@@ -44,13 +44,18 @@ public:
     // Calls `address` with the stack arguments pushed right-to-left (cdecl/stdcall), ECX/EDX
     // set when given (fastcall/thiscall), a stop return address, and a fresh stack. x87 is
     // reset to the control word given (the game's main thread runs with 0x27f after the CRT).
+    // `timeout_us` bounds the host time (Unicorn's instruction-count limit instruments every
+    // instruction and is several times slower, so no count is used).
     GuestCallResult call(std::uint32_t address,std::initializer_list<std::uint32_t> stack_arguments,
         std::optional<std::uint32_t> ecx=std::nullopt,std::optional<std::uint32_t> edx=std::nullopt,
-        std::uint16_t x87_control_word=0x27f,std::uint64_t instruction_limit=50'000'000);
+        std::uint16_t x87_control_word=0x27f,std::uint64_t timeout_us=600'000'000);
     // Runs guest code from `from` until EIP reaches `until` (a span inside a function), on a fresh
     // stack whose top holds the stop address. Registers other than ESP/EBP keep their values.
-    GuestCallResult run(std::uint32_t from,std::uint32_t until,std::uint16_t x87_control_word=0x27f,std::uint64_t instruction_limit=50'000'000);
+    GuestCallResult run(std::uint32_t from,std::uint32_t until,std::uint16_t x87_control_word=0x27f,std::uint64_t timeout_us=600'000'000);
     bool add_override(std::uint32_t address,Override,std::string* error);
+    // One code hook for a whole region (the HLE trap pages): overrides added inside it need no hook of their own.
+    // Unicorn scans every code hook on each hooked instruction, so thousands of per-address hooks are slow.
+    bool reserve_hook_region(std::uint32_t begin,std::uint32_t size,std::string* error);
     // From inside an override: instead of returning to the caller now, call the guest function
     // `target` with `arguments` (pushed right-to-left); when it returns (either convention), the
     // stack is put back where the override's caller expects it (its own `pops` bytes removed) and
@@ -81,6 +86,7 @@ public:
     // true the instruction is skipped (EIP advances by its length), otherwise the guest executes it itself.
     using InstructionHook=std::function<bool(X86Guest&,std::uint32_t address)>;
     bool add_instruction_hook(std::uint32_t address,InstructionHook,std::string* error);
+
     std::uint64_t xmm0_low()const;void set_xmm0_low(std::uint64_t); // the low 64 bits of XMM0 (double arguments/results)
     std::uint32_t stack_base()const noexcept{return stack_base_;}
     std::uint32_t stop_address()const noexcept{return stop_address_;}
@@ -101,6 +107,8 @@ private:
     void install_continuations();
     std::vector<std::unique_ptr<WriteWatch>> watches_;
     std::map<std::uint32_t,InstructionHook> instruction_hooks_;
+    std::vector<std::pair<std::uint32_t,std::uint32_t>> hook_regions_;
+
     static void instruction_hook(void*,std::uint64_t address,std::uint32_t size,void* user);
     static void write_hook(void*,int type,std::uint64_t address,int size,std::int64_t value,void* user);
 };

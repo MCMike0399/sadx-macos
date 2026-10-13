@@ -1690,3 +1690,29 @@ Evidence: gate `reference/production-integration-20261012/guest-fpu-109-gate.jso
 * Bug found on the way: `X86Guest::write` did not invalidate Unicorn's translated code, so host writes into code
   (a rewritten test stub here; the loader's WriteProcessMemory patches in principle) could leave stale code
   running. Writes now call `uc_ctl_remove_cache` for their range; the DLL and boot tests are unchanged by it.
+
+## M1 4f: guest frames, determinism and guest FPS (2026-10-13)
+
+Evidence: gate `reference/production-integration-20261012/guest-frames-110-gate.json` (rc 0; **guest FPS 61.4**
+recorded in its limits); test `tests/unit/guest_frames.cpp` (`guest-frames`, 300 frames, in the gate).
+
+* The guest runs sonic.exe from its entry point through **300 frames** (300 Presents, 299 scenes) with the FPU
+  shims, deterministically: a per-frame FNV-1a digest of the recorded D3D8 state, the frame's
+  DrawPrimitiveUP vertex bytes, the HLE call count and the virtual clock is identical on two boots.
+* **Virtual frame time 15.9 ms = 63 fps**: the Speedrun mod's frame limiter, running unmodified on the virtual
+  QueryPerformanceCounter, produces exactly the "63FPS" cadence the native runtime's config assumes — an
+  independent check of both.
+* **Guest FPS** (host time, boot excluded): ~60 frames/s with the 590 FPU-site code hooks (~124 without them).
+  The boot itself is ~1 s.
+* Performance root cause found: `X86Guest::call/run` passed a 50M-instruction limit, and Unicorn implements
+  instruction counting by instrumenting **every** instruction (`helper_uc_tracecode`): 60 frames took 33 s.
+  Calls now use a wall-clock timeout (600 s default) and no count: 60 frames + boot in ~1.2 s. Also: HLE traps
+  share one region code hook (`X86Guest::reserve_hook_region`), the trap→function lookup is cached, the
+  clock assumption is built once, and the per-call log can be switched off (`HleRegistry::set_logging`;
+  `calls()` still counts). An INT3-based FPU trap was tried and rejected: it changes code bytes the loader
+  later copies into trampolines or overwrites (the boot test's patch check caught it).
+* New on the way: ReadFileEx with APC completion at alertable waits (SleepEx / WaitForSingleObjectEx /
+  MsgWaitForMultipleObjectsEx), bsearch through the guest comparator.
+* Frontier: at frame 389 the intro FMV builds a DirectShow FilterGraph (CoCreateInstance of
+  CLSID_FilterGraph stops by name). Next: a headless DirectShow model for the FMVs (duration from the file,
+  completion events on the virtual clock), then the title screen and input.

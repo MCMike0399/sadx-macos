@@ -24,14 +24,19 @@ std::optional<std::uint32_t> HleRegistry::trap(X86Guest& guest,const std::string
     const auto k=key(dll,symbol);const auto found=traps_.find(k);if(found!=traps_.end())return found->second;
     if(!next_trap_)next_trap_=mapped_trap_end_=hle_trap_base;
     if(next_trap_+16>mapped_trap_end_){
+        if(mapped_trap_end_==hle_trap_base&&!guest.reserve_hook_region(hle_trap_base,0x100000,error))return std::nullopt; // one hook for every trap
         if(!guest.map(mapped_trap_end_,0x1000,true,error))return std::nullopt;
         const std::vector<std::uint8_t> halt(0x1000,0xf4);guest.write(mapped_trap_end_,halt.data(),halt.size());mapped_trap_end_+=0x1000;}
     const auto at=next_trap_;next_trap_+=16;
-    if(!guest.add_override(at,[this,dll,symbol](X86Guest& g)->std::uint32_t{
-            const auto esp=g.esp();const auto back=g.u32(esp).value_or(0);
-            const auto* f=find(dll,symbol);
-            if(!f||!f->body){g.stop("unbound import "+dll+"!"+symbol+" called (return address "+hex(back)+")");return 0;}
-            HleCall call(g,esp);HleCallRecord rec{dll,symbol,back,{},0};
+    auto cached=std::make_shared<const HleFunction*>(nullptr);
+    if(!guest.add_override(at,[this,dll,symbol,cached](X86Guest& g)->std::uint32_t{
+            const auto esp=g.esp();
+            if(!*cached)*cached=find(dll,symbol); // std::map nodes are stable; add() of the same key updates the node in place
+            const auto* f=*cached;
+            if(!f||!f->body){g.stop("unbound import "+dll+"!"+symbol+" called (return address "+hex(g.u32(esp).value_or(0))+")");return 0;}
+            HleCall call(g,esp);
+            if(!logging_){g.set_eax(f->body(call));++calls_;return f->argument_bytes;}
+            HleCallRecord rec{dll,symbol,g.u32(esp).value_or(0),{},0};
             for(unsigned i=0;i<f->logged_arguments;++i)rec.arguments.push_back(call.argument(i).value_or(0));
             rec.result=f->body(call);g.set_eax(rec.result);record(std::move(rec));
             return f->argument_bytes;},error))return std::nullopt;

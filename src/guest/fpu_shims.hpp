@@ -11,7 +11,8 @@ namespace sadx {
 // C2 for |x| >= 2^63 and the exception flags OR-ed into the status word. Unicorn computes these instructions
 // with host doubles; the shims make the guest agree with the native ports. F2XM1 / FYL2X(P1) have no native
 // model yet and RCPSS/RCPPS/RSQRTSS/RSQRTPS keep Unicorn's IEEE-division results (the project's RCP model):
-// those sites are counted when executed (`unshimmed`), not changed.
+// those sites are counted when executed (`unshimmed`), not changed. A non-canonical operand is left to Unicorn
+// and counted in `fallback`.
 struct FpuSite {std::uint32_t address=0;std::string instruction;};
 struct FpuShimStats {std::map<std::string,std::uint64_t> shimmed,unshimmed,fallback;}; // fallback: a non-canonical operand left to Unicorn
 std::vector<FpuSite> load_fpu_sites(const std::string& fpu_sites_json,bool confirmed_only=true);

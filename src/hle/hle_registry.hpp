@@ -48,7 +48,9 @@ public:
     void add_absent(const std::string& dll,const std::string& symbol);
     bool absent(const std::string& dll,const std::string& symbol)const;
     const std::vector<HleCallRecord>& log()const noexcept{return log_;}
-    void record(HleCallRecord r){log_.push_back(std::move(r));}
+    void record(HleCallRecord r){if(logging_)log_.push_back(std::move(r));++calls_;}
+    void set_logging(bool on){logging_=on;}bool logging()const noexcept{return logging_;}
+    std::uint64_t calls()const noexcept{return calls_;} // every HLE call, logged or not
     void clear_log(){log_.clear();}
     // The trap for an HLE symbol: one per dll!symbol across every image (so GetProcAddress of a system
     // function returns the same address the IATs hold), allocated in the trap region and installed in
@@ -58,6 +60,7 @@ private:
     std::map<std::string,HleFunction> functions_;std::set<std::string> absent_;
     std::map<std::string,std::function<std::optional<std::uint32_t>()>> data_providers_;std::map<std::string,std::uint32_t> data_;
     std::vector<HleCallRecord> log_;
+    bool logging_=true;std::uint64_t calls_=0;
     std::map<std::string,std::uint32_t> traps_;std::uint32_t next_trap_=0,mapped_trap_end_=0;
 };
 struct ImportBinding {std::string dll,symbol;std::uint32_t iat_va=0,trap=0;bool bound=false;};

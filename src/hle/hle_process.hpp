@@ -37,6 +37,7 @@ public:
     // Virtual time: 100 ns units since the virtual boot. QueryPerformanceCounter is 10 MHz on the same
     // count; each query advances it by 1 µs and Sleep(ms) by ms, so runs are deterministic.
     std::uint64_t now_100ns=0;
+    std::uint64_t counter_step_100ns=10; // QueryPerformanceCounter advance per query (1 µs)
     std::uint32_t last_error=0;
     // Kernel handles (files, mappings, find handles) are small tokens from 0x100, step 4.
     std::uint32_t new_handle(){const auto h=next_handle_;next_handle_+=4;return h;}
@@ -46,6 +47,7 @@ public:
     std::map<std::uint32_t,Win32File> file_handles;                   // CreateFile handles
     // CRT state in guest memory.
     std::uint32_t teb=0,peb=0;
+    struct Apc {std::uint32_t routine,error,bytes,overlapped;};std::vector<Apc> apcs; // queued I/O completion routines (one thread)
     HleWindows windows;
     // Direct3D 8: the recorded device state (the native runtime's owner type), the D3DPRESENT_PARAMETERS words
     // of CreateDevice, and a hook run on every IDirect3DDevice8::Present (tests stop the guest there).

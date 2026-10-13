@@ -161,8 +161,15 @@ std::uint32_t X86Guest::esp()const{return reg(UC_X86_REG_ESP);}
 std::uint32_t X86Guest::eip()const{return reg(UC_X86_REG_EIP);}
 void X86Guest::set_eax(std::uint32_t v){set_reg(UC_X86_REG_EAX,v);}
 void X86Guest::set_edx(std::uint32_t v){set_reg(UC_X86_REG_EDX,v);}
+bool X86Guest::reserve_hook_region(std::uint32_t begin,std::uint32_t size,std::string* error){
+    uc_hook handle=0;
+    const auto rc=uc_hook_add(engine(uc_),&handle,UC_HOOK_CODE,reinterpret_cast<void*>(&X86Guest::code_hook),this,begin,static_cast<std::uint64_t>(begin)+size-1);
+    if(rc!=UC_ERR_OK)return fail(error,std::string("uc_hook_add: ")+uc_strerror(rc));
+    hook_regions_.push_back({begin,size});uc_ctl_flush_tb(engine(uc_));return true;
+}
 bool X86Guest::add_override(std::uint32_t address,Override override,std::string* error){
     if(overrides_.count(address))return fail(error,"override already bound");
+    for(const auto& [begin,size]:hook_regions_)if(address>=begin&&address-begin<size){overrides_[address]=std::move(override);return true;} // the region hook serves it
     uc_hook handle=0;
     const auto rc=uc_hook_add(engine(uc_),&handle,UC_HOOK_CODE,reinterpret_cast<void*>(&X86Guest::code_hook),this,address,address);
     if(rc!=UC_ERR_OK)return fail(error,std::string("uc_hook_add: ")+uc_strerror(rc));
@@ -170,21 +177,21 @@ bool X86Guest::add_override(std::uint32_t address,Override override,std::string*
     uc_ctl_flush_tb(engine(uc_)); // blocks translated before the hook existed would bypass it
     return true;
 }
-GuestCallResult X86Guest::run(std::uint32_t from,std::uint32_t until,std::uint16_t control_word,std::uint64_t limit){
+GuestCallResult X86Guest::run(std::uint32_t from,std::uint32_t until,std::uint16_t control_word,std::uint64_t timeout){
     GuestCallResult r;
     const std::uint32_t esp=stack_base_+stack_size_-0x1000-4;write(esp,&stop_address_,4);
     set_reg(UC_X86_REG_ESP,esp);set_reg(UC_X86_REG_EBP,esp);
     std::uint32_t cw=control_word,sw=0,tag=0xffff;uc_reg_write(engine(uc_),UC_X86_REG_FPCW,&cw);uc_reg_write(engine(uc_),UC_X86_REG_FPSW,&sw);uc_reg_write(engine(uc_),UC_X86_REG_FPTAG,&tag);
     stopped_.reset();
-    const auto rc=uc_emu_start(engine(uc_),from,until,0,limit);
+    const auto rc=uc_emu_start(engine(uc_),from,until,timeout,0);
     r.eax=reg(UC_X86_REG_EAX);r.eip=reg(UC_X86_REG_EIP);r.esp=reg(UC_X86_REG_ESP);
     if(stopped_){r.error=*stopped_;stopped_.reset();return r;}
     if(rc!=UC_ERR_OK){r.error=uc_strerror(rc);return r;}
     r.completed=r.eip==until;
-    if(!r.completed)r.error="stopped at instruction limit";
+    if(!r.completed)r.error="stopped at the time limit";
     return r;
 }
-GuestCallResult X86Guest::call(std::uint32_t address,std::initializer_list<std::uint32_t> arguments,std::optional<std::uint32_t> ecx,std::optional<std::uint32_t> edx,std::uint16_t control_word,std::uint64_t limit){
+GuestCallResult X86Guest::call(std::uint32_t address,std::initializer_list<std::uint32_t> arguments,std::optional<std::uint32_t> ecx,std::optional<std::uint32_t> edx,std::uint16_t control_word,std::uint64_t timeout){
     GuestCallResult r;
     // Fresh stack: arguments right-to-left, then the stop return address.
     std::vector<std::uint32_t> frame(arguments.begin(),arguments.end());
@@ -197,12 +204,12 @@ GuestCallResult X86Guest::call(std::uint32_t address,std::initializer_list<std::
     std::uint32_t cw=control_word,sw=0,tag=0xffff;uc_reg_write(engine(uc_),UC_X86_REG_FPCW,&cw);uc_reg_write(engine(uc_),UC_X86_REG_FPSW,&sw);uc_reg_write(engine(uc_),UC_X86_REG_FPTAG,&tag);
     std::uint32_t mxcsr=0x1f80;uc_reg_write(engine(uc_),UC_X86_REG_MXCSR,&mxcsr);
     stopped_.reset();
-    const auto rc=uc_emu_start(engine(uc_),address,stop_address_,0,limit);
+    const auto rc=uc_emu_start(engine(uc_),address,stop_address_,timeout,0);
     r.eax=reg(UC_X86_REG_EAX);r.eip=reg(UC_X86_REG_EIP);r.esp=reg(UC_X86_REG_ESP);
     if(stopped_){r.error=*stopped_;stopped_.reset();return r;}
     if(rc!=UC_ERR_OK){r.error=uc_strerror(rc);return r;}
     r.completed=r.eip==stop_address_;
-    if(!r.completed)r.error="stopped at instruction limit";
+    if(!r.completed)r.error="stopped at the time limit";
     return r;
 }
 } // namespace sadx

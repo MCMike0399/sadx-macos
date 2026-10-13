@@ -47,9 +47,10 @@ void register_hle_kernel32(HleProcess& p){
         P->assume("wall clock: virtual, starting 2025-01-01 00:00:00 UTC at boot and advancing with the virtual counter");
         const std::uint64_t t=virtual_epoch_filetime+P->now_100ns;c.guest.write(arg(c,0),&t,8);return 0;});
     K("QueryPerformanceFrequency",4,1,[arg](HleCall& c)->std::uint32_t{const std::uint64_t f=10000000;c.guest.write(arg(c,0),&f,8);return 1;});
-    K("QueryPerformanceCounter",4,1,[P,arg](HleCall& c)->std::uint32_t{
-        P->assume("QueryPerformanceCounter: a virtual 10 MHz counter that advances 1 us per query and by Sleep");
-        P->now_100ns+=10;const std::uint64_t t=P->now_100ns;c.guest.write(arg(c,0),&t,8);return 1;});
+    auto counter_noted=std::make_shared<bool>(false);
+    K("QueryPerformanceCounter",4,1,[P,arg,counter_noted](HleCall& c)->std::uint32_t{
+        if(!*counter_noted){*counter_noted=true;P->assume("QueryPerformanceCounter: a virtual 10 MHz counter that advances "+std::to_string(P->counter_step_100ns/10)+" us per query and by Sleep");}
+        P->now_100ns+=P->counter_step_100ns;const std::uint64_t t=P->now_100ns;c.guest.write(arg(c,0),&t,8);return 1;});
     K("Sleep",4,1,[P,arg](HleCall& c)->std::uint32_t{P->now_100ns+=std::uint64_t(arg(c,0))*10000;return 0;});
     // WINMM timers on the same virtual clock (timeBeginPeriod changes no virtual resolution).
     r.add("WINMM.dll","timeGetTime",{0,0,[P](HleCall&)->std::uint32_t{return static_cast<std::uint32_t>(P->now_100ns/10000);}});
@@ -346,6 +347,32 @@ void register_hle_kernel32(HleProcess& p){
         if(arg(c,4)){c.guest.stop("ReadFile with OVERLAPPED is not implemented");return 0;}
         std::vector<std::uint8_t> b(arg(c,2));const auto n=std::fread(b.data(),1,b.size(),i->second.file);
         c.guest.write(arg(c,1),b.data(),n);if(arg(c,3)){const auto v=static_cast<std::uint32_t>(n);c.guest.write(arg(c,3),&v,4);}return 1;});
+    // ReadFileEx: the read completes at once from the host file (OVERLAPPED Offset/OffsetHigh); the completion
+    // routine is queued as an APC and runs at the thread's next alertable wait, as Windows delivers it.
+    K("ReadFileEx",20,5,[P,arg](HleCall& c)->std::uint32_t{
+        P->assume("ReadFileEx completes immediately from the host file; its completion routine runs at the next alertable wait (the reference disk timing was not captured)");
+        const auto i=P->file_handles.find(arg(c,0));if(i==P->file_handles.end()){P->last_error=ERROR_INVALID_HANDLE;return 0;}
+        const auto overlapped=arg(c,3);std::uint32_t o[5]={};c.guest.read(overlapped,o,20);
+        const std::int64_t offset=(std::int64_t(o[3])<<32)|o[2];std::fseek(i->second.file,static_cast<long>(offset),SEEK_SET);
+        std::vector<std::uint8_t> b(arg(c,2));const auto n=static_cast<std::uint32_t>(std::fread(b.data(),1,b.size(),i->second.file));c.guest.write(arg(c,1),b.data(),n);
+        o[0]=0;o[1]=n;c.guest.write(overlapped,o,8); // Internal = STATUS_SUCCESS, InternalHigh = bytes
+        P->apcs.push_back({arg(c,4),n||!arg(c,2)?0U:38U,n,overlapped});return 1;}); // ERROR_HANDLE_EOF when nothing was read
+    K("CancelIo",4,1,[](HleCall&)->std::uint32_t{return 1;});
+    // Alertable waits deliver the queued APCs (stdcall routine(error, bytes, overlapped)), then return WAIT_IO_COMPLETION.
+    const auto deliver=[P](HleCall& c,std::uint32_t pops,std::uint32_t idle_result,std::uint32_t idle_ms)->std::uint32_t{
+        if(P->apcs.empty()){P->now_100ns+=std::uint64_t(idle_ms==0xffffffffU?0:idle_ms)*10000;return idle_result;}
+        auto queue=std::make_shared<std::vector<HleProcess::Apc>>(std::move(P->apcs));P->apcs.clear();
+        auto next=std::make_shared<std::size_t>(0);auto step=std::make_shared<std::function<void(X86Guest&,std::uint32_t)>>();
+        *step=[queue,next,step](X86Guest& g,std::uint32_t pop){
+            if(*next>=queue->size()){g.set_eax(0xc0);return;} // WAIT_IO_COMPLETION
+            const auto a=(*queue)[(*next)++];g.redirect(a.routine,{a.error,a.bytes,a.overlapped},pop,[step](X86Guest& g2){(*step)(g2,0);});};
+        (*step)(c.guest,pops);return 0xc0;};
+    K("SleepEx",8,2,[P,arg,deliver](HleCall& c)->std::uint32_t{
+        if(!arg(c,1)){P->now_100ns+=std::uint64_t(arg(c,0))*10000;return 0;}return deliver(c,8,0,arg(c,0));});
+    K("WaitForSingleObjectEx",12,3,[arg,deliver](HleCall& c)->std::uint32_t{if(!arg(c,2))return 0;return deliver(c,12,0,0);});
+    r.add("USER32.dll","MsgWaitForMultipleObjectsEx",{20,5,[arg,deliver](HleCall& c)->std::uint32_t{
+        if(!(arg(c,4)&2))return arg(c,0); // not MWMO_ALERTABLE: WAIT_TIMEOUT-free model: "input available" = count (nothing to wait for)
+        return deliver(c,20,arg(c,0),arg(c,2));}});
     K("WriteFile",20,5,[P,arg](HleCall& c)->std::uint32_t{
         const auto i=P->file_handles.find(arg(c,0));if(i==P->file_handles.end()||!i->second.writable){P->last_error=ERROR_INVALID_HANDLE;return 0;}
         std::vector<std::uint8_t> b(arg(c,2));c.guest.read(arg(c,1),b.data(),b.size());const auto n=std::fwrite(b.data(),1,b.size(),i->second.file);

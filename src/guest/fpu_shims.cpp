@@ -43,10 +43,15 @@ bool install_fpu_shims(X86Guest& g,const std::vector<FpuSite>& sites,FpuShimStat
                     if(!r){guest.set_fpu_status(static_cast<std::uint16_t>(status|C2));++stats.shimmed[kind];return true;}
                     guest.set_st(0,r->significand(),r->sign_exponent());guest.set_fpu_status(status);return finish();
                 }catch(const X87Error& e){
-                    if(e.failure()==X87Failure::noncanonical_ext80_source){++stats.fallback[kind];return false;} // Unicorn executes it
+                    if(e.failure()==X87Failure::noncanonical_ext80_source){++stats.fallback[kind];return false;} // Unicorn executes it (counted)
                     guest.stop(kind+" shim: an unmasked x87 exception (the guest's handler is not modelled)");return true;}
             };
-        }else hook=[kind,&stats](X86Guest&,std::uint32_t)->bool{++stats.unshimmed[kind];return false;};
+            // A code hook per site leaves the guest's code bytes untouched (the loader copies and patches code; an
+            // in-place INT3 would travel into its trampolines or be overwritten).
+            if(!g.add_instruction_hook(site.address,std::move(hook),error))return false;
+            continue;
+        }
+        hook=[kind,&stats](X86Guest&,std::uint32_t)->bool{++stats.unshimmed[kind];return false;}; // counted, executed by Unicorn
         if(!g.add_instruction_hook(site.address,std::move(hook),error))return false;
     }
     return true;

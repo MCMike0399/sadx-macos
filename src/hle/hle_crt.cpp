@@ -398,6 +398,21 @@ void register_hle_crt_locale(HleProcess& p){
     C(runtime,"_beginthreadex",6,[](HleCall& c)->std::uint32_t{c.guest.stop("_beginthreadex: guest threads are not modelled");return 0;});
     C("api-ms-win-crt-heap-l1-1-0.dll","realloc",2,[P,arg](HleCall& c)->std::uint32_t{
         if(!arg(c,0))return P->memory().allocate(arg(c,1)).value_or(0);if(!arg(c,1)){P->memory().free(arg(c,0));return 0;}return P->memory().reallocate(arg(c,0),arg(c,1)).value_or(0);});
+    // bsearch(key, base, count, width, compare): the UCRT's binary search, calling the guest's compare(key, element).
+    C("api-ms-win-crt-utility-l1-1-0.dll","bsearch",5,[arg](HleCall& c)->std::uint32_t{
+        const auto key=arg(c,0),base=arg(c,1),width=arg(c,3),compare=arg(c,4);
+        auto lo=std::make_shared<std::uint32_t>(0),hi=std::make_shared<std::uint32_t>(arg(c,2));
+        if(!*hi||!width)return 0;
+        auto probe=std::make_shared<std::function<void(X86Guest&,std::uint32_t)>>();
+        *probe=[key,base,width,compare,lo,hi,probe](X86Guest& g,std::uint32_t pops){
+            if(*lo>=*hi){g.set_eax(0);return;}
+            const auto mid=*lo+(*hi-*lo)/2;const auto element=base+mid*width;
+            g.redirect(compare,{key,element},pops,[lo,hi,mid,element,probe](X86Guest& g2){
+                const auto r=static_cast<std::int32_t>(g2.reg(19));
+                if(r==0){g2.set_eax(element);return;}
+                if(r<0)*hi=mid;else *lo=mid+1;
+                (*probe)(g2,0);});};
+        (*probe)(c.guest,0);return 0;});
     C("api-ms-win-crt-utility-l1-1-0.dll","rand_s",1,[P,arg](HleCall& c)->std::uint32_t{
         P->assume("rand_s: a fixed LCG sequence (the reference's RtlGenRandom output is random by design)");
         static std::uint32_t state=0x12345678U;state=state*1103515245U+12345U;c.guest.set_u32(arg(c,0),state);return 0;});
