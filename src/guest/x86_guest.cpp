@@ -35,7 +35,12 @@ bool X86Guest::map_image(const ExecutableImage& image,std::string* error){
     if(!write(base,bytes.data(),bytes.size()))return fail(error,"image write");
     return true;
 }
-bool X86Guest::write(std::uint32_t address,const void* bytes,std::size_t size){return uc_mem_write(engine(uc_),address,bytes,size)==UC_ERR_OK;}
+// Host writes (HLE, loader patches through WriteProcessMemory, tests) invalidate translated code in the range:
+// Unicorn's self-modifying-code detection covers guest stores only.
+bool X86Guest::write(std::uint32_t address,const void* bytes,std::size_t size){
+    if(uc_mem_write(engine(uc_),address,bytes,size)!=UC_ERR_OK)return false;
+    if(size)uc_ctl_remove_cache(engine(uc_),address,static_cast<std::uint64_t>(address)+size);
+    return true;}
 bool X86Guest::read(std::uint32_t address,void* bytes,std::size_t size)const{return uc_mem_read(engine(uc_),address,bytes,size)==UC_ERR_OK;}
 std::optional<std::uint32_t> X86Guest::u32(std::uint32_t address)const{std::uint32_t v;if(!read(address,&v,4))return std::nullopt;return v;}
 bool X86Guest::set_u32(std::uint32_t address,std::uint32_t value){return write(address,&value,4);}
@@ -117,6 +122,25 @@ std::pair<std::uint64_t,std::uint16_t> X86Guest::st(unsigned i)const{
 }
 std::uint64_t X86Guest::xmm0_low()const{std::uint64_t v[2]={};uc_reg_read(engine(uc_),UC_X86_REG_XMM0,v);return v[0];}
 void X86Guest::set_xmm0_low(std::uint64_t low){std::uint64_t v[2]={};uc_reg_read(engine(uc_),UC_X86_REG_XMM0,v);v[0]=low;uc_reg_write(engine(uc_),UC_X86_REG_XMM0,v);}
+void X86Guest::set_st(unsigned i,std::uint64_t significand,std::uint16_t sign_exponent){
+    std::uint32_t sw=0,tag=0;uc_reg_read(engine(uc_),UC_X86_REG_FPSW,&sw);uc_reg_read(engine(uc_),UC_X86_REG_FPTAG,&tag);
+    const auto physical=(((sw>>11)&7U)+i)&7U;struct {std::uint64_t mantissa;std::uint16_t exponent;} value{significand,sign_exponent};
+    uc_reg_write(engine(uc_),UC_X86_REG_FP0+static_cast<int>(physical),&value);tag&=~(3U<<(2*physical));uc_reg_write(engine(uc_),UC_X86_REG_FPTAG,&tag);
+}
+std::uint16_t X86Guest::fpu_status()const{std::uint32_t sw=0;uc_reg_read(engine(uc_),UC_X86_REG_FPSW,&sw);return static_cast<std::uint16_t>(sw);}
+void X86Guest::set_fpu_status(std::uint16_t v){const std::uint32_t sw=v;uc_reg_write(engine(uc_),UC_X86_REG_FPSW,&sw);}
+void X86Guest::instruction_hook(void*,std::uint64_t address,std::uint32_t size,void* user){
+    auto* self=static_cast<X86Guest*>(user);const auto i=self->instruction_hooks_.find(static_cast<std::uint32_t>(address));
+    if(i==self->instruction_hooks_.end())return;
+    if(i->second(*self,static_cast<std::uint32_t>(address))&&!self->stopped_)self->set_reg(UC_X86_REG_EIP,static_cast<std::uint32_t>(address)+size);
+}
+bool X86Guest::add_instruction_hook(std::uint32_t address,InstructionHook hook,std::string* error){
+    if(instruction_hooks_.count(address))return fail(error,"instruction hook already bound");
+    uc_hook handle=0;
+    const auto rc=uc_hook_add(engine(uc_),&handle,UC_HOOK_CODE,reinterpret_cast<void*>(&X86Guest::instruction_hook),this,address,address);
+    if(rc!=UC_ERR_OK)return fail(error,std::string("uc_hook_add: ")+uc_strerror(rc));
+    instruction_hooks_[address]=std::move(hook);uc_ctl_flush_tb(engine(uc_));return true;
+}
 void X86Guest::pop_x87(){
     std::uint32_t sw=0,tag=0;uc_reg_read(engine(uc_),UC_X86_REG_FPSW,&sw);uc_reg_read(engine(uc_),UC_X86_REG_FPTAG,&tag);
     const auto top=(sw>>11)&7U;tag|=3U<<(2*top);sw=(sw&~0x3800U)|(((top+1)&7U)<<11);

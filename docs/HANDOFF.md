@@ -1665,3 +1665,28 @@ Evidence: gate `reference/production-integration-20261012/guest-overrides-108-ga
 * Limits: only four of the ported owners are bound; owners whose state includes native identities (heaps,
   devices, task graphs) need state bridges that map guest objects to native owners — the next ones to do.
   The oracles' case files are not decoded (each has its own format); the equivalence cases are regenerated.
+
+## M1 4e: FPU shims (2026-10-13)
+
+Evidence: gate `reference/production-integration-20261012/guest-fpu-109-gate.json` (rc 0); tests
+`guest-fpu-shims` and `guest-boot`.
+
+* `tools/analysis/fpu_sites.py` confirms the byte-scan candidates of `reference/inventory/fpu-sites.json` by a
+  capstone linear sweep of each containing procedure: 542 FPATAN, 10 FSINCOS, 3 FPTAN, 5 FSIN, 1 FCOS, 5 FYL2X,
+  2 F2XM1, 3 RCPSS, 5 RCPPS, 12 RSQRTSS, 2 RSQRTPS confirmed (590); the rest of the 4,900 candidates were bytes
+  inside other instructions (FCOS's 4,230 especially) and stay listed as unconfirmed.
+* `src/guest/fpu_shims.{hpp,cpp}` replaces every confirmed FPATAN/FSINCOS/FPTAN/FSIN/FCOS with the native Bochs
+  P5/P6 model under the guest's control word (results, stack effect, C2 for |x| >= 2^63, exception flags into
+  the status word); a non-canonical operand falls back to Unicorn and is counted. F2XM1/FYL2X(P1) (no native
+  model) and RCP/RSQRT (Unicorn's exact division is the project's RCP model) are counted when executed, not
+  changed. New: `X87Transcendental::fsin_bochs/fcos_bochs`; `X86Guest::add_instruction_hook`, `set_st`,
+  `fpu_status`.
+* `tests/unit/guest_fpu_shims.cpp`: every one of the 561 shimmed sites executes 4 times with random operands
+  (game-range angles, ±1e18, ±1e-30, ±0, ±inf, NaN) and random control words — registers, TOP and C2 equal
+  the Bochs model each time; 7716df with the shims equals the native port bit for bit on 3,000 cases including
+  fovy = ±inf (the d3dx_perspective oracle's 19 primary mismatches were Unicorn's FSINCOS(inf)).
+* `guest-boot` now boots with the shims: 3 shimmed executions (791170's FPTAN/FPATAN, 7716df's FSINCOS) and 257
+  unshimmed (counted) before the first Present; still deterministic and identical with the overrides.
+* Bug found on the way: `X86Guest::write` did not invalidate Unicorn's translated code, so host writes into code
+  (a rewritten test stub here; the loader's WriteProcessMemory patches in principle) could leave stale code
+  running. Writes now call `uc_ctl_remove_cache` for their range; the DLL and boot tests are unchanged by it.

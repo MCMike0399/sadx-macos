@@ -14,7 +14,7 @@
 "RSQRTSS": 12,
 "RCPSS": 3
 },
-"note": "byte-pattern scan of .text: candidates, not decoded instructions (a pattern can sit inside another instruction); step 4e confirms them in the guest",
+"note": "byte-pattern candidates confirmed by a linear-sweep disassembly (capstone 5.0.7) of the containing procedure; unconfirmed = not an instruction start in that sweep",
 "sites": [
 {
 "address": "0x40aec3",
@@ -26,25 +26,25 @@
 "address": "0x40e9aa",
 "instruction": "FPATAN",
 "procedure": "0x40e900",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x40eae5",
 "instruction": "FPATAN",
 "procedure": "0x40eab0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x40f287",
 "instruction": "FPATAN",
 "procedure": "0x40f170",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x40f6c8",
 "instruction": "FPATAN",
 "procedure": "0x40f460",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x41087e",
@@ -98,19 +98,19 @@
 "address": "0x4183e0",
 "instruction": "FPATAN",
 "procedure": "0x418370",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x41841f",
 "instruction": "FPATAN",
 "procedure": "0x418370",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x41847c",
 "instruction": "FPATAN",
 "procedure": "0x418370",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x41b3a9",
@@ -140,7 +140,7 @@
 "address": "0x41c126",
 "instruction": "FPATAN",
 "procedure": "0x41c0c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x41e542",
@@ -182,37 +182,37 @@
 "address": "0x430a14",
 "instruction": "FPATAN",
 "procedure": "0x4309e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x430a32",
 "instruction": "FPATAN",
 "procedure": "0x4309e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x434e59",
 "instruction": "FPATAN",
 "procedure": "0x434d80",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4354c1",
 "instruction": "FPATAN",
 "procedure": "0x434d80",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x435cab",
 "instruction": "FPATAN",
 "procedure": "0x435c70",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x435ce6",
 "instruction": "FPATAN",
 "procedure": "0x435c70",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x438121",
@@ -224,85 +224,85 @@
 "address": "0x43947d",
 "instruction": "FPATAN",
 "procedure": "0x439450",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x43949a",
 "instruction": "FPATAN",
 "procedure": "0x439450",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4394db",
 "instruction": "FPATAN",
 "procedure": "0x439450",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4394fd",
 "instruction": "FPATAN",
 "procedure": "0x439450",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x43b558",
 "instruction": "FPATAN",
 "procedure": "0x43b4c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x43bcac",
 "instruction": "FPATAN",
 "procedure": "0x43bc80",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x43be36",
 "instruction": "FPATAN",
 "procedure": "0x43bdc0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x43c002",
 "instruction": "FPATAN",
 "procedure": "0x43bfe0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x43c0aa",
 "instruction": "FPATAN",
 "procedure": "0x43c060",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x43d859",
 "instruction": "FPATAN",
 "procedure": "0x43d360",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x43e13f",
 "instruction": "FPATAN",
 "procedure": "0x43e100",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x43e1a3",
 "instruction": "FPATAN",
 "procedure": "0x43e100",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x43e335",
 "instruction": "FPATAN",
 "procedure": "0x43e2f0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x43e3e3",
 "instruction": "FPATAN",
 "procedure": "0x43e2f0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4412eb",
@@ -314,139 +314,139 @@
 "address": "0x441686",
 "instruction": "FPATAN",
 "procedure": "0x441630",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x442ba8",
 "instruction": "FPATAN",
 "procedure": "0x442b50",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x442dff",
 "instruction": "FPATAN",
 "procedure": "0x442ce0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x442e40",
 "instruction": "FPATAN",
 "procedure": "0x442ce0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x443aa5",
 "instruction": "FPATAN",
 "procedure": "0x4438a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x444fb4",
 "instruction": "FPATAN",
 "procedure": "0x444f10",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x446dc6",
 "instruction": "FPATAN",
 "procedure": "0x446d90",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4475fb",
 "instruction": "FPATAN",
 "procedure": "0x447510",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4476d7",
 "instruction": "FPATAN",
 "procedure": "0x447510",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x447782",
 "instruction": "FPATAN",
 "procedure": "0x447510",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x447c63",
 "instruction": "FPATAN",
 "procedure": "0x447b90",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x447d13",
 "instruction": "FPATAN",
 "procedure": "0x447b90",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x447dae",
 "instruction": "FPATAN",
 "procedure": "0x447b90",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x448342",
 "instruction": "FPATAN",
 "procedure": "0x448150",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x448c50",
 "instruction": "FPATAN",
 "procedure": "0x448af0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4492dd",
 "instruction": "FPATAN",
 "procedure": "0x4491e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x449459",
 "instruction": "FPATAN",
 "procedure": "0x449380",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x44b440",
 "instruction": "FPATAN",
 "procedure": "0x44b0e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x44bc3d",
 "instruction": "FPATAN",
 "procedure": "0x44bb60",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x44bdd9",
 "instruction": "FPATAN",
 "procedure": "0x44bd70",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x44c234",
 "instruction": "FPATAN",
 "procedure": "0x44c1c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x44d07c",
 "instruction": "FPATAN",
 "procedure": "0x44cdf0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x44d09c",
 "instruction": "FPATAN",
 "procedure": "0x44cdf0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x44f722",
@@ -458,7 +458,7 @@
 "address": "0x450072",
 "instruction": "FPATAN",
 "procedure": "0x44fa90",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x456178",
@@ -506,7 +506,7 @@
 "address": "0x45e339",
 "instruction": "FPATAN",
 "procedure": "0x45e280",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x45e400",
@@ -536,115 +536,115 @@
 "address": "0x4604a9",
 "instruction": "FPATAN",
 "procedure": "0x45e5d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x46282f",
 "instruction": "FPATAN",
 "procedure": "0x4625e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x462a79",
 "instruction": "FPATAN",
 "procedure": "0x4625e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x46366b",
 "instruction": "FPATAN",
 "procedure": "0x462b40",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x46388d",
 "instruction": "FPATAN",
 "procedure": "0x462b40",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x463fd9",
 "instruction": "FPATAN",
 "procedure": "0x463f90",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x464002",
 "instruction": "FPATAN",
 "procedure": "0x463f90",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4641c5",
 "instruction": "FPATAN",
 "procedure": "0x464170",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x464274",
 "instruction": "FPATAN",
 "procedure": "0x464250",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x46443e",
 "instruction": "FPATAN",
 "procedure": "0x464250",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4644df",
 "instruction": "FPATAN",
 "procedure": "0x464250",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x465cce",
 "instruction": "FPATAN",
 "procedure": "0x465190",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x465d12",
 "instruction": "FPATAN",
 "procedure": "0x465190",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x467340",
 "instruction": "FPATAN",
 "procedure": "0x466b60",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x46735c",
 "instruction": "FPATAN",
 "procedure": "0x466b60",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x46780e",
 "instruction": "FPATAN",
 "procedure": "0x466b60",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x46782e",
 "instruction": "FPATAN",
 "procedure": "0x466b60",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x468485",
 "instruction": "FPATAN",
 "procedure": "0x467970",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4684c1",
 "instruction": "FPATAN",
 "procedure": "0x467970",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4699e3",
@@ -656,37 +656,37 @@
 "address": "0x46c7c2",
 "instruction": "FPATAN",
 "procedure": "0x46c740",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x46e1e2",
 "instruction": "FPATAN",
 "procedure": "0x46e1c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x46fa7a",
 "instruction": "FPATAN",
 "procedure": "0x46f850",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4736e6",
 "instruction": "FPATAN",
 "procedure": "0x473660",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4745f9",
 "instruction": "FPATAN",
 "procedure": "0x4745f0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x475736",
 "instruction": "FPATAN",
 "procedure": "0x4756c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x478e64",
@@ -728,43 +728,43 @@
 "address": "0x47b9b8",
 "instruction": "FPATAN",
 "procedure": "0x47b9b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x47c127",
 "instruction": "FPATAN",
 "procedure": "0x47c120",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x47c14b",
 "instruction": "FPATAN",
 "procedure": "0x47c120",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x47dde4",
 "instruction": "FPATAN",
 "procedure": "0x47dd90",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x47de5c",
 "instruction": "FPATAN",
 "procedure": "0x47de00",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x47e346",
 "instruction": "FPATAN",
 "procedure": "0x47e290",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x48045a",
 "instruction": "FPATAN",
 "procedure": "0x47fd50",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x481489",
@@ -776,25 +776,25 @@
 "address": "0x484eee",
 "instruction": "FPATAN",
 "procedure": "0x484db0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4851d1",
 "instruction": "FPATAN",
 "procedure": "0x485140",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x485a06",
 "instruction": "FPATAN",
 "procedure": "0x485970",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x485bf3",
 "instruction": "FPATAN",
 "procedure": "0x485b90",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x487d17",
@@ -890,31 +890,31 @@
 "address": "0x4922a2",
 "instruction": "FPATAN",
 "procedure": "0x492170",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4923b7",
 "instruction": "FPATAN",
 "procedure": "0x492300",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x492453",
 "instruction": "FPATAN",
 "procedure": "0x492300",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x492525",
 "instruction": "FPATAN",
 "procedure": "0x492300",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x492c71",
 "instruction": "FPATAN",
 "procedure": "0x492ab0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x497603",
@@ -938,73 +938,73 @@
 "address": "0x499c3f",
 "instruction": "FPATAN",
 "procedure": "0x496f50",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x49caf7",
 "instruction": "FPATAN",
 "procedure": "0x49c9a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4a1150",
 "instruction": "FPATAN",
 "procedure": "0x4a1130",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4a1919",
 "instruction": "FPATAN",
 "procedure": "0x4a1850",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4a1d14",
 "instruction": "FPATAN",
 "procedure": "0x4a1b90",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4a1d32",
 "instruction": "FPATAN",
 "procedure": "0x4a1b90",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4a1f3e",
 "instruction": "FPATAN",
 "procedure": "0x4a1db0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4a4a3e",
 "instruction": "FPATAN",
 "procedure": "0x4a4a20",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4a5238",
 "instruction": "FPATAN",
 "procedure": "0x4a51f0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4a6cb8",
 "instruction": "FPATAN",
 "procedure": "0x4a6c70",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4a8cec",
 "instruction": "FPATAN",
 "procedure": "0x4a8cc0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4abb4b",
 "instruction": "FPATAN",
 "procedure": "0x4aba80",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4b10b3",
@@ -1016,67 +1016,67 @@
 "address": "0x4b1207",
 "instruction": "FPATAN",
 "procedure": "0x4b11f0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4b12a7",
 "instruction": "FPATAN",
 "procedure": "0x4b1290",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4b4734",
 "instruction": "FPATAN",
 "procedure": "0x4b4640",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4b47f7",
 "instruction": "FPATAN",
 "procedure": "0x4b4640",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4b6973",
 "instruction": "FPATAN",
 "procedure": "0x4b63e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4b8c3f",
 "instruction": "FPATAN",
 "procedure": "0x4b8910",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4b8c7a",
 "instruction": "FPATAN",
 "procedure": "0x4b8910",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4b8f38",
 "instruction": "FPATAN",
 "procedure": "0x4b8e80",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4bccae",
 "instruction": "FPATAN",
 "procedure": "0x4bcca0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4bccf0",
 "instruction": "FPATAN",
 "procedure": "0x4bcca0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4bd329",
 "instruction": "FPATAN",
 "procedure": "0x4bd2d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4c1aae",
@@ -1088,67 +1088,67 @@
 "address": "0x4c264b",
 "instruction": "FPATAN",
 "procedure": "0x4c2630",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4c26b2",
 "instruction": "FPATAN",
 "procedure": "0x4c2630",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4c3e70",
 "instruction": "FPATAN",
 "procedure": "0x4c3e40",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4c3eb8",
 "instruction": "FPATAN",
 "procedure": "0x4c3e40",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4c43c7",
 "instruction": "FPATAN",
 "procedure": "0x4c3f90",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4c440e",
 "instruction": "FPATAN",
 "procedure": "0x4c3f90",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4c4916",
 "instruction": "FPATAN",
 "procedure": "0x4c4850",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4c4933",
 "instruction": "FPATAN",
 "procedure": "0x4c4850",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4c4ed4",
 "instruction": "FPATAN",
 "procedure": "0x4c4da0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4c4ef0",
 "instruction": "FPATAN",
 "procedure": "0x4c4da0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4c52a0",
 "instruction": "RSQRTPS",
 "procedure": "0x4c5090",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4c54a4",
@@ -1160,73 +1160,73 @@
 "address": "0x4c5546",
 "instruction": "FPATAN",
 "procedure": "0x4c5440",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4c570e",
 "instruction": "FPATAN",
 "procedure": "0x4c56d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4c6515",
 "instruction": "FPATAN",
 "procedure": "0x4c62d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4c91cd",
 "instruction": "FPATAN",
 "procedure": "0x4c91c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4c920f",
 "instruction": "FPATAN",
 "procedure": "0x4c91c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4ccaeb",
 "instruction": "FPATAN",
 "procedure": "0x4cca80",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4cd429",
 "instruction": "FPATAN",
 "procedure": "0x4cd410",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4cd47a",
 "instruction": "FPATAN",
 "procedure": "0x4cd460",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4cd569",
 "instruction": "FPATAN",
 "procedure": "0x4cd550",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4cd5ba",
 "instruction": "FPATAN",
 "procedure": "0x4cd5a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4cd6ae",
 "instruction": "FPATAN",
 "procedure": "0x4cd670",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4cfa8e",
 "instruction": "FPATAN",
 "procedure": "0x4cf8e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4cfef9",
@@ -1238,115 +1238,115 @@
 "address": "0x4d0517",
 "instruction": "FPATAN",
 "procedure": "0x4d04c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4d0d8b",
 "instruction": "FPATAN",
 "procedure": "0x4d0960",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4d0dd0",
 "instruction": "FPATAN",
 "procedure": "0x4d0960",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4d226c",
 "instruction": "FPATAN",
 "procedure": "0x4d21a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4d25ac",
 "instruction": "FPATAN",
 "procedure": "0x4d21a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4d260e",
 "instruction": "FPATAN",
 "procedure": "0x4d21a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4d26d5",
 "instruction": "FPATAN",
 "procedure": "0x4d21a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4d27c7",
 "instruction": "FPATAN",
 "procedure": "0x4d21a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4d2abe",
 "instruction": "FPATAN",
 "procedure": "0x4d21a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4d2bf1",
 "instruction": "FPATAN",
 "procedure": "0x4d21a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4d2d95",
 "instruction": "FPATAN",
 "procedure": "0x4d21a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4d2f5b",
 "instruction": "FPATAN",
 "procedure": "0x4d21a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4d2fda",
 "instruction": "FPATAN",
 "procedure": "0x4d21a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4d39f9",
 "instruction": "FPATAN",
 "procedure": "0x4d21a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4d3a2e",
 "instruction": "FPATAN",
 "procedure": "0x4d21a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4d4004",
 "instruction": "FPATAN",
 "procedure": "0x4d3f40",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4d40c5",
 "instruction": "FPATAN",
 "procedure": "0x4d3f40",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4d4130",
 "instruction": "FPATAN",
 "procedure": "0x4d3f40",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4d61ca",
 "instruction": "FPATAN",
 "procedure": "0x4d5cf0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4d6bcf",
@@ -1358,73 +1358,73 @@
 "address": "0x4d7b19",
 "instruction": "FPATAN",
 "procedure": "0x4d79f0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4d7e7b",
 "instruction": "FPATAN",
 "procedure": "0x4d7c90",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4d8d15",
 "instruction": "FPATAN",
 "procedure": "0x4d8ce0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4dedff",
 "instruction": "FPATAN",
 "procedure": "0x4de8d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4e697e",
 "instruction": "FPATAN",
 "procedure": "0x4e6940",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4e6e75",
 "instruction": "FPATAN",
 "procedure": "0x4e6d00",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4e84e0",
 "instruction": "FPATAN",
 "procedure": "0x4e8310",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4e85a6",
 "instruction": "FPATAN",
 "procedure": "0x4e8310",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4e8689",
 "instruction": "FPATAN",
 "procedure": "0x4e8620",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4ea9ad",
 "instruction": "FPATAN",
 "procedure": "0x4ea700",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4eb1aa",
 "instruction": "FPATAN",
 "procedure": "0x4eaab0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4ec49d",
 "instruction": "FPATAN",
 "procedure": "0x4eb9f0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4ec564",
@@ -1442,31 +1442,31 @@
 "address": "0x4edd40",
 "instruction": "FPATAN",
 "procedure": "0x4eb9f0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4edd5d",
 "instruction": "FPATAN",
 "procedure": "0x4eb9f0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4ee695",
 "instruction": "FPATAN",
 "procedure": "0x4eb9f0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4f4d27",
 "instruction": "FPATAN",
 "procedure": "0x4f4820",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4f5a5a",
 "instruction": "FPATAN",
 "procedure": "0x4f4e00",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4f61d7",
@@ -1496,25 +1496,25 @@
 "address": "0x4f917f",
 "instruction": "FPATAN",
 "procedure": "0x4f8db0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4f9362",
 "instruction": "FPATAN",
 "procedure": "0x4f8db0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4f9952",
 "instruction": "FPATAN",
 "procedure": "0x4f8db0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4f99b5",
 "instruction": "FPATAN",
 "procedure": "0x4f8db0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4faebd",
@@ -1526,43 +1526,43 @@
 "address": "0x4fc3f9",
 "instruction": "FPATAN",
 "procedure": "0x4fc0c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4fc635",
 "instruction": "FPATAN",
 "procedure": "0x4fc550",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4fcfda",
 "instruction": "FPATAN",
 "procedure": "0x4fc550",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4fcff9",
 "instruction": "FPATAN",
 "procedure": "0x4fc550",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4fdbd3",
 "instruction": "FPATAN",
 "procedure": "0x4fc550",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4fe612",
 "instruction": "FPATAN",
 "procedure": "0x4fc550",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4fe6a1",
 "instruction": "FPATAN",
 "procedure": "0x4fc550",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x4ff11b",
@@ -1574,37 +1574,37 @@
 "address": "0x50059f",
 "instruction": "FPATAN",
 "procedure": "0x500510",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5005c0",
 "instruction": "FPATAN",
 "procedure": "0x500510",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5005fd",
 "instruction": "FPATAN",
 "procedure": "0x500510",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x50061e",
 "instruction": "FPATAN",
 "procedure": "0x500510",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x501e51",
 "instruction": "FPATAN",
 "procedure": "0x501b50",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x502c92",
 "instruction": "FPATAN",
 "procedure": "0x502b20",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x505170",
@@ -1640,7 +1640,7 @@
 "address": "0x50cfd2",
 "instruction": "FPATAN",
 "procedure": "0x50cb90",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x514377",
@@ -1670,7 +1670,7 @@
 "address": "0x520fd1",
 "instruction": "RSQRTPS",
 "procedure": "0x520c70",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x528308",
@@ -1688,7 +1688,7 @@
 "address": "0x52c05f",
 "instruction": "FPATAN",
 "procedure": "0x52bda0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x530f41",
@@ -1700,7 +1700,7 @@
 "address": "0x530ff1",
 "instruction": "RCPPS",
 "procedure": "0x530790",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x530ff5",
@@ -1718,85 +1718,85 @@
 "address": "0x530ffd",
 "instruction": "RCPPS",
 "procedure": "0x530790",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x532ebe",
 "instruction": "FPATAN",
 "procedure": "0x532eb0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x535689",
 "instruction": "FPATAN",
 "procedure": "0x535590",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5357f4",
 "instruction": "FPATAN",
 "procedure": "0x535590",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x535fe8",
 "instruction": "FPATAN",
 "procedure": "0x535f70",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x53cd93",
 "instruction": "FPATAN",
 "procedure": "0x53c630",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x53cdf4",
 "instruction": "FPATAN",
 "procedure": "0x53c630",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x53ce1f",
 "instruction": "FPATAN",
 "procedure": "0x53c630",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x53d8b9",
 "instruction": "FPATAN",
 "procedure": "0x53c630",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x53fafc",
 "instruction": "FPATAN",
 "procedure": "0x53f950",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x53fb51",
 "instruction": "FPATAN",
 "procedure": "0x53f950",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x53fba9",
 "instruction": "FPATAN",
 "procedure": "0x53f950",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x542db5",
 "instruction": "FPATAN",
 "procedure": "0x542be0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x543630",
 "instruction": "FPATAN",
 "procedure": "0x5435a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x543ec0",
@@ -1808,85 +1808,85 @@
 "address": "0x546478",
 "instruction": "FPATAN",
 "procedure": "0x546460",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5468c2",
 "instruction": "FPATAN",
 "procedure": "0x546790",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x547c49",
 "instruction": "FPATAN",
 "procedure": "0x547c20",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x54a236",
 "instruction": "FPATAN",
 "procedure": "0x549bb0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x54b3b6",
 "instruction": "FPATAN",
 "procedure": "0x54b370",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x54b414",
 "instruction": "FPATAN",
 "procedure": "0x54b370",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x54b607",
 "instruction": "FPATAN",
 "procedure": "0x54b4a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x54b684",
 "instruction": "FPATAN",
 "procedure": "0x54b4a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x54bbc2",
 "instruction": "FPATAN",
 "procedure": "0x54b4a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x54c1b8",
 "instruction": "FPATAN",
 "procedure": "0x54c070",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x54c37f",
 "instruction": "FPATAN",
 "procedure": "0x54c230",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x54c432",
 "instruction": "FPATAN",
 "procedure": "0x54c400",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x54c6b1",
 "instruction": "FPATAN",
 "procedure": "0x54c610",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x54ca41",
 "instruction": "FPATAN",
 "procedure": "0x54c910",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x54df3d",
@@ -1898,49 +1898,49 @@
 "address": "0x54e264",
 "instruction": "FPATAN",
 "procedure": "0x54d110",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x54e6de",
 "instruction": "FPATAN",
 "procedure": "0x54e5d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x550c8e",
 "instruction": "FPATAN",
 "procedure": "0x550c60",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x550fff",
 "instruction": "FPATAN",
 "procedure": "0x550fe0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5514c3",
 "instruction": "FPATAN",
 "procedure": "0x5514a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x55254e",
 "instruction": "FPATAN",
 "procedure": "0x552440",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x555f12",
 "instruction": "FPATAN",
 "procedure": "0x555e10",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x555fc9",
 "instruction": "FPATAN",
 "procedure": "0x555e10",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x556343",
@@ -1952,37 +1952,37 @@
 "address": "0x55671b",
 "instruction": "FPATAN",
 "procedure": "0x556580",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x557eeb",
 "instruction": "FPATAN",
 "procedure": "0x557df0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x558047",
 "instruction": "FPATAN",
 "procedure": "0x557f50",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x558242",
 "instruction": "FPATAN",
 "procedure": "0x5580c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x558778",
 "instruction": "FPATAN",
 "procedure": "0x558740",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x559147",
 "instruction": "FPATAN",
 "procedure": "0x5590d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x55a369",
@@ -1994,37 +1994,37 @@
 "address": "0x55a63f",
 "instruction": "FPATAN",
 "procedure": "0x55a580",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x55a6b2",
 "instruction": "FPATAN",
 "procedure": "0x55a580",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x55ac48",
 "instruction": "FPATAN",
 "procedure": "0x55a9e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x55c07b",
 "instruction": "FPATAN",
 "procedure": "0x55c050",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x55c580",
 "instruction": "FPATAN",
 "procedure": "0x55c0d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x55d59a",
 "instruction": "FPATAN",
 "procedure": "0x55cd60",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x55e02a",
@@ -2042,61 +2042,61 @@
 "address": "0x55fc05",
 "instruction": "FPATAN",
 "procedure": "0x55fbc0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x55fe57",
 "instruction": "FPATAN",
 "procedure": "0x55fe00",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x560ce8",
 "instruction": "FPATAN",
 "procedure": "0x560cb0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x560d2f",
 "instruction": "FPATAN",
 "procedure": "0x560cb0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x561297",
 "instruction": "FPATAN",
 "procedure": "0x561140",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x56149e",
 "instruction": "FPATAN",
 "procedure": "0x561140",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5614e4",
 "instruction": "FPATAN",
 "procedure": "0x561140",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x561690",
 "instruction": "FPATAN",
 "procedure": "0x5615e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x56250b",
 "instruction": "FPATAN",
 "procedure": "0x562400",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x56253c",
 "instruction": "FPATAN",
 "procedure": "0x562400",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x562617",
@@ -2108,73 +2108,73 @@
 "address": "0x562688",
 "instruction": "FPATAN",
 "procedure": "0x562670",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x563794",
 "instruction": "FPATAN",
 "procedure": "0x5636f0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x565edc",
 "instruction": "FPATAN",
 "procedure": "0x565d40",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5664c7",
 "instruction": "FPATAN",
 "procedure": "0x566040",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x56650e",
 "instruction": "FPATAN",
 "procedure": "0x566040",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x567220",
 "instruction": "FPATAN",
 "procedure": "0x567080",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x568610",
 "instruction": "FPATAN",
 "procedure": "0x568540",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5686d6",
 "instruction": "FPATAN",
 "procedure": "0x568540",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5687c9",
 "instruction": "FPATAN",
 "procedure": "0x568760",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5699e3",
 "instruction": "FPATAN",
 "procedure": "0x5699c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x56b378",
 "instruction": "FPATAN",
 "procedure": "0x56b2d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x56b3a0",
 "instruction": "FPATAN",
 "procedure": "0x56b2d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x56bcc5",
@@ -2198,13 +2198,13 @@
 "address": "0x56c34b",
 "instruction": "FPATAN",
 "procedure": "0x56c330",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x56c46d",
 "instruction": "FPATAN",
 "procedure": "0x56c440",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x56cf23",
@@ -2216,61 +2216,61 @@
 "address": "0x56fc56",
 "instruction": "FPATAN",
 "procedure": "0x56fc30",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x570ec1",
 "instruction": "FPATAN",
 "procedure": "0x570c20",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x570f89",
 "instruction": "FPATAN",
 "procedure": "0x570c20",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x573019",
 "instruction": "FPATAN",
 "procedure": "0x573010",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x573039",
 "instruction": "FPATAN",
 "procedure": "0x573030",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x573140",
 "instruction": "FPATAN",
 "procedure": "0x573130",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x573175",
 "instruction": "FPATAN",
 "procedure": "0x573160",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5731b5",
 "instruction": "FPATAN",
 "procedure": "0x5731a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5734cd",
 "instruction": "FPATAN",
 "procedure": "0x5733e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57370a",
 "instruction": "FPATAN",
 "procedure": "0x5736d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x575352",
@@ -2282,145 +2282,145 @@
 "address": "0x575c70",
 "instruction": "FPATAN",
 "procedure": "0x575c50",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x575d9b",
 "instruction": "FPATAN",
 "procedure": "0x575d50",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57789a",
 "instruction": "FPATAN",
 "procedure": "0x577840",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x578194",
 "instruction": "FPATAN",
 "procedure": "0x578150",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x578201",
 "instruction": "FPATAN",
 "procedure": "0x578150",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57a325",
 "instruction": "FPATAN",
 "procedure": "0x57a2c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57a38d",
 "instruction": "FPATAN",
 "procedure": "0x57a2c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57aa60",
 "instruction": "FPATAN",
 "procedure": "0x57aa10",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57aac1",
 "instruction": "FPATAN",
 "procedure": "0x57aa10",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57ab01",
 "instruction": "FPATAN",
 "procedure": "0x57aa10",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57ac65",
 "instruction": "FPATAN",
 "procedure": "0x57ac00",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57acca",
 "instruction": "FPATAN",
 "procedure": "0x57ac00",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57ad34",
 "instruction": "FPATAN",
 "procedure": "0x57ac00",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57eb43",
 "instruction": "FPATAN",
 "procedure": "0x57eb20",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57eb7f",
 "instruction": "FPATAN",
 "procedure": "0x57eb20",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57f361",
 "instruction": "FPATAN",
 "procedure": "0x57f0d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57f3a1",
 "instruction": "FPATAN",
 "procedure": "0x57f0d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57f529",
 "instruction": "FPATAN",
 "procedure": "0x57f0d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57f6c3",
 "instruction": "FPATAN",
 "procedure": "0x57f0d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57f701",
 "instruction": "FPATAN",
 "procedure": "0x57f0d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57f7d5",
 "instruction": "FPATAN",
 "procedure": "0x57f0d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57f7f2",
 "instruction": "FPATAN",
 "procedure": "0x57f0d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57f893",
 "instruction": "FPATAN",
 "procedure": "0x57f0d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57f8b0",
 "instruction": "FPATAN",
 "procedure": "0x57f0d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x57fce4",
@@ -2456,115 +2456,115 @@
 "address": "0x582616",
 "instruction": "FPATAN",
 "procedure": "0x581e10",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x58266a",
 "instruction": "FPATAN",
 "procedure": "0x581e10",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x582782",
 "instruction": "FPATAN",
 "procedure": "0x581e10",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5827d6",
 "instruction": "FPATAN",
 "procedure": "0x581e10",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x582e8d",
 "instruction": "FPATAN",
 "procedure": "0x582b60",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x582ecd",
 "instruction": "FPATAN",
 "procedure": "0x582b60",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5835d8",
 "instruction": "FPATAN",
 "procedure": "0x583320",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x583616",
 "instruction": "FPATAN",
 "procedure": "0x583320",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x583685",
 "instruction": "FPATAN",
 "procedure": "0x583320",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5836c0",
 "instruction": "FPATAN",
 "procedure": "0x583320",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5839e4",
 "instruction": "FPATAN",
 "procedure": "0x583810",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x583a52",
 "instruction": "FPATAN",
 "procedure": "0x583810",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5841f2",
 "instruction": "FPATAN",
 "procedure": "0x583810",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x584242",
 "instruction": "FPATAN",
 "procedure": "0x583810",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5849a2",
 "instruction": "FPATAN",
 "procedure": "0x584890",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5849da",
 "instruction": "FPATAN",
 "procedure": "0x584890",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5863c0",
 "instruction": "FPATAN",
 "procedure": "0x586030",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x586ec2",
 "instruction": "FPATAN",
 "procedure": "0x586e40",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5877c5",
 "instruction": "FPATAN",
 "procedure": "0x587600",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x588153",
@@ -2648,61 +2648,61 @@
 "address": "0x58ca3c",
 "instruction": "FPATAN",
 "procedure": "0x58c9e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x58ca81",
 "instruction": "FPATAN",
 "procedure": "0x58c9e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x58cb96",
 "instruction": "FPATAN",
 "procedure": "0x58cb10",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x58ce37",
 "instruction": "FPATAN",
 "procedure": "0x58cbf0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x58d0ed",
 "instruction": "FPATAN",
 "procedure": "0x58ce80",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x58d175",
 "instruction": "FPATAN",
 "procedure": "0x58d110",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x58d381",
 "instruction": "FPATAN",
 "procedure": "0x58d310",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x58e4bb",
 "instruction": "FPATAN",
 "procedure": "0x58e4a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x58e56e",
 "instruction": "FPATAN",
 "procedure": "0x58e520",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5945c4",
 "instruction": "FPATAN",
 "procedure": "0x594560",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x594a13",
@@ -2720,7 +2720,7 @@
 "address": "0x596f54",
 "instruction": "FPATAN",
 "procedure": "0x596ef0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x59736e",
@@ -2732,19 +2732,19 @@
 "address": "0x599629",
 "instruction": "FPATAN",
 "procedure": "0x597c80",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x599984",
 "instruction": "FPATAN",
 "procedure": "0x599930",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5999a1",
 "instruction": "FPATAN",
 "procedure": "0x599930",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x59b24b",
@@ -2756,13 +2756,13 @@
 "address": "0x59b89a",
 "instruction": "FPATAN",
 "procedure": "0x59af80",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x59b8b9",
 "instruction": "FPATAN",
 "procedure": "0x59af80",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x59c213",
@@ -2774,109 +2774,109 @@
 "address": "0x59d736",
 "instruction": "FPATAN",
 "procedure": "0x59c640",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x59dd00",
 "instruction": "FPATAN",
 "procedure": "0x59db70",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x59dd34",
 "instruction": "FPATAN",
 "procedure": "0x59db70",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5a38b9",
 "instruction": "FPATAN",
 "procedure": "0x5a36e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5a425a",
 "instruction": "FPATAN",
 "procedure": "0x5a36e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5a9703",
 "instruction": "FPATAN",
 "procedure": "0x5a8970",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5aace8",
 "instruction": "FPATAN",
 "procedure": "0x5aaa40",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5acb4b",
 "instruction": "FPATAN",
 "procedure": "0x5ac980",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5acba3",
 "instruction": "FPATAN",
 "procedure": "0x5ac980",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5acc6e",
 "instruction": "FPATAN",
 "procedure": "0x5ac980",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5acd93",
 "instruction": "FPATAN",
 "procedure": "0x5acd30",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5afa59",
 "instruction": "FPATAN",
 "procedure": "0x5afa20",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5b1753",
 "instruction": "FPATAN",
 "procedure": "0x5b1060",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5b17b6",
 "instruction": "FPATAN",
 "procedure": "0x5b1060",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5b218a",
 "instruction": "FPATAN",
 "procedure": "0x5b1a00",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5b2950",
 "instruction": "FPATAN",
 "procedure": "0x5b24b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5b3462",
 "instruction": "FPATAN",
 "procedure": "0x5b24b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5b34f1",
 "instruction": "FPATAN",
 "procedure": "0x5b24b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5b7770",
@@ -2906,79 +2906,79 @@
 "address": "0x5bf1a6",
 "instruction": "FPATAN",
 "procedure": "0x5bd9c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5c275f",
 "instruction": "FPATAN",
 "procedure": "0x5c19e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5c2932",
 "instruction": "FPATAN",
 "procedure": "0x5c19e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5c2f25",
 "instruction": "FPATAN",
 "procedure": "0x5c19e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5c2f88",
 "instruction": "FPATAN",
 "procedure": "0x5c19e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5c3fe1",
 "instruction": "FPATAN",
 "procedure": "0x5c19e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5c4017",
 "instruction": "FPATAN",
 "procedure": "0x5c19e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5c5e46",
 "instruction": "FPATAN",
 "procedure": "0x5c4390",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5c6936",
 "instruction": "FPATAN",
 "procedure": "0x5c4390",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5c7426",
 "instruction": "FPATAN",
 "procedure": "0x5c4390",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5c7fd6",
 "instruction": "FPATAN",
 "procedure": "0x5c4390",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5c92b9",
 "instruction": "FPATAN",
 "procedure": "0x5c4390",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5cc4c1",
 "instruction": "FPATAN",
 "procedure": "0x5ca0e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5ce31a",
@@ -2996,127 +2996,127 @@
 "address": "0x5d13d5",
 "instruction": "FPATAN",
 "procedure": "0x5d0960",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5d2953",
 "instruction": "FPATAN",
 "procedure": "0x5d2890",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5d476a",
 "instruction": "FPATAN",
 "procedure": "0x5d43c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5d5a2c",
 "instruction": "FPATAN",
 "procedure": "0x5d43c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5d75b6",
 "instruction": "FPATAN",
 "procedure": "0x5d6420",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5dbdac",
 "instruction": "FPATAN",
 "procedure": "0x5da200",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5df2af",
 "instruction": "FPATAN",
 "procedure": "0x5df280",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5df33f",
 "instruction": "FPATAN",
 "procedure": "0x5df280",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5e05b8",
 "instruction": "FPATAN",
 "procedure": "0x5e0070",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5e13f9",
 "instruction": "FPATAN",
 "procedure": "0x5e11a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5e35a8",
 "instruction": "FPATAN",
 "procedure": "0x5e24b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5e3902",
 "instruction": "FPATAN",
 "procedure": "0x5e24b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5e447f",
 "instruction": "FPATAN",
 "procedure": "0x5e24b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5e51af",
 "instruction": "FPATAN",
 "procedure": "0x5e24b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5e5382",
 "instruction": "FPATAN",
 "procedure": "0x5e24b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5e5975",
 "instruction": "FPATAN",
 "procedure": "0x5e24b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5e59d8",
 "instruction": "FPATAN",
 "procedure": "0x5e24b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5e6d19",
 "instruction": "FPATAN",
 "procedure": "0x5e6b80",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5e70a0",
 "instruction": "FPATAN",
 "procedure": "0x5e6b80",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5e97df",
 "instruction": "FPATAN",
 "procedure": "0x5e9430",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5ea8e1",
 "instruction": "FPATAN",
 "procedure": "0x5ea720",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5eaf5d",
@@ -3128,73 +3128,73 @@
 "address": "0x5ebcc1",
 "instruction": "FPATAN",
 "procedure": "0x5ea720",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5ebdb0",
 "instruction": "FPATAN",
 "procedure": "0x5ea720",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5edf5e",
 "instruction": "FPATAN",
 "procedure": "0x5edde0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5ee082",
 "instruction": "FPATAN",
 "procedure": "0x5edde0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5ee19f",
 "instruction": "FPATAN",
 "procedure": "0x5edde0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5f1e0f",
 "instruction": "FPATAN",
 "procedure": "0x5f1d20",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5f343a",
 "instruction": "FPATAN",
 "procedure": "0x5f3350",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5f3459",
 "instruction": "FPATAN",
 "procedure": "0x5f3350",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5f4723",
 "instruction": "FPATAN",
 "procedure": "0x5f4710",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5f797c",
 "instruction": "FPATAN",
 "procedure": "0x5f7880",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5f799c",
 "instruction": "FPATAN",
 "procedure": "0x5f7880",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5f884f",
 "instruction": "FPATAN",
 "procedure": "0x5f8550",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5f9174",
@@ -3206,91 +3206,91 @@
 "address": "0x5fbd82",
 "instruction": "FPATAN",
 "procedure": "0x5fbca0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5fce6a",
 "instruction": "FPATAN",
 "procedure": "0x5fcd80",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5fce89",
 "instruction": "FPATAN",
 "procedure": "0x5fcd80",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5fddce",
 "instruction": "FPATAN",
 "procedure": "0x5fd860",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5fef48",
 "instruction": "FPATAN",
 "procedure": "0x5fef10",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5fef62",
 "instruction": "FPATAN",
 "procedure": "0x5fef10",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5fefa0",
 "instruction": "FPATAN",
 "procedure": "0x5fef10",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5fefbc",
 "instruction": "FPATAN",
 "procedure": "0x5fef10",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5ff6fc",
 "instruction": "FPATAN",
 "procedure": "0x5ff370",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x5ff73b",
 "instruction": "FPATAN",
 "procedure": "0x5ff370",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x601b24",
 "instruction": "FPATAN",
 "procedure": "0x601ad0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x602ae6",
 "instruction": "FPATAN",
 "procedure": "0x602510",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x602f8a",
 "instruction": "FPATAN",
 "procedure": "0x602510",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6044a2",
 "instruction": "FPATAN",
 "procedure": "0x604480",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x604a25",
 "instruction": "FPATAN",
 "procedure": "0x6048b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x605983",
@@ -3302,37 +3302,37 @@
 "address": "0x60737a",
 "instruction": "FPATAN",
 "procedure": "0x606040",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x60aeac",
 "instruction": "FPATAN",
 "procedure": "0x60acc0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x60b4c1",
 "instruction": "FPATAN",
 "procedure": "0x60b490",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x60be7c",
 "instruction": "FPATAN",
 "procedure": "0x60be20",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x60c0a4",
 "instruction": "FPATAN",
 "procedure": "0x60c070",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x60c4d2",
 "instruction": "FPATAN",
 "procedure": "0x60c420",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x60e013",
@@ -3368,73 +3368,73 @@
 "address": "0x60f390",
 "instruction": "FPATAN",
 "procedure": "0x60f1b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x60f456",
 "instruction": "FPATAN",
 "procedure": "0x60f1b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x60f539",
 "instruction": "FPATAN",
 "procedure": "0x60f4d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x610afc",
 "instruction": "FPATAN",
 "procedure": "0x610570",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6121d4",
 "instruction": "FPATAN",
 "procedure": "0x610570",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x61281f",
 "instruction": "FPATAN",
 "procedure": "0x610570",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6129f2",
 "instruction": "FPATAN",
 "procedure": "0x610570",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x612fe5",
 "instruction": "FPATAN",
 "procedure": "0x610570",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x613048",
 "instruction": "FPATAN",
 "procedure": "0x610570",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6134ba",
 "instruction": "FPATAN",
 "procedure": "0x6134a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6138b5",
 "instruction": "FPATAN",
 "procedure": "0x6137b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x613b92",
 "instruction": "FPATAN",
 "procedure": "0x6137b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x61571d",
@@ -3446,19 +3446,19 @@
 "address": "0x615b2e",
 "instruction": "FPATAN",
 "procedure": "0x6146b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x616c01",
 "instruction": "FPATAN",
 "procedure": "0x6146b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6170e2",
 "instruction": "FPATAN",
 "procedure": "0x6146b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x618b77",
@@ -3476,19 +3476,19 @@
 "address": "0x61a7a8",
 "instruction": "FPATAN",
 "procedure": "0x61a2a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x61d7b8",
 "instruction": "FPATAN",
 "procedure": "0x61d610",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x61da5d",
 "instruction": "FPATAN",
 "procedure": "0x61d610",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x61da85",
@@ -3500,37 +3500,37 @@
 "address": "0x61e4c2",
 "instruction": "FPATAN",
 "procedure": "0x61e400",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x61e521",
 "instruction": "FPATAN",
 "procedure": "0x61e400",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x620eb8",
 "instruction": "FPATAN",
 "procedure": "0x620bc0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6215b4",
 "instruction": "FPATAN",
 "procedure": "0x620bc0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6238f3",
 "instruction": "FPATAN",
 "procedure": "0x6230f0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x623a58",
 "instruction": "FPATAN",
 "procedure": "0x6230f0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x624823",
@@ -3542,13 +3542,13 @@
 "address": "0x6276f9",
 "instruction": "FPATAN",
 "procedure": "0x627690",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x627717",
 "instruction": "FPATAN",
 "procedure": "0x627690",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6293bb",
@@ -3560,61 +3560,61 @@
 "address": "0x629c89",
 "instruction": "FPATAN",
 "procedure": "0x629c00",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x629ca7",
 "instruction": "FPATAN",
 "procedure": "0x629c00",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x62a0d1",
 "instruction": "FPATAN",
 "procedure": "0x62a030",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x62a0ef",
 "instruction": "FPATAN",
 "procedure": "0x62a030",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x62c427",
 "instruction": "FPATAN",
 "procedure": "0x62c3d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x62c464",
 "instruction": "FPATAN",
 "procedure": "0x62c3d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x62c581",
 "instruction": "FPATAN",
 "procedure": "0x62c520",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x62c5ae",
 "instruction": "FPATAN",
 "procedure": "0x62c520",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x62d014",
 "instruction": "FPATAN",
 "procedure": "0x62cfa0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x62d032",
 "instruction": "FPATAN",
 "procedure": "0x62cfa0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x62d203",
@@ -3626,61 +3626,61 @@
 "address": "0x62da09",
 "instruction": "FPATAN",
 "procedure": "0x62d950",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x62da27",
 "instruction": "FPATAN",
 "procedure": "0x62d950",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x62e69d",
 "instruction": "FPATAN",
 "procedure": "0x62e610",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x62e6bb",
 "instruction": "FPATAN",
 "procedure": "0x62e610",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x632b45",
 "instruction": "FPATAN",
 "procedure": "0x632a70",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x63397a",
 "instruction": "FPATAN",
 "procedure": "0x6338c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x633b75",
 "instruction": "FPATAN",
 "procedure": "0x6339a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x634500",
 "instruction": "FPATAN",
 "procedure": "0x6344f0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6351d7",
 "instruction": "FPATAN",
 "procedure": "0x635130",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x63afc0",
 "instruction": "FPATAN",
 "procedure": "0x63af20",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x63f2e0",
@@ -3692,25 +3692,25 @@
 "address": "0x63f782",
 "instruction": "FPATAN",
 "procedure": "0x63f450",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x64484a",
 "instruction": "FYL2X",
 "procedure": "0x6447fd",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x645064",
 "instruction": "FPATAN",
 "procedure": "0x64503d",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x645136",
 "instruction": "FPATAN",
 "procedure": "0x64510d",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x647f0f",
@@ -3734,31 +3734,31 @@
 "address": "0x64875d",
 "instruction": "FYL2X",
 "procedure": "0x647c19",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6487f1",
 "instruction": "FYL2X",
 "procedure": "0x647c19",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x648815",
 "instruction": "FYL2X",
 "procedure": "0x647c19",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6488ee",
 "instruction": "F2XM1",
 "procedure": "0x647c19",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x648b9a",
 "instruction": "F2XM1",
 "procedure": "0x648b47",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x649995",
@@ -3776,7 +3776,7 @@
 "address": "0x64b2ab",
 "instruction": "FPATAN",
 "procedure": "0x64b221",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x64bf95",
@@ -3788,13 +3788,13 @@
 "address": "0x64dac5",
 "instruction": "FPATAN",
 "procedure": "0x64cd28",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x64dac8",
 "instruction": "FPTAN",
 "procedure": "0x64cd28",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x652372",
@@ -28694,7 +28694,7 @@
 "address": "0x6e8c94",
 "instruction": "FPATAN",
 "procedure": "0x6df440",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6eb49a",
@@ -28718,97 +28718,97 @@
 "address": "0x6ec97b",
 "instruction": "FPATAN",
 "procedure": "0x6ec8b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6ec999",
 "instruction": "FPATAN",
 "procedure": "0x6ec8b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6ec9cb",
 "instruction": "FPATAN",
 "procedure": "0x6ec8b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6edb7b",
 "instruction": "FPATAN",
 "procedure": "0x6edad0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6edc4b",
 "instruction": "FPATAN",
 "procedure": "0x6edba0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6f4292",
 "instruction": "FPATAN",
 "procedure": "0x6f41b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6f42cb",
 "instruction": "FPATAN",
 "procedure": "0x6f41b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6f4b03",
 "instruction": "FPATAN",
 "procedure": "0x6f4a00",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6f4b63",
 "instruction": "FPATAN",
 "procedure": "0x6f4a00",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6f4b92",
 "instruction": "FPATAN",
 "procedure": "0x6f4a00",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6f4cb3",
 "instruction": "FPATAN",
 "procedure": "0x6f4a00",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6f4d13",
 "instruction": "FPATAN",
 "procedure": "0x6f4a00",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6f4d3e",
 "instruction": "FPATAN",
 "procedure": "0x6f4a00",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6f4e12",
 "instruction": "FPATAN",
 "procedure": "0x6f4a00",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6f4e72",
 "instruction": "FPATAN",
 "procedure": "0x6f4a00",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6f4e9d",
 "instruction": "FPATAN",
 "procedure": "0x6f4a00",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x6fdbb3",
@@ -28826,13 +28826,13 @@
 "address": "0x703940",
 "instruction": "FSIN",
 "procedure": "0x703930",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x70395a",
 "instruction": "FCOS",
 "procedure": "0x703930",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x706f6b",
@@ -28892,7 +28892,7 @@
 "address": "0x72140c",
 "instruction": "FPATAN",
 "procedure": "0x7211e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x721c03",
@@ -28904,7 +28904,7 @@
 "address": "0x723e9f",
 "instruction": "FPATAN",
 "procedure": "0x723e80",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7272cb",
@@ -28976,7 +28976,7 @@
 "address": "0x72b4e2",
 "instruction": "FPATAN",
 "procedure": "0x72b4b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x72bbf3",
@@ -29000,7 +29000,7 @@
 "address": "0x7339c3",
 "instruction": "FPATAN",
 "procedure": "0x7339b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x734913",
@@ -29012,25 +29012,25 @@
 "address": "0x736b47",
 "instruction": "FPATAN",
 "procedure": "0x736460",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7384f8",
 "instruction": "FPATAN",
 "procedure": "0x738410",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x738569",
 "instruction": "FPATAN",
 "procedure": "0x738540",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x738903",
 "instruction": "FPATAN",
 "procedure": "0x738540",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x73955b",
@@ -29048,7 +29048,7 @@
 "address": "0x73b9eb",
 "instruction": "FPATAN",
 "procedure": "0x73b840",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x73ba1d",
@@ -29060,49 +29060,49 @@
 "address": "0x73dded",
 "instruction": "FPATAN",
 "procedure": "0x73dd50",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x73df50",
 "instruction": "FPATAN",
 "procedure": "0x73de70",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x73e0d6",
 "instruction": "FPATAN",
 "procedure": "0x73e000",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x73e24d",
 "instruction": "FPATAN",
 "procedure": "0x73e180",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x73e35c",
 "instruction": "FPATAN",
 "procedure": "0x73e180",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x73e4ca",
 "instruction": "FPATAN",
 "procedure": "0x73e3f0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x74014b",
 "instruction": "FPATAN",
 "procedure": "0x740130",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x740203",
 "instruction": "FPATAN",
 "procedure": "0x7401e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x74d38b",
@@ -29114,43 +29114,43 @@
 "address": "0x74e260",
 "instruction": "FPATAN",
 "procedure": "0x74e0c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x74e30b",
 "instruction": "FPATAN",
 "procedure": "0x74e0c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x74e408",
 "instruction": "FPATAN",
 "procedure": "0x74e0c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x74e41f",
 "instruction": "FPATAN",
 "procedure": "0x74e0c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x75304b",
 "instruction": "FPATAN",
 "procedure": "0x753030",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x753092",
 "instruction": "FPATAN",
 "procedure": "0x753070",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x754360",
 "instruction": "FPATAN",
 "procedure": "0x753f50",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x75a4bd",
@@ -29174,7 +29174,7 @@
 "address": "0x75f350",
 "instruction": "FPTAN",
 "procedure": "0x75f240",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x764ad3",
@@ -29192,91 +29192,91 @@
 "address": "0x76e55f",
 "instruction": "FPATAN",
 "procedure": "0x76e540",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7711ee",
 "instruction": "FSINCOS",
 "procedure": "0x7711d3",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x771284",
 "instruction": "FSINCOS",
 "procedure": "0x771269",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x77131b",
 "instruction": "FSINCOS",
 "procedure": "0x771300",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7713b9",
 "instruction": "FSINCOS",
 "procedure": "0x77139c",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x771706",
 "instruction": "FSINCOS",
 "procedure": "0x7716df",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7719ce",
 "instruction": "FSINCOS",
 "procedure": "0x771998",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x771a4f",
 "instruction": "FSINCOS",
 "procedure": "0x771a22",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x771a76",
 "instruction": "FSINCOS",
 "procedure": "0x771a22",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x771a9d",
 "instruction": "FSINCOS",
 "procedure": "0x771a22",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x771ca7",
 "instruction": "FSIN",
 "procedure": "0x771c7e",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x771d4c",
 "instruction": "FSINCOS",
 "procedure": "0x771d02",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x771e41",
 "instruction": "FPATAN",
 "procedure": "0x771dc7",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x771e54",
 "instruction": "FSIN",
 "procedure": "0x771dc7",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x771e61",
 "instruction": "FSIN",
 "procedure": "0x771dc7",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x772330",
@@ -29288,109 +29288,109 @@
 "address": "0x774024",
 "instruction": "RCPPS",
 "procedure": "0x773ff0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7741a0",
 "instruction": "RCPPS",
 "procedure": "0x774150",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x774217",
 "instruction": "RCPPS",
 "procedure": "0x774150",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7744e2",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7745b7",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x774865",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x774e35",
 "instruction": "RCPSS",
 "procedure": "0x774310",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x774f14",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x775014",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x77515c",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7752b8",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x775355",
 "instruction": "RCPSS",
 "procedure": "0x774310",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7756b2",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x775787",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x775a3f",
 "instruction": "RCPSS",
 "procedure": "0x774310",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x775dc4",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x775ec4",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x77600c",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7769b3",
@@ -29468,85 +29468,85 @@
 "address": "0x78c663",
 "instruction": "FSIN",
 "procedure": "0x78c5b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x791240",
 "instruction": "FPTAN",
 "procedure": "0x791170",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x79124a",
 "instruction": "FPATAN",
 "procedure": "0x791170",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x794afc",
 "instruction": "FYL2X",
 "procedure": "0x7949b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x79852e",
 "instruction": "FPATAN",
 "procedure": "0x7984b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x79a481",
 "instruction": "FPATAN",
 "procedure": "0x79a330",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x79a60d",
 "instruction": "FPATAN",
 "procedure": "0x79a570",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x79a7cb",
 "instruction": "FPATAN",
 "procedure": "0x79a570",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x79bb3d",
 "instruction": "FPATAN",
 "procedure": "0x79b5a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x79fe78",
 "instruction": "FPATAN",
 "procedure": "0x79fe70",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7a0667",
 "instruction": "FPATAN",
 "procedure": "0x7a0610",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7a09e7",
 "instruction": "FPATAN",
 "procedure": "0x7a09c0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7a5863",
 "instruction": "FPATAN",
 "procedure": "0x7a57f0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7a5941",
 "instruction": "FPATAN",
 "procedure": "0x7a57f0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7a5b71",
@@ -29558,25 +29558,25 @@
 "address": "0x7a67ac",
 "instruction": "FPATAN",
 "procedure": "0x7a6790",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7a6e0f",
 "instruction": "FPATAN",
 "procedure": "0x7a6df0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7a6f04",
 "instruction": "FPATAN",
 "procedure": "0x7a6ee0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7a9f4a",
 "instruction": "FPATAN",
 "procedure": "0x7a9ed0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7ad5ea",
@@ -29588,85 +29588,85 @@
 "address": "0x7ae5e5",
 "instruction": "FPATAN",
 "procedure": "0x7ae5d0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7ae67a",
 "instruction": "FPATAN",
 "procedure": "0x7ae660",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7ae6d0",
 "instruction": "FPATAN",
 "procedure": "0x7ae6b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7ae7c6",
 "instruction": "FPATAN",
 "procedure": "0x7ae6f0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7ae7e0",
 "instruction": "FPATAN",
 "procedure": "0x7ae6f0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7aec1f",
 "instruction": "FPATAN",
 "procedure": "0x7aebe0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7aeded",
 "instruction": "FPATAN",
 "procedure": "0x7aeda0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7af35f",
 "instruction": "FPATAN",
 "procedure": "0x7af250",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7af980",
 "instruction": "FPATAN",
 "procedure": "0x7af960",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7afaed",
 "instruction": "FPATAN",
 "procedure": "0x7af9e0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7b177c",
 "instruction": "FPATAN",
 "procedure": "0x7b1720",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7b17ec",
 "instruction": "FPATAN",
 "procedure": "0x7b17a0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7b573e",
 "instruction": "FPATAN",
 "procedure": "0x7b55b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7b577e",
 "instruction": "FPATAN",
 "procedure": "0x7b55b0",
-"confirmed": false
+"confirmed": true
 },
 {
 "address": "0x7ba644",
@@ -29698,5 +29698,18 @@
 "procedure": "0x7c4a00",
 "confirmed": false
 }
-]
+],
+"confirmed_counts": {
+"FPATAN": 542,
+"RSQRTPS": 2,
+"RCPPS": 5,
+"FYL2X": 5,
+"F2XM1": 2,
+"FPTAN": 3,
+"FSIN": 5,
+"FCOS": 1,
+"FSINCOS": 10,
+"RSQRTSS": 12,
+"RCPSS": 3
+}
 }

@@ -75,6 +75,12 @@ public:
     void return_x87(std::uint64_t significand,std::uint16_t sign_exponent);
     // ST(i) as ext80 fields (significand, sign/exponent) and FSTP: pop ST(0).
     std::pair<std::uint64_t,std::uint16_t> st(unsigned i)const;void pop_x87();
+    void set_st(unsigned i,std::uint64_t significand,std::uint16_t sign_exponent); // ST(i) := value (tag valid)
+    std::uint16_t fpu_status()const;void set_fpu_status(std::uint16_t);
+    // Replaces one instruction: `emulate` runs before the instruction at `address` executes; when it returns
+    // true the instruction is skipped (EIP advances by its length), otherwise the guest executes it itself.
+    using InstructionHook=std::function<bool(X86Guest&,std::uint32_t address)>;
+    bool add_instruction_hook(std::uint32_t address,InstructionHook,std::string* error);
     std::uint64_t xmm0_low()const;void set_xmm0_low(std::uint64_t); // the low 64 bits of XMM0 (double arguments/results)
     std::uint32_t stack_base()const noexcept{return stack_base_;}
     std::uint32_t stop_address()const noexcept{return stop_address_;}
@@ -94,6 +100,8 @@ private:
     static void continuation_hook(void*,std::uint64_t address,std::uint32_t size,void* user);
     void install_continuations();
     std::vector<std::unique_ptr<WriteWatch>> watches_;
+    std::map<std::uint32_t,InstructionHook> instruction_hooks_;
+    static void instruction_hook(void*,std::uint64_t address,std::uint32_t size,void* user);
     static void write_hook(void*,int type,std::uint64_t address,int size,std::int64_t value,void* user);
 };
 } // namespace sadx

@@ -22,6 +22,8 @@ public:
     struct SineCosine {X87Value sine, cosine;};
     static std::optional<SineCosine> fsincos_bochs(X87Context& context, X87Value x);
     static std::optional<X87Value> fptan_bochs(X87Context& context, X87Value x); // tan; the instruction then pushes 1.0
+    static std::optional<X87Value> fsin_bochs(X87Context& context, X87Value x);  // FSIN (nullopt: the C2 path)
+    static std::optional<X87Value> fcos_bochs(X87Context& context, X87Value x);  // FCOS
 };
 
 } // namespace sadx

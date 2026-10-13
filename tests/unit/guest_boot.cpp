@@ -5,7 +5,9 @@
 // the D3D8 device came from CreateDevice with the profile's 640x480 back buffer; every Input/Speedrun and
 // WinMain-time loader patch is written except the 8 HUD-scaling sites applied after the first frame; nothing
 // outside the inventory's active ranges is written; and a second boot is identical (call log, D3D8 state).
+// Every boot runs with the FPU shims (4e) and the third one with the override table (4d) as well.
 //   guest-boot-test GAME_DIR WINDOWS_SYSTEM_DIR
+#include "guest/fpu_shims.hpp"
 #include "guest/override_table.hpp"
 #include "hle/hle_process.hpp"
 #include <cstring>
@@ -17,7 +19,7 @@
 namespace {
 using namespace sadx;
 void require(bool ok,const std::string& why){if(!ok)throw std::runtime_error(why);}
-struct Boot {std::unique_ptr<HleProcess> process;GuestCallResult result;};
+struct Boot {std::unique_ptr<HleProcess> process;GuestCallResult result;std::shared_ptr<FpuShimStats> shims=std::make_shared<FpuShimStats>();};
 Boot boot(const std::string& dir,const std::string& system,const std::string& overlay,std::map<std::string,std::size_t>* fired=nullptr){
     std::ifstream f(dir+"/sonic.exe",std::ios::binary);require(bool(f),"cannot read "+dir+"/sonic.exe");
     std::string error;const auto image=ExecutableImage::parse({std::istreambuf_iterator<char>(f),{}},&error);require(bool(image),error);
@@ -26,6 +28,7 @@ Boot boot(const std::string& dir,const std::string& system,const std::string& ov
     b.process->use_real_cpp_runtime(system);
     require(b.process->map_main(*image,&error),"map sonic.exe: "+error);
     b.process->on_present=[](X86Guest& g){g.stop("first Present");};
+    require(install_fpu_shims(b.process->guest(),load_fpu_sites("reference/inventory/fpu-sites.json"),*b.shims,&error),error); // M1 4e
     if(fired)for(auto entry:frame_loop_overrides(*image)){ // the override table, counting how often each fires
         auto bridge=entry.bridge;const auto name=entry.name;
         require(b.process->guest().add_override(entry.address,[bridge,name,fired](X86Guest& g){++(*fired)[name];return bridge(g);},&error),error);}
@@ -101,6 +104,7 @@ int main(int argc,char** argv){try{
         counts<<entry.name<<" x"<<fired[entry.name]<<" ";}
     std::cout<<"Guest boot: entry point to the first Present in the guest ("<<p.hle().log().size()<<" HLE calls, identical on a second boot); windows "
              <<p.windows.windows.size()<<" (borderless 646x509 wrapper, 640x480 game); "<<(active-pending.size())<<" of "<<active
-             <<" active patch sites written, the 8 HUD-scaling ones pending; "<<p.assumptions.size()<<" HLE assumptions reported; with the override table installed the boot is identical (fired: "<<counts.str()<<")\n";
+             <<" active patch sites written, the 8 HUD-scaling ones pending; "<<p.assumptions.size()<<" HLE assumptions reported; FPU shims executed "<<[&]{std::size_t n=0;for(const auto& [k,v]:first.shims->shimmed)n+=v;return n;}()
+             <<"x (unshimmed "<<[&]{std::size_t n=0;for(const auto& [k,v]:first.shims->unshimmed)n+=v;return n;}()<<"x); with the override table installed the boot is identical (fired: "<<counts.str()<<")\n";
     return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

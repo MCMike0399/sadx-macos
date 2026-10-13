@@ -1,6 +1,6 @@
 import sys,struct;sys.path.insert(0,'tools/lib')
 from pe_image import PEImage
-im=PEImage('Sonic Adventure DX/sonic.exe')
+im=PEImage('game/Sonic Adventure DX/sonic.exe')
 t=[s for s in im.sections if s['name']=='.text'][0]
 text=im.slice(t['file_offset'],t['raw_size']);base=im.base+t['rva']
 for g in [int(x,16) for x in sys.argv[1:]]:

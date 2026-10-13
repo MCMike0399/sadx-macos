@@ -52,4 +52,26 @@ std::optional<X87Value> X87Transcendental::fptan_bochs(X87Context& context, X87V
     return X87Value(value.signExp, value.signif);
 }
 
+std::optional<X87Value> X87Transcendental::fsin_bochs(X87Context& context, X87Value x) {
+    context.check_thread();
+    context.check_pending();
+    auto status = status_for(context.control_word_);
+    bochs_fpatan::extFloat80_t value{x.significand(), x.sign_exponent()};
+    const auto code = bochs_fpatan::fsin(value, status);
+    context.record_exceptions(static_cast<std::uint16_t>(status.softfloat_exceptionFlags & 0x3fU));
+    if (code < 0) return std::nullopt;
+    return X87Value(value.signExp, value.signif);
+}
+
+std::optional<X87Value> X87Transcendental::fcos_bochs(X87Context& context, X87Value x) {
+    context.check_thread();
+    context.check_pending();
+    auto status = status_for(context.control_word_);
+    bochs_fpatan::extFloat80_t value{x.significand(), x.sign_exponent()};
+    const auto code = bochs_fpatan::fcos(value, status);
+    context.record_exceptions(static_cast<std::uint16_t>(status.softfloat_exceptionFlags & 0x3fU));
+    if (code < 0) return std::nullopt;
+    return X87Value(value.signExp, value.signif);
+}
+
 } // namespace sadx

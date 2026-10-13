@@ -55,7 +55,10 @@ listings. `tools/analysis/xscan.py ADDR…` lists `.text` references to data add
 * `hot-paths.json` — functions reachable from the frame loop (`40cad0`) ranked by static
   call depth, later replaced by runtime profiles from the guest.
 * `fpu-sites.json` — every FPATAN/FSINCOS/FPTAN/F2XM1/FYL2X/RCPSS/RCPPS/RSQRTSS/RSQRTPS
-  site in `.text` (byte scan + Ghidra confirmation); the shim list for the guest.
+  site in `.text`: `run_inventory.py fpu` byte-scans candidates, `tools/analysis/fpu_sites.py` confirms each
+  by a capstone linear sweep of its procedure (`confirmed`); the shim list for the guest (src/guest/fpu_shims).
+  capstone 5.0.7 is installed in the reference venv for this (`reference/python/bin/python -m pip install
+  capstone`; Unicorn stays pinned at 2.1.4).
 
 These are inputs to M1 and M5 of the roadmap.
 
