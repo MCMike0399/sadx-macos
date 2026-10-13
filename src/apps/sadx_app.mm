@@ -1,5 +1,6 @@
 // sadx-app: a window on the game.
-//   sadx-app --guest GAME_DIR WINDOWS_SYSTEM_DIR [--exit-after N] [--screenshot out.ppm]
+//   sadx-app --guest GAME_DIR WINDOWS_SYSTEM_DIR [--exit-after N] [--screenshot out.ppm] [--keys FRAME:VK[:FRAMES],...]
+//     (the keyboard is forwarded to the guest as Windows keys; --keys scripts presses by guest frame)
 //     The guest (M1): sonic.exe runs from its entry point in the in-process x86 guest with the mod loader and
 //     mods (src/hle); every IDirect3DDevice8::Present pauses it, the frame it issued (Clears and
 //     DrawPrimitiveUP draws with their textures and states) is drawn with Metal (platform/mac/metal_guest_frame),
@@ -11,6 +12,7 @@
 #import <AppKit/AppKit.h>
 #import <Metal/Metal.h>
 #import <MetalKit/MetalKit.h>
+#include <map>
 #include "runtime/game_session.hpp"
 #include "platform/mac/mac_clock.hpp"
 #include "platform/mac/metal_guest_frame.hpp"
@@ -36,7 +38,7 @@ vertex Out polygon_vertex(uint index [[vertex_id]],constant uint* bytes [[buffer
 }
 fragment float4 polygon_fragment(Out in [[stage_in]]){return in.color;}
 )METAL";
-struct Options {std::string exe,dll,screenshot,game_dir,system_dir;std::uint32_t frames=5;bool survey=true,guest=false;int exit_after=-1;};
+struct Options {std::string exe,dll,screenshot,game_dir,system_dir,keys;std::uint32_t frames=5;bool survey=true,guest=false;int exit_after=-1;};
 bool parse(int argc,char** argv,Options& o){
     if(argc<3)return false;int first=3;
     if(!std::strcmp(argv[1],"--guest")){if(argc<4)return false;o.guest=true;o.game_dir=argv[2];o.system_dir=argv[3];first=4;}else{o.exe=argv[1];o.dll=argv[2];}
@@ -46,10 +48,29 @@ bool parse(int argc,char** argv,Options& o){
         else if(!std::strcmp(argv[i],"--stop"))o.survey=false;
         else if(!std::strcmp(argv[i],"--exit-after")&&i+1<argc)o.exit_after=std::atoi(argv[++i]);
         else if(!std::strcmp(argv[i],"--screenshot")&&i+1<argc)o.screenshot=argv[++i];
+        else if(!std::strcmp(argv[i],"--keys")&&i+1<argc)o.keys=argv[++i];
         else return false;
     }
     return true;
 }
+// --keys "FRAME:VK[:FRAMES],...": press Windows virtual key VK at guest Present FRAME for FRAMES frames (default 5).
+struct ScriptedKey {std::uint64_t frame=0;std::uint32_t vk=0,hold=5;};
+std::vector<ScriptedKey> parse_keys(const std::string& text){
+    std::vector<ScriptedKey> out;std::size_t at=0;
+    while(at<text.size()){auto end=text.find(',',at);if(end==std::string::npos)end=text.size();const auto item=text.substr(at,end-at);at=end+1;
+        ScriptedKey k;const auto a=item.find(':'),b=item.find(':',a+1);k.frame=std::stoull(item.substr(0,a));k.vk=static_cast<std::uint32_t>(std::stoul(item.substr(a+1,b-a-1),nullptr,0));
+        if(b!=std::string::npos)k.hold=static_cast<std::uint32_t>(std::stoul(item.substr(b+1)));out.push_back(k);}
+    return out;}
+// macOS virtual key codes (Carbon kVK_*) to Windows virtual keys (US layout); 0: not forwarded.
+std::uint32_t windows_key(unsigned short code){
+    static const std::map<unsigned short,std::uint32_t> table={
+        {0x00,'A'},{0x0b,'B'},{0x08,'C'},{0x02,'D'},{0x0e,'E'},{0x03,'F'},{0x05,'G'},{0x04,'H'},{0x22,'I'},{0x26,'J'},{0x28,'K'},{0x25,'L'},{0x2e,'M'},
+        {0x2d,'N'},{0x1f,'O'},{0x23,'P'},{0x0c,'Q'},{0x0f,'R'},{0x01,'S'},{0x11,'T'},{0x20,'U'},{0x09,'V'},{0x0d,'W'},{0x07,'X'},{0x10,'Y'},{0x06,'Z'},
+        {0x1d,'0'},{0x12,'1'},{0x13,'2'},{0x14,'3'},{0x15,'4'},{0x17,'5'},{0x16,'6'},{0x1a,'7'},{0x1c,'8'},{0x19,'9'},
+        {0x24,0x0d},{0x35,0x1b},{0x31,0x20},{0x33,0x08},{0x30,0x09},{0x7b,0x25},{0x7e,0x26},{0x7c,0x27},{0x7d,0x28},
+        {0x38,0xa0},{0x3c,0xa1},{0x3b,0xa2},{0x3e,0xa3},{0x3a,0xa4},{0x3d,0xa5},
+        {0x52,0x60},{0x53,0x61},{0x54,0x62},{0x55,0x63},{0x56,0x64},{0x57,0x65},{0x58,0x66},{0x59,0x67},{0x5b,0x68},{0x5c,0x69}};
+    const auto it=table.find(code);return it==table.end()?0:it->second;}
 // Triangle fan -> triangle list indices.
 std::vector<std::uint32_t> fan_indices(std::uint32_t vertex_count){std::vector<std::uint32_t> out;for(std::uint32_t i=1;i+1<vertex_count;++i){out.push_back(0);out.push_back(i);out.push_back(i+1);}return out;}
 }
@@ -67,6 +88,13 @@ std::vector<std::uint32_t> fan_indices(std::uint32_t vertex_count){std::vector<s
 @property(nonatomic,weak) NSTextField* status;
 @end
 @implementation SADXAppView
+// Keyboard: forwarded to the guest as Windows keys (the Input mod reads WM_KEYDOWN/WM_KEYUP).
+- (BOOL)acceptsFirstResponder{return YES;}
+- (void)keyDown:(NSEvent*)event{if(!self.guest)return;if(const auto vk=windows_key(event.keyCode))self.guest->host_key(vk,true);}
+- (void)keyUp:(NSEvent*)event{if(!self.guest)return;if(const auto vk=windows_key(event.keyCode))self.guest->host_key(vk,false);}
+- (void)flagsChanged:(NSEvent*)event{if(!self.guest)return;const auto vk=windows_key(event.keyCode);if(!vk)return;
+    const NSEventModifierFlags flag=vk==0xa0||vk==0xa1?NSEventModifierFlagShift:vk==0xa2||vk==0xa3?NSEventModifierFlagControl:NSEventModifierFlagOption;
+    self.guest->host_key(vk,(event.modifierFlags&flag)!=0);}
 - (void)drawRect:(NSRect)rect{
     (void)rect;id<CAMetalDrawable> drawable=self.currentDrawable;MTLRenderPassDescriptor* pass=self.currentRenderPassDescriptor;if(!drawable||!pass)return;
     id<MTLCommandBuffer> commands=[self.queue commandBuffer];
@@ -130,7 +158,10 @@ int run_guest(const Options& o){
     process->use_real_cpp_runtime(o.system_dir);process->hle().set_logging(false);
     if(!process->map_main(*image,&error)){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
     sadx::FpuShimStats shims;if(!sadx::install_fpu_shims(process->guest(),sadx::load_fpu_sites("reference/inventory/fpu-sites.json"),shims,&error)){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
-    process->on_present=[](sadx::X86Guest& g){g.pause();};
+    auto* P=process.get();const auto script=parse_keys(o.keys);
+    process->on_present=[P,script](sadx::X86Guest& g){
+        for(const auto& k:script){if(P->d3d8.presents==k.frame)P->host_key(k.vk,true);if(P->d3d8.presents==k.frame+k.hold)P->host_key(k.vk,false);}
+        g.pause();};
     const auto first=process->guest().call(0x643f96,{});
     std::string stop;if(!first.paused){std::fprintf(stderr,"the guest did not reach its first Present: %s\n",first.error.c_str());return 4;}
     [NSApplication sharedApplication];[NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
@@ -145,14 +176,14 @@ int run_guest(const Options& o){
     NSTextField* status=[NSTextField labelWithString:@"Guest"];status.font=[NSFont monospacedSystemFontOfSize:11 weight:NSFontWeightRegular];
     status.textColor=[NSColor colorWithWhite:0.9 alpha:1];status.backgroundColor=[NSColor colorWithWhite:0 alpha:0.55];status.drawsBackground=YES;
     status.frame=NSMakeRect(8,8,1264,36);[view addSubview:status];view.status=status;
-    [window center];[window makeKeyAndOrderFront:nil];[NSApp activateIgnoringOtherApps:YES];
+    [window center];[window makeKeyAndOrderFront:nil];[window makeFirstResponder:view];[NSApp activateIgnoringOtherApps:YES];
     [NSApp run];
     std::printf("guest assumptions (%zu):\n",process->assumptions.size());for(const auto& a:process->assumptions)std::printf("  %s\n",a.c_str());
     return view.guestStopped&&o.exit_after>0&&view.framesDrawn<o.exit_after?5:0;
 }
 }
 int main(int argc,char** argv){
-    Options o;if(!parse(argc,argv,o)){std::fprintf(stderr,"usage: %s --guest GAME_DIR WINDOWS_SYSTEM_DIR [--exit-after N] [--screenshot out.ppm]\n       %s SONIC.EXE INPUT_MOD.DLL [--frames N] [--survey|--stop] [--exit-after N] [--screenshot out.ppm]\n",argv[0],argv[0]);return 2;}
+    Options o;if(!parse(argc,argv,o)){std::fprintf(stderr,"usage: %s --guest GAME_DIR WINDOWS_SYSTEM_DIR [--exit-after N] [--screenshot out.ppm] [--keys FRAME:VK[:FRAMES],...]\n       %s SONIC.EXE INPUT_MOD.DLL [--frames N] [--survey|--stop] [--exit-after N] [--screenshot out.ppm]\n",argv[0],argv[0]);return 2;}
     if(o.guest){@autoreleasepool{return run_guest(o);}}
     @autoreleasepool{
         sadx::MacPerformanceCounter counter;

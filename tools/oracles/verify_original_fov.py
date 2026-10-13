@@ -29,6 +29,7 @@ def main():
             src=struct.unpack('<I',m.mem_read(0x3d0f9e0,4))[0];out=(ctypes.c_uint32*4)();fn(table,unit,angle,width,cw,out)
             if not out[0] or out[2]!=src:bad.append(dict(cw=hex(cw),angle=angle,width=hex(width),source=hex(src),native=hex(out[2]),completed=out[0],boundary=hex(out[1])))
             if out[3]!=(m.reg_read(UC_X86_REG_FPSW)&0x3f):flags+=1
+    blob=b''.join(struct.pack('<IiI',cw,angle,width) for cw in(0x7f,0x27f,0x37f,0xc7f) for angle,width in cases);a.output.with_suffix('.cases.bin').write_bytes(blob) # corpus: (cw, angle, width)
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),original_range_sha256=sha(image.read(0x7815c0,0x1f)+image.read(0x787e30,0x1b)),cases=4*len(cases),mismatch_count=len(bad),fp_flag_mismatches=flags,mismatches=bad[:20],scale_matches=not bad,limits=__doc__)
     a.output.write_text(json.dumps(report,indent=1)+'\n');print(json.dumps(dict(cases=4*len(cases),mismatches=len(bad),fp_flag_mismatches=flags)));return int(bool(bad))
 if __name__=='__main__':raise SystemExit(main())

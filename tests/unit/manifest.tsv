@@ -108,7 +108,8 @@ ninja-view	build/assets/ninja-trig.f32
 guest-imports	"$(GAME_EXE)"
 guest-dlls	reference/updated-pc-reference/game reference/windows-system
 guest-boot	reference/updated-pc-reference/game reference/windows-system
-guest-overrides	"$(GAME_EXE)"
+guest-overrides	"$(GAME_EXE)" build/oracles
 guest-fpu-shims	"$(GAME_EXE)" reference/inventory/fpu-sites.json
 guest-frames	reference/updated-pc-reference/game reference/windows-system 60
 mpeg-timing	reference/updated-pc-reference/game/system/RE-US.MPG
+guest-input	reference/updated-pc-reference/game reference/windows-system

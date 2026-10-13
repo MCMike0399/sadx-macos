@@ -53,6 +53,10 @@ void register_hle_kernel32(HleProcess& p){
         P->now_100ns+=P->counter_step_100ns;const std::uint64_t t=P->now_100ns;c.guest.write(arg(c,0),&t,8);return 1;});
     K("Sleep",4,1,[P,arg](HleCall& c)->std::uint32_t{P->now_100ns+=std::uint64_t(arg(c,0))*10000;return 0;});
     // WINMM timers on the same virtual clock (timeBeginPeriod changes no virtual resolution).
+    // Multimedia file I/O: no mmio file is ever opened (mmioOpen is not modelled and stops by name), so every handle
+    // mmioClose sees is invalid: MMSYSERR_INVALHANDLE, as winmm returns for an unknown HMMIO.
+    r.add("WINMM.dll","mmioClose",{8,2,[](HleCall& c)->std::uint32_t{
+        if(c.argument(0).value_or(0)){c.guest.stop("mmioClose of a non-null handle (no mmio file can be open)");return 5;}return 5;}});
     r.add("WINMM.dll","timeGetTime",{0,0,[P](HleCall&)->std::uint32_t{return static_cast<std::uint32_t>(P->now_100ns/10000);}});
     r.add("WINMM.dll","timeBeginPeriod",{4,1,[](HleCall&)->std::uint32_t{return 0;}}); // TIMERR_NOERROR
     r.add("WINMM.dll","timeEndPeriod",{4,1,[](HleCall&)->std::uint32_t{return 0;}});
@@ -277,6 +281,25 @@ void register_hle_kernel32(HleProcess& p){
     K("RtlUnwind",16,4,[](HleCall& c)->std::uint32_t{c.guest.stop("RtlUnwind: SEH unwinding is not modelled");return 0;});
     // --- strings
     K("lstrlenA",4,1,[P,arg](HleCall& c)->std::uint32_t{if(!arg(c,0))return 0;const auto s=P->string_at(arg(c,0));return s?static_cast<std::uint32_t>(s->size()):0;});
+    // Time zone: UTC without daylight saving (an assumption: the reference machine's zone was not captured).
+    const auto utc=[P](){P->assume("time zone: UTC without daylight saving (the reference machine's time zone was not captured)");};
+    K("FileTimeToLocalFileTime",8,2,[arg,utc](HleCall& c)->std::uint32_t{utc();std::uint64_t t=0;if(!c.guest.read(arg(c,0),&t,8))return 0;c.guest.write(arg(c,1),&t,8);return 1;});
+    K("GetTimeZoneInformation",4,1,[arg,utc](HleCall& c)->std::uint32_t{utc();const std::vector<std::uint8_t> z(172,0);c.guest.write(arg(c,0),z.data(),z.size());return 0;}); // TIME_ZONE_ID_UNKNOWN, bias 0
+    // FileTimeToSystemTime: 100 ns ticks since 1601-01-01 to the proleptic Gregorian calendar.
+    K("FileTimeToSystemTime",8,2,[arg](HleCall& c)->std::uint32_t{
+        std::uint64_t t=0;if(!c.guest.read(arg(c,0),&t,8)||t>=0x8000000000000000ULL)return 0;
+        const std::uint64_t ms=t/10000,days=ms/86400000ULL,rest=ms%86400000ULL;
+        // days since 1601-01-01 -> civil date (Howard Hinnant's algorithm on days since 0000-03-01)
+        const std::int64_t z=static_cast<std::int64_t>(days)+584694-60+60;std::int64_t era=z/146097;const std::int64_t doe=z-era*146097;
+        const std::int64_t yoe=(doe-doe/1460+doe/36524-doe/146096)/365;const std::int64_t doy=doe-(365*yoe+yoe/4-yoe/100);
+        const std::int64_t mp=(5*doy+2)/153;const std::int64_t d=doy-(153*mp+2)/5+1;const std::int64_t m=mp<10?mp+3:mp-9;const std::int64_t y=yoe+era*400+(m<=2?1:0);
+        const std::uint16_t st[8]={static_cast<std::uint16_t>(y),static_cast<std::uint16_t>(m),static_cast<std::uint16_t>((days+1)%7),static_cast<std::uint16_t>(d),
+            static_cast<std::uint16_t>(rest/3600000),static_cast<std::uint16_t>(rest/60000%60),static_cast<std::uint16_t>(rest/1000%60),static_cast<std::uint16_t>(rest%1000)};
+        c.guest.write(arg(c,1),st,16);return 1;});
+    K("lstrcpyA",8,2,[P,arg](HleCall& c)->std::uint32_t{const auto s=P->string_at(arg(c,1));if(!s){c.guest.stop("lstrcpyA: unreadable source");return 0;}
+        c.guest.write(arg(c,0),s->c_str(),s->size()+1);return arg(c,0);});
+    K("lstrcatA",8,2,[P,arg](HleCall& c)->std::uint32_t{const auto d=P->string_at(arg(c,0)),s=P->string_at(arg(c,1));if(!d||!s){c.guest.stop("lstrcatA: unreadable string");return 0;}
+        c.guest.write(arg(c,0)+static_cast<std::uint32_t>(d->size()),s->c_str(),s->size()+1);return arg(c,0);});
     K("lstrcmpA",8,2,[P,arg](HleCall& c)->std::uint32_t{const auto a=P->string_at(arg(c,0)).value_or(""),b=P->string_at(arg(c,1)).value_or("");return static_cast<std::uint32_t>(a<b?-1:a>b?1:0);});
     K("lstrcmpiA",8,2,[P,arg](HleCall& c)->std::uint32_t{const auto a=lower(P->string_at(arg(c,0)).value_or("")),b=lower(P->string_at(arg(c,1)).value_or(""));return static_cast<std::uint32_t>(a<b?-1:a>b?1:0);});
     K("AreFileApisANSI",0,0,[](HleCall&)->std::uint32_t{return 1;});

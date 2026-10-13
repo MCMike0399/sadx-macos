@@ -140,6 +140,8 @@ def main():
         o['block']=list(out[175:183])+[out[189],out[190]]+list(out[183:189])
         o['cw']=out[174];o['failure']=(out[0],out[1])
         return o
+    # corpus: 37 words per case (c[0] cw, c[1] mxcsr, c[2] mode: 0 = 781570 then 781250, c[3..12] the camera block, ...)
+    a.output.with_suffix('.cases.bin').write_bytes(b''.join(struct.pack('<37I',*c) for c in cases(random.Random(0x781250))))
     profiles={}
     for profile in('primary','seeded'):
         row=dict(cases=0,native_failures=0,value_mismatches=0,field_mismatches={},examples=[])

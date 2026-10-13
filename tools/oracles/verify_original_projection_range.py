@@ -43,17 +43,18 @@ def main():
     if image.sha256!=SOURCE_SHA256 or unicorn.__version__!='2.1.4':raise RuntimeError('Pinned source/Unicorn mismatch')
     k=[struct.unpack('<I',image.read(0x7dcb0c,4))[0],struct.unpack('<I',image.read(0x7dce50,4))[0]]
     lib=ctypes.CDLL(str(a.native_library.resolve()));fn=lib.sadx_native_projection_range;fn.argtypes=[ctypes.POINTER(ctypes.c_uint32),ctypes.c_size_t,ctypes.POINTER(ctypes.c_uint32),ctypes.c_size_t];fn.restype=ctypes.c_int
-    source=Source(image);rng=random.Random(0x403180);bad=[];flags=0;n=0;specials=[f32(-1.0),f32(-3000.0),f32(-0.5),f32(0.0),0x80000000,f32(-65535.0),f32(-70000.0),f32(5.0),0x7fc00000,0xff800000,0x7f800000,f32(-1.0000001)]
+    source=Source(image);rng=random.Random(0x403180);bad=[];flags=0;n=0;corpus=[];specials=[f32(-1.0),f32(-3000.0),f32(-0.5),f32(0.0),0x80000000,f32(-65535.0),f32(-70000.0),f32(5.0),0x7fc00000,0xff800000,0x7f800000,f32(-1.0000001)]
     for i in range(1500):
         c=[0]*23;c[0]=rng.choice(specials+[f32(rng.uniform(-80000,10))]);c[1]=rng.choice(specials+[f32(rng.uniform(-80000,10))]);c[2]=rng.getrandbits(32);c[3]=rng.getrandbits(32);c[4]=rng.choice([0x7f,0x27f,0x37f,0xc7f]);c[5:7]=k
         c[7:23]=[f32(rng.uniform(-3,3)) for _ in range(16)]
         for second in(0,1):
-            e=source.run(c);out=(ctypes.c_uint32*40)()
+            corpus.append(struct.pack('<23I',*c));e=source.run(c);out=(ctypes.c_uint32*40)()
             if fn((ctypes.c_uint32*23)(*c),23,out,40)!=1:raise RuntimeError('Native rejected')
             got=list(out);diff=[j for j in range(25) if got[j]!=e[j]];n+=1
             if diff:bad.append(dict(case=i,second=second,input=[hex(x) for x in c[:5]],fields=diff[:8],source=[hex(e[j]) for j in diff[:8]],native=[hex(got[j]) for j in diff[:8]]))
             if got[25]!=e[25]:flags+=1
             c[2],c[3]=e[5],e[6]
+    a.output.with_suffix('.cases.bin').write_bytes(b''.join(corpus)) # corpus: 23 words per call (c[0..1] near/far, c[2..3] 3d0f808/3d0f968, c[4] cw, ...)
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),original_range_sha256=sha(image.read(0x403180,0xc6)+image.read(0x7815e0,0x8c)),cases=n,mismatch_count=len(bad),fp_flag_mismatches=flags,mismatches=bad[:20],stores_transform_match=not bad,limits=__doc__)
     a.output.write_text(json.dumps(report,indent=1)+'\n');print(json.dumps(dict(cases=n,mismatches=len(bad),fp_flag_mismatches=flags)));return int(bool(bad))
 if __name__=='__main__':raise SystemExit(main())

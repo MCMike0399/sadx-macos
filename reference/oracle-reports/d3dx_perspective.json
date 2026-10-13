@@ -1,12 +1,12 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "7652def38a32935ed3c61584ea7bb8c7566b842ac4308bfc19ed64e1eaf9a81c",
+ "native_library_sha256": "b40adcbaf5a7b106ca78c08d0aa0c5fabccd08fc38a5888b4e594262f507093d",
  "source_files": {
-  "src/math/d3dx_math.hpp": "4c8811e8a97a22872c188c5a52be2a7de5f2a27fe8df6b190b52d11f046a90f0",
-  "src/math/d3dx_math.cpp": "9efedeb8914db2c9cba681d41e80a762ade22bb0c7bbfdcb503c82427e0398f3",
-  "src/cpu/x87_transcendental.cpp": "00fa509396903586b83807f7aa53b7df8675d7d8efdef031f7264283e3c0529a",
+  "src/math/d3dx_math.hpp": "3b997c26013a774f6b85e099f774187ffe9af64369316d2e3e769f6ff26ea8f0",
+  "src/math/d3dx_math.cpp": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171",
+  "src/cpu/x87_transcendental.cpp": "5241f89cff162deec68fa95d19f26e908974be9c78a1bdc18044f2c893abd5ea",
   "tests/probes/native_d3dx_perspective_probe.cpp": "a3ee10f5d70ca0d171bf7b90b9be793711a83cd53a1575bb5a7c8510111b31b4",
-  "tools/oracles/verify_original_d3dx_perspective.py": "3e5b412a3088d792cef5a6dff2c9e6f33742709c5009a909296cff543cf4694d"
+  "tools/oracles/verify_original_d3dx_perspective.py": "ed99f838527d7c50fd86fb8737ab00fbe7cf64c17e1cb58e502fa6328dd904e0"
  },
  "original_ranges_sha256": {
   "0x7716df-0x771773": "798e8ec191de74f25faf5c83f2fb8a55e9cf5154abf2c2ac7a45ae23c1f519d6",
@@ -392,7 +392,7 @@
   "native_unknown_cases are |fovy/2| >= 2^63 (FSINCOS C2 path); the native port reports them as unknown instead of modelling the stack-underflow stores"
  ],
  "tracked_summary": {
-  "full_sha256": "83965e7d4edb23097a646c0b1fd3d69844d1de3b8c07acedf400a16159da3e0b",
+  "full_sha256": "ae4a26ec8e8017128f037967b6c5835bfb7da49978a6d624c196c6e68c15cc54",
   "full_bytes": 9376,
   "lists_cut_to": 10,
   "cut_lists": {

@@ -48,7 +48,7 @@ SOFTFLOAT_FILES := $(wildcard third_party/softfloat/source/*.c third_party/softf
 SOFTFLOAT_SSE_FILES := $(wildcard third_party/softfloat_sse/source/*.c third_party/softfloat_sse/source/8086-SSE/*) third_party/softfloat_sse/sources.txt third_party/softfloat_sse/build.sh
 BOCHS_FILES := $(wildcard third_party/bochs_fpatan/source/fpu/* third_party/bochs_fpatan/source/softfloat3e/*.cc third_party/bochs_fpatan/source/softfloat3e/include/*.h) third_party/bochs_fpatan/math.hpp third_party/bochs_fpatan/config.h third_party/bochs_fpatan/sources.txt third_party/bochs_fpatan/build.sh
 
-.PHONY: all assets test unit-tests run-unit-tests probes oracles oracles-verdict render controllers check gate clean manifests app-smoke status
+.PHONY: m1 all assets test unit-tests run-unit-tests probes oracles oracles-verdict render controllers check gate clean manifests app-smoke status
 all: build/sadx-metal build/libsadx-core.a build/libsadx-macos.a build/libsadx-guest.a build/sadx-boot build/sadx-app
 
 build:
@@ -135,7 +135,11 @@ manifests: build/tests.mk build/oracles.mk
 include build/tests.mk
 include build/oracles.mk
 
-run-unit-tests: assets $(UNIT_TARGETS) $(UNIT_MM_TARGETS)
+# guest-overrides replays these oracle corpora (each verify script writes its <slug>.cases.bin next to the report).
+OVERRIDE_CORPORA := build/oracles/game_frame_control.cases.bin build/oracles/projection_range.cases.bin build/oracles/fov.cases.bin build/oracles/ninja_view.cases.bin build/oracles/d3dx_perspective.cases.bin build/oracles/d3dx_matrix_inverse.cases.bin
+build/oracles/%.cases.bin: tools/oracles/verify_original_%.py
+	$(MAKE) oracle-$(subst _,-,$*)
+run-unit-tests: assets $(UNIT_TARGETS) $(UNIT_MM_TARGETS) $(OVERRIDE_CORPORA)
 unit-tests: run-unit-tests
 test: unit-tests
 	$(PY) -m unittest discover -s tests/python -p 'test_*.py'
@@ -156,3 +160,16 @@ status:
 	python3 tools/gate/gen_status.py
 clean:
 	rm -rf build
+
+# The roadmap's M1 tests (docs/ROADMAP.md), nothing else: guest-imports, guest-dlls (profile-applied at mod init),
+# guest-boot (profile-applied, live overrides), guest-overrides (override-equivalence), guest-fpu-shims, guest-frames
+# (SEGA logo -> title, determinism, guest-fps), guest-input (input-script determinism) and app-smoke.
+M1_TESTS := guest-imports guest-dlls guest-boot guest-overrides guest-fpu-shims guest-frames guest-input
+m1: $(foreach t,$(M1_TESTS),build/$(t)-test) $(OVERRIDE_CORPORA) app-smoke
+	./build/guest-imports-test "$(GAME_EXE)"
+	./build/guest-dlls-test $(REFERENCE_GAME_DIR) $(WINDOWS_SYSTEM_DIR)
+	./build/guest-boot-test $(REFERENCE_GAME_DIR) $(WINDOWS_SYSTEM_DIR)
+	./build/guest-overrides-test "$(GAME_EXE)" build/oracles
+	./build/guest-fpu-shims-test "$(GAME_EXE)" reference/inventory/fpu-sites.json
+	./build/guest-frames-test $(REFERENCE_GAME_DIR) $(WINDOWS_SYSTEM_DIR) 60
+	./build/guest-input-test $(REFERENCE_GAME_DIR) $(WINDOWS_SYSTEM_DIR)

@@ -51,9 +51,10 @@ def main():
     m.mem_write(0x389b7c0,struct.pack('<I',0x7757e0))
     clean=m.context_save()
     lib=ctypes.CDLL(str(a.native_library.resolve()));fn=lib.sadx_native_d3dx_matrix_inverse;fn.argtypes=[ctypes.POINTER(ctypes.c_uint32),ctypes.POINTER(ctypes.c_uint32)];fn.restype=ctypes.c_int
-    rng=random.Random(0x7757e0);bad=[];outcomes={};cases=0;flag_mismatches=0
+    rng=random.Random(0x7757e0);bad=[];outcomes={};cases=0;flag_mismatches=0;corpus=[]
     for n,mat in matrices(rng):
         mxcsr=rng.choice([0x1f80,0x1f80,0x3f80,0x5f80,0x7f80]);with_det=rng.random()<0.8;aligned=rng.random()<0.5
+        corpus.append(struct.pack('<19I',mxcsr,int(with_det),int(aligned),*mat))
         out=(ctypes.c_uint32*19)()
         if fn((ctypes.c_uint32*17)(mxcsr,*mat),out)!=1:raise RuntimeError('Native rejected')
         m.context_restore(clean)
@@ -72,6 +73,7 @@ def main():
         outcomes[key]=outcomes.get(key,0)+1
         fields=[k for k in ('returned','null','matrix','det','mxcsr') if source[k]!=native[k]]
         if fields:bad.append(dict(case=n,mxcsr=hex(mxcsr),input=[hex(x) for x in mat],fields=fields,source={k:(hex(source[k]) if isinstance(source[k],int) else [hex(x) for x in source[k]]) for k in fields},native={k:(hex(native[k]) if isinstance(native[k],int) else [hex(x) for x in native[k]]) for k in fields}))
+    a.output.with_suffix('.cases.bin').write_bytes(b''.join(corpus)) # corpus: mxcsr, with pDeterminant, aligned, the 16 words
     names=['src/math/d3dx_math.hpp','src/math/d3dx_math.cpp','src/cpu/sse_math.cpp','tests/probes/native_d3dx_matrix_inverse_probe.cpp','tools/oracles/verify_original_d3dx_matrix_inverse.py']
     root=pathlib.Path(__file__).resolve().parents[2]
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={x:sha((root/x).read_bytes()) for x in names},

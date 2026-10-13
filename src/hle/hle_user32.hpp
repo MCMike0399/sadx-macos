@@ -1,4 +1,5 @@
 #pragma once
+#include <array>
 #include "guest/x86_guest.hpp"
 #include <cstdint>
 #include <functional>
@@ -29,6 +30,7 @@ struct HleWindows {
     bool quit_posted=false;std::uint32_t quit_code=0;
     std::uint16_t next_atom=0xc000;std::uint32_t next_window=0x00010010;std::uint32_t focus=0,foreground=0,active=0,capture=0;
     std::map<std::string,std::uint32_t> registered_messages;std::uint32_t next_registered_message=0xc000;
+    std::array<std::uint8_t,256> keys{}; // per virtual key: 0x80 down, 0x01 toggled (host input, HleProcess::host_key)
     HleWindow* find(std::uint32_t hwnd){auto i=windows.find(hwnd);return i==windows.end()||i->second.destroyed?nullptr:&i->second;}
 };
 } // namespace sadx

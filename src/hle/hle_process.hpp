@@ -33,6 +33,10 @@ public:
     std::vector<std::string> file_trace;
     std::vector<std::string> unmodelled_lookups; // GetProcAddress results that are traps without a body
     void trace_file(const std::string& function,const std::string& path,const std::string& outcome){file_trace.push_back(function+"("+path+") -> "+outcome);}
+    // Host keyboard input (M1 step 5): the key's state changes and WM_KEYDOWN / WM_KEYUP (with the US-layout scan code;
+    // repeat flag when already down) is posted to the focus window (else the active one), as Windows' raw input thread
+    // would. The guest reads it through its message loop (the Input mod's window subclass) and Get*KeyState.
+    void host_key(std::uint32_t virtual_key,bool down);
     void assume(const std::string& a){if(assumed_.insert(a).second)assumptions.push_back(a);}
     // Virtual time: 100 ns units since the virtual boot. QueryPerformanceCounter is 10 MHz on the same
     // count; each query advances it by 1 µs and Sleep(ms) by ms, so runs are deterministic.

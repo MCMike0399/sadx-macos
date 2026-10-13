@@ -167,6 +167,7 @@ void register_hle_user32(HleProcess& p){
         case 0x0086:return 1;                                            // WM_NCACTIVATE: TRUE lets the activation proceed
         case 0x0010:c.guest.stop("DefWindowProc WM_CLOSE (DestroyWindow from inside a message) is not modelled");return 0;
         case 0x0020:return 0;                                            // WM_SETCURSOR: FALSE (the class cursor; nothing to show)
+        case 0x0100:case 0x0101:case 0x0102:return 0;                   // WM_KEYDOWN, WM_KEYUP, WM_CHAR: nothing (only WM_SYSKEY* have default actions)
         case WM_CREATE:case WM_DESTROY:case WM_NCDESTROY:case WM_GETMINMAXINFO:case WM_NCCALCSIZE:return 0;
         case 0x0018:case 0x0046:case 0x001c:case 0x0007:case 0x0008:case 0x0005:case 0x0003:case 0x00ff:case 0x0219:case 0x0022:return 0;
             // WM_SHOWWINDOW, WM_WINDOWPOSCHANGING, WM_ACTIVATEAPP, WM_SETFOCUS, WM_KILLFOCUS, WM_SIZE, WM_MOVE, WM_INPUT, WM_DEVICECHANGE, WM_CHILDACTIVATE
@@ -370,7 +371,18 @@ void register_hle_user32(HleProcess& p){
         const auto m=take(arg(c,1),true);if(!m){c.guest.stop("GetMessage with an empty queue would block: no host events are fed to the guest yet");return 0;}
         put_msg(c,arg(c,0),*m);return m->message==0x0012?0:1;};
     U("GetMessageA",16,4,get);U("GetMessageW",16,4,get);
-    U("TranslateMessage",4,1,[](HleCall&)->std::uint32_t{return 0;}); // no keyboard messages exist yet
+    // TranslateMessage: WM_KEYDOWN of a key with a character posts WM_CHAR (same lParam) right behind it (US layout:
+    // letters lower case unless Shift xor Caps Lock; digits; Enter, Escape, Space, Backspace, Tab). Nonzero for key messages.
+    U("TranslateMessage",4,1,[&W,arg](HleCall& c)->std::uint32_t{
+        std::uint32_t m[4]={};c.guest.read(arg(c,0),m,16);
+        if(m[1]<0x0100||m[1]>0x0105)return 0;
+        if(m[1]!=0x0100)return 1;
+        const auto vk=m[2]&0xff;std::uint32_t ch=0;
+        if(vk>='A'&&vk<='Z')ch=((W.keys[0x10]&0x80)!=0)!=((W.keys[0x14]&1)!=0)?vk:vk+0x20;
+        else if(vk>='0'&&vk<='9'&&!(W.keys[0x10]&0x80))ch=vk;
+        else if(vk==0x0d||vk==0x1b||vk==0x20||vk==0x08||vk==0x09)ch=vk;
+        if(ch){HleMessage msg;msg.hwnd=m[0];msg.message=0x0102;msg.wparam=ch;msg.lparam=m[3];W.queue.insert(W.queue.begin(),msg);}
+        return 1;});
     const auto dispatch=[&W,arg](HleCall& c)->std::uint32_t{
         std::uint32_t m[4]={};c.guest.read(arg(c,0),m,16);auto* w=W.find(m[0]);if(!w)return 0;
         c.guest.redirect(w->procedure,{m[0],m[1],m[2],m[3]},4,[](X86Guest&){});return 0;};
@@ -399,6 +411,34 @@ void register_hle_user32(HleProcess& p){
         return at+static_cast<std::uint32_t>(dot);}});
 }
 
+namespace {
+// Set-1 scan codes of the US layout by virtual key (0: no key).
+std::uint32_t us_scan_code(std::uint32_t vk){
+    static const std::map<std::uint32_t,std::uint32_t> table={
+        {0x08,0x0e},{0x09,0x0f},{0x0d,0x1c},{0x10,0x2a},{0x11,0x1d},{0x12,0x38},{0x13,0x45},{0x14,0x3a},{0x1b,0x01},{0x20,0x39},
+        {0x21,0x49},{0x22,0x51},{0x23,0x4f},{0x24,0x47},{0x25,0x4b},{0x26,0x48},{0x27,0x4d},{0x28,0x50},{0x2d,0x52},{0x2e,0x53},
+        {0x30,0x0b},{0x31,0x02},{0x32,0x03},{0x33,0x04},{0x34,0x05},{0x35,0x06},{0x36,0x07},{0x37,0x08},{0x38,0x09},{0x39,0x0a},
+        {0x41,0x1e},{0x42,0x30},{0x43,0x2e},{0x44,0x20},{0x45,0x12},{0x46,0x21},{0x47,0x22},{0x48,0x23},{0x49,0x17},{0x4a,0x24},
+        {0x4b,0x25},{0x4c,0x26},{0x4d,0x32},{0x4e,0x31},{0x4f,0x18},{0x50,0x19},{0x51,0x10},{0x52,0x13},{0x53,0x1f},{0x54,0x14},
+        {0x55,0x16},{0x56,0x2f},{0x57,0x11},{0x58,0x2d},{0x59,0x15},{0x5a,0x2c},
+        {0x60,0x52},{0x61,0x4f},{0x62,0x50},{0x63,0x51},{0x64,0x4b},{0x65,0x4c},{0x66,0x4d},{0x67,0x47},{0x68,0x48},{0x69,0x49},
+        {0x6a,0x37},{0x6b,0x4e},{0x6d,0x4a},{0x6e,0x53},{0x6f,0x35},
+        {0x70,0x3b},{0x71,0x3c},{0x72,0x3d},{0x73,0x3e},{0x74,0x3f},{0x75,0x40},{0x76,0x41},{0x77,0x42},{0x78,0x43},{0x79,0x44},{0x7a,0x57},{0x7b,0x58},
+        {0xa0,0x2a},{0xa1,0x36},{0xa2,0x1d},{0xa3,0x1d},{0xa4,0x38},{0xa5,0x38},
+        {0xba,0x27},{0xbb,0x0d},{0xbc,0x33},{0xbd,0x0c},{0xbe,0x34},{0xbf,0x35},{0xc0,0x29},{0xdb,0x1a},{0xdc,0x2b},{0xdd,0x1b},{0xde,0x28}};
+    const auto it=table.find(vk);return it==table.end()?0:it->second;}
+bool extended_key(std::uint32_t vk){return (vk>=0x21&&vk<=0x28)||vk==0x2d||vk==0x2e||vk==0x6f||vk==0xa3||vk==0xa5;}
+}
+void HleProcess::host_key(std::uint32_t vk,bool down){
+    vk&=0xff;auto& k=windows.keys[vk];const bool was_down=(k&0x80)!=0;
+    if(down){if(!was_down)k^=1;k|=0x80;}else k&=0x7f;
+    // lParam: repeat count 1, scan code, extended bit, previous state (bit 30), transition (bit 31).
+    const auto lparam=1U|(us_scan_code(vk)<<16)|(extended_key(vk)?1U<<24:0U)|(was_down?1U<<30:0U)|(down?0U:1U<<31);
+    const auto target=windows.focus?windows.focus:windows.active;
+    if(!target)return; // no window has the keyboard: the key changes the state only
+    HleMessage m;m.hwnd=target;m.message=down?0x0100U:0x0101U;m.wparam=vk;m.lparam=lparam;m.time=static_cast<std::uint32_t>(now_100ns/10000);
+    windows.queue.push_back(m);
+}
 namespace {
 void register_hle_user32_desktop(HleProcess& p){
     auto& r=p.hle();auto* P=&p;
@@ -454,8 +494,20 @@ void register_hle_user32_desktop(HleProcess& p){
     U("SetCursor",4,1,[](HleCall&)->std::uint32_t{return 0;});U("ClipCursor",4,1,[](HleCall&)->std::uint32_t{return 1;});
     U("GetCursorPos",4,1,[arg](HleCall& c)->std::uint32_t{const std::int32_t pt[2]={screen_width/2,screen_height/2};c.guest.write(arg(c,0),pt,8);return 1;});
     U("SetCursorPos",8,2,[](HleCall&)->std::uint32_t{return 1;});
-    U("GetAsyncKeyState",4,1,[](HleCall&)->std::uint32_t{return 0;});U("GetKeyState",4,1,[](HleCall&)->std::uint32_t{return 0;});
-    U("GetKeyboardState",4,1,[arg](HleCall& c)->std::uint32_t{const std::uint8_t z[256]={};c.guest.write(arg(c,0),z,256);return 1;});
+    // Key state from host input (HleProcess::host_key); nothing pressed until the host sends keys.
+    U("GetAsyncKeyState",4,1,[P,arg](HleCall& c)->std::uint32_t{return P->windows.keys[arg(c,0)&0xff]&0x80?0xffff8000U:0;});
+    U("GetKeyState",4,1,[P,arg](HleCall& c)->std::uint32_t{const auto k=P->windows.keys[arg(c,0)&0xff];return (k&0x80?0xffff8000U:0)|(k&1);});
+    U("GetKeyboardState",4,1,[P,arg](HleCall& c)->std::uint32_t{c.guest.write(arg(c,0),P->windows.keys.data(),256);return 1;});
+    // MapVirtualKey(code, type): 0 VK -> scan code, 1 scan code -> VK, 2 VK -> unshifted character, 3 scan code -> VK (left/right).
+    const auto map_virtual_key=[P,arg](HleCall& c)->std::uint32_t{
+        P->assume("keyboard layout: US (scan codes and characters of the US layout; the reference machine's layout was not captured)");
+        const auto code=arg(c,0),type=arg(c,1);
+        switch(type){
+        case 0:return us_scan_code(code);
+        case 1:case 3:for(std::uint32_t vk=1;vk<256;++vk)if(us_scan_code(vk)==code&&(type==3||(vk!=0xa0&&vk!=0xa1&&vk!=0xa2&&vk!=0xa3&&vk!=0xa4&&vk!=0xa5)))return vk;return 0;
+        case 2:if((code>='0'&&code<='9')||(code>='A'&&code<='Z'))return code;if(code==0x20||code==0x0d||code==0x08||code==0x09||code==0x1b)return code;return 0;
+        default:c.guest.stop("MapVirtualKey type "+std::to_string(type)+" is not modelled");return 0;}};
+    U("MapVirtualKeyW",8,2,map_virtual_key);U("MapVirtualKeyA",8,2,map_virtual_key);
 }
 }
 } // namespace sadx

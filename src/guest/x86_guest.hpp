@@ -51,6 +51,9 @@ public:
     GuestCallResult call(std::uint32_t address,std::initializer_list<std::uint32_t> stack_arguments,
         std::optional<std::uint32_t> ecx=std::nullopt,std::optional<std::uint32_t> edx=std::nullopt,
         std::uint16_t x87_control_word=0x27f,std::uint64_t timeout_us=600'000'000);
+    GuestCallResult call(std::uint32_t address,const std::vector<std::uint32_t>& stack_arguments, // the same, arguments built at run time
+        std::optional<std::uint32_t> ecx=std::nullopt,std::optional<std::uint32_t> edx=std::nullopt,
+        std::uint16_t x87_control_word=0x27f,std::uint64_t timeout_us=600'000'000,std::uint32_t mxcsr=0x1f80);
     // Runs guest code from `from` until EIP reaches `until` (a span inside a function), on a fresh
     // stack whose top holds the stop address. Registers other than ESP/EBP keep their values.
     GuestCallResult run(std::uint32_t from,std::uint32_t until,std::uint16_t x87_control_word=0x27f,std::uint64_t timeout_us=600'000'000);

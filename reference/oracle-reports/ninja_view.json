@@ -1,14 +1,14 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "d89b1a3a4eabd34aec15a9ef278d1fadad7c44fc3ecff6d20f5ceda1c33f40af",
+ "native_library_sha256": "4ea32d6946ac2f25d8dff37d97ab7e8c146fca96b102312095a75285313a1674",
  "source_files": {
   "src/engine/ninja_view.hpp": "c5e41ad558ca1629c00001a772021546bdfa6fe3e03f9a9af2f5e5193af04c96",
   "src/engine/ninja_view.cpp": "aad37d5b8a2ff72bc2f8f3ab43459aef6d119f64a4304eb9880d4c8993d2c232",
-  "src/math/d3dx_math.cpp": "9efedeb8914db2c9cba681d41e80a762ade22bb0c7bbfdcb503c82427e0398f3",
+  "src/math/d3dx_math.cpp": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171",
   "src/math/ninja_math.cpp": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
-  "src/cpu/x87_transcendental.cpp": "00fa509396903586b83807f7aa53b7df8675d7d8efdef031f7264283e3c0529a",
+  "src/cpu/x87_transcendental.cpp": "5241f89cff162deec68fa95d19f26e908974be9c78a1bdc18044f2c893abd5ea",
   "tests/probes/native_ninja_view_probe.cpp": "bed6c6761bc790c243206a98c94590779d0b7402cbdb7d8af1e8205cb1f7e511",
-  "tools/oracles/verify_original_ninja_view.py": "68730128bcc302352e5f91b32748d3f3481cfb3396d7b90db5e1868a41ca4322"
+  "tools/oracles/verify_original_ninja_view.py": "a5d22b42004b142534ff8e994dee32352e8031a941e5789ba9368161416b125f"
  },
  "original_ranges_sha256": {
   "0x781570-0x7815b4": "bb1c80663b208d473155332f93defa96f2e81213be4aa2d8dcecf324f7175208",
@@ -45,7 +45,7 @@
   "x87 and MXCSR exception flags are not compared (Unicorn 2.1.4 raises few x87 and no SSE flags)"
  ],
  "tracked_summary": {
-  "full_sha256": "bcc5819e05b9e78acf3e182550d4091075f7dc241aa8545abdb7fcbc6d2ad92b",
+  "full_sha256": "d875d9df379c7170c9fbf5668b951fa5733c4b612ae19ffc7a66c35429555e0d",
   "full_bytes": 4272,
   "lists_cut_to": 10,
   "cut_lists": {}

@@ -73,6 +73,7 @@ def main():
     forced,_,_=original([0x27f,fb(1.0),fb(1.0),fb(1.0),fb(10.0)],True);seed['force']=None
     if forced[0]!=fb(2.0) or forced[5]!=fb(2.0):raise RuntimeError(f'seeded FSINCOS register convention wrong: {forced[0]:#x} {forced[5]:#x}')
     profiles={}
+    a.output.with_suffix('.cases.bin').write_bytes(b''.join(struct.pack('<5I',*c) for c in cases(random.Random(0x7716df)))) # corpus: cw, fovy, aspect, near, far
     for profile in ('primary','seeded'):
         rows=dict(cases=0,native_unknown_cases=0,value_mismatches=0,control_mismatches=0,flag_mismatches=0,mismatch_classes={},examples=[],flag_examples=[])
         for c in cases(random.Random(0x7716df)):

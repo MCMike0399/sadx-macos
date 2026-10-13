@@ -1805,3 +1805,48 @@ Evidence: gate `reference/production-integration-20261012/fmv-title-113-gate.jso
 * **Open:** the title screen's virtual frame time is ~19.5 ms (51 fps) versus 15.9 ms (63 fps) on the logo;
   all virtual time comes from the Speedrun limiter's QPC polling (213c115b, ~9,600 queries/frame). Cause not yet
   determined; the roadmap target (63 fps) is not asserted on the title.
+
+## M1 4d: override equivalence on the oracle corpora; step 5: host keyboard input; make m1 (2026-10-13)
+
+Evidence: gate `reference/production-integration-20261012/overrides-input-114-gate.json` (rc 0).
+
+* **Corpora.** The fov, projection_range, ninja_view, d3dx_perspective and d3dx_matrix_inverse verify scripts now
+  write `build/oracles/<slug>.cases.bin` like the others (reports unchanged except source hashes; tracked).
+  `OVERRIDE_CORPORA` in the Makefile regenerates them when a script changes; `run-unit-tests` and `m1` depend on them.
+* **Override table: 12 owners** (src/guest/override_table): frame loop 7899a0, 7815e0, 7815c0, 781570; startup
+  registrars 789930 (exit callbacks, EAX 1/0), 40a8a0 (menu block), 77ffc0 (callback list), 7959c0 (frame hooks);
+  D3DX leaves 774310, 774150, 7757e0, 7716df (stdcall, pOut; RCP by the IEEE-division estimate model; MXCSR flags
+  not accumulated, as Unicorn raises none). `X86Guest::call` gained a run-time argument vector and an MXCSR.
+* **guest-overrides-test** (args SONIC.EXE build/oracles): 40,279 cases, 28,279 replayed from oracle corpora
+  (game_frame_control entry-0 668, projection_range 3,000, fov 10,260, ninja_view mode-0 375, d3dx_matrix_inverse
+  8,000, d3dx_perspective 5,976 = 6,000 minus the 24 |fovy/2| >= 2^63 cases that are the native port's declared
+  boundary); the 6 owners without a corpus of their own use enumerated input classes (2,000 each). The original
+  side runs with the FPU shims (as every boot). **Mutants:** each entry is rerun with a bridge that flips one bit of
+  its first store; all 12 are caught. **Live:** guest-boot installs all 12 (11 fire before the first Present; the
+  boot is identical), and guest-frames runs a third boot with the table installed: the first 600 frame digests
+  equal the plain boot's.
+* **Still unbound** (address-named ported functions, 46): 401000 401830 401a20 401ac0 402f40 403180 407ab0 408630
+  40bf40 40c030 40c090 40f350 40f3a0 410510 411b40 419030 4208e0 4250d0 772615 77dfc0 77ec60 77f0a0 77f150 77f610
+  780c30 780f60 780fb0 781070 781250 785190 787260 789bd0 78dbe0 791170 7912e0 791610 791bd0 791df0 792100 793e70
+  7949b0 794e40 794ec0 (+ 411e30/40f010/411e20 of game_frame_control, which need a native input callback bridge).
+  Most call the D3D device or nested owners and need guest↔native bridges; the player modules are not
+  address-named and are not counted here.
+* **Host input (keyboard).** `HleProcess::host_key(vk, down)` posts WM_KEYDOWN/WM_KEYUP (US scan code, extended,
+  previous-state and transition bits) to the focus window and keeps the key state for GetKeyState /
+  GetAsyncKeyState / GetKeyboardState; TranslateMessage posts WM_CHAR; DefWindowProc returns 0 for key messages;
+  MapVirtualKeyA/W with a US-layout table (assumption: US layout). No input API is polled per frame — the Input
+  mod subclasses the window and reads key messages (its config.ini: Enter = Start, X = A, Z = B, arrows).
+  On the way to the menu: mmioClose (no mmio file can be open: MMSYSERR_INVALHANDLE), lstrcpyA/lstrcatA,
+  FileTimeToLocalFileTime / GetTimeZoneInformation (assumption: UTC, no DST), FileTimeToSystemTime.
+* **guest-input-test:** Enter at frame 450 skips the intro movie (title at 454), Enter at 800 opens
+  "Select a Saved File" (ava_filesel_e's textures load after 800, not before); two scripted boots give identical
+  digests over 900 frames; without input the movie still plays at 500. ~40 s.
+* **sadx-app:** the Mac keyboard is forwarded (key codes → Windows virtual keys); `--keys FRAME:VK[:FRAMES],...`
+  scripts presses. With `--keys 450:13,800:13 --exit-after 1000` the window shows the file select with the
+  install's two saves (build/menu.png, not committed).
+* **Bug fixed:** guest-frames' boots used `call`'s 600 s wall-clock limit; on a loaded machine the second boot was
+  cut short and the digest comparison failed. Long runs now pass timeout 0, and every boot's stop reason is checked.
+* **make m1:** guest-imports, guest-dlls, guest-boot, guest-overrides, guest-fpu-shims, guest-frames, guest-input,
+  app-smoke — exactly the roadmap's M1 tests.
+* **Not done:** controllers (SDL2's XInput/HID backends see no device), the title-screen frame time (~19.5 ms),
+  the native runtime's caps (see the previous entry), M2 golden frames. docs/NEXT-AGENT-PROMPT.md lists them.

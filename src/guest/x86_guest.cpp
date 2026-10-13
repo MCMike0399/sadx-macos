@@ -206,9 +206,10 @@ GuestCallResult X86Guest::run(std::uint32_t from,std::uint32_t until,std::uint16
     return r;
 }
 GuestCallResult X86Guest::call(std::uint32_t address,std::initializer_list<std::uint32_t> arguments,std::optional<std::uint32_t> ecx,std::optional<std::uint32_t> edx,std::uint16_t control_word,std::uint64_t timeout){
+    return call(address,std::vector<std::uint32_t>(arguments),ecx,edx,control_word,timeout);}
+GuestCallResult X86Guest::call(std::uint32_t address,const std::vector<std::uint32_t>& frame,std::optional<std::uint32_t> ecx,std::optional<std::uint32_t> edx,std::uint16_t control_word,std::uint64_t timeout,std::uint32_t mxcsr){
     GuestCallResult r;
     // Fresh stack: arguments right-to-left, then the stop return address.
-    std::vector<std::uint32_t> frame(arguments.begin(),arguments.end());
     std::uint32_t esp=stack_base_+stack_size_-0x1000;
     esp-=static_cast<std::uint32_t>(4*frame.size()+4);
     std::vector<std::uint32_t> words;words.push_back(stop_address_);words.insert(words.end(),frame.begin(),frame.end());
@@ -216,7 +217,7 @@ GuestCallResult X86Guest::call(std::uint32_t address,std::initializer_list<std::
     set_reg(UC_X86_REG_ESP,esp);set_reg(UC_X86_REG_EBP,esp);
     if(ecx)set_reg(UC_X86_REG_ECX,*ecx);if(edx)set_reg(UC_X86_REG_EDX,*edx);
     std::uint32_t cw=control_word,sw=0,tag=0xffff;uc_reg_write(engine(uc_),UC_X86_REG_FPCW,&cw);uc_reg_write(engine(uc_),UC_X86_REG_FPSW,&sw);uc_reg_write(engine(uc_),UC_X86_REG_FPTAG,&tag);
-    std::uint32_t mxcsr=0x1f80;uc_reg_write(engine(uc_),UC_X86_REG_MXCSR,&mxcsr);
+    uc_reg_write(engine(uc_),UC_X86_REG_MXCSR,&mxcsr);
     stopped_.reset();pause_requested_=false;
     const auto rc=uc_emu_start(engine(uc_),address,stop_address_,timeout,0);
     r.eax=reg(UC_X86_REG_EAX);r.eip=reg(UC_X86_REG_EIP);r.esp=reg(UC_X86_REG_ESP);
