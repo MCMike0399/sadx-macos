@@ -15,6 +15,7 @@
 #include "engine/task_work.hpp"
 #include "input/input_mod_pad.hpp"
 #include "engine/ninja_projection_range.hpp"
+#include "engine/ninja_view.hpp"
 #include "engine/ninja_fog.hpp"
 #include "engine/ninja_frame_calls.hpp"
 #include "game/mod_loader_frame.hpp"
@@ -145,7 +146,7 @@ private:
     // and its coordinate owner; created by 401830's njInitMatrix 780180 before 40cad0.
     GameFrameOwnersState frame_owners_;
     std::optional<NinjaMatrixStack> matrix_stack_;std::optional<PlayerCoordinates> coordinates_;std::optional<NinjaMatrix> unit_at_389d650_;
-    NinjaProjectionRangeState projection_range_{};NinjaTransformOwner transform_owner_;
+    NinjaProjectionRangeState projection_range_{};NinjaViewState ninja_view_;NinjaTransformOwner transform_owner_;
     // Task heap 40b1a0 and pool 40b460 (fresh owners each reset, as the source rebuilds them).
     std::shared_ptr<TaskWorkArena> task_arena_;std::unique_ptr<TaskScheduler> scheduler_;
     std::optional<std::uint32_t> word_at_3c839fc_,word_at_3c83a00_;std::array<std::optional<std::uint32_t>,4> words_at_3c60108_; // 64fc70, 51a740

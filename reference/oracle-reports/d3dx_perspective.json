@@ -1,0 +1,402 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "7652def38a32935ed3c61584ea7bb8c7566b842ac4308bfc19ed64e1eaf9a81c",
+ "source_files": {
+  "src/math/d3dx_math.hpp": "4c8811e8a97a22872c188c5a52be2a7de5f2a27fe8df6b190b52d11f046a90f0",
+  "src/math/d3dx_math.cpp": "9efedeb8914db2c9cba681d41e80a762ade22bb0c7bbfdcb503c82427e0398f3",
+  "src/cpu/x87_transcendental.cpp": "00fa509396903586b83807f7aa53b7df8675d7d8efdef031f7264283e3c0529a",
+  "tests/probes/native_d3dx_perspective_probe.cpp": "a3ee10f5d70ca0d171bf7b90b9be793711a83cd53a1575bb5a7c8510111b31b4",
+  "tools/oracles/verify_original_d3dx_perspective.py": "3e5b412a3088d792cef5a6dff2c9e6f33742709c5009a909296cff543cf4694d"
+ },
+ "original_ranges_sha256": {
+  "0x7716df-0x771773": "798e8ec191de74f25faf5c83f2fb8a55e9cf5154abf2c2ac7a45ae23c1f519d6",
+  "0x7dcc98-0x7dcc9c": "d99e58435243d9fef9c88273b8d553b4fba4d0baf8009d29eae74fa99e0d9f57"
+ },
+ "profiles": {
+  "primary": {
+   "cases": 5976,
+   "native_unknown_cases": 24,
+   "value_mismatches": 19,
+   "control_mismatches": 0,
+   "flag_mismatches": 5975,
+   "mismatch_classes": {
+    "unicorn_fsincos_infinity_as_out_of_range": 19
+   },
+   "examples": [
+    {
+     "input": [
+      "0x7f",
+      "0xff800000",
+      "0x3ff87a88",
+      "0x41d7f455",
+      "0x474341ff"
+     ],
+     "fields": [
+      0,
+      5
+     ],
+     "source": [
+      "0xff800000",
+      "0xff800000"
+     ],
+     "native": [
+      "0xffc00000",
+      "0xffc00000"
+     ]
+    },
+    {
+     "input": [
+      "0x7f",
+      "0x7f800000",
+      "0x3fe38e39",
+      "0x42415258",
+      "0x46dccf87"
+     ],
+     "fields": [
+      0,
+      5
+     ],
+     "source": [
+      "0x7f800000",
+      "0x7f800000"
+     ],
+     "native": [
+      "0xffc00000",
+      "0xffc00000"
+     ]
+    },
+    {
+     "input": [
+      "0x47f",
+      "0x7f800000",
+      "0x406a5305",
+      "0x42393619",
+      "0x47958ad5"
+     ],
+     "fields": [
+      0,
+      5
+     ],
+     "source": [
+      "0x7f800000",
+      "0x7f800000"
+     ],
+     "native": [
+      "0xffc00000",
+      "0xffc00000"
+     ]
+    },
+    {
+     "input": [
+      "0x27f",
+      "0x7f800000",
+      "0x3f400000",
+      "0x3dcccccd",
+      "0x461c4000"
+     ],
+     "fields": [
+      0,
+      5
+     ],
+     "source": [
+      "0x7f800000",
+      "0x7f800000"
+     ],
+     "native": [
+      "0xffc00000",
+      "0xffc00000"
+     ]
+    },
+    {
+     "input": [
+      "0x7f",
+      "0xff800000",
+      "0x3faaaaab",
+      "0x41541831",
+      "0x4764ad86"
+     ],
+     "fields": [
+      0,
+      5
+     ],
+     "source": [
+      "0xff800000",
+      "0xff800000"
+     ],
+     "native": [
+      "0xffc00000",
+      "0xffc00000"
+     ]
+    },
+    {
+     "input": [
+      "0x37f",
+      "0x7f800000",
+      "0x3f800000",
+      "0x3f800000",
+      "0x477fff00"
+     ],
+     "fields": [
+      0,
+      5
+     ],
+     "source": [
+      "0x7f800000",
+      "0x7f800000"
+     ],
+     "native": [
+      "0xffc00000",
+      "0xffc00000"
+     ]
+    },
+    {
+     "input": [
+      "0xc7f",
+      "0x7f800000",
+      "0x3e2accd9",
+      "0x418533f4",
+      "0x4748a243"
+     ],
+     "fields": [
+      0,
+      5
+     ],
+     "source": [
+      "0x7f800000",
+      "0x7f800000"
+     ],
+     "native": [
+      "0xffc00000",
+      "0xffc00000"
+     ]
+    },
+    {
+     "input": [
+      "0x7f",
+      "0x7f800000",
+      "0x3f0b1498",
+      "0x3f800000",
+      "0x477fff00"
+     ],
+     "fields": [
+      0,
+      5
+     ],
+     "source": [
+      "0x7f800000",
+      "0x7f800000"
+     ],
+     "native": [
+      "0xffc00000",
+      "0xffc00000"
+     ]
+    },
+    {
+     "input": [
+      "0x87f",
+      "0xff800000",
+      "0x3f400000",
+      "0x3dcccccd",
+      "0x461c4000"
+     ],
+     "fields": [
+      0,
+      5
+     ],
+     "source": [
+      "0xff800000",
+      "0xff800000"
+     ],
+     "native": [
+      "0xffc00000",
+      "0xffc00000"
+     ]
+    },
+    {
+     "input": [
+      "0x7f",
+      "0x7f800000",
+      "0x3f800000",
+      "0x3f000000",
+      "0x461c4000"
+     ],
+     "fields": [
+      0,
+      5
+     ],
+     "source": [
+      "0x7f800000",
+      "0x7f800000"
+     ],
+     "native": [
+      "0xffc00000",
+      "0xffc00000"
+     ]
+    }
+   ],
+   "flag_examples": [
+    {
+     "input": [
+      "0x87f",
+      "0x4099733d",
+      "0x3fe38e39",
+      "0x3f000000",
+      "0x477fff00"
+     ],
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "input": [
+      "0x27f",
+      "0x403c2416",
+      "0x3f800000",
+      "0x3f000000",
+      "0x447a0000"
+     ],
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "input": [
+      "0x47f",
+      "0xc0c0e330",
+      "0x3fec1875",
+      "0x3f000000",
+      "0x447a0000"
+     ],
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "input": [
+      "0x47f",
+      "0x40a2c296",
+      "0x3f800000",
+      "0x422d5791",
+      "0x4686117a"
+     ],
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "input": [
+      "0x87f",
+      "0x3fc90fdb",
+      "0x3faaaaab",
+      "0x3f000000",
+      "0x447a0000"
+     ],
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "input": [
+      "0x27f",
+      "0x40ac6a55",
+      "0x3fba9a3a",
+      "0x3f800000",
+      "0x477fff00"
+     ],
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  "seeded": {
+   "cases": 5976,
+   "native_unknown_cases": 24,
+   "value_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 5975,
+   "mismatch_classes": {},
+   "examples": [],
+   "flag_examples": [
+    {
+     "input": [
+      "0x87f",
+      "0x4099733d",
+      "0x3fe38e39",
+      "0x3f000000",
+      "0x477fff00"
+     ],
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "input": [
+      "0x27f",
+      "0x403c2416",
+      "0x3f800000",
+      "0x3f000000",
+      "0x447a0000"
+     ],
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "input": [
+      "0x47f",
+      "0xc0c0e330",
+      "0x3fec1875",
+      "0x3f000000",
+      "0x447a0000"
+     ],
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "input": [
+      "0x47f",
+      "0x40a2c296",
+      "0x3f800000",
+      "0x422d5791",
+      "0x4686117a"
+     ],
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "input": [
+      "0x87f",
+      "0x3fc90fdb",
+      "0x3faaaaab",
+      "0x3f000000",
+      "0x447a0000"
+     ],
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "input": [
+      "0x27f",
+      "0x40ac6a55",
+      "0x3fba9a3a",
+      "0x3f800000",
+      "0x477fff00"
+     ],
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  }
+ },
+ "seeded_suffix_values_match": true,
+ "primary_values_with_unicorn_fsincos_match": false,
+ "flag_mismatches": 11950,
+ "unclassified_primary_mismatches": 0,
+ "limits": [
+  "D3DX8 7716df (D3DXMatrixPerspectiveFovLH as linked into sonic.exe, stdcall, x87 throughout)\nagainst its original instructions.\n\n7716df is called directly (it is not dispatched through the 389b778 table): out, fovy, aspect, near,\nfar on the stack, RET 0x14. Every case runs the whole body. Compared: the 16 stored floats and the\nx87 control word; the six x87 exception flags are compared separately (flag class).\n\nTwo profiles:\n  primary  Unicorn executes every instruction, including FSINCOS at 0x771706, which QEMU computes\n           with the host's double sin/cos (53-bit), not an x87 64-bit-significand reduction. The\n           native side uses the Bochs P5/P6 FSINCOS model (third_party/bochs_fpatan, fsincos.cc).\n  seeded   the same, but right after 0x771706 ST(0)/ST(1) are overwritten with the native Bochs\n           cosine/sine (exported by the probe), so the rest of the body is compared exactly with no\n           FSINCOS model difference. Seeding validates the suffix only; it proves nothing about\n           Intel FSINCOS.\n|fovy * 0.5| >= 2^63 makes FSINCOS set C2 and leave ST(0); the native port returns an explicit unknown\n(nullopt) for it, and those cases are counted as native_unknown_cases, not compared.",
+  "primary value mismatches are FSINCOS model differences, classified in profiles.primary.mismatch_classes: unicorn_fsincos_infinity_as_out_of_range = QEMU treats FSINCOS(+-inf) as |x| >= 2^63 (C2, ST(0) kept) where the SDM gives #IA with the indefinite NaN (the Bochs model); finite operands use host double sin/cos in Unicorn. The Bochs model is not changed to match Unicorn; settling FSINCOS needs the Intel capture (roadmap M4). This report stays fail while primary mismatches exist",
+  "flag_mismatches: x87 exception flags; Unicorn 2.1.4 does not raise PE/UE for most x87 arithmetic, the native SoftFloat/Bochs models do",
+  "native_unknown_cases are |fovy/2| >= 2^63 (FSINCOS C2 path); the native port reports them as unknown instead of modelling the stack-underflow stores"
+ ],
+ "tracked_summary": {
+  "full_sha256": "83965e7d4edb23097a646c0b1fd3d69844d1de3b8c07acedf400a16159da3e0b",
+  "full_bytes": 9376,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "profiles.primary.examples": 12
+  }
+ }
+}

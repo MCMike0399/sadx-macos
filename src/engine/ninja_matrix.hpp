@@ -45,6 +45,7 @@ public:
     bool push_matrix(const NinjaMatrix&); // 0x7850f0: supplied matrix copied only on success
     void pop_one(); // source target-depth-zero guard is a no-op
     void pop_ex(); // 0x7816e0: unlike pop_one, permits depth1 -> depth0
+    void reset_to_first() noexcept { depth_ = 1; } // 781250: current 3d0f818 = base 3d0fa1c, depth 3d0fa2c = 1
     NinjaMatrix& current();
     const NinjaMatrix& current() const;
     const std::vector<NinjaMatrix>& slots() const noexcept { return slots_; }

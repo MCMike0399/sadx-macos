@@ -1,0 +1,827 @@
+{
+ "native_library_sha256": "7e0344d9942bf2f965d511c6682de115dc378f0b3836df19210cce6709d7efc7",
+ "unicorn_version": "2.1.4",
+ "source_files": {
+  "src/cpu/x87_transcendental.hpp": "443284c5e02df41950b33d2b58465f198af3679e8ceeac87c5513169beb99993",
+  "src/cpu/x87_transcendental.cpp": "00fa509396903586b83807f7aa53b7df8675d7d8efdef031f7264283e3c0529a",
+  "third_party/bochs_fpatan/upstream.json": "bce714089e1b6a7a5cfaba503164b946e75b636cdb86d1d523bfdbb4af4aca02",
+  "tests/probes/native_x87_transcendental_probe.cpp": "895529f003f97f2d3a4d93ae2a7c8722e6a13a1e6a194d5d076e9d6d77790117",
+  "tools/oracles/verify_original_x87_transcendental.py": "4057bb01604b1aa0e0ef96012b251f458507d0538064fecfeddfd06e08951aa6"
+ },
+ "results": [
+  {
+   "operation": "FSINCOS",
+   "cases": 12000,
+   "double_agreement_cases": 4544,
+   "double_agreement_mismatches": 0,
+   "special_cases": 3000,
+   "special_mismatches": 0,
+   "unicorn_infinity_as_out_of_range": 397,
+   "unicorn_nan_payload_via_double": 185,
+   "directed_rounding_cases": 4456,
+   "max_ulps_directed_rounding": 180247994,
+   "ext80_bit_equal": 955,
+   "max_ulps_in_agreement_range": 2563527024,
+   "examples": []
+  },
+  {
+   "operation": "FPTAN",
+   "cases": 12000,
+   "double_agreement_cases": 4455,
+   "double_agreement_mismatches": 0,
+   "special_cases": 3000,
+   "special_mismatches": 0,
+   "unicorn_infinity_as_out_of_range": 400,
+   "unicorn_nan_payload_via_double": 160,
+   "directed_rounding_cases": 4545,
+   "max_ulps_directed_rounding": 20027555,
+   "ext80_bit_equal": 965,
+   "max_ulps_in_agreement_range": 15020666,
+   "examples": []
+  }
+ ],
+ "profile": {
+  "FSINCOS:range53:2^5": {
+   "cases": 1963,
+   "max_double_ulps": 1,
+   "within_2": 1963
+  },
+  "FSINCOS:range53:2^3": {
+   "cases": 499,
+   "max_double_ulps": 1,
+   "within_2": 499
+  },
+  "FSINCOS:range53:2^2": {
+   "cases": 1135,
+   "max_double_ulps": 2,
+   "within_2": 1135
+  },
+  "FSINCOS:range64:2^5": {
+   "cases": 528,
+   "max_double_ulps": 13464,
+   "within_2": 17
+  },
+  "FSINCOS:large:2^37": {
+   "cases": 23,
+   "max_double_ulps": 1386561751927,
+   "within_2": 0
+  },
+  "FSINCOS:tiny:2^-1": {
+   "cases": 978,
+   "max_double_ulps": 0,
+   "within_2": 978
+  },
+  "FSINCOS:near_pi:2^2": {
+   "cases": 321,
+   "max_double_ulps": 2563527024,
+   "within_2": 0
+  },
+  "FSINCOS:range53:2^4": {
+   "cases": 1015,
+   "max_double_ulps": 1,
+   "within_2": 1015
+  },
+  "FSINCOS:range53:2^0": {
+   "cases": 502,
+   "max_double_ulps": 1,
+   "within_2": 502
+  },
+  "FSINCOS:large:2^6": {
+   "cases": 10,
+   "max_double_ulps": 1742,
+   "within_2": 0
+  },
+  "FSINCOS:near_pi:2^3": {
+   "cases": 191,
+   "max_double_ulps": 180247994,
+   "within_2": 0
+  },
+  "FSINCOS:range64:2^4": {
+   "cases": 236,
+   "max_double_ulps": 6041,
+   "within_2": 15
+  },
+  "FSINCOS:large:2^51": {
+   "cases": 30,
+   "max_double_ulps": 9179607770167068150,
+   "within_2": 0
+  },
+  "FSINCOS:near_pi:2^0": {
+   "cases": 252,
+   "max_double_ulps": 2503444,
+   "within_2": 92
+  },
+  "FSINCOS:range53:2^1": {
+   "cases": 687,
+   "max_double_ulps": 1,
+   "within_2": 687
+  },
+  "FSINCOS:range64:2^3": {
+   "cases": 118,
+   "max_double_ulps": 214,
+   "within_2": 15
+  },
+  "FSINCOS:large:2^41": {
+   "cases": 21,
+   "max_double_ulps": 1492013398105034,
+   "within_2": 0
+  },
+  "FSINCOS:near_pi:2^4": {
+   "cases": 45,
+   "max_double_ulps": 7510333,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^35": {
+   "cases": 18,
+   "max_double_ulps": 651478295061,
+   "within_2": 0
+  },
+  "FSINCOS:range64:2^1": {
+   "cases": 19,
+   "max_double_ulps": 124,
+   "within_2": 9
+  },
+  "FSINCOS:large:2^11": {
+   "cases": 15,
+   "max_double_ulps": 27965,
+   "within_2": 0
+  },
+  "FSINCOS:range53:2^-1": {
+   "cases": 199,
+   "max_double_ulps": 1,
+   "within_2": 199
+  },
+  "FSINCOS:large:2^34": {
+   "cases": 13,
+   "max_double_ulps": 138346410261,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^42": {
+   "cases": 25,
+   "max_double_ulps": 28114217337186,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^52": {
+   "cases": 22,
+   "max_double_ulps": 9197000510422047955,
+   "within_2": 0
+  },
+  "FSINCOS:near_pi:2^1": {
+   "cases": 191,
+   "max_double_ulps": 80110220,
+   "within_2": 47
+  },
+  "FSINCOS:large:2^59": {
+   "cases": 12,
+   "max_double_ulps": 9214204364816637205,
+   "within_2": 0
+  },
+  "FSINCOS:range64:2^0": {
+   "cases": 21,
+   "max_double_ulps": 7,
+   "within_2": 16
+  },
+  "FSINCOS:large:2^60": {
+   "cases": 17,
+   "max_double_ulps": 9213869766956717871,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^58": {
+   "cases": 17,
+   "max_double_ulps": 9213883614232169973,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^44": {
+   "cases": 19,
+   "max_double_ulps": 1450461917741632,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^57": {
+   "cases": 20,
+   "max_double_ulps": 9214335204930151746,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^31": {
+   "cases": 19,
+   "max_double_ulps": 29378931752,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^49": {
+   "cases": 14,
+   "max_double_ulps": 9173632778097226139,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^21": {
+   "cases": 12,
+   "max_double_ulps": 56732542,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^50": {
+   "cases": 17,
+   "max_double_ulps": 9168317420932034715,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^27": {
+   "cases": 21,
+   "max_double_ulps": 460455790,
+   "within_2": 0
+  },
+  "FSINCOS:range64:2^-1": {
+   "cases": 7,
+   "max_double_ulps": 1,
+   "within_2": 7
+  },
+  "FSINCOS:large:2^46": {
+   "cases": 21,
+   "max_double_ulps": 265996387719988,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^48": {
+   "cases": 25,
+   "max_double_ulps": 3860339321812799,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^15": {
+   "cases": 30,
+   "max_double_ulps": 259678,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^30": {
+   "cases": 17,
+   "max_double_ulps": 544912584355,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^38": {
+   "cases": 11,
+   "max_double_ulps": 1167125973859,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^14": {
+   "cases": 16,
+   "max_double_ulps": 253047,
+   "within_2": 0
+  },
+  "FSINCOS:range64:2^2": {
+   "cases": 71,
+   "max_double_ulps": 205,
+   "within_2": 16
+  },
+  "FSINCOS:large:2^16": {
+   "cases": 20,
+   "max_double_ulps": 3309115,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^43": {
+   "cases": 20,
+   "max_double_ulps": 65832503174518,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^10": {
+   "cases": 23,
+   "max_double_ulps": 129664,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^22": {
+   "cases": 18,
+   "max_double_ulps": 447215993,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^13": {
+   "cases": 16,
+   "max_double_ulps": 1847389,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^19": {
+   "cases": 17,
+   "max_double_ulps": 13425135,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^7": {
+   "cases": 16,
+   "max_double_ulps": 3243,
+   "within_2": 1
+  },
+  "FSINCOS:large:2^54": {
+   "cases": 17,
+   "max_double_ulps": 9213682199517241589,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^18": {
+   "cases": 24,
+   "max_double_ulps": 30735124,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^56": {
+   "cases": 12,
+   "max_double_ulps": 9213803113768716546,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^20": {
+   "cases": 18,
+   "max_double_ulps": 15004569,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^25": {
+   "cases": 15,
+   "max_double_ulps": 1998508500,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^33": {
+   "cases": 16,
+   "max_double_ulps": 270652324871,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^32": {
+   "cases": 20,
+   "max_double_ulps": 821427573715,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^17": {
+   "cases": 18,
+   "max_double_ulps": 718058,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^29": {
+   "cases": 25,
+   "max_double_ulps": 14571421324,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^53": {
+   "cases": 27,
+   "max_double_ulps": 9210640819046033632,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^12": {
+   "cases": 20,
+   "max_double_ulps": 146134,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^47": {
+   "cases": 14,
+   "max_double_ulps": 1078918213905645,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^23": {
+   "cases": 15,
+   "max_double_ulps": 252685369,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^24": {
+   "cases": 13,
+   "max_double_ulps": 91764543,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^8": {
+   "cases": 25,
+   "max_double_ulps": 5565,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^36": {
+   "cases": 11,
+   "max_double_ulps": 908307328018,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^9": {
+   "cases": 10,
+   "max_double_ulps": 25791,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^39": {
+   "cases": 19,
+   "max_double_ulps": 8912916610183,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^45": {
+   "cases": 14,
+   "max_double_ulps": 1002794818204367,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^28": {
+   "cases": 13,
+   "max_double_ulps": 2450675390,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^55": {
+   "cases": 20,
+   "max_double_ulps": 9212860131931530025,
+   "within_2": 0
+  },
+  "FSINCOS:tiny:2^zero": {
+   "cases": 22,
+   "max_double_ulps": 0,
+   "within_2": 22
+  },
+  "FSINCOS:large:2^40": {
+   "cases": 10,
+   "max_double_ulps": 24421304226408,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^61": {
+   "cases": 19,
+   "max_double_ulps": 9214307123298677502,
+   "within_2": 0
+  },
+  "FSINCOS:large:2^26": {
+   "cases": 10,
+   "max_double_ulps": 223180476,
+   "within_2": 0
+  },
+  "FPTAN:range53:2^4": {
+   "cases": 1014,
+   "max_double_ulps": 2,
+   "within_2": 1014
+  },
+  "FPTAN:range53:2^5": {
+   "cases": 1998,
+   "max_double_ulps": 2,
+   "within_2": 1998
+  },
+  "FPTAN:range53:2^3": {
+   "cases": 495,
+   "max_double_ulps": 2,
+   "within_2": 495
+  },
+  "FPTAN:range53:2^0": {
+   "cases": 517,
+   "max_double_ulps": 2,
+   "within_2": 517
+  },
+  "FPTAN:range53:2^2": {
+   "cases": 1079,
+   "max_double_ulps": 2,
+   "within_2": 1079
+  },
+  "FPTAN:range64:2^3": {
+   "cases": 124,
+   "max_double_ulps": 791,
+   "within_2": 17
+  },
+  "FPTAN:large:2^17": {
+   "cases": 24,
+   "max_double_ulps": 5230450,
+   "within_2": 0
+  },
+  "FPTAN:tiny:2^-1": {
+   "cases": 983,
+   "max_double_ulps": 1,
+   "within_2": 983
+  },
+  "FPTAN:near_pi:2^1": {
+   "cases": 187,
+   "max_double_ulps": 5006889,
+   "within_2": 47
+  },
+  "FPTAN:range53:2^1": {
+   "cases": 719,
+   "max_double_ulps": 2,
+   "within_2": 719
+  },
+  "FPTAN:range64:2^5": {
+   "cases": 499,
+   "max_double_ulps": 7801,
+   "within_2": 12
+  },
+  "FPTAN:large:2^15": {
+   "cases": 25,
+   "max_double_ulps": 904855,
+   "within_2": 0
+  },
+  "FPTAN:near_pi:2^0": {
+   "cases": 250,
+   "max_double_ulps": 698873,
+   "within_2": 94
+  },
+  "FPTAN:range64:2^0": {
+   "cases": 12,
+   "max_double_ulps": 111,
+   "within_2": 10
+  },
+  "FPTAN:large:2^32": {
+   "cases": 23,
+   "max_double_ulps": 124736857735,
+   "within_2": 0
+  },
+  "FPTAN:near_pi:2^2": {
+   "cases": 314,
+   "max_double_ulps": 20027555,
+   "within_2": 0
+  },
+  "FPTAN:large:2^27": {
+   "cases": 20,
+   "max_double_ulps": 543053077,
+   "within_2": 0
+  },
+  "FPTAN:near_pi:2^4": {
+   "cases": 48,
+   "max_double_ulps": 7510333,
+   "within_2": 0
+  },
+  "FPTAN:range64:2^1": {
+   "cases": 25,
+   "max_double_ulps": 22,
+   "within_2": 8
+  },
+  "FPTAN:large:2^13": {
+   "cases": 16,
+   "max_double_ulps": 317025,
+   "within_2": 0
+  },
+  "FPTAN:range64:2^4": {
+   "cases": 253,
+   "max_double_ulps": 591,
+   "within_2": 12
+  },
+  "FPTAN:large:2^26": {
+   "cases": 32,
+   "max_double_ulps": 1961635030,
+   "within_2": 0
+  },
+  "FPTAN:large:2^55": {
+   "cases": 21,
+   "max_double_ulps": 9228258483347022442,
+   "within_2": 0
+  },
+  "FPTAN:range53:2^-1": {
+   "cases": 178,
+   "max_double_ulps": 1,
+   "within_2": 178
+  },
+  "FPTAN:large:2^59": {
+   "cases": 14,
+   "max_double_ulps": 9189753850213032008,
+   "within_2": 0
+  },
+  "FPTAN:large:2^44": {
+   "cases": 12,
+   "max_double_ulps": 173421107411888,
+   "within_2": 0
+  },
+  "FPTAN:large:2^24": {
+   "cases": 22,
+   "max_double_ulps": 348233791,
+   "within_2": 0
+  },
+  "FPTAN:large:2^16": {
+   "cases": 21,
+   "max_double_ulps": 4227102,
+   "within_2": 0
+  },
+  "FPTAN:near_pi:2^3": {
+   "cases": 201,
+   "max_double_ulps": 15020666,
+   "within_2": 0
+  },
+  "FPTAN:range64:2^2": {
+   "cases": 79,
+   "max_double_ulps": 204,
+   "within_2": 21
+  },
+  "FPTAN:large:2^37": {
+   "cases": 15,
+   "max_double_ulps": 9535388545437,
+   "within_2": 0
+  },
+  "FPTAN:large:2^41": {
+   "cases": 24,
+   "max_double_ulps": 16078043387820,
+   "within_2": 0
+  },
+  "FPTAN:large:2^51": {
+   "cases": 12,
+   "max_double_ulps": 9301047186840024504,
+   "within_2": 0
+  },
+  "FPTAN:large:2^6": {
+   "cases": 19,
+   "max_double_ulps": 1063,
+   "within_2": 2
+  },
+  "FPTAN:tiny:2^zero": {
+   "cases": 17,
+   "max_double_ulps": 0,
+   "within_2": 17
+  },
+  "FPTAN:large:2^58": {
+   "cases": 15,
+   "max_double_ulps": 9248436080769966230,
+   "within_2": 0
+  },
+  "FPTAN:large:2^9": {
+   "cases": 17,
+   "max_double_ulps": 8076,
+   "within_2": 0
+  },
+  "FPTAN:large:2^23": {
+   "cases": 21,
+   "max_double_ulps": 82842576,
+   "within_2": 0
+  },
+  "FPTAN:large:2^22": {
+   "cases": 19,
+   "max_double_ulps": 57852742,
+   "within_2": 0
+  },
+  "FPTAN:large:2^12": {
+   "cases": 11,
+   "max_double_ulps": 67337,
+   "within_2": 0
+  },
+  "FPTAN:large:2^48": {
+   "cases": 24,
+   "max_double_ulps": 2631487758660030,
+   "within_2": 0
+  },
+  "FPTAN:large:2^29": {
+   "cases": 18,
+   "max_double_ulps": 2581658344,
+   "within_2": 0
+  },
+  "FPTAN:large:2^46": {
+   "cases": 17,
+   "max_double_ulps": 525332197576400,
+   "within_2": 0
+  },
+  "FPTAN:large:2^21": {
+   "cases": 21,
+   "max_double_ulps": 21509354,
+   "within_2": 0
+  },
+  "FPTAN:large:2^30": {
+   "cases": 14,
+   "max_double_ulps": 6408657720,
+   "within_2": 0
+  },
+  "FPTAN:large:2^57": {
+   "cases": 17,
+   "max_double_ulps": 9246078337935143448,
+   "within_2": 0
+  },
+  "FPTAN:large:2^42": {
+   "cases": 18,
+   "max_double_ulps": 26870505937024,
+   "within_2": 0
+  },
+  "FPTAN:range64:2^-1": {
+   "cases": 8,
+   "max_double_ulps": 1,
+   "within_2": 8
+  },
+  "FPTAN:large:2^61": {
+   "cases": 15,
+   "max_double_ulps": 9217117018144325999,
+   "within_2": 0
+  },
+  "FPTAN:large:2^49": {
+   "cases": 14,
+   "max_double_ulps": 4327905576237980,
+   "within_2": 0
+  },
+  "FPTAN:large:2^47": {
+   "cases": 16,
+   "max_double_ulps": 1043344887401469,
+   "within_2": 0
+  },
+  "FPTAN:large:2^7": {
+   "cases": 15,
+   "max_double_ulps": 1018,
+   "within_2": 0
+  },
+  "FPTAN:large:2^31": {
+   "cases": 14,
+   "max_double_ulps": 47039076529,
+   "within_2": 0
+  },
+  "FPTAN:large:2^10": {
+   "cases": 8,
+   "max_double_ulps": 7158,
+   "within_2": 0
+  },
+  "FPTAN:large:2^50": {
+   "cases": 29,
+   "max_double_ulps": 9248353170357288161,
+   "within_2": 0
+  },
+  "FPTAN:large:2^36": {
+   "cases": 17,
+   "max_double_ulps": 529509916656,
+   "within_2": 0
+  },
+  "FPTAN:large:2^60": {
+   "cases": 13,
+   "max_double_ulps": 9222115737493037549,
+   "within_2": 0
+  },
+  "FPTAN:large:2^35": {
+   "cases": 23,
+   "max_double_ulps": 228052449212,
+   "within_2": 0
+  },
+  "FPTAN:large:2^18": {
+   "cases": 22,
+   "max_double_ulps": 10809840,
+   "within_2": 0
+  },
+  "FPTAN:large:2^43": {
+   "cases": 17,
+   "max_double_ulps": 62504898712005,
+   "within_2": 0
+  },
+  "FPTAN:large:2^11": {
+   "cases": 17,
+   "max_double_ulps": 48098,
+   "within_2": 0
+  },
+  "FPTAN:large:2^54": {
+   "cases": 14,
+   "max_double_ulps": 9252693232530889271,
+   "within_2": 0
+  },
+  "FPTAN:large:2^8": {
+   "cases": 18,
+   "max_double_ulps": 4334,
+   "within_2": 0
+  },
+  "FPTAN:large:2^39": {
+   "cases": 17,
+   "max_double_ulps": 37940896512758,
+   "within_2": 0
+  },
+  "FPTAN:large:2^45": {
+   "cases": 17,
+   "max_double_ulps": 663168455857349,
+   "within_2": 0
+  },
+  "FPTAN:large:2^25": {
+   "cases": 10,
+   "max_double_ulps": 838400184,
+   "within_2": 0
+  },
+  "FPTAN:large:2^14": {
+   "cases": 15,
+   "max_double_ulps": 160936,
+   "within_2": 0
+  },
+  "FPTAN:large:2^33": {
+   "cases": 20,
+   "max_double_ulps": 157937804577,
+   "within_2": 0
+  },
+  "FPTAN:large:2^34": {
+   "cases": 21,
+   "max_double_ulps": 186885996910,
+   "within_2": 0
+  },
+  "FPTAN:large:2^19": {
+   "cases": 21,
+   "max_double_ulps": 14153188,
+   "within_2": 0
+  },
+  "FPTAN:large:2^28": {
+   "cases": 20,
+   "max_double_ulps": 62140771343,
+   "within_2": 0
+  },
+  "FPTAN:large:2^56": {
+   "cases": 19,
+   "max_double_ulps": 9235266320119705157,
+   "within_2": 0
+  },
+  "FPTAN:large:2^38": {
+   "cases": 18,
+   "max_double_ulps": 19760433459170,
+   "within_2": 0
+  },
+  "FPTAN:large:2^20": {
+   "cases": 12,
+   "max_double_ulps": 8288615,
+   "within_2": 0
+  },
+  "FPTAN:large:2^52": {
+   "cases": 19,
+   "max_double_ulps": 9227313182653152186,
+   "within_2": 0
+  },
+  "FPTAN:large:2^40": {
+   "cases": 8,
+   "max_double_ulps": 120489641571017,
+   "within_2": 0
+  },
+  "FPTAN:large:2^53": {
+   "cases": 19,
+   "max_double_ulps": 9227190757491034232,
+   "within_2": 0
+  }
+ },
+ "values_match": true,
+ "passed": false,
+ "limits": [
+  "The Bochs FSINCOS / FPTAN wrappers (src/cpu/x87_transcendental, fsincos.cc at the pinned Bochs revision)\nagainst Unicorn 2.1.4 executing the FSINCOS (D9 FB) and FPTAN (D9 F2) instructions on random canonical\next80 operands under every rounding/precision control.\n\nUnicorn is a weak reference here: QEMU converts ST(0) to a host double, calls the host libm sin/cos/tan\nand converts back, so its results carry at most 53 significant bits and its argument reduction is the\nlibm's exact one, while the x87 (and the Bochs model) reduces with a 66-bit approximation of pi. Bit\nequality is therefore not expected and is not claimed. What is compared:\n\n  * double_agreement_mismatches (value class): finite in-range operands of the kinds range53 / near_pi /\n    tiny (double-representable, so Unicorn's argument is exact) and range64 (full 64-bit significand,\n    Unicorn rounds the argument to a double): |native - unicorn| (native rounded to double) must be at\n    most 2 double ulps of Unicorn's result + |f'(x)| * |x| * (2^-62 + argument rounding 2^-53 for\n    range64), f' = 1 for sine/cosine and 1 + tan^2 for the tangent. The |x| term bounds the different\n    argument reductions (x87: 66-bit pi; libm: exact) and the argument rounding. QEMU's libm is not\n    correctly rounded, the x87 is within 1 ext80 ulp. This catches wrong signs, swapped outputs, wrong\n    quadrants and reduction errors; it does not judge the low bits. Only round-to-nearest control words\n    are judged: under a directed RC, QEMU converts the argument with that RC and its libm results were\n    measured far less accurate (2026-10-13, 300-bit mpmath reference on the reported examples: Unicorn\n    error up to 6.7e-13, native Bochs error <= 6.1e-18), so those cases are only counted\n    (directed_rounding_cases, max_ulps_directed_rounding).\n  * special_mismatches (value class): zeros (exact, signed), the C2 path |x| >= 2^63 (both leave ST(0)\n    and push nothing), NaN operands (quietened payload). Unicorn round-trips a NaN through a double and\n    drops the low 11 payload bits (the SDM propagates the ext80 QNaN): counted as\n    unicorn_nan_payload_via_double when the payloads agree above those bits. Infinite operands are an SDM #IA with the\n    indefinite NaN in Bochs but take the C2 path in QEMU: counted as unicorn_infinity_as_out_of_range,\n    not compared.\n  * Documented, not judged: ext80 bit differences in the 53-bit range, and the deviation profile for\n    larger or full-64-bit operands (the pi-approximation and argument-rounding effects), per magnitude\n    bucket in `profile`. Settling the low bits needs the Intel capture (roadmap M4).",
+  "passed is false by construction: Unicorn is not bit-exact for FSINCOS/FPTAN (host double libm), so only the double-precision agreement and the special cases are claimed; ext80 low bits and large-operand reduction are unverified until the Intel capture (M4)"
+ ],
+ "tracked_summary": {
+  "full_sha256": "49f9e22d8ee4000fada395d87931f963c439a7ba613c1ab20348a029da2bd214",
+  "full_bytes": 19605,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

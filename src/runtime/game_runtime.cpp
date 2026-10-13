@@ -601,7 +601,15 @@ NativeGameReport NativeGame::run(){
             report_.assumptions.push_back("401830 and 781070's 77f150: unported owners skipped, their globals stay load-image values: "+list);}
         if(!r){report_.failure="401830 system init failed at "+hex(r.source_boundary)+(r.required_fact?" (requires "+hex(*r.required_fact)+")":"");return report_;}
     }
-    report_.assumptions.push_back("WinMain 402c92..402d7c is not run natively: the ShowCursor loop, the cliplevel inits 5850f0/556e40/556d60/568d20/4f68e0/5adc40/600700, the model DLLs' SetClip_EC00/EC01/EC31 exports, 781570 (which reaches 791170, the 3d129c0 projection writer), 781250, 40e2e0 and the debug prints; their globals keep load-image values");
+    report_.assumptions.push_back("WinMain 402c92..402d4c is not run natively: the ShowCursor loop, the cliplevel inits 5850f0/556e40/556d60/568d20/4f68e0/5adc40/600700 and the model DLLs' SetClip_EC00/EC01/EC31 exports; after 781250, 40e2e0 and the debug prints are not run either; their globals keep load-image values");
+    {   // 402d4f..402d5e: 781570(3aad0a0), then 781250(3aad0a0) -> 791170 (view matrix, 3d0f9e0, near/far, 3d129c0, transforms).
+        if(!matrix_stack_||!sine_table_at_88af78_){report_.failure="781250 needs the matrix stack (780180) and the 88af78 sine table";return report_;}
+        ninja_view_init_781570(ninja_view_,projection_range_);
+        NinjaViewRuntime view{ninja_view_,projection_range_,projection_,screen_,device_,render_,screen_device_,*matrix_stack_,*sine_table_at_88af78_,fp_,sse_,sse_reciprocal_by_division};
+        const auto v=ninja_set_view_781250(view);
+        report_.assumptions.push_back("781250 -> 791170: FPTAN/FPATAN/FSINCOS use the Bochs P5/P6 models and the D3DX slots 774310/7757e0 (SSE CPU without 3DNow!); RCPSS/RCPPS are modelled as IEEE division");
+        if(!v){report_.failure="781250 view/projection failed at "+hex(v.source_boundary)+(v.required_fact?" (requires "+hex(*v.required_fact)+")":"");return report_;}
+    }
     auto r=run_game_loop_startup(loop);
     if(!r){if(!report_.stopped_at)report_.failure=describe(r);return report_;}
     while(r.next==GameLoopNext::iteration&&report_.frames_completed<config_.max_frames){

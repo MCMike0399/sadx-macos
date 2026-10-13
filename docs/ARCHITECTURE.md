@@ -12,7 +12,7 @@ from that file when fixed (a stale exception fails the check).
 | `cpu` | exact arithmetic: x87 (ext80, control word), SSE (MXCSR), Bochs transcendentals, CRT math, `SourceBytes` | — |
 | `loader` | what the OS loader gives a program: `ExecutableImage` (PE32 as mapped), `GuestHeap` (Win32 heap identities) | cpu |
 | `math` | `NinjaMath` (sine table, angles) and the D3DX8 math as linked into sonic.exe | cpu |
-| `engine` | the Ninja engine: task scheduler and work, controller records, game-logic timing/edge state and frame control, render states, sprites, texture lists, render queue, fog, screen, device/system init, frame thunks, keyboard, vibration, njMalloc, the speedrun limiter state | cpu loader math |
+| `engine` | the Ninja engine: task scheduler and work, the matrix stack and primitives (`ninja_matrix`), the camera/view/projection (`ninja_view`: 781570, 781250, 791170), controller records, game-logic timing/edge state and frame control, render states, sprites, texture lists, render queue, fog, screen, device/system init, frame thunks, keyboard, vibration, njMalloc, the speedrun limiter state | cpu loader math |
 | `input` | the Input mod DLL's pad/keyboard semantics (axes, pad records) | … engine |
 | `player` | player physics, collision, animation, Sonic, the scene input producer | … input |
 | `game` | WinMain, library init, startup, game loop, modes and leaves, resets, views, window, sound bookkeeping, model DLL bindings, mod loader frame, Win32 profile | … player |

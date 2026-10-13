@@ -1,0 +1,44 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "0c49cb4c50e2487b539403c87d7701a8879b138d96261cab28ee5e55ca59907d",
+ "source_files": {
+  "src/math/d3dx_math.hpp": "4c8811e8a97a22872c188c5a52be2a7de5f2a27fe8df6b190b52d11f046a90f0",
+  "src/math/d3dx_math.cpp": "9efedeb8914db2c9cba681d41e80a762ade22bb0c7bbfdcb503c82427e0398f3",
+  "src/cpu/sse_math.cpp": "f34e9cea514bcb5d6374e29e91e8b39fea80640e58fdaf816ed58f7282c673dc",
+  "tests/probes/native_d3dx_matrix_inverse_probe.cpp": "9fa09aec1a1efdc49f54ee25daab32ef94c44db255165641792b9fa44e8d4422",
+  "tools/oracles/verify_original_d3dx_matrix_inverse.py": "5dce8d2c1f73cac2066e38c91482651c56325b47f4f2e72ddab0c0e82f034a35"
+ },
+ "original_ranges_sha256": {
+  "0x770d10-0x770d16": "2425ab01149d41c59771ca6fa1555f15a84b90078b3dccd3603ddc0b73eda0a5",
+  "0x7757e0-0x775a99": "73ecd4b82caf184311802135dc876725563120f94774b4535e00155d7d2b4f9d"
+ },
+ "dispatch_seed": {
+  "0x389b7c0": "0x7757e0"
+ },
+ "cases": 8000,
+ "source_outcomes": {
+  "inverse:det:misaligned": 2843,
+  "inverse:misaligned": 758,
+  "inverse:det:aligned": 2952,
+  "inverse:aligned": 691,
+  "null:det:misaligned": 313,
+  "null:det:aligned": 300,
+  "null:aligned": 78,
+  "null:misaligned": 65
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "values_match": true,
+ "flag_mismatches": 7832,
+ "passed": false,
+ "limits": [
+  "D3DX8 7757e0 (D3DXMatrixInverse, the SSE cofactor inverse) against its original instructions.\n\nThe call goes through the thunk 770d10 (JMP [389b7c0]) with dispatch slot 18 (389b7c0) written as\n77350c leaves it on an SSE CPU without 3DNow!: both SSE tables (7735f0, 773700) put 7757e0 there.\n77350c itself is not executed. Arguments: out, pDeterminant (NULL or not), pM; RET 0xc. The source\nmatrix sits at a 16-byte aligned or misaligned (+8) address (7757e0 loads it with movlps/movhps only,\nso alignment must not matter). Compared: the return (out or NULL), the 16 stored floats, the stored\ndeterminant, untouched sentinels on the NULL path, and MXCSR without its six exception flags.\n\nRCPSS is Unicorn's (QEMU's IEEE single division), not a real CPU's estimate; the native probe uses the\nsame division model (sse_reciprocal_by_division), so this proves the transcription, not the estimate.\nMXCSR control profiles vary the rounding mode only: Unicorn 2.1.4 ignores FZ and DAZ (see the sse_math\nreport), so they are not exercised here. Cases keep at most one NaN source: Unicorn applies QEMU's x87\nNaN rule to SSE operands where hardware returns the first operand's NaN.",
+  "flag_mismatches: MXCSR exception flags; Unicorn 2.1.4 raises no SSE exception flags, the native SoftFloat SSE model does. Hardware flags need the Intel capture (roadmap M4)"
+ ],
+ "tracked_summary": {
+  "full_sha256": "2aae0446eae7611168dcd214295cfe32e048ed20646d993224002cc3c655eec0",
+  "full_bytes": 2760,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

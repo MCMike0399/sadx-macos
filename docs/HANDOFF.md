@@ -1403,3 +1403,55 @@ full `make -j6 -k oracles` on this tree: every verdict identical to the run befo
   factory mutant (wrong angle copied) fails both unit tests. No oracle exercises a live
   `primary_state` child (the task-lifecycle probe has none): that path is unit-tested only.
 * Oracle scripts that hash native sources now list `engine/ninja_matrix.*` / `player/player_task.*`.
+
+## Oracles for the D3DX/x87 code that had none; 781570/781250/791170 ported (2026-10-12, step 3)
+
+Evidence: gate `reference/production-integration-20261012/view-projection-103-gate.json` (rc 0, 106
+native programs, 4 Python tests, 0 layer violations, 0 duplicate owners, 0 UNHANDLED patch overlaps);
+reports `reference/oracle-reports/{d3dx_perspective,d3dx_matrix_inverse,x87_transcendental,ninja_view}.json`.
+
+New oracles (each with a probe in `tests/probes/` and mutants run with `tools/gate/mutate.py`):
+* `d3dx_matrix_inverse` (7757e0 through thunk 770d10, dispatch slot 389b7c0 = 7757e0 as both SSE tables
+  set it): 8,000 cases (random, affine, singular, diagonal incl. 1e±20, integer, edge/NaN/inf elements;
+  aligned and misaligned sources; with/without pDeterminant; 4 rounding modes) — 0 value mismatches,
+  NULL path leaves both outputs untouched. **partial**: MXCSR flags (Unicorn raises none).
+  Mutants 3/3 caught (unordered-determinant test, Newton step, a shuffle constant).
+* `d3dx_perspective` (7716df): 5,976 cases + 24 native-unknown (|fovy/2| >= 2^63, the FSINCOS C2 path the
+  port reports as unknown). Seeded profile (ST0/ST1 overwritten with the Bochs FSINCOS after 771706):
+  0 mismatches. Primary profile (Unicorn's own FSINCOS): 19 mismatches, all `fovy = ±inf`: QEMU treats
+  FSINCOS(∞) as out of range (C2, operand kept) where the SDM gives #IA with the indefinite NaN (the
+  Bochs model). **fail** by the unchanged criteria, classified (`unclassified_primary_mismatches` = 0).
+  Mutants 3/3 caught.
+* `x87_transcendental` (the Bochs FSINCOS/FPTAN wrappers vs Unicorn's instructions on random canonical
+  ext80 operands, 6 control words): Unicorn is not bit-exact here (host double libm), so the oracle
+  claims only (a) double-precision agreement within 2 ulps + a |x|·f′(x) reduction bound for
+  round-to-nearest control words (9,000 judged cases, 0 mismatches), (b) exact special cases (zeros, C2
+  path, NaN payloads; 0 mismatches after classifying QEMU's dropped low NaN-payload bits and ∞-as-C2).
+  Under directed rounding QEMU's results are far off: a 300-bit mpmath reference on the reported
+  examples gave Unicorn errors up to 6.7e-13 and native errors <= 6.1e-18, so those cases are counted,
+  not judged. The ext80 low bits and the large-operand reduction are unverified (M4). **partial**
+  (`passed` false by construction). Mutants 2/2 valid caught.
+
+Port: `engine/ninja_view.{hpp,cpp}` (+ `tests/unit/ninja_view.cpp`, oracle `ninja_view`):
+* 781570 (camera block 3aad0a0: position 0, direction (0,0,-1), roll 0, angle 0x2aaa, near -1, far
+  -60000, tail), 781250 (view matrix 3d0f760 with the yaw branch at the 7dce54 threshold, translation,
+  matrix-stack reset to slot 0 with columns 0/1 negated and column 2 copied raw, copy to 3d0f980, sprite
+  scale 3d0f9e0 through 787e30, near/far 3d0f808/3d0f968, then 791170), 791170 (aspect from the unsigned
+  viewport words, vertical fov = 2·FPATAN(FPTAN(fov/2)/aspect, 1), 7716df into 3d12960, 3d129c0 =
+  diag(1,-1,1,1) × 3d12960 through 774310, SetTransform(PROJECTION), MultiplyTransform(PROJECTION,
+  3d0fd80), SetTransform(VIEW, current), 389d398 copy, 7757e0 inverse into 389d358).
+* The 3aad0a0 block's +0x20/+0x24 are the projection range's 3aad0c0/3aad0c4 (already owned by
+  `NinjaProjectionRangeState`) and are borrowed, not re-owned. `NinjaMatrixStack::reset_to_first`
+  added for 781250's stack reset.
+* Oracle `ninja_view`: 3,000 cases (mode 0 = 781570 then 781250, mode 1 = random blocks incl. vertical
+  directions, x²+z² exactly at the threshold, random rolls/angles incl. negative odd angles, random
+  viewports and 3d0fd80, 1–4 stack slots at random depth) with a recording D3D8 vtable fixture: **pass**,
+  0 mismatches in both the primary (Unicorn's FPTAN/FPATAN/FSINCOS) and the seeded profile.
+  Mutants 8/8 caught (the threshold mutant only after adding the exact-threshold cases).
+* `NativeGame` runs 781570 + 781250 at WinMain 402d4f. **3d129c0 is no longer zero natively**: the
+  "projected depths are NaN" assumption is gone from the boot report. The boot frontier is unchanged
+  (1 frame, stops at 421180 from 42c756). Still skipped and reported: the ShowCursor loop, the cliplevel
+  inits, the SetClip exports, 40e2e0 and the debug prints.
+
+Limits: FPTAN/FPATAN/FSINCOS agreement with the reference Intel CPU is unmeasured (M4). RCPSS/RCPPS are
+the IEEE-division model in both the source run and the native port.

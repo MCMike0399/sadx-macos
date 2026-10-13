@@ -39,7 +39,7 @@ struct NinjaScreenState {
     std::optional<std::uint32_t> points_at_3ce7164,colors_at_3ce7168,word_at_3ce716c,count_at_3ce7170;
     std::array<std::optional<std::uint32_t>,8> points_at_3ce7184;
     std::optional<std::uint32_t> invalid_at_3d0fd1c;                  // set to 1 by the loader's reset_device
-    std::array<std::optional<std::uint32_t>,16> projection_at_3d129c0; // written by 791170 (unported)
+    std::array<std::optional<std::uint32_t>,16> projection_at_3d129c0; // written by 791170 (engine/ninja_view)
 };
 struct NinjaScreenPolygon {std::uint32_t primitive_type=6,primitive_count=0,stride=0x14;std::vector<std::uint8_t> vertex_bytes;};
 struct NinjaScreenDevice {
