@@ -33,7 +33,7 @@ struct RenderBridge {
         if(!identity){identity=guests.size()+1;guests[identity]=*address;}
         render.device_at_3d128b0=std::make_shared<NinjaRenderDevice>(NinjaRenderDevice{identity});
     }
-    NinjaRenderCallResult invoke(const NinjaRenderDeviceHandle& native,const char* symbol,std::uint32_t offset,std::uint32_t state,std::uint32_t value,std::uint32_t site){
+    NinjaRenderCallResult invoke(const NinjaRenderDeviceHandle& native,const char* symbol,std::uint32_t offset,std::uint32_t state,std::uint32_t value,std::uint32_t site,std::uint32_t reserve=0x40){
         auto& g=process.guest();const auto device=guests.find(native->identity);
         if(device==guests.end()){g.stop("device bridge: unknown native device at "+hex(site));return {false,{}};}
         const auto table=g.u32(device->second),target=table?g.u32(*table+offset):std::nullopt;
@@ -42,7 +42,7 @@ struct RenderBridge {
         if(!method||!target||!expected||*target!=*expected||method->argument_bytes!=12){
             g.stop(std::string("device bridge: non-HLE ")+symbol+" target at "+hex(site));return {false,{}};
         }
-        const auto frame=g.esp()-0x40;std::array<std::uint32_t,4> previous{};
+        const auto frame=g.esp()-reserve;std::array<std::uint32_t,4> previous{};
         if(!g.read(frame,previous.data(),sizeof previous)){g.stop("device bridge: unreadable call frame");return {false,{}};}
         const std::array<std::uint32_t,4> words={site+6,device->second,state,value};
         if(!g.write(frame,words.data(),sizeof words)){g.stop("device bridge: unwritable call frame");return {false,{}};}
@@ -126,6 +126,48 @@ struct ViewBridge {
 };
 
 std::optional<float> load_float(X86Guest& g,std::uint32_t at){const auto value=g.u32(at);if(!value)return std::nullopt;return floating(*value);}
+std::uint32_t projection_range(HleProcess& p){
+    auto& g=p.guest();RenderBridge bridge(p);NinjaProjectionRangeState state{};
+    const auto negative_one=load_float(g,0x7dcb0c),limit=load_float(g,0x7dce50);
+    if(!negative_one||!limit){g.stop("projection range bridge: missing clamp constants at 7815e4");return 0;}
+    state.negative_one_at_7dcb0c=*negative_one;state.limit_at_7dce50=*limit;
+    state.cache_x_at_3aad0c0=load_float(g,0x3aad0c0);state.cache_y_at_3aad0c4=load_float(g,0x3aad0c4);
+    bool flushed=false;
+    const auto flush=[&]{
+        if(flushed)return;
+        for(const auto& [at,value]:std::array<std::pair<std::uint32_t,std::optional<float>>,5>{{
+            {0x3d0f808,state.near_at_3d0f808},{0x3d0f968,state.far_at_3d0f968},{0x90082c,state.x_at_90082c},
+            {0x3aad0c0,state.cache_x_at_3aad0c0},{0x3aad0c4,state.cache_y_at_3aad0c4}}})if(value)g.write(at,&*value,4);
+        if(state.y_bits_at_900830)g.set_u32(0x900830,*state.y_bits_at_900830);
+        flushed=true;
+    };
+    // Source SUB ESP,40 supplies both COM calls with the same local matrix pointer.
+    // Place the synchronous call frame below that matrix, rather than overwriting it.
+    const auto matrix_address=g.esp()-0x40;
+    NinjaTransformOwner methods;
+    methods.get=[&](std::uint32_t kind)->std::optional<NinjaMatrix>{
+        flush();
+        if(state.near_at_3d0f808)g.write(g.esp()+4,&*state.near_at_3d0f808,4);
+        if(state.far_at_3d0f968)g.write(g.esp()+8,&*state.far_at_3d0f968,4);
+        if(!bridge.render.device_at_3d128b0||!*bridge.render.device_at_3d128b0){g.stop("projection range bridge: missing device at 403207");return std::nullopt;}
+        const auto r=bridge.invoke(*bridge.render.device_at_3d128b0,"GetTransform",0x98,kind,matrix_address,0x403207,0x50);
+        bridge.refresh();NinjaMatrix matrix{};
+        if(!r.completed||!g.read(matrix_address,matrix.data(),64))return std::nullopt;
+        return matrix;
+    };
+    methods.set=[&](std::uint32_t kind,const NinjaMatrix& matrix){
+        if(!g.write(matrix_address,matrix.data(),64)){g.stop("projection range bridge: missing matrix at 403236");return false;}
+        if(!bridge.render.device_at_3d128b0||!*bridge.render.device_at_3d128b0){g.stop("projection range bridge: missing device at 403236");return false;}
+        const auto r=bridge.invoke(*bridge.render.device_at_3d128b0,"SetTransform",0x94,kind,matrix_address,0x403236,0x50);
+        return r.completed;
+    };
+    X87Context fp(static_cast<std::uint16_t>(g.reg(UC_X86_REG_FPCW)));
+    const auto result=ninja_set_projection_range_403180(floating(argument(g,0)),floating(argument(g,1)),state,methods,fp);
+    if(!flushed&&state.y_bits_at_900830)g.set_u32(g.esp()+8,*state.y_bits_at_900830);
+    flush();
+    if(!result&&!g.stop_reason())g.stop("projection range bridge: native boundary "+hex(result.source_boundary));
+    return 0;
+}
 struct FogBridge {
     HleProcess& process;RenderBridge bridge;
     NinjaQueueConsumerState state;NinjaFogDeviceState device;NinjaFogTable table{};std::uint32_t table_address=0x3b10f78;
@@ -195,6 +237,8 @@ struct FogBridge {
 }
 std::vector<OverrideEntry> device_overrides(HleProcess& p){
     std::vector<OverrideEntry> out;
+    out.push_back({0x403180,"ninja_set_projection_range",{{0x3d0f808,4},{0x3d0f968,4},{0x90082c,8},{0x3aad0c0,8}},
+        [&p](X86Guest&)->std::uint32_t{return projection_range(p);}});
     for(const auto address:{0x4030d0U,0x77ec60U}){
         out.push_back({address,address==0x4030d0?"ninja_set_blend":"ninja_set_blend_leaf",
             address==0x4030d0?std::vector<std::pair<std::uint32_t,std::uint32_t>>{{0x3ab9890,1}}:std::vector<std::pair<std::uint32_t,std::uint32_t>>{},

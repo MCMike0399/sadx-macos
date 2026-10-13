@@ -19,6 +19,7 @@ struct Fixture {
     FpuShimStats shims;std::unique_ptr<HleProcess> p;std::uint32_t devices[2]={};std::uint32_t boundary=0;
     bool mapped_blend=true,mapped_device=true;unsigned calls=0,mutation=0,fail_at=0;std::vector<std::array<std::uint32_t,32>> dispatch_observed;std::vector<std::array<std::uint32_t,396>> fog_observed;
     std::vector<std::pair<std::optional<std::uint32_t>,std::optional<std::uint32_t>>> observed;
+    std::vector<std::array<std::uint32_t,6>> range_observed;
     std::uint32_t receipts[2]={};std::uint16_t cw=0x27f;bool argument_mutant=false;
     Fixture(const ExecutableImage& image,bool native){
         std::string error;p=HleProcess::create(".","build/device-bridge-overlay",&error);require(p!=nullptr,error);require(p->map_main(image,&error),error);
@@ -48,6 +49,20 @@ struct Fixture {
             return index<2?receipts[index]:result;
         };
         p->hle().add("com:IDirect3DDevice8","SetRenderState",state);
+        for(const auto* name:{"GetTransform","SetTransform"}){
+            auto method=*p->hle().find("com:IDirect3DDevice8",name);const auto transform_body=method.body;
+            method.body=[this,transform_body,name](HleCall& c){
+                std::array<std::uint32_t,6> snapshot{};const std::uint32_t addresses[6]={0x3d0f808,0x3d0f968,0x90082c,0x900830,0x3aad0c0,0x3aad0c4};
+                for(unsigned k=0;k<6;++k)snapshot[k]=c.guest.u32(addresses[k]).value_or(0);range_observed.push_back(snapshot);
+                const auto result=transform_body(c);
+                if(std::string(name)=="GetTransform"){
+                    if(mutation==1)c.guest.set_u32(0x3d128b0,devices[1]);
+                    if(fail_at==1)c.guest.stop("backend unavailable");
+                    return receipts[0];
+                }
+                return result;
+            };p->hle().add("com:IDirect3DDevice8",name,method);
+        }
         for(const auto at:{0x77ecb7U,0x77eccaU,0x78753aU})
             require(g.add_instruction_hook(at,[this](X86Guest& gg,std::uint32_t pc){if(boundary==pc)gg.stop("declared port boundary");return false;},&error),error);
         if(native)for(auto entry:device_overrides(*p)){
@@ -64,7 +79,7 @@ struct Fixture {
         if(!mapped_device){require(g.map(0x3d12000,4096,false,&e),e);mapped_device=true;}
         if(!blend_known){require(g.unmap(0x3ab9000,4096,&e),e);mapped_blend=false;}
         if(!device_known){require(g.unmap(0x3d12000,4096,&e),e);mapped_device=false;}
-        p->d3d8.transforms.clear();p->d3d8.render_states.clear();p->d3d8.render_calls=0;p->hle().clear_log();calls=0;observed.clear();dispatch_observed.clear();fog_observed.clear();boundary=mutation=fail_at=0;argument_mutant=false;cw=0x27f;receipts[0]=receipts[1]=0;
+        p->d3d8.transforms.clear();p->d3d8.render_states.clear();p->d3d8.render_calls=0;p->hle().clear_log();calls=0;observed.clear();range_observed.clear();dispatch_observed.clear();fog_observed.clear();boundary=mutation=fail_at=0;argument_mutant=false;cw=0x27f;receipts[0]=receipts[1]=0;
     }
 };
 void compare(Fixture& a,Fixture& b,std::uint32_t entry,const std::vector<std::uint32_t>& args,bool mutant=false){
@@ -174,6 +189,26 @@ int main(int argc,char** argv){try{
         for(const auto& [state,matrix]:original.p->d3d8.transforms){const auto found=native.p->d3d8.transforms.find(state);require(found!=native.p->d3d8.transforms.end()&&std::memcmp(matrix.data(),found->second.data(),64)==0,"transform device matrix bits");}
         if(entry==0x781250)++view_cases;else ++projection_cases;
     }
+    const auto range=corpus(std::string(argv[2])+"/projection_range.cases.bin",23);
+    std::size_t range_cases=0;
+    const auto check_range=[&](const std::uint32_t* c,bool mutant){
+        for(auto* f:{&original,&native}){
+            f->reset();auto& g=f->p->guest();g.set_u32(0x3d128b0,f->devices[0]);g.set_u32(0x3aad0c0,c[2]);g.set_u32(0x3aad0c4,c[3]);
+            g.set_u32(0x7dcb0c,c[5]);g.set_u32(0x7dce50,c[6]);
+            NinjaMatrix matrix{};std::memcpy(matrix.data(),c+7,64);f->p->d3d8.transforms[3]=matrix;
+            f->mutation=range_cases%100==0?1:0;f->fail_at=range_cases%200==0?1:0;f->receipts[0]=range_cases%50==0?0x80004005U:0;
+        }
+        native.argument_mutant=mutant;
+        const auto a=original.p->guest().call(0x403180,{c[0],c[1]},std::nullopt,std::nullopt,static_cast<std::uint16_t>(c[4]));
+        const auto b=native.p->guest().call(0x403180,{c[0],c[1]},std::nullopt,std::nullopt,static_cast<std::uint16_t>(c[4]));
+        require(a.completed==b.completed,"range completion");
+        for(const auto at:{0x3d0f808U,0x3d0f968U,0x90082cU,0x900830U,0x3aad0c0U,0x3aad0c4U})require(original.p->guest().u32(at)==native.p->guest().u32(at),"range globals case "+std::to_string(range_cases));
+        require(original.range_observed==native.range_observed,"range stores before COM");
+        const auto& l=original.p->hle().log();const auto& r=native.p->hle().log();require(l.size()==r.size(),"range COM count");
+        for(unsigned k=0;k<l.size();++k)require(l[k].dll==r[k].dll&&l[k].symbol==r[k].symbol&&l[k].return_address==r[k].return_address&&l[k].arguments==r[k].arguments&&l[k].result==r[k].result,"range COM pointers/receipt");
+        require(std::memcmp(original.p->d3d8.transforms[3].data(),native.p->d3d8.transforms[3].data(),64)==0,"range matrix bits");
+    };
+    for(std::size_t i=0;i<range.size();i+=23){check_range(range.data()+i,false);++range_cases;}
     unsigned caught=0;
     for(const auto entry:{0x4030d0U,0x77ec60U,0x7949b0U}){
         for(auto* f:{&original,&native}){f->reset();const std::uint8_t zero=0;f->p->guest().write(0x3ab9890,&zero,1);f->p->guest().set_u32(0x3d128b0,f->devices[0]);f->p->guest().set_u32(0x3d12898,0);f->p->guest().set_u32(0x3d128a4,1);}
@@ -229,11 +264,25 @@ int main(int argc,char** argv){try{
         if(differs)++caught;
     }
     require(caught==10,"fog generation/switch mutants not caught");
+    bool range_mutant_caught=false;
+    for(std::size_t i=0;i<range.size()&&!range_mutant_caught;i+=23){try{check_range(range.data()+i,true);}catch(const std::exception&){range_mutant_caught=true;}}
+    require(range_mutant_caught,"range argument mutant not caught");
     native.reset();native.p->guest().set_u32(0x3d128b0,native.devices[0]);
     const auto vtable=native.p->guest().u32(native.devices[0]);require(vtable.has_value(),"vtable");
     native.p->guest().set_u32(*vtable+0xc8,0x10000000);
     const auto rejected=native.p->guest().call(0x77ec60,{0,2});
     require(!rejected&&rejected.error.find("non-HLE")!=std::string::npos&&native.calls==0,"foreign device target not rejected");
-    std::cout<<"Device bridge: "<<blend_cases<<" blend wrapper/leaf and "<<fog_cases<<" fog-colour oracle cases equivalent; identical globals, HLE device states and COM traces/HRESULTs; unknown/null/live-changing devices and declared boundaries verified; 10 bridge input mutants caught; foreign vtable rejected; "<<view_cases<<" view and "<<projection_cases<<" projection cases equivalent; "<<fog_init_cases<<" fog init and "<<fog_table_cases<<" table cases ("<<fog_explicit<<" declared table boundaries); "<<fog_generate_cases<<" generate, "<<fog_switch_cases<<" switch cases\n";
+    for(const auto offset:{0x98U,0x94U}){
+        native.reset();auto& g=native.p->guest();g.set_u32(0x3d128b0,native.devices[0]);g.set_u32(0x3aad0c0,0);g.set_u32(0x3aad0c4,0);
+        const auto target=g.u32(*vtable+offset);require(target.has_value(),"transform target");g.set_u32(*vtable+offset,0x10000000);
+        const auto bad=g.call(0x403180,{0xc0000000,0xc2c80000});
+        require(!bad&&bad.error.find("non-HLE")!=std::string::npos,"foreign transform not rejected");g.set_u32(*vtable+offset,*target);
+    }
+    native.reset();auto& g=native.p->guest();g.set_u32(0x3d128b0,0);g.set_u32(0x3aad0c0,0xc0000000);g.set_u32(0x3aad0c4,0xc2c80000);
+    require(bool(g.call(0x403180,{0xc0000000,0xc2c80000}))&&native.p->hle().log().empty(),"unchanged range must skip null device");
+    g.set_u32(0x3aad0c0,0);
+    const auto absent=g.call(0x403180,{0xc0000000,0xc2c80000});
+    require(!absent&&absent.error.find("403207")!=std::string::npos&&g.u32(0x3aad0c0)==0xc0000000&&native.p->hle().log().empty(),"null range device boundary/prefix");
+    std::cout<<"Device bridge: "<<blend_cases<<" blend wrapper/leaf and "<<fog_cases<<" fog-colour oracle cases equivalent; identical globals, HLE device states and COM traces/HRESULTs; unknown/null/live-changing devices and declared boundaries verified; 11 bridge input mutants caught; foreign vtable rejected; "<<view_cases<<" view and "<<projection_cases<<" projection cases equivalent; "<<fog_init_cases<<" fog init and "<<fog_table_cases<<" table cases ("<<fog_explicit<<" declared table boundaries); "<<fog_generate_cases<<" generate, "<<fog_switch_cases<<" switch cases; "<<range_cases<<" projection range cases and its argument mutant\n";
     return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

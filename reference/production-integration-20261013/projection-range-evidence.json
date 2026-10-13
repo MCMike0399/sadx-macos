@@ -1,0 +1,35 @@
+{
+ "entries_added": [
+  "403180"
+ ],
+ "process_entries": 23,
+ "ghidra_evidence_id": "ev_da88117b0c821660b8693037205b7a45cf69cf695efc6ee4c9dea82ae6cc1a8c",
+ "corpus": {
+  "projection_range_cases": 3000,
+  "bridge_mutants_caught": 11,
+  "matrix_pointer": "entry ESP-0x40",
+  "COM_frame": "entry ESP-0x50",
+  "COM_snapshots": "near/far, range scratch, both cache globals"
+ },
+ "oracle": {
+  "verdict": "partial",
+  "store_transform_mismatches": 0,
+  "fp_flag_mismatches": 1251
+ },
+ "runtime": {
+  "boot_identical": true,
+  "controller_900_frames_identical": true,
+  "app_retry_exit_status": 0,
+  "first_app_attempt": "idle AppKit event loop; terminated after gate; retry completed",
+  "screenshot_sha256": "bc1cfbaa30f34f240c7094a5059ffec35138d91e9efd1233c762d048f7d5949e"
+ },
+ "source_sha256": {
+  "src/hle/hle_device_bridge.cpp": "62a039dc9b051bb49b23d538f9e2542b22c91c7ecd607f63ec8e749ca3ba3dfc",
+  "tests/unit/hle_device_bridge.cpp": "e313456d30bd7bb3e7203a3c5abce5dc336e404847994b8fd0ecf518ed73b5f9"
+ },
+ "limits": [
+  "Core oracle remains partial for x87 status.",
+  "Heap/task/queue and other owners plus reviewed goldens unfinished.",
+  "Concurrent host FPS measurement is not a performance comparison."
+ ]
+}

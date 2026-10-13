@@ -2218,3 +2218,40 @@ disable `ev_596bf50293cbf14714447a3d61bb4c14bb0318fd751e06b1f5ff141ff289c462`
   execution support the implementation. This does not claim newly recovered evidence ids.
 * **Open:** screen 403180, heap/task/queue and other owners remain unbound (38 of earlier address-named
   list; enable 411af0 is an additional entry outside that list). Reviewed goldens still unfinished.
+
+## M1 projection-range device override (2026-10-13)
+
+Evidence: `reference/production-integration-20261013/projection-range-123-gate.json`
+(rc 0, 123 native programs, 4 Python tests), `projection-range-evidence.json` in that directory.
+Fresh owned REA/Ghidra `bridge-range-403180`, evidence
+`ev_da88117b0c821660b8693037205b7a45cf69cf695efc6ee4c9dea82ae6cc1a8c`,
+pinned binary SHA 6b0937ca; runner closed successfully.
+
+* **23 process entries:** 403180 now uses the existing native projection-range owner. The source
+  subtracts 0x40 from entry ESP and passes that local matrix to GetTransform at 403207 and
+  SetTransform at 403236. The bridge uses that same guest pointer, with its temporary COM frame
+  at entry ESP-0x50 so it cannot overwrite the matrix. Flushes near/far, scratch range and cache
+  stores before GetTransform, preserves source argument-slot stores and rereads the live device
+  before SetTransform. Foreign/proxy methods and absent devices report source boundaries.
+* **Equivalence:** all 3,000 projection_range corpus cases replayed, including unchanged cache,
+  special floats and rounding modes. Final globals, transform bits, exact COM pointers/return
+  addresses/HRESULTs and range/cache snapshots at both calls match. Test callbacks inject failed
+  Get HRESULTs, backend stops and device changes. Null device is skipped for unchanged range;
+  changed range retains its prefix then stops at 403207. Both foreign Get/Set targets rejected.
+  One additional input mutant caught (11 bridge mutants total). No core port changes.
+* **Oracle:** projection-range rerun: 3,000 cases, zero store/transform mismatches, **partial**
+  for 1,251 x87-status differences. `make oracles-verdict` exits 1 because the inventory still
+  contains partial/fail reports; report tracked with track_reports. Other oracles **not rerun**.
+* **Live gate:** identical 22,030-call boot; range entry fires once before first Present.
+  First 600 overridden digests match. A temporary controller derivative compares plain and
+  23-entry process override boots over all 900 scripted frames; digests, axes/buttons identical,
+  title at 454 and file select after Start at 800. Full intro/title determinism and virtual
+  15.873 ms title cadence remain checked. Measured host 22.1 FPS under concurrent verification
+  load is not a dedicated performance comparison. Temporary source removed. Existing unregistered
+  metal-sprite, metal-sprite-composition, metal-texture and player-task **not run**.
+* **App:** 900-frame --pad 450:0x10,800:0x10 run exits 0 with file-select capture (local/ignored).
+  First attempt stayed idle in the AppKit event loop while the gate ran; stopped that owned process
+  and retried after the gate. Retry completed; no app source changes.
+* **Open:** heap 780f60/780fb0, task/queue and other owners (37 of the earlier address-named list),
+  plus reviewed goldens remain unfinished. 403180 is projection range, correcting the earlier
+  prompt's screen label.
