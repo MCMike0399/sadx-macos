@@ -207,7 +207,7 @@ void register_hle_user32(HleProcess& p){
         const auto s=P->string_at(arg(c,0));if(!s)return 0;auto& m=W.registered_messages[lower(*s)];if(!m)m=W.next_registered_message++;return m;});
     // Devices: the guest machine has no game controllers or HID devices (input reaches the game through the
     // host later); enumerations are empty and per-device functions stop because no device can exist.
-    P->assume("no game controllers or HID devices are attached to the guest machine (SetupAPI/HID enumerations are empty)");
+    P->assume("SetupAPI/HID enumerations are empty; XInput device state is supplied separately by host samples");
     for(const char* name:{"HidD_GetAttributes","HidD_GetSerialNumberString","HidD_GetManufacturerString","HidD_GetProductString","HidD_SetFeature","HidD_GetFeature",
                           "HidD_GetInputReport","HidD_GetIndexedString","HidD_GetPreparsedData","HidD_FreePreparsedData","HidP_GetCaps","HidD_SetNumInputBuffers",
                           "HidD_SetOutputReport","HidP_GetButtonCaps","HidP_GetValueCaps","HidP_MaxDataListLength","HidP_GetData"})
@@ -232,21 +232,13 @@ void register_hle_user32(HleProcess& p){
     r.add("ole32.dll","CoCreateInstance",{20,5,[](HleCall& c)->std::uint32_t{
         std::uint32_t g[4]={};c.guest.read(c.argument(0).value_or(0),g,16);char b[64];std::snprintf(b,sizeof b,"%08x-%08x-%08x-%08x",g[0],g[1],g[2],g[3]);
         c.guest.stop(std::string("CoCreateInstance of CLSID ")+b+" is not modelled");return 0x80004005U;}});
-    // XInput (1_4, 1_3, 9_1_0): no controller is connected to the guest machine.
-    for(const char* dll:{"XInput1_4.dll","XInput1_3.dll","XInput9_1_0.dll"}){
-        const auto none=[](HleCall&)->std::uint32_t{return 1167;}; // ERROR_DEVICE_NOT_CONNECTED
-        r.add(dll,"XInputGetState",{8,2,none});r.add(dll,"XInputSetState",{8,2,none});r.add(dll,"XInputGetCapabilities",{12,3,none});
-        r.add(dll,"XInputGetBatteryInformation",{12,3,none});r.add(dll,"XInputGetKeystroke",{12,3,none});
-        r.add(dll,"#100",{8,2,none});                 // XInputGetStateEx
-        r.add(dll,"#108",{16,4,none});                // XInputGetCapabilitiesEx
-        r.add(dll,"XInputEnable",{4,1,[](HleCall&)->std::uint32_t{return 0;}});}
     r.add("cfgmgr32.dll","CM_Register_Notification",{16,4,[P](HleCall& c)->std::uint32_t{c.guest.set_u32(c.argument(3).value_or(0),P->new_handle());return 0;}}); // CR_SUCCESS
     r.add("cfgmgr32.dll","CM_Unregister_Notification",{4,1,[](HleCall&)->std::uint32_t{return 0;}});
     // WinRT (combase): apartments initialise; activation factories (Windows.Gaming.Input…) are not provided.
     r.add("combase.dll","RoInitialize",{4,1,[](HleCall&)->std::uint32_t{return 0;}});
     r.add("combase.dll","RoUninitialize",{0,0,[](HleCall&)->std::uint32_t{return 0;}});
     r.add("combase.dll","RoGetActivationFactory",{12,3,[P](HleCall&)->std::uint32_t{
-        P->assume("WinRT activation factories (Windows.Gaming.Input) are not provided: RoGetActivationFactory returns REGDB_E_CLASSNOTREG; with no controllers attached the game sees no difference");
+        P->assume("WinRT activation factories (Windows.Gaming.Input) are not provided: RoGetActivationFactory returns REGDB_E_CLASSNOTREG; the synthetic XInput path is modelled separately");
         return 0x80040154U;}});
     r.add("combase.dll","WindowsCreateStringReference",{16,4,[](HleCall& c)->std::uint32_t{
         // HSTRING_HEADER (20 bytes): flags 1 (reference), length, padding, the buffer pointer; the HSTRING is the header address.

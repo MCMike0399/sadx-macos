@@ -45,7 +45,7 @@ const execute=async command=>{
 };
 try{
   let exists=false;try{await access(snapshot);exists=true;}catch(e){if(e.code!=='ENOENT')throw e;}
-  await call('open_binary',{path:resolve('game/Sonic Adventure DX/sonic.exe'),provider_id:'ghidra',
+  await call('open_binary',{path:resolve(config.binary_path??'game/Sonic Adventure DX/sonic.exe'),provider_id:'ghidra',
     ...(exists?{snapshot_path:snapshot}:{})},'open');opened=true;
   console.log('READY: send JSON {tool,args,label}; {tool:"export"} retains a bundle; {tool:"close"} closes the owned provider.');
   for await(const line of lines){

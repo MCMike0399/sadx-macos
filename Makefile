@@ -109,6 +109,9 @@ controllers: all
 # Apple make 3.81 picks the first matching pattern rule: the guest rule must precede the generic one.
 build/guest-%-test: tests/unit/guest_$$(subst -,_,$$*).cpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -I$(UNICORN_DIR)/include $< $(GUEST_LINK) build/libsadx-core.a -o $@
+# HLE module tests use the same guest CPU/import boundary as guest-* tests.
+build/hle-%-test: tests/unit/hle_$$(subst -,_,$$*).cpp build/libsadx-guest.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -I$(UNICORN_DIR)/include $< $(GUEST_LINK) build/libsadx-core.a -o $@
 # Tests named mac-* / metal-* exercise src/platform/mac and link that archive too.
 build/mac-%-test: tests/unit/mac_$$(subst -,_,$$*).cpp build/libsadx-macos.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/libsadx-macos.a build/libsadx-core.a $(MAC_FRAMEWORKS) -o $@

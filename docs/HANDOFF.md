@@ -1928,3 +1928,53 @@ REA/Ghidra: 78cfa0 `ev_8ab0f003a0d4f2c57e21a7ccf90c4c5b85a68c4d736aefe9731da3eb4
   unported owners. This aligns the platform fact and does not prove native title execution. Controllers,
   remaining override equivalence and reviewed golden frames remain in NEXT-AGENT-PROMPT.md.
   REA's close reported a process-ownership cleanup error; the cited PID was already absent on a direct ps check.
+
+## M1 controller foundation: XInput API and pinned SDL detection boundary (2026-10-13)
+
+Evidence: `reference/production-integration-20261013/xinput-foundation-117-gate.json` (rc 0,
+119 native programs, 4 Python tests). **Controller delivery is unfinished; SDL still sees zero joysticks.**
+
+* **`hle_xinput`** now owns a synthetic wired pad at user 0. Host `xinput.sample(optional gamepad)`
+  changes a deterministic packet counter; polling leaves it unchanged. XInputGetState writes its 16-byte
+  wire value (standard buttons, separate 8-bit triggers, four signed 16-bit sticks); ordinal 100 uses
+  the same layout with Guide. GetCapabilities writes a 20-byte standard-gamepad capability record,
+  with no voice/vibration actuators. Enable/disable returns neutral controls when disabled. Battery
+  type is wired; reference device identity and packet policy are assumptions, not captured facts.
+  Disconnected users return 1167 without changing output or LastError. Connected unsupported keystrokes,
+  extended identity and invalid output buffers stop explicitly. Vibration returns reported ERROR_NOT_SUPPORTED.
+* **Tests:** `hle-xinput-test` (new HLE link rule, registered in the gate) checks three DLL aliases,
+  connection/disconnection, packet changes, signed axes, trigger changes, wire layouts/guard bytes,
+  Guide distinction, enable/disable, battery, preserved LastError and named invalid-buffer failure.
+  Updated the obsolete unconditional no-controller assumption to describe empty SetupAPI/HID enumerations
+  separately from XInput host samples. The unit test does not prove SDL or game input delivery.
+* **Actual pinned SDL2:** Input mod's `SDL2.dll` SHA 25003b5bb2bda0d5b558d357cd8eb6c96fa20d776b815950b46ff3444791d1cf,
+  loaded at 6c940000. A temporary connected-pad fixture booted to 100 Presents without a thread failure,
+  but no XInputGetCapabilities call occurred and real SDL_NumJoysticks returned **0**. Export 6c970540
+  dispatches through 6ca7d3f8 to real implementation 6c988580; SDL_InitSubSystem similarly dispatches
+  through 6ca7d1c8 to 6c941830. These dynamic API thunks must be followed for analysis.
+* **Why XInput alone is insufficient:** 6ca6f120 enables SDL_JOYSTICK_RAWINPUT by default and sets
+  6cb4fb64=1 even when GetRawInputDeviceList returns zero devices (live return site 6ca6f18a).
+  6ca70900 returns that flag; 6ca73cf0 then clears classic XInput's enabled flag 6ca92b24.
+  The actual XInput DLL loader 6ca57b20 resolves ordinal 100, SetState, GetCapabilities and battery.
+  Raw attach 6ca6e6e0 requires a type-2 raw device, an ANSI path containing `IG_`, its device info and
+  preparsed data, a successful device CreateFile and HID manufacturer/product strings. It registers
+  a joystick only after those steps. Implement the virtual HID/raw-input facade and WM_INPUT path;
+  changing SDL hints would bypass the pinned profile. Host framework sampling/replay are still needed.
+* **REA/Ghidra** via the owned runner, which now accepts optional `config.binary_path` while preserving
+  the sonic.exe default. `reference/ghidra-sdl-config.json` and its unseeded SDL environment are committed;
+  raw results and snapshot are ignored. Results live in `reference/sdl-controller-recovery/`:
+  raw init `ev_80b62858b37614d5515fb9cf5fdcea798adba496df27539a19b4c4e43b50edca`,
+  raw-enabled flag `ev_51aa81673fc5c6a9b9af9604bd2224496bc0de5f122dd26bcaa561246f766464`,
+  XInput init `ev_96d1425dba8a090089fdf5553da1cfdcca60021e34c2e8d149184cccb86a35d1`,
+  raw attach `ev_fa7f15ffef8c847e771808a15163fa439d9d0fb9f3dcae747fb76c933c13bbbc`.
+  Session closed successfully. Temporary diagnostic source removed.
+* **SDK contracts consulted:** [GetState](https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputgetstate),
+  [gamepad](https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_gamepad),
+  [capabilities](https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_capabilities),
+  [enable](https://learn.microsoft.com/en-us/windows/win32/api/xinput/nf-xinput-xinputenable),
+  [battery](https://learn.microsoft.com/en-us/windows/win32/api/xinput/ns-xinput-xinput_battery_information).
+* **Gate/limits:** full title two-boot digests and first 600 override frames remain identical, 63 FPS
+  virtual title timing, measured 82.1 host FPS, keyboard replay and Metal smoke pass. No standalone
+  oracles rerun (HLE/build/analysis only). Existing unregistered metal-sprite, metal-sprite-composition,
+  metal-texture and player-task tests were **not run**. Controllers, remaining overrides and reviewed
+  golden frames remain open. No SDL hint was changed and no controller replay is claimed.

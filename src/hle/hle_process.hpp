@@ -1,6 +1,7 @@
 #pragma once
 #include "hle/hle_modules.hpp"
 #include "hle/hle_user32.hpp"
+#include "hle/hle_xinput.hpp"
 #include "runtime/game_runtime.hpp"
 #include <cstdio>
 #include <map>
@@ -37,6 +38,7 @@ public:
     // repeat flag when already down) is posted to the focus window (else the active one), as Windows' raw input thread
     // would. The guest reads it through its message loop (the Input mod's window subclass) and Get*KeyState.
     void host_key(std::uint32_t virtual_key,bool down);
+    HleXInputState xinput; // host samples; SDL polls the guest XInput API
     void assume(const std::string& a){if(assumed_.insert(a).second)assumptions.push_back(a);}
     // Virtual time: 100 ns units since the virtual boot. QueryPerformanceCounter is 10 MHz on the same
     // count; each query advances it by 1 µs and Sleep(ms) by ms, so runs are deterministic.
