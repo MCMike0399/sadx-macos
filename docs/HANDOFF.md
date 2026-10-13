@@ -1850,3 +1850,42 @@ Evidence: gate `reference/production-integration-20261012/overrides-input-114-ga
   app-smoke — exactly the roadmap's M1 tests.
 * **Not done:** controllers (SDL2's XInput/HID backends see no device), the title-screen frame time (~19.5 ms),
   the native runtime's caps (see the previous entry), M2 golden frames. docs/NEXT-AGENT-PROMPT.md lists them.
+
+## M1 timing investigation: title cadence, attract multipliers, loading Presents (2026-10-13)
+
+Evidence: gate `reference/production-integration-20261013/guest-timing-115-gate.json` (rc 0,
+116 native programs, 4 Python tests); `reference/production-integration-20261013/guest-timing-investigation.json`.
+REA/Ghidra: Speedrun +10f0 `ev_9c9c4f7b4061790ef99d538693b1de5a0322743e2323bd730b9d70aefb6db0ee`;
+411e30 `ev_6493ad0e3b555a150d66f041007da76146e34a7201ee77e3a256d5530fe3b75c`;
+7899e0 `ev_7735b5e0e5f2548dfdd3ebff2a5cb26c6c3035c22c5bee25ffe415efb45c2d5b`
+(results in `reference/inventory-raw/timing-*`).
+
+* **The old ~19.5 ms title report was not reproduced.** Both the full intro and the keyboard-skipped intro
+  give steady title frames of 158,730 virtual 100 ns ticks (15.873 ms, 63 FPS). The first title transition
+  after the full movie is 158,740 ticks; `guest-frames` now asserts the next 60 frames individually. Its
+  two 7,228-frame boots still have identical digests; the first 600 also match with the overrides installed.
+  This gate measured 76.9 host FPS. No clock/HLE/ported behaviour was changed.
+* **A Present is not necessarily one limiter invocation.** 411e30 writes 3b11188 (FrameMultiplier);
+  Speedrun +10f0 waits `multiplier * QPF / cadence`, with cadence 63. Attract gameplay uses multiplier 2:
+  317,460 ticks (31.746 ms) per steady Present. Loading contains multiple limiter waits between Presents;
+  the unskipped diagnostic's attract loading frame 7,658 spans 5,555,550 ticks (555.555 ms).
+  On return to title the multiplier can change AFTER the last wait and BEFORE Present: checking the
+  multiplier at Present incorrectly attributes the transition. Capture the multiplier during the wait.
+* **`guest-timing-test`**, in the gate and `make m1`: one 1,100-frame boot, Enter at 450/455, title -> attract
+  -> title. Wraps the real QPC body while preserving results; identifies the limiter caller by the loaded
+  Speedrun base +115b, compares each terminal sample to its live multiplier/frequency interval within one
+  QPC step, and attributes every post-first-Present virtual tick to the recorded counter reads. Checks
+  435 title +77 returned-title samples at 15.873 ms, 77 multiplier-2 attract samples at 31.746 ms, and
+  observes up to 18 limiter waits per loading Present. Stable title: 15,872 limiter reads +1 other QPC;
+  stable attract: 31,745 +1. The original assertion failure on the return transition prompted the live
+  multiplier capture, preserving that transition's coverage.
+* **Red check:** a temporary QPF wrapper writes 12,300,000 after Present 500 instead of 10,000,000, with
+  the same 1 us counter step. The test exits 1 at frame 501: `Present with one limiter wait has wrong
+  cadence at frame 501: 195240` (19.524 ms). Restored the real test binary before the passing gate;
+  temporary diagnostic/mutant sources were removed. The small investigation report retains the results.
+* **Limits:** the historical measurement's scope is unavailable, so its provenance/cause remains unknown;
+  averaging title, attract and loading frames is not a steady-title measurement. The 1 us/QPC model is
+  still a reported assumption, not proof of Windows wall-time or gameplay trace parity. Controllers,
+  the remaining override owners, native caps alignment and reviewed golden frames remain unfinished.
+  Standalone oracles were not rerun (tests/build/docs only); the gate replayed the existing 40,279-case
+  override suite and caught all 12 mutants. The Metal app smoke check passed.

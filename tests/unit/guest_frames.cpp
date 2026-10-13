@@ -14,6 +14,7 @@
 #include <chrono>
 #include <cstdlib>
 #include <cstring>
+#include <algorithm>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -70,6 +71,11 @@ int main(int argc,char** argv){try{
     for(const auto& [frame,mode]:a.modes){if(mode==1&&!logo)logo=frame;else if(mode==8&&logo&&!movie)movie=frame;else if(mode==12&&movie&&!title)title=frame;}
     require(logo&&movie&&title,"GameMode goes Logo -> Movie -> Menu:"+modes.str());
     require(a.empty_frames==0,std::to_string(a.empty_frames)+" frames with an empty D3D8 stream");
+    // Keep the full movie path's steady title cadence separate from transition/loading frames.
+    const auto title_samples=std::min<std::size_t>(extra,60);
+    require(title_samples>0,"at least one post-title timing sample is required");
+    for(std::size_t frame=title+1;frame<=title+title_samples;++frame)
+        require(a.frame_time_100ns.at(frame-2)==158730,"full-intro title cadence is not 63 FPS at frame "+std::to_string(frame));
     const auto b=run(argv[1],argv[2],extra);
     require(b.stop=="frames done","the second boot stopped after "+std::to_string(b.digests.size())+" frames: "+b.stop);
     require(b.digests==a.digests,"a second boot produces different frame digests");
@@ -82,6 +88,6 @@ int main(int argc,char** argv){try{
     const double frame_ms=n?sum/n/10000.0:0;
     std::ostringstream fps;fps<<std::fixed<<std::setprecision(1)<<static_cast<double>(a.digests.size()-1)/a.seconds;
     std::cout<<"Guest frames: "<<a.digests.size()<<" frames, SEGA logo -> intro movie -> title (logo at frame "<<logo<<", movie at "<<movie<<", title at "<<title<<"; GameMode"<<modes.str()<<"), every frame non-empty, identical digests on two boots and on the first 600 with the override table installed; guest FPS "<<fps.str()
-             <<" (host, boot excluded); virtual frame time on the logo "<<std::setprecision(3)<<frame_ms<<" ms ("<<std::setprecision(2)<<(frame_ms>0?1000/frame_ms:0)<<" fps under the Speedrun limiter); "<<a.hle_calls<<" HLE calls\n";
+             <<" (host, boot excluded); virtual frame time on the logo "<<std::setprecision(3)<<frame_ms<<" ms ("<<std::setprecision(2)<<(frame_ms>0?1000/frame_ms:0)<<" fps under the Speedrun limiter); "<<a.hle_calls<<" HLE calls; "<<title_samples<<" full-intro title frames at 15.873 ms (63 FPS)\n";
     return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

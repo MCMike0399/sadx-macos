@@ -1,0 +1,39 @@
+{
+ "scope": "NEXT-AGENT-PROMPT timing investigation; deterministic virtual clock, not Windows wall time",
+ "test_source_sha256": "20dd92138b5e1ee42fece5bc81712e496171f25af2a4cdb620c889ed3e0d8fdf",
+ "test_command": "./build/guest-timing-test reference/updated-pc-reference/game reference/windows-system",
+ "baseline": {
+  "exit_status": 0,
+  "frames": 1100,
+  "title_samples": 435,
+  "returned_title_samples": 77,
+  "title_frame_ticks_100ns": 158730,
+  "multiplier_2_attract_samples": 77,
+  "attract_frame_ticks_100ns": 317460,
+  "maximum_limiter_waits_per_present": 18
+ },
+ "mutant": {
+  "change": "QPF writes 12,300,000 instead of 10,000,000 after Present 500; QPC advance remains 10 ticks per query",
+  "exit_status": 1,
+  "output": "Present with one limiter wait has wrong cadence at frame 501: 195240"
+ },
+ "unskipped_diagnostic": {
+  "frames": 7800,
+  "first_title_frame": 7168,
+  "first_title_frame_ticks_100ns": 158740,
+  "steady_title_frame_ticks_100ns": 158730,
+  "attract_loading_frame": 7658,
+  "loading_frame_ticks_100ns": 5555550,
+  "steady_attract_frame_ticks_100ns": 317460
+ },
+ "ghidra_evidence": [
+  "ev_9c9c4f7b4061790ef99d538693b1de5a0322743e2323bd730b9d70aefb6db0ee",
+  "ev_6493ad0e3b555a150d66f041007da76146e34a7201ee77e3a256d5530fe3b75c",
+  "ev_7735b5e0e5f2548dfdd3ebff2a5cb26c6c3035c22c5bee25ffe415efb45c2d5b"
+ ],
+ "limits": [
+  "Historical 19.5 ms title report not reproduced; original measurement scope unavailable.",
+  "The fixed 1 us/QPC model is an assumption; no Windows wall-clock trace comparison.",
+  "No controller or gameplay timing parity is claimed."
+ ]
+}

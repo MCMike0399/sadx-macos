@@ -10,7 +10,7 @@ by automated tests. Read AGENTS.md, then docs/STATUS.md, docs/ARCHITECTURE.md, d
 docs/METHOD.md and docs/decisions/ADR-0001..0004 before touching code. Read the last handoff entries
 in docs/HANDOFF.md (from "M1 4e completion" on) — they record every HLE assumption and bug found.
 
-Where things stand (gate 114): the in-process guest runs sonic.exe from its entry point with the real
+Where things stand (gate 115): the in-process guest runs sonic.exe from its entry point with the real
 mod loader and mods (MSVCP140/VCRUNTIME140 as real code, everything else HLE in src/hle) from the SEGA
 logo through the intro movie (a headless DirectShow graph, src/hle/hle_dshow: no video/audio drawn, a
 reported assumption) to the title screen (frame 7168) and on into the attract demo; two boots are
@@ -22,6 +22,14 @@ profile-applied is 119/119. The override table binds 12 owners (frame loop, star
 D3DX math leaves), equivalence-tested on 6 oracle corpora + enumerated cases with mutants, live in the
 boot and over 600 frames. `make m1` runs exactly the roadmap's M1 tests.
 
+Timing is now checked: guest-frames asserts 60 steady title frames after the full intro at
+15.873 ms (63 FPS); guest-timing scripts a movie skip, then follows title -> attract -> title.
+Attract uses FrameMultiplier 2 (31.746 ms per Present); loading can contain many limiter waits
+before one Present. Every observed limiter wait matches multiplier*10 MHz/63, and every
+virtual tick after boot is accounted for by QPC reads (1 us per query). The old ~19.5 ms
+title report was not reproduced; its measurement scope is unavailable. Windows wall-time
+fidelity remains unverified: keep the QPC-step model reported as an assumption.
+
 Current milestone: M1 — what is left (one gate each: make -j10 gate — it opens a window for app-smoke;
 record with tools/gate/record_gate.py only on rc=0; python3 tools/gate/gen_status.py; a docs/HANDOFF.md
 entry; commit; do not push unless asked):
@@ -30,19 +38,16 @@ entry; commit; do not push unless asked):
    HLE reports none connected). Model one XInput pad (XInputGetState/GetCapabilities for user 0, and
    whatever SDL's detection needs: device notifications, its joystick thread) fed from the host
    (GameController framework in sadx-app; an input script in a test).
-2. The title screen's virtual frame time is ~19.5 ms (51 fps) against 15.9 ms on the logo; all virtual
-   time comes from the Speedrun limiter's QPC polling (213c115b). Find why (frame work vs the limiter's
-   interval, the 1 µs-per-query counter model) before trusting gameplay timing.
-3. Override equivalence for the rest of the ported owners with oracles (46 address-named ones are
+2. Override equivalence for the rest of the ported owners with oracles (46 address-named ones are
    unbound: see the 4d handoff entry for the list). Next: the D3D-device users (781250, 791170, 403180,
    fog 7949b0/794e40/794ec0, 77ec60) need a guest-device bridge (the HLE IDirect3DDevice8 as the
    native NinjaRenderState/transform owner callbacks); then heaps (780f60/780fb0), the task graph and
    the render queue. Give each oracle a <slug>.cases.bin (the verify scripts write it; add it to
    OVERRIDE_CORPORA) instead of enumerating cases.
-4. The native runtime (game_runtime.cpp) still declares only D3DPRASTERCAPS_WFOG; with those caps the
+3. The native runtime (game_runtime.cpp) still declares only D3DPRASTERCAPS_WFOG; with those caps the
    title screen's mipmapped PVRs hit the fatal 789dd0 (see the 4f entry). Align it with the guest's
    caps assumption.
-5. M2 golden-frames: offscreen render of fixed guest frames (SEGA logo, title screen, file select)
+4. M2 golden-frames: offscreen render of fixed guest frames (SEGA logo, title screen, file select)
    against reviewed goldens (perceptual diff), using sadx-app --guest --keys/--screenshot.
 
 Performance notes: never pass an instruction count to uc_emu_start (Unicorn then instruments every
