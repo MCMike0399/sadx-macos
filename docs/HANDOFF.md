@@ -1642,3 +1642,26 @@ The HLE's reported assumptions at the first Present (from `HleProcess::assumptio
 Limits: nothing is drawn (the D3D8 stream is recorded only; step 5); no host input or audio; window message
 order is modelled on Windows' documented sequence, not traced; the game has not completed a frame in the guest
 yet (4d–4f: overrides, FPU shims, frames/determinism/FPS).
+
+## M1 4d: the override table and override-equivalence (2026-10-13)
+
+Evidence: gate `reference/production-integration-20261012/guest-overrides-108-gate.json` (rc 0); tests
+`guest-overrides` and `guest-boot` (both in the gate).
+
+* `src/guest/override_table.{hpp,cpp}`: `OverrideEntry {address, name, writes, bridge}` and
+  `frame_loop_overrides(image)` with the first four bridges — 7899a0 `set_game_frame_multiplier`, 7815e0
+  `ninja_clamp_projection_range_7815e0`, 7815c0 `ninja_set_fov_7815c0`, 781570 `ninja_view_init_781570`. A
+  bridge loads the owner's `*_at_<hex>` globals and stack arguments from guest memory, runs the port with the
+  guest's x87 control word, writes the globals back and returns the pop count; a failing port stops the guest
+  at its boundary.
+* `tests/unit/guest_overrides.cpp`: two guests with the same image and randomised globals (each function's
+  oracle input classes: thresholds −1/−65535, signs, ±0, the six control words, odd/negative angles, any
+  frequency) run the same call through the original bytes and through the override; every declared write range
+  must match. 6,010 cases, all equivalent. Mutants: a wrong camera angle in 781570 and an inverted threshold
+  comparison in 7815e0 are both caught.
+* In the live game: `guest-boot` boots a third time with the table installed — identical HLE call log and
+  identical bytes in every override's write ranges at the first Present; every override fires (7899a0 three
+  times, the others once).
+* Limits: only four of the ported owners are bound; owners whose state includes native identities (heaps,
+  devices, task graphs) need state bridges that map guest objects to native owners — the next ones to do.
+  The oracles' case files are not decoded (each has its own format); the equivalence cases are regenerated.

@@ -6,6 +6,7 @@
 // WinMain-time loader patch is written except the 8 HUD-scaling sites applied after the first frame; nothing
 // outside the inventory's active ranges is written; and a second boot is identical (call log, D3D8 state).
 //   guest-boot-test GAME_DIR WINDOWS_SYSTEM_DIR
+#include "guest/override_table.hpp"
 #include "hle/hle_process.hpp"
 #include <cstring>
 #include <fstream>
@@ -17,7 +18,7 @@ namespace {
 using namespace sadx;
 void require(bool ok,const std::string& why){if(!ok)throw std::runtime_error(why);}
 struct Boot {std::unique_ptr<HleProcess> process;GuestCallResult result;};
-Boot boot(const std::string& dir,const std::string& system,const std::string& overlay){
+Boot boot(const std::string& dir,const std::string& system,const std::string& overlay,std::map<std::string,std::size_t>* fired=nullptr){
     std::ifstream f(dir+"/sonic.exe",std::ios::binary);require(bool(f),"cannot read "+dir+"/sonic.exe");
     std::string error;const auto image=ExecutableImage::parse({std::istreambuf_iterator<char>(f),{}},&error);require(bool(image),error);
     std::filesystem::remove_all(overlay);
@@ -25,6 +26,9 @@ Boot boot(const std::string& dir,const std::string& system,const std::string& ov
     b.process->use_real_cpp_runtime(system);
     require(b.process->map_main(*image,&error),"map sonic.exe: "+error);
     b.process->on_present=[](X86Guest& g){g.stop("first Present");};
+    if(fired)for(auto entry:frame_loop_overrides(*image)){ // the override table, counting how often each fires
+        auto bridge=entry.bridge;const auto name=entry.name;
+        require(b.process->guest().add_override(entry.address,[bridge,name,fired](X86Guest& g){++(*fired)[name];return bridge(g);},&error),error);}
     b.result=b.process->guest().call(0x643f96,{});
     return b;
 }
@@ -81,8 +85,22 @@ int main(int argc,char** argv){try{
     for(std::size_t i=0;i<p.hle().log().size();++i){const auto& a=p.hle().log()[i];const auto& b=q.hle().log()[i];
         require(a.dll==b.dll&&a.symbol==b.symbol&&a.arguments==b.arguments&&a.result==b.result&&a.return_address==b.return_address,"HLE call "+std::to_string(i)+" differs between boots ("+a.symbol+")");}
     require(q.d3d8.render_states==p.d3d8.render_states&&q.d3d8.stage0_states==p.d3d8.stage0_states&&q.d3d8.presents==p.d3d8.presents,"the same D3D8 state");
+    // In-game override equivalence: a boot with the override table installed issues the same HLE calls and leaves
+    // the same bytes in every override's write ranges at the first Present.
+    std::map<std::string,std::size_t> fired;
+    auto third=boot(argv[1],argv[2],"build/guest-boot-overlay",&fired);auto& o=*third.process;
+    require(!third.result&&third.result.error=="first Present","the boot with overrides reaches the first Present: "+third.result.error);
+    require(o.hle().log().size()==p.hle().log().size(),"the same number of HLE calls with the overrides installed");
+    for(std::size_t i=0;i<p.hle().log().size();++i){const auto& a=p.hle().log()[i];const auto& b=o.hle().log()[i];
+        require(a.symbol==b.symbol&&a.arguments==b.arguments&&a.result==b.result,"HLE call "+std::to_string(i)+" differs with the overrides ("+a.symbol+")");}
+    std::ifstream exe(std::string(argv[1])+"/sonic.exe",std::ios::binary);std::string why;
+    const auto image=ExecutableImage::parse({std::istreambuf_iterator<char>(exe),{}},&why);
+    std::ostringstream counts;
+    for(const auto& entry:frame_loop_overrides(*image)){
+        for(const auto& [at,size]:entry.writes)require(hex_bytes(p.guest(),at,size)==hex_bytes(o.guest(),at,size),entry.name+": different bytes at the first Present");
+        counts<<entry.name<<" x"<<fired[entry.name]<<" ";}
     std::cout<<"Guest boot: entry point to the first Present in the guest ("<<p.hle().log().size()<<" HLE calls, identical on a second boot); windows "
              <<p.windows.windows.size()<<" (borderless 646x509 wrapper, 640x480 game); "<<(active-pending.size())<<" of "<<active
-             <<" active patch sites written, the 8 HUD-scaling ones pending; "<<p.assumptions.size()<<" HLE assumptions reported\n";
+             <<" active patch sites written, the 8 HUD-scaling ones pending; "<<p.assumptions.size()<<" HLE assumptions reported; with the override table installed the boot is identical (fired: "<<counts.str()<<")\n";
     return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}
