@@ -51,11 +51,30 @@ public:
     // stack whose top holds the stop address. Registers other than ESP/EBP keep their values.
     GuestCallResult run(std::uint32_t from,std::uint32_t until,std::uint16_t x87_control_word=0x27f,std::uint64_t instruction_limit=50'000'000);
     bool add_override(std::uint32_t address,Override,std::string* error);
+    // From inside an override: instead of returning to the caller now, call the guest function
+    // `target` with `arguments` (pushed right-to-left); when it returns (either convention), the
+    // stack is put back where the override's caller expects it (its own `pops` bytes removed) and
+    // `then` runs. `then` sets the results (EAX…) and may redirect again (a chain of guest calls,
+    // e.g. _initterm); when it does not, the guest returns to the override's caller.
+    using Continuation=std::function<void(X86Guest&)>;
+    void redirect(std::uint32_t target,const std::vector<std::uint32_t>& arguments,std::uint32_t pops,Continuation then);
+    // Protected-mode segments as Windows sets them for a 32-bit thread: a GDT at `gdt` (one page) with
+    // flat code/data/stack and an FS segment whose base is the thread's TEB.
+    bool set_fs_base(std::uint32_t teb,std::uint32_t gdt,std::string* error);
+    // Calls `seen(pc, address, size, value)` for every guest store into [begin, end) (diagnostics, tests). Stores
+    // made by HLE functions through write() are not guest instructions and are not reported.
+    using WriteWatch=std::function<void(std::uint32_t pc,std::uint32_t address,std::uint32_t size,std::uint64_t value)>;
+    bool add_write_watch(std::uint32_t begin,std::uint32_t end,WriteWatch seen,std::string* error);
     // Ends the current call() as a failure with `error` (an override or import trap that cannot
     // proceed, e.g. an unbound import). The guest state is left as it was at the stop.
     void stop(std::string error);
     std::uint32_t esp()const;std::uint32_t eip()const;
     void set_eax(std::uint32_t);void set_edx(std::uint32_t);
+    // A function returning a float/double leaves it in ST(0): push the ext80 value as FLD would (TOP
+    // decremented, the register tagged valid). `significand`/`sign_exponent` are the ext80 fields.
+    void return_x87(std::uint64_t significand,std::uint16_t sign_exponent);
+    // ST(i) as ext80 fields (significand, sign/exponent) and FSTP: pop ST(0).
+    std::pair<std::uint64_t,std::uint16_t> st(unsigned i)const;void pop_x87();
     std::uint32_t stack_base()const noexcept{return stack_base_;}
     std::uint32_t stop_address()const noexcept{return stop_address_;}
 private:
@@ -66,5 +85,14 @@ private:
     std::map<std::uint32_t,Override> overrides_;
     std::vector<std::uint32_t> handles_;
     std::optional<std::string> stopped_;
+    // Pending redirected calls: continuation trap -> (the stack pointer the caller resumes with, its
+    // return address, what to run). Traps live in a page next to the stop address.
+    struct Pending {std::uint32_t resume_esp,return_address;Continuation then;};
+    std::map<std::uint32_t,Pending> pending_;std::vector<std::uint32_t> free_continuations_;
+    bool redirected_=false;std::uint32_t continuation_base_=0xfeee0000;std::uint32_t next_continuation_=0xfeee0000;
+    static void continuation_hook(void*,std::uint64_t address,std::uint32_t size,void* user);
+    void install_continuations();
+    std::vector<std::unique_ptr<WriteWatch>> watches_;
+    static void write_hook(void*,int type,std::uint64_t address,int size,std::int64_t value,void* user);
 };
 } // namespace sadx

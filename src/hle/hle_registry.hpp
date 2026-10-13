@@ -5,6 +5,7 @@
 #include <functional>
 #include <map>
 #include <optional>
+#include <set>
 #include <string>
 #include <vector>
 namespace sadx {
@@ -38,12 +39,26 @@ public:
     // DLL names compare case-insensitively (the loader does); symbols are exact, ordinals "#n".
     void add(const std::string& dll,const std::string& symbol,HleFunction);
     const HleFunction* find(const std::string& dll,const std::string& symbol)const;
+    // A data export (e.g. msvcrt!_iob): the IAT slot gets the address `provide` returns on first use.
+    void add_data(const std::string& dll,const std::string& symbol,std::function<std::optional<std::uint32_t>()> provide);
+    std::optional<std::uint32_t> data(const std::string& dll,const std::string& symbol);
+    // The same body under another DLL's name (msvcrt.dll and the UCRT API sets share implementations).
+    bool alias(const std::string& dll,const std::string& symbol,const std::string& from_dll,const std::string& from_symbol);
+    // A system function the modelled Windows version does not have: GetProcAddress returns NULL for it.
+    void add_absent(const std::string& dll,const std::string& symbol);
+    bool absent(const std::string& dll,const std::string& symbol)const;
     const std::vector<HleCallRecord>& log()const noexcept{return log_;}
     void record(HleCallRecord r){log_.push_back(std::move(r));}
     void clear_log(){log_.clear();}
+    // The trap for an HLE symbol: one per dll!symbol across every image (so GetProcAddress of a system
+    // function returns the same address the IATs hold), allocated in the trap region and installed in
+    // the guest on first use. nullopt when the region cannot be mapped.
+    std::optional<std::uint32_t> trap(X86Guest&,const std::string& dll,const std::string& symbol,std::string* error=nullptr);
 private:
-    std::map<std::string,HleFunction> functions_;
+    std::map<std::string,HleFunction> functions_;std::set<std::string> absent_;
+    std::map<std::string,std::function<std::optional<std::uint32_t>()>> data_providers_;std::map<std::string,std::uint32_t> data_;
     std::vector<HleCallRecord> log_;
+    std::map<std::string,std::uint32_t> traps_;std::uint32_t next_trap_=0,mapped_trap_end_=0;
 };
 struct ImportBinding {std::string dll,symbol;std::uint32_t iat_va=0,trap=0;bool bound=false;};
 struct ImportBindingResult {
@@ -51,9 +66,10 @@ struct ImportBindingResult {
     std::string error;                // non-empty: the image's imports could not be bound at all
     explicit operator bool()const noexcept{return error.empty();}
 };
-// Maps a trap page at `trap_base` (16 bytes per import, HLT-filled: a trap is never executed), writes
-// each trap address into its IAT slot in guest memory and installs the trap. Registry functions are
-// looked up when the trap fires, so functions added later still bind.
+// Traps live from hle_trap_base, 16 bytes each, in HLT-filled pages (a trap is never executed). For each
+// import, `resolve` may name a real guest address (a DLL loaded in the guest); otherwise the IAT slot gets
+// the registry's trap. Registry functions are looked up when the trap fires, so later additions still bind.
 constexpr std::uint32_t hle_trap_base=0xfe000000U;
-ImportBindingResult bind_imports(X86Guest&,const ExecutableImage&,HleRegistry&,std::uint32_t trap_base=hle_trap_base);
+using ImportResolver=std::function<std::optional<std::uint32_t>(const std::string& dll,const ExecutableImage::ImportedSymbol&,std::string* error)>;
+ImportBindingResult bind_imports(X86Guest&,const ExecutableImage&,HleRegistry&,const ImportResolver& resolve={});
 } // namespace sadx

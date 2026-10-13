@@ -21,6 +21,7 @@ public:
     struct Export {std::uint32_t va=0;std::optional<std::string> forwarder;};
     std::optional<Export> export_named(const std::string& name)const;
     std::uint32_t size_of_image()const noexcept{return size_of_image_;}
+    std::uint32_t entry_point()const noexcept{return entry_rva_?base_+entry_rva_:0;} // AddressOfEntryPoint as a VA (0: none)
     // Import directory (data directory 1) as the loader walks it: per DLL, every thunk of the
     // lookup table (OriginalFirstThunk, else FirstThunk) by name or ordinal, with the VA of the IAT
     // slot (FirstThunk + 4i) the loader overwrites with the bound address. nullopt = malformed.
@@ -33,6 +34,6 @@ public:
     std::optional<ExecutableImage> rebased(std::uint32_t base,std::string* error=nullptr)const;
 private:
     struct Section{std::uint32_t rva,virtual_size,raw_size,raw_offset;};
-    std::vector<std::uint8_t> bytes_;std::uint32_t base_=0;std::vector<Section> sections_;std::map<std::string,Export> exports_;std::uint32_t size_of_image_=0,relocation_rva_=0,relocation_size_=0,import_rva_=0,import_size_=0;
+    std::vector<std::uint8_t> bytes_;std::uint32_t base_=0;std::vector<Section> sections_;std::map<std::string,Export> exports_;std::uint32_t size_of_image_=0,relocation_rva_=0,relocation_size_=0,import_rva_=0,import_size_=0,entry_rva_=0;
 };
 } // namespace sadx

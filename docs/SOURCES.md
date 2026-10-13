@@ -53,3 +53,10 @@ Useful as an independent check of data integrity; not needed to build or test.
 The Windows reference GPU's D3DCAPS8, the CPU's transcendental/RCPSS tables, registry
 values (CTRLFLAG0) and the HeapAlloc addresses. The runtime reports an assumption for each.
 M4 of the roadmap captures them with the collector in `reference/windows-transfer`.
+
+## Windows system DLLs for the guest (local only)
+
+`reference/windows-system/` holds the 32-bit `msvcp140.dll` and `vcruntime140.dll` (14.51.36247.0) the
+guest runs as real code under the mod loader and the mods (M1 4b). They come from a local VC++
+redistributable install; hashes and the copy command are in `reference/windows-system/PROVENANCE.md`.
+Never committed (`*.dll` is ignored).

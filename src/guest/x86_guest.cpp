@@ -14,6 +14,7 @@ std::unique_ptr<X86Guest> X86Guest::create(std::string* error){
     std::string e;
     if(!g->map(g->stack_base_,g->stack_size_,false,&e)||!g->map(g->stop_address_&~0xfffU,0x1000,true,&e)){fail(error,e);return nullptr;}
     const std::uint8_t halt[]={0xf4};g->write(g->stop_address_,halt,1); // never executed: emulation stops before it
+    g->install_continuations();
     return g;
 }
 X86Guest::~X86Guest(){if(uc_)uc_close(engine(uc_));}
@@ -44,11 +45,90 @@ void X86Guest::code_hook(void*,std::uint64_t address,std::uint32_t,void* user){
     auto* self=static_cast<X86Guest*>(user);
     const auto found=self->overrides_.find(static_cast<std::uint32_t>(address));
     if(found==self->overrides_.end())return;
+    self->redirected_=false;
     const auto pops=found->second(*self);
     if(self->stopped_)return; // the override stopped the guest: leave the state at the stop
+    if(self->redirected_){self->redirected_=false;return;} // the override called into the guest; its continuation returns
     // Emulate `ret N`: the override replaced the whole callee.
     auto esp=self->reg(UC_X86_REG_ESP);const auto back=self->u32(esp).value_or(self->stop_address_);
     self->set_reg(UC_X86_REG_ESP,esp+4+pops);self->set_reg(UC_X86_REG_EIP,back);
+}
+void X86Guest::install_continuations(){
+    std::string e;map(continuation_base_,0x10000,true,&e);
+    const std::vector<std::uint8_t> halt(0x10000,0xf4);write(continuation_base_,halt.data(),halt.size());
+    uc_hook handle=0;
+    uc_hook_add(engine(uc_),&handle,UC_HOOK_CODE,reinterpret_cast<void*>(&X86Guest::continuation_hook),this,continuation_base_,continuation_base_+0xffff);
+}
+void X86Guest::redirect(std::uint32_t target,const std::vector<std::uint32_t>& arguments,std::uint32_t pops,Continuation then){
+    // Called from an override: [ESP] is the override caller's return address, then its arguments.
+    const auto esp=reg(UC_X86_REG_ESP);const auto back=u32(esp).value_or(stop_address_);
+    std::uint32_t trap;
+    if(!free_continuations_.empty()){trap=free_continuations_.back();free_continuations_.pop_back();}
+    else{trap=next_continuation_;next_continuation_+=4;}
+    pending_[trap]=Pending{esp+4+pops,back,std::move(then)};
+    std::vector<std::uint32_t> frame;frame.push_back(trap);frame.insert(frame.end(),arguments.begin(),arguments.end());
+    const auto top=esp+4+pops-static_cast<std::uint32_t>(4*frame.size());
+    write(top,frame.data(),frame.size()*4);
+    set_reg(UC_X86_REG_ESP,top);set_reg(UC_X86_REG_EIP,target);redirected_=true;
+}
+void X86Guest::continuation_hook(void*,std::uint64_t address,std::uint32_t,void* user){
+    auto* self=static_cast<X86Guest*>(user);
+    const auto found=self->pending_.find(static_cast<std::uint32_t>(address));
+    if(found==self->pending_.end()){self->stop("return to an unknown continuation "+std::to_string(address));return;}
+    auto pending=std::move(found->second);self->pending_.erase(found);self->free_continuations_.push_back(static_cast<std::uint32_t>(address));
+    // The callee returned: restore the caller's stack, then let the continuation set results or call again.
+    self->set_reg(UC_X86_REG_ESP,pending.resume_esp-4);self->write(pending.resume_esp-4,&pending.return_address,4);
+    self->redirected_=false;
+    if(pending.then)pending.then(*self);
+    if(self->stopped_)return;
+    if(self->redirected_){self->redirected_=false;return;}
+    self->set_reg(UC_X86_REG_ESP,pending.resume_esp);self->set_reg(UC_X86_REG_EIP,pending.return_address);
+}
+bool X86Guest::set_fs_base(std::uint32_t teb,std::uint32_t gdt,std::string* error){
+    if(!map(gdt,0x1000,false,error))return false;
+    const auto descriptor=[](std::uint32_t base,std::uint32_t limit,std::uint8_t access)->std::uint64_t{
+        // limit in 4 KiB units (G=1), 32-bit (D=1)
+        std::uint64_t d=0;d|=limit&0xffffU;d|=std::uint64_t(base&0xffffffU)<<16;d|=std::uint64_t(access)<<40;
+        d|=std::uint64_t((limit>>16)&0xfU)<<48;d|=std::uint64_t(0xcU)<<52;d|=std::uint64_t(base>>24)<<56;return d;};
+    std::uint64_t table[8]={};
+    table[1]=descriptor(0,0xfffff,0x9b);  // code, ring 0 (Unicorn runs the guest at CPL 0)
+    table[2]=descriptor(0,0xfffff,0x93);  // data / stack
+    table[3]=descriptor(teb,0xfffff,0x93); // FS: the TEB (limit covers the page and beyond, as Windows' does)
+    if(!write(gdt,table,sizeof table))return fail(error,"GDT write");
+    uc_x86_mmr gdtr{};gdtr.base=gdt;gdtr.limit=sizeof table-1;
+    if(uc_reg_write(engine(uc_),UC_X86_REG_GDTR,&gdtr)!=UC_ERR_OK)return fail(error,"GDTR");
+    const std::uint32_t cs=1<<3,ds=2<<3,fs=3<<3;
+    if(uc_reg_write(engine(uc_),UC_X86_REG_CS,&cs)!=UC_ERR_OK||uc_reg_write(engine(uc_),UC_X86_REG_DS,&ds)!=UC_ERR_OK||
+       uc_reg_write(engine(uc_),UC_X86_REG_ES,&ds)!=UC_ERR_OK||uc_reg_write(engine(uc_),UC_X86_REG_SS,&ds)!=UC_ERR_OK||
+       uc_reg_write(engine(uc_),UC_X86_REG_FS,&fs)!=UC_ERR_OK)return fail(error,"segment registers");
+    return true;
+}
+void X86Guest::return_x87(std::uint64_t significand,std::uint16_t sign_exponent){
+    std::uint32_t sw=0,tag=0;uc_reg_read(engine(uc_),UC_X86_REG_FPSW,&sw);uc_reg_read(engine(uc_),UC_X86_REG_FPTAG,&tag);
+    const std::uint32_t top=((sw>>11)&7U)-1U&7U;sw=(sw&~0x3800U)|(top<<11);
+    struct {std::uint64_t mantissa;std::uint16_t exponent;} value{significand,sign_exponent}; // Unicorn's 10-byte FPn layout
+    uc_reg_write(engine(uc_),UC_X86_REG_FP0+static_cast<int>(top),&value);
+    tag&=~(3U<<(2*top)); // 00 = valid (the full tag word)
+    uc_reg_write(engine(uc_),UC_X86_REG_FPSW,&sw);uc_reg_write(engine(uc_),UC_X86_REG_FPTAG,&tag);
+}
+std::pair<std::uint64_t,std::uint16_t> X86Guest::st(unsigned i)const{
+    std::uint32_t sw=0;uc_reg_read(engine(uc_),UC_X86_REG_FPSW,&sw);const auto top=(sw>>11)&7U;
+    struct {std::uint64_t mantissa;std::uint16_t exponent;} value{};uc_reg_read(engine(uc_),UC_X86_REG_FP0+static_cast<int>((top+i)&7U),&value);return {value.mantissa,value.exponent};
+}
+void X86Guest::pop_x87(){
+    std::uint32_t sw=0,tag=0;uc_reg_read(engine(uc_),UC_X86_REG_FPSW,&sw);uc_reg_read(engine(uc_),UC_X86_REG_FPTAG,&tag);
+    const auto top=(sw>>11)&7U;tag|=3U<<(2*top);sw=(sw&~0x3800U)|(((top+1)&7U)<<11);
+    uc_reg_write(engine(uc_),UC_X86_REG_FPSW,&sw);uc_reg_write(engine(uc_),UC_X86_REG_FPTAG,&tag);
+}
+void X86Guest::write_hook(void* uc,int,std::uint64_t address,int size,std::int64_t value,void* user){
+    std::uint32_t pc=0;uc_reg_read(static_cast<uc_engine*>(uc),UC_X86_REG_EIP,&pc);
+    (*static_cast<WriteWatch*>(user))(pc,static_cast<std::uint32_t>(address),static_cast<std::uint32_t>(size),static_cast<std::uint64_t>(value));
+}
+bool X86Guest::add_write_watch(std::uint32_t begin,std::uint32_t end,WriteWatch seen,std::string* error){
+    watches_.push_back(std::make_unique<WriteWatch>(std::move(seen)));uc_hook handle=0;
+    const auto rc=uc_hook_add(engine(uc_),&handle,UC_HOOK_MEM_WRITE,reinterpret_cast<void*>(&X86Guest::write_hook),watches_.back().get(),begin,end-1);
+    if(rc!=UC_ERR_OK)return fail(error,std::string("uc_hook_add: ")+uc_strerror(rc));
+    return true;
 }
 void X86Guest::stop(std::string error){stopped_=std::move(error);uc_emu_stop(engine(uc_));}
 std::uint32_t X86Guest::esp()const{return reg(UC_X86_REG_ESP);}

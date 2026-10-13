@@ -13,9 +13,11 @@ std::optional<ExecutableImage> ExecutableImage::parse(std::vector<std::uint8_t> 
     if(machine!=0x14cu||magic!=0x10bu||!count||!optional_size)return bad("not a PE32 i386 image");
     const auto base=le(bytes,*pe+24+28,4);if(!base)return bad("truncated optional header");
     ExecutableImage image;image.base_=*base;const std::size_t table=*pe+24+*optional_size;
-    image.size_of_image_=le(bytes,*pe+24+56,4).value_or(0);
+    image.size_of_image_=le(bytes,*pe+24+56,4).value_or(0);image.entry_rva_=le(bytes,*pe+24+16,4).value_or(0);
     if(*optional_size>=96+8*2){image.import_rva_=le(bytes,*pe+24+96+8,4).value_or(0);image.import_size_=le(bytes,*pe+24+96+12,4).value_or(0);}
     if(*optional_size>=96+8*6){image.relocation_rva_=le(bytes,*pe+24+96+40,4).value_or(0);image.relocation_size_=le(bytes,*pe+24+96+44,4).value_or(0);}
+    // The headers are mapped too (SizeOfHeaders bytes at RVA 0), as the Windows loader maps them.
+    if(const auto headers=le(bytes,*pe+24+60,4);headers&&*headers&&*headers<=bytes.size())image.sections_.push_back({0,*headers,*headers,0});
     for(std::uint32_t n=0;n<*count;++n){const auto at=table+40*n;const auto vsize=le(bytes,at+8,4),rva=le(bytes,at+12,4),rsize=le(bytes,at+16,4),roff=le(bytes,at+20,4);
         if(!vsize||!rva||!rsize||!roff)return bad("truncated section table");
         if(*rsize&&(*roff>bytes.size()||*rsize>bytes.size()-*roff))return bad("section raw data outside the file");
@@ -61,7 +63,7 @@ std::optional<ExecutableImage> ExecutableImage::rebased(std::uint32_t base,std::
             const auto target=*page+offset;const auto v=le(mapped,target,4);if(!v)return bad("relocation outside the image");
             const auto r=*v+delta;for(unsigned i=0;i<4;++i)mapped[target+i]=static_cast<std::uint8_t>(r>>(8*i));}
         at+=*block;}
-    ExecutableImage image;image.base_=base;image.size_of_image_=size_of_image_;image.import_rva_=import_rva_;image.import_size_=import_size_;image.sections_={{0,size_of_image_,size_of_image_,0}};image.bytes_=std::move(mapped);
+    ExecutableImage image;image.base_=base;image.size_of_image_=size_of_image_;image.import_rva_=import_rva_;image.import_size_=import_size_;image.entry_rva_=entry_rva_;image.sections_={{0,size_of_image_,size_of_image_,0}};image.bytes_=std::move(mapped);
     for(const auto& [name,e]:exports_){Export x=e;if(!x.forwarder)x.va=e.va-base_+base;image.exports_.emplace(name,std::move(x));}
     return image;
 }

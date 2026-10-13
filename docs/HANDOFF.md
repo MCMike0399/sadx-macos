@@ -1485,3 +1485,56 @@ list_procedures / procedure_callers / procedure_callees / procedure_references /
 batch_decompile. list_procedures: 8,875 procedures. The callee sweep writes raw results to the
 ignored `reference/inventory-raw/`; `run_inventory.py build` produces the tracked
 `reference/inventory/functions.json` when it finishes.
+
+## M1 4b (in progress): the loader and the mods load inside the guest (2026-10-13)
+
+Evidence: gate `reference/production-integration-20261012/guest-dlls-105-gate.json` (rc 0); test
+`tests/unit/guest_dlls.cpp` (`guest-dlls`, in the gate; inputs: the pinned profile install
+`reference/updated-pc-reference/game` and `reference/windows-system`).
+
+What runs, from original bytes, in one guest process: sonic.exe's static initializer 401ac0 → its
+LoadLibraryA("SYSTEM\chrmodels.dll") maps the pinned SADXModLoader (as CHRMODELS.dll) → the loader's
+real DllMain (CRT startup, static constructors, HookCreateFileA through dbghelp, the version check,
+the 401ae1/401ae2 patch) → back in 401ac0 the patched call runs LoadChrmodels (CHRMODELS_orig and the
+three garden DLLs with their own old static CRTs) → the loader reads `Profiles.json` and
+`updated-speedrun.json`, the sound data folders, both mods' `mod.ini`, loads `sadx-input-mod.dll` and
+`sadx-speedrun-mod.dll` (DllMains run) → the Input mod loads `SDL2.dll`, whose initialisation stops at
+USER32!RegisterClassW, the first function of the window system that is not modelled yet. 67 of the 119
+active patch sites of `tools/gate/profile_patches.json` hold their patched bytes at that point, and no
+site outside the inventory's active ranges was written (78b074 looked like one; a write watch showed it
+lies in the active 9-byte uiscale trampoline at 78b070 — the test now accepts writes inside an active
+entry's range).
+
+New code (all `src/hle` unless noted):
+* `X86Guest`: `redirect(target, args, pops, continuation)` — an HLE function calls into the guest and
+  resumes when it returns (DLL entry points, `_initterm`, `InitOnceExecuteOnce`), because Unicorn cannot
+  nest emulation inside a hook; `set_fs_base` (a GDT with flat segments and FS = TEB); x87 return helpers
+  (`return_x87`, `st`, `pop_x87`); `add_write_watch` (diagnostics).
+* `ExecutableImage`: `entry_point()`; the PE headers are now part of the mapped image (SizeOfHeaders at
+  RVA 0, as Windows maps them — dbghelp's ImageNtHeader needed them).
+* `hle_memory` (guest-address heap, zero-filled blocks — an assumption), `hle_modules` (module table,
+  LoadLibrary[Ex]A/W running entry points dependencies-first, GetProcAddress, GetModuleHandle[Ex]A/W,
+  GetModuleFileNameA/W, game-directory DLLs linked to each other, system DLLs HLE or — msvcp140/vcruntime140
+  — real code from `reference/windows-system`), `hle_process` (one guest process: TEB/PEB, overlay
+  directory for every write so the install is never modified, file trace, the assumption list),
+  `hle_kernel32` (identity, virtual clock, heaps, TLS/FLS, critical sections/SRW/InitOnce, files, find,
+  directories, environment, code pages, ctype/LCMap, SList, version), `hle_crt` (UCRT startup, heap,
+  string, stdio with Windows text mode, locale "C", conversions, msvcrt aliases and its `_iob`),
+  `hle_printf` (the printf engine on guest varargs), `hle_text` (CP1252/UTF-8/UTF-16, CT_CTYPE1),
+  `hle_user32` (SHLWAPI path helpers, SetProcessDPIAware so far), dbghelp header helpers.
+* `HleRegistry`: one trap per dll!symbol across images, data imports (`msvcrt!_iob`), aliases, and
+  "absent" functions (GetProcAddress returns NULL for functions newer than the modelled Windows 10 22H2,
+  e.g. GetTempPath2W) — every other unknown GetProcAddress stops the guest.
+
+Assumptions the HLE reports (`HleProcess::assumptions`; none silent): C:\SADX install path, process/thread
+ids 0x1000/0x1004, a virtual clock (2025-01-01 epoch, QPC 10 MHz advancing 1 µs per query and by Sleep),
+an SSE2 CPU without 3DNow!, Windows 10 22H2 (GetVersionEx 6.2.9200 for an unmanifested exe), code pages
+1252/437, the "C" locale, an empty environment, unattached standard streams (GUI subsystem), zero-filled
+heap blocks, Unicode-derived CT_CTYPE1 above U+007F, a fixed rand_s sequence, NTFS find order, virtual
+file times, and the MSVC runtime version.
+
+Next for 4b: a headless window manager in `hle_user32` (classes, HWNDs, CreateWindowEx's
+WM_NCCREATE/WM_NCCALCSIZE/WM_CREATE through the guest window procedure, DefWindowProc), then whatever SDL2
+and the Input mod's Init reach (SetupAPI device enumeration returning no devices, RegisterDeviceNotification,
+raw input, XInput), the Speedrun mod's Init, and the WinMain-time loader patches; the test's frontier
+string and the written-site count move with it until all 119 active sites are written.
