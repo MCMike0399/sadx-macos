@@ -1538,3 +1538,42 @@ WM_NCCREATE/WM_NCCALCSIZE/WM_CREATE through the guest window procedure, DefWindo
 and the Input mod's Init reach (SetupAPI device enumeration returning no devices, RegisterDeviceNotification,
 raw input, XInput), the Speedrun mod's Init, and the WinMain-time loader patches; the test's frontier
 string and the written-site count move with it until all 119 active sites are written.
+
+## M1 4b: loader, model DLLs and both mods initialise in the guest; whole-program inventory (2026-10-13)
+
+Evidence: gate `reference/production-integration-20261012/guest-dlls-106-gate.json` (rc 0); `guest-dlls` test.
+
+* **401ac0 now returns in the guest.** Beyond the previous checkpoint: the Input mod's Init loads SDL2.dll,
+  whose initialisation runs through a headless window system (`hle_user32.hpp`: classes, HWNDs, window
+  longs/properties, CreateWindowEx sending WM_[GETMINMAXINFO,]NCCREATE/NCCALCSIZE/CREATE through the guest
+  window procedure via continuations, DestroyWindow's WM_DESTROY/WM_NCDESTROY, a DefWindowProc that answers
+  documented messages and stops on others), WINMM timers, HID/SetupAPI/XInput/cfgmgr32 with no devices,
+  COM (`hle_com`: guest objects whose vtables are HLE traps) with an IDirectInput8 that enumerates no
+  devices (`hle_dinput`), combase/WinRT (RoInitialize, HSTRING references; activation factories not
+  provided), CommandLineToArgvW, and the UCRT/msvcrt math (`_CI*` on the x87 stack, `_libm_sse2_*` in XMM0).
+* Patch sites after 401ac0: **106 of 119 active** hold their patched bytes; every Input and Speedrun site is
+  written (their Init ran in the loader's order); the 13 still original are loader patches applied later in
+  WinMain (CreateSADXWindow_r and its hooks, HUD scaling at startup) — 4c. No site outside the inventory's
+  active ranges is written.
+* Policy changes: GetProcAddress of a system function without an HLE body returns its trap (the function is
+  taken to exist on Windows 10 22H2; calling it stops by name — `HleProcess::unmodelled_lookups` lists them);
+  functions newer than 22H2 are registered absent. The system-DLL list now covers a Windows 10 System32
+  (cfgmgr32/combase were missing and silently made SDL take another path — fixed before it mattered).
+* New reported assumptions: no controllers/HID devices; WinRT factories absent (no visible difference with no
+  controllers); host-libm results for pow/atan2/acos/asin/sin/cos; CW_USEDEFAULT = 0,0/0x0.
+* Bug found and fixed on the way: CreateWindowEx popped 60 instead of 48 bytes (12 arguments) — the guest
+  returned into heap memory; the continuation mechanism makes such pop counts critical, so each HLE function
+  states its own.
+
+Whole-program inventory (docs/METHOD.md §2), tracked in `reference/inventory/`:
+* `functions.json` — 8,875 procedures from REA's Ghidra `list_procedures`, 8,623 with their direct callees
+  (`procedure_callees`; the 252 others are externals/thunks). Raw results stay in the ignored
+  `reference/inventory-raw/` (~70 MB). The sweep took ~35 minutes unattended.
+* `hot-paths.json` — 1,335 procedures reachable from the frame loop 40cad0 through direct calls, with depth
+  (pointer calls — task callbacks, vtables, the D3DX table — are not followed; the guest's runtime profile
+  will replace this).
+* `fpu-sites.json` — byte-pattern candidates for FPATAN/FSINCOS/FPTAN/F2XM1/FYL2X(P1)/FSIN/FCOS/RCP*/RSQRT*
+  with their containing procedure, all `confirmed: false` (FCOS's 4,230 hits are mostly bytes inside other
+  instructions); 4e confirms them in the guest.
+* Runner fixes: `tools/inventory/run_inventory.py` waits only on its own session's log output, and the
+  inventory uses its own Ghidra snapshot (the old snapshots are tied to the pre-move binary path).

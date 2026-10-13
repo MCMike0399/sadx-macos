@@ -8,6 +8,7 @@
 #include <cctype>
 #include <cstring>
 #include <cmath>
+#include <limits>
 #include <map>
 #include <memory>
 namespace sadx {
@@ -359,6 +360,38 @@ void register_hle_crt_locale(HleProcess& p){
     C(math,"_dsign",2,[arg](HleCall& c)->std::uint32_t{return arg(c,1)&0x80000000U?0x8000:0;});
     C(math,"_fdclass",1,[arg](HleCall& c)->std::uint32_t{float f;const auto b=arg(c,0);std::memcpy(&f,&b,4);return std::isnan(f)?2:std::isinf(f)?1:f==0?0:std::fpclassify(f)==FP_SUBNORMAL?-2:-1;});
     C(math,"_fdsign",1,[arg](HleCall& c)->std::uint32_t{return arg(c,0)&0x80000000U?0x8000:0;});
+    // libm. Exact operations (ceil, floor, copysign, sqrt, _ftol, classification) are bit-identical in any
+    // correct implementation; the transcendental ones use the host libm (an assumption, reported).
+    const auto ext80_to_double=[](std::pair<std::uint64_t,std::uint16_t> v)->double{
+        const auto e=static_cast<int>(v.second&0x7fff);const bool neg=v.second&0x8000;
+        if(e==0x7fff){return (v.first<<1)?std::numeric_limits<double>::quiet_NaN():(neg?-1.0:1.0)*std::numeric_limits<double>::infinity();}
+        const double d=std::ldexp(static_cast<double>(v.first),e-16383-63);return neg?-d:d;}; // rounds the 64-bit significand to double (RN)
+    const auto host_libm=[P](){P->assume("UCRT transcendental functions (pow, atan2, acos, asin, sin, cos) take their results from the host libm; the UCRT's own last-bit results were not captured");};
+    const auto x87_unary=[ext80_to_double](std::function<double(double)> f){return [ext80_to_double,f](HleCall& c)->std::uint32_t{
+        const double x=ext80_to_double(c.guest.st(0));c.guest.pop_x87();const auto e=to_ext80(f(x));c.guest.return_x87(e.first,e.second);return 0;};};
+    const auto x87_binary=[ext80_to_double](std::function<double(double,double)> f){return [ext80_to_double,f](HleCall& c)->std::uint32_t{
+        const double y=ext80_to_double(c.guest.st(0)),x=ext80_to_double(c.guest.st(1));c.guest.pop_x87();c.guest.pop_x87();
+        const auto e=to_ext80(f(x,y));c.guest.return_x87(e.first,e.second);return 0;};}; // _CIpow(x=ST1, y=ST0), _CIatan2(y=ST1, x=ST0) pass (ST1, ST0)
+    const auto stack_unary=[stack_double](std::function<double(double)> f){return [stack_double,f](HleCall& c)->std::uint32_t{const auto e=to_ext80(f(stack_double(c,0)));c.guest.return_x87(e.first,e.second);return 0;};};
+    C(math,"ceil",2,stack_unary([](double x){return std::ceil(x);}));C(math,"floor",2,stack_unary([](double x){return std::floor(x);}));
+    C(math,"copysign",4,[stack_double](HleCall& c)->std::uint32_t{const auto e=to_ext80(std::copysign(stack_double(c,0),stack_double(c,2)));c.guest.return_x87(e.first,e.second);return 0;});
+    C(math,"_finite",2,[stack_double](HleCall& c)->std::uint32_t{return std::isfinite(stack_double(c,0))?1:0;});
+    C(math,"_dtest",1,[arg](HleCall& c)->std::uint32_t{std::uint64_t b=0;c.guest.read(arg(c,0),&b,8);double d;std::memcpy(&d,&b,8);
+        return std::isnan(d)?2:std::isinf(d)?1:d==0?0:std::fpclassify(d)==FP_SUBNORMAL?static_cast<std::uint32_t>(-2):static_cast<std::uint32_t>(-1);});
+    C(math,"_ftol",0,[ext80_to_double](HleCall& c)->std::uint32_t{ // truncates ST0 toward zero into EDX:EAX, pops
+        const auto v=c.guest.st(0);c.guest.pop_x87();const double d=ext80_to_double(v);
+        const auto t=std::isfinite(d)&&std::fabs(d)<9.2e18?static_cast<std::int64_t>(d):std::int64_t(0x8000000000000000ULL);
+        c.guest.set_edx(static_cast<std::uint32_t>(static_cast<std::uint64_t>(t)>>32));return static_cast<std::uint32_t>(t);});
+    C(math,"_CIpow",0,[host_libm,x87_binary](HleCall& c){host_libm();return x87_binary([](double x,double y){return std::pow(x,y);})(c);});
+    C(math,"_CIatan2",0,[host_libm,x87_binary](HleCall& c){host_libm();return x87_binary([](double y,double x){return std::atan2(y,x);})(c);});
+    C(math,"_CIacos",0,[host_libm,x87_unary](HleCall& c){host_libm();return x87_unary([](double x){return std::acos(x);})(c);});
+    const auto sse2=[](std::function<double(double)> f){return [f](HleCall& c)->std::uint32_t{double x;const auto b=c.guest.xmm0_low();std::memcpy(&x,&b,8);
+        const double y=f(x);std::uint64_t o;std::memcpy(&o,&y,8);c.guest.set_xmm0_low(o);return 0;};};
+    C(math,"_libm_sse2_sqrt_precise",0,sse2([](double x){return std::sqrt(x);}));
+    C(math,"_libm_sse2_sin_precise",0,[host_libm,sse2](HleCall& c){host_libm();return sse2([](double x){return std::sin(x);})(c);});
+    C(math,"_libm_sse2_cos_precise",0,[host_libm,sse2](HleCall& c){host_libm();return sse2([](double x){return std::cos(x);})(c);});
+    C(math,"_libm_sse2_asin_precise",0,[host_libm,sse2](HleCall& c){host_libm();return sse2([](double x){return std::asin(x);})(c);});
+    C(math,"_except1",0,[](HleCall& c)->std::uint32_t{c.guest.stop("_except1: a libm floating-point exception report");return 0;});
     // runtime odds and ends
     C(runtime,"_set_new_handler",1,[](HleCall&)->std::uint32_t{return 0;});
     C(runtime,"abort",0,[](HleCall& c)->std::uint32_t{c.guest.stop("abort()");return 0;});

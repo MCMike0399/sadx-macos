@@ -75,6 +75,7 @@ public:
     void return_x87(std::uint64_t significand,std::uint16_t sign_exponent);
     // ST(i) as ext80 fields (significand, sign/exponent) and FSTP: pop ST(0).
     std::pair<std::uint64_t,std::uint16_t> st(unsigned i)const;void pop_x87();
+    std::uint64_t xmm0_low()const;void set_xmm0_low(std::uint64_t); // the low 64 bits of XMM0 (double arguments/results)
     std::uint32_t stack_base()const noexcept{return stack_base_;}
     std::uint32_t stop_address()const noexcept{return stop_address_;}
 private:

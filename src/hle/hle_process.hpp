@@ -1,5 +1,6 @@
 #pragma once
 #include "hle/hle_modules.hpp"
+#include "hle/hle_user32.hpp"
 #include <cstdio>
 #include <map>
 #include <memory>
@@ -29,6 +30,7 @@ public:
     std::vector<std::string> assumptions;
     // File-system requests in call order (function, the guest's path, the outcome), for traces and tests.
     std::vector<std::string> file_trace;
+    std::vector<std::string> unmodelled_lookups; // GetProcAddress results that are traps without a body
     void trace_file(const std::string& function,const std::string& path,const std::string& outcome){file_trace.push_back(function+"("+path+") -> "+outcome);}
     void assume(const std::string& a){if(assumed_.insert(a).second)assumptions.push_back(a);}
     // Virtual time: 100 ns units since the virtual boot. QueryPerformanceCounter is 10 MHz on the same
@@ -43,6 +45,7 @@ public:
     std::map<std::uint32_t,Win32File> file_handles;                   // CreateFile handles
     // CRT state in guest memory.
     std::uint32_t teb=0,peb=0;
+    HleWindows windows;
     std::map<std::string,std::string> environment_variables; // names compared case-insensitively (stored upper-case)
     std::map<std::uint32_t,std::uint32_t> tls;std::uint32_t next_tls=0;std::set<std::uint32_t> heaps;std::uint32_t process_heap=0;std::uint32_t command_line_a_env=0;
     std::uint32_t errno_address=0,iob_address=0,narrow_argv=0,environment=0,command_line_w=0,command_line_a=0;
@@ -65,4 +68,5 @@ void register_hle_kernel32(HleProcess&);
 void register_hle_crt(HleProcess&);
 void register_hle_dbghelp(HleProcess&);
 void register_hle_user32(HleProcess&);
+void register_hle_dinput(HleProcess&);
 } // namespace sadx

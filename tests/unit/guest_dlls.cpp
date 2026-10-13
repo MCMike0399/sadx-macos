@@ -1,12 +1,11 @@
-// M1 step 4b (in progress): the mod loader and the mods load and initialise inside the guest. sonic.exe's
+// M1 step 4b: the mod loader and the mods load and initialise inside the guest. sonic.exe's
 // static initializer 401ac0 (this = 3ab9170) runs from the original bytes; its LoadLibraryA("SYSTEM\chrmodels.dll")
 // maps the pinned SADXModLoader (as CHRMODELS.dll), whose real DllMain patches 401ae1/401ae2 to call
 // LoadChrmodels, which loads CHRMODELS_orig and the garden DLLs; the loader then reads its profile and the
 // mods' mod.ini and loads sadx-input-mod and sadx-speedrun-mod. The MSVC C++ runtime runs as real code
 // (reference/windows-system, see its PROVENANCE.md); every Win32/UCRT function below it is HLE.
 //
-// The run must end at an explicit stop naming the next unimplemented import (the current frontier is the
-// window system SDL2 needs: USER32!RegisterClassW). Patch sites: every site the guest wrote is compared with
+// 401ac0 must return normally. Patch sites: every site the guest wrote is compared with
 // tools/gate/profile_patches.json; sites written although the inventory marks every entry inactive must be
 // exactly the known list below (empty: none so far), unless an active entry's range covers them. Entries whose
 // original bytes are unknown (null: .bss) are not judged.
@@ -22,7 +21,7 @@
 namespace {
 using namespace sadx;
 void require(bool ok,const std::string& why){if(!ok)throw std::runtime_error(why);}
-struct Site {std::uint32_t va=0;std::vector<std::pair<std::uint32_t,std::string>> ranges;bool active=false;std::uint32_t active_size=0;}; // every entry's (size, original bytes)
+struct Site {std::uint32_t va=0;std::vector<std::pair<std::uint32_t,std::string>> ranges;bool active=false;std::uint32_t active_size=0;std::set<std::string> active_owners;}; // every entry's (size, original bytes)
 // The few fields this test needs from profile_patches.json (one object per patch, keys in a fixed order).
 std::map<std::uint32_t,Site> patch_sites(const std::string& path){
     std::ifstream f(path);std::string all((std::istreambuf_iterator<char>(f)),{});
@@ -38,7 +37,7 @@ std::map<std::uint32_t,Site> patch_sites(const std::string& path){
         auto& s=sites[va];s.va=va;
         const auto original=field("original_bytes",at,end);
         if(original!="null"&&!original.empty())s.ranges.push_back({static_cast<std::uint32_t>(std::stoul(field("size",at,end))),original}); // null: unknown load-time bytes
-        if(field("active",at,end)=="true"){s.active=true;s.active_size=std::max(s.active_size,static_cast<std::uint32_t>(std::stoul(field("size",at,end))));}
+        if(field("active",at,end)=="true"){s.active=true;s.active_owners.insert(field("owner",at,end));s.active_size=std::max(s.active_size,static_cast<std::uint32_t>(std::stoul(field("size",at,end))));}
         at=end;}
     return sites;
 }
@@ -56,7 +55,7 @@ int main(int argc,char** argv){try{
     require(p->map_main(*image,&error),"map sonic.exe: "+error);
 
     const auto r=p->guest().call(0x401ac0,{},0x3ab9170);
-    require(!r&&r.error.find("unbound import USER32.dll!RegisterClassW")!=std::string::npos,"the run ends at the documented frontier, got: "+(r?std::string("completed"):r.error));
+    require(bool(r),"401ac0 returns in the guest: "+r.error);
 
     // The loader's DllMain: 401ae1 = NOP, 401ae2 = CALL LoadChrmodels inside CHRMODELS.dll (the loader).
     auto* loader=p->modules().by_name("CHRMODELS.dll");require(loader&&loader->entry_called,"the loader (CHRMODELS.dll) ran its entry point");
@@ -74,10 +73,10 @@ int main(int argc,char** argv){try{
 
     // Patch sites.
     const auto sites=patch_sites("tools/gate/profile_patches.json");
-    std::size_t active=0,active_written=0;std::set<std::uint32_t> unexpected;
+    std::size_t active=0,active_written=0;std::set<std::uint32_t> unexpected,pending;
     for(const auto& [va,s]:sites){
         bool written=false;for(const auto& [size,original]:s.ranges)written=written||hex_bytes(p->guest(),va,size)!=original;
-        if(s.active){++active;active_written+=written;continue;}
+        if(s.active){++active;active_written+=written;if(!written)pending.insert(va);continue;}
         if(!written)continue;
         // A write inside an active entry's range is that patch's (e.g. 78b074 lies in the active 9-byte 78b070 trampoline).
         bool covered=false;for(const auto& [other,o]:sites)if(o.active&&other<va&&va<other+o.active_size)covered=true;
@@ -85,8 +84,13 @@ int main(int argc,char** argv){try{
     const std::set<std::uint32_t> known={};
     std::ostringstream list;for(const auto va:unexpected){list<<std::hex<<va<<" ";if(std::getenv("GUEST_DLLS_DEBUG"))for(const auto& [size,original]:sites.at(va).ranges)std::cerr<<std::hex<<va<<" size "<<std::dec<<size<<" guest "<<hex_bytes(p->guest(),va,size)<<" original "<<original<<"\n";}
     require(unexpected==known,"sites written with no active inventory entry: "+list.str());
-    require(active_written>=67,"active patch sites written so far: "+std::to_string(active_written));
-    std::cout<<"Guest DLLs: 401ac0 ran the real loader DllMain (401ae1 patched), LoadChrmodels, the profile and both mods' DllMains in the guest; "
-             <<active_written<<" of "<<active<<" active patch sites written; "<<"no write outside the inventory's active patches; frontier: "<<r.error<<"\n";
+    // Still original after 401ac0: the loader patches applied later in WinMain (its window-creation hook, the
+    // HUD scaling at startup) — M1 4c. Every Input and Speedrun mod site is written (their Init ran).
+    const std::set<std::uint32_t> winmain_time={0x402c61,0x628951,0x62895b,0x7261cf,0x726211,0x727513,0x727546,0x72767b,0x72773b,0x789bd0,0x789e48,0x79426e,0x79427a};
+    std::ostringstream still;for(const auto va:pending)still<<std::hex<<va<<" ";
+    require(pending==winmain_time,"active sites still original after 401ac0: "+still.str());
+    for(const auto va:pending)require(sites.at(va).active_owners==std::set<std::string>{"loader"},"a pending site belongs to the loader only");
+    std::cout<<"Guest DLLs: 401ac0 returned after the real loader DllMain (401ae1 patched), LoadChrmodels, the profile, both mods' DllMains and Init (SDL2 included); "
+             <<active_written<<" of "<<active<<" active patch sites written; "<<"no write outside the inventory's active patches; the "<<pending.size()<<" pending are the loader's WinMain-time patches\n";
     return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

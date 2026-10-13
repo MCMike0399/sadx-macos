@@ -115,6 +115,8 @@ std::pair<std::uint64_t,std::uint16_t> X86Guest::st(unsigned i)const{
     std::uint32_t sw=0;uc_reg_read(engine(uc_),UC_X86_REG_FPSW,&sw);const auto top=(sw>>11)&7U;
     struct {std::uint64_t mantissa;std::uint16_t exponent;} value{};uc_reg_read(engine(uc_),UC_X86_REG_FP0+static_cast<int>((top+i)&7U),&value);return {value.mantissa,value.exponent};
 }
+std::uint64_t X86Guest::xmm0_low()const{std::uint64_t v[2]={};uc_reg_read(engine(uc_),UC_X86_REG_XMM0,v);return v[0];}
+void X86Guest::set_xmm0_low(std::uint64_t low){std::uint64_t v[2]={};uc_reg_read(engine(uc_),UC_X86_REG_XMM0,v);v[0]=low;uc_reg_write(engine(uc_),UC_X86_REG_XMM0,v);}
 void X86Guest::pop_x87(){
     std::uint32_t sw=0,tag=0;uc_reg_read(engine(uc_),UC_X86_REG_FPSW,&sw);uc_reg_read(engine(uc_),UC_X86_REG_FPTAG,&tag);
     const auto top=(sw>>11)&7U;tag|=3U<<(2*top);sw=(sw&~0x3800U)|(((top+1)&7U)<<11);

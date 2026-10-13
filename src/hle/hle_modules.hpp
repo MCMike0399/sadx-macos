@@ -47,6 +47,7 @@ public:
     // DisableThreadLibraryCalls.
     void register_functions();
     std::function<void(const std::string&,const std::string&,const std::string&)> trace_; // set by HleProcess
+    std::function<void(const std::string&,const std::string&)> on_unmodelled_lookup_;   // GetProcAddress of a system function without an HLE body
     // Runs `pending` entry points (DllMain(base, DLL_PROCESS_ATTACH, 0)) from inside an HLE function via
     // guest redirection, then `done(all_succeeded)`.
     void run_entries(X86Guest&,std::vector<GuestModule*> pending,std::uint32_t pops,std::function<void(X86Guest&,bool)> done);

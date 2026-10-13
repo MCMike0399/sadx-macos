@@ -16,7 +16,11 @@ bool system_dll(const std::string& name){
     const auto s=stem(file_part(name));
     static const char* known[]={"kernel32","kernelbase","ntdll","user32","gdi32","advapi32","shell32","shlwapi","ole32","oleaut32",
         "winmm","dsound","dinput8","dinput","d3d8","d3d9","dbghelp","gdiplus","msvcp140","vcruntime140","ucrtbase","msvcrt","imm32",
-        "setupapi","version","comctl32","comdlg32","ws2_32","xinput1_3","xinput1_4","xinput9_1_0","dxgi","dwmapi","uxtheme","winhttp","hid"};
+        "setupapi","version","comctl32","comdlg32","ws2_32","xinput1_3","xinput1_4","xinput9_1_0","dxgi","dwmapi","uxtheme","winhttp","hid",
+        // more of a Windows 10 22H2 System32 (present there, so LoadLibrary must succeed; their functions are HLE or stop)
+        "cfgmgr32","combase","rpcrt4","sechost","bcrypt","bcryptprimitives","crypt32","shcore","powrprof","winusb","d3d11","d3d12","dcomp","propsys",
+        "mmdevapi","avrt","ksuser","dwrite","d2d1","usp10","msimg32","psapi","secur32","userenv","wtsapi32","iphlpapi","winspool","opengl32","glu32",
+        "windowscodecs","wintrust","ntmarta","imagehlp","msacm32","dsound","xaudio2_9","x3daudio1_7","mfplat","mf","mfreadwrite","dbgcore","apphelp","win32u"};
     for(const auto* k:known)if(s==k)return true;
     return s.rfind("api-ms-win-",0)==0;
 }
@@ -152,10 +156,14 @@ void HleModules::register_functions(){
     hle_.add("KERNEL32.dll","LoadLibraryA",{4,1,load(false)});
     hle_.add("KERNEL32.dll","LoadLibraryW",{4,1,load(true)});
     const auto load_ex=[this](bool wide){return [this,wide](HleCall& c)->std::uint32_t{
-        if(c.argument(1).value_or(1)!=0||c.argument(2).value_or(1)!=0){c.guest.stop("LoadLibraryEx with a file handle or flags is not implemented");return 0;}
+        // Search-path flags only: LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR 0x100, _APPLICATION_DIR 0x200, _USER_DIRS 0x400,
+        // _SYSTEM32 0x800, _DEFAULT_DIRS 0x1000. With SYSTEM32 alone a game-directory DLL is not found.
+        const auto flags=c.argument(2).value_or(0);
+        if(c.argument(1).value_or(1)!=0||(flags&~0x1f00U)){c.guest.stop("LoadLibraryEx with a file handle or flags "+std::to_string(flags)+" is not implemented");return 0;}
         const auto at=c.argument(0).value_or(0);
         const auto name=wide?guest_wide_string(c.guest,at):guest_string(c.guest,at);
         if(!name){c.guest.stop("LoadLibraryEx: unreadable file name");return 0;}
+        if(flags==0x800&&!system_dll(*name)){if(trace_)trace_(wide?"LoadLibraryExW":"LoadLibraryExA",*name,"not in System32");return 0;}
         std::vector<GuestModule*> pending;std::string error;const auto base=map_library(*name,&pending,&error);
         if(!base)return 0;if(pending.empty())return *base;const auto b=*base;
         run_entries(c.guest,std::move(pending),12,[b](X86Guest& g,bool ok){g.set_eax(ok?b:0);});return b;};};
@@ -163,12 +171,15 @@ void HleModules::register_functions(){
     hle_.add("KERNEL32.dll","LoadLibraryExW",{12,3,load_ex(true)});
     hle_.add("KERNEL32.dll","GetProcAddress",{8,2,[this](HleCall& c)->std::uint32_t{
         const auto module=c.argument(0).value_or(0),at=c.argument(1).value_or(0);
-        if(at<0x10000){c.guest.stop("GetProcAddress by ordinal is not implemented");return 0;}
-        const auto name=guest_string(c.guest,at);if(!name){c.guest.stop("GetProcAddress: unreadable name");return 0;}
+        const auto name=at<0x10000?std::optional<std::string>("#"+std::to_string(at)):guest_string(c.guest,at);
+        if(!name){c.guest.stop("GetProcAddress: unreadable name");return 0;}
+        if(at<0x10000&&by_base(module)&&!by_base(module)->system){c.guest.stop("GetProcAddress by ordinal on a guest DLL is not implemented");return 0;}
         auto* m=by_base(module);if(!m)return 0;
         if(m->system&&hle_.data(m->name,*name))return *hle_.data(m->name,*name);
         if(m->system&&!hle_.find(m->name,*name)&&hle_.absent(m->name,*name))return 0; // not on the modelled Windows version
-        if(m->system&&!hle_.find(m->name,*name)){c.guest.stop("GetProcAddress("+m->name+", "+*name+"): no HLE implementation; returning NULL would claim the function is absent on the reference system");return 0;}
+        // A system function without an HLE body: its trap (the function exists on the modelled Windows 10 22H2;
+        // calling it stops with its name). Functions newer than that are registered absent (NULL above).
+        if(m->system&&!hle_.find(m->name,*name)){if(on_unmodelled_lookup_)on_unmodelled_lookup_(m->name,*name);return hle_.trap(guest_,m->name,*name).value_or(0);}
         return export_address(module,*name).value_or(0);}});
     const auto handle=[this](bool wide){return [this,wide](HleCall& c)->std::uint32_t{
         const auto at=c.argument(0).value_or(0);

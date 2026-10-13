@@ -48,6 +48,10 @@ void register_hle_kernel32(HleProcess& p){
         P->assume("QueryPerformanceCounter: a virtual 10 MHz counter that advances 1 us per query and by Sleep");
         P->now_100ns+=10;const std::uint64_t t=P->now_100ns;c.guest.write(arg(c,0),&t,8);return 1;});
     K("Sleep",4,1,[P,arg](HleCall& c)->std::uint32_t{P->now_100ns+=std::uint64_t(arg(c,0))*10000;return 0;});
+    // WINMM timers on the same virtual clock (timeBeginPeriod changes no virtual resolution).
+    r.add("WINMM.dll","timeGetTime",{0,0,[P](HleCall&)->std::uint32_t{return static_cast<std::uint32_t>(P->now_100ns/10000);}});
+    r.add("WINMM.dll","timeBeginPeriod",{4,1,[](HleCall&)->std::uint32_t{return 0;}}); // TIMERR_NOERROR
+    r.add("WINMM.dll","timeEndPeriod",{4,1,[](HleCall&)->std::uint32_t{return 0;}});
     // --- CPU and system facts
     K("IsProcessorFeaturePresent",4,1,[P,arg](HleCall& c)->std::uint32_t{
         P->assume("IsProcessorFeaturePresent: an SSE2 CPU without 3DNow! (the reference CPU's feature set was not captured)");
