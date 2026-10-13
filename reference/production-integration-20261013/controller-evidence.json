@@ -1,0 +1,65 @@
+{
+ "scope": "Controller delivery through the original pinned SDL/Input mod; synthetic raw HID identity and report schema",
+ "replay": {
+  "command": "./build/guest-controller-test reference/updated-pc-reference/game reference/windows-system",
+  "exit_status": 0,
+  "title_frame": 454,
+  "identical_scripted_boot_frames": 900,
+  "neutral_movie_frame": 500,
+  "hotplug_frames": 160,
+  "sdl_axes": [
+   16384,
+   8191,
+   -10000,
+   -20001,
+   3854,
+   23129
+  ],
+  "sdl_buttons": [
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   1,
+   0,
+   0,
+   1,
+   0
+  ]
+ },
+ "mutant": {
+  "change": "HID left hat value 7 -> 6",
+  "exit_status": 1,
+  "output": "original SDL face/shoulder/stick/Guide/Start/Back/hat mapping"
+ },
+ "app": {
+  "command": "./build/sadx-app --guest reference/updated-pc-reference/game reference/windows-system --pad 450:0x10,800:0x10 --exit-after 900 --screenshot build/controller-menu.ppm",
+  "exit_status": 0,
+  "screenshot_sha256": "4a15074160374035a1527192b06ff74b8e8e26112f582e50df2b8956b3c991b6",
+  "review": "Frame visibly shows Select a Saved File; screenshot stays local/ignored"
+ },
+ "physical_controllers_seen": 0,
+ "source_sha256": {
+  "src/hle/hle_raw_input.cpp": "6d4ca770296f49401b49815b1d153db0d8b3e3e1cb4765e542e3635ebd7fb073",
+  "src/hle/hle_raw_input.hpp": "b1144bef5881f259ddf91711bdefe0660a30e54d49ca59f3aa0a845b8e048ba2",
+  "src/platform/mac/mac_xinput.mm": "5805187f8f033f1f521600e1d1d0380a7fe542a518c75d6421f96f5d67d3011f",
+  "tests/unit/guest_controller.cpp": "8638d71a6f5b9ef643e61d8d5d035d6612f79e7c43b7f513d3ec58a05aa6b83b",
+  "tests/unit/hle_raw_input.cpp": "095077a781802665ccc36ea86e02aff718eeeedbfa6d3c1e584b1126342e7e00",
+  "tests/unit/mac_xinput.mm": "d3d2ae1f00ac8fa8098f0310d3cbabe6ebfccbd938603a54a5c9e6a87355a776"
+ },
+ "ghidra_evidence": [
+  "ev_431faa7f7139d8f194ea3d0b96806b89a1f63c5dfd8f188c174db80aaee62e9d",
+  "ev_ae73d61b469eb47d3073c6399b225e2a288bf1680f934661cf85f9ecdb7ff216"
+ ],
+ "limits": [
+  "Synthetic Xbox-style device identity, report schema and packet policy are assumptions, not captured Windows hardware.",
+  "Apple GameController deadzones remain applied.",
+  "Physical controller/Windows HID parity and vibration output are unverified/not provided."
+ ]
+}

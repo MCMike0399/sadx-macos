@@ -1,5 +1,5 @@
 // sadx-app: a window on the game.
-//   sadx-app --guest GAME_DIR WINDOWS_SYSTEM_DIR [--exit-after N] [--screenshot out.ppm] [--keys FRAME:VK[:FRAMES],...]
+//   sadx-app --guest GAME_DIR WINDOWS_SYSTEM_DIR [--exit-after N] [--screenshot out.ppm] [--keys FRAME:VK[:FRAMES],...] [--pad FRAME:BUTTONS[:FRAMES],...]
 //     (the keyboard is forwarded to the guest as Windows keys; --keys scripts presses by guest frame)
 //     The guest (M1): sonic.exe runs from its entry point in the in-process x86 guest with the mod loader and
 //     mods (src/hle); every IDirect3DDevice8::Present pauses it, the frame it issued (Clears and
@@ -15,6 +15,7 @@
 #include <map>
 #include "runtime/game_session.hpp"
 #include "platform/mac/mac_clock.hpp"
+#include "platform/mac/mac_xinput.hpp"
 #include "platform/mac/metal_guest_frame.hpp"
 #include "guest/fpu_shims.hpp"
 #include <iterator>
@@ -38,7 +39,7 @@ vertex Out polygon_vertex(uint index [[vertex_id]],constant uint* bytes [[buffer
 }
 fragment float4 polygon_fragment(Out in [[stage_in]]){return in.color;}
 )METAL";
-struct Options {std::string exe,dll,screenshot,game_dir,system_dir,keys;std::uint32_t frames=5;bool survey=true,guest=false;int exit_after=-1;};
+struct Options {std::string exe,dll,screenshot,game_dir,system_dir,keys,pad;std::uint32_t frames=5;bool survey=true,guest=false;int exit_after=-1;};
 bool parse(int argc,char** argv,Options& o){
     if(argc<3)return false;int first=3;
     if(!std::strcmp(argv[1],"--guest")){if(argc<4)return false;o.guest=true;o.game_dir=argv[2];o.system_dir=argv[3];first=4;}else{o.exe=argv[1];o.dll=argv[2];}
@@ -49,6 +50,7 @@ bool parse(int argc,char** argv,Options& o){
         else if(!std::strcmp(argv[i],"--exit-after")&&i+1<argc)o.exit_after=std::atoi(argv[++i]);
         else if(!std::strcmp(argv[i],"--screenshot")&&i+1<argc)o.screenshot=argv[++i];
         else if(!std::strcmp(argv[i],"--keys")&&i+1<argc)o.keys=argv[++i];
+        else if(!std::strcmp(argv[i],"--pad")&&i+1<argc)o.pad=argv[++i];
         else return false;
     }
     return true;
@@ -61,6 +63,11 @@ std::vector<ScriptedKey> parse_keys(const std::string& text){
         ScriptedKey k;const auto a=item.find(':'),b=item.find(':',a+1);k.frame=std::stoull(item.substr(0,a));k.vk=static_cast<std::uint32_t>(std::stoul(item.substr(a+1,b-a-1),nullptr,0));
         if(b!=std::string::npos)k.hold=static_cast<std::uint32_t>(std::stoul(item.substr(b+1)));out.push_back(k);}
     return out;}
+std::optional<sadx::HleXInputGamepad> host_pad(){
+    for(GCController* controller in [GCController controllers])
+        if(auto sample=sadx::input::mac::xinput_sample(controller))return sample;
+    return std::nullopt;
+}
 // macOS virtual key codes (Carbon kVK_*) to Windows virtual keys (US layout); 0: not forwarded.
 std::uint32_t windows_key(unsigned short code){
     static const std::map<unsigned short,std::uint32_t> table={
@@ -79,6 +86,7 @@ std::vector<std::uint32_t> fan_indices(std::uint32_t vertex_count){std::vector<s
 @property(nonatomic) sadx::HleProcess* guest;              // guest mode
 @property(nonatomic) sadx::MetalGuestFrameRenderer* guestRenderer;
 @property(nonatomic) BOOL guestStopped;
+@property(nonatomic) BOOL scriptedPad;
 @property(nonatomic) std::string* guestStop;
 @property(nonatomic) id<MTLRenderPipelineState> pipeline;
 @property(nonatomic) id<MTLCommandQueue> queue;
@@ -141,7 +149,7 @@ std::vector<std::uint32_t> fan_indices(std::uint32_t vertex_count){std::vector<s
     [commands presentDrawable:drawable];[commands commit];if(capture)[commands waitUntilCompleted];
     ++self.framesDrawn;
     std::string unsupported;for(const auto& [why,n]:stats.unsupported)unsupported+=" "+why+" x"+std::to_string(n);
-    if(!self.guestStopped){const auto r=self.guest->guest().resume();if(!r.paused){self.guestStopped=YES;*self.guestStop=r.completed?"the guest returned from its entry point":r.error;}}
+    if(!self.guestStopped){if(!self.scriptedPad)self.guest->host_xinput(host_pad());const auto r=self.guest->guest().resume();if(!r.paused){self.guestStopped=YES;*self.guestStop=r.completed?"the guest returned from its entry point":r.error;}}
     std::printf("frame %d: guest present %llu, %zu draws (%zu textured), %zu clears%s%s\n",self.framesDrawn,static_cast<unsigned long long>(self.guest->d3d8.presents),stats.draws,stats.textured,stats.clears,
         unsupported.empty()?"":(", not drawn:"+unsupported).c_str(),self.guestStopped?(", guest stopped: "+*self.guestStop).c_str():"");
     self.status.stringValue=[NSString stringWithFormat:@"Guest: sonic.exe + mod loader + mods, frame %llu (%zu draws, %zu textured)%@",static_cast<unsigned long long>(self.guest->d3d8.presents),stats.draws,stats.textured,
@@ -156,11 +164,16 @@ int run_guest(const Options& o){
     std::string error;const auto image=sadx::ExecutableImage::parse({std::istreambuf_iterator<char>(f),{}},&error);if(!image){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
     auto process=sadx::HleProcess::create(o.game_dir,"build/sadx-app-overlay",&error);if(!process){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
     process->use_real_cpp_runtime(o.system_dir);process->hle().set_logging(false);
+    process->assume("GameController host sampling: first extended controller is exposed as synthetic user 0; printed face labels resolved when available, Apple deadzones retained; no physical Windows HID parity or vibration output claimed");
+    if(!o.pad.empty())process->host_xinput(sadx::HleXInputGamepad{});
+    else process->host_xinput(host_pad());
     if(!process->map_main(*image,&error)){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
     sadx::FpuShimStats shims;if(!sadx::install_fpu_shims(process->guest(),sadx::load_fpu_sites("reference/inventory/fpu-sites.json"),shims,&error)){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
-    auto* P=process.get();const auto script=parse_keys(o.keys);
-    process->on_present=[P,script](sadx::X86Guest& g){
+    auto* P=process.get();const auto script=parse_keys(o.keys),pads=parse_keys(o.pad);
+    for(const auto& k:pads)if(k.vk&~0xf7ffU){std::fprintf(stderr,"unsupported --pad button mask\n");return 2;}
+    process->on_present=[P,script,pads](sadx::X86Guest& g){
         for(const auto& k:script){if(P->d3d8.presents==k.frame)P->host_key(k.vk,true);if(P->d3d8.presents==k.frame+k.hold)P->host_key(k.vk,false);}
+        for(const auto& k:pads){if(P->d3d8.presents==k.frame)P->host_xinput(sadx::HleXInputGamepad{static_cast<std::uint16_t>(k.vk),0,0,0,0,0,0});if(P->d3d8.presents==k.frame+k.hold)P->host_xinput(sadx::HleXInputGamepad{});}
         g.pause();};
     const auto first=process->guest().call(0x643f96,{});
     std::string stop;if(!first.paused){std::fprintf(stderr,"the guest did not reach its first Present: %s\n",first.error.c_str());return 4;}
@@ -172,7 +185,7 @@ int run_guest(const Options& o){
     SADXAppView* view=[[SADXAppView alloc] initWithFrame:NSMakeRect(0,0,1280,960) device:device];
     view.colorPixelFormat=MTLPixelFormatBGRA8Unorm;view.depthStencilPixelFormat=MTLPixelFormatDepth32Float;view.framebufferOnly=NO;view.preferredFramesPerSecond=63;view.drawableSize=CGSizeMake(640,480);view.autoResizeDrawable=NO;
     view.queue=[device newCommandQueue];view.exitAfter=o.exit_after;view.screenshot=o.screenshot.empty()?nil:[NSString stringWithUTF8String:o.screenshot.c_str()];
-    view.guest=process.get();view.guestRenderer=renderer.get();view.guestStop=&stop;window.contentView=view;
+    view.scriptedPad=!o.pad.empty();view.guest=process.get();view.guestRenderer=renderer.get();view.guestStop=&stop;window.contentView=view;
     NSTextField* status=[NSTextField labelWithString:@"Guest"];status.font=[NSFont monospacedSystemFontOfSize:11 weight:NSFontWeightRegular];
     status.textColor=[NSColor colorWithWhite:0.9 alpha:1];status.backgroundColor=[NSColor colorWithWhite:0 alpha:0.55];status.drawsBackground=YES;
     status.frame=NSMakeRect(8,8,1264,36);[view addSubview:status];view.status=status;
@@ -183,7 +196,7 @@ int run_guest(const Options& o){
 }
 }
 int main(int argc,char** argv){
-    Options o;if(!parse(argc,argv,o)){std::fprintf(stderr,"usage: %s --guest GAME_DIR WINDOWS_SYSTEM_DIR [--exit-after N] [--screenshot out.ppm] [--keys FRAME:VK[:FRAMES],...]\n       %s SONIC.EXE INPUT_MOD.DLL [--frames N] [--survey|--stop] [--exit-after N] [--screenshot out.ppm]\n",argv[0],argv[0]);return 2;}
+    Options o;if(!parse(argc,argv,o)){std::fprintf(stderr,"usage: %s --guest GAME_DIR WINDOWS_SYSTEM_DIR [--exit-after N] [--screenshot out.ppm] [--keys FRAME:VK[:FRAMES],...] [--pad FRAME:BUTTONS[:FRAMES],...]\n       %s SONIC.EXE INPUT_MOD.DLL [--frames N] [--survey|--stop] [--exit-after N] [--screenshot out.ppm]\n",argv[0],argv[0]);return 2;}
     if(o.guest){@autoreleasepool{return run_guest(o);}}
     @autoreleasepool{
         sadx::MacPerformanceCounter counter;

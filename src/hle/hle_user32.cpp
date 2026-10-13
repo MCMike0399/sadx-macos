@@ -207,7 +207,7 @@ void register_hle_user32(HleProcess& p){
         const auto s=P->string_at(arg(c,0));if(!s)return 0;auto& m=W.registered_messages[lower(*s)];if(!m)m=W.next_registered_message++;return m;});
     // Devices: the guest machine has no game controllers or HID devices (input reaches the game through the
     // host later); enumerations are empty and per-device functions stop because no device can exist.
-    P->assume("SetupAPI/HID enumerations are empty; XInput device state is supplied separately by host samples");
+    P->assume("SetupAPI exposes no physical HID interfaces; the synthetic pad is supplied through raw-input and XInput APIs");
     for(const char* name:{"HidD_GetAttributes","HidD_GetSerialNumberString","HidD_GetManufacturerString","HidD_GetProductString","HidD_SetFeature","HidD_GetFeature",
                           "HidD_GetInputReport","HidD_GetIndexedString","HidD_GetPreparsedData","HidD_FreePreparsedData","HidP_GetCaps","HidD_SetNumInputBuffers",
                           "HidD_SetOutputReport","HidP_GetButtonCaps","HidP_GetValueCaps","HidP_MaxDataListLength","HidP_GetData"})
@@ -375,9 +375,10 @@ void register_hle_user32(HleProcess& p){
         else if(vk==0x0d||vk==0x1b||vk==0x20||vk==0x08||vk==0x09)ch=vk;
         if(ch){HleMessage msg;msg.hwnd=m[0];msg.message=0x0102;msg.wparam=ch;msg.lparam=m[3];W.queue.insert(W.queue.begin(),msg);}
         return 1;});
-    const auto dispatch=[&W,arg](HleCall& c)->std::uint32_t{
+    const auto dispatch=[P,&W,arg](HleCall& c)->std::uint32_t{
         std::uint32_t m[4]={};c.guest.read(arg(c,0),m,16);auto* w=W.find(m[0]);if(!w)return 0;
-        c.guest.redirect(w->procedure,{m[0],m[1],m[2],m[3]},4,[](X86Guest&){});return 0;};
+        const auto message=m[1],token=m[3];
+        c.guest.redirect(w->procedure,{m[0],m[1],m[2],m[3]},4,[P,message,token](X86Guest&){if(message==0xff)P->raw_input.packets.erase(token);});return 0;};
     U("DispatchMessageA",4,1,dispatch);U("DispatchMessageW",4,1,dispatch);
     const auto send=[&W,arg](HleCall& c)->std::uint32_t{auto* w=W.find(arg(c,0));if(!w)return 0;
         c.guest.redirect(w->procedure,{arg(c,0),arg(c,1),arg(c,2),arg(c,3)},16,[](X86Guest&){});return 0;};

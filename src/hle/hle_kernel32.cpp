@@ -349,11 +349,15 @@ void register_hle_kernel32(HleProcess& p){
         if(!host){P->last_error=ERROR_FILE_NOT_FOUND;return 0xffffffffU;}
         return std::filesystem::is_directory(*host)?0x10U:0x80U;});
     K("CloseHandle",4,1,[P,arg](HleCall& c)->std::uint32_t{
+        if(P->raw_input.close(arg(c,0)))return 1;
         const auto i=P->file_handles.find(arg(c,0));if(i==P->file_handles.end()){P->last_error=ERROR_INVALID_HANDLE;return 0;}
         if(i->second.file)std::fclose(i->second.file);P->file_handles.erase(i);return 1;});
     const auto create_file=[P,arg](bool wide){return [P,arg,wide](HleCall& c)->std::uint32_t{
         const auto name=wide?P->wide_at(arg(c,0)):P->string_at(arg(c,0));
         if(!name){c.guest.stop("CreateFile: unreadable or non-ASCII file name");return 0;}
+        if(*name==HleRawInputState::device_name()){
+            if(arg(c,4)!=3||(arg(c,1)&~0x80000000U)!=0||arg(c,5)!=0){c.guest.stop("CreateFile: unsupported synthetic HID open mode");return 0xffffffffU;}
+            if(const auto device=P->raw_input.open(*P,*name))return *device;}
         const auto access=arg(c,1),disposition=arg(c,4);const bool write=(access&0x40000000U)!=0;
         if(name->rfind("\\\\.\\",0)==0||(name->find(':')==std::string::npos&&name->rfind("CON",0)==0)){c.guest.stop("CreateFile on a device ("+*name+") is not implemented");return 0;}
         auto host=P->host_path(*name);

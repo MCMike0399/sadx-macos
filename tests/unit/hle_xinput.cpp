@@ -40,6 +40,6 @@ int main(){try{
     require(p->last_error==0x1234,"XInput does not use SetLastError");
     p->xinput.sample(HleXInputGamepad{});
     const auto r=call("XInput1_4.dll","XInputGetState",{0,0});require(!r&&r.error.find("output buffer")!=std::string::npos,"invalid buffer stops explicitly");
-    std::cout<<"XInput HLE: three DLL aliases, connected/disconnected users, wire layouts/bounds, Guide, packet changes, enable/disable, wired battery, explicit unsupported vibration/invalid buffer; pinned SDL enumeration still needs the raw-input device facade\n";
+    std::cout<<"XInput HLE: three DLL aliases, connected/disconnected users, wire layouts/bounds, Guide, packet changes, enable/disable, wired battery, explicit unsupported vibration/invalid buffer; SDL/game delivery is verified by guest-controller\n";
     return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

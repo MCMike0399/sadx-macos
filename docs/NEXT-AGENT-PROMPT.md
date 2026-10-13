@@ -10,7 +10,7 @@ by automated tests. Read AGENTS.md, then docs/STATUS.md, docs/ARCHITECTURE.md, d
 docs/METHOD.md and docs/decisions/ADR-0001..0004 before touching code. Read the last handoff entries
 in docs/HANDOFF.md (from "M1 4e completion" on) — they record every HLE assumption and bug found.
 
-Where things stand (gate 117): the in-process guest runs sonic.exe from its entry point with the real
+Where things stand (gate 118): the in-process guest runs sonic.exe from its entry point with the real
 mod loader and mods (MSVCP140/VCRUNTIME140 as real code, everything else HLE in src/hle) from the SEGA
 logo through the intro movie (a headless DirectShow graph, src/hle/hle_dshow: no video/audio drawn, a
 reported assumption) to the title screen (frame 7168) and on into the attract demo; two boots are
@@ -35,29 +35,28 @@ WFOG and mipmap/cube-map texture-cap assumption, reported in both runtimes. Test
 native startup's stored caps, both guest COM methods, and original 78cfa0's MIPMAP branch.
 This aligns the platform fact; the native runtime's unported texture-init callees remain explicit.
 
+Controller delivery is implemented through the pinned SDL's default raw-input path:
+hle_raw_input enumerates/attaches a synthetic Xbox-style HID device, sends WM_INPUT and arrival/removal
+notifications, and supplies the HID parser interfaces. Original SDL handles mapping and XInput correlation.
+guest-controller scripts Start at 450/800 to skip the movie/open file select, checks two identical boots,
+six axes/fifteen buttons, and reconnect. sadx-app samples the first supported GameController extended
+profile; --pad FRAME:BUTTONS[:FRAMES],... scripts XInput masks (Start = 0x10).
+Limits: synthetic device identity/report schema and packet policy are assumptions; Apple's deadzones
+remain applied; no physical-controller/Windows HID parity or vibration output is claimed.
+SDL needs Win32 message dispatch (its video subsystem is not initialized) and a stable correlation
+interval before independent triggers are available after reconnect. See the controller handoff.
+
 Current milestone: M1 — what is left (one gate each: make -j10 gate — it opens a window for app-smoke;
 record with tools/gate/record_gate.py only on rc=0; python3 tools/gate/gen_status.py; a docs/HANDOFF.md
 entry; commit; do not push unless asked):
 
-1. Finish controllers through the real Input mod / SDL path. hle_xinput now models a synthetic user-0
-   wired pad (state/caps/#100, packet changes, enable/disable; no vibration actuators) with host samples,
-   but SDL STILL ENUMERATES ZERO JOYSTICKS. The pinned SDL2 (25003b5b, base 6c940000) enables raw input
-   by default (6ca6f120); 6ca73cf0 disables classic XInput when 6ca70900 reports raw input enabled.
-   Supply the virtual Xbox-style HID/raw-input device facade (GetRawInputDeviceList/Info, HID metadata,
-   device handles and WM_INPUT data/events), then any notification/thread behaviour SDL reaches.
-   Do not change the profile's SDL hints to route around this. Raw attach 6ca6e6e0 requires a type-2
-   device whose path contains IG_; it reads device info/preparsed data, opens the device and reads HID
-   manufacturer/product strings. Analysis is in reference/sdl-controller-recovery/ (owned runner now
-   accepts config.binary_path, defaulting to sonic.exe). Add GameController host sampling in sadx-app
-   and a script that drives movie skip/title/file select through controller Start, with determinism
-   and axis/button assertions. The direct XInput unit test is NOT proof of SDL/game input delivery.
-2. Override equivalence for the rest of the ported owners with oracles (46 address-named ones are
+1. Override equivalence for the rest of the ported owners with oracles (46 address-named ones are
    unbound: see the 4d handoff entry for the list). Next: the D3D-device users (781250, 791170, 403180,
    fog 7949b0/794e40/794ec0, 77ec60) need a guest-device bridge (the HLE IDirect3DDevice8 as the
    native NinjaRenderState/transform owner callbacks); then heaps (780f60/780fb0), the task graph and
    the render queue. Give each oracle a <slug>.cases.bin (the verify scripts write it; add it to
    OVERRIDE_CORPORA) instead of enumerating cases.
-3. M2 golden-frames: offscreen render of fixed guest frames (SEGA logo, title screen, file select)
+2. M2 golden-frames: offscreen render of fixed guest frames (SEGA logo, title screen, file select)
    against reviewed goldens (perceptual diff), using sadx-app --guest --keys/--screenshot.
 
 Performance notes: never pass an instruction count to uc_emu_start (Unicorn then instruments every

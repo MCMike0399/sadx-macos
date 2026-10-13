@@ -1978,3 +1978,62 @@ Evidence: `reference/production-integration-20261013/xinput-foundation-117-gate.
   oracles rerun (HLE/build/analysis only). Existing unregistered metal-sprite, metal-sprite-composition,
   metal-texture and player-task tests were **not run**. Controllers, remaining overrides and reviewed
   golden frames remain open. No SDL hint was changed and no controller replay is claimed.
+
+## M1 controller delivery: real SDL raw-input path, replay and GameController app adapter (2026-10-13)
+
+Evidence: `reference/production-integration-20261013/controller-delivery-118-gate.json` (rc 0,
+122 native programs, 4 Python tests), `reference/production-integration-20261013/controller-evidence.json`.
+REA/Ghidra: raw joystick open `ev_431faa7f7139d8f194ea3d0b96806b89a1f63c5dfd8f188c174db80aaee62e9d`,
+raw report/window procedure `ev_ae73d61b469eb47d3073c6399b225e2a288bf1680f934661cf85f9ecdb7ff216`
+(`reference/sdl-controller-recovery/sdl-raw-open`, `sdl-raw-report`). Session closed successfully.
+
+* **The pinned SDL now enumerates/opens one joystick.** `hle_raw_input` supplies user 0's synthetic
+  Xbox-style HID identity through GetRawInputDeviceList/Info; device CreateFile/CloseHandle and HID
+  manufacturer/product strings; opaque preparsed data, HidP_MaxDataListLength/GetCaps/GetButtonCaps/
+  GetValueCaps/GetData. Original 6ca6e6e0 attaches it and 6ca6f770 opens it. No SDL hint was changed.
+  Unsupported descriptors/report types/open modes stop explicitly. Physical SetupAPI HID enumeration
+  stays empty and is reported separately from the synthetic raw-input identity.
+* **Reports/lifetime:** host_xinput snapshots input and emits WM_INPUT to the registration's target,
+  with arrival/removal WM_INPUT_DEVICE_CHANGE notifications. Report values may repeat without changing
+  XInput's packet number; this supplies state after a newly attached joystick has opened. A 32-bit
+  RAWINPUT header + RAWHID wraps one 17-byte report (ID 0 + synthetic XINPUT_STATE). The HLE parser
+  exposes 10 buttons, X/Y/Z/Rx/Ry and a hat, 16 data indices. Packet buffers remain readable throughout
+  message dispatch and are released after the window procedure's continuation returns.
+* **Important exact consumer details:** the SDL raw window procedure uses a hardcoded hat table with
+  values **1..8, 0 neutral**; the initial 0..7/8-neutral descriptor was corrected. Y values become
+  `~XInputY` (-1 at centre), not just a sign flip. SDL without video does not drain Windows messages
+  through SDL_PumpEvents; the probe uses the same USER32 PeekMessageW/DispatchMessageW boundary as the
+  game, then SDL_GameControllerUpdate. SDL waits for a stable raw/XInput correlation after reconnect;
+  the probe advances real virtual Sleep(10) ten times and polls, without changing SDL state. Before
+  correlation, its own merged-trigger fallback is visible; afterward both independent triggers agree.
+* **`guest-controller-test` (gate and make m1):** controller Start (XInput mask 0x10) at frames 450/800,
+  held five frames: title at 454, file-select textures loaded after 800, two 900-frame boots have identical
+  per-frame digests. A neutral pad stays in the movie at 500. Real SDL API reads verify all six axes
+  `[16384,8191,-10000,-20001,3854,23129]` and fifteen buttons (including Guide and left-only D-pad) after
+  a mixed sample. Connection at 100, removal at 120, reconnect at 140 also enumerate/open one joystick
+  and produce the same probe outputs. Raw packet buffers are consumed. **Mutant:** left hat 7 ->6
+  causes exit 1 at the real SDL button/hat assertion; restored source/binary before the final gate.
+* **Host/app:** `platform/mac/mac_xinput` captures a stable extended GameController profile, reuses the
+  printed-label face mapping and converts axes to raw XInput Y-up values. Triggers convert directly
+  from the captured float to 0..255: converting through a truncated SDL axis incorrectly turns 30/255
+  into 29. `mac-xinput-test` checks axis signs/extremes, A/Start/D-pad, thresholds 30/31 and unsupported/
+  disconnected profiles. sadx-app samples the first supported extended controller each guest frame;
+  `--pad FRAME:BUTTONS[:FRAMES],...` supplies a connected scripted pad (Start=0x10).
+  `--pad 450:0x10,800:0x10 --exit-after 900 --screenshot build/controller-menu.ppm` exits 0 and its
+  captured frame visibly shows **Select a Saved File**. Screenshots stay local/ignored.
+* **`hle-raw-input-test`:** wire sizes/metadata, insufficient buffers, descriptor/caps/data, neutral
+  state, repeated packet reads and arrival/removal ordering. Every new test is registered in the manifest.
+  Corrected the old XInput test's now-stale output; final gate rerun includes the corrected text.
+  Gate: 7,228-frame full intro/title determinism and first 600 override frames unchanged, 63 FPS virtual
+  title samples, 82.3 measured host FPS, keyboard/timing/Metal smoke pass. No source-global owner added.
+* **SDK reference:** [raw device info](https://learn.microsoft.com/en-us/windows/win32/api/winuser/nf-winuser-getrawinputdeviceinfoa),
+  [HID caps](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/hidpi/ns-hidpi-_hidp_caps),
+  [button caps](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/hidpi/ns-hidpi-_hidp_button_caps),
+  [value caps](https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/hidpi/ns-hidpi-_hidp_value_caps).
+  Microsoft win32metadata's hidpi.h was consulted locally for field offsets; header not vendored.
+* **Limits:** synthetic 045e:028e identity/revision/report schema and packet policy are assumptions,
+  not a captured Windows device. Apple deadzones remain applied. No physical controller was connected
+  (`sadx-metal --controllers` showed an empty list); physical-controller/Windows HID parity and vibration
+  output are unverified/not supplied. No standalone oracles rerun (HLE/platform/app only); gate replays
+  existing override corpora. Existing unregistered metal-sprite, metal-sprite-composition, metal-texture,
+  player-task were **not run**. Remaining override equivalence and reviewed goldens remain open.

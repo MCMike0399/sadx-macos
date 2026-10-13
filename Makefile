@@ -167,7 +167,7 @@ clean:
 # The roadmap's M1 tests (docs/ROADMAP.md), nothing else: guest-imports, guest-dlls (profile-applied at mod init),
 # guest-boot (profile-applied, live overrides), guest-overrides (override-equivalence), guest-fpu-shims, guest-frames
 # (SEGA logo -> title, determinism, guest-fps), guest-input (input-script determinism), guest-timing (profile cadence) and app-smoke.
-M1_TESTS := guest-imports guest-dlls guest-boot guest-overrides guest-fpu-shims guest-frames guest-input guest-timing
+M1_TESTS := guest-imports guest-dlls guest-boot guest-overrides guest-fpu-shims guest-frames guest-input guest-timing guest-controller
 m1: $(foreach t,$(M1_TESTS),build/$(t)-test) $(OVERRIDE_CORPORA) app-smoke
 	./build/guest-imports-test "$(GAME_EXE)"
 	./build/guest-dlls-test $(REFERENCE_GAME_DIR) $(WINDOWS_SYSTEM_DIR)
@@ -177,3 +177,4 @@ m1: $(foreach t,$(M1_TESTS),build/$(t)-test) $(OVERRIDE_CORPORA) app-smoke
 	./build/guest-frames-test $(REFERENCE_GAME_DIR) $(WINDOWS_SYSTEM_DIR) 60
 	./build/guest-input-test $(REFERENCE_GAME_DIR) $(WINDOWS_SYSTEM_DIR)
 	./build/guest-timing-test $(REFERENCE_GAME_DIR) $(WINDOWS_SYSTEM_DIR)
+	./build/guest-controller-test $(REFERENCE_GAME_DIR) $(WINDOWS_SYSTEM_DIR)
