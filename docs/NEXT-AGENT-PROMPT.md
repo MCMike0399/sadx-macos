@@ -10,7 +10,7 @@ by automated tests. Read AGENTS.md, then docs/STATUS.md, docs/ARCHITECTURE.md, d
 docs/METHOD.md and docs/decisions/ADR-0001..0004 before touching code. Read the last handoff entries
 in docs/HANDOFF.md (from "M1 4e completion" on) — they record every HLE assumption and bug found.
 
-Where things stand (gate 118): the in-process guest runs sonic.exe from its entry point with the real
+Where things stand (gate 119): the in-process guest runs sonic.exe from its entry point with the real
 mod loader and mods (MSVCP140/VCRUNTIME140 as real code, everything else HLE in src/hle) from the SEGA
 logo through the intro movie (a headless DirectShow graph, src/hle/hle_dshow: no video/audio drawn, a
 reported assumption) to the title screen (frame 7168) and on into the attract demo; two boots are
@@ -18,8 +18,8 @@ identical. Host keyboard input reaches the guest as WM_KEYDOWN/WM_KEYUP (HleProc
 Input mod's window subclass maps them): Enter skips the movie and opens "Select a Saved File".
 sadx-app --guest draws all of it with Metal and forwards the Mac keyboard (--keys scripts presses).
 The FPU shims cover all 590 confirmed FPATAN/FSINCOS/FPTAN/FSIN/FCOS/F2XM1/FYL2X/RCP/RSQRT sites.
-profile-applied is 119/119. The override table binds 12 owners (frame loop, startup registrars, the
-D3DX math leaves), equivalence-tested on 6 oracle corpora + enumerated cases with mutants, live in the
+profile-applied is 119/119. The process override table binds 15 owners (frame loop, startup registrars, the
+D3DX math leaves + blend wrapper/leaf and fog colour), equivalence-tested on 8 oracle corpora + enumerated cases with mutants, live in the
 boot and over 600 frames. `make m1` runs exactly the roadmap's M1 tests.
 
 Timing is now checked: guest-frames asserts 60 steady title frames after the full intro at
@@ -50,12 +50,15 @@ Current milestone: M1 — what is left (one gate each: make -j10 gate — it ope
 record with tools/gate/record_gate.py only on rc=0; python3 tools/gate/gen_status.py; a docs/HANDOFF.md
 entry; commit; do not push unless asked):
 
-1. Override equivalence for the rest of the ported owners with oracles (46 address-named ones are
+1. Override equivalence for the rest of the ported owners with oracles (44 of the previously listed address-named ones are
    unbound: see the 4d handoff entry for the list). Next: the D3D-device users (781250, 791170, 403180,
-   fog 7949b0/794e40/794ec0, 77ec60) need a guest-device bridge (the HLE IDirect3DDevice8 as the
-   native NinjaRenderState/transform owner callbacks); then heaps (780f60/780fb0), the task graph and
+   fog 794e40/794ec0) need the transform/fog extension of hle_device_bridge. The bridge currently binds
+   4030d0/77ec60/7949b0, verifies the HLE vtable target, invokes the actual synchronous COM handler,
+   preserves call trace/partial-store order and rereads the live device. process_overrides combines it
+   with the 12 guest-only owners; sadx-app now installs that table. Extend it before heaps (780f60/780fb0), the task graph and
    the render queue. Give each oracle a <slug>.cases.bin (the verify scripts write it; add it to
-   OVERRIDE_CORPORA) instead of enumerating cases.
+   OVERRIDE_CORPORA) instead of enumerating cases. Blend and fog corpora are now generated dependencies;
+   hle-device-bridge replays 16,418 wrapper/leaf cases +300 fog-colour cases, including boundaries and mutants.
 2. M2 golden-frames: offscreen render of fixed guest frames (SEGA logo, title screen, file select)
    against reviewed goldens (perceptual diff), using sadx-app --guest --keys/--screenshot.
 

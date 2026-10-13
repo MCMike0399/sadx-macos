@@ -18,6 +18,7 @@
 #include "platform/mac/mac_xinput.hpp"
 #include "platform/mac/metal_guest_frame.hpp"
 #include "guest/fpu_shims.hpp"
+#include "hle/hle_device_bridge.hpp"
 #include <iterator>
 #include <cstdio>
 #include <cstdlib>
@@ -169,6 +170,7 @@ int run_guest(const Options& o){
     else process->host_xinput(host_pad());
     if(!process->map_main(*image,&error)){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
     sadx::FpuShimStats shims;if(!sadx::install_fpu_shims(process->guest(),sadx::load_fpu_sites("reference/inventory/fpu-sites.json"),shims,&error)){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
+    if(!sadx::install_overrides(process->guest(),sadx::process_overrides(*process,*image),&error)){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
     auto* P=process.get();const auto script=parse_keys(o.keys),pads=parse_keys(o.pad);
     for(const auto& k:pads)if(k.vk&~0xf7ffU){std::fprintf(stderr,"unsupported --pad button mask\n");return 2;}
     process->on_present=[P,script,pads](sadx::X86Guest& g){

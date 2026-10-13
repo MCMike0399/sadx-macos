@@ -1,0 +1,45 @@
+{
+ "entries": [
+  "4030d0",
+  "77ec60",
+  "7949b0"
+ ],
+ "equivalence": {
+  "blend_wrapper_and_leaf_corpus_cases": 16418,
+  "fog_colour_corpus_cases": 300,
+  "comparisons": [
+   "globals",
+   "HLE device states",
+   "COM arguments/results/return sites",
+   "stores visible at COM calls",
+   "FP state",
+   "completion/boundaries"
+  ],
+  "bridge_argument_mutants_caught": 3,
+  "foreign_vtable_rejected": true
+ },
+ "live": {
+  "boot_with_process_overrides_identical": true,
+  "blend_leaf_calls_before_first_present": 2,
+  "fog_colour_calls_before_first_present": 1,
+  "controller_script_frames_plain_vs_process_overrides": 900,
+  "controller_script_digests_match": true,
+  "app_script_exit_status": 0,
+  "app_screenshot_sha256": "bc1cfbaa30f34f240c7094a5059ffec35138d91e9efd1233c762d048f7d5949e",
+  "app_review": "Select a Saved File is visible; screenshot local/ignored"
+ },
+ "oracles": {
+  "ninja_render": "pass",
+  "fog": "partial; values match, 2404 FP flag mismatches"
+ },
+ "source_sha256": {
+  "src/hle/hle_device_bridge.cpp": "3edddd502105af369b6d4e1d5aa3ba707f55011457811444399511178fbe2376",
+  "src/hle/hle_device_bridge.hpp": "b022822df5dd09e79bb80de23f2f1e89426d80e24b8c3955ad73a743a18aad75",
+  "tests/unit/hle_device_bridge.cpp": "f0f5bf4a320cb8d67f5baf80f3e2efaa543073733cf31f731a7afbb77879e11a"
+ },
+ "limits": [
+  "Bridge supports verified synchronous HLE SetRenderState vtable targets only; foreign/proxy targets stop explicitly.",
+  "Transforms, fog table/init, heap/task/queue and other owners remain unbound.",
+  "Declared native table domains are replayed as explicit source boundaries, not claimed natural original returns."
+ ]
+}

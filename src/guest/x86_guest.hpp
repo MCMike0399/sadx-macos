@@ -37,6 +37,7 @@ public:
     // zeroed virtual tail (.bss). Page 0 stays unmapped so null dereferences fault.
     bool map_image(const ExecutableImage&,std::string* error);
     bool map(std::uint32_t base,std::uint32_t size,bool executable,std::string* error);
+    bool unmap(std::uint32_t base,std::uint32_t size,std::string* error);
     bool write(std::uint32_t address,const void* bytes,std::size_t size);
     bool read(std::uint32_t address,void* bytes,std::size_t size)const;
     std::optional<std::uint32_t> u32(std::uint32_t address)const;
@@ -82,6 +83,7 @@ public:
     // Ends the current call() as a failure with `error` (an override or import trap that cannot
     // proceed, e.g. an unbound import). The guest state is left as it was at the stop.
     void stop(std::string error);
+    const std::optional<std::string>& stop_reason()const noexcept{return stopped_;}
     std::uint32_t esp()const;std::uint32_t eip()const;
     void set_eax(std::uint32_t);void set_edx(std::uint32_t);
     // A function returning a float/double leaves it in ST(0): push the ext80 value as FLD would (TOP

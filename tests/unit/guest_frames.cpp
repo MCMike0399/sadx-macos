@@ -11,6 +11,7 @@
 #include "guest/fpu_shims.hpp"
 #include "guest/override_table.hpp"
 #include "hle/hle_process.hpp"
+#include "hle/hle_device_bridge.hpp"
 #include <chrono>
 #include <cstdlib>
 #include <cstring>
@@ -35,7 +36,7 @@ Run run(const std::string& dir,const std::string& system,std::size_t extra,std::
     p->use_real_cpp_runtime(system);p->hle().set_logging(false);
     require(p->map_main(*image,&error),"map sonic.exe: "+error);
     Run r;require(install_fpu_shims(p->guest(),load_fpu_sites("reference/inventory/fpu-sites.json"),r.shims,&error),error);
-    if(limit)require(install_overrides(p->guest(),all_overrides(*image),&error),error); // the override table (M1 4d)
+    if(limit)require(install_overrides(p->guest(),process_overrides(*p,*image),&error),error); // the override table (M1 4d)
     std::size_t polygons_seen=0,title_frame=0,draws_seen=0,clears_seen=0;std::uint64_t last_time=0;std::chrono::steady_clock::time_point first_present;
     p->on_present=[&](X86Guest& g){
         auto& d=p->d3d8;Hash h;

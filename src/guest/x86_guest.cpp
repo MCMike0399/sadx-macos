@@ -24,6 +24,11 @@ bool X86Guest::map(std::uint32_t base,std::uint32_t size,bool executable,std::st
     if(rc!=UC_ERR_OK)return fail(error,"uc_mem_map "+std::to_string(base)+": "+uc_strerror(rc));
     return true;
 }
+bool X86Guest::unmap(std::uint32_t base,std::uint32_t size,std::string* error){
+    const auto rc=uc_mem_unmap(engine(uc_),base,size);
+    if(rc!=UC_ERR_OK)return fail(error,"uc_mem_unmap "+std::to_string(base)+": "+uc_strerror(rc));
+    return true;
+}
 bool X86Guest::map_image(const ExecutableImage& image,std::string* error){
     // The image as the loader lays it out: SizeOfImage bytes from the base, file bytes where the
     // image has them and zeros elsewhere (section tails, .bss). One RWX mapping; per-section

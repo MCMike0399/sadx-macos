@@ -2037,3 +2037,51 @@ raw report/window procedure `ev_ae73d61b469eb47d3073c6399b225e2a288bf1680f934661
   output are unverified/not supplied. No standalone oracles rerun (HLE/platform/app only); gate replays
   existing override corpora. Existing unregistered metal-sprite, metal-sprite-composition, metal-texture,
   player-task were **not run**. Remaining override equivalence and reviewed goldens remain open.
+
+## M1 device-backed overrides: blend and fog colour (2026-10-13)
+
+Evidence: `reference/production-integration-20261013/device-bridge-119-gate.json` (rc 0,
+123 native programs, 4 Python tests), `reference/production-integration-20261013/device-bridge-evidence.json`.
+REA/Ghidra: 77ec60 `ev_2d469eb1d543985500c182ce741c2a672a5825733d1c92c2b751e0311abf79cf`,
+4030d0 `ev_34900e62ff547faabd2a85706f9c2cd864bd98ccf438ed4b1d2cda17e8418e80`,
+7949b0 `ev_ec8e5a62d0fa650585f7178d5b586640e54ea7be64ebacae9d19128cd33dcf91`
+(`reference/inventory-raw/bridge-*`). Session closed successfully.
+
+* **`hle_device_bridge`** binds native blend wrapper 4030d0, blend leaf 77ec60 and fog colour 7949b0.
+  The renderer callback verifies the guest object's +c8 vtable target is the registered synchronous
+  HLE IDirect3DDevice8::SetRenderState trap, then invokes that real handler. Foreign/proxy targets
+  stop explicitly. Native device identities are separate tokens; guest addresses remain uint32_t.
+  The callback builds/restores a small guest stack frame without allocating guest heap memory,
+  preserving source return sites (+6), COM arguments/results and HLE counts/logs. It rereads the
+  live device after each call, including mutation to another/null/unmapped device.
+* **Store order:** the blend wrapper's packed-byte store and changed fog-colour store are flushed
+  before their first COM call, once only; skipped stores stay skipped. Tests observe globals inside
+  the COM handler as well as final values. HRESULT failure values remain ignored as in the source.
+  A stopped/unavailable HLE backend stops the native operation; its error is preserved.
+* **Two corpora:** fog verify script now writes its 416-word cases.bin; ninja_render already writes
+  its 8-word corpus. Both are OVERRIDE_CORPORA dependencies. `hle-device-bridge-test` replays all
+  8,209 blend cases against BOTH wrapper and leaf (**16,418**) plus **300** fog-colour cases through
+  actual HLE devices. Compares completion, globals, device states, COM arguments/return sites/results,
+  stores visible at calls and FP state. Corpus missing-fact cases use unmapped pages (new X86Guest::unmap),
+  nulls are actual nulls, and declared table domains stop the original at the explicit native boundary
+  rather than claiming its natural return. No inputs were silently dropped.
+* **Mutants:** flip one argument bit in each bridge (three seeded bridge input-marshalling errors);
+  all three caught. A foreign SetRenderState vtable target is rejected without an HLE device call.
+  X86Guest's read-only stop_reason lets a synchronous callback report stopped availability faithfully.
+* **Live composition:** `process_overrides(process,image)` combines the 12 guest-only entries with
+  the three device-backed entries (**15**). HLE is above guest, so guest's all_overrides stays independent
+  of HLE. guest-boot's third boot installs the process table and remains identical: blend leaf fires
+  twice and fog colour once before first Present. guest-frames' first 600 override digests still match.
+  A standalone comparison derived from guest-controller also verifies all **900** scripted frame
+  digests with and without the process table; temporary source removed. sadx-app now installs the
+  process table; --pad 450:0x10,800:0x10 through frame 900 exits 0 and its captured frame shows file select
+  (build/device-bridge-menu.ppm/png, local/ignored).
+* **Oracles:** reran/tracked ninja_render (**pass**, 8,209 cases, zero mismatches) and fog (**partial**,
+  4,700 cases, 4,673 compared, 27 declared boundaries, values/trace/tables match, 2,404 FP flag mismatches).
+  The FP-free fog-colour entry is equivalence-checked separately; the broader fog oracle is not called pass.
+  Other standalone oracles **not rerun**. Existing unregistered metal-sprite, metal-sprite-composition,
+  metal-texture and player-task **not run**. Gate full intro/title two-boot determinism unchanged,
+  63 FPS virtual title timing, measured 80.8 host FPS; controller/keyboard/Metal checks pass.
+* **Open:** transform callbacks and view/projection 781250/791170/403180, fog table/init 794e40/794ec0,
+  heap/task/queue and other owners still unbound. Of the earlier 46 address-named list, 44 remain;
+  4030d0 was an additional wrapper outside that list. Reviewed golden frames remain unfinished.

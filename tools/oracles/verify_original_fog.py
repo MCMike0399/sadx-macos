@@ -101,6 +101,7 @@ def main():
     if image.sha256!=SOURCE_SHA256 or unicorn.__version__!='2.1.4':raise RuntimeError('Pinned source/Unicorn mismatch')
     lib=ctypes.CDLL(str(a.native_library.resolve()));fn=lib.sadx_native_fog;fn.argtypes=[ctypes.POINTER(ctypes.c_uint32),ctypes.c_size_t,ctypes.POINTER(ctypes.c_uint32),ctypes.c_size_t];fn.restype=ctypes.c_int
     source=Source(image);bad=[];flags=0;flag_kinds={};outcomes={};explicit={};cases=fixtures()
+    a.output.with_suffix(".cases.bin").write_bytes(b"".join(struct.pack("<416I",*c) for c in cases))
     for n,c in enumerate(cases):
         e=source.run(c);out=(ctypes.c_uint32*480)()
         if fn((ctypes.c_uint32*416)(*c),416,out,480)!=1:raise RuntimeError('Native rejected')

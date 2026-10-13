@@ -11,6 +11,7 @@
 #include "guest/fpu_shims.hpp"
 #include "guest/override_table.hpp"
 #include "hle/hle_process.hpp"
+#include "hle/hle_device_bridge.hpp"
 #include "engine/d3d8_caps.hpp"
 #include <cstring>
 #include <fstream>
@@ -33,7 +34,7 @@ Boot boot(const std::string& dir,const std::string& system,const std::string& ov
     for(const auto& [at,size]:watch){auto stored=b.stored;const auto site=at; // guest stores (the loader's code); HLE writes are not reported
         require(b.process->guest().add_write_watch(at,at+size,[stored,site](std::uint32_t,std::uint32_t,std::uint32_t,std::uint64_t){stored->insert(site);},&error),error);}
     require(install_fpu_shims(b.process->guest(),load_fpu_sites("reference/inventory/fpu-sites.json"),*b.shims,&error),error); // M1 4e
-    if(fired)for(auto entry:all_overrides(*image)){ // the override table, counting how often each fires
+    if(fired)for(auto entry:process_overrides(*b.process,*image)){ // the override table, counting how often each fires
         auto bridge=entry.bridge;const auto name=entry.name;
         require(b.process->guest().add_override(entry.address,[bridge,name,fired](X86Guest& g){++(*fired)[name];return bridge(g);},&error),error);}
     b.result=b.process->guest().call(0x643f96,{});
@@ -108,7 +109,7 @@ int main(int argc,char** argv){try{
     std::ifstream exe(std::string(argv[1])+"/sonic.exe",std::ios::binary);std::string why;
     const auto image=ExecutableImage::parse({std::istreambuf_iterator<char>(exe),{}},&why);
     std::ostringstream counts;
-    for(const auto& entry:all_overrides(*image)){
+    for(const auto& entry:process_overrides(p,*image)){
         for(const auto& [at,size]:entry.writes)require(hex_bytes(p.guest(),at,size)==hex_bytes(o.guest(),at,size),entry.name+": different bytes at the first Present");
         counts<<entry.name<<" x"<<fired[entry.name]<<" ";}
     std::cout<<"Guest boot: entry point to the first Present in the guest ("<<p.hle().log().size()<<" HLE calls, identical on a second boot); windows "

@@ -5,7 +5,7 @@
   "src/engine/ninja_fog.hpp": "fad92d751154601d070ab8cc5872848f9e2f807275ca51086e1200d3f7d30907",
   "src/engine/ninja_fog.cpp": "3a53f7add8909b09447dddf40e7491a0c82c8a14f2e106a88318b9d0e7877be4",
   "tests/probes/native_fog_probe.cpp": "ac9158ca7ca5bece56a0cd2cf545d4286ea83e0940690ac1937b2d09d863c859",
-  "tools/oracles/verify_original_fog.py": "6b799623782b9ae990f212eb6044519cd06c146250e8c588ea5f7e90c9cacb48"
+  "tools/oracles/verify_original_fog.py": "ae0f68bc0da21790950ee0a18d41d5830da8693d40f6bf0f6981801bfdedc47e"
  },
  "original_ranges_sha256": {
   "0x794ec0": "90bf1be9c97401688095e04022e81e574f3617ed8cfef61bf202e295493a4824",
@@ -69,7 +69,7 @@
  "state_trace_tables_match": true,
  "limits": "Ninja fog owners against original instructions: device fog init 794ec0 (with\n795930, CRT pow 6447a0 on both its x87 and SSE2 paths, 794db0, 7949f0), fog\ncolour 7949b0, njGenerateFogTable3 787260 (CRT frexp 7b5eef, _ftol2 644340,\n794db0, 7949f0), fog-table edges 794e40 (7949f0) and the switches 411af0/411b40\nwith 4119b0, 411a20, 787220/787230 and 794950/794980.\n\nThe whole PE image (including .data and its zero tail) is mapped; the D3D8\ndevice's SetRenderState is a fixture (recorded site, state, value) and one\ncall can fail. Compared: completion, every fog global, the three 128-entry\ntables, the 411af0 cache/flag words and the render trace; x87 status flags are\nreported separately. Native explicit boundaries (FYL2X EXP2 density 794afc,\nfrexp of Inf/NaN 78728e, 787260 reference past the table 78753a) are counted,\nnot compared: the source continues past them.\n",
  "tracked_summary": {
-  "full_sha256": "4f2d5c09ef4134788377f019228f88c706c4a03a4ca3632d8ed085d5719b4714",
+  "full_sha256": "f87fcf186e2580edcfa2cebef15fc8afb6351fcbba96abfab07d562d86b76075",
   "full_bytes": 3671,
   "lists_cut_to": 10,
   "cut_lists": {}
