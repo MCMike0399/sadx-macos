@@ -24,6 +24,9 @@ using SseReciprocalEstimate=std::function<std::uint32_t(std::uint32_t bits,std::
 // 1/x by IEEE single division in MXCSR's rounding mode, raising no flags (the
 // Unicorn/QEMU model of RCPPS). It is not any real CPU's estimate.
 std::uint32_t sse_reciprocal_by_division(std::uint32_t bits,std::uint32_t mxcsr);
+// 1/sqrt(x) as IEEE single SQRTSS then the division above, same rounding, no flags (the
+// Unicorn/QEMU model of RSQRTPS). Also not any real CPU's estimate.
+std::uint32_t sse_reciprocal_sqrt_by_division(std::uint32_t bits,std::uint32_t mxcsr);
 // 774310: out row i = ((a[i][0]*b0 + a[i][1]*b1) + a[i][2]*b2) + a[i][3]*b3, all
 // loads before the stores (so out may alias a or b).
 D3dxMatrix d3dx_matrix_multiply_774310(const D3dxMatrix& a,const D3dxMatrix& b,SseContext&);

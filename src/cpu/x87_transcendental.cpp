@@ -74,4 +74,33 @@ std::optional<X87Value> X87Transcendental::fcos_bochs(X87Context& context, X87Va
     return X87Value(value.signExp, value.signif);
 }
 
+X87Value X87Transcendental::f2xm1_bochs(X87Context& context, X87Value x) {
+    context.check_thread();
+    context.check_pending();
+    auto status = status_for(context.control_word_);
+    const auto r = bochs_fpatan::f2xm1(bochs_fpatan::extFloat80_t{x.significand(), x.sign_exponent()}, status);
+    context.record_exceptions(static_cast<std::uint16_t>(status.softfloat_exceptionFlags & 0x3fU));
+    return X87Value(r.signExp, r.signif);
+}
+
+X87Value X87Transcendental::fyl2x_bochs(X87Context& context, X87Value x, X87Value y) {
+    context.check_thread();
+    context.check_pending();
+    auto status = status_for(context.control_word_);
+    const auto r = bochs_fpatan::fyl2x(bochs_fpatan::extFloat80_t{x.significand(), x.sign_exponent()},
+                                       bochs_fpatan::extFloat80_t{y.significand(), y.sign_exponent()}, status);
+    context.record_exceptions(static_cast<std::uint16_t>(status.softfloat_exceptionFlags & 0x3fU));
+    return X87Value(r.signExp, r.signif);
+}
+
+X87Value X87Transcendental::fyl2xp1_bochs(X87Context& context, X87Value x, X87Value y) {
+    context.check_thread();
+    context.check_pending();
+    auto status = status_for(context.control_word_);
+    const auto r = bochs_fpatan::fyl2xp1(bochs_fpatan::extFloat80_t{x.significand(), x.sign_exponent()},
+                                         bochs_fpatan::extFloat80_t{y.significand(), y.sign_exponent()}, status);
+    context.record_exceptions(static_cast<std::uint16_t>(status.softfloat_exceptionFlags & 0x3fU));
+    return X87Value(r.signExp, r.signif);
+}
+
 } // namespace sadx

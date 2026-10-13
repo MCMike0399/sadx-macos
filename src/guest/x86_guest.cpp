@@ -122,6 +122,9 @@ std::pair<std::uint64_t,std::uint16_t> X86Guest::st(unsigned i)const{
 }
 std::uint64_t X86Guest::xmm0_low()const{std::uint64_t v[2]={};uc_reg_read(engine(uc_),UC_X86_REG_XMM0,v);return v[0];}
 void X86Guest::set_xmm0_low(std::uint64_t low){std::uint64_t v[2]={};uc_reg_read(engine(uc_),UC_X86_REG_XMM0,v);v[0]=low;uc_reg_write(engine(uc_),UC_X86_REG_XMM0,v);}
+std::array<std::uint32_t,4> X86Guest::xmm(unsigned i)const{std::array<std::uint32_t,4> v{};uc_reg_read(engine(uc_),UC_X86_REG_XMM0+static_cast<int>(i),v.data());return v;}
+void X86Guest::set_xmm(unsigned i,const std::array<std::uint32_t,4>& v){auto copy=v;uc_reg_write(engine(uc_),UC_X86_REG_XMM0+static_cast<int>(i),copy.data());}
+std::uint32_t X86Guest::mxcsr()const{std::uint32_t v=0;uc_reg_read(engine(uc_),UC_X86_REG_MXCSR,&v);return v;}
 void X86Guest::set_st(unsigned i,std::uint64_t significand,std::uint16_t sign_exponent){
     std::uint32_t sw=0,tag=0;uc_reg_read(engine(uc_),UC_X86_REG_FPSW,&sw);uc_reg_read(engine(uc_),UC_X86_REG_FPTAG,&tag);
     const auto physical=(((sw>>11)&7U)+i)&7U;struct {std::uint64_t mantissa;std::uint16_t exponent;} value{significand,sign_exponent};

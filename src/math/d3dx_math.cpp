@@ -28,6 +28,10 @@ std::uint32_t sse_reciprocal_by_division(std::uint32_t bits,std::uint32_t mxcsr)
     SseContext scratch((mxcsr&0x6000U)|0x1f80U);
     return scratch.divide(Sse32{0x3f800000U},Sse32{bits}).bits;
 }
+std::uint32_t sse_reciprocal_sqrt_by_division(std::uint32_t bits,std::uint32_t mxcsr){
+    SseContext scratch((mxcsr&0x6000U)|0x1f80U);
+    return scratch.divide(Sse32{0x3f800000U},scratch.sqrt_single(Sse32{bits})).bits;
+}
 D3dxMatrix d3dx_matrix_multiply_774310(const D3dxMatrix& a,const D3dxMatrix& b,SseContext& c){
     const Lanes b0=row(b,0),b1=row(b,1),b2=row(b,2),b3=row(b,3);
     D3dxMatrix out{};

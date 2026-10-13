@@ -4,7 +4,9 @@
 Candidates come from `run_inventory.py fpu` (a byte-pattern scan). Each candidate is confirmed by a linear-sweep
 disassembly (capstone, in the reference venv) of its containing procedure, from the procedure's start to the
 next procedure's start: a candidate is `confirmed` when the sweep decodes an instruction of that mnemonic
-starting exactly at it. Sweeps can desynchronise on data inside code (jump tables); such candidates stay
+starting exactly at it. For the SSE estimates (RCPSS/RCPPS/RSQRTSS/RSQRTPS) the operands are recorded as flat
+fields for the guest shims: dst_xmm, src_xmm (-1 for a memory source), base/index (register names, "" when absent),
+scale, disp and the instruction length. Sweeps can desynchronise on data inside code (jump tables); such candidates stay
 unconfirmed and are listed, never silently dropped.
 Usage: reference/python/bin/python tools/analysis/fpu_sites.py GAME_EXE"""
 import bisect,json,pathlib,sys
@@ -19,14 +21,22 @@ def main(exe):
     out=ROOT/'reference/inventory/fpu-sites.json';d=json.loads(out.read_text())
     funcs=sorted(int(x['address'],16) for x in json.loads((ROOT/'reference/inventory/functions.json').read_text())['functions'] if not x['address'].startswith('EXTERNAL'))
     im=PEImage(exe);md=capstone.Cs(capstone.CS_ARCH_X86,capstone.CS_MODE_32)
+    md.detail=True
     decoded={}
     for s in d['sites']:
         if not s['procedure']:continue
         p=int(s['procedure'],16)
         if p not in decoded:
             i=bisect.bisect_right(funcs,p);end=funcs[i] if i<len(funcs) else p+0x1000
-            decoded[p]={ins.address:ins.mnemonic for ins in md.disasm(im.read(p,min(end-p,0x10000)),p)}
-        s['confirmed']=decoded[p].get(int(s['address'],16))==MNEMONIC[s['instruction']]
+            decoded[p]={ins.address:ins for ins in md.disasm(im.read(p,min(end-p,0x10000)),p)}
+        ins=decoded[p].get(int(s['address'],16))
+        s['confirmed']=ins is not None and ins.mnemonic==MNEMONIC[s['instruction']]
+        for k in ('dst_xmm','src_xmm','base','index','scale','disp','length'):s.pop(k,None)
+        if s['confirmed'] and s['instruction'] in ('RCPSS','RCPPS','RSQRTSS','RSQRTPS'):
+            dst,src=ins.operands;s['dst_xmm']=int(ins.reg_name(dst.reg)[3:]);s['length']=ins.size
+            if src.type==capstone.x86.X86_OP_REG:s['src_xmm']=int(ins.reg_name(src.reg)[3:])
+            else:
+                m=src.mem;s.update(src_xmm=-1,base=ins.reg_name(m.base) if m.base else '',index=ins.reg_name(m.index) if m.index else '',scale=m.scale,disp=m.disp)
     d['note']='byte-pattern candidates confirmed by a linear-sweep disassembly (capstone '+capstone.__version__+') of the containing procedure; unconfirmed = not an instruction start in that sweep'
     d['confirmed_counts']=Counter(s['instruction'] for s in d['sites'] if s['confirmed'])
     out.write_text(json.dumps(d,indent=0)+'\n')

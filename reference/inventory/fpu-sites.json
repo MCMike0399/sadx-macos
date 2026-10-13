@@ -1148,7 +1148,14 @@
 "address": "0x4c52a0",
 "instruction": "RSQRTPS",
 "procedure": "0x4c5090",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 1,
+"length": 5,
+"src_xmm": -1,
+"base": "eax",
+"index": "eax",
+"scale": 1,
+"disp": 25
 },
 {
 "address": "0x4c54a4",
@@ -1670,7 +1677,14 @@
 "address": "0x520fd1",
 "instruction": "RSQRTPS",
 "procedure": "0x520c70",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 0,
+"length": 3,
+"src_xmm": -1,
+"base": "eax",
+"index": "",
+"scale": 1,
+"disp": 0
 },
 {
 "address": "0x528308",
@@ -1700,7 +1714,14 @@
 "address": "0x530ff1",
 "instruction": "RCPPS",
 "procedure": "0x530790",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 0,
+"length": 3,
+"src_xmm": -1,
+"base": "eax",
+"index": "",
+"scale": 1,
+"disp": 0
 },
 {
 "address": "0x530ff5",
@@ -1718,7 +1739,14 @@
 "address": "0x530ffd",
 "instruction": "RCPPS",
 "procedure": "0x530790",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 0,
+"length": 3,
+"src_xmm": -1,
+"base": "eax",
+"index": "",
+"scale": 1,
+"disp": 0
 },
 {
 "address": "0x532ebe",
@@ -29288,109 +29316,163 @@
 "address": "0x774024",
 "instruction": "RCPPS",
 "procedure": "0x773ff0",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 0,
+"length": 3,
+"src_xmm": 2
 },
 {
 "address": "0x7741a0",
 "instruction": "RCPPS",
 "procedure": "0x774150",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 1,
+"length": 3,
+"src_xmm": 0
 },
 {
 "address": "0x774217",
 "instruction": "RCPPS",
 "procedure": "0x774150",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 0,
+"length": 3,
+"src_xmm": 4
 },
 {
 "address": "0x7744e2",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 3,
+"length": 4,
+"src_xmm": 3
 },
 {
 "address": "0x7745b7",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 3,
+"length": 4,
+"src_xmm": 3
 },
 {
 "address": "0x774865",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 5,
+"length": 4,
+"src_xmm": 4
 },
 {
 "address": "0x774e35",
 "instruction": "RCPSS",
 "procedure": "0x774310",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 0,
+"length": 4,
+"src_xmm": 5
 },
 {
 "address": "0x774f14",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 0,
+"length": 4,
+"src_xmm": 0
 },
 {
 "address": "0x775014",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 5,
+"length": 4,
+"src_xmm": 5
 },
 {
 "address": "0x77515c",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 0,
+"length": 4,
+"src_xmm": 0
 },
 {
 "address": "0x7752b8",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 5,
+"length": 4,
+"src_xmm": 4
 },
 {
 "address": "0x775355",
 "instruction": "RCPSS",
 "procedure": "0x774310",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 0,
+"length": 4,
+"src_xmm": 0
 },
 {
 "address": "0x7756b2",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 3,
+"length": 4,
+"src_xmm": 3
 },
 {
 "address": "0x775787",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 3,
+"length": 4,
+"src_xmm": 3
 },
 {
 "address": "0x775a3f",
 "instruction": "RCPSS",
 "procedure": "0x774310",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 0,
+"length": 4,
+"src_xmm": 0
 },
 {
 "address": "0x775dc4",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 0,
+"length": 4,
+"src_xmm": 0
 },
 {
 "address": "0x775ec4",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 5,
+"length": 4,
+"src_xmm": 5
 },
 {
 "address": "0x77600c",
 "instruction": "RSQRTSS",
 "procedure": "0x774310",
-"confirmed": true
+"confirmed": true,
+"dst_xmm": 0,
+"length": 4,
+"src_xmm": 0
 },
 {
 "address": "0x7769b3",

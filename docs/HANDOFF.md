@@ -1740,3 +1740,26 @@ Evidence: gate `reference/production-integration-20261012/app-guest-111-gate.jso
   natively decoded PVM archives (`MetalTextureResource`), while the guest's textures are D3D8 surfaces in guest
   memory; `metal_guest_frame` is the guest-side renderer. Unifying the two is future work.
 * Limits: the gate now needs a GUI session (it opens a window); screenshots are game imagery and stay in build/.
+
+## M1 4e completion: F2XM1 / FYL2X and RCP / RSQRT shims (2026-10-13)
+
+Evidence: gate `reference/production-integration-20261012/fpu-f2xm1-rcp-112-gate.json` (rc 0).
+
+* Vendored from Bochs at the pinned revision 0a93954e (third_party/bochs_fpatan, sha256 in upstream.json):
+  fpu/f2xm1.cc, fpu/fyl2x.cc, their constants headers, softfloat3e/extF80_addsub.cc, s_addMagsExtF80.cc,
+  s_subMagsExtF80.cc. Wrappers `X87Transcendental::f2xm1_bochs / fyl2x_bochs / fyl2xp1_bochs` (x = ST0, y = ST1).
+  From SoftFloat 3 at its pinned revision: f32_sqrt.c (third_party/softfloat_sse) for `SseContext::sqrt_single`.
+* `tools/analysis/fpu_sites.py` now records the SSE estimate sites' operands (dst/src XMM, memory base/index/
+  scale/disp, length) in reference/inventory/fpu-sites.json.
+* `src/guest/fpu_shims`: F2XM1 (2 sites) and FYL2X (5 sites) run the Bochs model (FYL2X: ST1 := y·log2 x, pop);
+  RCPSS/RCPPS/RSQRTSS/RSQRTPS (22 sites) run `sse_reciprocal_by_division` / new
+  `sse_reciprocal_sqrt_by_division` (SQRTSS then division, MXCSR rounding, no flags) lane by lane.
+  **Assumption, kept reported:** real CPUs return an implementation-specific ~12-bit estimate; the reference
+  CPU is unknown, so the model is the IEEE one (Unicorn/QEMU's, and the native d3dx ports'). A packed memory
+  operand that is not 16-byte aligned stops by name (#GP is not modelled): 4c52a0's
+  `rsqrtps xmm1,[eax+eax+0x19]` can only address an odd byte, so it is either dead code or a desynchronised sweep.
+* `guest-fpu-shims-test`: 590 sites (542 FPATAN, 10 FSINCOS, 3 FPTAN, 5 FSIN, 1 FCOS, 2 F2XM1, 5 FYL2X, 3 RCPSS,
+  5 RCPPS, 12 RSQRTSS, 2 RSQRTPS); 2,272 x87 executions equal the Bochs model, 336 SSE executions equal the
+  estimate model with untouched upper lanes for scalar forms, every kind is computed by the shim (none left to
+  Unicorn); 7716df still equals the native port on 3,000 cases.
+* No site is "counted only" any more. Unshimmed in the boot: 0.

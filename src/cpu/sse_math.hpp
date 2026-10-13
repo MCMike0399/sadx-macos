@@ -34,6 +34,7 @@ public:
     Sse64 to_double(Sse32 source);
     Sse32 to_single(Sse64 source);
     Sse64 sqrt(Sse64 source);
+    Sse32 sqrt_single(Sse32 source); // SQRTSS
     Sse64 subtract_double(Sse64 destination, Sse64 source); // SUBSD
     bool less_than(Sse64 destination, Sse64 source); // signaling CMPLTPD low lane
     std::int32_t truncate_int32(Sse32 source); // CVTTSS2SI, no #D

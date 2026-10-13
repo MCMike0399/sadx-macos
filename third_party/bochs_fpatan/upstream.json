@@ -1,7 +1,7 @@
 {
   "repository": "https://github.com/bochs-emu/Bochs",
   "revision": "0a93954eb5debb16dd43b3f02337ee4e6c088b92",
-  "scope": "Math-only FPATAN, FSINCOS and FPTAN with P5/P6 table and internal rounding model; no CPU emulator",
+  "scope": "Math-only FPATAN, FSINCOS, FPTAN, F2XM1 and FYL2X/FYL2XP1 with P5/P6 table and internal rounding model; no CPU emulator",
   "files": {
     "fpu/f128_67.cc": "b150bae357f60f71185cd06bdee03d3e138d74701d3d00c63ff444ca44f05c4e",
     "fpu/fpatan.cc": "3467ac639f0555cf41fe562016e8e75fadce10b468ec1a4cea2efc6af4dfcb08",
@@ -43,7 +43,14 @@
     "softfloat3e/s_shiftRightJam128Extra.cc": "feda1c9983b7e0775e7c8f12e29a8474cbab24d0ebecf6cc138cfd5a3058e3c5",
     "softfloat3e/s_subMagsF128.cc": "2574cda169b6ae9b6777435e94cbbddf6ac009d8fa1b97ebc34f1a56552ccbbf",
     "fpu/fsincos.cc": "4544bf8d862188edff834fd88a3186ad00360426d068f0dcecae07ff072c99ff",
-    "fpu/fsincos_constants.h": "4e260a21afcbd3346dec4688b39914349769fb33b3c3817a876726050b31169f"
+    "fpu/fsincos_constants.h": "4e260a21afcbd3346dec4688b39914349769fb33b3c3817a876726050b31169f",
+    "fpu/f2xm1.cc": "df839112898597c36e1f4d5c881731e3bdb64ed7825bd5fb93f65852133b04e4",
+    "fpu/fyl2x.cc": "aadfaffc61e1bb0b80ae86f5b676fdb82c25314a36621d950ee601a2bbead40b",
+    "fpu/f2xm1_constants.h": "180f02a31e490594ba0eda2fabebcd1fb2045cc0da6672c38d6d99b3fd1153cc",
+    "fpu/fyl2x_constants.h": "f62749aa91e317264d6368063fcb8104099ddee16c70e544aa72f5d6c9ac2cff",
+    "softfloat3e/extF80_addsub.cc": "0589d3f7f1c7b3a6dd51b4f150506a6e0d242dfbda4bbd81d9055de419e15f58",
+    "softfloat3e/s_addMagsExtF80.cc": "6ca2d8fe8c4af29ca61ee27a93d411e9cd04fa29eef32bf4898c9f0c4291f375",
+    "softfloat3e/s_subMagsExtF80.cc": "07bb28b37afa9a2e0b5f66a0bfd505a098a95bc3cce9c1dc591234127b82b4b5"
   },
   "patches": {
     "softfloat3e/s_normRoundPackToExtF80.cc": {

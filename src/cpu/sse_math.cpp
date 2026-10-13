@@ -81,6 +81,11 @@ Sse64 SseContext::sqrt(Sse64 a) {
     if(!(f&1) && !nan64(a.bits) && den64(a.bits)) { if(!(mxcsr_&0x100)) commit(2); f|=2; }
     commit(f); return {z.v};
 }
+Sse32 SseContext::sqrt_single(Sse32 a) {
+    check_thread(); a.bits=daz32(a.bits,mxcsr_); Operation op(mxcsr_); auto z=f32_sqrt(float32_t{a.bits}); auto f=op.exceptions();
+    if(!(f&1) && !nan32(a.bits) && den32(a.bits)) { if(!(mxcsr_&0x100)) commit(2); f|=2; }
+    commit(f); return {z.v};
+}
 Sse64 SseContext::subtract_double(Sse64 a,Sse64 b) {
     check_thread(); a.bits=daz64(a.bits,mxcsr_); b.bits=daz64(b.bits,mxcsr_);
     Operation op(mxcsr_); auto z=f64_sub(float64_t{a.bits},float64_t{b.bits}); auto f=op.exceptions();

@@ -24,6 +24,10 @@ public:
     static std::optional<X87Value> fptan_bochs(X87Context& context, X87Value x); // tan; the instruction then pushes 1.0
     static std::optional<X87Value> fsin_bochs(X87Context& context, X87Value x);  // FSIN (nullopt: the C2 path)
     static std::optional<X87Value> fcos_bochs(X87Context& context, X87Value x);  // FCOS
+    // F2XM1 (2^x - 1, defined for |x| <= 1), FYL2X (y * log2 x) and FYL2XP1 (y * log2(x + 1)), same model.
+    static X87Value f2xm1_bochs(X87Context& context, X87Value x);
+    static X87Value fyl2x_bochs(X87Context& context, X87Value x, X87Value y);
+    static X87Value fyl2xp1_bochs(X87Context& context, X87Value x, X87Value y);
 };
 
 } // namespace sadx

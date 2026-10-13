@@ -1,6 +1,7 @@
 #pragma once
 #include <optional>
 #include "loader/executable_image.hpp"
+#include <array>
 #include <cstdint>
 #include <functional>
 #include <initializer_list>
@@ -93,6 +94,8 @@ public:
     bool add_instruction_hook(std::uint32_t address,InstructionHook,std::string* error);
 
     std::uint64_t xmm0_low()const;void set_xmm0_low(std::uint64_t); // the low 64 bits of XMM0 (double arguments/results)
+    std::array<std::uint32_t,4> xmm(unsigned i)const;void set_xmm(unsigned i,const std::array<std::uint32_t,4>&); // XMMi, lane 0 first
+    std::uint32_t mxcsr()const;
     std::uint32_t stack_base()const noexcept{return stack_base_;}
     std::uint32_t stop_address()const noexcept{return stop_address_;}
 private:
