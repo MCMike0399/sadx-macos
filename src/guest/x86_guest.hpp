@@ -47,7 +47,15 @@ public:
     GuestCallResult call(std::uint32_t address,std::initializer_list<std::uint32_t> stack_arguments,
         std::optional<std::uint32_t> ecx=std::nullopt,std::optional<std::uint32_t> edx=std::nullopt,
         std::uint16_t x87_control_word=0x27f,std::uint64_t instruction_limit=50'000'000);
+    // Runs guest code from `from` until EIP reaches `until` (a span inside a function), on a fresh
+    // stack whose top holds the stop address. Registers other than ESP/EBP keep their values.
+    GuestCallResult run(std::uint32_t from,std::uint32_t until,std::uint16_t x87_control_word=0x27f,std::uint64_t instruction_limit=50'000'000);
     bool add_override(std::uint32_t address,Override,std::string* error);
+    // Ends the current call() as a failure with `error` (an override or import trap that cannot
+    // proceed, e.g. an unbound import). The guest state is left as it was at the stop.
+    void stop(std::string error);
+    std::uint32_t esp()const;std::uint32_t eip()const;
+    void set_eax(std::uint32_t);void set_edx(std::uint32_t);
     std::uint32_t stack_base()const noexcept{return stack_base_;}
     std::uint32_t stop_address()const noexcept{return stop_address_;}
 private:
@@ -57,5 +65,6 @@ private:
     std::uint32_t stack_base_=0x7ff00000,stack_size_=0x100000,stop_address_=0xfeed0000;
     std::map<std::uint32_t,Override> overrides_;
     std::vector<std::uint32_t> handles_;
+    std::optional<std::string> stopped_;
 };
 } // namespace sadx

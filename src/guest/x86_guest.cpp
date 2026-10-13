@@ -45,10 +45,16 @@ void X86Guest::code_hook(void*,std::uint64_t address,std::uint32_t,void* user){
     const auto found=self->overrides_.find(static_cast<std::uint32_t>(address));
     if(found==self->overrides_.end())return;
     const auto pops=found->second(*self);
+    if(self->stopped_)return; // the override stopped the guest: leave the state at the stop
     // Emulate `ret N`: the override replaced the whole callee.
     auto esp=self->reg(UC_X86_REG_ESP);const auto back=self->u32(esp).value_or(self->stop_address_);
     self->set_reg(UC_X86_REG_ESP,esp+4+pops);self->set_reg(UC_X86_REG_EIP,back);
 }
+void X86Guest::stop(std::string error){stopped_=std::move(error);uc_emu_stop(engine(uc_));}
+std::uint32_t X86Guest::esp()const{return reg(UC_X86_REG_ESP);}
+std::uint32_t X86Guest::eip()const{return reg(UC_X86_REG_EIP);}
+void X86Guest::set_eax(std::uint32_t v){set_reg(UC_X86_REG_EAX,v);}
+void X86Guest::set_edx(std::uint32_t v){set_reg(UC_X86_REG_EDX,v);}
 bool X86Guest::add_override(std::uint32_t address,Override override,std::string* error){
     if(overrides_.count(address))return fail(error,"override already bound");
     uc_hook handle=0;
@@ -57,6 +63,20 @@ bool X86Guest::add_override(std::uint32_t address,Override override,std::string*
     overrides_[address]=std::move(override);handles_.push_back(static_cast<std::uint32_t>(handle));
     uc_ctl_flush_tb(engine(uc_)); // blocks translated before the hook existed would bypass it
     return true;
+}
+GuestCallResult X86Guest::run(std::uint32_t from,std::uint32_t until,std::uint16_t control_word,std::uint64_t limit){
+    GuestCallResult r;
+    const std::uint32_t esp=stack_base_+stack_size_-0x1000-4;write(esp,&stop_address_,4);
+    set_reg(UC_X86_REG_ESP,esp);set_reg(UC_X86_REG_EBP,esp);
+    std::uint32_t cw=control_word,sw=0,tag=0xffff;uc_reg_write(engine(uc_),UC_X86_REG_FPCW,&cw);uc_reg_write(engine(uc_),UC_X86_REG_FPSW,&sw);uc_reg_write(engine(uc_),UC_X86_REG_FPTAG,&tag);
+    stopped_.reset();
+    const auto rc=uc_emu_start(engine(uc_),from,until,0,limit);
+    r.eax=reg(UC_X86_REG_EAX);r.eip=reg(UC_X86_REG_EIP);r.esp=reg(UC_X86_REG_ESP);
+    if(stopped_){r.error=*stopped_;stopped_.reset();return r;}
+    if(rc!=UC_ERR_OK){r.error=uc_strerror(rc);return r;}
+    r.completed=r.eip==until;
+    if(!r.completed)r.error="stopped at instruction limit";
+    return r;
 }
 GuestCallResult X86Guest::call(std::uint32_t address,std::initializer_list<std::uint32_t> arguments,std::optional<std::uint32_t> ecx,std::optional<std::uint32_t> edx,std::uint16_t control_word,std::uint64_t limit){
     GuestCallResult r;
@@ -70,8 +90,10 @@ GuestCallResult X86Guest::call(std::uint32_t address,std::initializer_list<std::
     if(ecx)set_reg(UC_X86_REG_ECX,*ecx);if(edx)set_reg(UC_X86_REG_EDX,*edx);
     std::uint32_t cw=control_word,sw=0,tag=0xffff;uc_reg_write(engine(uc_),UC_X86_REG_FPCW,&cw);uc_reg_write(engine(uc_),UC_X86_REG_FPSW,&sw);uc_reg_write(engine(uc_),UC_X86_REG_FPTAG,&tag);
     std::uint32_t mxcsr=0x1f80;uc_reg_write(engine(uc_),UC_X86_REG_MXCSR,&mxcsr);
+    stopped_.reset();
     const auto rc=uc_emu_start(engine(uc_),address,stop_address_,0,limit);
     r.eax=reg(UC_X86_REG_EAX);r.eip=reg(UC_X86_REG_EIP);r.esp=reg(UC_X86_REG_ESP);
+    if(stopped_){r.error=*stopped_;stopped_.reset();return r;}
     if(rc!=UC_ERR_OK){r.error=uc_strerror(rc);return r;}
     r.completed=r.eip==stop_address_;
     if(!r.completed)r.error="stopped at instruction limit";

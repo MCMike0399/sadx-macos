@@ -1455,3 +1455,33 @@ Port: `engine/ninja_view.{hpp,cpp}` (+ `tests/unit/ninja_view.cpp`, oracle `ninj
 
 Limits: FPTAN/FPATAN/FSINCOS agreement with the reference Intel CPU is unmeasured (M4). RCPSS/RCPPS are
 the IEEE-division model in both the source run and the native port.
+
+## M1 4a: import resolution through HLE traps (2026-10-12)
+
+Evidence: gate `reference/production-integration-20261012/guest-imports-104-gate.json` (rc 0, 107 native
+programs); test `tests/unit/guest_imports.cpp` (`guest-imports`, in the gate).
+
+* `ExecutableImage::imports()` walks data directory 1 like the Windows loader (lookup table, else IAT;
+  names with hints or ordinals; the IAT slot VA of each). sonic.exe: 9 DLLs, 159 imports (KERNEL32 107,
+  USER32 23, WINMM 15, ole32 6, ADVAPI32 4, DINPUT8/DSOUND(#11)/GDI32/d3d8 1 each) — the same table as
+  tools/lib/pe_image.py. Rebased images keep the import directory.
+* `src/hle/hle_registry.{hpp,cpp}` (new `hle` layer, linked into libsadx-guest.a): `HleRegistry` maps
+  `dll!symbol` (DLL case-insensitive, ordinals `#n`) to a native function with its stdcall pop count and
+  logged argument count; `bind_imports` maps a HLT-filled trap page at 0xfe000000 (16 bytes per import),
+  writes every trap into its IAT slot and installs it as a guest override. A trap with a registered
+  function runs it and appends `{dll, symbol, return address, arguments, EAX}` to the call log; an
+  unregistered one calls `X86Guest::stop` with "unbound import DLL!symbol called (return address …)".
+* `X86Guest` gained `stop(error)` (a call/run ends as a failure carrying that text), `run(from, until)`
+  for spans inside functions, and esp/eip/eax/edx accessors.
+* Test: WinMain's own 402c9b..402ca9 ShowCursor(FALSE) loop runs from the original bytes through the
+  HLE trap (2 logged calls with argument 0 and return address 402ca5); `call [7db01c]` (DSOUND #11,
+  unregistered) stops with its name.
+
+Also started (unattended, docs/METHOD.md §2): `tools/inventory/run_inventory.py` (`procedures` /
+`callees --resume` / `build`) with `reference/ghidra-inventory-config.json` (own snapshot; the old ones
+are tied to the pre-move binary path). `reference/ghidra-live.mjs` and the Ghidra environment file
+were still pointing at `_reference/sadx/` (pre-move) and are fixed; the runner now also allows
+list_procedures / procedure_callers / procedure_callees / procedure_references / procedure_info /
+batch_decompile. list_procedures: 8,875 procedures. The callee sweep writes raw results to the
+ignored `reference/inventory-raw/`; `run_inventory.py build` produces the tracked
+`reference/inventory/functions.json` when it finishes.

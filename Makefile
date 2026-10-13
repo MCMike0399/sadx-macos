@@ -30,7 +30,7 @@ UNICORN_DIR ?= $(firstword $(wildcard reference/python/lib/python3.*/site-packag
 CORE_LAYERS := cpu loader math engine input player game runtime
 CORE_SOURCES := $(foreach a,$(CORE_LAYERS),$(wildcard src/$(a)/*.cpp))
 CORE_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(CORE_SOURCES))
-GUEST_SOURCES := $(wildcard src/guest/*.cpp)
+GUEST_SOURCES := $(wildcard src/guest/*.cpp src/hle/*.cpp)
 GUEST_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(GUEST_SOURCES))
 GUEST_LINK := build/libsadx-guest.a $(UNICORN_DIR)/lib/libunicorn.a -lpthread
 MAC_SOURCES := $(wildcard src/platform/mac/*.cpp src/platform/mac/*.mm)
@@ -64,6 +64,7 @@ build/obj/%.o: src/%.mm Makefile | build
 build/obj/cpu/x87_transcendental.o: CXXFLAGS += -Ithird_party/bochs_fpatan -Ithird_party/bochs_fpatan/source -Ithird_party/bochs_fpatan/source/softfloat3e/include
 build/obj/cpu/sse_math.o: third_party/softfloat/source/include/softfloat.h third_party/softfloat/source/include/softfloat_types.h
 build/obj/guest/%.o: CXXFLAGS += -I$(UNICORN_DIR)/include
+build/obj/hle/%.o: CXXFLAGS += -I$(UNICORN_DIR)/include
 -include $(CORE_OBJECTS:.o=.d) $(MAC_OBJECTS:.o=.d) $(GUEST_OBJECTS:.o=.d)
 
 build/softfloat/softfloat.a: $(SOFTFLOAT_FILES) | build
@@ -73,7 +74,7 @@ build/softfloat_sse/softfloat-sse.a: $(SOFTFLOAT_SSE_FILES) $(SOFTFLOAT_FILES) |
 build/bochs_fpatan/libbochs_fpatan.a: $(BOCHS_FILES) | build
 	CXX="$(shell xcrun --find clang++)" sh third_party/bochs_fpatan/build.sh build/bochs_fpatan
 
-# The three archives: portable core, mac platform, guest CPU.
+# The three archives: portable core, mac platform, guest CPU (+ the hle layer above it).
 build/libsadx-core.a: $(CORE_OBJECTS) build/softfloat_sse/softfloat-sse.a build/softfloat/softfloat.a build/bochs_fpatan/libbochs_fpatan.a
 	xcrun libtool -static -o $@ $^
 build/libsadx-macos.a: $(MAC_OBJECTS)

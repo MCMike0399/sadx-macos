@@ -1,4 +1,4 @@
-// One owned Ghidra import for successive source-recovery questions. Commands
+// Run from the sadx-macos root (paths are repo-relative: reference/, game/). One owned Ghidra import for successive source-recovery questions. Commands
 // arrive over this process's stdin; no original game or runtime is executed.
 import { Client } from '/private/tmp/sadx-rea/node_modules/@modelcontextprotocol/client/dist/index.mjs';
 import { StdioClientTransport } from '/private/tmp/sadx-rea/node_modules/@modelcontextprotocol/client/dist/stdio.mjs';
@@ -7,16 +7,17 @@ import { createInterface } from 'node:readline';
 import { resolve } from 'node:path';
 
 const config=process.argv[2]?JSON.parse(await readFile(process.argv[2],'utf8')):{};
-const root=resolve('_reference/sadx/'+(config.directory??'ghidra-live-recovery'));
-const snapshot=resolve('_reference/sadx/'+(config.snapshot_file??'sonic-ghidra-shadow-snapshot.json'));
-const env=JSON.parse(await readFile('_reference/sadx/'+
+const root=resolve('reference/'+(config.directory??'ghidra-live-recovery'));
+const snapshot=resolve('reference/'+(config.snapshot_file??'sonic-ghidra-shadow-snapshot.json'));
+const env=JSON.parse(await readFile('reference/'+
   (config.environment_file??'tools/ghidra-shadow-environment.json'),'utf8'));
 const client=new Client({name:'sadx-owned-live-ghidra',version:'1.0.0'});
 const transport=new StdioClientTransport({command:process.execPath,args:[
   '/private/tmp/sadx-rea/node_modules/rea-agents/scripts/rea.mjs','mcp'],env:{...process.env,...env}});
 const lines=createInterface({input:process.stdin,crlfDelay:Infinity});
 const allowed=new Set(['analyze_function','inspect_native_instruction','resolve_native_call_targets',
-  'trace_native_values','xrefs','binary_session']);
+  'trace_native_values','xrefs','binary_session','list_procedures','procedure_callers','procedure_callees',
+  'procedure_references','procedure_info','batch_decompile']);
 let opened=false,ordinal=0;
 class RejectedAnalysis extends Error {}
 await mkdir(root,{recursive:true});
@@ -44,7 +45,7 @@ const execute=async command=>{
 };
 try{
   let exists=false;try{await access(snapshot);exists=true;}catch(e){if(e.code!=='ENOENT')throw e;}
-  await call('open_binary',{path:resolve('Sonic Adventure DX/sonic.exe'),provider_id:'ghidra',
+  await call('open_binary',{path:resolve('game/Sonic Adventure DX/sonic.exe'),provider_id:'ghidra',
     ...(exists?{snapshot_path:snapshot}:{})},'open');opened=true;
   console.log('READY: send JSON {tool,args,label}; {tool:"export"} retains a bundle; {tool:"close"} closes the owned provider.');
   for await(const line of lines){

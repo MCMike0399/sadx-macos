@@ -18,12 +18,12 @@ from that file when fixed (a stale exception fails the check).
 | `game` | WinMain, library init, startup, game loop, modes and leaves, resets, views, window, sound bookkeeping, model DLL bindings, mod loader frame, Win32 profile | … player |
 | `runtime` | `NativeGame` (composition of every ported owner, boot + frame loop) and `GameSession` (shared by the CLI and the app) | … game |
 | `guest` | (M1) in-process x86 guest on Unicorn: image mapping, calls, override table, FPU shims | … runtime |
-| `hle` | (M1) Win32 / D3D8 / DirectInput / DirectSound implementations the guest calls | … guest |
+| `hle` | (M1) Win32 / D3D8 / DirectInput / DirectSound implementations the guest calls: `hle_registry` binds every import of a guest image to a trap (IAT slot → trap page at 0xfe000000), runs the registered native function and logs the call; an unregistered import stops the guest with its name | … guest |
 | `platform/mac` | Metal texture/sprite backends, GameController input, the virtual 10 MHz clock | … hle |
 | `apps` | executables only: `sadx_boot.cpp` (headless CLI), `sadx_app.mm` (AppKit window), `metal_stage.mm` (asset viewer), `diagnostics/` (one-off HID/GameController probes, not built by default) | everything |
 
 Archives: `libsadx-core.a` = cpu…runtime (portable, no frameworks), `libsadx-macos.a` =
-platform/mac, `libsadx-guest.a` = guest (+ Unicorn). Programs link what they need.
+platform/mac, `libsadx-guest.a` = guest + hle (+ Unicorn). Programs link what they need.
 
 Known debt (the exceptions file): none since 2026-10-13. The matrix stack and primitives live in
 `engine/ninja_matrix` (`NinjaMatrixPrimitives`; `player/player_coordinates`' `PlayerCoordinates`
