@@ -1,0 +1,40 @@
+{
+ "entries_added": [
+  "781250",
+  "791170"
+ ],
+ "process_entries": 17,
+ "corpus": {
+  "view_cases": 3000,
+  "derived_projection_cases": 3000,
+  "cold_dispatch_cases_per_entry": 10,
+  "mutants_caught_total": 5,
+  "nan_matrices_compared_as_bits": true,
+  "checks": [
+   "output globals",
+   "stack slot/depth/current pointer",
+   "COM trace arguments/results/return sites",
+   "HLE device matrix bits",
+   "perspective/projection visible at original dispatch initialization"
+  ]
+ },
+ "runtime": {
+  "live_boot_trace_identical": true,
+  "900_controller_frame_digests_match": true,
+  "app_script_exit_status": 0,
+  "app_file_select_screenshot_sha256": "bc1cfbaa30f34f240c7094a5059ffec35138d91e9efd1233c762d048f7d5949e"
+ },
+ "oracle": "ninja_view rerun: pass, primary and seeded 3000 cases each, zero value mismatches",
+ "source_sha256": {
+  "src/hle/hle_device_bridge.cpp": "97ef420760dd374144a6dc1d98e9119197cd07a3880249b060daa35fa45fc5ed",
+  "src/guest/x86_guest.cpp": "477a93577056b2ee180121274885ce490bbf5ab2f363f4329085fa95b7219097",
+  "src/guest/x86_guest.hpp": "3403408163d967a353b466d84cf4ba985075310aecee352e7e1e8ae2022e0be8",
+  "tests/unit/hle_device_bridge.cpp": "083957c99879ec9621425052aea883e79d109b02f761aa0726174af8347abcb0"
+ },
+ "limits": [
+  "Only verified synchronous HLE transform methods; foreign/proxy methods stop.",
+  "Only camera block 3aad0a0 and supported SSE D3DX dispatch; other configurations stop.",
+  "HLE MultiplyTransform rounding remains the existing reported assumption, not Windows GPU/runtime capture.",
+  "COM table/init fog, screen setup, heap/task/queue and other overrides remain unfinished."
+ ]
+}

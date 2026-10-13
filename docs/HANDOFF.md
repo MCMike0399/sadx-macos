@@ -2085,3 +2085,54 @@ REA/Ghidra: 77ec60 `ev_2d469eb1d543985500c182ce741c2a672a5825733d1c92c2b751e0311
 * **Open:** transform callbacks and view/projection 781250/791170/403180, fog table/init 794e40/794ec0,
   heap/task/queue and other owners still unbound. Of the earlier 46 address-named list, 44 remain;
   4030d0 was an additional wrapper outside that list. Reviewed golden frames remain unfinished.
+
+## M1 view/projection device overrides and cold D3DX dispatch (2026-10-13)
+
+Evidence: `reference/production-integration-20261013/view-bridge-120-gate.json` (rc 0,
+123 native programs, 4 Python tests), `reference/production-integration-20261013/view-bridge-evidence.json`.
+REA/Ghidra: 791170 `ev_052edf0562fc941f446ac21b3bdf6c105e26e3165f200a647b83e51bc6682882`,
+781250 `ev_332ee3ab15ff33268568afdcd28720939bd320c0132b3452d1d1d7476c5004c0`,
+77350c `ev_624ca060fa339e72d47cef6b0e7c055d81f9245ac97867403ed9ca80effbe91d`,
+7707f7 lazy multiply `ev_43f40b642ed5a0cdbfcac15fbf13261bbc81c9037e79d17e09a799d4224929d6`
+(`reference/inventory-raw/bridge-*`). Owned session closed successfully.
+
+* **Two new entries, 17 process overrides:** 781250 view (cdecl, canonical 3aad0a0 camera) and
+  791170 projection (stdcall, pops 12). hle_device_bridge now invokes verified synchronous HLE
+  SetTransform +94 /MultiplyTransform +9c handlers with the original guest matrix pointers, caller
+  return sites and HRESULTs. Generated view/stack/range/perspective/projection stores are flushed at
+  their source phases; current matrix and screen matrix inputs are read at their relevant boundaries.
+  Singular inverses preserve the original destination. Foreign/proxy COM targets stop.
+* **The live boot found a missing dependency:** original D3DX lazy dispatch makes RegOpenKeyA,
+  GetVersionExA, IsProcessorFeaturePresent, GetVersionExA queries, which the native math initially
+  skipped. The bridge now delegates to original 77350c(1) when dispatch is unset. The source has
+  stored its view/perspective prefix BEFORE those queries, while 3d129c0 is still old; the bridge
+  preserves that phase, resumes native calculation afterward and retains the actual source queries.
+  Non-SSE dispatch targets stop, rather than being assumed SSE. No fake log calls were introduced.
+* **Stack addresses are observable:** preserving the queries alone left RegOpenKey's output pointer
+  and GetVersionEx's structure pointer offset by 0x8c. X86Guest::redirect has optional stack_reserve
+  (default 0) to preserve a source dependency call depth. View uses reserve 0x8c; standalone projection
+  uses 0x6c. Derived from view's 0x2c call depth, projection's 0x4c locals/saved registers, the 0x10
+  multiply-call frame and the 0x8 lazy-initializer frame. Source pointer-bearing arguments now match
+  exactly. Native rerun skips duplicate prefix stores already flushed before initialization.
+* **Corpus checks:** hle-device-bridge replays all 3,000 existing 37-word ninja_view inputs against
+  original 781250, plus 3,000 standalone projection inputs derived from their angle/viewport/matrices.
+  Compares output globals, every matrix-stack slot/current/depth, transform device matrix bits,
+  COM arguments/return sites/HRESULTs, and environment-query snapshots. Twenty cases (10 per entry)
+  reset dispatch to the original lazy targets and verify the cold path. Matrix comparisons use bits:
+  float equality falsely rejects identical NaNs. Added two bridge argument mutants; all **five** caught.
+  Existing 16,418 blend and 300 fog-colour comparisons remain unchanged.
+* **Live:** the 17-entry boot has identical 22,030 HLE calls; view fires once before Present and
+  replaces its nested math calls natively. First 600 overridden frame digests match the plain boot.
+  A standalone derivative of guest-controller compared all 900 scripted frame digests with/without
+  17 entries, identical. App --pad 450:0x10,800:0x10 through frame 900 exits 0 and its screenshot visibly
+  shows file select (build/view-bridge-menu.ppm/png, local/ignored). Temporary diagnostic sources removed.
+* **Oracle:** reran/tracked ninja_view, **pass**: both primary and seeded profiles, 3,000 cases each,
+  zero native failures/value mismatches. Other standalone oracles **not rerun**. Gate: full 7,228-frame
+  two-boot intro/title determinism and 63 FPS virtual title timing unchanged, measured 82.4 host FPS;
+  controller/keyboard/Metal checks pass. Existing unregistered metal-sprite, metal-sprite-composition,
+  metal-texture, player-task **not run**.
+* **Limits/open:** only canonical camera block and supported SSE dispatch; HLE MultiplyTransform's
+  rounding remains the existing reported assumption, not Windows runtime/GPU capture. This is value/
+  state/trace equivalence under guest FPU shims; no new physical CPU/GPU parity is claimed. 403180 screen,
+  fog table/init, heap/task/queue and other owners remain unbound (42 of the earlier address-named list).
+  Reviewed golden frames remain unfinished.

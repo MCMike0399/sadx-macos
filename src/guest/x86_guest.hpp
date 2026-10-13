@@ -67,8 +67,9 @@ public:
     // stack is put back where the override's caller expects it (its own `pops` bytes removed) and
     // `then` runs. `then` sets the results (EAX…) and may redirect again (a chain of guest calls,
     // e.g. _initterm); when it does not, the guest returns to the override's caller.
+    // stack_reserve preserves a source dependency call depth when stack pointers are observable.
     using Continuation=std::function<void(X86Guest&)>;
-    void redirect(std::uint32_t target,const std::vector<std::uint32_t>& arguments,std::uint32_t pops,Continuation then);
+    void redirect(std::uint32_t target,const std::vector<std::uint32_t>& arguments,std::uint32_t pops,Continuation then,std::uint32_t stack_reserve=0);
     // Protected-mode segments as Windows sets them for a 32-bit thread: a GDT at `gdt` (one page) with
     // flat code/data/stack and an FS segment whose base is the thread's TEB.
     bool set_fs_base(std::uint32_t teb,std::uint32_t gdt,std::string* error);

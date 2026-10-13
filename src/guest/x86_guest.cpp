@@ -69,7 +69,7 @@ void X86Guest::install_continuations(){
     uc_hook handle=0;
     uc_hook_add(engine(uc_),&handle,UC_HOOK_CODE,reinterpret_cast<void*>(&X86Guest::continuation_hook),this,continuation_base_,continuation_base_+0xffff);
 }
-void X86Guest::redirect(std::uint32_t target,const std::vector<std::uint32_t>& arguments,std::uint32_t pops,Continuation then){
+void X86Guest::redirect(std::uint32_t target,const std::vector<std::uint32_t>& arguments,std::uint32_t pops,Continuation then,std::uint32_t stack_reserve){
     // Called from an override: [ESP] is the override caller's return address, then its arguments.
     const auto esp=reg(UC_X86_REG_ESP);const auto back=u32(esp).value_or(stop_address_);
     std::uint32_t trap;
@@ -77,7 +77,7 @@ void X86Guest::redirect(std::uint32_t target,const std::vector<std::uint32_t>& a
     else{trap=next_continuation_;next_continuation_+=4;}
     pending_[trap]=Pending{esp+4+pops,back,std::move(then)};
     std::vector<std::uint32_t> frame;frame.push_back(trap);frame.insert(frame.end(),arguments.begin(),arguments.end());
-    const auto top=esp+4+pops-static_cast<std::uint32_t>(4*frame.size());
+    const auto top=esp+4+pops-static_cast<std::uint32_t>(4*frame.size())-stack_reserve;
     write(top,frame.data(),frame.size()*4);
     set_reg(UC_X86_REG_ESP,top);set_reg(UC_X86_REG_EIP,target);redirected_=true;
 }
