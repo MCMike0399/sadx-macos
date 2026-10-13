@@ -17,7 +17,7 @@ std::vector<std::uint32_t> corpus(const std::string& path,unsigned width){
 }
 struct Fixture {
     FpuShimStats shims;std::unique_ptr<HleProcess> p;std::uint32_t devices[2]={};std::uint32_t boundary=0;
-    bool mapped_blend=true,mapped_device=true;unsigned calls=0,mutation=0,fail_at=0;std::vector<std::array<std::uint32_t,32>> dispatch_observed;std::vector<std::array<std::uint32_t,264>> fog_observed;
+    bool mapped_blend=true,mapped_device=true;unsigned calls=0,mutation=0,fail_at=0;std::vector<std::array<std::uint32_t,32>> dispatch_observed;std::vector<std::array<std::uint32_t,396>> fog_observed;
     std::vector<std::pair<std::optional<std::uint32_t>,std::optional<std::uint32_t>>> observed;
     std::uint32_t receipts[2]={};std::uint16_t cw=0x27f;bool argument_mutant=false;
     Fixture(const ExecutableImage& image,bool native){
@@ -36,23 +36,25 @@ struct Fixture {
         auto state=*p->hle().find("com:IDirect3DDevice8","SetRenderState");const auto body=state.body;
         state.body=[this,body](HleCall& c)->std::uint32_t{
             observed.push_back({c.guest.u32(0x3ab9890),c.guest.u32(0x3d12898)});
-            std::array<std::uint32_t,264> snapshot{};
+            std::array<std::uint32_t,396> snapshot{};
             const std::uint32_t addresses[8]={0x3d12798,0x3d128a4,0x3d128a0,0x3d12898,0x3d0fce0,0x3d12950,0x3d0fac0,0x3d12894};
             for(unsigned k=0;k<8;++k)snapshot[k]=c.guest.u32(addresses[k]).value_or(0xdeadbeef);
-            c.guest.read(0x3d12a00,snapshot.data()+8,512);c.guest.read(0x3d12c00,snapshot.data()+136,512);fog_observed.push_back(snapshot);
+            c.guest.read(0x3d12a00,snapshot.data()+8,512);c.guest.read(0x3d12c00,snapshot.data()+136,512);c.guest.read(0x3b10f78,snapshot.data()+264,512);
+            snapshot[392]=c.guest.u32(0x3d0849c).value_or(0);snapshot[393]=c.guest.u32(0x90a098).value_or(0);snapshot[394]=c.guest.u32(0x90a09c).value_or(0);
+            std::uint8_t flag=0;c.guest.read(0x3abdcfe,&flag,1);snapshot[395]=flag;fog_observed.push_back(snapshot);
             const auto result=body(c);const auto index=calls++;
             if(index==0){if(mutation==1)c.guest.set_u32(0x3d128b0,devices[1]);if(mutation==2){std::string e;require(c.guest.unmap(0x3d12000,4096,&e),e);mapped_device=false;}}
             if(fail_at&&calls==fail_at)c.guest.stop("backend unavailable");
             return index<2?receipts[index]:result;
         };
         p->hle().add("com:IDirect3DDevice8","SetRenderState",state);
-        for(const auto at:{0x77ecb7U,0x77eccaU})
+        for(const auto at:{0x77ecb7U,0x77eccaU,0x78753aU})
             require(g.add_instruction_hook(at,[this](X86Guest& gg,std::uint32_t pc){if(boundary==pc)gg.stop("declared port boundary");return false;},&error),error);
         if(native)for(auto entry:device_overrides(*p)){
             const auto bridge=entry.bridge;const auto index=entry.address==0x7949b0||entry.address==0x781250||entry.address==0x791170||entry.address==0x794e40?0U:1U;
-            const auto initialize=entry.address==0x794ec0;
-            require(g.add_override(entry.address,[this,bridge,index,initialize](X86Guest& guest){
-                if(argument_mutant){if(initialize)guest.set_u32(0x3d127e4,guest.u32(0x3d127e4).value_or(0)^0x100000);else{const auto at=guest.esp()+4+4*index;guest.set_u32(at,guest.u32(at).value_or(0)^1);}}
+            const auto initialize=entry.address==0x794ec0;const auto disable=entry.address==0x411b40,enable=entry.address==0x411af0;
+            require(g.add_override(entry.address,[this,bridge,index,initialize,disable,enable](X86Guest& guest){
+                if(argument_mutant){if(disable)guest.set_u32(0x3d12798,0);else if(enable)guest.set_u32(0x3b1117c,1);else if(initialize)guest.set_u32(0x3d127e4,guest.u32(0x3d127e4).value_or(0)^0x100000);else{const auto at=guest.esp()+4+4*index;guest.set_u32(at,guest.u32(at).value_or(0)^1);}}
                 return bridge(guest);},&error),error);
         }
     }
@@ -103,20 +105,23 @@ int main(int argc,char** argv){try{
         for(auto* f:{&original,&native}){f->reset();f->cw=static_cast<std::uint16_t>(c[1]);f->fail_at=c[2];f->p->guest().set_u32(0x3d128b0,f->devices[0]);f->p->guest().set_u32(0x3d12898,c[7]);f->p->guest().set_u32(0x3d128a4,c[5]);}
         compare(original,native,0x7949b0,{c[15]});++fog_cases;
     }
-    std::size_t fog_init_cases=0,fog_table_cases=0,fog_explicit=0;
+    std::size_t fog_init_cases=0,fog_table_cases=0,fog_generate_cases=0,fog_switch_cases=0,fog_explicit=0;
     const std::array<std::pair<std::uint32_t,unsigned>,10> fog_outputs={{{0x3d12798,4},{0x3d128a4,4},{0x3d128a0,4},{0x3d12898,4},{0x3d0fce0,4},{0x3d12950,4},{0x3d0fac0,4},{0x3d12894,4},{0x3d12a00,512},{0x3d12c00,512}}};
-    for(std::size_t i=0;i<fog.size();i+=416)if(fog[i]==0||fog[i]==3){
-        const auto* c=fog.data()+i;const auto entry=c[0]==0?0x794ec0U:0x794e40U;
+    for(std::size_t i=0;i<fog.size();i+=416)if(fog[i]==0||fog[i]==2||fog[i]==3||fog[i]==4){
+        const auto* c=fog.data()+i;const auto entry=c[0]==0?0x794ec0U:c[0]==2?0x787260U:c[0]==3?0x794e40U:c[26]?0x411af0U:0x411b40U;
         for(auto* f:{&original,&native}){
             f->reset();auto& g=f->p->guest();f->fail_at=c[2];
             g.set_u32(0x3d128b0,f->devices[0]);
             const std::uint32_t at[11]={0x3d12798,0x3d128a4,0x3d128a0,0x3d12898,0x3d0fce0,0x3d12950,0x3d0fac0,0x3d12894,0x3d0849c,0x3d127e4,0x3d08ae0};
             for(unsigned k=0;k<11;++k)g.set_u32(at[k],c[4+k]);
+            g.set_u32(0x3b1117c,c[17]);const auto profile=static_cast<std::uint8_t>(c[18]),special=static_cast<std::uint8_t>(c[19]),flag=static_cast<std::uint8_t>(c[25]);
+            g.write(0x3abdc6c,&profile,1);g.write(0x909eb4,&special,1);g.write(0x3abdcfe,&flag,1);
+            g.set_u32(0x90a098,c[20]);g.set_u32(0x90a09c,c[21]);g.set_u32(0x3abdc60,c[22]);g.set_u32(0x3abdc64,c[23]);g.set_u32(0x3abdc68,c[24]);g.set_u32(0x3d0f400,c[27]);
             g.write(0x3d12a00,c+32,512);g.write(0x3d12c00,c+160,512);g.write(0x3b10f78,c+288,512);
         }
-        const std::vector<std::uint32_t> args=c[0]==0?std::vector<std::uint32_t>{}:std::vector<std::uint32_t>{0x3b10f78};
+        const std::vector<std::uint32_t> args=c[0]==2?std::vector<std::uint32_t>{0x3b10f78,c[15],c[16]}:c[0]==3?std::vector<std::uint32_t>{0x3b10f78}:std::vector<std::uint32_t>{};
         const auto b=native.p->guest().call(entry,args,std::nullopt,std::nullopt,static_cast<std::uint16_t>(c[1]));
-        if(!b&&b.error.find("794afc")!=std::string::npos){original.boundary=0x794afc;++fog_explicit;}
+        if(!b&&b.error.find("78753a")!=std::string::npos){original.boundary=0x78753a;++fog_explicit;}
         const auto a=original.p->guest().call(entry,args,std::nullopt,std::nullopt,static_cast<std::uint16_t>(c[1]));
         require(a.completed==b.completed,"fog init/table completion");
         const auto& l=original.p->hle().log();const auto& r=native.p->hle().log();require(l.size()==r.size(),"fog init/table trace count");
@@ -124,7 +129,10 @@ int main(int argc,char** argv){try{
         require(original.p->d3d8.render_states==native.p->d3d8.render_states,"fog init/table device state");
         require(original.fog_observed==native.fog_observed,"fog scalar/table order at COM calls");
         for(const auto& [at,size]:fog_outputs){std::vector<std::uint8_t> x(size),y(size);original.p->guest().read(at,x.data(),size);native.p->guest().read(at,y.data(),size);require(x==y,"fog stores "+std::to_string(at)+" case "+std::to_string(i/416));}
-        if(c[0]==0)++fog_init_cases;else ++fog_table_cases;
+        for(const auto at:{0x3d0849cU,0x90a098U,0x90a09cU})require(original.p->guest().u32(at)==native.p->guest().u32(at),"fog switch globals");
+        std::uint8_t original_flag=0,native_flag=0;original.p->guest().read(0x3abdcfe,&original_flag,1);native.p->guest().read(0x3abdcfe,&native_flag,1);require(original_flag==native_flag,"fog switch byte");
+        std::array<std::uint32_t,128> source_table{},native_table{};original.p->guest().read(0x3b10f78,source_table.data(),512);native.p->guest().read(0x3b10f78,native_table.data(),512);require(source_table==native_table,"generated fog table");
+        if(c[0]==0)++fog_init_cases;else if(c[0]==3)++fog_table_cases;else if(c[0]==2)++fog_generate_cases;else ++fog_switch_cases;
     }
     const auto view=corpus(std::string(argv[2])+"/ninja_view.cases.bin",37);
     std::size_t view_cases=0,projection_cases=0;
@@ -203,11 +211,29 @@ int main(int argc,char** argv){try{
         if(differs)++caught;
     }
     require(caught==7,"fog bridge mutants not caught");
+    for(const auto entry:{0x787260U,0x411af0U,0x411b40U}){
+        for(auto* f:{&original,&native}){
+            f->reset();auto& g=f->p->guest();g.set_u32(0x3d128b0,f->devices[0]);g.set_u32(0x3d127e4,0x100000);g.set_u32(0x3d08ae0,0);g.set_u32(0x3d128a4,1);g.set_u32(0x3d12798,1);g.set_u32(0x3b1117c,0);
+            const std::uint8_t one=1,zero=0;g.write(0x3abdc6c,&one,1);g.write(0x909eb4,&zero,1);g.write(0x3abdcfe,&one,1);
+            g.set_u32(0x3abdc60,0x43960000);g.set_u32(0x3abdc64,0x453b8000);g.set_u32(0x3abdc68,0x123456);
+            g.set_u32(0x90a098,0);g.set_u32(0x90a09c,0);
+            std::array<std::uint32_t,128> values{};
+            for(unsigned k=0;k<128;++k){const auto v=float(k+1);std::memcpy(&values[k],&v,4);}
+            g.write(0x3d12a00,values.data(),512);g.write(0x3d12c00,values.data(),512);values.fill(0);g.write(0x3b10f78,values.data(),512);
+        }
+        native.argument_mutant=true;const auto args=entry==0x787260?std::vector<std::uint32_t>{0x3b10f78,0xc3960000,0xc53b8000}:std::vector<std::uint32_t>{};
+        const auto a=original.p->guest().call(entry,args),b=native.p->guest().call(entry,args);
+        bool differs=a.completed!=b.completed||original.p->d3d8.render_states!=native.p->d3d8.render_states;
+        for(const auto& [at,size]:fog_outputs){std::vector<std::uint8_t> x(size),y(size);original.p->guest().read(at,x.data(),size);native.p->guest().read(at,y.data(),size);differs=differs||x!=y;}
+        std::array<std::uint32_t,128> x{},y{};original.p->guest().read(0x3b10f78,x.data(),512);native.p->guest().read(0x3b10f78,y.data(),512);differs=differs||x!=y;
+        if(differs)++caught;
+    }
+    require(caught==10,"fog generation/switch mutants not caught");
     native.reset();native.p->guest().set_u32(0x3d128b0,native.devices[0]);
     const auto vtable=native.p->guest().u32(native.devices[0]);require(vtable.has_value(),"vtable");
     native.p->guest().set_u32(*vtable+0xc8,0x10000000);
     const auto rejected=native.p->guest().call(0x77ec60,{0,2});
     require(!rejected&&rejected.error.find("non-HLE")!=std::string::npos&&native.calls==0,"foreign device target not rejected");
-    std::cout<<"Device bridge: "<<blend_cases<<" blend wrapper/leaf and "<<fog_cases<<" fog-colour oracle cases equivalent; identical globals, HLE device states and COM traces/HRESULTs; unknown/null/live-changing devices and declared boundaries verified; 7 bridge input mutants caught; foreign vtable rejected; "<<view_cases<<" view and "<<projection_cases<<" projection cases equivalent; "<<fog_init_cases<<" fog init and "<<fog_table_cases<<" table cases ("<<fog_explicit<<" declared EXP2 boundaries)\n";
+    std::cout<<"Device bridge: "<<blend_cases<<" blend wrapper/leaf and "<<fog_cases<<" fog-colour oracle cases equivalent; identical globals, HLE device states and COM traces/HRESULTs; unknown/null/live-changing devices and declared boundaries verified; 10 bridge input mutants caught; foreign vtable rejected; "<<view_cases<<" view and "<<projection_cases<<" projection cases equivalent; "<<fog_init_cases<<" fog init and "<<fog_table_cases<<" table cases ("<<fog_explicit<<" declared table boundaries); "<<fog_generate_cases<<" generate, "<<fog_switch_cases<<" switch cases\n";
     return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

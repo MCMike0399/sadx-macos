@@ -1,0 +1,32 @@
+{
+ "entries_added": [
+  "787260",
+  "411af0",
+  "411b40"
+ ],
+ "process_entries": 22,
+ "corpus": {
+  "fog_generate_cases": 1200,
+  "fog_switch_cases": 1600,
+  "all_fog_cases_replayed": 4700,
+  "explicit_table_boundaries": 19,
+  "bridge_mutants_caught": 10,
+  "COM_snapshots": "fog scalars, both LUTs, generated table, cache/mode/flag"
+ },
+ "runtime": {
+  "boot_identical": true,
+  "controller_900_frames_identical": true,
+  "app_script_exit_status": 0,
+  "screenshot_sha256": "bc1cfbaa30f34f240c7094a5059ffec35138d91e9efd1233c762d048f7d5949e"
+ },
+ "source_sha256": {
+  "src/hle/hle_device_bridge.cpp": "f7eaf705e0cf43dfe1ba3948aedac156439a945196e50ce27173150c7696bba1",
+  "tests/unit/hle_device_bridge.cpp": "d0c94232c46e7d7ad24c5cb5641dea677a481359cf7265421c0859c46d0112f5"
+ },
+ "limits": [
+  "Native generator retains its explicit 78753a table-domain stop.",
+  "Broader fog oracle remains partial for 2410 FP-status differences.",
+  "Fresh REA recovery failed/timed out; retained Ghidra evidence matches the pinned binary hash.",
+  "Screen/heap/task/queue and other owners, reviewed goldens remain unfinished."
+ ]
+}

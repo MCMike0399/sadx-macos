@@ -2181,3 +2181,40 @@ apply `ev_0b129a020ac4f93e2a431314596642a6f26cb1345635af9448fc16145fd93f62`
 * **Open:** 403180 screen, fog generation/switch owners, heap/task/queue and other modules still
   unbound (40 of the earlier address-named list). Reviewed goldens unfinished. Bochs/guest-model
   agreement is not a new physical CPU/GPU capture, and FP-status differences remain explicit.
+
+## M1 fog generation and switch overrides (2026-10-13)
+
+Evidence: `reference/production-integration-20261013/fog-switch-122-gate.json` (rc 0,
+123 native programs, 4 Python tests), `reference/production-integration-20261013/fog-switch-evidence.json`.
+Retained Ghidra (same pinned binary SHA 6b0937ca): generation `ev_474a4ce5413af75e4d9c08025f9bca076a52966c623ac7a2d1c4f65ca2336725`,
+enable `ev_485778ac40add6e56651aa651d0f4fc56d993ced7b39c359d066f9637bc1c4b0`,
+disable `ev_596bf50293cbf14714447a3d61bb4c14bb0318fd751e06b1f5ff141ff289c462`
+(`reference/ghidra-game-loop-recovery/fog-table-787260`, `queue-consumer-411af0/411b40`).
+
+* **22 process entries:** 787260 generator and 411af0/411b40 switches added to hle_device_bridge.
+  FogBridge borrows the existing queue/device owners and captures the profile/special flags, display
+  switch, cached/level ranges, colour, mode, output table and one-byte 3abdcfe state. Generator output
+  pointers remain guest uint32_t and can refer to another mapped table. Flushes changed serialized
+  data at the nested COM boundaries and completion, including table/cache/mode/flag state, preserving
+  NaN payloads and avoiding overwriting callback changes with unchanged fields.
+* **Full fog corpus coverage:** all 4,700 inputs now participate in bridge tests: existing 400 init,
+  300 colour, 1,200 table + **1,200 generation and 1,600 switch** cases. Nineteen generator inputs
+  reach the port's declared 78753a table-domain boundary; the original is stopped at that instruction
+  for comparison, not claimed to return naturally. Final scalars/tables, COM arguments/return sites/
+  HRESULTs, device states, and snapshots inside calls agree. Snapshots now include the generated
+  table, mode, cache and byte flag, as well as the original scalars and LUTs. Ten bridge mutants caught
+  (new ones corrupt start input, display switch and enabled state). Core port/oracle code unchanged.
+* **Live:** identical 22,030-call boot with the process table; enable and disable each fire before
+  first Present. First 600 overridden digests equal the plain boot. A standalone derivative of
+  guest-controller compares all 900 scripted frame digests with/without 22 entries, identical.
+  App --pad 450:0x10,800:0x10 through frame 900 exits 0 (capture local/ignored). Temporary source removed.
+  Gate full intro/title determinism and 63 FPS virtual title timing unchanged, measured 82.4 host FPS;
+  controller/keyboard/Metal checks pass. Other standalone oracles **not rerun**; broader fog stays
+  partial for 2,410 FP-status differences. Existing unregistered metal-sprite, metal-sprite-composition,
+  metal-texture and player-task **not run**.
+* **Analysis limits:** fresh owned REA recovery failed on generation and timed out on subsequent
+  requests; runner became terminal. Used retained Ghidra reports after verifying provider/binary hash,
+  rather than interpreting failed recovery as new evidence. Retained source and actual corpus
+  execution support the implementation. This does not claim newly recovered evidence ids.
+* **Open:** screen 403180, heap/task/queue and other owners remain unbound (38 of earlier address-named
+  list; enable 411af0 is an additional entry outside that list). Reviewed goldens still unfinished.

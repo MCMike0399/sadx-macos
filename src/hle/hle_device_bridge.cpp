@@ -128,12 +128,19 @@ struct ViewBridge {
 std::optional<float> load_float(X86Guest& g,std::uint32_t at){const auto value=g.u32(at);if(!value)return std::nullopt;return floating(*value);}
 struct FogBridge {
     HleProcess& process;RenderBridge bridge;
-    NinjaQueueConsumerState state;NinjaFogDeviceState device;NinjaFogTable table{};
+    NinjaQueueConsumerState state;NinjaFogDeviceState device;NinjaFogTable table{};std::uint32_t table_address=0x3b10f78;
+    std::optional<std::uint8_t> flag,flushed_flag;
     std::map<std::uint32_t,std::uint32_t> flushed;
     explicit FogBridge(HleProcess& p):process(p),bridge(p){
         auto& g=p.guest();state.fog_enabled_at_3d12798=g.u32(0x3d12798);state.fog_supported_at_3d128a4=g.u32(0x3d128a4);
         device.software_density_at_3d128a0=g.u32(0x3d128a0);device.color_at_3d12898=g.u32(0x3d12898);
         device.end_index_at_3d0fce0=g.u32(0x3d0fce0);device.start_index_at_3d12950=g.u32(0x3d12950);
+        state.fog_mode_at_3d0849c=g.u32(0x3d0849c);
+        std::uint8_t byte=0;if(g.read(0x3abdc6c,&byte,1))state.fog_profile_at_3abdc6c=byte;
+        if(g.read(0x909eb4,&byte,1))state.special_flags_at_909eb4=byte;
+        if(g.read(0x3abdcfe,&byte,1))flag=flushed_flag=byte;
+        state.cached_fog_start_at_90a098=load_float(g,0x90a098);state.cached_fog_end_at_90a09c=load_float(g,0x90a09c);
+        for(unsigned k=0;k<128;++k)table[k]=load_float(g,table_address+4*k);
         device.start_value_at_3d0fac0=load_float(g,0x3d0fac0);device.end_value_at_3d12894=load_float(g,0x3d12894);
         for(unsigned k=0;k<128;++k){device.w_at_3d12a00[k]=load_float(g,0x3d12a00+4*k);device.reciprocal_at_3d12c00[k]=load_float(g,0x3d12c00+4*k);}
         // Remember serialized values, including NaN payloads, so callback effects are not
@@ -141,26 +148,43 @@ struct FogBridge {
         snapshot();bridge.before_call=[this]{flush();};
     }
     void each(const std::function<void(std::uint32_t,const std::optional<std::uint32_t>&)>& f){
+        f(0x3d0849c,state.fog_mode_at_3d0849c);
         f(0x3d12798,state.fog_enabled_at_3d12798);f(0x3d128a4,state.fog_supported_at_3d128a4);
         f(0x3d128a0,device.software_density_at_3d128a0);f(0x3d12898,device.color_at_3d12898);
         f(0x3d0fce0,device.end_index_at_3d0fce0);f(0x3d12950,device.start_index_at_3d12950);
         const auto scalar=[&](std::uint32_t at,const std::optional<float>& value){
             if(!value){f(at,std::nullopt);return;}std::uint32_t bits;std::memcpy(&bits,&*value,4);f(at,bits);
         };
+        scalar(0x90a098,state.cached_fog_start_at_90a098);scalar(0x90a09c,state.cached_fog_end_at_90a09c);
         scalar(0x3d0fac0,device.start_value_at_3d0fac0);scalar(0x3d12894,device.end_value_at_3d12894);
-        for(unsigned k=0;k<128;++k){scalar(0x3d12a00+4*k,device.w_at_3d12a00[k]);scalar(0x3d12c00+4*k,device.reciprocal_at_3d12c00[k]);}
+        for(unsigned k=0;k<128;++k){scalar(0x3d12a00+4*k,device.w_at_3d12a00[k]);scalar(0x3d12c00+4*k,device.reciprocal_at_3d12c00[k]);scalar(table_address+4*k,table[k]);}
     }
     void snapshot(){each([this](std::uint32_t at,const std::optional<std::uint32_t>& value){if(value)flushed[at]=*value;});}
     void flush(){each([this](std::uint32_t at,const std::optional<std::uint32_t>& value){
         if(value&&(!flushed.count(at)||flushed[at]!=*value)){process.guest().set_u32(at,*value);flushed[at]=*value;}
-    });}
+    });
+        if(flag&&flag!=flushed_flag){const auto value=*flag;process.guest().write(0x3abdcfe,&value,1);flushed_flag=flag;}
+    }
     std::uint32_t run(X86Guest& g,std::uint32_t entry){
         X87Context fp(static_cast<std::uint16_t>(g.reg(UC_X86_REG_FPCW)));
         NinjaFogDeviceOwners owners{state,device,&bridge.render};NinjaFogResult result;
         if(entry==0x794ec0)result=ninja_fog_initialize_794ec0(owners,{g.u32(0x3d127e4),g.u32(0x3d08ae0)},fp);
-        else{
-            const auto source=argument(g,0);for(unsigned k=0;k<128;++k)table[k]=load_float(g,source+4*k);
-            result=ninja_fog_set_table_794e40(table,owners,fp);
+        else if(entry==0x411af0||entry==0x411b40){
+            const auto display=g.u32(0x3b1117c);std::optional<std::int32_t> typed;
+            if(display)typed=static_cast<std::int32_t>(*display);
+            const auto start=load_float(g,0x3abdc60),end=load_float(g,0x3abdc64);const auto color=g.u32(0x3abdc68);
+            const auto sentinel=load_float(g,0x7dce50);
+            if(!sentinel){g.stop("fog bridge: missing sentinel at 7dce50");return 0;}
+            NinjaFogOwners switch_owners{state,flag,&typed,&bridge.render,*sentinel,&device,&table,&start,&end,&color};
+            result=ninja_fog_411af0_411b40(entry==0x411af0,switch_owners,fp);
+        }else{
+            const auto source=argument(g,0);
+            if(source!=table_address){
+                for(unsigned k=0;k<128;++k)flushed.erase(table_address+4*k);
+                table_address=source;for(unsigned k=0;k<128;++k){table[k]=load_float(g,source+4*k);if(const auto value=g.u32(source+4*k))flushed[source+4*k]=*value;}
+            }
+            if(entry==0x787260)result=ninja_fog_generate_table_787260(table,floating(argument(g,1)),floating(argument(g,2)),owners,fp);
+            else result=ninja_fog_set_table_794e40(table,owners,fp);
         }
         flush();
         if(!result&&!g.stop_reason())g.stop("fog bridge: native boundary "+hex(result.source_boundary));
@@ -220,8 +244,8 @@ std::vector<OverrideEntry> device_overrides(HleProcess& p){
                 }
             }});
     }
-    for(const auto entry:{0x794ec0U,0x794e40U})
-        out.push_back({entry,entry==0x794ec0?"ninja_fog_initialize":"ninja_fog_set_table",
+    for(const auto entry:{0x794ec0U,0x794e40U,0x787260U,0x411af0U,0x411b40U})
+        out.push_back({entry,entry==0x794ec0?"ninja_fog_initialize":entry==0x794e40?"ninja_fog_set_table":entry==0x787260?"ninja_fog_generate":entry==0x411af0?"ninja_fog_enable":"ninja_fog_disable",
             {{0x3d12798,4},{0x3d128a4,4},{0x3d128a0,4},{0x3d12898,4},{0x3d0fce0,4},{0x3d12950,4},{0x3d0fac0,4},{0x3d12894,4},{0x3d12a00,512},{0x3d12c00,512}},
             [&p,entry](X86Guest& g)->std::uint32_t{FogBridge bridge(p);return bridge.run(g,entry);}});
     return out;
