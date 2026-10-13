@@ -98,6 +98,8 @@ public:
     std::array<InputModGamepadState,8> gamepads{};
     // Recorded D3D8 state the source has set (what a Metal backend reads).
     const D3D8StateOwner& d3d8()const noexcept{return d3d8_;}
+    // Borrow the source GetDeviceCaps result; unknown bytes remain explicit before device setup.
+    const SourceBytes<0x3d127c0,0xd4>& device_caps()const noexcept{return device_.caps_at_3d127c0;}
 private:
     NativeGameConfig config_;
     // Engine state owners.

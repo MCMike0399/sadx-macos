@@ -1,0 +1,33 @@
+policy: survey (unported owners treated as no-ops; not game behaviour)
+startup completed: yes
+frames completed: 5
+exited: no
+D3D8 frame methods issued (recording owner): BeginScene 5, EndScene 4, Clear 6 (last flags 3), Present 5
+assumption: D3D8 GetDeviceCaps: a HAL device with TextureCaps PERSPECTIVE|ALPHA|PROJECTED|CUBEMAP|VOLUMEMAP|MIPMAP|MIPVOLUMEMAP|MIPCUBEMAP and RasterCaps WFOG, every other cap 0 (the reference GPU's D3DCAPS8 were not captured)
+assumption: 7958d0/793f70: registry value CTRLFLAG0 absent (3d08ae0 = 0), as 7958d0 zeroes it before the registry read; the reference machine's registry was not captured
+assumption: 401ac0: slot 0 follows the pinned mod loader's (eb4cdcca, DLL 3293cf35) 401ae1/401ae2 patch from source: LoadChrmodels stores CHRMODELS_orig.dll's handle in 3ab9170 and its exports are bound; the loader's machine code was not executed against this claim
+assumption: 401ac0: model DLLs all prefer 0x10000000; the native loader maps them at ascending 64 KiB-aligned bases from 0x20000000 with relocations applied (the reference's load addresses were not captured)
+assumption: WinMain GetPrivateProfileIntA/StringA: Win32 semantics re-implemented natively (case-insensitive lookup, trimmed values, sign + decimal digits), not traced
+assumption: 401a20: host drives are one fixed C:\ with no CD-ROM holding the disc, so 3a8af78 stays empty (the reference machine's drives were not captured; the digital install needs no disc)
+assumption: 780f60 njMalloc: HeapCreate/HeapAlloc results are native identities (handle 0x510000, blocks from 0x50000000); the reference's heap addresses were not captured
+assumption: WinMain 40269a: MessageBoxA("media player can't found") reached because 3ab918c/3ab9190 keep load-image zeros (the CRT static constructor that sets them is unported); no message box is shown natively
+assumption: WinMain imm32.dll/ImmDisableIME: host tokens; macOS has no IME counterpart and the call changes no game state
+assumption: 791610 -> 7943c0: device creation (the loader's CreateDirect3DDevice_r at 794000) is not ported; a native device with the loader's 640x480 windowed back buffer is created; caps use the shared reported D3D8 assumption
+assumption: 781070/791610: unported pre-40cad0 owners skipped, their globals stay load-image values (788000 is taken to succeed on its first try): 793ef0 (site 78110d), 789f80 (site 781112), 78d0d0 (site 791684), 796710 (site 79168e), 791860 (site 791693), 7943f0 (site 791698), 7914b0 (site 7917dc), 7800a0 (site 793d85), 780f20 (site 78112e), 788000 (site 781189)
+assumption: 401830: the matrix stack is as njInitMatrix leaves it; the Input mod's CreateSADXKeyboard replaces 77f0a0's 791b10 (no DirectInput keyboard device: the game's 791bd0 poll returns early and the Input mod's keyboard drives input), and its NOPs remove 77efd0's 791d60 and 77f150's 7928e0
+assumption: 401830 40bb20: the DirectInput8 interface and mouse device are host tokens; 3d0fd30/3d0fd34 (window and instance) keep load-image values because window creation (793ef0) is unported; 78e720's CRT malloc returns native identities (handle 0x520000, blocks from 0x60000000)
+assumption: 401830 and 781070's 77f150: unported owners skipped, their globals stay load-image values: 793c70 (site 7808a2), 794540 (site 78e76d) x9
+assumption: WinMain 402c92..402d4c is not run natively: the ShowCursor loop, the cliplevel inits 5850f0/556e40/556d60/568d20/4f68e0/5adc40/600700 and the model DLLs' SetClip_EC00/EC01/EC31 exports; after 781250, 40e2e0 and the debug prints are not run either; their globals keep load-image values
+assumption: 781250 -> 791170: FPTAN/FPATAN/FSINCOS use the Bochs P5/P6 models and the D3DX slots 774310/7757e0 (SSE CPU without 3DNow!); RCPSS/RCPPS are modelled as IEEE division
+assumption: 408630: Windows HeapAlloc address unknown; render-queue cursor assumes a 32-byte-aligned base
+assumption: 410510/44de80: no native audio backend yet; the device owner reports DSERR_NODRIVER and the source continues without sound (the Windows reference has sound)
+assumption: 780030/7959a0: natively the 3d0fa40 callback list holds the ported registrations in order (77f110, 785190, 78c5a0, 77f110, 785190, 77f090, 77efc0) and the 3d08af0 hook table holds 789bd0; the skipped 788000 would also register the 78818f callback and the 795380 hook (788007>795420) on the reference
+assumption: 78ba50: the 3d0fe00 dynamic vertex-buffer records hold only 791610's zero stores (their creators among the skipped device owners are unported), so Clear's 794800 walk finds no buffers
+assumption: D3D8 frame methods: no display backend configured; the recording owner returns D3D_OK for BeginScene/EndScene/Clear/Present
+assumption: 789bd0: the host message queue is empty (no window events headless; the app front end supplies them), so 3d08534 takes 789bd0's uninitialised MSG.wParam: unknown
+assumption: 78dbe0 -> D3DX8 772615: the reference CPU is taken to have SSE without 3DNow! and no DisableD3DXPSGP registry value, so the dispatch table holds 774310/774150; RCPPS is modelled as IEEE division (the reference CPU's estimate table was not captured)
+unported owners reached (4, first-reached order):
+  40cad0>40c090>42c7b0>421180              site 42c756  calls 1
+  40cad0>40c090>42c7b0>42d3b0              site 42c7cb  calls 1
+  40cad0>40c090>42cc70                     site 40c124  calls 4
+  40cad0>411d00>781020>793cc0              site 78b9e3  calls 4

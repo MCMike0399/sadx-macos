@@ -4,6 +4,7 @@
 // read either. Resources (textures, vertex/index buffers, surfaces) are added as the guest reaches them;
 // every method without a body stops the guest with its name.
 #include "hle/hle_com.hpp"
+#include "engine/d3d8_caps.hpp"
 #include <cstring>
 #include <memory>
 namespace sadx {
@@ -53,18 +54,10 @@ std::uint32_t pitch_of(std::uint32_t format,std::uint32_t width){
     switch(format){case 20:case 21:case 22:case 71:case 75:case 77:return width*4;case 23:case 24:case 25:case 26:case 80:return width*2;case 28:case 50:case 41:return width;default:return 0;}}
 std::uint32_t rows_of(std::uint32_t format,std::uint32_t height){
     const bool dxt=format>0xffff;return dxt?std::max(1U,(height+3)/4):height;}
-// D3DCAPS8 (0xd4 bytes) for IDirect3D8::GetDeviceCaps and IDirect3DDevice8::GetDeviceCaps. sonic.exe reads three
-// fields of its copy at 3d127c0: TextureCaps (+0x3c) bit MIPMAP (78cfa0: without it the mipmapped-PVR handlers are
-// cleared and the title screen's twiddled-mipmap textures reach the fatal 789dd0) and bit CUBEMAP (7914b0, 78db80),
-// and RasterCaps (+0x24) bit WFOG (794edb). Declared: a HAL device with the texture caps every D3D8-class GPU has.
-std::vector<std::uint8_t> device_caps(HleProcess& p){
-    p.assume("D3D8 GetDeviceCaps: a HAL device with TextureCaps PERSPECTIVE|ALPHA|PROJECTED|CUBEMAP|VOLUMEMAP|MIPMAP|MIPVOLUMEMAP|MIPCUBEMAP and RasterCaps WFOG, every other cap 0 (the reference GPU's D3DCAPS8 were not captured; the native runtime still declares only WFOG)");
-    std::vector<std::uint8_t> caps(0xd4,0);
-    const auto put=[&](std::size_t at,std::uint32_t v){for(int k=0;k<4;++k)caps[at+k]=static_cast<std::uint8_t>(v>>(8*k));};
-    put(0x00,1);          // DeviceType = D3DDEVTYPE_HAL
-    put(0x24,0x100000);   // RasterCaps = D3DPRASTERCAPS_WFOG
-    put(0x3c,0x1ec05);    // TextureCaps = PERSPECTIVE 1 | ALPHA 4 | PROJECTED 400 | CUBEMAP 800 | VOLUMEMAP 2000 | MIPMAP 4000 | MIPVOLUMEMAP 8000 | MIPCUBEMAP 10000
-    return caps;}
+// Both COM interfaces return the same reported platform assumption as NativeGame.
+D3D8CapsBytes device_caps(HleProcess& p){
+    p.assume(d3d8_caps_assumption());
+    return assumed_d3d8_caps();}
 }
 void register_hle_d3d8(HleProcess& p){
     auto* P=&p;

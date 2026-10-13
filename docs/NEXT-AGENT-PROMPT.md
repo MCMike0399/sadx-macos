@@ -10,7 +10,7 @@ by automated tests. Read AGENTS.md, then docs/STATUS.md, docs/ARCHITECTURE.md, d
 docs/METHOD.md and docs/decisions/ADR-0001..0004 before touching code. Read the last handoff entries
 in docs/HANDOFF.md (from "M1 4e completion" on) — they record every HLE assumption and bug found.
 
-Where things stand (gate 115): the in-process guest runs sonic.exe from its entry point with the real
+Where things stand (gate 116): the in-process guest runs sonic.exe from its entry point with the real
 mod loader and mods (MSVCP140/VCRUNTIME140 as real code, everything else HLE in src/hle) from the SEGA
 logo through the intro movie (a headless DirectShow graph, src/hle/hle_dshow: no video/audio drawn, a
 reported assumption) to the title screen (frame 7168) and on into the attract demo; two boots are
@@ -30,6 +30,11 @@ virtual tick after boot is accounted for by QPC reads (1 us per query). The old 
 title report was not reproduced; its measurement scope is unavailable. Windows wall-time
 fidelity remains unverified: keep the QPC-step model reported as an assumption.
 
+Native and guest GetDeviceCaps now use engine/d3d8_caps: the same 0xd4-byte HAL,
+WFOG and mipmap/cube-map texture-cap assumption, reported in both runtimes. Tests check
+native startup's stored caps, both guest COM methods, and original 78cfa0's MIPMAP branch.
+This aligns the platform fact; the native runtime's unported texture-init callees remain explicit.
+
 Current milestone: M1 — what is left (one gate each: make -j10 gate — it opens a window for app-smoke;
 record with tools/gate/record_gate.py only on rc=0; python3 tools/gate/gen_status.py; a docs/HANDOFF.md
 entry; commit; do not push unless asked):
@@ -44,10 +49,7 @@ entry; commit; do not push unless asked):
    native NinjaRenderState/transform owner callbacks); then heaps (780f60/780fb0), the task graph and
    the render queue. Give each oracle a <slug>.cases.bin (the verify scripts write it; add it to
    OVERRIDE_CORPORA) instead of enumerating cases.
-3. The native runtime (game_runtime.cpp) still declares only D3DPRASTERCAPS_WFOG; with those caps the
-   title screen's mipmapped PVRs hit the fatal 789dd0 (see the 4f entry). Align it with the guest's
-   caps assumption.
-4. M2 golden-frames: offscreen render of fixed guest frames (SEGA logo, title screen, file select)
+3. M2 golden-frames: offscreen render of fixed guest frames (SEGA logo, title screen, file select)
    against reviewed goldens (perceptual diff), using sadx-app --guest --keys/--screenshot.
 
 Performance notes: never pass an instruction count to uc_emu_start (Unicorn then instruments every

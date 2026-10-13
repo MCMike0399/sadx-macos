@@ -1889,3 +1889,42 @@ REA/Ghidra: Speedrun +10f0 `ev_9c9c4f7b4061790ef99d538693b1de5a0322743e2323bd730
   the remaining override owners, native caps alignment and reviewed golden frames remain unfinished.
   Standalone oracles were not rerun (tests/build/docs only); the gate replayed the existing 40,279-case
   override suite and caught all 12 mutants. The Metal app smoke check passed.
+
+## M1 native/guest device caps alignment (2026-10-13)
+
+Evidence: `reference/production-integration-20261013/shared-caps-116-gate.json` (rc 0,
+118 native programs, 4 Python tests); refreshed `reference/production-integration-20261013/sadx-boot-survey.txt`.
+REA/Ghidra: 78cfa0 `ev_8ab0f003a0d4f2c57e21a7ccf90c4c5b85a68c4d736aefe9731da3eb4b7ac5e6`,
+791610 `ev_ee87a52b7dfc6734d1fce3eb7f6bec7a1160e0c2c4ba071732a061848b30c73d`
+(`reference/inventory-raw/caps-*`).
+
+* **`engine/d3d8_caps`** supplies the same 0xd4-byte D3DCAPS8 assumption to NativeGame's host callback
+  and both HLE GetDeviceCaps COM methods: DeviceType HAL (1), RasterCaps WFOG (0x100000), TextureCaps
+  PERSPECTIVE|ALPHA|PROJECTED|CUBEMAP|VOLUMEMAP|MIPMAP|MIPVOLUMEMAP|MIPCUBEMAP (0x1ec05), other fields 0.
+  Both runtimes report the shared assumption text. The native device-creation limitation remains reported;
+  removed the obsolete text saying the native runtime declares only WFOG. No new source-global owner:
+  NativeGame's read-only `device_caps()` borrows NinjaDeviceState's existing 3d127c0 owner.
+* **Regression:** before the fix, the native-startup test exits 1 at `device caps declare HAL`.
+  It now checks every byte stored by native startup, the three independent field values and the reported
+  assumption. `d3d8-caps-test` checks the wire layout and zero fields. `guest-d3d8-caps-test` calls both COM
+  methods, compares all bytes, checks guard bytes around the output and one reported caps assumption.
+  `guest-boot-test` checks the stored caps under the actual loader/mod profile at first Present.
+* **The real MIPMAP consumer:** original 78cfa0 tests 3d127fc &0x4000. Without it, the sixteen flags at
+  389d47c +8*k become zero; these are format flags (0/1), not converter-function pointers. The original
+  0x200 (twiddled mipmaps) entry has flag 1. The guest caps test executes original 78cfa0 with the shared
+  caps and with only MIPMAP removed: flags preserved versus all cleared. This fixture runs the unpatched
+  helper in the original image; the full guest boot/title tests separately exercise the pinned profile.
+* **Verification:** device-setup oracle rerun/tracked: 2,000 cases, 14 outcomes, zero mismatches, **pass**;
+  report matches the current probe hash. Gate: full intro/title two-boot digests and first 600 frames with
+  overrides identical, title samples 15.873 ms, measured 79.6 host FPS; keyboard/timing/Metal smoke pass.
+  Native survey: five frames, four unported owners, shared caps assumption recorded (survey is not behaviour).
+* **Gate registration:** the first gate compiled but omitted the new no-argument caps test. Added its
+  manifest row and reran the gate; only the second log was recorded. Every test needs a manifest row in
+  the current generator, including no-argument tests. Normalizing that row's empty tab left generated
+  commands byte-identical. Existing `metal-sprite`, `metal-sprite-composition`, `metal-texture`, `player-task`
+  are outside the manifest and were **not run**. Other standalone oracles were **not rerun**; the verdict
+  inventory retains 47 pass /44 partial /9 fail, with game_reset_composed missing. Partial is not pass.
+* **Limits/open:** actual reference GPU caps are uncaptured; native texture-init callees remain explicit
+  unported owners. This aligns the platform fact and does not prove native title execution. Controllers,
+  remaining override equivalence and reviewed golden frames remain in NEXT-AGENT-PROMPT.md.
+  REA's close reported a process-ownership cleanup error; the cited PID was already absent on a direct ps check.

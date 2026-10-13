@@ -1,4 +1,5 @@
 #include "runtime/game_runtime.hpp"
+#include "engine/d3d8_caps.hpp"
 #include "game/win32_profile.hpp"
 #include "player/player_task.hpp"
 #include <cstdio>
@@ -493,7 +494,7 @@ NativeGameReport NativeGame::run(){
         if(!r){report_.failure="WinMain settings failed at "+hex(r.source_boundary)+(r.required_fact?" (requires "+hex(*r.required_fact)+")":"");return false;}
         return true;};
     // Pre-40cad0 device setup 791610: only its fog initializer 794ec0 runs natively.
-    report_.assumptions.push_back("791610 GetDeviceCaps: the native Metal device declares D3DPRASTERCAPS_WFOG (table fog emulated by the backend) and no other caps; the Windows reference GPU's D3DCAPS8 were not captured");
+    report_.assumptions.push_back(d3d8_caps_assumption());
     report_.assumptions.push_back("7958d0/793f70: registry value CTRLFLAG0 absent (3d08ae0 = 0), as 7958d0 zeroes it before the registry read; the reference machine's registry was not captured");
     // CRT static init 7c4e90 -> 401ac0 (before WinMain): model DLL bindings.
     if(std::any_of(config_.model_dlls.begin(),config_.model_dlls.end(),[](const auto& p){return bool(p);})){
@@ -540,15 +541,15 @@ NativeGameReport NativeGame::run(){
         NinjaDeviceHost host{
             [](std::uint32_t)->std::optional<std::uint32_t>{return 0x0d3d0000u;},  // Direct3DCreate8: a host IDirect3D8 token
             [](const D3D8FrameCommand&)->std::optional<std::vector<std::uint8_t>>{
-                std::vector<std::uint8_t> caps(0xd4,0);caps[0x24+2]=0x10; // RasterCaps (3d127e4) = D3DPRASTERCAPS_WFOG; every other cap 0
-                return caps;},
+                const auto caps=assumed_d3d8_caps();
+                return std::vector<std::uint8_t>(caps.begin(),caps.end());},
             [](const D3D8FrameCommand&)->std::optional<std::array<std::uint32_t,6>>{return std::array<std::uint32_t,6>{0,0,640,480,0,0x3f800000};},
             [&](const D3D8FrameCommand&,std::uint32_t flags,std::uint32_t,float,std::uint32_t)->std::optional<std::int32_t>{++d3d8_.clears;d3d8_.last_clear_flags=flags;return 0;}};
         NinjaDeviceInitRuntime device_rt{device_,frame_calls_,render_,renderer_,fp_,host,[&](const NinjaDeviceCall& c)->GameLogicOwnerResult{
             switch(c.callee){
             case 0x7943c0:{ // device creation (the loader's CreateDirect3DDevice_r behind 794000)
                 auto device=std::make_shared<NinjaRenderDevice>();device->identity=1;render_.device_at_3d128b0=device;
-                report_.assumptions.push_back("791610 -> 7943c0: device creation (the loader's CreateDirect3DDevice_r at 794000) is not ported; a native device with the loader's 640x480 windowed back buffer is created, and its caps declare only D3DPRASTERCAPS_WFOG");
+                report_.assumptions.push_back("791610 -> 7943c0: device creation (the loader's CreateDirect3DDevice_r at 794000) is not ported; a native device with the loader's 640x480 windowed back buffer is created; caps use the shared reported D3D8 assumption");
                 return {GameLogicOwnerState::completed,0,{}};}
             case 0x794ec0:{ // fog init reads the caps GetDeviceCaps just wrote
                 std::uint32_t raster=0;for(unsigned k=0;k<4;++k)raster|=static_cast<std::uint32_t>(device_.caps_at_3d127c0.bytes[0x24+k].value_or(0))<<(8*k);

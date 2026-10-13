@@ -1,4 +1,6 @@
 #include "runtime/game_runtime.hpp"
+#include "engine/d3d8_caps.hpp"
+#include <algorithm>
 #include <fstream>
 #include <iostream>
 #include <iterator>
@@ -26,6 +28,12 @@ int main(int argc,char** argv){try{
     config.policy=sadx::OwnerPolicy::stop_at_unported;
     sadx::NativeGame game(config);const auto stopped=game.run();
     require(stopped.stopped_at&&stopped.stopped_at->callee==survey.unported.front().callee&&stopped.failure.empty(),"stop policy halts at the first surveyed owner");
+    const auto caps=sadx::assumed_d3d8_caps();
+    for(std::size_t i=0;i<caps.size();++i)require(game.device_caps().bytes[i]==caps[i],"native startup stores the shared caps bytes");
+    require(std::find(stopped.assumptions.begin(),stopped.assumptions.end(),sadx::d3d8_caps_assumption())!=stopped.assumptions.end(),"native caps assumption reported");
+    require(game.device_caps().read(0x3d127c0,4)==1,"device caps declare HAL");
+    require(game.device_caps().read(0x3d127e4,4)==0x100000,"device caps retain WFOG");
+    require(game.device_caps().read(0x3d127fc,4)==0x1ec05,"device caps retain mipmap and cube-map converters");
     // 794ec0 then 40bf40>411af0>4119b0's update: zeroed fog table, colour 0,
     // linear table fog with the 65534..65535 range, fog switched off.
     const auto& rs=game.d3d8().render_states;const auto state=[&](std::uint32_t s){const auto i=rs.find(s);return i==rs.end()?0xdeadbeefU:i->second;};

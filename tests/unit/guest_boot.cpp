@@ -11,6 +11,7 @@
 #include "guest/fpu_shims.hpp"
 #include "guest/override_table.hpp"
 #include "hle/hle_process.hpp"
+#include "engine/d3d8_caps.hpp"
 #include <cstring>
 #include <fstream>
 #include <iostream>
@@ -67,6 +68,8 @@ int main(int argc,char** argv){try{
     require(!first.result&&first.result.error=="first Present","the boot reaches the first Present, got: "+(first.result?std::string("returned"):first.result.error));
     require(p.d3d8.presents==1&&p.d3d8.clears==1,"one Clear and the Present");
     require(p.d3d8_presentation.size()==13&&p.d3d8_presentation[0]==640&&p.d3d8_presentation[1]==480,"CreateDevice with the profile's 640x480 back buffer");
+    D3D8CapsBytes caps{};
+    require(p.guest().read(0x3d127c0,caps.data(),caps.size())&&caps==assumed_d3d8_caps(),"pinned-profile boot stores the shared D3D8 caps");
     // The loader's borderless window: a top-level wrapper with a 640x480 client and the visible game child.
     const HleWindow* wrapper=nullptr;const HleWindow* game=nullptr;
     for(const auto& [h,w]:p.windows.windows){if(w.text=="SonicAdventureDXPC"&&!w.parent)wrapper=&w;if(w.text=="SonicAdventureDXPC"&&w.parent)game=&w;}
