@@ -3,7 +3,8 @@
 // the Win32/D3D8/DirectInput/DirectSound imports HLE'd (src/hle) and the D3D8 state recorded in a D3D8StateOwner.
 // Checked: the run reaches Present; the windows the loader creates (borderless wrapper + 640x480 game child);
 // the D3D8 device came from CreateDevice with the profile's 640x480 back buffer; every Input/Speedrun and
-// WinMain-time loader patch is written except the 8 HUD-scaling sites applied after the first frame; nothing
+// WinMain-time loader patch is applied (profile-applied: all active sites; the inventory's 8 value-preserving HUD
+// sites, which at 640x480 store their original bytes, are observed as guest stores by a write watch); nothing
 // outside the inventory's active ranges is written; and a second boot is identical (call log, D3D8 state).
 // Every boot runs with the FPU shims (4e) and the third one with the override table (4d) as well.
 //   guest-boot-test GAME_DIR WINDOWS_SYSTEM_DIR
@@ -19,8 +20,8 @@
 namespace {
 using namespace sadx;
 void require(bool ok,const std::string& why){if(!ok)throw std::runtime_error(why);}
-struct Boot {std::unique_ptr<HleProcess> process;GuestCallResult result;std::shared_ptr<FpuShimStats> shims=std::make_shared<FpuShimStats>();};
-Boot boot(const std::string& dir,const std::string& system,const std::string& overlay,std::map<std::string,std::size_t>* fired=nullptr){
+struct Boot {std::unique_ptr<HleProcess> process;GuestCallResult result;std::shared_ptr<FpuShimStats> shims=std::make_shared<FpuShimStats>();std::shared_ptr<std::set<std::uint32_t>> stored=std::make_shared<std::set<std::uint32_t>>();};
+Boot boot(const std::string& dir,const std::string& system,const std::string& overlay,std::map<std::string,std::size_t>* fired=nullptr,const std::vector<std::pair<std::uint32_t,std::uint32_t>>& watch={}){
     std::ifstream f(dir+"/sonic.exe",std::ios::binary);require(bool(f),"cannot read "+dir+"/sonic.exe");
     std::string error;const auto image=ExecutableImage::parse({std::istreambuf_iterator<char>(f),{}},&error);require(bool(image),error);
     std::filesystem::remove_all(overlay);
@@ -28,6 +29,8 @@ Boot boot(const std::string& dir,const std::string& system,const std::string& ov
     b.process->use_real_cpp_runtime(system);
     require(b.process->map_main(*image,&error),"map sonic.exe: "+error);
     b.process->on_present=[](X86Guest& g){g.stop("first Present");};
+    for(const auto& [at,size]:watch){auto stored=b.stored;const auto site=at; // guest stores (the loader's code); HLE writes are not reported
+        require(b.process->guest().add_write_watch(at,at+size,[stored,site](std::uint32_t,std::uint32_t,std::uint32_t,std::uint64_t){stored->insert(site);},&error),error);}
     require(install_fpu_shims(b.process->guest(),load_fpu_sites("reference/inventory/fpu-sites.json"),*b.shims,&error),error); // M1 4e
     if(fired)for(auto entry:frame_loop_overrides(*image)){ // the override table, counting how often each fires
         auto bridge=entry.bridge;const auto name=entry.name;
@@ -38,7 +41,7 @@ Boot boot(const std::string& dir,const std::string& system,const std::string& ov
 std::string hex_bytes(const X86Guest& g,std::uint32_t at,std::uint32_t n){
     std::ostringstream o;for(std::uint32_t i=0;i<n;++i){std::uint8_t v=0;g.read(at+i,&v,1);char h[3];std::snprintf(h,3,"%02x",v);o<<h;}return o.str();}
 // (va, size, original bytes, active, owner) per patch entry of tools/gate/profile_patches.json.
-struct Entry {std::uint32_t va,size;std::string original;bool active;};
+struct Entry {std::uint32_t va,size;std::string original;bool active,value_preserving;};
 std::vector<Entry> entries(const std::string& path){
     std::ifstream f(path);std::string all((std::istreambuf_iterator<char>(f)),{});std::vector<Entry> out;std::size_t at=0;
     const auto field=[&](const std::string& key,std::size_t from,std::size_t limit)->std::string{
@@ -49,14 +52,17 @@ std::vector<Entry> entries(const std::string& path){
     while((at=all.find("\"va\":",at))!=std::string::npos){
         const auto next=all.find("\"va\":",at+5);const auto end=next==std::string::npos?all.size():next;
         out.push_back({static_cast<std::uint32_t>(std::stoul(field("va",at,end),nullptr,16)),static_cast<std::uint32_t>(std::stoul(field("size",at,end))),
-                       field("original_bytes",at,end),field("active",at,end)=="true"});
+                       field("original_bytes",at,end),field("active",at,end)=="true",field("condition",at,end).find("value-preserving")!=std::string::npos});
         at=end;}
     return out;
 }
 }
 int main(int argc,char** argv){try{
     require(argc==3,"usage: guest-boot-test GAME_DIR WINDOWS_SYSTEM_DIR");
-    auto first=boot(argv[1],argv[2],"build/guest-boot-overlay");
+    std::vector<std::pair<std::uint32_t,std::uint32_t>> preserving;
+    for(const auto& e:entries("tools/gate/profile_patches.json"))if(e.active&&e.value_preserving)preserving.push_back({e.va,e.size});
+    require(preserving.size()==8,"the inventory's value-preserving active sites (8 HUD-scaling stores)");
+    auto first=boot(argv[1],argv[2],"build/guest-boot-overlay",nullptr,preserving);
     auto& p=*first.process;
     require(!first.result&&first.result.error=="first Present","the boot reaches the first Present, got: "+(first.result?std::string("returned"):first.result.error));
     require(p.d3d8.presents==1&&p.d3d8.clears==1,"one Clear and the Present");
@@ -67,19 +73,19 @@ int main(int argc,char** argv){try{
     require(wrapper&&game&&game->parent==wrapper->handle&&wrapper->visible&&game->visible,"wrapper and game windows exist and are visible");
     require(game->width==640&&game->height==480&&wrapper->width==646&&wrapper->height==509,"640x480 client in a 646x509 captioned wrapper (fixed frame 3, caption 23)");
     // Patch sites.
-    const std::set<std::uint32_t> after_first_frame={0x628951,0x62895b,0x7261cf,0x726211,0x727513,0x727546,0x72767b,0x72773b};
     std::map<std::uint32_t,std::pair<bool,bool>> site; // va -> (active, written)
     std::map<std::uint32_t,std::uint32_t> active_size;
     for(const auto& e:entries("tools/gate/profile_patches.json")){
         auto& s=site[e.va];if(e.active){s.first=true;active_size[e.va]=std::max(active_size[e.va],e.size);}
-        if(e.original!="null"&&!e.original.empty()&&hex_bytes(p.guest(),e.va,e.size)!=e.original)s.second=true;}
+        if(e.original!="null"&&!e.original.empty()&&hex_bytes(p.guest(),e.va,e.size)!=e.original)s.second=true;
+        if(e.active&&e.value_preserving&&first.stored->count(e.va)){require(hex_bytes(p.guest(),e.va,e.size)==e.original,"a value-preserving site holds other bytes");s.second=true;}}
     std::set<std::uint32_t> pending,unexpected;std::size_t active=0;
     for(const auto& [va,s]:site){
         if(s.first){++active;if(!s.second)pending.insert(va);continue;}
         if(!s.second)continue;bool covered=false;for(const auto& [other,size]:active_size)if(other<va&&va<other+size)covered=true;
         if(!covered)unexpected.insert(va);}
     std::ostringstream still;for(const auto va:pending)still<<std::hex<<va<<" ";
-    require(pending==after_first_frame,"active sites still original at the first Present: "+still.str());
+    require(pending.empty(),"active sites not applied at the first Present: "+still.str());
     require(unexpected.empty(),"a site outside the inventory's active ranges was written");
     // Determinism: a second boot issues the same HLE calls with the same results and records the same D3D8 state.
     auto second=boot(argv[1],argv[2],"build/guest-boot-overlay");
@@ -104,7 +110,7 @@ int main(int argc,char** argv){try{
         counts<<entry.name<<" x"<<fired[entry.name]<<" ";}
     std::cout<<"Guest boot: entry point to the first Present in the guest ("<<p.hle().log().size()<<" HLE calls, identical on a second boot); windows "
              <<p.windows.windows.size()<<" (borderless 646x509 wrapper, 640x480 game); "<<(active-pending.size())<<" of "<<active
-             <<" active patch sites written, the 8 HUD-scaling ones pending; "<<p.assumptions.size()<<" HLE assumptions reported; FPU shims executed "<<[&]{std::size_t n=0;for(const auto& [k,v]:first.shims->shimmed)n+=v;return n;}()
+             <<" active patch sites applied ("<<first.stored->size()<<" value-preserving ones observed as guest stores); "<<p.assumptions.size()<<" HLE assumptions reported; FPU shims executed "<<[&]{std::size_t n=0;for(const auto& [k,v]:first.shims->shimmed)n+=v;return n;}()
              <<"x (unshimmed "<<[&]{std::size_t n=0;for(const auto& [k,v]:first.shims->unshimmed)n+=v;return n;}()<<"x); with the override table installed the boot is identical (fired: "<<counts.str()<<")\n";
     return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

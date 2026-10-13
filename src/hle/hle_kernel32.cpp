@@ -180,6 +180,12 @@ void register_hle_kernel32(HleProcess& p){
         c.guest.redirect(arg(c,1),{once,arg(c,2),arg(c,3)},16,[once](X86Guest& g){
             const auto ok=g.reg(19);const std::uint32_t done=ok?2:0;g.write(once,&done,4);g.set_eax(ok?1:0);});
         (void)P;return 0;});
+    // Interlocked arithmetic on a guest LONG (one guest thread: plain read-modify-write).
+    K("InterlockedIncrement",4,1,[arg](HleCall& c)->std::uint32_t{const auto v=c.guest.u32(arg(c,0)).value_or(0)+1;c.guest.set_u32(arg(c,0),v);return v;});
+    K("InterlockedDecrement",4,1,[arg](HleCall& c)->std::uint32_t{const auto v=c.guest.u32(arg(c,0)).value_or(0)-1;c.guest.set_u32(arg(c,0),v);return v;});
+    K("InterlockedExchange",8,2,[arg](HleCall& c)->std::uint32_t{const auto v=c.guest.u32(arg(c,0)).value_or(0);c.guest.set_u32(arg(c,0),arg(c,1));return v;});
+    K("InterlockedCompareExchange",12,3,[arg](HleCall& c)->std::uint32_t{const auto v=c.guest.u32(arg(c,0)).value_or(0);if(v==arg(c,2))c.guest.set_u32(arg(c,0),arg(c,1));return v;});
+    K("InterlockedExchangeAdd",8,2,[arg](HleCall& c)->std::uint32_t{const auto v=c.guest.u32(arg(c,0)).value_or(0);c.guest.set_u32(arg(c,0),v+arg(c,1));return v;});
     // Interlocked singly-linked lists (SLIST_HEADER: Next, Depth, Sequence) on guest memory.
     K("InterlockedPushEntrySList",8,2,[arg](HleCall& c)->std::uint32_t{
         const auto head=arg(c,0),entry=arg(c,1);const auto old=c.guest.u32(head).value_or(0);std::uint32_t meta=c.guest.u32(head+4).value_or(0);

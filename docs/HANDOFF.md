@@ -1763,3 +1763,45 @@ Evidence: gate `reference/production-integration-20261012/fpu-f2xm1-rcp-112-gate
   estimate model with untouched upper lanes for scalar forms, every kind is computed by the shim (none left to
   Unicorn); 7716df still equals the native port on 3,000 cases.
 * No site is "counted only" any more. Unshimmed in the boot: 0.
+
+## M1 4f: intro FMV, title screen, profile-applied 119/119 (2026-10-13)
+
+Evidence: gate `reference/production-integration-20261012/fmv-title-113-gate.json` (rc 0).
+
+* **The movie player** (5130a0 → 513ed0, reverse-engineered with capstone + Ghidra `reference/inventory-raw/fmv-*`):
+  CoCreateInstance(CLSID_FilterGraph, IID_IGraphBuilder) → `new` the game's own DirectShow-baseclasses
+  TEXTURERENDERER (513ab0, 0x160 bytes) → AddFilter → AddSourceFilter(system\re-us.mpg, "SOURCE") → FindPin
+  "Output" → Render → QI IBasicAudio::put_Volume, QI IMediaControl / IMediaPosition / IMediaEvent; Run (513d30);
+  every frame 513d50 polls IMediaEvent::GetEvent(timeout 0) and the loop ends on EC_COMPLETE; 513c50 Stops and
+  releases. The loop presents every iteration whether or not a video sample arrived (513990 flag).
+* **`src/hle/hle_dshow.cpp`**: a headless FilterGraph with exactly those interfaces (one object, shared reference
+  count; IFilterGraph/IGraphBuilder, IMediaControl, IMediaPosition, IMediaEvent(Ex), IBasicAudio, IMediaEventSink),
+  the file source and its "Output" pin. AddFilter AddRefs and JoinFilterGraph's the game's filter through guest
+  calls (`X86Guest::redirect` chains); the last Release calls JoinFilterGraph(NULL) and Release. Stream time
+  runs on the virtual clock from Run; EC_COMPLETE once it reaches the duration. Every other method stops by name.
+  **Assumptions (reported):** Render connects nothing, so no movie frame is drawn and no movie audio plays; the
+  duration is the MPEG-1 video PTS span plus one frame (the splitter's own rule was not captured).
+* **`src/loader/mpeg_timing`** (+ `mpeg-timing-test`): an MPEG-1 system-stream walk (packs, packets, video PTS,
+  sequence header). RE-US.MPG: 640x480, 29.97 fps, 3,206 video PTS, 107,540 ms.
+* **D3D8 caps (fix):** after the movie, the title screen's mipmapped twiddled PVRs (data format 0x200) reached the
+  fatal 789dd0 → PostQuitMessage → ExitProcess(0): 78cfa0 clears the mipmap converter table when TextureCaps
+  (3d127fc) lacks D3DPTEXTURECAPS_MIPMAP, and our GetDeviceCaps declared only WFOG. Both GetDeviceCaps now
+  declare a HAL device with TextureCaps PERSPECTIVE|ALPHA|PROJECTED|CUBEMAP|VOLUMEMAP|MIPMAP|MIPVOLUMEMAP|MIPCUBEMAP
+  (+ RasterCaps WFOG), an assumption naming the three fields sonic.exe reads (+0x24, +0x3c; DeviceType). **The
+  native runtime still declares only WFOG** (game_runtime.cpp) and will hit the same fatal path at the title.
+* New HLE: InterlockedIncrement/Decrement/Exchange/CompareExchange/ExchangeAdd, GetStreamSource, GetIndices,
+  GetVertexShader, GetPixelShader. Fixed a determinism bug: `rand_s` kept its LCG in a function static, so a
+  second boot in the same process continued the first boot's sequence.
+* **guest-frames** now runs from the SEGA logo through the intro movie to the title screen and 60 frames beyond:
+  GameMode 24@1 → Logo 1@2 → Movie 8@388 → 11@7167 → Menu 12@7168; 7,228 frames, every frame's D3D8 stream
+  non-empty, identical digests on two boots; ~35–80 guest fps (host load dependent). After the title the
+  attract demo starts by itself (mode 5 at ~7650, back to 12 at ~7750) — 12,000 frames run without a stop.
+* **sadx-app --guest** draws the title screen (Sonic, logo, "PRESS ENTER") at frame 7,900 (build/title.png, not
+  committed).
+* **profile-applied:** the 8 "pending" HUD-scaling sites are value-preserving at 640x480 (the inventory says so:
+  they store their original bytes), so a byte comparison could never see them. guest-boot now watches guest stores
+  to the inventory's value-preserving entries: the loader (CHRMODELS.dll 1008a96c…1009dee4) stores all 8 before
+  the first Present. **119 of 119 active sites applied**; the inventory was right, the test's method was blind.
+* **Open:** the title screen's virtual frame time is ~19.5 ms (51 fps) versus 15.9 ms (63 fps) on the logo;
+  all virtual time comes from the Speedrun limiter's QPC polling (213c115b, ~9,600 queries/frame). Cause not yet
+  determined; the roadmap target (63 fps) is not asserted on the title.

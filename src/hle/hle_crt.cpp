@@ -413,9 +413,10 @@ void register_hle_crt_locale(HleProcess& p){
                 if(r<0)*hi=mid;else *lo=mid+1;
                 (*probe)(g2,0);});};
         (*probe)(c.guest,0);return 0;});
-    C("api-ms-win-crt-utility-l1-1-0.dll","rand_s",1,[P,arg](HleCall& c)->std::uint32_t{
+    auto rand_s_state=std::make_shared<std::uint32_t>(0x12345678U); // per process: every boot starts the same sequence
+    C("api-ms-win-crt-utility-l1-1-0.dll","rand_s",1,[P,arg,rand_s_state](HleCall& c)->std::uint32_t{
         P->assume("rand_s: a fixed LCG sequence (the reference's RtlGenRandom output is random by design)");
-        static std::uint32_t state=0x12345678U;state=state*1103515245U+12345U;c.guest.set_u32(arg(c,0),state);return 0;});
+        auto& state=*rand_s_state;state=state*1103515245U+12345U;c.guest.set_u32(arg(c,0),state);return 0;});
     (void)double_bits;
     C(strings,"strlen",1,[P,arg](HleCall& c)->std::uint32_t{const auto s=P->string_at(arg(c,0),1u<<20);if(!s){c.guest.stop("strlen: unterminated or unreadable string");return 0;}return static_cast<std::uint32_t>(s->size());});
     // msvcrt.dll aliases

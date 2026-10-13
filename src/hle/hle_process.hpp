@@ -82,5 +82,6 @@ void register_hle_crt(HleProcess&);
 void register_hle_dbghelp(HleProcess&);
 void register_hle_user32(HleProcess&);
 void register_hle_dinput(HleProcess&);
+void register_hle_dshow(HleProcess&);
 void register_hle_d3d8(HleProcess&);
 } // namespace sadx

@@ -53,6 +53,18 @@ std::uint32_t pitch_of(std::uint32_t format,std::uint32_t width){
     switch(format){case 20:case 21:case 22:case 71:case 75:case 77:return width*4;case 23:case 24:case 25:case 26:case 80:return width*2;case 28:case 50:case 41:return width;default:return 0;}}
 std::uint32_t rows_of(std::uint32_t format,std::uint32_t height){
     const bool dxt=format>0xffff;return dxt?std::max(1U,(height+3)/4):height;}
+// D3DCAPS8 (0xd4 bytes) for IDirect3D8::GetDeviceCaps and IDirect3DDevice8::GetDeviceCaps. sonic.exe reads three
+// fields of its copy at 3d127c0: TextureCaps (+0x3c) bit MIPMAP (78cfa0: without it the mipmapped-PVR handlers are
+// cleared and the title screen's twiddled-mipmap textures reach the fatal 789dd0) and bit CUBEMAP (7914b0, 78db80),
+// and RasterCaps (+0x24) bit WFOG (794edb). Declared: a HAL device with the texture caps every D3D8-class GPU has.
+std::vector<std::uint8_t> device_caps(HleProcess& p){
+    p.assume("D3D8 GetDeviceCaps: a HAL device with TextureCaps PERSPECTIVE|ALPHA|PROJECTED|CUBEMAP|VOLUMEMAP|MIPMAP|MIPVOLUMEMAP|MIPCUBEMAP and RasterCaps WFOG, every other cap 0 (the reference GPU's D3DCAPS8 were not captured; the native runtime still declares only WFOG)");
+    std::vector<std::uint8_t> caps(0xd4,0);
+    const auto put=[&](std::size_t at,std::uint32_t v){for(int k=0;k<4;++k)caps[at+k]=static_cast<std::uint8_t>(v>>(8*k));};
+    put(0x00,1);          // DeviceType = D3DDEVTYPE_HAL
+    put(0x24,0x100000);   // RasterCaps = D3DPRASTERCAPS_WFOG
+    put(0x3c,0x1ec05);    // TextureCaps = PERSPECTIVE 1 | ALPHA 4 | PROJECTED 400 | CUBEMAP 800 | VOLUMEMAP 2000 | MIPMAP 4000 | MIPVOLUMEMAP 8000 | MIPCUBEMAP 10000
+    return caps;}
 }
 void register_hle_d3d8(HleProcess& p){
     auto* P=&p;
@@ -181,7 +193,12 @@ void register_hle_d3d8(HleProcess& p){
         b["GetTexture"]=[bound,arg,add_ref](HleCall& c)->std::uint32_t{const auto t=bound->textures[arg(c,1)];add_ref(c.guest,t);c.guest.set_u32(arg(c,2),t);return D3D_OK;};
         b["SetStreamSource"]=[bound,arg,add_ref,release](HleCall& c)->std::uint32_t{
             auto& slot=bound->streams[arg(c,1)];if(slot.first!=arg(c,2)){add_ref(c.guest,arg(c,2));release(c.guest,slot.first);}slot={arg(c,2),arg(c,3)};return D3D_OK;};
+        // GetStreamSource(n, &buffer, &stride): AddRef'd, as the runtime does.
+        b["GetStreamSource"]=[bound,arg,add_ref](HleCall& c)->std::uint32_t{const auto slot=bound->streams[arg(c,1)];add_ref(c.guest,slot.first);c.guest.set_u32(arg(c,2),slot.first);c.guest.set_u32(arg(c,3),slot.second);return D3D_OK;};
+        b["GetIndices"]=[bound,arg,add_ref](HleCall& c)->std::uint32_t{add_ref(c.guest,bound->indices);c.guest.set_u32(arg(c,1),bound->indices);c.guest.set_u32(arg(c,2),bound->base_vertex);return D3D_OK;};
         b["SetIndices"]=[bound,arg,add_ref,release](HleCall& c)->std::uint32_t{if(bound->indices!=arg(c,1)){add_ref(c.guest,arg(c,1));release(c.guest,bound->indices);}bound->indices=arg(c,1);bound->base_vertex=arg(c,2);return D3D_OK;};
+        b["GetVertexShader"]=[P,arg](HleCall& c)->std::uint32_t{c.guest.set_u32(arg(c,1),P->vertex_shader);return D3D_OK;};
+        b["GetPixelShader"]=[arg](HleCall& c)->std::uint32_t{c.guest.set_u32(arg(c,1),0);return D3D_OK;}; // only the fixed-function pipeline is ever set
         b["SetPixelShader"]=[](HleCall& c)->std::uint32_t{if(c.argument(1).value_or(0))c.guest.stop("IDirect3DDevice8::SetPixelShader with a shader is not modelled");return D3D_OK;};
         b["ValidateDevice"]=[arg](HleCall& c)->std::uint32_t{c.guest.set_u32(arg(c,1),1);return D3D_OK;};
         // Draws are recorded (counts; DrawPrimitiveUP bytes as polygons, the native owner's form).
@@ -220,7 +237,7 @@ void register_hle_d3d8(HleProcess& p){
         b["GetRenderTarget"]=[bound,arg,add_ref](HleCall& c)->std::uint32_t{const auto t=bound->render_target?bound->render_target:bound->back_buffer;add_ref(c.guest,t);c.guest.set_u32(arg(c,1),t);return D3D_OK;};
         b["GetDepthStencilSurface"]=[bound,arg,add_ref](HleCall& c)->std::uint32_t{if(!bound->depth)return 0x8876086cU;add_ref(c.guest,bound->depth);c.guest.set_u32(arg(c,1),bound->depth);return D3D_OK;};
         b["SetRenderTarget"]=[bound,arg](HleCall& c)->std::uint32_t{if(arg(c,1))bound->render_target=arg(c,1);if(arg(c,2))bound->depth=arg(c,2);return D3D_OK;};
-        b["GetDeviceCaps"]=[arg](HleCall& c)->std::uint32_t{std::vector<std::uint8_t> caps(0xd4,0);caps[0x24+2]=0x10;c.guest.write(arg(c,1),caps.data(),caps.size());return D3D_OK;};
+        b["GetDeviceCaps"]=[P,arg](HleCall& c)->std::uint32_t{const auto caps=device_caps(*P);c.guest.write(arg(c,1),caps.data(),caps.size());return D3D_OK;};
         b["GetCreationParameters"]=[P,arg](HleCall& c)->std::uint32_t{c.guest.stop("IDirect3DDevice8::GetCreationParameters is not modelled yet");(void)P;(void)arg;return 0;};
         *device_interface=std::make_unique<HleComInterface>(*P,"IDirect3DDevice8",methods("IDirect3DDevice8",device8,std::size(device8),b));
         return **device_interface;};
@@ -231,9 +248,7 @@ void register_hle_d3d8(HleProcess& p){
         b["GetAdapterCount"]=[](HleCall&)->std::uint32_t{return 1;};
         b["GetAdapterDisplayMode"]=[display_mode,arg](HleCall& c)->std::uint32_t{if(arg(c,1))return 0x8876086cU;display_mode(c,arg(c,2));return D3D_OK;};
         b["CheckDeviceType"]=[](HleCall&)->std::uint32_t{return D3D_OK;};
-        b["GetDeviceCaps"]=[P,arg](HleCall& c)->std::uint32_t{
-            P->assume("D3D8 GetDeviceCaps: only D3DPRASTERCAPS_WFOG is declared, as in the native runtime (the reference GPU's D3DCAPS8 were not captured)");
-            std::vector<std::uint8_t> caps(0xd4,0);caps[0x24+2]=0x10;c.guest.write(arg(c,3),caps.data(),caps.size());return D3D_OK;};
+        b["GetDeviceCaps"]=[P,arg](HleCall& c)->std::uint32_t{const auto caps=device_caps(*P);c.guest.write(arg(c,3),caps.data(),caps.size());return D3D_OK;};
         b["GetAdapterIdentifier"]=[P,arg](HleCall& c)->std::uint32_t{
             P->assume("D3D8 adapter identifier: driver \"sadx-hle\", description \"sadx-macos Metal\", vendor/device ids 0 (the reference GPU was not captured)");
             if(arg(c,1))return 0x8876086cU;std::vector<std::uint8_t> id(1024+8+16+16+4,0);
