@@ -1,0 +1,178 @@
+{
+ "goal_status": "active",
+ "user_confirmed_requirements": {
+  "native_target": "macOS arm64 / Apple Silicon with native GPU rendering, preferably Metal",
+  "input": [
+   "keyboard",
+   "Xbox controller",
+   "Switch 2 Pro controller"
+  ],
+  "mod_versions": "updated versions of the required speedrun mods",
+  "precision": "maximum practical precision against sonic.exe with the intended updated mods actually loaded on native PC hardware"
+ },
+ "reference_hardware_user_report": {
+  "cpu": "Intel Ultra",
+  "gpu": "NVIDIA",
+  "operating_system": "Windows 11 with AtlasOS",
+  "actual_device_and_runtime_capture": "Observed in user-supplied successful runtime capture; selected facts retained; original file requested for retention."
+ },
+ "reference_role": "verification only; the deliverable remains a native Mac game",
+ "completion_requires": [
+  "full playable native PC SADX reconstruction, not a stage viewer",
+  "source-rebuilt or integrated required mod behavior with verified active PC reference",
+  "precision of simulation and relevant original floating-point behavior",
+  "native GPU rendering and sustained performance",
+  "keyboard and both requested controller families verified in game",
+  "speedrun timing, tricks, collisions, cameras and transitions verified against the reference"
+ ],
+ "stored_goal_tool_limitation": "The available update_goal API changes status only; these user amendments are retained in this file and sadx-native/README.md",
+ "development_dependency": "Development proceeds locally on Apple Silicon; the Windows PC is not a prerequisite to build or run the Mac deliverable.",
+ "reference_access": "User has local access to Windows laptop, no remote connection; preparing a transfer bundle for locally run capture.",
+ "controller_hardware_user_report": {
+  "connected_to": "this Mac",
+  "controllers": [
+   "Xbox",
+   "Switch 2 Pro"
+  ],
+  "connection_confirmed_by_user": true,
+  "macOS_HID_observation": "Both USB gamepads observed; native GameController input verification underway",
+  "current_availability": "user may disconnect; no longer required for continuing source work",
+  "input_verification": "pending; previous physical presence/neutral profile checks did not receive input changes"
+ },
+ "rea_workflow_user_request": "Use useful REA repository capabilities and configure/use Ghidra in this session; keep native Mac speedrunning goal unchanged.",
+ "rea_findings": {
+  "verified_package": "REA6.4.0 live MCP catalog;170 tools",
+  "already_used": [
+   "Hopper function dossiers",
+   "cross-references",
+   "source byte identities",
+   "immutable snapshots",
+   "exported Evidence bundles"
+  ],
+  "use_now": [
+   "build_call_path from authenticated native dossiers",
+   "batch_decompile for related procedures",
+   "compare_functions/compare_bundles for explicit static differences",
+   "reconstruction obligation ledgers and coverage verification",
+   "record_unknown/list_unknowns for unresolved original behavior"
+  ],
+  "ghidra_adds": [
+   "complete analyzed function body ranges and CFG",
+   "high-p-code def-use graphs",
+   "trace_native_values across resolved calls",
+   "exact instruction facts and static indirect-call targets",
+   "ephemeral function names/comments without changing executable bytes"
+  ],
+  "demonstrated": "build_call_path found source44cdf0\u219243c580\u2192438410 from retained Evidence; comparison tool retained unknown cross-function identity rather than asserting equivalence",
+  "limitations": [
+   "Static pseudocode/value flow does not prove original runtime behavior or floating-point hardware equivalence",
+   "Trace budgets, unresolved computed calls and memory aliasing stay explicit",
+   "Comparison text differences do not prove behavioral differences/equivalence",
+   "Ghidra custom-register parameter bindings and memory aliasing remain unresolved; bounded trace omissions must be preserved."
+  ],
+  "evidence": "_reference/sadx/rea-capability-audit/evidence-bundle.json",
+  "ghidra_demonstrated": "Complete579-byte contact response body,167 instructions,17 CFG blocks,415 p-code operations, direct plane-call target and bounded467-node/493-edge dependency trace over4 functions."
+ },
+ "analysis_plan": [
+  "Continue Hopper evidence and exact-instruction/native comparisons for numeric fidelity.",
+  "Configure portable Ghidra12.1.4 with existing AppleSilicon OpenJDK27; validate declared Java bounds and a real sonic.exe session.",
+  "Use Ghidra body/CFG/value-flow and call-target evidence to recover remaining player actions, collision, startup, camera and timing owners.",
+  "Audit previously built modules against Ghidra body/CFG/instruction/p-code and call-target evidence; track confirmed semantics, disagreements and unexamined modules separately. Resolve disagreements against executable instructions, then rerun relevant native/original-instruction checks.",
+  "Use authenticated Evidence closures for call-path/function/bundle comparisons; retain prior versions and unknowns.",
+  "Build an explicit reconstruction obligation ledger covering complete game, updated mod behavior, keyboard/controllers, Metal presentation and speedrun reference parity.",
+  "Require original modded Windows hardware evidence for timing/input/floating-point conclusions that static or emulator evidence cannot prove."
+ ],
+ "ghidra_session_setup": {
+  "status": "configured and real sonic.exe analysis verified",
+  "version": "12.1.4",
+  "installation_root": "_reference/sadx/tools/ghidra_12.1.4_PUBLIC",
+  "java_home": "/opt/homebrew/Cellar/openjdk/27/libexec/openjdk.jdk/Contents/Home",
+  "scope": "session-local environment; portable workspace distribution, existing JDK; no persistent client/shell changes",
+  "java_version": "OpenJDK27 arm64; Ghidra declares minimum21, no maximum",
+  "native_decompiler": "Compiled from official12.1.4 sources with Xcode for arm64",
+  "environment_file": "_reference/sadx/tools/ghidra-session-environment.json",
+  "doctor": "_reference/sadx/tools/ghidra-doctor.json",
+  "native_build": "_reference/sadx/tools/ghidra-native-build.json",
+  "verification_driver": "_reference/sadx/ghidra-session.mjs",
+  "verification": "_reference/sadx/ghidra-session/verification.json",
+  "analysis_evidence_ids": {
+   "contact-reaction": "ev_72c02dcf70737c03418f756b2a127ed88cc7030c2f127fc7878da7621c2da643",
+   "speed-threshold-branch": "ev_7179d69353bc9a8440c3a1c5ebf549eed584a5b57ddacf9c630410d9a44f2277",
+   "plane-call-target": "ev_593fceb06092229fddbdedf255b7aef81bcfa5e61ee36565a917272591cbab71",
+   "contact-value-flow": "ev_3886661d5267558bebd9687697cdfda2d8155e5bed6143963d55c8cf934b7abb"
+  },
+  "cleanup": "JVM/native decompiler exited; private runtime removed; initial close warning retained"
+ },
+ "retrospective_validation_user_request": "Use newly configured Ghidra to independently validate previously reconstructed native code.",
+ "retrospective_validation_scope": {
+  "first_batch": [
+   "player work initialization",
+   "held-object query",
+   "mesh registry producers",
+   "contact attributes",
+   "PSetPosition",
+   "GetAnalog/WriteAnalogs",
+   "PGetSpeed",
+   "coordinate conversion"
+  ],
+  "does_not_establish": "Ghidra static agreement does not establish modded native Windows execution or hardware timing/input/FP equivalence.",
+  "ledger": "_reference/sadx/ghidra-retrospective-audit.md"
+ },
+ "reconstruction_obligation_ledger": {
+  "path": "_reference/sadx/goal-obligations/ledger.json",
+  "evidence_id": "ev_2145efe7f95b590e0e04d144917e7eae846918bbee8b6794420cec5ce6d1cbb7",
+  "scope": "Six complete-deliverable obligations and six explicit residual unknowns; no full-game verifier binding claimed.",
+  "status": "unknown; playable depends on other open obligations. The persistent goal remains active."
+ },
+ "retrospective_validation_results": {
+  "ledger": "_reference/sadx/ghidra-retrospective-audit.md",
+  "checked": [
+   "12 mesh registry procedures and2 storage xrefs",
+   "player startup and object-work initialization",
+   "held-object flag query",
+   "contact attributes",
+   "contact reaction",
+   "PSetPosition and collision form",
+   "GetAnalog and WriteAnalogs",
+   "PGetSpeed and task/floor coordinate conversion"
+  ],
+  "producing_changes": [
+   "Registry initialization retains source EAX return1.",
+   "Floor coordinate conversion snapshots the input before its angle helper.",
+   "New source-supported action/physics fields receive explicit byte/calloc facts from their real producers.",
+   "Shadow-task startup uses its own generic owned work; it no longer assigns a player view to the overlapping taskwk+8 resource field."
+  ],
+  "native_gate": "49 native programs+4 asset-extraction tests pass",
+  "remaining": "Other modules remain unexamined by this audit; static agreement does not establish complete gameplay or modded Windows hardware equivalence."
+ },
+ "verified_windows_reference_snapshot": {
+  "selected_facts": "_reference/sadx/windows-runtime-captures/user-supplied-20261012-003047-selected-facts.json",
+  "state": "User supplied complete JSON with required readbacks complete;13 prefix andrel32 checks revalidated against pinned spec.",
+  "cpu": "IntelCoreUltra7 155H",
+  "installed_gpus": [
+   "RTX4060LaptopGPU",
+   "IntelArc"
+  ],
+  "updated_mods_observed_loaded": true,
+  "clean_identity_recheck_as_reported": true,
+  "game_gpu_selected": "unknown",
+  "thread_floating_state": "not sampled",
+  "gameplay_timing_physical_input_parity": "not verified"
+ },
+ "observed_windows_floating_profiles": {
+  "selected_facts": "_reference/sadx/windows-runtime-captures/user-supplied-20261012-003944-fp-selected-facts.json",
+  "earliest_thread_control": "0x007f",
+  "earliest_thread_mxcsr": "0x1fa1, control0x1f80/status0x21",
+  "workers_control": "0x027f",
+  "worker_mxcsr_control": "0x1f80",
+  "runtime_policy": "Preserve per-thread/source phase control; select0x007f for candidate-main comparison profiles while confirming gameplay attribution.",
+  "global_default_change": "Not applied from a single menu snapshot.",
+  "hardware_numeric_parity": "Still unverified; current capture establishes control observations only."
+ },
+ "rea_tools_and_guides_user_request_20261012": {
+  "user_words": "save it to the goal to use rea to dont forget we have tools and guides in this repo like @AGENTS.md @README.md which help you achieving the goal of decompiling sadx and running it natively on mac m chips and that is ready for speedrun with the mods that are used for that",
+  "standing_instruction": "Throughout the goal, do reverse-engineering through REA's own tooling: its Hopper and Ghidra providers via the REA CLI/MCP (Evidence with provenance, xrefs, decompilation, value flow, snapshots), following AGENTS.md, README.md and the guides under docs/ (ghidra-provider.md, cli.md, mcp-contracts.md, installation.md) and the reverse-engineer-anything skill. Raw llvm-objdump and Unicorn oracles remain for exact-byte checks and execution comparisons, not as a substitute for REA analysis.",
+  "goal_unchanged": "Decompile/reconstruct PC SADX (sonic.exe 6b0937ca...) into buildable source running natively on Apple Silicon Macs, ready for speedrunning with the updated speedrun mods (Input 2.6.1, Speedrun 2.0 incl. CCEF/EHCF/Skipma/63 FPS).",
+  "recorded_by": "Claude Code session on Macintosh, 2026-10-12; the goal tool's condition text cannot be edited, so this ledger, SADX_NATIVE_PORT_HANDOFF.md section 0 and agent memory carry it."
+ }
+}

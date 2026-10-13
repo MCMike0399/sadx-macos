@@ -1,0 +1,49 @@
+{
+  "format_version": 1,
+  "source_query_evidence_id": "ev_5c55442bc23bf130098ae6aa9bb8e7009d1f292e54466e0ad4e8252a2a86b1c6",
+  "unit_optimized_passed": true,
+  "unit_ubsan_passed": true,
+  "native_windows_execution_observed": false,
+  "files": [
+    {
+      "path": "sadx-native/src/player_input.hpp",
+      "size": 3434,
+      "sha256": "4c7a3b6ba84127e17f33af39563fc3437908f209b732956d2d8a65406808c5cf"
+    },
+    {
+      "path": "sadx-native/src/player_input.cpp",
+      "size": 5456,
+      "sha256": "d6a436b9975cea1aca7faa53a645682c12a7bbd90c4192df70958419b4acf6c6"
+    },
+    {
+      "path": "sadx-native/tests/player_input.cpp",
+      "size": 8144,
+      "sha256": "4ecff4c41b4f5db5c093762666065d8b213972419e9cf7a092567d3226c01fc5"
+    },
+    {
+      "path": "sadx-native/tests/native_player_input_probe.cpp",
+      "size": 2387,
+      "sha256": "e950f07bd9024839a2f4cee042140a61b27e7a59a486d8e8ed81c0c661d34051"
+    },
+    {
+      "path": "sadx-native/tools/verify_original_player_input.py",
+      "size": 9418,
+      "sha256": "65cd0d713c754c865ba1ce466d6f2cef381affb7d6e1d0fbbcd3a201d4e45ffe"
+    },
+    {
+      "path": "_reference/sadx/original-player-input-comparison.json",
+      "size": 75098,
+      "sha256": "9f1ef1512b8b499df4fad88d2ab5af648ff795199a75c5e03d433eba4974c2b4"
+    },
+    {
+      "path": "_reference/sadx/original-player-input-comparison.cases.bin",
+      "size": 895596,
+      "sha256": "2cbaa86da3f7f379203382f2ce05b893931fc8b5e8c7e1ba9b26564330cac017"
+    },
+    {
+      "path": "_reference/sadx/player-input-provenance.md",
+      "size": 10641,
+      "sha256": "1cd7104c9e4f77f766ae9df0c439123915cecda4c0062e5639c473d75f408f99"
+    }
+  ]
+}

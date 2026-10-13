@@ -1,0 +1,245 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "functions": [
+    {
+      "address": "0x41bc00",
+      "end_exclusive": "0x41beaa",
+      "length": 682,
+      "sha256": "b1c05ec0478c6fa72362f157dd6ceae2f744f9b6e61dece754b97bd4ca933f27"
+    },
+    {
+      "address": "0x41bed0",
+      "end_exclusive": "0x41bee7",
+      "length": 23,
+      "sha256": "d5fa5adc5508dd125299bea79ee328c20895c3fa3a58780b469615c6b1424f96"
+    },
+    {
+      "address": "0x419030",
+      "end_exclusive": "0x419157",
+      "length": 295,
+      "sha256": "f1bce648205c865c7c7719ae64c10ce3f1b53ad102fbae9994398042fcbd4ca2"
+    },
+    {
+      "address": "0x419270",
+      "end_exclusive": "0x419391",
+      "length": 289,
+      "sha256": "47b320218eee9718e80916e2fd2382f798de1ac074021b9204f95b3b1d26d6e9"
+    },
+    {
+      "address": "0x4193a0",
+      "end_exclusive": "0x419463",
+      "length": 195,
+      "sha256": "e0552ff334849ca7b49217fa919be81547337bbc7137e602be0a3bc0a196e842"
+    },
+    {
+      "address": "0x419900",
+      "end_exclusive": "0x419969",
+      "length": 105,
+      "sha256": "ea22e5e69f354597571ff2cdaeb9487be9e28d746542fb25f979f016f3542ec1"
+    },
+    {
+      "address": "0x781c10",
+      "end_exclusive": "0x781c7f",
+      "length": 111,
+      "sha256": "1ead114a558ff4a754e1fd75dfb4dd38a6114f2a2126802aa480eab4e0383b44"
+    },
+    {
+      "address": "0x781670",
+      "end_exclusive": "0x7816d1",
+      "length": 97,
+      "sha256": "8845853d23987f366ebda1194c9a4d093fd3304b5d6da2687887debecd32c931"
+    },
+    {
+      "address": "0x784c70",
+      "end_exclusive": "0x784cf4",
+      "length": 132,
+      "sha256": "76540befd79b131d92a554ddf692ed0f1cbe4a2874777deb6813db92a3d97a60"
+    },
+    {
+      "address": "0x7850f0",
+      "end_exclusive": "0x785137",
+      "length": 71,
+      "sha256": "12fcfc08964b6c2a31ab850337f23e4c11e2b8415d717643b8e1d178de8004eb"
+    },
+    {
+      "address": "0x7816e0",
+      "end_exclusive": "0x7816f7",
+      "length": 23,
+      "sha256": "7f6f4a033ef2a73688c998d85b92d4d7028530f681f5e43ba04ac1114e8004a9"
+    }
+  ],
+  "evidence": [
+    {
+      "path": "_reference/sadx/collision-normal/normal-query.json",
+      "evidence_id": "ev_711e133add2969b871faa1498689028dd055cb75079b7e93e3b6fee2a76f18ec",
+      "address": "0x41bc00",
+      "callees": [
+        "0x418ac0",
+        "0x419030",
+        "0x419270",
+        "0x4193a0",
+        "0x419900",
+        "0x784d60",
+        "0x784e20",
+        "0x7850f0",
+        "0x785140"
+      ]
+    },
+    {
+      "path": "_reference/sadx/collision-primitives/translate-matrix.json",
+      "evidence_id": "ev_729561d4475a4d73480626704aab30e8d3498a0bb5ea3a2b61d4282162795b34",
+      "address": "0x781c10",
+      "callees": []
+    },
+    {
+      "path": "_reference/sadx/collision-primitives/shape-419900.json",
+      "evidence_id": "ev_46543ec6d195cb580b392ebbb81737e35c647c53de24c6206224972b75859eed",
+      "address": "0x419900",
+      "callees": [
+        "0x784d60",
+        "0x784e20",
+        "0x7850f0",
+        "0x785140"
+      ]
+    },
+    {
+      "path": "_reference/sadx/collision-primitives/pop-matrix-ex.json",
+      "evidence_id": "ev_8ded4ef9c9e40355eaf9850f52cc827ec4b45378c72cd95155703171415172a9",
+      "address": "0x7816e0",
+      "callees": []
+    },
+    {
+      "path": "_reference/sadx/collision-primitives/shape-419270.json",
+      "evidence_id": "ev_3b8117c75f859c8c1f84416ed423dc4139b290bc31989e6b18bd2b54ff5814ba",
+      "address": "0x419270",
+      "callees": [
+        "0x781670",
+        "0x7816e0",
+        "0x781c10",
+        "0x781c80",
+        "0x784e20",
+        "0x784ee0",
+        "0x784fb0",
+        "0x7875f0"
+      ]
+    },
+    {
+      "path": "_reference/sadx/collision-primitives/calculate-point.json",
+      "evidence_id": "ev_b1e81f9e1d338b097d30a9c998e85801e07cbae8a0d47b5aa5e263e23a6ccd7b",
+      "address": "0x781670",
+      "callees": []
+    },
+    {
+      "path": "_reference/sadx/collision-primitives/shape-419030.json",
+      "evidence_id": "ev_3e0362703fafbdd402d7c843816feafb1e43ba864de182dcec8a8a101c4a3176",
+      "address": "0x419030",
+      "callees": [
+        "0x781670",
+        "0x7816e0",
+        "0x781c10",
+        "0x781c80",
+        "0x784e20",
+        "0x784ee0",
+        "0x784fb0",
+        "0x7875f0"
+      ]
+    },
+    {
+      "path": "_reference/sadx/collision-primitives/shape-4193a0.json",
+      "evidence_id": "ev_cbd61930c96175d2d77add8aee94231349a4a3e26dbb477f3059994701fae38a",
+      "address": "0x4193a0",
+      "callees": [
+        "0x781670",
+        "0x7816e0",
+        "0x781c10",
+        "0x784e20",
+        "0x784ee0",
+        "0x784fb0",
+        "0x7850f0"
+      ]
+    },
+    {
+      "path": "_reference/sadx/collision-primitives/push-matrix.json",
+      "evidence_id": "ev_0bfe5721f8c90a531b39cb1371e39ede88925b269d70d82256426bdbfe7a5800",
+      "address": "0x7850f0",
+      "callees": []
+    },
+    {
+      "path": "_reference/sadx/scene-mesh-dependencies/mesh-test-450810.json",
+      "evidence_id": "ev_2951d526acaec76df660c66d85fdcfd969167cb54b03fd6c378ce9df23272972",
+      "address": "0x450810",
+      "callees": []
+    },
+    {
+      "path": "_reference/sadx/scene-mesh-dependencies/mesh-test-4509d0.json",
+      "evidence_id": "ev_2fd5e5b3babc37af4c14084708c871738283a7903d28339e7b6d7faca821507f",
+      "address": "0x4509d0",
+      "callees": [
+        "0x6452a4"
+      ]
+    },
+    {
+      "path": "_reference/sadx/scene-mesh-dependencies/scale-matrix.json",
+      "evidence_id": "ev_00599934a7202d469f1b1bd1938086e2c22507d147222406363b29b195c3842b",
+      "address": "0x784c70",
+      "callees": []
+    },
+    {
+      "path": "_reference/sadx/scene-mesh-dependencies/point-787630.json",
+      "evidence_id": "ev_aae184283097f59cac74670829773fd585bdc3fb5464a60ce80021c1e0043d8b",
+      "address": "0x787630",
+      "callees": [
+        "0x795000"
+      ]
+    },
+    {
+      "path": "_reference/sadx/scene-mesh-dependencies/mesh-test-450920.json",
+      "evidence_id": "ev_282b7985a15709bd61883ddb9d69caa713d7ec4a392d986cd9e6aeea7c3795a9",
+      "address": "0x450920",
+      "callees": [
+        "0x6452a4"
+      ]
+    }
+  ],
+  "dispatch_table": {
+    "address": "0x41beac",
+    "sha256": "2080ca474587fd316b96b7db3b789392dee53fb5a3de5ed976ded421ec0fb933",
+    "targets": [
+      "0x41bc93",
+      "0x41bd18",
+      "0x41bd22",
+      "0x41bd44",
+      "0x41be44",
+      "0x41bea1",
+      "0x41bd33",
+      "0x41bc93"
+    ]
+  },
+  "axis_constants": {
+    "addresses": [
+      "0x7dcb2c",
+      "0x7dcb10"
+    ],
+    "length": 8,
+    "sha256": "22b6f43bd8d27738d3213f29e96b62d01d9d6c0ab4f9732aaae803186f51eab7"
+  },
+  "geometry_fields": {
+    "CCL_INFO": [
+      "form+1",
+      "attributes+4",
+      "center+8",
+      "a+14",
+      "c+1c",
+      "angy+28"
+    ],
+    "colliwk": [
+      "task collision pointer taskwk+38",
+      "info+c",
+      "my_num+a2",
+      "hit_cwp+a4",
+      "hit nbInfo+6",
+      "hit mytask+9c ->taskwk+20"
+    ]
+  },
+  "native_ownership": "Existing scene records own CCL facts; live task poses borrowed through views/lookup, no copied pose or unit/matrix state. Source graph logicalIDs preserve unknown/null/unresolved references."
+}

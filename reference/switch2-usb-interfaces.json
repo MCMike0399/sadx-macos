@@ -1,0 +1,428 @@
+{
+  "operation": "read-onlyIORegistryUSBtree",
+  "vendor_id": 1406,
+  "product_id": 8297,
+  "selected_devices": [
+    {
+      "properties": {
+        "IOObjectClass": "IOUSBHostDevice",
+        "IORegistryEntryID": 4295528347,
+        "IORegistryEntryName": "Switch 2 Pro Controller",
+        "USB Product Name": "Switch 2 Pro Controller",
+        "bNumConfigurations": 1,
+        "bcdDevice": 513,
+        "idProduct": 8297,
+        "idVendor": 1406,
+        "locationID": 1048576
+      },
+      "property_names": [
+        "Device Speed",
+        "IOCFPlugInTypes",
+        "IOObjectClass",
+        "IOObjectRetainCount",
+        "IOPowerManagement",
+        "IORegistryEntryChildren",
+        "IORegistryEntryID",
+        "IORegistryEntryLocation",
+        "IORegistryEntryName",
+        "IOServiceBusyState",
+        "IOServiceBusyTime",
+        "IOServiceDEXTEntitlements",
+        "IOServiceState",
+        "USB Address",
+        "USB Product Name",
+        "USB Serial Number",
+        "USB Vendor Name",
+        "USBPortType",
+        "USBSpeed",
+        "UsbDeviceFunction",
+        "UsbDeviceSignature",
+        "UsbLinkSpeed",
+        "UsbPowerSinkAllocation",
+        "bDeviceClass",
+        "bDeviceProtocol",
+        "bDeviceSubClass",
+        "bMaxPacketSize0",
+        "bNumConfigurations",
+        "bcdDevice",
+        "bcdUSB",
+        "iManufacturer",
+        "iProduct",
+        "iSerialNumber",
+        "idProduct",
+        "idVendor",
+        "kUSBAddress",
+        "kUSBCurrentConfiguration",
+        "kUSBProductString",
+        "kUSBSerialNumberString",
+        "kUSBVendorString",
+        "locationID",
+        "sessionID"
+      ],
+      "children": [
+        {
+          "properties": {
+            "IOObjectClass": "AppleUSBHostCompositeDevice",
+            "IORegistryEntryID": 4295528360,
+            "IORegistryEntryName": "AppleUSBHostCompositeDevice"
+          },
+          "property_names": [
+            "IOObjectClass",
+            "IOObjectRetainCount",
+            "IORegistryEntryID",
+            "IORegistryEntryName",
+            "IOServiceBusyState",
+            "IOServiceBusyTime",
+            "IOServiceState"
+          ],
+          "children": []
+        },
+        {
+          "properties": {
+            "IOObjectClass": "IOUSBHostInterface",
+            "IORegistryEntryID": 4295528361,
+            "IORegistryEntryName": "If_Hid"
+          },
+          "property_names": [
+            "IOObjectClass",
+            "IOObjectRetainCount",
+            "IORegistryEntryChildren",
+            "IORegistryEntryID",
+            "IORegistryEntryLocation",
+            "IORegistryEntryName",
+            "IOServiceBusyState",
+            "IOServiceBusyTime",
+            "IOServiceState"
+          ],
+          "children": [
+            {
+              "properties": {
+                "IOObjectClass": "AppleUserHIDDevice",
+                "IORegistryEntryID": 4295528366,
+                "IORegistryEntryName": "AppleUserUSBHostHIDDevice"
+              },
+              "property_names": [
+                "IOObjectClass",
+                "IOObjectRetainCount",
+                "IORegistryEntryChildren",
+                "IORegistryEntryID",
+                "IORegistryEntryName",
+                "IOServiceBusyState",
+                "IOServiceBusyTime",
+                "IOServiceState"
+              ],
+              "children": [
+                {
+                  "properties": {
+                    "IOObjectClass": "IOHIDInterface",
+                    "IORegistryEntryID": 4295528380,
+                    "IORegistryEntryName": "IOHIDInterface"
+                  },
+                  "property_names": [
+                    "IOObjectClass",
+                    "IOObjectRetainCount",
+                    "IORegistryEntryChildren",
+                    "IORegistryEntryID",
+                    "IORegistryEntryName",
+                    "IOServiceBusyState",
+                    "IOServiceBusyTime",
+                    "IOServiceState"
+                  ],
+                  "children": [
+                    {
+                      "properties": {
+                        "IOObjectClass": "AppleUserHIDEventService",
+                        "IORegistryEntryID": 4295528383,
+                        "IORegistryEntryName": "AppleUserHIDEventDriver"
+                      },
+                      "property_names": [
+                        "IOObjectClass",
+                        "IOObjectRetainCount",
+                        "IORegistryEntryChildren",
+                        "IORegistryEntryID",
+                        "IORegistryEntryName",
+                        "IOServiceBusyState",
+                        "IOServiceBusyTime",
+                        "IOServiceState"
+                      ],
+                      "children": [
+                        {
+                          "properties": {
+                            "IOObjectClass": "IOHIDEventServiceUserClient",
+                            "IORegistryEntryID": 4295528390,
+                            "IORegistryEntryName": "IOHIDEventServiceUserClient"
+                          },
+                          "property_names": [
+                            "IOObjectClass",
+                            "IOObjectRetainCount",
+                            "IORegistryEntryID",
+                            "IORegistryEntryName",
+                            "IOServiceBusyState",
+                            "IOServiceBusyTime",
+                            "IOServiceState"
+                          ],
+                          "children": []
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "properties": {
+                    "IOObjectClass": "IOHIDLibUserClient",
+                    "IORegistryEntryID": 4295528385,
+                    "IORegistryEntryName": "IOHIDLibUserClient"
+                  },
+                  "property_names": [
+                    "IOObjectClass",
+                    "IOObjectRetainCount",
+                    "IORegistryEntryID",
+                    "IORegistryEntryName",
+                    "IOServiceBusyState",
+                    "IOServiceBusyTime",
+                    "IOServiceState"
+                  ],
+                  "children": []
+                },
+                {
+                  "properties": {
+                    "IOObjectClass": "IOHIDLibUserClient",
+                    "IORegistryEntryID": 4295528391,
+                    "IORegistryEntryName": "IOHIDLibUserClient"
+                  },
+                  "property_names": [
+                    "IOObjectClass",
+                    "IOObjectRetainCount",
+                    "IORegistryEntryID",
+                    "IORegistryEntryName",
+                    "IOServiceBusyState",
+                    "IOServiceBusyTime",
+                    "IOServiceState"
+                  ],
+                  "children": []
+                },
+                {
+                  "properties": {
+                    "IOObjectClass": "IOHIDLibUserClient",
+                    "IORegistryEntryID": 4295528402,
+                    "IORegistryEntryName": "IOHIDLibUserClient"
+                  },
+                  "property_names": [
+                    "IOObjectClass",
+                    "IOObjectRetainCount",
+                    "IORegistryEntryID",
+                    "IORegistryEntryName",
+                    "IOServiceBusyState",
+                    "IOServiceBusyTime",
+                    "IOServiceState"
+                  ],
+                  "children": []
+                },
+                {
+                  "properties": {
+                    "IOObjectClass": "IOHIDLibUserClient",
+                    "IORegistryEntryID": 4306732691,
+                    "IORegistryEntryName": "IOHIDLibUserClient"
+                  },
+                  "property_names": [
+                    "IOObjectClass",
+                    "IOObjectRetainCount",
+                    "IORegistryEntryID",
+                    "IORegistryEntryName",
+                    "IOServiceBusyState",
+                    "IOServiceBusyTime",
+                    "IOServiceState"
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "properties": {
+            "IOObjectClass": "IOUSBHostInterface",
+            "IORegistryEntryID": 4295528362,
+            "IORegistryEntryName": "Switch 2 Pro Controller"
+          },
+          "property_names": [
+            "IOObjectClass",
+            "IOObjectRetainCount",
+            "IORegistryEntryID",
+            "IORegistryEntryLocation",
+            "IORegistryEntryName",
+            "IOServiceBusyState",
+            "IOServiceBusyTime",
+            "IOServiceState"
+          ],
+          "children": []
+        },
+        {
+          "properties": {
+            "IOObjectClass": "IOUSBHostInterface",
+            "IORegistryEntryID": 4295528363,
+            "IORegistryEntryName": "IOUSBHostInterface"
+          },
+          "property_names": [
+            "IOObjectClass",
+            "IOObjectRetainCount",
+            "IORegistryEntryChildren",
+            "IORegistryEntryID",
+            "IORegistryEntryLocation",
+            "IORegistryEntryName",
+            "IOServiceBusyState",
+            "IOServiceBusyTime",
+            "IOServiceState"
+          ],
+          "children": [
+            {
+              "properties": {
+                "IOObjectClass": "AppleUSBAudioControlNub",
+                "IORegistryEntryID": 4295528371,
+                "IORegistryEntryName": "AppleUSBAudioControlNub"
+              },
+              "property_names": [
+                "IOObjectClass",
+                "IOObjectRetainCount",
+                "IORegistryEntryID",
+                "IORegistryEntryName",
+                "IOServiceBusyState",
+                "IOServiceBusyTime",
+                "IOServiceState"
+              ],
+              "children": []
+            },
+            {
+              "properties": {
+                "IOObjectClass": "AppleUSBHostFrameworkInterfaceClient",
+                "IORegistryEntryID": 4295528399,
+                "IORegistryEntryName": "usbaudiod"
+              },
+              "property_names": [
+                "IOObjectClass",
+                "IOObjectRetainCount",
+                "IORegistryEntryID",
+                "IORegistryEntryLocation",
+                "IORegistryEntryName",
+                "IOServiceBusyState",
+                "IOServiceBusyTime",
+                "IOServiceState"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "properties": {
+            "IOObjectClass": "IOUSBHostInterface",
+            "IORegistryEntryID": 4295528364,
+            "IORegistryEntryName": "IOUSBHostInterface"
+          },
+          "property_names": [
+            "IOObjectClass",
+            "IOObjectRetainCount",
+            "IORegistryEntryChildren",
+            "IORegistryEntryID",
+            "IORegistryEntryLocation",
+            "IORegistryEntryName",
+            "IOServiceBusyState",
+            "IOServiceBusyTime",
+            "IOServiceState"
+          ],
+          "children": [
+            {
+              "properties": {
+                "IOObjectClass": "AppleUSBHostFrameworkInterfaceClient",
+                "IORegistryEntryID": 4295528400,
+                "IORegistryEntryName": "usbaudiod"
+              },
+              "property_names": [
+                "IOObjectClass",
+                "IOObjectRetainCount",
+                "IORegistryEntryID",
+                "IORegistryEntryLocation",
+                "IORegistryEntryName",
+                "IOServiceBusyState",
+                "IOServiceBusyTime",
+                "IOServiceState"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "properties": {
+            "IOObjectClass": "IOUSBHostInterface",
+            "IORegistryEntryID": 4295528365,
+            "IORegistryEntryName": "IOUSBHostInterface"
+          },
+          "property_names": [
+            "IOObjectClass",
+            "IOObjectRetainCount",
+            "IORegistryEntryChildren",
+            "IORegistryEntryID",
+            "IORegistryEntryLocation",
+            "IORegistryEntryName",
+            "IOServiceBusyState",
+            "IOServiceBusyTime",
+            "IOServiceState"
+          ],
+          "children": [
+            {
+              "properties": {
+                "IOObjectClass": "AppleUSBHostFrameworkInterfaceClient",
+                "IORegistryEntryID": 4295528401,
+                "IORegistryEntryName": "usbaudiod"
+              },
+              "property_names": [
+                "IOObjectClass",
+                "IOObjectRetainCount",
+                "IORegistryEntryID",
+                "IORegistryEntryLocation",
+                "IORegistryEntryName",
+                "IOServiceBusyState",
+                "IOServiceBusyTime",
+                "IOServiceState"
+              ],
+              "children": []
+            }
+          ]
+        },
+        {
+          "properties": {
+            "IOObjectClass": "AppleUSBHostDeviceUserClient",
+            "IORegistryEntryID": 4295528372,
+            "IORegistryEntryName": "zoom.us"
+          },
+          "property_names": [
+            "IOObjectClass",
+            "IOObjectRetainCount",
+            "IORegistryEntryID",
+            "IORegistryEntryName",
+            "IOServiceBusyState",
+            "IOServiceBusyTime",
+            "IOServiceState"
+          ],
+          "children": []
+        },
+        {
+          "properties": {
+            "IOObjectClass": "AppleUSBHostDeviceUserClient",
+            "IORegistryEntryID": 4295528373,
+            "IORegistryEntryName": "Arc"
+          },
+          "property_names": [
+            "IOObjectClass",
+            "IOObjectRetainCount",
+            "IORegistryEntryID",
+            "IORegistryEntryName",
+            "IOServiceBusyState",
+            "IOServiceBusyTime",
+            "IOServiceState"
+          ],
+          "children": []
+        }
+      ]
+    }
+  ]
+}

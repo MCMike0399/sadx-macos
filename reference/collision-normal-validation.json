@@ -1,0 +1,23 @@
+{
+  "files_sha256": {
+    "sadx-native/src/collision_shapes.hpp": "8eec6b56c6e72060eef83e872090163605b3e19c65f20f6c7518e197c1253e9a",
+    "sadx-native/src/collision_shapes.cpp": "b87873ac15c71e6062e5453338e0c6f10e992ffe31e3ea4ef4e70ba85b09705f",
+    "sadx-native/src/collision_normal.hpp": "41e0fe9c12d964ef252b496d2a7a041214030b05f16d2d37218bd34b7167007f",
+    "sadx-native/src/collision_normal.cpp": "b9b9e4836fe9df481727fc0021fac0c3f58d1b7d33678793b5af0af6fe2c803c",
+    "sadx-native/src/player_position.hpp": "72992df123c896e504176eb8c63914332aaaf955c45033cc5610ee0a22b57bf3",
+    "sadx-native/src/player_coordinates.hpp": "a2ed86ef0661816404d1545ccbef92060270f4c2326a8b52969eb3aa8ccbc93a",
+    "sadx-native/src/player_coordinates.cpp": "e3702846af11886ee75b32848793b00a08e55f6d08ed2aec73a80d90313887fb",
+    "sadx-native/tests/collision_shapes.cpp": "a784d87e50b68c25bc394afd38eaef81ad2b59ccae2d0d8e221d0fff53b46b4b",
+    "sadx-native/tests/collision_normal.cpp": "478c031d3ab56f33d2047ee57f54e8a764eca0ec8af68c7f7804497a51632b47",
+    "sadx-native/tests/native_collision_shapes_probe.cpp": "3625cd7217212601ff2dbf7ac1249b03b5432faf358262a84f9dec26f58945bb",
+    "sadx-native/tools/verify_original_collision_shapes.py": "4a78593d47a5a1d447515e04f6cd4f938386ebbc9e12ccf6c3dad43f34ab9ed8"
+  },
+  "source_semantic_tests": "Strict optimized and UBSan12CW shapes/normal tests passed",
+  "source_instruction_evaluations": 43344,
+  "stored_value_AL_write_mask_matrix_depth_CW_mismatches": 0,
+  "exception_status_mismatches": 31632,
+  "full_state_passed": false,
+  "no_stand_ins": "All normal/shape/matrix arithmetic usesactualinstructionsinoracle; only resource/task/matrix input fixtures are explicit.",
+  "runtime_hardware": "Not measured; noWindowsstartup/active-mod/contactgenerationclaim",
+  "source_freeze": "Core/test/probe/verifier stable; rootproductionintegrationownsbuild"
+}

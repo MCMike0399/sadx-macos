@@ -1,0 +1,281 @@
+{
+  "input_mod_sha256": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+  "native_probe_sha256": "f3bd82eb1cda0a938f1fc3c38dcb87fae3d90289b396623d96b1b11521b7e702",
+  "constants_addresses": [
+    "0x1000bb6c",
+    "0x1000bbb0",
+    "0x1000bba0",
+    "0x1000bba4",
+    "0x1000bb7c"
+  ],
+  "constants_hex": "0000003400feff460000fe42000000430000803f",
+  "constants_sha256": "c9e208b6f0e83d0cbfe834fd1983b9e20aacef35b75b41d4606e6224256268ea",
+  "controller_instructions_sha256": "0842dfed02318b34dbad4e9973d4bc6c31e2eb4756a10a7b2e4b23ba4f3168c0",
+  "keyboard_instructions_sha256": "14b738087950c69a4fccba60db7042ed6cb14a1bc5b18cb8501e849d6f302dd9",
+  "unicorn_version": "2.1.4",
+  "mxcsr_controls": [
+    "0x1f80",
+    "0x9f80",
+    "0x1fc0",
+    "0x9fc0",
+    "0x3f80",
+    "0xbf80",
+    "0x3fc0",
+    "0xbfc0",
+    "0x5f80",
+    "0xdf80",
+    "0x5fc0",
+    "0xdfc0",
+    "0x7f80",
+    "0xff80",
+    "0x7fc0",
+    "0xffc0"
+  ],
+  "results": [
+    {
+      "mode": "controller helper",
+      "cases": 4560,
+      "cases_sha256": "8c6f0839dd03f77cbee25e7c1dfd82c4c958ba40de99cd74c212e7c6ab140d50",
+      "evaluations": 72960,
+      "value_mismatches": 0,
+      "mxcsr_mismatches": 57024,
+      "first_value_mismatches": [],
+      "first_mxcsr_mismatches": [
+        {
+          "input": [
+            -32768,
+            -32768,
+            0,
+            0
+          ],
+          "mxcsr": "0x1f80",
+          "original": "0x1f80",
+          "native": "0x1fa0"
+        },
+        {
+          "input": [
+            -32768,
+            -32768,
+            0,
+            1
+          ],
+          "mxcsr": "0x1f80",
+          "original": "0x1f80",
+          "native": "0x1fa0"
+        },
+        {
+          "input": [
+            -32768,
+            -32768,
+            7849,
+            0
+          ],
+          "mxcsr": "0x1f80",
+          "original": "0x1f80",
+          "native": "0x1fa0"
+        },
+        {
+          "input": [
+            -32768,
+            -32768,
+            7849,
+            1
+          ],
+          "mxcsr": "0x1f80",
+          "original": "0x1f80",
+          "native": "0x1fa0"
+        },
+        {
+          "input": [
+            -32768,
+            -32768,
+            8689,
+            0
+          ],
+          "mxcsr": "0x1f80",
+          "original": "0x1f80",
+          "native": "0x1fa0"
+        },
+        {
+          "input": [
+            -32768,
+            -32768,
+            8689,
+            1
+          ],
+          "mxcsr": "0x1f80",
+          "original": "0x1f80",
+          "native": "0x1fa0"
+        },
+        {
+          "input": [
+            -32768,
+            -32768,
+            32767,
+            0
+          ],
+          "mxcsr": "0x1f80",
+          "original": "0x1f80",
+          "native": "0x1fa1"
+        },
+        {
+          "input": [
+            -32768,
+            -32768,
+            32767,
+            1
+          ],
+          "mxcsr": "0x1f80",
+          "original": "0x1f80",
+          "native": "0x1fa1"
+        },
+        {
+          "input": [
+            -32768,
+            -32768,
+            -1,
+            0
+          ],
+          "mxcsr": "0x1f80",
+          "original": "0x1f80",
+          "native": "0x1fa0"
+        },
+        {
+          "input": [
+            -32768,
+            -32768,
+            -1,
+            1
+          ],
+          "mxcsr": "0x1f80",
+          "original": "0x1f80",
+          "native": "0x1fa0"
+        }
+      ]
+    },
+    {
+      "mode": "keyboard scalar range",
+      "cases": 2256,
+      "cases_sha256": "4a0c0b1b6a788d8288735067a22f42314fee1e18482b837f4e898e02809838fd",
+      "evaluations": 36096,
+      "value_mismatches": 0,
+      "mxcsr_mismatches": 36080,
+      "first_value_mismatches": [],
+      "first_mxcsr_mismatches": [
+        {
+          "input": [
+            -32768,
+            -32768,
+            -32768,
+            -32768
+          ],
+          "mxcsr": "0x1f80",
+          "original": "0x1f80",
+          "native": "0x1fa0"
+        },
+        {
+          "input": [
+            -32768,
+            -32767,
+            -32767,
+            -32768
+          ],
+          "mxcsr": "0x1f80",
+          "original": "0x1f80",
+          "native": "0x1fa0"
+        },
+        {
+          "input": [
+            -32768,
+            -24576,
+            -24576,
+            -32768
+          ],
+          "mxcsr": "0x1f80",
+          "original": "0x1f80",
+          "native": "0x1fa0"
+        },
+        {
+          "input": [
+            -32768,
+            -16384,
+            -16384,
+            -32768
+          ],
+          "mxcsr": "0x1f80",
+          "original": "0x1f80",
+          "native": "0x1fa0"
+        },
+        {
+          "input": [
+            -32768,
+            -8192,
+            -8192,
+            -32768
+          ],
+          "mxcsr": "0x1f80",
+          "original": "0x1f80",
+          "native": "0x1fa0"
+        },
+        {
+          "input": [
+            -32768,
+            -7849,
+            -7849,
+            -32768
+          ],
+          "mxcsr": "0x1f80",
+          "original": "0x1f80",
+          "native": "0x1fa0"
+        },
+        {
+          "input": [
+            -32768,
+            -7848,
+            -7848,
+            -32768
+          ],
+          "mxcsr": "0x1f80",
+          "original": "0x1f80",
+          "native": "0x1fa0"
+        },
+        {
+          "input": [
+            -32768,
+            -1,
+            -1,
+            -32768
+          ],
+          "mxcsr": "0x1f80",
+          "original": "0x1f80",
+          "native": "0x1fa0"
+        },
+        {
+          "input": [
+            -32768,
+            0,
+            0,
+            -32768
+          ],
+          "mxcsr": "0x1f80",
+          "original": "0x1f80",
+          "native": "0x1fa0"
+        },
+        {
+          "input": [
+            -32768,
+            1,
+            1,
+            -32768
+          ],
+          "mxcsr": "0x1f80",
+          "original": "0x1f80",
+          "native": "0x1fa0"
+        }
+      ]
+    }
+  ],
+  "seconds": 1.8066842089756392,
+  "passed": false,
+  "scope": "isolated actual DLL instructions, all exceptions masked; not Windows runtime or physical hardware"
+}

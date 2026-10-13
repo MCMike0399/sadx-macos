@@ -1,0 +1,10 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "b6b99004f2c820ce0a9a8d109e0c16d6f59d01e93ac290de185cee538a527c12",
+ "original_range_sha256": "b7a107484cc7753a0f24258c28e55e24a52238497585f6adde4d229c82181dfe",
+ "cases": 300,
+ "mismatch_count": 0,
+ "mismatches": [],
+ "order_stores_seed_match": true,
+ "limits": "Game-state reset 40bf40 against original instructions.\n\nEvery callee except the 51f680 RET and srand 6443b5 is an owner fixture that\nrecords (callee, site, first argument) and may fail at call N. Compared: call\norder/sites/arguments, 3abdf80, word 3b29d08, the conditional free-and-zero of\n3b290d0 and 3b0e330, and the CRT seed 2bcbdf8.\n"
+}

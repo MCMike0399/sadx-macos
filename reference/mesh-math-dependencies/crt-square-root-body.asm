@@ -1,0 +1,43 @@
+0x6452a4: lea edx, dword [esp+arg_0]
+0x6452a8: call sub_648bd5
+0x6452ad: push edx
+0x6452ae: wait
+0x6452af: fnstcw word [esp+0x4+var_4]
+0x6452b2: mov eax, dword [esp+0x4+arg_4]
+0x6452b6: je loc_645309
+0x6452b8: cmp word [esp+0x4+var_4], 0x27f
+0x6452be: je loc_6452c5
+0x6452c0: call sub_648ba5
+0x6452c5: test eax, 0x80000000
+0x6452ca: jne loc_6452eb
+0x6452cc: fsqrt
+0x6452ce: cmp dword [dword_3c837a8], 0x0
+0x6452d5: jne sub_648c18+22
+0x6452db: mov edx, 0x5
+0x6452e0: lea ecx, dword [aSqrt]
+0x6452e6: jmp sub_648c18+35
+0x6452eb: test eax, 0x7ff00000
+0x6452f0: jne loc_64531e
+0x6452f2: test eax, 0xfffff
+0x6452f7: jne loc_64531e
+0x6452f9: cmp dword [esp+0x4+arg_0], 0x0
+0x6452fe: jne loc_64531e
+0x645300: jmp loc_6452ce
+0x645302: call sub_648bbc
+0x645307: jmp loc_64532b
+0x645309: test eax, 0xfffff
+0x64530e: jne loc_645302
+0x645310: cmp dword [esp+0x4+arg_0], 0x0
+0x645315: jne loc_645302
+0x645317: and eax, 0x80000000
+0x64531c: je loc_6452ce
+0x64531e: fstp st0
+0x645320: fld tword [qword_2bcbfc2+62]
+0x645326: mov eax, 0x1
+0x64532b: cmp dword [dword_3c837a8], 0x0
+0x645332: jne sub_648c18+22
+0x645338: mov edx, 0x5
+0x64533d: lea ecx, dword [aSqrt]
+0x645343: call sub_648b47
+0x645348: pop edx
+0x645349: ret

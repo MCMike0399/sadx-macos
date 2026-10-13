@@ -1,0 +1,18 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "native_library_sha256": "2a9648834340b5934cce77c3b6b9e59a8a5020f2a33a029a6decaf8af136e053",
+  "source_files": {
+    "src/game_scene_logic.hpp": "8450b207b718467c6e3b6a45438d4ccd9232e5df7af98ff2d213f94c682efc87",
+    "src/game_scene_logic.cpp": "e7ba0f96210ddaf48b1620236b66e0a853bb884a7a0bb021632b2a4427ca7909",
+    "src/task.hpp": "b210cc6b7812d85484dcf04b6f96bc9800af3afe003071cda7380dd8e921512b",
+    "src/task.cpp": "d68b6026b0fe2400b3458eb015e1c5a2d2ee99b6ff0f12dd81815dc00db1fd2d",
+    "tests/native_game_scene_logic_probe.cpp": "f96964fd46b3edd7fca083216d663204c982918e630052e2fa526d34c874e30d",
+    "tools/verify_original_game_scene_logic.py": "bd74d77a3b06dcd5471bf1e579c85758aed50f94e8e9c26e3dea51d30f42faf5"
+  },
+  "original_range_sha256": "a03661b949d7c729c3a0569cdeae270b424ecb92d69c7d586ec34e8478fb9c45",
+  "cases": 800,
+  "case_sha256": "7fdde1565043d55880b875b821b33d6cfbe45620b94f8e3e5660fde40d7fb1fc",
+  "mismatches": [],
+  "ordering_stores_and_stopped_boundaries_match": true,
+  "limits": "413d40 scene orchestration against original instructions.\n\nInput/context/collision/registry/query callees are explicit owner fixtures. The\nsource40b170 task body executes with an explicitly empty eight-list fixture;\nnative task-order/mutation checks cover nonempty lists separately. This does\nnot establish full scene execution, physical input or hardware FP equivalence.\n"
+}

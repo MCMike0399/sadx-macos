@@ -1,0 +1,91 @@
+
+void FUN_00443f50(int param_1,int param_2,int param_3)
+
+{
+  float fVar1;
+  float fVar2;
+  float fVar3;
+  int iVar4;
+  undefined4 local_c;
+  undefined4 local_8;
+  undefined4 local_4;
+  
+  fVar1 = *(float *)(param_3 + 0x38);
+  fVar2 = *(float *)(param_3 + 0x2c) + *(float *)(param_3 + 0x38);
+  *(float *)(param_3 + 0x38) = fVar2;
+  fVar3 = *(float *)(param_3 + 0xc0) * 0.87;
+  if (fVar1 <= 0.0) {
+    if (fVar1 < 0.0) {
+      if (fVar2 <= 0.0) {
+        iVar4 = FUN_0043bdc0(param_1,0,0);
+        if (((iVar4 == 0) && (-fVar3 < *(float *)(param_3 + 0x38))) &&
+           (0.7 < *(float *)(param_3 + 0x1c))) {
+          *(undefined4 *)(param_3 + 0x38) = 0;
+        }
+      }
+      else {
+        *(undefined4 *)(param_3 + 0x38) = 0;
+      }
+    }
+  }
+  else if (0.0 <= fVar2) {
+    iVar4 = FUN_0043bdc0(param_1,0,0);
+    if (((iVar4 == 0) && (*(float *)(param_3 + 0x38) < fVar3)) && (0.7 < *(float *)(param_3 + 0x1c))
+       ) {
+      *(undefined4 *)(param_3 + 0x38) = 0;
+    }
+  }
+  else {
+    *(undefined4 *)(param_3 + 0x38) = 0;
+  }
+  *(float *)(param_3 + 0x3c) = *(float *)(param_3 + 0x30) + *(float *)(param_3 + 0x3c);
+  fVar1 = *(float *)(param_3 + 0x40);
+  fVar2 = *(float *)(param_3 + 0x34) + *(float *)(param_3 + 0x40);
+  *(float *)(param_3 + 0x40) = fVar2;
+  if (fVar1 <= 0.0) {
+    if (fVar1 < 0.0) {
+      fVar3 = -fVar3;
+      if ((fVar3 < fVar1) && (fVar1 == fVar2)) goto LAB_004440dc;
+      if ((fVar1 < fVar3 != (fVar1 == fVar3)) && (fVar3 < fVar2)) {
+        *(undefined4 *)(param_3 + 0x40) = 0;
+      }
+    }
+  }
+  else if ((fVar3 <= fVar1) || (fVar1 != fVar2)) {
+    if ((fVar3 <= fVar1) && (fVar2 < fVar3)) {
+      *(undefined4 *)(param_3 + 0x40) = 0;
+    }
+  }
+  else {
+LAB_004440dc:
+    *(undefined4 *)(param_3 + 0x40) = 0;
+  }
+  if ((*(uint *)(param_3 + 0x1e4) & 0x400000) == 0) {
+    if ((*(uint *)(param_3 + 0x1e4) & 0x400002) == 0) goto LAB_0044412b;
+    fVar1 = (*(float *)(param_3 + 0xc4) + *(float *)(param_3 + 0xc0)) * 0.5;
+  }
+  else {
+    fVar1 = *(float *)(param_3 + 0xc0) * 0.8;
+  }
+  if (fVar1 < *(float *)(param_3 + 0x38) != (fVar1 == *(float *)(param_3 + 0x38))) {
+    *(float *)(param_3 + 0x38) = *(float *)(param_3 + 0xe4) + *(float *)(param_3 + 0x38);
+  }
+LAB_0044412b:
+  local_8 = *(undefined4 *)(param_3 + 0x3c);
+  local_c = *(undefined4 *)(param_3 + 0x38);
+  local_4 = *(undefined4 *)(param_3 + 0x40);
+  if ((*(uint *)(param_3 + 0x5c) & 0x4000) == 0) {
+    FUN_0043ec90(param_1,&local_c);
+  }
+  else {
+    FUN_0043edd0(param_3 + 0x50,&local_c,*(undefined4 *)(param_1 + 0x18));
+  }
+  *(undefined4 *)(param_2 + 4) = local_c;
+  *(undefined4 *)(param_2 + 8) = local_8;
+  *(undefined4 *)(param_2 + 0xc) = local_4;
+  FUN_00785170();
+  FUN_0043c380();
+  FUN_0043c4c0();
+  return;
+}
+

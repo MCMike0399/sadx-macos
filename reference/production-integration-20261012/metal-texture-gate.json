@@ -1,0 +1,26 @@
+{
+  "build_command": "make -C sadx-native -j4 build/libsadx-macos.a build/metal-texture-test",
+  "build_passed": true,
+  "gpu_command": "./sadx-native/build/metal-texture-test --inspect Sonic Adventure DX/system/EFF_REGULAR.PVM 130 _reference/sadx/production-integration-20261012/bubble-metal",
+  "gpu_exit_code": 0,
+  "gpu_report": "_reference/sadx/production-integration-20261012/bubble-metal.json",
+  "device": "Apple M5 Pro",
+  "channel_mismatches": 0,
+  "sha256": {
+    "sadx-native/src/metal_texture.hpp": "d321a6444431e46eed7977db346a83ef00afd0a1239dc1f291118550b7f5e385",
+    "sadx-native/src/metal_texture.mm": "7ed5f0e5ac3973ee05142a9b979416c8fd2378604afbe5d43103d06a67c12596",
+    "sadx-native/tests/metal_texture.mm": "9bcb4b12eff78115fd60b1f33654d80dcd3dee7de61e98ba029ec2c21413ba54",
+    "sadx-native/build/metal-texture-test": "48a63a7deea483ca35e5e26e1f65083238d63d998629e5b49659d8b47cdbf09c",
+    "sadx-native/build/libsadx-core.a": "f9e509e04ed2e8b24216613f0142a66d3877a962bd79742e634092309fea5b93",
+    "sadx-native/build/libsadx-macos.a": "c376c9730054250668a7db4e6717c0cf9003afddb365c79d47655fbcb0b8fc09",
+    "_reference/sadx/production-integration-20261012/bubble-metal.json": "9460a20e8f66ae325064826ee35973a30189ac31636b0137a350a4cabae7e351",
+    "_reference/sadx/production-integration-20261012/bubble-metal.mip0.rgba32f": "c70f05437d9cd7ee36243a02d480f44d3074288331ad75c07eeda678c54cce3c",
+    "_reference/sadx/production-integration-20261012/bubble-metal.png": "a0850122829baf3c33e70d4c8cd23590e0e0a8a4990cc7e74c1739b0c6f33d30"
+  },
+  "limits": [
+    "Native Apple GPU upload/normalization/readback; not original NVIDIA/D3D equivalence",
+    "No original runtime texlist/cache ownership or gameplay binding inferred",
+    "No sampler/filter/blend contract is chosen by upload",
+    "PNG uses nearest-byte quantization of real FP32 GPU readback as inspection preview"
+  ]
+}

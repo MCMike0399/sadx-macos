@@ -1,0 +1,111 @@
+{
+  "format_version": 1,
+  "state": "static prepared, no Windows process or module activation observed",
+  "canonical_profile_manifest": "manifest.json",
+  "selected_source_bytes": 1393992524,
+  "final_game_bytes": 1410223905,
+  "final_game_files": 6272,
+  "files": [
+    {
+      "path": "manifest.json",
+      "sha256": "795918d0e40d30437a0fde905d40917cac861ef46b3e86dff0cffdac901f8cd8",
+      "size": 13046
+    },
+    {
+      "path": "manifest.sha256",
+      "sha256": "4e870010d6afaea546f0500ead5535813e4e8670056aa79e19cb3dabb8267809",
+      "size": 80
+    },
+    {
+      "path": "copy-scope.json",
+      "sha256": "4530e0c7be56b88b75133585ac06f32424ef0b60c60805fb7cd2996a75f52ba5",
+      "size": 465
+    },
+    {
+      "path": "bootstrap-static.json",
+      "sha256": "e53b707fa1935ca429d591b4a5d3ac0b94c8eb8e252e7680a11cd713db1ac9b4",
+      "size": 37973
+    },
+    {
+      "path": "effective-config.json",
+      "sha256": "94d26126a135e667f664cfd370e57425663e1be3b108c427df7705014b7a58e3",
+      "size": 5100
+    },
+    {
+      "path": "expected-hooks.json",
+      "sha256": "8b5300ee71ef42083759ab23169e1f7eb9922ab5b166f68da44e086b11925ad8",
+      "size": 3294
+    },
+    {
+      "path": "game-inventory.json",
+      "sha256": "92416569fd99d72feb907d7413101dd0433b2d7bd7fd3a8f6f3f4f30bd580a24",
+      "size": 1022599
+    },
+    {
+      "path": "README.md",
+      "sha256": "0fd712854e88520bead47caba442a62ffe9990793f108d1e427eb57edc02c3a9",
+      "size": 14174
+    },
+    {
+      "path": "prepare_profile.py",
+      "sha256": "c5657b6bdffa647a32e8c0d8d43939d33e824e0d9e1923d66400074219ec1639",
+      "size": 11182
+    },
+    {
+      "path": "verify_profile.py",
+      "sha256": "eb716667a7b8cbbeec7b66e7a7dcfc9a401b62d4dc30cc8be2ce9bc0cd454188",
+      "size": 6130
+    },
+    {
+      "path": "capture-runtime.ps1",
+      "size": 40373,
+      "sha256": "3601c69deb0d9051cf86c4d83260637ae65b42b0aad75032558ce88cd780a7a0"
+    },
+    {
+      "path": "runtime-capture.md",
+      "size": 10232,
+      "sha256": "c14a18d893c927a0c36ad8c6661c32b1107cdce1c1b0a448538cbeb82bde514d"
+    },
+    {
+      "path": "collector-validation.json",
+      "size": 1031,
+      "sha256": "5dcf409fcb7d538b41f70f5d849e2402c57806d11f9b6c75ef57ed5ae2cfdb57"
+    },
+    {
+      "path": "collector-layout-test.cs",
+      "size": 2204,
+      "sha256": "66090fe1335d6f510efd0c98cb142a9ca342859b5a76e7eccc3f7e75aa453e55"
+    }
+  ],
+  "runtime_collector_validation": {
+    "validation_kind": "compile and native-layout/arithmetic tests only",
+    "host": "macOS arm64",
+    "powershell_available": false,
+    "windows_api_execution_observed": false,
+    "csharp_language_version": "5",
+    "compiler_warnings_as_errors": true,
+    "collector_sha256": "3601c69deb0d9051cf86c4d83260637ae65b42b0aad75032558ce88cd780a7a0",
+    "microsoft_winnt_header_sha256": "404019933323ca25f5db8ce14437483e1054398ce454d5c75df2e187cec2ae40",
+    "expected_layouts": {
+      "MODULEENTRY32W_size": 1080,
+      "THREADENTRY32_size": 28,
+      "WOW64_FLOATING_SAVE_AREA_size": 112,
+      "WOW64_CONTEXT_size": 716,
+      "FloatSave_offset": 28,
+      "Eip_offset": 184,
+      "ExtendedRegisters_offset": 204,
+      "MxCsr_fxsave_offset": 24
+    },
+    "wrapper_fix": "Default path/flat JSON inventory; preserve raw duplicate module records and derive distinct mapping identity; mapped-file fallback and useful inline errors.",
+    "windows_wrapper_execution_observed": false,
+    "mapped_device_path_tests": 14,
+    "windows_full_fix_execution_observed": false
+  },
+  "user_reported_reference_host": {
+    "cpu": "Intel Ultra",
+    "gpu": "NVIDIA",
+    "os": "Windows 11",
+    "customization": "AtlasOS",
+    "independently_observed": false
+  }
+}

@@ -1,0 +1,16 @@
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+undefined4 FUN_0077f3d0(void)
+
+{
+  int *in_ECX;
+  
+  DAT_03d0fa24 = in_ECX;
+  if (in_ECX != (int *)0x0) {
+    _DAT_03ce7128 = *(undefined4 *)(*in_ECX + 8);
+    FUN_0078cf20();
+  }
+  return 1;
+}
+

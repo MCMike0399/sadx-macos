@@ -1,0 +1,366 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "evidence": [
+    {
+      "path": "_reference/sadx/ghidra-engine-recovery/scene-position-ordinary.json",
+      "sha256": "910749410da24910bf39c49cb7bb025685bddf82dc42907377759231eaae76c7",
+      "evidence_id": "ev_4cfe55dda1e95fc12cb551fe7bda0b8293cde3b5de9876da1b466edccfcfe697",
+      "procedure": "0x449500",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x449500",
+            "end": "0x449a08"
+          },
+          {
+            "start": "0x449a10",
+            "end": "0x44a7fd"
+          }
+        ],
+        "total_bytes": 4855,
+        "span_bytes": 4862,
+        "non_contiguous": true,
+        "contains_entry": true
+      },
+      "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+      ]
+    },
+    {
+      "path": "_reference/sadx/ghidra-engine-recovery/scene-position-alternate.json",
+      "sha256": "2d17db8a2073448e456ff885222b84ada67d72597bf63e15613209939293e7e4",
+      "evidence_id": "ev_c83dc8c032eef49b45fa73b6c828d8a7a62c9cd854315bac37585ad84571cf6e",
+      "procedure": "0x445d10",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x445d10",
+            "end": "0x446904"
+          }
+        ],
+        "total_bytes": 3061,
+        "span_bytes": 3061,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+      ]
+    },
+    {
+      "path": "_reference/sadx/ghidra-scene-helper-recovery/scene-contact-gate.json",
+      "sha256": "7c144890041b237d67b531685015dbacbaf039c4b940c08061b00360db9e1d7e",
+      "evidence_id": "ev_75f926011a3e634accc4abb1be7eb65c8c060bf5de6188e1269a7b5edddf3dc2",
+      "procedure": "0x444640",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x444640",
+            "end": "0x444a9a"
+          }
+        ],
+        "total_bytes": 1115,
+        "span_bytes": 1115,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+      ]
+    },
+    {
+      "path": "_reference/sadx/ghidra-scene-helper-recovery/scene-corner-response.json",
+      "sha256": "f75a4e506dde9942328df3e2348ae21e89f3faa449720b7ba61026b20fddf308",
+      "evidence_id": "ev_19d20ae5b89a1bc7cd330b4ca36cd886360fbe2cc57f9e9795138a14e71f6376",
+      "procedure": "0x444d50",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x444d50",
+            "end": "0x444f04"
+          }
+        ],
+        "total_bytes": 437,
+        "span_bytes": 437,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+      ]
+    },
+    {
+      "path": "_reference/sadx/ghidra-scene-helper-recovery/scene-event-active.json",
+      "sha256": "8dc09afc66479ce0dffd0d3364ad22642de3d0a4707403cae4d1f1c1b6092d18",
+      "evidence_id": "ev_8f216aded66c9baecf4b9a92507599e3dc4088e658d077681fd54b64d63116a5",
+      "procedure": "0x42fb00",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x42fb00",
+            "end": "0x42fb0d"
+          }
+        ],
+        "total_bytes": 14,
+        "span_bytes": 14,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+      ]
+    },
+    {
+      "path": "_reference/sadx/ghidra-scene-helper-recovery/scene-floor-rotation.json",
+      "sha256": "f2069ad21212e5cffd551d3ae96b9aa97363f2876abcab1e5fd330efc1298049",
+      "evidence_id": "ev_f6429e958fc8f2a4f1f434f600349bef0dd7b4192d88dd038305508112716a28",
+      "procedure": "0x444f10",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x444f10",
+            "end": "0x44509f"
+          }
+        ],
+        "total_bytes": 400,
+        "span_bytes": 400,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+      ]
+    },
+    {
+      "path": "_reference/sadx/ghidra-scene-helper-recovery/scene-helper-43dca0.json",
+      "sha256": "f1c8d34ce4827dfec12fe3b275a8e674db2be3080b98960171295531d18fba60",
+      "evidence_id": "ev_76f9a1949f1328b9ce3796972eb3c71f96ba885bee622f7d865972ffc60f9007",
+      "procedure": "0x43dca0",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x43dca0",
+            "end": "0x43df5b"
+          }
+        ],
+        "total_bytes": 700,
+        "span_bytes": 700,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+      ]
+    },
+    {
+      "path": "_reference/sadx/ghidra-scene-helper-recovery/scene-helper-43df60.json",
+      "sha256": "6500c4b7b38b5c58d905a93f7752a9fe30bbab13eaf278d84e4051e1129ec722",
+      "evidence_id": "ev_b31972da57a2515747d04a5339b63547e089a64f297aad204693e401d8bae55f",
+      "procedure": "0x43df60",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x43df60",
+            "end": "0x43e0f6"
+          }
+        ],
+        "total_bytes": 407,
+        "span_bytes": 407,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+      ]
+    },
+    {
+      "path": "_reference/sadx/ghidra-scene-helper-recovery/scene-normal-nudge.json",
+      "sha256": "80fb646b119b457e2e95896743f48ce4452793d1f2d3e7a32a9e185109e6f8a9",
+      "evidence_id": "ev_ae441305a91cc0f3d975c9e6fb046a965579b1a8e49ef83d846f812cccdd5dc6",
+      "procedure": "0x43cb40",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x43cb40",
+            "end": "0x43cb83"
+          }
+        ],
+        "total_bytes": 68,
+        "span_bytes": 68,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+      ]
+    },
+    {
+      "path": "_reference/sadx/ghidra-scene-helper-recovery/scene-platform-motion.json",
+      "sha256": "78453370c4b174d504e4526d6bde343bd18c44b2beaa6d2c1ee8f10332e1d675",
+      "evidence_id": "ev_650f039c4a12b47060146a2dab6f6c058136e6270cc075ecc3739ba0e8ed88b7",
+      "procedure": "0x43ca40",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x43ca40",
+            "end": "0x43cb3e"
+          }
+        ],
+        "total_bytes": 255,
+        "span_bytes": 255,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+      ]
+    },
+    {
+      "path": "_reference/sadx/ghidra-scene-helper-recovery/scene-wall-response.json",
+      "sha256": "9570c2a695aba6bfc624a509e4ab6a59e3b1909f6f36ee9f378bb68e2365f9ef",
+      "evidence_id": "ev_6d0added4a1b1bde2c8731817514737f99b663b26c77af26e2e9f04c4e4d132e",
+      "procedure": "0x444aa0",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x444aa0",
+            "end": "0x444d44"
+          }
+        ],
+        "total_bytes": 677,
+        "span_bytes": 677,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+      "limitations": [
+        "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+        "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+        "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+        "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+      ]
+    }
+  ],
+  "native_owners": [
+    "player_scene_position.cpp:449500/445d10,444640/444aa0/444d50/43dca0/43df60",
+    "player_scene_position_helpers.cpp:43ca40/43cb40/444f10",
+    "player_scene_broadphase:450c10/43acd0",
+    "player_mesh_registry:actual pool/triangle producer",
+    "player_mesh_query:453820",
+    "player_contact_response:five response bodies",
+    "player_contact_attributes:43cb90",
+    "player_contact_initializer:43c7d0",
+    "player_coordinates:actual task/floor/vector transforms",
+    "player_projection:438410; player_direction_reset:788d40; player_plane:7887d0",
+    "player_input:43bdc0; player_heading:438350/4383b0; native Ninja/x87/CRT owners"
+  ],
+  "ownership": [
+    "Shared task/player/world/live parameters retain all source mutations",
+    "Scene IDs resolve original object/task identities once; no guest addresses are cast",
+    "Moving task6c and cached object74 are distinct optional references",
+    "Platform task+28 typed view has two7-word rows selected by zero/nonzero player byte8",
+    "Native platform callback boundary keeps temporary task pose on incomplete callback",
+    "Stage registration/broadphase share work array3b2f720; dynamic source storage is3b32728"
+  ],
+  "full_body_profile": {
+    "first_report": "_reference/sadx/original-player-scene-position-first-profile.json",
+    "evaluations": 864,
+    "value_return_cw_frame_differences": 0,
+    "status_differences": 576,
+    "actual_contact_cases": 384,
+    "coverage": "wall/corner and airborne paths; landing subsequently measured separately",
+    "final_private_report": "/private/tmp/sadx-original-player-scene-position-final.json",
+    "final_status": "completed",
+    "final_report": "_reference/sadx/original-player-scene-position-comparison.json",
+    "final_evaluations": 1632,
+    "final_value_return_cw_frame_differences": 0,
+    "final_boundary_failures": 0,
+    "final_status_differences": 1344,
+    "final_contact_cases": 1152,
+    "strict_match": false,
+    "native_library_sha256": "58175a440b9d9956cf65cf556f4e923771103e565110d669f9789c695cb34682"
+  },
+  "leaf_profile": {
+    "private_report": "/private/tmp/sadx-original-player-scene-helpers-comparison.json",
+    "evaluations": 8076,
+    "value_cw_frame_differences": 0,
+    "status_differences": 6040,
+    "scope": "43cb40/444f10/43ca40 with explicit null force-work or null row callback"
+  },
+  "corrections": [
+    "Ordinary literal direction/angle/flag stores now precede height arithmetic and unavailable prior-attribute boundary",
+    "Alternate height arithmetic now follows its actual pushed-frame rotations/direction CalcVector",
+    "Both squared-distance and inline-normalization source addition orders are retained independently",
+    "Horizontal water entries with mask400002 are skipped unless task byte9=6; no bound-initialization defect was established"
+  ],
+  "unknowns": [
+    "Native source4128a0/408530/4128f0 diagnostic-render state remains unavailable at44499e after actual preceding matrix/contact stores",
+    "Non-null platform callbacks require a registered native owner; no successful placeholder callback is provided",
+    "Real runtime camera/task bindings,43a260 stage/mesh-conversion startup and updated-mod hook state remain unobserved",
+    "Original hardware x87 transcendental/deferred-trap fidelity is unmeasured; explicit Bochs P5/P6 model and status differences are retained",
+    "Fixed source local-record storage overflow is an explicit incomplete boundary, not a silent clamp",
+    "Current broadphase/main oracle profiles use bounded real-record views and controlled prior state, not a whole running game"
+  ]
+}

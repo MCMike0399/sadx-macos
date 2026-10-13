@@ -1,0 +1,15 @@
+
+void FUN_00794000(undefined4 param_1)
+
+{
+  int iVar1;
+  
+  if (DAT_03d128b0 == 0) {
+    iVar1 = (**(code **)(*DAT_03d11f60 + 0x3c))(DAT_03d11f60,DAT_03d0fdfc,param_1,DAT_03d0fd30);
+    if (iVar1 < 0) {
+      DAT_03d128b0 = 0;
+    }
+  }
+  return;
+}
+

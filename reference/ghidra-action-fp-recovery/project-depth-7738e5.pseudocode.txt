@@ -1,0 +1,77 @@
+
+void FUN_007738e5(undefined4 *param_1)
+
+{
+  byte bVar1;
+  byte extraout_AH;
+  
+  bVar1 = FUN_00773810();
+  if (((bVar1 & 0x20) != 0) && ((char)bVar1 < '\0')) {
+    *param_1 = &LAB_0077c058;
+    param_1[1] = &LAB_0077b59a;
+    param_1[2] = &LAB_0077c319;
+    param_1[3] = &LAB_007777ea;
+    param_1[5] = &LAB_0077c0ad;
+    param_1[6] = &LAB_0077b60b;
+    param_1[7] = FUN_0077b672;
+    param_1[8] = &LAB_0077c39b;
+    param_1[9] = &LAB_0077c0e6;
+    param_1[10] = &LAB_0077bb52;
+    param_1[0xb] = &LAB_00777a1c;
+    param_1[0xc] = &LAB_0077c743;
+    param_1[0xd] = &LAB_0077c786;
+    param_1[0xe] = FUN_0077bb57;
+    param_1[0xf] = FUN_0077bcdf;
+    param_1[0x10] = &LAB_0077c3fa;
+    param_1[0x11] = &LAB_0077c14a;
+    param_1[0x12] = &LAB_0077b57e;
+    param_1[0x13] = &LAB_00776280;
+    param_1[0x14] = &LAB_00776319;
+    param_1[0x15] = FUN_0077c928;
+    param_1[0x16] = &LAB_0077c86a;
+    param_1[0x17] = FUN_00776376;
+    param_1[0x18] = &LAB_00776429;
+    param_1[0x19] = &LAB_0077685a;
+    param_1[0x1a] = &LAB_00777aeb;
+    param_1[0x1b] = &LAB_00777b3b;
+    param_1[0x1c] = &LAB_00777c26;
+    param_1[0x1d] = FUN_0077691f;
+    param_1[0x1e] = &LAB_00777d02;
+    param_1[0x1f] = &LAB_00777d65;
+    param_1[0x20] = &LAB_00777dc3;
+    param_1[0x21] = &LAB_00777e1c;
+    param_1[0x22] = &LAB_0077c98c;
+    param_1[0x23] = FUN_0077698b;
+    param_1[0x24] = FUN_00776ac2;
+    param_1[0x25] = &LAB_00777e63;
+    param_1[0x26] = &LAB_00777f0b;
+    param_1[0x27] = FUN_00778092;
+    param_1[0x28] = FUN_0077922a;
+    param_1[0x29] = &LAB_007793cf;
+    param_1[0x2a] = FUN_00779903;
+    param_1[0x2b] = FUN_00776b4f;
+    param_1[0x2c] = &LAB_00776be1;
+    param_1[0x36] = &LAB_0077c52c;
+    param_1[0x33] = &LAB_0077b6d1;
+    param_1[0x30] = &LAB_0077c1e2;
+    param_1[0x2e] = &LAB_0077c22b;
+    param_1[0x34] = &LAB_0077c59d;
+    param_1[0x31] = &LAB_0077b742;
+    param_1[0x37] = FUN_00776c45;
+    param_1[0x38] = &LAB_00776cec;
+    param_1[0x35] = &LAB_0077c665;
+    param_1[0x2f] = &LAB_0077c26e;
+    param_1[0x32] = &LAB_0077b816;
+    param_1[4] = &LAB_0077ae52;
+    param_1[0x2d] = FUN_00776d91;
+    if (((extraout_AH & 1) != 0) && ((extraout_AH & 2) != 0)) {
+      param_1[0xf] = FUN_0077bf05;
+      param_1[0x12] = FUN_0077ab70;
+      param_1[0x26] = &LAB_00777fdd;
+      param_1[0x27] = FUN_00779a1c;
+      param_1[0x18] = &LAB_00776645;
+    }
+  }
+  return;
+}
+

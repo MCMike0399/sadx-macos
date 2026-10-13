@@ -1,0 +1,128 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "scope": "Native borrowed composition of actual PSetPosition44cdf0 and scene449500/445d10; new native integration tests only, no new original-instruction or hardware comparison",
+  "source_files_sha256": {
+    "src/player_scene_position_binding.hpp": "e3acdbf3e9ee4a187e24d45f7b51f4e9d18d3924d6360103fff102fe652790d9",
+    "src/player_scene_position_binding.cpp": "3409f31d7458eb0883a02528755d34bc5807ecce8e8f06e77466c60c7239d702",
+    "src/player_position.hpp": "53300e9b8ae14018bd2f9be3d65e0af29be01153d5c81a7af8629b7ce376aabe",
+    "src/player_position.cpp": "5cde5a7cbe2164941b2fbb3a5987c1fc8c3504a1be9065690e42d26d3a975121",
+    "tests/player_scene_position_binding.cpp": "8d0affe4d84257811b927a5b8f3773b5dedbb5d594c8764c03b703f11fd7fcdc",
+    "tests/player_position.cpp": "171c5611607d99d1afba8019676b3c27cdf47df74ab3ed093861cf886ad50cde",
+    "tests/native_player_position_probe.cpp": "14b8f9a604ad240a2a443735736f7a93e51accae36c9144b133c5b6ce67e7456"
+  },
+  "baseline": "player-scene-position-binding-baseline.json",
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "flags": [
+    "C++17",
+    "O2",
+    "ARM64",
+    "ffp-contract=off",
+    "fno-fast-math",
+    "macOS14 minimum"
+  ],
+  "profile": {
+    "cw": "0x007f",
+    "fixtures": 136,
+    "successful_real_responses": 96,
+    "geometry": "ECoast real arrays and source-derived positions; explicit bounded table views",
+    "caller_ccl_flags": 0,
+    "parameter_shadow_attributes": 2,
+    "crt_matherr_policy": 1,
+    "ordinary_stage_act": [
+      1,
+      0
+    ],
+    "alternate_stage_act": [
+      9,
+      2
+    ],
+    "alternate_ecost_geometry_synthetic": true,
+    "render_selector_completed_paths": -1,
+    "render_selector_failure_paths": 0,
+    "platform_reference": "source known-null fixture; nonnull callback closure unverified"
+  },
+  "checks": {
+    "optimized": true,
+    "ubsan_binding_position_sonic": true,
+    "dependencies_archive_sanitized": false,
+    "existing_position_unit": true,
+    "single_live_parameters": true,
+    "same_coordinates_query_contacts_and_fp": true,
+    "success_diagnostics": true,
+    "nested_failure_diagnostics": true,
+    "renderer_boundary": "0x44499e preserves preceding pushed matrix frame",
+    "sonic_later_failure": "0x44a800 retains successful scene result",
+    "sonic_position_failure": "retains complete failed scene result",
+    "missing_matrix": "uninvoked scene entry, no fabricated child result"
+  },
+  "private_validation": {
+    "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "cw": "0x007f",
+    "cases": 136,
+    "responses": 96,
+    "optimized_passed": true,
+    "ubsan_binding_position_sonic_passed": true,
+    "dependency_archive_sanitized": false,
+    "archive_sha256": "9ef43694880c70fdfe05de6f2ffa36a809cdcc2092e0eaa97d3a51cd3c4e8f36",
+    "sonic_constant_addresses": [
+      "0x7dcb2c",
+      "0x7dfff0",
+      "0x7dd554",
+      "0x7e0090",
+      "0x7dd57c",
+      "0x7df1bc",
+      "0x7e01a8",
+      "0x7dcb94",
+      "0x7e0844",
+      "0x7df1c8",
+      "0x7e00f4",
+      "0x7dcb34",
+      "0x7dd550"
+    ],
+    "sonic_constants_sha256": "cac3a43b8a00509706505b79771f4f9c2ec6b500a925b2cb4820b611fffe34b7",
+    "arguments": [
+      "/Users/burbujamc/Developer/rea/sadx-native/build/assets/ninja-trig.f32",
+      "/Users/burbujamc/Developer/rea/sadx-native/build/assets/ninja-unit.f32",
+      "/Users/burbujamc/Developer/rea/sadx-native/build/assets/player-parameters.bin",
+      "/Users/burbujamc/Developer/rea/sadx-native/build/assets/player-scene-position-constants.bin",
+      "/Users/burbujamc/Developer/rea/sadx-native/build/assets/player-rotation-constants.bin",
+      "/Users/burbujamc/Developer/rea/sadx-native/build/assets/player-contact-initialization-constants.bin",
+      "/Users/burbujamc/Developer/rea/sadx-native/build/assets/player-contact-response-constants.bin",
+      "/Users/burbujamc/Developer/rea/sadx-native/build/assets/player-contact-attribute-constants.bin",
+      "/Users/burbujamc/Developer/rea/sadx-native/build/assets/floor-angle-constants.bin",
+      "/Users/burbujamc/Developer/rea/sadx-native/build/assets/player-mesh-query-constants.bin",
+      "/Users/burbujamc/Developer/rea/sadx-native/build/assets/coordinate-axis-constants.bin",
+      "/Users/burbujamc/Developer/rea/Sonic Adventure DX/sonic.exe",
+      "/Users/burbujamc/Developer/rea/sadx-native/build/assets/player-scene-constants.bin",
+      "/Users/burbujamc/Developer/rea/sadx-native/build/assets/player-position-constants.bin",
+      "/private/tmp/sadx-scene-binding-core/sonic-constants.bin",
+      "/Users/burbujamc/Developer/rea/_reference/sadx/original-player-scene-position-comparison.cases.bin"
+    ]
+  },
+  "asset_sha256": {
+    "/Users/burbujamc/Developer/rea/sadx-native/build/assets/ninja-trig.f32": "3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed",
+    "/Users/burbujamc/Developer/rea/sadx-native/build/assets/ninja-unit.f32": "5998e9d1dd9bf48af6af87a1ef8c7783b818ac8329637ada08cc5fb329042376",
+    "/Users/burbujamc/Developer/rea/sadx-native/build/assets/player-parameters.bin": "3f69076118fcc6a77c55e600eb337944eb6562e5b0979104b58058ad64ba5107",
+    "/Users/burbujamc/Developer/rea/sadx-native/build/assets/player-scene-position-constants.bin": "ade5df1cd0323c829696ef023192a61e3ba22c5662abbcd48c0d7dafc374c87c",
+    "/Users/burbujamc/Developer/rea/sadx-native/build/assets/player-rotation-constants.bin": "e57e7537f25e6b0628370057deb2f9034ddf01f9b5aa8a337cf7d77c1a597f7e",
+    "/Users/burbujamc/Developer/rea/sadx-native/build/assets/player-contact-initialization-constants.bin": "e79730822bdc1cb8d10a78fcc832bf7080b4aa4efa9cf64c1c71e670f5188576",
+    "/Users/burbujamc/Developer/rea/sadx-native/build/assets/player-contact-response-constants.bin": "10889309fdb5c0b466b1f62c5d0adcda8f271ce9a4b5a6332feee9397899e557",
+    "/Users/burbujamc/Developer/rea/sadx-native/build/assets/player-contact-attribute-constants.bin": "04a4468e8e720781a8855884a62f4a745c95af3c58b61a6dca28afd7be1b7561",
+    "/Users/burbujamc/Developer/rea/sadx-native/build/assets/floor-angle-constants.bin": "78313b62673c30407e9f765030d8586011681f83aded82325b1f9ccad4ed29b1",
+    "/Users/burbujamc/Developer/rea/sadx-native/build/assets/player-mesh-query-constants.bin": "d1564af16fb5ea7d59d2ebdf87a61dcd1139ec4930a8c188a07ed5e3a762398c",
+    "/Users/burbujamc/Developer/rea/sadx-native/build/assets/coordinate-axis-constants.bin": "22b6f43bd8d27738d3213f29e96b62d01d9d6c0ab4f9732aaae803186f51eab7",
+    "/Users/burbujamc/Developer/rea/Sonic Adventure DX/sonic.exe": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "/Users/burbujamc/Developer/rea/sadx-native/build/assets/player-scene-constants.bin": "4b9586c2ff38668c58b07e8539030e37f3d2372c1e5e5f22ac5f8a39b30a4829",
+    "/Users/burbujamc/Developer/rea/sadx-native/build/assets/player-position-constants.bin": "f7be1c27e17fce5d129d33681b2ac8e1f279559ae671a9486ede618daa7112a6",
+    "/private/tmp/sadx-scene-binding-core/sonic-constants.bin": "cac3a43b8a00509706505b79771f4f9c2ec6b500a925b2cb4820b611fffe34b7",
+    "/Users/burbujamc/Developer/rea/_reference/sadx/original-player-scene-position-comparison.cases.bin": "e3006f51ed725e1fa698ad9d0b2662287abc30cb9115bdaae5ba7b3ff134f2f2"
+  },
+  "limits": [
+    "Native composition tests do not establish original PSetPosition-plus-scene instruction equivalence beyond previously retained separate owner comparisons",
+    "Unicorn transcendental/flags and physical Intel behavior remain separate limits",
+    "Header ABI had concurrent authorized Sonic predicate extensions; private archive source-manifest predates its replacement Sonic object, so parent production freeze/gate must supply the final compiled-Sonic source identity",
+    "No renderer/effect-task/nonnull platform callbacks or stage initializer are fabricated",
+    "No complete game or updated-mod runtime/hardware claim"
+  ],
+  "status": "binding source and tests frozen; parent production integration pending"
+}

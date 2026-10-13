@@ -1,0 +1,35 @@
+{
+  "source_function": "0x40b170",
+  "ghidra_evidence_id": "ev_a1920a19f4726a61ba605de6bc26a4b7180d7c1dfb5a4564e44ddde8b5787434",
+  "source_order": [
+    8,
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "native_order": [
+    7,
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "index8_alias": 7,
+  "sources": {
+    "sadx-native/src/task.hpp": "b210cc6b7812d85484dcf04b6f96bc9800af3afe003071cda7380dd8e921512b",
+    "sadx-native/src/task.cpp": "d68b6026b0fe2400b3458eb015e1c5a2d2ee99b6ff0f12dd81815dc00db1fd2d",
+    "sadx-native/tests/task.cpp": "f45f8a0c1204b7672e946ebb933010634fc74e51b6247f2c6c694d582f4b8558"
+  },
+  "tests": "Standalone task dispatch tests pass, including same-frame list7-to-list0 append and stopped list7 failure",
+  "production_gate": "_reference/sadx/production-integration-20261012/task-order-gate.json",
+  "limits": [
+    "Source task order does not establish whole-game startup or scene execution."
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "directory": "ghidra-shadow-recovery",
+  "environment_file": "tools/ghidra-shadow-environment.json",
+  "snapshot_file": "sonic-ghidra-shadow-snapshot.json",
+  "functions": [
+    {
+      "name": "shadow-gate",
+      "procedure": "0x4f88a0"
+    },
+    {
+      "name": "registered-character",
+      "procedure": "0x441970"
+    },
+    {
+      "name": "current-character",
+      "procedure": "0x4144e0"
+    },
+    {
+      "name": "shadow-destroy",
+      "procedure": "0x4a0720"
+    },
+    {
+      "name": "shadow-display",
+      "procedure": "0x4a0760"
+    },
+    {
+      "name": "shadow-update",
+      "procedure": "0x4a2570"
+    },
+    {
+      "name": "shadow-release-resource",
+      "procedure": "0x4030d0"
+    },
+    {
+      "name": "shadow-render-resource",
+      "procedure": "0x4072f0"
+    }
+  ],
+  "xrefs": []
+}

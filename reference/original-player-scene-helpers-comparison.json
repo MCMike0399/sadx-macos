@@ -1,0 +1,107 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "library_sha256": "7472fa10f025d45b806906be05b08c2897fb3162d99c009350f276b647c8507d",
+  "compiler": "Clang 21.0.0 (clang-2100.3.34.2); ARM64 C++17 O2 source-native scene helpers; explicit Bochs P5/P6 FPATAN model",
+  "sources": {
+    "src/player_scene_position_helpers.cpp": "016b0cbcfb2c8901acca88f216c46bd2e8e82bb68b79473dcf099818b1e25e59",
+    "src/player_coordinates.cpp": "6b5ddd8c595824e28a9d4264b205c37b0163b7e70acbd24d39ee28b60dad038d",
+    "src/ninja_math.cpp": "3c9788806b2015a5d29d6a77a6440bc20bd5958fae903b5dc69c972b5f5204d0",
+    "src/x87_math.cpp": "632db745ec15eab0e8d5144e2fb63c20098eb4de3d64bd2b5828bf2be63e16a0",
+    "src/x87_transcendental.cpp": "2e55ad21b3493525254fd3efa2ad385e3c2bbbfde26b2d493b0fb941baef9ec9",
+    "src/crt_integer.cpp": "78db9e06735cdb71bf98cea067822db94e250c59a773a9cdd6c4405c068e6ca7",
+    "src/player_scene_position.hpp": "57778b4a53303d4899d0d8f3785fe4eb8e09fba2c29df0c1bdb88d6461b28911",
+    "src/player_coordinates.hpp": "a2ed86ef0661816404d1545ccbef92060270f4c2326a8b52969eb3aa8ccbc93a",
+    "src/ninja_math.hpp": "85789753683911b95fe60fe1d34b7c69be144d3ef7696b36de3f4522f26e0126",
+    "src/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
+    "src/x87_transcendental.hpp": "1f0e470674d09e88603e01ef3f053a89f5c660f74700167d31584cb99385e80c",
+    "src/crt_integer.hpp": "611bc11fbdd51852f9073af870ddc18e2151a993bc2ec7a2a97c28188a98e27e",
+    "tests/native_player_scene_helpers_probe.cpp": "abc21b98fb0c440240340371ff92547fd7322729c72e5a5d21704b71df619d0b"
+  },
+  "verifier_sha256": "1e2785ede7f1fca5ad1a53faf3fdd40b02dd8cb9f63324dcc11c85bc77a43608",
+  "case_sha256": "f9f3a28b61b4410891845cc21242d190c863d1f003ee965df0204d65765267d2",
+  "profiles": [
+    {
+      "cw": "0x7f",
+      "cases": 673,
+      "value_mismatches": 0,
+      "flag_mismatches": 504
+    },
+    {
+      "cw": "0x47f",
+      "cases": 673,
+      "value_mismatches": 0,
+      "flag_mismatches": 504
+    },
+    {
+      "cw": "0x87f",
+      "cases": 673,
+      "value_mismatches": 0,
+      "flag_mismatches": 504
+    },
+    {
+      "cw": "0xc7f",
+      "cases": 673,
+      "value_mismatches": 0,
+      "flag_mismatches": 504
+    },
+    {
+      "cw": "0x27f",
+      "cases": 673,
+      "value_mismatches": 0,
+      "flag_mismatches": 503
+    },
+    {
+      "cw": "0x67f",
+      "cases": 673,
+      "value_mismatches": 0,
+      "flag_mismatches": 503
+    },
+    {
+      "cw": "0xa7f",
+      "cases": 673,
+      "value_mismatches": 0,
+      "flag_mismatches": 503
+    },
+    {
+      "cw": "0xe7f",
+      "cases": 673,
+      "value_mismatches": 0,
+      "flag_mismatches": 503
+    },
+    {
+      "cw": "0x37f",
+      "cases": 673,
+      "value_mismatches": 0,
+      "flag_mismatches": 503
+    },
+    {
+      "cw": "0x77f",
+      "cases": 673,
+      "value_mismatches": 0,
+      "flag_mismatches": 503
+    },
+    {
+      "cw": "0xb7f",
+      "cases": 673,
+      "value_mismatches": 0,
+      "flag_mismatches": 503
+    },
+    {
+      "cw": "0xf7f",
+      "cases": 673,
+      "value_mismatches": 0,
+      "flag_mismatches": 503
+    }
+  ],
+  "mismatches": [],
+  "limits": [
+    "Actual43cb40/444f10/43ca40 instructions without overlays",
+    "Platform profiles have observed-null task+28 or observed-null row callback; nonnull callback execution remains separately unavailable",
+    "Caller-selected source parameter row, task/contact vectors, fixed matrix stack and masked CWs are synthetic state facts",
+    "FPATAN uses explicitly selected Bochs P5/P6 native model; Unicorn uses host-double and incomplete exception semantics",
+    "Unnormalized/raw nonfinite fixtures are retained without native value adjustments",
+    "Full449500/445d10 positioning is not established by these leaf checks"
+  ],
+  "values_cw_frames_match": true,
+  "strict_match": false
+}

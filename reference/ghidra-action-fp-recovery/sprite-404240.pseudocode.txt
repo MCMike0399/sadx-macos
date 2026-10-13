@@ -1,0 +1,16 @@
+
+void FUN_00404240(uint param_1)
+
+{
+  if ((param_1 & 1) == 0) {
+    FUN_0077ed00(3);
+    FUN_0077ed20(0);
+  }
+  if ((param_1 & 0x10) != 0) {
+    FUN_0077ed00(7);
+    FUN_0077ed20(0);
+  }
+  FUN_0077ff90();
+  return;
+}
+

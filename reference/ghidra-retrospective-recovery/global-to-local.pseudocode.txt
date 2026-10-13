@@ -1,0 +1,24 @@
+
+void FUN_0043edd0(undefined4 *param_1,int param_2,int param_3)
+
+{
+  int iVar1;
+  
+  iVar1 = param_2;
+  FUN_004b8e80(*param_1,param_1[1],param_1[2],&param_1,&param_2);
+  FUN_00781c80();
+  FUN_007875f0();
+  if (param_2 != 0) {
+    FUN_00784fb0();
+  }
+  if (param_1 != (undefined4 *)0x0) {
+    FUN_00784ee0();
+  }
+  if (param_3 != 0) {
+    FUN_00784e20();
+  }
+  FUN_00784d60(iVar1);
+  FUN_00785140();
+  return;
+}
+

@@ -1,0 +1,128 @@
+--- a/sadx-native/src/player_acceleration_ground.cpp
++++ b/sadx-native/src/player_acceleration_ground.cpp
+@@ -1,4 +1,5 @@
+ #include "player_acceleration_ground.hpp"
++#include "player_acceleration_friction.hpp"
+ 
+ #include <cstring>
+ #include <stdexcept>
+@@ -34,7 +35,6 @@
+ 
+     const auto load=[&](float value){return fp.from_float(value);};
+     const auto c=[&](std::uint32_t address){return constants.at(address);};
+-    const auto compare=[&](X87Value a,X87Value b){return fp.compare(a,b);};
+     const auto cm=[&](X87Value a,float b){return fp.compare_float_memory(a,b);};
+     const auto cf=[&](float a,float b){return cm(load(a),b);};
+     const auto greater=[](X87Comparison value){return value==X87Comparison::greater;};
+@@ -105,7 +105,7 @@
+     update(gravity.y,fp.add_float_memory(product(p.air_resist_y,player.motion.speed.y),gravity.y));
+     update(gravity.z,fp.add(product(p.air_resist_z,player.motion.speed.z),retained_z));
+ 
+-    float drive=0,extra_y=0,extra_z=0;
++    float drive=0,extra_y=0;
+     if(!active) {
+         if(less(cf(player.dotp,c(0x7e0138)))) {
+             const auto result=mutation(callees.passive_rotation,0x44c620,0x4491e0);if(!result)return result;
+@@ -176,97 +176,14 @@
+         world.source_field_34=magnitude;drive=magnitude;
+     }
+ 
+-    // Independent X friction/drive and Z friction use stored Y acceleration.
+-    const auto friction=[&](float coefficient){return mul(mul(load(coefficient),world.friction_scale),gravity.y);};
+-    auto sum=load(gravity.x);float threshold=0;
++    auto friction_mode=LongitudinalFriction::apply;
+     if(less(cf(player.dotp,c(0x7e0138))) && less(cf(player.motion.speed.x,p.jog_speed)) &&
+        less(cm(load(p.jog_speed).negated(),player.motion.speed.x)) && !active) {
+-        gravity.x=stored_product(gravity.x,c(0x7dcb34));gravity.z=stored_product(gravity.z,c(0x7dcb34));
+-    } else {
+-        if(equal(cf(player.motion.speed.x,zero))) {
+-            threshold=fp.to_float(friction(p.lim_frict));
+-            update(gravity.x,fp.add_float_memory(load(gravity.x),drive));
+-            if(!active) {
+-                const bool contained=less(cf(gravity.x,threshold)) && less(cm(load(threshold).negated(),gravity.x));
+-                const bool small=less(cf(gravity.x,c(0x7e014c))) && greater(cf(gravity.x,c(0x7e0148)));
+-                if(contained || small)gravity.x=0;
+-            }
+-        } else if(less(cf(drive,zero))) {
+-            if((player.attributes & 4U)!=0) {
+-                bool clamped=false;
+-                if(less(cf(gravity.y,zero))) {
+-                    const auto wide=friction(p.grd_frict);threshold=fp.to_float(wide);
+-                    if(greater(cm(wide,zero)) && greater(cm(load(drive).negated(),threshold))) {
+-                        sum=fp.add_float_memory(load(gravity.x),drive);
+-                        const auto negative=fp.to_float(load(threshold).negated());
+-                        if(less(cm(sum,zero)) && less(cm(sum,negative))) {
+-                            world.source_field_38=fp.to_float(fp.subtract_float_memory(sum,threshold));sum=load(negative);
+-                        } else if(greater(cm(sum,zero)) && greater(cm(sum,threshold))) {
+-                            world.source_field_38=fp.to_float(fp.subtract_float_memory(sum,threshold));sum=load(threshold);
+-                        }
+-                        update(gravity.x,sum);clamped=true;
+-                    }
+-                }
+-                if(!clamped) {
+-                    if(!active && !parity(cf(player.motion.speed.x,p.jog_speed),0x41) &&
+-                       less(cf(gravity.x,c(0x7e014c))) && greater(cf(gravity.x,c(0x7e0148))))gravity.x=0;
+-                    else update(gravity.x,fp.add_float_memory(load(gravity.x),drive));
+-                }
+-            } else if(greater(cf(player.motion.speed.x,zero))) {
+-                sum=fp.add_float_memory(load(gravity.x),drive);
+-                if(less(cm(mul(sum,drive),zero)))sum=load(zero);update(gravity.x,sum);
+-            } else if(!active && !parity(cf(player.motion.speed.x,p.jog_speed),0x41) &&
+-                      less(cf(gravity.x,c(0x7e014c))) && greater(cf(gravity.x,c(0x7e0148))))gravity.x=0;
+-            else {
+-                sum=fp.add_float_memory(friction(p.lim_frict),drive);
+-                if(!less(cm(sum,zero)) && cm(sum,zero)!=X87Comparison::unordered)sum=load(zero);
+-                update(gravity.x,sum);
+-            }
+-        } else {
+-            threshold=fp.to_float(friction(p.lim_frict));
+-            if(less(cf(player.motion.speed.x,zero)) && less(cf(gravity.x,c(0x7e014c))) && greater(cf(gravity.x,c(0x7e0148)))) {
+-                sum=fp.add_float_memory(load(gravity.x),drive);gravity.x=fp.to_float(sum);
+-                if(less(cm(mul(sum,drive),zero)))gravity.x=0;
+-            } else if(greater(cf(threshold,zero)) && less(cf(threshold,drive))) {
+-                sum=fp.add_float_memory(load(gravity.x),drive);
+-                if(greater(cm(sum,threshold))) {
+-                    world.source_field_38=fp.to_float(fp.subtract_float_memory(sum,threshold));sum=load(threshold);
+-                }
+-                update(gravity.x,sum);
+-            } else if(!active && !parity(cf(player.motion.speed.x,p.jog_speed),0x41) &&
+-                      less(cf(gravity.x,c(0x7e014c))) && greater(cf(gravity.x,c(0x7e0148))))gravity.x=0;
+-            else update(gravity.x,fp.add_float_memory(load(gravity.x),drive));
+-        }
+-
++        gravity.x=stored_product(gravity.x,c(0x7dcb34));
++        gravity.z=stored_product(gravity.z,c(0x7dcb34));
++        friction_mode=LongitudinalFriction::skip;
+     }
+-        if(equal(cf(player.motion.speed.z,zero))) {
+-            const auto wide=friction(p.lim_frict);
+-            if(less(compare(load(gravity.z),wide)) && less(cm(wide.negated(),gravity.z)))gravity.z=0;
+-        } else {
+-            threshold=less(cf(gravity.y,zero)) ? fp.to_float(friction(p.grd_frict_z)) : 0;
+-            auto z=load(gravity.z);
+-            if((player.attributes & 4U)!=0) {
+-                if(greater(cm(z,zero))) {
+-                    z=fp.subtract_float_memory(z,threshold);if(less(cm(z,zero)))z=load(zero);
+-                } else if(less(cm(z,zero))) {
+-                    z=fp.add_float_memory(z,threshold);if(greater(cm(z,zero)))z=load(zero);
+-                }
+-                update(gravity.z,z);
+-            } else {
+-                if(greater(cm(z,zero)))extra_z=fp.to_float(load(threshold).negated());
+-                else if(less(cf(gravity.z,zero)))extra_z=threshold;
+-                const auto summed=fp.add_float_memory(load(gravity.z),extra_z);
+-                if(!equal(cf(gravity.z,zero)) && !equal(cf(extra_z,zero)) &&
+-                   less(cm(mul(summed,gravity.z),zero)))update(gravity.z,load(zero));
+-                else update(gravity.z,summed);
+-            }
+-        }
+-    // FADD Y precedes MOV X; FSTP32 Y follows it. An arithmetic failure here
+-    // must precede X's store, while a final binary32-store failure retains X.
+-    const auto final_y=fp.add_float_memory(load(gravity.y),extra_y);
+-    player.motion.acceleration.x=gravity.x;
+-    gravity.y=fp.to_float(final_y);
+-    player.motion.acceleration.y=gravity.y;player.motion.acceleration.z=gravity.z;
++    finish_player_ground_friction(gravity,drive,extra_y,active,world,player,p,constants,friction_mode,fp);
+     return {PlayerAccelerationFailure::none,0,0,gravity};
+ }
+ } // namespace sadx

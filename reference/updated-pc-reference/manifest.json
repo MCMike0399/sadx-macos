@@ -1,0 +1,417 @@
+{
+  "format_version": 1,
+  "profile_kind": "intended-updated-windows-pc-reference",
+  "prepared_on": "2026-10-11",
+  "state": "prepared-not-executed",
+  "execution_observed": false,
+  "modules_loaded_observed": false,
+  "community_acceptance_verified": false,
+  "reference_definition": "Supplied sonic.exe plus loader 676, external Input 2.6.1 and Speedrun 2.0 with selected 63FPS policy",
+  "base": {
+    "supplied_path": "/Users/burbujamc/Developer/rea/Sonic Adventure DX",
+    "sonic_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "sonic_size": 55549952,
+    "original_chrmodels_sha256": "76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5",
+    "original_loader_replaced_only_in_reference": true
+  },
+  "launch": {
+    "cwd": "game",
+    "executable": "sonic.exe",
+    "arguments": []
+  },
+  "artifacts": [
+    {
+      "component": "loader",
+      "release_id": 306700370,
+      "tag": "676",
+      "published_at": "2026-04-08T17:19:56Z",
+      "source_revision": "eb4cdcca9637d611a98b910fcfed6ce18580451c",
+      "asset_id": 391726703,
+      "asset_updated_at": "2026-04-08T17:19:53Z",
+      "url": "https://github.com/X-Hax/sadx-mod-loader/releases/download/676/SADXModLoader.7z",
+      "archive": "archives/SADXModLoader.7z",
+      "archive_size": 3166663,
+      "sha256": "59d2178af2403832c30c6845acc3783054e840b6ac490c9777b342aac7d23d88",
+      "upstream_digest": "sha256:59d2178af2403832c30c6845acc3783054e840b6ac490c9777b342aac7d23d88",
+      "release_metadata_sha256": "5c6cc27994a835bca25a305b144b9cbea4b497681fbcc8fa033e94eb225385cb",
+      "unpacked_inventory_sha256": "e439285d1ddf8e0e91ed3fc04824253299653f3713129214717a04b0dc35de13"
+    },
+    {
+      "component": "input",
+      "release_id": 76951679,
+      "tag": "v2.6.1",
+      "published_at": "2022-09-13T01:36:51Z",
+      "source_revision": "68e2a91bec4a55967674c1420ecd9abf89bcd0ce",
+      "asset_id": 77673029,
+      "asset_updated_at": "2022-09-13T01:36:10Z",
+      "url": "https://github.com/michael-fadely/sadx-input-mod/releases/download/v2.6.1/sadx-input-mod.7z",
+      "archive": "archives/sadx-input-mod.7z",
+      "archive_size": 979853,
+      "sha256": "1dc58bf3cbd4384275a598c10aa2fe469ac37417c220c885eb76c952f6346156",
+      "upstream_digest": null,
+      "release_metadata_sha256": "fe816759220014a8327db3683e836ac6e864f383f95ac71243a4f1ef3b4ee6ed",
+      "unpacked_inventory_sha256": "fbd1d5c17eb6f40e8e7edead378a90f8b80944763bc633c6fcce0ed3e7d6ebd7"
+    },
+    {
+      "component": "speedrun",
+      "release_id": 187935531,
+      "tag": "2.0",
+      "published_at": "2024-11-28T01:47:47Z",
+      "source_revision": "1833a11fccb93b96c15eb044d4c8b628039e6f8a",
+      "asset_id": 231034776,
+      "asset_updated_at": "2025-02-20T18:16:36Z",
+      "url": "https://github.com/skewbmaster/sadx-speedrun-mod/releases/download/2.0/sadx-speedrun-mod.zip",
+      "archive": "archives/sadx-speedrun-mod.zip",
+      "archive_size": 34191,
+      "sha256": "aa9339380db004c4857c154c39c4d259b89c0a2fad85281bb3bce8f2eaaa6958",
+      "upstream_digest": null,
+      "release_metadata_sha256": "5ba460dcc15617d11834d27c99886abff62dba8409ab67bd499b3e7695bef402",
+      "unpacked_inventory_sha256": "e501ebb4d6f370d9309deb0701ff37bf9d301a8b5becf79f838c238a23f77aa3"
+    }
+  ],
+  "loader_profile": {
+    "SettingsVersion": 3,
+    "Graphics": {
+      "SelectedScreen": 0,
+      "HorizontalResolution": 640,
+      "VerticalResolution": 480,
+      "Enable43ResolutionRatio": false,
+      "EnableVsync": false,
+      "Antialiasing": 0,
+      "Anisotropic": 0,
+      "EnablePauseOnInactive": true,
+      "CustomWindowWidth": 640,
+      "CustomWindowHeight": 480,
+      "EnableKeepResolutionRatio": false,
+      "EnableResizableWindow": false,
+      "FillModeBackground": 2,
+      "FillModeFMV": 1,
+      "RenderBackend": 0,
+      "EnableUIScaling": false,
+      "EnableForcedMipmapping": false,
+      "EnableForcedTextureFilter": false,
+      "ScreenMode": 0,
+      "ShowMouseInFullscreen": false,
+      "DisableBorderImage": true
+    },
+    "Controller": {
+      "EnabledInputMod": false
+    },
+    "Sound": {
+      "EnableBassMusic": false,
+      "EnableBassSFX": false,
+      "SEVolume": 100
+    },
+    "EnabledGamePatches": [],
+    "Patches": {
+      "HRTFSound": false,
+      "KeepCamSettings": false,
+      "FixVertexColorRendering": false,
+      "MaterialColorFix": false,
+      "NodeLimit": false,
+      "FOVFix": false,
+      "SkyChaseResolutionFix": false,
+      "Chaos2CrashFix": false,
+      "ChunkSpecularFix": false,
+      "E102NGonFix": false,
+      "ChaoPanelFix": false,
+      "PixelOffSetFix": false,
+      "LightFix": false,
+      "KillGBIX": false,
+      "DisableCDCheck": false,
+      "ExtendedSaveSupport": false,
+      "CrashGuard": false,
+      "XInputFix": false
+    },
+    "DebugSettings": {
+      "EnableDebugConsole": false,
+      "EnableDebugScreen": false,
+      "EnableDebugFile": false,
+      "EnableDebugCrashLog": false
+    },
+    "TestSpawn": {
+      "GameTextLanguage": 1,
+      "GameVoiceLanguage": 1
+    },
+    "EnabledMods": [
+      "sadx-input-mod",
+      "sadx-speedrun-mod"
+    ]
+  },
+  "input_config": {
+    "Config": {
+      "Debug": "false",
+      "DisableMouse": "true",
+      "KeyboardPlayer": 0
+    },
+    "Keyboard": {
+      "-lefty": 38,
+      "+lefty": 40,
+      "-leftx": 37,
+      "+leftx": 39,
+      "-righty": 73,
+      "+righty": 77,
+      "-rightx": 74,
+      "+rightx": 76,
+      "a": 88,
+      "b": 90,
+      "x": 65,
+      "y": 83,
+      "start": 13,
+      "back": 86,
+      "lefttrigger": 81,
+      "righttrigger": 87,
+      "leftshoulder": 67,
+      "rightshoulder": 66,
+      "leftstick": 69,
+      "rightstick": 160,
+      "dpup": 104,
+      "dpdown": 98,
+      "dpleft": 100,
+      "dpright": 102
+    },
+    "Controller 1": {
+      "DeadzoneL": 7849,
+      "DeadzoneR": 8689,
+      "RadialL": "true",
+      "RadialR": "false",
+      "TriggerThreshold": 30,
+      "RumbleFactor": 1.0,
+      "MegaRumble": "false",
+      "RumbleMinTime": 0
+    },
+    "Controller 2": {
+      "DeadzoneL": 7849,
+      "DeadzoneR": 8689,
+      "RadialL": "true",
+      "RadialR": "false",
+      "TriggerThreshold": 30,
+      "RumbleFactor": 1.0,
+      "MegaRumble": "false",
+      "RumbleMinTime": 0
+    },
+    "Controller 3": {
+      "DeadzoneL": 7849,
+      "DeadzoneR": 8689,
+      "RadialL": "true",
+      "RadialR": "false",
+      "TriggerThreshold": 30,
+      "RumbleFactor": 1.0,
+      "MegaRumble": "false",
+      "RumbleMinTime": 0
+    },
+    "Controller 4": {
+      "DeadzoneL": 7849,
+      "DeadzoneR": 8689,
+      "RadialL": "true",
+      "RadialR": "false",
+      "TriggerThreshold": 30,
+      "RumbleFactor": 1.0,
+      "MegaRumble": "false",
+      "RumbleMinTime": 0
+    },
+    "Controller 5": {
+      "DeadzoneL": 7849,
+      "DeadzoneR": 8689,
+      "RadialL": "true",
+      "RadialR": "false",
+      "TriggerThreshold": 30,
+      "RumbleFactor": 1.0,
+      "MegaRumble": "false",
+      "RumbleMinTime": 0
+    },
+    "Controller 6": {
+      "DeadzoneL": 7849,
+      "DeadzoneR": 8689,
+      "RadialL": "true",
+      "RadialR": "false",
+      "TriggerThreshold": 30,
+      "RumbleFactor": 1.0,
+      "MegaRumble": "false",
+      "RumbleMinTime": 0
+    },
+    "Controller 7": {
+      "DeadzoneL": 7849,
+      "DeadzoneR": 8689,
+      "RadialL": "true",
+      "RadialR": "false",
+      "TriggerThreshold": 30,
+      "RumbleFactor": 1.0,
+      "MegaRumble": "false",
+      "RumbleMinTime": 0
+    },
+    "Controller 8": {
+      "DeadzoneL": 7849,
+      "DeadzoneR": 8689,
+      "RadialL": "true",
+      "RadialR": "false",
+      "TriggerThreshold": 30,
+      "RumbleFactor": 1.0,
+      "MegaRumble": "false",
+      "RumbleMinTime": 0
+    }
+  },
+  "speedrun_config": {
+    "QuickSaveSettings": {
+      "Enabled": "false",
+      "ForceLoad": "false",
+      "PremadeFile": "Custom",
+      "SaveFilePath": "",
+      "SaveNum": 99
+    },
+    "OtherSettings": {
+      "CCEF": "true",
+      "FreeCam": "false",
+      "Skipma": "true",
+      "FrameLimit": "63FPS"
+    }
+  },
+  "raw_configs": [
+    {
+      "path": "game/sonicDX.ini",
+      "sha256": "a630a4406dd461e6965388591cd30428e45bfac23684ff8f3268fac2d9d2ee81"
+    },
+    {
+      "path": "game/mods/.modloader/profiles/Profiles.json",
+      "sha256": "fb54510586d9f467ab2d530115150e2e4b89ad82838dabca116c11312493066e"
+    },
+    {
+      "path": "game/mods/.modloader/profiles/updated-speedrun.json",
+      "sha256": "3402bf11fa59c52990bf670689794725b350f5089e7ed1b97ac354bda171572d"
+    },
+    {
+      "path": "game/mods/sadx-input-mod/config.ini",
+      "sha256": "f5ac427b9fd270bebc2383afa24948849d17bd2a700f330c2adf4f11ed262cbf"
+    },
+    {
+      "path": "game/mods/sadx-speedrun-mod/config.ini",
+      "sha256": "184e1158b2bbfc1be1c2c2a4ab67bae07f83d428efe9fbd1469f695fd5eaffa7"
+    }
+  ],
+  "enabled_mod_order": [
+    "sadx-input-mod",
+    "sadx-speedrun-mod"
+  ],
+  "owners": {
+    "input": "external Input Mod 2.6.1; built-in loader input disabled",
+    "camera_fix": "Speedrun Mod 2.0; loader KeepCamSettings disabled",
+    "egg_hornet_fix": "Speedrun Mod 2.0 unconditional",
+    "skipma": "Speedrun Mod 2.0 enabled",
+    "frame_limit": "Speedrun Mod 2.0 FrameLimit=63FPS; no standalone limiter"
+  },
+  "absent_executable_code_files": [
+    "mods/Codes.dat",
+    "mods/Patches.dat",
+    "mods/.modloader/Codes.dat",
+    "mods/.modloader/Patches.dat"
+  ],
+  "additional_mods_enabled": [],
+  "game_inventory_sha256": "92416569fd99d72feb907d7413101dd0433b2d7bd7fd3a8f6f3f4f30bd580a24",
+  "source_inventory": [
+    {
+      "path": "sources/input-dreampad.cpp",
+      "size": 9349,
+      "sha256": "8df4c9adafee7d1fa774f0ec1764e40d708ab0675711b98820ff0ef1c2d175af"
+    },
+    {
+      "path": "sources/input-dreampad.h",
+      "size": 4692,
+      "sha256": "8521658c2886476318763093dac60fcb95910c41a4a3eece7227d21f9738ff4c"
+    },
+    {
+      "path": "sources/input-keyboard.cpp",
+      "size": 15239,
+      "sha256": "232339dd102794cbd9321f961d1fee335e848bcce56feba516baa3e5ac99b053"
+    },
+    {
+      "path": "sources/input-keyboard.h",
+      "size": 1430,
+      "sha256": "10038170b2c77f9869a8ad2020c0761e303087f980b034b33387b13cfada6e15"
+    },
+    {
+      "path": "sources/input-mod.cpp",
+      "size": 10472,
+      "sha256": "1247bcdd2d1b0425a0f1988c149ca56b01f09d9179547ec204253b6a38cf0140"
+    },
+    {
+      "path": "sources/loader/Events.cpp",
+      "size": 1684,
+      "sha256": "42ac764bb60930b900165110240875bf59ba7533d5311d54c5717e8cbfa18ab0"
+    },
+    {
+      "path": "sources/loader/InterpolationFixes.cpp",
+      "size": 4045,
+      "sha256": "afb7139711dc78d8f070d833fab5dd4c5b37bba02f790c11d654910c2033e2b3"
+    },
+    {
+      "path": "sources/loader/TextureReplacement.cpp",
+      "size": 34064,
+      "sha256": "8339e6e9de157596706aac86b5823bfb02be1e68a72ff32ba9279e637c0f7db0"
+    },
+    {
+      "path": "sources/loader/backend.cpp",
+      "size": 3185,
+      "sha256": "397b3b3222c569d5f315218634454196033c2449db8b0898fe245ff0304efc15"
+    },
+    {
+      "path": "sources/loader/config.cpp",
+      "size": 9806,
+      "sha256": "cdd2a23446c979117e75589d06db4f210a538e820c6fb91edb21f6b1e276e8e1"
+    },
+    {
+      "path": "sources/loader/direct3d.cpp",
+      "size": 17965,
+      "sha256": "758a604e634dfb077e0550237e6e79259256bbd73715db0721256b2cb415db72"
+    },
+    {
+      "path": "sources/loader/dllmain.cpp",
+      "size": 51032,
+      "sha256": "00e17a72b9e720b6ee042b35d3642096b17a9395318755b7e4db5bb252915605"
+    },
+    {
+      "path": "sources/loader/hudscale.cpp",
+      "size": 52905,
+      "sha256": "ab103dd8666af8ab4c0e54a06e923184ffee8b7f2a4121339fe18222571bce7d"
+    },
+    {
+      "path": "sources/loader/testspawn.cpp",
+      "size": 47111,
+      "sha256": "a89647383148db1ad3eb5fc5af47506fc17acf04ac19a04fe38fa3ae5b102bf3"
+    },
+    {
+      "path": "sources/loader/version.h",
+      "size": 490,
+      "sha256": "6f5bc62d2227291a2005102059c5c4b518c5d3623c1fa717c0d76a5e4573731e"
+    },
+    {
+      "path": "sources/loader/window.cpp",
+      "size": 23686,
+      "sha256": "a21609b66cdcc57ee5e2fe276810821ad63c5eb1678dbb4f992f7af58fc8b686"
+    },
+    {
+      "path": "sources/skipma.cpp",
+      "size": 1059,
+      "sha256": "b73d96feb5f5733cfa0085979641d06aed4acdc8cfbf18cd5325c201371918f2"
+    },
+    {
+      "path": "sources/speedrun-frame.cpp",
+      "size": 4632,
+      "sha256": "d60451c7ec817daea7d73f1a9cd99db0abb6328e6580928706ff480b49afb567"
+    },
+    {
+      "path": "sources/speedrun-mod.cpp",
+      "size": 2862,
+      "sha256": "fa1f423b717472d310ffdd8385a1a0c05c586fe51a4d993a8915fab6b1cd1f5a"
+    }
+  ],
+  "runtime_verification_required": [
+    "native Windows process and thread identity",
+    "actual loaded module paths/digests",
+    "effective profile and mod Init completion",
+    "loaded hook bytes and destinations",
+    "x87 control/status, MXCSR and rounding state",
+    "simulation tick/frame multiplier/input/timing traces",
+    "keyboard/controller physical transport behavior",
+    "render/audio/device configuration and category fixture saves"
+  ]
+}

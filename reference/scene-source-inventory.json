@@ -1,0 +1,94 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "ranges": [
+    {
+      "name": "contact_initializer",
+      "address": "0x43c7d0",
+      "end_exclusive": "0x43ca3c",
+      "byte_size": 620,
+      "sha256": "3dd2aad941965bb41a65d6c1d5f438de6c80db88cfbf316013e3d117ecc18019",
+      "evidence_id": "ev_70ef324690a7ea034e40ed6d38581ba34ea0af1229b7f1a59205ac1336b025fa"
+    },
+    {
+      "name": "land_candidates",
+      "address": "0x43acd0",
+      "end_exclusive": "0x43aee8",
+      "byte_size": 536,
+      "sha256": "74eefc4e38ba9ab8bf624ecaea0751017d1ef8eec28031295801b41f9ab3acb9",
+      "evidence_id": "ev_4da2a88f176402cad7d619c369b06b89a056bdab858f303db4eaa1192011ef73"
+    },
+    {
+      "name": "mesh_bounds_broadphase",
+      "address": "0x450c10",
+      "end_exclusive": "0x451026",
+      "byte_size": 1046,
+      "sha256": "41bad9664754476e14cb0790fae22d075df0bf781240c514500f0fe7145a9781",
+      "evidence_id": "ev_82be9e7ecf4507c76d927ed4406d39a19e9fef7ff329258e16ab47263f8a0b8c"
+    },
+    {
+      "name": "registration",
+      "address": "0x43aef0",
+      "end_exclusive": "0x43b2e0",
+      "byte_size": 1008,
+      "sha256": "c54b89ae6b0041e9a2d896b29fb2f22ae1f4d5509b7d3db21b6a8b01179eed25",
+      "evidence_id": null
+    },
+    {
+      "name": "binding_prefix",
+      "address": "0x43b700",
+      "end_exclusive": "0x43b757",
+      "byte_size": 87,
+      "sha256": "bf4d75ed08aee77bc4cd7bc616efd1d9b6172fc1d4518b7d931f3a7a6393b687",
+      "evidence_id": null
+    },
+    {
+      "name": "ordinary_position_scene",
+      "address": "0x449500",
+      "end_exclusive": "0x44a7fe",
+      "byte_size": 4862,
+      "sha256": "44f0139e1c474a1feeba427b1cf6c856da8e4c3d9a429ea059fccc5f75fce7f8",
+      "evidence_id": "ev_39a7bf35bd9536051bf591fcb63b73d285e2d4b90b7c614ecef5bb8c4993dfc2"
+    },
+    {
+      "name": "alternate_position_scene",
+      "address": "0x445d10",
+      "end_exclusive": "0x446905",
+      "byte_size": 3061,
+      "sha256": "31acf615c036c3589087a1ef2cec3bc5d14c73f2af80b8b74de3cd7096f3ff84",
+      "evidence_id": "ev_4020990d0fd51d11694877651f4e7c3dfad90e04ddcfa52c7e135efe4c4169b5"
+    }
+  ],
+  "constants": [
+    {
+      "address": "0x7df1c8",
+      "bytes": "0000f041"
+    },
+    {
+      "address": "0x7e0600",
+      "bytes": "6666a63f"
+    },
+    {
+      "address": "0x7e0028",
+      "bytes": "00002042"
+    }
+  ],
+  "literal_messages": [
+    {
+      "address": "0x7e0018",
+      "raw_bytes": "82a082d382ea82ad2097dc300a",
+      "encoding": "cp932",
+      "decoded": "\u3042\u3075\u308c\u304f \u6d990\n"
+    },
+    {
+      "address": "0x7e0030",
+      "raw_bytes": "82a082d382ea82ad2097dc310a",
+      "encoding": "cp932",
+      "decoded": "\u3042\u3075\u308c\u304f \u6d991\n"
+    }
+  ],
+  "limitations": [
+    "Function span fingerprints are derived from retained instruction/byte disassembly; provider function body ranges are not exposed",
+    "449500/445d10 are investigation roots and remain unimplemented; closed callees do not complete those source bodies",
+    "43b700 comparison stops43b757 before43a260/mesh/Win32heap initialization"
+  ]
+}

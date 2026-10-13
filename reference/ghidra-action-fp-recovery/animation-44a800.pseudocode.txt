@@ -1,0 +1,307 @@
+
+void FUN_0044a800(short *param_1)
+
+{
+  ushort uVar1;
+  short sVar2;
+  float fVar3;
+  float fVar4;
+  undefined4 *puVar5;
+  undefined4 uVar6;
+  int *piVar7;
+  int iVar8;
+  ushort uVar9;
+  int iVar10;
+  
+  uVar1 = param_1[3];
+  uVar9 = param_1[2];
+  param_1[4] = uVar1;
+  param_1[7] = 0;
+  if ((((uVar1 == uVar9) || (sVar2 = *param_1, sVar2 == 2)) || (sVar2 == 0)) || (sVar2 == 0xe)) {
+    param_1[6] = param_1[6] + 1;
+  }
+  else {
+    *param_1 = 1;
+    param_1[6] = 0;
+  }
+  switch(*param_1) {
+  case 0:
+    param_1[3] = uVar9;
+    *param_1 = 1;
+    param_1[10] = 0;
+    param_1[0xb] = 0;
+    param_1[8] = 0;
+    param_1[9] = 0;
+    puVar5 = (undefined4 *)FUN_0040b220(8);
+    *(undefined4 **)(param_1 + 0x14) = puVar5;
+    *puVar5 = **(undefined4 **)((uint)uVar9 * 0x10 + *(int *)(param_1 + 0x10));
+    uVar6 = FUN_0040b220(0xc);
+    *(undefined4 *)(*(int *)(param_1 + 0x14) + 4) = uVar6;
+    *(undefined4 *)(*(int *)(*(int *)(param_1 + 0x14) + 4) + 4) = 2;
+    *(undefined2 *)(*(int *)(*(int *)(param_1 + 0x14) + 4) + 8) = 3;
+    *(undefined2 *)(*(int *)(*(int *)(param_1 + 0x14) + 4) + 10) = 2;
+    uVar6 = FUN_0040b2d0(0x6f,0x18);
+    **(undefined4 **)(*(int *)(param_1 + 0x14) + 4) = uVar6;
+    return;
+  case 1:
+    iVar8 = *(int *)(param_1 + 0x10);
+    iVar10 = (uint)uVar9 * 0x10;
+    if ((*(int *)(iVar8 + 8 + iVar10) == 0x3f800000) ||
+       (**(int **)(iVar8 + iVar10) != **(int **)((uint)uVar1 * 0x10 + iVar8))) {
+      param_1[8] = 0;
+      param_1[9] = 0x3f80;
+    }
+    else {
+      FUN_00446950();
+      param_1[8] = 0;
+      param_1[9] = 0;
+    }
+    param_1[3] = uVar9;
+    *param_1 = 2;
+    param_1[5] = (ushort)*(byte *)(iVar10 + 6 + *(int *)(param_1 + 0x10));
+  case 2:
+    iVar8 = *(int *)(param_1 + 0x10) + (uint)uVar9 * 0x10;
+    fVar3 = *(float *)(iVar8 + 8) + *(float *)(param_1 + 8);
+    *(float *)(param_1 + 8) = fVar3;
+    if (1.0 <= fVar3) {
+      *param_1 = (short)*(char *)(iVar8 + 5);
+LAB_0044acbc:
+      FUN_0043f9f0();
+      FUN_0043f230();
+      return;
+    }
+    break;
+  case 3:
+    piVar7 = (int *)((uint)uVar9 * 0x10 + *(int *)(param_1 + 0x10));
+    iVar8 = *piVar7;
+    fVar3 = (float)piVar7[3] + *(float *)(param_1 + 8);
+    *(float *)(param_1 + 8) = fVar3;
+    fVar4 = (float)*(int *)(*(int *)(iVar8 + 4) + 4);
+    if (*(int *)(*(int *)(iVar8 + 4) + 4) < 0) {
+      fVar4 = fVar4 + 4.2949673e+09;
+    }
+    if (fVar4 < fVar3 != (fVar4 == fVar3)) {
+      do {
+        *(float *)(param_1 + 8) = *(float *)(param_1 + 8) - fVar4;
+        fVar4 = (float)*(int *)(*(int *)(iVar8 + 4) + 4);
+        if (*(int *)(*(int *)(iVar8 + 4) + 4) < 0) {
+          fVar4 = fVar4 + 4.2949673e+09;
+        }
+      } while (fVar4 < *(float *)(param_1 + 8) != (fVar4 == *(float *)(param_1 + 8)));
+    }
+    if (*(float *)(param_1 + 8) < 0.0) {
+      do {
+        fVar3 = (float)*(int *)(*(int *)(iVar8 + 4) + 4);
+        if (*(int *)(*(int *)(iVar8 + 4) + 4) < 0) {
+          fVar3 = fVar3 + 4.2949673e+09;
+        }
+        *(float *)(param_1 + 8) = fVar3 + *(float *)(param_1 + 8);
+      } while (*(float *)(param_1 + 8) < 0.0);
+      return;
+    }
+    break;
+  case 4:
+    iVar8 = *(int *)(*(int *)(param_1 + 0x10) + (uint)uVar9 * 0x10);
+    fVar3 = *(float *)(*(int *)(param_1 + 0x10) + (uint)uVar9 * 0x10 + 0xc) +
+            *(float *)(param_1 + 8);
+    *(float *)(param_1 + 8) = fVar3;
+    iVar8 = *(int *)(iVar8 + 4);
+    iVar10 = *(int *)(iVar8 + 4);
+    iVar8 = *(int *)(iVar8 + 4);
+    goto LAB_0044ab71;
+  case 5:
+    piVar7 = (int *)(*(int *)(param_1 + 0x10) + (uint)uVar9 * 0x10);
+    iVar8 = *piVar7;
+    fVar3 = (float)piVar7[3] + *(float *)(param_1 + 8);
+    *(float *)(param_1 + 8) = fVar3;
+    iVar8 = *(int *)(iVar8 + 4);
+    fVar4 = (float)*(int *)(iVar8 + 4);
+    if (*(int *)(iVar8 + 4) < 0) {
+      fVar4 = fVar4 + 4.2949673e+09;
+    }
+    fVar4 = fVar4 - 1.0;
+    if (fVar4 < fVar3 != (fVar4 == fVar3)) {
+      *(float *)(param_1 + 8) = fVar4;
+      param_1[7] = 1;
+      return;
+    }
+    break;
+  case 6:
+    fVar3 = *(float *)(param_1 + 8) -
+            *(float *)((uint)uVar9 * 0x10 + 0xc + *(int *)(param_1 + 0x10));
+    *(float *)(param_1 + 8) = fVar3;
+    if (fVar3 < 0.0) {
+      FUN_00446910();
+      return;
+    }
+    break;
+  case 7:
+    fVar3 = *(float *)(param_1 + 8) -
+            *(float *)((uint)uVar9 * 0x10 + 0xc + *(int *)(param_1 + 0x10));
+    *(float *)(param_1 + 8) = fVar3;
+    if (fVar3 < 0.0) {
+      param_1[8] = 0;
+      param_1[9] = 0;
+      param_1[7] = 1;
+      return;
+    }
+    break;
+  case 8:
+    piVar7 = (int *)((uint)uVar9 * 0x10 + *(int *)(param_1 + 0x10));
+    iVar8 = *piVar7;
+    fVar3 = (float)piVar7[3] + *(float *)(param_1 + 8);
+    *(float *)(param_1 + 8) = fVar3;
+    iVar8 = *(int *)(*(int *)(iVar8 + 4) + 4);
+    fVar4 = (float)iVar8;
+    if (iVar8 < 0) {
+      fVar4 = fVar4 + 4.2949673e+09;
+    }
+    if (fVar4 - 1.0 < fVar3 == (fVar4 - 1.0 == fVar3)) {
+      return;
+    }
+    param_1[6] = 0;
+    if ((piVar7[2] == 0x3f800000) ||
+       (uVar1 = param_1[5],
+       *(int *)*piVar7 != **(int **)((uint)uVar1 * 0x10 + *(int *)(param_1 + 0x10)))) {
+      param_1[8] = 0;
+      param_1[9] = 0x3f80;
+    }
+    else {
+      param_1[2] = uVar1 & 0xff;
+      FUN_00446950();
+      param_1[8] = 0;
+      param_1[9] = 0;
+      uVar9 = uVar1;
+    }
+    iVar8 = *(int *)(param_1 + 0x10) + (uint)uVar9 * 0x10;
+    param_1[3] = uVar9;
+    param_1[5] = (ushort)*(byte *)(iVar8 + 6);
+    *param_1 = 2;
+    fVar3 = *(float *)(iVar8 + 8) + *(float *)(param_1 + 8);
+    *(float *)(param_1 + 8) = fVar3;
+    if (fVar3 < 1.0) {
+      return;
+    }
+    *param_1 = (short)*(char *)(iVar8 + 5);
+    goto LAB_0044acbc;
+  case 9:
+    piVar7 = (int *)((uint)uVar9 * 0x10 + *(int *)(param_1 + 0x10));
+    iVar8 = *piVar7;
+    fVar3 = **(float **)(param_1 + 0xc) * (float)piVar7[3] + *(float *)(param_1 + 8);
+    *(float *)(param_1 + 8) = fVar3;
+    fVar4 = (float)*(int *)(*(int *)(iVar8 + 4) + 4);
+    if (*(int *)(*(int *)(iVar8 + 4) + 4) < 0) {
+      fVar4 = fVar4 + 4.2949673e+09;
+    }
+    if (fVar4 < fVar3 != (fVar4 == fVar3)) {
+      do {
+        *(float *)(param_1 + 8) = *(float *)(param_1 + 8) - fVar4;
+        fVar4 = (float)*(int *)(*(int *)(iVar8 + 4) + 4);
+        if (*(int *)(*(int *)(iVar8 + 4) + 4) < 0) {
+          fVar4 = fVar4 + 4.2949673e+09;
+        }
+      } while (fVar4 < *(float *)(param_1 + 8) != (fVar4 == *(float *)(param_1 + 8)));
+    }
+    if (*(float *)(param_1 + 8) < 0.0) {
+      do {
+        fVar3 = (float)*(int *)(*(int *)(iVar8 + 4) + 4);
+        if (*(int *)(*(int *)(iVar8 + 4) + 4) < 0) {
+          fVar3 = fVar3 + 4.2949673e+09;
+        }
+        *(float *)(param_1 + 8) = fVar3 + *(float *)(param_1 + 8);
+      } while (*(float *)(param_1 + 8) < 0.0);
+      return;
+    }
+    break;
+  case 10:
+    piVar7 = (int *)((uint)uVar9 * 0x10 + *(int *)(param_1 + 0x10));
+    iVar8 = *piVar7;
+    fVar3 = **(float **)(param_1 + 0xe) * (float)piVar7[3] + *(float *)(param_1 + 8);
+    *(float *)(param_1 + 8) = fVar3;
+    fVar4 = (float)*(int *)(*(int *)(iVar8 + 4) + 4);
+    if (*(int *)(*(int *)(iVar8 + 4) + 4) < 0) {
+      fVar4 = fVar4 + 4.2949673e+09;
+    }
+    if (fVar4 < fVar3 != (fVar4 == fVar3)) {
+      do {
+        *(float *)(param_1 + 8) = *(float *)(param_1 + 8) - fVar4;
+        fVar4 = (float)*(int *)(*(int *)(iVar8 + 4) + 4);
+        if (*(int *)(*(int *)(iVar8 + 4) + 4) < 0) {
+          fVar4 = fVar4 + 4.2949673e+09;
+        }
+      } while (fVar4 < *(float *)(param_1 + 8) != (fVar4 == *(float *)(param_1 + 8)));
+    }
+    if (*(float *)(param_1 + 8) < 0.0) {
+      do {
+        fVar3 = (float)*(int *)(*(int *)(iVar8 + 4) + 4);
+        if (*(int *)(*(int *)(iVar8 + 4) + 4) < 0) {
+          fVar3 = fVar3 + 4.2949673e+09;
+        }
+        *(float *)(param_1 + 8) = fVar3 + *(float *)(param_1 + 8);
+      } while (*(float *)(param_1 + 8) < 0.0);
+      return;
+    }
+    break;
+  case 0xb:
+    fVar3 = **(float **)(param_1 + 0xe) + *(float *)(param_1 + 8);
+    iVar8 = *(int *)((uint)uVar9 * 0x10 + *(int *)(param_1 + 0x10));
+    *(float *)(param_1 + 8) = fVar3;
+    iVar8 = *(int *)(iVar8 + 4);
+    iVar10 = *(int *)(iVar8 + 4);
+    iVar8 = *(int *)(iVar8 + 4);
+LAB_0044ab71:
+    fVar4 = (float)iVar8;
+    if (iVar10 < 0) {
+      fVar4 = fVar4 + 4.2949673e+09;
+    }
+    if (fVar4 - 1.0 < fVar3 != (fVar4 - 1.0 == fVar3)) {
+      FUN_00446910();
+      return;
+    }
+    break;
+  case 0xc:
+    iVar8 = *(int *)((uint)uVar9 * 0x10 + *(int *)(param_1 + 0x10));
+    fVar3 = (float)*(int *)(*(int *)(iVar8 + 4) + 4);
+    if (*(int *)(*(int *)(iVar8 + 4) + 4) < 0) {
+      fVar3 = fVar3 + 4.2949673e+09;
+    }
+    if (fVar3 < *(float *)(param_1 + 8) != (fVar3 == *(float *)(param_1 + 8))) {
+      do {
+        *(float *)(param_1 + 8) = *(float *)(param_1 + 8) - fVar3;
+        fVar3 = (float)*(int *)(*(int *)(iVar8 + 4) + 4);
+        if (*(int *)(*(int *)(iVar8 + 4) + 4) < 0) {
+          fVar3 = fVar3 + 4.2949673e+09;
+        }
+      } while (fVar3 < *(float *)(param_1 + 8) != (fVar3 == *(float *)(param_1 + 8)));
+    }
+    if (*(float *)(param_1 + 8) < 0.0) {
+      do {
+        fVar3 = (float)*(int *)(*(int *)(iVar8 + 4) + 4);
+        if (*(int *)(*(int *)(iVar8 + 4) + 4) < 0) {
+          fVar3 = fVar3 + 4.2949673e+09;
+        }
+        *(float *)(param_1 + 8) = fVar3 + *(float *)(param_1 + 8);
+      } while (*(float *)(param_1 + 8) < 0.0);
+      return;
+    }
+    break;
+  default:
+    FUN_0043f9f0();
+    if (*(int *)(param_1 + 0x14) != 0) {
+      iVar8 = **(int **)(*(int *)(param_1 + 0x14) + 4);
+      if (iVar8 != 0) {
+        FUN_0040b310(iVar8);
+        **(undefined4 **)(*(int *)(param_1 + 0x14) + 4) = 0;
+      }
+      if (*(int *)(*(int *)(param_1 + 0x14) + 4) != 0) {
+        FUN_0040b310(*(int *)(*(int *)(param_1 + 0x14) + 4));
+        *(undefined4 *)(*(int *)(param_1 + 0x14) + 4) = 0;
+      }
+      FUN_0040b310(*(undefined4 *)(param_1 + 0x14));
+      param_1[0x14] = 0;
+      param_1[0x15] = 0;
+    }
+  }
+  return;
+}
+

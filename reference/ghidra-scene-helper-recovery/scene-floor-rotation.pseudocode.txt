@@ -1,0 +1,59 @@
+
+void FUN_00444f10(int param_1)
+
+{
+  float fVar1;
+  float fVar2;
+  float fVar3;
+  uint uVar4;
+  undefined4 uVar5;
+  int unaff_EBX;
+  int unaff_EDI;
+  float10 fVar6;
+  float10 fVar7;
+  
+  fVar6 = (float10)FUN_00787cf0();
+  fVar7 = (float10)FUN_00787cf0();
+  if ((((float10)(float)fVar6 <= fVar7) && ((*(ushort *)(param_1 + 0x10) & 1) != 0)) &&
+     ((*(ushort *)(param_1 + 0x10) & 0x2000) == 0)) {
+    fVar1 = *(float *)(unaff_EBX + 0x48);
+    fVar2 = *(float *)(unaff_EBX + 0x4c);
+    fVar3 = *(float *)(unaff_EBX + 0x50);
+    FUN_0043ec00();
+    fVar6 = (float10)FUN_007871f0(fVar3 * fVar3 + fVar1 * fVar1);
+    fpatan((float10)(float)fVar6,(float10)fVar2);
+    uVar4 = FUN_00644340();
+    uVar4 = uVar4 & 0xffff;
+    if (0x8000 < uVar4) {
+      uVar4 = 0x10000 - uVar4;
+    }
+    if (((*(ushort *)(unaff_EDI + 4) & 0x2000) == 0) &&
+       (*(float *)(param_1 + 0x38) < *(float *)(param_1 + 0xd0))) {
+      if (*(float *)(param_1 + 0x38) < *(float *)(param_1 + 200)) {
+        if (*(float *)(param_1 + 0x38) < *(float *)(param_1 + 0xc4)) {
+          if (*(float *)(param_1 + 0x38) < *(float *)(param_1 + 0xc0)) {
+            uVar4 = 0x400;
+          }
+          else if (0x1000 < (int)uVar4) {
+            uVar4 = 0x1000;
+          }
+        }
+        else if (0x1500 < (int)uVar4) {
+          uVar4 = 0x1500;
+        }
+      }
+      else if (0x2000 < (int)uVar4) {
+        uVar4 = 0x2000;
+      }
+    }
+    uVar5 = FUN_00438350(*(undefined4 *)(unaff_EDI + 0x14),*(undefined4 *)(unaff_EBX + 0x34),uVar4);
+    *(undefined4 *)(unaff_EDI + 0x14) = uVar5;
+    uVar5 = FUN_00438350(*(undefined4 *)(unaff_EDI + 0x1c),*(undefined4 *)(unaff_EBX + 0x38),uVar4);
+    *(undefined4 *)(unaff_EDI + 0x1c) = uVar5;
+    return;
+  }
+  *(undefined4 *)(unaff_EDI + 0x14) = *(undefined4 *)(unaff_EBX + 0x34);
+  *(undefined4 *)(unaff_EDI + 0x1c) = *(undefined4 *)(unaff_EBX + 0x38);
+  return;
+}
+

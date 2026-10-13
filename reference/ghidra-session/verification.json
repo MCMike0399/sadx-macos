@@ -1,0 +1,128 @@
+{
+  "provider": "Ghidra",
+  "version": "12.1.4",
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "source_unchanged": true,
+  "real_analysis_verified": true,
+  "procedure": "0x43c580",
+  "body": {
+    "available": true,
+    "provenance": "ghidra-function-body-address-set",
+    "ranges": [
+      {
+        "start": "0x43c580",
+        "end": "0x43c7c2"
+      }
+    ],
+    "total_bytes": 579,
+    "span_bytes": 579,
+    "non_contiguous": false,
+    "contains_entry": true
+  },
+  "instructions": 167,
+  "basic_blocks": 17,
+  "pcode_operations": 415,
+  "value_trace": {
+    "total_nodes": 467,
+    "total_edges": 493,
+    "decompilations": 4,
+    "truncated": true,
+    "unknowns": [
+      {
+        "procedure": "0x787cc0",
+        "address": "0x787ce0",
+        "reason": "Call depth budget reached"
+      },
+      {
+        "procedure": "0x41bed0",
+        "address": "0x41beda",
+        "reason": "Call depth budget reached"
+      },
+      {
+        "procedure": "0x7887d0",
+        "address": null,
+        "reason": "decompilation budget reached"
+      },
+      {
+        "procedure": "0x43c580",
+        "address": null,
+        "reason": "Parameter bindings for 0x787cc0 are unavailable or omitted"
+      },
+      {
+        "procedure": "0x43c580",
+        "address": null,
+        "reason": "Argument 0 for 0x41bed0 was not recovered"
+      },
+      {
+        "procedure": "0x43c580",
+        "address": null,
+        "reason": "Parameter bindings for 0x787cc0 are unavailable or omitted"
+      },
+      {
+        "procedure": "0x43c580",
+        "address": null,
+        "reason": "Parameter bindings for 0x7887d0 are unavailable or omitted"
+      },
+      {
+        "procedure": "0x43c580",
+        "address": null,
+        "reason": "Parameter bindings for 0x787cc0 are unavailable or omitted"
+      },
+      {
+        "procedure": "0x43c580",
+        "address": null,
+        "reason": "Parameter bindings for 0x787cf0 are unavailable or omitted"
+      },
+      {
+        "procedure": "0x43c580",
+        "address": null,
+        "reason": "Parameter bindings for 0x787cc0 are unavailable or omitted"
+      },
+      {
+        "procedure": "0x43c580",
+        "address": null,
+        "reason": "Parameter bindings for 0x438410 are unavailable or omitted"
+      },
+      {
+        "procedure": "0x43c580",
+        "address": null,
+        "reason": "Parameter bindings for 0x4383b0 are unavailable or omitted"
+      },
+      {
+        "procedure": "0x787cc0",
+        "address": null,
+        "reason": "Parameter bindings for 0x7871f0 are unavailable or omitted"
+      },
+      {
+        "procedure": "0x41bed0",
+        "address": null,
+        "reason": "Parameter bindings for 0x41bc00 are unavailable or omitted"
+      }
+    ]
+  },
+  "evidence_ids": {
+    "contact-reaction": "ev_72c02dcf70737c03418f756b2a127ed88cc7030c2f127fc7878da7621c2da643",
+    "speed-threshold-branch": "ev_7179d69353bc9a8440c3a1c5ebf549eed584a5b57ddacf9c630410d9a44f2277",
+    "plane-call-target": "ev_593fceb06092229fddbdedf255b7aef81bcfa5e61ee36565a917272591cbab71",
+    "contact-value-flow": "ev_3886661d5267558bebd9687697cdfda2d8155e5bed6143963d55c8cf934b7abb"
+  },
+  "cleanup": {
+    "first_close_result": "cleanup_incomplete; process ownership token read failed during exit",
+    "observed_exit_code": 0,
+    "runtime_root_removed": true,
+    "process_recheck": "No JVM or native decompiler matched the owned installation path after exit; no signal sent"
+  },
+  "snapshot": "_reference/sadx/sonic-ghidra-snapshot.json",
+  "bundle": "_reference/sadx/ghidra-session/evidence-bundle.json",
+  "limits": [
+    "Ghidra output is static/decompiler evidence, not original source or hardware behavior",
+    "Value trace is explicitly bounded and truncated; custom-register parameter bindings/aliasing remain unresolved",
+    "Snapshot saved before close; first close warning retained with later terminal/cleanup observations"
+  ],
+  "snapshot_verification": {
+    "bytes": 4749098,
+    "sha256": "fb4a9dfde1e57d4af47f0c6d9e04beaeb94254b7303eb8cedb5cea7610219075",
+    "primitive_entries": 4,
+    "workflow_entries": 1
+  }
+}

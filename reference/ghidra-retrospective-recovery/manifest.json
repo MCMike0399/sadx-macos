@@ -1,0 +1,165 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "functions": [
+    {
+      "name": "set-position",
+      "procedure": "0x44cdf0",
+      "evidence_id": "ev_8068d2d54b0b9cd8357a4c7c0a3fe6630afef7f92c652ef65e47d1f22a125228",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x44cdf0",
+            "end": "0x44d4da"
+          }
+        ],
+        "total_bytes": 1771,
+        "span_bytes": 1771,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "instructions": 498,
+      "pcode_truncated": false,
+      "sha256": "a707630c382ff99fca44b3ad9c140293a22b7ec124843040cb3947eaa8b41927"
+    },
+    {
+      "name": "collision-form",
+      "procedure": "0x41c1c0",
+      "evidence_id": "ev_7131a0ea0945f5e49771e14b6d9773291f5526407ad228c46f163d0a0eeee8d0",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x41c1c0",
+            "end": "0x41c1ee"
+          }
+        ],
+        "total_bytes": 47,
+        "span_bytes": 47,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "instructions": 18,
+      "pcode_truncated": false,
+      "sha256": "3fc1297abb5cab26c70f9e2aae3e24ec38f51aea065b978b0be14c7725472fe6"
+    },
+    {
+      "name": "get-analog",
+      "procedure": "0x43bdc0",
+      "evidence_id": "ev_fb0f975d68a93e082d9ea533ed94182cabf8dddbeb9761234cee14f1924ffbee",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x43bdc0",
+            "end": "0x43bf33"
+          }
+        ],
+        "total_bytes": 372,
+        "span_bytes": 372,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "instructions": 112,
+      "pcode_truncated": false,
+      "sha256": "e82bb8b1a6d507834870332cdecc18a7a84496a9ae02a9c037466e53e2cb2ed3"
+    },
+    {
+      "name": "write-analogs",
+      "procedure": "0x40f170",
+      "evidence_id": "ev_c58c47d8190add34a83b12aafd83ea97414edf0110404df4625e4c834b0c7472",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x40f170",
+            "end": "0x40f343"
+          }
+        ],
+        "total_bytes": 468,
+        "span_bytes": 468,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "instructions": 135,
+      "pcode_truncated": false,
+      "sha256": "c003ccdd80568b6a082ced57648264e173fcc1bda52be39f9f92fb9cbc531b86"
+    },
+    {
+      "name": "get-speed",
+      "procedure": "0x443f50",
+      "evidence_id": "ev_77e421a9e4dd6a734f4063b78c120ca287f8f606209f8957e6ddd96a3368c5ef",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x443f50",
+            "end": "0x4441aa"
+          }
+        ],
+        "total_bytes": 603,
+        "span_bytes": 603,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "instructions": 200,
+      "pcode_truncated": false,
+      "sha256": "26dfde5378d89369d94e9eb905fa4c7537d8cae70f0f0b452fa376981f134335"
+    },
+    {
+      "name": "local-to-global",
+      "procedure": "0x43ec90",
+      "evidence_id": "ev_fca591c9410a6076cb08ef5b155d980fe19145a76cacc743d9193ab6cc358b52",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x43ec90",
+            "end": "0x43ed16"
+          }
+        ],
+        "total_bytes": 135,
+        "span_bytes": 135,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "instructions": 46,
+      "pcode_truncated": false,
+      "sha256": "c07f9fc924b8f683cbaa147c4412a693e6906ef9edafb7880ba8c8b7d0404dc1"
+    },
+    {
+      "name": "global-to-local",
+      "procedure": "0x43edd0",
+      "evidence_id": "ev_135b3c88d77096f23b4e6140a0aa1cb6a048123eaf9c6fe279a0281d0712ef05",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x43edd0",
+            "end": "0x43ee6d"
+          }
+        ],
+        "total_bytes": 158,
+        "span_bytes": 158,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "instructions": 54,
+      "pcode_truncated": false,
+      "sha256": "eaa437460e1eecf63f4f03398788412b8f7d091f2c14eec688c6202dabfb939f"
+    }
+  ],
+  "cleanup": {
+    "initial_close": "cleanup_incomplete; kill EPERM during provider exit",
+    "session": "47325 terminal exit1 after all analyses/export retained",
+    "later_process_check": "No JVM/native decompiler matched owned installation path; no signal sent",
+    "runtime_root_removed": true
+  }
+}

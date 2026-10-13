@@ -1,0 +1,155 @@
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+undefined4 FUN_004511d0(void)
+
+{
+  undefined4 local_84c;
+  undefined4 local_848;
+  undefined4 local_844;
+  uint *local_840;
+  uint *local_83c;
+  uint local_838;
+  int local_834;
+  undefined4 local_830;
+  undefined *local_82c;
+  int local_828;
+  undefined4 *local_824;
+  int local_820;
+  uint *local_81c;
+  uint *local_818;
+  uint *local_814;
+  undefined4 *local_810;
+  int local_80c;
+  int local_808;
+  uint local_804 [256];
+  uint local_404 [256];
+  
+  if (DAT_03c4855c == 0) {
+    FUN_0043aef0();
+  }
+  else {
+    FUN_0043b580();
+    DAT_03c4855c = 0;
+  }
+  local_808 = 0;
+  local_818 = local_404;
+  local_81c = local_804;
+  local_80c = (int)DAT_03b32724;
+  if (0x100 < local_80c) {
+    local_80c = 0x100;
+  }
+  local_814 = &DAT_03b2f720;
+  for (; 0 < local_80c; local_80c = local_80c + -1) {
+    if ((*local_814 & 0x8000000) == 0) {
+      if (DAT_03b47000 == local_814[1]) {
+        DAT_03b47000 = 0;
+        *local_818 = local_814[1];
+        local_818 = local_818 + 1;
+        local_808 = local_808 + 1;
+        *local_81c = *local_814;
+        local_81c = local_81c + 1;
+      }
+      else {
+        local_820 = 0;
+        for (local_810 = DAT_03c48550; local_810 != (undefined4 *)0x0;
+            local_810 = (undefined4 *)*local_810) {
+          if (local_810[2] == local_814[1]) {
+            local_820 = 1;
+            break;
+          }
+        }
+        if (local_820 == 0) {
+          *local_818 = local_814[1];
+          local_818 = local_818 + 1;
+          local_808 = local_808 + 1;
+          *local_81c = *local_814;
+          local_81c = local_81c + 1;
+          if (local_808 == 0x100) break;
+        }
+      }
+    }
+    else {
+      *local_818 = local_814[1];
+      local_818 = local_818 + 1;
+      local_808 = local_808 + 1;
+      *local_81c = *local_814;
+      local_81c = local_81c + 1;
+    }
+    local_814 = local_814 + 3;
+  }
+  if (local_808 != 0x100) {
+    local_810 = DAT_03c48550;
+    while (local_810 != (undefined4 *)0x0) {
+      local_828 = 0;
+      local_814 = &DAT_03b2f720;
+      for (local_80c = (int)DAT_03b32724; 0 < local_80c; local_80c = local_80c + -1) {
+        if (local_810[2] == local_814[1]) {
+          if (((*local_814 & 0x8000000) == 0) && (DAT_03b47000 != local_814[1])) {
+            local_828 = 1;
+          }
+          else {
+            local_828 = 0;
+          }
+          break;
+        }
+        local_814 = local_814 + 3;
+      }
+      local_824 = (undefined4 *)*local_810;
+      if (local_828 == 0) {
+        FUN_00451800(local_810);
+      }
+      local_810 = local_824;
+    }
+  }
+  FUN_007850f0();
+  local_830 = 0x100;
+  local_82c = &DAT_03b43000;
+  local_834 = local_808;
+  local_840 = local_804;
+  local_83c = local_404;
+  while ((0 < local_834 && (local_82c = (undefined *)FUN_00451790(), local_82c != (undefined *)0x0))
+        ) {
+    FUN_004518d0();
+    FUN_007850f0();
+    local_838 = *local_83c;
+    FUN_00785070();
+    if (*(int *)(local_838 + 0x1c) != 0) {
+      FUN_00784fb0();
+    }
+    if (*(int *)(local_838 + 0x18) != 0) {
+      FUN_00784e20();
+    }
+    if (*(int *)(local_838 + 0x14) != 0) {
+      FUN_00784ee0();
+    }
+    FUN_00788a50();
+    local_84c = *(undefined4 *)(*(int *)(local_838 + 4) + 0x18);
+    local_848 = *(undefined4 *)(*(int *)(local_838 + 4) + 0x1c);
+    local_844 = *(undefined4 *)(*(int *)(local_838 + 4) + 0x20);
+    FUN_00781670(&local_84c);
+    _DAT_03b4758c = local_844;
+    *(undefined4 *)(local_82c + 0x30) = local_84c;
+    *(undefined4 *)(local_82c + 0x34) = local_848;
+    *(undefined4 *)(local_82c + 0x38) = local_844;
+    FUN_00785140();
+    DAT_03b47588 = 0;
+    DAT_03b42ff8 = 0;
+    *(uint *)(local_82c + 8) = *local_83c;
+    *(uint *)(local_82c + 0xc) = *local_840;
+    *(undefined4 *)(local_82c + 0x10) = 0;
+    *(undefined4 *)(local_82c + 0x18) = 0;
+    *(undefined4 *)(local_82c + 0x1c) = 0;
+    *(undefined4 *)(local_82c + 0x24) = 0;
+    FUN_00451a00(*local_83c,*local_840,local_82c);
+    FUN_00451910(local_82c);
+    *(undefined4 *)(local_82c + 0x28) = DAT_03b47588;
+    *(undefined4 *)(local_82c + 0x2c) = DAT_03b42ff8;
+    local_834 = local_834 + -1;
+    local_840 = local_840 + 1;
+    local_83c = local_83c + 1;
+  }
+  FUN_00785140();
+  return 1;
+}
+

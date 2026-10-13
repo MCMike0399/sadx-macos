@@ -1,0 +1,20 @@
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+undefined4 FUN_0078cf20(void)
+
+{
+  int iVar1;
+  char cVar2;
+  int *in_ECX;
+  
+  iVar1 = *in_ECX;
+  cVar2 = FUN_0078cdc0();
+  if (((cVar2 != '\0') || (DAT_03d0fdf4 != iVar1)) && (in_ECX[0xd] != 0)) {
+    (**(code **)(*DAT_03d128b0 + 0xf4))(DAT_03d128b0,0,in_ECX[0xd]);
+    DAT_03d0fdf4 = iVar1;
+    _DAT_03d129a0 = in_ECX;
+  }
+  return *(undefined4 *)(&DAT_0389d458 + ((uint)in_ECX[8] >> 0x1b & 3) * 4);
+}
+

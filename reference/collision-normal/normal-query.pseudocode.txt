@@ -1,0 +1,274 @@
+    esp = esp - 0x30;
+    decomp_var_30 = ebp;
+    ebp = arg_0;
+    ecx = arg_34[0x29];
+    edx = arg_34[0x51];
+    eax = arg_34[0x3];
+    if (ecx == 0x0) {
+            eax = 0x0;
+    }
+    else {
+            decomp_var_34 = esi;
+            esp = esp - 0x8;
+            decomp_var_38 = edi;
+            edi = sign_extend_32(edx);
+            if (edi <= (ecx[0x3] & 0xffff)) {
+                    edi = (edi + edi * 0x2 << 0x4) + ecx[0x3];
+                    if (eax != 0x0) {
+                            if (edi != 0x0) {
+                                    edx = eax[0x5];
+                                    esi = *(ecx[0x27] + 0x20);
+                                    arg_0 = edx;
+                                    var_2C = edi[0x5];
+                                    var_28 = edi[0x7];
+                                    eax = sub_419270(ebp, eax, &var_18);
+                                    eax = edi[0x1] & 0xff;
+                                    esp = (esp - 0xc) + 0xc;
+                                    switch (*(eax * 0x4 + switch_table)) {
+                                        case 0:
+                                            esp = esp - 0xc;
+                                            eax = sub_419270(esi, edi, &var_24);
+                                            asm { fld        dword [esp+0x44+var_18] };
+                                            asm { fsub       dword [esp+0x44+var_24] };
+                                            esp = esp + 0xc;
+                                            asm { fst        dword [ebx] };
+                                            asm { fld        dword [esp+0x38+var_14] };
+                                            asm { fsub       dword [esp+0x38+var_20] };
+                                            asm { fst        dword [ebx+4] };
+                                            asm { fld        dword [esp+0x38+var_10] };
+                                            asm { fsub       dword [esp+0x38+var_1C] };
+                                            asm { fst        dword [ebx+8] };
+                                            asm { fxch       st0, st1 };
+                                            asm { fld        st0 };
+                                            asm { fmul       st1 };
+                                            asm { fld        st2 };
+                                            asm { fmul       st3 };
+                                            asm { faddp      st1 };
+                                            asm { fld        st3 };
+                                            asm { fmul       st4 };
+                                            asm { faddp      st1 };
+                                            asm { fcomp      dword [dword_value_1142947840+4] };
+                                            asm { fstp       st0 };
+                                            asm { fnstsw     ax };
+                                            asm { fstp       st0 };
+                                            asm { fstp       st0 };
+                                            if (!asm { fstp       st0 }) {
+                                                    sub_418ac0(ebx);
+                                                    asm { fstp       st0 };
+                                                    eax = 0x1;
+                                            }
+                                            else {
+                                                    *ebx = 0x0;
+                                                    ebx[0x1] = 0x0;
+                                                    ebx[0x2] = 0x3f800000;
+                                                    eax = 0x1;
+                                            }
+                                            break;
+                                        case 1:
+                                            esp = esp - 0x4;
+                                            decomp_var_3c = &var_24;
+                                            esp = esp - 0x8;
+                                            eax = sub_419270(esi, edi, decomp_var_3c);
+                                            asm { fld        dword [esp+0x44+var_18] };
+                                            ecx = 0x0;
+                                            asm { fsub       dword [esp+0x44+var_24] };
+                                            esp = esp + 0xc;
+                                            ebx[0x1] = ecx;
+                                            asm { fst        dword [ebx] };
+                                            asm { fld        dword [esp+0x38+var_10] };
+                                            asm { fsub       dword [esp+0x38+var_1C] };
+                                            asm { fst        dword [ebx+8] };
+                                            asm { fld        st0 };
+                                            asm { fmul       st1 };
+                                            asm { fld        st2 };
+                                            asm { fmul       st3 };
+                                            asm { faddp      st1 };
+                                            asm { fcomp      dword [dword_value_1142947840+4] };
+                                            asm { fnstsw     ax };
+                                            asm { fstp       st0 };
+                                            asm { fstp       st0 };
+                                            if (!asm { fstp       st0 }) {
+                                                    *ebx = 0x0;
+                                                    ebx[0x1] = 0x0;
+                                                    ebx[0x2] = 0x3f800000;
+                                                    eax = 0x1;
+                                            }
+                                            else {
+                                                    sub_418ac0(ebx);
+                                                    asm { fstp       st0 };
+                                                    eax = 0x1;
+                                            }
+                                            break;
+                                        case 2:
+                                            esp = esp - 0xc;
+                                            eax = sub_419030(esi, edi, &var_24);
+                                            asm { fld        dword [esp+0x44+var_18] };
+                                            ecx = 0x0;
+                                            asm { fsub       dword [esp+0x44+var_24] };
+                                            esp = esp + 0xc;
+                                            ebx[0x1] = ecx;
+                                            asm { fst        dword [ebx] };
+                                            asm { fld        dword [esp+0x38+var_10] };
+                                            asm { fsub       dword [esp+0x38+var_1C] };
+                                            asm { fst        dword [ebx+8] };
+                                            asm { fld        st0 };
+                                            asm { fmul       st1 };
+                                            asm { fld        st2 };
+                                            asm { fmul       st3 };
+                                            asm { faddp      st1 };
+                                            asm { fcomp      dword [dword_value_1142947840+4] };
+                                            asm { fnstsw     ax };
+                                            asm { fstp       st0 };
+                                            asm { fstp       st0 };
+                                            if (!asm { fstp       st0 }) {
+                                                    *ebx = 0x0;
+                                                    ebx[0x1] = 0x0;
+                                                    ebx[0x2] = 0x3f800000;
+                                                    eax = 0x1;
+                                            }
+                                            else {
+                                                    sub_418ac0(ebx);
+                                                    asm { fstp       st0 };
+                                                    eax = 0x1;
+                                            }
+                                            break;
+                                        case 3:
+                                            var_18 = arg_1c;
+                                            eax = sub_4193a0(esi, edi, &var_24);
+                                            eax = edi[0x1];
+                                            esp = (esp - 0xc) + 0xc;
+                                            if ((eax & 0x20) == 0x0 && HIBYTE(eax) >= 0x0) {
+                                                    esi = esi[0x6];
+                                                    esi = esi + edi[0xa];
+                                            }
+                                            else {
+                                                    esi = edi[0xa];
+                                            }
+                                            esi = -esi;
+                                            eax = sub_419900();
+                                            asm { fld        dword [esp+0x38+var_2C] };
+                                            asm { fadd       dword [esp+0x38+arg_0] };
+                                            asm { fmul       dword [esp+0x38+var_4] };
+                                            asm { fstp       dword [esp+0x38+var_2C] };
+                                            asm { fld        dword [esp+0x38+var_28] };
+                                            asm { fadd       dword [esp+0x38+arg_0] };
+                                            asm { fmul       dword [esp+0x38+var_C] };
+                                            asm { fst        dword [esp+0x38+arg_0] };
+                                            asm { fadd       dword [esp+0x38+var_2C] };
+                                            asm { fld        dword [esp+0x38+var_2C] };
+                                            asm { fsub       dword [esp+0x38+arg_0] };
+                                            asm { fcomp      dword [dword_value_1142947840+4] };
+                                            asm { fnstsw     ax };
+                                            asm { fcomp      dword [dword_value_1142947840+4] };
+                                            asm { fnstsw     ax };
+                                            if (!asm { fnstsw     ax }) {
+                                                    if ((HIBYTE(eax) & 0x41) == 0x0) {
+                                                            edi = 0x0;
+                                                    }
+                                                    else {
+                                                            edi = 0xc000;
+                                                    }
+                                            }
+                                            else {
+                                                    edi = 0x4000;
+                                                    if ((HIBYTE(eax) & 0x41) != 0x0) {
+                                                            edi = 0x8000;
+                                                    }
+                                            }
+                                            var_C = 0x0;
+                                            sub_7850f0();
+                                            if (edi != esi) {
+                                                    sub_784e20();
+                                            }
+                                            sub_784d60(ebx);
+                                            sub_785140();
+                                            eax = 0x1;
+                                            break;
+                                        case 4:
+                                            esp = esp - 0x4;
+                                            decomp_var_3c = &var_24;
+                                            esp = esp - 0x8;
+                                            eax = sub_419270(esi, edi, decomp_var_3c);
+                                            asm { fld        dword [esp+0x44+var_18] };
+                                            ecx = 0x0;
+                                            asm { fsub       dword [esp+0x44+var_24] };
+                                            esp = esp + 0xc;
+                                            ebx[0x1] = ecx;
+                                            asm { fst        dword [ebx] };
+                                            asm { fld        dword [esp+0x38+var_10] };
+                                            asm { fsub       dword [esp+0x38+var_1C] };
+                                            asm { fst        dword [ebx+8] };
+                                            asm { fld        st0 };
+                                            asm { fmul       st1 };
+                                            asm { fld        st2 };
+                                            asm { fmul       st3 };
+                                            asm { faddp      st1 };
+                                            asm { fcomp      dword [dword_value_1142947840+4] };
+                                            asm { fnstsw     ax };
+                                            asm { fstp       st0 };
+                                            asm { fstp       st0 };
+                                            if (!asm { fstp       st0 }) {
+                                                    *ebx = 0x0;
+                                                    ebx[0x1] = 0x0;
+                                                    ebx[0x2] = 0x3f800000;
+                                                    eax = 0x1;
+                                            }
+                                            else {
+                                                    sub_418ac0(ebx);
+                                                    asm { fstp       st0 };
+                                                    eax = 0x1;
+                                            }
+                                            break;
+                                        case 5:
+                                            eax = 0x0;
+                                            break;
+                                        default:
+                                            esp = esp - 0xc;
+                                            eax = sub_419030(esi, edi, &var_24);
+                                            asm { fld        dword [esp+0x44+var_18] };
+                                            ecx = 0x0;
+                                            asm { fsub       dword [esp+0x44+var_24] };
+                                            esp = esp + 0xc;
+                                            ebx[0x1] = ecx;
+                                            asm { fst        dword [ebx] };
+                                            asm { fld        dword [esp+0x38+var_10] };
+                                            asm { fsub       dword [esp+0x38+var_1C] };
+                                            asm { fst        dword [ebx+8] };
+                                            asm { fld        st0 };
+                                            asm { fmul       st1 };
+                                            asm { fld        st2 };
+                                            asm { fmul       st3 };
+                                            asm { faddp      st1 };
+                                            asm { fcomp      dword [dword_value_1142947840+4] };
+                                            asm { fnstsw     ax };
+                                            asm { fstp       st0 };
+                                            asm { fstp       st0 };
+                                            if (!asm { fstp       st0 }) {
+                                                    *ebx = 0x0;
+                                                    ebx[0x1] = 0x0;
+                                                    ebx[0x2] = 0x3f800000;
+                                                    eax = 0x1;
+                                            }
+                                            else {
+                                                    sub_418ac0(ebx);
+                                                    asm { fstp       st0 };
+                                                    eax = 0x1;
+                                            }
+                                            break;
+                                        default:
+                                            eax = 0x0;
+                                    }
+                            }
+                            else {
+                                    eax = 0x0;
+                            }
+                    }
+                    else {
+                            eax = 0x0;
+                    }
+            }
+            else {
+                    eax = 0x0;
+            }
+    }
+    return eax;

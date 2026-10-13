@@ -1,0 +1,70 @@
+{
+  "status": "frozen-initial-source-native-slice-incomplete-Sonic-frame",
+  "original_executable_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "native_source_sha256": {
+    "src/sonic_player.hpp": "efef9cc293f430635fc3a42533cbba093c31534eef533a401e75cea7243a6cfa",
+    "src/sonic_player.cpp": "1184310f126fbc2ff07848121220d0597125f2fd2548f6a221a9b190fe4772f5",
+    "tests/sonic_player.cpp": "6eebf18d565bdcb59111fdbb0712668be8d2a52f9ad48029e71958ca5fc23500",
+    "tests/native_sonic_player_probe.cpp": "23bdb229998a9b9f4a3a5f6c46a1c6404f527de4597f4c1f5662a3df0a438bc3",
+    "tools/verify_original_sonic_player.py": "d3a0eed9e4ca54c5c2659a44962858fe71f367cf8211c41fdc867244dd511b99"
+  },
+  "implemented_entries": [
+    "49a9b0 control prefix",
+    "496f50 control prefix and closed guards",
+    "44bb60 local input heading",
+    "43ed20 inverse floor transform",
+    "43ee70 local speed post-update",
+    "4915f0 collider center"
+  ],
+  "source_case_status": {
+    "cases": 28800,
+    "by_entry": [
+      10608,
+      7008,
+      7152
+    ],
+    "ground_prefix_cases": 4032,
+    "stored_mismatches": 0,
+    "status_mismatches": 2840,
+    "stored_state_matches": true,
+    "strict_passed": false
+  },
+  "tests": {
+    "optimized": "passed all12 CW profiles",
+    "ubsan": "passed all12 CW profiles",
+    "arguments": [
+      "original-sonic-player-comparison.constants.bin32",
+      "original-sonic-player-comparison.dispatch.bin352",
+      "ninja-trig.f32 4100",
+      "ninja-unit.f32 64"
+    ]
+  },
+  "producer_owner_limits": [
+    "43eecc oracle is seeded post-transform suffix",
+    "44bb60 oracle stops at required rotation/raw-input owners",
+    "native full world angles cannot retain known-high16/unknown-low16 partial store",
+    "remaining496f50 dispatch is incomplete",
+    "animation/model/common-tail/action owners remain mandatory and unresolved",
+    "no complete playable frame or Windows/physical input/hardware claim"
+  ],
+  "provenance": "sonic-player-provenance.md",
+  "comparison": "original-sonic-player-comparison.json",
+  "next_required_source_owners": [
+    "496f50 remaining predicates",
+    "3c56210 animation resource",
+    "38f6e80 model tree",
+    "44a800",
+    "491660",
+    "495cd0",
+    "440790",
+    "43fa90",
+    "4948c0",
+    "4955e0",
+    "49f1a0",
+    "41c280",
+    "41c530",
+    "446f10"
+  ],
+  "no_shared_archive_or_makefile_writes": true,
+  "original_game_mutation": false
+}

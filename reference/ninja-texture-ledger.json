@@ -1,0 +1,140 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "claim": "Read-only PVM/PVRT producing-boundary resources and exact source packed16 layouts for selected actual assets",
+  "evidence": {
+    "texture-77f7f0": "ev_a64176fbc26b7d97c0ffba76625ab92764f020b019a40259b682c8a9f9eba240",
+    "texture-78bf50": "ev_6c3c74d3dfc5a3c3986f6fdabd8f044c163fb013bf88fceedc5eeb46eb0b91a9",
+    "texture-78bd10": "ev_cc12e1ccd05d740edbed0c3a4a256e1c1b387848e36d976114bceeb6f5646f58",
+    "texture-77f3f0": "ev_c92212b96e04e8fb26a94e2f4077308064f9eaa5fd7e12efe0943bfa44d41d24",
+    "texture-78bc30": "ev_e87f2ad9bb5cd9dda627fad87c8563a8b8da00e3b181ae5a873d5d5b110a12f9",
+    "texture-78ca00": "ev_a47ffb3af12b3f11ba03847be58f477522f63417caa828d5d2bcd1240ca4dfa0",
+    "texture-77f2f0": "ev_e61bfb5ffe8b83151a112556baec0f64fbba4a6332a3e95d0708fc51d79c183a"
+  },
+  "undefined_ghidra_procedure": {
+    "address": "0x78c570",
+    "resolution": "29-byte original LLVM listing and actual instruction comparison; no Ghidra pseudocode claimed"
+  },
+  "primary": {
+    "repository": "https://github.com/nickworonekin/puyotools",
+    "commit": "62118d22d06ca19c66e8d97cb14358ffd2be1df1",
+    "license": "MIT; upstream license retained",
+    "files": {
+      "Rgb565PixelCodec.cs": "b85889b34cd0b9b2c187cb3d14f9c37062a0d28791089fdda0d20ff5a60149b7",
+      "LICENSE.md": "5813b3cfd945c29ca50b5d0843af02e193f8724ed85c4c68e701308377cddb84",
+      "VqDataCodec.cs": "3df5500c1fd516a4e999701b062f5223636cfea8d42ccaab86583b20bbea8526",
+      "PvmFlags.cs": "1a9dc2d6474679f4c144d1e5a1a01d9e45b29dbf4164e87861783d9e22c591c8",
+      "SquareTwiddledDataCodec.cs": "364be0c4fee15c7508b1acc5f9e515e936b17d396f4cdb0354bff5fd30c71970",
+      "DataCodec.cs": "115cfcd8a1c1c56a4b288c3acbcdb4ab6330b506a9996228351aaf0613f34df3",
+      "PvmReader.cs": "81f078341d889b227875b1e8968ea6b8e965b2e2090c4464b967290e680032fa",
+      "SquareTwiddledMipmapsDataCodec.cs": "7a7b199cfb0e0bc8b85f36b41a83aed8e7a1a4e55396b0fc2fc74d6a1de8ef58",
+      "RectangleDataCodec.cs": "a0267fe3bdd4d2eb66bce47beb35ee6357848bd5f476ed2bd1256300eeb5e2ae",
+      "Argb4444PixelCodec.cs": "c2c8c9401440adf980a38e758b211cf26eb8538345724df2b58b19ba2c20b49d",
+      "Argb1555PixelCodec.cs": "6ab571a31b395c285677d77be1248a09d54cd4c41a708cc8ba4fdbb3463bc79b",
+      "PvrTextureDecoder.cs": "53d88d219a7b10896ff14dc1769ab817638ee90b4c8f6d5d39542f4e12eabd6c"
+    }
+  },
+  "parse_rules": {
+    "pixel_pointer": "PVRT start+16, exact77f2f0",
+    "payload_bytes": "chunk lengthword\u22128 (includes uninterpreted tail)",
+    "metadata_low_flags": {
+      "0x1": "raw filename28",
+      "0x2": "formats2",
+      "0x4": "dimensions2",
+      "0x8": "global index4"
+    },
+    "unknowns": "raw unknown chunks, metadata flags, reserved fields, GBIX suffixes, table/global/ordinal differences and payload tails retained"
+  },
+  "formats": {
+    "pixel": [
+      "0 ARGB1555",
+      "1 RGB565",
+      "2 ARGB4444"
+    ],
+    "data": [
+      "1 square twiddled",
+      "2 square twiddled with all mip levels",
+      "3 VQ",
+      "9 rectangle"
+    ],
+    "other_formats": "Explicit unsupported failures; no grayscale/palette/stride/small-VQ guess"
+  },
+  "ownership": {
+    "asset": "Archive owns immutable-by-convention source bytes and raw record/chunk facts; decode retains exact packed16 plus RGBA8",
+    "binding": "Archive identity and normalized ordinal must bind through future source texlist owner; no texaddr/GPU/cache/lifetime default"
+  },
+  "verification": {
+    "records": 532,
+    "levels": 540,
+    "original_packed_match": true,
+    "primary_rgba_policy_match": true,
+    "synthetic_metadata_flag_profiles": 16,
+    "optimized_unit": true,
+    "ubsan_unit": true,
+    "original_report": "original-ninja-texture-comparison.json",
+    "header_and_converter_ranges_sha256": {
+      "0x77f2f0": "54b32126ebe3b34e2adc050f39ab3ac74b7761159ca07a097825698c7b414cf4",
+      "0x77f3f0": "7c8e1401795f95d4b7767ec4ee2d12d66c930aef401c3f00343175bac590b90f",
+      "0x78bc30": "18aa2d73f61557b818e69ab55a98b6781c916dd82ce454f7b780469bd2b8998a",
+      "0x78bd10": "75049803c4efb10b829d01b537932f024f2cf1ed79c3e18cd80c64c738645a5d",
+      "0x78bf50": "e967aa6074b1f25401cf3a236dd85623b31260c9ae6b4d9a55b7fca447425861",
+      "0x78c570": "1285fb44ae9da658903ca35293ada9bba213af59cccc66c21c1158df64839fbd"
+    },
+    "library_sha256": "af52def46d00a1bcb132be3fed9446a21c4a2a9cbc953f167ef834ea091174c0",
+    "compiler": "Clang 21.0.0 (clang-2100.3.34.2); ARM64 C++17 O2 read-only PVM/PVRT source16-bit layouts; RGBA8 floor255/max policy",
+    "source_file_sha256": {
+      "src/ninja_texture.hpp": "0026635ad4d01daa52c4ac76e91c4a53bc116912f209487dd662d90adac286d8",
+      "src/ninja_texture.cpp": "1490e04aaee4bb69f1c1ab34f16a942c1b6f2f9ee7b9d3293d9c7d9b3fb185ea",
+      "tests/native_ninja_texture_probe.cpp": "845c042e82fe9ae1e3356cf0597720a1e701be9d03d6cbef33306f4c55e8f7b8",
+      "tools/verify_original_ninja_texture.py": "64a8241865c59b84052c983cb6e949284708a18ad35e3e50114e363f14f8b8e8"
+    }
+  },
+  "bubble": {
+    "offset": 894768,
+    "size": 8224,
+    "pixel": 0,
+    "data": 9,
+    "reserved": 0,
+    "width": 64,
+    "height": 64,
+    "table_index": 130,
+    "name_raw_hex": "627562626c6500000000000000000000000000000000000000000000",
+    "formats_raw_hex": "0009",
+    "dimensions_raw_hex": "4400",
+    "global_index": 6223,
+    "chunk_sha256": "555f9a3c830740379d0814fb5eb26899ed0ee676fa8336cf09a91dc76b50e8dd",
+    "levels": [
+      {
+        "width": 64,
+        "height": 64,
+        "source_offset": 894784,
+        "encoded_bytes": 8192,
+        "packed16_sha256": "6a7ffa5f6c11e8c0fb6dcf4f6638be5a723c8e992ccaf42c36d7d55c700d077a",
+        "rgba8_sha256": "3c91abb969cfad045b06fbc3ff3354d263c73000b070952e0b792eb30ca9462a",
+        "tail_offset": 902976,
+        "tail_bytes": 16
+      }
+    ]
+  },
+  "bubble_artifacts": {
+    "EFF_REGULAR-130.rgba8": {
+      "bytes": 16384,
+      "sha256": "3c91abb969cfad045b06fbc3ff3354d263c73000b070952e0b792eb30ca9462a"
+    },
+    "EFF_REGULAR-130.packed16": {
+      "bytes": 8192,
+      "sha256": "6a7ffa5f6c11e8c0fb6dcf4f6638be5a723c8e992ccaf42c36d7d55c700d077a"
+    },
+    "EFF_REGULAR-130.png": {
+      "bytes": 2169,
+      "sha256": "911866ea0d85385e0e371afe2992d572c073aacf50a618dfd6c3727d9fbadb1e"
+    }
+  },
+  "limits": [
+    "Safe truncated/unsupported-resource failures are native boundary design, not claims about source undefined input behavior",
+    "Primary PuyoTools reverses name/global low flag labels; source77f3f0 governs parser and16 synthetic masks corroborate it",
+    "RGBA8 integer floor255/max conversion is a declared primary-library policy; exact packed16 remains authoritative for renderer fidelity",
+    "Original77f7f0 registry/refcount,78cf20 cache, D3D/Metal allocation, filtering and GPU normalized-color behavior remain unclosed",
+    "Selected source files establish532 records; no other stage/mod archive or live modified-loader binding is inferred"
+  ],
+  "status": "Source, probe and tests frozen for parent production integration"
+}

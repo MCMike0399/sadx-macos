@@ -1,0 +1,87 @@
+
+void FUN_0078ca00(int *param_1,undefined4 param_2,undefined4 param_3,int param_4)
+
+{
+  undefined4 *puVar1;
+  undefined4 *puVar2;
+  int iVar3;
+  int in_EAX;
+  int iVar4;
+  int *piVar5;
+  int iVar6;
+  int *unaff_EBX;
+  code *pcVar7;
+  int *unaff_EBP;
+  undefined4 unaff_ESI;
+  uint uVar8;
+  uint uVar9;
+  undefined4 uStack_8;
+  
+  iVar3 = (int)param_1;
+  piVar5 = *(int **)((int)param_1 + 0x34);
+  if ((piVar5 == (int *)0x0) &&
+     (puVar1 = (undefined4 *)((int)param_1 + 0x28), puVar2 = (undefined4 *)((int)param_1 + 0x24),
+     param_1 = piVar5,
+     iVar4 = (**(code **)(*DAT_03d128b0 + 0x50))
+                       (DAT_03d128b0,*puVar2,*puVar1,0,0,param_3,1,&param_1), piVar5 = param_1,
+     iVar4 != 0)) {
+    FUN_00789dd0();
+    piVar5 = param_1;
+  }
+  param_1 = piVar5;
+  piVar5 = &DAT_0389d59c;
+  iVar4 = 0;
+  do {
+    if (*piVar5 == in_EAX) goto LAB_0078ca61;
+    iVar4 = iVar4 + 1;
+    piVar5 = piVar5 + 1;
+  } while (iVar4 != 7);
+  iVar4 = 0;
+LAB_0078ca61:
+  piVar5 = &DAT_0389d4f8;
+  iVar6 = 0xb;
+  do {
+    if (*piVar5 == *(int *)(iVar3 + 0x24)) {
+      uVar9 = piVar5[1];
+      goto LAB_0078ca7e;
+    }
+    iVar6 = iVar6 + -1;
+    piVar5 = piVar5 + 2;
+  } while (iVar6 != 0);
+  uVar9 = 0;
+LAB_0078ca7e:
+  if (param_4 == 0x20000000) {
+    pcVar7 = (code *)(&DAT_03d08be0)[iVar4];
+  }
+  else {
+    pcVar7 = (code *)(&DAT_038a63d0)[iVar4];
+  }
+  if (pcVar7 == (code *)0x0) {
+    FUN_00789dd0();
+  }
+  uVar8 = 1;
+  if (uVar9 != 0) {
+    do {
+      iVar4 = uVar8 - 1;
+      (**(code **)(*param_1 + 0x3c))(param_1,iVar4,&param_4);
+      if (param_1 == (int *)0x0) {
+        FUN_00789dd0();
+      }
+      else {
+        iVar6 = (**(code **)(*param_1 + 0x24))(param_1,&stack0xffffffec,0,0);
+        if (iVar6 == 0) {
+          (*pcVar7)(iVar4,unaff_ESI,*(undefined4 *)(iVar3 + 0x24),uStack_8,uVar9 - uVar8);
+          (**(code **)(*unaff_EBX + 0x28))(unaff_EBX);
+          (**(code **)(*unaff_EBP + 8))(unaff_EBP);
+        }
+        else {
+          FUN_00789dd0();
+          (**(code **)(*unaff_EBX + 8))(unaff_EBX);
+        }
+      }
+      uVar8 = uVar8 + 1;
+    } while (uVar8 <= uVar9);
+  }
+  return;
+}
+

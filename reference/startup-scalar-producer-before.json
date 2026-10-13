@@ -1,0 +1,26 @@
+{
+  "stage": "before approved source-produced scalar additions",
+  "native_sources": {
+    "src/task.cpp": "eb66082330d7ee8c31d06a32567f6d76ebb93f944f90918e756e9b771d9d7ab7",
+    "src/task.hpp": "d0b244066876f3bfa3f4d271736f7166f0e1fb8bfcfff3592ff720d594d81ae2",
+    "src/player_startup.cpp": "c384a825c407e4a9b20d76f18213be460a63b67d6ab266350a858f2e35beaae3",
+    "src/player_task.hpp": "7dee4011e743b1aa2c7ac67193c693b648d245079337ec22e609f6bb38cb7685",
+    "src/player_physics.hpp": "1515ff9ae9bf6e78e921b9e6ba08b81d92b4a35ecea2ae01036a80eb37ef92c1",
+    "tests/task_lifecycle.cpp": "b8457711644b8fb97c8c8124ba9d4f329a7cd2e462308dd2501f5f627ff5731c",
+    "tests/player_startup.cpp": "7b396c05b2edd33999bb88b1e5a1fdf2d101640e595ab74ef64959b531a9b95b"
+  },
+  "scope": "Only512-bytecalloc physics zeros, known generic task-counter bytes and calloc-child task-counter zero; event action-list remains unknown",
+  "after_native_sources": {
+    "src/task.cpp": "b180f52ef1f05e67f7ef951b63c20cc932ea032e45ed885fbceecf95f41e3aaa",
+    "src/task.hpp": "d0b244066876f3bfa3f4d271736f7166f0e1fb8bfcfff3592ff720d594d81ae2",
+    "src/player_startup.cpp": "a2fca1f3a50b2d6297d5cfa71a59a3021ab0d85117c13b443a75b8adcf796136",
+    "src/player_task.hpp": "7dee4011e743b1aa2c7ac67193c693b648d245079337ec22e609f6bb38cb7685",
+    "src/player_physics.hpp": "419eca58b2252f7413bf24fc802e626a844273f09e94ccec028dbfdf91e31ced",
+    "tests/task_lifecycle.cpp": "ea3ff7dbf4a54416db746bbe6640def4be2735ab5af177ed47f6bddacfceb497",
+    "tests/player_startup.cpp": "c49aceb2f6e8ef205d2947abfe987ca8c594a23851f12b0a9c8110a7a24a9177"
+  },
+  "focused_tests": [
+    "Source startup parameter asset1056 knowncalloczeros signedcounter/liveunknowntest passed",
+    "Source lifecycle childzero counters/eventfacts remain omitted passed"
+  ]
+}

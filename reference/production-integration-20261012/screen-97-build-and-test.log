@@ -1,0 +1,439 @@
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -fobjc-arc src/metal_stage.mm -framework Foundation -framework Metal -framework CoreGraphics -framework GameController -o build/sadx-metal
+python3 tools/extract.py "../Sonic Adventure DX/sonic.exe" --output build/assets
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/ninja_math.cpp build/libsadx-core.a -o build/ninja-math-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/speedrun.cpp build/libsadx-core.a -o build/speedrun-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/input.cpp build/libsadx-core.a -o build/input-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/task.cpp build/libsadx-core.a -o build/task-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_motion.cpp build/libsadx-core.a -o build/player-motion-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_state.cpp build/libsadx-core.a -o build/player-state-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_speed.cpp build/libsadx-core.a -o build/player-speed-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/x87_math.cpp build/libsadx-core.a -o build/x87-math-test
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "col_count": 480,
+  "triangle_count": 31351,
+  "mesh_types": {
+    "3": 1130
+  },
+  "output": "/Users/burbujamc/Developer/rea/sadx-native/build/assets"
+}
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/x87_transcendental.cpp build/libsadx-core.a -o build/x87-transcendental-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_coordinates.cpp build/libsadx-core.a -o build/player-coordinates-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_input.cpp build/libsadx-core.a -o build/player-input-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_input_producer.cpp build/libsadx-core.a -o build/player-input-producer-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/crt_integer.cpp build/libsadx-core.a -o build/crt-integer-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/crt_asin.cpp build/libsadx-core.a -o build/crt-asin-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/crt_acos.cpp build/libsadx-core.a -o build/crt-acos-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/floor_angles.cpp build/libsadx-core.a -o build/floor-angles-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_movement.cpp build/libsadx-core.a -o build/player-movement-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_heading.cpp build/libsadx-core.a -o build/player-heading-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_acceleration_ground.cpp build/libsadx-core.a -o build/player-acceleration-ground-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/sse_math.cpp build/libsadx-core.a -o build/sse-math-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/input_mod_axes.cpp build/libsadx-core.a -o build/input-mod-axes-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_rotation.cpp build/libsadx-core.a -o build/player-rotation-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_acceleration_air.cpp build/libsadx-core.a -o build/player-acceleration-air-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_projection.cpp build/libsadx-core.a -o build/player-projection-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_acceleration_alternate.cpp build/libsadx-core.a -o build/player-acceleration-alternate-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_position.cpp build/libsadx-core.a -o build/player-position-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/crt_floor.cpp build/libsadx-core.a -o build/crt-floor-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_contact_initializer.cpp build/libsadx-core.a -o build/player-contact-initializer-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/collision_shapes.cpp build/libsadx-core.a -o build/collision-shapes-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/collision_normal.cpp build/libsadx-core.a -o build/collision-normal-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_path.cpp build/libsadx-core.a -o build/player-path-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_direction_reset.cpp build/libsadx-core.a -o build/player-direction-reset-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/crt_sqrt.cpp build/libsadx-core.a -o build/crt-sqrt-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/crt_fabs.cpp build/libsadx-core.a -o build/crt-fabs-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/task_work.cpp build/libsadx-core.a -o build/task-work-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_mesh_math.cpp build/libsadx-core.a -o build/player-mesh-math-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_plane.cpp build/libsadx-core.a -o build/player-plane-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_reaction.cpp build/libsadx-core.a -o build/player-reaction-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/crt_atan2.cpp build/libsadx-core.a -o build/crt-atan2-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_mesh_query.cpp build/libsadx-core.a -o build/player-mesh-query-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_hold.cpp build/libsadx-core.a -o build/player-hold-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_mesh_registry.cpp build/libsadx-core.a -o build/player-mesh-registry-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_startup.cpp build/libsadx-core.a -o build/player-startup-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_contact_attributes.cpp build/libsadx-core.a -o build/player-contact-attributes-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_contact_response.cpp build/libsadx-core.a -o build/player-contact-response-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_auxiliary_effect.cpp build/libsadx-core.a -o build/player-auxiliary-effect-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/sonic_player.cpp build/libsadx-core.a -o build/sonic-player-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_scene_position.cpp build/libsadx-core.a -o build/player-scene-position-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_scene_position_binding.cpp build/libsadx-core.a -o build/player-scene-position-binding-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/ninja_texture.cpp build/libsadx-core.a -o build/ninja-texture-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/ninja_render.cpp build/libsadx-core.a -o build/ninja-render-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/ninja_sprite.cpp build/libsadx-core.a -o build/ninja-sprite-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/game_logic_support.cpp build/libsadx-core.a -o build/game-logic-support-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/game_logic.cpp build/libsadx-core.a -o build/game-logic-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/ninja_sprite_queue.cpp build/libsadx-core.a -o build/ninja-sprite-queue-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_animation.cpp build/libsadx-core.a -o build/player-animation-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_animation_decode.cpp build/libsadx-core.a -o build/player-animation-decode-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/sonic_animation_table.cpp build/libsadx-core.a -o build/sonic-animation-table-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/game_frame_control.cpp build/libsadx-core.a -o build/game-frame-control-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/ninja_texture_selection.cpp build/libsadx-core.a -o build/ninja-texture-selection-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/game_scene_logic.cpp build/libsadx-core.a -o build/game-scene-logic-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/scene_input_producer.cpp build/libsadx-core.a -o build/scene-input-producer-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/game_mode_leaves.cpp build/libsadx-core.a -o build/game-mode-leaves-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/model_dlls.cpp build/libsadx-core.a -o build/model-dlls-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/sound_manager.cpp build/libsadx-core.a -o build/sound-manager-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/game_frame_owners.cpp build/libsadx-core.a -o build/game-frame-owners-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/ninja_frame_calls.cpp build/libsadx-core.a -o build/ninja-frame-calls-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/mod_loader_frame.cpp build/libsadx-core.a -o build/mod-loader-frame-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/win32_profile.cpp build/libsadx-core.a -o build/win32-profile-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/guest_heap.cpp build/libsadx-core.a -o build/guest-heap-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/ninja_memory.cpp build/libsadx-core.a -o build/ninja-memory-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/game_winmain.cpp build/libsadx-core.a -o build/game-winmain-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/game_library_init.cpp build/libsadx-core.a -o build/game-library-init-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/ninja_device_init.cpp build/libsadx-core.a -o build/ninja-device-init-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/ninja_texture_pool.cpp build/libsadx-core.a -o build/ninja-texture-pool-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/ninja_system_init.cpp build/libsadx-core.a -o build/ninja-system-init-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/game_window.cpp build/libsadx-core.a -o build/game-window-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/ninja_vibration.cpp build/libsadx-core.a -o build/ninja-vibration-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/ninja_input_devices.cpp build/libsadx-core.a -o build/ninja-input-devices-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/ninja_queue_consumer.cpp build/libsadx-core.a -o build/ninja-queue-consumer-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/ninja_fog.cpp build/libsadx-core.a -o build/ninja-fog-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/ninja_keyboard.cpp build/libsadx-core.a -o build/ninja-keyboard-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/game_loop.cpp build/libsadx-core.a -o build/game-loop-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/input_mod_pad.cpp build/libsadx-core.a -o build/input-mod-pad-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/game_mode.cpp build/libsadx-core.a -o build/game-mode-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/game_startup.cpp build/libsadx-core.a -o build/game-startup-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/ninja_queue_lifecycle.cpp build/libsadx-core.a -o build/ninja-queue-lifecycle-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/audio_stream.cpp build/libsadx-core.a -o build/audio-stream-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/game_reset.cpp build/libsadx-core.a -o build/game-reset-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/game_view.cpp build/libsadx-core.a -o build/game-view-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/ninja_projection_range.cpp build/libsadx-core.a -o build/ninja-projection-range-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/d3dx_math.cpp build/libsadx-core.a -o build/d3dx-math-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/ninja_screen.cpp build/libsadx-core.a -o build/ninja-screen-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/axis_projection.cpp build/libsadx-core.a -o build/axis-projection-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_scene.cpp build/libsadx-core.a -o build/player-scene-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/task_lifecycle.cpp build/libsadx-core.a -o build/task-lifecycle-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/player_mesh_registry_contacts.cpp build/libsadx-core.a -o build/player-mesh-registry-contacts-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/sonic_actions.cpp build/libsadx-core.a -o build/sonic-actions-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/input_chain.cpp build/libsadx-core.a -o build/input-chain-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/game_runtime.cpp build/libsadx-core.a -o build/game-runtime-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -fobjc-arc -Isrc tests/mac_input.mm src/mac_input.mm build/libsadx-core.a -framework AppKit -framework GameController -o build/mac-input-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc tests/mac_clock.cpp build/libsadx-macos.a build/libsadx-core.a -o build/mac-clock-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_math_probe.cpp build/libsadx-core.a -o build/native-math-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_speed_probe.cpp build/libsadx-core.a -o build/native-player-speed-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_coordinates_probe.cpp build/libsadx-core.a -o build/native-player-coordinates-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_input_probe.cpp build/libsadx-core.a -o build/native-player-input-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_input_producer_probe.cpp build/libsadx-core.a -o build/native-player-input-producer-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_crt_integer_probe.cpp build/libsadx-core.a -o build/native-crt-integer-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_floor_angles_probe.cpp build/libsadx-core.a -o build/native-floor-angles-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_movement_probe.cpp build/libsadx-core.a -o build/native-player-movement-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_heading_probe.cpp build/libsadx-core.a -o build/native-player-heading-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_ground_acceleration_probe.cpp build/libsadx-core.a -o build/native-ground-acceleration-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_x87_memory_probe.cpp build/libsadx-core.a -o build/native-x87-memory-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_sse_math_probe.cpp build/libsadx-core.a -o build/native-sse-math-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_input_mod_axes_probe.cpp build/libsadx-core.a -o build/native-input-mod-axes-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_rotation_probe.cpp build/libsadx-core.a -o build/native-player-rotation-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_air_acceleration_probe.cpp build/libsadx-core.a -o build/native-air-acceleration-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_axis_projection_probe.cpp build/libsadx-core.a -o build/native-axis-projection-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_projection_angle_probe.cpp build/libsadx-core.a -o build/native-projection-angle-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_alternate_acceleration_probe.cpp build/libsadx-core.a -o build/native-alternate-acceleration-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_position_probe.cpp build/libsadx-core.a -o build/native-player-position-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_crt_floor_probe.cpp build/libsadx-core.a -o build/native-crt-floor-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_contact_initializer_probe.cpp build/libsadx-core.a -o build/native-player-contact-initializer-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_collision_shapes_probe.cpp build/libsadx-core.a -o build/native-collision-shapes-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_path_probe.cpp build/libsadx-core.a -o build/native-player-path-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_direction_reset_probe.cpp build/libsadx-core.a -o build/native-player-direction-reset-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_scene_probe.cpp build/libsadx-core.a -o build/native-player-scene-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_crt_sqrt_probe.cpp build/libsadx-core.a -o build/native-crt-sqrt-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_crt_fabs_probe.cpp build/libsadx-core.a -o build/native-crt-fabs-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_crt_asin_binary64_probe.cpp build/libsadx-core.a -o build/native-crt-asin-binary64-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_task_work_probe.cpp build/libsadx-core.a -o build/native-task-work-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_task_lifecycle_probe.cpp build/libsadx-core.a -o build/native-task-lifecycle-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_mesh_math_probe.cpp build/libsadx-core.a -o build/native-player-mesh-math-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_plane_probe.cpp build/libsadx-core.a -o build/native-player-plane-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_reaction_probe.cpp build/libsadx-core.a -o build/native-player-reaction-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_crt_atan2_probe.cpp build/libsadx-core.a -o build/native-crt-atan2-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_mesh_query_probe.cpp build/libsadx-core.a -o build/native-player-mesh-query-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_hold_probe.cpp build/libsadx-core.a -o build/native-player-hold-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_mesh_registry_probe.cpp build/libsadx-core.a -o build/native-player-mesh-registry-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_contact_attributes_probe.cpp build/libsadx-core.a -o build/native-player-contact-attributes-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_startup_probe.cpp build/libsadx-core.a -o build/native-player-startup-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_contact_response_probe.cpp build/libsadx-core.a -o build/native-player-contact-response-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_auxiliary_effect_probe.cpp build/libsadx-core.a -o build/native-player-auxiliary-effect-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_sonic_player_probe.cpp build/libsadx-core.a -o build/native-sonic-player-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_scene_position_probe.cpp build/libsadx-core.a -o build/native-player-scene-position-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_scene_helpers_probe.cpp build/libsadx-core.a -o build/native-player-scene-helpers-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_sonic_action_probe.cpp build/libsadx-core.a -o build/native-sonic-action-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_ninja_texture_probe.cpp build/libsadx-core.a -o build/native-ninja-texture-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_ninja_render_probe.cpp build/libsadx-core.a -o build/native-ninja-render-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_ninja_sprite_probe.cpp build/libsadx-core.a -o build/native-ninja-sprite-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_game_logic_support_probe.cpp build/libsadx-core.a -o build/native-game-logic-support-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_game_logic_probe.cpp build/libsadx-core.a -o build/native-game-logic-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_ninja_sprite_queue_probe.cpp build/libsadx-core.a -o build/native-ninja-sprite-queue-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_animation_probe.cpp build/libsadx-core.a -o build/native-player-animation-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_player_animation_blend_probe.cpp build/libsadx-core.a -o build/native-player-animation-blend-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_sonic_animation_table_probe.cpp build/libsadx-core.a -o build/native-sonic-animation-table-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_ninja_frame_calls_probe.cpp build/libsadx-core.a -o build/native-ninja-frame-calls-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_speedrun_on_frame_probe.cpp build/libsadx-core.a -o build/native-speedrun-on-frame-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_game_winmain_probe.cpp build/libsadx-core.a -o build/native-game-winmain-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_cd_drive_scan_probe.cpp build/libsadx-core.a -o build/native-cd-drive-scan-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_library_init_probe.cpp build/libsadx-core.a -o build/native-library-init-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_device_setup_probe.cpp build/libsadx-core.a -o build/native-device-setup-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_system_init_probe.cpp build/libsadx-core.a -o build/native-system-init-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_message_pump_probe.cpp build/libsadx-core.a -o build/native-message-pump-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_vibration_probe.cpp build/libsadx-core.a -o build/native-vibration-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_vibration_stop_probe.cpp build/libsadx-core.a -o build/native-vibration-stop-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_input_devices_probe.cpp build/libsadx-core.a -o build/native-input-devices-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_screen_init_probe.cpp build/libsadx-core.a -o build/native-screen-init-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_screen_polygon_probe.cpp build/libsadx-core.a -o build/native-screen-polygon-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_d3dx_project_probe.cpp build/libsadx-core.a -o build/native-d3dx-project-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_game_frame_control_probe.cpp build/libsadx-core.a -o build/native-game-frame-control-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_ninja_texture_selection_probe.cpp build/libsadx-core.a -o build/native-ninja-texture-selection-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_game_scene_logic_probe.cpp build/libsadx-core.a -o build/native-game-scene-logic-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_scene_input_producer_probe.cpp build/libsadx-core.a -o build/native-scene-input-producer-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_ninja_sprite_display_probe.cpp build/libsadx-core.a -o build/native-ninja-sprite-display-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_ninja_queue_consumer_probe.cpp build/libsadx-core.a -o build/native-ninja-queue-consumer-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_game_loop_probe.cpp build/libsadx-core.a -o build/native-game-loop-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_frame_completion_probe.cpp build/libsadx-core.a -o build/native-frame-completion-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_speedrun_limiter_probe.cpp build/libsadx-core.a -o build/native-speedrun-limiter-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_input_mod_pad_probe.cpp build/libsadx-core.a -o build/native-input-mod-pad-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_controller_init_probe.cpp build/libsadx-core.a -o build/native-controller-init-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_game_mode_probe.cpp build/libsadx-core.a -o build/native-game-mode-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_game_startup_probe.cpp build/libsadx-core.a -o build/native-game-startup-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_ninja_queue_lifecycle_probe.cpp build/libsadx-core.a -o build/native-ninja-queue-lifecycle-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_audio_stream_probe.cpp build/libsadx-core.a -o build/native-audio-stream-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_crt_rand_probe.cpp build/libsadx-core.a -o build/native-crt-rand-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_game_reset_probe.cpp build/libsadx-core.a -o build/native-game-reset-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_game_reset_composed_probe.cpp build/libsadx-core.a -o build/native-game-reset-composed-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_game_view_probe.cpp build/libsadx-core.a -o build/native-game-view-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_fov_probe.cpp build/libsadx-core.a -o build/native-fov-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_projection_range_probe.cpp build/libsadx-core.a -o build/native-projection-range-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_fog_probe.cpp build/libsadx-core.a -o build/native-fog-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_stream_players_probe.cpp build/libsadx-core.a -o build/native-stream-players-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_keyboard_probe.cpp build/libsadx-core.a -o build/native-keyboard-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_game_mode_leaves_probe.cpp build/libsadx-core.a -o build/native-game-mode-leaves-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_model_dlls_probe.cpp build/libsadx-core.a -o build/native-model-dlls-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_sound_manager_probe.cpp build/libsadx-core.a -o build/native-sound-manager-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/native_game_frame_owners_probe.cpp build/libsadx-core.a -o build/native-game-frame-owners-probe.dylib
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -fobjc-arc -Isrc tests/metal_texture.mm build/libsadx-macos.a build/libsadx-core.a -framework Foundation -framework Metal -framework CoreGraphics -framework ImageIO -o build/metal-texture-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -fobjc-arc -Isrc tests/metal_sprite.mm build/libsadx-macos.a build/libsadx-core.a -framework Foundation -framework Metal -framework CoreGraphics -framework ImageIO -o build/metal-sprite-test
+xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -fobjc-arc -Isrc tests/metal_sprite_composition.mm build/libsadx-macos.a build/libsadx-core.a -framework Foundation -framework Metal -framework CoreGraphics -framework ImageIO -o build/metal-sprite-composition-test
+python3 -m unittest discover -s tests -p 'test_*.py'
+....
+----------------------------------------------------------------------
+Ran 4 tests in 0.204s
+
+OK
+python3 tools/check_global_owners.py
+159670 owned bytes, 0 with more than one owner struct
+./build/ninja-math-test build/assets/ninja-trig.f32
+Ninja math: 65536 integer angles, exact table knots, wraps, symmetries, vector order and signed roots passed.
+Original full-game x87 control state/runtime equivalence remains unverified.
+./build/speedrun-test
+speedrun semantics passed
+./build/input-test
+input state passed
+./build/task-test
+Task dispatch: eight lists, alias, mutation, deferred free, child traversal, nested context and native ownership passed.
+Task lifecycle has separate source tests; full game integration remains unfinished.
+./build/player-motion-test
+Player motion: nullable speed clear, gravity arithmetic/required transform, failure preservation and ordered axis limits passed.
+PGetSpeed, original rotation and x87/runtime equivalence remain unverified.
+./build/player-state-test build/assets/player-parameters.bin
+Player seed: eight source rows, original bit patterns, upgrade masks and field stores passed.
+Full PInitialize resource/start-position/task behavior remains incomplete.
+./build/player-speed-test
+PGetSpeed local body: source order, stop/brake cases, mandatory boundaries, partial stores and FCOM NaNs passed.
+Input/rotation test doubles do not prove original callees or functioning gameplay.
+./build/mac-input-test
+mac input adapter passed
+./build/mac-clock-test
+Mac clock: 10 MHz QPC; 63 limiter frames in 1.06763 s (min 158730, max 178513 ticks; source interval 158730).
+./build/x87-math-test build/assets/ninja-trig.f32
+Native software ext80: cancellation, 24/53/64-bit precision, rounding, flags, payloads, ownership, threads and original-table interpolation passed.
+Actual game control state and hardware exception delivery remain unverified.
+./build/x87-transcendental-test
+Native Bochs P5/P6 FPATAN candidate: RC/PC independence, axes, signed zero, NaN payload, exception ownership and table intervals passed.
+Intel Ultra hardware equivalence remains unverified.
+./build/player-coordinates-test build/assets/ninja-trig.f32 build/assets/ninja-unit.f32
+Source coordinate/matrix owner: directions, wrap, null task, capacity, prior frames, normalization and explicit floor boundary passed.
+General floor angles and actual runtime/hardware state remain unverified.
+./build/player-input-test
+player input query passed
+./build/player-input-producer-test build/assets/input-producer-constants.bin
+player input producer passed
+./build/crt-integer-test
+CRT integer conversion: twelve explicit control profiles, sign/carry correction and indefinite values passed.
+Original hardware exception delivery remains unverified.
+./build/crt-asin-test
+Source CRT asin: literal/classifier branches, 12controlwords, explicit policy/dispatcher and source control-state effects passed.
+FPATAN is the selected Bochs model; original hardware and real matherr runtime remain unverified.
+./build/crt-acos-test
+CRT acos: classified endpoints, source FPATAN order, explicit policy and math-function identity passed.
+./build/floor-angles-test build/assets/ninja-trig.f32 build/assets/ninja-unit.f32
+Floor angles: exact source thresholds, actual numeric/CRT owner, partial stores and real floor-coordinate integration passed.
+Runtime policy is explicitly selected; hardware FPATAN/real error dispatcher remain unverified.
+./build/player-movement-test build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/player-parameters.bin
+Recovered movement composition: real input query, task/floor transforms, stack ownership and retained failure facts passed.
+Normalized input production, collision and complete game ticks remain incomplete.
+./build/player-heading-test build/assets/ninja-trig.f32 build/assets/ninja-unit.f32
+Source heading: wrapped signed angle policy, real coordinate owners and partial stores passed.
+./build/player-acceleration-ground-test build/assets/player-parameters.bin build/assets/ground-acceleration-constants.bin build/assets/ninja-trig.f32 build/assets/ninja-unit.f32
+Ground acceleration: explicit/lazy boundaries, partial stores, shared task yaw, actual heading and cross primitives passed.
+Alternate acceleration and remaining rotation callees are unresolved; full gameplay/hardware is unverified.
+./build/sse-math-test
+./build/input-mod-axes-test
+./build/player-rotation-test build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/player-rotation-constants.bin
+Source rotation: four real owners, timer/input boundaries, yaw policies, source normalization and partial effects passed.
+Hardware FPATAN/runtime state and direction-reset resource queries remain unverified.
+./build/player-acceleration-air-test build/assets/player-parameters.bin build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/player-rotation-constants.bin
+Air acceleration: shared owners, gravity/input/real yaw, source control branches and partial failures passed.
+./build/axis-projection-test build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/coordinate-axis-constants.bin
+Axis/projection: source row policy, non-unit axis, retained ST0, shared stack ownership and partial failure passed.
+Complete alternate acceleration/vector-angle and original hardware state remain separate verification scopes.
+./build/player-projection-test build/assets/projection-angle-constants.bin
+Signed vector-angle: real CRT owner, clamps, optional direction, canonical cross/alias and partial CRT failures passed.
+Original hardware exceptions and complete gameplay remain unverified.
+./build/player-acceleration-alternate-test build/assets/player-parameters.bin build/assets/ground-acceleration-constants.bin build/assets/event-acceleration-constants.bin build/assets/coordinate-axis-constants.bin build/assets/projection-angle-extra-constants.bin build/assets/ninja-trig.f32 build/assets/ninja-unit.f32
+Alternate acceleration: shared event mutations, lazy state, actual heading, query provenance and projection/CRT failure facts passed.
+./build/player-position-test build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/player-rotation-constants.bin build/assets/player-position-constants.bin
+player position local control and mandatory scene boundaries passed
+./build/crt-floor-test build/assets/crt-floor-constants.bin
+Source CRTfloor: SSE/fallback routing, DAZ, signed zero, FRNDINT PC independence and partial error boundaries passed.
+./build/player-contact-initializer-test build/assets/player-parameters.bin build/assets/player-contact-initialization-constants.bin build/assets/player-rotation-constants.bin
+Contact initializer: exact local stores and lazy unknown-state failures passed.
+./build/collision-shapes-test build/assets/ninja-trig.f32 build/assets/ninja-unit.f32
+collision shapes and source point/translate/scale passed
+./build/collision-normal-test build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/coordinate-axis-constants.bin
+collision normal real dispatcher and borrowed resource boundaries passed
+./build/player-path-test build/assets/ninja-trig.f32 build/assets/player-path-constants.bin
+Path query: real source interpolation/CRT wrap, optional facts, sentinel ownership and failure preservation passed.
+./build/player-direction-reset-test build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/player-direction-reset-constants.bin build/assets/ground-acceleration-constants.bin
+Direction reset: real path/plane owners, distance stores, source-false flag mutation and unknown/null boundaries passed.
+./build/player-scene-test "../Sonic Adventure DX/sonic.exe" build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/player-scene-constants.bin
+‚ ‚Ó‚ê‚­ —Ü0
+Scene: real ECoast decode/registration/query, live readviews and partial resource failures passed.
+./build/crt-sqrt-test
+CRT square root: source classification, control words, NaN payloads, negative zero and error policy passed.
+./build/crt-fabs-test
+CRT fabs: source sign-bit path, NaN sign/policy/errno and retained control boundaries passed.
+./build/task-work-test
+Task work arena: source limits, first-fit/reuse, coalescing, exact fit, payload and native references passed.
+./build/task-lifecycle-test
+Source task creation, slots, work cleanup, partial failures and callback mutations passed.
+./build/player-mesh-math-test
+Mesh math: source winding/aliases, CRT partial state, singular sentinel and matrix scaling passed.
+./build/player-plane-test
+Source plane intersection: perpendicular/parallel/null paths and 12 control words passed.
+./build/player-reaction-test build/assets/player-reaction-constants.bin
+Contact reaction: source gates, committed normal, missing resources and native plane/angle composition passed.
+./build/crt-atan2-test
+CRT binary64 atan2 passed12 CW profiles, two-argument boundaries and precision policy
+./build/player-mesh-query-test build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/floor-angle-constants.bin build/assets/player-mesh-query-constants.bin build/assets/coordinate-axis-constants.bin
+Mesh query: actual triangle contacts, precise pending failures and source frame retention passed.
+./build/player-hold-test
+Player hold query passed source routes, live authority, availability order and12 untouched FP profiles
+./build/player-mesh-registry-test build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 "../Sonic Adventure DX/sonic.exe"
+Mesh registry: source sentinel capacities, reuse, actual ECoast triangle production and unknown boundaries passed.
+./build/player-mesh-registry-contacts-test build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 "../Sonic Adventure DX/sonic.exe" build/assets/floor-angle-constants.bin build/assets/player-mesh-query-constants.bin build/assets/coordinate-axis-constants.bin build/assets/player-scene-constants.bin build/assets/player-contact-response-constants.bin
+Mesh composition: actual ECoast registry generation -> broadphase ->453820 contact ->43d180 response passed.
+./build/player-startup-test build/assets/player-parameters.bin
+Player startup: real allocation/registration prefix, live aliases, source events and retained boundaries passed.
+./build/player-contact-attributes-test build/assets/player-parameters.bin build/assets/player-contact-attribute-constants.bin
+Contact attributes: live parameters, all low-byte friction priorities, partial reads and raw signaling stores passed.
+./build/player-contact-response-test build/assets/player-contact-response-constants.bin build/assets/ninja-trig.f32
+Contact response bodies passed12 CW profiles, source selection, alias scratch and required-boundary tests
+./build/player-auxiliary-effect-test build/assets/player-auxiliary-effect-table.bin build/assets/player-parameters.bin
+Auxiliary-effect init/resource callbacks: source table, live lookup, failure context, node cleanup and explicit renderer boundaries passed.
+./build/sonic-player-test build/assets/sonic-player-constants.bin build/assets/sonic-action-dispatch.bin build/assets/ninja-trig.f32 build/assets/ninja-unit.f32
+Sonic control dispatch and source availability tests passed across 12 explicit CW profiles
+./build/sonic-actions-test build/assets/sonic-player-constants.bin
+Grounded/running/jump/spindash predicate and partial-owner tests passed across12 explicit CW profiles
+./build/ninja-texture-test "../Sonic Adventure DX/system/EFF_REGULAR.PVM" "../Sonic Adventure DX/system/BEACH01.PVM" "../Sonic Adventure DX/system/BEACH02.PVM" "../Sonic Adventure DX/system/BEACH03.PVM" "../Sonic Adventure DX/system/OBJ_BEACH.PVM" "../Sonic Adventure DX/system/BEACH_SEA.PVM" "../Sonic Adventure DX/system/BG_BEACH.PVM" "../Sonic Adventure DX/system/EC_CLOUDS.PVM"
+Texture assets: 532 actual records and 540 levels, bubble ranges, partial parse and unsupported/truncated cases passed.
+./build/ninja-render-test build/assets/ninja-blend-tables.bin
+Ninja blend state: source masks, ordered commands, ignored HRESULTs and explicit live resource boundaries passed.
+./build/ninja-sprite-test build/assets/ninja-sprite-constants.bin build/assets/ninja-trig.f32 build/assets/ninja-unit.f32
+Sprite numeric/vertex slices: actual frame/constants, UV/color/source stores and explicit projection/depth boundaries passed.
+./build/game-logic-support-test
+Game logic support: strided partial reads, wrap, source clamp and IDIV boundaries passed.
+./build/game-logic-test
+Game logic: source order, multi-tick press aggregation, live owner replacement and partial failure/cancellation passed.
+./build/game-frame-control-test
+Frame control: source frequency/read/store order, mode branches, real callback and explicit unknown facts passed.
+./build/game-scene-logic-test
+Scene logic: real task ordering, shared arithmetic, stage reloads and required-owner failures passed.
+./build/scene-input-producer-test
+Scene input: 4146b0 masks, ==1 copy/clear gates, partial raw facts, 40f170 order and 40f070 repeat/null boundaries passed.
+./build/game-loop-test
+Game loop: 40cad0 phases, source read/store order, exit tests and owner/cancel boundaries passed.
+./build/game-mode-test
+Game mode: 40c090 dispatch, required results, level-pointer and owner boundaries passed.
+./build/game-startup-test
+Game startup: 40c030 order, 40f350/40a8a0/424c20/789930 stores, Input mod repoint and unknown boundaries passed.
+./build/audio-stream-test
+Audio stream: 410510 init, already-initialized and no-driver paths, owner boundaries passed.
+./build/game-reset-test
+Game reset: CRT rand/srand and 40bf40 stores, frees, reseed and boundaries passed.
+./build/game-view-test
+Game view: 4208e0/420860 stores, owner calls and unknown boundaries passed.
+./build/ninja-projection-range-test
+Projection range: 7815e0 clamps, 403180 cache/transform update and boundaries passed.
+./build/game-runtime-test "../Sonic Adventure DX/sonic.exe" "../Sonic Adventure DX/mods/sadx-input-mod/sadx-input-mod.dll"
+Game runtime: survey ran startup + 3 frames (6 unported owners); native execution stops at 40cad0>40c090>415000>422680.
+./build/input-mod-pad-test
+Input mod pad: DLL poll/convert/publish/soft-reset semantics and explicit boundaries passed.
+./build/input-chain-test
+Input chain: keyboard -> Input 2.6.1 OnInput -> ControllerPointers(raw_input) -> 40fdc0 engine pads passed.
+./build/ninja-sprite-queue-test build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/ninja-depth-tables.bin
+Sprite queue: aligned ownership/log boundaries, exact headers, stable source sort and nullable texture facts passed.
+./build/ninja-texture-selection-test
+Texture selection: source list/index/cache aliasing, partial stores, palette boundaries and render triplet passed.
+./build/ninja-queue-lifecycle-test
+Queue lifecycle: 408630/407ab0/407330 stores, render order, alignment policy and unknown boundaries passed.
+./build/ninja-queue-consumer-test build/assets/ninja-sprite-constants.bin build/assets/ninja-blend-tables.bin build/assets/ninja-depth-tables.bin build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/ninja-texture-returns.bin build/assets/ninja-queue-consumer-constants.bin
+Queue consumer: real sprite zero-depth path, stable/lazy dispatch, typed resources, mode transform and partial failures passed.
+./build/ninja-fog-test
+Ninja fog: device init stores/trace, CTRLFLAG0, unknown caps/device, partial render failure, missing fog-device owner, 4119b0 and 411a20 updates, explicit frexp/EXP2/past-table boundaries passed.
+./build/ninja-keyboard-test
+Ninja keyboard: unknown device, 77f0a0/77ffc0, every-record poll, explicit record addressing, Acquire retry and null device passed.
+./build/game-mode-leaves-test
+Game-mode leaves: unknown facts, borrowed writes, character bound, nested release walk, 413300 hole, 415000 and 42c7b0 nested stops passed.
+./build/sound-manager-test
+Sound manager: idle expiry, 3b292a8 clear, active-record owners, frequency clamp, unknown facts and the 424b10 listener boundary passed.
+./build/game-frame-owners-test
+Game frame owners: 40d4d0/40bcf0, key queries and bounds, nested draw/effect/walk owners, 420840 and the FOV table requirement passed.
+./build/ninja-frame-calls-test
+Ninja frame calls: callback list/3d0fa34/slot bound, BeginScene/EndScene, loader and original Present, Clear records and device boundaries passed.
+./build/mod-loader-frame-test
+Mod loader frame: Init state, Speedrun OnFrame timer roll-over/reset, viewer and quick-save owners and unknown facts passed.
+./build/win32-profile-test
+Win32 profile: lookup, trimming, integer parsing, fallbacks, truncation and flagged forms passed.
+./build/game-winmain-test
+WinMain settings: profile composition, volumes, nested owners, unknown facts and the null procedure passed.
+./build/guest-heap-test
+Guest heap: identities, alignment, unknown contents, bounds, frees and trace passed.
+./build/ninja-memory-test
+njMalloc/njFree and 401a20: lazy heap, reuse, frees, unknown handle and the no-CD scan passed.
+./build/game-library-init-test
+Library init 781070: success path, retry exhaustion with cleanups, unknown viewport and store order passed.
+./build/ninja-device-init-test
+Device setup 791610: viewport math, nested order, the 7943c0 device contract and a missing host passed.
+./build/ninja-texture-pool-test
+Texture pool 77f610: records, pool words, cleared selection owners and the owner bound passed.
+./build/ninja-system-init-test
+System init 401830: profile path, pools, registrations, CRT block, unknown window and null DirectInput passed.
+./build/game-window-test
+Message pump 789bd0: empty queue, drained queue, unknown window and host gaps passed.
+./build/ninja-vibration-test
+Vibration 785190: idle, expiry, unknown state and duration passed.
+./build/ninja-input-devices-test
+Input device polls 792100/791df0: no-device returns, body owner and unknown count passed.
+./build/d3dx-math-test
+D3DX 774310/774150/772615: products, w divide, NULL arms and viewport map passed.
+./build/ninja-screen-test
+Screen 780c30/7912e0/78dbe0/77dfc0: 640x480 setup, depth, fan and stops passed.
+./build/model-dlls-test "../Sonic Adventure DX/system"
+Model DLLs: exact exports, relocated ascending mapping, 85 bindings, missing slot and in-image action pointers passed.
+./build/player-animation-test "../Sonic Adventure DX/system/CHRMODELS_orig.dll" build/assets/player-animation-constants.bin
+Animation real DLL147-record table,73-node transition/key release and12 FP profiles passed; 146 actions, 139 motions, 223 objects, 3650 key arrays decoded
+./build/player-animation-decode-test "../Sonic Adventure DX/system/CHRMODELS_orig.dll"
+Animation PE export/graph/key ranges and explicit artifact namespaces passed
+./build/sonic-animation-table-test
+Sonic animation initializer preserved actual instruction write order, late unknowns, observed nulls and147 records
+./build/player-scene-position-test build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/player-parameters.bin build/assets/player-scene-position-constants.bin build/assets/player-rotation-constants.bin build/assets/player-contact-initialization-constants.bin build/assets/player-contact-response-constants.bin build/assets/player-contact-attribute-constants.bin build/assets/floor-angle-constants.bin build/assets/player-mesh-query-constants.bin build/assets/coordinate-axis-constants.bin
+Scene position: exact early stores, unavailable dependencies and both complete no-contact bodies passed.
+./build/player-scene-position-binding-test build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/player-parameters.bin build/assets/player-scene-position-constants.bin build/assets/player-rotation-constants.bin build/assets/player-contact-initialization-constants.bin build/assets/player-contact-response-constants.bin build/assets/player-contact-attribute-constants.bin build/assets/floor-angle-constants.bin build/assets/player-mesh-query-constants.bin build/assets/coordinate-axis-constants.bin "../Sonic Adventure DX/sonic.exe" build/assets/player-scene-constants.bin build/assets/player-position-constants.bin build/assets/sonic-player-constants.bin ../_reference/sadx/original-player-scene-position-comparison.cases.bin
+Scene binding: 136 actual ECoast PSetPosition paths, 96 retained responses, live parameters, renderer failure and Sonic later-boundary diagnostics passed.

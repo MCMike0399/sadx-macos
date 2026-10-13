@@ -1,0 +1,36 @@
+[
+  {
+    "name": "crt-acos",
+    "artifact": "crt-acos.json",
+    "requested_procedure": "0x6450f0",
+    "canonical_procedure": "0x6450f0",
+    "evidence_id": "ev_af3f1f09d2bc543a4cad4272a617e706c5c8f9483feee7d9c7609522ea015cb9",
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    },
+    "limitations": [
+      "Results depend on Hopper's completed static analysis.",
+      "String values cover native typed objects. Hopper may split long literals into adjacent unterminated fragments; string searches match each object independently.",
+      "Undecodable typed objects retain native display text with an explicit decoding unknown; these values do not establish decoded source literals.",
+      "Reported string encodings are inferred from typed bytes and native display; the original source's intended encoding is unknown."
+    ]
+  },
+  {
+    "name": "crt-acos-body",
+    "artifact": "crt-acos-body.json",
+    "requested_procedure": "0x64510d",
+    "canonical_procedure": "0x64510d",
+    "evidence_id": "ev_d3311d760dfd977d2a5d4f18d473b19043a693e4d2d06b33cbc8c8e8cfc63be4",
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    },
+    "limitations": [
+      "Results depend on Hopper's completed static analysis.",
+      "String values cover native typed objects. Hopper may split long literals into adjacent unterminated fragments; string searches match each object independently.",
+      "Undecodable typed objects retain native display text with an explicit decoding unknown; these values do not establish decoded source literals.",
+      "Reported string encodings are inferred from typed bytes and native display; the original source's intended encoding is unknown."
+    ]
+  }
+]

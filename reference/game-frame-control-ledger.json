@@ -1,0 +1,20 @@
+{
+  "scope": "Local411e30/7899a0/40f010/411e20 frame-mode, signed64 interval and input-byte callback owners",
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "sources": {
+    "sadx-native/src/game_frame_control.hpp": "2b11c9faf0bf7be0488fbc3ec732229aee24d00a4a771af0be272c78df290819",
+    "sadx-native/src/game_frame_control.cpp": "82ca1c1885f4cfdcc78f9edcfb2bcc613f2bd19c46301bb3feb7b5a3e96f887b",
+    "sadx-native/tests/game_frame_control.cpp": "34f91c747cbdf99dc19f0129bd8b1d723297efcdda61a7946b7f00b378e7a9c9",
+    "sadx-native/tests/native_game_frame_control_probe.cpp": "a54023866938aebd114e112fab267148e044cfcb862e5ff476f2975e8f77cd36",
+    "sadx-native/tools/verify_original_game_frame_control.py": "9cf7b9abc8ad63ba268cce26eade9f8f7f653f12c31d8b9b7c45afc2e71261cf"
+  },
+  "comparison": "_reference/sadx/original-game-frame-control-comparison.json",
+  "comparison_sha256": "3568a68f33385edb0fc054ce8dd97e7c4f775ee7691c6387b3074462645c82bc",
+  "cases": 2672,
+  "mismatches": 0,
+  "tests": "Optimized and UBSan passed",
+  "production_integration": "pending source freeze for animation repair/shared rendering edits",
+  "limits": "Actual411e30/7899a0/40f010/411e20 control instructions vs native owners.\n\nCounter words and input bytes are explicit fixtures; no live host clock or\nphysical keys are inferred. Missing facts stop before their actual source read\nas a declared availability fixture. The unused EAX return of the input callback\nis excluded: its actual780074 caller immediately overwrites that register.\n",
+  "corrected_verifier_boundary": "Low-frequency read occurs after pushing frequency high; caller return is ESP+4, not ESP",
+  "source_callback_return": "780074 overwrites EAX immediately after callback; incidental raw-pointer high bits are not modeled"
+}

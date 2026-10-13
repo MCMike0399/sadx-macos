@@ -1,0 +1,110 @@
+{
+  "evidence_type": "expected static source write set, not observed live writes",
+  "observed_live": false,
+  "entries": [
+    {
+      "va": "0x434870",
+      "operation": "camera reset 1",
+      "unmodified_source_bytes": "c705a8cbb2",
+      "expected_live_prefix": "810d",
+      "owner": "Speedrun Mod",
+      "required_target_module": null
+    },
+    {
+      "va": "0x438330",
+      "operation": "camera reset 2",
+      "unmodified_source_bytes": "c705a8cbb2",
+      "expected_live_prefix": "810d",
+      "owner": "Speedrun Mod",
+      "required_target_module": null
+    },
+    {
+      "va": "0x533939",
+      "operation": "Egg Hornet dereference bypass",
+      "unmodified_source_bytes": "8b401050e8",
+      "expected_live_prefix": "909090",
+      "owner": "Speedrun Mod",
+      "required_target_module": null
+    },
+    {
+      "va": "0x440ef5",
+      "operation": "Egg Hornet conditional bypass",
+      "unmodified_source_bytes": "7505b80100",
+      "expected_live_prefix": "9090",
+      "owner": "Speedrun Mod",
+      "required_target_module": null
+    },
+    {
+      "va": "0x431517",
+      "operation": "in-game Skipma jump",
+      "unmodified_source_bytes": "8b0d7ce7b0",
+      "expected_live_prefix": "e9",
+      "owner": "Speedrun Mod",
+      "required_target_module": "sadx-speedrun-mod.dll"
+    },
+    {
+      "va": "0x5132b1",
+      "operation": "movie Skipma jump",
+      "unmodified_source_bytes": "a17ce7b003",
+      "expected_live_prefix": "e9",
+      "owner": "Speedrun Mod",
+      "required_target_module": "sadx-speedrun-mod.dll"
+    },
+    {
+      "va": "0x7899e0",
+      "operation": "frame limiter trampoline",
+      "unmodified_source_bytes": "83ec106838",
+      "expected_live_prefix": "e9",
+      "owner": "Speedrun Mod",
+      "required_target_module": "sadx-speedrun-mod.dll"
+    },
+    {
+      "va": "0x411d1c",
+      "operation": "extra tick policy jump",
+      "unmodified_source_bytes": "56e8bee336",
+      "expected_live_prefix": "e9",
+      "owner": "Speedrun Mod",
+      "required_target_module": "sadx-speedrun-mod.dll"
+    },
+    {
+      "va": "0x7dce58",
+      "operation": "frame rate scalar 63.0f",
+      "unmodified_source_bytes": "00007242cd",
+      "expected_live_prefix": "00007c42",
+      "owner": "Speedrun Mod",
+      "required_target_module": null
+    },
+    {
+      "va": "0x40f343",
+      "operation": "analog input hook",
+      "unmodified_source_bytes": "c390909090",
+      "expected_live_prefix": "e9",
+      "owner": "Input Mod",
+      "required_target_module": "sadx-input-mod.dll"
+    },
+    {
+      "va": "0x40f451",
+      "operation": "raw controller init hook",
+      "unmodified_source_bytes": "c390909090",
+      "expected_live_prefix": "e9",
+      "owner": "Input Mod",
+      "required_target_module": "sadx-input-mod.dll"
+    },
+    {
+      "va": "0x40f460",
+      "operation": "skip vanilla controller update",
+      "unmodified_source_bytes": "83ec246a00",
+      "expected_live_prefix": "e9",
+      "owner": "Input Mod",
+      "required_target_module": "sonic.exe:0x40fdb3"
+    },
+    {
+      "va": "0x40fdb3",
+      "operation": "input event dispatch",
+      "unmodified_source_bytes": "c390909090",
+      "expected_live_prefix": "e9",
+      "owner": "Mod Loader",
+      "required_target_module": "CHRMODELS.dll"
+    }
+  ]
+}

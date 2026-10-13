@@ -1,0 +1,18 @@
+
+void FUN_00446950(void)
+
+{
+  int in_EDX;
+  
+  if (((short)((*(byte *)(*(int *)(*(int *)((uint)*(ushort *)(in_EDX + 4) * 0x10 +
+                                           *(int *)(in_EDX + 0x20)) + 4) + 8) & 4 | 8) >> 2) != 3)
+     && ((short)((*(byte *)(*(int *)(*(int *)((uint)*(ushort *)(in_EDX + 6) * 0x10 +
+                                             *(int *)(in_EDX + 0x20)) + 4) + 8) & 4 | 8) >> 2) != 3)
+     ) {
+    FUN_0043f2a0();
+    return;
+  }
+  FUN_0043f2a0();
+  return;
+}
+

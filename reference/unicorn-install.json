@@ -1,0 +1,74 @@
+{
+  "version": "1",
+  "pip_version": "26.2.1",
+  "install": [
+    {
+      "download_info": {
+        "url": "https://files.pythonhosted.org/packages/6c/ae/4943c6f8524d729ec7d5e69df6407ea05d710fe77471d91cecf3fc64eb57/unicorn-2.1.4-cp37-abi3-macosx_11_0_arm64.whl",
+        "archive_info": {
+          "hashes": {
+            "sha256": "d6c93e0f60328d8f4a1792af3f834137a28050fcc2305f2ec01efe8558a9844e"
+          },
+          "hash": "sha256=d6c93e0f60328d8f4a1792af3f834137a28050fcc2305f2ec01efe8558a9844e"
+        }
+      },
+      "is_direct": false,
+      "is_yanked": false,
+      "requested": true,
+      "metadata": {
+        "metadata_version": "2.1",
+        "name": "unicorn",
+        "version": "2.1.4",
+        "summary": "Unicorn CPU emulator engine",
+        "description": "# Unicorn\n\nUnicorn is a lightweight, multi-platform, multi-architecture CPU emulator framework\nbased on [QEMU](http://qemu.org).\n\nUnicorn offers some unparalleled features:\n\n- Multi-architecture: ARM, ARM64 (ARMv8), M68K, MIPS, PowerPC, RISCV, SPARC, S390X, TriCore and X86 (16, 32, 64-bit)\n- Clean/simple/lightweight/intuitive architecture-neutral API\n- Implemented in pure C language, with bindings for Crystal, Clojure, Visual Basic, Perl, Rust, Ruby, Python, Java, .NET, Go, Delphi/Free Pascal, Haskell, Pharo, and Lua.\n- Native support for Windows & *nix (with Mac OSX, Linux, *BSD & Solaris confirmed)\n- High performance via Just-In-Time compilation\n- Support for fine-grained instrumentation at various levels\n- Thread-safety by design\n- Distributed under free software license GPLv2\n\nFurther information is available at http://www.unicorn-engine.org\n\n# Python Bindings for Unicorn\n\nOriginally written by Nguyen Anh Quynh, polished and redesigned by elicn, maintained by all community contributors.\n\n## Install\n\nInstall a prebuilt wheel from PyPI:\n\n```bash\npython3 -m pip install unicorn\n```\n\nIn case you would like to develop the bindings:\n\n```bash\nDEBUG=1 THREADS=4 python3 -m pip install --user -e .\n# Workaround for Pylance\nDEBUG=1 THREADS=4 python3 -m pip install --user -e . --config-settings editable_mode=strict\n```\n\nor install it by building it by yourself:\n\n```bash\nTHREADS=4 python3 -m pip install --user .\n```\n\nExplanations for arguments:\n\n- `THREADS=4` will use 4 threads for building.\n- `DEBUG=1` will build debug version of unicorn.\n- `--user` will install the bindings to your user directory instead of requiring root permission.\n- `-e` infers the editable mode, which gives your instant feedback instead of re-compiling every time.\n\nNote that you should setup a valid building environment according to docs/COMPILE.md but not necessarily build it because `setup.py` will do this for you. \n\n## Python2 compatibility\n\nBy default, Unicorn python bindings works with Python3.7 and above, as it offers more powerful features which improves developing efficiency compared to Python2. However, Unicorn will only keep compatible with all features Unicorn1 offers regarding Python2 because it has reached end-of-life for more than 3 years at the time of writing this README. While offering all features for both Python2 & Python3 is desirable and doable, it inevitably costs too much efforts to maintain and few users really rely on this. Therefore, we assume that if users still stick to Python2, previous Unicorn1 features should be enough. If you really want some new features Unicorn2 offers, please check and pull request to `unicorn/unicorn_py2`. We are happy to review and accept!\nEven though the build of wheel packages requires Python3, it's still possible to re-tag the wheel produced from Python3 with `py2` tag and then run `python2 -m pip install <retagged-wheel-py>`. For detailed commands please refer to our workflow files.\n",
+        "description_content_type": "text/markdown",
+        "keywords": [
+          "emulation",
+          "qemu",
+          "unicorn"
+        ],
+        "author_email": "Nguyen Anh Quynh <quynh@gmail.com>",
+        "license": "BSD License",
+        "classifier": [
+          "License :: OSI Approved :: BSD License",
+          "Programming Language :: Python :: 2.7",
+          "Programming Language :: Python :: 3.7",
+          "Programming Language :: Python :: 3.8",
+          "Programming Language :: Python :: 3.9",
+          "Programming Language :: Python :: 3.10",
+          "Programming Language :: Python :: 3.11",
+          "Programming Language :: Python :: 3.12",
+          "Programming Language :: Python :: 3.13"
+        ],
+        "requires_dist": [
+          "importlib-resources ; python_version < \"3.9\"",
+          "capstone ==5.0.1 ; (python_version <= \"3.7\") and extra == 'test'",
+          "capstone ==6.0.0a2 ; (python_version > \"3.7\") and extra == 'test'"
+        ],
+        "requires_python": "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7",
+        "project_url": [
+          "Homepage, http://www.unicorn-engine.org",
+          "Repository, https://github.com/unicorn-engine/unicorn",
+          "Bug Tracker, https://github.com/unicorn-engine/unicorn/issues",
+          "Changelog, https://github.com/unicorn-engine/unicorn/blob/master/ChangeLog"
+        ],
+        "provides_extra": [
+          "test"
+        ]
+      }
+    }
+  ],
+  "environment": {
+    "implementation_name": "cpython",
+    "implementation_version": "3.14.7",
+    "os_name": "posix",
+    "platform_machine": "arm64",
+    "platform_release": "27.0.0",
+    "platform_system": "Darwin",
+    "platform_version": "Darwin Kernel Version 27.0.0: Tue Aug 11 21:06:40 PDT 2026; root:xnu-13432.1.9~1/RELEASE_ARM64_T6050",
+    "python_full_version": "3.14.7",
+    "platform_python_implementation": "CPython",
+    "python_version": "3.14",
+    "sys_platform": "darwin"
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "archive_sha256" : "e7972e401ef9744cecc01740d47d23343c82add0044b74b13fce77bcfc64a530",
+  "channel_mismatches" : 0,
+  "channels" : 16384,
+  "device" : "Apple M5 Pro",
+  "gpu_completed" : true,
+  "inspection_profile" : "explicit nearest\/clamp, white diffuse, alpha texture, no blend\/depth",
+  "less_depth_test" : true,
+  "limits" : [
+    "Real Apple GPU rendering\/readback of supplied packed16 bubble texture and explicit screen command",
+    "Inspection vertices\/state are declared fixtures; no full queue\/game startup inferred",
+    "No original Windows GPU\/filter\/blend\/hardware parity claimed",
+    "World FVF142, unknown state, nonfinite vertices and unresolved projected-depth production remain explicit boundaries"
+  ],
+  "opaque_order_test" : true,
+  "os" : "Version 27.0.1 (Build 26A434)",
+  "partial_prefix_completed" : true,
+  "record_ordinal" : 130,
+  "registry_id" : 4294968649,
+  "shader_sha256" : "de2d6cf1f5214a36587436a6988c32a7b785ed6213965278c9e1b9715330f83b",
+  "source_alpha_blend_gpu" : [
+    0.50196081399917603,
+    0,
+    0.49803918600082397,
+    0.75000381469726562
+  ],
+  "source_alpha_blend_max_abs_error" : 0,
+  "source_pixel_center" : "D3D8 integer to Metal half-integer",
+  "stride" : 28,
+  "vertex_fixture_sha256" : "69916ae8829a89e6c7dfaefea457305f87c4ac5d06cc8bc63a2ab403249a8688",
+  "vertex_format" : 324
+}

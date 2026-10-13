@@ -1,0 +1,24 @@
+
+int * FUN_00451790(void)
+
+{
+  int *piVar1;
+  int *piVar2;
+  
+  piVar2 = DAT_03c48554;
+  if ((int *)*DAT_03c48554 == (int *)0x0) {
+    piVar2 = (int *)0x0;
+  }
+  else {
+    piVar1 = (int *)*DAT_03c48554;
+    *DAT_03c48554 = (int)DAT_03c48550;
+    DAT_03c48554 = piVar1;
+    if (*piVar2 != 0) {
+      DAT_03c48550[1] = (int)piVar2;
+    }
+    DAT_03c48550 = piVar2;
+    piVar2[1] = -0x3c48551;
+  }
+  return piVar2;
+}
+

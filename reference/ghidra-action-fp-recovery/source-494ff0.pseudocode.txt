@@ -1,0 +1,30 @@
+
+undefined4 FUN_00494ff0(undefined4 param_1)
+
+{
+  int in_EAX;
+  int iVar1;
+  uint uVar2;
+  undefined1 *in_ECX;
+  
+  iVar1 = FUN_0043bdc0();
+  if ((iVar1 != 0) || (*(float *)(in_EAX + 0x38) != 0.0)) {
+    return 0;
+  }
+  if ((*(ushort *)(in_ECX + 4) & 0x800) == 0) {
+    *in_ECX = 1;
+    *(undefined2 *)(in_EAX + 0xe) = 0;
+    FUN_00491660(param_1);
+    return 1;
+  }
+  uVar2 = FUN_0043b9c0();
+  if ((uVar2 & 0xc00) != 0) {
+    *in_ECX = 0x18;
+    *(undefined2 *)(in_EAX + 0x124) = 0x36;
+    return 1;
+  }
+  *in_ECX = 0x17;
+  *(undefined2 *)(in_EAX + 0x124) = 0x25;
+  return 1;
+}
+

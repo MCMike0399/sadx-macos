@@ -1,0 +1,104 @@
+
+undefined4 FUN_0043b9c0(int param_1)
+
+{
+  ushort uVar1;
+  int iVar2;
+  undefined4 uVar3;
+  char cVar4;
+  
+  uVar3 = 0;
+  if ((*(ushort *)(param_1 + 4) & 0x800) == 0) {
+    uVar1 = *(ushort *)(*(int *)(param_1 + 0x38) + 4);
+    if ((uVar1 & 1) == 0) {
+      return 0;
+    }
+    if ((*(ushort *)(param_1 + 4) & 4) != 0) {
+      return 0;
+    }
+    if ((uVar1 & 4) == 0) {
+      return 0;
+    }
+    iVar2 = *(int *)(*(int *)(param_1 + 0x38) + 0xa4);
+    if (iVar2 == 0) {
+      return 0;
+    }
+    iVar2 = *(int *)(*(int *)(iVar2 + 0x9c) + 0x20);
+    if ((*(byte *)(iVar2 + 4) & 0x40) == 0) {
+      return 0;
+    }
+    cVar4 = *(char *)(iVar2 + 2);
+    if ((*(ushort *)(iVar2 + 4) & 0x1000) != 0) {
+      return 0;
+    }
+    switch(*(undefined1 *)(param_1 + 9)) {
+    case 0:
+    case 2:
+    case 3:
+    case 5:
+    case 6:
+      break;
+    default:
+      goto switchD_0043ba44_caseD_1;
+    case 7:
+      goto switchD_0043ba44_caseD_7;
+    }
+joined_r0x0043bac4:
+    if (cVar4 == '\x04') {
+      return 0x200;
+    }
+    if (cVar4 == '\x05') {
+      return 0x400;
+    }
+    if (cVar4 == '\x06') {
+      return 0;
+    }
+  }
+  else {
+    iVar2 = *(int *)((&DAT_03b3cdf0)[*(byte *)(param_1 + 8)] + 0x68);
+    if (iVar2 == 0) {
+      return 0;
+    }
+    if (*(code **)(iVar2 + 0x10) == FUN_0040b570) {
+      return 0;
+    }
+    if (*(code **)(iVar2 + 0x10) == (code *)0x0) {
+      return 0;
+    }
+    if (*(int *)(iVar2 + 0x24) == 0) {
+      return 0;
+    }
+    iVar2 = *(int *)(iVar2 + 0x20);
+    if (iVar2 == 0) {
+      return 0;
+    }
+    if (*(int *)(iVar2 + 0x38) == 0) {
+      return 0;
+    }
+    cVar4 = *(char *)(iVar2 + 2);
+    switch(*(undefined1 *)(param_1 + 9)) {
+    case 0:
+    case 2:
+    case 3:
+    case 5:
+    case 6:
+      goto joined_r0x0043bac4;
+    default:
+      goto switchD_0043ba44_caseD_1;
+    case 7:
+switchD_0043ba44_caseD_7:
+      if (cVar4 == '\x04') {
+        return 0x200;
+      }
+      if ((cVar4 == '\x05') || (cVar4 == '\x06')) {
+        return 0x600;
+      }
+    }
+  }
+  if (cVar4 == '\a') {
+    uVar3 = 0x800;
+  }
+switchD_0043ba44_caseD_1:
+  return uVar3;
+}
+

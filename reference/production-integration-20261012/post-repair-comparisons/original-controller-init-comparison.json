@@ -1,0 +1,10 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "ebeda2f7f13e3d971434fcdb9413b702f1e732b36ab0a8aaad546825c3a6ecac",
+ "original_range_sha256": "8ce891e5f69e9cfa0fbe1c7cb711b2a020ffc0845156ddefb759e7c47ed5834d",
+ "cases": 300,
+ "mismatch_count": 0,
+ "mismatches": [],
+ "source_untouched_bytes_changed": 0,
+ "limits": "Vanilla InitControllers 40f3a0 against original instructions.\n\nThe source runs on a pseudo-random 3b0e000 page; the comparison covers the\nfour ControllersRaw records (incl. the overlapping forward replication),\nControllerPointers[0..3] targets and every other byte the function writes or\nmust leave untouched on that page. The Input mod's RET hook at 40f451 is not\napplied here; its repoint is input_mod_init_raw_controllers.\n"
+}

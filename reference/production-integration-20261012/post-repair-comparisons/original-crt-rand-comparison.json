@@ -1,0 +1,11 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "1e6b8e6c727a41619f0805fac8b6a4a467fd0d054ec14fdba5d8bec7ca2b72be",
+ "original_range_sha256": "0ec337fae4f14b43b97a000ad81840fbf42f2ee44a6e522d47b766f202a08605",
+ "sequences": 400,
+ "calls": 41718,
+ "case_sha256": "7fd43f1769596ad649bd2af4f58c4d42447271878893514241f2a753a39b923d",
+ "mismatched_words": 0,
+ "returns_and_seed_match": true,
+ "limits": "CRT srand 6443b5 / rand 6443bf against original instructions over mixed call sequences.\n\nCompares every rand() return and the seed word 2bcbdf8 after each call, including\nthe 40bf40 reset seed 0xdead0cab.\n"
+}

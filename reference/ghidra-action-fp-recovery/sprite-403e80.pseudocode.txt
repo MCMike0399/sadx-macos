@@ -1,0 +1,73 @@
+
+void FUN_00403e80(int param_1,int param_2)
+
+{
+  undefined4 *puVar1;
+  undefined4 *puVar2;
+  uint uVar3;
+  undefined4 *puVar4;
+  int *unaff_ESI;
+  undefined4 *puVar5;
+  float10 extraout_ST0;
+  
+  unaff_ESI[1] = param_1;
+  uVar3 = FUN_00644340();
+  if ((*(byte *)(unaff_ESI + 2) & 0x10) == 0) {
+    uVar3 = uVar3 + 8;
+  }
+  if ((int)uVar3 < 0x7ff) {
+    if ((int)uVar3 < 5) {
+      unaff_ESI[1] = (int)(float)extraout_ST0;
+      if ((int)uVar3 < -0x1f0f) {
+        if ((int)uVar3 < -0x461f) {
+          if ((int)uVar3 < -0x6d2f) {
+            uVar3 = (uint)(-0x9440 < (int)uVar3);
+          }
+          else {
+            uVar3 = 2;
+          }
+        }
+        else {
+          uVar3 = 3;
+        }
+      }
+      else {
+        uVar3 = 4;
+      }
+    }
+  }
+  else {
+    unaff_ESI[1] = (int)(float)extraout_ST0;
+    if ((param_2 == 1) && (9999 < (int)uVar3)) {
+      uVar3 = 0x7ff;
+    }
+    else {
+      uVar3 = 0x7fe;
+    }
+  }
+  puVar1 = (undefined4 *)(PTR_DAT_0090083c + uVar3 * 8);
+  puVar2 = *(undefined4 **)(PTR_DAT_0090083c + uVar3 * 8);
+  puVar5 = puVar1;
+  if (*(undefined4 **)(PTR_DAT_0090083c + uVar3 * 8) != puVar1) {
+    while (puVar4 = puVar2, (float)puVar4[1] <= (float)unaff_ESI[1]) {
+      puVar2 = (undefined4 *)*puVar4;
+      puVar5 = puVar4;
+      if ((undefined4 *)*puVar4 == puVar1) {
+        *unaff_ESI = (int)puVar1;
+        *puVar4 = unaff_ESI;
+        puVar1[1] = unaff_ESI;
+        return;
+      }
+    }
+    *unaff_ESI = (int)puVar4;
+    *puVar5 = unaff_ESI;
+    if (puVar4 != puVar1) {
+      return;
+    }
+  }
+  *unaff_ESI = (int)puVar1;
+  *puVar5 = unaff_ESI;
+  puVar1[1] = unaff_ESI;
+  return;
+}
+

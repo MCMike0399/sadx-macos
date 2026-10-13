@@ -1,0 +1,182 @@
+{
+ "evidence_type": "static REA Ghidra decompilation of the pinned Speedrun 2.0 DLL Init and its patch helpers; not observed live",
+ "dll_sha256": "f3fc68a3058fb726142547018da860b170f137248e54b82712b52527e7b74802",
+ "profile_config": "game/mods/sadx-speedrun-mod/config.ini: QuickSaveSettings.Enabled=false, ForceLoad=false; OtherSettings CCEF=true, FreeCam=false, Skipma=true, FrameLimit=63FPS",
+ "evidence": {
+  "Init": "ev_93015e2c2a2ea3ad4ef6b02cc33bde0381487c4a7718c81534efc93e833e5664",
+  "OnFrame": "ev_f0ffb1422187590a7cf67799b0b3afcf4a65dab8bd0e7ce0e5d77ef50e22bcaf",
+  "FUN_10001080": "ev_48a5ef54641df47a881660ab73a615c2d5c321dc04dbff5089c780640ad84c4c",
+  "FUN_100013b0": "ev_790560b89c116191dcd28dacfd14e20fdda27a516b7cfe80a25c84fab030e342",
+  "FUN_100012a0": "ev_95e73262dfd2b65780ca0823041e4fd78d3cb784896e0e82039efdfb52609ccd",
+  "FUN_10007a50": "ev_f848167dc701998d094da002366a82170e1029dbbd82d4856dd815ce7eac49f2",
+  "FUN_10004f80": "ev_3cdf9d0a7ad244c51ad07504b0671e99e94e63ddc07417d28de05fb557f7111e"
+ },
+ "note": "expected-hooks.json lists the CCEF/EHCF/Skipma/limiter/63.0f writes but not the unconditional Chao-viewer and Gamma-timer patches below. Every sonic.exe range a future port touches must be checked against this list and the loader's unconditional effects (updated-pc-reference/README.md).",
+ "unconditional": [
+  {
+   "helper": "FUN_10001080",
+   "writes": [
+    {
+     "va": "0x100107e8",
+     "value": "0 (Chao stat viewer flag)"
+    },
+    {
+     "va": "0x71adce",
+     "bytes": "e9 8d 62 8e 0f",
+     "meaning": "jmp 0x10001060 (Chao-race hook that sets 100107e8)"
+    }
+   ]
+  },
+  {
+   "helper": "Init",
+   "writes": [
+    {
+     "va": "0x1001081c",
+     "value": "malloc(0x80) (heap buffer; Init calls 0x401000 if null)"
+    }
+   ]
+  },
+  {
+   "helper": "FUN_100013b0",
+   "writes": [
+    {
+     "va": "0x426028",
+     "value": "the heap buffer address",
+     "meaning": "lands in the NOP padding after 425ff0's RET at 426023 (425ff0's final `mov [3b0f128],bl` has its operand at 42601e): no executed sonic.exe instruction changes; corrected 2026-10-12 by the profile-patch inventory"
+    }
+   ]
+  },
+  {
+   "helper": "FUN_100012a0",
+   "writes": [
+    {
+     "va": "0x10010818",
+     "value": "0"
+    },
+    {
+     "va": "0x10010819",
+     "value": "0"
+    },
+    {
+     "va": "0x1001081a",
+     "value": "0"
+    },
+    {
+     "va": "0x42608f",
+     "bytes": "e8 ec b1 bd 0f",
+     "meaning": "call 0x10001280"
+    },
+    {
+     "va": "0x426094",
+     "bytes": "90"
+    },
+    {
+     "va": "0x426134",
+     "bytes": "e8 57 b1 bd 0f",
+     "meaning": "call 0x10001290"
+    },
+    {
+     "va": "buffer+0, +4, +8",
+     "value": "&10010818, &10010819, &1001081a"
+    }
+   ],
+   "returns": "buffer+0x20, stored back to 1001081c"
+  },
+  {
+   "helper": "Init",
+   "writes": [
+    {
+     "va": "0x533939",
+     "bytes": "90 90 90"
+    },
+    {
+     "va": "0x440ef5",
+     "bytes": "90 90"
+    }
+   ],
+   "meaning": "EHCF"
+  }
+ ],
+ "conditional": [
+  {
+   "condition": "CCEF=true",
+   "helper": "FUN_100034f0 x2",
+   "sites": [
+    "0x434870",
+    "0x438330"
+   ]
+  },
+  {
+   "condition": "FreeCam=true (profile false)",
+   "writes": [
+    {
+     "va": "*0x1001005c",
+     "value": "|= 1"
+    }
+   ]
+  },
+  {
+   "condition": "Skipma=true",
+   "helper": "FUN_10007a50",
+   "writes": [
+    {
+     "va": "0x431517",
+     "bytes": "e9 f4 64 bd 0f + 7 nop",
+     "meaning": "jmp 0x10007a10"
+    },
+    {
+     "va": "0x5132b1",
+     "bytes": "e9 8a 47 af 0f + 4 nop",
+     "meaning": "jmp 0x10007a40"
+    }
+   ]
+  },
+  {
+   "condition": "QuickSaveSettings.Enabled=true (profile false)",
+   "effect": "100107e9 = 1, so OnFrame calls 10004f80 each frame"
+  },
+  {
+   "condition": "FrameLimit parses",
+   "helper": "FUN_100011e0",
+   "sites": [
+    "0x7899e0",
+    "0x411d1c",
+    "0x7dce58 = 63.0f"
+   ]
+  }
+ ],
+ "hook_bodies": {
+  "0x10001280": {
+   "evidence": "ev_422c7df010c867f15\u2026 (REA Hopper)",
+   "instructions": [
+    "inc byte [10010818]",
+    "mov eax, 0x3b0ef35",
+    "dec byte [eax]",
+    "ret"
+   ],
+   "reached_from": "0x42608f call (+ nop 426094), replacing a 6-byte dec of 3b0ef35"
+  },
+  "0x10001290": {
+   "evidence": "ev_f2e6bf7ed81a9fae4\u2026 (REA Hopper)",
+   "instructions": [
+    "inc byte [10010818]",
+    "mov edx, 0x3b0ef35",
+    "mov byte [edx], al",
+    "cmp al, 0x3c",
+    "ret"
+   ],
+   "reached_from": "0x426134 call; the caller resumes at 426139 with the CMP flags"
+  },
+  "0x10001060": {
+   "evidence": "ev_ed578ebc9e2049f80\u2026 (REA Hopper)",
+   "instructions": [
+    "mov edx, 1",
+    "mov byte [100107e8], dl",
+    "add esp, 8",
+    "mov esi, eax",
+    "jmp dword [10010014]"
+   ],
+   "reached_from": "0x71adce jmp"
+  }
+ }
+}

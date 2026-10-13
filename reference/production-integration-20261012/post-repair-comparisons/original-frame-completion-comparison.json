@@ -1,0 +1,35 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "speedrun_dll_sha256": "f3fc68a3058fb726142547018da860b170f137248e54b82712b52527e7b74802",
+ "native_library_sha256": "5fab9e308a941a1822291c08a13a64380871bec09e887df6464463cc98e670ca",
+ "source_files": {
+  "src/game_loop.hpp": "f6e5c9b2df7a070dc4d32ef45049d6f6f32f590a3136039af9218a16380a5a49",
+  "src/game_loop.cpp": "dd61ba5f732e90e8c01e492ec88c1598ee31248f3876ada2b1c42bc7f835e389",
+  "tests/native_frame_completion_probe.cpp": "e81ad4dcca3d319553892afb3e4bd5a79308e989d10d322d8f5fc232fe0eefdf",
+  "tools/verify_original_frame_completion.py": "b9e10a811e391a5ae3d42dd8462e2e23a9419eae0688523c83fd7807b528295e"
+ },
+ "original_range_sha256": "84e069dfe1a4e50aeb727f86f8ad6299ce11ed9bd2e0ca1fa805d1bf9a4709de",
+ "hook_bytes": {
+  "100011c0": "a18811b1038d48ff33c085c90f4fc1c3e8ebffffffff2518000110cccccccccc",
+  "10010018": "a31d4100"
+ },
+ "cases": 2964,
+ "case_sha256": "53d27690545c90316c1576287b4086a765fbbc5a3cd6d110723537bf97345d6e",
+ "source_outcomes": {
+  "policy0:failure0:owners6": 584,
+  "policy0:failure0:owners5": 872,
+  "policy1:failure2:owners0": 480,
+  "policy1:failure0:owners6": 384,
+  "policy1:failure0:owners5": 576,
+  "policy0:failure4:owners1": 12,
+  "policy0:failure4:owners2": 12,
+  "policy0:failure4:owners3": 12,
+  "policy0:failure4:owners4": 12,
+  "policy0:failure4:owners5": 12,
+  "policy0:failure4:owners6": 8
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "stores_order_boundaries_match": true,
+ "limits": "411d00 frame completion with the actual Speedrun 2.0 hook, against original instructions.\n\nUpdated profile: the pinned sadx-speedrun-mod.dll (SHA f3fc68a3...) is mapped at\nits preferred base 0x10000000 and 411d1c is patched with `jmp 0x100011d0`, the\nhook observed live in the Windows reference snapshot. The DLL stub calls +0x11c0\n(EAX=max(0,[3b11188]-1)) and jumps through its file-initialized pointer to\n411da3. Original profile: 411d1c lag recovery is unported, so the source run\nstops there and native must report that required boundary.\nThe 781010..781060 thunks (renderer/limiter owners) are explicit fixtures; the\n781030 fixture may rewrite 3b28114 to exercise the reread at 411e01.\n"
+}

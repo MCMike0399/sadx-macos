@@ -1,0 +1,138 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "source_ranges": {
+    "crt-startup-fp-callback": {
+      "start": "0x643e5f",
+      "end_exclusive": "0x643e76",
+      "bytes": 23,
+      "sha256": "6b4c8e8a496db47597002c05a47f0bb4c54b6bda1dc86eafc270f1267160dfc0"
+    },
+    "crt-precision-init": {
+      "start": "0x6462d0",
+      "end_exclusive": "0x6462e2",
+      "bytes": 18,
+      "sha256": "cd5aeea5f02a40fde4445ab5cfbd1009ffaea494f0bea25b18fe4e53c917526a"
+    },
+    "crt-control-map-from-x87": {
+      "start": "0x64c429",
+      "end_exclusive": "0x64c4bb",
+      "bytes": 146,
+      "sha256": "413c69a62589cae71aa7dbee87c6037e0b62304cc1f1742060f60e56307263da"
+    },
+    "crt-control-map-to-x87": {
+      "start": "0x64c4bb",
+      "end_exclusive": "0x64c549",
+      "bytes": 142,
+      "sha256": "d5cf3aabd4211da14dc75482d3a3353b8e90fe8dbd4f31c0085fe40e120178c5"
+    },
+    "crt-control87": {
+      "start": "0x64c549",
+      "end_exclusive": "0x64c57b",
+      "bytes": 50,
+      "sha256": "afb6a904b023425afbf7511d4fa85aae65b7d9301bc666a37276ca58a7afba9a"
+    },
+    "crt-controlfp": {
+      "start": "0x64c57b",
+      "end_exclusive": "0x64c591",
+      "bytes": 22,
+      "sha256": "1fc9575fd9bdfa04df9457e129a1225fc270978e4413f0aafc90a917a9d60e8f"
+    },
+    "source-raw-control": {
+      "start": "0x64b1fd",
+      "end_exclusive": "0x64b221",
+      "bytes": 36,
+      "sha256": "a7ab3a8042ef5a5909f1f414e454b341d2e9c1f9da36857ae8616e7983c9fa2b"
+    },
+    "source-create-device": {
+      "start": "0x794000",
+      "end_exclusive": "0x794043",
+      "bytes": 67,
+      "sha256": "e03ff6df4bf5c383f10f46de64b4c98e13ebb3241b27b3f6f2eb26272371c493"
+    },
+    "source-create-device-caller": {
+      "start": "0x794060",
+      "end_exclusive": "0x7941a3",
+      "bytes": 323,
+      "sha256": "29619394b3d5076aa3f258ce502c5aaf94a443e0bdea6ffa9df420c22a8d6ea0"
+    },
+    "captured-render-fip-owner": {
+      "start": "0x78ea10",
+      "end_exclusive": "0x78eaaf",
+      "bytes": 159,
+      "sha256": "a7510e88462395597cc61060dcd37f07a23785aadc594420fac7bf292ebccfc7"
+    },
+    "captured-render-fip-caller": {
+      "start": "0x77dfc0",
+      "end_exclusive": "0x77e04e",
+      "bytes": 142,
+      "sha256": "23ed9911192e43fe1fd555d87aa34c1194de6135c66411e9b494b1dbf67c9900"
+    }
+  },
+  "source_data": {
+    "fp_callback_at_2bcbdd0": "0x643e5f",
+    "fp_callback_bytes_sha256": "24547e1e65fac35b0731cd45ec4e85c97e0e1566d5cc95c0263fe921fecacccc"
+  },
+  "loader_source": {
+    "path": "_reference/sadx/updated-pc-reference/sources/loader/direct3d.cpp",
+    "sha256": "758a604e634dfb077e0550237e6e79259256bbd73715db0721256b2cb415db72",
+    "manifest_revision": "eb4cdcca9637d611a98b910fcfed6ce18580451c",
+    "relevant_lines": [
+      262,
+      273,
+      325
+    ]
+  },
+  "capture_selected_fact_source": {
+    "path": "_reference/sadx/windows-runtime-captures/user-supplied-20261012-003944-fp-selected-facts.json",
+    "sha256": "d040f889e570b83acdad7635849b203324d8df51eed7aba746319680dea060da",
+    "original_json_bytes_retained": false,
+    "process_id": 17384,
+    "creation_filetime_100ns": "134362391497835450",
+    "reported_earliest_thread": 17388,
+    "creation_delta_100ns": 181,
+    "worker_cw_counts": {
+      "0x27f": 38
+    },
+    "worker_mxcsr_counts": {
+      "0x1f80": 34,
+      "0x1fa0": 4
+    },
+    "reported_fxsave_prefix": {
+      "hex": "7f0020000000000066ea7800000000000000000000000000a11f0000ffff0000",
+      "bytes": 32,
+      "fcw": "0x7f",
+      "fsw": "0x20",
+      "ftw": "0x0",
+      "fip32": "0x78ea66",
+      "fip64": "0x78ea66",
+      "mxcsr": "0x1fa1",
+      "original_fxsave_full512_bytes_retained": false,
+      "selector_claim": false,
+      "source_instruction_bytes": "d95ef4",
+      "source_instruction": "FSTP m32 [ESI-0xc]",
+      "source_owner": "0x78ea10",
+      "direct_caller": "0x77e040 in0x77dfc0"
+    }
+  },
+  "limits": [
+    "LLVM source facts are standalone exact-byte analysis, not invented REA Evidence IDs",
+    "Whole-section linear disassembly can decode embedded data as instructions; candidate mnemonic hits are not control setters without a callable body/context",
+    "Selected user facts are a derivation from supplied conversation JSON, not independently acquired runtime evidence or a retained original raw JSON",
+    "Process17384 and prior16480 are separate reference identities; prior module mappings/hook verification are not transferred",
+    "No native defaults, emulator repair or provider launch performed"
+  ],
+  "rejected_linear_disassembly_candidate": {
+    "apparent_mnemonic_at": "0x522a04",
+    "classification": "embedded jump target table, not a callable FLDCW",
+    "table_start": "0x5229f8",
+    "table_bytes": "f6295200bb295200c8295200d9295200ea295200",
+    "table_dword_targets": [
+      "0x5229f6",
+      "0x5229bb",
+      "0x5229c8",
+      "0x5229d9",
+      "0x5229ea"
+    ],
+    "sha256": "7fe736a57a0602003d707f6ff404bcbdf1a720bd5bf6b058f504a6f03be60ea6"
+  }
+}

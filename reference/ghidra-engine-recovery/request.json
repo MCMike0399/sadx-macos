@@ -1,0 +1,89 @@
+{
+  "directory": "ghidra-engine-recovery",
+  "functions": [
+    {
+      "name": "player-initialize",
+      "procedure": "0x442750"
+    },
+    {
+      "name": "player-shadow-task",
+      "procedure": "0x4a2b60"
+    },
+    {
+      "name": "player-shadow-body",
+      "procedure": "0x4a2ae0"
+    },
+    {
+      "name": "hold-object",
+      "procedure": "0x43b9c0"
+    },
+    {
+      "name": "object-work-initialize",
+      "procedure": "0x417e80"
+    },
+    {
+      "name": "scene-position-ordinary",
+      "procedure": "0x449500"
+    },
+    {
+      "name": "scene-position-alternate",
+      "procedure": "0x445d10"
+    },
+    {
+      "name": "mesh-registry-refresh",
+      "procedure": "0x4511d0"
+    },
+    {
+      "name": "mesh-group-create",
+      "procedure": "0x451790"
+    },
+    {
+      "name": "mesh-group-remove",
+      "procedure": "0x451800"
+    },
+    {
+      "name": "mesh-group-recycle",
+      "procedure": "0x451860"
+    },
+    {
+      "name": "mesh-node-order",
+      "procedure": "0x451910"
+    },
+    {
+      "name": "mesh-object-traverse",
+      "procedure": "0x451a00"
+    },
+    {
+      "name": "meshset-traverse",
+      "procedure": "0x451ad0"
+    },
+    {
+      "name": "mesh-pools-initialize",
+      "procedure": "0x451030"
+    },
+    {
+      "name": "mesh-buckets-initialize",
+      "procedure": "0x4510e0"
+    },
+    {
+      "name": "mesh-pools-reset",
+      "procedure": "0x451110"
+    },
+    {
+      "name": "mesh-refresh-reset",
+      "procedure": "0x451160"
+    },
+    {
+      "name": "land-registration-alternate",
+      "procedure": "0x43b580"
+    },
+    {
+      "name": "contact-attributes",
+      "procedure": "0x43cb90"
+    }
+  ],
+  "xrefs": [
+    "0x3b2f720",
+    "0x3b32728"
+  ]
+}

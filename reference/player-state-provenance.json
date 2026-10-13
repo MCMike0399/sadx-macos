@@ -1,0 +1,15 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "PInitialize_evidence_id": "ev_cbdc04201a437f7e05362459b8d60d4b53a592356dbf1aaf9bd8e9c2ba9af9cc",
+  "parameter_table_va": "0x9154e8",
+  "parameter_table_sha256": "3f69076118fcc6a77c55e600eb337944eb6562e5b0979104b58058ad64ba5107",
+  "character_jump_table_va": "0x442994",
+  "event_reader_va": "0x412d20",
+  "event_bytes_va": "0x3b18808",
+  "shadow_scale_multiplier_va": "0x7dd58c",
+  "implemented": "parameter decoder and pure initial field/upgrade stores only",
+  "unknowns": [
+    "actual allocator/start-position/registration/task creation",
+    "PCruntime control word/FPU flags"
+  ]
+}

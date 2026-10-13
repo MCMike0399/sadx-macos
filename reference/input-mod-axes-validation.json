@@ -1,0 +1,29 @@
+{
+  "source_sha256": {
+    "sadx-native/src/sse_math.hpp": "5fe7166788a5e3afb89f122a2302d19f6f239ca5cecf84bdc8bf698f3c821567",
+    "sadx-native/src/sse_math.cpp": "7c895b6620d8363dbab6be9aba6cb26d0ab7f1b63b969742b1be86aaf7481f61",
+    "sadx-native/src/input_mod_axes.hpp": "b6650fb0a7a8df5a70e5069443b04cb9a238088ba117f223b9bbcc06e431ed2e",
+    "sadx-native/src/input_mod_axes.cpp": "95ad9c700e97d66aeabd9ae19f679a5d032c42c63761d2a45a817c6e6bf2163a",
+    "sadx-native/tests/sse_math.cpp": "1ccd3cb1b1f660b248902497007978687f098295cd1b31c04481fe584c2267f2",
+    "sadx-native/tests/input_mod_axes.cpp": "040ccc20c047935125b752e63b77078132b487155c9a4e97e1c32b64d27495ac",
+    "sadx-native/tests/native_sse_math_probe.cpp": "7ae7c4ce444b107ed93a4091680b5b2026dfc416a702c62969f499590695c97f",
+    "sadx-native/tests/native_input_mod_axes_probe.cpp": "c2ffd291d627e6f18e6aaa60a2dbdbf2e57cbfb50144f26f7a3767d2e715d099",
+    "sadx-native/tools/verify_sse_math.py": "af78b49b6e5a3552eb62b0ff90d046326856f7022c5cdd4aa804d7b4e070bed0",
+    "sadx-native/tools/verify_original_input_mod_axes.py": "107119a10b0aca6bbfdb20e8bb4f3566b80c05a0fdbda3fa29bda2d15d3d8fe5"
+  },
+  "retained_emulator_source_sha256": {
+    "_reference/sadx/input-mod-unicorn-ops-sse.h": "8f1a066fd41a8d8bf2f56d658780eaa2dd8d60aba59ec0008fd0490d4424a7de",
+    "_reference/sadx/input-mod-unicorn-softfloat.c": "e6ac2a04ee9faf535a6bc2256a7c464b5edc316fade53b7a59971602163d53c1",
+    "_reference/sadx/input-mod-unicorn-softfloat-specialize.inc.c": "cd91c50329311b2b551db9eb4060655e1ba03cd4c0d899c83f083ae3f18b9fb6",
+    "_reference/sadx/player-input-unicorn-fpu-helper.c": "809e3d8e0affb71cdf76e52da57d519ab227c223a5443039f2d41a8342979e33"
+  },
+  "semantic_test": "optimized strict and UBSan native tests passed",
+  "probe_directory": "/private/tmp/sadx-sse",
+  "production_archive_integration": "not modified; parent owner",
+  "hardware_reference": "unverified; PC MXCSR/runtime control absent",
+  "limitations": [
+    "Original SDL raw-controller backend remains unavailable; Apple normalized snapshots retain explicit native policy.",
+    "half-press/cursor/recenter/demo/controller-priority phases excluded",
+    "emulator value and status disagreements remain retained; not passing full-state conformance"
+  ]
+}

@@ -1,0 +1,21 @@
+
+void FUN_00446910(void)
+
+{
+  byte bVar1;
+  int iVar2;
+  short *in_ECX;
+  uint in_EDX;
+  
+  iVar2 = *(int *)(in_ECX + 0x10);
+  bVar1 = *(byte *)((in_EDX & 0xffff) * 0x10 + 6 + iVar2);
+  in_ECX[2] = (ushort)bVar1;
+  in_ECX[3] = (ushort)bVar1;
+  *in_ECX = (short)*(char *)((uint)bVar1 * 0x10 + 5 + iVar2);
+  bVar1 = *(byte *)((uint)(ushort)in_ECX[2] * 0x10 + 6 + iVar2);
+  *(byte *)(in_ECX + 7) = *(byte *)(in_ECX + 7) | 1;
+  in_ECX[5] = (ushort)bVar1;
+  FUN_0043f230();
+  return;
+}
+

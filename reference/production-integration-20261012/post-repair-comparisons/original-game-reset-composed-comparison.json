@@ -1,0 +1,43 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "a3d19d1818b11a2610914cfecb004bfb60a5668079cc1c99ac291ae16b813387",
+ "source_files": {
+  "src/game_reset.cpp": "686290b6617d71fd5b969bb4b0553bdd29d8212ed757c2b3e49c2cf065ef0086",
+  "src/game_reset_leaves.hpp": "d0d455d876a7145ebb77a64bb4b2b50038930adb2bf96b05df2ce172187ff482",
+  "src/game_reset_leaves.cpp": "efd88c24fe76062af2f77cd615c0dc4bf5f9fb48e7809a679aa8cbe9d1735adb",
+  "tests/native_game_reset_composed_probe.cpp": "45828f2e2e93a7f050c4f51a68d616d46bdef2291ca8c2d0208aaf0aca24f450",
+  "tools/verify_original_game_reset_composed.py": "fdb6a617d67d2f16baa8d61cbe944cda643ea9a1ae5d874cffa37ed1314645c2"
+ },
+ "cases": 300,
+ "source_outcomes": {
+  "completed0:fixtures0": 50,
+  "completed1:fixtures15": 37,
+  "completed1:fixtures12": 33,
+  "completed1:fixtures11": 22,
+  "completed0:fixtures7": 2,
+  "completed1:fixtures10": 16,
+  "completed1:fixtures8": 7,
+  "completed1:fixtures14": 35,
+  "completed1:fixtures13": 40,
+  "completed1:fixtures16": 23,
+  "completed0:fixtures13": 2,
+  "completed0:fixtures6": 4,
+  "completed1:fixtures17": 5,
+  "completed1:fixtures9": 6,
+  "completed0:fixtures1": 2,
+  "completed1:fixtures19": 1,
+  "completed0:fixtures3": 2,
+  "completed0:fixtures8": 2,
+  "completed0:fixtures5": 2,
+  "completed1:fixtures18": 2,
+  "completed0:fixtures11": 2,
+  "completed0:fixtures12": 2,
+  "completed0:fixtures9": 1,
+  "completed0:fixtures10": 1,
+  "completed0:fixtures2": 1
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "pages_trace_boundaries_match": true,
+ "limits": "40bf40 with its ported leaves running as real source code, over eleven randomized pages.\n\nReal source: 40bf40, 422440, 4224b0 (PrintDebug 401000 skipped after checking\nits constant format), 40cd10, 401410, 785330, 403e60, 4257c0, 4257e0, 424460,\n410100 (audio-uninitialized return), 40cff0, 40d490(0), 4228f0, 421fb0, the\n51f680 RETs and srand. Fixtures (recorded callee, site, argument or ECX; may\nfail at call N): 4208e0, 40b1a0, 40b460, 411af0, 780fb0, the\n3b291b4 callback (its `call *%eax` at 42291e is skipped and recorded), 504ed0, 411760, 411720. When the audio system is initialized\nthe source stops at 41010d, which native reports as its boundary. Pages are\ncompared byte for byte (stray source writes count as mismatches).\n"
+}

@@ -1,0 +1,26 @@
+{
+  "files_sha256": {
+    "sadx-native/src/input.hpp": "3d44d3d744d68cdfed6b060980d5e330bdc12e96c9b98bf5c80a73c3e10a9803",
+    "sadx-native/src/input.cpp": "b774a140615ca0fa3086b13ff5870d4ba131d958b8ae7385966a2d5110ece6aa",
+    "sadx-native/src/mac_input.mm": "a9111b602fc557aa39abd5ed5244f16b289e92c58e3bc470f680c367ad2030b1",
+    "sadx-native/tests/input.cpp": "05693c2e0e2f01092db892d90c44652c55a44c81b708d76225c63caa2fbbc89b",
+    "sadx-native/tests/mac_input.mm": "e29d545e164d8ade7c3e76c904f8805e05a4c02eb625560a8b5213b8bf78dfcb",
+    "sadx-native/tests/player_input_producer.cpp": "b02907e3ddb864d367c32844e2fced1e64a0b9c906bbfac2551807b006195991",
+    "sadx-native/tests/input_keyboard_goldens.hpp": "0a9f25e5a0d336a1f4381af39257fdc6f7403f43ca2aef743345284fb1c18fda",
+    "sadx-native/tools/record_keyboard_sampling_goldens.py": "9b57e005b075ed061711cdb917518e476a6b65165983448a6f7c668d08e0466d",
+    "_reference/sadx/keyboard-sampling-goldens.json": "fb377b52f3ebf4a0c7f4cf098f3e9703ea0d7b9ec72fa6a12670dcc5b3693730"
+  },
+  "optimized": [
+    "input",
+    "mac_input",
+    "player_input_producer"
+  ],
+  "ubsan": [
+    "input",
+    "mac_input"
+  ],
+  "test_selected_mxcsr": "0x1f80 plus explicit4RC golden profiles, not observedPC",
+  "source_goldens": 52,
+  "scope": "sampled source keyboard arithmetic and actual Cocoa event objects; physical hardware absent",
+  "build_outputs": "/private/tmp/sadx-sse"
+}

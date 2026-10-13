@@ -1,0 +1,14 @@
+{
+  "added_on": "2026-10-11",
+  "source": "User explicitly asked to add keyboard compatibility to the active native SADX goal",
+  "requirement": "Native macOS keyboard support alongside Xbox and Switch 2 Pro controllers",
+  "implementation_acceptance": [
+    "Keyboard actions enter the same sampled SADX input state as controller actions",
+    "Bindings cover movement, actions, camera and pause and can be configured",
+    "Preserve reference Input Mod keyboard movement behavior or expose explicit profiles",
+    "Release held input on loss of app focus",
+    "Verify real macOS key-down and key-up delivery and in-game behavior"
+  ],
+  "complete": false,
+  "goal_status": "active"
+}

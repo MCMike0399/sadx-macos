@@ -1,0 +1,26 @@
+{
+  "repository": "https://github.com/ucb-bar/berkeley-softfloat-3",
+  "revision": "a0c6494cdc11865811dec815d5c0049fba9d82a8",
+  "specialization": "8086-SSE",
+  "files": {
+    "8086-SSE/specialize.h": "8447d57528b20f8b5d61c49ad6d4b4e4fdfdbdc3cf2c2328ffd423c022832105",
+    "8086-SSE/s_propagateNaNF32UI.c": "83215e4528ffaee4e5bf4975e42acc65eb349dbdf33a408857c707790ed356e7",
+    "8086-SSE/s_propagateNaNF64UI.c": "e3584b53c927e73a18457654125a558c58501ad7cc1de9bd3c6db75e06c190aa",
+    "f32_add.c": "540c8f2d95b30bc846fe5b747aa6aae1bb70c687b9429278678bb0a000f65dcc",
+    "f32_sub.c": "c4020ba5c2d5f10e647711bd7287c574ca498b0e469ee99f1f9c68c930d43311",
+    "f32_mul.c": "bca46360750b343f24aafcfa7c36f24e3fc4fb6465d0c49f60de7980a86bc37b",
+    "f32_div.c": "ec341d5028f63f19230729ed8d8aca424b08f221adfdce4ebce3caa6d54ba0d8",
+    "f32_to_f64.c": "d25caefe4a26b9e9e1fa1cc53c683d8a22468122b2d09c16deb0e833702ada10",
+    "f64_to_f32.c": "48e998019d76613444c6f20e5d272464abd2657795830905dcf629bb18d90529",
+    "f64_sqrt.c": "643a9abb4d30aff2cac9be281687055a1a677ae7555ca782fc3fb1932d000908",
+    "i32_to_f32.c": "e6ccd7ec5ca8ea2b64435e94ecb0962be000f31d36abb88e68f6e90b44c0c290",
+    "f32_to_i32_r_minMag.c": "057627295cb621abf6c747af00a05a1809dd4ae1a5b10b76404dedd4a15910b1",
+    "s_addMagsF32.c": "5b2d7992841c17e42a96e5aec865b4386cdc7e9030ac6f4d25ad74e4e73fb59b",
+    "s_subMagsF32.c": "53ca2e9f6f1edc7095133e7c98018d69d1e6cd0d5f5b5c0393c4e656ee9a965c",
+    "s_normRoundPackToF32.c": "2e473ba709740808cfd59931034be7c67c80c87ddb76a4765dceb23c9bb518d2",
+    "f64_sub.c": "6b581000e70e679e057d2ce17e0839aa5a7da6982685b9718b6540069441e689",
+    "s_subMagsF64.c": "733f17b90486602ff6c67fa3d99166a841b03276c0fcc7da66751d1e8631f01f",
+    "s_addMagsF64.c": "2b4f69206b4e8d3fc26bc64ca147663530b68b53b0b0e7817c724e2d99376ec5",
+    "s_normRoundPackToF64.c": "4e65ccecf8ee96e2c5815575df3a0e4495ac82987a841868cb1d130556a3dd0a"
+  }
+}

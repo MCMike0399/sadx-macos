@@ -1,0 +1,73 @@
+0x43cb90: or dword [eax+0x5c], ebx
+0x43cb93: mov edx, dword [eax+0x1e4]
+0x43cb99: test dl, 0x2
+0x43cb9c: je loc_43cc0c
+0x43cb9e: mov dl, byte [ecx+9]
+0x43cba1: cmp dl, 0x5
+0x43cba4: jne loc_43cbb4
+0x43cba6: fld dword [dword_9157f4]
+0x43cbac: fmul dword [dword_value_1056964608]
+0x43cbb2: jmp loc_43cbc9
+0x43cbb4: movzx edx, dl
+0x43cbb7: imul edx, edx, 0x84
+0x43cbbd: fld dword [edx+0x915560]
+0x43cbc3: fmul dword [dword_value_1055286886]
+0x43cbc9: fstp dword [eax+0x114]
+0x43cbcf: movzx edx, byte [ecx+9]
+0x43cbd3: imul edx, edx, 0x84
+0x43cbd9: fld dword [edx+0x915540]
+0x43cbdf: fmul dword [dword_value_1069547520]
+0x43cbe5: fstp dword [eax+0xf4]
+0x43cbeb: movzx ecx, byte [ecx+9]
+0x43cbef: imul ecx, ecx, 0x84
+0x43cbf5: fld dword [ecx+0x915524]
+0x43cbfb: fmul dword [dword_value_1059481190]
+0x43cc01: fstp dword [eax+0xd8]
+0x43cc07: jmp loc_43cca4
+0x43cc0c: test edx, 0x400000
+0x43cc12: movzx edx, byte [ecx+9]
+0x43cc16: je loc_43cc66
+0x43cc18: imul edx, edx, 0x84
+0x43cc1e: fld dword [edx+0x915560]
+0x43cc24: fmul dword [dword_value_1065437102+4]
+0x43cc2a: fstp dword [eax+0x114]
+0x43cc30: movzx edx, byte [ecx+9]
+0x43cc34: imul edx, edx, 0x84
+0x43cc3a: fld dword [edx+0x915540]
+0x43cc40: fadd st0, st0
+0x43cc42: fstp dword [eax+0xf4]
+0x43cc48: movzx ecx, byte [ecx+9]
+0x43cc4c: imul ecx, ecx, 0x84
+0x43cc52: fld dword [ecx+0x915524]
+0x43cc58: fmul dword [dword_value_1055286886]
+0x43cc5e: fstp dword [eax+0xd8]
+0x43cc64: jmp loc_43cca4
+0x43cc66: imul edx, edx, 0x84
+0x43cc6c: mov edx, dword [edx+0x915560]
+0x43cc72: mov dword [eax+0x114], edx
+0x43cc78: movzx edx, byte [ecx+9]
+0x43cc7c: imul edx, edx, 0x84
+0x43cc82: mov edx, dword [edx+0x915540]
+0x43cc88: mov dword [eax+0xf4], edx
+0x43cc8e: movzx ecx, byte [ecx+9]
+0x43cc92: imul ecx, ecx, 0x84
+0x43cc98: mov edx, dword [ecx+0x915524]
+0x43cc9e: mov dword [eax+0xd8], edx
+0x43cca4: test bl, 0x8
+0x43cca7: je loc_43ccb1
+0x43cca9: mov dword [esi+0x3c], 0x3e19999a
+0x43ccb0: ret
+0x43ccb1: test bl, 0x4
+0x43ccb4: je loc_43ccbe
+0x43ccb6: mov dword [esi+0x3c], 0x3dcccccd
+0x43ccbd: ret
+0x43ccbe: test bl, 0x10
+0x43ccc1: je loc_43cccb
+0x43ccc3: mov dword [esi+0x3c], 0x3f000000
+0x43ccca: ret
+0x43cccb: test bl, bl
+0x43cccd: jns loc_43ccd7
+0x43cccf: mov dword [esi+0x3c], 0x3fc00000
+0x43ccd6: ret
+0x43ccd7: mov dword [esi+0x3c], 0x3f800000
+0x43ccde: ret

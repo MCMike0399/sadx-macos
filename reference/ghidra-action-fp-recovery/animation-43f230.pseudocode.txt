@@ -1,0 +1,30 @@
+
+void FUN_0043f230(void)
+
+{
+  short sVar1;
+  int iVar2;
+  float fVar3;
+  short *in_ECX;
+  
+  sVar1 = *in_ECX;
+  if ((sVar1 == 6) || (sVar1 == 7)) {
+    iVar2 = *(int *)(*(int *)((uint)(ushort)in_ECX[3] * 0x10 + *(int *)(in_ECX + 0x10)) + 4);
+    fVar3 = (float)*(int *)(iVar2 + 4);
+    if (*(int *)(iVar2 + 4) < 0) {
+      fVar3 = fVar3 + 4.2949673e+09;
+    }
+    *(float *)(in_ECX + 8) = fVar3 - 1.0;
+    return;
+  }
+  if ((((sVar1 != 3) && (sVar1 != 10)) && (sVar1 != 9)) && (sVar1 != 0xc)) {
+    in_ECX[8] = 0;
+    in_ECX[9] = 0;
+    return;
+  }
+  *(undefined4 *)(in_ECX + 8) = *(undefined4 *)(in_ECX + 10);
+  in_ECX[10] = 0;
+  in_ECX[0xb] = 0;
+  return;
+}
+

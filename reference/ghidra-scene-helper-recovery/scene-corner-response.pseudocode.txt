@@ -1,0 +1,68 @@
+
+undefined4
+FUN_00444d50(int param_1,int param_2,float *param_3,float *param_4,undefined4 param_5,uint param_6)
+
+{
+  undefined4 *puVar1;
+  int in_EAX;
+  int iVar2;
+  int unaff_EDI;
+  float10 fVar3;
+  float local_c;
+  float local_8;
+  float local_4;
+  
+  puVar1 = (undefined4 *)(in_EAX + 0x48);
+  *(undefined4 *)(param_2 + 0x44) = *puVar1;
+  *(undefined4 *)(param_2 + 0x48) = *(undefined4 *)(in_EAX + 0x4c);
+  *(undefined4 *)(param_2 + 0x4c) = *(undefined4 *)(in_EAX + 0x50);
+  if ((*(byte *)(unaff_EDI + 4) & 1) == 0) {
+    local_c = -*(float *)(param_1 + 4);
+    local_8 = -*(float *)(param_1 + 8);
+    local_4 = -*(float *)(param_1 + 0xc);
+    fVar3 = (float10)FUN_00787cc0();
+    if (fVar3 == (float10)0.0) goto LAB_00444eae;
+    FUN_00418ac0(&local_c);
+    iVar2 = FUN_00438410(&local_c,puVar1,0);
+    FUN_00787cf0();
+    if ((param_6 & 0x200000) != 0) goto LAB_00444e0a;
+    if (0x3fff < iVar2) {
+      return param_5;
+    }
+  }
+  else {
+    local_c = *param_3 - *(float *)(unaff_EDI + 0x20);
+    local_8 = param_3[1] - *(float *)(unaff_EDI + 0x24);
+    local_4 = param_3[2] - *(float *)(unaff_EDI + 0x28);
+    fVar3 = (float10)FUN_00787cc0();
+    if (fVar3 == (float10)0.0) {
+      local_c = -*(float *)(param_1 + 4);
+      local_8 = -*(float *)(param_1 + 8);
+      local_4 = -*(float *)(param_1 + 0xc);
+      fVar3 = (float10)FUN_00787cc0();
+      if (fVar3 == (float10)0.0) {
+        return param_5;
+      }
+    }
+    FUN_00418ac0(&local_c);
+    iVar2 = FUN_00438410(&local_c,puVar1,0);
+LAB_00444e0a:
+    if (0x3fff < iVar2) {
+      return param_5;
+    }
+    param_5 = 1;
+  }
+  FUN_0043df60(&local_c);
+LAB_00444eae:
+  *(undefined4 *)(in_EAX + 4) = *(undefined4 *)(in_EAX + 0x60);
+  *(undefined4 *)(in_EAX + 8) = *(undefined4 *)(in_EAX + 100);
+  *(undefined4 *)(in_EAX + 0xc) = *(undefined4 *)(in_EAX + 0x68);
+  *(float *)(unaff_EDI + 0x20) = *(float *)(in_EAX + 0x60) - *param_4;
+  *(float *)(unaff_EDI + 0x24) = *(float *)(in_EAX + 100) - param_4[1];
+  *(float *)(unaff_EDI + 0x28) = *(float *)(in_EAX + 0x68) - param_4[2];
+  *(undefined4 *)(in_EAX + 0x10) = *(undefined4 *)(in_EAX + 0x6c);
+  *(undefined4 *)(in_EAX + 0x14) = *(undefined4 *)(in_EAX + 0x70);
+  *(undefined4 *)(in_EAX + 0x18) = *(undefined4 *)(in_EAX + 0x74);
+  return param_5;
+}
+

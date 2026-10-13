@@ -1,0 +1,508 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "native_library_sha256": "5154684810cd71b3f55d9676f7fbf42a242611c781fad43f636df6dd9947d078",
+  "parameter_table_sha256": "3f69076118fcc6a77c55e600eb337944eb6562e5b0979104b58058ad64ba5107",
+  "case_blob": {
+    "path": "_reference/sadx/production-integration-20261012/original-player-startup-comparison.cases.bin",
+    "sha256": "7eb3128a4cc3e14b1f29944121e2de4e7972b25625a5a187b9fc46b1c0236bf4",
+    "cases": 167,
+    "record": "33 LE uint32words +512 exact event bytes"
+  },
+  "source_functions": {
+    "0x442750": {
+      "size": 579,
+      "sha256": "a9c53c641adbc9d6b69c2de78e7f6eb3997921272c45e081b6876acabd2ff1a5"
+    },
+    "0x40b2d0": {
+      "size": 51,
+      "sha256": "d87aa301bca015d0fdf205e25f770e9bf6113cb9e66f6cd4430cfc5549b3d153"
+    },
+    "0x417e80": {
+      "size": 32,
+      "sha256": "26fabc5d2513033969f64f29086c4de90fdebae7ae14f4724e4f6b82003887fd"
+    },
+    "0x412d20": {
+      "size": 16,
+      "sha256": "6b3c7179e7842abb6ebfa000bd0c1bdec0188eb2e10759d0fc58b77fe0bf8fc0"
+    }
+  },
+  "native_sources": {
+    "src/player_startup.cpp": "7ddaa014441efd2fb4653c95317038d32d31ccb9504dd3559c13f19307011ec4",
+    "src/player_startup.hpp": "e9382351e6fa1c5ade1535b1148459fe7f1303ffaeec17d941a35c8e60148210",
+    "src/player_state.cpp": "c80f03f32d40135c4682c7bda8bed9027a81e0f5a3163c89ee0647696bbe4918",
+    "src/task.cpp": "d68b6026b0fe2400b3458eb015e1c5a2d2ee99b6ff0f12dd81815dc00db1fd2d",
+    "src/task_work.cpp": "0fd985b4b3f6d71de7f4947206e6a214edc107e3a5285e15c70e50767e2b10b6",
+    "tests/native_player_startup_probe.cpp": "1462d7e8608a748a8021de7d5cb9920e06b9d49b90e7b0a560e6e3ff883f5a44",
+    "tools/verify_original_player_startup.py": "d0a58db15d1ee8c20a4b43cb9d6f8ef955d2f00d187f76669650f5e12c3be30c"
+  },
+  "profiles": [
+    {
+      "cw": "0x7f",
+      "cases": 167,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "resource_mismatches": 0,
+      "control_mismatches": 0,
+      "producer_fact_mismatches": 0,
+      "flag_mismatches": 77,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 9,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 10,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 11,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 12,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "cw": "0x47f",
+      "cases": 167,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "resource_mismatches": 0,
+      "control_mismatches": 0,
+      "producer_fact_mismatches": 0,
+      "flag_mismatches": 77,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 9,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 10,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 11,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 12,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "cw": "0x87f",
+      "cases": 167,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "resource_mismatches": 0,
+      "control_mismatches": 0,
+      "producer_fact_mismatches": 0,
+      "flag_mismatches": 77,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 9,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 10,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 11,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 12,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "cw": "0xc7f",
+      "cases": 167,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "resource_mismatches": 0,
+      "control_mismatches": 0,
+      "producer_fact_mismatches": 0,
+      "flag_mismatches": 77,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 9,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 10,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 11,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 12,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "cw": "0x27f",
+      "cases": 167,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "resource_mismatches": 0,
+      "control_mismatches": 0,
+      "producer_fact_mismatches": 0,
+      "flag_mismatches": 77,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 9,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 10,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 11,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 12,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "cw": "0x67f",
+      "cases": 167,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "resource_mismatches": 0,
+      "control_mismatches": 0,
+      "producer_fact_mismatches": 0,
+      "flag_mismatches": 77,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 9,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 10,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 11,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 12,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "cw": "0xa7f",
+      "cases": 167,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "resource_mismatches": 0,
+      "control_mismatches": 0,
+      "producer_fact_mismatches": 0,
+      "flag_mismatches": 77,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 9,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 10,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 11,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 12,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "cw": "0xe7f",
+      "cases": 167,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "resource_mismatches": 0,
+      "control_mismatches": 0,
+      "producer_fact_mismatches": 0,
+      "flag_mismatches": 77,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 9,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 10,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 11,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 12,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "cw": "0x37f",
+      "cases": 167,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "resource_mismatches": 0,
+      "control_mismatches": 0,
+      "producer_fact_mismatches": 0,
+      "flag_mismatches": 77,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 9,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 10,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 11,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 12,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "cw": "0x77f",
+      "cases": 167,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "resource_mismatches": 0,
+      "control_mismatches": 0,
+      "producer_fact_mismatches": 0,
+      "flag_mismatches": 77,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 9,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 10,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 11,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 12,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "cw": "0xb7f",
+      "cases": 167,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "resource_mismatches": 0,
+      "control_mismatches": 0,
+      "producer_fact_mismatches": 0,
+      "flag_mismatches": 77,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 9,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 10,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 11,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 12,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "cw": "0xf7f",
+      "cases": 167,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "resource_mismatches": 0,
+      "control_mismatches": 0,
+      "producer_fact_mismatches": 0,
+      "flag_mismatches": 77,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 9,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 10,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 11,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 12,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    }
+  ],
+  "mismatches": [],
+  "limits": [
+    "Actual source prefix only: stop before44297b because native4a2b60 owner remains missing; no original return or running game claim",
+    "Heap/task-pool initialization is an explicit fixture after unlifted CRT/Win32 acquisition",
+    "No source task/work/object/event callees are replaced",
+    "Canonical probe snapshot reads authoritative typed task/player/motion views; allocated bytes are initialization provenance",
+    "Caller-selected parameter/save/FP/resource fixtures, not actual initialized mods or hardware captures",
+    "Source crash/corrupt-registration/unknown-owner cases stop before the unsafe instruction and retain native partial failures"
+  ],
+  "prefix_state_resources_boundaries_control_match": true,
+  "original_return_observed": false,
+  "full_emulator_match": false
+}

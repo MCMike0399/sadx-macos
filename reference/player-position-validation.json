@@ -1,0 +1,23 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "files_sha256": {
+    "sadx-native/src/player_position.hpp": "ce8e65f42cb9e1237cda16a2926631d54c3fb566252ff8611e827e4cafb94029",
+    "sadx-native/src/player_position.cpp": "5836e6e4bd165e6dc995f7cda3275661e302cb6352739a9ea1f7376a51c8e352",
+    "sadx-native/tests/player_position.cpp": "e25e8d17cc0e2d9994a268b712d6af65b7b1a8f6fcd8611e66876f39e4a85649",
+    "sadx-native/tests/native_player_position_probe.cpp": "62e61208028db0bd814833cc55295cd681472bd73fec88f9cf5079b0abbf0c97",
+    "sadx-native/tools/verify_original_player_position.py": "18b9b9006608b39174c0c9e0400869fbcd258785e59c268bc97690b7f6429e26",
+    "_reference/sadx/player-position.asm": "94bd40f368a72e60b4673be12c52aeeecc5c42c734ee5286944c40ad05d79ec5",
+    "_reference/sadx/player-position-constants.bin": "f7be1c27e17fce5d129d33681b2ac8e1f279559ae671a9486ede618daa7112a6",
+    "_reference/sadx/player-position-ledger.json": "a0eff934687cd22d3abfa3ef04e4ae32a29d28c0855b3bceb37d441c539c2865"
+  },
+  "native_semantic_tests": "optimized strict and UBSan passed12CW profiles",
+  "main_instruction_evaluations": 23808,
+  "main_output_mismatches": 0,
+  "ccl_form_instruction_cases": 800,
+  "ccl_form_output_mismatches": 0,
+  "exception_status_mismatches": 11988,
+  "full_state_passed": false,
+  "scope": "source-native local body; fixture replies/stops for mandatory scene/normal/hold/reaction. Actual geometry/resources not initialized or implemented.",
+  "private_build_directory": "/private/tmp/sadx-position",
+  "production_source_freeze": "requested by root; no further source/test/probe changes pending"
+}

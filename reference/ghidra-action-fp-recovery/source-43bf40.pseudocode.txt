@@ -1,0 +1,14 @@
+
+char FUN_0043bf40(int param_1)
+
+{
+  int iVar1;
+  
+  if (((*(ushort *)(param_1 + 4) & 0x4000) == 0) &&
+     ((*(uint *)(&DAT_03b0e800 + (uint)*(byte *)(param_1 + 8) * 0x34) & DAT_00909f98) != 0)) {
+    iVar1 = FUN_004b83f0(param_1);
+    return (0 < iVar1) + '\x01';
+  }
+  return '\0';
+}
+

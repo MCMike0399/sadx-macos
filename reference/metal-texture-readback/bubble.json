@@ -1,0 +1,48 @@
+{
+  "archive" : "Sonic Adventure DX\/system\/EFF_REGULAR.PVM",
+  "archive_sha256" : "e7972e401ef9744cecc01740d47d23343c82add0044b74b13fce77bcfc64a530",
+  "channel_mismatches" : 0,
+  "channels" : 16384,
+  "compiler" : "21.0.0 (clang-2100.3.34.2)",
+  "device" : "Apple M5 Pro",
+  "direct_float32_ratios_match" : true,
+  "fp32_filtering" : true,
+  "gpu_commands_completed" : true,
+  "levels" : 1,
+  "limits" : [
+    "Native Apple GPU upload\/normalization\/readback; not original NVIDIA\/D3D equivalence",
+    "No original runtime texlist\/cache ownership or gameplay binding inferred",
+    "No sampler\/filter\/blend contract is chosen by upload",
+    "PNG uses nearest-byte quantization of real FP32 GPU readback as inspection preview"
+  ],
+  "math_profile" : "safe\/precise macOS15+; no fast math on macOS14",
+  "normalized_format" : "RGBA32Float",
+  "os" : "Version 27.0.1 (Build 26A434)",
+  "records" : [
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 894768,
+      "data_format" : 9,
+      "global_index" : 6223,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 894784,
+          "gpu_rgba32f_sha256" : "c70f05437d9cd7ee36243a02d480f44d3074288331ad75c07eeda678c54cce3c",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 130,
+      "pixel_format" : 0,
+      "table_index" : 130
+    }
+  ],
+  "registry_id" : 4294968649,
+  "shader_sha256" : "ffe6848cf2a25da0d6f676133133d9baef64179e35981b227aa52c529864a75f",
+  "unified_memory" : true,
+  "upload_format" : "R16Uint"
+}

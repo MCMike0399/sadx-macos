@@ -1,0 +1,264 @@
+
+Sonic Adventure DX/sonic.exe:	file format coff-i386
+Characteristics 0x10f
+	relocations stripped
+	executable
+	line numbers stripped
+	symbols stripped
+	32 bit words
+
+Time/Date               Sat Oct 25 16:34:04 2003
+Magic                   010b	(PE32)
+MajorLinkerVersion      7
+MinorLinkerVersion      0
+SizeOfCode              003da000
+SizeOfInitializedData   0353b000
+SizeOfUninitializedData 00000000
+AddressOfEntryPoint     00243f96
+BaseOfCode              00001000
+BaseOfData              003db000
+ImageBase               00400000
+SectionAlignment        00001000
+FileAlignment           00001000
+MajorOSystemVersion     4
+MinorOSystemVersion     0
+MajorImageVersion       0
+MinorImageVersion       0
+MajorSubsystemVersion   4
+MinorSubsystemVersion   0
+Win32Version            00000000
+SizeOfImage             03916000
+SizeOfHeaders           00001000
+CheckSum                00000000
+Subsystem               00000002	(Windows GUI)
+DllCharacteristics      00000000
+SizeOfStackReserve      00100000
+SizeOfStackCommit       00001000
+SizeOfHeapReserve       00100000
+SizeOfHeapCommit        00001000
+LoaderFlags             00000000
+NumberOfRvaAndSizes     00000010
+
+The Data Directory
+Entry 0 00000000 00000000 Export Directory [.edata (or where ever we found it)]
+Entry 1 00490cb0 000000c8 Import Directory [parts of .idata]
+Entry 2 03914000 00001668 Resource Directory [.rsrc]
+Entry 3 00000000 00000000 Exception Directory [.pdata]
+Entry 4 00000000 00000000 Security Directory
+Entry 5 00000000 00000000 Base Relocation Directory [.reloc]
+Entry 6 003db2a0 0000001c Debug Directory
+Entry 7 00000000 00000000 Description Directory
+Entry 8 00000000 00000000 Special Directory
+Entry 9 00000000 00000000 Thread Storage Directory [.tls]
+Entry a 00000000 00000000 Load Configuration Directory
+Entry b 00000000 00000000 Bound Import Directory
+Entry c 003db000 000002a0 Import Address Table Directory
+Entry d 00000000 00000000 Delay Import Directory
+Entry e 00000000 00000000 CLR Runtime Header
+Entry f 00000000 00000000 Reserved
+
+The Import Tables:
+  lookup 00490da4 time 00000000 fwd 00000000 name 004910d0 addr 003db02c
+
+    DLL Name: KERNEL32.dll
+    Hint/Ord  Name
+          51  CompareStringW
+         449  GetTimeZoneInformation
+         383  GetPrivateProfileIntA
+         389  GetPrivateProfileStringA
+         229  FreeLibrary
+         558  LoadLibraryA
+         393  GetProcAddress
+         351  GetLogicalDriveStringsA
+         317  GetDriveTypeA
+         920  lstrcpyA
+         657  ReadFileEx
+          37  CancelIo
+         810  SleepEx
+         328  GetFileAttributesA
+          87  CreateMutexA
+         639  QueryPerformanceFrequency
+         197  FindFirstFileA
+         745  SetEnvironmentVariableA
+         495  HeapAlloc
+         497  HeapCreate
+         809  Sleep
+         593  MultiByteToWideChar
+         139  EnterCriticalSection
+         557  LeaveCriticalSection
+         867  WaitForMultipleObjects
+         514  InitializeCriticalSection
+         101  CreateThread
+          70  CreateEventA
+          44  CloseHandle
+         118  DeleteCriticalSection
+         869  WaitForSingleObject
+         748  SetEvent
+         522  InterlockedIncrement
+         346  GetLastError
+         518  InterlockedDecrement
+         681  ResetEvent
+          74  CreateFileA
+         914  lstrcmpA
+         120  DeleteFileA
+         926  lstrlenA
+          50  CompareStringA
+          66  CreateDirectoryA
+         568  LocalFree
+         224  FormatMessageA
+         656  ReadFile
+         333  GetFileSize
+         917  lstrcmpiA
+         891  WritePrivateProfileStringA
+         753  SetFilePointer
+         505  HeapReAlloc
+         499  HeapDestroy
+         501  HeapFree
+         507  HeapSize
+         184  FileTimeToSystemTime
+         183  FileTimeToLocalFileTime
+         206  FindNextFileA
+         235  GetACP
+         349  GetLocaleInfoA
+         456  GetVersionExA
+         306  GetCurrentThreadId
+         592  MulDiv
+         424  GetSystemInfo
+         856  VirtualFree
+         303  GetCurrentProcess
+         853  VirtualAlloc
+         359  GetModuleHandleA
+         873  WideCharToMultiByte
+         792  SetThreadPriority
+         442  GetThreadPriority
+         305  GetCurrentThread
+         446  GetTickCount
+         171  ExitProcess
+         412  GetStartupInfoA
+         253  GetCommandLineA
+         689  RtlUnwind
+         638  QueryPerformanceCounter
+         304  GetCurrentProcessId
+         428  GetSystemTimeAsFileTime
+         357  GetModuleFileNameA
+         817  TerminateProcess
+         886  WriteFile
+         414  GetStdHandle
+         834  UnhandledExceptionFilter
+         227  FreeEnvironmentStringsA
+         319  GetEnvironmentStrings
+         228  FreeEnvironmentStringsW
+         321  GetEnvironmentStringsW
+         762  SetHandleCount
+         336  GetFileType
+         532  IsBadWritePtr
+         643  RaiseException
+         380  GetOEMCP
+         241  GetCPInfo
+         797  SetUnhandledExceptionFilter
+         529  IsBadReadPtr
+         526  IsBadCodePtr
+         780  SetStdHandle
+         219  FlushFileBuffers
+         415  GetStringTypeA
+         418  GetStringTypeW
+         544  LCMapStringA
+         545  LCMapStringW
+         744  SetEndOfFile
+         859  VirtualProtect
+         861  VirtualQuery
+         537  IsProcessorFeaturePresent
+         193  FindClose
+
+  lookup 00490f54 time 00000000 fwd 00000000 name 00491138 addr 003db1dc
+
+    DLL Name: USER32.dll
+    Hint/Ord  Name
+         654  ShowCursor
+         476  MessageBoxA
+         514  PostThreadMessageA
+         332  GetQueueStatus
+         509  PeekMessageA
+         490  MsgWaitForMultipleObjects
+         551  RegisterWindowMessageA
+         161  DispatchMessageA
+         682  TranslateMessage
+         599  SetForegroundWindow
+         665  SystemParametersInfoA
+         513  PostQuitMessage
+         142  DefWindowProcA
+         699  UpdateWindow
+         658  ShowWindow
+          96  CreateWindowExA
+         534  RegisterClassA
+         439  LoadCursorA
+         443  LoadIconA
+         728  wsprintfA
+         227  FindWindowA
+         640  SetWindowLongA
+          27  CallWindowProcA
+
+  lookup 00490ffc time 00000000 fwd 00000000 name 00491166 addr 003db284
+
+    DLL Name: ole32.dll
+    Hint/Ord  Name
+         101  CoUninitialize
+          97  CoTaskMemFree
+          28  CoFreeUnusedLibraries
+          96  CoTaskMemAlloc
+          16  CoCreateInstance
+          57  CoInitialize
+
+  lookup 00490d8c time 00000000 fwd 00000000 name 00491186 addr 003db014
+
+    DLL Name: DINPUT8.dll
+    Hint/Ord  Name
+           0  DirectInput8Create
+
+  lookup 00490fb4 time 00000000 fwd 00000000 name 00491266 addr 003db23c
+
+    DLL Name: WINMM.dll
+    Hint/Ord  Name
+         146  mmioSeek
+         136  mmioDescend
+         143  mmioRead
+         132  mmioAdvance
+         138  mmioGetInfo
+         134  mmioClose
+         141  mmioOpenA
+          42  joyGetPosEx
+         164  timeKillEvent
+         159  timeBeginPeriod
+         160  timeEndPeriod
+         165  timeSetEvent
+         133  mmioAscend
+         163  timeGetTime
+         149  mmioSetInfo
+
+  lookup 00490d94 time 00000000 fwd 00000000 name 00491270 addr 003db01c
+
+    DLL Name: DSOUND.dll
+    Hint/Ord  Name
+          11
+
+  lookup 00490d9c time 00000000 fwd 00000000 name 00491a72 addr 003db024
+
+    DLL Name: GDI32.dll
+    Hint/Ord  Name
+         421  GetStockObject
+
+  lookup 00490d78 time 00000000 fwd 00000000 name 00491abc addr 003db000
+
+    DLL Name: ADVAPI32.dll
+    Hint/Ord  Name
+         481  RegOpenKeyExA
+         456  RegCloseKey
+         491  RegQueryValueExA
+         480  RegOpenKeyA
+
+  lookup 00490ff4 time 00000000 fwd 00000000 name 00491b38 addr 003db27c
+
+    DLL Name: d3d8.dll
+    Hint/Ord  Name
+           0  Direct3DCreate8
+

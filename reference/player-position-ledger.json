@@ -1,0 +1,188 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "primary_evidence_id": "ev_8a56f1aab48dc7adf3d7c219be932c73ad9c1e8a4f7e152466c15aaa96bfcefa",
+  "procedures": [
+    {
+      "address": "0x44cdf0",
+      "length": 1771,
+      "sha256": "3788d6bb4eaab61234f5f031baa5aa439079883a68a52827497e3e048563fc6d"
+    },
+    {
+      "address": "0x41c1c0",
+      "length": 47,
+      "sha256": "bcac4d890237d9b401d6d5a11f77405bdf90b62cc0c87338b73310fadb155d92"
+    },
+    {
+      "address": "0x41bed0",
+      "length": 23,
+      "sha256": "d5fa5adc5508dd125299bea79ee328c20895c3fa3a58780b469615c6b1424f96"
+    },
+    {
+      "address": "0x4383a0",
+      "length": 12,
+      "sha256": "e57e93e20110e2620aa31b341a614a607ed41e77a39eab761fe6ab5b79427c09"
+    },
+    {
+      "address": "0x4383b0",
+      "length": 19,
+      "sha256": "06ee468f7aed3a01c0a6c7e51e3b0e129570fbb3def05f438293a7c6bc552f5c"
+    },
+    {
+      "address": "0x418ac0",
+      "length": 89,
+      "sha256": "9a213f76f24e32084e219b0b1e895596a21627b79b0589fe76b02f9405a5b205"
+    },
+    {
+      "address": "0x787cc0",
+      "length": 38,
+      "sha256": "8394622b2f31ae87570f34c5cd791dfa7338a9a82f7cfec0533069c7bd7a74e0"
+    },
+    {
+      "address": "0x787cf0",
+      "length": 21,
+      "sha256": "d8624d2d2864e02690baf75753f49b404c5c430130abb66c2ffeb9a5f6022766"
+    }
+  ],
+  "required_scene_owners": {
+    "0x449500": "ordinary stage position/collision update, receives task/motion/player and mutates native owners",
+    "0x445d10": "signed packed stage/act0x902/0x903 alternate position/collision update",
+    "0x41bc00": "normal query owner called by41bed0 wrapper, receives task and normal-output resource",
+    "0x43c580": "wall speed reaction on selected contact path",
+    "0x43b9c0": "hold/contact object flags query from real registered task/object graph"
+  },
+  "required_state_reads": [
+    "task flags/angles/player identity, optional known task position",
+    "world motion speed with source nullness, player local speed",
+    "source collision pointer presence; flags(+4), my_num(+a2), info-pointer(+c), hit_cwp(+a4)",
+    "source CCL_INFO records: form+1,push+2,damage+3,attr+4,a+14; original48-byte stride",
+    "hit-cwp nbHit+2,mytask+9c and owner taskwk+20; taskwk.id+2/yaw+18",
+    "signed16stage0x3b22dcc andact0x3b22dec",
+    "same live unit-matrix/sine/stack and normalization flag owners",
+    "actual CRT matherr runtime for wall acos; explicit x87 context"
+  ],
+  "entry_writes": [
+    "player source wall_normal+44/+48/+4c\u2192positive0",
+    "player attr+5c\u2192last_attr+60 thenattr+5c\u21920"
+  ],
+  "classification": "observed instructions plus source-bound derived layout; runtime/collision geometry absent",
+  "child_evidence": [
+    {
+      "name": "scene-position-449500",
+      "address": "0x449500",
+      "evidence_id": "ev_39a7bf35bd9536051bf591fcb63b73d285e2d4b90b7c614ecef5bb8c4993dfc2",
+      "callees": [
+        "0x418ac0",
+        "0x42fb00",
+        "0x4383b0",
+        "0x438410",
+        "0x43bdc0",
+        "0x43c7d0",
+        "0x43ca40",
+        "0x43cb40",
+        "0x43cb90",
+        "0x43cce0",
+        "0x43d180",
+        "0x43d360",
+        "0x43ec90",
+        "0x43edd0",
+        "0x444640",
+        "0x444aa0",
+        "0x444f10",
+        "0x450c10",
+        "0x453820",
+        "0x4b8e80",
+        "0x644340",
+        "0x645020",
+        "0x7871f0",
+        "0x787cc0",
+        "0x787cf0",
+        "0x788d40"
+      ]
+    },
+    {
+      "name": "scene-position-445d10",
+      "address": "0x445d10",
+      "evidence_id": "ev_4020990d0fd51d11694877651f4e7c3dfad90e04ddcfa52c7e135efe4c4169b5",
+      "callees": [
+        "0x418ac0",
+        "0x438410",
+        "0x43bdc0",
+        "0x43c7d0",
+        "0x43ca40",
+        "0x43cb90",
+        "0x43cf90",
+        "0x43d180",
+        "0x43d8b0",
+        "0x444d50",
+        "0x444f10",
+        "0x450c10",
+        "0x453820",
+        "0x4b8e80",
+        "0x781c80",
+        "0x784d60",
+        "0x784e20",
+        "0x784ee0",
+        "0x784fb0",
+        "0x785140",
+        "0x7871f0",
+        "0x7875f0",
+        "0x787cc0",
+        "0x787cf0",
+        "0x788d40"
+      ]
+    },
+    {
+      "name": "wall-normal",
+      "address": "0x41bed0",
+      "evidence_id": "ev_a51369b365dde189e0a6910bac7ea50f678a7e1886f17722be543963c8f09017",
+      "callees": [
+        "0x41bc00"
+      ]
+    },
+    {
+      "name": "speed-response",
+      "address": "0x43c580",
+      "evidence_id": "ev_bba2c578aad8fb13b244ec43a9095d729021888191609d45e99a55574431e49f",
+      "callees": [
+        "0x418ac0",
+        "0x41bed0",
+        "0x4383b0",
+        "0x438410",
+        "0x787cc0",
+        "0x787cf0",
+        "0x7887d0"
+      ]
+    },
+    {
+      "name": "hit-kind",
+      "address": "0x41c1c0",
+      "evidence_id": "ev_25c98866904e4c0aabe5bfc6a8a1c748c9e353b2cf34bf4c62da3c9f12d16056",
+      "callees": []
+    },
+    {
+      "name": "normal-query",
+      "address": "0x41bc00",
+      "evidence_id": "ev_711e133add2969b871faa1498689028dd055cb75079b7e93e3b6fee2a76f18ec",
+      "callees": [
+        "0x418ac0",
+        "0x419030",
+        "0x419270",
+        "0x4193a0",
+        "0x419900",
+        "0x784d60",
+        "0x784e20",
+        "0x7850f0",
+        "0x785140"
+      ]
+    }
+  ],
+  "native_scope": "Complete PSetPosition local control/math/matrix; tiny CCL form getter; mandatory scene/normal/hold/reaction boundaries remain external.",
+  "open_collision_facts": [
+    "CCL shape center/dimensions/forms and owning actor pose for419270/419030/4193a0/419900",
+    "Actual stage shape/land/terrain/object model arrays and transforms, dynamic hit/contact list and normal queries",
+    "Current playerwk.cstsp native collision-state resource (+64), detailed displacement/contact/work fields written by449500/445d10",
+    "Scene stage model count0x3b32724, scene array0x3b2f720 and query-global state0x3b42e74; their runtime initialization is not established",
+    "Hold-object registered-player/task lifecycle fields consumed by43b9c0 and source collision response43c580",
+    "Original runtime x87 control, CRT matherr policy and physical hardware state remain unknown"
+  ]
+}

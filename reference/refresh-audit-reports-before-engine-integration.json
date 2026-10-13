@@ -1,0 +1,220 @@
+[
+  {
+    "key": "air",
+    "args": [
+      "sadx-native/tools/verify_original_air_acceleration.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-air-acceleration-probe.dylib",
+      "--output",
+      "_reference/sadx/original-air-acceleration-comparison.json"
+    ]
+  },
+  {
+    "key": "rotation",
+    "args": [
+      "sadx-native/tools/verify_original_player_rotation.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-player-rotation-probe.dylib",
+      "--output",
+      "_reference/sadx/original-player-rotation-comparison.json"
+    ]
+  },
+  {
+    "key": "axis",
+    "args": [
+      "sadx-native/tools/verify_original_axis_projection.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-axis-projection-probe.dylib",
+      "--output",
+      "_reference/sadx/original-axis-projection-comparison.json"
+    ]
+  },
+  {
+    "key": "movement",
+    "args": [
+      "sadx-native/tools/verify_original_player_movement.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-player-movement-probe.dylib",
+      "--output",
+      "_reference/sadx/original-player-movement-comparison.json"
+    ]
+  },
+  {
+    "key": "position",
+    "args": [
+      "sadx-native/tools/verify_original_player_position.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-player-position-probe.dylib",
+      "--output",
+      "_reference/sadx/original-player-position-comparison.json"
+    ]
+  },
+  {
+    "key": "attribute4000",
+    "args": [
+      "sadx-native/tools/verify_original_alternate_acceleration.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-alternate-acceleration-probe.dylib",
+      "--variant",
+      "attribute4000",
+      "--output",
+      "_reference/sadx/original-attribute4000-comparison.json"
+    ]
+  },
+  {
+    "key": "attribute20000",
+    "args": [
+      "sadx-native/tools/verify_original_alternate_acceleration.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-alternate-acceleration-probe.dylib",
+      "--variant",
+      "attribute20000",
+      "--output",
+      "_reference/sadx/original-attribute20000-comparison.json"
+    ]
+  },
+  {
+    "key": "eventground",
+    "args": [
+      "sadx-native/tools/verify_original_alternate_acceleration.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-alternate-acceleration-probe.dylib",
+      "--variant",
+      "eventground",
+      "--output",
+      "_reference/sadx/original-eventground-comparison.json"
+    ]
+  },
+  {
+    "key": "eventair",
+    "args": [
+      "sadx-native/tools/verify_original_alternate_acceleration.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-alternate-acceleration-probe.dylib",
+      "--variant",
+      "eventair",
+      "--output",
+      "_reference/sadx/original-eventair-comparison.json"
+    ]
+  },
+  {
+    "key": "reset",
+    "args": [
+      "sadx-native/tools/verify_original_player_direction_reset.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-player-direction-reset-probe.dylib",
+      "--output",
+      "_reference/sadx/original-player-direction-reset-comparison.json"
+    ]
+  },
+  {
+    "key": "contact",
+    "args": [
+      "sadx-native/tools/verify_original_player_contact_initializer.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-player-contact-initializer-probe.dylib",
+      "--output",
+      "_reference/sadx/original-player-contact-initializer-comparison.json"
+    ]
+  },
+  {
+    "key": "collision",
+    "args": [
+      "sadx-native/tools/verify_original_collision_shapes.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-collision-shapes-probe.dylib",
+      "--output",
+      "_reference/sadx/original-collision-shapes-comparison.json"
+    ]
+  },
+  {
+    "key": "scene",
+    "args": [
+      "sadx-native/tools/verify_original_player_scene.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-player-scene-probe.dylib",
+      "--output",
+      "_reference/sadx/original-player-scene-comparison.json"
+    ]
+  },
+  {
+    "key": "bounds",
+    "args": [
+      "sadx-native/tools/verify_original_scene_mesh_bounds.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-player-scene-probe.dylib",
+      "--output",
+      "_reference/sadx/original-scene-mesh-bounds-comparison.json"
+    ]
+  },
+  {
+    "key": "plane",
+    "args": [
+      "sadx-native/tools/verify_original_player_plane.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-player-plane-probe.dylib",
+      "--output",
+      "_reference/sadx/original-player-plane-comparison.json"
+    ]
+  },
+  {
+    "key": "task_lifecycle",
+    "args": [
+      "sadx-native/tools/verify_original_task_lifecycle.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-task-lifecycle-probe.dylib",
+      "--output",
+      "_reference/sadx/original-task-lifecycle-comparison.json"
+    ]
+  },
+  {
+    "key": "reaction",
+    "args": [
+      "sadx-native/tools/verify_original_player_reaction.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-player-reaction-probe.dylib",
+      "--output",
+      "_reference/sadx/original-player-reaction-comparison.json"
+    ]
+  },
+  {
+    "key": "mesh_query",
+    "args": [
+      "sadx-native/tools/verify_original_player_mesh_query.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-player-mesh-query-probe.dylib",
+      "--output",
+      "_reference/sadx/original-player-mesh-query-comparison.json"
+    ]
+  },
+  {
+    "key": "hold",
+    "args": [
+      "sadx-native/tools/verify_original_player_hold.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-player-hold-probe.dylib",
+      "--output",
+      "_reference/sadx/original-player-hold-comparison.json"
+    ]
+  },
+  {
+    "key": "mesh_registry",
+    "args": [
+      "sadx-native/tools/verify_original_player_mesh_registry.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-player-mesh-registry-probe.dylib",
+      "--output",
+      "_reference/sadx/original-player-mesh-registry-comparison.json"
+    ]
+  },
+  {
+    "key": "contact_attributes",
+    "args": [
+      "sadx-native/tools/verify_original_player_contact_attributes.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-player-contact-attributes-probe.dylib",
+      "--output",
+      "_reference/sadx/original-player-contact-attributes-comparison.json"
+    ]
+  }
+]

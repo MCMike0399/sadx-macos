@@ -1,0 +1,203 @@
+0x43cce0: sub esp, 0xb0
+0x43cce6: push ebx
+0x43cce7: xor ebx, ebx
+0x43cce9: cmp word [edi+0x28], bx
+0x43cced: push ebp
+0x43ccee: push esi
+0x43ccef: mov dword [esp+0xbc+var_A8], ebx
+0x43ccf3: mov dword [esp+0xbc+var_A4], 0xffffffff
+0x43ccfb: mov dword [esp+0xbc+var_9C], 0x447a0000
+0x43cd03: mov dword [esp+0xbc+var_84], ebx
+0x43cd07: mov dword [esp+0xbc+var_88], ebx
+0x43cd0b: mov dword [esp+0xbc+var_8C], ebx
+0x43cd0f: jbe loc_43cf7d
+0x43cd15: mov esi, 0x3b4701c
+0x43cd1a: lea ebx, dword [ebx]
+0x43cd20: fld dword [esi+0x20]
+0x43cd23: push ecx
+0x43cd24: fsub dword [edi+0xc]
+0x43cd27: fld dword [esi+0x1c]
+0x43cd2a: fsub dword [edi+8]
+0x43cd2d: fld dword [esi+0x18]
+0x43cd30: fsub dword [edi+4]
+0x43cd33: fld st0
+0x43cd35: fmul st1
+0x43cd37: fld st2
+0x43cd39: fmul st3
+0x43cd3b: faddp st1
+0x43cd3d: fld st3
+0x43cd3f: fmul st4
+0x43cd41: faddp st1
+0x43cd43: fstp dword [esp+0xc0+var_C0]
+0x43cd46: fstp st0
+0x43cd48: fstp st0
+0x43cd4a: fstp st0
+0x43cd4c: call sub_7871f0
+0x43cd51: push 0x0
+0x43cd53: fst dword [esp+0xc0+var_A0]
+0x43cd57: push esi
+0x43cd58: fstp dword [esp+ebx*4+0xc4+var_40]
+0x43cd5f: lea ebp, dword [edi+0x1c]
+0x43cd62: push ebp
+0x43cd63: mov dword [esp+ebx*4+0xc8+var_80], 0x0
+0x43cd6b: call sub_438410
+0x43cd70: add esp, 0xc
+0x43cd73: cmp eax, 0x2c00
+0x43cd78: jle loc_43cee5
+0x43cd7e: mov edx, ebp
+0x43cd80: mov ecx, dword_3b0f0f8
+0x43cd85: call sub_787cf0
+0x43cd8a: fstp dword [esp+0xbc+var_B0]
+0x43cd8e: mov edx, esi
+0x43cd90: mov ecx, dword_3b0f0f8
+0x43cd95: call sub_787cf0
+0x43cd9a: fcomp dword [esp+0xbc+var_B0]
+0x43cd9e: fnstsw ax
+0x43cda0: test ah, 0x5
+0x43cda3: jnp loc_43cee5
+0x43cda9: lea eax, dword [edi+0x10]
+0x43cdac: mov ecx, dword [eax]
+0x43cdae: mov edx, dword [eax+4]
+0x43cdb1: mov eax, dword [eax+8]
+0x43cdb4: mov dword [esp+0xbc+var_98], ecx
+0x43cdb8: lea ecx, dword [esp+0xbc+var_98]
+0x43cdbc: mov dword [esp+0xbc+var_94], edx
+0x43cdc0: mov dword [esp+0xbc+var_90], eax
+0x43cdc4: call sub_787cc0
+0x43cdc9: fcomp dword [dword_value_1142947840+4]
+0x43cdcf: fnstsw ax
+0x43cdd1: test ah, 0x44
+0x43cdd4: jnp loc_43cde5
+0x43cdd6: lea ecx, dword [esp+0xbc+var_98]
+0x43cdda: push ecx
+0x43cddb: call sub_418ac0
+0x43cde0: fstp st0
+0x43cde2: add esp, 0x4
+0x43cde5: mov edx, esi
+0x43cde7: lea ecx, dword [esp+0xbc+var_98]
+0x43cdeb: call sub_787cf0
+0x43cdf0: fst dword [esp+0xbc+var_B0]
+0x43cdf4: fcomp dword [dword_value_1142947840+4]
+0x43cdfa: fnstsw ax
+0x43cdfc: test ah, 0x5
+0x43cdff: jp loc_43ceed
+0x43ce05: fld dword [esp+0xbc+var_9C]
+0x43ce09: mov eax, dword [esp+0xbc+var_A8]
+0x43ce0d: fcomp dword [esp+0xbc+var_A0]
+0x43ce11: inc eax
+0x43ce12: mov dword [esp+0xbc+var_A8], eax
+0x43ce16: mov dword [esp+ebx*4+0xbc+var_80], 0x8
+0x43ce1e: fnstsw ax
+0x43ce20: test ah, 0x41
+0x43ce23: jne loc_43ce31
+0x43ce25: mov edx, dword [esp+0xbc+var_A0]
+0x43ce29: mov dword [esp+0xbc+var_9C], edx
+0x43ce2d: mov dword [esp+0xbc+var_A4], ebx
+0x43ce31: test dword [esp+0xbc+arg_C], aLastwater003
+0x43ce3c: jne loc_43ced8
+0x43ce42: mov ecx, 0x600
+0x43ce47: call sub_7883c0
+0x43ce4c: fchs
+0x43ce4e: fcomp dword [esp+0xbc+var_B0]
+0x43ce52: mov ebp, dword [esp+0xbc+arg_4]
+0x43ce59: fnstsw ax
+0x43ce5b: test ah, 0x41
+0x43ce5e: jne loc_43ce6b
+0x43ce60: xor eax, eax
+0x43ce62: mov dword [ebp+0xc], eax
+0x43ce65: mov dword [ebp+8], eax
+0x43ce68: mov dword [ebp+4], eax
+0x43ce6b: mov edx, esi
+0x43ce6d: lea ecx, dword [edi+0x10]
+0x43ce70: call sub_787cf0
+0x43ce75: fcomp dword [dword_value_3230662656]
+0x43ce7b: fnstsw ax
+0x43ce7d: test ah, 0x5
+0x43ce80: jp loc_43ced8
+0x43ce82: mov eax, dword [esp+0xbc+arg_8]
+0x43ce89: mov ecx, dword [eax+0xc4]
+0x43ce8f: mov dword [esp+0xbc+var_AC], ecx
+0x43ce93: add ebp, 0x4
+0x43ce96: mov ecx, ebp
+0x43ce98: call sub_787cc0
+0x43ce9d: fcomp dword [esp+0xbc+var_AC]
+0x43cea1: fnstsw ax
+0x43cea3: test ah, 0x41
+0x43cea6: jne loc_43ced8
+0x43cea8: push ebp
+0x43cea9: call sub_418ac0
+0x43ceae: fstp st0
+0x43ceb0: fld dword [esp+0xc0+var_AC]
+0x43ceb4: mov eax, dword [esp+0xc0+arg_4]
+0x43cebb: fmul dword [ebp]
+0x43cebe: add esp, 0x4
+0x43cec1: fstp dword [ebp]
+0x43cec4: fld dword [esp+0xbc+var_AC]
+0x43cec8: fmul dword [eax+8]
+0x43cecb: fstp dword [eax+8]
+0x43cece: fld dword [esp+0xbc+var_AC]
+0x43ced2: fmul dword [eax+0xc]
+0x43ced5: fstp dword [eax+0xc]
+0x43ced8: mov edx, esi
+0x43ceda: lea ecx, dword [esp+0xbc+var_8C]
+0x43cede: call sub_785170
+0x43cee3: jmp loc_43ceed
+0x43cee5: mov dword [esp+ebx*4+0xbc+var_80], 0x2
+0x43ceed: movzx edx, word [edi+0x28]
+0x43cef1: inc ebx
+0x43cef2: add esi, 0x58
+0x43cef5: cmp ebx, edx
+0x43cef7: jl loc_43cd20
+0x43cefd: mov eax, dword [esp+0xbc+var_A8]
+0x43cf01: xor ebp, ebp
+0x43cf03: cmp eax, ebp
+0x43cf05: jle loc_43cf7d
+0x43cf07: mov ebx, dword [esp+0xbc+var_A4]
+0x43cf0b: lea esi, dword [edi+0x10]
+0x43cf0e: mov ecx, esi
+0x43cf10: lea ebx, dword [esp+ebx*4+0xbc+var_40]
+0x43cf14: call sub_787cc0
+0x43cf19: fcomp dword [ebx]
+0x43cf1b: fnstsw ax
+0x43cf1d: test ah, 0x41
+0x43cf20: jne loc_43cf7d
+0x43cf22: mov ecx, esi
+0x43cf24: call sub_787cc0
+0x43cf29: fcomp dword [dword_value_1142947840+4]
+0x43cf2f: fnstsw ax
+0x43cf31: test ah, 0x44
+0x43cf34: jp loc_43cf4d
+0x43cf36: mov dword [esi], ebp
+0x43cf38: pop esi
+0x43cf39: mov dword [edi+0x18], ebp
+0x43cf3c: mov dword [edi+0x14], ebp
+0x43cf3f: pop ebp
+0x43cf40: mov eax, 0x1
+0x43cf45: pop ebx
+0x43cf46: add esp, 0xb0
+0x43cf4c: ret
+0x43cf4d: push esi
+0x43cf4e: call sub_418ac0
+0x43cf53: fstp st0
+0x43cf55: fld dword [esi]
+0x43cf57: add esp, 0x4
+0x43cf5a: fmul dword [ebx]
+0x43cf5c: mov eax, 0x1
+0x43cf61: fstp dword [esi]
+0x43cf63: pop esi
+0x43cf64: fld dword [ebx]
+0x43cf66: pop ebp
+0x43cf67: fmul dword [edi+0x14]
+0x43cf6a: fstp dword [edi+0x14]
+0x43cf6d: fld dword [edi+0x18]
+0x43cf70: fmul dword [ebx]
+0x43cf72: pop ebx
+0x43cf73: fstp dword [edi+0x18]
+0x43cf76: add esp, 0xb0
+0x43cf7c: ret
+0x43cf7d: pop esi
+0x43cf7e: pop ebp
+0x43cf7f: xor eax, eax
+0x43cf81: pop ebx
+0x43cf82: add esp, 0xb0
+0x43cf88: ret

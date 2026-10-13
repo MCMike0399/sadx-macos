@@ -1,0 +1,97 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "status": "five_native_local_response_bodies_frozen_released_for_next_integration; full_scene_and_hardware_open",
+  "entries": {
+    "0x43cce0": {
+      "size": 681,
+      "sha256": "81caf040ebac921d1162c3cfeda295e5b5e595de29a4b5d878aa250e6ebd8b05"
+    },
+    "0x43cf90": {
+      "size": 488,
+      "sha256": "ac5443238c282b45b3133183a8f518929a5f7d51734223c81ab40753a9308b11"
+    },
+    "0x43d180": {
+      "size": 470,
+      "sha256": "c5cc5a981790f1cfb93f70399907c5c6aac16edb2a66d07cfe50e562b0c90d78"
+    },
+    "0x43d8b0": {
+      "size": 1001,
+      "sha256": "c61fc3146c1a21f413eedd587d69cd81005a9ef72efa29f1025358a8723e59ab"
+    },
+    "0x43d360": {
+      "size": 1357,
+      "sha256": "37fbf440d3d094c6b8b59bd0b17b3cf29021c96ea7495d82a972f6ccb3a4004b"
+    }
+  },
+  "hopper_evidence_ids": {
+    "43cce0": "ev_de0aa9339d12697159be1f6442ca60ffb2bf6d499759f9ec0918db3a066dd46b",
+    "43cf90": "ev_5737c9d384dd651a18627ffbabe57767a16f1b35452036921e6d2a2f7237e7e7",
+    "43d180": "ev_f0bfbdb2ab08add5bd5b280d3809ca8d5839043fa2b7e284eb6faf1f0e917de8",
+    "43d8b0": "ev_fe897f177fb8307baf8d39a03ef5eb584c7f951f70fabb1b6567ab1a05dddb72"
+  },
+  "43d360_provider_scope": "LLVM exact bytes only in this owner; no duplicate session",
+  "native_sources": {
+    "sadx-native/src/player_contact_response.hpp": "681f59d917656906054e14d043ed63d05d86a74134622c5f67ee9ba84c5531cf",
+    "sadx-native/src/player_contact_response.cpp": "00bfee77aed6f18550e8e22f8587a794c172934bdb2f5b6fb4474cbfc88d1f46",
+    "sadx-native/tests/player_contact_response.cpp": "02920653cfe619d3671f7bb4dee5fc2fb90cf5e4774fa3b611417b7f9b7c8e2c",
+    "sadx-native/tests/native_player_contact_response_probe.cpp": "84dc8cf354d4a95ab9f72753e31970414f24450e503d4291581fd92ba786ec15",
+    "sadx-native/tools/verify_original_player_contact_response.py": "fb1546da93b57df93eeb81c57a60ad9587fd38d0b0cf95e5ba2209bcdfb9b0e7"
+  },
+  "private_probe_sha256": "e748e085f2248725d54bd44d426f00dccc03e1571c9d12a9edb8d556f9652852",
+  "private_report_sha256": "61966a71d9811c49c49a92dd33a06c070a065147d893c9139899ad163ac4e1c6",
+  "constants": {
+    "bytes": "000000000000803fcdcc4cbe000090c0cdcc4c3e000080bf9a99793f000000000000f0400ae3e4b4305fc43f000000000000f03f",
+    "sha256": "10889309fdb5c0b466b1f62c5d0adcda8f271ce9a4b5a6332feee9397899e557",
+    "fields": [
+      "0x7dcb2c",
+      "0x7dcb10",
+      "0x7dd570",
+      "0x7e0080",
+      "0x7dd58c",
+      "0x7dcb0c",
+      "0x7e6c30",
+      "0x7dccd0",
+      "0x7dccc8",
+      "0x7e0b40"
+    ]
+  },
+  "case_sha256": "a18d35d7f3fb3de27c0914f7303822ae3a7526632db6e05ddb2c31f783b7727a",
+  "actual_source_cases": 61800,
+  "stored_value_return_control_mismatches": 0,
+  "flag_mismatches": 50196,
+  "stored_value_return_control_match": true,
+  "full_passed": false,
+  "validation": {
+    "optimized_arm64_owner_tests": "passed",
+    "ubsan_owner_tests": "passed; linked existing archive not instrumented here",
+    "test_args": [
+      "constants52",
+      "sine4100"
+    ],
+    "original": "Unicorn2.1.4 actual source, no overlays, caller-selected policy1/12 masked CW profiles"
+  },
+  "required_unknowns": [
+    "actual initialized CRT/FP policy and physical Intel status",
+    "actual registered scene contact production/actor lifetimes",
+    "uninitialized local distance word if no closest contact selected",
+    "response beyond native16-record buffer or response[-1]",
+    "production-linked root probe and retrospective Ghidra validation for new owners"
+  ],
+  "current_gate_scope": "excluded from parent49-program existing retrospective gate",
+  "limits": [
+    "Explicit fixtures/policy1/12 CW profiles do not establish actual Windows startup/mods/scene state",
+    "Unobserved contact/resource/scratch boundaries belong to owner tests; source initialization is not fabricated",
+    "Bochs FPATAN model versus Unicorn host-double transcendental and status differences remain separate",
+    "Actual Intel hardware, complete collision producers and physical controllers remain unverified"
+  ],
+  "production_integration": {
+    "state": "integrated",
+    "archive": "sadx-native/build/libsadx-core.a",
+    "native_gate": "50 native programs+4 extraction tests passed",
+    "gate_log": "/private/tmp/sadx-contact-response-integration-gate.log",
+    "probe": "sadx-native/build/native-player-contact-response-probe.dylib",
+    "probe_sha256": "0b5ee58cf1fa8e383f1d976e062d50f648655af01d7878c11a5adda4f65d65d3",
+    "report": "_reference/sadx/original-contact-response-comparison.json",
+    "scope": "Five local contact-response bodies; full positioning/game/hardware equivalence unverified."
+  }
+}

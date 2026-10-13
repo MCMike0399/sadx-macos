@@ -1,0 +1,58 @@
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+bool FUN_0043bdc0(int param_1,int *param_2,undefined4 *param_3)
+
+{
+  int iVar1;
+  uint uVar2;
+  
+  if ((*(ushort *)(param_1 + 4) & 0x4000) != 0) {
+    return *(char *)(*(int *)(param_1 + 0x3c) + 0x24) != '\0';
+  }
+  if ((*(ushort *)(param_1 + 4) & 0x2000) != 0) {
+    if (_DAT_03b22dcc == 2) {
+      if (_DAT_03b22dec != 2) goto LAB_0043be74;
+    }
+    else if ((_DAT_03b22dcc != 4) || (_DAT_03b22dec != 0)) goto LAB_0043be74;
+    iVar1 = FUN_004144e0();
+    if (iVar1 == 0) {
+      if (param_2 != (int *)0x0) {
+        fpatan((float10)-127.0,(float10)0.0);
+        iVar1 = FUN_00644340();
+        *param_2 = -iVar1 - *(int *)(DAT_03b2cbb0 + 0x18);
+      }
+      if (param_3 != (undefined4 *)0x0) {
+        *param_3 = 0x3f800000;
+      }
+      return true;
+    }
+  }
+LAB_0043be74:
+  uVar2 = (uint)*(byte *)(param_1 + 8);
+  if ((float)(&DAT_03b0e7a4)[uVar2 * 2] == 0.0) {
+    if (((*(char *)(param_1 + 9) == '\0') && ((*(ushort *)(param_1 + 4) & 0x100) != 0)) &&
+       ((uVar2 = (int)_DAT_03b22dcc << 8 | (int)_DAT_03b22dec, uVar2 == 0x902 || (uVar2 == 0x903))))
+    {
+      if (param_2 != (int *)0x0) {
+        *param_2 = *(int *)(param_1 + 0x18);
+      }
+      if (param_3 != (undefined4 *)0x0) {
+        *param_3 = 0;
+      }
+      return true;
+    }
+  }
+  else if (((*(ushort *)(param_1 + 4) & 0x2000) != 0) ||
+          (*(short *)((&DAT_03b3cdf0)[uVar2] + 10) == 0)) {
+    if (param_2 != (int *)0x0) {
+      *param_2 = (&DAT_03b0e7a0)[uVar2 * 2];
+    }
+    if (param_3 != (undefined4 *)0x0) {
+      *param_3 = (&DAT_03b0e7a4)[(uint)*(byte *)(param_1 + 8) * 2];
+    }
+    return true;
+  }
+  return false;
+}
+

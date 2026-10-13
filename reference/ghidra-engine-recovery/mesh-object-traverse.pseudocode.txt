@@ -1,0 +1,35 @@
+
+undefined4 FUN_00451a00(int param_1,undefined4 param_2,undefined4 param_3)
+
+{
+  int iVar1;
+  undefined4 uVar2;
+  undefined4 local_8;
+  
+  FUN_007850f0();
+  FUN_00785070();
+  if (*(int *)(param_1 + 0x1c) != 0) {
+    FUN_00784fb0();
+  }
+  if (*(int *)(param_1 + 0x18) != 0) {
+    FUN_00784e20();
+  }
+  if (*(int *)(param_1 + 0x14) != 0) {
+    FUN_00784ee0();
+  }
+  FUN_00788a50();
+  for (local_8 = *(int *)(param_1 + 0x2c); local_8 != 0;
+      local_8 = FUN_00451a00(local_8,param_2,param_3)) {
+  }
+  iVar1 = FUN_00451ad0(param_1,param_2,param_3);
+  if (iVar1 == 0) {
+    FUN_00785140();
+    uVar2 = 0;
+  }
+  else {
+    FUN_00785140();
+    uVar2 = *(undefined4 *)(param_1 + 0x30);
+  }
+  return uVar2;
+}
+

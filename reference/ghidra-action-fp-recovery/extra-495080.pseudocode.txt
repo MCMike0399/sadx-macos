@@ -1,0 +1,82 @@
+
+undefined4 FUN_00495080(void)
+
+{
+  short sVar1;
+  int iVar2;
+  float *unaff_ESI;
+  undefined1 *unaff_EDI;
+  
+  sVar1 = *(short *)((int)unaff_ESI + 0x7e);
+  if (((0x77 < sVar1) && (((uint)unaff_ESI[1] & 3) == 3)) ||
+     ((0xd1 < sVar1 && (((uint)unaff_ESI[1] & 2) != 0)))) {
+    unaff_EDI[5] = unaff_EDI[5] | 2;
+    iVar2 = FUN_0040b860(8,0,&LAB_004940e0);
+    if (iVar2 != 0) {
+      **(undefined4 **)(iVar2 + 0x2c) = unaff_EDI;
+      *(float **)(*(int *)(iVar2 + 0x2c) + 4) = unaff_ESI;
+      *(float *)(*(int *)(iVar2 + 0x2c) + 8) = unaff_ESI[0x2b];
+      unaff_ESI[0x2b] = 0.5;
+      *(undefined1 **)(iVar2 + 0x18) = &LAB_00494120;
+    }
+    *(undefined2 *)((int)unaff_ESI + 0x7e) = 0;
+    if (unaff_ESI[0xe] < 0.0 == (unaff_ESI[0xe] == 0.0)) {
+      *unaff_EDI = 2;
+    }
+    else {
+      *unaff_EDI = 1;
+      *(undefined2 *)((int)unaff_ESI + 0xe) = 0;
+    }
+    *(undefined2 *)(unaff_ESI + 0x49) = 0x1d;
+    unaff_EDI[5] = unaff_EDI[5] & 0xfa;
+    FUN_00424210(0x2ff);
+    FUN_00424210(0x2fb);
+    if (DAT_03b18db5 == '\0') {
+      FUN_00423d70(0x4cb,0,0,0);
+    }
+    return 1;
+  }
+  if (299 < sVar1) {
+    *(undefined2 *)((int)unaff_ESI + 0x7e) = 0;
+    if (unaff_ESI[0xe] < 0.0 == (unaff_ESI[0xe] == 0.0)) {
+      *unaff_EDI = 2;
+    }
+    else {
+      *unaff_EDI = 1;
+      *(undefined2 *)((int)unaff_ESI + 0xe) = 0;
+    }
+    *(undefined2 *)(unaff_ESI + 0x49) = 0x1d;
+    unaff_EDI[5] = unaff_EDI[5] & 0xfa;
+    FUN_00424210(0x2ff);
+    FUN_00424210(0x2fb);
+    return 1;
+  }
+  if (((&DAT_03b0e7f8)[(uint)(byte)unaff_EDI[8] * 0xd] & DAT_00909f94) == 0) {
+    *unaff_EDI = 5;
+    *(undefined2 *)(unaff_ESI + 0x49) = 0xf;
+    unaff_ESI[0xe] = *unaff_ESI;
+    FUN_00423d70(0x300,0,0,0);
+    FUN_00424210(0x2ff);
+    FUN_00424210(0x2fb);
+    *(undefined2 *)((int)unaff_ESI + 0x7e) = 0;
+    *unaff_ESI = 0.0;
+    if ((*(ushort *)(unaff_EDI + 4) & 0x100) == 0) {
+      FUN_00424210(0x2fb);
+    }
+    return 1;
+  }
+  if (*unaff_ESI < 10.0) {
+    *unaff_ESI = *unaff_ESI + 0.4;
+  }
+  if (((uint)unaff_ESI[1] & 2) != 0) {
+    if ((*(ushort *)(unaff_EDI + 4) & 0x100) != 0) {
+      FUN_00423f50(0x2fb);
+      return 0;
+    }
+    FUN_00424210(0x2fb);
+    return 0;
+  }
+  FUN_00423f50(0x2ff);
+  return 0;
+}
+

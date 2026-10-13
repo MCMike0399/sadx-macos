@@ -1,0 +1,7406 @@
+{
+  "profile": "immutable-x87-memory-instruction-fixtures/unicorn-2.1.4/native-arm64-ext80",
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "njAddVector_address": "0x785170",
+  "njAddVector_bytes": "d901d802d919d94204d84104d95904d94208d84108d95908c3",
+  "njAddVector_sha256": "6062ff68472aa60aea2d73c7cabbd34a40ff4ba2bdf10473cf48d7b33a730fb2",
+  "native_library_sha256": "e672a90ea605265992f8e0162e1c387f23a6324fc21848e3d9884730798580ba",
+  "instruction_wrappers": {
+    "32/add": "dbe3d92d00000011d90500010011d80500020011dfe0a300040011db3d00030011c3",
+    "32/multiply": "dbe3d92d00000011d90500010011d80d00020011dfe0a300040011db3d00030011c3",
+    "32/subtract": "dbe3d92d00000011d90500010011d82500020011dfe0a300040011db3d00030011c3",
+    "32/reverse_subtract": "dbe3d92d00000011d90500010011d82d00020011dfe0a300040011db3d00030011c3",
+    "32/divide": "dbe3d92d00000011d90500010011d83500020011dfe0a300040011db3d00030011c3",
+    "32/reverse_divide": "dbe3d92d00000011d90500010011d83d00020011dfe0a300040011db3d00030011c3",
+    "32/compare": "dbe3d92d00000011d90500010011d81500020011dfe0a300040011db3d00030011c3",
+    "64/add": "dbe3d92d00000011dd0500010011dc0500020011dfe0a300040011db3d00030011c3",
+    "64/multiply": "dbe3d92d00000011dd0500010011dc0d00020011dfe0a300040011db3d00030011c3",
+    "64/subtract": "dbe3d92d00000011dd0500010011dc2500020011dfe0a300040011db3d00030011c3",
+    "64/reverse_subtract": "dbe3d92d00000011dd0500010011dc2d00020011dfe0a300040011db3d00030011c3",
+    "64/divide": "dbe3d92d00000011dd0500010011dc3500020011dfe0a300040011db3d00030011c3",
+    "64/reverse_divide": "dbe3d92d00000011dd0500010011dc3d00020011dfe0a300040011db3d00030011c3",
+    "64/compare": "dbe3d92d00000011dd0500010011dc1500020011dfe0a300040011db3d00030011c3"
+  },
+  "control_words": [
+    {
+      "control_word": "0x7f",
+      "cases": 4536,
+      "value_condition_mismatches": 120,
+      "register_load_snan_cases": 504,
+      "register_load_snan_mismatches": 120,
+      "other_cases": 4032,
+      "other_mismatches": 0,
+      "exception_flag_mismatches": 2445,
+      "examples": [
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000001",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fffff",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xc0000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x40a00000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3eaaaaab",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fc12345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        }
+      ],
+      "flag_examples": [
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x2"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0x47f",
+      "cases": 4536,
+      "value_condition_mismatches": 120,
+      "register_load_snan_cases": 504,
+      "register_load_snan_mismatches": 120,
+      "other_cases": 4032,
+      "other_mismatches": 0,
+      "exception_flag_mismatches": 2445,
+      "examples": [
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000001",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fffff",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xc0000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x40a00000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3eaaaaab",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fc12345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        }
+      ],
+      "flag_examples": [
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x2"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0x87f",
+      "cases": 4536,
+      "value_condition_mismatches": 120,
+      "register_load_snan_cases": 504,
+      "register_load_snan_mismatches": 120,
+      "other_cases": 4032,
+      "other_mismatches": 0,
+      "exception_flag_mismatches": 2445,
+      "examples": [
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000001",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fffff",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xc0000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x40a00000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3eaaaaab",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fc12345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        }
+      ],
+      "flag_examples": [
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x2"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0xc7f",
+      "cases": 4536,
+      "value_condition_mismatches": 120,
+      "register_load_snan_cases": 504,
+      "register_load_snan_mismatches": 120,
+      "other_cases": 4032,
+      "other_mismatches": 0,
+      "exception_flag_mismatches": 2445,
+      "examples": [
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000001",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fffff",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xc0000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x40a00000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3eaaaaab",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fc12345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        }
+      ],
+      "flag_examples": [
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x2"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0x27f",
+      "cases": 4536,
+      "value_condition_mismatches": 120,
+      "register_load_snan_cases": 504,
+      "register_load_snan_mismatches": 120,
+      "other_cases": 4032,
+      "other_mismatches": 0,
+      "exception_flag_mismatches": 2399,
+      "examples": [
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000001",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fffff",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xc0000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x40a00000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3eaaaaab",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fc12345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        }
+      ],
+      "flag_examples": [
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x2"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0x67f",
+      "cases": 4536,
+      "value_condition_mismatches": 120,
+      "register_load_snan_cases": 504,
+      "register_load_snan_mismatches": 120,
+      "other_cases": 4032,
+      "other_mismatches": 0,
+      "exception_flag_mismatches": 2399,
+      "examples": [
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000001",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fffff",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xc0000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x40a00000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3eaaaaab",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fc12345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        }
+      ],
+      "flag_examples": [
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x2"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0xa7f",
+      "cases": 4536,
+      "value_condition_mismatches": 120,
+      "register_load_snan_cases": 504,
+      "register_load_snan_mismatches": 120,
+      "other_cases": 4032,
+      "other_mismatches": 0,
+      "exception_flag_mismatches": 2399,
+      "examples": [
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000001",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fffff",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xc0000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x40a00000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3eaaaaab",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fc12345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        }
+      ],
+      "flag_examples": [
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x2"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0xe7f",
+      "cases": 4536,
+      "value_condition_mismatches": 120,
+      "register_load_snan_cases": 504,
+      "register_load_snan_mismatches": 120,
+      "other_cases": 4032,
+      "other_mismatches": 0,
+      "exception_flag_mismatches": 2399,
+      "examples": [
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000001",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fffff",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xc0000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x40a00000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3eaaaaab",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fc12345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        }
+      ],
+      "flag_examples": [
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x2"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0x37f",
+      "cases": 4536,
+      "value_condition_mismatches": 120,
+      "register_load_snan_cases": 504,
+      "register_load_snan_mismatches": 120,
+      "other_cases": 4032,
+      "other_mismatches": 0,
+      "exception_flag_mismatches": 2379,
+      "examples": [
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000001",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fffff",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xc0000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x40a00000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3eaaaaab",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fc12345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        }
+      ],
+      "flag_examples": [
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x2"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0x77f",
+      "cases": 4536,
+      "value_condition_mismatches": 120,
+      "register_load_snan_cases": 504,
+      "register_load_snan_mismatches": 120,
+      "other_cases": 4032,
+      "other_mismatches": 0,
+      "exception_flag_mismatches": 2379,
+      "examples": [
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000001",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fffff",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xc0000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x40a00000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3eaaaaab",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fc12345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        }
+      ],
+      "flag_examples": [
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x2"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0xb7f",
+      "cases": 4536,
+      "value_condition_mismatches": 120,
+      "register_load_snan_cases": 504,
+      "register_load_snan_mismatches": 120,
+      "other_cases": 4032,
+      "other_mismatches": 0,
+      "exception_flag_mismatches": 2379,
+      "examples": [
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000001",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fffff",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xc0000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x40a00000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3eaaaaab",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fc12345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        }
+      ],
+      "flag_examples": [
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x2"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0xf7f",
+      "cases": 4536,
+      "value_condition_mismatches": 120,
+      "register_load_snan_cases": 504,
+      "register_load_snan_mismatches": 120,
+      "other_cases": 4032,
+      "other_mismatches": 0,
+      "exception_flag_mismatches": 2379,
+      "examples": [
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x80000001",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fffff",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xc0000000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x40a00000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x3eaaaaab",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff800000",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7f812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0xff812345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x7f812345",
+          "memory": "0x7fc12345",
+          "original": [
+            "0x0",
+            "0x81234500",
+            "0x7fff",
+            "0x4500",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x4500",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x7f812345",
+          "memory": "0xffc12345",
+          "original": [
+            "0x0",
+            "0xc1234500",
+            "0xffff",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0xc1234500",
+            "0x7fff",
+            "0x0",
+            "0x1"
+          ]
+        }
+      ],
+      "flag_examples": [
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x0",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_divide",
+          "first": "0x0",
+          "memory": "0x80000000",
+          "original": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x4"
+          ],
+          "native": [
+            "0x0",
+            "0xc0000000",
+            "0xffff",
+            "0x0",
+            "0x1"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "add",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "multiply",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0xbf6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "reverse_subtract",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x80000000",
+            "0x3f6a",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "divide",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x2"
+          ]
+        },
+        {
+          "width": 32,
+          "operation": "compare",
+          "first": "0x0",
+          "memory": "0x1",
+          "original": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x0"
+          ],
+          "native": [
+            "0x0",
+            "0x0",
+            "0x0",
+            "0x100",
+            "0x2"
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Focused instruction fixtures, not complete original game execution",
+    "Explicit experimental control words, not captured running-game state",
+    "Unicorn exception flags are recorded separately; hardware is unverified",
+    "All exception masks enabled; native typed unmasked failures tested separately"
+  ],
+  "cases_path": "_reference/sadx/original-x87-memory-comparison.cases.bin",
+  "cases_sha256": "dfa27fbf3d01632b5e305e90d80ecfcada68df7ba313766f9a41cbefb7e37e5c",
+  "stored_ext80_and_comparison_conditions_match": false,
+  "non_signaling_register_load_profile_matches": true,
+  "mismatch_path": "_reference/sadx/original-x87-memory-comparison.mismatches.json",
+  "mismatch_sha256": "6e561432a63bf0876bc68848c4d829d1e914911c6f02fa7ad750e691cd9aef95"
+}

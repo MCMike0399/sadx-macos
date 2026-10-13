@@ -1,0 +1,31 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "native_library_sha256": "3d0b6e88a6eef944ecfcf223f9fc3f009a52880791913d8b4d72bd4490965f1f",
+  "tables_sha256": "7ff43fc02523ece1602c5406755ad9afa77dd929f3d4b3042ed7c02811d754c2",
+  "cases": 6160,
+  "case_blob_sha256": "3ddc85a11f5bd7088cfed18066f36ad54c9358dead7134df6a1c8b8b6fd7335a",
+  "native_sources": {
+    "src/ninja_render.hpp": "0c0aa1def1459e4fb3ef9e1dcc8da6256904461130de874b24ff2c6b3c2094a9",
+    "src/ninja_render.cpp": "1d8fb55e6bdffeecadaf5aaacaafbeb3a3290168ddcf990af0d2e331f246cecc",
+    "tests/native_ninja_render_probe.cpp": "c7e4105bab224dd993fb7c2f964049de1fa953c8a8cd1df15fbadab2a438065a",
+    "tools/verify_original_ninja_render.py": "095febf834b808a63fda01803f8bfe3c9090b6c1f46c131dc255115bc4179441"
+  },
+  "source_ranges": {
+    "0x4030d0": {
+      "bytes": 85,
+      "sha256": "baf0aa18fa69406150940d9ec635739d695e18f92902905b56e6276547186b7a"
+    },
+    "0x77ec60": {
+      "bytes": 122,
+      "sha256": "f7cb7c418a557a9e336c68c441e0d7da4e8009ff9c9a0082728bd66971a7b7e7"
+    }
+  },
+  "mismatches": [],
+  "packed_commands_boundaries_match": true,
+  "limits": [
+    "Actual game state wrappers only; COMSetRenderState uses a declared test backend, not an originalGPU observation",
+    "Source failed HRESULT ignored as actual instructions; native APIs can omit originalHRESULT while preserving availability",
+    "Unsupported constant-table domains/unknown facts stop at source boundaries; no source validation invented",
+    "No FP arithmetic in this owner; GPU, texture lifetime and full sprite/game execution remain unverified"
+  ]
+}

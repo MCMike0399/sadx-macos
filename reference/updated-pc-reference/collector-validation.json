@@ -1,0 +1,24 @@
+{
+  "validation_kind": "compile and native-layout/arithmetic tests only",
+  "host": "macOS arm64",
+  "powershell_available": false,
+  "windows_api_execution_observed": false,
+  "csharp_language_version": "5",
+  "compiler_warnings_as_errors": true,
+  "collector_sha256": "3601c69deb0d9051cf86c4d83260637ae65b42b0aad75032558ce88cd780a7a0",
+  "microsoft_winnt_header_sha256": "404019933323ca25f5db8ce14437483e1054398ce454d5c75df2e187cec2ae40",
+  "expected_layouts": {
+    "MODULEENTRY32W_size": 1080,
+    "THREADENTRY32_size": 28,
+    "WOW64_FLOATING_SAVE_AREA_size": 112,
+    "WOW64_CONTEXT_size": 716,
+    "FloatSave_offset": 28,
+    "Eip_offset": 184,
+    "ExtendedRegisters_offset": 204,
+    "MxCsr_fxsave_offset": 24
+  },
+  "wrapper_fix": "Default path/flat JSON inventory; preserve raw duplicate module records and derive distinct mapping identity; mapped-file fallback and useful inline errors.",
+  "windows_wrapper_execution_observed": false,
+  "mapped_device_path_tests": 14,
+  "windows_full_fix_execution_observed": false
+}

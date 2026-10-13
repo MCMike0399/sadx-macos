@@ -1,0 +1,63 @@
+{
+  "format_version": 1,
+  "source_evidence_id": "ev_c16d7fed83c5b40993d9ebf9d9f17614d82005aaaeba4723a641f8858c940e9f",
+  "production_archive_tests_passed": true,
+  "ubsan_semantic_test_passed": true,
+  "instruction_value_outputs_passed": true,
+  "instruction_overall_passed": false,
+  "value_mismatches": 0,
+  "exception_mismatches": 108240,
+  "native_windows_mod_startup_observed": false,
+  "files": [
+    {
+      "path": "sadx-native/src/player_input_producer.hpp",
+      "size": 3785,
+      "sha256": "30b4627ecee75a669bf3eada347b7027446029bb5599da7e3d6c2521c09a4b20"
+    },
+    {
+      "path": "sadx-native/src/player_input_producer.cpp",
+      "size": 8246,
+      "sha256": "08f9aeeec149f81787d09a9eda3b0e31991edf9c38bb9acf9cc27e93a7480f99"
+    },
+    {
+      "path": "sadx-native/tests/player_input_producer.cpp",
+      "size": 7127,
+      "sha256": "4a137b7c1c466bbff61d5cf3caf2fb74df9377b066ebe44119dd6bc71bc58a4d"
+    },
+    {
+      "path": "sadx-native/tests/native_player_input_producer_probe.cpp",
+      "size": 2698,
+      "sha256": "a9ed72266159a808148728271a4d5191ac68fdc0785dca1740714efe970b5fe3"
+    },
+    {
+      "path": "sadx-native/tools/verify_original_player_input_producer.py",
+      "size": 8686,
+      "sha256": "3743f1dbd5e19db200587eea84f3e277a798028f335807225f5e935e1cfa1113"
+    },
+    {
+      "path": "sadx-native/build/assets/input-producer-constants.bin",
+      "size": 40,
+      "sha256": "8cf6c0c178d7e4f766401104b755a528282f0d59b6a00feb8f8022aea2d20e22"
+    },
+    {
+      "path": "sadx-native/build/native-player-input-producer-probe.dylib",
+      "size": 106440,
+      "sha256": "f4514dca57e99df5a42051f3e882fa1015d8940785a4c8377a7126d157277e3a"
+    },
+    {
+      "path": "_reference/sadx/original-input-producer-comparison.json",
+      "size": 5412,
+      "sha256": "4ef840392a2ec43da0dcaa03f033139f27186b69730ccfe9f727ba1af00af49a"
+    },
+    {
+      "path": "_reference/sadx/original-input-producer-comparison.cases.bin",
+      "size": 1111000,
+      "sha256": "787b2a6731b45dd7dd31bba780f0543adfd3ee9ac11fbaa53e0d6197e13dfbb7"
+    },
+    {
+      "path": "_reference/sadx/player-input-producer-provenance.md",
+      "size": 10549,
+      "sha256": "8f6a54dc7a9e2e6c0765efc0ed55ca822da0cf32d1bbef236054922ccc11a67b"
+    }
+  ]
+}

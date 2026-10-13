@@ -1,0 +1,52 @@
+[
+  {
+    "key": "player_startup",
+    "args": [
+      "sadx-native/tools/verify_original_player_startup.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-player-startup-probe.dylib",
+      "--output",
+      "_reference/sadx/production-integration-20261012/original-player-startup-comparison.json"
+    ]
+  },
+  {
+    "key": "sonic_player",
+    "args": [
+      "sadx-native/tools/verify_original_sonic_player.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-sonic-player-probe.dylib",
+      "--output",
+      "_reference/sadx/production-integration-20261012/original-sonic-player-comparison.json"
+    ]
+  },
+  {
+    "key": "player_animation",
+    "args": [
+      "sadx-native/tools/verify_original_player_animation.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-player-animation-probe.dylib",
+      "--output",
+      "_reference/sadx/production-integration-20261012/original-player-animation-comparison.json"
+    ]
+  },
+  {
+    "key": "sonic_animation_table",
+    "args": [
+      "sadx-native/tools/verify_original_sonic_animation_table.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-sonic-animation-table-probe.dylib",
+      "--output",
+      "_reference/sadx/production-integration-20261012/original-sonic-animation-table-comparison.json"
+    ]
+  },
+  {
+    "key": "ninja_sprite_queue",
+    "args": [
+      "sadx-native/tools/verify_original_ninja_sprite_queue.py",
+      "Sonic Adventure DX/sonic.exe",
+      "sadx-native/build/native-ninja-sprite-queue-probe.dylib",
+      "--output",
+      "_reference/sadx/production-integration-20261012/original-ninja-sprite-queue-comparison.json"
+    ]
+  }
+]

@@ -1,0 +1,561 @@
+{
+  "profile": "complete43c130 with actual path/plane/normalize/angle/CRT/input; no overlays",
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "native_library_sha256": "235ba36a560f3e0e09cf699c49d06ba2e031fb43103251d11e8a82ea9f2a3df9",
+  "constants_sha256": "562ea6cc756390b202843b31458ff9d94c8e5edc606799a112cad87eee234505",
+  "table_sha256": "3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed",
+  "unit_sha256": "5998e9d1dd9bf48af6af87a1ef8c7783b818ac8329637ada08cc5fb329042376",
+  "seed": "0x43c13049c330",
+  "case_blob": {
+    "path": "_reference/sadx/original-player-direction-reset-comparison.cases.bin",
+    "sha256": "2ecaf4d2e00959349ee6fdb3cf0bb6951491b010978fb14d389c1dfdaa5c80c0",
+    "record": "length-prefixed little-endian uint32 word records"
+  },
+  "source_functions": {
+    "0x43c130": {
+      "size": 399,
+      "sha256": "81b1081b96cd6b25e1e5ac77c624ede15f24982fef6c176b81f8737c3ec5b991"
+    },
+    "0x788d40": {
+      "size": 166,
+      "sha256": "695730f7d9068ac28ffb1dc85bfbba26fc7a0b525f10ac3c335a7bd2297a0cb1"
+    }
+  },
+  "control_words": [
+    {
+      "control_word": "0x7f",
+      "cases": 670,
+      "value_control_mismatches": 0,
+      "flag_mismatches": 596,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 13,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 14,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 15,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 16,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        }
+      ]
+    },
+    {
+      "control_word": "0x47f",
+      "cases": 670,
+      "value_control_mismatches": 0,
+      "flag_mismatches": 596,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 13,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 14,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 15,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 16,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        }
+      ]
+    },
+    {
+      "control_word": "0x87f",
+      "cases": 670,
+      "value_control_mismatches": 0,
+      "flag_mismatches": 596,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 13,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 14,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 15,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 16,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        }
+      ]
+    },
+    {
+      "control_word": "0xc7f",
+      "cases": 670,
+      "value_control_mismatches": 0,
+      "flag_mismatches": 596,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 13,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 14,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 15,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 16,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        }
+      ]
+    },
+    {
+      "control_word": "0x27f",
+      "cases": 670,
+      "value_control_mismatches": 0,
+      "flag_mismatches": 545,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 13,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 14,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 15,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 16,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        }
+      ]
+    },
+    {
+      "control_word": "0x67f",
+      "cases": 670,
+      "value_control_mismatches": 0,
+      "flag_mismatches": 545,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 13,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 14,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 15,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 16,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        }
+      ]
+    },
+    {
+      "control_word": "0xa7f",
+      "cases": 670,
+      "value_control_mismatches": 0,
+      "flag_mismatches": 545,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 13,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 14,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 15,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 16,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        }
+      ]
+    },
+    {
+      "control_word": "0xe7f",
+      "cases": 670,
+      "value_control_mismatches": 0,
+      "flag_mismatches": 545,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 13,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 14,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 15,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 16,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        }
+      ]
+    },
+    {
+      "control_word": "0x37f",
+      "cases": 670,
+      "value_control_mismatches": 0,
+      "flag_mismatches": 545,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 13,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 14,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 15,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 16,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        }
+      ]
+    },
+    {
+      "control_word": "0x77f",
+      "cases": 670,
+      "value_control_mismatches": 0,
+      "flag_mismatches": 545,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 13,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 14,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 15,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 16,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        }
+      ]
+    },
+    {
+      "control_word": "0xb7f",
+      "cases": 670,
+      "value_control_mismatches": 0,
+      "flag_mismatches": 545,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 13,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 14,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 15,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 16,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        }
+      ]
+    },
+    {
+      "control_word": "0xf7f",
+      "cases": 670,
+      "value_control_mismatches": 0,
+      "flag_mismatches": 545,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 13,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 14,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 15,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        },
+        {
+          "case": 16,
+          "original_flags": 0,
+          "native_flags": 32,
+          "original_mxcsr": "0x1f80",
+          "native_mxcsr": "0x1f80"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Caller-supplied finite path/task/contact/runtime fixtures, not captured game ticks",
+    "Both actual CRT floor routes and explicitly selected acos matherr bypass1",
+    "Work/vector checks cover observed source stores; undefined scratch is not fabricated",
+    "Original hardware flags and mod/startup FP state remain unverified"
+  ],
+  "state_work_vectors_and_control_match": true
+}

@@ -1,0 +1,144 @@
+
+/* WARNING: Function: __chkstk replaced with injection: alloca_probe */
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+undefined4 FUN_00451ad0(int param_1)
+
+{
+  float fVar1;
+  float fVar2;
+  float fVar3;
+  float fVar4;
+  float fVar5;
+  float fVar6;
+  float fVar7;
+  float fVar8;
+  float fVar9;
+  int iVar10;
+  float fVar11;
+  float fVar12;
+  float fVar13;
+  ushort uVar14;
+  int iVar15;
+  int iVar16;
+  double dVar17;
+  double dVar18;
+  double dVar19;
+  float local_3074;
+  float local_3054;
+  float *local_302c;
+  int local_3028;
+  uint local_3024;
+  ushort *local_3020;
+  int local_3018;
+  float local_300c [3073];
+  uint local_8;
+  
+  local_8 = (uint)*(ushort *)(*(int *)(param_1 + 4) + 0x14);
+  local_3020 = *(ushort **)(*(int *)(param_1 + 4) + 0xc);
+  do {
+    if ((int)local_8 < 1) {
+      return 1;
+    }
+    uVar14 = *local_3020 & 0xc000;
+    if (uVar14 < 0x8001) {
+      if (uVar14 != 0x8000) {
+        if ((*local_3020 & 0xc000) == 0) {
+          local_3018 = 3;
+        }
+        else {
+          if (uVar14 != 0x4000) goto LAB_00451b07;
+          local_3018 = 4;
+        }
+      }
+LAB_00451ba5:
+      for (local_3024 = (uint)local_3020[1]; 0 < (int)local_3024; local_3024 = local_3024 - 1) {
+        iVar15 = FUN_00452230();
+        local_302c = local_300c;
+        for (local_3028 = 0; local_3028 < local_3018 + -2; local_3028 = local_3028 + 1) {
+          fVar1 = *local_302c;
+          fVar2 = local_302c[3];
+          fVar3 = local_302c[6];
+          fVar4 = local_302c[1];
+          fVar5 = local_302c[4];
+          fVar6 = local_302c[7];
+          fVar7 = local_302c[2];
+          fVar8 = local_302c[5];
+          fVar9 = local_302c[8];
+          fVar11 = (fVar1 + fVar2 + fVar3) * 0.3333;
+          fVar12 = (fVar4 + fVar5 + fVar6) * 0.3333;
+          fVar13 = (fVar7 + fVar8 + fVar9) * 0.3333;
+          iVar16 = FUN_00452160();
+          if (iVar16 == 0) {
+            return 0;
+          }
+          if ((local_3028 + iVar15 & 1U) == 0) {
+            *(float *)(iVar16 + 0x18) = fVar1;
+            *(float *)(iVar16 + 0x1c) = fVar4;
+            *(float *)(iVar16 + 0x20) = fVar7;
+            *(float *)(iVar16 + 0x24) = fVar2;
+            *(float *)(iVar16 + 0x28) = fVar5;
+            *(float *)(iVar16 + 0x2c) = fVar8;
+            *(float *)(iVar16 + 0x30) = fVar3;
+            *(float *)(iVar16 + 0x34) = fVar6;
+            *(float *)(iVar16 + 0x38) = fVar9;
+          }
+          else {
+            *(float *)(iVar16 + 0x18) = fVar1;
+            *(float *)(iVar16 + 0x1c) = fVar4;
+            *(float *)(iVar16 + 0x20) = fVar7;
+            *(float *)(iVar16 + 0x24) = fVar3;
+            *(float *)(iVar16 + 0x28) = fVar6;
+            *(float *)(iVar16 + 0x2c) = fVar9;
+            *(float *)(iVar16 + 0x30) = fVar2;
+            *(float *)(iVar16 + 0x34) = fVar5;
+            *(float *)(iVar16 + 0x38) = fVar8;
+          }
+          dVar17 = _fabs((double)(fVar8 - fVar7));
+          dVar18 = _fabs((double)(fVar9 - fVar8));
+          dVar19 = _fabs((double)(fVar7 - fVar9));
+          local_3074 = (float)dVar17;
+          if ((float)dVar17 < (float)dVar18) {
+            local_3074 = (float)dVar18;
+          }
+          if (local_3074 < (float)dVar19) {
+            local_3074 = (float)dVar19;
+          }
+          if (DAT_03b47588 < local_3074) {
+            DAT_03b47588 = local_3074;
+          }
+          *(float *)(iVar16 + 8) = fVar11;
+          *(float *)(iVar16 + 0xc) = fVar12;
+          *(float *)(iVar16 + 0x10) = fVar13;
+          local_3054 = (fVar1 - fVar11) * (fVar1 - fVar11) + (fVar4 - fVar12) * (fVar4 - fVar12) +
+                       (fVar7 - fVar13) * (fVar7 - fVar13);
+          fVar1 = (fVar2 - fVar11) * (fVar2 - fVar11) + (fVar5 - fVar12) * (fVar5 - fVar12) +
+                  (fVar8 - fVar13) * (fVar8 - fVar13);
+          if (local_3054 < fVar1) {
+            local_3054 = fVar1;
+          }
+          fVar1 = (fVar3 - fVar11) * (fVar3 - fVar11) + (fVar6 - fVar12) * (fVar6 - fVar12) +
+                  (fVar9 - fVar13) * (fVar9 - fVar13);
+          if (local_3054 < fVar1) {
+            local_3054 = fVar1;
+          }
+          *(float *)(iVar16 + 0x14) = local_3054;
+          iVar10 = *(int *)(*(int *)(param_1 + 4) + 0x10);
+          if (iVar10 == 0) {
+            *(undefined4 *)(iVar16 + 0x3c) = 0;
+          }
+          else {
+            *(undefined4 *)(iVar16 + 0x3c) =
+                 *(undefined4 *)(iVar10 + 0x10 + (*local_3020 & 0xffff3fff) * 0x14);
+          }
+          local_302c = local_302c + 3;
+        }
+      }
+    }
+    else if (uVar14 == 0xc000) goto LAB_00451ba5;
+LAB_00451b07:
+    local_8 = local_8 - 1;
+    local_3020 = local_3020 + 0xe;
+  } while( true );
+}
+

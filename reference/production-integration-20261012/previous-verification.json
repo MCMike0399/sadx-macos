@@ -1,0 +1,521 @@
+{
+  "command": "make -C sadx-native -j4 all test probes",
+  "passed": true,
+  "native_programs": 53,
+  "python_tests": 4,
+  "reports": {
+    "math": {
+      "path": "_reference/sadx/original-math-comparison.json",
+      "sha256": "65c37fba04a83aafa324f467465b45c35be2dedd27f6b3e97bbe34ec5a74f351",
+      "native_probe": "sadx-native/build/native-math-probe.dylib",
+      "native_sha256": "fa9b4243763d8c84538a78e5b665ab21c1fa07758c89a0058fa51bb17f0e4dfd",
+      "results": {
+        "tested_profile_matches": true
+      },
+      "current_artifact_matches": true
+    },
+    "movement": {
+      "path": "_reference/sadx/original-player-movement-comparison.json",
+      "sha256": "8fba55c6bca1f73dfa25d980b99fab16d1a09a02f80f0ea5dd2685fe0ac391ac",
+      "native_probe": "sadx-native/build/native-player-movement-probe.dylib",
+      "native_sha256": "9a33d00243622017b0a4d698531e4a456f1cbeee435c402a8df308e7c8881711",
+      "results": {
+        "stored_values_calls_and_matrix_match": true,
+        "emulator_exception_flags_match": false
+      },
+      "current_artifact_matches": true
+    },
+    "air": {
+      "path": "_reference/sadx/original-air-acceleration-comparison.json",
+      "sha256": "83f5aef04ad2c58bed41ebf0d5507b0471fe8e78938e24eb73503f30fda451b5",
+      "native_probe": "sadx-native/build/native-air-acceleration-probe.dylib",
+      "native_sha256": "2ad4a774c0b9fcd2d37cc1f96f6e4cba41fadb650fe1d6cac57b0b37a3feff23",
+      "results": {
+        "stored_values_calls_and_matrix_match": true,
+        "exception_flags_match": false
+      },
+      "current_artifact_matches": true
+    },
+    "rotation": {
+      "path": "_reference/sadx/original-player-rotation-comparison.json",
+      "sha256": "6ed0bee2c35b35a9085be871f892261f89ce2d79a2718b039283a682501b49e0",
+      "native_probe": "sadx-native/build/native-player-rotation-probe.dylib",
+      "native_sha256": "8cafcb7d80da62bf713c537866d70159e41da7be039fbadd4126fafb8cf12fa1",
+      "results": {
+        "stored_values_and_matrix_match": true
+      },
+      "current_artifact_matches": true
+    },
+    "axis": {
+      "path": "_reference/sadx/original-axis-projection-comparison.json",
+      "sha256": "712366b4d038057f6c5ea594959f9c977a978b35e7e5edea3d7728774db613a7",
+      "native_probe": "sadx-native/build/native-axis-projection-probe.dylib",
+      "native_sha256": "f13c1ee07af783e304792e077a18381d8ef08d7b94837cc4cb915ed2d8ea3f38",
+      "results": {
+        "stored_vectors_and_matrix_match": true
+      },
+      "current_artifact_matches": true
+    },
+    "projection": {
+      "path": "_reference/sadx/original-projection-angle-comparison.json",
+      "sha256": "fc548eba16cdd07a324483c2d287afdad61bad90c0d985c8995f8789e3147975",
+      "native_probe": "sadx-native/build/native-projection-angle-probe.dylib",
+      "native_sha256": "8c07591439b876e0914d83fbd2d52fa8da1f895e47344848a4727d78ba42a680",
+      "results": {
+        "return_angle_control_and_cross_stores_length_match": true
+      },
+      "current_artifact_matches": true
+    },
+    "position": {
+      "path": "_reference/sadx/original-player-position-comparison.json",
+      "sha256": "f170d5c55b0551e40ee2e2b142c885cae33a46b00acf72cd7e7ff534e2308df7",
+      "native_probe": "sadx-native/build/native-player-position-probe.dylib",
+      "native_sha256": "bbcc944f24024afe1aff59f27d3906ee7c4e4678f62661a14f8c502d3e3df9d9",
+      "results": {
+        "stored_values_match": true,
+        "passed": false
+      },
+      "current_artifact_matches": true
+    },
+    "axes": {
+      "path": "_reference/sadx/original-input-mod-axes-comparison.json",
+      "sha256": "0ce57ada7d2d8e2eb010dfb0aca069478274691854679ea8b31d31b0f2419559",
+      "native_probe": "sadx-native/build/native-input-mod-axes-probe.dylib",
+      "native_sha256": "f3bd82eb1cda0a938f1fc3c38dcb87fae3d90289b396623d96b1b11521b7e702",
+      "results": {
+        "passed": false
+      },
+      "current_artifact_matches": true
+    },
+    "sse": {
+      "path": "_reference/sadx/sse-math-comparison.json",
+      "sha256": "cc42e2d733f58c4f1750306effdbfcf3cca509edf0fc550bc6d215873196de54",
+      "native_probe": "sadx-native/build/native-sse-math-probe.dylib",
+      "native_sha256": "ccf865839a544a50bad07501ebb08486f9e15fa9d4252f6db60a2a93448870a5",
+      "results": {
+        "passed": false
+      },
+      "current_artifact_matches": true
+    },
+    "attribute4000": {
+      "path": "_reference/sadx/original-attribute4000-comparison.json",
+      "sha256": "e05e438ca5c02fce6b016fd66bbffea558de1cb76cf7ed5d8085d8eddc7abea2",
+      "native_probe": "sadx-native/build/native-alternate-acceleration-probe.dylib",
+      "native_sha256": "c5409de9c91776d517536222fc6660bb8393d1ea88d4115b6c4dcb175c4c1408",
+      "results": {
+        "values_calls_cw_match": true
+      },
+      "current_artifact_matches": true
+    },
+    "attribute20000": {
+      "path": "_reference/sadx/original-attribute20000-comparison.json",
+      "sha256": "98f850874348368f7ee7436b1b28e2fd9b84d37c6ebda356453c51a776c69683",
+      "native_probe": "sadx-native/build/native-alternate-acceleration-probe.dylib",
+      "native_sha256": "c5409de9c91776d517536222fc6660bb8393d1ea88d4115b6c4dcb175c4c1408",
+      "results": {
+        "values_calls_cw_match": true
+      },
+      "current_artifact_matches": true
+    },
+    "eventground": {
+      "path": "_reference/sadx/original-eventground-comparison.json",
+      "sha256": "71a6a64983409fbe741f1ac0f251ef901124615dbd7ba43d0a092c888c3acc1b",
+      "native_probe": "sadx-native/build/native-alternate-acceleration-probe.dylib",
+      "native_sha256": "c5409de9c91776d517536222fc6660bb8393d1ea88d4115b6c4dcb175c4c1408",
+      "results": {
+        "values_calls_cw_match": false
+      },
+      "current_artifact_matches": true
+    },
+    "eventair": {
+      "path": "_reference/sadx/original-eventair-comparison.json",
+      "sha256": "3cffeb3a74d2b02bd635f8a33f5404c560843b9ea7c8247820ebe1c65ae6f8bd",
+      "native_probe": "sadx-native/build/native-alternate-acceleration-probe.dylib",
+      "native_sha256": "c5409de9c91776d517536222fc6660bb8393d1ea88d4115b6c4dcb175c4c1408",
+      "results": {
+        "values_calls_cw_match": false
+      },
+      "current_artifact_matches": true
+    },
+    "crt_floor": {
+      "path": "_reference/sadx/original-crt-floor-comparison.json",
+      "native_probe": "sadx-native/build/native-crt-floor-probe.dylib",
+      "sha256": "ed9f9544c13ba711739eb1a2448e5483af6d914040cc3792bf2953ecef47c8ac",
+      "native_sha256": "4d9be113c5ebb3ed1a81f7159b1725537763fb28d959f09cb8daf3e777754147",
+      "current_artifact_matches": true,
+      "results": {
+        "returned_values_and_boundaries_match": false,
+        "full_emulator_match": false
+      }
+    },
+    "collision": {
+      "path": "_reference/sadx/original-collision-shapes-comparison.json",
+      "native_probe": "sadx-native/build/native-collision-shapes-probe.dylib",
+      "sha256": "54c0ff13ea15ac8ffb779e72521d00a28b914d04aabb3db8a6b7cf57acf245d7",
+      "native_sha256": "7546d8397d34ff9455365571be23428b7390bd33ead03229fa84367fe5e15532",
+      "current_artifact_matches": true,
+      "results": {
+        "stored_state_matches": true,
+        "passed": false
+      }
+    },
+    "contact": {
+      "path": "_reference/sadx/original-player-contact-initializer-comparison.json",
+      "native_probe": "sadx-native/build/native-player-contact-initializer-probe.dylib",
+      "sha256": "0f85ed711f1e41365a332ca1694b6a845e15108e35a5b998fb3d1d15fb6766e4",
+      "native_sha256": "5728c4820a5254793f8475c148111773af899073fd213dfcc265e42ca0828658",
+      "current_artifact_matches": true,
+      "results": {
+        "values_cw_match": true
+      }
+    },
+    "path": {
+      "path": "_reference/sadx/original-player-path-comparison.json",
+      "native_probe": "sadx-native/build/native-player-path-probe.dylib",
+      "sha256": "11b78177c6703590fa47c51cfe6fd38d2c0040e5b0012b591261285000ed2681",
+      "native_sha256": "7d04392c73ee1275dbdb0825e7f5d87378d3d49c33b34b118b98f038961b86f9",
+      "current_artifact_matches": true,
+      "results": {
+        "returned_values_work_and_control_match": true
+      }
+    },
+    "reset": {
+      "path": "_reference/sadx/original-player-direction-reset-comparison.json",
+      "native_probe": "sadx-native/build/native-player-direction-reset-probe.dylib",
+      "sha256": "f0c11f72e8c3c396900dee5517d76b860da1f563be615cb1e2f94e3edb8fbc51",
+      "native_sha256": "235ba36a560f3e0e09cf699c49d06ba2e031fb43103251d11e8a82ea9f2a3df9",
+      "current_artifact_matches": true,
+      "results": {
+        "state_work_vectors_and_control_match": true
+      }
+    },
+    "scene": {
+      "path": "_reference/sadx/original-player-scene-comparison.json",
+      "native_probe": "sadx-native/build/native-player-scene-probe.dylib",
+      "sha256": "353ab974255384520b8377a11bf5bf8325409cd0e3bed71e3e72fe635777a0f1",
+      "native_sha256": "3af8de14beba14c1c7b6d46cb57692ea2181fde952295fa55248a6fdb34e5b22",
+      "current_artifact_matches": true,
+      "results": {
+        "values_match": true
+      }
+    },
+    "bounds": {
+      "path": "_reference/sadx/original-scene-mesh-bounds-comparison.json",
+      "native_probe": "sadx-native/build/native-player-scene-probe.dylib",
+      "sha256": "5c9a31acd7e3fbd232e16c3f8fb7c5900925b756e56ff320d75e45f0529f53ae",
+      "native_sha256": "3af8de14beba14c1c7b6d46cb57692ea2181fde952295fa55248a6fdb34e5b22",
+      "current_artifact_matches": true,
+      "results": {
+        "values_match": true
+      }
+    },
+    "crt_sqrt": {
+      "path": "_reference/sadx/original-crt-sqrt-comparison.json",
+      "sha256": "c55b4b9bd8572d3a5f8e8e167d8124803c10d3a0149eecc9f91affb9a4fa1631",
+      "native_probe": "sadx-native/build/native-crt-sqrt-probe.dylib",
+      "native_sha256": "57b6b2922f1841175dcbdd2531cd06ddaade2915bf4259fb346901b94f833591",
+      "results": {
+        "returned_values_control_match": true,
+        "full_emulator_match": false
+      },
+      "current_artifact_matches": true
+    },
+    "crt_fabs": {
+      "path": "_reference/sadx/original-crt-fabs-comparison.json",
+      "sha256": "0d283845875914f8f4379aeb3739685d978c34ba76e954fa5bc8ccfd6b9020a6",
+      "native_probe": "sadx-native/build/native-crt-fabs-probe.dylib",
+      "native_sha256": "153d75e6a28e566d2d34032602d4c1786b2dfe35d847b247b8d8dcd03c169657",
+      "results": {
+        "returned_values_control_boundaries_match": false,
+        "full_emulator_match": false
+      },
+      "current_artifact_matches": true
+    },
+    "crt_asin_binary64": {
+      "path": "_reference/sadx/original-crt-asin-binary64-comparison.json",
+      "sha256": "d925dcc943fae48e42ad8985e46663adcae0c427040ef725ea2c13fac1168d23",
+      "native_probe": "sadx-native/build/native-crt-asin-binary64-probe.dylib",
+      "native_sha256": "4e365f8e63d64ce3498c401ced48d0bf10f776c6af437cb6c0d7e825ef8e03b8",
+      "results": {
+        "returned_values_and_boundaries_match": false,
+        "full_emulator_match": false
+      },
+      "current_artifact_matches": true
+    },
+    "plane": {
+      "path": "_reference/sadx/original-player-plane-comparison.json",
+      "sha256": "88a3d533b888ef414756b5f1e0de11b3d4c8335687c6edcb9dba49b6c99eb2fd",
+      "native_probe": "sadx-native/build/native-player-plane-probe.dylib",
+      "native_sha256": "f587b874f37374aea284020a92a90cf859a39aff8dbd3b53af86ed57202540d7",
+      "results": {
+        "state_returns_control_match": true,
+        "full_emulator_match": false
+      },
+      "current_artifact_matches": true
+    },
+    "task_work": {
+      "path": "_reference/sadx/original-task-work-comparison.json",
+      "sha256": "7ab9da04cc035fa5c370b6e48a86387fd314f656b09d9a45c9511f6c03acef7b",
+      "native_probe": "sadx-native/build/native-task-work-probe.dylib",
+      "native_sha256": "744f09d1895abb903f8d57876339ee35b14cec2e8da8d965656ba2ef816a104a",
+      "results": {
+        "values_links_and_bytes_match": true
+      },
+      "current_artifact_matches": true
+    },
+    "task_lifecycle": {
+      "path": "_reference/sadx/original-task-lifecycle-comparison.json",
+      "sha256": "d65a534b3c66fdfaae69e3ae0fd5d7b36e734e81098e9ab14608fee588c2656e",
+      "native_probe": "sadx-native/build/native-task-lifecycle-probe.dylib",
+      "native_sha256": "ffdaf0d6532fb38fcb7baafcf76eae16ebaed2a98052ada7a0e4dec1117968ba",
+      "results": {
+        "values_links_and_bytes_match": true
+      },
+      "current_artifact_matches": true
+    },
+    "mesh_math": {
+      "path": "_reference/sadx/original-player-mesh-math-comparison.json",
+      "sha256": "a64e799fd84df03de242cf17b931ca438979bf9af273d3b21b49eab23c1e0d73",
+      "native_probe": "sadx-native/build/native-player-mesh-math-probe.dylib",
+      "native_sha256": "310002c67a744261f91994655375ec575936e266dc6947e48c86900f0c85635e",
+      "results": {
+        "values_returns_cw_match": true
+      },
+      "current_artifact_matches": true
+    },
+    "reaction": {
+      "path": "_reference/sadx/original-player-reaction-comparison.json",
+      "sha256": "076a0d0edb98d60964a4ab78beb5b3992789b5fe006edb4778cea16404a25aa2",
+      "native_probe": "sadx-native/build/native-player-reaction-probe.dylib",
+      "native_sha256": "bcd043b8df83000b21c6be60ca7be22eb3836168ac70a3b3b1f2fc5cde0c4bfa",
+      "results": {
+        "bypass_state_boundaries_control_match": true,
+        "state_boundaries_control_match": false,
+        "full_emulator_match": false
+      },
+      "current_artifact_matches": true
+    },
+    "crt_atan2": {
+      "path": "_reference/sadx/original-crt-atan2-comparison.json",
+      "sha256": "eacbbac45fb7a7c94812148b9b4d9338c85e02e1673624d0227867b9fcb964f4",
+      "native_probe": "sadx-native/build/native-crt-atan2-probe.dylib",
+      "native_sha256": "d581d2402ba065ccc87035af942fc0d99bcc9f201f9025fe0437ec71c5c2bfd7",
+      "results": {
+        "returned_values_and_boundaries_match": false,
+        "full_emulator_match": false,
+        "local_control_and_suffix_matches": true
+      },
+      "current_artifact_matches": true
+    },
+    "mesh_query": {
+      "path": "_reference/sadx/original-player-mesh-query-comparison.json",
+      "sha256": "bda07cfa9e56a64dfee10ff376fde108f19ac914b5bdcda65fa1bef20b0240f9",
+      "native_probe": "sadx-native/build/native-player-mesh-query-probe.dylib",
+      "native_sha256": "8aa271bfcf918b6e58f3351e88d460222e8b90097896957c642c09a23d1c9b86",
+      "results": {
+        "values_match": true
+      },
+      "current_artifact_matches": true
+    },
+    "hold": {
+      "path": "_reference/sadx/original-player-hold-comparison.json",
+      "sha256": "6ce346c2f1b241980ba6821e766e360a88b3e4fbea0c474ca380c2b0d304fef1",
+      "native_probe": "sadx-native/build/native-player-hold-probe.dylib",
+      "native_sha256": "611ee8e0fe2eb724e4aff095f1952455006ae0abdeabf16b628dd1729955908a",
+      "current_artifact_matches": true,
+      "results": {
+        "passed": true
+      }
+    },
+    "mesh_registry": {
+      "path": "_reference/sadx/original-player-mesh-registry-comparison.json",
+      "sha256": "967a443edf15c9cdd152354974a1e173131c2ceb1a5aeeb29f3d50f8356fba50",
+      "native_probe": "sadx-native/build/native-player-mesh-registry-probe.dylib",
+      "native_sha256": "91140320f45adcef147d5fada46ff5d8505a66d041022986a54a7b65fce7bf23",
+      "current_artifact_matches": true,
+      "results": {
+        "values_returns_cw_match": true,
+        "strict_match": false
+      }
+    },
+    "contact_attributes": {
+      "path": "_reference/sadx/original-player-contact-attributes-comparison.json",
+      "sha256": "307ede861aedcd1db2954ceb0363da513e876238abdeb477316547cce95c55ff",
+      "native_probe": "sadx-native/build/native-player-contact-attributes-probe.dylib",
+      "native_sha256": "7e5513717cf9ed09e1c1fdcaedde09a3419786504a9b13535e2533c43ea9449d",
+      "current_artifact_matches": true,
+      "results": {
+        "state_boundaries_control_match": true,
+        "full_emulator_match": false
+      }
+    },
+    "coordinates": {
+      "path": "_reference/sadx/original-player-coordinates-comparison.json",
+      "native_probe": "sadx-native/build/native-player-coordinates-probe.dylib",
+      "sha256": "f609af384739defc2f318e09c04afc7d4d481f203530844d20be698d945a1a9c",
+      "native_sha256": "5244aa7b41fe2cfde167955a9c94d212be5b8210321c27e072674e2b4ca8ccf5",
+      "current_artifact_matches": true,
+      "results": {
+        "stored_values_and_stack_match": true,
+        "general_floor_helper_exercised": false
+      }
+    },
+    "startup": {
+      "path": "_reference/sadx/original-player-startup-comparison.json",
+      "native_probe": "sadx-native/build/native-player-startup-probe.dylib",
+      "sha256": "95c90e7418b8c8676b9490b39ac9aaae920e8218fc58be935c1ac0f923f41520",
+      "native_sha256": "2756b111efd82fa75da64267681c2bb20cd7e5c7746aea27aa1d912015680bb4",
+      "current_artifact_matches": true,
+      "results": {
+        "prefix_state_resources_boundaries_control_match": true,
+        "original_return_observed": false,
+        "full_emulator_match": false
+      }
+    },
+    "speed": {
+      "path": "_reference/sadx/original-player-speed-comparison.json",
+      "native_probe": "sadx-native/build/native-player-speed-probe.dylib",
+      "sha256": "da74a8937b4046562c6bfd8359758977982f38fa69ce45f3d005590bd40db56f",
+      "native_sha256": "ab225b6153d9f20e00d108afc61550ab2d91b02722c5282e027903d914585e0c",
+      "current_artifact_matches": true,
+      "results": {
+        "tested_values_and_calls_match": true,
+        "emulator_exception_flags_match": false
+      }
+    },
+    "input": {
+      "path": "_reference/sadx/original-player-input-comparison.json",
+      "native_probe": "sadx-native/build/native-player-input-probe.dylib",
+      "sha256": "7de7cc580ebcca96c2f596993f3eaa2ceee9220a66874d3a42c401f5cbd6e244",
+      "native_sha256": "4301583fc79af419f61ec46fa1b58619503ff8514509186e2a36df448fc8c63b",
+      "current_artifact_matches": true,
+      "results": {
+        "passed": false,
+        "value_outputs_passed": true,
+        "exception_flags_match": false
+      }
+    },
+    "producer": {
+      "path": "_reference/sadx/original-input-producer-comparison.json",
+      "native_probe": "sadx-native/build/native-player-input-producer-probe.dylib",
+      "sha256": "5a07775702bde4d70f78e9d32cfb8953ba2b1b801e4874e9e7634920c9d6b9ef",
+      "native_sha256": "b0780233f0dac4ad366c298746f5f665a35b8de62561700ba75a0c4c59eac4b0",
+      "current_artifact_matches": true,
+      "results": {
+        "value_outputs_passed": true,
+        "exception_flags_match": false,
+        "passed": false
+      }
+    },
+    "contact_response": {
+      "path": "_reference/sadx/original-contact-response-comparison.json",
+      "native_probe": "sadx-native/build/native-player-contact-response-probe.dylib",
+      "native_sha256": "81e495e395bb9d4a1fae5aa74dc6aa0b1c58eab724ff462221b47da04e315a2c",
+      "sha256": "9eaed2724c42a3c384cefbbecb2a918586b8de272c5bfc1d142108d647282a17",
+      "current_artifact_matches": true,
+      "results": {
+        "stored_values_return_control_match": true,
+        "passed": false
+      }
+    },
+    "shadow": {
+      "path": "_reference/sadx/original-player-shadow-comparison.json",
+      "sha256": "df84a1d66658cd576c39effa2ac9de87cc3a9a7fde725ec84915a37748860684",
+      "native_probe": "sadx-native/build/native-player-shadow-probe.dylib",
+      "native_sha256": "33c1df911490bd72d81868bcd370990bf8399dd2661bb09f9f9de5abb929195f",
+      "current_artifact_matches": true,
+      "results": {
+        "supported_state_boundaries_callbacks_control_match": true,
+        "strict_emulator_match": false
+      }
+    },
+    "sonic_player": {
+      "path": "_reference/sadx/original-sonic-player-comparison.json",
+      "sha256": "a8fcfcd84a64560c35e9f3866575bfb0e1b80de3427c5003d98b2483af043c89",
+      "native_probe": "sadx-native/build/native-sonic-player-probe.dylib",
+      "native_sha256": "369e3db7180e016655284d95f80f3f33e67fe18fa2e88e5baef9554bf4126a93",
+      "current_artifact_matches": true,
+      "results": {
+        "stored_state_matches": true,
+        "passed": false
+      }
+    },
+    "scene_helpers": {
+      "path": "_reference/sadx/original-player-scene-helpers-comparison.json",
+      "sha256": "b119e0cacd5ea026aaa858a5560a57c5ed736bf3371eced065b510b11849ce1a",
+      "native_probe": "sadx-native/build/native-player-scene-helpers-probe.dylib",
+      "native_sha256": "7472fa10f025d45b806906be05b08c2897fb3162d99c009350f276b647c8507d",
+      "current_artifact_matches": true,
+      "results": {
+        "values_cw_frames_match": true,
+        "strict_match": false
+      }
+    },
+    "scene_position": {
+      "path": "_reference/sadx/original-player-scene-position-comparison.json",
+      "sha256": "98c3a32b997b628a7b4fa8cb164a3da4ad9f1cd70a2b5b60aaf2eb6deda1a289",
+      "native_probe": "sadx-native/build/native-player-scene-position-probe.dylib",
+      "native_sha256": "2199d93cb095c6192f99c8560af1dea5f041de182be83ba243b233cf92de6c4c",
+      "current_artifact_matches": true,
+      "results": {
+        "values_cw_frames_match": true,
+        "strict_match": false
+      }
+    }
+  },
+  "source_keyboard_DLL_goldens_via_Cocoa": 52,
+  "input_axes_values_match": 109056,
+  "air_stored_calls_matrices_match": 29952,
+  "rotation_outputs_match": 30456,
+  "axis_angle_cross_outputs_match": 39240,
+  "attribute_outputs_match": 59904,
+  "events_checked": 44256,
+  "event_NaN_sign_disagreements": 24,
+  "position_local_values_match": 23808,
+  "position_geometry_scope": "mandatoryscene/normal/hold/reaction replies controlled/stopped; not realgeometry",
+  "nativeWindows_reference_executed": false,
+  "hardware_or_complete_game_equivalence": false,
+  "gate_log": "/private/tmp/sadx-scene-sonic-integration-gate.log",
+  "collision_stored_outputs_match": 43344,
+  "contact_initializer_outputs_match": 57600,
+  "path_reset_stored_outputs_match": 15336,
+  "real_ECoast_registration_query_match": 5760,
+  "synthetic_mesh_bounds_match": 2988,
+  "crt_floor_total_checked": 100744,
+  "crt_floor_value_disagreements": 24,
+  "crt_floor_boundary_disagreements": 150,
+  "native_source_gate_scope": "Integrated task pool/arena, mesh primitives/matrix, CRT loaders/sqrt/fabs/asin/atan2, planes and contact reaction/PSetPosition binding; polygon query and producers still underway.",
+  "task_arena_operations": 4890,
+  "task_lifecycle_operations": 2302,
+  "mesh_math_evaluations": 39264,
+  "plane_evaluations": 17844,
+  "crt_sqrt_evaluations": 12228,
+  "crt_asin_binary64_evaluations": 8304,
+  "reaction_evaluations": 10392,
+  "reaction_bypass_owner_boundaries_match": 10152,
+  "atan2_unmodified_executions": 28416,
+  "atan2_seeded_suffix_executions": 20256,
+  "mesh_query_evaluations": 3972,
+  "mesh_query_scope": "Actual453820 with explicit selected triangle seeds (including80 realECoast triangles), not actual mesh pool/registry production or full positioning.",
+  "hold_source_cases": 133410,
+  "registry_source_evaluations": 1068,
+  "contact_attribute_source_evaluations": 105852,
+  "real_ECoast_registry_to_contact_native_test": true,
+  "production_archive_scope": "Tested53-program baseline includes full local scene-position bodies/helpers, Sonic control/movement slice and dedicatedshadow callbacks. NextPSetPosition binder/action changes unbuilt; fullgame/rendering/hardwareparity incomplete.",
+  "startup_prefix_evaluations": 2004,
+  "startup_original_return_observed": false,
+  "startup_full_game_initialized": false,
+  "current_report_count": 43,
+  "audit_source_unchanged": true,
+  "source_gate_scope": "Existing native owners including startup allocation/registration, mesh registry/query, hold and contact attributes; contact-response/fullscene implementation remains excluded.",
+  "contact_response_evaluations": 61800,
+  "contact_response_flag_differences": 50196,
+  "real_ECoast_registry_to_contact_response_native_test": true,
+  "native_windows_reference_setup_observed": true,
+  "scene_position_evaluations": 1632,
+  "scene_position_contact_cases": 1152,
+  "scene_position_fp_status_differences": 1344,
+  "shadow_evaluations": 516,
+  "sonic_player_evaluations": 28800,
+  "scene_helpers_evaluations": 8076
+}

@@ -1,0 +1,39 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "profile": "actual43b9c0/no-overlays/read-only/native-Task-and-WorkArena",
+  "source_body": {
+    "address": "0x43b9c0",
+    "size": 321,
+    "sha256": "57d91ea749af17f24c0cbcee71c24ae9475935dbbfdf36f3e57fcc7ce88320e0"
+  },
+  "source_tables": {
+    "address": "0x43bb04",
+    "bytes": "4bba4300d5ba4300feba43000002000002000001c1ba4300d5ba4300feba43000002000002000001"
+  },
+  "native_library_sha256": "611ee8e0fe2eb724e4aff095f1952455006ae0abdeabf16b628dd1729955908a",
+  "native_sources": {
+    "src/player_hold.hpp": "022e162652fce72adc6e48b483450274024ff3a6d6ece0b82cbde3b3c3755ed0",
+    "src/player_hold.cpp": "0b8cee44972e5a56427a2efd0898a946ca53d7f0a435032097a0ea7aaab370a2",
+    "src/task.hpp": "d0b244066876f3bfa3f4d271736f7166f0e1fb8bfcfff3592ff720d594d81ae2",
+    "src/task.cpp": "eb66082330d7ee8c31d06a32567f6d76ebb93f944f90918e756e9b771d9d7ab7",
+    "src/task_work.hpp": "8163352d4afc3c797d6ca3783ae4244cfeb6aee1ac2b19d8d0ebd2e3c6037c3d",
+    "src/task_work.cpp": "0fd985b4b3f6d71de7f4947206e6a214edc107e3a5285e15c70e50767e2b10b6",
+    "src/player_task.hpp": "290dee627532228d61528231f344c9c0119caa2b00c8f999edab2299bfe0f2db",
+    "src/player_physics.hpp": "1515ff9ae9bf6e78e921b9e6ba08b81d92b4a35ecea2ae01036a80eb37ef92c1",
+    "src/player_position.hpp": "ab0b175fdfb3b700095862aee819438bcda0e719602066cb8a9c48296d3eadf1",
+    "tests/native_player_hold_probe.cpp": "01e422a7bc24202bb5fccce5f91d0b7308fcd3400fa005a4e06e5ba76139a2eb",
+    "tools/verify_original_player_hold.py": "842640ec27a6627229687283adf28728213555e7ea06f24fb67671e314cbe122"
+  },
+  "cases": 133410,
+  "fault_cases": 16,
+  "mismatches": [],
+  "limits": [
+    "Fixtures explicitly supply observed memory facts; they are not an initialized game scene",
+    "Unknown fields and live typed-state precedence are native owner tests, not invented oracle memory",
+    "No executable, held task, controller, render or collision producer is run as a game",
+    "Actual Windows reference/gameplay/physical controllers remain unverified"
+  ],
+  "case_sha256": "a87b728c3ad161e9f86152dc86d8bc1c071b8e975e83a3cf62dff4f0d3b214c1",
+  "seconds": 1.9872682499699295,
+  "passed": true
+}

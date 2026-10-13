@@ -1,0 +1,330 @@
+{
+  "provenance": "Derived selected facts from user-supplied full runtime JSON in conversation; original file bytes not yet retained.",
+  "state": "required-readbacks-complete",
+  "capture_started_utc": "2026-10-12T00:39:44.4668152Z",
+  "capture_ended_utc": "2026-10-12T00:39:49.8089781Z",
+  "script_sha256": "3601c69deb0d9051cf86c4d83260637ae65b42b0aad75032558ce88cd780a7a0",
+  "powershell_version": "5.1.26100.9444",
+  "process_id": 17384,
+  "process_creation_filetime_100ns": "134362391497835450",
+  "process_identity_rechecked": true,
+  "earliest_thread": {
+    "thread_id": 17388,
+    "owner_process_id": 17384,
+    "creation_filetime_100ns": "134362391497835631",
+    "eip": 2001481486,
+    "esp": 1768720,
+    "x87_control_word": 127,
+    "x87_status_word": 32,
+    "x87_tag_word": 65535,
+    "mxcsr": 8097,
+    "qpc_before": 833671206,
+    "qpc_after": 833674965,
+    "suspend_count_before": 0,
+    "resume_count_before": 1,
+    "resume_succeeded": true,
+    "close_succeeded": true,
+    "register_area_80_hex": "0000000000000000000000000000000000000000000000000000000000000000000000000000008000000000000000ab074000000000000000cb074000000000000040f0074000000000000000000000",
+    "reported_fxsave_first_32_bytes_hex": "7f0020000000000066ea7800000000000000000000000000a11f0000ffff0000",
+    "fxsave_last_x87_ip_u32": 7924326,
+    "fxsave_ip_decode_scope": "Legacy WOW64 FXSAVE offset8 DWORD; reported512-bytefield exists in usermessage, only its first32bytes retained here."
+  },
+  "earliest_thread_decoded_control": {
+    "x87_precision_control_bits": 0,
+    "x87_precision_bits": 24,
+    "x87_rounding_bits": 0,
+    "x87_exception_masks": 63,
+    "mxcsr_control_word_without_status": "0x1f80",
+    "mxcsr_status_flags": 33,
+    "flush_to_zero": false,
+    "denormals_are_zero": false
+  },
+  "worker_selected_facts": [
+    {
+      "thread_id": 14744,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 13960,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 16404,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 16396,
+      "x87_control_word": 639,
+      "mxcsr": 8096,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 16392,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 16932,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17336,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17324,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 9008,
+      "x87_control_word": 639,
+      "mxcsr": 8096,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17452,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17532,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17612,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17676,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17700,
+      "x87_control_word": 639,
+      "mxcsr": 8096,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17704,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17708,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17712,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17732,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17736,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17740,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17744,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17748,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17752,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17756,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17760,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17764,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17768,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17772,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17776,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17780,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17784,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17788,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 17792,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 3804,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 18368,
+      "x87_control_word": 639,
+      "mxcsr": 8096,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 18372,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 15500,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    },
+    {
+      "thread_id": 15468,
+      "x87_control_word": 639,
+      "mxcsr": 8064,
+      "resume_succeeded": true,
+      "close_succeeded": true
+    }
+  ],
+  "worker_decoded_control": {
+    "x87_precision_control_bits": 2,
+    "x87_precision_bits": 53,
+    "x87_rounding_bits": 0,
+    "x87_exception_masks": 63,
+    "mxcsr_control_word_without_status": "0x1f80",
+    "mxcsr_status_flags": 0,
+    "flush_to_zero": false,
+    "denormals_are_zero": false
+  },
+  "sampled_thread_count": 39,
+  "errors_as_reported": [],
+  "cleanup_as_reported": [],
+  "limits": [
+    "Earliest-thread attribution to main gameplay thread is inferred from creation identity and is not a per-tick trace.",
+    "CW observed at one stopped instruction does not prove control state throughout every gameplay callee.",
+    "Transient status flags differ between threads; do not transfer observed exceptions into an initial runtime state.",
+    "AtlasOS remains user-reported; Windows DLLs/process identity changed between captures, so snapshots are separate sessions.",
+    "No GPU selection, physics trace, FPATAN hardware equivalence or complete gameplay parity established."
+  ]
+}

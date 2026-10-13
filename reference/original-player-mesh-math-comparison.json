@@ -1,0 +1,682 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "profile": "actual450810/450920/4509d0/795000/787630/788a50; no overlays; explicitmatherr1",
+  "native_library_sha256": "310002c67a744261f91994655375ec575936e266dc6947e48c86900f0c85635e",
+  "compiler": "Clang 21.0.0 (clang-2100.3.34.2); ARM64 C++17 O2 software x87; static ordered matrix expressions",
+  "native_sources": {
+    "src/player_mesh_math.hpp": "4b7a7466799f6c080328187921851eeb8a7fbb554b0b89061f05ceadfb4fe0d7",
+    "src/player_mesh_math.cpp": "aed479856b1982a32da8a8e9148ecf62275fe72bd0f2745fdbeda368bf7750a7",
+    "src/player_mesh_matrix.hpp": "1f0775f8619e9410f5f184eec68a3972b5d02c8835912dd7774db94f330758cd",
+    "src/player_mesh_matrix.cpp": "5067952365b33514ee4d1f101ddca97a92649cc83143e2ca6472712b376e31e7",
+    "src/crt_sqrt.hpp": "af62696896da39fae0890227e9e30656dc1a19826f070a15d5fe3a82aca8df0a",
+    "src/crt_sqrt.cpp": "216c022b44c4d75c5f6266c048c29d377bdeed2fb552cc65ac2073fa34931550",
+    "src/crt_asin.hpp": "3c1488b5bf8a810a2809127662d14cd758cd7020666827d6882cb4493736bf38",
+    "src/crt_asin.cpp": "4d30d398443a2c430cc0cbf218495e53c0934f4f82ec48db088b1b0242f49a07",
+    "src/crt_argument.hpp": "7485d664c0155d58d46b44fd3420e72ffb69b2bb6c72fe6e6703abaa4a2dd046",
+    "src/crt_argument.cpp": "7631ef22fca57e441061a9589ace636514cd2de0fe31b236439f4bd33184869e",
+    "src/ninja_math.hpp": "85789753683911b95fe60fe1d34b7c69be144d3ef7696b36de3f4522f26e0126",
+    "src/ninja_math.cpp": "3c9788806b2015a5d29d6a77a6440bc20bd5958fae903b5dc69c972b5f5204d0",
+    "src/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
+    "src/x87_math.cpp": "632db745ec15eab0e8d5144e2fb63c20098eb4de3d64bd2b5828bf2be63e16a0"
+  },
+  "verifier_sha256": "673de26c6de40bd57f184a8888bf23d5812fa76cefd654ffcb5979d004e97fe2",
+  "case_sha256": "0b4b89b48d9da0d7ab90e525245d52c129f35668215ff3f4006976ee3b5442cb",
+  "profiles": [
+    {
+      "cw": "0x7f",
+      "mode": 0,
+      "cases": 588,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 504,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x7f",
+      "mode": 1,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x7f",
+      "mode": 2,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x7f",
+      "mode": 3,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 504,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x7f",
+      "mode": 4,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 494,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x7f",
+      "mode": 5,
+      "cases": 628,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 466,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x47f",
+      "mode": 0,
+      "cases": 588,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 504,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x47f",
+      "mode": 1,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x47f",
+      "mode": 2,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x47f",
+      "mode": 3,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 504,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x47f",
+      "mode": 4,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 494,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x47f",
+      "mode": 5,
+      "cases": 628,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 466,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x87f",
+      "mode": 0,
+      "cases": 588,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 504,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x87f",
+      "mode": 1,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x87f",
+      "mode": 2,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x87f",
+      "mode": 3,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 504,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x87f",
+      "mode": 4,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 494,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x87f",
+      "mode": 5,
+      "cases": 628,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 466,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xc7f",
+      "mode": 0,
+      "cases": 588,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 504,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xc7f",
+      "mode": 1,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xc7f",
+      "mode": 2,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xc7f",
+      "mode": 3,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 504,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xc7f",
+      "mode": 4,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 494,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xc7f",
+      "mode": 5,
+      "cases": 628,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 466,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x27f",
+      "mode": 0,
+      "cases": 588,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 502,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x27f",
+      "mode": 1,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x27f",
+      "mode": 2,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x27f",
+      "mode": 3,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 504,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x27f",
+      "mode": 4,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 494,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x27f",
+      "mode": 5,
+      "cases": 628,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 466,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x67f",
+      "mode": 0,
+      "cases": 588,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 502,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x67f",
+      "mode": 1,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x67f",
+      "mode": 2,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x67f",
+      "mode": 3,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 504,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x67f",
+      "mode": 4,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 494,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x67f",
+      "mode": 5,
+      "cases": 628,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 466,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xa7f",
+      "mode": 0,
+      "cases": 588,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 502,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xa7f",
+      "mode": 1,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xa7f",
+      "mode": 2,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xa7f",
+      "mode": 3,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 504,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xa7f",
+      "mode": 4,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 494,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xa7f",
+      "mode": 5,
+      "cases": 628,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 466,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xe7f",
+      "mode": 0,
+      "cases": 588,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 502,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xe7f",
+      "mode": 1,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xe7f",
+      "mode": 2,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xe7f",
+      "mode": 3,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 504,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xe7f",
+      "mode": 4,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 494,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xe7f",
+      "mode": 5,
+      "cases": 628,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 466,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x37f",
+      "mode": 0,
+      "cases": 588,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 502,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x37f",
+      "mode": 1,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x37f",
+      "mode": 2,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x37f",
+      "mode": 3,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 504,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x37f",
+      "mode": 4,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 494,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x37f",
+      "mode": 5,
+      "cases": 628,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 466,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x77f",
+      "mode": 0,
+      "cases": 588,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 502,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x77f",
+      "mode": 1,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x77f",
+      "mode": 2,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x77f",
+      "mode": 3,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 504,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x77f",
+      "mode": 4,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 494,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0x77f",
+      "mode": 5,
+      "cases": 628,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 466,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xb7f",
+      "mode": 0,
+      "cases": 588,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 502,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xb7f",
+      "mode": 1,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xb7f",
+      "mode": 2,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xb7f",
+      "mode": 3,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 504,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xb7f",
+      "mode": 4,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 494,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xb7f",
+      "mode": 5,
+      "cases": 628,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 466,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xf7f",
+      "mode": 0,
+      "cases": 588,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 502,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xf7f",
+      "mode": 1,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xf7f",
+      "mode": 2,
+      "cases": 436,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 430,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xf7f",
+      "mode": 3,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 504,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xf7f",
+      "mode": 4,
+      "cases": 592,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 494,
+      "cw_mismatches": 0
+    },
+    {
+      "cw": "0xf7f",
+      "mode": 5,
+      "cases": 628,
+      "value_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 466,
+      "cw_mismatches": 0
+    }
+  ],
+  "mismatches": [],
+  "limits": [
+    "Masked experiment CWs/matherr1 not observed runtime",
+    "80realECoast localtriangle inputs plus syntheticraw/matrix fixtures; not finalcontactquery",
+    "Generated matrix arithmetic compiles to directnativeC++calls; no runtimeopcodeinterpreter",
+    "Unicorn signaling-load/transcendental/status limitations remain; no hardwareequivalenceclaim"
+  ],
+  "values_returns_cw_match": true
+}

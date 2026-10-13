@@ -1,0 +1,118 @@
+{
+  "profile": "actual453820,explicitselected real/local+synthetictriangles; nooverlays",
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "source_function_sha256": "7853bf38d1d5521e835ea3070c295a38df4ffd920aaa54490630333f49902f26",
+  "native_library_sha256": "8aa271bfcf918b6e58f3351e88d460222e8b90097896957c642c09a23d1c9b86",
+  "compiler": "Clang 21.0.0 (clang-2100.3.34.2); ARM64 C++17 O2; actual453820 native owner/software x87",
+  "native_sources": {
+    "src/player_mesh_query.hpp": "7c5ce651072a2eb6ce2e7e1b79f01291220fd40f672ba3a758f743f9cb1eb2b8",
+    "src/player_mesh_query.cpp": "dfd9ed5eb2e42f0747bbac0fc75fe9938e8b9feab55687d158910dc3f47c43ac",
+    "src/player_mesh_math.hpp": "4b7a7466799f6c080328187921851eeb8a7fbb554b0b89061f05ceadfb4fe0d7",
+    "src/player_mesh_math.cpp": "aed479856b1982a32da8a8e9148ecf62275fe72bd0f2745fdbeda368bf7750a7",
+    "src/player_mesh_matrix.hpp": "1f0775f8619e9410f5f184eec68a3972b5d02c8835912dd7774db94f330758cd",
+    "src/player_mesh_matrix.cpp": "5067952365b33514ee4d1f101ddca97a92649cc83143e2ca6472712b376e31e7",
+    "src/player_coordinates.hpp": "a2ed86ef0661816404d1545ccbef92060270f4c2326a8b52969eb3aa8ccbc93a",
+    "src/player_coordinates.cpp": "6b5ddd8c595824e28a9d4264b205c37b0163b7e70acbd24d39ee28b60dad038d",
+    "src/floor_angles.hpp": "27131e58476b2ea2f3fa001a59b8e4967db0492ce0d58172e46ce340228762c7",
+    "src/floor_angles.cpp": "6af0ea752e473a4c418f73480050b0e38a456c9e6f2f93ae1e1d2a883d817d49",
+    "src/crt_atan2.hpp": "2232d4dd0fadcae620dd07b99e92f3cd6e70a294d0c1b4a88d399d1f6ca680b8",
+    "src/crt_atan2.cpp": "8215c30a099487627f8dbeb17ed9db94313a63156bc3b3ce36bb122ce98dde24",
+    "src/crt_fabs.hpp": "a025cd42201de5dc13607633e543f62478a15c094e535219c4f1f8da9533e9f1",
+    "src/crt_fabs.cpp": "2dff9feed15b1de22cf710fe5d7ce84a2a7eb9b88298e4a7c3d7eda2db60678c",
+    "src/crt_asin.hpp": "3c1488b5bf8a810a2809127662d14cd758cd7020666827d6882cb4493736bf38",
+    "src/crt_asin.cpp": "4d30d398443a2c430cc0cbf218495e53c0934f4f82ec48db088b1b0242f49a07",
+    "src/crt_sqrt.hpp": "af62696896da39fae0890227e9e30656dc1a19826f070a15d5fe3a82aca8df0a",
+    "src/crt_sqrt.cpp": "216c022b44c4d75c5f6266c048c29d377bdeed2fb552cc65ac2073fa34931550",
+    "src/crt_argument.hpp": "7485d664c0155d58d46b44fd3420e72ffb69b2bb6c72fe6e6703abaa4a2dd046",
+    "src/crt_argument.cpp": "7631ef22fca57e441061a9589ace636514cd2de0fe31b236439f4bd33184869e",
+    "src/ninja_math.hpp": "85789753683911b95fe60fe1d34b7c69be144d3ef7696b36de3f4522f26e0126",
+    "src/ninja_math.cpp": "3c9788806b2015a5d29d6a77a6440bc20bd5958fae903b5dc69c972b5f5204d0",
+    "src/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
+    "src/x87_math.cpp": "632db745ec15eab0e8d5144e2fb63c20098eb4de3d64bd2b5828bf2be63e16a0"
+  },
+  "verifier_sha256": "ad0eb8ea63d8f85f25b8d5a9c77a8d464c9fe344751b676c4c54bf9608ee5e9a",
+  "fixture_sha256": "a80e585e4467bcdd50f9db3a813f449c5a6677dd32aeb68ee3d4c2bf7fac28d6",
+  "fixtures": 331,
+  "profiles": [
+    {
+      "cw": "0x7f",
+      "cases": 331,
+      "value_mismatches": 0,
+      "flag_mismatches": 298
+    },
+    {
+      "cw": "0x47f",
+      "cases": 331,
+      "value_mismatches": 0,
+      "flag_mismatches": 298
+    },
+    {
+      "cw": "0x87f",
+      "cases": 331,
+      "value_mismatches": 0,
+      "flag_mismatches": 298
+    },
+    {
+      "cw": "0xc7f",
+      "cases": 331,
+      "value_mismatches": 0,
+      "flag_mismatches": 298
+    },
+    {
+      "cw": "0x27f",
+      "cases": 331,
+      "value_mismatches": 0,
+      "flag_mismatches": 298
+    },
+    {
+      "cw": "0x67f",
+      "cases": 331,
+      "value_mismatches": 0,
+      "flag_mismatches": 298
+    },
+    {
+      "cw": "0xa7f",
+      "cases": 331,
+      "value_mismatches": 0,
+      "flag_mismatches": 298
+    },
+    {
+      "cw": "0xe7f",
+      "cases": 331,
+      "value_mismatches": 0,
+      "flag_mismatches": 298
+    },
+    {
+      "cw": "0x37f",
+      "cases": 331,
+      "value_mismatches": 0,
+      "flag_mismatches": 298
+    },
+    {
+      "cw": "0x77f",
+      "cases": 331,
+      "value_mismatches": 0,
+      "flag_mismatches": 298
+    },
+    {
+      "cw": "0xb7f",
+      "cases": 331,
+      "value_mismatches": 0,
+      "flag_mismatches": 298
+    },
+    {
+      "cw": "0xf7f",
+      "cases": 331,
+      "value_mismatches": 0,
+      "flag_mismatches": 298
+    }
+  ],
+  "mismatches": [],
+  "limits": [
+    "Selectedtriangle/resource pointers explicitly seeded; fullregistryproduceractivation notprovedbythisprofile",
+    "80realECoast localtriangles+syntheticflat/countcapcases",
+    "CRTpoliciesexplicit1,notobservedruntime",
+    "SourceFPATANextended/flagsoraclelimitations;hardwareunknown"
+  ],
+  "values_match": true
+}

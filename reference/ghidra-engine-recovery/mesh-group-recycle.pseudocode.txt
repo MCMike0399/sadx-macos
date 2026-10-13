@@ -1,0 +1,23 @@
+
+void FUN_00451860(int *param_1)
+
+{
+  int iVar1;
+  int *piVar2;
+  
+  iVar1 = *param_1;
+  piVar2 = (int *)param_1[1];
+  if (iVar1 != 0) {
+    *(int **)(iVar1 + 4) = piVar2;
+  }
+  if (((uint)piVar2 & 1) == 0) {
+    *piVar2 = iVar1;
+  }
+  else {
+    *(int *)~(uint)piVar2 = iVar1;
+  }
+  *param_1 = (int)DAT_03c48554;
+  DAT_03c48554 = param_1;
+  return;
+}
+

@@ -1,0 +1,90 @@
+    esp = esp - 0x70;
+    decomp_var_70 = ebx;
+    ebx = eax;
+    if ((edi[0x4] & 0x3) != 0x0) {
+            esp = esp - 0x4;
+            decomp_var_74 = esi;
+            esi = arg_0 + 0x4;
+            eax = sub_787cc0();
+            asm { fcomp      dword [aImm32dll+16] };
+            asm { fnstsw     ax };
+            if (PARITY(HIBYTE(eax) & 0x5)) {
+                    eax = edi[0xe];
+                    eax = eax[0x2];
+                    if ((eax & 0x10) != 0x0 && (edi[0x4] & 0x4) == 0x0 && (eax & 0x4) != 0x0) {
+                            decomp_var_78 = ebp;
+                            eax = sub_41bed0(edi, &var_6C);
+                            ebp = ebx + 0x44;
+                            *ebp = var_6C;
+                            ebp[0x1] = var_68;
+                            esp = (esp - 0xc) + 0x8;
+                            ebp[0x2] = var_64;
+                            eax = sub_787cc0();
+                            asm { fcomp      dword [dword_value_1142947840+4] };
+                            asm { fnstsw     ax };
+                            if (PARITY(HIBYTE(eax) & 0x44)) {
+                                    esp = esp - 0x4;
+                                    sub_418ac0(&var_6C);
+                                    asm { fstp       st0 };
+                                    esp = esp + 0x4;
+                            }
+                            ebp = ebx + 0x50;
+                            esp = esp - 0x4;
+                            sub_7887d0(&var_48);
+                            asm { fstp       st0 };
+                            var_60 = *esi;
+                            eax = sub_787cc0();
+                            asm { fcomp      dword [dword_value_1142947840+4] };
+                            asm { fnstsw     ax };
+                            if (PARITY(HIBYTE(eax) & 0x44)) {
+                                    esp = esp - 0x4;
+                                    eax = sub_418ac0(&var_60);
+                                    asm { fstp       st0 };
+                                    esp = esp + 0x4;
+                            }
+                            eax = sub_787cf0();
+                            asm { fcomp      dword [dword_value_1142947840+4] };
+                            asm { fnstsw     ax };
+                            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                    asm { fld        dword [esp+0x78+var_3C] };
+                                    asm { fchs };
+                                    asm { fstp       dword [esp+0x78+var_3C] };
+                                    asm { fld        dword [esp+0x78+var_38] };
+                                    asm { fchs };
+                                    asm { fstp       dword [esp+0x78+var_38] };
+                                    asm { fld        dword [esp+0x78+var_34] };
+                                    asm { fchs };
+                                    asm { fstp       dword [esp+0x78+var_34] };
+                            }
+                            sub_787cc0();
+                            asm { fld        dword [esp+0x78+var_3C] };
+                            ebx = arg_0;
+                            asm { fmul       st1 };
+                            eax = *esi;
+                            asm { fstp       dword [esi] };
+                            asm { fld        dword [esp+0x78+var_38] };
+                            var_54 = eax;
+                            asm { fmul       st1 };
+                            asm { fstp       dword [ebx+8] };
+                            asm { fmul       dword [esp+0x78+var_34] };
+                            asm { fstp       dword [ebx+0xc] };
+                            var_60 = *esi;
+                            esp = esp - 0x4;
+                            sub_418ac0(&var_54);
+                            asm { fstp       st0 };
+                            esp = esp - 0x4;
+                            sub_418ac0(&var_60);
+                            asm { fstp       st0 };
+                            eax = sub_438410(&var_54, &var_60, ebp);
+                            ecx = edi[0x6];
+                            edi[0x6] = ecx - eax;
+                            esp = (esp - 0x14) + 0x20;
+                            if (sub_4383b0(ebx[0x8], ecx - eax) > 0x6000) {
+                                    edi[0x6] = edi[0x6] + 0x8000;
+                            }
+                            ebx[0x8] = edi[0x6];
+                    }
+            }
+            esp = esp + 0x4;
+    }
+    return;

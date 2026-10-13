@@ -1,0 +1,2420 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "native_library_sha256": "81e495e395bb9d4a1fae5aa74dc6aa0b1c58eab724ff462221b47da04e315a2c",
+  "profile": "five actual source contact-response bodies with real callees, no overlays; explicit fixtures/policy1",
+  "source_functions": {
+    "0x43cce0": {
+      "size": 681,
+      "sha256": "81caf040ebac921d1162c3cfeda295e5b5e595de29a4b5d878aa250e6ebd8b05"
+    },
+    "0x43cf90": {
+      "size": 488,
+      "sha256": "ac5443238c282b45b3133183a8f518929a5f7d51734223c81ab40753a9308b11"
+    },
+    "0x43d180": {
+      "size": 470,
+      "sha256": "c5cc5a981790f1cfb93f70399907c5c6aac16edb2a66d07cfe50e562b0c90d78"
+    },
+    "0x43d8b0": {
+      "size": 1001,
+      "sha256": "c61fc3146c1a21f413eedd587d69cd81005a9ef72efa29f1025358a8723e59ab"
+    },
+    "0x43d360": {
+      "size": 1357,
+      "sha256": "37fbf440d3d094c6b8b59bd0b17b3cf29021c96ea7495d82a972f6ccb3a4004b"
+    }
+  },
+  "constants": {
+    "bytes": "000000000000803fcdcc4cbe000090c0cdcc4c3e000080bf9a99793f000000000000f0400ae3e4b4305fc43f000000000000f03f",
+    "sha256": "10889309fdb5c0b466b1f62c5d0adcda8f271ce9a4b5a6332feee9397899e557",
+    "fields": [
+      "0x7dcb2c",
+      "0x7dcb10",
+      "0x7dd570",
+      "0x7e0080",
+      "0x7dd58c",
+      "0x7dcb0c",
+      "0x7e6c30",
+      "0x7dccd0",
+      "0x7dccc8",
+      "0x7e0b40"
+    ]
+  },
+  "cases_per_entry_and_cw": 1030,
+  "case_sha256": "a18d35d7f3fb3de27c0914f7303822ae3a7526632db6e05ddb2c31f783b7727a",
+  "native_sources": {
+    "src/player_contact_response.hpp": "681f59d917656906054e14d043ed63d05d86a74134622c5f67ee9ba84c5531cf",
+    "src/player_contact_response.cpp": "00bfee77aed6f18550e8e22f8587a794c172934bdb2f5b6fb4474cbfc88d1f46",
+    "tests/native_player_contact_response_probe.cpp": "84dc8cf354d4a95ab9f72753e31970414f24450e503d4291581fd92ba786ec15",
+    "tools/verify_original_player_contact_response.py": "fb1546da93b57df93eeb81c57a60ad9587fd38d0b0cf95e5ba2209bcdfb9b0e7"
+  },
+  "native_shared_sources": {
+    "src/ninja_math.cpp": "3c9788806b2015a5d29d6a77a6440bc20bd5958fae903b5dc69c972b5f5204d0",
+    "src/player_rotation.cpp": "e301217beb4af19753fb13bdb6dbeb4b69e8c585f6a7d72137c5b9a53ef151e7",
+    "src/player_projection.cpp": "38ecb7d03d789b0e5ce1b3c53d330bd029ee177a9fb446f59409114b7dbea898",
+    "src/player_plane.cpp": "d4e8708dcb409631067fff9ebac96eafaade5eb15ccc9105f66dbc75bff9de9e",
+    "src/player_acceleration_alternate_math.cpp": "33737eac1d1ff064c9a3eba2489667f462ee6823878fe4147e8073f00db27073",
+    "src/crt_acos.cpp": "d02907ec125d13896cbb10e258597acc1abc47a421cc0ef64901371fc7b44e2a",
+    "src/crt_asin.cpp": "4d30d398443a2c430cc0cbf218495e53c0934f4f82ec48db088b1b0242f49a07",
+    "src/crt_integer.cpp": "78db9e06735cdb71bf98cea067822db94e250c59a773a9cdd6c4405c068e6ca7",
+    "src/x87_math.cpp": "632db745ec15eab0e8d5144e2fb63c20098eb4de3d64bd2b5828bf2be63e16a0",
+    "src/x87_transcendental.cpp": "2e55ad21b3493525254fd3efa2ad385e3c2bbbfde26b2d493b0fb941baef9ec9",
+    "src/player_contact.hpp": "912667a1933d880c913701a6f6d5aa1683825b0d951683354eec0aa4f155d835",
+    "src/player_mesh_query.hpp": "7c5ce651072a2eb6ce2e7e1b79f01291220fd40f672ba3a758f743f9cb1eb2b8",
+    "src/player_task.hpp": "290dee627532228d61528231f344c9c0119caa2b00c8f999edab2299bfe0f2db",
+    "src/player_physics.hpp": "1515ff9ae9bf6e78e921b9e6ba08b81d92b4a35ecea2ae01036a80eb37ef92c1",
+    "src/player_acceleration.hpp": "dc60f4f204e17114ee154e1c372880575ef7f3d3b58b2cf122193e524470e8b2"
+  },
+  "profiles": [
+    {
+      "entry": "0x43cce0",
+      "cw": "0x7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cf90",
+      "cw": "0x7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d180",
+      "cw": "0x7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 847,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d8b0",
+      "cw": "0x7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 831,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d360",
+      "cw": "0x7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 841,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cce0",
+      "cw": "0x47f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cf90",
+      "cw": "0x47f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d180",
+      "cw": "0x47f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 847,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d8b0",
+      "cw": "0x47f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 831,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d360",
+      "cw": "0x47f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 841,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cce0",
+      "cw": "0x87f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cf90",
+      "cw": "0x87f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d180",
+      "cw": "0x87f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 847,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d8b0",
+      "cw": "0x87f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 831,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d360",
+      "cw": "0x87f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 841,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cce0",
+      "cw": "0xc7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cf90",
+      "cw": "0xc7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d180",
+      "cw": "0xc7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 847,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d8b0",
+      "cw": "0xc7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 831,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d360",
+      "cw": "0xc7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 841,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cce0",
+      "cw": "0x27f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cf90",
+      "cw": "0x27f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d180",
+      "cw": "0x27f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 847,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d8b0",
+      "cw": "0x27f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 831,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d360",
+      "cw": "0x27f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 841,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cce0",
+      "cw": "0x67f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cf90",
+      "cw": "0x67f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d180",
+      "cw": "0x67f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 847,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d8b0",
+      "cw": "0x67f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 831,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d360",
+      "cw": "0x67f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 841,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cce0",
+      "cw": "0xa7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cf90",
+      "cw": "0xa7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d180",
+      "cw": "0xa7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 847,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d8b0",
+      "cw": "0xa7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 831,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d360",
+      "cw": "0xa7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 841,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cce0",
+      "cw": "0xe7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cf90",
+      "cw": "0xe7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d180",
+      "cw": "0xe7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 847,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d8b0",
+      "cw": "0xe7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 831,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d360",
+      "cw": "0xe7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 841,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cce0",
+      "cw": "0x37f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cf90",
+      "cw": "0x37f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d180",
+      "cw": "0x37f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 847,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d8b0",
+      "cw": "0x37f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 831,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d360",
+      "cw": "0x37f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 841,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cce0",
+      "cw": "0x77f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cf90",
+      "cw": "0x77f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d180",
+      "cw": "0x77f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 847,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d8b0",
+      "cw": "0x77f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 831,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d360",
+      "cw": "0x77f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 841,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cce0",
+      "cw": "0xb7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cf90",
+      "cw": "0xb7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d180",
+      "cw": "0xb7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 847,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d8b0",
+      "cw": "0xb7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 831,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d360",
+      "cw": "0xb7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 841,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cce0",
+      "cw": "0xf7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43cf90",
+      "cw": "0xf7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 832,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d180",
+      "cw": "0xf7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 847,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d8b0",
+      "cw": "0xf7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 831,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "entry": "0x43d360",
+      "cw": "0xf7f",
+      "cases": 1030,
+      "value_mismatches": 0,
+      "flag_mismatches": 841,
+      "flag_examples": [
+        {
+          "case": 1,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 2,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 3,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 4,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 5,
+          "source": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 6,
+          "source": "0x0",
+          "native": "0x20"
+        }
+      ]
+    }
+  ],
+  "mismatches": [],
+  "limits": [
+    "Explicit fixtures/policy1/12 CW profiles do not establish actual Windows startup/mods/scene state",
+    "Unobserved contact/resource/scratch boundaries belong to owner tests; source initialization is not fabricated",
+    "Bochs FPATAN model versus Unicorn host-double transcendental and status differences remain separate",
+    "Actual Intel hardware, complete collision producers and physical controllers remain unverified"
+  ],
+  "stored_values_return_control_match": true,
+  "passed": false,
+  "seconds": 4.033339417015668
+}

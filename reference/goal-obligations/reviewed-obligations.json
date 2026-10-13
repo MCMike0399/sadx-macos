@@ -1,0 +1,217 @@
+[
+  {
+    "obligation_id": "sadx.playable",
+    "obligation_version": 1,
+    "title": "Complete native SADX player actions, stages and transitions",
+    "application_layer": "application",
+    "family": "complete-native-game",
+    "target": {
+      "artifact_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "application_node_id": null,
+      "semantic_node_id": null,
+      "location": "User goal: Complete native SADX player actions, stages and transitions"
+    },
+    "required": true,
+    "required_case_kinds": [
+      "positive",
+      "negative"
+    ],
+    "required_original_authority": "runtime",
+    "required_fixture_authority": "packaged-process",
+    "required_verifier_authority": "packaged-process",
+    "requires_parser_type": false,
+    "dependency_obligation_ids": [
+      "sadx.mods",
+      "sadx.precision",
+      "sadx.input",
+      "sadx.presentation",
+      "sadx.package"
+    ],
+    "residual_unknown_ids": [
+      "unk_e14f925b69fde53b811c02948bc8d0168444c66672219a50b6d73fad8806e5cd"
+    ],
+    "unavailable_authority": [],
+    "required_next_evidence": [
+      "End-to-end playable Mac game with real task, camera and stage ownership."
+    ],
+    "disposition": "active",
+    "review_evidence_ids": [
+      "ev_826e6d2b70f1e9822217fade5eb463c9f4ceba4e4996d903d182a054d70e0274"
+    ]
+  },
+  {
+    "obligation_id": "sadx.mods",
+    "obligation_version": 1,
+    "title": "Updated speedrun mod behavior integrated in the native game",
+    "application_layer": "runtime",
+    "family": "complete-native-game",
+    "target": {
+      "artifact_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "application_node_id": null,
+      "semantic_node_id": null,
+      "location": "User goal: Updated speedrun mod behavior integrated in the native game"
+    },
+    "required": true,
+    "required_case_kinds": [
+      "positive",
+      "negative"
+    ],
+    "required_original_authority": "runtime",
+    "required_fixture_authority": "packaged-process",
+    "required_verifier_authority": "packaged-process",
+    "requires_parser_type": false,
+    "dependency_obligation_ids": [],
+    "residual_unknown_ids": [
+      "unk_8822b3af70326befad69af3a98281827a557644d36e2f25ba171b2fc7d67f2b1"
+    ],
+    "unavailable_authority": [
+      "Actual modded Windows hardware execution has not been observed."
+    ],
+    "required_next_evidence": [
+      "Compare actually loaded intended PC mod behavior with native integrated behavior."
+    ],
+    "disposition": "active",
+    "review_evidence_ids": [
+      "ev_9ac64b624a286d6a6e9bf5e6d8871da402502977130102f33735e9a832d222dd"
+    ]
+  },
+  {
+    "obligation_id": "sadx.precision",
+    "obligation_version": 1,
+    "title": "Speedrun physics, timing and tricks match the modded Intel reference",
+    "application_layer": "native-abi",
+    "family": "complete-native-game",
+    "target": {
+      "artifact_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "application_node_id": null,
+      "semantic_node_id": null,
+      "location": "User goal: Speedrun physics, timing and tricks match the modded Intel reference"
+    },
+    "required": true,
+    "required_case_kinds": [
+      "positive",
+      "negative"
+    ],
+    "required_original_authority": "runtime",
+    "required_fixture_authority": "packaged-process",
+    "required_verifier_authority": "packaged-process",
+    "requires_parser_type": false,
+    "dependency_obligation_ids": [],
+    "residual_unknown_ids": [
+      "unk_a030dc4082541b0db2d67cb1eeb791f4a20931cf7f919b39eb8a66ecfe517287"
+    ],
+    "unavailable_authority": [
+      "Actual modded Windows hardware execution has not been observed."
+    ],
+    "required_next_evidence": [
+      "Observed Windows reference traces and Mac traces, including finite/nonfinite arithmetic and timing."
+    ],
+    "disposition": "active",
+    "review_evidence_ids": [
+      "ev_e02a2b0091ee3668cc1fc116fb4b6acfac5270687c2f3040504e7d1efb3a4dfe"
+    ]
+  },
+  {
+    "obligation_id": "sadx.input",
+    "obligation_version": 1,
+    "title": "Keyboard, Xbox and Switch 2 Pro work in the native game",
+    "application_layer": "runtime",
+    "family": "complete-native-game",
+    "target": {
+      "artifact_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "application_node_id": null,
+      "semantic_node_id": null,
+      "location": "User goal: Keyboard, Xbox and Switch 2 Pro work in the native game"
+    },
+    "required": true,
+    "required_case_kinds": [
+      "positive",
+      "negative"
+    ],
+    "required_original_authority": "runtime",
+    "required_fixture_authority": "packaged-process",
+    "required_verifier_authority": "packaged-process",
+    "requires_parser_type": false,
+    "dependency_obligation_ids": [],
+    "residual_unknown_ids": [
+      "unk_c0af9a16e929fe433ad2a73fe47cbd73c456fe1957af3ec340b2a165b2b98409"
+    ],
+    "unavailable_authority": [],
+    "required_next_evidence": [
+      "Actual physical input delivery and gameplay on Mac; keyboard focus and disconnect/reconnect cases."
+    ],
+    "disposition": "active",
+    "review_evidence_ids": [
+      "ev_432e44b401ecefd1a49e3a18888231c15b1b0537b1e4af6eab89b6cfbbeec66a"
+    ]
+  },
+  {
+    "obligation_id": "sadx.presentation",
+    "obligation_version": 1,
+    "title": "Native Metal rendering, camera, audio and sustained performance",
+    "application_layer": "runtime",
+    "family": "complete-native-game",
+    "target": {
+      "artifact_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "application_node_id": null,
+      "semantic_node_id": null,
+      "location": "User goal: Native Metal rendering, camera, audio and sustained performance"
+    },
+    "required": true,
+    "required_case_kinds": [
+      "positive",
+      "negative"
+    ],
+    "required_original_authority": "runtime",
+    "required_fixture_authority": "packaged-process",
+    "required_verifier_authority": "packaged-process",
+    "requires_parser_type": false,
+    "dependency_obligation_ids": [],
+    "residual_unknown_ids": [
+      "unk_3248408bfd786822ca0f22f8de00bf52c3524f0f14f31fb903a2dcd049910fb7"
+    ],
+    "unavailable_authority": [],
+    "required_next_evidence": [
+      "Real gameplay presentation and frame-time measurements using final native resources."
+    ],
+    "disposition": "active",
+    "review_evidence_ids": [
+      "ev_8ca296f94a8deb87a875f97508d53027daa9bd1c0cc182d69298255165bf85c4"
+    ]
+  },
+  {
+    "obligation_id": "sadx.package",
+    "obligation_version": 1,
+    "title": "Complete installable native app, assets, UI, saves and lifecycle",
+    "application_layer": "packaging",
+    "family": "complete-native-game",
+    "target": {
+      "artifact_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "application_node_id": null,
+      "semantic_node_id": null,
+      "location": "User goal: Complete installable native app, assets, UI, saves and lifecycle"
+    },
+    "required": true,
+    "required_case_kinds": [
+      "positive",
+      "negative",
+      "teardown"
+    ],
+    "required_original_authority": "runtime",
+    "required_fixture_authority": "packaged-process",
+    "required_verifier_authority": "packaged-process",
+    "requires_parser_type": true,
+    "dependency_obligation_ids": [],
+    "residual_unknown_ids": [
+      "unk_27952382d51556129208d9f97e2aa07cb633c6d87c4dc6703ca4b39e86f4067a"
+    ],
+    "unavailable_authority": [],
+    "required_next_evidence": [
+      "Clean app installation, source-bound asset decoding, real saves and shutdown/restart validation."
+    ],
+    "disposition": "active",
+    "review_evidence_ids": [
+      "ev_5ad50c6565ca2e429c8d95d2f18fc7f4a21cc012870bbcc7768fd0774f19091b"
+    ]
+  }
+]

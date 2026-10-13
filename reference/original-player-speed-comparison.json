@@ -1,0 +1,3672 @@
+{
+  "profile": "exact-PGetSpeed-and-tail-i386/native-arm64/explicit-external-test-seeds",
+  "source_path": "/Users/burbujamc/Developer/rea/Sonic Adventure DX/sonic.exe",
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "native_library_path": "/Users/burbujamc/Developer/rea/sadx-native/build/native-player-speed-probe.dylib",
+  "native_library_sha256": "ab225b6153d9f20e00d108afc61550ab2d91b02722c5282e027903d914585e0c",
+  "parameter_source": {
+    "address": "0x9154e8",
+    "size": 132,
+    "row": "Sonic",
+    "sha256": "e7b11eb0865091f2baf1ea63052dcc7e8d9f0381005983137eee759152b9eb48"
+  },
+  "case_blob": {
+    "path": "/Users/burbujamc/Developer/rea/_reference/sadx/original-player-speed-comparison.cases.bin",
+    "sha256": "fb82240c307cc4b973f6a24136a8b1ecfc27d79396dc332daa005bd1dc34ca66",
+    "bytes": 735140,
+    "record": "58 little-endian uint32 source/state words followed by one gate-pattern uint32"
+  },
+  "seed": "0x443f50",
+  "case_groups": {
+    "finite-random": 2000,
+    "finite-systematic": 675,
+    "raw-zero-subnormal-nonfinite": 440
+  },
+  "function_bytes": {
+    "0x443f50": {
+      "size": 603,
+      "sha256": "e60e611ea247b5f1aedb3d91c3889242dd956f9ab3668981015211b4a9cf45ea"
+    },
+    "0x785170": {
+      "size": 25,
+      "sha256": "6062ff68472aa60aea2d73c7cabbd34a40ff4ba2bdf10473cf48d7b33a730fb2"
+    },
+    "0x43c380": {
+      "size": 308,
+      "sha256": "ed2a073798a1f65eadf1c47c6eea05f80d06c15292b2f311b531f242def33d20"
+    },
+    "0x43c4c0": {
+      "size": 135,
+      "sha256": "1306f7b30b26ce94c0f7af6bce3805e33e0716e3b700e30e15c529eefaec204c"
+    }
+  },
+  "overlays": [
+    {
+      "address": "0x43bdc0",
+      "bytes": "c3",
+      "behavior": "selected per-call input gate, EAX set by hook"
+    },
+    {
+      "address": "0x43ec90",
+      "bytes": "c3",
+      "behavior": "identity task-to-world test double"
+    },
+    {
+      "address": "0x43edd0",
+      "bytes": "c3",
+      "behavior": "identity floor-to-world test double"
+    }
+  ],
+  "control_words": [
+    {
+      "control_word": "0x7f",
+      "cases": 3115,
+      "value_mismatches": 0,
+      "untouched_mismatches": 0,
+      "call_count_mismatches": 0,
+      "exception_flag_mismatches": 2686,
+      "examples": [
+        {
+          "case": 15,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0400000",
+            "0xc0066666",
+            "0x0",
+            "0xc0400000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0400000",
+            "0xc0066666",
+            "0x0",
+            "0xc0400000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 16,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0000000",
+            "0xc0066666",
+            "0x0",
+            "0xc0000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0000000",
+            "0xc0066666",
+            "0x0",
+            "0xc0000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 17,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 18,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 19,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 20,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f000000",
+            "0xc0066666",
+            "0x0",
+            "0x3f000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f000000",
+            "0xc0066666",
+            "0x0",
+            "0x3f000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 21,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 22,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 23,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f800000",
+            "0xc0066666",
+            "0x0",
+            "0x3f800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f800000",
+            "0xc0066666",
+            "0x0",
+            "0x3f800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 24,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf000000",
+            "0xc0066666",
+            "0x0",
+            "0xbf000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf000000",
+            "0xc0066666",
+            "0x0",
+            "0xbf000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0x47f",
+      "cases": 3115,
+      "value_mismatches": 0,
+      "untouched_mismatches": 0,
+      "call_count_mismatches": 0,
+      "exception_flag_mismatches": 2686,
+      "examples": [
+        {
+          "case": 15,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0xc0400000",
+            "0xc0066667",
+            "0x0",
+            "0xc0400000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0xc0400000",
+            "0xc0066667",
+            "0x0",
+            "0xc0400000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 16,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0xc0000000",
+            "0xc0066667",
+            "0x0",
+            "0xc0000000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0xc0000000",
+            "0xc0066667",
+            "0x0",
+            "0xc0000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 17,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbf800000",
+            "0xc0066667",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbf800000",
+            "0xc0066667",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 18,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066667",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066667",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 19,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0x0",
+            "0xc0066667",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0x0",
+            "0xc0066667",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 20,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0x3f000000",
+            "0xc0066667",
+            "0x0",
+            "0x3f000000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0x3f000000",
+            "0xc0066667",
+            "0x0",
+            "0x3f000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 21,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbf800000",
+            "0xc0066667",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbf800000",
+            "0xc0066667",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 22,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0x0",
+            "0xc0066667",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0x0",
+            "0xc0066667",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 23,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0x3f800000",
+            "0xc0066667",
+            "0x0",
+            "0x3f800000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0x3f800000",
+            "0xc0066667",
+            "0x0",
+            "0x3f800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 24,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbf000000",
+            "0xc0066667",
+            "0x0",
+            "0xbf000000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbf000000",
+            "0xc0066667",
+            "0x0",
+            "0xbf000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0x87f",
+      "cases": 3115,
+      "value_mismatches": 0,
+      "untouched_mismatches": 0,
+      "call_count_mismatches": 0,
+      "exception_flag_mismatches": 2686,
+      "examples": [
+        {
+          "case": 15,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0400000",
+            "0xc0066666",
+            "0x0",
+            "0xc0400000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0400000",
+            "0xc0066666",
+            "0x0",
+            "0xc0400000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 16,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0000000",
+            "0xc0066666",
+            "0x0",
+            "0xc0000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0000000",
+            "0xc0066666",
+            "0x0",
+            "0xc0000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 17,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 18,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 19,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 20,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f000000",
+            "0xc0066666",
+            "0x0",
+            "0x3f000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f000000",
+            "0xc0066666",
+            "0x0",
+            "0x3f000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 21,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 22,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 23,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f800000",
+            "0xc0066666",
+            "0x0",
+            "0x3f800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f800000",
+            "0xc0066666",
+            "0x0",
+            "0x3f800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 24,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf000000",
+            "0xc0066666",
+            "0x0",
+            "0xbf000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf000000",
+            "0xc0066666",
+            "0x0",
+            "0xbf000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0xc7f",
+      "cases": 3115,
+      "value_mismatches": 0,
+      "untouched_mismatches": 0,
+      "call_count_mismatches": 0,
+      "exception_flag_mismatches": 2686,
+      "examples": [
+        {
+          "case": 15,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0400000",
+            "0xc0066666",
+            "0x0",
+            "0xc0400000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0400000",
+            "0xc0066666",
+            "0x0",
+            "0xc0400000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 16,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0000000",
+            "0xc0066666",
+            "0x0",
+            "0xc0000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0000000",
+            "0xc0066666",
+            "0x0",
+            "0xc0000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 17,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 18,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 19,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 20,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f000000",
+            "0xc0066666",
+            "0x0",
+            "0x3f000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f000000",
+            "0xc0066666",
+            "0x0",
+            "0x3f000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 21,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 22,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 23,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f800000",
+            "0xc0066666",
+            "0x0",
+            "0x3f800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f800000",
+            "0xc0066666",
+            "0x0",
+            "0x3f800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 24,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf000000",
+            "0xc0066666",
+            "0x0",
+            "0xbf000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf000000",
+            "0xc0066666",
+            "0x0",
+            "0xbf000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0x27f",
+      "cases": 3115,
+      "value_mismatches": 0,
+      "untouched_mismatches": 0,
+      "call_count_mismatches": 0,
+      "exception_flag_mismatches": 2686,
+      "examples": [
+        {
+          "case": 15,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0400000",
+            "0xc0066666",
+            "0x0",
+            "0xc0400000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0400000",
+            "0xc0066666",
+            "0x0",
+            "0xc0400000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 16,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0000000",
+            "0xc0066666",
+            "0x0",
+            "0xc0000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0000000",
+            "0xc0066666",
+            "0x0",
+            "0xc0000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 17,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 18,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 19,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 20,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f000000",
+            "0xc0066666",
+            "0x0",
+            "0x3f000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f000000",
+            "0xc0066666",
+            "0x0",
+            "0x3f000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 21,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 22,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 23,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f800000",
+            "0xc0066666",
+            "0x0",
+            "0x3f800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f800000",
+            "0xc0066666",
+            "0x0",
+            "0x3f800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 24,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf000000",
+            "0xc0066666",
+            "0x0",
+            "0xbf000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf000000",
+            "0xc0066666",
+            "0x0",
+            "0xbf000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0x67f",
+      "cases": 3115,
+      "value_mismatches": 0,
+      "untouched_mismatches": 0,
+      "call_count_mismatches": 0,
+      "exception_flag_mismatches": 2686,
+      "examples": [
+        {
+          "case": 15,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0xc0400000",
+            "0xc0066667",
+            "0x0",
+            "0xc0400000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0xc0400000",
+            "0xc0066667",
+            "0x0",
+            "0xc0400000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 16,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0xc0000000",
+            "0xc0066667",
+            "0x0",
+            "0xc0000000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0xc0000000",
+            "0xc0066667",
+            "0x0",
+            "0xc0000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 17,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbf800000",
+            "0xc0066667",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbf800000",
+            "0xc0066667",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 18,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066667",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066667",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 19,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0x0",
+            "0xc0066667",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0x0",
+            "0xc0066667",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 20,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0x3f000000",
+            "0xc0066667",
+            "0x0",
+            "0x3f000000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0x3f000000",
+            "0xc0066667",
+            "0x0",
+            "0x3f000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 21,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbf800000",
+            "0xc0066667",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbf800000",
+            "0xc0066667",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 22,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0x0",
+            "0xc0066667",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0x0",
+            "0xc0066667",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 23,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0x3f800000",
+            "0xc0066667",
+            "0x0",
+            "0x3f800000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0x3f800000",
+            "0xc0066667",
+            "0x0",
+            "0x3f800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 24,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbf000000",
+            "0xc0066667",
+            "0x0",
+            "0xbf000000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbf000000",
+            "0xc0066667",
+            "0x0",
+            "0xbf000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0xa7f",
+      "cases": 3115,
+      "value_mismatches": 0,
+      "untouched_mismatches": 0,
+      "call_count_mismatches": 0,
+      "exception_flag_mismatches": 2686,
+      "examples": [
+        {
+          "case": 15,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0400000",
+            "0xc0066666",
+            "0x0",
+            "0xc0400000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0400000",
+            "0xc0066666",
+            "0x0",
+            "0xc0400000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 16,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0000000",
+            "0xc0066666",
+            "0x0",
+            "0xc0000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0000000",
+            "0xc0066666",
+            "0x0",
+            "0xc0000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 17,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 18,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 19,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 20,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f000000",
+            "0xc0066666",
+            "0x0",
+            "0x3f000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f000000",
+            "0xc0066666",
+            "0x0",
+            "0x3f000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 21,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 22,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 23,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f800000",
+            "0xc0066666",
+            "0x0",
+            "0x3f800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f800000",
+            "0xc0066666",
+            "0x0",
+            "0x3f800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 24,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf000000",
+            "0xc0066666",
+            "0x0",
+            "0xbf000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf000000",
+            "0xc0066666",
+            "0x0",
+            "0xbf000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0xe7f",
+      "cases": 3115,
+      "value_mismatches": 0,
+      "untouched_mismatches": 0,
+      "call_count_mismatches": 0,
+      "exception_flag_mismatches": 2686,
+      "examples": [
+        {
+          "case": 15,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0400000",
+            "0xc0066666",
+            "0x0",
+            "0xc0400000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0400000",
+            "0xc0066666",
+            "0x0",
+            "0xc0400000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 16,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0000000",
+            "0xc0066666",
+            "0x0",
+            "0xc0000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0000000",
+            "0xc0066666",
+            "0x0",
+            "0xc0000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 17,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 18,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 19,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 20,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f000000",
+            "0xc0066666",
+            "0x0",
+            "0x3f000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f000000",
+            "0xc0066666",
+            "0x0",
+            "0x3f000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 21,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 22,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 23,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f800000",
+            "0xc0066666",
+            "0x0",
+            "0x3f800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f800000",
+            "0xc0066666",
+            "0x0",
+            "0x3f800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 24,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf000000",
+            "0xc0066666",
+            "0x0",
+            "0xbf000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf000000",
+            "0xc0066666",
+            "0x0",
+            "0xbf000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0x37f",
+      "cases": 3115,
+      "value_mismatches": 0,
+      "untouched_mismatches": 0,
+      "call_count_mismatches": 0,
+      "exception_flag_mismatches": 2686,
+      "examples": [
+        {
+          "case": 15,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0400000",
+            "0xc0066666",
+            "0x0",
+            "0xc0400000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0400000",
+            "0xc0066666",
+            "0x0",
+            "0xc0400000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 16,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0000000",
+            "0xc0066666",
+            "0x0",
+            "0xc0000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0000000",
+            "0xc0066666",
+            "0x0",
+            "0xc0000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 17,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 18,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 19,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 20,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f000000",
+            "0xc0066666",
+            "0x0",
+            "0x3f000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f000000",
+            "0xc0066666",
+            "0x0",
+            "0x3f000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 21,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 22,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 23,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f800000",
+            "0xc0066666",
+            "0x0",
+            "0x3f800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f800000",
+            "0xc0066666",
+            "0x0",
+            "0x3f800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 24,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf000000",
+            "0xc0066666",
+            "0x0",
+            "0xbf000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf000000",
+            "0xc0066666",
+            "0x0",
+            "0xbf000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0x77f",
+      "cases": 3115,
+      "value_mismatches": 0,
+      "untouched_mismatches": 0,
+      "call_count_mismatches": 0,
+      "exception_flag_mismatches": 2686,
+      "examples": [
+        {
+          "case": 15,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0xc0400000",
+            "0xc0066667",
+            "0x0",
+            "0xc0400000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0xc0400000",
+            "0xc0066667",
+            "0x0",
+            "0xc0400000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 16,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0xc0000000",
+            "0xc0066667",
+            "0x0",
+            "0xc0000000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0xc0000000",
+            "0xc0066667",
+            "0x0",
+            "0xc0000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 17,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbf800000",
+            "0xc0066667",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbf800000",
+            "0xc0066667",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 18,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066667",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066667",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 19,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0x0",
+            "0xc0066667",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0x0",
+            "0xc0066667",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 20,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0x3f000000",
+            "0xc0066667",
+            "0x0",
+            "0x3f000000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0x3f000000",
+            "0xc0066667",
+            "0x0",
+            "0x3f000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 21,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbf800000",
+            "0xc0066667",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbf800000",
+            "0xc0066667",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 22,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0x0",
+            "0xc0066667",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0x0",
+            "0xc0066667",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 23,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0x3f800000",
+            "0xc0066667",
+            "0x0",
+            "0x3f800000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0x3f800000",
+            "0xc0066667",
+            "0x0",
+            "0x3f800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 24,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbf000000",
+            "0xc0066667",
+            "0x0",
+            "0xbf000000"
+          ],
+          "native_values": [
+            "0xc0066667",
+            "0x0",
+            "0xbf000000",
+            "0xc0066667",
+            "0x0",
+            "0xbf000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0xb7f",
+      "cases": 3115,
+      "value_mismatches": 0,
+      "untouched_mismatches": 0,
+      "call_count_mismatches": 0,
+      "exception_flag_mismatches": 2686,
+      "examples": [
+        {
+          "case": 15,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0400000",
+            "0xc0066666",
+            "0x0",
+            "0xc0400000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0400000",
+            "0xc0066666",
+            "0x0",
+            "0xc0400000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 16,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0000000",
+            "0xc0066666",
+            "0x0",
+            "0xc0000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0000000",
+            "0xc0066666",
+            "0x0",
+            "0xc0000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 17,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 18,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 19,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 20,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f000000",
+            "0xc0066666",
+            "0x0",
+            "0x3f000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f000000",
+            "0xc0066666",
+            "0x0",
+            "0x3f000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 21,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 22,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 23,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f800000",
+            "0xc0066666",
+            "0x0",
+            "0x3f800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f800000",
+            "0xc0066666",
+            "0x0",
+            "0x3f800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 24,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf000000",
+            "0xc0066666",
+            "0x0",
+            "0xbf000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf000000",
+            "0xc0066666",
+            "0x0",
+            "0xbf000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        }
+      ]
+    },
+    {
+      "control_word": "0xf7f",
+      "cases": 3115,
+      "value_mismatches": 0,
+      "untouched_mismatches": 0,
+      "call_count_mismatches": 0,
+      "exception_flag_mismatches": 2686,
+      "examples": [
+        {
+          "case": 15,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0400000",
+            "0xc0066666",
+            "0x0",
+            "0xc0400000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0400000",
+            "0xc0066666",
+            "0x0",
+            "0xc0400000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 16,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0000000",
+            "0xc0066666",
+            "0x0",
+            "0xc0000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xc0000000",
+            "0xc0066666",
+            "0x0",
+            "0xc0000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 17,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 18,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000",
+            "0xc0066666",
+            "0x0",
+            "0xbfc00000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 19,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 20,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f000000",
+            "0xc0066666",
+            "0x0",
+            "0x3f000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f000000",
+            "0xc0066666",
+            "0x0",
+            "0x3f000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 21,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf800000",
+            "0xc0066666",
+            "0x0",
+            "0xbf800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 22,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x0",
+            "0xc0066666",
+            "0x0",
+            "0x0"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 23,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f800000",
+            "0xc0066666",
+            "0x0",
+            "0x3f800000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0x3f800000",
+            "0xc0066666",
+            "0x0",
+            "0x3f800000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        },
+        {
+          "case": 24,
+          "group": "finite-systematic",
+          "gate_pattern": 0,
+          "original_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf000000",
+            "0xc0066666",
+            "0x0",
+            "0xbf000000"
+          ],
+          "native_values": [
+            "0xc0066666",
+            "0x0",
+            "0xbf000000",
+            "0xc0066666",
+            "0x0",
+            "0xbf000000"
+          ],
+          "calls": [
+            2,
+            2
+          ],
+          "exception_flags": [
+            "0x0",
+            "0x20"
+          ]
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Input gate and BOTH transform providers are explicit test doubles",
+    "PGetSpeed/vector-add/limiter/cleanup original instructions actually execute",
+    "Control words and source parameter perturbations are explicit experimental fixtures",
+    "Emulator exception flags are reported separately and do not establish hardware flag equivalence",
+    "Original x86 hardware, actual game startup/control state, mods and functioning gameplay are unverified"
+  ],
+  "tested_values_and_calls_match": true,
+  "emulator_exception_flags_match": false,
+  "duration_seconds": 1.1613567090244032
+}

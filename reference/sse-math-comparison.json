@@ -1,0 +1,961 @@
+{
+  "native_probe_sha256": "ccf865839a544a50bad07501ebb08486f9e15fa9d4252f6db60a2a93448870a5",
+  "unicorn_version": "2.1.4",
+  "scope": "single explicit scalar opcodes; emulator values only, no physical Intel hardware claim",
+  "results": [
+    {
+      "operation": "ADDSS",
+      "opcode": "f30f58c1",
+      "evaluations": 36624,
+      "value_mismatches": 176,
+      "mxcsr_mismatches": 33408,
+      "first_value_mismatches": [
+        {
+          "a": "0x7f800001",
+          "b": "0x7fc12345",
+          "mxcsr": "0x1f80",
+          "oracle": "0x7fc12345",
+          "native": "0x7fc00001"
+        },
+        {
+          "a": "0x7fc00001",
+          "b": "0x7fc12345",
+          "mxcsr": "0x1f80",
+          "oracle": "0x7fc12345",
+          "native": "0x7fc00001"
+        },
+        {
+          "a": "0xff800001",
+          "b": "0x7f800001",
+          "mxcsr": "0x1f80",
+          "oracle": "0x7fc00001",
+          "native": "0xffc00001"
+        },
+        {
+          "a": "0xff800001",
+          "b": "0x7fc00001",
+          "mxcsr": "0x1f80",
+          "oracle": "0x7fc00001",
+          "native": "0xffc00001"
+        },
+        {
+          "a": "0xff800001",
+          "b": "0x7fc12345",
+          "mxcsr": "0x1f80",
+          "oracle": "0x7fc12345",
+          "native": "0xffc00001"
+        },
+        {
+          "a": "0x0",
+          "b": "0x1",
+          "mxcsr": "0x9f80",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x0",
+          "b": "0x80000001",
+          "mxcsr": "0x9f80",
+          "oracle": "0x80000001",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x0",
+          "b": "0x7fffff",
+          "mxcsr": "0x9f80",
+          "oracle": "0x7fffff",
+          "native": "0x0"
+        },
+        {
+          "a": "0x80000000",
+          "b": "0x1",
+          "mxcsr": "0x9f80",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x80000000",
+          "b": "0x80000001",
+          "mxcsr": "0x9f80",
+          "oracle": "0x80000001",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x80000000",
+          "b": "0x7fffff",
+          "mxcsr": "0x9f80",
+          "oracle": "0x7fffff",
+          "native": "0x0"
+        },
+        {
+          "a": "0x1",
+          "b": "0x0",
+          "mxcsr": "0x9f80",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x1",
+          "b": "0x80000000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x1",
+          "b": "0x1",
+          "mxcsr": "0x9f80",
+          "oracle": "0x2",
+          "native": "0x0"
+        },
+        {
+          "a": "0x1",
+          "b": "0x80800000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x807fffff",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x80000001",
+          "b": "0x0",
+          "mxcsr": "0x9f80",
+          "oracle": "0x80000001",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x80000001",
+          "b": "0x80000000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x80000001",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x80000001",
+          "b": "0x80000001",
+          "mxcsr": "0x9f80",
+          "oracle": "0x80000002",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x80000001",
+          "b": "0x7fffff",
+          "mxcsr": "0x9f80",
+          "oracle": "0x7ffffe",
+          "native": "0x0"
+        },
+        {
+          "a": "0x80000001",
+          "b": "0x800000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x7fffff",
+          "native": "0x0"
+        }
+      ],
+      "difference_classes": {
+        "emulator_x87_NaN_priority": 80,
+        "emulator_FTZ_wrong_status_owner": 96
+      },
+      "unclassified_mismatches": []
+    },
+    {
+      "operation": "SUBSS",
+      "opcode": "f30f5cc1",
+      "evaluations": 36624,
+      "value_mismatches": 168,
+      "mxcsr_mismatches": 33512,
+      "first_value_mismatches": [
+        {
+          "a": "0x7f800001",
+          "b": "0x7fc12345",
+          "mxcsr": "0x1f80",
+          "oracle": "0x7fc12345",
+          "native": "0x7fc00001"
+        },
+        {
+          "a": "0x7fc00001",
+          "b": "0x7fc12345",
+          "mxcsr": "0x1f80",
+          "oracle": "0x7fc12345",
+          "native": "0x7fc00001"
+        },
+        {
+          "a": "0xff800001",
+          "b": "0x7f800001",
+          "mxcsr": "0x1f80",
+          "oracle": "0x7fc00001",
+          "native": "0xffc00001"
+        },
+        {
+          "a": "0xff800001",
+          "b": "0x7fc00001",
+          "mxcsr": "0x1f80",
+          "oracle": "0x7fc00001",
+          "native": "0xffc00001"
+        },
+        {
+          "a": "0xff800001",
+          "b": "0x7fc12345",
+          "mxcsr": "0x1f80",
+          "oracle": "0x7fc12345",
+          "native": "0xffc00001"
+        },
+        {
+          "a": "0x0",
+          "b": "0x1",
+          "mxcsr": "0x9f80",
+          "oracle": "0x80000001",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x0",
+          "b": "0x80000001",
+          "mxcsr": "0x9f80",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x0",
+          "b": "0x7fffff",
+          "mxcsr": "0x9f80",
+          "oracle": "0x807fffff",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x80000000",
+          "b": "0x1",
+          "mxcsr": "0x9f80",
+          "oracle": "0x80000001",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x80000000",
+          "b": "0x80000001",
+          "mxcsr": "0x9f80",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x80000000",
+          "b": "0x7fffff",
+          "mxcsr": "0x9f80",
+          "oracle": "0x807fffff",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x1",
+          "b": "0x0",
+          "mxcsr": "0x9f80",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x1",
+          "b": "0x80000000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x1",
+          "b": "0x80000001",
+          "mxcsr": "0x9f80",
+          "oracle": "0x2",
+          "native": "0x0"
+        },
+        {
+          "a": "0x1",
+          "b": "0x7fffff",
+          "mxcsr": "0x9f80",
+          "oracle": "0x807ffffe",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x1",
+          "b": "0x800000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x807fffff",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x80000001",
+          "b": "0x0",
+          "mxcsr": "0x9f80",
+          "oracle": "0x80000001",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x80000001",
+          "b": "0x80000000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x80000001",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x80000001",
+          "b": "0x1",
+          "mxcsr": "0x9f80",
+          "oracle": "0x80000002",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x80000001",
+          "b": "0x80800000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x7fffff",
+          "native": "0x0"
+        }
+      ],
+      "difference_classes": {
+        "emulator_x87_NaN_priority": 80,
+        "emulator_FTZ_wrong_status_owner": 88
+      },
+      "unclassified_mismatches": []
+    },
+    {
+      "operation": "MULSS",
+      "opcode": "f30f59c1",
+      "evaluations": 36624,
+      "value_mismatches": 1084,
+      "mxcsr_mismatches": 33720,
+      "first_value_mismatches": [
+        {
+          "a": "0x7f800001",
+          "b": "0x7fc12345",
+          "mxcsr": "0x1f80",
+          "oracle": "0x7fc12345",
+          "native": "0x7fc00001"
+        },
+        {
+          "a": "0x7fc00001",
+          "b": "0x7fc12345",
+          "mxcsr": "0x1f80",
+          "oracle": "0x7fc12345",
+          "native": "0x7fc00001"
+        },
+        {
+          "a": "0xff800001",
+          "b": "0x7f800001",
+          "mxcsr": "0x1f80",
+          "oracle": "0x7fc00001",
+          "native": "0xffc00001"
+        },
+        {
+          "a": "0xff800001",
+          "b": "0x7fc00001",
+          "mxcsr": "0x1f80",
+          "oracle": "0x7fc00001",
+          "native": "0xffc00001"
+        },
+        {
+          "a": "0xff800001",
+          "b": "0x7fc12345",
+          "mxcsr": "0x1f80",
+          "oracle": "0x7fc12345",
+          "native": "0xffc00001"
+        },
+        {
+          "a": "0x1",
+          "b": "0x3f800000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x1",
+          "b": "0xbf800000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x80000001",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x80000001",
+          "b": "0x3f800000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x80000001",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x80000001",
+          "b": "0xbf800000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x7fffff",
+          "b": "0x3f000000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x400000",
+          "native": "0x0"
+        },
+        {
+          "a": "0x7fffff",
+          "b": "0x3f800000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x7fffff",
+          "native": "0x0"
+        },
+        {
+          "a": "0x7fffff",
+          "b": "0xbf800000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x807fffff",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x800000",
+          "b": "0x3f000000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x400000",
+          "native": "0x0"
+        },
+        {
+          "a": "0x80800000",
+          "b": "0x3f000000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x80400000",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x3f000000",
+          "b": "0x7fffff",
+          "mxcsr": "0x9f80",
+          "oracle": "0x400000",
+          "native": "0x0"
+        },
+        {
+          "a": "0x3f000000",
+          "b": "0x800000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x400000",
+          "native": "0x0"
+        },
+        {
+          "a": "0x3f000000",
+          "b": "0x80800000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x80400000",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x3f800000",
+          "b": "0x1",
+          "mxcsr": "0x9f80",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x3f800000",
+          "b": "0x80000001",
+          "mxcsr": "0x9f80",
+          "oracle": "0x80000001",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x3f800000",
+          "b": "0x7fffff",
+          "mxcsr": "0x9f80",
+          "oracle": "0x7fffff",
+          "native": "0x0"
+        }
+      ],
+      "difference_classes": {
+        "emulator_x87_NaN_priority": 80,
+        "emulator_FTZ_wrong_status_owner": 1004
+      },
+      "unclassified_mismatches": []
+    },
+    {
+      "operation": "DIVSS",
+      "opcode": "f30f5ec1",
+      "evaluations": 36624,
+      "value_mismatches": 1114,
+      "mxcsr_mismatches": 34032,
+      "first_value_mismatches": [
+        {
+          "a": "0x7f800001",
+          "b": "0x7fc12345",
+          "mxcsr": "0x1f80",
+          "oracle": "0x7fc12345",
+          "native": "0x7fc00001"
+        },
+        {
+          "a": "0x7fc00001",
+          "b": "0x7fc12345",
+          "mxcsr": "0x1f80",
+          "oracle": "0x7fc12345",
+          "native": "0x7fc00001"
+        },
+        {
+          "a": "0xff800001",
+          "b": "0x7f800001",
+          "mxcsr": "0x1f80",
+          "oracle": "0x7fc00001",
+          "native": "0xffc00001"
+        },
+        {
+          "a": "0xff800001",
+          "b": "0x7fc00001",
+          "mxcsr": "0x1f80",
+          "oracle": "0x7fc00001",
+          "native": "0xffc00001"
+        },
+        {
+          "a": "0xff800001",
+          "b": "0x7fc12345",
+          "mxcsr": "0x1f80",
+          "oracle": "0x7fc12345",
+          "native": "0xffc00001"
+        },
+        {
+          "a": "0x1",
+          "b": "0x3f000000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x2",
+          "native": "0x0"
+        },
+        {
+          "a": "0x1",
+          "b": "0x3f800000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x1",
+          "b": "0xbf800000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x80000001",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x80000001",
+          "b": "0x3f000000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x80000002",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x80000001",
+          "b": "0x3f800000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x80000001",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x80000001",
+          "b": "0xbf800000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x7fffff",
+          "b": "0x3f800000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x7fffff",
+          "native": "0x0"
+        },
+        {
+          "a": "0x7fffff",
+          "b": "0xbf800000",
+          "mxcsr": "0x9f80",
+          "oracle": "0x807fffff",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x3f000000",
+          "b": "0x7f7fffff",
+          "mxcsr": "0x9f80",
+          "oracle": "0x100000",
+          "native": "0x0"
+        },
+        {
+          "a": "0x3f800000",
+          "b": "0x7f7fffff",
+          "mxcsr": "0x9f80",
+          "oracle": "0x200000",
+          "native": "0x0"
+        },
+        {
+          "a": "0xbf800000",
+          "b": "0x7f7fffff",
+          "mxcsr": "0x9f80",
+          "oracle": "0x80200000",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x7f800001",
+          "b": "0x7fc12345",
+          "mxcsr": "0x9f80",
+          "oracle": "0x7fc12345",
+          "native": "0x7fc00001"
+        },
+        {
+          "a": "0x7fc00001",
+          "b": "0x7fc12345",
+          "mxcsr": "0x9f80",
+          "oracle": "0x7fc12345",
+          "native": "0x7fc00001"
+        },
+        {
+          "a": "0xff800001",
+          "b": "0x7f800001",
+          "mxcsr": "0x9f80",
+          "oracle": "0x7fc00001",
+          "native": "0xffc00001"
+        },
+        {
+          "a": "0xff800001",
+          "b": "0x7fc00001",
+          "mxcsr": "0x9f80",
+          "oracle": "0x7fc00001",
+          "native": "0xffc00001"
+        }
+      ],
+      "difference_classes": {
+        "emulator_x87_NaN_priority": 80,
+        "emulator_FTZ_wrong_status_owner": 1034
+      },
+      "unclassified_mismatches": []
+    },
+    {
+      "operation": "MINSS",
+      "opcode": "f30f5dc1",
+      "evaluations": 36624,
+      "value_mismatches": 536,
+      "mxcsr_mismatches": 2888,
+      "first_value_mismatches": [
+        {
+          "a": "0x0",
+          "b": "0x1",
+          "mxcsr": "0x1fc0",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x0",
+          "b": "0x80000001",
+          "mxcsr": "0x1fc0",
+          "oracle": "0x80000001",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x0",
+          "b": "0x7fffff",
+          "mxcsr": "0x1fc0",
+          "oracle": "0x7fffff",
+          "native": "0x0"
+        },
+        {
+          "a": "0x80000000",
+          "b": "0x1",
+          "mxcsr": "0x1fc0",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x80000000",
+          "b": "0x80000001",
+          "mxcsr": "0x1fc0",
+          "oracle": "0x80000001",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x80000000",
+          "b": "0x7fffff",
+          "mxcsr": "0x1fc0",
+          "oracle": "0x7fffff",
+          "native": "0x0"
+        },
+        {
+          "a": "0x1",
+          "b": "0x1",
+          "mxcsr": "0x1fc0",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x1",
+          "b": "0x80000001",
+          "mxcsr": "0x1fc0",
+          "oracle": "0x80000001",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x1",
+          "b": "0x7fffff",
+          "mxcsr": "0x1fc0",
+          "oracle": "0x7fffff",
+          "native": "0x0"
+        },
+        {
+          "a": "0x1",
+          "b": "0x800000",
+          "mxcsr": "0x1fc0",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x1",
+          "b": "0x3f000000",
+          "mxcsr": "0x1fc0",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x1",
+          "b": "0x3f800000",
+          "mxcsr": "0x1fc0",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x1",
+          "b": "0x7f7fffff",
+          "mxcsr": "0x1fc0",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x1",
+          "b": "0x7f800000",
+          "mxcsr": "0x1fc0",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x80000001",
+          "b": "0x1",
+          "mxcsr": "0x1fc0",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x80000001",
+          "b": "0x80000001",
+          "mxcsr": "0x1fc0",
+          "oracle": "0x80000001",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x80000001",
+          "b": "0x7fffff",
+          "mxcsr": "0x1fc0",
+          "oracle": "0x7fffff",
+          "native": "0x0"
+        },
+        {
+          "a": "0x80000001",
+          "b": "0x800000",
+          "mxcsr": "0x1fc0",
+          "oracle": "0x80000001",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x80000001",
+          "b": "0x3f000000",
+          "mxcsr": "0x1fc0",
+          "oracle": "0x80000001",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x80000001",
+          "b": "0x3f800000",
+          "mxcsr": "0x1fc0",
+          "oracle": "0x80000001",
+          "native": "0x80000000"
+        }
+      ],
+      "difference_classes": {
+        "emulator_MINSS_returns_unconverted_operand": 536
+      },
+      "unclassified_mismatches": []
+    },
+    {
+      "operation": "CVTSS2SD",
+      "opcode": "f30f5ac0",
+      "evaluations": 32272,
+      "value_mismatches": 0,
+      "mxcsr_mismatches": 160,
+      "first_value_mismatches": [],
+      "difference_classes": {},
+      "unclassified_mismatches": []
+    },
+    {
+      "operation": "CVTSD2SS",
+      "opcode": "f20f5ac0",
+      "evaluations": 32224,
+      "value_mismatches": 1998,
+      "mxcsr_mismatches": 32064,
+      "first_value_mismatches": [
+        {
+          "a": "0x36a0000000000000",
+          "b": "0x0",
+          "mxcsr": "0x9f80",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x3800000000000000",
+          "b": "0x0",
+          "mxcsr": "0x9f80",
+          "oracle": "0x400000",
+          "native": "0x0"
+        },
+        {
+          "a": "0x371410cb849180c9",
+          "b": "0x3ea5bfc22a1fd8d1",
+          "mxcsr": "0x9f80",
+          "oracle": "0xa1",
+          "native": "0x0"
+        },
+        {
+          "a": "0xb73a802c09d30fce",
+          "b": "0xb94d6966e4e1fd0d",
+          "mxcsr": "0x9f80",
+          "oracle": "0x80000350",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0xb7154dae49f27a91",
+          "b": "0x28e5d87b037fe276",
+          "mxcsr": "0x9f80",
+          "oracle": "0x800000aa",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x379e00d2e0b2585d",
+          "b": "0xf63ebb76738b34cb",
+          "mxcsr": "0x9f80",
+          "oracle": "0xf007",
+          "native": "0x0"
+        },
+        {
+          "a": "0xb80ff9628351a995",
+          "b": "0x76ecf074f393f80e",
+          "mxcsr": "0x9f80",
+          "oracle": "0x807fe58a",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x37f218f52bcae21e",
+          "b": "0x2620784863722fa2",
+          "mxcsr": "0x9f80",
+          "oracle": "0x2431ea",
+          "native": "0x0"
+        },
+        {
+          "a": "0x376370e9a061963c",
+          "b": "0xca172294aa810060",
+          "mxcsr": "0x9f80",
+          "oracle": "0x1371",
+          "native": "0x0"
+        },
+        {
+          "a": "0x3756761467d2b4ca",
+          "b": "0x3d6ac8cf1a8d9072",
+          "mxcsr": "0x9f80",
+          "oracle": "0xb3b",
+          "native": "0x0"
+        },
+        {
+          "a": "0x37a6d9ea9b51ac40",
+          "b": "0x58f9cd78e2015a0",
+          "mxcsr": "0x9f80",
+          "oracle": "0x16d9f",
+          "native": "0x0"
+        },
+        {
+          "a": "0x37e1a6869184db51",
+          "b": "0xb0bb0dfa08da00f1",
+          "mxcsr": "0x9f80",
+          "oracle": "0x11a687",
+          "native": "0x0"
+        },
+        {
+          "a": "0x37ca20b6e687491e",
+          "b": "0xe6f25ad2ca30ac67",
+          "mxcsr": "0x9f80",
+          "oracle": "0x6882e",
+          "native": "0x0"
+        },
+        {
+          "a": "0x369c78de1d056e37",
+          "b": "0xdb53c735044ca151",
+          "mxcsr": "0x9f80",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x375fa5b1f6b3d02e",
+          "b": "0x631a76d0ab22585e",
+          "mxcsr": "0x9f80",
+          "oracle": "0xfd3",
+          "native": "0x0"
+        },
+        {
+          "a": "0x37f97d8ae643c71f",
+          "b": "0x7d38d9e6db5aebe8",
+          "mxcsr": "0x9f80",
+          "oracle": "0x32fb16",
+          "native": "0x0"
+        },
+        {
+          "a": "0x36940386e72e3174",
+          "b": "0x308ca632e3b8634b",
+          "mxcsr": "0x9f80",
+          "oracle": "0x1",
+          "native": "0x0"
+        },
+        {
+          "a": "0x372fea8c11aac82b",
+          "b": "0x27875614c2f1700d",
+          "mxcsr": "0x9f80",
+          "oracle": "0x1ff",
+          "native": "0x0"
+        },
+        {
+          "a": "0xb7514deb258cda71",
+          "b": "0x3dcd75d7e74551eb",
+          "mxcsr": "0x9f80",
+          "oracle": "0x800008a7",
+          "native": "0x80000000"
+        },
+        {
+          "a": "0x36fad97e0d3b93c9",
+          "b": "0x677da000f0d651d5",
+          "mxcsr": "0x9f80",
+          "oracle": "0x36",
+          "native": "0x0"
+        }
+      ],
+      "difference_classes": {
+        "emulator_FTZ_wrong_status_owner": 1998
+      },
+      "unclassified_mismatches": []
+    },
+    {
+      "operation": "SQRTSD",
+      "opcode": "f20f51c0",
+      "evaluations": 32224,
+      "value_mismatches": 0,
+      "mxcsr_mismatches": 32088,
+      "first_value_mismatches": [],
+      "difference_classes": {},
+      "unclassified_mismatches": []
+    },
+    {
+      "operation": "CVTTSS2SI",
+      "opcode": "f30f2cc0",
+      "evaluations": 32272,
+      "value_mismatches": 0,
+      "mxcsr_mismatches": 30848,
+      "first_value_mismatches": [],
+      "difference_classes": {},
+      "unclassified_mismatches": []
+    }
+  ],
+  "seconds": 3.4480087499832734,
+  "passed": false
+}

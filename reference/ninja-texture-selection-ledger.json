@@ -1,0 +1,67 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "evidence": {
+    "77f3d0": {
+      "id": "ev_2d1191528272b6aa9bb3f5e6edcb64c9dcc630b6613e6ba488fa257d211c9f13",
+      "path": "_reference/sadx/ghidra-action-fp-recovery/extra-77f3d0.json",
+      "sha256": "27324913e64aff621e350d2f0872fbf2223a15a13cf9e6fb0fb2c3b4c676464c"
+    },
+    "77f440": {
+      "id": "ev_396efff0678fd78ca737c4199d9781b4fd00dde4d403de7052ce69d3ee336221",
+      "path": "_reference/sadx/ghidra-action-fp-recovery/extra-77f440.json",
+      "sha256": "a8d3c58f7d83d467cec12b78b396a508e97340c32ea3ea25ce1436fdf958e4e2"
+    },
+    "78cf20": {
+      "id": "ev_62ad6ef39b7259413cce0c1b5635dcafebbd3ac4a759a97ec025d8be9ba0f9c5",
+      "path": "_reference/sadx/ghidra-action-fp-recovery/extra-78cf20.json",
+      "sha256": "97dd8f6f31e9cb23e1a116c2a38f08c30fc1b14c96cf4ccc48f478c0ec488258"
+    },
+    "78cdc0": {
+      "id": "ev_1bdfca595761ae729e01fb92a6c7cad3ff6c9c94f069c708feed46b816c28c6d",
+      "path": "_reference/sadx/ghidra-action-fp-recovery/extra-78cdc0.json",
+      "sha256": "615ff7665e5716bc77c8decdd5c4df4c9cd35272c506c0f9f7df4f4eeb522611"
+    },
+    "78b840": {
+      "id": "ev_8b8e25f89a03eda8f3d1911e4c014f388ec56ba035bbb5fab2ca81ce67420459",
+      "path": "_reference/sadx/ghidra-action-fp-recovery/extra-78b840.json",
+      "sha256": "bb3ba3c3f4eebec3ff0ac25a9e7095838c5b3f148c69dbf42fc141637dffe282"
+    }
+  },
+  "owner": "Existing NinjaTextureListOwner/NinjaTextureMemoryReference only; source scalar facts appended and runtime_owner optional refined in approved narrow header patch",
+  "source_semantics": [
+    "77f3d0 stores current list before reading its array; knownnull completes with1",
+    "77f440 checks current-list nullness, not advertised count; raw32 index uses12-byte modulo32 addressing",
+    "Requested3ce7128 and active3d129a0 are distinct, cache hit may preserve a different prior active owner sharing the global ID",
+    "78cf20 eagerly reads header0 then78cdc0 header20/4/0; source surface and device remain unconsumed on non-paletted cache hit",
+    "Actual completed renderer call commits cache ID then active memory even if its captured HRESULT reports failure",
+    "Palette version at42 is stored before color-pointer read and surface lock; mutation remains on failure",
+    "78b840 emits actual states(22,1),(137,0),(145,1) through sole NinjaRenderState owner"
+  ],
+  "verification": {
+    "cases": 683,
+    "passed": true,
+    "mismatches": [],
+    "compiler": "Clang 21.0.0 (clang-2100.3.34.2); ARM64 C++17 O2 original texture list/index/cache and render triplet",
+    "probe_sha256": "a638a7f837bdc5ea8d82e114c95382df18caf9603eaf11e8e1379941c1ea13df",
+    "case_sha256": "6692319c20a036952dbebb8e1ab0bc19cd733361d4022a513aec3339ae250ce0",
+    "sources_sha256": {
+      "src/ninja_texture_selection.hpp": "297bc702bf024af9522884a6d0b26a116c153c0926d7b3d456c677c2a044d3e1",
+      "src/ninja_texture_selection.cpp": "dcc4ac252bfb2b34ee4305328b058ab8d7e7363271fbcdc608c92d97f2829d0f",
+      "src/ninja_sprite_queue.hpp": "6e91ac7848b38ac9537d3e6dcd07e212203d07381c733cf8041b5bdfcc6f63b9",
+      "tests/native_ninja_texture_selection_probe.cpp": "ee66eb27b54a2f79f5dd66eccc4b2b7c4240326fe2d2009e5add076ec53b9edf",
+      "tools/verify_original_ninja_texture_selection.py": "5d798d64de5ce91a6a8be7d4db2a51670052a617a6db2c8a0c1ff06cbb3eab7d"
+    },
+    "optimized_unit": true,
+    "ubsan_unit": true,
+    "report": "original-ninja-texture-selection-comparison.json"
+  },
+  "native_binding": "Port_sources owns the typed Metal sprite consumer and validates explicit resource mapping, identical archive/ordinal/runtime ownership, ready resource and captured bind operand. No arbitrary void cast or bubble-index fallback",
+  "remaining": [
+    "Dirty palette lock/data conversion/unlock branch remains unavailable at actual78ce5a, with preceding42 revision store retained",
+    "Original77f7f0 registry allocation/refcount/reuse and lifecycle cleanup are not inferred from selection",
+    "Unmapped source surface words remain unresolved at native renderer boundary; raw source pointer values never become GPU handles",
+    "Source array words outside the owned entry+8 representation remain explicit boundaries, including unsupported cross-field byte addresses",
+    "External D3D receipts are declared synthetic source profiles; physical updated-mod/NVIDIA cache behavior remains unobserved"
+  ],
+  "status": "Selection source/test/probe/verifier and approved MemoryReference patch frozen for parent integration"
+}

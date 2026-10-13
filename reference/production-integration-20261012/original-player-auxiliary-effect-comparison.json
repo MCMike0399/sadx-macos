@@ -1,0 +1,2180 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "native_library_sha256": "d21c3ba23621bdad9396624b2e06beeec99233c6907aae9d279140ec2ec9281c",
+  "table_sha256": "c852bb548014ed621db8fc5c1cbb2abfcee449e0172801438f32526a5ba32201",
+  "case_blob": {
+    "path": "_reference/sadx/production-integration-20261012/original-player-auxiliary-effect-comparison.cases.bin",
+    "sha256": "1c7d679bad701f238afe77d9b913359bbb432de51410a567083635238ece09f7",
+    "cases": 43,
+    "record": "16 LE uint32 words"
+  },
+  "source_functions": {
+    "0x4a2b60": {
+      "size": 9,
+      "sha256": "c2b4f07706f7d480f744c6bca581b41d997e891fee44743e207ec6ad8d8a1604"
+    },
+    "0x4a2ae0": {
+      "size": 123,
+      "sha256": "228dcd2b5c9a555a8b6a991946aa9bfeab51d876854d73c109d2a983274b5a71"
+    },
+    "0x441970": {
+      "size": 26,
+      "sha256": "7d7deb96de759098d44aeeb18fe6e205463a31d6d9c7970734a62560039e8ea4"
+    },
+    "0x4144e0": {
+      "size": 8,
+      "sha256": "59d4c6719d198fa7a265fd96993d62ea4f31baf2a95dcf62f77941f970da84d6"
+    },
+    "0x4f88a0": {
+      "size": 3,
+      "sha256": "4bc724f3b1d0caf4fe369c18cba3102e6c4ea057f63fe1587e3973134a7f755e"
+    },
+    "0x4a0720": {
+      "size": 62,
+      "sha256": "9468c8bdc8d10c8c50c978267bd272420dadd72f39180cf6022b04b9c8510c19"
+    },
+    "0x4a2570": {
+      "size": 1170,
+      "sha256": "f8b42b589b68614a2a76f78f17f69208565fcd3987960276187d6c396d1414d6"
+    },
+    "0x644340": {
+      "size": 127,
+      "sha256": "5d9597d3df45db01a3f221616452053d917b58a8cce4aad61f07da16cc2c16d0"
+    }
+  },
+  "native_sources": {
+    "src/player_auxiliary_effect.cpp": "86a978e3ad810ce93d0a80a78753df2814ef03f21ec01bca67adef3c4060958e",
+    "src/player_auxiliary_effect.hpp": "981fd0fa441c33824990f24deefeebc8d4616cd62f489737673f1bf0eaddc7c3",
+    "src/task.cpp": "b180f52ef1f05e67f7ef951b63c20cc932ea032e45ed885fbceecf95f41e3aaa",
+    "src/task.hpp": "aeb2516438bad85ee08e0578e66fe3b5a0b89d1904e0cc78efcf14b39fce6dde",
+    "src/task_work.cpp": "0fd985b4b3f6d71de7f4947206e6a214edc107e3a5285e15c70e50767e2b10b6",
+    "src/player_startup.cpp": "e027e38ba29b0e41ef19d13231e0a5e41bc6b0bc255f0a43c96711bef7b3fead",
+    "tests/native_player_auxiliary_effect_probe.cpp": "77b22a4351f86018ebc93c3419edb2c5cfbe57733ac315d07e59ecc5ab868bd6",
+    "tools/verify_original_player_auxiliary_effect.py": "ff60e2122d6bfbd5561feb545583b8f0daa3a6785901242c962750f82e44728b"
+  },
+  "profiles": [
+    {
+      "cw": "0x7f",
+      "cases": 43,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "callback_mismatches": 0,
+      "control_mismatches": 0,
+      "flag_mismatches": 5,
+      "examples": [
+        {
+          "case": 38,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            127,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 39,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            127,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 40,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            127,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 41,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            127,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 42,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            127,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        }
+      ]
+    },
+    {
+      "cw": "0x47f",
+      "cases": 43,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "callback_mismatches": 0,
+      "control_mismatches": 0,
+      "flag_mismatches": 5,
+      "examples": [
+        {
+          "case": 38,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            1151,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 39,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            1151,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 40,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            1151,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 41,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            1151,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 42,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            1151,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        }
+      ]
+    },
+    {
+      "cw": "0x87f",
+      "cases": 43,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "callback_mismatches": 0,
+      "control_mismatches": 0,
+      "flag_mismatches": 5,
+      "examples": [
+        {
+          "case": 38,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            2175,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 39,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            2175,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 40,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            2175,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 41,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            2175,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 42,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            2175,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        }
+      ]
+    },
+    {
+      "cw": "0xc7f",
+      "cases": 43,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "callback_mismatches": 0,
+      "control_mismatches": 0,
+      "flag_mismatches": 5,
+      "examples": [
+        {
+          "case": 38,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            3199,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 39,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            3199,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 40,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            3199,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 41,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            3199,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 42,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            3199,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        }
+      ]
+    },
+    {
+      "cw": "0x27f",
+      "cases": 43,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "callback_mismatches": 0,
+      "control_mismatches": 0,
+      "flag_mismatches": 5,
+      "examples": [
+        {
+          "case": 38,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            639,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 39,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            639,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 40,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            639,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 41,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            639,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 42,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            639,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        }
+      ]
+    },
+    {
+      "cw": "0x67f",
+      "cases": 43,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "callback_mismatches": 0,
+      "control_mismatches": 0,
+      "flag_mismatches": 5,
+      "examples": [
+        {
+          "case": 38,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            1663,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 39,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            1663,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 40,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            1663,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 41,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            1663,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 42,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            1663,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        }
+      ]
+    },
+    {
+      "cw": "0xa7f",
+      "cases": 43,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "callback_mismatches": 0,
+      "control_mismatches": 0,
+      "flag_mismatches": 5,
+      "examples": [
+        {
+          "case": 38,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            2687,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 39,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            2687,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 40,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            2687,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 41,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            2687,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 42,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            2687,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        }
+      ]
+    },
+    {
+      "cw": "0xe7f",
+      "cases": 43,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "callback_mismatches": 0,
+      "control_mismatches": 0,
+      "flag_mismatches": 5,
+      "examples": [
+        {
+          "case": 38,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            3711,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 39,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            3711,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 40,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            3711,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 41,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            3711,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 42,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            3711,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        }
+      ]
+    },
+    {
+      "cw": "0x37f",
+      "cases": 43,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "callback_mismatches": 0,
+      "control_mismatches": 0,
+      "flag_mismatches": 5,
+      "examples": [
+        {
+          "case": 38,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            895,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 39,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            895,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 40,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            895,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 41,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            895,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 42,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            895,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        }
+      ]
+    },
+    {
+      "cw": "0x77f",
+      "cases": 43,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "callback_mismatches": 0,
+      "control_mismatches": 0,
+      "flag_mismatches": 5,
+      "examples": [
+        {
+          "case": 38,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            1919,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 39,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            1919,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 40,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            1919,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 41,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            1919,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 42,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            1919,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        }
+      ]
+    },
+    {
+      "cw": "0xb7f",
+      "cases": 43,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "callback_mismatches": 0,
+      "control_mismatches": 0,
+      "flag_mismatches": 5,
+      "examples": [
+        {
+          "case": 38,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            2943,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 39,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            2943,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 40,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            2943,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 41,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            2943,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 42,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            2943,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        }
+      ]
+    },
+    {
+      "cw": "0xf7f",
+      "cases": 43,
+      "state_mismatches": 0,
+      "boundary_mismatches": 0,
+      "callback_mismatches": 0,
+      "control_mismatches": 0,
+      "flag_mismatches": 5,
+      "examples": [
+        {
+          "case": 38,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            3967,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 39,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            3967,
+            34,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 40,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            3967,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 41,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            3967,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        },
+        {
+          "case": 42,
+          "name": "source ftol nonfinite/subnormal index",
+          "fields": [
+            "flag"
+          ],
+          "native": [
+            18,
+            4859527,
+            4463360,
+            0,
+            4860768,
+            0,
+            0,
+            537083968,
+            2,
+            2,
+            537084032,
+            3967,
+            1,
+            0,
+            1,
+            0
+          ],
+          "source_boundary": "0x4a2687",
+          "source_callbacks": [
+            "0x4a2b60",
+            "0x0",
+            "0x0"
+          ],
+          "source_flags": "0x0",
+          "first_byte_offsets": []
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "Exact initializers/getters/destructor and update prefix; no source callee overlays",
+    "Unlifted update calls and unknown facts stop before the required source instruction; no full update/renderer or playable-game claim",
+    "Heap/task initialization starts after unlifted acquisition, as explicit fixture",
+    "Task pool payload excluded from arena byte comparison because native graph owns it; live callback identities compared separately, pool semantics have separate instruction oracle",
+    "Shadow source pointer bytes in probe snapshot encode the authoritative owned table selection; production never casts them",
+    "All FP status differences retained; Unicorn FLD SNaN conversion is not the hardware specification",
+    "No original Windows hardware or initialized mods runtime observed"
+  ],
+  "supported_state_boundaries_callbacks_control_match": true,
+  "strict_emulator_match": false
+}

@@ -1,0 +1,18 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "badae8844f8f702d08bdfa38e3e02cebfb28ada8924e73f8eb35d722a1318fae",
+ "source_files": {
+  "src/model_dlls.hpp": "c9150d03a582d6957aae3c659de719effd439b502d02cd0ddadcaba8da0cf5b1",
+  "src/model_dlls.cpp": "8e63e2c7e26e77c9d901a42c1f8826807a4b56b883754ecf76ec6f1432616f1b",
+  "src/executable_image.cpp": "8a6df112fa3f374a27708c43ef7d8f8223c2dc96beb0841cbaef4b0faac64eb9",
+  "tests/native_model_dlls_probe.cpp": "a467e1be5095b327f132c941dc5b3c861018a41f0a37791e057f034a501f5aff",
+  "tools/verify_original_model_dlls.py": "792f6f4fa7338d8f2e64ec6fc36048b5cb065a1c6a35ae1d33e6e8637d3c42c2"
+ },
+ "original_range_sha256": "257d0a2533da34018d9991230b97c8694cd878452e7fa90f73fc5fe4096b3003",
+ "bound_globals": 85,
+ "cases": 45,
+ "mismatch_count": 0,
+ "mismatches": [],
+ "bindings_match": true,
+ "limits": "Model-DLL bindings 401ac0 (this = 3ab9170, from the 7c4e90 static\ninitializer) against original instructions. LoadLibraryA and GetProcAddress\n(IAT 7db040/7db044) are fixtures: a slot's DLL is present or absent per case\n(case-insensitive name match), and GetProcAddress resolves names against that\nDLL's real export table at the native base layout (0x20000000 upward, 64 KiB\naligned; slot 0 resolves CHRMODELS_orig.dll behind the 0x10000000 proxy\nhandle). Compared: the seven handles at 3ab9170 and every bound global (an\nabsent slot leaves its globals untouched, so they are pre-filled distinctly).\n"
+}

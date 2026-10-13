@@ -1,0 +1,26 @@
+{
+  "scope": "Full local413dd0 orchestration with required real input/scene/mode boundaries",
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "native_sources": {
+    "sadx-native/src/game_logic.hpp": "fe3181a11015046c2ff54d28dc91c0865b91cb3a48387a3124bd23d05204b529",
+    "sadx-native/src/game_logic.cpp": "92bc9b2fb1daedfbb638ee76932810b04263807c8860d64e0a8e6616469d41ec",
+    "sadx-native/tests/game_logic.cpp": "ecf067abd5a06db79310fda6a800277b98760842789b4b1d4f6b81f5d16fcca7",
+    "sadx-native/tests/native_game_logic_probe.cpp": "3ec98d23a007786ee7354f101cdf8a7d6217b72f87c1f25e5d9896564e5f9b2b",
+    "sadx-native/tools/verify_original_game_logic.py": "1a53765c482be43353e28b7db6bd3adfdd95becda5ccb109cfe8ea3c42bafff2"
+  },
+  "standalone_comparison": "_reference/sadx/original-game-logic-comparison.json",
+  "cases": 170,
+  "mismatches": 0,
+  "comparison_report_sha256": "4380a2029c2bfb7361ee45122298b2ed5e1ea771b4efd8782f6cd1d1f4283ad7",
+  "optimized_tests": "passed; source order, pressed union, pointer replacement, failure/cancellation",
+  "real_support_composition": "passed with actual40ec80 and413920 native owners, including retained division-failure diagnostic",
+  "sanitizer_tests": "UBSan passed",
+  "production_integration": "_reference/sadx/production-integration-20261012/game-logic-gate.json",
+  "limits": [
+    "Input/scene/mode callbacks are explicit fixtures in the original-instruction comparison.",
+    "No physical input, complete scene execution, presentation, cadence or whole-game loop has been established.",
+    "The native timing state is borrowed from the support owner; no duplicated timing words."
+  ],
+  "production_comparison": "_reference/sadx/production-integration-20261012/original-game-logic-comparison.json",
+  "production_comparison_sha256": "fe6f9eb3499ac8604c205354f9ceafcaecbcce39f565c55b1ed115749532bb41"
+}

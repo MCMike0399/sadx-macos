@@ -1,0 +1,2 @@
+0x645270: mov edx, 0x2bcc170
+0x645275: jmp sub_64b3a4

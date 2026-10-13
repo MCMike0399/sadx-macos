@@ -1,0 +1,17 @@
+
+void FUN_00495ba0(void)
+
+{
+  int iVar1;
+  int unaff_ESI;
+  
+  if ((DAT_03b18db5 != '\0') && (*(short *)(unaff_ESI + 0x124) == 0x92)) {
+    iVar1 = FUN_0040b860(2,3,&LAB_00495a50);
+    if (iVar1 != 0) {
+      *(undefined4 *)(*(int *)(iVar1 + 0x20) + 0xc) = 5;
+    }
+  }
+  *(undefined2 *)(unaff_ESI + 0x124) = 0xb;
+  return;
+}
+

@@ -1,0 +1,39 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "9841f37279451b404d4b85337d9d892518c9a5488ae51a0301379245adb6e4a9",
+ "source_files": {
+  "src/d3dx_math.hpp": "3a32d6b1f2d901a0d4f502f9710e21a231b87f65d2e78395f0da9588a3df4f0e",
+  "src/d3dx_math.cpp": "67ae3cd9393bd8ba163c6d8cf31a50112621921c3a219580537bc2ec433ad1f1",
+  "src/sse_math.cpp": "309c30e7490f787e30d6a5737b4d3542ac8f894c16c058320bc56ba51ae0290f",
+  "tests/native_d3dx_project_probe.cpp": "9b9e8fe1f278f36b42b5db31ff1997781528736d700b5dc9d57a45a27c9e604b",
+  "tools/verify_original_d3dx_project.py": "32d1ccaa4e2a5184761fb3deb7666a507d894912e629cc806c324d1661884d12"
+ },
+ "original_ranges_sha256": {
+  "0x772615-0x7727a2": "92b14c0c20d229007b58ad27ce5d457047e2a00f2c10785e2f9a6ef80205f430",
+  "0x774150-0x774243": "2e4a96d6d2c559f1aebccd08e4050963b11fd68fb458f536f55d35c24c14ad27",
+  "0x774310-0x774456": "63512349cc3bd37f37668d4d47d8fabe516e1ceb56fc824ee2b472a841bbe2db"
+ },
+ "cases": 4000,
+ "source_outcomes": {
+  "arm4:viewport0": 266,
+  "arm6:viewport0": 228,
+  "arm2:viewport1": 225,
+  "arm2:viewport0": 238,
+  "arm6:viewport1": 237,
+  "arm5:viewport0": 255,
+  "arm7:viewport1": 240,
+  "arm5:viewport1": 239,
+  "arm3:viewport0": 263,
+  "arm7:viewport0": 245,
+  "arm1:viewport0": 259,
+  "arm4:viewport1": 234,
+  "arm1:viewport1": 247,
+  "arm0:viewport0": 272,
+  "arm0:viewport1": 283,
+  "arm3:viewport1": 269
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "state_traces_match": true,
+ "limits": "D3DX8 772615 (Vec3Project) against its original instructions, with the\nSSE-path 774310 (MatrixMultiply) and 774150 (Vec3TransformCoord).\n\nThe dispatch slots are written as 77350c leaves them on an SSE CPU without\n3DNow! (389b784 = 774310, 389b7a0 = 774150); 77350c is not executed. Each case\ncalls 772615 (stdcall) with any of the projection, view, world and viewport\npointers NULL, and the matrices at 16-byte aligned or misaligned (+8)\naddresses, which selects 774150's movaps or movlps path. RCPPS is Unicorn's\n(QEMU's float division), not a real CPU's estimate; the native probe uses the\nsame division model. Cases keep at most one NaN source: Unicorn applies QEMU's\nx87 NaN rule (larger significand) to SSE operands, where hardware SSE returns\nthe first operand's NaN. MXCSR is compared without its six exception flags,\nwhich Unicorn 2.1.4 does not raise. Compared: the three output floats.\n"
+}

@@ -1,0 +1,28 @@
+
+void FUN_00791990(void)
+
+{
+  int in_ECX;
+  
+  if (in_ECX == 0) {
+    (**(code **)(*DAT_03d128b0 + 200))(DAT_03d128b0,0x1b,0);
+    (**(code **)(*DAT_03d128b0 + 0xfc))(DAT_03d128b0,0,4,3);
+    (**(code **)(*DAT_03d128b0 + 200))(DAT_03d128b0,0x18,0);
+  }
+  else {
+    if (in_ECX == 1) {
+      (**(code **)(*DAT_03d128b0 + 200))(DAT_03d128b0,0x1b,1);
+      (**(code **)(*DAT_03d128b0 + 0xfc))(DAT_03d128b0,0,4,2);
+      (**(code **)(*DAT_03d128b0 + 200))(DAT_03d128b0,0x18,0);
+      return;
+    }
+    if (in_ECX == 2) {
+      (**(code **)(*DAT_03d128b0 + 200))(DAT_03d128b0,0x1b,1);
+      (**(code **)(*DAT_03d128b0 + 0xfc))(DAT_03d128b0,0,4,4);
+      (**(code **)(*DAT_03d128b0 + 200))(DAT_03d128b0,0x18,0x10);
+      return;
+    }
+  }
+  return;
+}
+

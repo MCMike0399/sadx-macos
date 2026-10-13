@@ -1,0 +1,25 @@
+    ecx = arg_4;
+    if (ecx >= 0x0) {
+            if (ecx < 0x10) {
+                    eax = arg_0;
+                    if (eax != 0x0) {
+                            eax = eax[0xe];
+                            if (eax == 0x0) {
+                                    eax = eax | 0xffffffff;
+                            }
+                            else {
+                                    eax = *(int8_t *)((ecx + ecx * 0x2 << 0x4) + eax[0x3] + 0x1) & 0xff;
+                            }
+                    }
+                    else {
+                            eax = eax | 0xffffffff;
+                    }
+            }
+            else {
+                    eax = eax | 0xffffffff;
+            }
+    }
+    else {
+            eax = eax | 0xffffffff;
+    }
+    return eax;

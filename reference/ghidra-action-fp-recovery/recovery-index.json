@@ -1,0 +1,638 @@
+[
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/action-fp-texture-complete.json",
+    "is_error": false,
+    "evidence_id": null,
+    "operation": null,
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/animation-43f230.json",
+    "is_error": false,
+    "evidence_id": "ev_2bd0eaf48a9ae57ec229aff2cdc9b84901e659d0ec47c3ce15d6d18b18a00429",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/animation-43f2a0.json",
+    "is_error": false,
+    "evidence_id": "ev_c4f74422819314f3f0bb9f2a0b165a7eec6c0d5ede6e0079005a24c771bf23bc",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/animation-43f9f0.json",
+    "is_error": false,
+    "evidence_id": "ev_3b5c9b6fd9d2107768fd172a7fbe4b7ef70f2f5dc5d23921c92c16d6ec6baaeb",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/animation-446910.json",
+    "is_error": false,
+    "evidence_id": "ev_02396e3f942d98a4fc1b0fcb0a64487154e2aefc3b4786879119458fd8e08a91",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/animation-446950.json",
+    "is_error": false,
+    "evidence_id": "ev_41db8e2f9350c3a4dfe3a5945eee34733ccfea5dd15625a6a3a380b8f2262088",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/animation-44a800.json",
+    "is_error": false,
+    "evidence_id": "ev_3f3fa508f3bdbe61c674826c08a616ce500311e2f9504bc89a0a99197b07cc2b",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/animation-producer-4383a0.json",
+    "is_error": false,
+    "evidence_id": "ev_a66cf3fac8f9c2bc1c031a50a3385656f709fc2c9940659c20ee20c6efd26706",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/animation-producer-4383d0.json",
+    "is_error": false,
+    "evidence_id": "ev_8c1f008e7a2c9b217bcd9286a727008b668a5907dc4aeceea433069d79bb772c",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/animation-producer-439400.json",
+    "is_error": false,
+    "evidence_id": "ev_3a984de7b6901165a2f5f1c3fa08a64716fbea5db27dfb7a5e8a47d88742a63c",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/animation-producer-439fc0.json",
+    "is_error": false,
+    "evidence_id": "ev_180bcd83b7ef8e75f045e6245dcc3f2bd8126a41ec3e55358230115196fab8b3",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/animation-producer-7cec90.json",
+    "is_error": true,
+    "evidence_id": null,
+    "operation": null,
+    "error": {
+      "code": "invalid_request",
+      "category": "invalid_input",
+      "message": "Analysis input is invalid. Check the arguments and try again.",
+      "retryable": true,
+      "remediation": {
+        "action": "Correct the listed arguments and retry."
+      },
+      "details": {
+        "operation": "analyze_function",
+        "issues": [
+          {
+            "path": [],
+            "reason": "invalid_value",
+            "message": "No procedure exists at the requested address: 0x7cec90"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/animation-xrefs-38f6e7c.json",
+    "is_error": false,
+    "evidence_id": "ev_d25935e240595f8d156521f19a33e9fbe564a9d620f92808f610b3aa0c461b33",
+    "operation": "xrefs",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/animation-xrefs-3c56210.json",
+    "is_error": false,
+    "evidence_id": "ev_3b8365d0706e673e9ef75ac664c612f9a14b5dde45cb5ee578793ec65c0e5344",
+    "operation": "xrefs",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/complete-action-fp-animation-texture-queue.json",
+    "is_error": false,
+    "evidence_id": null,
+    "operation": null,
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/extra-495080.json",
+    "is_error": false,
+    "evidence_id": "ev_87d17081f86ed7742f69c053624f20cd15c20ef67dbaf1d731f8758a813c2d4a",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/extra-770295.json",
+    "is_error": false,
+    "evidence_id": "ev_446c9dedac9721e6f81f43c257846bf6c168598ded6f9ed4c15cf9a224b31859",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/extra-77f3d0.json",
+    "is_error": false,
+    "evidence_id": "ev_2d1191528272b6aa9bb3f5e6edcb64c9dcc630b6613e6ba488fa257d211c9f13",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/extra-77f440.json",
+    "is_error": false,
+    "evidence_id": "ev_396efff0678fd78ca737c4199d9781b4fd00dde4d403de7052ce69d3ee336221",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/extra-78b840.json",
+    "is_error": false,
+    "evidence_id": "ev_8b8e25f89a03eda8f3d1911e4c014f388ec56ba035bbb5fab2ca81ce67420459",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/extra-78c5a0.json",
+    "is_error": false,
+    "evidence_id": "ev_538257a4b8c5fe4efafbed45e64ce05ea0e14bf9563f2d0ede1f929feb3c294f",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/extra-78cdc0.json",
+    "is_error": false,
+    "evidence_id": "ev_1bdfca595761ae729e01fb92a6c7cad3ff6c9c94f069c708feed46b816c28c6d",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/extra-78cf20.json",
+    "is_error": false,
+    "evidence_id": "ev_62ad6ef39b7259413cce0c1b5635dcafebbd3ac4a759a97ec025d8be9ba0f9c5",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/extra-78dbe0.json",
+    "is_error": false,
+    "evidence_id": "ev_685f753969366dc16ea135a00445b38ea76db02f6bb69de22df8585d7033d0cb",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/extra-791940.json",
+    "is_error": false,
+    "evidence_id": "ev_99d27d24ec6924d4366c4e2a5d8b7519e6b4d0f8cd10b0c4c062ba0e915e4494",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/extra-791990.json",
+    "is_error": false,
+    "evidence_id": "ev_512f305a2768e634c52e3e0e6f4c282b070d0c1599e1cee38224f7caed4b2531",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/extra-791a50.json",
+    "is_error": false,
+    "evidence_id": "ev_feb290914c8d74a7451ff5dcea27c81ac8910d2bcf23e3b27c164ee8ea8647eb",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/extra-791ab0.json",
+    "is_error": false,
+    "evidence_id": "ev_89291099fcd2db3c8f8e83d2c4d0cf2209e99abd6734cb12568ffda25aebd73e",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/extra-791ad0.json",
+    "is_error": false,
+    "evidence_id": "ev_b1baaacd47aba92b159c1fe9573b454fbd1a2f21d95028ca1325435da88756e7",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/first-action-fp-sprites.json",
+    "is_error": false,
+    "evidence_id": null,
+    "operation": null,
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/open.json",
+    "is_error": false,
+    "evidence_id": null,
+    "operation": null,
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/project-depth-772615.json",
+    "is_error": false,
+    "evidence_id": "ev_f60a0492b7253c9aa67bbe59b61ad0f028597ef8ab2ec1ed74fa5a43193ad6f8",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/project-depth-77350c.json",
+    "is_error": false,
+    "evidence_id": "ev_ea8cea04d915c9c37a15d962aa9706cf87b919550ac0e433ba267a40818657bd",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/project-depth-7738e5.json",
+    "is_error": false,
+    "evidence_id": "ev_ca24a8a72cca070e0f1f6c18f0f9a62d36ed918cc19f933d22d82b4fd3116e2c",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/project-depth-774150.json",
+    "is_error": true,
+    "evidence_id": null,
+    "operation": null,
+    "error": {
+      "code": "invalid_request",
+      "category": "invalid_input",
+      "message": "Analysis input is invalid. Check the arguments and try again.",
+      "retryable": true,
+      "remediation": {
+        "action": "Correct the listed arguments and retry."
+      },
+      "details": {
+        "operation": "analyze_function",
+        "issues": [
+          {
+            "path": [],
+            "reason": "invalid_value",
+            "message": "No procedure exists at the requested address: 0x774150"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/project-depth-774310.json",
+    "is_error": true,
+    "evidence_id": null,
+    "operation": null,
+    "error": {
+      "code": "invalid_request",
+      "category": "invalid_input",
+      "message": "Analysis input is invalid. Check the arguments and try again.",
+      "retryable": true,
+      "remediation": {
+        "action": "Correct the listed arguments and retry."
+      },
+      "details": {
+        "operation": "analyze_function",
+        "issues": [
+          {
+            "path": [],
+            "reason": "invalid_value",
+            "message": "No procedure exists at the requested address: 0x774310"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/project-depth-77bb57.json",
+    "is_error": false,
+    "evidence_id": "ev_04591110263f89c9b3a51333968398c6920bbd4ef9a55b15616d4621bcaefa4c",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/queue-default-403d30.json",
+    "is_error": false,
+    "evidence_id": "ev_a426dae5f55f498674a9a0da922b6c5348149704e10e1b893638626704d4d013",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/queue-default-77080a.json",
+    "is_error": true,
+    "evidence_id": null,
+    "operation": null,
+    "error": {
+      "code": "invalid_request",
+      "category": "invalid_input",
+      "message": "Analysis input is invalid. Check the arguments and try again.",
+      "retryable": true,
+      "remediation": {
+        "action": "Correct the listed arguments and retry."
+      },
+      "details": {
+        "operation": "analyze_function",
+        "issues": [
+          {
+            "path": [],
+            "reason": "invalid_value",
+            "message": "No procedure exists at the requested address: 0x77080a"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/queue-default-772556.json",
+    "is_error": false,
+    "evidence_id": "ev_15ba1e9d45e02a3989ce1924f6b03d523bbd0c09ec6b699e1a235ce7ee0641d4",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/source-43bf40.json",
+    "is_error": false,
+    "evidence_id": "ev_2c23e20f87d45ee37de79f300419d674042df35ac11b3bf0759041dccdae3d72",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/source-43bfe0.json",
+    "is_error": false,
+    "evidence_id": "ev_a721f42023220b558ef39a618d72c61ccd9f3654ff424766e2acf144e67db235",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/source-4429c0.json",
+    "is_error": false,
+    "evidence_id": "ev_ee4e5bb0aa8d21fb294fd4eb881b66edf773eaccb6c333d9a6092a1401d99f9c",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/source-492710.json",
+    "is_error": false,
+    "evidence_id": "ev_58b006ea7a6ab4516d324ee39f5ca196defa3640670eb09b73aac944e6bb6acc",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/source-494ff0.json",
+    "is_error": false,
+    "evidence_id": "ev_a6c337883fc6a6413ffb6d0bec11b06ea16718b952a0a27623ec9d1c99814808",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/source-495b50.json",
+    "is_error": false,
+    "evidence_id": "ev_dcc4a7171a2e922c832ad86e33c1ba67bbc2ace6cc8b16a04e0b12f1fb5056cd",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/source-495ba0.json",
+    "is_error": false,
+    "evidence_id": "ev_1d8515e73812a8b1d495871acf3e7c5c1b748cd7d6914d16c647302273c0a99f",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/source-495c30.json",
+    "is_error": false,
+    "evidence_id": "ev_599869988d2acc28533eb423a0c9fe842fbc80a2f6e6a7ee18c33f744d414f80",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/source-495c80.json",
+    "is_error": false,
+    "evidence_id": "ev_a0f91764eb316197cd602922383252b70bc1e9c9464e69f9231fd5976b14d75c",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/source-4b8320.json",
+    "is_error": false,
+    "evidence_id": "ev_83e248e4e259959afaecd979ca38f5c69a8158dfb6e56f354fad029d00c45b14",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/source-4b83f0.json",
+    "is_error": false,
+    "evidence_id": "ev_7f4f2f55ae6d637397ab65e10d37a8f6bb1d1a6380713ccba1c456ef5dddb2f5",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/source-643e5f.json",
+    "is_error": false,
+    "evidence_id": "ev_f0827b0e6677bee35793804815cf05f66500fa0f2256fe2514594fe4ae026b73",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/source-6462d0.json",
+    "is_error": false,
+    "evidence_id": "ev_494cef89923e171855c6e7a3bb9d1167201287a2e9e29f826c9395b042d81a93",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/source-64c429.json",
+    "is_error": false,
+    "evidence_id": "ev_b1ff6d834d9cbd1444889973ee0d9011699aaf8e5418390ce2c4c9ee5f8455e4",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/source-64c4bb.json",
+    "is_error": false,
+    "evidence_id": "ev_10806e3ce26f2f0daa335cf8e0cb08fb67cb1c2da1965301b2afd4473b6c406a",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/source-64c549.json",
+    "is_error": false,
+    "evidence_id": "ev_06a9807339898ca3efba5029f23d1b2d32739191ab57cf9c4c40a315d4f6ac19",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/source-64c57b.json",
+    "is_error": false,
+    "evidence_id": "ev_922b8fac35d6b2ef35c04e15b108786c7f6093dc36f591d3b309040ba440bd85",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/source-77dfc0.json",
+    "is_error": false,
+    "evidence_id": "ev_703ca22bf2fabebd0bb4e2101927b77e30439a219bb10e7e5584bdb08c4499b9",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/source-78ea10.json",
+    "is_error": false,
+    "evidence_id": "ev_9d03b04e4e615fedccffab45f6375b949e58b72f1e2a1690032232d2a2770c10",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/source-794000.json",
+    "is_error": false,
+    "evidence_id": "ev_304eb831fe0e66ed6a9b9fc878d5987219cd71200514a71561da8f6f5253ea7f",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/source-794060.json",
+    "is_error": false,
+    "evidence_id": "ev_7fe054be5cc3ec5e7ec89ed2baef83b7c3ba0d2174bc886b9dca7861e6f10e86",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/sprite-401420.json",
+    "is_error": false,
+    "evidence_id": "ev_49de5110f007664ce061e39d9d10bf6e3aabd16f27ab29e3f43a6e481c2ca5b5",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/sprite-403250.json",
+    "is_error": false,
+    "evidence_id": "ev_8a080598de70eac5bd22d0f4bb023ad47a7ea2a6a50e72b41ac7b622040fae91",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/sprite-403e80.json",
+    "is_error": false,
+    "evidence_id": "ev_743949795f9d933ecf279f3d761ca895bf3b06fcf563e75e384dedc7d0d13ba0",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/sprite-403f60.json",
+    "is_error": false,
+    "evidence_id": "ev_79d8a87c3c6b361fefa2b645a2edb8b75c6e1d454a2f99eccce987f66e00f494",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/sprite-404240.json",
+    "is_error": false,
+    "evidence_id": "ev_d16e160bfad7c496f6541aedb49bd9b78e3b2f0ff672e57b254364f08ea01074",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/sprite-4128f0.json",
+    "is_error": false,
+    "evidence_id": "ev_e5d6ecdaa4af4d623ab68aaafbc1b010e5d76eef19920240c0d4b39522c98c16",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/sprite-77e390.json",
+    "is_error": false,
+    "evidence_id": "ev_1559a418ab96877c2d84eeb12e2d0cc38c05f456063c3c69577b7e3178ebeef0",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/sprite-77ed20.json",
+    "is_error": false,
+    "evidence_id": "ev_9ea8f7855ddbc0e4a5a6de92a39eda35eccab4125a8dd0fa7e1ff626af8815f3",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/sprite-784bc0.json",
+    "is_error": false,
+    "evidence_id": "ev_cd5f16dde247730fa96916f8e70aa431d054cb196129778cc643aa244013d682",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/texture-77f2f0.json",
+    "is_error": false,
+    "evidence_id": "ev_e61bfb5ffe8b83151a112556baec0f64fbba4a6332a3e95d0708fc51d79c183a",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/texture-77f3f0.json",
+    "is_error": false,
+    "evidence_id": "ev_c92212b96e04e8fb26a94e2f4077308064f9eaa5fd7e12efe0943bfa44d41d24",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/texture-77f7f0.json",
+    "is_error": false,
+    "evidence_id": "ev_a64176fbc26b7d97c0ffba76625ab92764f020b019a40259b682c8a9f9eba240",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/texture-78bc30.json",
+    "is_error": false,
+    "evidence_id": "ev_e87f2ad9bb5cd9dda627fad87c8563a8b8da00e3b181ae5a873d5d5b110a12f9",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/texture-78bd10.json",
+    "is_error": false,
+    "evidence_id": "ev_cc12e1ccd05d740edbed0c3a4a256e1c1b387848e36d976114bceeb6f5646f58",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/texture-78bf50.json",
+    "is_error": false,
+    "evidence_id": "ev_6c3c74d3dfc5a3c3986f6fdabd8f044c163fb013bf88fceedc5eeb46eb0b91a9",
+    "operation": "analyze_function",
+    "error": null
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/texture-78c570.json",
+    "is_error": true,
+    "evidence_id": null,
+    "operation": null,
+    "error": {
+      "code": "invalid_request",
+      "category": "invalid_input",
+      "message": "Analysis input is invalid. Check the arguments and try again.",
+      "retryable": true,
+      "remediation": {
+        "action": "Correct the listed arguments and retry."
+      },
+      "details": {
+        "operation": "analyze_function",
+        "issues": [
+          {
+            "path": [],
+            "reason": "invalid_value",
+            "message": "No procedure exists at the requested address: 0x78c570"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "file": "_reference/sadx/ghidra-action-fp-recovery/texture-78ca00.json",
+    "is_error": false,
+    "evidence_id": "ev_a47ffb3af12b3f11ba03847be58f477522f63417caa828d5d2bcd1240ca4dfa0",
+    "operation": "analyze_function",
+    "error": null
+  }
+]

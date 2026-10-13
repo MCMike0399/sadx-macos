@@ -1,0 +1,90 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "functions": [
+    {
+      "address": "0x447010",
+      "end_exclusive": "0x44750c",
+      "size": 1276,
+      "sha256": "7788b57a50b387cb63fe8d35eaac9a3fd6a4a38808bd58e40ad746e2bf2c6dac",
+      "evidence_id": "ev_d8d3f38677c1164ab5bd21037d738b39e10dd895492aaa4b242bca3500048c47",
+      "callees": [
+        "0x4383b0",
+        "0x43bdc0",
+        "0x443c50",
+        "0x443df0",
+        "0x443e60"
+      ]
+    },
+    {
+      "address": "0x447510",
+      "end_exclusive": "0x447b7e",
+      "size": 1646,
+      "sha256": "91150cec08718db4fb3030bd6e5488fa6689dbebb5ba1ee263fef006b61e34a7",
+      "evidence_id": "ev_05184be5504ad5dd8480e4a7431cfcdcdb3e4f2c642dc92aa08448762f0cd737",
+      "callees": [
+        "0x43ec00",
+        "0x443df0",
+        "0x644340",
+        "0x785170",
+        "0x787610",
+        "0x787cc0"
+      ]
+    },
+    {
+      "address": "0x44b0e0",
+      "end_exclusive": "0x44b9b2",
+      "size": 2258,
+      "sha256": "d2f6ad9159eba969ecf14a8a36f6579416d9981b97ef641fd93f5e36098f9caf",
+      "evidence_id": "ev_1127ac751c27b4168b0fe7018b8e546738d5d925310f8d787692ee1b69fb4569",
+      "callees": [
+        "0x4383b0",
+        "0x438410",
+        "0x43bdc0",
+        "0x43c130",
+        "0x43ec00",
+        "0x43ec90",
+        "0x443df0",
+        "0x443e60",
+        "0x4491e0",
+        "0x644340",
+        "0x781c80",
+        "0x784d60",
+        "0x784e20",
+        "0x784ee0",
+        "0x785140",
+        "0x7875f0",
+        "0x788df0"
+      ]
+    }
+  ],
+  "event_ground_jump_table": {
+    "address": "0x447b80",
+    "bytes": "b07744009e7544008476440034774400",
+    "mode_targets": {
+      "1": "0x4477b0",
+      "2": "0x44759e",
+      "3": "0x447684",
+      "4": "0x447734"
+    }
+  },
+  "event_air_body": {
+    "address": "0x447b90",
+    "end_exclusive": "0x447e54",
+    "size": 708,
+    "sha256": "e423f4fe9e9777d2f3a7b2a2bb5dbd4e87f8e83dfe329814f1d174aa362ce50e"
+  },
+  "event_air_jump_table": {
+    "address": "0x447e54",
+    "bytes": "dc7d4400167c4400c07c44006d7d4400",
+    "mode_targets": {
+      "1": "0x447ddc",
+      "2": "0x447c16",
+      "3": "0x447cc0",
+      "4": "0x447d6d"
+    }
+  },
+  "limitations": [
+    "Source-bound static recovery, no original hardware or gameplay observation",
+    "State owners and external callee closure must be supplied explicitly"
+  ]
+}

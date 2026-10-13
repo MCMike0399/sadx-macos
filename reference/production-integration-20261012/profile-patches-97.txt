@@ -1,0 +1,24 @@
+patch inventory: 618 entries, 121 active, 95 active with handled_by=null
+reports: 30, declared sonic.exe ranges: 121
+reports declaring no addressed sonic.exe range (not checked): original-game-loop-comparison.json, original-game-scene-logic-comparison.json, original-game-view-comparison.json, original-input-mod-pad-comparison.json, original-model-dlls-comparison.json, original-sound-manager-comparison.json, original-speedrun-on-frame-comparison.json, original-stream-players-comparison.json, original-vibration-stop-comparison.json
+
+UNHANDLED overlaps with active patches: 0
+
+handled overlaps (native models the patch): 14
+report                                        range                  patch                  owner     kind        source_ref / handled_by
+original-game-frame-owners                    0x402ed0-0x402f10      0x402ed0-0x402ed5      loader    trampoline  equivalent: the loader FixFOV trampoline calls the original at 4:3 (640x480) and only updates loader-internal state  [njSetPerspective_r]
+original-game-mode-leaves                     0x426050-0x426090      0x426063-0x426068      loader    jump        mod_loader_frame ProcessCodes  [(void*)ProcessCodes]
+original-game-mode-leaves                     0x426050-0x426090      0x42608f-0x426094      speedrun  call        not reached by any port: the 426050 leaf ends at its RET 426063 (the checker default range is 0x40 bytes)  [DLL 0x10001280 (gamma timer: inc counter, dec 3b]
+original-game-winmain                         0x4025b0-0x402c29      0x402614-0x402619      loader    call        game_winmain  [SetLanguage]
+original-game-winmain                         0x4025b0-0x402c29      0x40297a-0x40297f      loader    jump        game_winmain  [(void*)0x402A90]
+original-keyboard                             0x77f0a0-0x77f0e0      0x77f0d7-0x77f0dc      input     call        ninja_keyboard input_mod profile (CreateSADXKeyboard: 3b0e340 = 0x1000e944)  [CreateSADXKeyboard]
+original-message-pump                         0x789bd0-0x789c45      0x789bd0-0x789bd5      loader    jump        game_window GameMessagePumpProfile::mod_loader (HandleWindowMessages_r)  [(void*)HandleWindowMessages_r]
+original-ninja-frame-calls                    0x78b960-0x78ba23      0x78b960-0x78b965      loader    trampoline  ninja_frame_calls: trampolines run the original  [Direct3D_EndScene_r]
+original-ninja-frame-calls                    0x78ba30-0x78ba50      0x78ba30-0x78ba35      loader    jump        ninja_frame_calls mod_loader Present  [Direct3D_Present_r]
+original-ninja-frame-calls                    0x78b880-0x78b958      0x78b880-0x78b885      loader    trampoline  ninja_frame_calls: trampolines run the original  [Direct3D_BeginScene_r]
+original-ninja-frame-calls                    0x78b880-0x78b958      0x78b922-0x78b927      loader    call        equivalent: uiscale rewrites the call to an unhooked copy of the original 77dfc0  [njDrawCircle2D_t->Target()]
+original-screen-polygon                       0x77dfc0-0x77e04e      0x77dfc0-0x77dfc7      loader    trampoline  ninja_screen: natively only BeginScene's 78b922 reaches 77dfc0, and the loader rewrites that call to the trampoline's unhooked original copy; other callers (njDrawCircle2D_r) are unported  [njDrawCircle2D_r]
+original-system-init                          0x77f150-0x77f21f      0x77f205-0x77f20a      input     data        ninja_system_init: 77f150 skips 7928e0  [nop x5 (DirectInput_Init call)]
+original-system-init                          0x77efd0-0x77f053      0x77f03e-0x77f043      input     data        ninja_system_init: 77efd0 skips 791d60  [nop x5 (CreateMouseDevice call)]
+
+overlaps with undetermined patches (informational): 0

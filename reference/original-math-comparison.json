@@ -1,0 +1,161 @@
+{
+  "profile": "original-i386-instructions/unicorn-2.1.4/native-arm64-binary32-store",
+  "source_path": "/Users/burbujamc/Developer/rea/Sonic Adventure DX/sonic.exe",
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "native_library_sha256": "fa9b4243763d8c84538a78e5b665ab21c1fa07758c89a0058fa51bb17f0e4dfd",
+  "table_sha256": "3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed",
+  "control_words": [
+    {
+      "control_word": "0x7f",
+      "trig_cases": 131072,
+      "trig_mismatches": 0,
+      "dot_cases": 1009,
+      "dot_mismatches": 0,
+      "squared_cases": 1009,
+      "squared_mismatches": 0,
+      "sqrt_cases": 12,
+      "sqrt_mismatches": 0,
+      "examples": []
+    },
+    {
+      "control_word": "0x47f",
+      "trig_cases": 131072,
+      "trig_mismatches": 0,
+      "dot_cases": 1009,
+      "dot_mismatches": 0,
+      "squared_cases": 1009,
+      "squared_mismatches": 0,
+      "sqrt_cases": 12,
+      "sqrt_mismatches": 0,
+      "examples": []
+    },
+    {
+      "control_word": "0x87f",
+      "trig_cases": 131072,
+      "trig_mismatches": 0,
+      "dot_cases": 1009,
+      "dot_mismatches": 0,
+      "squared_cases": 1009,
+      "squared_mismatches": 0,
+      "sqrt_cases": 12,
+      "sqrt_mismatches": 0,
+      "examples": []
+    },
+    {
+      "control_word": "0xc7f",
+      "trig_cases": 131072,
+      "trig_mismatches": 0,
+      "dot_cases": 1009,
+      "dot_mismatches": 0,
+      "squared_cases": 1009,
+      "squared_mismatches": 0,
+      "sqrt_cases": 12,
+      "sqrt_mismatches": 0,
+      "examples": []
+    },
+    {
+      "control_word": "0x27f",
+      "trig_cases": 131072,
+      "trig_mismatches": 0,
+      "dot_cases": 1009,
+      "dot_mismatches": 0,
+      "squared_cases": 1009,
+      "squared_mismatches": 0,
+      "sqrt_cases": 12,
+      "sqrt_mismatches": 0,
+      "examples": []
+    },
+    {
+      "control_word": "0x67f",
+      "trig_cases": 131072,
+      "trig_mismatches": 0,
+      "dot_cases": 1009,
+      "dot_mismatches": 0,
+      "squared_cases": 1009,
+      "squared_mismatches": 0,
+      "sqrt_cases": 12,
+      "sqrt_mismatches": 0,
+      "examples": []
+    },
+    {
+      "control_word": "0xa7f",
+      "trig_cases": 131072,
+      "trig_mismatches": 0,
+      "dot_cases": 1009,
+      "dot_mismatches": 0,
+      "squared_cases": 1009,
+      "squared_mismatches": 0,
+      "sqrt_cases": 12,
+      "sqrt_mismatches": 0,
+      "examples": []
+    },
+    {
+      "control_word": "0xe7f",
+      "trig_cases": 131072,
+      "trig_mismatches": 0,
+      "dot_cases": 1009,
+      "dot_mismatches": 0,
+      "squared_cases": 1009,
+      "squared_mismatches": 0,
+      "sqrt_cases": 12,
+      "sqrt_mismatches": 0,
+      "examples": []
+    },
+    {
+      "control_word": "0x37f",
+      "trig_cases": 131072,
+      "trig_mismatches": 0,
+      "dot_cases": 1009,
+      "dot_mismatches": 0,
+      "squared_cases": 1009,
+      "squared_mismatches": 0,
+      "sqrt_cases": 12,
+      "sqrt_mismatches": 0,
+      "examples": []
+    },
+    {
+      "control_word": "0x77f",
+      "trig_cases": 131072,
+      "trig_mismatches": 0,
+      "dot_cases": 1009,
+      "dot_mismatches": 0,
+      "squared_cases": 1009,
+      "squared_mismatches": 0,
+      "sqrt_cases": 12,
+      "sqrt_mismatches": 0,
+      "examples": []
+    },
+    {
+      "control_word": "0xb7f",
+      "trig_cases": 131072,
+      "trig_mismatches": 0,
+      "dot_cases": 1009,
+      "dot_mismatches": 0,
+      "squared_cases": 1009,
+      "squared_mismatches": 0,
+      "sqrt_cases": 12,
+      "sqrt_mismatches": 0,
+      "examples": []
+    },
+    {
+      "control_word": "0xf7f",
+      "trig_cases": 131072,
+      "trig_mismatches": 0,
+      "dot_cases": 1009,
+      "dot_mismatches": 0,
+      "squared_cases": 1009,
+      "squared_mismatches": 0,
+      "sqrt_cases": 12,
+      "sqrt_mismatches": 0,
+      "examples": []
+    }
+  ],
+  "limits": [
+    "Full Windows game startup and runtime are not executed",
+    "Experimentally selected FPU control words; actual game control state remains unverified",
+    "Only selected pure functions and their binary32 stored results are compared",
+    "An emulator is the instruction oracle; original x86 hardware equivalence is unverified"
+  ],
+  "duration_seconds": 12.050355041981675,
+  "tested_profile_matches": true
+}

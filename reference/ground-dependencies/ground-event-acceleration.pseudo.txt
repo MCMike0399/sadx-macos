@@ -1,0 +1,713 @@
+    esp = esp - 0x24;
+    asm { fld        dword [dword_3b0f0f8] };
+    decomp_var_28 = ebx;
+    decomp_var_2c = ebp;
+    ebp = arg_4;
+    esp = esp - 0xc;
+    decomp_var_30 = esi;
+    esi = arg_8;
+    asm { fmul       dword [esi+0x114] };
+    ecx = arg_c;
+    edx = *(&arg_c + 0x4);
+    eax = *(&arg_c + 0x8);
+    var_24 = ecx;
+    asm { fadd       dword [esp+0x30+var_24] };
+    var_20 = edx;
+    var_1C = eax;
+    asm { fstp       dword [esp+0x30+var_24] };
+    esp = esp - 0x4;
+    decomp_var_34 = edi;
+    asm { fld        dword [dword_3b0f0fc] };
+    edi = arg_0;
+    asm { fmul       dword [esi+0x114] };
+    ebx = edi[0xf];
+    var_10 = 0x0;
+    var_18 = 0x0;
+    asm { fadd       dword [esp+0x34+var_20] };
+    asm { fstp       dword [esp+0x34+var_20] };
+    asm { fld        dword [dword_3b0f100] };
+    asm { fmul       dword [esi+0x114] };
+    asm { fadd       dword [esp+0x34+var_1C] };
+    asm { fstp       dword [esp+0x34+var_1C] };
+    eax = ebx[0x24] & 0xff;
+    eax = eax - 0x1;
+    if (eax <= 0x3) {
+            if (*(eax * 0x4 + switch_table) != 0x0) {
+                    switch (*(eax * 0x4 + switch_table)) {
+                        case 1:
+                            var_C = ebx[0xa];
+                            var_4 = *(ebx + 0x30);
+                            sub_787610();
+                            eax = sub_787cc0();
+                            asm { fcomp      dword [aImm32dll+16] };
+                            asm { fnstsw     ax };
+                            if (!PARITY(HIBYTE(eax) & 0x41)) {
+                                    esi[0x10] = 0x0;
+                                    esi[0xf] = 0x0;
+                                    esi[0xe] = 0x0;
+                                    ebx[0x24] = 0x1;
+                            }
+                            else {
+                                    asm { fld        dword [esp+0x34+var_4] };
+                                    asm { fld        dword [esp+0x34+var_C] };
+                                    asm { fpatan };
+                                    asm { fmul       qword [qword_value_4679240012837945344] };
+                                    asm { fmul       qword [qword_value_4594902182622716682] };
+                                    eax = sub_644340();
+                                    eax = eax & 0xffff;
+                                    arg_1c = eax;
+                                    asm { fld        dword [ebx+0x34] };
+                                    asm { fcom       dword [dword_value_1142947840+4] };
+                                    asm { fnstsw     ax };
+                                    if (!PARITY(HIBYTE(eax) & 0x44)) {
+                                            asm { fstp       st0 };
+                                            asm { fld        dword [esi+0xc4] };
+                                    }
+                                    asm { fld        dword [ebx+0x38] };
+                                    asm { fst        dword [esp+0x34+arg_0] };
+                                    asm { fcomp      dword [dword_value_1142947840+4] };
+                                    asm { fnstsw     ax };
+                                    if (!PARITY(HIBYTE(eax) & 0x44)) {
+                                            arg_0 = esi[0x36];
+                                    }
+                                    asm { fsub       dword [esi+0x38] };
+                                    asm { fst        dword [esp+0x34+var_18] };
+                                    asm { fcomp      dword [dword_value_1142947840+4] };
+                                    asm { fnstsw     ax };
+                                    if ((HIBYTE(eax) & 0x41) == 0x0) {
+                                            asm { fld        dword [esp+0x34+var_18] };
+                                            asm { fcomp      dword [esp+0x34+arg_0] };
+                                            asm { fnstsw     ax };
+                                            if ((HIBYTE(eax) & 0x41) == 0x0) {
+                                                    var_18 = arg_0;
+                                            }
+                                    }
+                                    else {
+                                            var_18 = 0x0;
+                                    }
+                            }
+                            break;
+                        case 2:
+                            var_C = ebx[0xa];
+                            var_4 = *(ebx + 0x30);
+                            eax = sub_787cc0();
+                            asm { fcom       dword [dword_value_1142947840+4] };
+                            asm { fnstsw     ax };
+                            if (!PARITY(HIBYTE(eax) & 0x44)) {
+                                    eax = 0x0;
+                                    asm { fstp       st0 };
+                                    esi[0x10] = eax;
+                                    esi[0xf] = eax;
+                                    esi[0xe] = eax;
+                                    ebx[0x24] = 0x1;
+                            }
+                            else {
+                                    asm { fld        dword [esp+0x34+var_4] };
+                                    asm { fld        dword [esp+0x34+var_C] };
+                                    asm { fpatan };
+                                    asm { fmul       qword [qword_value_4679240012837945344] };
+                                    asm { fmul       qword [qword_value_4594902182622716682] };
+                                    eax = sub_644340();
+                                    eax = eax & 0xffff;
+                                    arg_1c = eax;
+                                    asm { fsub       dword [esi+0x38] };
+                                    asm { fst        dword [esp+0x34+var_18] };
+                                    asm { fcomp      dword [dword_value_1142947840+4] };
+                                    asm { fnstsw     ax };
+                                    if ((HIBYTE(eax) & 0x41) == 0x0) {
+                                            asm { fld        dword [esp+0x34+var_18] };
+                                            asm { fcomp      dword [esi+0xd8] };
+                                            asm { fnstsw     ax };
+                                            if ((HIBYTE(eax) & 0x41) == 0x0) {
+                                                    var_18 = esi[0x36];
+                                            }
+                                    }
+                                    else {
+                                            var_18 = 0x0;
+                                    }
+                            }
+                            break;
+                        default:
+                            var_C = ebx[0xa];
+                            var_4 = *(ebx + 0x30);
+                            eax = sub_787cc0();
+                            asm { fcomp      dword [dword_value_1142947840+4] };
+                            asm { fnstsw     ax };
+                            if (!PARITY(HIBYTE(eax) & 0x44)) {
+                                    esi[0x10] = 0x0;
+                                    esi[0xf] = 0x0;
+                                    esi[0xe] = 0x0;
+                                    ebx[0x24] = 0x1;
+                            }
+                            else {
+                                    asm { fld        dword [esp+0x34+var_4] };
+                                    asm { fld        dword [esp+0x34+var_C] };
+                                    asm { fpatan };
+                                    asm { fmul       qword [qword_value_4679240012837945344] };
+                                    asm { fmul       qword [qword_value_4594902182622716682] };
+                                    arg_1c = sub_644340() & 0xffff;
+                                    sub_785170();
+                            }
+                            break;
+                    }
+            }
+    }
+    else {
+            edi[0x5] = edi[0x5] & 0xbf;
+    }
+    esp = esp - 0x8;
+    eax = sub_43ec00(edi, &var_24);
+    asm { fld        dword [esi+0x38] };
+    asm { fcomp      dword [esi+0xac] };
+    esp = esp + 0x8;
+    asm { fld        dword [esi+0x38] };
+    asm { fnstsw     ax };
+    if ((HIBYTE(eax) & 0x41) == 0x0) {
+            asm { fsub       dword [esi+0xac] };
+            asm { fmul       dword [esi+0xf0] };
+            asm { fadd       dword [esp+0x34+var_24] };
+            asm { fstp       dword [esp+0x34+var_24] };
+    }
+    else {
+            asm { fcomp      dword [dword_value_1142947840+4] };
+            asm { fnstsw     ax };
+            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                    asm { fld        dword [esi+0xf0] };
+                    asm { fmul       dword [esi+0x38] };
+                    asm { fadd       dword [esp+0x34+var_24] };
+                    asm { fstp       dword [esp+0x34+var_24] };
+            }
+    }
+    asm { fld        dword [esi+0xf4] };
+    edx = arg_1c;
+    asm { fmul       dword [esi+0x3c] };
+    decomp_var_38 = edx;
+    esp = esp - 0x8;
+    decomp_var_3c = ebp;
+    asm { fadd       dword [esp+0x3c+var_20] };
+    asm { fstp       dword [esp+0x3c+var_20] };
+    asm { fld        dword [esi+0xf8] };
+    asm { fmul       dword [esi+0x40] };
+    asm { fadd       dword [esp+0x3c+var_1C] };
+    asm { fstp       dword [esp+0x3c+var_1C] };
+    eax = sub_443df0(decomp_var_3c, decomp_var_38);
+    asm { fld        dword [esi+0x38] };
+    esp = esp + 0x8;
+    asm { fcomp      dword [dword_value_1142947840+4] };
+    asm { fnstsw     ax };
+    if (!PARITY(HIBYTE(eax) & 0x44)) {
+            asm { fld        dword [esi+0x104] };
+            asm { fmul       dword [ebp+0x3c] };
+            asm { fmul       dword [esp+0x34+var_20] };
+            asm { fstp       dword [esp+0x34+arg_0] };
+            asm { fld        dword [esp+0x34+var_24] };
+            asm { fadd       dword [esp+0x34+var_18] };
+            asm { fstp       dword [esp+0x34+var_24] };
+            asm { fld        dword [esp+0x34+var_18] };
+            asm { fcomp      dword [dword_value_1142947840+4] };
+            asm { fnstsw     ax };
+            if (!PARITY(HIBYTE(eax) & 0x44)) {
+                    asm { fld        dword [esp+0x34+var_24] };
+                    asm { fcomp      dword [esp+0x34+arg_0] };
+                    asm { fnstsw     ax };
+                    if (!PARITY(HIBYTE(eax) & 0x5)) {
+                            asm { fld        dword [esp+0x34+arg_0] };
+                            asm { fchs };
+                            asm { fcomp      dword [esp+0x34+var_24] };
+                            asm { fnstsw     ax };
+                            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                    var_24 = 0x0;
+                            }
+                    }
+                    asm { fld        dword [esp+0x34+var_18] };
+                    asm { fcomp      dword [dword_value_1142947840+4] };
+                    asm { fnstsw     ax };
+                    if (!PARITY(HIBYTE(eax) & 0x44)) {
+                            asm { fld        dword [esp+0x34+var_24] };
+                            asm { fcomp      dword [dword_value_1028711776] };
+                            asm { fnstsw     ax };
+                            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                    asm { fld        dword [esp+0x34+var_24] };
+                                    asm { fcomp      dword [dword_value_3176195424] };
+                                    asm { fnstsw     ax };
+                                    if ((HIBYTE(eax) & 0x41) == 0x0) {
+                                            var_24 = 0x0;
+                                    }
+                            }
+                    }
+            }
+    }
+    else {
+            asm { fld        dword [esp+0x34+var_18] };
+            asm { fcomp      dword [dword_value_1142947840+4] };
+            asm { fnstsw     ax };
+            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                    asm { fld        dword [esi+0x38] };
+                    asm { fcomp      dword [dword_value_1142947840+4] };
+                    asm { fnstsw     ax };
+                    if ((HIBYTE(eax) & 0x41) == 0x0) {
+                            asm { fld        dword [esp+0x34+var_24] };
+                            asm { fadd       dword [esp+0x34+var_18] };
+                            asm { fld        dword [esp+0x34+var_18] };
+                            asm { fmul       st1 };
+                            asm { fcomp      dword [dword_value_1142947840+4] };
+                            asm { fnstsw     ax };
+                            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                    asm { fstp       st0 };
+                                    asm { fld        dword [dword_value_1142947840+4] };
+                            }
+                    }
+                    else {
+                            asm { fld        dword [esi+0x104] };
+                            asm { fmul       dword [ebp+0x3c] };
+                            asm { fmul       dword [esp+0x34+var_20] };
+                            asm { fadd       dword [esp+0x34+var_18] };
+                            asm { fcom       dword [dword_value_1142947840+4] };
+                            asm { fnstsw     ax };
+                            if ((HIBYTE(eax) & 0x1) == 0x0) {
+                                    asm { fstp       st0 };
+                                    asm { fld        dword [dword_value_1142947840+4] };
+                            }
+                    }
+                    asm { fstp       dword [esp+0x34+var_24] };
+            }
+            else {
+                    asm { fld        dword [esi+0x104] };
+                    asm { fmul       dword [ebp+0x3c] };
+                    asm { fmul       dword [esp+0x34+var_20] };
+                    asm { fstp       dword [esp+0x34+arg_0] };
+                    asm { fld        dword [esi+0x38] };
+                    asm { fcomp      dword [dword_value_1142947840+4] };
+                    asm { fnstsw     ax };
+                    if (!PARITY(HIBYTE(eax) & 0x5)) {
+                            asm { fld        dword [esp+0x34+var_24] };
+                            asm { fcomp      dword [dword_value_1028711776] };
+                            asm { fnstsw     ax };
+                            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                    asm { fld        dword [esp+0x34+var_24] };
+                                    asm { fcomp      dword [dword_value_3176195424] };
+                                    asm { fnstsw     ax };
+                                    if ((HIBYTE(eax) & 0x41) == 0x0) {
+                                            asm { fld        dword [esp+0x34+var_24] };
+                                            asm { fadd       dword [esp+0x34+var_18] };
+                                            asm { fst        dword [esp+0x34+var_24] };
+                                            asm { fmul       dword [esp+0x34+var_18] };
+                                            asm { fcomp      dword [dword_value_1142947840+4] };
+                                            asm { fnstsw     ax };
+                                            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                                    var_24 = 0x0;
+                                            }
+                                    }
+                                    else {
+                                            asm { fld        dword [esp+0x34+arg_0] };
+                                            asm { fcomp      dword [dword_value_1142947840+4] };
+                                            asm { fnstsw     ax };
+                                            if ((HIBYTE(eax) & 0x41) == 0x0) {
+                                                    asm { fld        dword [esp+0x34+arg_0] };
+                                                    asm { fcomp      dword [esp+0x34+var_18] };
+                                                    asm { fnstsw     ax };
+                                                    if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                                            asm { fld        dword [esp+0x34+var_24] };
+                                                            asm { fadd       dword [esp+0x34+var_18] };
+                                                            asm { fcom       dword [esp+0x34+arg_0] };
+                                                            asm { fnstsw     ax };
+                                                            if ((HIBYTE(eax) & 0x41) == 0x0) {
+                                                                    asm { fsub       dword [esp+0x34+arg_0] };
+                                                                    asm { fstp       dword [ebp+0x38] };
+                                                                    asm { fld        dword [esp+0x34+arg_0] };
+                                                            }
+                                                            asm { fstp       dword [esp+0x34+var_24] };
+                                                    }
+                                                    else {
+                                                            asm { fld        dword [esp+0x34+var_18] };
+                                                            asm { fcomp      dword [dword_value_1142947840+4] };
+                                                            asm { fnstsw     ax };
+                                                            if (!PARITY(HIBYTE(eax) & 0x44)) {
+                                                                    asm { fld        dword [esi+0x38] };
+                                                                    asm { fcomp      dword [esi+0xc0] };
+                                                                    asm { fnstsw     ax };
+                                                                    if (!PARITY(HIBYTE(eax) & 0x41)) {
+                                                                            asm { fld        dword [esp+0x34+var_24] };
+                                                                            asm { fcomp      dword [dword_value_1028711776] };
+                                                                            asm { fnstsw     ax };
+                                                                            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                                                                    asm { fld        dword [esp+0x34+var_24] };
+                                                                                    asm { fcomp      dword [dword_value_3176195424] };
+                                                                                    asm { fnstsw     ax };
+                                                                                    if ((HIBYTE(eax) & 0x41) == 0x0) {
+                                                                                            var_24 = 0x0;
+                                                                                    }
+                                                                                    else {
+                                                                                            asm { fld        dword [esp+0x34+var_24] };
+                                                                                            asm { fadd       dword [esp+0x34+var_18] };
+                                                                                            asm { fstp       dword [esp+0x34+var_24] };
+                                                                                    }
+                                                                            }
+                                                                            else {
+                                                                                    asm { fld        dword [esp+0x34+var_24] };
+                                                                                    asm { fadd       dword [esp+0x34+var_18] };
+                                                                                    asm { fstp       dword [esp+0x34+var_24] };
+                                                                            }
+                                                                    }
+                                                                    else {
+                                                                            asm { fld        dword [esp+0x34+var_24] };
+                                                                            asm { fadd       dword [esp+0x34+var_18] };
+                                                                            asm { fstp       dword [esp+0x34+var_24] };
+                                                                    }
+                                                            }
+                                                            else {
+                                                                    asm { fld        dword [esp+0x34+var_24] };
+                                                                    asm { fadd       dword [esp+0x34+var_18] };
+                                                                    asm { fstp       dword [esp+0x34+var_24] };
+                                                            }
+                                                    }
+                                            }
+                                            else {
+                                                    asm { fld        dword [esp+0x34+var_18] };
+                                                    asm { fcomp      dword [dword_value_1142947840+4] };
+                                                    asm { fnstsw     ax };
+                                                    if (!PARITY(HIBYTE(eax) & 0x44)) {
+                                                            asm { fld        dword [esi+0x38] };
+                                                            asm { fcomp      dword [esi+0xc0] };
+                                                            asm { fnstsw     ax };
+                                                            if (!PARITY(HIBYTE(eax) & 0x41)) {
+                                                                    asm { fld        dword [esp+0x34+var_24] };
+                                                                    asm { fcomp      dword [dword_value_1028711776] };
+                                                                    asm { fnstsw     ax };
+                                                                    if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                                                            asm { fld        dword [esp+0x34+var_24] };
+                                                                            asm { fcomp      dword [dword_value_3176195424] };
+                                                                            asm { fnstsw     ax };
+                                                                            if ((HIBYTE(eax) & 0x41) == 0x0) {
+                                                                                    var_24 = 0x0;
+                                                                            }
+                                                                            else {
+                                                                                    asm { fld        dword [esp+0x34+var_24] };
+                                                                                    asm { fadd       dword [esp+0x34+var_18] };
+                                                                                    asm { fstp       dword [esp+0x34+var_24] };
+                                                                            }
+                                                                    }
+                                                                    else {
+                                                                            asm { fld        dword [esp+0x34+var_24] };
+                                                                            asm { fadd       dword [esp+0x34+var_18] };
+                                                                            asm { fstp       dword [esp+0x34+var_24] };
+                                                                    }
+                                                            }
+                                                            else {
+                                                                    asm { fld        dword [esp+0x34+var_24] };
+                                                                    asm { fadd       dword [esp+0x34+var_18] };
+                                                                    asm { fstp       dword [esp+0x34+var_24] };
+                                                            }
+                                                    }
+                                                    else {
+                                                            asm { fld        dword [esp+0x34+var_24] };
+                                                            asm { fadd       dword [esp+0x34+var_18] };
+                                                            asm { fstp       dword [esp+0x34+var_24] };
+                                                    }
+                                            }
+                                    }
+                            }
+                            else {
+                                    asm { fld        dword [esp+0x34+arg_0] };
+                                    asm { fcomp      dword [dword_value_1142947840+4] };
+                                    asm { fnstsw     ax };
+                                    if ((HIBYTE(eax) & 0x41) == 0x0) {
+                                            asm { fld        dword [esp+0x34+arg_0] };
+                                            asm { fcomp      dword [esp+0x34+var_18] };
+                                            asm { fnstsw     ax };
+                                            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                                    asm { fld        dword [esp+0x34+var_24] };
+                                                    asm { fadd       dword [esp+0x34+var_18] };
+                                                    asm { fcom       dword [esp+0x34+arg_0] };
+                                                    asm { fnstsw     ax };
+                                                    if ((HIBYTE(eax) & 0x41) == 0x0) {
+                                                            asm { fsub       dword [esp+0x34+arg_0] };
+                                                            asm { fstp       dword [ebp+0x38] };
+                                                            asm { fld        dword [esp+0x34+arg_0] };
+                                                            asm { fstp       dword [esp+0x34+var_24] };
+                                                    }
+                                                    else {
+                                                            asm { fstp       dword [esp+0x34+var_24] };
+                                                    }
+                                            }
+                                            else {
+                                                    asm { fld        dword [esp+0x34+var_18] };
+                                                    asm { fcomp      dword [dword_value_1142947840+4] };
+                                                    asm { fnstsw     ax };
+                                                    if (!PARITY(HIBYTE(eax) & 0x44)) {
+                                                            asm { fld        dword [esi+0x38] };
+                                                            asm { fcomp      dword [esi+0xc0] };
+                                                            asm { fnstsw     ax };
+                                                            if (!PARITY(HIBYTE(eax) & 0x41)) {
+                                                                    asm { fld        dword [esp+0x34+var_24] };
+                                                                    asm { fcomp      dword [dword_value_1028711776] };
+                                                                    asm { fnstsw     ax };
+                                                                    if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                                                            asm { fld        dword [esp+0x34+var_24] };
+                                                                            asm { fcomp      dword [dword_value_3176195424] };
+                                                                            asm { fnstsw     ax };
+                                                                            if ((HIBYTE(eax) & 0x41) == 0x0) {
+                                                                                    var_24 = 0x0;
+                                                                            }
+                                                                            else {
+                                                                                    asm { fld        dword [esp+0x34+var_24] };
+                                                                                    asm { fadd       dword [esp+0x34+var_18] };
+                                                                                    asm { fstp       dword [esp+0x34+var_24] };
+                                                                            }
+                                                                    }
+                                                                    else {
+                                                                            asm { fld        dword [esp+0x34+var_24] };
+                                                                            asm { fadd       dword [esp+0x34+var_18] };
+                                                                            asm { fstp       dword [esp+0x34+var_24] };
+                                                                    }
+                                                            }
+                                                            else {
+                                                                    asm { fld        dword [esp+0x34+var_24] };
+                                                                    asm { fadd       dword [esp+0x34+var_18] };
+                                                                    asm { fstp       dword [esp+0x34+var_24] };
+                                                            }
+                                                    }
+                                                    else {
+                                                            asm { fld        dword [esp+0x34+var_24] };
+                                                            asm { fadd       dword [esp+0x34+var_18] };
+                                                            asm { fstp       dword [esp+0x34+var_24] };
+                                                    }
+                                            }
+                                    }
+                                    else {
+                                            asm { fld        dword [esp+0x34+var_18] };
+                                            asm { fcomp      dword [dword_value_1142947840+4] };
+                                            asm { fnstsw     ax };
+                                            if (!PARITY(HIBYTE(eax) & 0x44)) {
+                                                    asm { fld        dword [esi+0x38] };
+                                                    asm { fcomp      dword [esi+0xc0] };
+                                                    asm { fnstsw     ax };
+                                                    if (!PARITY(HIBYTE(eax) & 0x41)) {
+                                                            asm { fld        dword [esp+0x34+var_24] };
+                                                            asm { fcomp      dword [dword_value_1028711776] };
+                                                            asm { fnstsw     ax };
+                                                            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                                                    asm { fld        dword [esp+0x34+var_24] };
+                                                                    asm { fcomp      dword [dword_value_3176195424] };
+                                                                    asm { fnstsw     ax };
+                                                                    if ((HIBYTE(eax) & 0x41) == 0x0) {
+                                                                            var_24 = 0x0;
+                                                                    }
+                                                                    else {
+                                                                            asm { fld        dword [esp+0x34+var_24] };
+                                                                            asm { fadd       dword [esp+0x34+var_18] };
+                                                                            asm { fstp       dword [esp+0x34+var_24] };
+                                                                    }
+                                                            }
+                                                            else {
+                                                                    asm { fld        dword [esp+0x34+var_24] };
+                                                                    asm { fadd       dword [esp+0x34+var_18] };
+                                                                    asm { fstp       dword [esp+0x34+var_24] };
+                                                            }
+                                                    }
+                                                    else {
+                                                            asm { fld        dword [esp+0x34+var_24] };
+                                                            asm { fadd       dword [esp+0x34+var_18] };
+                                                            asm { fstp       dword [esp+0x34+var_24] };
+                                                    }
+                                            }
+                                            else {
+                                                    asm { fld        dword [esp+0x34+var_24] };
+                                                    asm { fadd       dword [esp+0x34+var_18] };
+                                                    asm { fstp       dword [esp+0x34+var_24] };
+                                            }
+                                    }
+                            }
+                    }
+                    else {
+                            asm { fld        dword [esp+0x34+arg_0] };
+                            asm { fcomp      dword [dword_value_1142947840+4] };
+                            asm { fnstsw     ax };
+                            if ((HIBYTE(eax) & 0x41) == 0x0) {
+                                    asm { fld        dword [esp+0x34+arg_0] };
+                                    asm { fcomp      dword [esp+0x34+var_18] };
+                                    asm { fnstsw     ax };
+                                    if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                            asm { fld        dword [esp+0x34+var_24] };
+                                            asm { fadd       dword [esp+0x34+var_18] };
+                                            asm { fcom       dword [esp+0x34+arg_0] };
+                                            asm { fnstsw     ax };
+                                            if ((HIBYTE(eax) & 0x41) == 0x0) {
+                                                    asm { fsub       dword [esp+0x34+arg_0] };
+                                                    asm { fstp       dword [ebp+0x38] };
+                                                    asm { fld        dword [esp+0x34+arg_0] };
+                                                    asm { fstp       dword [esp+0x34+var_24] };
+                                            }
+                                            else {
+                                                    asm { fstp       dword [esp+0x34+var_24] };
+                                            }
+                                    }
+                                    else {
+                                            asm { fld        dword [esp+0x34+var_18] };
+                                            asm { fcomp      dword [dword_value_1142947840+4] };
+                                            asm { fnstsw     ax };
+                                            if (!PARITY(HIBYTE(eax) & 0x44)) {
+                                                    asm { fld        dword [esi+0x38] };
+                                                    asm { fcomp      dword [esi+0xc0] };
+                                                    asm { fnstsw     ax };
+                                                    if (!PARITY(HIBYTE(eax) & 0x41)) {
+                                                            asm { fld        dword [esp+0x34+var_24] };
+                                                            asm { fcomp      dword [dword_value_1028711776] };
+                                                            asm { fnstsw     ax };
+                                                            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                                                    asm { fld        dword [esp+0x34+var_24] };
+                                                                    asm { fcomp      dword [dword_value_3176195424] };
+                                                                    asm { fnstsw     ax };
+                                                                    if ((HIBYTE(eax) & 0x41) == 0x0) {
+                                                                            var_24 = 0x0;
+                                                                    }
+                                                                    else {
+                                                                            asm { fld        dword [esp+0x34+var_24] };
+                                                                            asm { fadd       dword [esp+0x34+var_18] };
+                                                                            asm { fstp       dword [esp+0x34+var_24] };
+                                                                    }
+                                                            }
+                                                            else {
+                                                                    asm { fld        dword [esp+0x34+var_24] };
+                                                                    asm { fadd       dword [esp+0x34+var_18] };
+                                                                    asm { fstp       dword [esp+0x34+var_24] };
+                                                            }
+                                                    }
+                                                    else {
+                                                            asm { fld        dword [esp+0x34+var_24] };
+                                                            asm { fadd       dword [esp+0x34+var_18] };
+                                                            asm { fstp       dword [esp+0x34+var_24] };
+                                                    }
+                                            }
+                                            else {
+                                                    asm { fld        dword [esp+0x34+var_24] };
+                                                    asm { fadd       dword [esp+0x34+var_18] };
+                                                    asm { fstp       dword [esp+0x34+var_24] };
+                                            }
+                                    }
+                            }
+                            else {
+                                    asm { fld        dword [esp+0x34+var_18] };
+                                    asm { fcomp      dword [dword_value_1142947840+4] };
+                                    asm { fnstsw     ax };
+                                    if (!PARITY(HIBYTE(eax) & 0x44)) {
+                                            asm { fld        dword [esi+0x38] };
+                                            asm { fcomp      dword [esi+0xc0] };
+                                            asm { fnstsw     ax };
+                                            if (!PARITY(HIBYTE(eax) & 0x41)) {
+                                                    asm { fld        dword [esp+0x34+var_24] };
+                                                    asm { fcomp      dword [dword_value_1028711776] };
+                                                    asm { fnstsw     ax };
+                                                    if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                                            asm { fld        dword [esp+0x34+var_24] };
+                                                            asm { fcomp      dword [dword_value_3176195424] };
+                                                            asm { fnstsw     ax };
+                                                            if ((HIBYTE(eax) & 0x41) == 0x0) {
+                                                                    var_24 = 0x0;
+                                                            }
+                                                            else {
+                                                                    asm { fld        dword [esp+0x34+var_24] };
+                                                                    asm { fadd       dword [esp+0x34+var_18] };
+                                                                    asm { fstp       dword [esp+0x34+var_24] };
+                                                            }
+                                                    }
+                                                    else {
+                                                            asm { fld        dword [esp+0x34+var_24] };
+                                                            asm { fadd       dword [esp+0x34+var_18] };
+                                                            asm { fstp       dword [esp+0x34+var_24] };
+                                                    }
+                                            }
+                                            else {
+                                                    asm { fld        dword [esp+0x34+var_24] };
+                                                    asm { fadd       dword [esp+0x34+var_18] };
+                                                    asm { fstp       dword [esp+0x34+var_24] };
+                                            }
+                                    }
+                                    else {
+                                            asm { fld        dword [esp+0x34+var_24] };
+                                            asm { fadd       dword [esp+0x34+var_18] };
+                                            asm { fstp       dword [esp+0x34+var_24] };
+                                    }
+                            }
+                    }
+            }
+    }
+    asm { fld        dword [esi+0x40] };
+    asm { fcomp      dword [dword_value_1142947840+4] };
+    asm { fnstsw     ax };
+    if (!PARITY(HIBYTE(eax) & 0x44)) {
+            asm { fld        dword [esi+0x104] };
+            asm { fmul       dword [ebp+0x3c] };
+            asm { fmul       dword [esp+0x34+var_20] };
+            asm { fld        dword [esp+0x34+var_1C] };
+            asm { fcomp      st1 };
+            asm { fnstsw     ax };
+            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                    asm { fchs };
+                    asm { fcomp      dword [esp+0x34+var_1C] };
+                    asm { fnstsw     ax };
+                    if (!PARITY(HIBYTE(eax) & 0x5)) {
+                            var_1C = 0x0;
+                    }
+            }
+            else {
+                    asm { fstp       st0 };
+            }
+    }
+    else {
+            asm { fld        dword [esp+0x34+var_20] };
+            asm { fcomp      dword [dword_value_1142947840+4] };
+            asm { fnstsw     ax };
+            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                    asm { fld        dword [esi+0x100] };
+                    asm { fmul       dword [ebp+0x3c] };
+                    asm { fmul       dword [esp+0x34+var_20] };
+            }
+            else {
+                    asm { fld        dword [dword_value_1142947840+4] };
+            }
+            asm { fld        dword [esp+0x34+var_1C] };
+            asm { fcomp      dword [dword_value_1142947840+4] };
+            asm { fnstsw     ax };
+            if ((HIBYTE(eax) & 0x41) == 0x0) {
+                    asm { fchs };
+                    asm { fstp       dword [esp+0x34+var_10] };
+            }
+            else {
+                    asm { fld        dword [esp+0x34+var_1C] };
+                    asm { fcomp      dword [dword_value_1142947840+4] };
+                    asm { fnstsw     ax };
+                    if (!PARITY(HIBYTE(eax) & 0x5)) {
+                            asm { fstp       dword [esp+0x34+var_10] };
+                    }
+                    else {
+                            asm { fstp       st0 };
+                    }
+            }
+            asm { fld        dword [esp+0x34+var_1C] };
+            asm { fadd       dword [esp+0x34+var_10] };
+            asm { fld        dword [esp+0x34+var_1C] };
+            asm { fcomp      dword [dword_value_1142947840+4] };
+            asm { fnstsw     ax };
+            if (PARITY(HIBYTE(eax) & 0x44)) {
+                    asm { fld        dword [esp+0x34+var_10] };
+                    asm { fcomp      dword [dword_value_1142947840+4] };
+                    asm { fnstsw     ax };
+                    if (PARITY(HIBYTE(eax) & 0x44)) {
+                            asm { fld        dword [esp+0x34+var_1C] };
+                            asm { fmul       st1 };
+                            asm { fcomp      dword [dword_value_1142947840+4] };
+                            asm { fnstsw     ax };
+                            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                    asm { fstp       st0 };
+                                    asm { fld        dword [dword_value_1142947840+4] };
+                            }
+                    }
+            }
+            asm { fstp       dword [esp+0x34+var_1C] };
+    }
+    eax = var_24;
+    esi[0xb] = eax;
+    *(esi + 0x30) = var_20;
+    *(esi + 0x34) = var_1C;
+    return eax;

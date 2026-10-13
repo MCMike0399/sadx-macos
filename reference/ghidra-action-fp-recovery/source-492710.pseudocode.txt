@@ -1,0 +1,41 @@
+
+int FUN_00492710(int param_1,int param_2)
+
+{
+  int *piVar1;
+  int iVar2;
+  int iVar3;
+  int *piVar4;
+  float10 fVar5;
+  
+  piVar4 = &DAT_03b259c0;
+  if (*(char *)(param_1 + 8) != '\0') {
+    piVar4 = &DAT_03b242f8;
+  }
+  *(undefined2 *)(param_2 + 0x82) = 0;
+  if (*piVar4 != 0) {
+    iVar3 = FUN_00441bf0(*(undefined1 *)(param_1 + 8));
+    if (iVar3 == -1) {
+      fVar5 = (float10)160000.0;
+      iVar3 = 0;
+    }
+    else {
+      iVar3 = (&DAT_03b42e10)[iVar3];
+      fVar5 = (float10)FUN_00787e10();
+    }
+    iVar2 = *piVar4;
+    while (iVar2 != 0) {
+      if (((**(short **)(iVar2 + 0x38) == 2) || (**(short **)(iVar2 + 0x38) == 3)) &&
+         ((float10)(float)piVar4[1] < fVar5)) {
+        fVar5 = (float10)(float)piVar4[1];
+        iVar3 = iVar2;
+      }
+      piVar1 = piVar4 + 2;
+      piVar4 = piVar4 + 2;
+      iVar2 = *piVar1;
+    }
+    return iVar3;
+  }
+  return 0;
+}
+

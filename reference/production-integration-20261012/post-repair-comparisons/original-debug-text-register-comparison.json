@@ -1,0 +1,24 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "a910f436d0dd90523f8ca120e340bec22012846534c4d069b00c65a6551c793d",
+ "source_files": {
+  "src/ninja_debug_text.hpp": "0ec6afa3448d8edaedc17360711eb7ddd2b4f67f3ff9021995371f64269a3095",
+  "src/ninja_debug_text.cpp": "4119f88e54869798a3ba8033ba2921eda65b855326a8ae4bac280516fd4b966e",
+  "src/ninja_keyboard.cpp": "cc794e0c7161dee217feabd7617167a9e8b0fc6e7bb5311b43f63196b02779da",
+  "tests/native_debug_text_register_probe.cpp": "5d6b4d190ac3b003c8801486a73f45faccf1ba5c70591544fd40946da8f833a8",
+  "tools/verify_original_debug_text_register.py": "32a55b350c6eabaf3ebbb53573d1508f630d84705d30c567268bc76004ae2b21"
+ },
+ "original_ranges_sha256": {
+  "0x793e70-0x793e80": "0804e17a54b88429ecdb8041e14817e5eac80ba5fc0529eff21367b3b7305584",
+  "0x77ffc0": "72756b16400c0c2f32d9a6d4cbf4bbfdb87393c55656412c760e169ea5fb9a04",
+  "0x78c5a0": "ae3f4619b0413d70d3004b9131c3752153074e45725be13b9a148978895e359e"
+ },
+ "cases": 500,
+ "source_outcomes": {
+  "completed": 500
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "state_traces_match": true,
+ "limits": "793e70 (781070's 78115d) against its original instructions, with the real\n77ffc0. Cases seed the callback count 3ce712c (0..31) and the 32 slots at\n3d0fa40. Compared: the count, the slots and EAX.\n"
+}

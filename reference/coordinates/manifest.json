@@ -1,0 +1,146 @@
+[
+  {
+    "name": "world-to-player",
+    "procedure": "0x43ec00",
+    "artifact": "world-to-player.json",
+    "evidence_id": "ev_6f334535f572db5b1981c7cd9c93df41779c891de69c79ba6e1aa0329517c14b",
+    "canonical_procedure": "0x43ec00",
+    "instruction_count": 46,
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    }
+  },
+  {
+    "name": "task-to-world",
+    "procedure": "0x43ec90",
+    "artifact": "task-to-world.json",
+    "evidence_id": "ev_17da574a577f342ee8f777bf1f529571f6f9d9f7fe08fc930701445ca783393c",
+    "canonical_procedure": "0x43ec90",
+    "instruction_count": 46,
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    }
+  },
+  {
+    "name": "floor-to-world",
+    "procedure": "0x43edd0",
+    "artifact": "floor-to-world.json",
+    "evidence_id": "ev_d9d6afae74959a3715a6bfa60fe05416a78e2de9ea0986f854a11ac371fedc2b",
+    "canonical_procedure": "0x43edd0",
+    "instruction_count": 54,
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    }
+  },
+  {
+    "name": "input-query",
+    "procedure": "0x43bdc0",
+    "artifact": "input-query.json",
+    "evidence_id": "ev_5c55442bc23bf130098ae6aa9bb8e7009d1f292e54466e0ad4e8252a2a86b1c6",
+    "canonical_procedure": "0x43bdc0",
+    "instruction_count": 112,
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    }
+  },
+  {
+    "name": "matrix-init",
+    "procedure": "0x7850f0",
+    "artifact": "matrix-init.json",
+    "evidence_id": "ev_be4c15d6844b1442cbf8333ea88c5191c3743ae75b20a151ec6bd93d0fdcef44",
+    "canonical_procedure": "0x7850f0",
+    "instruction_count": 23,
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    }
+  },
+  {
+    "name": "matrix-copy",
+    "procedure": "0x785160",
+    "artifact": "matrix-copy.json",
+    "evidence_id": "ev_543b26ff1be549a9bcb8842297b55cc321c7c2cc970e65f145f1ea2abbf19ffe",
+    "canonical_procedure": "0x785140",
+    "instruction_count": 10,
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    }
+  },
+  {
+    "name": "matrix-push",
+    "procedure": "0x785120",
+    "artifact": "matrix-push.json",
+    "evidence_id": "ev_6a354416b4fd8fd4f8f6902e33541b9a142f247f01a96250d3297dbff212c677",
+    "canonical_procedure": "0x7850f0",
+    "instruction_count": 23,
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    }
+  },
+  {
+    "name": "matrix-pop",
+    "procedure": "0x785140",
+    "artifact": "matrix-pop.json",
+    "evidence_id": "ev_e606f6a6bd999702e68cc2e3c32bf41e597a733cfedc88c7d3f018661dd0c986",
+    "canonical_procedure": "0x785140",
+    "instruction_count": 10,
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    }
+  },
+  {
+    "name": "matrix-vector",
+    "procedure": "0x784d60",
+    "artifact": "matrix-vector.json",
+    "evidence_id": "ev_df52f4441d5c9b013926d61e1debd51e9853ef6ff776f8f637e6a6440d65d797",
+    "canonical_procedure": "0x784d60",
+    "instruction_count": 68,
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    }
+  },
+  {
+    "name": "rotate-x",
+    "procedure": "0x784ee0",
+    "artifact": "rotate-x.json",
+    "evidence_id": "ev_f7f8ed576b41f1961b5fbccc353bf234ee1f04f745b20a868a3bf9d84170a489",
+    "canonical_procedure": "0x784ee0",
+    "instruction_count": 72,
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    }
+  },
+  {
+    "name": "rotate-y",
+    "procedure": "0x784e20",
+    "artifact": "rotate-y.json",
+    "evidence_id": "ev_1cae3940afbabc2975ddba2faf5d8c475a74a8012254a2fda929ba02efae2913",
+    "canonical_procedure": "0x784e20",
+    "instruction_count": 72,
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    }
+  },
+  {
+    "name": "rotate-z",
+    "procedure": "0x784fb0",
+    "artifact": "rotate-z.json",
+    "evidence_id": "ev_ac40ef6ae93cc154d2a96c1936673d7522b4a8864577d5dd9c6603d336371c92",
+    "canonical_procedure": "0x784fb0",
+    "instruction_count": 72,
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    }
+  }
+]

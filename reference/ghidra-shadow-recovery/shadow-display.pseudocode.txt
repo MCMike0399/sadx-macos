@@ -1,0 +1,33 @@
+
+void FUN_004a0760(int param_1)
+
+{
+  int iVar1;
+  undefined4 local_20;
+  undefined4 local_1c;
+  undefined4 local_18;
+  undefined4 local_14;
+  float local_10;
+  int local_c;
+  undefined **local_8;
+  undefined *local_4;
+  
+  iVar1 = *(int *)(param_1 + 0x20);
+  if (DAT_03b1117c < 1) {
+    local_8 = &PTR_DAT_0094a2a8;
+    local_4 = &DAT_009279d8;
+    FUN_004030d0(0,8);
+    FUN_004030d0(1,10);
+    for (iVar1 = *(int *)(iVar1 + 0x10); iVar1 != 0; iVar1 = *(int *)(iVar1 + 0x30)) {
+      local_c = (int)*(short *)(iVar1 + 0x1c);
+      local_20 = *(undefined4 *)(iVar1 + 4);
+      local_1c = *(undefined4 *)(iVar1 + 8);
+      local_18 = *(undefined4 *)(iVar1 + 0xc);
+      local_14 = *(undefined4 *)(iVar1 + 0x24);
+      local_10 = *(float *)(iVar1 + 0x20) * *(float *)(iVar1 + 0x24);
+      FUN_004072f0(&local_20,0,0x31);
+    }
+  }
+  return;
+}
+

@@ -1,0 +1,110 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "cded67515a2f255e74f9776c550fe2b42721592f5298e5d0cebb33d5c895d3f8",
+ "source_files": {
+  "src/ninja_queue_consumer.hpp": "c572a02983ef8133be004fbbe7009e1ac3d5a05c5321afc7847d7426979908c4",
+  "src/ninja_queue_consumer.cpp": "9c32d56d780154c6153823a56bd814a6c4186dfd771627a710cb2dee975d1aee",
+  "src/ninja_sprite_display.cpp": "d3862c48369678c4b5f65a6456bf13ed3d3e109d284ecfec46a7e7fed4b6f00b",
+  "src/ninja_sprite_queue.cpp": "c1616882fb01cb08b0bc7e00208f539c9ef248a25d7cc9d8bba12e1b28677c17",
+  "src/ninja_sprite.cpp": "04582f0633c4f7085d559231426caf8d3dcc3ace32b8e36576aebc8be15863e5",
+  "src/ninja_render.cpp": "7826cdf55bc8a16fde3906071632018a3f469b30aa58e4ee0bdb2d4c56865085",
+  "src/ninja_texture_selection.cpp": "dcc4ac252bfb2b34ee4305328b058ab8d7e7363271fbcdc608c92d97f2829d0f",
+  "tests/native_ninja_queue_consumer_probe.cpp": "d916500f0afb00e91d1855fb5aa1717c907a1d2ee52de583a85461ba1715edf8",
+  "tools/verify_original_ninja_queue_consumer.py": "50a389a7707be6635e90b8d5d4d4d862227fe79fac13c44a6a1ffe8b01f6d76f"
+ },
+ "assets_sha256": "16ceb6aaaa80e666bfab2722ce6679a4737b445aa946b7efd5e18fde3d50f819",
+ "original_ranges_sha256": {
+  "404760": "3280956979ff40a35cf1d7a6daae656ebc122a82267ba5dc2e8df7910c1e6574",
+  "4086f0": "930e6cf40423428bc03a490b9ce62660c61a2edeb5cd67fb58a67c46e286c048"
+ },
+ "cases": 187,
+ "case_sha256": "b40744798d722757febbf3ba75f4e392b7a2b663443fe9bb3b1498d581a5f97b",
+ "profiles": [
+  {
+   "cw": "0x7f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0x47f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0x87f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0xc7f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0x27f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0x67f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0xa7f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0xe7f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0x37f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0x77f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0xb7f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0xf7f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  }
+ ],
+ "source_outcomes_all_profiles": {
+  "0:0x0:0x0:draws1": 852,
+  "0:0x0:0x0:draws0": 60,
+  "0:0x0:0x0:draws2": 780,
+  "0:0x0:0x0:draws3": 252,
+  "6:0x4119d8:0x787240:draws1": 144,
+  "6:0x411b02:0x411a20:draws1": 96,
+  "6:0x40901c:0x4071c0:draws0": 24,
+  "5:0x408b1f:0x77e390:draws0": 36
+ },
+ "mismatch_examples": [],
+ "state_calls_vertices_boundaries_match": true,
+ "strict_flags_match": false,
+ "limits": "404760 sprite submissions followed by 4086f0 queue consumption, against original instructions.\n\nSource runs the actual 404760 queued route (403250/403f60/784bc0/403e80) and the\nwhole 4086f0 body with every local callee unchanged (402f40, 412400, 411f30,\n77ed00/77ed20, 784d00, 411af0/411b40, 794950/794980, type-3 77e390 ...). Only\nthese are fixtures or stops: the D3D8 device is a recording COM fixture; D3DX\n78dbe0 is a seeded `fld [seed]; ret 4` or a required stop; world-sprite 791a50\nstops as the native display boundary; the unlifted\n4071c0/787240 callees, the 411a20 body after its bit0 early return (411a30), and non-type-3 dispatch bodies stop exactly where\nthe native consumer reports its required boundary. Submission happens with\nqueue mode 0 and display switch 0; the case values are applied before 4086f0.\nRecords are type-3 sprites only, header texlist word 0, palette banks off.\n"
+}

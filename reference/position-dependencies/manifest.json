@@ -1,0 +1,104 @@
+[
+  {
+    "name": "scene-position-449500",
+    "artifact": "scene-position-449500.json",
+    "requested_procedure": "0x449500",
+    "canonical_procedure": "0x449500",
+    "evidence_id": "ev_39a7bf35bd9536051bf591fcb63b73d285e2d4b90b7c614ecef5bb8c4993dfc2",
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    },
+    "limitations": [
+      "Results depend on Hopper's completed static analysis.",
+      "String values cover native typed objects. Hopper may split long literals into adjacent unterminated fragments; string searches match each object independently.",
+      "Undecodable typed objects retain native display text with an explicit decoding unknown; these values do not establish decoded source literals.",
+      "Reported string encodings are inferred from typed bytes and native display; the original source's intended encoding is unknown."
+    ]
+  },
+  {
+    "name": "scene-position-445d10",
+    "artifact": "scene-position-445d10.json",
+    "requested_procedure": "0x445d10",
+    "canonical_procedure": "0x445d10",
+    "evidence_id": "ev_4020990d0fd51d11694877651f4e7c3dfad90e04ddcfa52c7e135efe4c4169b5",
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    },
+    "limitations": [
+      "Results depend on Hopper's completed static analysis.",
+      "String values cover native typed objects. Hopper may split long literals into adjacent unterminated fragments; string searches match each object independently.",
+      "Undecodable typed objects retain native display text with an explicit decoding unknown; these values do not establish decoded source literals.",
+      "Reported string encodings are inferred from typed bytes and native display; the original source's intended encoding is unknown."
+    ]
+  },
+  {
+    "name": "wall-normal",
+    "artifact": "wall-normal.json",
+    "requested_procedure": "0x41bed0",
+    "canonical_procedure": "0x41bed0",
+    "evidence_id": "ev_a51369b365dde189e0a6910bac7ea50f678a7e1886f17722be543963c8f09017",
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    },
+    "limitations": [
+      "Results depend on Hopper's completed static analysis.",
+      "String values cover native typed objects. Hopper may split long literals into adjacent unterminated fragments; string searches match each object independently.",
+      "Undecodable typed objects retain native display text with an explicit decoding unknown; these values do not establish decoded source literals.",
+      "Reported string encodings are inferred from typed bytes and native display; the original source's intended encoding is unknown."
+    ]
+  },
+  {
+    "name": "hit-kind",
+    "artifact": "hit-kind.json",
+    "requested_procedure": "0x41c1c0",
+    "canonical_procedure": "0x41c1c0",
+    "evidence_id": "ev_25c98866904e4c0aabe5bfc6a8a1c748c9e353b2cf34bf4c62da3c9f12d16056",
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    },
+    "limitations": [
+      "Results depend on Hopper's completed static analysis.",
+      "String values cover native typed objects. Hopper may split long literals into adjacent unterminated fragments; string searches match each object independently.",
+      "Undecodable typed objects retain native display text with an explicit decoding unknown; these values do not establish decoded source literals.",
+      "Reported string encodings are inferred from typed bytes and native display; the original source's intended encoding is unknown."
+    ]
+  },
+  {
+    "name": "speed-response",
+    "artifact": "speed-response.json",
+    "requested_procedure": "0x43c580",
+    "canonical_procedure": "0x43c580",
+    "evidence_id": "ev_bba2c578aad8fb13b244ec43a9095d729021888191609d45e99a55574431e49f",
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    },
+    "limitations": [
+      "Results depend on Hopper's completed static analysis.",
+      "String values cover native typed objects. Hopper may split long literals into adjacent unterminated fragments; string searches match each object independently.",
+      "Undecodable typed objects retain native display text with an explicit decoding unknown; these values do not establish decoded source literals.",
+      "Reported string encodings are inferred from typed bytes and native display; the original source's intended encoding is unknown."
+    ]
+  },
+  {
+    "name": "scalar-squared",
+    "artifact": "scalar-squared.json",
+    "requested_procedure": "0x787cf0",
+    "canonical_procedure": "0x787cf0",
+    "evidence_id": "ev_dc695589752bd68dd12dc777938159890b704214883de48a0ad0e8954b7252ed",
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    },
+    "limitations": [
+      "Results depend on Hopper's completed static analysis.",
+      "String values cover native typed objects. Hopper may split long literals into adjacent unterminated fragments; string searches match each object independently.",
+      "Undecodable typed objects retain native display text with an explicit decoding unknown; these values do not establish decoded source literals.",
+      "Reported string encodings are inferred from typed bytes and native display; the original source's intended encoding is unknown."
+    ]
+  }
+]

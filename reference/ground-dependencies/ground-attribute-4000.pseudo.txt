@@ -1,0 +1,690 @@
+    esp = esp - 0x20;
+    asm { fld        dword [dword_3b0f0f8] };
+    decomp_var_24 = ebx;
+    ebx = arg_4;
+    esp = esp - 0x8;
+    decomp_var_28 = ebp;
+    ebp = arg_8;
+    asm { fmul       dword [ebp+0x114] };
+    ecx = ebx[0x4];
+    edx = *(ebx + 0x14);
+    eax = *(ebx + 0x18);
+    var_18 = ecx;
+    asm { fadd       dword [esp+0x28+var_18] };
+    var_14 = edx;
+    esp = esp - 0x4;
+    decomp_var_2c = esi;
+    esi = arg_0;
+    asm { fstp       dword [esp+0x2c+var_18] };
+    asm { fld        dword [dword_3b0f0fc] };
+    ecx = &arg_8;
+    asm { fmul       dword [ebp+0x114] };
+    var_10 = eax;
+    esp = esp - 0x4;
+    decomp_var_30 = ecx;
+    edx = &var_20;
+    asm { fadd       dword [esp+0x30+var_14] };
+    decomp_var_34 = edx;
+    esp = esp - 0x8;
+    decomp_var_38 = esi;
+    var_4 = 0x0;
+    asm { fstp       dword [esp+0x38+var_14] };
+    var_C = 0x0;
+    asm { fld        dword [dword_3b0f100] };
+    asm { fmul       dword [ebp+0x114] };
+    asm { fadd       dword [esp+0x38+var_10] };
+    asm { fstp       dword [esp+0x38+var_10] };
+    eax = sub_43bdc0(decomp_var_38, decomp_var_34, decomp_var_30);
+    ecx = eax;
+    esp = esp + 0xc;
+    var_1C = ecx;
+    if (ecx == 0x0) {
+            asm { fld        dword [ebp+0x38] };
+            asm { fcomp      dword [ebp+0xc4] };
+            asm { fnstsw     ax };
+            if ((HIBYTE(eax) & 0x41) != 0x0) {
+                    asm { fld        dword [ebp+0x38] };
+                    asm { fcomp      dword [ebp+0xc8] };
+                    asm { fld        dword [ebp+0x38] };
+                    asm { fnstsw     ax };
+                    if ((HIBYTE(eax) & 0x41) == 0x0) {
+                            asm { fsub       dword [ebp+0xc8] };
+                            asm { fmul       dword [ebp+0xf0] };
+                            asm { fadd       dword [esp+0x2c+var_18] };
+                            asm { fstp       dword [esp+0x2c+var_18] };
+                    }
+                    else {
+                            asm { fcomp      dword [dword_value_1142947840+4] };
+                            asm { fnstsw     ax };
+                            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                    asm { fld        dword [ebp+0xf0] };
+                                    asm { fmul       dword [ebp+0x38] };
+                                    asm { fadd       dword [esp+0x2c+var_18] };
+                                    asm { fstp       dword [esp+0x2c+var_18] };
+                            }
+                    }
+            }
+            else {
+                    asm { fld        dword [ebp+0xf0] };
+                    asm { fmul       dword [ebp+0x38] };
+                    asm { fadd       dword [esp+0x2c+var_18] };
+                    asm { fstp       dword [esp+0x2c+var_18] };
+            }
+    }
+    else {
+            asm { fld        dword [ebp+0x38] };
+            asm { fcomp      dword [ebp+0xc8] };
+            asm { fld        dword [ebp+0x38] };
+            asm { fnstsw     ax };
+            if ((HIBYTE(eax) & 0x41) == 0x0) {
+                    asm { fsub       dword [ebp+0xc8] };
+                    asm { fmul       dword [ebp+0xf0] };
+                    asm { fadd       dword [esp+0x2c+var_18] };
+                    asm { fstp       dword [esp+0x2c+var_18] };
+            }
+            else {
+                    asm { fcomp      dword [dword_value_1142947840+4] };
+                    asm { fnstsw     ax };
+                    if (!PARITY(HIBYTE(eax) & 0x5)) {
+                            asm { fld        dword [ebp+0xf0] };
+                            asm { fmul       dword [ebp+0x38] };
+                            asm { fadd       dword [esp+0x2c+var_18] };
+                            asm { fstp       dword [esp+0x2c+var_18] };
+                    }
+            }
+    }
+    bool_37 = ecx != 0x0;
+    asm { fld        dword [ebp+0xf4] };
+    asm { fmul       dword [ebp+0x3c] };
+    asm { fadd       dword [esp+0x2c+var_14] };
+    asm { fstp       dword [esp+0x2c+var_14] };
+    asm { fld        dword [ebp+0xf8] };
+    asm { fmul       dword [ebp+0x40] };
+    asm { fadd       dword [esp+0x2c+var_10] };
+    asm { fstp       dword [esp+0x2c+var_10] };
+    if (!bool_37) {
+            asm { fld        dword [ebp+0x38] };
+            asm { fcomp      dword [dword_value_1142947840+4] };
+            asm { fnstsw     ax };
+            if ((HIBYTE(eax) & 0x41) == 0x0) {
+                    eax = arg_dc;
+                    var_C = eax;
+                    ebx[0xd] = ecx;
+            }
+            else {
+                    asm { fld        dword [ebp+0x38] };
+                    asm { fcomp      dword [dword_value_1142947840+4] };
+                    asm { fnstsw     ax };
+                    if (!PARITY(HIBYTE(eax) & 0x5)) {
+                            asm { fld        dword [ebp+0xe0] };
+                            asm { fchs };
+                            asm { fstp       dword [esp+0x2c+var_C] };
+                    }
+                    ebx[0xd] = 0x0;
+            }
+    }
+    else {
+            asm { fld        dword [ebp+0xc4] };
+            asm { fcomp      dword [ebp+0x38] };
+            asm { fld        dword [esp+0x2c+arg_8] };
+            asm { fmul       dword [ebp+0xd8] };
+            asm { fnstsw     ax };
+            if ((HIBYTE(eax) & 0x41) != 0x0) {
+                    asm { fmul       dword [dword_value_1065336439+4] };
+            }
+            ecx = esi[0x6];
+            asm { fstp       dword [esp+0x2c+arg_8] };
+            decomp_var_30 = edi;
+            edi = var_20;
+            esp = esp - 0xc;
+            eax = sub_4383b0(ecx, edi);
+            asm { fld        dword [ebp+0x38] };
+            asm { fcomp      dword [dword_value_1142947840+4] };
+            ecx = eax;
+            esp = esp + 0x8;
+            asm { fnstsw     ax };
+            if (!PARITY(HIBYTE(eax) & 0x44)) {
+                    if (ecx > 0x1000) {
+                            ebx[0x8] = edi;
+                            esp = esp - 0x8;
+                            arg_8 = 0x0;
+                            sub_443df0(ebx, edi);
+                    }
+                    else {
+                            asm { fld        dword [ebp+0xc0] };
+                            asm { fadd       dword [ebp+0xc4] };
+                            asm { fmul       dword [dword_value_1056964608] };
+                            asm { fcomp      dword [ebp+0x38] };
+                            asm { fnstsw     ax };
+                            if (!PARITY(HIBYTE(eax) & 0x41)) {
+                                    if (ecx > 0x1000) {
+                                            ebx[0x8] = edi;
+                                            arg_8 = arg_dc;
+                                            esp = esp - 0x8;
+                                            sub_443c50(ebx, edi);
+                                    }
+                                    else {
+                                            asm { fld        dword [ebp+0x38] };
+                                            asm { fcomp      dword [ebp+0xc0] };
+                                            asm { fnstsw     ax };
+                                            if ((HIBYTE(eax) & 0x1) == 0x0) {
+                                                    if (ecx < 0x1000) {
+                                                            ebx[0x8] = edi;
+                                                            esp = esp - 0x8;
+                                                            sub_443e60(ebx, edi);
+                                                            ebx = arg_4;
+                                                    }
+                                                    else {
+                                                            asm { fld        dword [ebp+0x38] };
+                                                            asm { fcomp      dword [ebp+0xc0] };
+                                                            asm { fnstsw     ax };
+                                                            if ((HIBYTE(eax) & 0x1) == 0x0) {
+                                                                    asm { fld        dword [ebp+0x38] };
+                                                                    asm { fcomp      dword [ebp+0xc8] };
+                                                                    asm { fnstsw     ax };
+                                                                    if (!PARITY(HIBYTE(eax) & 0x41)) {
+                                                                            if (ecx > 0x2000) {
+                                                                                    asm { fld        dword [esp+0x30+arg_8] };
+                                                                                    asm { fmul       dword [dword_value_1114767360+4] };
+                                                                                    asm { fstp       dword [esp+0x30+arg_8] };
+                                                                            }
+                                                                    }
+                                                            }
+                                                            ebx[0x8] = edi;
+                                                            esp = esp - 0x8;
+                                                            sub_443c50(ebx, edi);
+                                                    }
+                                            }
+                                            else {
+                                                    asm { fld        dword [ebp+0x38] };
+                                                    asm { fcomp      dword [ebp+0xc0] };
+                                                    asm { fnstsw     ax };
+                                                    if ((HIBYTE(eax) & 0x1) == 0x0) {
+                                                            asm { fld        dword [ebp+0x38] };
+                                                            asm { fcomp      dword [ebp+0xc8] };
+                                                            asm { fnstsw     ax };
+                                                            if (!PARITY(HIBYTE(eax) & 0x41)) {
+                                                                    if (ecx > 0x2000) {
+                                                                            asm { fld        dword [esp+0x30+arg_8] };
+                                                                            asm { fmul       dword [dword_value_1114767360+4] };
+                                                                            asm { fstp       dword [esp+0x30+arg_8] };
+                                                                            ebx[0x8] = edi;
+                                                                    }
+                                                                    else {
+                                                                            ebx[0x8] = edi;
+                                                                    }
+                                                            }
+                                                            else {
+                                                                    ebx[0x8] = edi;
+                                                            }
+                                                    }
+                                                    else {
+                                                            ebx[0x8] = edi;
+                                                    }
+                                                    esp = esp - 0x8;
+                                                    sub_443c50(ebx, edi);
+                                            }
+                                    }
+                            }
+                            else {
+                                    asm { fld        dword [ebp+0x38] };
+                                    asm { fcomp      dword [ebp+0xc0] };
+                                    asm { fnstsw     ax };
+                                    if ((HIBYTE(eax) & 0x1) == 0x0) {
+                                            if (ecx < 0x1000) {
+                                                    ebx[0x8] = edi;
+                                                    esp = esp - 0x8;
+                                                    sub_443e60(ebx, edi);
+                                                    ebx = arg_4;
+                                            }
+                                            else {
+                                                    asm { fld        dword [ebp+0x38] };
+                                                    asm { fcomp      dword [ebp+0xc0] };
+                                                    asm { fnstsw     ax };
+                                                    if ((HIBYTE(eax) & 0x1) == 0x0) {
+                                                            asm { fld        dword [ebp+0x38] };
+                                                            asm { fcomp      dword [ebp+0xc8] };
+                                                            asm { fnstsw     ax };
+                                                            if (!PARITY(HIBYTE(eax) & 0x41)) {
+                                                                    if (ecx > 0x2000) {
+                                                                            asm { fld        dword [esp+0x30+arg_8] };
+                                                                            asm { fmul       dword [dword_value_1114767360+4] };
+                                                                            asm { fstp       dword [esp+0x30+arg_8] };
+                                                                            ebx[0x8] = edi;
+                                                                            esp = esp - 0x8;
+                                                                            sub_443c50(ebx, edi);
+                                                                    }
+                                                                    else {
+                                                                            ebx[0x8] = edi;
+                                                                            esp = esp - 0x8;
+                                                                            sub_443c50(ebx, edi);
+                                                                    }
+                                                            }
+                                                            else {
+                                                                    ebx[0x8] = edi;
+                                                                    esp = esp - 0x8;
+                                                                    sub_443c50(ebx, edi);
+                                                            }
+                                                    }
+                                                    else {
+                                                            ebx[0x8] = edi;
+                                                            esp = esp - 0x8;
+                                                            sub_443c50(ebx, edi);
+                                                    }
+                                            }
+                                    }
+                                    else {
+                                            asm { fld        dword [ebp+0x38] };
+                                            asm { fcomp      dword [ebp+0xc0] };
+                                            asm { fnstsw     ax };
+                                            if ((HIBYTE(eax) & 0x1) == 0x0) {
+                                                    asm { fld        dword [ebp+0x38] };
+                                                    asm { fcomp      dword [ebp+0xc8] };
+                                                    asm { fnstsw     ax };
+                                                    if (!PARITY(HIBYTE(eax) & 0x41)) {
+                                                            if (ecx > 0x2000) {
+                                                                    asm { fld        dword [esp+0x30+arg_8] };
+                                                                    asm { fmul       dword [dword_value_1114767360+4] };
+                                                                    asm { fstp       dword [esp+0x30+arg_8] };
+                                                                    ebx[0x8] = edi;
+                                                                    esp = esp - 0x8;
+                                                                    sub_443c50(ebx, edi);
+                                                            }
+                                                            else {
+                                                                    ebx[0x8] = edi;
+                                                                    esp = esp - 0x8;
+                                                                    sub_443c50(ebx, edi);
+                                                            }
+                                                    }
+                                                    else {
+                                                            ebx[0x8] = edi;
+                                                            esp = esp - 0x8;
+                                                            sub_443c50(ebx, edi);
+                                                    }
+                                            }
+                                            else {
+                                                    ebx[0x8] = edi;
+                                                    esp = esp - 0x8;
+                                                    sub_443c50(ebx, edi);
+                                            }
+                                    }
+                            }
+                    }
+            }
+            else {
+                    asm { fld        dword [ebp+0xc0] };
+                    asm { fadd       dword [ebp+0xc4] };
+                    asm { fmul       dword [dword_value_1056964608] };
+                    asm { fcomp      dword [ebp+0x38] };
+                    asm { fnstsw     ax };
+                    if (!PARITY(HIBYTE(eax) & 0x41)) {
+                            if (ecx > 0x1000) {
+                                    ebx[0x8] = edi;
+                                    arg_8 = arg_dc;
+                                    esp = esp - 0x8;
+                                    sub_443c50(ebx, edi);
+                            }
+                            else {
+                                    asm { fld        dword [ebp+0x38] };
+                                    asm { fcomp      dword [ebp+0xc0] };
+                                    asm { fnstsw     ax };
+                                    if ((HIBYTE(eax) & 0x1) == 0x0) {
+                                            if (ecx < 0x1000) {
+                                                    ebx[0x8] = edi;
+                                                    esp = esp - 0x8;
+                                                    sub_443e60(ebx, edi);
+                                                    ebx = arg_4;
+                                            }
+                                            else {
+                                                    asm { fld        dword [ebp+0x38] };
+                                                    asm { fcomp      dword [ebp+0xc0] };
+                                                    asm { fnstsw     ax };
+                                                    if ((HIBYTE(eax) & 0x1) == 0x0) {
+                                                            asm { fld        dword [ebp+0x38] };
+                                                            asm { fcomp      dword [ebp+0xc8] };
+                                                            asm { fnstsw     ax };
+                                                            if (!PARITY(HIBYTE(eax) & 0x41)) {
+                                                                    if (ecx > 0x2000) {
+                                                                            asm { fld        dword [esp+0x30+arg_8] };
+                                                                            asm { fmul       dword [dword_value_1114767360+4] };
+                                                                            asm { fstp       dword [esp+0x30+arg_8] };
+                                                                            ebx[0x8] = edi;
+                                                                            esp = esp - 0x8;
+                                                                            sub_443c50(ebx, edi);
+                                                                    }
+                                                                    else {
+                                                                            ebx[0x8] = edi;
+                                                                            esp = esp - 0x8;
+                                                                            sub_443c50(ebx, edi);
+                                                                    }
+                                                            }
+                                                            else {
+                                                                    ebx[0x8] = edi;
+                                                                    esp = esp - 0x8;
+                                                                    sub_443c50(ebx, edi);
+                                                            }
+                                                    }
+                                                    else {
+                                                            ebx[0x8] = edi;
+                                                            esp = esp - 0x8;
+                                                            sub_443c50(ebx, edi);
+                                                    }
+                                            }
+                                    }
+                                    else {
+                                            asm { fld        dword [ebp+0x38] };
+                                            asm { fcomp      dword [ebp+0xc0] };
+                                            asm { fnstsw     ax };
+                                            if ((HIBYTE(eax) & 0x1) == 0x0) {
+                                                    asm { fld        dword [ebp+0x38] };
+                                                    asm { fcomp      dword [ebp+0xc8] };
+                                                    asm { fnstsw     ax };
+                                                    if (!PARITY(HIBYTE(eax) & 0x41)) {
+                                                            if (ecx > 0x2000) {
+                                                                    asm { fld        dword [esp+0x30+arg_8] };
+                                                                    asm { fmul       dword [dword_value_1114767360+4] };
+                                                                    asm { fstp       dword [esp+0x30+arg_8] };
+                                                                    ebx[0x8] = edi;
+                                                                    esp = esp - 0x8;
+                                                                    sub_443c50(ebx, edi);
+                                                            }
+                                                            else {
+                                                                    ebx[0x8] = edi;
+                                                                    esp = esp - 0x8;
+                                                                    sub_443c50(ebx, edi);
+                                                            }
+                                                    }
+                                                    else {
+                                                            ebx[0x8] = edi;
+                                                            esp = esp - 0x8;
+                                                            sub_443c50(ebx, edi);
+                                                    }
+                                            }
+                                            else {
+                                                    ebx[0x8] = edi;
+                                                    esp = esp - 0x8;
+                                                    sub_443c50(ebx, edi);
+                                            }
+                                    }
+                            }
+                    }
+                    else {
+                            asm { fld        dword [ebp+0x38] };
+                            asm { fcomp      dword [ebp+0xc0] };
+                            asm { fnstsw     ax };
+                            if ((HIBYTE(eax) & 0x1) == 0x0) {
+                                    if (ecx < 0x1000) {
+                                            ebx[0x8] = edi;
+                                            esp = esp - 0x8;
+                                            sub_443e60(ebx, edi);
+                                            ebx = arg_4;
+                                    }
+                                    else {
+                                            asm { fld        dword [ebp+0x38] };
+                                            asm { fcomp      dword [ebp+0xc0] };
+                                            asm { fnstsw     ax };
+                                            if ((HIBYTE(eax) & 0x1) == 0x0) {
+                                                    asm { fld        dword [ebp+0x38] };
+                                                    asm { fcomp      dword [ebp+0xc8] };
+                                                    asm { fnstsw     ax };
+                                                    if (!PARITY(HIBYTE(eax) & 0x41)) {
+                                                            if (ecx > 0x2000) {
+                                                                    asm { fld        dword [esp+0x30+arg_8] };
+                                                                    asm { fmul       dword [dword_value_1114767360+4] };
+                                                                    asm { fstp       dword [esp+0x30+arg_8] };
+                                                                    ebx[0x8] = edi;
+                                                                    esp = esp - 0x8;
+                                                                    sub_443c50(ebx, edi);
+                                                            }
+                                                            else {
+                                                                    ebx[0x8] = edi;
+                                                                    esp = esp - 0x8;
+                                                                    sub_443c50(ebx, edi);
+                                                            }
+                                                    }
+                                                    else {
+                                                            ebx[0x8] = edi;
+                                                            esp = esp - 0x8;
+                                                            sub_443c50(ebx, edi);
+                                                    }
+                                            }
+                                            else {
+                                                    ebx[0x8] = edi;
+                                                    esp = esp - 0x8;
+                                                    sub_443c50(ebx, edi);
+                                            }
+                                    }
+                            }
+                            else {
+                                    asm { fld        dword [ebp+0x38] };
+                                    asm { fcomp      dword [ebp+0xc0] };
+                                    asm { fnstsw     ax };
+                                    if ((HIBYTE(eax) & 0x1) == 0x0) {
+                                            asm { fld        dword [ebp+0x38] };
+                                            asm { fcomp      dword [ebp+0xc8] };
+                                            asm { fnstsw     ax };
+                                            if (!PARITY(HIBYTE(eax) & 0x41)) {
+                                                    if (ecx > 0x2000) {
+                                                            asm { fld        dword [esp+0x30+arg_8] };
+                                                            asm { fmul       dword [dword_value_1114767360+4] };
+                                                            asm { fstp       dword [esp+0x30+arg_8] };
+                                                            ebx[0x8] = edi;
+                                                            esp = esp - 0x8;
+                                                            sub_443c50(ebx, edi);
+                                                    }
+                                                    else {
+                                                            ebx[0x8] = edi;
+                                                            esp = esp - 0x8;
+                                                            sub_443c50(ebx, edi);
+                                                    }
+                                            }
+                                            else {
+                                                    ebx[0x8] = edi;
+                                                    esp = esp - 0x8;
+                                                    sub_443c50(ebx, edi);
+                                            }
+                                    }
+                                    else {
+                                            ebx[0x8] = edi;
+                                            esp = esp - 0x8;
+                                            sub_443c50(ebx, edi);
+                                    }
+                            }
+                    }
+            }
+            eax = arg_8;
+            var_C = eax;
+            ecx = var_1C;
+            ebx[0xd] = eax;
+            esp = esp + 0xc;
+    }
+    asm { fld        dword [ebp+0x38] };
+    asm { fcomp      dword [dword_value_1142947840+4] };
+    asm { fnstsw     ax };
+    if (!PARITY(HIBYTE(eax) & 0x44)) {
+            bool_5 = ecx != 0x0;
+            asm { fld        dword [ebp+0x104] };
+            asm { fmul       dword [ebx+0x3c] };
+            asm { fmul       dword [esp+0x2c+var_14] };
+            asm { fstp       dword [esp+0x2c+arg_4] };
+            asm { fld        dword [esp+0x2c+var_18] };
+            asm { fadd       dword [esp+0x2c+var_C] };
+            asm { fstp       dword [esp+0x2c+var_18] };
+            if (!bool_5) {
+                    asm { fld        dword [esp+0x2c+var_18] };
+                    asm { fcomp      dword [esp+0x2c+arg_4] };
+                    asm { fnstsw     ax };
+                    if (!PARITY(HIBYTE(eax) & 0x5)) {
+                            asm { fld        dword [esp+0x2c+arg_4] };
+                            asm { fchs };
+                            asm { fcomp      dword [esp+0x2c+var_18] };
+                            asm { fnstsw     ax };
+                            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                    var_18 = 0x0;
+                            }
+                    }
+            }
+    }
+    else {
+            asm { fld        dword [esp+0x2c+var_C] };
+            asm { fcomp      dword [dword_value_1142947840+4] };
+            asm { fnstsw     ax };
+            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                    asm { fld        dword [ebp+0x38] };
+                    asm { fcomp      dword [dword_value_1142947840+4] };
+                    asm { fnstsw     ax };
+                    if ((HIBYTE(eax) & 0x41) == 0x0) {
+                            asm { fld        dword [esp+0x2c+var_18] };
+                            asm { fadd       dword [esp+0x2c+var_C] };
+                            asm { fld        dword [esp+0x2c+var_C] };
+                            asm { fmul       st1 };
+                            asm { fcomp      dword [dword_value_1142947840+4] };
+                            asm { fnstsw     ax };
+                            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                    asm { fstp       st0 };
+                                    asm { fld        dword [dword_value_1142947840+4] };
+                            }
+                    }
+                    else {
+                            asm { fld        dword [ebp+0x104] };
+                            asm { fmul       dword [ebx+0x3c] };
+                            asm { fmul       dword [esp+0x2c+var_14] };
+                            asm { fadd       dword [esp+0x2c+var_18] };
+                            asm { fadd       dword [esp+0x2c+var_C] };
+                            asm { fcom       dword [dword_value_1142947840+4] };
+                            asm { fnstsw     ax };
+                            if ((HIBYTE(eax) & 0x1) == 0x0) {
+                                    asm { fstp       st0 };
+                                    asm { fld        dword [dword_value_1142947840+4] };
+                            }
+                    }
+                    asm { fstp       dword [esp+0x2c+var_18] };
+            }
+            else {
+                    asm { fld        dword [ebp+0x104] };
+                    asm { fmul       dword [ebx+0x3c] };
+                    asm { fmul       dword [esp+0x2c+var_14] };
+                    asm { fstp       dword [esp+0x2c+arg_4] };
+                    asm { fld        dword [ebp+0x38] };
+                    asm { fcomp      dword [dword_value_1142947840+4] };
+                    asm { fnstsw     ax };
+                    if (!PARITY(HIBYTE(eax) & 0x5)) {
+                            asm { fld        dword [esp+0x2c+var_18] };
+                            asm { fadd       dword [esp+0x2c+var_C] };
+                            asm { fst        dword [esp+0x2c+var_18] };
+                            asm { fmul       dword [esp+0x2c+var_C] };
+                            asm { fcomp      dword [dword_value_1142947840+4] };
+                            asm { fnstsw     ax };
+                            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                    var_18 = 0x0;
+                            }
+                    }
+                    else {
+                            asm { fld        dword [esp+0x2c+arg_4] };
+                            asm { fcomp      dword [dword_value_1142947840+4] };
+                            asm { fnstsw     ax };
+                            if ((HIBYTE(eax) & 0x41) == 0x0) {
+                                    asm { fld        dword [esp+0x2c+arg_4] };
+                                    asm { fcomp      dword [esp+0x2c+var_C] };
+                                    asm { fnstsw     ax };
+                                    if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                            asm { fld        dword [esp+0x2c+var_18] };
+                                            asm { fadd       dword [esp+0x2c+var_C] };
+                                            asm { fcom       dword [esp+0x2c+arg_4] };
+                                            asm { fnstsw     ax };
+                                            if ((HIBYTE(eax) & 0x41) == 0x0) {
+                                                    asm { fsub       dword [esp+0x2c+arg_4] };
+                                                    asm { fstp       dword [ebx+0x38] };
+                                                    asm { fld        dword [esp+0x2c+arg_4] };
+                                            }
+                                    }
+                                    else {
+                                            asm { fld        dword [esp+0x2c+var_18] };
+                                            asm { fadd       dword [esp+0x2c+var_C] };
+                                    }
+                            }
+                            else {
+                                    asm { fld        dword [esp+0x2c+var_18] };
+                                    asm { fadd       dword [esp+0x2c+var_C] };
+                            }
+                            asm { fstp       dword [esp+0x2c+var_18] };
+                    }
+            }
+    }
+    asm { fld        dword [ebp+0x40] };
+    asm { fcomp      dword [dword_value_1142947840+4] };
+    asm { fnstsw     ax };
+    if (!PARITY(HIBYTE(eax) & 0x44)) {
+            asm { fld        dword [ebp+0x104] };
+            asm { fmul       dword [ebx+0x3c] };
+            asm { fmul       dword [esp+0x2c+var_14] };
+            asm { fld        dword [esp+0x2c+var_10] };
+            asm { fcomp      st1 };
+            asm { fnstsw     ax };
+            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                    asm { fchs };
+                    asm { fcomp      dword [esp+0x2c+var_10] };
+                    asm { fnstsw     ax };
+                    if (!PARITY(HIBYTE(eax) & 0x5)) {
+                            var_10 = 0x0;
+                    }
+            }
+            else {
+                    asm { fstp       st0 };
+            }
+    }
+    else {
+            asm { fld        dword [esp+0x2c+var_14] };
+            asm { fcomp      dword [dword_value_1142947840+4] };
+            asm { fnstsw     ax };
+            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                    asm { fld        dword [ebp+0x100] };
+                    asm { fmul       dword [ebx+0x3c] };
+                    asm { fmul       dword [esp+0x2c+var_14] };
+            }
+            else {
+                    asm { fld        dword [dword_value_1142947840+4] };
+            }
+            asm { fld        dword [esp+0x2c+var_10] };
+            asm { fcomp      dword [dword_value_1142947840+4] };
+            asm { fnstsw     ax };
+            if ((HIBYTE(eax) & 0x41) == 0x0) {
+                    asm { fchs };
+                    asm { fstp       dword [esp+0x2c+var_4] };
+            }
+            else {
+                    asm { fld        dword [esp+0x2c+var_10] };
+                    asm { fcomp      dword [dword_value_1142947840+4] };
+                    asm { fnstsw     ax };
+                    if (!PARITY(HIBYTE(eax) & 0x5)) {
+                            asm { fstp       dword [esp+0x2c+var_4] };
+                    }
+                    else {
+                            asm { fstp       st0 };
+                    }
+            }
+            asm { fld        dword [esp+0x2c+var_10] };
+            asm { fadd       dword [esp+0x2c+var_4] };
+            asm { fld        dword [esp+0x2c+var_10] };
+            asm { fcomp      dword [dword_value_1142947840+4] };
+            asm { fnstsw     ax };
+            if (PARITY(HIBYTE(eax) & 0x44)) {
+                    asm { fld        dword [esp+0x2c+var_4] };
+                    asm { fcomp      dword [dword_value_1142947840+4] };
+                    asm { fnstsw     ax };
+                    if (PARITY(HIBYTE(eax) & 0x44)) {
+                            asm { fld        dword [esp+0x2c+var_10] };
+                            asm { fmul       st1 };
+                            asm { fcomp      dword [dword_value_1142947840+4] };
+                            asm { fnstsw     ax };
+                            if (!PARITY(HIBYTE(eax) & 0x5)) {
+                                    asm { fstp       st0 };
+                                    asm { fld        dword [dword_value_1142947840+4] };
+                            }
+                    }
+            }
+            asm { fstp       dword [esp+0x2c+var_10] };
+    }
+    eax = var_18;
+    arg_28 = eax;
+    return eax;

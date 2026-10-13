@@ -1,0 +1,20 @@
+
+int FUN_00403d30(int param_1)
+
+{
+  uint uVar1;
+  int iVar2;
+  
+  uVar1 = DAT_03abd954 + (param_1 + 0x1fU & 0xffffffe0);
+  if (uVar1 <= DAT_03ab9874) {
+    iVar2 = DAT_03abd954;
+    DAT_03abd954 = uVar1;
+    return iVar2;
+  }
+  if (DAT_03abd9c8 == 0) {
+    FUN_00401000("late_alloca() : not enough memory!\n");
+    DAT_03abd9c8 = 1;
+  }
+  return 0;
+}
+

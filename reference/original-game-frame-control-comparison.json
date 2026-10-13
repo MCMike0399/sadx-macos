@@ -1,0 +1,42 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "native_library_sha256": "ae4750d4ef729bf37a63e1e0b30c634c8f6fe7b9c12aa5075852cbbfeee7cc8a",
+  "source_files": {
+    "src/game_frame_control.hpp": "2b11c9faf0bf7be0488fbc3ec732229aee24d00a4a771af0be272c78df290819",
+    "src/game_frame_control.cpp": "82ca1c1885f4cfdcc78f9edcfb2bcc613f2bd19c46301bb3feb7b5a3e96f887b",
+    "src/game_logic_support.hpp": "09fa4b39abd9bc8de1967e101dab442d66a74bb341b1f807ca4b8ec89a12572b",
+    "tests/native_game_frame_control_probe.cpp": "a54023866938aebd114e112fab267148e044cfcb862e5ff476f2975e8f77cd36",
+    "tools/verify_original_game_frame_control.py": "9cf7b9abc8ad63ba268cce26eade9f8f7f653f12c31d8b9b7c45afc2e71261cf"
+  },
+  "original_ranges": {
+    "0x411e20": {
+      "bytes": 10,
+      "sha256": "20d3e8dfa444fc04a22b80fea12a4b22c1a0771e57988a55a61df32bbb378eb5"
+    },
+    "0x411e30": {
+      "bytes": 93,
+      "sha256": "e0c74d874422c0d1bce6d255daed04f2c5e017e647c93b057f8ea3dcaed328a4"
+    },
+    "0x7899a0": {
+      "bytes": 54,
+      "sha256": "0a48acf7429b956758b6cd5057ed80f2e746004aae6d325994fc16fc4ade4eb5"
+    },
+    "0x40f010": {
+      "bytes": 86,
+      "sha256": "72b8e9716a4adffd6401aabb1d11efa3d09d83beefc941487796566331f5fa4c"
+    },
+    "0x792f60": {
+      "bytes": 3,
+      "sha256": "4bc724f3b1d0caf4fe369c18cba3102e6c4ea057f63fe1587e3973134a7f755e"
+    },
+    "0x780069": {
+      "bytes": 30,
+      "sha256": "e3daa5030d28c663b42aa7b2106e75404a91495949c41f8c4d5470a17b76177d"
+    }
+  },
+  "cases": 2672,
+  "case_sha256": "ba60d6912ccc53336a88b1d43149bc3b164ba3e478c3a942d91020dc5cd60d63",
+  "mismatches": [],
+  "stores_callback_identity_and_boundaries_match": true,
+  "limits": "Actual411e30/7899a0/40f010/411e20 control instructions vs native owners.\n\nCounter words and input bytes are explicit fixtures; no live host clock or\nphysical keys are inferred. Missing facts stop before their actual source read\nas a declared availability fixture. The unused EAX return of the input callback\nis excluded: its actual780074 caller immediately overwrites that register.\n"
+}

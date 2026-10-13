@@ -1,0 +1,1694 @@
+{
+  "source_sonic_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "source_sonic_imports": [
+    {
+      "dll": "KERNEL32.dll",
+      "symbols": [
+        {
+          "name": "CompareStringW"
+        },
+        {
+          "name": "GetTimeZoneInformation"
+        },
+        {
+          "name": "GetPrivateProfileIntA"
+        },
+        {
+          "name": "GetPrivateProfileStringA"
+        },
+        {
+          "name": "FreeLibrary"
+        },
+        {
+          "name": "LoadLibraryA"
+        },
+        {
+          "name": "GetProcAddress"
+        },
+        {
+          "name": "GetLogicalDriveStringsA"
+        },
+        {
+          "name": "GetDriveTypeA"
+        },
+        {
+          "name": "lstrcpyA"
+        },
+        {
+          "name": "ReadFileEx"
+        },
+        {
+          "name": "CancelIo"
+        },
+        {
+          "name": "SleepEx"
+        },
+        {
+          "name": "GetFileAttributesA"
+        },
+        {
+          "name": "CreateMutexA"
+        },
+        {
+          "name": "QueryPerformanceFrequency"
+        },
+        {
+          "name": "FindFirstFileA"
+        },
+        {
+          "name": "SetEnvironmentVariableA"
+        },
+        {
+          "name": "HeapAlloc"
+        },
+        {
+          "name": "HeapCreate"
+        },
+        {
+          "name": "Sleep"
+        },
+        {
+          "name": "MultiByteToWideChar"
+        },
+        {
+          "name": "EnterCriticalSection"
+        },
+        {
+          "name": "LeaveCriticalSection"
+        },
+        {
+          "name": "WaitForMultipleObjects"
+        },
+        {
+          "name": "InitializeCriticalSection"
+        },
+        {
+          "name": "CreateThread"
+        },
+        {
+          "name": "CreateEventA"
+        },
+        {
+          "name": "CloseHandle"
+        },
+        {
+          "name": "DeleteCriticalSection"
+        },
+        {
+          "name": "WaitForSingleObject"
+        },
+        {
+          "name": "SetEvent"
+        },
+        {
+          "name": "InterlockedIncrement"
+        },
+        {
+          "name": "GetLastError"
+        },
+        {
+          "name": "InterlockedDecrement"
+        },
+        {
+          "name": "ResetEvent"
+        },
+        {
+          "name": "CreateFileA"
+        },
+        {
+          "name": "lstrcmpA"
+        },
+        {
+          "name": "DeleteFileA"
+        },
+        {
+          "name": "lstrlenA"
+        },
+        {
+          "name": "CompareStringA"
+        },
+        {
+          "name": "CreateDirectoryA"
+        },
+        {
+          "name": "LocalFree"
+        },
+        {
+          "name": "FormatMessageA"
+        },
+        {
+          "name": "ReadFile"
+        },
+        {
+          "name": "GetFileSize"
+        },
+        {
+          "name": "lstrcmpiA"
+        },
+        {
+          "name": "WritePrivateProfileStringA"
+        },
+        {
+          "name": "SetFilePointer"
+        },
+        {
+          "name": "HeapReAlloc"
+        },
+        {
+          "name": "HeapDestroy"
+        },
+        {
+          "name": "HeapFree"
+        },
+        {
+          "name": "HeapSize"
+        },
+        {
+          "name": "FileTimeToSystemTime"
+        },
+        {
+          "name": "FileTimeToLocalFileTime"
+        },
+        {
+          "name": "FindNextFileA"
+        },
+        {
+          "name": "GetACP"
+        },
+        {
+          "name": "GetLocaleInfoA"
+        },
+        {
+          "name": "GetVersionExA"
+        },
+        {
+          "name": "GetCurrentThreadId"
+        },
+        {
+          "name": "MulDiv"
+        },
+        {
+          "name": "GetSystemInfo"
+        },
+        {
+          "name": "VirtualFree"
+        },
+        {
+          "name": "GetCurrentProcess"
+        },
+        {
+          "name": "VirtualAlloc"
+        },
+        {
+          "name": "GetModuleHandleA"
+        },
+        {
+          "name": "WideCharToMultiByte"
+        },
+        {
+          "name": "SetThreadPriority"
+        },
+        {
+          "name": "GetThreadPriority"
+        },
+        {
+          "name": "GetCurrentThread"
+        },
+        {
+          "name": "GetTickCount"
+        },
+        {
+          "name": "ExitProcess"
+        },
+        {
+          "name": "GetStartupInfoA"
+        },
+        {
+          "name": "GetCommandLineA"
+        },
+        {
+          "name": "RtlUnwind"
+        },
+        {
+          "name": "QueryPerformanceCounter"
+        },
+        {
+          "name": "GetCurrentProcessId"
+        },
+        {
+          "name": "GetSystemTimeAsFileTime"
+        },
+        {
+          "name": "GetModuleFileNameA"
+        },
+        {
+          "name": "TerminateProcess"
+        },
+        {
+          "name": "WriteFile"
+        },
+        {
+          "name": "GetStdHandle"
+        },
+        {
+          "name": "UnhandledExceptionFilter"
+        },
+        {
+          "name": "FreeEnvironmentStringsA"
+        },
+        {
+          "name": "GetEnvironmentStrings"
+        },
+        {
+          "name": "FreeEnvironmentStringsW"
+        },
+        {
+          "name": "GetEnvironmentStringsW"
+        },
+        {
+          "name": "SetHandleCount"
+        },
+        {
+          "name": "GetFileType"
+        },
+        {
+          "name": "IsBadWritePtr"
+        },
+        {
+          "name": "RaiseException"
+        },
+        {
+          "name": "GetOEMCP"
+        },
+        {
+          "name": "GetCPInfo"
+        },
+        {
+          "name": "SetUnhandledExceptionFilter"
+        },
+        {
+          "name": "IsBadReadPtr"
+        },
+        {
+          "name": "IsBadCodePtr"
+        },
+        {
+          "name": "SetStdHandle"
+        },
+        {
+          "name": "FlushFileBuffers"
+        },
+        {
+          "name": "GetStringTypeA"
+        },
+        {
+          "name": "GetStringTypeW"
+        },
+        {
+          "name": "LCMapStringA"
+        },
+        {
+          "name": "LCMapStringW"
+        },
+        {
+          "name": "SetEndOfFile"
+        },
+        {
+          "name": "VirtualProtect"
+        },
+        {
+          "name": "VirtualQuery"
+        },
+        {
+          "name": "IsProcessorFeaturePresent"
+        },
+        {
+          "name": "FindClose"
+        }
+      ]
+    },
+    {
+      "dll": "USER32.dll",
+      "symbols": [
+        {
+          "name": "ShowCursor"
+        },
+        {
+          "name": "MessageBoxA"
+        },
+        {
+          "name": "PostThreadMessageA"
+        },
+        {
+          "name": "GetQueueStatus"
+        },
+        {
+          "name": "PeekMessageA"
+        },
+        {
+          "name": "MsgWaitForMultipleObjects"
+        },
+        {
+          "name": "RegisterWindowMessageA"
+        },
+        {
+          "name": "DispatchMessageA"
+        },
+        {
+          "name": "TranslateMessage"
+        },
+        {
+          "name": "SetForegroundWindow"
+        },
+        {
+          "name": "SystemParametersInfoA"
+        },
+        {
+          "name": "PostQuitMessage"
+        },
+        {
+          "name": "DefWindowProcA"
+        },
+        {
+          "name": "UpdateWindow"
+        },
+        {
+          "name": "ShowWindow"
+        },
+        {
+          "name": "CreateWindowExA"
+        },
+        {
+          "name": "RegisterClassA"
+        },
+        {
+          "name": "LoadCursorA"
+        },
+        {
+          "name": "LoadIconA"
+        },
+        {
+          "name": "wsprintfA"
+        },
+        {
+          "name": "FindWindowA"
+        },
+        {
+          "name": "SetWindowLongA"
+        },
+        {
+          "name": "CallWindowProcA"
+        }
+      ]
+    },
+    {
+      "dll": "ole32.dll",
+      "symbols": [
+        {
+          "name": "CoUninitialize"
+        },
+        {
+          "name": "CoTaskMemFree"
+        },
+        {
+          "name": "CoFreeUnusedLibraries"
+        },
+        {
+          "name": "CoTaskMemAlloc"
+        },
+        {
+          "name": "CoCreateInstance"
+        },
+        {
+          "name": "CoInitialize"
+        }
+      ]
+    },
+    {
+      "dll": "DINPUT8.dll",
+      "symbols": [
+        {
+          "name": "DirectInput8Create"
+        }
+      ]
+    },
+    {
+      "dll": "WINMM.dll",
+      "symbols": [
+        {
+          "name": "mmioSeek"
+        },
+        {
+          "name": "mmioDescend"
+        },
+        {
+          "name": "mmioRead"
+        },
+        {
+          "name": "mmioAdvance"
+        },
+        {
+          "name": "mmioGetInfo"
+        },
+        {
+          "name": "mmioClose"
+        },
+        {
+          "name": "mmioOpenA"
+        },
+        {
+          "name": "joyGetPosEx"
+        },
+        {
+          "name": "timeKillEvent"
+        },
+        {
+          "name": "timeBeginPeriod"
+        },
+        {
+          "name": "timeEndPeriod"
+        },
+        {
+          "name": "timeSetEvent"
+        },
+        {
+          "name": "mmioAscend"
+        },
+        {
+          "name": "timeGetTime"
+        },
+        {
+          "name": "mmioSetInfo"
+        }
+      ]
+    },
+    {
+      "dll": "DSOUND.dll",
+      "symbols": [
+        {
+          "ordinal": 11
+        }
+      ]
+    },
+    {
+      "dll": "GDI32.dll",
+      "symbols": [
+        {
+          "name": "GetStockObject"
+        }
+      ]
+    },
+    {
+      "dll": "ADVAPI32.dll",
+      "symbols": [
+        {
+          "name": "RegOpenKeyExA"
+        },
+        {
+          "name": "RegCloseKey"
+        },
+        {
+          "name": "RegQueryValueExA"
+        },
+        {
+          "name": "RegOpenKeyA"
+        }
+      ]
+    },
+    {
+      "dll": "d3d8.dll",
+      "symbols": [
+        {
+          "name": "Direct3DCreate8"
+        }
+      ]
+    }
+  ],
+  "loader_version_check": {
+    "va": "0x789e50",
+    "expected_bytes": "83ec285733",
+    "observed_bytes": "83ec285733",
+    "matches": true
+  },
+  "wrapper": {
+    "path": "game/system/CHRMODELS.dll",
+    "sha256": "3293cf354dcfc62274c2ad25c09041606d6ad55483f070c233111cd9b47a97ba",
+    "size": 1031680,
+    "imports": [
+      {
+        "dll": "SHLWAPI.dll",
+        "symbols": [
+          {
+            "name": "PathFindExtensionA"
+          },
+          {
+            "name": "PathFindFileNameA"
+          }
+        ]
+      },
+      {
+        "dll": "dbghelp.dll",
+        "symbols": [
+          {
+            "name": "ImageDirectoryEntryToData"
+          },
+          {
+            "name": "MiniDumpWriteDump"
+          },
+          {
+            "name": "ImageNtHeader"
+          }
+        ]
+      },
+      {
+        "dll": "gdiplus.dll",
+        "symbols": [
+          {
+            "name": "GdipDrawImageRectI"
+          },
+          {
+            "name": "GdipFree"
+          },
+          {
+            "name": "GdipSetInterpolationMode"
+          },
+          {
+            "name": "GdipAlloc"
+          },
+          {
+            "name": "GdipCreateFromHDC"
+          },
+          {
+            "name": "GdipDeleteGraphics"
+          },
+          {
+            "name": "GdipCloneImage"
+          },
+          {
+            "name": "GdipCreateBitmapFromFile"
+          },
+          {
+            "name": "GdiplusStartup"
+          },
+          {
+            "name": "GdipDisposeImage"
+          }
+        ]
+      },
+      {
+        "dll": "KERNEL32.dll",
+        "symbols": [
+          {
+            "name": "TerminateProcess"
+          },
+          {
+            "name": "UnhandledExceptionFilter"
+          },
+          {
+            "name": "FreeLibrary"
+          },
+          {
+            "name": "VirtualQuery"
+          },
+          {
+            "name": "GetSystemInfo"
+          },
+          {
+            "name": "RaiseException"
+          },
+          {
+            "name": "QueryPerformanceCounter"
+          },
+          {
+            "name": "GetSystemTimeAsFileTime"
+          },
+          {
+            "name": "IsDebuggerPresent"
+          },
+          {
+            "name": "InitializeSListHead"
+          },
+          {
+            "name": "LoadLibraryExA"
+          },
+          {
+            "name": "GetModuleHandleW"
+          },
+          {
+            "name": "GetProcAddress"
+          },
+          {
+            "name": "ExitProcess"
+          },
+          {
+            "name": "SetEnvironmentVariableW"
+          },
+          {
+            "name": "LoadLibraryExW"
+          },
+          {
+            "name": "GetLastError"
+          },
+          {
+            "name": "VirtualProtect"
+          },
+          {
+            "name": "MultiByteToWideChar"
+          },
+          {
+            "name": "CopyFileW"
+          },
+          {
+            "name": "CreateDirectoryW"
+          },
+          {
+            "name": "CreateFileW"
+          },
+          {
+            "name": "GetCurrentProcess"
+          },
+          {
+            "name": "GetCurrentThreadId"
+          },
+          {
+            "name": "GetCurrentProcessId"
+          },
+          {
+            "name": "CloseHandle"
+          },
+          {
+            "name": "GetModuleHandleExA"
+          },
+          {
+            "name": "GetModuleFileNameA"
+          },
+          {
+            "name": "SetUnhandledExceptionFilter"
+          },
+          {
+            "name": "Sleep"
+          },
+          {
+            "name": "GetModuleFileNameW"
+          },
+          {
+            "name": "AllocConsole"
+          },
+          {
+            "name": "SetConsoleTitleW"
+          },
+          {
+            "name": "SetConsoleCtrlHandler"
+          },
+          {
+            "name": "SetConsoleOutputCP"
+          },
+          {
+            "name": "LoadLibraryW"
+          },
+          {
+            "name": "FormatMessageW"
+          },
+          {
+            "name": "LocalFree"
+          },
+          {
+            "name": "DisableThreadLibraryCalls"
+          },
+          {
+            "name": "GetModuleHandleA"
+          },
+          {
+            "name": "FindFirstFileExW"
+          },
+          {
+            "name": "FindNextFileW"
+          },
+          {
+            "name": "FindClose"
+          },
+          {
+            "name": "FindFirstFileA"
+          },
+          {
+            "name": "FindNextFileA"
+          },
+          {
+            "name": "CreateFileA"
+          },
+          {
+            "name": "GetNativeSystemInfo"
+          },
+          {
+            "name": "VirtualAlloc"
+          },
+          {
+            "name": "lstrcmpiA"
+          },
+          {
+            "name": "CreateDirectoryA"
+          },
+          {
+            "name": "CompareStringA"
+          },
+          {
+            "name": "lstrlenA"
+          },
+          {
+            "name": "GetCommandLineW"
+          },
+          {
+            "name": "lstrcmpA"
+          },
+          {
+            "name": "GetConsoleWindow"
+          },
+          {
+            "name": "LoadLibraryA"
+          },
+          {
+            "name": "GetFileSize"
+          },
+          {
+            "name": "MapViewOfFile"
+          },
+          {
+            "name": "CreateFileMappingA"
+          },
+          {
+            "name": "WideCharToMultiByte"
+          },
+          {
+            "name": "GetVersionExA"
+          },
+          {
+            "name": "UnmapViewOfFile"
+          },
+          {
+            "name": "IsProcessorFeaturePresent"
+          },
+          {
+            "name": "VirtualFree"
+          },
+          {
+            "name": "GetFileAttributesW"
+          },
+          {
+            "name": "GetFileAttributesA"
+          },
+          {
+            "name": "WriteProcessMemory"
+          }
+        ]
+      },
+      {
+        "dll": "USER32.dll",
+        "symbols": [
+          {
+            "name": "GetAsyncKeyState"
+          },
+          {
+            "name": "SetForegroundWindow"
+          },
+          {
+            "name": "UpdateWindow"
+          },
+          {
+            "name": "ShowWindow"
+          },
+          {
+            "name": "CreateWindowExA"
+          },
+          {
+            "name": "SendMessageW"
+          },
+          {
+            "name": "LoadImageW"
+          },
+          {
+            "name": "LoadAcceleratorsA"
+          },
+          {
+            "name": "EnumDisplayMonitors"
+          },
+          {
+            "name": "GetSystemMetrics"
+          },
+          {
+            "name": "RegisterClassA"
+          },
+          {
+            "name": "LoadCursorW"
+          },
+          {
+            "name": "LoadIconA"
+          },
+          {
+            "name": "DispatchMessageA"
+          },
+          {
+            "name": "TranslateMessage"
+          },
+          {
+            "name": "TranslateAcceleratorW"
+          },
+          {
+            "name": "PeekMessageA"
+          },
+          {
+            "name": "DefWindowProcA"
+          },
+          {
+            "name": "GetClientRect"
+          },
+          {
+            "name": "SendMessageA"
+          },
+          {
+            "name": "SetFocus"
+          },
+          {
+            "name": "SetWindowPos"
+          },
+          {
+            "name": "AdjustWindowRectEx"
+          },
+          {
+            "name": "ShowCursor"
+          },
+          {
+            "name": "SetWindowLongA"
+          },
+          {
+            "name": "GetWindowLongA"
+          },
+          {
+            "name": "GetWindowRect"
+          },
+          {
+            "name": "wsprintfA"
+          },
+          {
+            "name": "wsprintfW"
+          },
+          {
+            "name": "SetWindowLongW"
+          },
+          {
+            "name": "CallWindowProcW"
+          },
+          {
+            "name": "MapVirtualKeyW"
+          },
+          {
+            "name": "SetWindowTextA"
+          },
+          {
+            "name": "PostQuitMessage"
+          },
+          {
+            "name": "MessageBoxA"
+          },
+          {
+            "name": "MessageBoxW"
+          }
+        ]
+      },
+      {
+        "dll": "GDI32.dll",
+        "symbols": [
+          {
+            "name": "GetStockObject"
+          }
+        ]
+      },
+      {
+        "dll": "ADVAPI32.dll",
+        "symbols": [
+          {
+            "name": "RegOpenKeyA"
+          },
+          {
+            "name": "RegQueryValueExA"
+          },
+          {
+            "name": "RegCloseKey"
+          }
+        ]
+      },
+      {
+        "dll": "SHELL32.dll",
+        "symbols": [
+          {
+            "name": "ShellExecuteW"
+          },
+          {
+            "name": "SHGetFolderPathW"
+          },
+          {
+            "name": "CommandLineToArgvW"
+          }
+        ]
+      },
+      {
+        "dll": "MSVCP140.dll",
+        "symbols": [
+          {
+            "name": "?seekg@?$basic_istream@DU?$char_traits@D@std@@@std@@QAEAAV12@_JH@Z"
+          },
+          {
+            "name": "?cout@std@@3V?$basic_ostream@DU?$char_traits@D@std@@@1@A"
+          },
+          {
+            "name": "??6?$basic_ostream@_WU?$char_traits@_W@std@@@std@@QAEAAV01@P6AAAV01@AAV01@@Z@Z"
+          },
+          {
+            "name": "?seekg@?$basic_istream@DU?$char_traits@D@std@@@std@@QAEAAV12@V?$fpos@U_Mbstatet@@@2@@Z"
+          },
+          {
+            "name": "?read@?$basic_istream@DU?$char_traits@D@std@@@std@@QAEAAV12@PAD_J@Z"
+          },
+          {
+            "name": "??0?$basic_iostream@_WU?$char_traits@_W@std@@@std@@QAE@PAV?$basic_streambuf@_WU?$char_traits@_W@std@@@1@@Z"
+          },
+          {
+            "name": "?widen@?$basic_ios@_WU?$char_traits@_W@std@@@std@@QBE_WD@Z"
+          },
+          {
+            "name": "?put@?$basic_ostream@_WU?$char_traits@_W@std@@@std@@QAEAAV12@_W@Z"
+          },
+          {
+            "name": "?_Fiopen@std@@YAPAU_iobuf@@PBDHH@Z"
+          },
+          {
+            "name": "??1?$basic_iostream@_WU?$char_traits@_W@std@@@std@@UAE@XZ"
+          },
+          {
+            "name": "?widen@?$ctype@_W@std@@QBE_WD@Z"
+          },
+          {
+            "name": "?getloc@ios_base@std@@QBE?AVlocale@2@XZ"
+          },
+          {
+            "name": "?id@?$ctype@_W@std@@2V0locale@2@A"
+          },
+          {
+            "name": "?_Getcat@?$ctype@_W@std@@SAIPAPBVfacet@locale@2@PBV42@@Z"
+          },
+          {
+            "name": "??0?$basic_iostream@DU?$char_traits@D@std@@@std@@QAE@PAV?$basic_streambuf@DU?$char_traits@D@std@@@1@@Z"
+          },
+          {
+            "name": "?snextc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAEHXZ"
+          },
+          {
+            "name": "?_Ipfx@?$basic_istream@DU?$char_traits@D@std@@@std@@QAE_N_N@Z"
+          },
+          {
+            "name": "?imbue@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAEXABVlocale@2@@Z"
+          },
+          {
+            "name": "?setbuf@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAEPAV12@PAD_J@Z"
+          },
+          {
+            "name": "?sync@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAEHXZ"
+          },
+          {
+            "name": "?_Lock@?$basic_streambuf@DU?$char_traits@D@std@@@std@@UAEXXZ"
+          },
+          {
+            "name": "?_Unlock@?$basic_streambuf@DU?$char_traits@D@std@@@std@@UAEXXZ"
+          },
+          {
+            "name": "?uflow@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAEHXZ"
+          },
+          {
+            "name": "?sgetc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAEHXZ"
+          },
+          {
+            "name": "??1?$basic_iostream@DU?$char_traits@D@std@@@std@@UAE@XZ"
+          },
+          {
+            "name": "?_Xinvalid_argument@std@@YAXPBD@Z"
+          },
+          {
+            "name": "??6?$basic_ostream@_WU?$char_traits@_W@std@@@std@@QAEAAV01@H@Z"
+          },
+          {
+            "name": "??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV01@M@Z"
+          },
+          {
+            "name": "??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV01@H@Z"
+          },
+          {
+            "name": "??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV01@G@Z"
+          },
+          {
+            "name": "??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV01@F@Z"
+          },
+          {
+            "name": "??6?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV01@P6AAAV01@AAV01@@Z@Z"
+          },
+          {
+            "name": "??0?$basic_ostream@_WU?$char_traits@_W@std@@@std@@QAE@PAV?$basic_streambuf@_WU?$char_traits@_W@std@@@1@_N@Z"
+          },
+          {
+            "name": "?tellg@?$basic_istream@DU?$char_traits@D@std@@@std@@QAE?AV?$fpos@U_Mbstatet@@@2@XZ"
+          },
+          {
+            "name": "?get@?$basic_istream@DU?$char_traits@D@std@@@std@@QAEHXZ"
+          },
+          {
+            "name": "?xsputn@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@MAE_JPB_W_J@Z"
+          },
+          {
+            "name": "??0?$basic_ios@_WU?$char_traits@_W@std@@@std@@IAE@XZ"
+          },
+          {
+            "name": "?_Xlength_error@std@@YAXPBD@Z"
+          },
+          {
+            "name": "?sbumpc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAEHXZ"
+          },
+          {
+            "name": "??1?$basic_ios@DU?$char_traits@D@std@@@std@@UAE@XZ"
+          },
+          {
+            "name": "??1_Lockit@std@@QAE@XZ"
+          },
+          {
+            "name": "??0_Lockit@std@@QAE@H@Z"
+          },
+          {
+            "name": "?_Getgloballocale@locale@std@@CAPAV_Locimp@12@XZ"
+          },
+          {
+            "name": "??Bid@locale@std@@QAEIXZ"
+          },
+          {
+            "name": "?_Xout_of_range@std@@YAXPBD@Z"
+          },
+          {
+            "name": "??1?$basic_istream@DU?$char_traits@D@std@@@std@@UAE@XZ"
+          },
+          {
+            "name": "?xsputn@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAE_JPBD_J@Z"
+          },
+          {
+            "name": "?xsgetn@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAE_JPAD_J@Z"
+          },
+          {
+            "name": "?_Pninc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IAEPADXZ"
+          },
+          {
+            "name": "??1?$basic_streambuf@DU?$char_traits@D@std@@@std@@UAE@XZ"
+          },
+          {
+            "name": "?always_noconv@codecvt_base@std@@QBE_NXZ"
+          },
+          {
+            "name": "?_Fiopen@std@@YAPAU_iobuf@@PB_WHH@Z"
+          },
+          {
+            "name": "?_Xbad_alloc@std@@YAXXZ"
+          },
+          {
+            "name": "?id@?$codecvt@DDU_Mbstatet@@@std@@2V0locale@2@A"
+          },
+          {
+            "name": "?_Xbad_function_call@std@@YAXXZ"
+          },
+          {
+            "name": "?showmanyc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@MAE_JXZ"
+          },
+          {
+            "name": "?_Getcat@?$codecvt@DDU_Mbstatet@@@std@@SAIPAPBVfacet@locale@2@PBV42@@Z"
+          },
+          {
+            "name": "??0?$basic_streambuf@DU?$char_traits@D@std@@@std@@IAE@XZ"
+          },
+          {
+            "name": "?getloc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QBE?AVlocale@2@XZ"
+          },
+          {
+            "name": "??0?$basic_ios@DU?$char_traits@D@std@@@std@@IAE@XZ"
+          },
+          {
+            "name": "?_Init@?$basic_streambuf@DU?$char_traits@D@std@@@std@@IAEXXZ"
+          },
+          {
+            "name": "??0?$basic_istream@DU?$char_traits@D@std@@@std@@QAE@PAV?$basic_streambuf@DU?$char_traits@D@std@@@1@_N@Z"
+          },
+          {
+            "name": "?unshift@?$codecvt@DDU_Mbstatet@@@std@@QBEHAAU_Mbstatet@@PAD1AAPAD@Z"
+          },
+          {
+            "name": "?setstate@?$basic_ios@DU?$char_traits@D@std@@@std@@QAEXH_N@Z"
+          },
+          {
+            "name": "?in@?$codecvt@DDU_Mbstatet@@@std@@QBEHAAU_Mbstatet@@PBD1AAPBDPAD3AAPAD@Z"
+          },
+          {
+            "name": "?out@?$codecvt@DDU_Mbstatet@@@std@@QBEHAAU_Mbstatet@@PBD1AAPBDPAD3AAPAD@Z"
+          },
+          {
+            "name": "?clear@?$basic_ios@DU?$char_traits@D@std@@@std@@QAEXH_N@Z"
+          },
+          {
+            "name": "_Xtime_get_ticks"
+          },
+          {
+            "name": "?setw@std@@YA?AU?$_Smanip@_J@1@_J@Z"
+          },
+          {
+            "name": "??1?$basic_ios@_WU?$char_traits@_W@std@@@std@@UAE@XZ"
+          },
+          {
+            "name": "?uflow@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@MAEGXZ"
+          },
+          {
+            "name": "??1?$basic_ostream@_WU?$char_traits@_W@std@@@std@@UAE@XZ"
+          },
+          {
+            "name": "?_Pninc@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@IAEPA_WXZ"
+          },
+          {
+            "name": "??1?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@UAE@XZ"
+          },
+          {
+            "name": "??1?$basic_ostream@DU?$char_traits@D@std@@@std@@UAE@XZ"
+          },
+          {
+            "name": "?sputc@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@QAEG_W@Z"
+          },
+          {
+            "name": "?sputc@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAEHD@Z"
+          },
+          {
+            "name": "?uncaught_exception@std@@YA_NXZ"
+          },
+          {
+            "name": "?_Unlock@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@UAEXXZ"
+          },
+          {
+            "name": "?_Lock@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@UAEXXZ"
+          },
+          {
+            "name": "?sync@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@MAEHXZ"
+          },
+          {
+            "name": "?showmanyc@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@MAE_JXZ"
+          },
+          {
+            "name": "?xsgetn@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@MAE_JPA_W_J@Z"
+          },
+          {
+            "name": "?setbuf@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@MAEPAV12@PA_W_J@Z"
+          },
+          {
+            "name": "?imbue@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@MAEXABVlocale@2@@Z"
+          },
+          {
+            "name": "??0?$basic_ostream@DU?$char_traits@D@std@@@std@@QAE@PAV?$basic_streambuf@DU?$char_traits@D@std@@@1@_N@Z"
+          },
+          {
+            "name": "?widen@?$basic_ios@DU?$char_traits@D@std@@@std@@QBEDD@Z"
+          },
+          {
+            "name": "?sputn@?$basic_streambuf@DU?$char_traits@D@std@@@std@@QAE_JPBD_J@Z"
+          },
+          {
+            "name": "?put@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV12@D@Z"
+          },
+          {
+            "name": "?sputn@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@QAE_JPB_W_J@Z"
+          },
+          {
+            "name": "?_Osfx@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEXXZ"
+          },
+          {
+            "name": "?flush@?$basic_ostream@DU?$char_traits@D@std@@@std@@QAEAAV12@XZ"
+          },
+          {
+            "name": "??0?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@IAE@XZ"
+          },
+          {
+            "name": "?_Osfx@?$basic_ostream@_WU?$char_traits@_W@std@@@std@@QAEXXZ"
+          },
+          {
+            "name": "?flush@?$basic_ostream@_WU?$char_traits@_W@std@@@std@@QAEAAV12@XZ"
+          },
+          {
+            "name": "?setstate@?$basic_ios@_WU?$char_traits@_W@std@@@std@@QAEXH_N@Z"
+          }
+        ]
+      },
+      {
+        "dll": "VCRUNTIME140.dll",
+        "symbols": [
+          {
+            "name": "memchr"
+          },
+          {
+            "name": "memcpy"
+          },
+          {
+            "name": "memmove"
+          },
+          {
+            "name": "__std_type_info_destroy_list"
+          },
+          {
+            "name": "__CxxFrameHandler3"
+          },
+          {
+            "name": "__std_terminate"
+          },
+          {
+            "name": "__std_exception_destroy"
+          },
+          {
+            "name": "__std_exception_copy"
+          },
+          {
+            "name": "strrchr"
+          },
+          {
+            "name": "strstr"
+          },
+          {
+            "name": "__CxxFrameHandler"
+          },
+          {
+            "name": "longjmp"
+          },
+          {
+            "name": "_setjmp3"
+          },
+          {
+            "name": "__std_type_info_compare"
+          },
+          {
+            "name": "memset"
+          },
+          {
+            "name": "_except_handler4_common"
+          },
+          {
+            "name": "_CxxThrowException"
+          }
+        ]
+      },
+      {
+        "dll": "api-ms-win-crt-string-l1-1-0.dll",
+        "symbols": [
+          {
+            "name": "strcat_s"
+          },
+          {
+            "name": "isspace"
+          },
+          {
+            "name": "isdigit"
+          },
+          {
+            "name": "_stricmp"
+          },
+          {
+            "name": "strncmp"
+          },
+          {
+            "name": "strncpy_s"
+          },
+          {
+            "name": "tolower"
+          },
+          {
+            "name": "strncpy"
+          },
+          {
+            "name": "strnlen"
+          },
+          {
+            "name": "_strdup"
+          },
+          {
+            "name": "towlower"
+          }
+        ]
+      },
+      {
+        "dll": "api-ms-win-crt-utility-l1-1-0.dll",
+        "symbols": [
+          {
+            "name": "bsearch"
+          }
+        ]
+      },
+      {
+        "dll": "api-ms-win-crt-runtime-l1-1-0.dll",
+        "symbols": [
+          {
+            "name": "strerror"
+          },
+          {
+            "name": "_invalid_parameter_noinfo_noreturn"
+          },
+          {
+            "name": "_initterm"
+          },
+          {
+            "name": "terminate"
+          },
+          {
+            "name": "_crt_atexit"
+          },
+          {
+            "name": "_execute_onexit_table"
+          },
+          {
+            "name": "_errno"
+          },
+          {
+            "name": "_register_onexit_function"
+          },
+          {
+            "name": "_initialize_onexit_table"
+          },
+          {
+            "name": "_initialize_narrow_environment"
+          },
+          {
+            "name": "_cexit"
+          },
+          {
+            "name": "_configure_narrow_argv"
+          },
+          {
+            "name": "_seh_filter_dll"
+          },
+          {
+            "name": "_initterm_e"
+          },
+          {
+            "name": "exit"
+          }
+        ]
+      },
+      {
+        "dll": "api-ms-win-crt-stdio-l1-1-0.dll",
+        "symbols": [
+          {
+            "name": "__acrt_iob_func"
+          },
+          {
+            "name": "fread_s"
+          },
+          {
+            "name": "fgetpos"
+          },
+          {
+            "name": "_fseeki64"
+          },
+          {
+            "name": "fsetpos"
+          },
+          {
+            "name": "__stdio_common_vswprintf"
+          },
+          {
+            "name": "__stdio_common_vsprintf_s"
+          },
+          {
+            "name": "fwrite"
+          },
+          {
+            "name": "__stdio_common_vsprintf"
+          },
+          {
+            "name": "fclose"
+          },
+          {
+            "name": "_get_stream_buffer_pointers"
+          },
+          {
+            "name": "fputc"
+          },
+          {
+            "name": "ungetc"
+          },
+          {
+            "name": "fopen_s"
+          },
+          {
+            "name": "setvbuf"
+          },
+          {
+            "name": "fflush"
+          },
+          {
+            "name": "ftell"
+          },
+          {
+            "name": "fseek"
+          },
+          {
+            "name": "fgets"
+          },
+          {
+            "name": "feof"
+          },
+          {
+            "name": "fgetc"
+          },
+          {
+            "name": "_wfopen"
+          },
+          {
+            "name": "fread"
+          },
+          {
+            "name": "fopen"
+          },
+          {
+            "name": "freopen"
+          },
+          {
+            "name": "__stdio_common_vswprintf_s"
+          },
+          {
+            "name": "fputs"
+          }
+        ]
+      },
+      {
+        "dll": "api-ms-win-crt-convert-l1-1-0.dll",
+        "symbols": [
+          {
+            "name": "atoi"
+          },
+          {
+            "name": "strtoull"
+          },
+          {
+            "name": "strtol"
+          },
+          {
+            "name": "wcstol"
+          },
+          {
+            "name": "strtod"
+          },
+          {
+            "name": "_wtoi"
+          },
+          {
+            "name": "strtof"
+          },
+          {
+            "name": "strtoul"
+          },
+          {
+            "name": "wcstof"
+          },
+          {
+            "name": "strtoll"
+          }
+        ]
+      },
+      {
+        "dll": "api-ms-win-crt-filesystem-l1-1-0.dll",
+        "symbols": [
+          {
+            "name": "_mkdir"
+          },
+          {
+            "name": "_wchdir"
+          },
+          {
+            "name": "_unlock_file"
+          },
+          {
+            "name": "_lock_file"
+          }
+        ]
+      },
+      {
+        "dll": "api-ms-win-crt-heap-l1-1-0.dll",
+        "symbols": [
+          {
+            "name": "calloc"
+          },
+          {
+            "name": "malloc"
+          },
+          {
+            "name": "free"
+          },
+          {
+            "name": "_callnewh"
+          }
+        ]
+      },
+      {
+        "dll": "api-ms-win-crt-locale-l1-1-0.dll",
+        "symbols": [
+          {
+            "name": "localeconv"
+          }
+        ]
+      },
+      {
+        "dll": "api-ms-win-crt-math-l1-1-0.dll",
+        "symbols": [
+          {
+            "name": "_CIpow"
+          },
+          {
+            "name": "_finite"
+          },
+          {
+            "name": "floor"
+          },
+          {
+            "name": "_dtest"
+          },
+          {
+            "name": "_CIacos"
+          },
+          {
+            "name": "ceil"
+          },
+          {
+            "name": "_except1"
+          },
+          {
+            "name": "_libm_sse2_sqrt_precise"
+          },
+          {
+            "name": "_libm_sse2_sin_precise"
+          },
+          {
+            "name": "_libm_sse2_cos_precise"
+          },
+          {
+            "name": "_CIatan2"
+          },
+          {
+            "name": "_ftol"
+          },
+          {
+            "name": "_libm_sse2_asin_precise"
+          },
+          {
+            "name": "copysign"
+          }
+        ]
+      },
+      {
+        "dll": "api-ms-win-crt-time-l1-1-0.dll",
+        "symbols": [
+          {
+            "name": "_time64"
+          },
+          {
+            "name": "_localtime64"
+          }
+        ]
+      },
+      {
+        "dll": "api-ms-win-crt-environment-l1-1-0.dll",
+        "symbols": [
+          {
+            "name": "_wgetcwd"
+          }
+        ]
+      }
+    ],
+    "equals_downloaded_loader": true
+  },
+  "original_character_data": {
+    "sha256": "76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5",
+    "size": 7647232
+  },
+  "evidence_type": "static PE inspection; not proof modules loaded",
+  "component_exports": [
+    {
+      "path": "game/system/CHRMODELS.dll",
+      "sha256": "3293cf354dcfc62274c2ad25c09041606d6ad55483f070c233111cd9b47a97ba",
+      "size": 1031680,
+      "pe_machine": "i386",
+      "export_count": 0,
+      "selected_exports": []
+    },
+    {
+      "path": "game/system/CHRMODELS_orig.dll",
+      "sha256": "76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5",
+      "size": 7647232,
+      "pe_machine": "i386",
+      "export_count": 25,
+      "selected_exports": [
+        "___SONIC_OBJECTS"
+      ]
+    },
+    {
+      "path": "game/mods/sadx-input-mod/sadx-input-mod.dll",
+      "sha256": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+      "size": 57856,
+      "pe_machine": "i386",
+      "export_count": 5,
+      "selected_exports": [
+        "Init",
+        "OnInput",
+        "SADXModInfo"
+      ]
+    },
+    {
+      "path": "game/mods/sadx-speedrun-mod/sadx-speedrun-mod.dll",
+      "sha256": "f3fc68a3058fb726142547018da860b170f137248e54b82712b52527e7b74802",
+      "size": 62464,
+      "pe_machine": "i386",
+      "export_count": 4,
+      "selected_exports": [
+        "Init",
+        "OnFrame",
+        "OnInput",
+        "SADXModInfo"
+      ]
+    }
+  ],
+  "source_module_name_strings": [
+    {
+      "text": "CHRMODELS.DLL",
+      "file_offset": null
+    },
+    {
+      "text": "CHRMODELS.dll",
+      "file_offset": null
+    },
+    {
+      "text": "CHRMODELSData",
+      "file_offset": null
+    }
+  ]
+}

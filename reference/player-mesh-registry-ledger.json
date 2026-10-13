@@ -1,0 +1,353 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "evidence": [
+    {
+      "path": "_reference/sadx/mesh-producers/mesh-bound-452160.json",
+      "sha256": "ef0be6271eb58ed6fa6fe312ccea917f03370275d16a3693e357c51c3127a128",
+      "evidence_id": "ev_2057e5f74f12ad2e415cf93974f2ad1e74d30f18e2e45408c7e8e11a0f0d208c",
+      "procedure": "0x452160",
+      "analysis_profile_digest": "8c226db6a8bd36b662dc1cb83ab0ad0af698230fc322b58c6c4870878bf6ae70"
+    },
+    {
+      "path": "_reference/sadx/mesh-producers/mesh-bound-4521c0.json",
+      "sha256": "543bc81f0472e2530387597b0ee8dfcc99df7bca3140df194b81d94dd3289a4d",
+      "evidence_id": "ev_0a291fdd3e5fd8ae81f74b7a1ce312a41cd04bf273c26bfba16a2ea855706a29",
+      "procedure": "0x4521c0",
+      "analysis_profile_digest": "8c226db6a8bd36b662dc1cb83ab0ad0af698230fc322b58c6c4870878bf6ae70"
+    },
+    {
+      "path": "_reference/sadx/mesh-producers/mesh-bound-452230.json",
+      "sha256": "55bc725b5d4d8f823886a39ee49e3d9555798c505d9a4b6cb0de39f0543aee13",
+      "evidence_id": "ev_9fb5e21e080594829394ab2fe82264ec2d7c341aeac9ea83739af6cc11ce58dd",
+      "procedure": "0x452230",
+      "analysis_profile_digest": "8c226db6a8bd36b662dc1cb83ab0ad0af698230fc322b58c6c4870878bf6ae70"
+    },
+    {
+      "path": "_reference/sadx/mesh-producers/mesh-group-create.json",
+      "sha256": "5e89f870191c6fc2015728d170ebaa774243977a268aff4d0b400010a97baa61",
+      "evidence_id": "ev_520db4c73a49ae146303950dc851984c8a43fc81e42908aecd49b6c06a6d834c",
+      "procedure": "0x451790",
+      "analysis_profile_digest": "8c226db6a8bd36b662dc1cb83ab0ad0af698230fc322b58c6c4870878bf6ae70"
+    },
+    {
+      "path": "_reference/sadx/mesh-producers/mesh-node-4518d0.json",
+      "sha256": "bd17694d026339534886fcac6cd206fbc898b3bbd9a530965e629689017a2ff5",
+      "evidence_id": "ev_a74d70fb5b325e9b2ae01662527e0054334d07a42fb6ce8da348448085134625",
+      "procedure": "0x4518d0",
+      "analysis_profile_digest": "8c226db6a8bd36b662dc1cb83ab0ad0af698230fc322b58c6c4870878bf6ae70"
+    },
+    {
+      "path": "_reference/sadx/mesh-producers/mesh-node-order.json",
+      "sha256": "a987b0e7f4d5c61785a05757ae22b3cbdffd66b7eecf89eabedb8edd3798cdc1",
+      "evidence_id": "ev_2fc703ad86c1df98956c946ab4a631a15bd8d57574a0bca7026e72bcfdce49e8",
+      "procedure": "0x451910",
+      "analysis_profile_digest": "8c226db6a8bd36b662dc1cb83ab0ad0af698230fc322b58c6c4870878bf6ae70"
+    },
+    {
+      "path": "_reference/sadx/mesh-producers/mesh-object-traverse.json",
+      "sha256": "4290c5c0a631f74b98bcf6874c59cde8122232867fdb712691ffd490f7eb5b26",
+      "evidence_id": "ev_39340d127676e5e38eaf80ada936214453289f1356b5d4ecd8681807010bcb5b",
+      "procedure": "0x451a00",
+      "analysis_profile_digest": "8c226db6a8bd36b662dc1cb83ab0ad0af698230fc322b58c6c4870878bf6ae70"
+    },
+    {
+      "path": "_reference/sadx/mesh-producers/mesh-registry-refresh.json",
+      "sha256": "1cdbadf7301460a55ed4d75bdf6c77cf75207e697694568559d44aa92575d91a",
+      "evidence_id": "ev_9a47c98404235f3cc8d65d000e33567bde05b487114c0872057359307ef862fa",
+      "procedure": "0x4511d0",
+      "analysis_profile_digest": "8c226db6a8bd36b662dc1cb83ab0ad0af698230fc322b58c6c4870878bf6ae70"
+    },
+    {
+      "path": "_reference/sadx/mesh-producers/meshset-traverse.json",
+      "sha256": "3081e4ea2c70eb5970cab85534f7303a9ff87157add9aed81a8bb048316dbd61",
+      "evidence_id": "ev_fb51d18b90813ef410d1c12d91a2b6ea03e1e25626dcf59287fb15a30f31c616",
+      "procedure": "0x451ad0",
+      "analysis_profile_digest": "8c226db6a8bd36b662dc1cb83ab0ad0af698230fc322b58c6c4870878bf6ae70"
+    }
+  ],
+  "source_entries": {
+    "451030": "fixed-pool source initializer, query and selection counter resets",
+    "4510e0": "node then group pool linkage",
+    "451110": "16384-node free chain",
+    "451160": "256-group free chain and active-head clear",
+    "451790": "group allocate, terminal sentinel retained, encoded-head backlink",
+    "451800": "node-chain recycling and object clear before group unlink",
+    "451860": "encoded-head/group unlink and free-group prepend",
+    "4518d0": "128 bucket head/tail reset",
+    "451910": "ascending bucket chain joins; returns final examined head",
+    "452160": "actual CRT ftol low32, SAR4, ADD64 and signed0..127 clamp",
+    "4521c0": "bucket node allocation with unconsumed terminal sentinel",
+    "452230": "signed16 vertex indices, strip bit15 flip/low15 length and clamp1024 cursor semantics",
+    "451ad0": "sliding triangles, binary32 centroid/spans/radius, raw material flags",
+    "451a00": "current-frame push, translate, Z/Y/X low16 rotation, scale, child/sibling recursion",
+    "43b580": "unculled registration into dynamic3b32728 and combined3b2f720 arrays",
+    "4511d0": "registration, preserve/remove/rebuild groups and real triangle production"
+  },
+  "ownership": {
+    "dynamic_land_entries": "3b32728 dynamic prefix owned by dynamic_count",
+    "candidates": "3b2f720 combined mutable work array, logical count3b32724; registration and broadphase share storage",
+    "mesh_groups": "3c48550 active group head; scene groups/nodes own links and geometry",
+    "free_groups": "3c48554,256 physical slots with255 usable",
+    "free_nodes": "3c48558,16384 physical slots with16383 usable",
+    "query_contact_count": "3b42ff4 sole PlayerMeshQueryState owner reset by451030",
+    "buckets": "3b48150,128 original head/tail pairs",
+    "registry_globals": "3c4855c force refresh;3b47000 forced object;3b4758c baseZ;3b47588 max span;3b42ff8 source word"
+  },
+  "superseded_interpretation": {
+    "claim": "3b2f720 missing static tail from dynamic_entries",
+    "status": "rejected after exact43acd0/43aef0/4511d0 address trace",
+    "correction": "dynamic source array is3b32728; existing candidates already own3b2f720. Static append correctly targets candidates only. No false missing-tail behavior change remains."
+  },
+  "comparison": {
+    "initial_private_report": "/private/tmp/sadx-original-player-mesh-registry-comparison.json",
+    "initial_evaluations": 720,
+    "initial_value_return_cw_mismatches": 0,
+    "initial_status_only_differences": 480,
+    "expanded_private_report": "/private/tmp/sadx-original-player-mesh-registry-comparison-expanded.json",
+    "expanded_status": "completed",
+    "expanded_report": "_reference/sadx/original-player-mesh-registry-comparison.json",
+    "expanded_evaluations": 1068,
+    "expanded_value_return_cw_mismatches": 0,
+    "expanded_status_only_differences": 504,
+    "strict_match": false,
+    "cxx17_repin_status": "completed",
+    "cxx17_private_report": "/private/tmp/sadx-original-player-mesh-registry-cxx17-comparison.json",
+    "final_compiler": "Clang 21.0.0 (clang-2100.3.34.2); ARM64 C++17 O2 source-native fixed-pool mesh producer",
+    "final_native_library_sha256": "3c6047231174e532833b35c5437e91fea09a173b26d32219aaf3d26456a36768",
+    "initializer_return_measured": true,
+    "initializer_return_repin_status": "completed"
+  },
+  "unknowns": [
+    "Physical Intel Ultra runtime and updated-mod effects are not captured",
+    "43a260 stage/NJS conversion/Win32 allocation startup remains separate",
+    "449500/445d10 complete scene positioning remains separate",
+    "Source negative vertex indices can address bytes outside the decoded owning array; unavailable native ranges stay failures",
+    "Unmasked x87 instruction traps and host-double Unicorn transcendental/status limitations are not proven hardware-equivalent",
+    "Direct451910 return is derived from the source final-bucket load; pool/registry profiles compare its link stores, while the source master ignores that return. No separate join-return oracle claim."
+  ],
+  "build_contract": {
+    "language": "C++17",
+    "flags": "-O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0",
+    "superseded_private_language": "C++20 bit_cast was replaced with same-width memcpy copies; no toolchain change"
+  },
+  "supplementary_byte_evidence": "_reference/sadx/mesh-registry-byte-evidence/manifest.json",
+  "ghidra_reconciliation": {
+    "evidence": [
+      {
+        "path": "_reference/sadx/ghidra-engine-recovery/land-registration-alternate.json",
+        "sha256": "8dfb3af2d0018e14b74f9d0b13003f6c0bd3d98827170ddcdc0bca4802240f7a",
+        "evidence_id": "ev_dd5fcb92d4bde84c124f74ea325d68385d031152af9c21c5f50fc5217485e767",
+        "parameters": {
+          "procedure": "0x43b580"
+        },
+        "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+        "critical_limitations": [
+          "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+          "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+          "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+          "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+        ]
+      },
+      {
+        "path": "_reference/sadx/ghidra-engine-recovery/mesh-buckets-initialize.json",
+        "sha256": "9ce4cc3ca552dadfceddeb628f5575506d27d1b9f97162e7ba798bd4c37443d7",
+        "evidence_id": "ev_9ff61abd89c3af9b75c0c33ef5ff887dfd597e08955b80665ecc493e12b55032",
+        "parameters": {
+          "procedure": "0x4510e0"
+        },
+        "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+        "critical_limitations": [
+          "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+          "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+          "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+          "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+        ]
+      },
+      {
+        "path": "_reference/sadx/ghidra-engine-recovery/mesh-group-create.json",
+        "sha256": "8af59d8cfb2e46de3436cc59c2363181566b204d71be0d833a21d3e04970e2b8",
+        "evidence_id": "ev_54dc809a38b0e187d297ac80fbb769fa258a687c20030d2c5bd0d979c4a11b2f",
+        "parameters": {
+          "procedure": "0x451790"
+        },
+        "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+        "critical_limitations": [
+          "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+          "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+          "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+          "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+        ]
+      },
+      {
+        "path": "_reference/sadx/ghidra-engine-recovery/mesh-group-recycle.json",
+        "sha256": "f756b51497e72d938ac3a1ad2566b56172b4cdf79924401929cdaeb160e232a9",
+        "evidence_id": "ev_2902194fb1aa6b167a5e72c674822df22baccc0a26d923295de196f578082c5d",
+        "parameters": {
+          "procedure": "0x451860"
+        },
+        "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+        "critical_limitations": [
+          "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+          "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+          "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+          "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+        ]
+      },
+      {
+        "path": "_reference/sadx/ghidra-engine-recovery/mesh-group-remove.json",
+        "sha256": "19ccb746679d016f17d2009b9f77610c8f3fa2e9ed292401a6f299b5900a6885",
+        "evidence_id": "ev_e1491423c10e0899c98c7674b425a8e2389c55d2a60f25c85241c124015e041b",
+        "parameters": {
+          "procedure": "0x451800"
+        },
+        "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+        "critical_limitations": [
+          "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+          "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+          "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+          "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+        ]
+      },
+      {
+        "path": "_reference/sadx/ghidra-engine-recovery/mesh-node-order.json",
+        "sha256": "cedcedaf62e220f57cde98c18b6aefe9d79aa3b99d4d9af6e14fddaa829c67a2",
+        "evidence_id": "ev_1fba0581c6a8239b43508ad950a2b6c812cb9692ce5d6990f5d1799bae8c7302",
+        "parameters": {
+          "procedure": "0x451910"
+        },
+        "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+        "critical_limitations": [
+          "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+          "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+          "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+          "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+        ]
+      },
+      {
+        "path": "_reference/sadx/ghidra-engine-recovery/mesh-object-traverse.json",
+        "sha256": "f1f5b2a3c172385078bd9d58419cbcdeddf9d2cf303219b2d8cb20bb6a4a9bf0",
+        "evidence_id": "ev_6aa6b76b8c9942ec54532ac81b68ccaded35f7d67f6ef2a810d9279c3367c79a",
+        "parameters": {
+          "procedure": "0x451a00"
+        },
+        "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+        "critical_limitations": [
+          "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+          "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+          "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+          "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+        ]
+      },
+      {
+        "path": "_reference/sadx/ghidra-engine-recovery/mesh-pools-initialize.json",
+        "sha256": "ddd14a0ae3e9085b1fb69825e23482be20b8269215624711320c83fcd18058eb",
+        "evidence_id": "ev_4f28b63e571e4fc0fe84bfffa0cd80e8478a781069cfdff022de79883d6ca2fc",
+        "parameters": {
+          "procedure": "0x451030"
+        },
+        "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+        "critical_limitations": [
+          "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+          "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+          "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+          "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+        ]
+      },
+      {
+        "path": "_reference/sadx/ghidra-engine-recovery/mesh-pools-reset.json",
+        "sha256": "b3c3d30c5ed0ed7008f37728d17cd1e90a4e53e7f7c98ff495c7b0eb6a479b7f",
+        "evidence_id": "ev_0f3a2802e966be82480c1921b3ee766c08a674d428d3610a4562037da12d81b4",
+        "parameters": {
+          "procedure": "0x451110"
+        },
+        "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+        "critical_limitations": [
+          "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+          "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+          "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+          "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+        ]
+      },
+      {
+        "path": "_reference/sadx/ghidra-engine-recovery/mesh-refresh-reset.json",
+        "sha256": "c453343c7d700ddf27802e70c3323b628179510a8747d5179279bc47ea5d0199",
+        "evidence_id": "ev_4fdbc0c1d60f30e02dfa5e50e63985c55da84aa28bd461b611aa41d78af947a6",
+        "parameters": {
+          "procedure": "0x451160"
+        },
+        "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+        "critical_limitations": [
+          "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+          "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+          "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+          "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+        ]
+      },
+      {
+        "path": "_reference/sadx/ghidra-engine-recovery/mesh-registry-refresh.json",
+        "sha256": "35a600c7c684ae8948e7a64fbca39c08fe2e438d614c740ee104b9c3e90ed161",
+        "evidence_id": "ev_60ee3f5e3321363ff3f3239edede0ea61fd964a79693332d5e183d0159faa94d",
+        "parameters": {
+          "procedure": "0x4511d0"
+        },
+        "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+        "critical_limitations": [
+          "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+          "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+          "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+          "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+        ]
+      },
+      {
+        "path": "_reference/sadx/ghidra-engine-recovery/xrefs-0x3b2f720.json",
+        "sha256": "d477777ca51df776799358ba27a95fd79e80945d4f5b663480f8b6db608c619b",
+        "evidence_id": "ev_ed8f8c55aa8ad0d69863a1608500c0df158bdeb8d3066c9a7fd49090e9f86e1f",
+        "parameters": {
+          "address": "0x3b2f720"
+        },
+        "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+        "critical_limitations": []
+      },
+      {
+        "path": "_reference/sadx/ghidra-engine-recovery/xrefs-0x3b32728.json",
+        "sha256": "195a245781367d943042d981b808d1ed689eb0c9bca1b05cc39731b79e4ab257",
+        "evidence_id": "ev_42292f5711c6e0951345e88fd2abb6545e8d9f9a555e7a12956a90d20391b1fc",
+        "parameters": {
+          "address": "0x3b32728"
+        },
+        "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+        "critical_limitations": []
+      },
+      {
+        "path": "_reference/sadx/ghidra-engine-recovery/meshset-traverse.json",
+        "sha256": "9b91c87beda28e79a67a0af477bb291b7efe0a5166cb507b551787b9790a3252",
+        "evidence_id": "ev_f41a9e9174b06cb71522dbd691be044cf05ff2eda23afb8e457e2db8ac1ab75e",
+        "parameters": {
+          "procedure": "0x451ad0"
+        },
+        "analysis_profile_digest": "614542df33656fa07a2bc0c1d53364947e4f7f6e76185389a9d04f5c4de136c2",
+        "critical_limitations": [
+          "Unresolved computed or indirect flows without target addresses are not represented as reference edges.",
+          "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+          "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+          "Synthetic Ghidra entry-point references without actionable memory sources are omitted."
+        ]
+      }
+    ],
+    "matches": [
+      "Terminal sentinel capacities255/16383",
+      "Complemented registry-head backlink and chain recycling",
+      "Ascending bucket linking and final-bucket return",
+      "Z/Y/X low16 object transforms and child-first traversal",
+      "3b32728 dynamic storage distinct from3b2f720 work records",
+      "Forced-object and source partial-geometry refresh control"
+    ],
+    "correction": "451030 completed return1 now represented explicitly; previous probe checked its stores only",
+    "critical_limitations": [
+      "Ghidra inferred types/argument positions are not source signatures; exact bytes remain arithmetic/ABI authority",
+      "Ghidra session used one caller-asserted callback seed, not an engine-discovered function",
+      "Function-body coverage is Ghidra AddressSet-specific; unresolved targetless computed flows remain unknown",
+      "A second static provider does not establish runtime source/mod/hardware behavior"
+    ]
+  }
+}

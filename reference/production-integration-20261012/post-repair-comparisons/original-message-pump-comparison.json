@@ -1,0 +1,31 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "77aff142f46250334ef5a76aa322187ba675e008d7eb3349c2a48d894cd8c627",
+ "source_files": {
+  "src/game_window.hpp": "1164701a3aed174e0114045d28d4745954a6f2e315bc9dc869e94a319dbefefd",
+  "src/game_window.cpp": "5640465b5116cdb6981c4f4f70cba1e6fae797952a04eb77b7e3062dff056f42",
+  "tests/native_message_pump_probe.cpp": "a5638d23b2a557af5b9e15087ea5733f42b37e22c768e55c14bcc168bd071295",
+  "tools/verify_original_message_pump.py": "cf16b4094ef0d5842da3ec8a031ee099777b071acbc566938e7bc042799d3610"
+ },
+ "original_ranges_sha256": {
+  "0x789bd0-0x789c45": "647d353f795fad9cd95bd88c4397dfda6f6b3c56bc04de3911c55c0448925de4"
+ },
+ "cases": 2000,
+ "explicit_uninitialised": 578,
+ "source_outcomes": {
+  "explicit:uninitialised-wparam": 578,
+  "completed1:messages0": 578,
+  "completed1:messages7": 274,
+  "completed1:messages1": 509,
+  "completed1:messages3": 213,
+  "completed1:messages2": 256,
+  "completed0:messages3": 57,
+  "completed0:messages7": 48,
+  "completed0:messages1": 39,
+  "completed0:messages2": 26
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "state_traces_match": true,
+ "limits": "The 789bd0 message pump against its original instructions.\n\nPeekMessageA (IAT 7db1ec) pops the case's scripted queue into the caller's MSG\n(PM_REMOVE) or returns 0 without writing; TranslateMessage (7db1fc) and\nDispatchMessageA (7db1f8) record the message, and one dispatch can stop the\nsource (the native window-procedure owner stops there). Compared: completion,\n3d08534, the dispatch count, and the ordered trace of peeked window handles and\ndispatched (hwnd, message, wParam). When the first peek finds nothing the source\nstores an uninitialised stack word: the native owner reports it unknown, and\nthose cases are counted as explicit.\n"
+}

@@ -1,0 +1,19 @@
+[
+  {
+    "name": "normal-query",
+    "artifact": "normal-query.json",
+    "requested_procedure": "0x41bc00",
+    "canonical_procedure": "0x41bc00",
+    "evidence_id": "ev_711e133add2969b871faa1498689028dd055cb75079b7e93e3b6fee2a76f18ec",
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    },
+    "limitations": [
+      "Results depend on Hopper's completed static analysis.",
+      "String values cover native typed objects. Hopper may split long literals into adjacent unterminated fragments; string searches match each object independently.",
+      "Undecodable typed objects retain native display text with an explicit decoding unknown; these values do not establish decoded source literals.",
+      "Reported string encodings are inferred from typed bytes and native display; the original source's intended encoding is unknown."
+    ]
+  }
+]

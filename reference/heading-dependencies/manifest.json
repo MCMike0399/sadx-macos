@@ -1,0 +1,19 @@
+[
+  {
+    "name": "adjust-angle",
+    "artifact": "adjust-angle.json",
+    "requested_procedure": "0x438350",
+    "canonical_procedure": "0x438350",
+    "evidence_id": "ev_b6a242ec35d15a55a4d2e7821f3527a6a4a20b89cbc96ce979b94b4edaa41e77",
+    "body_coverage": {
+      "available": false,
+      "reason": "Hopper's public Python API does not expose complete function body ranges"
+    },
+    "limitations": [
+      "Results depend on Hopper's completed static analysis.",
+      "String values cover native typed objects. Hopper may split long literals into adjacent unterminated fragments; string searches match each object independently.",
+      "Undecodable typed objects retain native display text with an explicit decoding unknown; these values do not establish decoded source literals.",
+      "Reported string encodings are inferred from typed bytes and native display; the original source's intended encoding is unknown."
+    ]
+  }
+]

@@ -1,0 +1,61 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "entry": "0x43b9c0",
+  "evidence_id": "ev_aa103833c803a5c4ab1f403c66349cf1331ce5b73d07db9855e8ddfbd70bddbb",
+  "status": "source_native_read_only_integer_query_closed; actual_registration_contact_production_and_gameplay_open",
+  "native_sources": {
+    "sadx-native/src/player_hold.hpp": "022e162652fce72adc6e48b483450274024ff3a6d6ece0b82cbde3b3c3755ed0",
+    "sadx-native/src/player_hold.cpp": "0b8cee44972e5a56427a2efd0898a946ca53d7f0a435032097a0ea7aaab370a2",
+    "sadx-native/tests/player_hold.cpp": "9c988007ac22453fb751a4f38f156d388e3e42c44d4ab96156e2e3068dddb4d9",
+    "sadx-native/tests/native_player_hold_probe.cpp": "01e422a7bc24202bb5fccce5f91d0b7308fcd3400fa005a4e06e5ba76139a2eb",
+    "sadx-native/tools/verify_original_player_hold.py": "842640ec27a6627229687283adf28728213555e7ea06f24fb67671e314cbe122"
+  },
+  "source_body": {
+    "address": "0x43b9c0",
+    "size": 321,
+    "sha256": "57d91ea749af17f24c0cbcee71c24ae9475935dbbfdf36f3e57fcc7ce88320e0"
+  },
+  "source_tables": {
+    "address": "0x43bb04",
+    "bytes": "4bba4300d5ba4300feba43000002000002000001c1ba4300d5ba4300feba43000002000002000001"
+  },
+  "private_probe_sha256": "aa24de25cab8e0e3d19d2e1a4d34c5e2924f6ed214c01ce7a8887fa59341f41f",
+  "private_report_sha256": "d79990e7a04bd8fa5ac85f86eb707f0d2641a69d3705cddd0e1f4fc8011f4837",
+  "actual_source_cases": 133410,
+  "actual_null_fault_cases": 16,
+  "mismatches": 0,
+  "passed": true,
+  "required_runtime_facts": [
+    "actual byte-index player-work registration lookup",
+    "observed held TaskHandle with authoritative typed task ID when attached",
+    "real shared TaskWorkArena reference/known bytes",
+    "actual collision hit-work/task/actor graph with live authority or explicit captured availability"
+  ],
+  "shared_additions_owned_by_parent": [
+    "PlayerPhysicsState.held_task_at_68",
+    "Task.primary_state",
+    "PlayerTaskState.task_id_at_2",
+    "PositionHitActor.flags_bytes_at_4/live_task and shared read helpers",
+    "PSetPosition hold_diagnostics propagation"
+  ],
+  "validation": {
+    "optimized_arm64": "passed",
+    "ubsan_current_owner_and_task_work": "passed; shared FP archive not instrumented by this owner",
+    "fp_profiles": 12,
+    "unmasked_pending_fp": "unchanged by integer-only query",
+    "reference": "Unicorn2.1.4 original source bytes, no overlays; controlled fully known fixtures"
+  },
+  "limits": [
+    "Fixtures explicitly supply observed memory facts; they are not an initialized game scene",
+    "Unknown fields and live typed-state precedence are native owner tests, not invented oracle memory",
+    "No executable, held task, controller, render or collision producer is run as a game",
+    "Actual Windows reference/gameplay/physical controllers remain unverified"
+  ],
+  "ghidra_corroboration": {
+    "evidence_id": "ev_f6d91d07b03e9c02681253bab7dce13e300dd8985ff113f29093bb31dfd29142",
+    "path": "_reference/sadx/ghidra-engine-recovery/hold-object.json",
+    "body_bytes": 321,
+    "range": "0x43b9c0..0x43bb00",
+    "result": "control/guards/map/returns agree with frozen native owner and LLVM; no source change"
+  }
+}

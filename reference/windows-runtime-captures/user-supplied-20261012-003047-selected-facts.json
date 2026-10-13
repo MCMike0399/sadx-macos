@@ -1,0 +1,157 @@
+{
+  "provenance": "Derived selected facts from the complete runtime JSON supplied in the user conversation. Original file bytes are not yet retained; this is not a byte-for-byte copy or a REA Evidence observation.",
+  "capture_state": "required-readbacks-complete",
+  "started_utc": "2026-10-12T00:30:47.6897729Z",
+  "ended_utc": "2026-10-12T00:30:52.0303603Z",
+  "collector_sha256": "3601c69deb0d9051cf86c4d83260637ae65b42b0aad75032558ce88cd780a7a0",
+  "embedded_csharp_source_sha256": "bb474f4715f0c1e5525faeab0a34f148a6add1ba25f8a49237c0a87cddbd8c69",
+  "powershell_version": "5.1.26100.9168",
+  "profile_manifest_sha256": "795918d0e40d30437a0fde905d40917cac861ef46b3e86dff0cffdac901f8cd8",
+  "cpu": "Intel Core Ultra 7 155H",
+  "cpu_cores": 16,
+  "cpu_logical_processors": 22,
+  "installed_gpus": [
+    {
+      "name": "NVIDIA GeForce RTX4060 LaptopGPU",
+      "driver": "32.0.15.9282"
+    },
+    {
+      "name": "Intel Arc Graphics",
+      "driver": "32.0.101.6556"
+    }
+  ],
+  "windows": {
+    "caption": "Windows11HomeSingleLanguage",
+    "version": "10.0.26200",
+    "build": "26200",
+    "architecture": "64-bit",
+    "AtlasOS": "user-reported"
+  },
+  "process": {
+    "reported_pid": 16480,
+    "creation_filetime_100ns": "134362370837469313",
+    "process_machine": "0x014c",
+    "native_machine": "0x8664",
+    "identity_rechecked_at_end": true,
+    "exe_base": "0x400000",
+    "exe_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "exe_raw_observations": 2,
+    "exe_distinct_mappings": 1
+  },
+  "required_modules_verified_as_reported": 6,
+  "required_hooks": [
+    {
+      "va": "0x434870",
+      "observed_hex": "810da8cbb20304000080c39090909090",
+      "operation": "camera reset 1",
+      "prefix_matches": true,
+      "jump_target": null,
+      "destination_verified_as_reported": null
+    },
+    {
+      "va": "0x438330",
+      "observed_hex": "810da8cbb20304000080c70570cab203",
+      "operation": "camera reset 2",
+      "prefix_matches": true,
+      "jump_target": null,
+      "destination_verified_as_reported": null
+    },
+    {
+      "va": "0x533939",
+      "observed_hex": "90909050e88ed5f0ff83c40483f80175",
+      "operation": "Egg Hornet dereference bypass",
+      "prefix_matches": true,
+      "jump_target": null,
+      "destination_verified_as_reported": null
+    },
+    {
+      "va": "0x440ef5",
+      "observed_hex": "9090b8010000008b0d142eb40385c974",
+      "operation": "Egg Hornet conditional bypass",
+      "prefix_matches": true,
+      "jump_target": null,
+      "destination_verified_as_reported": null
+    },
+    {
+      "va": "0x431517",
+      "observed_hex": "e9f464ca70909090909090908b0de4a2",
+      "operation": "in-game Skipma jump",
+      "prefix_matches": true,
+      "jump_target": "0x710d7a10",
+      "destination_verified_as_reported": true
+    },
+    {
+      "va": "0x5132b1",
+      "observed_hex": "e98a47bc7090909090742aa10000c603",
+      "operation": "movie Skipma jump",
+      "prefix_matches": true,
+      "jump_target": "0x710d7a40",
+      "destination_verified_as_reported": true
+    },
+    {
+      "va": "0x7899e0",
+      "observed_hex": "e90b779470909090ff1568b07d0083f8",
+      "operation": "frame limiter trampoline",
+      "prefix_matches": true,
+      "jump_target": "0x710d10f0",
+      "destination_verified_as_reported": true
+    },
+    {
+      "va": "0x411d1c",
+      "observed_hex": "e9aff4cb70008b0d9c11b1038bf05651",
+      "operation": "extra tick policy jump",
+      "prefix_matches": true,
+      "jump_target": "0x710d11d0",
+      "destination_verified_as_reported": true
+    },
+    {
+      "va": "0x7dce58",
+      "observed_hex": "00007c42cdcc4c3f0000000000002040",
+      "operation": "frame rate scalar 63.0f",
+      "prefix_matches": true,
+      "jump_target": null,
+      "destination_verified_as_reported": null
+    },
+    {
+      "va": "0x40f343",
+      "observed_hex": "e92858ce709090909090909090b8e1e3",
+      "operation": "analog input hook",
+      "prefix_matches": true,
+      "jump_target": "0x710f4b70",
+      "destination_verified_as_reported": true
+    },
+    {
+      "va": "0x40f451",
+      "observed_hex": "e98a57ce7090909090909090909090e9",
+      "operation": "raw controller init hook",
+      "prefix_matches": true,
+      "jump_target": "0x710f4be0",
+      "destination_verified_as_reported": true
+    },
+    {
+      "va": "0x40f460",
+      "observed_hex": "e94e090000e8f6fb3600a340e3b003a1",
+      "operation": "skip vanilla controller update",
+      "prefix_matches": true,
+      "jump_target": "0x40fdb3",
+      "destination_verified_as_reported": true
+    },
+    {
+      "va": "0x40fdb3",
+      "observed_hex": "e9b8411e719090909090909090e8eb48",
+      "operation": "input event dispatch",
+      "prefix_matches": true,
+      "jump_target": "0x715f3f70",
+      "destination_verified_as_reported": true
+    }
+  ],
+  "errors_as_reported": [],
+  "cleanup_as_reported": [],
+  "qpc_frequency_hz": 10000000,
+  "limits": [
+    "No thread-state snapshot; x87/MXCSR still unobserved.",
+    "GPU installation/driver-module presence does not prove selected game GPU.",
+    "No per-tick gameplay/physics, cadence, IGT or physical input trace.",
+    "Module hashes are on-disk hashes, not loaded-memory image digests."
+  ]
+}

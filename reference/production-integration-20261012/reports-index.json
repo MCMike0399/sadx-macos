@@ -1,0 +1,217 @@
+{
+  "original-ninja-render-comparison": {
+    "path": "_reference/sadx/production-integration-20261012/original-ninja-render-comparison.json",
+    "report_sha256": "d9cc3dccd6fb3d3b1b599884bfc11fd3a881445d3784218379dcb273b72c5418",
+    "tested_probe_sha256": "3d0b6e88a6eef944ecfcf223f9fc3f009a52880791913d8b4d72bd4490965f1f",
+    "matching_current_probes": [],
+    "top_level_results": {
+      "cases": 6160,
+      "packed_commands_boundaries_match": true
+    },
+    "limits": [
+      "Actual game state wrappers only; COMSetRenderState uses a declared test backend, not an originalGPU observation",
+      "Source failed HRESULT ignored as actual instructions; native APIs can omit originalHRESULT while preserving availability",
+      "Unsupported constant-table domains/unknown facts stop at source boundaries; no source validation invented",
+      "No FP arithmetic in this owner; GPU, texture lifetime and full sprite/game execution remain unverified"
+    ]
+  },
+  "original-ninja-sprite-comparison": {
+    "path": "_reference/sadx/production-integration-20261012/original-ninja-sprite-comparison.json",
+    "report_sha256": "f23a4ab8753f50ec91ef1a1ee449a65bb8f2bcd40fa1a2b60c6d10d49e9b0fe8",
+    "tested_probe_sha256": "6b3e21fa855a4c565997245f7028e73c35c0ee6f172e895cab0324ecf310f101",
+    "matching_current_probes": [
+      "sadx-native/build/native-ninja-sprite-probe.dylib"
+    ],
+    "top_level_results": {
+      "supported_slice_values_vertices_boundaries_control_match": false,
+      "strict_emulator_match": false
+    },
+    "limits": [
+      "Actual instruction slices77e3c9..77e5c2/77e80f and vertex stores; no full source texture/queue/renderer body claim",
+      "Matrix ownership/data and projection/color are explicit source-bound fixtures, not a captured game camera",
+      "Vertex depth is explicitly seeded FLD32 external input, not an implemented D3DX project approximation",
+      "Actual781670/CRT_ftol instructions execute unchanged; no callee overlays",
+      "Required unknown native facts stop before their source instruction and retain local stores",
+      "All status/nonfinite discrepancies retained, including known Unicorn FLD SNaN limits",
+      "No GPU rendering, resource loading or full game/mod/hardware parity claim"
+    ]
+  },
+  "original-ninja-texture-comparison": {
+    "path": "_reference/sadx/production-integration-20261012/original-ninja-texture-comparison.json",
+    "report_sha256": "b78428a39d983bd62dba92d0ae5d5857dcdaac00e5180c8bf31676d35a00b0ad",
+    "tested_probe_sha256": "cebff90718fecc4ecd6769e515a3dd15bd85c6a9aced3f7650f54b07de68d9f9",
+    "matching_current_probes": [
+      "sadx-native/build/native-ninja-texture-probe.dylib"
+    ],
+    "top_level_results": {
+      "packed_and_metadata_match": true,
+      "rgba_primary_policy_match": true,
+      "passed": true
+    },
+    "limits": [
+      "Packed16 values compared with actual77f2f0/77f3f0/78bc30/78bd10/78bf50/78c570 instructions, no overlays",
+      "RGBA8 compared with integer expansion derived from pinned MIT PuyoTools; original GPU consumes packed16",
+      "No D3D/Metal upload/filter/normalized-channel/hardware/runtime texture binding equivalence",
+      "Supplied source assets only; other pixel/data formats explicitly unsupported"
+    ]
+  },
+  "original-player-auxiliary-effect-comparison": {
+    "path": "_reference/sadx/production-integration-20261012/original-player-auxiliary-effect-comparison.json",
+    "report_sha256": "c66318e686ec44b890a03b7fcb9c8a4d2bdf71469b1037cfc7b1ac39a807f8c2",
+    "tested_probe_sha256": "d21c3ba23621bdad9396624b2e06beeec99233c6907aae9d279140ec2ec9281c",
+    "matching_current_probes": [],
+    "top_level_results": {
+      "supported_state_boundaries_callbacks_control_match": true,
+      "strict_emulator_match": false
+    },
+    "limits": [
+      "Exact initializers/getters/destructor and update prefix; no source callee overlays",
+      "Unlifted update calls and unknown facts stop before the required source instruction; no full update/renderer or playable-game claim",
+      "Heap/task initialization starts after unlifted acquisition, as explicit fixture",
+      "Task pool payload excluded from arena byte comparison because native graph owns it; live callback identities compared separately, pool semantics have separate instruction oracle",
+      "Shadow source pointer bytes in probe snapshot encode the authoritative owned table selection; production never casts them",
+      "All FP status differences retained; Unicorn FLD SNaN conversion is not the hardware specification",
+      "No original Windows hardware or initialized mods runtime observed"
+    ]
+  },
+  "original-player-position-comparison": {
+    "path": "_reference/sadx/production-integration-20261012/original-player-position-comparison.json",
+    "report_sha256": "42c028ba822becb7e02f0e062fa4c14aeb3dc64b3740e6c8c6feefdcb4db89d4",
+    "tested_probe_sha256": "ad1b604590961ca172b3886bbb4c07a0eecf87679c2d13166e53ae75425053b4",
+    "matching_current_probes": [
+      "sadx-native/build/native-player-position-probe.dylib"
+    ],
+    "top_level_results": {
+      "stored_values_match": true,
+      "passed": false
+    },
+    "limits": "actual1771-byte local body and real math/matrix/CRT; explicit fixture replies or stop boundaries for normal/hold/scene/reaction; not actual geometry or fullcollision"
+  },
+  "original-player-startup-comparison": {
+    "path": "_reference/sadx/production-integration-20261012/original-player-startup-comparison.json",
+    "report_sha256": "74cbf3a4098cbc61e1bf0d8862585245a4e7ed84f936ad3794e8e862ff4a4064",
+    "tested_probe_sha256": "24b04cde23efa3da1e433a53f921bcd0c71d20f1ff0d0c5293c96dd777cc1944",
+    "matching_current_probes": [],
+    "top_level_results": {
+      "prefix_state_resources_boundaries_control_match": true,
+      "original_return_observed": false,
+      "full_emulator_match": false
+    },
+    "limits": [
+      "Actual source prefix only: stop before44297b because native4a2b60 owner remains missing; no original return or running game claim",
+      "Heap/task-pool initialization is an explicit fixture after unlifted CRT/Win32 acquisition",
+      "No source task/work/object/event callees are replaced",
+      "Canonical probe snapshot reads authoritative typed task/player/motion views; allocated bytes are initialization provenance",
+      "Caller-selected parameter/save/FP/resource fixtures, not actual initialized mods or hardware captures",
+      "Source crash/corrupt-registration/unknown-owner cases stop before the unsafe instruction and retain native partial failures"
+    ]
+  },
+  "original-sonic-actions-comparison": {
+    "path": "_reference/sadx/production-integration-20261012/original-sonic-actions-comparison.json",
+    "report_sha256": "5482f7f9e8ba6f47a745eb8e0bb8c783e8d64d7258e805d0f240f8b8c50da3a6",
+    "tested_probe_sha256": "a2c428e0b6c42c2c7e3b5553a226f5edd346969258aeaa636a2cd8840cd9fc23",
+    "matching_current_probes": [],
+    "top_level_results": {
+      "cases": 30192,
+      "stored_mismatches": 0,
+      "boundary_mismatches": 0,
+      "status_mismatches": 2172,
+      "stored_state_matches": true,
+      "passed": false
+    },
+    "limits": [
+      "Actual original bytes with private fixture memory, not full game/mod startup or a physical gameplay trace",
+      "Unbound sound/effect/native task/animation/normal owners stop at actual source CALL before execution; none returns synthetic success",
+      "Fully known source masks/pad/event fields are explicit fixture facts, not defaults",
+      "All12 masked CW profiles include hardware candidate007f and worker027f but are not hardware measurements",
+      "Source FPATAN/scratch-dependent wall query remains a mandatory owner boundary in these fixtures"
+    ]
+  },
+  "original-sonic-player-comparison": {
+    "path": "_reference/sadx/production-integration-20261012/original-sonic-player-comparison.json",
+    "report_sha256": "199dc11b0035638f755ce834ecb98c868bb96d3258563eea70981f0ccfa0d933",
+    "tested_probe_sha256": "ea270937bf5452ed3ef7c93fe4bf5e41b45961d84161a70ae091d47cf1063c65",
+    "matching_current_probes": [],
+    "top_level_results": {
+      "cases": 28800,
+      "stored_mismatches": 0,
+      "status_mismatches": 2840,
+      "ground_prefix_cases": 4032,
+      "ground_prefix_stored_mismatches": 0,
+      "ground_prefix_status_mismatches": 1632,
+      "stored_state_matches": true,
+      "passed": false
+    },
+    "limits": [
+      "No full Sonic action, animation, model, sound, collision or task initialization is executed as a game",
+      "Control comparisons stop before mandatory callbacks or at the remaining predicate jump; those paths are incomplete",
+      "Ground-input cases execute actual GetAnalog and stop at mandatory rotation/raw-input owners; their matrix resources are not consumed",
+      "Local-speed cases seed the transformed stack vector at43eecc; they do not establish the producer43ed20/43ec00 equivalence",
+      "Unicorn is an instruction oracle; physical Windows control/status and hardware equivalence remain unverified",
+      "Native full-angle unavailable low16 stops before the high16 source write; known fixtures cover fully captured angles"
+    ]
+  },
+  "original-task-lifecycle-comparison": {
+    "path": "_reference/sadx/production-integration-20261012/original-task-lifecycle-comparison.json",
+    "report_sha256": "2c3ded12356dcc669b0dd5be550bbb2b97d44edf792d061c2f2a9ee59465fbb7",
+    "tested_probe_sha256": "cb90d7b7666fd4ab436afc7dc151037b5d61beb8b8364dcedc7a9a2a477894d1",
+    "matching_current_probes": [],
+    "top_level_results": {
+      "values_links_and_bytes_match": true
+    },
+    "limits": [
+      "Heap acquisition and51a740 initializer excluded; explicit runtimefield30 owner supplied",
+      "Known51f680 RET callback only; arbitrary game callbacks/mods not captured",
+      "One sourcecleanup fixture seeds owned collision/object chains explicitly; initialization producers not claimed",
+      "Pool native graph is encoded only by the probe canonical test identity scheme; functional native code never casts guest pointers",
+      "Inactive membership diagnostic401000/CRT formatting and corruption/hang paths excluded from originalgoldens, retained as native failures",
+      "Original hardware/fullgame startup remain unverified"
+    ]
+  },
+  "original-task-work-comparison": {
+    "path": "_reference/sadx/production-integration-20261012/original-task-work-comparison.json",
+    "report_sha256": "7ab9da04cc035fa5c370b6e48a86387fd314f656b09d9a45c9511f6c03acef7b",
+    "tested_probe_sha256": "744f09d1895abb903f8d57876339ee35b14cec2e8da8d965656ba2ef816a104a",
+    "matching_current_probes": [
+      "sadx-native/build/native-task-work-probe.dylib"
+    ],
+    "top_level_results": {
+      "values_links_and_bytes_match": true
+    },
+    "limits": [
+      "StartsafterCRTandWin32heapacquisitionwithanexplicitzerofilledheapfixture",
+      "Onlyvalidownedallocation/free sequences; sourcehang/corruption failures have native unit coverage",
+      "Original hardware/fullgame startup and mod runtime remain unverified"
+    ]
+  },
+  "original-game-logic-comparison": {
+    "path": "_reference/sadx/production-integration-20261012/original-game-logic-comparison.json",
+    "report_sha256": "fe6f9eb3499ac8604c205354f9ceafcaecbcce39f565c55b1ed115749532bb41",
+    "tested_probe_sha256": "298d15da673285753b4e9366c02c008bfb8c139401a6c831c9666165e96c80b3",
+    "matching_current_probes": [
+      "sadx-native/build/native-game-logic-probe.dylib"
+    ],
+    "top_level_results": {
+      "cases": 170,
+      "orchestration_stores_press_union_calls_match": true
+    },
+    "limits": "413dd0 instructions versus native orchestration, with explicit owner fixtures.\n\nCalled input/scene/timing operations are fixture boundaries in both runs. This\ndoes not establish a complete scene, physical input, keyboard-edge owner or\nnative game loop. Every call, argument, partial store and press union is kept.\n"
+  },
+  "original-game-logic-support-comparison": {
+    "path": "_reference/sadx/production-integration-20261012/original-game-logic-support-comparison.json",
+    "report_sha256": "81df64564a7c47e1d4fa342da968b0c0ada8f7d7931b45f8df17b49e4e913148",
+    "tested_probe_sha256": "17a7ea6a589af9ac3ebe53c5523c79d5e44540e94d79e9419c5fa73f3105b10b",
+    "matching_current_probes": [
+      "sadx-native/build/native-game-logic-support-probe.dylib"
+    ],
+    "top_level_results": {
+      "passed": true
+    },
+    "limits": [
+      "Synthetic raw source bytes and integer timing globals, not observed Win32/input defaults",
+      "Missing native facts modeled by a source-read stop before instruction, preserving actual earlier stores",
+      "Local IDIV #DE boundaries only; Windows exception dispatcher remains unimplemented",
+      "No physical keyboard/HID/controller namespace equivalence inferred"
+    ]
+  }
+}

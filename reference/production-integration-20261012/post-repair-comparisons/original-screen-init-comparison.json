@@ -1,0 +1,29 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "3e3dd586ee6445b19f2fe9d8d505c3bde1b5ded07246ffe2ca6bafc02cc1ab70",
+ "source_files": {
+  "src/ninja_screen.hpp": "94fb1e289dfe20f1731716625ab609bdaf6d54dafd428a90b89672833012be59",
+  "src/ninja_screen.cpp": "1a227341e62db9cc51c7acfa0dea03fded86fca860473a892f9b7c6efb7d3838",
+  "src/game_frame_control.cpp": "f75083f33e4f7a945a92c9cdc96ee6417af7af51b31463c4c97a797cafc24e6c",
+  "src/ninja_render.cpp": "29c87c76a6aff6f0f40bb21cae3e0bdfcd0713a222955f7cd9555e72b9c4022a",
+  "tests/native_screen_init_probe.cpp": "e834f15712ea074d1b668dc810d7c7b467b559bd32c61e5fa7537097f7cee9de",
+  "tools/verify_original_screen_init.py": "50e047b36cf2c0baadae9df5cc85f6c923a66c7ceaae4c2f5965c5428dad0a25"
+ },
+ "original_ranges_sha256": {
+  "0x780c30-0x780e70": "0f1632d09b023fcbc48ffea9b81101cd3c1c88dcd3d07f9c391928af7be1fd17",
+  "0x7912e0-0x7913cc": "bfc22c55a895fa7d5db1a721b44db79d92db18b301e1609883482617cad00e7c",
+  "0x77ff70": "22022c2120cc4b0058937bbff5114d11abe4ee43c9ad30889dd5e50ba2f8864b",
+  "0x780090": "23f6959d83ddca615209ad81eedb1cc3cee5c6272d44c86516c3ea15c745a85a"
+ },
+ "cases": 3000,
+ "source_outcomes": {
+  "completed1:calls2:invalid0": 1416,
+  "completed1:calls5:invalid1": 1390,
+  "completed0:calls0:invalid1": 97,
+  "completed0:calls0:invalid0": 97
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "state_traces_match": true,
+ "limits": "780c30 (screen setup, 781070's 78113f) against its original instructions,\nwith the real 7899a0, 7912e0, 77ec60, 77ff70 and 780090 code.\n\nThe whole PE is mapped. The device is a COM fixture recording SetViewport\n(+0xa0, its six words), SetTransform (+0x94) and MultiplyTransform (+0x9c)\n(state and the sixteen matrix words) and SetRenderState (+0xc8). 3d0fd1c is\nseeded per case (1 runs 7912e0's body; the loader's reset_device is its only\nwriter). Seeded first: 3ce712c = 5, 3d0f840 = 0x1234, 3d0f9c4 = 0x5678,\n3ce71b0 = 0x11, 3ce71a4 = 0x22 and the 3ce7174 colours 1..4, so their stores\nare visible. A null device faults at the vtable load (page 0 is unmapped), as\nthe native owner stops (null_device). Compared: completion, every global the\nsource writes, 7899a0's words and the device-method trace with its arguments.\n"
+}

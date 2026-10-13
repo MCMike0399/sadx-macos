@@ -1,0 +1,2190 @@
+{
+  "archive" : "Sonic Adventure DX\/system\/BEACH01.PVM",
+  "archive_sha256" : "fb6fa479787fb29e57688ea56cf21da6952142d9ebb98665895d9c1372105a07",
+  "channel_mismatches" : 0,
+  "channels" : 3437056,
+  "compiler" : "21.0.0 (clang-2100.3.34.2)",
+  "device" : "Apple M5 Pro",
+  "direct_float32_ratios_match" : true,
+  "fp32_filtering" : true,
+  "gpu_commands_completed" : true,
+  "levels" : 103,
+  "limits" : [
+    "Native Apple GPU upload\/normalization\/readback; not original NVIDIA\/D3D equivalence",
+    "No original runtime texlist\/cache ownership or gameplay binding inferred",
+    "No sampler\/filter\/blend contract is chosen by upload",
+    "PNG uses nearest-byte quantization of real FP32 GPU readback as inspection preview"
+  ],
+  "math_profile" : "safe\/precise macOS15+; no fast math on macOS14",
+  "normalized_format" : "RGBA32Float",
+  "os" : "Version 27.0.1 (Build 26A434)",
+  "records" : [
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 3952,
+      "data_format" : 9,
+      "global_index" : 810014,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 3968,
+          "gpu_rgba32f_sha256" : "648384dd7a86007ed60191542d4b8a80ebc3590aedef35f1c1bb857b7d9a1e84",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 0,
+      "pixel_format" : 0,
+      "table_index" : 0
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 36752,
+      "data_format" : 9,
+      "global_index" : 810008,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 36768,
+          "gpu_rgba32f_sha256" : "6733ee6aa6c7509c06efae99030287e461cbaed5496404b61376d18879547112",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 1,
+      "pixel_format" : 0,
+      "table_index" : 1
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 69552,
+      "data_format" : 9,
+      "global_index" : 810035,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 69568,
+          "gpu_rgba32f_sha256" : "96b4620b481df9fdb9f5005f00456ff1ef51bd2e9a4c98892dd2715bc775fba3",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 2,
+      "pixel_format" : 1,
+      "table_index" : 2
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 102352,
+      "data_format" : 9,
+      "global_index" : 810036,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 102368,
+          "gpu_rgba32f_sha256" : "9dd6578ff76bb886fa733f680e630cc8c6a0ca1e825eb6da6e6946da4bec4527",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 3,
+      "pixel_format" : 1,
+      "table_index" : 3
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 135152,
+      "data_format" : 9,
+      "global_index" : 810016,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 135168,
+          "gpu_rgba32f_sha256" : "5c1e9884a462a6fad75819aa93d9b3c63a6312abca9ee639c7f8bba7ab2e4e9f",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 4,
+      "pixel_format" : 0,
+      "table_index" : 4
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 167952,
+      "data_format" : 9,
+      "global_index" : 810032,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 167968,
+          "gpu_rgba32f_sha256" : "22cfa0799d22e1e79b7fc91d1180be3f5b4620552d14918cd8cd0f5f98418bc2",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 5,
+      "pixel_format" : 0,
+      "table_index" : 5
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 200752,
+      "data_format" : 9,
+      "global_index" : 810005,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 200768,
+          "gpu_rgba32f_sha256" : "f89c6edba53aaff6c8d43e17b93d24cd95a4a658cbca6992f7f8a1ed5308890c",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 6,
+      "pixel_format" : 0,
+      "table_index" : 6
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 233552,
+      "data_format" : 9,
+      "global_index" : 810034,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 233568,
+          "gpu_rgba32f_sha256" : "92ef77c33e11769d96323987c6396e75de76817581a3c4eef1a59990dc386727",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 7,
+      "pixel_format" : 0,
+      "table_index" : 7
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 266352,
+      "data_format" : 9,
+      "global_index" : 810026,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 266368,
+          "gpu_rgba32f_sha256" : "437243bbd3c887a9483c6ba9512947827e29af8ab21de47ecf1b88657c78d82a",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 8,
+      "pixel_format" : 0,
+      "table_index" : 8
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 299152,
+      "data_format" : 9,
+      "global_index" : 810006,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 299168,
+          "gpu_rgba32f_sha256" : "2542dc2a0ef440c3a940fab390a60f778c8b5a5ec201e4eb4b14cf3b49885808",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 9,
+      "pixel_format" : 0,
+      "table_index" : 9
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 331952,
+      "data_format" : 9,
+      "global_index" : 810037,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 331968,
+          "gpu_rgba32f_sha256" : "bb7117e2eab4447d1ac7df60a08db45e7a00812f061aadb2267b4820e7094e0e",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 10,
+      "pixel_format" : 0,
+      "table_index" : 10
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 364752,
+      "data_format" : 9,
+      "global_index" : 810029,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 364768,
+          "gpu_rgba32f_sha256" : "3089342e55cbe18f009c27df90491d8d20515010f77c8f1d2e9865393b7d81d2",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 11,
+      "pixel_format" : 0,
+      "table_index" : 11
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 397552,
+      "data_format" : 9,
+      "global_index" : 810009,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 397568,
+          "gpu_rgba32f_sha256" : "186042778b0b18300345d2d0d0ef51fda6a5f8ca1c83183739d5f865fc37676c",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 12,
+      "pixel_format" : 0,
+      "table_index" : 12
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 430352,
+      "data_format" : 9,
+      "global_index" : 17095,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 430368,
+          "gpu_rgba32f_sha256" : "90ba158e784a07af5a48198f33ed7011facf9a187b4c67a78f27b2361d117d3a",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 13,
+      "pixel_format" : 1,
+      "table_index" : 13
+    },
+    {
+      "chunk_bytes" : 131104,
+      "chunk_offset" : 463152,
+      "data_format" : 9,
+      "global_index" : 810017,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 131072,
+          "encoded_offset" : 463168,
+          "gpu_rgba32f_sha256" : "c9f685e1db6ae3b1aa77aa89606ec580cc361caa6e1d4da61408aefd9b153a9e",
+          "height" : 256,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 256
+        }
+      ],
+      "ordinal" : 14,
+      "pixel_format" : 0,
+      "table_index" : 14
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 594256,
+      "data_format" : 9,
+      "global_index" : 810007,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 594272,
+          "gpu_rgba32f_sha256" : "b97b3a768a6e8fd886562d3c4b87817e6d7b7d10f7dae3ea75972528f7f8d5fd",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 15,
+      "pixel_format" : 2,
+      "table_index" : 15
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 627056,
+      "data_format" : 9,
+      "global_index" : 810502,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 627072,
+          "gpu_rgba32f_sha256" : "8eca7699407b2961428e63d625e5c197c3ab3e25db9d4eac126bed30353c1115",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 16,
+      "pixel_format" : 1,
+      "table_index" : 16
+    },
+    {
+      "chunk_bytes" : 2080,
+      "chunk_offset" : 659856,
+      "data_format" : 9,
+      "global_index" : 810065,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 2048,
+          "encoded_offset" : 659872,
+          "gpu_rgba32f_sha256" : "ef541a3afff640b898f0bf200d06d98d02d00f6be2c47c939e2f91cd96b19823",
+          "height" : 32,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 32
+        }
+      ],
+      "ordinal" : 17,
+      "pixel_format" : 1,
+      "table_index" : 17
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 661936,
+      "data_format" : 9,
+      "global_index" : 810019,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 661952,
+          "gpu_rgba32f_sha256" : "5cb776ba4b36f802c380475aa190868022604eebcee41a03cde5e8e021611d2b",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 18,
+      "pixel_format" : 1,
+      "table_index" : 18
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 670160,
+      "data_format" : 9,
+      "global_index" : 810023,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 670176,
+          "gpu_rgba32f_sha256" : "ce4676fa1e04c3a6b001ac76af305242ce7283a9edf2aa921f14f70487c26f80",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 19,
+      "pixel_format" : 1,
+      "table_index" : 19
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 678384,
+      "data_format" : 9,
+      "global_index" : 810020,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 678400,
+          "gpu_rgba32f_sha256" : "6c18e4a1a6947ef7a16ef6badd114bbbb087b7431ec39e22238c591590fdfbb7",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 20,
+      "pixel_format" : 1,
+      "table_index" : 20
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 686608,
+      "data_format" : 9,
+      "global_index" : 810024,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 686624,
+          "gpu_rgba32f_sha256" : "857275ec403981d35ec52f29b5a946b8d654c3bc22a4fae3399bb7cbd554dd9a",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 21,
+      "pixel_format" : 1,
+      "table_index" : 21
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 694832,
+      "data_format" : 9,
+      "global_index" : 810025,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 694848,
+          "gpu_rgba32f_sha256" : "820fa14b9864fa357b8545194510bd4938193260aa450a849871c6e59cfd651c",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 22,
+      "pixel_format" : 0,
+      "table_index" : 22
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 703056,
+      "data_format" : 9,
+      "global_index" : 810067,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 703072,
+          "gpu_rgba32f_sha256" : "768d94d8bd0270f83c8cc7d63d37f49c65fbe9a5f576da85f61f98170fcb8f0d",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 23,
+      "pixel_format" : 0,
+      "table_index" : 23
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 711280,
+      "data_format" : 9,
+      "global_index" : 810015,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 711296,
+          "gpu_rgba32f_sha256" : "dbc4361bd537ca837aa3aa9118893793de4ceaccab975fe2a065945afbe84ee7",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 24,
+      "pixel_format" : 0,
+      "table_index" : 24
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 719504,
+      "data_format" : 9,
+      "global_index" : 810027,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 719520,
+          "gpu_rgba32f_sha256" : "654359fde42f34434e430d29a7dd2d94e3779b84299824ac5f596133755d0992",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 25,
+      "pixel_format" : 1,
+      "table_index" : 25
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 727728,
+      "data_format" : 9,
+      "global_index" : 810030,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 727744,
+          "gpu_rgba32f_sha256" : "669414d1e455fb20a05493bdaba6bc66a325b00863a3db7e98f73b49be446d30",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 26,
+      "pixel_format" : 1,
+      "table_index" : 26
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 735952,
+      "data_format" : 9,
+      "global_index" : 810031,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 735968,
+          "gpu_rgba32f_sha256" : "44e0bb6214449bcd0fcc184f2b9a896b2a5cc13720872a79474dfadda5cc5be9",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 27,
+      "pixel_format" : 1,
+      "table_index" : 27
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 744176,
+      "data_format" : 9,
+      "global_index" : 810033,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 744192,
+          "gpu_rgba32f_sha256" : "aba959715acff886dde6ffd15bcc48ee92fbaeb73e3e3282f1775e5e139b0dca",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 28,
+      "pixel_format" : 0,
+      "table_index" : 28
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 752400,
+      "data_format" : 9,
+      "global_index" : 810010,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 752416,
+          "gpu_rgba32f_sha256" : "4d2c91db002017674a159115fa73e7a52bf631a4c063465b9199533bfc23161d",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 29,
+      "pixel_format" : 0,
+      "table_index" : 29
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 760624,
+      "data_format" : 9,
+      "global_index" : 810045,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 760640,
+          "gpu_rgba32f_sha256" : "fac0cc07ff39759c316427090344e4ecb97d80ef7ac0eab39e1226c99e3b8b0c",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 30,
+      "pixel_format" : 0,
+      "table_index" : 30
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 768848,
+      "data_format" : 9,
+      "global_index" : 810028,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 768864,
+          "gpu_rgba32f_sha256" : "d1551280278b875a2c539ef9ddb4370cf22cf7f51ea9ea54ebad279b654ec242",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 31,
+      "pixel_format" : 0,
+      "table_index" : 31
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 777072,
+      "data_format" : 9,
+      "global_index" : 810011,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 777088,
+          "gpu_rgba32f_sha256" : "ffe03b50426845c4106cffe7d7746bbf4100be049b5d66e02757a4e4be1b7bd2",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 32,
+      "pixel_format" : 1,
+      "table_index" : 32
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 785296,
+      "data_format" : 9,
+      "global_index" : 810012,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 785312,
+          "gpu_rgba32f_sha256" : "d118946e274cabbccfc41845e428b36a9bb99fa80f1895ff6ff5c2f52bfe3ef3",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 33,
+      "pixel_format" : 1,
+      "table_index" : 33
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 793520,
+      "data_format" : 9,
+      "global_index" : 810013,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 793536,
+          "gpu_rgba32f_sha256" : "27538840b118854950cfb88c507af17b8450156e518b869e3ed3d019406939a8",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 34,
+      "pixel_format" : 1,
+      "table_index" : 34
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 801744,
+      "data_format" : 9,
+      "global_index" : 810021,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 801760,
+          "gpu_rgba32f_sha256" : "c5a6b547a990c7d53ece2af8936d095d1f0a6008ba2928fc9a63115d68dc8625",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 35,
+      "pixel_format" : 0,
+      "table_index" : 35
+    },
+    {
+      "chunk_bytes" : 160,
+      "chunk_offset" : 809968,
+      "data_format" : 9,
+      "global_index" : 810501,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 128,
+          "encoded_offset" : 809984,
+          "gpu_rgba32f_sha256" : "4d112456ddb3d0eb01810de8cb96aebf54d30d4fd09307e0fb1b1c3ace679d22",
+          "height" : 8,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 8
+        }
+      ],
+      "ordinal" : 36,
+      "pixel_format" : 0,
+      "table_index" : 36
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 810128,
+      "data_format" : 9,
+      "global_index" : 810056,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 810144,
+          "gpu_rgba32f_sha256" : "17c0d05408c2ec548a797561a09eb07afacd485088b800c3ba4086864fc08586",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 37,
+      "pixel_format" : 0,
+      "table_index" : 37
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 818352,
+      "data_format" : 9,
+      "global_index" : 810057,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 818368,
+          "gpu_rgba32f_sha256" : "533c9ff3b8379bf7baf4ccadd98cf4a6aaee79ca7bf264f17967efa7be7c7dc6",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 38,
+      "pixel_format" : 0,
+      "table_index" : 38
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 826576,
+      "data_format" : 9,
+      "global_index" : 810001,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 826592,
+          "gpu_rgba32f_sha256" : "ef01052d0e7f271caac92e38fd0b9eb0d146f88baab78c4c605a6d37272a2a89",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 39,
+      "pixel_format" : 0,
+      "table_index" : 39
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 834800,
+      "data_format" : 9,
+      "global_index" : 810038,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 834816,
+          "gpu_rgba32f_sha256" : "c9149883347a4ba6f2515395754342f0c751eb872359e525d09199673c07445d",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 40,
+      "pixel_format" : 0,
+      "table_index" : 40
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 867600,
+      "data_format" : 9,
+      "global_index" : 810052,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 867616,
+          "gpu_rgba32f_sha256" : "dbe99e20dd798e00886268d4ecd7a50ce2deff7322757608ff4f786e132f73d0",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 41,
+      "pixel_format" : 0,
+      "table_index" : 41
+    },
+    {
+      "chunk_bytes" : 2080,
+      "chunk_offset" : 875824,
+      "data_format" : 9,
+      "global_index" : 810062,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 2048,
+          "encoded_offset" : 875840,
+          "gpu_rgba32f_sha256" : "1c998c3d5b177ffe1c5fdac1a24123ef2c53f2b09245af71be9288395c451289",
+          "height" : 32,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 32
+        }
+      ],
+      "ordinal" : 42,
+      "pixel_format" : 0,
+      "table_index" : 42
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 877904,
+      "data_format" : 9,
+      "global_index" : 810046,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 877920,
+          "gpu_rgba32f_sha256" : "67a9a7eb6b0390dca5b33b83274a502b76656277c76a6e2e20e330cf967f681c",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 43,
+      "pixel_format" : 0,
+      "table_index" : 43
+    },
+    {
+      "chunk_bytes" : 2080,
+      "chunk_offset" : 886128,
+      "data_format" : 9,
+      "global_index" : 810500,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 2048,
+          "encoded_offset" : 886144,
+          "gpu_rgba32f_sha256" : "19d706ae898ad78883a81388b6d0e84b5254962f5433d1d2832fe2f96a6910a9",
+          "height" : 32,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 32
+        }
+      ],
+      "ordinal" : 44,
+      "pixel_format" : 0,
+      "table_index" : 44
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 888208,
+      "data_format" : 9,
+      "global_index" : 810063,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 888224,
+          "gpu_rgba32f_sha256" : "c3ac4eb0b78d2e3d9da65bc5c82dc2aca0a6a3e13cf4241416c76a49d9eada85",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 45,
+      "pixel_format" : 2,
+      "table_index" : 45
+    },
+    {
+      "chunk_bytes" : 2080,
+      "chunk_offset" : 896432,
+      "data_format" : 9,
+      "global_index" : 810050,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 2048,
+          "encoded_offset" : 896448,
+          "gpu_rgba32f_sha256" : "9617a53c3f69ed36e53bd57683c9da165ce89104f9027d28bfa6f3fda493f95e",
+          "height" : 32,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 32
+        }
+      ],
+      "ordinal" : 46,
+      "pixel_format" : 0,
+      "table_index" : 46
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 898512,
+      "data_format" : 9,
+      "global_index" : 810053,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 898528,
+          "gpu_rgba32f_sha256" : "80c3367dcb3dbd2c90987c3b6b7683fcfc4f3d742da476ddd18ae427e8ff4b8c",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 47,
+      "pixel_format" : 0,
+      "table_index" : 47
+    },
+    {
+      "chunk_bytes" : 2080,
+      "chunk_offset" : 906736,
+      "data_format" : 9,
+      "global_index" : 810039,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 2048,
+          "encoded_offset" : 906752,
+          "gpu_rgba32f_sha256" : "4f98163278a55afa4b432b2f0e2db627428481025ceae6a7edad40318d0952c9",
+          "height" : 32,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 32
+        }
+      ],
+      "ordinal" : 48,
+      "pixel_format" : 0,
+      "table_index" : 48
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 908816,
+      "data_format" : 9,
+      "global_index" : 810064,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 908832,
+          "gpu_rgba32f_sha256" : "1f4449924a92c39deb017347aaa5a1a9865079727a9b6f9ca1a7d34b14b35486",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 49,
+      "pixel_format" : 0,
+      "table_index" : 49
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 917040,
+      "data_format" : 9,
+      "global_index" : 810040,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 917056,
+          "gpu_rgba32f_sha256" : "16e364cdee590458c7ab444563e28fac3fc184c0900f94773064ccabd4e59e2f",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 50,
+      "pixel_format" : 0,
+      "table_index" : 50
+    },
+    {
+      "chunk_bytes" : 2080,
+      "chunk_offset" : 925264,
+      "data_format" : 9,
+      "global_index" : 810041,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 2048,
+          "encoded_offset" : 925280,
+          "gpu_rgba32f_sha256" : "0db8dbaedb11d36f75629e6e98728781e8002680a637ddd63b98675ceb89b55e",
+          "height" : 32,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 32
+        }
+      ],
+      "ordinal" : 51,
+      "pixel_format" : 2,
+      "table_index" : 51
+    },
+    {
+      "chunk_bytes" : 2080,
+      "chunk_offset" : 927344,
+      "data_format" : 9,
+      "global_index" : 810042,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 2048,
+          "encoded_offset" : 927360,
+          "gpu_rgba32f_sha256" : "f2dbd95278e8e0ebabd45f75c2b938302d3c8877ed305e1ea2f8530aed838379",
+          "height" : 32,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 32
+        }
+      ],
+      "ordinal" : 52,
+      "pixel_format" : 0,
+      "table_index" : 52
+    },
+    {
+      "chunk_bytes" : 2080,
+      "chunk_offset" : 929424,
+      "data_format" : 9,
+      "global_index" : 810043,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 2048,
+          "encoded_offset" : 929440,
+          "gpu_rgba32f_sha256" : "50bb2481d17123b5bae8ac2fa8766d45513b7b8029d27e4abd29c6df2d674d64",
+          "height" : 32,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 32
+        }
+      ],
+      "ordinal" : 53,
+      "pixel_format" : 0,
+      "table_index" : 53
+    },
+    {
+      "chunk_bytes" : 2080,
+      "chunk_offset" : 931504,
+      "data_format" : 9,
+      "global_index" : 810048,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 2048,
+          "encoded_offset" : 931520,
+          "gpu_rgba32f_sha256" : "11c79b77ade90010ca86575ec7f7846d6d227c3e64cfc4a5066e2cbcac6398da",
+          "height" : 32,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 32
+        }
+      ],
+      "ordinal" : 54,
+      "pixel_format" : 0,
+      "table_index" : 54
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 933584,
+      "data_format" : 9,
+      "global_index" : 810002,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 933600,
+          "gpu_rgba32f_sha256" : "f1805832cfbe7c19ea729ffb48564246161d622f2b96cc639aee8b382a5f78ef",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 55,
+      "pixel_format" : 0,
+      "table_index" : 55
+    },
+    {
+      "chunk_bytes" : 2080,
+      "chunk_offset" : 966384,
+      "data_format" : 9,
+      "global_index" : 810049,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 2048,
+          "encoded_offset" : 966400,
+          "gpu_rgba32f_sha256" : "ed01efb4a912628386ed0a92651fb50c422e8a845f3a95ab0126cc54a90ed231",
+          "height" : 32,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 32
+        }
+      ],
+      "ordinal" : 56,
+      "pixel_format" : 0,
+      "table_index" : 56
+    },
+    {
+      "chunk_bytes" : 2080,
+      "chunk_offset" : 968464,
+      "data_format" : 9,
+      "global_index" : 810066,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 2048,
+          "encoded_offset" : 968480,
+          "gpu_rgba32f_sha256" : "d4fd446802eb7b704c2aeffa240d248817dfcb1e61656e698f49dd04e854f3f5",
+          "height" : 32,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 32
+        }
+      ],
+      "ordinal" : 57,
+      "pixel_format" : 0,
+      "table_index" : 57
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 970544,
+      "data_format" : 9,
+      "global_index" : 810018,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 970560,
+          "gpu_rgba32f_sha256" : "ea019af74fedbb3c37f918a022e6eb502ccedf475919b3cf1d5aa21cf998b6ff",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 58,
+      "pixel_format" : 0,
+      "table_index" : 58
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1003344,
+      "data_format" : 9,
+      "global_index" : 810022,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1003360,
+          "gpu_rgba32f_sha256" : "26d114789a846e8c7d0826654296854266dd4d54274d75877763a59bf6c0988b",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 59,
+      "pixel_format" : 0,
+      "table_index" : 59
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1011568,
+      "data_format" : 9,
+      "global_index" : 810003,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1011584,
+          "gpu_rgba32f_sha256" : "b4dff75ec551b6fe013282b11d45185508f6850fcc502b2998a9c9b74bd1b292",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 60,
+      "pixel_format" : 1,
+      "table_index" : 60
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1019792,
+      "data_format" : 9,
+      "global_index" : 810051,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1019808,
+          "gpu_rgba32f_sha256" : "eff1b47e7e20848c61974fb95ca0b64de1cdb998d16b32c024b3dd0fa4d4ddaa",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 61,
+      "pixel_format" : 0,
+      "table_index" : 61
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1028016,
+      "data_format" : 9,
+      "global_index" : 810054,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1028032,
+          "gpu_rgba32f_sha256" : "ee6cc85802efde3cd4c362d03ca62b74ddaec0ad223c98b34c2541431fb591da",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 62,
+      "pixel_format" : 0,
+      "table_index" : 62
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1036240,
+      "data_format" : 9,
+      "global_index" : 810004,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1036256,
+          "gpu_rgba32f_sha256" : "a99a94d940312add1e6e58105b4daf87ebaa17e01910baf351033ce29c2939f8",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 63,
+      "pixel_format" : 0,
+      "table_index" : 63
+    },
+    {
+      "chunk_bytes" : 160,
+      "chunk_offset" : 1044464,
+      "data_format" : 9,
+      "global_index" : 810044,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 128,
+          "encoded_offset" : 1044480,
+          "gpu_rgba32f_sha256" : "cdcf07b1c436134e166e900a89d8a3f8f9429fef6fd9bafd0c2013dbee3eb102",
+          "height" : 8,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 8
+        }
+      ],
+      "ordinal" : 64,
+      "pixel_format" : 0,
+      "table_index" : 64
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1044624,
+      "data_format" : 9,
+      "global_index" : 810058,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1044640,
+          "gpu_rgba32f_sha256" : "9e03830d0fc131f8f3b1d203c62e072a272daa1a07293d85bec4f156129c5002",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 65,
+      "pixel_format" : 0,
+      "table_index" : 65
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1052848,
+      "data_format" : 9,
+      "global_index" : 810059,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1052864,
+          "gpu_rgba32f_sha256" : "d7138b79c80b4046f03da55db88cc3825a02389d0a7ca8feeaac76ea8f189a3b",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 66,
+      "pixel_format" : 2,
+      "table_index" : 66
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1061072,
+      "data_format" : 9,
+      "global_index" : 810068,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1061088,
+          "gpu_rgba32f_sha256" : "9ce95e09070c6f2df41147df4e76cc9bac74dc40a247217a4c63e01078fdf7a7",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 67,
+      "pixel_format" : 0,
+      "table_index" : 67
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1069296,
+      "data_format" : 9,
+      "global_index" : 810055,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1069312,
+          "gpu_rgba32f_sha256" : "0f4517a6bd16a44a3d2b5cfcdc8ea71a6bee99b112c24b74d3a6eb6cf15ff9a9",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 68,
+      "pixel_format" : 0,
+      "table_index" : 68
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1077520,
+      "data_format" : 9,
+      "global_index" : 810047,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1077536,
+          "gpu_rgba32f_sha256" : "8ff126c8acb65b70d24683ecb21a6625ca564bb87f97813ec4b6f7e621c28b40",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 69,
+      "pixel_format" : 0,
+      "table_index" : 69
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1085744,
+      "data_format" : 9,
+      "global_index" : 810060,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1085760,
+          "gpu_rgba32f_sha256" : "cafd56b993bc145157524cc42dd335f99653b7ff728207f48a3b0c881ac0cfc4",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 70,
+      "pixel_format" : 2,
+      "table_index" : 70
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1093968,
+      "data_format" : 9,
+      "global_index" : 810069,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1093984,
+          "gpu_rgba32f_sha256" : "b6557480ba0291f867b360d3ec6b75118b724b273993f5ae24771eff70bdd58d",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 71,
+      "pixel_format" : 0,
+      "table_index" : 71
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1102192,
+      "data_format" : 9,
+      "global_index" : 810061,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1102208,
+          "gpu_rgba32f_sha256" : "ac0498ca64a1e04bfb946eca255390c090c729a3b58bb10a36aafbcf24dfc9a9",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 72,
+      "pixel_format" : 0,
+      "table_index" : 72
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1110416,
+      "data_format" : 9,
+      "global_index" : 17220,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1110432,
+          "gpu_rgba32f_sha256" : "11db9b7e4b7964dd4b870cea25af4f5c6b1e21f0fbdad5a47ff0e15332b68f43",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 73,
+      "pixel_format" : 2,
+      "table_index" : 73
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1118640,
+      "data_format" : 9,
+      "global_index" : 17221,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1118656,
+          "gpu_rgba32f_sha256" : "d3af616a200e1d0d28a41914f48789e5ba887e7c93996521b849403e9744cbf4",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 74,
+      "pixel_format" : 2,
+      "table_index" : 74
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1126864,
+      "data_format" : 9,
+      "global_index" : 17222,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1126880,
+          "gpu_rgba32f_sha256" : "3020280ac42479fedb2d675a3724d0cc699c45e81d0f5e448c4343fd1b7a510f",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 75,
+      "pixel_format" : 2,
+      "table_index" : 75
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1135088,
+      "data_format" : 9,
+      "global_index" : 17223,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1135104,
+          "gpu_rgba32f_sha256" : "871392094f05024d66e0ecbf94648863906a92b91c645fd13ce8b7e1eb86e4df",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 76,
+      "pixel_format" : 2,
+      "table_index" : 76
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1143312,
+      "data_format" : 9,
+      "global_index" : 17224,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1143328,
+          "gpu_rgba32f_sha256" : "cc46b2ec9fd87e8d5b30b290308a0cced3f3f226208633a43eb0d03df8ea0c77",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 77,
+      "pixel_format" : 2,
+      "table_index" : 77
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1151536,
+      "data_format" : 9,
+      "global_index" : 17225,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1151552,
+          "gpu_rgba32f_sha256" : "1f63b8c4ef9825178883db6a26c7ba5b90f098179be2bee1cba06ffbfbf47973",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 78,
+      "pixel_format" : 2,
+      "table_index" : 78
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1159760,
+      "data_format" : 9,
+      "global_index" : 17226,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1159776,
+          "gpu_rgba32f_sha256" : "58aea98448ebff13a42155906943bf5d8824e0a6a2ea286762840a58eb5f763c",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 79,
+      "pixel_format" : 2,
+      "table_index" : 79
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1167984,
+      "data_format" : 9,
+      "global_index" : 17227,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1168000,
+          "gpu_rgba32f_sha256" : "691ad9c106a91b103a62de779590966a08e644153e64c5bbc9be1ab622f79d88",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 80,
+      "pixel_format" : 2,
+      "table_index" : 80
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1176208,
+      "data_format" : 9,
+      "global_index" : 17228,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1176224,
+          "gpu_rgba32f_sha256" : "1d0b68d8292e56e08b16fb6d74711207db8fdb9c19e299e1e81341e652ce461d",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 81,
+      "pixel_format" : 2,
+      "table_index" : 81
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1184432,
+      "data_format" : 9,
+      "global_index" : 17229,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1184448,
+          "gpu_rgba32f_sha256" : "07017a069775cde2ab7e5b748d85d28bfaa7450a324f66eea34f1519b96eedd5",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 82,
+      "pixel_format" : 2,
+      "table_index" : 82
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1192656,
+      "data_format" : 9,
+      "global_index" : 17230,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1192672,
+          "gpu_rgba32f_sha256" : "42ec57e8ed162b332a9ecfa88f4534fe1d3fff554a8414170cdae717bb000926",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 83,
+      "pixel_format" : 2,
+      "table_index" : 83
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1200880,
+      "data_format" : 9,
+      "global_index" : 17231,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1200896,
+          "gpu_rgba32f_sha256" : "1b9394c7f26c67d67f1ebee64a1192979ce29ad49744e716344ca42af17d9ae4",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 84,
+      "pixel_format" : 2,
+      "table_index" : 84
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1209104,
+      "data_format" : 9,
+      "global_index" : 17232,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1209120,
+          "gpu_rgba32f_sha256" : "6e6584f8ff991d11f29557aa0f290ea26d2593007011788bf2637f63536bd477",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 85,
+      "pixel_format" : 2,
+      "table_index" : 85
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1217328,
+      "data_format" : 9,
+      "global_index" : 17233,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1217344,
+          "gpu_rgba32f_sha256" : "ab4d6da454c10b5fe9e5e0a99d0a18986992efb6a6c097ecb0b9dedb0149e346",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 86,
+      "pixel_format" : 2,
+      "table_index" : 86
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 1225552,
+      "data_format" : 9,
+      "global_index" : 17234,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 1225568,
+          "gpu_rgba32f_sha256" : "f604ec4082d7e65c70f6d758d745f9925d82c16766951ecf1edd5e55b5fdb349",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 87,
+      "pixel_format" : 2,
+      "table_index" : 87
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 1233776,
+      "data_format" : 9,
+      "global_index" : 17095,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 1233792,
+          "gpu_rgba32f_sha256" : "90ba158e784a07af5a48198f33ed7011facf9a187b4c67a78f27b2361d117d3a",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 88,
+      "pixel_format" : 1,
+      "table_index" : 88
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 1266576,
+      "data_format" : 9,
+      "global_index" : 17197,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 1266592,
+          "gpu_rgba32f_sha256" : "36c67d11f2188e221ef8c2c8d801608929ab1c13efaa845ba0ae3bfa9a9ebaea",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 89,
+      "pixel_format" : 0,
+      "table_index" : 89
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 1299376,
+      "data_format" : 9,
+      "global_index" : 17198,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 1299392,
+          "gpu_rgba32f_sha256" : "bd89b6f40f1c003c5e20f951b629bb33e80ed8eeb4f64b6786eabeba4a67abd7",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 90,
+      "pixel_format" : 0,
+      "table_index" : 90
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 1332176,
+      "data_format" : 9,
+      "global_index" : 17199,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 1332192,
+          "gpu_rgba32f_sha256" : "2ba2891d7cafab77bd0738b6b7df27056b9e6f2378e45023727490b73b18d490",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 91,
+      "pixel_format" : 0,
+      "table_index" : 91
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 1364976,
+      "data_format" : 9,
+      "global_index" : 17200,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 1364992,
+          "gpu_rgba32f_sha256" : "521624b71e493eb9e4cdd529064e63e33f23ad75d3e473a5f8f7afa78a5750fb",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 92,
+      "pixel_format" : 0,
+      "table_index" : 92
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 1397776,
+      "data_format" : 9,
+      "global_index" : 17201,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 1397792,
+          "gpu_rgba32f_sha256" : "580cb4a2362fe220b730e1ff2cc23181a1fe0787e2c8a41a25d67e015cf766e4",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 93,
+      "pixel_format" : 0,
+      "table_index" : 93
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 1430576,
+      "data_format" : 9,
+      "global_index" : 17202,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 1430592,
+          "gpu_rgba32f_sha256" : "522108ec749c9f0dc30cfc055b9d983c899493c04d2c107c9ebbfc2292857066",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 94,
+      "pixel_format" : 0,
+      "table_index" : 94
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 1463376,
+      "data_format" : 9,
+      "global_index" : 17203,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 1463392,
+          "gpu_rgba32f_sha256" : "bf41b489503ff2abe8f78bd3ec21f28e7d2363f2a49530db9e9e4b76dc3f97e6",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 95,
+      "pixel_format" : 1,
+      "table_index" : 95
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 1496176,
+      "data_format" : 9,
+      "global_index" : 17204,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 1496192,
+          "gpu_rgba32f_sha256" : "d506133eff97bc62f1a87272abea0e9a9e47498ef0518ef11b951363ea700740",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 96,
+      "pixel_format" : 0,
+      "table_index" : 96
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 1528976,
+      "data_format" : 9,
+      "global_index" : 17205,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 1528992,
+          "gpu_rgba32f_sha256" : "a4736efd3b7c06aedc49d7859e4cd2714cda4cf803bda2eaa0bb4acaf25c2f87",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 97,
+      "pixel_format" : 0,
+      "table_index" : 97
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 1561776,
+      "data_format" : 9,
+      "global_index" : 17206,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 1561792,
+          "gpu_rgba32f_sha256" : "22780faf4372cd5725f7684c5aaaef8a1d1f03c1af89b8e6e5be99c5c82ac77c",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 98,
+      "pixel_format" : 0,
+      "table_index" : 98
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 1594576,
+      "data_format" : 9,
+      "global_index" : 17207,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 1594592,
+          "gpu_rgba32f_sha256" : "5df8899a223737abcf1b1ea8b3ab2e6bd6d06593d10c43c644a92a2a1a571b9e",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 99,
+      "pixel_format" : 1,
+      "table_index" : 99
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 1627376,
+      "data_format" : 9,
+      "global_index" : 17208,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 1627392,
+          "gpu_rgba32f_sha256" : "716379875288204b6f002578a435ffb9739dbb94bdb90223caba7b85985694ab",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 100,
+      "pixel_format" : 0,
+      "table_index" : 100
+    },
+    {
+      "chunk_bytes" : 32800,
+      "chunk_offset" : 1660176,
+      "data_format" : 9,
+      "global_index" : 17209,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 1660192,
+          "gpu_rgba32f_sha256" : "affd64cd7f25dd082995a2143020c466e828079cf5a2b4f1018c88bbd9dc3824",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 101,
+      "pixel_format" : 0,
+      "table_index" : 101
+    },
+    {
+      "chunk_bytes" : 32784,
+      "chunk_offset" : 1692976,
+      "data_format" : 9,
+      "global_index" : 17210,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 32768,
+          "encoded_offset" : 1692992,
+          "gpu_rgba32f_sha256" : "d5ea607be7c6dc5280e8ca12da3562ff41f200196f9fa698fa35f268adf09e02",
+          "height" : 128,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 128
+        }
+      ],
+      "ordinal" : 102,
+      "pixel_format" : 0,
+      "table_index" : 102
+    }
+  ],
+  "registry_id" : 4294968649,
+  "shader_sha256" : "ffe6848cf2a25da0d6f676133133d9baef64179e35981b227aa52c529864a75f",
+  "unified_memory" : true,
+  "upload_format" : "R16Uint"
+}

@@ -1,0 +1,90 @@
+{
+  "archive" : "Sonic Adventure DX\/system\/EC_CLOUDS.PVM",
+  "archive_sha256" : "7f344a3093e2eba605b305e7a896a8e2372ece1496b79e4e4bdf9176cb588046",
+  "channel_mismatches" : 0,
+  "channels" : 49152,
+  "compiler" : "21.0.0 (clang-2100.3.34.2)",
+  "device" : "Apple M5 Pro",
+  "direct_float32_ratios_match" : true,
+  "fp32_filtering" : true,
+  "gpu_commands_completed" : true,
+  "levels" : 3,
+  "limits" : [
+    "Native Apple GPU upload\/normalization\/readback; not original NVIDIA\/D3D equivalence",
+    "No original runtime texlist\/cache ownership or gameplay binding inferred",
+    "No sampler\/filter\/blend contract is chosen by upload",
+    "PNG uses nearest-byte quantization of real FP32 GPU readback as inspection preview"
+  ],
+  "math_profile" : "safe\/precise macOS15+; no fast math on macOS14",
+  "normalized_format" : "RGBA32Float",
+  "os" : "Version 27.0.1 (Build 26A434)",
+  "records" : [
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 128,
+      "data_format" : 9,
+      "global_index" : 217175,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 144,
+          "gpu_rgba32f_sha256" : "97b986b94672e5f4647c1bbc5cf28e8530d864ee7419c00b83fed800e273c59f",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 0,
+      "pixel_format" : 0,
+      "table_index" : 0
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 8352,
+      "data_format" : 9,
+      "global_index" : 217174,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 8368,
+          "gpu_rgba32f_sha256" : "691bc3b019b76d7e0f14833dab05e513c7c09a3233fb64e91d110e94c49e520d",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 1,
+      "pixel_format" : 0,
+      "table_index" : 1
+    },
+    {
+      "chunk_bytes" : 8224,
+      "chunk_offset" : 16576,
+      "data_format" : 9,
+      "global_index" : 217173,
+      "levels" : [
+        {
+          "channel_mismatches" : 0,
+          "encoded_bytes" : 8192,
+          "encoded_offset" : 16592,
+          "gpu_rgba32f_sha256" : "3c4610151067fa3671af4ee5020da510bf1b99ff045223319592460dbaceaf59",
+          "height" : 64,
+          "level" : 0,
+          "maximum_ulp" : 0,
+          "width" : 64
+        }
+      ],
+      "ordinal" : 2,
+      "pixel_format" : 0,
+      "table_index" : 2
+    }
+  ],
+  "registry_id" : 4294968649,
+  "shader_sha256" : "ffe6848cf2a25da0d6f676133133d9baef64179e35981b227aa52c529864a75f",
+  "unified_memory" : true,
+  "upload_format" : "R16Uint"
+}

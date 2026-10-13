@@ -1,0 +1,375 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "library_sha256": "2199d93cb095c6192f99c8560af1dea5f041de182be83ba243b233cf92de6c4c",
+  "compiler": "Clang 21.0.0 (clang-2100.3.34.2); ARM64 C++17 O2 native real ECoast registry and full scene-position bodies; explicit policy1",
+  "sources": {
+    "src/player_scene_position.cpp": "81418a6c066122e57ca02c07c47684a1ec74557606cd47528594eeaee13ce49b",
+    "src/player_scene_position.hpp": "57778b4a53303d4899d0d8f3785fe4eb8e09fba2c29df0c1bdb88d6461b28911",
+    "src/player_scene_position_helpers.cpp": "016b0cbcfb2c8901acca88f216c46bd2e8e82bb68b79473dcf099818b1e25e59",
+    "tests/native_player_scene_position_probe.cpp": "0b294934676f415573b49855935fd611fc08de71097ed33696263e71b1c9b872"
+  },
+  "verifier_sha256": "6b75086860116a3f0652ac3936342ea37966f688c0a8137e3ec0a60bf247cf88",
+  "case_sha256": "e3006f51ed725e1fa698ad9d0b2662287abc30cb9115bdaae5ba7b3ff134f2f2",
+  "profiles": [
+    {
+      "cw": "0x7f",
+      "cases": 136,
+      "value_mismatches": 0,
+      "flag_mismatches": 112,
+      "boundary_failures": 0,
+      "source_calls": {
+        "0x449500": 68,
+        "0x450c10": 136,
+        "0x453820": 272,
+        "0x43d180": 40,
+        "0x444640": 48,
+        "0x444aa0": 16,
+        "0x43dca0": 16,
+        "0x43cce0": 28,
+        "0x43bdc0": 24,
+        "0x445d10": 68,
+        "0x444d50": 16,
+        "0x43cf90": 28,
+        "0x43d360": 32,
+        "0x444f10": 32,
+        "0x43d8b0": 32
+      },
+      "source_contact_cases": 96,
+      "source_outcomes": {
+        "0": 120,
+        "1": 16
+      }
+    },
+    {
+      "cw": "0x47f",
+      "cases": 136,
+      "value_mismatches": 0,
+      "flag_mismatches": 112,
+      "boundary_failures": 0,
+      "source_calls": {
+        "0x449500": 68,
+        "0x450c10": 136,
+        "0x453820": 272,
+        "0x43d180": 40,
+        "0x444640": 48,
+        "0x444aa0": 16,
+        "0x43dca0": 16,
+        "0x43cce0": 28,
+        "0x43bdc0": 24,
+        "0x445d10": 68,
+        "0x444d50": 16,
+        "0x43cf90": 28,
+        "0x43d360": 32,
+        "0x444f10": 32,
+        "0x43d8b0": 32
+      },
+      "source_contact_cases": 96,
+      "source_outcomes": {
+        "0": 120,
+        "1": 16
+      }
+    },
+    {
+      "cw": "0x87f",
+      "cases": 136,
+      "value_mismatches": 0,
+      "flag_mismatches": 112,
+      "boundary_failures": 0,
+      "source_calls": {
+        "0x449500": 68,
+        "0x450c10": 136,
+        "0x453820": 272,
+        "0x43d180": 40,
+        "0x444640": 48,
+        "0x444aa0": 16,
+        "0x43dca0": 16,
+        "0x43cce0": 28,
+        "0x43bdc0": 24,
+        "0x445d10": 68,
+        "0x444d50": 16,
+        "0x43df60": 8,
+        "0x43cf90": 28,
+        "0x43d360": 32,
+        "0x444f10": 32,
+        "0x43d8b0": 32
+      },
+      "source_contact_cases": 96,
+      "source_outcomes": {
+        "0": 112,
+        "1": 24
+      }
+    },
+    {
+      "cw": "0xc7f",
+      "cases": 136,
+      "value_mismatches": 0,
+      "flag_mismatches": 112,
+      "boundary_failures": 0,
+      "source_calls": {
+        "0x449500": 68,
+        "0x450c10": 136,
+        "0x453820": 272,
+        "0x43d180": 40,
+        "0x444640": 48,
+        "0x444aa0": 16,
+        "0x43dca0": 16,
+        "0x43cce0": 28,
+        "0x43bdc0": 24,
+        "0x445d10": 68,
+        "0x444d50": 16,
+        "0x43cf90": 28,
+        "0x43d360": 32,
+        "0x444f10": 32,
+        "0x43d8b0": 32
+      },
+      "source_contact_cases": 96,
+      "source_outcomes": {
+        "0": 120,
+        "1": 16
+      }
+    },
+    {
+      "cw": "0x27f",
+      "cases": 136,
+      "value_mismatches": 0,
+      "flag_mismatches": 112,
+      "boundary_failures": 0,
+      "source_calls": {
+        "0x449500": 68,
+        "0x450c10": 136,
+        "0x453820": 272,
+        "0x43d180": 40,
+        "0x444640": 48,
+        "0x444aa0": 16,
+        "0x43dca0": 16,
+        "0x43cce0": 28,
+        "0x43bdc0": 24,
+        "0x445d10": 68,
+        "0x444d50": 16,
+        "0x43cf90": 28,
+        "0x43d360": 32,
+        "0x444f10": 32,
+        "0x43d8b0": 32
+      },
+      "source_contact_cases": 96,
+      "source_outcomes": {
+        "0": 120,
+        "1": 16
+      }
+    },
+    {
+      "cw": "0x67f",
+      "cases": 136,
+      "value_mismatches": 0,
+      "flag_mismatches": 112,
+      "boundary_failures": 0,
+      "source_calls": {
+        "0x449500": 68,
+        "0x450c10": 136,
+        "0x453820": 272,
+        "0x43d180": 40,
+        "0x444640": 48,
+        "0x444aa0": 16,
+        "0x43dca0": 16,
+        "0x43cce0": 28,
+        "0x43bdc0": 24,
+        "0x445d10": 68,
+        "0x444d50": 16,
+        "0x43cf90": 28,
+        "0x43d360": 32,
+        "0x444f10": 32,
+        "0x43d8b0": 32
+      },
+      "source_contact_cases": 96,
+      "source_outcomes": {
+        "0": 120,
+        "1": 16
+      }
+    },
+    {
+      "cw": "0xa7f",
+      "cases": 136,
+      "value_mismatches": 0,
+      "flag_mismatches": 112,
+      "boundary_failures": 0,
+      "source_calls": {
+        "0x449500": 68,
+        "0x450c10": 136,
+        "0x453820": 272,
+        "0x43d180": 40,
+        "0x444640": 48,
+        "0x444aa0": 16,
+        "0x43dca0": 16,
+        "0x43cce0": 28,
+        "0x43bdc0": 24,
+        "0x445d10": 68,
+        "0x444d50": 16,
+        "0x43df60": 8,
+        "0x43cf90": 28,
+        "0x43d360": 32,
+        "0x444f10": 40,
+        "0x43d8b0": 32
+      },
+      "source_contact_cases": 96,
+      "source_outcomes": {
+        "0": 112,
+        "1": 24
+      }
+    },
+    {
+      "cw": "0xe7f",
+      "cases": 136,
+      "value_mismatches": 0,
+      "flag_mismatches": 112,
+      "boundary_failures": 0,
+      "source_calls": {
+        "0x449500": 68,
+        "0x450c10": 136,
+        "0x453820": 272,
+        "0x43d180": 40,
+        "0x444640": 48,
+        "0x444aa0": 16,
+        "0x43dca0": 16,
+        "0x43cce0": 28,
+        "0x43bdc0": 24,
+        "0x445d10": 68,
+        "0x444d50": 16,
+        "0x43cf90": 28,
+        "0x43d360": 32,
+        "0x444f10": 32,
+        "0x43d8b0": 32
+      },
+      "source_contact_cases": 96,
+      "source_outcomes": {
+        "0": 120,
+        "1": 16
+      }
+    },
+    {
+      "cw": "0x37f",
+      "cases": 136,
+      "value_mismatches": 0,
+      "flag_mismatches": 112,
+      "boundary_failures": 0,
+      "source_calls": {
+        "0x449500": 68,
+        "0x450c10": 136,
+        "0x453820": 272,
+        "0x43d180": 40,
+        "0x444640": 48,
+        "0x444aa0": 16,
+        "0x43dca0": 16,
+        "0x43cce0": 28,
+        "0x43bdc0": 24,
+        "0x445d10": 68,
+        "0x444d50": 16,
+        "0x43cf90": 28,
+        "0x43d360": 32,
+        "0x444f10": 32,
+        "0x43d8b0": 32
+      },
+      "source_contact_cases": 96,
+      "source_outcomes": {
+        "0": 120,
+        "1": 16
+      }
+    },
+    {
+      "cw": "0x77f",
+      "cases": 136,
+      "value_mismatches": 0,
+      "flag_mismatches": 112,
+      "boundary_failures": 0,
+      "source_calls": {
+        "0x449500": 68,
+        "0x450c10": 136,
+        "0x453820": 272,
+        "0x43d180": 40,
+        "0x444640": 48,
+        "0x444aa0": 16,
+        "0x43dca0": 16,
+        "0x43cce0": 28,
+        "0x43bdc0": 24,
+        "0x445d10": 68,
+        "0x444d50": 16,
+        "0x43cf90": 28,
+        "0x43d360": 32,
+        "0x444f10": 32,
+        "0x43d8b0": 32
+      },
+      "source_contact_cases": 96,
+      "source_outcomes": {
+        "0": 120,
+        "1": 16
+      }
+    },
+    {
+      "cw": "0xb7f",
+      "cases": 136,
+      "value_mismatches": 0,
+      "flag_mismatches": 112,
+      "boundary_failures": 0,
+      "source_calls": {
+        "0x449500": 68,
+        "0x450c10": 136,
+        "0x453820": 272,
+        "0x43d180": 40,
+        "0x444640": 48,
+        "0x444aa0": 16,
+        "0x43dca0": 16,
+        "0x43cce0": 28,
+        "0x43bdc0": 24,
+        "0x445d10": 68,
+        "0x444d50": 16,
+        "0x43df60": 8,
+        "0x43cf90": 28,
+        "0x43d360": 32,
+        "0x444f10": 40,
+        "0x43d8b0": 32
+      },
+      "source_contact_cases": 96,
+      "source_outcomes": {
+        "0": 112,
+        "1": 24
+      }
+    },
+    {
+      "cw": "0xf7f",
+      "cases": 136,
+      "value_mismatches": 0,
+      "flag_mismatches": 112,
+      "boundary_failures": 0,
+      "source_calls": {
+        "0x449500": 68,
+        "0x450c10": 136,
+        "0x453820": 272,
+        "0x43d180": 40,
+        "0x444640": 48,
+        "0x444aa0": 16,
+        "0x43dca0": 16,
+        "0x43cce0": 28,
+        "0x43bdc0": 24,
+        "0x445d10": 68,
+        "0x444d50": 16,
+        "0x43cf90": 28,
+        "0x43d360": 32,
+        "0x444f10": 32,
+        "0x43d8b0": 32
+      },
+      "source_contact_cases": 96,
+      "source_outcomes": {
+        "0": 120,
+        "1": 16
+      }
+    }
+  ],
+  "mismatches": [],
+  "limits": [
+    "Actual source registry plus449500/445d10; no code overlays",
+    "Zero-filled caller work, real ECoast arrays and bounded landtable count views are synthetic profiles",
+    "Platform callback/render/input selectors are explicit controlled facts, not live Windows observations",
+    "Unicorn flags/transcendental limits remain; full hardware/mod behavior is unverified"
+  ],
+  "values_cw_frames_match": true,
+  "strict_match": false
+}

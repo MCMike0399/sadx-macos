@@ -1,0 +1,65 @@
+
+/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */
+
+void FUN_0043cb90(void)
+
+{
+  float fVar1;
+  int in_EAX;
+  int in_ECX;
+  uint unaff_EBX;
+  int unaff_ESI;
+  
+  *(uint *)(in_EAX + 0x5c) = *(uint *)(in_EAX + 0x5c) | unaff_EBX;
+  if ((*(uint *)(in_EAX + 0x1e4) & 2) == 0) {
+    if ((*(uint *)(in_EAX + 0x1e4) & 0x400000) == 0) {
+      *(undefined4 *)(in_EAX + 0x114) =
+           *(undefined4 *)(&DAT_00915560 + (uint)*(byte *)(in_ECX + 9) * 0x84);
+      *(undefined4 *)(in_EAX + 0xf4) =
+           *(undefined4 *)(&DAT_00915540 + (uint)*(byte *)(in_ECX + 9) * 0x84);
+      *(undefined4 *)(in_EAX + 0xd8) =
+           *(undefined4 *)(&DAT_00915524 + (uint)*(byte *)(in_ECX + 9) * 0x84);
+    }
+    else {
+      *(float *)(in_EAX + 0x114) =
+           *(float *)(&DAT_00915560 + (uint)*(byte *)(in_ECX + 9) * 0x84) * 0.6;
+      *(float *)(in_EAX + 0xf4) =
+           *(float *)(&DAT_00915540 + (uint)*(byte *)(in_ECX + 9) * 0x84) +
+           *(float *)(&DAT_00915540 + (uint)*(byte *)(in_ECX + 9) * 0x84);
+      *(float *)(in_EAX + 0xd8) =
+           *(float *)(&DAT_00915524 + (uint)*(byte *)(in_ECX + 9) * 0x84) * 0.45;
+    }
+  }
+  else {
+    if (*(byte *)(in_ECX + 9) == 5) {
+      fVar1 = _DAT_009157f4 * 0.5;
+    }
+    else {
+      fVar1 = *(float *)(&DAT_00915560 + (uint)*(byte *)(in_ECX + 9) * 0x84) * 0.45;
+    }
+    *(float *)(in_EAX + 0x114) = fVar1;
+    *(float *)(in_EAX + 0xf4) = *(float *)(&DAT_00915540 + (uint)*(byte *)(in_ECX + 9) * 0x84) * 1.5
+    ;
+    *(float *)(in_EAX + 0xd8) =
+         *(float *)(&DAT_00915524 + (uint)*(byte *)(in_ECX + 9) * 0x84) * 0.65;
+  }
+  if ((unaff_EBX & 8) != 0) {
+    *(undefined4 *)(unaff_ESI + 0x3c) = 0x3e19999a;
+    return;
+  }
+  if ((unaff_EBX & 4) != 0) {
+    *(undefined4 *)(unaff_ESI + 0x3c) = 0x3dcccccd;
+    return;
+  }
+  if ((unaff_EBX & 0x10) != 0) {
+    *(undefined4 *)(unaff_ESI + 0x3c) = 0x3f000000;
+    return;
+  }
+  if ((char)unaff_EBX < '\0') {
+    *(undefined4 *)(unaff_ESI + 0x3c) = 0x3fc00000;
+    return;
+  }
+  *(undefined4 *)(unaff_ESI + 0x3c) = 0x3f800000;
+  return;
+}
+

@@ -1,0 +1,475 @@
+{
+  "profile": "complete original438410 with real acos/ftol/cross; no overlays",
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "native_library_sha256": "8c07591439b876e0914d83fbd2d52fa8da1f895e47344848a4727d78ba42a680",
+  "constants_sha256": "443ae9201e62abf25de902664499600a37b668497f43fa6b232b74f719db9094",
+  "case_blob": {
+    "path": "_reference/sadx/original-projection-angle-comparison.cases.bin",
+    "sha256": "948fa685760fb278d80defddda82c8a3ba98823ebc6bb69b4266d80049bac43b",
+    "record": "12 little-endian uint32 words"
+  },
+  "seed": "0x4384107889f0",
+  "source_functions": {
+    "0x438410": {
+      "size": 168,
+      "sha256": "f895b77609e50ecd88bbbe47bbd417a6838b74b893ebf19806283e5ce057f37b"
+    },
+    "0x7889f0": {
+      "size": 88,
+      "sha256": "7f9777641eba60ec6d12de166a4d2dbc5ee1d76f482a717ec45e75eb677c17da"
+    }
+  },
+  "control_words": [
+    {
+      "control_word": "0x7f",
+      "cases": 998,
+      "angle_control_mismatches": 0,
+      "flag_mismatches": 920,
+      "cross_cases": 998,
+      "cross_store_length_mismatches": 0,
+      "cross_flag_mismatches": 678,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 14,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 15,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 16,
+          "original": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "control_word": "0x47f",
+      "cases": 998,
+      "angle_control_mismatches": 0,
+      "flag_mismatches": 920,
+      "cross_cases": 998,
+      "cross_store_length_mismatches": 0,
+      "cross_flag_mismatches": 678,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 14,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 15,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 16,
+          "original": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "control_word": "0x87f",
+      "cases": 998,
+      "angle_control_mismatches": 0,
+      "flag_mismatches": 920,
+      "cross_cases": 998,
+      "cross_store_length_mismatches": 0,
+      "cross_flag_mismatches": 678,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 14,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 15,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 16,
+          "original": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "control_word": "0xc7f",
+      "cases": 998,
+      "angle_control_mismatches": 0,
+      "flag_mismatches": 920,
+      "cross_cases": 998,
+      "cross_store_length_mismatches": 0,
+      "cross_flag_mismatches": 678,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 14,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 15,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 16,
+          "original": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "control_word": "0x27f",
+      "cases": 998,
+      "angle_control_mismatches": 0,
+      "flag_mismatches": 920,
+      "cross_cases": 998,
+      "cross_store_length_mismatches": 0,
+      "cross_flag_mismatches": 678,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 14,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 15,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 16,
+          "original": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "control_word": "0x67f",
+      "cases": 998,
+      "angle_control_mismatches": 0,
+      "flag_mismatches": 920,
+      "cross_cases": 998,
+      "cross_store_length_mismatches": 0,
+      "cross_flag_mismatches": 678,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 14,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 15,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 16,
+          "original": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "control_word": "0xa7f",
+      "cases": 998,
+      "angle_control_mismatches": 0,
+      "flag_mismatches": 920,
+      "cross_cases": 998,
+      "cross_store_length_mismatches": 0,
+      "cross_flag_mismatches": 678,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 14,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 15,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 16,
+          "original": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "control_word": "0xe7f",
+      "cases": 998,
+      "angle_control_mismatches": 0,
+      "flag_mismatches": 920,
+      "cross_cases": 998,
+      "cross_store_length_mismatches": 0,
+      "cross_flag_mismatches": 678,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 14,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 15,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 16,
+          "original": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "control_word": "0x37f",
+      "cases": 998,
+      "angle_control_mismatches": 0,
+      "flag_mismatches": 920,
+      "cross_cases": 998,
+      "cross_store_length_mismatches": 0,
+      "cross_flag_mismatches": 678,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 14,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 15,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 16,
+          "original": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "control_word": "0x77f",
+      "cases": 998,
+      "angle_control_mismatches": 0,
+      "flag_mismatches": 920,
+      "cross_cases": 998,
+      "cross_store_length_mismatches": 0,
+      "cross_flag_mismatches": 678,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 14,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 15,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 16,
+          "original": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "control_word": "0xb7f",
+      "cases": 998,
+      "angle_control_mismatches": 0,
+      "flag_mismatches": 920,
+      "cross_cases": 998,
+      "cross_store_length_mismatches": 0,
+      "cross_flag_mismatches": 678,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 14,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 15,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 16,
+          "original": "0x0",
+          "native": "0x20"
+        }
+      ]
+    },
+    {
+      "control_word": "0xf7f",
+      "cases": 998,
+      "angle_control_mismatches": 0,
+      "flag_mismatches": 920,
+      "cross_cases": 998,
+      "cross_store_length_mismatches": 0,
+      "cross_flag_mismatches": 678,
+      "examples": [],
+      "flag_examples": [
+        {
+          "case": 12,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 13,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 14,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 15,
+          "original": "0x0",
+          "native": "0x20"
+        },
+        {
+          "case": 16,
+          "original": "0x0",
+          "native": "0x20"
+        }
+      ]
+    }
+  ],
+  "limits": [
+    "CRT matherr bypass policy1 is explicitly selected",
+    "Bochs FPATAN and Unicorn oracle are not original hardware",
+    "Original angle/CW and independently executed cross stores/ext80 length are checked; native pending-error facts use owner tests",
+    "Flags and actual startup/mod FP state remain unverified"
+  ],
+  "return_angle_control_and_cross_stores_length_match": true
+}

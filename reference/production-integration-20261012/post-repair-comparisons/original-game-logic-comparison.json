@@ -1,0 +1,21 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "native_library_sha256": "598396d87021b176b2f6497d32ff9d215392c26d1cda81253201211ffcffd2fd",
+  "native_sources": {
+    "sadx-native/src/game_logic_support.hpp": "8b695a4f8caa2f38db2d0f2f62a43fa3726c622ba87d1baaeccf12082a7c858c",
+    "sadx-native/src/game_logic.hpp": "66f36700733afba20dfe2d4e8d494977c283fd20953a659d50d2e839d904cf67",
+    "sadx-native/src/game_logic.cpp": "580adafc106dfe14f16bebc92c2c0de380fc438ec057f8d7bcb755763c4b44dc",
+    "sadx-native/tests/native_game_logic_probe.cpp": "8ba0868b2c3345369d7cf059a16a9a89b0dabaff3273e3c8e89b6bdeb0f1d241",
+    "/Users/burbujamc/Developer/rea/sadx-native/tools/verify_original_game_logic.py": "1a53765c482be43353e28b7db6bd3adfdd95becda5ccb109cfe8ea3c42bafff2"
+  },
+  "source_range": {
+    "address": "0x413dd0",
+    "bytes": 301,
+    "sha256": "bdd1b3f1c23e8708bbf77c0053b1231dee3e90ca74d13d7e1281109ca242fdf4"
+  },
+  "cases": 170,
+  "case_sha256": "30e056bddf208e678ca6e7efe1643ca8c422b50bec2954b2ebe928b02cfd39db",
+  "mismatches": [],
+  "orchestration_stores_press_union_calls_match": true,
+  "limits": "413dd0 instructions versus native orchestration, with explicit owner fixtures.\n\nCalled input/scene/timing operations are fixture boundaries in both runs. This\ndoes not establish a complete scene, physical input, keyboard-edge owner or\nnative game loop. Every call, argument, partial store and press union is kept.\n"
+}

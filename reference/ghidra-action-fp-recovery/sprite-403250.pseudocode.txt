@@ -1,0 +1,30 @@
+
+bool FUN_00403250(void)
+
+{
+  uint uVar1;
+  int *in_EAX;
+  uint uVar2;
+  int *piVar3;
+  
+  if (in_EAX == (int *)0x0) {
+    return true;
+  }
+  uVar1 = in_EAX[1];
+  if (uVar1 != 0) {
+    uVar2 = 0;
+    if (uVar1 != 0) {
+      piVar3 = (int *)*in_EAX + 2;
+      do {
+        if (*piVar3 == 0) {
+          return true;
+        }
+        uVar2 = uVar2 + 1;
+        piVar3 = piVar3 + 3;
+      } while (uVar2 < uVar1);
+    }
+    return *(int *)*in_EAX == -1;
+  }
+  return true;
+}
+

@@ -1,0 +1,105 @@
+# test	arguments (make syntax; run from the repo root)
+ninja-math	build/assets/ninja-trig.f32
+speedrun	
+input	
+task	
+player-motion	
+player-state	build/assets/player-parameters.bin
+player-speed	
+mac-input	
+mac-clock	
+x87-math	build/assets/ninja-trig.f32
+x87-transcendental	
+player-coordinates	build/assets/ninja-trig.f32 build/assets/ninja-unit.f32
+player-input	
+player-input-producer	build/assets/input-producer-constants.bin
+crt-integer	
+crt-asin	
+crt-acos	
+floor-angles	build/assets/ninja-trig.f32 build/assets/ninja-unit.f32
+player-movement	build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/player-parameters.bin
+player-heading	build/assets/ninja-trig.f32 build/assets/ninja-unit.f32
+player-acceleration-ground	build/assets/player-parameters.bin build/assets/ground-acceleration-constants.bin build/assets/ninja-trig.f32 build/assets/ninja-unit.f32
+sse-math	
+input-mod-axes	
+player-rotation	build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/player-rotation-constants.bin
+player-acceleration-air	build/assets/player-parameters.bin build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/player-rotation-constants.bin
+axis-projection	build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/coordinate-axis-constants.bin
+player-projection	build/assets/projection-angle-constants.bin
+player-acceleration-alternate	build/assets/player-parameters.bin build/assets/ground-acceleration-constants.bin build/assets/event-acceleration-constants.bin build/assets/coordinate-axis-constants.bin build/assets/projection-angle-extra-constants.bin build/assets/ninja-trig.f32 build/assets/ninja-unit.f32
+player-position	build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/player-rotation-constants.bin build/assets/player-position-constants.bin
+crt-floor	build/assets/crt-floor-constants.bin
+player-contact-initializer	build/assets/player-parameters.bin build/assets/player-contact-initialization-constants.bin build/assets/player-rotation-constants.bin
+collision-shapes	build/assets/ninja-trig.f32 build/assets/ninja-unit.f32
+collision-normal	build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/coordinate-axis-constants.bin
+player-path	build/assets/ninja-trig.f32 build/assets/player-path-constants.bin
+player-direction-reset	build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/player-direction-reset-constants.bin build/assets/ground-acceleration-constants.bin
+player-scene	"$(GAME_EXE)" build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/player-scene-constants.bin
+crt-sqrt	
+crt-fabs	
+task-work	
+task-lifecycle	
+player-mesh-math	
+player-plane	
+player-reaction	build/assets/player-reaction-constants.bin
+crt-atan2	
+player-mesh-query	build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/floor-angle-constants.bin build/assets/player-mesh-query-constants.bin build/assets/coordinate-axis-constants.bin
+player-hold	
+player-mesh-registry	build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 "$(GAME_EXE)"
+player-mesh-registry-contacts	build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 "$(GAME_EXE)" build/assets/floor-angle-constants.bin build/assets/player-mesh-query-constants.bin build/assets/coordinate-axis-constants.bin build/assets/player-scene-constants.bin build/assets/player-contact-response-constants.bin
+player-startup	build/assets/player-parameters.bin
+player-contact-attributes	build/assets/player-parameters.bin build/assets/player-contact-attribute-constants.bin
+player-contact-response	build/assets/player-contact-response-constants.bin build/assets/ninja-trig.f32
+player-auxiliary-effect	build/assets/player-auxiliary-effect-table.bin build/assets/player-parameters.bin
+sonic-player	build/assets/sonic-player-constants.bin build/assets/sonic-action-dispatch.bin build/assets/ninja-trig.f32 build/assets/ninja-unit.f32
+sonic-actions	build/assets/sonic-player-constants.bin
+ninja-texture	"$(GAME_DIR)/system/EFF_REGULAR.PVM" "$(GAME_DIR)/system/BEACH01.PVM" "$(GAME_DIR)/system/BEACH02.PVM" "$(GAME_DIR)/system/BEACH03.PVM" "$(GAME_DIR)/system/OBJ_BEACH.PVM" "$(GAME_DIR)/system/BEACH_SEA.PVM" "$(GAME_DIR)/system/BG_BEACH.PVM" "$(GAME_DIR)/system/EC_CLOUDS.PVM"
+ninja-render	build/assets/ninja-blend-tables.bin
+ninja-sprite	build/assets/ninja-sprite-constants.bin build/assets/ninja-trig.f32 build/assets/ninja-unit.f32
+game-logic-support	
+game-logic	
+game-frame-control	
+game-scene-logic	
+scene-input-producer	
+game-loop	
+game-mode	
+game-startup	
+audio-stream	
+game-reset	
+game-view	
+ninja-projection-range	
+game-runtime	"$(GAME_EXE)" "$(INPUT_MOD_DLL)"
+input-mod-pad	
+input-chain	
+ninja-sprite-queue	build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/ninja-depth-tables.bin
+ninja-texture-selection	
+ninja-queue-lifecycle	
+ninja-queue-consumer	build/assets/ninja-sprite-constants.bin build/assets/ninja-blend-tables.bin build/assets/ninja-depth-tables.bin build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/ninja-texture-returns.bin build/assets/ninja-queue-consumer-constants.bin
+ninja-fog	
+ninja-keyboard	
+game-mode-leaves	
+sound-manager	
+game-frame-owners	
+ninja-frame-calls	
+mod-loader-frame	
+win32-profile	
+game-winmain	
+guest-heap	
+ninja-memory	
+game-library-init	
+ninja-device-init	
+ninja-texture-pool	
+ninja-system-init	
+game-window	
+ninja-vibration	
+ninja-input-devices	
+d3dx-math	
+ninja-screen	
+ninja-debug-text	
+model-dlls	"$(GAME_SYSTEM)"
+player-animation	"$(GAME_DIR)/system/CHRMODELS_orig.dll" build/assets/player-animation-constants.bin
+player-animation-decode	"$(GAME_DIR)/system/CHRMODELS_orig.dll"
+sonic-animation-table	
+player-scene-position	build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/player-parameters.bin build/assets/player-scene-position-constants.bin build/assets/player-rotation-constants.bin build/assets/player-contact-initialization-constants.bin build/assets/player-contact-response-constants.bin build/assets/player-contact-attribute-constants.bin build/assets/floor-angle-constants.bin build/assets/player-mesh-query-constants.bin build/assets/coordinate-axis-constants.bin
+player-scene-position-binding	build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/player-parameters.bin build/assets/player-scene-position-constants.bin build/assets/player-rotation-constants.bin build/assets/player-contact-initialization-constants.bin build/assets/player-contact-response-constants.bin build/assets/player-contact-attribute-constants.bin build/assets/floor-angle-constants.bin build/assets/player-mesh-query-constants.bin build/assets/coordinate-axis-constants.bin "$(GAME_EXE)" build/assets/player-scene-constants.bin build/assets/player-position-constants.bin build/assets/sonic-player-constants.bin reference/original-player-scene-position-comparison.cases.bin
+guest-smoke	"$(GAME_EXE)"

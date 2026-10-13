@@ -1,0 +1,26 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "producer": "LLVM byte disassembly; supplementary to retained REA dossiers",
+  "tool_path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/llvm-objdump",
+  "tool_sha256": "83b32f39e5475ee168927eb1509c82978e08e0100ec8c6fafeca588d9960773c",
+  "tool_version": "Apple LLVM version 21.0.0\n  Optimized build.\n\n\n  Registered Targets:\n    aarch64    - AArch64 (little endian)\n    aarch64_32 - AArch64 (little endian ILP32)\n    aarch64_be - AArch64 (big endian)\n    arm        - ARM\n    arm64      - ARM64 (little endian)\n    arm64_32   - ARM64 (little endian ILP32)\n    armeb      - ARM (big endian)\n    thumb      - Thumb\n    thumbeb    - Thumb (big endian)\n    wasm32     - WebAssembly 32-bit\n    wasm64     - WebAssembly 64-bit\n    x86        - 32-bit X86: Pentium-Pro and above\n    x86-64     - 64-bit X86: EM64T and AMD64",
+  "records": [
+    {
+      "path": "_reference/sadx/mesh-registry-byte-evidence/group-recycling.asm",
+      "sha256": "29f6ef873a251fcd10eccf5a6e61b0002ae380f7186a9dbd35edadb536015ee0"
+    },
+    {
+      "path": "_reference/sadx/mesh-registry-byte-evidence/pool-initializers.asm",
+      "sha256": "1e8a5e3d36d9b038664e88bc93b05052b9f0a640b5bb917be712e990f84bf1db"
+    },
+    {
+      "path": "_reference/sadx/mesh-registry-byte-evidence/unculled-registration.asm",
+      "sha256": "6b9f43c24af65e4cace843f1818c252a11ef96eda34e4d51bad0ab128ebdedd8"
+    }
+  ],
+  "literal_7e0030_hex": "82a082d382ea82ad2097dc310a",
+  "limitations": [
+    "Instruction meanings and normalized ownership are derivations from source bytes",
+    "No REA Evidence ID is invented for standalone LLVM output"
+  ]
+}

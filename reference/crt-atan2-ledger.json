@@ -1,0 +1,95 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "evidence_id": "ev_13e718505384cd29c18410fa802007b12c410fc2b78e750e6feceea4d841920c",
+  "entry": "0x645270",
+  "status": "source_native_local_owner_closed_with_required_runtime_dispatcher_and_explicit_fpatan_model",
+  "native_sources": {
+    "sadx-native/src/crt_atan2.hpp": "2232d4dd0fadcae620dd07b99e92f3cd6e70a294d0c1b4a88d399d1f6ca680b8",
+    "sadx-native/src/crt_atan2.cpp": "8215c30a099487627f8dbeb17ed9db94313a63156bc3b3ce36bb122ce98dde24",
+    "sadx-native/tests/crt_atan2.cpp": "0d157f48283f2ebdf766c7d1c15065e49cfbc96d15a7e68e8290533ba9b4e558",
+    "sadx-native/tests/native_crt_atan2_probe.cpp": "29fc0b22fbec89ee0ff175bdae4409d4bfcf8b57b06b70e0fd514db49390fbd3",
+    "sadx-native/tools/verify_original_crt_atan2.py": "7d5e3dbe47854dde67969ac1f3140e57819699e25118283e6ae63ec86578d1e1"
+  },
+  "source_functions": {
+    "0x645270": {
+      "size": 10,
+      "sha256": "1280bfb3bbea59bdb174b61e93cd7fbc6931a93277af598da4e43b3700d266a3"
+    },
+    "0x64b29c": {
+      "size": 140,
+      "sha256": "8985d8821b96db25427bc24f47c3da4e858b4fb627e7f52811be5360d4ba01ec"
+    },
+    "0x64b3a4": {
+      "size": 494,
+      "sha256": "a6992051abc40a92e3ec99b202872d5da0aa1a59672d5f489b4c4acbf2b3749a"
+    },
+    "0x6489c7": {
+      "size": 355,
+      "sha256": "a1c991a09dd4d6a5b1cb69c2e4d81f3d397e0bf156f1fae121d442ce5496c4ab"
+    }
+  },
+  "descriptor": {
+    "address": "0x2bcc170",
+    "bytes": "056174616e32000000000000000210009cb2640018b364009f8a6400f5b26400f5b26400f5b264009f8a6400f5b264009d8a64009d8a6400c78a64009d8a640018b3640018b364009f8a6400068b6400",
+    "name": "atan2",
+    "argument_count": 2,
+    "operation": 16
+  },
+  "private_probe_sha256": "2a37631d9e6a2cd1f04ccd752fe1ed677c05c1715ef95248c37825cbeb8226c9",
+  "private_report_sha256": "b5cd281ffac1c990d15078a6616ad5ee59b2c3401384bc0b572c96896f3af203",
+  "primary_cases": 28416,
+  "suffix_cases": 20256,
+  "totals": {
+    "value_mismatches": 17604,
+    "boundary_mismatches": 0,
+    "cw_mismatches": 0,
+    "pending_mismatches": 324,
+    "error_mismatches": 0,
+    "scratch_mismatches": 1548,
+    "copy_flag_mismatches": 0,
+    "fpatan_mismatches": 19776,
+    "flags_mismatches": 25224,
+    "unclassified_nonflag_mismatches": 0
+  },
+  "suffix_totals": {
+    "value_mismatches": 0,
+    "boundary_mismatches": 0,
+    "cw_mismatches": 0,
+    "pending_mismatches": 0,
+    "error_mismatches": 0,
+    "scratch_mismatches": 0,
+    "copy_flag_mismatches": 0,
+    "flags_mismatches": 20256
+  },
+  "strict_full_emulator_match": false,
+  "unmodified_return_values_and_boundaries_match": false,
+  "local_control_and_explicitly_seeded_suffix_match": true,
+  "required_runtime_facts": [
+    "initialized matherr_control at3c837a8",
+    "actual two-argument operation16 dispatcher64dacb/error/errno/matherr policy",
+    "source-ordered shared scratch3c83960/argument-copy3c83968 writes before callbacks",
+    "real Intel Ultra control/status/FPATAN comparison with updated mod profile"
+  ],
+  "unknown_boundaries": {
+    "policy": "0x64b3e5",
+    "dispatcher": "0x64b518",
+    "unmasked_return_wait": "0x64b443"
+  },
+  "validation": {
+    "compiler": "Apple clang21.0.0 clang-2100.3.34.2",
+    "architecture": "arm64",
+    "optimized_owner_tests": "passed12 CW profiles and typed boundaries",
+    "ubsan_owner_tests": "passed; linked shared/vendor archive not instrumented by this owner",
+    "unicorn": "2.1.4",
+    "cli_gate": "nonzero for unclassified nonflag or seeded scalar-suffix mismatches; strict full=false retained"
+  },
+  "limitations": [
+    "Caller-selected policy0/1 and12 masked CW profiles are experimental inputs, not actual initialized Windows state",
+    "Source and native stop before real64b518 handler; no fake callback is installed",
+    "Unicorn FPATAN uses host-double results and incomplete flags; native Bochs P5/P6 remains explicit",
+    "Primary comparisons have no replacement/overlay; supplementary suffix profiles explicitly seed ST0 at64b2ad with the native extended intermediate after actual source prefix/FPATAN",
+    "Suffix seeding validates only quadrant/return/dispatch scalar instructions; it does not prove Intel FPATAN agreement",
+    "The two-argument64dacb dispatcher, errno/matherr callbacks and physical Intel Ultra behavior remain unverified",
+    "Source stack/TOP/C1/deferred trap timing and native full-game collision behavior remain outside this comparison"
+  ]
+}

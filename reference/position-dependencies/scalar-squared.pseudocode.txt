@@ -1,0 +1,9 @@
+    asm { fld        dword [ecx+8] };
+    asm { fmul       dword [edx+8] };
+    asm { fld        dword [ecx+4] };
+    asm { fmul       dword [edx+4] };
+    asm { faddp      st1 };
+    asm { fld        dword [ecx] };
+    asm { fmul       dword [edx] };
+    asm { faddp      st1 };
+    return;

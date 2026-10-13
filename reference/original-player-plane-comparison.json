@@ -1,0 +1,139 @@
+{
+  "profile": "actual795820/7887d0/788d40/no-overlays; output alias and null profiles",
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "native_library_sha256": "f587b874f37374aea284020a92a90cf859a39aff8dbd3b53af86ed57202540d7",
+  "source_functions": {
+    "0x795820": {
+      "size": 169,
+      "sha256": "eef6134e42fc63a02bfa9c4b00a228b663f7d4f7c5ed8e9ab313cfdf875d6074"
+    },
+    "0x7887d0": {
+      "size": 528,
+      "sha256": "ef6eb4576b10f5bdb6f3bed4e22e3149466b56c55a50550fef6d715675bfe33a"
+    },
+    "0x7871f0": {
+      "size": 43,
+      "sha256": "4eb9860ab520e2ec4fd1fafefd7b97330dd1a9a04adcec057ca24ab916d96376"
+    },
+    "0x788d40": {
+      "size": 176,
+      "sha256": "515a5615183f6e51e3b68bb876d85ac006edd211fd3818add6fd426ce9cb0d9c"
+    }
+  },
+  "native_sources": {
+    "src/player_plane.cpp": "d4e8708dcb409631067fff9ebac96eafaade5eb15ccc9105f66dbc75bff9de9e",
+    "src/player_plane.hpp": "0f14fc7bf53acd49909833fce3ef0f800ffa7078deb1503ebe60ac894ca3d583",
+    "src/ninja_math.cpp": "3c9788806b2015a5d29d6a77a6440bc20bd5958fae903b5dc69c972b5f5204d0",
+    "src/player_direction_reset.cpp": "0242516c2b11dadec6bcd49a36dd55d9285fb169d0770604103de18d1e15afbe",
+    "tests/native_player_plane_probe.cpp": "ef5abb3788cca9eb97afbd0723095ac3eb531ffa30912bdc2a180a82231c9e4d",
+    "tools/verify_original_player_plane.py": "62e7ad745b7ae63bbddd8064f1dab952b4ce7ed580552d5798addf9f89c418d1"
+  },
+  "case_sha256": "06b011ac6316942fd9c793201684b27d23dc7282e8c8017312ab5293e2aeced1",
+  "cases": 1487,
+  "profiles": [
+    {
+      "cw": "0x7f",
+      "cases": 1487,
+      "state_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 1272,
+      "control_mismatches": 0
+    },
+    {
+      "cw": "0x47f",
+      "cases": 1487,
+      "state_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 1272,
+      "control_mismatches": 0
+    },
+    {
+      "cw": "0x87f",
+      "cases": 1487,
+      "state_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 1272,
+      "control_mismatches": 0
+    },
+    {
+      "cw": "0xc7f",
+      "cases": 1487,
+      "state_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 1272,
+      "control_mismatches": 0
+    },
+    {
+      "cw": "0x27f",
+      "cases": 1487,
+      "state_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 1272,
+      "control_mismatches": 0
+    },
+    {
+      "cw": "0x67f",
+      "cases": 1487,
+      "state_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 1272,
+      "control_mismatches": 0
+    },
+    {
+      "cw": "0xa7f",
+      "cases": 1487,
+      "state_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 1272,
+      "control_mismatches": 0
+    },
+    {
+      "cw": "0xe7f",
+      "cases": 1487,
+      "state_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 1272,
+      "control_mismatches": 0
+    },
+    {
+      "cw": "0x37f",
+      "cases": 1487,
+      "state_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 1272,
+      "control_mismatches": 0
+    },
+    {
+      "cw": "0x77f",
+      "cases": 1487,
+      "state_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 1272,
+      "control_mismatches": 0
+    },
+    {
+      "cw": "0xb7f",
+      "cases": 1487,
+      "state_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 1272,
+      "control_mismatches": 0
+    },
+    {
+      "cw": "0xf7f",
+      "cases": 1487,
+      "state_mismatches": 0,
+      "return_mismatches": 0,
+      "flag_mismatches": 1272,
+      "control_mismatches": 0
+    }
+  ],
+  "mismatches": [],
+  "limits": [
+    "Masked control words and synthetic planes are selected test fixtures; no runtime or hardware observation",
+    "No original math calls are overlaid; return/flags are captured after source instruction execution",
+    "Unicorn nonfinite operand/status limitations remain; full contact response and game are not exercised"
+  ],
+  "state_returns_control_match": true,
+  "full_emulator_match": false
+}

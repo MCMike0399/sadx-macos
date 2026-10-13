@@ -1,0 +1,67 @@
+
+void FUN_0043df60(void)
+
+{
+  int in_EAX;
+  int iVar1;
+  int in_ECX;
+  int in_EDX;
+  float10 fVar2;
+  float local_28;
+  float local_24;
+  float local_20;
+  float local_1c;
+  float local_18;
+  undefined4 local_14;
+  undefined4 local_10;
+  undefined4 local_c;
+  undefined4 local_8;
+  undefined4 local_4;
+  
+  if (((*(byte *)(in_ECX + 0x10) & 3) == 0) &&
+     (fVar2 = (float10)FUN_00787cc0(),
+     fVar2 < (float10)*(float *)(in_ECX + 0xc0) != (fVar2 == (float10)*(float *)(in_ECX + 0xc0)))) {
+    return;
+  }
+  fVar2 = (float10)FUN_007889f0(&local_24);
+  if (fVar2 != (float10)0.0) {
+    local_c = *(undefined4 *)(in_EAX + 0x10);
+    local_8 = *(undefined4 *)(in_EAX + 0x14);
+    local_4 = *(undefined4 *)(in_EAX + 0x18);
+    local_18 = *(float *)(in_EAX + 0x6c);
+    local_14 = *(undefined4 *)(in_EAX + 0x70);
+    local_10 = *(undefined4 *)(in_EAX + 0x74);
+    fVar2 = (float10)FUN_00787cc0();
+    if (fVar2 != (float10)0.0) {
+      FUN_00418ac0(&local_c);
+      FUN_00418ac0(&local_18);
+      iVar1 = FUN_00438410(&local_c,&local_18,in_EAX + 0x1c);
+      iVar1 = *(int *)(in_EDX + 0x18) - iVar1;
+      *(int *)(in_EDX + 0x18) = iVar1;
+      iVar1 = FUN_004383b0(*(undefined4 *)((&DAT_03b36dd0)[*(byte *)(in_EDX + 8)] + 0x20),iVar1);
+      if (0x6000 < iVar1) {
+        *(int *)(in_EDX + 0x18) = *(int *)(in_EDX + 0x18) + 0x8000;
+      }
+      *(undefined4 *)((&DAT_03b36dd0)[*(byte *)(in_EDX + 8)] + 0x20) =
+           *(undefined4 *)(in_EDX + 0x18);
+      local_24 = *(float *)(in_EAX + 0x6c);
+      local_20 = *(float *)(in_EAX + 0x70);
+      local_1c = *(float *)(in_EAX + 0x74);
+      fVar2 = (float10)FUN_00787cc0();
+      if ((float10)0.4 <= fVar2) {
+        iVar1 = (&DAT_03b36dd0)[*(byte *)(in_EDX + 8)];
+        fVar2 = (float10)FUN_00787cc0();
+        local_28 = (float)fVar2;
+        if ((float10)0.6 < fVar2) {
+          local_28 = local_28 * 0.96;
+        }
+        FUN_00418ac0(&local_24);
+        *(float *)(iVar1 + 4) = local_24 * local_28;
+        *(float *)(iVar1 + 8) = local_20 * local_28;
+        *(float *)(iVar1 + 0xc) = local_1c * local_28;
+      }
+    }
+  }
+  return;
+}
+
