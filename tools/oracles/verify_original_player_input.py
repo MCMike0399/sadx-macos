@@ -142,6 +142,7 @@ def main():
     report['value_outputs_passed']=all(item['value_mismatches']==0 for item in report['control_words'])
     report['exception_flags_match']=all(item['exception_mismatches']==0 for item in report['control_words'])
     report['exception_oracle_note']='Unicorn2.1.4 FNSTSW/accessor omit tested denormal/invalid flags; native architecture flags retained; actual PC exception parity unverified.'
+    report['limits']=([report['limits']] if isinstance(report.get('limits'),str) else list(report.get('limits') or []))+['Flag difference (exception_mismatches): the native x87 status exception bits (DE 0x02 in the examples) are set where Unicorn 2.1.4 does not raise them (FNSTSW reads 0x0). All compared values match; the hardware flags need the Intel capture (M4).']
     args.output.write_text(json.dumps(report,indent=2)+'\n')
     if failure:raise SystemExit(1)
 

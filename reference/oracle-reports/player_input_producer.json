@@ -210,10 +210,13 @@
  "value_outputs_passed": true,
  "exception_flags_match": false,
  "passed": false,
- "elapsed_seconds": 5.340389500022866,
+ "elapsed_seconds": 5.479997249960434,
+ "limits": [
+  "Flag difference (exception_mismatches): the native x87/MXCSR exception bits are set where Unicorn 2.1.4 does not raise them; values, boundaries and call order match. All compared values match; the hardware flags need the Intel capture (M4)."
+ ],
  "tracked_summary": {
-  "full_sha256": "b59d4aa667d281c042f6f436dabbd0a525d54ccbbb06f2a1e39e31d812270dd5",
-  "full_bytes": 5412,
+  "full_sha256": "eb55478433116fc7de8522f26b212e4e7d6d4f455cc8f3f9efc8754b25b89d3c",
+  "full_bytes": 5678,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

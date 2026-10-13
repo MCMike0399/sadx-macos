@@ -119,6 +119,7 @@ def main():
             report['runs'].append(run);print(json.dumps({k:v for k,v in run.items() if k!='examples'}),flush=True)
     report['value_outputs_passed']=not failed;report['exception_flags_match']=all(r['exception_mismatches']==0 for r in report['runs'])
     report['passed']=report['value_outputs_passed'] and report['exception_flags_match'];report['elapsed_seconds']=time.monotonic()-started
+    report['limits']=([report['limits']] if isinstance(report.get('limits'),str) else list(report.get('limits') or []))+['Flag difference (exception_mismatches): the native x87/MXCSR exception bits are set where Unicorn 2.1.4 does not raise them; values, boundaries and call order match. All compared values match; the hardware flags need the Intel capture (M4).']
     args.output.write_text(json.dumps(report,indent=2)+'\n')
     if not report['passed']:raise SystemExit(1)
 if __name__=='__main__':main()

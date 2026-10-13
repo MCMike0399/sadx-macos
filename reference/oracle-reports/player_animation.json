@@ -232,21 +232,22 @@
   "Typed four-record action/motion fixture is not the real initialized147-record Sonic table",
   "Source numeric paths execute real43f9f0 with object_count0; nonzero key buffers/allocation lifecycle are not proved by this experiment",
   "Original43f2a0 blend CALL stops before execution; the separate producer verifier covers its body and the native path retains synthetic resource unavailability",
-  "An emulator is the instruction oracle, not physical Windows hardware or game/mod execution"
+  "An emulator is the instruction oracle, not physical Windows hardware or game/mod execution",
+  "Flag difference (status_mismatches): the native x87 status exception bits (IE 0x01 in the examples, comparisons with NaN operands) are set where Unicorn 2.1.4 does not raise them (source 0). All compared values match; the hardware flags need the Intel capture (M4)."
  ],
  "native_sources": {
   "src/player/player_animation.hpp": "29aecbe442f5151044a6c9678fa93b678b1d4a04a52958e95cfd16c0aa2b11bf",
   "src/player/player_animation.cpp": "f1fea844550691d84e9be39bb2f8bd78c3b75bcc16c950c79a67df1b1a71ade0",
   "tests/probes/native_player_animation_probe.cpp": "9dd13ebcf928a54f9fd4736b1e62ce710573caba4795032a9b2b968a5d89ccdc",
-  "tools/oracles/verify_original_player_animation.py": "b426a2bc2fc00fd7216160a725d298647d758fd7d885d25f5d174dba68cac6ea"
+  "tools/oracles/verify_original_player_animation.py": "3501d8cd23af6671f3b70ebd13c762d4723a22091b0627d701821c52809331cf"
  },
  "case_sha256": "3b9c7db48a75222e99582d5f9cbccedc00f76f89ce23dab23d5fade43a61de43",
- "seconds": 7.06172808399424,
+ "seconds": 7.136585250031203,
  "stored_state_matches": true,
  "passed": false,
  "tracked_summary": {
-  "full_sha256": "d055b260a5dfeccc01618802808b1cace2244f9193f34f42fec3d672eb269b19",
-  "full_bytes": 22503,
+  "full_sha256": "0d81ec543233beaa972977caa4cde69c7c0c546240ec06b1f6cd487677a53c87",
+  "full_bytes": 22777,
   "lists_cut_to": 10,
   "cut_lists": {
    "status_examples": 30,

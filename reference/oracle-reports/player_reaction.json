@@ -1,6 +1,6 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "79da111d73053463ebd0a23b2d3e3309f7e50a6cdca43f0a470a9850e54dee9b",
+ "native_library_sha256": "563c9f276f7ea7362a3b3d0286fa10bc8e086c01ab1f0bcf271dc3c14e86042c",
  "source_functions": {
   "0x43c580": {
    "size": 579,
@@ -2845,7 +2845,8 @@
   "All remaining reaction/plane/angle/Ninja/CRT instructions execute until return or declared boundary, with no math overlays",
   "Unicorn host-double FPATAN, initial SNaN FLD and architectural flag limitations remain visible",
   "Explicit control/runtime/scene fixtures, not actual gameplay/mod or hardware captures",
-  "No CRT error handler is substituted; policy0 stops before real dispatcher call"
+  "No CRT error handler is substituted; policy0 stops before real dispatcher call",
+  "The value-class differences come from Unicorn 2.1.4, not the port: it computes FPATAN with host doubles inside the CRT asin/atan2 the reaction path calls (policy-1 cases: pending ext80 differs in the low mantissa bits) and the initial SNaN FLD. The native port follows the Bochs P5/P6 / SoftFloat models and must not be changed to match. Settling these cases needs the Intel capture (roadmap M4); until then this report stays `fail`."
  ],
  "native_sources": {
   "src/player/player_reaction.cpp": "3b572f7e4b29ea7def9d16451046dd93b0a32fa561152e69812c9cdae3de7289",
@@ -2856,15 +2857,15 @@
   "src/cpu/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8",
   "src/cpu/x87_transcendental.cpp": "00fa509396903586b83807f7aa53b7df8675d7d8efdef031f7264283e3c0529a",
   "tests/probes/native_player_reaction_probe.cpp": "84bc18d727e16d3e2981b5f1cba2ca3d4e7caf2c6f36f2e0506d7c1acdea7feb",
-  "tools/oracles/verify_original_player_reaction.py": "da3b40448a1092ff60edd227bab565eae0b10c144ef4324437961c259352a014"
+  "tools/oracles/verify_original_player_reaction.py": "fde58626c2815e8ff39ea978f9e69b655b99d218bc1a2517c88fe00afd5c8eaf"
  },
  "bypass_state_boundaries_control_match": true,
  "bypass_and_native_owner_boundary_evaluations": 10152,
  "state_boundaries_control_match": false,
  "full_emulator_match": false,
  "tracked_summary": {
-  "full_sha256": "946a841d77da79a11e7332735e0a4e84e2418afe633cd22e9495b61ad2f3831d",
-  "full_bytes": 249394,
+  "full_sha256": "513d225b7a74db565214588ec405b7a78e38f3ec3ccf5c4e38f32372c0a015c9",
+  "full_bytes": 249835,
   "lists_cut_to": 10,
   "cut_lists": {
    "profiles": 12,

@@ -536,11 +536,20 @@
    "unclassified_mismatches": []
   }
  ],
- "seconds": 3.2473235829966143,
+ "seconds": 3.6291502499952912,
+ "unclassified_value_mismatches": 0,
+ "limits": [
+  "Reference is Unicorn 2.1.4 (QEMU softfloat), not Intel hardware; value differences are expected where Unicorn deviates from the Intel SDM",
+  "emulator_x87_NaN_priority: with two NaN operands Unicorn applies the x87 larger-significand rule; SSE returns the first source quietened (SDM vol. 1 table 4-7). Counted only when native equals that rule",
+  "emulator_FTZ_wrong_status_owner: Unicorn ignores MXCSR.FZ and returns the denormal; SSE flushes a masked underflow to signed zero. Counted only when native returns that signed zero",
+  "emulator_MINSS_returns_unconverted_operand: Unicorn ignores MXCSR.DAZ in MINSS; SSE reads denormal sources as signed zero. Counted only when native equals the SDM MINSS result",
+  "mxcsr_mismatches: Unicorn 2.1.4 raises no SSE exception flags; the native MXCSR flags are not checked by this oracle",
+  "Verdict stays fail while value_mismatches>0 (pass criteria unchanged): every value difference must sit in a classified class with unclassified_value_mismatches=0; settling them against silicon needs the Intel capture (roadmap M4)"
+ ],
  "passed": false,
  "tracked_summary": {
-  "full_sha256": "f4fd6998f0dc86a5bd9e24635167fee684a32f7a7badb56982d7a680beaadd63",
-  "full_bytes": 23451,
+  "full_sha256": "3911b5dbbecdcb31380c25ca37384f14c1a12bd592fa49a4b08a574823b77420",
+  "full_bytes": 24594,
   "lists_cut_to": 10,
   "cut_lists": {
    "results[0].first_value_mismatches": 20,

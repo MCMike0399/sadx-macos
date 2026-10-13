@@ -115,7 +115,8 @@ def main():
                 limits=['Focused instruction fixtures, not complete original game execution',
                         'Explicit experimental control words, not captured running-game state',
                         'Unicorn exception flags are recorded separately; hardware is unverified',
-                        'All exception masks enabled; native typed unmasked failures tested separately'])
+                        'All exception masks enabled; native typed unmasked failures tested separately',
+                        'The value-class differences come from Unicorn 2.1.4, not the port: it computes register loads of signaling NaNs (register_load_snan_mismatches equals every value_condition mismatch; non-signaling loads all match) differently from the native x87 model. The native port follows the Bochs P5/P6 / SoftFloat models and must not be changed to match. Settling these cases needs the Intel capture (roadmap M4); until then this report stays `fail`.'])
     case_bytes=b''.join(struct.pack('<IQQ',width,a,b)
                         for width in (32,64) for a,b in fixtures(width))
     cases_path=args.output.with_suffix('.cases.bin')

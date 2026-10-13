@@ -223,6 +223,7 @@ def main():
         ('floor_angle_mismatches','boundary_mismatches','cw_mismatches')) for p in report['controls'])
     report['bypass_asin_extended_register_match']=all(not p['policy_summaries']['1']['asin_ext80_mismatches']
         for p in report['controls'])
+    report['limits']=([report['limits']] if isinstance(report.get('limits'),str) else list(report.get('limits') or []))+['The value-class differences come from Unicorn 2.1.4, not the port: it computes FPATAN with host doubles inside CRT asin (asin_ext80_mismatches) and SNaN loads; the floor-angle, boundary and pending-store differences follow from those intermediates. The native port follows the Bochs P5/P6 / SoftFloat models and must not be changed to match. Settling these cases needs the Intel capture (roadmap M4); until then this report stays `fail`.']
     args.output.write_text(json.dumps(report,indent=2)+'\n')
     # A disagreement is retained evidence; the command reports it to the caller
     # rather than treating weaker transcendental emulation as a repair target.

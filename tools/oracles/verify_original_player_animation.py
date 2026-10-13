@@ -72,5 +72,6 @@ def main():
                 report['boundary_mismatches']+=1
                 if len(report['examples'])<30:report['examples'].append(dict(case=report['cases'],input=f,field='boundary',source=hex(boundary),returned=returned,native=list(out)))
             report['cases']+=1
+    report['limits']=([report['limits']] if isinstance(report.get('limits'),str) else list(report.get('limits') or []))+['Flag difference (status_mismatches): the native x87 status exception bits (IE 0x01 in the examples, comparisons with NaN operands) are set where Unicorn 2.1.4 does not raise them (source 0). All compared values match; the hardware flags need the Intel capture (M4).']
     report.update(case_sha256=digest.hexdigest(),seconds=time.monotonic()-start,stored_state_matches=not(report['stored_mismatches']or report['boundary_mismatches']),passed=not(report['stored_mismatches']or report['boundary_mismatches']or report['status_mismatches']));a.output.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({k:report[k]for k in ('cases','stored_mismatches','boundary_mismatches','status_mismatches','seconds','passed')}));return int(not report['stored_state_matches'])
 if __name__=='__main__':raise SystemExit(main())

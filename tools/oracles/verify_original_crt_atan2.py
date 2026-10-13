@@ -160,6 +160,7 @@ def main():
     report['local_control_and_suffix_matches']=all(not p['unclassified_nonflag_mismatches'] for p in report['profiles']) and all(
         not any(p[field+'_mismatches'] for field in fields if field not in ('flags','fpatan')) for p in report['suffix_profiles'])
     report['seconds']=time.monotonic()-start
+    report['limits']=([report['limits']] if isinstance(report.get('limits'),str) else list(report.get('limits') or []))+['The value-class differences come from Unicorn 2.1.4, not the port: it computes FPATAN with host doubles (53-bit results) and incomplete flags. The native port follows the Bochs P5/P6 / SoftFloat models and must not be changed to match. Settling these cases needs the Intel capture (roadmap M4); until then this report stays `fail`.']
     args.output.parent.mkdir(parents=True,exist_ok=True);args.output.write_text(json.dumps(report,indent=2)+'\n')
     return int(not report['local_control_and_suffix_matches'])
 

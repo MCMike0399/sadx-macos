@@ -269,12 +269,15 @@
    ]
   }
  ],
- "seconds": 1.8775891659897752,
+ "seconds": 2.0893645840114914,
  "passed": false,
  "scope": "isolated actual DLL instructions, all exceptions masked; not Windows runtime or physical hardware",
+ "limits": [
+  "Flag difference: the native SSE model sets MXCSR exception bits (PE 0x20 in the examples, e.g. 0x1f80 -> 0x1fa0); Unicorn 2.1.4 does not raise SSE exception flags (MXCSR unchanged). All compared values match; the hardware flags need the Intel capture (M4)."
+ ],
  "tracked_summary": {
-  "full_sha256": "3f0bcab53af4257455c1ba1352e4406e092792724aa2c3e262c953b0997058b3",
-  "full_bytes": 6153,
+  "full_sha256": "6d0168bfc2d6abced3d4ba1eac49e89baa347f42a8770072175d45b732ac4047",
+  "full_bytes": 6435,
   "lists_cut_to": 10,
   "cut_lists": {
    "mxcsr_controls": 16

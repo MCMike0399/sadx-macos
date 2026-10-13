@@ -414,14 +414,15 @@
   "Explicit NaN policy1 and masked control words are test seeds, not observed runtime",
   "Original signaling-NaN routes can stop before unresolved CRT dispatcher; these remain strict disagreements",
   "Error handler/unmasked delivery and Intel hardware remain unverified",
-  "Full geometry/game/controller behavior is not exercised"
+  "Full geometry/game/controller behavior is not exercised",
+  "The value-class differences come from Unicorn 2.1.4, not the port: it computes FLD of a signaling NaN (e.g. 0x7ff0000000000123) differently from the native x87 model, so the source stops at a different boundary (4927) than the native path. The native port follows the Bochs P5/P6 / SoftFloat models and must not be changed to match. Settling these cases needs the Intel capture (roadmap M4); until then this report stays `fail`."
  ],
  "returned_values_control_boundaries_match": false,
  "full_emulator_match": false,
- "seconds": 0.34926466696197167,
+ "seconds": 0.3478064999799244,
  "tracked_summary": {
-  "full_sha256": "16ddfe6ed409f7fc27886ebf0b71017a695a68a53fb2d2a0f0578ac034842291",
-  "full_bytes": 10692,
+  "full_sha256": "035035eca870df540bd55cc0907928e36dde42a95b8249f917ef7103e6cf7696",
+  "full_bytes": 11127,
   "lists_cut_to": 10,
   "cut_lists": {
    "profiles": 12

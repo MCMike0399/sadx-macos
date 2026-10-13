@@ -31,7 +31,7 @@
   "src/cpu/crt_atan2.hpp": "886e2d5c0d43bebef1aeac32ab617411f963cb9b8126c8e3fb67b1309af03694",
   "src/cpu/crt_atan2.cpp": "1fbb0c6f470930b6a087655233d14dd02b93ecf5d105bb723a4894c740fb9555",
   "tests/probes/native_crt_atan2_probe.cpp": "da39fd6350a49bef45b2bd07137fdd092688caab39271f313bd4eefbea22dc9a",
-  "tools/oracles/verify_original_crt_atan2.py": "b09ff7fa1ee3387f03e8a25e1e99d4a57a1ead3e1731c1449f6633a0b6767c9d"
+  "tools/oracles/verify_original_crt_atan2.py": "9c393a041466fb658928c16a68ed73d8a78f1948af518de246a0167ec3268d4c"
  },
  "cases": 2368,
  "case_sha256": "bc23ea24dd05a9d9e4724cce2dc0579da3fd000eb11f8d96ad9101a3702f0ba0",
@@ -1164,15 +1164,16 @@
   "Primary comparisons have no replacement/overlay; supplementary suffix profiles explicitly seed ST0 at64b2ad with the native extended intermediate after actual source prefix/FPATAN",
   "Suffix seeding validates only quadrant/return/dispatch scalar instructions; it does not prove Intel FPATAN agreement",
   "The two-argument64dacb dispatcher, errno/matherr callbacks and physical Intel Ultra behavior remain unverified",
-  "Source stack/TOP/C1/deferred trap timing and native full-game collision behavior remain outside this comparison"
+  "Source stack/TOP/C1/deferred trap timing and native full-game collision behavior remain outside this comparison",
+  "The value-class differences come from Unicorn 2.1.4, not the port: it computes FPATAN with host doubles (53-bit results) and incomplete flags. The native port follows the Bochs P5/P6 / SoftFloat models and must not be changed to match. Settling these cases needs the Intel capture (roadmap M4); until then this report stays `fail`."
  ],
  "returned_values_and_boundaries_match": false,
  "full_emulator_match": false,
  "local_control_and_suffix_matches": true,
- "seconds": 1.0549995410256088,
+ "seconds": 1.0559488339931704,
  "tracked_summary": {
-  "full_sha256": "2ba795609c491e9e6bd0ee3b035b092771afed9c508ad6d918f203ebdc875458",
-  "full_bytes": 42398411,
+  "full_sha256": "8ee0697f56d0b6d1a225f73f03e1d319236dbfd4b788e671bce7eaa502efb615",
+  "full_bytes": 42398750,
   "lists_cut_to": 10,
   "cut_lists": {
    "profiles": 12,

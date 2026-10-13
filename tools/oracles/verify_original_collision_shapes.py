@@ -102,6 +102,7 @@ def main():
         reports.append(r);print(json.dumps({k:v for k,v in r.items() if not k.startswith('first_') and k!='modes'}),flush=True)
     sha=lambda b:hashlib.sha256(b).hexdigest()
     result={'source_sha256':image.sha256,'native_library_sha256':sha(a.native_library.read_bytes()),'sine_sha256':sha(table),'unit_sha256':sha(unit),'axis_constants_sha256':sha(constants),'cases_sha256':sha(blob),'seed':hex(SEED),'results':reports,'seconds':time.monotonic()-start,'stored_state_matches':all(not r['value_mismatches'] for r in reports),'passed':all(not(r['value_mismatches'] or r['flag_mismatches']) for r in reports),'scope':'4real shape primitives, real41bc00+41bed0, 3real matrix primitives; no arithmetic/normal replies or geometry replacements. Native live-task views seeded explicitly; hardware/runtime unknown.'}
+    result['limits']=([result['limits']] if isinstance(result.get('limits'),str) else list(result.get('limits') or []))+['Flag difference: the native x87 model sets the precision bit (PE 0x20) of the status word on inexact results; Unicorn 2.1.4 does not raise x87 exception bits for these instructions (source 0x0). All compared values match; the hardware flags need the Intel capture (M4).']
     a.output.write_text(json.dumps(result,indent=2)+'\n')
     return int(not result['stored_state_matches'])
 if __name__=='__main__':raise SystemExit(main())

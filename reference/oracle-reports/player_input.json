@@ -3226,14 +3226,17 @@
   "Forced-angle FPATAN uses an explicit Bochs P5/P6 model; Intel Ultra hardware is unverified",
   "Native InputState/WriteAnalogs producer and complete gameplay are not verified"
  ],
- "elapsed_seconds": 4.623539166001137,
+ "elapsed_seconds": 4.781691791955382,
  "passed": false,
  "value_outputs_passed": true,
  "exception_flags_match": false,
  "exception_oracle_note": "Unicorn2.1.4 FNSTSW/accessor omit tested denormal/invalid flags; native architecture flags retained; actual PC exception parity unverified.",
+ "limits": [
+  "Flag difference (exception_mismatches): the native x87 status exception bits (DE 0x02 in the examples) are set where Unicorn 2.1.4 does not raise them (FNSTSW reads 0x0). All compared values match; the hardware flags need the Intel capture (M4)."
+ ],
  "tracked_summary": {
-  "full_sha256": "0c5ba9ff9251eb5bdfda5ffdda9068347c329a8348d0228803ccc9ba3bc49fa3",
-  "full_bytes": 75506,
+  "full_sha256": "40d3a774277695bf8deba21d7a429a84b4abcaa1444a1fc8fdbf2a06e194f1c1",
+  "full_bytes": 75777,
   "lists_cut_to": 10,
   "cut_lists": {
    "control_words[0].examples[0].words": 12,

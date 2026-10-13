@@ -1,7 +1,7 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
  "source_instructions_sha256": "3788d6bb4eaab61234f5f031baa5aa439079883a68a52827497e3e048563fc6d",
- "native_library_sha256": "2246673dd32095bdc7423790271740b34f925cbd5ef90b2da9d07cadee5f5093",
+ "native_library_sha256": "7bfceca4319a109d1ad69d259935a327f62909fb67bfcbc4bc5e11dabd9b552d",
  "constants_sha256": "f7be1c27e17fce5d129d33681b2ac8e1f279559ae671a9486ede618daa7112a6",
  "rotation_constants_sha256": "e57e7537f25e6b0628370057deb2f9034ddf01f9b5aa8a337cf7d77c1a597f7e",
  "sine_sha256": "3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed",
@@ -422,13 +422,16 @@
    ]
   }
  ],
- "seconds": 2.9820584999979474,
+ "seconds": 3.0616969169932418,
  "stored_values_match": true,
  "passed": false,
  "scope": "actual1771-byte local body and real math/matrix/CRT; explicit fixture replies or stop boundaries for normal/hold/scene/reaction; not actual geometry or fullcollision",
+ "limits": [
+  "Flag difference: the native x87 model sets the precision bit (PE 0x20) of the status word on inexact results; Unicorn 2.1.4 does not raise x87 exception bits for these instructions (oracle 0x0). All compared values match; the hardware flags need the Intel capture (M4)."
+ ],
  "tracked_summary": {
-  "full_sha256": "b87b6b816f0a204d8e014d19f6f29c19f090cc0dbb1d234e8a23e0d4b649e0d7",
-  "full_bytes": 9228,
+  "full_sha256": "1d464be825be33f03bed480ced0fb5c9ce063b8388b632c12c43702ea2dc05b5",
+  "full_bytes": 9523,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

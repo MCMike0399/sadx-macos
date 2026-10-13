@@ -65,9 +65,9 @@
   "src/cpu/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
   "src/cpu/x87_transcendental.cpp": "00fa509396903586b83807f7aa53b7df8675d7d8efdef031f7264283e3c0529a",
   "src/cpu/x87_transcendental.hpp": "443284c5e02df41950b33d2b58465f198af3679e8ceeac87c5513169beb99993",
-  "src/player/player_coordinates.hpp": "5d5cfa3e2965997baf122f6ea263f2104c1e2698ba48373e06628f54ad83b1a7",
+  "src/player/player_coordinates.hpp": "322331b4ca9a51e4a58a8133d9c1a323e7a223d84cbe44f83f029540a65057c0",
   "tests/probes/native_floor_angles_probe.cpp": "b04b733c7353637c8838901f6978a471ddfa364ca67f63097b1567e3a0415f0a",
-  "tools/oracles/verify_original_floor_angles.py": "b73e8529a2bb3aa4e61f593e5f50486e5ea8aa38fd6408376dba09887481e5c1"
+  "tools/oracles/verify_original_floor_angles.py": "e13f3f6b25548aa5cf4e7b2084f79714a47c30355b6f576db1023de41f7413f7"
  },
  "native_library_compiler": "Clang 21.0.0 (clang-2100.3.34.2); target arm64; __cplusplus=201703L; native integer SoftFloat/Bochs",
  "declared_native_build_profile": "arm64 C++17 O2 ff-contract=off fno-fast-math; native integer SoftFloat/Bochs archives",
@@ -1051,17 +1051,18 @@
   "Original error callback is never replaced or executed; no callback result is invented",
   "Unicorn FPATAN uses host-double arithmetic and x87 exception flags are incomplete",
   "Native Bochs P5/P6 results must not be changed merely to match this weaker oracle",
-  "Original Intel Ultra results, startup state, gameplay/mod call inputs, FPS and hardware exception delivery remain unverified"
+  "Original Intel Ultra results, startup state, gameplay/mod call inputs, FPS and hardware exception delivery remain unverified",
+  "The value-class differences come from Unicorn 2.1.4, not the port: it computes FPATAN with host doubles inside CRT asin (asin_ext80_mismatches) and SNaN loads; the floor-angle, boundary and pending-store differences follow from those intermediates. The native port follows the Bochs P5/P6 / SoftFloat models and must not be changed to match. Settling these cases needs the Intel capture (roadmap M4); until then this report stays `fail`."
  ],
- "duration_seconds": 0.43578512500971556,
+ "duration_seconds": 0.4287130410084501,
  "floor_output_and_boundary_match": false,
  "asin_extended_register_match": false,
  "emulator_exception_flags_match": false,
  "bypass_floor_output_control_and_boundary_match": true,
  "bypass_asin_extended_register_match": false,
  "tracked_summary": {
-  "full_sha256": "3b6f4f816cd43df608c505b78acd1fd9c1239ccb0d208c98ed4ac0f5fd2ab542",
-  "full_bytes": 15895783,
+  "full_sha256": "7cdcc7b537bf41850a78fe9110a9eaa529617d49004ad8b3a67621141f9a9926",
+  "full_bytes": 15896227,
   "lists_cut_to": 10,
   "cut_lists": {
    "mismatches": 18264,

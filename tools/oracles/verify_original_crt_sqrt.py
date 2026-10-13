@@ -48,5 +48,6 @@ def main():
         report['profiles'].append(item);print(json.dumps({k:v for k,v in item.items() if k!='examples'}),flush=True)
     report['returned_values_control_match']=all(not i['value_mismatches'] and not i['control_mismatches'] for i in report['profiles'])
     report['full_emulator_match']=report['returned_values_control_match'] and all(not i['flag_mismatches'] for i in report['profiles'])
+    report['limits']=([report['limits']] if isinstance(report.get('limits'),str) else list(report.get('limits') or []))+['Flag difference (flag_mismatches per profile): x87 exception bits after FSQRT/FST rounding (PE) are set natively where Unicorn 2.1.4 does not raise them. All compared values match; the hardware flags need the Intel capture (M4).']
     report['seconds']=time.monotonic()-start;a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(report,indent=2)+'\n');return int(not report['returned_values_control_match'])
 if __name__=='__main__':raise SystemExit(main())

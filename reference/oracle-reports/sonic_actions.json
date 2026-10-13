@@ -1,6 +1,6 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "dd6fea4e97bf86c836f8d4c37b50093412f4d4e54c54821d68c66551801d3da2",
+ "native_library_sha256": "9e6693f7d3cacd384ead894d75fbb3eb20f92eee8c3813266d5bdea8c9fa516c",
  "cases": 30192,
  "stored_mismatches": 0,
  "boundary_mismatches": 0,
@@ -256,24 +256,25 @@
   "Unbound sound/effect/native task/animation/normal owners stop at actual source CALL before execution; none returns synthetic success",
   "Fully known source masks/pad/event fields are explicit fixture facts, not defaults",
   "All12 masked CW profiles include hardware candidate007f and worker027f but are not hardware measurements",
-  "Source FPATAN/scratch-dependent wall query remains a mandatory owner boundary in these fixtures"
+  "Source FPATAN/scratch-dependent wall query remains a mandatory owner boundary in these fixtures",
+  "Flag difference (status_mismatches): the native x87 status exception bits (PE 0x20 in the examples) are set where Unicorn 2.1.4 does not raise them (source 0). All compared values match; the hardware flags need the Intel capture (M4)."
  ],
  "native_sources": {
   "src/player/sonic_player.hpp": "418bf5996866cc2d11dd27c504f0697a72fc298ae90e3db00dfb0c1d7c33b666",
   "src/player/sonic_player.cpp": "9ea4fa5e53deac6158ebbad76bbc2f9358515d85414b78f0b7fabeb579e9e073",
   "tests/probes/native_sonic_action_probe.cpp": "a32e1be6081014140f4cf1a46dff9d891016432b66da1c841d9223a9d07b7031",
-  "tools/oracles/verify_original_sonic_actions.py": "31ac7f04009d92848124f38ed6a8b050eaa8bb43250a03c7c250c305fa0c118d",
-  "src/player/player_task.hpp": "ed87e810477ddf9f81d4e4e450af20111a885cc66dae4285e1eaa490bb17b957",
+  "tools/oracles/verify_original_sonic_actions.py": "4ec5a3b53ecacbb40400f4e7663e9d4aa60a176b72acc8eba9a0e6d8bc383f01",
+  "src/player/player_task.hpp": "ca3b911db75e90e2ddabc2a4bef3e4fae6578c0405f864001c2e68162e07650d",
   "src/player/player_physics.hpp": "08bf9f1949cdb7fd1605429c9b9663265e61d62352b9f5d018e7244a74738530",
   "src/player/player_position.hpp": "4a9343e6107b2cad271dfe2c369084a282f32b5c088f90c4bbd73fb40e3165de"
  },
  "case_sha256": "011512a72d2c21b1ea2362ba8cf86393b52f13601b89055fa8137cd3d505053b",
- "seconds": 15.120476124982815,
+ "seconds": 14.751655625004787,
  "stored_state_matches": true,
  "passed": false,
  "tracked_summary": {
-  "full_sha256": "ea97b371e79fd777a3b428e33603863dcf2188ea35c3858e6d282531b93a687f",
-  "full_bytes": 35884,
+  "full_sha256": "adab4db274a608e37dc4b0362ba0c8d36cea97dd7633f1762a256e7e8d6c5ab3",
+  "full_bytes": 36126,
   "lists_cut_to": 10,
   "cut_lists": {
    "status_examples": 40,

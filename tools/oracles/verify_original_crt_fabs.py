@@ -56,5 +56,6 @@ def main():
         report['profiles'].append(item);print(json.dumps({k:v for k,v in item.items() if k!='examples'}),flush=True)
     report['returned_values_control_boundaries_match']=all(not i['value_mismatches'] and not i['control_mismatches'] and not i['boundary_disagreements'] and not i['errno_mismatches'] for i in report['profiles'])
     report['full_emulator_match']=report['returned_values_control_boundaries_match'] and all(not i['flag_mismatches'] for i in report['profiles'])
+    report['limits']=([report['limits']] if isinstance(report.get('limits'),str) else list(report.get('limits') or []))+['The value-class differences come from Unicorn 2.1.4, not the port: it computes FLD of a signaling NaN (e.g. 0x7ff0000000000123) differently from the native x87 model, so the source stops at a different boundary (4927) than the native path. The native port follows the Bochs P5/P6 / SoftFloat models and must not be changed to match. Settling these cases needs the Intel capture (roadmap M4); until then this report stays `fail`.']
     report['seconds']=time.monotonic()-start;a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(report,indent=2)+'\n');return int(not report['returned_values_control_boundaries_match'])
 if __name__=='__main__':raise SystemExit(main())

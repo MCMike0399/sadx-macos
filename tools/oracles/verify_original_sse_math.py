@@ -1,7 +1,21 @@
 """Explicit scalar opcode probe: emulator comparison is not hardware proof."""
-import argparse,ctypes,hashlib,json,pathlib,random,time
+import argparse,ctypes,hashlib,json,pathlib,random,struct,time
 import unicorn
 from unicorn.x86_const import UC_X86_REG_XMM0,UC_X86_REG_XMM1,UC_X86_REG_MXCSR,UC_X86_REG_EAX
+def sdm_minss(x,y):
+    """MINSS under MXCSR.DAZ (Intel SDM vol. 2: denormal sources read as signed zero; if either is NaN or both
+    are zero the second source is returned)."""
+    daz=lambda v:v&0x80000000 if 0<(v&0x7fffffff)<0x800000 else v
+    x,y=daz(x),daz(y)
+    if (x&0x7fffffff)>0x7f800000 or (y&0x7fffffff)>0x7f800000:return y
+    f=lambda v:struct.unpack('<f',struct.pack('<I',v))[0]
+    return x if f(x)<f(y) else y
+LIMITS=['Reference is Unicorn 2.1.4 (QEMU softfloat), not Intel hardware; value differences are expected where Unicorn deviates from the Intel SDM',
+        'emulator_x87_NaN_priority: with two NaN operands Unicorn applies the x87 larger-significand rule; SSE returns the first source quietened (SDM vol. 1 table 4-7). Counted only when native equals that rule',
+        'emulator_FTZ_wrong_status_owner: Unicorn ignores MXCSR.FZ and returns the denormal; SSE flushes a masked underflow to signed zero. Counted only when native returns that signed zero',
+        'emulator_MINSS_returns_unconverted_operand: Unicorn ignores MXCSR.DAZ in MINSS; SSE reads denormal sources as signed zero. Counted only when native equals the SDM MINSS result',
+        'mxcsr_mismatches: Unicorn 2.1.4 raises no SSE exception flags; the native MXCSR flags are not checked by this oracle',
+        'Verdict stays fail while value_mismatches>0 (pass criteria unchanged): every value difference must sit in a classified class with unclassified_value_mismatches=0; settling them against silicon needs the Intel capture (roadmap M4)']
 OPS=[('ADDSS','f30f58c1'),('SUBSS','f30f5cc1'),('MULSS','f30f59c1'),('DIVSS','f30f5ec1'),('MINSS','f30f5dc1'),('CVTSS2SD','f30f5ac0'),('CVTSD2SS','f20f5ac0'),('SQRTSD','f20f51c0'),('CVTTSS2SI','f30f2cc0')]
 def main():
     p=argparse.ArgumentParser();p.add_argument('native_library',type=pathlib.Path);p.add_argument('--output',type=pathlib.Path,required=True);a=p.parse_args()
@@ -32,15 +46,17 @@ def main():
                             report['value_mismatches']+=1
                             nan=lambda v:(v&0x7fffffff)>0x7f800000
                             den=lambda v:0<(v&0x7fffffff)<0x800000
-                            if operation<4 and nan(x) and nan(y):reason='emulator_x87_NaN_priority'
+                            # Each class names a documented Unicorn deviation AND checks the native value against the
+                            # Intel SDM rule for it, so "classified" never means "native is merely different".
+                            if operation<4 and nan(x) and nan(y) and out.value==(x|0x400000):reason='emulator_x87_NaN_priority'
                             elif operation in (0,1,2,3,6) and ftz and den(expected) and out.value==(expected&0x80000000):reason='emulator_FTZ_wrong_status_owner'
-                            elif operation==4 and daz and (den(x) or den(y)):reason='emulator_MINSS_returns_unconverted_operand'
+                            elif operation==4 and daz and (den(x) or den(y)) and out.value==sdm_minss(x,y):reason='emulator_MINSS_returns_unconverted_operand'
                             else:reason='unclassified'
                             report['difference_classes'][reason]=report['difference_classes'].get(reason,0)+1
                             if reason=='unclassified' and len(report['unclassified_mismatches'])<20:report['unclassified_mismatches'].append({'a':hex(x),'b':hex(y),'mxcsr':hex(mxcsr),'oracle':hex(expected),'native':hex(out.value)})
                             if len(report['first_value_mismatches'])<20:report['first_value_mismatches'].append({'a':hex(x),'b':hex(y),'mxcsr':hex(mxcsr),'oracle':hex(expected),'native':hex(out.value)})
                         if status!=flags.value:report['mxcsr_mismatches']+=1
         reports.append(report);print(json.dumps(report),flush=True)
-    result={'native_probe_sha256':hashlib.sha256(a.native_library.read_bytes()).hexdigest(),'unicorn_version':unicorn.__version__,'scope':'single explicit scalar opcodes; emulator values only, no physical Intel hardware claim','results':reports,'seconds':time.monotonic()-start,'passed':all(not(r['value_mismatches'] or r['mxcsr_mismatches']) for r in reports)}
+    result={'native_probe_sha256':hashlib.sha256(a.native_library.read_bytes()).hexdigest(),'unicorn_version':unicorn.__version__,'scope':'single explicit scalar opcodes; emulator values only, no physical Intel hardware claim','results':reports,'seconds':time.monotonic()-start,'unclassified_value_mismatches':sum(r['difference_classes'].get('unclassified',0) for r in reports),'limits':LIMITS,'passed':all(not(r['value_mismatches'] or r['mxcsr_mismatches']) for r in reports)}
     a.output.write_text(json.dumps(result,indent=2)+'\n')
 if __name__=='__main__':main()

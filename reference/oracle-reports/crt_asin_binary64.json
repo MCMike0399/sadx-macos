@@ -19,7 +19,7 @@
   "src/cpu/crt_argument.hpp": "dad8ca261ac36d58837f104b768426ecdaa83b7d4cf832d7d410e9a21e9a25be",
   "src/cpu/crt_inverse_internal.hpp": "04d985492c3e69710b99c96406d089e53f25b9eba86862de78f20542bef20186",
   "tests/probes/native_crt_asin_binary64_probe.cpp": "b374d1969e1fb9cb6dfbe1d8c2070c452385af993b51d1872578b06a0bf127b8",
-  "tools/oracles/verify_original_crt_asin_binary64.py": "0ebafef83c1343eb09244373a2005b7566e674780458ccf37782eea6eddf23fe"
+  "tools/oracles/verify_original_crt_asin_binary64.py": "4bbbd9d6bf12e885ea34ba59dfef32165693d4597b8ac79ee80d8eaee9e66dc7"
  },
  "cases": 692,
  "case_sha256": "c8764d225c3ec0a6beea75d2909c5bb489e16ed74968341f33ff07c374c74327",
@@ -415,14 +415,15 @@
   "Explicit policy1 bypass and policy0 boundary profiles do not establish initialized CRT state",
   "No original handler is executed or replaced; original instructions execute until return or dispatcher",
   "Native FPATAN uses Bochs P5/P6; Unicorn uses host-double math with incomplete flags",
-  "Intel Ultra results and full-game geometry/mod/controller behavior remain unverified"
+  "Intel Ultra results and full-game geometry/mod/controller behavior remain unverified",
+  "The value-class differences come from Unicorn 2.1.4, not the port: it computes FPATAN with host doubles (results rounded to 53 bits, e.g. 0x860a91e2cccde000 vs native 0x860a91e2cccddd7c) and loads signaling NaNs without the invalid-operation behaviour. The native port follows the Bochs P5/P6 / SoftFloat models and must not be changed to match. Settling these cases needs the Intel capture (roadmap M4); until then this report stays `fail`."
  ],
  "returned_values_and_boundaries_match": false,
  "full_emulator_match": false,
- "seconds": 0.10901195905171335,
+ "seconds": 0.10896287497598678,
  "tracked_summary": {
-  "full_sha256": "bc83011fb81860e5153a6217e03417ffad533ec1e651c035bffc109b4bd87eba",
-  "full_bytes": 3140178,
+  "full_sha256": "7bd89912dae77de8533153378e638552b0c6c6be89707b48e56006a001311263",
+  "full_bytes": 3140627,
   "lists_cut_to": 10,
   "cut_lists": {
    "profiles": 12,

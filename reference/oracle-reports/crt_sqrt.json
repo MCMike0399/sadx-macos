@@ -104,14 +104,15 @@
   "Explicit matherr bypass and masked control words are test seeds, not observed runtime",
   "Binary64 arguments only; retained-ST0 wrapper has separate source semantics",
   "Error handler/unmasked delivery and Intel hardware remain unverified",
-  "Full geometry/game/controller behavior is not exercised"
+  "Full geometry/game/controller behavior is not exercised",
+  "Flag difference (flag_mismatches per profile): x87 exception bits after FSQRT/FST rounding (PE) are set natively where Unicorn 2.1.4 does not raise them. All compared values match; the hardware flags need the Intel capture (M4)."
  ],
  "returned_values_control_match": true,
  "full_emulator_match": false,
- "seconds": 0.12652049999451265,
+ "seconds": 0.13202558300690725,
  "tracked_summary": {
-  "full_sha256": "6d765249f96deeef58590847879b8a2eb609a21d938d3b730743244b98ab00ce",
-  "full_bytes": 3231,
+  "full_sha256": "9451643796ebb1b1cc322afb2337e07d501a13605bb265327acb74fb60b7d44d",
+  "full_bytes": 3467,
   "lists_cut_to": 10,
   "cut_lists": {
    "profiles": 12

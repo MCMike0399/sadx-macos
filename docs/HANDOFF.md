@@ -1340,3 +1340,36 @@ Limits
 * The gate still does not run the oracles (minutes each); `make oracles` is the separate step.
 * Historical names (`reference-<x>-test`, `original-<x>-comparison.json`) remain in older
   handoff entries and gate records.
+
+## Oracle health: every fail and partial explained (2026-10-12, step 1 of NEXT-AGENT-PROMPT)
+
+Evidence: gate `reference/production-integration-20261012/oracle-health-101-gate.json` (rc 0, 104
+native programs, 4 Python tests); 19 reports rerun and tracked in `reference/oracle-reports/`.
+
+* The seven named fails (`crt_asin_binary64`, `crt_atan2`, `crt_fabs`, `crt_floor`, `floor_angles`,
+  `player_reaction`, `x87_memory`) were checked against their mismatch samples, not just their
+  `limits`: asin/atan2/floor_angles/player_reaction values are Unicorn's 53-bit host-double FPATAN
+  (e.g. 0x860a91e2cccde000 vs native 0x860a91e2cccddd7c); fabs/floor stop at a different boundary
+  only on SNaN inputs (0x7ff0000000000123 class); x87_memory's 1440 value mismatches are exactly its
+  1440 SNaN register loads (non-signaling loads all match). No port change. Each script now appends
+  a limit naming the Unicorn behaviour and that settling it needs the Intel capture (M4); they stay
+  `fail`.
+* `sse_math` (the real look): all 5,076 value mismatches fall into three documented Unicorn
+  deviations — x87 NaN priority on SSE operands (SSE returns the first source quietened), MXCSR.FZ
+  ignored (masked underflow not flushed), MXCSR.DAZ ignored in MINSS. The classifier now also
+  checks that the native value equals the Intel SDM rule for its class (before, "classified" only
+  meant "different"); `unclassified_value_mismatches` = 0. Verdict stays `fail` (pass criteria
+  unchanged); limits added (the report had none).
+* `ninja_sprite`: already retired by the layout session (its script tested bytes the loader
+  replaces); nothing to do.
+* Partial reports whose `limits` did not name the flag difference: collision_shapes, crt_sqrt,
+  input_mod_axes, ninja_queue_consumer, player_animation, player_input, player_input_producer,
+  player_movement, player_position, player_startup, sonic_actions (11). Each now names it from its
+  own examples (x87 PE 0x20 / DE 0x02 / IE 0x01 set natively where Unicorn 2.1.4 raises none; MXCSR
+  PE 0x20 for the Input mod axes). Every partial now names its flag difference.
+* Verdicts after the rerun: unchanged (46 pass, 42 partial, 8 fail, `game_reset_composed` still
+  missing — its native probe rejects the composed fixture, as before).
+
+Limits: the 19 reports were produced by one `make -k` run whose tree already held step 2's
+matrix/task refactor (no behaviour change; the full-oracle verdicts before and after it are
+identical). Oracles remain outside the gate.

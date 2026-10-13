@@ -3988,7 +3988,8 @@
   "Explicit CPU feature/CW/MXCSR/fallback global seeds are not original startup observations",
   "NaN and unmasked-precision policy routes stop before unresolved real CRT error dispatch calls",
   "Unicorn2.1.4 is not native Intel hardware; arithmetic exception flags reported separately",
-  "Full path/scene/game/mod runtime and physical input are not covered"
+  "Full path/scene/game/mod runtime and physical input are not covered",
+  "The value-class differences come from Unicorn 2.1.4, not the port: it computes FLD of a signaling NaN differently from the native x87 model (boundary 0x64923f vs 0x6491cb on 0x7ff0000000000123-class inputs). The native port follows the Bochs P5/P6 / SoftFloat models and must not be changed to match. Settling these cases needs the Intel capture (roadmap M4); until then this report stays `fail`."
  ],
  "frndint_leaf_diagnostics": [
   {
@@ -4115,10 +4116,10 @@
  ],
  "returned_values_and_boundaries_match": false,
  "full_emulator_match": false,
- "duration_seconds": 3.1707085840171203,
+ "duration_seconds": 3.13349970895797,
  "tracked_summary": {
-  "full_sha256": "22ec3e8aed66e23a707ff41ef42c274806011d152e68381f839d0e6461003035",
-  "full_bytes": 549325,
+  "full_sha256": "7de7d1fc9203c8ce37832fee2381b2c2cb4712f29eb9883c890d8503c2599a1f",
+  "full_bytes": 549727,
   "lists_cut_to": 10,
   "cut_lists": {
    "profiles": 98

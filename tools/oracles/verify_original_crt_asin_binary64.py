@@ -121,6 +121,7 @@ def main():
         not profile['flag_mismatches'] for profile in report['profiles'])
     report['seconds']=time.monotonic()-start
     args.output.parent.mkdir(parents=True,exist_ok=True)
+    report['limits']=([report['limits']] if isinstance(report.get('limits'),str) else list(report.get('limits') or []))+['The value-class differences come from Unicorn 2.1.4, not the port: it computes FPATAN with host doubles (results rounded to 53 bits, e.g. 0x860a91e2cccde000 vs native 0x860a91e2cccddd7c) and loads signaling NaNs without the invalid-operation behaviour. The native port follows the Bochs P5/P6 / SoftFloat models and must not be changed to match. Settling these cases needs the Intel capture (roadmap M4); until then this report stays `fail`.']
     args.output.write_text(json.dumps(report,indent=2)+'\n')
     return int(not report['returned_values_and_boundaries_match'])
 

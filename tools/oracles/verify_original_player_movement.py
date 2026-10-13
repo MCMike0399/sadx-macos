@@ -193,6 +193,7 @@ def main():
         for item in report['control_words'])
     report['emulator_exception_flags_match'] = all(item['flag_mismatches'] == 0 for item in report['control_words'])
     report['duration_seconds'] = time.monotonic() - started
+    report['limits']=([report['limits']] if isinstance(report.get('limits'),str) else list(report.get('limits') or []))+['Flag difference (flag_mismatches): the native x87 status exception bits (PE and, for FPATAN, the Bochs P5/P6 flags) are set where Unicorn 2.1.4 does not raise them. All compared values match; the hardware flags need the Intel capture (M4).']
     args.output.write_text(json.dumps(report, indent=2) + '\n')
     if not report['stored_values_calls_and_matrix_match']:
         raise SystemExit(1)

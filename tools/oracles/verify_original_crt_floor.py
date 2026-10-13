@@ -104,6 +104,7 @@ def main():
         print(f"CPU{cpu} CW{cw:#x} MXCSR{m:#x}: {len(cases)} cases, values{item['value_mismatches']} boundaries{item['boundary_mismatches']} pending{item['pending_mismatches']} CW{item['control_word_mismatches']}",flush=True)
     report['returned_values_and_boundaries_match']=all(not any(p[k] for k in ['value_mismatches','boundary_mismatches','pending_mismatches','control_word_mismatches']) for p in report['profiles'])
     report['full_emulator_match']=report['returned_values_and_boundaries_match'] and all(not p['x87_flag_mismatches'] and not p['mxcsr_mismatches'] for p in report['profiles'])
+    report['limits']=([report['limits']] if isinstance(report.get('limits'),str) else list(report.get('limits') or []))+['The value-class differences come from Unicorn 2.1.4, not the port: it computes FLD of a signaling NaN differently from the native x87 model (boundary 0x64923f vs 0x6491cb on 0x7ff0000000000123-class inputs). The native port follows the Bochs P5/P6 / SoftFloat models and must not be changed to match. Settling these cases needs the Intel capture (roadmap M4); until then this report stays `fail`.']
     report['duration_seconds']=time.monotonic()-start;a.output.parent.mkdir(parents=True,exist_ok=True);a.output.write_text(json.dumps(report,indent=2)+'\n')
     if not report['returned_values_and_boundaries_match']:raise SystemExit(1)
 if __name__=='__main__':main()

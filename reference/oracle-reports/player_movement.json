@@ -1,7 +1,7 @@
 {
  "profile": "PGetSpeed with real GetAnalog/task/floor/Ninja/CRT callees; no instruction overlays",
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "273fff130e41f79e4a12215c2bc06b4e7af3f16ae7a265ee8bb50ab3ca183160",
+ "native_library_sha256": "39671fb1b7f7647c8f66c9bd35117e76e771fcadeb58d21661f34c44574493b2",
  "table_sha256": "3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed",
  "unit_sha256": "5998e9d1dd9bf48af6af87a1ef8c7783b818ac8329637ada08cc5fb329042376",
  "constants_sha256": "78313b62673c30407e9f765030d8586011681f83aded82325b1f9ccad4ed29b1",
@@ -3513,14 +3513,15 @@
   "Explicit normalized-input/runtime/matrix fixtures, not original startup state",
   "Bochs P5/P6 FPATAN model versus Unicorn host-double FPATAN; hardware unverified",
   "CRT error dispatcher bypass explicitly selected for this comparison",
-  "No physical input producer, Windows startup, mod DLL execution or complete game ticks"
+  "No physical input producer, Windows startup, mod DLL execution or complete game ticks",
+  "Flag difference (flag_mismatches): the native x87 status exception bits (PE and, for FPATAN, the Bochs P5/P6 flags) are set where Unicorn 2.1.4 does not raise them. All compared values match; the hardware flags need the Intel capture (M4)."
  ],
  "stored_values_calls_and_matrix_match": true,
  "emulator_exception_flags_match": false,
- "duration_seconds": 3.9910095420200378,
+ "duration_seconds": 4.194336207991,
  "tracked_summary": {
-  "full_sha256": "8414d513cf9be02ebdeabcf9c8336cffee44657e4db9e709b9ff469c2a880a82",
-  "full_bytes": 505388,
+  "full_sha256": "d3d6d157929c524b4eb703791b17ca9c1ca332d62bb35e50741daa171b57fd78",
+  "full_bytes": 505631,
   "lists_cut_to": 10,
   "cut_lists": {
    "control_words[0].examples[0].original": 112,
