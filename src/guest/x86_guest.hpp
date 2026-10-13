@@ -18,6 +18,7 @@ namespace sadx {
 // tests. Imports, threads, SEH and the frame loop come in later M1 steps.
 struct GuestCallResult {
     bool completed=false;          // emulation reached the stop address
+    bool paused=false;             // pause() was requested; resume() continues
     std::uint32_t eax=0,eip=0,esp=0;
     std::string error;             // Unicorn error text when not completed
     explicit operator bool()const noexcept{return completed;}
@@ -70,6 +71,10 @@ public:
     // made by HLE functions through write() are not guest instructions and are not reported.
     using WriteWatch=std::function<void(std::uint32_t pc,std::uint32_t address,std::uint32_t size,std::uint64_t value)>;
     bool add_write_watch(std::uint32_t begin,std::uint32_t end,WriteWatch seen,std::string* error);
+    // Pauses the current call()/run() after the running override or hook completes normally (the guest's state
+    // stays consistent: e.g. an HLE function has returned to its caller); call() returns with `paused` set and
+    // resume() continues from there with the same stop address.
+    void pause();GuestCallResult resume(std::uint64_t timeout_us=600'000'000);
     // Ends the current call() as a failure with `error` (an override or import trap that cannot
     // proceed, e.g. an unbound import). The guest state is left as it was at the stop.
     void stop(std::string error);
@@ -97,7 +102,7 @@ private:
     std::uint32_t stack_base_=0x7ff00000,stack_size_=0x100000,stop_address_=0xfeed0000;
     std::map<std::uint32_t,Override> overrides_;
     std::vector<std::uint32_t> handles_;
-    std::optional<std::string> stopped_;
+    std::optional<std::string> stopped_;bool pause_requested_=false;
     // Pending redirected calls: continuation trap -> (the stack pointer the caller resumes with, its
     // return address, what to run). Traps live in a page next to the stop address.
     struct Pending {std::uint32_t resume_esp,return_address;Continuation then;};

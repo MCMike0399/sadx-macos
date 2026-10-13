@@ -1,14 +1,21 @@
-// sadx-app: a window on the native boot. It runs the same NativeGame composition as
-// sadx-boot, then shows what the game actually issued to Direct3D 8 in those frames
-// (the Clear, BeginScene's screen polygon, any sprite draws) in a Metal view, with
-// the boot report as an overlay. It renders nothing the game did not ask for: before
-// the SEGA logo's texture loads natively, the game's own frame is a black screen.
+// sadx-app: a window on the game.
+//   sadx-app --guest GAME_DIR WINDOWS_SYSTEM_DIR [--exit-after N] [--screenshot out.ppm]
+//     The guest (M1): sonic.exe runs from its entry point in the in-process x86 guest with the mod loader and
+//     mods (src/hle); every IDirect3DDevice8::Present pauses it, the frame it issued (Clears and
+//     DrawPrimitiveUP draws with their textures and states) is drawn with Metal (platform/mac/metal_guest_frame),
+//     and the guest resumes for the next frame. The overlay states the guest frame count and any stop.
 //   sadx-app SONIC.EXE INPUT_MOD.DLL [--frames N] [--survey] [--exit-after N] [--screenshot out.ppm]
+//     The native boot: the NativeGame composition of sadx-boot, then what it issued to Direct3D 8 (the Clear,
+//     BeginScene's screen polygon) with the boot report as an overlay.
+// Neither mode draws anything the game did not ask for.
 #import <AppKit/AppKit.h>
 #import <Metal/Metal.h>
 #import <MetalKit/MetalKit.h>
 #include "runtime/game_session.hpp"
 #include "platform/mac/mac_clock.hpp"
+#include "platform/mac/metal_guest_frame.hpp"
+#include "guest/fpu_shims.hpp"
+#include <iterator>
 #include <cstdio>
 #include <cstdlib>
 #include <cstring>
@@ -29,10 +36,11 @@ vertex Out polygon_vertex(uint index [[vertex_id]],constant uint* bytes [[buffer
 }
 fragment float4 polygon_fragment(Out in [[stage_in]]){return in.color;}
 )METAL";
-struct Options {std::string exe,dll,screenshot;std::uint32_t frames=5;bool survey=true;int exit_after=-1;};
+struct Options {std::string exe,dll,screenshot,game_dir,system_dir;std::uint32_t frames=5;bool survey=true,guest=false;int exit_after=-1;};
 bool parse(int argc,char** argv,Options& o){
-    if(argc<3)return false;o.exe=argv[1];o.dll=argv[2];
-    for(int i=3;i<argc;++i){
+    if(argc<3)return false;int first=3;
+    if(!std::strcmp(argv[1],"--guest")){if(argc<4)return false;o.guest=true;o.game_dir=argv[2];o.system_dir=argv[3];first=4;}else{o.exe=argv[1];o.dll=argv[2];}
+    for(int i=first;i<argc;++i){
         if(!std::strcmp(argv[i],"--frames")&&i+1<argc)o.frames=static_cast<std::uint32_t>(std::strtoul(argv[++i],nullptr,10));
         else if(!std::strcmp(argv[i],"--survey"))o.survey=true;
         else if(!std::strcmp(argv[i],"--stop"))o.survey=false;
@@ -47,6 +55,10 @@ std::vector<std::uint32_t> fan_indices(std::uint32_t vertex_count){std::vector<s
 }
 @interface SADXAppView : MTKView
 @property(nonatomic) std::vector<sadx::NinjaScreenPolygon>* polygons;
+@property(nonatomic) sadx::HleProcess* guest;              // guest mode
+@property(nonatomic) sadx::MetalGuestFrameRenderer* guestRenderer;
+@property(nonatomic) BOOL guestStopped;
+@property(nonatomic) std::string* guestStop;
 @property(nonatomic) id<MTLRenderPipelineState> pipeline;
 @property(nonatomic) id<MTLCommandQueue> queue;
 @property(nonatomic) int framesDrawn;
@@ -57,8 +69,10 @@ std::vector<std::uint32_t> fan_indices(std::uint32_t vertex_count){std::vector<s
 @implementation SADXAppView
 - (void)drawRect:(NSRect)rect{
     (void)rect;id<CAMetalDrawable> drawable=self.currentDrawable;MTLRenderPassDescriptor* pass=self.currentRenderPassDescriptor;if(!drawable||!pass)return;
+    id<MTLCommandBuffer> commands=[self.queue commandBuffer];
+    if(self.guest){[self drawGuest:commands pass:pass drawable:drawable];return;}
     pass.colorAttachments[0].loadAction=MTLLoadActionClear;pass.colorAttachments[0].clearColor=MTLClearColorMake(0,0,0,1); // the game's Clear: colour 0
-    id<MTLCommandBuffer> commands=[self.queue commandBuffer];id<MTLRenderCommandEncoder> encoder=[commands renderCommandEncoderWithDescriptor:pass];
+    id<MTLRenderCommandEncoder> encoder=[commands renderCommandEncoderWithDescriptor:pass];
     // The game's viewport is 640x480; the window scales it to fit.
     [encoder setRenderPipelineState:self.pipeline];
     float viewport[4]={0,0,640,480};
@@ -86,9 +100,60 @@ std::vector<std::uint32_t> fan_indices(std::uint32_t vertex_count){std::vector<s
     ++self.framesDrawn;
     if(self.exitAfter>0&&self.framesDrawn>=self.exitAfter)[NSApp terminate:nil];
 }
+// Guest mode: draw the frame the guest closed with its last Present, then let it run to the next one.
+- (void)drawGuest:(id<MTLCommandBuffer>)commands pass:(MTLRenderPassDescriptor*)pass drawable:(id<CAMetalDrawable>)drawable{
+    const auto stats=self.guestRenderer->encode(self.guest->last_frame,self.guest->guest(),commands,pass);
+    const bool capture=self.screenshot!=nil&&self.framesDrawn+1==(self.exitAfter>0?self.exitAfter:1);
+    if(capture){id<MTLTexture> texture=drawable.texture;NSString* path=self.screenshot;
+        [commands addCompletedHandler:^(id<MTLCommandBuffer>){
+            const auto w=texture.width,h=texture.height;std::vector<std::uint8_t> bgra(w*h*4);
+            [texture getBytes:bgra.data() bytesPerRow:w*4 fromRegion:MTLRegionMake2D(0,0,w,h) mipmapLevel:0];
+            std::ofstream f(path.UTF8String,std::ios::binary);f<<"P6\n"<<w<<" "<<h<<"\n255\n";
+            for(std::size_t i=0;i<w*h;++i){f.put(static_cast<char>(bgra[4*i+2]));f.put(static_cast<char>(bgra[4*i+1]));f.put(static_cast<char>(bgra[4*i]));}}];}
+    [commands presentDrawable:drawable];[commands commit];if(capture)[commands waitUntilCompleted];
+    ++self.framesDrawn;
+    std::string unsupported;for(const auto& [why,n]:stats.unsupported)unsupported+=" "+why+" x"+std::to_string(n);
+    if(!self.guestStopped){const auto r=self.guest->guest().resume();if(!r.paused){self.guestStopped=YES;*self.guestStop=r.completed?"the guest returned from its entry point":r.error;}}
+    std::printf("frame %d: guest present %llu, %zu draws (%zu textured), %zu clears%s%s\n",self.framesDrawn,static_cast<unsigned long long>(self.guest->d3d8.presents),stats.draws,stats.textured,stats.clears,
+        unsupported.empty()?"":(", not drawn:"+unsupported).c_str(),self.guestStopped?(", guest stopped: "+*self.guestStop).c_str():"");
+    self.status.stringValue=[NSString stringWithFormat:@"Guest: sonic.exe + mod loader + mods, frame %llu (%zu draws, %zu textured)%@",static_cast<unsigned long long>(self.guest->d3d8.presents),stats.draws,stats.textured,
+        self.guestStopped?[NSString stringWithFormat:@" — guest stopped: %s",self.guestStop->c_str()]:@""];
+    if(self.exitAfter>0&&self.framesDrawn>=self.exitAfter)[NSApp terminate:nil];
+}
 @end
+namespace {
+// Guest mode: boot the guest to its first Present, then hand it to the view.
+int run_guest(const Options& o){
+    std::ifstream f(o.game_dir+"/sonic.exe",std::ios::binary);if(!f){std::fprintf(stderr,"cannot read %s/sonic.exe\n",o.game_dir.c_str());return 2;}
+    std::string error;const auto image=sadx::ExecutableImage::parse({std::istreambuf_iterator<char>(f),{}},&error);if(!image){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
+    auto process=sadx::HleProcess::create(o.game_dir,"build/sadx-app-overlay",&error);if(!process){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
+    process->use_real_cpp_runtime(o.system_dir);process->hle().set_logging(false);
+    if(!process->map_main(*image,&error)){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
+    sadx::FpuShimStats shims;if(!sadx::install_fpu_shims(process->guest(),sadx::load_fpu_sites("reference/inventory/fpu-sites.json"),shims,&error)){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
+    process->on_present=[](sadx::X86Guest& g){g.pause();};
+    const auto first=process->guest().call(0x643f96,{});
+    std::string stop;if(!first.paused){std::fprintf(stderr,"the guest did not reach its first Present: %s\n",first.error.c_str());return 4;}
+    [NSApplication sharedApplication];[NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
+    id<MTLDevice> device=MTLCreateSystemDefaultDevice();if(!device){std::fprintf(stderr,"no Metal device\n");return 3;}
+    auto renderer=sadx::MetalGuestFrameRenderer::create(device,&error);if(!renderer){std::fprintf(stderr,"shader: %s\n",error.c_str());return 3;}
+    NSWindow* window=[[NSWindow alloc] initWithContentRect:NSMakeRect(0,0,1280,960) styleMask:NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|NSWindowStyleMaskMiniaturizable backing:NSBackingStoreBuffered defer:NO];
+    window.title=@"sadx-macos — guest: sonic.exe with the speedrun profile";
+    SADXAppView* view=[[SADXAppView alloc] initWithFrame:NSMakeRect(0,0,1280,960) device:device];
+    view.colorPixelFormat=MTLPixelFormatBGRA8Unorm;view.depthStencilPixelFormat=MTLPixelFormatDepth32Float;view.framebufferOnly=NO;view.preferredFramesPerSecond=63;view.drawableSize=CGSizeMake(640,480);view.autoResizeDrawable=NO;
+    view.queue=[device newCommandQueue];view.exitAfter=o.exit_after;view.screenshot=o.screenshot.empty()?nil:[NSString stringWithUTF8String:o.screenshot.c_str()];
+    view.guest=process.get();view.guestRenderer=renderer.get();view.guestStop=&stop;window.contentView=view;
+    NSTextField* status=[NSTextField labelWithString:@"Guest"];status.font=[NSFont monospacedSystemFontOfSize:11 weight:NSFontWeightRegular];
+    status.textColor=[NSColor colorWithWhite:0.9 alpha:1];status.backgroundColor=[NSColor colorWithWhite:0 alpha:0.55];status.drawsBackground=YES;
+    status.frame=NSMakeRect(8,8,1264,36);[view addSubview:status];view.status=status;
+    [window center];[window makeKeyAndOrderFront:nil];[NSApp activateIgnoringOtherApps:YES];
+    [NSApp run];
+    std::printf("guest assumptions (%zu):\n",process->assumptions.size());for(const auto& a:process->assumptions)std::printf("  %s\n",a.c_str());
+    return view.guestStopped&&o.exit_after>0&&view.framesDrawn<o.exit_after?5:0;
+}
+}
 int main(int argc,char** argv){
-    Options o;if(!parse(argc,argv,o)){std::fprintf(stderr,"usage: %s SONIC.EXE INPUT_MOD.DLL [--frames N] [--survey|--stop] [--exit-after N] [--screenshot out.ppm]\n",argv[0]);return 2;}
+    Options o;if(!parse(argc,argv,o)){std::fprintf(stderr,"usage: %s --guest GAME_DIR WINDOWS_SYSTEM_DIR [--exit-after N] [--screenshot out.ppm]\n       %s SONIC.EXE INPUT_MOD.DLL [--frames N] [--survey|--stop] [--exit-after N] [--screenshot out.ppm]\n",argv[0],argv[0]);return 2;}
+    if(o.guest){@autoreleasepool{return run_guest(o);}}
     @autoreleasepool{
         sadx::MacPerformanceCounter counter;
         const auto policy=o.survey?sadx::OwnerPolicy::survey_unported_as_noop:sadx::OwnerPolicy::stop_at_unported;

@@ -85,13 +85,16 @@ build/libsadx-guest.a: $(GUEST_OBJECTS)
 # Programs (src/apps).
 build/sadx-boot: src/apps/sadx_boot.cpp build/libsadx-macos.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/libsadx-macos.a build/libsadx-core.a -o $@
-build/sadx-app: src/apps/sadx_app.mm build/libsadx-macos.a build/libsadx-core.a
-	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-macos.a build/libsadx-core.a $(MAC_FRAMEWORKS) -o $@
+build/sadx-app: src/apps/sadx_app.mm build/libsadx-macos.a build/libsadx-guest.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) -I$(UNICORN_DIR)/include $< build/libsadx-macos.a $(GUEST_LINK) build/libsadx-core.a $(MAC_FRAMEWORKS) -o $@
 build/sadx-metal: src/apps/metal_stage.mm Makefile | build
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $< -framework Foundation -framework Metal -framework CoreGraphics -framework GameController -o $@
-# The window smoke test of the roadmap (M2 app-smoke): 120 frames, a screenshot, exit 0.
+# The window smoke test of the roadmap (M2 app-smoke): the guest in the app for 120 frames, a screenshot, exit 0
+# (in the gate; it opens a window, so the gate needs a logged-in GUI session).
+REFERENCE_GAME_DIR ?= reference/updated-pc-reference/game
+WINDOWS_SYSTEM_DIR ?= reference/windows-system
 app-smoke: build/sadx-app
-	./build/sadx-app "$(GAME_EXE)" "$(INPUT_MOD_DLL)" --frames 5 --survey --exit-after 120 --screenshot build/app-smoke.ppm > build/app-smoke.log && test -s build/app-smoke.ppm
+	./build/sadx-app --guest "$(REFERENCE_GAME_DIR)" "$(WINDOWS_SYSTEM_DIR)" --exit-after 120 --screenshot build/app-smoke.ppm > build/app-smoke.log && test -s build/app-smoke.ppm && python3 tools/gate/check_app_smoke.py build/app-smoke.ppm build/app-smoke.log
 
 assets:
 	python3 tools/lib/extract.py "$(GAME_EXE)" --output build/assets
@@ -148,7 +151,7 @@ check:
 	python3 tools/gate/check_profile_patches.py
 	python3 tools/gate/check_repo_hygiene.py
 # The full gate command recorded by tools/gate/record_gate.py (every program built and run, then the checkers).
-gate: all test probes $(UNIT_MM_TARGETS) check
+gate: all test probes $(UNIT_MM_TARGETS) check app-smoke
 status:
 	python3 tools/gate/gen_status.py
 clean:

@@ -133,8 +133,11 @@ void register_hle_d3d8(HleProcess& p){
         b["TestCooperativeLevel"]=[](HleCall&)->std::uint32_t{return D3D_OK;};
         b["BeginScene"]=[&d3d8](HleCall&)->std::uint32_t{++d3d8.begin_scenes;return D3D_OK;};
         b["EndScene"]=[&d3d8](HleCall&)->std::uint32_t{++d3d8.end_scenes;return D3D_OK;};
-        b["Clear"]=[&d3d8,arg](HleCall& c)->std::uint32_t{++d3d8.clears;d3d8.last_clear_flags=arg(c,3);return D3D_OK;};
-        b["Present"]=[P,&d3d8](HleCall& c)->std::uint32_t{++d3d8.presents;if(P->on_present)P->on_present(c.guest);return D3D_OK;};
+        b["Clear"]=[P,&d3d8,arg](HleCall& c)->std::uint32_t{++d3d8.clears;d3d8.last_clear_flags=arg(c,3);
+            if(arg(c,1)){c.guest.stop("IDirect3DDevice8::Clear of sub-rectangles is not modelled");return 0;}
+            P->frame.clears.push_back({arg(c,3),arg(c,4),arg(c,5),arg(c,6)});return D3D_OK;}; // flags, colour, Z (float bits), stencil
+        b["Present"]=[P,&d3d8](HleCall& c)->std::uint32_t{++d3d8.presents;P->frame.viewport=d3d8.viewport;P->last_frame=std::move(P->frame);P->frame={};
+            if(P->on_present)P->on_present(c.guest);return D3D_OK;};
         b["SetRenderState"]=[&d3d8,arg](HleCall& c)->std::uint32_t{d3d8.render_states[arg(c,1)]=arg(c,2);++d3d8.render_calls;return D3D_OK;};
         b["GetRenderState"]=[&d3d8,arg](HleCall& c)->std::uint32_t{
             const auto i=d3d8.render_states.find(arg(c,1));if(i==d3d8.render_states.end()){c.guest.stop("GetRenderState("+std::to_string(arg(c,1))+") before any SetRenderState: the device's default is not modelled");return 0;}
@@ -157,7 +160,7 @@ void register_hle_d3d8(HleProcess& p){
             if(!d3d8.viewport){ // D3D8's default: the whole render target, Z 0..1
                 const auto t=bound->back_buffer;const std::uint32_t v[6]={0,0,field(c.guest,t,8),field(c.guest,t,12),0,0x3f800000U};c.guest.write(arg(c,1),v,24);return D3D_OK;}
             c.guest.write(arg(c,1),d3d8.viewport->data(),24);return D3D_OK;};
-        b["SetVertexShader"]=[&d3d8](HleCall&)->std::uint32_t{++d3d8.vertex_formats;return D3D_OK;};
+        b["SetVertexShader"]=[P,&d3d8,arg](HleCall& c)->std::uint32_t{++d3d8.vertex_formats;P->vertex_shader=arg(c,1);return D3D_OK;}; // D3D8: an FVF code is a shader handle
         b["SetTexture"]=[&d3d8](HleCall&)->std::uint32_t{++d3d8.texture_binds;return D3D_OK;};
         b["ShowCursor"]=[](HleCall&)->std::uint32_t{return 1;};
         const auto add_ref=[](X86Guest& g,std::uint32_t o){if(o)g.set_u32(o+4,g.u32(o+4).value_or(0)+1);};
@@ -184,10 +187,14 @@ void register_hle_d3d8(HleProcess& p){
         // Draws are recorded (counts; DrawPrimitiveUP bytes as polygons, the native owner's form).
         b["DrawPrimitive"]=[&d3d8](HleCall&)->std::uint32_t{++d3d8.render_calls;return D3D_OK;};
         b["DrawIndexedPrimitive"]=[&d3d8](HleCall&)->std::uint32_t{++d3d8.render_calls;return D3D_OK;};
-        b["DrawPrimitiveUP"]=[&d3d8,arg](HleCall& c)->std::uint32_t{
+        b["DrawPrimitiveUP"]=[P,&d3d8,arg,bound](HleCall& c)->std::uint32_t{
             const auto type=arg(c,1),count=arg(c,2),stride=arg(c,4);const auto vertices=type==6||type==5?count+2:type==4?count*3:type==3?count+1:type==2?count*2:count;
             NinjaScreenPolygon poly;poly.primitive_type=type;poly.primitive_count=count;poly.stride=stride;poly.vertex_bytes.resize(static_cast<std::size_t>(vertices)*stride);
-            c.guest.read(arg(c,3),poly.vertex_bytes.data(),poly.vertex_bytes.size());d3d8.polygons.push_back(std::move(poly));return D3D_OK;};
+            c.guest.read(arg(c,3),poly.vertex_bytes.data(),poly.vertex_bytes.size());
+            HleProcess::D3D8Draw draw;draw.primitive_type=type;draw.primitive_count=count;draw.fvf=P->vertex_shader;draw.stride=stride;draw.vertices=poly.vertex_bytes;
+            draw.texture=bound->textures.count(0)?bound->textures[0]:0;draw.render_states=d3d8.render_states;draw.stage0_states=d3d8.stage0_states;
+            P->frame.draws.push_back(std::move(draw));
+            d3d8.polygons.push_back(std::move(poly));return D3D_OK;};
         b["DrawIndexedPrimitiveUP"]=[&d3d8](HleCall&)->std::uint32_t{++d3d8.render_calls;return D3D_OK;};
         // Resources.
         b["CreateTexture"]=[P,texture_interface,new_surface,arg](HleCall& c)->std::uint32_t{

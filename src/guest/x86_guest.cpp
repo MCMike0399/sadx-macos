@@ -156,6 +156,16 @@ bool X86Guest::add_write_watch(std::uint32_t begin,std::uint32_t end,WriteWatch 
     if(rc!=UC_ERR_OK)return fail(error,std::string("uc_hook_add: ")+uc_strerror(rc));
     return true;
 }
+void X86Guest::pause(){pause_requested_=true;uc_emu_stop(engine(uc_));}
+GuestCallResult X86Guest::resume(std::uint64_t timeout){
+    GuestCallResult r;stopped_.reset();pause_requested_=false;
+    const auto rc=uc_emu_start(engine(uc_),reg(UC_X86_REG_EIP),stop_address_,timeout,0);
+    r.eax=reg(UC_X86_REG_EAX);r.eip=reg(UC_X86_REG_EIP);r.esp=reg(UC_X86_REG_ESP);
+    if(stopped_){r.error=*stopped_;stopped_.reset();return r;}
+    if(pause_requested_){pause_requested_=false;r.paused=true;r.error="paused";return r;}
+    if(rc!=UC_ERR_OK){r.error=uc_strerror(rc);return r;}
+    r.completed=r.eip==stop_address_;if(!r.completed)r.error="stopped at the time limit";return r;
+}
 void X86Guest::stop(std::string error){stopped_=std::move(error);uc_emu_stop(engine(uc_));}
 std::uint32_t X86Guest::esp()const{return reg(UC_X86_REG_ESP);}
 std::uint32_t X86Guest::eip()const{return reg(UC_X86_REG_EIP);}
@@ -182,10 +192,11 @@ GuestCallResult X86Guest::run(std::uint32_t from,std::uint32_t until,std::uint16
     const std::uint32_t esp=stack_base_+stack_size_-0x1000-4;write(esp,&stop_address_,4);
     set_reg(UC_X86_REG_ESP,esp);set_reg(UC_X86_REG_EBP,esp);
     std::uint32_t cw=control_word,sw=0,tag=0xffff;uc_reg_write(engine(uc_),UC_X86_REG_FPCW,&cw);uc_reg_write(engine(uc_),UC_X86_REG_FPSW,&sw);uc_reg_write(engine(uc_),UC_X86_REG_FPTAG,&tag);
-    stopped_.reset();
+    stopped_.reset();pause_requested_=false;
     const auto rc=uc_emu_start(engine(uc_),from,until,timeout,0);
     r.eax=reg(UC_X86_REG_EAX);r.eip=reg(UC_X86_REG_EIP);r.esp=reg(UC_X86_REG_ESP);
     if(stopped_){r.error=*stopped_;stopped_.reset();return r;}
+    if(pause_requested_){pause_requested_=false;r.paused=true;r.error="paused";return r;}
     if(rc!=UC_ERR_OK){r.error=uc_strerror(rc);return r;}
     r.completed=r.eip==until;
     if(!r.completed)r.error="stopped at the time limit";
@@ -203,10 +214,11 @@ GuestCallResult X86Guest::call(std::uint32_t address,std::initializer_list<std::
     if(ecx)set_reg(UC_X86_REG_ECX,*ecx);if(edx)set_reg(UC_X86_REG_EDX,*edx);
     std::uint32_t cw=control_word,sw=0,tag=0xffff;uc_reg_write(engine(uc_),UC_X86_REG_FPCW,&cw);uc_reg_write(engine(uc_),UC_X86_REG_FPSW,&sw);uc_reg_write(engine(uc_),UC_X86_REG_FPTAG,&tag);
     std::uint32_t mxcsr=0x1f80;uc_reg_write(engine(uc_),UC_X86_REG_MXCSR,&mxcsr);
-    stopped_.reset();
+    stopped_.reset();pause_requested_=false;
     const auto rc=uc_emu_start(engine(uc_),address,stop_address_,timeout,0);
     r.eax=reg(UC_X86_REG_EAX);r.eip=reg(UC_X86_REG_EIP);r.esp=reg(UC_X86_REG_ESP);
     if(stopped_){r.error=*stopped_;stopped_.reset();return r;}
+    if(pause_requested_){pause_requested_=false;r.paused=true;r.error="paused";return r;}
     if(rc!=UC_ERR_OK){r.error=uc_strerror(rc);return r;}
     r.completed=r.eip==stop_address_;
     if(!r.completed)r.error="stopped at the time limit";

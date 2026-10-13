@@ -17,9 +17,9 @@ from that file when fixed (a stale exception fails the check).
 | `player` | player physics, collision, animation, Sonic, the scene input producer | … input |
 | `game` | WinMain, library init, startup, game loop, modes and leaves, resets, views, window, sound bookkeeping, model DLL bindings, mod loader frame, Win32 profile | … player |
 | `runtime` | `NativeGame` (composition of every ported owner, boot + frame loop) and `GameSession` (shared by the CLI and the app) | … game |
-| `guest` | (M1) in-process x86 guest on Unicorn: image mapping, calls, override table, FPU shims | … runtime |
-| `hle` | (M1) Win32 / D3D8 / DirectInput / DirectSound implementations the guest calls: `hle_registry` binds every import of a guest image to a trap (IAT slot → trap page at 0xfe000000), runs the registered native function and logs the call; an unregistered import stops the guest with its name | … guest |
-| `platform/mac` | Metal texture/sprite backends, GameController input, the virtual 10 MHz clock | … hle |
+| `guest` | (M1) in-process x86 guest on Unicorn: image mapping, calls, continuations (`redirect`), pause/resume, the override table (`override_table`), FPU shims (`fpu_shims`) | … runtime |
+| `hle` | (M1) the guest's Windows: `hle_registry` (imports → traps, call log), `hle_modules` (LoadLibrary & co., DLL linking), `hle_process` (one guest process, TEB/PEB, overlay, assumptions), `hle_kernel32`, `hle_crt` (+`hle_printf`, `hle_text`), `hle_user32` (headless window system), `hle_com`, `hle_dinput`, `hle_d3d8`. An unmodelled import stops the guest with its name; every chosen fact is a reported assumption | … guest |
+| `platform/mac` | Metal texture/sprite backends, `metal_guest_frame` (draws a recorded guest D3D8 frame: clears, DrawPrimitiveUP with guest textures, blending, depth), GameController input, the virtual 10 MHz clock | … hle |
 | `apps` | executables only: `sadx_boot.cpp` (headless CLI), `sadx_app.mm` (AppKit window), `metal_stage.mm` (asset viewer), `diagnostics/` (one-off HID/GameController probes, not built by default) | everything |
 
 Archives: `libsadx-core.a` = cpu…runtime (portable, no frameworks), `libsadx-macos.a` =

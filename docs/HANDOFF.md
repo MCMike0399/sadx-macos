@@ -1716,3 +1716,27 @@ recorded in its limits); test `tests/unit/guest_frames.cpp` (`guest-frames`, 300
 * Frontier: at frame 389 the intro FMV builds a DirectShow FilterGraph (CoCreateInstance of
   CLSID_FilterGraph stops by name). Next: a headless DirectShow model for the FMVs (duration from the file,
   completion events on the virtual clock), then the title screen and input.
+
+## Step 5: sadx-app shows the guest; app-smoke in the gate (2026-10-13)
+
+Evidence: gate `reference/production-integration-20261012/app-guest-111-gate.json` (rc 0; `make gate` now runs
+`app-smoke`).
+
+* `sadx-app --guest GAME_DIR WINDOWS_SYSTEM_DIR`: the guest boots (FPU shims on, call log off) and pauses at
+  every Present (`X86Guest::pause/resume`); the view draws the frame the guest just closed and resumes it.
+  The native-boot mode is unchanged.
+* The D3D8 HLE records each frame (`HleProcess::frame / last_frame`): every Clear (flags, colour, Z, stencil)
+  and every DrawPrimitiveUP with its FVF, vertex bytes, the stage-0 texture object and the render/stage-0 state.
+* `src/platform/mac/metal_guest_frame` draws it: XYZRHW+DIFFUSE(+SPECULAR)(+TEX1) vertices, lists/strips/fans,
+  stage-0 textures decoded from the guest surfaces (A8R8G8B8, X8R8G8B8, R5G6B5, X1R5G5B5, A1R5G5B5, A4R4G4B4),
+  COLOROP/ALPHAOP MODULATE/SELECTARG1/2, alpha blending, **depth testing** (the SEGA screen's white fade quad
+  sits at z 0.909 behind the logo tiles at 0.091 with LESSEQUAL — without depth it covered everything), point/
+  linear filtering, wrap/clamp. Anything else is counted as "not drawn" with its reason.
+* Result: **the window shows "PRESENTED BY SEGA" (frame ~120) and "CREATED BY SONIC TEAM" (frame ~340)** drawn from
+  sonic.exe's own D3D8 commands and textures in the guest, at ~63 fps.
+* `make app-smoke` (in the gate): 120 guest frames, `tools/gate/check_app_smoke.py` checks the log (all frames,
+  nothing undrawn, no stop) and the screenshot (640x480, white > 80 %, blue logo > 2,000 px).
+* Deviation from the prompt: sprites are not drawn through `platform/mac/metal_sprite` — that backend consumes
+  natively decoded PVM archives (`MetalTextureResource`), while the guest's textures are D3D8 surfaces in guest
+  memory; `metal_guest_frame` is the guest-side renderer. Unifying the two is future work.
+* Limits: the gate now needs a GUI session (it opens a window); screenshots are game imagery and stay in build/.

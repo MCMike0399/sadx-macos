@@ -52,6 +52,13 @@ public:
     // Direct3D 8: the recorded device state (the native runtime's owner type), the D3DPRESENT_PARAMETERS words
     // of CreateDevice, and a hook run on every IDirect3DDevice8::Present (tests stop the guest there).
     D3D8StateOwner d3d8;std::vector<std::uint32_t> d3d8_presentation;std::function<void(X86Guest&)> on_present;
+    // The frame being recorded since the last Present (and the last complete one): every Clear and every
+    // DrawPrimitiveUP with its FVF, vertex bytes, stage-0 texture object and the render/stage-0 state at the draw.
+    struct D3D8Draw {std::uint32_t primitive_type=0,primitive_count=0,fvf=0,stride=0,texture=0;std::vector<std::uint8_t> vertices;
+        std::map<std::uint32_t,std::uint32_t> render_states,stage0_states;};
+    struct D3D8Clear {std::uint32_t flags=0,color=0,z_bits=0,stencil=0;};
+    struct D3D8Frame {std::vector<D3D8Clear> clears;std::vector<D3D8Draw> draws;std::optional<std::array<std::uint32_t,6>> viewport;};
+    D3D8Frame frame,last_frame;std::uint32_t vertex_shader=0;
     std::map<std::string,std::string> environment_variables; // names compared case-insensitively (stored upper-case)
     std::map<std::uint32_t,std::uint32_t> tls;std::uint32_t next_tls=0;std::set<std::uint32_t> heaps;std::uint32_t process_heap=0;std::uint32_t command_line_a_env=0;
     std::uint32_t errno_address=0,iob_address=0,narrow_argv=0,environment=0,command_line_w=0,command_line_a=0;
