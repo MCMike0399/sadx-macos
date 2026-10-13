@@ -49,7 +49,7 @@ void test(int argc,char** argv){
     (**list->entries)[0]=std::shared_ptr<const NinjaTextureMemoryReference>(memory);(**list->entries)[ordinal]=std::shared_ptr<const NinjaTextureMemoryReference>(memory);list->first_filename_is_invalid_sentinel=false;
     selection.current_list_at_3d0fa24=std::shared_ptr<NinjaTextureListOwner>{};selection.requested_memory_at_3ce7128=std::shared_ptr<const NinjaTextureMemoryReference>{};
     selection.active_memory_at_3d129a0=std::shared_ptr<const NinjaTextureMemoryReference>{};selection.global_id_at_3d0fdf4=99;
-    NinjaMatrixStack stack({unit},1,0);PlayerCoordinates coordinates(table,unit,stack);X87Context fp(0x7f); // capture-tied main-thread CW candidate
+    NinjaMatrixStack stack({unit},1,0);NinjaMatrixPrimitives coordinates(table,unit,stack);X87Context fp(0x7f); // capture-tied main-thread CW candidate
     NinjaSpriteProjection projection{&coordinates,1e-6F,32,32,{}};
     NinjaSpriteDisplayRuntime display{projection,selection,texture_runtime,constants,{},{},{}};
     display.set_vertex_format=[&](const auto& c){check(c.format==0x144,"screen FVF");return NinjaRenderCallResult{true,{}};};

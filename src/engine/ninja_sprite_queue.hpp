@@ -157,7 +157,7 @@ public:
     const std::shared_ptr<NinjaRenderQueueArena>& arena()const noexcept{return arena_;}
     NinjaQueueResult allocate_record(std::uint32_t size,std::uint8_t type,std::uint8_t flags,std::uint32_t eax_value,NinjaSpriteQueueRuntime&); //403f60
     NinjaQueueResult insert(const NinjaQueueRecordHandle&,float depth,std::uint32_t policy,NinjaSpriteQueueRuntime&,X87Context&); //403e80
-    NinjaSpriteSubmissionResult submit(const std::optional<std::shared_ptr<const NinjaQueuedSpriteInput>>&,std::optional<bool> source_pointer_domain,std::int32_t frame_index,std::uint32_t sprite_flags,std::uint32_t queue_flags,NinjaSpriteQueueRuntime&,PlayerCoordinates*,X87Context&); //404760 queued route
+    NinjaSpriteSubmissionResult submit(const std::optional<std::shared_ptr<const NinjaQueuedSpriteInput>>&,std::optional<bool> source_pointer_domain,std::int32_t frame_index,std::uint32_t sprite_flags,std::uint32_t queue_flags,NinjaSpriteQueueRuntime&,NinjaMatrixPrimitives*,X87Context&); //404760 queued route
     NinjaQueueBucketResult bucket_records(std::size_t)const;
     NinjaQueueBucketFrontResult bucket_front(std::size_t)const;
     bool owns_record(const NinjaQueueRecordHandle&)const noexcept;

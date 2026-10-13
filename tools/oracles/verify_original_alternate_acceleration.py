@@ -112,7 +112,7 @@ def main():
     blob=b''.join(struct.pack('<80I',*w) for w in fixtures);args.output.parent.mkdir(parents=True,exist_ok=True);args.output.with_suffix('.cases.bin').write_bytes(blob)
     address,end=((0x447010,0x44750c),(0x447510,0x447b7e),(0x447b90,0x447e54),(0x44b0e0,0x44b9b2))[variant]
     root=pathlib.Path(__file__).resolve().parents[2]
-    names=('player_acceleration_alternate','player_acceleration_alternate_math','player_acceleration_friction','player_acceleration_ground','player_rotation','player_projection','player_coordinates','player_heading','player_input','player_state','crt_acos','crt_asin','crt_integer','x87_math','x87_transcendental','ninja_math')
+    names=('player_acceleration_alternate','player_acceleration_alternate_math','player_acceleration_friction','player_acceleration_ground','player_rotation','player_projection','player_coordinates','ninja_matrix','player_heading','player_input','player_state','crt_acos','crt_asin','crt_integer','x87_math','x87_transcendental','ninja_math')
     report=dict(profile=f'actual {args.variant}/actual-yaw-matrix-callees/no-overlays',source_sha256=image.sha256,source_function=dict(address=hex(address),end_exclusive=hex(end),sha256=sha(image.read(address,end-address))),native_library_sha256=sha(args.library.read_bytes()),fixture_sha256=sha(blob),fixture_record='80 little-endian uint32 words',fixture_count=len(fixtures),
         native_sources={f'src/{name}.{ext}':sha((native_source(root,f'src/{name}.{ext}')).read_bytes()) for name in names for ext in ('cpp','hpp')},
         native_contracts={f'src/{name}.hpp':sha((native_source(root,f'src/{name}.hpp')).read_bytes()) for name in ('player_acceleration','player_physics','player_task','player_rotation_result')},

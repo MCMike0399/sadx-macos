@@ -20,7 +20,7 @@ extern "C" int sadx_native_ninja_queue_consumer(const std::uint8_t* assets,std::
     sadx::NinjaMath::SineTable table;std::memcpy(table.data(),assets+128,4100);sadx::NinjaMatrix unit;std::memcpy(&unit,assets+4228,64);
     std::array<std::uint32_t,4> returns;std::memcpy(returns.data(),assets+4292,16);
     sadx::NinjaMatrix matrix=unit;matrix[12]=as_float(in[59]);matrix[13]=as_float(in[60]);matrix[14]=as_float(in[61]);
-    sadx::NinjaMatrixStack stack({matrix},1,0);sadx::PlayerCoordinates coordinates(table,unit,stack);sadx::X87Context fp(static_cast<std::uint16_t>(in[0]));
+    sadx::NinjaMatrixStack stack({matrix},1,0);sadx::NinjaMatrixPrimitives coordinates(table,unit,stack);sadx::X87Context fp(static_cast<std::uint16_t>(in[0]));
     std::vector<std::array<std::uint32_t,5>> trace;
     sadx::NinjaRenderState render;auto device=std::make_shared<sadx::NinjaRenderDevice>();device->identity=1;render.device_at_3d128b0=device;render.packed_blend_at_3ab9890=static_cast<std::uint8_t>(in[62]);render.blend_tables=&*blend;
     render.set_render_state=[&](const auto& c){trace.push_back({0xc8,c.source_call,c.state,c.value,0});return sadx::NinjaRenderCallResult{true,0};};

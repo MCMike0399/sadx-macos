@@ -6,7 +6,7 @@
   "record_count": 480,
   "records_sha256": "9038e702dd37997d42f580cd2eaa46f9077bf6343b3f4a70d1ff64403b579ad1"
  },
- "library_sha256": "c28e9fb04b8ef8e11825191e570c5d486e3dec6caa7982933c21b8dcd3476097",
+ "library_sha256": "2d651b05ff4a9336efd7e2a738ba9fb0e2591622aeb284bb0d9f59936b7db412",
  "compiler": "Clang 21.0.0 (clang-2100.3.34.2); ARM64 C++17 O2 software x87; actual PE32 landtable decode",
  "native_sources": {
   "src/player_scene_decode.hpp": "78b98a172e0d8a6ee235fde19a05c6b80dc09e1cc61cb6db4650690d85620d70",
@@ -15,8 +15,10 @@
   "src/player_scene_registration.cpp": "d11f264669d75203e764fb926610d6f5f861a8fce163f76e6c8a3311d54ed3dd",
   "src/player_scene_broadphase.hpp": "9fa80b714b61a36f01d404b128f2d56039ff912839f18051e117976abc0edf1c",
   "src/player_scene_broadphase.cpp": "f1219a05e68bfe201d8b144bbabd0234f6c4a1ce4bb91245efa4e5931e93f96d",
-  "src/player_coordinates.hpp": "5d5cfa3e2965997baf122f6ea263f2104c1e2698ba48373e06628f54ad83b1a7",
-  "src/player_coordinates.cpp": "b375c24b44a6efb65954c6a52d3338b86a6e250d8a4b1ab6b190168d75024663",
+  "src/player_coordinates.hpp": "322331b4ca9a51e4a58a8133d9c1a323e7a223d84cbe44f83f029540a65057c0",
+  "src/player_coordinates.cpp": "9727e8a6fb00ed7f1db362be426821405767b895e08f698b8ad231f2de578090",
+  "src/ninja_matrix.hpp": "97ddcdb7b4f08e6a46d181b8f9d034a26762e62248cbb0643b34d55c61696a90",
+  "src/ninja_matrix.cpp": "7045d50d871e7853935b7301ac90473bb06536f14c7b010ce7f75562d5b09bc4",
   "src/ninja_math.hpp": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
   "src/ninja_math.cpp": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
   "src/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
@@ -24,7 +26,7 @@
   "src/player/player_scene_resources.hpp": "87a118d948493bee0819900f83637ecd58f6d2bcf5422b45fd4c7ab374a3e52b",
   "tests/probes/native_player_scene_probe.cpp": "65a03499f679229979558b676bd8834592f60c8cb2a20370043cf2f9ef5901b1"
  },
- "verifier_sha256": "e7921b4b90d0a3e3118c74f32f4b7382f051a01a80f07286888c06063cb4cc54",
+ "verifier_sha256": "e77ec6e64fedbf25ecf6a74e1ad5464bd1b4079baee2df2b3baa7a2c5a61f86f",
  "fixture_sha256": "dc7e0bc5e4c3dd420d80503ee3a16bcbd0551dba7d3fd0250009f2e2074dcee3",
  "fixture_count": 480,
  "control_words": [
@@ -125,8 +127,8 @@
  ],
  "values_match": true,
  "tracked_summary": {
-  "full_sha256": "53a96f3131879004b4a938ebef24a259f2034b05dbfefdecf19aacef78addcc2",
-  "full_bytes": 4607,
+  "full_sha256": "a56693e7ee400ccc14d64a0d0e00c0a0dc43eb1a2fcaa7cc59e7721367822943",
+  "full_bytes": 4799,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

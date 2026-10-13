@@ -2,7 +2,7 @@
  "profile": "actual453820,explicitselected real/local+synthetictriangles; nooverlays",
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
  "source_function_sha256": "7853bf38d1d5521e835ea3070c295a38df4ffd920aaa54490630333f49902f26",
- "native_library_sha256": "5409612ce46e3ce52133f234bbaee4b2c637c8307105274382ece3094d565643",
+ "native_library_sha256": "ec35757adb7ff3ef985af63caf4b03d1ddc85aed90ed613e72d91db1f88d90c7",
  "compiler": "Clang 21.0.0 (clang-2100.3.34.2); ARM64 C++17 O2; actual453820 native owner/software x87",
  "native_sources": {
   "src/player_mesh_query.hpp": "8f787f09c4f3fc44bb833a7616a4e07f57ee85cd57f1b673a06591b3258ecfe7",
@@ -11,8 +11,10 @@
   "src/player_mesh_math.cpp": "c004d7b4adb38f2ddae67349ffea167647731088b58c29a49a7acd61c912f0f3",
   "src/player_mesh_matrix.hpp": "8a3834fa1b22b686f195cfa8c84105a9a64187089b725f21a650702b33631031",
   "src/player_mesh_matrix.cpp": "d471c45ce938663118cf792a8740e29d596c4172f5f22dbdde27f8bedc2a0fd2",
-  "src/player_coordinates.hpp": "5d5cfa3e2965997baf122f6ea263f2104c1e2698ba48373e06628f54ad83b1a7",
-  "src/player_coordinates.cpp": "b375c24b44a6efb65954c6a52d3338b86a6e250d8a4b1ab6b190168d75024663",
+  "src/player_coordinates.hpp": "322331b4ca9a51e4a58a8133d9c1a323e7a223d84cbe44f83f029540a65057c0",
+  "src/player_coordinates.cpp": "9727e8a6fb00ed7f1db362be426821405767b895e08f698b8ad231f2de578090",
+  "src/ninja_matrix.hpp": "97ddcdb7b4f08e6a46d181b8f9d034a26762e62248cbb0643b34d55c61696a90",
+  "src/ninja_matrix.cpp": "7045d50d871e7853935b7301ac90473bb06536f14c7b010ce7f75562d5b09bc4",
   "src/floor_angles.hpp": "22c502da8a5e4837735c57cdd080458adb2c460176c1c694bd08df187c8482f6",
   "src/floor_angles.cpp": "8eff4d8e5363260bd73ecb965de0e78e0105abda96e82f28943a183ccbdcd80b",
   "src/crt_atan2.hpp": "886e2d5c0d43bebef1aeac32ab617411f963cb9b8126c8e3fb67b1309af03694",
@@ -30,7 +32,7 @@
   "src/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
   "src/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8"
  },
- "verifier_sha256": "784d5d7728890c4dafd460f31aa3df13e43cdf3154d86f10dfd54b57d524a09f",
+ "verifier_sha256": "392e711b12912178efaab02bd2802f6ae3f469f70b58604ff0f36aea614aaf19",
  "fixture_sha256": "a80e585e4467bcdd50f9db3a813f449c5a6677dd32aeb68ee3d4c2bf7fac28d6",
  "fixtures": 331,
  "profiles": [
@@ -104,8 +106,8 @@
  ],
  "values_match": true,
  "tracked_summary": {
-  "full_sha256": "26f43ca9e681c744515a2060767ead0d6d69c203c1de67f1e5ab2e567a53eaad",
-  "full_bytes": 4718,
+  "full_sha256": "68843880c20924b7747a7c02e29c0f52a8629598869f92f2eef90b2df130f809",
+  "full_bytes": 4910,
   "lists_cut_to": 10,
   "cut_lists": {
    "profiles": 12

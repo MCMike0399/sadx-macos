@@ -6,7 +6,7 @@
   "size": 2933,
   "sha256": "1282dd5c69b6bc2bf4978a834517a23a18c1d3a0d0a8b27553ccef35d73756f1"
  },
- "native_library_sha256": "1abc5dc61637fdbc9f9b179c613f75847c72bbb33e5cc25503a5dfadb0b55a23",
+ "native_library_sha256": "7bb43333d00964d0af260d92c3098348562595e26326e62f63ea03cee73ce34d",
  "fixture_sha256": "e0631b7959531377f4072279fcb719259d39013eaa39f77144d96bf43fb7e2d3",
  "controlled_callees": [
   "0x4491e0",
@@ -28,8 +28,10 @@
  "native_sources": {
   "src/player_acceleration_ground.hpp": "5ae622e467675d30addebb5d36395b7799b0e8b786ea51cc1fe00a161da93ad2",
   "src/player_acceleration_ground.cpp": "95ac6dd7dfd1507279d58986a1e5aa9bf67dd29d5b9e39f473473004ed6568d0",
-  "src/player_coordinates.hpp": "5d5cfa3e2965997baf122f6ea263f2104c1e2698ba48373e06628f54ad83b1a7",
-  "src/player_coordinates.cpp": "b375c24b44a6efb65954c6a52d3338b86a6e250d8a4b1ab6b190168d75024663",
+  "src/player_coordinates.hpp": "322331b4ca9a51e4a58a8133d9c1a323e7a223d84cbe44f83f029540a65057c0",
+  "src/player_coordinates.cpp": "9727e8a6fb00ed7f1db362be426821405767b895e08f698b8ad231f2de578090",
+  "src/ninja_matrix.hpp": "97ddcdb7b4f08e6a46d181b8f9d034a26762e62248cbb0643b34d55c61696a90",
+  "src/ninja_matrix.cpp": "7045d50d871e7853935b7301ac90473bb06536f14c7b010ce7f75562d5b09bc4",
   "src/player_heading.hpp": "42df76e4801ce3d90ec1ce2a06bff00a328f05a0e13979d2f8d0d7487e8aaf1c",
   "src/player_heading.cpp": "c109cb4370cc006d0ddb7186cf9a8ab1396aa64fb61fed45b7a1b8b46dc6e491",
   "src/player_input.hpp": "929cf1ce32c8d72a2b180354bd1287c3979494d6fb9a9ae69c645ecf7ac76603",
@@ -45,9 +47,9 @@
   "src/crt_integer.hpp": "f88d5d9b73239055150a35d0fe6363f773c7e62f5b2c1ce62eff5eaabe8333a6",
   "src/crt_integer.cpp": "18d16777cc02344275575955f7773043ea9c6b48cf0197b725e838d1c5294a92"
  },
- "native_task_owner_sha256": "ed87e810477ddf9f81d4e4e450af20111a885cc66dae4285e1eaa490bb17b957",
+ "native_task_owner_sha256": "ca3b911db75e90e2ddabc2a4bef3e4fae6578c0405f864001c2e68162e07650d",
  "native_probe_sha256": "a6c26229db849e83942403311f28f1972a46f231178f2226fd2eb8cd30d37820",
- "verifier_sha256": "527683a2a2ad30518d7848efa6b79bb7ed16c613881ae661ae2aca0dd885862d",
+ "verifier_sha256": "81ae4f31dd26b208d67f8ee7ad7254c58c44c66527b810884933b2eaa3238840",
  "native_compiler": "Clang 21.0.0 (clang-2100.3.34.2); target arm64; native integer x87 arithmetic",
  "declared_build_profile": "arm64 C++17 O2 ff-contract=off fno-fast-math native SoftFloat/Bochs",
  "quarter_table_sha256": "3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed",
@@ -752,8 +754,8 @@
  ],
  "local_values_and_call_selections_match": true,
  "tracked_summary": {
-  "full_sha256": "8c7e79456c76f1bfb47c93a23e68c0dd08d6e509acec7dcc3dc4709104903c08",
-  "full_bytes": 68892329,
+  "full_sha256": "301ce25a5d79f90c51b8888ca7597e54c65bf1a9aad37d914c58889cd5ffad26",
+  "full_bytes": 68892521,
   "lists_cut_to": 10,
   "cut_lists": {
    "mismatches": 29952,

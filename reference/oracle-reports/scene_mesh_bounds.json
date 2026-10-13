@@ -5,21 +5,23 @@
   "0x450c10": "41bad9664754476e14cb0790fae22d075df0bf781240c514500f0fe7145a9781",
   "0x43acd0": "74eefc4e38ba9ab8bf624ecaea0751017d1ef8eec28031295801b41f9ab3acb9"
  },
- "library_sha256": "c28e9fb04b8ef8e11825191e570c5d486e3dec6caa7982933c21b8dcd3476097",
+ "library_sha256": "2d651b05ff4a9336efd7e2a738ba9fb0e2591622aeb284bb0d9f59936b7db412",
  "compiler": "Clang 21.0.0 (clang-2100.3.34.2); ARM64 C++17 O2 software x87; actual PE32 landtable decode",
  "native_sources": {
   "src/player/player_scene_resources.hpp": "87a118d948493bee0819900f83637ecd58f6d2bcf5422b45fd4c7ab374a3e52b",
   "src/player/player_scene_broadphase.hpp": "9fa80b714b61a36f01d404b128f2d56039ff912839f18051e117976abc0edf1c",
   "src/player/player_scene_broadphase.cpp": "f1219a05e68bfe201d8b144bbabd0234f6c4a1ce4bb91245efa4e5931e93f96d",
-  "src/player/player_coordinates.hpp": "5d5cfa3e2965997baf122f6ea263f2104c1e2698ba48373e06628f54ad83b1a7",
-  "src/player/player_coordinates.cpp": "b375c24b44a6efb65954c6a52d3338b86a6e250d8a4b1ab6b190168d75024663",
+  "src/player/player_coordinates.hpp": "322331b4ca9a51e4a58a8133d9c1a323e7a223d84cbe44f83f029540a65057c0",
+  "src/player/player_coordinates.cpp": "9727e8a6fb00ed7f1db362be426821405767b895e08f698b8ad231f2de578090",
+  "src/engine/ninja_matrix.hpp": "97ddcdb7b4f08e6a46d181b8f9d034a26762e62248cbb0643b34d55c61696a90",
+  "src/engine/ninja_matrix.cpp": "7045d50d871e7853935b7301ac90473bb06536f14c7b010ce7f75562d5b09bc4",
   "src/math/ninja_math.hpp": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
   "src/math/ninja_math.cpp": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
   "src/cpu/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
   "src/cpu/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8",
   "tests/probes/native_player_scene_probe.cpp": "65a03499f679229979558b676bd8834592f60c8cb2a20370043cf2f9ef5901b1"
  },
- "verifier_sha256": "7b2edefd589ea7c20a08592d326cc031d4e81449dd310ef8b83a185792966992",
+ "verifier_sha256": "3e2a35a127868330f4c9aeee70349de081cc2bf7bf47ab41143617a860f5b67a",
  "fixture_sha256": "3f523cca88a159da0e7d05b05eae23cb1114868ba73334017e33d0f3e592a547",
  "fixture_count": 249,
  "control_words": [
@@ -105,8 +107,8 @@
  ],
  "values_match": true,
  "tracked_summary": {
-  "full_sha256": "d75801d22b844a3181d433a2ed3b63cad7f7e9216a6f3fea13e00e91356836a0",
-  "full_bytes": 3621,
+  "full_sha256": "aa4427bf54fcc3cc2e3ee6f423acd64dda887e7656aaf05a5acf18a08f318a01",
+  "full_bytes": 3827,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

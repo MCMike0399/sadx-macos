@@ -36,7 +36,7 @@ struct Operation {
         case NinjaFogFailure::unmodeled_operation:case NinjaFogFailure::index_out_of_range:stop(NinjaQueueConsumerFailure::unlifted_callee,r.source_boundary,r.callee_boundary);
         }
     }
-    PlayerCoordinates& coordinates(std::uint32_t at){if(!runtime.sprite.projection.coordinates)stop(NinjaQueueConsumerFailure::missing_coordinates,at);return *runtime.sprite.projection.coordinates;}
+    NinjaMatrixPrimitives& coordinates(std::uint32_t at){if(!runtime.sprite.projection.coordinates)stop(NinjaQueueConsumerFailure::missing_coordinates,at);return *runtime.sprite.projection.coordinates;}
     void body(){
         auto& q=runtime.queue_runtime;auto& state=runtime.state;
         const auto saved_word20=q.captured_word_at_3d0f9c8,saved_word24=q.captured_word_at_3d0f840,saved_word28=q.captured_word_at_3d0f9c4,saved_mode=q.flag_at_3b12208;

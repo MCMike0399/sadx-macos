@@ -1,6 +1,6 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "cbf7cab7c419ef77a38bb54476e3a37f5451100397b2f185b8fa5eebc9a8e85a",
+ "native_library_sha256": "350f14827ab22830c7f22bfdcfe1d07faff504486060dd0bea5b265cd7e99efe",
  "table_sha256": "c852bb548014ed621db8fc5c1cbb2abfcee449e0172801438f32526a5ba32201",
  "case_blob": {
   "path": "build/oracles/player_auxiliary_effect.cases.bin",
@@ -45,12 +45,14 @@
  "native_sources": {
   "src/player/player_auxiliary_effect.cpp": "14ac88c81aef6da81cbc1444e92e1366e67fed54a7775d3cef0315825671b5ec",
   "src/player/player_auxiliary_effect.hpp": "0e3a39d8824df0136473d19ded637c2173401373eba8570d7f80df79535e09af",
-  "src/engine/task.cpp": "3bdec3d5cfb4af75195959d434a5555dececf055280259044def70e29033d9a8",
-  "src/engine/task.hpp": "06fe28e25fd8a5e2de818305639b8a9a8342216af486c23efe330ce2c2815400",
+  "src/engine/task.cpp": "b7e931c0acf62b9e8ca1f78fe0b26605f6e8be21aa5e27888080291d8e449e3b",
+  "src/player/player_task.hpp": "ca3b911db75e90e2ddabc2a4bef3e4fae6578c0405f864001c2e68162e07650d",
+  "src/player/player_task.cpp": "2e76cd51fb6d4e58e95fffb2245a76f686243035074cf331890e240e61e8bf71",
+  "src/engine/task.hpp": "56860f5aaf534b6309cd01bc6b7846078305c64d9a6c32504301254344e115b6",
   "src/engine/task_work.cpp": "b044c4dfb8c85b054216443b35d4e5a42481cf55277e8c9386c4564b4c7797d7",
   "src/player/player_startup.cpp": "2d6aacc547a36312b9969b7d44bde0f632fe3c5620eff43283c1a9c3e2294e96",
   "tests/probes/native_player_auxiliary_effect_probe.cpp": "3f1726a1171c85739de18c9d16fb7a650de9495cbd2b2645e44bb42071b863e7",
-  "tools/oracles/verify_original_player_auxiliary_effect.py": "3974c5a248c84a915795427feb7e8050ad93f65f41e63014da7d84fffdfb97b1"
+  "tools/oracles/verify_original_player_auxiliary_effect.py": "b9162d50e4a73ee976c3560263f6fda02ee65a4f94e4af0696603f130150eff4"
  },
  "profiles": [
   {
@@ -1526,8 +1528,8 @@
  "supported_state_boundaries_callbacks_control_match": true,
  "strict_emulator_match": false,
  "tracked_summary": {
-  "full_sha256": "22aad5296331f590ea412a68a69959b7576e1395cbc50208031fa81964e5d367",
-  "full_bytes": 47151,
+  "full_sha256": "9142ce9544330cd76fab8654263f8a55601221ce0f4513bbf2859a54ca77e7fb",
+  "full_bytes": 47355,
   "lists_cut_to": 10,
   "cut_lists": {
    "profiles": 12,

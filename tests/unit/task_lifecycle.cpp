@@ -148,6 +148,10 @@ void live_primary_view() {
     auto& state=*parent->primary_state;
     state.position=NinjaVector{7,8,9};state.orientation.flags=0xffff;
     state.orientation.angles={111,222,333};state.character_id=6;state.task_id_at_2=9;
+    // Without the player layer's factory the engine cannot build a child PlayerTaskState: explicit failure.
+    auto unbound=s.create_child(2,nullptr,parent);
+    check(unbound.failure==TaskFailure::child_state_factory_missing && unbound.source_boundary==0x40b98d && unbound.task && !unbound.task->primary_state);
+    install_player_child_state(s);
     auto child=s.create_child(2,nullptr,parent).task;
     check(child && child->primary_state && child->primary_state!=parent->primary_state);
     check(child->primary_state->position->x==7 && child->primary_state->position->y==8 && child->primary_state->position->z==9);

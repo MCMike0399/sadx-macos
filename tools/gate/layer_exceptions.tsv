@@ -1,7 +1,2 @@
 # Known upward dependencies (debt). Format: <including file>\t<included header>. Remove a line when fixed.
-# The engine's sprite/projection code borrows the player's matrix-stack owner; the matrix stack
-# (NinjaMatrixStack + the 0x785xxx/0x788xxx primitives) belongs in engine/ and PlayerCoordinates should wrap it.
-src/engine/ninja_sprite.hpp	player/player_coordinates.hpp
-src/engine/ninja_projection_range.hpp	player/player_coordinates.hpp
-# The task scheduler creates the child's PlayerTaskState inline; it should ask a factory the player layer installs.
-src/engine/task.cpp	player/player_task.hpp
+# (none: the matrix stack moved to engine/ninja_matrix and the task child-state factory is installed by player/player_task, 2026-10-13)

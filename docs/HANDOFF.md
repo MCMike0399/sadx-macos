@@ -1373,3 +1373,33 @@ native programs, 4 Python tests); 19 reports rerun and tracked in `reference/ora
 Limits: the 19 reports were produced by one `make -k` run whose tree already held step 2's
 matrix/task refactor (no behaviour change; the full-oracle verdicts before and after it are
 identical). Oracles remain outside the gate.
+
+## Layer debts paid: engine/ninja_matrix and the task child-state factory (2026-10-12, step 2)
+
+Evidence: gate `reference/production-integration-20261012/layer-debt-102-gate.json` (rc 0, 105
+native programs, 4 Python tests, `check_layers.py`: 12 layers, 0 known exceptions, 0 violations);
+full `make -j6 -k oracles` on this tree: every verdict identical to the run before the refactor.
+
+* `engine/ninja_matrix.{hpp,cpp}` (new): `NinjaMatrix`, `NinjaMatrixStack`, the coordinate failure
+  vocabulary and `NinjaMatrixPrimitives` (push/pop/unit frames, rotate x/y/z, 788df0 axis rotation,
+  784c70 scale, 781c10 translate, 781670 point, 784d00 vector) moved verbatim from
+  `player/player_coordinates`. `PlayerCoordinates` now derives from it and keeps only the player
+  transforms (43ec90 family, floor_to_world, 44b453 projection). Engine users (sprite projection,
+  sprite queue, queue consumer, projection range) take `NinjaMatrixPrimitives`; engine tests and
+  probes build it directly.
+* `engine/task.cpp` no longer includes `player/player_task.hpp`: `TaskScheduler::set_child_state_factory`
+  takes the 40b960..40b9a3 copy for a parent with a live `PlayerTaskState`;
+  `player/player_task.cpp` provides `copy_player_child_state` / `install_player_child_state`
+  (installed by `NativeGame` when it creates the scheduler). No factory = explicit
+  `TaskFailure::child_state_factory_missing` at 0x40b98d, never a silent skip.
+* `tools/gate/layer_exceptions.tsv` is empty; ARCHITECTURE.md updated.
+* New unit tests: `ninja-matrix` (stack, unit frames, translate/point/scale/rotate/vector, unknown
+  normalization flag) and `player-task` (installed copy, missing factory, unobserved boundary).
+* `tools/gate/mutate.py` now judges a mutant by the report's verdict (tools/oracles/verdict.py)
+  instead of a `{"cases"…}` stdout line most oracles never print; it reports equivalent survivors
+  and non-compiling mutants separately. Mutants on `engine/ninja_matrix.cpp`: player-coordinates
+  caught 4 of 5 relevant (survivor: commuted addition in rotate_z, equivalent); collision-shapes
+  caught translate/scale/point (3 of 3); axis-projection caught both axis-rotation mutants. The
+  factory mutant (wrong angle copied) fails both unit tests. No oracle exercises a live
+  `primary_state` child (the task-lifecycle probe has none): that path is unit-tested only.
+* Oracle scripts that hash native sources now list `engine/ninja_matrix.*` / `player/player_task.*`.

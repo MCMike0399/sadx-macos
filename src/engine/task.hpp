@@ -6,6 +6,7 @@
 #include <unordered_map>
 #include <optional>
 #include <cstdint>
+#include <functional>
 #include <vector>
 #include "engine/task_work.hpp"
 
@@ -83,6 +84,7 @@ enum class TaskFailure {
     inactive_task,
     work_failure,
     default_field30_unobserved,
+    child_state_factory_missing, // a live parent primary_state with no player-layer factory installed
     detached_creation_rollback_rejected,
     inactive_children_corruption,
     callback_mutation_invalidated_destructor,
@@ -136,6 +138,13 @@ public:
     void set_default_field30(std::optional<std::shared_ptr<void>> value) {
         default_field30_ = std::move(value);
     }
+    // 0x40b960..0x40b9a3 copies the parent's live position and angles into the child's primary
+    // work. When the parent carries a live primary_state (a player-layer type), the copy is done by
+    // this factory, which the player layer installs (install_player_child_state, player/player_task).
+    // It sets child.primary_state, keeps every store it made on failure, and returns the source
+    // boundary of an unobserved parent field, or nullopt on success. No factory = explicit failure.
+    using ChildStateFactory = std::function<std::optional<std::uint32_t>(const Task& parent, Task& child)>;
+    void set_child_state_factory(ChildStateFactory factory) { child_state_factory_ = std::move(factory); }
     TaskResult allocate_task(int level, TaskCallback callback); // 0x40b030
     TaskResult create_element(std::uint32_t flags, int level, TaskCallback callback);
     TaskResult create_child(std::uint32_t flags, TaskCallback callback,
@@ -191,6 +200,7 @@ private:
     std::array<TaskHandle, 4096> source_slots_{};
     std::vector<std::uint16_t> free_slots_;
     std::optional<std::shared_ptr<void>> default_field30_;
+    ChildStateFactory child_state_factory_;
 
     static int canonical_index(int list_index) noexcept;
     TaskResult validate(const TaskHandle& task) const;

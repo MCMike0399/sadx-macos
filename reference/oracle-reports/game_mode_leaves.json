@@ -1,6 +1,6 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "5b2af1122352d57462a0905bd82a1938f537afaf8ada36d43e46bbaefa0825c3",
+ "native_library_sha256": "7867b7946a343a3e26ae16532c5656451faa1e9ccc40530332ab1d12795e85c7",
  "source_files": {
   "src/game/game_mode_leaves.hpp": "e666caebda16066c8222f2efe277b1139722a2fa25d6ab74c56000f64453aec6",
   "src/game/game_mode_leaves.cpp": "6412ab51ebc3d04b20d416e3ad90d488dade30d538b3e1ca95b6c5625804d366",
@@ -90,7 +90,7 @@
  "state_match": true,
  "limits": "40c090 game-mode leaves against original instructions: 4144e0, 421f70,\n421f80, 4f88a0, 4221e0, 426050, 42cea0, 421f90, 427ee0, 427ec0, 425af0,\n43b490, 42f5d0, 413300, 427f10, 420e90, 414470 (with 46b230), 42c730 (with\nthe real 42e470, 402f10/780c00, 42c4e0, 432ea0 and 78c5a0) and the composites\n415000 and 42c7b0.\n\nThe whole PE image is mapped. Unported or elsewhere-owned callees 422680,\n42d3b0, 403290, 4030d0, 4073b0, 785330, 40b1a0, 40b460, 421180 (LoadPVM, the\nloader's LoadPVM_r in the profile), 411e30 and 77ed40 are fixtures: each call either returns (EAX 0) or, at a\nchosen call, stops the source as the native nested owner stops. Compared:\ncompletion, nested-call count, every owned scalar and block byte, the\nborrowed words (3b290e4, 3b2a2fa, 3b11178, 3b2a2e4, 3b2a2e8, seed 2bcbdf8),\nwhether the level pointer 3b0ef4c and the event task 3b2c578 are null, and\nEAX where the native result defines it. Cases that reach 420e90's texture\nrelease walk (count 1, nonzero list) are a native explicit nested owner and\nare counted, not compared.\n\n422680 and its callers run the real per-character code against the model\nDLLs mapped at the native layout with relocations applied by this script (an\nimplementation independent of the native rebase); the three table pointers\n(38f6e7c, 3aad104, 3a7cf28) are inputs. Characters whose 422680 case loops\nforever (1, 4, above 7) are native explicit boundaries.\n",
  "tracked_summary": {
-  "full_sha256": "5bd32341fc4069493ec6467acf143f32ccc92b0ad41e685836a7a962a290d810",
+  "full_sha256": "7c24798c149b91034e16b8598006688f437e4d021e5a48855c220a5fa2092686",
   "full_bytes": 6149,
   "lists_cut_to": 10,
   "cut_lists": {}

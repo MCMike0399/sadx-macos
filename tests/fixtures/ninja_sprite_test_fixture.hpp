@@ -16,7 +16,7 @@ struct SpriteAssets {
 struct SpriteFixture {
     const SpriteAssets& assets;
     sadx::NinjaMatrixStack stack;
-    sadx::PlayerCoordinates coordinates;
+    sadx::NinjaMatrixPrimitives coordinates;
     sadx::X87Context fp;
     sadx::NinjaRenderState render;
     sadx::NinjaTextureSelectionState selection;

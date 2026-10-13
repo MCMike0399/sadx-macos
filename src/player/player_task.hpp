@@ -2,6 +2,7 @@
 
 #include "player/player_motion.hpp"
 #include "player/player_input.hpp"
+#include "engine/task.hpp"
 #include <optional>
 #include <memory>
 
@@ -42,5 +43,11 @@ inline PlayerInputTask input_task_view(const PlayerTaskState& task) {
     return {task.orientation.flags,task.player_index,task.character_id,
             task.orientation.angles[1],task.event_move ? task.event_move->mode : std::nullopt};
 }
+
+// Installs the scheduler's child-state factory (0x40b960..0x40b9a3 for a parent with a live
+// PlayerTaskState): the child gets zeroed live fields, then the parent's position x,y,z and angles
+// 0,1,2 in source order. An unobserved parent position fails at 0x40b98d with the child state kept.
+void install_player_child_state(TaskScheduler&);
+std::optional<std::uint32_t> copy_player_child_state(const Task& parent, Task& child);
 
 } // namespace sadx

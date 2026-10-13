@@ -10,19 +10,20 @@
   "address": "0x43bb04",
   "bytes": "4bba4300d5ba4300feba43000002000002000001c1ba4300d5ba4300feba43000002000002000001"
  },
- "native_library_sha256": "cb25c33f5990f4386adad541cfc3f4dea814c91d3bf5aa3b86a27ec6f6478048",
+ "native_library_sha256": "9be17bb628e6e1568a0b8a08298f8df742e3917bb24b4ee20eb733aa382de9f8",
  "native_sources": {
   "src/player/player_hold.hpp": "11cbf9f85a4b73d4b3525b3e8a50281e8e32848d5c96ee1ef5e223085c8b6b90",
   "src/player/player_hold.cpp": "a05c67631eb355dc6999806e8269788df92863399afcd36be2214458307d902d",
-  "src/engine/task.hpp": "06fe28e25fd8a5e2de818305639b8a9a8342216af486c23efe330ce2c2815400",
-  "src/engine/task.cpp": "3bdec3d5cfb4af75195959d434a5555dececf055280259044def70e29033d9a8",
+  "src/engine/task.hpp": "56860f5aaf534b6309cd01bc6b7846078305c64d9a6c32504301254344e115b6",
+  "src/engine/task.cpp": "b7e931c0acf62b9e8ca1f78fe0b26605f6e8be21aa5e27888080291d8e449e3b",
+  "src/player/player_task.hpp": "ca3b911db75e90e2ddabc2a4bef3e4fae6578c0405f864001c2e68162e07650d",
+  "src/player/player_task.cpp": "2e76cd51fb6d4e58e95fffb2245a76f686243035074cf331890e240e61e8bf71",
   "src/engine/task_work.hpp": "8163352d4afc3c797d6ca3783ae4244cfeb6aee1ac2b19d8d0ebd2e3c6037c3d",
   "src/engine/task_work.cpp": "b044c4dfb8c85b054216443b35d4e5a42481cf55277e8c9386c4564b4c7797d7",
-  "src/player/player_task.hpp": "ed87e810477ddf9f81d4e4e450af20111a885cc66dae4285e1eaa490bb17b957",
   "src/player/player_physics.hpp": "08bf9f1949cdb7fd1605429c9b9663265e61d62352b9f5d018e7244a74738530",
   "src/player/player_position.hpp": "4a9343e6107b2cad271dfe2c369084a282f32b5c088f90c4bbd73fb40e3165de",
   "tests/probes/native_player_hold_probe.cpp": "e0785fc521986c6d646a41c1ade1ac7b3fe442abb09a3b98237e920a0e6b90b0",
-  "tools/oracles/verify_original_player_hold.py": "cf0422093b1107d97663587c143aa99abc6b0714f32da4bc21fefffed88042f3"
+  "tools/oracles/verify_original_player_hold.py": "32c3f866258846178ed46893ae6238207f42c1a0919dd1bdffbcac4c2e0f84ea"
  },
  "cases": 133410,
  "fault_cases": 16,
@@ -34,11 +35,11 @@
   "Actual Windows reference/gameplay/physical controllers remain unverified"
  ],
  "case_sha256": "a87b728c3ad161e9f86152dc86d8bc1c071b8e975e83a3cf62dff4f0d3b214c1",
- "seconds": 1.940942167013418,
+ "seconds": 1.9782232500147074,
  "passed": true,
  "tracked_summary": {
-  "full_sha256": "bff5393d611de172ec6c1bee58d3f0bdd278aa126c8355d9ac738cb83919992d",
-  "full_bytes": 2315,
+  "full_sha256": "7cc4735330f4511a543c48c0cebc8937e3f932d59c2fc42ec7c8a528c9ff4f5a",
+  "full_bytes": 2418,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

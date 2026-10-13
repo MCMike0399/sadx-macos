@@ -80,7 +80,7 @@ def main():
         source_tables=dict(address='0x43bb04',bytes=image.read(0x43bb04,40).hex()),
         native_library_sha256=sha(args.native_library.read_bytes()),
         native_sources={name:sha((root/name).read_bytes()) for name in ('src/player/player_hold.hpp','src/player/player_hold.cpp',
-            'src/engine/task.hpp','src/engine/task.cpp','src/engine/task_work.hpp','src/engine/task_work.cpp',
+            'src/engine/task.hpp','src/engine/task.cpp','src/player/player_task.hpp','src/player/player_task.cpp','src/engine/task_work.hpp','src/engine/task_work.cpp',
             'src/player/player_task.hpp','src/player/player_physics.hpp','src/player/player_position.hpp',
             'tests/probes/native_player_hold_probe.cpp','tools/oracles/verify_original_player_hold.py')},
         cases=0,fault_cases=0,mismatches=[],limits=[

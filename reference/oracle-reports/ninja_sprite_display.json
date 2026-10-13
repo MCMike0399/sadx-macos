@@ -1,13 +1,13 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "36fa1b5dc08f16d7b58cb902a2e4b26a6a9cf194c723b18672bb5a634630f91e",
+ "native_library_sha256": "68908fec594abf64e9e3fbbdb57ddb0e0cd9df1dc83fc3d2808947ee760be8ed",
  "source_files": {
   "src/engine/ninja_sprite_display.hpp": "4eb8e418ec7b25304a722a4c4cbfecd961e463d96256d4bf8a7eb96b20604ac9",
   "src/engine/ninja_sprite_display.cpp": "2d7f69d9a5b56101aadbb91508a2355f1151ce992fa4bbfda30749f1abe5a0a3",
   "src/engine/ninja_sprite.cpp": "ac67ce87fd086d4d7ad3de41f8a43cb89b3835e8f8030799e14717debeba65c7",
   "src/engine/ninja_texture_selection.cpp": "cee6edafaba3d9f6d18071c9e4b0098b1a41597a0f08877d39567a4d585b85d8",
   "src/engine/ninja_render.cpp": "d18ca70f7a617ea3a0b26f31e461ad18d36994279982e968ea0634dc4b7d3db9",
-  "tests/probes/native_ninja_sprite_display_probe.cpp": "4730e0855c5e39d289de4b9d6727165b3f367419e51046793c6d427f8ecd5e13",
+  "tests/probes/native_ninja_sprite_display_probe.cpp": "afaa058efbe5d1e8ea2461688dc5ba34813e4794b17992b9ff83ecebe458fdf5",
   "tools/oracles/verify_original_ninja_sprite_display.py": "67d237a94faed100d3658260e34307109daab3342c0f6524923f9d552b5bac44"
  },
  "assets_sha256": "f7fcd079283abfc9ec66c28001a3006bbc904b0cc682edd4b8590c9abf8af000",
@@ -91,7 +91,7 @@
  "strict_flags_match": false,
  "limits": "Full 77e390 sprite display against original instructions.\n\nExecutes actual 77f3d0/77f440/78cf20/78cdc0 texture selection, 781670 and the\nsprite geometry, 78b840/791940 state helpers, vertex stores, the D3D8 calls and\n78c5a0 RET. The D3D8 device is an explicit recording COM fixture returning the\ncase HRESULT (ignored by the source). D3DX 78dbe0 is unlifted: it is either a\nrequired stop or an explicit seeded `fld [seed]; ret 4` fixture, never a model\nof projection. The world (flags&0x10==0) branch stops at unlifted 791a50.\nPalette banks are off (id 0xffffffff); texture indices stay inside the list.\nThis does not establish Windows GPU raster/filter equality or full queue use.\n",
  "tracked_summary": {
-  "full_sha256": "8ecac1993279c0abfd920433682246e382a6b330379ff06b78b9244ebb412b55",
+  "full_sha256": "8d73c02ad4503aadbe26e37a395b4a0aa7da0ed344476526ce6e8be5147c6f2f",
   "full_bytes": 3442,
   "lists_cut_to": 10,
   "cut_lists": {

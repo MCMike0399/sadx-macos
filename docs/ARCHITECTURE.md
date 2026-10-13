@@ -25,10 +25,12 @@ from that file when fixed (a stale exception fails the check).
 Archives: `libsadx-core.a` = cpu…runtime (portable, no frameworks), `libsadx-macos.a` =
 platform/mac, `libsadx-guest.a` = guest (+ Unicorn). Programs link what they need.
 
-Known debt (the exceptions file): `engine/ninja_sprite.hpp` and
-`engine/ninja_projection_range.hpp` borrow `PlayerCoordinates` as the matrix-stack owner —
-the matrix stack belongs in `engine` and the player wrapper above it; `engine/task.cpp`
-creates a child `PlayerTaskState` inline — it should ask a factory the player layer installs.
+Known debt (the exceptions file): none since 2026-10-13. The matrix stack and primitives live in
+`engine/ninja_matrix` (`NinjaMatrixPrimitives`; `player/player_coordinates`' `PlayerCoordinates`
+derives from it and adds the player transforms), and `engine/task.cpp` builds a child's live
+`PlayerTaskState` through a factory the player layer installs (`install_player_child_state`,
+`player/player_task`); with no factory installed that path fails explicitly
+(`TaskFailure::child_state_factory_missing`).
 
 ## One name per module
 

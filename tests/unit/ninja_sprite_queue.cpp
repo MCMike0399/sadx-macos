@@ -64,7 +64,7 @@ void submission_and_immediate(const NinjaMath::SineTable& table,const NinjaMatri
     auto arena=std::make_shared<NinjaRenderQueueArena>(std::vector<std::uint8_t>(2048,0xcd),0,2048,1);NinjaSpriteQueue queue(arena);queue.initialize_sort_buckets();X87Context fp(0x7f);
     auto resource=std::make_shared<NinjaTextureMemoryReference>();auto texture=std::make_shared<NinjaTextureListOwner>();texture->count=1;texture->first_filename_is_invalid_sentinel=false;texture->entries=std::make_shared<NinjaTextureListOwner::Entries>(1);(**texture->entries)[0]=resource;
     auto packet=std::make_shared<NinjaQueuedSpriteInput>();packet->sprite={{3,4,5},2,3,123};packet->texture_list=texture;packet->animation=std::make_shared<const std::vector<NinjaSpriteFrame>>();
-    NinjaMatrixStack stack({unit},1,0);PlayerCoordinates coordinates(table,unit,stack);
+    NinjaMatrixStack stack({unit},1,0);NinjaMatrixPrimitives coordinates(table,unit,stack);
     auto submitted=queue.submit(packet,true,7,0x31,0,r,&coordinates,fp);check(submitted&&submitted.route==NinjaSpriteSubmissionRoute::queued&&submitted.queue.record->sprite);
     auto record=submitted.queue.record;float depth;check(arena->read(record->block,4,&depth,4)==NinjaQueueFailure::none&&depth==-4);
     const auto retained=record->sprite->texture_list;packet->sprite.position.x=99;check(record->sprite->sprite.position.x==3&&retained==texture);

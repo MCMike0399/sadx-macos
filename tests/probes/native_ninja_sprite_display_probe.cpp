@@ -18,7 +18,7 @@ extern "C" int sadx_native_ninja_sprite_display(const std::uint8_t* assets,std::
     sadx::NinjaMath::SineTable table;std::memcpy(table.data(),assets+96,4100);sadx::NinjaMatrix unit;std::memcpy(&unit,assets+4196,64);
     std::array<std::uint32_t,4> returns;std::memcpy(returns.data(),assets+4260,16);
     sadx::NinjaMatrix matrix;std::memcpy(&matrix,in+19,64);
-    sadx::NinjaMatrixStack stack({matrix},1,0);sadx::PlayerCoordinates coordinates(table,unit,stack);sadx::X87Context fp(static_cast<std::uint16_t>(in[2]));
+    sadx::NinjaMatrixStack stack({matrix},1,0);sadx::NinjaMatrixPrimitives coordinates(table,unit,stack);sadx::X87Context fp(static_cast<std::uint16_t>(in[2]));
     std::vector<std::array<std::uint32_t,5>> trace;
     sadx::NinjaRenderState render;auto device=std::make_shared<sadx::NinjaRenderDevice>();device->identity=1;render.device_at_3d128b0=device;render.packed_blend_at_3ab9890=0xa8;render.blend_tables=&*blend;
     const auto hresult=static_cast<std::int32_t>(in[51]);

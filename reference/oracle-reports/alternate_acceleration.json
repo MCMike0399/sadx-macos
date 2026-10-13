@@ -6,7 +6,7 @@
   "end_exclusive": "0x44750c",
   "sha256": "7788b57a50b387cb63fe8d35eaac9a3fd6a4a38808bd58e40ad746e2bf2c6dac"
  },
- "native_library_sha256": "50160e0455a891a05ab01c3f3d2c0f42ac0c0b3c1ddab8bf500a8670b914e6aa",
+ "native_library_sha256": "2c3a21ab80dbc31d261efc0833cb7668ad269d5a24eb228b4833effdcb2116f4",
  "fixture_sha256": "691b1f017689fbdfdbfea7393e4418bd7c098c91e2b001e6d149822c26dcba5f",
  "fixture_record": "80 little-endian uint32 words",
  "fixture_count": 2496,
@@ -23,8 +23,10 @@
   "src/player_rotation.hpp": "8bdf5a75ca53c7857db86c6f15778095257d3e58428de71b7f34e4b0b2cbeb32",
   "src/player_projection.cpp": "ac94968965936abb23389abf02f367c49e4053aa113712fba41535348ce3e203",
   "src/player_projection.hpp": "d830d79cce6d907039fcfb20978dab81c8c413009b06d164389f3384297b285c",
-  "src/player_coordinates.cpp": "b375c24b44a6efb65954c6a52d3338b86a6e250d8a4b1ab6b190168d75024663",
-  "src/player_coordinates.hpp": "5d5cfa3e2965997baf122f6ea263f2104c1e2698ba48373e06628f54ad83b1a7",
+  "src/player_coordinates.cpp": "9727e8a6fb00ed7f1db362be426821405767b895e08f698b8ad231f2de578090",
+  "src/player_coordinates.hpp": "322331b4ca9a51e4a58a8133d9c1a323e7a223d84cbe44f83f029540a65057c0",
+  "src/ninja_matrix.cpp": "7045d50d871e7853935b7301ac90473bb06536f14c7b010ce7f75562d5b09bc4",
+  "src/ninja_matrix.hpp": "97ddcdb7b4f08e6a46d181b8f9d034a26762e62248cbb0643b34d55c61696a90",
   "src/player_heading.cpp": "c109cb4370cc006d0ddb7186cf9a8ab1396aa64fb61fed45b7a1b8b46dc6e491",
   "src/player_heading.hpp": "42df76e4801ce3d90ec1ce2a06bff00a328f05a0e13979d2f8d0d7487e8aaf1c",
   "src/player_input.cpp": "784b664b79fc29456911d253760fa59a763ff38f5b74aeafab65a4ec5aed962e",
@@ -47,13 +49,13 @@
  "native_contracts": {
   "src/player_acceleration.hpp": "3ca9bd3f7dfccec590eec2926fa0d0b0eea194e1fa1f014b0dcf250411273257",
   "src/player_physics.hpp": "08bf9f1949cdb7fd1605429c9b9663265e61d62352b9f5d018e7244a74738530",
-  "src/player_task.hpp": "ed87e810477ddf9f81d4e4e450af20111a885cc66dae4285e1eaa490bb17b957",
+  "src/player_task.hpp": "ca3b911db75e90e2ddabc2a4bef3e4fae6578c0405f864001c2e68162e07650d",
   "src/player_rotation_result.hpp": "d1acaa5c8f11148bb5d5d2a5c8f246b0e4f137ccab552022dddc25d7e3daa5a1"
  },
  "native_compiler": "Clang 21.0.0 (clang-2100.3.34.2); target arm64; source-specific software x87",
  "declared_build_profile": "arm64 C++17 O2 ffp-contract=off fno-fast-math native integer SoftFloat/Bochs",
  "native_probe_sha256": "7abc258ffdb325f057963209dcb7561efb6daadeb64eca76b4eec2daa0573a41",
- "verifier_sha256": "74e54ab13d031ed2ce0ba0b2dea8fa25f2fed6181f44e9648daf56ab6baa94fe",
+ "verifier_sha256": "4edab9d25905208cf753d79e3ece6f91a11ddd8ce524cddc779beb9dd8c72785",
  "source_artifacts": {
   "quarter_table_sha256": "3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed",
   "unit_matrix_sha256": "5998e9d1dd9bf48af6af87a1ef8c7783b818ac8329637ada08cc5fb329042376",
@@ -831,8 +833,8 @@
  ],
  "values_calls_cw_match": true,
  "tracked_summary": {
-  "full_sha256": "23f4d617a99eb14936a459a0f5b1aff085406bae5911daae60f54f3f5898f938",
-  "full_bytes": 86791733,
+  "full_sha256": "507076586aa293af9437ab1e1379916e68d08cc7722e639fea7ff1b55afdfc34",
+  "full_bytes": 86791925,
   "lists_cut_to": 10,
   "cut_lists": {
    "mismatches": 29952,

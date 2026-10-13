@@ -148,7 +148,7 @@ NinjaQueueResult NinjaSpriteQueue::insert(const NinjaQueueRecordHandle& record,f
     }catch(const X87Error& e){auto result=failed(NinjaQueueFailure::fp_failed,at,record);result.fp_failure=e.failure();result.fp_exceptions=e.exceptions();return result;}
 }
 
-NinjaSpriteSubmissionResult NinjaSpriteQueue::submit(const std::optional<std::shared_ptr<const NinjaQueuedSpriteInput>>& input,std::optional<bool> domain,std::int32_t frame,std::uint32_t flags,std::uint32_t queue_flags,NinjaSpriteQueueRuntime& runtime,PlayerCoordinates* coordinates,X87Context& fp){
+NinjaSpriteSubmissionResult NinjaSpriteQueue::submit(const std::optional<std::shared_ptr<const NinjaQueuedSpriteInput>>& input,std::optional<bool> domain,std::int32_t frame,std::uint32_t flags,std::uint32_t queue_flags,NinjaSpriteQueueRuntime& runtime,NinjaMatrixPrimitives* coordinates,X87Context& fp){
     NinjaSpriteSubmissionResult result;
     auto stop=[&](NinjaQueueFailure failure,std::uint32_t site,NinjaQueueRecordHandle record={}){result.queue=failed(failure,site,std::move(record));return result;};
     if(!runtime.display_switch_at_3b1117c||!*runtime.display_switch_at_3b1117c)return stop(NinjaQueueFailure::unknown_display_switch,0x404760);

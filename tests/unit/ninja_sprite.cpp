@@ -21,7 +21,7 @@ int main(int argc,char** argv){try{
     check(value(vertices.command->vertex_bytes,0)==1 && value(vertices.command->vertex_bytes,1)==1 && value(vertices.command->vertex_bytes,2)==5);
     auto angle=input;angle.angle=-999;auto ignored=ninja_sprite_geometry(angle,*frame,0,*constants,runtime,fp);check(ignored.partial.bounds==world.partial.bounds); // source body never reads angle
     auto projected=ninja_sprite_geometry(input,*frame,0x31,*constants,runtime,fp);check(projected.failure==NinjaSpriteFailure::missing_coordinates);
-    NinjaMatrixStack stack({unit},1,0);PlayerCoordinates coordinates(table,unit,stack);runtime.coordinates=&coordinates;
+    NinjaMatrixStack stack({unit},1,0);NinjaMatrixPrimitives coordinates(table,unit,stack);runtime.coordinates=&coordinates;
     projected=ninja_sprite_geometry(input,*frame,0x31,*constants,runtime,fp);check(projected.failure==NinjaSpriteFailure::missing_projection_scale && projected.partial.camera_position->z==5);
     runtime.scale_at_3d0f9e0=100;runtime.center_x_at_3d0fa0c=10;runtime.center_y_at_3d0fa10=20;
     projected=ninja_sprite_geometry(input,*frame,0x31,*constants,runtime,fp);check(projected && *projected.partial.bounds[0]==30 && *projected.partial.bounds[3]==160);

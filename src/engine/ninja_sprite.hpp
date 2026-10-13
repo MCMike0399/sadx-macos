@@ -1,5 +1,5 @@
 #pragma once
-#include "player/player_coordinates.hpp"
+#include "engine/ninja_matrix.hpp"
 #include <array>
 #include <optional>
 namespace sadx {
@@ -12,7 +12,7 @@ struct NinjaSpriteConstants {float uv_scale,color_scale,minimum_depth,zero,one;}
 std::optional<NinjaSpriteConstants> decode_ninja_sprite_constants(const std::uint8_t*,std::size_t);
 struct NinjaSpriteInput {NinjaVector position;float scale_x,scale_y;std::int32_t angle;};
 struct NinjaSpriteProjection {
-    PlayerCoordinates* coordinates=nullptr; // borrowed real current matrix owner
+    NinjaMatrixPrimitives* coordinates=nullptr; // borrowed real current matrix owner
     std::optional<float> scale_at_3d0f9e0,center_x_at_3d0fa0c,center_y_at_3d0fa10;
     std::optional<std::array<float,4>> color_argb_at_3d0f7f0;
 };

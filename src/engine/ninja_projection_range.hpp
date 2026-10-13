@@ -1,6 +1,6 @@
 #pragma once
 #include "cpu/x87_math.hpp"
-#include "player/player_coordinates.hpp"
+#include "engine/ninja_matrix.hpp"
 #include <cstdint>
 #include <functional>
 #include <optional>

@@ -1,14 +1,16 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "library_sha256": "dcdbc6458980083e63cf316786d0e9fd72b1d5245c180a1e7099176f9f205e6d",
+ "library_sha256": "a477be137ba074f8e9024d9f65c732763a103754a0a895d96a5903701f824401",
  "compiler": "Clang 21.0.0 (clang-2100.3.34.2); ARM64 C++17 O2 source-native fixed-pool mesh producer",
  "native_sources": {
   "src/player_mesh_registry.cpp": "3df8f5a39895ef6ecf4ff51c0ffad27e2da043cd74641a89de5dbf5eab0beb63",
   "src/player_mesh_registry.hpp": "c0c2745ea174a164100174cb1f9f66332a7a4ff3fbfa275c65f9288c6b29e48f",
   "src/player_mesh_matrix.cpp": "d471c45ce938663118cf792a8740e29d596c4172f5f22dbdde27f8bedc2a0fd2",
   "src/player_mesh_matrix.hpp": "8a3834fa1b22b686f195cfa8c84105a9a64187089b725f21a650702b33631031",
-  "src/player_coordinates.cpp": "b375c24b44a6efb65954c6a52d3338b86a6e250d8a4b1ab6b190168d75024663",
-  "src/player_coordinates.hpp": "5d5cfa3e2965997baf122f6ea263f2104c1e2698ba48373e06628f54ad83b1a7",
+  "src/player_coordinates.cpp": "9727e8a6fb00ed7f1db362be426821405767b895e08f698b8ad231f2de578090",
+  "src/player_coordinates.hpp": "322331b4ca9a51e4a58a8133d9c1a323e7a223d84cbe44f83f029540a65057c0",
+  "src/ninja_matrix.cpp": "7045d50d871e7853935b7301ac90473bb06536f14c7b010ce7f75562d5b09bc4",
+  "src/ninja_matrix.hpp": "97ddcdb7b4f08e6a46d181b8f9d034a26762e62248cbb0643b34d55c61696a90",
   "src/player_scene_decode.cpp": "e6e292883fbef8e1c90afe4f81f35b20b3f275b4939ab68f7d7fab62bf2c815c",
   "src/player_scene_decode.hpp": "78b98a172e0d8a6ee235fde19a05c6b80dc09e1cc61cb6db4650690d85620d70",
   "src/player_scene_registration.cpp": "d11f264669d75203e764fb926610d6f5f861a8fce163f76e6c8a3311d54ed3dd",
@@ -26,7 +28,7 @@
   "src/player/player_scene_resources.hpp": "87a118d948493bee0819900f83637ecd58f6d2bcf5422b45fd4c7ab374a3e52b",
   "tests/probes/native_player_mesh_registry_probe.cpp": "b0b44231a067aa8b784b7dcaae6913e695e68d4f1e87c4cba2f1510c10ae500a"
  },
- "verifier_sha256": "4352ebda8ef3715e46b7de8b69ffa91f2a05f1b3a66a8db41c6099b7c6cf32b0",
+ "verifier_sha256": "ecc63ff09313ce881f76155df079fb7ae03d269d928044782044ae9ce53a3418",
  "case_sha256": "ffa14c32599e8de776a0c79e24e7296693801b254a00afd068b2b5fc19a24393",
  "profiles": [
   {
@@ -102,8 +104,8 @@
  "values_returns_cw_match": true,
  "strict_match": false,
  "tracked_summary": {
-  "full_sha256": "76ed45a20b0db17d845b65adcec51d0c13b5f1fe0771549a4aeec9ce13892945",
-  "full_bytes": 4788,
+  "full_sha256": "8cb1117ef5e7ce11ab80f660d70705d1fbc00406dceb38b256e7c1806b1fa28d",
+  "full_bytes": 4980,
   "lists_cut_to": 10,
   "cut_lists": {
    "profiles": 12

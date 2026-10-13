@@ -1,5 +1,6 @@
 #include "runtime/game_runtime.hpp"
 #include "game/win32_profile.hpp"
+#include "player/player_task.hpp"
 #include <cstdio>
 #include <cstring>
 
@@ -244,7 +245,7 @@ NativeGameReport NativeGame::run(){
         if(callee==0x40b1a0){word_at_3c839fc_=0;word_at_3c83a00_=0;task_arena_=std::make_shared<TaskWorkArena>();return done(GameLogicOwnerState::completed);}
         for(auto& w:words_at_3c60108_)w=0;
         if(!task_arena_)return GameLogicOwnerResult{GameLogicOwnerState::failed,0x40b46b,{}};
-        scheduler_=std::make_unique<TaskScheduler>();const auto r=scheduler_->initialize_source_pool(task_arena_);
+        scheduler_=std::make_unique<TaskScheduler>();install_player_child_state(*scheduler_);const auto r=scheduler_->initialize_source_pool(task_arena_);
         return r?done(GameLogicOwnerState::completed):GameLogicOwnerResult{GameLogicOwnerState::failed,0x40b466,{}};};
     const auto reset=[&](const std::string& path)->GameLogicOwnerResult{
         GameResetRuntime rr{*reset_,[&](const GameResetCall& c)->GameLogicOwnerResult{
