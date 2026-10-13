@@ -15,7 +15,8 @@ std::optional<std::uint32_t> HleMemory::allocate(std::uint32_t size,std::uint32_
     }
     const auto at=(top_+alignment-1)&~(alignment-1);
     if(at<top_||need>limit_-at)return std::nullopt;
-    while(mapped_<at+need){if(!guest_.map(mapped_,0x100000,false,nullptr))return std::nullopt;mapped_+=0x100000;}
+    // RWX: VirtualAlloc(PAGE_EXECUTE_*) blocks hold generated code (the loader's trampolines); DEP is not modelled.
+    while(mapped_<at+need){if(!guest_.map(mapped_,0x100000,true,nullptr))return std::nullopt;mapped_+=0x100000;}
     if(at>top_)free_[top_]=at-top_;
     top_=at+need;live_[at]=need;
     const std::vector<std::uint8_t> zero(need,0);guest_.write(at,zero.data(),need);

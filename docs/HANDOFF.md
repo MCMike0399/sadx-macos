@@ -1577,3 +1577,68 @@ Whole-program inventory (docs/METHOD.md §2), tracked in `reference/inventory/`:
   instructions); 4e confirms them in the guest.
 * Runner fixes: `tools/inventory/run_inventory.py` waits only on its own session's log output, and the
   inventory uses its own Ghidra snapshot (the old snapshots are tied to the pre-move binary path).
+
+## M1 4c: the guest boots sonic.exe to the first Present (2026-10-13)
+
+Evidence: gate `reference/production-integration-20261012/guest-boot-107-gate.json` (rc 0); test
+`tests/unit/guest_boot.cpp` (`guest-boot`, in the gate, ~18 s: two boots).
+
+sonic.exe now runs **from its real entry point 643f96** in the guest: the MSVC 6 CRT startup and every static
+initializer (including 401ac0 → the mod loader, CHRMODELS_orig, the model DLLs, both mods with SDL2), then
+WinMain: the single-instance mutex, sonicDX.ini through `Win32Profile`, the registry (empty), the CD-drive
+scan (one fixed C:), WMVCORE's WMCreateReader lookup (so the "media player can't found" box is no longer
+reached), the loader's CreateSADXWindow_r (borderless: a 646x509 captioned wrapper around the 640x480 game
+child, created, shown, activated and focused through the guest window procedures), DirectInput8 (mouse
+device, no input), Direct3D 8 (adapter, modes, formats, CreateDevice through the loader's hook with the
+profile's 640x480 back buffer, device state), DirectSound (DSERR_NODRIVER), into the game loop up to the first
+IDirect3DDevice8::Present (one Clear before it, no BeginScene yet). Two boots issue identical HLE call logs
+(22,030 calls, same arguments and results) and the same D3D8 state.
+
+Patch sites at the first Present: 111 of 119 active ones written; the 8 left are HUD-scaling patches the loader
+applies after the first frame; nothing outside the inventory's active ranges is written.
+
+New HLE (src/hle): `hle_d3d8.cpp` (Direct3DCreate8, IDirect3D8 16 methods, IDirect3DDevice8 97 methods in d3d8.h
+order with exact pop counts — unmodelled ones stop by name; textures/surfaces/vertex+index buffers as guest-memory
+COM objects; D3D8 defaults for viewport and transforms; draws recorded into `D3D8StateOwner`), the visible-window
+model in `hle_user32.cpp` (ShowWindow/UpdateWindow/SetFocus/SetForegroundWindow/SetWindowPos, rectangles, the
+desktop metrics and monitor, a message queue with WM_PAINT/WM_QUIT generation, Dispatch/Send/PostMessage,
+SystemParametersInfo, wsprintf), IDirectInputDevice8 (mouse/keyboard with no input), private profiles, mutexes and
+events, drives. HLE memory is RWX (the loader executes trampolines it VirtualAllocs).
+
+The HLE's reported assumptions at the first Present (from `HleProcess::assumptions`, verbatim):
+* the modelled Windows version is 10 22H2 (build 19045): GetProcAddress returns NULL for later functions such as GetTempPath2W; the reference machine's version was not captured
+* process id 0x1000 and main thread id 0x1004 (the reference ids were not captured)
+* no game controllers or HID devices are attached to the guest machine (SetupAPI/HID enumerations are empty)
+* the install is C:\SADX (the guest's module paths and current directory); the reference install path was not captured
+* MSVCP140/VCRUNTIME140 14.51.36247.0 run as real code (a local VC++ redistributable); the reference machine's runtime version was not captured
+* main thread TEB/PEB: only ExceptionList, the stack bounds, Self, the client ids and PEB.ImageBaseAddress are filled
+* GetVersionExA reports Windows 6.2 build 9200 (an unmanifested process on Windows 8 or later)
+* the process environment block is empty (the reference environment was not captured)
+* ANSI code page 1252 and OEM code page 437 (a Western-European Windows; the reference locale was not captured)
+* CT_CTYPE1 above U+007F from Unicode categories (Windows' NLS tables were not captured)
+* IsProcessorFeaturePresent: an SSE2 CPU without 3DNow! (the reference CPU's feature set was not captured)
+* wall clock: virtual, starting 2025-01-01 00:00:00 UTC at boot and advancing with the virtual counter
+* QueryPerformanceCounter: a virtual 10 MHz counter that advances 1 us per query and by Sleep
+* GetProcAddress of a system function without an HLE body returns its trap (taken to exist on Windows 10 22H2); calling one stops with its name
+* stdin/stdout/stderr are unattached (a GUI-subsystem process without a console): reads see EOF, writes fail
+* the CRT runs in the "C" locale (lc_codepage 0, mb_cur_max 1, the ASCII ctype table)
+* GetSystemInfo: one x86 processor, 4 KiB pages, 64 KiB allocation granularity
+* SetProcessDPIAware succeeds and has no effect (no host DPI scaling is modelled)
+* FindFirstFile: NTFS name order (case-insensitive), virtual file times
+* CreateWindowEx CW_USEDEFAULT: position 0,0 and size 0x0 (the desktop's cascade was not captured)
+* WinRT activation factories (Windows.Gaming.Input) are not provided: RoGetActivationFactory returns REGDB_E_CLASSNOTREG; with no controllers attached the game sees no difference
+* the drives are one fixed C:\ with no CD-ROM holding the disc (the reference machine's drives were not captured)
+* the desktop is one 1920x1080 monitor at 96 DPI with Windows 10 metrics (caption 23, sizing frame 4 + padded border 4, fixed frame 3), work area 1920x1040
+* window message order (creation, ShowWindow, activation, SetWindowPos) follows Windows' documented sequence as Wine's message tests record it; WM_NCPAINT/WM_ERASEBKGND/IME messages are not sent; not traced on the reference
+* the registry holds none of the game's keys (RegOpenKey* returns ERROR_FILE_NOT_FOUND)
+* D3D8 adapter identifier: driver "sadx-hle", description "sadx-macos Metal", vendor/device ids 0 (the reference GPU was not captured)
+* D3D8 adapter modes: 640x480, 800x600, 1024x768, 1280x720, 1280x1024, 1600x900, 1920x1080 at 60 Hz in X8R8G8B8 and R5G6B5 (the reference monitor's mode list was not captured)
+* D3D8 CheckDeviceFormat: A8R8G8B8, X8R8G8B8, R5G6B5, X1R5G5B5, A1R5G5B5, A4R4G4B4, L8, A8 and DXT1-5 textures, D16/D24S8/D24X8/D32 depth are available, nothing else (a modern GPU; the reference GPU was not captured)
+* D3D8 GetDeviceCaps: only D3DPRASTERCAPS_WFOG is declared, as in the native runtime (the reference GPU's D3DCAPS8 were not captured)
+* DirectInput system mouse/keyboard devices exist but report no input (host input is not fed to the guest yet)
+* IDirect3DDevice8::MultiplyTransform computes pMatrix x current in single precision, row by column in index order (the D3D runtime's own rounding was not captured)
+* DirectSoundCreate8 reports DSERR_NODRIVER (no audio backend yet; the Windows reference has sound), as the native runtime does
+
+Limits: nothing is drawn (the D3D8 stream is recorded only; step 5); no host input or audio; window message
+order is modelled on Windows' documented sequence, not traced; the game has not completed a frame in the guest
+yet (4d–4f: overrides, FPU shims, frames/determinism/FPS).

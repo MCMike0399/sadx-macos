@@ -1,6 +1,7 @@
 #pragma once
 #include "hle/hle_modules.hpp"
 #include "hle/hle_user32.hpp"
+#include "runtime/game_runtime.hpp"
 #include <cstdio>
 #include <map>
 #include <memory>
@@ -46,6 +47,9 @@ public:
     // CRT state in guest memory.
     std::uint32_t teb=0,peb=0;
     HleWindows windows;
+    // Direct3D 8: the recorded device state (the native runtime's owner type), the D3DPRESENT_PARAMETERS words
+    // of CreateDevice, and a hook run on every IDirect3DDevice8::Present (tests stop the guest there).
+    D3D8StateOwner d3d8;std::vector<std::uint32_t> d3d8_presentation;std::function<void(X86Guest&)> on_present;
     std::map<std::string,std::string> environment_variables; // names compared case-insensitively (stored upper-case)
     std::map<std::uint32_t,std::uint32_t> tls;std::uint32_t next_tls=0;std::set<std::uint32_t> heaps;std::uint32_t process_heap=0;std::uint32_t command_line_a_env=0;
     std::uint32_t errno_address=0,iob_address=0,narrow_argv=0,environment=0,command_line_w=0,command_line_a=0;
@@ -69,4 +73,5 @@ void register_hle_crt(HleProcess&);
 void register_hle_dbghelp(HleProcess&);
 void register_hle_user32(HleProcess&);
 void register_hle_dinput(HleProcess&);
+void register_hle_d3d8(HleProcess&);
 } // namespace sadx

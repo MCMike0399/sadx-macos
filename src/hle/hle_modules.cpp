@@ -20,7 +20,8 @@ bool system_dll(const std::string& name){
         // more of a Windows 10 22H2 System32 (present there, so LoadLibrary must succeed; their functions are HLE or stop)
         "cfgmgr32","combase","rpcrt4","sechost","bcrypt","bcryptprimitives","crypt32","shcore","powrprof","winusb","d3d11","d3d12","dcomp","propsys",
         "mmdevapi","avrt","ksuser","dwrite","d2d1","usp10","msimg32","psapi","secur32","userenv","wtsapi32","iphlpapi","winspool","opengl32","glu32",
-        "windowscodecs","wintrust","ntmarta","imagehlp","msacm32","dsound","xaudio2_9","x3daudio1_7","mfplat","mf","mfreadwrite","dbgcore","apphelp","win32u"};
+        "windowscodecs","wintrust","ntmarta","imagehlp","msacm32","dsound","xaudio2_9","x3daudio1_7","mfplat","mf","mfreadwrite","dbgcore","apphelp","win32u",
+        "wmvcore","wmasf","quartz","msdmo","dmoguids"}; // wmvcore: Windows Media Format runtime of a Windows 10 with Media Player (not an N edition)
     for(const auto* k:known)if(s==k)return true;
     return s.rfind("api-ms-win-",0)==0;
 }

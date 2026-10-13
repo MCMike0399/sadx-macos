@@ -12,7 +12,7 @@ std::unique_ptr<HleProcess> HleProcess::create(std::filesystem::path game_dir,st
         raw->assume("GetProcAddress of a system function without an HLE body returns its trap (taken to exist on Windows 10 22H2); calling one stops with its name");
         raw->unmodelled_lookups.push_back(dll+"!"+name);};
     p->modules_->trace_=[raw=p.get()](const std::string& f,const std::string& path,const std::string& outcome){raw->trace_file(f,path,outcome);};
-    register_hle_kernel32(*p);register_hle_crt(*p);register_hle_dbghelp(*p);register_hle_user32(*p);register_hle_dinput(*p);
+    register_hle_kernel32(*p);register_hle_crt(*p);register_hle_dbghelp(*p);register_hle_user32(*p);register_hle_dinput(*p);register_hle_d3d8(*p);
     p->assume("the install is C:\\SADX (the guest's module paths and current directory); the reference install path was not captured");
     return p;
 }

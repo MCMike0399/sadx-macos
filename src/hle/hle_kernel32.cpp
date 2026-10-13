@@ -3,6 +3,9 @@
 // values the reference machine would have supplied are fixed and listed as assumptions.
 #include "hle/hle_process.hpp"
 #include "hle/hle_text.hpp"
+#include "game/win32_profile.hpp"
+#include <fstream>
+#include <iterator>
 #include <algorithm>
 #include <cctype>
 #include <cstring>
@@ -52,6 +55,45 @@ void register_hle_kernel32(HleProcess& p){
     r.add("WINMM.dll","timeGetTime",{0,0,[P](HleCall&)->std::uint32_t{return static_cast<std::uint32_t>(P->now_100ns/10000);}});
     r.add("WINMM.dll","timeBeginPeriod",{4,1,[](HleCall&)->std::uint32_t{return 0;}}); // TIMERR_NOERROR
     r.add("WINMM.dll","timeEndPeriod",{4,1,[](HleCall&)->std::uint32_t{return 0;}});
+    // --- synchronisation objects for one thread: named mutexes/events exist once; waits never block.
+    auto named=std::make_shared<std::map<std::string,std::uint32_t>>();
+    const auto create_named=[P,arg,named](bool wide,unsigned name_arg){return [P,arg,named,wide,name_arg](HleCall& c)->std::uint32_t{
+        const auto at=arg(c,name_arg);std::optional<std::string> name;if(at)name=wide?P->wide_at(at):P->string_at(at);
+        if(name){const auto i=named->find(*name);if(i!=named->end()){P->last_error=ERROR_ALREADY_EXISTS;return i->second;}}
+        const auto h=P->new_handle();if(name)(*named)[*name]=h;P->last_error=0;return h;};};
+    K("CreateMutexA",12,3,create_named(false,2));K("CreateMutexW",12,3,create_named(true,2));
+    K("CreateEventA",16,4,create_named(false,3));K("CreateEventW",16,4,create_named(true,3));
+    K("ReleaseMutex",4,1,[](HleCall&)->std::uint32_t{return 1;});
+    K("SetEvent",4,1,[](HleCall&)->std::uint32_t{return 1;});K("ResetEvent",4,1,[](HleCall&)->std::uint32_t{return 1;});
+    K("WaitForSingleObject",8,2,[](HleCall&)->std::uint32_t{return 0;}); // WAIT_OBJECT_0: nothing else can own an object
+    // --- private profiles (.\sonicDX.ini) through the native Win32Profile owner (documented Win32 semantics)
+    const auto profile=[P](HleCall& c,std::uint32_t file_arg)->std::optional<Win32Profile>{
+        const auto file=P->string_at(c.argument(file_arg).value_or(0));if(!file){c.guest.stop("GetPrivateProfile: unreadable file name");return std::nullopt;}
+        const auto host=P->host_path(*file);P->trace_file("GetPrivateProfile",*file,host?host->string():"not found");
+        std::vector<std::uint8_t> bytes;if(host){std::ifstream f(*host,std::ios::binary);bytes.assign(std::istreambuf_iterator<char>(f),{});}
+        Win32Profile w(bytes);if(!w.unsupported.empty()){c.guest.stop("GetPrivateProfile: a value form Win32Profile does not interpret ("+w.unsupported.front()+")");return std::nullopt;}
+        return w;};
+    K("GetPrivateProfileIntA",16,4,[P,arg,profile](HleCall& c)->std::uint32_t{
+        const auto w=profile(c,3);if(!w)return 0;const auto section=P->string_at(arg(c,0)),key=P->string_at(arg(c,1));
+        if(!section||!key){c.guest.stop("GetPrivateProfileIntA with a NULL section or key");return 0;}
+        return static_cast<std::uint32_t>(w->get_int(*section,*key,static_cast<std::int32_t>(arg(c,2))));});
+    K("GetPrivateProfileStringA",24,6,[P,arg,profile](HleCall& c)->std::uint32_t{
+        const auto w=profile(c,5);if(!w)return 0;const auto section=P->string_at(arg(c,0)),key=P->string_at(arg(c,1));
+        if(!section||!key){c.guest.stop("GetPrivateProfileStringA with a NULL section or key (enumeration) is not implemented");return 0;}
+        const auto fallback=arg(c,2)?P->string_at(arg(c,2)).value_or(""):std::string();const auto size=arg(c,4);if(!size)return 0;
+        const auto v=w->get_string(*section,*key,fallback,size);P->put_string(arg(c,3),v);return static_cast<std::uint32_t>(v.size());});
+    // --- the registry holds none of the game's keys (CTRLFLAG0 and the rest absent, as the native runtime assumes)
+    const auto registry_absent=[P](HleCall&)->std::uint32_t{P->assume("the registry holds none of the game's keys (RegOpenKey* returns ERROR_FILE_NOT_FOUND)");return ERROR_FILE_NOT_FOUND;};
+    r.add("ADVAPI32.dll","RegOpenKeyExA",{20,5,registry_absent});r.add("ADVAPI32.dll","RegOpenKeyA",{12,3,registry_absent});
+    r.add("ADVAPI32.dll","RegOpenKeyExW",{20,5,registry_absent});
+    r.add("ADVAPI32.dll","RegCloseKey",{4,1,[](HleCall&)->std::uint32_t{return ERROR_INVALID_HANDLE;}});
+    r.add("ADVAPI32.dll","RegQueryValueExA",{24,6,[](HleCall&)->std::uint32_t{return ERROR_INVALID_HANDLE;}});
+    // --- drives: one fixed C:\ and no CD-ROM (the native runtime's 401a20 assumption; the digital install needs no disc)
+    K("GetLogicalDriveStringsA",8,2,[P,arg](HleCall& c)->std::uint32_t{
+        P->assume("the drives are one fixed C:\\ with no CD-ROM holding the disc (the reference machine's drives were not captured)");
+        const char text[]={'C',':','\\',0,0};if(arg(c,0)<sizeof text)return sizeof text-1;c.guest.write(arg(c,1),text,sizeof text);return 4;});
+    K("GetDriveTypeA",4,1,[P,arg](HleCall& c)->std::uint32_t{const auto root=P->string_at(arg(c,0)).value_or("");
+        return root.size()>=2&&(root[0]=='C'||root[0]=='c')&&root[1]==':'?3U:1U;}); // DRIVE_FIXED / DRIVE_NO_ROOT_DIR
     // --- CPU and system facts
     K("IsProcessorFeaturePresent",4,1,[P,arg](HleCall& c)->std::uint32_t{
         P->assume("IsProcessorFeaturePresent: an SSE2 CPU without 3DNow! (the reference CPU's feature set was not captured)");
