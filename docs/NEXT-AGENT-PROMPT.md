@@ -8,74 +8,63 @@ You are continuing the sadx-macos project: a native Apple Silicon port of Sonic 
 (2004 PC) with the pinned speedrun mod profile, built by exact reverse engineering and proven
 by automated tests. Read AGENTS.md, then docs/STATUS.md, docs/ARCHITECTURE.md, docs/ROADMAP.md,
 docs/METHOD.md and docs/decisions/ADR-0001..0004 before touching code. The previous session's
-handoff entry is the last one in docs/HANDOFF.md ("Second layout iteration: layers, one slug,
-discovered oracles").
+handoff entries are the last eleven in docs/HANDOFF.md (from "Oracle health" to "Step 5: sadx-app
+shows the guest"); read them — they record every HLE assumption and the bugs found on the way.
 
-Layout rules you must keep (ADR-0004): src/ is a stack cpu < loader < math < engine < input <
-player < game < runtime < guest < hle < platform < apps, includes only go downward
-(tools/gate/check_layers.py runs in the gate; debt is listed in tools/gate/layer_exceptions.tsv).
-One slug per module: src/<layer>/<slug>.*, tests/unit/<slug>.cpp, tests/probes/native_<slug>_probe.cpp,
-tools/oracles/verify_original_<slug>.py -> `make oracle-<slug-with-dashes>` -> build/oracles/<slug>.json,
-tracked copy reference/oracle-reports/<slug>.json. tools/oracles/verdict.py is the only reader of
-report pass/fail shapes (pass / partial / fail; partial = values exact but FP flags differ).
+Where things stand (gate 111): the in-process guest runs sonic.exe from its entry point with the
+real mod loader, CHRMODELS_orig, the model DLLs, the Input and Speedrun mods and SDL2 (MSVCP140 /
+VCRUNTIME140 as real code from reference/windows-system, everything else HLE in src/hle), through
+WinMain, window and D3D8 device creation, to 300+ deterministic frames at 63 fps virtual (the Speedrun
+limiter on the virtual QPC), ~60 guest frames/s of host time. sadx-app --guest draws those frames with
+Metal (PRESENTED BY SEGA, CREATED BY SONIC TEAM); make app-smoke is in the gate. Four frame-loop
+overrides are equivalence-tested; the FPU shims replace every confirmed FPATAN/FSINCOS/FPTAN/FSIN/FCOS.
 
-Current milestone: M1 — the whole game runs headless on the hybrid runtime (docs/ROADMAP.md).
-The guest CPU skeleton exists (src/guest/x86_guest.*, test tests/unit/guest_smoke.cpp: 7899a0
-from original bytes == native port, override works).
+Current milestone: M1 — finish its definition of done (docs/ROADMAP.md). Do these in order, one gate
+each (make -j10 gate — it now opens a window for app-smoke; record with tools/gate/record_gate.py only
+on rc=0; python3 tools/gate/gen_status.py; a docs/HANDOFF.md entry; commit; do not push unless asked):
 
-Do these in order, one gate each (make -j10 gate; record with tools/gate/record_gate.py only on
-rc=0; python3 tools/gate/gen_status.py; append a docs/HANDOFF.md entry; commit; do not push
-unless asked):
+1. The intro FMV. At frame ~389 the game builds a DirectShow FilterGraph (CoCreateInstance of
+   CLSID_FilterGraph stops by name; the call site is near the movie player that reads system\*.MPG /
+   the WMV path through WMVCORE's WMCreateReader). Model it headlessly and honestly: find exactly which
+   interfaces/methods the game uses (IGraphBuilder::RenderFile, IMediaControl, IMediaEventEx,
+   IMediaSeeking, IVideoWindow, IBasicAudio…), give the graph the movie's real duration from the file,
+   deliver EC_COMPLETE on the virtual clock, draw nothing (a reported assumption), and keep every
+   unmodelled method stopping by name. Then run until the title screen; extend guest-frames to 600
+   frames (the roadmap's SEGA logo → title).
+2. profile-applied: 111 of 119 active patch sites are written by the first Present and still after 300
+   frames; the 8 left are hudscale/SkyChaseFixes sites the inventory marks "unconditional at startup"
+   while the profile has EnableUIScaling false. Decide from the loader source (eb4cdcca) and the pinned
+   DLL which is right; fix tools/gate/profile_patches.json or find what the guest misses. The
+   guest-boot test then asserts all active sites.
+3. Override equivalence for every ported module with an oracle (src/guest/override_table): extend the
+   bridges beyond the four frame-loop ones, starting with the owners whose state is plain globals,
+   then the ones that need guest↔native object bridges (task graph, render queue, heaps). Each entry:
+   equivalence on generated cases (the oracle's input classes) + mutants + the live-boot check in
+   guest-boot. Record which ported modules are still unbound.
+4. FPU shims for F2XM1 / FYL2X(P1): vendor the Bochs routines at the pinned revision (third_party
+   bochs_fpatan, upstream.json), add X87Transcendental wrappers, shim the 7 confirmed sites, and compare
+   on the guest-fpu-shims test like the others. Decide RCP/RSQRT honestly (the IEEE-division model is
+   an assumption, keep it reported).
+5. Input: feed host input to the guest (DirectInput mouse/keyboard device state and buffered data, the
+   Input mod's SDL2 path — SDL's joystick backends currently find no devices), with an input script for
+   the determinism test (identical per-frame hashes for the same script), then keyboard/controller in
+   sadx-app.
+6. A `make m1` target that runs exactly the roadmap's M1 tests, and the M2 golden-frames start
+   (offscreen render of the SEGA frame against a reviewed golden).
 
-1. Oracle health first. docs/STATUS.md lists every oracle as pass / partial / fail. For each
-   `fail`, decide from the report and its `limits` whether it is a stale fixture, a real port
-   regression since gate 98 (the d3dx_math/x87_transcendental changes are the suspects) or a
-   known Unicorn limit, fix what is a regression, and rerun (`make oracle-<slug>`, copy the
-   report + side files to reference/oracle-reports/). Every `partial` must have the flag
-   difference named in its `limits`; add it where missing. Do not change pass criteria to
-   make a report pass. Seven of the nine current fails (crt_asin_binary64, crt_atan2, crt_fabs,
-   crt_floor, floor_angles, player_reaction, x87_memory) attribute their value differences to
-   Unicorn's host-double FPATAN / SNaN loads versus the native Bochs models: do not "fix" the
-   port to match Unicorn; mark them as needing the Intel capture (M4) in their limits and
-   move on. sse_math and ninja_sprite need a real look.
-2. Pay the three layer debts in tools/gate/layer_exceptions.tsv: move NinjaMatrixStack and the
-   matrix primitives (0x7850f0/0x7875f0/0x781c10/0x784c70/0x788df0…) from
-   player/player_coordinates into engine/ninja_matrix with PlayerCoordinates wrapping it; give
-   TaskScheduler a child-state factory installed by the player layer. Rerun the affected
-   oracles with mutants (tools/gate/mutate.py). Remove the exception lines.
-3. Oracles for what landed without one: d3dx_perspective_7716df, d3dx_matrix_inverse_7757e0
-   (seed the dispatch slot 389b7c0 = 7757e0 as the SSE tables do), and the Bochs FSINCOS/FPTAN
-   wrappers (compare against Unicorn's FSINCOS/FPTAN on random ext80 inputs; expect and
-   document differences — QEMU uses host libm). Then port 791170/781250/781570 (the
-   view/projection WinMain span; analysis in reference/ghidra-game-loop-recovery/wm-*.json and
-   proj-791170.json) so 3d129c0 stops being zero natively.
-4. M1 guest, step by step, each with a test in tests/unit/guest_*.cpp:
-   a. Import resolution: parse sonic.exe's import table (ExecutableImage needs an imports()
-      accessor; tools/lib/pe_image.py has the Python version) and bind every import to a trap
-      address in a reserved page; an HLE registry (src/hle) maps trap -> native function with
-      a logged call record. Unbound imports are explicit failures with the import name.
-   b. DLL loading in the guest: the mod loader (reference/updated-pc-reference/game/mods/
-      .modloader/SADXModLoader.dll), Input mod, Speedrun mod, CHRMODELS; relocation via
-      ExecutableImage::rebased; their imports through the same HLE; DllMain/Init export calls
-      in the loader's order (tools/gate/profile_patches.json documents the patch sites they
-      write — the profile-applied test verifies them in guest memory).
-   c. WinMain to the first Present with the D3D8 COM vtables HLE'd onto D3D8StateOwner
-      (src/runtime/game_runtime.hpp) — guest-boot test.
-   d. Override table: bind the already-ported owners (start with the frame-loop ones in
-      src/engine and src/game) and run override-equivalence on the oracle corpora.
-   e. FPU shims: tools/analysis script for FPATAN/FSINCOS/FPTAN/F2XM1/FYL2X/RCPSS/RCPPS/RSQRT*
-      sites; hook them in the guest and compute with src/cpu models; test over the list.
-   f. guest-frames + determinism + guest-fps tests; record FPS in the gate.
-5. Keep sadx-app showing the real state: once the guest produces frames, render its D3D8
-   command stream (clears, polygons, sprites via platform/mac/metal_sprite) and add
-   `make app-smoke` to the gate.
+Performance notes: never pass an instruction count to uc_emu_start (Unicorn then instruments every
+instruction — 30x slower); per-address code hooks are scanned linearly on each hooked instruction, so
+use X86Guest::reserve_hook_region for dense trap ranges; host writes into guest code must invalidate
+translations (X86Guest::write does).
 
-Analysis rules: use REA's Ghidra through reference/ghidra-live.mjs (docs/METHOD.md §1);
-Hopper is not used. Build a whole-program inventory (docs/METHOD.md §2) early — it is cheap
-to start unattended and every later step needs it. Never commit anything under game/ or the
-large reference material; tools/gate/check_repo_hygiene.py runs in the gate. Report honestly:
-unverified scope is named, skipped tests are listed, gates are recorded only with their real
-exit status, "partial" oracles are not called passing.
+Analysis rules: use REA's Ghidra through reference/ghidra-live.mjs (docs/METHOD.md §1; now repo-relative
+and allowing list_procedures/procedure_callees/…); the whole-program inventory is in reference/inventory
+(functions.json, hot-paths.json, fpu-sites.json) — use it. capstone is in the reference venv for byte-level
+checks. Never commit anything under game/, the windows-system DLLs, screenshots or the large reference
+material; tools/gate/check_repo_hygiene.py runs in the gate. Report honestly: unverified scope is named,
+skipped tests are listed, gates are recorded only with their real exit status, "partial" oracles are not
+called passing, and every HLE fact the reference machine would have supplied is an assumption in
+HleProcess::assumptions.
 ```
 
 ## Inputs available on this Mac (all git-ignored)
@@ -85,9 +74,11 @@ exit status, "partial" oracles are not called passing.
 | `game/Sonic Adventure DX/` | the working install (sonic.exe `6b0937ca…`, system/, mods/ with loader + Input/Frame Limit/CCEF/EHCF) |
 | `game/pristine/sonic.exe` | the untouched speedrun-page download, same hash |
 | `game/disc/sonic-adventure-dx-directors-cut_202202/` | retail disc BIN/CUE images (Disc 1 exe differs by the CD-check byte; Disc 2 = SoundData) |
-| `reference/updated-pc-reference/game/` | the pinned "updated speedrun" profile install (the DLLs the oracles pin) |
+| `reference/updated-pc-reference/game/` | the pinned "updated speedrun" profile install — the guest's install directory (loader, Input + Speedrun mods, profiles) |
+| `reference/windows-system/` | 32-bit msvcp140.dll / vcruntime140.dll 14.51.36247.0 the guest runs as real code (PROVENANCE.md has hashes and the copy command) |
 | `reference/sadx-mod-loader/` | mod loader source at eb4cdcca (git submodule) |
-| `reference/python/` | the venv with Unicorn 2.1.4 (oracles and the in-process guest library) |
+| `reference/python/` | the venv with Unicorn 2.1.4 (oracles and the in-process guest library) and capstone 5.0.7 |
 | `reference/tools/ghidra_12.1.4_PUBLIC/` | Ghidra for REA's provider |
+| `reference/inventory-raw/` | raw Ghidra list_procedures / procedure_callees results (the tracked product is reference/inventory/) |
 | `reference/ghidra-game-loop-recovery/` | all Ghidra results so far (`<label>.json` + `.pseudocode.txt`) |
 | `reference/windows-transfer/` | the Windows capture collector for M4 |
