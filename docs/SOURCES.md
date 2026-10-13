@@ -17,7 +17,7 @@ speedrun page (same hash as above; use it to re-verify the install if anything i
 doubt) and `game/disc/sonic-adventure-dx-directors-cut_202202/` — the retail disc images
 (see below). `reference/updated-pc-reference/game/` is the pinned-profile install.
 
-`tools/extract.py` refuses any other `sonic.exe`. Verified 2026-10-12: the user's fresh
+`tools/lib/extract.py` refuses any other `sonic.exe`. Verified 2026-10-12: the user's fresh
 download from the speedrun page is byte-identical to this image; the install's sound
 tree is complete against the retail disc (4,329 names match; 21 `.wma` differ only by
 metadata size), i.e. nothing was deleted.
@@ -46,7 +46,7 @@ Two BIN/CUE images (MODE1/2352). Disc 1: `sonic.exe` (differs from the pinned im
 the one CD-check byte), `system.dat` (installer container "archive V2.2", 1,891
 compressed entries), DirectX/WMP redistributables. Disc 2: `SoundData/` (4,329 files).
 Useful as an independent check of data integrity; not needed to build or test.
-`tools/iso_list.py` lists the images read-only.
+`tools/analysis/iso_list.py` lists the images read-only.
 
 ## Reference machine facts not captured yet
 

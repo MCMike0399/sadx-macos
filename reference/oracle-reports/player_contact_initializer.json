@@ -1,0 +1,470 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "function": {
+  "address": "0x43c7d0",
+  "end_exclusive": "0x43ca3c",
+  "sha256": "3dd2aad941965bb41a65d6c1d5f438de6c80db88cfbf316013e3d117ecc18019"
+ },
+ "library_sha256": "b49f455ac9c3c7bcb23d07aabaa4bfbfa6a8f36d15ea1645119b05162cdc76b5",
+ "native_sources": {
+  "src/player_contact_initializer.hpp": "5b664af75665144851a85118f6414c82c9f95f7c11757c5f103ec1dd70a248b8",
+  "src/player_contact_initializer.cpp": "10489fda406e458b4406eb5ae5751042c820d4b9d291f0cfc69520e6e9e4625a",
+  "src/player_rotation.hpp": "8bdf5a75ca53c7857db86c6f15778095257d3e58428de71b7f34e4b0b2cbeb32",
+  "src/player_rotation.cpp": "87e7f62da064257f47af017e596c3c61078a1c65ca05828d8d6c73903c835cbe",
+  "src/ninja_math.hpp": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
+  "src/ninja_math.cpp": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
+  "src/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
+  "src/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8",
+  "src/player/player_contact.hpp": "8f155fff829310c44430815156fe19c91782b2156620005a76e317921868e401",
+  "src/player/player_physics.hpp": "08bf9f1949cdb7fd1605429c9b9663265e61d62352b9f5d018e7244a74738530",
+  "src/player/player_acceleration.hpp": "3ca9bd3f7dfccec590eec2926fa0d0b0eea194e1fa1f014b0dcf250411273257",
+  "tests/probes/native_player_contact_initializer_probe.cpp": "66741c77712284fbe1cc86644874edb23a5e0e9086f7d3d166de4d74f9c8e148"
+ },
+ "compiler": "Clang 21.0.0 (clang-2100.3.34.2); ARM64 C++17 O2 software x87",
+ "verifier_sha256": "fa5567931cb91237ddea0d3264c0fadc5c9fe03ba7f7b4d203edad5b5bbf2074",
+ "fixture_sha256": "686147b3886d788c716a444910983013a00c2aef1bc041dc55cef6441c076b2e",
+ "fixture_count": 4800,
+ "control_words": [
+  {
+   "cw": "0x7f",
+   "cases": 4800,
+   "value_mismatches": 0,
+   "flag_mismatches": 2344,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0x47f",
+   "cases": 4800,
+   "value_mismatches": 0,
+   "flag_mismatches": 2344,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0x87f",
+   "cases": 4800,
+   "value_mismatches": 0,
+   "flag_mismatches": 2344,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0xc7f",
+   "cases": 4800,
+   "value_mismatches": 0,
+   "flag_mismatches": 2344,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0x27f",
+   "cases": 4800,
+   "value_mismatches": 0,
+   "flag_mismatches": 2102,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0x67f",
+   "cases": 4800,
+   "value_mismatches": 0,
+   "flag_mismatches": 2102,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0xa7f",
+   "cases": 4800,
+   "value_mismatches": 0,
+   "flag_mismatches": 2102,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0xe7f",
+   "cases": 4800,
+   "value_mismatches": 0,
+   "flag_mismatches": 2102,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0x37f",
+   "cases": 4800,
+   "value_mismatches": 0,
+   "flag_mismatches": 2087,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0x77f",
+   "cases": 4800,
+   "value_mismatches": 0,
+   "flag_mismatches": 2087,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0xb7f",
+   "cases": 4800,
+   "value_mismatches": 0,
+   "flag_mismatches": 2087,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0xf7f",
+   "cases": 4800,
+   "value_mismatches": 0,
+   "flag_mismatches": 2087,
+   "cw_mismatches": 0
+  }
+ ],
+ "mismatches": [
+  {
+   "cw": "0x7f",
+   "case": 1,
+   "fields": [
+    "flag"
+   ],
+   "input": [
+    "0x24008",
+    "0x1",
+    "0xc1341dcf",
+    "0xbfc59eee",
+    "0xbd430b36",
+    "0xc0a2657c",
+    "0xc12f372d",
+    "0xc0ba838e",
+    "0xc118dd0c",
+    "0xc0a76457"
+   ],
+   "original": [
+    "0x0",
+    "0xc0cdcabe",
+    "0x0"
+   ],
+   "native": [
+    "0x0",
+    "0xc0cdcabe",
+    "0x0"
+   ],
+   "flags": [
+    "0x0",
+    "0x20"
+   ]
+  },
+  {
+   "cw": "0x7f",
+   "case": 2,
+   "fields": [
+    "flag"
+   ],
+   "input": [
+    "0x4000",
+    "0x2000",
+    "0xc12bd20d",
+    "0x3fcb45a1",
+    "0x400ababd",
+    "0x413cba2a",
+    "0xc0234efe",
+    "0x4121ff85",
+    "0xc1275f9a",
+    "0xc10afa69"
+   ],
+   "original": [
+    "0x0",
+    "0xc11e2d9c",
+    "0x0"
+   ],
+   "native": [
+    "0x0",
+    "0xc11e2d9c",
+    "0x0"
+   ],
+   "flags": [
+    "0x0",
+    "0x20"
+   ]
+  },
+  {
+   "cw": "0x7f",
+   "case": 4,
+   "fields": [
+    "flag"
+   ],
+   "input": [
+    "0x0",
+    "0x2003",
+    "0x409415d8",
+    "0xc1289d99",
+    "0xc139cc25",
+    "0xc1251794",
+    "0xc0f4dc2f",
+    "0xc0fccdbd",
+    "0xbf586812",
+    "0xc0e2d8e9"
+   ],
+   "original": [
+    "0x0",
+    "0xc11e3941",
+    "0x0"
+   ],
+   "native": [
+    "0x0",
+    "0xc11e3941",
+    "0x0"
+   ],
+   "flags": [
+    "0x0",
+    "0x20"
+   ]
+  },
+  {
+   "cw": "0x7f",
+   "case": 5,
+   "fields": [
+    "flag"
+   ],
+   "input": [
+    "0x20000",
+    "0x1",
+    "0xc132c6a1",
+    "0x40a71ab4",
+    "0xc0e081b7",
+    "0x40a22f60",
+    "0xbf6ddf22",
+    "0xbfce8576",
+    "0xc02a39c3",
+    "0xc0fd241d"
+   ],
+   "original": [
+    "0x0",
+    "0xc11e920e",
+    "0x0"
+   ],
+   "native": [
+    "0x0",
+    "0xc11e920e",
+    "0x0"
+   ],
+   "flags": [
+    "0x0",
+    "0x20"
+   ]
+  },
+  {
+   "cw": "0x7f",
+   "case": 7,
+   "fields": [
+    "flag"
+   ],
+   "input": [
+    "0x4000",
+    "0x2",
+    "0x413dde61",
+    "0x4136e2e0",
+    "0xbfb27157",
+    "0x40a921e2",
+    "0x3fe7efb2",
+    "0xbea7721d",
+    "0xbf5cc261",
+    "0xc122b948"
+   ],
+   "original": [
+    "0x0",
+    "0xc1291fae",
+    "0x0"
+   ],
+   "native": [
+    "0x0",
+    "0xc1291fae",
+    "0x0"
+   ],
+   "flags": [
+    "0x0",
+    "0x20"
+   ]
+  },
+  {
+   "cw": "0x7f",
+   "case": 8,
+   "fields": [
+    "flag"
+   ],
+   "input": [
+    "0x20000",
+    "0x0",
+    "0x409f9709",
+    "0x402a2dce",
+    "0x402b2cd0",
+    "0x40d1eb14",
+    "0x41192a4e",
+    "0xc061a9da",
+    "0xc00880c3",
+    "0xc07c87f9"
+   ],
+   "original": [
+    "0x0",
+    "0xc0be43fc",
+    "0x0"
+   ],
+   "native": [
+    "0x0",
+    "0xc0be43fc",
+    "0x0"
+   ],
+   "flags": [
+    "0x0",
+    "0x20"
+   ]
+  },
+  {
+   "cw": "0x7f",
+   "case": 11,
+   "fields": [
+    "flag"
+   ],
+   "input": [
+    "0x24008",
+    "0x2000",
+    "0x40f62c68",
+    "0xbc9f14f8",
+    "0xbf11e8b4",
+    "0xc0d74580",
+    "0xc08b1724",
+    "0xc124405a",
+    "0x410bd3f4",
+    "0xc0b36291"
+   ],
+   "original": [
+    "0x0",
+    "0xc0d9c8f8",
+    "0x0"
+   ],
+   "native": [
+    "0x0",
+    "0xc0d9c8f8",
+    "0x0"
+   ],
+   "flags": [
+    "0x0",
+    "0x20"
+   ]
+  },
+  {
+   "cw": "0x7f",
+   "case": 12,
+   "fields": [
+    "flag"
+   ],
+   "input": [
+    "0x24008",
+    "0x1",
+    "0xbff9d8fb",
+    "0x406c15e4",
+    "0x40fb4a8c",
+    "0x40b1c1ab",
+    "0xc10810f8",
+    "0x4060fc67",
+    "0x4003ac4f",
+    "0xc134f39a"
+   ],
+   "original": [
+    "0x0",
+    "0xc14826cd",
+    "0x0"
+   ],
+   "native": [
+    "0x0",
+    "0xc14826cd",
+    "0x0"
+   ],
+   "flags": [
+    "0x0",
+    "0x20"
+   ]
+  },
+  {
+   "cw": "0x7f",
+   "case": 13,
+   "fields": [
+    "flag"
+   ],
+   "input": [
+    "0x24008",
+    "0x2",
+    "0x41229f43",
+    "0x412da1bd",
+    "0x40ee43a5",
+    "0xbe7a66a1",
+    "0x41299891",
+    "0xc122ab59",
+    "0xc0351a33",
+    "0xc126de15"
+   ],
+   "original": [
+    "0x0",
+    "0xc12d447b",
+    "0x0"
+   ],
+   "native": [
+    "0x0",
+    "0xc12d447b",
+    "0x0"
+   ],
+   "flags": [
+    "0x0",
+    "0x20"
+   ]
+  },
+  {
+   "cw": "0x7f",
+   "case": 14,
+   "fields": [
+    "flag"
+   ],
+   "input": [
+    "0x24008",
+    "0x3",
+    "0x412c4826",
+    "0x4106c7aa",
+    "0xc08c9d25",
+    "0x4034497d",
+    "0xc0ef998a",
+    "0xc10ecd7a",
+    "0x404a36ee",
+    "0x40d5cd66"
+   ],
+   "original": [
+    "0x0",
+    "0x40af6700",
+    "0x0"
+   ],
+   "native": [
+    "0x0",
+    "0x40af6700",
+    "0x0"
+   ],
+   "flags": [
+    "0x0",
+    "0x20"
+   ]
+  }
+ ],
+ "limits": [
+  "Explicit caller data and masked experimental CW profiles, not observed startup",
+  "All original instructions/callees execute without overlays",
+  "Raw/nonfinite values are preserved",
+  "Unicorn status/transcendental limitations; no original Intel hardware observation"
+ ],
+ "values_cw_match": true,
+ "tracked_summary": {
+  "full_sha256": "9b37084889be30643e40df0ad7d1c2c6fa0fd93f5dd77a7a96a659d4cbdce0d6",
+  "full_bytes": 36880883,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "mismatches": 26132,
+   "mismatches[0].input": 50,
+   "mismatches[1].input": 50,
+   "mismatches[2].input": 50,
+   "mismatches[3].input": 50,
+   "mismatches[4].input": 50,
+   "mismatches[5].input": 50,
+   "mismatches[6].input": 50,
+   "mismatches[7].input": 50,
+   "mismatches[8].input": 50,
+   "mismatches[9].input": 50
+  }
+ }
+}

@@ -60,7 +60,7 @@ def main():
         cases+=1;key=f"arm{c[2]&7}:viewport{c[2]>>3}";outcomes[key]=outcomes.get(key,0)+1
         d=[i for i in range(4) if got[i]!=e[i]]
         if d:bad.append(dict(case=n,fields=d,source=[hex(e[i]) for i in d],native=[hex(got[i]) for i in d]))
-    names=['src/d3dx/d3dx_math.hpp','src/d3dx/d3dx_math.cpp','src/cpu/sse_math.cpp','tests/probes/native_d3dx_project_probe.cpp','tools/oracles/verify_original_d3dx_project.py']
+    names=['src/math/d3dx_math.hpp','src/math/d3dx_math.cpp','src/cpu/sse_math.cpp','tests/probes/native_d3dx_project_probe.cpp','tools/oracles/verify_original_d3dx_project.py']
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={x:sha((pathlib.Path(__file__).resolve().parents[2]/x).read_bytes()) for x in names},
         original_ranges_sha256={'0x772615-0x7727a2':sha(image.read(0x772615,0x18d)),'0x774150-0x774243':sha(image.read(0x774150,0xf3)),'0x774310-0x774456':sha(image.read(0x774310,0x146))},
         cases=cases,source_outcomes=outcomes,mismatch_count=len(bad),mismatches=bad[:20],state_traces_match=not bad,limits=__doc__)

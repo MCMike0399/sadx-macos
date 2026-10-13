@@ -1,4 +1,4 @@
-#include "ninja/ninja_vibration.hpp"
+#include "engine/ninja_vibration.hpp"
 #include <iostream>
 #include <stdexcept>
 #include <vector>

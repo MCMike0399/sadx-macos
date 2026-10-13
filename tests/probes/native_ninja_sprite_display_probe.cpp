@@ -1,4 +1,4 @@
-#include "ninja/ninja_sprite_display.hpp"
+#include "engine/ninja_sprite_display.hpp"
 #include <algorithm>
 #include <cstring>
 #include <vector>

@@ -1,0 +1,93 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "827828cd432cedceef831ecc4f0d92917a8a88723eb2a253fe40dd26b295426d",
+ "source_function_address": "0x644340",
+ "source_function_sha256": "5333b186c02836974c6f792303aeb2c00d856316b93ccbbe65f51def6ae661b4",
+ "input_case_sha256": "187ede43a1fd8038506149e5ca016fd72aef46ef78a6548fe3fde3cb24eacc4e",
+ "profiles": [
+  {
+   "control_word": "0x7f",
+   "cases": 3026,
+   "value_mismatches": 0,
+   "flag_mismatches": 3019,
+   "examples": []
+  },
+  {
+   "control_word": "0x47f",
+   "cases": 3026,
+   "value_mismatches": 0,
+   "flag_mismatches": 3019,
+   "examples": []
+  },
+  {
+   "control_word": "0x87f",
+   "cases": 3026,
+   "value_mismatches": 0,
+   "flag_mismatches": 3019,
+   "examples": []
+  },
+  {
+   "control_word": "0xc7f",
+   "cases": 3026,
+   "value_mismatches": 0,
+   "flag_mismatches": 3019,
+   "examples": []
+  },
+  {
+   "control_word": "0x27f",
+   "cases": 3026,
+   "value_mismatches": 0,
+   "flag_mismatches": 3019,
+   "examples": []
+  },
+  {
+   "control_word": "0x67f",
+   "cases": 3026,
+   "value_mismatches": 0,
+   "flag_mismatches": 3019,
+   "examples": []
+  },
+  {
+   "control_word": "0xa7f",
+   "cases": 3026,
+   "value_mismatches": 0,
+   "flag_mismatches": 3019,
+   "examples": []
+  },
+  {
+   "control_word": "0xe7f",
+   "cases": 3026,
+   "value_mismatches": 0,
+   "flag_mismatches": 3019,
+   "examples": []
+  },
+  {
+   "control_word": "0x37f",
+   "cases": 3026,
+   "value_mismatches": 0,
+   "flag_mismatches": 3019,
+   "examples": []
+  },
+  {
+   "control_word": "0x77f",
+   "cases": 3026,
+   "value_mismatches": 0,
+   "flag_mismatches": 3019,
+   "examples": []
+  }
+ ],
+ "limits": [
+  "Binary64 initial load, not every possible extended register input",
+  "Original instructions execute in Unicorn, not native x86 hardware",
+  "Exception flags are reported independently; emulator flag behavior is not a hardware oracle"
+ ],
+ "tested_values_match": true,
+ "tracked_summary": {
+  "full_sha256": "7dded7d5a43cb5a14c988a93c26af0781c429bd7a0350b46ea761f27b61f4ac1",
+  "full_bytes": 2478,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "profiles": 12
+  }
+ }
+}

@@ -1,0 +1,133 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "landtable": {
+  "address": "0xe99cb8",
+  "header_sha256": "cb356c5f3e3536004a2533796e4b7e42c9ad7fcad650442897e537f5875b2ff7",
+  "record_count": 480,
+  "records_sha256": "9038e702dd37997d42f580cd2eaa46f9077bf6343b3f4a70d1ff64403b579ad1"
+ },
+ "library_sha256": "c28e9fb04b8ef8e11825191e570c5d486e3dec6caa7982933c21b8dcd3476097",
+ "compiler": "Clang 21.0.0 (clang-2100.3.34.2); ARM64 C++17 O2 software x87; actual PE32 landtable decode",
+ "native_sources": {
+  "src/player_scene_decode.hpp": "78b98a172e0d8a6ee235fde19a05c6b80dc09e1cc61cb6db4650690d85620d70",
+  "src/player_scene_decode.cpp": "e6e292883fbef8e1c90afe4f81f35b20b3f275b4939ab68f7d7fab62bf2c815c",
+  "src/player_scene_registration.hpp": "496d568a385006fa11305f236da0229c8752a3bd16eee7b05d484ded98dad39d",
+  "src/player_scene_registration.cpp": "d11f264669d75203e764fb926610d6f5f861a8fce163f76e6c8a3311d54ed3dd",
+  "src/player_scene_broadphase.hpp": "9fa80b714b61a36f01d404b128f2d56039ff912839f18051e117976abc0edf1c",
+  "src/player_scene_broadphase.cpp": "f1219a05e68bfe201d8b144bbabd0234f6c4a1ce4bb91245efa4e5931e93f96d",
+  "src/player_coordinates.hpp": "5d5cfa3e2965997baf122f6ea263f2104c1e2698ba48373e06628f54ad83b1a7",
+  "src/player_coordinates.cpp": "b375c24b44a6efb65954c6a52d3338b86a6e250d8a4b1ab6b190168d75024663",
+  "src/ninja_math.hpp": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
+  "src/ninja_math.cpp": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
+  "src/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
+  "src/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8",
+  "src/player/player_scene_resources.hpp": "87a118d948493bee0819900f83637ecd58f6d2bcf5422b45fd4c7ab374a3e52b",
+  "tests/probes/native_player_scene_probe.cpp": "65a03499f679229979558b676bd8834592f60c8cb2a20370043cf2f9ef5901b1"
+ },
+ "verifier_sha256": "e7921b4b90d0a3e3118c74f32f4b7382f051a01a80f07286888c06063cb4cc54",
+ "fixture_sha256": "dc7e0bc5e4c3dd420d80503ee3a16bcbd0551dba7d3fd0250009f2e2074dcee3",
+ "fixture_count": 480,
+ "control_words": [
+  {
+   "cw": "0x7f",
+   "cases": 480,
+   "value_mismatches": 0,
+   "flag_mismatches": 480
+  },
+  {
+   "cw": "0x47f",
+   "cases": 480,
+   "value_mismatches": 0,
+   "flag_mismatches": 480
+  },
+  {
+   "cw": "0x87f",
+   "cases": 480,
+   "value_mismatches": 0,
+   "flag_mismatches": 480
+  },
+  {
+   "cw": "0xc7f",
+   "cases": 480,
+   "value_mismatches": 0,
+   "flag_mismatches": 480
+  },
+  {
+   "cw": "0x27f",
+   "cases": 480,
+   "value_mismatches": 0,
+   "flag_mismatches": 480
+  },
+  {
+   "cw": "0x67f",
+   "cases": 480,
+   "value_mismatches": 0,
+   "flag_mismatches": 480
+  },
+  {
+   "cw": "0xa7f",
+   "cases": 480,
+   "value_mismatches": 0,
+   "flag_mismatches": 480
+  },
+  {
+   "cw": "0xe7f",
+   "cases": 480,
+   "value_mismatches": 0,
+   "flag_mismatches": 480
+  },
+  {
+   "cw": "0x37f",
+   "cases": 480,
+   "value_mismatches": 0,
+   "flag_mismatches": 480
+  },
+  {
+   "cw": "0x77f",
+   "cases": 480,
+   "value_mismatches": 0,
+   "flag_mismatches": 480
+  },
+  {
+   "cw": "0xb7f",
+   "cases": 480,
+   "value_mismatches": 0,
+   "flag_mismatches": 480
+  },
+  {
+   "cw": "0xf7f",
+   "cases": 480,
+   "value_mismatches": 0,
+   "flag_mismatches": 480
+  }
+ ],
+ "mismatches": [],
+ "limits": [
+  "Real source ECoast LANDTABLE, actual binding43b700 prefix through43b751 store; stopsbefore43a260",
+  "Separate actual source static registration43aef0/query450c10 experiments using that observed table and real records; no overlays",
+  "Registered dynamic-task count0 and mesh-group headnull are explicit test selectors, not observed live-world absence",
+  "Camera/player positions and FPU profiles are caller-selected, not physical gameplay observations",
+  "43a260 stage initialization/NJS mesh conversion/Win32 heap initialization remain unfinished; no heap overlays added",
+  "Object-query453820/contactresponse/completepositionpath remain unfinished",
+  "Unicorn exception flags remain limited"
+ ],
+ "original_binding": {
+  "landtable": "0xe99cb8",
+  "static_enabled": 1,
+  "stop_boundary": "0x43b757",
+  "unexecuted_initializer": "0x43a260"
+ },
+ "native_decoded_table_identity": [
+  "0x0",
+  "0xe99cb8",
+  "0x1e0",
+  "0xc"
+ ],
+ "values_match": true,
+ "tracked_summary": {
+  "full_sha256": "53a96f3131879004b4a938ebef24a259f2034b05dbfefdecf19aacef78addcc2",
+  "full_bytes": 4607,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

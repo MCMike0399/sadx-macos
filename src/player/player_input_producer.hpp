@@ -1,6 +1,6 @@
 #pragma once
 
-#include "game/game_controller.hpp"
+#include "engine/game_controller.hpp"
 #include "player/player_input.hpp"
 
 #include <array>

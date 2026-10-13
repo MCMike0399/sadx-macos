@@ -77,7 +77,7 @@ def main():
     init.argtypes=[ctypes.POINTER(ctypes.c_float),ctypes.POINTER(ctypes.c_ubyte),ctypes.c_size_t]
     if init((ctypes.c_float*1025).from_buffer_copy(sine),(ctypes.c_ubyte*52).from_buffer_copy(constants),52):raise RuntimeError('Native constants rejected')
     fn=lib.sadx_native_contact_response;fn.argtypes=[ctypes.c_uint,ctypes.c_uint16,ctypes.POINTER(ctypes.c_uint32),ctypes.POINTER(ctypes.c_uint32),ctypes.POINTER(ctypes.c_uint32)]
-    cases=list(fixtures());oracle=ResponseOriginal(image);start=time.monotonic();root=pathlib.Path(__file__).resolve().parent.parent
+    cases=list(fixtures());oracle=ResponseOriginal(image);start=time.monotonic();root=pathlib.Path(__file__).resolve().parents[2]
     case_blob=b''.join(struct.pack('<40I',*w)+struct.pack('<I',len(rows))+b''.join(struct.pack('<22I',*row) for row in rows) for w,rows in cases)
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(args.native_library.read_bytes()),
         profile='five actual source contact-response bodies with real callees, no overlays; explicit fixtures/policy1',
@@ -85,7 +85,7 @@ def main():
         constants=dict(bytes=constants.hex(),sha256=sha(constants),fields=[hex(a) for a,n in addresses]),
         cases_per_entry_and_cw=len(cases),case_sha256=sha(case_blob),
         native_sources={name:sha((root/name).read_bytes()) for name in ('src/player/player_contact_response.hpp','src/player/player_contact_response.cpp','tests/probes/native_player_contact_response_probe.cpp','tools/oracles/verify_original_player_contact_response.py')},
-        native_shared_sources={name:sha((root/name).read_bytes()) for name in ('src/ninja/ninja_math.cpp','src/player/player_rotation.cpp','src/player/player_projection.cpp',
+        native_shared_sources={name:sha((root/name).read_bytes()) for name in ('src/math/ninja_math.cpp','src/player/player_rotation.cpp','src/player/player_projection.cpp',
             'src/player/player_plane.cpp','src/player/player_acceleration_alternate_math.cpp','src/cpu/crt_acos.cpp','src/cpu/crt_asin.cpp',
             'src/cpu/crt_integer.cpp','src/cpu/x87_math.cpp','src/cpu/x87_transcendental.cpp','src/player/player_contact.hpp','src/player/player_mesh_query.hpp',
             'src/player/player_task.hpp','src/player/player_physics.hpp','src/player/player_acceleration.hpp')},

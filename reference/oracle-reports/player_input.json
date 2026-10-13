@@ -1,0 +1,3337 @@
+{
+ "profile": "GetAnalog exact i386 bytes / native arm64 / explicit external globals",
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_function_va": "0x43bdc0",
+ "source_function_sha256": "1605a9592f99613b75f7c81c753209e6e4d89954007e2d6868cb367eb40b2ae3",
+ "native_library_sha256": "7fb382445d199f182e743353b39218de2e9f570eca3943c0854ed187ec8d5c05",
+ "forced_angle_constants": [
+  {
+   "address": "0x7e0050",
+   "binary64_hex": "0000000000c05fc0"
+  },
+  {
+   "address": "0x7e0048",
+   "binary64_hex": "0000000000000000"
+  },
+  {
+   "address": "0x7dccd0",
+   "binary64_hex": "000000000000f040"
+  },
+  {
+   "address": "0x7dcce8",
+   "binary64_hex": "0ae3e4b4305fc4bf"
+  }
+ ],
+ "fixture_sha256": "09ef8434b1a029b483c46ef2c6be7ea5ae610877664bd1b339e256d371e68f2a",
+ "fixture_count": 17848,
+ "forced_angle_case_count": 625,
+ "control_words": [
+  {
+   "control_word": "0x7f",
+   "cases": 17848,
+   "mismatches": 6009,
+   "value_mismatches": 0,
+   "exception_mismatches": 6009,
+   "accessor_instruction_exception_mismatches": 0,
+   "examples": [
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    }
+   ]
+  },
+  {
+   "control_word": "0x47f",
+   "cases": 17848,
+   "mismatches": 6009,
+   "value_mismatches": 0,
+   "exception_mismatches": 6009,
+   "accessor_instruction_exception_mismatches": 0,
+   "examples": [
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    }
+   ]
+  },
+  {
+   "control_word": "0x87f",
+   "cases": 17848,
+   "mismatches": 6009,
+   "value_mismatches": 0,
+   "exception_mismatches": 6009,
+   "accessor_instruction_exception_mismatches": 0,
+   "examples": [
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    }
+   ]
+  },
+  {
+   "control_word": "0xc7f",
+   "cases": 17848,
+   "mismatches": 6009,
+   "value_mismatches": 0,
+   "exception_mismatches": 6009,
+   "accessor_instruction_exception_mismatches": 0,
+   "examples": [
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    }
+   ]
+  },
+  {
+   "control_word": "0x27f",
+   "cases": 17848,
+   "mismatches": 6009,
+   "value_mismatches": 0,
+   "exception_mismatches": 6009,
+   "accessor_instruction_exception_mismatches": 0,
+   "examples": [
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    }
+   ]
+  },
+  {
+   "control_word": "0x67f",
+   "cases": 17848,
+   "mismatches": 6009,
+   "value_mismatches": 0,
+   "exception_mismatches": 6009,
+   "accessor_instruction_exception_mismatches": 0,
+   "examples": [
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    }
+   ]
+  },
+  {
+   "control_word": "0xa7f",
+   "cases": 17848,
+   "mismatches": 6009,
+   "value_mismatches": 0,
+   "exception_mismatches": 6009,
+   "accessor_instruction_exception_mismatches": 0,
+   "examples": [
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    }
+   ]
+  },
+  {
+   "control_word": "0xe7f",
+   "cases": 17848,
+   "mismatches": 6009,
+   "value_mismatches": 0,
+   "exception_mismatches": 6009,
+   "accessor_instruction_exception_mismatches": 0,
+   "examples": [
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    }
+   ]
+  },
+  {
+   "control_word": "0x37f",
+   "cases": 17848,
+   "mismatches": 6009,
+   "value_mismatches": 0,
+   "exception_mismatches": 6009,
+   "accessor_instruction_exception_mismatches": 0,
+   "examples": [
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    }
+   ]
+  },
+  {
+   "control_word": "0x77f",
+   "cases": 17848,
+   "mismatches": 6009,
+   "value_mismatches": 0,
+   "exception_mismatches": 6009,
+   "accessor_instruction_exception_mismatches": 0,
+   "examples": [
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    }
+   ]
+  },
+  {
+   "control_word": "0xb7f",
+   "cases": 17848,
+   "mismatches": 6009,
+   "value_mismatches": 0,
+   "exception_mismatches": 6009,
+   "accessor_instruction_exception_mismatches": 0,
+   "examples": [
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    }
+   ]
+  },
+  {
+   "control_word": "0xf7f",
+   "cases": 17848,
+   "mismatches": 6009,
+   "value_mismatches": 0,
+   "exception_mismatches": 6009,
+   "accessor_instruction_exception_mismatches": 0,
+   "examples": [
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xa1b2c3d4",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x1",
+      "0xfedcba98",
+      "0x1",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 0,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 1,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 2,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    },
+    {
+     "label": "systematic",
+     "words": [
+      "0x0",
+      "0x3",
+      "0x0",
+      "0x87654321",
+      "0xff",
+      "0x1",
+      "0x0",
+      "0x0",
+      "0xfedcba98",
+      "0x1"
+     ],
+     "outputs_requested": 3,
+     "expected": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x0",
+      "0x0"
+     ],
+     "actual": [
+      "0x0",
+      "0xa1b2c3d4",
+      "0xdeadbeef",
+      "0x2",
+      "0x0"
+     ],
+     "unicorn_fpsw_accessor_flags": "0x0",
+     "source_fnstsw_ax": "0x0"
+    }
+   ]
+  }
+ ],
+ "limitations": [
+  "Unicorn oracle, not original x86 hardware",
+  "Explicit experimental FPCWs and seeded globals; actual runtime state is unobserved",
+  "No Windows startup, updated mod DLL execution or physical game input",
+  "Forced-angle FPATAN uses an explicit Bochs P5/P6 model; Intel Ultra hardware is unverified",
+  "Native InputState/WriteAnalogs producer and complete gameplay are not verified"
+ ],
+ "elapsed_seconds": 4.623539166001137,
+ "passed": false,
+ "value_outputs_passed": true,
+ "exception_flags_match": false,
+ "exception_oracle_note": "Unicorn2.1.4 FNSTSW/accessor omit tested denormal/invalid flags; native architecture flags retained; actual PC exception parity unverified.",
+ "tracked_summary": {
+  "full_sha256": "0c5ba9ff9251eb5bdfda5ffdda9068347c329a8348d0228803ccc9ba3bc49fa3",
+  "full_bytes": 75506,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "control_words[0].examples[0].words": 12,
+   "control_words[0].examples[1].words": 12,
+   "control_words[0].examples[2].words": 12,
+   "control_words[0].examples[3].words": 12,
+   "control_words[0].examples[4].words": 12,
+   "control_words[0].examples[5].words": 12,
+   "control_words[0].examples[6].words": 12,
+   "control_words[0].examples[7].words": 12,
+   "control_words[1].examples[0].words": 12,
+   "control_words[1].examples[1].words": 12,
+   "control_words[1].examples[2].words": 12,
+   "control_words[1].examples[3].words": 12,
+   "control_words[1].examples[4].words": 12,
+   "control_words[1].examples[5].words": 12,
+   "control_words[1].examples[6].words": 12,
+   "control_words[1].examples[7].words": 12,
+   "control_words[2].examples[0].words": 12,
+   "control_words[2].examples[1].words": 12,
+   "control_words[2].examples[2].words": 12,
+   "control_words[2].examples[3].words": 12,
+   "control_words[2].examples[4].words": 12,
+   "control_words[2].examples[5].words": 12,
+   "control_words[2].examples[6].words": 12,
+   "control_words[2].examples[7].words": 12,
+   "control_words[3].examples[0].words": 12,
+   "control_words[3].examples[1].words": 12,
+   "control_words[3].examples[2].words": 12,
+   "control_words[3].examples[3].words": 12,
+   "control_words[3].examples[4].words": 12,
+   "control_words[3].examples[5].words": 12,
+   "control_words[3].examples[6].words": 12,
+   "control_words[3].examples[7].words": 12,
+   "control_words[4].examples[0].words": 12,
+   "control_words[4].examples[1].words": 12,
+   "control_words[4].examples[2].words": 12,
+   "control_words[4].examples[3].words": 12,
+   "control_words[4].examples[4].words": 12,
+   "control_words[4].examples[5].words": 12,
+   "control_words[4].examples[6].words": 12,
+   "control_words[4].examples[7].words": 12,
+   "control_words[5].examples[0].words": 12,
+   "control_words[5].examples[1].words": 12,
+   "control_words[5].examples[2].words": 12,
+   "control_words[5].examples[3].words": 12,
+   "control_words[5].examples[4].words": 12,
+   "control_words[5].examples[5].words": 12,
+   "control_words[5].examples[6].words": 12,
+   "control_words[5].examples[7].words": 12,
+   "control_words[6].examples[0].words": 12,
+   "control_words[6].examples[1].words": 12,
+   "control_words[6].examples[2].words": 12,
+   "control_words[6].examples[3].words": 12,
+   "control_words[6].examples[4].words": 12,
+   "control_words[6].examples[5].words": 12,
+   "control_words[6].examples[6].words": 12,
+   "control_words[6].examples[7].words": 12,
+   "control_words[7].examples[0].words": 12,
+   "control_words[7].examples[1].words": 12,
+   "control_words[7].examples[2].words": 12,
+   "control_words[7].examples[3].words": 12,
+   "control_words[7].examples[4].words": 12,
+   "control_words[7].examples[5].words": 12,
+   "control_words[7].examples[6].words": 12,
+   "control_words[7].examples[7].words": 12,
+   "control_words[8].examples[0].words": 12,
+   "control_words[8].examples[1].words": 12,
+   "control_words[8].examples[2].words": 12,
+   "control_words[8].examples[3].words": 12,
+   "control_words[8].examples[4].words": 12,
+   "control_words[8].examples[5].words": 12,
+   "control_words[8].examples[6].words": 12,
+   "control_words[8].examples[7].words": 12,
+   "control_words[9].examples[0].words": 12,
+   "control_words[9].examples[1].words": 12,
+   "control_words[9].examples[2].words": 12,
+   "control_words[9].examples[3].words": 12,
+   "control_words[9].examples[4].words": 12,
+   "control_words[9].examples[5].words": 12,
+   "control_words[9].examples[6].words": 12,
+   "control_words[9].examples[7].words": 12,
+   "control_words[10].examples[0].words": 12,
+   "control_words[10].examples[1].words": 12,
+   "control_words[10].examples[2].words": 12,
+   "control_words[10].examples[3].words": 12,
+   "control_words[10].examples[4].words": 12,
+   "control_words[10].examples[5].words": 12,
+   "control_words[10].examples[6].words": 12,
+   "control_words[10].examples[7].words": 12,
+   "control_words[11].examples[0].words": 12,
+   "control_words[11].examples[1].words": 12,
+   "control_words[11].examples[2].words": 12,
+   "control_words[11].examples[3].words": 12,
+   "control_words[11].examples[4].words": 12,
+   "control_words[11].examples[5].words": 12,
+   "control_words[11].examples[6].words": 12,
+   "control_words[11].examples[7].words": 12
+  }
+ }
+}

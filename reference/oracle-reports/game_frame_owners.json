@@ -1,0 +1,51 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "ea9b88dec0d0fd2dd12c4698337718ff16b2a159a614c8e9d7cab2946ccdca71",
+ "source_files": {
+  "src/game/game_frame_owners.hpp": "5752b82e87aba68ebab15ecbe58fadf00cb81a1c48daf9d4d979d08aadcf994b",
+  "src/game/game_frame_owners.cpp": "69a07c2b39f14534c35543a6e2dcf9aa664e9b3b7345afd4a94ee29076726e6b",
+  "tests/probes/native_game_frame_owners_probe.cpp": "56d8f463f79306bbc1dc830dd1a17bbe12cd0f84395b41e73d74e5f96ad4481d",
+  "tools/oracles/verify_original_game_frame_owners.py": "3b8553e85f7df1f7dc37e7c31b671cd10006f893a4221aa8dbebbef0bf76cb1b"
+ },
+ "original_ranges_sha256": {
+  "0x40d4d0": "c5a138989dafd34e4857b591f7d41312d5b86c78409816350d3b0488a6987112",
+  "0x40eab0": "bba81af123d201225261c6085c1053d6b235f50c964eeadfa4e548cc780bdf96",
+  "0x42f990": "4f8a422c29c800bf4b118bdfe393d52f04a5e7c139e0fc3fab9c08b729ed6f4e",
+  "0x40d3c0": "86864f6aca0bd58dbe927614b6786bd14479df726e8068a4e72013123c437837",
+  "0x420840": "2b67e9814ec2671fd6360a51584b96b64b67cccf65b0e48109bc11bf8bcdb048",
+  "0x40ef30": "1b81e43a063a27b8e364a6ac9551690d97f26106ef2e4a5bad18f76b2a32cdaf",
+  "0x40ef20": "5e6d11e9148e69a40bf78bdd67a49fcb54557750d9c2413802b973a428cedac4",
+  "0x40bcf0": "17bf8f45ead5b16249df5ef032581af03ce5fbd9b9bb7f223c8a645a8e75ecf8",
+  "0x402ed0": "6150ad0b31e3049ae3e231131b981bf3876e82b0a83f52034fe0d5d71bc5ab9a",
+  "0x402f00": "b2157bc55742d0646a271f47e88ea7930fec165a46f52566068db92b3d993344",
+  "0x4128f0": "d86901e0467154e6f0c8e1a9360cd558bd83b0b9bd8677f7ad98ec5fa01c0d0c"
+ },
+ "cases": 2100,
+ "source_outcomes": {
+  "0x40d4d0:completed0:nested1:render2": 116,
+  "0x40eab0:completed1:nested0:render0": 170,
+  "0x42f990:completed1:nested0:render0": 206,
+  "0x40d3c0:completed0:nested1:render0": 88,
+  "0x420840:completed1:nested0:render2": 300,
+  "0x40ef30:completed1:nested0:render0": 300,
+  "0x40ef20:completed1:nested0:render0": 265,
+  "0x40eab0:completed0:nested1:render0": 130,
+  "0x40ef20:completed0:nested0:render0": 35,
+  "0x40d3c0:completed1:nested0:render0": 212,
+  "0x42f990:completed0:nested1:render0": 94,
+  "0x40d4d0:completed1:nested0:render4": 139,
+  "0x40d4d0:completed1:nested2:render4": 39,
+  "0x40d4d0:completed0:nested1:render4": 2,
+  "0x40d4d0:completed0:nested2:render4": 4
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "state_traces_match": true,
+ "limits": "Per-frame GameLoop owners 40d4d0 (402f00, 77ed00/77ed20, 402ed0 with the real\n7815c0, 40bcf0), 40eab0, 42f990, 40d3c0, 420840 (77ed00/77ed20, 4128f0 with\nthe real 402f40/77ff90) and the key queries 40ef30/40ef20, against original\ninstructions. SetRenderState is a recording COM fixture; 40e2c0 and 780fb0\nare recording fixtures (one can stop the source). The draw-list, effect and\nrelease-walk bodies are native nested owners: the source stops when it reaches\ntheir first body instruction (40d520, 40eac0, 42f9cc, 40d3f5). Compared:\ncompletion, EAX for the key queries, every touched global (FOV words, the\n3d0f9e0 projection scale, counters, list/buffer words, 3b280a8, the 3ab9864\nand 3d0f7f0 colours), the render-state trace and the nested-owner trace.\n",
+ "tracked_summary": {
+  "full_sha256": "fdaa6cbb7f4593a9d773452779f49080946c418c1c48d40a479613b723eff606",
+  "full_bytes": 3166,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

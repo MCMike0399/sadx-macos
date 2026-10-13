@@ -1,4 +1,4 @@
-#include "ninja/ninja_debug_text.hpp"
+#include "engine/ninja_debug_text.hpp"
 #include <algorithm>
 // Native 793e70 with the layout of tools/verify_original_debug_text_register.py.
 // in: [0] 3ce712c [1..32] 3d0fa40 slots   out: [0] completed [1] 3ce712c [2..33] slots [34] EAX

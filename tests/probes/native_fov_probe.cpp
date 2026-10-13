@@ -1,4 +1,4 @@
-#include "ninja/ninja_queue_consumer.hpp"
+#include "engine/ninja_queue_consumer.hpp"
 #include <cstring>
 extern "C" int sadx_native_fov(const float* table,const float* unit,std::int32_t angle,std::uint32_t width_bits,std::uint16_t cw,std::uint32_t* out){
     (void)unit;sadx::NinjaMath::SineTable t;std::memcpy(t.data(),table,4100);

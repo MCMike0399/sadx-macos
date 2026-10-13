@@ -52,6 +52,6 @@ def main():
         if fn((ctypes.c_uint32*8)(*case),8,out,32)!=1:raise RuntimeError('Native fixture rejected')
         if list(out)!=expected:bad.append({'case':number,'fields':[i for i,(x,y) in enumerate(zip(out,expected)) if x!=y],'source':expected,'native':list(out)})
     blob=b''.join(struct.pack('<8I',*c) for c in cases);a.output.with_suffix('.cases.bin').write_bytes(blob)
-    names=['src/game/game_scene_logic.hpp','src/game/game_scene_logic.cpp','src/game/task.hpp','src/game/task.cpp','tests/probes/native_game_scene_logic_probe.cpp','tools/oracles/verify_original_game_scene_logic.py']
+    names=['src/game/game_scene_logic.hpp','src/game/game_scene_logic.cpp','src/engine/task.hpp','src/engine/task.cpp','tests/probes/native_game_scene_logic_probe.cpp','tools/oracles/verify_original_game_scene_logic.py']
     report={'source_sha256':image.sha256,'native_library_sha256':sha(a.native_library.read_bytes()),'source_files':{n:sha((pathlib.Path(__file__).resolve().parents[2]/n).read_bytes()) for n in names},'original_range_sha256':sha(image.read(0x413d40,142)),'cases':len(cases),'case_sha256':sha(blob),'mismatches':bad,'ordering_stores_and_stopped_boundaries_match':not bad,'limits':__doc__};a.output.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({'cases':len(cases),'mismatches':len(bad)}));return int(bool(bad))
 if __name__=='__main__':raise SystemExit(main())

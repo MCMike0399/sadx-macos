@@ -81,7 +81,7 @@ def main():
         cases+=1;key=f"completed{e[0]}:calls{e[100]}:invalid{int(c[10]==1)}";outcomes[key]=outcomes.get(key,0)+1
         d=[i for i in range(200) if got[i]!=e[i]]
         if d:bad.append(dict(case=n,fields=d[:12],source=[hex(e[i]) for i in d[:12]],native=[hex(got[i]) for i in d[:12]]))
-    names=['src/ninja/ninja_screen.hpp','src/ninja/ninja_screen.cpp','src/game/game_frame_control.cpp','src/ninja/ninja_render.cpp','tests/probes/native_screen_init_probe.cpp','tools/oracles/verify_original_screen_init.py']
+    names=['src/engine/ninja_screen.hpp','src/engine/ninja_screen.cpp','src/engine/game_frame_control.cpp','src/engine/ninja_render.cpp','tests/probes/native_screen_init_probe.cpp','tools/oracles/verify_original_screen_init.py']
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={x:sha((pathlib.Path(__file__).resolve().parents[2]/x).read_bytes()) for x in names},
         original_ranges_sha256={'0x780c30-0x780e70':sha(image.read(0x780c30,0x240)),'0x7912e0-0x7913cc':sha(image.read(0x7912e0,0xec)),'0x77ff70':sha(image.read(0x77ff70,0x14)),'0x780090':sha(image.read(0x780090,0xb))},
         cases=cases,source_outcomes=outcomes,mismatch_count=len(bad),mismatches=bad[:20],state_traces_match=not bad,limits=__doc__)

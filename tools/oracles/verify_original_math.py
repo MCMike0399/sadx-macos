@@ -19,6 +19,14 @@ from unicorn.x86_const import UC_X86_REG_ECX, UC_X86_REG_EDX, UC_X86_REG_ESP, UC
 from pe_image import PEImage
 from extract import SOURCE_SHA256, TABLE_ADDRESS
 
+def native_source(root,rel):
+    """Path of a native source named without its layer (legacy 'src/<file>' lists): the one src/<layer>/<file>."""
+    p=pathlib.Path(rel)
+    if (root/p).exists():return root/p
+    hits=sorted((root/'src').glob(f'*/{p.name}'))+sorted((root/'src').glob(f'*/*/{p.name}'))
+    if len(hits)!=1:raise FileNotFoundError(f'{rel}: {len(hits)} candidates under src/')
+    return hits[0]
+
 CODE = 0x10000000
 STOP = CODE + 0x100
 DATA = 0x11000000

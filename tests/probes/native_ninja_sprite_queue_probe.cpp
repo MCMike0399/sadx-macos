@@ -1,4 +1,4 @@
-#include "ninja/ninja_sprite_queue.hpp"
+#include "engine/ninja_sprite_queue.hpp"
 #include <cstring>
 namespace {
 float f(std::uint32_t w){float value;std::memcpy(&value,&w,4);return value;}

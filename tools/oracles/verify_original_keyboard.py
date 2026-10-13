@@ -82,7 +82,7 @@ def main():
         e=source.run(c);key=f"kind{c[0]}:device{c[1]}:hr{c[2]:#x}:count{c[4]:#x}";outcomes[key]=outcomes.get(key,0)+1
         diff=[i for i in range(80) if i!=2 and got[i]!=e[i]]
         if diff:bad.append(dict(case=n,fields=diff[:12],source=[e[i] for i in diff[:12]],native=[got[i] for i in diff[:12]]))
-    names=['src/ninja/ninja_keyboard.hpp','src/ninja/ninja_keyboard.cpp','tests/probes/native_keyboard_probe.cpp','tools/oracles/verify_original_keyboard.py']
+    names=['src/engine/ninja_keyboard.hpp','src/engine/ninja_keyboard.cpp','tests/probes/native_keyboard_probe.cpp','tools/oracles/verify_original_keyboard.py']
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={x:sha((pathlib.Path(__file__).resolve().parents[2]/x).read_bytes()) for x in names},
         original_ranges_sha256={hex(s):sha(image.read(s,n)) for s,n in((0x791bd0,0x189),(0x791b10,0x7f),(0x77f090,5),(0x77f0a0,0x4d),(0x77ffc0,0x17),(0x389d918,0xed*4))},
         cases=len(cases),native_explicit_boundaries=explicit,source_outcomes=outcomes,mismatch_count=len(bad),mismatches=bad[:20],records_match=not bad,limits=__doc__)

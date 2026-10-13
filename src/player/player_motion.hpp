@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ninja/ninja_math.hpp"
+#include "math/ninja_math.hpp"
 
 #include <array>
 #include <cstdint>

@@ -1,6 +1,6 @@
 #pragma once
 #include <functional>
-#include "game/game_controller.hpp"
+#include "engine/game_controller.hpp"
 #include "input/input.hpp"
 #include "input/input_mod_axes.hpp"
 #include "cpu/sse_math.hpp"

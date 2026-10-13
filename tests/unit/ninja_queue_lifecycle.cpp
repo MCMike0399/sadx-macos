@@ -1,4 +1,4 @@
-#include "ninja/ninja_queue_lifecycle.hpp"
+#include "engine/ninja_queue_lifecycle.hpp"
 #include <iostream>
 #include <stdexcept>
 namespace {

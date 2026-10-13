@@ -15,7 +15,7 @@ were used.
 ## Decision
 
 All binary reading goes through the owned Ghidra runner (batch requests, one session).
-Hopper is not used. Raw bytes (`tools/pe_image.py`) only for exact checks and oracle
+Hopper is not used. Raw bytes (`tools/lib/pe_image.py`) only for exact checks and oracle
 fixtures. A whole-program inventory (`reference/inventory/`, see `docs/METHOD.md` §2) is
 produced once and reused.
 

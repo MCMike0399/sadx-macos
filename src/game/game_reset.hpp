@@ -1,6 +1,6 @@
 #pragma once
 #include "cpu/crt_rand.hpp"
-#include "game/game_logic.hpp"
+#include "engine/game_logic.hpp"
 #include <array>
 #include <cstdint>
 #include <functional>

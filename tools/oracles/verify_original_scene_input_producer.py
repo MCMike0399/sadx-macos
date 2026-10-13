@@ -79,7 +79,7 @@ def main():
         outcomes[expected[0]]=outcomes.get(expected[0],0)+1
         if list(out)!=expected:bad.append({'case':number,'fields':[i for i,(x,y) in enumerate(zip(out,expected)) if x!=y],'source':expected,'native':list(out)})
     blob=b''.join(struct.pack('<32I',*c) for c in cases);a.output.with_suffix('.cases.bin').write_bytes(blob)
-    names=['src/game/game_controller.hpp','src/game/game_controller.cpp','src/input/scene_input_producer.hpp','src/input/scene_input_producer.cpp','tests/probes/native_scene_input_producer_probe.cpp','tools/oracles/verify_original_scene_input_producer.py']
+    names=['src/engine/game_controller.hpp','src/engine/game_controller.cpp','src/player/scene_input_producer.hpp','src/player/scene_input_producer.cpp','tests/probes/native_scene_input_producer_probe.cpp','tools/oracles/verify_original_scene_input_producer.py']
     report={'source_sha256':image.sha256,'native_library_sha256':sha(a.native_library.read_bytes()),'source_files':{n:sha((pathlib.Path(__file__).resolve().parents[2]/n).read_bytes()) for n in names},
             'original_ranges_sha256':{'40fdc0':sha(image.read(0x40fdc0,0x141)),'40f070':sha(image.read(0x40f070,0xfb)),'4146b0':sha(image.read(0x4146b0,0x27))},
             'cases':len(cases),'case_sha256':sha(blob),'source_outcomes':{str(k):v for k,v in sorted(outcomes.items())},'mismatches':bad[:50],'mismatch_count':len(bad),

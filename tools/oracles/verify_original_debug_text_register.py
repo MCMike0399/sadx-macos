@@ -34,7 +34,7 @@ def main():
         e[34]=m.reg_read(UC_X86_REG_EAX)
         cases+=1;d=[i for i in range(40) if got[i]!=e[i]]
         if d:bad.append(dict(case=n,fields=d[:12],source=[hex(e[i]) for i in d[:12]],native=[hex(got[i]) for i in d[:12]]))
-    names=['src/ninja/ninja_debug_text.hpp','src/ninja/ninja_debug_text.cpp','src/ninja/ninja_keyboard.cpp','tests/probes/native_debug_text_register_probe.cpp','tools/oracles/verify_original_debug_text_register.py']
+    names=['src/engine/ninja_debug_text.hpp','src/engine/ninja_debug_text.cpp','src/engine/ninja_keyboard.cpp','tests/probes/native_debug_text_register_probe.cpp','tools/oracles/verify_original_debug_text_register.py']
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={x:sha((pathlib.Path(__file__).resolve().parents[2]/x).read_bytes()) for x in names},
         original_ranges_sha256={'0x793e70-0x793e80':sha(image.read(0x793e70,0x10)),'0x77ffc0':sha(image.read(0x77ffc0,0x17)),'0x78c5a0':sha(image.read(0x78c5a0,1))},
         cases=cases,source_outcomes={'completed':cases},mismatch_count=len(bad),mismatches=bad[:20],state_traces_match=not bad,limits=__doc__)

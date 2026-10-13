@@ -1,4 +1,4 @@
-#include "game/game_logic_support.hpp"
+#include "engine/game_logic_support.hpp"
 #include <cstring>
 namespace {
 void diag(const sadx::GameLogicSupportResult& r,std::uint64_t* out){out[0]=static_cast<unsigned>(r.failure);out[1]=r.source_boundary;out[2]=r.completed;out[3]=r.byte_index?*r.byte_index:0xffffffffffffffffULL;out[4]=r.committed_bytes;out[5]=r.quotient?static_cast<std::uint32_t>(*r.quotient):0;out[6]=r.incremented_quotient?static_cast<std::uint32_t>(*r.incremented_quotient):0;out[7]=r.product?static_cast<std::uint32_t>(*r.product):0;out[8]=(r.quotient?1:0)|(r.incremented_quotient?2:0)|(r.product?4:0)|(r.clamped?8:0);out[9]=r.clamped&&*r.clamped;}

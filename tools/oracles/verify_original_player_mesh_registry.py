@@ -9,7 +9,7 @@ from unicorn.x86_const import UC_X86_REG_EAX,UC_X86_REG_ESP,UC_X86_REG_FPCW,UC_X
 from pe_image import PEImage
 from extract import SOURCE_SHA256,TABLE_ADDRESS
 from verify_original_player_scene import SceneOriginal,MATRIX,CAMERA
-from verify_original_math import DATA,STACK,STOP
+from verify_original_math import native_source,DATA,STACK,STOP
 
 GROUPS=0x3b43000;NODES=0x3b48550;BUCKETS=0x3b48150
 WORDS=17+256*16+16384*16+256+1024*3+128*3+8*16+4+1024*3+1
@@ -75,9 +75,9 @@ def main():
     lib.sadx_native_player_mesh_registry_compiler.restype=ctypes.c_char_p
     source=(ctypes.c_uint8*len(image.data)).from_buffer_copy(image.data);table=(ctypes.c_uint8*4100).from_buffer_copy(image.read(TABLE_ADDRESS,4100));unit=image.read(0x389d650,64);ub=(ctypes.c_uint8*64).from_buffer_copy(unit)
     cases=fixtures();blob=b''.join(struct.pack('<8I',mode,*w) for mode,w in cases);a.output.with_suffix('.cases.bin').write_bytes(blob)
-    root=pathlib.Path(__file__).resolve().parent.parent;names=('player_mesh_registry','player_mesh_matrix','player_coordinates','player_scene_decode','player_scene_registration','player_scene_broadphase','crt_fabs','crt_integer','ninja_math','x87_math')
+    root=pathlib.Path(__file__).resolve().parents[2];names=('player_mesh_registry','player_mesh_matrix','player_coordinates','player_scene_decode','player_scene_registration','player_scene_broadphase','crt_fabs','crt_integer','ninja_math','x87_math')
     paths=[f'src/{name}.{ext}' for name in names for ext in ('cpp','hpp')]+['src/player/player_scene_resources.hpp','tests/probes/native_player_mesh_registry_probe.cpp']
-    report=dict(source_sha256=image.sha256,library_sha256=sha(a.library.read_bytes()),compiler=lib.sadx_native_player_mesh_registry_compiler().decode(),native_sources={path:sha((root/path).read_bytes()) for path in paths},verifier_sha256=sha(pathlib.Path(__file__).read_bytes()),case_sha256=sha(blob),profiles=[],mismatches=[],limits=['Actual source instructions, no function overlays','Zero-filled pool bytes and masked CW/matherr1/fabs-policy1 are explicit test profiles, not observed startup state','Real Emerald Coast vertex/index/material/object arrays and exact source transforms; bounded landtable count views are synthetic metadata','Full registry4511d0 uses actual43b580 force profile plus real mesh production; regular43aef0 prefix is separately checked','No physical Intel or updated-mod runtime capture; x87 flags/oracle limitations retained','449500/445d10 positioning and43a260 stage resource startup remain unfinished'])
+    report=dict(source_sha256=image.sha256,library_sha256=sha(a.library.read_bytes()),compiler=lib.sadx_native_player_mesh_registry_compiler().decode(),native_sources={path:sha((native_source(root,path)).read_bytes()) for path in paths},verifier_sha256=sha(pathlib.Path(__file__).read_bytes()),case_sha256=sha(blob),profiles=[],mismatches=[],limits=['Actual source instructions, no function overlays','Zero-filled pool bytes and masked CW/matherr1/fabs-policy1 are explicit test profiles, not observed startup state','Real Emerald Coast vertex/index/material/object arrays and exact source transforms; bounded landtable count views are synthetic metadata','Full registry4511d0 uses actual43b580 force profile plus real mesh production; regular43aef0 prefix is separately checked','No physical Intel or updated-mod runtime capture; x87 flags/oracle limitations retained','449500/445d10 positioning and43a260 stage resource startup remain unfinished'])
     oracle=RegistryOriginal(image,0x27f,unit);oracle.image=image
     for cw in (pc|rc|0x7f for pc in (0,0x200,0x300) for rc in (0,0x400,0x800,0xc00)):
         item=dict(cw=hex(cw),cases=len(cases),value_mismatches=0,flag_mismatches=0)

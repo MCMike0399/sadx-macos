@@ -1,7 +1,7 @@
 #pragma once
 #include <optional>
-#include "game/game_logic.hpp"
-#include "ninja/ninja_memory.hpp"
+#include "engine/game_logic.hpp"
+#include "engine/ninja_memory.hpp"
 #include "cpu/source_bytes.hpp"
 #include <array>
 #include <cstdint>

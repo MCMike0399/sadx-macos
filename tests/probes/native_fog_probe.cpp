@@ -1,4 +1,4 @@
-#include "ninja/ninja_fog.hpp"
+#include "engine/ninja_fog.hpp"
 #include <algorithm>
 #include <cstring>
 // Native Ninja fog owners with the layout of tools/verify_original_fog.py.

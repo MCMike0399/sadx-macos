@@ -1,0 +1,112 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "library_sha256": "dcdbc6458980083e63cf316786d0e9fd72b1d5245c180a1e7099176f9f205e6d",
+ "compiler": "Clang 21.0.0 (clang-2100.3.34.2); ARM64 C++17 O2 source-native fixed-pool mesh producer",
+ "native_sources": {
+  "src/player_mesh_registry.cpp": "3df8f5a39895ef6ecf4ff51c0ffad27e2da043cd74641a89de5dbf5eab0beb63",
+  "src/player_mesh_registry.hpp": "c0c2745ea174a164100174cb1f9f66332a7a4ff3fbfa275c65f9288c6b29e48f",
+  "src/player_mesh_matrix.cpp": "d471c45ce938663118cf792a8740e29d596c4172f5f22dbdde27f8bedc2a0fd2",
+  "src/player_mesh_matrix.hpp": "8a3834fa1b22b686f195cfa8c84105a9a64187089b725f21a650702b33631031",
+  "src/player_coordinates.cpp": "b375c24b44a6efb65954c6a52d3338b86a6e250d8a4b1ab6b190168d75024663",
+  "src/player_coordinates.hpp": "5d5cfa3e2965997baf122f6ea263f2104c1e2698ba48373e06628f54ad83b1a7",
+  "src/player_scene_decode.cpp": "e6e292883fbef8e1c90afe4f81f35b20b3f275b4939ab68f7d7fab62bf2c815c",
+  "src/player_scene_decode.hpp": "78b98a172e0d8a6ee235fde19a05c6b80dc09e1cc61cb6db4650690d85620d70",
+  "src/player_scene_registration.cpp": "d11f264669d75203e764fb926610d6f5f861a8fce163f76e6c8a3311d54ed3dd",
+  "src/player_scene_registration.hpp": "496d568a385006fa11305f236da0229c8752a3bd16eee7b05d484ded98dad39d",
+  "src/player_scene_broadphase.cpp": "f1219a05e68bfe201d8b144bbabd0234f6c4a1ce4bb91245efa4e5931e93f96d",
+  "src/player_scene_broadphase.hpp": "9fa80b714b61a36f01d404b128f2d56039ff912839f18051e117976abc0edf1c",
+  "src/crt_fabs.cpp": "a3fa19258583d90ccd2466a628f41a0ec0a42b5381b2cb569c2981bfe56655b5",
+  "src/crt_fabs.hpp": "7cb4435a02d0307c0cbfa7ee2a0d8f1c8eb97f659042bce551776e84ac3ddef6",
+  "src/crt_integer.cpp": "18d16777cc02344275575955f7773043ea9c6b48cf0197b725e838d1c5294a92",
+  "src/crt_integer.hpp": "f88d5d9b73239055150a35d0fe6363f773c7e62f5b2c1ce62eff5eaabe8333a6",
+  "src/ninja_math.cpp": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
+  "src/ninja_math.hpp": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
+  "src/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8",
+  "src/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
+  "src/player/player_scene_resources.hpp": "87a118d948493bee0819900f83637ecd58f6d2bcf5422b45fd4c7ab374a3e52b",
+  "tests/probes/native_player_mesh_registry_probe.cpp": "b0b44231a067aa8b784b7dcaae6913e695e68d4f1e87c4cba2f1510c10ae500a"
+ },
+ "verifier_sha256": "4352ebda8ef3715e46b7de8b69ffa91f2a05f1b3a66a8db41c6099b7c6cf32b0",
+ "case_sha256": "ffa14c32599e8de776a0c79e24e7296693801b254a00afd068b2b5fc19a24393",
+ "profiles": [
+  {
+   "cw": "0x7f",
+   "cases": 89,
+   "value_mismatches": 0,
+   "flag_mismatches": 42
+  },
+  {
+   "cw": "0x47f",
+   "cases": 89,
+   "value_mismatches": 0,
+   "flag_mismatches": 42
+  },
+  {
+   "cw": "0x87f",
+   "cases": 89,
+   "value_mismatches": 0,
+   "flag_mismatches": 42
+  },
+  {
+   "cw": "0xc7f",
+   "cases": 89,
+   "value_mismatches": 0,
+   "flag_mismatches": 42
+  },
+  {
+   "cw": "0x27f",
+   "cases": 89,
+   "value_mismatches": 0,
+   "flag_mismatches": 42
+  },
+  {
+   "cw": "0x67f",
+   "cases": 89,
+   "value_mismatches": 0,
+   "flag_mismatches": 42
+  },
+  {
+   "cw": "0xa7f",
+   "cases": 89,
+   "value_mismatches": 0,
+   "flag_mismatches": 42
+  },
+  {
+   "cw": "0xe7f",
+   "cases": 89,
+   "value_mismatches": 0,
+   "flag_mismatches": 42
+  },
+  {
+   "cw": "0x37f",
+   "cases": 89,
+   "value_mismatches": 0,
+   "flag_mismatches": 42
+  },
+  {
+   "cw": "0x77f",
+   "cases": 89,
+   "value_mismatches": 0,
+   "flag_mismatches": 42
+  }
+ ],
+ "mismatches": [],
+ "limits": [
+  "Actual source instructions, no function overlays",
+  "Zero-filled pool bytes and masked CW/matherr1/fabs-policy1 are explicit test profiles, not observed startup state",
+  "Real Emerald Coast vertex/index/material/object arrays and exact source transforms; bounded landtable count views are synthetic metadata",
+  "Full registry4511d0 uses actual43b580 force profile plus real mesh production; regular43aef0 prefix is separately checked",
+  "No physical Intel or updated-mod runtime capture; x87 flags/oracle limitations retained",
+  "449500/445d10 positioning and43a260 stage resource startup remain unfinished"
+ ],
+ "values_returns_cw_match": true,
+ "strict_match": false,
+ "tracked_summary": {
+  "full_sha256": "76ed45a20b0db17d845b65adcec51d0c13b5f1fe0771549a4aeec9ce13892945",
+  "full_bytes": 4788,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "profiles": 12
+  }
+ }
+}

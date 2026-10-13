@@ -1,5 +1,5 @@
 #pragma once
-#include "game/game_logic.hpp"
+#include "engine/game_logic.hpp"
 #include "game/game_startup.hpp"
 #include <array>
 #include <cstdint>

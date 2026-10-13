@@ -4,7 +4,7 @@ import unicorn
 from unicorn.x86_const import UC_X86_REG_EAX,UC_X86_REG_ECX,UC_X86_REG_EDX,UC_X86_REG_ESP,UC_X86_REG_FPCW,UC_X86_REG_FPSW,UC_X86_REG_FPTAG
 from pe_image import PEImage
 from extract import SOURCE_SHA256
-from verify_original_math import Original,CODE,DATA,STACK,STOP
+from verify_original_math import native_source,Original,CODE,DATA,STACK,STOP
 
 VECTOR=DATA+0x100;OUTPUT=DATA+0x300
 def word(v):return struct.unpack('<I',struct.pack('<f',v))[0]
@@ -61,8 +61,8 @@ def main():
     probe.argtypes=[ctypes.c_uint32,ctypes.POINTER(ctypes.c_uint32),ctypes.POINTER(ctypes.c_uint32),ctypes.c_uint16,ctypes.POINTER(ctypes.c_uint32)];probe.restype=ctypes.c_int
     lib.sadx_native_player_mesh_math_compiler.restype=ctypes.c_char_p
     axis=(ctypes.c_uint32*2)(image.unpack('<I',0x7dcb2c)[0],image.unpack('<I',0x7dcb10)[0]);blob=b''.join(struct.pack('<20I',m,*w) for m in range(6) for w in cases[m]);a.output.with_suffix('.cases.bin').write_bytes(blob)
-    root=pathlib.Path(__file__).resolve().parent.parent;names=('player_mesh_math','player_mesh_matrix','crt_sqrt','crt_asin','crt_argument','ninja_math','x87_math')
-    report=dict(source_sha256=image.sha256,profile='actual450810/450920/4509d0/795000/787630/788a50; no overlays; explicitmatherr1',native_library_sha256=sha(a.library.read_bytes()),compiler=lib.sadx_native_player_mesh_math_compiler().decode(),native_sources={f'src/{n}.{e}':sha((root/f'src/{n}.{e}').read_bytes()) for n in names for e in ('hpp','cpp')},verifier_sha256=sha(pathlib.Path(__file__).read_bytes()),case_sha256=sha(blob),profiles=[],mismatches=[],limits=['Masked experiment CWs/matherr1 not observed runtime','80realECoast localtriangle inputs plus syntheticraw/matrix fixtures; not finalcontactquery','Generated matrix arithmetic compiles to directnativeC++calls; no runtimeopcodeinterpreter','Unicorn signaling-load/transcendental/status limitations remain; no hardwareequivalenceclaim'])
+    root=pathlib.Path(__file__).resolve().parents[2];names=('player_mesh_math','player_mesh_matrix','crt_sqrt','crt_asin','crt_argument','ninja_math','x87_math')
+    report=dict(source_sha256=image.sha256,profile='actual450810/450920/4509d0/795000/787630/788a50; no overlays; explicitmatherr1',native_library_sha256=sha(a.library.read_bytes()),compiler=lib.sadx_native_player_mesh_math_compiler().decode(),native_sources={f'src/{n}.{e}':sha((native_source(root,f'src/{n}.{e}')).read_bytes()) for n in names for e in ('hpp','cpp')},verifier_sha256=sha(pathlib.Path(__file__).read_bytes()),case_sha256=sha(blob),profiles=[],mismatches=[],limits=['Masked experiment CWs/matherr1 not observed runtime','80realECoast localtriangle inputs plus syntheticraw/matrix fixtures; not finalcontactquery','Generated matrix arithmetic compiles to directnativeC++calls; no runtimeopcodeinterpreter','Unicorn signaling-load/transcendental/status limitations remain; no hardwareequivalenceclaim'])
     oracle=MeshOriginal(image)
     for cw in (pc|rc|0x7f for pc in (0,0x200,0x300) for rc in (0,0x400,0x800,0xc00)):
         for mode in range(6):

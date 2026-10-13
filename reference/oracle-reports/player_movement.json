@@ -1,0 +1,3720 @@
+{
+ "profile": "PGetSpeed with real GetAnalog/task/floor/Ninja/CRT callees; no instruction overlays",
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "273fff130e41f79e4a12215c2bc06b4e7af3f16ae7a265ee8bb50ab3ca183160",
+ "table_sha256": "3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed",
+ "unit_sha256": "5998e9d1dd9bf48af6af87a1ef8c7783b818ac8329637ada08cc5fb329042376",
+ "constants_sha256": "78313b62673c30407e9f765030d8586011681f83aded82325b1f9ccad4ed29b1",
+ "case_blob": {
+  "path": "/Users/burbujamc/Developer/sadx-macos/build/oracles/player_movement.cases.bin",
+  "sha256": "62af8ef670e3b88e54311c38e96f65dd720615c04599674918f26e92bbeec321",
+  "size": 2732360,
+  "record": "166 little-endian uint32 words"
+ },
+ "seed": "0x43ed50443f50",
+ "fixture_count": 4115,
+ "overlays": [],
+ "crt_matherr_policy": 1,
+ "control_words": [
+  {
+   "control_word": "0x7f",
+   "cases": 4115,
+   "value_mismatches": 0,
+   "untouched_mismatches": 0,
+   "call_count_mismatches": 0,
+   "stack_mismatches": 0,
+   "flag_mismatches": 4115,
+   "examples": [
+    {
+     "case": 0,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433523",
+      "0xbf1f081d",
+      "0xbe38fe84",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433523",
+      "0xbf1f081d",
+      "0xbe38fe84",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 1,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f7",
+      "0x3f981d52",
+      "0xc0938170",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f7",
+      "0x3f981d52",
+      "0xc0938170",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 2,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610d",
+      "0x406c3ecd",
+      "0xbf8315e4",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610d",
+      "0x406c3ecd",
+      "0xbf8315e4",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 3,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef90479",
+      "0x3f5a3935",
+      "0xbe4473d5",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x1"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef90479",
+      "0x3f5a3935",
+      "0xbe4473d5",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x1"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 4,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f719",
+      "0xbe9f5994",
+      "0x3d47b5b7",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f719",
+      "0xbe9f5994",
+      "0x3d47b5b7",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 5,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73de",
+      "0xbf6cdc9e",
+      "0xbeb4e881",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73de",
+      "0xbf6cdc9e",
+      "0xbeb4e881",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 6,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9758",
+      "0xc079a8ff",
+      "0xc008bbfc",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9758",
+      "0xc079a8ff",
+      "0xc008bbfc",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 7,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5b00",
+      "0x409505e1",
+      "0x3f173b02",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5b00",
+      "0x409505e1",
+      "0x3f173b02",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    }
+   ]
+  },
+  {
+   "control_word": "0x47f",
+   "cases": 4115,
+   "value_mismatches": 0,
+   "untouched_mismatches": 0,
+   "call_count_mismatches": 0,
+   "stack_mismatches": 0,
+   "flag_mismatches": 4115,
+   "examples": [
+    {
+     "case": 0,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433524",
+      "0xbf1f081f",
+      "0xbe38fe86",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433524",
+      "0xbf1f081f",
+      "0xbe38fe86",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 1,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f6",
+      "0x3f981d52",
+      "0xc0938171",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f6",
+      "0x3f981d52",
+      "0xc0938171",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 2,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610d",
+      "0x406c3ecc",
+      "0xbf8315e4",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610d",
+      "0x406c3ecc",
+      "0xbf8315e4",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 3,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef9047c",
+      "0x3f5a3935",
+      "0xbe4473d8",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x1"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef9047c",
+      "0x3f5a3935",
+      "0xbe4473d8",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x1"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 4,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f719",
+      "0xbe9f5996",
+      "0x3d47b5b7",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f719",
+      "0xbe9f5996",
+      "0x3d47b5b7",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 5,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73e1",
+      "0xbf6cdca0",
+      "0xbeb4e883",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73e1",
+      "0xbf6cdca0",
+      "0xbeb4e883",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 6,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9758",
+      "0xc079a901",
+      "0xc008bbff",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9758",
+      "0xc079a901",
+      "0xc008bbff",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 7,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5b01",
+      "0x409505e1",
+      "0x3f173b03",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5b01",
+      "0x409505e1",
+      "0x3f173b03",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    }
+   ]
+  },
+  {
+   "control_word": "0x87f",
+   "cases": 4115,
+   "value_mismatches": 0,
+   "untouched_mismatches": 0,
+   "call_count_mismatches": 0,
+   "stack_mismatches": 0,
+   "flag_mismatches": 4115,
+   "examples": [
+    {
+     "case": 0,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433521",
+      "0xbf1f081c",
+      "0xbe38fe83",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433521",
+      "0xbf1f081c",
+      "0xbe38fe83",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 1,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f7",
+      "0x3f981d51",
+      "0xc093816f",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f7",
+      "0x3f981d51",
+      "0xc093816f",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 2,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610c",
+      "0x406c3ecd",
+      "0xbf8315e2",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610c",
+      "0x406c3ecd",
+      "0xbf8315e2",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 3,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef90475",
+      "0x3f5a3935",
+      "0xbe4473d1",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x1"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef90475",
+      "0x3f5a3935",
+      "0xbe4473d1",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x1"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 4,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f718",
+      "0xbe9f5990",
+      "0x3d47b5b6",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f718",
+      "0xbe9f5990",
+      "0x3d47b5b6",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 5,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73de",
+      "0xbf6cdc9d",
+      "0xbeb4e87f",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73de",
+      "0xbf6cdc9d",
+      "0xbeb4e87f",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 6,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9756",
+      "0xc079a8fe",
+      "0xc008bbfa",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9756",
+      "0xc079a8fe",
+      "0xc008bbfa",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 7,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5aff",
+      "0x409505e1",
+      "0x3f173b03",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5aff",
+      "0x409505e1",
+      "0x3f173b03",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    }
+   ]
+  },
+  {
+   "control_word": "0xc7f",
+   "cases": 4115,
+   "value_mismatches": 0,
+   "untouched_mismatches": 0,
+   "call_count_mismatches": 0,
+   "stack_mismatches": 0,
+   "flag_mismatches": 4115,
+   "examples": [
+    {
+     "case": 0,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433523",
+      "0xbf1f081d",
+      "0xbe38fe84",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433523",
+      "0xbf1f081d",
+      "0xbe38fe84",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 1,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f5",
+      "0x3f981d4e",
+      "0xc093816f",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f5",
+      "0x3f981d4e",
+      "0xc093816f",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 2,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x40576109",
+      "0x406c3ec9",
+      "0xbf8315e2",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x40576109",
+      "0x406c3ec9",
+      "0xbf8315e2",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 3,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef9047a",
+      "0x3f5a3935",
+      "0xbe4473d6",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x1"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef9047a",
+      "0x3f5a3935",
+      "0xbe4473d6",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x1"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 4,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f71a",
+      "0xbe9f5994",
+      "0x3d47b5b8",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f71a",
+      "0xbe9f5994",
+      "0x3d47b5b8",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 5,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73e0",
+      "0xbf6cdc9d",
+      "0xbeb4e881",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73e0",
+      "0xbf6cdc9d",
+      "0xbeb4e881",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 6,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9755",
+      "0xc079a8fb",
+      "0xc008bbfa",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9755",
+      "0xc079a8fb",
+      "0xc008bbfa",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 7,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5afd",
+      "0x409505df",
+      "0x3f173b01",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5afd",
+      "0x409505df",
+      "0x3f173b01",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    }
+   ]
+  },
+  {
+   "control_word": "0x27f",
+   "cases": 4115,
+   "value_mismatches": 0,
+   "untouched_mismatches": 0,
+   "call_count_mismatches": 0,
+   "stack_mismatches": 0,
+   "flag_mismatches": 4115,
+   "examples": [
+    {
+     "case": 0,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433522",
+      "0xbf1f081d",
+      "0xbe38fe84",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433522",
+      "0xbf1f081d",
+      "0xbe38fe84",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 1,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f7",
+      "0x3f981d52",
+      "0xc0938170",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f7",
+      "0x3f981d52",
+      "0xc0938170",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 2,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610d",
+      "0x406c3ecd",
+      "0xbf8315e3",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610d",
+      "0x406c3ecd",
+      "0xbf8315e3",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 3,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef90479",
+      "0x3f5a3934",
+      "0xbe4473d6",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x1"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef90479",
+      "0x3f5a3934",
+      "0xbe4473d6",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x1"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 4,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f719",
+      "0xbe9f5994",
+      "0x3d47b5b7",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f719",
+      "0xbe9f5994",
+      "0x3d47b5b7",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 5,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73df",
+      "0xbf6cdc9d",
+      "0xbeb4e881",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73df",
+      "0xbf6cdc9d",
+      "0xbeb4e881",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 6,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9758",
+      "0xc079a8ff",
+      "0xc008bbfb",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9758",
+      "0xc079a8ff",
+      "0xc008bbfb",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 7,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5aff",
+      "0x409505e1",
+      "0x3f173b02",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5aff",
+      "0x409505e1",
+      "0x3f173b02",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    }
+   ]
+  },
+  {
+   "control_word": "0x67f",
+   "cases": 4115,
+   "value_mismatches": 0,
+   "untouched_mismatches": 0,
+   "call_count_mismatches": 0,
+   "stack_mismatches": 0,
+   "flag_mismatches": 4115,
+   "examples": [
+    {
+     "case": 0,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433524",
+      "0xbf1f081e",
+      "0xbe38fe85",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433524",
+      "0xbf1f081e",
+      "0xbe38fe85",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 1,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f7",
+      "0x3f981d54",
+      "0xc0938170",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f7",
+      "0x3f981d54",
+      "0xc0938170",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 2,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610d",
+      "0x406c3ecb",
+      "0xbf8315e4",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610d",
+      "0x406c3ecb",
+      "0xbf8315e4",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 3,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef90479",
+      "0x3f5a3934",
+      "0xbe4473d5",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x1"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef90479",
+      "0x3f5a3934",
+      "0xbe4473d5",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x1"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 4,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f719",
+      "0xbe9f5997",
+      "0x3d47b5b8",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f719",
+      "0xbe9f5997",
+      "0x3d47b5b8",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 5,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73e0",
+      "0xbf6cdc9e",
+      "0xbeb4e881",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73e0",
+      "0xbf6cdc9e",
+      "0xbeb4e881",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 6,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9758",
+      "0xc079a900",
+      "0xc008bbfd",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9758",
+      "0xc079a900",
+      "0xc008bbfd",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 7,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5b01",
+      "0x409505e1",
+      "0x3f173b03",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5b01",
+      "0x409505e1",
+      "0x3f173b03",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    }
+   ]
+  },
+  {
+   "control_word": "0xa7f",
+   "cases": 4115,
+   "value_mismatches": 0,
+   "untouched_mismatches": 0,
+   "call_count_mismatches": 0,
+   "stack_mismatches": 0,
+   "flag_mismatches": 4115,
+   "examples": [
+    {
+     "case": 0,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433521",
+      "0xbf1f081c",
+      "0xbe38fe84",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433521",
+      "0xbf1f081c",
+      "0xbe38fe84",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 1,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f6",
+      "0x3f981d50",
+      "0xc0938170",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f6",
+      "0x3f981d50",
+      "0xc0938170",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 2,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610c",
+      "0x406c3ecc",
+      "0xbf8315e3",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610c",
+      "0x406c3ecc",
+      "0xbf8315e3",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 3,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef90479",
+      "0x3f5a3935",
+      "0xbe4473d5",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x1"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef90479",
+      "0x3f5a3935",
+      "0xbe4473d5",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x1"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 4,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f71a",
+      "0xbe9f5992",
+      "0x3d47b5b6",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f71a",
+      "0xbe9f5992",
+      "0x3d47b5b6",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 5,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73de",
+      "0xbf6cdc9d",
+      "0xbeb4e881",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73de",
+      "0xbf6cdc9d",
+      "0xbeb4e881",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 6,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9758",
+      "0xc079a8fe",
+      "0xc008bbfc",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9758",
+      "0xc079a8fe",
+      "0xc008bbfc",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 7,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5aff",
+      "0x409505e1",
+      "0x3f173b02",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5aff",
+      "0x409505e1",
+      "0x3f173b02",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    }
+   ]
+  },
+  {
+   "control_word": "0xe7f",
+   "cases": 4115,
+   "value_mismatches": 0,
+   "untouched_mismatches": 0,
+   "call_count_mismatches": 0,
+   "stack_mismatches": 0,
+   "flag_mismatches": 4115,
+   "examples": [
+    {
+     "case": 0,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433523",
+      "0xbf1f081d",
+      "0xbe38fe84",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433523",
+      "0xbf1f081d",
+      "0xbe38fe84",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 1,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f6",
+      "0x3f981d4f",
+      "0xc093816f",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f6",
+      "0x3f981d4f",
+      "0xc093816f",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 2,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610b",
+      "0x406c3eca",
+      "0xbf8315e2",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610b",
+      "0x406c3eca",
+      "0xbf8315e2",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 3,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef90479",
+      "0x3f5a3934",
+      "0xbe4473d6",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x1"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef90479",
+      "0x3f5a3934",
+      "0xbe4473d6",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x1"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 4,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f719",
+      "0xbe9f5993",
+      "0x3d47b5b6",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f719",
+      "0xbe9f5993",
+      "0x3d47b5b6",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 5,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73e0",
+      "0xbf6cdc9d",
+      "0xbeb4e881",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73e0",
+      "0xbf6cdc9d",
+      "0xbeb4e881",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 6,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9757",
+      "0xc079a8fc",
+      "0xc008bbfb",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9757",
+      "0xc079a8fc",
+      "0xc008bbfb",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 7,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5aff",
+      "0x409505e0",
+      "0x3f173b01",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5aff",
+      "0x409505e0",
+      "0x3f173b01",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    }
+   ]
+  },
+  {
+   "control_word": "0x37f",
+   "cases": 4115,
+   "value_mismatches": 0,
+   "untouched_mismatches": 0,
+   "call_count_mismatches": 0,
+   "stack_mismatches": 0,
+   "flag_mismatches": 4115,
+   "examples": [
+    {
+     "case": 0,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433522",
+      "0xbf1f081d",
+      "0xbe38fe84",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433522",
+      "0xbf1f081d",
+      "0xbe38fe84",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 1,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f7",
+      "0x3f981d52",
+      "0xc0938170",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f7",
+      "0x3f981d52",
+      "0xc0938170",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 2,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610d",
+      "0x406c3ecd",
+      "0xbf8315e3",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610d",
+      "0x406c3ecd",
+      "0xbf8315e3",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 3,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef90479",
+      "0x3f5a3934",
+      "0xbe4473d6",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x1"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef90479",
+      "0x3f5a3934",
+      "0xbe4473d6",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x1"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 4,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f719",
+      "0xbe9f5994",
+      "0x3d47b5b7",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f719",
+      "0xbe9f5994",
+      "0x3d47b5b7",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 5,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73df",
+      "0xbf6cdc9d",
+      "0xbeb4e881",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73df",
+      "0xbf6cdc9d",
+      "0xbeb4e881",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 6,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9758",
+      "0xc079a8ff",
+      "0xc008bbfb",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9758",
+      "0xc079a8ff",
+      "0xc008bbfb",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 7,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5aff",
+      "0x409505e1",
+      "0x3f173b02",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5aff",
+      "0x409505e1",
+      "0x3f173b02",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    }
+   ]
+  },
+  {
+   "control_word": "0x77f",
+   "cases": 4115,
+   "value_mismatches": 0,
+   "untouched_mismatches": 0,
+   "call_count_mismatches": 0,
+   "stack_mismatches": 0,
+   "flag_mismatches": 4115,
+   "examples": [
+    {
+     "case": 0,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433524",
+      "0xbf1f081e",
+      "0xbe38fe85",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433524",
+      "0xbf1f081e",
+      "0xbe38fe85",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 1,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f7",
+      "0x3f981d54",
+      "0xc0938170",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f7",
+      "0x3f981d54",
+      "0xc0938170",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 2,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610d",
+      "0x406c3ecb",
+      "0xbf8315e4",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610d",
+      "0x406c3ecb",
+      "0xbf8315e4",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 3,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef90479",
+      "0x3f5a3934",
+      "0xbe4473d5",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x1"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef90479",
+      "0x3f5a3934",
+      "0xbe4473d5",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x1"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 4,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f719",
+      "0xbe9f5997",
+      "0x3d47b5b8",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f719",
+      "0xbe9f5997",
+      "0x3d47b5b8",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 5,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73e0",
+      "0xbf6cdc9e",
+      "0xbeb4e881",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73e0",
+      "0xbf6cdc9e",
+      "0xbeb4e881",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 6,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9758",
+      "0xc079a900",
+      "0xc008bbfd",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9758",
+      "0xc079a900",
+      "0xc008bbfd",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 7,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5b01",
+      "0x409505e1",
+      "0x3f173b03",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5b01",
+      "0x409505e1",
+      "0x3f173b03",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    }
+   ]
+  },
+  {
+   "control_word": "0xb7f",
+   "cases": 4115,
+   "value_mismatches": 0,
+   "untouched_mismatches": 0,
+   "call_count_mismatches": 0,
+   "stack_mismatches": 0,
+   "flag_mismatches": 4115,
+   "examples": [
+    {
+     "case": 0,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433521",
+      "0xbf1f081c",
+      "0xbe38fe84",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433521",
+      "0xbf1f081c",
+      "0xbe38fe84",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 1,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f6",
+      "0x3f981d50",
+      "0xc0938170",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f6",
+      "0x3f981d50",
+      "0xc0938170",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 2,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610c",
+      "0x406c3ecc",
+      "0xbf8315e3",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610c",
+      "0x406c3ecc",
+      "0xbf8315e3",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 3,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef90479",
+      "0x3f5a3935",
+      "0xbe4473d5",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x1"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef90479",
+      "0x3f5a3935",
+      "0xbe4473d5",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x1"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 4,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f71a",
+      "0xbe9f5992",
+      "0x3d47b5b6",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f71a",
+      "0xbe9f5992",
+      "0x3d47b5b6",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 5,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73de",
+      "0xbf6cdc9d",
+      "0xbeb4e881",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73de",
+      "0xbf6cdc9d",
+      "0xbeb4e881",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 6,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9758",
+      "0xc079a8fe",
+      "0xc008bbfc",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9758",
+      "0xc079a8fe",
+      "0xc008bbfc",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 7,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5aff",
+      "0x409505e1",
+      "0x3f173b02",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5aff",
+      "0x409505e1",
+      "0x3f173b02",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    }
+   ]
+  },
+  {
+   "control_word": "0xf7f",
+   "cases": 4115,
+   "value_mismatches": 0,
+   "untouched_mismatches": 0,
+   "call_count_mismatches": 0,
+   "stack_mismatches": 0,
+   "flag_mismatches": 4115,
+   "examples": [
+    {
+     "case": 0,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433523",
+      "0xbf1f081d",
+      "0xbe38fe84",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0400000",
+      "0xbf433523",
+      "0xbf1f081d",
+      "0xbe38fe84",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 1,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f6",
+      "0x3f981d4f",
+      "0xc093816f",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xc0000000",
+      "0x402124f6",
+      "0x3f981d4f",
+      "0xc093816f",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 2,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610b",
+      "0x406c3eca",
+      "0xbf8315e2",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0x4057610b",
+      "0x406c3eca",
+      "0xbf8315e2",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 3,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef90479",
+      "0x3f5a3934",
+      "0xbe4473d6",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x1"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbfc00000",
+      "0xbef90479",
+      "0x3f5a3934",
+      "0xbe4473d6",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x1"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 4,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f719",
+      "0xbe9f5993",
+      "0x3d47b5b6",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3f72f719",
+      "0xbe9f5993",
+      "0x3d47b5b6",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 5,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73e0",
+      "0xbf6cdc9d",
+      "0xbeb4e881",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x3f000000",
+      "0xbe0d73e0",
+      "0xbf6cdc9d",
+      "0xbeb4e881",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 6,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9757",
+      "0xc079a8fc",
+      "0xc008bbfb",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x2"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0xbf800000",
+      "0xc01f9757",
+      "0xc079a8fc",
+      "0xc008bbfb",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x2"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    },
+    {
+     "case": 7,
+     "group": "finite-systematic",
+     "original": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5aff",
+      "0x409505e0",
+      "0x3f173b01",
+      "0x2",
+      "0x0",
+      "0x0",
+      "0x5"
+     ],
+     "native": [
+      "0xc0a00000",
+      "0x0",
+      "0x0",
+      "0x3fdc5aff",
+      "0x409505e0",
+      "0x3f173b01",
+      "0x2",
+      "0x20",
+      "0x0",
+      "0x5"
+     ],
+     "differences": {
+      "value_mismatches": false,
+      "untouched_mismatches": false,
+      "call_count_mismatches": false,
+      "stack_mismatches": false,
+      "flag_mismatches": true
+     }
+    }
+   ]
+  }
+ ],
+ "limits": [
+  "Explicit normalized-input/runtime/matrix fixtures, not original startup state",
+  "Bochs P5/P6 FPATAN model versus Unicorn host-double FPATAN; hardware unverified",
+  "CRT error dispatcher bypass explicitly selected for this comparison",
+  "No physical input producer, Windows startup, mod DLL execution or complete game ticks"
+ ],
+ "stored_values_calls_and_matrix_match": true,
+ "emulator_exception_flags_match": false,
+ "duration_seconds": 3.9910095420200378,
+ "tracked_summary": {
+  "full_sha256": "8414d513cf9be02ebdeabcf9c8336cffee44657e4db9e709b9ff469c2a880a82",
+  "full_bytes": 505388,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "control_words[0].examples[0].original": 112,
+   "control_words[0].examples[0].native": 112,
+   "control_words[0].examples[1].original": 112,
+   "control_words[0].examples[1].native": 112,
+   "control_words[0].examples[2].original": 112,
+   "control_words[0].examples[2].native": 112,
+   "control_words[0].examples[3].original": 112,
+   "control_words[0].examples[3].native": 112,
+   "control_words[0].examples[4].original": 112,
+   "control_words[0].examples[4].native": 112,
+   "control_words[0].examples[5].original": 112,
+   "control_words[0].examples[5].native": 112,
+   "control_words[0].examples[6].original": 112,
+   "control_words[0].examples[6].native": 112,
+   "control_words[0].examples[7].original": 112,
+   "control_words[0].examples[7].native": 112,
+   "control_words[1].examples[0].original": 112,
+   "control_words[1].examples[0].native": 112,
+   "control_words[1].examples[1].original": 112,
+   "control_words[1].examples[1].native": 112,
+   "control_words[1].examples[2].original": 112,
+   "control_words[1].examples[2].native": 112,
+   "control_words[1].examples[3].original": 112,
+   "control_words[1].examples[3].native": 112,
+   "control_words[1].examples[4].original": 112,
+   "control_words[1].examples[4].native": 112,
+   "control_words[1].examples[5].original": 112,
+   "control_words[1].examples[5].native": 112,
+   "control_words[1].examples[6].original": 112,
+   "control_words[1].examples[6].native": 112,
+   "control_words[1].examples[7].original": 112,
+   "control_words[1].examples[7].native": 112,
+   "control_words[2].examples[0].original": 112,
+   "control_words[2].examples[0].native": 112,
+   "control_words[2].examples[1].original": 112,
+   "control_words[2].examples[1].native": 112,
+   "control_words[2].examples[2].original": 112,
+   "control_words[2].examples[2].native": 112,
+   "control_words[2].examples[3].original": 112,
+   "control_words[2].examples[3].native": 112,
+   "control_words[2].examples[4].original": 112,
+   "control_words[2].examples[4].native": 112,
+   "control_words[2].examples[5].original": 112,
+   "control_words[2].examples[5].native": 112,
+   "control_words[2].examples[6].original": 112,
+   "control_words[2].examples[6].native": 112,
+   "control_words[2].examples[7].original": 112,
+   "control_words[2].examples[7].native": 112,
+   "control_words[3].examples[0].original": 112,
+   "control_words[3].examples[0].native": 112,
+   "control_words[3].examples[1].original": 112,
+   "control_words[3].examples[1].native": 112,
+   "control_words[3].examples[2].original": 112,
+   "control_words[3].examples[2].native": 112,
+   "control_words[3].examples[3].original": 112,
+   "control_words[3].examples[3].native": 112,
+   "control_words[3].examples[4].original": 112,
+   "control_words[3].examples[4].native": 112,
+   "control_words[3].examples[5].original": 112,
+   "control_words[3].examples[5].native": 112,
+   "control_words[3].examples[6].original": 112,
+   "control_words[3].examples[6].native": 112,
+   "control_words[3].examples[7].original": 112,
+   "control_words[3].examples[7].native": 112,
+   "control_words[4].examples[0].original": 112,
+   "control_words[4].examples[0].native": 112,
+   "control_words[4].examples[1].original": 112,
+   "control_words[4].examples[1].native": 112,
+   "control_words[4].examples[2].original": 112,
+   "control_words[4].examples[2].native": 112,
+   "control_words[4].examples[3].original": 112,
+   "control_words[4].examples[3].native": 112,
+   "control_words[4].examples[4].original": 112,
+   "control_words[4].examples[4].native": 112,
+   "control_words[4].examples[5].original": 112,
+   "control_words[4].examples[5].native": 112,
+   "control_words[4].examples[6].original": 112,
+   "control_words[4].examples[6].native": 112,
+   "control_words[4].examples[7].original": 112,
+   "control_words[4].examples[7].native": 112,
+   "control_words[5].examples[0].original": 112,
+   "control_words[5].examples[0].native": 112,
+   "control_words[5].examples[1].original": 112,
+   "control_words[5].examples[1].native": 112,
+   "control_words[5].examples[2].original": 112,
+   "control_words[5].examples[2].native": 112,
+   "control_words[5].examples[3].original": 112,
+   "control_words[5].examples[3].native": 112,
+   "control_words[5].examples[4].original": 112,
+   "control_words[5].examples[4].native": 112,
+   "control_words[5].examples[5].original": 112,
+   "control_words[5].examples[5].native": 112,
+   "control_words[5].examples[6].original": 112,
+   "control_words[5].examples[6].native": 112,
+   "control_words[5].examples[7].original": 112,
+   "control_words[5].examples[7].native": 112,
+   "control_words[6].examples[0].original": 112,
+   "control_words[6].examples[0].native": 112,
+   "control_words[6].examples[1].original": 112,
+   "control_words[6].examples[1].native": 112,
+   "control_words[6].examples[2].original": 112,
+   "control_words[6].examples[2].native": 112,
+   "control_words[6].examples[3].original": 112,
+   "control_words[6].examples[3].native": 112,
+   "control_words[6].examples[4].original": 112,
+   "control_words[6].examples[4].native": 112,
+   "control_words[6].examples[5].original": 112,
+   "control_words[6].examples[5].native": 112,
+   "control_words[6].examples[6].original": 112,
+   "control_words[6].examples[6].native": 112,
+   "control_words[6].examples[7].original": 112,
+   "control_words[6].examples[7].native": 112,
+   "control_words[7].examples[0].original": 112,
+   "control_words[7].examples[0].native": 112,
+   "control_words[7].examples[1].original": 112,
+   "control_words[7].examples[1].native": 112,
+   "control_words[7].examples[2].original": 112,
+   "control_words[7].examples[2].native": 112,
+   "control_words[7].examples[3].original": 112,
+   "control_words[7].examples[3].native": 112,
+   "control_words[7].examples[4].original": 112,
+   "control_words[7].examples[4].native": 112,
+   "control_words[7].examples[5].original": 112,
+   "control_words[7].examples[5].native": 112,
+   "control_words[7].examples[6].original": 112,
+   "control_words[7].examples[6].native": 112,
+   "control_words[7].examples[7].original": 112,
+   "control_words[7].examples[7].native": 112,
+   "control_words[8].examples[0].original": 112,
+   "control_words[8].examples[0].native": 112,
+   "control_words[8].examples[1].original": 112,
+   "control_words[8].examples[1].native": 112,
+   "control_words[8].examples[2].original": 112,
+   "control_words[8].examples[2].native": 112,
+   "control_words[8].examples[3].original": 112,
+   "control_words[8].examples[3].native": 112,
+   "control_words[8].examples[4].original": 112,
+   "control_words[8].examples[4].native": 112,
+   "control_words[8].examples[5].original": 112,
+   "control_words[8].examples[5].native": 112,
+   "control_words[8].examples[6].original": 112,
+   "control_words[8].examples[6].native": 112,
+   "control_words[8].examples[7].original": 112,
+   "control_words[8].examples[7].native": 112,
+   "control_words[9].examples[0].original": 112,
+   "control_words[9].examples[0].native": 112,
+   "control_words[9].examples[1].original": 112,
+   "control_words[9].examples[1].native": 112,
+   "control_words[9].examples[2].original": 112,
+   "control_words[9].examples[2].native": 112,
+   "control_words[9].examples[3].original": 112,
+   "control_words[9].examples[3].native": 112,
+   "control_words[9].examples[4].original": 112,
+   "control_words[9].examples[4].native": 112,
+   "control_words[9].examples[5].original": 112,
+   "control_words[9].examples[5].native": 112,
+   "control_words[9].examples[6].original": 112,
+   "control_words[9].examples[6].native": 112,
+   "control_words[9].examples[7].original": 112,
+   "control_words[9].examples[7].native": 112,
+   "control_words[10].examples[0].original": 112,
+   "control_words[10].examples[0].native": 112,
+   "control_words[10].examples[1].original": 112,
+   "control_words[10].examples[1].native": 112,
+   "control_words[10].examples[2].original": 112,
+   "control_words[10].examples[2].native": 112,
+   "control_words[10].examples[3].original": 112,
+   "control_words[10].examples[3].native": 112,
+   "control_words[10].examples[4].original": 112,
+   "control_words[10].examples[4].native": 112,
+   "control_words[10].examples[5].original": 112,
+   "control_words[10].examples[5].native": 112,
+   "control_words[10].examples[6].original": 112,
+   "control_words[10].examples[6].native": 112,
+   "control_words[10].examples[7].original": 112,
+   "control_words[10].examples[7].native": 112,
+   "control_words[11].examples[0].original": 112,
+   "control_words[11].examples[0].native": 112,
+   "control_words[11].examples[1].original": 112,
+   "control_words[11].examples[1].native": 112,
+   "control_words[11].examples[2].original": 112,
+   "control_words[11].examples[2].native": 112,
+   "control_words[11].examples[3].original": 112,
+   "control_words[11].examples[3].native": 112,
+   "control_words[11].examples[4].original": 112,
+   "control_words[11].examples[4].native": 112,
+   "control_words[11].examples[5].original": 112,
+   "control_words[11].examples[5].native": 112,
+   "control_words[11].examples[6].original": 112,
+   "control_words[11].examples[6].native": 112,
+   "control_words[11].examples[7].original": 112,
+   "control_words[11].examples[7].native": 112
+  }
+ }
+}

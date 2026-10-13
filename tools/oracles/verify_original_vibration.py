@@ -55,7 +55,7 @@ def main():
         cases+=1;key=f"completed{e[0]}:nested{e[10]}";outcomes[key]=outcomes.get(key,0)+1
         d=[i for i in range(120) if got[i]!=e[i]]
         if d:bad.append(dict(case=n,input=c,fields=d[:10],source=[hex(e[i]) for i in d[:10]],native=[hex(got[i]) for i in d[:10]]))
-    names=['src/ninja/ninja_vibration.hpp','src/ninja/ninja_vibration.cpp','tests/probes/native_vibration_probe.cpp','tools/oracles/verify_original_vibration.py']
+    names=['src/engine/ninja_vibration.hpp','src/engine/ninja_vibration.cpp','tests/probes/native_vibration_probe.cpp','tools/oracles/verify_original_vibration.py']
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={x:sha((pathlib.Path(__file__).resolve().parents[2]/x).read_bytes()) for x in names},
         original_ranges_sha256={'0x785190-0x785233':sha(image.read(0x785190,0xa3))},cases=cases,source_outcomes=outcomes,mismatch_count=len(bad),mismatches=bad[:20],state_traces_match=not bad,limits=__doc__)
     a.output.write_text(json.dumps(report,indent=1)+'\n');print(json.dumps(dict(cases=cases,outcome_kinds=len(outcomes),mismatches=len(bad))))

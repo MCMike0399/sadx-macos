@@ -1,0 +1,295 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "c7d3a861772af831c0649ecc25536efd98b3cc58080b3f13acb31430da7ddff0",
+ "profile": "actual Sonic control prefix plus explicitly seeded post-transform43eecc suffix",
+ "cases": 28800,
+ "by_entry": [
+  10608,
+  7008,
+  7152
+ ],
+ "stored_mismatches": 0,
+ "status_mismatches": 2840,
+ "examples": [
+  {
+   "case": 2,
+   "entry": 0,
+   "field": 17,
+   "source": 0,
+   "native": 2,
+   "boundary": "0x0",
+   "input": [
+    0,
+    127,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "case": 3,
+   "entry": 0,
+   "field": 17,
+   "source": 0,
+   "native": 2,
+   "boundary": "0x0",
+   "input": [
+    0,
+    127,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "case": 10,
+   "entry": 0,
+   "field": 17,
+   "source": 0,
+   "native": 1,
+   "boundary": "0x0",
+   "input": [
+    0,
+    127,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "case": 11,
+   "entry": 0,
+   "field": 17,
+   "source": 0,
+   "native": 1,
+   "boundary": "0x0",
+   "input": [
+    0,
+    127,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "case": 14,
+   "entry": 0,
+   "field": 17,
+   "source": 0,
+   "native": 2,
+   "boundary": "0x0",
+   "input": [
+    0,
+    127,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    16384
+   ]
+  },
+  {
+   "case": 15,
+   "entry": 0,
+   "field": 17,
+   "source": 0,
+   "native": 2,
+   "boundary": "0x0",
+   "input": [
+    0,
+    127,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    16384
+   ]
+  },
+  {
+   "case": 22,
+   "entry": 0,
+   "field": 17,
+   "source": 0,
+   "native": 1,
+   "boundary": "0x0",
+   "input": [
+    0,
+    127,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    16384
+   ]
+  },
+  {
+   "case": 23,
+   "entry": 0,
+   "field": 17,
+   "source": 0,
+   "native": 1,
+   "boundary": "0x0",
+   "input": [
+    0,
+    127,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    16384
+   ]
+  },
+  {
+   "case": 26,
+   "entry": 0,
+   "field": 17,
+   "source": 0,
+   "native": 2,
+   "boundary": "0x0",
+   "input": [
+    0,
+    127,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "case": 27,
+   "entry": 0,
+   "field": 17,
+   "source": 0,
+   "native": 2,
+   "boundary": "0x0",
+   "input": [
+    0,
+    127,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0
+   ]
+  }
+ ],
+ "stored_examples": [],
+ "source_ranges": {
+  "0x49a9b0": {
+   "size": 5644,
+   "sha256": "b596218104db8e6ffa07a077271a3656f843aa47e442f35cfa1edb57c8fb270f"
+  },
+  "0x496f50": {
+   "size": 14592,
+   "sha256": "cd03b21a10b336be9378ba4aa1a5b89aba2bd462b3f6b16b6a151625ecef56f3"
+  },
+  "0x43ee70": {
+   "size": 401,
+   "sha256": "16c0e7829b1f65f0832932f182766973619895f80ed2a3732bfa5f0211dd9de4"
+  },
+  "0x4915f0": {
+   "size": 105,
+   "sha256": "d81db50efa8afb4dffc8294d0c955bce0499fa076b157f2d48eabec15fe75d35"
+  },
+  "0x44bb60": {
+   "size": 522,
+   "sha256": "71b1245d6df926e3603a8c1f5ee358e08919ee005d6ada147ecf9c1f675e87cb"
+  }
+ },
+ "constants": {
+  "addresses": [
+   "0x7dcb2c",
+   "0x7dfff0",
+   "0x7dd554",
+   "0x7e0090",
+   "0x7dd57c",
+   "0x7df1bc",
+   "0x7e01a8",
+   "0x7dcb94",
+   "0x7e0844",
+   "0x7df1c8"
+  ],
+  "bytes": "000000006666663f0ad7233c0ad723bc6f12833a6f1283ba9a9999be00000040b81e453f0000f0413bdfbf3f00002041cdcccc3e",
+  "sha256": "cac3a43b8a00509706505b79771f4f9c2ec6b500a925b2cb4820b611fffe34b7"
+ },
+ "dispatch_sha256": "e78b7fb8a08356eca526539587e821b2ac2a642a623411ad374f1cfee846ab77",
+ "limits": [
+  "No full Sonic action, animation, model, sound, collision or task initialization is executed as a game",
+  "Control comparisons stop before mandatory callbacks or at the remaining predicate jump; those paths are incomplete",
+  "Ground-input cases execute actual GetAnalog and stop at mandatory rotation/raw-input owners; their matrix resources are not consumed",
+  "Local-speed cases seed the transformed stack vector at43eecc; they do not establish the producer43ed20/43ec00 equivalence",
+  "Unicorn is an instruction oracle; physical Windows control/status and hardware equivalence remain unverified",
+  "Native full-angle unavailable low16 stops before the high16 source write; known fixtures cover fully captured angles"
+ ],
+ "native_sources": {
+  "src/player/sonic_player.hpp": "418bf5996866cc2d11dd27c504f0697a72fc298ae90e3db00dfb0c1d7c33b666",
+  "src/player/sonic_player.cpp": "9ea4fa5e53deac6158ebbad76bbc2f9358515d85414b78f0b7fabeb579e9e073",
+  "tests/probes/native_sonic_player_probe.cpp": "ea27199dca1c3f9ea726e9e1be159ed14b4ec35ab594d975fe80d2f9cd25ca60",
+  "tools/oracles/verify_original_sonic_player.py": "f170107503ce1ba1f2b4834e012cca5a05565ed915f25accf87bfed50f9754a2"
+ },
+ "ground_prefix_cases": 4032,
+ "ground_prefix_stored_mismatches": 0,
+ "ground_prefix_status_mismatches": 1632,
+ "case_sha256": "2acd398b460a3c6691a178fcb7b0862219ac1e11818909ad41cb8fb14e6f34fe",
+ "seconds": 11.864107457979117,
+ "stored_state_matches": true,
+ "passed": false,
+ "tracked_summary": {
+  "full_sha256": "99fab7cf07799d3c37dc03274cdc642f88f16207aafbe7d891ad25cfb6e99859",
+  "full_bytes": 23752,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "examples": 30,
+   "examples[0].input": 36,
+   "examples[1].input": 36,
+   "examples[2].input": 36,
+   "examples[3].input": 36,
+   "examples[4].input": 36,
+   "examples[5].input": 36,
+   "examples[6].input": 36,
+   "examples[7].input": 36,
+   "examples[8].input": 36,
+   "examples[9].input": 36,
+   "constants.addresses": 13
+  }
+ }
+}

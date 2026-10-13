@@ -1,4 +1,4 @@
-#include "ninja/ninja_input_devices.hpp"
+#include "engine/ninja_input_devices.hpp"
 #include <iostream>
 #include <stdexcept>
 namespace {using namespace sadx;void require(bool ok,const char* why){if(!ok)throw std::runtime_error(why);}}

@@ -1,0 +1,40 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "d7dd5cd8815a7c7eb21ae90cc549f3d6517d0c39bca7edfaab04466bc4e37470",
+ "source_files": {
+  "src/engine/ninja_queue_lifecycle.hpp": "aae93525a8c00d39e16ff12b5a515ca1d1d31bf0e81b8000df0c9d6cc1c9364b",
+  "src/engine/ninja_queue_lifecycle.cpp": "ff2b07c9d9c9c2887a9a7289d258b796666680a95540e23e6583037d0943500e",
+  "src/engine/ninja_queue_consumer.cpp": "f92eaa45e623067f8338fe98e3321df4eb8371f3d283ca704d8471ec94639567",
+  "src/engine/ninja_sprite_queue.cpp": "ec48b82cf378952a70094837abcbce2ad154312c673148ff9fecd11e81b08347",
+  "tests/probes/native_ninja_queue_lifecycle_probe.cpp": "b306e72bef300c4298808f2dd5816b3d9910faac3cb5dab5ccfa95a5809b24aa",
+  "tools/oracles/verify_original_ninja_queue_lifecycle.py": "1cdd0dc16dad13e5672de210272d61ce26e438757a7a162978473f88afc74ab3"
+ },
+ "original_ranges_sha256": {
+  "408630": "697a839ff01b85d9839f9b503d416766187bfa405542f4916f072cb7d0a693a2",
+  "407ab0": "30adc410559a7d45dca59e7b81736cbddcb8cd758da301b3e71c9f6db8f80012",
+  "407330": "dfb0a1bf94d5dec1c7ab865ec9e96fbd7044473b139b98177cef47b9b34b169d",
+  "402f40": "783cae18b6ee1f73b9b2a19f0ab4a27c120d181181f7cff0e0902f159f56c855",
+  "401420": "04ab0a69d6444d81e26c995c80c428e75e64e6957006e28c910a52361fffc5b0",
+  "412400": "a10c2961b5258ff44b7df88bffb4593264827094cd6959a160e1926efab5c7ae",
+  "77ff90": "3b7846d913dce085a945ecaf9ede3c16bf0cd4cd6314b00a14a3c07d1c326732"
+ },
+ "cases": 600,
+ "case_sha256": "92c8bfdf5f56f82dabe1dfe1d4e09cf1aa1490e2d42526eabbbbc1ccdbfbce7b",
+ "source_outcomes": {
+  "failure2:calls2": 24,
+  "failure0:calls3": 511,
+  "failure2:calls1": 24,
+  "failure2:calls3": 41
+ },
+ "state_mismatch_count": 0,
+ "fp_flag_mismatches": 402,
+ "mismatches": [],
+ "stores_trace_boundaries_match": true,
+ "limits": "Render-queue lifecycle 408630 -> 407ab0 -> (4128f0/402f40, 407330) against original instructions.\n\nReal source code runs for 408630, 407ab0, 4128f0, 402f40, 407330, 401420, 77ed00,\n77ed20, 77ece0, 412400, 401440 and 77ff90. Fixtures: 780f60 (HeapAlloc) returns\nthe case's heap address, 780fb0 (HeapFree) is a no-op, and the D3D8 device's\nSetRenderState (vtable +0xc8) records (site, state, value) and may fail at call N.\nCompared: buffer cursor offset and zeroing, overflow flag, colours, captured\nwords, mode/count stores, bucket sentinels and the render-state trace. FP status\nflags are reported separately (Unicorn's x87 flag behaviour is not hardware).\n",
+ "tracked_summary": {
+  "full_sha256": "6b9ed52c496000c58de3f6264e25f57d71dbe61b6cea96ea829cad6b8027478a",
+  "full_bytes": 2507,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

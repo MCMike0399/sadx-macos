@@ -1,4 +1,4 @@
-#include "input/scene_input_producer.hpp"
+#include "player/scene_input_producer.hpp"
 #include <iostream>
 #include <stdexcept>
 namespace {

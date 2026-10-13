@@ -1,5 +1,5 @@
 #include "input/input_mod_pad.hpp"
-#include "input/scene_input_producer.hpp"
+#include "player/scene_input_producer.hpp"
 #include "player/sonic_player.hpp"
 #include <iostream>
 #include <stdexcept>

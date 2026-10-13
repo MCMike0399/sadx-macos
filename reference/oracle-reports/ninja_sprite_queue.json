@@ -1,0 +1,688 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "5f74784ce1364f5457d8c9ece2a249fe5e97289c43186e2387145d0f758f6c76",
+ "case_blob_sha256": "2ca7e97fec5244f30ee09722dc87b906f1b1edc87d89316929b5eb78768acd41",
+ "source_ranges": {
+  "0x403d30": {
+   "bytes": 77,
+   "sha256": "a596c4388a3a0c72ca16a4323bee5e7a5f75068d837e8675d451fe7c0e7451ce"
+  },
+  "0x403f60": {
+   "bytes": 196,
+   "sha256": "8294b948c8a1d37df43b3da10db95dc0e8e629ba19c1604d7d71b79b81a84d3b"
+  },
+  "0x403e80": {
+   "bytes": 215,
+   "sha256": "3d9b1caed57bbf6c61387964aa73e6119e94fd99278cb72a76fa56be58e1138f"
+  },
+  "0x644340": {
+   "bytes": 127,
+   "sha256": "5d9597d3df45db01a3f221616452053d917b58a8cce4aad61f07da16cc2c16d0"
+  },
+  "0x403250": {
+   "bytes": 61,
+   "sha256": "6df189d84533a30623a99b4e6c68bf5a4b5053abcfb8acf19899035bac7d7eb8"
+  },
+  "0x404240": {
+   "bytes": 74,
+   "sha256": "7778e80945774b752301c95269a91ceb013c9f60bac5153abd0b21156fd7a563"
+  },
+  "0x77ed00": {
+   "bytes": 32,
+   "sha256": "8e1c8130d7d2328437aa796297ed8b15d68a01be238861bed40b68b7d25f25d9"
+  },
+  "0x77ed20": {
+   "bytes": 22,
+   "sha256": "fd7aacc0c9c4c2400bdec7e314d9a4f0d12097149523b6ee1817caec56fffd90"
+  },
+  "0x77ff90": {
+   "bytes": 44,
+   "sha256": "3b7846d913dce085a945ecaf9ede3c16bf0cd4cd6314b00a14a3c07d1c326732"
+  }
+ },
+ "native_sources": {
+  "src/engine/ninja_sprite_queue.cpp": "ec48b82cf378952a70094837abcbce2ad154312c673148ff9fecd11e81b08347",
+  "src/engine/ninja_sprite_queue.hpp": "ebad4860669ebd652ab5eb6c371881f0ebbd23aff400dc7d5a67a4ebf4b9bfc9",
+  "src/engine/ninja_render.cpp": "d18ca70f7a617ea3a0b26f31e461ad18d36994279982e968ea0634dc4b7d3db9",
+  "src/engine/ninja_render.hpp": "efc8add7a4a2fd1669497d235f1ae9f4f9e4ccf3ee20c2800428d1e6aa288ce1",
+  "tests/probes/native_ninja_sprite_queue_probe.cpp": "fc14855b96b6b1e3e6c54406c608e34c4abac3129a39a08280f410acd0beda61",
+  "tools/oracles/verify_original_ninja_sprite_queue.py": "c06b849386af51de06ea16b08201987cc723eeff66db8e070db7d3dcbd667f80"
+ },
+ "profiles": [
+  {
+   "cw": "0x7f",
+   "sequences": 10,
+   "records": 1472,
+   "state_mismatches": 0,
+   "bucket_mismatches": 0,
+   "trace_mismatches": 0,
+   "flag_mismatches": 1438,
+   "flag_examples": [
+    {
+     "sequence": 0,
+     "record": 10,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 11,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 12,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 13,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 14,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 15,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 16,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 17,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ],
+   "examples": []
+  },
+  {
+   "cw": "0x47f",
+   "sequences": 10,
+   "records": 1472,
+   "state_mismatches": 0,
+   "bucket_mismatches": 0,
+   "trace_mismatches": 0,
+   "flag_mismatches": 1438,
+   "flag_examples": [
+    {
+     "sequence": 0,
+     "record": 10,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 11,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 12,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 13,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 14,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 15,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 16,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 17,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ],
+   "examples": []
+  },
+  {
+   "cw": "0x87f",
+   "sequences": 10,
+   "records": 1472,
+   "state_mismatches": 0,
+   "bucket_mismatches": 0,
+   "trace_mismatches": 0,
+   "flag_mismatches": 1438,
+   "flag_examples": [
+    {
+     "sequence": 0,
+     "record": 10,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 11,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 12,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 13,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 14,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 15,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 16,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 17,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ],
+   "examples": []
+  },
+  {
+   "cw": "0xc7f",
+   "sequences": 10,
+   "records": 1472,
+   "state_mismatches": 0,
+   "bucket_mismatches": 0,
+   "trace_mismatches": 0,
+   "flag_mismatches": 1438,
+   "flag_examples": [
+    {
+     "sequence": 0,
+     "record": 10,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 11,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 12,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 13,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 14,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 15,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 16,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 17,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ],
+   "examples": []
+  },
+  {
+   "cw": "0x27f",
+   "sequences": 10,
+   "records": 1472,
+   "state_mismatches": 0,
+   "bucket_mismatches": 0,
+   "trace_mismatches": 0,
+   "flag_mismatches": 1438,
+   "flag_examples": [
+    {
+     "sequence": 0,
+     "record": 10,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 11,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 12,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 13,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 14,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 15,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 16,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 17,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ],
+   "examples": []
+  },
+  {
+   "cw": "0x67f",
+   "sequences": 10,
+   "records": 1472,
+   "state_mismatches": 0,
+   "bucket_mismatches": 0,
+   "trace_mismatches": 0,
+   "flag_mismatches": 1438,
+   "flag_examples": [
+    {
+     "sequence": 0,
+     "record": 10,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 11,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 12,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 13,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 14,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 15,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 16,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 17,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ],
+   "examples": []
+  },
+  {
+   "cw": "0xa7f",
+   "sequences": 10,
+   "records": 1472,
+   "state_mismatches": 0,
+   "bucket_mismatches": 0,
+   "trace_mismatches": 0,
+   "flag_mismatches": 1438,
+   "flag_examples": [
+    {
+     "sequence": 0,
+     "record": 10,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 11,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 12,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 13,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 14,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 15,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 16,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 17,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ],
+   "examples": []
+  },
+  {
+   "cw": "0xe7f",
+   "sequences": 10,
+   "records": 1472,
+   "state_mismatches": 0,
+   "bucket_mismatches": 0,
+   "trace_mismatches": 0,
+   "flag_mismatches": 1438,
+   "flag_examples": [
+    {
+     "sequence": 0,
+     "record": 10,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 11,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 12,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 13,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 14,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 15,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 16,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 17,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ],
+   "examples": []
+  },
+  {
+   "cw": "0x37f",
+   "sequences": 10,
+   "records": 1472,
+   "state_mismatches": 0,
+   "bucket_mismatches": 0,
+   "trace_mismatches": 0,
+   "flag_mismatches": 1438,
+   "flag_examples": [
+    {
+     "sequence": 0,
+     "record": 10,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 11,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 12,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 13,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 14,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 15,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 16,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 17,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ],
+   "examples": []
+  },
+  {
+   "cw": "0x77f",
+   "sequences": 10,
+   "records": 1472,
+   "state_mismatches": 0,
+   "bucket_mismatches": 0,
+   "trace_mismatches": 0,
+   "flag_mismatches": 1438,
+   "flag_examples": [
+    {
+     "sequence": 0,
+     "record": 10,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 11,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 12,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 13,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 14,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 15,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 16,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "sequence": 0,
+     "record": 17,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ],
+   "examples": []
+  }
+ ],
+ "limits": [
+  "Buffer and initialized2048 bucket sentinels are explicit source-bound fixtures, not claimed full renderer startup",
+  "Actual allocator/header/sort/CRT_ftol source executes without overlays",
+  "Known warning flag1 suppresses401000 logging in source; missing/unavailable logger cases remain native boundary tests",
+  "Canonical pointer bytes exist only in probe snapshot; native runtime uses owned allocations and weak/list references",
+  "All FP/nonfinite discrepancies retained; no full GPU/mod/hardware/runtime equality claim"
+ ],
+ "immediate_state_composition": {
+  "cases": 256,
+  "mismatches": [],
+  "commands_color_match": true,
+  "limits": [
+   "Actual404240/77ed00/77ed20/77ff90, only externalCOMSetRenderState is a declared test boundary",
+   "No actual GPU submission or sprite draw claimed"
+  ]
+ },
+ "texture_gate": {
+  "cases": 63,
+  "mismatches": [],
+  "known_gate_match": true,
+  "limits": [
+   "Actual403250 executes without callee overlays",
+   "Known resource identity/null facts only; no texture upload/cache/GPU readiness claimed"
+  ]
+ },
+ "state_buckets_trace_control_match": true,
+ "strict_emulator_match": false,
+ "tracked_summary": {
+  "full_sha256": "156484dab1da311c86da0c3b42e2ffb97146741b17e6fd66a86e3b9a658b63ab",
+  "full_bytes": 18308,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "profiles": 12
+  }
+ }
+}

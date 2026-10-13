@@ -1,5 +1,5 @@
 #pragma once
-#include "ninja/ninja_queue_consumer.hpp"
+#include "engine/ninja_queue_consumer.hpp"
 #include <cstring>
 #include <stdexcept>
 namespace sadx_test {

@@ -1,0 +1,27 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "c90f602a121baad294f56c356f94b9f17cd25c9aecb8badf735a9d2987c85db4",
+ "native_sources": {
+  "/Users/burbujamc/Developer/sadx-macos/src/engine/game_logic_support.hpp": "8b695a4f8caa2f38db2d0f2f62a43fa3726c622ba87d1baaeccf12082a7c858c",
+  "/Users/burbujamc/Developer/sadx-macos/src/engine/game_logic.hpp": "d2db6a511b3faff980d8ddb2946632a4573a952e4c2697499793763d1af905b6",
+  "/Users/burbujamc/Developer/sadx-macos/src/engine/game_logic.cpp": "ca449f62e52694f635e7229ffdad8eb0dc21bfcecf947235534754cfc4fe7fb7",
+  "/Users/burbujamc/Developer/sadx-macos/tests/probes/native_game_logic_probe.cpp": "8e9215a011a7bf947e2ec4d895cc127e511baa0ba43744ae89fed4db82d72da8",
+  "/Users/burbujamc/Developer/sadx-macos/tools/oracles/verify_original_game_logic.py": "4e68c278741c6b8c63cb480976470214ed252fa63f56c4ea88284598afa3464e"
+ },
+ "source_range": {
+  "address": "0x413dd0",
+  "bytes": 301,
+  "sha256": "bdd1b3f1c23e8708bbf77c0053b1231dee3e90ca74d13d7e1281109ca242fdf4"
+ },
+ "cases": 170,
+ "case_sha256": "30e056bddf208e678ca6e7efe1643ca8c422b50bec2954b2ebe928b02cfd39db",
+ "mismatches": [],
+ "orchestration_stores_press_union_calls_match": true,
+ "limits": "413dd0 instructions versus native orchestration, with explicit owner fixtures.\n\nCalled input/scene/timing operations are fixture boundaries in both runs. This\ndoes not establish a complete scene, physical input, keyboard-edge owner or\nnative game loop. Every call, argument, partial store and press union is kept.\n",
+ "tracked_summary": {
+  "full_sha256": "e1734e73c0f12cfafa79e8f5804ddda5052cf363a2e51c82f332b2afd9ab9737",
+  "full_bytes": 1610,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

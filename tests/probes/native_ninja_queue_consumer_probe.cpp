@@ -1,4 +1,4 @@
-#include "ninja/ninja_queue_consumer.hpp"
+#include "engine/ninja_queue_consumer.hpp"
 #include <algorithm>
 #include <cstring>
 #include <vector>

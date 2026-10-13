@@ -1,0 +1,48 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "85475781e02306e0fa3770f02cccfc55d9a788c7793d588e61e06148f411e877",
+ "source_files": {
+  "src/engine/game_frame_control.hpp": "44f61f6476a944d065cedc41c442d3d9b7859d09dcbba63a6dc2747cffb900b3",
+  "src/engine/game_frame_control.cpp": "3effdc73b7f1d216c7068e60382e336aa2b1208e95c82142b97770ed40015d52",
+  "src/engine/game_logic_support.hpp": "8b695a4f8caa2f38db2d0f2f62a43fa3726c622ba87d1baaeccf12082a7c858c",
+  "tests/probes/native_game_frame_control_probe.cpp": "7df6dd2c57f13d5b9b961e10d3d0d0cfd9af497e7f2e2f0b9674706d0abc9d9b",
+  "tools/oracles/verify_original_game_frame_control.py": "ac76cf11a0208d6efd313e4427cae48b3222c48e3289634689ee7f66c35279f2"
+ },
+ "original_ranges": {
+  "0x411e20": {
+   "bytes": 10,
+   "sha256": "20d3e8dfa444fc04a22b80fea12a4b22c1a0771e57988a55a61df32bbb378eb5"
+  },
+  "0x411e30": {
+   "bytes": 93,
+   "sha256": "e0c74d874422c0d1bce6d255daed04f2c5e017e647c93b057f8ea3dcaed328a4"
+  },
+  "0x7899a0": {
+   "bytes": 54,
+   "sha256": "0a48acf7429b956758b6cd5057ed80f2e746004aae6d325994fc16fc4ade4eb5"
+  },
+  "0x40f010": {
+   "bytes": 86,
+   "sha256": "72b8e9716a4adffd6401aabb1d11efa3d09d83beefc941487796566331f5fa4c"
+  },
+  "0x792f60": {
+   "bytes": 3,
+   "sha256": "4bc724f3b1d0caf4fe369c18cba3102e6c4ea057f63fe1587e3973134a7f755e"
+  },
+  "0x780069": {
+   "bytes": 30,
+   "sha256": "e3daa5030d28c663b42aa7b2106e75404a91495949c41f8c4d5470a17b76177d"
+  }
+ },
+ "cases": 2672,
+ "case_sha256": "ba60d6912ccc53336a88b1d43149bc3b164ba3e478c3a942d91020dc5cd60d63",
+ "mismatches": [],
+ "stores_callback_identity_and_boundaries_match": true,
+ "limits": "Actual411e30/7899a0/40f010/411e20 control instructions vs native owners.\n\nCounter words and input bytes are explicit fixtures; no live host clock or\nphysical keys are inferred. Missing facts stop before their actual source read\nas a declared availability fixture. The unused EAX return of the input callback\nis excluded: its actual780074 caller immediately overwrites that register.\n",
+ "tracked_summary": {
+  "full_sha256": "f6d37f7a86e0671436430a91762cf3cde5944cd89506c365dcc1ac1e86261d7b",
+  "full_bytes": 2159,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

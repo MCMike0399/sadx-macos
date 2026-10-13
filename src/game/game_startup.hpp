@@ -1,8 +1,8 @@
 #pragma once
-#include "game/game_controller.hpp"
-#include "game/game_frame_control.hpp"
-#include "game/game_logic.hpp"
-#include "game/game_logic_support.hpp"
+#include "engine/game_controller.hpp"
+#include "engine/game_frame_control.hpp"
+#include "engine/game_logic.hpp"
+#include "engine/game_logic_support.hpp"
 #include "input/input_mod_pad.hpp"
 #include <array>
 #include <cstdint>

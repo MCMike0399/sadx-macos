@@ -1,0 +1,478 @@
+{
+ "profile": "four original rotation bodies with real input/transforms/Ninja/CRT; no overlays",
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "690a62343e984fb2c4c799d03eb93dd1b5ab89dc519b5dd7c2ac3a9f0bdf508a",
+ "table_sha256": "3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed",
+ "unit_sha256": "5998e9d1dd9bf48af6af87a1ef8c7783b818ac8329637ada08cc5fb329042376",
+ "parameter_row_sha256": "e7b11eb0865091f2baf1ea63052dcc7e8d9f0381005983137eee759152b9eb48",
+ "constants_sha256": "e57e7537f25e6b0628370057deb2f9034ddf01f9b5aa8a337cf7d77c1a597f7e",
+ "constant_addresses": {
+  "binary32": [
+   "0x7dfff0",
+   "0x7dd568",
+   "0x7dd550",
+   "0x7e0070",
+   "0x7e0118",
+   "0x7dcc98",
+   "0x7dcb10",
+   "0x7e011c",
+   "0x7e0120",
+   "0x7dce68"
+  ],
+  "binary64": [
+   "0x7e0168",
+   "0x7dccd0",
+   "0x7dcce8"
+  ]
+ },
+ "case_blob": {
+  "path": "build/oracles/player_rotation.cases.bin",
+  "sha256": "151f6dc1bfdddb5d60812c8a56da9457028f4a242b688a746e16a4bdeca6dcca",
+  "record": "154 little-endian uint32 words"
+ },
+ "seed": "0x443e604491e0",
+ "source_functions": {
+  "0x443c50": {
+   "size": 410,
+   "sha256": "7f0aae2f159f38100768623cb99a8d3c6c2c578123700865ad7bc45d23942916"
+  },
+  "0x443e60": {
+   "size": 231,
+   "sha256": "f0d8e1380aa89174d29dbf93a0c89eb40605b2f6ec8a56c3ab9184cc4b69e52b"
+  },
+  "0x4491e0": {
+   "size": 403,
+   "sha256": "848fcf01201ed53a5b4c6763b8278ec182023c3650a8f4e0eb05b69006f10d7b"
+  },
+  "0x449380": {
+   "size": 367,
+   "sha256": "6f951a2ef4eaac30590a7a9416a084e2471a286b76b975d18ab4c4b0afe03bfb"
+  }
+ },
+ "control_words": [
+  {
+   "control_word": "0x7f",
+   "cases": 2538,
+   "output_mismatches": 0,
+   "flag_mismatches": 2503,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 0,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 1,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 7,
+     "original": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "control_word": "0x47f",
+   "cases": 2538,
+   "output_mismatches": 0,
+   "flag_mismatches": 2503,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 0,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 1,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 7,
+     "original": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "control_word": "0x87f",
+   "cases": 2538,
+   "output_mismatches": 0,
+   "flag_mismatches": 2503,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 0,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 1,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 7,
+     "original": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "control_word": "0xc7f",
+   "cases": 2538,
+   "output_mismatches": 0,
+   "flag_mismatches": 2503,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 0,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 1,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 7,
+     "original": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "control_word": "0x27f",
+   "cases": 2538,
+   "output_mismatches": 0,
+   "flag_mismatches": 2503,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 0,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 1,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 7,
+     "original": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "control_word": "0x67f",
+   "cases": 2538,
+   "output_mismatches": 0,
+   "flag_mismatches": 2503,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 0,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 1,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 7,
+     "original": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "control_word": "0xa7f",
+   "cases": 2538,
+   "output_mismatches": 0,
+   "flag_mismatches": 2503,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 0,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 1,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 7,
+     "original": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "control_word": "0xe7f",
+   "cases": 2538,
+   "output_mismatches": 0,
+   "flag_mismatches": 2503,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 0,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 1,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 7,
+     "original": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "control_word": "0x37f",
+   "cases": 2538,
+   "output_mismatches": 0,
+   "flag_mismatches": 2503,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 0,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 1,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 7,
+     "original": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "control_word": "0x77f",
+   "cases": 2538,
+   "output_mismatches": 0,
+   "flag_mismatches": 2503,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 0,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 1,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 7,
+     "original": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "control_word": "0xb7f",
+   "cases": 2538,
+   "output_mismatches": 0,
+   "flag_mismatches": 2503,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 0,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 1,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 7,
+     "original": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "control_word": "0xf7f",
+   "cases": 2538,
+   "output_mismatches": 0,
+   "flag_mismatches": 2503,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 0,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 1,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "original": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 7,
+     "original": "0x0",
+     "native": "0x20"
+    }
+   ]
+  }
+ ],
+ "limits": [
+  "Explicit runtime/matrix/input fixtures, not startup/mod execution",
+  "Selected Bochs P5/P6 FPATAN versus Unicorn, not Intel hardware",
+  "Exception flags are separately unverified",
+  "Quiet NaNs/infinities/subnormals/signed zero in local speed X; signaling-NaN FLD is a separately retained emulator limitation",
+  "Direction-reset/resource queries are not part of this comparison"
+ ],
+ "stored_values_and_matrix_match": true,
+ "tracked_summary": {
+  "full_sha256": "6067d2050ca2f3bd2757c25ae02f45a159ecede0099443fd8a3a3c972bc4b3f3",
+  "full_bytes": 10347,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "constant_addresses.binary32": 16
+  }
+ }
+}

@@ -177,7 +177,7 @@ def main():
             if d:bad.append(dict(case=f'loader {n}',fields=d[:12],source=[hex(e[i]) for i in d[:12]],native=[hex(got[i]) for i in d[:12]]))
         ranges_loader={'0x10050290-0x100502f0':sha(bytes(L.mem_read(0x10050290,0x60)))}
     else:ranges_loader={}
-    names=['src/ninja/ninja_frame_calls.hpp','src/ninja/ninja_frame_calls.cpp','src/ninja/ninja_render.cpp','tests/probes/native_ninja_frame_calls_probe.cpp','tools/oracles/verify_original_ninja_frame_calls.py']
+    names=['src/engine/ninja_frame_calls.hpp','src/engine/ninja_frame_calls.cpp','src/engine/ninja_render.cpp','tests/probes/native_ninja_frame_calls_probe.cpp','tools/oracles/verify_original_ninja_frame_calls.py']
     ranges=((0x78bab0,0x78baba),(0x780030,0x780088),(0x7959a0,0x7959bb),(0x78b960,0x78ba23),(0x78ba30,0x78ba50),(0x78ba50,0x78baa4),(0x78b880,0x78b958),(0x794800,0x794835),(0x77ec60,0x77ecda),(0x781010,0x781065))
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={x:sha((pathlib.Path(__file__).resolve().parents[2]/x).read_bytes()) for x in names},
         original_ranges_sha256={f'{x:#x}-{y:#x}':sha(image.read(x,y-x)) for x,y in ranges},cases=cases,loader_present_cases=loader_cases,loader_ranges_sha256=ranges_loader,explicit_native_boundaries=explicit,source_outcomes=outcomes,mismatch_count=len(bad),mismatches=bad[:20],state_traces_match=not bad,limits=__doc__)

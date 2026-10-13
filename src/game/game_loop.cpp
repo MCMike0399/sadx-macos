@@ -1,5 +1,5 @@
 #include "game/game_loop.hpp"
-#include "game/speedrun.hpp"
+#include "engine/speedrun.hpp"
 
 namespace sadx {
 namespace {

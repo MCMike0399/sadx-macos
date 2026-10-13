@@ -1,0 +1,430 @@
+{
+ "profile": "actual6451bb-fabs/native-arm64/NaN-policy1/no-overlays",
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "9e799729b1b4d929175ca1977fc35befcd073738b7bf877e2ad7351d4b395726",
+ "source_functions": {
+  "0x6451bb": {
+   "size": 177,
+   "sha256": "d3153c33d6d4f0586b6368557c13368e00cfb1456ed2f744e1f702233f79d586"
+  },
+  "0x64af93": {
+   "size": 82,
+   "sha256": "16cb8beae9c924580224ee196f8773c3f947ace8b5ba63cee5ebe418eddbab1b"
+  },
+  "0x64b1fd": {
+   "size": 36,
+   "sha256": "a7ab3a8042ef5a5909f1f414e454b341d2e9c1f9da36857ae8616e7983c9fa2b"
+  }
+ },
+ "case_sha256": "466b16251a0baffd259ae90c1acbf280a0e1299a110570094af51fa58ccef062",
+ "nan_policy": 1,
+ "profiles": [
+  {
+   "cw": "0x7f",
+   "cases": 1019,
+   "value_mismatches": 0,
+   "control_mismatches": 2,
+   "flag_mismatches": 6,
+   "errno_mismatches": 0,
+   "boundary_disagreements": 2,
+   "examples": [
+    {
+     "case": 17,
+     "input": "0x7ff0000000000123",
+     "source": [
+      null,
+      null,
+      4927
+     ],
+     "native": [
+      13835058055282759680,
+      32767,
+      127
+     ]
+    },
+    {
+     "case": 18,
+     "input": "0xfff0000000000123",
+     "source": [
+      null,
+      null,
+      4927
+     ],
+     "native": [
+      13835058055282759680,
+      65535,
+      127
+     ]
+    }
+   ]
+  },
+  {
+   "cw": "0x47f",
+   "cases": 1019,
+   "value_mismatches": 0,
+   "control_mismatches": 2,
+   "flag_mismatches": 6,
+   "errno_mismatches": 0,
+   "boundary_disagreements": 2,
+   "examples": [
+    {
+     "case": 17,
+     "input": "0x7ff0000000000123",
+     "source": [
+      null,
+      null,
+      4927
+     ],
+     "native": [
+      13835058055282759680,
+      32767,
+      1151
+     ]
+    },
+    {
+     "case": 18,
+     "input": "0xfff0000000000123",
+     "source": [
+      null,
+      null,
+      4927
+     ],
+     "native": [
+      13835058055282759680,
+      65535,
+      1151
+     ]
+    }
+   ]
+  },
+  {
+   "cw": "0x87f",
+   "cases": 1019,
+   "value_mismatches": 0,
+   "control_mismatches": 2,
+   "flag_mismatches": 6,
+   "errno_mismatches": 0,
+   "boundary_disagreements": 2,
+   "examples": [
+    {
+     "case": 17,
+     "input": "0x7ff0000000000123",
+     "source": [
+      null,
+      null,
+      4927
+     ],
+     "native": [
+      13835058055282759680,
+      32767,
+      2175
+     ]
+    },
+    {
+     "case": 18,
+     "input": "0xfff0000000000123",
+     "source": [
+      null,
+      null,
+      4927
+     ],
+     "native": [
+      13835058055282759680,
+      65535,
+      2175
+     ]
+    }
+   ]
+  },
+  {
+   "cw": "0xc7f",
+   "cases": 1019,
+   "value_mismatches": 0,
+   "control_mismatches": 2,
+   "flag_mismatches": 6,
+   "errno_mismatches": 0,
+   "boundary_disagreements": 2,
+   "examples": [
+    {
+     "case": 17,
+     "input": "0x7ff0000000000123",
+     "source": [
+      null,
+      null,
+      4927
+     ],
+     "native": [
+      13835058055282759680,
+      32767,
+      3199
+     ]
+    },
+    {
+     "case": 18,
+     "input": "0xfff0000000000123",
+     "source": [
+      null,
+      null,
+      4927
+     ],
+     "native": [
+      13835058055282759680,
+      65535,
+      3199
+     ]
+    }
+   ]
+  },
+  {
+   "cw": "0x27f",
+   "cases": 1019,
+   "value_mismatches": 0,
+   "control_mismatches": 2,
+   "flag_mismatches": 6,
+   "errno_mismatches": 0,
+   "boundary_disagreements": 2,
+   "examples": [
+    {
+     "case": 17,
+     "input": "0x7ff0000000000123",
+     "source": [
+      null,
+      null,
+      4927
+     ],
+     "native": [
+      13835058055282759680,
+      32767,
+      639
+     ]
+    },
+    {
+     "case": 18,
+     "input": "0xfff0000000000123",
+     "source": [
+      null,
+      null,
+      4927
+     ],
+     "native": [
+      13835058055282759680,
+      65535,
+      639
+     ]
+    }
+   ]
+  },
+  {
+   "cw": "0x67f",
+   "cases": 1019,
+   "value_mismatches": 0,
+   "control_mismatches": 2,
+   "flag_mismatches": 6,
+   "errno_mismatches": 0,
+   "boundary_disagreements": 2,
+   "examples": [
+    {
+     "case": 17,
+     "input": "0x7ff0000000000123",
+     "source": [
+      null,
+      null,
+      4927
+     ],
+     "native": [
+      13835058055282759680,
+      32767,
+      1663
+     ]
+    },
+    {
+     "case": 18,
+     "input": "0xfff0000000000123",
+     "source": [
+      null,
+      null,
+      4927
+     ],
+     "native": [
+      13835058055282759680,
+      65535,
+      1663
+     ]
+    }
+   ]
+  },
+  {
+   "cw": "0xa7f",
+   "cases": 1019,
+   "value_mismatches": 0,
+   "control_mismatches": 2,
+   "flag_mismatches": 6,
+   "errno_mismatches": 0,
+   "boundary_disagreements": 2,
+   "examples": [
+    {
+     "case": 17,
+     "input": "0x7ff0000000000123",
+     "source": [
+      null,
+      null,
+      4927
+     ],
+     "native": [
+      13835058055282759680,
+      32767,
+      2687
+     ]
+    },
+    {
+     "case": 18,
+     "input": "0xfff0000000000123",
+     "source": [
+      null,
+      null,
+      4927
+     ],
+     "native": [
+      13835058055282759680,
+      65535,
+      2687
+     ]
+    }
+   ]
+  },
+  {
+   "cw": "0xe7f",
+   "cases": 1019,
+   "value_mismatches": 0,
+   "control_mismatches": 2,
+   "flag_mismatches": 6,
+   "errno_mismatches": 0,
+   "boundary_disagreements": 2,
+   "examples": [
+    {
+     "case": 17,
+     "input": "0x7ff0000000000123",
+     "source": [
+      null,
+      null,
+      4927
+     ],
+     "native": [
+      13835058055282759680,
+      32767,
+      3711
+     ]
+    },
+    {
+     "case": 18,
+     "input": "0xfff0000000000123",
+     "source": [
+      null,
+      null,
+      4927
+     ],
+     "native": [
+      13835058055282759680,
+      65535,
+      3711
+     ]
+    }
+   ]
+  },
+  {
+   "cw": "0x37f",
+   "cases": 1019,
+   "value_mismatches": 0,
+   "control_mismatches": 2,
+   "flag_mismatches": 6,
+   "errno_mismatches": 0,
+   "boundary_disagreements": 2,
+   "examples": [
+    {
+     "case": 17,
+     "input": "0x7ff0000000000123",
+     "source": [
+      null,
+      null,
+      4927
+     ],
+     "native": [
+      13835058055282759680,
+      32767,
+      895
+     ]
+    },
+    {
+     "case": 18,
+     "input": "0xfff0000000000123",
+     "source": [
+      null,
+      null,
+      4927
+     ],
+     "native": [
+      13835058055282759680,
+      65535,
+      895
+     ]
+    }
+   ]
+  },
+  {
+   "cw": "0x77f",
+   "cases": 1019,
+   "value_mismatches": 0,
+   "control_mismatches": 2,
+   "flag_mismatches": 6,
+   "errno_mismatches": 0,
+   "boundary_disagreements": 2,
+   "examples": [
+    {
+     "case": 17,
+     "input": "0x7ff0000000000123",
+     "source": [
+      null,
+      null,
+      4927
+     ],
+     "native": [
+      13835058055282759680,
+      32767,
+      1919
+     ]
+    },
+    {
+     "case": 18,
+     "input": "0xfff0000000000123",
+     "source": [
+      null,
+      null,
+      4927
+     ],
+     "native": [
+      13835058055282759680,
+      65535,
+      1919
+     ]
+    }
+   ]
+  }
+ ],
+ "limits": [
+  "Explicit NaN policy1 and masked control words are test seeds, not observed runtime",
+  "Original signaling-NaN routes can stop before unresolved CRT dispatcher; these remain strict disagreements",
+  "Error handler/unmasked delivery and Intel hardware remain unverified",
+  "Full geometry/game/controller behavior is not exercised"
+ ],
+ "returned_values_control_boundaries_match": false,
+ "full_emulator_match": false,
+ "seconds": 0.34926466696197167,
+ "tracked_summary": {
+  "full_sha256": "16ddfe6ed409f7fc27886ebf0b71017a695a68a53fb2d2a0f0578ac034842291",
+  "full_bytes": 10692,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "profiles": 12
+  }
+ }
+}

@@ -1,0 +1,17 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "0c87e0a3832dd935d62b8c01c4e6069a021d0af2a159056cb758d7f83c82c5a9",
+ "original_range_sha256": "6d05db8e833f886992fa4aca291805a50c362033bdc9f6c84f72753b322681ce",
+ "cases": 3000,
+ "mismatch_count": 0,
+ "fp_flag_mismatches": 1251,
+ "mismatches": [],
+ "stores_transform_match": true,
+ "limits": "Projection range 403180 + 7815e0 against original instructions.\n\nThe D3D8 device is a COM fixture: GetTransform (+0x98) writes the case matrix,\nSetTransform (+0x94) records the written matrix. Each case runs with a random\ncache and again with the cache equal to the first run's stored values (the\nunchanged path). x87 status flags are reported separately.\n",
+ "tracked_summary": {
+  "full_sha256": "04b6cc506de2745aebf9dab79be478d5335c891af8aeef217475c2671c628a8a",
+  "full_bytes": 773,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

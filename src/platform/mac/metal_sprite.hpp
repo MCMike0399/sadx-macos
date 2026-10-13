@@ -3,8 +3,8 @@
 #error "metal_sprite.hpp is the Objective-C++ sprite consumer boundary"
 #endif
 #include "platform/mac/metal_texture.hpp"
-#include "ninja/ninja_sprite_queue.hpp"
-#include "ninja/ninja_texture_selection.hpp"
+#include "engine/ninja_sprite_queue.hpp"
+#include "engine/ninja_texture_selection.hpp"
 #include <map>
 namespace sadx {
 // A snapshot of the actual D3D8 backend state, separate from the packed Ninja

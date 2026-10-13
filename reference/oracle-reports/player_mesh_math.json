@@ -1,0 +1,132 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "profile": "actual450810/450920/4509d0/795000/787630/788a50; no overlays; explicitmatherr1",
+ "native_library_sha256": "fe5e73fd2a3bd13ea1e96aa155b4418bba6a13b51086ae9e4e23cecb3f90b474",
+ "compiler": "Clang 21.0.0 (clang-2100.3.34.2); ARM64 C++17 O2 software x87; static ordered matrix expressions",
+ "native_sources": {
+  "src/player_mesh_math.hpp": "39e1208e23f227376a453d3037b19105c4d7fdae07831b917c1eb303e11f1cfe",
+  "src/player_mesh_math.cpp": "c004d7b4adb38f2ddae67349ffea167647731088b58c29a49a7acd61c912f0f3",
+  "src/player_mesh_matrix.hpp": "8a3834fa1b22b686f195cfa8c84105a9a64187089b725f21a650702b33631031",
+  "src/player_mesh_matrix.cpp": "d471c45ce938663118cf792a8740e29d596c4172f5f22dbdde27f8bedc2a0fd2",
+  "src/crt_sqrt.hpp": "7b2f22e1cfda66272b17ad41d54520bf63af9e79d66d111272812bffa834fa55",
+  "src/crt_sqrt.cpp": "4d2aaa0e7c267a1b173eaff61f448d3e217654cc405061f70605070dff30d40f",
+  "src/crt_asin.hpp": "632dc9cacad59e2d411d46f1019278beb4e65044f3f381d2ab57c31aa729c531",
+  "src/crt_asin.cpp": "ef3960069a7d20264f9997fb0ea40b6def9424bcbaf73fe221a84ab257bedbd5",
+  "src/crt_argument.hpp": "dad8ca261ac36d58837f104b768426ecdaa83b7d4cf832d7d410e9a21e9a25be",
+  "src/crt_argument.cpp": "95ef63e5063580ddb3071f4549259d09a985acef5d80c26e3bfeba52eba1e4da",
+  "src/ninja_math.hpp": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
+  "src/ninja_math.cpp": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
+  "src/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
+  "src/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8"
+ },
+ "verifier_sha256": "dc61c662f24e3df63b87d023d71b03f162abcdab71ce762c2895532a367dc8c1",
+ "case_sha256": "0b4b89b48d9da0d7ab90e525245d52c129f35668215ff3f4006976ee3b5442cb",
+ "profiles": [
+  {
+   "cw": "0x7f",
+   "mode": 0,
+   "cases": 588,
+   "value_mismatches": 0,
+   "return_mismatches": 0,
+   "flag_mismatches": 504,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0x7f",
+   "mode": 1,
+   "cases": 436,
+   "value_mismatches": 0,
+   "return_mismatches": 0,
+   "flag_mismatches": 430,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0x7f",
+   "mode": 2,
+   "cases": 436,
+   "value_mismatches": 0,
+   "return_mismatches": 0,
+   "flag_mismatches": 430,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0x7f",
+   "mode": 3,
+   "cases": 592,
+   "value_mismatches": 0,
+   "return_mismatches": 0,
+   "flag_mismatches": 504,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0x7f",
+   "mode": 4,
+   "cases": 592,
+   "value_mismatches": 0,
+   "return_mismatches": 0,
+   "flag_mismatches": 494,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0x7f",
+   "mode": 5,
+   "cases": 628,
+   "value_mismatches": 0,
+   "return_mismatches": 0,
+   "flag_mismatches": 466,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0x47f",
+   "mode": 0,
+   "cases": 588,
+   "value_mismatches": 0,
+   "return_mismatches": 0,
+   "flag_mismatches": 504,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0x47f",
+   "mode": 1,
+   "cases": 436,
+   "value_mismatches": 0,
+   "return_mismatches": 0,
+   "flag_mismatches": 430,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0x47f",
+   "mode": 2,
+   "cases": 436,
+   "value_mismatches": 0,
+   "return_mismatches": 0,
+   "flag_mismatches": 430,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0x47f",
+   "mode": 3,
+   "cases": 592,
+   "value_mismatches": 0,
+   "return_mismatches": 0,
+   "flag_mismatches": 504,
+   "cw_mismatches": 0
+  }
+ ],
+ "mismatches": [],
+ "limits": [
+  "Masked experiment CWs/matherr1 not observed runtime",
+  "80realECoast localtriangle inputs plus syntheticraw/matrix fixtures; not finalcontactquery",
+  "Generated matrix arithmetic compiles to directnativeC++calls; no runtimeopcodeinterpreter",
+  "Unicorn signaling-load/transcendental/status limitations remain; no hardwareequivalenceclaim"
+ ],
+ "values_returns_cw_match": true,
+ "tracked_summary": {
+  "full_sha256": "93b4d642e3c8f0e5e413796c4053e575eb6c50ec754c8f148377ad36044703ef",
+  "full_bytes": 15691,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "profiles": 72
+  }
+ }
+}

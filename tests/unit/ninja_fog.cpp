@@ -1,4 +1,4 @@
-#include "ninja/ninja_fog.hpp"
+#include "engine/ninja_fog.hpp"
 #include <cstring>
 #include <iostream>
 #include <stdexcept>

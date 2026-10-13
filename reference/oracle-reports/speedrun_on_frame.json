@@ -1,0 +1,34 @@
+{
+ "dll_sha256": "f3fc68a3058fb726142547018da860b170f137248e54b82712b52527e7b74802",
+ "native_library_sha256": "5d99dee453e1a7339a1a69ed94af0f93181f451d0b064a164312fd748e3e4ea4",
+ "source_files": {
+  "src/game/mod_loader_frame.hpp": "abed7b1d92c8f5573529107a177d5a654f2af302413decb8f042649f589e43f2",
+  "src/game/mod_loader_frame.cpp": "7ad9f3105c8ab83ce1ec3c92c5d944d25a52cedc3bac5e98c0b3f681149555e6",
+  "tests/probes/native_speedrun_on_frame_probe.cpp": "ddda3d4288274187ac6613d9f33ba7b01f79a6573c98e021075739efffda9ed8",
+  "tools/oracles/verify_original_speedrun_on_frame.py": "1e8405303efa4890e36c512a1a73e87499efd6a7fbb2552d3ae6bae52b6c892e"
+ },
+ "original_range_sha256": {
+  "0x10002e60-0x10002fe2": "7cb0a5c6bd669489accd99d762614cccd6d924908daccde7bf56da3bf1c6a405"
+ },
+ "cases": 6000,
+ "source_outcomes": {
+  "completed1:nested0:timerreset": 968,
+  "completed1:nested1:timerreset": 1734,
+  "completed0:nested1:timerkept": 416,
+  "completed1:nested2:timerreset": 798,
+  "completed1:nested1:timerkept": 962,
+  "completed1:nested2:timerkept": 420,
+  "completed1:nested0:timerkept": 543,
+  "completed0:nested2:timerkept": 159
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "state_traces_match": true,
+ "limits": "Speedrun 2.0 OnFrame (sadx-speedrun-mod.dll +0x2e60), which the pinned mod\nloader's ProcessCodes (426063) raises each 40c090 pass, against its original\ninstructions.\n\nThe pinned DLL runs at its preferred base. sonic.exe globals 3b22de4 (u16),\n3abdc7c and 3b22dcc (u16) are mapped data. Nested owners are recording\nfixtures that can stop the source: 10004f80 (quick save, entered by CALL) and\nthe Chao stat viewer body at 10002e7f (the fixture resumes at its stack-balanced\nend 10002f4f). Compared: completion, the five DLL bytes 100107e8/100107e9 and\nthe 10010818..1a timer, and the nested trace. Not covered: the viewer body and\nthe quick-save routine themselves (unported nested owners).\n",
+ "tracked_summary": {
+  "full_sha256": "df229f5826e15e99b9c8c9a60ddc71dc7361c26fa2fc8a5dab53b17e03b24fc1",
+  "full_bytes": 1922,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

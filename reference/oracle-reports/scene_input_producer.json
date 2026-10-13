@@ -1,0 +1,34 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "e2d34f61aa727e05bbc4c21b0657ce61bb6131e46e5b9fdc1509f4891a71528e",
+ "source_files": {
+  "src/engine/game_controller.hpp": "c8e3d41f7f1f14f5a0532befdb4f7e37be1cdad92edc085092dd4a24ada34784",
+  "src/engine/game_controller.cpp": "10f4738004f84f40be471c48c217676793e22f48346e2f7b19d4cf49723cf294",
+  "src/player/scene_input_producer.hpp": "7df05899fdbd59b40b23b9950b81a8f96ae5d897c5aadd7ccd2f68709087a508",
+  "src/player/scene_input_producer.cpp": "e4a8560da976c2756b4646e9bf179eb3790aaa9980c3f155e76eaa40e6124f8a",
+  "tests/probes/native_scene_input_producer_probe.cpp": "066022bab2a4f47ba2c355f0579a2a5c13198fdf007795949a9c2b9c89509a58",
+  "tools/oracles/verify_original_scene_input_producer.py": "11b34ffd95450f457d09739fcd7eb8ed7765c7e7f0ce773b39f1bad17afea186"
+ },
+ "original_ranges_sha256": {
+  "40fdc0": "f65e2f46df22202d7052493c4364b4ca06033b0d1d0254384409a29462c497f3",
+  "40f070": "1ba8b1ef6a4e266aa5a06f8219c02881b8160c39373ae1949adb73ac7230c3ff",
+  "4146b0": "5ef4a62f301520d032a686295e98028204337142cae6586b01ce398ae2f5f685"
+ },
+ "cases": 1888,
+ "case_sha256": "2cd3bd6c13e6e81edddebf006c901291acf79ec8dcb7d0fb2d55fa338f92af9d",
+ "source_outcomes": {
+  "0": 1040,
+  "2": 96,
+  "11": 752
+ },
+ "mismatches": [],
+ "mismatch_count": 0,
+ "stores_order_and_boundaries_match": true,
+ "limits": "40fdc0 scene input producer (with actual 4146b0 and 40f070) against original instructions.\n\nThe 40f170 analog producer is an explicit owner fixture here; WriteAnalogs and\nthe Input2.6.1 hook have their own reports. Raw controller records hold\ndeterministic fixture bytes; observed null ControllerPointers fault in the\nsource copy and return early in 40f070. Unknown native facts and physical\ncontroller delivery are outside this comparison.\n",
+ "tracked_summary": {
+  "full_sha256": "60b1684cbc7bfc5bb0a3bb1e44d7f435c3e272ad4df1123895f16c83cc9ba667",
+  "full_bytes": 1902,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

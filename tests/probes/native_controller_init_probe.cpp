@@ -1,4 +1,4 @@
-#include "game/game_controller.hpp"
+#include "engine/game_controller.hpp"
 #include <algorithm>
 #include <cstring>
 // Native 40f3a0 matching tools/verify_original_controller_init.py.

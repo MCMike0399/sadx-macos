@@ -147,7 +147,7 @@ def main():
             if got[10]!=expected[10]:profile['flag_mismatches']+=1
         profiles.append(profile);print(json.dumps(profile),flush=True)
     blob=b''.join(struct.pack('<64I',*c) for c in cases);a.output.with_suffix('.cases.bin').write_bytes(blob)
-    names=['src/ninja/ninja_sprite_display.hpp','src/ninja/ninja_sprite_display.cpp','src/ninja/ninja_sprite.cpp','src/ninja/ninja_texture_selection.cpp','src/ninja/ninja_render.cpp','tests/probes/native_ninja_sprite_display_probe.cpp','tools/oracles/verify_original_ninja_sprite_display.py']
+    names=['src/engine/ninja_sprite_display.hpp','src/engine/ninja_sprite_display.cpp','src/engine/ninja_sprite.cpp','src/engine/ninja_texture_selection.cpp','src/engine/ninja_render.cpp','tests/probes/native_ninja_sprite_display_probe.cpp','tools/oracles/verify_original_ninja_sprite_display.py']
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={n:sha((pathlib.Path(__file__).resolve().parents[2]/n).read_bytes()) for n in names},
         assets_sha256=sha(assets),original_range_sha256=sha(image.read(0x77e390,0x487)),cases=len(cases),case_sha256=sha(blob),profiles=profiles,source_outcomes_all_profiles=outcomes,
         mismatch_examples=bad,state_calls_vertices_boundaries_match=all(not p['state_mismatches'] for p in profiles),strict_flags_match=all(not p['flag_mismatches'] for p in profiles),limits=__doc__)

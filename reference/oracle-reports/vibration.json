@@ -1,0 +1,48 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "9ca9f1af24f479dbc277291efe4a373e1f0ed73643275183aaed842c5567d21e",
+ "source_files": {
+  "src/engine/ninja_vibration.hpp": "f29a7afe322298608464c58846f12da0bc71be42559a15fb5ee62aee6a68812a",
+  "src/engine/ninja_vibration.cpp": "7f8764e26291679a680b05c9214d03d615edf12281f1bbed65ae9b51fba618f6",
+  "tests/probes/native_vibration_probe.cpp": "2045248ea7f208b1a0b17194bcacfec48a9b7d6b34d598c688b62398eac41d9e",
+  "tools/oracles/verify_original_vibration.py": "7caf359803ff0ff31724c65c2ba598b4c496b9f4b1ab50a3e2470b73b6a9e2ec"
+ },
+ "original_ranges_sha256": {
+  "0x785190-0x785233": "ce63c0c79440e3b1e891581ae1998c9840da0a11c92103a3be8edd565cc46a6d"
+ },
+ "cases": 4000,
+ "source_outcomes": {
+  "completed0:nested1": 100,
+  "completed1:nested2": 377,
+  "completed1:nested8": 96,
+  "completed1:nested9": 104,
+  "completed1:nested3": 770,
+  "completed1:nested4": 515,
+  "completed1:nested6": 414,
+  "completed1:nested5": 338,
+  "completed1:nested1": 396,
+  "completed1:nested7": 180,
+  "completed1:nested0": 436,
+  "completed0:nested2": 70,
+  "completed0:nested3": 58,
+  "completed0:nested6": 19,
+  "completed0:nested5": 32,
+  "completed0:nested7": 11,
+  "completed0:nested4": 50,
+  "completed1:nested10": 14,
+  "completed0:nested8": 3,
+  "completed0:nested9": 2,
+  "completed1:nested11": 12,
+  "completed1:nested12": 3
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "state_traces_match": true,
+ "limits": "The 785190 vibration update against its original instructions.\n\nThe four 0x18-stride entries at 3d08428 (state +0, strength byte +6, duration\n+0xc, counter +0x14) are case inputs. 793da0, 793e00 (writes the case's\nelapsed word into its second argument), 791f80 and 792000 are recording\nfixtures; any nested call can stop the source. Compared: completion, the four\nstates and counters, and the nested trace (callee, site, arguments).\n",
+ "tracked_summary": {
+  "full_sha256": "1408df817d3d53d1d11b7ead8daca3038cb6d9c6e3b4a20a500f407b36be6d27",
+  "full_bytes": 1957,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

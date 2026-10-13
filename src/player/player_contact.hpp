@@ -1,6 +1,6 @@
 #pragma once
 
-#include "ninja/ninja_math.hpp"
+#include "math/ninja_math.hpp"
 #include <optional>
 
 namespace sadx {

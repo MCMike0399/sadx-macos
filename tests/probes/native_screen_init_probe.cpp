@@ -1,4 +1,4 @@
-#include "ninja/ninja_screen.hpp"
+#include "engine/ninja_screen.hpp"
 #include <algorithm>
 #include <cstring>
 #include <vector>

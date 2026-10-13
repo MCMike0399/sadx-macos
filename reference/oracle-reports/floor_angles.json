@@ -1,0 +1,1081 @@
+{
+ "profile": "source-GetNormalAngles-CRTasin-ftol/Unicorn2.1.4/explicit-policy/native-Bochs-P5P6",
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "9a7158ec497604c408bf573d3d8d12d0e101b281d9f93e259cd8f1041c697672",
+ "native_model": "X87Transcendental::fpatan_bochs_p5_p6",
+ "seed": "0x4b8e80",
+ "source_functions": {
+  "0x4b8e80": {
+   "size": 258,
+   "sha256": "390a452fed0cf1226bc1b60690a8057835212d164aeb6d08cd12e864d10efef2"
+  },
+  "0x645020": {
+   "size": 203,
+   "sha256": "a265dc1943d9a0f422060b23724800a415fd45fad9466ff565ac157c60efbf6b"
+  },
+  "0x648b47": {
+   "size": 286,
+   "sha256": "c8f18de8032429373ccc4672468bef58d46cfcc676783415d31caca980c2746a"
+  },
+  "0x644340": {
+   "size": 117,
+   "sha256": "5333b186c02836974c6f792303aeb2c00d856316b93ccbbe65f51def6ae661b4"
+  }
+ },
+ "constants": {
+  "0x7e66d8": {
+   "size": 4,
+   "bytes": "61fd7f3f",
+   "sha256": "273da05d1c8cc7e6691a29882e2586a0d2fc188555db0c743111269f4d54da88"
+  },
+  "0x7e66d4": {
+   "size": 4,
+   "bytes": "61fd7fbf",
+   "sha256": "0be1fea6efe53b32c004d7bb32ca41b000ec8914ff79e56dc2f6b16bb2f8eac1"
+  },
+  "0x7e00e0": {
+   "size": 4,
+   "bytes": "6f12033b",
+   "sha256": "0cd78fc5bf341032fcadb03079458783bac2e3e616c7da1603d8788205a13bd0"
+  },
+  "0x7dccd0": {
+   "size": 8,
+   "bytes": "000000000000f040",
+   "sha256": "962b9b484dbe0e4b254d53508edb68b1a3561d3d71ccaa9e9a84070897a6e1f4"
+  },
+  "0x7dccc8": {
+   "size": 8,
+   "bytes": "0ae3e4b4305fc43f",
+   "sha256": "befc8b20280d17895feaca1848007d17564f1f191a7a369398cf93933c601bfd"
+  },
+  "0x7dcce8": {
+   "size": 8,
+   "bytes": "0ae3e4b4305fc4bf",
+   "sha256": "db66a5a42a1a6fe60fc968ddf4c1719798ff1fbefeb58df42c8f5e68c84a59ea"
+  }
+ },
+ "native_sources": {
+  "src/player/floor_angles.cpp": "8eff4d8e5363260bd73ecb965de0e78e0105abda96e82f28943a183ccbdcd80b",
+  "src/player/floor_angles.hpp": "22c502da8a5e4837735c57cdd080458adb2c460176c1c694bd08df187c8482f6",
+  "src/cpu/crt_asin.cpp": "ef3960069a7d20264f9997fb0ea40b6def9424bcbaf73fe221a84ab257bedbd5",
+  "src/cpu/crt_asin.hpp": "632dc9cacad59e2d411d46f1019278beb4e65044f3f381d2ab57c31aa729c531",
+  "src/cpu/crt_integer.cpp": "18d16777cc02344275575955f7773043ea9c6b48cf0197b725e838d1c5294a92",
+  "src/cpu/crt_integer.hpp": "f88d5d9b73239055150a35d0fe6363f773c7e62f5b2c1ce62eff5eaabe8333a6",
+  "src/cpu/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8",
+  "src/cpu/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
+  "src/cpu/x87_transcendental.cpp": "00fa509396903586b83807f7aa53b7df8675d7d8efdef031f7264283e3c0529a",
+  "src/cpu/x87_transcendental.hpp": "443284c5e02df41950b33d2b58465f198af3679e8ceeac87c5513169beb99993",
+  "src/player/player_coordinates.hpp": "5d5cfa3e2965997baf122f6ea263f2104c1e2698ba48373e06628f54ad83b1a7",
+  "tests/probes/native_floor_angles_probe.cpp": "b04b733c7353637c8838901f6978a471ddfa364ca67f63097b1567e3a0415f0a",
+  "tools/oracles/verify_original_floor_angles.py": "b73e8529a2bb3aa4e61f593e5f50486e5ea8aa38fd6408376dba09887481e5c1"
+ },
+ "native_library_compiler": "Clang 21.0.0 (clang-2100.3.34.2); target arm64; __cplusplus=201703L; native integer SoftFloat/Bochs",
+ "declared_native_build_profile": "arm64 C++17 O2 ff-contract=off fno-fast-math; native integer SoftFloat/Bochs archives",
+ "bochs_dependency": "bce714089e1b6a7a5cfaba503164b946e75b636cdb86d1d523bfdbb4af4aca02",
+ "basic_softfloat_dependency": "ecfa7fb82b659895be97661b3607d5583e11c7c96de0b04ee8c3325a9dceee35",
+ "cases": {
+  "count": 1915,
+  "path": "/Users/burbujamc/Developer/sadx-macos/build/oracles/floor_angles.cases.bin",
+  "sha256": "aaa0c980f12dec6dc2275bbabcdad0d6bab657c3202c17c2f6e9d298deabfca2",
+  "record": "8 LE uint32 words"
+ },
+ "controls": [
+  {
+   "cw": "0x7f",
+   "cases": 1915,
+   "floor_angle_mismatches": 2,
+   "asin_ext80_mismatches": 172,
+   "boundary_mismatches": 4,
+   "cw_mismatches": 0,
+   "flag_mismatches": 1522,
+   "pending_store_mismatches": 2,
+   "policy_summaries": {
+    "0": {
+     "cases": 26,
+     "floor_angle_mismatches": 2,
+     "asin_ext80_mismatches": 2,
+     "boundary_mismatches": 4,
+     "cw_mismatches": 0,
+     "flag_mismatches": 11,
+     "pending_store_mismatches": 2
+    },
+    "1": {
+     "cases": 1889,
+     "floor_angle_mismatches": 0,
+     "asin_ext80_mismatches": 170,
+     "boundary_mismatches": 0,
+     "cw_mismatches": 0,
+     "flag_mismatches": 1511,
+     "pending_store_mismatches": 0
+    }
+   }
+  },
+  {
+   "cw": "0x47f",
+   "cases": 1915,
+   "floor_angle_mismatches": 2,
+   "asin_ext80_mismatches": 172,
+   "boundary_mismatches": 4,
+   "cw_mismatches": 4,
+   "flag_mismatches": 1522,
+   "pending_store_mismatches": 2,
+   "policy_summaries": {
+    "0": {
+     "cases": 26,
+     "floor_angle_mismatches": 2,
+     "asin_ext80_mismatches": 2,
+     "boundary_mismatches": 4,
+     "cw_mismatches": 4,
+     "flag_mismatches": 11,
+     "pending_store_mismatches": 2
+    },
+    "1": {
+     "cases": 1889,
+     "floor_angle_mismatches": 0,
+     "asin_ext80_mismatches": 170,
+     "boundary_mismatches": 0,
+     "cw_mismatches": 0,
+     "flag_mismatches": 1511,
+     "pending_store_mismatches": 0
+    }
+   }
+  },
+  {
+   "cw": "0x87f",
+   "cases": 1915,
+   "floor_angle_mismatches": 2,
+   "asin_ext80_mismatches": 172,
+   "boundary_mismatches": 4,
+   "cw_mismatches": 4,
+   "flag_mismatches": 1522,
+   "pending_store_mismatches": 2,
+   "policy_summaries": {
+    "0": {
+     "cases": 26,
+     "floor_angle_mismatches": 2,
+     "asin_ext80_mismatches": 2,
+     "boundary_mismatches": 4,
+     "cw_mismatches": 4,
+     "flag_mismatches": 11,
+     "pending_store_mismatches": 2
+    },
+    "1": {
+     "cases": 1889,
+     "floor_angle_mismatches": 0,
+     "asin_ext80_mismatches": 170,
+     "boundary_mismatches": 0,
+     "cw_mismatches": 0,
+     "flag_mismatches": 1511,
+     "pending_store_mismatches": 0
+    }
+   }
+  },
+  {
+   "cw": "0xc7f",
+   "cases": 1915,
+   "floor_angle_mismatches": 2,
+   "asin_ext80_mismatches": 172,
+   "boundary_mismatches": 4,
+   "cw_mismatches": 4,
+   "flag_mismatches": 1522,
+   "pending_store_mismatches": 2,
+   "policy_summaries": {
+    "0": {
+     "cases": 26,
+     "floor_angle_mismatches": 2,
+     "asin_ext80_mismatches": 2,
+     "boundary_mismatches": 4,
+     "cw_mismatches": 4,
+     "flag_mismatches": 11,
+     "pending_store_mismatches": 2
+    },
+    "1": {
+     "cases": 1889,
+     "floor_angle_mismatches": 0,
+     "asin_ext80_mismatches": 170,
+     "boundary_mismatches": 0,
+     "cw_mismatches": 0,
+     "flag_mismatches": 1511,
+     "pending_store_mismatches": 0
+    }
+   }
+  },
+  {
+   "cw": "0x27f",
+   "cases": 1915,
+   "floor_angle_mismatches": 0,
+   "asin_ext80_mismatches": 173,
+   "boundary_mismatches": 0,
+   "cw_mismatches": 0,
+   "flag_mismatches": 1522,
+   "pending_store_mismatches": 0,
+   "policy_summaries": {
+    "0": {
+     "cases": 26,
+     "floor_angle_mismatches": 0,
+     "asin_ext80_mismatches": 2,
+     "boundary_mismatches": 0,
+     "cw_mismatches": 0,
+     "flag_mismatches": 11,
+     "pending_store_mismatches": 0
+    },
+    "1": {
+     "cases": 1889,
+     "floor_angle_mismatches": 0,
+     "asin_ext80_mismatches": 171,
+     "boundary_mismatches": 0,
+     "cw_mismatches": 0,
+     "flag_mismatches": 1511,
+     "pending_store_mismatches": 0
+    }
+   }
+  },
+  {
+   "cw": "0x67f",
+   "cases": 1915,
+   "floor_angle_mismatches": 2,
+   "asin_ext80_mismatches": 173,
+   "boundary_mismatches": 4,
+   "cw_mismatches": 4,
+   "flag_mismatches": 1522,
+   "pending_store_mismatches": 2,
+   "policy_summaries": {
+    "0": {
+     "cases": 26,
+     "floor_angle_mismatches": 2,
+     "asin_ext80_mismatches": 2,
+     "boundary_mismatches": 4,
+     "cw_mismatches": 4,
+     "flag_mismatches": 11,
+     "pending_store_mismatches": 2
+    },
+    "1": {
+     "cases": 1889,
+     "floor_angle_mismatches": 0,
+     "asin_ext80_mismatches": 171,
+     "boundary_mismatches": 0,
+     "cw_mismatches": 0,
+     "flag_mismatches": 1511,
+     "pending_store_mismatches": 0
+    }
+   }
+  },
+  {
+   "cw": "0xa7f",
+   "cases": 1915,
+   "floor_angle_mismatches": 2,
+   "asin_ext80_mismatches": 173,
+   "boundary_mismatches": 4,
+   "cw_mismatches": 4,
+   "flag_mismatches": 1522,
+   "pending_store_mismatches": 2,
+   "policy_summaries": {
+    "0": {
+     "cases": 26,
+     "floor_angle_mismatches": 2,
+     "asin_ext80_mismatches": 2,
+     "boundary_mismatches": 4,
+     "cw_mismatches": 4,
+     "flag_mismatches": 11,
+     "pending_store_mismatches": 2
+    },
+    "1": {
+     "cases": 1889,
+     "floor_angle_mismatches": 0,
+     "asin_ext80_mismatches": 171,
+     "boundary_mismatches": 0,
+     "cw_mismatches": 0,
+     "flag_mismatches": 1511,
+     "pending_store_mismatches": 0
+    }
+   }
+  },
+  {
+   "cw": "0xe7f",
+   "cases": 1915,
+   "floor_angle_mismatches": 2,
+   "asin_ext80_mismatches": 173,
+   "boundary_mismatches": 4,
+   "cw_mismatches": 4,
+   "flag_mismatches": 1522,
+   "pending_store_mismatches": 2,
+   "policy_summaries": {
+    "0": {
+     "cases": 26,
+     "floor_angle_mismatches": 2,
+     "asin_ext80_mismatches": 2,
+     "boundary_mismatches": 4,
+     "cw_mismatches": 4,
+     "flag_mismatches": 11,
+     "pending_store_mismatches": 2
+    },
+    "1": {
+     "cases": 1889,
+     "floor_angle_mismatches": 0,
+     "asin_ext80_mismatches": 171,
+     "boundary_mismatches": 0,
+     "cw_mismatches": 0,
+     "flag_mismatches": 1511,
+     "pending_store_mismatches": 0
+    }
+   }
+  },
+  {
+   "cw": "0x37f",
+   "cases": 1915,
+   "floor_angle_mismatches": 2,
+   "asin_ext80_mismatches": 173,
+   "boundary_mismatches": 4,
+   "cw_mismatches": 0,
+   "flag_mismatches": 1522,
+   "pending_store_mismatches": 2,
+   "policy_summaries": {
+    "0": {
+     "cases": 26,
+     "floor_angle_mismatches": 2,
+     "asin_ext80_mismatches": 2,
+     "boundary_mismatches": 4,
+     "cw_mismatches": 0,
+     "flag_mismatches": 11,
+     "pending_store_mismatches": 2
+    },
+    "1": {
+     "cases": 1889,
+     "floor_angle_mismatches": 0,
+     "asin_ext80_mismatches": 171,
+     "boundary_mismatches": 0,
+     "cw_mismatches": 0,
+     "flag_mismatches": 1511,
+     "pending_store_mismatches": 0
+    }
+   }
+  },
+  {
+   "cw": "0x77f",
+   "cases": 1915,
+   "floor_angle_mismatches": 2,
+   "asin_ext80_mismatches": 173,
+   "boundary_mismatches": 4,
+   "cw_mismatches": 4,
+   "flag_mismatches": 1522,
+   "pending_store_mismatches": 2,
+   "policy_summaries": {
+    "0": {
+     "cases": 26,
+     "floor_angle_mismatches": 2,
+     "asin_ext80_mismatches": 2,
+     "boundary_mismatches": 4,
+     "cw_mismatches": 4,
+     "flag_mismatches": 11,
+     "pending_store_mismatches": 2
+    },
+    "1": {
+     "cases": 1889,
+     "floor_angle_mismatches": 0,
+     "asin_ext80_mismatches": 171,
+     "boundary_mismatches": 0,
+     "cw_mismatches": 0,
+     "flag_mismatches": 1511,
+     "pending_store_mismatches": 0
+    }
+   }
+  },
+  {
+   "cw": "0xb7f",
+   "cases": 1915,
+   "floor_angle_mismatches": 2,
+   "asin_ext80_mismatches": 173,
+   "boundary_mismatches": 4,
+   "cw_mismatches": 4,
+   "flag_mismatches": 1522,
+   "pending_store_mismatches": 2,
+   "policy_summaries": {
+    "0": {
+     "cases": 26,
+     "floor_angle_mismatches": 2,
+     "asin_ext80_mismatches": 2,
+     "boundary_mismatches": 4,
+     "cw_mismatches": 4,
+     "flag_mismatches": 11,
+     "pending_store_mismatches": 2
+    },
+    "1": {
+     "cases": 1889,
+     "floor_angle_mismatches": 0,
+     "asin_ext80_mismatches": 171,
+     "boundary_mismatches": 0,
+     "cw_mismatches": 0,
+     "flag_mismatches": 1511,
+     "pending_store_mismatches": 0
+    }
+   }
+  },
+  {
+   "cw": "0xf7f",
+   "cases": 1915,
+   "floor_angle_mismatches": 2,
+   "asin_ext80_mismatches": 173,
+   "boundary_mismatches": 4,
+   "cw_mismatches": 4,
+   "flag_mismatches": 1522,
+   "pending_store_mismatches": 2,
+   "policy_summaries": {
+    "0": {
+     "cases": 26,
+     "floor_angle_mismatches": 2,
+     "asin_ext80_mismatches": 2,
+     "boundary_mismatches": 4,
+     "cw_mismatches": 4,
+     "flag_mismatches": 11,
+     "pending_store_mismatches": 2
+    },
+    "1": {
+     "cases": 1889,
+     "floor_angle_mismatches": 0,
+     "asin_ext80_mismatches": 171,
+     "boundary_mismatches": 0,
+     "cw_mismatches": 0,
+     "flag_mismatches": 1511,
+     "pending_store_mismatches": 0
+    }
+   }
+  }
+ ],
+ "mismatches": [
+  {
+   "cw": "0x7f",
+   "case": 1,
+   "name": "axis/threshold",
+   "inputs": [
+    "0x0",
+    "0x80000000",
+    "0x80000000",
+    "0x0",
+    "0x13579bdf",
+    "0xfdb97531",
+    "0x1",
+    "0x1"
+   ],
+   "fields": [
+    "flags"
+   ],
+   "original": {
+    "angles": [
+     "0x0",
+     "0x8000"
+    ],
+    "boundary": "0x0",
+    "flags": "0x0",
+    "cw": "0x7f",
+    "returned": true,
+    "ext80": null,
+    "pending_f64": null
+   },
+   "native": {
+    "angles": [
+     "0x0",
+     "0x8000"
+    ],
+    "failure": 0,
+    "boundary": "0x0",
+    "flags": "0x20",
+    "cw": "0x7f",
+    "returned": true,
+    "ext80": null,
+    "pending_f64": null
+   }
+  },
+  {
+   "cw": "0x7f",
+   "case": 2,
+   "name": "axis/threshold",
+   "inputs": [
+    "0x0",
+    "0x3f800000",
+    "0x0",
+    "0x0",
+    "0x13579bdf",
+    "0xfdb97531",
+    "0x1",
+    "0x1"
+   ],
+   "fields": [
+    "flags"
+   ],
+   "original": {
+    "angles": [
+     "0x0",
+     "0xffffc000"
+    ],
+    "boundary": "0x0",
+    "flags": "0x0",
+    "cw": "0x7f",
+    "returned": true,
+    "ext80": null,
+    "pending_f64": null
+   },
+   "native": {
+    "angles": [
+     "0x0",
+     "0xffffc000"
+    ],
+    "failure": 0,
+    "boundary": "0x0",
+    "flags": "0x20",
+    "cw": "0x7f",
+    "returned": true,
+    "ext80": null,
+    "pending_f64": null
+   }
+  },
+  {
+   "cw": "0x7f",
+   "case": 4,
+   "name": "axis/threshold",
+   "inputs": [
+    "0x0",
+    "0x3f800000",
+    "0x3f800000",
+    "0x0",
+    "0x13579bdf",
+    "0xfdb97531",
+    "0x1",
+    "0x1"
+   ],
+   "fields": [
+    "flags"
+   ],
+   "original": {
+    "angles": [
+     "0x0",
+     "0xffffe000"
+    ],
+    "boundary": "0x0",
+    "flags": "0x0",
+    "cw": "0x7f",
+    "returned": true,
+    "ext80": null,
+    "pending_f64": null
+   },
+   "native": {
+    "angles": [
+     "0x0",
+     "0xffffe000"
+    ],
+    "failure": 0,
+    "boundary": "0x0",
+    "flags": "0x20",
+    "cw": "0x7f",
+    "returned": true,
+    "ext80": null,
+    "pending_f64": null
+   }
+  },
+  {
+   "cw": "0x7f",
+   "case": 5,
+   "name": "axis/threshold",
+   "inputs": [
+    "0x0",
+    "0xbf800000",
+    "0xbf800000",
+    "0x0",
+    "0x13579bdf",
+    "0xfdb97531",
+    "0x1",
+    "0x1"
+   ],
+   "fields": [
+    "flags"
+   ],
+   "original": {
+    "angles": [
+     "0x0",
+     "0x6000"
+    ],
+    "boundary": "0x0",
+    "flags": "0x0",
+    "cw": "0x7f",
+    "returned": true,
+    "ext80": null,
+    "pending_f64": null
+   },
+   "native": {
+    "angles": [
+     "0x0",
+     "0x6000"
+    ],
+    "failure": 0,
+    "boundary": "0x0",
+    "flags": "0x20",
+    "cw": "0x7f",
+    "returned": true,
+    "ext80": null,
+    "pending_f64": null
+   }
+  },
+  {
+   "cw": "0x7f",
+   "case": 7,
+   "name": "axis/threshold",
+   "inputs": [
+    "0x0",
+    "0x80000000",
+    "0x80000000",
+    "0x80000000",
+    "0x13579bdf",
+    "0xfdb97531",
+    "0x1",
+    "0x1"
+   ],
+   "fields": [
+    "flags"
+   ],
+   "original": {
+    "angles": [
+     "0x0",
+     "0x8000"
+    ],
+    "boundary": "0x0",
+    "flags": "0x0",
+    "cw": "0x7f",
+    "returned": true,
+    "ext80": null,
+    "pending_f64": null
+   },
+   "native": {
+    "angles": [
+     "0x0",
+     "0x8000"
+    ],
+    "failure": 0,
+    "boundary": "0x0",
+    "flags": "0x20",
+    "cw": "0x7f",
+    "returned": true,
+    "ext80": null,
+    "pending_f64": null
+   }
+  },
+  {
+   "cw": "0x7f",
+   "case": 8,
+   "name": "axis/threshold",
+   "inputs": [
+    "0x0",
+    "0x3f800000",
+    "0x0",
+    "0x80000000",
+    "0x13579bdf",
+    "0xfdb97531",
+    "0x1",
+    "0x1"
+   ],
+   "fields": [
+    "flags"
+   ],
+   "original": {
+    "angles": [
+     "0x0",
+     "0xffffc000"
+    ],
+    "boundary": "0x0",
+    "flags": "0x0",
+    "cw": "0x7f",
+    "returned": true,
+    "ext80": null,
+    "pending_f64": null
+   },
+   "native": {
+    "angles": [
+     "0x0",
+     "0xffffc000"
+    ],
+    "failure": 0,
+    "boundary": "0x0",
+    "flags": "0x20",
+    "cw": "0x7f",
+    "returned": true,
+    "ext80": null,
+    "pending_f64": null
+   }
+  },
+  {
+   "cw": "0x7f",
+   "case": 10,
+   "name": "axis/threshold",
+   "inputs": [
+    "0x0",
+    "0x3f800000",
+    "0x3f800000",
+    "0x80000000",
+    "0x13579bdf",
+    "0xfdb97531",
+    "0x1",
+    "0x1"
+   ],
+   "fields": [
+    "flags"
+   ],
+   "original": {
+    "angles": [
+     "0x0",
+     "0xffffe000"
+    ],
+    "boundary": "0x0",
+    "flags": "0x0",
+    "cw": "0x7f",
+    "returned": true,
+    "ext80": null,
+    "pending_f64": null
+   },
+   "native": {
+    "angles": [
+     "0x0",
+     "0xffffe000"
+    ],
+    "failure": 0,
+    "boundary": "0x0",
+    "flags": "0x20",
+    "cw": "0x7f",
+    "returned": true,
+    "ext80": null,
+    "pending_f64": null
+   }
+  },
+  {
+   "cw": "0x7f",
+   "case": 11,
+   "name": "axis/threshold",
+   "inputs": [
+    "0x0",
+    "0xbf800000",
+    "0xbf800000",
+    "0x80000000",
+    "0x13579bdf",
+    "0xfdb97531",
+    "0x1",
+    "0x1"
+   ],
+   "fields": [
+    "flags"
+   ],
+   "original": {
+    "angles": [
+     "0x0",
+     "0x6000"
+    ],
+    "boundary": "0x0",
+    "flags": "0x0",
+    "cw": "0x7f",
+    "returned": true,
+    "ext80": null,
+    "pending_f64": null
+   },
+   "native": {
+    "angles": [
+     "0x0",
+     "0x6000"
+    ],
+    "failure": 0,
+    "boundary": "0x0",
+    "flags": "0x20",
+    "cw": "0x7f",
+    "returned": true,
+    "ext80": null,
+    "pending_f64": null
+   }
+  },
+  {
+   "cw": "0x7f",
+   "case": 26,
+   "name": "axis/threshold",
+   "inputs": [
+    "0x0",
+    "0x3f800000",
+    "0x0",
+    "0x3f7ffd61",
+    "0x13579bdf",
+    "0xfdb97531",
+    "0x1",
+    "0x1"
+   ],
+   "fields": [
+    "flags"
+   ],
+   "original": {
+    "angles": [
+     "0x3fa2",
+     "0xffffc000"
+    ],
+    "boundary": "0x0",
+    "flags": "0x0",
+    "cw": "0x7f",
+    "returned": true,
+    "ext80": null,
+    "pending_f64": null
+   },
+   "native": {
+    "angles": [
+     "0x3fa2",
+     "0xffffc000"
+    ],
+    "failure": 0,
+    "boundary": "0x0",
+    "flags": "0x20",
+    "cw": "0x7f",
+    "returned": true,
+    "ext80": null,
+    "pending_f64": null
+   }
+  },
+  {
+   "cw": "0x7f",
+   "case": 27,
+   "name": "axis/threshold",
+   "inputs": [
+    "0x0",
+    "0x0",
+    "0x3f800000",
+    "0x3f7ffd61",
+    "0x13579bdf",
+    "0xfdb97531",
+    "0x1",
+    "0x1"
+   ],
+   "fields": [
+    "flags"
+   ],
+   "original": {
+    "angles": [
+     "0x3fa2",
+     "0x0"
+    ],
+    "boundary": "0x0",
+    "flags": "0x0",
+    "cw": "0x7f",
+    "returned": true,
+    "ext80": null,
+    "pending_f64": null
+   },
+   "native": {
+    "angles": [
+     "0x3fa2",
+     "0x0"
+    ],
+    "failure": 0,
+    "boundary": "0x0",
+    "flags": "0x20",
+    "cw": "0x7f",
+    "returned": true,
+    "ext80": null,
+    "pending_f64": null
+   }
+  }
+ ],
+ "native_unknown_policy": [
+  {
+   "cw": "0x7f",
+   "mode": 0,
+   "status": 0,
+   "output": [
+    324508639,
+    4256789809,
+    1,
+    6574182,
+    32,
+    127,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "cw": "0x7f",
+   "mode": 1,
+   "status": 0,
+   "output": [
+    324508639,
+    4256789809,
+    1,
+    6574182,
+    32,
+    127,
+    1,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "cw": "0x47f",
+   "mode": 0,
+   "status": 0,
+   "output": [
+    324508639,
+    4256789809,
+    1,
+    6574182,
+    32,
+    127,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "cw": "0x47f",
+   "mode": 1,
+   "status": 0,
+   "output": [
+    324508639,
+    4256789809,
+    1,
+    6574182,
+    32,
+    127,
+    1,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "cw": "0x87f",
+   "mode": 0,
+   "status": 0,
+   "output": [
+    324508639,
+    4256789809,
+    1,
+    6574182,
+    32,
+    127,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "cw": "0x87f",
+   "mode": 1,
+   "status": 0,
+   "output": [
+    324508639,
+    4256789809,
+    1,
+    6574182,
+    32,
+    127,
+    1,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "cw": "0xc7f",
+   "mode": 0,
+   "status": 0,
+   "output": [
+    324508639,
+    4256789809,
+    1,
+    6574182,
+    32,
+    127,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "cw": "0xc7f",
+   "mode": 1,
+   "status": 0,
+   "output": [
+    324508639,
+    4256789809,
+    1,
+    6574182,
+    32,
+    127,
+    1,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "cw": "0x27f",
+   "mode": 0,
+   "status": 0,
+   "output": [
+    324508639,
+    4256789809,
+    1,
+    6574182,
+    32,
+    639,
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  {
+   "cw": "0x27f",
+   "mode": 1,
+   "status": 0,
+   "output": [
+    324508639,
+    4256789809,
+    1,
+    6574182,
+    32,
+    639,
+    1,
+    0,
+    0,
+    0
+   ]
+  }
+ ],
+ "limits": [
+  "All GetNormalAngles/CRTasin/_ftol source instructions execute until return or explicit dispatcher boundary",
+  "Policy1 bypass and policy0 pre-dispatch stop are test seeds; actual initialized CRT word is unobserved",
+  "Original error callback is never replaced or executed; no callback result is invented",
+  "Unicorn FPATAN uses host-double arithmetic and x87 exception flags are incomplete",
+  "Native Bochs P5/P6 results must not be changed merely to match this weaker oracle",
+  "Original Intel Ultra results, startup state, gameplay/mod call inputs, FPS and hardware exception delivery remain unverified"
+ ],
+ "duration_seconds": 0.43578512500971556,
+ "floor_output_and_boundary_match": false,
+ "asin_extended_register_match": false,
+ "emulator_exception_flags_match": false,
+ "bypass_floor_output_control_and_boundary_match": true,
+ "bypass_asin_extended_register_match": false,
+ "tracked_summary": {
+  "full_sha256": "3b6f4f816cd43df608c505b78acd1fd9c1239ccb0d208c98ed4ac0f5fd2ab542",
+  "full_bytes": 15895783,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "mismatches": 18264,
+   "native_unknown_policy": 24,
+   "native_unknown_policy[0].output": 14,
+   "native_unknown_policy[1].output": 14,
+   "native_unknown_policy[2].output": 14,
+   "native_unknown_policy[3].output": 14,
+   "native_unknown_policy[4].output": 14,
+   "native_unknown_policy[5].output": 14,
+   "native_unknown_policy[6].output": 14,
+   "native_unknown_policy[7].output": 14,
+   "native_unknown_policy[8].output": 14,
+   "native_unknown_policy[9].output": 14
+  }
+ }
+}

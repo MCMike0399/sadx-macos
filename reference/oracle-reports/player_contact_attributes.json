@@ -1,0 +1,114 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "profile": "actual43cb90/native-arm64; source default/read/null-motion fixture boundaries",
+ "native_library_sha256": "f7c90f7cd468cd12ee9b61b3b86933d80928e414b68189775b9a42173a0cbced",
+ "function_sha256": "b9fdd2bd02a36a95a7ef761f1e323a664370580bb2af235f912fab34c9433f98",
+ "constants_sha256": "04a4468e8e720781a8855884a62f4a745c95af3c58b61a6dca28afd7be1b7561",
+ "native_sources": {
+  "src/player/player_contact_attributes.cpp": "03a7022aef4b70648fa2b60fbe8c318ca769c4620b3de0cdca754746d9d8b877",
+  "src/player/player_contact_attributes.hpp": "0d1028d1333a154a9dbc2b66f43a55f597278c3909bc3f3a134885a868368755",
+  "tests/probes/native_player_contact_attributes_probe.cpp": "2fddb2cd461bebd8e1759b474f06ba378f5eb3fe29be26d8f2901f924d4452d1",
+  "tools/oracles/verify_original_player_contact_attributes.py": "c6ad0a9874152f1b64ce9da375f5e2c7c974a23cd91813fdaf6f443eedb6f0a0"
+ },
+ "case_sha256": "73e25a859661e15cbbd7819824e00200fcdc0dce37ff86f3cdd7115613ccd9f9",
+ "profiles": [
+  {
+   "cw": "0x7f",
+   "cases": 8821,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 6506
+  },
+  {
+   "cw": "0x47f",
+   "cases": 8821,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 6506
+  },
+  {
+   "cw": "0x87f",
+   "cases": 8821,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 6506
+  },
+  {
+   "cw": "0xc7f",
+   "cases": 8821,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 6506
+  },
+  {
+   "cw": "0x27f",
+   "cases": 8821,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 6506
+  },
+  {
+   "cw": "0x67f",
+   "cases": 8821,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 6506
+  },
+  {
+   "cw": "0xa7f",
+   "cases": 8821,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 6506
+  },
+  {
+   "cw": "0xe7f",
+   "cases": 8821,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 6506
+  },
+  {
+   "cw": "0x37f",
+   "cases": 8821,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 6506
+  },
+  {
+   "cw": "0x77f",
+   "cases": 8821,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 6506
+  }
+ ],
+ "mismatches": [],
+ "limits": [
+  "No original instructions or math calls overlaid",
+  "Default table fields are explicit selected fixture values; actual initialized modded runtime is not observed",
+  "Missing default facts and null motion stop at original source instruction before the read/store",
+  "All byte0..255 friction priorities and nonfinites are included; Unicorn flags remain a weaker oracle",
+  "Full scene contact, hardware input and speedrun timing are not exercised"
+ ],
+ "state_boundaries_control_match": true,
+ "full_emulator_match": false,
+ "tracked_summary": {
+  "full_sha256": "4b5bdc8e37ce1d01acc535db3fccf4e39bd437bc0059c30e123410043df8a27d",
+  "full_bytes": 3783,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "profiles": 12
+  }
+ }
+}

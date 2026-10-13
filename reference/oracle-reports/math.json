@@ -1,0 +1,167 @@
+{
+ "profile": "original-i386-instructions/unicorn-2.1.4/native-arm64-binary32-store",
+ "source_path": "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "c0357c526246b7bb3e0d6b9de6d84212ae1d76c90b7ed1b8d2228da92d4aed8f",
+ "table_sha256": "3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed",
+ "control_words": [
+  {
+   "control_word": "0x7f",
+   "trig_cases": 131072,
+   "trig_mismatches": 0,
+   "dot_cases": 1009,
+   "dot_mismatches": 0,
+   "squared_cases": 1009,
+   "squared_mismatches": 0,
+   "sqrt_cases": 12,
+   "sqrt_mismatches": 0,
+   "examples": []
+  },
+  {
+   "control_word": "0x47f",
+   "trig_cases": 131072,
+   "trig_mismatches": 0,
+   "dot_cases": 1009,
+   "dot_mismatches": 0,
+   "squared_cases": 1009,
+   "squared_mismatches": 0,
+   "sqrt_cases": 12,
+   "sqrt_mismatches": 0,
+   "examples": []
+  },
+  {
+   "control_word": "0x87f",
+   "trig_cases": 131072,
+   "trig_mismatches": 0,
+   "dot_cases": 1009,
+   "dot_mismatches": 0,
+   "squared_cases": 1009,
+   "squared_mismatches": 0,
+   "sqrt_cases": 12,
+   "sqrt_mismatches": 0,
+   "examples": []
+  },
+  {
+   "control_word": "0xc7f",
+   "trig_cases": 131072,
+   "trig_mismatches": 0,
+   "dot_cases": 1009,
+   "dot_mismatches": 0,
+   "squared_cases": 1009,
+   "squared_mismatches": 0,
+   "sqrt_cases": 12,
+   "sqrt_mismatches": 0,
+   "examples": []
+  },
+  {
+   "control_word": "0x27f",
+   "trig_cases": 131072,
+   "trig_mismatches": 0,
+   "dot_cases": 1009,
+   "dot_mismatches": 0,
+   "squared_cases": 1009,
+   "squared_mismatches": 0,
+   "sqrt_cases": 12,
+   "sqrt_mismatches": 0,
+   "examples": []
+  },
+  {
+   "control_word": "0x67f",
+   "trig_cases": 131072,
+   "trig_mismatches": 0,
+   "dot_cases": 1009,
+   "dot_mismatches": 0,
+   "squared_cases": 1009,
+   "squared_mismatches": 0,
+   "sqrt_cases": 12,
+   "sqrt_mismatches": 0,
+   "examples": []
+  },
+  {
+   "control_word": "0xa7f",
+   "trig_cases": 131072,
+   "trig_mismatches": 0,
+   "dot_cases": 1009,
+   "dot_mismatches": 0,
+   "squared_cases": 1009,
+   "squared_mismatches": 0,
+   "sqrt_cases": 12,
+   "sqrt_mismatches": 0,
+   "examples": []
+  },
+  {
+   "control_word": "0xe7f",
+   "trig_cases": 131072,
+   "trig_mismatches": 0,
+   "dot_cases": 1009,
+   "dot_mismatches": 0,
+   "squared_cases": 1009,
+   "squared_mismatches": 0,
+   "sqrt_cases": 12,
+   "sqrt_mismatches": 0,
+   "examples": []
+  },
+  {
+   "control_word": "0x37f",
+   "trig_cases": 131072,
+   "trig_mismatches": 0,
+   "dot_cases": 1009,
+   "dot_mismatches": 0,
+   "squared_cases": 1009,
+   "squared_mismatches": 0,
+   "sqrt_cases": 12,
+   "sqrt_mismatches": 0,
+   "examples": []
+  },
+  {
+   "control_word": "0x77f",
+   "trig_cases": 131072,
+   "trig_mismatches": 0,
+   "dot_cases": 1009,
+   "dot_mismatches": 0,
+   "squared_cases": 1009,
+   "squared_mismatches": 0,
+   "sqrt_cases": 12,
+   "sqrt_mismatches": 0,
+   "examples": []
+  },
+  {
+   "control_word": "0xb7f",
+   "trig_cases": 131072,
+   "trig_mismatches": 0,
+   "dot_cases": 1009,
+   "dot_mismatches": 0,
+   "squared_cases": 1009,
+   "squared_mismatches": 0,
+   "sqrt_cases": 12,
+   "sqrt_mismatches": 0,
+   "examples": []
+  },
+  {
+   "control_word": "0xf7f",
+   "trig_cases": 131072,
+   "trig_mismatches": 0,
+   "dot_cases": 1009,
+   "dot_mismatches": 0,
+   "squared_cases": 1009,
+   "squared_mismatches": 0,
+   "sqrt_cases": 12,
+   "sqrt_mismatches": 0,
+   "examples": []
+  }
+ ],
+ "limits": [
+  "Full Windows game startup and runtime are not executed",
+  "Experimentally selected FPU control words; actual game control state remains unverified",
+  "Only selected pure functions and their binary32 stored results are compared",
+  "An emulator is the instruction oracle; original x86 hardware equivalence is unverified"
+ ],
+ "duration_seconds": 12.04768908402184,
+ "tested_profile_matches": true,
+ "tracked_summary": {
+  "full_sha256": "6e02702935f40cead0e56228a1b53cdac4e5f11b2cf1d4549ca82a1c5c669c7c",
+  "full_bytes": 4319,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

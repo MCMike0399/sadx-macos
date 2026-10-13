@@ -9,7 +9,7 @@ from unicorn import UC_HOOK_CODE
 from unicorn.x86_const import UC_X86_REG_ESP,UC_X86_REG_FPCW,UC_X86_REG_FPSW,UC_X86_REG_FPTAG,UC_X86_REG_EAX,UC_X86_REG_ECX,UC_X86_REG_EDX
 from pe_image import PEImage
 from extract import SOURCE_SHA256,TABLE_ADDRESS
-from verify_original_math import Original,DATA,STACK,STOP
+from verify_original_math import native_source,Original,DATA,STACK,STOP
 from verify_original_ground_acceleration import cases,CONSTANTS
 
 TASK=DATA+0x100;PLAYER=DATA+0x300;MOTION=DATA+0x700;EVENT=DATA+0xc00;MATRIX=DATA+0x4000;UNIT=0x389d650
@@ -111,11 +111,11 @@ def main():
     tb=(ctypes.c_uint8*4100).from_buffer_copy(table);ub=(ctypes.c_uint8*64).from_buffer_copy(unit);cb=(ctypes.c_uint32*24)(*[image.unpack('<I',a)[0] for a in CONSTANTS]);rb=(ctypes.c_uint8*88).from_buffer_copy(rotation);eb=(ctypes.c_uint8*20).from_buffer_copy(event);pb=(ctypes.c_uint8*28).from_buffer_copy(projection)
     blob=b''.join(struct.pack('<80I',*w) for w in fixtures);args.output.parent.mkdir(parents=True,exist_ok=True);args.output.with_suffix('.cases.bin').write_bytes(blob)
     address,end=((0x447010,0x44750c),(0x447510,0x447b7e),(0x447b90,0x447e54),(0x44b0e0,0x44b9b2))[variant]
-    root=pathlib.Path(__file__).resolve().parent.parent
+    root=pathlib.Path(__file__).resolve().parents[2]
     names=('player_acceleration_alternate','player_acceleration_alternate_math','player_acceleration_friction','player_acceleration_ground','player_rotation','player_projection','player_coordinates','player_heading','player_input','player_state','crt_acos','crt_asin','crt_integer','x87_math','x87_transcendental','ninja_math')
     report=dict(profile=f'actual {args.variant}/actual-yaw-matrix-callees/no-overlays',source_sha256=image.sha256,source_function=dict(address=hex(address),end_exclusive=hex(end),sha256=sha(image.read(address,end-address))),native_library_sha256=sha(args.library.read_bytes()),fixture_sha256=sha(blob),fixture_record='80 little-endian uint32 words',fixture_count=len(fixtures),
-        native_sources={f'src/{name}.{ext}':sha((root/f'src/{name}.{ext}').read_bytes()) for name in names for ext in ('cpp','hpp')},
-        native_contracts={f'src/{name}.hpp':sha((root/f'src/{name}.hpp').read_bytes()) for name in ('player_acceleration','player_physics','player_task','player_rotation_result')},
+        native_sources={f'src/{name}.{ext}':sha((native_source(root,f'src/{name}.{ext}')).read_bytes()) for name in names for ext in ('cpp','hpp')},
+        native_contracts={f'src/{name}.hpp':sha((native_source(root,f'src/{name}.hpp')).read_bytes()) for name in ('player_acceleration','player_physics','player_task','player_rotation_result')},
         native_compiler=lib.sadx_native_alternate_acceleration_compiler().decode(),declared_build_profile='arm64 C++17 O2 ffp-contract=off fno-fast-math native integer SoftFloat/Bochs',
         native_probe_sha256=sha((root/'tests/probes/native_alternate_acceleration_probe.cpp').read_bytes()),verifier_sha256=sha(pathlib.Path(__file__).read_bytes()),
         source_artifacts=dict(quarter_table_sha256=sha(table),unit_matrix_sha256=sha(unit),parameter_row_sha256=sha(image.read(0x9154e8,132)),rotation_constants_sha256=sha(rotation),event_constants_sha256=sha(event),projection_constants_sha256=sha(projection)),

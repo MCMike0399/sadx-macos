@@ -1,6 +1,6 @@
 #include "player/player_input_producer.hpp"
 #include "cpu/crt_integer.hpp"
-#include "ninja/ninja_math.hpp"
+#include "math/ninja_math.hpp"
 #include "cpu/x87_transcendental.hpp"
 
 #include <cstring>

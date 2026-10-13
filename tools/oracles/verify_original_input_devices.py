@@ -34,7 +34,7 @@ def main():
         if not st['body'] and m.reg_read(UC_X86_REG_EIP)!=STOP:raise RuntimeError('Source return ABI')
         e=[int(st['body']==0),st['body']];cases+=1;key=f"{['792100','791df0'][which]}:body{int(bool(st['body']))}";outcomes[key]=outcomes.get(key,0)+1
         if list(out)!=e:bad.append(dict(case=n,which=which,gate=gate,source=e,native=list(out)))
-    names=['src/ninja/ninja_input_devices.hpp','src/ninja/ninja_input_devices.cpp','tests/probes/native_input_devices_probe.cpp','tools/oracles/verify_original_input_devices.py']
+    names=['src/engine/ninja_input_devices.hpp','src/engine/ninja_input_devices.cpp','tests/probes/native_input_devices_probe.cpp','tools/oracles/verify_original_input_devices.py']
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={x:sha((pathlib.Path(__file__).resolve().parents[2]/x).read_bytes()) for x in names},
         original_ranges_sha256={'0x792100-0x792122':sha(image.read(0x792100,0x22)),'0x791df0-0x791e0b':sha(image.read(0x791df0,0x1b))},cases=cases,source_outcomes=outcomes,mismatch_count=len(bad),mismatches=bad[:20],state_traces_match=not bad,limits=__doc__)
     a.output.write_text(json.dumps(report,indent=1)+'\n');print(json.dumps(dict(cases=cases,mismatches=len(bad))))

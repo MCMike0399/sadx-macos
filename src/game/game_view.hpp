@@ -1,6 +1,6 @@
 #pragma once
-#include "game/game_logic.hpp"
-#include "ninja/ninja_queue_lifecycle.hpp"
+#include "engine/game_logic.hpp"
+#include "engine/ninja_queue_lifecycle.hpp"
 #include <array>
 #include <cstdint>
 #include <functional>

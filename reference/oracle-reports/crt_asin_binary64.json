@@ -1,0 +1,432 @@
+{
+ "profile": "actual645034/classifier/body/return-or-real-matherr-boundary/no-overlays",
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "37d2df82285a7c5984b288be627bf1b9b7ca1c9dd1625f0dfb7169aa5f7da4b2",
+ "source_functions": {
+  "0x645034": {
+   "size": 183,
+   "sha256": "1a83a14711cc3a41b998fc7b43437ecb4db5efc91339450449828b23708bff8a"
+  },
+  "0x648b47": {
+   "size": 286,
+   "sha256": "c8f18de8032429373ccc4672468bef58d46cfcc676783415d31caca980c2746a"
+  }
+ },
+ "native_sources": {
+  "src/cpu/crt_asin.cpp": "ef3960069a7d20264f9997fb0ea40b6def9424bcbaf73fe221a84ab257bedbd5",
+  "src/cpu/crt_asin.hpp": "632dc9cacad59e2d411d46f1019278beb4e65044f3f381d2ab57c31aa729c531",
+  "src/cpu/crt_argument.cpp": "95ef63e5063580ddb3071f4549259d09a985acef5d80c26e3bfeba52eba1e4da",
+  "src/cpu/crt_argument.hpp": "dad8ca261ac36d58837f104b768426ecdaa83b7d4cf832d7d410e9a21e9a25be",
+  "src/cpu/crt_inverse_internal.hpp": "04d985492c3e69710b99c96406d089e53f25b9eba86862de78f20542bef20186",
+  "tests/probes/native_crt_asin_binary64_probe.cpp": "b374d1969e1fb9cb6dfbe1d8c2070c452385af993b51d1872578b06a0bf127b8",
+  "tools/oracles/verify_original_crt_asin_binary64.py": "0ebafef83c1343eb09244373a2005b7566e674780458ccf37782eea6eddf23fe"
+ },
+ "cases": 692,
+ "case_sha256": "c8764d225c3ec0a6beea75d2909c5bb489e16ed74968341f33ff07c374c74327",
+ "profiles": [
+  {
+   "cw": "0x7f",
+   "cases": 692,
+   "value_mismatches": 369,
+   "boundary_mismatches": 26,
+   "control_mismatches": 0,
+   "pending_mismatches": 26,
+   "flag_mismatches": 471
+  },
+  {
+   "cw": "0x47f",
+   "cases": 692,
+   "value_mismatches": 369,
+   "boundary_mismatches": 26,
+   "control_mismatches": 26,
+   "pending_mismatches": 26,
+   "flag_mismatches": 471
+  },
+  {
+   "cw": "0x87f",
+   "cases": 692,
+   "value_mismatches": 369,
+   "boundary_mismatches": 26,
+   "control_mismatches": 26,
+   "pending_mismatches": 26,
+   "flag_mismatches": 471
+  },
+  {
+   "cw": "0xc7f",
+   "cases": 692,
+   "value_mismatches": 369,
+   "boundary_mismatches": 26,
+   "control_mismatches": 26,
+   "pending_mismatches": 26,
+   "flag_mismatches": 471
+  },
+  {
+   "cw": "0x27f",
+   "cases": 692,
+   "value_mismatches": 365,
+   "boundary_mismatches": 0,
+   "control_mismatches": 0,
+   "pending_mismatches": 0,
+   "flag_mismatches": 471
+  },
+  {
+   "cw": "0x67f",
+   "cases": 692,
+   "value_mismatches": 369,
+   "boundary_mismatches": 26,
+   "control_mismatches": 26,
+   "pending_mismatches": 26,
+   "flag_mismatches": 471
+  },
+  {
+   "cw": "0xa7f",
+   "cases": 692,
+   "value_mismatches": 369,
+   "boundary_mismatches": 26,
+   "control_mismatches": 26,
+   "pending_mismatches": 26,
+   "flag_mismatches": 471
+  },
+  {
+   "cw": "0xe7f",
+   "cases": 692,
+   "value_mismatches": 369,
+   "boundary_mismatches": 26,
+   "control_mismatches": 26,
+   "pending_mismatches": 26,
+   "flag_mismatches": 471
+  },
+  {
+   "cw": "0x37f",
+   "cases": 692,
+   "value_mismatches": 368,
+   "boundary_mismatches": 26,
+   "control_mismatches": 0,
+   "pending_mismatches": 26,
+   "flag_mismatches": 471
+  },
+  {
+   "cw": "0x77f",
+   "cases": 692,
+   "value_mismatches": 368,
+   "boundary_mismatches": 26,
+   "control_mismatches": 26,
+   "pending_mismatches": 26,
+   "flag_mismatches": 471
+  }
+ ],
+ "mismatches": [
+  {
+   "case": 2,
+   "input": "0x3fe0000000000000",
+   "policy": 1,
+   "cw": "0x7f",
+   "fields": [
+    "value",
+    "flags"
+   ],
+   "source": {
+    "boundary": 0,
+    "cw": 127,
+    "flags": 0,
+    "value": [
+     "0x860a91e2cccde000",
+     "0x3ffe"
+    ],
+    "pending": null
+   },
+   "native": {
+    "boundary": 0,
+    "cw": 127,
+    "flags": 32,
+    "value": [
+     "0x860a91e2cccddd7c",
+     "0x3ffe"
+    ],
+    "pending": null
+   }
+  },
+  {
+   "case": 3,
+   "input": "0xbfe0000000000000",
+   "policy": 1,
+   "cw": "0x7f",
+   "fields": [
+    "value",
+    "flags"
+   ],
+   "source": {
+    "boundary": 0,
+    "cw": 127,
+    "flags": 0,
+    "value": [
+     "0x860a91e2cccde000",
+     "0xbffe"
+    ],
+    "pending": null
+   },
+   "native": {
+    "boundary": 0,
+    "cw": 127,
+    "flags": 32,
+    "value": [
+     "0x860a91e2cccddd7c",
+     "0xbffe"
+    ],
+    "pending": null
+   }
+  },
+  {
+   "case": 10,
+   "input": "0x1",
+   "policy": 1,
+   "cw": "0x7f",
+   "fields": [
+    "flags"
+   ],
+   "source": {
+    "boundary": 0,
+    "cw": 127,
+    "flags": 0,
+    "value": [
+     "0x8000000000000000",
+     "0x3bcd"
+    ],
+    "pending": null
+   },
+   "native": {
+    "boundary": 0,
+    "cw": 127,
+    "flags": 34,
+    "value": [
+     "0x8000000000000000",
+     "0x3bcd"
+    ],
+    "pending": null
+   }
+  },
+  {
+   "case": 11,
+   "input": "0x8000000000000001",
+   "policy": 1,
+   "cw": "0x7f",
+   "fields": [
+    "flags"
+   ],
+   "source": {
+    "boundary": 0,
+    "cw": 127,
+    "flags": 0,
+    "value": [
+     "0x8000000000000000",
+     "0xbbcd"
+    ],
+    "pending": null
+   },
+   "native": {
+    "boundary": 0,
+    "cw": 127,
+    "flags": 34,
+    "value": [
+     "0x8000000000000000",
+     "0xbbcd"
+    ],
+    "pending": null
+   }
+  },
+  {
+   "case": 12,
+   "input": "0xfffffffffffff",
+   "policy": 1,
+   "cw": "0x7f",
+   "fields": [
+    "flags"
+   ],
+   "source": {
+    "boundary": 0,
+    "cw": 127,
+    "flags": 0,
+    "value": [
+     "0xfffffffffffff000",
+     "0x3c00"
+    ],
+    "pending": null
+   },
+   "native": {
+    "boundary": 0,
+    "cw": 127,
+    "flags": 34,
+    "value": [
+     "0xfffffffffffff000",
+     "0x3c00"
+    ],
+    "pending": null
+   }
+  },
+  {
+   "case": 13,
+   "input": "0x800fffffffffffff",
+   "policy": 1,
+   "cw": "0x7f",
+   "fields": [
+    "flags"
+   ],
+   "source": {
+    "boundary": 0,
+    "cw": 127,
+    "flags": 0,
+    "value": [
+     "0xfffffffffffff000",
+     "0xbc00"
+    ],
+    "pending": null
+   },
+   "native": {
+    "boundary": 0,
+    "cw": 127,
+    "flags": 34,
+    "value": [
+     "0xfffffffffffff000",
+     "0xbc00"
+    ],
+    "pending": null
+   }
+  },
+  {
+   "case": 16,
+   "input": "0x7ff0000000000123",
+   "policy": 1,
+   "cw": "0x7f",
+   "fields": [
+    "flags"
+   ],
+   "source": {
+    "boundary": 0,
+    "cw": 127,
+    "flags": 0,
+    "value": [
+     "0xc000000000091800",
+     "0x7fff"
+    ],
+    "pending": null
+   },
+   "native": {
+    "boundary": 0,
+    "cw": 127,
+    "flags": 1,
+    "value": [
+     "0xc000000000091800",
+     "0x7fff"
+    ],
+    "pending": null
+   }
+  },
+  {
+   "case": 17,
+   "input": "0xfff0000000000123",
+   "policy": 1,
+   "cw": "0x7f",
+   "fields": [
+    "flags"
+   ],
+   "source": {
+    "boundary": 0,
+    "cw": 127,
+    "flags": 0,
+    "value": [
+     "0xc000000000091800",
+     "0xffff"
+    ],
+    "pending": null
+   },
+   "native": {
+    "boundary": 0,
+    "cw": 127,
+    "flags": 1,
+    "value": [
+     "0xc000000000091800",
+     "0xffff"
+    ],
+    "pending": null
+   }
+  },
+  {
+   "case": 18,
+   "input": "0x3feffffffffffffd",
+   "policy": 1,
+   "cw": "0x7f",
+   "fields": [
+    "value",
+    "flags"
+   ],
+   "source": {
+    "boundary": 0,
+    "cw": 127,
+    "flags": 0,
+    "value": [
+     "0xc90fda6ab4730000",
+     "0x3fff"
+    ],
+    "pending": null
+   },
+   "native": {
+    "boundary": 0,
+    "cw": 127,
+    "flags": 32,
+    "value": [
+     "0xc90fda6ab4730235",
+     "0x3fff"
+    ],
+    "pending": null
+   }
+  },
+  {
+   "case": 19,
+   "input": "0x3feffffffffffffe",
+   "policy": 1,
+   "cw": "0x7f",
+   "fields": [
+    "value",
+    "flags"
+   ],
+   "source": {
+    "boundary": 0,
+    "cw": 127,
+    "flags": 0,
+    "value": [
+     "0xc90fda74e02c0000",
+     "0x3fff"
+    ],
+    "pending": null
+   },
+   "native": {
+    "boundary": 0,
+    "cw": 127,
+    "flags": 32,
+    "value": [
+     "0xc90fda74e02c0235",
+     "0x3fff"
+    ],
+    "pending": null
+   }
+  }
+ ],
+ "limits": [
+  "Explicit policy1 bypass and policy0 boundary profiles do not establish initialized CRT state",
+  "No original handler is executed or replaced; original instructions execute until return or dispatcher",
+  "Native FPATAN uses Bochs P5/P6; Unicorn uses host-double math with incomplete flags",
+  "Intel Ultra results and full-game geometry/mod/controller behavior remain unverified"
+ ],
+ "returned_values_and_boundaries_match": false,
+ "full_emulator_match": false,
+ "seconds": 0.10901195905171335,
+ "tracked_summary": {
+  "full_sha256": "bc83011fb81860e5153a6217e03417ffad533ec1e651c035bffc109b4bd87eba",
+  "full_bytes": 3140178,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "profiles": 12,
+   "mismatches": 5652
+  }
+ }
+}

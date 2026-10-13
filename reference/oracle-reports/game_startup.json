@@ -1,0 +1,39 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "075b09b838afc679c88d843deb084ff2a64cf90462f5a692fd2fc940c927296d",
+ "source_files": {
+  "src/game/game_startup.hpp": "9125c2a677e8482b6929f42207cb6b436e43f49435c86a50bf12c851f5e0b596",
+  "src/game/game_startup.cpp": "3a25f2145d4e27678270606c6c04ad35bf59f6c436bd784026c8c66699b9d159",
+  "src/engine/game_controller.cpp": "10f4738004f84f40be471c48c217676793e22f48346e2f7b19d4cf49723cf294",
+  "tests/probes/native_game_startup_probe.cpp": "55d5ba631ba75a95baf1407e62005044c9e186dee907cc90ca439facfa6fc0ad",
+  "tools/oracles/verify_original_game_startup.py": "d3277d2375f9c4a77480aec43685c034b594e83654ef52f89deb2662f43e8bcd"
+ },
+ "original_ranges_sha256": {
+  "40c030": "78cf59a4451a945112a27b5e6d65b73988087bb2a47aedbbc4b1f766ae85a7b1",
+  "40f350": "3c45b4e8e65a39e089be9ffabfa04c7e65be9a5d968246d6d151c6bd2c94cc60",
+  "424c20": "25d1e4dd1e50a34064650dd0d691e7d68644916eb7566b911f1592b2be9785ed",
+  "40a8a0": "f10094fdc104d244b4840723301eca6d53f719ef1a2374f59c4a35260baad6f7",
+  "789930": "91e99af6b73cedd6efa208ffc06c5fb7f9662dd4bce6ef0ce29831a19e94b3b9",
+  "420810": "1b16b12c7c2b3ee00f21ede5f4b8046c49cbbcf81f3b933130b5eb6a35f14e2c"
+ },
+ "cases": 400,
+ "source_outcomes": {
+  "failure3:owners3": 10,
+  "failure0:owners6": 342,
+  "failure3:owners2": 13,
+  "failure3:owners5": 10,
+  "failure3:owners1": 11,
+  "failure3:owners6": 8,
+  "failure3:owners4": 6
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "pages_order_boundaries_match": true,
+ "limits": "InitGameLoop 40c030 against original instructions, over six randomized source pages.\n\nReal source code runs for 40c030, 420810, 40f350, 424c20 (local part), 40f3a0,\n40a8a0 and 781000->789930. Fixtures: 408630 (queue arena alloc/reset), 411e30,\n410510 (audio init), 40bf40 (state reset), 4253c0->40d0d0 (audio objects) and the\n78c5a0 RET, recorded as owner calls; one call can fail. Pages 3abd000, 3b0e000,\n3b29000, 900000, 903000 and 3d08000 are compared byte for byte, so source writes\noutside the native model also count as mismatches. Vanilla InitControllers only;\nthe Input mod's 40f451 hook is covered by input_mod_init_raw_controllers tests.\n",
+ "tracked_summary": {
+  "full_sha256": "8843612ed524c2e1456190351782d3f775ee622abda9f82b6281e040b802d47a",
+  "full_bytes": 2227,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

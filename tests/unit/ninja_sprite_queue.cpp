@@ -1,4 +1,4 @@
-#include "ninja/ninja_sprite_queue.hpp"
+#include "engine/ninja_sprite_queue.hpp"
 #include <cstring>
 #include <fstream>
 #include <iostream>

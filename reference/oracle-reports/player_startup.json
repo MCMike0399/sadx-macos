@@ -1,0 +1,440 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "aad44e884ed7230d085ec2df04925950cfe9f5061bf4f58d24874969b94824db",
+ "parameter_table_sha256": "3f69076118fcc6a77c55e600eb337944eb6562e5b0979104b58058ad64ba5107",
+ "case_blob": {
+  "path": "build/oracles/player_startup.cases.bin",
+  "sha256": "7eb3128a4cc3e14b1f29944121e2de4e7972b25625a5a187b9fc46b1c0236bf4",
+  "cases": 167,
+  "record": "33 LE uint32words +512 exact event bytes"
+ },
+ "source_functions": {
+  "0x442750": {
+   "size": 579,
+   "sha256": "a9c53c641adbc9d6b69c2de78e7f6eb3997921272c45e081b6876acabd2ff1a5"
+  },
+  "0x40b2d0": {
+   "size": 51,
+   "sha256": "d87aa301bca015d0fdf205e25f770e9bf6113cb9e66f6cd4430cfc5549b3d153"
+  },
+  "0x417e80": {
+   "size": 32,
+   "sha256": "26fabc5d2513033969f64f29086c4de90fdebae7ae14f4724e4f6b82003887fd"
+  },
+  "0x412d20": {
+   "size": 16,
+   "sha256": "6b3c7179e7842abb6ebfa000bd0c1bdec0188eb2e10759d0fc58b77fe0bf8fc0"
+  }
+ },
+ "native_sources": {
+  "src/player/player_startup.cpp": "2d6aacc547a36312b9969b7d44bde0f632fe3c5620eff43283c1a9c3e2294e96",
+  "src/player/player_startup.hpp": "caf9869ca53aa415652f368ed0228b7d712be8ead731fa467a51adfd2e7c3c32",
+  "src/player/player_state.cpp": "50c12dc9f34152a746062a3933611965cc02bb6487bf063d0b42e47611ee205c",
+  "src/engine/task.cpp": "3bdec3d5cfb4af75195959d434a5555dececf055280259044def70e29033d9a8",
+  "src/engine/task_work.cpp": "b044c4dfb8c85b054216443b35d4e5a42481cf55277e8c9386c4564b4c7797d7",
+  "tests/probes/native_player_startup_probe.cpp": "3f19fe2625681280cd69a28a9c91cf1fccd4a33c23894adc34f65f87a8db9261",
+  "tools/oracles/verify_original_player_startup.py": "0caccdb26a4fcce6c8198affe393887b0e593ece76dbaeaea80815c1363340bc"
+ },
+ "profiles": [
+  {
+   "cw": "0x7f",
+   "cases": 167,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "resource_mismatches": 0,
+   "control_mismatches": 0,
+   "producer_fact_mismatches": 0,
+   "flag_mismatches": 77,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 9,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 10,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 11,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 12,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 13,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "cw": "0x47f",
+   "cases": 167,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "resource_mismatches": 0,
+   "control_mismatches": 0,
+   "producer_fact_mismatches": 0,
+   "flag_mismatches": 77,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 9,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 10,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 11,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 12,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 13,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "cw": "0x87f",
+   "cases": 167,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "resource_mismatches": 0,
+   "control_mismatches": 0,
+   "producer_fact_mismatches": 0,
+   "flag_mismatches": 77,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 9,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 10,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 11,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 12,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 13,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "cw": "0xc7f",
+   "cases": 167,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "resource_mismatches": 0,
+   "control_mismatches": 0,
+   "producer_fact_mismatches": 0,
+   "flag_mismatches": 77,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 9,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 10,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 11,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 12,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 13,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "cw": "0x27f",
+   "cases": 167,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "resource_mismatches": 0,
+   "control_mismatches": 0,
+   "producer_fact_mismatches": 0,
+   "flag_mismatches": 77,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 9,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 10,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 11,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 12,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 13,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "cw": "0x67f",
+   "cases": 167,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "resource_mismatches": 0,
+   "control_mismatches": 0,
+   "producer_fact_mismatches": 0,
+   "flag_mismatches": 77,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 9,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 10,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 11,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 12,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 13,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "cw": "0xa7f",
+   "cases": 167,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "resource_mismatches": 0,
+   "control_mismatches": 0,
+   "producer_fact_mismatches": 0,
+   "flag_mismatches": 77,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 9,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 10,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 11,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 12,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 13,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "cw": "0xe7f",
+   "cases": 167,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "resource_mismatches": 0,
+   "control_mismatches": 0,
+   "producer_fact_mismatches": 0,
+   "flag_mismatches": 77,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 9,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 10,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 11,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 12,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 13,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "cw": "0x37f",
+   "cases": 167,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "resource_mismatches": 0,
+   "control_mismatches": 0,
+   "producer_fact_mismatches": 0,
+   "flag_mismatches": 77,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 9,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 10,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 11,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 12,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 13,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "cw": "0x77f",
+   "cases": 167,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "resource_mismatches": 0,
+   "control_mismatches": 0,
+   "producer_fact_mismatches": 0,
+   "flag_mismatches": 77,
+   "examples": [],
+   "flag_examples": [
+    {
+     "case": 9,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 10,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 11,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 12,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 13,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  }
+ ],
+ "mismatches": [],
+ "limits": [
+  "Actual source prefix only: stop before44297b because native4a2b60 owner remains missing; no original return or running game claim",
+  "Heap/task-pool initialization is an explicit fixture after unlifted CRT/Win32 acquisition",
+  "No source task/work/object/event callees are replaced",
+  "Canonical probe snapshot reads authoritative typed task/player/motion views; allocated bytes are initialization provenance",
+  "Caller-selected parameter/save/FP/resource fixtures, not actual initialized mods or hardware captures",
+  "Source crash/corrupt-registration/unknown-owner cases stop before the unsafe instruction and retain native partial failures"
+ ],
+ "prefix_state_resources_boundaries_control_match": true,
+ "original_return_observed": false,
+ "full_emulator_match": false,
+ "tracked_summary": {
+  "full_sha256": "07b539d531cdb4304c5734c84f607d683da69e2de306207cb7340206d3d7cef9",
+  "full_bytes": 12058,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "profiles": 12
+  }
+ }
+}

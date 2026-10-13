@@ -1,6 +1,6 @@
 // Native half of the original-instruction comparison. This library is a test
 // artifact; neither Unicorn nor x86 execution is part of the game's runtime.
-#include "ninja/ninja_math.hpp"
+#include "math/ninja_math.hpp"
 #include <cstddef>
 #include <cstdint>
 #include <cstring>

@@ -84,7 +84,7 @@ def main():
     library=ctypes.CDLL(str(a.library.resolve()));probe=library.sadx_native_contact_attributes
     probe.argtypes=[ctypes.POINTER(ctypes.c_uint8),ctypes.POINTER(ctypes.c_uint32),ctypes.c_uint16,ctypes.POINTER(ctypes.c_uint32)];probe.restype=ctypes.c_int
     cases=fixtures(image);blob=b''.join(struct.pack('<13I',*w) for w in cases);a.output.parent.mkdir(parents=True,exist_ok=True);a.output.with_suffix('.cases.bin').write_bytes(blob)
-    root=pathlib.Path(__file__).resolve().parent.parent
+    root=pathlib.Path(__file__).resolve().parents[2]
     report=dict(source_sha256=image.sha256,profile='actual43cb90/native-arm64; source default/read/null-motion fixture boundaries',
         native_library_sha256=sha(a.library.read_bytes()),function_sha256=sha(image.read(0x43cb90,0x14f)),constants_sha256=sha(data),
         native_sources={name:sha((root/name).read_bytes()) for name in ('src/player/player_contact_attributes.cpp','src/player/player_contact_attributes.hpp','tests/probes/native_player_contact_attributes_probe.cpp','tools/oracles/verify_original_player_contact_attributes.py')},

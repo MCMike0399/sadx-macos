@@ -1,5 +1,5 @@
 #include "platform/mac/metal_sprite.hpp"
-#include "ninja/ninja_queue_consumer.hpp"
+#include "engine/ninja_queue_consumer.hpp"
 #import <Foundation/Foundation.h>
 #include <cmath>
 #include <cstring>

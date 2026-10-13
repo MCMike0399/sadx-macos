@@ -1,5 +1,5 @@
 #pragma once
-#include "game/executable_image.hpp"
+#include "loader/executable_image.hpp"
 #include "cpu/source_bytes.hpp"
 #include <array>
 #include <cstdint>

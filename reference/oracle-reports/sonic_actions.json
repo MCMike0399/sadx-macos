@@ -1,0 +1,293 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "dd6fea4e97bf86c836f8d4c37b50093412f4d4e54c54821d68c66551801d3da2",
+ "cases": 30192,
+ "stored_mismatches": 0,
+ "boundary_mismatches": 0,
+ "status_mismatches": 2172,
+ "examples": [],
+ "status_examples": [
+  {
+   "case": 919,
+   "input": [
+    4804736,
+    127,
+    0,
+    1,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0
+   ],
+   "field": 24,
+   "source": 0,
+   "native": 32,
+   "boundary": "0x495286"
+  },
+  {
+   "case": 923,
+   "input": [
+    4804736,
+    127,
+    0,
+    1,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0
+   ],
+   "field": 24,
+   "source": 0,
+   "native": 32,
+   "boundary": "0x495286"
+  },
+  {
+   "case": 925,
+   "input": [
+    4804736,
+    127,
+    1,
+    1,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0
+   ],
+   "field": 24,
+   "source": 0,
+   "native": 32,
+   "boundary": "0x495286"
+  },
+  {
+   "case": 929,
+   "input": [
+    4804736,
+    127,
+    1,
+    1,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0
+   ],
+   "field": 24,
+   "source": 0,
+   "native": 32,
+   "boundary": "0x495286"
+  },
+  {
+   "case": 931,
+   "input": [
+    4804736,
+    127,
+    3,
+    1,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0
+   ],
+   "field": 24,
+   "source": 0,
+   "native": 32,
+   "boundary": "0x495286"
+  },
+  {
+   "case": 935,
+   "input": [
+    4804736,
+    127,
+    3,
+    1,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0
+   ],
+   "field": 24,
+   "source": 0,
+   "native": 32,
+   "boundary": "0x495286"
+  },
+  {
+   "case": 937,
+   "input": [
+    4804736,
+    127,
+    256,
+    1,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0
+   ],
+   "field": 24,
+   "source": 0,
+   "native": 32,
+   "boundary": "0x495286"
+  },
+  {
+   "case": 941,
+   "input": [
+    4804736,
+    127,
+    256,
+    1,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0
+   ],
+   "field": 24,
+   "source": 0,
+   "native": 32,
+   "boundary": "0x495286"
+  },
+  {
+   "case": 943,
+   "input": [
+    4804736,
+    127,
+    512,
+    1,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0
+   ],
+   "field": 24,
+   "source": 0,
+   "native": 32,
+   "boundary": "0x495286"
+  },
+  {
+   "case": 947,
+   "input": [
+    4804736,
+    127,
+    512,
+    1,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0
+   ],
+   "field": 24,
+   "source": 0,
+   "native": 32,
+   "boundary": "0x495286"
+  }
+ ],
+ "entry_cases": {
+  "0x495fa0": 2880,
+  "0x492f90": 2472,
+  "0x494f70": 936,
+  "0x495e60": 1308,
+  "0x493120": 924,
+  "0x496ee0": 2424,
+  "0x442680": 972,
+  "0x442570": 1344,
+  "0x43bf40": 1020,
+  "0x4b83f0": 3132,
+  "0x4b8320": 876,
+  "0x494ff0": 948,
+  "0x4429c0": 1080,
+  "0x495c30": 1056,
+  "0x495b50": 1068,
+  "0x495ba0": 996,
+  "0x4930d0": 1128,
+  "0x495080": 2496,
+  "0x496f50": 3132
+ },
+ "mandatory_boundaries": {
+  "0x49308d": 144,
+  "0x494fc9": 204,
+  "0x495eaa": 432,
+  "0x495f07": 48,
+  "0x496f33": 1644,
+  "0x4951d8": 1008,
+  "0x495286": 1128,
+  "0x49506b": 48,
+  "0x495fb9": 720,
+  "0x49526f": 240,
+  "0x4950b6": 240,
+  "0x495190": 324,
+  "0x495ff8": 36,
+  "0x4973b6": 48
+ },
+ "constants": {
+  "addresses": [
+   "0x7dcb2c",
+   "0x7dfff0",
+   "0x7dd554",
+   "0x7e0090",
+   "0x7dd57c",
+   "0x7df1bc",
+   "0x7e01a8",
+   "0x7dcb94",
+   "0x7e0844",
+   "0x7df1c8"
+  ],
+  "bytes": "000000006666663f0ad7233c0ad723bc6f12833a6f1283ba9a9999be00000040b81e453f0000f0413bdfbf3f00002041cdcccc3e",
+  "sha256": "cac3a43b8a00509706505b79771f4f9c2ec6b500a925b2cb4820b611fffe34b7"
+ },
+ "limits": [
+  "Actual original bytes with private fixture memory, not full game/mod startup or a physical gameplay trace",
+  "Unbound sound/effect/native task/animation/normal owners stop at actual source CALL before execution; none returns synthetic success",
+  "Fully known source masks/pad/event fields are explicit fixture facts, not defaults",
+  "All12 masked CW profiles include hardware candidate007f and worker027f but are not hardware measurements",
+  "Source FPATAN/scratch-dependent wall query remains a mandatory owner boundary in these fixtures"
+ ],
+ "native_sources": {
+  "src/player/sonic_player.hpp": "418bf5996866cc2d11dd27c504f0697a72fc298ae90e3db00dfb0c1d7c33b666",
+  "src/player/sonic_player.cpp": "9ea4fa5e53deac6158ebbad76bbc2f9358515d85414b78f0b7fabeb579e9e073",
+  "tests/probes/native_sonic_action_probe.cpp": "a32e1be6081014140f4cf1a46dff9d891016432b66da1c841d9223a9d07b7031",
+  "tools/oracles/verify_original_sonic_actions.py": "31ac7f04009d92848124f38ed6a8b050eaa8bb43250a03c7c250c305fa0c118d",
+  "src/player/player_task.hpp": "ed87e810477ddf9f81d4e4e450af20111a885cc66dae4285e1eaa490bb17b957",
+  "src/player/player_physics.hpp": "08bf9f1949cdb7fd1605429c9b9663265e61d62352b9f5d018e7244a74738530",
+  "src/player/player_position.hpp": "4a9343e6107b2cad271dfe2c369084a282f32b5c088f90c4bbd73fb40e3165de"
+ },
+ "case_sha256": "011512a72d2c21b1ea2362ba8cf86393b52f13601b89055fa8137cd3d505053b",
+ "seconds": 15.120476124982815,
+ "stored_state_matches": true,
+ "passed": false,
+ "tracked_summary": {
+  "full_sha256": "ea97b371e79fd777a3b428e33603863dcf2188ea35c3858e6d282531b93a687f",
+  "full_bytes": 35884,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "status_examples": 40,
+   "status_examples[0].input": 52,
+   "status_examples[1].input": 52,
+   "status_examples[2].input": 52,
+   "status_examples[3].input": 52,
+   "status_examples[4].input": 52,
+   "status_examples[5].input": 52,
+   "status_examples[6].input": 52,
+   "status_examples[7].input": 52,
+   "status_examples[8].input": 52,
+   "status_examples[9].input": 52,
+   "constants.addresses": 13
+  }
+ }
+}

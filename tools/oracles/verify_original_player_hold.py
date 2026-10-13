@@ -74,13 +74,13 @@ def main():
     if image.sha256!=SOURCE_SHA256 or unicorn.__version__!='2.1.4':raise RuntimeError('Source/oracle identity mismatch')
     lib=ctypes.CDLL(str(args.native_library.resolve()));probe=lib.sadx_native_player_hold
     probe.argtypes=[ctypes.POINTER(ctypes.c_uint32),ctypes.POINTER(ctypes.c_uint32)];probe.restype=ctypes.c_int
-    root=pathlib.Path(__file__).resolve().parent.parent
+    root=pathlib.Path(__file__).resolve().parents[2]
     report=dict(source_sha256=image.sha256,profile='actual43b9c0/no-overlays/read-only/native-Task-and-WorkArena',
         source_body=dict(address='0x43b9c0',size=0x141,sha256=sha(image.read(0x43b9c0,0x141))),
         source_tables=dict(address='0x43bb04',bytes=image.read(0x43bb04,40).hex()),
         native_library_sha256=sha(args.native_library.read_bytes()),
         native_sources={name:sha((root/name).read_bytes()) for name in ('src/player/player_hold.hpp','src/player/player_hold.cpp',
-            'src/game/task.hpp','src/game/task.cpp','src/game/task_work.hpp','src/game/task_work.cpp',
+            'src/engine/task.hpp','src/engine/task.cpp','src/engine/task_work.hpp','src/engine/task_work.cpp',
             'src/player/player_task.hpp','src/player/player_physics.hpp','src/player/player_position.hpp',
             'tests/probes/native_player_hold_probe.cpp','tools/oracles/verify_original_player_hold.py')},
         cases=0,fault_cases=0,mismatches=[],limits=[

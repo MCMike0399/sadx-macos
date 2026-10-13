@@ -157,7 +157,7 @@ def main():
         ctypes.c_size_t, ctypes.c_uint16, ctypes.POINTER(ctypes.c_uint32), ctypes.c_size_t]
     probe.restype = ctypes.c_int
     constants = (ctypes.c_uint8 * 36).from_buffer_copy(constant_bytes)
-    source_dir = pathlib.Path(__file__).resolve().parent.parent
+    source_dir = pathlib.Path(__file__).resolve().parents[2]
     report = dict(profile='source-GetNormalAngles-CRTasin-ftol/Unicorn2.1.4/explicit-policy/native-Bochs-P5P6',
         source_sha256=image.sha256, native_library_sha256=sha(args.native_library.read_bytes()),
         native_model='X87Transcendental::fpatan_bochs_p5_p6', seed=hex(SEED),

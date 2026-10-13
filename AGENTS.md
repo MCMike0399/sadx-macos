@@ -27,16 +27,16 @@ practice, proven by automated tests (`docs/ROADMAP.md`), not by someone playing 
   (`std::optional`, tagged failure results, reported assumptions) — it never guesses a
   value or masks a mismatch to make a test pass.
 * **Never commit binaries or game assets.** `game/`, DLLs, `.exe`, disc images, large
-  reference captures stay local and ignored. `tools/check_repo_hygiene.py` runs in the gate.
+  reference captures stay local and ignored. `tools/gate/check_repo_hygiene.py` runs in the gate.
 * **One owner per source global.** A `*_at_<hex>` member lives in exactly one struct;
-  `tools/check_global_owners.py` enforces it. Borrow with references/pointers.
+  `tools/gate/check_global_owners.py` enforces it. Borrow with references/pointers.
 * **Tagged results, explicit unknowns.** Failures carry the source boundary (the
   instruction address) and the fact that was missing. Unported callees are reported, not
   silently skipped, except under the survey policy, which is navigation, not behaviour.
 * **Report honestly.** A gate is recorded only with its real exit status. "Unverified"
   scope is named. Tests that were skipped are listed as skipped.
 * **Profile awareness.** Every ported range is checked against
-  `tools/profile_patches.json` (`tools/check_profile_patches.py`, 0 UNHANDLED). Under the
+  `tools/gate/profile_patches.json` (`tools/gate/check_profile_patches.py`, 0 UNHANDLED). Under the
   profile the loader and mods replace game code; the port implements what actually runs.
 * **No attribution lines in commits** (no Co-Authored-By / Generated-with).
 
@@ -45,18 +45,27 @@ practice, proven by automated tests (`docs/ROADMAP.md`), not by someone playing 
 1. Read `docs/STATUS.md`; choose the next item of the current milestone (or the item the
    user named). Say which one you are doing.
 2. Analyse with REA's Ghidra provider through the owned runner (`docs/METHOD.md` §1).
-   Hopper is not used (demo build hangs). Raw bytes via `tools/pe_image.py` only for exact
+   Hopper is not used (demo build hangs). Raw bytes via `tools/lib/pe_image.py` only for exact
    byte checks and oracle fixtures.
-3. Implement in the right area (`docs/ARCHITECTURE.md`). New module = files in
-   `src/<area>/` + `tests/unit/<name>.cpp` + one line in `tests/unit/manifest.tsv`.
-   New oracle = `tests/probes/native_<x>_probe.cpp` + `tools/oracles/verify_original_<x>.py`
-   + one line in `tools/oracles/manifest.tsv`.
+3. Implement in the right layer (`docs/ARCHITECTURE.md`: cpu < loader < math < engine <
+   input < player < game < runtime < guest < hle < platform < apps; include only downward,
+   `tools/gate/check_layers.py` enforces it). One slug per module:
+   `src/<layer>/<slug>.{hpp,cpp}` + `tests/unit/<slug>.cpp` (+ a `tests/unit/manifest.tsv`
+   line when it takes arguments). An oracle is `tests/probes/native_<slug>_probe.cpp` +
+   `tools/oracles/verify_original_<slug>.py`; the target `oracle-<slug-with-dashes>` and the
+   report `build/oracles/<slug>.json` exist by themselves (`tools/oracles/manifest.tsv`
+   only when it needs other inputs than the exe and the probe).
 4. Verify at the level the roadmap asks for: unit test; oracle with mutants for exact
    ports; override-equivalence / replay / golden tests for runtime work.
 5. Run the gate: `make -j10 gate 2>&1 | tee build/gate.log; echo rc=$?`. Record it only
-   when rc is 0: `python3 tools/record_gate.py --log build/gate.log --command "make -j10 gate"
+   when rc is 0: `python3 tools/gate/record_gate.py --log build/gate.log --command "make -j10 gate"
    --exit-status 0 --limit "…" --output reference/production-integration-<date>/<name>-gate.json`,
-   then `python3 tools/gen_status.py` to refresh `docs/STATUS.md`.
+   then `python3 tools/gate/gen_status.py` to refresh `docs/STATUS.md`.
+   If you touched ported code, also run its oracles (`make oracle-<slug>`, or `make -j6
+   oracles` for all, ~10 min), read them with `make oracles-verdict`, and track the ones
+   you reran with `python3 tools/gate/track_reports.py <slug>…` (size-bounded summaries in
+   `reference/oracle-reports/`). "partial" (values exact, FP flags differ) is not "pass":
+   say which it is.
 6. Append a `docs/HANDOFF.md` entry: evidence ids, what was done, test counts, limits.
 7. Commit with a Conventional Commit subject (`feat(guest): …`, `fix(ninja): …`,
    `docs: …`). Push only when asked.
@@ -70,7 +79,7 @@ practice, proven by automated tests (`docs/ROADMAP.md`), not by someone playing 
 * Do not map page 0 in an oracle when a null-pointer fault must be reproduced.
 * Probe and native must start from identical initial values; never mask a mismatch.
 * `make` mtime races: after editing a source, the probe `.dylib` must be newer than it
-  before an oracle runs (`tools/mutate.py` sleeps for this reason).
+  before an oracle runs (`tools/gate/mutate.py` sleeps for this reason).
 * Unicorn 2.1.4 raises no SSE exception flags and applies the x87 NaN rule to SSE
   operands; oracles compare MXCSR control bits only and keep one NaN source per case.
 * Game paths contain spaces; quote `$(GAME_EXE)`.

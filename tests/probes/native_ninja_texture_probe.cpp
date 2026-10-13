@@ -1,4 +1,4 @@
-#include "ninja/ninja_texture.hpp"
+#include "engine/ninja_texture.hpp"
 #include <algorithm>
 #include <cstring>
 extern "C" int sadx_native_ninja_texture(const std::uint8_t* bytes,std::size_t size,

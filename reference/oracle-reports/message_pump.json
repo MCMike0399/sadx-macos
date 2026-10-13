@@ -1,0 +1,37 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "77aff142f46250334ef5a76aa322187ba675e008d7eb3349c2a48d894cd8c627",
+ "source_files": {
+  "src/game/game_window.hpp": "04e70c9ade346c1d20c832eb49d3d6ffb05a00fb9d231bca329b1b8c70c65a87",
+  "src/game/game_window.cpp": "33b53a34ef5ec088e81cf4ab9d1a803e05a49671b554d18263a4d9d707cc701a",
+  "tests/probes/native_message_pump_probe.cpp": "9fb63664ea94e069180babd9a0be8a9ca4b408976ed8df95f661ad09af3b818c",
+  "tools/oracles/verify_original_message_pump.py": "bdc24aafe3f1a8ea5633735911f93d664bd0ddf82f9c39a5d55024836d2b316f"
+ },
+ "original_ranges_sha256": {
+  "0x789bd0-0x789c45": "647d353f795fad9cd95bd88c4397dfda6f6b3c56bc04de3911c55c0448925de4"
+ },
+ "cases": 2000,
+ "explicit_uninitialised": 578,
+ "source_outcomes": {
+  "explicit:uninitialised-wparam": 578,
+  "completed1:messages0": 578,
+  "completed1:messages7": 274,
+  "completed1:messages1": 509,
+  "completed1:messages3": 213,
+  "completed1:messages2": 256,
+  "completed0:messages3": 57,
+  "completed0:messages7": 48,
+  "completed0:messages1": 39,
+  "completed0:messages2": 26
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "state_traces_match": true,
+ "limits": "The 789bd0 message pump against its original instructions.\n\nPeekMessageA (IAT 7db1ec) pops the case's scripted queue into the caller's MSG\n(PM_REMOVE) or returns 0 without writing; TranslateMessage (7db1fc) and\nDispatchMessageA (7db1f8) record the message, and one dispatch can stop the\nsource (the native window-procedure owner stops there). Compared: completion,\n3d08534, the dispatch count, and the ordered trace of peeked window handles and\ndispatched (hwnd, message, wParam). When the first peek finds nothing the source\nstores an uninitialised stack word: the native owner reports it unknown, and\nthose cases are counted as explicit.\n",
+ "tracked_summary": {
+  "full_sha256": "ae49a511e49802d1f57f6c9793d1cc175e4667ade40b546cd241c104d6afe9e4",
+  "full_bytes": 1882,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

@@ -1,4 +1,4 @@
-#include "game/guest_heap.hpp"
+#include "loader/guest_heap.hpp"
 #include <iostream>
 #include <stdexcept>
 // Native heap identities: token, aligned distinct blocks, unknown fresh bytes,

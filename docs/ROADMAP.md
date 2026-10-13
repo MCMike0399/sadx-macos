@@ -55,7 +55,7 @@ Definition of done (all automated, `make m1`):
 | `guest-frames` | 600 frames headless (SEGA logo → title) complete; the D3D8 command stream per frame is non-empty and hashed. |
 | `override-equivalence` | For every ported module with an oracle, the in-process guest runs the original function on the oracle corpus and the native override produces identical outputs. Mismatch = the override is wrong (or the shim is). |
 | `determinism` | Two headless runs with the same input script give identical per-frame state hashes (player/mode/RNG regions + command stream). |
-| `profile-applied` | Every active patch in `tools/profile_patches.json` is observed as written in guest memory after mod init (the inventory becomes runtime-verified). |
+| `profile-applied` | Every active patch in `tools/gate/profile_patches.json` is observed as written in guest memory after mod init (the inventory becomes runtime-verified). |
 | `fpu-shims` | Every FPATAN/FSINCOS/FPTAN/F2XM1/FYL2X/RCPSS/RCPPS/RSQRT site in `.text` is covered by a shim; the shim results match the Bochs/own models (unit test over the site list). |
 | `guest-fps` | Headless frames per second is measured and recorded in the gate (no threshold yet; this is the performance baseline M5 works against). |
 

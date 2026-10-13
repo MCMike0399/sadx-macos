@@ -74,13 +74,13 @@ def main():
     probe.restype=ctypes.c_int;cases=fixtures(image);threshold=image.unpack('<f',0x7e6c30)[0]
     blob=b''.join(struct.pack('<20I',mode,alias,*words) for mode,alias,words in cases)
     a.output.parent.mkdir(parents=True,exist_ok=True);a.output.with_suffix('.cases.bin').write_bytes(blob)
-    root=pathlib.Path(__file__).resolve().parent.parent
+    root=pathlib.Path(__file__).resolve().parents[2]
     report=dict(profile='actual795820/7887d0/788d40/no-overlays; output alias and null profiles',
         source_sha256=image.sha256,native_library_sha256=sha(a.library.read_bytes()),
         source_functions={hex(lo):dict(size=hi-lo,sha256=sha(image.read(lo,hi-lo))) for lo,hi in
             ((0x795820,0x7958c9),(0x7887d0,0x7889e0),(0x7871f0,0x78721b),(0x788d40,0x788df0))},
         native_sources={name:sha((root/name).read_bytes()) for name in
-            ('src/player/player_plane.cpp','src/player/player_plane.hpp','src/ninja/ninja_math.cpp',
+            ('src/player/player_plane.cpp','src/player/player_plane.hpp','src/math/ninja_math.cpp',
              'src/player/player_direction_reset.cpp','tests/probes/native_player_plane_probe.cpp','tools/oracles/verify_original_player_plane.py')},
         case_sha256=sha(blob),cases=len(cases),profiles=[],mismatches=[],limits=[
             'Masked control words and synthetic planes are selected test fixtures; no runtime or hardware observation',

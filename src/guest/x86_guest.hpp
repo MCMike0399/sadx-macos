@@ -1,6 +1,6 @@
 #pragma once
 #include <optional>
-#include "game/executable_image.hpp"
+#include "loader/executable_image.hpp"
 #include <cstdint>
 #include <functional>
 #include <initializer_list>

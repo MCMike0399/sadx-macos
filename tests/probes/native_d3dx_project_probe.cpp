@@ -1,4 +1,4 @@
-#include "d3dx/d3dx_math.hpp"
+#include "math/d3dx_math.hpp"
 #include <algorithm>
 #include <cstring>
 // Native D3DX 772615 (+774310, 774150) with the layout of tools/verify_original_d3dx_project.py. RCPPS is the

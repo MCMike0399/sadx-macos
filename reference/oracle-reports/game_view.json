@@ -1,0 +1,38 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "0a33d0e0326d878f84848f4a758ff35f0f6cd8cb104b4b9d5edeb2fd1f409da7",
+ "source_files": {
+  "src/game/game_view.hpp": "5067cb1a6fb669beffe96407de97fdd1b1cc031b6e32b459dc0f95da938db9f1",
+  "src/game/game_view.cpp": "73304c7d72cb670852cab4ca013067e50a5c60d6e35d714f5477f29915624f7a",
+  "tests/probes/native_game_view_probe.cpp": "e7708c410b3868b1db0e2ddd55d7257e93a812e41b292139d8920774c5781d62",
+  "tools/oracles/verify_original_game_view.py": "6542f3d4a088e56cdea89b179081ee1b32ad5838ad2bb708a52700269252eeb2"
+ },
+ "original_range_sha256": "f690f4b95989d57290d8da5ab99f94e60dbcec80460ffa15c65981b9a3fc4dc6",
+ "cases": 500,
+ "source_outcomes": {
+  "reset0:completed1:calls2": 221,
+  "reset1:completed1:calls8": 91,
+  "reset1:completed0:calls6": 5,
+  "reset0:completed1:calls1": 117,
+  "reset1:completed1:calls7": 43,
+  "reset0:completed0:calls1": 2,
+  "reset1:completed0:calls5": 2,
+  "reset1:completed0:calls4": 1,
+  "reset1:completed0:calls3": 6,
+  "reset1:completed0:calls2": 3,
+  "reset1:completed0:calls8": 2,
+  "reset0:completed0:calls2": 5,
+  "reset1:completed0:calls7": 2
+ },
+ "state_mismatch_count": 0,
+ "fp_flag_mismatches": 291,
+ "mismatches": [],
+ "stores_trace_match": true,
+ "limits": "View setup 4208e0 (with 420860, 403e60, 788240, 402ed0, 402f10/780c00, 77ff60,\n77ff70, 402f40, 77ed50 and, on the reset path, 407ab0/407330/4030d0/4128f0) against\noriginal instructions. Fixtures: 4071c0, 7815c0, 403180 (recorded callee, site,\nfirst two arguments) and the D3D8 device's SetRenderState (recorded site, state,\nvalue); one call can fail. x87 status flags are reported separately.\n",
+ "tracked_summary": {
+  "full_sha256": "106af3fec2780e90542e4d360c40c050a8604f7935ceeb36fa1cad05706a3563",
+  "full_bytes": 1712,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

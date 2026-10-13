@@ -22,7 +22,7 @@ L=/tmp/ghidra-run.log; : > $L
 } | node reference/ghidra-live.mjs reference/ghidra-game-loop-config.json >> $L 2>&1
 ```
 
-Print assembly from a result: `python3 tools/ghidra_asm.py reference/ghidra-game-loop-recovery/screen-780c30.json`.
+Print assembly from a result: `python3 tools/analysis/ghidra_asm.py reference/ghidra-game-loop-recovery/screen-780c30.json`.
 
 Facts about the provider (from REA's docs, verified 2026-10-12):
 
@@ -42,8 +42,8 @@ Facts about the provider (from REA's docs, verified 2026-10-12):
 * `~/Developer/rea/_reference`-style raw Hopper queries are retired: the Hopper demo hangs
   under load and reads one function per query.
 
-Byte-exact checks use `tools/pe_image.py` (`PEImage(path).read(va, n)`), never guesses from
-listings. `tools/xscan.py ADDR…` lists `.text` references to data addresses.
+Byte-exact checks use `tools/lib/pe_image.py` (`PEImage(path).read(va, n)`), never guesses from
+listings. `tools/analysis/xscan.py ADDR…` lists `.text` references to data addresses.
 
 ## 2. Whole-program inventory (do once per binary, reuse forever)
 
@@ -64,19 +64,23 @@ These are inputs to M1 and M5 of the roadmap.
 Used for hot paths and for the platform boundary; not for everything.
 
 1. Read it (section 1). Cross-check every constant with `pe_image`.
-2. Check the range against `tools/profile_patches.json`: `python3 tools/check_profile_patches.py`
+2. Check the range against `tools/gate/profile_patches.json`: `python3 tools/gate/check_profile_patches.py`
    must report 0 UNHANDLED. If the loader or a mod replaces part of it, implement what
    runs under the profile and mark the patch `handled_by`.
-3. Write the owner in `src/<area>/`: state struct with `<meaning>_at_<hex>` members (one
+3. Write the owner in `src/<layer>/` (the lowest layer whose dependencies it needs,
+   `docs/ARCHITECTURE.md`): state struct with `<meaning>_at_<hex>` members (one
    owner per global), a `*Runtime` with borrowed dependencies, a `*Result` with failure
    tag + source boundary + required fact. Every store in instruction order; every branch
    with its exact x87/flag condition.
-4. Unit test in `tests/unit/<name>.cpp` + manifest line.
-5. Oracle: `tests/probes/native_<x>_probe.cpp` (flat `uint32_t` in/out layout) and
-   `tools/oracles/verify_original_<x>.py` (Unicorn runs the original bytes with fixtures for
-   callees/Win32/COM; compares every store and the call trace), + manifest line.
-   Run `make reference-<x>-test`; it must print `"mismatches": 0`.
-6. Mutants: `python3 tools/mutate.py src/<area>/<file>.cpp reference-<x>-test build/native-<x>-probe.dylib mutants.json`
+4. Unit test in `tests/unit/<slug>.cpp` (+ a manifest line if it takes arguments).
+5. Oracle: `tests/probes/native_<slug>_probe.cpp` (flat `uint32_t` in/out layout) and
+   `tools/oracles/verify_original_<slug>.py` (Unicorn runs the original bytes with fixtures for
+   callees/Win32/COM; compares every store and the call trace). Write `passed` (strict) and
+   `values_match` into the report and `limits` for every known flag difference. Run
+   `make oracle-<slug-with-dashes>`; `python3 tools/oracles/verdict.py build/oracles/<slug>.json`
+   must say `pass`. Track it: `python3 tools/gate/track_reports.py <slug>` (summary copy in
+   `reference/oracle-reports/`; side files stay in `build/`).
+6. Mutants: `python3 tools/gate/mutate.py src/<layer>/<file>.cpp oracle-<slug> build/native-<slug>-probe.dylib mutants.json`
    with 3–7 seeded bugs; every non-equivalent mutant must be caught.
 7. Wire it into the runtime (`src/runtime`, or the override table once M1 lands).
 8. Gate, record, status, handoff (AGENTS.md).

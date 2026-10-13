@@ -1,6 +1,6 @@
 #pragma once
 #include <optional>
-#include "game/game_logic.hpp"
+#include "engine/game_logic.hpp"
 #include <cstdint>
 #include <functional>
 namespace sadx {

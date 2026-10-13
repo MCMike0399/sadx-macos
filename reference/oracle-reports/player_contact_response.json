@@ -1,0 +1,478 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "5451382c1c27fac8e0b5d759203025340379a350e46f73affda8d38c6248bcc8",
+ "profile": "five actual source contact-response bodies with real callees, no overlays; explicit fixtures/policy1",
+ "source_functions": {
+  "0x43cce0": {
+   "size": 681,
+   "sha256": "81caf040ebac921d1162c3cfeda295e5b5e595de29a4b5d878aa250e6ebd8b05"
+  },
+  "0x43cf90": {
+   "size": 488,
+   "sha256": "ac5443238c282b45b3133183a8f518929a5f7d51734223c81ab40753a9308b11"
+  },
+  "0x43d180": {
+   "size": 470,
+   "sha256": "c5cc5a981790f1cfb93f70399907c5c6aac16edb2a66d07cfe50e562b0c90d78"
+  },
+  "0x43d8b0": {
+   "size": 1001,
+   "sha256": "c61fc3146c1a21f413eedd587d69cd81005a9ef72efa29f1025358a8723e59ab"
+  },
+  "0x43d360": {
+   "size": 1357,
+   "sha256": "37fbf440d3d094c6b8b59bd0b17b3cf29021c96ea7495d82a972f6ccb3a4004b"
+  }
+ },
+ "constants": {
+  "bytes": "000000000000803fcdcc4cbe000090c0cdcc4c3e000080bf9a99793f000000000000f0400ae3e4b4305fc43f000000000000f03f",
+  "sha256": "10889309fdb5c0b466b1f62c5d0adcda8f271ce9a4b5a6332feee9397899e557",
+  "fields": [
+   "0x7dcb2c",
+   "0x7dcb10",
+   "0x7dd570",
+   "0x7e0080",
+   "0x7dd58c",
+   "0x7dcb0c",
+   "0x7e6c30",
+   "0x7dccd0",
+   "0x7dccc8",
+   "0x7e0b40"
+  ]
+ },
+ "cases_per_entry_and_cw": 1030,
+ "case_sha256": "a18d35d7f3fb3de27c0914f7303822ae3a7526632db6e05ddb2c31f783b7727a",
+ "native_sources": {
+  "src/player/player_contact_response.hpp": "1d190378a84d2a8b8458d36f33c36b71739d5a7b9c1a9006cd87bbbfa215317c",
+  "src/player/player_contact_response.cpp": "e263fba0e09a776eb89c4b4023a3e5359f3e598808fdb499f81603a339f24c63",
+  "tests/probes/native_player_contact_response_probe.cpp": "ec01b8dab93679400b46bbd0937422e3163d9e9db7a203758a122e44dae132ef",
+  "tools/oracles/verify_original_player_contact_response.py": "d84b7063d1751a237defae8c6b6c31a9ae73155854748c5d96aa9a4adfd10dfe"
+ },
+ "native_shared_sources": {
+  "src/math/ninja_math.cpp": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
+  "src/player/player_rotation.cpp": "87e7f62da064257f47af017e596c3c61078a1c65ca05828d8d6c73903c835cbe",
+  "src/player/player_projection.cpp": "ac94968965936abb23389abf02f367c49e4053aa113712fba41535348ce3e203",
+  "src/player/player_plane.cpp": "68fdac89b68c1d01ed4b18a444b9d4e1d26fc5c33aea785fab66dd1035e6c957",
+  "src/player/player_acceleration_alternate_math.cpp": "6be8ab051a2fda7eddc50e6f558108f7f08691ccbead0d02db5979b2b6f8f500",
+  "src/cpu/crt_acos.cpp": "ed203a63db8746fd0fb18e2089a9826f5f939ccb4b31edb4f08bd48b1ec3e889",
+  "src/cpu/crt_asin.cpp": "ef3960069a7d20264f9997fb0ea40b6def9424bcbaf73fe221a84ab257bedbd5",
+  "src/cpu/crt_integer.cpp": "18d16777cc02344275575955f7773043ea9c6b48cf0197b725e838d1c5294a92",
+  "src/cpu/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8",
+  "src/cpu/x87_transcendental.cpp": "00fa509396903586b83807f7aa53b7df8675d7d8efdef031f7264283e3c0529a",
+  "src/player/player_contact.hpp": "8f155fff829310c44430815156fe19c91782b2156620005a76e317921868e401",
+  "src/player/player_mesh_query.hpp": "8f787f09c4f3fc44bb833a7616a4e07f57ee85cd57f1b673a06591b3258ecfe7",
+  "src/player/player_task.hpp": "ed87e810477ddf9f81d4e4e450af20111a885cc66dae4285e1eaa490bb17b957",
+  "src/player/player_physics.hpp": "08bf9f1949cdb7fd1605429c9b9663265e61d62352b9f5d018e7244a74738530",
+  "src/player/player_acceleration.hpp": "3ca9bd3f7dfccec590eec2926fa0d0b0eea194e1fa1f014b0dcf250411273257"
+ },
+ "profiles": [
+  {
+   "entry": "0x43cce0",
+   "cw": "0x7f",
+   "cases": 1030,
+   "value_mismatches": 0,
+   "flag_mismatches": 832,
+   "flag_examples": [
+    {
+     "case": 1,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 3,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 4,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 5,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "entry": "0x43cf90",
+   "cw": "0x7f",
+   "cases": 1030,
+   "value_mismatches": 0,
+   "flag_mismatches": 832,
+   "flag_examples": [
+    {
+     "case": 1,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 3,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 4,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 5,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "entry": "0x43d180",
+   "cw": "0x7f",
+   "cases": 1030,
+   "value_mismatches": 0,
+   "flag_mismatches": 847,
+   "flag_examples": [
+    {
+     "case": 1,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 3,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 4,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 5,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "entry": "0x43d8b0",
+   "cw": "0x7f",
+   "cases": 1030,
+   "value_mismatches": 0,
+   "flag_mismatches": 831,
+   "flag_examples": [
+    {
+     "case": 1,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 3,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 4,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 5,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "entry": "0x43d360",
+   "cw": "0x7f",
+   "cases": 1030,
+   "value_mismatches": 0,
+   "flag_mismatches": 841,
+   "flag_examples": [
+    {
+     "case": 1,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 3,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 4,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 5,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "entry": "0x43cce0",
+   "cw": "0x47f",
+   "cases": 1030,
+   "value_mismatches": 0,
+   "flag_mismatches": 832,
+   "flag_examples": [
+    {
+     "case": 1,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 3,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 4,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 5,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "entry": "0x43cf90",
+   "cw": "0x47f",
+   "cases": 1030,
+   "value_mismatches": 0,
+   "flag_mismatches": 832,
+   "flag_examples": [
+    {
+     "case": 1,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 3,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 4,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 5,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "entry": "0x43d180",
+   "cw": "0x47f",
+   "cases": 1030,
+   "value_mismatches": 0,
+   "flag_mismatches": 847,
+   "flag_examples": [
+    {
+     "case": 1,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 3,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 4,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 5,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "entry": "0x43d8b0",
+   "cw": "0x47f",
+   "cases": 1030,
+   "value_mismatches": 0,
+   "flag_mismatches": 831,
+   "flag_examples": [
+    {
+     "case": 1,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 3,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 4,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 5,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  },
+  {
+   "entry": "0x43d360",
+   "cw": "0x47f",
+   "cases": 1030,
+   "value_mismatches": 0,
+   "flag_mismatches": 841,
+   "flag_examples": [
+    {
+     "case": 1,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 2,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 3,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 4,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 5,
+     "source": "0x0",
+     "native": "0x20"
+    },
+    {
+     "case": 6,
+     "source": "0x0",
+     "native": "0x20"
+    }
+   ]
+  }
+ ],
+ "mismatches": [],
+ "limits": [
+  "Explicit fixtures/policy1/12 CW profiles do not establish actual Windows startup/mods/scene state",
+  "Unobserved contact/resource/scratch boundaries belong to owner tests; source initialization is not fabricated",
+  "Bochs FPATAN model versus Unicorn host-double transcendental and status differences remain separate",
+  "Actual Intel hardware, complete collision producers and physical controllers remain unverified"
+ ],
+ "stored_values_return_control_match": true,
+ "passed": false,
+ "seconds": 4.052567165985238,
+ "tracked_summary": {
+  "full_sha256": "f0af1a3249cefb31971b9af2c415b0cb0c057aea927fd17b14bd1eee59127f1e",
+  "full_bytes": 49145,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "profiles": 60
+  }
+ }
+}

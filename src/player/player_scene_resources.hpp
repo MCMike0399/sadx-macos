@@ -1,7 +1,7 @@
 #pragma once
 
-#include "ninja/ninja_math.hpp"
-#include "game/scene_resource_reference.hpp"
+#include "math/ninja_math.hpp"
+#include "engine/scene_resource_reference.hpp"
 #include <optional>
 #include <unordered_map>
 #include <vector>

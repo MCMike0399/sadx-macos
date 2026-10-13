@@ -2,8 +2,8 @@
 
 #include "player/player_motion.hpp"
 #include "player/player_contact.hpp"
-#include "game/task.hpp"
-#include "game/scene_resource_reference.hpp"
+#include "engine/task.hpp"
+#include "engine/scene_resource_reference.hpp"
 #include "player/player_animation_state.hpp"
 #include <optional>
 

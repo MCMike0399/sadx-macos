@@ -1,0 +1,229 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "5757580c5bfc3b7f692bddc8096fb44c95c36dd619074ec512dac374faccf5f2",
+ "cases": 7944,
+ "stored_mismatches": 0,
+ "status_mismatches": 1668,
+ "examples": [],
+ "status_examples": [
+  {
+   "case": 278,
+   "field": 30,
+   "source": 0,
+   "native": 32,
+   "input": [
+    127,
+    1091567616,
+    7,
+    3,
+    10,
+    1,
+    0,
+    3,
+    0,
+    1048576000
+   ]
+  },
+  {
+   "case": 279,
+   "field": 30,
+   "source": 0,
+   "native": 32,
+   "input": [
+    127,
+    1094713344,
+    7,
+    3,
+    10,
+    1,
+    0,
+    3,
+    0,
+    1048576000
+   ]
+  },
+  {
+   "case": 286,
+   "field": 30,
+   "source": 0,
+   "native": 32,
+   "input": [
+    127,
+    1091567616,
+    7,
+    3,
+    10,
+    1,
+    7,
+    3,
+    0,
+    1048576000
+   ]
+  },
+  {
+   "case": 287,
+   "field": 30,
+   "source": 0,
+   "native": 32,
+   "input": [
+    127,
+    1094713344,
+    7,
+    3,
+    10,
+    1,
+    7,
+    3,
+    0,
+    1048576000
+   ]
+  },
+  {
+   "case": 310,
+   "field": 30,
+   "source": 0,
+   "native": 32,
+   "input": [
+    127,
+    1091567616,
+    7,
+    3,
+    10,
+    3,
+    0,
+    3,
+    0,
+    1048576000
+   ]
+  },
+  {
+   "case": 311,
+   "field": 30,
+   "source": 0,
+   "native": 32,
+   "input": [
+    127,
+    1094713344,
+    7,
+    3,
+    10,
+    3,
+    0,
+    3,
+    0,
+    1048576000
+   ]
+  },
+  {
+   "case": 318,
+   "field": 30,
+   "source": 0,
+   "native": 32,
+   "input": [
+    127,
+    1091567616,
+    7,
+    3,
+    10,
+    3,
+    7,
+    3,
+    0,
+    1048576000
+   ]
+  },
+  {
+   "case": 319,
+   "field": 30,
+   "source": 0,
+   "native": 32,
+   "input": [
+    127,
+    1094713344,
+    7,
+    3,
+    10,
+    3,
+    7,
+    3,
+    0,
+    1048576000
+   ]
+  },
+  {
+   "case": 342,
+   "field": 30,
+   "source": 0,
+   "native": 32,
+   "input": [
+    127,
+    1091567616,
+    7,
+    3,
+    10,
+    5,
+    0,
+    3,
+    0,
+    1048576000
+   ]
+  },
+  {
+   "case": 343,
+   "field": 30,
+   "source": 0,
+   "native": 32,
+   "input": [
+    127,
+    1094713344,
+    7,
+    3,
+    10,
+    5,
+    0,
+    3,
+    0,
+    1048576000
+   ]
+  }
+ ],
+ "source_range": {
+  "address": "0x43f2a0",
+  "bytes": 1872,
+  "sha256": "3f838787e21b95594cb3ad0647c4d48f1b7edbecb900f2989eb3b4cbbbadc8c9"
+ },
+ "limits": [
+  "Synthetic single-object graph and two MDATA2/3 motion descriptors; not actual model DLL resource execution",
+  "Fixture allocator supplies32-byte buffers at40b220; original allocator policy is not compared here",
+  "Integer/float stored keys and metadata compared; full x87 status/stack/tags are outside native context",
+  "Unicorn2.1.4 is an instruction oracle, not physical Windows execution"
+ ],
+ "native_sources": {
+  "src/player/player_animation.hpp": "29aecbe442f5151044a6c9678fa93b678b1d4a04a52958e95cfd16c0aa2b11bf",
+  "src/player/player_animation_blend.cpp": "d1ad8f801908b368f3d6cffdc9459c85a1f142d0db484a72f13dc0069256888c",
+  "tests/probes/native_player_animation_blend_probe.cpp": "da87dbc6f10d89a6ded7a6ec942896a70fa40abead3fdef8c9e24003188a108a",
+  "tools/oracles/verify_original_player_animation_blend.py": "1cb4fdd24fe6ad64083b05ed5f85123f6b6fae794fc1f22a88a3b62c9b4e5dc9"
+ },
+ "case_sha256": "26f317d919a50438214dae0a9f1790b942ced6cb6d1862e2ebccc4f4c146c2b7",
+ "seconds": 5.37539433297934,
+ "stored_state_matches": true,
+ "passed": false,
+ "tracked_summary": {
+  "full_sha256": "b965565a04305b1f30904ff31a128c8ab34e317124c6e719575346e4f26e9818",
+  "full_bytes": 35331,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "status_examples": 30,
+   "status_examples[0].input": 62,
+   "status_examples[1].input": 62,
+   "status_examples[2].input": 62,
+   "status_examples[3].input": 62,
+   "status_examples[4].input": 62,
+   "status_examples[5].input": 62,
+   "status_examples[6].input": 62,
+   "status_examples[7].input": 62,
+   "status_examples[8].input": 62,
+   "status_examples[9].input": 62
+  }
+ }
+}

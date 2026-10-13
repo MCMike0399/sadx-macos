@@ -1,5 +1,5 @@
 #pragma once
-#include "ninja/ninja_math.hpp"
+#include "math/ninja_math.hpp"
 #include "cpu/crt_floor.hpp"
 #include <cstddef>
 #include <optional>

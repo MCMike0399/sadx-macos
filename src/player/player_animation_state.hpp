@@ -1,6 +1,6 @@
 #pragma once
-#include "game/task_work.hpp"
-#include "game/scene_resource_reference.hpp"
+#include "engine/task_work.hpp"
+#include "engine/scene_resource_reference.hpp"
 namespace sadx {
 struct PlayerAnimationTable;
 struct PlayerAnimationAllocatedMotion {

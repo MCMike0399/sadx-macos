@@ -92,7 +92,7 @@ def main():
         if got_text!=source_text:problems.append('queries/heap trace')
         if out[2]!=live:problems.append(f'live blocks {out[2]} vs {live}')
         if problems:bad.append(dict(case=n,drives=drives,problems=problems,native=got_text[:8],source=source_text[:8]))
-    names=['src/game/game_winmain.hpp','src/game/game_winmain.cpp','src/ninja/ninja_memory.hpp','src/ninja/ninja_memory.cpp','src/game/guest_heap.hpp','src/game/guest_heap.cpp','tests/probes/native_cd_drive_scan_probe.cpp','tools/oracles/verify_original_cd_drive_scan.py']
+    names=['src/game/game_winmain.hpp','src/game/game_winmain.cpp','src/engine/ninja_memory.hpp','src/engine/ninja_memory.cpp','src/loader/guest_heap.hpp','src/loader/guest_heap.cpp','tests/probes/native_cd_drive_scan_probe.cpp','tools/oracles/verify_original_cd_drive_scan.py']
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={x:sha((pathlib.Path(__file__).resolve().parents[2]/x).read_bytes()) for x in names},
         original_ranges_sha256={hex(x):sha(image.read(x,y)) for x,y in((0x401a20,0x9e),(0x401990,0x8c),(0x780f60,0x2d),(0x780fb0,0x18))},
         cases=cases,source_outcomes=outcomes,mismatch_count=len(bad),mismatches=bad[:20],state_traces_match=not bad,limits=__doc__)

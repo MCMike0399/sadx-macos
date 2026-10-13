@@ -1,4 +1,4 @@
-#include "ninja/ninja_projection_range.hpp"
+#include "engine/ninja_projection_range.hpp"
 #include <cmath>
 #include <iostream>
 #include <stdexcept>

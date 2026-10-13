@@ -1,4 +1,4 @@
-#include "ninja/ninja_screen.hpp"
+#include "engine/ninja_screen.hpp"
 #include <cstring>
 #include <iostream>
 // 780c30/7912e0/78dbe0/77dfc0: the 640x480 screen, a clean viewport flag, the projected depth,

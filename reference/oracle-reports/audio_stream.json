@@ -1,0 +1,25 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "c2ad3d9b956ebdc54351c112aa1e7def7d3d8d64c2f7f6a5e5e6eea075c780ed",
+ "source_files": {
+  "src/game/audio_stream.hpp": "2690eed3ba6565faebe237f0c6878b524ec4a3ccb43a3b50006ab1ea94b2e2bd",
+  "src/game/audio_stream.cpp": "4198ffa2c43c83614cec9641e7290070e793639700a8346a4cff3f4900240dbc",
+  "tests/probes/native_audio_stream_probe.cpp": "de34143de74dda9e031c70b46e546f2e1efb1ac1ed7796006e2562b7bea4ef11",
+  "tools/oracles/verify_original_audio_stream.py": "0d043ed86c718edc6d95b438e23597c2ebcce526623a3d105fcc8f5bae6ecb5e"
+ },
+ "original_ranges_sha256": {
+  "410510": "573c3de76dce1768c85d3db2ff2cbdd7081c2dc1ea3481881bb6244eeee25501",
+  "513e60": "cda72abcdbb1efdc80edc8549a889c40e93418986336d31914aa9a2d9e967cc7"
+ },
+ "cases": 192,
+ "mismatch_count": 0,
+ "mismatches": [],
+ "stores_owner_calls_match": true,
+ "limits": "Audio streaming init 410510 against original instructions.\n\nFixtures: operator new 6443e7 (returns a mapped 4-byte object), the 44de80\ndevice init (records this/window/format arguments, checks the 513e60-zeroed\ndevice field, returns the case HRESULT; thiscall RET 0x14), and the\nCreateEventA / CreateThread / InitializeCriticalSection import slots\n(0x7db098/94/90). SEH frames use fs:[0] at linear page 0. Compared: return\nvalue, init flag, the four 36-word tables, thread handle/id, the critical\nsection call, device-call count and its arguments. The 40ff50 stream thread\nbody and the real DirectSound device are not part of this comparison.\n",
+ "tracked_summary": {
+  "full_sha256": "edec4dac823d009e33ea111cae4e65412e7891e37f31692b873cdaa2bc8b296d",
+  "full_bytes": 1589,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

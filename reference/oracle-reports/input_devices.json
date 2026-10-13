@@ -1,0 +1,31 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "038206d4d0aec7e75a6911f8ca32f2f41516eacc8bc557dd48555ed5f645644d",
+ "source_files": {
+  "src/engine/ninja_input_devices.hpp": "9202c99f48dfcff54c4bcaeea874ac4fde3f98dad529eab2a8a9f28a2948af7b",
+  "src/engine/ninja_input_devices.cpp": "442e26f5665cfbd7c8f4b3a45527f2ac8cb0b3d0c040ccabd27601ddc3e6ecbc",
+  "tests/probes/native_input_devices_probe.cpp": "86d57d7ccfb833606c56f61306cf83107202bba891a350ae0698bb6b99299ab9",
+  "tools/oracles/verify_original_input_devices.py": "a7862b4d9826b5df763da43bbba10af24630c883f6b36ca74b537ef6def0906d"
+ },
+ "original_ranges_sha256": {
+  "0x792100-0x792122": "52f8a669fb5a4863459d1caf9540dba02b3073e2346443173006ba1bfcc72b1b",
+  "0x791df0-0x791e0b": "531077fbee5fee54cd2fc642be25bb40df22b7f32a01d18a03dacc5a9f97e9fe"
+ },
+ "cases": 400,
+ "source_outcomes": {
+  "792100:body1": 117,
+  "791df0:body1": 119,
+  "792100:body0": 83,
+  "791df0:body0": 81
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "state_traces_match": true,
+ "limits": "792100 and 791df0 (the 77f110/77efc0 callback targets) against their original\ninstructions: with a zero joystick count (3d08814) / null mouse device (3d08834)\neach returns through its stack-cookie check; otherwise the source reaches the\nfirst body instruction (792122 / 791e0b), where the native body owner stops.\nCompared: completion and the body reached. The bodies themselves are not covered.\n",
+ "tracked_summary": {
+  "full_sha256": "62e80c9cb030440ebd8953db3631f11e9781432a97d24c9b30898ab554a2d52d",
+  "full_bytes": 1488,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

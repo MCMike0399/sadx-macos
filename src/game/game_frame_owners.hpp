@@ -1,7 +1,7 @@
 #pragma once
-#include "game/game_logic_support.hpp"
+#include "engine/game_logic_support.hpp"
 #include "game/game_view.hpp"
-#include "ninja/ninja_queue_consumer.hpp"
+#include "engine/ninja_queue_consumer.hpp"
 #include <array>
 #include <cstdint>
 #include <functional>

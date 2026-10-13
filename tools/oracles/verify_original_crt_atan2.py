@@ -99,7 +99,7 @@ def main():
     fixture=fixtures();lib=ctypes.CDLL(str(args.native_library.resolve()));probe=lib.sadx_native_crt_atan2
     probe.argtypes=[ctypes.c_uint64,ctypes.c_uint64,ctypes.c_uint16,ctypes.c_uint32,ctypes.POINTER(ctypes.c_uint32)]
     probe.restype=ctypes.c_int
-    root=pathlib.Path(__file__).resolve().parent.parent
+    root=pathlib.Path(__file__).resolve().parents[2]
     report=dict(profile='actual645270/two-argument-classifier/body/return-or-real-matherr-call/no-overlays',
         source_sha256=image.sha256,native_library_sha256=sha(args.native_library.read_bytes()),
         descriptor=dict(address=hex(0x2bcc170),bytes=image.read(0x2bcc170,80).hex(),name='atan2',argument_count=2,operation=16),

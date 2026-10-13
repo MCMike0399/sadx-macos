@@ -1,6 +1,6 @@
 #pragma once
-#include "game/game_frame_control.hpp"
-#include "game/game_logic.hpp"
+#include "engine/game_frame_control.hpp"
+#include "engine/game_logic.hpp"
 #include <array>
 #include <cstdint>
 #include <functional>

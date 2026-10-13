@@ -1,4 +1,4 @@
-#include "ninja/ninja_texture.hpp"
+#include "engine/ninja_texture.hpp"
 #include <cstring>
 #include <fstream>
 #include <iostream>

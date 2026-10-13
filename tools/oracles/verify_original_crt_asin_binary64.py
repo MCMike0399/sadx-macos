@@ -78,7 +78,7 @@ def main():
     probe=library.sadx_native_crt_asin_binary64
     probe.argtypes=[ctypes.c_uint64,ctypes.c_uint16,ctypes.c_uint32,ctypes.POINTER(ctypes.c_uint32)]
     probe.restype=ctypes.c_int
-    root=pathlib.Path(__file__).resolve().parent.parent
+    root=pathlib.Path(__file__).resolve().parents[2]
     report=dict(profile='actual645034/classifier/body/return-or-real-matherr-boundary/no-overlays',
         source_sha256=image.sha256,native_library_sha256=sha(args.native_library.read_bytes()),
         source_functions={hex(lo):dict(size=hi-lo,sha256=sha(image.read(lo,hi-lo))) for lo,hi in

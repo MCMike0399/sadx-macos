@@ -1,4 +1,4 @@
-#include "ninja/ninja_texture_selection.hpp"
+#include "engine/ninja_texture_selection.hpp"
 namespace {
 std::uint32_t identity(const std::optional<std::shared_ptr<const sadx::NinjaTextureMemoryReference>>& r,const std::array<std::shared_ptr<sadx::NinjaTextureMemoryReference>,3>& m){if(!r)return 0xfffffffeU;if(!*r)return 0;for(std::size_t i=0;i<3;++i)if(r->get()==m[i].get())return i+1;return 0xffffffffU;}
 }

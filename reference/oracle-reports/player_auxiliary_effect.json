@@ -1,0 +1,1586 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "cbf7cab7c419ef77a38bb54476e3a37f5451100397b2f185b8fa5eebc9a8e85a",
+ "table_sha256": "c852bb548014ed621db8fc5c1cbb2abfcee449e0172801438f32526a5ba32201",
+ "case_blob": {
+  "path": "build/oracles/player_auxiliary_effect.cases.bin",
+  "sha256": "1c7d679bad701f238afe77d9b913359bbb432de51410a567083635238ece09f7",
+  "cases": 43,
+  "record": "16 LE uint32 words"
+ },
+ "source_functions": {
+  "0x4a2b60": {
+   "size": 9,
+   "sha256": "c2b4f07706f7d480f744c6bca581b41d997e891fee44743e207ec6ad8d8a1604"
+  },
+  "0x4a2ae0": {
+   "size": 123,
+   "sha256": "228dcd2b5c9a555a8b6a991946aa9bfeab51d876854d73c109d2a983274b5a71"
+  },
+  "0x441970": {
+   "size": 26,
+   "sha256": "7d7deb96de759098d44aeeb18fe6e205463a31d6d9c7970734a62560039e8ea4"
+  },
+  "0x4144e0": {
+   "size": 8,
+   "sha256": "59d4c6719d198fa7a265fd96993d62ea4f31baf2a95dcf62f77941f970da84d6"
+  },
+  "0x4f88a0": {
+   "size": 3,
+   "sha256": "4bc724f3b1d0caf4fe369c18cba3102e6c4ea057f63fe1587e3973134a7f755e"
+  },
+  "0x4a0720": {
+   "size": 62,
+   "sha256": "9468c8bdc8d10c8c50c978267bd272420dadd72f39180cf6022b04b9c8510c19"
+  },
+  "0x4a2570": {
+   "size": 1170,
+   "sha256": "f8b42b589b68614a2a76f78f17f69208565fcd3987960276187d6c396d1414d6"
+  },
+  "0x644340": {
+   "size": 127,
+   "sha256": "5d9597d3df45db01a3f221616452053d917b58a8cce4aad61f07da16cc2c16d0"
+  }
+ },
+ "native_sources": {
+  "src/player/player_auxiliary_effect.cpp": "14ac88c81aef6da81cbc1444e92e1366e67fed54a7775d3cef0315825671b5ec",
+  "src/player/player_auxiliary_effect.hpp": "0e3a39d8824df0136473d19ded637c2173401373eba8570d7f80df79535e09af",
+  "src/engine/task.cpp": "3bdec3d5cfb4af75195959d434a5555dececf055280259044def70e29033d9a8",
+  "src/engine/task.hpp": "06fe28e25fd8a5e2de818305639b8a9a8342216af486c23efe330ce2c2815400",
+  "src/engine/task_work.cpp": "b044c4dfb8c85b054216443b35d4e5a42481cf55277e8c9386c4564b4c7797d7",
+  "src/player/player_startup.cpp": "2d6aacc547a36312b9969b7d44bde0f632fe3c5620eff43283c1a9c3e2294e96",
+  "tests/probes/native_player_auxiliary_effect_probe.cpp": "3f1726a1171c85739de18c9d16fb7a650de9495cbd2b2645e44bb42071b863e7",
+  "tools/oracles/verify_original_player_auxiliary_effect.py": "3974c5a248c84a915795427feb7e8050ad93f65f41e63014da7d84fffdfb97b1"
+ },
+ "profiles": [
+  {
+   "cw": "0x7f",
+   "cases": 43,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "callback_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 5,
+   "examples": [
+    {
+     "case": 38,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 39,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 40,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 41,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 42,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    }
+   ]
+  },
+  {
+   "cw": "0x47f",
+   "cases": 43,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "callback_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 5,
+   "examples": [
+    {
+     "case": 38,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 39,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 40,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 41,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 42,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    }
+   ]
+  },
+  {
+   "cw": "0x87f",
+   "cases": 43,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "callback_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 5,
+   "examples": [
+    {
+     "case": 38,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 39,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 40,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 41,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 42,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    }
+   ]
+  },
+  {
+   "cw": "0xc7f",
+   "cases": 43,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "callback_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 5,
+   "examples": [
+    {
+     "case": 38,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 39,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 40,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 41,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 42,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    }
+   ]
+  },
+  {
+   "cw": "0x27f",
+   "cases": 43,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "callback_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 5,
+   "examples": [
+    {
+     "case": 38,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 39,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 40,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 41,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 42,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    }
+   ]
+  },
+  {
+   "cw": "0x67f",
+   "cases": 43,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "callback_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 5,
+   "examples": [
+    {
+     "case": 38,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 39,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 40,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 41,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 42,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    }
+   ]
+  },
+  {
+   "cw": "0xa7f",
+   "cases": 43,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "callback_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 5,
+   "examples": [
+    {
+     "case": 38,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 39,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 40,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 41,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 42,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    }
+   ]
+  },
+  {
+   "cw": "0xe7f",
+   "cases": 43,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "callback_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 5,
+   "examples": [
+    {
+     "case": 38,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 39,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 40,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 41,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 42,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    }
+   ]
+  },
+  {
+   "cw": "0x37f",
+   "cases": 43,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "callback_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 5,
+   "examples": [
+    {
+     "case": 38,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 39,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 40,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 41,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 42,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    }
+   ]
+  },
+  {
+   "cw": "0x77f",
+   "cases": 43,
+   "state_mismatches": 0,
+   "boundary_mismatches": 0,
+   "callback_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 5,
+   "examples": [
+    {
+     "case": 38,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 39,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 40,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 41,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    },
+    {
+     "case": 42,
+     "name": "source ftol nonfinite/subnormal index",
+     "fields": [
+      "flag"
+     ],
+     "native": [
+      18,
+      4859527,
+      4463360,
+      0,
+      4860768,
+      0,
+      0,
+      537083968,
+      2,
+      2
+     ],
+     "source_boundary": "0x4a2687",
+     "source_callbacks": [
+      "0x4a2b60",
+      "0x0",
+      "0x0"
+     ],
+     "source_flags": "0x0",
+     "first_byte_offsets": []
+    }
+   ]
+  }
+ ],
+ "limits": [
+  "Exact initializers/getters/destructor and update prefix; no source callee overlays",
+  "Unlifted update calls and unknown facts stop before the required source instruction; no full update/renderer or playable-game claim",
+  "Heap/task initialization starts after unlifted acquisition, as explicit fixture",
+  "Task pool payload excluded from arena byte comparison because native graph owns it; live callback identities compared separately, pool semantics have separate instruction oracle",
+  "Shadow source pointer bytes in probe snapshot encode the authoritative owned table selection; production never casts them",
+  "All FP status differences retained; Unicorn FLD SNaN conversion is not the hardware specification",
+  "No original Windows hardware or initialized mods runtime observed"
+ ],
+ "supported_state_boundaries_callbacks_control_match": true,
+ "strict_emulator_match": false,
+ "tracked_summary": {
+  "full_sha256": "22aad5296331f590ea412a68a69959b7576e1395cbc50208031fa81964e5d367",
+  "full_bytes": 47151,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "profiles": 12,
+   "profiles[0].examples[0].native": 16,
+   "profiles[0].examples[1].native": 16,
+   "profiles[0].examples[2].native": 16,
+   "profiles[0].examples[3].native": 16,
+   "profiles[0].examples[4].native": 16,
+   "profiles[1].examples[0].native": 16,
+   "profiles[1].examples[1].native": 16,
+   "profiles[1].examples[2].native": 16,
+   "profiles[1].examples[3].native": 16,
+   "profiles[1].examples[4].native": 16,
+   "profiles[2].examples[0].native": 16,
+   "profiles[2].examples[1].native": 16,
+   "profiles[2].examples[2].native": 16,
+   "profiles[2].examples[3].native": 16,
+   "profiles[2].examples[4].native": 16,
+   "profiles[3].examples[0].native": 16,
+   "profiles[3].examples[1].native": 16,
+   "profiles[3].examples[2].native": 16,
+   "profiles[3].examples[3].native": 16,
+   "profiles[3].examples[4].native": 16,
+   "profiles[4].examples[0].native": 16,
+   "profiles[4].examples[1].native": 16,
+   "profiles[4].examples[2].native": 16,
+   "profiles[4].examples[3].native": 16,
+   "profiles[4].examples[4].native": 16,
+   "profiles[5].examples[0].native": 16,
+   "profiles[5].examples[1].native": 16,
+   "profiles[5].examples[2].native": 16,
+   "profiles[5].examples[3].native": 16,
+   "profiles[5].examples[4].native": 16,
+   "profiles[6].examples[0].native": 16,
+   "profiles[6].examples[1].native": 16,
+   "profiles[6].examples[2].native": 16,
+   "profiles[6].examples[3].native": 16,
+   "profiles[6].examples[4].native": 16,
+   "profiles[7].examples[0].native": 16,
+   "profiles[7].examples[1].native": 16,
+   "profiles[7].examples[2].native": 16,
+   "profiles[7].examples[3].native": 16,
+   "profiles[7].examples[4].native": 16,
+   "profiles[8].examples[0].native": 16,
+   "profiles[8].examples[1].native": 16,
+   "profiles[8].examples[2].native": 16,
+   "profiles[8].examples[3].native": 16,
+   "profiles[8].examples[4].native": 16,
+   "profiles[9].examples[0].native": 16,
+   "profiles[9].examples[1].native": 16,
+   "profiles[9].examples[2].native": 16,
+   "profiles[9].examples[3].native": 16,
+   "profiles[9].examples[4].native": 16
+  }
+ }
+}

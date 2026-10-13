@@ -1,4 +1,4 @@
-#include "input/scene_input_producer.hpp"
+#include "player/scene_input_producer.hpp"
 #include <algorithm>
 // Fixture byte pattern shared with tools/verify_original_scene_input_producer.py.
 namespace {std::uint8_t pattern(std::uint32_t seed,std::uint32_t tag,std::uint32_t index){return static_cast<std::uint8_t>(seed*31U+tag*17U+index*7U);}

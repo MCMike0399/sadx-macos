@@ -1,4 +1,4 @@
-#include "ninja/ninja_vibration.hpp"
+#include "engine/ninja_vibration.hpp"
 #include <algorithm>
 #include <vector>
 // Native 785190 with the layout of tools/verify_original_vibration.py.

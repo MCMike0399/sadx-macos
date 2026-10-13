@@ -11,7 +11,7 @@ from unicorn import UC_HOOK_CODE,UC_PROT_READ,UC_PROT_WRITE
 from unicorn.x86_const import UC_X86_REG_EAX,UC_X86_REG_EIP,UC_X86_REG_ESP,UC_X86_REG_FPCW,UC_X86_REG_FPSW,UC_X86_REG_FPTAG
 from pe_image import PEImage
 from extract import SOURCE_SHA256,TABLE_ADDRESS
-from verify_original_math import Original,DATA,STACK,STOP
+from verify_original_math import native_source,Original,DATA,STACK,STOP
 
 TASK=DATA+0x100;PLAYER=DATA+0x300;MOTION=DATA+0x700;COLLISION=DATA+0xa00;MATRIX=DATA+0x4000
 UNIT=0x389d650
@@ -91,10 +91,10 @@ def main():
     probe.argtypes=[ctypes.POINTER(ctypes.c_uint8),ctypes.c_size_t,ctypes.POINTER(ctypes.c_uint8),ctypes.c_size_t,ctypes.POINTER(ctypes.c_uint32),ctypes.c_size_t,ctypes.POINTER(ctypes.c_uint32),ctypes.c_size_t,ctypes.c_uint16,ctypes.POINTER(ctypes.c_uint32),ctypes.c_size_t];probe.restype=ctypes.c_int
     tb=(ctypes.c_uint8*4100).from_buffer_copy(table);ub=(ctypes.c_uint8*64).from_buffer_copy(unit);cb=(ctypes.c_uint32*24)(*[image.unpack('<I',a)[0] for a in CONSTANTS])
     blob=b''.join(struct.pack('<63I',*w) for w in fixtures);args.output.parent.mkdir(parents=True,exist_ok=True);args.output.with_suffix('.cases.bin').write_bytes(blob)
-    root=pathlib.Path(__file__).resolve().parent.parent
+    root=pathlib.Path(__file__).resolve().parents[2]
     names=('player_acceleration_ground','player_coordinates','player_heading','player_input','player_state','ninja_math','x87_math','x87_transcendental','crt_integer')
     report=dict(profile='ground local body/real input-matrix-cross-fast-yaw/five controlled rotation no-mutation boundaries',source_sha256=image.sha256,source_function=dict(address='0x44c270',size=0xb75,sha256=sha(image.read(0x44c270,0xb75))),native_library_sha256=sha(args.library.read_bytes()),fixture_sha256=sha(blob),controlled_callees=list(map(hex,CONTROLLED)),real_callees=['0x43ec00','0x43bdc0','0x7889f0','0x7871f0','0x4383b0','0x443df0','0x438350','0x43ec90'],
-        native_sources={f'src/{name}.{ext}':sha((root/f'src/{name}.{ext}').read_bytes()) for name in names for ext in ('hpp','cpp')},
+        native_sources={f'src/{name}.{ext}':sha((native_source(root,f'src/{name}.{ext}')).read_bytes()) for name in names for ext in ('hpp','cpp')},
         native_task_owner_sha256=sha((root/'src/player/player_task.hpp').read_bytes()),
         native_probe_sha256=sha((root/'tests/probes/native_ground_acceleration_probe.cpp').read_bytes()),
         verifier_sha256=sha(pathlib.Path(__file__).read_bytes()),

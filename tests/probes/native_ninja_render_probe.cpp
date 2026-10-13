@@ -1,4 +1,4 @@
-#include "ninja/ninja_render.hpp"
+#include "engine/ninja_render.hpp"
 #include <cstring>
 extern "C" int sadx_native_ninja_render(const std::uint8_t* bytes,std::size_t size,const std::uint32_t* w,std::size_t words,std::uint32_t* out,std::size_t count){
     if(!bytes||(size!=56&&size!=88)||!w||words!=8||!out||count!=20)return 1;

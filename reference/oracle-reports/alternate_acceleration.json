@@ -1,0 +1,881 @@
+{
+ "profile": "actual attribute4000/actual-yaw-matrix-callees/no-overlays",
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_function": {
+  "address": "0x447010",
+  "end_exclusive": "0x44750c",
+  "sha256": "7788b57a50b387cb63fe8d35eaac9a3fd6a4a38808bd58e40ad746e2bf2c6dac"
+ },
+ "native_library_sha256": "50160e0455a891a05ab01c3f3d2c0f42ac0c0b3c1ddab8bf500a8670b914e6aa",
+ "fixture_sha256": "691b1f017689fbdfdbfea7393e4418bd7c098c91e2b001e6d149822c26dcba5f",
+ "fixture_record": "80 little-endian uint32 words",
+ "fixture_count": 2496,
+ "native_sources": {
+  "src/player_acceleration_alternate.cpp": "fd409c2fa4733a131e2ac24b31923729fd57713125443b84699b0cfe3d815b0d",
+  "src/player_acceleration_alternate.hpp": "bc15d77e8fddd57f88c03c21fe259a7f52063dc2ad7452c1db88b9c53f0ad36a",
+  "src/player_acceleration_alternate_math.cpp": "6be8ab051a2fda7eddc50e6f558108f7f08691ccbead0d02db5979b2b6f8f500",
+  "src/player_acceleration_alternate_math.hpp": "59bf729a6229e303570a2fef2d9aae8b0d3740de23a13c64618f42f23c684d1f",
+  "src/player_acceleration_friction.cpp": "bb104a7f294d0654fb8a15e3c93fd5b0b38db5caefa60caaa47e84cfad3af529",
+  "src/player_acceleration_friction.hpp": "9af0e4c75cff3815e231a260f24b8db6264a0b6db9f91d6c6077b0f87b8032c8",
+  "src/player_acceleration_ground.cpp": "95ac6dd7dfd1507279d58986a1e5aa9bf67dd29d5b9e39f473473004ed6568d0",
+  "src/player_acceleration_ground.hpp": "5ae622e467675d30addebb5d36395b7799b0e8b786ea51cc1fe00a161da93ad2",
+  "src/player_rotation.cpp": "87e7f62da064257f47af017e596c3c61078a1c65ca05828d8d6c73903c835cbe",
+  "src/player_rotation.hpp": "8bdf5a75ca53c7857db86c6f15778095257d3e58428de71b7f34e4b0b2cbeb32",
+  "src/player_projection.cpp": "ac94968965936abb23389abf02f367c49e4053aa113712fba41535348ce3e203",
+  "src/player_projection.hpp": "d830d79cce6d907039fcfb20978dab81c8c413009b06d164389f3384297b285c",
+  "src/player_coordinates.cpp": "b375c24b44a6efb65954c6a52d3338b86a6e250d8a4b1ab6b190168d75024663",
+  "src/player_coordinates.hpp": "5d5cfa3e2965997baf122f6ea263f2104c1e2698ba48373e06628f54ad83b1a7",
+  "src/player_heading.cpp": "c109cb4370cc006d0ddb7186cf9a8ab1396aa64fb61fed45b7a1b8b46dc6e491",
+  "src/player_heading.hpp": "42df76e4801ce3d90ec1ce2a06bff00a328f05a0e13979d2f8d0d7487e8aaf1c",
+  "src/player_input.cpp": "784b664b79fc29456911d253760fa59a763ff38f5b74aeafab65a4ec5aed962e",
+  "src/player_input.hpp": "929cf1ce32c8d72a2b180354bd1287c3979494d6fb9a9ae69c645ecf7ac76603",
+  "src/player_state.cpp": "50c12dc9f34152a746062a3933611965cc02bb6487bf063d0b42e47611ee205c",
+  "src/player_state.hpp": "29e031f4b2437d0ddccb68273b28c698a45a872cd2ea8087e3d97eea0118cedd",
+  "src/crt_acos.cpp": "ed203a63db8746fd0fb18e2089a9826f5f939ccb4b31edb4f08bd48b1ec3e889",
+  "src/crt_acos.hpp": "cee67ca51ca14ce2652bb6d1146842cb518971bec54b8ffba298f23620468ceb",
+  "src/crt_asin.cpp": "ef3960069a7d20264f9997fb0ea40b6def9424bcbaf73fe221a84ab257bedbd5",
+  "src/crt_asin.hpp": "632dc9cacad59e2d411d46f1019278beb4e65044f3f381d2ab57c31aa729c531",
+  "src/crt_integer.cpp": "18d16777cc02344275575955f7773043ea9c6b48cf0197b725e838d1c5294a92",
+  "src/crt_integer.hpp": "f88d5d9b73239055150a35d0fe6363f773c7e62f5b2c1ce62eff5eaabe8333a6",
+  "src/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8",
+  "src/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
+  "src/x87_transcendental.cpp": "00fa509396903586b83807f7aa53b7df8675d7d8efdef031f7264283e3c0529a",
+  "src/x87_transcendental.hpp": "443284c5e02df41950b33d2b58465f198af3679e8ceeac87c5513169beb99993",
+  "src/ninja_math.cpp": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
+  "src/ninja_math.hpp": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530"
+ },
+ "native_contracts": {
+  "src/player_acceleration.hpp": "3ca9bd3f7dfccec590eec2926fa0d0b0eea194e1fa1f014b0dcf250411273257",
+  "src/player_physics.hpp": "08bf9f1949cdb7fd1605429c9b9663265e61d62352b9f5d018e7244a74738530",
+  "src/player_task.hpp": "ed87e810477ddf9f81d4e4e450af20111a885cc66dae4285e1eaa490bb17b957",
+  "src/player_rotation_result.hpp": "d1acaa5c8f11148bb5d5d2a5c8f246b0e4f137ccab552022dddc25d7e3daa5a1"
+ },
+ "native_compiler": "Clang 21.0.0 (clang-2100.3.34.2); target arm64; source-specific software x87",
+ "declared_build_profile": "arm64 C++17 O2 ffp-contract=off fno-fast-math native integer SoftFloat/Bochs",
+ "native_probe_sha256": "7abc258ffdb325f057963209dcb7561efb6daadeb64eca76b4eec2daa0573a41",
+ "verifier_sha256": "74e54ab13d031ed2ce0ba0b2dea8fa25f2fed6181f44e9648daf56ab6baa94fe",
+ "source_artifacts": {
+  "quarter_table_sha256": "3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed",
+  "unit_matrix_sha256": "5998e9d1dd9bf48af6af87a1ef8c7783b818ac8329637ada08cc5fb329042376",
+  "parameter_row_sha256": "e7b11eb0865091f2baf1ea63052dcc7e8d9f0381005983137eee759152b9eb48",
+  "rotation_constants_sha256": "e57e7537f25e6b0628370057deb2f9034ddf01f9b5aa8a337cf7d77c1a597f7e",
+  "event_constants_sha256": "1410cdb100058e2ee1ff8218f70565b251559f7a214a8c4acefca137647d3369",
+  "projection_constants_sha256": "443ae9201e62abf25de902664499600a37b668497f43fa6b232b74f719db9094"
+ },
+ "control_words": [
+  {
+   "cw": "0x7f",
+   "cases": 2496,
+   "value_mismatches": 0,
+   "call_mismatches": 0,
+   "flag_mismatches": 2496,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0x47f",
+   "cases": 2496,
+   "value_mismatches": 0,
+   "call_mismatches": 0,
+   "flag_mismatches": 2496,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0x87f",
+   "cases": 2496,
+   "value_mismatches": 0,
+   "call_mismatches": 0,
+   "flag_mismatches": 2496,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0xc7f",
+   "cases": 2496,
+   "value_mismatches": 0,
+   "call_mismatches": 0,
+   "flag_mismatches": 2496,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0x27f",
+   "cases": 2496,
+   "value_mismatches": 0,
+   "call_mismatches": 0,
+   "flag_mismatches": 2496,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0x67f",
+   "cases": 2496,
+   "value_mismatches": 0,
+   "call_mismatches": 0,
+   "flag_mismatches": 2496,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0xa7f",
+   "cases": 2496,
+   "value_mismatches": 0,
+   "call_mismatches": 0,
+   "flag_mismatches": 2496,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0xe7f",
+   "cases": 2496,
+   "value_mismatches": 0,
+   "call_mismatches": 0,
+   "flag_mismatches": 2496,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0x37f",
+   "cases": 2496,
+   "value_mismatches": 0,
+   "call_mismatches": 0,
+   "flag_mismatches": 2496,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0x77f",
+   "cases": 2496,
+   "value_mismatches": 0,
+   "call_mismatches": 0,
+   "flag_mismatches": 2496,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0xb7f",
+   "cases": 2496,
+   "value_mismatches": 0,
+   "call_mismatches": 0,
+   "flag_mismatches": 2496,
+   "cw_mismatches": 0
+  },
+  {
+   "cw": "0xf7f",
+   "cases": 2496,
+   "value_mismatches": 0,
+   "call_mismatches": 0,
+   "flag_mismatches": 2496,
+   "cw_mismatches": 0
+  }
+ ],
+ "mismatches": [
+  {
+   "cw": "0x7f",
+   "case": 0,
+   "fields": [
+    "flag"
+   ],
+   "input": [
+    "0x0",
+    "0xffff10b0",
+    "0x8d9a",
+    "0xee9a",
+    "0x2a12",
+    "0x0",
+    "0x3f3ef259",
+    "0x800000",
+    "0x377d",
+    "0x42f60000"
+   ],
+   "original": [
+    "0xbfa38f5c",
+    "0xbf2896b6",
+    "0x39f4e200",
+    "0x413f96f7",
+    "0x3fee7f00",
+    "0xbf0b060a",
+    "0xc0ee4bdc",
+    "0x411e0890",
+    "0xbf3eea4d",
+    "0x377d"
+   ],
+   "native": [
+    "0xbfa38f5c",
+    "0xbf2896b6",
+    "0x39f4e200",
+    "0x413f96f7",
+    "0x3fee7f00",
+    "0xbf0b060a",
+    "0xc0ee4bdc",
+    "0x411e0890",
+    "0xbf3eea4d",
+    "0x377d"
+   ],
+   "calls": [
+    [],
+    []
+   ],
+   "flags": [
+    "0x0",
+    "0x20"
+   ],
+   "original_projection": {},
+   "native_projection": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "vector_add_replay": null
+  },
+  {
+   "cw": "0x7f",
+   "case": 1,
+   "fields": [
+    "flag"
+   ],
+   "input": [
+    "0x0",
+    "0xf351",
+    "0x546f",
+    "0x6b29",
+    "0xbaa1",
+    "0x0",
+    "0x3f4cc348",
+    "0x4",
+    "0x9a61",
+    "0x42f60000"
+   ],
+   "original": [
+    "0x0",
+    "0x3fbdb338",
+    "0xbe8e40eb",
+    "0x40a95b9f",
+    "0x3f8a1642",
+    "0xbf5d603d",
+    "0x411bb740",
+    "0x40cff4af",
+    "0xc0d827a8",
+    "0x9a61"
+   ],
+   "native": [
+    "0x0",
+    "0x3fbdb338",
+    "0xbe8e40eb",
+    "0x40a95b9f",
+    "0x3f8a1642",
+    "0xbf5d603d",
+    "0x411bb740",
+    "0x40cff4af",
+    "0xc0d827a8",
+    "0x9a61"
+   ],
+   "calls": [
+    [],
+    []
+   ],
+   "flags": [
+    "0x0",
+    "0x20"
+   ],
+   "original_projection": {},
+   "native_projection": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "vector_add_replay": null
+  },
+  {
+   "cw": "0x7f",
+   "case": 2,
+   "fields": [
+    "flag"
+   ],
+   "input": [
+    "0x0",
+    "0x8045",
+    "0xc7c3",
+    "0x5968",
+    "0x4439",
+    "0x0",
+    "0x3eb7e329",
+    "0x0",
+    "0xd555",
+    "0x42f60000"
+   ],
+   "original": [
+    "0xbe2b4c51",
+    "0xbef619b9",
+    "0x3de3f88a",
+    "0x4141ffa7",
+    "0xbe399fa5",
+    "0x3fb0b6a2",
+    "0xc0dc2f18",
+    "0x3fb59f2b",
+    "0x40a82e6e",
+    "0xd555"
+   ],
+   "native": [
+    "0xbe2b4c51",
+    "0xbef619b9",
+    "0x3de3f88a",
+    "0x4141ffa7",
+    "0xbe399fa5",
+    "0x3fb0b6a2",
+    "0xc0dc2f18",
+    "0x3fb59f2b",
+    "0x40a82e6e",
+    "0xd555"
+   ],
+   "calls": [
+    [],
+    []
+   ],
+   "flags": [
+    "0x0",
+    "0x20"
+   ],
+   "original_projection": {},
+   "native_projection": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "vector_add_replay": null
+  },
+  {
+   "cw": "0x7f",
+   "case": 3,
+   "fields": [
+    "flag"
+   ],
+   "input": [
+    "0x0",
+    "0xffffa185",
+    "0x4d48",
+    "0xc40d",
+    "0xfc1c",
+    "0x3e4ccccd",
+    "0x3f1ec53c",
+    "0x0",
+    "0x6ccc",
+    "0x42f60000"
+   ],
+   "original": [
+    "0xbfe12995",
+    "0x3f0ce507",
+    "0xbf5aea4a",
+    "0x41298e96",
+    "0x3dd7f15f",
+    "0x3f8fdd08",
+    "0x405a9f9e",
+    "0xc0aadf1f",
+    "0x40182e12",
+    "0xfc1c"
+   ],
+   "native": [
+    "0xbfe12995",
+    "0x3f0ce507",
+    "0xbf5aea4a",
+    "0x41298e96",
+    "0x3dd7f15f",
+    "0x3f8fdd08",
+    "0x405a9f9e",
+    "0xc0aadf1f",
+    "0x40182e12",
+    "0xfc1c"
+   ],
+   "calls": [
+    [
+     "0x443c50"
+    ],
+    [
+     "0x443c50"
+    ]
+   ],
+   "flags": [
+    "0x0",
+    "0x20"
+   ],
+   "original_projection": {},
+   "native_projection": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "vector_add_replay": null
+  },
+  {
+   "cw": "0x7f",
+   "case": 4,
+   "fields": [
+    "flag"
+   ],
+   "input": [
+    "0x0",
+    "0xffff7f40",
+    "0x43",
+    "0x6ac2",
+    "0xa81d",
+    "0x0",
+    "0xbf5cb91b",
+    "0x0",
+    "0xb17",
+    "0x42f60000"
+   ],
+   "original": [
+    "0xbee4fc18",
+    "0xbf1f338f",
+    "0x3f9549ec",
+    "0x4136884e",
+    "0x3fd26d87",
+    "0xbec76a62",
+    "0xc113ef90",
+    "0xbfda21d4",
+    "0x40f8db98",
+    "0xb17"
+   ],
+   "native": [
+    "0xbee4fc18",
+    "0xbf1f338f",
+    "0x3f9549ec",
+    "0x4136884e",
+    "0x3fd26d87",
+    "0xbec76a62",
+    "0xc113ef90",
+    "0xbfda21d4",
+    "0x40f8db98",
+    "0xb17"
+   ],
+   "calls": [
+    [],
+    []
+   ],
+   "flags": [
+    "0x0",
+    "0x20"
+   ],
+   "original_projection": {},
+   "native_projection": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "vector_add_replay": null
+  },
+  {
+   "cw": "0x7f",
+   "case": 5,
+   "fields": [
+    "flag"
+   ],
+   "input": [
+    "0x0",
+    "0x7c04",
+    "0x925b",
+    "0x4731",
+    "0x23c7",
+    "0x0",
+    "0x3e1d2f2e",
+    "0x800000",
+    "0x2770",
+    "0x42f60000"
+   ],
+   "original": [
+    "0xbfa952cb",
+    "0xbf0f7326",
+    "0x0",
+    "0x40ec6911",
+    "0x3fb6cea0",
+    "0xbff05cdc",
+    "0x40d2c925",
+    "0xc108f5c0",
+    "0x40887b50",
+    "0x2770"
+   ],
+   "native": [
+    "0xbfa952cb",
+    "0xbf0f7326",
+    "0x0",
+    "0x40ec6911",
+    "0x3fb6cea0",
+    "0xbff05cdc",
+    "0x40d2c925",
+    "0xc108f5c0",
+    "0x40887b50",
+    "0x2770"
+   ],
+   "calls": [
+    [],
+    []
+   ],
+   "flags": [
+    "0x0",
+    "0x20"
+   ],
+   "original_projection": {},
+   "native_projection": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "vector_add_replay": null
+  },
+  {
+   "cw": "0x7f",
+   "case": 6,
+   "fields": [
+    "flag"
+   ],
+   "input": [
+    "0x0",
+    "0xffff16cd",
+    "0x8e54",
+    "0x93c2",
+    "0xf682",
+    "0x0",
+    "0xbf21bcf7",
+    "0x0",
+    "0xbd5c",
+    "0x42f60000"
+   ],
+   "original": [
+    "0x0",
+    "0xbe20ca3a",
+    "0xbe8b4d6e",
+    "0x3f2fb31b",
+    "0x3f109652",
+    "0xbeb393e9",
+    "0xbea174e0",
+    "0xc03516fb",
+    "0xc0fc756b",
+    "0xbd5c"
+   ],
+   "native": [
+    "0x0",
+    "0xbe20ca3a",
+    "0xbe8b4d6e",
+    "0x3f2fb31b",
+    "0x3f109652",
+    "0xbeb393e9",
+    "0xbea174e0",
+    "0xc03516fb",
+    "0xc0fc756b",
+    "0xbd5c"
+   ],
+   "calls": [
+    [],
+    []
+   ],
+   "flags": [
+    "0x0",
+    "0x20"
+   ],
+   "original_projection": {},
+   "native_projection": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "vector_add_replay": null
+  },
+  {
+   "cw": "0x7f",
+   "case": 7,
+   "fields": [
+    "flag"
+   ],
+   "input": [
+    "0x0",
+    "0x1362",
+    "0xa069",
+    "0xd0b7",
+    "0xb1af",
+    "0x0",
+    "0x3f424c87",
+    "0x4",
+    "0x6382",
+    "0x42f60000"
+   ],
+   "original": [
+    "0xbffa4cda",
+    "0xbf1244ef",
+    "0xbf4f2aca",
+    "0x4056fd43",
+    "0xbf8929d2",
+    "0x3edc6e13",
+    "0xc11f3706",
+    "0x40b9bc3e",
+    "0x40e79349",
+    "0x6382"
+   ],
+   "native": [
+    "0xbffa4cda",
+    "0xbf1244ef",
+    "0xbf4f2aca",
+    "0x4056fd43",
+    "0xbf8929d2",
+    "0x3edc6e13",
+    "0xc11f3706",
+    "0x40b9bc3e",
+    "0x40e79349",
+    "0x6382"
+   ],
+   "calls": [
+    [],
+    []
+   ],
+   "flags": [
+    "0x0",
+    "0x20"
+   ],
+   "original_projection": {},
+   "native_projection": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "vector_add_replay": null
+  },
+  {
+   "cw": "0x7f",
+   "case": 8,
+   "fields": [
+    "flag"
+   ],
+   "input": [
+    "0x2000",
+    "0xe33",
+    "0x1957",
+    "0xc4b6",
+    "0x25b2",
+    "0x3f333333",
+    "0xbf735d5e",
+    "0x4",
+    "0x5e02",
+    "0x42f60000"
+   ],
+   "original": [
+    "0xbe2a877c",
+    "0xbfe7a813",
+    "0x0",
+    "0x412df914",
+    "0x3fab49c8",
+    "0x3fcd205a",
+    "0x3f55ce0c",
+    "0x3e306d3f",
+    "0x410310cb",
+    "0x25b2"
+   ],
+   "native": [
+    "0xbe2a877c",
+    "0xbfe7a813",
+    "0x0",
+    "0x412df914",
+    "0x3fab49c8",
+    "0x3fcd205a",
+    "0x3f55ce0c",
+    "0x3e306d3f",
+    "0x410310cb",
+    "0x25b2"
+   ],
+   "calls": [
+    [
+     "0x443e60"
+    ],
+    [
+     "0x443e60"
+    ]
+   ],
+   "flags": [
+    "0x0",
+    "0x20"
+   ],
+   "original_projection": {},
+   "native_projection": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "vector_add_replay": null
+  },
+  {
+   "cw": "0x7f",
+   "case": 9,
+   "fields": [
+    "flag"
+   ],
+   "input": [
+    "0x0",
+    "0xfae0",
+    "0xc11a",
+    "0x5bae",
+    "0x3684",
+    "0x0",
+    "0xbe1f0171",
+    "0x4",
+    "0x364e",
+    "0x42f60000"
+   ],
+   "original": [
+    "0x0",
+    "0xbfe07b1d",
+    "0x0",
+    "0x3f098853",
+    "0xbfb3ba53",
+    "0x3ffd67db",
+    "0xc06848f6",
+    "0xc0c3bbb3",
+    "0x4111511c",
+    "0x364e"
+   ],
+   "native": [
+    "0x0",
+    "0xbfe07b1d",
+    "0x0",
+    "0x3f098853",
+    "0xbfb3ba53",
+    "0x3ffd67db",
+    "0xc06848f6",
+    "0xc0c3bbb3",
+    "0x4111511c",
+    "0x364e"
+   ],
+   "calls": [
+    [],
+    []
+   ],
+   "flags": [
+    "0x0",
+    "0x20"
+   ],
+   "original_projection": {},
+   "native_projection": [
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0",
+    "0x0"
+   ],
+   "vector_add_replay": null
+  }
+ ],
+ "limits": [
+  "Explicit source data/states and experimental masked CW profiles, not observed startup state",
+  "Actual source yaw/input/vector/matrix callees execute when selected; no no-op or identity replacement",
+  "Attribute20000 profiles use task flags0; direction-reset owner remains a separate required boundary",
+  "Source CRT matherr-control1 is an explicit dispatcher-bypass test seed; actual initialized control is unobserved",
+  "Unicorn flags/transcendental results remain weaker than original Intel hardware",
+  "Raw/nonfinite encodings are retained without caller-value normalization",
+  "No physical controls, loaded mods or complete game/collision path"
+ ],
+ "values_calls_cw_match": true,
+ "tracked_summary": {
+  "full_sha256": "23f4d617a99eb14936a459a0f5b1aff085406bae5911daae60f54f3f5898f938",
+  "full_bytes": 86791733,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "mismatches": 29952,
+   "mismatches[0].input": 80,
+   "mismatches[0].original": 17,
+   "mismatches[0].native": 17,
+   "mismatches[0].native_projection": 13,
+   "mismatches[1].input": 80,
+   "mismatches[1].original": 17,
+   "mismatches[1].native": 17,
+   "mismatches[1].native_projection": 13,
+   "mismatches[2].input": 80,
+   "mismatches[2].original": 17,
+   "mismatches[2].native": 17,
+   "mismatches[2].native_projection": 13,
+   "mismatches[3].input": 80,
+   "mismatches[3].original": 17,
+   "mismatches[3].native": 17,
+   "mismatches[3].native_projection": 13,
+   "mismatches[4].input": 80,
+   "mismatches[4].original": 17,
+   "mismatches[4].native": 17,
+   "mismatches[4].native_projection": 13,
+   "mismatches[5].input": 80,
+   "mismatches[5].original": 17,
+   "mismatches[5].native": 17,
+   "mismatches[5].native_projection": 13,
+   "mismatches[6].input": 80,
+   "mismatches[6].original": 17,
+   "mismatches[6].native": 17,
+   "mismatches[6].native_projection": 13,
+   "mismatches[7].input": 80,
+   "mismatches[7].original": 17,
+   "mismatches[7].native": 17,
+   "mismatches[7].native_projection": 13,
+   "mismatches[8].input": 80,
+   "mismatches[8].original": 17,
+   "mismatches[8].native": 17,
+   "mismatches[8].native_projection": 13,
+   "mismatches[9].input": 80,
+   "mismatches[9].original": 17,
+   "mismatches[9].native": 17,
+   "mismatches[9].native_projection": 13
+  }
+ }
+}

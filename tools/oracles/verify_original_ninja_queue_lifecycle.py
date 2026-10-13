@@ -77,7 +77,7 @@ def main():
         if diff:bad.append(dict(case=n,input=[hex(x) for x in c],fields=diff,source=[hex(x) for x in e[:53]],native=[hex(x) for x in got[:53]]))
         if got[52]!=e[52]:flag_bad+=1
     blob=b''.join(struct.pack('<24I',*c) for c in cases);a.output.with_suffix('.cases.bin').write_bytes(blob)
-    names=['src/ninja/ninja_queue_lifecycle.hpp','src/ninja/ninja_queue_lifecycle.cpp','src/ninja/ninja_queue_consumer.cpp','src/ninja/ninja_sprite_queue.cpp','tests/probes/native_ninja_queue_lifecycle_probe.cpp','tools/oracles/verify_original_ninja_queue_lifecycle.py']
+    names=['src/engine/ninja_queue_lifecycle.hpp','src/engine/ninja_queue_lifecycle.cpp','src/engine/ninja_queue_consumer.cpp','src/engine/ninja_sprite_queue.cpp','tests/probes/native_ninja_queue_lifecycle_probe.cpp','tools/oracles/verify_original_ninja_queue_lifecycle.py']
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={k:sha((pathlib.Path(__file__).resolve().parents[2]/k).read_bytes()) for k in names},
         original_ranges_sha256={h:sha(image.read(int(h,16),n)) for h,n in(('408630',0x5f),('407ab0',0x50),('407330',0x76),('402f40',0x124),('401420',0xd),('412400',0x17),('77ff90',0x2c))},
         cases=len(cases),case_sha256=sha(blob),source_outcomes=outcomes,state_mismatch_count=len(bad),fp_flag_mismatches=flag_bad,mismatches=bad[:20],stores_trace_boundaries_match=not bad,limits=__doc__)

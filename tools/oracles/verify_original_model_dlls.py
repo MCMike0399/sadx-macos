@@ -84,7 +84,7 @@ def main():
         if native!=source:
             d=[i for i in range(len(source)) if native[i]!=source[i]]
             bad.append(dict(mask=hex(mask),fields=d[:10],source=[hex(source[i]) for i in d[:10]],native=[hex(native[i]) for i in d[:10]]))
-    names=['src/game/model_dlls.hpp','src/game/model_dlls.cpp','src/game/executable_image.cpp','tests/probes/native_model_dlls_probe.cpp','tools/oracles/verify_original_model_dlls.py']
+    names=['src/game/model_dlls.hpp','src/game/model_dlls.cpp','src/loader/executable_image.cpp','tests/probes/native_model_dlls_probe.cpp','tools/oracles/verify_original_model_dlls.py']
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={x:sha((pathlib.Path(__file__).resolve().parents[2]/x).read_bytes()) for x in names},
         original_range_sha256=sha(image.read(0x401ac0,0x40254e-0x401ac0)+image.read(0x7c4e90,0x16)),bound_globals=len(globals_),cases=cases,mismatch_count=len(bad),mismatches=bad[:10],bindings_match=not bad,limits=__doc__)
     a.output.write_text(json.dumps(report,indent=1)+'\n');print(json.dumps(dict(cases=cases,bound_globals=len(globals_),mismatches=len(bad))))

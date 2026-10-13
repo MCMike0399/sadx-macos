@@ -1,4 +1,4 @@
-#include "d3dx/d3dx_math.hpp"
+#include "math/d3dx_math.hpp"
 #include <cstring>
 #include <iostream>
 // D3DX8 774310/774150/772615: identity products, the w divide, NULL-argument switch arms and the viewport map.

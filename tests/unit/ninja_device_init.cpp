@@ -1,4 +1,4 @@
-#include "ninja/ninja_device_init.hpp"
+#include "engine/ninja_device_init.hpp"
 #include <iostream>
 #include <stdexcept>
 #include <vector>

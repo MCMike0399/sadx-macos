@@ -95,7 +95,7 @@ def main():
         cases+=1;key=f"completed{e[0]}:faulted{int(faulted)}:nested{e[60]}:device{e[100]}";outcomes[key]=outcomes.get(key,0)+1
         d=[i for i in range(200) if got[i]!=e[i]]
         if d:bad.append(dict(case=n,fields=d[:12],source=[hex(e[i]) for i in d[:12]],native=[hex(got[i]) for i in d[:12]]))
-    names=['src/ninja/ninja_device_init.hpp','src/ninja/ninja_device_init.cpp','src/game/game_frame_control.cpp','tests/probes/native_device_setup_probe.cpp','tools/oracles/verify_original_device_setup.py']
+    names=['src/engine/ninja_device_init.hpp','src/engine/ninja_device_init.cpp','src/engine/game_frame_control.cpp','tests/probes/native_device_setup_probe.cpp','tools/oracles/verify_original_device_setup.py']
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={x:sha((pathlib.Path(__file__).resolve().parents[2]/x).read_bytes()) for x in names},
         original_ranges_sha256={'0x791610-0x7917e1':sha(image.read(0x791610,0x1d1)),'0x7899a0':sha(image.read(0x7899a0,0x40))},cases=cases,source_outcomes=outcomes,mismatch_count=len(bad),mismatches=bad[:20],state_traces_match=not bad,limits=__doc__)
     a.output.write_text(json.dumps(report,indent=1)+'\n');print(json.dumps(dict(cases=cases,outcome_kinds=len(outcomes),mismatches=len(bad))))

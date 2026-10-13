@@ -1,11 +1,11 @@
 #pragma once
 #include "cpu/crt_rand.hpp"
-#include "game/game_logic.hpp"
+#include "engine/game_logic.hpp"
 #include "game/game_mode.hpp"
 #include "game/model_dlls.hpp"
 #include "cpu/x87_math.hpp"
 #include "cpu/source_bytes.hpp"
-#include "game/task.hpp"
+#include "engine/task.hpp"
 #include <array>
 #include <cstdint>
 #include <functional>

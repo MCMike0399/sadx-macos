@@ -3,7 +3,7 @@
 #error "metal_texture.hpp is the Objective-C++ Metal consumer boundary"
 #endif
 #import <Metal/Metal.h>
-#include "ninja/ninja_texture.hpp"
+#include "engine/ninja_texture.hpp"
 #include <memory>
 #include <string>
 namespace sadx {

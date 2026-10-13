@@ -1,5 +1,5 @@
 #pragma once
-#include "game/game_frame_control.hpp"
+#include "engine/game_frame_control.hpp"
 #include <cstdint>
 namespace sadx {
 // macOS counter owner presenting a 10 MHz QueryPerformanceCounter, the

@@ -129,7 +129,7 @@ def main():
         cases+=1;key=f"completed{e[0]}:nested{e[70]}";outcomes[key]=outcomes.get(key,0)+1
         if problems:bad.append(dict(case=n,problems=[hex(x) if isinstance(x,int) else x for x in problems[:12]],source=[hex(e[x]) for x in problems[:12] if isinstance(x,int)],native=[hex(got[x]) for x in problems[:12] if isinstance(x,int)],
             native_text=got_text[:6] if 'heap traces' in problems else None,source_text=source_text[:6] if 'heap traces' in problems else None))
-    names=['src/ninja/ninja_system_init.hpp','src/ninja/ninja_system_init.cpp','src/ninja/ninja_texture_pool.cpp','src/ninja/ninja_memory.cpp','src/game/guest_heap.cpp','tests/probes/native_system_init_probe.cpp','tools/oracles/verify_original_system_init.py']
+    names=['src/engine/ninja_system_init.hpp','src/engine/ninja_system_init.cpp','src/engine/ninja_texture_pool.cpp','src/engine/ninja_memory.cpp','src/loader/guest_heap.cpp','tests/probes/native_system_init_probe.cpp','tools/oracles/verify_original_system_init.py']
     ranges=((0x401830,0x4018ff),(0x77f240,0x77f25a),(0x780ea0,0x780f15),(0x780870,0x7808a8),(0x7808c0,0x7808d4),(0x780850,0x780865),(0x78e720,0x78e791),(0x7803b0,0x7803b7),(0x77f610,0x77f6d5),
             (0x780140,0x780156),(0x77ff60,0x77ff6a),(0x77f150,0x77f21f),(0x785240,0x785268),(0x77efd0,0x77f053),(0x40bb20,0x40bb80))
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={x:sha((pathlib.Path(__file__).resolve().parents[2]/x).read_bytes()) for x in names},

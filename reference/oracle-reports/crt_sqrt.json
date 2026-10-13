@@ -1,0 +1,120 @@
+{
+ "profile": "actual6452a4/classifier/common-return/native-arm64/no-overlays",
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "8afe47ca053fe82de10f3c3a7b50c1edeceee59691c74a0cec3d7cda72220f0a",
+ "source_functions": {
+  "0x6452a4": {
+   "size": 166,
+   "sha256": "9597517545c15fc37489d1b67edef5a3e8f2ac6ba98becb496aaeef890103a9e"
+  },
+  "0x648bd5": {
+   "size": 67,
+   "sha256": "49756c88592603c59a91d5ecf8589dab665fc8a2ad0f138e5d6e3c3b05c21169"
+  },
+  "0x648c2e": {
+   "size": 13,
+   "sha256": "b0971b5d2cb4945dc056293d2dac8d989fc1d1488b22edb4125e67fdf93c85bd"
+  }
+ },
+ "case_sha256": "466b16251a0baffd259ae90c1acbf280a0e1299a110570094af51fa58ccef062",
+ "matherr_control": 1,
+ "profiles": [
+  {
+   "cw": "0x7f",
+   "cases": 1019,
+   "value_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 512,
+   "examples": []
+  },
+  {
+   "cw": "0x47f",
+   "cases": 1019,
+   "value_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 512,
+   "examples": []
+  },
+  {
+   "cw": "0x87f",
+   "cases": 1019,
+   "value_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 512,
+   "examples": []
+  },
+  {
+   "cw": "0xc7f",
+   "cases": 1019,
+   "value_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 512,
+   "examples": []
+  },
+  {
+   "cw": "0x27f",
+   "cases": 1019,
+   "value_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 512,
+   "examples": []
+  },
+  {
+   "cw": "0x67f",
+   "cases": 1019,
+   "value_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 512,
+   "examples": []
+  },
+  {
+   "cw": "0xa7f",
+   "cases": 1019,
+   "value_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 512,
+   "examples": []
+  },
+  {
+   "cw": "0xe7f",
+   "cases": 1019,
+   "value_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 512,
+   "examples": []
+  },
+  {
+   "cw": "0x37f",
+   "cases": 1019,
+   "value_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 512,
+   "examples": []
+  },
+  {
+   "cw": "0x77f",
+   "cases": 1019,
+   "value_mismatches": 0,
+   "control_mismatches": 0,
+   "flag_mismatches": 512,
+   "examples": []
+  }
+ ],
+ "limits": [
+  "Explicit matherr bypass and masked control words are test seeds, not observed runtime",
+  "Binary64 arguments only; retained-ST0 wrapper has separate source semantics",
+  "Error handler/unmasked delivery and Intel hardware remain unverified",
+  "Full geometry/game/controller behavior is not exercised"
+ ],
+ "returned_values_control_match": true,
+ "full_emulator_match": false,
+ "seconds": 0.12652049999451265,
+ "tracked_summary": {
+  "full_sha256": "6d765249f96deeef58590847879b8a2eb609a21d938d3b730743244b98ab00ce",
+  "full_bytes": 3231,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "profiles": 12
+  }
+ }
+}

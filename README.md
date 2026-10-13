@@ -14,10 +14,12 @@ profile, built by exact reverse engineering and verified by automated tests.
 
 ```sh
 # your own install at game/Sonic Adventure DX/ (see docs/SOURCES.md)
-make -j10 all        # libraries, sadx-boot, sadx-metal
+make -j10 all        # libraries, sadx-boot, sadx-app, sadx-metal
 make -j10 test       # unit tests + owner checker
-make -j10 gate       # everything a gate requires (tests, probes, Metal tests, checkers)
-make reference-screen-init-test   # one Unicorn oracle (needs reference/python venv)
+make -j10 gate       # everything a gate requires (tests, probes, Metal tests, layer/owner/profile/hygiene checks)
+make oracle-screen-init          # one Unicorn oracle (needs reference/python venv); `make oracles` = all
+make oracles-verdict             # pass / partial / fail per report in build/oracles/
+make app-smoke       # opens the window for 120 frames and writes build/app-smoke.ppm
 ./build/sadx-boot "game/Sonic Adventure DX/sonic.exe" "game/Sonic Adventure DX/mods/sadx-input-mod/sadx-input-mod.dll" 5 --survey
 ```
 

@@ -1,4 +1,4 @@
-#include "ninja/ninja_debug_text.hpp"
+#include "engine/ninja_debug_text.hpp"
 #include <iostream>
 #include <stdexcept>
 // 793e70: the 78c5a0 registration after the existing callbacks, and an unknown count.

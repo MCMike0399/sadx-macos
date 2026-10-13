@@ -1276,3 +1276,67 @@ Toolkit metadata lives under `_reference/sadx/tools/ghidra-*.json`; actual porta
     - Found by the new status generator: 19 comparison reports under `post-repair-comparisons/` are mutant leftovers (`tools/mutate.py` used to leave the last mutant's report in `build/`; it now reruns the oracle after restoring the source). They are being rerun and recopied; `docs/STATUS.md` lists any still failing.
     - WinMain 402c92..402d7c analysis is done but unported: `reference/ghidra-game-loop-recovery/wm-*.json` (5850f0, 556e40, 556d60, 568d20, 4f68e0, 5adc40, 600700, 781570, 781500, 781250, 40e2e0, 7716df, 770d10) and `proj-791170.json`; 781250's listing and FixFOV's patches (inactive under the profile) are in the previous session's notes above. 7757e0's listing came from Hopper (`ev_f344ba3f…`).
     - Next: `docs/NEXT-AGENT-PROMPT.md`.
+
+## Second layout iteration: layers, one slug, discovered oracles (2026-10-13)
+
+Evidence: gate `reference/production-integration-20261012/layout2-100-gate.json` (rc 0, 104
+native programs, 4 Python tests, 0 layer violations with 3 listed exceptions, 0 duplicate
+owners, 0 UNHANDLED patches, 0 hygiene violations); every oracle rerun under the new layout
+(`make -j6 -k oracles`, logs in the session scratch) and tracked as summaries in
+`reference/oracle-reports/` (96 reports; `make oracles-verdict`: 46 pass, 41 partial, 9 fail).
+Decision record: `docs/decisions/ADR-0004-layered-source-and-one-slug.md`.
+
+What changed
+* `src/` is now a layer stack `cpu loader math engine input player game runtime guest hle
+  platform apps`; files moved, includes rewritten (151 files), no code edited. The old
+  cycles (`ninja`↔`game`, `game`↔`player`, `ninja`→`player`, `platform`↔`runtime`) are gone
+  except the three dependencies listed in `tools/gate/layer_exceptions.tsv`
+  (`ninja_sprite`/`ninja_projection_range` → `player_coordinates` matrix stack, `task.cpp` →
+  `player_task`). `tools/gate/check_layers.py` runs in `make check`.
+* `tools/` grouped: `lib/` (pe_image, extract), `gate/` (gen_make, gen_status, record_gate,
+  checkers, mutate, track_reports, profile_patches.json), `oracles/`, `analysis/`, `emit/`.
+  Executables moved to `src/apps/` (sadx_boot, sadx_app, metal_stage, diagnostics/).
+* Oracles are discovered from `tools/oracles/verify_original_<slug>.py` (target
+  `oracle-<slug>`, report `build/oracles/<slug>.json`); `tools/oracles/manifest.tsv` keeps 16
+  override rows. Nine scripts that were never wired (game_logic, game_logic_support,
+  ninja_render, ninja_sprite, ninja_sprite_queue, ninja_texture, player_animation,
+  player_animation_blend, sonic_animation_table) now run. `verify_sse_math.py` renamed to the
+  `verify_original_` scheme.
+* 20 oracle scripts still computed the repository root one level short after the move and 8
+  listed native sources by pre-area paths (`src/<file>`); both fixed (`native_source()` in the
+  harness resolves legacy names to `src/<layer>/<file>`). Nothing had detected this because
+  the gate does not run oracles.
+* `tools/oracles/verdict.py` is the single reader of report shapes (pass / partial / fail);
+  `docs/STATUS.md` now lists all three buckets and an oracle map. `tools/gate/track_reports.py`
+  writes size-bounded summaries (lists cut to 10, full sha256 kept) instead of raw copies —
+  five raw reports were 3–69 MB.
+* Makefile: layers drive the archives; `.mm` and `mac-*`/`metal-*` unit tests link the
+  platform archive by rule; `make status`, `make oracles-verdict`, `make app-smoke`.
+
+Oracle state, honestly
+* 46 pass. 41 partial: every compared value/state/byte matches, only x87 status / MXCSR /
+  exception flags differ, as each report's `limits` say (Unicorn 2.1.4 raises no SSE flags,
+  applies the x87 NaN rule to SSE operands; FLD of an SNaN is not the hardware spec).
+* 9 fail: `crt_asin_binary64`, `crt_atan2`, `crt_fabs`, `crt_floor`, `floor_angles`,
+  `player_reaction`, `x87_memory` report value-class disagreements whose `limits` attribute
+  them to Unicorn's host-double FPATAN and SNaN register loads (the native side uses Bochs
+  P5/P6); `sse_math` (5,076 value mismatches of 329k evaluations, SSE scalar opcodes vs
+  Unicorn) and `ninja_sprite` (`supported_slice_values_vertices_boundaries_control_match`
+  false) need a look. None of these verdicts changed with the layout: the pre-move baseline
+  run of the same scripts gave the same non-pass set (plus the path breakages fixed above).
+  Settling the FPATAN/SNaN cases needs an Intel capture (roadmap M4), not a port change.
+* Earlier status pages reported "60/60 passing" from a tracked subset of 60 reports that
+  excluded the 37 older oracles; that subset is gone.
+* Retired: `verify_original_ninja_sprite.py` + `native_ninja_sprite_probe.cpp`. It was never
+  wired into the build, failed on its own value criterion, and tested the original
+  77e390..77e3d0 bytes that the loader replaces with `njDrawSprite3D_DrawNow_r` (patch check:
+  1 UNHANDLED overlap, now 0); the 77e390 path under the profile is covered by
+  `ninja_sprite_display` (handoff step 9). The unit test `tests/unit/ninja_sprite.cpp` stays.
+* Not produced: `game_reset_composed` (the native probe rejects the composed fixture:
+  `RuntimeError: Native rejected`, identical before the move) — listed as "missing" in STATUS.
+  `alternate_acceleration` wrote to a pre-move path; fixed in the manifest, now partial.
+
+Limits
+* The gate still does not run the oracles (minutes each); `make oracles` is the separate step.
+* Historical names (`reference-<x>-test`, `original-<x>-comparison.json`) remain in older
+  handoff entries and gate records.

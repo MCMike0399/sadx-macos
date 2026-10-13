@@ -1,0 +1,48 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "d684e1d17560f7047683d942cec35e1ccbd64ab417ecb98076db820afdc90c17",
+ "source_files": {
+  "src/game/sound_manager.hpp": "fed5bd0a9588592f8f407652cd89343efff1bc9658d85dcd12af3d2b55798388",
+  "src/game/sound_manager.cpp": "249cba65813f18ad9cec7a0e46d0b765ee8e7d5347691e731d524c05f0b6cbf0",
+  "tests/probes/native_sound_manager_probe.cpp": "d08fc547339121aae579f8658419a614b8ad76429c11ed2b1ec23322f9324ef9",
+  "tools/oracles/verify_original_sound_manager.py": "a13e403920f75e1e52da4cf84071e1accd33a50530f4f1c339f54a0cf1701087"
+ },
+ "original_range_sha256": "49ff0ea485dbc5d90de476655956edff82ff69b380f65c1c9ed84bff600f625d",
+ "cases": 956,
+ "native_explicit_boundaries": 544,
+ "source_outcomes": {
+  "completed1:calls3": 91,
+  "completed1:calls4": 63,
+  "completed1:calls0": 244,
+  "completed1:calls5": 42,
+  "completed0:calls3": 43,
+  "completed1:calls8": 15,
+  "completed1:calls2": 112,
+  "completed0:calls2": 36,
+  "completed1:calls1": 121,
+  "completed0:calls5": 18,
+  "completed0:calls4": 23,
+  "completed0:calls1": 65,
+  "completed1:calls12": 5,
+  "completed1:calls6": 22,
+  "completed1:calls7": 23,
+  "completed1:calls9": 8,
+  "completed1:calls13": 4,
+  "completed1:calls16": 2,
+  "completed1:calls10": 8,
+  "completed1:calls14": 5,
+  "completed1:calls11": 1,
+  "completed1:calls15": 2,
+  "completed1:calls18": 3
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "records_trace_match": true,
+ "limits": "Sound-effect manager 4250d0 (with its 424b10 entry check) against original\ninstructions. Every helper the native port treats as an owner (425710,\n4246c0, 4244a0 [index in EAX], 423c20, 410260, 423cc0, 410100, 424b10) is a\nfixture: it records callee, call site and two arguments and returns a\ncase-derived EAX, or stops the source at a chosen call. Compared: completion,\nthe call trace, the frame counter 3b29ce8, the 3b292a8 table, and every record\nfield (timer, +4, flags, id, frequency, volume, pan, the 3b29c28 volume and\n3b29b90 entity tables). Active records whose 4246c0 body continues through\nunported owners end there natively; those cases are counted, not compared.\n",
+ "tracked_summary": {
+  "full_sha256": "c4653301763c92531a1a21fccdc5288a00ecfd1c97ac10cfc9e49608f843156d",
+  "full_bytes": 2205,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

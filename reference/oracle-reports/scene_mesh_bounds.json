@@ -1,0 +1,113 @@
+{
+ "profile": "synthetic linked bounds; actual450c10/43acd0; no overlays",
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_functions": {
+  "0x450c10": "41bad9664754476e14cb0790fae22d075df0bf781240c514500f0fe7145a9781",
+  "0x43acd0": "74eefc4e38ba9ab8bf624ecaea0751017d1ef8eec28031295801b41f9ab3acb9"
+ },
+ "library_sha256": "c28e9fb04b8ef8e11825191e570c5d486e3dec6caa7982933c21b8dcd3476097",
+ "compiler": "Clang 21.0.0 (clang-2100.3.34.2); ARM64 C++17 O2 software x87; actual PE32 landtable decode",
+ "native_sources": {
+  "src/player/player_scene_resources.hpp": "87a118d948493bee0819900f83637ecd58f6d2bcf5422b45fd4c7ab374a3e52b",
+  "src/player/player_scene_broadphase.hpp": "9fa80b714b61a36f01d404b128f2d56039ff912839f18051e117976abc0edf1c",
+  "src/player/player_scene_broadphase.cpp": "f1219a05e68bfe201d8b144bbabd0234f6c4a1ce4bb91245efa4e5931e93f96d",
+  "src/player/player_coordinates.hpp": "5d5cfa3e2965997baf122f6ea263f2104c1e2698ba48373e06628f54ad83b1a7",
+  "src/player/player_coordinates.cpp": "b375c24b44a6efb65954c6a52d3338b86a6e250d8a4b1ab6b190168d75024663",
+  "src/math/ninja_math.hpp": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
+  "src/math/ninja_math.cpp": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
+  "src/cpu/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
+  "src/cpu/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8",
+  "tests/probes/native_player_scene_probe.cpp": "65a03499f679229979558b676bd8834592f60c8cb2a20370043cf2f9ef5901b1"
+ },
+ "verifier_sha256": "7b2edefd589ea7c20a08592d326cc031d4e81449dd310ef8b83a185792966992",
+ "fixture_sha256": "3f523cca88a159da0e7d05b05eae23cb1114868ba73334017e33d0f3e592a547",
+ "fixture_count": 249,
+ "control_words": [
+  {
+   "cw": "0x7f",
+   "cases": 249,
+   "value_mismatches": 0,
+   "flag_mismatches": 247
+  },
+  {
+   "cw": "0x47f",
+   "cases": 249,
+   "value_mismatches": 0,
+   "flag_mismatches": 247
+  },
+  {
+   "cw": "0x87f",
+   "cases": 249,
+   "value_mismatches": 0,
+   "flag_mismatches": 247
+  },
+  {
+   "cw": "0xc7f",
+   "cases": 249,
+   "value_mismatches": 0,
+   "flag_mismatches": 247
+  },
+  {
+   "cw": "0x27f",
+   "cases": 249,
+   "value_mismatches": 0,
+   "flag_mismatches": 247
+  },
+  {
+   "cw": "0x67f",
+   "cases": 249,
+   "value_mismatches": 0,
+   "flag_mismatches": 247
+  },
+  {
+   "cw": "0xa7f",
+   "cases": 249,
+   "value_mismatches": 0,
+   "flag_mismatches": 247
+  },
+  {
+   "cw": "0xe7f",
+   "cases": 249,
+   "value_mismatches": 0,
+   "flag_mismatches": 247
+  },
+  {
+   "cw": "0x37f",
+   "cases": 249,
+   "value_mismatches": 0,
+   "flag_mismatches": 247
+  },
+  {
+   "cw": "0x77f",
+   "cases": 249,
+   "value_mismatches": 0,
+   "flag_mismatches": 247
+  },
+  {
+   "cw": "0xb7f",
+   "cases": 249,
+   "value_mismatches": 0,
+   "flag_mismatches": 247
+  },
+  {
+   "cw": "0xf7f",
+   "cases": 249,
+   "value_mismatches": 0,
+   "flag_mismatches": 247
+  }
+ ],
+ "mismatches": [],
+ "limits": [
+  "Synthetic native/source resource graphs, not loaded level geometry",
+  "Actual forward/backward walks, selected/unselected identity, range edges and fixed128cap",
+  "Native/source group partial stores, selected order, matrix frames and CW compared",
+  "No original hardware or physicalgameplay observation; Unicornflagslimited"
+ ],
+ "values_match": true,
+ "tracked_summary": {
+  "full_sha256": "d75801d22b844a3181d433a2ed3b63cad7f7e9216a6f3fea13e00e91356836a0",
+  "full_bytes": 3621,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

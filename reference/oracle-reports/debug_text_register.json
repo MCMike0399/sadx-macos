@@ -1,0 +1,30 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "2e7a276bdf6b55b383064d214a38a68e624dcb7ef48efab2731ba893e1e5ebd6",
+ "source_files": {
+  "src/engine/ninja_debug_text.hpp": "cf2a3e8cbf4cf26f9a11ffbb36623b60db02a9e6f7900af54c5aabb54113a65b",
+  "src/engine/ninja_debug_text.cpp": "5b9e4651f08f9d1ef5d5e244d2ef86df7a98104fb13c939b378cf11d8c1eb76c",
+  "src/engine/ninja_keyboard.cpp": "b114c98f3629d2c5c6feb1c4b9b0ffb0cc2dbf261c314f0efbc2da69a6c26122",
+  "tests/probes/native_debug_text_register_probe.cpp": "f8f27743c2aec65b7359364796a1c2ca9dc5ab314ba78e07ef22df0d83009dd3",
+  "tools/oracles/verify_original_debug_text_register.py": "8d56a347030b350d00acb7ec1dbcaf3bd2f2cf2a7d9878f307aade45efc46840"
+ },
+ "original_ranges_sha256": {
+  "0x793e70-0x793e80": "0804e17a54b88429ecdb8041e14817e5eac80ba5fc0529eff21367b3b7305584",
+  "0x77ffc0": "72756b16400c0c2f32d9a6d4cbf4bbfdb87393c55656412c760e169ea5fb9a04",
+  "0x78c5a0": "ae3f4619b0413d70d3004b9131c3752153074e45725be13b9a148978895e359e"
+ },
+ "cases": 500,
+ "source_outcomes": {
+  "completed": 500
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "state_traces_match": true,
+ "limits": "793e70 (781070's 78115d) against its original instructions, with the real\n77ffc0. Cases seed the callback count 3ce712c (0..31) and the 32 slots at\n3d0fa40. Compared: the count, the slots and EAX.\n",
+ "tracked_summary": {
+  "full_sha256": "ac7ac546c9cfdc8dd5e715c7fb25f3803594bf9b80441297f4de4340e73a925c",
+  "full_bytes": 1399,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

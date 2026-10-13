@@ -4,7 +4,7 @@ import unicorn
 from unicorn.x86_const import UC_X86_REG_ESP,UC_X86_REG_EAX,UC_X86_REG_ESI,UC_X86_REG_EDI,UC_X86_REG_FPCW,UC_X86_REG_FPSW,UC_X86_REG_FPTAG
 from pe_image import PEImage
 from extract import SOURCE_SHA256
-from verify_original_math import Original,DATA,STACK,STOP
+from verify_original_math import native_source,Original,DATA,STACK,STOP
 from verify_original_alternate_acceleration import ROTATION_FLOATS,ROTATION_DOUBLES
 
 PLAYER=DATA+0x100;MOTION=DATA+0x500;CONTACT=DATA+0x600;OFFSET=DATA+0x700
@@ -46,9 +46,9 @@ def main():
     lib.sadx_native_player_contact_initializer_compiler.restype=ctypes.c_char_p
     cb=(ctypes.c_uint32*13)(*[image.unpack('<I',addr)[0] for addr in CONSTANTS]);rotation=b''.join(image.read(addr,4) for addr in ROTATION_FLOATS)+b''.join(image.read(addr,8) for addr in ROTATION_DOUBLES);rb=(ctypes.c_uint8*88).from_buffer_copy(rotation)
     blob=b''.join(struct.pack('<50I',*w) for w in cases);a.output.with_suffix('.cases.bin').write_bytes(blob)
-    root=pathlib.Path(__file__).resolve().parent.parent
+    root=pathlib.Path(__file__).resolve().parents[2]
     paths=['src/'+n+ext for n in ('player_contact_initializer','player_rotation','ninja_math','x87_math') for ext in ('.hpp','.cpp')]+['src/player/player_contact.hpp','src/player/player_physics.hpp','src/player/player_acceleration.hpp','tests/probes/native_player_contact_initializer_probe.cpp']
-    report=dict(source_sha256=image.sha256,function=dict(address='0x43c7d0',end_exclusive='0x43ca3c',sha256=sha(image.read(0x43c7d0,0x26c))),library_sha256=sha(a.library.read_bytes()),native_sources={path:sha((root/path).read_bytes()) for path in paths},compiler=lib.sadx_native_player_contact_initializer_compiler().decode(),verifier_sha256=sha(pathlib.Path(__file__).read_bytes()),fixture_sha256=sha(blob),fixture_count=len(cases),control_words=[],mismatches=[],limits=['Explicit caller data and masked experimental CW profiles, not observed startup','All original instructions/callees execute without overlays','Raw/nonfinite values are preserved','Unicorn status/transcendental limitations; no original Intel hardware observation'])
+    report=dict(source_sha256=image.sha256,function=dict(address='0x43c7d0',end_exclusive='0x43ca3c',sha256=sha(image.read(0x43c7d0,0x26c))),library_sha256=sha(a.library.read_bytes()),native_sources={path:sha((native_source(root,path)).read_bytes()) for path in paths},compiler=lib.sadx_native_player_contact_initializer_compiler().decode(),verifier_sha256=sha(pathlib.Path(__file__).read_bytes()),fixture_sha256=sha(blob),fixture_count=len(cases),control_words=[],mismatches=[],limits=['Explicit caller data and masked experimental CW profiles, not observed startup','All original instructions/callees execute without overlays','Raw/nonfinite values are preserved','Unicorn status/transcendental limitations; no original Intel hardware observation'])
     for cw in (pc|rc|0x7f for pc in (0,0x200,0x300) for rc in (0,0x400,0x800,0xc00)):
         oracle=ContactOriginal(image,cw);item=dict(cw=hex(cw),cases=len(cases),value_mismatches=0,flag_mismatches=0,cw_mismatches=0)
         for index,w in enumerate(cases):

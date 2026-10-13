@@ -1,6 +1,6 @@
 #pragma once
-#include "game/game_logic.hpp"
-#include "game/task.hpp"
+#include "engine/game_logic.hpp"
+#include "engine/task.hpp"
 #include "cpu/x87_math.hpp"
 
 namespace sadx {

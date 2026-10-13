@@ -1,4 +1,4 @@
-#include "ninja/ninja_sprite.hpp"
+#include "engine/ninja_sprite.hpp"
 #include <fstream>
 #include <iostream>
 #include <stdexcept>

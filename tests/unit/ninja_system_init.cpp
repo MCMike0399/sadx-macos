@@ -1,4 +1,4 @@
-#include "ninja/ninja_system_init.hpp"
+#include "engine/ninja_system_init.hpp"
 #include <algorithm>
 #include <iostream>
 #include <stdexcept>

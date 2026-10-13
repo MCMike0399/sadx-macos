@@ -1,0 +1,47 @@
+{
+ "dll_sha256": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+ "native_library_sha256": "b43f0d47e8fc0824515dd951d609313af58cdb2ba0b75f14e3b2174079f859ee",
+ "source_files": {
+  "src/input/input_mod_pad.hpp": "66ea128051e940ef7ca50be62cd2b434bfe724105dd3812f112675b2210cc6da",
+  "src/input/input_mod_pad.cpp": "3cf611b0aff87c8cc9c14aaf891b89c5e8128b7d0d1ec0e344d7956b37c135d2",
+  "tests/probes/native_vibration_stop_probe.cpp": "ba8d0aa79a6534471fecca0920653d2a2ed52596ce1d947fcdff271b2cb40867",
+  "tools/oracles/verify_original_vibration_stop.py": "557eebec0a2a4000ac8d72939631cb1e6d7ccc2efbbae6e3bd9889385be49b35"
+ },
+ "original_range_sha256": {
+  "0x10008d80-0x10008df9": "a79c89ed47363b890e699ad731bfcc3b534125bc138ee5cb59d39b1d10e214fa"
+ },
+ "cases": 3000,
+ "source_outcomes": {
+  "completed0:calls3": 134,
+  "completed1:calls11": 392,
+  "completed1:calls8": 307,
+  "completed1:calls12": 246,
+  "completed1:calls9": 411,
+  "completed1:calls10": 419,
+  "completed0:calls1": 116,
+  "completed0:calls2": 114,
+  "completed0:calls5": 130,
+  "completed1:calls13": 134,
+  "completed1:calls7": 197,
+  "completed1:calls14": 59,
+  "completed0:calls4": 116,
+  "completed1:calls6": 117,
+  "completed1:calls5": 57,
+  "completed1:calls15": 28,
+  "completed1:calls4": 14,
+  "completed1:calls16": 4,
+  "completed1:calls18": 2,
+  "completed1:calls17": 2,
+  "completed1:calls3": 1
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "state_traces_match": true,
+ "limits": "The pinned Input mod's pdVibMxStop_r (sadx-input-mod.dll +0x8d80, the Jumps\nreplacement for 785330) against its own instructions.\n\nThe DLL runs at its preferred base. The rumble task pairs (1000ec60..) and each\nDreamPad's rumble flags (+0x3f) and word (+0x40) are case inputs; the pad's SDL\ncontroller word (+0x34) is its index. The game's 4b4160 and the\nSDL_GameControllerRumble pointer at 1000e35c are recording fixtures; one call\ncan stop the source. Compared: completion, the 16 task slots, the flags and\nwords, and the call trace.\n",
+ "tracked_summary": {
+  "full_sha256": "ffe3eda51f717c78ea7395e52444dadc71b653f595f6806593ee66f2ea8a2311",
+  "full_bytes": 2025,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

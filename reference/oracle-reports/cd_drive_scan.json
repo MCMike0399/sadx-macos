@@ -1,0 +1,50 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "dcbdfcf96df03139f2507131ba360b7adfd5352d8131483f521ea35604e29b48",
+ "source_files": {
+  "src/game/game_winmain.hpp": "c8dcf3c4862d82150a418b48fd12c12a1d74287cc702b29340241160c17c6aed",
+  "src/game/game_winmain.cpp": "f42356c3061f91b67ad09215d65a63e57e9df5fb2a24ccdda79f577c75457433",
+  "src/engine/ninja_memory.hpp": "0150b9bd57526a8c36d447ed33d48b6d9dffb4a50c9d25ec91b356ec8f2d12a7",
+  "src/engine/ninja_memory.cpp": "3cbad521c7424c91edeb3d24c1588aed5565e6b906f625612a5c7c1f6d58f600",
+  "src/loader/guest_heap.hpp": "1cb4f0451bc1e5fa8e86b43dc3c0b80a2560cbfa5db2a154faf582684b838c37",
+  "src/loader/guest_heap.cpp": "4597e674c4c5fa69c4fef0451c8a2182eb25224e3c81e26306145593cb83d7ed",
+  "tests/probes/native_cd_drive_scan_probe.cpp": "f25716483e1075efad9128ae7a0134b3aed9d8ab35bb6164a8b6f716dbebf2ce",
+  "tools/oracles/verify_original_cd_drive_scan.py": "e16e337028ca72ec10fa54378bda865dec57f532ca1c0eb313ffeb35a4f3d939"
+ },
+ "original_ranges_sha256": {
+  "0x401a20": "a5c02a9fb1018fa4692be079c800b5c5158d656cb161cb5d64d4142e63fb3e3c",
+  "0x401990": "c73f967c59b4639aa778e2742ac412f19e44edd8a151b0231bafeaff6e34e98f",
+  "0x780f60": "fbf20ea45a33fd60e4f777897e9643b41a6b17a3c9035e806cc97a82340ccfce",
+  "0x780fb0": "de9d980fe6a6200ec3585468f325ee830d81df800033890dba6bb17dc11e47db"
+ },
+ "cases": 1500,
+ "source_outcomes": {
+  "drives3:found0:heapfail0": 140,
+  "drives8:found1:heapfail0": 135,
+  "drives2:found0:heapfail0": 142,
+  "drives3:found1:heapfail0": 68,
+  "drives1:found0:heapfail0": 330,
+  "drives2:found1:heapfail0": 64,
+  "drives0:found0:heapfail0": 178,
+  "drives5:found1:heapfail0": 84,
+  "drives1:found0:heapfail1": 40,
+  "drives8:found0:heapfail0": 74,
+  "drives1:found1:heapfail0": 44,
+  "drives2:found0:heapfail1": 22,
+  "drives3:found0:heapfail1": 26,
+  "drives8:found0:heapfail1": 21,
+  "drives5:found0:heapfail1": 29,
+  "drives5:found0:heapfail0": 80,
+  "drives0:found0:heapfail1": 23
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "state_traces_match": true,
+ "limits": "WinMain's CD-drive scan 401a20, with the real 401990 disc check and the real\nnjMalloc 780f60 / njFree 780fb0, against original instructions.\n\nWin32 imports are IAT fixtures with the same rules the native host owners use:\nGetLogicalDriveStringsA returns the required size (with the final NUL) when the\nbuffer is too small and otherwise writes the NUL-separated list and returns its\nlength without the final NUL; GetDriveTypeA, FindFirstFileA/FindClose answer\nfrom the case's drives; wsprintfA formats \"%s\"; lstrcpyA copies; HeapCreate\nreturns the GuestHeap handle token and HeapAlloc follows GuestHeap's identity\nscheme (first 0x50000000, 8-byte rounded spans plus an 8-byte gap) or fails on\nrequest. Compared: completion, 389d628, the 0x104 bytes of 3a8af78, the ordered\ndrive-type and file queries, and the ordered heap calls (create, alloc size and\nresult, free address). Not covered: the reference machine's actual drives.\n",
+ "tracked_summary": {
+  "full_sha256": "b817e43481a8ef9b17bf61f7fa961e0e4a8338a6f0cbbcf8b9561fa3bbd454dd",
+  "full_bytes": 3050,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

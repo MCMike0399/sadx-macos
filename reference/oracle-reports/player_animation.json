@@ -1,0 +1,265 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "ce1dbfcdc3859ebc77cd7f4fad17a02a424dd1f70244f047a9195f834f6a8ee6",
+ "cases": 16440,
+ "stored_mismatches": 0,
+ "status_mismatches": 4140,
+ "boundary_mismatches": 0,
+ "examples": [],
+ "status_examples": [
+  {
+   "case": 102,
+   "input": [
+    2,
+    0,
+    0,
+    7,
+    1,
+    65535,
+    65535,
+    2143363909,
+    1056964608,
+    1065353216
+   ],
+   "field": 9,
+   "source": 0,
+   "native": 1,
+   "boundary": "0x0"
+  },
+  {
+   "case": 103,
+   "input": [
+    2,
+    0,
+    0,
+    7,
+    1,
+    65535,
+    65535,
+    2143363909,
+    1056964608,
+    1065353216
+   ],
+   "field": 9,
+   "source": 0,
+   "native": 1,
+   "boundary": "0x0"
+  },
+  {
+   "case": 104,
+   "input": [
+    2,
+    0,
+    0,
+    7,
+    1,
+    65535,
+    65535,
+    2143363909,
+    1056964608,
+    1065353216
+   ],
+   "field": 9,
+   "source": 0,
+   "native": 1,
+   "boundary": "0x0"
+  },
+  {
+   "case": 105,
+   "input": [
+    2,
+    0,
+    0,
+    7,
+    1,
+    65535,
+    65535,
+    2143363909,
+    1056964608,
+    1065353216
+   ],
+   "field": 9,
+   "source": 0,
+   "native": 1,
+   "boundary": "0x0"
+  },
+  {
+   "case": 106,
+   "input": [
+    2,
+    0,
+    0,
+    7,
+    1,
+    65535,
+    65535,
+    2143363909,
+    1056964608,
+    1065353216
+   ],
+   "field": 9,
+   "source": 0,
+   "native": 1,
+   "boundary": "0x0"
+  },
+  {
+   "case": 107,
+   "input": [
+    2,
+    0,
+    0,
+    7,
+    1,
+    65535,
+    65535,
+    2143363909,
+    1056964608,
+    1065353216
+   ],
+   "field": 9,
+   "source": 0,
+   "native": 1,
+   "boundary": "0x0"
+  },
+  {
+   "case": 113,
+   "input": [
+    3,
+    0,
+    0,
+    7,
+    1,
+    65535,
+    65535,
+    0,
+    1056964608,
+    1065353216
+   ],
+   "field": 9,
+   "source": 0,
+   "native": 32,
+   "boundary": "0x0"
+  },
+  {
+   "case": 119,
+   "input": [
+    3,
+    0,
+    0,
+    7,
+    1,
+    65535,
+    65535,
+    2147483648,
+    1056964608,
+    1065353216
+   ],
+   "field": 9,
+   "source": 0,
+   "native": 32,
+   "boundary": "0x0"
+  },
+  {
+   "case": 125,
+   "input": [
+    3,
+    0,
+    0,
+    7,
+    1,
+    65535,
+    65535,
+    1056964608,
+    1056964608,
+    1065353216
+   ],
+   "field": 9,
+   "source": 0,
+   "native": 32,
+   "boundary": "0x0"
+  },
+  {
+   "case": 131,
+   "input": [
+    3,
+    0,
+    0,
+    7,
+    1,
+    65535,
+    65535,
+    1065353216,
+    1056964608,
+    1065353216
+   ],
+   "field": 9,
+   "source": 0,
+   "native": 32,
+   "boundary": "0x0"
+  }
+ ],
+ "source_ranges": {
+  "0x44a800": {
+   "bytes": 1601,
+   "sha256": "fd780fe989ab1a2162b99383dee2fb6765f1a7223cbccad1c1bb2d98905a79dc"
+  },
+  "0x43f230": {
+   "bytes": 107,
+   "sha256": "586724af64c216e89bcfe485b052ad7bdbefdd4437d9647f8876992f45e55644"
+  },
+  "0x446910": {
+   "bytes": 64,
+   "sha256": "c5d47ad32054bad817ba67867440f18f37971c2c6c1d7d1d1da16f1e7223bc7c"
+  },
+  "0x446950": {
+   "bytes": 87,
+   "sha256": "1c2020014b22835480dbdb268e356de7b5ea3bc662565ce19507858402bcebea"
+  },
+  "0x43f9f0": {
+   "bytes": 154,
+   "sha256": "561f48c196b2f3ba75495bf7fb62195c070675ad05014df45fb2977095942981"
+  }
+ },
+ "constants": {
+  "addresses": [
+   "0x7dcb2c",
+   "0x7dcb10",
+   "0x7dcb7c"
+  ],
+  "sha256": "d9ca6d900b4ec0c2256d5aaeca6d9fe83a0bdc9d6f3c49d301a3402162311473"
+ },
+ "limits": [
+  "Typed four-record action/motion fixture is not the real initialized147-record Sonic table",
+  "Source numeric paths execute real43f9f0 with object_count0; nonzero key buffers/allocation lifecycle are not proved by this experiment",
+  "Original43f2a0 blend CALL stops before execution; the separate producer verifier covers its body and the native path retains synthetic resource unavailability",
+  "An emulator is the instruction oracle, not physical Windows hardware or game/mod execution"
+ ],
+ "native_sources": {
+  "src/player/player_animation.hpp": "29aecbe442f5151044a6c9678fa93b678b1d4a04a52958e95cfd16c0aa2b11bf",
+  "src/player/player_animation.cpp": "f1fea844550691d84e9be39bb2f8bd78c3b75bcc16c950c79a67df1b1a71ade0",
+  "tests/probes/native_player_animation_probe.cpp": "9dd13ebcf928a54f9fd4736b1e62ce710573caba4795032a9b2b968a5d89ccdc",
+  "tools/oracles/verify_original_player_animation.py": "b426a2bc2fc00fd7216160a725d298647d758fd7d885d25f5d174dba68cac6ea"
+ },
+ "case_sha256": "3b9c7db48a75222e99582d5f9cbccedc00f76f89ce23dab23d5fade43a61de43",
+ "seconds": 7.06172808399424,
+ "stored_state_matches": true,
+ "passed": false,
+ "tracked_summary": {
+  "full_sha256": "d055b260a5dfeccc01618802808b1cace2244f9193f34f42fec3d672eb269b19",
+  "full_bytes": 22503,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "status_examples": 30,
+   "status_examples[0].input": 37,
+   "status_examples[1].input": 37,
+   "status_examples[2].input": 37,
+   "status_examples[3].input": 37,
+   "status_examples[4].input": 37,
+   "status_examples[5].input": 37,
+   "status_examples[6].input": 37,
+   "status_examples[7].input": 37,
+   "status_examples[8].input": 37,
+   "status_examples[9].input": 37
+  }
+ }
+}
