@@ -1,11 +1,11 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "05f41f63b37ab1e911e6108c4120842b8f84016947a78e9fd122737d248da770",
+ "native_library_sha256": "53facd0a3fe9669b426d13c780883ab9ffdbe141fb57fc79348a8e4b14372941",
  "source_files": {
   "src/engine/ninja_fog.hpp": "fad92d751154601d070ab8cc5872848f9e2f807275ca51086e1200d3f7d30907",
-  "src/engine/ninja_fog.cpp": "3a53f7add8909b09447dddf40e7491a0c82c8a14f2e106a88318b9d0e7877be4",
-  "tests/probes/native_fog_probe.cpp": "ac9158ca7ca5bece56a0cd2cf545d4286ea83e0940690ac1937b2d09d863c859",
-  "tools/oracles/verify_original_fog.py": "ae0f68bc0da21790950ee0a18d41d5830da8693d40f6bf0f6981801bfdedc47e"
+  "src/engine/ninja_fog.cpp": "07c01f365ca35fdfc5b23db24a7b4929e986381775969df2a6a89d9275cff618",
+  "tests/probes/native_fog_probe.cpp": "78e1bf82c1daab25435b3062ecec4c9e60c53976d43753670d6736e64559d384",
+  "tools/oracles/verify_original_fog.py": "fc326e74c95b71c369dab6b7f45c6132dbfb071196bb81034e486d5e36e074c8"
  },
  "original_ranges_sha256": {
   "0x794ec0": "90bf1be9c97401688095e04022e81e574f3617ed8cfef61bf202e295493a4824",
@@ -22,6 +22,7 @@
   "kind0:completed1:calls1": 190,
   "kind0:completed0:calls1": 16,
   "kind0:completed1:calls8": 164,
+  "kind0:completed1:calls7": 3,
   "kind0:completed0:calls4": 5,
   "kind0:completed0:calls2": 7,
   "kind0:completed0:calls5": 6,
@@ -34,6 +35,7 @@
   "kind2:completed1:calls0": 397,
   "kind2:completed0:calls3": 24,
   "kind2:completed0:calls2": 26,
+  "kind2:completed1:calls2": 5,
   "kind3:completed1:calls0": 414,
   "kind3:completed1:calls3": 683,
   "kind3:completed0:calls3": 36,
@@ -52,14 +54,13 @@
   "kind4:completed0:calls2": 8
  },
  "native_explicit_boundaries": {
-  "kind0:0x794afc": 3,
-  "kind2:0x794afc": 5,
   "kind2:0x78753a": 19
  },
  "state_mismatch_count": 0,
- "fp_flag_mismatches": 2404,
+ "fp_flag_mismatches": 2410,
  "fp_flag_mismatch_kinds": {
   "source0x0:native0x20": 2257,
+  "source0x20:native0x21": 6,
   "source0x4:native0x24": 74,
   "source0x0:native0x21": 62,
   "source0x4:native0x25": 3,
@@ -67,10 +68,10 @@
  },
  "mismatches": [],
  "state_trace_tables_match": true,
- "limits": "Ninja fog owners against original instructions: device fog init 794ec0 (with\n795930, CRT pow 6447a0 on both its x87 and SSE2 paths, 794db0, 7949f0), fog\ncolour 7949b0, njGenerateFogTable3 787260 (CRT frexp 7b5eef, _ftol2 644340,\n794db0, 7949f0), fog-table edges 794e40 (7949f0) and the switches 411af0/411b40\nwith 4119b0, 411a20, 787220/787230 and 794950/794980.\n\nThe whole PE image (including .data and its zero tail) is mapped; the D3D8\ndevice's SetRenderState is a fixture (recorded site, state, value) and one\ncall can fail. Compared: completion, every fog global, the three 128-entry\ntables, the 411af0 cache/flag words and the render trace; x87 status flags are\nreported separately. Native explicit boundaries (FYL2X EXP2 density 794afc,\nfrexp of Inf/NaN 78728e, 787260 reference past the table 78753a) are counted,\nnot compared: the source continues past them.\n",
+ "limits": "Ninja fog owners against original instructions: device fog init 794ec0 (with\n795930, CRT pow 6447a0 on both its x87 and SSE2 paths, 794db0, 7949f0), fog\ncolour 7949b0, njGenerateFogTable3 787260 (CRT frexp 7b5eef, _ftol2 644340,\n794db0, 7949f0), fog-table edges 794e40 (7949f0) and the switches 411af0/411b40\nwith 4119b0, 411a20, 787220/787230 and 794950/794980.\n\nThe whole PE image (including .data and its zero tail) is mapped; the D3D8\ndevice's SetRenderState is a fixture (recorded site, state, value) and one\ncall can fail. Compared: completion, every fog global, the three 128-entry\ntables, the 411af0 cache/flag words and the render trace; x87 status flags are\nreported separately. FYL2X at 794afc runs the Bochs model, as in the production guest FPU shims.\nNative explicit boundaries (frexp of Inf/NaN 78728e, 787260 reference past the table 78753a) are counted,\nnot compared: the source continues past them.\n",
  "tracked_summary": {
-  "full_sha256": "f87fcf186e2580edcfa2cebef15fc8afb6351fcbba96abfab07d562d86b76075",
-  "full_bytes": 3671,
+  "full_sha256": "42a29424d4b386289d646193518e30399fb23ccb200de3216a9e757d141b71d6",
+  "full_bytes": 3768,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

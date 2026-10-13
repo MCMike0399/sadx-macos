@@ -1,0 +1,47 @@
+{
+ "entries_added": [
+  "794ec0",
+  "794e40"
+ ],
+ "process_entries": 19,
+ "corpus": {
+  "fog_init": 400,
+  "fog_table": 1200,
+  "EXP2_boundary_stops": 0,
+  "bridge_mutants_caught": 7,
+  "COM_snapshot_checks": "eight scalars and both 128-entry tables at each call"
+ },
+ "EXP2_mutants": {
+  "mean_coefficient": "caught (2 value mismatches)",
+  "log_sign": "caught (8 value mismatches)",
+  "density_state": "caught (8 value mismatches)",
+  "restored": "partial, values match"
+ },
+ "oracle": {
+  "cases": 4700,
+  "compared": 4681,
+  "explicit_past_table_boundaries": 19,
+  "value_mismatches": 0,
+  "fp_flag_mismatches": 2410,
+  "verdict": "partial"
+ },
+ "runtime": {
+  "live_boot_identical": true,
+  "900_controller_frame_digests_identical": true,
+  "app_script_exit_status": 0,
+  "screenshot_sha256": "bc1cfbaa30f34f240c7094a5059ffec35138d91e9efd1233c762d048f7d5949e"
+ },
+ "source_sha256": {
+  "src/engine/ninja_fog.cpp": "07c01f365ca35fdfc5b23db24a7b4929e986381775969df2a6a89d9275cff618",
+  "src/hle/hle_device_bridge.cpp": "10b91ea13aa5b46ef00fcc7efe85ba2aa91e5bece47cd725ce544330496e3c1f",
+  "tests/unit/hle_device_bridge.cpp": "d39e907e7eb44f8f9a3680d0e4370d0e9bd8ad788618b8d8352ed8a053a436b9",
+  "tests/unit/ninja_fog.cpp": "57fa4c19c28adffef0600bb62589cd44c90ebb956a769432e84da5b51a2a8b87",
+  "tools/oracles/verify_original_fog.py": "fc326e74c95b71c369dab6b7f45c6132dbfb071196bb81034e486d5e36e074c8"
+ },
+ "limits": [
+  "FYL2X uses Bochs as production guest shims; physical CPU parity unverified.",
+  "FLDLN2 uses current guest canonical AC constant independent of RC; physical constant-load rounding uncaptured.",
+  "Fog remains partial for FP status flags; that is not pass.",
+  "Other native owner overrides and reviewed goldens unfinished."
+ ]
+}

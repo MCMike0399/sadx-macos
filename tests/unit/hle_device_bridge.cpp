@@ -2,6 +2,7 @@
 #include "hle/hle_process.hpp"
 #include "guest/fpu_shims.hpp"
 #include <array>
+#include <algorithm>
 #include <cstring>
 #include <fstream>
 #include <iostream>
@@ -16,12 +17,14 @@ std::vector<std::uint32_t> corpus(const std::string& path,unsigned width){
 }
 struct Fixture {
     FpuShimStats shims;std::unique_ptr<HleProcess> p;std::uint32_t devices[2]={};std::uint32_t boundary=0;
-    bool mapped_blend=true,mapped_device=true;unsigned calls=0,mutation=0,fail_at=0;std::vector<std::array<std::uint32_t,32>> dispatch_observed;
+    bool mapped_blend=true,mapped_device=true;unsigned calls=0,mutation=0,fail_at=0;std::vector<std::array<std::uint32_t,32>> dispatch_observed;std::vector<std::array<std::uint32_t,264>> fog_observed;
     std::vector<std::pair<std::optional<std::uint32_t>,std::optional<std::uint32_t>>> observed;
     std::uint32_t receipts[2]={};std::uint16_t cw=0x27f;bool argument_mutant=false;
     Fixture(const ExecutableImage& image,bool native){
         std::string error;p=HleProcess::create(".","build/device-bridge-overlay",&error);require(p!=nullptr,error);require(p->map_main(image,&error),error);
-        auto& g=p->guest();require(install_fpu_shims(g,load_fpu_sites("reference/inventory/fpu-sites.json"),shims,&error),error);require(g.map(0x10000000,4096,false,&error),error);const auto create=p->hle().trap(g,"d3d8.dll","Direct3DCreate8",&error);require(create.has_value(),error);
+        auto& g=p->guest();auto sites=load_fpu_sites("reference/inventory/fpu-sites.json");
+
+        require(install_fpu_shims(g,sites,shims,&error),error);require(g.map(0x10000000,4096,false,&error),error);const auto create=p->hle().trap(g,"d3d8.dll","Direct3DCreate8",&error);require(create.has_value(),error);
         const auto d3d=g.call(*create,{0xdc});require(bool(d3d),d3d.error);
         const auto params=p->memory().allocate(52),out=p->memory().allocate(4);require(params&&out,"memory");
         const std::uint32_t pp[13]={1,1,22,1,0,1,0,1,0,0,0,0,0};g.write(*params,pp,sizeof pp);
@@ -33,6 +36,10 @@ struct Fixture {
         auto state=*p->hle().find("com:IDirect3DDevice8","SetRenderState");const auto body=state.body;
         state.body=[this,body](HleCall& c)->std::uint32_t{
             observed.push_back({c.guest.u32(0x3ab9890),c.guest.u32(0x3d12898)});
+            std::array<std::uint32_t,264> snapshot{};
+            const std::uint32_t addresses[8]={0x3d12798,0x3d128a4,0x3d128a0,0x3d12898,0x3d0fce0,0x3d12950,0x3d0fac0,0x3d12894};
+            for(unsigned k=0;k<8;++k)snapshot[k]=c.guest.u32(addresses[k]).value_or(0xdeadbeef);
+            c.guest.read(0x3d12a00,snapshot.data()+8,512);c.guest.read(0x3d12c00,snapshot.data()+136,512);fog_observed.push_back(snapshot);
             const auto result=body(c);const auto index=calls++;
             if(index==0){if(mutation==1)c.guest.set_u32(0x3d128b0,devices[1]);if(mutation==2){std::string e;require(c.guest.unmap(0x3d12000,4096,&e),e);mapped_device=false;}}
             if(fail_at&&calls==fail_at)c.guest.stop("backend unavailable");
@@ -42,9 +49,10 @@ struct Fixture {
         for(const auto at:{0x77ecb7U,0x77eccaU})
             require(g.add_instruction_hook(at,[this](X86Guest& gg,std::uint32_t pc){if(boundary==pc)gg.stop("declared port boundary");return false;},&error),error);
         if(native)for(auto entry:device_overrides(*p)){
-            const auto bridge=entry.bridge;const auto index=entry.address==0x7949b0||entry.address==0x781250||entry.address==0x791170?0U:1U;
-            require(g.add_override(entry.address,[this,bridge,index](X86Guest& guest){
-                if(argument_mutant){const auto at=guest.esp()+4+4*index;guest.set_u32(at,guest.u32(at).value_or(0)^1);}
+            const auto bridge=entry.bridge;const auto index=entry.address==0x7949b0||entry.address==0x781250||entry.address==0x791170||entry.address==0x794e40?0U:1U;
+            const auto initialize=entry.address==0x794ec0;
+            require(g.add_override(entry.address,[this,bridge,index,initialize](X86Guest& guest){
+                if(argument_mutant){if(initialize)guest.set_u32(0x3d127e4,guest.u32(0x3d127e4).value_or(0)^0x100000);else{const auto at=guest.esp()+4+4*index;guest.set_u32(at,guest.u32(at).value_or(0)^1);}}
                 return bridge(guest);},&error),error);
         }
     }
@@ -54,7 +62,7 @@ struct Fixture {
         if(!mapped_device){require(g.map(0x3d12000,4096,false,&e),e);mapped_device=true;}
         if(!blend_known){require(g.unmap(0x3ab9000,4096,&e),e);mapped_blend=false;}
         if(!device_known){require(g.unmap(0x3d12000,4096,&e),e);mapped_device=false;}
-        p->d3d8.transforms.clear();p->d3d8.render_states.clear();p->d3d8.render_calls=0;p->hle().clear_log();calls=0;observed.clear();dispatch_observed.clear();boundary=mutation=fail_at=0;argument_mutant=false;cw=0x27f;receipts[0]=receipts[1]=0;
+        p->d3d8.transforms.clear();p->d3d8.render_states.clear();p->d3d8.render_calls=0;p->hle().clear_log();calls=0;observed.clear();dispatch_observed.clear();fog_observed.clear();boundary=mutation=fail_at=0;argument_mutant=false;cw=0x27f;receipts[0]=receipts[1]=0;
     }
 };
 void compare(Fixture& a,Fixture& b,std::uint32_t entry,const std::vector<std::uint32_t>& args,bool mutant=false){
@@ -94,6 +102,29 @@ int main(int argc,char** argv){try{
         const auto* c=fog.data()+i;
         for(auto* f:{&original,&native}){f->reset();f->cw=static_cast<std::uint16_t>(c[1]);f->fail_at=c[2];f->p->guest().set_u32(0x3d128b0,f->devices[0]);f->p->guest().set_u32(0x3d12898,c[7]);f->p->guest().set_u32(0x3d128a4,c[5]);}
         compare(original,native,0x7949b0,{c[15]});++fog_cases;
+    }
+    std::size_t fog_init_cases=0,fog_table_cases=0,fog_explicit=0;
+    const std::array<std::pair<std::uint32_t,unsigned>,10> fog_outputs={{{0x3d12798,4},{0x3d128a4,4},{0x3d128a0,4},{0x3d12898,4},{0x3d0fce0,4},{0x3d12950,4},{0x3d0fac0,4},{0x3d12894,4},{0x3d12a00,512},{0x3d12c00,512}}};
+    for(std::size_t i=0;i<fog.size();i+=416)if(fog[i]==0||fog[i]==3){
+        const auto* c=fog.data()+i;const auto entry=c[0]==0?0x794ec0U:0x794e40U;
+        for(auto* f:{&original,&native}){
+            f->reset();auto& g=f->p->guest();f->fail_at=c[2];
+            g.set_u32(0x3d128b0,f->devices[0]);
+            const std::uint32_t at[11]={0x3d12798,0x3d128a4,0x3d128a0,0x3d12898,0x3d0fce0,0x3d12950,0x3d0fac0,0x3d12894,0x3d0849c,0x3d127e4,0x3d08ae0};
+            for(unsigned k=0;k<11;++k)g.set_u32(at[k],c[4+k]);
+            g.write(0x3d12a00,c+32,512);g.write(0x3d12c00,c+160,512);g.write(0x3b10f78,c+288,512);
+        }
+        const std::vector<std::uint32_t> args=c[0]==0?std::vector<std::uint32_t>{}:std::vector<std::uint32_t>{0x3b10f78};
+        const auto b=native.p->guest().call(entry,args,std::nullopt,std::nullopt,static_cast<std::uint16_t>(c[1]));
+        if(!b&&b.error.find("794afc")!=std::string::npos){original.boundary=0x794afc;++fog_explicit;}
+        const auto a=original.p->guest().call(entry,args,std::nullopt,std::nullopt,static_cast<std::uint16_t>(c[1]));
+        require(a.completed==b.completed,"fog init/table completion");
+        const auto& l=original.p->hle().log();const auto& r=native.p->hle().log();require(l.size()==r.size(),"fog init/table trace count");
+        for(unsigned k=0;k<l.size();++k)require(l[k].dll==r[k].dll&&l[k].symbol==r[k].symbol&&l[k].return_address==r[k].return_address&&l[k].arguments==r[k].arguments&&l[k].result==r[k].result,"fog init/table COM trace");
+        require(original.p->d3d8.render_states==native.p->d3d8.render_states,"fog init/table device state");
+        require(original.fog_observed==native.fog_observed,"fog scalar/table order at COM calls");
+        for(const auto& [at,size]:fog_outputs){std::vector<std::uint8_t> x(size),y(size);original.p->guest().read(at,x.data(),size);native.p->guest().read(at,y.data(),size);require(x==y,"fog stores "+std::to_string(at)+" case "+std::to_string(i/416));}
+        if(c[0]==0)++fog_init_cases;else ++fog_table_cases;
     }
     const auto view=corpus(std::string(argv[2])+"/ninja_view.cases.bin",37);
     std::size_t view_cases=0,projection_cases=0;
@@ -158,11 +189,25 @@ int main(int argc,char** argv){try{
         if(differs)++caught;
     }
     require(caught==5,"view/projection argument mutants not caught");
+    for(const auto entry:{0x794ec0U,0x794e40U}){
+        for(auto* f:{&original,&native}){
+            f->reset();auto& g=f->p->guest();g.set_u32(0x3d128b0,f->devices[0]);g.set_u32(0x3d127e4,0x100000);g.set_u32(0x3d08ae0,0);g.set_u32(0x3d128a4,1);
+            std::array<std::uint32_t,128> values{};
+            for(unsigned k=0;k<128;++k){const auto v=float(k+1);std::memcpy(&values[k],&v,4);}
+            g.write(0x3d12a00,values.data(),512);g.write(0x3d12c00,values.data(),512);values.fill(0);values[0]=0x3f800000;values[1]=0x3f000000;g.write(0x3b10f78,values.data(),512);
+        }
+        native.argument_mutant=true;const auto args=entry==0x794ec0?std::vector<std::uint32_t>{}:std::vector<std::uint32_t>{0x3b10f78};
+        const auto a=original.p->guest().call(entry,args),b=native.p->guest().call(entry,args);
+        bool differs=a.completed!=b.completed||original.p->d3d8.render_states!=native.p->d3d8.render_states;
+        for(const auto& [at,size]:fog_outputs){std::vector<std::uint8_t> x(size),y(size);original.p->guest().read(at,x.data(),size);native.p->guest().read(at,y.data(),size);differs=differs||x!=y;}
+        if(differs)++caught;
+    }
+    require(caught==7,"fog bridge mutants not caught");
     native.reset();native.p->guest().set_u32(0x3d128b0,native.devices[0]);
     const auto vtable=native.p->guest().u32(native.devices[0]);require(vtable.has_value(),"vtable");
     native.p->guest().set_u32(*vtable+0xc8,0x10000000);
     const auto rejected=native.p->guest().call(0x77ec60,{0,2});
     require(!rejected&&rejected.error.find("non-HLE")!=std::string::npos&&native.calls==0,"foreign device target not rejected");
-    std::cout<<"Device bridge: "<<blend_cases<<" blend wrapper/leaf and "<<fog_cases<<" fog-colour oracle cases equivalent; identical globals, HLE device states and COM traces/HRESULTs; unknown/null/live-changing devices and declared boundaries verified; 5 bridge argument mutants caught; foreign vtable rejected; "<<view_cases<<" view and "<<projection_cases<<" projection cases equivalent\n";
+    std::cout<<"Device bridge: "<<blend_cases<<" blend wrapper/leaf and "<<fog_cases<<" fog-colour oracle cases equivalent; identical globals, HLE device states and COM traces/HRESULTs; unknown/null/live-changing devices and declared boundaries verified; 7 bridge input mutants caught; foreign vtable rejected; "<<view_cases<<" view and "<<projection_cases<<" projection cases equivalent; "<<fog_init_cases<<" fog init and "<<fog_table_cases<<" table cases ("<<fog_explicit<<" declared EXP2 boundaries)\n";
     return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

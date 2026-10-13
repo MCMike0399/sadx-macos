@@ -1,4 +1,5 @@
 #include "engine/ninja_fog.hpp"
+#include "cpu/x87_transcendental.hpp"
 #include <algorithm>
 #include <cstring>
 // Native Ninja fog owners with the layout of tools/verify_original_fog.py.
@@ -44,4 +45,11 @@ extern "C" int sadx_native_fog(const std::uint32_t* in,std::size_t count,std::ui
     for(std::size_t i=0;i<r.render.commands.size()&&i<24;++i){const auto& c=r.render.commands[i];out[16+3*i]=c.state;out[17+3*i]=c.value;out[18+3*i]=c.source_call;}
     for(unsigned i=0;i<128;++i){out[96+i]=as_bits(d.reciprocal_at_3d12c00[i]);out[224+i]=as_bits(d.w_at_3d12a00[i]);out[352+i]=as_bits(table[i]);}
     return 1;
+}
+
+extern "C" int sadx_native_fog_fyl2x(std::uint32_t cw,std::uint64_t xsig,std::uint32_t xse,std::uint64_t ysig,std::uint32_t yse,std::uint64_t* sig,std::uint32_t* meta){
+    sadx::X87Context fp(static_cast<std::uint16_t>(cw));
+    try{const auto result=sadx::X87Transcendental::fyl2x_bochs(fp,fp.from_canonical_ext80(static_cast<std::uint16_t>(xse),xsig),fp.from_canonical_ext80(static_cast<std::uint16_t>(yse),ysig));
+        *sig=result.significand();meta[0]=result.sign_exponent();meta[1]=fp.exception_flags();return 1;}
+    catch(const sadx::X87Error&){return 0;}
 }

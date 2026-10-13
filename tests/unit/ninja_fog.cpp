@@ -52,7 +52,9 @@ int main(){try{
         auto o=f.owners();f.calls.clear();const auto r=ninja_fog_set_table_794e40(t,o,f.fp);
         require(r&&f.device.start_index_at_3d12950==0u&&f.device.end_index_at_3d0fce0==2u&&f.device.start_value_at_3d0fac0==0.2F&&f.device.end_value_at_3d12894==0.0F&&f.calls.size()==3,"table edges");
         NinjaFogTable exp2{};for(auto& v:exp2)v=0.0F;exp2[0]=0.5F;exp2[0x7e]=0.1F;exp2[0x7f]=-0.75F;f.calls.clear();
-        const auto e=ninja_fog_set_table_794e40(exp2,o,f.fp);require(e.failure==NinjaFogFailure::unmodeled_operation&&e.source_boundary==0x794afc&&f.calls.empty(),"EXP2 density stops before any render call");}
+        const auto e=ninja_fog_set_table_794e40(exp2,o,f.fp);
+        require(e&&f.calls.size()==2&&f.calls[0].state==35&&f.calls[0].value==2&&f.calls[0].source_call==0x794b20&&f.calls[1].state==38&&f.calls[1].source_call==0x794b35,"EXP2 mode and density commands");
+        require((f.calls[1].value&0x7fffffffU)>0x7f800000U,"EXP2 negative square-root density preserves NaN");}
     {Fixture f;f.display=1;auto o=f.fog(true);const auto r=ninja_fog_411af0_411b40(false,o,f.fp);require(r&&f.flag==0&&f.calls.empty()&&f.state.fog_enabled_at_3d12798==1u,"display switch returns at once");}
-    std::cout<<"Ninja fog: device init stores/trace, CTRLFLAG0, unknown caps/device, partial render failure, missing fog-device owner, 4119b0 and 411a20 updates, explicit frexp/EXP2/past-table boundaries passed.\n";return 0;
+    std::cout<<"Ninja fog: device init stores/trace, CTRLFLAG0, unknown caps/device, partial render failure, missing fog-device owner, 4119b0 and 411a20 updates, EXP2 mode/density and explicit frexp/past-table boundaries passed.\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

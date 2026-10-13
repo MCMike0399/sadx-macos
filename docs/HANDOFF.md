@@ -2136,3 +2136,48 @@ REA/Ghidra: 791170 `ev_052edf0562fc941f446ac21b3bdf6c105e26e3165f200a647b83e51bc
   state/trace equivalence under guest FPU shims; no new physical CPU/GPU parity is claimed. 403180 screen,
   fog table/init, heap/task/queue and other owners remain unbound (42 of the earlier address-named list).
   Reviewed golden frames remain unfinished.
+
+## M1 fog initialisation/table overrides and EXP2 density (2026-10-13)
+
+Evidence: `reference/production-integration-20261013/fog-bridge-121-gate.json` (rc 0,
+123 native programs, 4 Python tests), `reference/production-integration-20261013/fog-bridge-evidence.json`.
+REA/Ghidra: init `ev_34b40db3666dfb52eead2fb14d437b39f1833e714ac5c452db16be29659f15fb`,
+table `ev_569f27828f5fb76abddd4277ea06a6f08d84a7f645ecf7f9998faed6b7781075`,
+apply `ev_0b129a020ac4f93e2a431314596642a6f26cb1345635af9448fc16145fd93f62`
+(`reference/inventory-raw/bridge-fog-*`). Owned session closed successfully.
+
+* **19 process entries:** 794ec0 fog initialisation and 794e40 fog-table edges now use the verified
+  SetRenderState bridge. FogBridge loads the existing state/table owners, flushes serialized changed
+  values before COM calls and after completion/failure, and preserves NaN payloads. Tests compare
+  eight scalars and both 128-entry tables inside every COM call, in addition to final values/traces.
+  The HLE handler is actual device state, not a recording no-op.
+* **EXP2 density was a real remaining port boundary.** Bochs FYL2X already existed for the guest shims.
+  Lifted 794ade..794b35: mean=(F+N)*0.5; x=1-mean; FYL2X with FLDLN2 gives ln(x); multiply by -1,
+  FSQRT, divide by (A+B)*0.5, store float density. Issues table-mode state 35=2 at 794b20, then density
+  state 38 at 794b35 with a fresh device read. Invalid square roots retain the source NaN behaviour.
+  FLDLN2 uses the current guest CPU's canonical ext80 3ffe:b17217f7d1cf79ac; a direct instruction fixture
+  confirmed Unicorn loads it independently of RC. Physical constant-load rounding is not captured.
+* **Oracle follows the production model:** fog oracle now seeds FYL2X with the same Bochs helper and
+  stack effect as the guest shim, retaining the rest of the original instructions. The native probe
+  exports that model for the fixture. It no longer excludes 794afc. Full rerun/tracked: 4,700 cases,
+  **4,681 compared**, 19 remaining 78753a table-domain boundaries, zero value/trace/table mismatches,
+  **2,410 FP-status mismatches: partial, not pass** (previously 2,404 with eight EXP2 cases excluded).
+* **Mutants:** tools/gate/mutate.py on ninja_fog.cpp/oracle-fog catches all three valid seeded EXP2
+  bugs: mean coefficient (2 mismatches), logarithm sign (8), density state (8). Source/probe/report
+  restored by the runner. hle-device-bridge adds two input mutants (capability bit and table pointer)
+  to the previous five; all seven caught.
+* **Corpus/live:** all 400 fog-init and 1,200 fog-table inputs return through supported paths (zero
+  EXP2 boundary stops), matching globals, LUTs, COM traces/HRESULTs and snapshots. The previous
+  blend/fog-colour/view/projection cases still pass. Boot trace remains identical at 22,030 calls;
+  init and table entries each fire once before first Present. First 600 override digests match;
+  a standalone derivative of guest-controller compares all 900 scripted digests with/without 19
+  entries, identical. App --pad 450:0x10,800:0x10 through frame 900 exits 0 (local ignored capture).
+  Temporary diagnostic source removed.
+* **Gate:** first run exited 2 because ninja-fog-test still expected EXP2 to stop. Updated it to
+  assert the mode/density commands, their source sites and NaN density; only the subsequent rc-0
+  gate was recorded. Full intro/title two-boot determinism unchanged, title 63 FPS virtual cadence,
+  measured 83.0 host FPS; controller/keyboard/Metal checks pass. Other standalone oracles **not rerun**.
+  Existing unregistered metal-sprite, metal-sprite-composition, metal-texture, player-task **not run**.
+* **Open:** 403180 screen, fog generation/switch owners, heap/task/queue and other modules still
+  unbound (40 of the earlier address-named list). Reviewed goldens unfinished. Bochs/guest-model
+  agreement is not a new physical CPU/GPU capture, and FP-status differences remain explicit.

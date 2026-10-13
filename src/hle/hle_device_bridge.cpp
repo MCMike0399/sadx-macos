@@ -125,6 +125,49 @@ struct ViewBridge {
     }
 };
 
+std::optional<float> load_float(X86Guest& g,std::uint32_t at){const auto value=g.u32(at);if(!value)return std::nullopt;return floating(*value);}
+struct FogBridge {
+    HleProcess& process;RenderBridge bridge;
+    NinjaQueueConsumerState state;NinjaFogDeviceState device;NinjaFogTable table{};
+    std::map<std::uint32_t,std::uint32_t> flushed;
+    explicit FogBridge(HleProcess& p):process(p),bridge(p){
+        auto& g=p.guest();state.fog_enabled_at_3d12798=g.u32(0x3d12798);state.fog_supported_at_3d128a4=g.u32(0x3d128a4);
+        device.software_density_at_3d128a0=g.u32(0x3d128a0);device.color_at_3d12898=g.u32(0x3d12898);
+        device.end_index_at_3d0fce0=g.u32(0x3d0fce0);device.start_index_at_3d12950=g.u32(0x3d12950);
+        device.start_value_at_3d0fac0=load_float(g,0x3d0fac0);device.end_value_at_3d12894=load_float(g,0x3d12894);
+        for(unsigned k=0;k<128;++k){device.w_at_3d12a00[k]=load_float(g,0x3d12a00+4*k);device.reciprocal_at_3d12c00[k]=load_float(g,0x3d12c00+4*k);}
+        // Remember serialized values, including NaN payloads, so callback effects are not
+        // overwritten by repeated flushes of fields the native operation has not changed.
+        snapshot();bridge.before_call=[this]{flush();};
+    }
+    void each(const std::function<void(std::uint32_t,const std::optional<std::uint32_t>&)>& f){
+        f(0x3d12798,state.fog_enabled_at_3d12798);f(0x3d128a4,state.fog_supported_at_3d128a4);
+        f(0x3d128a0,device.software_density_at_3d128a0);f(0x3d12898,device.color_at_3d12898);
+        f(0x3d0fce0,device.end_index_at_3d0fce0);f(0x3d12950,device.start_index_at_3d12950);
+        const auto scalar=[&](std::uint32_t at,const std::optional<float>& value){
+            if(!value){f(at,std::nullopt);return;}std::uint32_t bits;std::memcpy(&bits,&*value,4);f(at,bits);
+        };
+        scalar(0x3d0fac0,device.start_value_at_3d0fac0);scalar(0x3d12894,device.end_value_at_3d12894);
+        for(unsigned k=0;k<128;++k){scalar(0x3d12a00+4*k,device.w_at_3d12a00[k]);scalar(0x3d12c00+4*k,device.reciprocal_at_3d12c00[k]);}
+    }
+    void snapshot(){each([this](std::uint32_t at,const std::optional<std::uint32_t>& value){if(value)flushed[at]=*value;});}
+    void flush(){each([this](std::uint32_t at,const std::optional<std::uint32_t>& value){
+        if(value&&(!flushed.count(at)||flushed[at]!=*value)){process.guest().set_u32(at,*value);flushed[at]=*value;}
+    });}
+    std::uint32_t run(X86Guest& g,std::uint32_t entry){
+        X87Context fp(static_cast<std::uint16_t>(g.reg(UC_X86_REG_FPCW)));
+        NinjaFogDeviceOwners owners{state,device,&bridge.render};NinjaFogResult result;
+        if(entry==0x794ec0)result=ninja_fog_initialize_794ec0(owners,{g.u32(0x3d127e4),g.u32(0x3d08ae0)},fp);
+        else{
+            const auto source=argument(g,0);for(unsigned k=0;k<128;++k)table[k]=load_float(g,source+4*k);
+            result=ninja_fog_set_table_794e40(table,owners,fp);
+        }
+        flush();
+        if(!result&&!g.stop_reason())g.stop("fog bridge: native boundary "+hex(result.source_boundary));
+        return 0;
+    }
+};
+
 }
 std::vector<OverrideEntry> device_overrides(HleProcess& p){
     std::vector<OverrideEntry> out;
@@ -177,6 +220,10 @@ std::vector<OverrideEntry> device_overrides(HleProcess& p){
                 }
             }});
     }
+    for(const auto entry:{0x794ec0U,0x794e40U})
+        out.push_back({entry,entry==0x794ec0?"ninja_fog_initialize":"ninja_fog_set_table",
+            {{0x3d12798,4},{0x3d128a4,4},{0x3d128a0,4},{0x3d12898,4},{0x3d0fce0,4},{0x3d12950,4},{0x3d0fac0,4},{0x3d12894,4},{0x3d12a00,512},{0x3d12c00,512}},
+            [&p,entry](X86Guest& g)->std::uint32_t{FogBridge bridge(p);return bridge.run(g,entry);}});
     return out;
 }
 std::vector<OverrideEntry> process_overrides(HleProcess& p,const ExecutableImage& image){

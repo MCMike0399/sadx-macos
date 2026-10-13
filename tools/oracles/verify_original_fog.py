@@ -8,13 +8,13 @@ The whole PE image (including .data and its zero tail) is mapped; the D3D8
 device's SetRenderState is a fixture (recorded site, state, value) and one
 call can fail. Compared: completion, every fog global, the three 128-entry
 tables, the 411af0 cache/flag words and the render trace; x87 status flags are
-reported separately. Native explicit boundaries (FYL2X EXP2 density 794afc,
-frexp of Inf/NaN 78728e, 787260 reference past the table 78753a) are counted,
+reported separately. FYL2X at 794afc runs the Bochs model, as in the production guest FPU shims.
+Native explicit boundaries (frexp of Inf/NaN 78728e, 787260 reference past the table 78753a) are counted,
 not compared: the source continues past them.
 """
 import argparse,ctypes,hashlib,json,math,pathlib,random,struct
 import unicorn
-from unicorn.x86_const import UC_X86_REG_EIP,UC_X86_REG_ESP,UC_X86_REG_FPCW,UC_X86_REG_FPSW,UC_X86_REG_FPTAG
+from unicorn.x86_const import UC_X86_REG_EIP,UC_X86_REG_ESP,UC_X86_REG_FPCW,UC_X86_REG_FPSW,UC_X86_REG_FPTAG,UC_X86_REG_FP0
 from pe_image import PEImage
 from extract import SOURCE_SHA256
 from verify_original_math import Original,STACK,STOP,DATA,CODE
@@ -22,19 +22,30 @@ sha=lambda b:hashlib.sha256(b).hexdigest()
 DEVICE=DATA+0x100;VTABLE=DATA+0x400;METHOD=CODE+0x300;TABLE=0x3b10f78
 ENTRY={0:0x794ec0,1:0x7949b0,2:0x787260,3:0x794e40}
 GLOBALS=[(0x3d12798,4),(0x3d128a4,4),(0x3d128a0,4),(0x3d12898,4),(0x3d0fce0,4),(0x3d12950,4),(0x3d0fac0,4),(0x3d12894,4),(0x3d0849c,4),(0x90a098,4),(0x90a09c,4),(0x3abdcfe,1)]
-EXPLICIT=(0x794afc,0x78728e,0x78753a)
+EXPLICIT=(0x78728e,0x78753a)
 def put(m,a,n,v):m.mem_write(a,(v&((1<<(8*n))-1)).to_bytes(n,'little'))
 def get(m,a,n):return int.from_bytes(m.mem_read(a,n),'little')
 def f32(v):return struct.unpack('<I',struct.pack('<f',v))[0]
 class Source:
-    def __init__(self,image):
+    def __init__(self,image,fyl2x):
         self.m=m=Original(image,0x7f).machine
         for s in image.sections:
             if s['name'] in('.text','.rdata'):continue
             base=image.base+s['rva'];size=(max(s['virtual_size'],s['raw_size'])+0xfff)&~0xfff
             m.mem_map(base,size);m.mem_write(base,image.slice(s['file_offset'],min(s['raw_size'],size)))
         m.mem_write(METHOD,b'\x31\xc0\xc2\x0c\x00');m.mem_write(VTABLE+0xc8,struct.pack('<I',METHOD));m.mem_write(DEVICE,struct.pack('<I',VTABLE))
+        self.fyl2x=fyl2x
+        m.hook_add(unicorn.UC_HOOK_CODE,self.seed_fyl2x,begin=0x794afc,end=0x794afc)
         self.clean=m.context_save();m.hook_add(unicorn.UC_HOOK_CODE,self.code,begin=METHOD,end=METHOD)
+    def seed_fyl2x(self,m,address,size,user):
+        sw=m.reg_read(UC_X86_REG_FPSW);top=(sw>>11)&7
+        x=m.reg_read(UC_X86_REG_FP0+top);y=m.reg_read(UC_X86_REG_FP0+((top+1)&7))
+        sig=ctypes.c_uint64();meta=(ctypes.c_uint32*2)()
+        if self.fyl2x(m.reg_read(UC_X86_REG_FPCW),x[0],x[1],y[0],y[1],ctypes.byref(sig),meta)!=1:raise RuntimeError('FYL2X shim boundary')
+        m.reg_write(UC_X86_REG_FP0+((top+1)&7),(sig.value,meta[0]))
+        m.reg_write(UC_X86_REG_FPTAG,m.reg_read(UC_X86_REG_FPTAG)|(3<<(2*top)))
+        m.reg_write(UC_X86_REG_FPSW,((sw|meta[1])&~0x3800)|(((top+1)&7)<<11))
+        m.reg_write(UC_X86_REG_EIP,address+2)
     def code(self,m,address,size,user):
         esp=m.reg_read(UC_X86_REG_ESP);self.trace.append((get(m,esp+8,4),get(m,esp+12,4),get(m,esp,4)-6))
         if self.c[2] and len(self.trace)==self.c[2]:self.stopped=True;m.emu_stop()
@@ -100,7 +111,8 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('exe',type=pathlib.Path);p.add_argument('native_library',type=pathlib.Path);p.add_argument('--output',type=pathlib.Path,required=True);a=p.parse_args();image=PEImage(a.exe)
     if image.sha256!=SOURCE_SHA256 or unicorn.__version__!='2.1.4':raise RuntimeError('Pinned source/Unicorn mismatch')
     lib=ctypes.CDLL(str(a.native_library.resolve()));fn=lib.sadx_native_fog;fn.argtypes=[ctypes.POINTER(ctypes.c_uint32),ctypes.c_size_t,ctypes.POINTER(ctypes.c_uint32),ctypes.c_size_t];fn.restype=ctypes.c_int
-    source=Source(image);bad=[];flags=0;flag_kinds={};outcomes={};explicit={};cases=fixtures()
+    fyl=lib.sadx_native_fog_fyl2x;fyl.argtypes=[ctypes.c_uint32,ctypes.c_uint64,ctypes.c_uint32,ctypes.c_uint64,ctypes.c_uint32,ctypes.POINTER(ctypes.c_uint64),ctypes.POINTER(ctypes.c_uint32)];fyl.restype=ctypes.c_int
+    source=Source(image,fyl);bad=[];flags=0;flag_kinds={};outcomes={};explicit={};cases=fixtures()
     a.output.with_suffix(".cases.bin").write_bytes(b"".join(struct.pack("<416I",*c) for c in cases))
     for n,c in enumerate(cases):
         e=source.run(c);out=(ctypes.c_uint32*480)()

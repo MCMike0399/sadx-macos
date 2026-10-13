@@ -1,4 +1,5 @@
 #include "engine/ninja_fog.hpp"
+#include "cpu/x87_transcendental.hpp"
 #include <cmath>
 #include <cstring>
 namespace sadx {
@@ -71,7 +72,23 @@ void apply_7949f0(Operation& op,NinjaFogDeviceOwners& o){
                 if(!o.render)op.stop(NinjaFogFailure::render_failed,0x794a8c);
                 if(!o.render->device_at_3d128b0){op.r.render.failure=NinjaRenderFailure::unknown_device;op.r.render.source_boundary=0x794a8c;op.stop(NinjaFogFailure::render_failed,0x794a8c);}
                 if(!*o.render->device_at_3d128b0){op.r.render.failure=NinjaRenderFailure::null_device;op.r.render.source_boundary=0x794ae2;op.stop(NinjaFogFailure::render_failed,0x794ae2);}
-                op.stop(NinjaFogFailure::unmodeled_operation,0x794afc); // FYL2X is not modeled
+                op.at(0x794ade);auto mean=fp.add_float_memory(f32(f),n);
+                op.at(0x794aec);mean=fp.multiply_float_memory(mean,0.5F);
+                op.at(0x794af2);const auto x=fp.reverse_subtract_float_memory(mean,1.0F);
+                // FLDLN2 as the current guest CPU loads it (RC-independent canonical constant).
+                // The physical CPU's constant-load rounding remains uncaptured.
+                const auto ln2=fp.from_canonical_ext80(0x3ffe,0xb17217f7d1cf79acULL);
+                op.at(0x794afc);const auto log=X87Transcendental::fyl2x_bochs(fp,x,ln2);
+                op.at(0x794afe);const auto negative=fp.multiply_double_memory(log,-1.0);
+                op.at(0x794b04);const auto root=fp.sqrt(negative);
+                op.at(0x794b06);auto distance=fp.add_float_memory(f32(b),a);
+                op.at(0x794b0e);distance=fp.multiply_float_memory(distance,0.5F);
+                op.at(0x794b14);distance=fp.reverse_divide_double_memory(distance,1.0);
+                op.at(0x794b1a);const auto product=fp.multiply(root,distance);
+                op.at(0x794b1c);const auto density=float_bits(fp.to_float(product));
+                op.render_state(o.render,fog_table_mode_state,2,{0x794a8c,0x794ae2,0x794b20});
+                op.render_state(o.render,38,density,{0x794b2a,0x794b2f,0x794b35});
+                return;
             }
             std::uint32_t start=0,end=0;thresholds(0x794b42,0x794b67,0x794b7c,start,end);linear(start,end,{0x794b99,0x794b9e,0x794ba5},0x794baf,0x794bc4);return;
         }
