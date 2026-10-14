@@ -26,6 +26,7 @@ void TaskWorkArena::store_pointer(std::uint32_t at,
         bytes_[at + i] = static_cast<std::uint8_t>(value >> (i * 8));
         known_[at + i] = known ? 1 : 0;
     }
+    if(metadata_writer_)metadata_writer_(at,known?std::optional<std::uint32_t>(value):std::nullopt);
 }
 
 void TaskWorkArena::sync(const TaskWorkBlock& block) {

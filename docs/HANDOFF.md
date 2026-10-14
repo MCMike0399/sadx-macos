@@ -2305,3 +2305,57 @@ Pinned sonic.exe SHA 6b0937ca. Small summary: `heap-evidence.json` under
   Java PID 76494 absent. Both analyses had completed successfully before close.
 * **Open:** task graph, queue and other owners (35 of the earlier address-named list), plus
   reviewed goldens remain unfinished. No physical Windows allocator capture is claimed.
+
+## M1 task-work arena overrides (2026-10-13)
+
+Evidence: `reference/production-integration-20261013/task-work-125-gate.json` (actual rc 0,
+125 native programs, 4 Python tests), `task-work-evidence.json` in that directory.
+Fresh owned REA/Ghidra: init `ev_26b01929064e1047693512c535f7f656dee57f31b45592edd4febf059d27a3f6`,
+allocation `ev_33de9ca780010e8101d4b68465f4772cf23c9e3cbbf1fb67f0bbf4395a08eb66`,
+free `ev_cbd7c97fb1db4865e81d45a96a95ba4ba4068735fd44466e16ab4ab42c1a465d`
+(`reference/inventory-raw/bridge-task-work-*`, pinned sonic.exe SHA 6b0937ca). Runner closed successfully.
+
+* **28 process entries:** 40b1a0 initialization, 40b220 allocation and 40b310 release now
+  use hle_task_bridge and one persistent native TaskWorkArena per process. MetadataWriter
+  serializes native header stores into guest storage; pointer bytes without provenance remain
+  optional. Guest payload writes stay in place, rather than copying a stale native arena over
+  gameplay data. Native allocation handles map to guest uint32 addresses only in the bridge.
+* **Init source phases:** original CRT prerequisite 64fc70 runs with redirect reserve 4, the
+  original CALL depth. Reads 3abdbf0 after that dependency; if zero, actual verified HLE
+  HeapCreate(0,0,0) at 40b1b2 and HeapAlloc(handle,8,0x1000020) at 40b1c0 run synchronously.
+  Source heap handler transport is shared with hle_heap_bridge; source return sites and frame
+  addresses preserved. Stores the acquired base then native initialization: first 16 MiB
+  fill/header bytes and first 16 sentinel bytes. Reinitialization leaves sentinel padding
+  unchanged. Sets 3abdbe8 free head and preserves the source's init EAX/EDX/ECX results.
+* **Corpus:** all 16 task_work sequences, **4,890 operations**, replayed with actual original
+  heap acquisition and repeated initialization. Defined init/allocation EAX, globals and exact
+  HLE traces match. Full 16 MiB+32 arena bytes agree after initialization and each sequence.
+  Cases also write patterns into guest payload ends, then free/coalesce/reuse; sentinel padding
+  gets a retained marker. Release is void; its leftover EAX is not compared. Two bridge input
+  mutants caught. Corrupt metadata, size-wrap and unowned/double frees stop explicitly; these
+  are declared native limits, not claimed original natural returns. Zero allocation/free skip
+  the arena dependency as in the source. Native writer has direct transport/unknown-provenance
+  unit coverage. Test registered in manifest; task_work corpus is an OVERRIDE_CORPORA dependency.
+* **Oracles:** task_work **pass**, 16 sequences/4,890 operations, and task_lifecycle **pass**,
+  17 sequences/2,302 operations, after the metadata-writer change. Three core mutants caught:
+  wrong rounded size and omitted stale next-header store fail byte/link comparisons; omitted
+  allocated free-previous reset aborts the oracle. Restored source rerun passes; both reports
+  tracked. Other oracles **not rerun**. Aggregate oracles-verdict remains exit 1 for the existing
+  partial/fail inventory.
+* **Live gate:** boot remains identical at 22,030 HLE calls; init and allocation fire once
+  before first Present. First 600 overridden frame digests and the persistent 900-frame
+  controller plain/native replay match. Full intro/title determinism and virtual title cadence
+  15.873 ms remain checked. Gate measured host **32.9 FPS** (see standalone follow-up below).
+  App --pad 450:0x10,800:0x10 through frame 900 exits 0; local ignored capture shows file select.
+  make m1 task bridge dependency/command checked with dry-run; full m1 **not separately rerun**.
+  Existing unregistered metal-sprite, metal-sprite-composition, metal-texture and player-task
+  **not run**. No game assets or captures committed.
+* **Host FPS follow-up:** dedicated guest-frames rerun after gate/app work completed exits 0,
+  **84.4 host FPS**, same 7,228 frames, 115,545,660 HLE calls and deterministic/override checks.
+  The gate's 32.9 result is still recorded as measured; the lower rate was not reproduced in
+  the follow-up. Cause of that variation is not established; no code adjustment or threshold
+  change was made. Local log hash retained in task-work-evidence.
+* **Next:** task graph/callback owners and render queue, plus the other unbound owners (32 of
+  the earlier address-named list), and reviewed goldens remain unfinished. When binding the
+  graph, import live work fields or add payload transport: the allocator's native byte vector
+  is not a mirror of guest gameplay payload. Do not read its old bytes as a live player pose.

@@ -10,7 +10,7 @@ by automated tests. Read AGENTS.md, then docs/STATUS.md, docs/ARCHITECTURE.md, d
 docs/METHOD.md and docs/decisions/ADR-0001..0004 before touching code. Read the last handoff entries
 in docs/HANDOFF.md (from "M1 4e completion" on) — they record every HLE assumption and bug found.
 
-Where things stand (gate 124): the in-process guest runs sonic.exe from its entry point with the real
+Where things stand (gate 125): the in-process guest runs sonic.exe from its entry point with the real
 mod loader and mods (MSVCP140/VCRUNTIME140 as real code, everything else HLE in src/hle) from the SEGA
 logo through the intro movie (a headless DirectShow graph, src/hle/hle_dshow: no video/audio drawn, a
 reported assumption) to the title screen (frame 7168) and on into the attract demo; two boots are
@@ -18,9 +18,9 @@ identical. Host keyboard input reaches the guest as WM_KEYDOWN/WM_KEYUP (HleProc
 Input mod's window subclass maps them): Enter skips the movie and opens "Select a Saved File".
 sadx-app --guest draws all of it with Metal and forwards the Mac keyboard (--keys scripts presses).
 The FPU shims cover all 590 confirmed FPATAN/FSINCOS/FPTAN/FSIN/FCOS/F2XM1/FYL2X/RCP/RSQRT sites.
-profile-applied is 119/119. The process override table binds 25 owners (frame loop, startup registrars, the
-D3DX math leaves + blend wrapper/leaf, fog colour, view/projection/range and fog init/table/generation/switches + heap allocation/free), equivalence-tested on 9 oracle corpora + enumerated cases with mutants, live in the
-boot and over 600 frames. `make m1` runs the roadmap's M1 tests, including both HLE bridge corpora.
+profile-applied is 119/119. The process override table binds 28 owners (frame loop, startup registrars, the
+D3DX math leaves + blend wrapper/leaf, fog colour, view/projection/range and fog init/table/generation/switches + heap allocation/free + task-work initialization/allocation/free), equivalence-tested on 10 oracle corpora + enumerated cases with mutants, live in the
+boot and over 600 frames. `make m1` runs the roadmap's M1 tests, including the device, heap and task-work HLE bridge corpora.
 
 Timing is now checked: guest-frames asserts 60 steady title frames after the full intro at
 15.873 ms (63 FPS); guest-timing scripts a movie skip, then follows title -> attract -> title.
@@ -50,11 +50,11 @@ Current milestone: M1 — what is left (one gate each: make -j10 gate — it ope
 record with tools/gate/record_gate.py only on rc=0; python3 tools/gate/gen_status.py; a docs/HANDOFF.md
 entry; commit; do not push unless asked):
 
-1. Override equivalence for the rest of the ported owners with oracles (35 of the previously listed address-named ones are
-   unbound: see the 4d handoff entry for the list). Next: task graph and render queue. Heap owners 780f60/780fb0 are now bound through hle_heap_bridge; projection range through hle_device_bridge. The bridge currently binds
+1. Override equivalence for the rest of the ported owners with oracles (32 of the previously listed address-named ones are
+   unbound: see the 4d handoff entry for the list). Next: task graph and render queue; the task-work arena is now bound. Heap owners 780f60/780fb0 are now bound through hle_heap_bridge; projection range through hle_device_bridge. The bridge currently binds
    403180/4030d0/77ec60/7949b0/781250/791170/794e40/794ec0/787260/411af0/411b40, verifies the HLE vtable target, invokes the actual synchronous COM handler,
    preserves call trace/partial-store order and rereads the live device. process_overrides combines it
-   with the 12 guest-only and 2 heap owners; sadx-app installs that table. Bind the task graph and
+   with the 12 guest-only, 2 heap and 3 task-work owners; sadx-app installs that table. Bind the task graph and
    the render queue. Give each oracle a <slug>.cases.bin (the verify scripts write it; add it to
    OVERRIDE_CORPORA) instead of enumerating cases. Blend and fog corpora are now generated dependencies;
    hle-device-bridge replays 16,418 wrapper/leaf cases +300 fog-colour cases and 3,000 view +3,000 derived projection cases plus 400 fog-init/1,200 fog-table cases, including cold dispatch
@@ -74,6 +74,14 @@ entry; commit; do not push unless asked):
    versus unavailable host calls, and source return sites. All 3,000 heap cases and live reuse/
    exhaustion checks pass; 3 core/2 bridge mutants caught. guest-controller now compares the plain
    guest with process_overrides over its 900-frame script on every gate run.
+   task_overrides binds 40b1a0/40b220/40b310 with one persistent TaskWorkArena. Initialization
+   runs original 64fc70 at CALL depth (redirect reserve 4), then real HLE HeapCreate/HeapAlloc
+   at source sites, and native fill/headers. Reinitialization preserves sentinel padding.
+   MetadataWriter serializes header updates; guest payload writes stay in place. All 16 task_work
+   sequences (4,890 operations) match full arena bytes with payload mutations; 3 core/2 bridge
+   mutants caught. External metadata corruption/unowned frees/size-wrap stop explicitly.
+   Next task graph work must map native task identities/callbacks and import live work fields:
+   the allocator bridge does not synchronize guest payload into the native arena byte vector.
 2. M2 golden-frames: offscreen render of fixed guest frames (SEGA logo, title screen, file select)
    against reviewed goldens (perceptual diff), using sadx-app --guest --keys/--screenshot.
 

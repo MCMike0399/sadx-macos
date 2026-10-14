@@ -1,6 +1,7 @@
 #include "hle/hle_device_bridge.hpp"
 #include "hle/hle_process.hpp"
 #include "hle/hle_heap_bridge.hpp"
+#include "hle/hle_task_bridge.hpp"
 #include "engine/ninja_render.hpp"
 #include "engine/ninja_fog.hpp"
 #include "engine/ninja_view.hpp"
@@ -297,6 +298,7 @@ std::vector<OverrideEntry> device_overrides(HleProcess& p){
 }
 std::vector<OverrideEntry> process_overrides(HleProcess& p,const ExecutableImage& image){
     auto out=all_overrides(image);
+    for(auto& entry:task_overrides(p))out.push_back(std::move(entry));
     for(auto& entry:heap_overrides(p))out.push_back(std::move(entry));
     for(auto& entry:device_overrides(p))out.push_back(std::move(entry));
     return out;

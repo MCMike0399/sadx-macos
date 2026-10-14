@@ -1,0 +1,67 @@
+{
+ "entries_added": [
+  "40b1a0",
+  "40b220",
+  "40b310"
+ ],
+ "process_entries": 28,
+ "ghidra_evidence_ids": [
+  "ev_26b01929064e1047693512c535f7f656dee57f31b45592edd4febf059d27a3f6",
+  "ev_33de9ca780010e8101d4b68465f4772cf23c9e3cbbf1fb67f0bbf4395a08eb66",
+  "ev_cbd7c97fb1db4865e81d45a96a95ba4ba4068735fd44466e16ab4ab42c1a465d"
+ ],
+ "corpus": {
+  "sequences": 16,
+  "operations": 4890,
+  "full_bytes_compared": 16777248,
+  "guest_payload_mutations": true,
+  "reinitialized_sentinel_padding_preserved": true,
+  "core_mutants_caught": 3,
+  "bridge_mutants_caught": 2
+ },
+ "source_contract": {
+  "CRT_prerequisite": "original 64fc70; redirect reserve 4",
+  "HeapCreate": [
+   0,
+   0,
+   0
+  ],
+  "HeapAlloc": [
+   "handle",
+   8,
+   16777248
+  ],
+  "initialization_writes": "first 16 MiB plus first 16 sentinel bytes; remaining padding retained",
+  "release_EAX": "void, not compared"
+ },
+ "oracles": {
+  "task_work": "pass: 16 sequences, 4890 operations",
+  "task_lifecycle": "pass: 17 sequences, 2302 operations"
+ },
+ "runtime": {
+  "boot_identical": true,
+  "first_600_override_digests_match": true,
+  "controller_900_frames_match": true,
+  "app_script_exit_status": 0,
+  "gate_host_FPS": 32.9,
+  "screenshot_sha256": "bc1cfbaa30f34f240c7094a5059ffec35138d91e9efd1233c762d048f7d5949e",
+  "standalone_host_FPS": 84.4,
+  "standalone_frames_exit_status": 0,
+  "standalone_frames_log_sha256": "d8dc120325313d582983f81a8dccb8d3c931a094fe7684d98cb3208665e03150"
+ },
+ "source_sha256": {
+  "src/engine/task_work.cpp": "d7885b1e4c806bc4fdc06617d99298eda2bc2da10a781983b5abe93ee12afda0",
+  "src/engine/task_work.hpp": "86b8a2429b74d8f2c5971fcdc424a670f960be0a837122602b7e9925170d39ee",
+  "src/hle/hle_task_bridge.cpp": "e7c903e26cbff19ae464fb8d7fe40005d5809d61244a3256d95cac2b05ffbfa4",
+  "src/hle/hle_task_bridge.hpp": "a6be0d683dc6ce7da8c24a04ba9ae9c6b6785c7574c5b6e76efdad251b7f6528",
+  "tests/unit/hle_task_bridge.cpp": "c4eac69914d64a6dbcb134df07f09a2aad537da5beecaf7f65299afe97f34468",
+  "src/hle/hle_heap_bridge.cpp": "291ecf163b346a139f7f16613301e7386ef09e47af4528931d2a295f566fecec"
+ },
+ "limits": [
+  "Source size-wrap/corrupt metadata and unowned free are explicit stopped boundaries, not claimed source returns.",
+  "Guest gameplay payload is not mirrored into the native allocator byte vector; graph binding must import live fields.",
+  "Original hardware heap identity/content facts remain existing HLE assumptions.",
+  "Other oracles not rerun; partial/fail inventory remains explicit.",
+  "Task graph/queue and other owners plus reviewed goldens remain unfinished."
+ ]
+}

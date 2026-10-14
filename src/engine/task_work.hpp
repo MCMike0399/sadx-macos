@@ -5,6 +5,8 @@
 #include <memory>
 #include <optional>
 #include <vector>
+#include <functional>
+#include <utility>
 
 namespace sadx {
 
@@ -83,6 +85,10 @@ public:
     std::vector<TaskWorkBlock> blocks() const;
     const std::vector<std::uint8_t>& source_bytes() const noexcept { return bytes_; }
     const std::vector<std::uint8_t>& known_bytes() const noexcept { return known_; }
+    // Transport serialized metadata stores to an external owner. Payload remains owned
+    // separately by that runtime. nullopt reports pointer bytes without provenance.
+    using MetadataWriter = std::function<void(std::uint32_t,std::optional<std::uint32_t>)>;
+    void set_metadata_writer(MetadataWriter writer) { metadata_writer_=std::move(writer); }
 
 private:
     std::optional<std::uint32_t> reference_base_;
@@ -95,6 +101,7 @@ private:
     };
     std::map<std::uint32_t, Reference> references_;
     std::optional<std::uint32_t> free_head_;
+    MetadataWriter metadata_writer_;
     TaskWorkResult validate(const TaskWorkHandle&, std::uint32_t at,
                             std::uint32_t bytes) const;
     void store_pointer(std::uint32_t at, std::optional<std::uint32_t> offset);

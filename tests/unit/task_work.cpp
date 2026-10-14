@@ -1,6 +1,7 @@
 #include "engine/task_work.hpp"
 
 #include <array>
+#include <cstring>
 #include <iostream>
 #include <stdexcept>
 
@@ -63,6 +64,13 @@ int main() {
         auto larger = unknown.allocate(64).work;
         check(larger && unknown.read(larger,32,bytes.data(),4).failure == TaskWorkFailure::unobserved_pointer_bytes);
         (void)third;
+        TaskWorkArena transported(0x20000000);auto mirrored=transported.source_bytes();
+        transported.set_metadata_writer([&](std::uint32_t at,std::optional<std::uint32_t> value){check(value);std::memcpy(mirrored.data()+at,&*value,4);});
+        const auto transported_a=transported.allocate(56).work,transported_b=transported.allocate(64).work;
+        check(transported.release(transported_a)&&transported.release(transported_b));check(mirrored==transported.source_bytes());
+        bool missing_pointer=false;TaskWorkArena without_provenance;
+        without_provenance.set_metadata_writer([&](std::uint32_t,std::optional<std::uint32_t> value){if(!value)missing_pointer=true;});
+        check(without_provenance.allocate(32));check(missing_pointer);
         std::cout << "Task work arena: source limits, first-fit/reuse, coalescing, exact fit, payload and native references passed.\n";
         return 0;
     } catch (const std::exception& e) { std::cerr << e.what() << '\n'; return 1; }
