@@ -1,10 +1,17 @@
 // Run from the sadx-macos root (paths are repo-relative: reference/, game/). One owned Ghidra import for successive source-recovery questions. Commands
 // arrive over this process's stdin; no original game or runtime is executed.
-import { Client } from '/private/tmp/sadx-rea/node_modules/@modelcontextprotocol/client/dist/index.mjs';
-import { StdioClientTransport } from '/private/tmp/sadx-rea/node_modules/@modelcontextprotocol/client/dist/stdio.mjs';
 import { readFile,writeFile,mkdir,copyFile,access } from 'node:fs/promises';
+import { existsSync } from 'node:fs';
 import { createInterface } from 'node:readline';
 import { resolve } from 'node:path';
+import { pathToFileURL } from 'node:url';
+// REA's node_modules: $SADX_REA_MODULES, else the git-ignored reference/tools/rea install
+// (docs/METHOD.md §1), else the 2026-10-11 /private/tmp/sadx-rea install old notes name.
+const modules=process.env.SADX_REA_MODULES??[resolve('reference/tools/rea/node_modules'),'/private/tmp/sadx-rea/node_modules']
+  .find(path=>existsSync(path+'/rea-agents/scripts/rea.mjs'));
+if(!modules)throw new Error('REA not installed: npm ci --prefix reference/tools/rea (docs/METHOD.md §1)');
+const { Client }=await import(pathToFileURL(modules+'/@modelcontextprotocol/client/dist/index.mjs').href);
+const { StdioClientTransport }=await import(pathToFileURL(modules+'/@modelcontextprotocol/client/dist/stdio.mjs').href);
 
 const config=process.argv[2]?JSON.parse(await readFile(process.argv[2],'utf8')):{};
 const root=resolve('reference/'+(config.directory??'ghidra-live-recovery'));
@@ -13,7 +20,7 @@ const env=JSON.parse(await readFile('reference/'+
   (config.environment_file??'tools/ghidra-shadow-environment.json'),'utf8'));
 const client=new Client({name:'sadx-owned-live-ghidra',version:'1.0.0'});
 const transport=new StdioClientTransport({command:process.execPath,args:[
-  '/private/tmp/sadx-rea/node_modules/rea-agents/scripts/rea.mjs','mcp'],env:{...process.env,...env}});
+  modules+'/rea-agents/scripts/rea.mjs','mcp'],env:{...process.env,...env}});
 const lines=createInterface({input:process.stdin,crlfDelay:Infinity});
 // Start buffering immediately: piped requests can arrive while open_binary awaits.
 const commands=lines[Symbol.asyncIterator]();

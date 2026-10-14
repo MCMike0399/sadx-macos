@@ -1,12 +1,12 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "aae2c55f5a80bced3806da1e32e650d522d9dc595f8778c85050933d3f3671c5",
+ "native_library_sha256": "52043fe7906f3773c3770e8fcde8f0e622249b28c806a053ec0efb2c2b79f77f",
  "source_files": {
-  "src/math/d3dx_math.hpp": "4c8811e8a97a22872c188c5a52be2a7de5f2a27fe8df6b190b52d11f046a90f0",
-  "src/math/d3dx_math.cpp": "9efedeb8914db2c9cba681d41e80a762ade22bb0c7bbfdcb503c82427e0398f3",
-  "src/cpu/sse_math.cpp": "f34e9cea514bcb5d6374e29e91e8b39fea80640e58fdaf816ed58f7282c673dc",
+  "src/math/d3dx_math.hpp": "3b997c26013a774f6b85e099f774187ffe9af64369316d2e3e769f6ff26ea8f0",
+  "src/math/d3dx_math.cpp": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171",
+  "src/cpu/sse_math.cpp": "b7ddd9dc425ac2e1ebd49929de1dcdf4bd7671466bf041544a6ba57157ca12b7",
   "tests/probes/native_d3dx_project_probe.cpp": "ee3c522d839147e16da30df6410bd74fcb7f20c27b036d9c59eecc8650f6eac3",
-  "tools/oracles/verify_original_d3dx_project.py": "39b107ef77145e8bd53d9551605ff69d7ca0b9b28e8cefa4b02f833e292b148b"
+  "tools/oracles/verify_original_d3dx_project.py": "0c3ccc516047ca5c86a044454734e6985bec3ec07f002fcc72b1dc5a02176c22"
  },
  "original_ranges_sha256": {
   "0x772615-0x7727a2": "92b14c0c20d229007b58ad27ce5d457047e2a00f2c10785e2f9a6ef80205f430",
@@ -35,10 +35,10 @@
  "mismatch_count": 0,
  "mismatches": [],
  "state_traces_match": true,
- "limits": "D3DX8 772615 (Vec3Project) against its original instructions, with the\nSSE-path 774310 (MatrixMultiply) and 774150 (Vec3TransformCoord).\n\nThe dispatch slots are written as 77350c leaves them on an SSE CPU without\n3DNow! (389b784 = 774310, 389b7a0 = 774150); 77350c is not executed. Each case\ncalls 772615 (stdcall) with any of the projection, view, world and viewport\npointers NULL, and the matrices at 16-byte aligned or misaligned (+8)\naddresses, which selects 774150's movaps or movlps path. RCPPS is Unicorn's\n(QEMU's float division), not a real CPU's estimate; the native probe uses the\nsame division model. Cases keep at most one NaN source: Unicorn applies QEMU's\nx87 NaN rule (larger significand) to SSE operands, where hardware SSE returns\nthe first operand's NaN. MXCSR is compared without its six exception flags,\nwhich Unicorn 2.1.4 does not raise. Compared: the three output floats.\n",
+ "limits": "D3DX8 772615 (Vec3Project) against its original instructions, with the\nSSE-path 774310 (MatrixMultiply) and 774150 (Vec3TransformCoord).\n\nThe dispatch slots are written as 77350c leaves them on an SSE CPU without\n3DNow! (389b784 = 774310, 389b7a0 = 774150); 77350c is not executed. Each case\ncalls 772615 (stdcall) with any of the projection, view, world and viewport\npointers NULL, and the matrices at 16-byte aligned or misaligned (+8)\naddresses, which selects 774150's movaps or movlps path. RCPPS is Unicorn's\n(QEMU's float division), not a real CPU's estimate; the native probe uses the\nsame division model. Cases keep at most one NaN source: Unicorn applies QEMU's\nx87 NaN rule (larger significand) to SSE operands, where hardware SSE returns\nthe first operand's NaN. MXCSR is compared without its six exception flags,\nwhich Unicorn 2.1.4 does not raise. Compared: the three output floats.\nThe case words (the probe's 61-word input) go to d3dx_project.cases.bin for the\nguest override-equivalence test.\n",
  "tracked_summary": {
-  "full_sha256": "ac2f0f3cf316b6fd9cbd780ad76fc9a20f941a1f8f94e1693fe5e2e43ba6515b",
-  "full_bytes": 2466,
+  "full_sha256": "6a72a50bdaee8152ad82a0ac96e230e2cf992b07472d5e82a98f30a2275332d2",
+  "full_bytes": 2581,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

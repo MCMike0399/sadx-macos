@@ -11,6 +11,8 @@ same division model. Cases keep at most one NaN source: Unicorn applies QEMU's
 x87 NaN rule (larger significand) to SSE operands, where hardware SSE returns
 the first operand's NaN. MXCSR is compared without its six exception flags,
 which Unicorn 2.1.4 does not raise. Compared: the three output floats.
+The case words (the probe's 61-word input) go to d3dx_project.cases.bin for the
+guest override-equivalence test.
 """
 import argparse,ctypes,hashlib,json,pathlib,random,struct
 import unicorn
@@ -33,7 +35,7 @@ def main():
     lib=ctypes.CDLL(str(a.native_library.resolve()));fn=lib.sadx_native_d3dx_project;fn.argtypes=[ctypes.POINTER(ctypes.c_uint32),ctypes.POINTER(ctypes.c_uint32)];fn.restype=ctypes.c_int
     fb=lambda x:struct.unpack('<I',struct.pack('<f',x))[0]
     isnan=lambda w:(w&0x7fffffff)>0x7f800000
-    rng=random.Random(0x772615);bad=[];outcomes={};cases=0
+    rng=random.Random(0x772615);bad=[];outcomes={};cases=0;corpus=[]
     for n in range(4000):
         c=[0]*61;c[0]=rng.choice([0x7f,0x27f,0x37f,0xc7f,0x47f,0x87f]);c[1]=rng.choice([0x1f80,0x1f80,0x3f80,0x5f80,0x7f80])
         c[2]=rng.randrange(16);c[3]=rng.randrange(8)
@@ -44,6 +46,7 @@ def main():
         for i in list(range(4,13))+list(range(13,61)):
             if isnan(c[i]):c[i]&=~0x40000000
         if rng.random()<0.05:c[rng.choice(list(range(4,7))+list(range(11,61)))]=rng.choice([0x7fc00000,0xffc00001,0x7f800001,0xff91bb64])
+        corpus.append(struct.pack('<61I',*c))
         out=(ctypes.c_uint32*8)()
         if fn((ctypes.c_uint32*len(c))(*c),out)!=1:raise RuntimeError('Native rejected')
         got=list(out)
@@ -64,6 +67,7 @@ def main():
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={x:sha((pathlib.Path(__file__).resolve().parents[2]/x).read_bytes()) for x in names},
         original_ranges_sha256={'0x772615-0x7727a2':sha(image.read(0x772615,0x18d)),'0x774150-0x774243':sha(image.read(0x774150,0xf3)),'0x774310-0x774456':sha(image.read(0x774310,0x146))},
         cases=cases,source_outcomes=outcomes,mismatch_count=len(bad),mismatches=bad[:20],state_traces_match=not bad,limits=__doc__)
+    a.output.with_suffix('.cases.bin').write_bytes(b''.join(corpus)) # corpus: the probe's 61 input words per case
     a.output.write_text(json.dumps(report,indent=1)+'\n');print(json.dumps(dict(cases=cases,outcome_kinds=len(outcomes),mismatches=len(bad))))
     for b in bad[:3]:print(json.dumps(b))
     return int(bool(bad))

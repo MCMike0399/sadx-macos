@@ -1,0 +1,42 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "8a3f70136b28726db2c8e6a7ee8e7425dd1ab2789de7d78cae969a78cdb69072",
+ "source_files": {
+  "src/engine/ninja_queue_consumer.hpp": "81d5037026e1eb4f4685bfe025ff2e0d15973aa808a6e53d6c849a49704dcdf6",
+  "src/engine/ninja_queue_consumer.cpp": "cb8faee4629f9d07c20f062458df246b66f5e7d6d55d4fe8d07e5eb035845de5",
+  "src/cpu/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8",
+  "tests/probes/native_ninja_queue_color_probe.cpp": "12c8bd47f41f3b60db202805fb9c79757aeb47cfac1c188011a124f442db96d8",
+  "tools/oracles/verify_original_ninja_queue_color.py": "14a7b41b28a3889615f0f9859022156ae19e601f02d44fc511efcb37053fb1a1"
+ },
+ "original_ranges_sha256": {
+  "0x402f40-0x40306f": "b307a44c17c90c7a69adc43b84eeeb1333bb3b7b36c6a276180fdccc16db86a1",
+  "0x77ff90-0x77ffbc": "3b7846d913dce085a945ecaf9ede3c16bf0cd4cd6314b00a14a3c07d1c326732"
+ },
+ "cases": 4000,
+ "source_outcomes": {
+  "kept:cw0x7f": 495,
+  "<-1:cw0x7f": 240,
+  ">1:cw0x7f": 265,
+  "kept:cw0x27f": 491,
+  ">1:cw0x27f": 258,
+  "<-1:cw0x27f": 251,
+  "kept:cw0x37f": 515,
+  ">1:cw0x37f": 259,
+  "<-1:cw0x37f": 226,
+  ">1:cw0xc7f": 248,
+  "<-1:cw0xc7f": 277,
+  "kept:cw0xc7f": 475
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "state_traces_match": true,
+ "fp_flag_mismatches": 1797,
+ "exception_flags_match": false,
+ "limits": "Render-queue colour 402f40 (with its 77ff90 tail jump) against original instructions.\n\n402f40 (cdecl, pointer to four floats) copies the colour into 3ab9864 word by\nword, clamps each component to [-1, 1] with FLD/FCOMP against 7dcb10 (1.0) and\n7dcb0c (-1.0), then jumps to 77ff90(&3ab9864), which copies the four words into\n3d0f7f0. Cases: finite values around the clamp edges, signed zeros, infinities,\ndenormals, quiet and signalling NaNs (any number per case: nothing is computed,\nso no NaN-propagation rule applies), under the four masked x87 control words\nthe game uses. Compared: the eight stored words (bitwise), and EAX/ECX/EDX and\nthe x87 condition bits after the call against the values the source leaves\n(EAX = 3ab9864, ECX/EDX = the last two copied words, C3/C2/C0 = the last FCOMP).\nx87 exception flags are compared separately: Unicorn 2.1.4 raises neither IE\nfor a NaN FCOMP operand / SNaN FLD nor DE for a denormal FLD m32, which the\nnative model raises as the Intel SDM documents, so those cases differ in flags\nonly (verdict partial). Unmasked-exception control words are not exercised.\nThe corpus (CW, the input words, the prior 3ab9864 words) goes to\nninja_queue_color.cases.bin for the guest override-equivalence test.\n",
+ "tracked_summary": {
+  "full_sha256": "df59254dc0cb84d35e9d66d7cbcfc7967d612cc216d098fb2c1d25fdb2cbc282",
+  "full_bytes": 2681,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

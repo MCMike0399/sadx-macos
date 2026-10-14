@@ -2569,3 +2569,64 @@ Pinned sonic.exe SHA remains 6b0937ca…24cd74.
   overridden frame digests and 900-frame controller plain/native replay match. Full intro
   checks pass; host 78.2 FPS and virtual title cadence 63 FPS. App script through 900 exits
   0; local ignored main-menu capture inspected, not a reviewed golden.
+
+### M1 render-queue colour and D3DXVec3Project overrides; stable REA install (gate 130, 2026-10-13)
+
+Fresh owned REA/Ghidra (pinned sonic.exe 6b0937ca…24cd74, runner now importing the new install,
+`reference/ghidra-bridge-project-requests.json`, results `reference/inventory-raw/bridge-project-*`,
+`bridge-callers-*`): 772615 `ev_4ddeaabc585e06529fdf19f4ff958c02510962d53ece240cd67d2b25a535b5c1`,
+thunks 770804 `ev_f6e9d0fe39fbebbb99f350830d23d62c34e7d26eef6465d88b5950d5aa70eaa1` / 77020b
+`ev_e49fbbfbe1aef04f317182e3b5987fffb8f57d6a6b232ebe096e03a8997f3728` / 770295
+`ev_c85db70ad50f25a2cd6c5cb4a5726336cfc4975d3e420120b2eca9479d2de95a`, 402f40
+`ev_c4b8d6c09355daf2cde72aa7ba2b6da1adc08020e996cf4d676730bc653816ea`, 77ff90
+`ev_e3950b6acb98bbac9ef4868e008bc983bb28d06570c2918b3b3adcc2402ae162`; callers 772615
+`ev_922f16b29183cfbad676f088489a4f1920aca7a10d90fa38fcd6facb62956bff` (none direct), 770295
+`ev_9227a3de75fd68111b81cfe95d124e2340ac64788cbe23b65e0eb2a91dab56fb` (78dbe0), 402f40
+`ev_9744c4c72e704e65f19aba74c8d42913d8ec24b4851dc41bad2ffdba6597f31d` (75 callers). Runner closed rc 0.
+
+* **Unbound-owner count reconciled:** the 4d list has 43 address-named owners + 3 game_frame_control
+  owners. 13 were bound by gates 119–129 (403180 407ab0 408630 411b40 77ec60 780f60 780fb0 781250
+  787260 791170 7949b0 794e40 794ec0), leaving **30 + 3**, not the "20" the last entries said.
+  After this step **28 + 3** remain: 401000 401830 401a20 401ac0 40bf40 40c030 40c090 40f350 40f3a0
+  410510 419030 4208e0 4250d0 77dfc0 77f0a0 77f150 77f610 780c30 781070 785190 789bd0 78dbe0
+  7912e0 791610 791bd0 791df0 792100 793e70 (+ 411e30/40f010/411e20).
+* **Why not the consumer/producer first:** native 4086f0 supports only empty/type-3 records and stops
+  at the exact callee of every other type, which the live title produces; binding it would stop the
+  guest. 4073b0 (rectangle enqueue) has no native port. Both stay next, behind porting those bodies.
+* **42 process entries.** 402f40 (`ninja_queue_color`, guest-only table): words copied one at a time,
+  each read just before its store as in the source (an input overlapping 3ab9864 reads stored words),
+  then native clamp and 77ff90's copy to 3d0f7f0. Leftovers set as the source leaves them: EAX
+  3ab9864, ECX/EDX the last two copied words, C3/C2/C0 of the last FCOMP, C1 clear, FLD/FCOMP sticky
+  flags. Unreadable input words stop at their read site after the earlier stores; unmasked x87
+  exceptions stop. 772615 (`d3dx_vec3_project`, math table): binds only when slots 3/10 (389b784/
+  389b7a0) hold the SSE table's 774310/774150, as 77350c leaves them under the reported SSE-CPU
+  assumption; any other slot value (77350c not run, another CPU table) stops by name. Unreadable
+  pV/pViewport/matrix arguments stop. `OverrideEntry::returns_scratch` adds ECX/EDX and the x87
+  condition bits to the guest-overrides comparison.
+* **Oracles:** new `ninja_queue_color` (402f40+77ff90 original instructions, 4,000 cases over four
+  masked CWs, edge values incl. ±1 neighbours, signed zeros, infinities, denormals, QNaN/SNaN):
+  **partial**, every store exact, source register leftovers as modelled, 1,797 FP-flag differences
+  (native raises IE on NaN FCOMP/SNaN FLD and DE on denormal FLD m32 per the SDM; Unicorn 2.1.4
+  raises neither). Writes `ninja_queue_color.cases.bin`. `d3dx_project` now also writes its corpus;
+  rerun **pass** (4,000 cases, 0 mismatches). Both reports tracked; both corpora in OVERRIDE_CORPORA.
+  Other standalone oracles **not rerun**; aggregate verdict unchanged otherwise (103 oracles: 48 pass /
+  45 partial / 9 fail / 1 missing).
+* **Equivalence/mutants:** guest-overrides: 402f40 5,000 cases (corpus + 1,000 inputs at
+  3ab9864-4), 772615 4,000 corpus cases, unset slots stop explicitly; 14 guest-only entries on
+  49,279 cases. Core mutants on the colour oracle 3/3 caught (NaN clamps high, unclamped projection
+  copy, component 1 reusing the first compare); restored source same partial verdict. Bridge mutants
+  4/5 caught (omitted ECX/EDX, omitted condition bits, read-all-then-store, swapped view/world);
+  **survivor:** inverting 774150's `aligned` flag only reorders additions, which can change only which
+  of two NaNs is returned, and the corpus keeps one NaN source per case (Unicorn's NaN rule) — an
+  equivalent mutant under this corpus, not proof of the flag.
+* **REA housekeeping (GOAL §4.2 item 1):** REA 6.4.0 installed with the original lockfile at
+  `reference/tools/rea/` (git-ignored). `reference/ghidra-live.mjs` imports from `$SADX_REA_MODULES`,
+  else that install, else `/private/tmp/sadx-rea`; METHOD §1 documents it. MCP registration (§4.2
+  item 2) not done.
+* **Gate/live:** `reference/production-integration-20261013/queue-color-project-130-gate.json`, actual
+  rc 0, 126 native programs, 4 Python tests. Boot identical with the table (22,030 HLE calls; 402f40
+  fires 4x before first Present, 772615 0x), first 600 overridden digests and the 900-frame controller
+  plain/native replay match; full intro/title checks pass, host 79.4 FPS, title 15.873 ms. app-smoke
+  120 frames. 772615 is not exercised live yet (no caller before file select). Existing unregistered
+  metal-sprite, metal-sprite-composition, metal-texture and player-task **not run**; full m1 **not
+  separately rerun**. No assets or captures committed.

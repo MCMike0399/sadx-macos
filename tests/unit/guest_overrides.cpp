@@ -10,6 +10,9 @@
 // 77ffc0, 7959c0) and 774310/774150 have no corpus of their own (their oracles run them nested inside larger
 // owners), so their input classes are enumerated here: empty/full/duplicate slots, counts, zero/non-zero flag
 // bytes; random and special-valued matrices, aliased pOut, misaligned matrices, every MXCSR rounding mode.
+// 772615 replays the d3dx_project cases (slots 3/10 set to the SSE table; NULL arguments, misaligned matrices) and
+// checks that unset slots stop; 402f40 the ninja_queue_color cases plus one input overlapping 3ab9864 per four,
+// comparing ECX/EDX and the x87 condition bits as well.
 // The original side runs with the FPU shims installed, as every guest boot does (7716df's FSINCOS is a shim site).
 // Mutants: every entry is also run with a bridge that flips one bit of its first store; the comparison must
 // catch it, or the test fails (an insensitive comparison would pass anything).
@@ -30,7 +33,8 @@ namespace {
 using namespace sadx;
 void require(bool ok,const std::string& why){if(!ok)throw std::runtime_error(why);}
 struct Case {std::vector<std::pair<std::uint32_t,std::uint32_t>> memory;std::vector<std::uint32_t> arguments;std::optional<std::uint32_t> ecx;std::uint16_t cw=0x27f;std::uint32_t mxcsr=0x1f80;};
-constexpr std::uint32_t scratch=0x10000000,out_at=scratch+0x100,det_at=scratch+0x180,matrix_at=scratch+0x200,second_at=scratch+0x300; // a page mapped in both guests
+constexpr std::uint32_t scratch=0x10000000,out_at=scratch+0x100,det_at=scratch+0x180,matrix_at=scratch+0x200,second_at=scratch+0x300, // a page mapped in both guests
+    project_v_at=scratch+0x40,project_viewport_at=scratch+0x60,color_at=scratch+0x80,project_matrix_at=scratch+0x400;
 std::vector<std::uint32_t> words(const std::string& path){
     std::ifstream f(path,std::ios::binary);require(bool(f),"cannot read the oracle corpus "+path+" (run its oracle)");
     std::string all((std::istreambuf_iterator<char>(f)),{});require(all.size()%4==0&&!all.empty(),path+": not a word corpus");
@@ -66,6 +70,24 @@ std::vector<Case> corpus_cases(std::uint32_t entry,const std::string& dir){
             Case c;c.mxcsr=w[i];const auto at=matrix_at+(w[i+2]?0U:8U);
             for(std::uint32_t k=0;k<16;++k)c.memory.push_back({at+4*k,w[i+3+k]});
             c.arguments={out_at,w[i+1]?det_at:0U,at};c.cw=0x7f;out.push_back(c);}}
+    else if(entry==0x772615){ // d3dx_project: the probe's 61 words; [0] cw [1] mxcsr [2] present bits [3] aligned bits [4..6] v
+        // [7..12] viewport [13..60] projection/view/world. Slots 3/10 hold the SSE table, as 77350c leaves them.
+        const auto w=words(dir+"/d3dx_project.cases.bin");require(w.size()%61==0,"d3dx_project corpus size");
+        for(std::size_t i=0;i<w.size();i+=61){
+            Case c;c.cw=static_cast<std::uint16_t>(w[i]);c.mxcsr=w[i+1];c.memory={{0x389b784,0x774310},{0x389b7a0,0x774150}};
+            for(std::uint32_t k=0;k<3;++k)c.memory.push_back({project_v_at+4*k,w[i+4+k]});
+            for(std::uint32_t k=0;k<6;++k)c.memory.push_back({project_viewport_at+4*k,w[i+7+k]});
+            std::vector<std::uint32_t> matrices;
+            for(std::uint32_t m=0;m<3;++m){const auto at=project_matrix_at+0x100*m+((w[i+3]>>m&1)?0U:8U);matrices.push_back(w[i+2]>>m&1?at:0U);
+                for(std::uint32_t k=0;k<16;++k)c.memory.push_back({at+4*k,w[i+13+16*m+k]});}
+            c.arguments={out_at,project_v_at,w[i+2]&8?project_viewport_at:0U,matrices[0],matrices[1],matrices[2]};out.push_back(c);}}
+    else if(entry==0x402f40){ // ninja_queue_color: 9 words; [0] cw [1..4] the input colour [5..8] the prior 3ab9864
+        const auto w=words(dir+"/ninja_queue_color.cases.bin");require(w.size()%9==0,"ninja_queue_color corpus size");
+        for(std::size_t i=0;i<w.size();i+=9){
+            Case c;c.cw=static_cast<std::uint16_t>(w[i]);
+            for(std::uint32_t k=0;k<4;++k){c.memory.push_back({color_at+4*k,w[i+1+k]});c.memory.push_back({0x3ab9864+4*k,w[i+5+k]});}
+            c.arguments={color_at};out.push_back(c);
+            if(i%36==0){Case alias=c;alias.arguments={0x3ab9864-4};alias.memory.push_back({0x3ab9864-4,w[i+1]});out.push_back(alias);}}} // overlaps the copy
     return out;
 }
 std::vector<Case> enumerated_cases(std::uint32_t entry,std::mt19937& rng){
@@ -119,6 +141,8 @@ std::size_t compare(const ExecutableImage& image,const OverrideEntry& entry,cons
         require(bool(ra),entry.name+": original failed: "+ra.error);
         if(!rb){mismatch=entry.name+": override failed: "+rb.error;return compared;}
         if(entry.returns_eax&&ra.eax!=rb.eax){mismatch=entry.name+": EAX differs";return compared;}
+        if(entry.returns_scratch&&(original->reg(UC_X86_REG_ECX)!=native->reg(UC_X86_REG_ECX)||original->reg(UC_X86_REG_EDX)!=native->reg(UC_X86_REG_EDX)
+            ||((original->fpu_status()^native->fpu_status())&0x4700))){mismatch=entry.name+": ECX/EDX or the x87 condition bits differ (case "+std::to_string(compared)+")";return compared;}
         for(const auto& [at,size]:out){
             std::vector<std::uint8_t> x(size),y(size);original->read(at,x.data(),size);native->read(at,y.data(),size);
             if(x!=y){mismatch=entry.name+": the stores differ at "+std::to_string(at)+" (case "+std::to_string(compared)+")";return compared;}}
@@ -147,6 +171,12 @@ int main(int argc,char** argv){try{
         require(bool(caught),entry.name+": the mutant (one flipped store bit) was not detected");
         total+=compared;from_corpora+=corpus?compared:0;
         std::cout<<"  "<<entry.name<<" ("<<std::hex<<entry.address<<std::dec<<"): "<<compared<<(corpus?" oracle-corpus":" enumerated")<<" cases equivalent; mutant caught\n";}
+    { // 772615 binds only the SSE dispatch table: with the image's slot stubs (77350c not yet run) it stops, never guesses
+        const auto e=std::find_if(table.begin(),table.end(),[](const OverrideEntry& x){return x.address==0x772615;});require(e!=table.end(),"772615 not bound");
+        auto native=X86Guest::create(&error);require(native&&native->map_image(*image,&error)&&native->map(scratch,0x1000,true,&error)&&native->add_override(0x772615,e->bridge,&error),error);
+        const auto r=native->call(0x772615,{out_at,project_v_at,0,0,0,0});
+        require(!r&&r.error.find("dispatch slots")!=std::string::npos,"772615: unset dispatch slots did not stop explicitly");
+        std::cout<<"  d3dx_vec3_project (772615): unset dispatch slots stop explicitly\n";}
     std::cout<<"Guest overrides: "<<table.size()<<" overrides equivalent to the original bytes on "<<total<<" cases ("<<from_corpora<<" from oracle corpora); every mutant caught\n";
     return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

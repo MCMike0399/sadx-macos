@@ -56,6 +56,28 @@ std::vector<OverrideEntry> frame_loop_overrides(const ExecutableImage& image){
         g.set_u32(0x3aad0c0,bits(*range.cache_x_at_3aad0c0));g.set_u32(0x3aad0c4,bits(*range.cache_y_at_3aad0c4));
         for(std::size_t i=0;i<6;++i)g.set_u32(0x3aad0c8+4*static_cast<std::uint32_t>(i),*view.camera_tail_at_3aad0c8[i]);
         return 0;}});
+    // 402f40 (cdecl, colour): the words are copied one at a time, each read just before its store, as the source
+    // does (an input overlapping 3ab9864 reads the words already stored); then the native clamp and 77ff90's copy.
+    // Leftovers as the source: EAX = 3ab9864 (77ff90's argument), ECX/EDX = its last two copied words, C3/C2/C0
+    // from the last FCOMP (component 3 against 1.0, else against -1.0), C1 clear, the FLD/FCOMP sticky flags.
+    const float one=as_float(image.u32(0x7dcb10).value_or(0));
+    out.push_back({0x402f40,"ninja_queue_color",{{0x3ab9864,16},{0x3d0f7f0,16}},[one,negative_one](X86Guest& g)->std::uint32_t{
+        const auto input=stack_argument(g,0);std::array<float,4> words{};
+        static constexpr std::uint32_t reads[]={0x402f44,0x402f52,0x402f61,0x402f6a};
+        for(std::uint32_t i=0;i<4;++i){const auto w=g.u32(input+4*i);
+            if(!w){g.stop("override 402f40: unreadable colour word at "+std::to_string(reads[i]));return 0;}
+            g.set_u32(0x3ab9864+4*i,*w);words[i]=as_float(*w);}
+        std::optional<std::array<float,4>> color=words,projection;
+        NinjaQueueColorOwners owners{color,projection,one,negative_one};NinjaQueueColorResult partial;
+        X87Context fp(control_word(g));std::uint32_t site=0;
+        try{if(!ninja_queue_color_402f40(words,owners,partial,fp,site)||!color||!projection){g.stop("override 402f40: the native port failed");return 0;}}
+        catch(const X87Error&){g.stop("override 402f40: unmasked x87 exception at "+std::to_string(site));return 0;}
+        X87Context last(control_word(g));auto compared=last.compare_float_memory(last.from_float(words[3]),one);
+        if(compared!=X87Comparison::greater)compared=last.compare_float_memory(last.from_float(words[3]),negative_one);
+        for(std::uint32_t i=0;i<4;++i){g.set_u32(0x3ab9864+4*i,bits((*color)[i]));g.set_u32(0x3d0f7f0+4*i,bits((*projection)[i]));}
+        g.set_eax(0x3ab9864);g.set_reg(UC_X86_REG_ECX,bits((*projection)[2]));g.set_reg(UC_X86_REG_EDX,bits((*projection)[3]));
+        g.set_fpu_status(static_cast<std::uint16_t>((g.fpu_status()&~0x4700U)|x87_comparison_status(compared)|(fp.exception_flags()&0x3f)));
+        return 0;},true,{},true});
     return out;
 }
 std::vector<OverrideEntry> startup_overrides(){
@@ -118,6 +140,26 @@ std::vector<OverrideEntry> math_overrides(){
         if(!r){g.stop("override 7716df: |fovy/2| >= 2^63 (FSINCOS C2) is not modelled");return 0;}
         g.set_fpu_status(static_cast<std::uint16_t>(g.fpu_status()|(fp.exception_flags()&0x3f))); // the x87 stores' sticky flags
         g.write(o,r->data(),64);g.set_eax(o);return 20;},true,{{0,64}}});
+    // 772615 (pOut, pV, pViewport, pProjection, pView, pWorld): reached through slot 14 (thunk 770295). Its
+    // product and transform calls jump through slots 3 (thunk 770804) and 10 (77020b); only the SSE table's
+    // 774310/774150 are modelled, so any other slot value stops here instead of guessing that table's arithmetic.
+    out.push_back({0x772615,"d3dx_vec3_project",{},[estimate](X86Guest& g)->std::uint32_t{
+        if(g.u32(0x389b784)!=0x774310U||g.u32(0x389b7a0)!=0x774150U){
+            g.stop("override 772615: D3DX dispatch slots 3/10 are not the SSE table's 774310/774150 (77350c not run, or another CPU path)");return 0;}
+        const auto o=stack_argument(g,0);D3dxVector3 v{};
+        if(!g.read(stack_argument(g,1),v.data(),12)){g.stop("override 772615: unreadable pV");return 0;}
+        bool unreadable=false;
+        const auto matrix=[&g,&unreadable](unsigned index)->std::optional<D3dxMatrixArgument>{
+            const auto at=stack_argument(g,index);if(!at)return std::nullopt;
+            D3dxMatrixArgument m{{},(at&0xf)==0};unreadable=unreadable||!g.read(at,m.matrix.data(),64);return m;};
+        const auto projection=matrix(3),view=matrix(4),world=matrix(5);
+        if(unreadable){g.stop("override 772615: unreadable matrix argument");return 0;}
+        std::optional<D3dxViewport> viewport;
+        if(const auto at=stack_argument(g,2)){std::array<std::uint32_t,6> w{};if(!g.read(at,w.data(),24)){g.stop("override 772615: unreadable pViewport");return 0;}viewport=D3dxViewport{w[0],w[1],w[2],w[3],w[4],w[5]};}
+        SseContext sse(g.mxcsr());X87Context fp(control_word(g));
+        const auto r=d3dx_vec3_project_772615(v,viewport,projection,view,world,sse,fp,estimate);
+        g.set_fpu_status(static_cast<std::uint16_t>(g.fpu_status()|(fp.exception_flags()&0x3f))); // the viewport mapping's sticky flags
+        g.write(o,r.data(),12);g.set_eax(o);return 24;},true,{{0,12}}});
     return out;
 }
 std::vector<OverrideEntry> all_overrides(const ExecutableImage& image){

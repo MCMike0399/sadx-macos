@@ -7,7 +7,12 @@ session through `reference/ghidra-live.mjs` with `reference/ghidra-inventory-con
 (snapshot + environment; the older `ghidra-game-loop-config.json` snapshot is tied to the pre-move
 binary path and is not used). It takes JSON requests on stdin and writes
 `reference/inventory-raw/<label>.json` and `<label>.pseudocode.txt`. The runner imports
-`rea-agents` from a hardcoded path (see `docs/GOAL.md` §4 for the installation state and the CLI).
+`rea-agents` 6.4.0 from `$SADX_REA_MODULES`, else from the git-ignored install
+`reference/tools/rea/node_modules` (since 2026-10-13: `npm ci --prefix reference/tools/rea`
+with the tracked-nowhere lockfile copied from the first install; recreate it with
+`npm install --prefix reference/tools/rea rea-agents@6.4.0`), else from the original
+`/private/tmp/sadx-rea/node_modules`. The CLI is `node reference/tools/rea/node_modules/rea-agents/scripts/rea.mjs`
+(`docs/GOAL.md` §4.2).
 
 ```sh
 cd ~/Developer/sadx-macos
