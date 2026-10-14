@@ -19,6 +19,8 @@ practice, proven by automated tests (`docs/ROADMAP.md`), not by someone playing 
 6. `docs/decisions/` — decisions already made; do not relitigate them silently. Add an ADR
    if you change direction, and say so in your report.
 7. `docs/HANDOFF.md` — the per-step journal (append an entry when you finish a step).
+8. `docs/GOAL.md` — the standing brief `/goal` loads (`.claude/commands/goal.md`): history, how
+   REA is used, the ordered next items and the per-step loop.
 
 ## Non-negotiables
 

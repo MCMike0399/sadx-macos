@@ -1,5 +1,9 @@
 # Prompt for the next agent session
 
+> Since 2026-10-13 the entry point is `/goal` (`.claude/commands/goal.md` → `docs/GOAL.md`). This
+> file is kept for the detailed M1 state notes its item 1 holds (bridge reserves, store phases,
+> boundaries); `docs/GOAL.md` §6 links here.
+
 Copy the block below into a new Claude Code session opened in `~/Developer/sadx-macos`
 (REA lives in `~/Developer/rea`; this repo's `CLAUDE.md` imports `AGENTS.md`).
 

@@ -3,9 +3,11 @@
 ## 1. Reading the binary with REA (Ghidra)
 
 REA (`~/Developer/rea`, CLI + MCP) drives a headless Ghidra. The project owns one Ghidra
-session through `reference/ghidra-live.mjs` with `reference/ghidra-game-loop-config.json`
-(snapshot + environment). It takes JSON requests on stdin and writes
-`reference/ghidra-game-loop-recovery/<label>.json` and `<label>.pseudocode.txt`.
+session through `reference/ghidra-live.mjs` with `reference/ghidra-inventory-config.json`
+(snapshot + environment; the older `ghidra-game-loop-config.json` snapshot is tied to the pre-move
+binary path and is not used). It takes JSON requests on stdin and writes
+`reference/inventory-raw/<label>.json` and `<label>.pseudocode.txt`. The runner imports
+`rea-agents` from a hardcoded path (see `docs/GOAL.md` §4 for the installation state and the CLI).
 
 ```sh
 cd ~/Developer/sadx-macos
@@ -19,10 +21,10 @@ L=/tmp/ghidra-run.log; : > $L
   echo '{"tool":"batch","requests_file":"reference/ghidra-requests.json"}'
   while ! grep -q '"retained":"screen-780c30"' $L; do sleep 3; done; sleep 2
   echo '{"tool":"close"}'
-} | node reference/ghidra-live.mjs reference/ghidra-game-loop-config.json >> $L 2>&1
+} | node reference/ghidra-live.mjs reference/ghidra-inventory-config.json >> $L 2>&1
 ```
 
-Print assembly from a result: `python3 tools/analysis/ghidra_asm.py reference/ghidra-game-loop-recovery/screen-780c30.json`.
+Print assembly from a result: `python3 tools/analysis/ghidra_asm.py reference/inventory-raw/screen-780c30.json`.
 
 The owned runner buffers piped commands during startup; waiting for READY remains
 useful for interactive orchestration but is not required for an early command pipe.
