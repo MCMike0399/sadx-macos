@@ -2477,3 +2477,49 @@ Small summary: reference/production-integration-20261013/task-dispatch-evidence.
   owners (24 of the earlier address-named list) and reviewed goldens. Synchronous native
   creation rollback still names unknown callback execution at 40b590; dispatch now executes
   guest callbacks and is no longer merely an identity serializer.
+
+### M1 native task lifetime continuations (gate 128, 2026-10-13)
+
+Fresh owned REA/Ghidra: destruction `bridge-task-destroy`
+`ev_5fd900765a8b77026e3938ea87f6559907c206575530481e80ebfd81794e9f53`;
+free children `bridge-task-free-children`
+`ev_4b0ffe3d15b05ef90221a798fd56016cef630a5461fd807ab74bf1f025c4ecdd`.
+Pinned sonic.exe remains `6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74`.
+
+* **38 process entries:** added 40b570/40b7e0. TaskScheduler's lifetime cursor is shared
+  by synchronous destruction/free-children and the HLE bridge. Destruction runs the guest
+  destructor before snapshotting siblings and clearing callback fields; children finish
+  before unlink, collision/object/work/control cleanup and pool recycle. The child-driver
+  self-exec branch dispatches children before changing exec to DestroyTask when empty.
+* **Source frames:** continuations preserve 40b593 (destructor), 40b5b1 (free children),
+  40b7f4 (run children) and 40b826 (destroy child). Reserves are 12, 20 and 8 bytes,
+  respectively. Saved words/incoming registers follow the source prologues; destroy
+  completion restores EBX/EDI as the original POPs do. Retired source rows retain field30
+  and clear fields 2..11. Owned controls serialize updated flag/task linkage.
+* **Live work references:** TaskWorkArena's reference resolver maps observed guest pointer
+  words to tracked native allocations and validates the resulting handle. Cleanup reads
+  live guest payload; it does not cast guest pointers or trust a stale native byte mirror.
+  Unknown, released and unowned references remain tagged failures.
+* **Verification:** all 16 work sequences/4,890 operations, 19 lifecycle sequences/2,316
+  operations, 18 dispatch scenarios and six lifetime callback scenarios match. Destructors
+  cover no-op, nested dispatch and prepend; return/frame/context/register traces, defined
+  globals/results and full 16 MiB+32 arena bytes agree. Two lifetime argument mutants
+  caught, alongside the existing two work/five graph/three dispatch mutants.
+* **Oracle improvement:** task_work and task_lifecycle rerun pass and reports tracked.
+  Initial lifetime core mutation run missed retain-exec because final state hid the order.
+  Added parent-exec observations to the no-op callback in both original/native probes and
+  a parent/child destructor fixture. All three core mutants now caught: skip destructor,
+  retain exec, skip auxiliary free; restored source passes. Other standalone oracles not
+  rerun; aggregate verdict remains exit 1 for the existing partial/fail inventory.
+* **Limits/next:** render queue, remaining owners (22 of the earlier address-named list)
+  and reviewed goldens remain unfinished. Unknown synchronous creation-rollback callback
+  execution still stops at 40b590. Changed pool provenance, unsupported lifetime graph
+  mutations and inactive multi-child corruption remain explicit boundaries; arbitrary
+  destructive reentrancy is not proven by these scenarios. Existing unregistered
+  metal-sprite, metal-sprite-composition, metal-texture and player-task not run. m1 recipe
+  dry-run checked; full m1 not separately rerun. No assets or captures committed.
+* **Recorded gate/live:** reference/production-integration-20261013/task-lifetime-128-gate.json,
+  actual rc 0, 125 native programs and four Python tests. Boot identical; first 600
+  overridden digests and the 900-frame controller plain/native comparison match. Full
+  intro/title checks pass; host 78.7 FPS and virtual 63 FPS title cadence. App controller
+  script through 900 exits 0; local ignored file-select capture visually inspected.

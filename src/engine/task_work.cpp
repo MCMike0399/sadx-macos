@@ -194,8 +194,14 @@ TaskWorkReferenceResult TaskWorkArena::reference_view(const TaskWorkHandle& work
     if(payload_reader_){
         std::uint32_t observed=0;const auto current=read(work,at,&observed,4);if(!current)return {current.failure,work,0,{}};
         if(!observed)return {TaskWorkFailure::none,{},0,{}};
-        if(found==references_.end()||!reference_base_||observed!=*reference_base_+found->second.allocation_data_offset+found->second.byte_offset)
-            return {TaskWorkFailure::unbound_reference,{},0,{}};
+        if(found==references_.end()||!reference_base_||observed!=*reference_base_+found->second.allocation_data_offset+found->second.byte_offset){
+            if(!reference_resolver_)return {TaskWorkFailure::unbound_reference,{},0,{}};
+            auto resolved=reference_resolver_(observed);
+            if(!resolved)return resolved;
+            const auto checked=validate(resolved.work,resolved.byte_offset,1);
+            if(!checked)return {checked.failure,resolved.work,resolved.byte_offset,resolved.allocation_data_offset};
+            return resolved;
+        }
     }
     if (found != references_.end()) {
         const auto target=found->second.work.lock();

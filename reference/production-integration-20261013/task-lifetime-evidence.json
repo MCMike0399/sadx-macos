@@ -1,0 +1,64 @@
+{
+ "entries_added": [
+  "40b570",
+  "40b7e0"
+ ],
+ "process_entries": 38,
+ "ghidra_evidence_ids": [
+  "ev_5fd900765a8b77026e3938ea87f6559907c206575530481e80ebfd81794e9f53",
+  "ev_4b0ffe3d15b05ef90221a798fd56016cef630a5461fd807ab74bf1f025c4ecdd"
+ ],
+ "corpus": {
+  "lifecycle_sequences": 19,
+  "lifecycle_operations": 2316,
+  "work_sequences": 16,
+  "work_operations": 4890,
+  "dispatch_scenarios": 18,
+  "lifetime_scenarios": 6,
+  "core_lifetime_mutants_caught": 3,
+  "lifetime_bridge_mutants_caught": 2,
+  "existing_bridge_mutants": 10
+ },
+ "source_contract": {
+  "callback_return_addresses": [
+   "40b593",
+   "40b5b1",
+   "40b7f4",
+   "40b826"
+  ],
+  "callback_stack_reserves": {
+   "destructor": 12,
+   "destroy_children": 20,
+   "child_driver": 8
+  },
+  "order": "destructor; sibling snapshot/callback clear; children; unlink; collision/object/work/control cleanup; recycle",
+  "retired_rows": "retain field30; clear fields 2..11",
+  "references": "resolve live guest words to validated tracked native allocations"
+ },
+ "source_sha256": {
+  "src/engine/task.cpp": "2d3f784b14e8f1dabac45c1bc4cb798a5765f81c5f1bc536f21f00f3ce066b44",
+  "src/engine/task.hpp": "32d4bbecbbcf7087486cbd913f3455fa86f66e6675dd176910711290670f6707",
+  "src/engine/task_work.cpp": "08e679e66ab28ceda7a942033489cbd1f49356875766babe9e66236870c84691",
+  "src/engine/task_work.hpp": "f2a5c6b93f7a6bded90fb267d88ace2d0bcb45e34524750f3314bde7c9a4660c",
+  "src/hle/hle_task_bridge.cpp": "bee248577084715fc6a7f1370f36146330c61e4a3efa29f37648210ce890d364",
+  "tests/unit/hle_task_bridge.cpp": "742390afbce6f7722dc6b24501e4a807d46afe2c60f90fbfeb5d374c1c72e825",
+  "tests/probes/native_task_lifecycle_probe.cpp": "0c115f0336fdc78c83daaf786bc56b83ced651eafeedf17cc0de31b1f1f831b9",
+  "tools/oracles/verify_original_task_lifecycle.py": "010c3770e264bd05a26b34fa2d20381e79aa51c492c062ff01755ee3cf20bf93"
+ },
+ "limits": [
+  "Unknown synchronous creation rollback callbacks stop at 40b590.",
+  "Changed pool provenance and unsupported graph mutations remain explicit boundaries.",
+  "Arbitrary destructive reentrancy unverified beyond the recorded scenarios.",
+  "Other oracles not rerun; existing partial/fail inventory retained.",
+  "Render queue, remaining owners and reviewed goldens unfinished."
+ ],
+ "runtime": {
+  "app_script_exit_status": 0,
+  "screenshot_sha256": "bc1cfbaa30f34f240c7094a5059ffec35138d91e9efd1233c762d048f7d5949e",
+  "boot_identical": true,
+  "override_600_digests_match": true,
+  "controller_900_digests_match": true,
+  "host_FPS": 78.7,
+  "gate_exit_status": 0
+ }
+}

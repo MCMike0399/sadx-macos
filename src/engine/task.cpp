@@ -416,55 +416,52 @@ void TaskScheduler::free_children_callback(TaskScheduler& scheduler, const TaskH
     if (!result) throw SourceTaskFailure{result};
 }
 
-TaskResult TaskScheduler::free_children(const TaskHandle& parent) {
-    const auto accepted = validate(parent);
-    if (!accepted) return accepted;
-    if (parent->exec == &free_children_callback) {
-        const auto dispatched = run_children(parent);
-        if (!dispatched) return dispatched;
-        if (!parent->first_child_) parent->exec = &destroy_callback;
-        return {};
-    }
-    while (parent->first_child_) {
-        if (!active_member(parent)) {
-            // Actual inactive multi-child path writes next.prev/next.next to
-            // next itself, then loops forever. Do not corrupt the native graph.
-            if (parent->first_child_->next_)
-                return {TaskFailure::inactive_children_corruption, parent, {}, 0x40b834};
-            auto child = retain(parent->first_child_);
-            if (!child || child->parent_ != parent.get())
-                return {TaskFailure::inactive_children_corruption, parent, {}, 0x40b83e};
-            parent->first_child_ = nullptr; // actual sole-child branch; child not freed
-            child->linked_ = false;
-            return {};
-        }
-        const auto destroyed = destroy_task(retain(parent->first_child_));
-        if (!destroyed) return destroyed;
-    }
-    return {};
+TaskLifetimeState TaskScheduler::begin_destruction(const TaskHandle& task){
+    TaskLifetimeState state;state.task=task;state.failure=validate(task);
+    if(state.failure&&!active_member(task))state.failure={TaskFailure::inactive_task,task,{},0x401000};
+    if(state.failure&&(task->destructor_active_||task->destruction_stage_!=Task::DestructionStage::live))state.failure={TaskFailure::callback_mutation_invalidated_destructor,task,{},0x40b586};
+    return state;
 }
-
-TaskResult TaskScheduler::destroy_task(const TaskHandle& task) {
-    const auto accepted = validate(task);
-    if (!accepted) return accepted;
-    if (!active_member(task)) return {TaskFailure::inactive_task, task, {}, 0x401000};
-    if (task->destructor_active_)
-        return {TaskFailure::callback_mutation_invalidated_destructor, task, {}, 0x40b591};
-    if (task->destruction_stage_ != Task::DestructionStage::live)
-        return {TaskFailure::callback_mutation_invalidated_destructor, task, {}, 0x40b586};
-    const auto destructor = task->destructor;
-    if (destructor) {
-        task->destructor_active_ = true;
-        try { destructor(*this, task); }
-        catch (...) { task->destructor_active_ = false; throw; }
-        task->destructor_active_ = false;
+TaskLifetimeState TaskScheduler::begin_free_children(const TaskHandle& task){TaskLifetimeState state;state.task=task;state.children=true;state.failure=validate(task);return state;}
+TaskLifetimeCall TaskScheduler::advance_lifetime(TaskLifetimeState& state){
+    if(!state.failure)return {state.failure,state.task,nullptr,TaskLifetimeCallee::none,false};
+    const auto resolve=[&](const TaskHandle& value){if(value&&value->source_slot_){const auto current=source_slots_[*value->source_slot_];return current?current:TaskHandle{};}return value;};
+    const auto task=resolve(state.task);if(!task||task->retired_)return {{TaskFailure::callback_mutation_invalidated_destructor,state.task,{},0x40b596},state.task,nullptr,TaskLifetimeCallee::none,false};
+    state.task=task;
+    if(state.children){
+        if(state.phase==0&&task->exec==&free_children_callback){state.phase=1;return {{},task,nullptr,TaskLifetimeCallee::run_children,false};}
+        if(state.phase==1){if(!task->first_child_)task->exec=&destroy_callback;return {{},task,nullptr,TaskLifetimeCallee::none,true};}
+        if(!task->first_child_)return {{},task,nullptr,TaskLifetimeCallee::none,true};
+        if(!active_member(task)){
+            if(task->first_child_->next_)return {{TaskFailure::inactive_children_corruption,task,{},0x40b834},task,nullptr,TaskLifetimeCallee::none,false};
+            const auto child=retain(task->first_child_);if(!child||child->parent_!=task.get())return {{TaskFailure::inactive_children_corruption,task,{},0x40b83e},task,nullptr,TaskLifetimeCallee::none,false};
+            task->first_child_=nullptr;child->linked_=false;return {{},task,nullptr,TaskLifetimeCallee::none,true};
+        }
+        return {{},retain(task->first_child_),nullptr,TaskLifetimeCallee::destroy_child,false};
     }
-    if (task->retired_) return {TaskFailure::callback_mutation_invalidated_destructor, task, {}, 0x40b596};
-    task->destruction_previous_ = retain(task->previous_);
-    task->destruction_next_ = retain(task->next_);
-    task->exec = task->display = task->destructor = nullptr;
-    task->destruction_stage_ = Task::DestructionStage::children;
-    return finish_destruction(task);
+    if(state.phase==0){state.phase=1;if(task->destructor)return {{},task,task->destructor,TaskLifetimeCallee::destructor,false};}
+    if(state.phase==1){state.previous=retain(task->previous_);state.next=retain(task->next_);task->exec=task->display=task->destructor=nullptr;state.phase=2;return {{},task,nullptr,TaskLifetimeCallee::free_children,false};}
+    if(state.phase==2){
+        if(task->first_child_)return {{TaskFailure::callback_mutation_invalidated_destructor,task,{},0x40b5b4},task,nullptr,TaskLifetimeCallee::none,false};
+        const auto previous=resolve(state.previous),next=resolve(state.next);
+        if((state.previous&&!previous)||(state.next&&!next))return {{TaskFailure::callback_mutation_invalidated_destructor,task,{},0x40b5b4},task,nullptr,TaskLifetimeCallee::none,false};
+        task->destruction_previous_=previous;task->destruction_next_=next;task->destruction_stage_=Task::DestructionStage::children;
+        state.phase=3;const auto result=finish_destruction(task);return {result,task,nullptr,TaskLifetimeCallee::none,bool(result)};
+    }
+    return {{},task,nullptr,TaskLifetimeCallee::none,true};
+}
+TaskResult TaskScheduler::free_children(const TaskHandle& parent){
+    auto state=begin_free_children(parent);
+    for(;;){const auto call=advance_lifetime(state);if(!call.result)return call.result;if(call.completed)return {};
+        const auto result=call.callee==TaskLifetimeCallee::run_children?run_children(call.task):destroy_task(call.task);if(!result)return result;
+    }
+}
+TaskResult TaskScheduler::destroy_task(const TaskHandle& task){
+    auto state=begin_destruction(task);
+    for(;;){const auto call=advance_lifetime(state);if(!call.result)return call.result;if(call.completed)return {};
+        if(call.callee==TaskLifetimeCallee::destructor){task->destructor_active_=true;try{call.callback(*this,call.task);}catch(...){task->destructor_active_=false;throw;}task->destructor_active_=false;}
+        else {const auto result=free_children(call.task);if(!result)return result;}
+    }
 }
 
 TaskResult TaskScheduler::resume_destruction(const TaskHandle& task) {

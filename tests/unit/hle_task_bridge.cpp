@@ -29,9 +29,10 @@ struct Fixture {
         for(const auto at:{0x10000000U,0x10000040U,0x10000080U,0x100000c0U,0x10000100U,0x10000140U})require(p->guest().add_instruction_hook(at,[this](X86Guest& g,std::uint32_t pc){callbacks.push_back({pc,g.u32(g.esp()+4).value_or(0),g.u32(0x3abdbf4).value_or(0),g.u32(0x3abdbf8).value_or(0),g.u32(g.esp()).value_or(0),g.esp(),g.reg(UC_X86_REG_ESI),g.reg(UC_X86_REG_EBX),g.reg(UC_X86_REG_EDI)});return false;},&error),error);
         if(native)for(auto entry:task_overrides(*p)){const auto bridge=entry.bridge;const auto at=entry.address;require(p->guest().add_override(at,[this,bridge,at](X86Guest& g){if(mutant&&at!=0x40b1a0){if(at==0x40b030)g.set_reg(UC_X86_REG_EDX,g.reg(UC_X86_REG_EDX)^1U);else if(at==0x40b170)g.set_u32(0x3abdbe0,g.u32(0x3abdbe0).value_or(0)^1U);else if(at==0x40b460)g.set_u32(0x3abdbe8,g.u32(0x3abdbe8).value_or(0)^1U);else g.set_u32(g.esp()+4,g.u32(g.esp()+4).value_or(0)^1U);}return bridge(g);},&error),error);}}
 };
-void compare(Fixture& a,Fixture& b,std::uint32_t entry,const std::vector<std::uint32_t>& args){const auto x=a.p->guest().call(entry,args),y=b.p->guest().call(entry,args);require(bool(x),"original: "+x.error);require(bool(y),"native: "+y.error);
+void compare(Fixture& a,Fixture& b,std::uint32_t entry,const std::vector<std::uint32_t>& args){const auto x=a.p->guest().call(entry,args),y=b.p->guest().call(entry,args);require(bool(x),"original: "+x.error);require(bool(y),"native entry "+std::to_string(entry)+": "+y.error);
     if(entry!=0x40b310&&entry!=0x40b570&&entry!=0x40b0c0&&entry!=0x40b7e0&&entry!=0x40b170&&entry!=0x40b420)require(x.eax==y.eax,"task-work EAX");
     for(const auto at:{0x3abdbe8U,0x3abdbf0U,0x3c839fcU,0x3c83a00U,0x3abdbe4U,0x3abdbecU,0x3abdbf4U,0x3abdbf8U})require(a.p->guest().u32(at)==b.p->guest().u32(at),"task-work globals at "+std::to_string(at)+" entry "+std::to_string(entry));
+    if(a.callbacks!=b.callbacks){for(unsigned k=0;k<std::min(a.callbacks.size(),b.callbacks.size());++k)if(a.callbacks[k]!=b.callbacks[k]){std::cerr<<"callback diff entry "<<std::hex<<entry<<" index "<<k<<" original";for(auto v:a.callbacks[k])std::cerr<<" "<<v;std::cerr<<" native";for(auto v:b.callbacks[k])std::cerr<<" "<<v;std::cerr<<std::dec<<"\n";break;}}
     require(a.callbacks==b.callbacks,"callback source return/frame/context/register trace");
     for(unsigned k=0;k<8;++k)require(a.p->guest().u32(0x3abdbc4+4*k)==b.p->guest().u32(0x3abdbc4+4*k),"task list heads entry "+std::to_string(entry));
     const auto& l=a.p->hle().log();const auto& r=b.p->hle().log();require(l.size()==r.size(),"task-work trace count");
@@ -69,6 +70,7 @@ int main(int argc,char** argv){try{
             else if(op==6)compare(original,native,0x40b7e0,{tasks.at(a)});
             else if(op==7)for(auto* p:{&original,&native})p->p->guest().set_u32(tasks.at(a)+16,0x40b7e0);
             else if(op==8)for(auto* p:{&original,&native}){const auto work=p->p->guest().u32(tasks.at(a)+32);require(work&&*work,"primary work");p->p->guest().set_u32(*work+b,c);}
+            else if(op==10)for(auto* p:{&original,&native})p->p->guest().set_u32(tasks.at(a)+24,0x51f680);
             else if(op==9){std::vector<std::uint32_t> blocks;for(const auto n:{32U,16U,80U,20U,20U,8U,16U}){compare(original,native,0x40b220,{n});blocks.push_back(original.p->guest().reg(UC_X86_REG_EAX));}
                 for(auto* p:{&original,&native}){auto& g=p->p->guest();const auto work=g.u32(tasks.at(a)+32).value_or(0);const std::uint32_t lengths[7]={32,0,80,20,20,0,16};for(unsigned k=0;k<7;++k)if(lengths[k]){std::vector<std::uint8_t> zero(lengths[k],0);g.write(blocks[k],zero.data(),zero.size());}const std::uint8_t flag=0x80;g.write(blocks[0]+5,&flag,1);
                     const std::pair<std::uint32_t,std::uint32_t> links[]={{blocks[0]+12,blocks[1]},{work+56,blocks[0]},{work+60,blocks[2]},{blocks[3]+16,blocks[4]},{blocks[2]+64,blocks[3]},{blocks[2]+68,blocks[5]},{blocks[2]+76,blocks[6]}};for(const auto& [at,value]:links)g.set_u32(at,value);}
@@ -85,6 +87,14 @@ int main(int argc,char** argv){try{
         compare(original,native,0x40b860,{0,1,0x10000000});compare(original,native,0x40b860,{0,8,0x10000000});
         const auto base=original.p->guest().u32(0x3abdbe4).value_or(0);for(auto* f:{&original,&native})for(unsigned k=0;k<8;++k)f->p->guest().set_u32(base+52*k+48,0x30000000+4*k);
         compare(original,native,owner,owner==0x40b170?std::vector<std::uint32_t>{}:std::vector<std::uint32_t>{owner==0x40b420?parent:0});memory(original,native);++dispatch_cases;
+    }
+    unsigned lifetime_scenarios=0;
+    for(const auto owner:{0x40b570U,0x40b7e0U})for(const auto destructor:{0x10000000U,0x10000080U,0x10000100U}){
+        original.callbacks.clear();native.callbacks.clear();compare(original,native,0x40b1a0,{});compare(original,native,0x40b460,{});
+        compare(original,native,0x40b860,{15,0,0x51f680});const auto parent=original.p->guest().reg(UC_X86_REG_EAX);
+        compare(original,native,0x40b940,{15,0x51f680,parent});const auto child=original.p->guest().reg(UC_X86_REG_EAX);compare(original,native,0x40b860,{0,1,0x10000000});
+        for(auto* f:{&original,&native}){f->p->guest().set_u32(parent+24,destructor);f->p->guest().set_u32(child+24,destructor);}
+        compare(original,native,owner,{parent});memory(original,native);++lifetime_scenarios;
     }
     unsigned dispatch_mutants=0;
     for(const auto owner:{0x40b0c0U,0x40b170U,0x40b420U}){
@@ -114,9 +124,14 @@ int main(int argc,char** argv){try{
     for(auto* p:{&original,&native}){p->p->guest().set_reg(UC_X86_REG_EDX,0xffffffffU);p->p->guest().set_reg(UC_X86_REG_EDI,0);}compare(original,native,0x40b030,{});compare(original,native,0x40b860,{0,9,0});const auto source_null=original.p->guest().call(0x40b940,{2,0,0}),native_null=native.p->guest().call(0x40b940,{2,0,0});require(!source_null&&!native_null&&native_null.error.find("40b95c")!=std::string::npos,"null parent source boundary");memory(original,native);
     clear_graph();compare(original,native,0x40b1a0,{});compare(original,native,0x40b220,{TaskWorkArena::usable_bytes-32});compare(original,native,0x40b460,{});memory(original,native);
     clear_graph();compare(original,native,0x40b1a0,{});compare(original,native,0x40b460,{});compare(original,native,0x40b220,{TaskWorkArena::usable_bytes-0x34020-32});compare(original,native,0x40b860,{2,0,0});memory(original,native);
+    unsigned lifetime_mutants=0;
+    for(const auto owner:{0x40b570U,0x40b7e0U}){
+        clear_graph();original.callbacks.clear();native.callbacks.clear();compare(original,native,0x40b1a0,{});compare(original,native,0x40b460,{});compare(original,native,0x40b860,{2,0,0});const auto parent=original.p->guest().reg(UC_X86_REG_EAX);compare(original,native,0x40b940,{2,0,parent});native.mutant=true;
+        try{compare(original,native,owner,{parent});}catch(const std::exception&){++lifetime_mutants;}native.mutant=false;
+    }require(lifetime_mutants==2,"lifetime bridge mutants");original.callbacks.clear();native.callbacks.clear();
     auto& g=native.p->guest();require(bool(g.call(0x40b1a0,{})),"native reset");const auto base=g.u32(0x3abdbf0).value_or(0);g.set_u32(base+8,base+64);
     const auto corrupt=g.call(0x40b220,{32});require(!corrupt&&corrupt.error.find("changed metadata")!=std::string::npos,"external metadata corruption boundary");
     require(bool(g.call(0x40b1a0,{})),"native reset after corruption");const auto wrapped=g.call(0x40b220,{0xffffffffU});require(!wrapped&&wrapped.error.find("40b220")!=std::string::npos,"declared size-wrap boundary");
     const auto block=g.call(0x40b220,{32});require(bool(block)&&block.eax!=0,"native allocation");require(bool(g.call(0x40b310,{block.eax})),"native release");const auto twice=g.call(0x40b310,{block.eax});require(!twice&&twice.error.find("40b31c")!=std::string::npos,"double/foreign free boundary");
-    std::cout<<"Task bridge: "<<sequences<<" complete oracle sequences, "<<operations<<" operations; "<<graph_sequences<<" graph sequences/"<<graph_operations<<" operations; "<<dispatch_cases<<" dispatch scenarios; actual CRT/heap acquisition and repeated initialization; EAX allocation/global/exact HLE traces and full 16 MiB+32 arena bytes match with guest payload writes and sentinel padding; 2 work, 5 graph and 3 dispatch input mutants caught; corrupt metadata, wrap and unowned free stop explicitly\n";return 0;
+    std::cout<<"Task bridge: "<<sequences<<" complete oracle sequences, "<<operations<<" operations; "<<graph_sequences<<" graph sequences/"<<graph_operations<<" operations; "<<dispatch_cases<<" dispatch scenarios; "<<lifetime_scenarios<<" lifetime callback scenarios; actual CRT/heap acquisition and repeated initialization; EAX allocation/global/exact HLE traces and full 16 MiB+32 arena bytes match with guest payload writes and sentinel padding; 2 work, 5 graph and 3 dispatch and 2 lifetime input mutants caught; corrupt metadata, wrap and unowned free stop explicitly\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

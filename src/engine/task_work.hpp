@@ -92,6 +92,8 @@ public:
     using PayloadReader = std::function<bool(std::uint32_t,void*,std::uint32_t)>;
     using PayloadWriter = std::function<bool(std::uint32_t,const void*,std::uint32_t)>;
     void set_payload_transport(PayloadReader read,PayloadWriter write) { payload_reader_=std::move(read);payload_writer_=std::move(write); }
+    using ReferenceResolver = std::function<TaskWorkReferenceResult(std::uint32_t)>;
+    void set_reference_resolver(ReferenceResolver resolve) { reference_resolver_=std::move(resolve); }
 
 private:
     std::optional<std::uint32_t> reference_base_;
@@ -107,6 +109,7 @@ private:
     MetadataWriter metadata_writer_;
     PayloadReader payload_reader_;
     PayloadWriter payload_writer_;
+    ReferenceResolver reference_resolver_;
     TaskWorkResult validate(const TaskWorkHandle&, std::uint32_t at,
                             std::uint32_t bytes) const;
     void store_pointer(std::uint32_t at, std::optional<std::uint32_t> offset);

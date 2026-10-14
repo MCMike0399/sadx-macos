@@ -137,6 +137,20 @@ struct TaskDispatchCall {
     TaskCallback callback=nullptr;
     bool completed=false;
 };
+enum class TaskLifetimeCallee {none,destructor,free_children,destroy_child,run_children};
+struct TaskLifetimeState {
+    TaskHandle task,previous,next;
+    TaskResult failure;
+    unsigned phase=0;
+    bool children=false;
+};
+struct TaskLifetimeCall {
+    TaskResult result;
+    TaskHandle task;
+    TaskCallback callback=nullptr;
+    TaskLifetimeCallee callee=TaskLifetimeCallee::none;
+    bool completed=false;
+};
 
 enum class TaskCallbackContextFailure { none,null_callback,null_context,conflicting_owner };
 struct TaskCallbackContextResult {
@@ -181,6 +195,9 @@ public:
     TaskResult create_child(std::uint32_t flags, TaskCallback callback,
                             const TaskHandle& parent);
     TaskResult destroy_task(const TaskHandle& task); // 0x40b570
+    TaskLifetimeState begin_destruction(const TaskHandle&);
+    TaskLifetimeState begin_free_children(const TaskHandle&);
+    TaskLifetimeCall advance_lifetime(TaskLifetimeState&);
     // Explicit native continuation of an interrupted destruction, not another
     // call to source DestroyTask (which rejects the now-unlinked node).
     TaskResult resume_destruction(const TaskHandle& task);

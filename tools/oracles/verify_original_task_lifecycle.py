@@ -17,6 +17,7 @@ def fixtures():
          [(1,15,0,0),(2,15,0,0),(2,15,1,0),(2,15,2,0),(3,0,0,0)],
          [(0,0,0,0),(0,1,0,0),(0,8,0,0),(3,0,0,0),(0,7,0,0)]]
     out.append([(1,2,0,0),(1,2,0,0),(1,2,1,0),(5,0,0,0),(5,1,0,0),(2,2,0,0),(7,0,0,0),(5,0,0,0),(5,0,0,0)])
+    out.append([(1,15,0,0),(10,0,0,0),(2,15,0,0),(10,1,0,0),(3,0,0,0)])
     rng=random.Random(0x40b86040b570)
     for _ in range(12):
         ops=[];live=[];allocation=0
@@ -41,7 +42,7 @@ def original_run(image,ops):
     if m.reg_read(UC_X86_REG_ESP)!=STACK+8:raise RuntimeError('Pool initializer ABI')
     m.mem_write(0x38f6e08,struct.pack('<I',0x30000000));allocations=[];trace=[];callbacks=[]
     def observe(mu,address,size,user):
-        esp=mu.reg_read(UC_X86_REG_ESP);callbacks.extend(struct.unpack('<I',mu.mem_read(esp+4,4)));callbacks.extend(struct.unpack('<2I',mu.mem_read(0x3abdbf4,8)))
+        esp=mu.reg_read(UC_X86_REG_ESP);callbacks.extend(struct.unpack('<I',mu.mem_read(esp+4,4)));callbacks.extend(struct.unpack('<2I',mu.mem_read(0x3abdbf4,8)));task=struct.unpack('<I',mu.mem_read(esp+4,4))[0];parent=struct.unpack('<I',mu.mem_read(task+8,4))[0];callbacks.append(struct.unpack('<I',mu.mem_read(parent+16,4))[0] if parent else 0)
     m.hook_add(unicorn.UC_HOOK_CODE,observe,begin=0x51f680,end=0x51f680)
     for step,(op,a,b,c) in enumerate(ops):
         ret=0
@@ -60,6 +61,7 @@ def original_run(image,ops):
         elif op==7:m.mem_write(allocations[a]+16,struct.pack('<I',0x40b7e0))
         elif op==8:
             work=struct.unpack('<I',m.mem_read(allocations[a]+32,4))[0];m.mem_write(work+b,struct.pack('<I',c))
+        elif op==10:m.mem_write(allocations[a]+24,struct.pack('<I',0x51f680))
         elif op==9:
             work=struct.unpack('<I',m.mem_read(allocations[a]+32,4))[0]
             blocks=[call(m,0x40b220,[n])for n in (32,16,80,20,20,8,16)]
@@ -89,7 +91,7 @@ def main():
         callback_fn=lib.sadx_native_task_callback_trace;callback_fn.argtypes=[ctypes.POINTER(ctypes.c_uint32),ctypes.c_size_t];callback_fn.restype=ctypes.c_size_t
         callback_out=(ctypes.c_uint32*(len(callback_expected)+16))();callback_count=callback_fn(callback_out,len(callback_out));callback_match=callback_count==len(callback_expected) and list(callback_out)[:callback_count]==callback_expected
         actual_bytes=bytes(memory);trace_diffs=[i for i,(x,y)in enumerate(zip(trace,expected))if x!=y];byte_diffs=[i for i,(x,y)in enumerate(zip(actual_bytes,original_bytes))if x!=y]
-        item=dict(callback_contexts_match=callback_match,callback_count=len(callback_expected)//3,sequence=number,operations=len(ops),trace_mismatches=len(trace_diffs),byte_mismatches=len(byte_diffs),expected_boundary_failures=failure_sites,trace_examples=[dict(index=i,original=hex(expected[i]),native=hex(trace[i]))for i in trace_diffs[:12]],byte_examples=[dict(offset=hex(i),original=original_bytes[i],native=actual_bytes[i])for i in byte_diffs[:24]],original_arena_sha256=sha(original_bytes),native_arena_sha256=sha(actual_bytes));report['sequences'].append(item);print(json.dumps(item),flush=True)
+        item=dict(callback_contexts_match=callback_match,callback_count=len(callback_expected)//4,sequence=number,operations=len(ops),trace_mismatches=len(trace_diffs),byte_mismatches=len(byte_diffs),expected_boundary_failures=failure_sites,trace_examples=[dict(index=i,original=hex(expected[i]),native=hex(trace[i]))for i in trace_diffs[:12]],byte_examples=[dict(offset=hex(i),original=original_bytes[i],native=actual_bytes[i])for i in byte_diffs[:24]],original_arena_sha256=sha(original_bytes),native_arena_sha256=sha(actual_bytes));report['sequences'].append(item);print(json.dumps(item),flush=True)
     # Keep inactive membership evidence as a strict boundary experiment. Stop
     # on entry to the real401000 logger; its CRT side effects remain unexecuted.
     original=Original(image,0x27f);m=original.machine;m.mem_map(ARENA,0x1001000);m.mem_map(GLOBALS,0x1000);m.mem_map(0x38f6000,0x1000);m.reg_write(UC_X86_REG_EDX,ARENA);call(m,0x40b1ce,[])

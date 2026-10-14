@@ -10,7 +10,7 @@ by automated tests. Read AGENTS.md, then docs/STATUS.md, docs/ARCHITECTURE.md, d
 docs/METHOD.md and docs/decisions/ADR-0001..0004 before touching code. Read the last handoff entries
 in docs/HANDOFF.md (from "M1 4e completion" on) — they record every HLE assumption and bug found.
 
-Where things stand (gate 127): the in-process guest runs sonic.exe from its entry point with the real
+Where things stand (gate 128): the in-process guest runs sonic.exe from its entry point with the real
 mod loader and mods (MSVCP140/VCRUNTIME140 as real code, everything else HLE in src/hle) from the SEGA
 logo through the intro movie (a headless DirectShow graph, src/hle/hle_dshow: no video/audio drawn, a
 reported assumption) to the title screen (frame 7168) and on into the attract demo; two boots are
@@ -18,8 +18,8 @@ identical. Host keyboard input reaches the guest as WM_KEYDOWN/WM_KEYUP (HleProc
 Input mod's window subclass maps them): Enter skips the movie and opens "Select a Saved File".
 sadx-app --guest draws all of it with Metal and forwards the Mac keyboard (--keys scripts presses).
 The FPU shims cover all 590 confirmed FPATAN/FSINCOS/FPTAN/FSIN/FCOS/F2XM1/FYL2X/RCP/RSQRT sites.
-profile-applied is 119/119. The process override table binds 36 owners (frame loop, startup registrars, the
-D3DX math leaves + blend wrapper/leaf, fog colour, view/projection/range and fog init/table/generation/switches + heap allocation/free + task-work initialization/allocation/free + task pool/creation/free), equivalence-tested on 11 oracle corpora + enumerated cases with mutants, live in the
+profile-applied is 119/119. The process override table binds 38 owners (frame loop, startup registrars, the
+D3DX math leaves + blend wrapper/leaf, fog colour, view/projection/range and fog init/table/generation/switches + heap allocation/free + task-work initialization/allocation/free + task pool/creation/free/dispatch/lifetime), equivalence-tested on 11 oracle corpora + enumerated cases with mutants, live in the
 boot and over 600 frames. `make m1` runs the roadmap's M1 tests, including the device, heap and task-work HLE bridge corpora.
 
 Timing is now checked: guest-frames asserts 60 steady title frames after the full intro at
@@ -50,12 +50,11 @@ Current milestone: M1 — what is left (one gate each: make -j10 gate — it ope
 record with tools/gate/record_gate.py only on rc=0; python3 tools/gate/gen_status.py; a docs/HANDOFF.md
 entry; commit; do not push unless asked):
 
-1. Override equivalence for the rest of the ported owners with oracles (24 of the previously listed address-named ones are
-   unbound: see the 4d handoff entry for the list). Next: task destruction/free-children and render queue; the pool, allocation/creation/child/free owners are now bound. Heap owners 780f60/780fb0 are now bound through hle_heap_bridge; projection range through hle_device_bridge. The bridge currently binds
+1. Override equivalence for the rest of the ported owners with oracles (22 of the previously listed address-named ones are
+   unbound: see the 4d handoff entry for the list). Next: render queue and remaining owners; the pool, allocation/creation/child/free owners are now bound. Heap owners 780f60/780fb0 are now bound through hle_heap_bridge; projection range through hle_device_bridge. The bridge currently binds
    403180/4030d0/77ec60/7949b0/781250/791170/794e40/794ec0/787260/411af0/411b40, verifies the HLE vtable target, invokes the actual synchronous COM handler,
    preserves call trace/partial-store order and rereads the live device. process_overrides combines it
-   with the 12 guest-only, 2 heap and 3 task-work owners; sadx-app installs that table. Bind the task graph and
-   the render queue. Give each oracle a <slug>.cases.bin (the verify scripts write it; add it to
+   with the 12 guest-only, 2 heap and 13 task owners; sadx-app installs that table. Bind the render queue and remaining owners. Give each oracle a <slug>.cases.bin (the verify scripts write it; add it to
    OVERRIDE_CORPORA) instead of enumerating cases. Blend and fog corpora are now generated dependencies;
    hle-device-bridge replays 16,418 wrapper/leaf cases +300 fog-colour cases and 3,000 view +3,000 derived projection cases plus 400 fog-init/1,200 fog-table cases, including cold dispatch
    initialization, boundaries and mutants. D3DX dispatch unset calls original 77350c after the
@@ -86,7 +85,7 @@ entry; commit; do not push unless asked):
    partition/links/arena ownership before replacing state and rejects active walkers/destruction.
    40b460 runs original 51a740 with redirect reserve 8; source globals/free links are serialized.
    40b030/40b860/40b940/40b6c0 use the native scheduler. Callback addresses map to native tokens,
-   not host pointer casts. Guest run/destroy functions remain original and their changes are reconciled
+   not host pointer casts. Guest callbacks remain original and their changes are reconciled
    before the next native operation. All 17 lifecycle sequences (2,302 operations) replayed with those
    guest callees; full arena bytes/defined results/globals match. Three core and five graph mutants caught.
    Null-parent creation preserves its allocated prefix then stops at 40b95c. Unknown callback execution
@@ -99,6 +98,14 @@ entry; commit; do not push unless asked):
    mutation/nesting/self-deletion/prepend and same-slot reuse. Lifecycle oracle now checks callback-
    time globals (18 sequences/2,311 operations); all three dispatch core mutants caught.
    Unknown execution inside a synchronous creation rollback remains a named boundary.
+
+   Task lifetime follow-up (gate 128): 40b570/40b7e0 bind native lifetime cursors; original guest
+   destructors and recursive child callees execute via source-return continuations before unlink/
+   work cleanup/recycle. Source retired rows retain field30; owned controls update flag/task linkage.
+   External work-reference resolution maps observed guest words to tracked native allocations,
+   not pointer casts. Lifetime callback scenarios cover nested dispatch and prepend. Lifecycle
+   corpus now has 19 sequences/2,316 operations, with callback observations of parent exec state.
+
 2. M2 golden-frames: offscreen render of fixed guest frames (SEGA logo, title screen, file select)
    against reviewed goldens (perceptual diff), using sadx-app --guest --keys/--screenshot.
 

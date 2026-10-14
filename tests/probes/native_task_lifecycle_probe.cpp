@@ -9,7 +9,7 @@ static std::vector<std::uint32_t> callback_trace;
 class TaskSourceProbe {
     static constexpr std::uint32_t base=0x20000020;
     static std::uint32_t address(const TaskHandle& t) {return t && t->source_slot_?base+*t->source_slot_*52:0;}
-    static void observed_no_op(TaskScheduler& scheduler,const TaskHandle& task){callback_trace.push_back(address(task));callback_trace.push_back(callback(scheduler.context().current_function));callback_trace.push_back(scheduler.context().field30?0x30000000:0);}
+    static void observed_no_op(TaskScheduler& scheduler,const TaskHandle& task){callback_trace.push_back(address(task));callback_trace.push_back(callback(scheduler.context().current_function));callback_trace.push_back(scheduler.context().field30?0x30000000:0);callback_trace.push_back(task->parent_?callback(task->parent_->exec):0);}
     static std::uint32_t callback(TaskCallback c) {
         if(c==&TaskScheduler::source_no_op||c==&observed_no_op)return 0x51f680;
         if(c==&TaskScheduler::destroy_callback)return 0x40b570;
@@ -44,6 +44,7 @@ public:
                 else if(op==6)result=scheduler.free_children(t);
                 else if(op==7)t->exec=&TaskScheduler::free_children_callback;
                 else if(op==8) {auto written=arena->write(t->primary_work,b,&c,4);if(!written)return 4;}
+                else if(op==10)t->destructor=&observed_no_op;
                 else if(op==9) {
                     auto collision=arena->allocate(32).work,nested=arena->allocate(16).work;
                     auto object=arena->allocate(80).work;

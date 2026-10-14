@@ -57,6 +57,7 @@ struct TaskBridge {
             }
         });
         arena->set_payload_transport([this](std::uint32_t at,void* out,std::uint32_t bytes){return process.guest().read(base+at,out,bytes);},[this](std::uint32_t at,const void* in,std::uint32_t bytes){return process.guest().write(base+at,in,bytes);});
+        arena->set_reference_resolver([this](std::uint32_t value){const auto i=allocations.find(value);if(i==allocations.end())return TaskWorkReferenceResult{TaskWorkFailure::unbound_reference,{},0,{}};return TaskWorkReferenceResult{TaskWorkFailure::none,i->second,0,i->second->data_offset()};});
     }
     void initialize(){
         auto& g=process.guest();entry=0x40b1a0;const auto current=g.u32(0x3abdbf0);
@@ -160,6 +161,43 @@ struct TaskBridge {
         catch(const MetadataUnavailable&){}
         return 0;
     }
+    struct LifetimeRun {
+        TaskLifetimeState cursor;
+        std::uint32_t owner=0,source_pool=0;
+        std::array<std::uint32_t,4> saved{}; // EBP, ESI, EBX, EDI
+        bool children=false;
+    };
+    void lifetime_next(const std::shared_ptr<LifetimeRun>& run,bool returned=false){
+        auto& g=process.guest();entry=run->owner;
+        try{
+            if(returned){if(pool!=run->source_pool){g.stop("task bridge: changed lifetime pool at 40b596");return;}if(!ready())return;import_graph();}
+            auto before=scheduler->source_graph();std::vector<std::pair<std::shared_ptr<Task::ObjectControl>,std::uint32_t>> borrowed;
+            for(const auto& n:before.nodes)if(n.control)borrowed.push_back({n.control,controls.at(n.control.get())});
+            const auto call=scheduler->advance_lifetime(run->cursor);
+            if(call.task&&call.task->retired()){auto& row=serialized[*call.task->source_slot()];for(unsigned f=2;f<12;++f)row[f]=0;row[12]=raw(call.task->field30);}
+            for(const auto& [control,address_value]:borrowed){g.write(address_value+2,&control->flags_at_2,1);g.set_u32(address_value+4,control->task_at_4?address(control->task_at_4->source_slot()):0);}
+            export_graph();flush_work();
+            if(!call.result){g.stop("task bridge: lifetime boundary "+hex(call.result.source_boundary?call.result.source_boundary:run->owner));return;}
+            if(call.completed){g.set_reg(UC_X86_REG_ESI,run->saved[1]);if(!run->children){g.set_reg(UC_X86_REG_EBP,run->saved[0]);g.set_reg(UC_X86_REG_EBX,run->saved[2]);g.set_reg(UC_X86_REG_EDI,run->saved[3]);}return;}
+            const auto task=address(call.task->source_slot());std::uint32_t target=0,back=0,reserve=0;const auto sp=g.esp();
+            if(run->children){target=call.callee==TaskLifetimeCallee::run_children?0x40b420:0x40b570;back=call.callee==TaskLifetimeCallee::run_children?0x40b7f4:0x40b826;reserve=8;g.set_u32(sp-4,run->saved[1]);g.set_reg(UC_X86_REG_ESI,address(run->cursor.task->source_slot()));g.set_eax(task);}
+            else {
+                g.set_u32(sp-4,run->saved[1]);g.set_u32(sp-8,run->saved[0]);g.set_reg(UC_X86_REG_ESI,address(run->cursor.task->source_slot()));g.set_reg(UC_X86_REG_EBP,0);
+                if(call.callee==TaskLifetimeCallee::destructor){target=raw(call.callback);back=0x40b593;reserve=12;g.set_eax(target);}
+                else {target=0x40b7e0;back=0x40b5b1;reserve=20;g.set_u32(sp-12,run->saved[2]);g.set_u32(sp-16,run->saved[3]);g.set_reg(UC_X86_REG_EBX,run->cursor.previous?address(run->cursor.previous->source_slot()):0);g.set_reg(UC_X86_REG_EDI,run->cursor.next?address(run->cursor.next->source_slot()):0);}
+            }
+            g.redirect(target,{task},0,[this,run](X86Guest&){lifetime_next(run,true);},reserve,back);
+        }catch(const MetadataUnavailable&){}
+    }
+    std::uint32_t lifetime(X86Guest& g,std::uint32_t at){
+        entry=at;if(at==0x40b570&&g.u32(g.esp()+4)==0){g.set_eax(0);return 0;}if(!ready())return 0;
+        try{import_graph();const auto id=slot(word(g.esp()+4));const auto task=id?scheduler->source_task(*id):TaskHandle{};if(!task){g.stop("task bridge: unobserved lifetime task "+hex(word(g.esp()+4))+" at "+hex(at));return 0;}
+            auto run=std::make_shared<LifetimeRun>();run->owner=at;run->source_pool=pool;run->children=at==0x40b7e0;
+            const int regs[4]={UC_X86_REG_EBP,UC_X86_REG_ESI,UC_X86_REG_EBX,UC_X86_REG_EDI};for(unsigned k=0;k<4;++k)run->saved[k]=g.reg(regs[k]);
+            run->cursor=run->children?scheduler->begin_free_children(task):scheduler->begin_destruction(task);lifetime_next(run);
+        }catch(const MetadataUnavailable&){}
+        return 0;
+    }
     struct DispatchRun {
         TaskDispatchState cursor;
         std::uint32_t owner=0,source_pool=0;
@@ -233,6 +271,7 @@ std::vector<OverrideEntry> task_overrides(HleProcess& p){
     }});
     out.push_back({0x40b460,"task_pool_initialize",{{0x3abdbe4,4},{0x3abdbec,4},{0x3abdbc4,32},{0x3abdbe8,4}},[state](X86Guest& g){g.redirect(0x51a740,{},0,[state](X86Guest&){state->initialize_pool();},8);return 0U;}});
     for(const auto at:{0x40b030U,0x40b860U,0x40b940U,0x40b6c0U})out.push_back({at,at==0x40b030?"task_allocate":at==0x40b860?"task_create_element":at==0x40b940?"task_create_child":"task_free",{{0x3abdbec,4},{0x3abdbc4,32},{0x3abdbe8,4}},[state,at](X86Guest& g){return state->graph(g,at);}});
+    for(const auto at:{0x40b570U,0x40b7e0U})out.push_back({at,at==0x40b570?"task_destroy":"task_free_children",{{0x3abdbec,4},{0x3abdbc4,32},{0x3abdbe8,4}},[state,at](X86Guest& g){return state->lifetime(g,at);}});
     for(const auto at:{0x40b0c0U,0x40b170U,0x40b420U})out.push_back({at,at==0x40b0c0?"task_dispatch_index":at==0x40b170?"task_dispatch_all":"task_dispatch_children",{{0x3abdbf4,8}},[state,at](X86Guest& g){return state->dispatch(g,at);}});
     for(const auto entry:{0x40b220U,0x40b310U})out.push_back({entry,entry==0x40b220?"task_work_allocate":"task_work_release",{{0x3abdbe8,4}},[state,entry](X86Guest& g){return state->run(g,entry);}});
     return out;
