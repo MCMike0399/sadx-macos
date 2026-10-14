@@ -192,11 +192,11 @@ Each item is one `/goal` step (one gate). Definitions of done are the roadmap ta
 
 1. **M1 override-equivalence for the remaining ported owners.** The handoff says 20 of the
    address-named list from the 4d entry remain unbound; grepping the bridges for entry addresses
-   gives these ported owners with no `OverrideEntry` (reconciled at gate 130: 28 + 3, the "20" was a
-   miscount): 401000 401830 401a20 401ac0 40bf40 40c030 40c090 40f350 40f3a0 410510
-   419030 4208e0 4250d0 77dfc0 77f0a0 77f150 77f610 780c30 781070 785190 789bd0 78dbe0 7912e0
+   gives these ported owners with no `OverrideEntry` (reconciled at gate 130; 27 + 3 after gate 131):
+   401000 401830 401a20 401ac0 40bf40 40c030 40c090 40f350 40f3a0 410510
+   419030 4208e0 4250d0 77dfc0 77f0a0 77f150 77f610 780c30 781070 785190 789bd0 7912e0
    791610 791bd0 791df0 792100 793e70, and 411e30/40f010/411e20 of game_frame_control (they need a
-   native input-callback bridge). 402f40 and 772615 were bound at gate 130. The render-queue
+   native input-callback bridge). 402f40 and 772615 were bound at gate 130, 78dbe0 at gate 131. The render-queue
    consumer 4086f0 cannot be bound until its other record-type bodies are ported (it stops on them,
    and the live title produces them); 4073b0 has no native port yet. Those ports, then the frame owners. Every new entry: a `<slug>.cases.bin`
    corpus in `OVERRIDE_CORPORA`, replay through the real HLE device/heap/task owners, source-return

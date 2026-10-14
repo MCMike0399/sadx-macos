@@ -5,6 +5,7 @@
 #include "engine/ninja_frame_calls.hpp"
 #include "engine/ninja_keyboard.hpp"
 #include "engine/ninja_view.hpp"
+#include "engine/ninja_screen.hpp"
 #include "math/d3dx_math.hpp"
 #include "game/game_startup.hpp"
 #include <unicorn/unicorn.h>
@@ -78,6 +79,26 @@ std::vector<OverrideEntry> frame_loop_overrides(const ExecutableImage& image){
         g.set_eax(0x3ab9864);g.set_reg(UC_X86_REG_ECX,bits((*projection)[2]));g.set_reg(UC_X86_REG_EDX,bits((*projection)[3]));
         g.set_fpu_status(static_cast<std::uint16_t>((g.fpu_status()&~0x4700U)|x87_comparison_status(compared)|(fp.exception_flags()&0x3f)));
         return 0;},true,{},true});
+    // 78dbe0 (stdcall, w): the depth of (0, 0, w below 7e9b40 or unordered ? 65535 : 1/w) through slot 14
+    // (thunk 770295) = 772615 with viewport 3d12780, projection 3d129c0 and 389d318 as view and world, returned
+    // in ST(0). Bound only on the SSE dispatch table (slots 3/10/14 = 774310/774150/772615), as for 772615.
+    // EAX is 772615's pOut, the source's local at entry ESP - 0xc; ECX/EDX (772615's leftovers) are not modelled.
+    out.push_back({0x78dbe0,"ninja_projected_depth",{},[](X86Guest& g)->std::uint32_t{
+        if(g.u32(0x389b7b0)!=0x772615U||g.u32(0x389b784)!=0x774310U||g.u32(0x389b7a0)!=0x774150U){
+            g.stop("override 78dbe0: D3DX dispatch slots 3/10/14 are not the SSE table (77350c not run, or another CPU path) at 78dc3a");return 0;}
+        { // the source pushes at most two x87 values (772615's viewport mapping); a stack fault there is not modelled
+            const auto top=(g.fpu_status()>>11)&7U,tag=g.reg(UC_X86_REG_FPTAG);
+            for(std::uint32_t k=1;k<=2;++k)if(((tag>>(2*((top-k)&7U)))&3U)!=3U){g.stop("override 78dbe0: x87 stack overflow (fewer than two free registers) is not modelled");return 0;}}
+        NinjaScreenState state{};NinjaDeviceState device{};
+        for(std::uint32_t i=0;i<6;++i)device.viewport_at_3d12780[i]=g.u32(0x3d12780+4*i);
+        for(std::uint32_t i=0;i<16;++i){state.projection_at_3d129c0[i]=g.u32(0x3d129c0+4*i);device.matrix_at_389d318[i]=g.u32(0x389d318+4*i);}
+        SseContext sse(g.mxcsr());X87Context fp(control_word(g));
+        NinjaDepthRuntime rt{state,device,sse,fp,sse_reciprocal_by_division};
+        const auto r=ninja_projected_depth_78dbe0(as_float(stack_argument(g,0)),rt);
+        if(!r){g.stop("override 78dbe0: the native port stopped at "+std::to_string(r.source_boundary));return 0;}
+        g.set_fpu_status(static_cast<std::uint16_t>(g.fpu_status()|(fp.exception_flags()&0x3f)));
+        g.return_x87(r.value->significand(),r.value->sign_exponent());
+        g.set_eax(g.esp()-0xc);return 4;},true,{},false,true});
     return out;
 }
 std::vector<OverrideEntry> startup_overrides(){

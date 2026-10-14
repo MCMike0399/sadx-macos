@@ -22,11 +22,14 @@ struct OverrideEntry {
     std::vector<std::pair<unsigned,std::uint32_t>> pointer_writes={};
     // ECX, EDX and the x87 condition bits C3/C2/C1/C0 the source leaves are part of the comparison too.
     bool returns_scratch=false;
+    // Returns a value in ST(0): ST(0), TOP and the tag word are part of the comparison.
+    bool returns_x87=false;
 };
 // The frame-loop owners ported so far whose state is guest globals: 7899a0 (frame multiplier), 7815e0
 // (projection range clamp), 7815c0 (sprite projection scale), 781570 (camera block). `image` supplies the
 // .rdata/.data constants the ports take as inputs (the 88af78 sine table, the 7dcb0c/7dce50 floats).
 // 402f40 (cdecl, colour pointer): the render-queue colour 3ab9864, clamped to [-1, 1], then 77ff90's copy to 3d0f7f0.
+// 78dbe0 (stdcall, w): the projected depth through 772615, returned in ST(0) (SSE dispatch table only).
 std::vector<OverrideEntry> frame_loop_overrides(const ExecutableImage& image);
 // Startup / registration owners whose state is plain guest globals: 789930 (exit-callback slots 3d084b0,
 // returns 1 or 0 in EAX), 40a8a0 (menu block 900e88 -> 9008b4), 77ffc0 (callback list 3ce712c / 3d0fa40) and

@@ -1,0 +1,38 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "94df649099f351fa09b9847e9a39cbd8937384f3eb267718f1e7232ad2c18117",
+ "source_files": {
+  "src/engine/ninja_screen.hpp": "b35eaf87003c06fdf2ba916e7508810c798906a2c27d7660eb92004f59bb2acd",
+  "src/engine/ninja_screen.cpp": "16495da84a08efee1fefb24b8972ae6134e9ef2e58ec781b11880b5dcdffa768",
+  "src/math/d3dx_math.cpp": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171",
+  "src/cpu/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8",
+  "tests/probes/native_ninja_projected_depth_probe.cpp": "b3ff8e75327eca1da5368413a5b9bc91a589e125dbc335b8f9e47c8f77dbd89f",
+  "tools/oracles/verify_original_ninja_projected_depth.py": "bead98b888763a844726c08533b2f4648b7736d9710aa915db3c68c77feae862"
+ },
+ "original_ranges_sha256": {
+  "0x78dbe0-0x78dc49": "700f37d11ed7607388f880c582b0dd5e37286c441dd93c5d13d85bea99be5af5",
+  "0x772615-0x7727a2": "92b14c0c20d229007b58ad27ce5d457047e2a00f2c10785e2f9a6ef80205f430",
+  "0x774150-0x774243": "2e4a96d6d2c559f1aebccd08e4050963b11fd68fb458f536f55d35c24c14ad27",
+  "0x774310-0x774456": "63512349cc3bd37f37668d4d47d8fabe516e1ceb56fc824ee2b472a841bbe2db",
+  "0x770295": "a25b6b27a2f21f8b9572ec660c2512034e5ab745b00d25e5f59f26427496be46"
+ },
+ "cases": 4000,
+ "source_outcomes": {
+  "small": 880,
+  "divided": 2786,
+  "near": 325,
+  "nan": 9
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "state_traces_match": true,
+ "fp_flag_mismatches": 3879,
+ "exception_flags_match": false,
+ "limits": "Projected depth 78dbe0 (stdcall, float w) against original instructions.\n\n78dbe0 compares w with 7e9b40 (FCOMP; below it, or unordered, z = 65535.0, else\nz = 1.0f / w through FDIV and FSTP m32), then D3DXVec3Project((0, 0, z),\nviewport 3d12780, projection 3d129c0, view = world = 389d318) through thunk\n770295 and returns FLD out.z in ST(0) (ret 4). The original runs 770295, 772615,\n774310 and 774150 as real code with dispatch slots 3/10/14 written as 77350c\nleaves them on an SSE CPU without 3DNow! (774310, 774150, 772615); 77350c is not\nexecuted. Cases: w at the 7e9b40 edge and its neighbours, signed zeros,\nnegatives, infinities, denormals, NaNs, and typical depths; integer viewports\nincluding zero/negative extents; perspective-like and random projections; the\nimage's 389d318 or random words; four masked x87 control words and the MXCSR\nrounding modes. Compared: the returned ext80 (bitwise), that exactly one value\nwas pushed (TOP and tag), EAX (772615's pOut, entry ESP - 0xc). RCPPS is\nUnicorn's QEMU division, the same model the native port uses; cases keep at\nmost one NaN source (Unicorn applies the x87 NaN rule to SSE operands). x87\nexception flags are compared separately: Unicorn 2.1.4 raises no PE for an\ninexact FDIV/FSTP (1/w for most w) nor IE/DE for NaN/denormal operands, which\nthe native model raises as the SDM documents, so nearly every case differs in\nflags only (verdict partial); MXCSR flags are not compared. ECX/EDX (772615's\nleftovers) and the x87 condition bits C0/C2/C3 (undefined after the trailing\nFLD/FDIV) are not compared. The case words go to ninja_projected_depth.cases.bin.\n",
+ "tracked_summary": {
+  "full_sha256": "c16af0a7d862b923f6bb1780283d8d8d85a5673d409744ac126d61e60571fa1a",
+  "full_bytes": 3219,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

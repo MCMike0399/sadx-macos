@@ -12,7 +12,8 @@
 // bytes; random and special-valued matrices, aliased pOut, misaligned matrices, every MXCSR rounding mode.
 // 772615 replays the d3dx_project cases (slots 3/10 set to the SSE table; NULL arguments, misaligned matrices) and
 // checks that unset slots stop; 402f40 the ninja_queue_color cases plus one input overlapping 3ab9864 per four,
-// comparing ECX/EDX and the x87 condition bits as well.
+// comparing ECX/EDX and the x87 condition bits as well; 78dbe0 the ninja_projected_depth cases, comparing the
+// returned ST(0), TOP and the tag word (its mutant flips the returned significand's lowest bit).
 // The original side runs with the FPU shims installed, as every guest boot does (7716df's FSINCOS is a shim site).
 // Mutants: every entry is also run with a bridge that flips one bit of its first store; the comparison must
 // catch it, or the test fails (an insensitive comparison would pass anything).
@@ -81,6 +82,13 @@ std::vector<Case> corpus_cases(std::uint32_t entry,const std::string& dir){
             for(std::uint32_t m=0;m<3;++m){const auto at=project_matrix_at+0x100*m+((w[i+3]>>m&1)?0U:8U);matrices.push_back(w[i+2]>>m&1?at:0U);
                 for(std::uint32_t k=0;k<16;++k)c.memory.push_back({at+4*k,w[i+13+16*m+k]});}
             c.arguments={out_at,project_v_at,w[i+2]&8?project_viewport_at:0U,matrices[0],matrices[1],matrices[2]};out.push_back(c);}}
+    else if(entry==0x78dbe0){ // ninja_projected_depth: 41 words; [0] cw [1] mxcsr [2] w [3..8] 3d12780 [9..24] 3d129c0 [25..40] 389d318
+        const auto w=words(dir+"/ninja_projected_depth.cases.bin");require(w.size()%41==0,"ninja_projected_depth corpus size");
+        for(std::size_t i=0;i<w.size();i+=41){
+            Case c;c.cw=static_cast<std::uint16_t>(w[i]);c.mxcsr=w[i+1];c.memory={{0x389b784,0x774310},{0x389b7a0,0x774150},{0x389b7b0,0x772615}};
+            for(std::uint32_t k=0;k<6;++k)c.memory.push_back({0x3d12780+4*k,w[i+3+k]});
+            for(std::uint32_t k=0;k<16;++k){c.memory.push_back({0x3d129c0+4*k,w[i+9+k]});c.memory.push_back({0x389d318+4*k,w[i+25+k]});}
+            c.arguments={w[i+2]};out.push_back(c);}}
     else if(entry==0x402f40){ // ninja_queue_color: 9 words; [0] cw [1..4] the input colour [5..8] the prior 3ab9864
         const auto w=words(dir+"/ninja_queue_color.cases.bin");require(w.size()%9==0,"ninja_queue_color corpus size");
         for(std::size_t i=0;i<w.size();i+=9){
@@ -141,6 +149,8 @@ std::size_t compare(const ExecutableImage& image,const OverrideEntry& entry,cons
         require(bool(ra),entry.name+": original failed: "+ra.error);
         if(!rb){mismatch=entry.name+": override failed: "+rb.error;return compared;}
         if(entry.returns_eax&&ra.eax!=rb.eax){mismatch=entry.name+": EAX differs";return compared;}
+        if(entry.returns_x87&&(original->st(0)!=native->st(0)||((original->fpu_status()^native->fpu_status())&0x3800)||original->reg(UC_X86_REG_FPTAG)!=native->reg(UC_X86_REG_FPTAG)))
+            {mismatch=entry.name+": ST(0), TOP or the tag word differ (case "+std::to_string(compared)+")";return compared;}
         if(entry.returns_scratch&&(original->reg(UC_X86_REG_ECX)!=native->reg(UC_X86_REG_ECX)||original->reg(UC_X86_REG_EDX)!=native->reg(UC_X86_REG_EDX)
             ||((original->fpu_status()^native->fpu_status())&0x4700))){mismatch=entry.name+": ECX/EDX or the x87 condition bits differ (case "+std::to_string(compared)+")";return compared;}
         for(const auto& [at,size]:out){
@@ -165,7 +175,9 @@ int main(int argc,char** argv){try{
         // The mutant: the real bridge, then one bit of the first store range flipped (a pOut range: through the argument).
         const auto fixed=entry.writes.empty()?std::optional<std::uint32_t>():entry.writes.front().first;const auto pointer=entry.pointer_writes.empty()?0U:entry.pointer_writes.front().first;
         const auto bridge=entry.bridge;std::optional<std::string> caught;
-        compare(*image,entry,[bridge,fixed,pointer](X86Guest& g)->std::uint32_t{
+        if(entry.returns_x87&&entry.writes.empty()&&entry.pointer_writes.empty()) // no store range: flip the returned ST(0)'s lowest significand bit
+            compare(*image,entry,[bridge](X86Guest& g)->std::uint32_t{const auto pops=bridge(g);if(g.stop_reason())return pops;const auto [s,e]=g.st(0);g.set_st(0,s^1,e);return pops;},cases,caught);
+        else compare(*image,entry,[bridge,fixed,pointer](X86Guest& g)->std::uint32_t{
             const auto at=fixed?*fixed:g.u32(g.esp()+4+4*pointer).value_or(0);const auto pops=bridge(g);
             std::uint8_t b=0;g.read(at,&b,1);b^=1;g.write(at,&b,1);return pops;},cases,caught);
         require(bool(caught),entry.name+": the mutant (one flipped store bit) was not detected");
@@ -177,6 +189,13 @@ int main(int argc,char** argv){try{
         const auto r=native->call(0x772615,{out_at,project_v_at,0,0,0,0});
         require(!r&&r.error.find("dispatch slots")!=std::string::npos,"772615: unset dispatch slots did not stop explicitly");
         std::cout<<"  d3dx_vec3_project (772615): unset dispatch slots stop explicitly\n";}
+    { // 78dbe0 likewise: slot 14 still the 770284 stub (and slots 3/10 set) stops by name
+        const auto e=std::find_if(table.begin(),table.end(),[](const OverrideEntry& x){return x.address==0x78dbe0;});require(e!=table.end(),"78dbe0 not bound");
+        auto native=X86Guest::create(&error);require(native&&native->map_image(*image,&error)&&native->add_override(0x78dbe0,e->bridge,&error),error);
+        native->set_u32(0x389b784,0x774310);native->set_u32(0x389b7a0,0x774150);
+        const auto r=native->call(0x78dbe0,{0x41200000U});
+        require(!r&&r.error.find("dispatch slots")!=std::string::npos,"78dbe0: unset dispatch slot 14 did not stop explicitly");
+        std::cout<<"  ninja_projected_depth (78dbe0): unset dispatch slot 14 stops explicitly\n";}
     std::cout<<"Guest overrides: "<<table.size()<<" overrides equivalent to the original bytes on "<<total<<" cases ("<<from_corpora<<" from oracle corpora); every mutant caught\n";
     return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

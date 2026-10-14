@@ -2630,3 +2630,48 @@ thunks 770804 `ev_f6e9d0fe39fbebbb99f350830d23d62c34e7d26eef6465d88b5950d5aa70ea
   120 frames. 772615 is not exercised live yet (no caller before file select). Existing unregistered
   metal-sprite, metal-sprite-composition, metal-texture and player-task **not run**; full m1 **not
   separately rerun**. No assets or captures committed.
+
+### M1 projected-depth override 78dbe0 (gate 131, 2026-10-13)
+
+Fresh owned REA/Ghidra (pinned sonic.exe 6b0937ca…24cd74, `reference/ghidra-bridge-depth-requests.json`,
+results `reference/inventory-raw/bridge-depth-78dbe0*`, `bridge-callers-78dbe0`, `bridge-xrefs-389b7b0`):
+78dbe0 `ev_8637b3ef98a68d3f70543e90c06b9a27ff68c618f861a60c5c29204519de85d9`, callers
+`ev_e9dc88bb6ec2327deb5b8ef97243657ace709bf24ffe8653ab0b41ebe9d1e617` (77dbc0 77de10 77e390 78b070
+78b2f0 78b4c0 78e7f0 78e8c0 78e960 78ea10 78eab0), slot 14 xrefs
+`ev_0e3fd0af7a1b6d05dc5ff5fc918ada581ab3bd619d764191249f64d4476f9f6b` (770284 stub, 770295 thunk only).
+Runner closed rc 0.
+
+* **43 process entries.** 78dbe0 (`ninja_projected_depth`, guest-only table, stdcall `ret 4`): FCOMP of w
+  with 7e9b40 (below or unordered: z = 65535.0, else 1.0f/w via FDIV/FSTP m32), 770295 → 772615 on
+  (0,0,z) with viewport 3d12780, projection 3d129c0 and 389d318 as view and world, then FLD out.z.
+  The bridge pushes the native ext80 result with `return_x87`, ORs the sticky x87 flags and sets EAX to
+  772615's pOut (entry ESP-0xc). Bound only when slots 3/10/14 are 774310/774150/772615; otherwise it
+  stops at 78dc3a by name. It also stops when fewer than two x87 registers are free (the source's
+  deepest push, in 772615's viewport mapping; a stack fault is not modelled). ECX/EDX (772615's leftovers)
+  and C0/C2/C3 (undefined after FLD/FDIV) are not modelled or compared.
+* **Oracle:** new `ninja_projected_depth` (78dbe0 + 770295/772615/774310/774150 original instructions,
+  4,000 cases: threshold edge and neighbours, signed zeros, infinities, denormals, NaNs, typical depths;
+  zero/negative viewports; perspective and random projections; image or random 389d318; four masked CWs;
+  MXCSR rounding modes): **partial**. The returned ext80, the single push (TOP/tag/ESP) and EAX are exact.
+  3,879 cases differ in FP flags because Unicorn raises no PE for an inexact FDIV/FSTP, or IE/DE, while the
+  native model does as the SDM documents. Writes `ninja_projected_depth.cases.bin` (OVERRIDE_CORPORA).
+  Report tracked.
+* **Equivalence/mutants:** guest-overrides adds `OverrideEntry::returns_x87` (ST(0), TOP and the tag word
+  compared). Results: 4,000 corpus cases equivalent; the generic mutant flips the returned significand's
+  low bit and is caught; slot-14-stub stop verified. In total, 15 guest-only entries are equivalent on
+  53,279 cases. Core mutants 3/3 caught (equal-threshold divides, far constant, returns out.y); the restored
+  source gives the same partial verdict. Bridge mutants 4/4 caught (EAX offset, shifted viewport, world read
+  from projection, slot-14 check removed).
+* **Gate/live:** `reference/production-integration-20261013/projected-depth-131-gate.json`, actual rc 0,
+  126 native programs, 4 Python tests. Boot identical with the table (78dbe0 fires 0x before first Present).
+  First 600 overridden frame digests and the 900-frame controller plain/native replay match. Full
+  intro/title checks pass; host 80.5 FPS, title 15.873 ms; app-smoke 120 frames. The frame tests do not
+  report per-override fire counts, so **whether 78dbe0 ran live during those frames is not established**;
+  it never stopped there. Other standalone oracles **not rerun**. Existing unregistered metal-sprite,
+  metal-sprite-composition, metal-texture and player-task **not run**. Full m1 **not separately rerun**.
+  No assets or captures committed.
+* **Remaining unbound (27 + 3):** 401000 401830 401a20 401ac0 40bf40 40c030 40c090 40f350 40f3a0 410510
+  419030 4208e0 4250d0 77dfc0 77f0a0 77f150 77f610 780c30 781070 785190 789bd0 7912e0 791610 791bd0
+  791df0 792100 793e70 (+ 411e30/40f010/411e20). Next cheapest: 419030 (player collision fixtures), 40f350;
+  device-calling 77dfc0/7912e0 through the device bridge. Worth adding: per-override fire counts over the
+  600 overridden frames in guest-frames.
