@@ -3,6 +3,7 @@
 // repeated frame digests, and SDL axis/button reads after actual USER32 message dispatch.
 #include "guest/fpu_shims.hpp"
 #include "hle/hle_process.hpp"
+#include "hle/hle_device_bridge.hpp"
 #include <fstream>
 #include <iostream>
 #include <iterator>
@@ -11,13 +12,14 @@ using namespace sadx;
 void require(bool ok,const std::string& why){if(!ok)throw std::runtime_error(why);}
 struct PadPulse {std::uint64_t frame;std::uint32_t buttons,hold;};
 struct Run {std::vector<std::uint64_t> digests;std::vector<std::uint32_t> modes;std::uint32_t filesel_799=0,filesel_last=0;std::string stop;std::vector<std::int32_t> axes;std::vector<std::uint32_t> buttons;std::uint32_t joystick_count=0;};
-Run run(const std::string& dir,const std::string& system,const std::vector<PadPulse>& script,std::size_t frames,bool hotplug=false){
+Run run(const std::string& dir,const std::string& system,const std::vector<PadPulse>& script,std::size_t frames,bool hotplug=false,bool overrides=false){
     std::ifstream f(dir+"/sonic.exe",std::ios::binary);require(bool(f),"cannot read "+dir+"/sonic.exe");
     std::string error;const auto image=ExecutableImage::parse({std::istreambuf_iterator<char>(f),{}},&error);require(bool(image),error);
     std::filesystem::remove_all("build/guest-controller-overlay");
     auto p=HleProcess::create(dir,"build/guest-controller-overlay",&error);require(p!=nullptr,error);
     if(!hotplug)p->host_xinput(HleXInputGamepad{});p->use_real_cpp_runtime(system);p->hle().set_logging(false);
     require(p->map_main(*image,&error),"map sonic.exe: "+error);
+    if(overrides)require(install_overrides(p->guest(),process_overrides(*p,*image),&error),error);
     FpuShimStats shims;require(install_fpu_shims(p->guest(),load_fpu_sites("reference/inventory/fpu-sites.json"),shims,&error),error);
     Run r;std::size_t polygons_seen=0;
     p->on_present=[&](X86Guest& g){
@@ -71,12 +73,12 @@ int main(int argc,char** argv){try{
     require(a.filesel_799==0&&a.filesel_last!=0,"controller Start opens file select after frame 800");
     require(a.axes==std::vector<std::int32_t>({16384,8191,-10000,-20001,3854,23129}),"original SDL axis conversion");
     require(a.buttons==std::vector<std::uint32_t>({1,1,1,1,1,1,1,1,1,1,1,0,0,1,0}),"original SDL face/shoulder/stick/Guide/Start/Back/hat mapping");
-    const auto b=run(argv[1],argv[2],script,900);
-    require(b.digests==a.digests&&b.axes==a.axes&&b.buttons==a.buttons,"controller replay determinism");
+    const auto b=run(argv[1],argv[2],script,900,false,true);
+    require(b.digests==a.digests&&b.axes==a.axes&&b.buttons==a.buttons,"controller replay and process override equivalence");
     const auto neutral=run(argv[1],argv[2],{},500);
     require(neutral.modes.back()==8,"neutral controller does not skip movie");
     const auto plugged=run(argv[1],argv[2],{},160,true);
     require(plugged.joystick_count==1&&plugged.axes==a.axes&&plugged.buttons==a.buttons,"arrival/removal/reconnect through original SDL");
-    std::cout<<"Guest controller: pinned SDL enumerates/opens 1 joystick; WM_INPUT + original HID parser/controller mapping; Start at 450 skips movie (title "<<title<<"), Start at 800 opens file select; two 900-frame boots identical; six axes and fifteen buttons verified including Guide/triggers; neutral pad still in movie at 500; arrival/removal/reconnect verified\n";
+    std::cout<<"Guest controller: pinned SDL enumerates/opens 1 joystick; WM_INPUT + original HID parser/controller mapping; Start at 450 skips movie (title "<<title<<"), Start at 800 opens file select; plain/native process override 900-frame boots identical; six axes and fifteen buttons verified including Guide/triggers; neutral pad still in movie at 500; arrival/removal/reconnect verified\n";
     return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

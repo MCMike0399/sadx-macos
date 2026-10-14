@@ -2255,3 +2255,53 @@ pinned binary SHA 6b0937ca; runner closed successfully.
 * **Open:** heap 780f60/780fb0, task/queue and other owners (37 of the earlier address-named list),
   plus reviewed goldens remain unfinished. 403180 is projection range, correcting the earlier
   prompt's screen label.
+
+## M1 heap allocation/free overrides (2026-10-13)
+
+Fresh owned REA/Ghidra: `bridge-heap-780f60`
+`ev_7c684162be3828144dda03af2558e1f259f71b306031e70483c085a6fd8488e4`;
+`bridge-heap-780fb0` `ev_16e48373e09a4c9217db660c25286aaf2345b5523cefce2059a3652ae1f9ce27`.
+Pinned sonic.exe SHA 6b0937ca. Small summary: `heap-evidence.json` under
+`reference/production-integration-20261013/`.
+
+* **25 process entries:** added 780f60 allocation and 780fb0 free through hle_heap_bridge.
+  NinjaMemoryMethods gives the existing native owner a platform interface; GuestHeap remains
+  the native-runtime adapter and the process uses its existing HLE allocator. No second heap
+  address/handle scheme is introduced into the guest. Calls verified HeapCreate/Alloc/Free
+  IAT targets synchronously with exact source return sites and argument frames (entry ESP-16).
+  Flushes 389d628 at 780f79 before allocation. Ordinary zero results remain completed calls;
+  unavailable methods/backend stops are tagged at the source calls. Free retains its raw DWORD
+  in EAX; null free returns zero without reading the heap or calling a host method.
+* **Source correction:** HeapCreate arguments are `(0,0x800000,0)`, an 8 MiB initial size.
+  The previous header's string-address claim was incorrect. Native GuestHeap reservation is
+  still unmodelled; real allocator identity/content assumptions remain explicit.
+* **Oracle/mutants:** new standalone ninja_memory oracle/probe and 3,000-case corpus, **pass**,
+  zero EAX/global/ordered-call mismatches with ordinary zero and noncanonical BOOL receipts.
+  Checks HeapCreate's exact arguments and zero allocation/free flags. Three core mutants caught:
+  wrong sentinel 579 mismatches, wrong stored handle 579, normalized free receipt 758. Restored
+  source rerun passes. Existing composed cd_drive_scan rerun: **pass**, 1,500 cases, zero mismatches.
+  Both reports tracked; other oracles **not rerun**. Aggregate oracles-verdict remains exit 1
+  because the existing inventory has partial/fail reports.
+* **Bridge:** all 3,000 corpus cases agree with original EAX, heap global and exact HLE traces.
+  Also checked 173 reached backend stops for completion, heap global, call traces and global
+  snapshots inside calls. Live HLE allocation/free,
+  first-fit reuse, zeroed-content assumption, exhaustion and invalid/null free checked. Two
+  input mutants caught; all three foreign IAT targets rejected. Unknown heap state tagged at
+  780f60/780fb9; null free still returns without a known heap. Every new test has a manifest row.
+* **Persistent integration checks:** guest-controller's second 900-frame scripted boot now
+  installs process_overrides and compares against the plain first boot, including axis/button
+  reads. This replaces the per-step temporary controller derivative. make m1 now explicitly
+  runs both device/heap bridge corpus programs; dry-run confirms commands/dependencies. The
+  gate runs those same programs; the entire make m1 command was not separately rerun.
+* **Gate:** `reference/production-integration-20261013/heap-124-gate.json`, actual exit 0,
+  124 native programs and 4 Python tests. Identical 22,030-call boot; allocation fires four
+  times and free once before first Present. First 600 overridden frame digests match; persistent
+  plain/native controller replay agrees over all 900 frames. Full intro/title determinism and
+  15.873 ms virtual title cadence remain checked; measured host 82.7 FPS. Existing unregistered
+  metal-sprite, metal-sprite-composition, metal-texture and player-task **not run**.
+* **App:** --pad 450:0x10,800:0x10 through frame 900 exits 0; local ignored capture shows
+  file select. No screenshot or game asset committed.
+* **REA cleanup:** close reported ownership-token cleanup failure; subsequent ps showed its
+  Java PID 76494 absent. Both analyses had completed successfully before close.
+* **Open:** task graph, queue and other owners (35 of the earlier address-named list), plus
+  reviewed goldens remain unfinished. No physical Windows allocator capture is claimed.

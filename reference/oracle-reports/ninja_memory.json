@@ -1,0 +1,25 @@
+{
+ "source_files": {
+  "src/engine/ninja_memory.hpp": "600cb8cf2cd66c72d1b5556831ec4a6d46a951dde647fa236eaab66aebd8974e",
+  "src/engine/ninja_memory.cpp": "668dca17f50a61813a1b05fb098f6288c048a0b30e0668b07f34008ce1b325b0",
+  "tests/probes/native_ninja_memory_probe.cpp": "5baabdc7a49514b1bfddb709dd330cf3b445274ec0f6e6fa80a7eed2c1b098b6",
+  "tools/oracles/verify_original_ninja_memory.py": "dfa82fb9eb3863436be31336e3f92743ea8e3812480eeea25df43cc1f70dcc32"
+ },
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "4374809aa4320e54bea19e01d1dfe6916942483690c6d0e1e339622c5a909c69",
+ "original_ranges_sha256": {
+  "0x780f60": "fbf20ea45a33fd60e4f777897e9643b41a6b17a3c9035e806cc97a82340ccfce",
+  "0x780fb0": "de9d980fe6a6200ec3585468f325ee830d81df800033890dba6bb17dc11e47db"
+ },
+ "cases": 3000,
+ "mismatch_count": 0,
+ "mismatches": [],
+ "state_traces_match": true,
+ "limits": "780f60/780fb0 against original instructions with recording Win32 heap fixtures.\n\nHeapCreate/HeapAlloc/HeapFree return each case's DWORD, including zero and\nnoncanonical BOOL receipts. Compares EAX, heap global, call order and arguments.\nAllocator internals and actual Windows handles/contents are platform facts, not\ncovered by these fixtures. Bridge tests separately use the live HLE allocator.\n",
+ "tracked_summary": {
+  "full_sha256": "aee8b33bfc6ecd02e17b6964105a815e662ccb8580a7b61cc18738bbca2583b0",
+  "full_bytes": 1341,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

@@ -1,0 +1,53 @@
+{
+ "entries_added": [
+  "780f60",
+  "780fb0"
+ ],
+ "process_entries": 25,
+ "ghidra_evidence_ids": [
+  "ev_7c684162be3828144dda03af2558e1f259f71b306031e70483c085a6fd8488e4",
+  "ev_16e48373e09a4c9217db660c25286aaf2345b5523cefce2059a3652ae1f9ce27"
+ ],
+ "source_contract": {
+  "HeapCreate": [
+   0,
+   8388608,
+   0
+  ],
+  "store_before_alloc": "389d628 at 780f79",
+  "null_free": "EAX zero, no heap read or host call",
+  "free_result": "raw DWORD, not bool normalization"
+ },
+ "corpus": {
+  "ninja_memory_cases": 3000,
+  "backend_stops_reached": 173,
+  "core_mutants_caught": 3,
+  "bridge_mutants_caught": 2,
+  "foreign_IAT_targets_rejected": 3,
+  "live_HLE_allocator": "allocation/free/first-fit reuse/zeroed contents/exhaustion/invalid free"
+ },
+ "oracles": {
+  "ninja_memory": "pass: 3000 cases, zero mismatches",
+  "cd_drive_scan": "pass: 1500 cases, zero mismatches"
+ },
+ "source_sha256": {
+  "src/engine/ninja_memory.hpp": "600cb8cf2cd66c72d1b5556831ec4a6d46a951dde647fa236eaab66aebd8974e",
+  "src/engine/ninja_memory.cpp": "668dca17f50a61813a1b05fb098f6288c048a0b30e0668b07f34008ce1b325b0",
+  "src/hle/hle_heap_bridge.hpp": "781854fffc667bd49a0af2a386b6124e0e6eee2fbb78179c7daf6ff192092082",
+  "src/hle/hle_heap_bridge.cpp": "93f8403cd9080eb28cbf5dd89b69344365347eebffe891481a0bb5fce94309fa",
+  "tests/unit/hle_heap_bridge.cpp": "45f6ecbe43da63d0fc79b0010f1c23627c3b66a14af2c5f6c4b2f3472589415a",
+  "tests/unit/guest_controller.cpp": "9f01281be880591f814e0dadc3f86f6170c3f1d001a55d4f6612cdf8bb544dbf"
+ },
+ "limits": [
+  "Allocator addresses and zeroed contents retain existing HLE assumptions; no physical Windows heap capture.",
+  "Other oracle reports not rerun; partial/fail inventory remains explicit.",
+  "REA close reported ownership-token cleanup failure; Java PID 76494 was absent on subsequent ps inspection.",
+  "Task/queue and other owners plus reviewed goldens unfinished."
+ ],
+ "runtime": {
+  "boot_identical": true,
+  "controller_900_frames_identical": true,
+  "app_script_exit_status": 0,
+  "screenshot_sha256": "bc1cfbaa30f34f240c7094a5059ffec35138d91e9efd1233c762d048f7d5949e"
+ }
+}
