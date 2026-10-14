@@ -298,6 +298,59 @@ TaskResult TaskScheduler::initialize_source_pool(std::shared_ptr<TaskWorkArena> 
 
 void TaskScheduler::source_no_op(TaskScheduler&, const TaskHandle&) {}
 
+TaskHandle TaskScheduler::source_task(std::uint16_t slot) const {return slot<source_slots_.size()?source_slots_[slot]:TaskHandle{};}
+TaskGraphState TaskScheduler::source_graph() const {
+    TaskGraphState out;out.free_slots=free_slots_;out.context=context_;
+    if(!arena_)out.failure=TaskFailure::source_pool_uninitialized;
+    for(const auto& [p,t]:storage_){(void)p;if(!t->source_slot_)out.failure=TaskFailure::invalid_source_graph;}
+    const auto slot=[](Task* t)->std::optional<std::uint16_t>{return t?t->source_slot_:std::nullopt;};
+    for(unsigned k=0;k<8;++k)out.heads[k]=slot(heads_[k]);
+    for(const auto& t:source_slots_)if(t&&!t->retired_){
+        TaskGraphNode node{};node.slot=*t->source_slot_;node.next=t->linked_?slot(t->next_):t->detached_free_next_slot_;
+        node.previous=slot(t->previous_);node.parent=slot(t->parent_);node.child=slot(t->first_child_);node.linked=t->linked_;
+        node.exec=t->exec;node.display=t->display;node.destructor=t->destructor;node.field30=t->field30;
+        node.primary=t->primary_work;node.motion=t->motion_work;node.force=t->force_work;node.auxiliary=t->auxiliary_work;node.control=t->object_control;node.primary_state=t->primary_state;node.auxiliary_effect_work=t->auxiliary_effect_work;
+        out.nodes.push_back(std::move(node));
+    }
+    return out;
+}
+TaskResult TaskScheduler::restore_source_graph(const TaskGraphState& state){
+    const auto bad=[](){return TaskResult{TaskFailure::invalid_source_graph,{},{},0};};
+    if(!arena_||walk_depth_||state.failure!=TaskFailure::none)return bad();
+    for(const auto& [p,t]:storage_){(void)p;if(!t->retired_&&(t->destructor_active_||t->destruction_stage_!=Task::DestructionStage::live))return bad();}
+    std::array<bool,4096> free{},used{};
+    for(auto slot:state.free_slots){if(slot>=4096||free[slot])return bad();free[slot]=true;}
+    for(const auto& n:state.nodes){if(n.slot>=4096||free[n.slot]||used[n.slot])return bad();used[n.slot]=true;}
+    const auto valid=[&](std::optional<std::uint16_t> v,bool permit_free=false){return !v||(*v<4096&&(used[*v]||(permit_free&&free[*v])));};
+    for(unsigned k=0;k<4096;++k)if(!used[k]&&!free[k])return bad();
+    for(const auto& n:state.nodes){if(!valid(n.next,!n.linked)||!valid(n.previous)||!valid(n.parent)||!valid(n.child))return bad();
+        for(const auto& work:{n.primary,n.motion,n.force,n.auxiliary})if(work&&!arena_->read(work,0,nullptr,0))return bad();
+    }
+    for(const auto& h:state.heads)if(!valid(h))return bad();
+    std::array<unsigned,4096> visits{};
+    std::array<std::size_t,4096> lists{};
+    const auto find=[&](std::uint16_t id)->const TaskGraphNode*{for(const auto& n:state.nodes)if(n.slot==id)return &n;return nullptr;};
+    std::function<bool(std::optional<std::uint16_t>,std::optional<std::uint16_t>,unsigned)> walk;
+    walk=[&](std::optional<std::uint16_t> head,std::optional<std::uint16_t> parent,unsigned list){std::optional<std::uint16_t> previous;
+        while(head){if(++visits[*head]!=1)return false;const auto* n=find(*head);if(!n||!n->linked||n->previous!=previous||n->parent!=parent)return false;
+            lists[*head]=list;if(!walk(n->child,head,list))return false;previous=head;head=n->next;}return true;};
+    for(unsigned k=0;k<8;++k)if(!walk(state.heads[k],{},k))return bad();
+    for(const auto& n:state.nodes)if(!n.linked&&!n.parent&&!walk(n.child,n.slot,0))return bad();
+    for(const auto& n:state.nodes)if(n.linked!=(visits[n.slot]!=0))return bad();
+    std::map<Task::ObjectControl*,std::optional<std::uint16_t>> control_targets;
+    for(const auto& n:state.nodes)if(n.control){const auto& target=n.control->task_at_4;if(target&&(target->owner_!=this||!target->source_slot_||!used[*target->source_slot_]))return bad();control_targets[n.control.get()]=target?target->source_slot_:std::nullopt;}
+    for(auto& [p,t]:storage_){(void)p;if(t->object_control&&t->object_control->task_at_4&&t->object_control->task_at_4->owner_==this)t->object_control->task_at_4.reset();}
+    storage_.clear();source_slots_.fill({});heads_.fill(nullptr);free_slots_=state.free_slots;context_=state.context;
+    for(const auto& n:state.nodes){TaskHandle t(new Task);t->owner_=this;t->source_slot_=n.slot;t->linked_=n.linked;t->list_=lists[n.slot];
+        t->exec=n.exec;t->display=n.display;t->destructor=n.destructor;t->field30=n.field30;t->primary_work=n.primary;t->motion_work=n.motion;t->force_work=n.force;t->auxiliary_work=n.auxiliary;t->object_control=n.control;t->primary_state=n.primary_state;t->auxiliary_effect_work=n.auxiliary_effect_work;
+        if(!n.linked)t->detached_free_next_slot_=n.next;source_slots_[n.slot]=t;storage_[t.get()]=t;}
+    const auto pointer=[&](std::optional<std::uint16_t> v){return v?source_slots_[*v].get():nullptr;};
+    for(const auto& n:state.nodes){auto& t=source_slots_[n.slot];if(n.linked)t->next_=pointer(n.next);t->previous_=pointer(n.previous);t->parent_=pointer(n.parent);t->first_child_=pointer(n.child);}
+    for(unsigned k=0;k<8;++k)heads_[k]=pointer(state.heads[k]);
+    for(const auto& [control,target]:control_targets)control->task_at_4=target?source_slots_[*target]:TaskHandle{};
+    return {};
+}
+
 TaskResult TaskScheduler::allocate_task(int level, TaskCallback callback) {
     if (level < 0 || level >= 9) return {TaskFailure::invalid_list_index, {}, {}, 0x40b03e};
     if (!arena_) return {TaskFailure::source_pool_uninitialized, {}, {}, 0x40b030};

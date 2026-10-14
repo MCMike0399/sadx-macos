@@ -129,6 +129,7 @@ TaskWorkResult TaskWorkArena::read(const TaskWorkHandle& work, std::uint32_t at,
     if (!accepted) return accepted;
     if (bytes && !output) return {TaskWorkFailure::invalid_buffer, work};
     const auto start = work->data_offset() + at;
+    if(bytes&&payload_reader_){if(!payload_reader_(start,output,bytes))return {TaskWorkFailure::unobserved_live_field,work};return accepted;}
     for (std::uint32_t i = 0; i != bytes; ++i)
         if (!known_[start + i]) return {TaskWorkFailure::unobserved_pointer_bytes, work};
     if (bytes) std::memcpy(output, bytes_.data() + start, bytes);
@@ -141,6 +142,7 @@ TaskWorkResult TaskWorkArena::write(const TaskWorkHandle& work, std::uint32_t at
     if (!accepted) return accepted;
     if (bytes && !input) return {TaskWorkFailure::invalid_buffer, work};
     const auto start = work->data_offset() + at;
+    if(bytes&&payload_writer_&&!payload_writer_(start,input,bytes))return {TaskWorkFailure::unobserved_live_field,work};
     forget_references(start, bytes);
     if (bytes) std::memcpy(bytes_.data() + start, input, bytes);
     std::fill(known_.begin() + start, known_.begin() + start + bytes, 1);
@@ -152,6 +154,7 @@ TaskWorkResult TaskWorkArena::fill(const TaskWorkHandle& work, std::uint32_t at,
     const auto accepted = validate(work, at, bytes);
     if (!accepted) return accepted;
     const auto start = work->data_offset() + at;
+    if(bytes&&payload_writer_){const std::vector<std::uint8_t> filled(bytes,value);if(!payload_writer_(start,filled.data(),bytes))return {TaskWorkFailure::unobserved_live_field,work};}
     forget_references(start, bytes);
     std::fill(bytes_.begin() + start, bytes_.begin() + start + bytes, value);
     std::fill(known_.begin() + start, known_.begin() + start + bytes, 1);
@@ -188,6 +191,12 @@ TaskWorkReferenceResult TaskWorkArena::reference_view(const TaskWorkHandle& work
     const auto accepted = validate(work, at, 4);
     if (!accepted) return {accepted.failure,work,0,{}};
     const auto found = references_.find(work->data_offset() + at);
+    if(payload_reader_){
+        std::uint32_t observed=0;const auto current=read(work,at,&observed,4);if(!current)return {current.failure,work,0,{}};
+        if(!observed)return {TaskWorkFailure::none,{},0,{}};
+        if(found==references_.end()||!reference_base_||observed!=*reference_base_+found->second.allocation_data_offset+found->second.byte_offset)
+            return {TaskWorkFailure::unbound_reference,{},0,{}};
+    }
     if (found != references_.end()) {
         const auto target=found->second.work.lock();
         return {(!target||target->released_)?TaskWorkFailure::released_work:TaskWorkFailure::none,

@@ -139,7 +139,7 @@ include build/tests.mk
 include build/oracles.mk
 
 # guest-overrides replays these oracle corpora (each verify script writes its <slug>.cases.bin next to the report).
-OVERRIDE_CORPORA := build/oracles/task_work.cases.bin build/oracles/ninja_memory.cases.bin build/oracles/fog.cases.bin build/oracles/ninja_render.cases.bin build/oracles/game_frame_control.cases.bin build/oracles/projection_range.cases.bin build/oracles/fov.cases.bin build/oracles/ninja_view.cases.bin build/oracles/d3dx_perspective.cases.bin build/oracles/d3dx_matrix_inverse.cases.bin
+OVERRIDE_CORPORA := build/oracles/task_lifecycle.cases.bin build/oracles/task_work.cases.bin build/oracles/ninja_memory.cases.bin build/oracles/fog.cases.bin build/oracles/ninja_render.cases.bin build/oracles/game_frame_control.cases.bin build/oracles/projection_range.cases.bin build/oracles/fov.cases.bin build/oracles/ninja_view.cases.bin build/oracles/d3dx_perspective.cases.bin build/oracles/d3dx_matrix_inverse.cases.bin
 build/oracles/%.cases.bin: tools/oracles/verify_original_%.py
 	$(MAKE) oracle-$(subst _,-,$*)
 run-unit-tests: assets $(UNIT_TARGETS) $(UNIT_MM_TARGETS) $(OVERRIDE_CORPORA)
@@ -175,7 +175,7 @@ m1: $(foreach t,$(M1_TESTS),build/$(t)-test) $(OVERRIDE_CORPORA) app-smoke
 	./build/guest-overrides-test "$(GAME_EXE)" build/oracles
 	./build/hle-device-bridge-test "$(GAME_EXE)" build/oracles
 	./build/hle-heap-bridge-test "$(GAME_EXE)" build/oracles/ninja_memory.cases.bin
-	./build/hle-task-bridge-test "$(GAME_EXE)" build/oracles/task_work.cases.bin
+	./build/hle-task-bridge-test "$(GAME_EXE)" build/oracles/task_work.cases.bin build/oracles/task_lifecycle.cases.bin
 	./build/guest-fpu-shims-test "$(GAME_EXE)" reference/inventory/fpu-sites.json
 	./build/guest-frames-test $(REFERENCE_GAME_DIR) $(WINDOWS_SYSTEM_DIR) 60
 	./build/guest-input-test $(REFERENCE_GAME_DIR) $(WINDOWS_SYSTEM_DIR)

@@ -2359,3 +2359,70 @@ free `ev_cbd7c97fb1db4865e81d45a96a95ba4ba4068735fd44466e16ab4ab42c1a465d`
   the earlier address-named list), and reviewed goldens remain unfinished. When binding the
   graph, import live work fields or add payload transport: the allocator's native byte vector
   is not a mirror of guest gameplay payload. Do not read its old bytes as a live player pose.
+
+## M1 task pool and creation/free bindings (2026-10-13)
+
+Fresh owned REA/Ghidra, pinned sonic.exe SHA 6b0937ca:
+40b460 `ev_0fae7e09b7ea2dc7a41dd06106d9cb9e2f0036548d8cfa6fb4764be51bfb466d`,
+40b030 `ev_5468b81cfb8f3f0fd98abd6aa68e9e7c0eda989643a97507e2525ce99a104d52`,
+40b860 `ev_f6fa592d0d325eb4114b9eaa958bfbf120da0278d18e8ccddd90e076de1cec1b`,
+40b940 `ev_fa19fecaa76f1397c6a41d9604e089143b967c744666ab262580246d4e85e1d8`,
+40b6c0 `ev_b98f7a69d67b95f215b872dcb5f500e0dd259b8d397cd635b4e76ec8a3cee611`.
+Reports retained under reference/inventory-raw/bridge-task-{pool,allocate,create,child,free}.
+Runner closed successfully; small summary task-graph-evidence.json under
+reference/production-integration-20261013/.
+
+* **33 process entries:** pool initialization, register-argument allocation (EDX level/EDI
+  callback), element creation, child creation and FreeTask now use TaskScheduler through
+  hle_task_bridge. Pool prerequisite 51a740 executes original code at source CALL depth
+  (redirect reserve 8 for saved ESI plus return address). Native allocator reserves the
+  0x34000 pool; free links, heads, 3abdbe4/3abdbec and context stores serialize to guest memory.
+  Current-function state survives pool reinitialization as source; field30 clears.
+* **Interchange:** TaskGraphState represents native slot indices, callbacks and owned
+  references. Reconciliation validates the slot partition, links, parent/child structure
+  (including children of detached roots), arena ownership and callback context before
+  replacing state. Active walkers and pending destruction continuations are rejected.
+  Native gameplay-view references remain attached across round trips; owned control links
+  rebind to new native task identities and old self-reference cycles are broken.
+  Guest callback and opaque field30 values map to independent native identities; no pointer
+  casts cross the engine interface. Callback bank is finite (1,024), explicitly stopped
+  if exhausted. Native execution of an unknown callback is named at 40b590, never skipped.
+* **Live work:** TaskWorkArena payload transport reads/writes guest work at actual accesses;
+  child position/angle copies preserve raw words, including special floats. Cached owned
+  references are checked against the current external pointer word before use. Changed
+  unknown pointers are unbound-reference failures, not stale cached handles. Transport and
+  unknown-data tests cover reads/writes/fill and pointer replacement.
+* **Equivalence:** all 17 task_lifecycle sequences (2,302 operations) plus previous 16
+  task_work sequences (4,890 operations) replayed. Dispatch/destruction callees are still
+  original guest code; their changes are imported before the next native operation. Defined
+  returns, globals including all eight heads, exact HLE traces and full 16 MiB+32 arena bytes
+  match. The unit pool prerequisite 51a740 is a RET fixture, matching the original oracle
+  acquisition scope; real prerequisite is exercised in live boot/frame verification.
+  Five graph bridge input/fact mutants caught, in addition to two work mutants.
+* **Additional source branches:** detached/inactive FreeTask and null task return zero
+  without mutation; invalid level and empty allocation head return zero. Pool allocation
+  exhaustion and active element allocation-failure rollback retain source zero returns and
+  state. Null-parent child creation allocates first, then stops at actual parent-read 40b95c;
+  its complete arena prefix matches the faulting source. Foreign/non-pool identities and
+  corrupt metadata remain explicit native limits. No claim of original natural returns for
+  those unsupported inputs or unported callback execution.
+* **Oracle/mutants:** task_lifecycle and task_work rerun **pass** after final code. Lifecycle
+  native probe now round-trips the production graph before every operation, preserving
+  allocation-generation references for its serializer. Three scheduler mutants caught:
+  wrong primary-work size fails; wrong restored primary and omitted next links abort the
+  oracle. Restored source passes. Reports tracked; other standalone oracles **not rerun**.
+  Aggregate verdict remains exit 1 for existing partial/fail inventory.
+* **Gate/live:** `reference/production-integration-20261013/task-graph-126-gate.json`, actual
+  rc 0, 125 native programs and 4 Python tests. Initial gate passed before the final
+  gameplay-view preservation assertion; it was not recorded. Final gate rerun passes: boot
+  trace identical (22,030 HLE calls), first 600 overridden digests match, permanent 900-frame
+  controller plain/native replay matches. Pool init fires before first Present. Full intro/
+  title determinism and 15.873 ms virtual title cadence checked; host 76.6 FPS. App --pad
+  450:0x10,800:0x10 through frame 900 exits 0 with local ignored file-select capture.
+  m1 corpus recipe checked with dry-run; full m1 not separately rerun. Existing unregistered
+  metal-sprite, metal-sprite-composition, metal-texture and player-task **not run**.
+  No game assets/captures committed.
+* **Next:** dispatch/destruction/child walkers still need native callback continuations,
+  then render queue and other owners (27 of the earlier address-named list). Creation
+  callback tokens presently serialize identity; they do not execute arbitrary guest code
+  inside a native scheduler call. Reviewed goldens remain unfinished.

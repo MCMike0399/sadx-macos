@@ -42,6 +42,10 @@ void source_lifecycle() {
     auto last=s.allocate_task(8,nullptr).task;
     check(s.list_head(7)==last && s.list_head(8)==last && !s.active_member(detached));
     check(s.destroy_task(detached).failure==TaskFailure::inactive_task);
+    a->primary_state=std::make_shared<PlayerTaskState>();
+    auto graph=s.source_graph();TaskScheduler reconciled;check(reconciled.initialize_source_pool(arena,std::shared_ptr<void>{}));check(reconciled.restore_source_graph(graph));check(reconciled.source_task(*a->source_slot())&&reconciled.source_task(*detached->source_slot())&&!reconciled.active_member(reconciled.source_task(*detached->source_slot())));check(reconciled.source_graph().free_slots==graph.free_slots);check(reconciled.source_task(*a->source_slot())->primary_state==a->primary_state);
+    auto corrupt=graph;corrupt.nodes.front().next=corrupt.nodes.front().slot;check(reconciled.restore_source_graph(corrupt).failure==TaskFailure::invalid_source_graph);check(reconciled.source_graph().free_slots==graph.free_slots);
+    a->primary_state.reset();
     auto resource=std::make_shared<int>(9);a->field30=resource;
     const std::uint32_t words[]={0x7f812345,0x80000000,0xdeadbeef};
     check(arena->write(a->primary_work,32,words,12));

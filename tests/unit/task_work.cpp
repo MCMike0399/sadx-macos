@@ -68,6 +68,10 @@ int main() {
         transported.set_metadata_writer([&](std::uint32_t at,std::optional<std::uint32_t> value){check(value);std::memcpy(mirrored.data()+at,&*value,4);});
         const auto transported_a=transported.allocate(56).work,transported_b=transported.allocate(64).work;
         check(transported.release(transported_a)&&transported.release(transported_b));check(mirrored==transported.source_bytes());
+        std::uint32_t live_word=0x7fc12345,stored_word=0;
+        transported.set_payload_transport([&](std::uint32_t,void* output,std::uint32_t count){if(count!=4)return false;std::memcpy(output,&live_word,4);return true;},[&](std::uint32_t,const void* input,std::uint32_t count){if(count!=4)return false;std::memcpy(&stored_word,input,4);return true;});
+        auto live=transported.allocate(32).work;std::uint32_t observed=0;check(transported.read(live,0,&observed,4)&&observed==live_word);check(transported.write(live,0,&live_word,4)&&stored_word==live_word);check(transported.fill(live,0,0x7a,4)&&stored_word==0x7a7a7a7a);check(transported.read(live,0,&observed,8).failure==TaskWorkFailure::unobserved_live_field);
+        check(transported.set_reference(live,0,live));live_word=0;check(transported.reference(live,0)&&!transported.reference(live,0).work);live_word=0x12345678;check(transported.reference(live,0).failure==TaskWorkFailure::unbound_reference);
         bool missing_pointer=false;TaskWorkArena without_provenance;
         without_provenance.set_metadata_writer([&](std::uint32_t,std::optional<std::uint32_t> value){if(!value)missing_pointer=true;});
         check(without_provenance.allocate(32));check(missing_pointer);

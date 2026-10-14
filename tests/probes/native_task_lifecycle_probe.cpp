@@ -24,6 +24,11 @@ public:
         std::vector<TaskHandle> allocations;
         std::array<TaskHandle,4096> last_generation{};
         for(std::size_t i=0;i<words;i+=4) {
+            // Exercise the production interchange before each source call, as
+            // the guest adapter does after external callbacks mutate its graph.
+            if(!scheduler.restore_source_graph(scheduler.source_graph()))return 6;
+            for(auto& task:allocations)if(task&&!task->retired_)task=scheduler.source_slots_[*task->source_slot_];
+            for(auto& task:last_generation)if(task&&!task->retired_)task=scheduler.source_slots_[*task->source_slot_];
             const auto op=commands[i],a=commands[i+1],b=commands[i+2],c=commands[i+3];
             TaskResult result;
             if(op==0)result=scheduler.allocate_task(static_cast<int>(a),nullptr);

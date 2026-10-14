@@ -91,6 +91,7 @@ enum class TaskFailure {
     source_task_requires_destructor,
     detached_snapshot_next,
     callback_failed,
+    invalid_source_graph,
 };
 
 struct TaskResult {
@@ -105,6 +106,25 @@ struct TaskResult {
 struct TaskContext {
     TaskCallback current_function = nullptr; // guest global 0x3abdbf4
     std::shared_ptr<void> field30;            // guest global 0x3abdbf8
+};
+// Native structural interchange: slot indices and owned references, never guest pointers.
+struct TaskGraphNode {
+    std::uint16_t slot=0;
+    std::optional<std::uint16_t> next,previous,parent,child;
+    bool linked=false;
+    TaskCallback exec=nullptr,display=nullptr,destructor=nullptr;
+    std::shared_ptr<void> field30;
+    TaskWorkHandle primary,motion,force,auxiliary;
+    std::shared_ptr<PlayerTaskState> primary_state;
+    std::shared_ptr<PlayerAuxiliaryEffectTaskWork> auxiliary_effect_work;
+    std::shared_ptr<Task::ObjectControl> control;
+};
+struct TaskGraphState {
+    TaskFailure failure=TaskFailure::none;
+    std::vector<TaskGraphNode> nodes;
+    std::vector<std::uint16_t> free_slots; // allocation pops the last entry
+    std::array<std::optional<std::uint16_t>,8> heads{};
+    TaskContext context;
 };
 
 enum class TaskCallbackContextFailure { none,null_callback,null_context,conflicting_owner };
@@ -162,6 +182,13 @@ public:
     TaskHandle list_head(int index) const;
     TaskHandle first_child(const TaskHandle& task) const;
     TaskHandle next_task(const TaskHandle& task) const;
+    TaskHandle source_task(std::uint16_t slot) const;
+    const TaskWorkHandle& source_pool_work() const noexcept { return source_pool_work_; }
+    TaskGraphState source_graph() const;
+    // Reconcile external graph changes between source calls; requires an initialized
+    // pool, no active native walker and no retained destruction continuation.
+    // Validates references before replacing state.
+    TaskResult restore_source_graph(const TaskGraphState&);
     bool active_member(const TaskHandle& task) const;
 
     // RunObjectIndex 0x40b0c0: lists 0..7, with index 8 aliasing 7.

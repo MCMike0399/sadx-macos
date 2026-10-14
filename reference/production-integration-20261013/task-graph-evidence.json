@@ -1,0 +1,59 @@
+{
+ "entries_added": [
+  "40b460",
+  "40b030",
+  "40b860",
+  "40b940",
+  "40b6c0"
+ ],
+ "process_entries": 33,
+ "ghidra_evidence_ids": [
+  "ev_0fae7e09b7ea2dc7a41dd06106d9cb9e2f0036548d8cfa6fb4764be51bfb466d",
+  "ev_5468b81cfb8f3f0fd98abd6aa68e9e7c0eda989643a97507e2525ce99a104d52",
+  "ev_f6fa592d0d325eb4114b9eaa958bfbf120da0278d18e8ccddd90e076de1cec1b",
+  "ev_fa19fecaa76f1397c6a41d9604e089143b967c744666ab262580246d4e85e1d8",
+  "ev_b98f7a69d67b95f215b872dcb5f500e0dd259b8d397cd635b4e76ec8a3cee611"
+ ],
+ "corpus": {
+  "work_sequences": 16,
+  "work_operations": 4890,
+  "graph_sequences": 17,
+  "graph_operations": 2302,
+  "work_bridge_mutants": 2,
+  "graph_bridge_mutants": 5,
+  "scheduler_core_mutants": 3,
+  "graph_restore_exercised_in_core_oracle_before_each_step": true,
+  "51a740_unit_fixture": "RET; real dependency exercised in boot/frame tests"
+ },
+ "source_contract": {
+  "pool_prerequisite": "original 51a740, redirect reserve 8",
+  "graph_identity": "native slot indices and callback/resource tokens; no guest pointer casts",
+  "payload": "live guest read/write transport; cached references checked against observed pointer word",
+  "null_parent": "creation prefix retained, then explicit 40b95c boundary",
+  "exhaustion": "pool and active element rollback return zero as source"
+ },
+ "source_sha256": {
+  "src/engine/task.cpp": "1070c51e087f4b3897c289120dbaf8013163bb3fbe7741948b6003f4769056b3",
+  "src/engine/task.hpp": "b25ada46a6ea28d169f46df26da28a98c97102c7078f251792d7b793369239e4",
+  "src/engine/task_work.cpp": "13c8616cd1f98990b3ccb2859ce76b3feace8ba6112823b9b6989bb8451b6f60",
+  "src/engine/task_work.hpp": "f3b0f309225ad6f7ff63bfbc90927bcbbd9c5a70e65854d284c623cc0780360e",
+  "src/hle/hle_task_bridge.cpp": "a973e40fd1f1ccca89cdb418eae51096cc81136536ee54a8df7e7dda5f93343c",
+  "tests/probes/native_task_lifecycle_probe.cpp": "ce2270566ca374fcfbfbe01d15679abe6edadc60c838b00e2fbbf0f3894a1377",
+  "tests/unit/hle_task_bridge.cpp": "15fc22b1c42d408f18592fca8851c687aa81c70a0e5d3536307ee45b44894190"
+ },
+ "limits": [
+  "Callback token bank serializes identity; native execution of an unknown callback is a named 40b590 boundary.",
+  "Guest dispatch/destruction remain original and their mutations are reconciled before native creation/free.",
+  "Foreign task identity and unsupported/corrupt graph cases stop explicitly.",
+  "Original hardware facts remain existing HLE assumptions.",
+  "Reviewed goldens and other unbound owners unfinished."
+ ],
+ "runtime": {
+  "boot_identical": true,
+  "first_600_override_digests_match": true,
+  "controller_900_frames_match": true,
+  "app_script_exit_status": 0,
+  "host_FPS": 76.6,
+  "screenshot_sha256": "bc1cfbaa30f34f240c7094a5059ffec35138d91e9efd1233c762d048f7d5949e"
+ }
+}

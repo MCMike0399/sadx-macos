@@ -89,6 +89,9 @@ public:
     // separately by that runtime. nullopt reports pointer bytes without provenance.
     using MetadataWriter = std::function<void(std::uint32_t,std::optional<std::uint32_t>)>;
     void set_metadata_writer(MetadataWriter writer) { metadata_writer_=std::move(writer); }
+    using PayloadReader = std::function<bool(std::uint32_t,void*,std::uint32_t)>;
+    using PayloadWriter = std::function<bool(std::uint32_t,const void*,std::uint32_t)>;
+    void set_payload_transport(PayloadReader read,PayloadWriter write) { payload_reader_=std::move(read);payload_writer_=std::move(write); }
 
 private:
     std::optional<std::uint32_t> reference_base_;
@@ -102,6 +105,8 @@ private:
     std::map<std::uint32_t, Reference> references_;
     std::optional<std::uint32_t> free_head_;
     MetadataWriter metadata_writer_;
+    PayloadReader payload_reader_;
+    PayloadWriter payload_writer_;
     TaskWorkResult validate(const TaskWorkHandle&, std::uint32_t at,
                             std::uint32_t bytes) const;
     void store_pointer(std::uint32_t at, std::optional<std::uint32_t> offset);
