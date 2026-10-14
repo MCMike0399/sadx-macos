@@ -5,6 +5,7 @@
 #include "engine/ninja_render.hpp"
 #include "engine/ninja_fog.hpp"
 #include "engine/ninja_view.hpp"
+#include "engine/ninja_queue_lifecycle.hpp"
 #include <unicorn/unicorn.h>
 #include <cstring>
 #include <array>
@@ -59,6 +60,83 @@ float floating(std::uint32_t raw){float value;std::memcpy(&value,&raw,4);return 
 template<std::size_t N>void flush_words(X86Guest& g,std::uint32_t address,const std::array<std::optional<std::uint32_t>,N>& values){
     for(unsigned k=0;k<N;++k)if(values[k])g.set_u32(address+4*k,*values[k]);
 }
+struct QueueLifecycleBridge {
+    HleProcess& process;
+    explicit QueueLifecycleBridge(HleProcess& p):process(p){}
+    void reset(bool allocated_buffer=false){
+        auto& g=process.guest();const auto base=g.u32(0x3abd960),size=g.u32(0x3abd958);
+        if(base&&size)g.set_u32(0x3abd954,(*base+0x1fU)&~0x1fU);
+        if(!base||!size||!*base||*size!=0x88000){g.stop("queue bridge: unobserved buffer at 407ad0");return;}
+        std::vector<std::uint8_t> bytes(*size);
+        if(!g.read(*base,bytes.data(),bytes.size())){g.stop("queue bridge: unreadable buffer at 407ad0");return;}
+        auto arena=std::make_shared<NinjaRenderQueueArena>(std::move(bytes),0,*size,g.u32(0x3abd9c8));
+        NinjaSpriteQueue queue(arena);NinjaSpriteQueueRuntime runtime;NinjaQueueConsumerState consumer;
+        GameLogicTimingState timing;NinjaSpriteProjection projection{};RenderBridge bridge(process);
+        runtime.render_state=&bridge.render;runtime.flag_at_3b12208=g.u32(0x3b12208);runtime.mode_at_3ab98ac=g.u32(0x3ab98ac);
+        std::uint8_t mode=0;if(g.read(0x3abdbc0,&mode,1))consumer.mode_byte_at_3abdbc0=mode;
+        consumer.count_at_3abd9d4=g.u32(0x3abd9d4);consumer.count_at_3abd9dc=g.u32(0x3abd9dc);timing.word_at_3b1117c=g.u32(0x3b1117c);
+        const auto color=[&](std::uint32_t at)->std::optional<std::array<float,4>>{std::array<float,4> value{};if(!g.read(at,value.data(),16))return {};return value;};
+        runtime.color_at_3ab9864=color(0x3ab9864);projection.color_argb_at_3d0f7f0=color(0x3d0f7f0);
+        const auto initial=color(0x3b18230);const auto depth_mode=g.u32(0x8928c8);
+        std::array<std::uint32_t,8> depth{};const auto depth_known=g.read(0x88ad9c,depth.data(),32);
+        const auto one=g.u32(0x7dcb10),negative=g.u32(0x7dcb0c);
+        if(!one||!negative){g.stop("queue bridge: unknown colour constants at 402f55");return;}
+        std::array<std::optional<std::uint32_t>,3> input{},captured{},source{},destination{};
+        for(unsigned k=0;k<3;++k){input[k]=g.u32(0x900840+4*k);captured[k]=g.u32(0x3ab9898+4*k);source[k]=g.u32(0x900858+4*k);destination[k]=g.u32(0x90084c+4*k);}
+        std::map<std::uint32_t,std::uint32_t> flushed;
+        const auto store=[&](std::uint32_t at,std::optional<std::uint32_t> value,unsigned width=4){
+            if(!value)return;const auto i=flushed.find(at);
+            if(i==flushed.end()){std::uint32_t previous=0;if(g.read(at,&previous,width))flushed[at]=previous;}
+            if(flushed.find(at)==flushed.end()||flushed[at]!=*value){if(!g.write(at,&*value,width))g.stop("queue bridge: unwritable global "+hex(at));flushed[at]=*value;}
+        };
+        const auto bits=[](float value){std::uint32_t raw;std::memcpy(&raw,&value,4);return raw;};
+        bool buffer_flushed=false;
+        const auto flush=[&](bool copy_projection=true){
+            if(!buffer_flushed){g.set_u32(0x3abd954,*base+queue.arena()->cursor());if(!g.write(*base,queue.arena()->bytes().data(),queue.arena()->bytes().size()))g.stop("queue bridge: unwritable buffer at 407ad0");g.set_u32(0x3abd9c8,queue.arena()->overflow_reported().value_or(0));buffer_flushed=true;}
+            if(runtime.color_at_3ab9864)for(unsigned k=0;k<4;++k)store(0x3ab9864+4*k,bits((*runtime.color_at_3ab9864)[k]));
+            if(copy_projection&&projection.color_argb_at_3d0f7f0)for(unsigned k=0;k<4;++k)store(0x3d0f7f0+4*k,bits((*projection.color_argb_at_3d0f7f0)[k]));
+            store(0x3b12208,runtime.flag_at_3b12208);store(0x3abdbc0,consumer.mode_byte_at_3abdbc0,1);
+        };
+        // Snapshot before native stores so a live backend's unrelated writes survive.
+        for(const auto address:{0x3ab9864U,0x3d0f7f0U})for(unsigned k=0;k<4;++k)if(const auto v=g.u32(address+4*k))flushed[address+4*k]=*v;
+        if(runtime.flag_at_3b12208)flushed[0x3b12208]=*runtime.flag_at_3b12208;if(consumer.mode_byte_at_3abdbc0)flushed[0x3abdbc0]=*consumer.mode_byte_at_3abdbc0;
+        bridge.before_call=[&]{flush();};const auto invoke=bridge.render.set_render_state;
+        bridge.render.set_render_state=[&](const NinjaRenderStateCommand& command){
+            const auto result=invoke(command);
+            // The source reads these after COM, including the final raw colour copy.
+            for(unsigned k=0;k<3;++k)input[k]=g.u32(0x900840+4*k);
+            runtime.color_at_3ab9864=color(0x3ab9864);projection.color_argb_at_3d0f7f0=color(0x3d0f7f0);
+            return result;
+        };
+        NinjaQueueLifecycleOwners owners{queue,runtime,consumer,timing,projection,initial,depth_known?&depth:nullptr,floating(*one),floating(*negative),depth_mode,input,captured,source,destination};
+        X87Context fp(static_cast<std::uint16_t>(g.reg(UC_X86_REG_FPCW)));
+        const auto result=allocated_buffer?ninja_queue_allocate_408630(owners,*base,fp):ninja_queue_reset_407ab0(owners,*base,fp);flush(false);
+        if(!result){if(!g.stop_reason())g.stop("queue bridge: native boundary "+hex(result.source_boundary));return;}
+        const auto buckets=g.u32(0x90083c);if(!buckets){g.stop("queue bridge: unknown buckets at 40734a");return;}
+        for(unsigned k=0;k<2048;++k){const auto address=*buckets+8*k;const std::uint32_t links[2]={address,address};if(!g.write(address,links,8)){g.stop("queue bridge: unwritable buckets at 407360");return;}}
+        flush_words(g,0x3ab9898,captured);
+        // 407330's final 77ff90 reads colour after the render-state calls.
+        if(projection.color_argb_at_3d0f7f0)g.write(0x3d0f7f0,projection.color_argb_at_3d0f7f0->data(),16);
+        if(runtime.mode_at_3ab98ac)g.set_u32(0x3ab98ac,*runtime.mode_at_3ab98ac);
+        if(timing.word_at_3b1117c)g.set_u32(0x3b1117c,static_cast<std::uint32_t>(*timing.word_at_3b1117c));
+        if(consumer.count_at_3abd9d4)g.set_u32(0x3abd9d4,static_cast<std::uint32_t>(*consumer.count_at_3abd9d4));
+        if(consumer.count_at_3abd9dc)g.set_u32(0x3abd9dc,static_cast<std::uint32_t>(*consumer.count_at_3abd9dc));
+    }
+    void allocated(){
+        auto& g=process.guest();const auto base=g.reg(UC_X86_REG_EAX);
+        const auto second=g.u32(0x90085c);if(!second){g.stop("queue bridge: unknown allocation capture at 408656");return;}
+        const auto third=g.u32(0x900860);if(!third){g.stop("queue bridge: unknown allocation capture at 40865c");return;}
+        g.set_u32(0x3abd960,base);g.set_u32(0x3ab9874,base+0x88000);
+        const auto first=g.u32(0x900858);if(!first){g.stop("queue bridge: unknown allocation capture at 408674");return;}
+        g.set_u32(0x90084c,*first);g.set_u32(0x900850,*second);g.set_u32(0x900854,*third);
+        reset(true);
+    }
+    void allocate(const std::shared_ptr<QueueLifecycleBridge>& self,bool freed=false){
+        auto& g=process.guest();const auto old=g.u32(0x3abd960);if(!old){g.stop("queue bridge: unknown old buffer at 408630");return;}
+        if(!freed&&*old){g.redirect(0x780fb0,{*old},0,[self](X86Guest&){self->allocate(self,true);},4,0x40863f);return;}
+        g.set_u32(0x3abd958,0x88000);g.redirect(0x780f60,{0x88000},0,[self](X86Guest&){self->allocated();},4,0x408656);
+    }
+};
 struct DispatchNeeded{};
 struct ViewBridge {
     HleProcess& process;RenderBridge bridge;
@@ -294,6 +372,9 @@ std::vector<OverrideEntry> device_overrides(HleProcess& p){
         out.push_back({entry,entry==0x794ec0?"ninja_fog_initialize":entry==0x794e40?"ninja_fog_set_table":entry==0x787260?"ninja_fog_generate":entry==0x411af0?"ninja_fog_enable":"ninja_fog_disable",
             {{0x3d12798,4},{0x3d128a4,4},{0x3d128a0,4},{0x3d12898,4},{0x3d0fce0,4},{0x3d12950,4},{0x3d0fac0,4},{0x3d12894,4},{0x3d12a00,512},{0x3d12c00,512}},
             [&p,entry](X86Guest& g)->std::uint32_t{FogBridge bridge(p);return bridge.run(g,entry);}});
+    for(const auto entry:{0x407ab0U,0x408630U})out.push_back({entry,entry==0x407ab0?"ninja_queue_reset":"ninja_queue_allocate",
+        {{0x3abd954,16},{0x3ab9864,16},{0x3ab9898,12},{0x3ab98ac,4}},
+        [&p,entry](X86Guest&)->std::uint32_t{auto bridge=std::make_shared<QueueLifecycleBridge>(p);if(entry==0x407ab0)bridge->reset();else bridge->allocate(bridge);return 0;}});
     return out;
 }
 std::vector<OverrideEntry> process_overrides(HleProcess& p,const ExecutableImage& image){

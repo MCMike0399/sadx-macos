@@ -1,0 +1,53 @@
+{
+ "entries_added": [
+  "407ab0",
+  "408630"
+ ],
+ "process_entries": 40,
+ "ghidra_evidence_ids": [
+  "ev_78f8e8edea338231f450e53231a72c37f55f9a31b08141a179693f7ad344e2d7",
+  "ev_8093ae7646865e318fa13b0fe7d5baa9b48822d4e0d66d669d842546809bf10e"
+ ],
+ "corpus": {
+  "cases": 600,
+  "owners_replayed": 2,
+  "live_heap_reallocations": 3,
+  "bridge_input_mutants_caught": 2,
+  "core_mutants_caught": 3,
+  "oracle_verdict": "partial",
+  "oracle_fp_status_differences": 402
+ },
+ "source_contract": {
+  "heap_return_sites": [
+   "40863f",
+   "408656"
+  ],
+  "heap_stack_reserve": 4,
+  "order": "allocation/free; source allocation capture; native buffer zero/cursor; colour; three COM calls; mode/buckets; captured words/final colour; queue mode/count/display clears",
+  "external_changes": "reread 900840..48 and colour after COM; revalidate live device",
+  "zero_allocation": "preserve base/end/capture/cursor stores then stop at 407ad0"
+ },
+ "source_sha256": {
+  "src/hle/hle_device_bridge.cpp": "edff4dec9f4fa36db5d8e0b30b28b950804352aea6091b4b59617be8a7c24d50",
+  "tests/unit/hle_queue_bridge.cpp": "1834cc3a5794a6f371539bd3a4216a4d4d9e6f96ad2cec259f0f5553e9e8720c",
+  "tests/unit/manifest.tsv": "384b843b9ae951cd6a00e38c4ec587e20fd3215cb1ec0c6bfc01dc1b0b6ea964",
+  "Makefile": "a565f1e9f862feb1105a8aa2834fe428e2e7a9da5828aab39c67f8995e1de89e",
+  "reference/ghidra-live.mjs": "d8825a8125432b572af5b7c0b880ccafbf6ba4c00fb6d7b7ff9e204d94936f1c"
+ },
+ "limits": [
+  "Only observed 0x88000-byte reset arena is bound; other sizes stop.",
+  "Sparse fault prefixes, arbitrary foreign backends and hardware FP-status parity unverified.",
+  "Producer/consumer and remaining owners plus reviewed goldens unfinished.",
+  "Other standalone oracles not rerun; existing partial/fail inventory retained."
+ ],
+ "runtime": {
+  "boot_identical": true,
+  "override_600_digests_match": true,
+  "host_FPS": 78.2,
+  "app_script_exit_status": 0,
+  "screenshot_sha256": "9be1b0923d140e2f727d3263e3e6c5bc31fc28d2501f5286040bea12d64ad23f",
+  "screenshot_observed": "Adventure/main menu; locally inspected, not a reviewed golden",
+  "gate_exit_status": 0,
+  "controller_900_digests_match": true
+ }
+}

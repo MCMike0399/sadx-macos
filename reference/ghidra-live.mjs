@@ -15,6 +15,8 @@ const client=new Client({name:'sadx-owned-live-ghidra',version:'1.0.0'});
 const transport=new StdioClientTransport({command:process.execPath,args:[
   '/private/tmp/sadx-rea/node_modules/rea-agents/scripts/rea.mjs','mcp'],env:{...process.env,...env}});
 const lines=createInterface({input:process.stdin,crlfDelay:Infinity});
+// Start buffering immediately: piped requests can arrive while open_binary awaits.
+const commands=lines[Symbol.asyncIterator]();
 const allowed=new Set(['analyze_function','inspect_native_instruction','resolve_native_call_targets',
   'trace_native_values','xrefs','binary_session','list_procedures','procedure_callers','procedure_callees',
   'procedure_references','procedure_info','batch_decompile']);
@@ -48,7 +50,7 @@ try{
   await call('open_binary',{path:resolve(config.binary_path??'game/Sonic Adventure DX/sonic.exe'),provider_id:'ghidra',
     ...(exists?{snapshot_path:snapshot}:{})},'open');opened=true;
   console.log('READY: send JSON {tool,args,label}; {tool:"export"} retains a bundle; {tool:"close"} closes the owned provider.');
-  for await(const line of lines){
+  for await(const line of commands){
     if(!line.trim())continue;
     let command;
     try{command=JSON.parse(line);}

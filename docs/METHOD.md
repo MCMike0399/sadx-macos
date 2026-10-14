@@ -24,6 +24,9 @@ L=/tmp/ghidra-run.log; : > $L
 
 Print assembly from a result: `python3 tools/analysis/ghidra_asm.py reference/ghidra-game-loop-recovery/screen-780c30.json`.
 
+The owned runner buffers piped commands during startup; waiting for READY remains
+useful for interactive orchestration but is not required for an early command pipe.
+
 Facts about the provider (from REA's docs, verified 2026-10-12):
 
 * `analyze_function` returns, per function: body ranges and size, assembly, pseudocode,

@@ -123,3 +123,4 @@ hle-raw-input
 hle-device-bridge	"$(GAME_EXE)" build/oracles
 hle-heap-bridge	"$(GAME_EXE)" build/oracles/ninja_memory.cases.bin
 hle-task-bridge	"$(GAME_EXE)" build/oracles/task_work.cases.bin build/oracles/task_lifecycle.cases.bin
+hle-queue-bridge	"$(GAME_EXE)" build/oracles/ninja_queue_lifecycle.cases.bin

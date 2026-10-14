@@ -139,7 +139,7 @@ include build/tests.mk
 include build/oracles.mk
 
 # guest-overrides replays these oracle corpora (each verify script writes its <slug>.cases.bin next to the report).
-OVERRIDE_CORPORA := build/oracles/task_lifecycle.cases.bin build/oracles/task_work.cases.bin build/oracles/ninja_memory.cases.bin build/oracles/fog.cases.bin build/oracles/ninja_render.cases.bin build/oracles/game_frame_control.cases.bin build/oracles/projection_range.cases.bin build/oracles/fov.cases.bin build/oracles/ninja_view.cases.bin build/oracles/d3dx_perspective.cases.bin build/oracles/d3dx_matrix_inverse.cases.bin
+OVERRIDE_CORPORA := build/oracles/ninja_queue_lifecycle.cases.bin build/oracles/task_lifecycle.cases.bin build/oracles/task_work.cases.bin build/oracles/ninja_memory.cases.bin build/oracles/fog.cases.bin build/oracles/ninja_render.cases.bin build/oracles/game_frame_control.cases.bin build/oracles/projection_range.cases.bin build/oracles/fov.cases.bin build/oracles/ninja_view.cases.bin build/oracles/d3dx_perspective.cases.bin build/oracles/d3dx_matrix_inverse.cases.bin
 build/oracles/%.cases.bin: tools/oracles/verify_original_%.py
 	$(MAKE) oracle-$(subst _,-,$*)
 run-unit-tests: assets $(UNIT_TARGETS) $(UNIT_MM_TARGETS) $(OVERRIDE_CORPORA)
@@ -167,7 +167,7 @@ clean:
 # The roadmap's M1 tests (docs/ROADMAP.md), nothing else: guest-imports, guest-dlls (profile-applied at mod init),
 # guest-boot (profile-applied, live overrides), guest-overrides + HLE bridges (override-equivalence), guest-fpu-shims, guest-frames
 # (SEGA logo -> title, determinism, guest-fps), guest-input (input-script determinism), guest-timing (profile cadence) and app-smoke.
-M1_TESTS := guest-imports guest-dlls guest-boot guest-overrides hle-device-bridge hle-heap-bridge hle-task-bridge guest-fpu-shims guest-frames guest-input guest-timing guest-controller
+M1_TESTS := guest-imports guest-dlls guest-boot guest-overrides hle-device-bridge hle-heap-bridge hle-task-bridge hle-queue-bridge guest-fpu-shims guest-frames guest-input guest-timing guest-controller
 m1: $(foreach t,$(M1_TESTS),build/$(t)-test) $(OVERRIDE_CORPORA) app-smoke
 	./build/guest-imports-test "$(GAME_EXE)"
 	./build/guest-dlls-test $(REFERENCE_GAME_DIR) $(WINDOWS_SYSTEM_DIR)
@@ -176,6 +176,7 @@ m1: $(foreach t,$(M1_TESTS),build/$(t)-test) $(OVERRIDE_CORPORA) app-smoke
 	./build/hle-device-bridge-test "$(GAME_EXE)" build/oracles
 	./build/hle-heap-bridge-test "$(GAME_EXE)" build/oracles/ninja_memory.cases.bin
 	./build/hle-task-bridge-test "$(GAME_EXE)" build/oracles/task_work.cases.bin build/oracles/task_lifecycle.cases.bin
+	./build/hle-queue-bridge-test "$(GAME_EXE)" build/oracles/ninja_queue_lifecycle.cases.bin
 	./build/guest-fpu-shims-test "$(GAME_EXE)" reference/inventory/fpu-sites.json
 	./build/guest-frames-test $(REFERENCE_GAME_DIR) $(WINDOWS_SYSTEM_DIR) 60
 	./build/guest-input-test $(REFERENCE_GAME_DIR) $(WINDOWS_SYSTEM_DIR)

@@ -2523,3 +2523,49 @@ Pinned sonic.exe remains `6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa
   overridden digests and the 900-frame controller plain/native comparison match. Full
   intro/title checks pass; host 78.7 FPS and virtual 63 FPS title cadence. App controller
   script through 900 exits 0; local ignored file-select capture visually inspected.
+
+### M1 native render-queue lifecycle (2026-10-13)
+
+Fresh owned REA/Ghidra: reset 407ab0
+`ev_78f8e8edea338231f450e53231a72c37f55f9a31b08141a179693f7ad344e2d7`;
+allocation 408630
+`ev_8093ae7646865e318fa13b0fe7d5baa9b48822d4e0d66d669d842546809bf10e`.
+Pinned sonic.exe SHA remains 6b0937ca…24cd74.
+
+* **40 process entries:** bind native ninja_queue_reset_407ab0 and
+  ninja_queue_allocate_408630 through the device bridge. Allocation executes the actual
+  heap owners using source-return continuations 40863f/408656 (reserve 4). Preserve the
+  3abd958 store before allocation and the allocation/capture stores before reset.
+  Zero allocation preserves cursor/base/end/capture prefix, then stops at 407ad0.
+* **Render phases:** native buffer reset/cursor/overflow and clamped colour stores precede
+  the three actual HLE SetRenderState calls. Verified live device targets are reread by
+  RenderBridge. Backend changes to 900840..48 and colour survive until the source's later
+  reads. Native bucket reset serializes all 2,048 self-linked sentinels, then captured
+  words, final colour copy, queue mode and display/count clears. Guest addresses remain
+  integer provenance; no guest pointer casts or second heap allocator.
+* **Verification:** 600 lifecycle corpus cases replayed at each owner, including all backend
+  stops, with exact buffer/bucket/global bytes, HLE trace arguments/returns and COM-time
+  stores. Three live heap reallocations match and dirty buffers reset; two bridge input
+  mutants caught. Null/foreign devices and unobserved sizes stop explicitly. Standalone
+  lifecycle oracle rerun: partial, values/stores/traces match, 402 FP-status differences.
+  Three core mutants caught (captured words, display switch and depth write); restored
+  baseline returns the same partial verdict. Other standalone oracles not rerun.
+  Aggregate verdict remains nonzero for the existing partial/fail inventory.
+* **Analysis runner repair:** readline's async iterator now starts buffering before awaited
+  open_binary. Previously an early piped request could be consumed without a listener;
+  the first owned process stayed idle after READY, issued no analyze request and was
+  terminated (rc 143). The repaired runner accepted the same early pipe, retained both
+  evidence results, saved the snapshot and closed normally (rc 0).
+* **Limits/next:** reset currently binds the observed 0x88000-byte arena. Other sizes,
+  unreadable memory/provenance and foreign device targets stop; arbitrary sparse fault
+  prefixes and FP-status/hardware parity remain unverified. Render-queue producer/
+  consumer and other owners (20 of the earlier address-named list), plus reviewed
+  goldens remain unfinished. Existing unregistered metal-sprite, metal-sprite-composition,
+  metal-texture and player-task not run. m1 dry-run checked; full m1 not separately run.
+  First gate attempt deliberately interrupted (rc 130) to correct cursor and allocation
+  capture ordering on missing-input paths; its log is local build/queue-interrupted-gate.log.
+* **Recorded gate/live:** reference/production-integration-20261013/queue-lifecycle-129-gate.json,
+  actual rc 0, 126 native programs and four Python tests. Boot trace identical, first 600
+  overridden frame digests and 900-frame controller plain/native replay match. Full intro
+  checks pass; host 78.2 FPS and virtual title cadence 63 FPS. App script through 900 exits
+  0; local ignored main-menu capture inspected, not a reviewed golden.

@@ -1,6 +1,6 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "148c6b0e193f1b76ad46b941a58541e5444b85b6f984658c99cb99af63f0473c",
+ "native_library_sha256": "08b395a1b49399e8943ca01ab31f90e228f885691d13b029a9ce20c74575eb79",
  "source_files": {
   "src/engine/ninja_queue_lifecycle.hpp": "aae93525a8c00d39e16ff12b5a515ca1d1d31bf0e81b8000df0c9d6cc1c9364b",
   "src/engine/ninja_queue_lifecycle.cpp": "ff2b07c9d9c9c2887a9a7289d258b796666680a95540e23e6583037d0943500e",
@@ -32,7 +32,7 @@
  "stores_trace_boundaries_match": true,
  "limits": "Render-queue lifecycle 408630 -> 407ab0 -> (4128f0/402f40, 407330) against original instructions.\n\nReal source code runs for 408630, 407ab0, 4128f0, 402f40, 407330, 401420, 77ed00,\n77ed20, 77ece0, 412400, 401440 and 77ff90. Fixtures: 780f60 (HeapAlloc) returns\nthe case's heap address, 780fb0 (HeapFree) is a no-op, and the D3D8 device's\nSetRenderState (vtable +0xc8) records (site, state, value) and may fail at call N.\nCompared: buffer cursor offset and zeroing, overflow flag, colours, captured\nwords, mode/count stores, bucket sentinels and the render-state trace. FP status\nflags are reported separately (Unicorn's x87 flag behaviour is not hardware).\n",
  "tracked_summary": {
-  "full_sha256": "6040592dcb3fb9fbe37b920b7cd92386866445f007b418eac1851920052dd6cb",
+  "full_sha256": "22da5693f83a678aac82e7e17f3b20f083199680b522babdd877b2ebcef992e8",
   "full_bytes": 2507,
   "lists_cut_to": 10,
   "cut_lists": {}
