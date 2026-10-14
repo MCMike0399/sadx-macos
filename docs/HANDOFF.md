@@ -2426,3 +2426,54 @@ reference/production-integration-20261013/.
   then render queue and other owners (27 of the earlier address-named list). Creation
   callback tokens presently serialize identity; they do not execute arbitrary guest code
   inside a native scheduler call. Reviewed goldens remain unfinished.
+
+## M1 native task dispatch continuations (2026-10-13)
+
+Fresh owned REA/Ghidra, pinned sonic.exe SHA 6b0937ca:
+index 40b0c0 `ev_0eaaaa2e6e7d3fff355851df5812dde22f2134ab47962c03e199a2dcb23e9993`,
+children 40b420 `ev_91e5820fb211f5d6d3e545ba24a3f9fb126a52012e9cfab2720568a82864b570`,
+all 40b170 `ev_3b9ee31f82ebd8aba1eb9578a13486cc62ce40c54b75a28dbb38730fe34db229`
+(reference/inventory-raw/bridge-task-dispatch*). Runner closed successfully.
+Small summary: reference/production-integration-20261013/task-dispatch-evidence.json.
+
+* **36 process entries:** index, all-list and child dispatch use the native TaskScheduler
+  cursor. Native run_index/run_children share begin/advance logic with this adapter. Next
+  captured before callback; after guest return reconcile the graph, clear source context
+  phases and resolve current slot generation. All-list order is 8 (alias 7), then 0..6.
+  Top dispatch sets/clears current-function; child dispatch never restores that global,
+  including after nested calls. Field30 clears after each completed callback.
+* **Real guest callbacks:** callback identity tokens serialize to the actual guest code
+  address, executed via redirect. Source-return continuation mode writes actual 40b10b
+  (top) or 40b43f (child) return words. Pending entries form a per-site stack, and only a
+  matching return ESP completes one, permitting nested calls through the same site and
+  leaving unrelated source execution alone. Regular continuation trap mode is unchanged.
+  Callback reserves are index 0x14, all 0x20, child 8; saved-register words are populated,
+  including all-list nested owner return/index words. Incoming source registers and caller
+  preserved registers follow Ghidra prologues. Source callback ABI is cdecl.
+* **Verification:** all 18 lifecycle sequences/2,311 operations and 16 work sequences/4,890
+  operations replay, plus 18 callback scenarios across all three owners: no-op, next-function
+  mutation, nesting, self-deletion, prepend and same-slot replacement. Callback source return
+  words, ESP, task argument, context globals and incoming ESI/EBX/EDI match, as do final arena
+  bytes, defined results/globals/HLE traces. Void dispatcher leftover EAX is not compared.
+  Three new dispatch bridge mutants caught (index/parent input and all-list head), alongside
+  five graph/two work mutants. Snapshot freed-list traversal and changed pool provenance are
+  explicit native boundaries, not guessed execution.
+* **Oracle improvement:** task_work and task_lifecycle pass after the cursor refactor.
+  Initial lifecycle mutation run caught saved-next/context-clear edits but missed omitted
+  current-function assignment because final state hid it. Added native observed no-op
+  callback and original 51f680 hook to compare callback-time task/context words, plus a
+  sequence with multiple no-op and nested-child observations. All three dispatch core
+  mutants now caught; restored source rerun passes. Reports tracked. Other standalone
+  oracles not rerun; aggregate verdict retains existing partial/fail reports (exit 1).
+* **Gate/live:** reference/production-integration-20261013/task-dispatch-127-gate.json,
+  actual rc 0, 125 native programs and 4 Python tests. Boot trace remains identical at
+  22,030 HLE calls; first 600 overridden digests and persistent 900-frame controller plain/
+  native replay match. Full intro/title determinism and 15.873 ms virtual title cadence
+  remain checked; measured host 80.0 FPS. App --pad 450:0x10,800:0x10 through frame 900
+  exits 0 with local ignored file-select capture. m1 recipe dry-run checked; full m1 not
+  separately rerun. Existing unregistered metal-sprite, metal-sprite-composition, metal-
+  texture and player-task not run. No game assets or captures committed.
+* **Next:** native destruction/free-children continuations and render queue, plus remaining
+  owners (24 of the earlier address-named list) and reviewed goldens. Synchronous native
+  creation rollback still names unknown callback execution at 40b590; dispatch now executes
+  guest callbacks and is no longer merely an identity serializer.

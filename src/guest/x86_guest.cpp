@@ -69,13 +69,21 @@ void X86Guest::install_continuations(){
     uc_hook handle=0;
     uc_hook_add(engine(uc_),&handle,UC_HOOK_CODE,reinterpret_cast<void*>(&X86Guest::continuation_hook),this,continuation_base_,continuation_base_+0xffff);
 }
-void X86Guest::redirect(std::uint32_t target,const std::vector<std::uint32_t>& arguments,std::uint32_t pops,Continuation then,std::uint32_t stack_reserve){
+void X86Guest::redirect(std::uint32_t target,const std::vector<std::uint32_t>& arguments,std::uint32_t pops,Continuation then,std::uint32_t stack_reserve,std::optional<std::uint32_t> source_return){
     // Called from an override: [ESP] is the override caller's return address, then its arguments.
     const auto esp=reg(UC_X86_REG_ESP);const auto back=u32(esp).value_or(stop_address_);
     std::uint32_t trap;
-    if(!free_continuations_.empty()){trap=free_continuations_.back();free_continuations_.pop_back();}
-    else{trap=next_continuation_;next_continuation_+=4;}
-    pending_[trap]=Pending{esp+4+pops,back,std::move(then)};
+    Pending pending{esp+4+pops,back,std::move(then),0};
+    if(source_return)pending.source_return_esp=esp+4+pops-static_cast<std::uint32_t>(4*(arguments.size()+1))-stack_reserve+4;
+    if(source_return){
+        trap=*source_return;
+        if(source_continuation_sites_.insert(trap).second){uc_hook handle=0;const auto rc=uc_hook_add(engine(uc_),&handle,UC_HOOK_CODE,reinterpret_cast<void*>(&X86Guest::source_continuation_hook),this,trap,trap);if(rc!=UC_ERR_OK){stop("source continuation hook failed");return;}uc_ctl_flush_tb(engine(uc_));}
+        source_pending_[trap].push_back(std::move(pending));
+    }else{
+        if(!free_continuations_.empty()){trap=free_continuations_.back();free_continuations_.pop_back();}
+        else{trap=next_continuation_;next_continuation_+=4;}
+        pending_[trap]=std::move(pending);
+    }
     std::vector<std::uint32_t> frame;frame.push_back(trap);frame.insert(frame.end(),arguments.begin(),arguments.end());
     const auto top=esp+4+pops-static_cast<std::uint32_t>(4*frame.size())-stack_reserve;
     write(top,frame.data(),frame.size()*4);
@@ -86,13 +94,19 @@ void X86Guest::continuation_hook(void*,std::uint64_t address,std::uint32_t,void*
     const auto found=self->pending_.find(static_cast<std::uint32_t>(address));
     if(found==self->pending_.end()){self->stop("return to an unknown continuation "+std::to_string(address));return;}
     auto pending=std::move(found->second);self->pending_.erase(found);self->free_continuations_.push_back(static_cast<std::uint32_t>(address));
-    // The callee returned: restore the caller's stack, then let the continuation set results or call again.
-    self->set_reg(UC_X86_REG_ESP,pending.resume_esp-4);self->write(pending.resume_esp-4,&pending.return_address,4);
-    self->redirected_=false;
-    if(pending.then)pending.then(*self);
-    if(self->stopped_)return;
-    if(self->redirected_){self->redirected_=false;return;}
-    self->set_reg(UC_X86_REG_ESP,pending.resume_esp);self->set_reg(UC_X86_REG_EIP,pending.return_address);
+    self->complete_continuation(std::move(pending));
+}
+void X86Guest::source_continuation_hook(void*,std::uint64_t address,std::uint32_t,void* user){
+    auto* self=static_cast<X86Guest*>(user);const auto i=self->source_pending_.find(static_cast<std::uint32_t>(address));
+    if(i==self->source_pending_.end()||i->second.empty()||self->esp()!=i->second.back().source_return_esp)return;
+    auto pending=std::move(i->second.back());i->second.pop_back();self->complete_continuation(std::move(pending));
+}
+void X86Guest::complete_continuation(Pending pending){
+    // The callee returned: restore the owner frame before advancing its native continuation.
+    set_reg(UC_X86_REG_ESP,pending.resume_esp-4);write(pending.resume_esp-4,&pending.return_address,4);
+    redirected_=false;if(pending.then)pending.then(*this);if(stopped_)return;
+    if(redirected_){redirected_=false;return;}
+    set_reg(UC_X86_REG_ESP,pending.resume_esp);set_reg(UC_X86_REG_EIP,pending.return_address);
 }
 bool X86Guest::set_fs_base(std::uint32_t teb,std::uint32_t gdt,std::string* error){
     if(!map(gdt,0x1000,false,error))return false;

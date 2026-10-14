@@ -6,6 +6,7 @@
 #include <functional>
 #include <initializer_list>
 #include <map>
+#include <set>
 #include <memory>
 #include <string>
 #include <vector>
@@ -69,7 +70,7 @@ public:
     // e.g. _initterm); when it does not, the guest returns to the override's caller.
     // stack_reserve preserves a source dependency call depth when stack pointers are observable.
     using Continuation=std::function<void(X86Guest&)>;
-    void redirect(std::uint32_t target,const std::vector<std::uint32_t>& arguments,std::uint32_t pops,Continuation then,std::uint32_t stack_reserve=0);
+    void redirect(std::uint32_t target,const std::vector<std::uint32_t>& arguments,std::uint32_t pops,Continuation then,std::uint32_t stack_reserve=0,std::optional<std::uint32_t> source_return={});
     // Protected-mode segments as Windows sets them for a 32-bit thread: a GDT at `gdt` (one page) with
     // flat code/data/stack and an FS segment whose base is the thread's TEB.
     bool set_fs_base(std::uint32_t teb,std::uint32_t gdt,std::string* error);
@@ -114,11 +115,15 @@ private:
     std::optional<std::string> stopped_;bool pause_requested_=false;
     // Pending redirected calls: continuation trap -> (the stack pointer the caller resumes with, its
     // return address, what to run). Traps live in a page next to the stop address.
-    struct Pending {std::uint32_t resume_esp,return_address;Continuation then;};
+    struct Pending {std::uint32_t resume_esp,return_address;Continuation then;std::uint32_t source_return_esp=0;};
     std::map<std::uint32_t,Pending> pending_;std::vector<std::uint32_t> free_continuations_;
     bool redirected_=false;std::uint32_t continuation_base_=0xfeee0000;std::uint32_t next_continuation_=0xfeee0000;
     static void continuation_hook(void*,std::uint64_t address,std::uint32_t size,void* user);
     void install_continuations();
+    void complete_continuation(Pending);
+    std::map<std::uint32_t,std::vector<Pending>> source_pending_;
+    std::set<std::uint32_t> source_continuation_sites_;
+    static void source_continuation_hook(void*,std::uint64_t,std::uint32_t,void*);
     std::vector<std::unique_ptr<WriteWatch>> watches_;
     std::map<std::uint32_t,InstructionHook> instruction_hooks_;
     std::vector<std::pair<std::uint32_t,std::uint32_t>> hook_regions_;

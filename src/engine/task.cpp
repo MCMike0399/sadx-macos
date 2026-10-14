@@ -121,41 +121,43 @@ TaskResult TaskScheduler::append_child(const TaskHandle& parent, TaskCallback ca
     return {TaskFailure::none, task};
 }
 
+TaskDispatchState TaskScheduler::begin_index_dispatch(int list_index){
+    TaskDispatchState state;
+    const auto index=canonical_index(list_index);
+    if(index<0)state.failure={TaskFailure::invalid_list_index,{}};
+    else state.next=retain(heads_[static_cast<std::size_t>(index)]);
+    return state;
+}
+TaskDispatchState TaskScheduler::begin_child_dispatch(const TaskHandle& parent){
+    TaskDispatchState state;state.children=true;state.failure=validate(parent);
+    if(state.failure)state.next=retain(parent->first_child_);
+    return state;
+}
+TaskDispatchCall TaskScheduler::advance_dispatch(TaskDispatchState& state){
+    if(!state.failure)return {state.failure,{},nullptr,false};
+    if(state.awaiting_callback){context_.field30.reset();if(!state.children)context_.current_function=nullptr;state.awaiting_callback=false;}
+    while(state.next){
+        auto task=state.next;
+        // External graph reconciliation replaces native handles. The source
+        // snapshot is a pool address, so resolve its current slot generation.
+        if(task->source_slot_){const auto current=source_slots_[*task->source_slot_];if(current)task=current;else return {{TaskFailure::deleted_snapshot_next,task,{},state.children?0x40b433U:0x40b0e0U},task,nullptr,false};}
+        if(task->retired_)return {{TaskFailure::deleted_snapshot_next,task},task,nullptr,false};
+        if(task->source_slot_&&!task->linked_)return {{TaskFailure::detached_snapshot_next,task,{},state.children?0x40b433U:0x40b0e0U},task,nullptr,false};
+        state.next=retain(task->next_);const auto callback=task->exec;
+        if(!state.children)context_.current_function=callback;
+        if(callback||state.children)context_.field30=task->field30;
+        if(!callback){if(state.children)return {{TaskFailure::null_child_callback,task},task,nullptr,false};context_.current_function=nullptr;continue;}
+        state.awaiting_callback=true;return {{},task,callback,false};
+    }
+    return {{},{},nullptr,true};
+}
 TaskResult TaskScheduler::run_index(int list_index) {
-    const int index = canonical_index(list_index);
-    if (index < 0) {
-        return {TaskFailure::invalid_list_index, {}};
-    }
+    auto state=begin_index_dispatch(list_index);if(!state.failure)return state.failure;
     WalkGuard guard(*this);
-    auto task = retain(heads_[static_cast<std::size_t>(index)]);
-    while (task) {
-        if (task->retired_) {
-            return {TaskFailure::deleted_snapshot_next, task};
-        }
-        if (task->source_slot_ && !task->linked_)
-            return {TaskFailure::detached_snapshot_next, task, {}, 0x40b0e0};
-        const auto next = retain(task->next_); // snapshot BEFORE callback
-        const auto callback = task->exec;
-        context_.current_function = callback;
-        if (callback) {
-            context_.field30 = task->field30;
-            try {
-                callback(*this, task);
-            } catch (const SourceTaskFailure& failed) {
-                return failed.result;
-            } catch (...) {
-                // Native callback exceptions have no x86 counterpart. Release
-                // native context ownership, retain the exception and stop.
-                context_.field30.reset();
-                context_.current_function = nullptr;
-                throw;
-            }
-            context_.field30.reset();
-        }
-        context_.current_function = nullptr;
-        task = resolve_snapshot(next);
+    for(;;){const auto call=advance_dispatch(state);if(!call.result)return call.result;if(call.completed)return {};
+        try{call.callback(*this,call.task);}catch(const SourceTaskFailure& failed){return failed.result;}
+        catch(...){context_.field30.reset();context_.current_function=nullptr;throw;}
     }
-    return {};
 }
 
 TaskResult TaskScheduler::run_game_tasks() {
@@ -169,41 +171,12 @@ TaskResult TaskScheduler::run_game_tasks() {
 }
 
 TaskResult TaskScheduler::run_children(const TaskHandle& parent) {
-    const auto accepted = validate(parent);
-    if (!accepted) {
-        return accepted;
-    }
+    auto state=begin_child_dispatch(parent);if(!state.failure)return state.failure;
     WalkGuard guard(*this);
-    auto task = retain(parent->first_child_);
-    while (task) {
-        if (task->retired_) {
-            return {TaskFailure::deleted_snapshot_next, task};
-        }
-        if (task->source_slot_ && !task->linked_)
-            return {TaskFailure::detached_snapshot_next, task, {}, 0x40b433};
-        const auto next = retain(task->next_); // snapshot BEFORE callback
-        const auto callback = task->exec;
-        context_.field30 = task->field30;
-        if (!callback) {
-            // Original ff 50 10 attempts a call through zero. Surface the
-            // failure and release the native handle instead of crashing.
-            context_.field30.reset();
-            return {TaskFailure::null_child_callback, task};
-        }
-        try {
-            callback(*this, task);
-        } catch (const SourceTaskFailure& failed) {
-            return failed.result;
-        } catch (...) {
-            context_.field30.reset();
-            throw;
-        }
-        context_.field30.reset();
-        // Deliberately neither set nor restore current_function. Nested
-        // run_index calls can clear it; the original does not restore globals.
-        task = resolve_snapshot(next);
+    for(;;){const auto call=advance_dispatch(state);if(!call.result)return call.result;if(call.completed)return {};
+        try{call.callback(*this,call.task);}catch(const SourceTaskFailure& failed){return failed.result;}
+        catch(...){context_.field30.reset();throw;}
     }
-    return {};
 }
 
 TaskResult TaskScheduler::free_task(const TaskHandle& task) {

@@ -14,13 +14,25 @@ using namespace sadx;
 void require(bool ok,const std::string& why){if(!ok)throw std::runtime_error(why);}
 struct Fixture {
     std::unique_ptr<HleProcess> p;bool mutant=false;
+    std::vector<std::array<std::uint32_t,9>> callbacks;
     Fixture(const ExecutableImage& image,bool native){std::string error;p=HleProcess::create(".","build/task-bridge-overlay",&error);require(p!=nullptr,error);require(p->map_main(image,&error),error);
         require(p->guest().add_override(0x51a740,[](X86Guest&){return 0U;},&error),error);
-        if(native)for(auto entry:task_overrides(*p)){const auto bridge=entry.bridge;const auto at=entry.address;require(p->guest().add_override(at,[this,bridge,at](X86Guest& g){if(mutant&&at!=0x40b1a0){if(at==0x40b030)g.set_reg(UC_X86_REG_EDX,g.reg(UC_X86_REG_EDX)^1U);else if(at==0x40b460)g.set_u32(0x3abdbe8,g.u32(0x3abdbe8).value_or(0)^1U);else g.set_u32(g.esp()+4,g.u32(g.esp()+4).value_or(0)^1U);}return bridge(g);},&error),error);}}
+        require(p->guest().map(0x10000000,4096,true,&error),error);
+        const auto put=[&](std::uint32_t at,const std::vector<std::uint8_t>& code){require(p->guest().write(at,code.data(),code.size()),"callback code");};
+        const auto call_bytes=[](std::uint32_t at,std::uint32_t target){std::vector<std::uint8_t> bytes{0xe8};const auto displacement=target-at-5;for(unsigned k=0;k<4;++k)bytes.push_back(static_cast<std::uint8_t>(displacement>>(8*k)));return bytes;};
+        put(0x10000000,{0xc3});put(0x10000040,{0x8b,0x54,0x24,0x04,0x8b,0x02,0x85,0xc0,0x74,0x07,0xc7,0x40,0x10,0,0,0,0x10,0xc3});
+        for(const auto at:{0x10000080U,0x100000c0U,0x10000100U,0x10000140U}){std::vector<std::uint8_t> code;
+            if(at==0x10000080)code={0x6a,0x01};else if(at==0x100000c0)code={0xff,0x74,0x24,0x04};else code={0x68,0,0,0,0x10,0x6a,0x00,0x6a,0x00};
+            const auto invoke=call_bytes(at+code.size(),at==0x10000080?0x40b0c0:at==0x100000c0?0x40b570:0x40b860);code.insert(code.end(),invoke.begin(),invoke.end());code.insert(code.end(),{0x83,0xc4,static_cast<std::uint8_t>(at==0x10000100?12:4),0xc3});put(at,code);
+        }
+        std::vector<std::uint8_t> reused={0x8b,0x44,0x24,0x04,0xff,0x30};const auto remove=call_bytes(0x10000140+reused.size(),0x40b570);reused.insert(reused.end(),remove.begin(),remove.end());reused.insert(reused.end(),{0x83,0xc4,0x04,0x68,0,0,0,0x10,0x6a,0x00,0x6a,0x00});const auto replace=call_bytes(0x10000140+reused.size(),0x40b860);reused.insert(reused.end(),replace.begin(),replace.end());reused.insert(reused.end(),{0x83,0xc4,0x0c,0xc3});put(0x10000140,reused);
+        for(const auto at:{0x10000000U,0x10000040U,0x10000080U,0x100000c0U,0x10000100U,0x10000140U})require(p->guest().add_instruction_hook(at,[this](X86Guest& g,std::uint32_t pc){callbacks.push_back({pc,g.u32(g.esp()+4).value_or(0),g.u32(0x3abdbf4).value_or(0),g.u32(0x3abdbf8).value_or(0),g.u32(g.esp()).value_or(0),g.esp(),g.reg(UC_X86_REG_ESI),g.reg(UC_X86_REG_EBX),g.reg(UC_X86_REG_EDI)});return false;},&error),error);
+        if(native)for(auto entry:task_overrides(*p)){const auto bridge=entry.bridge;const auto at=entry.address;require(p->guest().add_override(at,[this,bridge,at](X86Guest& g){if(mutant&&at!=0x40b1a0){if(at==0x40b030)g.set_reg(UC_X86_REG_EDX,g.reg(UC_X86_REG_EDX)^1U);else if(at==0x40b170)g.set_u32(0x3abdbe0,g.u32(0x3abdbe0).value_or(0)^1U);else if(at==0x40b460)g.set_u32(0x3abdbe8,g.u32(0x3abdbe8).value_or(0)^1U);else g.set_u32(g.esp()+4,g.u32(g.esp()+4).value_or(0)^1U);}return bridge(g);},&error),error);}}
 };
 void compare(Fixture& a,Fixture& b,std::uint32_t entry,const std::vector<std::uint32_t>& args){const auto x=a.p->guest().call(entry,args),y=b.p->guest().call(entry,args);require(bool(x),"original: "+x.error);require(bool(y),"native: "+y.error);
-    if(entry!=0x40b310&&entry!=0x40b570&&entry!=0x40b0c0&&entry!=0x40b7e0)require(x.eax==y.eax,"task-work EAX");
+    if(entry!=0x40b310&&entry!=0x40b570&&entry!=0x40b0c0&&entry!=0x40b7e0&&entry!=0x40b170&&entry!=0x40b420)require(x.eax==y.eax,"task-work EAX");
     for(const auto at:{0x3abdbe8U,0x3abdbf0U,0x3c839fcU,0x3c83a00U,0x3abdbe4U,0x3abdbecU,0x3abdbf4U,0x3abdbf8U})require(a.p->guest().u32(at)==b.p->guest().u32(at),"task-work globals at "+std::to_string(at)+" entry "+std::to_string(entry));
+    require(a.callbacks==b.callbacks,"callback source return/frame/context/register trace");
     for(unsigned k=0;k<8;++k)require(a.p->guest().u32(0x3abdbc4+4*k)==b.p->guest().u32(0x3abdbc4+4*k),"task list heads entry "+std::to_string(entry));
     const auto& l=a.p->hle().log();const auto& r=b.p->hle().log();require(l.size()==r.size(),"task-work trace count");
     for(unsigned k=0;k<l.size();++k)require(l[k].dll==r[k].dll&&l[k].symbol==r[k].symbol&&l[k].return_address==r[k].return_address&&l[k].arguments==r[k].arguments&&l[k].result==r[k].result,"task-work exact HLE trace");
@@ -64,6 +76,22 @@ int main(int argc,char** argv){try{
             if(op<=2)tasks.push_back(original.p->guest().reg(UC_X86_REG_EAX));++graph_operations;
         }memory(original,native);++graph_sequences;
     }
+    unsigned dispatch_cases=0;
+    for(const auto owner:{0x40b0c0U,0x40b170U,0x40b420U})for(const auto cb:{0x10000000U,0x10000040U,0x10000080U,0x100000c0U,0x10000100U,0x10000140U}){
+        original.callbacks.clear();native.callbacks.clear();compare(original,native,0x40b1a0,{});compare(original,native,0x40b460,{});
+        compare(original,native,0x40b860,{0,0,0});const auto parent=original.p->guest().reg(UC_X86_REG_EAX);
+        if(owner==0x40b420){compare(original,native,0x40b940,{0,0x10000000,parent});compare(original,native,0x40b940,{0,cb,parent});}
+        else {compare(original,native,0x40b860,{0,0,0x10000000});compare(original,native,0x40b860,{0,0,cb});}
+        compare(original,native,0x40b860,{0,1,0x10000000});compare(original,native,0x40b860,{0,8,0x10000000});
+        const auto base=original.p->guest().u32(0x3abdbe4).value_or(0);for(auto* f:{&original,&native})for(unsigned k=0;k<8;++k)f->p->guest().set_u32(base+52*k+48,0x30000000+4*k);
+        compare(original,native,owner,owner==0x40b170?std::vector<std::uint32_t>{}:std::vector<std::uint32_t>{owner==0x40b420?parent:0});memory(original,native);++dispatch_cases;
+    }
+    unsigned dispatch_mutants=0;
+    for(const auto owner:{0x40b0c0U,0x40b170U,0x40b420U}){
+        original.callbacks.clear();native.callbacks.clear();compare(original,native,0x40b1a0,{});compare(original,native,0x40b460,{});compare(original,native,0x40b860,{0,0,0x10000000});const auto parent=original.p->guest().reg(UC_X86_REG_EAX);compare(original,native,0x40b940,{0,0x10000000,parent});compare(original,native,0x40b860,{0,8,0x10000000});native.mutant=true;
+        try{compare(original,native,owner,owner==0x40b170?std::vector<std::uint32_t>{}:std::vector<std::uint32_t>{owner==0x40b420?parent:0});}catch(const std::exception&){++dispatch_mutants;}native.mutant=false;
+        original.callbacks.clear();native.callbacks.clear();for(auto* p:{&original,&native})for(const auto at:{0x3abdbe4U,0x3abdbecU,0x3abdbf4U,0x3abdbf8U,0x3abdbc4U,0x3abdbc8U,0x3abdbccU,0x3abdbd0U,0x3abdbd4U,0x3abdbd8U,0x3abdbdcU,0x3abdbe0U})p->p->guest().set_u32(at,0);
+    }require(dispatch_mutants==3,"dispatch bridge mutants");
     unsigned caught=0;
     for(const auto entry:{0x40b220U,0x40b310U}){
         compare(original,native,0x40b1a0,{});compare(original,native,0x40b220,{64});const auto address=original.p->guest().reg(UC_X86_REG_EAX);native.mutant=true;
@@ -90,5 +118,5 @@ int main(int argc,char** argv){try{
     const auto corrupt=g.call(0x40b220,{32});require(!corrupt&&corrupt.error.find("changed metadata")!=std::string::npos,"external metadata corruption boundary");
     require(bool(g.call(0x40b1a0,{})),"native reset after corruption");const auto wrapped=g.call(0x40b220,{0xffffffffU});require(!wrapped&&wrapped.error.find("40b220")!=std::string::npos,"declared size-wrap boundary");
     const auto block=g.call(0x40b220,{32});require(bool(block)&&block.eax!=0,"native allocation");require(bool(g.call(0x40b310,{block.eax})),"native release");const auto twice=g.call(0x40b310,{block.eax});require(!twice&&twice.error.find("40b31c")!=std::string::npos,"double/foreign free boundary");
-    std::cout<<"Task bridge: "<<sequences<<" complete oracle sequences, "<<operations<<" operations; "<<graph_sequences<<" graph sequences/"<<graph_operations<<" operations; actual CRT/heap acquisition and repeated initialization; EAX allocation/global/exact HLE traces and full 16 MiB+32 arena bytes match with guest payload writes and sentinel padding; 2 work and 5 graph input mutants caught; corrupt metadata, wrap and unowned free stop explicitly\n";return 0;
+    std::cout<<"Task bridge: "<<sequences<<" complete oracle sequences, "<<operations<<" operations; "<<graph_sequences<<" graph sequences/"<<graph_operations<<" operations; "<<dispatch_cases<<" dispatch scenarios; actual CRT/heap acquisition and repeated initialization; EAX allocation/global/exact HLE traces and full 16 MiB+32 arena bytes match with guest payload writes and sentinel padding; 2 work, 5 graph and 3 dispatch input mutants caught; corrupt metadata, wrap and unowned free stop explicitly\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

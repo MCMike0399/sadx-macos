@@ -126,6 +126,17 @@ struct TaskGraphState {
     std::array<std::optional<std::uint16_t>,8> heads{};
     TaskContext context;
 };
+struct TaskDispatchState {
+    TaskHandle next;
+    TaskResult failure;
+    bool children=false,awaiting_callback=false;
+};
+struct TaskDispatchCall {
+    TaskResult result;
+    TaskHandle task;
+    TaskCallback callback=nullptr;
+    bool completed=false;
+};
 
 enum class TaskCallbackContextFailure { none,null_callback,null_context,conflicting_owner };
 struct TaskCallbackContextResult {
@@ -194,6 +205,12 @@ public:
     // RunObjectIndex 0x40b0c0: lists 0..7, with index 8 aliasing 7.
     // Top-level null exec is skipped; next is captured before calling exec.
     TaskResult run_index(int list_index);
+    // One native dispatch transition at a time; callbacks may run externally.
+    // The saved next identity precedes the callback. Reconcile the graph, then
+    // advance again to apply source context cleanup and resolve pool-slot reuse.
+    TaskDispatchState begin_index_dispatch(int list_index);
+    TaskDispatchState begin_child_dispatch(const TaskHandle& parent);
+    TaskDispatchCall advance_dispatch(TaskDispatchState&);
     // RunTask0x40b170: source index8 (alias7) first, then indices0..6.
     TaskResult run_game_tasks();
     // LoopTaskC 0x40b420: direct children only. A null child exec models the

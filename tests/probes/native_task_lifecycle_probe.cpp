@@ -5,11 +5,13 @@
 #include <vector>
 
 namespace sadx {
+static std::vector<std::uint32_t> callback_trace;
 class TaskSourceProbe {
     static constexpr std::uint32_t base=0x20000020;
     static std::uint32_t address(const TaskHandle& t) {return t && t->source_slot_?base+*t->source_slot_*52:0;}
+    static void observed_no_op(TaskScheduler& scheduler,const TaskHandle& task){callback_trace.push_back(address(task));callback_trace.push_back(callback(scheduler.context().current_function));callback_trace.push_back(scheduler.context().field30?0x30000000:0);}
     static std::uint32_t callback(TaskCallback c) {
-        if(c==&TaskScheduler::source_no_op)return 0x51f680;
+        if(c==&TaskScheduler::source_no_op||c==&observed_no_op)return 0x51f680;
         if(c==&TaskScheduler::destroy_callback)return 0x40b570;
         if(c==&TaskScheduler::free_children_callback)return 0x40b7e0;
         return 0;
@@ -18,6 +20,7 @@ public:
     static int run(const std::uint32_t* commands,std::size_t words,std::uint8_t* memory,
         std::size_t memory_size,std::uint32_t* trace,std::size_t trace_size) {
         if(!commands||words%4||!memory||memory_size!=TaskWorkArena::usable_bytes+32||!trace||trace_size!=words/4*3+11)return 1;
+        callback_trace.clear();
         TaskScheduler scheduler;auto arena=std::make_shared<TaskWorkArena>(0x20000000);
         auto resource=std::make_shared<int>(1);
         if(!scheduler.initialize_source_pool(arena,resource))return 2;
@@ -58,7 +61,7 @@ public:
                 }
                 else if(op!=5)return 3;
             }else if(op!=5)return 3;
-            if(op==5)result=scheduler.run_index(static_cast<int>(a));
+            if(op==5){for(const auto& task:scheduler.source_slots_)if(task&&task->exec==&TaskScheduler::source_no_op)task->exec=&observed_no_op;result=scheduler.run_index(static_cast<int>(a));}
             if(op<=2) {
                 allocations.push_back(result.task);
                 if(result.task)last_generation[*result.task->source_slot_]=result.task;
@@ -123,3 +126,5 @@ extern "C" int sadx_native_task_inactive_boundary(std::uint32_t* output,std::siz
         return 0;
     }catch(...){return 3;}
 }
+
+extern "C" std::size_t sadx_native_task_callback_trace(std::uint32_t* out,std::size_t capacity){const auto& trace=sadx::callback_trace;if(capacity>=trace.size()&&out)std::memcpy(out,trace.data(),trace.size()*4);return trace.size();}

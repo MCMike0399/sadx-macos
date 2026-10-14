@@ -1,7 +1,7 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "8ef1e57e1d73539e205a145a3fcbaf49619b3e687be55fcba0b6e7dd1ff82e7b",
- "case_blob_sha256": "d9802429ed3fc22802f9eed8f6626caeadabb4d99d930a69c38ce3f5c705c869",
+ "native_library_sha256": "f4607fa3ea09678c78c86085c473685cf56e94d987389232ab424cd040de21cc",
+ "case_blob_sha256": "0cab4557174b563fcc73986623ff2c4e1b30ca5e56e48b0661897a602236b485",
  "source_ranges": {
   "0x40b030": {
    "size": 143,
@@ -46,6 +46,8 @@
  },
  "sequences": [
   {
+   "callback_contexts_match": true,
+   "callback_count": 0,
    "sequence": 0,
    "operations": 3,
    "trace_mismatches": 0,
@@ -57,6 +59,8 @@
    "native_arena_sha256": "1058e7e51ba9a74af2990f3de59d755a29f7c3950e316d775c6e6641b703b039"
   },
   {
+   "callback_contexts_match": true,
+   "callback_count": 0,
    "sequence": 1,
    "operations": 12,
    "trace_mismatches": 0,
@@ -68,6 +72,8 @@
    "native_arena_sha256": "d57be7a6deea8076939166e9c4cbe0da81b3b2a57ae0813f3e73eb9b7e829541"
   },
   {
+   "callback_contexts_match": true,
+   "callback_count": 1,
    "sequence": 2,
    "operations": 9,
    "trace_mismatches": 0,
@@ -79,6 +85,8 @@
    "native_arena_sha256": "c80a9d12c7b8dd080ddc6222578318950f08c16795bee28f4711bd4b663b1582"
   },
   {
+   "callback_contexts_match": true,
+   "callback_count": 0,
    "sequence": 3,
    "operations": 5,
    "trace_mismatches": 0,
@@ -90,6 +98,8 @@
    "native_arena_sha256": "03306d3ed59e5e29a172bdcfbae6b9eb160159f97b7fff24a304f4bd8016f8d7"
   },
   {
+   "callback_contexts_match": true,
+   "callback_count": 0,
    "sequence": 4,
    "operations": 5,
    "trace_mismatches": 0,
@@ -101,7 +111,22 @@
    "native_arena_sha256": "51ce2e705eeb371d89c82afb7c3f469dca6629c738c8c5b075b59ae8994427c4"
   },
   {
+   "callback_contexts_match": true,
+   "callback_count": 7,
    "sequence": 5,
+   "operations": 9,
+   "trace_mismatches": 0,
+   "byte_mismatches": 0,
+   "expected_boundary_failures": [],
+   "trace_examples": [],
+   "byte_examples": [],
+   "original_arena_sha256": "dc41fa8e76f75914740b41e6932b2c58ed149aea6eb3397859da021d00e01a68",
+   "native_arena_sha256": "dc41fa8e76f75914740b41e6932b2c58ed149aea6eb3397859da021d00e01a68"
+  },
+  {
+   "callback_contexts_match": true,
+   "callback_count": 0,
+   "sequence": 6,
    "operations": 190,
    "trace_mismatches": 0,
    "byte_mismatches": 0,
@@ -112,7 +137,9 @@
    "native_arena_sha256": "69c0aae28150c36282fbf47d5f9d4d5ea478a2b7cc5c98eb8d6c254e0747252e"
   },
   {
-   "sequence": 6,
+   "callback_contexts_match": true,
+   "callback_count": 0,
+   "sequence": 7,
    "operations": 200,
    "trace_mismatches": 0,
    "byte_mismatches": 0,
@@ -123,7 +150,9 @@
    "native_arena_sha256": "ceb07647d72e26e227cbbd6a5246ee5fecc9e4e34887b558d7b82667509a1084"
   },
   {
-   "sequence": 7,
+   "callback_contexts_match": true,
+   "callback_count": 0,
+   "sequence": 8,
    "operations": 185,
    "trace_mismatches": 0,
    "byte_mismatches": 0,
@@ -134,7 +163,9 @@
    "native_arena_sha256": "8d9ae41b4166879f08e1a09e942cc9e7b0269905051320ca0518f4c6e8e9c284"
   },
   {
-   "sequence": 8,
+   "callback_contexts_match": true,
+   "callback_count": 0,
+   "sequence": 9,
    "operations": 194,
    "trace_mismatches": 0,
    "byte_mismatches": 0,
@@ -143,17 +174,6 @@
    "byte_examples": [],
    "original_arena_sha256": "4e6ecc6e3463bc5cdc25616bddc6a8eb74484a330db3fbc7a4414e4969cdb522",
    "native_arena_sha256": "4e6ecc6e3463bc5cdc25616bddc6a8eb74484a330db3fbc7a4414e4969cdb522"
-  },
-  {
-   "sequence": 9,
-   "operations": 200,
-   "trace_mismatches": 0,
-   "byte_mismatches": 0,
-   "expected_boundary_failures": [],
-   "trace_examples": [],
-   "byte_examples": [],
-   "original_arena_sha256": "c1878357a6374a23dfd204bc4f7d51db0b08541266599e20f512073cbdb84cd7",
-   "native_arena_sha256": "c1878357a6374a23dfd204bc4f7d51db0b08541266599e20f512073cbdb84cd7"
   }
  ],
  "limits": [
@@ -181,11 +201,11 @@
  },
  "values_links_and_bytes_match": true,
  "tracked_summary": {
-  "full_sha256": "4cc15e0ee6a575370c547a0564cd5c4c33ea6edf8bf70676267453f1f853d341",
-  "full_bytes": 9822,
+  "full_sha256": "8594ae96ccd4f82985a5475726c2ff7d07cea39b59b2536b1ec4b416cf35daec",
+  "full_bytes": 11415,
   "lists_cut_to": 10,
   "cut_lists": {
-   "sequences": 17
+   "sequences": 18
   }
  }
 }

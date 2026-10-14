@@ -1,0 +1,62 @@
+{
+ "entries_added": [
+  "40b0c0",
+  "40b170",
+  "40b420"
+ ],
+ "process_entries": 36,
+ "ghidra_evidence_ids": [
+  "ev_0eaaaa2e6e7d3fff355851df5812dde22f2134ab47962c03e199a2dcb23e9993",
+  "ev_91e5820fb211f5d6d3e545ba24a3f9fb126a52012e9cfab2720568a82864b570",
+  "ev_3b9ee31f82ebd8aba1eb9578a13486cc62ce40c54b75a28dbb38730fe34db229"
+ ],
+ "corpus": {
+  "lifecycle_sequences": 18,
+  "lifecycle_operations": 2311,
+  "work_sequences": 16,
+  "work_operations": 4890,
+  "dispatch_scenarios": 18,
+  "core_mutants_caught": 3,
+  "dispatch_bridge_mutants_caught": 3,
+  "existing_bridge_mutants": 7
+ },
+ "source_contract": {
+  "order": "8(alias7), then 0..6",
+  "callback_return_addresses": [
+   "40b10b",
+   "40b43f"
+  ],
+  "callback_stack_reserves": {
+   "index": 20,
+   "all": 32,
+   "children": 8
+  },
+  "next_snapshot": "before callback; resolve current pool-slot generation after reconciliation",
+  "context": "top sets/clears current_function; children leave it; field30 clears after callback",
+  "saved_register_slots": "written as source frame; owner registers restored"
+ },
+ "source_sha256": {
+  "src/engine/task.cpp": "ef7ef251c7c7ead2b1a0ae0127790a67ed627de499972401211f09652267486d",
+  "src/engine/task.hpp": "7d9d4aeeed534fb8f984f053e35522674a4791a350d374d900349ac484aa95a3",
+  "src/guest/x86_guest.cpp": "41e71fd4c35bfbd4cfc5fa6ceb98e54d089dda72cbecf201104d859e383559fa",
+  "src/guest/x86_guest.hpp": "77f4204095b6a68fc1324b9f79dc28d02a2585eef6e385952e5a40bbcd3bc115",
+  "src/hle/hle_task_bridge.cpp": "585b4c69bff7c5b2d16214700607390d2fae5482815cd85d550d9ab4dc544033",
+  "tests/unit/hle_task_bridge.cpp": "4b560d33f9a09bfbcb73e38b2f9a8a59dffa99bea4c29df4ce32ecee7d043531",
+  "tests/probes/native_task_lifecycle_probe.cpp": "ab7544a397961ea8a9b460663c152736214e086b1eee2b6933993563b977b50c",
+  "tools/oracles/verify_original_task_lifecycle.py": "88194efd167a20c45344a0e08cefdd5aae871c71403813ebaddb2e2e92b4fe10"
+ },
+ "limits": [
+  "Source saved-next freed-list traversal and changed pool provenance remain explicit native boundaries.",
+  "Callback ABI is the source cdecl Task callback; source-return frames are matched by ESP.",
+  "Native synchronous creation rollback unknown callbacks remain explicit 40b590 boundary.",
+  "Native destruction/free-children and render queue plus other owners, reviewed goldens unfinished."
+ ],
+ "runtime": {
+  "boot_identical": true,
+  "override_600_digests_match": true,
+  "controller_900_digests_match": true,
+  "host_FPS": 80.0,
+  "app_script_exit_status": 0,
+  "screenshot_sha256": "bc1cfbaa30f34f240c7094a5059ffec35138d91e9efd1233c762d048f7d5949e"
+ }
+}

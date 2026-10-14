@@ -160,6 +160,49 @@ struct TaskBridge {
         catch(const MetadataUnavailable&){}
         return 0;
     }
+    struct DispatchRun {
+        TaskDispatchState cursor;
+        std::uint32_t owner=0,source_pool=0;
+        std::array<std::uint32_t,4> saved{}; // EBP, ESI, EBX, EDI
+        int position=0;
+        bool all=false,children=false;
+    };
+    void dispatch_next(const std::shared_ptr<DispatchRun>& run,bool returned=false){
+        auto& g=process.guest();entry=run->owner;
+        try{
+            if(returned){if(pool!=run->source_pool){g.stop("task bridge: changed snapshot pool at "+hex(run->children?0x40b433:0x40b0e0));return;}if(!ready())return;import_graph();}
+            for(;;){
+                const auto call=scheduler->advance_dispatch(run->cursor);export_graph();
+                if(!call.result){g.stop("task bridge: dispatch boundary "+hex(call.result.source_boundary?call.result.source_boundary:run->children?0x40b43cU:0x40b0e0U));return;}
+                if(call.completed){
+                    if(run->all&&++run->position<8){run->cursor=scheduler->begin_index_dispatch(run->position-1);continue;}
+                    g.set_reg(UC_X86_REG_ESI,run->saved[1]);if(!run->children){g.set_reg(UC_X86_REG_EBP,run->saved[0]);g.set_reg(UC_X86_REG_EBX,run->saved[2]);g.set_reg(UC_X86_REG_EDI,run->saved[3]);}
+                    return;
+                }
+                const auto task=address(call.task->source_slot()),next=run->cursor.next?address(run->cursor.next->source_slot()):0,fn=raw(call.callback),field30=raw(call.task->field30);
+                const auto sp=g.esp();unsigned reserve=run->children?8U:run->all?0x20U:0x14U;
+                if(run->children){g.set_u32(sp-4,run->saved[1]);g.set_eax(task);g.set_reg(UC_X86_REG_ECX,field30);g.set_reg(UC_X86_REG_ESI,next);}
+                else {
+                    auto top=sp;
+                    if(run->all){g.set_u32(sp-4,run->saved[1]);g.set_u32(sp-8,run->position==0?8U:static_cast<unsigned>(run->position-1));g.set_u32(sp-12,run->position==0?0x40b178:0x40b186);top-=12;}
+                    g.set_u32(top-4,run->saved[0]);g.set_u32(top-8,run->all&&run->position?static_cast<unsigned>(run->position-1):run->saved[1]);g.set_u32(top-12,run->saved[2]);g.set_u32(top-16,run->saved[3]);
+                    g.set_reg(UC_X86_REG_EBP,0);g.set_reg(UC_X86_REG_ESI,task);g.set_reg(UC_X86_REG_EBX,next);g.set_reg(UC_X86_REG_EDI,fn);g.set_eax(field30);
+                }
+                g.redirect(fn,{task},0,[this,run](X86Guest&){dispatch_next(run,true);},reserve,run->children?0x40b43fU:0x40b10bU);
+                return;
+            }
+        }catch(const MetadataUnavailable&){}
+    }
+    std::uint32_t dispatch(X86Guest& g,std::uint32_t at){
+        entry=at;if(!ready())return 0;
+        try{import_graph();auto run=std::make_shared<DispatchRun>();run->owner=at;run->source_pool=pool;run->all=at==0x40b170;run->children=at==0x40b420;
+            const int regs[4]={UC_X86_REG_EBP,UC_X86_REG_ESI,UC_X86_REG_EBX,UC_X86_REG_EDI};for(unsigned k=0;k<4;++k)run->saved[k]=g.reg(regs[k]);
+            if(run->children){const auto parent=slot(word(g.esp()+4));const auto handle=parent?scheduler->source_task(*parent):TaskHandle{};if(!handle){g.stop("task bridge: unobserved parent at 40b424");return 0;}run->cursor=scheduler->begin_child_dispatch(handle);}
+            else run->cursor=scheduler->begin_index_dispatch(run->all?8:static_cast<int>(word(g.esp()+4)));
+            dispatch_next(run);
+        }catch(const MetadataUnavailable&){}
+        return 0;
+    }
     std::uint32_t run(X86Guest& g,std::uint32_t at){
         entry=at;const auto value=g.u32(g.esp()+4);if(!value){g.stop("task bridge: missing argument at "+hex(at));return 0;}
         if(!*value){g.set_eax(0);return 0;}
@@ -190,6 +233,7 @@ std::vector<OverrideEntry> task_overrides(HleProcess& p){
     }});
     out.push_back({0x40b460,"task_pool_initialize",{{0x3abdbe4,4},{0x3abdbec,4},{0x3abdbc4,32},{0x3abdbe8,4}},[state](X86Guest& g){g.redirect(0x51a740,{},0,[state](X86Guest&){state->initialize_pool();},8);return 0U;}});
     for(const auto at:{0x40b030U,0x40b860U,0x40b940U,0x40b6c0U})out.push_back({at,at==0x40b030?"task_allocate":at==0x40b860?"task_create_element":at==0x40b940?"task_create_child":"task_free",{{0x3abdbec,4},{0x3abdbc4,32},{0x3abdbe8,4}},[state,at](X86Guest& g){return state->graph(g,at);}});
+    for(const auto at:{0x40b0c0U,0x40b170U,0x40b420U})out.push_back({at,at==0x40b0c0?"task_dispatch_index":at==0x40b170?"task_dispatch_all":"task_dispatch_children",{{0x3abdbf4,8}},[state,at](X86Guest& g){return state->dispatch(g,at);}});
     for(const auto entry:{0x40b220U,0x40b310U})out.push_back({entry,entry==0x40b220?"task_work_allocate":"task_work_release",{{0x3abdbe8,4}},[state,entry](X86Guest& g){return state->run(g,entry);}});
     return out;
 }
