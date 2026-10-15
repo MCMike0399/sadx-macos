@@ -65,10 +65,13 @@ tests `player_acceleration_air`); new ones must.
 
 ## Ownership rules (enforced)
 
-* Every source global the native code models is a value member named
-  `<meaning>_at_<hex>` in exactly one struct (`tools/gate/check_global_owners.py`). Other
-  code borrows it by reference/pointer. Arrays count their first element; `SourceBytes<base,size>`
-  owns a whole block.
+* Migrated source globals use semantic value members with a preceding `GLOBAL`
+  annotation and explicit source-byte extent (`tools/gate/check_provenance.py`).
+  Legacy `<meaning>_at_<hex>` owners remain checked by `check_global_owners.py`;
+  arrays count their first element and `SourceBytes<base,size>` owns a whole block.
+  The new checker also rejects overlaps between annotations and those legacy
+  extents. Other code borrows owners by reference/pointer. Both checkers run;
+  the new checker has not replaced the legacy checker.
 * Every ported code range is listed in its oracle report (`original_ranges_sha256` or
   `source_ranges`) and checked against the profile patch inventory
   (`tools/gate/check_profile_patches.py`, reading `build/oracles/*.json`).

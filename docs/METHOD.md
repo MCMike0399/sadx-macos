@@ -95,6 +95,54 @@ These are inputs to M1 and M5 of the roadmap.
 
 ## 3. Porting a function natively (the exact-port method)
 
+### Provenance during ownership migration
+
+`make check` runs `check_provenance.py` after generating the symbol database.
+For migrated state, annotate one owning value declaration directly:
+
+```cpp
+// GLOBAL: SONIC 0x3b11188 FrameMultiplier size=4
+std::optional<std::int32_t> render_ratio;
+```
+
+The annotation uses a database symbol (canonical or retained alternative);
+the C++ identifier is semantic. `size=` is the source byte extent, not native
+`sizeof`; it must match a known symbol size when one exists. Unknown source ABI
+sizes require an explicit extent justified by recovery evidence. One declaration
+per annotation; use type aliases for complex types. Annotations on borrowed
+references/pointers or ambiguous declarations fail. Native pointer-sized values
+such as callback identities can be stored through a named type alias while their
+source extent remains the original four bytes.
+
+`FUNCTION`/`LIBRARY`/`STUB` identify one source entry, using its database name;
+put the annotation at a single declaration/definition, not both. `DATA` describes
+imported content and does not claim mutable storage. `PATCH` uses module-relative
+provenance, for example `// PATCH: SPEEDRUN +0x10f0 -> 0x7899e0`, immediately
+before the implementing function. Existing profile-patch checks remain separate.
+
+`reference/symbols/legacy-identifiers.json` freezes existing per-file legacy
+identifier spellings and retains a separate ledger of the original owned ranges.
+Do not add identifiers to admit new address-named code. Remove retired spelling
+allowances together with a whole-owner annotated migration; stale allowances
+fail. Preserve the range ledger: it rejects cosmetic renames that discard source
+ownership, even if the spelling allowance was removed. A migrated `GLOBAL` must
+cover the retained source extent.
+
+Legacy extent rules remain deliberately unchanged (including array-first-byte
+and read-only constant allowances), so both ownership checkers continue running.
+The retained ledger is **not** full coverage of legacy arrays: source records can
+be strided, and native array `sizeof` is not evidence of their source span. Before
+an aggregate owner migrates, establish its source layout and annotate its full
+extent; do not interpret this checker as proof about unexamined array interiors.
+Legacy identifiers carry no source-module tag: an annotated
+non-SONIC claim at a legacy VA is conservatively treated as a potential overlap
+until that owner migrates. The ledger's legacy `SONIC` namespace mirrors the old
+checker's flat address space; it does not establish that DLL globals belong to
+sonic.exe. Settle a DLL owner's module from evidence when migrating it. This is
+not a full C++ parser or proof of behavior.
+
+### Recovery and verification
+
 Used for verified native behavior and reference adapters. For system-level source
 recovery and the executable-independent destination, also follow `docs/GOAL.md` §4.4–4.5
 and ADR-0005: gather functions and data dependencies into meaningful native interfaces,

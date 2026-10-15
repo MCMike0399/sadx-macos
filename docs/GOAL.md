@@ -410,6 +410,10 @@ completion of more guest bridges is not a prerequisite for establishing the nati
    report that it proves frame control only, not gameplay or full asset independence.
    Subsequent steps extend native composition toward boot/title and a playable stage;
    reuse verified modules rather than maintaining a second gameplay implementation.
+   Progress: the observed dependencies are inventoried in `docs/NATIVE-INDEPENDENCE.md`.
+   The provenance checker and its legacy migration baseline are implemented; no
+   owners have migrated yet. Frame-control naming decisions, native composition,
+   binary-absent test and oracle/replay proof remain pending.
 3. **M1 override-equivalence where it supports recovery or closes the existing milestone.**
    Reference adapters serve the native source, rather than becoming the production API.
    The handoff says 20 of the

@@ -1,0 +1,19 @@
+{
+  "command": "python3 tools/gate/check_provenance.py --root FIXTURE --baseline FIXTURE/baseline.json",
+  "database": "build/symbols/symbols.json from pinned symbol sources",
+  "checks": [
+    {
+      "case": "single_owner",
+      "exit_status": 0,
+      "output": "Provenance: {'GLOBAL': 1}, 4 legacy/annotated byte identities, 0 errors"
+    },
+    {
+      "case": "duplicated_owner",
+      "exit_status": 1,
+      "output": "SONIC 0x3b11188: overlapping GLOBAL owners: src/engine/frame.hpp:2:render_ratio, src/engine/frame.hpp:6:other_ratio\nSONIC 0x3b11189: overlapping GLOBAL owners: src/engine/frame.hpp:2:render_ratio, src/engine/frame.hpp:6:other_ratio\nSONIC 0x3b1118a: overlapping GLOBAL owners: src/engine/frame.hpp:2:render_ratio, src/engine/frame.hpp:6:other_ratio\nSONIC 0x3b1118b: overlapping GLOBAL owners: src/engine/frame.hpp:2:render_ratio, src/engine/frame.hpp:6:other_ratio\nProvenance: {'GLOBAL': 2}, 4 legacy/annotated byte identities, 4 errors"
+    }
+  ],
+  "scope": "CLI fixture uses actual FrameMultiplier symbol; source has one owner, then a duplicated owner. No production state migrated.",
+  "baseline_sha256": "4fbacb8172612745cf7b4545716745d590ead953a28010fdc3ce1e4162435374",
+  "baseline_scope": "Original legacy checker extents only; arrays use first-byte policy, not inferred native array size. No owner migrated."
+}

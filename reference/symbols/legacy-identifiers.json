@@ -1,0 +1,6840 @@
+{
+  "identifiers": {
+    "src/cpu/crt_atan2.hpp": [
+      "argument_copy_flag_at_3c83968",
+      "scratch_result_at_3c83960"
+    ],
+    "src/cpu/crt_rand.cpp": [
+      "seed_at_2bcbdf8"
+    ],
+    "src/cpu/crt_rand.hpp": [
+      "seed_at_2bcbdf8"
+    ],
+    "src/engine/game_controller.cpp": [
+      "bytes_at_3b0e9a4",
+      "words_at_3b0e344",
+      "words_at_3b0e768",
+      "words_at_3b0e990",
+      "words_at_3b0e9b8"
+    ],
+    "src/engine/game_controller.hpp": [
+      "bytes_at_3b0e9a4",
+      "controller_pointers_at_3b0e77c",
+      "controllers_raw_at_3b0e9c8",
+      "mask_at_909f94",
+      "mask_at_909f98",
+      "mask_at_909fa4",
+      "mask_at_909fa8",
+      "mask_at_909fac",
+      "template_at_3b0eaa8",
+      "words_at_3b0e344",
+      "words_at_3b0e768",
+      "words_at_3b0e990",
+      "words_at_3b0e9b8"
+    ],
+    "src/engine/game_frame_control.cpp": [
+      "flags_at_3b0eaa0",
+      "frame_multiplier_at_389d7dc",
+      "frequency_high_at_3d0853c",
+      "frequency_low_at_3d08538",
+      "input_callback_at_3d0fa34",
+      "interval_high_at_3d084ac",
+      "interval_low_at_3d084a8",
+      "last_counter_at_3d08550",
+      "mask_at_3b0e3b8",
+      "raw_at_3b0e3e2",
+      "render_factor_at_89295c",
+      "save_phase_at_3b291a4",
+      "word_at_3b11178",
+      "word_at_3b1117c",
+      "word_at_3b11188"
+    ],
+    "src/engine/game_frame_control.hpp": [
+      "flags_at_3b0eaa0",
+      "frame_multiplier_at_389d7dc",
+      "frequency_high_at_3d0853c",
+      "frequency_low_at_3d08538",
+      "input_callback_at_3d0fa34",
+      "interval_high_at_3d084ac",
+      "interval_low_at_3d084a8",
+      "last_counter_at_3d08550",
+      "mask_at_3b0e3b8",
+      "render_factor_at_89295c",
+      "save_phase_at_3b291a4"
+    ],
+    "src/engine/game_logic.cpp": [
+      "word_at_3abdf70",
+      "word_at_3b11178",
+      "word_at_3b1117c",
+      "word_at_3b1118c",
+      "word_at_3b11194",
+      "word_at_3b11198"
+    ],
+    "src/engine/game_logic.hpp": [
+      "word_at_3abdf70",
+      "word_at_3b11194"
+    ],
+    "src/engine/game_logic_support.cpp": [
+      "aggregate_at_3b0eaf0",
+      "aggregate_special_at_3b0eae8",
+      "raw_at_3b0e3e2",
+      "special_at_3b0e3ba",
+      "word_at_3b11178",
+      "word_at_3b1117c",
+      "word_at_3b11180",
+      "word_at_3b11188",
+      "word_at_3b1118c",
+      "word_at_3b11198",
+      "word_at_3b2a2e4"
+    ],
+    "src/engine/game_logic_support.hpp": [
+      "aggregate_at_3b0eaf0",
+      "aggregate_special_at_3b0eae8",
+      "byte_at_3b0e3b9",
+      "bytes_at_3b0e3e0",
+      "raw_at_3b0e3e2",
+      "special_at_3b0e3ba",
+      "word_at_3b11178",
+      "word_at_3b1117c",
+      "word_at_3b11180",
+      "word_at_3b11188",
+      "word_at_3b1118c",
+      "word_at_3b11198",
+      "word_at_3b2a2e4"
+    ],
+    "src/engine/ninja_device_init.cpp": [
+      "block_at_3d0fae0",
+      "bottom_at_3d0fd2c",
+      "caps_at_3d127c0",
+      "device_at_3d128b0",
+      "device_flags_at_3d1289c",
+      "direct3d_at_3d11f60",
+      "half_height_at_3d1294c",
+      "half_width_at_3d12948",
+      "left_at_3d0fd20",
+      "matrix_at_389d318",
+      "matrix_at_3d0fd80",
+      "records_at_3d0fe00",
+      "right_at_3d0fd28",
+      "top_at_3d0fd24",
+      "viewport_at_3d12780",
+      "words_at_3d0fd00"
+    ],
+    "src/engine/ninja_device_init.hpp": [
+      "block_at_3d0fae0",
+      "bottom_at_3d0fd2c",
+      "caps_at_3d127c0",
+      "direct3d_at_3d11f60",
+      "half_height_at_3d1294c",
+      "half_width_at_3d12948",
+      "left_at_3d0fd20",
+      "matrix_at_389d318",
+      "matrix_at_3d0fd80",
+      "right_at_3d0fd28",
+      "top_at_3d0fd24",
+      "viewport_at_3d12780",
+      "words_at_3d0fd00"
+    ],
+    "src/engine/ninja_fog.cpp": [
+      "cached_fog_end_at_90a09c",
+      "cached_fog_start_at_90a098",
+      "color_at_3d12898",
+      "device_at_3d128b0",
+      "display_switch_at_3b1117c",
+      "end_index_at_3d0fce0",
+      "end_value_at_3d12894",
+      "flag_at_3abdcfe",
+      "fog_enabled_at_3d12798",
+      "fog_mode_at_3d0849c",
+      "fog_profile_at_3abdc6c",
+      "fog_sentinel_at_7dce50",
+      "fog_supported_at_3d128a4",
+      "level_color_at_3abdc68",
+      "level_end_at_3abdc64",
+      "level_start_at_3abdc60",
+      "reciprocal_at_3d12c00",
+      "software_density_at_3d128a0",
+      "special_flags_at_909eb4",
+      "start_index_at_3d12950",
+      "start_value_at_3d0fac0",
+      "table_at_3b10f78",
+      "w_at_3d12a00"
+    ],
+    "src/engine/ninja_fog.hpp": [
+      "color_at_3d12898",
+      "display_switch_at_3b1117c",
+      "end_index_at_3d0fce0",
+      "end_value_at_3d12894",
+      "flag_at_3abdcfe",
+      "fog_sentinel_at_7dce50",
+      "level_color_at_3abdc68",
+      "level_end_at_3abdc64",
+      "level_start_at_3abdc60",
+      "reciprocal_at_3d12c00",
+      "software_density_at_3d128a0",
+      "start_index_at_3d12950",
+      "start_value_at_3d0fac0",
+      "table_at_3b10f78",
+      "w_at_3d12a00"
+    ],
+    "src/engine/ninja_frame_calls.cpp": [
+      "argument_at_3d0fa38",
+      "count_at_3ce712c",
+      "device_at_3d128b0",
+      "device_flags_at_3d1289c",
+      "hook_at_3d0f7a4",
+      "hook_at_3d0f7a8",
+      "hook_at_3d0fa30",
+      "hooks_at_3d08af0",
+      "input_callback_at_3d0fa34",
+      "records_at_3d0fe00",
+      "scene_flags_at_3d08588",
+      "slots_at_3d0fa40",
+      "vertex_buffer_at_3d128ac"
+    ],
+    "src/engine/ninja_frame_calls.hpp": [
+      "argument_at_3d0fa38",
+      "device_flags_at_3d1289c",
+      "hook_at_3d0f7a4",
+      "hook_at_3d0f7a8",
+      "hook_at_3d0fa30",
+      "hooks_at_3d08af0",
+      "records_at_3d0fe00",
+      "scene_flags_at_3d08588",
+      "vertex_buffer_at_3d128ac"
+    ],
+    "src/engine/ninja_input_devices.cpp": [
+      "joysticks_at_3d08814",
+      "mouse_at_3d08834"
+    ],
+    "src/engine/ninja_input_devices.hpp": [
+      "joysticks_at_3d08814",
+      "mouse_at_3d08834"
+    ],
+    "src/engine/ninja_keyboard.cpp": [
+      "count_at_3ce712c",
+      "count_at_3d0881c",
+      "device_at_3d08820",
+      "input_pointer_at_3b0e340",
+      "records_at_3ce6e38",
+      "records_at_3d08818",
+      "slots_at_3d0fa40",
+      "words_at_3ce6e68"
+    ],
+    "src/engine/ninja_keyboard.hpp": [
+      "count_at_3ce712c",
+      "count_at_3d0881c",
+      "device_at_3d08820",
+      "input_pointer_at_3b0e340",
+      "records_at_3ce6e38",
+      "records_at_3d08818",
+      "slots_at_3d0fa40",
+      "words_at_3ce6e68"
+    ],
+    "src/engine/ninja_memory.cpp": [
+      "heap_at_389d628"
+    ],
+    "src/engine/ninja_memory.hpp": [
+      "heap_at_389d628"
+    ],
+    "src/engine/ninja_projection_range.cpp": [
+      "cache_x_at_3aad0c0",
+      "cache_y_at_3aad0c4",
+      "far_at_3d0f968",
+      "limit_at_7dce50",
+      "near_at_3d0f808",
+      "negative_one_at_7dcb0c",
+      "x_at_90082c",
+      "y_bits_at_900830"
+    ],
+    "src/engine/ninja_projection_range.hpp": [
+      "cache_x_at_3aad0c0",
+      "cache_y_at_3aad0c4",
+      "far_at_3d0f968",
+      "limit_at_7dce50",
+      "near_at_3d0f808",
+      "negative_one_at_7dcb0c",
+      "x_at_90082c",
+      "y_bits_at_900830"
+    ],
+    "src/engine/ninja_queue_consumer.cpp": [
+      "captured_texture_list_at_3abd950",
+      "captured_word_at_3abd950",
+      "captured_word_at_3d0f840",
+      "captured_word_at_3d0f9c4",
+      "captured_word_at_3d0f9c8",
+      "color_argb_at_3d0f7f0",
+      "color_at_3ab9864",
+      "count_at_3abd9d4",
+      "count_at_3abd9dc",
+      "display_switch_at_3b1117c",
+      "flag_at_3abdcfe",
+      "flag_at_3b12208",
+      "fog_sentinel_at_7dce50",
+      "initial_color_at_3b18230",
+      "maximum_at_3abd9d8",
+      "maximum_at_3abd9e0",
+      "mode_at_3ab98ac",
+      "mode_byte_at_3abdbc0",
+      "negative_one_at_7dcb0c",
+      "one_at_7dcb10",
+      "projection_color_at_3d0f7f0",
+      "scale_at_3d0f9e0",
+      "special_flags_at_909eb4",
+      "width_at_3d0f9e4"
+    ],
+    "src/engine/ninja_queue_consumer.hpp": [
+      "cached_fog_end_at_90a09c",
+      "cached_fog_start_at_90a098",
+      "color_at_3ab9864",
+      "count_at_3abd9d4",
+      "count_at_3abd9dc",
+      "fog_enabled_at_3d12798",
+      "fog_mode_at_3d0849c",
+      "fog_profile_at_3abdc6c",
+      "fog_sentinel_at_7dce50",
+      "fog_supported_at_3d128a4",
+      "initial_color_at_3b18230",
+      "maximum_at_3abd9d8",
+      "maximum_at_3abd9e0",
+      "mode_byte_at_3abdbc0",
+      "negative_one_at_7dcb0c",
+      "one_at_7dcb10",
+      "projection_color_at_3d0f7f0",
+      "projection_width_at_3d0f9e4",
+      "special_flags_at_909eb4",
+      "table_at_88af78",
+      "width_at_3d0f9e4"
+    ],
+    "src/engine/ninja_queue_lifecycle.cpp": [
+      "color_argb_at_3d0f7f0",
+      "color_at_3ab9864",
+      "count_at_3abd9d4",
+      "count_at_3abd9dc",
+      "depth_mode_at_8928c8",
+      "depth_table_at_88ad9c",
+      "flag_at_3b12208",
+      "initial_color_at_3b18230",
+      "mode_at_3ab98ac",
+      "mode_byte_at_3abdbc0",
+      "negative_one_at_7dcb0c",
+      "one_at_7dcb10",
+      "word_at_3b1117c",
+      "words_at_3ab9898",
+      "words_at_900840",
+      "words_at_90084c",
+      "words_at_900858"
+    ],
+    "src/engine/ninja_queue_lifecycle.hpp": [
+      "depth_mode_at_8928c8",
+      "depth_table_at_88ad9c",
+      "initial_color_at_3b18230",
+      "negative_one_at_7dcb0c",
+      "one_at_7dcb10",
+      "words_at_3ab9898",
+      "words_at_900840",
+      "words_at_90084c",
+      "words_at_900858"
+    ],
+    "src/engine/ninja_render.cpp": [
+      "device_at_3d128b0",
+      "following_words_at_88ad9c",
+      "packed_blend_at_3ab9890"
+    ],
+    "src/engine/ninja_render.hpp": [
+      "device_at_3d128b0",
+      "following_words_at_88ad9c",
+      "packed_blend_at_3ab9890"
+    ],
+    "src/engine/ninja_screen.cpp": [
+      "active_memory_at_3d129a0",
+      "bottom_at_3d0f82c",
+      "bottom_at_3d0fd2c",
+      "center_x_at_3d0fa0c",
+      "center_y_at_3d0fa10",
+      "clear_colors_at_3ce7174",
+      "colors_at_3ce7168",
+      "count_at_3ce712c",
+      "count_at_3ce7170",
+      "device_at_3d128b0",
+      "flags_at_3d0f964",
+      "global_id_at_3d0fdf4",
+      "height_at_3d0f838",
+      "height_at_3d0f9e8",
+      "height_at_3d0fa08",
+      "invalid_at_3d0fd1c",
+      "left_at_3d0f820",
+      "left_at_3d0fd20",
+      "matrix_at_389d318",
+      "matrix_at_3d0fd80",
+      "points_at_3ce7164",
+      "points_at_3ce7184",
+      "pool_at_3ce71b0",
+      "projection_at_3d129c0",
+      "right_at_3d0f828",
+      "right_at_3d0fd28",
+      "size_at_3ce71a4",
+      "top_at_3d0f824",
+      "top_at_3d0fd24",
+      "vertex_buffer_at_3d128ac",
+      "viewport_at_3d12780",
+      "width_at_3d0f9e4",
+      "width_at_3d0fa04",
+      "width_at_3d0fa20",
+      "word_at_3ce7160",
+      "word_at_3d0f804",
+      "word_at_3d0f814",
+      "word_at_3d0f840",
+      "word_at_3d0f9c4"
+    ],
+    "src/engine/ninja_screen.hpp": [
+      "bottom_at_3d0f82c",
+      "clear_colors_at_3ce7174",
+      "colors_at_3ce7168",
+      "count_at_3ce7170",
+      "flags_at_3d0f964",
+      "height_at_3d0f838",
+      "height_at_3d0f9e8",
+      "height_at_3d0fa08",
+      "invalid_at_3d0fd1c",
+      "left_at_3d0f820",
+      "points_at_3ce7164",
+      "points_at_3ce7184",
+      "pool_at_3ce71b0",
+      "projection_at_3d129c0",
+      "right_at_3d0f828",
+      "size_at_3ce71a4",
+      "top_at_3d0f824",
+      "vertex_buffer_at_3d128ac",
+      "width_at_3d0f9e4",
+      "width_at_3d0fa04",
+      "width_at_3d0fa20",
+      "word_at_3ce7160",
+      "word_at_3ce716c",
+      "word_at_3d0f804",
+      "word_at_3d0f814",
+      "word_at_3d0f840",
+      "word_at_3d0f9c4"
+    ],
+    "src/engine/ninja_sprite.cpp": [
+      "center_x_at_3d0fa0c",
+      "center_y_at_3d0fa10",
+      "color_argb_at_3d0f7f0",
+      "scale_at_3d0f9e0"
+    ],
+    "src/engine/ninja_sprite.hpp": [
+      "center_x_at_3d0fa0c",
+      "center_y_at_3d0fa10",
+      "color_argb_at_3d0f7f0",
+      "scale_at_3d0f9e0"
+    ],
+    "src/engine/ninja_sprite_display.cpp": [
+      "active_memory_at_3d129a0",
+      "device_at_3d128b0"
+    ],
+    "src/engine/ninja_sprite_queue.cpp": [
+      "bucket_bias_at_7dcb60",
+      "captured_texture_list_at_3abd950",
+      "captured_word_at_3abd950",
+      "captured_word_at_3d0f840",
+      "captured_word_at_3d0f9c4",
+      "captured_word_at_3d0f9c8",
+      "color_argb_at_3d0f7f0",
+      "color_at_3ab9864",
+      "color_at_3abd9a8",
+      "depth_bias_at_3abd9b8",
+      "display_switch_at_3b1117c",
+      "flag_at_3abdcfe",
+      "flag_at_3b12208",
+      "mode_at_3ab98ac",
+      "packed_blend_at_3ab9890",
+      "sort_bias_at_3abd9c0"
+    ],
+    "src/engine/ninja_sprite_queue.hpp": [
+      "bucket_bias_at_7dcb60",
+      "captured_texture_list_at_3abd950",
+      "captured_word_at_3abd950",
+      "captured_word_at_3d0f840",
+      "captured_word_at_3d0f9c4",
+      "captured_word_at_3d0f9c8",
+      "color_at_3ab9864",
+      "color_at_3abd9a8",
+      "depth_bias_at_3abd9b8",
+      "display_switch_at_3b1117c",
+      "flag_at_3abdcfe",
+      "flag_at_3b12208",
+      "mode_at_3ab98ac",
+      "sort_bias_at_3abd9c0"
+    ],
+    "src/engine/ninja_system_init.cpp": [
+      "block_at_3ce6d80",
+      "block_at_3d0fae0",
+      "buffer_at_3ce7158",
+      "clear_colors_at_3ce7174",
+      "color_at_3ce715c",
+      "counter_high_at_3ce7134",
+      "counter_low_at_3ce7130",
+      "direct_input_at_3abdc10",
+      "entry_words_at_3d08428",
+      "flag_at_3ce7150",
+      "instance_at_3d0fd34",
+      "mouse_at_3abdc14",
+      "pool_at_3ce71b0",
+      "records_at_3ce6e78",
+      "records_at_3ce6f48",
+      "scale_at_3ce7154",
+      "size_at_3ce71a4",
+      "sizes_at_389d864",
+      "tables_at_389d888",
+      "vertex_buffer_at_3d128ac",
+      "window_at_3d0fd30",
+      "word_at_3d0f740",
+      "word_at_3d0f810",
+      "word_at_3d0f83c",
+      "word_at_3d0f9c8",
+      "word_at_3d127a0"
+    ],
+    "src/engine/ninja_system_init.hpp": [
+      "block_at_3ce6d80",
+      "block_at_3d0fae0",
+      "buffer_at_3ce7158",
+      "clear_colors_at_3ce7174",
+      "color_at_3ce715c",
+      "counter_high_at_3ce7134",
+      "counter_low_at_3ce7130",
+      "direct_input_at_3abdc10",
+      "entry_words_at_3d08428",
+      "flag_at_3ce7150",
+      "instance_at_3d0fd34",
+      "mouse_at_3abdc14",
+      "pool_at_3ce71b0",
+      "records_at_3ce6e78",
+      "records_at_3ce6f48",
+      "scale_at_3ce7154",
+      "size_at_3ce71a4",
+      "sizes_at_389d864",
+      "tables_at_389d888",
+      "window_at_3d0fd30",
+      "word_at_3d0f740",
+      "word_at_3d0f810",
+      "word_at_3d0f83c",
+      "word_at_3d0f9c8",
+      "word_at_3d127a0"
+    ],
+    "src/engine/ninja_texture_pool.cpp": [
+      "base_at_3d0f844",
+      "byte_at_3d0f860",
+      "count_at_3d0f80c",
+      "current_list_at_3d0fa24",
+      "records_at_3a8b0a0",
+      "requested_memory_at_3ce7128",
+      "word_at_3d0f830",
+      "word_at_3d0f960",
+      "word_at_3d0fa14",
+      "words_at_3d0f7c0"
+    ],
+    "src/engine/ninja_texture_pool.hpp": [
+      "base_at_3d0f844",
+      "byte_at_3d0f860",
+      "count_at_3d0f80c",
+      "records_at_3a8b0a0",
+      "word_at_3d0f830",
+      "word_at_3d0f960",
+      "word_at_3d0fa14",
+      "words_at_3d0f7c0"
+    ],
+    "src/engine/ninja_texture_selection.cpp": [
+      "active_memory_at_3d129a0",
+      "current_list_at_3d0fa24",
+      "device_at_3d128b0",
+      "global_id_at_3d0fdf4",
+      "palette_table_at_3d11f80",
+      "requested_memory_at_3ce7128",
+      "return_table_at_389d458"
+    ],
+    "src/engine/ninja_texture_selection.hpp": [
+      "active_memory_at_3d129a0",
+      "current_list_at_3d0fa24",
+      "global_id_at_3d0fdf4",
+      "palette_table_at_3d11f80",
+      "requested_memory_at_3ce7128",
+      "return_table_at_389d458"
+    ],
+    "src/engine/ninja_vibration.cpp": [
+      "counter_at_3d0843c",
+      "duration_at_3d08434",
+      "state_at_3d08428",
+      "strength_at_3d0842e"
+    ],
+    "src/engine/ninja_vibration.hpp": [
+      "counter_at_3d0843c",
+      "duration_at_3d08434",
+      "state_at_3d08428",
+      "strength_at_3d0842e"
+    ],
+    "src/engine/ninja_view.cpp": [
+      "angle_to_radians_at_7e5d60",
+      "cache_x_at_3aad0c0",
+      "cache_y_at_3aad0c4",
+      "camera_at_3aad0a0",
+      "camera_tail_at_3aad0c8",
+      "device_at_3d128b0",
+      "far_at_3d0f968",
+      "half_at_7dcc98",
+      "matrix_at_3d0fd80",
+      "near_at_3d0f808",
+      "one_at_7dcb10",
+      "one_at_7e0b40",
+      "perspective_at_3d12960",
+      "projection_at_3d129c0",
+      "scale_at_3d0f9e0",
+      "threshold_at_7dce54",
+      "view_at_389d398",
+      "view_at_3d0f760",
+      "view_copy_at_3d0f980",
+      "view_inverse_at_389d358",
+      "viewport_at_3d12780",
+      "zero_at_7dcb2c"
+    ],
+    "src/engine/ninja_view.hpp": [
+      "camera_at_3aad0a0",
+      "camera_tail_at_3aad0c8",
+      "perspective_at_3d12960",
+      "view_at_389d398",
+      "view_at_3d0f760",
+      "view_copy_at_3d0f980",
+      "view_inverse_at_389d358"
+    ],
+    "src/game/audio_stream.cpp": [
+      "events_at_3b0ece0",
+      "initialized_at_3b0ef2c",
+      "sound_object_at_3b0ecc0",
+      "thread_at_3b0ee00",
+      "thread_id_at_3b0ec28",
+      "words_at_3b0ec30",
+      "words_at_3b0ed70",
+      "words_at_3b0ee98"
+    ],
+    "src/game/audio_stream.hpp": [
+      "events_at_3b0ece0",
+      "initialized_at_3b0ef2c",
+      "sound_object_at_3b0ecc0",
+      "thread_at_3b0ee00",
+      "thread_id_at_3b0ec28",
+      "words_at_3b0ec30",
+      "words_at_3b0ed70",
+      "words_at_3b0ee98"
+    ],
+    "src/game/game_frame_owners.cpp": [
+      "buffer_at_3abdf84",
+      "bytes_at_3b0e3e0",
+      "color_at_3b18230",
+      "count_at_3b0e334",
+      "draw_count_at_3b0e338",
+      "effect_at_3b0e998",
+      "fov_at_3aad0bc",
+      "fov_copy_at_3ab98ec",
+      "keys_at_3b0e3b8",
+      "list_at_3b2c584",
+      "raw_at_3b0e3e2",
+      "timer_at_3abdf88",
+      "view_reset_at_3b280a8",
+      "width_at_3d0f9e4",
+      "word_at_3b2cbb4"
+    ],
+    "src/game/game_frame_owners.hpp": [
+      "buffer_at_3abdf84",
+      "color_at_3b18230",
+      "count_at_3b0e334",
+      "draw_count_at_3b0e338",
+      "effect_at_3b0e998",
+      "keys_at_3b0e3b8",
+      "list_at_3b2c584",
+      "timer_at_3abdf88",
+      "view_reset_at_3b280a8",
+      "width_at_3d0f9e4"
+    ],
+    "src/game/game_library_init.cpp": [
+      "aspect_at_3d0f9c0",
+      "scale_at_3d0f800",
+      "word_at_38a5dc4",
+      "word_at_38a5dc8",
+      "word_at_38a5dcc",
+      "words_at_389d864"
+    ],
+    "src/game/game_library_init.hpp": [
+      "aspect_at_3d0f9c0",
+      "scale_at_3d0f800",
+      "word_at_38a5dc4",
+      "word_at_38a5dc8",
+      "word_at_38a5dcc",
+      "words_at_389d864"
+    ],
+    "src/game/game_loop.cpp": [
+      "counter_at_3b291b2",
+      "exit_at_3abdf7c",
+      "focus_at_8929d4",
+      "fog_flag_at_3abdcfe",
+      "fog_range_at_3abdc70",
+      "fog_range_at_3abdc74",
+      "fog_range_at_3abdca0",
+      "fog_range_at_3abdca4",
+      "frames_at_3abdf58",
+      "frames_at_3abdf5c",
+      "game_mode_at_3b22de4",
+      "mode_at_3b28114",
+      "pending_at_3abdf76",
+      "pending_at_3abdf79",
+      "render_factor_at_89295c",
+      "request_at_3b291ad",
+      "resync_at_3abdf68",
+      "save_phase_at_3b291a4",
+      "special_flags_at_909eb4",
+      "word_at_3abdcf8",
+      "word_at_3abdf80",
+      "word_at_3b11180",
+      "word_at_3b11188",
+      "word_at_3b11194",
+      "word_at_3b11198",
+      "word_at_3c85804"
+    ],
+    "src/game/game_loop.hpp": [
+      "counter_at_3b291b2",
+      "exit_at_3abdf7c",
+      "focus_at_8929d4",
+      "fog_flag_at_3abdcfe",
+      "fog_range_at_3abdc70",
+      "fog_range_at_3abdc74",
+      "fog_range_at_3abdca0",
+      "fog_range_at_3abdca4",
+      "frames_at_3abdf58",
+      "frames_at_3abdf5c",
+      "game_mode_at_3b22de4",
+      "mode_at_3b28114",
+      "pending_at_3abdf76",
+      "pending_at_3abdf79",
+      "request_at_3b291ad",
+      "resync_at_3abdf68",
+      "save_phase_at_3b291a4",
+      "special_flags_at_909eb4",
+      "word_at_3abdcf8",
+      "word_at_3abdf80",
+      "word_at_3c85804"
+    ],
+    "src/game/game_mode.cpp": [
+      "byte_at_3abdcfc",
+      "byte_at_3abdcfd",
+      "byte_at_3abdf74",
+      "byte_at_3abdf78",
+      "byte_at_3b18db4",
+      "byte_at_3b22e1e",
+      "byte_at_3b2a2fa",
+      "mode_at_3abdc7c",
+      "mode_at_3b28114",
+      "request_at_3b291ad",
+      "save_phase_at_3b291a4",
+      "word_at_3abdcf8",
+      "word_at_3b290e4",
+      "word_at_3b2c45c"
+    ],
+    "src/game/game_mode.hpp": [
+      "byte_at_3abdcfc",
+      "byte_at_3abdcfd",
+      "byte_at_3abdf74",
+      "byte_at_3abdf78",
+      "byte_at_3b18db4",
+      "byte_at_3b22e1e",
+      "byte_at_3b2a2fa",
+      "mode_at_3abdc7c",
+      "word_at_3b290e4",
+      "word_at_3b2c45c"
+    ],
+    "src/game/game_mode_leaves.cpp": [
+      "block_at_3b0ef9c",
+      "block_at_3b18250",
+      "block_at_3b290c4",
+      "block_at_3b2b5f9",
+      "block_at_3b2c5e8",
+      "block_at_3c4ae08",
+      "block_at_90ed54",
+      "byte_at_3abe134",
+      "byte_at_3b0ef34",
+      "byte_at_3b0ef35",
+      "byte_at_3b0ef48",
+      "byte_at_3b0f0e0",
+      "byte_at_3b0f128",
+      "byte_at_3b290d8",
+      "byte_at_3b290e0",
+      "byte_at_3b290e8",
+      "byte_at_3b2a2f8",
+      "byte_at_3b2a2f9",
+      "byte_at_3b2a2fa",
+      "byte_at_3b2a2fb",
+      "byte_at_3b2c565",
+      "byte_at_3b2c574",
+      "callback_at_3d08420",
+      "character_at_3b22dc0",
+      "clear_colors_at_3ce7174",
+      "color_at_3b29d5c",
+      "demo_cutscene_at_3b2a2e8",
+      "event_task_at_3b2c578",
+      "game_mode_at_3b22de4",
+      "half_at_3b0f0e4",
+      "half_at_3b18db8",
+      "half_at_3b22e1c",
+      "half_at_3b2a300",
+      "motion_at_3c53510",
+      "motion_at_3c53520",
+      "motion_at_3c559c0",
+      "motion_at_3c559d0",
+      "motion_at_3c559e0",
+      "motion_at_3c559f0",
+      "motion_at_3c55a00",
+      "motion_at_3c566c0",
+      "motion_at_3c566d0",
+      "screen_height_at_8928c4",
+      "screen_width_at_8928c0",
+      "stage_at_3b22dcc",
+      "state_at_3b29d6c",
+      "word_at_3b0ef44",
+      "word_at_3b0f0f4",
+      "word_at_3b0f0f8",
+      "word_at_3b0f0fc",
+      "word_at_3b0f100",
+      "word_at_3b0f108",
+      "word_at_3b0f10c",
+      "word_at_3b0f13c",
+      "word_at_3b11178",
+      "word_at_3b18244",
+      "word_at_3b22e20",
+      "word_at_3b290dc",
+      "word_at_3b290e4",
+      "word_at_3b2919c",
+      "word_at_3b29d68",
+      "word_at_3b2a2e4",
+      "word_at_3b2a2f0",
+      "word_at_3b2a2f4",
+      "word_at_3b2a2fc",
+      "word_at_3b2b358",
+      "word_at_3b2c420",
+      "word_at_3b2c45c",
+      "word_at_3b2c47c",
+      "word_at_3b2c560",
+      "word_at_914788"
+    ],
+    "src/game/game_mode_leaves.hpp": [
+      "block_at_3b0ef9c",
+      "block_at_3b18250",
+      "block_at_3b290c4",
+      "block_at_3b2b5f9",
+      "block_at_3b2c5e8",
+      "block_at_3c4ae08",
+      "block_at_90ed54",
+      "byte_at_3abe134",
+      "byte_at_3b0ef34",
+      "byte_at_3b0ef35",
+      "byte_at_3b0ef48",
+      "byte_at_3b0f0e0",
+      "byte_at_3b0f128",
+      "byte_at_3b290d8",
+      "byte_at_3b290e0",
+      "byte_at_3b290e8",
+      "byte_at_3b2a2f8",
+      "byte_at_3b2a2f9",
+      "byte_at_3b2a2fb",
+      "byte_at_3b2c565",
+      "byte_at_3b2c574",
+      "callback_at_3d08420",
+      "character_at_3b22dc0",
+      "clear_colors_at_3ce7174",
+      "color_at_3b29d5c",
+      "demo_cutscene_at_3b2a2e8",
+      "event_task_at_3b2c578",
+      "game_mode_at_3b22de4",
+      "half_at_3b0f0e4",
+      "half_at_3b18db8",
+      "half_at_3b22e1c",
+      "half_at_3b2a300",
+      "motion_at_3c53510",
+      "motion_at_3c53520",
+      "motion_at_3c559c0",
+      "motion_at_3c559d0",
+      "motion_at_3c559e0",
+      "motion_at_3c559f0",
+      "motion_at_3c55a00",
+      "motion_at_3c566c0",
+      "motion_at_3c566d0",
+      "screen_height_at_8928c4",
+      "screen_width_at_8928c0",
+      "stage_at_3b22dcc",
+      "state_at_3b29d6c",
+      "word_at_3b0ef44",
+      "word_at_3b0f0f4",
+      "word_at_3b0f0f8",
+      "word_at_3b0f0fc",
+      "word_at_3b0f100",
+      "word_at_3b0f108",
+      "word_at_3b0f10c",
+      "word_at_3b0f13c",
+      "word_at_3b18244",
+      "word_at_3b22e20",
+      "word_at_3b290dc",
+      "word_at_3b2919c",
+      "word_at_3b29d68",
+      "word_at_3b2a2f0",
+      "word_at_3b2a2f4",
+      "word_at_3b2a2fc",
+      "word_at_3b2b358",
+      "word_at_3b2c420",
+      "word_at_3b2c47c",
+      "word_at_3b2c560",
+      "word_at_914788"
+    ],
+    "src/game/game_reset.cpp": [
+      "heap_at_3b0e330",
+      "heap_at_3b290d0",
+      "word_at_3abdf80",
+      "word_at_3b29d08"
+    ],
+    "src/game/game_reset.hpp": [
+      "heap_at_3b0e330",
+      "heap_at_3b290d0",
+      "word_at_3abdf80",
+      "word_at_3b29d08"
+    ],
+    "src/game/game_reset_leaves.cpp": [
+      "audio_initialized_at_3b0ef2c",
+      "callback_at_3b291b4",
+      "cam_files_at_3abdf28",
+      "config_at_38f6ec0",
+      "config_at_3a7cf3c",
+      "debug_text_at_38f6d08",
+      "depth_mode_at_8928c8",
+      "entry_words_at_3d08428",
+      "player_at_3abdf94",
+      "player_at_3abdf9c",
+      "queue_mode_at_3ab98ac",
+      "set_files_at_3abdf40",
+      "sound_record_flags_at_3b29304",
+      "sound_record_words_at_3b292fc",
+      "timing_word_at_3b1118c",
+      "word_at_389d608",
+      "word_at_3abdf90",
+      "word_at_3abdf98",
+      "word_at_3abdfa0",
+      "word_at_3abdfa4",
+      "word_at_3abdfa8",
+      "word_at_3abdfac",
+      "word_at_3b0e338",
+      "word_at_3b11190",
+      "word_at_3b29cf4",
+      "word_at_3b29cf8",
+      "word_at_3c4e458",
+      "word_at_3c4e45c",
+      "word_at_3c5e8b8",
+      "word_at_912694",
+      "word_at_912698",
+      "word_at_91269c",
+      "word_at_9126a8",
+      "words_at_3b29b90"
+    ],
+    "src/game/game_reset_leaves.hpp": [
+      "audio_initialized_at_3b0ef2c",
+      "callback_at_3b291b4",
+      "cam_files_at_3abdf28",
+      "config_at_38f6ec0",
+      "config_at_3a7cf3c",
+      "debug_text_at_38f6d08",
+      "depth_mode_at_8928c8",
+      "entry_words_at_3d08428",
+      "player_at_3abdf94",
+      "player_at_3abdf9c",
+      "queue_mode_at_3ab98ac",
+      "set_files_at_3abdf40",
+      "sound_record_flags_at_3b29304",
+      "sound_record_words_at_3b292fc",
+      "timing_word_at_3b1118c",
+      "word_at_389d608",
+      "word_at_3abdf90",
+      "word_at_3abdf98",
+      "word_at_3abdfa0",
+      "word_at_3abdfa4",
+      "word_at_3abdfa8",
+      "word_at_3abdfac",
+      "word_at_3b0e338",
+      "word_at_3b11190",
+      "word_at_3b29cf4",
+      "word_at_3b29cf8",
+      "word_at_3c4e458",
+      "word_at_3c4e45c",
+      "word_at_3c5e8b8",
+      "word_at_912694",
+      "word_at_912698",
+      "word_at_91269c",
+      "word_at_9126a8",
+      "words_at_3b29b90"
+    ],
+    "src/game/game_scene_logic.cpp": [
+      "byte_at_3b0ef40",
+      "byte_at_3b0f150",
+      "mode_at_3abdc7c",
+      "stage_at_3b22dcc"
+    ],
+    "src/game/game_scene_logic.hpp": [
+      "byte_at_3b0ef40",
+      "byte_at_3b0f150",
+      "mode_at_3abdc7c",
+      "stage_at_3b22dcc"
+    ],
+    "src/game/game_startup.cpp": [
+      "block_at_9008b4",
+      "block_at_900e88",
+      "byte_at_3abdbc1",
+      "byte_at_3b0e3b9",
+      "byte_at_3b29ce8",
+      "byte_at_903e58",
+      "bytes_at_3b0e3e0",
+      "controller_pointers_at_3b0e77c",
+      "controller_template_at_3b0eaa8",
+      "controllers_raw_at_3b0e9c8",
+      "input_mod_raw_input_at_1000e748",
+      "mask_at_3b0e3b8",
+      "mode_at_3abdc7c",
+      "raw_at_3b0e3e2",
+      "record_words_at_3b292fc",
+      "slots_at_3d084b0",
+      "special_at_3b0e3ba",
+      "word_at_3abdc78",
+      "word_at_3abdc80",
+      "word_at_3abdc90",
+      "word_at_3b29b7c",
+      "word_at_3b29ce0",
+      "word_at_3b29ce4",
+      "words_at_3b0e990",
+      "words_at_3b292a8"
+    ],
+    "src/game/game_startup.hpp": [
+      "block_at_9008b4",
+      "block_at_900e88",
+      "byte_at_3abdbc1",
+      "byte_at_3b29ce8",
+      "byte_at_903e58",
+      "controller_pointers_at_3b0e77c",
+      "controller_template_at_3b0eaa8",
+      "controllers_raw_at_3b0e9c8",
+      "input_mod_raw_input_at_1000e748",
+      "mode_at_3abdc7c",
+      "record_words_at_3b292fc",
+      "slots_at_3d084b0",
+      "word_at_3abdc78",
+      "word_at_3abdc80",
+      "word_at_3abdc90",
+      "word_at_3b29b7c",
+      "word_at_3b29ce0",
+      "word_at_3b29ce4",
+      "words_at_3b292a8"
+    ],
+    "src/game/game_view.cpp": [
+      "captured_word_at_3d0f840",
+      "captured_word_at_3d0f9c4",
+      "captured_word_at_3d0f9c8",
+      "clear_colors_at_3ce7174",
+      "color_argb_at_3d0f7f0",
+      "color_at_3ab9864",
+      "color_at_3b280ac",
+      "fov_at_3aad0bc",
+      "fov_copy_at_3ab98ec",
+      "fov_x_at_7dd594",
+      "fov_y_at_7dd590",
+      "half_at_7dcc98",
+      "initial_color_at_3b18230",
+      "mode_at_3ab98ac",
+      "mode_at_3b28114",
+      "negative_one_at_7dcb0c",
+      "one_at_7dcb10",
+      "projection_words_at_3d0f9ec",
+      "projection_words_at_3d0f9f0",
+      "reset_pending_at_3b280a8",
+      "scale_at_3d0f9e0",
+      "scale_word_at_3b28094",
+      "scale_x_at_7dcb28",
+      "scale_y_at_7dcb24",
+      "screen_height_at_8928c4",
+      "screen_width_at_8928c0",
+      "view_at_3b28098",
+      "view_at_3b2809c",
+      "view_at_3b280a0",
+      "view_at_3b280a4",
+      "word_at_3abd9cc",
+      "word_at_3b2cbb4"
+    ],
+    "src/game/game_view.hpp": [
+      "clear_colors_at_3ce7174",
+      "color_at_3b280ac",
+      "fov_at_3aad0bc",
+      "fov_copy_at_3ab98ec",
+      "fov_x_at_7dd594",
+      "fov_y_at_7dd590",
+      "half_at_7dcc98",
+      "mode_at_3b28114",
+      "projection_words_at_3d0f9ec",
+      "projection_words_at_3d0f9f0",
+      "reset_pending_at_3b280a8",
+      "scale_word_at_3b28094",
+      "scale_x_at_7dcb28",
+      "scale_y_at_7dcb24",
+      "screen_height_at_8928c4",
+      "screen_width_at_8928c0",
+      "view_at_3b28098",
+      "view_at_3b2809c",
+      "view_at_3b280a0",
+      "view_at_3b280a4",
+      "word_at_3abd9cc",
+      "word_at_3b2cbb4"
+    ],
+    "src/game/game_window.cpp": [
+      "last_wparam_at_3d08534",
+      "window_at_3d0fd30"
+    ],
+    "src/game/game_window.hpp": [
+      "last_wparam_at_3d08534",
+      "window_at_3d0fd30"
+    ],
+    "src/game/game_winmain.cpp": [
+      "bgm_at_3a7cf3c",
+      "bgm_volume_at_909f28",
+      "clip_level_at_3abdcf0",
+      "media_at_3ab918c",
+      "media_at_3ab9190",
+      "message_caption_at_8929c4",
+      "message_text_at_8929b0",
+      "mouse_mode_at_3b0eae0",
+      "pad_bits_at_8929d8",
+      "pad_buttons_at_389d634",
+      "render_factor_at_89295c",
+      "root_at_3a8af78",
+      "screen_at_892950",
+      "sevoice_at_38f6ec0",
+      "sound3d_at_3b0ef28",
+      "special_flags_at_909eb4",
+      "text_language_at_3b0f0e8",
+      "voice_copy_at_3abdf90",
+      "voice_language_at_3b0ef38",
+      "voice_volume_at_3abdfac"
+    ],
+    "src/game/game_winmain.hpp": [
+      "bgm_at_3a7cf3c",
+      "bgm_volume_at_909f28",
+      "clip_level_at_3abdcf0",
+      "media_at_3ab918c",
+      "media_at_3ab9190",
+      "message_caption_at_8929c4",
+      "message_text_at_8929b0",
+      "mouse_mode_at_3b0eae0",
+      "pad_bits_at_8929d8",
+      "pad_buttons_at_389d634",
+      "render_factor_at_89295c",
+      "root_at_3a8af78",
+      "screen_at_892950",
+      "sevoice_at_38f6ec0",
+      "sound3d_at_3b0ef28",
+      "special_flags_at_909eb4",
+      "text_language_at_3b0f0e8",
+      "voice_copy_at_3abdf90",
+      "voice_language_at_3b0ef38",
+      "voice_volume_at_3abdfac"
+    ],
+    "src/game/mod_loader_frame.cpp": [
+      "chao_viewer_at_100107e8",
+      "game_mode_at_3b22de4",
+      "mode_at_3abdc7c",
+      "quick_save_at_100107e9",
+      "stage_at_3b22dcc",
+      "timer_frames_at_10010818",
+      "timer_minutes_at_1001081a",
+      "timer_seconds_at_10010819"
+    ],
+    "src/game/mod_loader_frame.hpp": [
+      "chao_viewer_at_100107e8",
+      "game_mode_at_3b22de4",
+      "mode_at_3abdc7c",
+      "quick_save_at_100107e9",
+      "stage_at_3b22dcc",
+      "timer_frames_at_10010818",
+      "timer_minutes_at_1001081a",
+      "timer_seconds_at_10010819"
+    ],
+    "src/game/model_dlls.cpp": [
+      "handles_at_3ab9170"
+    ],
+    "src/game/model_dlls.hpp": [
+      "handles_at_3ab9170"
+    ],
+    "src/game/sound_manager.cpp": [
+      "byte_at_3b29ce8",
+      "current_volume_at_3b29c28",
+      "entities_at_3b29b90",
+      "flags_at_3b29304",
+      "frequency_at_3b2930c",
+      "ids_at_3b29308",
+      "listener_at_3b2cbb0",
+      "pan_at_3b29318",
+      "record_words_at_3b292fc",
+      "volume_at_3b29310",
+      "word_at_3b29ce0",
+      "word_at_3b29ce4",
+      "words_at_3b292a8",
+      "words_at_3b29300"
+    ],
+    "src/game/sound_manager.hpp": [
+      "current_volume_at_3b29c28",
+      "entities_at_3b29b90",
+      "flags_at_3b29304",
+      "frequency_at_3b2930c",
+      "ids_at_3b29308",
+      "listener_at_3b2cbb0",
+      "pan_at_3b29318",
+      "volume_at_3b29310",
+      "words_at_3b29300"
+    ],
+    "src/guest/override_table.cpp": [
+      "block_at_9008b4",
+      "block_at_900e88",
+      "byte_at_3abdbc1",
+      "byte_at_3b0e3b9",
+      "byte_at_903e58",
+      "bytes_at_3b0e3e0",
+      "bytes_at_3b0e9a4",
+      "cache_x_at_3aad0c0",
+      "cache_y_at_3aad0c4",
+      "camera_at_3aad0a0",
+      "camera_tail_at_3aad0c8",
+      "count_at_3ce712c",
+      "far_at_3d0f968",
+      "flags_at_3b0eaa0",
+      "frame_multiplier_at_389d7dc",
+      "frequency_high_at_3d0853c",
+      "frequency_low_at_3d08538",
+      "hooks_at_3d08af0",
+      "input_callback_at_3d0fa34",
+      "interval_high_at_3d084ac",
+      "interval_low_at_3d084a8",
+      "limit_at_7dce50",
+      "mask_at_3b0e3b8",
+      "matrix_at_389d318",
+      "near_at_3d0f808",
+      "negative_one_at_7dcb0c",
+      "projection_at_3d129c0",
+      "raw_at_3b0e3e2",
+      "render_factor_at_89295c",
+      "scale_at_3d0f9e0",
+      "slots_at_3d084b0",
+      "slots_at_3d0fa40",
+      "special_at_3b0e3ba",
+      "viewport_at_3d12780",
+      "word_at_3b11178",
+      "word_at_3b1117c",
+      "word_at_3b11188",
+      "words_at_3b0e344",
+      "words_at_3b0e768",
+      "words_at_3b0e990",
+      "words_at_3b0e9b8"
+    ],
+    "src/hle/hle_device_bridge.cpp": [
+      "active_memory_at_3d129a0",
+      "bottom_at_3d0f82c",
+      "bottom_at_3d0fd2c",
+      "cache_x_at_3aad0c0",
+      "cache_y_at_3aad0c4",
+      "cached_fog_end_at_90a09c",
+      "cached_fog_start_at_90a098",
+      "camera_at_3aad0a0",
+      "center_x_at_3d0fa0c",
+      "center_y_at_3d0fa10",
+      "color_argb_at_3d0f7f0",
+      "color_at_3ab9864",
+      "color_at_3d12898",
+      "colors_at_3ce7168",
+      "count_at_3abd9d4",
+      "count_at_3abd9dc",
+      "count_at_3ce712c",
+      "count_at_3ce7170",
+      "device_at_3d128b0",
+      "end_index_at_3d0fce0",
+      "end_value_at_3d12894",
+      "far_at_3d0f968",
+      "flag_at_3b12208",
+      "flags_at_3d0f964",
+      "fog_enabled_at_3d12798",
+      "fog_mode_at_3d0849c",
+      "fog_profile_at_3abdc6c",
+      "fog_supported_at_3d128a4",
+      "frame_multiplier_at_389d7dc",
+      "frequency_high_at_3d0853c",
+      "frequency_low_at_3d08538",
+      "global_id_at_3d0fdf4",
+      "height_at_3d0f838",
+      "height_at_3d0f9e8",
+      "height_at_3d0fa08",
+      "interval_high_at_3d084ac",
+      "interval_low_at_3d084a8",
+      "invalid_at_3d0fd1c",
+      "left_at_3d0f820",
+      "left_at_3d0fd20",
+      "limit_at_7dce50",
+      "matrix_at_389d318",
+      "matrix_at_3d0fd80",
+      "mode_at_3ab98ac",
+      "mode_byte_at_3abdbc0",
+      "near_at_3d0f808",
+      "negative_one_at_7dcb0c",
+      "packed_blend_at_3ab9890",
+      "perspective_at_3d12960",
+      "points_at_3ce7164",
+      "points_at_3ce7184",
+      "projection_at_3d129c0",
+      "reciprocal_at_3d12c00",
+      "right_at_3d0f828",
+      "right_at_3d0fd28",
+      "scale_at_3d0f9e0",
+      "software_density_at_3d128a0",
+      "special_flags_at_909eb4",
+      "start_index_at_3d12950",
+      "start_value_at_3d0fac0",
+      "top_at_3d0f824",
+      "top_at_3d0fd24",
+      "view_at_389d398",
+      "view_at_3d0f760",
+      "view_copy_at_3d0f980",
+      "view_inverse_at_389d358",
+      "viewport_at_3d12780",
+      "w_at_3d12a00",
+      "width_at_3d0fa04",
+      "width_at_3d0fa20",
+      "word_at_3b1117c",
+      "word_at_3ce7160",
+      "word_at_3d0f804",
+      "word_at_3d0f814",
+      "x_at_90082c",
+      "y_bits_at_900830"
+    ],
+    "src/hle/hle_heap_bridge.cpp": [
+      "heap_at_389d628"
+    ],
+    "src/input/input_mod_pad.cpp": [
+      "controller_pointers_at_3b0e77c",
+      "controllers_raw_at_3b0e9c8",
+      "demo_at_1000e708",
+      "demo_cutscene_at_3b2a2e8",
+      "demo_playing_at_3b2a2e4",
+      "enabled_at_1000e73c",
+      "game_mode_at_3abdc7c",
+      "raw_input_at_1000e748",
+      "tasks_at_1000ec60"
+    ],
+    "src/input/input_mod_pad.hpp": [
+      "controller_pointers_at_3b0e77c",
+      "controllers_raw_at_3b0e9c8",
+      "demo_at_1000e708",
+      "demo_cutscene_at_3b2a2e8",
+      "demo_playing_at_3b2a2e4",
+      "enabled_at_1000e73c",
+      "game_mode_at_3abdc7c",
+      "raw_input_at_1000e748",
+      "tasks_at_1000ec60"
+    ],
+    "src/player/player_auxiliary_effect.cpp": [
+      "current_character_at_3b22dc0",
+      "display_switch_at_3b1117c"
+    ],
+    "src/player/player_auxiliary_effect.hpp": [
+      "current_character_at_3b22dc0",
+      "display_switch_at_3b1117c"
+    ],
+    "src/player/player_mesh_registry.cpp": [
+      "source_word_at_3b42ff8"
+    ],
+    "src/player/player_mesh_registry.hpp": [
+      "source_word_at_3b42ff8"
+    ],
+    "src/player/player_scene_position.cpp": [
+      "amy_offset_at_915d74",
+      "amy_radius_at_915d78",
+      "environment_at_3b22dec",
+      "event_task_at_3b2c578",
+      "motion_override_at_3b42e70",
+      "render_at_3b0f0ec",
+      "special_surface_at_3b42e74"
+    ],
+    "src/player/player_scene_position.hpp": [
+      "amy_offset_at_915d74",
+      "amy_radius_at_915d78",
+      "environment_at_3b22dec",
+      "event_task_at_3b2c578",
+      "motion_override_at_3b42e70",
+      "render_at_3b0f0ec",
+      "special_surface_at_3b42e74"
+    ],
+    "src/player/scene_input_producer.cpp": [
+      "control_enabled_at_909fb0",
+      "held_out_at_3b0e7e0",
+      "held_work_at_3b0e3a8",
+      "mask_at_909f94",
+      "mask_at_909fa4",
+      "pressed_out_at_3b0e3cc",
+      "pressed_work_at_3b0e354",
+      "repeat_at_3b0e3bc",
+      "stage_at_3b22dcc"
+    ],
+    "src/player/scene_input_producer.hpp": [
+      "control_enabled_at_909fb0",
+      "held_out_at_3b0e7e0",
+      "held_work_at_3b0e3a8",
+      "pressed_out_at_3b0e3cc",
+      "pressed_work_at_3b0e354",
+      "repeat_at_3b0e3bc",
+      "stage_at_3b22dcc"
+    ],
+    "src/player/sonic_player.cpp": [
+      "alternate_model_at_3b18db5",
+      "current_player_at_3abdf64",
+      "current_task_at_3abdf60",
+      "forced_at_3b29d08",
+      "forced_at_3b29d0c",
+      "mask_at_909f94",
+      "mask_at_909f98",
+      "mask_at_909fa4",
+      "mask_at_909fa8",
+      "mask_at_909fac",
+      "range_at_3c55d45",
+      "stage_at_3b22dcc",
+      "tasks_at_3c5a27c"
+    ],
+    "src/player/sonic_player.hpp": [
+      "alternate_model_at_3b18db5",
+      "current_player_at_3abdf64",
+      "current_task_at_3abdf60",
+      "forced_at_3b29d08",
+      "forced_at_3b29d0c",
+      "range_at_3c55d45",
+      "sound_latch_at_3c55d44",
+      "stage_at_3b22dcc",
+      "tasks_at_3c5a27c"
+    ],
+    "src/runtime/game_runtime.cpp": [
+      "active_memory_at_3d129a0",
+      "aggregate_at_3b0eaf0",
+      "aggregate_special_at_3b0eae8",
+      "argument_at_3d0fa38",
+      "aspect_at_3d0f9c0",
+      "base_at_3d0f844",
+      "bgm_volume_at_909f28",
+      "block_at_3b0ef9c",
+      "block_at_3b18250",
+      "block_at_3b290c4",
+      "block_at_3b2b5f9",
+      "block_at_3b2c5e8",
+      "block_at_3c4ae08",
+      "block_at_3ce6d80",
+      "block_at_3d0fae0",
+      "block_at_9008b4",
+      "block_at_900e88",
+      "block_at_90ed54",
+      "bottom_at_3d0f82c",
+      "bottom_at_3d0fd2c",
+      "buffer_at_3abdf84",
+      "buffer_at_3ce7158",
+      "byte_at_3abdbc1",
+      "byte_at_3abdcfc",
+      "byte_at_3abdcfd",
+      "byte_at_3abdf74",
+      "byte_at_3abdf78",
+      "byte_at_3abe134",
+      "byte_at_3b0e3b9",
+      "byte_at_3b0ef34",
+      "byte_at_3b0ef35",
+      "byte_at_3b0ef48",
+      "byte_at_3b0f0e0",
+      "byte_at_3b0f128",
+      "byte_at_3b18db4",
+      "byte_at_3b22e1e",
+      "byte_at_3b280a8_",
+      "byte_at_3b290d8",
+      "byte_at_3b290e0",
+      "byte_at_3b290e8",
+      "byte_at_3b29ce8",
+      "byte_at_3b2a2f8",
+      "byte_at_3b2a2f9",
+      "byte_at_3b2a2fa",
+      "byte_at_3b2a2fb",
+      "byte_at_3b2c565",
+      "byte_at_3b2c574",
+      "byte_at_3d0f860",
+      "byte_at_903e58",
+      "bytes_at_3b0e3e0",
+      "bytes_at_3b0e9a4",
+      "cache_x_at_3aad0c0",
+      "cache_y_at_3aad0c4",
+      "cached_fog_end_at_90a09c",
+      "cached_fog_start_at_90a098",
+      "callback_at_3d08420",
+      "cam_files_at_3abdf28",
+      "caps_at_3d127c0",
+      "captured_word_at_3d0f840",
+      "captured_word_at_3d0f9c4",
+      "captured_word_at_3d0f9c8",
+      "character_at_3b22dc0",
+      "clear_colors_at_3ce7174",
+      "clip_level_at_3abdcf0",
+      "color_argb_at_3d0f7f0",
+      "color_at_3ab9864",
+      "color_at_3b18230_",
+      "color_at_3b280ac_",
+      "color_at_3b29d5c",
+      "color_at_3ce715c",
+      "color_at_3d12898",
+      "colors_at_3ce7168",
+      "config_at_38f6ec0",
+      "config_at_3a7cf3c",
+      "count_at_3abd9d4",
+      "count_at_3abd9dc",
+      "count_at_3b0e334",
+      "count_at_3ce712c",
+      "count_at_3ce7170",
+      "count_at_3d0881c",
+      "count_at_3d0f80c",
+      "counter_at_3b291b2",
+      "counter_at_3d0843c",
+      "counter_high_at_3ce7134",
+      "counter_low_at_3ce7130",
+      "current_list_at_3d0fa24",
+      "current_volume_at_3b29c28",
+      "demo_cutscene_at_3b2a2e8",
+      "demo_playing_at_3b2a2e4",
+      "depth_mode_at_8928c8_",
+      "device_at_3d128b0",
+      "device_flags_at_3d1289c",
+      "direct3d_at_3d11f60",
+      "direct_input_at_3abdc10",
+      "display_switch_at_3b1117c",
+      "duration_at_3d08434",
+      "end_index_at_3d0fce0",
+      "end_value_at_3d12894",
+      "entry_words_at_3d08428",
+      "event_task_at_3b2c578",
+      "exit_at_3abdf7c",
+      "far_at_3d0f968",
+      "flag_at_3abdcfe",
+      "flag_at_3b12208",
+      "flag_at_3ce7150",
+      "flags_at_3b0eaa0",
+      "flags_at_3d0f964",
+      "focus_at_8929d4",
+      "fog_enabled_at_3d12798",
+      "fog_flag_at_3abdcfe",
+      "fog_mode_at_3d0849c",
+      "fog_profile_at_3abdc6c",
+      "fog_range_at_3abdc70",
+      "fog_range_at_3abdc74",
+      "fog_range_at_3abdca0",
+      "fog_range_at_3abdca4",
+      "fog_sentinel_at_7dce50_",
+      "fog_supported_at_3d128a4",
+      "fog_table_at_3b10f78_",
+      "frame_multiplier_at_389d7dc",
+      "frames_at_3abdf58",
+      "frames_at_3abdf5c",
+      "frequency_at_3b2930c",
+      "frequency_high_at_3d0853c",
+      "frequency_low_at_3d08538",
+      "game_mode_at_3abdc7c",
+      "game_mode_at_3b22de4",
+      "global_id_at_3d0fdf4",
+      "half_at_3b0f0e4",
+      "half_at_3b18db8",
+      "half_at_3b22e1c",
+      "half_at_3b2a300",
+      "half_height_at_3d1294c",
+      "half_width_at_3d12948",
+      "heap_at_389d628",
+      "height_at_3d0f838",
+      "height_at_3d0f9e8",
+      "height_at_3d0fa08",
+      "hook_at_3d0f7a4",
+      "hook_at_3d0f7a8",
+      "hook_at_3d0fa30",
+      "hooks_at_3d08af0",
+      "ids_at_3b29308",
+      "initialized_at_3b0ef2c",
+      "input_callback_at_3d0fa34",
+      "input_pointer_at_3b0e340",
+      "instance_at_3d0fd34_",
+      "interval_high_at_3d084ac",
+      "interval_low_at_3d084a8",
+      "invalid_at_3d0fd1c",
+      "joysticks_at_3d08814",
+      "last_counter_at_3d08550",
+      "last_wparam_at_3d08534",
+      "left_at_3d0f820",
+      "left_at_3d0fd20",
+      "level_fog_color_at_3abdc68_",
+      "level_fog_end_at_3abdc64_",
+      "level_fog_start_at_3abdc60_",
+      "limit_at_7dce50",
+      "list_at_3b2c584",
+      "listener_at_3b2cbb0",
+      "mask_at_3b0e3b8",
+      "matrix_at_389d318",
+      "matrix_at_3d0fd80",
+      "maximum_at_3abd9d8",
+      "maximum_at_3abd9e0",
+      "media_at_3ab918c",
+      "media_at_3ab9190",
+      "message_caption_at_8929c4",
+      "message_text_at_8929b0",
+      "mode_at_3ab98ac",
+      "mode_at_3abdc7c_",
+      "mode_at_3b28114",
+      "mode_byte_at_3abdbc0",
+      "mouse_at_3abdc14",
+      "mouse_at_3d08834",
+      "mouse_mode_at_3b0eae0",
+      "near_at_3d0f808",
+      "negative_one_at_7dcb0c",
+      "negative_one_at_7dcb0c_",
+      "one_at_7dcb10_",
+      "packed_blend_at_3ab9890",
+      "pad_bits_at_8929d8",
+      "pad_buttons_at_389d634",
+      "pan_at_3b29318",
+      "pending_at_3abdf76",
+      "pending_at_3abdf79",
+      "points_at_3ce7164",
+      "points_at_3ce7184",
+      "pool_at_3ce71b0",
+      "projection_at_3d129c0",
+      "projection_width_at_3d0f9e4",
+      "queue_base_at_3abd960_",
+      "raw_at_3b0e3e2",
+      "reciprocal_at_3d12c00",
+      "record_words_at_3b292fc",
+      "records_at_3a8b0a0",
+      "records_at_3ce6e38",
+      "records_at_3ce6e78",
+      "records_at_3ce6f48",
+      "records_at_3d08818",
+      "records_at_3d0fe00",
+      "render_factor_at_89295c",
+      "request_at_3b291ad",
+      "requested_memory_at_3ce7128",
+      "resync_at_3abdf68",
+      "right_at_3d0f828",
+      "right_at_3d0fd28",
+      "root_at_3a8af78",
+      "save_phase_at_3b291a4",
+      "scale_at_3ce7154",
+      "scale_at_3d0f800",
+      "scene_flags_at_3d08588",
+      "screen_at_892950",
+      "screen_height_at_8928c4",
+      "screen_width_at_8928c0",
+      "seed_at_2bcbdf8",
+      "set_files_at_3abdf40",
+      "sine_table_at_88af78_",
+      "size_at_3ce71a4",
+      "slots_at_3d084b0",
+      "slots_at_3d0fa40",
+      "software_density_at_3d128a0",
+      "sound3d_at_3b0ef28",
+      "sound_record_flags_at_3b29304",
+      "special_at_3b0e3ba",
+      "special_flags_at_909eb4",
+      "stage_at_3b22dcc",
+      "start_index_at_3d12950",
+      "start_value_at_3d0fac0",
+      "state_at_3b29d6c",
+      "strength_at_3d0842e",
+      "tables_at_389d888",
+      "text_language_at_3b0f0e8",
+      "texture_returns_at_389d458_",
+      "timer_at_3abdf88",
+      "top_at_3d0f824",
+      "top_at_3d0fd24",
+      "unit_at_389d650_",
+      "vertex_buffer_at_3d128ac",
+      "viewport_at_3d12780",
+      "voice_language_at_3b0ef38",
+      "volume_at_3b29310",
+      "w_at_3d12a00",
+      "width_at_3d0fa04",
+      "width_at_3d0fa20",
+      "window_at_3a8b088_",
+      "window_at_3d0fd30_",
+      "word_at_38a5dc4",
+      "word_at_38a5dc8",
+      "word_at_38a5dcc",
+      "word_at_3abdc78_",
+      "word_at_3abdc80_",
+      "word_at_3abdc90_",
+      "word_at_3abdcf8",
+      "word_at_3abdf70",
+      "word_at_3abdf80",
+      "word_at_3abdf90",
+      "word_at_3abdfac",
+      "word_at_3b0e338",
+      "word_at_3b0ef44",
+      "word_at_3b0f0f4",
+      "word_at_3b0f0f8",
+      "word_at_3b0f0fc",
+      "word_at_3b0f100",
+      "word_at_3b0f108",
+      "word_at_3b0f10c",
+      "word_at_3b0f13c",
+      "word_at_3b11178",
+      "word_at_3b1117c",
+      "word_at_3b11180",
+      "word_at_3b11188",
+      "word_at_3b1118c",
+      "word_at_3b11194",
+      "word_at_3b11198",
+      "word_at_3b18244",
+      "word_at_3b22e20",
+      "word_at_3b290dc",
+      "word_at_3b290e4",
+      "word_at_3b2919c",
+      "word_at_3b29b7c",
+      "word_at_3b29ce0",
+      "word_at_3b29ce4",
+      "word_at_3b29d68",
+      "word_at_3b2a2e4",
+      "word_at_3b2a2f0",
+      "word_at_3b2a2f4",
+      "word_at_3b2a2fc",
+      "word_at_3b2b358",
+      "word_at_3b2c420",
+      "word_at_3b2c45c",
+      "word_at_3b2c47c",
+      "word_at_3b2c560",
+      "word_at_3c839fc_",
+      "word_at_3c83a00_",
+      "word_at_3c85804",
+      "word_at_3ce7160",
+      "word_at_3ce716c",
+      "word_at_3d0f740",
+      "word_at_3d0f7a0_",
+      "word_at_3d0f804",
+      "word_at_3d0f810",
+      "word_at_3d0f814",
+      "word_at_3d0f830",
+      "word_at_3d0f83c",
+      "word_at_3d0f960",
+      "word_at_3d0fa14",
+      "word_at_3d127a0",
+      "word_at_914788",
+      "words_at_389d864",
+      "words_at_3ab9898_",
+      "words_at_3b0e344",
+      "words_at_3b0e768",
+      "words_at_3b0e990",
+      "words_at_3b0e9b8",
+      "words_at_3b292a8",
+      "words_at_3b29300",
+      "words_at_3b29b90",
+      "words_at_3c60108_",
+      "words_at_3ce6e68",
+      "words_at_3d0f7c0",
+      "words_at_3d0fd00",
+      "words_at_900840_",
+      "words_at_90084c_",
+      "words_at_900858_",
+      "x_at_90082c",
+      "y_bits_at_900830"
+    ],
+    "src/runtime/game_runtime.hpp": [
+      "byte_at_3b280a8_",
+      "caps_at_3d127c0",
+      "color_at_3b18230_",
+      "color_at_3b280ac_",
+      "depth_mode_at_8928c8_",
+      "fog_sentinel_at_7dce50_",
+      "fog_table_at_3b10f78_",
+      "instance_at_3d0fd34_",
+      "level_fog_color_at_3abdc68_",
+      "level_fog_end_at_3abdc64_",
+      "level_fog_start_at_3abdc60_",
+      "mode_at_3abdc7c_",
+      "negative_one_at_7dcb0c_",
+      "one_at_7dcb10_",
+      "queue_base_at_3abd960_",
+      "save_phase_at_3b291a4",
+      "sine_table_at_88af78_",
+      "texture_returns_at_389d458_",
+      "unit_at_389d650_",
+      "window_at_3a8b088_",
+      "window_at_3d0fd30_",
+      "word_at_3abdc78_",
+      "word_at_3abdc80_",
+      "word_at_3abdc90_",
+      "word_at_3c839fc_",
+      "word_at_3c83a00_",
+      "word_at_3d0f7a0_",
+      "words_at_3ab9898_",
+      "words_at_3c60108_",
+      "words_at_900840_",
+      "words_at_90084c_",
+      "words_at_900858_"
+    ]
+  },
+  "owners": [
+    {
+      "identity": "src/cpu/crt_atan2.hpp:CrtAtan2MathErrorRequest.argument_copy_flag_at_3c83968",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c83968",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/cpu/crt_atan2.hpp:CrtAtan2MathErrorRequest.scratch_result_at_3c83960",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c83960",
+          8
+        ]
+      ]
+    },
+    {
+      "identity": "src/cpu/crt_atan2.hpp:CrtAtan2Result.argument_copy_flag_at_3c83968",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c83968",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/cpu/crt_atan2.hpp:CrtAtan2Result.scratch_result_at_3c83960",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c83960",
+          8
+        ]
+      ]
+    },
+    {
+      "identity": "src/cpu/crt_rand.hpp:CrtRandState.seed_at_2bcbdf8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x2bcbdf8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_controller.hpp:GameControllerButtonMasks.mask_at_909f94",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x909f94",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_controller.hpp:GameControllerButtonMasks.mask_at_909f98",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x909f98",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_controller.hpp:GameControllerButtonMasks.mask_at_909fa4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x909fa4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_controller.hpp:GameControllerButtonMasks.mask_at_909fa8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x909fa8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_controller.hpp:GameControllerButtonMasks.mask_at_909fac",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x909fac",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_controller.hpp:GameControllerInitGlobals.bytes_at_3b0e9a4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0e9a4",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_controller.hpp:GameControllerInitGlobals.words_at_3b0e344",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0e344",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_controller.hpp:GameControllerInitGlobals.words_at_3b0e768",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0e768",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_controller.hpp:GameControllerInitGlobals.words_at_3b0e990",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0e990",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_controller.hpp:GameControllerInitGlobals.words_at_3b0e9b8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0e9b8",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_frame_control.hpp:GameFrameInputState.flags_at_3b0eaa0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0eaa0",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_frame_control.hpp:GameFrameInputState.mask_at_3b0e3b8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0e3b8",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_frame_control.hpp:GameFrameRendererState.frame_multiplier_at_389d7dc",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x389d7dc",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_frame_control.hpp:GameFrameRendererState.frequency_high_at_3d0853c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0853c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_frame_control.hpp:GameFrameRendererState.frequency_low_at_3d08538",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d08538",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_frame_control.hpp:GameFrameRendererState.input_callback_at_3d0fa34",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fa34",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_frame_control.hpp:GameFrameRendererState.interval_high_at_3d084ac",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d084ac",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_frame_control.hpp:GameFrameRendererState.interval_low_at_3d084a8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d084a8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_frame_control.hpp:GameFrameRendererState.last_counter_at_3d08550",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d08550",
+          8
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_frame_control.hpp:GameFrameRendererState.render_factor_at_89295c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x89295c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_logic.hpp:GameLogicState.word_at_3abdf70",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdf70",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_logic.hpp:GameLogicState.word_at_3b11194",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b11194",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_logic_support.hpp:GameLogicEdgeState.aggregate_at_3b0eaf0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0eaf0",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_logic_support.hpp:GameLogicEdgeState.aggregate_special_at_3b0eae8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0eae8",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_logic_support.hpp:GameLogicEdgeState.byte_at_3b0e3b9",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0e3b9",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_logic_support.hpp:GameLogicEdgeState.bytes_at_3b0e3e0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0e3e0",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_logic_support.hpp:GameLogicEdgeState.raw_at_3b0e3e2",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0e3e2",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_logic_support.hpp:GameLogicEdgeState.special_at_3b0e3ba",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0e3ba",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_logic_support.hpp:GameLogicTimingState.word_at_3b11178",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b11178",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_logic_support.hpp:GameLogicTimingState.word_at_3b1117c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b1117c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_logic_support.hpp:GameLogicTimingState.word_at_3b11180",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b11180",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_logic_support.hpp:GameLogicTimingState.word_at_3b11188",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b11188",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_logic_support.hpp:GameLogicTimingState.word_at_3b1118c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b1118c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_logic_support.hpp:GameLogicTimingState.word_at_3b11198",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b11198",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/game_logic_support.hpp:GameLogicTimingState.word_at_3b2a2e4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2a2e4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_device_init.hpp:NinjaDeviceState.block_at_3d0fae0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fae0",
+          512
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_device_init.hpp:NinjaDeviceState.bottom_at_3d0fd2c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fd2c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_device_init.hpp:NinjaDeviceState.caps_at_3d127c0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d127c0",
+          212
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_device_init.hpp:NinjaDeviceState.direct3d_at_3d11f60",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d11f60",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_device_init.hpp:NinjaDeviceState.half_height_at_3d1294c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d1294c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_device_init.hpp:NinjaDeviceState.half_width_at_3d12948",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d12948",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_device_init.hpp:NinjaDeviceState.left_at_3d0fd20",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fd20",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_device_init.hpp:NinjaDeviceState.matrix_at_389d318",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x389d318",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_device_init.hpp:NinjaDeviceState.matrix_at_3d0fd80",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fd80",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_device_init.hpp:NinjaDeviceState.right_at_3d0fd28",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fd28",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_device_init.hpp:NinjaDeviceState.top_at_3d0fd24",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fd24",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_device_init.hpp:NinjaDeviceState.viewport_at_3d12780",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d12780",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_device_init.hpp:NinjaDeviceState.words_at_3d0fd00",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fd00",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_fog.hpp:NinjaFogDeviceState.color_at_3d12898",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d12898",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_fog.hpp:NinjaFogDeviceState.end_index_at_3d0fce0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fce0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_fog.hpp:NinjaFogDeviceState.end_value_at_3d12894",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d12894",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_fog.hpp:NinjaFogDeviceState.reciprocal_at_3d12c00",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d12c00",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_fog.hpp:NinjaFogDeviceState.software_density_at_3d128a0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d128a0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_fog.hpp:NinjaFogDeviceState.start_index_at_3d12950",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d12950",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_fog.hpp:NinjaFogDeviceState.start_value_at_3d0fac0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fac0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_fog.hpp:NinjaFogDeviceState.w_at_3d12a00",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d12a00",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_frame_calls.hpp:NinjaFrameCallState.argument_at_3d0fa38",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fa38",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_frame_calls.hpp:NinjaFrameCallState.device_flags_at_3d1289c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d1289c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_frame_calls.hpp:NinjaFrameCallState.hook_at_3d0f7a4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f7a4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_frame_calls.hpp:NinjaFrameCallState.hook_at_3d0f7a8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f7a8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_frame_calls.hpp:NinjaFrameCallState.hook_at_3d0fa30",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fa30",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_frame_calls.hpp:NinjaFrameCallState.hooks_at_3d08af0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d08af0",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_frame_calls.hpp:NinjaFrameCallState.records_at_3d0fe00",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fe00",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_frame_calls.hpp:NinjaFrameCallState.scene_flags_at_3d08588",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d08588",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_frame_calls.hpp:NinjaFrameCallState.vertex_buffer_at_3d128ac",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d128ac",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_input_devices.hpp:NinjaInputDeviceState.joysticks_at_3d08814",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d08814",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_input_devices.hpp:NinjaInputDeviceState.mouse_at_3d08834",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d08834",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_keyboard.hpp:NinjaCallbackList.count_at_3ce712c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce712c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_keyboard.hpp:NinjaCallbackList.slots_at_3d0fa40",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fa40",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_keyboard.hpp:NinjaKeyboardState.count_at_3d0881c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0881c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_keyboard.hpp:NinjaKeyboardState.device_at_3d08820",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d08820",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_keyboard.hpp:NinjaKeyboardState.input_pointer_at_3b0e340",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0e340",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_keyboard.hpp:NinjaKeyboardState.records_at_3ce6e38",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce6e38",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_keyboard.hpp:NinjaKeyboardState.records_at_3d08818",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d08818",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_keyboard.hpp:NinjaKeyboardState.words_at_3ce6e68",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce6e68",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_memory.hpp:NinjaMemoryState.heap_at_389d628",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x389d628",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_projection_range.hpp:NinjaProjectionRangeState.cache_x_at_3aad0c0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad0c0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_projection_range.hpp:NinjaProjectionRangeState.cache_y_at_3aad0c4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad0c4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_projection_range.hpp:NinjaProjectionRangeState.far_at_3d0f968",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f968",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_projection_range.hpp:NinjaProjectionRangeState.near_at_3d0f808",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f808",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_projection_range.hpp:NinjaProjectionRangeState.x_at_90082c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x90082c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_projection_range.hpp:NinjaProjectionRangeState.y_bits_at_900830",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x900830",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_queue_consumer.hpp:NinjaQueueConsumerState.cached_fog_end_at_90a09c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x90a09c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_queue_consumer.hpp:NinjaQueueConsumerState.cached_fog_start_at_90a098",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x90a098",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_queue_consumer.hpp:NinjaQueueConsumerState.count_at_3abd9d4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abd9d4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_queue_consumer.hpp:NinjaQueueConsumerState.count_at_3abd9dc",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abd9dc",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_queue_consumer.hpp:NinjaQueueConsumerState.fog_enabled_at_3d12798",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d12798",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_queue_consumer.hpp:NinjaQueueConsumerState.fog_mode_at_3d0849c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0849c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_queue_consumer.hpp:NinjaQueueConsumerState.fog_profile_at_3abdc6c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdc6c",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_queue_consumer.hpp:NinjaQueueConsumerState.fog_supported_at_3d128a4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d128a4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_queue_consumer.hpp:NinjaQueueConsumerState.maximum_at_3abd9d8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abd9d8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_queue_consumer.hpp:NinjaQueueConsumerState.maximum_at_3abd9e0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abd9e0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_queue_consumer.hpp:NinjaQueueConsumerState.mode_byte_at_3abdbc0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdbc0",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_queue_consumer.hpp:NinjaQueueConsumerState.projection_width_at_3d0f9e4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f9e4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_queue_consumer.hpp:NinjaQueueConsumerState.special_flags_at_909eb4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x909eb4",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_render.hpp:NinjaRenderState.device_at_3d128b0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d128b0",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_render.hpp:NinjaRenderState.packed_blend_at_3ab9890",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ab9890",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_screen.hpp:NinjaScreenState.bottom_at_3d0f82c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f82c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_screen.hpp:NinjaScreenState.colors_at_3ce7168",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce7168",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_screen.hpp:NinjaScreenState.count_at_3ce7170",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce7170",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_screen.hpp:NinjaScreenState.flags_at_3d0f964",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f964",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_screen.hpp:NinjaScreenState.height_at_3d0f838",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f838",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_screen.hpp:NinjaScreenState.height_at_3d0f9e8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f9e8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_screen.hpp:NinjaScreenState.height_at_3d0fa08",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fa08",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_screen.hpp:NinjaScreenState.invalid_at_3d0fd1c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fd1c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_screen.hpp:NinjaScreenState.left_at_3d0f820",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f820",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_screen.hpp:NinjaScreenState.points_at_3ce7164",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce7164",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_screen.hpp:NinjaScreenState.points_at_3ce7184",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce7184",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_screen.hpp:NinjaScreenState.projection_at_3d129c0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d129c0",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_screen.hpp:NinjaScreenState.right_at_3d0f828",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f828",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_screen.hpp:NinjaScreenState.top_at_3d0f824",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f824",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_screen.hpp:NinjaScreenState.width_at_3d0fa04",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fa04",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_screen.hpp:NinjaScreenState.width_at_3d0fa20",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fa20",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_screen.hpp:NinjaScreenState.word_at_3ce7160",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce7160",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_screen.hpp:NinjaScreenState.word_at_3ce716c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce716c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_screen.hpp:NinjaScreenState.word_at_3d0f804",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f804",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_screen.hpp:NinjaScreenState.word_at_3d0f814",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f814",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_sprite.hpp:NinjaSpriteProjection.center_x_at_3d0fa0c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fa0c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_sprite.hpp:NinjaSpriteProjection.center_y_at_3d0fa10",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fa10",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_sprite.hpp:NinjaSpriteProjection.color_argb_at_3d0f7f0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f7f0",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_sprite.hpp:NinjaSpriteProjection.scale_at_3d0f9e0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f9e0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_sprite_queue.hpp:NinjaSpriteQueueRuntime.captured_texture_list_at_3abd950",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abd950",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_sprite_queue.hpp:NinjaSpriteQueueRuntime.captured_word_at_3abd950",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abd950",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_sprite_queue.hpp:NinjaSpriteQueueRuntime.captured_word_at_3d0f840",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f840",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_sprite_queue.hpp:NinjaSpriteQueueRuntime.captured_word_at_3d0f9c4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f9c4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_sprite_queue.hpp:NinjaSpriteQueueRuntime.captured_word_at_3d0f9c8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f9c8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_sprite_queue.hpp:NinjaSpriteQueueRuntime.color_at_3ab9864",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ab9864",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_sprite_queue.hpp:NinjaSpriteQueueRuntime.color_at_3abd9a8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abd9a8",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_sprite_queue.hpp:NinjaSpriteQueueRuntime.flag_at_3abdcfe",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdcfe",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_sprite_queue.hpp:NinjaSpriteQueueRuntime.flag_at_3b12208",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b12208",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_sprite_queue.hpp:NinjaSpriteQueueRuntime.mode_at_3ab98ac",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ab98ac",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_sprite_queue.hpp:NinjaSpriteQueueRuntime.sort_bias_at_3abd9c0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abd9c0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_system_init.hpp:NinjaSystemInitState.block_at_3ce6d80",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce6d80",
+          184
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_system_init.hpp:NinjaSystemInitState.buffer_at_3ce7158",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce7158",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_system_init.hpp:NinjaSystemInitState.color_at_3ce715c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce715c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_system_init.hpp:NinjaSystemInitState.counter_high_at_3ce7134",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce7134",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_system_init.hpp:NinjaSystemInitState.counter_low_at_3ce7130",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce7130",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_system_init.hpp:NinjaSystemInitState.direct_input_at_3abdc10",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdc10",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_system_init.hpp:NinjaSystemInitState.flag_at_3ce7150",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce7150",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_system_init.hpp:NinjaSystemInitState.mouse_at_3abdc14",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdc14",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_system_init.hpp:NinjaSystemInitState.pool_at_3ce71b0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce71b0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_system_init.hpp:NinjaSystemInitState.records_at_3ce6e78",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce6e78",
+          208
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_system_init.hpp:NinjaSystemInitState.records_at_3ce6f48",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce6f48",
+          480
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_system_init.hpp:NinjaSystemInitState.scale_at_3ce7154",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce7154",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_system_init.hpp:NinjaSystemInitState.size_at_3ce71a4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce71a4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_system_init.hpp:NinjaSystemInitState.tables_at_389d888",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x389d888",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_system_init.hpp:NinjaSystemInitState.word_at_3d0f740",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f740",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_system_init.hpp:NinjaSystemInitState.word_at_3d0f810",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f810",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_system_init.hpp:NinjaSystemInitState.word_at_3d0f83c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f83c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_system_init.hpp:NinjaSystemInitState.word_at_3d127a0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d127a0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_texture_pool.hpp:NinjaTexturePoolState.base_at_3d0f844",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f844",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_texture_pool.hpp:NinjaTexturePoolState.byte_at_3d0f860",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f860",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_texture_pool.hpp:NinjaTexturePoolState.count_at_3d0f80c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f80c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_texture_pool.hpp:NinjaTexturePoolState.records_at_3a8b0a0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a8b0a0",
+          139264
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_texture_pool.hpp:NinjaTexturePoolState.word_at_3d0f830",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f830",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_texture_pool.hpp:NinjaTexturePoolState.word_at_3d0f960",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f960",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_texture_pool.hpp:NinjaTexturePoolState.word_at_3d0fa14",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fa14",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_texture_pool.hpp:NinjaTexturePoolState.words_at_3d0f7c0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f7c0",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_texture_selection.hpp:NinjaTextureSelectionState.active_memory_at_3d129a0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d129a0",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_texture_selection.hpp:NinjaTextureSelectionState.current_list_at_3d0fa24",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fa24",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_texture_selection.hpp:NinjaTextureSelectionState.global_id_at_3d0fdf4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fdf4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_texture_selection.hpp:NinjaTextureSelectionState.requested_memory_at_3ce7128",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce7128",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_vibration.hpp:NinjaVibrationState.counter_at_3d0843c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0843c",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_vibration.hpp:NinjaVibrationState.duration_at_3d08434",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d08434",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_vibration.hpp:NinjaVibrationState.strength_at_3d0842e",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0842e",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_view.hpp:NinjaViewState.camera_at_3aad0a0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad0a0",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_view.hpp:NinjaViewState.camera_tail_at_3aad0c8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad0c8",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_view.hpp:NinjaViewState.perspective_at_3d12960",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d12960",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_view.hpp:NinjaViewState.view_at_389d398",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x389d398",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_view.hpp:NinjaViewState.view_at_3d0f760",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f760",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_view.hpp:NinjaViewState.view_copy_at_3d0f980",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f980",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/engine/ninja_view.hpp:NinjaViewState.view_inverse_at_389d358",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x389d358",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/audio_stream.hpp:AudioStreamState.events_at_3b0ece0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0ece0",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/audio_stream.hpp:AudioStreamState.initialized_at_3b0ef2c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0ef2c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/audio_stream.hpp:AudioStreamState.sound_object_at_3b0ecc0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0ecc0",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/audio_stream.hpp:AudioStreamState.thread_at_3b0ee00",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0ee00",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/audio_stream.hpp:AudioStreamState.thread_id_at_3b0ec28",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0ec28",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/audio_stream.hpp:AudioStreamState.words_at_3b0ec30",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0ec30",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/audio_stream.hpp:AudioStreamState.words_at_3b0ed70",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0ed70",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/audio_stream.hpp:AudioStreamState.words_at_3b0ee98",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0ee98",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_frame_owners.hpp:GameFrameOwnersState.buffer_at_3abdf84",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdf84",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_frame_owners.hpp:GameFrameOwnersState.count_at_3b0e334",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0e334",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_frame_owners.hpp:GameFrameOwnersState.list_at_3b2c584",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2c584",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_frame_owners.hpp:GameFrameOwnersState.timer_at_3abdf88",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdf88",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_library_init.hpp:GameLibraryInitState.aspect_at_3d0f9c0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f9c0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_library_init.hpp:GameLibraryInitState.scale_at_3d0f800",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f800",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_library_init.hpp:GameLibraryInitState.word_at_38a5dc4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38a5dc4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_library_init.hpp:GameLibraryInitState.word_at_38a5dc8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38a5dc8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_library_init.hpp:GameLibraryInitState.word_at_38a5dcc",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38a5dcc",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_library_init.hpp:GameLibraryInitState.words_at_389d864",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x389d864",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_loop.hpp:GameLoopState.counter_at_3b291b2",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b291b2",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_loop.hpp:GameLoopState.exit_at_3abdf7c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdf7c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_loop.hpp:GameLoopState.focus_at_8929d4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x8929d4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_loop.hpp:GameLoopState.fog_range_at_3abdc70",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdc70",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_loop.hpp:GameLoopState.fog_range_at_3abdc74",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdc74",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_loop.hpp:GameLoopState.fog_range_at_3abdca0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdca0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_loop.hpp:GameLoopState.fog_range_at_3abdca4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdca4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_loop.hpp:GameLoopState.frames_at_3abdf58",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdf58",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_loop.hpp:GameLoopState.frames_at_3abdf5c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdf5c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_loop.hpp:GameLoopState.game_mode_at_3b22de4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b22de4",
+          2
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_loop.hpp:GameLoopState.mode_at_3b28114",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b28114",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_loop.hpp:GameLoopState.pending_at_3abdf76",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdf76",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_loop.hpp:GameLoopState.pending_at_3abdf79",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdf79",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_loop.hpp:GameLoopState.request_at_3b291ad",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b291ad",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_loop.hpp:GameLoopState.resync_at_3abdf68",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdf68",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_loop.hpp:GameLoopState.save_phase_at_3b291a4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b291a4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_loop.hpp:GameLoopState.word_at_3abdcf8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdcf8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_loop.hpp:GameLoopState.word_at_3abdf80",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdf80",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_loop.hpp:GameLoopState.word_at_3c85804",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c85804",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode.hpp:GameModeState.byte_at_3abdcfc",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdcfc",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode.hpp:GameModeState.byte_at_3abdcfd",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdcfd",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode.hpp:GameModeState.byte_at_3abdf74",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdf74",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode.hpp:GameModeState.byte_at_3abdf78",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdf78",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode.hpp:GameModeState.byte_at_3b18db4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b18db4",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode.hpp:GameModeState.byte_at_3b22e1e",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b22e1e",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode.hpp:GameModeState.byte_at_3b2a2fa",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2a2fa",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode.hpp:GameModeState.word_at_3b290e4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b290e4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode.hpp:GameModeState.word_at_3b2c45c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2c45c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.block_at_3b0ef9c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0ef9c",
+          60
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.block_at_3b18250",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b18250",
+          2916
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.block_at_3b290c4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b290c4",
+          8
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.block_at_3b2b5f9",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2b5f9",
+          7
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.block_at_3b2c5e8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2c5e8",
+          120
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.block_at_3c4ae08",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c4ae08",
+          13880
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.block_at_90ed54",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x90ed54",
+          32
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.byte_at_3abe134",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abe134",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.byte_at_3b0ef34",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0ef34",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.byte_at_3b0ef35",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0ef35",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.byte_at_3b0ef48",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0ef48",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.byte_at_3b0f0e0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0f0e0",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.byte_at_3b0f128",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0f128",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.byte_at_3b290d8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b290d8",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.byte_at_3b290e0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b290e0",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.byte_at_3b290e8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b290e8",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.byte_at_3b2a2f8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2a2f8",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.byte_at_3b2a2f9",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2a2f9",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.byte_at_3b2a2fb",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2a2fb",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.byte_at_3b2c565",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2c565",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.byte_at_3b2c574",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2c574",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.callback_at_3d08420",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d08420",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.character_at_3b22dc0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b22dc0",
+          2
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.color_at_3b29d5c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b29d5c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.half_at_3b0f0e4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0f0e4",
+          2
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.half_at_3b18db8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b18db8",
+          2
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.half_at_3b22e1c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b22e1c",
+          2
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.half_at_3b2a300",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2a300",
+          2
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.motion_at_3c53510",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c53510",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.motion_at_3c53520",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c53520",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.motion_at_3c559c0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c559c0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.motion_at_3c559d0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c559d0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.motion_at_3c559e0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c559e0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.motion_at_3c559f0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c559f0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.motion_at_3c55a00",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c55a00",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.motion_at_3c566c0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c566c0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.motion_at_3c566d0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c566d0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.state_at_3b29d6c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b29d6c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.word_at_3b0ef44",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0ef44",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.word_at_3b0f0f4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0f0f4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.word_at_3b0f0f8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0f0f8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.word_at_3b0f0fc",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0f0fc",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.word_at_3b0f100",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0f100",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.word_at_3b0f108",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0f108",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.word_at_3b0f10c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0f10c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.word_at_3b0f13c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0f13c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.word_at_3b18244",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b18244",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.word_at_3b22e20",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b22e20",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.word_at_3b290dc",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b290dc",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.word_at_3b2919c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2919c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.word_at_3b29d68",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b29d68",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.word_at_3b2a2f0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2a2f0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.word_at_3b2a2f4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2a2f4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.word_at_3b2a2fc",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2a2fc",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.word_at_3b2b358",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2b358",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.word_at_3b2c420",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2c420",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.word_at_3b2c47c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2c47c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.word_at_3b2c560",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2c560",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_mode_leaves.hpp:GameModeLeafState.word_at_914788",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x914788",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset.hpp:GameResetState.heap_at_3b0e330",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0e330",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset.hpp:GameResetState.heap_at_3b290d0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b290d0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset.hpp:GameResetState.word_at_3b29d08",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b29d08",
+          2
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.callback_at_3b291b4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b291b4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.cam_files_at_3abdf28",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdf28",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.config_at_38f6ec0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6ec0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.config_at_3a7cf3c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a7cf3c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.debug_text_at_38f6d08",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6d08",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.entry_words_at_3d08428",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d08428",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.player_at_3abdf94",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdf94",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.player_at_3abdf9c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdf9c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.set_files_at_3abdf40",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdf40",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.sound_record_flags_at_3b29304",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b29304",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.word_at_389d608",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x389d608",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.word_at_3abdf90",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdf90",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.word_at_3abdf98",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdf98",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.word_at_3abdfa0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdfa0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.word_at_3abdfa4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdfa4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.word_at_3abdfa8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdfa8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.word_at_3abdfac",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdfac",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.word_at_3b0e338",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0e338",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.word_at_3b11190",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b11190",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.word_at_3b29cf4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b29cf4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.word_at_3b29cf8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b29cf8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.word_at_3c4e458",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c4e458",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.word_at_3c4e45c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c4e45c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.word_at_3c5e8b8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c5e8b8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.word_at_912694",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x912694",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.word_at_912698",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x912698",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.word_at_91269c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x91269c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.word_at_9126a8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x9126a8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_reset_leaves.hpp:ResetLeafState.words_at_3b29b90",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b29b90",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_scene_logic.hpp:GameSceneLogicState.byte_at_3b0ef40",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0ef40",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_scene_logic.hpp:GameSceneLogicState.byte_at_3b0f150",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0f150",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_startup.hpp:AudioStartupState.byte_at_3b29ce8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b29ce8",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_startup.hpp:AudioStartupState.record_words_at_3b292fc",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b292fc",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_startup.hpp:AudioStartupState.word_at_3b29b7c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b29b7c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_startup.hpp:AudioStartupState.word_at_3b29ce0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b29ce0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_startup.hpp:AudioStartupState.word_at_3b29ce4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b29ce4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_startup.hpp:AudioStartupState.words_at_3b292a8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b292a8",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_startup.hpp:ExitCallbackList.slots_at_3d084b0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d084b0",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_startup.hpp:MenuBlockState.block_at_9008b4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x9008b4",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_startup.hpp:MenuBlockState.block_at_900e88",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x900e88",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_startup.hpp:MenuBlockState.byte_at_3abdbc1",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdbc1",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_startup.hpp:MenuBlockState.byte_at_903e58",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x903e58",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_view.hpp:GameViewState.clear_colors_at_3ce7174",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ce7174",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_view.hpp:GameViewState.fov_at_3aad0bc",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad0bc",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_view.hpp:GameViewState.fov_copy_at_3ab98ec",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ab98ec",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_view.hpp:GameViewState.projection_words_at_3d0f9ec",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f9ec",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_view.hpp:GameViewState.projection_words_at_3d0f9f0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f9f0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_view.hpp:GameViewState.scale_word_at_3b28094",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b28094",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_view.hpp:GameViewState.screen_height_at_8928c4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x8928c4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_view.hpp:GameViewState.screen_width_at_8928c0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x8928c0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_view.hpp:GameViewState.view_at_3b28098",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b28098",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_view.hpp:GameViewState.view_at_3b2809c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2809c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_view.hpp:GameViewState.view_at_3b280a0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b280a0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_view.hpp:GameViewState.view_at_3b280a4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b280a4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_view.hpp:GameViewState.word_at_3abd9cc",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abd9cc",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_view.hpp:GameViewState.word_at_3b2cbb4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2cbb4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_window.hpp:GameWindowState.last_wparam_at_3d08534",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d08534",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_winmain.hpp:CdDriveState.root_at_3a8af78",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a8af78",
+          260
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_winmain.hpp:GameWinMainState.bgm_volume_at_909f28",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x909f28",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_winmain.hpp:GameWinMainState.clip_level_at_3abdcf0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdcf0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_winmain.hpp:GameWinMainState.media_at_3ab918c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ab918c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_winmain.hpp:GameWinMainState.media_at_3ab9190",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ab9190",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_winmain.hpp:GameWinMainState.message_caption_at_8929c4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x8929c4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_winmain.hpp:GameWinMainState.message_text_at_8929b0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x8929b0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_winmain.hpp:GameWinMainState.mouse_mode_at_3b0eae0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0eae0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_winmain.hpp:GameWinMainState.pad_bits_at_8929d8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x8929d8",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_winmain.hpp:GameWinMainState.pad_buttons_at_389d634",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x389d634",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_winmain.hpp:GameWinMainState.screen_at_892950",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x892950",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_winmain.hpp:GameWinMainState.sound3d_at_3b0ef28",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0ef28",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_winmain.hpp:GameWinMainState.text_language_at_3b0f0e8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0f0e8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/game_winmain.hpp:GameWinMainState.voice_language_at_3b0ef38",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0ef38",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/mod_loader_frame.hpp:SpeedrunModState.chao_viewer_at_100107e8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x100107e8",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/mod_loader_frame.hpp:SpeedrunModState.quick_save_at_100107e9",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x100107e9",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/mod_loader_frame.hpp:SpeedrunModState.timer_frames_at_10010818",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x10010818",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/mod_loader_frame.hpp:SpeedrunModState.timer_minutes_at_1001081a",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x1001081a",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/mod_loader_frame.hpp:SpeedrunModState.timer_seconds_at_10010819",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x10010819",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.handles_at_3ab9170",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ab9170",
+          28
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6e70",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6e70",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6e74",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6e74",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6e78",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6e78",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6e7c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6e7c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6e80",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6e80",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6e84",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6e84",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6e88",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6e88",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6e8c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6e8c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6e94",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6e94",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6e98",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6e98",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6e9c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6e9c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6ea0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6ea0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6ea4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6ea4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6ea8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6ea8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6eac",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6eac",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6eb0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6eb0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6eb4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6eb4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6ebc",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6ebc",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6ec4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6ec4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6ec8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6ec8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6ecc",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6ecc",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6ed0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6ed0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6ed4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6ed4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6ed8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6ed8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6edc",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6edc",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6ee0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6ee0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6ee4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6ee4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6ee8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6ee8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6eec",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6eec",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38f6ef0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38f6ef0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38fcef8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38fcef8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38fcefc",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38fcefc",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38fcf00",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38fcf00",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_38fcf04",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x38fcf04",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a7cf08",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a7cf08",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a7cf0c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a7cf0c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a7cf10",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a7cf10",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a7cf14",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a7cf14",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a7cf18",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a7cf18",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a7cf1c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a7cf1c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a7cf20",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a7cf20",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a7cf24",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a7cf24",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a7cf28",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a7cf28",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a7cf2c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a7cf2c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a7cf30",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a7cf30",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a7cf34",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a7cf34",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a7cf38",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a7cf38",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a7cf40",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a7cf40",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a8af68",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a8af68",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a8af6c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a8af6c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a8af70",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a8af70",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a8b07c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a8b07c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a8b080",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a8b080",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a8b084",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a8b084",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a8b08c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a8b08c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a8b090",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a8b090",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a8b094",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a8b094",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3a8b098",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a8b098",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad0e0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad0e0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad0e4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad0e4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad0e8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad0e8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad0ec",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad0ec",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad0f0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad0f0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad0f4",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad0f4",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad0f8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad0f8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad0fc",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad0fc",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad100",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad100",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad104",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad104",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad108",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad108",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad10c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad10c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad110",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad110",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad114",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad114",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad118",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad118",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad11c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad11c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad120",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad120",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad124",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad124",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad128",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad128",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad12c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad12c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad130",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad130",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad134",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad134",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3aad138",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3aad138",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3ab9160",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ab9160",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3ab9164",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ab9164",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3ab9168",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ab9168",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/model_dlls.hpp:ModelDllBindings.table_3ab916c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ab916c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/sound_manager.hpp:SoundRecordFields.current_volume_at_3b29c28",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b29c28",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/sound_manager.hpp:SoundRecordFields.frequency_at_3b2930c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2930c",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/sound_manager.hpp:SoundRecordFields.ids_at_3b29308",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b29308",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/sound_manager.hpp:SoundRecordFields.listener_at_3b2cbb0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2cbb0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/sound_manager.hpp:SoundRecordFields.pan_at_3b29318",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b29318",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/sound_manager.hpp:SoundRecordFields.volume_at_3b29310",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b29310",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/game/sound_manager.hpp:SoundRecordFields.words_at_3b29300",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b29300",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/input/input_mod_pad.hpp:InputModControllerTable.enabled_at_1000e73c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x1000e73c",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/input/input_mod_pad.hpp:InputModFrameState.demo_at_1000e708",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x1000e708",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/input/input_mod_pad.hpp:InputModFrameState.demo_cutscene_at_3b2a2e8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2a2e8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/input/input_mod_pad.hpp:InputModRumbleTasks.tasks_at_1000ec60",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x1000ec60",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/player/player_mesh_registry.hpp:PlayerMeshRegistryState.source_word_at_3b42ff8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b42ff8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/player/player_scene_position.hpp:PlayerScenePositionGlobals.amy_offset_at_915d74",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x915d74",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/player/player_scene_position.hpp:PlayerScenePositionGlobals.amy_radius_at_915d78",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x915d78",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/player/player_scene_position.hpp:PlayerScenePositionGlobals.environment_at_3b22dec",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b22dec",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/player/player_scene_position.hpp:PlayerScenePositionGlobals.event_task_at_3b2c578",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b2c578",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/player/player_scene_position.hpp:PlayerScenePositionGlobals.motion_override_at_3b42e70",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b42e70",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/player/player_scene_position.hpp:PlayerScenePositionGlobals.render_at_3b0f0ec",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0f0ec",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/player/player_scene_position.hpp:PlayerScenePositionGlobals.special_surface_at_3b42e74",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b42e74",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/player/scene_input_producer.hpp:SceneDirectionalKeyState.held_out_at_3b0e7e0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0e7e0",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/player/scene_input_producer.hpp:SceneDirectionalKeyState.held_work_at_3b0e3a8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0e3a8",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/player/scene_input_producer.hpp:SceneDirectionalKeyState.pressed_out_at_3b0e3cc",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0e3cc",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/player/scene_input_producer.hpp:SceneDirectionalKeyState.pressed_work_at_3b0e354",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0e354",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/player/scene_input_producer.hpp:SceneDirectionalKeyState.repeat_at_3b0e3bc",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b0e3bc",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/player/sonic_player.hpp:SonicPlayerGlobals.alternate_model_at_3b18db5",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b18db5",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/player/sonic_player.hpp:SonicPlayerGlobals.current_player_at_3abdf64",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdf64",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/player/sonic_player.hpp:SonicPlayerGlobals.current_task_at_3abdf60",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdf60",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/player/sonic_player.hpp:SonicPlayerGlobals.forced_at_3b29d0c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b29d0c",
+          2
+        ]
+      ]
+    },
+    {
+      "identity": "src/player/sonic_player.hpp:SonicPlayerGlobals.range_at_3c55d45",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c55d45",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/player/sonic_player.hpp:SonicPlayerGlobals.sound_latch_at_3c55d44",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c55d44",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/player/sonic_player.hpp:SonicPlayerGlobals.stage_at_3b22dcc",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b22dcc",
+          2
+        ]
+      ]
+    },
+    {
+      "identity": "src/player/sonic_player.hpp:SonicPlayerGlobals.tasks_at_3c5a27c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c5a27c",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.byte_at_3b280a8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b280a8",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.color_at_3b18230",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b18230",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.color_at_3b280ac",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b280ac",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.depth_mode_at_8928c8",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x8928c8",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.fog_table_at_3b10f78",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3b10f78",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.instance_at_3d0fd34",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fd34",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.level_fog_color_at_3abdc68",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdc68",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.level_fog_end_at_3abdc64",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdc64",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.level_fog_start_at_3abdc60",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdc60",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.mode_at_3abdc7c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdc7c",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.queue_base_at_3abd960",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abd960",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.texture_returns_at_389d458",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x389d458",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.unit_at_389d650",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x389d650",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.window_at_3a8b088",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3a8b088",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.window_at_3d0fd30",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0fd30",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.word_at_3abdc78",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdc78",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.word_at_3abdc80",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdc80",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.word_at_3abdc90",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3abdc90",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.word_at_3c839fc",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c839fc",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.word_at_3c83a00",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c83a00",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.word_at_3d0f7a0",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3d0f7a0",
+          4
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.words_at_3ab9898",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3ab9898",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.words_at_3c60108",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x3c60108",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.words_at_900840",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x900840",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.words_at_90084c",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x90084c",
+          1
+        ]
+      ]
+    },
+    {
+      "identity": "src/runtime/game_runtime.hpp:NativeGame.words_at_900858",
+      "module": "SONIC",
+      "ranges": [
+        [
+          "0x900858",
+          1
+        ]
+      ]
+    }
+  ]
+}

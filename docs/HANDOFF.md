@@ -3105,3 +3105,80 @@ untouched and are excluded from this commit.
   tests remain skipped; Windows parity/physical pads unverified. No assets/binaries
   committed. M1 and native independence remain incomplete. Next: dependency
   inventory, provenance checker and native frame-control pilot (GOAL item 2).
+
+
+### 2026-10-15 — Native independence dependency inventory (GOAL stage B prerequisite)
+
+* Added `docs/NATIVE-INDEPENDENCE.md`, a static inventory of `sadx-app`'s two
+  modes, `load_boot_config`, all of `NativeGame::initialize_source_facts`, later
+  runtime image reads, the bring-up extractor, all four `tools/emit` scripts and
+  their build-graph position. Every dependency group records category, source
+  lines, intended native destination and the verification required to migrate it.
+* `all` does not regenerate source/assets from the EXE, but the app links the
+  guest/HLE archive and Unicorn; core includes loader/PE-backed boot. Gate/tests
+  explicitly regenerate EXE assets and run original-code corpora/live reference.
+  All four emitters are manual regeneration tools, not Makefile prerequisites.
+  Matrix/plane emitter evidence paths currently resolve outside this repository;
+  regeneration was not attempted. Native boot also requires Input DLL constants
+  and initial records and optionally loads seven model DLL containers.
+* Evidence is source inspection (file/line references), not new REA dossiers or
+  runtime captures. `git diff --check -- docs/NATIVE-INDEPENDENCE.md` passed. No
+  gameplay changed; no unit tests, oracles, gate or M1 rerun in this documentation
+  substep. The coordinating step records its own gate separately. No executable
+  independence is claimed; dynamic file/module closure, cold callbacks/content,
+  other entry points and supported disc variants remain explicitly unexamined.
+
+### Provenance checker before native ownership migration (gate 139, 2026-10-15)
+
+GOAL stage B prerequisite, alongside the dependency inventory above. No recovered
+owner or gameplay implementation changed; the native frame-control pilot is next.
+
+* Added `tools/gate/check_provenance.py` to `make check` after symbol generation.
+  GLOBAL names/kinds validate against the database (including retained aliases),
+  explicit source-byte extents agree with known sizes, and duplicate/partially
+  overlapping annotated ownership fails. FUNCTION/LIBRARY/STUB entries and PATCH
+  identities must be unique; callable variables are not function declarations.
+  Annotation parsing deliberately supports a restricted declaration grammar.
+* `reference/symbols/legacy-identifiers.json` freezes 1,590 per-file legacy
+  identifier allowances across 97 source files, plus a retained ledger of 505
+  original owner records covering the old checker's **159,677** byte identities.
+  Spelling allowances shrink during migration; the range ledger survives so a
+  cosmetic rename without a replacement annotation cannot discard ownership.
+  New legacy identifiers and stale spelling allowances fail. Existing
+  check_global_owners.py remains unchanged and runs alongside the new checker.
+* Scope limits: the legacy ledger mirrors existing conservative extents, including
+  first-byte array coverage and read-only constant exclusions. It does not infer
+  source strides from native array sizeof, and is not proof about unexamined
+  aggregate interiors. New GLOBAL extents are explicit and fully checked. The
+  legacy SONIC namespace mirrors the old checker's flat VA space, not a finding
+  that DLL state belongs to sonic.exe; settle DLL mappings with evidence during
+  their migration. Same-VA annotated claims in other modules are conservatively
+  checked against legacy claims. No production GLOBAL/FUNCTION annotations exist
+  yet, so current production success is a migration guard, not recovery evidence.
+* Independent reviewer reproduced draft gaps: cosmetic owner rename with baseline
+  trimming, commented-out owners, typedef/multiple declarations and callable
+  variables accepted as functions. Fixed these and subsequent auto-borrow/extern/
+  multiple-statement variants; regression fixtures cover each. Eleven provenance
+  test methods pass. Review also identified the inherited array limitation above;
+  no legacy checker policy was weakened to hide it.
+* CLI mutant evidence `reference/production-integration-20261015/provenance-checker-mutants.json`:
+  actual pinned FrameMultiplier symbol with one owning field returns **rc 0**;
+  duplicate owner returns **rc 1** with four overlapping-byte errors. The report
+  pins the legacy ledger SHA-256. Tests additionally cover partial overlap,
+  legacy/annotated overlap, retired mappings, aliases, module namespaces, invalid
+  names/kinds/widths and malformed declarations. All source restored; no runtime
+  judge, expected game output or tolerance changed.
+* Final gate `reference/production-integration-20261015/provenance-139-gate.json`:
+  actual **rc 0**, **126 native programs / 19 Python tests**. Boot, 7,228-frame
+  intro/title determinism, 600 overridden digests and 900-frame controller
+  plain/native replay pass. Host **82.4 FPS**, title **63 FPS**; 0 duplicate known
+  legacy bytes, 0 provenance errors, 0 UNHANDLED profile overlaps. App-smoke passed.
+  STATUS regenerated; staged-files hygiene also passes (0 violations).
+* Existing uncommitted hle_device_bridge.cpp and request drafts remain untouched
+  and outside this commit; gate records the tested worktree source hash. No
+  standalone oracles or separate make m1 rerun; four unregistered tests skipped.
+  Oracle inventory remains 48 pass / 46 partial / 9 fail / 1 missing. Windows
+  parity and physical pads unverified; no assets/binaries committed. M1 and M5
+  remain incomplete. Next: evidence-backed frame-control naming decisions,
+  whole-owner migration, direct native composition and binary-absent test using
+  the same core as the existing oracle/reference adapters.
