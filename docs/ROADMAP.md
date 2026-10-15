@@ -4,7 +4,10 @@ Goal: play *Sonic Adventure DX* (2004 PC release, `sonic.exe`) on macOS arm64 as
 native application, with the pinned speedrun mod profile (SADX Mod Loader eb4cdcca /
 DLL 3293cf35, Input mod 2.6.1, Speedrun mod 2.0, 63 FPS frame limit), with gameplay
 that matches the Windows reference closely enough for speedrun practice — and prove
-it with automated tests instead of manual play.
+it with automated tests instead of manual play. The finished game builds from readable,
+maintained source and runs from imported assets without `sonic.exe`, original Windows/mod
+DLL execution or an x86 runtime (ADR-0005). The pinned binaries remain development
+references and may supply embedded data during one-time import from the user's own media.
 
 This file is the plan. `docs/STATUS.md` says where we are. `AGENTS.md` says how to
 work. Milestones are ordered by dependency; each has a definition of done that is a
@@ -18,7 +21,7 @@ verification toolchain and 23k lines of exact ports, but the measured throughput
 **~6 KB of verified code per day against 3.85 MB of code (~9,300 functions)**. That
 is a multi-year path to a first playable build. See `docs/REVIEW-2026-10-12.md`.
 
-The plan now is a **hybrid runtime**: every function that is not natively ported runs
+The intermediate plan is a **hybrid runtime**: every function that is not natively ported runs
 from the original x86 bytes inside the process (QEMU-based Unicorn, already a project
 dependency), behind native implementations of the operating-system and graphics
 boundary (Win32, Direct3D 8 → Metal, DirectInput → GameController/keyboard, DirectSound
@@ -30,6 +33,11 @@ Fidelity stays the top requirement: the guest executes the game's own instructio
 the known places where emulation is not bit-exact (x87 transcendentals, SSE
 reciprocal estimates) are shimmed with the project's exact models, which already
 exist (`src/cpu`).
+
+On 2026-10-15 the user clarified executable independence and maintainable source as
+required outcomes. [ADR-0005](decisions/ADR-0005-native-source-and-executable-independence.md)
+retains this reference runtime and strengthens M5 beyond its original hot-path performance
+target. Native-system recovery starts alongside M1–M4; their existing tests are unchanged.
 
 ## Milestones
 
@@ -111,23 +119,60 @@ Definition of done (`make m4`):
 | `hardware-tables` | The Bochs transcendental models and the RCPSS/RCPPS/RSQRT models are compared against an Intel CPU's actual results (needs an Intel host once; recorded as a dataset). |
 | `technique-suite` | Input scripts for the speedrun techniques that matter (spindash chains, Emerald Coast skips, …) reach the same outcomes as the reference. |
 
-### M5 — Native all the way (progressive)
+### M5 — Native source and executable independence
 
-Replace guest execution with native code by hot-path priority, each replacement
-proven by `override-equivalence` on corpora recorded from real play, until frame time
-spent in the emulator is ~0. Static recompilation (Ghidra CFG → C) is an acceptable
-tool here, verified the same way. Performance target: 63 FPS with headroom on an M-series
-Mac without the emulator on the hot path.
+Recover complete game systems into named, maintained C++ modules and compose them
+through native state, resources and callbacks. Share those implementations with the
+reference adapters used by `override-equivalence`. Use measured hot paths to prioritize
+work, while accounting for initialization, menus, cold paths and pinned mod behavior.
+The final dependency graph must account for all shipped game behavior, not only the
+Sonic route or functions reached in a title-screen recording.
+
+Separate original code from content currently embedded in `sonic.exe` and model DLLs.
+A versioned importer reads the user's supported disc/install once and emits data-only
+resources with hashes, schemas and resolved resource references. Identify source variants
+explicitly; disc import and installation-folder import need their own fixtures. Imported
+packs stay local/ignored. Source builds compile the maintained code without regenerating
+it from a game binary. Pure numeric compatibility helpers may remain where required for
+fidelity; whole-game guest execution and original-code fallback may not.
+
+Static recompilation is an optional recovery aid, with separate compiler correctness
+and maintenance requirements. REA's bounded analysis graph and pseudocode export alone
+are insufficient. See [the source investigation](RESEARCH-native-recompilation.md) and
+`docs/GOAL.md` §4.5 for the recovery workflow.
+
+Definition of done (planned `make m5`; these targets are not implemented yet):
+
+| Test/check | What it proves |
+|---|---|
+| `native-source-build` | A clean build from maintained source plus declared native dependencies succeeds with game binaries, Ghidra/REA and Unicorn unavailable. No build-time lifting/decompilation step or generated file from an undeclared local executable is required. |
+| `asset-import` | Supported owned disc/install fixtures produce complete versioned data packs, including embedded models, tables, animation and placement data. Hash/round-trip checks and resource-reference validation catch omissions; malformed or unsupported variants fail explicitly. The existing partial geometry extraction is insufficient. |
+| `native-runtime-independent` | In an isolated environment containing only the built app, native dependencies and imported pack, boot/title, load/save, stage and boss replays pass with original EXE/DLLs and reference directories unavailable. Dependency/link inspection excludes guest/HLE PE execution and Unicorn; no original code image is hidden in a pack. |
+| `native-behavior-closure` | A reviewed inventory accounts for all required game modes, characters, stages, tasks/callbacks and profile hooks, including cold paths; each has a native owner and tests or an explicit remaining gap. Completion requires zero unresolved required behavior, zero guest fallback, and a replay suite covering those systems beyond the initial Sonic route. Test coverage alone does not prove that every indirect target was recovered. |
+| `native-profile-parity` | Input 2.6.1 and Speedrun 2.0 behaviors, the 63 FPS limiter, CCEF/EHCF/Skipma and quick save/load run natively and pass M3/M4 traces and technique tests. Binary patch sites serve as provenance; original mod DLLs are unnecessary. |
+| `native-source-ownership` | Shipping game interfaces, mutable state and callback dispatch use semantic names and native identities. Source-address mappings are maintained separately with one-owner/provenance checks. A reviewed module map and representative maintenance change demonstrate that gameplay changes do not require editing an address switch, guest registers or PE memory offsets. |
+| `reference-corpus-frozen` | Each recovered system's oracle fixtures, replay end states and trace digests are recorded under `reference/` (numbers and hashes only, hygiene green) and its tests run from them with `sonic.exe` absent, so verification outlives the reference runtime (OpenRCT2 TestPaint rotted without this). |
+| `native-reference-parity` | Existing module oracles, mutants, full native replays, Windows trace parity and reference-frame comparisons retain their stated fidelity scopes. Numeric/flag differences remain reported; a partial oracle is not promoted to pass by removing the guest. |
+| `native-performance` | The native replay suite sustains the profile's 63 FPS cadence on the recorded M-series test configuration, with frame-time distributions and headroom reported. Native execution and executable independence are also enforced structurally; a near-zero guest-time measurement cannot substitute for them. |
+
+First pull forward a bounded frame-control slice (GOAL §6 item 1), then native boot/title
+and a stage. Preserve the working reference while these grow; retire a production binary
+dependency only after its replacement is proven. M5 remains incomplete until every row passes.
 
 ## How progress is measured
 
 `docs/STATUS.md` is regenerated from the gate: tests passing, oracles passing, number of
 functions with native overrides, % of frame time native vs guest, FPS headless, FPS
-windowed, replay suite pass/fail. Every gate record (`reference/production-integration-*/`)
+windowed, replay suite pass/fail. For M5 (ADR-0006) it adds: procedures with a symbol-database
+name (of 8,875), address-named owners remaining (`*_at_<hex>`, to reach 0, the OpenLoco
+measure), `FUNCTION` vs `STUB` annotations, imported-pack coverage of the sa_tools mappings,
+and reference corpora frozen per system. Every gate record (`reference/production-integration-*/`)
 is the audit trail. A milestone is complete only when its table is green in a recorded
 gate.
 
 ## Explicitly out of scope
 
 Other SADX releases (Steam 2010/2011) and other platforms. Pirated assets: the user
-supplies their own `sonic.exe`, game data and mods (`docs/SOURCES.md`).
+supplies their own game data from supported media/installations (`docs/SOURCES.md`).
+Development/reference tests additionally require the pinned executable and mods; the
+finished native game uses the independent imported data pack.

@@ -1,5 +1,10 @@
 # Architecture
 
+The layer table describes the current implementation. The shipping destination is
+[ADR-0005](decisions/ADR-0005-native-source-and-executable-independence.md): native game
+systems built from maintained source and running from imported assets. `guest`/`hle`
+and PE image loading are reference/development facilities in that destination.
+
 ## Layers (`src/`)
 
 `src/` is a strict stack. A file may include headers from its own layer or any layer
@@ -89,6 +94,25 @@ With M1, `NativeGame` becomes the override provider for the guest: the guest exe
 `sonic.exe` and, at every address in the override table, calls the native owner instead.
 Each HLE import logs its call for trace diffs. The headless runner and the AppKit app
 share one `GameSession` object: the app only adds a window, a Metal backend and input.
+
+Naming and provenance follow [ADR-0006](decisions/ADR-0006-symbol-names-and-provenance-annotations.md):
+identifiers are semantic, the source address sits in a `// FUNCTION:`/`// GLOBAL:`/`// DATA:`/
+`// PATCH:`/`// STUB:`/`// LIBRARY:` annotation, and a generated symbol database
+(`tools/symbols/`, from the mod loader's symbol-based headers) supplies the names. Legacy
+`*_at_<hex>` owners stay checked by `check_global_owners.py` until migrated.
+
+For M5, sharing moves to a native session and semantic game interfaces. A separate
+reference adapter marshals original addresses/registers into the same implementations
+for equivalence tests. Native callers use state types and native callbacks directly;
+shipping initialization reads declared constants and imported resources rather than
+`ExecutableImage::u32(va)`. Model/DLL data references become validated resource identities
+at import. Native platform services call Metal, input and audio backends directly.
+
+The current `libsadx-core.a` includes `loader` and EXE-backed runtime initialization,
+and the app links `libsadx-guest.a`; its name does not establish independence. Separate
+production and reference build graphs as systems migrate. Existing source-global
+ownership rules remain enforced until mappings and replacement checks migrate together;
+preserve tagged failures and exact observable arithmetic/order throughout.
 
 ## Other top-level directories
 

@@ -2,6 +2,11 @@
 
 Date: 2026-10-12. Status: accepted (user decision).
 
+End state refined on 2026-10-15 by
+[ADR-0005](ADR-0005-native-source-and-executable-independence.md): the hybrid runtime
+remains a development/reference path; the finished game is executable-independent,
+compiled native code maintained through semantic source interfaces.
+
 ## Context
 
 The port-everything method verified 6 KB of 3.85 MB of game code in a day of gates

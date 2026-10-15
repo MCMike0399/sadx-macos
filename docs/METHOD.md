@@ -45,7 +45,10 @@ Facts about the provider (from REA's docs, verified 2026-10-12):
   Add any of these to the runner's `allowed` set (one line) before using them.
 * Functions reached only through pointers (vtables, callbacks, the D3DX dispatch table)
   are not auto-defined. Seed them: `REA_GHIDRA_SEED_FILE` = TSV of
-  `address<TAB>function[<TAB>name]` applied before analysis. Keep the seed list in
+  `address<TAB>function|code|label[<TAB>name]` applied before analysis (a named `function` seed
+  renames, a `label` seed names a global, also in `.bss`; names without whitespace). This is the
+  only durable way to put names into Ghidra: the symbol database emits the names part of this
+  file (ADR-0006, GOAL §4.4). REA cannot import struct types or signatures. Keep the seed list in
   `reference/ghidra-game-loop-seeds.tsv` and grow it. Seed contents are part of
   REA's snapshot profile: after adding seeds, preserve the old ignored snapshot
   under a backup name and run the owned runner without a snapshot at its configured
@@ -77,7 +80,11 @@ These are inputs to M1 and M5 of the roadmap.
 
 ## 3. Porting a function natively (the exact-port method)
 
-Used for hot paths and for the platform boundary; not for everything.
+Used for verified native behavior and reference adapters. For system-level source
+recovery and the executable-independent destination, also follow `docs/GOAL.md` §4.4–4.5
+and ADR-0005: gather functions and data dependencies into meaningful native interfaces,
+then compare the same implementation through a reference adapter. Existing address-owned
+state remains checked until replacement ownership/provenance validation is in place.
 
 1. Read it (section 1). Cross-check every constant with `pe_image`.
 2. Check the range against `tools/gate/profile_patches.json`: `python3 tools/gate/check_profile_patches.py`
@@ -126,3 +133,9 @@ Used for hot paths and for the platform boundary; not for everything.
 
 A test must fail for the right reason: when adding one, break the code once and watch it
 fail (that is what the mutant runs are for).
+
+M5 also tests a clean native source build and execution with original binaries and the
+reference runtime unavailable (`docs/ROADMAP.md` M5). Oracle equivalence establishes
+behavior on the compared inputs; it does not establish executable independence or
+maintainable interfaces. REA pseudocode and bounded p-code are analysis evidence, not
+complete compiler input. Preserve unresolved call targets and truncation explicitly.

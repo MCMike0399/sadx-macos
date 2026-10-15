@@ -7,7 +7,11 @@ agents, across many sessions. These rules keep every session pointed at the same
 ## The goal, in one sentence
 
 A native app that plays SADX with the speedrun profile faithfully enough for speedrun
-practice, proven by automated tests (`docs/ROADMAP.md`), not by someone playing it.
+practice, proven by automated tests (`docs/ROADMAP.md`), not by someone playing it, and
+built from readable, maintained source that needs neither `sonic.exe` nor the mod DLLs to
+build or run (assets are imported once from the user's own disc/install; ADR-0005, ADR-0006).
+The emulated hybrid runtime is the development reference that proves the native code right;
+it is not the product.
 
 ## Orientation (5 minutes)
 
@@ -17,7 +21,9 @@ practice, proven by automated tests (`docs/ROADMAP.md`), not by someone playing 
 4. `docs/METHOD.md` — how to analyse the binary (REA + Ghidra), how to port, how to test.
 5. `docs/SOURCES.md` — the inputs (exe, profile DLLs, disc) and their hashes.
 6. `docs/decisions/` — decisions already made; do not relitigate them silently. Add an ADR
-   if you change direction, and say so in your report.
+   if you change direction, and say so in your report. ADR-0005 (native source and executable
+   independence) and ADR-0006 (symbol names, provenance annotations) define the destination.
+   `docs/RESEARCH-native-recompilation.md` is why; `CONTEXT.md` is the vocabulary.
 7. `docs/HANDOFF.md` — the per-step journal (append an entry when you finish a step).
 8. `docs/GOAL.md` — the standing brief `/goal` loads (`.claude/commands/goal.md`): history, how
    REA is used, the ordered next items and the per-step loop.
@@ -30,8 +36,19 @@ practice, proven by automated tests (`docs/ROADMAP.md`), not by someone playing 
   value or masks a mismatch to make a test pass.
 * **Never commit binaries or game assets.** `game/`, DLLs, `.exe`, disc images, large
   reference captures stay local and ignored. `tools/gate/check_repo_hygiene.py` runs in the gate.
-* **One owner per source global.** A `*_at_<hex>` member lives in exactly one struct;
-  `tools/gate/check_global_owners.py` enforces it. Borrow with references/pointers.
+* **Names in identifiers, addresses in annotations** (ADR-0006). New and migrated code is
+  named from the symbol database (`docs/GOAL.md` §4.4; the mod loader's `*New.h` headers first)
+  in the project's style, with `// FUNCTION: SONIC 0x411e30 dsInitInt`-style provenance on the
+  line above. Never put a `sub_<hex>`/`FUN_<hex>` function or a Ghidra `DAT_`/`local_`/`param_`
+  name into `src/`. Once `tools/gate/check_provenance.py` is in the gate, no new `*_at_<hex>`
+  identifier either; until then a new *owner* may keep the legacy form so the existing checker
+  still sees it (behaviour and interfaces are named regardless). Guest addresses, register
+  marshalling and override registration exist only in the reference adapters (`src/guest`,
+  `src/hle`).
+* **One owner per source address.** Legacy `*_at_<hex>` members live in exactly one struct
+  (`tools/gate/check_global_owners.py`); annotated `GLOBAL`s are checked the same way
+  (`check_provenance.py` once it lands). Borrow with references/pointers. Migrate an owner
+  whole (name + annotation + check) or not at all.
 * **Tagged results, explicit unknowns.** Failures carry the source boundary (the
   instruction address) and the fact that was missing. Unported callees are reported, not
   silently skipped, except under the survey policy, which is navigation, not behaviour.
@@ -42,18 +59,68 @@ practice, proven by automated tests (`docs/ROADMAP.md`), not by someone playing 
   profile the loader and mods replace game code; the port implements what actually runs.
 * **No attribution lines in commits** (no Co-Authored-By / Generated-with).
 
+## Toolbox: what to use for what
+
+Paths are relative to the repo; details and command lines are in `docs/METHOD.md` §1–2 and
+`docs/GOAL.md` §4.
+
+| Question | Tool |
+|---|---|
+| What is this address called, what is its signature/struct? | the symbol database (`tools/symbols/`, GOAL §6 item 1); until it exists `grep -i 0x0*ADDR reference/sadx-mod-loader/SADXModLoader/include/*New.h`, then the classic `SADX{Functions,Variables,Structs,Enums}.h`. Treat names as hypotheses; record decisions in `reference/symbols/overrides.tsv` |
+| Pseudocode / dossier / CFG of functions (batch of new questions) | the owned runner `reference/ghidra-live.mjs reference/ghidra-inventory-config.json` (REA → Ghidra, snapshot cached); `batch_decompile` for clusters, `analyze_function` for what you port |
+| One quick or cached question | REA CLI `node reference/tools/rea/node_modules/rea-agents/scripts/rea.mjs function\|decompile\|xrefs\|instructions …` with `--snapshot` (GOAL §4.2); `rea doctor --provider ghidra` before blaming Ghidra |
+| Who reads/writes a global | runner `xrefs`; `tools/analysis/xscan.py ADDR…` for raw `.text` references |
+| Callback/vtable targets Ghidra missed; names into Ghidra | the seed TSV (`address<TAB>function\|label<TAB>name`), then one fresh snapshot (seed digest is part of the profile) |
+| Assembly of a stored result | `tools/analysis/ghidra_asm.py reference/inventory-raw/<label>.json` |
+| Exact bytes / constants | `tools/lib/pe_image.py` (`PEImage(path).read(va, n)`), never a listing |
+| Call graph, sizes, hot paths, FPU sites | `reference/inventory/{functions,hot-paths,fpu-sites}.json` (`tools/inventory/run_inventory.py`) |
+| Does a mod patch this range? | `tools/gate/check_profile_patches.py` (0 UNHANDLED), `tools/gate/profile_patches.json`, mod loader source in `reference/sadx-mod-loader/` |
+| Embedded models/landtables/animations/texlists in the exe | X-Hax sa_tools `GameConfig/PC_SADX` mappings (fetch pinned, ignored; GOAL §4.4); `tools/lib/extract.py` is only a bring-up extractor |
+| Is my native code equal to the original? | oracle: `tests/probes/native_<slug>_probe.cpp` + `tools/oracles/verify_original_<slug>.py`, `make oracle-<slug>`, `make oracles-verdict`, `tools/gate/mutate.py`; overrides: corpus replay + live digests (`make m1`) |
+| Runtime facts (values, order, what actually runs) | the guest (`sadx-app --guest …`, `make m1` targets); HLE assumptions printed by the runtime |
+| Generated tables from source data | `tools/emit/` emitters (check them into the gate like any test) |
+| Gate, status, journal | `make -j10 gate`, `tools/gate/record_gate.py`, `tools/gate/gen_status.py`, `tools/gate/track_reports.py`, `docs/HANDOFF.md` |
+
+Not used: Hopper (ADR-0002), REA live renames (`set_addresses_names` does not survive the
+session and blocks the snapshot save; use the seed file), Ghidra GUI edits (not reproducible).
+
+## Decompiling with an LLM (you): rules that keep it honest
+
+These come from projects that ran agent decompilation at scale (GOAL §4.3) and from this
+project's own sessions.
+
+* **Context first, code second.** Build the context bundle of GOAL §7 step 2 (names, structs,
+  callers/callees and which are native, pseudocode, profile status, a style model) before
+  writing a line.
+* **Pseudocode is evidence, not source.** Rewrite it as named C++ with types; do not paste
+  Ghidra's `DAT_`, `local_`, `param_` or pointer-arithmetic shapes into `src/`. Keep exact
+  arithmetic, operation order and FP width where the oracle says they matter.
+* **One function or one tight cluster per attempt**, with the differential judge (oracle,
+  override-equivalence, replay) as the only definition of "works".
+* **Never game the judge.** Do not edit a tolerance, an expected value, a fixture, a mutant, the
+  oracle harness or the gate scripts to get your own code through; do not narrow a test's
+  inputs to dodge a mismatch. If the judge is wrong, fix it in a separate commit with evidence.
+* **Bound dead ends.** After three failed approaches on one function, stop; record the unknown
+  (evidence id, what was tried, the mismatch) in the handoff and move on.
+* **Independent review** for a recovered system: a fresh subagent reads the evidence and the
+  diff and looks for masked mismatches, invented facts and address-shaped code before the gate.
+* **Parallelise by independent clusters**, never two agents on one owner; each writes its own
+  HANDOFF lines with evidence ids.
+
 ## The loop for any piece of work
 
 1. Read `docs/STATUS.md`; choose the next item of the current milestone (or the item the
    user named). Say which one you are doing.
-2. Analyse with REA's Ghidra provider through the owned runner (`docs/METHOD.md` §1).
+2. Look up names and types (symbol database / mod loader headers), then analyse with REA's
+   Ghidra provider through the owned runner (`docs/METHOD.md` §1, GOAL §7 step 2).
    Hopper is not used (demo build hangs). Raw bytes via `tools/lib/pe_image.py` only for exact
    byte checks and oracle fixtures.
 3. Implement in the right layer (`docs/ARCHITECTURE.md`: cpu < loader < math < engine <
    input < player < game < runtime < guest < hle < platform < apps; include only downward,
    `tools/gate/check_layers.py` enforces it). One slug per module:
    `src/<layer>/<slug>.{hpp,cpp}` + `tests/unit/<slug>.cpp` (+ a `tests/unit/manifest.tsv`
-   line when it takes arguments). An oracle is `tests/probes/native_<slug>_probe.cpp` +
+   line; every test needs one to run in the gate). Semantic names + provenance annotations
+   (ADR-0006). An oracle is `tests/probes/native_<slug>_probe.cpp` +
    `tools/oracles/verify_original_<slug>.py`; the target `oracle-<slug-with-dashes>` and the
    report `build/oracles/<slug>.json` exist by themselves (`tools/oracles/manifest.tsv`
    only when it needs other inputs than the exe and the probe).
