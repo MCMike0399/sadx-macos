@@ -179,8 +179,9 @@ clean:
 # The roadmap's M1 tests (docs/ROADMAP.md), nothing else: guest-imports, guest-dlls (profile-applied at mod init),
 # guest-boot (profile-applied, live overrides), guest-overrides + HLE bridges (override-equivalence), guest-fpu-shims, guest-frames
 # (SEGA logo -> title, determinism, guest-fps), guest-input (input-script determinism), guest-timing (profile cadence) and app-smoke.
-M1_TESTS := guest-imports guest-dlls guest-boot guest-overrides hle-device-bridge hle-heap-bridge hle-task-bridge hle-queue-bridge guest-fpu-shims guest-frames guest-input guest-timing guest-controller
+M1_TESTS := hle-screen-init-bridge guest-imports guest-dlls guest-boot guest-overrides hle-device-bridge hle-heap-bridge hle-task-bridge hle-queue-bridge guest-fpu-shims guest-frames guest-input guest-timing guest-controller
 m1: $(foreach t,$(M1_TESTS),build/$(t)-test) $(OVERRIDE_CORPORA) app-smoke
+	./build/hle-screen-init-bridge-test "$(GAME_EXE)" build/oracles/screen_init.cases.bin
 	./build/guest-imports-test "$(GAME_EXE)"
 	./build/guest-dlls-test $(REFERENCE_GAME_DIR) $(WINDOWS_SYSTEM_DIR)
 	./build/guest-boot-test $(REFERENCE_GAME_DIR) $(WINDOWS_SYSTEM_DIR)

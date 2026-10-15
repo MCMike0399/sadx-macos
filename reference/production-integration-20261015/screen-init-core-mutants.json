@@ -1,0 +1,17 @@
+[
+  [
+    "wrong width flag",
+    "if(flags&0x10){rt.width_at_3d0f9e4=640.0F;",
+    "if(flags&0x20){rt.width_at_3d0f9e4=640.0F;"
+  ],
+  [
+    "wrong doubling flag",
+    "if(flags&0x10000){",
+    "if(flags&0x20000){"
+  ],
+  [
+    "wrong polygon count",
+    "s.count_at_3ce7170=4;",
+    "s.count_at_3ce7170=3;"
+  ]
+]

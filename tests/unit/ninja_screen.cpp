@@ -40,5 +40,18 @@ int main(){try{
     textures.global_id_at_3d0fdf4=1;render.device_at_3d128b0=NinjaRenderDeviceHandle{};
     require(run_screen_polygon_77dfc0(0x3ce7164,4,-1.0F,0x22,polygon).status.failure==NinjaScreenFailure::null_device,"null device");
     require(bool(run_screen_polygon_77dfc0(0x3ce7164,2,-1.0F,0x22,polygon)),"two vertices draw nothing");
+    render.device_at_3d128b0=std::make_shared<NinjaRenderDevice>(NinjaRenderDevice{1});
+    s.invalid_at_3d0fd1c=0;s.points_at_3ce7184[2]=0xfeedbeefU;
+    init.final_inputs_ready=[&](){s.width_at_3d0fa04.reset();return true;};
+    const auto absent_extent=run_screen_init_780c30(0x30,0,1,init);
+    require(!absent_extent&&absent_extent.source_boundary==0x780dee&&absent_extent.required_fact==0x3d0fa04U
+        &&s.points_at_3ce7184[2]==0xfeedbeefU,"missing final extent stops before polygon stores");
+    bool multiplied=false;s.invalid_at_3d0fd1c=1;
+    device.set_viewport=[](const D3D8FrameCommand&,const std::array<std::uint32_t,6>&)->std::optional<std::int32_t>{return 0;};
+    device.set_transform=[&](const D3D8FrameCommand&,std::uint32_t,const D3dxMatrix&)->std::optional<std::int32_t>{d.matrix_at_3d0fd80[0].reset();return 0;};
+    device.multiply_transform=[&](const D3D8FrameCommand&,std::uint32_t,const D3dxMatrix&)->std::optional<std::int32_t>{multiplied=true;return 0;};
+    NinjaViewportRuntime viewport_runtime{s,d,render,device,fp};const auto absent_matrix=run_viewport_refresh_7912e0(viewport_runtime);
+    require(!absent_matrix&&absent_matrix.source_boundary==0x7913c2&&absent_matrix.required_fact==0x3d0fd80U&&!multiplied,
+        "callback-unavailable matrix stops explicitly before multiply");
     std::cout<<"Screen 780c30/7912e0/78dbe0/77dfc0: 640x480 setup, depth, fan and stops passed.\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}

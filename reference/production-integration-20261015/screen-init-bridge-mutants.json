@@ -1,0 +1,17 @@
+[
+  [
+    "stale restored EDI",
+    "else if(const auto live=g.u32(entry-20))g.set_reg(UC_X86_REG_EDI,*live);",
+    "else g.set_reg(UC_X86_REG_EDI,saved_edi);"
+  ],
+  [
+    "missing final extent reload",
+    "state.width_at_3d0fa04=load_float(g,0x3d0fa04);state.height_at_3d0fa08=load_float(g,0x3d0fa08);",
+    "/* omitted final extent reload */"
+  ],
+  [
+    "wrong viewport reserve",
+    "\"SetViewport\",0xa0,{0x3d12780},c.source_call,0x20,true",
+    "\"SetViewport\",0xa0,{0x3d12780},c.source_call,0x1c,true"
+  ]
+]

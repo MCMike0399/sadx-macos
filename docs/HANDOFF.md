@@ -3261,3 +3261,44 @@ The product still needs native boot/title, resources and gameplay recovery.
   pads and full independence unverified. Next ordered work remains M1 recovery/
   override-equivalence, close-out and typed importer; native boot/title still
   needs its own composed proof. Goal remains active.
+
+### Screen-initialization bridge — stopped for user push (2026-10-15)
+
+* Completed the existing 780c30 screen-initialization bridge draft against owned
+  REA evidence in `screen-init-context.json` and the recovery request file: six
+  function dossiers and 33 global xrefs, pinned source and existing symbol names.
+* Native screen/viewport/blend owners remain shared. Added a native final-input
+  transport hook and explicit unavailable extent/matrix failures. Published
+  prefix, viewport, attributes and polygon stores in their source phases/order;
+  refreshed live device/matrix/blend facts after callbacks. Reconstructed outer
+  frames/CMP flags, preserved callback changes to saved EDI/ESI, and retained the
+  source POP ESI/RET epilogue. Stack writes are checked and never value-deduplicated.
+* Targeted verification completed before stopping: existing ninja-screen unit
+  passed; new real-HLE source/native comparison passed all **3,000** corpus rows,
+  **9** callback mutations, **5** backend stops, **6** original-body fallback
+  contexts, **4** foreign-method rejections and **5** input/body mutants. Compared
+  global phases, COM frames/pointers/arguments/HRESULTs, callback registers and
+  integer flags, final integer flags and caller stack. Original-only impostor
+  is rejected by the source-body path assertion. Registered in gate and make m1.
+* Three core mutants caught (width flag 1,516 mismatches, doubling flag 1,441,
+  polygon count 2,806); restored oracle passed. Three bridge-source mutants caught
+  (stale EDI restoration, missing final extent refresh, wrong viewport reserve),
+  restored unit passed. Specs/results tracked in this date's integration folder.
+  Original oracle scripts, fixtures and tolerances unchanged.
+* Final affected oracles completed/tracked: screen_init **pass** 3,000 cases,
+  screen_polygon **pass** 3,000 cases, ninja_render **pass** 8,209 cases. Independent
+  final review found no blocking issues within scope. Exclusions: full physical
+  unmapping/fault-register and FP-exception parity; arbitrary callback CPU/FP
+  state mutation. Unsupported direction, FP-stack/control and caller-frame
+  contexts retain original execution rather than approximating it.
+* **Full gate interrupted at the user's explicit stop request.** The latest log
+  is `build/screen-init-gate.log`; it reached guest-frames after boot, override
+  corpus and FP-shim checks, then make reports `Terminated: 15`. No new successful
+  gate record or STATUS claim was created. Final full replay/controller checks,
+  separate make m1 and the remaining gate completion are unverified on this tree.
+  Last fully recorded gate remains 140. Stopped make and its guest-frames child;
+  OS process inspection confirmed both exited. All subagents were already done.
+* User requested stopping processes and pushing current work to main. The bridge
+  and completed test evidence are committed for that push; do not treat this as
+  M1 or full native-independence completion. No assets/binaries committed. The two
+  pre-existing generic/older Ghidra request drafts remain untracked and untouched.

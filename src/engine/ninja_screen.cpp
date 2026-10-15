@@ -48,7 +48,7 @@ struct Viewport:Base {
         {D3dxMatrix m{};for(std::size_t i=0;i<16;++i)m[i]=need(s.projection_at_3d129c0[i],0x7913ad,0x3d129c0+4*static_cast<std::uint32_t>(i));
             const auto c=device(rt.render,0x79139e,0x7913a3,0x7913ad);
             issued(rt.device.set_transform?rt.device.set_transform(c,3,m):std::nullopt,bool(rt.device.set_transform),0x7913ad);}
-        {D3dxMatrix m{};for(std::size_t i=0;i<16;++i)m[i]=*d.matrix_at_3d0fd80[i];
+        {D3dxMatrix m{};for(std::size_t i=0;i<16;++i)m[i]=need(d.matrix_at_3d0fd80[i],0x7913c2,0x3d0fd80+4*static_cast<std::uint32_t>(i));
             const auto c=device(rt.render,0x7913b3,0x7913b8,0x7913c2);
             issued(rt.device.multiply_transform?rt.device.multiply_transform(c,3,m):std::nullopt,bool(rt.device.multiply_transform),0x7913c2);}
     }
@@ -85,11 +85,15 @@ struct ScreenInit:Base {
         blend(0,8);blend(1,6);
         rt.word_at_3d0f840=0xffffffffU;rt.word_at_3d0f9c4=0;          // 77ff70(-1, 0)
         rt.callbacks.count_at_3ce712c=0;                                // 780090
-        const auto width=float_bits(*s.width_at_3d0fa04),height=float_bits(*s.height_at_3d0fa08);
+        if(rt.final_inputs_ready&&!rt.final_inputs_ready())fail(NinjaScreenFailure::unknown_state,0x780dee);
+        const auto width=float_bits(need(s.width_at_3d0fa04,0x780dee,0x3d0fa04));
+        const auto height=float_bits(need(s.height_at_3d0fa08,0x780df4,0x3d0fa08));
+        s.points_at_3ce7184[2]=width; // source stores this before the pool/colour clears
         rt.pool_at_3ce71b0=0;rt.size_at_3ce71a4=0;
         for(auto& c:rt.clear_colors_at_3ce7174)c=0;
-        s.points_at_3ce7184={0u,0u,width,0u,width,height,0u,height};
+        s.points_at_3ce7184[0]=0;s.points_at_3ce7184[1]=0;s.points_at_3ce7184[3]=0;s.points_at_3ce7184[6]=0;
         s.points_at_3ce7164=0x3ce7184;s.colors_at_3ce7168=0x3ce7174;s.count_at_3ce7170=4;
+        s.points_at_3ce7184[4]=width;s.points_at_3ce7184[5]=height;s.points_at_3ce7184[7]=height;
     }
 };
 struct Depth:Base {

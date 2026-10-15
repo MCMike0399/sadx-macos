@@ -1,0 +1,23 @@
+{
+  "bridge": [
+    {
+      "name": "stale restored EDI",
+      "caught": true,
+      "exit_status": 1,
+      "diagnostic": "mutation 6: final register 23"
+    },
+    {
+      "name": "missing final extent reload",
+      "caught": true,
+      "exit_status": 1,
+      "diagnostic": "mutation 2: written globals"
+    },
+    {
+      "name": "wrong viewport reserve",
+      "caught": true,
+      "exit_status": 1,
+      "diagnostic": "corpus case 1: COM source stack phase 0 word 3 source 1719109785 native 1432778632"
+    }
+  ],
+  "restored_exit_status": 0
+}

@@ -67,6 +67,9 @@ struct NinjaScreenInitRuntime {
     std::optional<std::uint32_t>& word_at_3d0f840;std::optional<std::uint32_t>& word_at_3d0f9c4; // 77ff70 (NinjaSpriteQueueRuntime)
     std::optional<std::uint32_t>& pool_at_3ce71b0;std::optional<std::uint32_t>& size_at_3ce71a4;   // NinjaSystemInitState
     std::array<std::optional<std::uint32_t>,4>& clear_colors_at_3ce7174;                          // GameViewState
+    // Reference transport may publish preceding stores and refresh the two
+    // final extent facts after device callbacks. Native callers need no hook.
+    std::function<bool()> final_inputs_ready={};
 };
 NinjaScreenResult run_screen_init_780c30(std::uint32_t flags,std::uint32_t word_3d0f804,std::uint32_t word_3d0f814,NinjaScreenInitRuntime&);
 struct NinjaDepthRuntime {
