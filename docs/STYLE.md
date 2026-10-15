@@ -101,10 +101,13 @@ links the recovered implementation, or a definition that fails loudly
 (`unimplemented("run_logos")`) so nothing is skipped. When the callee is recovered, its real
 definition replaces the stub, and its annotation becomes `FUNCTION`.
 
-Today's `check_provenance.py` accepts `STUB` only as `MODULE 0xADDR name` (no reason text) on
-a plain function declaration, so put the reason in a comment line above, as shown. ADR-0006's
-`// STUB: … <reason>` form and seam members inside structs need a checker extension first: a
-separate `fix(judge)` change (GOAL §6 item 3).
+`check_provenance.py` accepts `// STUB: MODULE 0xADDR name` with optional reason text after
+the symbol, for example `// STUB: SONIC 0x42cc70 RunSegaSonicTeamLogos awaiting recovery`.
+Ordinary member function declarations inside structs are accepted by the same declaration
+grammar. Callable fields (`std::function`, function pointers) are values and cannot carry
+function-entry annotations. Prefer the plain link-time seams above; member syntax alone is
+not a reason to introduce a service class. STUBs retain symbol validation and the unique
+source-entry rule: annotate the seam declaration once, not its adapter definition too.
 
 ## 6. State
 

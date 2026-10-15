@@ -202,6 +202,9 @@ put the annotation at a single declaration/definition, not both. `DATA` describe
 imported content and does not claim mutable storage. `PATCH` uses module-relative
 provenance, for example `// PATCH: SPEEDRUN +0x10f0 -> 0x7899e0`, immediately
 before the implementing function. Existing profile-patch checks remain separate.
+Only `STUB` permits free-form reason text after the symbol. Its declaration may be a
+free function or an ordinary member function; callable value fields do not qualify.
+Reason text never replaces the symbol lookup or permits duplicate entry annotations.
 
 `reference/symbols/legacy-identifiers.json` freezes existing per-file legacy
 identifier spellings and retains a separate ledger of the original owned ranges.

@@ -3399,3 +3399,28 @@ The product still needs native boot/title, resources and gameplay recovery.
   or binaries committed. Existing two Ghidra request drafts remain untracked and untouched.
 * Next: finish §6.3 with the separate provenance STUB grammar change and symbol lookup /
   context-bundle tools, then the tamper-evident judge. Goal remains active.
+
+### 2026-10-15 — GOAL §6.3 STUB provenance grammar (track R, gate 142)
+
+* Separate judge change required by GOAL §6.3/ADR-0006; evidence is
+  `production-integration-20261015/stub-provenance-142-gate.json` and the fixture diff.
+  No recovered behavior changed; no new REA evidence needed for this grammar extension.
+* STUB permits optional reason text after its database symbol. Ordinary member functions
+  are explicitly allowed and tested; callable value fields remain invalid. The plain
+  link-time seam remains the preferred STYLE model. Documented the rule in STYLE/METHOD.
+* Preserved symbol/module/kind validation, source-entry uniqueness, other annotation
+  grammars, GLOBAL extent/overlap checks and legacy ownership. New fixtures check free and
+  member functions, reasons, invalid symbols/kinds/modules, callable fields, duplicate
+  STUB/FUNCTION entries and rejection of free text on other annotation kinds.
+* Before extension: new fixtures produced six failures (`build/stub-grammar-before.log`).
+  After: all 14 provenance tests and all **29 Python tests** pass. Current provenance:
+  159,680 byte identities, zero errors; legacy ownership 159,630 bytes, zero overlaps.
+* Full gate **rc 0**, **128 native programs / 29 Python tests**. 7,228-frame determinism,
+  unchanged 600 override digests, 71,115 override comparisons with every mutant caught,
+  900-frame controller parity, 63 FPS title cadence; host 78.9 FPS. Code and fixtures
+  remained unchanged throughout this gate. Readability counts unchanged (233 files).
+* Not run: standalone oracles, separate `make m1`, four unregistered tests. Physical pads,
+  Windows parity, native boot/title and full independence remain unverified. Grammar is
+  deliberately restricted, not a C++ parser. Existing Ghidra request drafts untouched.
+* Next: remaining §6.3 lookup/context-bundle tools, then §6.4 tamper-evident judge.
+  Goal remains active.

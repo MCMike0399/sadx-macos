@@ -3,7 +3,9 @@
 
 GLOBAL annotations require an explicit source-byte size (native sizeof is not the
 32-bit game's layout). Annotate one owning declaration per line. FUNCTION,
-LIBRARY and STUB identify one implementation per source entry. DATA describes
+LIBRARY and STUB identify one declaration/implementation per source entry. STUB
+permits optional reason text after the symbol and ordinary member functions;
+callable value fields are not function declarations. DATA describes
 imported content, not mutable storage. PATCH identifies a module-relative hook.
 This is a deliberately restricted declaration grammar, not a C++ parser; ambiguous
 annotated declarations fail instead of being assigned a guessed width/owner.
@@ -170,11 +172,19 @@ def check(root, database, baseline):
                     errors.append(f'{location}: duplicate PATCH also at {patches[key]}')
                 patches[key] = location
                 continue
-            match = re.fullmatch(r'([A-Z0-9]+)\s+(0x[0-9a-fA-F]+)\s+(\S+)(?:\s+size=(0x[0-9a-fA-F]+|[0-9]+))?', body)
+            if kind == 'STUB':
+                match = re.fullmatch(
+                    r'([A-Z0-9]+)\s+(0x[0-9a-fA-F]+)\s+(\S+)(?:\s+\S.*)?', body.strip())
+            else:
+                match = re.fullmatch(r'([A-Z0-9]+)\s+(0x[0-9a-fA-F]+)\s+(\S+)(?:\s+size=(0x[0-9a-fA-F]+|[0-9]+))?', body)
             if not match:
                 errors.append(f'{location}: malformed {kind}')
                 continue
-            module, address, name, extent = match.groups()
+            if kind == 'STUB':
+                module, address, name = match.groups()
+                extent = None
+            else:
+                module, address, name, extent = match.groups()
             key = (module, int(address, 16))
             symbol = index.get(key)
             candidates = ([symbol] + symbol.get('alternatives', [])) if symbol else []

@@ -134,6 +134,32 @@ std::uint32_t& borrowed_at_900100;
                     errors = self.run_check('// ' + annotation + '\n' + declaration)
                     self.assertTrue(any('function declaration' in e for e in errors))
 
+    def test_stub_reason_and_member_function(self):
+        for reason in ['', ' awaiting native recovery', ' calls reference adapter; native fails loudly']:
+            annotation = '// STUB: SONIC 0x401000 Tick' + reason + '\n'
+            for declaration in ['void tick();', 'struct Seams {\n' + annotation + 'void tick();\n};']:
+                source = declaration if declaration.startswith('struct') else annotation + declaration
+                with self.subTest(reason=reason, declaration=declaration):
+                    self.assertEqual(self.run_check(source), [])
+
+    def test_stub_reason_cannot_hide_invalid_symbol_or_declaration(self):
+        for declaration in ['std::function<void()> tick;', 'void (*tick)();', 'int tick;']:
+            errors = self.run_check('// STUB: SONIC 0x401000 Tick unrecovered\n' + declaration)
+            self.assertTrue(any('function declaration' in e for e in errors))
+        for body in ['SONIC 0x401000 Invented waiting for recovery',
+                     'SONIC 0x900000 Counter waiting for recovery',
+                     'INPUT 0x401000 Tick waiting for recovery']:
+            self.assertTrue(any('absent from' in e for e in self.run_check(
+                '// STUB: ' + body + '\nvoid tick();')))
+
+    def test_stub_reason_preserves_other_grammar_and_unique_entry(self):
+        stub = '// STUB: SONIC 0x401000 Tick unrecovered\nvoid tick();\n'
+        for duplicate in [stub, '// FUNCTION: SONIC 0x401000 Tick\nvoid tick() {}\n']:
+            self.assertTrue(any('duplicate source entry' in e for e in self.run_check(stub + duplicate)))
+        for kind in ['FUNCTION', 'LIBRARY', 'GLOBAL', 'DATA']:
+            self.assertTrue(any('malformed' in e for e in self.run_check(
+                '// ' + kind + ': SONIC 0x401000 Tick free text\nvoid tick();')))
+
     def test_commented_global_is_not_an_owner(self):
         self.assertEqual(self.run_check('/*\n// GLOBAL: SONIC 0x900000 Counter size=4\nint counter;\n*/'), [])
 
