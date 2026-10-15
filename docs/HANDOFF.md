@@ -2842,3 +2842,70 @@ endpoints converted to exclusive ends, hashed through PEImage. 0 UNHANDLED overl
   and physical pads unverified. No game assets committed. Remaining list
   **24 + 3** in GOAL section 6. Next: device-backed 77dfc0/7912e0 or another frame
   owner; the collision matrix transport now has an explicit source-state seam.
+
+### M1 viewport-refresh override 7912e0 (gate 135, 2026-10-14)
+
+Fresh owned REA/Ghidra, pinned sonic.exe 6b0937ca…24cd74,
+`reference/ghidra-screen-bridge-requests.json`:
+77dfc0 `ev_d26d2c1c482f3b94c1b937fe8be3bc614690127ac47519c3c3fc635121fecd0a`;
+7912e0 `ev_8c266aa5d123e45b98f46a587228313a2152f9837da72dfa760a053c08c18cea`.
+Runner closed rc 0. 77dfc0 remains unbound: its entry is replaced by the loader's
+UI-scaling wrapper, while BeginScene calls an unhooked copy. A direct override
+would bypass the pinned profile; its relocated entry needs a bridge that retains
+the wrapper. 7912e0 is unpatched and is this step's bound screen owner.
+
+* **47 process entries.** The existing viewport owner runs against live reset flag,
+  viewport, source matrix and projection. Copy/rectangle/reset-flag stores flush
+  once before the first COM call. After callbacks, reload projection/multiply
+  matrix values and the live device; do not write the initial prefix again.
+  The device bridge now accepts verified COM argument vectors, supporting
+  SetViewport's two stdcall arguments alongside the transform methods' three.
+  No guest-heap allocation and no guest-pointer casts.
+* **Source ABI/observations:** COM frames are entry ESP-0x18 for SetViewport
+  (791398 -> 79139e), and ESP-0x1c for SetTransform/MultiplyTransform
+  (7913ad -> 7913b3, 7913c2 -> 7913c8). Calls use the real global pointers
+  3d12780, 3d129c0 and 3d0fd80. New calls expose the source ESP and EAX/vtable
+  register while executing the verified synchronous HLE body. ESI/EDI advance
+  through the 16-dword copy, then the original POP epilogue restores them.
+  The initial PUSH ECX word is reused for FILD of height-1, so final ECX is
+  height-1, not the incoming ECX. Defined integer flags match; AF after TEST
+  is undefined and not compared. HRESULTs, including failures, are ignored as
+  in the source, while the last receipt remains in EAX.
+* **Directions/limits:** DF=1 or a nonempty incoming x87 stack retains original
+  execution after the first PUSH. DF=1 is tested; nonempty-stack fallback and
+  unmasked-x87-exception stops were not separately tested. Invalid flag !=1
+  executes the original CMP/no-op epilogue and needs no device. Stop-path full
+  CPU register details are not claimed; compared failure effects are completion,
+  global prefix, callback snapshots and COM log.
+* **Corpus/oracle:** screen_init now exports its 68-word inputs as
+  screen_init.cases.bin, in OVERRIDE_CORPORA. Original 780c30 composition still
+  reruns **pass**, 3,000 cases, 0 value/state/COM-trace mismatches; report tracked.
+  That oracle does not compare FP exception flags. Viewport shadow runs the
+  actual 7912e0 independently on all 3,000 inputs plus 20 explicit callback/stop
+  cases and one backwards-copy case: **3,021** equivalent. Compared globals,
+  device viewport/matrix bytes, COM targets/arguments/returns, source call-frame
+  ESP, GPRs, reset/rectangle/matrix snapshots, x87 control/stack/condition bits,
+  final EAX/ESP and register leftovers. A source-body hook rejects an
+  always-original fake override.
+* **Mutants:** core 3/3 caught (reset predicate, missing right-edge minus one,
+  projection state), restored pass. Four input/body mutants caught (reset flag,
+  viewport width, copied matrix word, original-only override). Three bridge
+  source mutants caught (wrong viewport frame, stale post-callback device,
+  duplicate prefix flush); restored test rc 0. The duplicate-flush mutation is
+  explicitly scoped to viewport_refresh because another helper has the same
+  guard text. Three foreign COM slots rejected with the prefix preserved.
+  Tests start both guests with identical registers/flags; the foreign-method
+  fixture explicitly clears DF after its backwards-copy case.
+* **Gate:** `reference/production-integration-20261014/viewport-refresh-135-gate.json`,
+  actual rc 0, 126 native programs and four Python tests. Boot identical with the
+  new entry reached once (22,030 HLE calls; 119/119 active patches). Full 7,228-frame
+  intro/title determinism, first 600 overridden digests and 900-frame controller
+  plain/native replay match. Host 80.5 FPS; title 15.873 ms; app-smoke 120 frames.
+  7912e0 fires **600x** through frame 600, but reset flag=1 and native-supported
+  refresh contexts both occur **0x**. Live arithmetic refresh remains unverified;
+  these live calls prove the no-op path. STATUS regenerated.
+* **Limits/skips:** other standalone oracles not rerun; aggregate still 48 pass /
+  46 partial / 9 fail / 1 missing, oracles-verdict rc 2 for existing failures.
+  Separate make m1 and unregistered metal-sprite, metal-sprite-composition,
+  metal-texture and player-task not run. Windows parity/physical pads unverified.
+  No game assets committed. Remaining list **23 + 3** in GOAL section 6.

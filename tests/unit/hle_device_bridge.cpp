@@ -2,6 +2,7 @@
 #include "hle/hle_process.hpp"
 #include "guest/fpu_shims.hpp"
 #include <array>
+#include <unicorn/unicorn.h>
 #include <algorithm>
 #include <cstring>
 #include <fstream>
@@ -20,7 +21,7 @@ struct Fixture {
     bool mapped_blend=true,mapped_device=true;unsigned calls=0,mutation=0,fail_at=0;std::vector<std::array<std::uint32_t,32>> dispatch_observed;std::vector<std::array<std::uint32_t,396>> fog_observed;
     std::vector<std::pair<std::optional<std::uint32_t>,std::optional<std::uint32_t>>> observed;
     std::vector<std::array<std::uint32_t,6>> range_observed;
-    std::uint32_t receipts[2]={};std::uint16_t cw=0x27f;bool argument_mutant=false;
+    std::uint32_t receipts[2]={};std::uint16_t cw=0x27f;bool argument_mutant=false,viewport_test=false;unsigned viewport_mutation=0,viewport_fail=0,viewport_calls=0,viewport_source_bodies=0,viewport_bridge_mutant=0;std::vector<std::array<std::uint32_t,54>> viewport_observed;
     Fixture(const ExecutableImage& image,bool native){
         std::string error;p=HleProcess::create(".","build/device-bridge-overlay",&error);require(p!=nullptr,error);require(p->map_main(image,&error),error);
         auto& g=p->guest();auto sites=load_fpu_sites("reference/inventory/fpu-sites.json");
@@ -63,13 +64,46 @@ struct Fixture {
                 return result;
             };p->hle().add("com:IDirect3DDevice8",name,method);
         }
+        for(const auto* name:{"SetViewport","SetTransform","MultiplyTransform"}){
+            auto method=*p->hle().find("com:IDirect3DDevice8",name);const auto body=method.body;
+            method.body=[this,body,name](HleCall& c){
+                if(!viewport_test)return body(c);
+                const bool viewport=std::string(name)=="SetViewport";
+                std::array<std::uint32_t,54> observed{};
+                observed[0]=c.guest.u32(0x3d0fd1c).value_or(0xdeadbeef);
+                c.guest.read(0x3d0fd20,observed.data()+1,16);c.guest.read(0x3d0fd80,observed.data()+5,64);
+                c.guest.read(0x3d129c0,observed.data()+21,64);c.guest.read(0x3d12780,observed.data()+37,24);
+                observed[43]=c.guest.esp();observed[44]=c.guest.reg(UC_X86_REG_EAX);observed[45]=c.guest.reg(UC_X86_REG_ECX);
+                observed[46]=c.guest.reg(UC_X86_REG_EDX);observed[47]=c.guest.reg(UC_X86_REG_ESI);observed[48]=c.guest.reg(UC_X86_REG_EDI);
+                observed[49]=c.guest.reg(UC_X86_REG_EFLAGS)&0x8c5U;
+                observed[50]=c.guest.u32(c.guest.esp()+(viewport?0x18U:0x1cU)-4).value_or(0xdeadbeef);
+                observed[51]=c.guest.fpu_status()&0x7f00U;observed[52]=c.guest.reg(UC_X86_REG_FPCW);observed[53]=c.guest.reg(UC_X86_REG_FPTAG);
+                viewport_observed.push_back(observed);
+                const auto result=body(c);++viewport_calls;
+                if(viewport_calls==1){
+                    if(viewport_mutation==1)c.guest.set_u32(0x3d128b0,devices[1]);
+                    if(viewport_mutation==2){c.guest.set_u32(0x3d129c0,*c.guest.u32(0x3d129c0)^1U);c.guest.set_u32(0x3d0fd1c,1);}
+                    if(viewport_mutation==4)c.guest.set_u32(0x3d128b0,0);
+                }
+                if(viewport_calls==2&&viewport_mutation==3)c.guest.set_u32(0x3d0fd80,*c.guest.u32(0x3d0fd80)^1U);
+                if(viewport_fail==viewport_calls)c.guest.stop("viewport backend unavailable");
+                return viewport_calls%2?0x80004005U:result; // source ignores HRESULTs
+            };p->hle().add("com:IDirect3DDevice8",name,method);
+        }
         for(const auto at:{0x77ecb7U,0x77eccaU,0x78753aU})
             require(g.add_instruction_hook(at,[this](X86Guest& gg,std::uint32_t pc){if(boundary==pc)gg.stop("declared port boundary");return false;},&error),error);
+        require(g.add_instruction_hook(0x7912ee,[this](X86Guest&,std::uint32_t){++viewport_source_bodies;return false;},&error),error);
         if(native)for(auto entry:device_overrides(*p)){
             const auto bridge=entry.bridge;const auto index=entry.address==0x7949b0||entry.address==0x781250||entry.address==0x791170||entry.address==0x794e40?0U:1U;
             const auto initialize=entry.address==0x794ec0;const auto disable=entry.address==0x411b40,enable=entry.address==0x411af0;
             require(g.add_override(entry.address,[this,bridge,index,initialize,disable,enable](X86Guest& guest){
                 if(argument_mutant){if(disable)guest.set_u32(0x3d12798,0);else if(enable)guest.set_u32(0x3b1117c,1);else if(initialize)guest.set_u32(0x3d127e4,guest.u32(0x3d127e4).value_or(0)^0x100000);else{const auto at=guest.esp()+4+4*index;guest.set_u32(at,guest.u32(at).value_or(0)^1);}}
+                if(viewport_test&&viewport_bridge_mutant&&guest.eip()==0x7912e0){
+                    if(viewport_bridge_mutant==1)guest.set_u32(0x3d0fd1c,0);
+                    if(viewport_bridge_mutant==2)guest.set_u32(0x3d12788,*guest.u32(0x3d12788)^1U);
+                    if(viewport_bridge_mutant==3)guest.set_u32(0x389d318,*guest.u32(0x389d318)^1U);
+                    if(viewport_bridge_mutant==4){const auto esp=guest.esp();guest.set_u32(esp-4,guest.reg(UC_X86_REG_ECX));guest.set_reg(UC_X86_REG_ESP,esp-4);guest.tail_redirect(0x7912e1);return 0U;}
+                }
                 return bridge(guest);},&error),error);
         }
     }
@@ -79,7 +113,7 @@ struct Fixture {
         if(!mapped_device){require(g.map(0x3d12000,4096,false,&e),e);mapped_device=true;}
         if(!blend_known){require(g.unmap(0x3ab9000,4096,&e),e);mapped_blend=false;}
         if(!device_known){require(g.unmap(0x3d12000,4096,&e),e);mapped_device=false;}
-        p->d3d8.transforms.clear();p->d3d8.render_states.clear();p->d3d8.render_calls=0;p->hle().clear_log();calls=0;observed.clear();range_observed.clear();dispatch_observed.clear();fog_observed.clear();boundary=mutation=fail_at=0;argument_mutant=false;cw=0x27f;receipts[0]=receipts[1]=0;
+        p->d3d8.transforms.clear();p->d3d8.render_states.clear();p->d3d8.render_calls=0;p->hle().clear_log();calls=0;observed.clear();range_observed.clear();dispatch_observed.clear();fog_observed.clear();boundary=mutation=fail_at=0;argument_mutant=false;viewport_test=false;viewport_mutation=viewport_fail=viewport_calls=viewport_source_bodies=viewport_bridge_mutant=0;viewport_observed.clear();cw=0x27f;receipts[0]=receipts[1]=0;
     }
 };
 void compare(Fixture& a,Fixture& b,std::uint32_t entry,const std::vector<std::uint32_t>& args,bool mutant=false){
@@ -149,6 +183,66 @@ int main(int argc,char** argv){try{
         std::array<std::uint32_t,128> source_table{},native_table{};original.p->guest().read(0x3b10f78,source_table.data(),512);native.p->guest().read(0x3b10f78,native_table.data(),512);require(source_table==native_table,"generated fog table");
         if(c[0]==0)++fog_init_cases;else if(c[0]==3)++fog_table_cases;else if(c[0]==2)++fog_generate_cases;else ++fog_switch_cases;
     }
+    const auto screen=corpus(std::string(argv[2])+"/screen_init.cases.bin",68);
+    std::size_t viewport_cases=0;
+    const auto check_viewport=[&](const std::uint32_t* c,unsigned mutation,unsigned fail,bool direction=false,unsigned mutant=0){
+        for(auto* f:{&original,&native}){
+            f->reset();f->viewport_test=true;f->viewport_mutation=mutation;f->viewport_fail=fail;
+            auto& g=f->p->guest();g.set_reg(UC_X86_REG_EFLAGS,direction?0x402:2);
+            g.set_reg(UC_X86_REG_ESI,0x13579bdf);g.set_reg(UC_X86_REG_EDI,0x2468ace0);g.set_reg(UC_X86_REG_ECX,0x56789abc);g.set_reg(UC_X86_REG_EDX,0x789abcde);g.set_eax(0x31415926);
+            g.set_u32(0x3d128b0,c[45]?f->devices[0]:0);g.set_u32(0x3d0fd1c,c[10]);
+            g.write(0x3d12780,c+4,24);g.write(0x389d318,c+11,64);g.write(0x3d129c0,c+27,64);
+            std::array<std::uint32_t,20> sentinel{};sentinel.fill(0x5eed1234);g.write(0x3d0fd20,sentinel.data(),16);g.write(0x3d0fd80,sentinel.data()+4,64);
+            f->p->d3d8.viewport.reset();
+        }
+        native.viewport_bridge_mutant=mutant;
+        const auto a=original.p->guest().call(0x7912e0,{},std::nullopt,std::nullopt,static_cast<std::uint16_t>(c[0]),600'000'000);
+        const auto b=native.p->guest().call(0x7912e0,{},std::nullopt,std::nullopt,static_cast<std::uint16_t>(c[0]),600'000'000);
+        require(a.completed==b.completed,"viewport completion");
+        require(native.viewport_source_bodies==((c[10]==1&&direction)?1U:0U),"viewport native/original execution path");
+        const auto& l=original.p->hle().log();const auto& r=native.p->hle().log();require(l.size()==r.size(),"viewport COM count");
+        for(unsigned k=0;k<l.size();++k)require(l[k].dll==r[k].dll&&l[k].symbol==r[k].symbol&&l[k].return_address==r[k].return_address
+            &&l[k].arguments==r[k].arguments&&l[k].result==r[k].result,"viewport COM trace");
+        require(original.viewport_observed.size()==native.viewport_observed.size(),"viewport observation count");
+        for(std::size_t call=0;call<original.viewport_observed.size();++call)
+            for(unsigned word=0;word<54;++word)require(original.viewport_observed[call][word]==native.viewport_observed[call][word],
+                "viewport snapshot case "+std::to_string(viewport_cases)+" call "+std::to_string(call)+" word "+std::to_string(word)
+                +" source "+std::to_string(original.viewport_observed[call][word])+" native "+std::to_string(native.viewport_observed[call][word]));
+        for(const auto& [at,size]:std::vector<std::pair<std::uint32_t,unsigned>>{{0x3d0fd1c,4},{0x3d0fd20,16},{0x3d0fd80,64},{0x3d129c0,64}}){
+            std::vector<std::uint8_t> x(size),y(size);original.p->guest().read(at,x.data(),size);native.p->guest().read(at,y.data(),size);
+            require(x==y,"viewport globals "+std::to_string(at));
+        }
+        require(original.p->d3d8.viewport==native.p->d3d8.viewport,"viewport device words");
+        require(original.p->d3d8.transforms.size()==native.p->d3d8.transforms.size(),"viewport transform count");
+        for(const auto& [which,matrix]:original.p->d3d8.transforms){
+            const auto found=native.p->d3d8.transforms.find(which);
+            require(found!=native.p->d3d8.transforms.end()&&std::memcmp(matrix.data(),found->second.data(),64)==0,"viewport transform bytes");
+        }
+        if(a){
+            require(a.eax==b.eax&&a.esp==b.esp,"viewport return ABI");
+            for(const auto reg:{UC_X86_REG_ECX,UC_X86_REG_EDX,UC_X86_REG_ESI,UC_X86_REG_EDI})
+                require(original.p->guest().reg(reg)==native.p->guest().reg(reg),"viewport register leftover");
+        }
+        ++viewport_cases;
+    };
+    for(std::size_t i=0;i<screen.size();i+=68)check_viewport(screen.data()+i,i/68%5,i/68%100==0?1U+(i/68%3):0U);
+    std::array<std::uint32_t,68> viewport_fixture{};std::copy_n(screen.data(),68,viewport_fixture.data());
+    viewport_fixture[0]=0x27f;viewport_fixture[10]=1;viewport_fixture[45]=1;
+    for(unsigned mutation=0;mutation<5;++mutation)for(unsigned fail=0;fail<4;++fail)check_viewport(viewport_fixture.data(),mutation,fail);
+    check_viewport(viewport_fixture.data(),0,0,true);
+    for(unsigned mutant=1;mutant<=4;++mutant){
+        bool caught=false;try{check_viewport(viewport_fixture.data(),0,0,false,mutant);}catch(const std::exception&){caught=true;}
+        require(caught,"viewport input/body mutant survived "+std::to_string(mutant));
+    }
+    for(unsigned offset:{0xa0U,0x94U,0x9cU}){
+        native.reset();auto& g=native.p->guest();g.set_reg(UC_X86_REG_EFLAGS,2);g.set_u32(0x3d0fd1c,1);g.set_u32(0x3d128b0,native.devices[0]);
+        const auto table=g.u32(native.devices[0]);require(bool(table),"viewport vtable");
+        const auto target=g.u32(*table+offset);require(bool(target),"viewport target");g.set_u32(*table+offset,0x10000000);
+        const auto r=g.call(0x7912e0,{});
+        require(!r&&r.error.find("non-HLE")!=std::string::npos&&g.u32(0x3d0fd1c)==0U,"viewport foreign method / prefix");
+        g.set_u32(*table+offset,*target);
+    }
+    std::cout<<"Viewport bridge: "<<viewport_cases<<" corpus/callback/direction cases equivalent; four input/body mutants caught; three foreign methods rejected; source COM frames/registers and callback-time globals match\n";
     const auto view=corpus(std::string(argv[2])+"/ninja_view.cases.bin",37);
     std::size_t view_cases=0,projection_cases=0;
     const std::array<std::pair<std::uint32_t,unsigned>,9> outputs={{{0x3d0f760,64},{0x3d0f980,64},{0x3d0f9e0,4},{0x3d0f808,4},{0x3d0f968,4},{0x3d12960,64},{0x3d129c0,64},{0x389d398,64},{0x389d358,64}}};

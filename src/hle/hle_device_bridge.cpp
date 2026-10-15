@@ -37,21 +37,30 @@ struct RenderBridge {
         render.device_at_3d128b0=std::make_shared<NinjaRenderDevice>(NinjaRenderDevice{identity});
     }
     NinjaRenderCallResult invoke(const NinjaRenderDeviceHandle& native,const char* symbol,std::uint32_t offset,std::uint32_t state,std::uint32_t value,std::uint32_t site,std::uint32_t reserve=0x40){
+        return invoke_arguments(native,symbol,offset,{state,value},site,reserve);
+    }
+    NinjaRenderCallResult invoke_arguments(const NinjaRenderDeviceHandle& native,const char* symbol,std::uint32_t offset,
+        const std::vector<std::uint32_t>& args,std::uint32_t site,std::uint32_t reserve,bool expose_frame=false,int table_register=0){
         auto& g=process.guest();const auto device=guests.find(native->identity);
         if(device==guests.end()){g.stop("device bridge: unknown native device at "+hex(site));return {false,{}};}
         const auto table=g.u32(device->second),target=table?g.u32(*table+offset):std::nullopt;
         const auto* method=process.hle().find("com:IDirect3DDevice8",symbol);
         const auto expected=method?process.hle().trap(g,"com:IDirect3DDevice8",symbol):std::nullopt;
-        if(!method||!target||!expected||*target!=*expected||method->argument_bytes!=12){
+        if(!method||!target||!expected||*target!=*expected||method->argument_bytes!=4*(args.size()+1)){
             g.stop(std::string("device bridge: non-HLE ")+symbol+" target at "+hex(site));return {false,{}};
         }
-        const auto frame=g.esp()-reserve;std::array<std::uint32_t,4> previous{};
-        if(!g.read(frame,previous.data(),sizeof previous)){g.stop("device bridge: unreadable call frame");return {false,{}};}
-        const std::array<std::uint32_t,4> words={site+6,device->second,state,value};
-        if(!g.write(frame,words.data(),sizeof words)){g.stop("device bridge: unwritable call frame");return {false,{}};}
+        const auto esp=g.esp(),frame=esp-reserve;std::vector<std::uint32_t> previous(args.size()+2);
+        if(!g.read(frame,previous.data(),previous.size()*4)){g.stop("device bridge: unreadable call frame");return {false,{}};}
+        std::vector<std::uint32_t> words={site+6,device->second};words.insert(words.end(),args.begin(),args.end());
+        if(!g.write(frame,words.data(),words.size()*4)){g.stop("device bridge: unwritable call frame");return {false,{}};}
+        if(expose_frame){g.set_reg(UC_X86_REG_ESP,frame);g.set_eax(device->second);g.set_reg(table_register,*table);}
         HleCall call(g,frame);const auto receipt=method->body(call);
-        g.write(frame,previous.data(),sizeof previous);
-        process.hle().record({"com:IDirect3DDevice8",symbol,words[0],{words[1],words[2],words[3]},receipt});
+        if(!g.stop_reason()){
+            g.write(frame,previous.data(),previous.size()*4);
+            if(expose_frame)g.set_reg(UC_X86_REG_ESP,esp);
+        }else if(!expose_frame)g.write(frame,previous.data(),previous.size()*4);
+        std::vector<std::uint32_t> arguments={device->second};arguments.insert(arguments.end(),args.begin(),args.end());
+        process.hle().record({"com:IDirect3DDevice8",symbol,words[0],std::move(arguments),receipt});
         g.set_eax(receipt);
         return {!g.stop_reason().has_value(),static_cast<std::int32_t>(receipt)};
     }
@@ -315,8 +324,69 @@ struct FogBridge {
 };
 
 }
+std::uint32_t viewport_refresh(HleProcess& p){
+    auto& g=p.guest();const auto entry=g.esp(),saved_ecx=g.reg(UC_X86_REG_ECX);
+    const auto invalid=g.u32(0x3d0fd1c);
+    if(!invalid){g.stop("viewport bridge: unknown reset flag at 7912e1, 3d0fd1c");return 0;}
+    if(!g.set_u32(entry-4,saved_ecx)){g.stop("viewport bridge: missing saved ECX at 7912e0");return 0;}
+    if(*invalid!=1){g.set_reg(UC_X86_REG_ESP,entry-4);g.tail_redirect(0x7912e1);return 0;}
+    // REP direction / an occupied x87 stack require the original instruction state.
+    if((g.reg(UC_X86_REG_EFLAGS)&0x400U)||g.reg(UC_X86_REG_FPTAG)!=0xffffU){
+        g.set_reg(UC_X86_REG_ESP,entry-4);g.tail_redirect(0x7912e1);return 0;
+    }
+    if((g.reg(UC_X86_REG_FPCW)&0x3fU)!=0x3fU){g.stop("viewport bridge: unmasked x87 exceptions not supplied at 7912f3");return 0;}
+    if(!g.set_u32(entry-8,g.reg(UC_X86_REG_ESI))||!g.set_u32(entry-12,g.reg(UC_X86_REG_EDI))){
+        g.stop("viewport bridge: missing saved registers at 7912fb/7912fc");return 0;
+    }
+    RenderBridge bridge(p);NinjaScreenState state{};NinjaDeviceState device_state{};NinjaScreenDevice methods{};
+    state.invalid_at_3d0fd1c=*invalid;
+    for(unsigned k=0;k<6;++k)device_state.viewport_at_3d12780[k]=g.u32(0x3d12780+4*k);
+    for(unsigned k=0;k<16;++k)device_state.matrix_at_389d318[k]=g.u32(0x389d318+4*k);
+    const auto reload=[&](){
+        for(unsigned k=0;k<16;++k){state.projection_at_3d129c0[k]=g.u32(0x3d129c0+4*k);device_state.matrix_at_3d0fd80[k]=g.u32(0x3d0fd80+4*k);}
+        bridge.refresh();
+    };
+    for(unsigned k=0;k<16;++k)state.projection_at_3d129c0[k]=g.u32(0x3d129c0+4*k);
+    X87Context fp(static_cast<std::uint16_t>(g.reg(UC_X86_REG_FPCW)));bool flushed=false;
+    const auto flush=[&](){
+        if(flushed)return;
+        flush_words(g,0x3d0fd80,device_state.matrix_at_3d0fd80);
+        if(state.invalid_at_3d0fd1c==0U)g.set_u32(0x3d0fd1c,0);
+        const std::optional<float> rectangle[]={device_state.left_at_3d0fd20,device_state.top_at_3d0fd24,device_state.right_at_3d0fd28,device_state.bottom_at_3d0fd2c};
+        for(unsigned k=0;k<4;++k)if(rectangle[k]){std::uint32_t raw;std::memcpy(&raw,&*rectangle[k],4);g.set_u32(0x3d0fd20+4*k,raw);}
+        if(device_state.viewport_at_3d12780[3]){
+            const auto last=*device_state.viewport_at_3d12780[3]-1U;
+            g.set_u32(entry-4,last); // source reused PUSH ECX's word as its FILD temporary
+            const auto flags=((__builtin_popcount(last&255U)&1)?0U:4U)|(last==0?64U:0U)|(last&0x80000000U?128U:0U);
+            g.set_reg(UC_X86_REG_EFLAGS,(g.reg(UC_X86_REG_EFLAGS)&~0x8d5U)|flags);
+        }
+        g.set_fpu_status(static_cast<std::uint16_t>((g.fpu_status()&~0x200U)|(fp.exception_flags()&0x3fU)));
+        g.set_reg(UC_X86_REG_ESI,0x389d358);g.set_reg(UC_X86_REG_EDI,0x3d0fdc0);
+        if(device_state.viewport_at_3d12780[2])g.set_edx(*device_state.viewport_at_3d12780[2]-1U);
+        flushed=true;
+    };
+    methods.set_viewport=[&](const D3D8FrameCommand& c,const std::array<std::uint32_t,6>&)->std::optional<std::int32_t>{
+        flush();const auto r=bridge.invoke_arguments(c.device,"SetViewport",0xa0,{0x3d12780},c.source_call,0x18,true,UC_X86_REG_ECX);
+        if(!g.stop_reason())reload();return r.completed?r.original_hresult:std::nullopt;
+    };
+    methods.set_transform=[&](const D3D8FrameCommand& c,std::uint32_t which,const D3dxMatrix&)->std::optional<std::int32_t>{
+        const auto r=bridge.invoke_arguments(c.device,"SetTransform",0x94,{which,0x3d129c0},c.source_call,0x1c,true,UC_X86_REG_EDX);
+        if(!g.stop_reason())reload();return r.completed?r.original_hresult:std::nullopt;
+    };
+    methods.multiply_transform=[&](const D3D8FrameCommand& c,std::uint32_t which,const D3dxMatrix&)->std::optional<std::int32_t>{
+        const auto r=bridge.invoke_arguments(c.device,"MultiplyTransform",0x9c,{which,0x3d0fd80},c.source_call,0x1c,true,UC_X86_REG_ECX);
+        if(!g.stop_reason())reload();return r.completed?r.original_hresult:std::nullopt;
+    };
+    NinjaViewportRuntime runtime{state,device_state,bridge.render,methods,fp};
+    const auto r=run_viewport_refresh_7912e0(runtime);
+    if(!g.stop_reason())flush();
+    if(!r){if(!g.stop_reason())g.stop("viewport bridge: native boundary "+hex(r.source_boundary));return 0;}
+    g.set_reg(UC_X86_REG_ESP,entry-12);g.tail_redirect(0x7913c8);return 0;
+}
 std::vector<OverrideEntry> device_overrides(HleProcess& p){
     std::vector<OverrideEntry> out;
+    out.push_back({0x7912e0,"ninja_viewport_refresh",{{0x3d0fd1c,4},{0x3d0fd20,16},{0x3d0fd80,64}},
+        [&p](X86Guest&)->std::uint32_t{return viewport_refresh(p);},true});
     out.push_back({0x403180,"ninja_set_projection_range",{{0x3d0f808,4},{0x3d0f968,4},{0x90082c,8},{0x3aad0c0,8}},
         [&p](X86Guest&)->std::uint32_t{return projection_range(p);}});
     for(const auto address:{0x4030d0U,0x77ec60U}){

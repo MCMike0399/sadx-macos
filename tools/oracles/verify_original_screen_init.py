@@ -41,7 +41,7 @@ def main():
     lib=ctypes.CDLL(str(a.native_library.resolve()));fn=lib.sadx_native_screen_init;fn.argtypes=[ctypes.POINTER(ctypes.c_uint32),ctypes.POINTER(ctypes.c_uint32)];fn.restype=ctypes.c_int
     matrix=list(struct.unpack('<16I',image.read(0x389d318,64)));tables=list(struct.unpack('<22I',image.read(0x88ad64,88)))
     rf=lambda rng:struct.unpack('<I',struct.pack('<f',rng.choice([1.0,0.5,-2.0,1.0e-3,3.0e5])*rng.random()))[0]
-    rng=random.Random(0x780c30);bad=[];outcomes={};cases=0
+    rng=random.Random(0x780c30);bad=[];outcomes={};cases=0;corpus=[]
     for n in range(3000):
         c=[0]*68;c[0]=rng.choice([0x7f,0x27f,0x37f,0xc7f,0x47f,0x87f])
         c[1]=rng.choice([0,0x10,0x20,0x30,0x10030,0x10000,0x10010,0x10020,rng.getrandbits(32)]);c[2]=rng.getrandbits(32);c[3]=rng.choice([1,2,3,0,0xffffffff,rng.getrandbits(32)])
@@ -51,6 +51,7 @@ def main():
         for i in range(16):c[11+i]=matrix[i] if rng.random()<0.8 else rng.getrandbits(32);c[27+i]=rf(rng) if rng.random()<0.9 else rng.getrandbits(32)
         c[43]=rng.choice([10000000,3579545,0,rng.getrandbits(32)]);c[44]=rng.choice([0,0,1,rng.getrandbits(32)]);c[45]=int(rng.random()<0.93)
         c[46:68]=tables
+        corpus.append(c.copy())
         out=(ctypes.c_uint32*200)()
         if fn((ctypes.c_uint32*len(c))(*c),out)!=1:raise RuntimeError('Native rejected')
         got=list(out)
@@ -85,6 +86,8 @@ def main():
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={x:sha((pathlib.Path(__file__).resolve().parents[2]/x).read_bytes()) for x in names},
         original_ranges_sha256={'0x780c30-0x780e70':sha(image.read(0x780c30,0x240)),'0x7912e0-0x7913cc':sha(image.read(0x7912e0,0xec)),'0x77ff70':sha(image.read(0x77ff70,0x14)),'0x780090':sha(image.read(0x780090,0xb))},
         cases=cases,source_outcomes=outcomes,mismatch_count=len(bad),mismatches=bad[:20],state_traces_match=not bad,limits=__doc__)
+    path=a.output.with_suffix('.cases.bin');path.write_bytes(b''.join(struct.pack('<68I',*c) for c in corpus))
+    report['corpus']=dict(path=str(path),cases=cases,words_per_case=68,viewport_entry='7912e0')
     a.output.write_text(json.dumps(report,indent=1)+'\n');print(json.dumps(dict(cases=cases,outcome_kinds=len(outcomes),mismatches=len(bad))))
     for b in bad[:3]:print(json.dumps(b))
     return int(bool(bad))

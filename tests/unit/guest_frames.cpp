@@ -21,6 +21,7 @@
 #include <iostream>
 #include <iterator>
 #include <map>
+#include <unicorn/unicorn.h>
 #include <sstream>
 namespace {
 using namespace sadx;
@@ -28,7 +29,7 @@ void require(bool ok,const std::string& why){if(!ok)throw std::runtime_error(why
 struct Hash {std::uint64_t h=1469598103934665603ULL;
     void bytes(const void* p,std::size_t n){const auto* b=static_cast<const std::uint8_t*>(p);for(std::size_t i=0;i<n;++i){h^=b[i];h*=1099511628211ULL;}}
     template<class T>void value(const T& v){bytes(&v,sizeof v);}};
-struct Run {std::vector<std::pair<std::size_t,std::uint32_t>> modes;std::size_t empty_frames=0;std::vector<std::uint64_t> digests;std::vector<std::uint64_t> frame_time_100ns;double seconds=0;std::uint64_t hle_calls=0;std::string stop;FpuShimStats shims;std::map<std::string,std::size_t> override_calls;};
+struct Run {std::vector<std::pair<std::size_t,std::uint32_t>> modes;std::size_t empty_frames=0;std::vector<std::uint64_t> digests;std::vector<std::uint64_t> frame_time_100ns;double seconds=0;std::uint64_t hle_calls=0;std::string stop;FpuShimStats shims;std::map<std::string,std::size_t> override_calls;std::size_t viewport_flag1_calls=0,viewport_native_context_calls=0;};
 Run run(const std::string& dir,const std::string& system,std::size_t extra,std::size_t limit=0){
     std::ifstream f(dir+"/sonic.exe",std::ios::binary);require(bool(f),"cannot read "+dir+"/sonic.exe");
     std::string error;const auto image=ExecutableImage::parse({std::istreambuf_iterator<char>(f),{}},&error);require(bool(image),error);
@@ -39,9 +40,15 @@ Run run(const std::string& dir,const std::string& system,std::size_t extra,std::
     Run r;require(install_fpu_shims(p->guest(),load_fpu_sites("reference/inventory/fpu-sites.json"),r.shims,&error),error);
     if(limit)for(const auto& entry:process_overrides(*p,*image)){
         r.override_calls.emplace(entry.name,0);
-        const auto bridge=entry.bridge;const auto name=entry.name;
-        require(p->guest().add_override(entry.address,[bridge,name,&r](X86Guest& g){
-            ++r.override_calls.at(name);return bridge(g);},&error),error);
+        const auto bridge=entry.bridge;const auto name=entry.name;const auto address=entry.address;
+        require(p->guest().add_override(entry.address,[bridge,name,address,&r](X86Guest& g){
+            ++r.override_calls.at(name);
+            if(address==0x7912e0&&g.u32(0x3d0fd1c)==1U){
+                ++r.viewport_flag1_calls;
+                if(!(g.reg(UC_X86_REG_EFLAGS)&0x400U)&&g.reg(UC_X86_REG_FPTAG)==0xffffU
+                    &&(g.reg(UC_X86_REG_FPCW)&0x3fU)==0x3fU)++r.viewport_native_context_calls;
+            }
+            return bridge(g);},&error),error);
     }
     std::size_t polygons_seen=0,title_frame=0,draws_seen=0,clears_seen=0;std::uint64_t last_time=0;std::chrono::steady_clock::time_point first_present;
     p->on_present=[&](X86Guest& g){
@@ -99,5 +106,6 @@ int main(int argc,char** argv){try{
     std::cout<<"  override calls through frame 600 (including boot):";
     for(const auto& [name,count]:o.override_calls)std::cout<<" "<<name<<" x"<<count;
     std::cout<<'\n';
+    std::cout<<"  viewport flag=1 calls: "<<o.viewport_flag1_calls<<"; native-supported contexts: "<<o.viewport_native_context_calls<<'\n';
     return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}
