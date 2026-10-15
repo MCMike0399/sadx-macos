@@ -287,6 +287,9 @@ comes first, because every later port should copy a readable model, not the lega
    `reference/symbols/legacy-identifiers.json`; 11 named GLOBAL owners; `make
    native-frame-control` with 2,672 frozen cases.
 3. **Readability ratchet and tooling (R).**
+   Formatting, the lexical ratchet, fixture/mutant tests and STATUS metrics landed in the
+   2026-10-15 readability step (see HANDOFF). Next within this item: the separate provenance
+   extension, then the lookup/context-bundle tools. The requirements below remain the scope.
    * Add `.clang-format` (LLVM base, 4 spaces, 100 columns). Apply it to new and migrated files
      only.
    * Add `tools/gate/check_readability.py` to `make check`. In game-tier files it counts hex

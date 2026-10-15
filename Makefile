@@ -167,6 +167,7 @@ check: check-symbols native-frame-control
 	python3 tools/gate/check_layers.py
 	python3 tools/gate/check_global_owners.py
 	python3 tools/gate/check_provenance.py
+	python3 tools/gate/check_readability.py
 	python3 tools/gate/check_profile_patches.py
 	python3 tools/gate/check_repo_hygiene.py
 # The full gate command recorded by tools/gate/record_gate.py (every program built and run, then the checkers).

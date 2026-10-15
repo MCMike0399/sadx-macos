@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "scope": "GOAL 6.3 readability ratchet, no game-code changes",
+  "sha256": {
+    ".clang-format": "889de0c77a6ce473d981be32315a12752c0d7e4f59e40a9fc2e4b7a5fb410e02",
+    "reference/readability-baseline.json": "3654fd31c76525703b0ae04a83019736b6bc848bc7ada6f3ea459e4ccc6c8cd5",
+    "tools/gate/check_readability.py": "9073f92c597025e2b1f64dfe574bcbb1dec99625b06be8f2602d9f6b938c9054",
+    "tests/python/test_readability.py": "8090f2eb23f8c958972e071d94a4d77b99a8062953d456a89ccba2abafc78a3d",
+    "build/readability-final-check.log": "cdbe76b3556fff6bb3745a2b2dcbe25d684e1e30a7330aafcdee9a2ce62e2783",
+    "build/readability-python-tests.log": "256e486d14fee96b8b72b733a7b90051617cfcca134a86f2068432b883c484e7"
+  },
+  "final_make_check_exit_status": 0,
+  "python_tests": 26,
+  "python_exit_status": 0,
+  "readability_fixture_tests": 7,
+  "limits": [
+    "Lexical source metric, not C++ parsing or fidelity proof.",
+    "Baseline/configuration hashes supplement the standard gate source glob.",
+    "Standalone oracles and separate make m1 not rerun."
+  ]
+}

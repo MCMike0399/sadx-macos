@@ -198,9 +198,21 @@ measure.
 
 ## 10. Formatting and files
 
-* `.clang-format` (to be added; LLVM base, 4-space indent, 100 columns) applies to every new
+* `.clang-format` (LLVM base, 4-space indent, 100 columns) applies to every new
   or migrated file. Write one statement per line, and do not chain lambdas on one line. Do not
   mass-reformat unmigrated files, because mutant specs and blame depend on them.
+* `make check` runs `tools/gate/check_readability.py`. It measures code hex literals,
+  address identifiers, `call`/`ret`/`invoke` dispatch helpers with a hex first argument,
+  `goto`, address labels, lines over 120 columns and lines with multiple semicolons outside
+  parentheses. Comments and strings are masked for code counts; line length includes them.
+  These are lexical debt indicators, not a C++ parser or a fidelity verdict. Scope is
+  `src/{cpu,math,engine,input,player,game,runtime,enhancements}` recursively; reference,
+  loader, platform and app code are outside this metric.
+  Per-file allowances in `reference/readability-baseline.json` may only decrease against
+  HEAD; unlisted files have zero allowance. After reducing debt, run
+  `python3 tools/gate/check_readability.py --write-baseline` to lower the tracked allowances.
+  The checker refuses to refresh over an increase. Source archives enforce the supplied
+  baseline; comparing baseline edits against history requires a Git checkout.
 * One public header per system. Keep internal helpers in the `.cpp` or in a `detail`
   namespace. Slug rules are in `docs/ARCHITECTURE.md`.
 * Comments explain why, the original's quirks, and fidelity-relevant ordering. They do not

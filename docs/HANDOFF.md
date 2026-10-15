@@ -3369,3 +3369,33 @@ The product still needs native boot/title, resources and gameplay recovery.
   cited authors' claims; recent repos are marked unverified.
 * Next: GOAL §6 item 3 (readability ratchet, `.clang-format`, lookup and context-bundle
   tools).
+
+### 2026-10-15 — GOAL §6.3 readability ratchet (track R, gate 141)
+
+* Evidence: `production-integration-20261015/readability-141-{gate,evidence}.json`.
+  Infrastructure step using ADR-0007, STYLE, METHOD and current source; no recovered
+  behavior changed and no new REA analysis was needed.
+* Added LLVM/4-space/100-column `.clang-format`, `check_readability.py` in `make check`,
+  tracked per-file baseline and generated STATUS totals. New files have zero allowance;
+  increases in either source counts or baseline counts against HEAD fail. Reference,
+  loader, platform and app paths are excluded. Archive builds enforce the supplied baseline.
+* Seven fixture tests cover annotations/comments/strings, raw strings, character escapes,
+  numeric separators, for headers, nested file scope, schema rejection and CLI mutants.
+  A new hex literal in a clean file, a dirty new file, and a raised baseline are rejected.
+  Counts are lexical heuristics; dispatch counts cover call/ret/invoke helper spellings.
+* Baseline (233 files): 13,465 hex literals; 2,621 address identifiers; 249 address calls;
+  73 goto; 14 address labels; 2,022 lines over 120 columns; 2,846 multi-statement lines.
+  No debt reduction claimed. Scope and all-hex counting differ from the earlier estimate.
+* Full gate rc **0**, **128 native programs / 26 Python tests**; 7,228-frame determinism,
+  first 600 override digests unchanged, 900-frame controller parity, 63 FPS title cadence;
+  host 84.4 FPS. Override comparison: 71,115 cases, every mutant caught. Screen-init bridge's
+  registered 3,000-case test also passes, completing its previously interrupted full gate.
+* First sandboxed gate failed at app launch (illegal instruction); the GUI-enabled rerun
+  passed. A numeric-separator tokenizer fix and quote fixture correction landed during the
+  gate; final `make check` and the complete Python suite passed afterward. Supplementary
+  evidence hashes the baseline/configuration and final check logs; counts were unchanged.
+* Not run: separate `make m1`, standalone oracles, four unregistered tests. Physical pads,
+  Windows parity, native boot/title and full independence remain unverified. No game assets
+  or binaries committed. Existing two Ghidra request drafts remain untracked and untouched.
+* Next: finish §6.3 with the separate provenance STUB grammar change and symbol lookup /
+  context-bundle tools, then the tamper-evident judge. Goal remains active.

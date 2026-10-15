@@ -7,6 +7,7 @@ import glob,json,os,pathlib,re,subprocess,sys,datetime
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 sys.path.insert(0,str(ROOT/'tools/oracles'))
 from verdict import verdict
+from check_readability import snapshot as readability_snapshot, totals as readability_totals
 LAYERS=['cpu','loader','math','engine','input','player','game','runtime','guest','hle','platform','apps']
 def newest(pattern):
     files=sorted(glob.glob(str(ROOT/pattern)),key=os.path.getmtime)
@@ -71,6 +72,14 @@ def main():
     out.append('| Layer | Files | Lines |\n|---|---|---|')
     for a in sorted(layers,key=lambda a:(LAYERS.index(a) if a in LAYERS else 99,a)):out.append(f'| `src/{a}` | {layers[a][0]} | {layers[a][1]} |')
     out.append(f'| total | {sum(v[0] for v in layers.values())} | {sum(v[1] for v in layers.values())} |\n')
+    readable = readability_snapshot(ROOT)
+    out.append('## Readability (current source)\n')
+    out.append(f'Game tier: {len(readable)} files; lexical counts from '
+               '`tools/gate/check_readability.py`, ratcheted against '
+               '`reference/readability-baseline.json`. Reference adapters are excluded.\n')
+    for metric, count in readability_totals(readable).items():
+        out.append(f'* {metric.replace("_", " ")}: {count}')
+    out.append('')
     out.append('## Oracle map\n')
     out.append('One row per `tools/oracles/verify_original_<slug>.py` (`make oracle-<slug-with-dashes>` reruns it; `make oracles` all; tracked report `reference/oracle-reports/<slug>.json`).\n')
     out.append('| Oracle | Probe | Verdict |\n|---|---|---|')
