@@ -16,7 +16,7 @@ int main(){try{
     NinjaScreenDevice device;std::optional<NinjaScreenPolygon> drawn;
     device.set_vertex_shader=[](const D3D8FrameCommand&,std::uint32_t)->std::optional<std::int32_t>{return 0;};
     device.draw_primitive_up=[&](const D3D8FrameCommand&,const NinjaScreenPolygon& p)->std::optional<std::int32_t>{drawn=p;return 0;};
-    GameFrameRendererState renderer{};renderer.frequency_low_at_3d08538=3579545;renderer.frequency_high_at_3d0853c=0;
+    GameFrameRendererState renderer{};renderer.counter_frequency.low=3579545;renderer.counter_frequency.high=0;
     std::optional<float> width;NinjaSpriteProjection projection;NinjaCallbackList callbacks;callbacks.count_at_3ce712c=3;
     std::optional<std::uint32_t> w840,w9c4,pool=9,size=9;std::array<std::optional<std::uint32_t>,4> colors{7u,7u,7u,7u};
     X87Context fp(0x27f);SseContext sse(0x1f80);

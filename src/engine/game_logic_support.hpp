@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <optional>
+#include "engine/game_frame_control.hpp"
 namespace sadx {
 // Raw source namespace, not HID/virtual-key/player-input codes. Only lane0 at
 // base3b0e3e2+3i is consumed; the other two fields keep their independent facts.
@@ -13,10 +14,12 @@ struct GameLogicEdgeState {
     // Neighbouring bytes cleared with the rows by 40f350 (no other known reader).
     std::array<std::optional<std::uint8_t>,2> bytes_at_3b0e3e0;
     std::optional<std::uint8_t> byte_at_3b0e3b9;
+    // Borrow the existing strided byte consumed by the frame soft-reset logic.
+    std::optional<std::uint8_t>& soft_reset_edge() noexcept {return raw_at_3b0e3e2[59][0];}
 };
-struct GameLogicTimingState {
-    std::optional<std::int32_t> word_at_3b11178,word_at_3b1117c,word_at_3b11180;
-    std::optional<std::int32_t> word_at_3b11188,word_at_3b1118c,word_at_3b11198,word_at_3b2a2e4;
+struct GameLogicTimingState : FrameRateModeState {
+    std::optional<std::int32_t> word_at_3b11180;
+    std::optional<std::int32_t> word_at_3b1118c,word_at_3b11198,word_at_3b2a2e4;
 };
 enum class GameLogicSupportFailure {none,unknown_raw_byte,unknown_aggregate_byte,
     unknown_special_byte,unknown_aggregate_special_byte,unknown_timing_word,

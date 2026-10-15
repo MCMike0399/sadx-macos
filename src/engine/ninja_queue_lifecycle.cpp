@@ -29,7 +29,7 @@ NinjaQueueLifecycleResult ninja_queue_reset_407ab0(NinjaQueueLifecycleOwners& o,
     o.words_at_3ab9898=o.words_at_900840;
     o.projection.color_argb_at_3d0f7f0=o.queue_runtime.color_at_3ab9864; // 77ff90(&3ab9864): constant non-null pointer, raw copy
     o.queue_runtime.mode_at_3ab98ac=0;
-    o.timing.word_at_3b1117c=0;o.consumer.count_at_3abd9d4=0;o.consumer.count_at_3abd9dc=0;
+    o.timing.pending_logic_ticks=0;o.consumer.count_at_3abd9d4=0;o.consumer.count_at_3abd9dc=0;
     r.completed=true;return r;
 }
 NinjaQueueLifecycleResult ninja_queue_allocate_408630(NinjaQueueLifecycleOwners& o,std::optional<std::uint32_t> heap,X87Context& fp){

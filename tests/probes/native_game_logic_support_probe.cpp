@@ -12,7 +12,7 @@ extern "C" int sadx_native_game_edges(std::int32_t mode,const std::uint8_t* byte
 }
 extern "C" int sadx_native_game_ticks(const std::int32_t* words,const std::uint8_t* present,std::int32_t* output,std::uint8_t* known,std::uint64_t* diagnostics){
     if(!words||!present||!output||!known||!diagnostics)return -1;sadx::GameLogicTimingState s;
-    std::optional<std::int32_t>* fields[]={&s.word_at_3b11178,&s.word_at_3b1117c,&s.word_at_3b11180,&s.word_at_3b11188,&s.word_at_3b1118c,&s.word_at_3b11198,&s.word_at_3b2a2e4};
+    std::optional<std::int32_t>* fields[]={&s.logic_increment,&s.pending_logic_ticks,&s.word_at_3b11180,&s.frame_multiplier,&s.word_at_3b1118c,&s.word_at_3b11198,&s.word_at_3b2a2e4};
     for(std::size_t i=0;i<7;++i)if(present[i])*fields[i]=words[i];auto r=sadx::calculate_game_logic_ticks(s);diag(r,diagnostics);for(std::size_t i=0;i<7;++i){known[i]=fields[i]->has_value();output[i]=known[i]?**fields[i]:0;}return 0;
 }
 extern "C" const char* sadx_native_game_logic_support_compiler(){return "Clang " __clang_version__ "; ARM64 C++17 O2 source byte edges and signed32 IDIV/INC/IMUL";}

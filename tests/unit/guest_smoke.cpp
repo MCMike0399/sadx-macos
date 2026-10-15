@@ -22,10 +22,10 @@ int main(int argc,char** argv){try{
     for(const auto& c:cases){
         guest->set_u32(0x3d08538,c[0]);guest->set_u32(0x3d0853c,c[1]);guest->set_u32(0x389d7dc,0);guest->set_u32(0x3d084a8,0);guest->set_u32(0x3d084ac,0);
         const auto r=guest->call(0x7899a0,{c[2]});require(bool(r),r.error.c_str());
-        GameFrameRendererState native{};native.frequency_low_at_3d08538=c[0];native.frequency_high_at_3d0853c=c[1];native.frame_multiplier_at_389d7dc=0;native.interval_low_at_3d084a8=0;native.interval_high_at_3d084ac=0;
-        require(bool(set_game_frame_multiplier(static_cast<std::int32_t>(c[2]),native)),"native 7899a0");
-        require(guest->u32(0x389d7dc)==static_cast<std::uint32_t>(*native.frame_multiplier_at_389d7dc),"389d7dc: guest == native");
-        require(guest->u32(0x3d084a8)==*native.interval_low_at_3d084a8&&guest->u32(0x3d084ac)==*native.interval_high_at_3d084ac,"3d084a8/ac: guest == native");
+        GameFrameRendererState native{};native.counter_frequency.low=c[0];native.counter_frequency.high=c[1];native.frame_interval_multiplier=0;native.frame_interval.low=0;native.frame_interval.high=0;
+        require(bool(set_frame_interval_multiplier(static_cast<std::int32_t>(c[2]),native)),"native 7899a0");
+        require(guest->u32(0x389d7dc)==static_cast<std::uint32_t>(*native.frame_interval_multiplier),"389d7dc: guest == native");
+        require(guest->u32(0x3d084a8)==*native.frame_interval.low&&guest->u32(0x3d084ac)==*native.frame_interval.high,"3d084a8/ac: guest == native");
     }
     // An override replaces the guest function: the caller sees what the native owner wrote.
     bool ran=false;

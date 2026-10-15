@@ -106,6 +106,9 @@ controllers: all
 # Unit tests: tests/unit/<name>.cpp -> build/<name-with-dashes>-test against libsadx-core; tests/unit/<name>.mm
 # additionally link libsadx-macos and the frameworks; tests/unit/guest_<name>.cpp link the guest + Unicorn.
 .SECONDEXPANSION:
+# Native frame-control composition deliberately excludes the reference/core archive.
+build/native-frame-control-test: tests/unit/native_frame_control.cpp src/engine/game_frame_control.cpp src/engine/game_frame_control.hpp src/engine/speedrun.cpp src/engine/speedrun.hpp
+	$(CXX) $(CXXFLAGS) -Isrc tests/unit/native_frame_control.cpp src/engine/game_frame_control.cpp src/engine/speedrun.cpp -o $@
 # Apple make 3.81 picks the first matching pattern rule: the guest rule must precede the generic one.
 build/guest-%-test: tests/unit/guest_$$(subst -,_,$$*).cpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -I$(UNICORN_DIR)/include $< $(GUEST_LINK) build/libsadx-core.a -o $@
@@ -157,7 +160,10 @@ symbols:
 .PHONY: symbols check-symbols
 check-symbols: symbols
 	python3 tools/symbols/build_symbol_db.py --check
-check: check-symbols
+.PHONY: native-frame-control
+native-frame-control:
+	python3 tools/gate/check_native_frame_control.py
+check: check-symbols native-frame-control
 	python3 tools/gate/check_layers.py
 	python3 tools/gate/check_global_owners.py
 	python3 tools/gate/check_provenance.py

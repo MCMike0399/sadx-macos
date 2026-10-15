@@ -18,7 +18,7 @@ extern "C" int sadx_native_game_startup(const std::uint8_t* pages,std::size_t si
     Memory m{std::vector<std::uint8_t>(pages,pages+size)};
     sadx::GameLogicEdgeState edges;for(unsigned r=0;r<256;++r)for(unsigned k=0;k<3;++k)edges.raw_at_3b0e3e2[r][k]=m.b(0x3b0e3e2+3*r+k);
     edges.bytes_at_3b0e3e0={m.b(0x3b0e3e0),m.b(0x3b0e3e1)};edges.special_at_3b0e3ba=m.b(0x3b0e3ba);edges.byte_at_3b0e3b9=m.b(0x3b0e3b9);
-    std::optional<std::int32_t> save_phase;sadx::GameFrameInputState input{edges,{},{},save_phase};input.mask_at_3b0e3b8=m.b(0x3b0e3b8);
+    std::optional<std::int32_t> save_phase;sadx::GameFrameInputState input{edges.soft_reset_edge(),{},{},save_phase};input.reset_input_mask=m.b(0x3b0e3b8);
     sadx::GameControllerInitGlobals g;for(unsigned i=0;i<4;++i){g.words_at_3b0e768[i]=m.w(0x3b0e768+4*i);g.words_at_3b0e344[i]=m.w(0x3b0e344+4*i);g.words_at_3b0e9b8[i]=m.w(0x3b0e9b8+4*i);g.bytes_at_3b0e9a4[i]=m.b(0x3b0e9a4+i);}
     for(unsigned i=0;i<5;++i)g.words_at_3b0e990[i]=m.w(0x3b0e990+4*i);
     sadx::GameLogicController tmpl;for(unsigned b=0;b<52;++b)tmpl.write_byte(b,m.b(0x3b0eaa8+b));
@@ -35,7 +35,7 @@ extern "C" int sadx_native_game_startup(const std::uint8_t* pages,std::size_t si
         if(in[0]&&trace.size()==in[0])return sadx::GameLogicOwnerResult{sadx::GameLogicOwnerState::failed,0x123};return sadx::GameLogicOwnerResult{sadx::GameLogicOwnerState::completed,0};};
     const auto r=sadx::run_startup_40c030(rt);
     for(unsigned r2=0;r2<256;++r2)for(unsigned k=0;k<3;++k)m.put8(0x3b0e3e2+3*r2+k,edges.raw_at_3b0e3e2[r2][k]);
-    m.put8(0x3b0e3e0,edges.bytes_at_3b0e3e0[0]);m.put8(0x3b0e3e1,edges.bytes_at_3b0e3e0[1]);m.put8(0x3b0e3ba,edges.special_at_3b0e3ba);m.put8(0x3b0e3b9,edges.byte_at_3b0e3b9);m.put8(0x3b0e3b8,input.mask_at_3b0e3b8);
+    m.put8(0x3b0e3e0,edges.bytes_at_3b0e3e0[0]);m.put8(0x3b0e3e1,edges.bytes_at_3b0e3e0[1]);m.put8(0x3b0e3ba,edges.special_at_3b0e3ba);m.put8(0x3b0e3b9,edges.byte_at_3b0e3b9);m.put8(0x3b0e3b8,input.reset_input_mask);
     for(unsigned i=0;i<4;++i){m.put32(0x3b0e768+4*i,g.words_at_3b0e768[i]);m.put32(0x3b0e344+4*i,g.words_at_3b0e344[i]);m.put32(0x3b0e9b8+4*i,g.words_at_3b0e9b8[i]);m.put8(0x3b0e9a4+i,g.bytes_at_3b0e9a4[i]);}
     for(unsigned i=0;i<5;++i)m.put32(0x3b0e990+4*i,g.words_at_3b0e990[i]);
     for(unsigned rr=0;rr<4;++rr)for(unsigned b=0;b<52;++b)m.put8(0x3b0e9c8+0x34*rr+b,raw[rr]->read_byte(b));

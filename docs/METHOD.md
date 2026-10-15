@@ -143,6 +143,15 @@ not a full C++ parser or proof of behavior.
 
 ### Recovery and verification
 
+The first native composition check is `make native-frame-control`. Its isolated
+build reuses `game_frame_control` and `speedrun` directly and replays the tracked
+numeric frame-control corpus through the existing probe. To regenerate that
+frozen reference intentionally, run
+`$(REFERENCE_PYTHON) tools/oracles/freeze_frame_control.py "$(GAME_EXE)"` (expand
+the Make variables when running directly). This development-only generator needs
+the pinned EXE and Unicorn; the independent checker does not. A corpus change
+requires source evidence and review, not accommodation of a native mismatch.
+
 Used for verified native behavior and reference adapters. For system-level source
 recovery and the executable-independent destination, also follow `docs/GOAL.md` §4.4–4.5
 and ADR-0005: gather functions and data dependencies into meaningful native interfaces,

@@ -16,8 +16,8 @@ int main(){try{
     s.hook_at_3d0f7a4=0;s.hook_at_3d0f7a8=0;s.hook_at_3d0fa30=0;s.argument_at_3d0fa38=0;
     for(auto& h:s.hooks_at_3d08af0)h=0;for(auto& r:s.records_at_3d0fe00)for(auto& w:r)w=0;
     NinjaCallbackList callbacks;callbacks.count_at_3ce712c=1;callbacks.slots_at_3d0fa40={0x77f090};
-    GameFrameRendererState renderer{};renderer.input_callback_at_3d0fa34=&input;
-    GameLogicEdgeState edges;std::optional<std::int32_t> phase=0;GameFrameInputState frame_input{edges,{},{},phase};
+    GameFrameRendererState renderer{};renderer.input_callback=&input;
+    GameLogicEdgeState edges;std::optional<std::int32_t> phase=0;GameFrameInputState frame_input{edges.soft_reset_edge(),{},{},phase};
     std::array<std::uint8_t,88> raw{};for(std::size_t i=0;i<raw.size();i+=4)raw[i]=static_cast<std::uint8_t>(i/4+1);
     const auto tables=decode_ninja_blend_tables(raw.data(),raw.size());
     NinjaRenderState render;render.device_at_3d128b0=std::make_shared<NinjaRenderDevice>(NinjaRenderDevice{1});render.blend_tables=&*tables;
@@ -33,8 +33,8 @@ int main(){try{
     rt.device.get_render_state=[&](const D3D8FrameCommand&,std::uint32_t state){return std::optional<std::uint32_t>{state};};
     // 781010: the keyboard poll callback, then the native input callback.
     require(bool(run_ninja_frame_call(0x781010,rt))&&nested==std::vector<std::uint32_t>{0x77f090}&&g_inputs==1,"callback list and 3d0fa34");
-    renderer.input_callback_at_3d0fa34.reset();require(run_ninja_frame_call(0x781010,rt).required_fact==0x3d0fa34u,"unknown 3d0fa34 stops");
-    renderer.input_callback_at_3d0fa34=nullptr;
+    renderer.input_callback.reset();require(run_ninja_frame_call(0x781010,rt).required_fact==0x3d0fa34u,"unknown 3d0fa34 stops");
+    renderer.input_callback=nullptr;
     callbacks.count_at_3ce712c=2;nested.clear();
     {const auto r=run_ninja_frame_call(0x781010,rt);require(r.failure==NinjaFrameFailure::index_out_of_range&&r.required_fact==0x3d0fa44u&&nested.size()==1,"slot past the registered list");}
     callbacks.count_at_3ce712c=1;

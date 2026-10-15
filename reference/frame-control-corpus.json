@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "row_count": 2672,
+  "input_words": 19,
+  "output_words": 16,
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "unicorn_version": "2.1.4",
+  "corpus_sha256": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",
+  "generator_sha256": {
+    "tools/oracles/verify_original_game_frame_control.py": "aadd134c737e74d26e1d65c35623b13fa6a612092472d2d8ed86dba57b76c2b5",
+    "tools/oracles/freeze_frame_control.py": "d2363d9722a647c00e02805b6b93efdb1b222c165e237d0992034f4969418e88"
+  },
+  "original_ranges_sha256": {
+    "77ff50-77ff5a": "5143b0f8d8a5a6a9283d5915e53e6e4d6f1a8e54f765f1170ccccf3d156eef8a",
+    "411e20-411e2a": "20d3e8dfa444fc04a22b80fea12a4b22c1a0771e57988a55a61df32bbb378eb5",
+    "411e30-411e8d": "e0c74d874422c0d1bce6d255daed04f2c5e017e647c93b057f8ea3dcaed328a4",
+    "7899a0-7899d6": "0a48acf7429b956758b6cd5057ed80f2e746004aae6d325994fc16fc4ade4eb5",
+    "40f010-40f066": "72b8e9716a4adffd6401aabb1d11efa3d09d83beefc941487796566331f5fa4c",
+    "792f60-792f63": "4bc724f3b1d0caf4fe369c18cba3102e6c4ea057f63fe1587e3973134a7f755e",
+    "780069-780087": "e3daa5030d28c663b42aa7b2106e75404a91495949c41f8c4d5470a17b76177d"
+  },
+  "limits": [
+    "Frozen values, optional-fact masks, callback identity and declared availability boundaries only.",
+    "Unused input-callback EAX and FP exception flags are outside this original oracle scope.",
+    "No complete game, physical input or original startup-state independence claim."
+  ]
+}

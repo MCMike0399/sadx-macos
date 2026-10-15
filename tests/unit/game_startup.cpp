@@ -5,7 +5,7 @@
 namespace {
 void require(bool ok,const char* why){if(!ok)throw std::runtime_error(why);}
 struct Fixture {
-    sadx::GameLogicEdgeState edges;std::optional<std::int32_t> save_phase;sadx::GameFrameInputState input{edges,{},{},save_phase};sadx::GameControllerInitGlobals g;sadx::GameLogicController tmpl;
+    sadx::GameLogicEdgeState edges;std::optional<std::int32_t> save_phase;sadx::GameFrameInputState input{edges.soft_reset_edge(),{},{},save_phase};sadx::GameControllerInitGlobals g;sadx::GameLogicController tmpl;
     std::array<std::shared_ptr<sadx::GameLogicController>,4> raw;sadx::GameLogicControllers pointers;sadx::InputModRawRecords mod;
     sadx::AudioStartupState audio;sadx::MenuBlockState menu;sadx::ExitCallbackList exits;std::optional<std::int32_t> mode=7;std::optional<std::uint32_t> w80=1,w78=1,w90=1;
     std::vector<sadx::StartupCall> calls;

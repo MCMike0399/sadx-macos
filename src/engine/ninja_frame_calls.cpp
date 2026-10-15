@@ -46,10 +46,10 @@ struct Operation {
         if(const auto h=need(rt.state.hook_at_3d0f7a4,0x780051,0x3d0f7a4))call(0x78005c,h);
         if(const auto h=need(rt.state.hook_at_3d0f7a8,0x78005e,0x3d0f7a8))call(0x780067,h);
         // 3d0fa34: 77ff50's native callable (411e20) or null.
-        if(!rt.renderer.input_callback_at_3d0fa34)fail(NinjaFrameFailure::unknown_state,0x780069,0x3d0fa34);
-        if(*rt.renderer.input_callback_at_3d0fa34){
+        if(!rt.renderer.input_callback)fail(NinjaFrameFailure::unknown_state,0x780069,0x3d0fa34);
+        if(*rt.renderer.input_callback){
             if(!rt.input)fail(NinjaFrameFailure::missing_owner,0x780072);
-            const auto f=(*rt.renderer.input_callback_at_3d0fa34)(*rt.input);
+            const auto f=(*rt.renderer.input_callback)(*rt.input);
             if(!f)fail(NinjaFrameFailure::input_failed,f.source_boundary);}
         if(const auto h=need(rt.state.hook_at_3d0fa30,0x780074,0x3d0fa30))call(0x780084,h,{},{need(rt.state.argument_at_3d0fa38,0x78007d,0x3d0fa38)});
     }

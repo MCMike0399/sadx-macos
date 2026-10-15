@@ -1,0 +1,98 @@
+{
+  "evidence_id": "ev_2d0e017f462c911d938c8132623f3a9211ff22316be42d52de0975808c47e5c1",
+  "analysis_profile": {
+    "provider": {
+      "id": "rea-workflow",
+      "name": "REA composed investigation workflow",
+      "version": "1"
+    },
+    "parameters": {
+      "upstream_analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "pe",
+          "executable_role": "application",
+          "managed": false,
+          "native_aot_metadata": {
+            "contract_revision": "rtr-9.1-x64-pe-read-only-v3",
+            "source_bytes": 134217728,
+            "work_units": 67108864,
+            "working_memory_bytes": 67108864,
+            "report_bytes": 4194304
+          },
+          "architecture": "x86",
+          "available_architectures": [
+            "x86"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "function_boundary_observations": "ghidra-terminal-call-limitations-v1",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default",
+          "analysis_seeds": {
+            "format": "rea-ghidra-seeds-v1",
+            "path": "/Users/burbujamc/Developer/sadx-macos/build/symbols/rea-seeds.tsv",
+            "configured_path": "/Users/burbujamc/Developer/sadx-macos/build/symbols/rea-seeds.tsv",
+            "sha256": "3c59de92faf87eac44d011a13048a61c487dbb603278c696c2a20205facf05e5",
+            "entries": {
+              "function": 3758,
+              "code": 0,
+              "label": 249003
+            }
+          }
+        },
+        "digest": "6079452b19c888b9db5ab6bdc9ab135db8d040c833a83db9ff87cbf200f32643"
+      },
+      "workflow_revision": 2
+    },
+    "digest": "cbcb1a240dee0b3b65609e27cfe45af6f8afaa853ae67069c9ab27574bee3bd9"
+  },
+  "named_entries": [
+    {
+      "address": "0x411e30",
+      "name": "dsInitInt"
+    },
+    {
+      "address": "0x7899a0",
+      "name": "stHWSetVSync"
+    },
+    {
+      "address": "0x40f010",
+      "name": "UpdateSoftResetFlags"
+    },
+    {
+      "address": "0x411e20",
+      "name": "RunFrameInput"
+    }
+  ],
+  "observed_identifiers": [
+    "FrameMultiplier",
+    "FrameIntervalMultiplier",
+    "SoftResetInputMask",
+    "UpdateSoftResetFlags",
+    "RunFrameInput"
+  ],
+  "raw_result_sha256": "3e732bbde27c8e4bb97bb45299c8578df8e560d63a0289543b1b9f7390ac8dad",
+  "snapshot_sha256": "4ef53e88b87c54069ed8acfe33146a68f3a49c5f6a209000a1822308b77f5d3a",
+  "limits": [
+    "Names are project decisions backed by the pre-rename evidence in frame-control-context.json.",
+    "Decompiler naming verification does not replace differential execution."
+  ]
+}

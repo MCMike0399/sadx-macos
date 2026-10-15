@@ -1,0 +1,153 @@
+{
+  "scope": "Native frame-control pilot; same existing arithmetic/input implementation through reference and native callers.",
+  "evidence": [
+    {
+      "label": "native-frame-411e30",
+      "evidence_id": "ev_65278bae4da5ac3cd7e721a2297d9e0a32c72b5035a5ab6c04bb06ee8b906058",
+      "operation": "analyze_function"
+    },
+    {
+      "label": "native-frame-7899a0",
+      "evidence_id": "ev_f4f34f8384f42255e9d0ad0c3aa71b4820ec639e94978ea07b633083a1080d72",
+      "operation": "analyze_function"
+    },
+    {
+      "label": "native-frame-40f010",
+      "evidence_id": "ev_24bb302b82b123f3d82dde38334007dd967dcea618b46e4aa3d149b2f2d35807",
+      "operation": "analyze_function"
+    },
+    {
+      "label": "native-frame-411e20",
+      "evidence_id": "ev_f90281d7067805e7b5e31db9157188bb48e356e88c9164847ba207f72d8b0288",
+      "operation": "analyze_function"
+    },
+    {
+      "label": "native-frame-77ff50",
+      "evidence_id": "ev_70ef94107ce03c12d52a2ef68ea77e4035acd109448083c26030f330843dc2ba",
+      "operation": "analyze_function"
+    },
+    {
+      "label": "native-frame-global-3b11188",
+      "evidence_id": "ev_25e5fd6e2cfcd3acddebe850c5f1409fff37d04428a1018226eacd5c4efdc96f",
+      "operation": "xrefs"
+    },
+    {
+      "label": "native-frame-global-3b11178",
+      "evidence_id": "ev_52c37e263dca7eb2aefbcd461f88c9792d844349a042a6ad668ac4724c96d495",
+      "operation": "xrefs"
+    },
+    {
+      "label": "native-frame-global-3b1117c",
+      "evidence_id": "ev_dd715d0296da24386fe973f14c67670ee74925363774a39dd890a1bb2fe1a0f1",
+      "operation": "xrefs"
+    },
+    {
+      "label": "native-frame-global-3d08538",
+      "evidence_id": "ev_452501acb290819e1dd6fee632fbfdd7a4953ed52ddb579abc18fb767fd4df4e",
+      "operation": "xrefs"
+    },
+    {
+      "label": "native-frame-global-3d0853c",
+      "evidence_id": "ev_a1c59e38b2993795eb27ab9ea81b4990db236eb634adb1f8de06ce0e316ae714",
+      "operation": "xrefs"
+    },
+    {
+      "label": "native-frame-global-389d7dc",
+      "evidence_id": "ev_3b19172b1c4329e5cda3e645dd3fbf721c6ad8b7dda10df71b3308949a35233b",
+      "operation": "xrefs"
+    },
+    {
+      "label": "native-frame-global-89295c",
+      "evidence_id": "ev_559499cc10a2157e2705b2110039e41cf365c43d5c53d885f3afb436b5e31c44",
+      "operation": "xrefs"
+    },
+    {
+      "label": "native-frame-global-3d084a8",
+      "evidence_id": "ev_abb561ed7c74d573217bcf3ef56cdf57a5533f6be92629db0a7797b02a4328e1",
+      "operation": "xrefs"
+    },
+    {
+      "label": "native-frame-global-3d084ac",
+      "evidence_id": "ev_bc1dd87fe20e3d681968159041c4881dd6a531f79393d26e44049ac9aa67a39f",
+      "operation": "xrefs"
+    },
+    {
+      "label": "native-frame-global-3d08550",
+      "evidence_id": "ev_b95b328eafc673f0bcd85b13f1cee7acc497b559f9d3e67e7a5fd6782fe65816",
+      "operation": "xrefs"
+    },
+    {
+      "label": "native-frame-global-3d0fa34",
+      "evidence_id": "ev_eaa14c28dceaa086e244203f02dab16d65afa2dc4aac35ce4c7a4f3c490c9489",
+      "operation": "xrefs"
+    },
+    {
+      "label": "native-frame-global-3b0eaa0",
+      "evidence_id": "ev_3a32f7bd1df5550f5974303a58c0476209d52338cf58a12ebbaa5ffc560a0b02",
+      "operation": "xrefs"
+    },
+    {
+      "label": "native-frame-global-3b0e3b8",
+      "evidence_id": "ev_417395eebb5831cf76458460f3e54ac59096cb761530b76717abb2756fd15936",
+      "operation": "xrefs"
+    },
+    {
+      "label": "native-frame-global-3b0e493",
+      "evidence_id": "ev_3d9d4cfa531bb30b4f7cf280520997dcd5f0f2ebcca488f4651faf996d6ce677",
+      "operation": "xrefs"
+    },
+    {
+      "label": "native-frame-global-3b291a4",
+      "evidence_id": "ev_13e6914cbb1919bd084109b72579ac69af4a3d06a8cf7ff6d76ccb15142933b6",
+      "operation": "xrefs"
+    }
+  ],
+  "dependencies": [
+    {
+      "source": "dsInitInt -> stHWSetVSync (through 77ed40)",
+      "classification": "native behavior",
+      "implementation": "set_frame_interval_multiplier"
+    },
+    {
+      "source": "dsInitInt -> 77ff50 callback setter",
+      "classification": "native behavior",
+      "implementation": "direct assignment of native input callable; guest token mapping stays in reference adapter"
+    },
+    {
+      "source": "411e20 -> 792f60",
+      "classification": "native behavior",
+      "implementation": "integer XOR EAX return is unused by native callable; scratch register effect retained in adapter"
+    },
+    {
+      "source": "411e20 -> 40f010",
+      "classification": "native behavior",
+      "implementation": "update_soft_reset_flags"
+    },
+    {
+      "source": "Speedrun +10f0 (7899e0 hook)",
+      "classification": "native behavior + platform clock",
+      "implementation": "existing limiter_interval/limiter_elapsed with injected frequency/counter/wait callbacks"
+    },
+    {
+      "source": "all state fields at entry",
+      "classification": "caller supplied facts/initial state",
+      "implementation": "optionals; no EXE load or inferred host values in this slice"
+    },
+    {
+      "source": "strided input edge and save phase",
+      "classification": "borrowed facts from other owners",
+      "implementation": "scalar reference interface; no input-table address in native frame-control module"
+    }
+  ],
+  "style": "Existing verified game_frame_control arithmetic and explicit unavailable-fact results; no algorithm replacement.",
+  "profile": "Existing profile-aware native limiter and adapter coverage; check_profile_patches.py rerun before gate. Other gameplay/profile systems not recovered by this slice.",
+  "source_conflicts": {
+    "3b11188": "FrameMultiplier chosen over vsync_const: dsInitInt stores render ratio and pinned limiter multiplies frequency by it; not a frame counter.",
+    "389d7dc": "FrameIntervalMultiplier chosen over g_CurrentFrame/DeltaTimeMultiplier: stHWSetVSync stores its argument then computes frequency*argument/60; distinct from the limiter FrameMultiplier."
+  },
+  "limits": [
+    "Soft-reset edge/mask names describe their observed role in 40f010; no physical key mapping or broader mask-bit meaning inferred.",
+    "Low/high words remain independently optional to preserve availability and source store-order oracles.",
+    "No assets or binary instructions are required by the native frame-control caller; full native game independence is still open."
+  ]
+}

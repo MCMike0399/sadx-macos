@@ -22,7 +22,7 @@ struct Operation {
     X87Value unsigned_load(std::uint32_t v){auto x=rt.fp.from_int64(static_cast<std::int32_t>(v));if(static_cast<std::int32_t>(v)<0)x=rt.fp.add_float_memory(x,4294967296.0F);return x;}
     void run(){
         auto& s=rt.state;
-        if(!set_game_frame_multiplier(1,rt.renderer))fail(NinjaDeviceFailure::multiplier_failed,0x791616);
+        if(!set_frame_interval_multiplier(1,rt.renderer))fail(NinjaDeviceFailure::multiplier_failed,0x791616);
         if(!s.block_at_3d0fae0.fill(0x3d0fae0,0x200,0))fail(NinjaDeviceFailure::unknown_state,0x79162c,0x3d0fae0);
         rt.frame.device_flags_at_3d1289c=0;
         for(auto& record:rt.frame.records_at_3d0fe00)record[0]=0;

@@ -38,15 +38,15 @@ GameLogicSupportResult calculate_game_logic_ticks(GameLogicTimingState& s){
     GameLogicSupportResult r;
     const auto need=[&](const std::optional<std::int32_t>& v,std::uint32_t site){if(!v){r.failure=GameLogicSupportFailure::unknown_timing_word;r.source_boundary=site;throw Missing{};}return *v;};
     try {
-        if(need(s.word_at_3b11198,0x413920)==0){s.word_at_3b1117c=0;s.word_at_3b1118c=1;r.clamped=false;r.completed=true;return r;}
-        const auto dividend=need(s.word_at_3b11180,0x413929),divisor=need(s.word_at_3b11188,0x41392f);
+        if(need(s.word_at_3b11198,0x413920)==0){s.pending_logic_ticks=0;s.word_at_3b1118c=1;r.clamped=false;r.completed=true;return r;}
+        const auto dividend=need(s.word_at_3b11180,0x413929),divisor=need(s.frame_multiplier,0x41392f);
         if(divisor==0){r.failure=GameLogicSupportFailure::divide_by_zero;r.source_boundary=0x41392f;return r;}
         if(dividend==std::numeric_limits<std::int32_t>::min()&&divisor==-1){r.failure=GameLogicSupportFailure::divide_overflow;r.source_boundary=0x41392f;return r;}
         r.quotient=dividend/divisor;r.incremented_quotient=signed_bits(static_cast<std::uint32_t>(*r.quotient)+1U);
-        const auto factor=need(s.word_at_3b11178,0x41393b);r.product=signed_bits(static_cast<std::uint32_t>(*r.incremented_quotient)*static_cast<std::uint32_t>(factor));
+        const auto factor=need(s.logic_increment,0x41393b);r.product=signed_bits(static_cast<std::uint32_t>(*r.incremented_quotient)*static_cast<std::uint32_t>(factor));
         // Both source stores precede the optional clamp-selector read.
-        s.word_at_3b1117c=*r.product;s.word_at_3b1118c=*r.product;
-        if(*r.product>6){if(need(s.word_at_3b2a2e4,0x413950)==0){s.word_at_3b1117c=6;s.word_at_3b1118c=6;r.clamped=true;}else r.clamped=false;}
+        s.pending_logic_ticks=*r.product;s.word_at_3b1118c=*r.product;
+        if(*r.product>6){if(need(s.word_at_3b2a2e4,0x413950)==0){s.pending_logic_ticks=6;s.word_at_3b1118c=6;r.clamped=true;}else r.clamped=false;}
         else r.clamped=false;
         r.completed=true;return r;
     }catch(Missing){return r;}

@@ -125,7 +125,7 @@ GameModeLeafResult run_game_mode_leaf(std::uint32_t callee,std::optional<std::ui
         case 0x421f80:r.eax=1;break;
         case 0x4f88a0:r.eax=0;break;
         case 0x4221e0:r.eax=0;break; // the "FCLoadFileModule" print is the 51f680 RET
-        case 0x426050:{const auto d=static_cast<std::uint32_t>(op.need(s.timing.word_at_3b11178,0x426056,0x3b11178));
+        case 0x426050:{const auto d=static_cast<std::uint32_t>(op.need(s.timing.logic_increment,0x426056,0x3b11178));
             s.word_at_3b0f13c=static_cast<std::uint32_t>(op.need(s.word_at_3b0f13c,0x426050,0x3b0f13c)+d);r.eax=d;break;}
         case 0x42cea0:s.word_at_3b2a2f0=0;s.word_at_3b2a2f4=0;s.byte_at_3b2a2f8=0;s.byte_at_3b2a2f9=0;s.mode.byte_at_3b2a2fa=0;s.byte_at_3b2a2fb=0;
             s.word_at_3b2a2fc=0;s.half_at_3b2a300=0;s.word_at_3b2b358=0;r.eax=0;break;

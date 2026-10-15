@@ -1,5 +1,6 @@
 #include "guest/override_table.hpp"
 #include "engine/game_frame_control.hpp"
+#include "engine/game_logic_support.hpp"
 #include "engine/ninja_projection_range.hpp"
 #include "engine/ninja_queue_consumer.hpp"
 #include "engine/ninja_frame_calls.hpp"
@@ -25,13 +26,13 @@ template<class T>void store(X86Guest& g,std::uint32_t at,const std::optional<T>&
 std::vector<OverrideEntry> frame_loop_overrides(const ExecutableImage& image){
     std::vector<OverrideEntry> out;
     // 7899a0 (cdecl, multiplier): GameFrameRendererState from 3d08538/3c, 389d7dc, 3d084a8/ac.
-    out.push_back({0x7899a0,"set_game_frame_multiplier",{{0x389d7dc,4},{0x3d084a8,8}},[](X86Guest& g)->std::uint32_t{
+    out.push_back({0x7899a0,"set_frame_interval_multiplier",{{0x389d7dc,4},{0x3d084a8,8}},[](X86Guest& g)->std::uint32_t{
         GameFrameRendererState s{};
-        s.frequency_low_at_3d08538=load<std::uint32_t>(g,0x3d08538);s.frequency_high_at_3d0853c=load<std::uint32_t>(g,0x3d0853c);
-        s.frame_multiplier_at_389d7dc=load<std::int32_t>(g,0x389d7dc);s.interval_low_at_3d084a8=load<std::uint32_t>(g,0x3d084a8);s.interval_high_at_3d084ac=load<std::uint32_t>(g,0x3d084ac);
-        const auto r=set_game_frame_multiplier(static_cast<std::int32_t>(stack_argument(g,0)),s);
+        s.counter_frequency.low=load<std::uint32_t>(g,0x3d08538);s.counter_frequency.high=load<std::uint32_t>(g,0x3d0853c);
+        s.frame_interval_multiplier=load<std::int32_t>(g,0x389d7dc);s.frame_interval.low=load<std::uint32_t>(g,0x3d084a8);s.frame_interval.high=load<std::uint32_t>(g,0x3d084ac);
+        const auto r=set_frame_interval_multiplier(static_cast<std::int32_t>(stack_argument(g,0)),s);
         if(!r){g.stop("override 7899a0: the native port failed");return 0;}
-        store(g,0x389d7dc,s.frame_multiplier_at_389d7dc);store(g,0x3d084a8,s.interval_low_at_3d084a8);store(g,0x3d084ac,s.interval_high_at_3d084ac);
+        store(g,0x389d7dc,s.frame_interval_multiplier);store(g,0x3d084a8,s.frame_interval.low);store(g,0x3d084ac,s.frame_interval.high);
         return 0;}});
     // 7815e0 (cdecl, near, far): writes 3d0f808/3d0f968.
     const float negative_one=as_float(image.u32(0x7dcb0c).value_or(0)),limit=as_float(image.u32(0x7dce50).value_or(0));
@@ -109,7 +110,7 @@ std::vector<OverrideEntry> startup_overrides(){
     // covers the whole page so clearing the two trailing row bytes is detected.
     out.push_back({0x40f350,"clear_input_edges",{{0x3b0e000,0x1000}},[](X86Guest& g)->std::uint32_t{
         GameLogicEdgeState edges{};std::optional<std::int32_t> save_phase;
-        GameFrameInputState input{edges,{},{},save_phase};GameControllerInitGlobals globals{};
+        GameFrameInputState input{edges.soft_reset_edge(),{},{},save_phase};GameControllerInitGlobals globals{};
         clear_input_edges_40f350(edges,input,globals);
         std::array<std::uint8_t,0x300> cleared{};
         cleared[0]=*edges.bytes_at_3b0e3e0[0];cleared[1]=*edges.bytes_at_3b0e3e0[1];
@@ -127,7 +128,7 @@ std::vector<OverrideEntry> startup_overrides(){
         g.set_reg(UC_X86_REG_EFLAGS,(g.reg(UC_X86_REG_EFLAGS)&~0x8d5U)|0x44U);
         if(!byte(0x3b0e3ba,*edges.special_at_3b0e3ba,0x40f369)
             ||!byte(0x3b0e3b9,*edges.byte_at_3b0e3b9,0x40f36f)
-            ||!byte(0x3b0e3b8,*input.mask_at_3b0e3b8,0x40f375))return 0;
+            ||!byte(0x3b0e3b8,*input.reset_input_mask,0x40f375))return 0;
         constexpr std::uint32_t indices[]={2,3,4,0,1},sites[]={0x40f37b,0x40f381,0x40f387,0x40f38d,0x40f393};
         for(std::uint32_t i=0;i<5;++i){
             const auto at=0x3b0e990+4*indices[i],value=*globals.words_at_3b0e990[indices[i]];
@@ -301,40 +302,40 @@ std::uint32_t frame_input_fact(GameFrameControlFailure failure){
 }
 std::vector<OverrideEntry> frame_input_overrides(){
     std::vector<OverrideEntry> out;
-    out.push_back({0x411e30,"set_game_logic_mode",{{0x3b11188,4},{0x3b11178,8},{0x389d7dc,4},{0x3d084a8,8},{0x3d0fa34,4}},
+    out.push_back({0x411e30,"set_frame_rate_mode",{{0x3b11188,4},{0x3b11178,8},{0x389d7dc,4},{0x3d084a8,8},{0x3d0fa34,4}},
         [](X86Guest& g)->std::uint32_t{
             const auto first=g.u32(g.esp()+4),second=g.u32(g.esp()+8);
             if(!first||!second){g.stop("override 411e30: unreadable arguments at 411e30/411e34");return 0;}
             const auto carry=g.reg(UC_X86_REG_EFLAGS)&1U;
             GameLogicTimingState timing{};GameFrameRendererState renderer{};
-            renderer.render_factor_at_89295c=load<std::int32_t>(g,0x89295c);
-            renderer.frequency_high_at_3d0853c=g.u32(0x3d0853c);renderer.frequency_low_at_3d08538=g.u32(0x3d08538);
-            const auto r=set_game_logic_mode(static_cast<std::int32_t>(*first),static_cast<std::int32_t>(*second),timing,renderer);
+            renderer.configured_frame_interval=load<std::int32_t>(g,0x89295c);
+            renderer.counter_frequency.high=g.u32(0x3d0853c);renderer.counter_frequency.low=g.u32(0x3d08538);
+            const auto r=set_frame_rate_mode(static_cast<std::int32_t>(*first),static_cast<std::int32_t>(*second),timing,renderer);
             const auto put=[&](std::uint32_t at,std::uint32_t value,std::uint32_t site){
                 if(g.set_u32(at,value))return true;
                 g.stop("override 411e30: missing output "+std::to_string(at)+" at "+std::to_string(site));return false;
             };
-            if(!put(0x3b11188,static_cast<std::uint32_t>(*timing.word_at_3b11188),0x411e38)
-                ||!put(0x3b11178,static_cast<std::uint32_t>(*timing.word_at_3b11178),0x411e3e)
-                ||!put(0x3b1117c,static_cast<std::uint32_t>(*timing.word_at_3b1117c),0x411e44))return 0;
-            if(renderer.frame_multiplier_at_389d7dc){
-                if(!put(0x389d7dc,static_cast<std::uint32_t>(*renderer.frame_multiplier_at_389d7dc),0x7899b1)
-                    ||!put(0x3d084a8,*renderer.interval_low_at_3d084a8,0x7899ca)
-                    ||!put(0x3d084ac,*renderer.interval_high_at_3d084ac,0x7899cf))return 0;
+            if(!put(0x3b11188,static_cast<std::uint32_t>(*timing.frame_multiplier),0x411e38)
+                ||!put(0x3b11178,static_cast<std::uint32_t>(*timing.logic_increment),0x411e3e)
+                ||!put(0x3b1117c,static_cast<std::uint32_t>(*timing.pending_logic_ticks),0x411e44))return 0;
+            if(renderer.frame_interval_multiplier){
+                if(!put(0x389d7dc,static_cast<std::uint32_t>(*renderer.frame_interval_multiplier),0x7899b1)
+                    ||!put(0x3d084a8,*renderer.frame_interval.low,0x7899ca)
+                    ||!put(0x3d084ac,*renderer.frame_interval.high,0x7899cf))return 0;
             }
             if(!r){g.stop("override 411e30: native boundary "+std::to_string(r.source_boundary)+", missing fact "+std::to_string(frame_input_fact(r.failure)));return 0;}
-            if(!renderer.input_callback_at_3d0fa34||*renderer.input_callback_at_3d0fa34!=&run_game_frame_input){
+            if(!renderer.input_callback||*renderer.input_callback!=&run_frame_input){
                 g.stop("override 411e30: unmapped native input callback identity at 77ff54");return 0;
             }
             if(!put(0x3d0fa34,0x411e20,0x77ff54))return 0;g.set_eax(0x411e20);g.set_reg(UC_X86_REG_ECX,0x411e20);
-            if(renderer.frame_multiplier_at_389d7dc){
-                g.set_edx(*renderer.interval_high_at_3d084ac);pointer_flags(g,g.esp()-4,4,false);
-            }else if(*first==2){pointer_flags(g,static_cast<std::uint32_t>(*renderer.render_factor_at_89295c),1,true);}
+            if(renderer.frame_interval_multiplier){
+                g.set_edx(*renderer.frame_interval.high);pointer_flags(g,g.esp()-4,4,false);
+            }else if(*first==2){pointer_flags(g,static_cast<std::uint32_t>(*renderer.configured_frame_interval),1,true);}
             else{pointer_flags(g,*first-1U,1,true);g.set_reg(UC_X86_REG_EFLAGS,(g.reg(UC_X86_REG_EFLAGS)&~1U)|carry);}
             return 0;
         },true,{},true});
     for(const auto entry:{0x40f010U,0x411e20U}){
-        out.push_back({entry,entry==0x40f010?"update_game_frame_input_flags":"run_game_frame_input",{{0x3b0eaa0,4}},
+        out.push_back({entry,entry==0x40f010?"update_soft_reset_flags":"run_frame_input",{{0x3b0eaa0,4}},
             [entry](X86Guest& g)->std::uint32_t{
                 const auto logic8=[&](std::uint8_t v){pointer_flags(g,(v&0x80U)?0xffffff00U|v:v,0,true);};
                 if(entry==0x411e20){g.set_eax(0);pointer_flags(g,0,0,true);}
@@ -345,20 +346,20 @@ std::vector<OverrideEntry> frame_input_overrides(){
                     std::uint8_t value=0;if(!g.read(at,&value,1))return {};return value;
                 };
                 GameLogicEdgeState edges{};auto save=load<std::int32_t>(g,0x3b291a4);
-                GameFrameInputState state{edges,{},{},save};
-                state.flags_at_3b0eaa0=byte(0x3b0eaa0);state.mask_at_3b0e3b8=byte(0x3b0e3b8);
+                GameFrameInputState state{edges.soft_reset_edge(),{},{},save};
+                state.soft_reset_flags=byte(0x3b0eaa0);state.reset_input_mask=byte(0x3b0e3b8);
                 edges.raw_at_3b0e3e2[59][0]=byte(0x3b0e493);
-                if(state.flags_at_3b0eaa0){
-                    g.set_eax((*incidental&0xffffff00U)|*state.flags_at_3b0eaa0);logic8(*state.flags_at_3b0eaa0);
-                    if(*state.flags_at_3b0eaa0!=0&&save){g.set_eax(static_cast<std::uint32_t>(*save));pointer_flags(g,static_cast<std::uint32_t>(*save),0,true);}
-                    if(*state.flags_at_3b0eaa0==0&&edges.raw_at_3b0e3e2[59][0]){
+                if(state.soft_reset_flags){
+                    g.set_eax((*incidental&0xffffff00U)|*state.soft_reset_flags);logic8(*state.soft_reset_flags);
+                    if(*state.soft_reset_flags!=0&&save){g.set_eax(static_cast<std::uint32_t>(*save));pointer_flags(g,static_cast<std::uint32_t>(*save),0,true);}
+                    if(*state.soft_reset_flags==0&&edges.raw_at_3b0e3e2[59][0]){
                         g.set_eax((*incidental&0xffffff00U)|*edges.raw_at_3b0e3e2[59][0]);logic8(*edges.raw_at_3b0e3e2[59][0]);
                     }
                 }
-                const auto old=state.flags_at_3b0eaa0;
-                const auto r=entry==0x40f010?update_game_frame_input_flags(state):run_game_frame_input(state);
+                const auto old=state.soft_reset_flags;
+                const auto r=entry==0x40f010?update_soft_reset_flags(state):run_frame_input(state);
                 if(!r){g.stop("override frame input: native boundary "+std::to_string(r.source_boundary)+", missing fact "+std::to_string(frame_input_fact(r.failure)));return 0;}
-                const auto final=*state.flags_at_3b0eaa0;
+                const auto final=*state.soft_reset_flags;
                 const bool write=*old==0||*save==0; // save is consumed only on the nonzero-flag path
                 if(write&&!g.write(0x3b0eaa0,&final,1)){g.stop("override frame input: unavailable output at 40f030/40f052/40f060");return 0;}
                 if(*old!=0){

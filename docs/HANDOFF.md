@@ -3182,3 +3182,82 @@ owner or gameplay implementation changed; the native frame-control pilot is next
   remain incomplete. Next: evidence-backed frame-control naming decisions,
   whole-owner migration, direct native composition and binary-absent test using
   the same core as the existing oracle/reference adapters.
+
+### Native frame-control pilot (gate 140, 2026-10-15)
+
+GOAL section 6 item 2 / stage B bounded pilot, after the inventory and checker.
+The product still needs native boot/title, resources and gameplay recovery.
+
+* Context: `reference/frame-control-context.json` records 20 owned REA evidence
+  IDs (five function dossiers, all 15 relevant global xrefs), dependency
+  classification and naming decisions. Key dossiers: dsInitInt
+  `ev_65278bae4da5ac3cd7e721a2297d9e0a32c72b5035a5ab6c04bb06ee8b906058`,
+  stHWSetVSync `ev_f4f34f8384f42255e9d0ad0c3aa71b4820ec639e94978ea07b633083a1080d72`,
+  input flags `ev_24bb302b82b123f3d82dde38334007dd967dcea618b46e4aa3d149b2f2d35807`,
+  wrapper `ev_f90281d7067805e7b5e31db9157188bb48e356e88c9164847ba207f72d8b0288`.
+  Speedrun limiter retained evidence
+  `ev_9c9c4f7b4061790ef99d538693b1de5a0322743e2323bd730b9d70aefb6db0ee`.
+  Callers/callees and assembly were inspected; no unresolved callee is skipped
+  by the frame-control core (source no-op/register effects remain adapter facts).
+* Named state: 11 GLOBAL annotations / **50 source bytes**, four FUNCTIONs and
+  a Speedrun PATCH. `FrameRateModeState` owns the three mode/tick fields; existing
+  logic timing extends it. `CounterWords` preserves independently optional halves
+  and exact high-before-low reads/low-before-high stores. Input takes borrowed
+  scalar reset-edge and save facts; the existing raw-edge owner supplies a named
+  accessor. Core header/body no longer depend on the legacy input table/logic
+  header, loader, HLE or guest. Arithmetic, branches and store ordering unchanged.
+* Decisions in `reference/symbols/overrides.tsv`: 3b11188 is FrameMultiplier,
+  whereas 389d7dc is FrameIntervalMultiplier (the original frequency*argument/60
+  state, not a frame counter). Soft-reset mask/callback/functions have explicit
+  evidence-backed project names; no physical key or other mask meaning invented.
+  Original header alternatives remain in the database. New seeds required a
+  backed-up snapshot (before-native-frame-names) and fresh import; named batch
+  verified individually, close rc 0, evidence
+  `ev_2d0e017f462c911d938c8132623f3a9211ff22316be42d52de0975808c47e5c1`.
+  Summary/hashes in `reference/symbols/native-frame-verification.json`.
+* Native proof: `make native-frame-control` copies six maintained files to an
+  isolated directory, compiles executable/probe library directly, checks compiler
+  dependency closure, symbols and linked libraries, then runs three host-driven
+  journeys and **2,672 frozen original cases**, zero mismatches. No core archive,
+  EXE/DLL, Unicorn, PE loader, guest/HLE or original reference code is used by
+  this checker. Source/fixture/binary hashes in
+  `reference/production-integration-20261015/native-frame-independent.json`.
+  This is a source/link/directory isolation check, not an OS access sandbox.
+* Freeze: `tools/oracles/freeze_frame_control.py` calls the unchanged original
+  source_run/fixtures against the pinned EXE. The tracked TSV contains only 19
+  input + 16 original-output numeric words per case; JSON pins source/range and
+  generator hashes. It never derives expected values from native results. The
+  existing probe now transports scalar/native mode state directly with its
+  numerical ABI/presence bits unchanged. Frozen scope covers four game entries,
+  not the limiter's complete mod corpus or CPU/fault/register parity beyond the
+  original oracle. Limiter host journeys and its separate oracle remain required.
+* Oracles: final compiled tree's 12 affected reports rerun/tracked: **10 pass**;
+  game_view and ninja_queue_lifecycle remain **partial**, exact values with 291
+  and 402 FP-flag mismatches. Core passes 2,672 cases; limiter passes **1,799**,
+  retaining its **one pre-existing capped exclusion**. Aggregate verdict rc 2,
+  unchanged 48 pass / 46 partial / 9 fail / 1 missing. Three original differential
+  mutants caught (mode factor 120 mismatches, save phase 472, mask 182), restored
+  pass. Three isolated-copy host mutants caught (accumulated deadline, cadence,
+  skipped callback). Existing oracle Python/fixtures/tolerances untouched.
+* Independent review found no blocking issues, including original evidence,
+  probe ABI, ownership and frozen-input/hash checks. Reviewer independently ran
+  the isolated journey plus all frozen cases successfully. Minor include/comment
+  cleanup applied; subsequent core oracles/final gate use final sources.
+* Gate: first attempt rc 2 at mac-clock-test's removed transitive type dependency;
+  not recorded as passing. Adapted it to FrameRateModeState. Final
+  `reference/production-integration-20261015/native-frame-140-gate.json`: **rc 0**,
+  **127 native programs / 19 Python tests**, app-smoke passed. 7,228-frame
+  determinism, first 600 overridden digests and 900-frame controller plain/native
+  replay identical. Host **80.9 FPS**; title **63 FPS**. Legacy checker 159,630
+  bytes, provenance combined 159,680 byte identities, zero errors/overlaps; three
+  added bytes reflect explicit source width of the formerly unknown callback
+  pointer. Old ownership checker retained; no legacy array-extent policy changed.
+* Delivery scope: existing screen_initialize bridge/request drafts remain outside
+  the commit. Only two HEAD timing-field renames in that HLE file are staged via
+  an independently reviewed patch; that staged version separately compiled.
+  Gate captures the exact mixed working tree, including the unstaged bridge.
+  No game assets/binaries committed. Other standalone oracles and separate make
+  m1 not rerun; four unregistered tests still skipped; Windows parity/physical
+  pads and full independence unverified. Next ordered work remains M1 recovery/
+  override-equivalence, close-out and typed importer; native boot/title still
+  needs its own composed proof. Goal remains active.

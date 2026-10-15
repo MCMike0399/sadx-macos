@@ -24,7 +24,7 @@ struct GameWinMainState {
     std::optional<std::uint32_t> message_text_at_8929b0,message_caption_at_8929c4; // .data string pointers for that MessageBoxA
 };
 struct GameWinMainBorrowed {
-    std::optional<std::int32_t>& render_factor_at_89295c;   // GameFrameRendererState
+    std::optional<std::int32_t>& configured_frame_interval;   // GameFrameRendererState
     std::optional<std::uint8_t>& special_flags_at_909eb4;   // NinjaQueueConsumerState
     std::optional<std::uint32_t>& sevoice_at_38f6ec0;       // ResetLeafState
     std::optional<std::uint32_t>& voice_volume_at_3abdfac;  // ResetLeafState

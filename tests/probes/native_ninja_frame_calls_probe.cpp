@@ -31,8 +31,8 @@ extern "C" int sadx_native_ninja_frame_calls(const std::uint32_t* in,const std::
     for(int i=0;i<16;++i)s.hooks_at_3d08af0[i]=in[20+i];
     for(int r=0;r<9;++r)for(int w=0;w<4;++w)s.records_at_3d0fe00[r][w]=in[36+4*r+w];
     NinjaCallbackList callbacks;callbacks.count_at_3ce712c=in[11];for(int i=0;i<8;++i)callbacks.slots_at_3d0fa40.push_back(in[12+i]);
-    GameFrameRendererState renderer{};renderer.input_callback_at_3d0fa34=in[10]?&input_callback:nullptr;
-    GameLogicEdgeState edges;std::optional<std::int32_t> phase=0;GameFrameInputState input{edges,{},{},phase};
+    GameFrameRendererState renderer{};renderer.input_callback=in[10]?&input_callback:nullptr;
+    GameLogicEdgeState edges;std::optional<std::int32_t> phase=0;GameFrameInputState input{edges.soft_reset_edge(),{},{},phase};
     const auto tables=decode_ninja_blend_tables(blend_bytes,88);
     std::vector<std::array<std::uint32_t,3>> device;
     NinjaRenderState render;render.device_at_3d128b0=std::make_shared<NinjaRenderDevice>(NinjaRenderDevice{1});render.packed_blend_at_3ab9890=static_cast<std::uint8_t>(in[74]);render.blend_tables=tables?&*tables:nullptr;

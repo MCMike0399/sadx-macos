@@ -1,9 +1,9 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "7e5c452ea28b3299ee6cb672b9ba1a57b02ed0a5c82c9badead573259a2b2add",
+ "native_library_sha256": "4de3d6d483a1da357d7f50478d681b6fd81610aadcc2d8bbe70d0e4f6208b34b",
  "source_files": {
   "src/game/game_loop.hpp": "c521e19602ed5cf98081347039fe9aa9823dde9e02522a92e8e81d7d15c82928",
-  "src/game/game_loop.cpp": "ae3933648418b4ad9c27ce4aa34f79e39526a0961e956ce6b2d1b8e4507fe8d7",
+  "src/game/game_loop.cpp": "9574b22cdebff480509afaacde25d8e70b97dae92512c321485b34ef4711180c",
   "tests/probes/native_game_loop_probe.cpp": "bb2481b78c7e30b3c932ddc3e5a8e1124a97445fc1807b1636a53fefffcdb4fc",
   "tools/oracles/verify_original_game_loop.py": "fc8dc056f832e86f7ffe86a86465a008fac90db5b427751122ede9f1da3f3f1d"
  },
@@ -27,7 +27,7 @@
  "order_arguments_stores_boundaries_match": true,
  "limits": "GameLoop 40cad0 local orchestration against original instructions.\n\nEvery callee (40c030, 51f680, 401410, 77f090, 40f460, 781010/781060, 420830,\n407ab0, 77ed00, 40c090, 4250d0, 411b60, 403180, 4086f0, 40be40, 40e2c0, 4326f0,\n40d4d0, 40eab0, 42f990, 40d3c0, 420840, 411d00, 421fd0, 40ef30, 40ef20, 7853c0,\n6fbf10, 410630, 420f40, 420ef0 and the 77fc50 tail) is an explicit owner fixture:\nthe 77f090 fixture writes scripted per-frame globals standing in for the real\nproducers, 4250d0 may set the exit flag, 411b60 may replace the near fog range,\n40ef30/40ef20 return scripted values. From the 4th frame the fixture forces focus and\nan exit key so every case terminates. This compares the local call order, call\narguments, global loads/stores and failure boundaries only; it does not show that\nany owner subsystem, Windows message pump or frame pacing is implemented.\n",
  "tracked_summary": {
-  "full_sha256": "8cd32c0fcb1f309d76f253dcaceee3c1465f7e1da18f9f1a6404d27676e794f4",
+  "full_sha256": "f948c5bde54f82829bad4efe0483e3ffecb77b8f0f2dd1721e7c8c53d105947e",
   "full_bytes": 2228,
   "lists_cut_to": 10,
   "cut_lists": {}

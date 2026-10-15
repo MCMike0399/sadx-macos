@@ -5,9 +5,9 @@
 extern "C" int sadx_native_frame_completion(const std::uint32_t* in,std::size_t count,std::uint32_t* out,std::size_t capacity){
     if(!in||count!=16||!out||capacity<40)return 0;
     sadx::GameLoopState loop;loop.resync_at_3abdf68=static_cast<std::uint8_t>(in[1]);loop.mode_at_3b28114=in[5];
-    sadx::GameLogicTimingState timing;timing.word_at_3b11188=static_cast<std::int32_t>(in[3]);timing.word_at_3b11198=static_cast<std::int32_t>(in[4]);timing.word_at_3b11180=static_cast<std::int32_t>(0x5a5a5a5a);
+    sadx::GameLogicTimingState timing;timing.frame_multiplier=static_cast<std::int32_t>(in[3]);timing.word_at_3b11198=static_cast<std::int32_t>(in[4]);timing.word_at_3b11180=static_cast<std::int32_t>(0x5a5a5a5a);
     sadx::GameLogicState logic{timing,{},static_cast<std::int32_t>(0x6b6b6b6b)};
-    sadx::GameFrameRendererState renderer{};renderer.render_factor_at_89295c=static_cast<std::int32_t>(in[2]);
+    sadx::GameFrameRendererState renderer{};renderer.configured_frame_interval=static_cast<std::int32_t>(in[2]);
     std::vector<std::array<std::uint32_t,2>> trace;
     sadx::FrameCompletionRuntime runtime{loop,logic,renderer,in[0]?sadx::FrameCompletionPolicy::original_unported:sadx::FrameCompletionPolicy::speedrun_2_0,{}};
     runtime.invoke=[&](const sadx::FrameCompletionCall& c)->sadx::GameLogicOwnerResult{trace.push_back({c.callee,c.source_call});

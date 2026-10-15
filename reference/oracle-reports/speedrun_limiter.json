@@ -1,12 +1,12 @@
 {
  "speedrun_dll_sha256": "f3fc68a3058fb726142547018da860b170f137248e54b82712b52527e7b74802",
- "native_library_sha256": "ddb0e5c404311d7afee4d0f675927048592d94ffb95019ed6e77f69a4d885184",
+ "native_library_sha256": "1244a58dfa7741d97181dd796a0e52dcb0ffb9ae03d9c565590b6364d4af5915",
  "source_files": {
   "src/engine/speedrun.hpp": "464998cab62c811d833dd10dd6fc3ac1ad72f63e3f26636d94468932dd6dbac8",
   "src/engine/speedrun.cpp": "aadb023ca23dbf2bb2abcb772b46ebc5c90b3b247e78f816baf5c870cc207fe3",
-  "src/engine/game_frame_control.hpp": "44f61f6476a944d065cedc41c442d3d9b7859d09dcbba63a6dc2747cffb900b3",
-  "src/engine/game_frame_control.cpp": "3effdc73b7f1d216c7068e60382e336aa2b1208e95c82142b97770ed40015d52",
-  "tests/probes/native_speedrun_limiter_probe.cpp": "125efdfab6f2043fdc1dbeebca1caae8d330689c24e9a03c7d4f421dbf403fa8",
+  "src/engine/game_frame_control.hpp": "1817f43a66e73c98aa0936f08869635bd369d1f147be0d5cbc064380848edf4a",
+  "src/engine/game_frame_control.cpp": "06238236f7d4a31dc66aac5418218a480a5e5bc78c009ddf9c0bbb5f8521758e",
+  "tests/probes/native_speedrun_limiter_probe.cpp": "492bade6c6918c3fdb95233df46efca271ed171a4a386d9151b306afa454415d",
   "tools/oracles/verify_original_speedrun_limiter.py": "b1da67cb4d7ef25c051c538b48f4b90d4af23fc0fd136188312a52a90c3921dd"
  },
  "limiter_bytes_sha256": "d3d713ed974f86a4d0c3db2f0f7b5ac6486c8f0b1ab3d60bde2740173db664fd",
@@ -27,7 +27,7 @@
  "reads_stores_match": true,
  "limits": "Speedrun 2.0 frame limiter (sadx-speedrun-mod.dll +0x10f0, the live 7899e0 hook) against its original instructions.\n\nThe pinned DLL runs at its preferred base with its own __allmul/__alldiv and\nsecurity-cookie code. Only the kernel32 imports are fixtures: the QPF slot\n(+0x1000c064) writes a scripted frequency or fails, and the QPC slot\n(+0x1000c060) returns start + k*step. sonic.exe globals 3b11188 (FrameMultiplier),\n3d08538 (frequency) and 3d08550 (last counter) are mapped data. Cases are chosen\nto finish within the read cap; native must make the same number of counter reads.\nThis is the wait condition and stores only, not host wall-clock pacing.\n",
  "tracked_summary": {
-  "full_sha256": "432288ce38382ab624d353147fb293c267ff75763be6e6e486dadd2279bd0ec2",
+  "full_sha256": "a04f117c402c302fb1adbe21aaf331bd314adbdb5870926790978bd3d1664048",
   "full_bytes": 2039,
   "lists_cut_to": 10,
   "cut_lists": {}

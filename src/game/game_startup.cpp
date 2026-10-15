@@ -7,7 +7,7 @@ void clear_input_edges_40f350(GameLogicEdgeState& e,GameFrameInputState& input,G
         e.raw_at_3b0e3e2[row][0]=0;
         if(row<255){e.raw_at_3b0e3e2[row][1]=0;e.raw_at_3b0e3e2[row][2]=0;} // the clear ends at 3b0e6df
     }
-    e.special_at_3b0e3ba=0;e.byte_at_3b0e3b9=0;input.mask_at_3b0e3b8=0;
+    e.special_at_3b0e3ba=0;e.byte_at_3b0e3b9=0;input.reset_input_mask=0;
     for(auto& w:g.words_at_3b0e990)w=0;
 }
 ExitCallbackResult register_exit_callback_789930(std::uint32_t function,ExitCallbackList& list){

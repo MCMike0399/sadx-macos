@@ -1,11 +1,11 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "85475781e02306e0fa3770f02cccfc55d9a788c7793d588e61e06148f411e877",
+ "native_library_sha256": "0123e6d0ce51bf26947c1a556717ba33cb059df4bf3a4aca1a9ca778474e5420",
  "source_files": {
-  "src/engine/game_frame_control.hpp": "44f61f6476a944d065cedc41c442d3d9b7859d09dcbba63a6dc2747cffb900b3",
-  "src/engine/game_frame_control.cpp": "3effdc73b7f1d216c7068e60382e336aa2b1208e95c82142b97770ed40015d52",
-  "src/engine/game_logic_support.hpp": "8b695a4f8caa2f38db2d0f2f62a43fa3726c622ba87d1baaeccf12082a7c858c",
-  "tests/probes/native_game_frame_control_probe.cpp": "7df6dd2c57f13d5b9b961e10d3d0d0cfd9af497e7f2e2f0b9674706d0abc9d9b",
+  "src/engine/game_frame_control.hpp": "1817f43a66e73c98aa0936f08869635bd369d1f147be0d5cbc064380848edf4a",
+  "src/engine/game_frame_control.cpp": "06238236f7d4a31dc66aac5418218a480a5e5bc78c009ddf9c0bbb5f8521758e",
+  "src/engine/game_logic_support.hpp": "c4c24cae0c77c57dfd0e621f12f2f98b79a5faf5fa659e0e4e3323decd970b8d",
+  "tests/probes/native_game_frame_control_probe.cpp": "4bee4d822beaa3978d8108edd6c60824b6e89b9688863d09a0fe069526295308",
   "tools/oracles/verify_original_game_frame_control.py": "aadd134c737e74d26e1d65c35623b13fa6a612092472d2d8ed86dba57b76c2b5"
  },
  "original_ranges_sha256": {
@@ -23,7 +23,7 @@
  "stores_callback_identity_and_boundaries_match": true,
  "limits": "Actual411e30/7899a0/40f010/411e20 control instructions vs native owners.\n\nCounter words and input bytes are explicit fixtures; no live host clock or\nphysical keys are inferred. Missing facts stop before their actual source read\nas a declared availability fixture. The unused EAX return of the input callback\nis excluded: its actual780074 caller immediately overwrites that register.\n",
  "tracked_summary": {
-  "full_sha256": "43206c931862a5219485432985d753459f35cb9abd86b937735d3d85be8e619a",
+  "full_sha256": "bbcd990e2db33c9ee245aaa983d45a1950ec0de661190afc8ababa69aea00777",
   "full_bytes": 2028,
   "lists_cut_to": 10,
   "cut_lists": {}

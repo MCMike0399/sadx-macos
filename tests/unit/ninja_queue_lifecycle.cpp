@@ -18,7 +18,7 @@ int main(){try{
     {Fixture f;auto r=sadx::ninja_queue_allocate_408630(f.o,std::nullopt,f.fp);
      require(r&&r.alignment_assumed&&f.queue.arena()->cursor()==0&&f.queue.arena()->bytes().size()==0x88000,"allocation without a known heap address assumes alignment");
      require(f.q.color_at_3ab9864==std::array<float,4>{1,-1,0.5F,1}&&f.projection.color_argb_at_3d0f7f0==f.q.color_at_3ab9864,"402f40 clamp and 77ff90 copy");
-     require(f.states==std::vector<std::uint32_t>{0x17,0xe,27}&&f.w898==f.w840&&f.w84c==f.w858&&f.timing.word_at_3b1117c==0&&f.q.mode_at_3ab98ac==0u,"407330 order and stores");
+     require(f.states==std::vector<std::uint32_t>{0x17,0xe,27}&&f.w898==f.w840&&f.w84c==f.w858&&f.timing.pending_logic_ticks==0&&f.q.mode_at_3ab98ac==0u,"407330 order and stores");
      require(bool(f.queue.bucket_front(2047))&&!f.queue.bucket_front(2047).record,"bucket sentinels initialized");}
     {Fixture f;auto r=sadx::ninja_queue_allocate_408630(f.o,0x30000008,f.fp);require(r&&!r.alignment_assumed&&f.queue.arena()->cursor()==24,"known heap address sets the 32-byte cursor offset");}
     {Fixture f;f.initial.reset();auto r=sadx::ninja_queue_allocate_408630(f.o,0,f.fp);require(r.failure==sadx::NinjaQueueLifecycleFailure::unknown_fact&&r.required_fact==0x3b18230u&&f.states.empty()&&f.w84c==f.w858,"unknown 3b18230 stops before 407330");}

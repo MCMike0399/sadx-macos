@@ -59,7 +59,7 @@ struct ScreenInit:Base {
     void run(std::uint32_t flags,std::uint32_t word_3d0f804,std::uint32_t word_3d0f814){
         auto& s=rt.viewport.state;auto& fp=rt.viewport.fp;const auto& vp=rt.viewport.device_state.viewport_at_3d12780;
         s.word_at_3d0f804=word_3d0f804;s.flags_at_3d0f964=flags;s.word_at_3d0f814=word_3d0f814;
-        if(!set_game_frame_multiplier(static_cast<std::int32_t>(word_3d0f814),rt.renderer))fail(NinjaScreenFailure::multiplier_failed,0x780c4e);
+        if(!set_frame_interval_multiplier(static_cast<std::int32_t>(word_3d0f814),rt.renderer))fail(NinjaScreenFailure::multiplier_failed,0x780c4e);
         if(flags&0x10){rt.width_at_3d0f9e4=640.0F;s.width_at_3d0fa20=0x280;}else{rt.width_at_3d0f9e4=320.0F;s.width_at_3d0fa20=0x140;}
         if(flags&0x20){s.height_at_3d0f9e8=480.0F;s.height_at_3d0f838=0x1e0;}else{s.height_at_3d0f9e8=240.0F;s.height_at_3d0f838=0xf0;}
         s.width_at_3d0fa04=fp.to_float(unsigned_load(fp,need(vp[2],0x780cb4,0x3d12788)));

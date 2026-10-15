@@ -119,12 +119,12 @@ FrameCompletionResult run_frame_completion(FrameCompletionRuntime& runtime){
     if(!runtime.loop.resync_at_3abdf68)return stop(FrameCompletionFailure::unknown_state,0x411d01);
     std::int32_t extra;
     if(*runtime.loop.resync_at_3abdf68!=0){
-        if(!runtime.renderer.render_factor_at_89295c)return stop(FrameCompletionFailure::unknown_state,0x411d0a);
-        extra=static_cast<std::int32_t>(static_cast<std::uint32_t>(*runtime.renderer.render_factor_at_89295c)-1U);runtime.loop.resync_at_3abdf68=0;
+        if(!runtime.renderer.configured_frame_interval)return stop(FrameCompletionFailure::unknown_state,0x411d0a);
+        extra=static_cast<std::int32_t>(static_cast<std::uint32_t>(*runtime.renderer.configured_frame_interval)-1U);runtime.loop.resync_at_3abdf68=0;
     }else{
         if(runtime.policy!=FrameCompletionPolicy::speedrun_2_0)return stop(FrameCompletionFailure::unported_original_policy,0x411d1c);
-        if(!timing.word_at_3b11188)return stop(FrameCompletionFailure::unknown_state,0x411d1c);
-        extra=speedrun::extra_game_ticks(*timing.word_at_3b11188); // DLL +0x11c0
+        if(!timing.frame_multiplier)return stop(FrameCompletionFailure::unknown_state,0x411d1c);
+        extra=speedrun::extra_game_ticks(*timing.frame_multiplier); // DLL +0x11c0
     }
     r.extra_ticks=extra;
     // 411da3: load 3b11198 before the 3b11180 store, then 3b28114.

@@ -7,7 +7,7 @@
 namespace {using namespace sadx;void require(bool ok,const char* why){if(!ok)throw std::runtime_error(why);}}
 int main(){try{
     NinjaDeviceState s;for(auto& w:s.matrix_at_389d318)w=0;NinjaFrameCallState frame;NinjaRenderState render;GameFrameRendererState renderer{};
-    renderer.frequency_low_at_3d08538=0;renderer.frequency_high_at_3d0853c=0;X87Context fp(0x7f);std::vector<std::uint32_t> calls;
+    renderer.counter_frequency.low=0;renderer.counter_frequency.high=0;X87Context fp(0x7f);std::vector<std::uint32_t> calls;
     NinjaDeviceHost host{[](std::uint32_t)->std::optional<std::uint32_t>{return 0x1000u;},
         [](const D3D8FrameCommand&)->std::optional<std::vector<std::uint8_t>>{return std::vector<std::uint8_t>(0xd4,0);},
         [](const D3D8FrameCommand&)->std::optional<std::array<std::uint32_t,6>>{return std::array<std::uint32_t,6>{0,0,640,480,0,0x3f800000};},
@@ -15,7 +15,7 @@ int main(){try{
     NinjaDeviceInitRuntime rt{s,frame,render,renderer,fp,host,[&](const NinjaDeviceCall& c)->GameLogicOwnerResult{calls.push_back(c.callee);
         if(c.callee==0x7943c0)render.device_at_3d128b0=std::make_shared<NinjaRenderDevice>(NinjaRenderDevice{1});return {GameLogicOwnerState::completed,0,{}};}};
     auto r=run_device_setup_791610(rt);
-    require(r&&s.half_width_at_3d12948==320.0F&&s.right_at_3d0fd28==639.0F&&s.bottom_at_3d0fd2c==479.0F&&renderer.frame_multiplier_at_389d7dc==1,"640x480 viewport");
+    require(r&&s.half_width_at_3d12948==320.0F&&s.right_at_3d0fd28==639.0F&&s.bottom_at_3d0fd2c==479.0F&&renderer.frame_interval_multiplier==1,"640x480 viewport");
     require(calls==std::vector<std::uint32_t>{0x7943c0,0x794ec0,0x78d0d0,0x796710,0x791860,0x7943f0,0x7914b0},"nested owners in order");
     rt.invoke=[&](const NinjaDeviceCall&)->GameLogicOwnerResult{return {GameLogicOwnerState::completed,0,{}};};
     r=run_device_setup_791610(rt);require(r.failure==NinjaDeviceFailure::null_device&&r.source_boundary==0x791674u,"7943c0 left 3d128b0 null: the vtable load faults");

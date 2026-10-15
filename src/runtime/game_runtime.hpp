@@ -105,7 +105,7 @@ private:
     // Engine state owners.
     GameLogicTimingState timing_;GameLogicState logic_{timing_,{},{}};
     GameLoopState loop_;GameModeState mode_state_;std::optional<std::int32_t> mode_at_3abdc7c_;
-    GameLogicEdgeState edges_;GameFrameInputState input_{edges_,{},{},loop_.save_phase_at_3b291a4};
+    GameLogicEdgeState edges_;GameFrameInputState input_{edges_.soft_reset_edge(),{},{},loop_.save_phase_at_3b291a4};
     GameFrameRendererState renderer_{};GameControllerInitGlobals controller_globals_;GameLogicController controller_template_;
     std::array<std::shared_ptr<GameLogicController>,4> controllers_raw_;GameLogicControllers controller_pointers_;
     InputModRawRecords input_raw_;std::array<InputModDreamPad,8> pads_{};InputModFrameState input_frame_;SseContext sse_{0x1f80};

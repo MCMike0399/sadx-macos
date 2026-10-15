@@ -5,14 +5,14 @@
 extern "C" int sadx_native_speedrun_limiter(const std::uint32_t* in,std::size_t count,std::uint32_t* out,std::size_t capacity){
     if(!in||count!=16||!out||capacity<12)return 0;
     const auto join=[](std::uint32_t lo,std::uint32_t hi){return static_cast<std::int64_t>((std::uint64_t(hi)<<32)|lo);};
-    sadx::GameFrameRendererState renderer{};renderer.last_counter_at_3d08550=join(in[5],in[6]);renderer.frequency_low_at_3d08538=0xa5a5a5a5;renderer.frequency_high_at_3d0853c=0x5a5a5a5a;
-    sadx::GameLogicTimingState timing;timing.word_at_3b11188=static_cast<std::int32_t>(in[3]);
+    sadx::GameFrameRendererState renderer{};renderer.previous_counter=join(in[5],in[6]);renderer.counter_frequency.low=0xa5a5a5a5;renderer.counter_frequency.high=0x5a5a5a5a;
+    sadx::FrameRateModeState timing;timing.frame_multiplier=static_cast<std::int32_t>(in[3]);
     std::uint64_t reads=0;const auto start=static_cast<std::uint64_t>(join(in[7],in[8])),step=static_cast<std::uint64_t>(join(in[9],in[10]));
     sadx::SpeedrunLimiterClock clock{[&]()->std::optional<std::int64_t>{if(!in[2])return std::nullopt;return join(in[0],in[1]);},
         [&]()->std::optional<std::int64_t>{if(reads>=in[11])return std::nullopt;return static_cast<std::int64_t>(start+step*reads++);}};
     const auto r=sadx::run_speedrun_frame_limiter(renderer,timing,static_cast<std::int32_t>(in[4]),clock);
-    std::fill(out,out+capacity,0);const auto last=static_cast<std::uint64_t>(renderer.last_counter_at_3d08550.value_or(0));
+    std::fill(out,out+capacity,0);const auto last=static_cast<std::uint64_t>(renderer.previous_counter.value_or(0));
     out[0]=static_cast<std::uint32_t>(r.failure);out[1]=r.source_boundary;out[2]=static_cast<std::uint32_t>(r.counter_reads);out[3]=static_cast<std::uint32_t>(last);out[4]=static_cast<std::uint32_t>(last>>32);
-    out[5]=renderer.frequency_low_at_3d08538.value_or(0);out[6]=renderer.frequency_high_at_3d0853c.value_or(0);out[7]=r.completed;
+    out[5]=renderer.counter_frequency.low.value_or(0);out[6]=renderer.counter_frequency.high.value_or(0);out[7]=r.completed;
     return 1;
 }

@@ -1,0 +1,24 @@
+{
+  "scope": "native-frame-control-pilot",
+  "mutants": [
+    {
+      "name": "accumulated_deadline",
+      "killed": true,
+      "failure": "Native frame control: late frame stores sampled time"
+    },
+    {
+      "name": "wrong_profile_cadence",
+      "killed": true,
+      "failure": "Native frame control: counter script exhausted"
+    },
+    {
+      "name": "skipped_native_callback",
+      "killed": true,
+      "failure": "Native frame control: installed handler consumes host-owned reset input"
+    }
+  ],
+  "passed": true,
+  "limits": [
+    "Mutants applied only to temporary source copies; worktree implementation and all original-binary oracle judges untouched."
+  ]
+}

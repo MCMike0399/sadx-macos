@@ -1,1 +1,7 @@
 module	address	kind	name	type	signature	size	evidence_id	reason
+SONIC	0x3b11188	global	FrameMultiplier	std::int32_t		4	ev_65278bae4da5ac3cd7e721a2297d9e0a32c72b5035a5ab6c04bb06ee8b906058	dsInitInt ratio; pinned Speedrun limiter scales frequency by this value; retain vsync_const alias
+SONIC	0x389d7dc	global	FrameIntervalMultiplier	std::int32_t		4	ev_f4f34f8384f42255e9d0ad0c3aa71b4820ec639e94978ea07b633083a1080d72	Argument stored before frequency*argument/60; not a current frame counter; distinct from FrameMultiplier
+SONIC	0x3d0fa34	global	FrameInputCallback	native callable		4	ev_70ef94107ce03c12d52a2ef68ea77e4035acd109448083c26030f330843dc2ba	77ff50 stores callable token; 780069 reads and invokes it; native identity transported only by adapter
+SONIC	0x3b0e3b8	global	SoftResetInputMask	std::uint8_t		1	ev_24bb302b82b123f3d82dde38334007dd967dcea618b46e4aa3d149b2f2d35807	40f040 tests bits 0x44 while deciding SoftResetByte; other bit meanings remain unexamined
+SONIC	0x40f010	function	UpdateSoftResetFlags	void	()		ev_24bb302b82b123f3d82dde38334007dd967dcea618b46e4aa3d149b2f2d35807	Reads SoftResetByte and save phase; updates bits 1 and 4 from supplied input facts
+SONIC	0x411e20	function	RunFrameInput	void	()		ev_f90281d7067805e7b5e31db9157188bb48e356e88c9164847ba207f72d8b0288	Wrapper calls no-op 792f60 then tail-jumps soft-reset updater

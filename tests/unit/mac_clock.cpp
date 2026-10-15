@@ -7,9 +7,9 @@
 int main(){try{
     pthread_set_qos_class_self_np(QOS_CLASS_USER_INTERACTIVE,0); // a game thread's class
     sadx::MacPerformanceCounter clock;const auto a=clock.now(),b=clock.now();if(b<a)throw std::runtime_error("counter must be monotonic");
-    sadx::GameFrameRendererState renderer{};sadx::GameLogicTimingState timing;timing.word_at_3b11188=1;renderer.last_counter_at_3d08550=clock.now();
-    const auto limiter=clock.limiter_clock();std::vector<std::int64_t> stamps{*renderer.last_counter_at_3d08550};
-    for(int frame=0;frame<63;++frame){const auto r=sadx::run_speedrun_frame_limiter(renderer,timing,63,limiter);if(!r||r.interval!=158'730)throw std::runtime_error("limiter frame failed");stamps.push_back(*renderer.last_counter_at_3d08550);}
+    sadx::GameFrameRendererState renderer{};sadx::FrameRateModeState timing;timing.frame_multiplier=1;renderer.previous_counter=clock.now();
+    const auto limiter=clock.limiter_clock();std::vector<std::int64_t> stamps{*renderer.previous_counter};
+    for(int frame=0;frame<63;++frame){const auto r=sadx::run_speedrun_frame_limiter(renderer,timing,63,limiter);if(!r||r.interval!=158'730)throw std::runtime_error("limiter frame failed");stamps.push_back(*renderer.previous_counter);}
     std::int64_t shortest=INT64_MAX,longest=0;for(std::size_t i=1;i<stamps.size();++i){const auto d=stamps[i]-stamps[i-1];shortest=std::min(shortest,d);longest=std::max(longest,d);}
     if(shortest<158'730)throw std::runtime_error("a frame ended before the source interval");
     const double seconds=double(stamps.back()-stamps.front())/sadx::MacPerformanceCounter::frequency_hz;

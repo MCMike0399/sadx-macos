@@ -1,12 +1,12 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "08b395a1b49399e8943ca01ab31f90e228f885691d13b029a9ce20c74575eb79",
+ "native_library_sha256": "ceb96827d7a014e2642f8eaf7a2a9bb28ce47b2f48079411493d283fadfb7afb",
  "source_files": {
   "src/engine/ninja_queue_lifecycle.hpp": "aae93525a8c00d39e16ff12b5a515ca1d1d31bf0e81b8000df0c9d6cc1c9364b",
-  "src/engine/ninja_queue_lifecycle.cpp": "ff2b07c9d9c9c2887a9a7289d258b796666680a95540e23e6583037d0943500e",
+  "src/engine/ninja_queue_lifecycle.cpp": "1092ac75bed8ad9cbf47d317928eda16ccd7a17b0bc13a6b65a550ba6c0b6015",
   "src/engine/ninja_queue_consumer.cpp": "cb8faee4629f9d07c20f062458df246b66f5e7d6d55d4fe8d07e5eb035845de5",
   "src/engine/ninja_sprite_queue.cpp": "a33865beed1726432a385f43468ca2918ed1ae0d9cbbc39f228c43bbac614aa8",
-  "tests/probes/native_ninja_queue_lifecycle_probe.cpp": "b306e72bef300c4298808f2dd5816b3d9910faac3cb5dab5ccfa95a5809b24aa",
+  "tests/probes/native_ninja_queue_lifecycle_probe.cpp": "d3c2bacccaa617c5148433b765fe0e15244f3416b8126c9fd1e76ceb41ad293f",
   "tools/oracles/verify_original_ninja_queue_lifecycle.py": "1cdd0dc16dad13e5672de210272d61ce26e438757a7a162978473f88afc74ab3"
  },
  "original_ranges_sha256": {
@@ -32,7 +32,7 @@
  "stores_trace_boundaries_match": true,
  "limits": "Render-queue lifecycle 408630 -> 407ab0 -> (4128f0/402f40, 407330) against original instructions.\n\nReal source code runs for 408630, 407ab0, 4128f0, 402f40, 407330, 401420, 77ed00,\n77ed20, 77ece0, 412400, 401440 and 77ff90. Fixtures: 780f60 (HeapAlloc) returns\nthe case's heap address, 780fb0 (HeapFree) is a no-op, and the D3D8 device's\nSetRenderState (vtable +0xc8) records (site, state, value) and may fail at call N.\nCompared: buffer cursor offset and zeroing, overflow flag, colours, captured\nwords, mode/count stores, bucket sentinels and the render-state trace. FP status\nflags are reported separately (Unicorn's x87 flag behaviour is not hardware).\n",
  "tracked_summary": {
-  "full_sha256": "22da5693f83a678aac82e7e17f3b20f083199680b522babdd877b2ebcef992e8",
+  "full_sha256": "fcdfd0ff32f136b2df57b85eac39a1f2ff913d98b704c2f2a5629b98d1630ff9",
   "full_bytes": 2507,
   "lists_cut_to": 10,
   "cut_lists": {}

@@ -1,0 +1,17 @@
+[
+  [
+    "wrong mode factor",
+    "*renderer.configured_frame_interval==1",
+    "*renderer.configured_frame_interval!=1"
+  ],
+  [
+    "save phase reversed",
+    "*state.save_phase==0",
+    "*state.save_phase!=0"
+  ],
+  [
+    "wrong input mask",
+    "&0x44",
+    "&0x04"
+  ]
+]

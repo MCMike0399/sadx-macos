@@ -83,7 +83,7 @@ struct QueueLifecycleBridge {
         GameLogicTimingState timing;NinjaSpriteProjection projection{};RenderBridge bridge(process);
         runtime.render_state=&bridge.render;runtime.flag_at_3b12208=g.u32(0x3b12208);runtime.mode_at_3ab98ac=g.u32(0x3ab98ac);
         std::uint8_t mode=0;if(g.read(0x3abdbc0,&mode,1))consumer.mode_byte_at_3abdbc0=mode;
-        consumer.count_at_3abd9d4=g.u32(0x3abd9d4);consumer.count_at_3abd9dc=g.u32(0x3abd9dc);timing.word_at_3b1117c=g.u32(0x3b1117c);
+        consumer.count_at_3abd9d4=g.u32(0x3abd9d4);consumer.count_at_3abd9dc=g.u32(0x3abd9dc);timing.pending_logic_ticks=g.u32(0x3b1117c);
         const auto color=[&](std::uint32_t at)->std::optional<std::array<float,4>>{std::array<float,4> value{};if(!g.read(at,value.data(),16))return {};return value;};
         runtime.color_at_3ab9864=color(0x3ab9864);projection.color_argb_at_3d0f7f0=color(0x3d0f7f0);
         const auto initial=color(0x3b18230);const auto depth_mode=g.u32(0x8928c8);
@@ -127,7 +127,7 @@ struct QueueLifecycleBridge {
         // 407330's final 77ff90 reads colour after the render-state calls.
         if(projection.color_argb_at_3d0f7f0)g.write(0x3d0f7f0,projection.color_argb_at_3d0f7f0->data(),16);
         if(runtime.mode_at_3ab98ac)g.set_u32(0x3ab98ac,*runtime.mode_at_3ab98ac);
-        if(timing.word_at_3b1117c)g.set_u32(0x3b1117c,static_cast<std::uint32_t>(*timing.word_at_3b1117c));
+        if(timing.pending_logic_ticks)g.set_u32(0x3b1117c,static_cast<std::uint32_t>(*timing.pending_logic_ticks));
         if(consumer.count_at_3abd9d4)g.set_u32(0x3abd9d4,static_cast<std::uint32_t>(*consumer.count_at_3abd9d4));
         if(consumer.count_at_3abd9dc)g.set_u32(0x3abd9dc,static_cast<std::uint32_t>(*consumer.count_at_3abd9dc));
     }

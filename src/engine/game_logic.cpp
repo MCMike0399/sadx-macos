@@ -60,9 +60,9 @@ GameLogicResult run_game_logic(GameLogicRuntime& runtime){
         if(!call(GameLogicOperation::calculate_ticks,0x413e27,0x413920))return result;
         std::uint32_t iteration=0;
         for(;;){
-            if(!state.timing.word_at_3b1117c){fail(GameLogicFailure::unknown_state,iteration?0x413e86:0x413e2c);return result;}
-            state.timing.word_at_3b1117c=decrement(*state.timing.word_at_3b1117c);
-            if(*state.timing.word_at_3b1117c<0)break;
+            if(!state.timing.pending_logic_ticks){fail(GameLogicFailure::unknown_state,iteration?0x413e86:0x413e2c);return result;}
+            state.timing.pending_logic_ticks=decrement(*state.timing.pending_logic_ticks);
+            if(*state.timing.pending_logic_ticks<0)break;
             if(iteration!=0){
                 if(!call(GameLogicOperation::poll_input,0x413e49,0x40f460))return result;
                 if(!read_press(0,0x413e54,true,0x413e4e)||!read_press(1,0x413e5d,true,0x413e57)||
@@ -74,8 +74,8 @@ GameLogicResult run_game_logic(GameLogicRuntime& runtime){
         }
     }
     // CMP's operand read precedes the zero store in this shared tail.
-    if(!state.timing.word_at_3b11178){fail(GameLogicFailure::unknown_state,0x413ea9);return result;}
-    const auto mode=*state.timing.word_at_3b11178;state.timing.word_at_3b1117c=0;
+    if(!state.timing.logic_increment){fail(GameLogicFailure::unknown_state,0x413ea9);return result;}
+    const auto mode=*state.timing.logic_increment;state.timing.pending_logic_ticks=0;
     if(mode==2&&!call(GameLogicOperation::set_mode,0x413ec0,0x411e30,1,1))return result;
     constexpr std::array<std::uint32_t,4> boundaries{{0x413ecd,0x413ed5,0x413edd,0x413ee5}};
     constexpr std::array<std::uint32_t,4> loads{{0x413ec8,0x413ed0,0x413ed8,0x413ee0}};

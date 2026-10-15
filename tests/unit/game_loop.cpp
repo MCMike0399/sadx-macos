@@ -42,7 +42,7 @@ void tests(){
      require(r.failure==GameLoopFailure::cancelled&&r.pending_call&&r.pending_call->operation==GameLoopOperation::queue_reset_407ab0,"cancellation keeps the pending owner");}
     {Fixture f;f.state.word_at_3c85804=1;auto r=sadx::run_game_loop_shutdown(f.runtime);require(r&&r.next==GameLoopNext::finished&&f.count(GameLoopOperation::shutdown_6fbf10)==1&&f.calls.back().operation==GameLoopOperation::shutdown_77fc50,"shutdown order");
      require(f.calls[0].arguments[0]==0x7dcc30u,"first 51f680 call keeps its pushed argument");}
-    {sadx::GameLoopState loop;loop.resync_at_3abdf68=0;loop.mode_at_3b28114=0;sadx::GameLogicTimingState timing;timing.word_at_3b11188=3;timing.word_at_3b11198=1;sadx::GameLogicState logic{timing,{},{}};sadx::GameFrameRendererState renderer{};
+    {sadx::GameLoopState loop;loop.resync_at_3abdf68=0;loop.mode_at_3b28114=0;sadx::GameLogicTimingState timing;timing.frame_multiplier=3;timing.word_at_3b11198=1;sadx::GameLogicState logic{timing,{},{}};sadx::GameFrameRendererState renderer{};
      std::vector<sadx::FrameCompletionOperation> owners;sadx::FrameCompletionRuntime fc{loop,logic,renderer,sadx::FrameCompletionPolicy::original_unported,[&](const sadx::FrameCompletionCall& c){owners.push_back(c.operation);return sadx::GameLogicOwnerResult{sadx::GameLogicOwnerState::completed,0};}};
      auto r=sadx::run_frame_completion(fc);require(r.failure==sadx::FrameCompletionFailure::unported_original_policy&&r.source_boundary==0x411d1c&&owners.empty()&&timing.word_at_3b11198==1,"original lag recovery stays an explicit boundary");
      fc.policy=sadx::FrameCompletionPolicy::speedrun_2_0;r=sadx::run_frame_completion(fc);

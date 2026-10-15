@@ -23,7 +23,7 @@ extern "C" int sadx_native_screen_init(const std::uint32_t* in,std::uint32_t* ou
     device.set_viewport=[&](const D3D8FrameCommand&,const std::array<std::uint32_t,6>& v)->std::optional<std::int32_t>{calls.push_back({0xa0,0,0});vp_words=v;return 0;};
     device.set_transform=[&](const D3D8FrameCommand&,std::uint32_t state,const D3dxMatrix& m)->std::optional<std::int32_t>{calls.push_back({0x94,state,0});set=m;return 0;};
     device.multiply_transform=[&](const D3D8FrameCommand&,std::uint32_t state,const D3dxMatrix& m)->std::optional<std::int32_t>{calls.push_back({0x9c,state,0});multiply=m;return 0;};
-    GameFrameRendererState renderer{};renderer.frequency_low_at_3d08538=in[43];renderer.frequency_high_at_3d0853c=in[44];renderer.frame_multiplier_at_389d7dc=0;renderer.interval_low_at_3d084a8=0;renderer.interval_high_at_3d084ac=0;
+    GameFrameRendererState renderer{};renderer.counter_frequency.low=in[43];renderer.counter_frequency.high=in[44];renderer.frame_interval_multiplier=0;renderer.frame_interval.low=0;renderer.frame_interval.high=0;
     std::optional<float> width_3d0f9e4=0.0F;NinjaSpriteProjection projection;projection.center_x_at_3d0fa0c=0.0F;projection.center_y_at_3d0fa10=0.0F;
     NinjaCallbackList callbacks;callbacks.count_at_3ce712c=5;
     std::optional<std::uint32_t> w840=0x1234,w9c4=0x5678,pool=0x11,size=0x22;std::array<std::optional<std::uint32_t>,4> colors{1u,2u,3u,4u};
@@ -41,7 +41,7 @@ extern "C" int sadx_native_screen_init(const std::uint32_t* in,std::uint32_t* ou
     for(int i=0;i<8;++i)out[26+i]=s.points_at_3ce7184[i].value_or(0);out[34]=s.points_at_3ce7164.value_or(0);out[35]=s.colors_at_3ce7168.value_or(0);out[36]=s.count_at_3ce7170.value_or(0);
     out[37]=v(s.invalid_at_3d0fd1c);for(int i=0;i<16;++i)out[38+i]=v(d.matrix_at_3d0fd80[i]);
     out[54]=f(d.left_at_3d0fd20);out[55]=f(d.top_at_3d0fd24);out[56]=f(d.right_at_3d0fd28);out[57]=f(d.bottom_at_3d0fd2c);
-    out[58]=static_cast<std::uint32_t>(renderer.frame_multiplier_at_389d7dc.value_or(0x7eadbeef));out[59]=v(renderer.interval_low_at_3d084a8);out[60]=v(renderer.interval_high_at_3d084ac);
+    out[58]=static_cast<std::uint32_t>(renderer.frame_interval_multiplier.value_or(0x7eadbeef));out[59]=v(renderer.frame_interval.low);out[60]=v(renderer.frame_interval.high);
     out[100]=static_cast<std::uint32_t>(calls.size());for(std::size_t i=0;i<calls.size()&&i<8;++i)for(int k=0;k<3;++k)out[101+3*i+k]=calls[i][k];
     for(int i=0;i<6;++i)out[130+i]=vp_words[i];for(int i=0;i<16;++i){out[140+i]=set[i];out[160+i]=multiply[i];}
     return 1;

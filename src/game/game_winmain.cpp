@@ -40,7 +40,7 @@ struct Operation {
         if(need(s.media_at_3ab918c,0x40267b,0x3ab918c)==0||need(s.media_at_3ab9190,0x402683,0x3ab9190)==0){
             const auto caption=need(s.message_caption_at_8929c4,0x40268b,0x8929c4),text=need(s.message_text_at_8929b0,0x402691,0x8929b0);
             call(0x40269a,0x7db1e0,{0u,text,caption,0u});} // MessageBoxA(0, text, caption, 0)
-        {auto f=profile(0x4026c5,"sonicDX","framerate",2);if(f<=0)f=1;else if(f>3)f=3;b.render_factor_at_89295c=f;}
+        {auto f=profile(0x4026c5,"sonicDX","framerate",2);if(f<=0)f=1;else if(f>3)f=3;b.configured_frame_interval=f;}
         {const auto fog=profile(0x40270d,"sonicDX","fogemulation",0);const auto flags=need(b.special_flags_at_909eb4,0x402715,0x909eb4);
             b.special_flags_at_909eb4=static_cast<std::uint8_t>(fog<=0?(flags&0xfe):(flags|1));}
         {auto sound=profile(0x402747,"sonicDX","sound3d",1);if(sound<0)sound=0;else if(sound>1)sound=1;

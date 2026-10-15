@@ -20,7 +20,7 @@ void NativeGame::initialize_source_facts(){
     const auto u32=[&](std::uint32_t a)->std::optional<std::uint32_t>{if(!exe)return std::nullopt;return exe->u32(a);};
     const auto s32=[&](std::uint32_t a)->std::optional<std::int32_t>{const auto v=u32(a);if(!v)return std::nullopt;return static_cast<std::int32_t>(*v);};
     mode_at_3abdc7c_=s32(0x3abdc7c);
-    timing_.word_at_3b11178=s32(0x3b11178);timing_.word_at_3b1117c=s32(0x3b1117c);timing_.word_at_3b11180=s32(0x3b11180);timing_.word_at_3b11188=s32(0x3b11188);
+    timing_.logic_increment=s32(0x3b11178);timing_.pending_logic_ticks=s32(0x3b1117c);timing_.word_at_3b11180=s32(0x3b11180);timing_.frame_multiplier=s32(0x3b11188);
     timing_.word_at_3b1118c=s32(0x3b1118c);timing_.word_at_3b11198=s32(0x3b11198);timing_.word_at_3b2a2e4=s32(0x3b2a2e4);
     logic_.word_at_3abdf70=u32(0x3abdf70);logic_.word_at_3b11194=s32(0x3b11194);
     loop_.word_at_3abdcf8=u32(0x3abdcf8);loop_.exit_at_3abdf7c=u32(0x3abdf7c);loop_.focus_at_8929d4=u32(0x8929d4);loop_.resync_at_3abdf68=u8(0x3abdf68);
@@ -38,10 +38,10 @@ void NativeGame::initialize_source_facts(){
     for(unsigned r=0;r<256;++r)for(unsigned k=0;k<3;++k)edges_.raw_at_3b0e3e2[r][k]=u8(0x3b0e3e2+3*r+k);
     for(unsigned i=0;i<256;++i)edges_.aggregate_at_3b0eaf0[i]=u8(0x3b0eaf0+i);
     edges_.special_at_3b0e3ba=u8(0x3b0e3ba);edges_.aggregate_special_at_3b0eae8=u8(0x3b0eae8);edges_.bytes_at_3b0e3e0={u8(0x3b0e3e0),u8(0x3b0e3e1)};edges_.byte_at_3b0e3b9=u8(0x3b0e3b9);
-    input_.flags_at_3b0eaa0=u8(0x3b0eaa0);input_.mask_at_3b0e3b8=u8(0x3b0e3b8);
-    renderer_.frequency_low_at_3d08538=u32(0x3d08538);renderer_.frequency_high_at_3d0853c=u32(0x3d0853c);renderer_.frame_multiplier_at_389d7dc=s32(0x389d7dc);
-    renderer_.render_factor_at_89295c=s32(0x89295c);renderer_.interval_low_at_3d084a8=u32(0x3d084a8);renderer_.interval_high_at_3d084ac=u32(0x3d084ac);
-    if(const auto lo=u32(0x3d08550),hi=u32(0x3d08554);lo&&hi)renderer_.last_counter_at_3d08550=static_cast<std::int64_t>((std::uint64_t(*hi)<<32)|*lo);
+    input_.soft_reset_flags=u8(0x3b0eaa0);input_.reset_input_mask=u8(0x3b0e3b8);
+    renderer_.counter_frequency.low=u32(0x3d08538);renderer_.counter_frequency.high=u32(0x3d0853c);renderer_.frame_interval_multiplier=s32(0x389d7dc);
+    renderer_.configured_frame_interval=s32(0x89295c);renderer_.frame_interval.low=u32(0x3d084a8);renderer_.frame_interval.high=u32(0x3d084ac);
+    if(const auto lo=u32(0x3d08550),hi=u32(0x3d08554);lo&&hi)renderer_.previous_counter=static_cast<std::int64_t>((std::uint64_t(*hi)<<32)|*lo);
     for(unsigned w=0;w<52;++w)controller_template_.write_byte(w,u8(0x3b0eaa8+w));
     for(unsigned r=0;r<4;++r)for(unsigned w=0;w<52;++w)controllers_raw_[r]->write_byte(w,u8(0x3b0e9c8+0x34*r+w));
     for(unsigned i=0;i<4;++i){controller_globals_.words_at_3b0e768[i]=u32(0x3b0e768+4*i);controller_globals_.words_at_3b0e344[i]=u32(0x3b0e344+4*i);
@@ -71,7 +71,7 @@ void NativeGame::initialize_source_facts(){
     for(unsigned i=0;i<8;++i)depth_table_[i]=u32(0x88ad9c+4*i).value_or(0);
     if(exe){std::array<std::uint8_t,88> raw{};bool ok=true;for(unsigned i=0;i<88;++i){const auto b=u8(0x88ad64+i);ok=ok&&b;raw[i]=b.value_or(0);}if(ok)blend_tables_=decode_ninja_blend_tables(raw.data(),raw.size());}
     if(const auto v=f32(0x7dcb10))one_at_7dcb10_=*v;if(const auto v=f32(0x7dcb0c))negative_one_at_7dcb0c_=*v;
-    queue_runtime_.flag_at_3b12208=u32(0x3b12208);queue_runtime_.mode_at_3ab98ac=u32(0x3ab98ac);queue_runtime_.display_switch_at_3b1117c=&timing_.word_at_3b1117c;
+    queue_runtime_.flag_at_3b12208=u32(0x3b12208);queue_runtime_.mode_at_3ab98ac=u32(0x3ab98ac);queue_runtime_.display_switch_at_3b1117c=&timing_.pending_logic_ticks;
     consumer_.mode_byte_at_3abdbc0=u8(0x3abdbc0);consumer_.count_at_3abd9d4=s32(0x3abd9d4);consumer_.count_at_3abd9dc=s32(0x3abd9dc);consumer_.maximum_at_3abd9d8=s32(0x3abd9d8);consumer_.maximum_at_3abd9e0=s32(0x3abd9e0);
     // D3D8 device owner: native state table (identity 1 = the one source device).
     if(const auto d=u32(0x3d128b0);d&&*d==0)render_.device_at_3d128b0=NinjaRenderDeviceHandle{}; // created by 791610's 7943c0
@@ -125,7 +125,7 @@ void NativeGame::initialize_source_facts(){
     screen_device_.set_vertex_shader=[this](const D3D8FrameCommand&,std::uint32_t)->std::optional<std::int32_t>{++d3d8_.vertex_formats;return 0;};
     screen_device_.draw_primitive_up=[this](const D3D8FrameCommand&,const NinjaScreenPolygon& p)->std::optional<std::int32_t>{d3d8_.polygons.push_back(p);return 0;};
     // 3d0fa34: zero in the load image until 411e30's 77ff50 stores the native 411e20 callable.
-    if(const auto v=u32(0x3d0fa34);v&&*v==0)renderer_.input_callback_at_3d0fa34=nullptr;
+    if(const auto v=u32(0x3d0fa34);v&&*v==0)renderer_.input_callback=nullptr;
     winmain_.voice_language_at_3b0ef38=u32(0x3b0ef38);winmain_.text_language_at_3b0f0e8=u32(0x3b0f0e8);winmain_.clip_level_at_3abdcf0=u32(0x3abdcf0);
     winmain_.bgm_volume_at_909f28=u32(0x909f28);winmain_.screen_at_892950=u32(0x892950);winmain_.sound3d_at_3b0ef28=u32(0x3b0ef28);winmain_.mouse_mode_at_3b0eae0=u32(0x3b0eae0);
     for(unsigned i=0;i<13;++i)if(const auto lo=u8(0x389d634+2*i),hi=u8(0x389d635+2*i);lo&&hi)winmain_.pad_buttons_at_389d634[i]=static_cast<std::uint16_t>(*lo|(*hi<<8));
@@ -285,7 +285,7 @@ NativeGameReport NativeGame::run(){
         // Profile: the loader WriteCalls 40c045 to EventGameLoopInit (dllmain.cpp:1647): no enabled mod exports
         // OnInitGameLoop and CrashGuard is off, so like 78c5a0's RET it changes no state; 40c04a does not read EAX.
         case StartupOperation::ret_78c5a0:return done(GameLogicOwnerState::completed);
-        case StartupOperation::set_mode_411e30:{const auto r=set_game_logic_mode(1,1,timing_,renderer_);return status(bool(r),r.source_boundary);}
+        case StartupOperation::set_mode_411e30:{const auto r=set_frame_rate_mode(1,1,timing_,renderer_);return status(bool(r),r.source_boundary);}
         case StartupOperation::reset_40bf40:return reset("40cad0>40c030");
         case StartupOperation::audio_410510:{
             AudioStreamOwners owners;
@@ -306,8 +306,8 @@ NativeGameReport NativeGame::run(){
     // 40c090 owners.
     GameModeRuntime mode{loop_,mode_at_3abdc7c_,mode_state_,{}};
     mode.invoke=[&](const GameModeCall& c)->GameModeOwnerResult{
-        if(c.callee==0x411e30){const auto r=set_game_logic_mode(static_cast<std::int32_t>(*c.arguments[0]),static_cast<std::int32_t>(*c.arguments[1]),timing_,renderer_);return {status(bool(r),r.source_boundary),0};}
-        if(c.callee==0x77ed40){const auto r=set_game_frame_multiplier(static_cast<std::int32_t>(*c.arguments[0]),renderer_);return {status(bool(r),r.source_boundary),0};}
+        if(c.callee==0x411e30){const auto r=set_frame_rate_mode(static_cast<std::int32_t>(*c.arguments[0]),static_cast<std::int32_t>(*c.arguments[1]),timing_,renderer_);return {status(bool(r),r.source_boundary),0};}
+        if(c.callee==0x77ed40){const auto r=set_frame_interval_multiplier(static_cast<std::int32_t>(*c.arguments[0]),renderer_);return {status(bool(r),r.source_boundary),0};}
         if(c.callee==0x40bf40)return {reset("40cad0>40c090"),0};
         if(c.callee==0x426050){ // 426050, then the loader's ProcessCodes at its RET (426063); 40c9b6 does not read EAX
             const auto leaf=run_game_mode_leaf(0x426050,c.arguments[0],*mode_leaves_,{});
@@ -323,8 +323,8 @@ NativeGameReport NativeGame::run(){
             if(n.callee==0x4030d0){const auto r=ninja_set_blend(*n.arguments[0],*n.arguments[1],render_);return status(bool(r),r.source_boundary);}
             if(n.callee==0x785330)return vibration_stop("40cad0>40c090>"+hex(c.callee));
             if(n.callee==0x40b1a0||n.callee==0x40b460)return task_reset(n.callee);
-            if(n.callee==0x411e30){const auto r=set_game_logic_mode(static_cast<std::int32_t>(*n.arguments[0]),static_cast<std::int32_t>(*n.arguments[1]),timing_,renderer_);return status(bool(r),r.source_boundary);}
-            if(n.callee==0x77ed40){const auto r=set_game_frame_multiplier(static_cast<std::int32_t>(*n.arguments[0]),renderer_);return status(bool(r),r.source_boundary);}
+            if(n.callee==0x411e30){const auto r=set_frame_rate_mode(static_cast<std::int32_t>(*n.arguments[0]),static_cast<std::int32_t>(*n.arguments[1]),timing_,renderer_);return status(bool(r),r.source_boundary);}
+            if(n.callee==0x77ed40){const auto r=set_frame_interval_multiplier(static_cast<std::int32_t>(*n.arguments[0]),renderer_);return status(bool(r),r.source_boundary);}
             return unported(n.callee,n.source_call,"40cad0>40c090>"+hex(c.callee));});
         if(leaf.outcome==GameModeLeafOutcome::completed)return {done(GameLogicOwnerState::completed),leaf.eax};
         if(leaf.outcome==GameModeLeafOutcome::not_a_leaf)return {unported(c.callee,c.source_call,"40cad0>40c090"),0};
@@ -413,7 +413,7 @@ NativeGameReport NativeGame::run(){
         case GameLoopOperation::ret_51f680:return {done(GameLogicOwnerState::completed),{}};
         case GameLoopOperation::work_40d4d0:case GameLoopOperation::work_40eab0:case GameLoopOperation::work_42f990:case GameLoopOperation::work_40d3c0:
         case GameLoopOperation::work_420840:case GameLoopOperation::keys_40ef30:case GameLoopOperation::key_40ef20:{
-            GameFrameOwnersRuntime owners{frame_owners_,*view_,byte_at_3b280a8_,leaves_->word_at_3b0e338,controller_globals_.words_at_3b0e990[2],input_.mask_at_3b0e3b8,edges_,render_,&depth_table_,
+            GameFrameOwnersRuntime owners{frame_owners_,*view_,byte_at_3b280a8_,leaves_->word_at_3b0e338,controller_globals_.words_at_3b0e990[2],input_.reset_input_mask,edges_,render_,&depth_table_,
                 sine_table_at_88af78_,projection_,consumer_.projection_width_at_3d0f9e4,color_at_3b18230_,
                 NinjaQueueColorOwners{queue_runtime_.color_at_3ab9864,projection_.color_argb_at_3d0f7f0,one_at_7dcb10_,negative_one_at_7dcb0c_},fp_,
                 [&](const GameFrameOwnerCall& n){return unported(n.callee,n.source_call,"40cad0>"+hex(c.callee));}};
@@ -463,7 +463,7 @@ NativeGameReport NativeGame::run(){
         for(const auto& u:profile.unsupported)report_.assumptions.push_back("sonicDX.ini "+u+": not interpreted identically to Win32");
         report_.assumptions.push_back("WinMain GetPrivateProfileIntA/StringA: Win32 semantics re-implemented natively (case-insensitive lookup, trimmed values, sign + decimal digits), not traced");
         std::vector<std::string> skipped;
-        GameWinMainRuntime rt{winmain_,{renderer_.render_factor_at_89295c,consumer_.special_flags_at_909eb4,leaves_->config_at_38f6ec0,leaves_->word_at_3abdfac,leaves_->config_at_3a7cf3c,leaves_->word_at_3abdf90},config_.loader_settings,
+        GameWinMainRuntime rt{winmain_,{renderer_.configured_frame_interval,consumer_.special_flags_at_909eb4,leaves_->config_at_38f6ec0,leaves_->word_at_3abdfac,leaves_->config_at_3a7cf3c,leaves_->word_at_3abdf90},config_.loader_settings,
             [&](const WinMainProfileRead& r)->std::optional<std::int32_t>{return profile.get_int(r.section,r.key,r.fallback);},
             [&](const WinMainProfileRead& r)->std::optional<std::string>{return profile.get_string(r.section,r.key,r.string_fallback,r.size);},
             [&](const WinMainCall& c)->WinMainOwnerResult{
@@ -559,7 +559,7 @@ NativeGameReport NativeGame::run(){
         GameLibraryInitRuntime lib{library_,0x892940,
             [&](std::uint32_t a)->std::optional<std::uint32_t>{
                 if(a==0x892950)return winmain_.screen_at_892950;
-                if(a==0x89295c){if(!renderer_.render_factor_at_89295c)return std::nullopt;return static_cast<std::uint32_t>(*renderer_.render_factor_at_89295c);}
+                if(a==0x89295c){if(!renderer_.configured_frame_interval)return std::nullopt;return static_cast<std::uint32_t>(*renderer_.configured_frame_interval);}
                 return config_.executable?config_.executable->u32(a):std::nullopt;},  // config words without another owner: load image
             [&](std::uint32_t a)->std::optional<std::uint32_t>{return a==0x3d12788?device_.viewport_at_3d12780[2]:a==0x3d1278c?device_.viewport_at_3d12780[3]:std::nullopt;},
             fp_,[&](const GameLibraryCall& c)->GameLibraryOwnerResult{

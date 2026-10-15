@@ -411,9 +411,14 @@ completion of more guest bridges is not a prerequisite for establishing the nati
    Subsequent steps extend native composition toward boot/title and a playable stage;
    reuse verified modules rather than maintaining a second gameplay implementation.
    Progress: the observed dependencies are inventoried in `docs/NATIVE-INDEPENDENCE.md`.
-   The provenance checker and its legacy migration baseline are implemented; no
-   owners have migrated yet. Frame-control naming decisions, native composition,
-   binary-absent test and oracle/replay proof remain pending.
+   The checker now covers the frame-control pilot's 11 named owners (50 source
+   bytes), with separate optional counter words and borrowed input/save facts.
+   `make native-frame-control` builds an isolated maintained-source closure,
+   checks its link dependencies and runs the native host journey plus 2,672
+   frozen original cases (`reference/frame-control-corpus.{tsv,json}`). The same
+   implementation serves the original oracle/reference adapters. Naming decisions
+   and evidence are in `reference/frame-control-context.json` and the symbol
+   overrides; native game boot/title and full independence remain open.
 3. **M1 override-equivalence where it supports recovery or closes the existing milestone.**
    Reference adapters serve the native source, rather than becoming the production API.
    The handoff says 20 of the

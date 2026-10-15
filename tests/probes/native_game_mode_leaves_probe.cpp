@@ -65,7 +65,7 @@ extern "C" int sadx_native_game_mode_leaves(const std::uint32_t* in,const std::u
     each([&](auto& v,std::size_t o){put(v,bytes+o,1);},[&](auto& v,std::size_t o){put(v,bytes+o,2);},[&](auto& v,std::size_t o){put(v,bytes+o,4);},
         [&](std::size_t i,std::size_t o){std::uint32_t v=0;std::memcpy(&v,bytes+o,kScalars[39+i].width);
             switch(i){case 0:mode.word_at_3b290e4=v;break;case 1:mode.byte_at_3b2a2fa=static_cast<std::uint8_t>(v);break;case 2:if(v)mode.level_word_via_3b0ef4c=0x1234;break;
-            case 3:timing.word_at_3b11178=static_cast<std::int32_t>(v);break;case 4:timing.word_at_3b2a2e4=static_cast<std::int32_t>(v);break;case 5:cutscene=static_cast<std::int32_t>(v);break;
+            case 3:timing.logic_increment=static_cast<std::int32_t>(v);break;case 4:timing.word_at_3b2a2e4=static_cast<std::int32_t>(v);break;case 5:cutscene=static_cast<std::int32_t>(v);break;
             case 6:event=v?scheduler.append_task(0,&TaskScheduler::source_no_op).task:TaskHandle{};break;case 7:rng.seed_at_2bcbdf8=v;break;
             case 11:game_mode=static_cast<std::uint16_t>(v);break;case 12:stage=static_cast<std::uint16_t>(v);break;
             case 22:s.color_at_3b29d5c=v;break;case 23:screen_w=as_float(v);break;case 24:screen_h=as_float(v);break;
@@ -79,7 +79,7 @@ extern "C" int sadx_native_game_mode_leaves(const std::uint32_t* in,const std::u
     each([&](auto& v,std::size_t o){get(v,out+o,1);},[&](auto& v,std::size_t o){get(v,out+o,2);},[&](auto& v,std::size_t o){get(v,out+o,4);},
         [&](std::size_t i,std::size_t o){std::uint32_t v=0xdeadbeef;
             switch(i){case 0:v=mode.word_at_3b290e4.value_or(0xdeadbeef);break;case 1:v=mode.byte_at_3b2a2fa.value_or(0xef);break;case 2:v=mode.level_word_via_3b0ef4c?1U:0U;break;
-            case 3:v=static_cast<std::uint32_t>(timing.word_at_3b11178.value_or(0));break;case 4:v=static_cast<std::uint32_t>(timing.word_at_3b2a2e4.value_or(0));break;case 5:v=static_cast<std::uint32_t>(cutscene.value_or(0));break;
+            case 3:v=static_cast<std::uint32_t>(timing.logic_increment.value_or(0));break;case 4:v=static_cast<std::uint32_t>(timing.word_at_3b2a2e4.value_or(0));break;case 5:v=static_cast<std::uint32_t>(cutscene.value_or(0));break;
             case 6:v=event&&*event?1U:0U;break;case 7:v=rng.seed_at_2bcbdf8.value_or(0xdeadbeef);break;
             case 11:v=game_mode.value_or(0xbeef);break;case 12:v=stage.value_or(0xbeef);break;
             case 22:v=s.color_at_3b29d5c.value_or(0xdeadbeef);break;case 23:v=as_bits(screen_w);break;case 24:v=as_bits(screen_h);break;

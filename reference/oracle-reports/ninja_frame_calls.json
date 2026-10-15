@@ -1,11 +1,11 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "b385ba031339f2962edd92e32cea07db394f351c0dc854926c946829af8ce200",
+ "native_library_sha256": "2c86951abb4679d0b4c40df1999b252e72b1695db96300b113aee95a4ded7c73",
  "source_files": {
   "src/engine/ninja_frame_calls.hpp": "f489f7887266211433190b6b32701c4e72bdad4d9794f2ecce234e610de87a99",
-  "src/engine/ninja_frame_calls.cpp": "bbebbd989218ad2ecf25784d419e9dc6d75d8e8b8c9e4cb30b00a3c47208f089",
+  "src/engine/ninja_frame_calls.cpp": "3d2c3bdbb3fe6209d3816ef24c41089c334b47109e3a4c15a41eeba3b90f5cc9",
   "src/engine/ninja_render.cpp": "d18ca70f7a617ea3a0b26f31e461ad18d36994279982e968ea0634dc4b7d3db9",
-  "tests/probes/native_ninja_frame_calls_probe.cpp": "a60a7dcaad64ada694cd62c8ff4c4416501ab914bb4f5cf0208c6ce1446cbabd",
+  "tests/probes/native_ninja_frame_calls_probe.cpp": "a0ee4dcbc5d5b63f171b5c8b5f91bfceb5017b6abdf1c2255a08c468cd06dac8",
   "tools/oracles/verify_original_ninja_frame_calls.py": "1fc4d126e96ca4f9aa5910f296188799796bac3c54b671e80d72b1389982701a"
  },
  "original_ranges_sha256": {
@@ -83,7 +83,7 @@
  "state_traces_match": true,
  "limits": "411d00's D3D8 frame thunks 781010 (78bab0: the real 780030 callback list and\nhooks, then the real 7959a0 hook table), 781020 (78b960 EndScene path with the\nreal 77ec60), 781030 (vanilla 78ba30 Present: the native `original` policy),\n781040 (78ba50 Clear, then the real 794800 on the nine 3d0fe00 records) and\n781050 (78b880 BeginScene path), against original instructions. With\n--loader, 781030 is also compared under the profile's policy against the pinned\nmod loader's own Direct3D_Present_r (DLL 3293cf35 +0x50290: Present through\n[100f167c] = 3d128b0, reset_device 10050300 on DEVICELOST, the empty\nonRenderSceneStart vector) in a separate machine with a Present COM fixture.\n\nThe device is a COM fixture: BeginScene/EndScene/Present/Clear/SetRenderState/\nGetRenderState stubs record their arguments (GetRenderState writes a case\nvalue). Nested owners are recording fixtures that can stop the source: 7912e0,\n793cc0 (ECX), 77dfc0 (four arguments), 789dd0 (Present's DEVICELOST tail jump),\nthe 411e20 input callback at 3d0fa34, callback/hook stubs, and a vertex-buffer\nCOM object whose Lock is 794800's nested owner. One fixture can rewrite 3ce712c\nmid-list (as 77ffe0 would), proving 780030's per-iteration reread. Compared:\ncompletion, 3d08588, 3d1289c, 3d128ac, 3ce712c, the 3d0fe00 records, the nested\ntrace (callee, site, ECX/arguments) and the device trace. Not covered:\nreset_device itself (a nested owner), null/unknown devices\n(native-only boundaries), and callback indices past the 8 modelled slots\n(native index_out_of_range, counted as explicit).\n",
  "tracked_summary": {
-  "full_sha256": "82252a202585c6a034a54f761d2c4ee148da3ccde9fa866dfb48ad981fa10f2c",
+  "full_sha256": "02c03ffb671208513e3b2d2fc4a8f7c3c047279df74f4264b551c550b583c412",
   "full_bytes": 5856,
   "lists_cut_to": 10,
   "cut_lists": {}
