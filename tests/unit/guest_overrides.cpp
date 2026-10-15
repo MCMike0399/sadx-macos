@@ -16,6 +16,7 @@
 // returned ST(0), TOP and the tag word (its mutant flips the returned significand's lowest bit).
 // 40f350 replays the game_startup input pages and compares EAX, ECX/EDX, arithmetic flags and every page byte.
 // 40f3a0 replays controller_init pages with DF=0/1 and RET/JMP suffixes, recording suffix-entry state.
+// 419030 replays mode0 of collision_shapes under all oracle CWs; matrix/metadata/absolute aliases and DF=1 retain original execution, asserted by a source-body hook.
 // The original side runs with the FPU shims installed, as every guest boot does (7716df's FSINCOS is a shim site).
 // Mutants: every entry is also run with a bridge that flips one bit of its first store; the comparison must
 // catch it, or the test fails (an insensitive comparison would pass anything).
@@ -35,9 +36,9 @@
 namespace {
 using namespace sadx;
 void require(bool ok,const std::string& why){if(!ok)throw std::runtime_error(why);}
-struct Case {std::vector<std::pair<std::uint32_t,std::uint32_t>> memory;std::vector<std::uint32_t> arguments;std::optional<std::uint32_t> ecx;std::uint16_t cw=0x27f;std::uint32_t mxcsr=0x1f80;std::uint32_t eflags=2;};
+struct Case {std::vector<std::pair<std::uint32_t,std::uint32_t>> memory;std::vector<std::uint32_t> arguments;std::optional<std::uint32_t> ecx;std::uint16_t cw=0x27f;std::uint32_t mxcsr=0x1f80;std::uint32_t eflags=2;bool source_body=false;};
 constexpr std::uint32_t scratch=0x10000000,out_at=scratch+0x100,det_at=scratch+0x180,matrix_at=scratch+0x200,second_at=scratch+0x300, // a page mapped in both guests
-    project_v_at=scratch+0x40,project_viewport_at=scratch+0x60,color_at=scratch+0x80,project_matrix_at=scratch+0x400;
+    project_v_at=scratch+0x40,project_viewport_at=scratch+0x60,color_at=scratch+0x80,project_matrix_at=scratch+0x400,collision_task_at=scratch+0x1100,collision_shape_at=scratch+0x1200,collision_out_at=scratch+0x1300,collision_matrix_at=scratch+0x2000;
 std::vector<std::uint32_t> words(const std::string& path){
     std::ifstream f(path,std::ios::binary);require(bool(f),"cannot read the oracle corpus "+path+" (run its oracle)");
     std::string all((std::istreambuf_iterator<char>(f)),{});require(all.size()%4==0&&!all.empty(),path+": not a word corpus");
@@ -73,6 +74,30 @@ std::vector<Case> corpus_cases(std::uint32_t entry,const std::string& dir){
             out.push_back(c);c.eflags|=0x400U;out.push_back(c);
         }}
 
+    else if(entry==0x419030){ // collision_shapes: 136 words; replay mode0 under all twelve oracle CWs
+        const auto w=words(dir+"/collision_shapes.cases.bin");require(w.size()%136==0,"collision_shapes corpus size");
+        for(std::size_t i=0;i<w.size();i+=136)if(w[i]==0)
+            for(const std::uint16_t pc:{0U,0x200U,0x300U})for(const std::uint16_t rc:{0U,0x400U,0x800U,0xc00U}){
+                Case c;c.cw=static_cast<std::uint16_t>(pc|rc|0x7f);c.ecx=0x12345678;
+                c.memory={{collision_shape_at+4,w[i+8]},{0x3d0f818,collision_matrix_at+64*(w[i+32]-1)},
+                    {0x3d0fa28,w[i+135]},{0x3d0fa2c,w[i+32]},{0x3d0f7ac,w[i+33]}};
+                for(std::uint32_t k=0;k<3;++k){
+                    c.memory.push_back({collision_task_at+0x14+4*k,w[i+2+k]});
+                    c.memory.push_back({collision_task_at+0x20+4*k,w[i+5+k]});
+                    c.memory.push_back({collision_shape_at+8+4*k,w[i+9+k]});
+                    c.memory.push_back({collision_out_at+4*k,w[i+130+k]});
+                }
+                for(std::uint32_t k=0;k<96;++k)c.memory.push_back({collision_matrix_at+4*k,w[i+34+k]});
+                c.arguments={w[i+26]?collision_task_at:0U,collision_shape_at,collision_out_at};out.push_back(c);
+                if((w[i+8]&0x20)!=0){Case alias=c;alias.arguments[2]=collision_shape_at+12;alias.source_body=true;out.push_back(alias);}
+                else if((w[i+8]&0x8000)!=0){Case alias=c;alias.arguments[2]=collision_task_at+0x24;out.push_back(alias);}
+                else {
+                    const auto changed=collision_matrix_at+64*(w[i+32]-1+(w[i+32]<w[i+135]?1:0));
+                    Case alias=c;alias.arguments[2]=changed+8;alias.source_body=true;out.push_back(alias);
+                    alias=c;alias.arguments[2]=0x3d0fa28;alias.source_body=true;out.push_back(alias);
+                    alias=c;alias.eflags|=0x400U;alias.source_body=true;out.push_back(alias);
+                }
+            }}
     else if(entry==0x7899a0){ // game_frame_control: 19 words; [0] entry index (0 = 7899a0), [2] argument, [4..9] 3d0853c 3d08538 389d7dc 89295c 3d084a8 3d084ac
         const auto w=words(dir+"/game_frame_control.cases.bin");require(w.size()%19==0,"game_frame_control corpus size");
         for(std::size_t i=0;i<w.size();i+=19)if(w[i]==0)
@@ -163,13 +188,15 @@ std::vector<Case> enumerated_cases(std::uint32_t entry,std::mt19937& rng){
 // first mismatch's description in `mismatch` (nullopt mismatch = all equal).
 // The ranges a case's call may store to: the entry's fixed ranges and those addressed by its pointer arguments.
 std::vector<std::pair<std::uint32_t,std::uint32_t>> ranges(const OverrideEntry& entry,const Case& c){
-    auto r=entry.writes;for(const auto& [index,size]:entry.pointer_writes)if(index<c.arguments.size()&&c.arguments[index])r.push_back({c.arguments[index],size});return r;}
+    auto r=entry.writes;if(entry.address==0x419030)r.push_back({collision_matrix_at,384});for(const auto& [index,size]:entry.pointer_writes)if(index<c.arguments.size()&&c.arguments[index])r.push_back({c.arguments[index],size});return r;}
 std::size_t compare(const ExecutableImage& image,const OverrideEntry& entry,const X86Guest::Override& bridge,const std::vector<Case>& cases,std::optional<std::string>& mismatch){
     std::string error;auto original=X86Guest::create(&error);auto native=X86Guest::create(&error);require(original&&native,error);
     require(original->map_image(image,&error)&&native->map_image(image,&error),error);
-    require(original->map(scratch,0x1000,true,&error)&&native->map(scratch,0x1000,true,&error),error);
+    require(original->map(scratch,0x4000,true,&error)&&native->map(scratch,0x4000,true,&error),error);
     FpuShimStats shims;require(install_fpu_shims(*original,load_fpu_sites("reference/inventory/fpu-sites.json"),shims,&error),error);
     require(native->add_override(entry.address,bridge,&error),error);
+    std::size_t source_bodies=0;
+    if(entry.address==0x419030)require(native->add_instruction_hook(0x419031,[&](X86Guest&,std::uint32_t){++source_bodies;return false;},&error),error);
     std::size_t compared=0;
     for(const auto& c:cases){
         auto out=ranges(entry,c);
@@ -178,16 +205,27 @@ std::size_t compare(const ExecutableImage& image,const OverrideEntry& entry,cons
         if(entry.address==0x40f3a0){const std::uint8_t tail[]={0xc3,0x90,0x90,0x90,0x90,0x90,0x90,0x90};
             original->write(0x40f451,tail,sizeof tail);native->write(0x40f451,tail,sizeof tail);}
         for(auto* g:{original.get(),native.get()}){g->set_reg(UC_X86_REG_EFLAGS,c.eflags);
-            if(entry.address==0x40f3a0){g->set_reg(UC_X86_REG_ESI,0x13579bdf);g->set_reg(UC_X86_REG_EDI,0x2468ace0);g->set_reg(UC_X86_REG_EBX,0xdeadbeef);}
+            if(entry.address==0x40f3a0||entry.address==0x419030){g->set_reg(UC_X86_REG_ESI,0x13579bdf);g->set_reg(UC_X86_REG_EDI,0x2468ace0);g->set_reg(UC_X86_REG_EBX,0xdeadbeef);}
             for(const auto& [at,size]:out){const std::vector<std::uint8_t> z(size,0xa5);g->write(at,z.data(),size);}
             for(const auto& [at,v]:c.memory)g->set_u32(at,v);}
+        const auto before_source_bodies=source_bodies;
         const auto ra=original->call(entry.address,c.arguments,c.ecx,std::nullopt,c.cw,600'000'000,c.mxcsr);
         const auto rb=native->call(entry.address,c.arguments,c.ecx,std::nullopt,c.cw,600'000'000,c.mxcsr);
         require(bool(ra),entry.name+": original failed: "+ra.error);
         if(!rb){mismatch=entry.name+": override failed: "+rb.error;return compared;}
         if((entry.address==0x40f350||entry.address==0x40f3a0)&&((original->reg(UC_X86_REG_EFLAGS)^native->reg(UC_X86_REG_EFLAGS))&0xcd5U))
             {mismatch=entry.name+": arithmetic flags differ";return compared;}
-        if(entry.address==0x40f3a0){
+        if(entry.address==0x419030){
+            if(source_bodies-before_source_bodies!=(c.source_body?1U:0U)){mismatch=entry.name+": native/original execution path differs";return compared;}
+            if(ra.esp!=rb.esp){mismatch=entry.name+": ESP differs";return compared;}
+            if(original->reg(UC_X86_REG_FPCW)!=native->reg(UC_X86_REG_FPCW)
+                ||original->reg(UC_X86_REG_FPTAG)!=native->reg(UC_X86_REG_FPTAG)
+                ||((original->fpu_status()^native->fpu_status())&0x3800U)){mismatch=entry.name+": x87 control/stack differs";return compared;}
+            // Translation-only overwrites the caller's second argument.
+            if(original->u32(ra.esp+4)!=native->u32(rb.esp+4)){mismatch=entry.name+": caller argument store differs";return compared;}
+            if((original->reg(UC_X86_REG_EFLAGS)^native->reg(UC_X86_REG_EFLAGS))&0x8d5U){mismatch=entry.name+": arithmetic flags differ";return compared;}
+        }
+        if(entry.address==0x40f3a0||entry.address==0x419030){
             if(ra.esp!=rb.esp){mismatch=entry.name+": caller stack differs";return compared;}
             for(const auto reg:{UC_X86_REG_EBX,UC_X86_REG_ESI,UC_X86_REG_EDI,UC_X86_REG_EBP})
                 if(original->reg(reg)!=native->reg(reg)){mismatch=entry.name+": preserved register differs";return compared;}
@@ -254,6 +292,24 @@ int main(int argc,char** argv){try{
                 require(bool(failure),"40f3a0 bridge mutant survived: "+name);
             }
             std::cout<<"  init_controllers: 7/7 register/store/profile-suffix bridge mutants caught\n";
+        }
+        if(entry.address==0x419030){
+            const std::vector<std::pair<std::string,X86Guest::Override>> mutants={
+                {"wrong task position",[bridge](X86Guest& g){g.set_u32(g.esp()+4,*g.u32(g.esp()+4)+4);return bridge(g);}},
+                {"wrong rotation order",[bridge](X86Guest& g){const auto shape=*g.u32(g.esp()+8);g.set_u32(shape+4,*g.u32(shape+4)^0x200U);return bridge(g);}},
+                {"wrong capacity",[bridge](X86Guest& g){g.set_u32(0x3d0fa28,0);return bridge(g);}},
+                {"wrong ECX",[bridge](X86Guest& g){const auto pops=bridge(g);g.set_reg(UC_X86_REG_ECX,1);return pops;}},
+                {"wrong EDX",[bridge](X86Guest& g){const auto pops=bridge(g);g.set_edx(1);return pops;}},
+                {"wrong FP control",[bridge](X86Guest& g){g.set_reg(UC_X86_REG_FPCW,0x27f);return bridge(g);}},
+                {"original-only override",[](X86Guest& g){const auto esp=g.esp();g.set_u32(esp-4,g.reg(UC_X86_REG_ECX));g.set_reg(UC_X86_REG_ESP,esp-4);g.tail_redirect(0x419031);return 0U;}}
+            };
+            for(const auto& [name,mutant]:mutants){
+                std::optional<std::string> failure;compare(*image,entry,mutant,cases,failure);
+                require(bool(failure),"419030 bridge mutant survived: "+name);
+            }
+            std::size_t original_paths=0;for(const auto& c:cases)original_paths+=c.source_body;
+            std::cout<<"  collision_shape_center: "<<cases.size()-original_paths<<" native / "<<original_paths
+                <<" original-body cases; 7/7 bridge mutants caught\n";
         }
         total+=compared;from_corpora+=corpus?compared:0;
         std::cout<<"  "<<entry.name<<" ("<<std::hex<<entry.address<<std::dec<<"): "<<compared<<(corpus?" oracle-corpus":" enumerated")<<" cases equivalent; mutant caught\n";}

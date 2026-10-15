@@ -824,16 +824,33 @@
    }
   }
  ],
- "seconds": 1.757110083999578,
+ "seconds": 1.7673258329741657,
  "stored_state_matches": true,
  "passed": false,
  "scope": "4real shape primitives, real41bc00+41bed0, 3real matrix primitives; no arithmetic/normal replies or geometry replacements. Native live-task views seeded explicitly; hardware/runtime unknown.",
+ "original_ranges_sha256": {
+  "419030-419157": "f1bce648205c865c7c7719ae64c10ce3f1b53ad102fbae9994398042fcbd4ca2",
+  "781c80-781cbc": "b8b2a24e2149c95a9fdbcb364dd928429842387971959d791252c8714c4ee873",
+  "7816e0-7816f7": "7f6f4a033ef2a73688c998d85b92d4d7028530f681f5e43ba04ac1114e8004a9",
+  "7875f0-78760d": "f34144b6976caa00723574631521a5251e2cfb29666178ac3eb945d732753d32",
+  "781c10-781c7f": "1ead114a558ff4a754e1fd75dfb4dd38a6114f2a2126802aa480eab4e0383b44",
+  "781670-7816d1": "8845853d23987f366ebda1194c9a4d093fd3304b5d6da2687887debecd32c931",
+  "784e20-784edf": "f101608bb9ce1ab9c1e245d7c59304a4becf13d4e774e2974aff6944298e3757",
+  "784ee0-784fa1": "a3814f3dad96a45e0739766739929ea8c460b92056baa814ff402d444bbcb427",
+  "784fb0-78506f": "c214c29c4898a9f25ac53581df3de973333582f44ac5b9a32d5a1e98f25ea51f"
+ },
+ "source_files": {
+  "src/player/collision_shapes.cpp": "de12f37cafe024c457ccf89f56871439a5b275d43c75ea580372b2d035f3c8fa",
+  "src/engine/ninja_matrix.cpp": "7045d50d871e7853935b7301ac90473bb06536f14c7b010ce7f75562d5b09bc4",
+  "tests/probes/native_collision_shapes_probe.cpp": "6ca1cdfde7ee506458e74b84505cabc2541ad3bacc627f5b0264d44669b2366a",
+  "tools/oracles/verify_original_collision_shapes.py": "28bde4746eca7d67543247ed9b6907fad509eb559fdee0eca0de1bdd3f6cf99b"
+ },
  "limits": [
   "Flag difference: the native x87 model sets the precision bit (PE 0x20) of the status word on inexact results; Unicorn 2.1.4 does not raise x87 exception bits for these instructions (source 0x0). All compared values match; the hardware flags need the Intel capture (M4)."
  ],
  "tracked_summary": {
-  "full_sha256": "ec493529eeb8ce7b0ae9e7f25a0da4704c56861f72a1aaaec8498edb305a293a",
-  "full_bytes": 17425,
+  "full_sha256": "9d1d15558b4a62d4deb6ee19a9be9c0febb62a35651bfa18086f92845af63acf",
+  "full_bytes": 18742,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

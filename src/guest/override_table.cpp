@@ -8,6 +8,7 @@
 #include "engine/ninja_screen.hpp"
 #include "math/d3dx_math.hpp"
 #include "game/game_startup.hpp"
+#include "player/collision_shapes.hpp"
 #include <unicorn/unicorn.h>
 #include <cstring>
 #include <algorithm>
@@ -270,8 +271,118 @@ std::vector<OverrideEntry> math_overrides(){
         g.write(o,r.data(),12);g.set_eax(o);return 24;},true,{{0,12}}});
     return out;
 }
+namespace {
+bool overlaps(std::uint32_t a,std::uint32_t n,std::uint32_t b,std::uint32_t m){
+    return std::uint64_t(a)<std::uint64_t(b)+m&&std::uint64_t(b)<std::uint64_t(a)+n;
+}
+void pointer_flags(X86Guest& g,std::uint32_t a,std::uint32_t b,bool subtract){
+    const auto r=subtract?a-b:a+b;
+    const bool carry=subtract?a<b:std::uint64_t(a)+b>0xffffffffULL;
+    const bool overflow=subtract?((a^b)&(a^r)&0x80000000U)!=0:((~(a^b))&(a^r)&0x80000000U)!=0;
+    const auto flags=(carry?1U:0U)|((__builtin_popcount(r&255U)&1)?0U:4U)|(((a^b^r)&16U)?16U:0U)
+        |(r==0?64U:0U)|(r&0x80000000U?128U:0U)|(overflow?0x800U:0U);
+    g.set_reg(UC_X86_REG_EFLAGS,(g.reg(UC_X86_REG_EFLAGS)&~0x8d5U)|flags);
+}
+}
+std::vector<OverrideEntry> collision_overrides(){
+    std::vector<OverrideEntry> out;
+    out.push_back({0x419030,"collision_shape_center",{{0x3d0f818,4},{0x3d0fa2c,4}},[](X86Guest& g)->std::uint32_t{
+        const auto entry=g.esp(),saved_ecx=g.reg(UC_X86_REG_ECX);
+        const auto fallback=[&](){
+            // Aliasing / noncanonical owner states retain actual source execution.
+            // Perform only the first PUSH, then resume after the intercepted entry.
+            if(!g.set_u32(entry-4,saved_ecx)){g.stop("override 419030: missing saved-ECX stack word at 419030");return;}
+            g.set_reg(UC_X86_REG_ESP,entry-4);g.tail_redirect(0x419031);
+        };
+        const auto task_arg=g.u32(entry+4),shape_arg=g.u32(entry+8),output_arg=g.u32(entry+12);
+        if(!task_arg||!shape_arg||!output_arg){fallback();return 0;}
+        const auto task=*task_arg,shape_address=*shape_arg,output_address=*output_arg;
+        if(std::uint64_t(shape_address)+20>0xffffffffULL||std::uint64_t(task)+44>0xffffffffULL
+            ||std::uint64_t(output_address)+12>0xffffffffULL
+            ||overlaps(shape_address,20,entry-0x200,0x210)
+            ||overlaps(output_address,12,entry-0x200,0x210)){fallback();return 0;}
+        const auto attributes=g.u32(shape_address+4);
+        if(!attributes){fallback();return 0;}
+        const bool absolute=(*attributes&0x20)!=0,translation=(*attributes&0x8000)!=0;
+        if(!absolute&&!translation&&(g.reg(UC_X86_REG_EFLAGS)&0x400U)){fallback();return 0;}
+        if(absolute&&overlaps(output_address,12,shape_address,20)){fallback();return 0;}
+        NinjaVector center{},position{},result{};std::array<std::int32_t,3> angles{};
+        NinjaVector output_probe{};if(!g.read(output_address,&output_probe,12)){fallback();return 0;}
+        if(!g.read(shape_address+8,&center,12)){fallback();return 0;}
+        if(!absolute){
+            if(overlaps(task,44,entry-0x200,0x210)||!g.read(task+0x20,&position,12)){fallback();return 0;}
+            if((control_word(g)&0x3f)!=0x3f){g.stop("override 419030: unmasked x87 exceptions not modelled at 419109/781c10");return 0;}
+            if(g.reg(UC_X86_REG_FPTAG)!=0xffffU){fallback();return 0;} // preserve a nonempty caller's exact x87 stack
+        }
+        PositionCollisionInfo info;info.attributes=*attributes;info.center=center;
+        CollisionTaskView view{};view.present=task!=0;
+        if(!absolute)view.position=[position]()->std::optional<NinjaVector>{return position;};
+        X87Context fp(control_word(g));
+        std::optional<NinjaMatrixStack> stack;std::unique_ptr<PlayerCoordinates> coordinates;
+        std::uint32_t current=0,depth=0,changed=0;bool pushed=false;
+        if(!absolute&&!translation){
+            const auto pointer=g.u32(0x3d0f818),count=g.u32(0x3d0fa2c),capacity=g.u32(0x3d0fa28);
+            if(!pointer||!count||!capacity||!*count||(*count&0x80000000U)){fallback();return 0;}
+            current=*pointer;depth=*count;
+            const auto signed_depth=static_cast<std::int32_t>(depth),signed_capacity=static_cast<std::int32_t>(*capacity);
+            pushed=signed_depth<signed_capacity;
+            if(std::uint64_t(current)+(pushed?128:64)>0xffffffffULL){fallback();return 0;}
+            changed=current+(pushed?64U:0U);
+            // These overlaps require the source's interleaved reads/stores. Execute
+            // those instructions rather than treating a cached shape/pose as live.
+            if(overlaps(changed,64,task,44)||overlaps(changed,64,shape_address,20)||overlaps(changed,64,output_address,12)
+                ||overlaps(changed,64,0x3d0f818,4)||overlaps(changed,64,0x3d0fa28,8)
+                ||overlaps(changed,64,0x389d650,64)||overlaps(changed,64,0x88af78,4100)
+                ||overlaps(changed,64,g.stack_base(),0x100000)
+                ||overlaps(output_address,12,0x3d0f818,4)||overlaps(output_address,12,0x3d0fa28,8)){fallback();return 0;}
+            NinjaMatrix matrix{},unit{};NinjaMath::SineTable sine{};
+            NinjaMatrix destination_probe{};if(!g.read(changed,destination_probe.data(),64)){fallback();return 0;}
+            if(!g.read(current,matrix.data(),64)||!g.read(0x389d650,unit.data(),64)
+                ||!g.read(0x88af78,sine.data(),sizeof sine)||!g.read(task+0x14,angles.data(),12)){fallback();return 0;}
+            // Only current/next are consumed. Do not require untouched physical
+            // slots or invent a base pointer; source capacity chooses this window.
+            stack.emplace(std::vector<NinjaMatrix>(pushed?2:1,matrix),1,std::nullopt);
+            coordinates=std::make_unique<PlayerCoordinates>(sine,unit,*stack);
+            view.angle=[angles](unsigned i)->std::optional<std::int32_t>{return i<3?std::optional<std::int32_t>{angles[i]}:std::nullopt;};
+        }
+        const auto r=collision_shape_center_419030(view,info,result,coordinates.get(),fp);
+        if(!r){g.stop("override 419030: native owner stopped at "+std::to_string(r.source_boundary));return 0;}
+        const auto word=[&](std::uint32_t address,std::uint32_t value,std::uint32_t site){
+            if(g.set_u32(address,value))return true;
+            g.stop("override 419030: missing output "+std::to_string(address)+" at "+std::to_string(site));return false;};
+        if(!word(entry-4,saved_ecx,0x419030)||!word(entry-8,g.reg(UC_X86_REG_EDI),0x419031))return 0;
+        if(!absolute)g.set_fpu_status(static_cast<std::uint16_t>((g.fpu_status()&~0x200U)|(fp.exception_flags()&0x3f)));
+        if(absolute){
+            if(!word(output_address,bits(result.x),0x419047)||!word(output_address+4,bits(result.y),0x41904f)
+                ||!word(output_address+8,bits(result.z),0x419055))return 0;
+            g.set_eax(bits(result.z));g.set_edx(bits(result.y));g.set_reg(UC_X86_REG_ECX,output_address);
+            pointer_flags(g,shape_address+8,4,false);
+            g.set_reg(UC_X86_REG_ESP,entry-8);g.tail_redirect(0x419058);
+        }else if(translation){
+            if(!word(output_address+8,bits(result.z),0x419130)||!word(entry+8,bits(center.y),0x419132)
+                ||!word(entry-4,bits(center.x),0x41913f)||!word(output_address+4,bits(result.y),0x419146)
+                ||!word(output_address,bits(result.x),0x419150))return 0;
+            g.set_eax(output_address+4);g.set_edx(bits(center.x));
+            pointer_flags(g,output_address+8,4,true);
+            g.set_reg(UC_X86_REG_ESP,entry-4);g.tail_redirect(0x419155);
+        }else{
+            if(!word(entry-12,g.reg(UC_X86_REG_ESI),0x419063))return 0;
+            const auto& matrix=stack->slots()[pushed?1:0];
+            for(std::uint32_t i=0;i<16;++i)if(!word(changed+4*i,bits(matrix[i]),0x4190f6))return 0;
+            if(!word(0x3d0f818,changed,0x781caf)||!word(0x3d0fa2c,depth+(pushed?1U:0U),0x781cb5))return 0;
+            if(!word(output_address,bits(result.x),0x78169c)||!word(output_address+4,bits(result.y),0x7816b4)
+                ||!word(output_address+8,bits(result.z),0x7816cb))return 0;
+            g.set_reg(UC_X86_REG_ECX,output_address);g.set_edx(shape_address+8);
+            // Source ends by tail-jumping to PopMatrixEx. It owns signed depth,
+            // pointer arithmetic, EAX and flags, including depth1 -> depth0.
+            g.tail_redirect(0x7816e0);
+        }
+        return 0;
+    },true,{{2,12}},true});
+    return out;
+}
 std::vector<OverrideEntry> all_overrides(const ExecutableImage& image){
-    auto out=frame_loop_overrides(image);for(auto& e:startup_overrides())out.push_back(std::move(e));for(auto& e:math_overrides())out.push_back(std::move(e));return out;
+    auto out=frame_loop_overrides(image);for(auto& e:startup_overrides())out.push_back(std::move(e));for(auto& e:math_overrides())out.push_back(std::move(e));for(auto& e:collision_overrides())out.push_back(std::move(e));return out;
 }
 bool install_overrides(X86Guest& g,const std::vector<OverrideEntry>& entries,std::string* error){
     for(const auto& e:entries)if(!g.add_override(e.address,e.bridge,error))return false;

@@ -2773,3 +2773,72 @@ process. RET/padding at 40f451 byte-checked with PEImage: c390909090909090.
   metal-texture, player-task not run. Windows parity/physical pads unverified.
   No game assets committed. Remaining list **25 + 3** in GOAL section 6; next
   419030 (fresh analysis retained) or device-backed 77dfc0/7912e0.
+
+### M1 collision-center override 419030 (gate 134, 2026-10-14)
+
+Fresh owned REA/Ghidra, pinned sonic.exe 6b0937ca…24cd74,
+`reference/ghidra-collision-matrix-requests.json`, retained results
+`reference/inventory-raw/bridge-collision-matrix-<address>.json`:
+419030 `ev_92c054cee2e0c6c1a69347aeb11e4431a43a693dc44bd94fee885848e37250b9`;
+781c80 `ev_8ecfa8fd1253aa676529b4908294b5bdeccd36fd60361d7934e91002c833b6d2`;
+7816e0 `ev_3f441cbf2be68b0c6efa04e899763d26b01e9a959358580b7b7c53869ff28fb2`;
+7875f0 `ev_1bd5455df663fb0f5bb88367cc14e4438cb657a40e068fd32bd51b9615f7ea4c`;
+781670 `ev_7158f86895031c2f47f4b5505abbb237e7d42cfa62e36376f029be8c3f8f0a5c`;
+781c10 `ev_d8674ced9a56c466db01e9284c8aa4ecf7bd06ada0e5068aaf79ce0f9e980f89`;
+784e20 `ev_2d49158fe7d299720e9748f0e8f862f27f26872f2f7f8a7b102a070a6fe734d8`;
+784ee0 `ev_c0c1082b2b4f14e4127e00ef3b8a9a73f81991d66ee65223b2b0c7766c626fa0`;
+784fb0 `ev_ac043c0e47a6413bec83898bfc167ac6f6f14de01def483f07150e34f3322de6`.
+Runner closed rc 0; function ranges declared in the oracle use Ghidra's inclusive
+endpoints converted to exclusive ends, hashed through PEImage. 0 UNHANDLED overlaps.
+
+* **46 process entries.** New guest-only collision_overrides binds the existing
+  collision_shape_center_419030 owner. Absolute raw-copy path, translation-only
+  path and both rotation orders are native over live guest shape/pose values.
+  The matrix workspace contains only current/next slots; the actual signed
+  depth/capacity comparison chooses whether push succeeds. No invented base
+  address, physical capacity, inactive-slot contents or normalization flag.
+  Capacity exhaustion still replaces the current slot with unit, transforms it
+  and pops one level, preserving the source mutation.
+* **Source ABI:** absolute copy leaves EAX=raw Z and EDX=raw Y and resumes the
+  original POP EDI/POP ECX/RET epilogue. Translation stores Z/Y/X, overwrites the
+  caller's second argument (entry ESP+8) with raw center Y, and replaces saved
+  ECX with raw center X; the original POP ECX/RET leaves that X word in ECX.
+  EDX=raw X, EAX=output+4. Pointer ADD/SUB flags reproduced. Matrix path leaves
+  ECX=output and EDX=shape+8, then executes the original tail PopMatrixEx, which
+  owns the actual pointer/depth/EAX/flag stores, including depth1 -> depth0.
+  No guest-heap allocation and no guest-pointer casts.
+* **Original execution retained where required:** aliased absolute copies,
+  matrix/shape/pose/output/metadata overlaps, matrix DF=1, nonempty incoming x87
+  stacks and noncanonical/unreadable state resume original code at 419031 after
+  the source first PUSH ECX. No cached snapshot is substituted for interleaved
+  reads/stores. Original epilogues/PopEx remain guest even on native main-body
+  paths. Unmasked x87 exceptions stop explicitly; they are not silently masked.
+  Nonempty-stack/unreadable-state paths and memory-fault register details were
+  not separately tested this step.
+* **Equivalence:** collision_shapes mode-0 corpus replayed under all 12 oracle CWs,
+  plus absolute-copy aliases, translation output/pose overlap, matrix-output and
+  metadata aliases and backwards matrix-copy direction. 14,232 cases match:
+  **6,936 native main-body / 7,296 original-body** cases. A source instruction
+  hook asserts the selected path; an always-original override is caught. Compared:
+  output, all six fixture matrix slots, pointer/depth, caller argument store,
+  EAX/ECX/EDX, arithmetic flags, x87 conditions/control/TOP/tag, ESP and preserved
+  registers. Guest-only table: 18 entries, 69,111 cases (57,111 corpus cases).
+* **Oracle/mutants:** collision-shapes rerun **partial**, all 43,344 value/state cases
+  match, 31,632 FP-flag differences (native PE, Unicorn raises no x87 exception
+  bits). Report tracked; corpus in OVERRIDE_CORPORA. Core 3/3 caught (absolute flag,
+  rotation order, translation Z subtraction), restored partial. Bridge 7/7 caught
+  (task offset, rotation order, capacity, ECX, EDX, FP control, original-only
+  override), plus generic flipped store. Other standalone oracles not rerun;
+  aggregate remains 48 pass / 46 partial / 9 fail / 1 missing, verdict rc 2.
+* **Gate:** `reference/production-integration-20261014/collision-center-134-gate.json`,
+  actual rc 0, 126 native programs and four Python tests. Boot identical (22,030
+  HLE calls, 119/119 active patches); full 7,228-frame intro/title determinism,
+  first 600 overridden digests and 900-frame controller plain/native replay match.
+  Host 83.4 FPS, full-intro title cadence 15.873 ms; app-smoke draws 120 frames.
+  419030 fires **0x** before first Present and through overridden frame 600:
+  live gameplay exercise remains unverified. STATUS regenerated.
+* **Limits/skips:** separate make m1 and unregistered metal-sprite,
+  metal-sprite-composition, metal-texture and player-task not run; Windows parity
+  and physical pads unverified. No game assets committed. Remaining list
+  **24 + 3** in GOAL section 6. Next: device-backed 77dfc0/7912e0 or another frame
+  owner; the collision matrix transport now has an explicit source-state seam.

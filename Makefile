@@ -139,7 +139,7 @@ include build/tests.mk
 include build/oracles.mk
 
 # guest-overrides replays these oracle corpora (each verify script writes its <slug>.cases.bin next to the report).
-OVERRIDE_CORPORA := build/oracles/controller_init.cases.bin build/oracles/game_startup.cases.bin build/oracles/ninja_queue_lifecycle.cases.bin build/oracles/task_lifecycle.cases.bin build/oracles/task_work.cases.bin build/oracles/ninja_memory.cases.bin build/oracles/fog.cases.bin build/oracles/ninja_render.cases.bin build/oracles/game_frame_control.cases.bin build/oracles/projection_range.cases.bin build/oracles/fov.cases.bin build/oracles/ninja_view.cases.bin build/oracles/d3dx_perspective.cases.bin build/oracles/d3dx_matrix_inverse.cases.bin build/oracles/d3dx_project.cases.bin build/oracles/ninja_queue_color.cases.bin build/oracles/ninja_projected_depth.cases.bin
+OVERRIDE_CORPORA := build/oracles/collision_shapes.cases.bin build/oracles/controller_init.cases.bin build/oracles/game_startup.cases.bin build/oracles/ninja_queue_lifecycle.cases.bin build/oracles/task_lifecycle.cases.bin build/oracles/task_work.cases.bin build/oracles/ninja_memory.cases.bin build/oracles/fog.cases.bin build/oracles/ninja_render.cases.bin build/oracles/game_frame_control.cases.bin build/oracles/projection_range.cases.bin build/oracles/fov.cases.bin build/oracles/ninja_view.cases.bin build/oracles/d3dx_perspective.cases.bin build/oracles/d3dx_matrix_inverse.cases.bin build/oracles/d3dx_project.cases.bin build/oracles/ninja_queue_color.cases.bin build/oracles/ninja_projected_depth.cases.bin
 build/oracles/%.cases.bin: tools/oracles/verify_original_%.py
 	$(MAKE) oracle-$(subst _,-,$*)
 run-unit-tests: assets $(UNIT_TARGETS) $(UNIT_MM_TARGETS) $(OVERRIDE_CORPORA)

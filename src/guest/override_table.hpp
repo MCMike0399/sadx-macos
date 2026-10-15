@@ -45,7 +45,11 @@ std::vector<OverrideEntry> startup_overrides();
 // MXCSR exception flags are not accumulated (the guest CPU, Unicorn, raises none either). `writes` names fixed
 // ranges for the test; these entries write through their pOut argument instead (`pointer_writes`).
 std::vector<OverrideEntry> math_overrides();
-// Every bound owner (frame-loop + startup + math).
+// 419030: CCL center over the live current/next matrix window; absolute copy,
+// translation-only and both rotation orders. Aliased inputs/matrix or noncanonical
+// states execute the original body; no source fact is guessed. PopEx remains guest.
+std::vector<OverrideEntry> collision_overrides();
+// Every bound owner (frame-loop + startup + math + collision).
 std::vector<OverrideEntry> all_overrides(const ExecutableImage& image);
 bool install_overrides(X86Guest&,const std::vector<OverrideEntry>&,std::string* error);
 } // namespace sadx

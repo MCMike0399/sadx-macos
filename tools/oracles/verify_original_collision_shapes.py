@@ -102,6 +102,10 @@ def main():
         reports.append(r);print(json.dumps({k:v for k,v in r.items() if not k.startswith('first_') and k!='modes'}),flush=True)
     sha=lambda b:hashlib.sha256(b).hexdigest()
     result={'source_sha256':image.sha256,'native_library_sha256':sha(a.native_library.read_bytes()),'sine_sha256':sha(table),'unit_sha256':sha(unit),'axis_constants_sha256':sha(constants),'cases_sha256':sha(blob),'seed':hex(SEED),'results':reports,'seconds':time.monotonic()-start,'stored_state_matches':all(not r['value_mismatches'] for r in reports),'passed':all(not(r['value_mismatches'] or r['flag_mismatches']) for r in reports),'scope':'4real shape primitives, real41bc00+41bed0, 3real matrix primitives; no arithmetic/normal replies or geometry replacements. Native live-task views seeded explicitly; hardware/runtime unknown.'}
+    ranges=[(0x419030,0x127),(0x781c80,0x3c),(0x7816e0,0x17),(0x7875f0,0x1d),(0x781c10,0x6f),(0x781670,0x61),(0x784e20,0xbf),(0x784ee0,0xc1),(0x784fb0,0xbf)]
+    result['original_ranges_sha256']={f'{address:x}-{address+size:x}':sha(image.read(address,size)) for address,size in ranges}
+    root=pathlib.Path(__file__).resolve().parents[2]
+    result['source_files']={name:sha((root/name).read_bytes()) for name in ['src/player/collision_shapes.cpp','src/engine/ninja_matrix.cpp','tests/probes/native_collision_shapes_probe.cpp','tools/oracles/verify_original_collision_shapes.py']}
     result['limits']=([result['limits']] if isinstance(result.get('limits'),str) else list(result.get('limits') or []))+['Flag difference: the native x87 model sets the precision bit (PE 0x20) of the status word on inexact results; Unicorn 2.1.4 does not raise x87 exception bits for these instructions (source 0x0). All compared values match; the hardware flags need the Intel capture (M4).']
     a.output.write_text(json.dumps(result,indent=2)+'\n')
     return int(not result['stored_state_matches'])
