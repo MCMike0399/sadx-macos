@@ -54,7 +54,7 @@ def main():
     lib=ctypes.CDLL(str(a.native_library.resolve()));fn=lib.sadx_native_screen_polygon;fn.argtypes=[ctypes.POINTER(ctypes.c_uint32),ctypes.POINTER(ctypes.c_uint32)];fn.restype=ctypes.c_int
     matrix=list(struct.unpack('<16I',image.read(0x389d318,64)))
     fb=lambda x:struct.unpack('<I',struct.pack('<f',x))[0]
-    rng=random.Random(0x77dfc0);bad=[];outcomes={};cases=0
+    rng=random.Random(0x77dfc0);bad=[];outcomes={};cases=0;corpus=[]
     for n in range(3000):
         c=[0]*63;c[0]=rng.choice([0x7f,0x27f,0x37f,0xc7f,0x47f,0x87f]);c[1]=rng.choice([0x1f80,0x1f80,0x3f80,0x5f80,0x7f80,0x1f81])
         c[2]=rng.choice([4,4,4,3,5,6,2,1,0,0x80000004]);c[3]=rng.choice([0xbf800000,0xbf800000,0x3f800000,0xc0000000,0xbf000000,0,0x80000000,0x7fc00000,rng.getrandbits(32)])
@@ -76,6 +76,7 @@ def main():
         for i in range(31,63):
             if isnan(c[i]):c[i]&=~0x40000000
         if not isnan(c[3]) and rng.random()<0.05:c[31+rng.randrange(32)]=rng.choice([0x7fc00000,0xffc00001,0x7f800001,0xff91bb64])
+        corpus.append(c.copy())
         out=(ctypes.c_uint32*200)()
         if fn((ctypes.c_uint32*len(c))(*c),out)!=1:raise RuntimeError('Native rejected')
         got=list(out)
@@ -108,6 +109,8 @@ def main():
             '0x772615-0x7727a2':sha(image.read(0x772615,0x18d)),'0x774150-0x774243':sha(image.read(0x774150,0xf3)),'0x774310-0x774456':sha(image.read(0x774310,0x146)),
             '0x791940-0x79198b':sha(image.read(0x791940,0x4b)),'0x78b780-0x78b83d':sha(image.read(0x78b780,0xbd)),'0x78bba0-0x78bbd0':sha(image.read(0x78bba0,0x30))},
         cases=cases,source_outcomes=outcomes,mismatch_count=len(bad),mismatches=bad[:20],state_traces_match=not bad,limits=__doc__)
+    path=a.output.with_suffix('.cases.bin');path.write_bytes(b''.join(struct.pack('<63I',*c) for c in corpus))
+    report['corpus']=dict(path=str(path),cases=cases,words_per_case=63,entry='77dfc0')
     a.output.write_text(json.dumps(report,indent=1)+'\n');print(json.dumps(dict(cases=cases,outcome_kinds=len(outcomes),mismatches=len(bad))))
     for b in bad[:3]:print(json.dumps(b))
     return int(bool(bad))

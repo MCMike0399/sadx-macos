@@ -21,12 +21,12 @@ struct Fixture {
     bool mapped_blend=true,mapped_device=true;unsigned calls=0,mutation=0,fail_at=0;std::vector<std::array<std::uint32_t,32>> dispatch_observed;std::vector<std::array<std::uint32_t,396>> fog_observed;
     std::vector<std::pair<std::optional<std::uint32_t>,std::optional<std::uint32_t>>> observed;
     std::vector<std::array<std::uint32_t,6>> range_observed;
-    std::uint32_t receipts[2]={};std::uint16_t cw=0x27f;bool argument_mutant=false,viewport_test=false;unsigned viewport_mutation=0,viewport_fail=0,viewport_calls=0,viewport_source_bodies=0,viewport_bridge_mutant=0;std::vector<std::array<std::uint32_t,54>> viewport_observed;
+    std::uint32_t receipts[2]={};std::uint16_t cw=0x27f;bool argument_mutant=false,viewport_test=false,polygon_test=false;unsigned polygon_calls=0,polygon_mutation=0,polygon_fail=0,polygon_source_bodies=0,polygon_bridge_mutant=0;std::vector<std::vector<std::uint32_t>> polygon_observed;unsigned viewport_mutation=0,viewport_fail=0,viewport_calls=0,viewport_source_bodies=0,viewport_bridge_mutant=0;std::vector<std::array<std::uint32_t,54>> viewport_observed;
     Fixture(const ExecutableImage& image,bool native){
         std::string error;p=HleProcess::create(".","build/device-bridge-overlay",&error);require(p!=nullptr,error);require(p->map_main(image,&error),error);
         auto& g=p->guest();auto sites=load_fpu_sites("reference/inventory/fpu-sites.json");
 
-        require(install_fpu_shims(g,sites,shims,&error),error);require(g.map(0x10000000,4096,false,&error),error);const auto create=p->hle().trap(g,"d3d8.dll","Direct3DCreate8",&error);require(create.has_value(),error);
+        require(install_fpu_shims(g,sites,shims,&error),error);require(g.map(0x10000000,0x4000,true,&error),error);const auto create=p->hle().trap(g,"d3d8.dll","Direct3DCreate8",&error);require(create.has_value(),error);
         const auto d3d=g.call(*create,{0xdc});require(bool(d3d),d3d.error);
         const auto params=p->memory().allocate(52),out=p->memory().allocate(4);require(params&&out,"memory");
         const std::uint32_t pp[13]={1,1,22,1,0,1,0,1,0,0,0,0,0};g.write(*params,pp,sizeof pp);
@@ -92,12 +92,40 @@ struct Fixture {
         }
         for(const auto at:{0x77ecb7U,0x77eccaU,0x78753aU})
             require(g.add_instruction_hook(at,[this](X86Guest& gg,std::uint32_t pc){if(boundary==pc)gg.stop("declared port boundary");return false;},&error),error);
+        for(const auto* name:{"SetRenderState","SetTextureStageState","SetTexture","SetVertexShader","DrawPrimitiveUP"}){
+            auto method=*p->hle().find("com:IDirect3DDevice8",name);const auto body=method.body;
+            method.body=[this,body,name](HleCall& c){
+                if(!polygon_test)return body(c);
+                std::vector<std::uint32_t> snapshot(2+30);
+                snapshot[0]=c.guest.u32(0x3d0fdf4).value_or(0);snapshot[1]=c.guest.u32(0x3d129a0).value_or(0);
+                c.guest.read(0x10001000,snapshot.data()+2,120);polygon_observed.push_back(snapshot);
+                const auto result=body(c);++polygon_calls;
+                if(polygon_calls==2){
+                    if(polygon_mutation==1)c.guest.set_u32(0x3d128b0,devices[1]);
+                    if(polygon_mutation==2){c.guest.set_u32(0x3d129c0,*c.guest.u32(0x3d129c0)^1U);c.guest.set_u32(0x3d0fdf4,7);}
+                }
+                if(std::string(name)=="SetVertexShader"&&polygon_mutation==3)c.guest.set_u32(0x3d128ac,0x10001100);
+                if(std::string(name)=="SetTexture"&&polygon_mutation==4){c.guest.set_u32(0x3d0fdf4,9);c.guest.set_u32(0x3d129a0,0x5555);}
+                if(polygon_fail==polygon_calls)c.guest.stop("polygon backend unavailable");
+                return polygon_calls%2?0x80004005U:result;
+            };p->hle().add("com:IDirect3DDevice8",name,method);
+        }
+        require(g.add_instruction_hook(0x77dfee,[this](X86Guest&,std::uint32_t){++polygon_source_bodies;return false;},&error),error);
         require(g.add_instruction_hook(0x7912ee,[this](X86Guest&,std::uint32_t){++viewport_source_bodies;return false;},&error),error);
         if(native)for(auto entry:device_overrides(*p)){
             const auto bridge=entry.bridge;const auto index=entry.address==0x7949b0||entry.address==0x781250||entry.address==0x791170||entry.address==0x794e40?0U:1U;
             const auto initialize=entry.address==0x794ec0;const auto disable=entry.address==0x411b40,enable=entry.address==0x411af0;
             require(g.add_override(entry.address,[this,bridge,index,initialize,disable,enable](X86Guest& guest){
                 if(argument_mutant){if(disable)guest.set_u32(0x3d12798,0);else if(enable)guest.set_u32(0x3b1117c,1);else if(initialize)guest.set_u32(0x3d127e4,guest.u32(0x3d127e4).value_or(0)^0x100000);else{const auto at=guest.esp()+4+4*index;guest.set_u32(at,guest.u32(at).value_or(0)^1);}}
+                if(polygon_test&&guest.eip()==0x77dfc7&&polygon_bridge_mutant){
+                    if(polygon_bridge_mutant==1)guest.set_u32(guest.esp()+0x18,3);
+                    if(polygon_bridge_mutant==2)guest.set_u32(guest.esp()+0x20,*guest.u32(guest.esp()+0x20)^0x40U);
+                    if(polygon_bridge_mutant==3)guest.set_u32(0x10000900,*guest.u32(0x10000900)^0x100000U);
+                    if(polygon_bridge_mutant==4){
+                        const auto value=guest.u32(guest.reg(UC_X86_REG_EAX));if(value)guest.set_reg(UC_X86_REG_ECX,*value);
+                        guest.tail_redirect(0x77dfc9);return 0U;
+                    }
+                }
                 if(viewport_test&&viewport_bridge_mutant&&guest.eip()==0x7912e0){
                     if(viewport_bridge_mutant==1)guest.set_u32(0x3d0fd1c,0);
                     if(viewport_bridge_mutant==2)guest.set_u32(0x3d12788,*guest.u32(0x3d12788)^1U);
@@ -113,7 +141,7 @@ struct Fixture {
         if(!mapped_device){require(g.map(0x3d12000,4096,false,&e),e);mapped_device=true;}
         if(!blend_known){require(g.unmap(0x3ab9000,4096,&e),e);mapped_blend=false;}
         if(!device_known){require(g.unmap(0x3d12000,4096,&e),e);mapped_device=false;}
-        p->d3d8.transforms.clear();p->d3d8.render_states.clear();p->d3d8.render_calls=0;p->hle().clear_log();calls=0;observed.clear();range_observed.clear();dispatch_observed.clear();fog_observed.clear();boundary=mutation=fail_at=0;argument_mutant=false;viewport_test=false;viewport_mutation=viewport_fail=viewport_calls=viewport_source_bodies=viewport_bridge_mutant=0;viewport_observed.clear();cw=0x27f;receipts[0]=receipts[1]=0;
+        p->d3d8.transforms.clear();p->d3d8.render_states.clear();p->d3d8.render_calls=0;p->hle().clear_log();calls=0;observed.clear();range_observed.clear();dispatch_observed.clear();fog_observed.clear();boundary=mutation=fail_at=0;argument_mutant=false;polygon_test=false;polygon_calls=polygon_mutation=polygon_fail=polygon_source_bodies=polygon_bridge_mutant=0;polygon_observed.clear();viewport_test=false;viewport_mutation=viewport_fail=viewport_calls=viewport_source_bodies=viewport_bridge_mutant=0;viewport_observed.clear();cw=0x27f;receipts[0]=receipts[1]=0;
     }
 };
 void compare(Fixture& a,Fixture& b,std::uint32_t entry,const std::vector<std::uint32_t>& args,bool mutant=false){
@@ -183,6 +211,63 @@ int main(int argc,char** argv){try{
         std::array<std::uint32_t,128> source_table{},native_table{};original.p->guest().read(0x3b10f78,source_table.data(),512);native.p->guest().read(0x3b10f78,native_table.data(),512);require(source_table==native_table,"generated fog table");
         if(c[0]==0)++fog_init_cases;else if(c[0]==3)++fog_table_cases;else if(c[0]==2)++fog_generate_cases;else ++fog_switch_cases;
     }
+    const auto polygons=corpus(std::string(argv[2])+"/screen_polygon.cases.bin",63);
+    std::size_t polygon_cases=0;
+    const auto check_polygon=[&](const std::uint32_t* c,unsigned mutation,unsigned fail,unsigned alias=0,bool wrapper=false,unsigned mutant=0){
+        for(auto* f:{&original,&native}){
+            f->reset();f->polygon_test=true;f->polygon_mutation=mutation;f->polygon_fail=fail;
+            auto& g=f->p->guest();g.set_reg(UC_X86_REG_EFLAGS,2);g.set_reg(UC_X86_REG_ECX,0x12345678);g.set_reg(UC_X86_REG_EDX,0x23456789);
+            g.set_u32(0x3d128b0,c[6]?f->devices[0]:0);g.set_u32(0x3d0fdf4,c[5]);g.set_u32(0x3d129a0,0x7777);
+            g.set_u32(0x389b784,0x774310);g.set_u32(0x389b7a0,0x774150);g.set_u32(0x389b7b0,0x772615);
+            g.write(0x3d12780,c+25,24);g.write(0x3d129c0,c+31,64);g.write(0x389d318,c+47,64);
+            g.write(0x10000900,c+7,48);g.write(0x10000a00,c+19,24);
+            const std::uint32_t block[]={0x10000900,0x10000a00,0x5555,0x6666};g.write(0x10000800,block,16);
+            std::array<std::uint32_t,64> sentinel{};sentinel.fill(0x5eed1234);
+            g.write(0x10001000,sentinel.data(),256);g.write(0x10001100,sentinel.data(),256);
+            g.set_u32(0x3d128ac,alias==1?0x10000900:alias==2?0x10000a00:0x10001000);
+            f->p->d3d8.polygons.clear();f->p->d3d8.stage0_states.clear();f->p->d3d8.texture_binds=0;
+            if(wrapper){
+                // Synthetic loader wrapper: mutate a point, call an unhooked
+                // copy of the real 7-byte prologue, then return to its caller.
+                std::vector<std::uint8_t> code={0x83,0x35,0x00,0x09,0x00,0x10,0x01};
+                for(unsigned k=0;k<4;++k)code.insert(code.end(),{0xff,0x74,0x24,0x10});
+                code.push_back(0xe8);const auto rel=0x10002100U-(0x10002000U+static_cast<std::uint32_t>(code.size())+4);
+                for(unsigned b=0;b<4;++b)code.push_back(static_cast<std::uint8_t>(rel>>(8*b)));
+                code.insert(code.end(),{0x83,0xc4,0x10,0xc3});g.write(0x10002000,code.data(),code.size());
+                const std::uint8_t prologue[]={0x83,0xec,0x10,0x8b,0x44,0x24,0x14,0xe9};
+                g.write(0x10002100,prologue,sizeof prologue);g.set_u32(0x10002108,0x77dfc7U-(0x10002100U+12));
+            }
+        }
+        const std::vector<std::uint32_t> args={0x10000800,c[2],c[3],c[4]};
+        native.polygon_bridge_mutant=mutant;
+        const auto a=original.p->guest().call(wrapper?0x10002000:0x77dfc0,args,std::nullopt,std::nullopt,static_cast<std::uint16_t>(c[0]),600'000'000,c[1]);
+        const auto b=native.p->guest().call(wrapper?0x10002000:0x77dfc0,args,std::nullopt,std::nullopt,static_cast<std::uint16_t>(c[0]),600'000'000,c[1]);
+        require(a.completed==b.completed,"polygon completion case "+std::to_string(polygon_cases)+" native "+b.error);
+        require(native.polygon_source_bodies==0,"polygon must use native main body");
+        const auto& l=original.p->hle().log();const auto& r=native.p->hle().log();require(l.size()==r.size(),"polygon call count case "+std::to_string(polygon_cases));
+        for(unsigned k=0;k<l.size();++k)require(l[k].dll==r[k].dll&&l[k].symbol==r[k].symbol&&l[k].return_address==r[k].return_address
+            &&l[k].arguments==r[k].arguments&&l[k].result==r[k].result,"polygon COM trace case "+std::to_string(polygon_cases)+" call "+std::to_string(k));
+        require(original.polygon_observed==native.polygon_observed,"polygon callback buffers/cache case "+std::to_string(polygon_cases));
+        require(original.p->d3d8.render_states==native.p->d3d8.render_states&&original.p->d3d8.stage0_states==native.p->d3d8.stage0_states,"polygon render/stage states");
+        for(auto at:{0x3d0fdf4U,0x3d129a0U})require(original.p->guest().u32(at)==native.p->guest().u32(at),"polygon texture cache");
+        for(auto at:{0x10000900U,0x10000a00U,0x10001000U,0x10001100U}){
+            std::array<std::uint8_t,160> x{},y{};original.p->guest().read(at,x.data(),x.size());native.p->guest().read(at,y.data(),y.size());
+            require(x==y,"polygon data "+std::to_string(at)+" case "+std::to_string(polygon_cases));
+        }
+        const auto& x=original.p->d3d8.polygons;const auto& y=native.p->d3d8.polygons;require(x.size()==y.size(),"polygon draw count");
+        for(unsigned k=0;k<x.size();++k)require(x[k].primitive_type==y[k].primitive_type&&x[k].primitive_count==y[k].primitive_count&&x[k].vertex_bytes==y[k].vertex_bytes,"polygon vertex bytes");
+        if(a)require(a.esp==b.esp,"polygon caller stack");
+        ++polygon_cases;
+    };
+    for(std::size_t i=0;i<polygons.size();i+=63)check_polygon(polygons.data()+i,i/63%5,i/63%100==0?1U+(i/63%8):0U);
+    std::array<std::uint32_t,63> polygon_fixture{};std::copy_n(polygons.data(),63,polygon_fixture.data());
+    polygon_fixture[0]=0x27f;polygon_fixture[1]=0x1f80;polygon_fixture[2]=4;polygon_fixture[3]=0xbf800000;polygon_fixture[5]=7;polygon_fixture[6]=1;
+    for(unsigned alias=0;alias<3;++alias)for(bool wrapper:{false,true})check_polygon(polygon_fixture.data(),0,0,alias,wrapper);
+    for(unsigned mutant=1;mutant<=4;++mutant){
+        bool caught=false;try{check_polygon(polygon_fixture.data(),0,0,0,true,mutant);}catch(const std::exception&){caught=true;}
+        require(caught,"polygon input/body mutant survived "+std::to_string(mutant));
+    }
+    std::cout<<"Polygon bridge: "<<polygon_cases<<" corpus/callback/alias/wrapper cases equivalent; four input/body mutants caught\n";
     const auto screen=corpus(std::string(argv[2])+"/screen_init.cases.bin",68);
     std::size_t viewport_cases=0;
     const auto check_viewport=[&](const std::uint32_t* c,unsigned mutation,unsigned fail,bool direction=false,unsigned mutant=0){

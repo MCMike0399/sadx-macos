@@ -84,6 +84,11 @@ struct NinjaPolygonRuntime {
     NinjaRenderState& render;NinjaTextureSelectionState& textures;NinjaTextureSelectionRuntime& texture_runtime;
     const std::optional<std::uint32_t>& vertex_buffer_at_3d128ac; // NinjaFrameCallState
     NinjaScreenDevice& device;NinjaDepthRuntime depth;
+    std::function<bool(float)> argument_ready={};
+    std::function<bool(std::uint32_t,std::uint32_t)> vertices_begin={};
+    std::function<bool(const NinjaScreenPolygon&)> vertices_ready={};
+    std::function<bool()> depth_begin={};
+    std::function<bool(std::uint32_t,std::uint32_t,std::uint32_t)> vertex_store={};
 };
 struct NinjaPolygonResult {
     NinjaScreenResult status;std::optional<NinjaScreenPolygon> polygon;

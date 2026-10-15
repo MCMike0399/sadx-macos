@@ -6229,7 +6229,7 @@
    "condition": "uiscale::initialize_common via setup_background_scale (FillModeBackground=2) -> runs once",
    "active": true,
    "source_ref": "uiscale.cpp:682",
-   "handled_by": "ninja_screen: natively only BeginScene's 78b922 reaches 77dfc0, and the loader rewrites that call to the trampoline's unhooked original copy; other callers (njDrawCircle2D_r) are unported",
+   "handled_by": "ninja_screen / hle_device_bridge: common body 77dfc7 bound after original or relocated prologue; actual njDrawCircle2D_r UI wrapper retained, including unscaled BeginScene trampoline calls",
    "original_bytes": "83ec108b442414"
   },
   {

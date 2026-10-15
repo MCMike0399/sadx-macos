@@ -324,6 +324,116 @@ struct FogBridge {
 };
 
 }
+std::uint32_t screen_polygon(HleProcess& p){
+    auto& g=p.guest();const auto frame=g.esp(),block=g.reg(UC_X86_REG_EAX);
+    const auto read=[&](std::uint32_t at,std::uint32_t site)->std::optional<std::uint32_t>{
+        const auto value=g.u32(at);if(!value)g.stop("polygon bridge: missing word "+hex(at)+" at "+hex(site));return value;
+    };
+    const auto points=read(block,0x77dfc7);if(!points)return 0;g.set_reg(UC_X86_REG_ECX,*points);
+    const auto colors=read(block+4,0x77dfc9);if(!colors)return 0;g.set_edx(*colors);g.set_u32(frame,*points);
+    const auto extra=read(block+8,0x77dfcf);if(!extra)return 0;g.set_reg(UC_X86_REG_ECX,*extra);g.set_u32(frame+4,*colors);
+    const auto old_count=read(block+12,0x77dfd6);if(!old_count)return 0;g.set_edx(*old_count);
+    const auto count=read(frame+0x18,0x77dfd9);if(!count)return 0;
+    g.set_eax(*count);g.set_u32(frame+8,*extra);g.set_u32(frame+12,*count);
+    if(static_cast<std::int32_t>(*count)<=2){g.tail_redirect(0x77e04a);return 0;}
+    const auto original_argument=read(frame+0x1c,0x77dff4),flags=read(frame+0x20,0x77e015);
+    if(!original_argument||!flags)return 0;
+    // Bounded native workspace; larger or noncanonical floating contexts retain source execution.
+    if(*count>16384U||g.reg(UC_X86_REG_FPTAG)!=0xffffU){g.tail_redirect(0x77dfee);return 0;}
+    if((g.reg(UC_X86_REG_FPCW)&0x3fU)!=0x3fU){g.stop("polygon bridge: unmasked x87 exceptions not supplied at 77dfee");return 0;}
+    const auto filter_call=g.u32(0x77e032),filter_tail=g.u32(0x77e036);
+    if(filter_call!=0x00d749e8U||!filter_tail||(*filter_tail&0xffU)!=0U){
+        // An internal profile variant (forced linear filter) remains original.
+        g.tail_redirect(0x77dfee);return 0;
+    }
+    RenderBridge bridge(p);NinjaScreenState state{};NinjaDeviceState device{};NinjaScreenDevice methods{};
+    NinjaTextureSelectionState textures{};std::optional<std::uint32_t> buffer;
+    std::uint32_t mirrored_id=0,mirrored_active=0,generated_buffer=0;bool generated=false;
+    const auto bits=[](float value){std::uint32_t word;std::memcpy(&word,&value,4);return word;};
+    const auto reload_depth=[&](){
+        for(unsigned k=0;k<6;++k)device.viewport_at_3d12780[k]=g.u32(0x3d12780+4*k);
+        for(unsigned k=0;k<16;++k){state.projection_at_3d129c0[k]=g.u32(0x3d129c0+4*k);device.matrix_at_389d318[k]=g.u32(0x389d318+4*k);}
+    };
+    const auto reload_texture=[&](){
+        textures.global_id_at_3d0fdf4=g.u32(0x3d0fdf4);
+        const auto active=g.u32(0x3d129a0);textures.active_memory_at_3d129a0.reset();
+        if(active){textures.active_memory_at_3d129a0=*active?std::make_shared<const NinjaTextureMemoryReference>(NinjaTextureMemoryReference{nullptr,0,{},{},{},{},{},{}}):std::shared_ptr<const NinjaTextureMemoryReference>{};mirrored_active=*active;}
+        if(textures.global_id_at_3d0fdf4)mirrored_id=*textures.global_id_at_3d0fdf4;
+    };
+    const auto flush_texture=[&](){
+        if(textures.global_id_at_3d0fdf4&&*textures.global_id_at_3d0fdf4!=mirrored_id){
+            g.set_u32(0x3d0fdf4,*textures.global_id_at_3d0fdf4);mirrored_id=*textures.global_id_at_3d0fdf4;
+        }
+        if(textures.active_memory_at_3d129a0&&!*textures.active_memory_at_3d129a0&&mirrored_active){
+            g.set_u32(0x3d129a0,0);mirrored_active=0;
+        }
+    };
+    const auto after=[&](){bridge.refresh();reload_texture();reload_depth();buffer=g.u32(0x3d128ac);};
+    const auto table_register=[](std::uint32_t site){
+        return site==0x791964||site==0x791984||site==0x78b7a1||site==0x78b7ca||site==0x78b7f2||site==0x78b822||site==0x78ea80?UC_X86_REG_EDX:UC_X86_REG_ECX;
+    };
+    const auto invoke=[&](const NinjaRenderDeviceHandle& handle,const char* name,std::uint32_t offset,
+        const std::vector<std::uint32_t>& args,std::uint32_t site,std::uint32_t reserve){
+        flush_texture();const auto r=bridge.invoke_arguments(handle,name,offset,args,site,reserve,true,table_register(site));
+        if(!g.stop_reason())after();return r;
+    };
+    bridge.render.set_render_state=[&](const NinjaRenderStateCommand& c){return invoke(c.device,"SetRenderState",0xc8,{c.state,c.value},c.source_call,0x14);};
+    bridge.render.set_texture_stage_state=[&](const NinjaRenderStageCommand& c){return invoke(c.device,"SetTextureStageState",0xfc,{c.stage,c.state,c.value},c.source_call,0x18);};
+    NinjaTextureSelectionRuntime texture_runtime{bridge.render,nullptr,nullptr,[&](const NinjaTextureBindCommand& c){
+        return invoke(c.device,"SetTexture",0xf4,{c.stage,0},c.source_call,generated?0x30U:0x14U);
+    }};
+    methods.set_vertex_shader=[&](const D3D8FrameCommand& c,std::uint32_t shader)->std::optional<std::int32_t>{
+        const auto r=invoke(c.device,"SetVertexShader",0x130,{shader},c.source_call,0x28);return r.completed?r.original_hresult:std::nullopt;
+    };
+    const std::array<std::uint32_t,4> saved={g.reg(UC_X86_REG_EBP),g.reg(UC_X86_REG_EBX),g.reg(UC_X86_REG_ESI),g.reg(UC_X86_REG_EDI)};
+    methods.draw_primitive_up=[&](const D3D8FrameCommand& c,const NinjaScreenPolygon& polygon)->std::optional<std::int32_t>{
+        const auto current=read(0x3d128ac,0x78ea86);if(!current)return std::nullopt;
+        g.set_edx(polygon.primitive_count);
+        const auto r=invoke(c.device,"DrawPrimitiveUP",0x120,{polygon.primitive_type,polygon.primitive_count,*current,polygon.stride},c.source_call,0x34);
+        if(!g.stop_reason()){
+            g.set_reg(UC_X86_REG_EBP,saved[0]);g.set_reg(UC_X86_REG_EBX,saved[1]);g.set_reg(UC_X86_REG_ESI,saved[2]);g.set_reg(UC_X86_REG_EDI,saved[3]);
+        }
+        return r.completed?r.original_hresult:std::nullopt;
+    };
+    after();X87Context fp(static_cast<std::uint16_t>(g.reg(UC_X86_REG_FPCW)));SseContext sse(g.mxcsr());
+    NinjaPolygonRuntime runtime{[&](std::uint32_t at){return g.u32(at);},bridge.render,textures,texture_runtime,buffer,methods,
+        NinjaDepthRuntime{state,device,sse,fp,sse_reciprocal_by_division}};
+    runtime.argument_ready=[&](float value){
+        if(static_cast<std::int32_t>(*flags)>=0)g.set_u32(frame+8,0);
+        return g.set_u32(frame+0x1c,bits(value));
+    };
+    runtime.vertices_begin=[&](std::uint32_t address,std::uint32_t n){
+        if(std::uint64_t(address)+20ULL*n>0xffffffffULL){g.stop("polygon bridge: wrapping vertex buffer at 78ea29");return false;}
+        generated_buffer=address;
+        g.set_u32(frame-8,0x77e045);g.set_u32(frame-4,*g.u32(frame+0x1c));g.set_u32(frame-12,n);
+        for(unsigned k=0;k<4;++k)g.set_u32(frame-16-4*k,saved[k]);
+        return true;
+    };
+    runtime.depth_begin=[&](){
+        if(g.u32(0x389b784)!=0x774310U||g.u32(0x389b7a0)!=0x774150U||g.u32(0x389b7b0)!=0x772615U){
+            g.stop("polygon bridge: non-SSE D3DX dispatch at 78dc3a");return false;
+        }
+        return true;
+    };
+    runtime.vertex_store=[&](std::uint32_t i,std::uint32_t component,std::uint32_t word){
+        g.set_reg(UC_X86_REG_ESI,generated_buffer+20*(i+1));g.set_reg(UC_X86_REG_EDI,*points+8*(i+1));
+        g.set_reg(UC_X86_REG_EBX,*colors+4*(i+1));g.set_reg(UC_X86_REG_EBP,*count-1-i);
+        const auto address=generated_buffer+20*i+4*component;
+        if(!g.set_u32(address,word)){g.stop("polygon bridge: missing vertex output at 78ea50/78ea63/78ea66/78ea6c, "+hex(address));return false;}
+        if(component==4)g.set_reg(UC_X86_REG_ECX,word);
+        if((std::uint64_t(address)<0x3d129c0ULL+64&&std::uint64_t(address)+4>0x3d129c0ULL)
+            ||(std::uint64_t(address)<0x389d318ULL+64&&std::uint64_t(address)+4>0x389d318ULL)
+            ||(std::uint64_t(address)<0x3d12780ULL+24&&std::uint64_t(address)+4>0x3d12780ULL))reload_depth();
+        if(address==0x3d0fdf4||address==0x3d129a0)reload_texture();
+        return true;
+    };
+    runtime.vertices_ready=[&](const NinjaScreenPolygon&){generated=true;return true;};
+    const auto r=run_screen_polygon_77dfc0(frame,*count,floating(*original_argument),*flags,runtime);
+    if(!g.stop_reason())flush_texture();
+    if(!r){if(!g.stop_reason())g.stop("polygon bridge: native boundary "+hex(r.status.source_boundary));return 0;}
+    g.set_fpu_status(static_cast<std::uint16_t>(g.fpu_status()|(fp.exception_flags()&0x3fU)));
+    g.tail_redirect(0x77e04a);return 0;
+}
 std::uint32_t viewport_refresh(HleProcess& p){
     auto& g=p.guest();const auto entry=g.esp(),saved_ecx=g.reg(UC_X86_REG_ECX);
     const auto invalid=g.u32(0x3d0fd1c);
@@ -385,6 +495,8 @@ std::uint32_t viewport_refresh(HleProcess& p){
 }
 std::vector<OverrideEntry> device_overrides(HleProcess& p){
     std::vector<OverrideEntry> out;
+    out.push_back({0x77dfc7,"ninja_screen_polygon",{{0x3d0fdf4,4},{0x3d129a0,4}},
+        [&p](X86Guest&)->std::uint32_t{return screen_polygon(p);}});
     out.push_back({0x7912e0,"ninja_viewport_refresh",{{0x3d0fd1c,4},{0x3d0fd20,16},{0x3d0fd80,64}},
         [&p](X86Guest&)->std::uint32_t{return viewport_refresh(p);},true});
     out.push_back({0x403180,"ninja_set_projection_range",{{0x3d0f808,4},{0x3d0f968,4},{0x90082c,8},{0x3aad0c0,8}},

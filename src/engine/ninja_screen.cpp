@@ -130,6 +130,7 @@ struct Polygon:Base {
         // FLD -1.0 ; FDIV arg ; FSTP arg ; FLD 1.0 ; FCOMP arg ; TEST AH,5 ; JP: clamp to 1.0 when 1.0 < -1/arg.
         argument=fp.to_float(fp.divide_float_memory(fp.from_float(-1.0F),argument));
         if(fp.compare_float_memory(fp.from_float(1.0F),argument)==X87Comparison::less)argument=1.0F;
+        if(rt.argument_ready&&!rt.argument_ready(argument))fail(NinjaScreenFailure::unknown_state,0x77dff8);
         // 791940 (ECX = flags & 0x40): alpha blending and the stage-0 alpha operation.
         if(flags&0x40){state(rt.render,0x1b,1,{0x791940,0x791947,0x791950});stage(rt.render,4,4,{0x791956,0x79195b,0x791964});}
         else{state(rt.render,0x1b,0,{0x791940,0x791947,0x791970});stage(rt.render,4,3,{0x791976,0x79197b,0x791984});}
@@ -139,15 +140,25 @@ struct Polygon:Base {
         stage(rt.render,0x10,1,{0x78b7bc,0x78b7c1,0x78b7ca});stage(rt.render,0x11,1,{0x78b7d0,0x78b7d5,0x78b7de});stage(rt.render,0x12,1,{0x78b7e4,0x78b7e9,0x78b7f2});
         // 78ea10 (ECX = the local copy of the block with count as its fourth word)
         const auto buffer=need(rt.vertex_buffer_at_3d128ac,0x78ea29,0x3d128ac);(void)buffer;
+        if(rt.vertices_begin&&!rt.vertices_begin(buffer,count))fail(NinjaScreenFailure::unknown_state,0x78ea29,0x3d128ac);
         NinjaScreenPolygon p;p.primitive_count=count-2U;p.vertex_bytes.resize(static_cast<std::size_t>(count)*0x14U);
         for(std::uint32_t i=0;i<count;++i){
+            if(rt.depth_begin&&!rt.depth_begin())fail(NinjaScreenFailure::sse_failed,0x78dc3a);
             Depth depth(rt.depth);X87Value z=fp.from_float(0.0F);
             try{z=depth.run(argument);}catch(Stop){r=depth.r;throw;}
+            const auto store=[&](unsigned component,std::uint32_t word){
+                std::memcpy(p.vertex_bytes.data()+0x14U*i+4*component,&word,4);
+                if(rt.vertex_store&&!rt.vertex_store(i,component,word))fail(NinjaScreenFailure::unknown_state,0x78ea69,buffer+0x14U*i+4*component);
+            };
             const float x=fp.to_float(fp.add_float_memory(fp.from_float(bits_float(read(points+8*i,0x78ea3e))),0.5F));
-            const float y=fp.to_float(fp.add_float_memory(fp.from_float(bits_float(read(points+8*i+4,0x78ea53))),0.5F));
-            const std::uint32_t words[5]={float_bits(x),float_bits(y),float_bits(fp.to_float(z)),0x3f800000U,read(colors+4*i,0x78ea69)};
-            std::memcpy(p.vertex_bytes.data()+0x14U*i,words,0x14);
+            store(0,float_bits(x));
+            const auto loaded_y=fp.from_float(bits_float(read(points+8*i+4,0x78ea53)));
+            store(3,0x3f800000U);
+            const float y=fp.to_float(fp.add_float_memory(loaded_y,0.5F));
+            store(1,float_bits(y));store(2,float_bits(fp.to_float(z)));
+            store(4,read(colors+4*i,0x78ea69));
         }
+        if(rt.vertices_ready&&!rt.vertices_ready(p))fail(NinjaScreenFailure::unknown_state,0x78ea69,0x3d128ac);
         release_texture();
         {const auto c=device(rt.render,0x78ea76,0x78ea7b,0x78ea80);
             issued(rt.device.set_vertex_shader?rt.device.set_vertex_shader(c,0x44):std::nullopt,bool(rt.device.set_vertex_shader),0x78ea80);}

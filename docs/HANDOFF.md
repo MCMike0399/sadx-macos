@@ -2909,3 +2909,72 @@ the wrapper. 7912e0 is unpatched and is this step's bound screen owner.
   Separate make m1 and unregistered metal-sprite, metal-sprite-composition,
   metal-texture and player-task not run. Windows parity/physical pads unverified.
   No game assets committed. Remaining list **23 + 3** in GOAL section 6.
+
+### M1 screen-polygon body override 77dfc7 (gate 136, 2026-10-15)
+
+Fresh owned REA/Ghidra, pinned sonic.exe 6b0937ca…24cd74,
+`reference/ghidra-polygon-bridge-requests.json`:
+77dfc0 `ev_1873c68678e19335a5f22c3c86db30e863954ad1bf3e17311cddbe8d014dd13a`;
+78ea10 `ev_85046df6a2d7891bf72179826368c14be722dc717bc4b40fd9880a6054a98940`;
+791940 `ev_a5e9b339277f0124f475cbb5e36de1cb0931042156ba55a68fbb3e200f5097c3`;
+78bba0 `ev_081b60d636b5db7eec587c2f31adcb1ab61b5b76b9c114c3121c7efe682bf3c4`;
+78b780 `ev_d89bf73e2601c447e040cf97a9c8d49db371f6c8a69957fa4c14a5fbd960866b`;
+78b800 `ev_27b4219116e004cd1a7541ae23e47bf183d6544e2ae6ec028933188a9600473f`.
+Runner closed rc 0.
+
+* **48 process entries.** Bind 77dfc0's common body at **77dfc7**, after the
+  7-byte SUB ESP,0x10 / MOV EAX,[ESP+0x14] prologue. Both original entry and the
+  loader's relocated prologue reach it. The actual njDrawCircle2D_r UI-scaling
+  wrapper still runs, and BeginScene's rewritten 78b922 call still reaches the
+  unhooked copy. No override replaces the patched 77dfc0 entry. Profile inventory
+  now names this common-body binding; 0 UNHANDLED overlaps.
+* **Native composition:** existing polygon owner performs alpha/render/stage
+  state changes, texture release, projected depth through the SSE dispatch model,
+  XYZRHW|DIFFUSE generation, shader selection, TRIANGLEFAN and linear-filter reset.
+  Verified synchronous HLE COM targets receive actual global buffer pointers,
+  return sites and source stack depths. The source local block, adjusted caller
+  priority argument and sign-dependent local word are transported. Original
+  ADD ESP,0x10 / RET epilogue remains guest code; no guest-heap allocation.
+* **Vertex transport seam:** optional owner callbacks expose argument readiness,
+  vertex-buffer setup, per-depth checks, per-word stores and completion. Integer
+  RHW is stored after loading Y but before its arithmetic/store, matching 78ea10;
+  X is committed before the next Y read, and colour is read after the preceding
+  stores. Point/colour aliases therefore consume live mutated input. Depth facts
+  reload when output overlaps viewport/projection/world data. Texture cache
+  mirrors flush only after source release completes and before the next device
+  call; device/depth/cache/buffer facts reload after callbacks. DrawPrimitiveUP
+  rereads 3d128ac after SetVertexShader instead of reusing the generated buffer.
+* **Equivalence:** all 3,000 screen_polygon inputs through the real HLE owners,
+  adversarial device/projection/cache/buffer changes and backend stops, plus six
+  overlapping-buffer and synthetic loader-wrapper/trampoline cases: **3,006**
+  equivalent. Compared completion, COM methods/arguments/return sites/HRESULTs,
+  callback-time vertex/cache snapshots, render/stage state, texture globals,
+  input/output buffer bytes, draw vertices and caller ESP. A source-body hook
+  asserts native main-body execution. The synthetic wrapper changes a point,
+  calls a copied source prologue that jumps to 77dfc7, and returns to its caller.
+* **Oracles/mutants:** screen-polygon and screen-init rerun **pass**, 3,000 cases
+  each, 0 value/state/COM mismatches, reports tracked. Their existing comparison
+  scopes do not prove FP exception flags; polygon MXCSR comparison masks those
+  bits and retains the division-estimate / one-NaN corpus limits. Polygon corpus
+  exported as screen_polygon.cases.bin, in OVERRIDE_CORPORA. Core 3/3 caught
+  (missing X half-pixel offset, primitive count, alpha branch). Four input/body
+  mutants caught (count, flags, point word, original-only body). Three bridge
+  mutants caught (stale post-shader buffer pointer, omitted vertex stores,
+  omitted texture-id flush), restored test rc 0.
+* **Gate/live:** `reference/production-integration-20261015/screen-polygon-136-gate.json`,
+  actual rc 0, 126 native programs and four Python tests. Boot identical
+  (22,030 HLE calls, 119/119 active patches). Full 7,228-frame intro/title
+  determinism, first 600 overridden digests and 900-frame controller plain/native
+  replay match. Common polygon body fires **599x** through overridden frame 600
+  (0x before first Present). Separate projected-depth override calls drop from
+  13,208 to 10,812, consistent with four depths per polygon moving into this
+  native composition. Host 83.4 FPS; title 15.873 ms; app-smoke 120 frames.
+  STATUS regenerated.
+* **Limits/skips:** nonempty incoming x87 stacks, counts above the 16,384-vertex
+  native-workspace limit and changed internal filter calls retain original body;
+  unmasked x87 exceptions stop. These fallback/stop variants were not separately
+  exercised. Full fault-register/volatile-register parity is not claimed. Other
+  standalone oracles not rerun; inventory remains 48 pass / 46 partial / 9 fail /
+  1 missing (verdict rc 2 for existing failures). Separate make m1 and the four
+  unregistered tests not run. Windows parity and physical pads unverified; no
+  game assets committed. Remaining list **22 + 3** in GOAL section 6.

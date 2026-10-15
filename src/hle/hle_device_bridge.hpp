@@ -3,6 +3,7 @@
 namespace sadx {
 class HleProcess;
 // Device-backed overrides. The process/guest must outlive the entries.
+// 77dfc7 binds the polygon body after the original/loader-relocated prologue, preserving UI wrappers.
 // 7912e0 refreshes viewport/projection with original COM stack depths and live callback state.
 // Calls only verified HLE COM targets; a guest/proxy vtable is an explicit boundary.
 std::vector<OverrideEntry> device_overrides(HleProcess&);

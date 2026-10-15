@@ -1,14 +1,14 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "3413b126fb919a94edc329992f8fc63abc3ebdacc972efedf4159f84f2c8c79c",
+ "native_library_sha256": "393363884ad5516641fea59cb781f60083b8c2c903edd21751993aa468074805",
  "source_files": {
-  "src/engine/ninja_screen.hpp": "675d77aee8d6c6cffe01d05657293077830555a2a3f38a3a7c5e38787f077b53",
-  "src/engine/ninja_screen.cpp": "16495da84a08efee1fefb24b8972ae6134e9ef2e58ec781b11880b5dcdffa768",
-  "src/math/d3dx_math.hpp": "4c8811e8a97a22872c188c5a52be2a7de5f2a27fe8df6b190b52d11f046a90f0",
-  "src/math/d3dx_math.cpp": "9efedeb8914db2c9cba681d41e80a762ade22bb0c7bbfdcb503c82427e0398f3",
-  "src/cpu/sse_math.cpp": "f34e9cea514bcb5d6374e29e91e8b39fea80640e58fdaf816ed58f7282c673dc",
+  "src/engine/ninja_screen.hpp": "00a0ef052560cd8073ed1f32d8f9edddcea7d4e4347eae7edda093c492e3e030",
+  "src/engine/ninja_screen.cpp": "387d878e89bdb1dae96dde80474c46f2aef749a1c10aae75995ddbdaf40f52b7",
+  "src/math/d3dx_math.hpp": "3b997c26013a774f6b85e099f774187ffe9af64369316d2e3e769f6ff26ea8f0",
+  "src/math/d3dx_math.cpp": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171",
+  "src/cpu/sse_math.cpp": "b7ddd9dc425ac2e1ebd49929de1dcdf4bd7671466bf041544a6ba57157ca12b7",
   "tests/probes/native_screen_polygon_probe.cpp": "dcd4d808f68dcf8ad2b92d8f32e3bc3e1ac82734633e1edbe2b2209327ce8325",
-  "tools/oracles/verify_original_screen_polygon.py": "743795ec4173727d35a48d1587cb9203d7381c460b346227487242db121f3d08"
+  "tools/oracles/verify_original_screen_polygon.py": "710a898db181c9adfccef08e13fc3ed023ae691cfad914e5f055aa9a828727bc"
  },
  "original_ranges_sha256": {
   "0x77dfc0-0x77e04e": "23ed9911192e43fe1fd555d87aa34c1194de6135c66411e9b494b1dbf67c9900",
@@ -32,9 +32,15 @@
  "mismatches": [],
  "state_traces_match": true,
  "limits": "77dfc0 (BeginScene's 78b922 polygon) against its original instructions, with\nthe real 791940, 78bba0, 78b780, 78ea10, 78b800, 78dbe0 and the D3DX8 math\n772615 (Vec3Project), 774310 (MatrixMultiply) and 774150 (Vec3TransformCoord).\n\nThe whole PE is mapped. The D3DX dispatch slots are written as 77350c leaves\nthem on an SSE CPU without 3DNow! (389b784 = 774310, 389b7a0 = 774150) and\n389b7b0 = 772615 (the default every path keeps); 77350c's CPU and registry\nprobes are not executed. RCPPS is Unicorn's (QEMU's float division), which is\nnot a real CPU's estimate: the native probe uses the same division model, so\nthis checks everything around RCPPS, not the reference CPU's table. MXCSR\nchoices keep FTZ/DAZ clear. Cases keep at most one NaN source (the argument or one matrix word): Unicorn\napplies QEMU's x87 NaN rule (larger significand) to SSE operands, where hardware\nSSE returns the first operand's NaN. MXCSR is compared without its six exception flags:\nUnicorn 2.1.4 raises none, which hardware and the native SseContext do. The device is a COM fixture recording\nSetRenderState (+0xc8), SetTextureStageState (+0xfc), SetTexture (+0xf4),\nSetVertexShader (+0x130) and DrawPrimitiveUP (+0x120, with the vertex bytes it\nis given). A null device faults at the vtable load (page 0 is unmapped), as the\nnative owner stops (null_device). Compared: completion, 3d0fdf4, whether\n3d129a0 was cleared, the device trace, the drawn vertices and MXCSR.\n",
+ "corpus": {
+  "path": "build/oracles/screen_polygon.cases.bin",
+  "cases": 3000,
+  "words_per_case": 63,
+  "entry": "77dfc0"
+ },
  "tracked_summary": {
-  "full_sha256": "2e56ee4bfca5e32be31f2daac821508ea82f96d7859e7430d6f707c0a29af324",
-  "full_bytes": 3518,
+  "full_sha256": "5a6f9c287709eacb2955d4e153e6c520b104bb9442f9d487b3417805ba36b5b3",
+  "full_bytes": 3648,
   "lists_cut_to": 10,
   "cut_lists": {}
  }
