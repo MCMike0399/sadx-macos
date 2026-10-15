@@ -2978,3 +2978,72 @@ Runner closed rc 0.
   1 missing (verdict rc 2 for existing failures). Separate make m1 and the four
   unregistered tests not run. Windows parity and physical pads unverified; no
   game assets committed. Remaining list **22 + 3** in GOAL section 6.
+
+### M1 frame-input/mode overrides 411e30/40f010/411e20 (gate 137, 2026-10-15)
+
+Owned REA/Ghidra, pinned sonic.exe 6b0937ca…24cd74,
+`reference/ghidra-frame-input-requests.json`:
+411e30 `ev_828b81ca781f83dfdeb82bd02a3ade208d91d198855d18a599d536c08d4ada33`;
+40f010 `ev_7847377cde4e89c664b6b76ddc3e21832e73249f5a8f2a5261067402216e3fae`;
+411e20 `ev_ce8a2a5b897b4f0e598adfa9304a049c102e2da4ba725a24dfeacb15e98ea7ce`;
+77ff50 `ev_89c276c89f57bbca158515e50483845af20f909a92a2e9556e3d564b575d561c`;
+792f60 `ev_65bea6a8eb16549ef087deed67200accb673b802acbf7734ecab4d8bd14004a5`.
+
+* **Seed recovery:** first callback queries were rejected because no procedure
+  existed at either address. Added 40f010/411e20 to the tracked seed list (64
+  seeds). REA correctly rejected the old snapshot with profile_mismatch because
+  seed contents affect the profile. Preserved it locally as
+  sonic-ghidra-inventory-before-frame-input-seeds.json; fresh import produced the
+  current, smaller snapshot. No old-profile evidence was relabelled. METHOD and
+  GOAL explain the transition. Successful analysis above; close rc 1 for the
+  recurring sysctl_errno_22 ownership-token cleanup failure. Subsequent process
+  listing showed no Ghidra Java process.
+* **51 process entries.** The existing native mode owner transports timing stores,
+  conditional frame multiplier/interval stores, then callback registration. The
+  native callable identity is checked against run_game_frame_input and mapped
+  explicitly to source token **411e20**; no native pointer is cast to guest memory.
+  Source final EAX/ECX are 411e20; EDX is the interval high word when multiplication
+  ran, otherwise preserved. Integer flags follow the actual DEC/CMP/stack-ADD path.
+  Checked output stores stop at the first missing destination with its source
+  instruction and address; an unmapped timing page cannot silently succeed or
+  register the callback.
+* **Input ABI:** 40f010's incidental 3b0e760 load is now modelled by the bridge
+  even though the older state oracle excluded its unused EAX. AL loads/updates
+  preserve the high EAX bytes. Nonzero flags load EAX=save phase and update CL
+  only when phase=0; zero flags may leave the edge in AL and set DL=4, or clear
+  AL on the AND path. Other ECX/EDX bytes remain intact. Only the flag byte is
+  stored. 411e20's integer XOR/no-op-call effect is represented before the same
+  native input owner. No floating state, host clock or physical key is invented.
+  Native failure diagnostics include source boundary and required field address.
+* **Equivalence:** 668 mapped payloads for each new entry (**2,004** cases), using
+  the existing 19-word corpus. Availability mask bits are fixture metadata,
+  not guest pages: these bridge replays seed the payloads as physically present.
+  Byte guards and EAX/ECX/EDX, integer flags, output/callback values agree; source
+  instruction hooks catch an original-only fake override. A real x86 caller
+  registers mode then CALLs [3d0fa34] under three input/save phases and matches
+  the original. Separately, an unmapped output page stops at 411e38 before callback
+  registration. Full fault-register parity and other physical-unmapping variants
+  are not claimed. Guest-only table: 21 entries, **71,115** cases (59,115 corpus).
+* **Oracle/mutants:** game_frame_control rerun **pass**, 2,672 cases, 0 mismatches,
+  including its separate declared-availability boundaries. Addressed source ranges
+  now use the profile checker's recognised key, with 77ff50 added; report tracked,
+  0 UNHANDLED overlaps. Core 3/3 caught (mode factor test, save-phase branch, mask
+  bit 0x40). Twelve bridge mutants caught, four per entry (input corruption,
+  callback/adjacent-byte corruption, scratch registers, original-only body), plus
+  the generic store mutants. Restored source passes.
+* **Gate discipline:** an initial full gate finished rc 0 but its binaries preceded
+  the checked-store correction. Its log is retained locally as
+  build/frame-input-pre-correction-gate.log and was not recorded as final evidence.
+  The final corrected tree was rebuilt and the whole gate rerun.
+* **Final gate/live:** `reference/production-integration-20261015/frame-input-137-gate.json`,
+  actual rc 0, 126 native programs and four Python tests. Boot identical; full
+  7,228-frame intro/title determinism, first 600 overridden digests and 900-frame
+  controller plain/native replay match. Through frame 600: mode setter **3x**,
+  wrapper **600x**, independent 40f010 entry **0x** (the wrapper calls the shared
+  native leaf directly). Host 81.6 FPS; title 15.873 ms; app-smoke 120 frames.
+  STATUS regenerated.
+* **Limits/skips:** other standalone oracles not rerun; inventory remains 48 pass /
+  46 partial / 9 fail / 1 missing (aggregate verdict rc 2 for existing failures).
+  Separate make m1 and unregistered metal-sprite, metal-sprite-composition,
+  metal-texture and player-task not run. Windows parity and physical pads remain
+  unverified. No game assets committed. Remaining list **22** in GOAL section 6.

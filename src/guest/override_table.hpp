@@ -49,7 +49,9 @@ std::vector<OverrideEntry> math_overrides();
 // translation-only and both rotation orders. Aliased inputs/matrix or noncanonical
 // states execute the original body; no source fact is guessed. PopEx remains guest.
 std::vector<OverrideEntry> collision_overrides();
-// Every bound owner (frame-loop + startup + math + collision).
+// Frame-input owners transport native callback identity to the source 411e20 token.
+std::vector<OverrideEntry> frame_input_overrides();
+// Every bound owner (frame-loop + startup + math + collision + frame input).
 std::vector<OverrideEntry> all_overrides(const ExecutableImage& image);
 bool install_overrides(X86Guest&,const std::vector<OverrideEntry>&,std::string* error);
 } // namespace sadx

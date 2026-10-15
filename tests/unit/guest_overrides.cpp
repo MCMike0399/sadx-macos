@@ -98,6 +98,18 @@ std::vector<Case> corpus_cases(std::uint32_t entry,const std::string& dir){
                     alias=c;alias.eflags|=0x400U;alias.source_body=true;out.push_back(alias);
                 }
             }}
+    else if(entry==0x411e30||entry==0x40f010||entry==0x411e20){
+        const auto w=words(dir+"/game_frame_control.cases.bin");require(w.size()%19==0,"frame input corpus size");
+        const auto kind=entry==0x411e30?1U:entry==0x40f010?2U:3U;
+        for(std::size_t i=0;i<w.size();i+=19)if(w[i]==kind){
+            Case c;c.ecx=0x12345678;c.eflags=(i/19%2)?3U:2U;
+            c.memory={{0x3d0853c,w[i+4]},{0x3d08538,w[i+5]},{0x389d7dc,w[i+6]},{0x89295c,w[i+7]},
+                {0x3d084a8,w[i+8]},{0x3d084ac,w[i+9]},{0x3d0fa34,w[i+17]?0x411e20U:0U},
+                {0x3b0eaa0,0xb3c4d500U|(w[i+10]&255U)},{0x3b0e3b8,0xd5e6f700U|(w[i+11]&255U)},
+                {0x3b291a4,w[i+12]},{0x3b0e493,0x91726300U|(w[i+13]&255U)},{0x3b0e760,w[i+18]},
+                {0x3b11188,w[i+14]},{0x3b11178,w[i+15]},{0x3b1117c,w[i+16]}};
+            if(kind==1)c.arguments={w[i+2],w[i+3]};out.push_back(c);
+        }}
     else if(entry==0x7899a0){ // game_frame_control: 19 words; [0] entry index (0 = 7899a0), [2] argument, [4..9] 3d0853c 3d08538 389d7dc 89295c 3d084a8 3d084ac
         const auto w=words(dir+"/game_frame_control.cases.bin");require(w.size()%19==0,"game_frame_control corpus size");
         for(std::size_t i=0;i<w.size();i+=19)if(w[i]==0)
@@ -195,7 +207,9 @@ std::size_t compare(const ExecutableImage& image,const OverrideEntry& entry,cons
     require(original->map(scratch,0x4000,true,&error)&&native->map(scratch,0x4000,true,&error),error);
     FpuShimStats shims;require(install_fpu_shims(*original,load_fpu_sites("reference/inventory/fpu-sites.json"),shims,&error),error);
     require(native->add_override(entry.address,bridge,&error),error);
-    std::size_t source_bodies=0;
+    std::size_t source_bodies=0,frame_source_bodies=0;
+    if(entry.address==0x411e30||entry.address==0x40f010||entry.address==0x411e20)
+        require(native->add_instruction_hook(entry.address==0x411e30?0x411e38:0x40f015,[&](X86Guest&,std::uint32_t){++frame_source_bodies;return false;},&error),error);
     if(entry.address==0x419030)require(native->add_instruction_hook(0x419031,[&](X86Guest&,std::uint32_t){++source_bodies;return false;},&error),error);
     std::size_t compared=0;
     for(const auto& c:cases){
@@ -205,15 +219,17 @@ std::size_t compare(const ExecutableImage& image,const OverrideEntry& entry,cons
         if(entry.address==0x40f3a0){const std::uint8_t tail[]={0xc3,0x90,0x90,0x90,0x90,0x90,0x90,0x90};
             original->write(0x40f451,tail,sizeof tail);native->write(0x40f451,tail,sizeof tail);}
         for(auto* g:{original.get(),native.get()}){g->set_reg(UC_X86_REG_EFLAGS,c.eflags);
+            if(entry.address==0x411e30||entry.address==0x40f010||entry.address==0x411e20){g->set_reg(UC_X86_REG_EDX,0x23456789);g->set_eax(0x3456789a);}
             if(entry.address==0x40f3a0||entry.address==0x419030){g->set_reg(UC_X86_REG_ESI,0x13579bdf);g->set_reg(UC_X86_REG_EDI,0x2468ace0);g->set_reg(UC_X86_REG_EBX,0xdeadbeef);}
             for(const auto& [at,size]:out){const std::vector<std::uint8_t> z(size,0xa5);g->write(at,z.data(),size);}
             for(const auto& [at,v]:c.memory)g->set_u32(at,v);}
-        const auto before_source_bodies=source_bodies;
+        const auto before_source_bodies=source_bodies,before_frame_source_bodies=frame_source_bodies;
         const auto ra=original->call(entry.address,c.arguments,c.ecx,std::nullopt,c.cw,600'000'000,c.mxcsr);
         const auto rb=native->call(entry.address,c.arguments,c.ecx,std::nullopt,c.cw,600'000'000,c.mxcsr);
         require(bool(ra),entry.name+": original failed: "+ra.error);
+        if(frame_source_bodies!=before_frame_source_bodies){mismatch=entry.name+": original frame body used instead of native";return compared;}
         if(!rb){mismatch=entry.name+": override failed: "+rb.error;return compared;}
-        if((entry.address==0x40f350||entry.address==0x40f3a0)&&((original->reg(UC_X86_REG_EFLAGS)^native->reg(UC_X86_REG_EFLAGS))&0xcd5U))
+        if((entry.address==0x40f350||entry.address==0x40f3a0||entry.address==0x411e30||entry.address==0x40f010||entry.address==0x411e20)&&((original->reg(UC_X86_REG_EFLAGS)^native->reg(UC_X86_REG_EFLAGS))&0xcd5U))
             {mismatch=entry.name+": arithmetic flags differ";return compared;}
         if(entry.address==0x419030){
             if(source_bodies-before_source_bodies!=(c.source_body?1U:0U)){mismatch=entry.name+": native/original execution path differs";return compared;}
@@ -311,8 +327,53 @@ int main(int argc,char** argv){try{
             std::cout<<"  collision_shape_center: "<<cases.size()-original_paths<<" native / "<<original_paths
                 <<" original-body cases; 7/7 bridge mutants caught\n";
         }
+        if(entry.address==0x411e30||entry.address==0x40f010||entry.address==0x411e20){
+            const bool mode=entry.address==0x411e30;
+            const std::vector<std::pair<std::string,X86Guest::Override>> mutants={
+                {"input changed",[bridge,mode](X86Guest& g){
+                    const auto at=mode?g.esp()+4:0x3b0e760;g.set_u32(at,*g.u32(at)^0x10000U);return bridge(g);}},
+                {"callback or adjacent bytes clobbered",[bridge,mode](X86Guest& g){
+                    const auto pops=bridge(g);g.set_u32(mode?0x3d0fa34:0x3b0eaa0,mode?0U:*g.u32(0x3b0eaa0)&255U);return pops;}},
+                {"wrong scratch register",[bridge](X86Guest& g){const auto pops=bridge(g);g.set_reg(UC_X86_REG_ECX,0);g.set_edx(0);return pops;}},
+                {"original-only override",[mode](X86Guest& g){
+                    if(mode){g.set_eax(*g.u32(g.esp()+4));g.tail_redirect(0x411e34);}
+                    else{g.set_eax(*g.u32(0x3b0e760));g.tail_redirect(0x40f015);}return 0U;}}
+            };
+            for(const auto& [name,mutant]:mutants){std::optional<std::string> failure;compare(*image,entry,mutant,cases,failure);
+                require(bool(failure),entry.name+": bridge mutant survived: "+name);}
+            std::cout<<"  "<<entry.name<<": 4/4 input/byte/ABI/body mutants caught\n";
+        }
         total+=compared;from_corpora+=corpus?compared:0;
         std::cout<<"  "<<entry.name<<" ("<<std::hex<<entry.address<<std::dec<<"): "<<compared<<(corpus?" oracle-corpus":" enumerated")<<" cases equivalent; mutant caught\n";}
+    { // A missing destination must stop before the callback store, not report success.
+        auto g=X86Guest::create(&error);require(g&&g->map_image(*image,&error),error);
+        require(install_overrides(*g,table,&error),error);
+        require(g->unmap(0x3b11000,4096,&error),error);g->set_u32(0x3d0fa34,0x12345678);
+        const auto result=g->call(0x411e30,{3,2});
+        require(!result&&result.error.find(std::to_string(0x411e38))!=std::string::npos
+            &&g->u32(0x3d0fa34)==0x12345678U,"mode output fault must stop at the first store");
+        std::cout<<"Frame mode: unmapped timing output stops before callback registration\n";
+    }
+    { // Actual guest indirection through the token set by the native mode owner.
+        std::vector<std::array<std::uint32_t,9>> observations;
+        for(bool bound:{false,true}){
+            auto g=X86Guest::create(&error);require(g&&g->map_image(*image,&error)&&g->map(scratch,4096,true,&error),error);
+            if(bound)require(install_overrides(*g,table,&error),error);
+            const std::uint8_t caller[]={0x6a,1,0x6a,1,0xb8,0x30,0x1e,0x41,0x00,0xff,0xd0,0x83,0xc4,8,
+                0xff,0x15,0x34,0xfa,0xd0,0x03,0xc3};
+            require(g->write(scratch,caller,sizeof caller),"write callback caller");
+            for(unsigned phase:{0U,1U,2U}){
+                g->set_u32(0x3d08538,10000000);g->set_u32(0x3d0853c,0);g->set_u32(0x89295c,1);
+                g->set_u32(0x3b0e760,0x98765432);g->set_u32(0x3b0eaa0,phase?2U:0U);
+                g->set_u32(0x3b0e493,1);g->set_u32(0x3b0e3b8,0x44);g->set_u32(0x3b291a4,phase==2?1U:0U);
+                const auto result=g->call(scratch,{});require(bool(result),result.error);
+                std::array<std::uint32_t,9> row={*g->u32(0x3d0fa34),*g->u32(0x389d7dc),*g->u32(0x3d084a8),*g->u32(0x3b0eaa0),
+                    result.eax,g->reg(UC_X86_REG_ECX),g->reg(UC_X86_REG_EDX),result.esp,g->reg(UC_X86_REG_EFLAGS)&0x8c5U};
+                if(!bound)observations.push_back(row);else require(row==observations[phase],"mode -> actual registered callback indirection differs");
+            }
+        }
+        std::cout<<"Frame input: mode registration -> guest indirect callback agrees on 3 input/save phases\n";
+    }
     { // 772615 binds only the SSE dispatch table: with the image's slot stubs (77350c not yet run) it stops, never guesses
         const auto e=std::find_if(table.begin(),table.end(),[](const OverrideEntry& x){return x.address==0x772615;});require(e!=table.end(),"772615 not bound");
         auto native=X86Guest::create(&error);require(native&&native->map_image(*image,&error)&&native->map(scratch,0x1000,true,&error)&&native->add_override(0x772615,e->bridge,&error),error);

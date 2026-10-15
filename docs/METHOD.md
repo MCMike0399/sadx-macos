@@ -46,7 +46,10 @@ Facts about the provider (from REA's docs, verified 2026-10-12):
 * Functions reached only through pointers (vtables, callbacks, the D3DX dispatch table)
   are not auto-defined. Seed them: `REA_GHIDRA_SEED_FILE` = TSV of
   `address<TAB>function[<TAB>name]` applied before analysis. Keep the seed list in
-  `reference/ghidra-seeds.tsv` and grow it.
+  `reference/ghidra-game-loop-seeds.tsv` and grow it. Seed contents are part of
+  REA's snapshot profile: after adding seeds, preserve the old ignored snapshot
+  under a backup name and run the owned runner without a snapshot at its configured
+  path so it can save a fresh one. Do not bypass a profile_mismatch rejection.
 * The bridge is a single serial queue: a whole-program dump of ~9,300 functions is hours of
   wall-clock, ~300 KB per function on disk. Run it once, unattended, keep the snapshot.
 * `~/Developer/rea/_reference`-style raw Hopper queries are retired: the Hopper demo hangs
