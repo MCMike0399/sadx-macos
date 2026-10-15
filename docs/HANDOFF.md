@@ -1,4 +1,26 @@
-# SADX native Apple Silicon port: complete agent handoff
+# Handoff journal
+
+The per-step journal of sadx-macos. **Start with [`docs/GOAL.md`](GOAL.md)**, which holds the
+brief, tracks, ordered items and loop. Coding rules are in [`docs/STYLE.md`](STYLE.md) and tools
+in [`docs/METHOD.md`](METHOD.md) §0. Append new entries **at the end**. Everything from the
+next heading down to the 2026-10-12 sections is the historical record of the `rea` repository
+era. It mentions Hopper and `SADX_AGENT_GUIDE.md`, which are retired; read it as history.
+
+New entries are short (about 15–30 lines). Use this template:
+
+```markdown
+### <date> — <item from GOAL §6> (track R/S/I/V/E, gate <n> or "no gate")
+
+* Context: evidence ids (REA `ev_…`), symbol decisions (overrides.tsv rows), files read.
+* Changed: what is now true, in game-tier terms (system, functions, state), plus the adapter.
+* Verified: oracle verdicts with counts (pass / partial / fail), mutants caught,
+  dev/holdout cases, replay digests, gate name and real rc.
+* Readability: baseline delta (hex, _at_, address calls, goto) for the touched files.
+* Not run / unverified: skipped tests, scope limits, assumptions added.
+* Next: the item a fresh agent should take.
+```
+
+## Historical header (2026-10-12, rea repository era)
 
 **Start here:** [SADX_AGENT_GUIDE.md](SADX_AGENT_GUIDE.md) is the method guide for agents: goal, current status, REA usage, the step-by-step workflow, conventions, pitfalls and next steps. This file is the detailed step ledger.
 
@@ -3302,3 +3324,48 @@ The product still needs native boot/title, resources and gameplay recovery.
   and completed test evidence are committed for that push; do not treat this as
   M1 or full native-independence completion. No assets/binaries committed. The two
   pre-existing generic/older Ghidra request drafts remain untracked and untouched.
+
+### 2026-10-15 — Goal and plan steered toward a readable, extensible native codebase (docs, no gate)
+
+* Context: the user asked that the source be readable, modular, maintainable and extensible,
+  while staying a faithful, fully native, executable-independent port, and that the plan be
+  informed by recent decompilation projects and the project's own history. Reviewed the
+  ADRs, METHOD, ARCHITECTURE, the HANDOFF history and code samples (`game_mode.cpp`,
+  `player_acceleration_ground.cpp`, `game_frame_control.hpp`, `override_table.cpp`), and ran
+  a web survey (RESEARCH third pass).
+* Diagnosis, measured at `f72a05d` in the game layers (about 21,300 lines): about 7,700 hex
+  literals, 1,950 `_at_` uses, 249 callee-address calls, 73 `goto`, 16 annotations. Five causes,
+  listed in ADR-0007; the main one is that METHOD §3 itself prescribed `_at_<hex>` members and
+  instruction-order transliteration.
+* Changed:
+  * Added ADR-0007 (game tier vs reference tier, seams, unknowns at the boundary, readable
+    exact arithmetic, literals, system modules, readability ratchet, enhancements).
+  * Added `docs/STYLE.md` (rules, before/after from this repo with the real constant values,
+    review checklist) and `docs/TIPS.md` (SADX/MSVC idioms).
+  * Rewrote GOAL (five tracks; new items 3–7: ratchet, tamper-evident judge, control-word
+    census, pilot refactors, refactor queue; M6).
+  * METHOD: §0 cookbook with tested lookup/callee snippets; new recovery recipe; refactoring
+    under the judge; control-word premise.
+  * ARCHITECTURE: destination tree and tier rules.
+  * ROADMAP: readability metric, M5 ownership row, M6 enhancements.
+  * Also updated AGENTS, the `/goal` command, CONTEXT, README, the RESEARCH third pass, and
+    this header with an entry template. Marked AGENT_GUIDE_v1 and NEXT-AGENT-PROMPT as
+    historical or partial.
+* Verified: `check_repo_hygiene.py` 0 violations; `git diff --check` clean; the METHOD §0
+  symbol and callee snippets run against `build/symbols/symbols.json` and
+  `reference/inventory/functions.json`. The independent review found two defects, both fixed:
+  * The STYLE seam example would have failed `check_provenance.py`, so seams are now plain
+    STUB function declarations, and the checker extension is GOAL item 3.
+  * The ROADMAP M6 item reference was wrong.
+
+  It also prompted four hardenings:
+  * a static assembly precondition for plain floats;
+  * re-expressed mutants go in a `fix(judge)` commit;
+  * the FPU causation is a hypothesis in TIPS;
+  * nested module paths are defined.
+* Not run: no code changed; no gate, oracles or `make m1`. The STYLE §11 "after" examples are
+  sketches until the pilots (GOAL §6 item 6) pass their oracles. The control-word premise for
+  plain-float arithmetic is a hypothesis until the census (item 5). Research figures are the
+  cited authors' claims; recent repos are marked unverified.
+* Next: GOAL §6 item 3 (readability ratchet, `.clang-format`, lookup and context-bundle
+  tools).

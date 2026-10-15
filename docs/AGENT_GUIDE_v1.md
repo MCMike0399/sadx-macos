@@ -1,3 +1,6 @@
+> **Historical (2026-10-12, `rea` repository era).** Superseded by `AGENTS.md`, `docs/GOAL.md`,
+> `docs/STYLE.md` and `docs/METHOD.md`. It describes Hopper and paths that are retired; read it as history.
+
 # SADX native port: agent guide and handoff (2026-10-12)
 
 This guide is for the next coding agent working on the native Apple Silicon port

@@ -1,3 +1,7 @@
+> **Partly historical.** The entry point is `docs/GOAL.md` (`/goal`). This file is kept for the
+> per-bridge state notes in item 1 (stack reserves, store phases, boundaries) and the performance notes.
+> New bridges follow the two-tier form of `docs/STYLE.md`.
+
 # Prompt for the next agent session
 
 > Since 2026-10-13 the entry point is `/goal` (`.claude/commands/goal.md` → `docs/GOAL.md`). This

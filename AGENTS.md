@@ -11,7 +11,9 @@ practice, proven by automated tests (`docs/ROADMAP.md`), not by someone playing 
 built from readable, maintained source that needs neither `sonic.exe` nor the mod DLLs to
 build or run (assets are imported once from the user's own disc/install; ADR-0005, ADR-0006).
 The emulated hybrid runtime is the development reference that proves the native code right;
-it is not the product.
+it is not the product. The source must read like a game codebase, organised by game system, so
+anyone can download it, play with their own assets, maintain it, and extend it with opt-in
+features that leave the faithful game untouched (ADR-0007, `docs/STYLE.md`).
 
 ## Orientation (5 minutes)
 
@@ -22,11 +24,16 @@ it is not the product.
 5. `docs/SOURCES.md` — the inputs (exe, profile DLLs, disc) and their hashes.
 6. `docs/decisions/` — decisions already made; do not relitigate them silently. Add an ADR
    if you change direction, and say so in your report. ADR-0005 (native source and executable
-   independence) and ADR-0006 (symbol names, provenance annotations) define the destination.
+   independence), ADR-0006 (symbol names, provenance annotations) and ADR-0007 (readable game
+   tier, reference tier, enhancements) define the destination.
    `docs/RESEARCH-native-recompilation.md` is why; `CONTEXT.md` is the vocabulary.
 7. `docs/HANDOFF.md` — the per-step journal (append an entry when you finish a step).
-8. `docs/GOAL.md` — the standing brief `/goal` loads (`.claude/commands/goal.md`): history, how
-   REA is used, the ordered next items and the per-step loop.
+8. `docs/GOAL.md` — the standing brief `/goal` loads (`.claude/commands/goal.md`): history, the
+   five tracks, how REA is used, the ordered next items and the per-step loop.
+9. `docs/STYLE.md` — **how recovered code is written** (two tiers, names, control flow, seams,
+   readable exact arithmetic, constants, enhancements, review checklist). ADR-0007 is why.
+10. `docs/TIPS.md` — SADX/MSVC idioms and lessons (x87 compare masks, constant pools, tail
+    merging…). Add to it.
 
 ## Non-negotiables
 
@@ -45,6 +52,16 @@ it is not the product.
   still sees it (behaviour and interfaces are named regardless). Guest addresses, register
   marshalling and override registration exist only in the reference adapters (`src/guest`,
   `src/hle`).
+* **Readable game tier, address-shaped reference tier** (ADR-0007, `docs/STYLE.md`). Game code
+  uses semantic names, enums, structured control flow, literal constants, readable exact
+  arithmetic and named `STUB` seams for unrecovered callees. It never contains callee-address
+  calls (`call(0x…,0x…)`), address labels or `goto`, constants fetched from the EXE, or
+  `std::optional` fields that model "the fixture did not supply this". Those belong in the
+  reference adapter (`src/guest`, `src/hle`). Invent nothing: every field, callee and guard
+  traces to evidence, and helpers that are not in the original are tagged `// NOTSA:`. A
+  transliterated draft may exist only inside a step and is refactored under the same oracle
+  before the commit. Once `tools/gate/check_readability.py` is in the gate, its per-file
+  baseline may only go down.
 * **One owner per source address.** Legacy `*_at_<hex>` members live in exactly one struct
   (`tools/gate/check_global_owners.py`); annotated `GLOBAL`s are checked the same way
   (`check_provenance.py` once it lands). Borrow with references/pointers. Migrate an owner
@@ -52,6 +69,9 @@ it is not the product.
 * **Tagged results, explicit unknowns.** Failures carry the source boundary (the
   instruction address) and the fact that was missing. Unported callees are reported, not
   silently skipped, except under the survey policy, which is navigation, not behaviour.
+  In new and refactored code the unknowns are reported at their boundary: the reference
+  adapter (missing guest/fixture fact), a `STUB` seam (unrecovered behaviour), or the
+  importer (missing asset). They are not threaded through game logic (ADR-0007).
 * **Report honestly.** A gate is recorded only with its real exit status. "Unverified"
   scope is named. Tests that were skipped are listed as skipped.
 * **Profile awareness.** Every ported range is checked against
@@ -61,12 +81,13 @@ it is not the product.
 
 ## Toolbox: what to use for what
 
-Paths are relative to the repo; details and command lines are in `docs/METHOD.md` §1–2 and
-`docs/GOAL.md` §4.
+Paths are relative to the repo. **Exact command lines for every row are in the cookbook,
+`docs/METHOD.md` §0**, with details in §1–2 and `docs/GOAL.md` §4.
 
 | Question | Tool |
 |---|---|
-| What is this address called, what is its signature/struct? | the symbol database (`tools/symbols/`, GOAL §6 item 1); until it exists `grep -i 0x0*ADDR reference/sadx-mod-loader/SADXModLoader/include/*New.h`, then the classic `SADX{Functions,Variables,Structs,Enums}.h`. Treat names as hypotheses; record decisions in `reference/symbols/overrides.tsv` |
+| What is this address called, what is its signature/struct? | the symbol database (`make symbols`, then the lookup snippet in METHOD §0 over `build/symbols/symbols.json`); the declaration via `grep -in 0x0*ADDR reference/sadx-mod-loader/SADXModLoader/include/*.h`. Treat names as hypotheses; record decisions in `reference/symbols/overrides.tsv` |
+| Is this idiom/quirk known? | `docs/TIPS.md` |
 | Pseudocode / dossier / CFG of functions (batch of new questions) | the owned runner `reference/ghidra-live.mjs reference/ghidra-inventory-config.json` (REA → Ghidra, snapshot cached); `batch_decompile` for clusters, `analyze_function` for what you port |
 | One quick or cached question | REA CLI `node reference/tools/rea/node_modules/rea-agents/scripts/rea.mjs function\|decompile\|xrefs\|instructions …` with `--snapshot` (GOAL §4.2); `rea doctor --provider ghidra` before blaming Ghidra |
 | Who reads/writes a global | runner `xrefs`; `tools/analysis/xscan.py ADDR…` for raw `.text` references |
@@ -96,14 +117,23 @@ project's own sessions.
   Ghidra's `DAT_`, `local_`, `param_` or pointer-arithmetic shapes into `src/`. Keep exact
   arithmetic, operation order and FP width where the oracle says they matter.
 * **One function or one tight cluster per attempt**, with the differential judge (oracle,
-  override-equivalence, replay) as the only definition of "works".
+  override-equivalence, replay) as the only definition of "works". Use a fresh context per
+  function or module, and reread `docs/STYLE.md` before writing; instructions decay over long
+  sessions.
+* **Readable but wrong is the default failure** of agent decompilation (RESEARCH third pass).
+  Readability is never judged by eye: every readability change reruns the same oracle and
+  mutants. Iterate on dev cases, and keep holdout cases for the final run.
 * **Never game the judge.** Do not edit a tolerance, an expected value, a fixture, a mutant, the
   oracle harness or the gate scripts to get your own code through; do not narrow a test's
-  inputs to dodge a mismatch. If the judge is wrong, fix it in a separate commit with evidence.
+  inputs to dodge a mismatch. If the judge is wrong, fix it in a separate commit with evidence
+  (`fix(judge): …`), never mixed with a port. Agents in other projects edited verifiers and
+  hashes when they could, so the judge is being made tamper-evident (GOAL §6 item 4).
 * **Bound dead ends.** After three failed approaches on one function, stop; record the unknown
   (evidence id, what was tried, the mismatch) in the handoff and move on.
-* **Independent review** for a recovered system: a fresh subagent reads the evidence and the
-  diff and looks for masked mismatches, invented facts and address-shaped code before the gate.
+* **Independent review** for a recovered system or pilot refactor: a fresh subagent reads the
+  evidence, the oracle results and the diff, and works through `docs/STYLE.md` §12 (masked
+  mismatches, invented facts, address-shaped code, over-abstraction) before the gate. A
+  reviewer without objective criteria approves wrong code.
 * **Parallelise by independent clusters**, never two agents on one owner; each writes its own
   HANDOFF lines with evidence ids.
 
@@ -119,8 +149,9 @@ project's own sessions.
    input < player < game < runtime < guest < hle < platform < apps; include only downward,
    `tools/gate/check_layers.py` enforces it). One slug per module:
    `src/<layer>/<slug>.{hpp,cpp}` + `tests/unit/<slug>.cpp` (+ a `tests/unit/manifest.tsv`
-   line; every test needs one to run in the gate). Semantic names + provenance annotations
-   (ADR-0006). An oracle is `tests/probes/native_<slug>_probe.cpp` +
+   line; every test needs one to run in the gate). Game-tier code in the system's module plus
+   a reference adapter for everything address-shaped (`docs/STYLE.md`); semantic names +
+   provenance annotations (ADR-0006). An oracle is `tests/probes/native_<slug>_probe.cpp` +
    `tools/oracles/verify_original_<slug>.py`; the target `oracle-<slug-with-dashes>` and the
    report `build/oracles/<slug>.json` exist by themselves (`tools/oracles/manifest.tsv`
    only when it needs other inputs than the exe and the probe).

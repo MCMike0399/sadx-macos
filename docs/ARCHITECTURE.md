@@ -5,6 +5,71 @@ The layer table describes the current implementation. The shipping destination i
 systems built from maintained source and running from imported assets. `guest`/`hle`
 and PE image loading are reference/development facilities in that destination.
 
+## Destination: system modules in two tiers (ADR-0005, ADR-0006, ADR-0007)
+
+The finished repository is a normal game codebase that anyone can clone, build, and run
+with assets imported from their own disc or install. Code is grouped by **game system**, and
+it is split into a **game tier** that ships and a **reference tier** that proves the game
+tier matches the original. Coding rules for both tiers are in [`STYLE.md`](STYLE.md).
+
+```
+src/
+  cpu/          exact arithmetic models and sadx::fidelity helpers (x87/SSE, Bochs, CRT math)
+  math/         Ninja math, D3DX math as linked into sonic.exe
+  assets/       imported-pack reader: resource ids, typed records (models, landtables,
+                texlists, motions, SET/CAM, physics, sound lists); never reads sonic.exe
+  engine/       the Ninja library and core services, by system:
+    ninja/        matrix stack, view/projection, draw, sprite, texture, motion, light, fog,
+                  render queue, memory
+    task/         task scheduler, TaskWork and friends, task callbacks as native functions
+    device/       the D3D8-shaped graphics device interface the engine draws through, plus
+                  the audio, input and clock interfaces (backends live in platform/)
+  input/        pad and keyboard semantics, including the Input mod's behaviour
+  player/       common physics, collision response, input, animation; then one module per
+                character: sonic/ tails/ knuckles/ amy/ big/ gamma/
+  game/         flow/ (njUserMain modes, game loop, resets, startup), camera/, collision/,
+                stage/, object/, enemy/, boss/, event/, adventure/, chao/, minigame/, ui/,
+                sound/, save/, profile/ (Speedrun 2.0, CCEF, EHCF, Skipma, quick save/load;
+                PATCH annotations)
+  enhancements/ opt-in features and the hook/settings registry (STYLE.md §9); off by default
+  session/      native composition: owns every system's state, boot → title → stage, the
+                frame loop, settings (today: runtime/)
+  platform/mac/ Metal, CoreAudio, GameController, AppKit backends of the engine interfaces
+  reference/    (today guest/ and hle/) Unicorn guest, Win32/D3D8 HLE, per-system reference
+                adapters, the override table, PE loading; development only
+apps/           sadx (production: session + platform + assets), sadx-reference (guest app),
+                developer CLIs
+tools/import/   the one-time asset importer (stage E); reads the user's disc or install
+```
+
+Rules:
+
+* **Game tier** = everything except `reference/` (today: `guest`, `hle`, and the adapter
+  code in them). It contains no guest addresses outside provenance annotations, no register
+  or stack marshalling, and no callee-address dispatch. Unrecovered dependencies are named
+  `STUB` seams (STYLE.md §5).
+* **Reference tier** depends on the game tier, never the other way round. Each recovered
+  system gets one reference adapter that marshals guest memory to the system's state types,
+  fills its service seams from the guest, and exposes it to oracles and to override
+  registration. Address tables live only there (gta-reversed's single hook list, OpenLoco's
+  path to native builds).
+* **Platform** backends implement interfaces declared by the engine. The same Metal device
+  backend serves the native session and the reference app, so both draw through one tested
+  path.
+* **Enhancements** depend on game systems and attach at hook points. Game systems never
+  depend on enhancements. Fidelity tests run with every enhancement registered and off.
+* **Production and reference build graphs are separate** (M5 `native-source-build`). The
+  production app links the game tier, `assets`, `session` and `platform` only.
+
+Migration is per system, together with its tests. A module moves to its destination
+directory when it is refactored into game-tier form (GOAL §3 track R). Nested paths are
+`src/<layer>/<system>/<slug>.{hpp,cpp}`. The slug stays globally unique and keeps naming its
+unit test, probe, oracle and report (`tests/unit/<slug>.cpp`, `oracle-<slug>`), so moving a
+file into a system directory renames nothing else. The layer is still the top-level
+directory that `check_layers.py` ranks. The layer table below
+and `tools/gate/check_layers.py` stay authoritative for the current tree. When a destination
+directory is created, its layer rank is added to the checker in the same step.
+
 ## Layers (`src/`)
 
 `src/` is a strict stack. A file may include headers from its own layer or any layer
@@ -80,12 +145,18 @@ tests `player_acceleration_air`); new ones must.
 
 ## Result and failure vocabulary
 
-`*State` (owned facts, `std::optional` for unknowns), `*Runtime` (borrowed owners + host
-callbacks), `*Result` with a failure enum, `source_boundary` (the instruction that could
-not proceed) and `required_fact` (the address that was unknown). Nested owners are
-invoked through `std::function` callbacks and may return `GameLogicOwnerState::unavailable`
-(unported) or `failed`. These types live in `engine/game_logic.hpp` so every layer above
-`engine` shares them.
+Current ports (the legacy shape): `*State` (owned facts, `std::optional` for unknowns),
+`*Runtime` (borrowed owners + host callbacks), `*Result` with a failure enum,
+`source_boundary` (the instruction that could not proceed) and `required_fact` (the address
+that was unknown). Nested owners are invoked through `std::function` callbacks and may return
+`GameLogicOwnerState::unavailable` (unported) or `failed`. These types live in
+`engine/game_logic.hpp` so every layer above `engine` shares them.
+
+Destination (ADR-0007): this vocabulary moves to the reference adapters. Game-tier functions
+return their real result types, state holds recovered values, and the remaining unknowns
+appear at three boundaries: the adapter (a fixture or guest fact is missing), a `STUB` seam
+(the behaviour is not recovered), and the importer (an asset is missing or unsupported).
+Each boundary still reports the source boundary and the missing fact.
 
 ## The runtime today and tomorrow
 

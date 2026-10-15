@@ -8,6 +8,9 @@ it with automated tests instead of manual play. The finished game builds from re
 maintained source and runs from imported assets without `sonic.exe`, original Windows/mod
 DLL execution or an x86 runtime (ADR-0005). The pinned binaries remain development
 references and may supply embedded data during one-time import from the user's own media.
+The source is organised by game system and readable without the original at hand
+(ADR-0007, `docs/STYLE.md`), so the community can maintain it and add opt-in enhancements
+on top of the faithful game (M6).
 
 This file is the plan. `docs/STATUS.md` says where we are. `AGENTS.md` says how to
 work. Milestones are ordered by dependency; each has a definition of done that is a
@@ -150,14 +153,35 @@ Definition of done (planned `make m5`; these targets are not implemented yet):
 | `native-runtime-independent` | In an isolated environment containing only the built app, native dependencies and imported pack, boot/title, load/save, stage and boss replays pass with original EXE/DLLs and reference directories unavailable. Dependency/link inspection excludes guest/HLE PE execution and Unicorn; no original code image is hidden in a pack. |
 | `native-behavior-closure` | A reviewed inventory accounts for all required game modes, characters, stages, tasks/callbacks and profile hooks, including cold paths; each has a native owner and tests or an explicit remaining gap. Completion requires zero unresolved required behavior, zero guest fallback, and a replay suite covering those systems beyond the initial Sonic route. Test coverage alone does not prove that every indirect target was recovered. |
 | `native-profile-parity` | Input 2.6.1 and Speedrun 2.0 behaviors, the 63 FPS limiter, CCEF/EHCF/Skipma and quick save/load run natively and pass M3/M4 traces and technique tests. Binary patch sites serve as provenance; original mod DLLs are unnecessary. |
-| `native-source-ownership` | Shipping game interfaces, mutable state and callback dispatch use semantic names and native identities. Source-address mappings are maintained separately with one-owner/provenance checks. A reviewed module map and representative maintenance change demonstrate that gameplay changes do not require editing an address switch, guest registers or PE memory offsets. |
+| `native-source-ownership` | Shipping game interfaces, mutable state and callback dispatch use semantic names and native identities. Source-address mappings are maintained separately with one-owner/provenance checks. A reviewed module map and representative maintenance change demonstrate that gameplay changes do not require editing an address switch, guest registers or PE memory offsets. `check_readability.py` reports zero address-shaped constructs in the game tier (ADR-0007, `docs/STYLE.md`); every remaining `STUB` seam is listed and none is required by the replay suite. |
 | `reference-corpus-frozen` | Each recovered system's oracle fixtures, replay end states and trace digests are recorded under `reference/` (numbers and hashes only, hygiene green) and its tests run from them with `sonic.exe` absent, so verification outlives the reference runtime (OpenRCT2 TestPaint rotted without this). |
 | `native-reference-parity` | Existing module oracles, mutants, full native replays, Windows trace parity and reference-frame comparisons retain their stated fidelity scopes. Numeric/flag differences remain reported; a partial oracle is not promoted to pass by removing the guest. |
 | `native-performance` | The native replay suite sustains the profile's 63 FPS cadence on the recorded M-series test configuration, with frame-time distributions and headroom reported. Native execution and executable independence are also enforced structurally; a near-zero guest-time measurement cannot substitute for them. |
 
-First pull forward a bounded frame-control slice (GOAL §6 item 1), then native boot/title
+The frame-control slice was pulled forward first (GOAL §6 item 2, done). Then come the
+readability foundation and pilot refactors (track R, GOAL §6 items 3–7), native boot/title
 and a stage. Preserve the working reference while these grow; retire a production binary
 dependency only after its replacement is proven. M5 remains incomplete until every row passes.
+
+### M6 — Enhancements on a faithful base
+
+The port is meant to be extended. M6 adds the mechanism for opt-in features without
+weakening anything M1–M5 prove (ADR-0007 §8, `docs/STYLE.md` §9). It is GOAL §6 item 16 and
+starts once a native session runs a stage (items 11 and 15). Hook points can be added to systems earlier,
+as they are refactored.
+
+Definition of done (planned `make m6`):
+
+| Test | What it proves |
+|---|---|
+| `enhancements-off-parity` | With every enhancement and bug fix registered and off, the M3/M4 replay and trace digests are identical to the build without the registry. |
+| `vanilla-behavior-hooks` | Every `VanillaBehavior` decision point has a unit test showing that `should` returns the documented vanilla value when no handler is registered. |
+| `replay-neutral-proof` | Each enhancement classed replay-neutral, run on, leaves every game-state digest of the replay suite unchanged (only presentation differs). |
+| `settings-roundtrip` | Typed settings load, save and default to the faithful profile; unknown keys fail explicitly. |
+| `first-enhancements` | A practice overlay (speed, position, timer) and an input display work in `sadx-app` and pass `replay-neutral-proof`. |
+
+Gameplay-affecting enhancements (practice savestates, fixes to original bugs) mark the
+session as non-faithful and never run in fidelity suites.
 
 ## How progress is measured
 
@@ -166,7 +190,12 @@ functions with native overrides, % of frame time native vs guest, FPS headless, 
 windowed, replay suite pass/fail. For M5 (ADR-0006) it adds: procedures with a symbol-database
 name (of 8,875), address-named owners remaining (`*_at_<hex>`, to reach 0, the OpenLoco
 measure), `FUNCTION` vs `STUB` annotations, imported-pack coverage of the sa_tools mappings,
-and reference corpora frozen per system. Every gate record (`reference/production-integration-*/`)
+and reference corpora frozen per system. For readability (ADR-0007) it adds the
+`check_readability.py` totals for the game tier (hex literals outside annotations, `_at_`
+identifiers, callee-address calls, `goto`, long and multi-statement lines), per file
+against the tracked baseline, which may only go down. This is the "readable" number,
+reported next to "verified": SM64DS's CONVERTED metric. Baseline 2026-10-15: about 7,700
+hex literals, 1,950 `_at_` uses, 249 address calls, 73 `goto` in the game layers. Every gate record (`reference/production-integration-*/`)
 is the audit trail. A milestone is complete only when its table is green in a recorded
 gate.
 

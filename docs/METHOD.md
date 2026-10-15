@@ -1,5 +1,88 @@
 # Method: analysing, porting and testing
 
+## 0. Cookbook: which tool answers which question
+
+Run from the repository root. One-time setup per shell (the paths are this Mac's;
+`docs/GOAL.md` §8 lists the inputs):
+
+```sh
+export GHIDRA_INSTALL_DIR="$PWD/reference/tools/ghidra_12.1.4_PUBLIC"
+export JAVA_HOME=/opt/homebrew/Cellar/openjdk/27/libexec/openjdk.jdk/Contents/Home
+export REA_GHIDRA_STARTUP_TIMEOUT_MS=600000 REA_GHIDRA_SEED_FILE="$PWD/build/symbols/rea-seeds.tsv"
+REA="$PWD/reference/tools/rea/node_modules/rea-agents/scripts/rea.mjs"
+EXE="game/Sonic Adventure DX/sonic.exe"; SNAP="$PWD/reference/sonic-ghidra-inventory-snapshot.json"
+make symbols          # build/symbols/{symbols,conflicts,coverage}.json + rea-seeds.tsv
+```
+
+| I need… | Do this |
+|---|---|
+| **The name, signature or type of an address** (always first) | symbol lookup, below; then `grep -in '0x0*40c090' reference/sadx-mod-loader/SADXModLoader/include/*.h` for the declaration and its comment |
+| A struct layout (`taskwk`, `playerwk`, `motionwk`…) | `grep -n -A60 '^struct playerwk' reference/sadx-mod-loader/SADXModLoader/include/SADXStructsNew.h` (the classic `SADXStructs.h` has older names); verify field offsets against the pseudocode before trusting them |
+| An enum (`MD_GameMode`, characters, levels) | `grep -n -A40 '^enum MD_GameMode' …/SADXEnumsNew.h` |
+| Callees of a function and which are named | the `functions.json` query below; then `grep` the override tables and `src/` for the callee's annotation or legacy name to see whether it is native |
+| Named pseudocode of **one** function | `node $REA decompile "$EXE" 0x44c270 --provider ghidra --snapshot "$SNAP" --json` (snapshot hit = seconds; miss = a fresh import, minutes) |
+| The full dossier (CFG, p-code, callers, API) of a function you port | the owned runner with `analyze_function` (§1); or `node $REA function "$EXE" 0x44c270 … --json` |
+| Pseudocode of a **cluster** (10–200 functions) | the runner with `batch_decompile {addresses:[…]}`, then split `items[].pseudocode` into files (snippet below) |
+| Who reads or writes a global | `node $REA xrefs "$EXE" 0x3abdc7c --provider ghidra --snapshot "$SNAP" --json`; raw `.text` scan: `python3 tools/analysis/xscan.py 0x3abdc7c` |
+| Who calls a function | the runner with `procedure_callers`; the static callee graph inverted from `functions.json` |
+| Assembly of a stored result | `python3 tools/analysis/ghidra_asm.py reference/inventory-raw/<label>.json` |
+| One instruction's decoded operands | `node $REA instructions "$EXE" 0x781060 …` or the runner's `inspect_native_instruction` |
+| Exact bytes / a constant's value | `PYTHONPATH=tools/lib python3 -c "from pe_image import PEImage;import struct;print(struct.unpack('<f',PEImage('$EXE').read(0x7e0178,4)))"` (prints 1.16) |
+| Is the range patched by the loader or a mod? | `python3 tools/gate/check_profile_patches.py` (0 UNHANDLED) and `tools/gate/profile_patches.json`; the mod sources under `reference/` |
+| Format of embedded data (models, landtables, texlists, physics) | `reference/sa-tools/GameConfig/PC_SADX/*.ini` (pinned `b72d52f3`, `reference/symbols/sources.json`): `address=`, `type=`, `pointer=` per item |
+| A runtime value (what actually runs, which control word, which branch) | the guest: `build/sadx-boot`/`sadx-app --guest` with an override or trace hook (§4); HLE assumptions print at exit |
+| Is my code equal to the original? | its oracle: `make oracle-<slug>`, `python3 tools/oracles/verdict.py build/oracles/<slug>.json`; mutants: `tools/gate/mutate.py` (§3) |
+| Is REA/Ghidra healthy? | `node $REA doctor --provider ghidra --json` before blaming the provider |
+
+Symbol lookup (prints the preferred name and every alternative with its source header):
+
+```sh
+python3 - 0x40c090 0x3abdc7c 0x44c270 <<'EOF'
+import json,sys
+db={e['address']:e for e in json.load(open('build/symbols/symbols.json'))['symbols']}
+for a in sys.argv[1:]:
+    e=db.get(hex(int(a,16)))
+    if not e: print(a,'UNNAMED: record a decision in reference/symbols/overrides.tsv'); continue
+    alts=', '.join(x['name']+' ('+x['source'].split('/')[-1]+')' for x in e.get('alternatives',[])[1:])
+    print(e['address'],e['kind'],e['name'],e.get('type') or '',e.get('signature') or '','| also:',alts)
+EOF
+# 0x40c090 function GameModeHandler void () | also: FUN_0040c090 (functions.json)
+# 0x3abdc7c global ulGlobalMode unsigned int  | also: GameMode (SADXVariables.h)
+# 0x44c270 function PGetAcceleration void (taskwk* twp, motionwk2* mwp, playerwk* pwp) | …
+```
+
+Callees with names (the start of every context bundle):
+
+```sh
+python3 - 0x40c090 <<'EOF'
+import json,sys
+inv={f['address']:f for f in json.load(open('reference/inventory/functions.json'))['functions']}
+db={e['address']:e['name'] for e in json.load(open('build/symbols/symbols.json'))['symbols']}
+f=inv[hex(int(sys.argv[1],16))]
+for c in f.get('callees',[]): print(c, db.get(c,'?'))
+EOF
+```
+
+Splitting a `batch_decompile` result into one file per function:
+
+```sh
+python3 - reference/inventory-raw/<label>.json <<'EOF'
+import json,sys,pathlib
+r=json.load(open(sys.argv[1])); body=r['content'][0]['text'] if 'content' in r else r
+body=json.loads(body) if isinstance(body,str) else body
+out=pathlib.Path(sys.argv[1]).with_suffix(''); out.mkdir(exist_ok=True)
+for it in body.get('items',[]): (out/f"{it.get('address','unknown')}.c").write_text(it.get('pseudocode') or '')
+EOF
+```
+
+(Check the stored result's envelope once. The runner writes the MCP result as returned, and
+the snippet handles both the wrapped and the plain form.)
+
+What REA cannot do (do not wait for it): import types or signatures into Ghidra, emulate,
+infer structs, or compile pseudocode to source. Types live in project headers and are checked
+by oracles. Runtime facts come from the guest. Pseudocode is evidence, never source
+(`STYLE.md`).
+
 ## 1. Reading the binary with REA (Ghidra)
 
 Run `make symbols` before the inventory runner. `tools/symbols/build_symbol_db.py`
@@ -102,7 +185,7 @@ For migrated state, annotate one owning value declaration directly:
 
 ```cpp
 // GLOBAL: SONIC 0x3b11188 FrameMultiplier size=4
-std::optional<std::int32_t> render_ratio;
+std::int32_t frame_multiplier{};
 ```
 
 The annotation uses a database symbol (canonical or retained alternative);
@@ -158,27 +241,78 @@ and ADR-0005: gather functions and data dependencies into meaningful native inte
 then compare the same implementation through a reference adapter. Existing address-owned
 state remains checked until replacement ownership/provenance validation is in place.
 
-1. Read it (section 1). Cross-check every constant with `pe_image`.
+This recipe is for **new** recovery. It was rewritten on 2026-10-15 (ADR-0007): the old step 3
+asked for `<meaning>_at_<hex>` members and instruction-order transliteration, and produced the
+unreadable code the project now refactors.
+
+1. **Context bundle** (§0): names, signatures, structs and enums for every address involved;
+   callees with names and native status; callers; named pseudocode (cluster via
+   `batch_decompile`, dossier for the functions you port); xrefs for every global; profile
+   status; the nearest recovered module in game-tier form as a style model. Cross-check every
+   constant's value with `pe_image`.
 2. Check the range against `tools/gate/profile_patches.json`: `python3 tools/gate/check_profile_patches.py`
    must report 0 UNHANDLED. If the loader or a mod replaces part of it, implement what
    runs under the profile and mark the patch `handled_by`.
-3. Write the owner in `src/<layer>/` (the lowest layer whose dependencies it needs,
-   `docs/ARCHITECTURE.md`): state struct with `<meaning>_at_<hex>` members (one
-   owner per global), a `*Runtime` with borrowed dependencies, a `*Result` with failure
-   tag + source boundary + required fact. Every store in instruction order; every branch
-   with its exact x87/flag condition.
-4. Unit test in `tests/unit/<slug>.cpp` (+ a manifest line if it takes arguments).
-5. Oracle: `tests/probes/native_<slug>_probe.cpp` (flat `uint32_t` in/out layout) and
+3. **Write the game-tier code** (`docs/STYLE.md`) in the system's module (`docs/ARCHITECTURE.md`):
+   named state struct with `GLOBAL` annotations and recovered initial values, named functions
+   with `FUNCTION` annotations, structured control flow over named enums, literal constants,
+   arithmetic at the most readable level the oracle accepts (STYLE §7), and service seams with
+   `STUB` annotations for unrecovered callees. Observable side-effect order and exact
+   arithmetic are kept. It is fine to write an assembly-shaped draft first to get the oracle
+   green, but only within the step: refactor it under the same oracle before committing.
+4. **Write the reference adapter** (reference tier): marshal guest memory to and from the state
+   struct, fill the seams from the guest, report missing fixture facts with `source_boundary`
+   and `required_fact`, and register the override. All addresses live here.
+5. Unit test in `tests/unit/<slug>.cpp` (+ a manifest line). It exercises the game-tier API
+   with no guest.
+6. Oracle: `tests/probes/native_<slug>_probe.cpp` (flat `uint32_t` in/out layout, calling the
+   game-tier code through the adapter) and
    `tools/oracles/verify_original_<slug>.py` (Unicorn runs the original bytes with fixtures for
    callees/Win32/COM; compares every store and the call trace). Write `passed` (strict) and
    `values_match` into the report and `limits` for every known flag difference. Run
    `make oracle-<slug-with-dashes>`; `python3 tools/oracles/verdict.py build/oracles/<slug>.json`
    must say `pass`. Track it: `python3 tools/gate/track_reports.py <slug>` (summary copy in
    `reference/oracle-reports/`; side files stay in `build/`).
-6. Mutants: `python3 tools/gate/mutate.py src/<layer>/<file>.cpp oracle-<slug> build/native-<slug>-probe.dylib mutants.json`
+7. Mutants: `python3 tools/gate/mutate.py src/<layer>/<file>.cpp oracle-<slug> build/native-<slug>-probe.dylib mutants.json`
    with 3–7 seeded bugs; every non-equivalent mutant must be caught.
-7. Wire it into the runtime (`src/runtime`, or the override table once M1 lands).
-8. Gate, record, status, handoff (AGENTS.md).
+8. Wire it into the native session (`src/runtime` today) and into the override table through
+   the adapter.
+9. Readability review (STYLE §12, by a fresh subagent for a recovered system), then gate,
+   record, status, handoff (AGENTS.md).
+
+### Refactoring an existing port under its oracle (track R)
+
+The existing ports are verified, so they can be made readable without new reverse
+engineering:
+
+1. Run the module's oracle on the unchanged tree and record the verdict (pass, partial or
+   fail, with counts). That is the bar.
+2. Split the module into game-tier code plus a reference adapter (STYLE §1, §5). The probe's
+   flat C ABI stays byte-for-byte the same, and the probe now calls through the adapter.
+3. Refactor in small commits-in-waiting: names and enums, then structured control flow, then
+   constants as literals, then arithmetic level (STYLE §7), then state without fixture
+   optionals. Rerun the oracle after each stage; the verdict and counts must not get worse.
+   "Partial" stays partial, and the flag differences are not yours to fix here.
+4. Rerun the module's recorded mutants. A mutant spec that no longer applies textually is
+   re-expressed against the new code with the same semantic bug. That is a change to the judge,
+   so it goes in its own `fix(judge)` commit listing old and new specs. Each re-expressed
+   mutant must be shown caught before the refactor counts as verified. Never drop a mutant.
+5. Update `reference/symbols/legacy-identifiers.json` (spellings retired with the whole-owner
+   migration) and the readability baseline once the checker exists.
+
+### Readable exact arithmetic: the control-word premise
+
+STYLE §7 allows plain `float` expressions where the game thread runs x87 at 24-bit precision
+and round-to-nearest (control word `0x007f`, observed on the Windows reference main thread;
+`HANDOFF.md` "Floating-point observations"). With that control word, `+ - * / sqrt` round
+like IEEE single unless an operand is a `double` (an `fld qword` constant), a result leaves
+the single exponent range while still in a register, or the value is converted to an integer.
+The premise is checked, not assumed: the census in GOAL §6 records `FPCW` at the entry of
+every override in the guest across the boot/title/attract run and the replays. A module may
+use plain floats only for call sites where the census saw `0x007f`, only for expressions
+whose assembly has single-precision operands only (no `fld qword`, `fistp` or
+transcendental), and only when its oracle, run under that control word, keeps its verdict.
+The oracle alone is not enough: its fixtures may never reach the divergent paths.
 
 ## 4. Runtime work (M1+)
 

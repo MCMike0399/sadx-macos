@@ -23,14 +23,21 @@ make app-smoke       # opens the window for 120 frames and writes build/app-smok
 ./build/sadx-boot "game/Sonic Adventure DX/sonic.exe" "game/Sonic Adventure DX/mods/sadx-input-mod/sadx-input-mod.dll" 5 --survey
 ```
 
-## Status in one paragraph
+## What this is, and where it is going
 
-The boot sequence and one full frame of the original game run natively from exact
-re-implementations (verified instruction-for-instruction against the original with a
-Unicorn oracle per function), but that method covers 0.15 % of the game's code per day.
-The project is now building a hybrid runtime that executes all remaining original code
-in-process behind native Win32/Direct3D 8/input/audio layers, so the whole game runs and
-can be tested while native code replaces it progressively. Details in
+The destination is a normal, readable C++ game codebase that anyone can clone, build, and
+play with assets imported once from their own disc or install. It needs no `sonic.exe`, no
+original DLLs and no emulation. The code is organised by game system and written to be
+maintained and extended: new features sit on top of the faithful game as opt-in
+enhancements. See [`docs/GOAL.md`](docs/GOAL.md), [`docs/STYLE.md`](docs/STYLE.md) and
+ADR-0005/0006/0007 in [`docs/decisions/`](docs/decisions).
+
+Today the original game runs in-process under a hybrid runtime: an x86 guest behind native
+Win32/Direct3D 8/input layers, with Metal drawing. It boots through the intro and title
+deterministically and serves as the judge. Native code, verified function by function
+against the original with Unicorn oracles, replaces it progressively. The earliest native
+code was written in an address-shaped style that is being refactored into readable form under
+the same oracles. Details in [`docs/STATUS.md`](docs/STATUS.md) and
 [`docs/REVIEW-2026-10-12.md`](docs/REVIEW-2026-10-12.md).
 
 ## Licence

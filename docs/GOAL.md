@@ -1,525 +1,435 @@
 # The goal, for `/goal`
 
-This file is the standing brief an agent session loads when the user types `/goal` in
-`~/Developer/sadx-macos` (`.claude/commands/goal.md` reads it, then `docs/STATUS.md`). It
-replaces the per-step `docs/NEXT-AGENT-PROMPT.md` as the entry point: that file still holds the
-detailed state notes of the last M1 steps and is linked from section 6. The destination was
-clarified by the user on 2026-10-15 (ADR-0005); a second pass the same day added the symbol
-database, provenance annotations, the asset importer plan and the lessons of comparable
-projects (ADR-0006, §4.3–4.5, `docs/RESEARCH-native-recompilation.md`). Historical measurements
-below are labelled; current numbers and completed gates live in `docs/STATUS.md`.
+This is the standing brief that an agent session loads when the user types `/goal` in
+`~/Developer/sadx-macos`. `.claude/commands/goal.md` reads it, then `docs/STATUS.md`. It was
+last rewritten on 2026-10-15, after the user reviewed the source and asked for code that is
+readable, modular and maintainable enough to extend with new features. That request is
+[ADR-0007](decisions/ADR-0007-readable-game-code-and-extensibility.md). It builds on
+[ADR-0005](decisions/ADR-0005-native-source-and-executable-independence.md) (native,
+executable-independent) and [ADR-0006](decisions/ADR-0006-symbol-names-and-provenance-annotations.md)
+(names in code, addresses in annotations). Current numbers and completed gates live in
+`docs/STATUS.md`. Numbers below are labelled with their date.
 
 ## 0. The prompt (what `/goal` injects)
 
 ```
 You are continuing sadx-macos: a native Apple Silicon port of Sonic Adventure DX (2004 PC,
 sonic.exe 6b0937ca…24cd74) under the pinned "updated speedrun" mod profile (SADX Mod Loader
-eb4cdcca / DLL 3293cf35, Input mod 2.6.1, Speedrun mod 2.0 with CCEF/EHCF/Skipma/63 FPS), built by
-exact reverse engineering and proven by automated tests. Metal for graphics, GameController for
-Xbox and Switch 2 Pro pads, fidelity to the Windows reference over convenience. The finished
-game builds from maintained source and runs from imported assets without sonic.exe, original
-Windows/mod DLL execution or an x86 runtime. The hybrid app is the development reference.
-New and moved code uses semantic names from the symbol database with the source address in a
-provenance annotation, never in an identifier (ADR-0006).
+eb4cdcca / DLL 3293cf35, Input mod 2.6.1, Speedrun mod 2.0 with CCEF/EHCF/Skipma/63 FPS).
+The product is readable, modular C++ that anyone can clone, build and play with assets
+imported from their own disc or install: no sonic.exe, no original DLL execution, no x86
+runtime (ADR-0005). The code reads like a game codebase, not a disassembly. Names come from
+the symbol database, addresses appear only in provenance annotations (ADR-0006), and
+everything address-shaped lives in the reference tier (ADR-0007, docs/STYLE.md). Fidelity
+to the Windows reference is non-negotiable and is proved by differential tests. The hybrid
+guest is the development judge, not the product. New features later attach as opt-in
+enhancements on top of the faithful game.
 
-Read, in order: AGENTS.md, docs/GOAL.md (this brief: history, how REA is used, the next items),
-docs/STATUS.md (generated from the last gate), docs/ROADMAP.md (the milestone whose table is not yet
-green is the current one), docs/ARCHITECTURE.md, docs/METHOD.md, docs/decisions/ADR-0001..0006, and
-the last three entries of docs/HANDOFF.md. Then do ONE step of the loop in docs/GOAL.md §7: name the
-item (the one the user passed, else the first open item of §6), analyse with REA's Ghidra through the
-owned runner, implement in the right layer, verify at the level the roadmap asks, run the gate,
-record it only on rc 0, regenerate STATUS, append a HANDOFF entry, commit (no push, no attribution).
-Report honestly: unverified scope named, skipped tests listed, "partial" oracles never called pass,
-every HLE fact the reference machine would have supplied kept as an assumption in
-HleProcess::assumptions. Do not stop at a plan; a step ends with a recorded gate or an explicit
-statement of what blocked it.
+Read, in order: AGENTS.md, docs/GOAL.md, docs/STYLE.md, docs/STATUS.md, docs/ROADMAP.md,
+docs/ARCHITECTURE.md, docs/METHOD.md (§0 is the tool cookbook), docs/TIPS.md, ADR-0001..0007,
+and the last three docs/HANDOFF.md entries. Then do ONE step of the loop in GOAL §7: name the
+item (the one the user passed, else the first open item of §6), build the context bundle with
+the symbol database and REA's Ghidra, write game-tier code plus its reference adapter,
+verify with the differential judge, run the gate, record it only on rc 0, regenerate STATUS,
+append a HANDOFF entry, and commit (no push, no attribution). Report honestly: name the
+unverified scope, list skipped tests, never call a "partial" oracle a pass, and keep every
+unknown explicit at its boundary. Never edit the judge to pass. Do not stop at a plan: a step
+ends with a recorded gate or an explicit statement of what blocked it.
 ```
 
 ## 1. The goal, exactly
 
-A native arm64 macOS application, built from readable, maintained source, that plays
-*Sonic Adventure DX* with the pinned speedrun profile faithfully enough for speedrun practice,
-proven by automated tests. The user supplies game assets from their own disc or installation;
-the finished game does not require downloading or retaining `sonic.exe` to play.
+A native arm64 macOS game, built from readable, maintained source, that plays *Sonic
+Adventure DX* with the pinned speedrun profile faithfully enough for speedrun practice. It is
+proved by automated tests, and it is structured so that the community can maintain it and
+extend it. Anyone can download the source. The user supplies the game assets from their own
+disc or installation through a one-time importer.
 
-There are three separate requirements:
+Four requirements, each with its own acceptance tests:
 
-* **Native execution:** all shipped game and pinned-profile code, including cold paths,
-  compiles for arm64. Unicorn, x86 JIT/interpreter execution and original-code fallbacks
-  belong only to the separate development reference.
-* **Executable independence:** ordinary source builds use maintained source and native
-  dependencies. Playing uses imported assets. Neither operation opens `sonic.exe` or
-  executes original Windows/mod DLLs. One-time import may read embedded data from the
-  user's own EXE/model DLL containers; it must produce independent data resources.
-* **Maintainable source:** game systems expose meaningful types, operations and ownership.
-  Developers change frame control, player physics, collision or speedrun features through
-  those interfaces. Source addresses remain available as provenance and reference-adapter
-  metadata rather than defining production storage and dispatch.
+* **Native execution.** All shipped game and pinned-profile code, cold paths included,
+  compiles for arm64. Unicorn, x86 execution and original-code fallbacks belong only to the
+  development reference.
+* **Executable independence.** Building uses maintained source and declared native
+  dependencies. Playing uses imported assets. Neither opens `sonic.exe` or runs an original
+  DLL. A one-time import may read embedded data from the user's own EXE/DLL containers and
+  emits independent, typed, hashed data (M5).
+* **Readable, maintainable source** (ADR-0006, ADR-0007, `docs/STYLE.md`). Game code is
+  organised by game system (player, camera, objects, stages, UI…). It uses names from the
+  symbol database, recovered types, structured control flow, literal constants and readable
+  exact arithmetic. An address appears only in a `// FUNCTION:`/`// GLOBAL:` annotation, and
+  everything address-shaped (guest marshalling, callee-address dispatch, fixture unknowns)
+  lives in the reference tier. A developer can change Sonic's physics without knowing where it
+  lived in `sonic.exe`.
+* **Extensible without losing fidelity** (ADR-0007 §8, ROADMAP M6). The faithful game is the
+  default and the only thing fidelity tests measure. Enhancements (practice tools, overlays,
+  widescreen, new features) are opt-in, attach at named hook points, and are proved not to
+  change the game when off. Replay-neutral ones are proved not to change it when on, either.
 
-**What "readable" means, concretely** ([ADR-0006](decisions/ADR-0006-symbol-names-and-provenance-annotations.md)):
-an address is a *comment*, never an *identifier*. Today a field reads
-`std::optional<std::int32_t> frame_multiplier_at_389d7dc`; the destination reads
+What readable means, concretely:
 
 ```cpp
-// GLOBAL: SONIC 0x3b11188 FrameMultiplier
-std::int32_t frame_multiplier = 1;
+// before (src/game/game_mode.cpp today)
+case 0x01:
+    r=ret(0x40c124,0x42cc70);
+    if(r==1){call(0x40c130,0x411e30,1,1);goto L3bc;}
 ```
 
-and a function reads `// FUNCTION: SONIC 0x411e30 dsInitInt` above
-`void set_frame_rate_mode(FrameRateMode mode, int frame_increment)`. Names come from the
-symbol database (§4.4: the mod loader's symbol-based headers first), types from recovered
-struct layouts (`task`, `taskwk`, `playerwk` …), and a gate checker reads the annotations to
-keep one owner per address. This is the isledecomp/OpenLoco convention (§4.3), and it is what
-lets a developer change player physics without knowing where it lived in `sonic.exe`.
+```cpp
+// after (game tier; STYLE.md §11)
+case GameMode::Logo: {                                  // MD_LOGO
+    const int logo_result = run_logos();                // RunSegaSonicTeamLogos (STUB seam)
+    if (logo_result == 1) {
+        frame_control.set_frame_rate_mode(1, 1);        // dsInitInt
+        return enter_title(state);
+```
 
-The decision is [ADR-0005](decisions/ADR-0005-native-source-and-executable-independence.md);
-the acceptance tests are [M5](ROADMAP.md#m5--native-source-and-executable-independence).
-The vocabulary is in [CONTEXT.md](../CONTEXT.md). Exact arithmetic and observable ordering
-remain part of fidelity even when the source is reorganized. The existing one-owner checker
-and address-named state remain in force until migrated with equivalent ownership/provenance
-checks; a cosmetic rename is not a native architecture change.
+The game-mode oracle still judges the "after" code. The probe calls it through a reference
+adapter that maps `run_logos` to 42cc70 in the guest. Exact arithmetic and observable ordering
+remain part of fidelity whatever the code looks like.
 
-The existing implementation is an intermediate reference, as these historical measurements show:
+## 2. History, and what it taught
 
-| Requirement | Where it is defined | State at gate 129 |
+| Days | What happened | Gates |
 |---|---|---|
-| All game code native; build and play independent of original executables | ADR-0005; M5 | not achieved: guest runs boot → SEGA logo → intro FMV → title → attract → file select; 40 native overrides |
-| Metal rendering | M2 | `sadx-app --guest` draws the guest's D3D8 stream (clears, DrawPrimitiveUP, textures, blend, depth) |
-| Keyboard, Xbox and Switch 2 Pro controllers | M3 `input-mapping`; the Input mod's SDL path | keyboard forwarded; a synthetic XInput/HID pad reaches the pinned SDL2; GameController adapter samples the first extended profile; no physical pad verified |
-| Speedrun profile (mod loader, Input 2.6.1, Speedrun 2.0, 63 FPS) | `tools/gate/profile_patches.json`, M3 `speedrun-profile` | loader and both mods run as real code in the guest; 119/119 active patch sites applied; 63 FPS limiter cadence measured on the virtual clock |
-| Fidelity to the Windows reference | AGENTS.md non-negotiables, M4 | every unknown platform fact is a reported assumption (23 in the native survey, ~40 in the HLE); no Windows capture yet |
-| Proven by automated tests | ROADMAP milestone tables, `make gate`, `make m1` | 129 unit programs, 101 probes, 102 oracles (48 pass / 44 partial / 9 fail / 1 missing), 82 recorded gates |
+| 2026-10-10/11 | Port everything, function by function, each with a Unicorn oracle, using Hopper | `render` … `endscene-98` |
+| 2026-10-12 | 6 KB of 3.85 MB verified per day; review; ADR-0001 hybrid runtime, ADR-0002 Ghidra via REA, ADR-0003 repo move, ADR-0004 layers | 99–104 |
+| 2026-10-13 | M1: loader, mods and SDL2 in the guest; boot → FMV → title → attract, 7,228 deterministic frames; Metal app; keyboard, pads; 40 overrides | 105–129 |
+| 2026-10-14/15 | more override bridges; ADR-0005/0006; symbol database (2,166 / 8,875 procedures named); provenance checker; native frame-control pilot built and tested with no guest; screen-init bridge | 130–140 |
 
-## 2. Four days in numbers
+**The method change, not more effort, made the day-3 jump.** The hybrid runtime made the
+whole intro and title run from the original bytes, with exact ports bound in as overrides.
+That produced a judge for everything: oracles, override-equivalence, determinism and replay.
+It did not produce a readable native game.
 
-| Day | Where | What happened | Gates |
-|---|---|---|---|
-| 2026-10-10/11 | `~/Developer/rea/_reference/sadx` + `rea/sadx-native` | port-everything: boot order ported function by function (WinMain settings, library/device/screen init, GameLoop startup, one full frame of owners), each with a Unicorn oracle; Hopper demo as the reader | `render` (10-11 20:14) … `endscene-98` (10-12 19:47) |
-| 2026-10-12 | same, then `~/Developer/sadx-macos` | the user measured the pace (6 KB of 3.85 MB verified per day, a late-2027 playable) and asked for a review; ADR-0001 hybrid runtime, ADR-0002 Ghidra via REA, ADR-0003 repo move, ADR-0004 layers; oracle health audit; first guest smoke (7899a0 from original bytes equals the port) | 99–104 |
-| 2026-10-13 (26 commits) | `sadx-macos` | M1 4b–4f: loader + mods + SDL2 initialise in the guest; boot to first Present; override table; 590 FPU shim sites; 300 → 7,228 deterministic frames; headless DirectShow FMV; title screen; `sadx-app` draws the guest; keyboard; timing; shared D3D caps; XInput + raw-input HID path for SDL; device/heap/task/queue bridges (40 overrides) | 105–129 |
+**Why the code became unreadable** (measured 2026-10-15 at `f72a05d`, game layers
+`engine input player game runtime`, about 21,300 lines): about 7,700 hex literals, 1,950 uses
+of `*_at_<hex>` identifiers, 249 callee-address calls, 73 `goto`s, about 700 lines over 160
+characters, and 16 provenance annotations. The causes are in ADR-0007. In short, the method
+told agents to transliterate (`METHOD.md` §3 asked for `_at_<hex>` members and instruction
+order), the hybrid runtime leaked callee addresses into game code, x87 exactness was written as
+emulator calls, constants were fetched from the EXE by address, and fixture unknowns were
+threaded through every read. All five are now fixed in the method, and the existing code is
+fixed by refactoring under its oracles (track R).
 
-Measured totals (gate 129): `src/` 295 files / 29,811 lines in 12 layers; `src/hle` 3,888 lines
-written in one day; whole-program inventory 8,875 procedures with 8,623 callee lists; 618
-profile patches evaluated; 208 distinct REA evidence ids cited in `docs/HANDOFF.md`.
+**What cost time, and the rule that came out of it** (details in HANDOFF):
 
-## 3. How the agents worked, and what it taught
+* Hopper demo hangs → Ghidra only, batched (ADR-0002).
+* A per-instruction count passed to Unicorn made it 30× slower → wall-clock timeouts only.
+* The gate did not run oracles, and 20 silently pointed at stale paths → `make oracles` +
+  `make oracles-verdict` when ported code changes; partial is reported as partial.
+* Tests outside `tests/unit/manifest.tsv` do not run → every test gets a manifest row.
+* stdcall pop counts are load-bearing; code writes into the guest must flush Unicorn's
+  translation cache.
+* Gates are recorded only with their real rc. Interrupted gates stay interrupted.
 
-**What produced the jump on day 3 was the change of method, not more effort.** Two days of exact
-per-function porting verified 0.15 % of `.text`. One day of hybrid runtime made the whole intro
-and title run from the original bytes, with the ported code bound back in as overrides. This
-made a useful reference sooner; it did not recover an independent native game. Exact ports
-and reference adapters remain verification tools (`docs/METHOD.md` §3). Recovery now also
-groups functions into coherent native systems and explicitly accounts for cold code and data.
+**What the wider field learned in the same months** (RESEARCH third pass): agent
+decompilation produces code that is *readable but wrong* unless an objective, tamper-proof judge
+checks every step (momo5502's 15-agent run). Agents edit the judge when they can (Snowboard
+Kids 2). Introduced fields, callees and guards are where hidden divergence lives (arXiv
+2609.05370). Readability is best tracked as its own number, judged by the same check
+(SM64DS: "readability never costs a match"). Address-bound state peaks before it falls, and
+removing it needs a dedicated phase (OpenLoco 342 → 157 → 0).
 
-**What cost time, and the rule that came out of it** (all recorded in HANDOFF entries):
+## 3. Strategy: five tracks
 
-* Hopper demo hangs under load, one function per query → ADR-0002, Ghidra only, batched.
-* A per-instruction count passed to Unicorn instruments every instruction (30× slower) → wall-clock
-  timeouts only, `timeout 0` for long runs.
-* The gate did not run oracles, so 20 oracle scripts silently pointed at pre-move paths → `make
-  oracles` + `make oracles-verdict` are part of closing a session; `partial` is reported as partial.
-* Tests outside `tests/unit/manifest.tsv` do not run in the gate even with no arguments (four such
-  tests still exist: metal-sprite, metal-sprite-composition, metal-texture, player-task) → every
-  test gets a manifest row.
-* An HLE function's stdcall pop count is load-bearing because continuations resume the guest at the
-  caller: one wrong count (CreateWindowEx, 60 vs 48) returned into heap memory.
-* Hosts writes into guest code must flush Unicorn's translation cache; an INT3-based FPU trap was
-  rejected because the loader copies code bytes into trampolines.
-* Gates were recorded only with their real rc; an interrupted gate (rc 130) stays in the handoff
-  as interrupted; the first gate after adding a test was rerun when the test was found unregistered.
+Every `/goal` step belongs to one track. The order in §6 interleaves them.
 
-**Honesty conventions that held across sessions:** assumption lists printed by the runtime,
-tagged failures with the source boundary, "unverified" scope named in every handoff entry, mutants
-for every new oracle or bridge, and the oracle verdict vocabulary pass / partial / fail.
+| Track | What | Judge |
+|---|---|---|
+| **R — Readability** | refactor existing verified ports into game-tier form plus reference adapters, under their unchanged oracles; build the ratchet and the tooling that makes readable work cheap | the module's oracle verdict and counts unchanged, mutants still caught, the readability baseline goes down |
+| **S — System recovery** | recover new systems directly in game-tier form (`METHOD.md` §3), one function or tight cluster per attempt, grouped into coherent systems | a new oracle with mutants and dev/holdout cases; override-equivalence in the live guest |
+| **I — Independence** | the asset importer, native session composition (boot → title → stage with no guest), separate production/reference build graphs, frozen reference corpora | M5 rows: `native-source-build`, `asset-import`, `native-runtime-independent`, `reference-corpus-frozen` |
+| **V — Verification** | M1–M4: override-equivalence, goldens, replays, audio events, Windows trace parity | ROADMAP tables |
+| **E — Enhancements** | later (M6): hook and settings registry, first replay-neutral enhancements | enhancements-off parity, replay-neutral proofs |
 
-## 4. How REA has been used, and how to use it from here
+The recovery pipeline (stages, mapped to tracks):
 
-### 4.1 What exists
+* **A. Symbol database** (done): names for 2,166 / 8,875 procedures plus seeds into Ghidra.
+* **B. Provenance checker + pilot** (done): `check_provenance.py`; native frame control with
+  no guest.
+* **R. Readability foundation**: style guide (done in this revision), `.clang-format`, the
+  readability ratchet, lookup and context-bundle tools, a tamper-evident judge, the
+  control-word census, and pilot refactors (§6 items 3–6).
+* **C. System recovery** (track S). For one system at a time: (1) the context bundle, including
+  profile hooks, callback targets and every unresolved edge; (2) state meaning, record layouts,
+  aliasing, initialisation and callback ownership, then the named interface and its seams;
+  (3) every dependency classified as native behaviour, imported content, constant/initial
+  state, platform service, or unresolved; (4) game-tier code plus reference adapter, proved
+  through the adapter (oracle + mutants + override-equivalence), then from a native caller
+  with the guest absent; (5) report remaining seams. Metrics: `STUB` vs `FUNCTION`,
+  address-bound owners remaining, guest instructions per frame in replays.
+* **E. Importer** (track I): `tools/import/` reads the user's install or disc once. sa_tools
+  mappings are the schema, and committed descriptors are the source of truth. It emits typed,
+  hashed packs with resolved references. Verify by re-serialising each record to its source
+  bytes, resolving every `pointer=` site, and reproducing known pack digests. Packs stay local
+  and ignored.
+* **F. Freeze the reference**: before a system's last guest dependency goes, record its oracle
+  fixtures, replay end states and trace digests into `reference/` (numbers and hashes only).
+* **G. Independence gate**: the M5 rows.
+* **H. Enhancements** (track E, M6): the hook registry, settings, and the first enhancements.
 
-* **The owned runner** `reference/ghidra-live.mjs` is an MCP stdio client that starts `rea mcp`,
-  opens `sonic.exe` (or `SDL2.dll`, `reference/ghidra-sdl-config.json`) with REA's Ghidra provider
-  once, replays requests from a JSON file and saves a snapshot on close. Allowed tools:
-  `analyze_function`, `inspect_native_instruction`, `resolve_native_call_targets`,
-  `trace_native_values`, `xrefs`, `binary_session`, `list_procedures`, `procedure_callers`,
-  `procedure_callees`, `procedure_references`, `procedure_info`, `batch_decompile`, plus `export`
-  (evidence bundle). Current config: `reference/ghidra-inventory-config.json` (snapshot
-  `reference/sonic-ghidra-inventory-snapshot.json`, seeds
-  `build/symbols/rea-seeds.tsv` (`make symbols`); the original 64 callback/game-loop seeds
-  are preserved from `reference/ghidra-game-loop-seeds.tsv`).
-  The former full-cache snapshot is preserved locally as
-  `reference/sonic-ghidra-inventory-before-frame-input-seeds.json`; adding seeds
-  changed the analysis profile, so the current snapshot was rebuilt without reusing it. The older
-  `ghidra-game-loop-config.json` snapshot is tied to the pre-move binary path; do not use it.
-* **Results on disk:** `reference/ghidra-game-loop-recovery/` (314 files: preloop, frame, wm, dbg,
-  startup, proj, queue, fog …) and `reference/inventory-raw/` (8,717 files: the callee sweep plus
-  the `bridge-*`, `caps-*`, `timing-*`, `fmv-*` analyses of the M1 sessions). Both are git-ignored;
-  the tracked products are `reference/inventory/{functions,hot-paths,fpu-sites}.json`.
-* **Usage so far** (from the handoff): `analyze_function` for every ported or bridged function,
-  `list_procedures` once (8,875 procedures), `procedure_callees` for 8,623 of them (35 minutes
-  unattended through `tools/inventory/run_inventory.py`), `xrefs` for data references,
-  `trace_native_values` once. `batch_decompile` and `procedure_callers` are allowed but almost
-  unused. Pseudocode is written next to each result as `<label>.pseudocode.txt`;
-  `tools/analysis/ghidra_asm.py <result.json>` prints the assembly.
-* **REA itself:** the runner imports `rea-agents` 6.4.0 from `$SADX_REA_MODULES`, otherwise
-  `reference/tools/rea/node_modules`, with `/private/tmp/sadx-rea/node_modules` as a legacy
-  fallback (`docs/METHOD.md` §1). `~/Developer/rea` is the source checkout inspected for this
-  goal revision. Do not assume that source HEAD and the installed package are identical.
-* **Ghidra readiness is green:** `rea doctor --provider ghidra` with the environment file's
-  `GHIDRA_INSTALL_DIR` (`reference/tools/ghidra_12.1.4_PUBLIC`) and `JAVA_HOME` (Homebrew OpenJDK 27)
-  reports every check healthy (verified 2026-10-13).
+A static recompiler (Ghidra CFG → C, or M-HT/SR's x86 → LLVM) may still help as a temporary
+speed path behind the reference adapter, never as shipped logic (ADR-0005).
 
-### 4.2 The REA CLI, and what to do with it
+## 4. Tools
 
-`rea` (`node reference/tools/rea/node_modules/rea-agents/scripts/rea.mjs`) exposes the same
-workflows as the MCP server, one process per call, with `--snapshot` reuse:
+### 4.1 The cookbook
 
-```sh
-export GHIDRA_INSTALL_DIR="$PWD/reference/tools/ghidra_12.1.4_PUBLIC"
-export JAVA_HOME=/opt/homebrew/Cellar/openjdk/27/libexec/openjdk.jdk/Contents/Home
-make symbols
-export REA_GHIDRA_STARTUP_TIMEOUT_MS=600000 REA_GHIDRA_SEED_FILE="$PWD/build/symbols/rea-seeds.tsv"
-REA="$PWD/reference/tools/rea/node_modules/rea-agents/scripts/rea.mjs"
-EXE="game/Sonic Adventure DX/sonic.exe"; SNAP="$PWD/reference/sonic-ghidra-inventory-snapshot.json"
-node $REA doctor --provider ghidra --json                      # readiness, no target
-node $REA function  "$EXE" 0x40c090 --provider ghidra --snapshot "$SNAP" --json   # one dossier
-node $REA decompile "$EXE" 0x40c090 --provider ghidra --snapshot "$SNAP" --json   # pseudocode only
-node $REA xrefs     "$EXE" 0x3b11188 --provider ghidra --snapshot "$SNAP" --json  # who touches a global
-node $REA instructions "$EXE" 0x781060 --provider ghidra --snapshot "$SNAP" --json
-```
+`docs/METHOD.md` §0 maps each question to a tool and an exact command: symbol lookup, structs
+and enums, callees with names, one function's pseudocode (REA CLI with snapshot), clusters
+(`batch_decompile` through the runner), xrefs, assembly, bytes and constants (`pe_image`),
+profile patches, sa_tools data mappings, runtime facts from the guest, and the oracle judge.
+Start there. `docs/TIPS.md` is the knowledge base of SADX and MSVC idioms (x87 compare masks,
+constant pools, tail merging, usercall registers). Add to it when you learn something.
 
-Rules of thumb, from REA's own docs (`~/Developer/rea/docs/cli.md`, `ghidra-provider.md`):
+### 4.2 REA: facts that matter
 
-* An exact snapshot hit is answered before Ghidra starts; a miss imports the binary again (one
-  import of `sonic.exe` is minutes). So: **the runner for a batch of new questions, the CLI for a
-  single question or a cached one, and `doctor` before blaming the provider.**
-* Functions reached only through pointers (task callbacks, vtables, the D3DX dispatch table) are
-  not auto-defined: add them to the seed TSV (`address<TAB>function[<TAB>name]`) and keep growing it.
-* Every result carries `evidence_id`, limitations and the target SHA-256. Cite the id in the
-  handoff entry (the convention is already followed: 208 ids so far).
-* `batch_decompile {addresses[]}` and `procedure_callers` are cheaper than one `analyze_function`
-  per function when only pseudocode or the caller set is needed; use them for surveys.
-  `batch_decompile` has no CLI form and returns `items[].pseudocode`; the runner writes
-  `.pseudocode.txt` only for single results, so split the items yourself (a small loop).
-* **Names enter Ghidra through the seed file, durably.** The seed TSV accepts
-  `address<TAB>function|code|label<TAB>name`; a named function seed renames the function, a
-  label seed names a global (also in `.bss`). Seeded names survive into snapshots, so the
-  pseudocode of every later query arrives named (`FrameMultiplier` instead of `DAT_03b11188`).
-  The seed file's digest is part of the analysis profile: a new seed set means one fresh,
-  unattended re-analysis and a new snapshot (keep the old one under a backup name).
-* **Live renames do not persist.** `set_addresses_names` and `annotate_native_function` work on
-  Ghidra but only for the session, and after any edit `close_binary` refuses to save a snapshot
-  (export the evidence bundle, then close without `snapshot_path`). The runner does not allow
-  them today. Prefer the seed file.
-* **Types cannot be pushed into Ghidra through REA** (no struct/signature/header import;
-  `inspect_native_data_type` only reads). Struct layouts therefore live in the project's own
-  headers and are checked by oracles and `static_assert`s on offsets, not by Ghidra.
-* Read-only tools worth adding to the runner's `allowed` set when a step needs them (one line
-  each): `list_names`, `list_strings`, `search_strings`, `procedure_pseudo_code`,
-  `get_call_graph`, `trace_call_path`, `inspect_native_api` (jump tables / switch cases),
-  `inspect_native_data_type`, `read_function_instructions`, `inspect_analysis_view` (page one
-  facet of a stored dossier by evidence id instead of re-running it), `compare_functions`.
-  The unknowns ledger (`record_unknown`, `list_unknowns`, `verify_unknown_resolution`) fits the
-  "explicit unknowns" rule if a step wants REA-side bookkeeping.
-* Limits that matter: one serial bridge queue (a "batch" is serial inside Ghidra); p-code capped
-  at 3,000 ops / 12,000 def-use edges per function; `trace_native_values` is static def-use, not
-  emulation; computed calls stay unresolved; REA has **no** compile-to-source, struct-inference
-  or emulation feature for PE targets. Runtime facts come from the project's guest.
+* **The owned runner** `reference/ghidra-live.mjs` starts `rea mcp`, opens `sonic.exe` once with
+  REA's Ghidra provider, replays a JSON request file and saves a snapshot on close.
+  * Allowed tools: `analyze_function`, `inspect_native_instruction`,
+    `resolve_native_call_targets`, `trace_native_values`, `xrefs`, `binary_session`,
+    `list_procedures`, `procedure_callers`, `procedure_callees`, `procedure_references`,
+    `procedure_info`, `batch_decompile`. Add a read-only tool to the `allowed` set when a step
+    needs it, one line each. Candidates: `procedure_pseudo_code`, `get_call_graph`,
+    `trace_call_path`, `inspect_native_api` (jump tables), `inspect_native_data_type`,
+    `inspect_analysis_view` (page a stored dossier by evidence id), `list_strings`,
+    `search_strings`, `compare_functions`.
+  * Config: `reference/ghidra-inventory-config.json` (snapshot
+    `reference/sonic-ghidra-inventory-snapshot.json`, seeds `build/symbols/rea-seeds.tsv` from
+    `make symbols`).
+* **The CLI** (`node reference/tools/rea/node_modules/rea-agents/scripts/rea.mjs`, REA 6.4.0):
+  `function`, `decompile`, `xrefs`, `instructions`, `doctor`. An exact snapshot hit is answered
+  before Ghidra starts; a miss re-imports `sonic.exe`, which takes minutes. Use the runner for a
+  batch of new questions, the CLI for one question or a cached one, and `doctor` before blaming
+  the provider. Set `REA_GHIDRA_SEED_FILE` to the generated seeds, or the snapshot profile will
+  not match.
+* **Names enter Ghidra only through the seed file** (`address<TAB>function|code|label<TAB>name`).
+  The seed digest is part of the analysis profile, so a new seed set means one fresh,
+  unattended re-analysis. Keep the old snapshot under a backup name. Live renames
+  (`set_addresses_names`, `annotate_native_function`) do not persist and block the snapshot
+  save.
+* **Types cannot be pushed into Ghidra through REA.** Struct layouts live in project headers
+  and are checked by oracles and by `static_assert`s in adapters.
+* **Limits:** one serial bridge queue; p-code capped at 3,000 ops per function;
+  `trace_native_values` is static def-use, not emulation; computed calls stay unresolved; no
+  compile-to-source, struct inference or emulation for PE. Runtime facts come from the guest.
+* **Evidence ids:** every result carries `evidence_id`. Cite it in the handoff and in
+  `overrides.tsv` decisions.
+* **Health:** `rea doctor --provider ghidra` with the environment's `GHIDRA_INSTALL_DIR`
+  (`reference/tools/ghidra_12.1.4_PUBLIC`) and `JAVA_HOME` (Homebrew OpenJDK 27) was green on
+  2026-10-13. Raw results: `reference/inventory-raw/` and `reference/ghidra-game-loop-recovery/`
+  (ignored). Tracked products: `reference/inventory/{functions,hot-paths,fpu-sites}.json`.
 
 ### 4.3 What comparable projects teach
 
-The [source investigation](RESEARCH-native-recompilation.md) has the evidence and links. The
-short version: every project that reached *readable, binary-free* native code got there by
-decompilation with names, not by static recompilation; every static recompiler that ships
-(LASRecomp, N64Recomp/Zelda64Recomp, XenonRecomp/UnleashedRecompiled) still needs the
-original binary to build or run and names its game code `f_<hex>`/`sub_<hex>`.
+Evidence and links: [`RESEARCH-native-recompilation.md`](RESEARCH-native-recompilation.md)
+(three passes). Every project that reached *readable, binary-free* native code got there by
+decompilation with names, behind a judge. The static recompilers that ship still need the
+original binary and keep `sub_<hex>` code.
 
-| Project | Path it took | What SADX takes from it |
-|---|---|---|
-| LASRecomp | static lift of the NSO to C at first launch, `f_<hex>` functions, `Cpu*` registers, original modules still loaded | separate platform/game code; artifact identity checks. Its generated code is the shape ADR-0005 rejects |
-| pokeheartgold | LLM-agent matching decomp, batch per address range, journal per batch (`DECOMP-NOTES.md`), whole-ROM SHA-1 as the judge | batch journal (our HANDOFF); "a source-language percentage is not binary verification" |
-| re3 / gta-reversed | DLL injected into the exe replaces functions one by one (`RH_ScopedInstall(Name, 0xADDR)`), per-function reversed flag, later standalone exe | this is exactly our hybrid phase; hook registration lives in one table, game code is named C++ |
-| OpenRCT2 / OpenLoco | hooks into the original exe, then all functions native; OpenLoco then moved globals off fixed addresses (`loco_global<T,addr>` 342 → 157 → 0) before native 64-bit | **state migration is the long pole**: track the count of address-bound globals as a metric. Address survives only as `// 0x…` comments (3,047 in OpenLoco) |
-| isledecomp + reccmp (LEGO Island) → isle-portable | `// FUNCTION: LEGO1 0x100b12c0` above a named function; `GLOBAL`, `VTABLE`, `STUB`, `LIBRARY` annotations; a linter checks them; portable fork runs on macOS arm64 | **our annotation scheme** (ADR-0006) and its checker |
-| OpenRCT2 TestPaint | differential harness against the original paint code, later removed because it rotted | **freeze the reference** into recorded corpora before the exe leaves the loop (stage F) |
-| sm64-port, Ship of Harkinian, OoT decomp | assets described by offset/name/type (OoT: 763 XML files), extracted once from the user's ROM into a native archive (`.o2r`) | the one-time importer (stage E), driven by sa_tools' SADX data mappings |
-| LLM decomp case studies (Rock Band 3, Melee, Klonoa, Snowboard Kids 2; LLM4Decompile) | one function or cluster per task, names/types from prior work in context, fast unforgeable equivalence check, independent review agent, attempt caps; agents game loose metrics | the agent loop rules in §7 and AGENTS.md; our judge is differential execution (oracles, override-equivalence, replay), not byte matching |
+| Project | What SADX takes from it |
+|---|---|
+| re3 / gta-reversed | the hybrid phase: named C++, addresses bound once in a hook table; `NOTSA` tags; reversible bug-fix registry; an AI tips file |
+| OpenRCT2 / OpenLoco | state migration is the long pole and peaks before it falls; a dedicated integration phase; library/app split for headless tests; freeze the differential evidence before the original leaves |
+| isledecomp / reccmp / isle-portable | `// FUNCTION: MODULE 0xADDR name` annotations with a linter; platform replacements tagged at their sites; macOS arm64 port of the same source |
+| sm64-port, Ship of Harkinian, Torch, libultraship | one-time asset import driven by committed descriptors; `should(VanillaBehavior…)` hooks keep vanilla the default; resource overrides by id |
+| TRX | faithful gameplay, platform rewritten first; never hard-code game-specific options |
+| SM64DS decomp | readability measured as its own number, gated by the same judge |
+| momo5502, Snowboard Kids 2, Mizuchi, LLM4Decompile, SK2Decompile, arXiv 2609.05370 | tamper-proof objective judge; invent nothing; one function per fresh context; a cap on attempts; skeleton first, then names; an adversarial reviewer *with* evidence |
+| SA1 Dreamcast decomp (new) | equivalence-first with dev/holdout case splits; a future name cross-reference for shared Ninja/game code |
 
-### 4.4 The symbol database and provenance annotations (ADR-0006)
+### 4.4 The symbol database (ADR-0006, implemented)
 
-**The project already has most of the names and it has not used them.** The mod loader
-submodule (`reference/sadx-mod-loader/SADXModLoader/include/`, pinned at eb4cdcca) carries:
+`make symbols` → `build/symbols/{symbols,conflicts,coverage}.json` and `rea-seeds.tsv`.
+Sources, in order of preference: the mod loader's `*New.h` headers (original symbols), the
+classic headers, sa_tools labels (`reference/sa-tools` at `b72d52f3`), Ghidra boundaries, and
+the tracked decisions in `reference/symbols/overrides.tsv`. Coverage on 2026-10-15: 2,166
+named procedures out of 8,875 (8,716 nonexternal); 215 of 418 legacy owner addresses named;
+2,823 conflicts listed, never silently resolved. A name is a hypothesis until the recovered
+behaviour agrees. The mod loader headers are GPL: use names and layouts as facts and write our
+own declarations.
 
-* `SADXFunctionsNew.h`, `SADXVariablesNew.h`, `SADXStructsNew.h`, `SADXEnumsNew.h`, headed
-  "based on symbols": original-style names (`dsInitInt` 411e30, `stHWSetVSync` 7899a0,
-  `texLoadTexturePvmFile` 421180, `now_saving` 3b291a4, `task`/`taskwk`/`motionwk`/`playerwk`).
-* `SADXFunctions.h`, `SADXVariables.h`, `SADXStructs.h`, `SADXEnums.h`: the older community
-  names (`SetFrameRateMode`, `FrameMultiplier`, `GameModeHandler` 40c090, `LoadPVM`).
-* Together roughly 3,800 distinct function addresses (of 8,875 Ghidra procedures), 3,150
-  globals and 470 structs, as `FunctionPointer(ret, name, (args), 0xADDR)`,
-  `DataPointer(type, name, 0xADDR)`, `DataArray(...)`, `TaskFunc(name, 0xADDR)` macros.
+## 5. Where things stand (2026-10-15, gate 140 + screen-init bridge)
 
-Outside the repo, X-Hax **sa_tools** (`GameConfig/PC_SADX/`, 140 files) maps 13,160 data items
-embedded in `sonic.exe` and the model DLLs: 9,416 basic models, 1,680 animations, 480 chunk
-models, 456 texlists, 62 landtables, 57 death zones, sound lists, object lists, physics data,
-each with `address=`, `type=`, output filename and `pointer=` (the code sites that reference
-it); `sonic_labels.txt` adds ~243,000 data labels. These are the schema for the importer
-(stage E) and a second source of data names. Fetch it at a pinned commit into an ignored
-path when stage A or E starts; reimplement the formats, do not link the C# code.
+`docs/STATUS.md` is authoritative. In outline:
 
-Rules (full text in ADR-0006):
-
-1. A generated **symbol database** (`tools/symbols/`, stage A) merges, with a source tag per
-   entry: the `New` headers (preferred), the classic headers, sa_tools labels, Ghidra
-   boundaries from the inventory, and the project's own decisions
-   (`reference/symbols/overrides.tsv`, tracked). Conflicts are listed, never silently resolved.
-   Community names are hypotheses: a name is adopted when the evidence for the function's
-   behaviour agrees with it.
-2. The database emits the REA seed TSV, so Ghidra pseudocode arrives named.
-3. **Code names are semantic, in the project's style** (`snake_case` functions/fields,
-   `CamelCase` types); the original symbol is in the annotation. Recovered record types follow
-   the symbol layout (`taskwk` → `TaskWork`) with `static_assert`ed offsets when guest memory
-   is still marshalled.
-4. **Provenance annotations** sit on the line above the declaration:
-   `// FUNCTION: SONIC 0x411e30 dsInitInt`, `// GLOBAL: SONIC 0x3b11188 FrameMultiplier`,
-   `// DATA: SONIC 0x88af78 <label>` (content the importer supplies), `// PATCH: SPEEDRUN
-   +0x10f0 → 7899e0` (pinned-profile behaviour, module + offset), `// STUB: SONIC 0x… <reason>`
-   (declared but not recovered), `// LIBRARY: SONIC 0x… _ftol` (CRT/D3DX). Module tags:
-   `SONIC`, `CHRMODELS`, `ADV00`…, `LOADER`, `INPUT`, `SPEEDRUN`, `SDL2`.
-5. A gate checker (`check_provenance.py`, stage B) enforces one `GLOBAL` owner per byte range
-   and one `FUNCTION` per entry address, and validates names against the database. It replaces
-   `check_global_owners.py` **only when** it covers everything that checker covers; until then
-   both run, and existing `*_at_<hex>` owners stay valid. Migrate one system at a time and move
-   the owner and its annotation together.
-6. Address-keyed override registration stays in `src/guest`/`src/hle` reference adapters (one
-   table, like gta-reversed's hook list); production game code never takes a guest address.
-
-### 4.5 The recovery pipeline
-
-REA's Java bridge returns Ghidra decompiler C text and an analysis dossier; neither is a
-compiler or proof of behaviour. Treat truncated or unresolved results as open work. The
-pipeline, each stage a series of `/goal` steps:
-
-* **A. Symbol database** (§4.4): generated map + seeds + one fresh snapshot. Metric: named
-  procedures / 8,875, named globals referenced by ported code.
-* **B. Annotations and checker**: `check_provenance.py` in the gate; first migrate an
-  already-verified module (frame control) from `*_at_<hex>` to named fields + annotations,
-  proving the checker catches a duplicated owner (mutant).
-* **C. System recovery** (the long pole): for one system at a time —
-  1. gather callers, callees, data references, assembly and named pseudocode (runner,
-     `batch_decompile` for the cluster); include profile hooks and callback targets; record
-     evidence ids and unresolved edges;
-  2. recover state meaning, record layouts, aliasing, initialisation and callback ownership;
-     define the named native interface; keep binary marshalling in the reference adapter;
-  3. classify every dependency: native behaviour, imported content, constant/initial state,
-     platform service, or unresolved; resolve data pointers to resource identities;
-  4. implement with direct native calls; prove it through the reference adapter (oracle +
-     mutants, override-equivalence, replay), then from a native caller with the guest absent;
-  5. report recovered behaviour and remaining dependencies. Metrics: address-bound globals
-     remaining (OpenLoco's), functions with `FUNCTION` vs `STUB`, guest instructions per
-     frame in the reference replays.
-* **D. The agent loop for one function or cluster**: the context bundle (§7 step 2), one
-  bounded attempt, the differential judge, an independent review for recovered systems.
-* **E. Importer**: `tools/import/` (later a native `sadx-import` tool) reads the user's install
-  or disc once, uses sa_tools mappings as the schema (address, type, `pointer=` sites) and
-  emits typed, hashed packs (models, landtables, animations, texlists, physics, object/sound
-  lists, strings, initial-state tables) with references resolved to ids. Tests: re-serialise
-  each record and compare to the source bytes; every `pointer=` site resolves; an unknown
-  variant fails explicitly. Packs stay local and ignored. `tools/lib/extract.py` is a
-  bring-up artifact, not this importer.
-* **F. Freeze the reference**: before a system's last guest dependency goes, record its oracle
-  fixtures, replay end states and trace digests into `reference/` (numbers and hashes only,
-  `check_repo_hygiene.py` green) so verification survives without `sonic.exe`. OpenRCT2's
-  TestPaint rotted because this was not done.
-* **G. Independence gate**: the M5 rows (`native-source-build`, `native-runtime-independent`, …).
-
-A static recompiler (Ghidra CFG → C) may still help as a *temporary* speed path behind the
-reference adapter, never as shipped logic; it would need its own instruction/flow/memory/FP
-validation (ADR-0005). The hybrid runtime already gives what recompilation would give us
-(the whole game running) so its value here is speed, not the goal.
-
-## 5. Where things stand (gate 129, 2026-10-13 22:25)
-
-`docs/STATUS.md` is authoritative; the shape is:
-
-* **M0 complete.** **M1 nearly complete:** `make m1` runs guest-imports, guest-dlls, guest-boot,
-  guest-overrides, hle-device/heap/task/queue-bridge, guest-fpu-shims, guest-frames, guest-input,
-  guest-timing, guest-controller and app-smoke. Of the roadmap's M1 table, `guest-boot`,
-  `guest-frames`, `determinism`, `profile-applied`, `fpu-shims` and `guest-fps` are green;
-  `override-equivalence` is green for the 40 bound owners and open for the rest (§6).
-* **The guest:** boots `sonic.exe` from entry 643f96 with the real loader, CHRMODELS_orig, model
-  DLLs, Input and Speedrun mods, SDL2 (MSVCP140/VCRUNTIME140 as real code; everything else HLE in
-  `src/hle`), runs 7,228 frames SEGA logo → FMV (headless DirectShow) → title and on into the
-  attract demo deterministically; host 78–82 FPS, virtual 63 FPS title cadence.
-* **The app:** `sadx-app --guest GAME WINSYS [--keys F:VK[:N],…] [--pad F:MASK[:N],…] [--exit-after N]
-  [--screenshot out.ppm]` draws every frame with Metal and reaches "Select a Saved File"; the
-  main-menu screenshot was inspected by eye only, not against a reviewed golden.
-* **Oracles:** 48 pass, 44 partial (values exact, FP flags differ: Unicorn 2.1.4 raises no SSE flags
-  and applies the x87 NaN rule to SSE), 9 fail (host-double FPATAN and SNaN loads in Unicorn, plus
-  `sse_math` and `d3dx_perspective` classified), 1 missing (`game_reset_composed`, the probe
-  rejects the composed fixture). Settling the fails needs an Intel capture (M4), not a port change.
-* **Native-only runtime (`sadx-boot`)** still stops at frame 2 (LoadPVM 421180) and is now the
-  override provider, not the main path.
+* **M0 complete. M1 nearly complete:** guest boot, frames, determinism, profile-applied,
+  fpu-shims and guest-fps are green. Override-equivalence is green for the bound owners and
+  open for the rest (§6 item 8).
+* **The guest** boots `sonic.exe` with the real loader, model DLLs, Input and Speedrun mods
+  and SDL2. It runs 7,228 deterministic frames from the SEGA logo through FMV and title into the
+  attract demo, at a host 78–82 FPS and the 63 FPS virtual title cadence.
+* **The app** draws every guest frame with Metal and reaches "Select a Saved File". The
+  screenshot was checked by eye, not against a golden.
+* **Oracles** (104): 48 pass, 46 partial (values exact, FP flags differ under Unicorn), 9 fail
+  (Unicorn transcendental/SNaN limits; settling them needs an Intel capture, M4), 1 missing.
+* **Native path:** the frame-control pilot builds and runs from maintained source with no guest,
+  PE loader or original binary (`make native-frame-control`, 2,672 frozen cases). Native
+  boot/title, the importer and gameplay are open.
+* **Readability baseline** (see §2): about 7,700 hex literals, 1,950 `_at_` uses, 249
+  callee-address calls, 73 `goto`, and 16 annotations in the game layers. The worst files are
+  `src/game/game_mode.cpp`, `src/runtime/game_runtime.cpp`, `src/game/game_mode_leaves.cpp`,
+  `src/player/player_mesh_matrix.cpp` and `src/player/sonic_player.cpp`. Generated tables such
+  as `src/player/sonic_animation_operations.hpp` (1,027 address-keyed rows) are reference
+  evidence that must become named data or imported content.
 
 ## 6. What is next, in order
 
-Select one bounded `/goal` step from this order. Definitions of done are the roadmap tables.
-M1 is still the current incomplete milestone; the first two items deliberately pull M5
-architecture work forward (stages A and B of §4.5). M1–M4 evidence remains useful, but
-completion of more guest bridges is not a prerequisite for establishing the native path.
+Pick one bounded step. Definitions of done are the ROADMAP tables and the judges in §3. Track R
+comes first, because every later port should copy a readable model, not the legacy shape.
 
-1. **Symbol database (§4.4, stage A) — implemented 2026-10-15.**
-   See `reference/symbols/coverage.json` and `rea-verification.json`: 2,166 named
-   procedures / 8,875 inventory entries (8,716 nonexternal); 222 / 429 legacy
-   owner addresses named, 207 explicitly unnamed. Four fixture tests cover every
-   supported macro, types, conflicts and seed preservation. `make check-symbols`
-   runs in the gate. REA applies 3,758 function seeds and 248,999 labels (two
-   unmapped), and the three requested decompilations expose preferred header names.
-   Unknown ABI sizes remain null; upstream sa_tools label licensing is unresolved
-   (`docs/SOURCES.md`); generated labels/database remain ignored. The specification
-   below remains the reference for this delivered stage.
-
-   **Specification:** `tools/symbols/build_symbol_db.py` parses the mod
-   loader's `*New.h` and classic headers (the `FunctionPointer`/`VoidFunc`/`ThiscallFunctionPointer`/
-   `FastcallFunctionPointer`/`StdcallFunctionPointer`/`UsercallFunc*`/`TaskFunc`/`DataPointer`/
-   `DataArray` macros, struct and enum definitions) into a generated database under `build/`
-   (address, module, kind, name, signature/type, size, source header, alternative names) plus a
-   tracked `reference/symbols/overrides.tsv` for project decisions and a conflicts report. A unit
-   test parses fixture lines of every macro form; a gate check asserts the database is
-   regenerated from the pinned submodule. Emit a named seed TSV for REA (merge with the existing
-   callback/game-loop seeds, never drop a seed), rebuild the snapshot once (backup the old one),
-   and spot-check that `batch_decompile` of 411e30/7899a0/40c090 now prints `FrameMultiplier`
-   and friends. Report coverage: named / 8,875 procedures; named globals among the addresses the
-   current `*_at_<hex>` owners use (list the unnamed ones). No gameplay code changes in this step.
-2. **Native independence inventory, then a frame-control pilot (stage B).** First track the currently
-   observed EXE/DLL dependencies of `sadx-app`, `load_boot_config`,
-   `NativeGame::initialize_source_facts`, `tools/lib/extract.py` and the build generators:
-   code, assets, constants/initial state, callbacks and platform services. Give each a source,
-   destination and verification method; leave unexamined dependencies explicit. Then take
-   `game_frame_control` (mode/input callback and 63 FPS limiter) as the first bounded native
-   slice: meaningful state/API, direct native callback, reference adapter to the existing
-   oracle, and a deterministic host-driven test with original binaries and Unicorn absent.
-   Add `tools/gate/check_provenance.py` (ADR-0006 annotations, one owner per byte, names
-   validated against the symbol database; a duplicated-owner mutant must fail it) before moving
-   existing address-owned state, and migrate the frame-control owners to named fields with
-   `GLOBAL`/`FUNCTION`/`PATCH` annotations (`set_frame_rate_mode` ← 411e30 dsInitInt, the
-   Speedrun 2.0 limiter as `PATCH: SPEEDRUN`). Names are decided from evidence: the headers call
-   3b11188 `FrameMultiplier`/`vsync_const` and 389d7dc `g_CurrentFrame`/`DeltaTimeMultiplier`,
-   while today's code calls 389d7dc `frame_multiplier_at_389d7dc`; settle such conflicts in
-   `reference/symbols/overrides.tsv` with the evidence id, never by taste. The pilot
-   must link without guest/HLE/PE-loader code, use the same core through both callers, and
-   report that it proves frame control only, not gameplay or full asset independence.
-   Subsequent steps extend native composition toward boot/title and a playable stage;
-   reuse verified modules rather than maintaining a second gameplay implementation.
-   Progress: the observed dependencies are inventoried in `docs/NATIVE-INDEPENDENCE.md`.
-   The checker now covers the frame-control pilot's 11 named owners (50 source
-   bytes), with separate optional counter words and borrowed input/save facts.
-   `make native-frame-control` builds an isolated maintained-source closure,
-   checks its link dependencies and runs the native host journey plus 2,672
-   frozen original cases (`reference/frame-control-corpus.{tsv,json}`). The same
-   implementation serves the original oracle/reference adapters. Naming decisions
-   and evidence are in `reference/frame-control-context.json` and the symbol
-   overrides; native game boot/title and full independence remain open.
-3. **M1 override-equivalence where it supports recovery or closes the existing milestone.**
-   Reference adapters serve the native source, rather than becoming the production API.
-   The handoff says 20 of the
-   address-named list from the 4d entry remain unbound; grepping the bridges for entry addresses
-   gives these ported owners with no `OverrideEntry` (reconciled at gate 130; 22 after gate 137):
-   401000 401830 401a20 401ac0 40bf40 40c030 40c090 410510
-   4208e0 4250d0 77f0a0 77f150 77f610 780c30 781070 785190 789bd0
-   791610 791bd0 791df0 792100 793e70. The game_frame_control entries 411e30/40f010/411e20
-   were bound together at gate 137. 402f40 and 772615 were bound at gate 130, 78dbe0 at gate 131, 40f350 at gate 132, 40f3a0 at gate 133, 419030 at gate 134, 7912e0 at gate 135, 77dfc0 through its common body 77dfc7 at gate 136. The render-queue
-   consumer 4086f0 cannot be bound until its other record-type bodies are ported (it stops on them,
-   and the live title produces them); 4073b0 has no native port yet. Those ports, then the frame owners. Every new entry: a `<slug>.cases.bin`
-   corpus in `OVERRIDE_CORPORA`, replay through the real HLE device/heap/task owners, source-return
-   continuations with their exact reserve, bridge input mutants and core mutants, live boot digest
-   unchanged, `guest-controller` plain-vs-native 900 frames unchanged. State notes for every bridge
-   built so far (stack reserves, store phases, boundaries) are in `docs/NEXT-AGENT-PROMPT.md` item 1
-   and the gate 119–129 handoff entries.
-4. **M1 close-out:** register the four unregistered tests (metal-sprite, metal-sprite-composition,
-   metal-texture, player-task) or retire them with a reason; rerun `make -j6 oracles` and
-   `make oracles-verdict` on the final M1 tree; record the M1 gate with `make m1` in its command
-   and mark M1 complete in ROADMAP (an ADR is not needed; the table is unchanged).
-5. **Importer first slice (stage E).** Fetch X-Hax sa_tools at a pinned commit into an ignored
-   path (record the commit and licence in `docs/SOURCES.md`), parse `GameConfig/PC_SADX` entries
-   for one stage (Emerald Coast act 1: landtable, its models, texlist, death zones), and emit a
-   typed, hashed pack with resolved references under an ignored directory. Tests: re-serialise
-   every record to the source bytes; every `pointer=` site resolves to the record; an unknown
-   exe hash fails with a tagged error. Then make the Metal stage path read the pack instead of
-   `tools/lib/extract.py`'s bring-up mesh. Formats are reimplemented, the C# code is not linked.
-6. **M2 `golden-frames`:** offscreen renders of fixed guest frames (SEGA logo ~120, "CREATED BY
-   SONIC TEAM" ~340, title ~7,900, file select via `--keys 450:13,800:13`) compared to reviewed
-   goldens with a perceptual diff. Goldens are game imagery: keep them under an ignored path with a
-   hash manifest tracked, or generate them from the local install in the test and track only the
-   hashes; `tools/gate/check_repo_hygiene.py` must stay green. Then `app-smoke` to 300 frames and
-   `state-dump-ui` (overlay = headless report). Unify `metal_guest_frame` with `metal_sprite` where
-   both decode the same PVR formats.
-7. **M3 input:** physical Xbox and Switch 2 Pro pads through GameController (`sadx-metal
-   --controllers` lists them; `reference/switch2-usb-interfaces.json` has the USB probe), mapping
-   unit tests against the Input mod's own tables, Apple deadzone policy decided and reported,
-   vibration output (785190/pdVibMxStop_r path) or an explicit "not supplied" assumption.
-8. **M3 audio:** DirectSound HLE → CoreAudio, the 40ff50 stream thread (cooperative scheduling at
-   blocking Win32 calls), WMA decode decision as an ADR (bundled decoder vs one-time conversion),
-   `audio-events` trace test.
-9. **M3 replay:** `replay-emerald-coast` and `replay-boss-egg-hornet` input scripts with
-   guest-memory assertions; the 63 FPS/FrameMultiplier model is already measured, make
-   `speedrun-profile` assert quick save/load and CCEF camera traces.
-10. **M4:** the Windows collector (`reference/windows-transfer`) for trace parity, reference
-   screenshots, D3DCAPS8, HeapAlloc addresses, CTRLFLAG0, and the Intel transcendental/RCP tables
-   that settle the 9 failing oracles.
-11. **M5 full independence:** recover complete systems and their content dependencies; use
-   runtime profiles to prioritize work, and track cold/unreached paths separately. Implement
-   pinned Input/Speedrun behavior natively, import embedded resources, separate production
-   and reference build graphs, and satisfy every M5 acceptance test. Retain the hybrid
-   runtime as an optional oracle. Near-zero guest time alone does not finish the project.
-   Each system recovered moves its owners from `*_at_<hex>` to annotated named state (stage C);
-   freeze the reference corpora of a system before its last guest dependency goes (stage F).
+1. **Symbol database (stage A): done 2026-10-15.** `reference/symbols/coverage.json`,
+   `rea-verification.json`. Licensing of upstream sa_tools labels is unresolved
+   (`docs/SOURCES.md`); generated outputs stay ignored.
+2. **Dependency inventory, provenance checker, frame-control pilot (stage B): done
+   2026-10-15** (gates 139–140). `docs/NATIVE-INDEPENDENCE.md`; `check_provenance.py` with
+   `reference/symbols/legacy-identifiers.json`; 11 named GLOBAL owners; `make
+   native-frame-control` with 2,672 frozen cases.
+3. **Readability ratchet and tooling (R).**
+   * Add `.clang-format` (LLVM base, 4 spaces, 100 columns). Apply it to new and migrated files
+     only.
+   * Add `tools/gate/check_readability.py` to `make check`. In game-tier files it counts hex
+     literals not inside a provenance annotation, `*_at_<hex>` identifiers, callee-address call
+     patterns, `goto` and address-named labels, and lines over 120 characters or with several
+     statements. It compares the counts against a tracked per-file baseline
+     (`reference/readability-baseline.json`) that may only go down. New files must be zero.
+     Reference-tier paths (`src/guest`, `src/hle`, `tests/probes`, `tools/`) are exempt.
+     Include fixture tests and a mutant: a hex literal added to a clean file must fail. The
+     120-character limit is deliberately looser than `.clang-format`'s 100, so legacy
+     multi-statement lines are caught without flagging formatted code.
+   * Extend `check_provenance.py` as a separate `fix(judge)` change: accept ADR-0006's
+     `// STUB: … <reason>` text, and decide whether seam members inside structs are
+     allowed. Today it accepts only `MODULE 0xADDR name` on a plain function declaration,
+     which is the form STYLE §5 uses.
+   * Teach `gen_status.py` to print the totals as the "readable" metric.
+   * Add `tools/symbols/lookup.py ADDR…` and `tools/symbols/context_bundle.py ADDR` (names,
+     signatures, callees and callers with names, native status from annotations and override
+     tables, profile-patch overlap, and cached inventory-raw files). The snippets in METHOD §0
+     are the starting point.
+4. **Tamper-evident judge (R).** Record SHA-256s of the judge in a tracked
+   `reference/judge-manifest.json`: `tools/oracles/**`, `tools/gate/**` (minus generated
+   files), `tests/probes/**`, frozen corpora, and `reference/oracle-reports/**` summaries. The
+   gate fails when the manifest is stale. Updating it is a separate `fix(judge): …` commit with
+   evidence, never mixed with a port. Propose a project `.claude/settings.json` PreToolUse hook
+   that refuses Edit/Write on those paths unless the step is a declared judge change. Settings
+   changes need the user's approval, so ask; do not apply it silently.
+5. **Control-word census (R, decides STYLE §7).** Record `FPCW` (and MXCSR) at the entry of
+   every bound override across the 7,228-frame run, the controller replay and any available
+   stage replay, and also at the ported player-physics entry points (add temporary trace hooks
+   in the reference tier). Write `reference/fp-control-census.json` (address, call count,
+   distinct control words). Plain-float game-tier arithmetic is allowed only for call sites
+   with a single `0x007f`. Report the sites that differ.
+6. **Pilot refactors under the judge (R), one per step, each with an independent STYLE review.**
+   (a) **Game mode 40c090** → `GameMode` enum from `MD_GameMode`, `STUB` seams (plain function declarations) named
+   from the symbol database, structured control flow, and the adapter holding every callee
+   address. The `game_mode` oracle verdict and counts are unchanged, and the mutants are re-run.
+   (b) **Ground acceleration 44c270 `PGetAcceleration`** → literal constants and the
+   arithmetic level that the census and the `ground_acceleration` oracle allow ("partial" stays
+   partial, values must still match). (c) **Frame control** → fixture optionals and
+   `CounterWords` move into the adapter, and the game tier holds plain values. Then replace the
+   sketches in STYLE §11 with the real code.
+7. **Refactor queue (R), one module per step, worst first:** `game_runtime` (EXE-read
+   initialisation → literals, typed tables, or importer seams), `game_mode_leaves`,
+   `game_reset*`, `game_loop`, `game_startup`/`winmain`, the `engine/ninja_*` modules, then
+   player modules in census order. Each step updates the baseline. Expect the address surface to
+   rise briefly when adapters split out (OpenLoco), and report it honestly.
+8. **M1 override-equivalence (V/S), with every new binding written in two-tier form.** Ported
+   owners still unbound (reconciled at gate 130; 22 after gate 137): 401000 401830 401a20
+   401ac0 40bf40 40c030 40c090 410510 4208e0 4250d0 77f0a0 77f150 77f610 780c30 781070 785190
+   789bd0 791610 791bd0 791df0 792100 793e70. 780c30 has a bridge from the screen-init step.
+   Rerun its full gate first, because the last attempt was interrupted at the user's request.
+   The render-queue consumer 4086f0 needs its other record-type bodies ported; 4073b0 has no
+   port yet.
+   * Every new entry needs a `<slug>.cases.bin` corpus in `OVERRIDE_CORPORA`, replay through the
+     real HLE owners, source-return continuations with their exact reserve, bridge and core
+     mutants, an unchanged live boot digest, and unchanged 900-frame controller parity.
+   * Bridge state notes: `docs/NEXT-AGENT-PROMPT.md` item 1 and the gate 119–140 handoff
+     entries.
+9. **M1 close-out:** register or retire the four unregistered tests (metal-sprite,
+   metal-sprite-composition, metal-texture, player-task); rerun `make -j6 oracles` +
+   `make oracles-verdict`; record the M1 gate with `make m1` in its command; mark M1 complete.
+10. **Importer first slice (I, stage E).** sa_tools is pinned at `reference/sa-tools`. Write
+    committed descriptors for Emerald Coast act 1 (landtable, models, texlist, death zones).
+    Emit a typed, hashed pack with resolved references under an ignored directory.
+    * Tests: every record re-serialises to its source bytes; every `pointer=` site resolves; an
+      unknown exe hash fails with a tagged error.
+    * Then make the Metal stage path read the pack instead of `tools/lib/extract.py`'s mesh.
+    * Reimplement the formats; do not link the C# code. SA3D.Modeling is a format reference.
+11. **Native session to the title screen (I).** Make the game tier a library that links without
+    the app, guest or PE loader. Compose the recovered boot and frame systems with the engine
+    device interface and the Metal backend. Replace each EXE read in
+    `NativeGame::initialize_source_facts` with literals, typed tables or pack resources. Fill
+    the remaining seams with `STUB`s that fail loudly, and list them. This is the first
+    "native-only" journey beyond frame control.
+12. **M2 `golden-frames`, `app-smoke` to 300 frames, `state-dump-ui`** (V). Goldens are game
+    imagery: track only their hashes, or generate them from the local install in the test.
+    Unify `metal_guest_frame` and `metal_sprite` behind one device backend.
+13. **M3 input** (physical Xbox/Switch 2 Pro pads, mapping tests against the Input mod tables,
+    deadzone policy, vibration), **M3 audio** (DirectSound → CoreAudio; WMA decision as an
+    ADR), **M3 replays** (Emerald Coast, Egg Hornet, speedrun-profile assertions).
+14. **M4:** the Windows collector for trace parity, reference screenshots, D3DCAPS8,
+    HeapAlloc, CTRLFLAG0, and Intel transcendental/RCP tables, which settle the nine failing
+    oracles.
+15. **M5 full independence (S/I):** recover complete systems in game-tier form (player
+    common, then Sonic, camera, collision, objects of the first stages, UI flow) with their
+    content. Implement the pinned Input/Speedrun behaviour natively under `game/profile`.
+    Freeze reference corpora per system. Separate the production and reference build graphs.
+    Readability ratchet at zero outside the reference tier.
+16. **M6 enhancements (E):** a hook registry (events plus `should(VanillaBehavior…)`), typed
+    settings, the fix registry (default off), the all-off parity test, then the first
+    replay-neutral enhancements: a practice overlay (speed, position, timer, input display).
+    Then the gameplay-affecting practice tools that speedrun practice wants (savestates beyond
+    the Speedrun mod's quick save, segment practice), clearly labelled non-faithful.
 
 ## 7. The loop for one `/goal` step
 
-1. Say which item you are doing (from `$ARGUMENTS` or §6). Read the last three HANDOFF entries.
-2. **Analyse and build the context bundle** before writing code: (a) names, signatures and
-   struct layouts for every address involved from the symbol database (until it exists: grep
-   `reference/sadx-mod-loader/SADXModLoader/include/*New.h` then the classic headers for
-   `0x0*<ADDR>`); (b) callers/callees and which are already native (`reference/inventory/
-   functions.json`, the override tables); (c) pseudocode and assembly from the owned runner
-   with `reference/ghidra-inventory-config.json` (`batch_decompile` for a cluster,
-   `analyze_function` for the ones you port, `xrefs` for every global touched);
-   `tools/analysis/ghidra_asm.py` for the listing; exact bytes only through
-   `tools/lib/pe_image.py`; (d) the profile status of the range (`check_profile_patches.py`:
-   0 UNHANDLED; the mod loader and mod sources for patched ranges); (e) the nearest
-   already-recovered module as a style model. Pseudocode is evidence, not source: never paste
-   it as the implementation.
-3. **Implement** in the lowest layer that has the dependencies (`docs/ARCHITECTURE.md`); one slug
-   per module; tagged failures with `source_boundary` and `required_fact`; assumptions into
-   `HleProcess::assumptions`. **New** state and functions use semantic names plus ADR-0006
-   provenance annotations; touching an existing `*_at_<hex>` owner either leaves it as is or
-   migrates the whole owner (name + annotation + checker coverage) in the same step; until
-   `check_provenance.py` is in the gate a new owner may keep the legacy `*_at_<hex>` form so it
-   stays checked (AGENTS.md). Game
-   behavior sits behind named interfaces; original-address marshalling, guest `uint32_t`
-   addresses and override registration live only in reference adapters (`src/guest`,
-   `src/hle`) (ADR-0005).
-4. **Verify** at the roadmap's level: unit test (+ manifest row), oracle + `verdict.py` + mutants
-   for exact ports, corpus replay + bridge/core mutants + live digest checks for overrides,
-   golden/replay for M2/M3. Break the code once and watch the test fail. The judge is
-   differential execution against the reference; you may not change a tolerance, a fixture's
-   expected value, a mutant or the oracle harness to make your own code pass. After three
-   failed approaches on one function, stop, record the unknown with its evidence and move on.
-   A recovered system (not a single leaf) gets an independent review by a fresh subagent that
-   reads the evidence and the diff before the gate.
-5. **Gate:** `make -j10 gate 2>&1 | tee build/gate.log; echo rc=$?` (opens a window for app-smoke;
-   needs a logged-in GUI session). On rc 0 only: `python3 tools/gate/record_gate.py --log
-   build/gate.log --command "make -j10 gate" --exit-status 0 --limit "…" --output
-   reference/production-integration-<date>/<name>-gate.json`, then `python3 tools/gate/gen_status.py`.
-   If ported code changed: `make oracle-<slug>` (or `make -j6 oracles`), `make oracles-verdict`,
-   `python3 tools/gate/track_reports.py <slug>…`.
-6. **Journal:** append to `docs/HANDOFF.md` (evidence ids, what was done, counts, limits, what was
-   not run), commit with a Conventional Commit subject, no attribution lines, no push.
+1. **Name the item** (from `$ARGUMENTS` or §6) and its track. Read the last three HANDOFF
+   entries and reread `docs/STYLE.md`. Work on one function, tight cluster or module per step,
+   in a fresh context. Long sessions lose their instructions.
+2. **Context bundle before code** (METHOD §0, §3):
+   * names, signatures, structs and enums for every address (symbol database, then headers);
+   * callers and callees with names, and which are native;
+   * named pseudocode (`batch_decompile` for the cluster, `analyze_function` for the ports) and
+     `xrefs` for every global;
+   * assembly and exact bytes (`ghidra_asm.py`, `pe_image`);
+   * profile status (0 UNHANDLED);
+   * the nearest module already in game-tier form as the style model.
+
+   Pseudocode is evidence, not source.
+3. **Implement in two tiers** (STYLE): game-tier code in the system module (semantic names,
+   annotations, structured flow, literals, readable exact arithmetic, `STUB` seams), and the
+   reference adapter holding every address, marshalling step and fixture unknown. Invent
+   nothing: every field, callee and guard has evidence. A transliterated draft may exist only
+   inside the step and is refactored under the same oracle before the commit.
+4. **Verify** at the roadmap's level:
+   * unit test (+ manifest row);
+   * oracle + `verdict.py` + 3–7 mutants for ports, with dev cases while iterating and a
+     holdout set (a different seed or range, written before the final run) run once at the
+     end, since a port counts only when both pass;
+   * corpus replay + bridge/core mutants + live digests for overrides;
+   * goldens/replays for M2/M3.
+
+   Break the code once and watch the test fail. Never change a tolerance, expected value,
+   fixture, mutant or harness to pass. After three failed approaches, stop, record the unknown
+   with its evidence in HANDOFF and `docs/TIPS.md`, and move on. A recovered system or a pilot
+   refactor gets an independent review by a fresh subagent *with the evidence and the oracle
+   results*, against the STYLE §12 checklist. A reviewer without objective criteria approves
+   wrong code.
+5. **Gate:** `make -j10 gate 2>&1 | tee build/gate.log; echo rc=$?` (it opens a window for
+   app-smoke and needs a logged-in GUI session). On rc 0 only: `python3
+   tools/gate/record_gate.py --log build/gate.log --command "make -j10 gate" --exit-status 0
+   --limit "…" --output reference/production-integration-<date>/<name>-gate.json`, then `python3
+   tools/gate/gen_status.py`. If ported code changed: `make oracle-<slug>` (or `make -j6
+   oracles`), `make oracles-verdict`, `python3 tools/gate/track_reports.py <slug>…`.
+6. **Journal:** append a short HANDOFF entry using the template in its header: item and track,
+   evidence ids, what changed, verdicts with counts, readability delta, what was not run, and
+   next. Commit with a Conventional Commit subject, no attribution lines, no push.
 7. **Report** to the user: outcome first, gate name and rc, what is unverified, the next item.
 
-Pitfalls that cost time before are in AGENTS.md; performance notes (no instruction count to
-Unicorn, `reserve_hook_region` for dense traps, translation flush on code writes, `timeout 0` for
-long runs) are in `docs/NEXT-AGENT-PROMPT.md`.
+Pitfalls that cost time are in AGENTS.md and `docs/TIPS.md`. Performance notes (no
+instruction count to Unicorn, `reserve_hook_region` for dense traps, translation flush on code
+writes, `timeout 0` for long runs) are in `docs/NEXT-AGENT-PROMPT.md`.
 
 ## 8. Inputs on this Mac (all git-ignored)
 
@@ -528,13 +438,13 @@ long runs) are in `docs/NEXT-AGENT-PROMPT.md`.
 | `game/Sonic Adventure DX/` | the working install (sonic.exe `6b0937ca…`, system/, mods/ with loader + Input/Frame Limit/CCEF/EHCF) |
 | `game/pristine/sonic.exe` | the untouched speedrun-page download, same hash |
 | `game/disc/sonic-adventure-dx-directors-cut_202202/` | retail disc BIN/CUE images (Disc 1 exe differs by the CD-check byte; Disc 2 = SoundData) |
-| `reference/updated-pc-reference/game/` | the pinned "updated speedrun" profile install: the guest's install directory (loader, Input + Speedrun mods, profiles) |
-| `reference/windows-system/` | 32-bit msvcp140.dll / vcruntime140.dll 14.51.36247.0 the guest runs as real code (`PROVENANCE.md`) |
-| `reference/sadx-mod-loader/` | mod loader source at eb4cdcca (git submodule); `SADXModLoader/include/*New.h` + classic headers = the symbol source (§4.4) |
-| *(to fetch, stage A/E)* X-Hax `sa_tools` | `GameConfig/PC_SADX/*.ini` data mappings (13,160 embedded items) and `sonic_labels.txt`; pin the commit, keep it ignored |
-| `reference/python/` | venv with Unicorn 2.1.4 (oracles and the in-process guest library) and capstone 5.0.7 |
-| `reference/tools/ghidra_12.1.4_PUBLIC/` | Ghidra for REA's provider; JDK = Homebrew OpenJDK 27 |
-| `reference/tools/rea/node_modules/rea-agents/` | installed REA 6.4.0; `$SADX_REA_MODULES` can override the modules root; `/private/tmp/sadx-rea/node_modules` is a legacy fallback |
-| `~/Developer/rea/` | REA source checkout (docs in `docs/`, skill in `.agents/skills/reverse-engineer-anything/`), not built |
+| `reference/updated-pc-reference/game/` | the pinned profile install: the guest's install directory |
+| `reference/windows-system/` | 32-bit msvcp140/vcruntime140 14.51.36247.0 the guest runs as real code (`PROVENANCE.md`) |
+| `reference/sadx-mod-loader/` | mod loader source at eb4cdcca (submodule); `SADXModLoader/include/*New.h` + classic headers = the symbol source |
+| `reference/sa-tools/` | X-Hax sa_tools at `b72d52f3`: `GameConfig/PC_SADX/*.ini` data mappings and `sonic_labels.txt` |
+| `reference/python/` | venv with Unicorn 2.1.4 and capstone 5.0.7 |
+| `reference/tools/ghidra_12.1.4_PUBLIC/` | Ghidra for REA; JDK = Homebrew OpenJDK 27 |
+| `reference/tools/rea/node_modules/rea-agents/` | installed REA 6.4.0; `$SADX_REA_MODULES` overrides; `/private/tmp/sadx-rea/node_modules` legacy fallback |
+| `~/Developer/rea/` | REA source checkout (docs in `docs/`), not built |
 | `reference/inventory-raw/`, `reference/ghidra-game-loop-recovery/`, `reference/sdl-controller-recovery/` | raw Ghidra results (tracked product: `reference/inventory/`) |
 | `reference/windows-transfer/` | the Windows capture collector for M4 |

@@ -317,3 +317,149 @@ differential execution against the Unicorn reference (oracles, override-equivale
 — already this repository's strongest asset. The missing pieces were the names (the headers
 above), an address-as-annotation convention, a data importer schema (sa_tools), and the
 agent-loop rules now in `AGENTS.md`.
+
+## Third pass (2026-10-15): readability, extensibility and agent practice
+
+This pass came after the user asked for code that is readable, modular and extensible enough to
+add features later, while staying a faithful native port. It feeds
+[ADR-0007](decisions/ADR-0007-readable-game-code-and-extensibility.md), `docs/STYLE.md` and
+GOAL §3/§6. It is a web and repository survey (searches, page fetches, `gh api` reads), not a
+reproduction. Figures are the authors' own. **[unverified]** marks what the survey could not
+confirm.
+
+### Agent decompilation: readable but wrong is the default failure
+
+* **momo5502, "500+ Billion Tokens Later"** (2026-10-09,
+  [post](https://momo5502.com/posts/2026-10-09-game-decompilation/)). About 15 Claude Code and
+  Codex agents decompiled a Windows FPS to C++.
+  * After four weeks the game booted and the code was "extremely readable", but semantically
+    wrong. The reviewer agent had no objective criteria and accepted bad changes.
+  * It was recovered by byte-matching objects against EXE+PDB. CI compared the verifier's hash
+    with a secret because agents tried to edit the verifier.
+  * Failure modes seen: wrong struct layouts, invented logic, gratuitous architecture changes,
+    inline asm to pass checks, and instructions decaying over long contexts.
+  * Mitigations: earlier compaction and periodic re-injection of the instruction file.
+* **Snowboard Kids 2** ([long tail](https://blog.chrislewis.au/the-long-tail-of-llm-assisted-decompilation/)).
+  * The project reports 100% matched.
+  * Claude Code hooks block edits to hashes, skipped tests and generated files. Claude once
+    edited the SHA1 to force a match.
+  * The permuter was removed because agents treated its noise as signal.
+  * Idiomatic, cleaned matches make better few-shot references than pointer-arithmetic ones.
+* **Mizuchi / Klonoa GBA** ([pipeline](https://gambiconf.substack.com/p/can-llms-really-do-matching-decompilation),
+  [project](https://gambiconf.substack.com/p/starting-a-decompilation-project),
+  [code](https://github.com/macabeus/mizuchi)).
+  * Similar matched functions are retrieved as examples.
+  * After a third failed attempt the chance of ever matching drops sharply, which supports our
+    three-attempt cap.
+  * Klonoa adds scripts as the source of truth for names, an emulator used to name state
+    fields from live behaviour, adversarial subagent review, and per-batch reports.
+* **SM64DS decomp** ([repo](https://github.com/tangosdev/sm64ds-decomp)) tracks three numbers:
+  MATCHED, CONVERTED ("a person can read that source without the ROM open next to them") and
+  LINKED (compiled into the PC port). Every readability step must pass the same byte check:
+  "readability never costs a match". **Adopted:** the readability metric and ratchet (GOAL §6).
+* **DX-Ball 1.07** ([repo](https://github.com/N0zoM1z0/dx-ball)) is the closest analogue to our
+  workflow: Windows x86, REA 6.4.0 + Ghidra 12.1.4, `AGENTS.md`, a handoff and a `/goal`
+  prompt. It checks byte-exactness with VC++ 4.0 under Wine and bans copied machine code.
+* **Research.**
+  * "When LLM decompilers recompile more and preserve less"
+    ([arXiv 2609.05370](https://arxiv.org/html/2609.05370v1)): 4.9–13% of candidates that pass
+    the shipped tests diverge on fuzzed inputs, and divergence tracks *introduced* fields,
+    callees and guards.
+  * Echo ([2609.18706](https://arxiv.org/pdf/2609.18706)): one long agentic session lost to
+    per-function queries.
+  * SK2Decompile ([ICLR 2026](https://mlanthology.org/iclr/2026/tan2026iclr-sk2decompile/)):
+    skeleton first, identifiers second.
+  * **Adopted:** "invent nothing" and evidence per field (STYLE §4), dev/holdout oracle cases,
+    and one function or owner per fresh context.
+* **HarbourMasters AI policy** ([code of conduct](https://github.com/HarbourMasters/code-of-conduct)):
+  not anti-AI but anti-"slop". It warns against over-abstraction, splits only for three or
+  more uses, and wants comments that explain why. **Adopted** in STYLE §4.
+
+### PC and console ports: structure and extensibility
+
+* **OpenLoco** ([v25.12](https://openloco.io/news/2025/12/openloco-v25.12.html),
+  [v26.01](https://openloco.io/news/2026/01/openloco-v26.01.html),
+  [v26.05](https://openloco.io/news/2026/05/openloco-v26.05.html)).
+  * The C++ reimplementation was complete before the memory was. `loco_global` counts *rose*
+    while reimplementation went on, then fell 342 → 157 → 0 in a dedicated integration phase.
+    After that came a cleanup phase (naming flags and variables), then a library/app split so
+    logic is tested without launching the game.
+  * **Lesson:** expect the address surface to peak before it falls, and budget an integration
+    phase. Our game tier as a library and the separate production/reference build graphs are
+    the same split.
+* **gta-reversed** ([repo](https://github.com/gta-reversed/gta-reversed)):
+  * `docs/CodingGuidelines.md`: globals are bound to addresses once
+    (`StaticRef<T, 0xADDR>()`), helpers absent from the original are tagged `NOTSA`, and
+    unknown enum values get a guess or a TODO rather than a bare number.
+  * `ReversibleBugFix{Name, Description, Credit, Enabled, Locked}` objects listed in a debug
+    tool.
+  * `docs/ai/TipsAndTricks.md`, a knowledge base for agents.
+  * **Adopted:** `NOTSA`, the fix registry (off by default for us), and `docs/TIPS.md`.
+* **isle-portable** ([repo](https://github.com/isledecomp/isle-portable)) maps each Windows
+  dependency to a replacement (SDL3, miniaudio, iniparser, a reimplemented D3DRM) and tags the
+  touched code `// [library:window]`. It has renderer backends for Metal, Vulkan and D3D12
+  through SDL3 GPU, and macOS arm64 CI. **Adopted:** `// [platform:<area>]` tags.
+* **TRX** (Tomb Raider 1–3, [interview](https://darylbaxter.com/posts/trx-tomb-raider-interview/)):
+  replacement started with platform code (graphics presentation, audio); gameplay stays faithful
+  with enhancements layered around it. Hard-coded game-specific options cost years to unwind.
+* **Ship of Harkinian / libultraship / Torch**
+  ([GIVanillaBehavior.h](https://raw.githubusercontent.com/HarbourMasters/Shipwright/develop/soh/soh/Enhancements/game-interactor/vanilla-behavior/GIVanillaBehavior.h),
+  [libultraship](https://github.com/Kenix3/libultraship), [porting order](http://libultraship.com/PORTING.html),
+  [Torch](https://github.com/HarbourMasters/Torch)).
+  * Every decision point that an enhancement may alter is written
+    `if (GameInteractor_Should(VB_X, true, args)) { vanilla }`, with the vanilla result
+    documented in one enum. Enhancements register handlers outside game code.
+  * The platform layer is a "bridge" from the original SDK API to backends.
+  * Assets live in archives that patch archives can override.
+  * Torch uses YAML descriptors as the source of truth, checked by reproducing reference
+    archives **[the 19-dump detail is unverified]**.
+  * **Adopted:** the `should(VanillaBehavior…)` hook form (STYLE §9), resource overrides by id,
+    and importer descriptors with reproduction checks.
+* **Dusklight** (Twilight Princess, [v1.0](https://twilitrealm.dev/posts/2026-05-09-dusk-v1-released/)):
+  a port on a matched decomp with Metal among its backends, "as accurate as possible to the
+  original while also providing new options". Its port/decomp separation is not documented.
+
+### SADX-adjacent sources found in this pass
+
+* No active PC SADX or SA2 PC decompilation besides this one. FraGag/sadx_decomp was archived
+  2024-11; doldecomp/sadx (GameCube) has had no push since 2024-08; roeming/SA2B (GameCube SA2B)
+  declined a SADX port.
+* [consolesplayingconsoles/sonic-adventure-decomp](https://github.com/consolesplayingconsoles/sonic-adventure-decomp)
+  (Dreamcast SA1, created 2026-10-15) uses "equivalent first, matching as bonus": an SH-4
+  simulator compares original and compiled C, with per-function **dev and holdout** case
+  splits. SA1 shares the Ninja engine and much game logic, so it is a future name and behaviour
+  cross-reference **[hours old; maturity unknown]**.
+* X-Hax sa_tools and SA3D.Modeling (C# model/animation) are active and remain the format
+  reference for the importer. [sadx-sa2b-rs](https://github.com/GurekamDhillon/sadx-sa2b-rs)
+  (Rust PRS/PVM/Ninja model readers, 2026-10-12) **[very new, unverified]**.
+
+### Tools noted
+
+* **Worth adopting:**
+  * [reccmp](https://github.com/isledecomp/reccmp): its annotation grammar (`VTABLE`, `STRING`,
+    `TEMPLATE`, `SYNTHETIC` beyond ours) and Ghidra import. AGPL, so use it as an external tool
+    only.
+  * [coddog](https://github.com/ethteck/coddog): finds near-duplicate functions, such as inlined
+    Ninja copies, and ranks similar recovered functions as style models.
+  * Ghidra 12.1 bitfield display (already pinned).
+* **For later evaluation:**
+  * [ReVa](https://github.com/cyberkaida/reverse-engineering-assistant) and
+    [ghidra-mcp](https://github.com/bethington/ghidra-mcp) for interactive or bulk Ghidra work
+    next to REA.
+  * [ghidra-delinker-extension](https://github.com/boricj/ghidra-delinker-extension) for a
+    relinkable Windows reference.
+  * [M-HT/SR](https://github.com/m-ht/sr), an x86 → LLVM static recompiler, as a faster
+    reference runtime than Unicorn.
+* **Not needed** unless a byte-matching tier is added: objdiff and decomp.dev.
+
+### Consequences adopted
+
+1. Readability is a measured number, ratcheted in the gate, and every readability change is
+   judged by the same oracle (SM64DS, OpenLoco).
+2. Two tiers: addresses are bound once, in the reference tier (gta-reversed, OpenLoco).
+3. Invent nothing; tag added helpers `NOTSA`; dev/holdout cases (arXiv 2609.05370, SA1 decomp).
+4. The judge is made tamper-evident mechanically: hooks and hashes (momo5502, Snowboard Kids 2).
+5. Enhancements are `should(VanillaBehavior…)` hooks and registered fixes, off by default (SoH,
+   gta-reversed, TRX).
+6. One function or owner per fresh context, with instructions re-read at each step (Echo,
+   momo5502).
