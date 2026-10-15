@@ -67,5 +67,10 @@ def main():
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={k:sha((pathlib.Path(__file__).resolve().parents[2]/k).read_bytes()) for k in names},
         original_ranges_sha256={h:sha(image.read(int(h,16),n)) for h,n in(('40c030',0x57),('40f350',0x4a),('424c20',0x56),('40a8a0',0x50),('789930',0x27),('420810',0xa))},
         cases=len(fixtures()),source_outcomes=outcomes,mismatch_count=len(bad),mismatches=bad[:20],pages_order_boundaries_match=not bad,limits=__doc__)
+    # Replay the input page at the independent 40f350 entry too, including cases
+    # whose composed startup fixture stops before reaching it.
+    corpus=a.output.with_suffix('.cases.bin')
+    corpus.write_bytes(b''.join(pages[4096:8192] for pages,_ in fixtures()))
+    report['corpus']=dict(path=str(corpus),cases=len(fixtures()),bytes_per_case=4096,entry='40f350')
     a.output.write_text(json.dumps(report,indent=1)+'\n');print(json.dumps(dict(cases=report['cases'],mismatches=len(bad),outcomes=outcomes)));return int(bool(bad))
 if __name__=='__main__':raise SystemExit(main())

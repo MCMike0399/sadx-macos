@@ -103,6 +103,35 @@ std::vector<OverrideEntry> frame_loop_overrides(const ExecutableImage& image){
 }
 std::vector<OverrideEntry> startup_overrides(){
     std::vector<OverrideEntry> out;
+    // 40f350: fixed input-edge stores, no input reads or nested calls. The comparison
+    // covers the whole page so clearing the two trailing row bytes is detected.
+    out.push_back({0x40f350,"clear_input_edges",{{0x3b0e000,0x1000}},[](X86Guest& g)->std::uint32_t{
+        GameLogicEdgeState edges{};std::optional<std::int32_t> save_phase;
+        GameFrameInputState input{edges,{},{},save_phase};GameControllerInitGlobals globals{};
+        clear_input_edges_40f350(edges,input,globals);
+        std::array<std::uint8_t,0x300> cleared{};
+        cleared[0]=*edges.bytes_at_3b0e3e0[0];cleared[1]=*edges.bytes_at_3b0e3e0[1];
+        for(std::uint32_t i=2;i<cleared.size();++i)cleared[i]=*edges.raw_at_3b0e3e2[(i-2)/3][(i-2)%3];
+        const auto byte=[&](std::uint32_t at,std::uint8_t value,std::uint32_t site){
+            if(g.write(at,&value,1))return true;
+            g.stop("override 40f350: unavailable output "+std::to_string(at)+" at "+std::to_string(site));return false;};
+        for(std::uint32_t i=0;i<cleared.size();i+=3){
+            g.set_eax(0x3b0e3e1+i);g.set_reg(UC_X86_REG_ECX,0);
+            if(!byte(0x3b0e3e0+i+2,cleared[i+2],0x40f357)||!byte(0x3b0e3e0+i+1,cleared[i+1],0x40f35a)
+                ||!byte(0x3b0e3e0+i,cleared[i],0x40f35c))return 0;
+        }
+        g.set_eax(0x3b0e6e1);
+        // Final CMP is equal: CF/AF/SF/OF clear, PF/ZF set; other flags survive.
+        g.set_reg(UC_X86_REG_EFLAGS,(g.reg(UC_X86_REG_EFLAGS)&~0x8d5U)|0x44U);
+        if(!byte(0x3b0e3ba,*edges.special_at_3b0e3ba,0x40f369)
+            ||!byte(0x3b0e3b9,*edges.byte_at_3b0e3b9,0x40f36f)
+            ||!byte(0x3b0e3b8,*input.mask_at_3b0e3b8,0x40f375))return 0;
+        constexpr std::uint32_t indices[]={2,3,4,0,1},sites[]={0x40f37b,0x40f381,0x40f387,0x40f38d,0x40f393};
+        for(std::uint32_t i=0;i<5;++i){
+            const auto at=0x3b0e990+4*indices[i],value=*globals.words_at_3b0e990[indices[i]];
+            if(!g.write(at,&value,4)){g.stop("override 40f350: unavailable output "+std::to_string(at)+" at "+std::to_string(sites[i]));return 0;}
+        }
+        return 0;},true,{},true});
     // 789930 (cdecl, function): the first empty slot of the 32 at 3d084b0 takes it; EAX 1, or 0 when all are taken.
     out.push_back({0x789930,"register_exit_callback",{{0x3d084b0,0x80}},[](X86Guest& g)->std::uint32_t{
         ExitCallbackList list;for(std::uint32_t i=0;i<32;++i)list.slots_at_3d084b0[i]=load<std::uint32_t>(g,0x3d084b0+4*i);

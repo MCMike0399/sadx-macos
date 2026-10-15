@@ -2675,3 +2675,48 @@ Runner closed rc 0.
   791df0 792100 793e70 (+ 411e30/40f010/411e20). Next cheapest: 419030 (player collision fixtures), 40f350;
   device-calling 77dfc0/7912e0 through the device bridge. Worth adding: per-override fire counts over the
   600 overridden frames in guest-frames.
+
+### M1 input-edge reset override 40f350 (gate 132, 2026-10-14)
+
+Owned REA/Ghidra, pinned sonic.exe 6b0937ca…24cd74:
+`reference/ghidra-input-edges-requests.json`, result
+`reference/inventory-raw/bridge-input-edges-40f350.json`,
+evidence `ev_3357715ad8c91ac84c8868d89947df2bedaf37da242f20b57b21066ebfec20cd`.
+Analysis succeeded after retrying outside the sandbox. Runner close returned rc 1:
+Ghidra cleanup failed closed because the live-process ownership token could not be
+read (`sysctl_errno_22`); no arbitrary process was killed.
+
+* **44 process entries.** 40f350 binds the existing `clear_input_edges_40f350` owner.
+  No input reads, arguments, callees or stack reserve. Bridge writes in source order:
+  each triple high byte → middle → low, exactly 3b0e3e0..3b0e6df; then
+  3b0e3ba/3b9/3b8; then controller words 998/99c/9a0/990/994. Leaves EAX=3b0e6e1,
+  ECX=0, EDX unchanged and arithmetic flags from the equal final CMP. Failed writes
+  stop with the source store boundary and missing output address.
+* **Corpus/oracle:** existing `game_startup` oracle now exports its 400 randomized
+  3b0e000 input pages to `game_startup.cases.bin`, including fixtures whose composed
+  startup stops before the reset. Corpus is in OVERRIDE_CORPORA. Guest equivalence
+  runs 40f350 directly and compares the whole page (including the untouched trailing
+  two row bytes), EAX, ECX/EDX, x87 conditions and arithmetic flags. All 400 agree.
+  Startup oracle rerun **pass**, 400 cases, 0 mismatches; report tracked. Other
+  standalone oracles **not rerun**; aggregate verdict still 48 pass / 46 partial /
+  9 fail / 1 missing (`make oracles-verdict` rc 2 for existing failures).
+* **Mutants:** core 3/3 caught (trailing row bytes cleared, mask wrong, controller words
+  nonzero); restored source gives the same pass. Bridge 5/5 caught (wrong EAX, wrong
+  ECX, wrong ZF, trailing bytes cleared, last controller word omitted), plus the
+  generic flipped-store mutant. Guest-only table: 16 entries on 53,679 cases.
+  Also removed a disengaged-optional dereference from the successful comparison path.
+* **Live exercise now measured:** guest-frames reports every process entry's call
+  count through frame 600, including boot. Reset fires once. Projected-depth 78dbe0
+  fires **13,208 times**, settling gate 131's uncertainty about live exercise; its
+  partial FP-flag oracle and hardware limitations remain unchanged.
+* **Gate:** `reference/production-integration-20261014/input-edges-132-gate.json`,
+  actual rc 0, 126 native programs and 4 Python tests. Boot identical (22,030 HLE
+  calls, 119/119 active patches); full 7,228-frame intro/title determinism, first 600
+  overridden digests and 900-frame controller plain/native replay match. Host
+  81.1 FPS, full-intro title cadence 15.873 ms; app-smoke draws 120 frames.
+  Layers/global owners clean, 0 UNHANDLED profile overlaps. STATUS regenerated.
+* **Limits/skips:** separate `make m1` and full oracle suite not rerun; existing
+  unregistered metal-sprite, metal-sprite-composition, metal-texture and player-task
+  tests not run. No Windows parity or physical-pad verification. No game assets
+  committed. Remaining unbound list is **26 + 3** in GOAL §6; next candidates
+  419030, 40f3a0, or device-backed 77dfc0/7912e0.

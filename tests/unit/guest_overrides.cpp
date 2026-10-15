@@ -14,6 +14,7 @@
 // checks that unset slots stop; 402f40 the ninja_queue_color cases plus one input overlapping 3ab9864 per four,
 // comparing ECX/EDX and the x87 condition bits as well; 78dbe0 the ninja_projected_depth cases, comparing the
 // returned ST(0), TOP and the tag word (its mutant flips the returned significand's lowest bit).
+// 40f350 replays the game_startup input pages and compares EAX, ECX/EDX, arithmetic flags and every page byte.
 // The original side runs with the FPU shims installed, as every guest boot does (7716df's FSINCOS is a shim site).
 // Mutants: every entry is also run with a bridge that flips one bit of its first store; the comparison must
 // catch it, or the test fails (an insensitive comparison would pass anything).
@@ -42,7 +43,12 @@ std::vector<std::uint32_t> words(const std::string& path){
     std::vector<std::uint32_t> w(all.size()/4);std::memcpy(w.data(),all.data(),all.size());return w;}
 std::vector<Case> corpus_cases(std::uint32_t entry,const std::string& dir){
     std::vector<Case> out;
-    if(entry==0x7899a0){ // game_frame_control: 19 words; [0] entry index (0 = 7899a0), [2] argument, [4..9] 3d0853c 3d08538 389d7dc 89295c 3d084a8 3d084ac
+    if(entry==0x40f350){ // game_startup: the complete 3b0e000 input page (1024 words); compare all neighbours too
+        const auto w=words(dir+"/game_startup.cases.bin");require(w.size()%1024==0,"game_startup corpus size");
+        for(std::size_t i=0;i<w.size();i+=1024){
+            Case c;for(std::uint32_t k=0;k<1024;++k)c.memory.push_back({0x3b0e000+4*k,w[i+k]});
+            out.push_back(c);}}
+    else if(entry==0x7899a0){ // game_frame_control: 19 words; [0] entry index (0 = 7899a0), [2] argument, [4..9] 3d0853c 3d08538 389d7dc 89295c 3d084a8 3d084ac
         const auto w=words(dir+"/game_frame_control.cases.bin");require(w.size()%19==0,"game_frame_control corpus size");
         for(std::size_t i=0;i<w.size();i+=19)if(w[i]==0)
             out.push_back({{{0x3d0853c,w[i+4]},{0x3d08538,w[i+5]},{0x389d7dc,w[i+6]},{0x89295c,w[i+7]},{0x3d084a8,w[i+8]},{0x3d084ac,w[i+9]}},{w[i+2]},std::nullopt,0x7f});}
@@ -148,6 +154,8 @@ std::size_t compare(const ExecutableImage& image,const OverrideEntry& entry,cons
         const auto rb=native->call(entry.address,c.arguments,c.ecx,std::nullopt,c.cw,600'000'000,c.mxcsr);
         require(bool(ra),entry.name+": original failed: "+ra.error);
         if(!rb){mismatch=entry.name+": override failed: "+rb.error;return compared;}
+        if(entry.address==0x40f350&&((original->reg(UC_X86_REG_EFLAGS)^native->reg(UC_X86_REG_EFLAGS))&0x8d5U))
+            {mismatch=entry.name+": arithmetic flags differ";return compared;}
         if(entry.returns_eax&&ra.eax!=rb.eax){mismatch=entry.name+": EAX differs";return compared;}
         if(entry.returns_x87&&(original->st(0)!=native->st(0)||((original->fpu_status()^native->fpu_status())&0x3800)||original->reg(UC_X86_REG_FPTAG)!=native->reg(UC_X86_REG_FPTAG)))
             {mismatch=entry.name+": ST(0), TOP or the tag word differ (case "+std::to_string(compared)+")";return compared;}
@@ -171,7 +179,7 @@ int main(int argc,char** argv){try{
         if(!corpus)cases=enumerated_cases(entry.address,rng);
         require(!cases.empty(),entry.name+": no cases");
         std::optional<std::string> mismatch;const auto compared=compare(*image,entry,entry.bridge,cases,mismatch);
-        require(!mismatch,*mismatch);
+        require(!mismatch,mismatch.value_or(""));
         // The mutant: the real bridge, then one bit of the first store range flipped (a pOut range: through the argument).
         const auto fixed=entry.writes.empty()?std::optional<std::uint32_t>():entry.writes.front().first;const auto pointer=entry.pointer_writes.empty()?0U:entry.pointer_writes.front().first;
         const auto bridge=entry.bridge;std::optional<std::string> caught;
@@ -181,6 +189,20 @@ int main(int argc,char** argv){try{
             const auto at=fixed?*fixed:g.u32(g.esp()+4+4*pointer).value_or(0);const auto pops=bridge(g);
             std::uint8_t b=0;g.read(at,&b,1);b^=1;g.write(at,&b,1);return pops;},cases,caught);
         require(bool(caught),entry.name+": the mutant (one flipped store bit) was not detected");
+        if(entry.address==0x40f350){
+            const std::vector<std::pair<std::string,X86Guest::Override>> mutants={
+                {"wrong EAX",[bridge](X86Guest& g){const auto pops=bridge(g);g.set_eax(0);return pops;}},
+                {"wrong ECX",[bridge](X86Guest& g){const auto pops=bridge(g);g.set_reg(UC_X86_REG_ECX,1);return pops;}},
+                {"wrong CMP flags",[bridge](X86Guest& g){const auto pops=bridge(g);g.set_reg(UC_X86_REG_EFLAGS,g.reg(UC_X86_REG_EFLAGS)^0x40U);return pops;}},
+                {"cleared trailing bytes",[bridge](X86Guest& g){const auto pops=bridge(g);const std::uint16_t zero=0;g.write(0x3b0e6e0,&zero,2);return pops;}},
+                {"omitted last controller word",[bridge](X86Guest& g){const auto prior=g.u32(0x3b0e994);const auto pops=bridge(g);g.set_u32(0x3b0e994,*prior);return pops;}}
+            };
+            for(const auto& [name,mutant]:mutants){
+                std::optional<std::string> failure;compare(*image,entry,mutant,cases,failure);
+                require(bool(failure),"40f350 bridge mutant survived: "+name);
+            }
+            std::cout<<"  clear_input_edges: 5/5 register/flag/store-boundary bridge mutants caught\n";
+        }
         total+=compared;from_corpora+=corpus?compared:0;
         std::cout<<"  "<<entry.name<<" ("<<std::hex<<entry.address<<std::dec<<"): "<<compared<<(corpus?" oracle-corpus":" enumerated")<<" cases equivalent; mutant caught\n";}
     { // 772615 binds only the SSE dispatch table: with the image's slot stubs (77350c not yet run) it stops, never guesses

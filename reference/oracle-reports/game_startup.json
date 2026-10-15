@@ -1,12 +1,12 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "075b09b838afc679c88d843deb084ff2a64cf90462f5a692fd2fc940c927296d",
+ "native_library_sha256": "288a408ca1caa5eed517494b7d2532ce396fb786bb90d17a1b41c0714dd3a004",
  "source_files": {
   "src/game/game_startup.hpp": "9125c2a677e8482b6929f42207cb6b436e43f49435c86a50bf12c851f5e0b596",
   "src/game/game_startup.cpp": "3a25f2145d4e27678270606c6c04ad35bf59f6c436bd784026c8c66699b9d159",
   "src/engine/game_controller.cpp": "10f4738004f84f40be471c48c217676793e22f48346e2f7b19d4cf49723cf294",
   "tests/probes/native_game_startup_probe.cpp": "55d5ba631ba75a95baf1407e62005044c9e186dee907cc90ca439facfa6fc0ad",
-  "tools/oracles/verify_original_game_startup.py": "d3277d2375f9c4a77480aec43685c034b594e83654ef52f89deb2662f43e8bcd"
+  "tools/oracles/verify_original_game_startup.py": "67380d4eda2f40718b7068762a366f2eba74fa6d75ae225f46dafd58f93c1822"
  },
  "original_ranges_sha256": {
   "40c030": "78cf59a4451a945112a27b5e6d65b73988087bb2a47aedbbc4b1f766ae85a7b1",
@@ -30,9 +30,15 @@
  "mismatches": [],
  "pages_order_boundaries_match": true,
  "limits": "InitGameLoop 40c030 against original instructions, over six randomized source pages.\n\nReal source code runs for 40c030, 420810, 40f350, 424c20 (local part), 40f3a0,\n40a8a0 and 781000->789930. Fixtures: 408630 (queue arena alloc/reset), 411e30,\n410510 (audio init), 40bf40 (state reset), 4253c0->40d0d0 (audio objects) and the\n78c5a0 RET, recorded as owner calls; one call can fail. Pages 3abd000, 3b0e000,\n3b29000, 900000, 903000 and 3d08000 are compared byte for byte, so source writes\noutside the native model also count as mismatches. Vanilla InitControllers only;\nthe Input mod's 40f451 hook is covered by input_mod_init_raw_controllers tests.\n",
+ "corpus": {
+  "path": "build/oracles/game_startup.cases.bin",
+  "cases": 400,
+  "bytes_per_case": 4096,
+  "entry": "40f350"
+ },
  "tracked_summary": {
-  "full_sha256": "8843612ed524c2e1456190351782d3f775ee622abda9f82b6281e040b802d47a",
-  "full_bytes": 2227,
+  "full_sha256": "090a033ebb73d6438da291fb9c7253760ce819090dfd9c84b793bf714e764c8c",
+  "full_bytes": 2356,
   "lists_cut_to": 10,
   "cut_lists": {}
  }
