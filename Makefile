@@ -152,7 +152,12 @@ oracles: $(ORACLE_TARGETS)
 oracles-verdict:
 	python3 tools/oracles/verdict.py build/oracles/*.json
 # The checkers every gate must pass: layer rules, 0 duplicate owners, 0 UNHANDLED profile patches, repo hygiene.
-check:
+symbols:
+	python3 tools/symbols/build_symbol_db.py
+.PHONY: symbols check-symbols
+check-symbols: symbols
+	python3 tools/symbols/build_symbol_db.py --check
+check: check-symbols
 	python3 tools/gate/check_layers.py
 	python3 tools/gate/check_global_owners.py
 	python3 tools/gate/check_profile_patches.py

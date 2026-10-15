@@ -3047,3 +3047,61 @@ Owned REA/Ghidra, pinned sonic.exe 6b0937ca…24cd74,
   Separate make m1 and unregistered metal-sprite, metal-sprite-composition,
   metal-texture and player-task not run. Windows parity and physical pads remain
   unverified. No game assets committed. Remaining list **22** in GOAL section 6.
+
+### Symbol database and named REA seeds (gate 138, 2026-10-15)
+
+GOAL section 6 item 1 / recovery stage A. Continued the existing untracked
+symbol-generator draft; pre-existing screen-init bridge/request drafts were left
+untouched and are excluded from this commit.
+
+* `tools/symbols/build_symbol_db.py` parses every supported function/data macro,
+  struct and enum declarations from pinned New/classic mod-loader headers, merges
+  sa_tools labels and inventory boundaries, and preserves alternatives/conflicts.
+  Project decisions have a tracked evidence-bearing overrides TSV (currently empty).
+  Unknown ABI sizes remain null rather than inferred. Checks verify the mod-loader
+  gitlink, checkout revision and header bytes, and the sa_tools revision/label bytes.
+  Outputs stay in ignored `build/symbols/`; generation reads no executable.
+* sa_tools pin: b72d52f37c21a2f7215711e3516360a63aea12da, ignored sparse checkout
+  `reference/sa-tools/`. Label keys are decimal VAs. No project-wide license was
+  identified; README.md and the license-file tree were inspected, with only
+  third-party component licenses found. Licensing remains unresolved before
+  database redistribution; no upstream implementation or full labels committed.
+* `make symbols` generates the database; `make check-symbols` is in the gate.
+  Four fixture tests cover all 13 macro forms, nested arguments, comments/macros,
+  types, unknown sizes, precedence/conflicts, callback preservation and duplicate
+  seed names. Reversing priority selection fails the fixture test (rc 1); restored
+  tests pass. Corrupting generated coverage makes --check reject it (rc 1);
+  original bytes restored and --check passes.
+* Coverage: **2,166 / 8,875** inventoried procedures named (8,716 nonexternal),
+  **222 / 429** legacy address uses named; all **207** unnamed addresses are listed
+  in `reference/symbols/coverage.json`. 636 type declarations, 2,823 address
+  conflicts retained. Coverage counts addresses used by legacy header identifiers,
+  not a newly reviewed global-ownership inventory. STATUS now reports these facts
+  and correctly counts the inventory's procedures instead of JSON object keys.
+* The runner's inventory config now selects generated seeds explicitly. All 64
+  original callback/game-loop seeds survive; 3,758 function seeds and 249,001 label
+  seeds emitted. Ghidra applies all functions and 248,999 labels, with two unmapped
+  labels and zero seed failures. Old snapshot backed up locally as
+  sonic-ghidra-inventory-before-symbol-seeds.json; new snapshot saved successfully.
+  First sandboxed query had nested execution_failure results (not treated as
+  success). Outside-sandbox retry/close rc 0, evidence
+  `ev_e60187fe1e91bd13fbad47e41cb87127ea6419e2a0da14f7a194631b4bfa68b3`.
+  Three batch-decompile items checked individually: dsInitInt 411e30,
+  stHWSetVSync 7899a0, GameModeHandler 40c090. Observed vsync_const (classic
+  FrameMultiplier alias), g_CurrentFrame, FrameFrequency, ulGlobalMode and
+  now_saving. `reference/symbols/rea-verification.json` records evidence/profile,
+  snapshot/raw-result hashes and observed identifiers, not decompiled code.
+* Gate: sandboxed run rc 2 at GUI app-smoke, not recorded as passing. Final
+  outside-sandbox `make -j10 gate` **rc 0**, 126 native programs / eight Python
+  tests. Record: `reference/production-integration-20261015/symbols-138-gate.json`.
+  Boot, 7,228-frame intro/title determinism, 600 overridden digests, input and
+  900-frame controller plain/native replay pass; host 80.7 FPS; title 63 FPS;
+  0 duplicate owned bytes and 0 UNHANDLED profile overlaps. STATUS regenerated.
+* Scope/limits: named metadata is a hypothesis, not recovered behavior. This step
+  changes no gameplay implementation. The tested worktree includes the existing
+  uncommitted hle_device_bridge.cpp draft, excluded from this commit; gate records
+  its exact source hash. Standalone oracles and separate make m1 not rerun;
+  aggregate remains 48 pass / 46 partial / 9 fail / 1 missing. Four unregistered
+  tests remain skipped; Windows parity/physical pads unverified. No assets/binaries
+  committed. M1 and native independence remain incomplete. Next: dependency
+  inventory, provenance checker and native frame-control pilot (GOAL item 2).

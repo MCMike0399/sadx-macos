@@ -1,0 +1,103 @@
+{
+  "evidence_id": "ev_e60187fe1e91bd13fbad47e41cb87127ea6419e2a0da14f7a194631b4bfa68b3",
+  "analysis_profile": {
+    "provider": {
+      "id": "rea-workflow",
+      "name": "REA composed investigation workflow",
+      "version": "1"
+    },
+    "parameters": {
+      "upstream_analysis_profile": {
+        "provider": {
+          "id": "ghidra",
+          "name": "Ghidra",
+          "version": "12.1.4"
+        },
+        "parameters": {
+          "target_kind": "executable",
+          "target_format": "pe",
+          "executable_role": "application",
+          "managed": false,
+          "native_aot_metadata": {
+            "contract_revision": "rtr-9.1-x64-pe-read-only-v3",
+            "source_bytes": 134217728,
+            "work_units": 67108864,
+            "working_memory_bytes": 67108864,
+            "report_bytes": 4194304
+          },
+          "architecture": "x86",
+          "available_architectures": [
+            "x86"
+          ],
+          "import_mode": "ephemeral-source-immutable",
+          "annotation_policy": "atomic-function-entry-metadata-v1",
+          "load_image_observations": "source-mappings-entry-context-v2",
+          "function_body_evidence": "complete-inclusive-ranges-v1",
+          "function_references": "complete-body-and-entry-reference-manager-v2",
+          "string_inventory_evidence": "defined-data-coverage-v1",
+          "location_resolution": "explicit-address-exact-entry-symbol-first-v3",
+          "instruction_flow_evidence": "decoded-return-pcode-v1",
+          "function_boundary_observations": "ghidra-terminal-call-limitations-v1",
+          "no_return_repair": "returning-imports-decoded-return-v2",
+          "process_launch": "inspected-jvm-launch-support-v1",
+          "jump_table_evidence": "typed-case-default-blocks-v1",
+          "decompiler_jump_loads": true,
+          "loader": "auto-from-header",
+          "language_id": "auto-from-header",
+          "compiler_spec_id": "auto-default",
+          "analyzer_preset": "ghidra-default",
+          "analysis_seeds": {
+            "format": "rea-ghidra-seeds-v1",
+            "path": "/Users/burbujamc/Developer/sadx-macos/build/symbols/rea-seeds.tsv",
+            "configured_path": "/Users/burbujamc/Developer/sadx-macos/build/symbols/rea-seeds.tsv",
+            "sha256": "da3e0104ac2b814f29411fe11465a55370f06f553417227a2f88a24ae5c897b2",
+            "entries": {
+              "function": 3758,
+              "code": 0,
+              "label": 249001
+            }
+          }
+        },
+        "digest": "f68e82be722d93e033a463bdc08357a1aeea1bfe7577100a11b04a524dfd1002"
+      },
+      "workflow_revision": 2
+    },
+    "digest": "54be6ea142b70ec78d1b7aa6ab727c4fecbae40bcc76eb1677ba30617d0928c3"
+  },
+  "checks": [
+    {
+      "address": "0x411e30",
+      "name": "dsInitInt",
+      "observed_identifiers": [
+        "vsync_const",
+        "loop_const",
+        "stHWSetVSync"
+      ]
+    },
+    {
+      "address": "0x7899a0",
+      "name": "stHWSetVSync",
+      "observed_identifiers": [
+        "g_CurrentFrame",
+        "PerformanceFrequency",
+        "FrameFrequency"
+      ]
+    },
+    {
+      "address": "0x40c090",
+      "name": "GameModeHandler",
+      "observed_identifiers": [
+        "ulGlobalMode",
+        "now_saving",
+        "dsInitInt"
+      ]
+    }
+  ],
+  "raw_result_sha256": "761cf00b7f2fddba91a4b97a82fa7484b78e10608a6f181f9d7ad881a531ce8b",
+  "snapshot_sha256": "d3ffa3ee76a3e632a4987dd6bb739ba2c66a1ea396c21fc01345aa18ee52e301",
+  "limits": [
+    "Header names remain hypotheses; this verifies naming, not recovered behavior.",
+    "Preferred New-header vsync_const is the classic FrameMultiplier alias.",
+    "Ghidra applied 3758 function seeds and 248999 labels; two labels were unmapped; no seed failures."
+  ]
+}

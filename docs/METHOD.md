@@ -2,6 +2,15 @@
 
 ## 1. Reading the binary with REA (Ghidra)
 
+Run `make symbols` before the inventory runner. `tools/symbols/build_symbol_db.py`
+merges pinned mod-loader declarations, sa_tools labels, inventory boundaries and
+`reference/symbols/overrides.tsv`. Generated `build/symbols/` contains the full
+database, conflict candidates, coverage (including unnamed owner addresses) and
+`rea-seeds.tsv`. Unknown ABI sizes remain null. `make check-symbols` regenerates
+and checks these outputs in the gate; `python3 tools/symbols/build_symbol_db.py --check`
+alone detects absent/stale outputs. Fixture tests need neither binary nor upstream
+checkout. The source checkouts are required for generation.
+
 REA (`~/Developer/rea`, CLI + MCP) drives a headless Ghidra. The project owns one Ghidra
 session through `reference/ghidra-live.mjs` with `reference/ghidra-inventory-config.json`
 (snapshot + environment; the older `ghidra-game-loop-config.json` snapshot is tied to the pre-move
@@ -43,6 +52,12 @@ Facts about the provider (from REA's docs, verified 2026-10-12):
   call; `procedure_callers`/`procedure_callees`/`procedure_references`/`xrefs` are per
   address; `batch_decompile {addresses[]}` decompiles many (still serial inside Ghidra).
   Add any of these to the runner's `allowed` set (one line) before using them.
+* The inventory config selects `build/symbols/rea-seeds.tsv` through `seed_file`
+  (repo-relative), overriding the environment file's legacy seed path. The generator
+  preserves every seed and explicit name from `reference/ghidra-game-loop-seeds.tsv`.
+  CLI calls must set `REA_GHIDRA_SEED_FILE` to this generated file to share the snapshot
+  profile. The pre-symbol snapshot is backed up locally as
+  `reference/sonic-ghidra-inventory-before-symbol-seeds.json`.
 * Functions reached only through pointers (vtables, callbacks, the D3DX dispatch table)
   are not auto-defined. Seed them: `REA_GHIDRA_SEED_FILE` = TSV of
   `address<TAB>function|code|label[<TAB>name]` applied before analysis (a named `function` seed

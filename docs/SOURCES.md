@@ -40,6 +40,22 @@ The Makefile variables `INPUT_DLL`, `LOADER_DLL`, `SPEEDRUN_DLL` point here. The
 source at that revision is the git submodule `reference/sadx-mod-loader`
 (https://github.com/X-Hax/sadx-mod-loader, GPL; not vendored into this repo's licence).
 
+## sa_tools symbol inputs (local only)
+
+The symbol generator reads `GameConfig/PC_SADX/sonic_labels.txt` from X-Hax
+`sa_tools` at `b72d52f37c21a2f7215711e3516360a63aea12da`, in the ignored
+`reference/sa-tools/` checkout. `reference/symbols/sources.json` pins the input;
+the generator checks the checkout revision and label bytes against that commit.
+The label dictionary uses decimal absolute addresses, not hexadecimal keys.
+Only metadata is read; no C# implementation or game content is linked or copied.
+
+License status: this revision has no project-wide LICENSE/COPYING file or license
+statement in README.md. `Licenses/` contains Assimp and AssimpNET third-party
+licenses, which do not establish a license for the label database. Upstream license
+clarification remains open before redistributing that database. Generated labels
+and the full database stay ignored under `build/`; tracked reports contain counts
+and unresolved addresses only. This is not the stage importer (GOAL stage E).
+
 ## The retail disc (Archive.org `sonic-adventure-dx-directors-cut_202202`)
 
 Two BIN/CUE images (MODE1/2352). Disc 1: `sonic.exe` (differs from the pinned image by

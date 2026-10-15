@@ -144,7 +144,8 @@ for every new oracle or bridge, and the oracle verdict vocabulary pass / partial
   `procedure_callees`, `procedure_references`, `procedure_info`, `batch_decompile`, plus `export`
   (evidence bundle). Current config: `reference/ghidra-inventory-config.json` (snapshot
   `reference/sonic-ghidra-inventory-snapshot.json`, seeds
-  `reference/ghidra-game-loop-seeds.tsv`, 64 functions after gate 137's callback seeds).
+  `build/symbols/rea-seeds.tsv` (`make symbols`); the original 64 callback/game-loop seeds
+  are preserved from `reference/ghidra-game-loop-seeds.tsv`).
   The former full-cache snapshot is preserved locally as
   `reference/sonic-ghidra-inventory-before-frame-input-seeds.json`; adding seeds
   changed the analysis profile, so the current snapshot was rebuilt without reusing it. The older
@@ -175,7 +176,8 @@ workflows as the MCP server, one process per call, with `--snapshot` reuse:
 ```sh
 export GHIDRA_INSTALL_DIR="$PWD/reference/tools/ghidra_12.1.4_PUBLIC"
 export JAVA_HOME=/opt/homebrew/Cellar/openjdk/27/libexec/openjdk.jdk/Contents/Home
-export REA_GHIDRA_STARTUP_TIMEOUT_MS=600000 REA_GHIDRA_SEED_FILE="$PWD/reference/ghidra-game-loop-seeds.tsv"
+make symbols
+export REA_GHIDRA_STARTUP_TIMEOUT_MS=600000 REA_GHIDRA_SEED_FILE="$PWD/build/symbols/rea-seeds.tsv"
 REA="$PWD/reference/tools/rea/node_modules/rea-agents/scripts/rea.mjs"
 EXE="game/Sonic Adventure DX/sonic.exe"; SNAP="$PWD/reference/sonic-ghidra-inventory-snapshot.json"
 node $REA doctor --provider ghidra --json                      # readiness, no target
@@ -365,7 +367,18 @@ M1 is still the current incomplete milestone; the first two items deliberately p
 architecture work forward (stages A and B of §4.5). M1–M4 evidence remains useful, but
 completion of more guest bridges is not a prerequisite for establishing the native path.
 
-1. **Symbol database (§4.4, stage A).** `tools/symbols/build_symbol_db.py` parses the mod
+1. **Symbol database (§4.4, stage A) — implemented 2026-10-15.**
+   See `reference/symbols/coverage.json` and `rea-verification.json`: 2,166 named
+   procedures / 8,875 inventory entries (8,716 nonexternal); 222 / 429 legacy
+   owner addresses named, 207 explicitly unnamed. Four fixture tests cover every
+   supported macro, types, conflicts and seed preservation. `make check-symbols`
+   runs in the gate. REA applies 3,758 function seeds and 248,999 labels (two
+   unmapped), and the three requested decompilations expose preferred header names.
+   Unknown ABI sizes remain null; upstream sa_tools label licensing is unresolved
+   (`docs/SOURCES.md`); generated labels/database remain ignored. The specification
+   below remains the reference for this delivered stage.
+
+   **Specification:** `tools/symbols/build_symbol_db.py` parses the mod
    loader's `*New.h` and classic headers (the `FunctionPointer`/`VoidFunc`/`ThiscallFunctionPointer`/
    `FastcallFunctionPointer`/`StdcallFunctionPointer`/`UsercallFunc*`/`TaskFunc`/`DataPointer`/
    `DataArray` macros, struct and enum definitions) into a generated database under `build/`

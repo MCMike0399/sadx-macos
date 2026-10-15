@@ -18,6 +18,10 @@ const root=resolve('reference/'+(config.directory??'ghidra-live-recovery'));
 const snapshot=resolve('reference/'+(config.snapshot_file??'sonic-ghidra-shadow-snapshot.json'));
 const env=JSON.parse(await readFile('reference/'+
   (config.environment_file??'tools/ghidra-shadow-environment.json'),'utf8'));
+if(config.seed_file){
+  await access(resolve(config.seed_file));
+  env.REA_GHIDRA_SEED_FILE=resolve(config.seed_file);
+}
 const client=new Client({name:'sadx-owned-live-ghidra',version:'1.0.0'});
 const transport=new StdioClientTransport({command:process.execPath,args:[
   modules+'/rea-agents/scripts/rea.mjs','mcp'],env:{...process.env,...env}});

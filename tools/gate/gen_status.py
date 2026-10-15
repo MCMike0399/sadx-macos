@@ -79,12 +79,19 @@ def main():
     out.append('## Hybrid runtime progress (M1+)\n')
     inv=ROOT/'reference/inventory/functions.json'
     if inv.exists():
-        d=json.loads(inv.read_text());out.append(f'* Functions inventoried: {len(d)}')
+        d=json.loads(inv.read_text());out.append(f'* Functions inventoried: {d["procedures"]}')
     else:out.append('* Function inventory: not built yet (`docs/METHOD.md` §2).')
     overrides=ROOT/'src/guest/overrides.tsv'
     if overrides.exists():
         m=sum(1 for l in overrides.read_text().splitlines() if l.strip() and not l.startswith('#'));out.append(f'* Native overrides bound: {m}')
     else:out.append('* Guest/override table: not built yet (M1).')
+    coverage=ROOT/'reference/symbols/coverage.json'
+    if coverage.exists():
+        c=json.loads(coverage.read_text())
+        out.append(f'* Symbol names: {c["named_procedures"]} / {c["inventory_procedures"]} inventoried procedures '
+                   f'({c["nonexternal_procedures"]} nonexternal).')
+        out.append(f'* Named legacy owner addresses: {c["named_owner_addresses"]} / {c["legacy_owner_addresses"]}; '
+                   'unresolved addresses listed in `reference/symbols/coverage.json`.')
     out.append('')
     (ROOT/'docs/STATUS.md').write_text('\n'.join(out)+'\n')
     print('docs/STATUS.md written')
