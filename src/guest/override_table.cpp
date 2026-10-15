@@ -10,6 +10,7 @@
 #include "game/game_startup.hpp"
 #include <unicorn/unicorn.h>
 #include <cstring>
+#include <algorithm>
 #include <memory>
 namespace sadx {
 namespace {
@@ -132,6 +133,63 @@ std::vector<OverrideEntry> startup_overrides(){
             if(!g.write(at,&value,4)){g.stop("override 40f350: unavailable output "+std::to_string(at)+" at "+std::to_string(sites[i]));return 0;}
         }
         return 0;},true,{},true});
+    // 40f3a0: vanilla controller initialization, followed by the actual 40f451
+    // RET / pinned Input-mod jump on the original caller frame.
+    out.push_back({0x40f3a0,"init_controllers",{{0x3b0e000,0x1000}},[](X86Guest& g)->std::uint32_t{
+        GameLogicController source;GameLogicControllers pointers;GameControllerInitGlobals globals{};
+        std::array<std::shared_ptr<GameLogicController>,4> raw{};
+        // Missing records exercise the owner's first store phase only.
+        (void)init_controllers_40f3a0(source,raw,pointers,globals);
+        const auto word=[&](std::uint32_t at,std::uint32_t value,std::uint32_t site){
+            if(g.set_u32(at,value))return true;
+            g.stop("override 40f3a0: unavailable output "+std::to_string(at)+" at "+std::to_string(site));return false;};
+        g.set_reg(UC_X86_REG_ECX,0);
+        const auto entry_esp=g.esp();
+        if(!word(0x3b0e768,*globals.words_at_3b0e768[0],0x40f3a2)
+            ||!word(0x3b0e76c,*globals.words_at_3b0e768[1],0x40f3a8)
+            ||!word(entry_esp-4,g.reg(UC_X86_REG_ESI),0x40f3ae)
+            ||!word(0x3b0e770,*globals.words_at_3b0e768[2],0x40f3af)
+            ||!word(entry_esp-8,g.reg(UC_X86_REG_EDI),0x40f3b5)
+            ||!word(0x3b0e774,*globals.words_at_3b0e768[3],0x40f3b6))return 0;
+        g.set_edx(0);g.set_reg(UC_X86_REG_EFLAGS,(g.reg(UC_X86_REG_EFLAGS)&~0x8d5U)|0x44U);
+        if(g.reg(UC_X86_REG_EFLAGS)&0x400U){
+            // The native owner copies forwards. Preserve a noncanonical DF=1 by
+            // executing the source's two backwards REP MOVSDs and remaining body.
+            g.set_reg(UC_X86_REG_ESP,entry_esp-8);g.tail_redirect(0x40f3be);return 0;
+        }
+        for(std::uint32_t i=0;i<13;++i){
+            const auto value=g.u32(0x3b0eaa8+4*i);
+            if(!value){g.stop("override 40f3a0: unreadable controller template at 40f3cd, "+std::to_string(0x3b0eaa8+4*i));return 0;}
+            source.write_u32(4*i,*value);
+        }
+        for(auto& record:raw)record=std::make_shared<GameLogicController>();
+        if(!init_controllers_40f3a0(source,raw,pointers,globals)){g.stop("override 40f3a0: native controller records missing at 40f3cd");return 0;}
+        for(std::uint32_t i=0;i<13;++i)
+            if(!word(0x3b0e9c8+4*i,*raw[0]->read_u32(4*i),0x40f3cd))return 0;
+        if(!word(0x3b0e344,*globals.words_at_3b0e344[0],0x40f3d4))return 0;
+        for(std::uint32_t i=0;i<39;++i)
+            if(!word(0x3b0e9fc+4*i,*raw[1+i/13]->read_u32(4*(i%13)),0x40f3e6))return 0;
+        constexpr std::uint32_t clear_sites[]={0x40f3e8,0x40f3ee,0x40f3f5};
+        for(std::uint32_t i=1;i<4;++i)
+            if(!word(0x3b0e344+4*i,*globals.words_at_3b0e344[i],clear_sites[i-1]))return 0;
+        for(std::uint32_t i=0;i<4;++i){
+            const auto found=std::find(raw.begin(),raw.end(),*pointers[i]);
+            if(found==raw.end()){g.stop("override 40f3a0: native controller pointer has no guest identity at 40f400");return 0;}
+            if(!word(0x3b0e77c+4*i,0x3b0e9c8+0x34*static_cast<std::uint32_t>(found-raw.begin()),0x40f400))return 0;
+        }
+        for(std::uint32_t i=0;i<4;++i){
+            if(!word(0x3b0e9b8+4*i,*globals.words_at_3b0e9b8[i],0x40f420))return 0;
+            const auto value=*globals.bytes_at_3b0e9a4[i];
+            if(!g.write(0x3b0e9a4+i,&value,1)){g.stop("override 40f3a0: unavailable controller byte at 40f427, "+std::to_string(0x3b0e9a4+i));return 0;}
+        }
+        constexpr std::uint32_t indices[]={2,3,4,0,1},sites[]={0x40f433,0x40f439,0x40f43f,0x40f445,0x40f44b};
+        for(std::uint32_t i=0;i<5;++i)
+            if(!word(0x3b0e990+4*indices[i],*globals.words_at_3b0e990[indices[i]],sites[i]))return 0;
+        g.set_eax(4);g.set_reg(UC_X86_REG_ECX,16);
+        // The equal EAX,4 CMP leaves PF/ZF set and the other arithmetic flags clear.
+        g.set_reg(UC_X86_REG_EFLAGS,(g.reg(UC_X86_REG_EFLAGS)&~0x8d5U)|0x44U);
+        g.tail_redirect(0x40f451);return 0;
+    },true,{},true});
     // 789930 (cdecl, function): the first empty slot of the 32 at 3d084b0 takes it; EAX 1, or 0 when all are taken.
     out.push_back({0x789930,"register_exit_callback",{{0x3d084b0,0x80}},[](X86Guest& g)->std::uint32_t{
         ExitCallbackList list;for(std::uint32_t i=0;i<32;++i)list.slots_at_3d084b0[i]=load<std::uint32_t>(g,0x3d084b0+4*i);

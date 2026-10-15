@@ -32,7 +32,8 @@ struct OverrideEntry {
 // 78dbe0 (stdcall, w): the projected depth through 772615, returned in ST(0) (SSE dispatch table only).
 std::vector<OverrideEntry> frame_loop_overrides(const ExecutableImage& image);
 // Startup / registration owners whose state is plain guest globals: 40f350 (input-edge reset, exact
-// EAX/ECX and final CMP flags; no input reads), 789930 (exit-callback slots 3d084b0,
+// EAX/ECX and final CMP flags; no input reads), 40f3a0 (controller init then original
+// 40f451 RET/profile jump, DF=1 retains original REP body), 789930 (exit-callback slots 3d084b0,
 // returns 1 or 0 in EAX), 40a8a0 (menu block 900e88 -> 9008b4), 77ffc0 (callback list 3ce712c / 3d0fa40) and
 // 7959c0 (frame hooks 3d08af0). `returns_eax`: EAX is part of the comparison (the others leave it as scratch).
 std::vector<OverrideEntry> startup_overrides();

@@ -71,6 +71,10 @@ public:
     // stack_reserve preserves a source dependency call depth when stack pointers are observable.
     using Continuation=std::function<void(X86Guest&)>;
     void redirect(std::uint32_t target,const std::vector<std::uint32_t>& arguments,std::uint32_t pops,Continuation then,std::uint32_t stack_reserve=0,std::optional<std::uint32_t> source_return={});
+    // From an override or continuation: resume original guest code at target on the
+    // current caller frame. No return word, arguments, reserve or continuation is
+    // synthesized. The guest suffix owns its eventual RET (including profile hooks).
+    void tail_redirect(std::uint32_t target);
     // Protected-mode segments as Windows sets them for a 32-bit thread: a GDT at `gdt` (one page) with
     // flat code/data/stack and an FS segment whose base is the thread's TEB.
     bool set_fs_base(std::uint32_t teb,std::uint32_t gdt,std::string* error);

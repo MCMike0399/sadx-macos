@@ -15,6 +15,7 @@
 // comparing ECX/EDX and the x87 condition bits as well; 78dbe0 the ninja_projected_depth cases, comparing the
 // returned ST(0), TOP and the tag word (its mutant flips the returned significand's lowest bit).
 // 40f350 replays the game_startup input pages and compares EAX, ECX/EDX, arithmetic flags and every page byte.
+// 40f3a0 replays controller_init pages with DF=0/1 and RET/JMP suffixes, recording suffix-entry state.
 // The original side runs with the FPU shims installed, as every guest boot does (7716df's FSINCOS is a shim site).
 // Mutants: every entry is also run with a bridge that flips one bit of its first store; the comparison must
 // catch it, or the test fails (an insensitive comparison would pass anything).
@@ -34,7 +35,7 @@
 namespace {
 using namespace sadx;
 void require(bool ok,const std::string& why){if(!ok)throw std::runtime_error(why);}
-struct Case {std::vector<std::pair<std::uint32_t,std::uint32_t>> memory;std::vector<std::uint32_t> arguments;std::optional<std::uint32_t> ecx;std::uint16_t cw=0x27f;std::uint32_t mxcsr=0x1f80;};
+struct Case {std::vector<std::pair<std::uint32_t,std::uint32_t>> memory;std::vector<std::uint32_t> arguments;std::optional<std::uint32_t> ecx;std::uint16_t cw=0x27f;std::uint32_t mxcsr=0x1f80;std::uint32_t eflags=2;};
 constexpr std::uint32_t scratch=0x10000000,out_at=scratch+0x100,det_at=scratch+0x180,matrix_at=scratch+0x200,second_at=scratch+0x300, // a page mapped in both guests
     project_v_at=scratch+0x40,project_viewport_at=scratch+0x60,color_at=scratch+0x80,project_matrix_at=scratch+0x400;
 std::vector<std::uint32_t> words(const std::string& path){
@@ -48,6 +49,30 @@ std::vector<Case> corpus_cases(std::uint32_t entry,const std::string& dir){
         for(std::size_t i=0;i<w.size();i+=1024){
             Case c;for(std::uint32_t k=0;k<1024;++k)c.memory.push_back({0x3b0e000+4*k,w[i+k]});
             out.push_back(c);}}
+    else if(entry==0x40f3a0){
+        const auto w=words(dir+"/controller_init.cases.bin");require(w.size()%1024==0,"controller_init corpus size");
+        for(std::size_t i=0;i<w.size();i+=1024){
+            Case c;c.memory.push_back({scratch+0x900,0x909090c3U});
+            for(std::uint32_t k=0;k<1024;++k)c.memory.push_back({0x3b0e000+4*k,w[i+k]});
+            out.push_back(c);Case backwards=c;backwards.eflags|=0x400U;out.push_back(backwards);
+            // The RET may be a profile jump. This fixture records the suffix-entry
+            // registers, flags, ESP and caller return word, then repoints the pads.
+            constexpr std::uint32_t hook=scratch+0x800,observed=scratch+0x600;
+            std::vector<std::uint8_t> code;
+            const auto imm=[&](std::uint32_t value){for(unsigned b=0;b<4;++b)code.push_back(static_cast<std::uint8_t>(value>>(8*b)));};
+            const auto record=[&](std::uint8_t modrm,std::uint32_t offset){code.push_back(0x89);code.push_back(modrm);imm(observed+offset);};
+            record(0x05,0);record(0x0d,4);record(0x15,8);record(0x25,12);record(0x35,16);record(0x3d,20);
+            code.insert(code.end(),{0x9c,0x8f,0x05});imm(observed+24); // PUSHFD; POP [observed+24]
+            code.insert(code.end(),{0x8b,0x04,0x24,0xa3});imm(observed+28); // MOV EAX,[ESP]; MOV [observed+28],EAX
+            for(std::uint32_t pad=0;pad<4;++pad){code.insert(code.end(),{0xc7,0x05});imm(0x3b0e77c+4*pad);imm(scratch+0xc00+0x34*pad);}
+            code.push_back(0xc3);while(code.size()%4)code.push_back(0x90);
+            for(std::uint32_t offset=0;offset<code.size();offset+=4){std::uint32_t value;std::memcpy(&value,code.data()+offset,4);c.memory.push_back({hook+offset,value});}
+            const auto relative=hook-(0x40f451+5);
+            c.memory.push_back({0x40f451,0xe9U|((relative&0xffffffU)<<8)});
+            c.memory.push_back({0x40f455,0x90909000U|(relative>>24)});
+            out.push_back(c);c.eflags|=0x400U;out.push_back(c);
+        }}
+
     else if(entry==0x7899a0){ // game_frame_control: 19 words; [0] entry index (0 = 7899a0), [2] argument, [4..9] 3d0853c 3d08538 389d7dc 89295c 3d084a8 3d084ac
         const auto w=words(dir+"/game_frame_control.cases.bin");require(w.size()%19==0,"game_frame_control corpus size");
         for(std::size_t i=0;i<w.size();i+=19)if(w[i]==0)
@@ -147,15 +172,26 @@ std::size_t compare(const ExecutableImage& image,const OverrideEntry& entry,cons
     require(native->add_override(entry.address,bridge,&error),error);
     std::size_t compared=0;
     for(const auto& c:cases){
-        const auto out=ranges(entry,c);
-        for(auto* g:{original.get(),native.get()}){for(const auto& [at,size]:out){const std::vector<std::uint8_t> z(size,0xa5);g->write(at,z.data(),size);}
+        auto out=ranges(entry,c);
+        if(entry.address==0x40f3a0)out.push_back({scratch+0x600,32}); // suffix-entry observations
+        // A prior case's profile fixture must not leak into the next plain case.
+        if(entry.address==0x40f3a0){const std::uint8_t tail[]={0xc3,0x90,0x90,0x90,0x90,0x90,0x90,0x90};
+            original->write(0x40f451,tail,sizeof tail);native->write(0x40f451,tail,sizeof tail);}
+        for(auto* g:{original.get(),native.get()}){g->set_reg(UC_X86_REG_EFLAGS,c.eflags);
+            if(entry.address==0x40f3a0){g->set_reg(UC_X86_REG_ESI,0x13579bdf);g->set_reg(UC_X86_REG_EDI,0x2468ace0);g->set_reg(UC_X86_REG_EBX,0xdeadbeef);}
+            for(const auto& [at,size]:out){const std::vector<std::uint8_t> z(size,0xa5);g->write(at,z.data(),size);}
             for(const auto& [at,v]:c.memory)g->set_u32(at,v);}
         const auto ra=original->call(entry.address,c.arguments,c.ecx,std::nullopt,c.cw,600'000'000,c.mxcsr);
         const auto rb=native->call(entry.address,c.arguments,c.ecx,std::nullopt,c.cw,600'000'000,c.mxcsr);
         require(bool(ra),entry.name+": original failed: "+ra.error);
         if(!rb){mismatch=entry.name+": override failed: "+rb.error;return compared;}
-        if(entry.address==0x40f350&&((original->reg(UC_X86_REG_EFLAGS)^native->reg(UC_X86_REG_EFLAGS))&0x8d5U))
+        if((entry.address==0x40f350||entry.address==0x40f3a0)&&((original->reg(UC_X86_REG_EFLAGS)^native->reg(UC_X86_REG_EFLAGS))&0xcd5U))
             {mismatch=entry.name+": arithmetic flags differ";return compared;}
+        if(entry.address==0x40f3a0){
+            if(ra.esp!=rb.esp){mismatch=entry.name+": caller stack differs";return compared;}
+            for(const auto reg:{UC_X86_REG_EBX,UC_X86_REG_ESI,UC_X86_REG_EDI,UC_X86_REG_EBP})
+                if(original->reg(reg)!=native->reg(reg)){mismatch=entry.name+": preserved register differs";return compared;}
+        }
         if(entry.returns_eax&&ra.eax!=rb.eax){mismatch=entry.name+": EAX differs";return compared;}
         if(entry.returns_x87&&(original->st(0)!=native->st(0)||((original->fpu_status()^native->fpu_status())&0x3800)||original->reg(UC_X86_REG_FPTAG)!=native->reg(UC_X86_REG_FPTAG)))
             {mismatch=entry.name+": ST(0), TOP or the tag word differ (case "+std::to_string(compared)+")";return compared;}
@@ -202,6 +238,22 @@ int main(int argc,char** argv){try{
                 require(bool(failure),"40f350 bridge mutant survived: "+name);
             }
             std::cout<<"  clear_input_edges: 5/5 register/flag/store-boundary bridge mutants caught\n";
+        }
+        if(entry.address==0x40f3a0){
+            const std::vector<std::pair<std::string,X86Guest::Override>> mutants={
+                {"wrong EAX",[bridge](X86Guest& g){const auto pops=bridge(g);g.set_eax(0);return pops;}},
+                {"wrong ECX",[bridge](X86Guest& g){const auto pops=bridge(g);g.set_reg(UC_X86_REG_ECX,0);return pops;}},
+                {"wrong CMP flags",[bridge](X86Guest& g){const auto pops=bridge(g);g.set_reg(UC_X86_REG_EFLAGS,g.reg(UC_X86_REG_EFLAGS)^0x40U);return pops;}},
+                {"wrong raw record",[bridge](X86Guest& g){const auto pops=bridge(g);g.set_u32(0x3b0e9c8,*g.u32(0x3b0e9c8)^1U);return pops;}},
+                {"wrong controller identity",[bridge](X86Guest& g){const auto pops=bridge(g);g.set_u32(0x3b0e788,0x3b0e9c8);return pops;}},
+                {"cleared neighbour",[bridge](X86Guest& g){const auto pops=bridge(g);const std::uint8_t zero=0;g.write(0x3b0e9a8,&zero,1);return pops;}},
+                {"skipped patched suffix",[bridge](X86Guest& g){const auto pops=bridge(g);if(!(g.reg(UC_X86_REG_EFLAGS)&0x400U))g.tail_redirect(scratch+0x900);return pops;}}
+            };
+            for(const auto& [name,mutant]:mutants){
+                std::optional<std::string> failure;compare(*image,entry,mutant,cases,failure);
+                require(bool(failure),"40f3a0 bridge mutant survived: "+name);
+            }
+            std::cout<<"  init_controllers: 7/7 register/store/profile-suffix bridge mutants caught\n";
         }
         total+=compared;from_corpora+=corpus?compared:0;
         std::cout<<"  "<<entry.name<<" ("<<std::hex<<entry.address<<std::dec<<"): "<<compared<<(corpus?" oracle-corpus":" enumerated")<<" cases equivalent; mutant caught\n";}

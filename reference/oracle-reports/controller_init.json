@@ -1,15 +1,29 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
  "native_library_sha256": "ebeda2f7f13e3d971434fcdb9413b702f1e732b36ab0a8aaad546825c3a6ecac",
- "original_range_sha256": "8ce891e5f69e9cfa0fbe1c7cb711b2a020ffc0845156ddefb759e7c47ed5834d",
+ "original_ranges_sha256": {
+  "40f3a0-40f452": "8ce891e5f69e9cfa0fbe1c7cb711b2a020ffc0845156ddefb759e7c47ed5834d"
+ },
  "cases": 300,
  "mismatch_count": 0,
  "mismatches": [],
  "source_untouched_bytes_changed": 0,
  "limits": "Vanilla InitControllers 40f3a0 against original instructions.\n\nThe source runs on a pseudo-random 3b0e000 page; the comparison covers the\nfour ControllersRaw records (incl. the overlapping forward replication),\nControllerPointers[0..3] targets and every other byte the function writes or\nmust leave untouched on that page. The Input mod's RET hook at 40f451 is not\napplied here; its repoint is input_mod_init_raw_controllers.\n",
+ "corpus": {
+  "path": "build/oracles/controller_init.cases.bin",
+  "cases": 300,
+  "bytes_per_case": 4096,
+  "entry": "40f3a0"
+ },
+ "source_files": {
+  "src/engine/game_controller.hpp": "c8e3d41f7f1f14f5a0532befdb4f7e37be1cdad92edc085092dd4a24ada34784",
+  "src/engine/game_controller.cpp": "10f4738004f84f40be471c48c217676793e22f48346e2f7b19d4cf49723cf294",
+  "tests/probes/native_controller_init_probe.cpp": "96bb25ac75ac24c070d5191c8a50736a006a9cb42ce977db1fca5eb78295ed01",
+  "tools/oracles/verify_original_controller_init.py": "1a709f962b7847e20782da965d0aaa9bac1c1dd6b85ce980d1f95f30d039e585"
+ },
  "tracked_summary": {
-  "full_sha256": "b6e773602712a01d04c1913b65686cc11b617c8e7f623a50b1ecde3aecac6132",
-  "full_bytes": 819,
+  "full_sha256": "a6abce3d53222f7d1c011cfc36cbfdfbc7f2f9ab517043d5302f736a4dc75db0",
+  "full_bytes": 1447,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

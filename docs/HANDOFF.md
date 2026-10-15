@@ -2720,3 +2720,56 @@ read (`sysctl_errno_22`); no arbitrary process was killed.
   tests not run. No Windows parity or physical-pad verification. No game assets
   committed. Remaining unbound list is **26 + 3** in GOAL §6; next candidates
   419030, 40f3a0, or device-backed 77dfc0/7912e0.
+
+### M1 controller initialization override 40f3a0 (gate 133, 2026-10-14)
+
+Owned REA/Ghidra, pinned sonic.exe 6b0937ca…24cd74,
+`reference/ghidra-controller-collision-requests.json`:
+40f3a0 `ev_dd9233defa9704e3cbf0785e8084b7bfc058ae22c6eaf34a1f63c6a2b8b243b9`;
+419030 survey `ev_bce3f0071ab18a3536ead9d3ba7c59b3eedc9d4459dc6c190b3376f8c68961cd`
+(not bound this step). Analysis succeeded. Runner close rc 1: process-token cleanup
+failed closed with sysctl_errno_22; subsequent process listing showed no Ghidra Java
+process. RET/padding at 40f451 byte-checked with PEImage: c390909090909090.
+
+* **45 process entries.** 40f3a0 uses the existing controller owner. Native transport
+  preserves the source clear/copy/pointer/store phases: clear four globals (interleaved
+  ESI/EDI saves), 13 template dwords to raw record 0, clear 3b0e344, forward replication
+  of 39 dwords into records 1..3, remaining clears, four guest pointer identities,
+  paired word/byte clears, final controller-word clears. No guest-heap allocation;
+  guest pointers are resolved from native record identity, never cast.
+* **Profile suffix preserved:** X86Guest::tail_redirect transfers control without
+  synthesizing any return word, arguments or continuation. Forward init leaves
+  EAX=4, ECX=16, EDX=0, preserved registers and equal-CMP arithmetic flags, then
+  resumes 40f451 on the original caller frame. That executes the actual RET or
+  the pinned Input-mod jump; the mod's initialization remains real guest code.
+  Profile inventory now names this bridge; the oracle declares the full addressed
+  40f3a0..40f452 range, including the patched RET. 0 UNHANDLED overlaps.
+* **DF=1 fidelity:** the native owner models forward copies. With direction set,
+  the bridge preserves the native clear prefix and source saved-register stack,
+  then resumes original code at 40f3be with ESP=entry-8. Both backwards REP MOVSDs
+  and the remaining body/suffix execute as original guest code. This branch is
+  not claimed native; no unsupported direction is silently replaced with forward copy.
+* **Oracle/corpus:** controller-init rerun **pass**, 300 cases, 0 mismatches and
+  0 untouched violations. Full 3b0e000 input pages exported as controller_init.cases.bin,
+  in OVERRIDE_CORPORA. Bridge replays 1,200 cases: each page with DF=0/1 and plain
+  RET/synthetic patched JMP. Compares the whole page, EAX/ECX/EDX, arithmetic flags/DF,
+  x87 conditions, ESP and preserved registers; the suffix records entry registers,
+  flags, ESP and caller return word before repointing pads. Guest-only table has
+  17 entries on 54,879 cases. Source 40f451 padding restored between fixture variants.
+* **Mutants/tests:** core 3/3 caught (replication source, pointer identity, nonzero
+  clears), restored pass. Bridge 7/7 caught (EAX, ECX, ZF, raw word, pointer identity,
+  neighbour clear, skipped patched suffix), plus generic flipped store. Guest smoke
+  proves direct and continuation tail transfers preserve caller arguments/return word/
+  registers and let a suffix RET 4, rather than the bridge pop count, own the ABI.
+* **Gate:** reference/production-integration-20261014/controller-init-133-gate.json,
+  actual rc 0, 126 native programs and 4 Python tests. Boot identical with init
+  firing once (22,030 HLE calls, 119/119 active patches). Full 7,228-frame intro/title
+  determinism, first 600 overridden digests and 900-frame controller plain/native
+  replay match. Init fires once through frame 600. Host 82.6 FPS; title 15.873 ms;
+  app-smoke draws 120 frames. STATUS regenerated.
+* **Limits/skips:** other standalone oracles not rerun; aggregate still 48 pass /
+  46 partial / 9 fail / 1 missing (oracles-verdict rc 2 for existing failures).
+  Separate make m1 and unregistered metal-sprite, metal-sprite-composition,
+  metal-texture, player-task not run. Windows parity/physical pads unverified.
+  No game assets committed. Remaining list **25 + 3** in GOAL section 6; next
+  419030 (fresh analysis retained) or device-backed 77dfc0/7912e0.

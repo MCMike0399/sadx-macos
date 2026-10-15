@@ -757,7 +757,7 @@
    "condition": "unconditional: loader applies exported Jumps PointerList (DLL 0x1000e0b8 -> array 0x1000e070, count 9 set by static init) at mod load",
    "active": true,
    "source_ref": "_reference/sadx/updated-pc-reference/sources/input-mod.cpp:27-38 (jumps[4])",
-   "handled_by": "input_mod_pad / game_runtime input",
+   "handled_by": "input_mod_pad / game_runtime input; guest init_controllers override tail-transfers to the actual patched 40f451 suffix",
    "original_bytes": "c390909090"
   },
   {

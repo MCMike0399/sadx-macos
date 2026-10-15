@@ -89,6 +89,9 @@ void X86Guest::redirect(std::uint32_t target,const std::vector<std::uint32_t>& a
     write(top,frame.data(),frame.size()*4);
     set_reg(UC_X86_REG_ESP,top);set_reg(UC_X86_REG_EIP,target);redirected_=true;
 }
+void X86Guest::tail_redirect(std::uint32_t target){
+    set_reg(UC_X86_REG_EIP,target);redirected_=true;
+}
 void X86Guest::continuation_hook(void*,std::uint64_t address,std::uint32_t,void* user){
     auto* self=static_cast<X86Guest*>(user);
     const auto found=self->pending_.find(static_cast<std::uint32_t>(address));

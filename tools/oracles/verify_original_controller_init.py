@@ -18,9 +18,10 @@ def main():
     p=argparse.ArgumentParser();p.add_argument('exe',type=pathlib.Path);p.add_argument('native_library',type=pathlib.Path);p.add_argument('--output',type=pathlib.Path,required=True);a=p.parse_args();image=PEImage(a.exe)
     if image.sha256!=SOURCE_SHA256 or unicorn.__version__!='2.1.4':raise RuntimeError('Pinned source/Unicorn mismatch')
     lib=ctypes.CDLL(str(a.native_library.resolve()));fn=lib.sadx_native_controller_init;fn.argtypes=[ctypes.POINTER(ctypes.c_uint32),ctypes.c_size_t,ctypes.POINTER(ctypes.c_uint32),ctypes.c_size_t];fn.restype=ctypes.c_int
-    m=Original(image,0x7f).machine;m.mem_map(0x3b0e000,0x1000);clean=m.context_save();rng=random.Random(0x40f3a0);bad=[];untouched_bad=0;cases=0
+    m=Original(image,0x7f).machine;m.mem_map(0x3b0e000,0x1000);clean=m.context_save();rng=random.Random(0x40f3a0);bad=[];untouched_bad=0;cases=0;corpus=[]
     for case in range(300):
         page=bytes(rng.getrandbits(8) for _ in range(0x1000)) if case else bytes(0x1000)
+        corpus.append(page)
         template=list(struct.unpack('<13I',page[0xaa8:0xaa8+52]))
         m.context_restore(clean);m.mem_write(0x3b0e000,page);m.mem_write(STACK,struct.pack('<I',STOP));m.reg_write(UC_X86_REG_ESP,STACK);m.emu_start(0x40f3a0,STOP,count=2000)
         after=bytes(m.mem_read(0x3b0e000,0x1000));cases+=1
@@ -33,7 +34,12 @@ def main():
         if fn((ctypes.c_uint32*13)(*template),13,out,60)!=1:raise RuntimeError('Native rejected')
         expected=raw+pointers+[int(cleared)]
         if list(out)[:57]!=expected:bad.append(dict(case=case,fields=[i for i,(x,y) in enumerate(zip(list(out)[:57],expected)) if x!=y][:10]))
-    report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),original_range_sha256=sha(image.read(0x40f3a0,0xb2)),cases=cases,mismatch_count=len(bad),mismatches=bad[:20],
+    report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),original_ranges_sha256={"40f3a0-40f452":sha(image.read(0x40f3a0,0xb2))},cases=cases,mismatch_count=len(bad),mismatches=bad[:20],
         source_untouched_bytes_changed=untouched_bad,limits=__doc__)
+    corpus_path=a.output.with_suffix('.cases.bin');corpus_path.write_bytes(b''.join(corpus))
+    report['corpus']=dict(path=str(corpus_path),cases=cases,bytes_per_case=4096,entry='40f3a0')
+    root=pathlib.Path(__file__).resolve().parents[2]
+    report['source_files']={name:sha((root/name).read_bytes()) for name in
+        ['src/engine/game_controller.hpp','src/engine/game_controller.cpp','tests/probes/native_controller_init_probe.cpp','tools/oracles/verify_original_controller_init.py']}
     a.output.write_text(json.dumps(report,indent=1)+'\n');print(json.dumps(dict(cases=cases,mismatches=len(bad),untouched_violations=untouched_bad)));return int(bool(bad or untouched_bad))
 if __name__=='__main__':raise SystemExit(main())
