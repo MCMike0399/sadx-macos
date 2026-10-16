@@ -1,0 +1,111 @@
+{
+  "passed": true,
+  "source_sha256": "dc2f26b82c0d631afe1f42c910cbeb85e39601d24a90e126a194884e8c783e3b",
+  "baseline": {
+    "name": "baseline",
+    "exit_status": 0,
+    "killed": false,
+    "mismatches": [],
+    "replacement": [
+      null,
+      null
+    ]
+  },
+  "mutants": [
+    {
+      "name": "wrong_epsilon",
+      "exit_status": 1,
+      "killed": true,
+      "mismatches": [
+        {
+          "word": 0,
+          "expected": 872415232,
+          "actual": 897988541
+        }
+      ],
+      "replacement": [
+        "sse_literal(1.1920929e-7F)",
+        "sse_literal(0.000001F)"
+      ]
+    },
+    {
+      "name": "keyboard_controller_scale_confusion",
+      "exit_status": 1,
+      "killed": true,
+      "mismatches": [
+        {
+          "word": 2,
+          "expected": 1123942400,
+          "actual": 1124073472
+        }
+      ],
+      "replacement": [
+        "sse_literal(127.0F)",
+        "sse_literal(128.0F)"
+      ]
+    },
+    {
+      "name": "lost_half_press",
+      "exit_status": 1,
+      "killed": true,
+      "mismatches": [
+        {
+          "word": 6,
+          "expected": 1056964608,
+          "actual": 1065353216
+        }
+      ],
+      "replacement": [
+        "sse_literal(0.5F)",
+        "sse_literal(1.0F)"
+      ]
+    },
+    {
+      "name": "numeric_conversion_instead_of_bits",
+      "exit_status": 1,
+      "killed": true,
+      "mismatches": [
+        {
+          "word": 0,
+          "expected": 872415232,
+          "actual": 0
+        },
+        {
+          "word": 1,
+          "expected": 1191181824,
+          "actual": 32767
+        },
+        {
+          "word": 2,
+          "expected": 1123942400,
+          "actual": 127
+        },
+        {
+          "word": 3,
+          "expected": 1124073472,
+          "actual": 128
+        },
+        {
+          "word": 4,
+          "expected": 1065353216,
+          "actual": 1
+        },
+        {
+          "word": 5,
+          "expected": 1132396544,
+          "actual": 255
+        },
+        {
+          "word": 6,
+          "expected": 1056964608,
+          "actual": 0
+        }
+      ],
+      "replacement": [
+        "std::memcpy(&result.bits, &value, sizeof(value));",
+        "result.bits = static_cast<std::uint32_t>(value);"
+      ]
+    }
+  ],
+  "worktree_mutated": false
+}

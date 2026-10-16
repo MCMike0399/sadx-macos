@@ -1,0 +1,58 @@
+{
+  "passed": true,
+  "source_sha256": {
+    "src/guest/native_game_session.cpp": "8a4813581081ed51d6bec089c999e4305f6e8aebbc9a89238d19e2e2c9ee85f3",
+    "src/guest/native_game_reference.cpp": "503e1257c2757e5231f39c061d79ecc2de7f8d7db24f3b2df460a0e35e63877e"
+  },
+  "baseline": {
+    "name": "baseline",
+    "exit_status": 0,
+    "killed": false,
+    "output": "Boot coefficients: canonical/poison/varied/partial DLLs, injection and resources passed.",
+    "target": null,
+    "replacement": [
+      null,
+      null
+    ]
+  },
+  "mutants": [
+    {
+      "name": "decode_DLL_in_boot",
+      "exit_status": 1,
+      "killed": true,
+      "output": "boot coefficients are independent of DLL coefficient availability/values",
+      "target": "src/guest/native_game_session.cpp",
+      "replacement": [
+        "config.input_constants=input_mod_261_constants();",
+        "const auto &dll=*config.input_mod_dll;\n    const auto coefficient=[&](std::uint32_t address){return Sse32{dll.u32(address).value_or(0)};};\n    config.input_constants={{coefficient(0x1000bb6c),coefficient(0x1000bbb0),coefficient(0x1000bba0),coefficient(0x1000bba4),coefficient(0x1000bb7c)},coefficient(0x1000bba8),coefficient(0x1000bb78)};"
+      ]
+    },
+    {
+      "name": "omit_boot_coefficients",
+      "exit_status": 1,
+      "killed": true,
+      "output": "normal boot selects maintained Input2.6.1 constants",
+      "target": "src/guest/native_game_session.cpp",
+      "replacement": [
+        "config.input_constants=input_mod_261_constants();",
+        "config.input_constants={};"
+      ]
+    },
+    {
+      "name": "erase_injected_coefficients",
+      "exit_status": 1,
+      "killed": true,
+      "output": "caller-injected zero/IEEE coefficient words must not be replaced",
+      "target": "src/guest/native_game_reference.cpp",
+      "replacement": [
+        "    initialize_source_facts();",
+        "    if(!config_.input_mod_dll)config_.input_constants={};\n    initialize_source_facts();"
+      ]
+    }
+  ],
+  "worktree_mutated": false,
+  "limits": [
+    "Temporary source copies linked before unchanged archives; no worktree mutation.",
+    "Three-frame composition has no sprite draws; no physical-controller/graphics or full-session independence claim."
+  ]
+}

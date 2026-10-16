@@ -1,0 +1,96 @@
+{
+  "passed": true,
+  "source_sha256": {
+    "src/input/input_mod_constants.hpp": "24fd81fa99a60451cbfe6532c6ac852864737e1f459afd168f54d571ca6cb6ba",
+    "src/input/input_mod_constants.cpp": "dc2f26b82c0d631afe1f42c910cbeb85e39601d24a90e126a194884e8c783e3b",
+    "tests/probes/input_mod_constants_probe.hpp": "729788565862a6fadfb0496b004b516ec195de2ceaef262c9a677669b35e8305",
+    "tests/probes/native_input_mod_constants_probe.cpp": "64b4ed51cff0de4e8047ffc73c286f34c53ef90e548d4e9028e3749df2b74448",
+    "src/input/input_mod_pad.hpp": "66ea128051e940ef7ca50be62cd2b434bfe724105dd3812f112675b2210cc6da",
+    "src/input/input_mod_axes.hpp": "51cb3a746951707ac7fc624f54a481aa81312af153412b31f5cc14b1ec333e81",
+    "src/input/input.hpp": "addd67c94712087d50b704722c057185c605cf29c98b895b0212d9ba60be4e4b",
+    "src/engine/game_controller.hpp": "94948bcbf7da7efa12713b39a41e12c89c135016e56c06af14c17d6cefc8dbcd",
+    "src/cpu/sse_math.hpp": "b0bed7f83c4b3ceec2070dee8a64de8045f2cc3bde412483690b8d4e6a7ef213"
+  },
+  "compiler_dependencies": [
+    "src/cpu/sse_math.hpp",
+    "src/engine/game_controller.hpp",
+    "src/input/input.hpp",
+    "src/input/input_mod_axes.hpp",
+    "src/input/input_mod_constants.cpp",
+    "src/input/input_mod_constants.hpp",
+    "src/input/input_mod_pad.hpp",
+    "tests/probes/input_mod_constants_probe.hpp",
+    "tests/probes/native_input_mod_constants_probe.cpp"
+  ],
+  "toolchain_metadata_sha256": {
+    "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb"
+  },
+  "linked_libraries": [
+    "/usr/lib/libc++.1.dylib",
+    "/usr/lib/libSystem.B.dylib"
+  ],
+  "reference_runtime_symbols_found": false,
+  "commands": [
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-0.d",
+      "-c",
+      "src/input/input_mod_constants.cpp",
+      "-o",
+      "unit-0.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-1.d",
+      "-c",
+      "tests/probes/native_input_mod_constants_probe.cpp",
+      "-o",
+      "unit-1.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-dynamiclib",
+      "-Wl,-install_name,@rpath/input-mod-constants.dylib",
+      "unit-0.o",
+      "unit-1.o",
+      "-o",
+      "input-mod-constants.dylib"
+    ]
+  ],
+  "binary_sha256": "3cb2b063e8aaf58fde044ef6055152f60b44499533c9514aff5c2a1dbcaa46ce",
+  "serialized": {
+    "words": 7,
+    "sha256": "53ff70b58dd383e67c181bb49184039eecff8e9c87b88881705878cec1bd23d4"
+  },
+  "copied_original_binary_inputs": [],
+  "copied_fixtures": [],
+  "inherited_environment": false,
+  "core_archive_linked": false,
+  "limits": [
+    "Seven arithmetic coefficients only; consumer algorithms, mutable pad data and resources remain outside this source closure.",
+    "Isolated source/dependency closure, not an operating-system access sandbox.",
+    "Only the verified fingerprint is read before isolation; no original binary or table data is copied."
+  ]
+}

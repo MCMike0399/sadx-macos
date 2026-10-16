@@ -4343,3 +4343,33 @@ The product still needs native boot/title, resources and gameplay recovery.
   approved; full gate follows.
   DLL/game images remain required for other state/resources; no full native input/
   session/game or physical-device/MXCSR claim. GOAL §6.7 remains open; no push.
+
+
+### 2026-10-16 — Input arithmetic coefficient verification complete (gate 160)
+
+* Completes source `0cc61ce` in a separate judge commit. Seven exact words, strict
+  nine-file source closure, native consumers, boot dependency-cut/resource/injection
+  cases, historical CLI equivalence and all seven mutants pass. Independent final
+  STYLE review approved. No existing algorithm, decoder or prior judge changes.
+* Full `make -j10 gate` **rc 0**, **143 native programs /50 Python tests**. Unchanged
+  7,228-frame two-boot determinism and first-600 override digests; 71,115 override
+  comparisons/mutants, 900-frame controller parity and 63 FPS title cadence pass.
+  Host throughput 80.0 FPS. Twelve layers/zero exceptions; 159,630 owned bytes /
+  159,680 combined identities; 491 protected judge inputs. Readability 249 files,
+  unchanged debt: hex11,628 / identifiers1,796 / calls75 / gotos2 / long1,489 / multi2,184.
+* Existing full numerical reports reproduce historical hashes after restoring only
+  library/timing metadata: axes109,056/93,104 MXCSR differences; pad1,044/300 flags;
+  producer24*5,050/108,240 FP differences. Values exact; partials remain partial.
+  Standalone producer make command rc2 remains its original strict flag result.
+  Aggregate verdict rc2: tracked58pass/46partial/9fail/1missing. Other standalone
+  oracles, separate `make m1` and four unregistered tests skipped: metal-sprite,
+  metal-sprite-composition, metal-texture, player-task. All source/probe/app programs compile.
+* Evidence `production-integration-20261016/input-constants-160-*`: three fresh
+  consumer dossiers +seven xrefs, source/data identities, isolated closure, field map,
+  retained numeric/boot mutants and historical CLI harness/results, recorded gate.
+  The partial fixture is a synthetic project-reader mapping retaining exports/data;
+  no Windows-loadability or execution claim. Caller coefficients are preserved and
+  missing required images still fail. Remaining image state/resources, runtime
+  initialization and unrecovered input/game behavior stay open. No whole-DLL/full
+  session or physical-device/MXCSR claim. Goal active; hook settings and user drafts
+  untouched; no binaries/assets committed; no push.

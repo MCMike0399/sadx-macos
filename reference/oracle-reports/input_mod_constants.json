@@ -1,0 +1,37 @@
+{
+ "source_sha256": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+ "native_library_sha256": "a3df9647657bfe649d67a53ab9524a483f2c9701e7d3e59369280605fdca562f",
+ "source_files": {
+  "src/input/input_mod_constants.hpp": "24fd81fa99a60451cbfe6532c6ac852864737e1f459afd168f54d571ca6cb6ba",
+  "src/input/input_mod_constants.cpp": "dc2f26b82c0d631afe1f42c910cbeb85e39601d24a90e126a194884e8c783e3b",
+  "tests/probes/input_mod_constants_probe.hpp": "729788565862a6fadfb0496b004b516ec195de2ceaef262c9a677669b35e8305",
+  "tests/probes/native_input_mod_constants_probe.cpp": "64b4ed51cff0de4e8047ffc73c286f34c53ef90e548d4e9028e3749df2b74448",
+  "src/input/input_mod_pad.hpp": "66ea128051e940ef7ca50be62cd2b434bfe724105dd3812f112675b2210cc6da",
+  "src/input/input_mod_axes.hpp": "51cb3a746951707ac7fc624f54a481aa81312af153412b31f5cc14b1ec333e81",
+  "src/input/input.hpp": "addd67c94712087d50b704722c057185c605cf29c98b895b0212d9ba60be4e4b",
+  "src/engine/game_controller.hpp": "94948bcbf7da7efa12713b39a41e12c89c135016e56c06af14c17d6cefc8dbcd",
+  "src/cpu/sse_math.hpp": "b0bed7f83c4b3ceec2070dee8a64de8045f2cc3bde412483690b8d4e6a7ef213",
+  "tools/oracles/verify_original_input_mod_constants.py": "fe126bb3ae04dc4c502494c6027f0a0455532a02120cf80024d31bcd84d2dc11"
+ },
+ "original_ranges_sha256": {
+  "1000bb6c-1000bb70": "46cecbeaa7de6866910a4856ef1f7378f9dd9dfa698578637ce4ecb33e7f7bac",
+  "1000bbb0-1000bbb4": "461fd2eb57b562e156fa72295897db3f1dff3372c6dda9a1275d4b3d786abae6",
+  "1000bba0-1000bba4": "6bf148e9b76013042dd9144925d79f6def7bdc53681f3067f007ffe1b5114caa",
+  "1000bba4-1000bba8": "ad286c64373644140ff927b256b8415467b5d27645ff997010b15519d022631b",
+  "1000bb7c-1000bb80": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+  "1000bba8-1000bbac": "270696d298cc689d8e5bd75897918aa617a25a5030ccae98017053dddd974995",
+  "1000bb78-1000bb7c": "d99e58435243d9fef9c88273b8d553b4fba4d0baf8009d29eae74fa99e0d9f57"
+ },
+ "cases": 1,
+ "words_compared": 7,
+ "expected_words_sha256": "53ff70b58dd383e67c181bb49184039eecff8e9c87b88881705878cec1bd23d4",
+ "mismatches": [],
+ "returned_values_and_boundaries_match": true,
+ "limits": "Compare seven native Input 2.6.1 arithmetic coefficients with pinned DLL bytes.\n\nReader fixtures are synthetic PE mappings, never executed. Only coefficients are\nmade native; mutable controller data, resources and other DLL dependencies remain.\n",
+ "tracked_summary": {
+  "full_sha256": "92292447b97fbda3038613ba1f5a901f2c63d48818f7d7550170bddeaae015c1",
+  "full_bytes": 2452,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

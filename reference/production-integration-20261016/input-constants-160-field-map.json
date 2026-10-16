@@ -1,0 +1,48 @@
+{
+  "words": 7,
+  "bytes": 28,
+  "fields": [
+    {
+      "name": "axes.epsilon",
+      "address": "1000bb6c",
+      "width": 4
+    },
+    {
+      "name": "axes.maximum",
+      "address": "1000bbb0",
+      "width": 4
+    },
+    {
+      "name": "axes.keyboard_scale",
+      "address": "1000bba0",
+      "width": 4
+    },
+    {
+      "name": "axes.controller_scale",
+      "address": "1000bba4",
+      "width": 4
+    },
+    {
+      "name": "axes.magnitude_cap",
+      "address": "1000bb7c",
+      "width": 4
+    },
+    {
+      "name": "trigger_scale",
+      "address": "1000bba8",
+      "width": 4
+    },
+    {
+      "name": "half_press_scale",
+      "address": "1000bb78",
+      "width": 4
+    }
+  ],
+  "unselected_resources": [
+    "1000e76c",
+    "1000e770",
+    "1000e778"
+  ],
+  "partial_fixture": "Synthetic reader mapping splits .rdata around1000bb6f; all other mapped bytes and exports preserved. Never execute this fixture.",
+  "native_selection": "Normal boot always selects maintained Input2.6.1 coefficients; explicit NativeGameConfig.input_constants injection and old decoder remain available."
+}

@@ -1,0 +1,173 @@
+{
+  "step": "GOAL6.7 Input2.6.1 native arithmetic coefficients",
+  "base_commit": "1cad20c3cddd913ded98e242a5cce81647ed4d1a",
+  "source_sha256": {
+    "src/input/input_mod_constants.hpp": "24fd81fa99a60451cbfe6532c6ac852864737e1f459afd168f54d571ca6cb6ba",
+    "src/input/input_mod_constants.cpp": "dc2f26b82c0d631afe1f42c910cbeb85e39601d24a90e126a194884e8c783e3b",
+    "src/guest/native_game_session.hpp": "637bef47dcfb72e67c95612a79868b564c8f0973567dd5bfaedc799ce37ff40d",
+    "src/guest/native_game_session.cpp": "8a4813581081ed51d6bec089c999e4305f6e8aebbc9a89238d19e2e2c9ee85f3",
+    "src/guest/native_game_reference.hpp": "fd98a326bd72f1f84f1b7fd6d00189de45a2365a1b475ee4d04ac7e05bcc56e0",
+    "src/guest/native_game_reference.cpp": "503e1257c2757e5231f39c061d79ecc2de7f8d7db24f3b2df460a0e35e63877e"
+  },
+  "source_dll_sha256": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+  "words_compared": 7,
+  "source_bytes": 28,
+  "data_report": "reference/oracle-reports/input_mod_constants.json",
+  "field_map": "reference/production-integration-20261016/input-constants-160-field-map.json",
+  "evidence": [
+    {
+      "path": "reference/input-constant-recovery/input-constants-axes.json",
+      "evidence_id": "ev_04b56588384f76eac54fe16cad0549889d467478a37a72e7c82e79c226d07416",
+      "sha256": "6dee569b52c8aace767b16115505b6b5b43a71faadd08017ed3eeb0f81ccecd0"
+    },
+    {
+      "path": "reference/input-constant-recovery/input-constants-keyboard-normalize.json",
+      "evidence_id": "ev_a5415ec5cf15d5dd42bf5359268dc7c0f408883fc46a914fd0ff17df422fe533",
+      "sha256": "ef06562d6bb1c7ed2ebd1fb45c524ddc5d22591663b54e058de950c41d21bac0"
+    },
+    {
+      "path": "reference/input-constant-recovery/input-constants-poll.json",
+      "evidence_id": "ev_7cf70f664d2e3482e6fbf30a6083706cac7744d8b80e221210cc665b4a368d57",
+      "sha256": "d7872e6c4c3b1ab9a207bd2bbc1984a8006f2b8962336f8f4dd5b48ab166910d"
+    },
+    {
+      "path": "reference/input-constant-recovery/input-constants-xrefs-1000bb6c.json",
+      "evidence_id": "ev_0d37a073ad5ba4f8327460ef358169e513b9fa4932fd361466902e99afe539e4",
+      "sha256": "9e4b65e5125a01835caf02c7e64a654e7146ac8c034698173b4b094245b58d5a"
+    },
+    {
+      "path": "reference/input-constant-recovery/input-constants-xrefs-1000bb78.json",
+      "evidence_id": "ev_e8fd5daf80bf9221a72a1a1b643c5bb9fa0fa96e5fc8dafaf33871287f880637",
+      "sha256": "9ae08479eba7e5009a481d1044f4cf49cc74708023781f5c9bf5424788e1d53f"
+    },
+    {
+      "path": "reference/input-constant-recovery/input-constants-xrefs-1000bb7c.json",
+      "evidence_id": "ev_2d1696b4689ddfbd74185ee67b6ddce6c5f1ac508f80eeb19bef9b1bd45b642e",
+      "sha256": "2e660d6a509180a20e2b8fe0383723ff4f9e215966cf0e5ff835fe9f2e0c6c80"
+    },
+    {
+      "path": "reference/input-constant-recovery/input-constants-xrefs-1000bba0.json",
+      "evidence_id": "ev_5237791e244a68ef832b082ea7e6e2c2652bcc36ee2730740ad7cf0929d37515",
+      "sha256": "dcbd3283dffe31ddfa076964863380a38a463a7efa11a86d4e59691f7b475741"
+    },
+    {
+      "path": "reference/input-constant-recovery/input-constants-xrefs-1000bba4.json",
+      "evidence_id": "ev_6ff8aa5cc388ef300a0c90788eba7a91644e3e66984ae0fea2343adb83e6358d",
+      "sha256": "ec44b14499c86dae32d29233c2e755da849b0276b6f581cf2dc16f616208a88f"
+    },
+    {
+      "path": "reference/input-constant-recovery/input-constants-xrefs-1000bba8.json",
+      "evidence_id": "ev_f2eda198f54c31f1052797e692fd7c91e318f771616a02c0b2478a6d3f10c603",
+      "sha256": "a40dc2d06e01f27bc3f44337452b6c4c37c5a3842284f455123779e273b6cae2"
+    },
+    {
+      "path": "reference/input-constant-recovery/input-constants-xrefs-1000bbb0.json",
+      "evidence_id": "ev_a59ec11f203596eb4f5c7958d1d591f1a65ca29dbd8c7867173d5b57360e8f2e",
+      "sha256": "69da78c0da6729486d746d0333a887235b2acbe7a28c01e5d7069187e273a80b"
+    }
+  ],
+  "excluded_navigation": "input-constants-keyboard.json resolves to ramp helper10004cb0; consumer proof uses keyboard-normalize10004db0 instead.",
+  "native_closure_source_files": 9,
+  "numeric_mutants": 4,
+  "boot_mutants": 3,
+  "boot_cases": {
+    "images": [
+      "canonical",
+      "poisoned",
+      "varied resources/IEEE coefficients",
+      "single-byte gap preserving exports"
+    ],
+    "explicit_injections": [
+      "zero words",
+      "varied signed-zero/infinity/NaN/subnormal words"
+    ],
+    "missing_required_images": [
+      "empty game path",
+      "empty DLL path"
+    ],
+    "three_frame_compositions": [
+      "historical DLL coefficients",
+      "native canonical",
+      "native over poisoned coefficients",
+      "native over partial mapping"
+    ],
+    "sprite_draws": 0,
+    "resource_observer": "All252 existing input-resource bytes compared against independent PE reads; no-image resources/capabilities remain unknown."
+  },
+  "cli_comparison": {
+    "passed": true,
+    "base_commit": "1cad20c",
+    "bytes_compared": 5427,
+    "sha256": "52254476457a377d2ac6d3f5eb7cd323f2154d6e22bf2e79e296833c8b070b7c"
+  },
+  "existing_oracles": {
+    "input_mod_axes": {
+      "historical_full_sha256": "6d0168bfc2d6abced3d4ba1eac49e89baa347f42a8770072175d45b732ac4047",
+      "restored_metadata_only": [
+        "native_probe_sha256",
+        "seconds"
+      ],
+      "full_numerical_report_unchanged": true,
+      "profiles": 16,
+      "results": [
+        {
+          "mode": "controller helper",
+          "cases": 4560,
+          "evaluations": 72960,
+          "value_mismatches": 0,
+          "mxcsr_mismatches": 57024
+        },
+        {
+          "mode": "keyboard scalar range",
+          "cases": 2256,
+          "evaluations": 36096,
+          "value_mismatches": 0,
+          "mxcsr_mismatches": 36080
+        }
+      ]
+    },
+    "input_mod_pad": {
+      "historical_full_sha256": "60c0d2bb708a80b179d816c3404a442841f755f582890606451daf1e9559c7e5",
+      "restored_metadata_only": [
+        "native_library_sha256"
+      ],
+      "full_numerical_report_unchanged": true,
+      "cases": 1044,
+      "value_mismatches": 0,
+      "fp_flags": 300
+    },
+    "player_input_producer": {
+      "historical_full_sha256": "eb55478433116fc7de8522f26b212e4e7d6d4f455cc8f3f9efc8754b25b89d3c",
+      "restored_metadata_only": [
+        "native_library_sha256",
+        "elapsed_seconds"
+      ],
+      "full_numerical_report_unchanged": true,
+      "fixtures": 5050,
+      "runs": 24,
+      "value_outputs_passed": true,
+      "exception_flags_match": false,
+      "make_exit_status": 2
+    }
+  },
+  "independent_review": "Approved by fresh input_constants_review under STYLE \u00a712: exact seven literals, current source/evidence fingerprints, independent historical full-report restoration, strict closure, real consumers, injection/resource/missing-image behavior and seven caught mutants verified. Full gate pending; no whole input/session/physical-device independence claim.",
+  "limits": [
+    "Seven arithmetic coefficients only; existing input algorithms and prior judges/decoder remain unchanged.",
+    "Literal provider reuses InputModPadConstants; full transitive header closure checked without PE, fixtures, guest/HLE runtime or core archive.",
+    "Partial fixture is only for the project PE reader; it is not evidence that a Windows loader accepts its unaligned split sections.",
+    "Boot still requires game and Input DLL images for remaining state/resources; no whole-DLL or full-session/game independence claim.",
+    "Original standalone player-input-producer command rc2 retains108240 FP exception discrepancies; compared values exact and full historical report unchanged after restoring only elapsed/library metadata.",
+    "Existing input axes/pad FP partials remain partial; no physical input or universal MXCSR claim.",
+    "Three-frame surveys issue no sprites; no physical graphics or full gameplay claim."
+  ],
+  "reproduce": [
+    "make input-constants-fixtures build/input-mod-constants-test build/input-constants-boot-test",
+    "build/input-mod-constants-test",
+    "build/input-constants-boot-test EXE INPUT_DLL build/input-constants",
+    "python3 reference/production-integration-20261016/input-constants-160-cli-harness.py",
+    "python3 reference/production-integration-20261016/input-constants-160-numeric-harness.py",
+    "python3 reference/production-integration-20261016/input-constants-160-boot-harness.py",
+    "python3 tools/gate/check_input_mod_constants.py"
+  ],
+  "source_commit": "0cc61ce"
+}
