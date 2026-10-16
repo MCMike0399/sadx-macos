@@ -3755,7 +3755,39 @@ The product still needs native boot/title, resources and gameplay recovery.
   reference header, PE or guest runtime. Portable closure retains every old missing-fact
   assertion. New tests check clock mutations and nested successful/failing reference calls;
   four Python guard tests prevent dependency exceptions from leaking into native closure.
-* Fourteen affected oracles rerun: value/call comparisons exact; game loop, game view and
+* Fourteen affected oracles rerun: value/call comparisons exact; game view, queue lifecycle and
   projected depth retain existing FP-flag partial results. Aggregate verdict still rc 2.
   Full gate and judge identity refresh pending in a separate judge commit. No full native
   boot/title, physical timing or game independence claim. Goal remains active.
+
+
+### 2026-10-16 — frame-control judge and final verification (gate 150)
+
+* Completes the source step above (`899bc5d`). Separate judge update registers the portable
+  adapter includes, reference link targets, relocated source identities, holdout and four
+  dependency-guard tests. Native closure still rejects every guest header; only the separate
+  corpus closure permits its exact portable fact header. Adapter bodies, transitive includes,
+  symbols and libraries remain checked. No numeric fixture, comparison, tolerance or
+  historical mutant was changed. Fourteen reports have current source/probe identities and
+  identical prior case counts, hashes and results.
+* Full `make -j10 gate` **rc 0**, **132 native programs / 50 Python tests**. The 7,228-frame
+  intro has unchanged two-boot and first-600 override digests; all 71,115 override comparisons
+  and runtime mutants pass, as do 900-frame controller parity and 63 FPS title cadence.
+  Host throughput 82.2 FPS. All native/unit/probe/app builds pass; native core archive contains
+  frame-control core/backend only, excluding its adapter and the eight legacy interpreters.
+* Independent STYLE review approved after inspecting source identities, frozen corpus,
+  holdout, mutations, nested binding tests and oracle metadata diff. Proof under
+  `production-integration-20261016/frame-semantic-150-*`: four owned Ghidra dossier ids,
+  exact relocation hashes, default-value PE section proof, separate old/candidate holdouts,
+  mutation log, isolated closure report and recorded gate. Host mutation results/specs are
+  retained alongside them; original mutant artifacts remain unchanged.
+* Twelve layers / zero exceptions; 159,630 legacy owned bytes / 159,680 combined identities;
+  422 protected judge inputs. Readability 234→229 files, hex 12,231→11,628, address identifiers
+  2,062→1,796, address calls 94→75, long lines 1,635→1,489, multiple statements 2,387→2,184;
+  gotos remain 2. Most reductions reflect tier relocation, not rewrites of those consumers.
+* Aggregate oracle verdict remains rc 2 (9 fail / 46 partial / 1 missing); existing flag-only
+  partials in game view, queue lifecycle and projected depth are unchanged. Other standalone
+  oracles, separate `make m1` and four unregistered tests skipped (`metal-sprite`,
+  `metal-sprite-composition`, `metal-texture`, `player-task`). No assets/binaries committed.
+  User hook settings and two Ghidra request drafts untouched. These two commits remain local;
+  the earlier requested push ended at `3ab9558`. Goal active; next §6.7 runtime initialization.

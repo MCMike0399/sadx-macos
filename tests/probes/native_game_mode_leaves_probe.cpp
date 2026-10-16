@@ -1,3 +1,4 @@
+#include "guest/frame_control_reference.hpp"
 #include "guest/game_mode_leaves_reference.hpp"
 #include <algorithm>
 #include <cstring>

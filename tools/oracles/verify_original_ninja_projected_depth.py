@@ -81,7 +81,7 @@ def main():
         if fields:bad.append(dict(case=[hex(x) for x in c[:9]],fields=fields,source=[hex(mant),hex(exp),hex(sw),hex(tag)],native=[hex(x) for x in out]))
     a.output.with_suffix('.cases.bin').write_bytes(b''.join(struct.pack('<41I',*c) for c in cases)) # corpus: the probe's 41 input words
     root=pathlib.Path(__file__).resolve().parents[2]
-    names=['src/engine/ninja_screen.hpp','src/engine/ninja_screen.cpp','src/math/d3dx_math.cpp','src/cpu/x87_math.cpp','tests/probes/native_ninja_projected_depth_probe.cpp','tools/oracles/verify_original_ninja_projected_depth.py']
+    names=['src/engine/ninja_screen.hpp','src/guest/ninja_screen.cpp','src/math/d3dx_math.cpp','src/cpu/x87_math.cpp','tests/probes/native_ninja_projected_depth_probe.cpp','tools/oracles/verify_original_ninja_projected_depth.py']
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={x:sha((root/x).read_bytes()) for x in names},
         original_ranges_sha256={'0x78dbe0-0x78dc49':sha(image.read(0x78dbe0,0x69)),'0x772615-0x7727a2':sha(image.read(0x772615,0x18d)),'0x774150-0x774243':sha(image.read(0x774150,0xf3)),'0x774310-0x774456':sha(image.read(0x774310,0x146)),'0x770295':sha(image.read(0x770295,6))},
         cases=len(cases),source_outcomes=outcomes,mismatch_count=len(bad),mismatches=bad[:20],state_traces_match=not bad,fp_flag_mismatches=flag_mismatches,exception_flags_match=flag_mismatches==0,limits=__doc__)

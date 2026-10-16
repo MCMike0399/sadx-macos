@@ -1,14 +1,14 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "6f8d40629487341d1c28a23ebb1e8679714fd9b7a271986adf065ed46bcf5cf6",
+ "native_library_sha256": "89dc82a386c1a54271272b3748f35d59b28303bf222d05d3359533a90c784c58",
  "source_files": {
-  "src/engine/ninja_screen.hpp": "d0a95eb714796e67eaaa3f5d22c0180395ad5e827c4b2a1b081cab2a539b7d8c",
-  "src/engine/ninja_screen.cpp": "bb271530ea1e1ed6b40c77a0192fd64ba472a2f837fb0556f75670d52fdabf65",
+  "src/engine/ninja_screen.hpp": "fc043609c4d50b72e006a896c0266916764a02f8781789ee007c0e17528977c0",
+  "src/guest/ninja_screen.cpp": "7cb45c4524eb5ff4d772c14ed780302b0ec972f4f963442d8e74572430d34580",
   "src/math/d3dx_math.hpp": "3b997c26013a774f6b85e099f774187ffe9af64369316d2e3e769f6ff26ea8f0",
   "src/math/d3dx_math.cpp": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171",
   "src/cpu/sse_math.cpp": "b7ddd9dc425ac2e1ebd49929de1dcdf4bd7671466bf041544a6ba57157ca12b7",
   "tests/probes/native_screen_polygon_probe.cpp": "dcd4d808f68dcf8ad2b92d8f32e3bc3e1ac82734633e1edbe2b2209327ce8325",
-  "tools/oracles/verify_original_screen_polygon.py": "710a898db181c9adfccef08e13fc3ed023ae691cfad914e5f055aa9a828727bc"
+  "tools/oracles/verify_original_screen_polygon.py": "1c83efd5d540155282c795c64872454fcc8dc284888857d9481e514033be5d24"
  },
  "original_ranges_sha256": {
   "0x77dfc0-0x77e04e": "23ed9911192e43fe1fd555d87aa34c1194de6135c66411e9b494b1dbf67c9900",
@@ -39,8 +39,8 @@
   "entry": "77dfc0"
  },
  "tracked_summary": {
-  "full_sha256": "1257a335520c15620c31164354c4645d3d820446cd4cd9649b6305dfe3db028f",
-  "full_bytes": 3648,
+  "full_sha256": "af2654773c83966e4c6c1b41173816a9cb70e6a94457745bb903f6da6c812e0a",
+  "full_bytes": 3647,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

@@ -69,7 +69,7 @@ def main():
         if native((ctypes.c_uint32*18)(*case),18,output,128)!=1:raise RuntimeError('Native fixture rejected')
         if list(output)!=expected:bad.append({'case':number,'fields':[i for i,(a,b) in enumerate(zip(output,expected)) if a!=b],'native':list(output),'source':expected})
     blob=b''.join(struct.pack('<18I',*case) for case in cases);args.output.with_suffix('.cases.bin').write_bytes(blob)
-    root=pathlib.Path(__file__).resolve().parents[2];sources=[root/'src/engine/game_logic_support.hpp',root/'src/engine/game_logic.hpp',root/'src/engine/game_logic.cpp',root/'tests/probes/native_game_logic_probe.cpp',pathlib.Path(__file__)]
+    root=pathlib.Path(__file__).resolve().parents[2];sources=[root/'src/engine/game_logic_support.hpp',root/'src/engine/game_logic.hpp',root/'src/guest/game_logic.cpp',root/'tests/probes/native_game_logic_probe.cpp',pathlib.Path(__file__)]
     report={'source_sha256':image.sha256,'native_library_sha256':sha(args.native_library.read_bytes()),'native_sources':{str(p):sha(p.read_bytes()) for p in sources},'source_range':{'address':'0x413dd0','bytes':301,'sha256':sha(image.read(0x413dd0,301))},'cases':len(cases),'case_sha256':sha(blob),'mismatches':bad,'orchestration_stores_press_union_calls_match':not bad,'limits':__doc__}
     args.output.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({'cases':len(cases),'mismatches':len(bad)}));return int(bool(bad))
 if __name__=='__main__':raise SystemExit(main())

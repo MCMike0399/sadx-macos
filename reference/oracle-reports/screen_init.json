@@ -1,13 +1,13 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "c05ae3d813f89f6177855bf48062191050f80154a19a6f31eb9192fc8cb41dfc",
+ "native_library_sha256": "22606c9a41bdc0d5875cdae8943b755033e9dad39e34f99a6074418d1ee00b07",
  "source_files": {
-  "src/engine/ninja_screen.hpp": "d0a95eb714796e67eaaa3f5d22c0180395ad5e827c4b2a1b081cab2a539b7d8c",
-  "src/engine/ninja_screen.cpp": "bb271530ea1e1ed6b40c77a0192fd64ba472a2f837fb0556f75670d52fdabf65",
-  "src/engine/game_frame_control.cpp": "06238236f7d4a31dc66aac5418218a480a5e5bc78c009ddf9c0bbb5f8521758e",
+  "src/engine/ninja_screen.hpp": "fc043609c4d50b72e006a896c0266916764a02f8781789ee007c0e17528977c0",
+  "src/guest/ninja_screen.cpp": "7cb45c4524eb5ff4d772c14ed780302b0ec972f4f963442d8e74572430d34580",
+  "src/engine/game_frame_control.cpp": "930a94809ee8f84acc82b3da960766a14d73905455f6ff831b4541b1d90b1746",
   "src/engine/ninja_render.cpp": "d18ca70f7a617ea3a0b26f31e461ad18d36994279982e968ea0634dc4b7d3db9",
-  "tests/probes/native_screen_init_probe.cpp": "794a551c5dbfac7997f600ec5999830dde1b79acec1cbf41d8fdd4e070545cc7",
-  "tools/oracles/verify_original_screen_init.py": "1cf4d0da56012cdf3d32979becf52471a9ef770d08e022d97c526c61654c38f9"
+  "tests/probes/native_screen_init_probe.cpp": "f14cbf553b934adb7152d3ccbc272a3e438ca9b30e8aedc6febfcdb052a6c9ed",
+  "tools/oracles/verify_original_screen_init.py": "896bc6521c4a99248669d64b4f8a25b0b19213df165aef6ac3f84f0fb881ab3a"
  },
  "original_ranges_sha256": {
   "0x780c30-0x780e70": "0f1632d09b023fcbc48ffea9b81101cd3c1c88dcd3d07f9c391928af7be1fd17",
@@ -33,8 +33,8 @@
   "viewport_entry": "7912e0"
  },
  "tracked_summary": {
-  "full_sha256": "4c899846ab1c659937b0975d6c161ba8828fcf9ba826300ec275117df340f545",
-  "full_bytes": 2469,
+  "full_sha256": "9cab77f98c2b0478cd0796cc155eadf590d9abbb97c7c704df153dc6b9556971",
+  "full_bytes": 2468,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

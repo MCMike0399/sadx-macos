@@ -1,10 +1,10 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "a5007f32e403d332691bb6eb852577c6261a9768f933933b4282d119899f8f32",
+ "native_library_sha256": "10225bd9201b5bd61874063c0026ab73bd5e0bedb7f7eec157404b4289481b04",
  "source_files": {
   "src/game/game_view.hpp": "5067cb1a6fb669beffe96407de97fdd1b1cc031b6e32b459dc0f95da938db9f1",
   "src/game/game_view.cpp": "73304c7d72cb670852cab4ca013067e50a5c60d6e35d714f5477f29915624f7a",
-  "tests/probes/native_game_view_probe.cpp": "e7708c410b3868b1db0e2ddd55d7257e93a812e41b292139d8920774c5781d62",
+  "tests/probes/native_game_view_probe.cpp": "8662d10d023ee20125cda297ed375f3026ae257dfb240124d364caf50e16960f",
   "tools/oracles/verify_original_game_view.py": "6542f3d4a088e56cdea89b179081ee1b32ad5838ad2bb708a52700269252eeb2"
  },
  "original_range_sha256": "f690f4b95989d57290d8da5ab99f94e60dbcec80460ffa15c65981b9a3fc4dc6",
@@ -30,7 +30,7 @@
  "stores_trace_match": true,
  "limits": "View setup 4208e0 (with 420860, 403e60, 788240, 402ed0, 402f10/780c00, 77ff60,\n77ff70, 402f40, 77ed50 and, on the reset path, 407ab0/407330/4030d0/4128f0) against\noriginal instructions. Fixtures: 4071c0, 7815c0, 403180 (recorded callee, site,\nfirst two arguments) and the D3D8 device's SetRenderState (recorded site, state,\nvalue); one call can fail. x87 status flags are reported separately.\n",
  "tracked_summary": {
-  "full_sha256": "f3f4d00550175284e97a7875c5317b4a20a7fd91d1cbdf12218043058014385e",
+  "full_sha256": "99196aa103543d55cd1eb37270eaac92daf7587c1bb605355148be0a85d13ef5",
   "full_bytes": 1712,
   "lists_cut_to": 10,
   "cut_lists": {}

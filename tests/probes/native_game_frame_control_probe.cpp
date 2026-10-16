@@ -1,3 +1,4 @@
+#include "guest/frame_control_reference.hpp"
 #include "engine/game_frame_control.hpp"
 #include <cstddef>
 #include <cstring>

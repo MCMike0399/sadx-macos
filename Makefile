@@ -107,15 +107,17 @@ controllers: all
 # additionally link libsadx-macos and the frameworks; tests/unit/guest_<name>.cpp link the guest + Unicorn.
 .SECONDEXPANSION:
 # Address-shaped boot/mode interpreters are reference adapters.
-REFERENCE_UNIT_TARGETS := build/game-mode-test build/game-mode-leaves-test build/game-runtime-test \
+REFERENCE_UNIT_TARGETS := build/game-view-test \
+ build/game-frame-control-test build/reference-frame-control-test build/game-logic-test build/game-logic-support-test build/game-loop-test build/game-startup-test build/ninja-device-init-test build/ninja-frame-calls-test build/ninja-screen-test build/ninja-queue-lifecycle-test \
+ build/game-mode-test build/game-mode-leaves-test build/game-runtime-test \
  build/player-acceleration-ground-test build/player-acceleration-alternate-test \
  build/player-direction-reset-test build/sonic-player-test build/sonic-actions-test \
  build/player-scene-position-binding-test
 $(REFERENCE_UNIT_TARGETS): build/%-test: tests/unit/$$(subst -,_,$$*).cpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/libsadx-guest.a build/libsadx-core.a -o $@
 # Native frame-control composition deliberately excludes the reference/core archive.
-build/native-frame-control-test: tests/unit/native_frame_control.cpp src/engine/game_frame_control.cpp src/engine/game_frame_control.hpp src/engine/speedrun.cpp src/engine/speedrun.hpp
-	$(CXX) $(CXXFLAGS) -Isrc tests/unit/native_frame_control.cpp src/engine/game_frame_control.cpp src/engine/speedrun.cpp -o $@
+build/native-frame-control-test: tests/unit/native_frame_control.cpp src/engine/game_frame_control.cpp src/engine/game_frame_control.hpp src/engine/game_frame_control_internal.hpp src/engine/game_frame_control_native.cpp src/engine/speedrun.cpp src/engine/speedrun.hpp
+	$(CXX) $(CXXFLAGS) -Isrc tests/unit/native_frame_control.cpp src/engine/game_frame_control.cpp src/engine/game_frame_control_native.cpp src/engine/speedrun.cpp -o $@
 # The semantic mode core and its native seams build without reference archives or PE inputs.
 build/native-game-mode-test: tests/unit/native_game_mode.cpp src/game/game_mode.cpp src/game/game_mode.hpp src/game/game_mode_internal.hpp src/game/game_mode_native.cpp
 	$(CXX) $(CXXFLAGS) -Isrc tests/unit/native_game_mode.cpp src/game/game_mode.cpp src/game/game_mode_native.cpp -o $@
@@ -141,7 +143,7 @@ build/ninja-queue-consumer-test: tests/fixtures/ninja_sprite_test_fixture.hpp
 build/native-player-path-probe.dylib build/native-player-direction-reset-probe.dylib: tests/fixtures/path_probe_data.hpp
 
 # Native probes: tests/probes/native_<x>_probe.cpp -> build/native-<x>-probe.dylib, called by the Unicorn oracles.
-REFERENCE_PLAYER_PROBES := build/native-ground-acceleration-probe.dylib build/native-alternate-acceleration-probe.dylib build/native-sonic-player-probe.dylib build/native-sonic-action-probe.dylib
+REFERENCE_PLAYER_PROBES := build/native-screen-polygon-probe.dylib build/native-ninja-projected-depth-probe.dylib build/native-game-view-probe.dylib  build/native-game-frame-control-probe.dylib build/native-speedrun-limiter-probe.dylib build/native-device-setup-probe.dylib build/native-screen-init-probe.dylib build/native-game-startup-probe.dylib build/native-game-logic-support-probe.dylib build/native-game-logic-probe.dylib build/native-game-loop-probe.dylib build/native-frame-completion-probe.dylib build/native-ninja-frame-calls-probe.dylib build/native-ninja-queue-lifecycle-probe.dylib build/native-ground-acceleration-probe.dylib build/native-alternate-acceleration-probe.dylib build/native-sonic-player-probe.dylib build/native-sonic-action-probe.dylib
 $(REFERENCE_PLAYER_PROBES): build/native-%-probe.dylib: tests/probes/native_$$(subst -,_,$$*)_probe.cpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) $< build/libsadx-guest.a build/libsadx-core.a -o $@
 

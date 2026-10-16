@@ -78,7 +78,7 @@ def main():
         if fn((ctypes.c_uint32*19)(*case),19,actual,16)!=1:raise RuntimeError('Native fixture rejected')
         if list(actual)!=expected:bad.append({'case':number,'input':case,'source':expected,'native':list(actual),'fields':[i for i,(a,b) in enumerate(zip(actual,expected)) if a!=b]})
     blob=b''.join(struct.pack('<19I',*case) for case in cases);args.output.with_suffix('.cases.bin').write_bytes(blob)
-    names=['src/engine/game_frame_control.hpp','src/engine/game_frame_control.cpp','src/engine/game_logic_support.hpp','tests/probes/native_game_frame_control_probe.cpp','tools/oracles/verify_original_game_frame_control.py']
+    names=['src/engine/game_frame_control.hpp','src/engine/game_frame_control.cpp','src/engine/game_frame_control_internal.hpp','src/engine/frame_control_fwd.hpp','src/guest/frame_control_reference.hpp','src/guest/frame_control_reference.cpp','src/engine/game_logic_support.hpp','tests/probes/native_game_frame_control_probe.cpp','tools/oracles/verify_original_game_frame_control.py']
     ranges=[(0x77ff50,10),(0x411e20,10),(0x411e30,93),(0x7899a0,54),(0x40f010,86),(0x792f60,3),(0x780069,30)]
     report={'source_sha256':image.sha256,'native_library_sha256':sha(args.native_library.read_bytes()),'source_files':{n:sha((pathlib.Path(__file__).resolve().parents[2]/n).read_bytes()) for n in names},'original_ranges_sha256':{f'{at:x}-{at+length:x}':sha(image.read(at,length)) for at,length in ranges},'cases':len(cases),'case_sha256':sha(blob),'mismatches':bad,'stores_callback_identity_and_boundaries_match':not bad,'limits':__doc__}
     args.output.write_text(json.dumps(report,indent=2)+'\n');print(json.dumps({'cases':len(cases),'mismatches':len(bad)}));return int(bool(bad))

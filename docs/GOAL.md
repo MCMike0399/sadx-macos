@@ -353,10 +353,16 @@ comes first, because every later port should copy a readable model, not the lega
    mutations, callback/scratch/store-prefix tests, native-only closure and independent STYLE
    review pass. All 24 literal encodings match PE bytes. Native mutation/yaw composition and
    live stage precision remain open; no plain-float or full-native-movement claim.
-   (c) **Frame control** → fixture optionals and
-   `CounterWords` move into the adapter, and the game tier holds plain values. Then replace the
-   sketches in STYLE §11 with the real code.
-7. **Refactor queue (R), one module per step, worst first:** `game_runtime` (EXE-read
+   (c) **Frame control** → **done at gate 150**: plain native values and typed callbacks;
+   fixture optionals, `CounterWords` and numeric diagnostics live in the reference adapter.
+   Native and portable adapter builds use separate isolated closures; all prior missing-fact
+   assertions and 2,672 frozen comparisons remain intact. Limiter 1,799 comparisons/one
+   existing exclusion exact, holdout 2,048/zero, all six preserved mutations caught; independent
+   STYLE review and full gate pass. Defaults come from PE virtual-zero tails and two literal
+   settings 1/3. Eight coupled legacy CPPs moved unchanged into reference; their semantic
+   rewrites remain in the queue. STYLE §11 quotes actual reset code. No physical timing,
+   native boot/title or full-game independence claim. Next: item 7.
+7. **Refactor queue (R), one module per step, worst first:** `game_runtime` (legacy composition now in `guest/native_game_reference`; EXE-read
    initialisation → literals, typed tables, or importer seams), `game_mode_leaves`,
    `game_reset*`, `game_loop`, `game_startup`/`winmain`, the `engine/ninja_*` modules, then
    player modules in census order. Each step updates the baseline. Expect the address surface to

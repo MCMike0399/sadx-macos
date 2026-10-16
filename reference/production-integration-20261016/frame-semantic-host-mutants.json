@@ -1,0 +1,42 @@
+{
+  "scope": "plain-native-frame-control",
+  "passed": true,
+  "mutants": [
+    {
+      "name": "accumulated_deadline",
+      "exit_status": 1,
+      "killed": true,
+      "output": "Native frame control: late frame stores sampled time"
+    },
+    {
+      "name": "wrong_profile_cadence",
+      "exit_status": 1,
+      "killed": true,
+      "output": "Native frame control: counter script exhausted"
+    },
+    {
+      "name": "skipped_native_callback",
+      "exit_status": 1,
+      "killed": true,
+      "output": "Native frame control: native callback consumes owned input"
+    }
+  ],
+  "baseline": {
+    "name": "baseline",
+    "exit_status": 0,
+    "killed": false,
+    "output": "{\"passed\":true,\"journeys\":[\"native_host_frame_control\",\"plain_state_values\",\"native_clock_failures\"]}"
+  },
+  "source_sha256": {
+    "src/engine/game_frame_control.hpp": "676b9b2915b4e826737130231825fbb333b59a15346c5cb09444d37113d074f3",
+    "src/engine/game_frame_control_internal.hpp": "4fa87f0fac7eba31863204a9dd6247541111e8810cfd347a859d4803400f7f74",
+    "src/engine/game_frame_control.cpp": "930a94809ee8f84acc82b3da960766a14d73905455f6ff831b4541b1d90b1746",
+    "src/engine/speedrun.hpp": "464998cab62c811d833dd10dd6fc3ac1ad72f63e3f26636d94468932dd6dbac8",
+    "src/engine/speedrun.cpp": "aadb023ca23dbf2bb2abcb772b46ebc5c90b3b247e78f816baf5c870cc207fe3",
+    "src/engine/game_frame_control_native.cpp": "551c58594cf51f4686aa65b35f4a686fd58dc36b661110e285a1774c8dcd347a",
+    "tests/unit/native_frame_control.cpp": "057f4f018318cb471f51bba9fa85b1938dd37f1b11819c1475a938277923875d"
+  },
+  "limits": [
+    "Compiled temporary source copies only; same native unit assertions; no source mutations in worktree."
+  ]
+}

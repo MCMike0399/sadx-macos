@@ -298,6 +298,15 @@
       "long_lines": 0,
       "multi_statement_lines": 0
     },
+    "src/engine/frame_control_fwd.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0
+    },
     "src/engine/game_controller.cpp": {
       "hex_literals": 0,
       "address_identifiers": 8,
@@ -317,13 +326,13 @@
       "multi_statement_lines": 1
     },
     "src/engine/game_frame_control.cpp": {
-      "hex_literals": 18,
+      "hex_literals": 0,
       "address_identifiers": 0,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
-      "long_lines": 7,
-      "multi_statement_lines": 17
+      "long_lines": 0,
+      "multi_statement_lines": 0
     },
     "src/engine/game_frame_control.hpp": {
       "hex_literals": 0,
@@ -331,17 +340,26 @@
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
-      "long_lines": 1,
-      "multi_statement_lines": 1
+      "long_lines": 0,
+      "multi_statement_lines": 0
     },
-    "src/engine/game_logic.cpp": {
-      "hex_literals": 45,
-      "address_identifiers": 7,
+    "src/engine/game_frame_control_internal.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
-      "long_lines": 6,
-      "multi_statement_lines": 21
+      "long_lines": 0,
+      "multi_statement_lines": 0
+    },
+    "src/engine/game_frame_control_native.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0
     },
     "src/engine/game_logic.hpp": {
       "hex_literals": 0,
@@ -352,18 +370,9 @@
       "long_lines": 0,
       "multi_statement_lines": 1
     },
-    "src/engine/game_logic_support.cpp": {
-      "hex_literals": 45,
-      "address_identifiers": 19,
-      "address_calls": 0,
-      "goto": 0,
-      "address_labels": 0,
-      "long_lines": 20,
-      "multi_statement_lines": 21
-    },
     "src/engine/game_logic_support.hpp": {
       "hex_literals": 0,
-      "address_identifiers": 11,
+      "address_identifiers": 7,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
@@ -387,15 +396,6 @@
       "address_labels": 0,
       "long_lines": 0,
       "multi_statement_lines": 0
-    },
-    "src/engine/ninja_device_init.cpp": {
-      "hex_literals": 47,
-      "address_identifiers": 28,
-      "address_calls": 8,
-      "goto": 0,
-      "address_labels": 0,
-      "long_lines": 8,
-      "multi_statement_lines": 10
     },
     "src/engine/ninja_device_init.hpp": {
       "hex_literals": 4,
@@ -423,15 +423,6 @@
       "address_labels": 0,
       "long_lines": 2,
       "multi_statement_lines": 2
-    },
-    "src/engine/ninja_frame_calls.cpp": {
-      "hex_literals": 128,
-      "address_identifiers": 20,
-      "address_calls": 11,
-      "goto": 0,
-      "address_labels": 0,
-      "long_lines": 18,
-      "multi_statement_lines": 24
     },
     "src/engine/ninja_frame_calls.hpp": {
       "hex_literals": 1,
@@ -550,15 +541,6 @@
       "long_lines": 3,
       "multi_statement_lines": 2
     },
-    "src/engine/ninja_queue_lifecycle.cpp": {
-      "hex_literals": 11,
-      "address_identifiers": 19,
-      "address_calls": 0,
-      "goto": 0,
-      "address_labels": 0,
-      "long_lines": 11,
-      "multi_statement_lines": 7
-    },
     "src/engine/ninja_queue_lifecycle.hpp": {
       "hex_literals": 0,
       "address_identifiers": 9,
@@ -585,15 +567,6 @@
       "address_labels": 0,
       "long_lines": 5,
       "multi_statement_lines": 4
-    },
-    "src/engine/ninja_screen.cpp": {
-      "hex_literals": 156,
-      "address_identifiers": 82,
-      "address_calls": 0,
-      "goto": 0,
-      "address_labels": 0,
-      "long_lines": 43,
-      "multi_statement_lines": 48
     },
     "src/engine/ninja_screen.hpp": {
       "hex_literals": 1,
@@ -1855,15 +1828,6 @@
       "long_lines": 0,
       "multi_statement_lines": 3
     },
-    "src/game/game_loop.cpp": {
-      "hex_literals": 135,
-      "address_identifiers": 48,
-      "address_calls": 0,
-      "goto": 0,
-      "address_labels": 0,
-      "long_lines": 24,
-      "multi_statement_lines": 32
-    },
     "src/game/game_loop.hpp": {
       "hex_literals": 0,
       "address_identifiers": 21,
@@ -1962,15 +1926,6 @@
       "address_labels": 0,
       "long_lines": 0,
       "multi_statement_lines": 1
-    },
-    "src/game/game_startup.cpp": {
-      "hex_literals": 18,
-      "address_identifiers": 39,
-      "address_calls": 0,
-      "goto": 0,
-      "address_labels": 0,
-      "long_lines": 8,
-      "multi_statement_lines": 22
     },
     "src/game/game_startup.hpp": {
       "hex_literals": 0,

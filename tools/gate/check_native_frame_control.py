@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Build/run the frame-control pilot using only an isolated maintained-source closure.
 
+The native journey and portable fact-adapter corpus use distinct isolated closures.
 This proves independence for this named core and host journey, not the game or
 production application. The reference game directories are never moved or hidden.
 """
@@ -20,20 +21,21 @@ import tempfile
 
 
 ROOT = Path(__file__).resolve().parents[2]
-SOURCES = (
-    "src/engine/game_frame_control.hpp",
-    "src/engine/game_frame_control.cpp",
-    "src/engine/speedrun.hpp",
-    "src/engine/speedrun.cpp",
-    "tests/unit/native_frame_control.cpp",
-    "tests/probes/native_game_frame_control_probe.cpp",
+COMMON_SOURCES = (
+    "src/engine/game_frame_control.hpp", "src/engine/game_frame_control_internal.hpp",
+    "src/engine/game_frame_control.cpp", "src/engine/speedrun.hpp", "src/engine/speedrun.cpp",
 )
-TRANSLATION_UNITS = (
-    "tests/unit/native_frame_control.cpp",
-    "src/engine/game_frame_control.cpp",
-    "src/engine/speedrun.cpp",
-    "tests/probes/native_game_frame_control_probe.cpp",
-)
+NATIVE_SOURCES = (*COMMON_SOURCES, "src/engine/game_frame_control_native.cpp",
+                  "tests/unit/native_frame_control.cpp")
+CORPUS_SOURCES = (*COMMON_SOURCES, "src/engine/frame_control_fwd.hpp",
+                  "src/guest/frame_control_reference.hpp", "src/guest/frame_control_reference.cpp",
+                  "tests/unit/reference_frame_control.cpp", "tests/probes/native_game_frame_control_probe.cpp")
+NATIVE_UNITS = ("src/engine/game_frame_control.cpp", "src/engine/game_frame_control_native.cpp",
+                "src/engine/speedrun.cpp", "tests/unit/native_frame_control.cpp")
+CORPUS_UNITS = ("src/engine/game_frame_control.cpp", "src/guest/frame_control_reference.cpp",
+                "src/engine/speedrun.cpp", "tests/unit/reference_frame_control.cpp",
+                "tests/probes/native_game_frame_control_probe.cpp")
+PORTABLE_HEADERS = ("guest/frame_control_reference.hpp",)
 FIXTURES = ("reference/frame-control-corpus.tsv", "reference/frame-control-corpus.json")
 FORBIDDEN = re.compile(
     r"ExecutableImage|HleProcess|unicorn|(?:^|[^a-zA-Z])uc_[a-zA-Z]|sadx::guest|sadx::hle|"
@@ -135,121 +137,138 @@ def validate_corpus(isolated: Path) -> tuple[dict, dict[str, str]]:
     return metadata, {name: hashlib.sha256((isolated / name).read_bytes()).hexdigest() for name in FIXTURES}
 
 
+def validate_closure(isolated: Path, sources: tuple[str, ...], portable_headers: tuple[str, ...] = ()) -> None:
+    for name in sources:
+        content = (isolated / name).read_text()
+        inspected = content
+        # Only the corpus closure may name this exact portable fact header. Its body is
+        # still checked, as are every dependency, symbol and linked library.
+        for header in portable_headers:
+            inspected = re.sub(r'^[ \t]*#[ \t]*include[ \t]+"' + re.escape(header) + r'"[ \t]*$',
+                               '', inspected, flags=re.M)
+        if FORBIDDEN.search(inspected):
+            raise RuntimeError(f"reference-runtime identifier in source closure: {name}")
+        for delimiter, include in re.findall(r'^\s*#\s*include\s*([<"])([^>"\n]+)[>"]', content, re.M):
+            if Path(include).is_absolute() or ".." in Path(include).parts:
+                raise RuntimeError(f"include escapes isolated closure: {name}: {include}")
+            if delimiter == '"':
+                candidates = ((isolated / name).parent / include, isolated / "src" / include)
+                resolved = [path.resolve() for path in candidates if path.is_file()]
+                if not resolved or any(path.relative_to(isolated).as_posix() not in sources for path in resolved):
+                    raise RuntimeError(f"undeclared maintained include: {name}: {include}")
+
+
+def compile_closure(compiler: str, isolated: Path, sources: tuple[str, ...], units: tuple[str, ...],
+                    portable_headers: tuple[str, ...] = ()) -> dict:
+    for name in sources:
+        source = ROOT / name
+        if source.is_symlink():
+            raise RuntimeError(f"declared maintained source is a symlink: {name}")
+        destination = isolated / name
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copyfile(source, destination)
+    validate_closure(isolated, sources, portable_headers)
+    (isolated / "tmp").mkdir()
+    env = {"PATH": "/usr/bin:/bin:/usr/sbin:/sbin", "HOME": str(isolated),
+           "TMPDIR": str(isolated / "tmp"), "LC_ALL": "C"}
+    toolchain_allowed: set[Path] = set()
+    if platform.system() == "Darwin":
+        sdk = Path(run(["/usr/bin/xcrun", "--show-sdk-path"], isolated, env).strip())
+        toolchain_allowed.add((sdk / "SDKSettings.json").resolve())
+    flags = ["-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
+             "-ffp-contract=off", "-fno-fast-math", "-fPIC", "-Isrc"]
+    commands, objects, dependencies, toolchain = [], {}, set(), {}
+    for index, source in enumerate(units):
+        obj, dep = f"unit-{index}.o", f"unit-{index}.d"
+        command = [compiler, *flags, "-MMD", "-MF", dep, "-c", source, "-o", obj]
+        commands.append(command)
+        run(command, isolated, env)
+        text = (isolated / dep).read_text().replace("\\\n", " ")
+        for token in shlex.split(text.split(":", 1)[1]):
+            path = (isolated / token).resolve()
+            if path in toolchain_allowed:
+                toolchain[str(path)] = hashlib.sha256(path.read_bytes()).hexdigest()
+                continue
+            if not path.is_relative_to(isolated):
+                raise RuntimeError(f"compiler dependency escaped isolated closure: {token}")
+            relative = path.relative_to(isolated).as_posix()
+            if relative not in sources:
+                raise RuntimeError(f"undeclared compiler dependency: {relative}")
+            dependencies.add(relative)
+        objects[source] = obj
+    if dependencies != set(sources):
+        raise RuntimeError(f"declared source closure differs from compiler dependencies: {sorted(dependencies)}")
+    return dict(env=env, flags=flags, commands=commands, objects=objects,
+                dependencies=sorted(dependencies), toolchain=toolchain,
+                files={name:hashlib.sha256((isolated/name).read_bytes()).hexdigest() for name in sources})
+
+
 def check(cxx: str) -> dict:
-    # Resolve once, then remove inherited compiler/include/library environment.
     compiler = shutil.which(cxx)
     if not compiler:
         raise RuntimeError(f"compiler unavailable: {cxx}")
     with tempfile.TemporaryDirectory(prefix="sadx-native-frame-control-") as temporary:
-        isolated = Path(temporary).resolve()
-        for name in (*SOURCES, *FIXTURES):
-            source = ROOT / name
-            if source.is_symlink():
-                raise RuntimeError(f"declared maintained source is a symlink: {name}")
-            destination = isolated / name
+        base = Path(temporary).resolve()
+        native, corpus = base / "native", base / "corpus"
+        n = compile_closure(compiler, native, NATIVE_SOURCES, NATIVE_UNITS)
+        c = compile_closure(compiler, corpus, CORPUS_SOURCES, CORPUS_UNITS, PORTABLE_HEADERS)
+        for name in FIXTURES:
+            destination = corpus / name
             destination.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copyfile(source, destination)
-        files = {name: hashlib.sha256((isolated / name).read_bytes()).hexdigest() for name in SOURCES}
-        metadata, fixture_hashes = validate_corpus(isolated)
-        (isolated / "tmp").mkdir()
-        env = {"PATH": "/usr/bin:/bin:/usr/sbin:/sbin", "HOME": str(isolated),
-               "TMPDIR": str(isolated / "tmp"), "LC_ALL": "C"}
-        # Quoted includes must resolve entirely within the declared closure.
-        # Absolute/parent paths in either form are disallowed before compilation.
-        for name in SOURCES:
-            content = (isolated / name).read_text()
-            if FORBIDDEN.search(content):
-                raise RuntimeError(f"reference-runtime identifier in source closure: {name}")
-            for delimiter, include in re.findall(r'^\s*#\s*include\s*([<"])([^>"\n]+)[>"]', content, re.M):
-                if Path(include).is_absolute() or ".." in Path(include).parts:
-                    raise RuntimeError(f"include escapes isolated closure: {name}: {include}")
-                if delimiter == '"':
-                    candidates = ((isolated / name).parent / include, isolated / "src" / include)
-                    resolved = [path.resolve() for path in candidates if path.is_file()]
-                    if not resolved or any(path.relative_to(isolated).as_posix() not in SOURCES for path in resolved):
-                        raise RuntimeError(f"undeclared maintained include: {name}: {include}")
-        compiler_version = run([compiler, "--version"], isolated, env).splitlines()[0]
-        # Apple Clang emits this SDK metadata even with -MMD. It is a
-        # toolchain input, not a maintained-source dependency; admit only the
-        # exact metadata file in the active SDK selected by xcrun.
-        allowed_toolchain_dependencies: set[Path] = set()
-        if platform.system() == "Darwin":
-            sdk = Path(run(["/usr/bin/xcrun", "--show-sdk-path"], isolated, env).strip())
-            allowed_toolchain_dependencies.add((sdk / "SDKSettings.json").resolve())
-        flags = ["-std=c++17", "-O2", "-Wall", "-Wextra", "-Werror",
-                 "-ffp-contract=off", "-fno-fast-math", "-fPIC", "-Isrc"]
-        commands = []
-        dependencies: set[str] = set()
-        toolchain_dependencies: dict[str, str] = {}
-        objects = []
-        for index, source in enumerate(TRANSLATION_UNITS):
-            obj, dep = f"unit-{index}.o", f"unit-{index}.d"
-            command = [compiler, *flags, "-MMD", "-MF", dep, "-c", source, "-o", obj]
-            commands.append(command)
-            run(command, isolated, env)
-            dependency_text = (isolated / dep).read_text().replace("\\\n", " ")
-            for token in shlex.split(dependency_text.split(":", 1)[1]):
-                path = (isolated / token).resolve()
-                if path in allowed_toolchain_dependencies:
-                    toolchain_dependencies[str(path)] = hashlib.sha256(path.read_bytes()).hexdigest()
-                    continue
-                if not path.is_relative_to(isolated):
-                    raise RuntimeError(f"compiler dependency escaped isolated closure: {token}")
-                relative = path.relative_to(isolated).as_posix()
-                if relative not in SOURCES:
-                    raise RuntimeError(f"undeclared compiler dependency: {relative}")
-                dependencies.add(relative)
-            objects.append(obj)
-        if dependencies != set(SOURCES):
-            raise RuntimeError(f"declared source closure differs from compiler dependencies: {sorted(dependencies)}")
-        link = [compiler, *objects[:3], "-o", "native-frame-control-test"]
-        commands.append(link)
-        run(link, isolated, env)
-        binary = isolated / "native-frame-control-test"
-        symbols = run(["/usr/bin/nm", "-C", str(binary)], isolated, env)
+            shutil.copyfile(ROOT/name, destination)
+        metadata, fixture_hashes = validate_corpus(corpus)
+        command = [compiler, *n['objects'].values(), '-o', 'native-frame-control-test']
+        n['commands'].append(command);run(command, native, n['env'])
+        binary = native / 'native-frame-control-test'
+        symbols = run(['/usr/bin/nm', '-C', str(binary)], native, n['env'])
         if FORBIDDEN.search(symbols):
-            raise RuntimeError("reference-runtime symbol present in isolated executable")
-        library_output, libraries = inspect_libraries(binary, isolated, env)
-        output = run([str(binary)], isolated, env)
-        journey = json.loads(output)
-        if journey.get("passed") is not True or journey.get("journeys") != [
-                "native_host_frame_control", "explicit_unknowns", "native_clock_failures"]:
-            raise RuntimeError("native executable did not report all required journeys")
-        shared_name = "native-frame-control-probe.dylib" if platform.system() == "Darwin" else "native-frame-control-probe.so"
-        self_id = f"@rpath/{shared_name}" if platform.system() == "Darwin" else None
-        shared_flags = ["-dynamiclib", "-Wl,-install_name," + self_id] if self_id else ["-shared"]
-        shared_link = [compiler, *shared_flags, *objects[1:], "-o", shared_name]
-        commands.append(shared_link)
-        run(shared_link, isolated, env)
-        shared = isolated / shared_name
-        shared_symbols = run(["/usr/bin/nm", "-C", str(shared)], isolated, env)
-        if FORBIDDEN.search(shared_symbols) or "sadx_native_game_frame_control" not in shared_symbols:
-            raise RuntimeError("invalid native corpus probe symbols")
-        shared_library_output, shared_libraries = inspect_libraries(shared, isolated, env, self_id)
-        corpus_result = json.loads(run([sys.executable, "-I", "-c", CORPUS_WORKER,
-                                       str(shared), str(isolated / FIXTURES[0])], isolated, env))
-        if corpus_result.get("passed") is not True or corpus_result.get("rows_compared") != metadata["row_count"]:
-            raise RuntimeError(f"frozen original numeric corpus mismatch: {json.dumps(corpus_result)}")
-        return {
-            "passed": True, "scope": "native-frame-control-pilot", "limits": LIMITS,
-            "source_sha256": files, "compiler": compiler_version,
-            "fixture_sha256": fixture_hashes,
-            "commands": commands, "compiler_dependencies": sorted(dependencies),
-            "toolchain_metadata_sha256": toolchain_dependencies,
-            "linked_libraries": libraries, "library_inspection": library_output.replace(str(isolated), "<isolated>"),
-            "symbol_table_sha256": hashlib.sha256(symbols.encode()).hexdigest(),
-            "reference_runtime_symbols_found": False,
-            "binary_sha256": hashlib.sha256(binary.read_bytes()).hexdigest(),
-            "journey": journey,
-            "frozen_original_corpus": {**corpus_result,
-                "corpus_sha256": metadata["corpus_sha256"],
-                "shared_binary_sha256": hashlib.sha256(shared.read_bytes()).hexdigest(),
-                "symbol_table_sha256": hashlib.sha256(shared_symbols.encode()).hexdigest(),
-                "linked_libraries": shared_libraries,
-                "library_inspection": shared_library_output.replace(str(isolated), "<isolated>")},
-            "isolation": {"copied_files": list(SOURCES), "copied_fixtures": list(FIXTURES), "inherited_environment": False,
-                          "original_binary_inputs": [], "core_archive_linked": False},
-        }
+            raise RuntimeError('reference-runtime symbol present in isolated executable')
+        library_output, libraries = inspect_libraries(binary, native, n['env'])
+        journey = json.loads(run([str(binary)], native, n['env']))
+        if journey.get('passed') is not True or journey.get('journeys') != [
+                'native_host_frame_control', 'plain_state_values', 'native_clock_failures']:
+            raise RuntimeError('native executable did not report all required journeys')
+        reference_test = 'reference-frame-control-test'
+        command = [compiler, *[obj for source,obj in c['objects'].items() if not source.startswith('tests/probes/')],
+                   '-o', reference_test]
+        c['commands'].append(command);run(command, corpus, c['env'])
+        reference_journey = json.loads(run([str(corpus/reference_test)], corpus, c['env']))
+        if reference_journey.get('passed') is not True or reference_journey.get('journeys') != [
+                'native_host_frame_control', 'explicit_unknowns', 'native_clock_failures']:
+            raise RuntimeError('portable adapter did not preserve the missing-fact journeys')
+        shared_name = 'native-frame-control-probe.dylib' if platform.system() == 'Darwin' else 'native-frame-control-probe.so'
+        self_id = f'@rpath/{shared_name}' if platform.system() == 'Darwin' else None
+        shared_flags = ['-dynamiclib', '-Wl,-install_name,'+self_id] if self_id else ['-shared']
+        command = [compiler, *shared_flags,
+                   *[obj for source,obj in c['objects'].items() if not source.startswith('tests/unit/')],
+                   '-o', shared_name]
+        c['commands'].append(command);run(command, corpus, c['env'])
+        shared = corpus/shared_name
+        shared_symbols = run(['/usr/bin/nm','-C',str(shared)], corpus, c['env'])
+        if FORBIDDEN.search(shared_symbols) or 'sadx_native_game_frame_control' not in shared_symbols:
+            raise RuntimeError('invalid portable corpus probe symbols')
+        shared_output, shared_libraries = inspect_libraries(shared, corpus, c['env'], self_id)
+        corpus_result = json.loads(run([sys.executable,'-I','-c',CORPUS_WORKER,str(shared),str(corpus/FIXTURES[0])],
+                                       corpus,c['env']))
+        if corpus_result.get('passed') is not True or corpus_result.get('rows_compared') != metadata['row_count']:
+            raise RuntimeError(f'frozen original numeric corpus mismatch: {json.dumps(corpus_result)}')
+        return dict(passed=True, scope='native-frame-control-pilot', limits=LIMITS,
+            source_sha256=n['files'], compiler=run([compiler,'--version'],native,n['env']).splitlines()[0],
+            fixture_sha256=fixture_hashes, commands=n['commands'], compiler_dependencies=n['dependencies'],
+            toolchain_metadata_sha256=n['toolchain'], linked_libraries=libraries,
+            library_inspection=library_output.replace(str(base),'<isolated>'),
+            symbol_table_sha256=hashlib.sha256(symbols.encode()).hexdigest(),
+            reference_runtime_symbols_found=False, binary_sha256=hashlib.sha256(binary.read_bytes()).hexdigest(),
+            journey=journey, portable_adapter_journey=reference_journey,
+            frozen_original_corpus={**corpus_result,'corpus_sha256':metadata['corpus_sha256'],
+                'shared_binary_sha256':hashlib.sha256(shared.read_bytes()).hexdigest(),
+                'source_sha256':c['files'],'compiler_dependencies':c['dependencies'],'commands':c['commands'],
+                'symbol_table_sha256':hashlib.sha256(shared_symbols.encode()).hexdigest(),
+                'linked_libraries':shared_libraries,'library_inspection':shared_output.replace(str(base),'<isolated>')},
+            isolation={'copied_files':list(NATIVE_SOURCES),'copied_fixtures':[],
+                       'portable_adapter_files':list(CORPUS_SOURCES),'portable_adapter_fixtures':list(FIXTURES),
+                       'separate_build_roots':True,'inherited_environment':False,
+                       'original_binary_inputs':[],'core_archive_linked':False})
 
 
 def main() -> int:

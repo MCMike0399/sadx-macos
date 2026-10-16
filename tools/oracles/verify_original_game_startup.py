@@ -63,7 +63,7 @@ def main():
         key=f"failure{eout[0]}:owners{eout[3]}";outcomes[key]=outcomes.get(key,0)+1
         diff=[i for i in range(len(pages)) if opages[i]!=epages[i]]
         if diff or list(out)!=eout:bad.append(dict(case=n,fail=fail,byte_diffs=[hex(PAGES[i//4096]+i%4096) for i in diff[:12]],trace_fields=[i for i,(x,y) in enumerate(zip(out,eout)) if x!=y][:10]))
-    names=['src/game/game_startup.hpp','src/game/game_startup.cpp','src/engine/game_controller.cpp','tests/probes/native_game_startup_probe.cpp','tools/oracles/verify_original_game_startup.py']
+    names=['src/game/game_startup.hpp','src/guest/game_startup.cpp','src/engine/game_controller.cpp','tests/probes/native_game_startup_probe.cpp','tools/oracles/verify_original_game_startup.py']
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={k:sha((pathlib.Path(__file__).resolve().parents[2]/k).read_bytes()) for k in names},
         original_ranges_sha256={h:sha(image.read(int(h,16),n)) for h,n in(('40c030',0x57),('40f350',0x4a),('424c20',0x56),('40a8a0',0x50),('789930',0x27),('420810',0xa))},
         cases=len(fixtures()),source_outcomes=outcomes,mismatch_count=len(bad),mismatches=bad[:20],pages_order_boundaries_match=not bad,limits=__doc__)

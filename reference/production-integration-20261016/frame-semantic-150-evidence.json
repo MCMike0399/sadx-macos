@@ -1,0 +1,53 @@
+{
+  "step": "GOAL 6.6c frame-control fixture separation",
+  "source_sha256": {
+    "src/engine/game_frame_control.hpp": "676b9b2915b4e826737130231825fbb333b59a15346c5cb09444d37113d074f3",
+    "src/engine/game_frame_control_internal.hpp": "4fa87f0fac7eba31863204a9dd6247541111e8810cfd347a859d4803400f7f74",
+    "src/engine/game_frame_control.cpp": "930a94809ee8f84acc82b3da960766a14d73905455f6ff831b4541b1d90b1746",
+    "src/engine/game_frame_control_native.cpp": "551c58594cf51f4686aa65b35f4a686fd58dc36b661110e285a1774c8dcd347a",
+    "src/engine/frame_control_fwd.hpp": "02a7f1c6bf39ab836e6a99fbd7179464a69b496982a3e5936d6abf5a029b4797",
+    "src/guest/frame_control_reference.hpp": "51be52abf4d5d3d16ac63043af56f1ac46630cc7a4e16117aee1862b73d2f20b",
+    "src/guest/frame_control_reference.cpp": "107e8aa6984959d7652f1660e2a9d208a6867c73f393504279d1853a1170f618"
+  },
+  "source_image_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "file_backed_defaults": [
+    {
+      "symbol": "FrameIntervalMultiplier",
+      "address": "0x389d7dc",
+      "expected": 1,
+      "actual": 1
+    },
+    {
+      "symbol": "framerate_setting",
+      "address": "0x89295c",
+      "expected": 3,
+      "actual": 3
+    }
+  ],
+  "zero_filled_fields": "ModeState and remaining RendererState values; no guessed frame multiplier of one",
+  "dossiers": [
+    "ev_97400dda4c60327e842d4b6db21dbf308febfc70194fe71c980e93e5d844c3ef",
+    "ev_523a8151dcf25e3d79912d17f89cc0af9ed0863ecceabe5581db4bca9b98280c",
+    "ev_f91d21fa073d978abefe89b33c23e42cf999f4b45f684ffed55a300720936ab7",
+    "ev_ea658884c66b7a471a2511cca51ef4fab6973572b9eb4879a3738e7c238753ba"
+  ],
+  "frozen_corpus_sha256": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",
+  "holdout_cases": 2048,
+  "holdout_mismatches": 0,
+  "core_mutants": {
+    "caught": 3,
+    "compared_cases": 2672,
+    "mismatch_counts": [
+      120,
+      472,
+      182
+    ]
+  },
+  "host_mutants_caught": 3,
+  "independent_review": "frame_semantic_review: no source correctness blockers; verification pending",
+  "limits": [
+    "Native frame-control slice and portable optional-fact adapter only, no full native app or physical timing proof.",
+    "Eight legacy CPP relocations are byte-identical after single include; readability reductions mostly reflect tier relocation.",
+    "Existing flag-only partial verdicts retained; numeric corpus, tolerances, oracle comparisons and historical mutants unchanged."
+  ]
+}

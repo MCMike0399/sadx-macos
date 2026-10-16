@@ -18,7 +18,7 @@ FILES = ('Makefile', 'tests/unit/manifest.tsv', 'reference/frame-control-corpus.
          'reference/judge-hook-settings.proposed.json',
          'tools/analysis/fp_control_census.cpp', 'tools/analysis/run_fp_census.py',
          'reference/fp-control-census.json', 'tools/analysis/verify_game_mode_holdout.py',
-         'tools/analysis/verify_ground_holdout.py')
+         'tools/analysis/verify_ground_holdout.py', 'tools/analysis/verify_frame_control_holdout.py')
 GENERATED_SUFFIXES = ('.pyc', '.pyo')
 
 

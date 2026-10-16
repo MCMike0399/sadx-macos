@@ -1,12 +1,12 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
  "speedrun_dll_sha256": "f3fc68a3058fb726142547018da860b170f137248e54b82712b52527e7b74802",
- "native_library_sha256": "5d8d4fba95a37dcd0137feabb8e9cf06057971735c8932a0719c94a0d4713f22",
+ "native_library_sha256": "26d0da4409f609a6ba8b1568ec7ece2090be55b25665be29485f4dc80d3af308",
  "source_files": {
-  "src/game/game_loop.hpp": "c521e19602ed5cf98081347039fe9aa9823dde9e02522a92e8e81d7d15c82928",
-  "src/game/game_loop.cpp": "9574b22cdebff480509afaacde25d8e70b97dae92512c321485b34ef4711180c",
-  "tests/probes/native_frame_completion_probe.cpp": "8dee21982332d3180300e643fba553783a772b636c678a91a31676d7e186fd11",
-  "tools/oracles/verify_original_frame_completion.py": "aa180320c77b7889ec62c89b95cd90944819c92bf6642dd46a0238fba34f2e48"
+  "src/game/game_loop.hpp": "2ec062e0c579953d48618d33a4c04eca8f43a117a061b7952ad8b71475120822",
+  "src/guest/game_loop.cpp": "6589264a723fdd763c296e424636bacfabdf6feec96dd5942844b9b8e3c5f8d1",
+  "tests/probes/native_frame_completion_probe.cpp": "e27a9fdd4c8e2cbfd0d42a3ecfbf55a78d2adbf9308d0c92a8d7914674a756cf",
+  "tools/oracles/verify_original_frame_completion.py": "d1f18a46ebeea4c982d81bb883e5f0f43319a5220c888f6024e74785e68df9aa"
  },
  "original_range_sha256": "84e069dfe1a4e50aeb727f86f8ad6299ce11ed9bd2e0ca1fa805d1bf9a4709de",
  "hook_bytes": {
@@ -33,8 +33,8 @@
  "stores_order_boundaries_match": true,
  "limits": "411d00 frame completion with the actual Speedrun 2.0 hook, against original instructions.\n\nUpdated profile: the pinned sadx-speedrun-mod.dll (SHA f3fc68a3...) is mapped at\nits preferred base 0x10000000 and 411d1c is patched with `jmp 0x100011d0`, the\nhook observed live in the Windows reference snapshot. The DLL stub calls +0x11c0\n(EAX=max(0,[3b11188]-1)) and jumps through its file-initialized pointer to\n411da3. Original profile: 411d1c lag recovery is unported, so the source run\nstops there and native must report that required boundary.\nThe 781010..781060 thunks (renderer/limiter owners) are explicit fixtures; the\n781030 fixture may rewrite 3b28114 to exercise the reread at 411e01.\n",
  "tracked_summary": {
-  "full_sha256": "88edb956632cf1d48e9c9dc5fcff4981fb2e867062b1e04bcc54179c9d0aa770",
-  "full_bytes": 2254,
+  "full_sha256": "f559d7da2ddd6fee043be97a7d65f97f1afa2f7607a30bcaade21e2930394a5f",
+  "full_bytes": 2255,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

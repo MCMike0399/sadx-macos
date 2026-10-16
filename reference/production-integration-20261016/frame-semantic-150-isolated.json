@@ -1,0 +1,334 @@
+{
+  "binary_sha256": "48026935f09cca23d70cfcd0639250f5a733a837f67530dfee36a54340f30c54",
+  "commands": [
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-0.d",
+      "-c",
+      "src/engine/game_frame_control.cpp",
+      "-o",
+      "unit-0.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-1.d",
+      "-c",
+      "src/engine/game_frame_control_native.cpp",
+      "-o",
+      "unit-1.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-2.d",
+      "-c",
+      "src/engine/speedrun.cpp",
+      "-o",
+      "unit-2.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-3.d",
+      "-c",
+      "tests/unit/native_frame_control.cpp",
+      "-o",
+      "unit-3.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "unit-0.o",
+      "unit-1.o",
+      "unit-2.o",
+      "unit-3.o",
+      "-o",
+      "native-frame-control-test"
+    ]
+  ],
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)",
+  "compiler_dependencies": [
+    "src/engine/game_frame_control.cpp",
+    "src/engine/game_frame_control.hpp",
+    "src/engine/game_frame_control_internal.hpp",
+    "src/engine/game_frame_control_native.cpp",
+    "src/engine/speedrun.cpp",
+    "src/engine/speedrun.hpp",
+    "tests/unit/native_frame_control.cpp"
+  ],
+  "fixture_sha256": {
+    "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
+    "reference/frame-control-corpus.tsv": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae"
+  },
+  "frozen_original_corpus": {
+    "commands": [
+      [
+        "/usr/bin/c++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-fPIC",
+        "-Isrc",
+        "-MMD",
+        "-MF",
+        "unit-0.d",
+        "-c",
+        "src/engine/game_frame_control.cpp",
+        "-o",
+        "unit-0.o"
+      ],
+      [
+        "/usr/bin/c++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-fPIC",
+        "-Isrc",
+        "-MMD",
+        "-MF",
+        "unit-1.d",
+        "-c",
+        "src/guest/frame_control_reference.cpp",
+        "-o",
+        "unit-1.o"
+      ],
+      [
+        "/usr/bin/c++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-fPIC",
+        "-Isrc",
+        "-MMD",
+        "-MF",
+        "unit-2.d",
+        "-c",
+        "src/engine/speedrun.cpp",
+        "-o",
+        "unit-2.o"
+      ],
+      [
+        "/usr/bin/c++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-fPIC",
+        "-Isrc",
+        "-MMD",
+        "-MF",
+        "unit-3.d",
+        "-c",
+        "tests/unit/reference_frame_control.cpp",
+        "-o",
+        "unit-3.o"
+      ],
+      [
+        "/usr/bin/c++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-fPIC",
+        "-Isrc",
+        "-MMD",
+        "-MF",
+        "unit-4.d",
+        "-c",
+        "tests/probes/native_game_frame_control_probe.cpp",
+        "-o",
+        "unit-4.o"
+      ],
+      [
+        "/usr/bin/c++",
+        "unit-0.o",
+        "unit-1.o",
+        "unit-2.o",
+        "unit-3.o",
+        "-o",
+        "reference-frame-control-test"
+      ],
+      [
+        "/usr/bin/c++",
+        "-dynamiclib",
+        "-Wl,-install_name,@rpath/native-frame-control-probe.dylib",
+        "unit-0.o",
+        "unit-1.o",
+        "unit-2.o",
+        "unit-4.o",
+        "-o",
+        "native-frame-control-probe.dylib"
+      ]
+    ],
+    "compiler_dependencies": [
+      "src/engine/frame_control_fwd.hpp",
+      "src/engine/game_frame_control.cpp",
+      "src/engine/game_frame_control.hpp",
+      "src/engine/game_frame_control_internal.hpp",
+      "src/engine/speedrun.cpp",
+      "src/engine/speedrun.hpp",
+      "src/guest/frame_control_reference.cpp",
+      "src/guest/frame_control_reference.hpp",
+      "tests/probes/native_game_frame_control_probe.cpp",
+      "tests/unit/reference_frame_control.cpp"
+    ],
+    "corpus_sha256": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",
+    "examples": [],
+    "library_inspection": "<isolated>/corpus/native-frame-control-probe.dylib:\n\t@rpath/native-frame-control-probe.dylib (compatibility version 0.0.0, current version 0.0.0)\n\t/usr/lib/libc++.1.dylib (compatibility version 1.0.0, current version 2200.27.0)\n\t/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1359.0.0)\n",
+    "linked_libraries": [
+      "/usr/lib/libc++.1.dylib",
+      "/usr/lib/libSystem.B.dylib"
+    ],
+    "mismatches": 0,
+    "passed": true,
+    "rows_compared": 2672,
+    "shared_binary_sha256": "da9cf53906071b9e707554fcc6f81fafcdc5d492b63b5c23728305c9208f2aff",
+    "source_sha256": {
+      "src/engine/frame_control_fwd.hpp": "02a7f1c6bf39ab836e6a99fbd7179464a69b496982a3e5936d6abf5a029b4797",
+      "src/engine/game_frame_control.cpp": "930a94809ee8f84acc82b3da960766a14d73905455f6ff831b4541b1d90b1746",
+      "src/engine/game_frame_control.hpp": "676b9b2915b4e826737130231825fbb333b59a15346c5cb09444d37113d074f3",
+      "src/engine/game_frame_control_internal.hpp": "4fa87f0fac7eba31863204a9dd6247541111e8810cfd347a859d4803400f7f74",
+      "src/engine/speedrun.cpp": "aadb023ca23dbf2bb2abcb772b46ebc5c90b3b247e78f816baf5c870cc207fe3",
+      "src/engine/speedrun.hpp": "464998cab62c811d833dd10dd6fc3ac1ad72f63e3f26636d94468932dd6dbac8",
+      "src/guest/frame_control_reference.cpp": "107e8aa6984959d7652f1660e2a9d208a6867c73f393504279d1853a1170f618",
+      "src/guest/frame_control_reference.hpp": "51be52abf4d5d3d16ac63043af56f1ac46630cc7a4e16117aee1862b73d2f20b",
+      "tests/probes/native_game_frame_control_probe.cpp": "be649c165a97af1b3a01e5831fa8d48ef0887a5cfabaf4e7972211c9b189019d",
+      "tests/unit/reference_frame_control.cpp": "23fba1c89960992f24eb78f479de1d015c14e79a650c9f171b0083bf9b8fc0b2"
+    },
+    "symbol_table_sha256": "811e2935985da687655a8444a2739c8cd058c52c9cecf7d76a3aa5750641cf0f"
+  },
+  "isolation": {
+    "copied_files": [
+      "src/engine/game_frame_control.hpp",
+      "src/engine/game_frame_control_internal.hpp",
+      "src/engine/game_frame_control.cpp",
+      "src/engine/speedrun.hpp",
+      "src/engine/speedrun.cpp",
+      "src/engine/game_frame_control_native.cpp",
+      "tests/unit/native_frame_control.cpp"
+    ],
+    "copied_fixtures": [],
+    "core_archive_linked": false,
+    "inherited_environment": false,
+    "original_binary_inputs": [],
+    "portable_adapter_files": [
+      "src/engine/game_frame_control.hpp",
+      "src/engine/game_frame_control_internal.hpp",
+      "src/engine/game_frame_control.cpp",
+      "src/engine/speedrun.hpp",
+      "src/engine/speedrun.cpp",
+      "src/engine/frame_control_fwd.hpp",
+      "src/guest/frame_control_reference.hpp",
+      "src/guest/frame_control_reference.cpp",
+      "tests/unit/reference_frame_control.cpp",
+      "tests/probes/native_game_frame_control_probe.cpp"
+    ],
+    "portable_adapter_fixtures": [
+      "reference/frame-control-corpus.tsv",
+      "reference/frame-control-corpus.json"
+    ],
+    "separate_build_roots": true
+  },
+  "journey": {
+    "journeys": [
+      "native_host_frame_control",
+      "plain_state_values",
+      "native_clock_failures"
+    ],
+    "passed": true
+  },
+  "library_inspection": "<isolated>/native/native-frame-control-test:\n\t/usr/lib/libc++.1.dylib (compatibility version 1.0.0, current version 2200.27.0)\n\t/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1359.0.0)\n",
+  "limits": [
+    "Frame-control core and scripted native host journey only; no full-game or production-app independence claim.",
+    "Inputs and counter samples are host-owned scripted facts; physical devices and real-time scheduling are unverified.",
+    "Frozen original numeric cases cover the four frame-control entry points; live original-binary differential verification remains separate. The host-driven limiter journey is scripted, not part of this original numeric corpus.",
+    "An isolated source closure, compiler dependency lists, symbols and linked-library inspection are checked; this is not an operating-system access sandbox."
+  ],
+  "linked_libraries": [
+    "/usr/lib/libc++.1.dylib",
+    "/usr/lib/libSystem.B.dylib"
+  ],
+  "passed": true,
+  "portable_adapter_journey": {
+    "journeys": [
+      "native_host_frame_control",
+      "explicit_unknowns",
+      "native_clock_failures"
+    ],
+    "passed": true
+  },
+  "reference_runtime_symbols_found": false,
+  "scope": "native-frame-control-pilot",
+  "source_sha256": {
+    "src/engine/game_frame_control.cpp": "930a94809ee8f84acc82b3da960766a14d73905455f6ff831b4541b1d90b1746",
+    "src/engine/game_frame_control.hpp": "676b9b2915b4e826737130231825fbb333b59a15346c5cb09444d37113d074f3",
+    "src/engine/game_frame_control_internal.hpp": "4fa87f0fac7eba31863204a9dd6247541111e8810cfd347a859d4803400f7f74",
+    "src/engine/game_frame_control_native.cpp": "551c58594cf51f4686aa65b35f4a686fd58dc36b661110e285a1774c8dcd347a",
+    "src/engine/speedrun.cpp": "aadb023ca23dbf2bb2abcb772b46ebc5c90b3b247e78f816baf5c870cc207fe3",
+    "src/engine/speedrun.hpp": "464998cab62c811d833dd10dd6fc3ac1ad72f63e3f26636d94468932dd6dbac8",
+    "tests/unit/native_frame_control.cpp": "057f4f018318cb471f51bba9fa85b1938dd37f1b11819c1475a938277923875d"
+  },
+  "symbol_table_sha256": "91e94614fe10d3ac041ab46c15379dd19541c2edb0c880ba2de739fad33a7956",
+  "toolchain_metadata_sha256": {
+    "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb"
+  }
+}

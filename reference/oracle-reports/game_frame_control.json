@@ -1,12 +1,16 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "0123e6d0ce51bf26947c1a556717ba33cb059df4bf3a4aca1a9ca778474e5420",
+ "native_library_sha256": "ed3775ad2bce8b73da4d0af642e6e9ea97d8ac6627be21e2eeee97c8078e9dd1",
  "source_files": {
-  "src/engine/game_frame_control.hpp": "1817f43a66e73c98aa0936f08869635bd369d1f147be0d5cbc064380848edf4a",
-  "src/engine/game_frame_control.cpp": "06238236f7d4a31dc66aac5418218a480a5e5bc78c009ddf9c0bbb5f8521758e",
-  "src/engine/game_logic_support.hpp": "c4c24cae0c77c57dfd0e621f12f2f98b79a5faf5fa659e0e4e3323decd970b8d",
-  "tests/probes/native_game_frame_control_probe.cpp": "4bee4d822beaa3978d8108edd6c60824b6e89b9688863d09a0fe069526295308",
-  "tools/oracles/verify_original_game_frame_control.py": "aadd134c737e74d26e1d65c35623b13fa6a612092472d2d8ed86dba57b76c2b5"
+  "src/engine/game_frame_control.hpp": "676b9b2915b4e826737130231825fbb333b59a15346c5cb09444d37113d074f3",
+  "src/engine/game_frame_control.cpp": "930a94809ee8f84acc82b3da960766a14d73905455f6ff831b4541b1d90b1746",
+  "src/engine/game_frame_control_internal.hpp": "4fa87f0fac7eba31863204a9dd6247541111e8810cfd347a859d4803400f7f74",
+  "src/engine/frame_control_fwd.hpp": "02a7f1c6bf39ab836e6a99fbd7179464a69b496982a3e5936d6abf5a029b4797",
+  "src/guest/frame_control_reference.hpp": "51be52abf4d5d3d16ac63043af56f1ac46630cc7a4e16117aee1862b73d2f20b",
+  "src/guest/frame_control_reference.cpp": "107e8aa6984959d7652f1660e2a9d208a6867c73f393504279d1853a1170f618",
+  "src/engine/game_logic_support.hpp": "92e1c2f02a8636859e778bbb9e0053dd74a3951a505ae293b721e7dc8659f958",
+  "tests/probes/native_game_frame_control_probe.cpp": "be649c165a97af1b3a01e5831fa8d48ef0887a5cfabaf4e7972211c9b189019d",
+  "tools/oracles/verify_original_game_frame_control.py": "3d9b54203c8cb1be6120eeabe4f41374b5878e1f31cce54c0d8799c984cc4777"
  },
  "original_ranges_sha256": {
   "77ff50-77ff5a": "5143b0f8d8a5a6a9283d5915e53e6e4d6f1a8e54f765f1170ccccf3d156eef8a",
@@ -23,8 +27,8 @@
  "stores_callback_identity_and_boundaries_match": true,
  "limits": "Actual411e30/7899a0/40f010/411e20 control instructions vs native owners.\n\nCounter words and input bytes are explicit fixtures; no live host clock or\nphysical keys are inferred. Missing facts stop before their actual source read\nas a declared availability fixture. The unused EAX return of the input callback\nis excluded: its actual780074 caller immediately overwrites that register.\n",
  "tracked_summary": {
-  "full_sha256": "bbcd990e2db33c9ee245aaa983d45a1950ec0de661190afc8ababa69aea00777",
-  "full_bytes": 2028,
+  "full_sha256": "b1a3acf4f0669014358d7f686e156c6a229bfbb5697a5d28ce0a4189ccfc9dca",
+  "full_bytes": 2480,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

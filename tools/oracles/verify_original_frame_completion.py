@@ -74,7 +74,7 @@ def main():
         key=f"policy{c[0]}:failure{expected[0]}:owners{expected[9]}";outcomes[key]=outcomes.get(key,0)+1
         if list(out)!=expected:bad.append(dict(case=number,input=c[:8],fields=[i for i,(x,y) in enumerate(zip(out,expected)) if x!=y],source=expected,native=list(out)))
     blob=b''.join(struct.pack('<16I',*c) for c in cases);a.output.with_suffix('.cases.bin').write_bytes(blob)
-    names=['src/game/game_loop.hpp','src/game/game_loop.cpp','tests/probes/native_frame_completion_probe.cpp','tools/oracles/verify_original_frame_completion.py']
+    names=['src/game/game_loop.hpp','src/guest/game_loop.cpp','tests/probes/native_frame_completion_probe.cpp','tools/oracles/verify_original_frame_completion.py']
     report=dict(source_sha256=image.sha256,speedrun_dll_sha256=dll.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={n:sha((pathlib.Path(__file__).resolve().parents[2]/n).read_bytes()) for n in names},
         original_range_sha256=sha(image.read(0x411d00,0x118)),hook_bytes={'100011c0':dll.read(0x100011c0,0x20).hex(),'10010018':dll.read(0x10010018,4).hex()},cases=len(cases),case_sha256=sha(blob),source_outcomes=outcomes,
         mismatch_count=len(bad),mismatches=bad[:30],stores_order_boundaries_match=not bad,limits=__doc__)

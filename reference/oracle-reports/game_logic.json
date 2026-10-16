@@ -1,12 +1,12 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "0b90d77107d41b62563fd19d9df08c4f2b840cdf77072497f5eceda2080ca986",
+ "native_library_sha256": "2c02611037284beaf5bc3cffcac31fed8ed9b506a15f27e085573a3a174a38a9",
  "native_sources": {
-  "/Users/burbujamc/Developer/sadx-macos/src/engine/game_logic_support.hpp": "c4c24cae0c77c57dfd0e621f12f2f98b79a5faf5fa659e0e4e3323decd970b8d",
+  "/Users/burbujamc/Developer/sadx-macos/src/engine/game_logic_support.hpp": "92e1c2f02a8636859e778bbb9e0053dd74a3951a505ae293b721e7dc8659f958",
   "/Users/burbujamc/Developer/sadx-macos/src/engine/game_logic.hpp": "d2db6a511b3faff980d8ddb2946632a4573a952e4c2697499793763d1af905b6",
-  "/Users/burbujamc/Developer/sadx-macos/src/engine/game_logic.cpp": "820e2b6d914c1dba3a861fde79485891800ac15aa337a49406cdab44df67dec6",
-  "/Users/burbujamc/Developer/sadx-macos/tests/probes/native_game_logic_probe.cpp": "1a959becb793b80268f0c99cd6e2801274a79ec2462fefff55068de128b4267b",
-  "/Users/burbujamc/Developer/sadx-macos/tools/oracles/verify_original_game_logic.py": "4e68c278741c6b8c63cb480976470214ed252fa63f56c4ea88284598afa3464e"
+  "/Users/burbujamc/Developer/sadx-macos/src/guest/game_logic.cpp": "bd8cd8d3005ce00f9e64009f734539582e0b42485bc131ec33584f991fe64c29",
+  "/Users/burbujamc/Developer/sadx-macos/tests/probes/native_game_logic_probe.cpp": "b653470127127cd112d33350e2d04973aae3e2d603901c9ddb1172dcd3d37318",
+  "/Users/burbujamc/Developer/sadx-macos/tools/oracles/verify_original_game_logic.py": "d0e98854022f8349808664c8993adadfe976da15f3b3140ee1f17f7e9485acae"
  },
  "source_range": {
   "address": "0x413dd0",
@@ -19,8 +19,8 @@
  "orchestration_stores_press_union_calls_match": true,
  "limits": "413dd0 instructions versus native orchestration, with explicit owner fixtures.\n\nCalled input/scene/timing operations are fixture boundaries in both runs. This\ndoes not establish a complete scene, physical input, keyboard-edge owner or\nnative game loop. Every call, argument, partial store and press union is kept.\n",
  "tracked_summary": {
-  "full_sha256": "5be3ed676a396f95b812c817c7c0cd749190cfff8be6ea2c6d48f46eaf803a8f",
-  "full_bytes": 1610,
+  "full_sha256": "62424a3af78601126d780f1ca9fc5cefb6742914742a3bc0d12d7681d7fcce7b",
+  "full_bytes": 1609,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

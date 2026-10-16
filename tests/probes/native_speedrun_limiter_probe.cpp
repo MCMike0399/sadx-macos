@@ -1,3 +1,4 @@
+#include "guest/frame_control_reference.hpp"
 #include "engine/game_frame_control.hpp"
 #include <algorithm>
 // Native Speedrun 2.0 limiter matching tools/verify_original_speedrun_limiter.py.

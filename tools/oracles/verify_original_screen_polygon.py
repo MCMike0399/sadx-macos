@@ -103,7 +103,7 @@ def main():
         cases+=1;key=f"completed{e[0]}:calls{e[3]}:drawn{int(bool(st['draw']))}";outcomes[key]=outcomes.get(key,0)+1
         d=[i for i in range(200) if got[i]!=e[i]]
         if d:bad.append(dict(case=n,fields=d[:12],source=[hex(e[i]) for i in d[:12]],native=[hex(got[i]) for i in d[:12]]))
-    names=['src/engine/ninja_screen.hpp','src/engine/ninja_screen.cpp','src/math/d3dx_math.hpp','src/math/d3dx_math.cpp','src/cpu/sse_math.cpp','tests/probes/native_screen_polygon_probe.cpp','tools/oracles/verify_original_screen_polygon.py']
+    names=['src/engine/ninja_screen.hpp','src/guest/ninja_screen.cpp','src/math/d3dx_math.hpp','src/math/d3dx_math.cpp','src/cpu/sse_math.cpp','tests/probes/native_screen_polygon_probe.cpp','tools/oracles/verify_original_screen_polygon.py']
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={x:sha((pathlib.Path(__file__).resolve().parents[2]/x).read_bytes()) for x in names},
         original_ranges_sha256={'0x77dfc0-0x77e04e':sha(image.read(0x77dfc0,0x8e)),'0x78ea10-0x78eaaf':sha(image.read(0x78ea10,0x9f)),'0x78dbe0-0x78dc49':sha(image.read(0x78dbe0,0x69)),
             '0x772615-0x7727a2':sha(image.read(0x772615,0x18d)),'0x774150-0x774243':sha(image.read(0x774150,0xf3)),'0x774310-0x774456':sha(image.read(0x774310,0x146)),

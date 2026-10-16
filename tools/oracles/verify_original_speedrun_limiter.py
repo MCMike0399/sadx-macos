@@ -80,7 +80,7 @@ def main():
         key=f"failure{expected[0]}:reads{min(expected[2],9)}";outcomes[key]=outcomes.get(key,0)+1
         if got!=expected:bad.append(dict(input=c[:12],source=expected,native=got))
     blob=b''.join(struct.pack('<16I',*c) for c in used);a.output.with_suffix('.cases.bin').write_bytes(blob)
-    names=['src/engine/speedrun.hpp','src/engine/speedrun.cpp','src/engine/game_frame_control.hpp','src/engine/game_frame_control.cpp','tests/probes/native_speedrun_limiter_probe.cpp','tools/oracles/verify_original_speedrun_limiter.py']
+    names=['src/engine/speedrun.hpp','src/engine/speedrun.cpp','src/engine/game_frame_control.hpp','src/engine/game_frame_control.cpp','src/engine/game_frame_control_internal.hpp','src/engine/frame_control_fwd.hpp','src/guest/frame_control_reference.hpp','src/guest/frame_control_reference.cpp','tests/probes/native_speedrun_limiter_probe.cpp','tools/oracles/verify_original_speedrun_limiter.py']
     report=dict(speedrun_dll_sha256=dll.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={n:sha((pathlib.Path(__file__).resolve().parents[2]/n).read_bytes()) for n in names},limiter_bytes_sha256=sha(dll.read(0x100010f0,0xd0)),
         cases=len(used),capped_fixtures_excluded=skipped,case_sha256=sha(blob),source_outcomes=outcomes,mismatch_count=len(bad),mismatches=bad[:30],reads_stores_match=not bad,limits=__doc__)
     a.output.write_text(json.dumps(report,indent=1)+'\n');print(json.dumps(dict(cases=len(used),excluded=skipped,mismatches=len(bad),outcomes=outcomes)));return int(bool(bad))

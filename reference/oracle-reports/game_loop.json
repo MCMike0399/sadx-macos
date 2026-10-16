@@ -1,11 +1,11 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "4de3d6d483a1da357d7f50478d681b6fd81610aadcc2d8bbe70d0e4f6208b34b",
+ "native_library_sha256": "2a09cf2d3eefd8c4a1981c73add37b2b067754d75c4c2340836c713495dd01d0",
  "source_files": {
-  "src/game/game_loop.hpp": "c521e19602ed5cf98081347039fe9aa9823dde9e02522a92e8e81d7d15c82928",
-  "src/game/game_loop.cpp": "9574b22cdebff480509afaacde25d8e70b97dae92512c321485b34ef4711180c",
-  "tests/probes/native_game_loop_probe.cpp": "bb2481b78c7e30b3c932ddc3e5a8e1124a97445fc1807b1636a53fefffcdb4fc",
-  "tools/oracles/verify_original_game_loop.py": "fc8dc056f832e86f7ffe86a86465a008fac90db5b427751122ede9f1da3f3f1d"
+  "src/game/game_loop.hpp": "2ec062e0c579953d48618d33a4c04eca8f43a117a061b7952ad8b71475120822",
+  "src/guest/game_loop.cpp": "6589264a723fdd763c296e424636bacfabdf6feec96dd5942844b9b8e3c5f8d1",
+  "tests/probes/native_game_loop_probe.cpp": "2ecf50dc4f72e6660023bf7b413e5c8b532348db2f32f2fc896059507e99ca1d",
+  "tools/oracles/verify_original_game_loop.py": "50dbb4081cc1ce1adf15c5e1f20166447c6bc93a1a840793d7ea3275c15899e6"
  },
  "original_range_sha256": "40f3c25b40083ceb898d440ddd687b6765d91641cb402c4d17ae3ea9aeb67318",
  "cases": 688,
@@ -27,8 +27,8 @@
  "order_arguments_stores_boundaries_match": true,
  "limits": "GameLoop 40cad0 local orchestration against original instructions.\n\nEvery callee (40c030, 51f680, 401410, 77f090, 40f460, 781010/781060, 420830,\n407ab0, 77ed00, 40c090, 4250d0, 411b60, 403180, 4086f0, 40be40, 40e2c0, 4326f0,\n40d4d0, 40eab0, 42f990, 40d3c0, 420840, 411d00, 421fd0, 40ef30, 40ef20, 7853c0,\n6fbf10, 410630, 420f40, 420ef0 and the 77fc50 tail) is an explicit owner fixture:\nthe 77f090 fixture writes scripted per-frame globals standing in for the real\nproducers, 4250d0 may set the exit flag, 411b60 may replace the near fog range,\n40ef30/40ef20 return scripted values. From the 4th frame the fixture forces focus and\nan exit key so every case terminates. This compares the local call order, call\narguments, global loads/stores and failure boundaries only; it does not show that\nany owner subsystem, Windows message pump or frame pacing is implemented.\n",
  "tracked_summary": {
-  "full_sha256": "f948c5bde54f82829bad4efe0483e3ffecb77b8f0f2dd1721e7c8c53d105947e",
-  "full_bytes": 2228,
+  "full_sha256": "9e16b6aee7adf7bb9f3ec877d773b412849dcce3fc34aab207e781cebc246ab9",
+  "full_bytes": 2229,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

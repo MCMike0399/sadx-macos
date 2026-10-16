@@ -1,3 +1,4 @@
+#include "guest/frame_control_reference.hpp"
 #include "engine/ninja_frame_calls.hpp"
 #include <algorithm>
 #include <cstring>

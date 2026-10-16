@@ -1,0 +1,17 @@
+[
+  [
+    "wrong mode factor",
+    "configured_frame_interval(renderer, ModeInterval::Double) == 1",
+    "configured_frame_interval(renderer, ModeInterval::Double) != 1"
+  ],
+  [
+    "save phase reversed",
+    "save_phase(state) == 0",
+    "save_phase(state) != 0"
+  ],
+  [
+    "wrong input mask",
+    "kResetInputMask = 68",
+    "kResetInputMask = 4"
+  ]
+]

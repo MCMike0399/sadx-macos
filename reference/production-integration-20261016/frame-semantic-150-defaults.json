@@ -1,0 +1,110 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "fields": [
+    {
+      "symbol": "FrameMultiplier",
+      "address": "0x3b11188",
+      "bytes": 4,
+      "initial_value": 0,
+      "section": ".data",
+      "file_backed_end": "0x38f7000",
+      "virtual_end": "0x3d12e40",
+      "basis": "PE virtual tail is zero-filled"
+    },
+    {
+      "symbol": "loop_const",
+      "address": "0x3b11178",
+      "bytes": 4,
+      "initial_value": 0,
+      "section": ".data",
+      "file_backed_end": "0x38f7000",
+      "virtual_end": "0x3d12e40",
+      "basis": "PE virtual tail is zero-filled"
+    },
+    {
+      "symbol": "loop_count",
+      "address": "0x3b1117c",
+      "bytes": 4,
+      "initial_value": 0,
+      "section": ".data",
+      "file_backed_end": "0x38f7000",
+      "virtual_end": "0x3d12e40",
+      "basis": "PE virtual tail is zero-filled"
+    },
+    {
+      "symbol": "SoftResetByte",
+      "address": "0x3b0eaa0",
+      "bytes": 1,
+      "initial_value": 0,
+      "section": ".data",
+      "file_backed_end": "0x38f7000",
+      "virtual_end": "0x3d12e40",
+      "basis": "PE virtual tail is zero-filled"
+    },
+    {
+      "symbol": "SoftResetInputMask",
+      "address": "0x3b0e3b8",
+      "bytes": 1,
+      "initial_value": 0,
+      "section": ".data",
+      "file_backed_end": "0x38f7000",
+      "virtual_end": "0x3d12e40",
+      "basis": "PE virtual tail is zero-filled"
+    },
+    {
+      "symbol": "PerformanceFrequency",
+      "address": "0x3d08538",
+      "bytes": 8,
+      "initial_value": 0,
+      "section": ".data",
+      "file_backed_end": "0x38f7000",
+      "virtual_end": "0x3d12e40",
+      "basis": "PE virtual tail is zero-filled"
+    },
+    {
+      "symbol": "FrameFrequency",
+      "address": "0x3d084a8",
+      "bytes": 8,
+      "initial_value": 0,
+      "section": ".data",
+      "file_backed_end": "0x38f7000",
+      "virtual_end": "0x3d12e40",
+      "basis": "PE virtual tail is zero-filled"
+    },
+    {
+      "symbol": "PerformanceCounter",
+      "address": "0x3d08550",
+      "bytes": 8,
+      "initial_value": 0,
+      "section": ".data",
+      "file_backed_end": "0x38f7000",
+      "virtual_end": "0x3d12e40",
+      "basis": "PE virtual tail is zero-filled"
+    },
+    {
+      "symbol": "FrameInputCallback",
+      "address": "0x3d0fa34",
+      "bytes": 4,
+      "initial_value": 0,
+      "section": ".data",
+      "file_backed_end": "0x38f7000",
+      "virtual_end": "0x3d12e40",
+      "basis": "PE virtual tail is zero-filled"
+    },
+    {
+      "symbol": "FrameIntervalMultiplier",
+      "address": "0x389d7dc",
+      "bytes": 4,
+      "initial_value": 1,
+      "basis": "exact file-backed PE bytes"
+    },
+    {
+      "symbol": "framerate_setting",
+      "address": "0x89295c",
+      "bytes": 4,
+      "initial_value": 3,
+      "basis": "exact file-backed PE bytes"
+    }
+  ],
+  "limits": "Load-image defaults only; native callers own later runtime values."
+}
