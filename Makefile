@@ -12,6 +12,8 @@ MAC_FRAMEWORKS := -framework Foundation -framework AppKit -framework Metal -fram
 INCLUDES := -Isrc -Itests/fixtures
 GAME_DIR ?= game/Sonic Adventure DX
 GAME_EXE ?= $(GAME_DIR)/sonic.exe
+game_path_empty :=
+game_path_space := $(game_path_empty) $(game_path_empty)
 GAME_SYSTEM ?= $(GAME_DIR)/system
 INPUT_MOD_DLL ?= $(GAME_DIR)/mods/sadx-input-mod/sadx-input-mod.dll
 # The pinned "updated speedrun" profile install (reference/updated-pc-reference): the DLLs the oracles pin.
@@ -151,6 +153,9 @@ build/native-game-mode-probe.dylib: tests/probes/native_game_mode_probe.cpp buil
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) $< build/libsadx-guest.a build/libsadx-core.a -o $@
 build/native-game-mode-leaves-probe.dylib: tests/probes/native_game_mode_leaves_probe.cpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) $< build/libsadx-guest.a build/libsadx-core.a -o $@
+# This native code-table probe needs only maintained table source.
+build/native-engine-code-tables-probe.dylib: tests/probes/native_engine_code_tables_probe.cpp src/runtime/engine_code_tables.cpp src/runtime/engine_code_tables.hpp
+	$(CXX) $(CXXFLAGS) -dynamiclib -Isrc tests/probes/native_engine_code_tables_probe.cpp src/runtime/engine_code_tables.cpp -o $@
 build/native-%-probe.dylib: tests/probes/native_$$(subst -,_,$$*)_probe.cpp build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) $< build/libsadx-core.a -o $@
 probes: $(PROBE_TARGETS)
@@ -166,7 +171,11 @@ include build/oracles.mk
 OVERRIDE_CORPORA := build/oracles/screen_polygon.cases.bin build/oracles/screen_init.cases.bin build/oracles/collision_shapes.cases.bin build/oracles/controller_init.cases.bin build/oracles/game_startup.cases.bin build/oracles/ninja_queue_lifecycle.cases.bin build/oracles/task_lifecycle.cases.bin build/oracles/task_work.cases.bin build/oracles/ninja_memory.cases.bin build/oracles/fog.cases.bin build/oracles/ninja_render.cases.bin build/oracles/game_frame_control.cases.bin build/oracles/projection_range.cases.bin build/oracles/fov.cases.bin build/oracles/ninja_view.cases.bin build/oracles/d3dx_perspective.cases.bin build/oracles/d3dx_matrix_inverse.cases.bin build/oracles/d3dx_project.cases.bin build/oracles/ninja_queue_color.cases.bin build/oracles/ninja_projected_depth.cases.bin
 build/oracles/%.cases.bin: tools/oracles/verify_original_%.py
 	$(MAKE) oracle-$(subst _,-,$*)
-run-unit-tests: assets $(UNIT_TARGETS) $(UNIT_MM_TARGETS) $(OVERRIDE_CORPORA)
+# A poisoned reference image proves explicit native code tables do not reread PE bytes.
+build/engine-code-tables-poisoned.exe: $(subst $(game_path_space),\$(game_path_space),$(GAME_EXE)) tools/oracles/verify_original_engine_code_tables.py build/native-engine-code-tables-probe.dylib
+	$(REFERENCE_PYTHON) tools/oracles/verify_original_engine_code_tables.py "$(GAME_EXE)" build/native-engine-code-tables-probe.dylib --output build/oracles/engine_code_tables.json --poison-output $@
+
+run-unit-tests: assets $(UNIT_TARGETS) $(UNIT_MM_TARGETS) $(OVERRIDE_CORPORA) build/engine-code-tables-poisoned.exe
 unit-tests: run-unit-tests
 test: unit-tests
 	$(PY) -m unittest discover -s tests/python -p 'test_*.py'
@@ -184,7 +193,10 @@ check-symbols: symbols
 .PHONY: native-frame-control
 native-frame-control:
 	python3 tools/gate/check_native_frame_control.py
-check: check-symbols native-frame-control
+.PHONY: native-engine-code-tables
+native-engine-code-tables:
+	python3 tools/gate/check_engine_code_tables.py
+check: check-symbols native-frame-control native-engine-code-tables
 	python3 tools/gate/check_layers.py
 	python3 tools/gate/check_global_owners.py
 	python3 tools/gate/check_provenance.py

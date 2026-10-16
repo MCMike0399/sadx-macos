@@ -367,6 +367,12 @@ comes first, because every later port should copy a readable model, not the lega
    `game_reset*`, `game_loop`, `game_startup`/`winmain`, the `engine/ninja_*` modules, then
    player modules in census order. Each step updates the baseline. Expect the address surface to
    rise briefly when adapters split out (OpenLoco), and report it honestly.
+   Runtime initialization is **in progress at gate 151**: immutable engine code tables now
+   come from maintained native source (287 exact words, five caught mutations, isolated build
+   and poisoned-PE composition check). Native boot configuration selects them explicitly;
+   injectable reference decoding remains available. This first family does not complete the
+   runtime refactor: reset state, content/resource references, sine data and remaining load-image
+   facts still need native initial values or importer seams. Existing unported stops remain.
 8. **M1 override-equivalence (V/S), with every new binding written in two-tier form.** Ported
    owners still unbound (reconciled at gate 130; 22 after gate 137): 401000 401830 401a20
    401ac0 40bf40 40c030 40c090 410510 4208e0 4250d0 77f0a0 77f150 77f610 780c30 781070 785190

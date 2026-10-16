@@ -1,0 +1,28 @@
+{
+  "passed": true,
+  "baseline": {
+    "name": "baseline",
+    "killed": false,
+    "exit_status": 0,
+    "output": "Game runtime: survey ran startup + 3 frames (5 unported owners); native execution stops at 40cad0>40c090>415000>422680."
+  },
+  "mutants": [
+    {
+      "name": "ignore_explicit_native_tables",
+      "killed": true,
+      "exit_status": 1,
+      "output": "native code tables preserve recorded graphics values and call counts"
+    },
+    {
+      "name": "drop_native_unit_matrix",
+      "killed": true,
+      "exit_status": 1,
+      "output": "native code tables preserve the full composition report"
+    }
+  ],
+  "source_sha256": "a828537cd2b380d28197b0970229d4cc8a6e8b725cff75bab344fd3207c071e5",
+  "limits": [
+    "Temporary source copies only; links explicit mutant composition before unchanged archives.",
+    "Three-frame survey composition only; no sprite draws or full native game claim."
+  ]
+}

@@ -3828,3 +3828,39 @@ The product still needs native boot/title, resources and gameplay recovery.
   Renamed only the private HLE CRT DLL-name variable runtime→runtime_library to avoid a
   collision with the new namespace; DLL strings and handlers are unchanged. Full gate and
   separate judge snapshot refresh pending. No native-session/full-game independence claim.
+
+
+### 2026-10-16 — runtime code-table verification complete (gate 151)
+
+* Completes verification of the source step above (`45ad597`), with a separate judge commit.
+  New original-data oracle compares all 287 words and output bounds; three deliberately wrong
+  data mutations each produce one discrepancy. Explicit-native-tables bypass and missing-unit-
+  matrix integration mutants both fail the unchanged report/graphics comparison. Mutations
+  use temporary composition copies or the ordinary restored-source oracle loop.
+* Isolated native table/header/probe closure uses the frame pilot's existing strict dependency,
+  sanitized-environment, forbidden-symbol and system-library guards without relaxation. No
+  original binary or fixture data is copied; only the verified fingerprint is read beforehand.
+  The checker is now in the gate. The poisoned executable is an ignored generated test input;
+  all selected table bytes are XOR-poisoned and the native composition still matches.
+* All unit/probe/app programs compile. Four consumer oracles rerun (`ninja_render`, `keyboard`,
+  `game_view`, `ninja_sprite_display`); every prior numerical result is unchanged. View retains
+  291 flag differences; sprite display retains 5,580 across 6,432 cases (partial). Independent
+  STYLE review approved final source/evidence and the corrected observer scope. A separately
+  compiled prior initializer + boot-session produces the identical 5,427-byte native CLI survey
+  report; this is source-composition equivalence, not Windows or complete game proof.
+* Full `make -j10 gate` **rc 0**, **133 native programs / 50 Python tests**. Unchanged 7,228-frame
+  two-boot determinism and first-600 override digests; all 71,115 override comparisons/mutants,
+  900-frame controller parity and 63 FPS title cadence pass. Host throughput 78.6 FPS.
+  Twelve layers/zero exceptions; 159,630 legacy owned bytes/159,680 combined identities;
+  428 protected judge inputs. Two new game-tier files have zero readability debt; scope
+  231 files, prior counts unchanged (hex11,628 / address IDs1,796 / address calls75 / gotos2 /
+  long lines1,489 / multiple statements2,184).
+* Evidence: `production-integration-20261016/runtime-tables-151-*`, including both CLI reports,
+  source/range hashes, five Ghidra evidence ids, isolated build, mutations and recorded gate.
+  Aggregate oracles-verdict remains rc 2 (49 pass / 46 partial / 9 fail / 1 missing in tracked
+  status); other standalone oracles, separate `make m1` and four unregistered tests skipped
+  (`metal-sprite`, `metal-sprite-composition`, `metal-texture`, `player-task`). No assets or
+  binaries committed. Hook settings and two user Ghidra drafts untouched. No push.
+* GOAL §6.7 stays open: next native initialization families include reset state, content
+  references and sine/remaining image data. No complete native session, title or game
+  independence claim. The standing goal remains active.

@@ -1,0 +1,84 @@
+{
+  "passed": true,
+  "source_sha256": {
+    "src/runtime/engine_code_tables.hpp": "e5d4cd1c79ea7d34adbd383acc2d371d6fa460fde6c139fde498c18b4309feca",
+    "src/runtime/engine_code_tables.cpp": "c5d42992c4c82d474532cd9bd95f064e519e997e43289a98aeff2d11159d7a6f",
+    "tests/probes/native_engine_code_tables_probe.cpp": "7c620d5391df52a3968119908598bb874249ad900d3707c84f27c28565213c32"
+  },
+  "compiler_dependencies": [
+    "src/runtime/engine_code_tables.cpp",
+    "src/runtime/engine_code_tables.hpp",
+    "tests/probes/native_engine_code_tables_probe.cpp"
+  ],
+  "toolchain_metadata_sha256": {
+    "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb"
+  },
+  "linked_libraries": [
+    "/usr/lib/libc++.1.dylib",
+    "/usr/lib/libSystem.B.dylib"
+  ],
+  "reference_runtime_symbols_found": false,
+  "commands": [
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-0.d",
+      "-c",
+      "src/runtime/engine_code_tables.cpp",
+      "-o",
+      "unit-0.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-1.d",
+      "-c",
+      "tests/probes/native_engine_code_tables_probe.cpp",
+      "-o",
+      "unit-1.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-dynamiclib",
+      "-Wl,-install_name,@rpath/engine-code-tables.dylib",
+      "unit-0.o",
+      "unit-1.o",
+      "-o",
+      "engine-code-tables.dylib"
+    ]
+  ],
+  "binary_sha256": "0a08fb25ea0b419b66298b8a0ddf0a44e3870b14807fc857d221074b0ba743a1",
+  "serialized": {
+    "words": 287,
+    "sha256": "8977b5e20616b64c40031195410b1618fe97c11526d06f6f19f5a7ed63e982ad"
+  },
+  "copied_original_binary_inputs": [],
+  "copied_fixtures": [],
+  "inherited_environment": false,
+  "core_archive_linked": false,
+  "limits": [
+    "Immutable code tables only; no complete runtime or game independence claim.",
+    "Isolated source/dependency closure, not an operating-system access sandbox.",
+    "Only the verified fingerprint is read before isolation; no original binary or table data is copied."
+  ]
+}

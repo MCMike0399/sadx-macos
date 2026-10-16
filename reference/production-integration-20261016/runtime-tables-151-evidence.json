@@ -1,0 +1,71 @@
+{
+  "step": "GOAL6.7 first initialization family: immutable engine code tables",
+  "base_commit": "2f7bf68c1c80a7cc89d0989d8f47d43c70942b39",
+  "source_sha256": {
+    "src/runtime/engine_code_tables.hpp": "e5d4cd1c79ea7d34adbd383acc2d371d6fa460fde6c139fde498c18b4309feca",
+    "src/runtime/engine_code_tables.cpp": "c5d42992c4c82d474532cd9bd95f064e519e997e43289a98aeff2d11159d7a6f",
+    "src/guest/native_game_reference.hpp": "60c944c7fdcbbccb5af12ada5cd325f26ea151079bba4d48d4033882fcd83fce",
+    "src/guest/native_game_reference.cpp": "a828537cd2b380d28197b0970229d4cc8a6e8b725cff75bab344fd3207c071e5",
+    "src/guest/native_game_session.cpp": "af53fecd34dced4aac3c635a7fa9adc4b80dba1e48093d3459c4e89b315e7f6d",
+    "src/hle/hle_crt.cpp": "447294706e2e734e606015bc287288b5392280b7acbe80162a975e9220c2c1f3"
+  },
+  "source_image_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "source_ranges_sha256": {
+    "88ad64-88adbc": "452be1a469a475cb4fa4fd3172cb0bfd58b52e114e4347215251d176369c082b",
+    "389d918-389dccc": "800fa0b2d441e7236854d728ba4af944f63a655dfe8e6d7c5caf97d6b977fd87",
+    "389d650-389d690": "5998e9d1dd9bf48af6af87a1ef8c7783b818ac8329637ada08cc5fb329042376",
+    "7db2c4-7db2c8": "52c37b242f7ae8185a2b223b5b9d0b8772d97180a46b1d6a4d6c8b018c803d64",
+    "7dce6c-7dce70": "270696d298cc689d8e5bd75897918aa617a25a5030ccae98017053dddd974995",
+    "7e9b40-7e9b44": "2315b29abb1ce2659de7ecf4ff48bdaf193dc9b04f3695ce0c53cc99cd7fc079",
+    "7dcb2c-7dcb30": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "7dcb10-7dcb14": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+    "7dcb0c-7dcb10": "c68830a25204a09f8e77aada6bc5807f607cccaaa0ebb2a7122d317584478a8b",
+    "7dce50-7dce54": "b272aeb8c1bb51bef3f46f99ac5e1c5147072a4290367d609510c42c5aa9a845",
+    "7dcb28-7dcb2c": "9b9ba346be908602f08cc9df103cd4c6463bea6db69062bc77e7819ac69f1200",
+    "7dcb24-7dcb28": "89a0636b40f7f5be7beca3df1c5352427cae3f2f05cd52cdd9044e4184e072fa",
+    "7dcc98-7dcc9c": "d99e58435243d9fef9c88273b8d553b4fba4d0baf8009d29eae74fa99e0d9f57",
+    "7dd594-7dd598": "676997ad4a6527df1e857517adb464127be3934f2b51105650454a7dd8220fb5",
+    "7dd590-7dd594": "abe3a70e1598fba4a114749d56c512bedc1c6ffe3b81b78c491c45cc87e32b5e"
+  },
+  "words_compared": 287,
+  "expected_words_sha256": "8977b5e20616b64c40031195410b1618fe97c11526d06f6f19f5a7ed63e982ad",
+  "mismatches": 0,
+  "dossiers": [
+    {
+      "label": "runtime-tables-blend",
+      "evidence_id": "ev_ee3a4d4b48eb2e44528c10dd9e12dce330dc01b2e4b47a2389e53da63f704151"
+    },
+    {
+      "label": "runtime-tables-depth",
+      "evidence_id": "ev_044249f68fddc1a2fc2ba6d8f03968df86ec252d0cb45dfdd09b602288f0ade0"
+    },
+    {
+      "label": "runtime-tables-keyboard",
+      "evidence_id": "ev_7ddd507cd94a2a892dafefb06bec17f3b024b2f695c323cbcf43b38efcd20b41"
+    },
+    {
+      "label": "runtime-tables-matrix",
+      "evidence_id": "ev_35705afbbcc10c8445f7e1e93403a0a163ca71290ec58527b5ba1f6c3c74ab37"
+    },
+    {
+      "label": "runtime-tables-sprite",
+      "evidence_id": "ev_e292771c2440f95ae38c0e40d0fec9c5b019a5d58c2a2858d40e7792e677fddf"
+    }
+  ],
+  "numerical_mutants_caught": 3,
+  "adapter_mutants_caught": 2,
+  "composition": {
+    "survey_frames": 3,
+    "poisoned_tables_match": true,
+    "before_after_cli_report_identical": true,
+    "cli_report_sha256": "52254476457a377d2ac6d3f5eb7cd323f2154d6e22bf2e79e296833c8b070b7c",
+    "baseline": "Prior initializer and boot-session CPPs compiled explicitly with current compatible headers and recovered owner libraries."
+  },
+  "independent_review": "runtime_tables_review: no source implementation blockers; observer scope corrected; final gate pending",
+  "limits": [
+    "First immutable code-data family only; reset state, content pointers, sine data and other image facts remain. GOAL6.7 stays open.",
+    "Three-frame survey is navigation, not complete native game behavior; it issues no sprite draws.",
+    "Native source closure alone needs no PE or guest runtime; the legacy composition still does.",
+    "Existing consumer numerical results unchanged; view and sprite display retain flag-only partial verdicts."
+  ]
+}
