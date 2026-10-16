@@ -5,6 +5,7 @@
 #include "../probes/ninja_sine_table_probe.hpp"
 #include "../probes/ninja_fog_initial_state_probe.hpp"
 #include "../probes/ninja_screen_initial_state_probe.hpp"
+#include "../probes/sound_initial_state_probe.hpp"
 #include <algorithm>
 #include <fstream>
 #include <iostream>
@@ -138,6 +139,66 @@ void missing_fog_facts() {
     same_fog_facts(varied, *config.fog_defaults);
     same_control_facts(varied, *config.control_defaults);
 }
+void same_sound_facts(const sadx::NativeGame &game, const sadx::SoundInitialState &values) {
+    const auto actual = game.sound_facts();
+    const auto expected = sadx::test::sound_initial_words(values);
+    for (std::size_t i = 0; i < expected.size(); ++i)
+        require(actual[i] && *actual[i] == expected[i], "native sound numeric bits survive adapter mapping");
+}
+void same_sound_resources(const sadx::NativeGame &game, const sadx::NativeGameConfig &config) {
+    const auto actual = game.sound_resource_facts();
+    const auto read = [&](std::uint32_t address) {
+        return config.executable ? config.executable->u32(address) : std::nullopt;
+    };
+    for (unsigned i = 0; i < 36; ++i) {
+        require(actual[i] == read(0x3b29300 + 0x38 * i), "opaque record ID remains reference-backed");
+        require(actual[36 + i] == read(0x3b29b90 + 4 * i), "origin task remains reference-backed");
+    }
+    require(actual[72] == read(0x3b2cbb0), "listener remains reference-backed");
+}
+void reference_sound_facts(const sadx::NativeGame &game, const sadx::NativeGameConfig &config) {
+    const auto actual = game.sound_facts();
+    unsigned next = 0;
+    const auto read = [&](std::uint32_t address) {
+        return config.executable ? config.executable->u32(address) : std::nullopt;
+    };
+    for (auto address : {0x3b29ce0U, 0x3b29ce4U, 0x3b29b7cU})
+        require(actual[next++] == read(address), "reference sound scalar availability");
+    require(actual[next++] == (config.executable ? config.executable->byte(0x3b29ce8) : std::nullopt),
+            "reference sound frame byte availability");
+    require(actual[next++] == read(0x3b0ef2c), "reference audio initialized availability");
+    for (unsigned word = 0; word < 18; ++word) {
+        const auto packed = read(0x3b292a8 + 4 * word);
+        for (unsigned byte = 0; byte < 4; ++byte) {
+            const auto expected = packed ? std::optional<std::uint32_t>((*packed >> (8 * byte)) & 255U) : std::nullopt;
+            require(actual[next++] == expected, "reference overlap retains whole-word availability");
+        }
+    }
+    for (unsigned i = 0; i < 36; ++i) {
+        for (unsigned offset : {4, 12, 16, 20, 24, 32})
+            require(actual[next++] == read(0x3b292f8 + 0x38 * i + offset), "reference record numeric availability");
+        require(actual[next++] == read(0x3b29c28 + 4 * i), "reference current volume availability");
+    }
+    require(next == actual.size(), "all sound facts observed");
+    same_sound_resources(game, config);
+}
+void missing_sound_facts() {
+    sadx::NativeGameConfig config{};
+    const sadx::NativeGame missing(config);
+    reference_sound_facts(missing, config);
+    config.sound_defaults = sadx::sound_initial_state();
+    config.control_defaults = sadx::test::varied_control_defaults();
+    const sadx::NativeGame native(config);
+    same_sound_facts(native, *config.sound_defaults);
+    same_sound_resources(native, config);
+    same_control_facts(native, *config.control_defaults);
+    for (const auto &byte : native.device_caps().bytes)
+        require(!byte, "sound defaults do not invent GPU capabilities");
+    config.sound_defaults = sadx::test::varied_sound_initial_state();
+    const sadx::NativeGame varied(config);
+    same_sound_facts(varied, *config.sound_defaults);
+    same_sound_resources(varied, config);
+}
 void same_screen_facts(const sadx::NativeGame &game, const sadx::NinjaScreenInitialState &values) {
     const auto actual = game.screen_facts();
     const auto expected = sadx::test::screen_initial_words(values);
@@ -216,12 +277,13 @@ void same_composition(const sadx::NativeGameReport &expected, const sadx::D3D8St
 }
 }
 int main(int argc,char** argv){try{
-    require(argc==3||argc==4||argc==7||argc==13||argc==14||argc==15||argc==16,"usage: game-runtime-test SONIC.EXE INPUT_MOD.DLL [ENGINE_POISON [CONTROL_POISON CONTROL_VARIED CONTROL_PARTIAL]]");
+    require(argc==3||argc==4||argc==7||argc==13||argc==14||argc==15||argc==16||argc==17,"usage: game-runtime-test SONIC.EXE INPUT_MOD.DLL [ENGINE_POISON [CONTROL_POISON CONTROL_VARIED CONTROL_PARTIAL]]");
     missing_control_facts();
     missing_input_facts();
     missing_sine_facts();
     missing_fog_facts();
     missing_screen_facts();
+    missing_sound_facts();
     const auto exe=load(argv[1]),dll=load(argv[2]);
     require(exe->u32(0x7dce58)==0x42720000u&&exe->byte(0x3abdc7c)==0&&!exe->byte(0x3d14000+0x2000),"load image: .rdata 60.5f at 7dce58, zero-fill .data, outside the image");
     sadx::NativeGameConfig config;config.executable=exe;config.input_mod_dll=dll;
@@ -237,6 +299,8 @@ int main(int argc,char** argv){try{
     same_sine_facts(original, sadx::ninja_sine_table());
     same_fog_facts(original, sadx::ninja_fog_initial_state());
     same_screen_facts(original, sadx::ninja_screen_initial_state());
+    same_sound_facts(original, sadx::sound_initial_state());
+    reference_sound_facts(original, config);
     same_screen_resources(original, config);
     const auto survey=original.run();
     require(survey.failure.empty()&&survey.startup_completed&&survey.frames_completed==3&&!survey.unported.empty(),"survey completes startup and three frames");
@@ -247,6 +311,7 @@ int main(int argc,char** argv){try{
     config.fog_defaults = sadx::ninja_fog_initial_state();
     config.screen_defaults = sadx::ninja_screen_initial_state();
     now = 0;
+    config.sound_defaults = sadx::sound_initial_state();
     sadx::NativeGame native_tables(config);
     same_control_facts(native_tables, *config.control_defaults);
     const auto native_report = native_tables.run();
@@ -391,7 +456,7 @@ int main(int argc,char** argv){try{
         const sadx::NativeGame partial_native(config);
         same_fog_facts(partial_native, *config.fog_defaults);
     }
-    if (argc == 16) {
+    if (argc >= 16) {
         const std::string prefix = argv[15];
         config.fog_defaults = sadx::ninja_fog_initial_state();
         config.sine_table = sadx::ninja_sine_table();
@@ -436,6 +501,46 @@ int main(int argc,char** argv){try{
         same_screen_facts(partial_native, *config.screen_defaults);
         same_screen_resources(partial_native, config);
     }
+    if (argc >= 17) {
+        const std::string prefix = argv[16];
+        config.screen_defaults = sadx::ninja_screen_initial_state();
+        config.sound_defaults = sadx::sound_initial_state();
+        config.executable = load((prefix + "-poisoned.exe").c_str());
+        require(config.executable->u32(0x3b29308) != exe->u32(0x3b29308) &&
+                    config.executable->byte(0x3b292ef) != exe->byte(0x3b292ef),
+                "sound fixture poisons record and overlap values");
+        now = 0;
+        sadx::NativeGame poisoned(config);
+        same_sound_facts(poisoned, *config.sound_defaults);
+        same_sound_resources(poisoned, config);
+        const auto report = poisoned.run();
+        same_composition(survey, original.d3d8(), report, poisoned.d3d8());
+        config.executable = load((prefix + "-varied.exe").c_str());
+        config.sound_defaults.reset();
+        const sadx::NativeGame varied_image(config);
+        same_sound_facts(varied_image, sadx::test::varied_sound_initial_state());
+        reference_sound_facts(varied_image, config);
+        config.sound_defaults = sadx::sound_initial_state();
+        const sadx::NativeGame native_over_varied(config);
+        same_sound_facts(native_over_varied, *config.sound_defaults);
+        same_sound_resources(native_over_varied, config);
+        require(native_over_varied.sound_resource_facts() == varied_image.sound_resource_facts(),
+                "native sound defaults preserve injected opaque identities");
+        config.executable = load((prefix + "-partial.exe").c_str());
+        require(config.executable->byte(0x3b292ee).has_value() && !config.executable->byte(0x3b292ef),
+                "partial fixture cuts the final overlap word");
+        config.sound_defaults.reset();
+        const sadx::NativeGame partial(config);
+        reference_sound_facts(partial, config);
+        const auto facts = partial.sound_facts();
+        for (unsigned i = 5 + 68; i < 5 + 72; ++i)
+            require(!facts[i], "all bytes of incomplete reference overlap word remain unknown");
+        config.sound_defaults = sadx::test::varied_sound_initial_state();
+        const sadx::NativeGame partial_native(config);
+        same_sound_facts(partial_native, *config.sound_defaults);
+        same_sound_resources(partial_native, config);
+    }
+    config.sound_defaults.reset();
     config.screen_defaults.reset();
     config.fog_defaults.reset();
     config.sine_table.reset();

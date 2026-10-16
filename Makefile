@@ -117,8 +117,8 @@ REFERENCE_UNIT_TARGETS := build/game-view-test \
  build/player-scene-position-binding-test
 $(REFERENCE_UNIT_TARGETS): build/%-test: tests/unit/$$(subst -,_,$$*).cpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< $(EXTRA_REFERENCE_SOURCES) build/libsadx-guest.a build/libsadx-core.a -o $@
-build/game-runtime-test: EXTRA_REFERENCE_SOURCES := tests/probes/native_session_control_defaults_probe.cpp tests/probes/native_input_initial_state_probe.cpp tests/probes/native_ninja_sine_table_probe.cpp tests/probes/native_ninja_fog_initial_state_probe.cpp tests/probes/native_ninja_screen_initial_state_probe.cpp
-build/game-runtime-test: tests/probes/native_session_control_defaults_probe.cpp tests/probes/session_control_probe.hpp tests/probes/native_input_initial_state_probe.cpp tests/probes/input_initial_state_probe.hpp tests/probes/native_ninja_sine_table_probe.cpp tests/probes/ninja_sine_table_probe.hpp tests/probes/native_ninja_fog_initial_state_probe.cpp tests/probes/ninja_fog_initial_state_probe.hpp tests/probes/native_ninja_screen_initial_state_probe.cpp tests/probes/ninja_screen_initial_state_probe.hpp
+build/game-runtime-test: EXTRA_REFERENCE_SOURCES := tests/probes/native_session_control_defaults_probe.cpp tests/probes/native_input_initial_state_probe.cpp tests/probes/native_ninja_sine_table_probe.cpp tests/probes/native_ninja_fog_initial_state_probe.cpp tests/probes/native_ninja_screen_initial_state_probe.cpp tests/probes/native_sound_initial_state_probe.cpp
+build/game-runtime-test: tests/probes/native_session_control_defaults_probe.cpp tests/probes/session_control_probe.hpp tests/probes/native_input_initial_state_probe.cpp tests/probes/input_initial_state_probe.hpp tests/probes/native_ninja_sine_table_probe.cpp tests/probes/ninja_sine_table_probe.hpp tests/probes/native_ninja_fog_initial_state_probe.cpp tests/probes/ninja_fog_initial_state_probe.hpp tests/probes/native_ninja_screen_initial_state_probe.cpp tests/probes/ninja_screen_initial_state_probe.hpp tests/probes/native_sound_initial_state_probe.cpp tests/probes/sound_initial_state_probe.hpp
 # Native frame-control composition deliberately excludes the reference/core archive.
 build/native-frame-control-test: tests/unit/native_frame_control.cpp src/engine/game_frame_control.cpp src/engine/game_frame_control.hpp src/engine/game_frame_control_internal.hpp src/engine/game_frame_control_native.cpp src/engine/speedrun.cpp src/engine/speedrun.hpp
 	$(CXX) $(CXXFLAGS) -Isrc tests/unit/native_frame_control.cpp src/engine/game_frame_control.cpp src/engine/game_frame_control_native.cpp src/engine/speedrun.cpp -o $@
@@ -158,6 +158,8 @@ build/native-game-mode-leaves-probe.dylib: tests/probes/native_game_mode_leaves_
 # This native code-table probe needs only maintained table source.
 build/native-engine-code-tables-probe.dylib: tests/probes/native_engine_code_tables_probe.cpp src/runtime/engine_code_tables.cpp src/runtime/engine_code_tables.hpp
 	$(CXX) $(CXXFLAGS) -dynamiclib -Isrc tests/probes/native_engine_code_tables_probe.cpp src/runtime/engine_code_tables.cpp -o $@
+build/native-sound-initial-state-probe.dylib: tests/probes/native_sound_initial_state_probe.cpp tests/probes/sound_initial_state_probe.hpp src/game/sound_initial_state.cpp src/game/sound_initial_state.hpp
+	$(CXX) $(CXXFLAGS) -dynamiclib -Isrc tests/probes/native_sound_initial_state_probe.cpp src/game/sound_initial_state.cpp -o $@
 build/native-ninja-screen-initial-state-probe.dylib: tests/probes/native_ninja_screen_initial_state_probe.cpp tests/probes/ninja_screen_initial_state_probe.hpp src/engine/ninja_screen_initial_state.cpp src/engine/ninja_screen_initial_state.hpp
 	$(CXX) $(CXXFLAGS) -dynamiclib -Isrc tests/probes/native_ninja_screen_initial_state_probe.cpp src/engine/ninja_screen_initial_state.cpp -o $@
 build/native-ninja-fog-initial-state-probe.dylib: tests/probes/native_ninja_fog_initial_state_probe.cpp tests/probes/ninja_fog_initial_state_probe.hpp src/engine/ninja_fog_initial_state.cpp src/engine/ninja_fog_initial_state.hpp
@@ -205,11 +207,15 @@ sine-initial-fixtures: build/native-ninja-sine-table-probe.dylib
 fog-initial-fixtures: build/native-ninja-fog-initial-state-probe.dylib
 	$(REFERENCE_PYTHON) tools/oracles/verify_original_ninja_fog_initial_state.py "$(GAME_EXE)" build/native-ninja-fog-initial-state-probe.dylib --output build/oracles/ninja_fog_initial_state.json --poison-output build/fog-initial-poisoned.exe --varied-output build/fog-initial-varied.exe --partial-output build/fog-initial-partial.exe
 
+.PHONY: sound-initial-fixtures
+sound-initial-fixtures: build/native-sound-initial-state-probe.dylib
+	$(REFERENCE_PYTHON) tools/oracles/verify_original_sound_initial_state.py "$(GAME_EXE)" build/native-sound-initial-state-probe.dylib --output build/oracles/sound_initial_state.json --poison-output build/sound-initial-poisoned.exe --varied-output build/sound-initial-varied.exe --partial-output build/sound-initial-partial.exe
+
 .PHONY: screen-initial-fixtures
 screen-initial-fixtures: build/native-ninja-screen-initial-state-probe.dylib
 	$(REFERENCE_PYTHON) tools/oracles/verify_original_ninja_screen_initial_state.py "$(GAME_EXE)" build/native-ninja-screen-initial-state-probe.dylib --output build/oracles/ninja_screen_initial_state.json --poison-output build/screen-initial-poisoned.exe --varied-output build/screen-initial-varied.exe --partial-output build/screen-initial-partial.exe
 
-run-unit-tests: assets $(UNIT_TARGETS) $(UNIT_MM_TARGETS) $(OVERRIDE_CORPORA) build/engine-code-tables-poisoned.exe session-control-fixtures input-initial-fixtures sine-initial-fixtures fog-initial-fixtures screen-initial-fixtures
+run-unit-tests: assets $(UNIT_TARGETS) $(UNIT_MM_TARGETS) $(OVERRIDE_CORPORA) build/engine-code-tables-poisoned.exe session-control-fixtures input-initial-fixtures sine-initial-fixtures fog-initial-fixtures screen-initial-fixtures sound-initial-fixtures
 unit-tests: run-unit-tests
 test: unit-tests
 	$(PY) -m unittest discover -s tests/python -p 'test_*.py'
@@ -245,7 +251,10 @@ native-ninja-fog-initial-state:
 .PHONY: native-ninja-screen-initial-state
 native-ninja-screen-initial-state:
 	python3 tools/gate/check_ninja_screen_initial_state.py
-check: check-symbols native-frame-control native-engine-code-tables native-session-control-defaults native-input-initial-state native-ninja-sine-table native-ninja-fog-initial-state native-ninja-screen-initial-state
+.PHONY: native-sound-initial-state
+native-sound-initial-state:
+	python3 tools/gate/check_sound_initial_state.py
+check: native-sound-initial-state check-symbols native-frame-control native-engine-code-tables native-session-control-defaults native-input-initial-state native-ninja-sine-table native-ninja-fog-initial-state native-ninja-screen-initial-state
 	python3 tools/gate/check_layers.py
 	python3 tools/gate/check_global_owners.py
 	python3 tools/gate/check_provenance.py

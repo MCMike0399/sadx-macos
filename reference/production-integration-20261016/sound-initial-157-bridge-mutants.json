@@ -1,0 +1,60 @@
+{
+  "passed": true,
+  "source_sha256": "03bd794cae98a15c8d4208aac5827f11547f1527db04358f56bf79604d60c7aa",
+  "baseline": {
+    "name": "baseline",
+    "exit_status": 0,
+    "killed": false,
+    "output": "Game runtime: survey ran startup + 3 frames (5 unported owners); native execution stops at 40cad0>40c090>415000>422680.",
+    "replacement": [
+      null,
+      null
+    ]
+  },
+  "mutants": [
+    {
+      "name": "ignore_native_sound",
+      "exit_status": 1,
+      "killed": true,
+      "output": "native sound numeric bits survive adapter mapping",
+      "replacement": [
+        "if (config_.sound_defaults) {",
+        "if (false && config_.sound_defaults) {"
+      ]
+    },
+    {
+      "name": "swap_pan_pitch",
+      "exit_status": 1,
+      "killed": true,
+      "output": "native sound numeric bits survive adapter mapping",
+      "replacement": [
+        "static_cast<std::uint32_t>(record.pan_angle);",
+        "static_cast<std::uint32_t>(record.pitch);"
+      ]
+    },
+    {
+      "name": "erase_opaque_id",
+      "exit_status": 1,
+      "killed": true,
+      "output": "opaque record ID remains reference-backed",
+      "replacement": [
+        "sound_fields_.words_at_3b29300[i]=u32(0x3b29300+0x38*i);",
+        "sound_fields_.words_at_3b29300[i]=0;"
+      ]
+    },
+    {
+      "name": "invent_missing_overlap",
+      "exit_status": 1,
+      "killed": true,
+      "output": "reference overlap retains whole-word availability",
+      "replacement": [
+        "audio_.words_at_3b292a8[i] = u32(0x3b292a8 + 4 * i);",
+        "audio_.words_at_3b292a8[i] = u32(0x3b292a8 + 4 * i).value_or(0);"
+      ]
+    }
+  ],
+  "limits": [
+    "Temporary adapter copies linked before unchanged archives; no worktree mutation.",
+    "Three-frame survey only, no sprite draws or complete native sound claim."
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "source_sha256": "d76dfbb721ef6e89450192ac3f91c6b2511d65758a55975e61c692e57e258eb7",
+  "baseline": {
+    "name": "baseline",
+    "exit_status": 0,
+    "killed": false,
+    "mismatches": [],
+    "mutation": null
+  },
+  "mutants": [
+    {
+      "name": "post_service_tone",
+      "exit_status": 1,
+      "killed": true,
+      "mismatches": [
+        {
+          "word": 79,
+          "expected": 0,
+          "actual": 4294967295
+        }
+      ],
+      "mutation": "values.records[0].tone = -1;"
+    },
+    {
+      "name": "overlap_endpoint",
+      "exit_status": 1,
+      "killed": true,
+      "mismatches": [
+        {
+          "word": 76,
+          "expected": 0,
+          "actual": 1
+        }
+      ],
+      "mutation": "values.overlap[71] = 1;"
+    },
+    {
+      "name": "wrong_frame",
+      "exit_status": 1,
+      "killed": true,
+      "mismatches": [
+        {
+          "word": 3,
+          "expected": 0,
+          "actual": 4
+        }
+      ],
+      "mutation": "values.frame_counter = 4;"
+    }
+  ],
+  "worktree_mutated": false
+}

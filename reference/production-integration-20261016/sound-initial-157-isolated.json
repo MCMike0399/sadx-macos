@@ -1,0 +1,86 @@
+{
+  "passed": true,
+  "source_sha256": {
+    "src/game/sound_initial_state.hpp": "0a0ca4936202a736a73ddbda24c625d679c909346ba3aa37004e116fc483d3da",
+    "src/game/sound_initial_state.cpp": "d76dfbb721ef6e89450192ac3f91c6b2511d65758a55975e61c692e57e258eb7",
+    "tests/probes/sound_initial_state_probe.hpp": "2c0daf5906038beb4a150d6827454fc204c983a3adc6b55d1217a2f5284f04e9",
+    "tests/probes/native_sound_initial_state_probe.cpp": "4999d1317ed393398dde2ca4945cadf643d9552b754a9ed2ba5fe96dc4d50bf5"
+  },
+  "compiler_dependencies": [
+    "src/game/sound_initial_state.cpp",
+    "src/game/sound_initial_state.hpp",
+    "tests/probes/native_sound_initial_state_probe.cpp",
+    "tests/probes/sound_initial_state_probe.hpp"
+  ],
+  "toolchain_metadata_sha256": {
+    "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb"
+  },
+  "linked_libraries": [
+    "/usr/lib/libc++.1.dylib",
+    "/usr/lib/libSystem.B.dylib"
+  ],
+  "reference_runtime_symbols_found": false,
+  "commands": [
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-0.d",
+      "-c",
+      "src/game/sound_initial_state.cpp",
+      "-o",
+      "unit-0.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-1.d",
+      "-c",
+      "tests/probes/native_sound_initial_state_probe.cpp",
+      "-o",
+      "unit-1.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-dynamiclib",
+      "-Wl,-install_name,@rpath/sound-initial-state.dylib",
+      "unit-0.o",
+      "unit-1.o",
+      "-o",
+      "sound-initial-state.dylib"
+    ]
+  ],
+  "binary_sha256": "5ce63c72af1ad439fa0d8041b676520a03d4e5d4214b7f7f88e9360f3c10b281",
+  "serialized": {
+    "words": 329,
+    "sha256": "5bc633d52bc4345c9cc4ea7cf49422a85a9fe401faf3239ef72b53aa0dd667ee"
+  },
+  "copied_original_binary_inputs": [],
+  "copied_fixtures": [],
+  "inherited_environment": false,
+  "core_archive_linked": false,
+  "limits": [
+    "Load-time numeric sound values only; algorithms, identities, tasks, listener and audio resources remain outside this source closure.",
+    "Isolated source/dependency closure, not an operating-system access sandbox.",
+    "Only the verified fingerprint is read before isolation; no original binary or table data is copied."
+  ]
+}

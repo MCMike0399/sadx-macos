@@ -4175,3 +4175,29 @@ The product still needs native boot/title, resources and gameplay recovery.
 * Independent final STYLE review approved; no existing algorithm/judge modified.
   Full gate follows in a separate judge commit. No full sound/session independence
   or physical audio claim. GOAL §6.7 remains open.
+
+
+### 2026-10-16 — sound initialization verification complete (gate 157)
+
+* Completes source `73afb76` in a separate judge commit. All 329 atoms exact; native
+  isolated closure, idle server consumer, five historical constructor comparisons,
+  numeric poison composition, resource separation and all seven mutants pass.
+  Independent final STYLE review approved; original algorithms/judges unchanged.
+* Full `make -j10 gate` **rc 0**, **139 native programs / 50 Python tests**. Unchanged
+  7,228-frame two-boot determinism and first-600 override digests; 71,115 override
+  comparisons/mutants, 900-frame controller parity and 63 FPS title cadence pass.
+  Host throughput 83.6 FPS. Twelve layers/zero exceptions; 159,630 owned bytes and
+  159,680 combined identities; 470 protected judge inputs. Readability 243 files,
+  unchanged debt: hex11,628 / identifiers1,796 / calls75 / gotos2 / long1,489 / multi2,184.
+* Original sound manager956/startup400/reset300/stream192 reports unchanged. Sound's
+  544 active-record boundaries are counted, not compared. Aggregate verdict command
+  rc2: tracked55pass/46partial/9fail/1missing. Other standalone oracles, separate
+  `make m1` and four unregistered tests skipped: metal-sprite, metal-sprite-composition,
+  metal-texture, player-task. All source/probe/app programs compile.
+* Evidence `production-integration-20261016/sound-initial-157-*` includes source/data
+  identities, five Ghidra dossiers +16 xrefs, field map, exact constructor/CLI results
+  and reproducible harnesses, retained mutants, isolated closure and recorded gate.
+  Numeric sound migration leaves remaining runtime initialization, resource/content
+  import seams and unrecovered sound/session/game behavior open. No physical audio
+  or complete native-game claim. Goal active. Hook settings and user Ghidra drafts
+  untouched; no binaries/assets committed; no push.

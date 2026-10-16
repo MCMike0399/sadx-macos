@@ -1,0 +1,195 @@
+{
+  "step": "GOAL6.7 numeric sound initialization",
+  "base_commit": "9f4feba67f5770e6e9e8ac41817a3abb00a4140f",
+  "source_sha256": {
+    "src/game/sound_initial_state.hpp": "0a0ca4936202a736a73ddbda24c625d679c909346ba3aa37004e116fc483d3da",
+    "src/game/sound_initial_state.cpp": "d76dfbb721ef6e89450192ac3f91c6b2511d65758a55975e61c692e57e258eb7",
+    "src/guest/native_game_reference.hpp": "2c5df4291d7767bf2c53f8927ce4ba6fe6be7118bd7329fb617441b4cb6d277f",
+    "src/guest/native_game_reference.cpp": "03bd794cae98a15c8d4208aac5827f11547f1527db04358f56bf79604d60c7aa",
+    "src/guest/native_game_session.cpp": "130c3a177558f2d5b693d1aa6c5e10ab2d94e3660509a14270b2a99e80ee7a1c"
+  },
+  "source_image_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "numeric_atoms": 329,
+  "numeric_bytes": 1097,
+  "excluded_resource_facts": 73,
+  "pinned_values_match": true,
+  "data_report": "reference/oracle-reports/sound_initial_state.json",
+  "field_map": "reference/production-integration-20261016/sound-initial-157-field-map.json",
+  "evidence": [
+    {
+      "path": "reference/inventory-raw/sound-initial-manager.json",
+      "evidence_id": "ev_ebe75c4842b43ed23cc301b2b9aec6ea6310e3db2dd08771419c3915909e6400",
+      "sha256": "5d9b6cf770f3f4f92a47943b294ad32f2b7d2865388844185d9b10025220bd71"
+    },
+    {
+      "path": "reference/inventory-raw/sound-initial-pan.json",
+      "evidence_id": "ev_5ed21244f3f0eb5e9f9d9efc5d2456cebb970a3ec83718a897d4938c5b13fb7f",
+      "sha256": "147832d1965a64d1f90b8033273b40356343611a93dd465339567f35fb1c9ad5"
+    },
+    {
+      "path": "reference/inventory-raw/sound-initial-pitch.json",
+      "evidence_id": "ev_ef9a04341c2222b2086dc0c6c201567b644fb89d4abbdd2da005dc05aa0f10aa",
+      "sha256": "99e22f56b230294e6e289aa587a5d4b69b5e71ae52b851c21516d7e208de1e19"
+    },
+    {
+      "path": "reference/inventory-raw/sound-initial-reset.json",
+      "evidence_id": "ev_12e86dcb7f5925178f45730780676e3e90d51f45d727f2de073878fa2b6047b5",
+      "sha256": "612a8ef898ae457af8fcbee6b960fa66175ecdac0aef60fd78b8f4bab68fc1ca"
+    },
+    {
+      "path": "reference/inventory-raw/sound-initial-startup.json",
+      "evidence_id": "ev_40bb829983e28f5308e76b1885b5afaf9380a965cb5647124689b6a73dfbedb2",
+      "sha256": "889b723216102640b63acb4c91b4a5ce244ae8a68f4a150361073fb0fd3ea4fd"
+    },
+    {
+      "path": "reference/inventory-raw/sound-initial-xrefs-3b0ef2c.json",
+      "evidence_id": "ev_51392d24b0b95d215b8b728a247ce4674defe464ef3101fe43e92f448217e2aa",
+      "sha256": "3450925e72ec8556ecaae60e6e50499e1fca83919a0e13c5b75a0ac1dd984491"
+    },
+    {
+      "path": "reference/inventory-raw/sound-initial-xrefs-3b292a8.json",
+      "evidence_id": "ev_1a71a87988a9f92d0f4c9abe4d57f926a180d97a516818e9ee6400ee9ddccfde",
+      "sha256": "f3776c14dd5f424e36253478103952642502510fb5d539fab5ec86b4dd223276"
+    },
+    {
+      "path": "reference/inventory-raw/sound-initial-xrefs-3b292fc.json",
+      "evidence_id": "ev_cecae1a4827835e47a93fd3b6ae90bc242f64cea90fbf1b978e058d07f27b5a9",
+      "sha256": "39b4754cc104e4f87df2530d3605d61cab87f96a5fb52906bf5f33e6f1c2e9f2"
+    },
+    {
+      "path": "reference/inventory-raw/sound-initial-xrefs-3b29300.json",
+      "evidence_id": "ev_9548e3be37f9042858c790f9d73553e07c45ae23f26e7b570b2a2babee5594b3",
+      "sha256": "101f7c58689852c68e2ebc201fb3c9692afa22d216a6d1b2ad96b18b00a3f728"
+    },
+    {
+      "path": "reference/inventory-raw/sound-initial-xrefs-3b29304.json",
+      "evidence_id": "ev_7de28f938241134f751cc18d9992f12a5178b34d526fade0013f457d2fa28c1f",
+      "sha256": "337514b838926b0205860bbc17c0511daf8a5d86d7a16edd71e0fbf42371cf7c"
+    },
+    {
+      "path": "reference/inventory-raw/sound-initial-xrefs-3b29308.json",
+      "evidence_id": "ev_84619d0329a8b23832d7b7c674f9a9b4cbbc3edc308e57f174f82a26aaf21997",
+      "sha256": "ef2411c6bd7cfc01f5f374284342d85fd24a900c1ed1d1edabf44615aa6863ab"
+    },
+    {
+      "path": "reference/inventory-raw/sound-initial-xrefs-3b2930c.json",
+      "evidence_id": "ev_cb8c69d265b7802902b3db0f39300d124d5354d06bb64c9cd11126dcee1840ac",
+      "sha256": "ca345f8069e672faf445453f1e8d068e26ace788639fdfe01a62d9cde241d951"
+    },
+    {
+      "path": "reference/inventory-raw/sound-initial-xrefs-3b29310.json",
+      "evidence_id": "ev_9bb4f2f5de4d78e418ef6402e65d43e050aa18cce92a445a5cfb952463c53809",
+      "sha256": "7686826d9e42817dc7537eccd44e064ff671514a2a93eb6c29a09a1893f99aa8"
+    },
+    {
+      "path": "reference/inventory-raw/sound-initial-xrefs-3b29318.json",
+      "evidence_id": "ev_715ffffbe3f4d5fe1a4c159d06cce7ddff10e8452effa1c7e36cbb3e3d74cdf1",
+      "sha256": "7ab2494293bc213b3a87cb9e6575ef4a9c88dfe23c3946a6dac5c96e59bb4289"
+    },
+    {
+      "path": "reference/inventory-raw/sound-initial-xrefs-3b29b7c.json",
+      "evidence_id": "ev_0a3e6255090b1a13081d7d3a6a4928a98abf92d54273ef5922264db74530505d",
+      "sha256": "5c961d59967d1f5a0c3ee252f4a9f8eea6e5bace0b5702e9132c4c139ec9fd58"
+    },
+    {
+      "path": "reference/inventory-raw/sound-initial-xrefs-3b29b90.json",
+      "evidence_id": "ev_af1d7047af25e3beaec4d375ae9925f699cce150d26e067c0f3baf0964882ec1",
+      "sha256": "4dc63d849a2f88c488757d7045dd991b6114c0ddf2d6c43e06868fb15bf0abe6"
+    },
+    {
+      "path": "reference/inventory-raw/sound-initial-xrefs-3b29c28.json",
+      "evidence_id": "ev_64cd400b0215b58a30c5e32b05a17750a0c8cc720cec60c5a8ccca007b885d02",
+      "sha256": "b6deb28587fefd510b183387c22365788892a005ccd6ebe83e11dc1329c470a7"
+    },
+    {
+      "path": "reference/inventory-raw/sound-initial-xrefs-3b29ce0.json",
+      "evidence_id": "ev_fe3b5db0243d335ba35a3653c744cce3bca4afee2747d3d20a5051a9e14f8784",
+      "sha256": "971ace59ea4f3e718078f6a3b6d4a326f2a8a64af297344fe8ddb33d03a2755e"
+    },
+    {
+      "path": "reference/inventory-raw/sound-initial-xrefs-3b29ce4.json",
+      "evidence_id": "ev_e03fb040901760b9d4316cd03368955b010f5352083d25639075691d26598e41",
+      "sha256": "02455acbdc8c48a479f08ca7f359333203fb9b2dd695e7c4a791b858bc0a5449"
+    },
+    {
+      "path": "reference/inventory-raw/sound-initial-xrefs-3b29ce8.json",
+      "evidence_id": "ev_79b676f4746fb2f0ec46402b2249864fa139e4e64d673e0a51e2acd7db56f089",
+      "sha256": "8dc31177a47daa631168f88dbe07543d1cb010c20786191dc3c9d6c408b49583"
+    },
+    {
+      "path": "reference/inventory-raw/sound-initial-xrefs-3b2cbb0.json",
+      "evidence_id": "ev_2c68009d00dc2d74749351a51227eeb90a99b9c070e3d65d079faff97f3b7da4",
+      "sha256": "c6e489c693ca29124a68e29b425bff79c5cd9bc1500964605e0eb066e8f98c49"
+    }
+  ],
+  "constructor_comparison": {
+    "passed": true,
+    "inputs": [
+      "game/Sonic Adventure DX/sonic.exe",
+      "build/sound-initial-poisoned.exe",
+      "build/sound-initial-varied.exe",
+      "build/sound-initial-partial.exe",
+      "-"
+    ],
+    "configurations": 5,
+    "facts_per_configuration": 402,
+    "facts_compared": 2010,
+    "bytes_compared": 13377,
+    "sha256": "6b9af289c8a6ed7f11daddad07a152ce7af4daa97af0222d9f3b4b65feef4301",
+    "rows_sha256": [
+      "fe8215f34df4bb193ee23214879716751b91f725521fdc932237fa2cc47dd69d",
+      "1d8d363b187dbc7041fd23f0798f48c987bb3e67ae40b778f3121c7b263a2a22",
+      "88d11bd4e16379d965c1474ad0f820648051641008ba38e412aa6f81d9ae021f",
+      "0c015c2f5b401e8a41ba576ec67f467594698c76937eb7f0e5d84e25b2764dde",
+      "41d1e06e954f32dbca5080ad3cc451b9780ca8f83b62c9e449707e43aa7962c8"
+    ]
+  },
+  "cli_comparison": {
+    "passed": true,
+    "bytes_compared": 5427,
+    "sha256": "52254476457a377d2ac6d3f5eb7cd323f2154d6e22bf2e79e296833c8b070b7c"
+  },
+  "numeric_mutants": 3,
+  "adapter_mutants": 4,
+  "existing_oracles": {
+    "sound_manager": {
+      "cases": 956,
+      "mismatches": 0,
+      "tracked_report_unchanged": true,
+      "explicit_uncompared_boundaries": 544
+    },
+    "game_startup": {
+      "cases": 400,
+      "mismatches": 0,
+      "tracked_report_unchanged": true
+    },
+    "game_reset": {
+      "cases": 300,
+      "mismatches": 0,
+      "tracked_report_unchanged": true
+    },
+    "audio_stream": {
+      "cases": 192,
+      "mismatches": 0,
+      "tracked_report_unchanged": true
+    }
+  },
+  "independent_review": "Approved by fresh sound_initial_review under STYLE \u00a712; source/evidence fingerprints, classification, ownership/order, signed mapping, availability, exact oracle, isolated closure, seven caught mutants, constructor/CLI equivalence verified. Full gate pending; no complete sound/session or physical audio claim.",
+  "limits": [
+    "Numeric initialization only; original gameplay/audio algorithms retain their existing recovery limits.",
+    "Opaque record IDs, task/listener pointers and sound objects/events/thread/critical-section resources are not invented.",
+    "Unloaded queue priority/other record fields remain untouched; no observer coverage claimed for those fields.",
+    "Sound manager has 956 cases: 544 active-record boundaries counted but not compared.",
+    "No complete native session, title/game independence, real DirectSound, physical audio or FP claim.",
+    "Runtime survey covers three frames without sprite draws."
+  ],
+  "source_commit": "73afb76",
+  "reproduce": [
+    "make sound-initial-fixtures build/sound-initial-state-test build/game-runtime-test",
+    "python3 reference/production-integration-20261016/sound-initial-157-constructor-harness.py",
+    "python3 reference/production-integration-20261016/sound-initial-157-cli-harness.py (after constructor harness creates the old reference source)",
+    "python3 reference/production-integration-20261016/sound-initial-157-numeric-harness.py",
+    "python3 reference/production-integration-20261016/sound-initial-157-bridge-harness.py",
+    "python3 tools/gate/check_sound_initial_state.py"
+  ]
+}
