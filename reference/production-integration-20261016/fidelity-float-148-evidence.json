@@ -1,0 +1,190 @@
+{
+  "step": "GOAL 6.6b prerequisite: STYLE arithmetic tier 3 retained value type; ground/friction migration remains open",
+  "source_commit": "b7e786a18694506893572b491d7d0f2aa3f0b7e0",
+  "evidence_id": "ev_b9e2502725c195a77b096e64d97288e6b5f9db93725b1886a588320ac34dee6d",
+  "ground_body": {
+    "start": "0x44c270",
+    "end_exclusive": "0x44cde5",
+    "bytes": 2933
+  },
+  "source_files": {
+    "src/cpu/fidelity_float.hpp": "cb0cfd79841632c46569b93ff45667160d3189f00a61bbd44d3c3936792daad9",
+    "tests/unit/fidelity_float.cpp": "a9028b975d1ce69e09333cce9e76d93e251efc7748f30279f44f4603b0093743"
+  },
+  "contract": [
+    "ExactFloat retains X87Value with its live caller context, preserving selected precision and exponent range.",
+    "A float RHS calls memory-operand arithmetic; another ExactFloat calls loaded-operand arithmetic.",
+    "rounded() is the only binary32 conversion; reverse memory subtraction/division preserve operand order.",
+    "Double operands are rejected, mixed contexts fail before arithmetic, source exception order requires separately sequenced operand calculations."
+  ],
+  "unit_proof": [
+    "Cancellation distinguishes retained 53/64-bit precision from binary32 spills.",
+    "Intermediate exponent overflow recovers before a spill; the explicit spill records overflow/precision.",
+    "Halfway results exercise all 12 PC/RC profiles and preserve CW.",
+    "Quiet NaN plus signaling memory operand differs from separately loaded operand; NaN/denormal precedence remains exact.",
+    "Reverse subtraction/division, loaded operations, comparison relations and signed zero.",
+    "Mixed contexts fail without flag mutation; unmasked spill fails before destination store."
+  ],
+  "mutants": {
+    "caught": 6,
+    "valid": 6,
+    "restored_pass": true,
+    "initial_harness_issue": "Initial mutation was not rebuilt because of make second-resolution mtimes. Corrected runner waits then touches header and asserts executable newer; all final mutants rebuilt and caught."
+  },
+  "independent_review": {
+    "agent": "ground_pilot_review",
+    "verdict": "approved for arithmetic-foundation scope, no blockers",
+    "limitation": "ground migration remains open; full gate follows"
+  },
+  "ground_baseline": {
+    "fixture_sha256": "e0631b7959531377f4072279fcb719259d39013eaa39f77144d96bf43fb7e2d3",
+    "control_words": [
+      {
+        "cw": "0x7f",
+        "cases": 2496,
+        "value_mismatches": 0,
+        "call_mismatches": 0,
+        "flag_mismatches": 2496,
+        "cw_mismatches": 0,
+        "actual_fast_yaw_cases": 13,
+        "cases_without_controlled_callees": 192
+      },
+      {
+        "cw": "0x47f",
+        "cases": 2496,
+        "value_mismatches": 0,
+        "call_mismatches": 0,
+        "flag_mismatches": 2496,
+        "cw_mismatches": 0,
+        "actual_fast_yaw_cases": 13,
+        "cases_without_controlled_callees": 192
+      },
+      {
+        "cw": "0x87f",
+        "cases": 2496,
+        "value_mismatches": 0,
+        "call_mismatches": 0,
+        "flag_mismatches": 2496,
+        "cw_mismatches": 0,
+        "actual_fast_yaw_cases": 13,
+        "cases_without_controlled_callees": 192
+      },
+      {
+        "cw": "0xc7f",
+        "cases": 2496,
+        "value_mismatches": 0,
+        "call_mismatches": 0,
+        "flag_mismatches": 2496,
+        "cw_mismatches": 0,
+        "actual_fast_yaw_cases": 13,
+        "cases_without_controlled_callees": 192
+      },
+      {
+        "cw": "0x27f",
+        "cases": 2496,
+        "value_mismatches": 0,
+        "call_mismatches": 0,
+        "flag_mismatches": 2496,
+        "cw_mismatches": 0,
+        "actual_fast_yaw_cases": 13,
+        "cases_without_controlled_callees": 192
+      },
+      {
+        "cw": "0x67f",
+        "cases": 2496,
+        "value_mismatches": 0,
+        "call_mismatches": 0,
+        "flag_mismatches": 2496,
+        "cw_mismatches": 0,
+        "actual_fast_yaw_cases": 13,
+        "cases_without_controlled_callees": 192
+      },
+      {
+        "cw": "0xa7f",
+        "cases": 2496,
+        "value_mismatches": 0,
+        "call_mismatches": 0,
+        "flag_mismatches": 2496,
+        "cw_mismatches": 0,
+        "actual_fast_yaw_cases": 13,
+        "cases_without_controlled_callees": 192
+      },
+      {
+        "cw": "0xe7f",
+        "cases": 2496,
+        "value_mismatches": 0,
+        "call_mismatches": 0,
+        "flag_mismatches": 2496,
+        "cw_mismatches": 0,
+        "actual_fast_yaw_cases": 13,
+        "cases_without_controlled_callees": 192
+      },
+      {
+        "cw": "0x37f",
+        "cases": 2496,
+        "value_mismatches": 0,
+        "call_mismatches": 0,
+        "flag_mismatches": 2496,
+        "cw_mismatches": 0,
+        "actual_fast_yaw_cases": 13,
+        "cases_without_controlled_callees": 192
+      },
+      {
+        "cw": "0x77f",
+        "cases": 2496,
+        "value_mismatches": 0,
+        "call_mismatches": 0,
+        "flag_mismatches": 2496,
+        "cw_mismatches": 0,
+        "actual_fast_yaw_cases": 13,
+        "cases_without_controlled_callees": 192
+      },
+      {
+        "cw": "0xb7f",
+        "cases": 2496,
+        "value_mismatches": 0,
+        "call_mismatches": 0,
+        "flag_mismatches": 2496,
+        "cw_mismatches": 0,
+        "actual_fast_yaw_cases": 13,
+        "cases_without_controlled_callees": 192
+      },
+      {
+        "cw": "0xf7f",
+        "cases": 2496,
+        "value_mismatches": 0,
+        "call_mismatches": 0,
+        "flag_mismatches": 2496,
+        "cw_mismatches": 0,
+        "actual_fast_yaw_cases": 13,
+        "cases_without_controlled_callees": 192
+      }
+    ],
+    "verdict": "partial",
+    "value_call_cw_mismatches": 0,
+    "flag_mismatches": 29952,
+    "scope": "Unchanged existing ground implementation; this oracle does not exercise the new value type."
+  },
+  "adapter_edge": {
+    "classification": "public callback-contract edge, not an established reachable ordinary game path",
+    "trigger": "Entry event flag delegates before input; a supplied world_to_player callback can set that flag after dispatch, making GetAnalog active without writing angle/magnitude.",
+    "proof": "Reviewer temporary executable observed success=1 active=1 outputs_written=0, scratch sentinels unchanged.",
+    "next_action": "During reference adapter migration, report unavailable scratch lazily at actual consumption; preserve earlier failures/stores and never initialize fake zero inputs.",
+    "angle_site": "0x44c6d3",
+    "angle_override_site": "0x44c696",
+    "magnitude_sites": [
+      "0x44c6fb",
+      "0x44c72a",
+      "0x44c781",
+      "0x44c7c8",
+      "0x44c7d4"
+    ]
+  },
+  "judge_refresh": "Register unit/header dependency and freeze six new mutations/readability baseline; no existing fixture, tolerance, expected value or oracle comparison edited.",
+  "limits": [
+    "Header-only arithmetic foundation is not yet used by the ground/friction algorithm.",
+    "No plain-float premise, new guest binding, native boot/title, stage replay or hardware fidelity claim.",
+    "Existing 29952 ground flag discrepancies remain separate; partial is not pass.",
+    "Hook settings and user Ghidra drafts untouched."
+  ]
+}

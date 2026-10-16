@@ -132,6 +132,7 @@ build/%-test: tests/unit/$$(subst -,_,$$*).cpp build/libsadx-core.a
 build/%-test: tests/unit/$$(subst -,_,$$*).mm build/libsadx-macos.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-macos.a build/libsadx-core.a $(MAC_FRAMEWORKS) -o $@
 # Fixture headers some tests include.
+build/fidelity-float-test: src/cpu/fidelity_float.hpp
 build/input-test build/mac-input-test: tests/fixtures/input_keyboard_goldens.hpp
 build/ninja-queue-consumer-test: tests/fixtures/ninja_sprite_test_fixture.hpp
 build/native-player-path-probe.dylib build/native-player-direction-reset-probe.dylib: tests/fixtures/path_probe_data.hpp

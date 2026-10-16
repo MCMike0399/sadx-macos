@@ -3609,3 +3609,57 @@ The product still needs native boot/title, resources and gameplay recovery.
   hook settings and the user's two Ghidra request drafts untouched.
 * Next: §6.6b ground acceleration, retaining the census precision constraints (observed
   entries CW 0x023f; this function unobserved, no plain-float premise). Goal remains active.
+
+
+### 2026-10-16 — GOAL §6.6b exact-value foundation (track R, gate 148)
+
+* Added STYLE §7 tier-3 arithmetic foundation `cpu/fidelity_float.hpp`, source commit
+  `b7e786a`. `sadx::fidelity::ExactFloat` retains the caller's x87 value/context: float RHS
+  is a memory operand, another exact value is loaded; `rounded()` is an explicit binary32
+  spill. Memory-first subtraction/division retain reverse order. Doubles are rejected;
+  mixed contexts fail before arithmetic. No implicit float conversion or hidden FPU default.
+  Named temporaries must sequence independent operand computations when exception order
+  matters, because C++17 does not order the sides of a binary expression.
+* The new unit covers cancellation with/without a spill, retained exponent recovery,
+  12 PC/RC profiles, signaling-memory versus loaded NaN selection, NaN/denormal precedence,
+  comparisons, signed zero, reverse arithmetic, mixed contexts and unmasked failure before
+  destination store. Registered in the gate with an explicit header dependency. Six mutants
+  caught, restored unit passes. Initial mutation missed its rebuild due to make's timestamp
+  resolution; final runner waits/touches and asserts executable newer than header before
+  every check. No survivor was treated as a pass.
+* Independent STYLE review approved the foundation with no blockers; its requested
+  evaluation-order warning is in the header and STYLE. All new game-tier debt counts are
+  zero; scope now 230 files, totals unchanged. Source implementation and judge refresh are
+  separate commits; existing oracle fixtures/comparisons/tolerances remain unchanged.
+* **Ground/friction migration is still open.** This helper is not yet used by those
+  algorithms, so its unit/mutation results do not prove a migrated ground implementation.
+  The full owned Ghidra dossier `inventory-raw/ground-pilot-context.json`, evidence
+  `ev_b9e2502725c195a77b096e64d97288e6b5f9db93725b1886a588320ac34dee6d`, confirms
+  44c270..44cde4 inclusive (2,933 bytes). The context bundle includes names/types, callees,
+  native candidates and profile coverage. PE bytes confirm the 24 shortest source float
+  literals for the next refactor. Shared friction also serves alternate acceleration;
+  migrate it once and rerun both oracles. The census does not justify plain floats.
+* Reviewer demonstrated a public callback-contract edge: world-to-player callback can set
+  task event flag after entry dispatch; actual GetAnalog then returns active with neither
+  output written. Sentinels remain unchanged. The recovered coordinate owner does not
+  mutate that flag, so this is not an established ordinary game path. Future reference
+  adapter must validate scratch lazily: angle at 44c6d3 unless reset overrides it at 44c696;
+  first magnitude read is 44c6fb/44c72a/44c781/44c7c8/44c7d4 by branch. Preserve earlier
+  contact/arithmetic/rotation failure precedence; no fake zero angle or magnitude.
+* Reran unchanged ground oracle as baseline: **partial**, 29,952 comparisons with zero
+  value/call/CW mismatches and 29,952 flag discrepancies; case digest unchanged. Summary
+  refreshed with current source/library identities. This oracle does not exercise the new
+  exact-value type. Evidence: `production-integration-20261016/fidelity-float-148-*.json`,
+  mutation log and `fidelity-float-mutants.json`.
+* Full gate **rc 0**, **130 native programs / 46 Python tests**. The 7,228-frame intro,
+  first 600 override digests, 71,115 override comparisons/mutants, 900-frame controller parity
+  and 63 FPS cadence remain exact; host 83.1 FPS. Twelve layers / zero exceptions, 159,630
+  legacy owned bytes / 159,680 combined identities, 414 protected judge inputs.
+* Aggregate oracle verdict still rc 2: existing 9 fail / 46 partial / 1 missing. Other standalone
+  oracles, separate `make m1`, and four unregistered tests (`metal-sprite`,
+  `metal-sprite-composition`, `metal-texture`, `player-task`) skipped. No new live binding,
+  native boot/title, stage/Windows/physical-pad or full-independence claim. Hook settings,
+  user's two Ghidra request drafts and game assets untouched; nothing pushed.
+* Next: complete §6.6b's actual ground/friction migration using the retained-value helper,
+  semantic constants and reference-only diagnostics, with unchanged oracle counts, explicit
+  callback/scratch coverage and independent final STYLE review. Goal remains active.

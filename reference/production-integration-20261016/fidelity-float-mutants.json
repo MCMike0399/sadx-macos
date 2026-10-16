@@ -1,0 +1,32 @@
+[
+  [
+    "hidden_memory_add_spill",
+    "return retain(context_->add_float_memory(value_, memory));",
+    "return ExactFloat(*context_, context_->to_float(context_->add_float_memory(value_, memory)));"
+  ],
+  [
+    "preload_memory_signaling_nan",
+    "return retain(context_->add_float_memory(value_, memory));",
+    "return retain(context_->add(value_, context_->from_float(memory)));"
+  ],
+  [
+    "hidden_loaded_add_spill",
+    "return retain(context_->add(value_, other.value_));",
+    "return ExactFloat(*context_, context_->to_float(context_->add(value_, other.value_)));"
+  ],
+  [
+    "forward_subtraction_for_reverse",
+    "reverse_subtract_float_memory(reg.value_, memory)",
+    "subtract_float_memory(reg.value_, memory)"
+  ],
+  [
+    "forward_division_for_reverse",
+    "reverse_divide_float_memory(reg.value_, memory)",
+    "divide_float_memory(reg.value_, memory)"
+  ],
+  [
+    "accept_mixed_contexts",
+    "context_ != other.context_",
+    "context_ == nullptr && other.context_ == nullptr"
+  ]
+]

@@ -1,0 +1,9 @@
+baseline Exact float: retained precision/exponent, 12 controls, memory NaNs, explicit spills, reverse operands and failure prefixes passed.
+hidden_memory_add_spill caught: retained expression obeys selected precision without a hidden binary32 spill
+preload_memory_signaling_nan caught: memory signaling NaN keeps the existing quiet NaN and records invalid
+hidden_loaded_add_spill caught: loaded-operand expressions retain the same precision without a hidden spill
+forward_subtraction_for_reverse caught: left memory subtraction and division retain operand order
+forward_division_for_reverse caught: left memory subtraction and division retain operand order
+accept_mixed_contexts caught: mixed contexts fail before arithmetic or flag mutation
+restored Exact float: retained precision/exponent, 12 controls, memory NaNs, explicit spills, reverse operands and failure prefixes passed.
+caught 6 of 6

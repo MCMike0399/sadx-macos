@@ -347,7 +347,11 @@ comes first, because every later port should copy a readable model, not the lega
    explicit STUB stops; this does not complete native boot/title. STYLE §11 now quotes real code.
    (b) **Ground acceleration 44c270 `PGetAcceleration`** → literal constants and the
    arithmetic level that the census and the `ground_acceleration` oracle allow ("partial" stays
-   partial, values must still match). (c) **Frame control** → fixture optionals and
+   partial, values must still match). Foundation: `cpu/fidelity_float.hpp` now supplies the
+   exact retained-value operators required by STYLE §7 tier 3, tested across 12 PC/RC profiles,
+   memory/loaded NaNs, explicit spills and unmasked store failures. The ground/friction source
+   migration and its independent post-migration oracle/mutants remain open.
+   (c) **Frame control** → fixture optionals and
    `CounterWords` move into the adapter, and the game tier holds plain values. Then replace the
    sketches in STYLE §11 with the real code.
 7. **Refactor queue (R), one module per step, worst first:** `game_runtime` (EXE-read

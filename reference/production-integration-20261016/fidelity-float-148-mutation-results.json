@@ -1,0 +1,36 @@
+{
+  "baseline_exit": 0,
+  "mutants": [
+    {
+      "name": "hidden_memory_add_spill",
+      "caught": true,
+      "failure": "retained expression obeys selected precision without a hidden binary32 spill"
+    },
+    {
+      "name": "preload_memory_signaling_nan",
+      "caught": true,
+      "failure": "memory signaling NaN keeps the existing quiet NaN and records invalid"
+    },
+    {
+      "name": "hidden_loaded_add_spill",
+      "caught": true,
+      "failure": "loaded-operand expressions retain the same precision without a hidden spill"
+    },
+    {
+      "name": "forward_subtraction_for_reverse",
+      "caught": true,
+      "failure": "left memory subtraction and division retain operand order"
+    },
+    {
+      "name": "forward_division_for_reverse",
+      "caught": true,
+      "failure": "left memory subtraction and division retain operand order"
+    },
+    {
+      "name": "accept_mixed_contexts",
+      "caught": true,
+      "failure": "mixed contexts fail before arithmetic or flag mutation"
+    }
+  ],
+  "restored_exit": 0
+}
