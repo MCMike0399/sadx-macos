@@ -1,0 +1,196 @@
+{
+  "step": "GOAL6.7 input data initialization",
+  "base_commit": "a2fe862d9e6ee43c95683cdb78c5b685abaa95ec",
+  "source_sha256": {
+    "src/input/input_initial_state.hpp": "6c7afd7a79c3ca2dc0070ba5e957c40c5bd90a54b3115a339157f0bb23d3cd18",
+    "src/input/input_initial_state.cpp": "0eda2b014281062e72921c54192c164b1bff83e0215081089be538aa00097c3a",
+    "src/guest/native_game_reference.hpp": "36881c239b4cc99789c3907985103084ff40b24457c1966fe18837de62c2d9c3",
+    "src/guest/native_game_reference.cpp": "3fb5ac846a788a7fbad4125e58baa0e2fc3d044fa341dde44bcab239c1abb733",
+    "src/guest/native_input_initialization.cpp": "f736f85ee538c803fecb468d588547b2410c328adbdd366618c0868ffa5af950",
+    "src/guest/native_game_session.cpp": "afa438046becf8c120b953ebc1f48afe9b42e6f8acbb1b925b49e93bb25c2fcc"
+  },
+  "source_image_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "input_mod_sha256": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+  "source_ranges_sha256": {
+    "3b0e3e2-3b0e6e2": "ef115a0e0c15cdc41958ca46b5b14b456115f4baec5e3ca68599d2a8f435e3b8",
+    "3b0eaf0-3b0ebf0": "5341e6b2646979a70e57653007a1f310169421ec9bdd9f1a5648f75ade005af1",
+    "3b0e3ba-3b0e3bb": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+    "3b0eae8-3b0eae9": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+    "3b0e3e0-3b0e3e2": "96a296d224f285c67bee93c30f8a309157f0daa35dc5b87e410b78630a09cfc7",
+    "3b0e3b9-3b0e3ba": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+    "3b0eaa8-3b0eacc": "6db65fd59fd356f6729140571b5bcd6bb3b83492a16e1bf0a3884442fc3c8a0e",
+    "3b0ead4-3b0ead8": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3b0e9c8-3b0e9ec": "6db65fd59fd356f6729140571b5bcd6bb3b83492a16e1bf0a3884442fc3c8a0e",
+    "3b0e9f4-3b0e9f8": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3b0e9fc-3b0ea20": "6db65fd59fd356f6729140571b5bcd6bb3b83492a16e1bf0a3884442fc3c8a0e",
+    "3b0ea28-3b0ea2c": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3b0ea30-3b0ea54": "6db65fd59fd356f6729140571b5bcd6bb3b83492a16e1bf0a3884442fc3c8a0e",
+    "3b0ea5c-3b0ea60": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3b0ea64-3b0ea88": "6db65fd59fd356f6729140571b5bcd6bb3b83492a16e1bf0a3884442fc3c8a0e",
+    "3b0ea90-3b0ea94": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "1000e748-1000e76c": "6db65fd59fd356f6729140571b5bcd6bb3b83492a16e1bf0a3884442fc3c8a0e",
+    "1000e774-1000e778": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "1000e77c-1000e7a0": "6db65fd59fd356f6729140571b5bcd6bb3b83492a16e1bf0a3884442fc3c8a0e",
+    "1000e7a8-1000e7ac": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "1000e7b0-1000e7d4": "6db65fd59fd356f6729140571b5bcd6bb3b83492a16e1bf0a3884442fc3c8a0e",
+    "1000e7dc-1000e7e0": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "1000e7e4-1000e808": "6db65fd59fd356f6729140571b5bcd6bb3b83492a16e1bf0a3884442fc3c8a0e",
+    "1000e810-1000e814": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "1000e818-1000e83c": "6db65fd59fd356f6729140571b5bcd6bb3b83492a16e1bf0a3884442fc3c8a0e",
+    "1000e844-1000e848": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "1000e84c-1000e870": "6db65fd59fd356f6729140571b5bcd6bb3b83492a16e1bf0a3884442fc3c8a0e",
+    "1000e878-1000e87c": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "1000e880-1000e8a4": "6db65fd59fd356f6729140571b5bcd6bb3b83492a16e1bf0a3884442fc3c8a0e",
+    "1000e8ac-1000e8b0": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "1000e8b4-1000e8d8": "6db65fd59fd356f6729140571b5bcd6bb3b83492a16e1bf0a3884442fc3c8a0e",
+    "1000e8e0-1000e8e4": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "1000e950-1000e974": "6db65fd59fd356f6729140571b5bcd6bb3b83492a16e1bf0a3884442fc3c8a0e",
+    "1000e97c-1000e980": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "1000e9b0-1000e9d4": "6db65fd59fd356f6729140571b5bcd6bb3b83492a16e1bf0a3884442fc3c8a0e",
+    "1000e9dc-1000e9e0": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "1000ea10-1000ea34": "6db65fd59fd356f6729140571b5bcd6bb3b83492a16e1bf0a3884442fc3c8a0e",
+    "1000ea3c-1000ea40": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "1000ea70-1000ea94": "6db65fd59fd356f6729140571b5bcd6bb3b83492a16e1bf0a3884442fc3c8a0e",
+    "1000ea9c-1000eaa0": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "1000ead0-1000eaf4": "6db65fd59fd356f6729140571b5bcd6bb3b83492a16e1bf0a3884442fc3c8a0e",
+    "1000eafc-1000eb00": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "1000eb30-1000eb54": "6db65fd59fd356f6729140571b5bcd6bb3b83492a16e1bf0a3884442fc3c8a0e",
+    "1000eb5c-1000eb60": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "1000eb90-1000ebb4": "6db65fd59fd356f6729140571b5bcd6bb3b83492a16e1bf0a3884442fc3c8a0e",
+    "1000ebbc-1000ebc0": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "1000ebf0-1000ec14": "6db65fd59fd356f6729140571b5bcd6bb3b83492a16e1bf0a3884442fc3c8a0e",
+    "1000ec1c-1000ec20": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+  },
+  "data_bytes_compared": 1869,
+  "resource_bytes_excluded": 252,
+  "resource_pointer_offsets": [
+    36,
+    40,
+    48
+  ],
+  "controller_data_offset_extents": [
+    [
+      0,
+      36
+    ],
+    [
+      44,
+      48
+    ]
+  ],
+  "dossiers": [
+    {
+      "label": "input-initial-controllers-confirmed",
+      "evidence_id": "ev_6aab80132c1327b4f11093b770af771716158b2d1dd33c5eb6ddebaecbf304df"
+    },
+    {
+      "label": "input-initial-clear-confirmed",
+      "evidence_id": "ev_75aa54730d0a836a656905b3fb2b53a977b6ae4d0ae7c8eac6533fc7733ff0d9"
+    },
+    {
+      "label": "input-initial-aggregate-confirmed",
+      "evidence_id": "ev_aa77e88812968e42f6a69b5a175bf1b02c18d4282e3329e3a0ccd611c061dc9a"
+    },
+    {
+      "label": "input-initial-xrefs-3b0e3b9",
+      "evidence_id": "ev_b544cb6491e17de272d8156ab1854c88685e5ca3d3a9fb667e09621eba89a812"
+    },
+    {
+      "label": "input-initial-xrefs-3b0e3ba",
+      "evidence_id": "ev_abda333d916650661870d2503286e80056b1a3447d345865b5c692004e2bcf4a"
+    },
+    {
+      "label": "input-initial-xrefs-3b0e3e0",
+      "evidence_id": "ev_2295ee1e9eb629548a90f3f87397fa000caa624c7cefd79ea1b6fbe93d1f87fd"
+    },
+    {
+      "label": "input-initial-xrefs-3b0e3e2",
+      "evidence_id": "ev_3d9a310f8ad49a2bec73de04bab868768efee835f70f3d1f34627866cd9c6cf7"
+    },
+    {
+      "label": "input-initial-xrefs-3b0e9c8",
+      "evidence_id": "ev_ca1991650b924562d178d6a6736964d461e3b4fd2421ec798291775610ce8bef"
+    },
+    {
+      "label": "input-initial-xrefs-3b0eaa8",
+      "evidence_id": "ev_fdc499c882ce4a21542f6013bc88bf37c9502d047fdc2093b16b50a6eb56056e"
+    },
+    {
+      "label": "input-initial-xrefs-3b0eae8",
+      "evidence_id": "ev_16557b618dec4c3ba83e5b94f60a267eef0029bf9e2c94c43f26d2fa3bda830b"
+    },
+    {
+      "label": "input-initial-xrefs-3b0eaf0",
+      "evidence_id": "ev_a4716c8dca170a3f84999564c9e8154afd54ef60932b275143874e184e6d2098"
+    },
+    {
+      "label": "decompile-0x10004790",
+      "evidence_id": "ev_a21b62bb5d32210db6e78c7b39e48411adb45152fb852e2758ef3c0aa561621e"
+    },
+    {
+      "label": "decompile-0x10004080",
+      "evidence_id": "ev_92d691f1f6f4379190342df7fc4cd46dc534e0a2eceb5f8d3008cd8217da9ce2"
+    }
+  ],
+  "numeric_mutants_caught": 3,
+  "adapter_mutants_caught": 4,
+  "rejected_equivalent_mutant": "Store to extension before unconditional resource reload: no observable constructor effect; retained in bridge report.",
+  "constructor": {
+    "configurations": [
+      "original",
+      "poisoned",
+      "varied",
+      "partial",
+      "no_mod",
+      "no_game",
+      "no_images"
+    ],
+    "data_and_resource_facts_per_configuration": 2121,
+    "includes_availability": true,
+    "identical": true,
+    "artifacts": [
+      {
+        "variant": "before",
+        "bytes": 64450,
+        "sha256": "5f78850e4e6d4220745fca4600fea6814a173668da1cc46f5102c2355a4b3ac9",
+        "row_sha256": [
+          "3e61524bdcb438e4bb227c66fa57a8ec40e84749403fb0cd69b2a5cc0a029ba6",
+          "05ec2c433282a865c6e5cef839371367592580698568c8bfe092a231ca141d58",
+          "c7212502675c8afdf22beb9abf31f9a78c831eab86e2d7485b68b0a9a56d745b",
+          "22a1be2326fd9ad2d850239acfa0bd227c0d27b952b6416ef2720aee5ef7a6de",
+          "a33475a31f5be6d7a52358fa0a12fe2d2b5a20d9e2a79982080b74d83c50094d",
+          "fb0cf14c9a5e30465f9ade0eb41a842058b88ab5f23f210bc829eb42d5ccc879",
+          "f71c95b0eb7e17831151de1ee9fceaad2abad0e684d6dd6177583dcac40c8a8f"
+        ]
+      },
+      {
+        "variant": "after",
+        "bytes": 64450,
+        "sha256": "5f78850e4e6d4220745fca4600fea6814a173668da1cc46f5102c2355a4b3ac9",
+        "row_sha256": [
+          "3e61524bdcb438e4bb227c66fa57a8ec40e84749403fb0cd69b2a5cc0a029ba6",
+          "05ec2c433282a865c6e5cef839371367592580698568c8bfe092a231ca141d58",
+          "c7212502675c8afdf22beb9abf31f9a78c831eab86e2d7485b68b0a9a56d745b",
+          "22a1be2326fd9ad2d850239acfa0bd227c0d27b952b6416ef2720aee5ef7a6de",
+          "a33475a31f5be6d7a52358fa0a12fe2d2b5a20d9e2a79982080b74d83c50094d",
+          "fb0cf14c9a5e30465f9ade0eb41a842058b88ab5f23f210bc829eb42d5ccc879",
+          "f71c95b0eb7e17831151de1ee9fceaad2abad0e684d6dd6177583dcac40c8a8f"
+        ]
+      }
+    ]
+  },
+  "composition": {
+    "survey_frames": 3,
+    "poisoned_game_and_mod_match": true,
+    "before_after_cli_report_identical": true,
+    "cli_report_bytes": 5427,
+    "cli_report_sha256": "52254476457a377d2ac6d3f5eb7cd323f2154d6e22bf2e79e296833c8b070b7c"
+  },
+  "independent_review": "input_initial_review: final source, classification, oracle, isolation, all seven mutations and provenance relocation approved; ready for full gate",
+  "limits": [
+    "Initialization values only; resource handles, connected state, input constants, controller discovery, other initialization families and executable independence remain open.",
+    "Three-frame survey has no sprite draws and is navigation only, not full native game behavior.",
+    "Five original consumer oracles numerically unchanged; Input mod pad retains 300 MXCSR differences across1044poll cases.",
+    "Three initial analyze_function requests had invalid parameter name address; retained errors are not positive evidence. Corrected procedure requests all succeeded."
+  ]
+}

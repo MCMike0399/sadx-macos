@@ -1,0 +1,64 @@
+{
+  "passed": true,
+  "source_sha256": "f736f85ee538c803fecb468d588547b2410c328adbdd366618c0868ffa5af950",
+  "baseline": {
+    "name": "baseline",
+    "exit_status": 0,
+    "killed": false,
+    "output": "Game runtime: survey ran startup + 3 frames (5 unported owners); native execution stops at 40cad0>40c090>415000>422680.",
+    "replacement": [
+      null,
+      null
+    ]
+  },
+  "mutants": [
+    {
+      "name": "ignore_native_input",
+      "exit_status": 1,
+      "killed": true,
+      "output": "native input facts retain every data byte",
+      "replacement": [
+        "if (config_.input_defaults) {",
+        "if (false && config_.input_defaults) {"
+      ]
+    },
+    {
+      "name": "negate_left_stick",
+      "exit_status": 1,
+      "killed": true,
+      "output": "native input facts retain every data byte",
+      "replacement": [
+        "static_cast<std::uint16_t>(values.left_x)",
+        "static_cast<std::uint16_t>(-values.left_x)"
+      ]
+    },
+    {
+      "name": "zero_injected_resources",
+      "exit_status": 1,
+      "killed": true,
+      "output": "native input values preserve independent resource availability and bytes",
+      "replacement": [
+        "record.write_byte(i, image ? image->byte(address + i) : std::nullopt);",
+        "record.write_byte(i, image ? (config_.input_defaults ? std::optional<std::uint8_t>{0} : image->byte(address + i)) : std::nullopt);"
+      ]
+    },
+    {
+      "name": "wrong_mod_raw_stride",
+      "exit_status": 1,
+      "killed": true,
+      "output": "native input values preserve independent resource availability and bytes",
+      "replacement": [
+        "load(*input_raw_[i], dll, 0x1000e748 + 52 * i);",
+        "load(*input_raw_[i], dll, 0x1000e748 + 96 * i);"
+      ]
+    }
+  ],
+  "rejected_equivalent_mutant": {
+    "name": "overwrite_extension_resource_before_resource_reload",
+    "reason": "Writing +40 inside store_input_values is overwritten by the subsequent resource load; it has no observable constructor effect and is not a valid mutation."
+  },
+  "limits": [
+    "Temporary adapter copies linked before unchanged archives; no worktree mutation.",
+    "Three-frame survey only, no sprite draws or complete native input claim."
+  ]
+}

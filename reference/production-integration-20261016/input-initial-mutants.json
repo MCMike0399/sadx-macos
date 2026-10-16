@@ -1,0 +1,17 @@
+[
+  [
+    "post-poll complement used before polling",
+    "return {};",
+    "auto values = InputInitialState{}; values.controller_template.not_held = 4294967295U; return values;"
+  ],
+  [
+    "last raw edge lane nonzero",
+    "return {};",
+    "auto values = InputInitialState{}; values.edges.raw[255][2] = 1; return values;"
+  ],
+  [
+    "last mod raw stick nonzero",
+    "return {};",
+    "auto values = InputInitialState{}; values.mod_raw[7].right_y = -32768; return values;"
+  ]
+]

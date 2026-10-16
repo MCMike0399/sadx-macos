@@ -117,8 +117,8 @@ REFERENCE_UNIT_TARGETS := build/game-view-test \
  build/player-scene-position-binding-test
 $(REFERENCE_UNIT_TARGETS): build/%-test: tests/unit/$$(subst -,_,$$*).cpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< $(EXTRA_REFERENCE_SOURCES) build/libsadx-guest.a build/libsadx-core.a -o $@
-build/game-runtime-test: EXTRA_REFERENCE_SOURCES := tests/probes/native_session_control_defaults_probe.cpp
-build/game-runtime-test: tests/probes/native_session_control_defaults_probe.cpp tests/probes/session_control_probe.hpp
+build/game-runtime-test: EXTRA_REFERENCE_SOURCES := tests/probes/native_session_control_defaults_probe.cpp tests/probes/native_input_initial_state_probe.cpp
+build/game-runtime-test: tests/probes/native_session_control_defaults_probe.cpp tests/probes/session_control_probe.hpp tests/probes/native_input_initial_state_probe.cpp tests/probes/input_initial_state_probe.hpp
 # Native frame-control composition deliberately excludes the reference/core archive.
 build/native-frame-control-test: tests/unit/native_frame_control.cpp src/engine/game_frame_control.cpp src/engine/game_frame_control.hpp src/engine/game_frame_control_internal.hpp src/engine/game_frame_control_native.cpp src/engine/speedrun.cpp src/engine/speedrun.hpp
 	$(CXX) $(CXXFLAGS) -Isrc tests/unit/native_frame_control.cpp src/engine/game_frame_control.cpp src/engine/game_frame_control_native.cpp src/engine/speedrun.cpp -o $@
@@ -158,6 +158,8 @@ build/native-game-mode-leaves-probe.dylib: tests/probes/native_game_mode_leaves_
 # This native code-table probe needs only maintained table source.
 build/native-engine-code-tables-probe.dylib: tests/probes/native_engine_code_tables_probe.cpp src/runtime/engine_code_tables.cpp src/runtime/engine_code_tables.hpp
 	$(CXX) $(CXXFLAGS) -dynamiclib -Isrc tests/probes/native_engine_code_tables_probe.cpp src/runtime/engine_code_tables.cpp -o $@
+build/native-input-initial-state-probe.dylib: tests/probes/native_input_initial_state_probe.cpp tests/probes/input_initial_state_probe.hpp src/input/input_initial_state.cpp src/input/input_initial_state.hpp
+	$(CXX) $(CXXFLAGS) -dynamiclib -Isrc tests/probes/native_input_initial_state_probe.cpp src/input/input_initial_state.cpp -o $@
 build/native-session-control-defaults-probe.dylib: tests/probes/native_session_control_defaults_probe.cpp tests/probes/session_control_probe.hpp src/runtime/session_control_defaults.cpp src/runtime/session_control_defaults.hpp src/engine/game_frame_control.hpp src/game/game_mode.hpp
 	$(CXX) $(CXXFLAGS) -dynamiclib -Isrc tests/probes/native_session_control_defaults_probe.cpp src/runtime/session_control_defaults.cpp -o $@
 build/native-%-probe.dylib: tests/probes/native_$$(subst -,_,$$*)_probe.cpp build/libsadx-core.a
@@ -184,7 +186,11 @@ build/engine-code-tables-poisoned.exe: $(subst $(game_path_space),\$(game_path_s
 session-control-fixtures: $(subst $(game_path_space),\$(game_path_space),$(GAME_EXE)) tools/oracles/verify_original_session_control_defaults.py build/native-session-control-defaults-probe.dylib
 	$(REFERENCE_PYTHON) tools/oracles/verify_original_session_control_defaults.py "$(GAME_EXE)" build/native-session-control-defaults-probe.dylib --output build/oracles/session_control_defaults.json --poison-output build/session-control-poisoned.exe --varied-output build/session-control-varied.exe --partial-output build/session-control-partial.exe
 
-run-unit-tests: assets $(UNIT_TARGETS) $(UNIT_MM_TARGETS) $(OVERRIDE_CORPORA) build/engine-code-tables-poisoned.exe session-control-fixtures
+.PHONY: input-initial-fixtures
+input-initial-fixtures: build/native-input-initial-state-probe.dylib
+	$(REFERENCE_PYTHON) tools/oracles/verify_original_input_initial_state.py "$(GAME_EXE)" "$(INPUT_MOD_DLL)" build/native-input-initial-state-probe.dylib --output build/oracles/input_initial_state.json --fixture-prefix build/input-initial
+
+run-unit-tests: assets $(UNIT_TARGETS) $(UNIT_MM_TARGETS) $(OVERRIDE_CORPORA) build/engine-code-tables-poisoned.exe session-control-fixtures input-initial-fixtures
 unit-tests: run-unit-tests
 test: unit-tests
 	$(PY) -m unittest discover -s tests/python -p 'test_*.py'
@@ -208,7 +214,10 @@ native-engine-code-tables:
 .PHONY: native-session-control-defaults
 native-session-control-defaults:
 	python3 tools/gate/check_session_control_defaults.py
-check: check-symbols native-frame-control native-engine-code-tables native-session-control-defaults
+.PHONY: native-input-initial-state
+native-input-initial-state:
+	python3 tools/gate/check_input_initial_state.py
+check: check-symbols native-frame-control native-engine-code-tables native-session-control-defaults native-input-initial-state
 	python3 tools/gate/check_layers.py
 	python3 tools/gate/check_global_owners.py
 	python3 tools/gate/check_provenance.py

@@ -17,3 +17,4 @@ speedrun_limiter	build/native-speedrun-limiter-probe.dylib	tools/oracles/verify_
 speedrun_on_frame	build/native-speedrun-on-frame-probe.dylib	tools/oracles/verify_original_speedrun_on_frame.py "$(SPEEDRUN_DLL)" build/native-speedrun-on-frame-probe.dylib --output build/oracles/speedrun_on_frame.json
 sse_math	build/native-sse-math-probe.dylib	tools/oracles/verify_original_sse_math.py build/native-sse-math-probe.dylib --output build/oracles/sse_math.json
 vibration_stop	build/native-vibration-stop-probe.dylib	tools/oracles/verify_original_vibration_stop.py "$(INPUT_DLL)" build/native-vibration-stop-probe.dylib --output build/oracles/vibration_stop.json
+input_initial_state	build/native-input-initial-state-probe.dylib	tools/oracles/verify_original_input_initial_state.py "$(GAME_EXE)" "$(INPUT_MOD_DLL)" build/native-input-initial-state-probe.dylib --output build/oracles/input_initial_state.json

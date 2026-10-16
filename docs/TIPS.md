@@ -150,3 +150,17 @@ in `AGENTS.md` and `STYLE.md`; this page holds facts and patterns.
 * Native code-table selection belongs before any PE decoding of that family. A poisoned-PE
   runtime test catches an accidental read even when unchanged pinned table bytes would
   hide it. This does not remove the composition's other image dependencies.
+
+
+## Input initialization values
+
+* PDS_PERIPHERAL's 52-byte layout has three resource words: name at +0x24, extend
+  at +0x28 and info at +0x30. The previous-held word at +0x2c is scalar input.
+  Keep all three resources separate when migrating input data, including byte-granular
+  missing facts. An all-zero source record does not establish a native resource identity.
+* The load-time not-held mask is zero in the game template/raw records and Input mod's
+  raw/DreamPad data. DreamPad polling later writes the complement of held; applying that
+  invariant during load initialization changes the original state.
+* input_init clears only through the last raw row's first lane. Its last two lanes still
+  have independent load-time values; do not infer them from the clear loop. Gate153 evidence
+  `input-initial-153-*` compares all load-time bytes and preserves varied injected values.

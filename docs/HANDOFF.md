@@ -3949,3 +3949,29 @@ The product still needs native boot/title, resources and gameplay recovery.
   no owner or source-byte extent changes. Two new game-tier files have zero readability
   debt. Independent initial STYLE review found no source blockers; final review and full
   gate follow in the separate judge commit. GOAL §6.7 remains open.
+
+
+### 2026-10-16 — input initialization verification complete (gate 153)
+
+* Completes source `13a341a` with a separate judge commit. Native input source closure,
+  exhaustive 1,869-byte oracle, seven constructor configurations, poisoned-game/mod survey
+  and three data/four behavioral adapter mutants all pass. One equivalent candidate is
+  documented separately. Independent final STYLE review approves source, classifications,
+  missing/resource facts, provenance allowance relocation and the final evidence.
+* Full `make -j10 gate` **rc 0**, **135 native programs / 50 Python tests**. Unchanged
+  7,228-frame two-boot determinism and first-600 override digests; 71,115 comparisons/mutants,
+  900-frame controller parity and 63 FPS title cadence pass. Host throughput 83.1 FPS.
+  Twelve layers, zero exceptions; 159,630 owned bytes/159,680 combined identities;
+  442 protected judge inputs. Readability235files with unchanged debt: hex11,628 /
+  identifiers1,796 / calls75 / gotos2 / long lines1,489 / multiple statements2,184.
+* Five affected consumer oracles retain every prior numerical result. Input mod pad keeps
+  its 300 MXCSR differences across1,044 cases (partial). Aggregate verdict command rc2:
+  tracked51pass/46partial/9fail/1missing. Other standalone oracles, separate `make m1`, and
+  four unregistered tests skipped: metal-sprite, metal-sprite-composition, metal-texture,
+  player-task. Source/probe/app programs compile; no assets or binaries committed.
+* Evidence: `production-integration-20261016/input-initial-153-*`, including source/range
+  identities, corrected Ghidra dossiers/xrefs, constructor fingerprints/driver, CLI reports,
+  retained mutation harness, isolated closure and recorded gate. Resources, discovery,
+  DLL lifecycle and other initialization families remain open; no complete native input,
+  session, title or game independence claim. Goal active; two user Ghidra drafts and hook
+  settings untouched. Commits remain local; no push.

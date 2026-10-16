@@ -370,10 +370,13 @@ comes first, because every later port should copy a readable model, not the lega
    Runtime initialization is **in progress**: immutable engine code tables now come from
    maintained native source (gate 151: 287 exact words, five caught mutations). Scalar control
    defaults add 51 exact source words, six caught mutations, isolated native builds and
-   poisoned/varied/partial/no-image constructor checks. Native boot configuration selects
-   these families explicitly; injectable reference decoding remains available. These families
-   do not complete the runtime refactor: resource/content references, input records, sine data
-   and remaining load-image facts still need native initial values or importer seams.
+   poisoned/varied/partial/no-image constructor checks. Input initialization adds 1,869 exact
+   data bytes in typed edge buffers and controller values, with all 252 resource-pointer
+   bytes preserved separately, seven caught behavioral mutations and seven old/new constructor
+   configurations. Native boot configuration selects these families explicitly; injectable
+   reference decoding remains available. These families do not complete the runtime refactor:
+   resource/content references, remaining input state, sine data and other load-image facts
+   still need native initial values or importer seams.
    Existing unported stops remain. See the latest recorded gate and HANDOFF for verification.
 8. **M1 override-equivalence (V/S), with every new binding written in two-tier form.** Ported
    owners still unbound (reconciled at gate 130; 22 after gate 137): 401000 401830 401a20

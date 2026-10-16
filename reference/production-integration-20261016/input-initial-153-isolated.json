@@ -1,0 +1,86 @@
+{
+  "passed": true,
+  "source_sha256": {
+    "src/input/input_initial_state.hpp": "6c7afd7a79c3ca2dc0070ba5e957c40c5bd90a54b3115a339157f0bb23d3cd18",
+    "src/input/input_initial_state.cpp": "0eda2b014281062e72921c54192c164b1bff83e0215081089be538aa00097c3a",
+    "tests/probes/input_initial_state_probe.hpp": "9e93ad6c5ba55f7dfb853059ef1db1f9a971353acf4b600a374505e607a1cc40",
+    "tests/probes/native_input_initial_state_probe.cpp": "db9f9317fcab64a50ac33f9468db9b4528e97085241ce0411c7ef035602a9227"
+  },
+  "compiler_dependencies": [
+    "src/input/input_initial_state.cpp",
+    "src/input/input_initial_state.hpp",
+    "tests/probes/input_initial_state_probe.hpp",
+    "tests/probes/native_input_initial_state_probe.cpp"
+  ],
+  "toolchain_metadata_sha256": {
+    "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb"
+  },
+  "linked_libraries": [
+    "/usr/lib/libc++.1.dylib",
+    "/usr/lib/libSystem.B.dylib"
+  ],
+  "reference_runtime_symbols_found": false,
+  "commands": [
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-0.d",
+      "-c",
+      "src/input/input_initial_state.cpp",
+      "-o",
+      "unit-0.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-1.d",
+      "-c",
+      "tests/probes/native_input_initial_state_probe.cpp",
+      "-o",
+      "unit-1.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-dynamiclib",
+      "-Wl,-install_name,@rpath/input-initial-state.dylib",
+      "unit-0.o",
+      "unit-1.o",
+      "-o",
+      "input-initial-state.dylib"
+    ]
+  ],
+  "binary_sha256": "9c98cce0ebc5b36378241febdc56543f705de4cc873e5d706562ad6ba6bd484f",
+  "serialized": {
+    "bytes": 1869,
+    "sha256": "4cfbc7e186da614b5d74630a2a6e235354ece9c8352b076c11569b6bf66c551f"
+  },
+  "copied_original_binary_inputs": [],
+  "copied_fixtures": [],
+  "inherited_environment": false,
+  "core_archive_linked": false,
+  "limits": [
+    "Load-time input data only; name/extension/info resources, discovery and other initialization facts remain outside this closure.",
+    "Isolated source/dependency closure, not an operating-system access sandbox.",
+    "Only the verified fingerprint is read before isolation; no original binary or table data is copied."
+  ]
+}
