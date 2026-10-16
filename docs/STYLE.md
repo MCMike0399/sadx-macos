@@ -224,11 +224,14 @@ measure.
 
 ## 11. Before and after (from this repository)
 
-The "after" versions are sketches showing the shape. Each becomes real only when its oracle
-passes unchanged (GOAL §6).
+The game-mode example is implemented and judged. The ground-acceleration sketch below remains
+conditional on its precision evidence and oracle (GOAL §6).
 
-**Game mode handler** (legacy reference interpreter now in
-`src/guest/game_mode_reference.cpp`, 40c090 `GameModeHandler`; the game-tier rewrite is pending):
+**Game mode handler** (`src/game/game_mode.cpp`, `update_logo`; source `GameModeHandler`).
+The adapter in `src/guest/game_mode_reference.cpp` holds call-site addresses, guest arguments,
+and lazy missing-fact diagnostics. The native backend reads plain state and stops explicitly
+at uncomposed callees. `FlowPhase` names logical steps; it carries no source address or game
+branch in the adapter.
 
 ```cpp
 // before: transliterated assembly
@@ -240,21 +243,29 @@ case 0x01:
 ```
 
 ```cpp
-// after: game tier
-case GameMode::Logo: {                                     // MD_LOGO
-    const int logo_result = run_logos();                   // RunSegaSonicTeamLogos (seam)
-    if (logo_result == 1) {
-        frame_control.set_frame_rate_mode(1, 1);           // dsInitInt
-        return enter_title(state);                         // was the shared tail L3bc
+// after: actual game-tier helper
+void update_logo(FlowContext &flow) {
+    enter_phase(flow, FlowPhase::Logo);
+    const auto result = run_logos(flow);
+    if (result == 1) {
+        enter_phase(flow, FlowPhase::LogoTitle);
+        set_frame_rate_mode(flow, 1, 1);
+        enter_title(flow);
+    } else if (result == 3) {
+        enter_phase(flow, FlowPhase::LogoMovie);
+        set_frame_rate_mode(flow, 1, 1);
+        write_movie_number(flow, 0);
+        write_mode(flow, GameMode::Movie);
     }
-    if (logo_result == 3) {
-        frame_control.set_frame_rate_mode(1, 1);
-        movie.number = 0;                                  // movie_num
-        mode = GameMode::Movie;
-    }
-    break;
 }
 ```
+
+State accessors publish every source store, including same-value stores, and validate facts
+only on reads. This preserves owner callbacks that change or invalidate state during a
+frame, without putting fixture optionals in the game tier. The unchanged oracle covers
+24,000 cases/252 paths; three preserved mutations and a separate 2,048-case holdout judge
+the rewrite. Native-only linkage proves the dispatcher builds without a PE or guest runtime;
+it does not claim the menu, logo, audio, or other missing callee implementations are complete.
 
 **Ground acceleration** (`src/player/player_acceleration_ground.cpp`, 44c270
 `PGetAcceleration`). The constants below are the actual values at 7dd568, 7dd584, 7e0178,

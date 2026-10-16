@@ -22,5 +22,24 @@ int main(){try{
     {Fixture f;f.mode.reset();require(sadx::run_game_mode_40c090(f.rt).source_boundary==0x40c091,"unknown mode stops before dispatch");}
     {Fixture f;f.rt.invoke={};auto r=sadx::run_game_mode_40c090(f.rt);require(r.failure==sadx::GameModeFailure::missing_owner&&r.pending_call&&r.pending_call->callee==0x4228f0,"missing owner keeps the pending call");}
     {Fixture f;f.mode=0x19;auto r=sadx::run_game_mode_40c090(f.rt);require(r&&f.calls.size()==2&&f.calls[0].callee==0x42c4f0,"unused modes run only the tail");}
+    {Fixture f;f.mode=25;f.loop={};f.st={};f.st.word_at_3b290e4=0;
+     auto r=sadx::run_game_mode_40c090(f.rt);
+     require(r&&f.calls.size()==2&&!f.loop.mode_at_3b28114&&!f.st.byte_at_3abdf74,"unread absent facts remain absent through a short-circuited tail");}
+    {Fixture f;f.mode=25;f.st.word_at_3b290e4=1;f.st.byte_at_3b22e1e.reset();
+     auto r=sadx::run_game_mode_40c090(f.rt);
+     require(r.failure==sadx::GameModeFailure::unknown_state&&r.source_boundary==0x40c967&&f.calls.empty(),"tail reports only the first missing fact it actually reads");}
+    {Fixture f;f.mode=2;f.loop.mode_at_3b28114.reset();
+     f.rt.invoke=[&](const sadx::GameModeCall& c)->sadx::GameModeOwnerResult{
+         f.calls.push_back(c);if(c.callee==0x42e890)require(f.loop.mode_at_3b28114==0u,"same-value zero store materializes an absent pause fact before callback");
+         return {{sadx::GameLogicOwnerState::completed,0},0u};};
+     require(bool(sadx::run_game_mode_40c090(f.rt)),"title prefix store requires no prior pause value");}
+    {Fixture f;f.mode=25;f.rt.invoke=[](const sadx::GameModeCall&)->sadx::GameModeOwnerResult{
+         return {{sadx::GameLogicOwnerState::completed,0},std::nullopt};};
+     require(bool(sadx::run_game_mode_40c090(f.rt)),"ignored EAX at shared tail calls may remain unknown");}
+    {Fixture f;f.rt.invoke=[&](const sadx::GameModeCall& c)->sadx::GameModeOwnerResult{
+         f.calls.push_back(c);if(c.callee==0x5034a0)f.mode.reset();
+         return {{sadx::GameLogicOwnerState::completed,0},0u};};
+     auto r=sadx::run_game_mode_40c090(f.rt);
+     require(r.failure==sadx::GameModeFailure::unknown_state&&r.source_boundary==0x40c4e6,"mode is validated again after an owner removes the fact");}
     std::cout<<"Game mode: 40c090 dispatch, required results, level-pointer and owner boundaries passed.\n";return 0;
 }catch(const std::exception& e){std::cerr<<e.what()<<'\n';return 1;}}
