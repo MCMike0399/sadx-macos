@@ -68,7 +68,7 @@ audio-stream
 game-reset	
 game-view	
 ninja-projection-range	
-game-runtime	"$(GAME_EXE)" "$(INPUT_MOD_DLL)" build/engine-code-tables-poisoned.exe build/session-control-poisoned.exe build/session-control-varied.exe build/session-control-partial.exe build/input-initial-poisoned.exe build/input-initial-poisoned.dll build/input-initial-varied.exe build/input-initial-varied.dll build/input-initial-partial.exe build/input-initial-partial.dll build/sine-initial build/fog-initial
+game-runtime	"$(GAME_EXE)" "$(INPUT_MOD_DLL)" build/engine-code-tables-poisoned.exe build/session-control-poisoned.exe build/session-control-varied.exe build/session-control-partial.exe build/input-initial-poisoned.exe build/input-initial-poisoned.dll build/input-initial-varied.exe build/input-initial-varied.dll build/input-initial-partial.exe build/input-initial-partial.dll build/sine-initial build/fog-initial build/screen-initial
 input-mod-pad	
 input-chain	
 ninja-sprite-queue	build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/ninja-depth-tables.bin
@@ -136,3 +136,4 @@ session-control-defaults
 input-initial-state
 ninja-sine-table
 ninja-fog-initial-state
+ninja-screen-initial-state

@@ -1,0 +1,260 @@
+{
+  "step": "GOAL6.7 numeric screen initialization",
+  "base_commit": "ff463cd4943fe7e986f27df89dd1bd097df7173a",
+  "source_sha256": {
+    "src/engine/ninja_screen_initial_state.hpp": "adfa26612d9aee42c94deb4c524583338df4c49ab627e97c5c3ddd1a297c1153",
+    "src/engine/ninja_screen_initial_state.cpp": "361e0775bd725ccab88e069c1c01c91af27ca431b893edbaf77210e353bc1a05",
+    "src/guest/native_game_reference.hpp": "b4a486558853217da18c2d6e49bf7033466f1bcb6b4c8abbbb33219640167db2",
+    "src/guest/native_game_reference.cpp": "e0ada2889b0c656af598e3cceddccaf5a701239f4571d087fba0a0fa665552fb",
+    "src/guest/native_game_session.cpp": "11f5cb3a482d8bd8ae357c9d5060cf6e7d0d0a0531af25127a94d7e59a325ddc"
+  },
+  "source_image_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "source_ranges_sha256": {
+    "3d0f808-3d0f80c": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0f968-3d0f96c": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "90082c-900830": "c68830a25204a09f8e77aada6bc5807f607cccaaa0ebb2a7122d317584478a8b",
+    "900830-900834": "a061bbb218b72abad8a60b3d9fdb97fbb49a30d46c6a60496e67db96b33a05e3",
+    "3aad0c0-3aad0c4": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3aad0c4-3aad0c8": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0f804-3d0f808": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0f964-3d0f968": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0f814-3d0f818": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0fa20-3d0fa24": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0f838-3d0f83c": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0f9e8-3d0f9ec": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0fa04-3d0fa08": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0fa08-3d0fa0c": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0f820-3d0f824": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0f824-3d0f828": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0f828-3d0f82c": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0f82c-3d0f830": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0fd1c-3d0fd20": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3ce7160-3ce7164": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3ce7170-3ce7174": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d12780-3d12784": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d12784-3d12788": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d12788-3d1278c": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d1278c-3d12790": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d12790-3d12794": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d12794-3d12798": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d12948-3d1294c": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d1294c-3d12950": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0fd20-3d0fd24": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0fd24-3d0fd28": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0fd28-3d0fd2c": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0fd2c-3d0fd30": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0f9e4-3d0f9e8": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3ce7184-3ce7188": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3ce7188-3ce718c": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3ce718c-3ce7190": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3ce7190-3ce7194": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3ce7194-3ce7198": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3ce7198-3ce719c": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3ce719c-3ce71a0": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3ce71a0-3ce71a4": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d129c0-3d12a00": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
+    "3d0fd80-3d0fdc0": "f5a5fd42d16a20302798ef6ed309979b43003d2320d9f0e8ea9831a92759fb4b",
+    "389d318-389d358": "5998e9d1dd9bf48af6af87a1ef8c7783b818ac8329637ada08cc5fb329042376"
+  },
+  "numeric_words_compared": 90,
+  "mismatches": 0,
+  "expected_words_sha256": "27d91488baa140609403004446e867b916ac61cd283c4454898e0c5932a9656f",
+  "polygon_resource_addresses": [
+    "0x3ce7164",
+    "0x3ce7168",
+    "0x3ce716c"
+  ],
+  "dossiers": [
+    {
+      "label": "screen-initial-depth",
+      "evidence_id": "ev_737a02240e2ea08f486a78b22b847ec6820bb52889e5475fe45a92ef822d650e"
+    },
+    {
+      "label": "screen-initial-device",
+      "evidence_id": "ev_cb53bf479c58781ec7a5433b3ed8b893888524a4bad1c3e19b9920abfc48ef92"
+    },
+    {
+      "label": "screen-initial-range",
+      "evidence_id": "ev_85f7515b2799686ef807ae79025220fbde3285693e62f589eaa732f80141b9e7"
+    },
+    {
+      "label": "screen-initial-setup",
+      "evidence_id": "ev_332421657976352101ec55f3ca5cfe477687e9b176b8cf8aceada95eaff67c3d"
+    },
+    {
+      "label": "screen-initial-viewport",
+      "evidence_id": "ev_38ac9457c14be00bf114c60f00337a6a45194fb27b93d7036f6daf55d6c987dc"
+    },
+    {
+      "label": "screen-initial-xrefs-389d318",
+      "evidence_id": "ev_3b62c4bb95a3ad14fec2a80b79776eb83316edc8aa5213363669c772a0cf55f5"
+    },
+    {
+      "label": "screen-initial-xrefs-3aad0c0",
+      "evidence_id": "ev_3df0f12288092adfd6d41268c9e1ebef53e9bef2c47a7c53a911f66dc0242744"
+    },
+    {
+      "label": "screen-initial-xrefs-3aad0c4",
+      "evidence_id": "ev_839e750efadd6f1a538778a89897ea97de13670e58607402503b76feaa5f4208"
+    },
+    {
+      "label": "screen-initial-xrefs-3ce7160",
+      "evidence_id": "ev_4d4c96cd9d4973cef27b1ffc00e3b3dcc97cc1eb3531d3125b9a54ba9be82a9b"
+    },
+    {
+      "label": "screen-initial-xrefs-3ce7170",
+      "evidence_id": "ev_443b7577f9c257690982eb168c01a264eff4045d577d0deb6dc269f990653441"
+    },
+    {
+      "label": "screen-initial-xrefs-3ce7184",
+      "evidence_id": "ev_19c476918f331cefa69080adace82aa5250e65280d2c35fe76994c704ae31a0e"
+    },
+    {
+      "label": "screen-initial-xrefs-3d0f804",
+      "evidence_id": "ev_73eb1ce5344ef31c3b25755500106e61c52bf50c49a432dda8c75da1c1f4d474"
+    },
+    {
+      "label": "screen-initial-xrefs-3d0f808",
+      "evidence_id": "ev_c93c0b5200af0f64d54804747df79984e746f12571bb994421a95ef093dc54e6"
+    },
+    {
+      "label": "screen-initial-xrefs-3d0f814",
+      "evidence_id": "ev_295b6d92314aa40f49968fce9d4ba050da0df1a317744c0012b9a8fa0bc406b6"
+    },
+    {
+      "label": "screen-initial-xrefs-3d0f820",
+      "evidence_id": "ev_20ec73c47c93f101427ae075ad69025988b1765b5860b0307a4895c864676ee3"
+    },
+    {
+      "label": "screen-initial-xrefs-3d0f838",
+      "evidence_id": "ev_1d38a77dcf22239e69be5864d98b4181c10ddfea87e0158bd163c6fa18dccfbf"
+    },
+    {
+      "label": "screen-initial-xrefs-3d0f964",
+      "evidence_id": "ev_250dfbc1f758f68e87047e41fa7580f1bf5ecdf7f1574805495e0d903cd415e7"
+    },
+    {
+      "label": "screen-initial-xrefs-3d0f968",
+      "evidence_id": "ev_7ffb749c8595889665a50df3cabd94e05256f7951ac3b6f1b30180f6d9611686"
+    },
+    {
+      "label": "screen-initial-xrefs-3d0f9e4",
+      "evidence_id": "ev_a634bdf45180e6df8cd6522eb4e4534122a79812b0771d779fee005f1d7389c2"
+    },
+    {
+      "label": "screen-initial-xrefs-3d0f9e8",
+      "evidence_id": "ev_e20ddff646c81467883e92a6b6da1697803a0433abee53690b6b67ae072662b1"
+    },
+    {
+      "label": "screen-initial-xrefs-3d0fa04",
+      "evidence_id": "ev_69a2b0f4c0893b01da542c07ceeb3a2fea5daeee29a2477a48870b0de2b097b5"
+    },
+    {
+      "label": "screen-initial-xrefs-3d0fa08",
+      "evidence_id": "ev_f94d1c76c4524076f6d5dbc2656c7094103ceb7c6bd7f8879e97ea909b388be2"
+    },
+    {
+      "label": "screen-initial-xrefs-3d0fa20",
+      "evidence_id": "ev_7cc63b17c95078dc02b8faeb0e60beb19f100add159c5ac09fec395e35dbeedd"
+    },
+    {
+      "label": "screen-initial-xrefs-3d0fd1c",
+      "evidence_id": "ev_2472754fea65217fad4aef6ae3e407dff2f59a59bd3e2637417e771cde63740c"
+    },
+    {
+      "label": "screen-initial-xrefs-3d0fd20",
+      "evidence_id": "ev_f6f123492892706c0a323db2a5f11e06d2c794f33b9a719a7f0ab8c0d4cbd31a"
+    },
+    {
+      "label": "screen-initial-xrefs-3d0fd80",
+      "evidence_id": "ev_f4c6238bab8cf9f72233589cb526e46039933826a88f72f45089eea536e53f98"
+    },
+    {
+      "label": "screen-initial-xrefs-3d12780",
+      "evidence_id": "ev_a5047beabc1c6c4d03ff2a2959cb33ad7d0527b333ede78008109026de9a482d"
+    },
+    {
+      "label": "screen-initial-xrefs-3d12948",
+      "evidence_id": "ev_4640732dd3156d94b1533367e1bd40e9bf76f37b80069dcabe73bee19376135d"
+    },
+    {
+      "label": "screen-initial-xrefs-3d1294c",
+      "evidence_id": "ev_93f6bd1925b30be1715290242d7feae310e219d6de757784725d094cd8484bae"
+    },
+    {
+      "label": "screen-initial-xrefs-3d129c0",
+      "evidence_id": "ev_51f7d31e2d79d025ada643a8fb0d31f64120141a1fec2c1ba2e1525f797466dd"
+    },
+    {
+      "label": "screen-initial-xrefs-90082c",
+      "evidence_id": "ev_3de3a8b6ceebbeb621e99f7f68b517b7f7f6a2ab33b8de35c877d83529fdf501"
+    },
+    {
+      "label": "screen-initial-xrefs-900830",
+      "evidence_id": "ev_8af1341d08ca5526c791ed3445bdb7b211c14049fdc3a202349e4e397f6f5f83"
+    }
+  ],
+  "initial_state": "Range pair -1/-2049; base transform identity. Other selected words zero, including working/projection matrices and viewport depth bounds before device setup.",
+  "numeric_mutants_caught": 3,
+  "adapter_mutants_caught": 4,
+  "constructor": {
+    "configurations": [
+      "original",
+      "poisoned",
+      "varied",
+      "partial",
+      "no_image"
+    ],
+    "numeric_words": 90,
+    "resource_words": 3,
+    "includes_availability": true,
+    "identical": true,
+    "artifacts": [
+      {
+        "variant": "before",
+        "bytes": 3582,
+        "sha256": "808c91c8f8bb665433d331e02f5b6a38ff18a6cc39423fec95bb6dee60472ebc",
+        "row_sha256": [
+          "07c9fcdf637127c3ce5470b2bbe6187a395c223b1747f82ba7a7860d6ccf8211",
+          "73bf168560498ebda61ef9113186ade7233241844ec90360e84b34093b07d887",
+          "64e150f9555a94a1426719f936516cbc4329c9030e646208c1d39f311df25c91",
+          "d16cd51d89f57ad3484853d86efdcff62270fde41e916c8ae854171878f32e51",
+          "4ffd955e4cdbe5be2a12243d882fadcea2fef9ba71b3db0053aec21f0df94425"
+        ]
+      },
+      {
+        "variant": "after",
+        "bytes": 3582,
+        "sha256": "808c91c8f8bb665433d331e02f5b6a38ff18a6cc39423fec95bb6dee60472ebc",
+        "row_sha256": [
+          "07c9fcdf637127c3ce5470b2bbe6187a395c223b1747f82ba7a7860d6ccf8211",
+          "73bf168560498ebda61ef9113186ade7233241844ec90360e84b34093b07d887",
+          "64e150f9555a94a1426719f936516cbc4329c9030e646208c1d39f311df25c91",
+          "d16cd51d89f57ad3484853d86efdcff62270fde41e916c8ae854171878f32e51",
+          "4ffd955e4cdbe5be2a12243d882fadcea2fef9ba71b3db0053aec21f0df94425"
+        ]
+      }
+    ]
+  },
+  "composition": {
+    "survey_frames": 3,
+    "poisoned_values_match": true,
+    "before_after_cli_report_identical": true,
+    "report_bytes": 5427,
+    "report_sha256": "52254476457a377d2ac6d3f5eb7cd323f2154d6e22bf2e79e296833c8b070b7c"
+  },
+  "consumers": {
+    "screen_init_cases": 3000,
+    "device_setup_cases": 2000,
+    "projection_range_cases": 3000,
+    "projection_fp_flag_differences": 1251,
+    "prior_numerical_reports_unchanged": true
+  },
+  "independent_review": "screen_initial_review: final source, mapping, seven mutations, isolation, historical constructor/CLI and consumer evidence approved; ready for gate156",
+  "limits": [
+    "Numeric load-time state only. Polygon point/color/texture resources and GPU capabilities remain independent.",
+    "Existing projection scale/centers/color were not initialized here and remain untouched; their preservation is static review, not additional numeric snapshot coverage.",
+    "Preset setup and projection algorithms unchanged; broader meaning of second preset argument and polygon setup word remains unestablished.",
+    "Three-frame survey has no sprite draws and is navigation only, not complete native session, Windows or physical GPU proof."
+  ]
+}

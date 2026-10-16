@@ -193,3 +193,17 @@ in `AGENTS.md` and `STYLE.md`; this page holds facts and patterns.
   floating-point consumer. Retain its word representation rather than guessing a new type.
   Frame flags/profile and saved ranges have other owners; GPU capabilities are not initial
   fog defaults. Evidence and seven caught mutations: `fog-initial-155-*`.
+
+
+## Numeric screen defaults and resources
+
+* The stored range pair is -1.0/-2049.0, not the round power-of-two guess -2048.0.
+  The base transform is identity, but projection and working matrices start at zero;
+  viewport MinZ/MaxZ also start at zero before device setup.
+* NJS_POINT2COL has three pointer words: points, colors and texture coordinates. Its
+  third word is not numeric padding. Keep all three reference identities independent of
+  the numeric polygon count/coordinates, including unknown and injected values.
+* Screen setup's saved second argument and polygon setup word lack established broader
+  meanings; retain their observed values and those limits. Existing projection scale,
+  center and color fields not loaded by this initializer remain untouched. Evidence:
+  `screen-initial-156-*`, including exact values and seven caught mutations.

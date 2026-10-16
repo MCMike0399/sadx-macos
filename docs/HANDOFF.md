@@ -4122,3 +4122,30 @@ The product still needs native boot/title, resources and gameplay recovery.
   Projection range retains its 1,251 FP-flag differences (partial). Algorithms and prior
   judges unchanged. Independent final STYLE review approved source and evidence. Full
   gate follows in a separate judge commit; GOAL §6.7 remains open.
+
+
+### 2026-10-16 — screen initialization verification complete (gate 156)
+
+* Completes source `68c7da5` with a separate judge commit. All 90 numeric words exact;
+  isolated closure, native first/cached projection consumer, five historical constructor
+  comparisons, poisoned numeric composition and all seven mutants pass. POINT2COL's
+  three pointer facts remain independently available/unknown. Independent final STYLE
+  review approves source, mapping and evidence; prior algorithms/judges unchanged.
+* Full `make -j10 gate` **rc 0**, **138 native programs / 50 Python tests**. Unchanged
+  7,228-frame two-boot determinism and first-600 override digests; 71,115 comparisons/mutants,
+  900-frame controller parity and 63 FPS title cadence pass. Host throughput 81.7 FPS.
+  Twelve layers, zero exceptions; 159,630 owned bytes / 159,680 combined identities;
+  463 protected judge inputs. Readability 241 files with unchanged debt: hex11,628 /
+  identifiers1,796 / calls75 / gotos2 / long lines1,489 / multiple statements2,184.
+* Original screen init 3,000, device setup 2,000 and projection range 3,000 numerical
+  results unchanged. Projection keeps its 1,251 FP-flag differences (partial). Aggregate
+  verdict command rc2: tracked54pass/46partial/9fail/1missing. Other standalone oracles,
+  separate `make m1` and four unregistered tests skipped: metal-sprite,
+  metal-sprite-composition, metal-texture, player-task. All source/probe/app programs compile.
+* Evidence: `production-integration-20261016/screen-initial-156-*`: source/range identities,
+  five Ghidra dossiers and 27 xrefs, field map, constructor fingerprints/driver, CLI reports,
+  retained mutations, isolated closure and recorded gate. Existing projection scale/centers/
+  color remain statically untouched; no extra snapshot coverage is claimed for them.
+  Resource/content, remaining input and other initialization families remain open. No
+  complete native screen/session/game independence or physical GPU/FP claim. Goal active;
+  hook settings and two user Ghidra drafts untouched. No binaries/assets committed. No push.

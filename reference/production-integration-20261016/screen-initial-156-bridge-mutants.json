@@ -1,0 +1,60 @@
+{
+  "passed": true,
+  "source_sha256": "e0ada2889b0c656af598e3cceddccaf5a701239f4571d087fba0a0fa665552fb",
+  "baseline": {
+    "name": "baseline",
+    "exit_status": 0,
+    "killed": false,
+    "output": "Game runtime: survey ran startup + 3 frames (5 unported owners); native execution stops at 40cad0>40c090>415000>422680.",
+    "replacement": [
+      null,
+      null
+    ]
+  },
+  "mutants": [
+    {
+      "name": "ignore_native_screen",
+      "exit_status": 1,
+      "killed": true,
+      "output": "every numeric screen fact retains its exact bits",
+      "replacement": [
+        "if (config_.screen_defaults) {",
+        "if (false && config_.screen_defaults) {"
+      ]
+    },
+    {
+      "name": "convert_depth_instead_of_bits",
+      "exit_status": 1,
+      "killed": true,
+      "output": "every numeric screen fact retains its exact bits",
+      "replacement": [
+        "device_.viewport_at_3d12780[5] = bits(values.viewport.max_z);",
+        "device_.viewport_at_3d12780[5] = static_cast<std::uint32_t>(values.viewport.max_z);"
+      ]
+    },
+    {
+      "name": "cross_wire_texture_resource",
+      "exit_status": 1,
+      "killed": true,
+      "output": "screen numeric defaults preserve point/color/texture resource facts",
+      "replacement": [
+        "screen_.word_at_3ce716c=u32(0x3ce716c);",
+        "screen_.word_at_3ce716c=u32(0x3ce7164);"
+      ]
+    },
+    {
+      "name": "invent_missing_projection_word",
+      "exit_status": 1,
+      "killed": true,
+      "output": "incomplete final projection word remains unknown",
+      "replacement": [
+        "screen_.projection_at_3d129c0[i] = word(0x3d129c0 + 4 * i);",
+        "screen_.projection_at_3d129c0[i] = exe ? std::optional<std::uint32_t>{word(0x3d129c0 + 4 * i).value_or(0)} : std::nullopt;"
+      ]
+    }
+  ],
+  "limits": [
+    "Temporary adapter copies linked before unchanged archives; no worktree mutation.",
+    "Three-frame survey only, no sprite draws or complete native input claim."
+  ]
+}

@@ -1,0 +1,17 @@
+[
+  [
+    "wrong stored far range",
+    "return {};",
+    "auto values = NinjaScreenInitialState{}; values.clip.range_far = -2048.0F; return values;"
+  ],
+  [
+    "premature projection identity",
+    "return {};",
+    "auto values = NinjaScreenInitialState{}; values.projection[0] = 1.0F; return values;"
+  ],
+  [
+    "missing base matrix endpoint",
+    "return {};",
+    "auto values = NinjaScreenInitialState{}; values.base_transform[15] = 0; return values;"
+  ]
+]

@@ -217,6 +217,13 @@ per-word availability. Frame flags/saved ranges, GPU capability bytes and device
 remain separate. The positive initial caches and zero tables precede device generation;
 this migration leaves the existing fog algorithms unchanged.
 
+`engine/ninja_screen_initial_state` supplies numeric clip caches, screen geometry,
+viewport values and matrices before preset/device initialization. Native boot selects
+these explicitly; omitted reference data retain per-word availability. POINT2COL point,
+color and texture resources remain independent. The base matrix starts at identity while
+projection/working matrices and viewport depth bounds start at zero; actual display/device
+setup remains separate. Existing screen/projection algorithms are unchanged.
+
 The hybrid guest executes `sonic.exe` with `process_overrides` supplying native owners.
 Each HLE import logs its call for trace diffs. These reference paths do not establish
 native boot/title or executable independence. The separate native frame-control and game-mode pilots
