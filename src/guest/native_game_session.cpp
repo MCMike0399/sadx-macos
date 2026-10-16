@@ -19,6 +19,7 @@ BootLoadResult load_boot_config(const std::string& exe_path,const std::string& i
     config.input_mod_dll=load(input_mod_path,r.error);if(!config.input_mod_dll)return r;
     // Native code tables are maintained source; images still supply unmigrated state/assets.
     config.engine_tables=runtime::engine_code_tables();
+    config.control_defaults=runtime::session_control_defaults();
     config.clock=clock;config.max_frames=frames;config.policy=policy;
     {   // 401ac0's model DLLs from the game's system directory (slot 0: CHRMODELS_orig.dll behind the loader proxy).
         const auto system=directory_of(exe_path)+"/system/";

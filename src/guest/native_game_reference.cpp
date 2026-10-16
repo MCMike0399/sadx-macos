@@ -16,33 +16,17 @@ NativeGame::NativeGame(NativeGameConfig config):config_(std::move(config)),speed
 }
 void NativeGame::initialize_source_facts(){
     initialize_engine_code_tables();
+    initialize_control_defaults();
     const auto* exe=config_.executable.get();
     const auto u8=[&](std::uint32_t a)->std::optional<std::uint8_t>{if(!exe)return std::nullopt;return exe->byte(a);};
     const auto u32=[&](std::uint32_t a)->std::optional<std::uint32_t>{if(!exe)return std::nullopt;return exe->u32(a);};
     const auto s32=[&](std::uint32_t a)->std::optional<std::int32_t>{const auto v=u32(a);if(!v)return std::nullopt;return static_cast<std::int32_t>(*v);};
-    mode_at_3abdc7c_=s32(0x3abdc7c);
-    timing_.logic_increment=s32(0x3b11178);timing_.pending_logic_ticks=s32(0x3b1117c);timing_.word_at_3b11180=s32(0x3b11180);timing_.frame_multiplier=s32(0x3b11188);
-    timing_.word_at_3b1118c=s32(0x3b1118c);timing_.word_at_3b11198=s32(0x3b11198);timing_.word_at_3b2a2e4=s32(0x3b2a2e4);
-    logic_.word_at_3abdf70=u32(0x3abdf70);logic_.word_at_3b11194=s32(0x3b11194);
-    loop_.word_at_3abdcf8=u32(0x3abdcf8);loop_.exit_at_3abdf7c=u32(0x3abdf7c);loop_.focus_at_8929d4=u32(0x8929d4);loop_.resync_at_3abdf68=u8(0x3abdf68);
-    consumer_.special_flags_at_909eb4=u8(0x909eb4);queue_runtime_.flag_at_3abdcfe=u8(0x3abdcfe);consumer_.fog_profile_at_3abdc6c=u8(0x3abdc6c);
+    loop_.word_at_3abdcf8=u32(0x3abdcf8);
     loop_.special_flags_at_909eb4=&consumer_.special_flags_at_909eb4;loop_.fog_flag_at_3abdcfe=&queue_runtime_.flag_at_3abdcfe;
-    loop_.fog_range_at_3abdca0=u32(0x3abdca0);loop_.fog_range_at_3abdca4=u32(0x3abdca4);loop_.fog_range_at_3abdc70=u32(0x3abdc70);loop_.fog_range_at_3abdc74=u32(0x3abdc74);
-    loop_.request_at_3b291ad=u8(0x3b291ad);loop_.counter_at_3b291b2=u8(0x3b291b2);loop_.pending_at_3abdf76=u8(0x3abdf76);loop_.pending_at_3abdf79=u8(0x3abdf79);
-    loop_.save_phase_at_3b291a4=s32(0x3b291a4);loop_.word_at_3abdf80=u32(0x3abdf80);loop_.mode_at_3b28114=u32(0x3b28114);
-    loop_.frames_at_3abdf58=u32(0x3abdf58);loop_.frames_at_3abdf5c=u32(0x3abdf5c);loop_.word_at_3c85804=u32(0x3c85804);
-    if(const auto lo=u8(0x3b22de4),hi=u8(0x3b22de5);lo&&hi)loop_.game_mode_at_3b22de4=static_cast<std::uint16_t>(*lo|(*hi<<8));
-    mode_state_.byte_at_3abdf74=u8(0x3abdf74);mode_state_.byte_at_3abdcfc=u8(0x3abdcfc);mode_state_.byte_at_3abdcfd=u8(0x3abdcfd);mode_state_.byte_at_3b18db4=u8(0x3b18db4);
-    mode_state_.byte_at_3b2a2fa=u8(0x3b2a2fa);mode_state_.byte_at_3b22e1e=u8(0x3b22e1e);mode_state_.byte_at_3abdf78=u8(0x3abdf78);
-    mode_state_.word_at_3b2c45c=u32(0x3b2c45c);mode_state_.word_at_3b290e4=u32(0x3b290e4);
     // 3b0ef4c is a pointer; a null load-image value stays unknown (a source fault if reached).
     for(unsigned r=0;r<256;++r)for(unsigned k=0;k<3;++k)edges_.raw_at_3b0e3e2[r][k]=u8(0x3b0e3e2+3*r+k);
     for(unsigned i=0;i<256;++i)edges_.aggregate_at_3b0eaf0[i]=u8(0x3b0eaf0+i);
     edges_.special_at_3b0e3ba=u8(0x3b0e3ba);edges_.aggregate_special_at_3b0eae8=u8(0x3b0eae8);edges_.bytes_at_3b0e3e0={u8(0x3b0e3e0),u8(0x3b0e3e1)};edges_.byte_at_3b0e3b9=u8(0x3b0e3b9);
-    input_.soft_reset_flags=u8(0x3b0eaa0);input_.reset_input_mask=u8(0x3b0e3b8);
-    renderer_.counter_frequency.low=u32(0x3d08538);renderer_.counter_frequency.high=u32(0x3d0853c);renderer_.frame_interval_multiplier=s32(0x389d7dc);
-    renderer_.configured_frame_interval=s32(0x89295c);renderer_.frame_interval.low=u32(0x3d084a8);renderer_.frame_interval.high=u32(0x3d084ac);
-    if(const auto lo=u32(0x3d08550),hi=u32(0x3d08554);lo&&hi)renderer_.previous_counter=static_cast<std::int64_t>((std::uint64_t(*hi)<<32)|*lo);
     for(unsigned w=0;w<52;++w)controller_template_.write_byte(w,u8(0x3b0eaa8+w));
     for(unsigned r=0;r<4;++r)for(unsigned w=0;w<52;++w)controllers_raw_[r]->write_byte(w,u8(0x3b0e9c8+0x34*r+w));
     for(unsigned i=0;i<4;++i){controller_globals_.words_at_3b0e768[i]=u32(0x3b0e768+4*i);controller_globals_.words_at_3b0e344[i]=u32(0x3b0e344+4*i);
@@ -59,7 +43,7 @@ void NativeGame::initialize_source_facts(){
         for(unsigned w=0;w<52;++w){if(dll){input_raw_[i]->write_byte(w,dll->byte(0x1000e748+0x34*i+w));pads_[i].record.write_byte(w,dll->byte(0x1000e950+0x60*i+w));}}
         pads_[i].settings=config_.pad_settings[i];
     }
-    input_frame_.demo_cutscene_at_3b2a2e8=s32(0x3b2a2e8);input_frame_.game_mode_at_3abdc7c=&mode_at_3abdc7c_;input_frame_.demo_playing_at_3b2a2e4=&timing_.word_at_3b2a2e4;
+    input_frame_.game_mode_at_3abdc7c=&mode_at_3abdc7c_;input_frame_.demo_playing_at_3b2a2e4=&timing_.word_at_3b2a2e4;
     // Render queue facts.
     const auto f32=[&](std::uint32_t a)->std::optional<float>{const auto v=u32(a);if(!v)return std::nullopt;float x;std::memcpy(&x,&*v,4);return x;};
     if(const auto a=f32(0x3b18230),b=f32(0x3b18234),c=f32(0x3b18238),d=f32(0x3b1823c);a&&b&&c&&d)color_at_3b18230_=std::array<float,4>{*a,*b,*c,*d};
@@ -203,6 +187,191 @@ void NativeGame::initialize_source_facts(){
     }
     lifecycle_.emplace(NinjaQueueLifecycleOwners{queue_,queue_runtime_,consumer_,timing_,projection_,color_at_3b18230_,&depth_table_,one_at_7dcb10_,negative_one_at_7dcb0c_,depth_mode_at_8928c8_,
         words_at_900840_,words_at_3ab9898_,words_at_900858_,words_at_90084c_});
+}
+std::array<std::optional<std::uint32_t>, 51> NativeGame::control_facts() const {
+    const auto word = [](const auto &value) -> std::optional<std::uint32_t> {
+        return value ? std::optional<std::uint32_t>{static_cast<std::uint32_t>(*value)} : std::nullopt;
+    };
+    const auto previous = [&](unsigned shift) -> std::optional<std::uint32_t> {
+        if (!renderer_.previous_counter)
+            return std::nullopt;
+        return static_cast<std::uint32_t>(std::uint64_t(*renderer_.previous_counter) >> shift);
+    };
+    return {
+        word(mode_at_3abdc7c_),
+        word(loop_.mode_at_3b28114),
+        word(loop_.save_phase_at_3b291a4),
+        word(loop_.request_at_3b291ad),
+        word(mode_state_.byte_at_3abdf74),
+        word(mode_state_.byte_at_3abdcfc),
+        word(mode_state_.byte_at_3abdcfd),
+        word(mode_state_.byte_at_3b18db4),
+        word(mode_state_.byte_at_3b2a2fa),
+        word(mode_state_.byte_at_3b22e1e),
+        word(mode_state_.byte_at_3abdf78),
+        word(mode_state_.word_at_3b2c45c),
+        word(mode_state_.word_at_3b290e4),
+        word(timing_.frame_multiplier),
+        word(timing_.logic_increment),
+        word(timing_.pending_logic_ticks),
+        word(renderer_.counter_frequency.low),
+        word(renderer_.counter_frequency.high),
+        word(renderer_.frame_interval.low),
+        word(renderer_.frame_interval.high),
+        word(renderer_.frame_interval_multiplier),
+        word(renderer_.configured_frame_interval),
+        previous(0),
+        previous(32),
+        word(timing_.word_at_3b11180),
+        word(timing_.word_at_3b1118c),
+        word(timing_.word_at_3b11198),
+        word(timing_.word_at_3b2a2e4),
+        word(logic_.word_at_3abdf70),
+        word(logic_.word_at_3b11194),
+        word(loop_.exit_at_3abdf7c),
+        word(loop_.focus_at_8929d4),
+        word(loop_.resync_at_3abdf68),
+        word(consumer_.special_flags_at_909eb4),
+        word(consumer_.fog_profile_at_3abdc6c),
+        word(queue_runtime_.flag_at_3abdcfe),
+        word(loop_.fog_range_at_3abdca0),
+        word(loop_.fog_range_at_3abdca4),
+        word(loop_.fog_range_at_3abdc70),
+        word(loop_.fog_range_at_3abdc74),
+        word(loop_.counter_at_3b291b2),
+        word(loop_.pending_at_3abdf76),
+        word(loop_.pending_at_3abdf79),
+        word(loop_.word_at_3abdf80),
+        word(loop_.frames_at_3abdf58),
+        word(loop_.frames_at_3abdf5c),
+        word(loop_.word_at_3c85804),
+        word(loop_.game_mode_at_3b22de4),
+        word(input_frame_.demo_cutscene_at_3b2a2e8),
+        word(input_.soft_reset_flags),
+        word(input_.reset_input_mask),
+    };
+}
+void NativeGame::initialize_control_defaults() {
+    if (config_.control_defaults) {
+        const auto &values = *config_.control_defaults;
+        const auto real_bits = [](float value) {
+            std::uint32_t bits;
+            std::memcpy(&bits, &value, sizeof(bits));
+            return bits;
+        };
+        mode_at_3abdc7c_ = static_cast<std::int32_t>(values.flow.mode);
+        loop_.mode_at_3b28114 = values.flow.pause_state;
+        loop_.save_phase_at_3b291a4 = values.flow.save_phase;
+        loop_.request_at_3b291ad = values.flow.save_ready;
+        mode_state_.byte_at_3abdf74 = values.flow.action_restart_requested;
+        mode_state_.byte_at_3abdcfc = values.flow.title_mode;
+        mode_state_.byte_at_3abdcfd = values.flow.title_load_phase;
+        mode_state_.byte_at_3b18db4 = values.flow.playing_super_sonic;
+        mode_state_.byte_at_3b2a2fa = values.flow.tutorial_variant;
+        mode_state_.byte_at_3b22e1e = values.flow.alert_flag;
+        mode_state_.byte_at_3abdf78 = values.flow.alert_blocked;
+        mode_state_.word_at_3b2c45c = values.flow.movie_number;
+        mode_state_.word_at_3b290e4 = values.flow.menu_message_enabled;
+        timing_.frame_multiplier = values.frame_mode.frame_multiplier;
+        timing_.logic_increment = values.frame_mode.logic_increment;
+        timing_.pending_logic_ticks = values.frame_mode.pending_logic_ticks;
+        renderer_.counter_frequency.low = static_cast<std::uint32_t>(std::uint64_t(values.renderer.counter_frequency));
+        renderer_.counter_frequency.high = static_cast<std::uint32_t>(std::uint64_t(values.renderer.counter_frequency) >> 32);
+        renderer_.frame_interval.low = static_cast<std::uint32_t>(std::uint64_t(values.renderer.frame_interval));
+        renderer_.frame_interval.high = static_cast<std::uint32_t>(std::uint64_t(values.renderer.frame_interval) >> 32);
+        renderer_.frame_interval_multiplier = values.renderer.frame_interval_multiplier;
+        renderer_.configured_frame_interval = values.renderer.configured_frame_interval;
+        timing_.word_at_3b11180 = values.logic.extra_ticks;
+        timing_.word_at_3b1118c = values.logic.logic_tick_count;
+        timing_.word_at_3b11198 = values.logic.loop_starting;
+        timing_.word_at_3b2a2e4 = values.logic.demo_playing;
+        logic_.word_at_3abdf70 = values.logic.logic_entry_flag;
+        logic_.word_at_3b11194 = values.logic.previous_loop_starting;
+        loop_.exit_at_3abdf7c = values.loop.exit_requested;
+        loop_.focus_at_8929d4 = values.loop.window_active;
+        loop_.resync_at_3abdf68 = values.loop.loading_file;
+        consumer_.special_flags_at_909eb4 = values.loop.special_render_flags;
+        consumer_.fog_profile_at_3abdc6c = values.loop.fog_profile;
+        queue_runtime_.flag_at_3abdcfe = values.loop.queue_fog_enabled;
+        loop_.fog_range_at_3abdca0 = real_bits(values.loop.active_fog.near_distance);
+        loop_.fog_range_at_3abdca4 = real_bits(values.loop.active_fog.far_distance);
+        loop_.fog_range_at_3abdc70 = real_bits(values.loop.restored_fog.near_distance);
+        loop_.fog_range_at_3abdc74 = real_bits(values.loop.restored_fog.far_distance);
+        loop_.counter_at_3b291b2 = values.loop.save_count;
+        loop_.pending_at_3abdf76 = values.loop.save_pending;
+        loop_.pending_at_3abdf79 = values.loop.texture_pending;
+        loop_.word_at_3abdf80 = values.loop.late_frame_work_enabled;
+        loop_.frames_at_3abdf58 = values.loop.game_frame_count;
+        loop_.frames_at_3abdf5c = values.loop.local_frame_count;
+        loop_.word_at_3c85804 = values.loop.shutdown_cleanup_enabled;
+        loop_.game_mode_at_3b22de4 = values.loop.game_mode;
+        input_frame_.demo_cutscene_at_3b2a2e8 = values.loop.demo_cutscene;
+        input_.soft_reset_flags = values.reset_input.soft_reset_flags;
+        input_.reset_input_mask = values.reset_input.reset_input_mask;
+        renderer_.previous_counter = values.renderer.previous_counter;
+        return;
+    }
+    const auto *exe = config_.executable.get();
+    const auto u8 = [&](std::uint32_t address) -> std::optional<std::uint8_t> {
+        return exe ? exe->byte(address) : std::nullopt;
+    };
+    const auto u32 = [&](std::uint32_t address) -> std::optional<std::uint32_t> {
+        return exe ? exe->u32(address) : std::nullopt;
+    };
+    const auto s32 = [&](std::uint32_t address) -> std::optional<std::int32_t> {
+        const auto value = u32(address);
+        return value ? std::optional<std::int32_t>{static_cast<std::int32_t>(*value)} : std::nullopt;
+    };
+    mode_at_3abdc7c_=s32(0x3abdc7c);
+    loop_.mode_at_3b28114=u32(0x3b28114);
+    loop_.save_phase_at_3b291a4=s32(0x3b291a4);
+    loop_.request_at_3b291ad=u8(0x3b291ad);
+    mode_state_.byte_at_3abdf74=u8(0x3abdf74);
+    mode_state_.byte_at_3abdcfc=u8(0x3abdcfc);
+    mode_state_.byte_at_3abdcfd=u8(0x3abdcfd);
+    mode_state_.byte_at_3b18db4=u8(0x3b18db4);
+    mode_state_.byte_at_3b2a2fa=u8(0x3b2a2fa);
+    mode_state_.byte_at_3b22e1e=u8(0x3b22e1e);
+    mode_state_.byte_at_3abdf78=u8(0x3abdf78);
+    mode_state_.word_at_3b2c45c=u32(0x3b2c45c);
+    mode_state_.word_at_3b290e4=u32(0x3b290e4);
+    timing_.frame_multiplier=s32(0x3b11188);
+    timing_.logic_increment=s32(0x3b11178);
+    timing_.pending_logic_ticks=s32(0x3b1117c);
+    renderer_.counter_frequency.low=u32(0x3d08538);
+    renderer_.counter_frequency.high=u32(0x3d0853c);
+    renderer_.frame_interval.low=u32(0x3d084a8);
+    renderer_.frame_interval.high=u32(0x3d084ac);
+    renderer_.frame_interval_multiplier=s32(0x389d7dc);
+    renderer_.configured_frame_interval=s32(0x89295c);
+    timing_.word_at_3b11180=s32(0x3b11180);
+    timing_.word_at_3b1118c=s32(0x3b1118c);
+    timing_.word_at_3b11198=s32(0x3b11198);
+    timing_.word_at_3b2a2e4=s32(0x3b2a2e4);
+    logic_.word_at_3abdf70=u32(0x3abdf70);
+    logic_.word_at_3b11194=s32(0x3b11194);
+    loop_.exit_at_3abdf7c=u32(0x3abdf7c);
+    loop_.focus_at_8929d4=u32(0x8929d4);
+    loop_.resync_at_3abdf68=u8(0x3abdf68);
+    consumer_.special_flags_at_909eb4=u8(0x909eb4);
+    consumer_.fog_profile_at_3abdc6c=u8(0x3abdc6c);
+    queue_runtime_.flag_at_3abdcfe=u8(0x3abdcfe);
+    loop_.fog_range_at_3abdca0=u32(0x3abdca0);
+    loop_.fog_range_at_3abdca4=u32(0x3abdca4);
+    loop_.fog_range_at_3abdc70=u32(0x3abdc70);
+    loop_.fog_range_at_3abdc74=u32(0x3abdc74);
+    loop_.counter_at_3b291b2=u8(0x3b291b2);
+    loop_.pending_at_3abdf76=u8(0x3abdf76);
+    loop_.pending_at_3abdf79=u8(0x3abdf79);
+    loop_.word_at_3abdf80=u32(0x3abdf80);
+    loop_.frames_at_3abdf58=u32(0x3abdf58);
+    loop_.frames_at_3abdf5c=u32(0x3abdf5c);
+    loop_.word_at_3c85804=u32(0x3c85804);
+    if(const auto lo=u8(0x3b22de4),hi=u8(0x3b22de5);lo&&hi)loop_.game_mode_at_3b22de4=static_cast<std::uint16_t>(*lo|(*hi<<8));
+    input_frame_.demo_cutscene_at_3b2a2e8=s32(0x3b2a2e8);
+    input_.soft_reset_flags=u8(0x3b0eaa0);
+    input_.reset_input_mask=u8(0x3b0e3b8);
+    if(const auto lo=u32(0x3d08550),hi=u32(0x3d08554);lo&&hi)renderer_.previous_counter=static_cast<std::int64_t>((std::uint64_t(*hi)<<32)|*lo);
 }
 void NativeGame::initialize_engine_code_tables() {
     if (config_.engine_tables) {

@@ -3864,3 +3864,29 @@ The product still needs native boot/title, resources and gameplay recovery.
 * GOAL §6.7 stays open: next native initialization families include reset state, content
   references and sine/remaining image data. No complete native session, title or game
   independence claim. The standing goal remains active.
+
+### 2026-10-16 — native scalar control initialization (source step)
+
+* GOAL §6.7 second family: `runtime/session_control_defaults` supplies 51 source words
+  (48 native scalar fields) for flow, timing, counters, fog ranges and reset input.
+  Boot configuration selects these plain values; absent configuration preserves PE
+  injection and missing facts. Resources, callbacks, content and other image facts remain.
+* Complete constructor snapshots precede startup overwrites. Original, poisoned, varied,
+  partial and absent-image old/new reference initializers match all 255 availability/value
+  facts. Partial images preserve the absent frequency high word and paired previous counter.
+  Explicit native values also work with no image without inventing unrelated device facts.
+* All 51 pinned load-image words match exactly, including actual virtual zero fill. Three
+  data mutants and three temporary-copy adapter mutants are caught. Seven affected consumer
+  oracles rerun with no value mismatches. Prior initializer/session CPPs produce a byte-
+  identical 5,427-byte CLI survey report. The bounded three-frame graphics comparison has
+  no sprite draws. Native-only interval/callback/borrowed-save-phase tests pass.
+* Ghidra flow dossier `ev_b3e260e67723e1986b8576858b077b5ed4c503d3977c35fc200446a335ae4611`;
+  menu callee `ev_360ebb749f1d76348c2304594ae8834c0a0789d76cfedf76a786988d25f37a73`;
+  cleanup initializer `ev_bf73d06e505c1b84300240936ebf4e16162e60844cd68a48aee128b6ff9881c2`.
+  Writer/consumer evidence establishes the three opaque words as scalar gates, distinct
+  from resource pointers; broader meanings remain explicitly unknown. Menu function's
+  incomplete switch decompilation and undecodable instruction requests are not claimed
+  as full recovery. Evidence identities/field map are in `runtime-control-152-*`.
+* Independent STYLE review approved source/classifications and the missing-fact tests.
+  Full gate and final verification record follow in a separate judge commit. No complete
+  native runtime/session/game independence claim; GOAL §6.7 remains open.
