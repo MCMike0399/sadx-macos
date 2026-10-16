@@ -195,15 +195,21 @@ modes, keyboard translations, the unit matrix, and sprite/view constants. The no
 boot configuration supplies these explicitly. The reference composition converts them at its
 boundary; callers omitting that configuration still receive injectable PE-decoded facts,
 including their previous missing-fact behavior. Native table source builds without a PE or
-reference runtime and is checked against every source encoding. Reset state, content pointers,
-the sine table and other initialization families still need migration; this is not a native
-session or asset importer.
+reference runtime and is checked against every source encoding. Reset state, content pointers
+and other initialization families still need migration; this is not a native session or
+asset importer.
 
 `input/input_initial_state` supplies plain load-time edge buffers and controller input
 values for the game and pinned Input mod. Native boot configuration selects them explicitly;
 reference callers can still inject image bytes and observe byte-granular missing facts.
 PDS_PERIPHERAL name, extension and info pointers remain separate reference resources;
 this migration does not recover controller discovery or remove the session's image dependency.
+
+`math/ninja_sine_table` supplies maintained quarter-wave coefficients as exact decimal
+literals, copied into each math owner. Native boot selects this table explicitly; the
+reference configuration can still inject a complete PE table or leave it unknown. The
+coefficient source/probe builds without a PE or core archive. Existing Ninja interpolation
+and software x87 arithmetic are unchanged; this removes one initialization dependency.
 
 The hybrid guest executes `sonic.exe` with `process_overrides` supplying native owners.
 Each HLE import logs its call for trace diffs. These reference paths do not establish

@@ -1,0 +1,86 @@
+{
+  "passed": true,
+  "source_sha256": {
+    "src/math/ninja_sine_table.hpp": "21dd2cc9bb5cf9dd36f15f3f0f79bded248962ecc0648309a99caa2259583f5b",
+    "src/math/ninja_sine_table.cpp": "5843cdcab33b2ec76edff60437bfb908db6d8afe720374c47b13c25ddc57c454",
+    "tests/probes/ninja_sine_table_probe.hpp": "f183b6e0dc5fc2ffc00690b9b60d8ef6776cdb07be3644cbded4ad77b4622003",
+    "tests/probes/native_ninja_sine_table_probe.cpp": "ca992c3b12252332d400ff7c4836b75fc71e14cf1c3c65cedd4ef1f0c4ce97d3"
+  },
+  "compiler_dependencies": [
+    "src/math/ninja_sine_table.cpp",
+    "src/math/ninja_sine_table.hpp",
+    "tests/probes/native_ninja_sine_table_probe.cpp",
+    "tests/probes/ninja_sine_table_probe.hpp"
+  ],
+  "toolchain_metadata_sha256": {
+    "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb"
+  },
+  "linked_libraries": [
+    "/usr/lib/libc++.1.dylib",
+    "/usr/lib/libSystem.B.dylib"
+  ],
+  "reference_runtime_symbols_found": false,
+  "commands": [
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-0.d",
+      "-c",
+      "src/math/ninja_sine_table.cpp",
+      "-o",
+      "unit-0.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-1.d",
+      "-c",
+      "tests/probes/native_ninja_sine_table_probe.cpp",
+      "-o",
+      "unit-1.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-dynamiclib",
+      "-Wl,-install_name,@rpath/ninja-sine-table.dylib",
+      "unit-0.o",
+      "unit-1.o",
+      "-o",
+      "ninja-sine-table.dylib"
+    ]
+  ],
+  "binary_sha256": "06fe7b5efdc70c535aac8a93833430c4347c3b99c90bb689898649d35ca4b151",
+  "serialized": {
+    "words": 1025,
+    "sha256": "3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed"
+  },
+  "copied_original_binary_inputs": [],
+  "copied_fixtures": [],
+  "inherited_environment": false,
+  "core_archive_linked": false,
+  "limits": [
+    "Mathematical coefficient data only; native trig arithmetic and other game systems are outside this source closure.",
+    "Isolated source/dependency closure, not an operating-system access sandbox.",
+    "Only the verified fingerprint is read before isolation; no original binary or table data is copied."
+  ]
+}

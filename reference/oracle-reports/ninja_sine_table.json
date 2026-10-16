@@ -1,0 +1,27 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "e25704c4ed6893ac73b9e97fbcd6a5634cd401b53720b34ebf8229d04dd48162",
+ "source_files": {
+  "src/math/ninja_sine_table.hpp": "21dd2cc9bb5cf9dd36f15f3f0f79bded248962ecc0648309a99caa2259583f5b",
+  "src/math/ninja_sine_table.cpp": "5843cdcab33b2ec76edff60437bfb908db6d8afe720374c47b13c25ddc57c454",
+  "tests/probes/ninja_sine_table_probe.hpp": "f183b6e0dc5fc2ffc00690b9b60d8ef6776cdb07be3644cbded4ad77b4622003",
+  "tests/probes/native_ninja_sine_table_probe.cpp": "ca992c3b12252332d400ff7c4836b75fc71e14cf1c3c65cedd4ef1f0c4ce97d3",
+  "tools/oracles/verify_original_ninja_sine_table.py": "6865eb8da01ad3b686945543c6d5cefb84014b57b3030f10fbccf5c083ce56fd",
+  "tools/emit/emit_ninja_sine_table.py": "2d209fa724e37ad72ec1d265c21fc99fe83cb0585d407da7c33f4d4531ca881f"
+ },
+ "original_ranges_sha256": {
+  "88af78-88bf7c": "3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed"
+ },
+ "cases": 1,
+ "words_compared": 1025,
+ "expected_words_sha256": "3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed",
+ "mismatches": [],
+ "returned_values_and_boundaries_match": true,
+ "limits": "Verify maintained Ninja coefficients exactly against the pinned inline table.\n\nThis covers code data only. Original trig execution remains in the unchanged math\noracle; it does not establish complete native runtime or physical FP equivalence.\n",
+ "tracked_summary": {
+  "full_sha256": "99f184d216c40d875a5788f7240dd6f7d483239089697dd8783a3710b98b2efa",
+  "full_bytes": 1481,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

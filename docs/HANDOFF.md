@@ -4006,3 +4006,31 @@ The product still needs native boot/title, resources and gameplay recovery.
   1,572,864 trig comparisons across 12 control words, plus vector/sqrt cases. Independent
   final STYLE review approves source, classification and evidence. Full gate follows in a
   separate judge commit; GOAL §6.7 and complete runtime independence remain open.
+
+
+### 2026-10-16 — native sine coefficient verification complete (gate 154)
+
+* Completes source `ff7256f` with a separate judge commit. All 1,025 compiled coefficients
+  match the pinned table exactly; deterministic decimal rendering and isolated native
+  source/header/probe closure pass. Native consumer covers all angles, signed zeros and
+  independent owner copies. Three coefficient and three adapter mutations caught;
+  restored baseline and independent final STYLE review pass.
+* Full `make -j10 gate` **rc 0**, **136 native programs / 50 Python tests**. Unchanged
+  7,228-frame two-boot determinism and first-600 override digests; 71,115 comparisons/mutants,
+  900-frame controller parity and 63 FPS title cadence pass. Host throughput79.6 FPS.
+  Twelve layers/zero exceptions; 159,630 owned bytes/159,680 combined identities;
+  449 protected judge inputs. One new non-owning DATA annotation. Readability237files,
+  unchanged debt: hex11,628 / identifiers1,796 / calls75 / gotos2 / long lines1,489 /
+  multiple statements2,184. New math header/source contain zero debt.
+* Original math and Ninja-view oracles retain all prior numerical results. Math compares
+  1,572,864 trig cases over12control words plus vector/sqrt. Aggregate verdict command
+  rc2: tracked52pass/46partial/9fail/1missing. Other standalone oracles, separate `make m1`
+  and four unregistered tests skipped: metal-sprite, metal-sprite-composition,
+  metal-texture, player-task. All source/probe/app programs compile.
+* Evidence: `production-integration-20261016/sine-initial-154-*`, including range/source
+  identities, Ghidra dossiers, constructor snapshots' fingerprints/driver, CLI reports,
+  retained mutation harness, isolated closure and recorded gate. The emitter is development
+  tooling; native builds need neither the original table nor its container. No binaries or
+  game assets committed. Resource/content, remaining input and other initialization families
+  remain open. No complete native session/game independence or physical-FP claim. Goal active;
+  hook settings and two user Ghidra drafts untouched. Commits local; no push.

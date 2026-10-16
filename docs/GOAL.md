@@ -373,10 +373,12 @@ comes first, because every later port should copy a readable model, not the lega
    poisoned/varied/partial/no-image constructor checks. Input initialization adds 1,869 exact
    data bytes in typed edge buffers and controller values, with all 252 resource-pointer
    bytes preserved separately, seven caught behavioral mutations and seven old/new constructor
-   configurations. Native boot configuration selects these families explicitly; injectable
+   configurations. Maintained Ninja sine coefficients add 1,025 exact binary32 words,
+   isolated source builds, six caught mutations and preserved all-or-unknown reference
+   decoding. Native boot configuration selects these families explicitly; injectable
    reference decoding remains available. These families do not complete the runtime refactor:
-   resource/content references, remaining input state, sine data and other load-image facts
-   still need native initial values or importer seams.
+   resource/content references, remaining input state and other load-image facts still need
+   native initial values or importer seams.
    Existing unported stops remain. See the latest recorded gate and HANDOFF for verification.
 8. **M1 override-equivalence (V/S), with every new binding written in two-tier form.** Ported
    owners still unbound (reconciled at gate 130; 22 after gate 137): 401000 401830 401a20

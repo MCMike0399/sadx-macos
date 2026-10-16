@@ -1,0 +1,50 @@
+{
+  "passed": true,
+  "source_sha256": "7a6c3ecc15678f24123e78ac2d38090e306de0d5fe30fe016b6322763890565c",
+  "baseline": {
+    "name": "baseline",
+    "exit_status": 0,
+    "killed": false,
+    "output": "Game runtime: survey ran startup + 3 frames (5 unported owners); native execution stops at 40cad0>40c090>415000>422680.",
+    "replacement": [
+      null,
+      null
+    ]
+  },
+  "mutants": [
+    {
+      "name": "ignore_native_sine",
+      "exit_status": 1,
+      "killed": true,
+      "output": "complete sine table remains available",
+      "replacement": [
+        "if (config_.sine_table) {",
+        "if (false && config_.sine_table) {"
+      ]
+    },
+    {
+      "name": "drop_native_endpoint",
+      "exit_status": 1,
+      "killed": true,
+      "output": "every initialized coefficient retains its exact bits",
+      "replacement": [
+        "sine_table_at_88af78_ = *config_.sine_table;",
+        "sine_table_at_88af78_ = *config_.sine_table; (*sine_table_at_88af78_)[1024] = 0;"
+      ]
+    },
+    {
+      "name": "accept_partial_table",
+      "exit_status": 1,
+      "killed": true,
+      "output": "incomplete final coefficient keeps the entire reference table unknown",
+      "replacement": [
+        "complete = value.has_value();\n            if (complete)\n                table[i] = *value;",
+        "if (value) table[i] = *value;"
+      ]
+    }
+  ],
+  "limits": [
+    "Temporary adapter copies linked before unchanged archives; no worktree mutation.",
+    "Three-frame survey only, no sprite draws or complete native input claim."
+  ]
+}

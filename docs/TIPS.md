@@ -164,3 +164,19 @@ in `AGENTS.md` and `STYLE.md`; this page holds facts and patterns.
 * input_init clears only through the last raw row's first lane. Its last two lanes still
   have independent load-time values; do not infer them from the clear loop. Gate153 evidence
   `input-initial-153-*` compares all load-time bytes and preserves varied injected values.
+
+
+## Ninja quarter-wave coefficients
+
+* The classic SDK declares BAMSTable as a pointer cell, but njSin's direct scaled FLD
+  accesses prove inline binary32 storage. The justified symbol override records the full
+  1,025-coefficient array and its endpoint. Do not dereference its first float as a pointer.
+* Ghidra's cosine pseudocode labels some base constants with unrelated strings. Combine
+  each base with its bounded quadrant index before classifying the effective read: these
+  accesses still land in the coefficient array, not in string content.
+* The library's rounded coefficients differ from analytic sine. Preserve every original
+  binary32 word as a round-tripping decimal literal; host sine generation changes fidelity.
+  The emitter is a development rendering check; normal native builds use maintained C++.
+* A missing byte in the final knot keeps the old reference initializer's entire table
+  unknown. Earlier readable knots must not become a partially published/default-filled table.
+  Source/range evidence and six caught mutations are in `sine-initial-154-*`.

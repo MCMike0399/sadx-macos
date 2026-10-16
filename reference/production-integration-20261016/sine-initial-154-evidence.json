@@ -1,0 +1,94 @@
+{
+  "step": "GOAL6.7 maintained Ninja mathematical coefficients",
+  "base_commit": "b38d46ab0f6d82a2677877d86a516952e773955c",
+  "source_sha256": {
+    "src/math/ninja_sine_table.hpp": "21dd2cc9bb5cf9dd36f15f3f0f79bded248962ecc0648309a99caa2259583f5b",
+    "src/math/ninja_sine_table.cpp": "5843cdcab33b2ec76edff60437bfb908db6d8afe720374c47b13c25ddc57c454",
+    "src/guest/native_game_reference.hpp": "ccb28509a973b19f2d808ccee254dbd6917e183e668ea8b6e4f111ff2f1ccf3d",
+    "src/guest/native_game_reference.cpp": "7a6c3ecc15678f24123e78ac2d38090e306de0d5fe30fe016b6322763890565c",
+    "src/guest/native_game_session.cpp": "5f1a8a525fa021c7860d6f0eda17bb54dc3fd713baef1d8355c1853f7817d3e8",
+    "reference/symbols/overrides.tsv": "0fe56e109e63a7d827e3515b57acd89289506fe09ca2f74e2534188cb2ac745a",
+    "tools/emit/emit_ninja_sine_table.py": "2d209fa724e37ad72ec1d265c21fc99fe83cb0585d407da7c33f4d4531ca881f"
+  },
+  "source_image_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "source_ranges_sha256": {
+    "88af78-88bf7c": "3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed"
+  },
+  "words_compared": 1025,
+  "mismatches": 0,
+  "expected_words_sha256": "3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed",
+  "dossiers": [
+    {
+      "label": "sine-initial-sin",
+      "evidence_id": "ev_88209916727c25f3af8874531f198f0ba02e2030cb2249123dfbc0573b1d5981"
+    },
+    {
+      "label": "sine-initial-cos",
+      "evidence_id": "ev_fac1be9b81d2a45c9b3fb619771dd5a0f8217f39af13c388122b60deeff1ced6"
+    },
+    {
+      "label": "sine-initial-xrefs",
+      "evidence_id": "ev_5858b60cee1081a78c4dd08c6a8086797a0467507866f121d4f9673dde27b393"
+    }
+  ],
+  "symbol_resolution": "BAMSTable is an inline float[1025] coefficient table. njSin direct scaled FLD proves this is not the SDK float* pointer cell. DATA is non-owning provenance; runtime ownership unchanged.",
+  "numeric_mutants_caught": 3,
+  "adapter_mutants_caught": 3,
+  "constructor": {
+    "configurations": [
+      "original",
+      "poisoned",
+      "varied",
+      "partial",
+      "no_image"
+    ],
+    "whole_optional_table_availability_preserved": true,
+    "identical": true,
+    "artifacts": [
+      {
+        "variant": "before",
+        "bytes": 33810,
+        "sha256": "eea94dd6dd38b16877e8c73e6d406b77178cb9eb0ec917345959fa485c54cff1",
+        "row_sha256": [
+          "5389bf7df3bef078aca5b8bd2501e0158fbea1dde58b9e76e2367a1b31b1a473",
+          "428f81c027f9e1fc457bd266f14799a7b57c6d6249decd37c03041d9e64af139",
+          "e87a33b1417732bd1786b9e481cc798f0b7f0f1e587b3deb0d6ffa8914a38bd7",
+          "ba768b331fd86cec803be04e56ab2b3d4c0e98ef4ee4fcd4e72ad7cce61a1d1f",
+          "ba768b331fd86cec803be04e56ab2b3d4c0e98ef4ee4fcd4e72ad7cce61a1d1f"
+        ]
+      },
+      {
+        "variant": "after",
+        "bytes": 33810,
+        "sha256": "eea94dd6dd38b16877e8c73e6d406b77178cb9eb0ec917345959fa485c54cff1",
+        "row_sha256": [
+          "5389bf7df3bef078aca5b8bd2501e0158fbea1dde58b9e76e2367a1b31b1a473",
+          "428f81c027f9e1fc457bd266f14799a7b57c6d6249decd37c03041d9e64af139",
+          "e87a33b1417732bd1786b9e481cc798f0b7f0f1e587b3deb0d6ffa8914a38bd7",
+          "ba768b331fd86cec803be04e56ab2b3d4c0e98ef4ee4fcd4e72ad7cce61a1d1f",
+          "ba768b331fd86cec803be04e56ab2b3d4c0e98ef4ee4fcd4e72ad7cce61a1d1f"
+        ]
+      }
+    ]
+  },
+  "composition": {
+    "survey_frames": 3,
+    "before_after_cli_report_identical": true,
+    "report_bytes": 5427,
+    "sha256": "52254476457a377d2ac6d3f5eb7cd323f2154d6e22bf2e79e296833c8b070b7c",
+    "poisoned_table_match": true
+  },
+  "consumers": {
+    "math_control_words": 12,
+    "trig_comparisons": 1572864,
+    "math_numerical_report_unchanged": true,
+    "ninja_view_numerical_report_unchanged": true
+  },
+  "independent_review": "sine_table_review: final source, classification, isolation, all six mutations and consumer evidence approved; ready for full gate",
+  "limits": [
+    "Mathematical coefficient data only; native trig arithmetic unchanged. Runtime, content/resource and other initialization families remain open.",
+    "Native factory and probe build without a PE, reference runtime or archive; full application is not independent.",
+    "Observed direct indexed trig reads and exact binary32 data establish classification; exact-base xrefs alone do not prove absence of every possible write.",
+    "Poisoned runtime comparison is a three-frame survey with no sprite draws, not complete game or Windows proof."
+  ]
+}
