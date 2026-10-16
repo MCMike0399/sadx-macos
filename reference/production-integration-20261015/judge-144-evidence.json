@@ -1,0 +1,52 @@
+{
+  "scope": "GOAL 6.4 initial judge manifest and inactive Claude Edit/Write hook proposal",
+  "sha256": {
+    "tools/gate/check_judge.py": "6c01cf5dbb2dd9db6409438e6266034bb2dd3eb2727302390c91b7b1723ca5d4",
+    "tools/gate/guard_judge_edit.py": "6fa117651c735c3a152343da978945a426138ce455d0494e7ca707f46ff82935",
+    "tests/python/test_judge.py": "719f9ea82d96b4bda93aceff207c156610ced808f79ffffda451afa38ab77b8a",
+    "reference/judge-hook-settings.proposed.json": "22f468435f9752eeeddd6757875ab9033a6dce1adbca75b98aa3992df9515da0"
+  },
+  "fixture_tests": 7,
+  "python_tests": 42,
+  "unit_log_sha256": "3b770a6cf95e871c8fdee667eb0c123bd8b0bd7dd86693f80c01dc60943ef743",
+  "isolated_mutants": [
+    {
+      "name": "baseline",
+      "file": null,
+      "before": null,
+      "after": null,
+      "exit_status": 0
+    },
+    {
+      "name": "hash_check",
+      "file": "check_judge.py",
+      "before": "elif current[path] != expected[path]:",
+      "after": "elif False:",
+      "exit_status": 1
+    },
+    {
+      "name": "new_input_check",
+      "file": "check_judge.py",
+      "before": "errors.append(f'unmanifested judge input: {path}')",
+      "after": "pass",
+      "exit_status": 1
+    },
+    {
+      "name": "hook_guard",
+      "file": "guard_judge_edit.py",
+      "before": "if not selected:\n        return",
+      "after": "if True:\n        return",
+      "exit_status": 1
+    }
+  ],
+  "mutation_log_sha256": "775dc8bbac6951833d32c55aef0834b374384078a03424b0a47dc2452ba7b9f5",
+  "claude_cli_version": "2.1.301",
+  "hook_reference": "https://code.claude.com/docs/en/hooks",
+  "project_settings_applied": false,
+  "limits": [
+    "Manifest is tamper evidence, not an adversarial security boundary.",
+    "Live hook activation remains unverified and requires user approval.",
+    "Generated build oracle corpora are not frozen inputs.",
+    "Commit separation requires Git; source archives still verify hashes."
+  ]
+}

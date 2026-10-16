@@ -3457,3 +3457,35 @@ The product still needs native boot/title, resources and gameplay recovery.
   remain unverified. Existing Ghidra request drafts untouched; no assets/binaries committed.
 * §6.3 tooling is delivered across gates 141–143. Next: §6.4 tamper-evident judge; the
   proposed settings hook requires user approval before application. Goal remains active.
+
+### 2026-10-15 — GOAL §6.4 tamper-evident judge (track R, gate 144)
+
+* Added `check_judge.py` in `make check` and `reference/judge-manifest.json`: 406 SHA-256
+  identities across oracle/gate tools, shared `tools/lib` helpers, probes, fixtures, checker
+  tests, frozen corpora, tracked oracle summaries and mutant specs, Makefile and unit-test
+  registration. Generated caches are excluded; generated build corpora are not frozen.
+  Changed, added and removed inputs fail. Refreshes record reason/evidence hashes and reject
+  mixed staged/unstaged/untracked `src/` changes. Source archives still check their hashes.
+* Added `guard_judge_edit.py` plus **inactive** `judge-hook-settings.proposed.json`.
+  Settings were not applied. Declarations bind current HEAD and unchanged evidence, expire
+  after commit and reject mixed source steps; hook targets check lexical/resolved paths and
+  resolve the working tree from payload cwd. Documented the workflow in `docs/JUDGE.md` and
+  linked METHOD/GOAL; report-summary refreshes are separate evidenced judge commits.
+* Evidence: `production-integration-20261015/judge-144-{evidence,gate}.json`. Seven new
+  fixtures, 42 total Python tests pass. Isolated baseline passes; three code mutants caught
+  (disabled hash comparison, ignored new inputs, bypassed edit guard). Tests cover removals,
+  corpora/summaries, symlinks, declaration expiry/evidence mutation and JSON hook protocol.
+* Full gate **rc 0**, **128 native programs / 42 Python tests**; 7,228-frame determinism,
+  unchanged 600 override digests, 71,115 override cases with all mutants caught, 900-frame
+  controller parity, 63 FPS title cadence; host 81.0 FPS. Shared helper scope was added
+  during the gate: final fixtures/mutants rerun, manifest refreshed, then full `make check`
+  passed 406 identities (initial parallel checker had 404). Combined log records both.
+* No recovered code or readability debt changed; no assets/binaries committed. Manifest is
+  tamper evidence, not an adversarial security boundary. Hook covers Claude Edit/Write,
+  not shell writes or other harnesses. Official hook docs consulted; CLI 2.1.301 satisfies
+  proposal's onFailure requirement. Live activation remains unverified pending approval.
+* Not run: standalone oracles, separate `make m1`, four unregistered tests. Existing oracle
+  partial/fail verdicts unchanged; Windows parity, physical pads, native boot/title and full
+  independence remain open. Existing Ghidra request drafts untouched.
+* Next: request the approval required by GOAL §6.4 for the concrete hook proposal; settings
+  stay inactive unless approved. Continue §6.5 FP control-word census. Goal remains active.

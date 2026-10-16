@@ -203,6 +203,10 @@ These are inputs to M1 and M5 of the roadmap.
 
 ## 3. Porting a function natively (the exact-port method)
 
+Judge inputs are hashed by `check_judge.py`. Follow [JUDGE.md](JUDGE.md) when changing an
+oracle, probe, fixture, gate tool, frozen corpus or tracked oracle summary: its refresh is
+an evidenced `fix(judge)` commit separate from game-source changes.
+
 ### Provenance during ownership migration
 
 `make check` runs `check_provenance.py` after generating the symbol database.

@@ -319,6 +319,11 @@ comes first, because every later port should copy a readable model, not the lega
    evidence, never mixed with a port. Propose a project `.claude/settings.json` PreToolUse hook
    that refuses Edit/Write on those paths unless the step is a declared judge change. Settings
    changes need the user's approval, so ask; do not apply it silently.
+   Manifest/checker workflow: [JUDGE.md](JUDGE.md). The prepared hook settings remain an
+   inactive proposal until approved. Report-summary refreshes use a separate judge commit
+   after the verified game-source commit, as that workflow specifies.
+   Manifest and checker delivered at gate 144 (406 files, 42 Python tests). Hook protocol
+   fixtures pass; project settings and live activation await the user's approval.
 5. **Control-word census (R, decides STYLE §7).** Record `FPCW` (and MXCSR) at the entry of
    every bound override across the 7,228-frame run, the controller replay and any available
    stage replay, and also at the ported player-physics entry points (add temporary trace hooks
