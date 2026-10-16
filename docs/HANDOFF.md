@@ -4373,3 +4373,45 @@ The product still needs native boot/title, resources and gameplay recovery.
   initialization and unrecovered input/game behavior stay open. No whole-DLL/full
   session or physical-device/MXCSR claim. Goal active; hook settings and user drafts
   untouched; no binaries/assets committed; no push.
+
+## 2026-10-16 — GOAL §6.7 startup numeric defaults (source step; gate pending)
+
+* Added maintained `StartupInitialState`: 11 scalar words, 13 uint16 button
+  assignments and 17 signed configuration slots, 41 atoms /138 exact source bytes.
+  Text language uses SDK LANGUAGE; voice language remains raw signed int.
+  Initial music volume -1000, cursor setting 1 and unassigned slots 65535 preserve
+  load-time values before INI/loader processing. No new GLOBAL owner or guessed resource.
+* Explicit normal boot selection bypasses all selected PE reads. Absent config keeps
+  per-field reference decoding; partial uint16 bindings remain wholly unknown. Four
+  existing ResetLeaf facts retain their original owners, installed after the aggregate
+  exists. Media objects/message pointers/shared frame and fog controls stay separate.
+* Four fresh owned-Ghidra dossiers +13 xrefs: CheckSettings
+  ev_0014a8ea3a06c03bf3f00e17105686d80e7081fdcbda004a2e835df2e6b4fb31,
+  Enable3DSound ev_656f7500faa4b790e1649fda0c9d473980fa5b266001df243cb2d043c822a6b8,
+  SetMouseMode ev_24213793f30717c215e50212d4805da2510f713c844cacf62dc390270e4c46fb,
+  voicevolchange ev_8d20c3ca9edfd376a477a7a762a85dd63898c5ead77a79bac0cd9b091a3aaef2.
+  Complete metadata/field map retained under startup-initial-161-*; cursor naming
+  decision recorded in overrides.tsv. Existing pinned loader hooks remain unchanged.
+* Native settings consumer passes INI/loader language, volume, cursor and controller-map
+  transitions. New data oracle matches41 values and verifies storage boundaries;
+  strict isolated four-file closure passes. Boot tests cover canonical, poisoned,
+  varied, truncated and absent images, caller injection, all four resource identities,
+  separate control/sound owners and unknown capabilities. Partial reader fixture
+  shrinks raw+virtual .data mapping, removing the final binding's second byte; never run.
+* Historical8a03588 vs current reference constructors: five images/configurations,
+  2,125 facts /9,311 bytes identical, including selected41/resources4/control51/sound329.
+  Full historical CLI report5,427 bytes identical. Three-frame canonical/poisoned
+  surveys preserve the complete report and graphics observer; zero sprite draws.
+  Fixture composition holds installation INI/model inputs equal because fixtures live
+  under build/. This correction changes no prior judge or production behavior.
+* Four numeric +four adapter mutants caught. An initial media dead-store candidate was
+  overwritten by independent resource initialization; its replacement mutates that
+  observable store and is caught. Existing WinMain3,000/reset300/loop688 reports
+  reproduce full historical hashes after metadata restoration only; WinMain source
+  metadata was already stale, so current source hashes were independently checked
+  against8a03588 before comparison. No compared value/flag/case is changed or omitted.
+* Readability251 files, debt unchanged; ownership/layers/provenance checks pass.
+  New verification inputs and full-gate evidence will be committed separately after
+  independent final review. Final fresh STYLE §12 review approved all targeted
+  evidence; full gate remains pending. Runtime initialization and the overall goal remain open.
+  No physical-device/full WinMain independence or complete native session claim.

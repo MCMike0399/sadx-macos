@@ -24,7 +24,6 @@ void NativeGame::initialize_source_facts(){
     const auto* exe=config_.executable.get();
     const auto u8=[&](std::uint32_t a)->std::optional<std::uint8_t>{if(!exe)return std::nullopt;return exe->byte(a);};
     const auto u32=[&](std::uint32_t a)->std::optional<std::uint32_t>{if(!exe)return std::nullopt;return exe->u32(a);};
-    const auto s32=[&](std::uint32_t a)->std::optional<std::int32_t>{const auto v=u32(a);if(!v)return std::nullopt;return static_cast<std::int32_t>(*v);};
     loop_.word_at_3abdcf8=u32(0x3abdcf8);
     loop_.special_flags_at_909eb4=&consumer_.special_flags_at_909eb4;loop_.fog_flag_at_3abdcfe=&queue_runtime_.flag_at_3abdcfe;
     // 3b0ef4c is a pointer; a null load-image value stays unknown (a source fault if reached).
@@ -55,9 +54,9 @@ void NativeGame::initialize_source_facts(){
         report_.assumptions.push_back("D3D8 transform "+std::to_string(state)+" read before any SetTransform: using the D3D8 device-creation default (identity); pre-40cad0 device setup is unported");
         NinjaMatrix identity{};identity[0]=identity[5]=identity[10]=identity[15]=1.0F;return identity;};
     transform_owner_.set=[this](std::uint32_t state,const NinjaMatrix& m){d3d8_.transforms[state]=m;return true;};
-    leaves_.emplace(ResetLeafState{u32(0x3abdf90),u32(0x3abdfac),depth_mode_at_8928c8_,queue_runtime_.mode_at_3ab98ac,u32(0x912694),u32(0x912698),u32(0x91269c),u32(0x9126a8),u32(0x3b29cf4),u32(0x3b29cf8),
+    leaves_.emplace(ResetLeafState{{},{},depth_mode_at_8928c8_,queue_runtime_.mode_at_3ab98ac,u32(0x912694),u32(0x912698),u32(0x91269c),u32(0x9126a8),u32(0x3b29cf4),u32(0x3b29cf8),
         u32(0x3b11190),u32(0x3c5e8b8),timing_.word_at_3b1118c,u32(0x3b291b4),audio_.record_words_at_3b292fc,{},{},audio_stream_.initialized_at_3b0ef2c,
-        u32(0x3abdf94),u32(0x3abdf9c),u32(0x3abdfa0),u32(0x3abdf98),u32(0x3abdfa8),u32(0x3abdfa4),u32(0x3a7cf3c),u32(0x38f6ec0),u32(0x3b0e338),{},u32(0x389d608),u32(0x3c4e458),u32(0x3c4e45c),{},{},{}});
+        u32(0x3abdf94),u32(0x3abdf9c),u32(0x3abdfa0),u32(0x3abdf98),u32(0x3abdfa8),u32(0x3abdfa4),{},{},u32(0x3b0e338),{},u32(0x389d608),u32(0x3c4e458),u32(0x3c4e45c),{},{},{}});
     for(unsigned i=0;i<6;++i){leaves_->set_files_at_3abdf40[i]=u32(0x3abdf40+4*i);leaves_->cam_files_at_3abdf28[i]=u32(0x3abdf28+4*i);}
     for(unsigned i=0;i<36;++i){leaves_->words_at_3b29b90[i]=u32(0x3b29b90+4*i);}
     for(unsigned i=0;i<4;++i)leaves_->entry_words_at_3d08428[i]=u32(0x3d08428+24*i);
@@ -81,10 +80,7 @@ void NativeGame::initialize_source_facts(){
     screen_device_.draw_primitive_up=[this](const D3D8FrameCommand&,const NinjaScreenPolygon& p)->std::optional<std::int32_t>{d3d8_.polygons.push_back(p);return 0;};
     // 3d0fa34: zero in the load image until 411e30's 77ff50 stores the native 411e20 callable.
     if(const auto v=u32(0x3d0fa34);v&&*v==0)renderer_.input_callback=nullptr;
-    winmain_.voice_language_at_3b0ef38=u32(0x3b0ef38);winmain_.text_language_at_3b0f0e8=u32(0x3b0f0e8);winmain_.clip_level_at_3abdcf0=u32(0x3abdcf0);
-    winmain_.bgm_volume_at_909f28=u32(0x909f28);winmain_.screen_at_892950=u32(0x892950);winmain_.sound3d_at_3b0ef28=u32(0x3b0ef28);winmain_.mouse_mode_at_3b0eae0=u32(0x3b0eae0);
-    for(unsigned i=0;i<13;++i)if(const auto lo=u8(0x389d634+2*i),hi=u8(0x389d635+2*i);lo&&hi)winmain_.pad_buttons_at_389d634[i]=static_cast<std::uint16_t>(*lo|(*hi<<8));
-    for(unsigned i=0;i<17;++i)winmain_.pad_bits_at_8929d8[i]=s32(0x8929d8+4*i);
+    initialize_startup_defaults();
     memory_.heap_at_389d628=u32(0x389d628);word_at_3d0f7a0_=u32(0x3d0f7a0);
     for(unsigned i=0;i<9;++i)library_.words_at_389d864[i]=u32(0x389d864+4*i);
     library_.word_at_38a5dc4=u32(0x38a5dc4);library_.word_at_38a5dc8=u32(0x38a5dc8);library_.word_at_38a5dcc=u32(0x38a5dcc);library_.scale_at_3d0f800=f32(0x3d0f800);library_.aspect_at_3d0f9c0=f32(0x3d0f9c0);
@@ -174,6 +170,78 @@ std::array<std::uint32_t, 7> NativeGame::input_constant_facts() const {
     return {values.axes.epsilon.bits, values.axes.maximum.bits, values.axes.keyboard_scale.bits,
             values.axes.controller_scale.bits, values.axes.magnitude_cap.bits,
             values.trigger_scale.bits, values.half_press_scale.bits};
+}
+void NativeGame::initialize_startup_defaults() {
+    if (config_.startup_defaults) {
+        const auto &values = *config_.startup_defaults;
+        winmain_.voice_language_at_3b0ef38 = static_cast<std::uint32_t>(values.voice_language);
+        winmain_.text_language_at_3b0f0e8 = static_cast<std::uint32_t>(values.text_language);
+        winmain_.clip_level_at_3abdcf0 = static_cast<std::uint32_t>(values.clip_level);
+        winmain_.bgm_volume_at_909f28 = static_cast<std::uint32_t>(values.music_volume);
+        winmain_.screen_at_892950 = static_cast<std::uint32_t>(values.cursor_setting);
+        winmain_.sound3d_at_3b0ef28 = static_cast<std::uint32_t>(values.sound_3d_mode);
+        winmain_.mouse_mode_at_3b0eae0 = static_cast<std::uint32_t>(values.mouse_mode);
+        leaves_->config_at_38f6ec0 = static_cast<std::uint32_t>(values.voice_enabled);
+        leaves_->config_at_3a7cf3c = static_cast<std::uint32_t>(values.music_enabled);
+        leaves_->word_at_3abdfac = static_cast<std::uint32_t>(values.voice_volume);
+        leaves_->word_at_3abdf90 = static_cast<std::uint32_t>(values.voice_volume_copy);
+        for (unsigned i = 0; i < 13; ++i)
+            winmain_.pad_buttons_at_389d634[i] = values.button_assignments[i];
+        for (unsigned i = 0; i < 17; ++i)
+            winmain_.pad_bits_at_8929d8[i] = values.configuration_slots[i];
+        return;
+    }
+    const auto *exe = config_.executable.get();
+    const auto word = [&](std::uint32_t address) -> std::optional<std::uint32_t> {
+        return exe ? exe->u32(address) : std::nullopt;
+    };
+    winmain_.voice_language_at_3b0ef38 = word(0x3b0ef38);
+    winmain_.text_language_at_3b0f0e8 = word(0x3b0f0e8);
+    winmain_.clip_level_at_3abdcf0 = word(0x3abdcf0);
+    winmain_.bgm_volume_at_909f28 = word(0x909f28);
+    winmain_.screen_at_892950 = word(0x892950);
+    winmain_.sound3d_at_3b0ef28 = word(0x3b0ef28);
+    winmain_.mouse_mode_at_3b0eae0 = word(0x3b0eae0);
+    leaves_->config_at_38f6ec0 = word(0x38f6ec0);
+    leaves_->config_at_3a7cf3c = word(0x3a7cf3c);
+    leaves_->word_at_3abdfac = word(0x3abdfac);
+    leaves_->word_at_3abdf90 = word(0x3abdf90);
+    for (unsigned i = 0; i < 13; ++i) {
+        const auto low = exe ? exe->byte(0x389d634 + 2 * i) : std::nullopt;
+        const auto high = exe ? exe->byte(0x389d635 + 2 * i) : std::nullopt;
+        if (low && high)
+            winmain_.pad_buttons_at_389d634[i] = static_cast<std::uint16_t>(*low | (*high << 8));
+    }
+    for (unsigned i = 0; i < 17; ++i)
+        if (const auto value = word(0x8929d8 + 4 * i))
+            winmain_.pad_bits_at_8929d8[i] = static_cast<std::int32_t>(*value);
+}
+std::array<std::optional<std::uint32_t>, 41> NativeGame::startup_facts() const {
+    std::array<std::optional<std::uint32_t>, 41> facts{};
+    unsigned next = 0;
+    facts[next++] = winmain_.voice_language_at_3b0ef38;
+    facts[next++] = winmain_.text_language_at_3b0f0e8;
+    facts[next++] = winmain_.clip_level_at_3abdcf0;
+    facts[next++] = winmain_.bgm_volume_at_909f28;
+    facts[next++] = winmain_.screen_at_892950;
+    facts[next++] = winmain_.sound3d_at_3b0ef28;
+    facts[next++] = winmain_.mouse_mode_at_3b0eae0;
+    facts[next++] = leaves_->config_at_38f6ec0;
+    facts[next++] = leaves_->config_at_3a7cf3c;
+    facts[next++] = leaves_->word_at_3abdfac;
+    facts[next++] = leaves_->word_at_3abdf90;
+    for (const auto &value : winmain_.pad_buttons_at_389d634)
+        facts[next++] = value;
+    for (const auto &value : winmain_.pad_bits_at_8929d8)
+        if (value)
+            facts[next++] = static_cast<std::uint32_t>(*value);
+        else
+            ++next;
+    return facts;
+}
+std::array<std::optional<std::uint32_t>, 4> NativeGame::startup_resource_facts() const {
+    return {winmain_.media_at_3ab918c, winmain_.media_at_3ab9190,
+            winmain_.message_text_at_8929b0, winmain_.message_caption_at_8929c4};
 }
 void NativeGame::initialize_queue_defaults() {
     if (config_.queue_defaults) {

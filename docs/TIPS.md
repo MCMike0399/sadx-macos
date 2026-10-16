@@ -277,3 +277,21 @@ in `AGENTS.md` and `STYLE.md`; this page holds facts and patterns.
   discrepancies even when every value matches. Compare complete report fingerprints
   after restoring only documented library/timing metadata; do not count partial as pass.
   Evidence: `input-constants-160-*`.
+
+### Startup defaults precede INI processing
+
+The load image's MusicVolume is -1000, VoiceLanguage/Language are zero, and
+several uint16 controller slots are 65535 (unassigned). These are not the later
+WinMain fallbacks: loader languages default to 1/1, voicev=100 converts to -300,
+and bgmv=89 converts to -2100. Keep initial values separate from settings conversion.
+The 17 signed configuration entries map action codes 1..17 to logical slots (-1
+unsupported); the 13 uint16 assignments map logical slots to physical button indices.
+Do not reverse these tables or truncate assignments to bytes.
+
+The SDK's CursorHidden name conflicts with the observed settings stores: screen<=0
+stores 1; screen>0 stores 0 before ShowCursor(FALSE). Use the neutral numeric role
+`cursor_setting`; do not infer a boolean or a window/fullscreen model. Enable3DSound
+accepts/clamps a full signed mode to 0..3, while WinMain clamps its INI input to 0..1.
+Evidence: startup-initial-161-evidence.json (CheckSettings, Enable3DSound,
+SetMouseMode, voicevolchange). Numeric native defaults exclude media objects,
+message pointers and the independently owned frame/fog controls.

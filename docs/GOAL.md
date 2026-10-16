@@ -387,6 +387,9 @@ comes first, because every later port should copy a readable model, not the lega
    Allocation/device facts and shared controls retain separate owners. Seven Input2.6.1
    arithmetic coefficients now come from native literals (28 exact bytes), retaining
    caller injection and reference decoders while removing boot-time DLL coefficient reads.
+   Startup settings add 41 exact numeric atoms (138 source bytes), including typed text
+   language, load-time audio/cursor modes and both controller mapping tables, with
+   media/message resources and shared controls kept separate.
    Native boot configuration selects these
    families explicitly; injectable reference decoding remains available. These families
    do not complete the runtime refactor:
