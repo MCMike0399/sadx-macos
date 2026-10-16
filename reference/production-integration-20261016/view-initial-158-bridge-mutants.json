@@ -1,0 +1,60 @@
+{
+  "passed": true,
+  "source_sha256": "4e06b1267233b22c5250f621d1681560f97b69a1fa957e631ee81fcef1412eae",
+  "baseline": {
+    "name": "baseline",
+    "exit_status": 0,
+    "killed": false,
+    "output": "Game runtime: survey ran startup + 3 frames (5 unported owners); native execution stops at 40cad0>40c090>415000>422680.",
+    "replacement": [
+      null,
+      null
+    ]
+  },
+  "mutants": [
+    {
+      "name": "ignore_native_view",
+      "exit_status": 1,
+      "killed": true,
+      "output": "native view facts retain every bit",
+      "replacement": [
+        "if (config_.view_defaults) {",
+        "if (false && config_.view_defaults) {"
+      ]
+    },
+    {
+      "name": "wrong_screen_distance",
+      "exit_status": 1,
+      "killed": true,
+      "output": "native view facts retain every bit",
+      "replacement": [
+        "bits(values.screen.distance)",
+        "bits(values.screen.width)"
+      ]
+    },
+    {
+      "name": "invent_missing_color_component",
+      "exit_status": 1,
+      "killed": true,
+      "output": "view colors retain whole-group availability",
+      "replacement": [
+        "if (!a || !r || !g || !b)\n            return std::nullopt;\n        return std::array<float, 4>{*a, *r, *g, *b};",
+        "if (!a || !r || !g)\n            return std::nullopt;\n        return std::array<float, 4>{*a, *r, *g, b.value_or(0)};"
+      ]
+    },
+    {
+      "name": "overwrite_pause_owner",
+      "exit_status": 1,
+      "killed": true,
+      "output": "all initialized control facts retain their exact values",
+      "replacement": [
+        "byte_at_3b280a8_ = values.reset_pending;",
+        "byte_at_3b280a8_ = values.reset_pending; loop_.mode_at_3b28114 = 0;"
+      ]
+    }
+  ],
+  "limits": [
+    "Temporary adapter copies linked before unchanged archives; no worktree mutation.",
+    "Three-frame survey only, no sprite draws or complete native view claim."
+  ]
+}

@@ -1,0 +1,179 @@
+{
+  "numeric_atoms": 30,
+  "numeric_bytes": 117,
+  "fields": [
+    {
+      "name": "stretch_x",
+      "address": "8928c0",
+      "width": 4
+    },
+    {
+      "name": "stretch_y",
+      "address": "8928c4",
+      "width": 4
+    },
+    {
+      "name": "animation_queue_state",
+      "address": "3abd9cc",
+      "width": 4
+    },
+    {
+      "name": "screen.distance",
+      "address": "3b28094",
+      "width": 4
+    },
+    {
+      "name": "screen.width",
+      "address": "3b28098",
+      "width": 4
+    },
+    {
+      "name": "screen.height",
+      "address": "3b2809c",
+      "width": 4
+    },
+    {
+      "name": "screen.center_x",
+      "address": "3b280a0",
+      "width": 4
+    },
+    {
+      "name": "screen.center_y",
+      "address": "3b280a4",
+      "width": 4
+    },
+    {
+      "name": "reset_pending",
+      "address": "3b280a8",
+      "width": 1
+    },
+    {
+      "name": "projection_center_x",
+      "address": "3d0f9ec",
+      "width": 4
+    },
+    {
+      "name": "projection_center_y",
+      "address": "3d0f9f0",
+      "width": 4
+    },
+    {
+      "name": "perspective",
+      "address": "3aad0bc",
+      "width": 4
+    },
+    {
+      "name": "perspective_copy",
+      "address": "3ab98ec",
+      "width": 4
+    },
+    {
+      "name": "last_perspective",
+      "address": "3b2cbb4",
+      "width": 4
+    },
+    {
+      "name": "clear_colors[0]",
+      "address": "3ce7174",
+      "width": 4
+    },
+    {
+      "name": "clear_colors[1]",
+      "address": "3ce7178",
+      "width": 4
+    },
+    {
+      "name": "clear_colors[2]",
+      "address": "3ce717c",
+      "width": 4
+    },
+    {
+      "name": "clear_colors[3]",
+      "address": "3ce7180",
+      "width": 4
+    },
+    {
+      "name": "view_color.alpha",
+      "address": "3b280ac",
+      "width": 4
+    },
+    {
+      "name": "view_color.red",
+      "address": "3b280b0",
+      "width": 4
+    },
+    {
+      "name": "view_color.green",
+      "address": "3b280b4",
+      "width": 4
+    },
+    {
+      "name": "view_color.blue",
+      "address": "3b280b8",
+      "width": 4
+    },
+    {
+      "name": "reset_color.alpha",
+      "address": "3b18230",
+      "width": 4
+    },
+    {
+      "name": "reset_color.red",
+      "address": "3b18234",
+      "width": 4
+    },
+    {
+      "name": "reset_color.green",
+      "address": "3b18238",
+      "width": 4
+    },
+    {
+      "name": "reset_color.blue",
+      "address": "3b1823c",
+      "width": 4
+    },
+    {
+      "name": "sprite_color.alpha",
+      "address": "3ab9864",
+      "width": 4
+    },
+    {
+      "name": "sprite_color.red",
+      "address": "3ab9868",
+      "width": 4
+    },
+    {
+      "name": "sprite_color.green",
+      "address": "3ab986c",
+      "width": 4
+    },
+    {
+      "name": "sprite_color.blue",
+      "address": "3ab9870",
+      "width": 4
+    }
+  ],
+  "color_groups": [
+    {
+      "name": "view_color",
+      "address": "3b280ac",
+      "availability": "all four float words or absent"
+    },
+    {
+      "name": "reset_color",
+      "address": "3b18230",
+      "availability": "all four float words or absent"
+    },
+    {
+      "name": "sprite_color",
+      "address": "3ab9864",
+      "availability": "all four float words or absent"
+    }
+  ],
+  "unselected_resource_addresses": [
+    "3ce7164",
+    "3ce7168",
+    "3ce716c"
+  ],
+  "shared_owner": "pause state remains session-control/loop owned; not included in view defaults"
+}

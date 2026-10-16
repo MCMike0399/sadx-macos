@@ -1,0 +1,86 @@
+{
+  "passed": true,
+  "source_sha256": {
+    "src/game/game_view_initial_state.hpp": "3ef9c910f6b89ede9aa6c1296e9850183645350a1815ad28d53ebdc0aaa38224",
+    "src/game/game_view_initial_state.cpp": "30b5db8e233fb5e7ccb5eac38df539856110b52a6ada9f09e41cfc11fa06a24e",
+    "tests/probes/game_view_initial_state_probe.hpp": "6c93980d864dc9ab7f56ee56260a3992ad5683d8992c1401893cf04ccc65b22a",
+    "tests/probes/native_game_view_initial_state_probe.cpp": "f1ac8b8f090408a62b34ee3db7920ccffe6b6cc90edb083115e2b00023c0357a"
+  },
+  "compiler_dependencies": [
+    "src/game/game_view_initial_state.cpp",
+    "src/game/game_view_initial_state.hpp",
+    "tests/probes/game_view_initial_state_probe.hpp",
+    "tests/probes/native_game_view_initial_state_probe.cpp"
+  ],
+  "toolchain_metadata_sha256": {
+    "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb"
+  },
+  "linked_libraries": [
+    "/usr/lib/libc++.1.dylib",
+    "/usr/lib/libSystem.B.dylib"
+  ],
+  "reference_runtime_symbols_found": false,
+  "commands": [
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-0.d",
+      "-c",
+      "src/game/game_view_initial_state.cpp",
+      "-o",
+      "unit-0.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-1.d",
+      "-c",
+      "tests/probes/native_game_view_initial_state_probe.cpp",
+      "-o",
+      "unit-1.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-dynamiclib",
+      "-Wl,-install_name,@rpath/game-view-initial-state.dylib",
+      "unit-0.o",
+      "unit-1.o",
+      "-o",
+      "game-view-initial-state.dylib"
+    ]
+  ],
+  "binary_sha256": "c5f73e601a29f585f88b2d3c8b3fb4fea73468b1ec521781b9e8197016b17bcf",
+  "serialized": {
+    "words": 30,
+    "sha256": "a950ea4e65331114f55c0b747ea6c62033e1af1e8177771dc47a307f1f048562"
+  },
+  "copied_original_binary_inputs": [],
+  "copied_fixtures": [],
+  "inherited_environment": false,
+  "core_archive_linked": false,
+  "limits": [
+    "Load-time numeric game-view/color values only; algorithms, resources and live control owners remain outside this source closure.",
+    "Isolated source/dependency closure, not an operating-system access sandbox.",
+    "Only the verified fingerprint is read before isolation; no original binary or table data is copied."
+  ]
+}

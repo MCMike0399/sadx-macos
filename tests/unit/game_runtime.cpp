@@ -6,6 +6,7 @@
 #include "../probes/ninja_fog_initial_state_probe.hpp"
 #include "../probes/ninja_screen_initial_state_probe.hpp"
 #include "../probes/sound_initial_state_probe.hpp"
+#include "../probes/game_view_initial_state_probe.hpp"
 #include <algorithm>
 #include <fstream>
 #include <iostream>
@@ -232,6 +233,56 @@ void missing_screen_facts() {
     same_screen_facts(varied, *config.screen_defaults);
     same_screen_resources(varied, config);
 }
+void same_view_facts(const sadx::NativeGame &game, const sadx::GameViewInitialState &values) {
+    const auto actual = game.view_facts();
+    const auto expected = sadx::test::view_initial_words(values);
+    for (std::size_t i = 0; i < expected.size(); ++i)
+        require(actual[i] && *actual[i] == expected[i], "native view facts retain every bit");
+}
+void reference_view_facts(const sadx::NativeGame &game, const sadx::NativeGameConfig &config) {
+    const auto actual = game.view_facts();
+    const auto word = [&](std::uint32_t address) {
+        return config.executable ? config.executable->u32(address) : std::nullopt;
+    };
+    unsigned next = 0;
+    for (auto address : {0x8928c0U, 0x8928c4U, 0x3abd9ccU, 0x3b28094U,
+                         0x3b28098U, 0x3b2809cU, 0x3b280a0U, 0x3b280a4U})
+        require(actual[next++] == word(address), "view scalar availability and raw values");
+    require(actual[next++] == (config.executable ? config.executable->byte(0x3b280a8) : std::nullopt),
+            "view reset flag byte availability");
+    for (auto address : {0x3d0f9ecU, 0x3d0f9f0U, 0x3aad0bcU, 0x3ab98ecU, 0x3b2cbb4U,
+                         0x3ce7174U, 0x3ce7178U, 0x3ce717cU, 0x3ce7180U})
+        require(actual[next++] == word(address), "view caches and clear colors stay independently available");
+    for (auto address : {0x3b280acU, 0x3b18230U, 0x3ab9864U}) {
+        bool complete = true;
+        for (unsigned i = 0; i < 4; ++i)
+            complete = complete && word(address + 4 * i).has_value();
+        for (unsigned i = 0; i < 4; ++i)
+            require(actual[next++] == (complete ? word(address + 4 * i) : std::nullopt),
+                    "view colors retain whole-group availability");
+    }
+    require(next == actual.size(), "all numeric view facts observed");
+}
+void missing_view_facts() {
+    sadx::NativeGameConfig config{};
+    const sadx::NativeGame missing(config);
+    reference_view_facts(missing, config);
+    config.view_defaults = sadx::game_view_initial_state();
+    config.control_defaults = sadx::test::varied_control_defaults();
+    config.screen_defaults = sadx::test::varied_screen_initial_state();
+    const sadx::NativeGame native(config);
+    same_view_facts(native, *config.view_defaults);
+    same_control_facts(native, *config.control_defaults);
+    same_screen_facts(native, *config.screen_defaults);
+    same_screen_resources(native, config);
+    for (const auto &byte : native.device_caps().bytes)
+        require(!byte, "view values do not invent GPU capabilities");
+    config.view_defaults = sadx::test::varied_view_initial_state();
+    const sadx::NativeGame varied(config);
+    same_view_facts(varied, *config.view_defaults);
+    same_control_facts(varied, *config.control_defaults);
+    same_screen_facts(varied, *config.screen_defaults);
+}
 void same_composition(const sadx::NativeGameReport &expected, const sadx::D3D8StateOwner &graphics,
                       const sadx::NativeGameReport &actual, const sadx::D3D8StateOwner &native) {
     require(expected.startup_completed == actual.startup_completed &&
@@ -277,13 +328,14 @@ void same_composition(const sadx::NativeGameReport &expected, const sadx::D3D8St
 }
 }
 int main(int argc,char** argv){try{
-    require(argc==3||argc==4||argc==7||argc==13||argc==14||argc==15||argc==16||argc==17,"usage: game-runtime-test SONIC.EXE INPUT_MOD.DLL [ENGINE_POISON [CONTROL_POISON CONTROL_VARIED CONTROL_PARTIAL]]");
+    require(argc==3||argc==4||argc==7||argc==13||argc==14||argc==15||argc==16||argc==17||argc==18,"usage: game-runtime-test SONIC.EXE INPUT_MOD.DLL [ENGINE_POISON [CONTROL_POISON CONTROL_VARIED CONTROL_PARTIAL]]");
     missing_control_facts();
     missing_input_facts();
     missing_sine_facts();
     missing_fog_facts();
     missing_screen_facts();
     missing_sound_facts();
+    missing_view_facts();
     const auto exe=load(argv[1]),dll=load(argv[2]);
     require(exe->u32(0x7dce58)==0x42720000u&&exe->byte(0x3abdc7c)==0&&!exe->byte(0x3d14000+0x2000),"load image: .rdata 60.5f at 7dce58, zero-fill .data, outside the image");
     sadx::NativeGameConfig config;config.executable=exe;config.input_mod_dll=dll;
@@ -301,6 +353,8 @@ int main(int argc,char** argv){try{
     same_screen_facts(original, sadx::ninja_screen_initial_state());
     same_sound_facts(original, sadx::sound_initial_state());
     reference_sound_facts(original, config);
+    same_view_facts(original, sadx::game_view_initial_state());
+    reference_view_facts(original, config);
     same_screen_resources(original, config);
     const auto survey=original.run();
     require(survey.failure.empty()&&survey.startup_completed&&survey.frames_completed==3&&!survey.unported.empty(),"survey completes startup and three frames");
@@ -312,6 +366,7 @@ int main(int argc,char** argv){try{
     config.screen_defaults = sadx::ninja_screen_initial_state();
     now = 0;
     config.sound_defaults = sadx::sound_initial_state();
+    config.view_defaults = sadx::game_view_initial_state();
     sadx::NativeGame native_tables(config);
     same_control_facts(native_tables, *config.control_defaults);
     const auto native_report = native_tables.run();
@@ -540,6 +595,44 @@ int main(int argc,char** argv){try{
         same_sound_facts(partial_native, *config.sound_defaults);
         same_sound_resources(partial_native, config);
     }
+    if (argc >= 18) {
+        const std::string prefix = argv[17];
+        config.sound_defaults = sadx::sound_initial_state();
+        config.view_defaults = sadx::game_view_initial_state();
+        config.executable = load((prefix + "-poisoned.exe").c_str());
+        require(config.executable->u32(0x8928c0) != exe->u32(0x8928c0) &&
+                    config.executable->u32(0x3b280b8) != exe->u32(0x3b280b8),
+                "view poison changes stretches and zero-filled color components");
+        now = 0;
+        sadx::NativeGame poisoned(config);
+        same_view_facts(poisoned, *config.view_defaults);
+        same_screen_resources(poisoned, config);
+        const auto report = poisoned.run();
+        same_composition(survey, original.d3d8(), report, poisoned.d3d8());
+        config.executable = load((prefix + "-varied.exe").c_str());
+        config.view_defaults.reset();
+        const sadx::NativeGame varied_image(config);
+        same_view_facts(varied_image, sadx::test::varied_view_initial_state());
+        reference_view_facts(varied_image, config);
+        config.view_defaults = sadx::game_view_initial_state();
+        const sadx::NativeGame native_over_varied(config);
+        same_view_facts(native_over_varied, *config.view_defaults);
+        same_screen_resources(native_over_varied, config);
+        config.executable = load((prefix + "-partial.exe").c_str());
+        require(config.executable->byte(0x3b280ba).has_value() && !config.executable->byte(0x3b280bb),
+                "partial fixture cuts the fourth view-color float");
+        config.view_defaults.reset();
+        const sadx::NativeGame partial(config);
+        reference_view_facts(partial, config);
+        const auto facts = partial.view_facts();
+        for (unsigned i = 18; i < 22; ++i)
+            require(!facts[i], "all four view-color components remain unknown when one is incomplete");
+        config.view_defaults = sadx::test::varied_view_initial_state();
+        const sadx::NativeGame partial_native(config);
+        same_view_facts(partial_native, *config.view_defaults);
+        same_screen_resources(partial_native, config);
+    }
+    config.view_defaults.reset();
     config.sound_defaults.reset();
     config.screen_defaults.reset();
     config.fog_defaults.reset();

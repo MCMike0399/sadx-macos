@@ -1,0 +1,53 @@
+{
+  "passed": true,
+  "source_sha256": "30b5db8e233fb5e7ccb5eac38df539856110b52a6ada9f09e41cfc11fa06a24e",
+  "baseline": {
+    "name": "baseline",
+    "exit_status": 0,
+    "killed": false,
+    "mismatches": [],
+    "mutation": null
+  },
+  "mutants": [
+    {
+      "name": "pixel_width_as_stretch",
+      "exit_status": 1,
+      "killed": true,
+      "mismatches": [
+        {
+          "word": 0,
+          "expected": 1065353216,
+          "actual": 1142947840
+        }
+      ],
+      "mutation": "values.stretch_x = 640.0F;"
+    },
+    {
+      "name": "premature_screen_distance",
+      "exit_status": 1,
+      "killed": true,
+      "mismatches": [
+        {
+          "word": 3,
+          "expected": 0,
+          "actual": 1065353216
+        }
+      ],
+      "mutation": "values.screen.distance = 1.0F;"
+    },
+    {
+      "name": "opaque_load_color",
+      "exit_status": 1,
+      "killed": true,
+      "mismatches": [
+        {
+          "word": 18,
+          "expected": 0,
+          "actual": 1065353216
+        }
+      ],
+      "mutation": "values.view_color.alpha = 1.0F;"
+    }
+  ],
+  "worktree_mutated": false
+}

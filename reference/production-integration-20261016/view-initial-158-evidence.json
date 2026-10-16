@@ -1,0 +1,201 @@
+{
+  "step": "GOAL6.7 native game-view/color initialization",
+  "base_commit": "817d0eb7671bcf5659392dcc52fc4589e52551b1",
+  "source_sha256": {
+    "src/game/game_view_initial_state.hpp": "3ef9c910f6b89ede9aa6c1296e9850183645350a1815ad28d53ebdc0aaa38224",
+    "src/game/game_view_initial_state.cpp": "30b5db8e233fb5e7ccb5eac38df539856110b52a6ada9f09e41cfc11fa06a24e",
+    "src/guest/native_game_reference.hpp": "0c4172b014b3c6a5fc0981d88c55daa228af71b8ab8de32e060c844a97d1112d",
+    "src/guest/native_game_reference.cpp": "4e06b1267233b22c5250f621d1681560f97b69a1fa957e631ee81fcef1412eae",
+    "src/guest/native_game_session.cpp": "2dce5239f60e4b4cc284d21514c2236c50032aec9b438f28ace3528db2fea7c0"
+  },
+  "source_image_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "numeric_atoms": 30,
+  "numeric_bytes": 117,
+  "data_report": "reference/oracle-reports/game_view_initial_state.json",
+  "field_map": "reference/production-integration-20261016/view-initial-158-field-map.json",
+  "evidence": [
+    {
+      "path": "reference/inventory-raw/view-initial-clear.json",
+      "evidence_id": "ev_bba1967b2bac138381621483a43a5e8da2e6b2086fb99ca05dddf52da6f0f968",
+      "sha256": "fc29b3aae6e9a75795176a9c4ea4cc319b6b9b9fe69100ad1960ee238d16f233"
+    },
+    {
+      "path": "reference/inventory-raw/view-initial-perspective.json",
+      "evidence_id": "ev_8da1cafa3515c9e40347cfc4752e76b528d1e693a95ac2493e1aec930cde555a",
+      "sha256": "7b65136ee4b18232482b836816b45efa9aa0c8f70dda1d5c2f30dc12bc6b349f"
+    },
+    {
+      "path": "reference/inventory-raw/view-initial-queue-color.json",
+      "evidence_id": "ev_c54e5797909d85adfe29d009d92d46437c394ac3af48e40fcf8200e173f9c4b3",
+      "sha256": "810d5abdb544fa0f1a1f27bcd3d70605da665e33fb0979e32863a87ee38ebefc"
+    },
+    {
+      "path": "reference/inventory-raw/view-initial-reset-color.json",
+      "evidence_id": "ev_768428cd32e962e643090c0fd31b5f0b65cb8178176065dd4749ab4fe807ca43",
+      "sha256": "8fcf7ea56e8ec7a1a6a599d2254f593518a1270f05ccdb2bed5acf74dd78d81f"
+    },
+    {
+      "path": "reference/inventory-raw/view-initial-reset.json",
+      "evidence_id": "ev_80d3673715367dc1665fbaacc0f16ad0c08d363fbb1ed357d06052230ee7e781",
+      "sha256": "a09d393788ee662d6ef92d00780cc644a84e18084ac11c9e28fee564379dad50"
+    },
+    {
+      "path": "reference/inventory-raw/view-initial-screen.json",
+      "evidence_id": "ev_5a916b236607eaf154df837ccface4d858afbf766767ce6a387cf235efc3df2d",
+      "sha256": "83759268e6da52b5aee5da3f78e988528f9f723e783b96cfa0b854911035b39c"
+    },
+    {
+      "path": "reference/inventory-raw/view-initial-view.json",
+      "evidence_id": "ev_426b08c594be99632022b590b7e0693883b6b534df0529bdedaf7745b0b4a836",
+      "sha256": "15b81871222c70ba35bfcd9f8811e5997f3b3f08880fd30b87984ddef1915e6f"
+    },
+    {
+      "path": "reference/inventory-raw/view-initial-xrefs-3aad0bc.json",
+      "evidence_id": "ev_64fbe1f4b1ce2ab936ea40dbcb13f68fc2ebf8da52bd93e79dd1fab342744ae8",
+      "sha256": "e50787695287f545e4e28fe1315e53bf52d24ce722b34ad8fe5c4630f6e899e9"
+    },
+    {
+      "path": "reference/inventory-raw/view-initial-xrefs-3ab9864.json",
+      "evidence_id": "ev_13c46ec826b94e0c906b72fdab5a1903c7f653c9b91223cc60a4ce0a6e9a7e87",
+      "sha256": "0e0ce087fead0bfcc5fa3044a65c34fa32254757559e4933de607a0290656934"
+    },
+    {
+      "path": "reference/inventory-raw/view-initial-xrefs-3ab98ec.json",
+      "evidence_id": "ev_1901c3d41ac40b79f4add1e2a6689c1dc4c9fe8dcdad3a87ac041308b4238beb",
+      "sha256": "b4e21223ef379237cab539d9326e1814f9623a3e19da02af8e3f27c2c800b20d"
+    },
+    {
+      "path": "reference/inventory-raw/view-initial-xrefs-3abd9cc.json",
+      "evidence_id": "ev_ceac3f43215428652dd3f03332fb96a08160dc98391a913f53b7f87a58083dde",
+      "sha256": "147d9904ed3d72b20beae653a559c08af41ec7ae94cbb1a972bffcb68ecaba06"
+    },
+    {
+      "path": "reference/inventory-raw/view-initial-xrefs-3b18230.json",
+      "evidence_id": "ev_07f4275dcc454bdb551f2ac503fec1fae6c8dcccbafefe48ce37f603f95526ad",
+      "sha256": "31ef61bb94183592f37be16a08980b0638022f89e24ed9019c368da4a8a83c87"
+    },
+    {
+      "path": "reference/inventory-raw/view-initial-xrefs-3b28094.json",
+      "evidence_id": "ev_5ea047ab92e6b0b06c6c097a11be4294df2351a8e6e4de45121efacfe2ac94db",
+      "sha256": "de2171e6e1f268535e6f4af418dc5364afe5b37cf84cd517cd334fff4cdfc294"
+    },
+    {
+      "path": "reference/inventory-raw/view-initial-xrefs-3b280a8.json",
+      "evidence_id": "ev_429b59a7cefd2b2877a6f63136e554e988a43dc569ce6751fb66b35dc069d155",
+      "sha256": "52f070a9c8c30e252597397022e3d151221a541b0f67149268d47d9ce529e16c"
+    },
+    {
+      "path": "reference/inventory-raw/view-initial-xrefs-3b280ac.json",
+      "evidence_id": "ev_5d67d700561b7146e154ebf74d0f393ee2ca3da0c820579acdab426b5b5127ce",
+      "sha256": "20c3102314096e715353b954c4e54bfdaad6ac2a0a0ed49d18adb7da6c34c0c8"
+    },
+    {
+      "path": "reference/inventory-raw/view-initial-xrefs-3b2cbb4.json",
+      "evidence_id": "ev_9040c68f7f4a1186d404af84348c9ddf6dd2be54636aa68a814ef6e64df2fba6",
+      "sha256": "1edb8efed7927a5f8e9f38b26e93c8c819626bed6663d087ca32c85c0f5e2e35"
+    },
+    {
+      "path": "reference/inventory-raw/view-initial-xrefs-3ce7174.json",
+      "evidence_id": "ev_28058762662d0a82bcbd4455f46c0b0579f8dea2b05bb40ae18b709498b7f87c",
+      "sha256": "38280025b121485667e7c07ba512c52039078bc4ff6d107fc336456db343e8cb"
+    },
+    {
+      "path": "reference/inventory-raw/view-initial-xrefs-3d0f9ec.json",
+      "evidence_id": "ev_3706f4769d7b1f1d366fdfee1787f2aa53b951d6deaa922da6417d07c548ae57",
+      "sha256": "9ab565968793f55135dec5d33a5ffeff2f9527a1253b586bdb349b8317db5db6"
+    },
+    {
+      "path": "reference/inventory-raw/view-initial-xrefs-3d0f9f0.json",
+      "evidence_id": "ev_9ec5738874a7a20513a4c17f4b60cba79138c693523750147d401aab1df1fe03",
+      "sha256": "7b722f6d341f2032737fc71071dd63b74d3e30b990c510d63782f6f46b5afad7"
+    },
+    {
+      "path": "reference/inventory-raw/view-initial-xrefs-8928c0.json",
+      "evidence_id": "ev_8bce5843e461744a26771993432b9896e9dc66f467204a99d220b7313937e3f7",
+      "sha256": "cea1446b17bbf47e11448c2c66cdad95d7f58793911864f0b127c10a550b560a"
+    },
+    {
+      "path": "reference/inventory-raw/view-initial-xrefs-8928c4.json",
+      "evidence_id": "ev_0f76b24aca7da5424609dd25d0bfeb30f029da450d19024d45e9667557661ebe",
+      "sha256": "b7a3c8da1469b44d3bc8b3f1b5f9521bb6dc51f79c41e5590ecab90a22998137"
+    }
+  ],
+  "constructor_comparison": {
+    "passed": true,
+    "inputs": [
+      "game/Sonic Adventure DX/sonic.exe",
+      "build/view-initial-poisoned.exe",
+      "build/view-initial-varied.exe",
+      "build/view-initial-partial.exe",
+      "-"
+    ],
+    "configurations": 5,
+    "facts_per_configuration": 174,
+    "facts_compared": 870,
+    "bytes_compared": 4269,
+    "sha256": "9e7321371cbe446970a7ea35447ca028905d0c2d181c930867b57697dc770d8b",
+    "rows_sha256": [
+      "ef6f466f99ca77cf269a9e15ebc2939a9f7dbdc5045a5c686b6f3fc13ab2f290",
+      "192a8f9d0bfc0468a2cd7e676ca2294fd4c957e9994115eb048626bb3a789b24",
+      "8e83acf775eac5d2c63e67ba3e3643ce3d17e5dffdc00b8841d3e55aab02bab9",
+      "47b37e763e44e52bb47392517f0c8effcbfd845053dca972a233547f90df8e67",
+      "bd64da00ca5ef8e3ef789af394cbe72c4864471a5f2d9473e7800f8a8ca73653"
+    ]
+  },
+  "cli_comparison": {
+    "passed": true,
+    "bytes_compared": 5427,
+    "sha256": "52254476457a377d2ac6d3f5eb7cd323f2154d6e22bf2e79e296833c8b070b7c"
+  },
+  "numeric_mutants": 3,
+  "adapter_mutants": 4,
+  "existing_oracles": {
+    "game_view": {
+      "numerical_report_unchanged": true,
+      "cases": 500,
+      "fp_flag_mismatches": 291,
+      "historical_full_report_sha256": "99196aa103543d55cd1eb37270eaac92daf7587c1bb605355148be0a85d13ef5",
+      "full_report_matches_after_restoring_only_library_hash": true
+    },
+    "game_frame_owners": {
+      "numerical_report_unchanged": true,
+      "cases": 2100,
+      "historical_full_report_sha256": "d2f5a6dc9303e5f0ed58a18f8c14790608a08b147b5de309ffb027564dbbf37e",
+      "full_report_matches_after_restoring_only_library_hash": true
+    },
+    "ninja_queue_consumer": {
+      "numerical_report_unchanged": true,
+      "cases": 187,
+      "profiles": 12,
+      "flag_mismatches_per_profile": 180,
+      "historical_full_report_sha256": "370602ae9d928e34e5ee9808f68612f1e719800d807fe11f0275753cf2efd880",
+      "full_report_matches_after_restoring_only_library_hash": true,
+      "tracked_list_limit": 10
+    },
+    "ninja_queue_lifecycle": {
+      "numerical_report_unchanged": true,
+      "cases": 600,
+      "fp_flag_mismatches": 402,
+      "historical_full_report_sha256": "ce500514fb8f6dbee7f2813ed643c20c86038db1929c7bc231ed6ffc946bebff",
+      "full_report_matches_after_restoring_only_library_hash": true
+    }
+  },
+  "independent_review": "Approved by fresh view_initial_review under STYLE \u00a712: all26 source/evidence hashes, classification, aggregate mapping, original availability/ownership, exact oracle, isolation, seven caught mutants and historical constructor/CLI results verified. Full gate pending; no complete view/session or physical GPU claim.",
+  "reproduce": [
+    "make view-initial-fixtures build/game-view-initial-state-test build/game-runtime-test",
+    "python3 reference/production-integration-20261016/view-initial-158-constructor-harness.py",
+    "python3 reference/production-integration-20261016/view-initial-158-cli-harness.py (after constructor harness creates historical reference source)",
+    "python3 reference/production-integration-20261016/view-initial-158-numeric-harness.py",
+    "python3 reference/production-integration-20261016/view-initial-158-bridge-harness.py",
+    "python3 tools/gate/check_game_view_initial_state.py"
+  ],
+  "limits": [
+    "Selected numeric view/color initialization only. Screen stretch defaults1; all other selected values0 before setup.",
+    "Existing view algorithm/lifecycle dependencies remain reference-era; isolated closure proves maintained initialization data only. Native unit exercises material color consumption.",
+    "Existing projection_.scale/center/color members not initialized by original constructor remain untouched (static review only). Separate projection-center copy words are selected.",
+    "Pause/frame-control owners, screen resources and GPU capabilities remain separate; selected values do not manufacture device facts.",
+    "Game view and queue lifecycle/consumer retain original FP-flag partial verdicts; no algorithm or existing judge changes.",
+    "Three-frame survey has no sprite draws; no complete native view/session/title/game or physical GPU/FP claim."
+  ],
+  "source_commit": "870b6bb"
+}

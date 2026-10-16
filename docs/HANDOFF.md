@@ -4229,3 +4229,33 @@ The product still needs native boot/title, resources and gameplay recovery.
   dependencies. Independent final STYLE review approved; full gate follows. No
   complete native view/session
   or physical GPU/FP claim. GOAL §6.7 remains open.
+
+
+### 2026-10-16 — game-view/color initialization verification complete (gate 158)
+
+* Completes source `870b6bb` in a separate judge commit. Thirty exact numeric atoms,
+  isolated native data closure, material consumer, historical constructor/CLI
+  equivalence, poisoned composition and all seven mutants pass. Independent final
+  STYLE review approved. Original algorithms and existing judges unchanged.
+* Full `make -j10 gate` **rc 0**, **140 native programs / 50 Python tests**. Unchanged
+  7,228-frame two-boot determinism and first-600 override digests; 71,115 comparisons
+  and mutants, 900-frame controller parity and 63 FPS title cadence pass. Host
+  throughput 64.6 FPS. Twelve layers/zero exceptions; 159,630 owned bytes /159,680
+  combined identities; 477 protected judge inputs. Readability 245 files with
+  unchanged debt: hex11,628 / identifiers1,796 / calls75 / gotos2 / long1,489 / multi2,184.
+* All four historical full numerical reports reproduce exactly after restoring only
+  the native-library hash: view500/291 FP flags, frame owners2100, queue lifecycle
+  600/402 FP flags, queue consumer12 CW*187/180 FP flags per profile. The tracked
+  summary clips profiles to10; the full-report fingerprint proves all12 unchanged.
+  Partial results remain partial. Aggregate verdict command rc2: tracked56pass /
+  46partial /9fail /1missing. Other standalone oracles, separate `make m1` and four
+  unregistered tests skipped: metal-sprite, metal-sprite-composition, metal-texture,
+  player-task. All source/probe/app programs compile.
+* Evidence: `production-integration-20261016/view-initial-158-*`, with seven fresh
+  Ghidra dossiers +14 xrefs, source/data hashes, field map, historical constructor
+  and CLI harnesses/results, numeric/adapter mutants, isolated closure and gate.
+  New data builds without reference code; the existing full view/lifecycle still
+  needs reference-era dependencies. Remaining runtime initialization, resource/content
+  seams and unrecovered game behavior stay open. No complete native view/session
+  independence or physical graphics/FP claim. Goal active; hook settings and two
+  user Ghidra drafts untouched; no binaries/assets committed; no push.

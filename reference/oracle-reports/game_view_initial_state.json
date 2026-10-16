@@ -1,0 +1,46 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "1df9e774eec0119dd57e2599a71977883753089ec1df1d67e9de4155c145ccbd",
+ "source_files": {
+  "src/game/game_view_initial_state.hpp": "3ef9c910f6b89ede9aa6c1296e9850183645350a1815ad28d53ebdc0aaa38224",
+  "src/game/game_view_initial_state.cpp": "30b5db8e233fb5e7ccb5eac38df539856110b52a6ada9f09e41cfc11fa06a24e",
+  "tests/probes/game_view_initial_state_probe.hpp": "6c93980d864dc9ab7f56ee56260a3992ad5683d8992c1401893cf04ccc65b22a",
+  "tests/probes/native_game_view_initial_state_probe.cpp": "f1ac8b8f090408a62b34ee3db7920ccffe6b6cc90edb083115e2b00023c0357a",
+  "tools/oracles/verify_original_game_view_initial_state.py": "301f63fb18b34be2fefe6e090d8ae7f79ff408fbca3cc1c0734b33b4190a06d9"
+ },
+ "original_ranges_sha256": {
+  "8928c0-8928c4": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+  "8928c4-8928c8": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c",
+  "3abd9cc-3abd9d0": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3b28094-3b28098": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3b28098-3b2809c": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3b2809c-3b280a0": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3b280a0-3b280a4": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3b280a4-3b280a8": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3b280a8-3b280a9": "6e340b9cffb37a989ca544e6bb780a2c78901d3fb33738768511a30617afa01d",
+  "3d0f9ec-3d0f9f0": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3d0f9f0-3d0f9f4": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3aad0bc-3aad0c0": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3ab98ec-3ab98f0": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3b2cbb4-3b2cbb8": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3ce7174-3ce7178": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3ce7178-3ce717c": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3ce717c-3ce7180": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3ce7180-3ce7184": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3b280ac-3b280bc": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb",
+  "3b18230-3b18240": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb",
+  "3ab9864-3ab9874": "374708fff7719dd5979ec875d56cd2286f6d3cf7ec317a3b25632aab28ec37bb"
+ },
+ "cases": 1,
+ "words_compared": 30,
+ "expected_words_sha256": "a950ea4e65331114f55c0b747ea6c62033e1af1e8177771dc47a307f1f048562",
+ "mismatches": [],
+ "returned_values_and_boundaries_match": true,
+ "limits": "Verify view load-time values against pinned file bytes and PE virtual zero fill.\n\nOnly the selected numeric game-view and shared queue-color initial values are\ncovered. Resources, frame controls and uninitialized projection fields stay separate.\nThis does not establish complete native view/session behavior or physical graphics.\n",
+ "tracked_summary": {
+  "full_sha256": "3c36a5cfe518183c5d11c38a86ce805dcd8c3b6c4defeacd61e1a80a78293755",
+  "full_bytes": 3309,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}
