@@ -1,0 +1,66 @@
+{
+  "passed": true,
+  "source_sha256": "e5df39d7809f86d241aaa24df687280f7603e9a5b85520dec950455a1bf26c91",
+  "baseline": {
+    "name": "baseline",
+    "exit_status": 0,
+    "killed": false,
+    "mismatches": [],
+    "mutation": null
+  },
+  "mutants": [
+    {
+      "name": "post_ini_music_volume",
+      "exit_status": 1,
+      "killed": true,
+      "mismatches": [
+        {
+          "word": 3,
+          "expected": 4294966296,
+          "actual": 4294965196
+        }
+      ],
+      "mutation": "values.music_volume = -2100;"
+    },
+    {
+      "name": "premature_voice_enable",
+      "exit_status": 1,
+      "killed": true,
+      "mismatches": [
+        {
+          "word": 7,
+          "expected": 0,
+          "actual": 1
+        }
+      ],
+      "mutation": "values.voice_enabled = 1;"
+    },
+    {
+      "name": "assigned_sentinel",
+      "exit_status": 1,
+      "killed": true,
+      "mismatches": [
+        {
+          "word": 23,
+          "expected": 65535,
+          "actual": 0
+        }
+      ],
+      "mutation": "values.button_assignments[12] = 0;"
+    },
+    {
+      "name": "supported_configuration_code",
+      "exit_status": 1,
+      "killed": true,
+      "mismatches": [
+        {
+          "word": 34,
+          "expected": 4294967295,
+          "actual": 0
+        }
+      ],
+      "mutation": "values.configuration_slots[10] = 0;"
+    }
+  ],
+  "worktree_mutated": false
+}

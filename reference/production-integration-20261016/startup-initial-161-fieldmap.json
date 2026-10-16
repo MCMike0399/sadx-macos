@@ -1,0 +1,95 @@
+{
+  "scalars": [
+    {
+      "name": "voice_language",
+      "owner": "winmain_.voice_language_at_3b0ef38",
+      "address": "3b0ef38",
+      "bytes": 4
+    },
+    {
+      "name": "text_language",
+      "owner": "winmain_.text_language_at_3b0f0e8",
+      "address": "3b0f0e8",
+      "bytes": 4
+    },
+    {
+      "name": "clip_level",
+      "owner": "winmain_.clip_level_at_3abdcf0",
+      "address": "3abdcf0",
+      "bytes": 4
+    },
+    {
+      "name": "music_volume",
+      "owner": "winmain_.bgm_volume_at_909f28",
+      "address": "909f28",
+      "bytes": 4
+    },
+    {
+      "name": "cursor_setting",
+      "owner": "winmain_.screen_at_892950",
+      "address": "892950",
+      "bytes": 4
+    },
+    {
+      "name": "sound_3d_mode",
+      "owner": "winmain_.sound3d_at_3b0ef28",
+      "address": "3b0ef28",
+      "bytes": 4
+    },
+    {
+      "name": "mouse_mode",
+      "owner": "winmain_.mouse_mode_at_3b0eae0",
+      "address": "3b0eae0",
+      "bytes": 4
+    },
+    {
+      "name": "voice_enabled",
+      "owner": "leaves_->config_at_38f6ec0",
+      "address": "38f6ec0",
+      "bytes": 4
+    },
+    {
+      "name": "music_enabled",
+      "owner": "leaves_->config_at_3a7cf3c",
+      "address": "3a7cf3c",
+      "bytes": 4
+    },
+    {
+      "name": "voice_volume",
+      "owner": "leaves_->word_at_3abdfac",
+      "address": "3abdfac",
+      "bytes": 4
+    },
+    {
+      "name": "voice_volume_copy",
+      "owner": "leaves_->word_at_3abdf90",
+      "address": "3abdf90",
+      "bytes": 4
+    }
+  ],
+  "arrays": [
+    {
+      "name": "button_assignments",
+      "address": "389d634",
+      "count": 13,
+      "bytes_each": 2
+    },
+    {
+      "name": "configuration_slots",
+      "address": "8929d8",
+      "count": 17,
+      "bytes_each": 4
+    }
+  ],
+  "atoms": 41,
+  "source_bytes": 138,
+  "excluded_resources": [
+    "3ab918c",
+    "3ab9190",
+    "8929b0",
+    "8929c4"
+  ],
+  "classification": "Native load-time numeric data, not post-INI defaults or resource identities",
+  "cursor_naming": "SDK CursorHidden name is ambiguous: actual WinMain stores zero before ShowCursor(FALSE); use neutral cursor_setting",
+  "signedness": "VoiceLanguage raw int; LANGUAGE enum text; sound3d mode is a 32-bit 0..3 value in Enable3DSound, not a bool"
+}

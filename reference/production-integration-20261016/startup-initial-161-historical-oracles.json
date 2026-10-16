@@ -1,0 +1,37 @@
+{
+ "passed": true,
+ "reports": [
+  {
+   "slug": "game_winmain",
+   "full_raw_sha256": "8c3432140915bcc12112ff13b22199b0220f0b0778d2c5c18683e24902848403",
+   "historical_full_sha256": "917e4f05b90cedf77b424ce64dfed031801929cdc6b5b01a669151b256ac28e3",
+   "metadata_restored": [
+    "native_library_sha256",
+    "source_files"
+   ],
+   "cases": 3000,
+   "passed": true
+  },
+  {
+   "slug": "game_reset",
+   "full_raw_sha256": "275bbd0b73ead0b003a1e52e2298dccc4a7cd35fb3bd1a3674070eea9f0899ee",
+   "historical_full_sha256": "275bbd0b73ead0b003a1e52e2298dccc4a7cd35fb3bd1a3674070eea9f0899ee",
+   "metadata_restored": [
+    "native_library_sha256"
+   ],
+   "cases": 300,
+   "passed": true
+  },
+  {
+   "slug": "game_loop",
+   "full_raw_sha256": "9e16b6aee7adf7bb9f3ec877d773b412849dcce3fc34aab207e781cebc246ab9",
+   "historical_full_sha256": "9e16b6aee7adf7bb9f3ec877d773b412849dcce3fc34aab207e781cebc246ab9",
+   "metadata_restored": [
+    "native_library_sha256"
+   ],
+   "cases": 688,
+   "passed": true
+  }
+ ],
+ "limits": "Full raw JSON reconstructed with only native library identity and already-stale provenance hashes restored (current sources independently equal HEAD8a03588); no test values/flags removed or changed."
+}

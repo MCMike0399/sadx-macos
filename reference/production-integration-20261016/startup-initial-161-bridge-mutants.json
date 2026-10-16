@@ -1,0 +1,60 @@
+{
+  "passed": true,
+  "source_sha256": "fb86c357ff811bc1ceda26a37065167c22fa63320fadf2192bf6f01091c5538e",
+  "baseline": {
+    "name": "baseline",
+    "exit_status": 0,
+    "killed": false,
+    "output": "Startup boot: canonical/poison/varied/partial, injection, absent image and resources passed.",
+    "replacement": [
+      null,
+      null
+    ]
+  },
+  "mutants": [
+    {
+      "name": "ignore_native_startup",
+      "exit_status": 1,
+      "killed": true,
+      "output": "all native startup fields preserve injected values and widths",
+      "replacement": [
+        "if (config_.startup_defaults) {",
+        "if (false && config_.startup_defaults) {"
+      ]
+    },
+    {
+      "name": "truncate_assignments",
+      "exit_status": 1,
+      "killed": true,
+      "output": "all native startup fields preserve injected values and widths",
+      "replacement": [
+        "= values.button_assignments[i];",
+        "= static_cast<std::uint8_t>(values.button_assignments[i]);"
+      ]
+    },
+    {
+      "name": "invent_missing_binding",
+      "exit_status": 1,
+      "killed": true,
+      "output": "fallback preserves independent field availability and original widths",
+      "replacement": [
+        "if (low && high)\n            winmain_.pad_buttons_at_389d634[i] = static_cast<std::uint16_t>(*low | (*high << 8));",
+        "if (low)\n            winmain_.pad_buttons_at_389d634[i] = static_cast<std::uint16_t>(*low | (high.value_or(0) << 8));"
+      ]
+    },
+    {
+      "name": "overwrite_media_resource",
+      "exit_status": 1,
+      "killed": true,
+      "output": "native startup values preserve independent resource availability and identity",
+      "replacement": [
+        "winmain_.media_at_3ab918c=u32(0x3ab918c);",
+        "winmain_.media_at_3ab918c=config_.startup_defaults ? std::optional<std::uint32_t>{0} : u32(0x3ab918c);"
+      ]
+    }
+  ],
+  "limits": [
+    "Temporary adapter copies linked before unchanged archives; no worktree mutation.",
+    "Three-frame survey only, no sprite draws or complete native startup claim."
+  ]
+}

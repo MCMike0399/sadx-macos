@@ -1,0 +1,86 @@
+{
+  "passed": true,
+  "source_sha256": {
+    "src/game/startup_initial_state.hpp": "b4a54a2f391371e91b962e9fd554a9e99d6e701642f86222abfb7b48d53193f6",
+    "src/game/startup_initial_state.cpp": "e5df39d7809f86d241aaa24df687280f7603e9a5b85520dec950455a1bf26c91",
+    "tests/probes/startup_initial_state_probe.hpp": "d516c7fd80ec55032b9abca542054530b6a930b469cdf48d292ecc73571b30cd",
+    "tests/probes/native_startup_initial_state_probe.cpp": "f347be097c4b30818ab6ffdc5d4fd4ee2870b4512c3d98cbffcb097a59682307"
+  },
+  "compiler_dependencies": [
+    "src/game/startup_initial_state.cpp",
+    "src/game/startup_initial_state.hpp",
+    "tests/probes/native_startup_initial_state_probe.cpp",
+    "tests/probes/startup_initial_state_probe.hpp"
+  ],
+  "toolchain_metadata_sha256": {
+    "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb"
+  },
+  "linked_libraries": [
+    "/usr/lib/libc++.1.dylib",
+    "/usr/lib/libSystem.B.dylib"
+  ],
+  "reference_runtime_symbols_found": false,
+  "commands": [
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-0.d",
+      "-c",
+      "src/game/startup_initial_state.cpp",
+      "-o",
+      "unit-0.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-1.d",
+      "-c",
+      "tests/probes/native_startup_initial_state_probe.cpp",
+      "-o",
+      "unit-1.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-dynamiclib",
+      "-Wl,-install_name,@rpath/startup-initial-state.dylib",
+      "unit-0.o",
+      "unit-1.o",
+      "-o",
+      "startup-initial-state.dylib"
+    ]
+  ],
+  "binary_sha256": "fa8c73b95fad98edbbe3d1df5c5042441b36142502e8523a825d0ea559b509a9",
+  "serialized": {
+    "words": 41,
+    "sha256": "5c42e8f3243fcd670a3d126a2dc57f65f4bea3493d4a8d9a0eb17771d4f24e95"
+  },
+  "copied_original_binary_inputs": [],
+  "copied_fixtures": [],
+  "inherited_environment": false,
+  "core_archive_linked": false,
+  "limits": [
+    "Load-time numeric startup values only; startup algorithms, media and message resources remain outside this source closure.",
+    "Isolated source/dependency closure, not an operating-system access sandbox.",
+    "Only the verified fingerprint is read before isolation; no original binary or table data is copied."
+  ]
+}

@@ -4415,3 +4415,26 @@ The product still needs native boot/title, resources and gameplay recovery.
   independent final review. Final fresh STYLE §12 review approved all targeted
   evidence; full gate remains pending. Runtime initialization and the overall goal remain open.
   No physical-device/full WinMain independence or complete native session claim.
+
+## 2026-10-16 — startup initial defaults, gate161 verification
+
+* Source27ab03b; fresh independent final STYLE §12 review approved. Exact41-atom
+  data oracle and isolated four-file source closure pass. Four numeric/four adapter
+  mutants caught. Historical constructors2,125facts/9,311bytes and CLI5,427bytes
+  identical. Existing WinMain3,000/reset300/loop688 complete report hashes reproduce
+  with only documented metadata restored; existing source consumers/judges unchanged.
+* Full `make -j10 gate` **rc0**, **145 native programs /50 Python tests**. Both new
+  registered native-settings and boot-boundary tests run. 7,228-frame two-boot replay
+  and first600 override digests unchanged;71,115 override comparisons/mutants,
+  900-frame controller parity,63FPS title cadence pass. Host81.9FPS. Twelve layers/
+  zero exceptions;159,630 owned bytes/159,680 combined identities;498 judge inputs.
+  Readability251 files, unchanged hex11,628/IDs1,796/calls75/gotos2/long1,489/multi2,184.
+* Recorded startup-initial-161-gate.json with real terminal status; STATUS regenerated.
+  Aggregate verdict **rc2**, tracked59pass/46partial/9fail/1missing. Other standalone
+  oracles, separate make m1 and four unregistered tests skipped: metal-sprite,
+  metal-sprite-composition, metal-texture, player-task. Existing partials remain partial.
+* Startup-initial-161-* retains field/evidence map, source isolation, independent
+  review, mutants and historical harnesses/results. No original data bytes, assets
+  or binaries committed. Partial PE is a reader fixture, never executed. This proves
+  selected numeric initialization only; full native startup/session, importer resources
+  and overall GOAL remain open. No push; hook settings and two user drafts untouched.

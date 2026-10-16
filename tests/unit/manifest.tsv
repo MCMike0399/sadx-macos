@@ -142,3 +142,5 @@ game-view-initial-state
 ninja-queue-initial-state
 input-mod-constants
 input-constants-boot	"$(GAME_EXE)" "$(INPUT_MOD_DLL)" build/input-constants
+startup-initial-state	
+startup-initial-boot	"$(GAME_EXE)" "$(INPUT_MOD_DLL)" build/startup-initial
