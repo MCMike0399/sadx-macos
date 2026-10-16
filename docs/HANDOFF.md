@@ -4034,3 +4034,33 @@ The product still needs native boot/title, resources and gameplay recovery.
   game assets committed. Resource/content, remaining input and other initialization families
   remain open. No complete native session/game independence or physical-FP claim. Goal active;
   hook settings and two user Ghidra drafts untouched. Commits local; no push.
+
+### 2026-10-16 — native fog load-time values (source step)
+
+* GOAL §6.7 fifth initialization family: `engine/ninja_fog_initial_state` supplies
+  398 words: 14 scalar values and three 128-entry tables (game, device W, reciprocal).
+  Caches start at positive65535.0F; all other selected load-time values are zero. Tables
+  must not contain device-generated values yet. Native boot supplies these explicitly;
+  omitted reference configuration preserves each word's PE value/unknown availability.
+* Device resources and GPU capability bytes remain separate. Frame enable/profile flags
+  and saved ranges remain owned by the prior control family; varied-control coexistence
+  tests catch accidental overwrite. Software density remains a uint32 bit-pattern word:
+  four observed references are immediate writes, not proof of a float consumer.
+* Six owned Ghidra dossiers plus15global xrefs are indexed in `fog-initial-155-evidence`.
+  Device `ev_ea4d3942d2aa81aa3847a38ae8856b47ef4ad19fe88b07eccf93302063f59a0d`,
+  reciprocal `ev_263269abc7cfcc2ea45f779d376c1fe5d28580af4e956ef70f0fec5e285ef4b2`,
+  disabled update `ev_e459d7896a39a0395f5e7bfde4acfeb3ceda6cf939d2f81d5708e02ace5d6436`,
+  level update `ev_4a7cf69dcebe4de74c74cda564ddb01735ecc81dc1fe21eb5f63cc955b3b0740`.
+  Direct buffer arguments/indexed writes establish three inline float[128] arrays,
+  correcting classic SDK pointer-cell declarations in the symbol override table.
+* All398compiled words exact, including actual virtual zero fill. Native source/header/
+  probe closure passes without PE, fixtures, guest runtime or core archive. No-image,
+  varied NaN/Inf/zero/subnormal transport and partial-last-word tests pass. Five old/new
+  constructor snapshots compare1,990availability/value facts exactly (15,132bytes);
+  prior initializer/session CLI report is identical5,427bytes. Poisoned-cache/table
+  survey preserves report/graphics for3frames, with no sprite draws.
+* Three data/four adapter mutants caught; restored baseline passes. Original consumer
+  results unchanged: fog4,700cases retain2,410FP-flag differences (partial) and19explicit
+  uncompared boundaries; loop688/reset300 have zero value mismatches. Algorithms and
+  prior judges unchanged. Independent final STYLE review approves the bounded source and
+  evidence. Full gate follows in a separate judge commit; GOAL §6.7 remains open.

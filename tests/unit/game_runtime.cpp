@@ -3,6 +3,7 @@
 #include "../probes/session_control_probe.hpp"
 #include "../probes/input_initial_state_probe.hpp"
 #include "../probes/ninja_sine_table_probe.hpp"
+#include "../probes/ninja_fog_initial_state_probe.hpp"
 #include <algorithm>
 #include <fstream>
 #include <iostream>
@@ -113,6 +114,29 @@ void missing_sine_facts() {
     const sadx::NativeGame varied(config);
     same_sine_facts(varied, *config.sine_table);
 }
+void same_fog_facts(const sadx::NativeGame &game, const sadx::NinjaFogInitialState &values) {
+    const auto actual = game.fog_facts();
+    const auto expected = sadx::test::fog_initial_words(values);
+    for (std::size_t i = 0; i < expected.size(); ++i)
+        require(actual[i] && *actual[i] == expected[i], "every fog initializer fact retains its exact bits");
+}
+void missing_fog_facts() {
+    sadx::NativeGameConfig config{};
+    const sadx::NativeGame missing(config);
+    for (const auto &fact : missing.fog_facts())
+        require(!fact, "absent reference image leaves fog facts unknown");
+    config.fog_defaults = sadx::ninja_fog_initial_state();
+    config.control_defaults = sadx::test::varied_control_defaults();
+    const sadx::NativeGame native(config);
+    same_fog_facts(native, *config.fog_defaults);
+    same_control_facts(native, *config.control_defaults);
+    for (const auto &byte : native.device_caps().bytes)
+        require(!byte, "native fog defaults must not invent GPU capabilities");
+    config.fog_defaults = sadx::test::varied_fog_initial_state();
+    const sadx::NativeGame varied(config);
+    same_fog_facts(varied, *config.fog_defaults);
+    same_control_facts(varied, *config.control_defaults);
+}
 void same_composition(const sadx::NativeGameReport &expected, const sadx::D3D8StateOwner &graphics,
                       const sadx::NativeGameReport &actual, const sadx::D3D8StateOwner &native) {
     require(expected.startup_completed == actual.startup_completed &&
@@ -158,10 +182,11 @@ void same_composition(const sadx::NativeGameReport &expected, const sadx::D3D8St
 }
 }
 int main(int argc,char** argv){try{
-    require(argc==3||argc==4||argc==7||argc==13||argc==14,"usage: game-runtime-test SONIC.EXE INPUT_MOD.DLL [ENGINE_POISON [CONTROL_POISON CONTROL_VARIED CONTROL_PARTIAL]]");
+    require(argc==3||argc==4||argc==7||argc==13||argc==14||argc==15,"usage: game-runtime-test SONIC.EXE INPUT_MOD.DLL [ENGINE_POISON [CONTROL_POISON CONTROL_VARIED CONTROL_PARTIAL]]");
     missing_control_facts();
     missing_input_facts();
     missing_sine_facts();
+    missing_fog_facts();
     const auto exe=load(argv[1]),dll=load(argv[2]);
     require(exe->u32(0x7dce58)==0x42720000u&&exe->byte(0x3abdc7c)==0&&!exe->byte(0x3d14000+0x2000),"load image: .rdata 60.5f at 7dce58, zero-fill .data, outside the image");
     sadx::NativeGameConfig config;config.executable=exe;config.input_mod_dll=dll;
@@ -175,12 +200,14 @@ int main(int argc,char** argv){try{
     same_input_facts(original, sadx::input::input_initial_state());
     reference_input_facts(original, config);
     same_sine_facts(original, sadx::ninja_sine_table());
+    same_fog_facts(original, sadx::ninja_fog_initial_state());
     const auto survey=original.run();
     require(survey.failure.empty()&&survey.startup_completed&&survey.frames_completed==3&&!survey.unported.empty(),"survey completes startup and three frames");
     config.engine_tables = sadx::runtime::engine_code_tables();
     config.control_defaults = sadx::runtime::session_control_defaults();
     config.input_defaults = sadx::input::input_initial_state();
     config.sine_table = sadx::ninja_sine_table();
+    config.fog_defaults = sadx::ninja_fog_initial_state();
     now = 0;
     sadx::NativeGame native_tables(config);
     same_control_facts(native_tables, *config.control_defaults);
@@ -257,7 +284,7 @@ int main(int argc,char** argv){try{
         same_input_facts(partial_native, *config.input_defaults);
         same_input_resources(partial_native, config);
     }
-    if (argc == 14) {
+    if (argc >= 14) {
         const std::string prefix = argv[13];
         config.input_mod_dll = dll;
         config.input_defaults = sadx::input::input_initial_state();
@@ -288,6 +315,45 @@ int main(int argc,char** argv){try{
         const sadx::NativeGame partial_native(config);
         same_sine_facts(partial_native, *config.sine_table);
     }
+    if (argc == 15) {
+        const std::string prefix = argv[14];
+        config.input_mod_dll = dll;
+        config.sine_table = sadx::ninja_sine_table();
+        config.executable = load((prefix + "-poisoned.exe").c_str());
+        require(config.executable->u32(0x90a098) != exe->u32(0x90a098) &&
+                    config.executable->u32(0x3b10f78) != exe->u32(0x3b10f78),
+                "fog poison fixture changes file-backed caches and virtual-zero table data");
+        now = 0;
+        sadx::NativeGame poisoned_fog(config);
+        same_fog_facts(poisoned_fog, *config.fog_defaults);
+        const auto report = poisoned_fog.run();
+        same_composition(survey, original.d3d8(), report, poisoned_fog.d3d8());
+        config.executable = load((prefix + "-varied.exe").c_str());
+        config.fog_defaults.reset();
+        const sadx::NativeGame varied_image(config);
+        same_fog_facts(varied_image, sadx::test::varied_fog_initial_state());
+        config.fog_defaults = sadx::ninja_fog_initial_state();
+        const sadx::NativeGame native_over_varied(config);
+        same_fog_facts(native_over_varied, *config.fog_defaults);
+        config.executable = load((prefix + "-partial.exe").c_str());
+        require(config.executable->byte(0x3d12dfe).has_value() &&
+                    !config.executable->byte(0x3d12dff),
+                "partial fixture removes the last reciprocal float byte");
+        config.fog_defaults.reset();
+        const sadx::NativeGame partial(config);
+        const auto facts = partial.fog_facts();
+        const auto expected = sadx::test::fog_initial_words(sadx::ninja_fog_initial_state());
+        for (std::size_t i = 0; i < facts.size(); ++i) {
+            if (i == facts.size() - 1)
+                require(!facts[i], "incomplete reciprocal word remains unknown");
+            else
+                require(facts[i] && *facts[i] == expected[i], "other mapped fog words remain known");
+        }
+        config.fog_defaults = sadx::test::varied_fog_initial_state();
+        const sadx::NativeGame partial_native(config);
+        same_fog_facts(partial_native, *config.fog_defaults);
+    }
+    config.fog_defaults.reset();
     config.sine_table.reset();
     config.input_defaults.reset();
     config.input_mod_dll = load(argv[2]);

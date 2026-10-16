@@ -18,6 +18,7 @@ void NativeGame::initialize_source_facts(){
     initialize_engine_code_tables();
     initialize_control_defaults();
     initialize_input_defaults();
+    initialize_fog_defaults();
     const auto* exe=config_.executable.get();
     const auto u8=[&](std::uint32_t a)->std::optional<std::uint8_t>{if(!exe)return std::nullopt;return exe->byte(a);};
     const auto u32=[&](std::uint32_t a)->std::optional<std::uint32_t>{if(!exe)return std::nullopt;return exe->u32(a);};
@@ -69,11 +70,6 @@ void NativeGame::initialize_source_facts(){
     for(unsigned i=0;i<4;++i)leaves_->entry_words_at_3d08428[i]=u32(0x3d08428+24*i);
     if(const auto a=f32(0x3b280ac),b=f32(0x3b280b0),c=f32(0x3b280b4),d=f32(0x3b280b8);a&&b&&c&&d)color_at_3b280ac_=std::array<float,4>{*a,*b,*c,*d};
     queue_base_at_3abd960_=u32(0x3abd960);consumer_.projection_width_at_3d0f9e4=f32(0x3d0f9e4);
-    consumer_.fog_enabled_at_3d12798=u32(0x3d12798);consumer_.fog_supported_at_3d128a4=u32(0x3d128a4);consumer_.fog_mode_at_3d0849c=u32(0x3d0849c);
-    consumer_.cached_fog_start_at_90a098=f32(0x90a098);consumer_.cached_fog_end_at_90a09c=f32(0x90a09c);
-    for(unsigned i=0;i<128;++i){fog_table_at_3b10f78_[i]=f32(0x3b10f78+4*i);fog_device_.w_at_3d12a00[i]=f32(0x3d12a00+4*i);fog_device_.reciprocal_at_3d12c00[i]=f32(0x3d12c00+4*i);}
-    fog_device_.color_at_3d12898=u32(0x3d12898);fog_device_.start_index_at_3d12950=u32(0x3d12950);fog_device_.end_index_at_3d0fce0=u32(0x3d0fce0);
-    fog_device_.start_value_at_3d0fac0=f32(0x3d0fac0);fog_device_.end_value_at_3d12894=f32(0x3d12894);fog_device_.software_density_at_3d128a0=u32(0x3d128a0);
     frame_calls_.scene_flags_at_3d08588=u32(0x3d08588);frame_calls_.device_flags_at_3d1289c=u32(0x3d1289c);frame_calls_.vertex_buffer_at_3d128ac=u32(0x3d128ac);
     frame_calls_.hook_at_3d0f7a4=u32(0x3d0f7a4);frame_calls_.hook_at_3d0f7a8=u32(0x3d0f7a8);frame_calls_.hook_at_3d0fa30=u32(0x3d0fa30);frame_calls_.argument_at_3d0fa38=u32(0x3d0fa38);
     for(unsigned i=0;i<16;++i)frame_calls_.hooks_at_3d08af0[i]=u32(0x3d08af0+4*i);
@@ -153,7 +149,6 @@ void NativeGame::initialize_source_facts(){
         f.current_volume_at_3b29c28[i]=u32(0x3b29c28+4*i);}
     sound_fields_.listener_at_3b2cbb0=u32(0x3b2cbb0);
     frame_owners_.list_at_3b2c584=u32(0x3b2c584);frame_owners_.count_at_3b0e334=u32(0x3b0e334);frame_owners_.timer_at_3abdf88=u32(0x3abdf88);frame_owners_.buffer_at_3abdf84=u32(0x3abdf84);
-    level_fog_start_at_3abdc60_=f32(0x3abdc60);level_fog_end_at_3abdc64_=f32(0x3abdc64);level_fog_color_at_3abdc68_=u32(0x3abdc68);
     if (config_.sine_table) {
         sine_table_at_88af78_ = *config_.sine_table;
     } else {
@@ -192,6 +187,94 @@ void NativeGame::initialize_source_facts(){
     }
     lifecycle_.emplace(NinjaQueueLifecycleOwners{queue_,queue_runtime_,consumer_,timing_,projection_,color_at_3b18230_,&depth_table_,one_at_7dcb10_,negative_one_at_7dcb0c_,depth_mode_at_8928c8_,
         words_at_900840_,words_at_3ab9898_,words_at_900858_,words_at_90084c_});
+}
+void NativeGame::initialize_fog_defaults() {
+    if (config_.fog_defaults) {
+        const auto &values = *config_.fog_defaults;
+        consumer_.fog_enabled_at_3d12798 = values.enabled;
+        consumer_.fog_supported_at_3d128a4 = values.table_supported;
+        consumer_.fog_mode_at_3d0849c = values.mode;
+        consumer_.cached_fog_start_at_90a098 = values.cached_start;
+        consumer_.cached_fog_end_at_90a09c = values.cached_end;
+        fog_device_.color_at_3d12898 = values.device.color;
+        fog_device_.start_index_at_3d12950 = values.device.start_index;
+        fog_device_.end_index_at_3d0fce0 = values.device.end_index;
+        fog_device_.start_value_at_3d0fac0 = values.device.start_value;
+        fog_device_.end_value_at_3d12894 = values.device.end_value;
+        fog_device_.software_density_at_3d128a0 = values.device.software_density_bits;
+        level_fog_start_at_3abdc60_ = values.level.start_z;
+        level_fog_end_at_3abdc64_ = values.level.end_z;
+        level_fog_color_at_3abdc68_ = values.level.color;
+        for (unsigned i = 0; i < 128; ++i) {
+            fog_table_at_3b10f78_[i] = values.table[i];
+            fog_device_.w_at_3d12a00[i] = values.device.w_depth[i];
+            fog_device_.reciprocal_at_3d12c00[i] = values.device.reciprocal[i];
+        }
+        return;
+    }
+    const auto *exe = config_.executable.get();
+    const auto word = [exe](std::uint32_t address) -> std::optional<std::uint32_t> {
+        return exe ? exe->u32(address) : std::nullopt;
+    };
+    const auto real = [&](std::uint32_t address) -> std::optional<float> {
+        const auto bits = word(address);
+        if (!bits)
+            return std::nullopt;
+        float value;
+        std::memcpy(&value, &*bits, sizeof(value));
+        return value;
+    };
+    consumer_.fog_enabled_at_3d12798 = word(0x3d12798);
+    consumer_.fog_supported_at_3d128a4 = word(0x3d128a4);
+    consumer_.fog_mode_at_3d0849c = word(0x3d0849c);
+    consumer_.cached_fog_start_at_90a098 = real(0x90a098);
+    consumer_.cached_fog_end_at_90a09c = real(0x90a09c);
+    fog_device_.color_at_3d12898 = word(0x3d12898);
+    fog_device_.start_index_at_3d12950 = word(0x3d12950);
+    fog_device_.end_index_at_3d0fce0 = word(0x3d0fce0);
+    fog_device_.start_value_at_3d0fac0 = real(0x3d0fac0);
+    fog_device_.end_value_at_3d12894 = real(0x3d12894);
+    fog_device_.software_density_at_3d128a0 = word(0x3d128a0);
+    level_fog_start_at_3abdc60_ = real(0x3abdc60);
+    level_fog_end_at_3abdc64_ = real(0x3abdc64);
+    level_fog_color_at_3abdc68_ = word(0x3abdc68);
+    for (unsigned i = 0; i < 128; ++i) {
+        fog_table_at_3b10f78_[i] = real(0x3b10f78 + 4 * i);
+        fog_device_.w_at_3d12a00[i] = real(0x3d12a00 + 4 * i);
+        fog_device_.reciprocal_at_3d12c00[i] = real(0x3d12c00 + 4 * i);
+    }
+}
+std::array<std::optional<std::uint32_t>, 398> NativeGame::fog_facts() const {
+    const auto real_bits = [](const std::optional<float> &value) -> std::optional<std::uint32_t> {
+        if (!value)
+            return std::nullopt;
+        std::uint32_t bits;
+        std::memcpy(&bits, &*value, sizeof(bits));
+        return bits;
+    };
+    std::array<std::optional<std::uint32_t>, 398> facts{};
+    unsigned next = 0;
+    facts[next++] = consumer_.fog_enabled_at_3d12798;
+    facts[next++] = consumer_.fog_supported_at_3d128a4;
+    facts[next++] = consumer_.fog_mode_at_3d0849c;
+    facts[next++] = real_bits(consumer_.cached_fog_start_at_90a098);
+    facts[next++] = real_bits(consumer_.cached_fog_end_at_90a09c);
+    facts[next++] = fog_device_.color_at_3d12898;
+    facts[next++] = fog_device_.start_index_at_3d12950;
+    facts[next++] = fog_device_.end_index_at_3d0fce0;
+    facts[next++] = real_bits(fog_device_.start_value_at_3d0fac0);
+    facts[next++] = real_bits(fog_device_.end_value_at_3d12894);
+    facts[next++] = fog_device_.software_density_at_3d128a0;
+    facts[next++] = real_bits(level_fog_start_at_3abdc60_);
+    facts[next++] = real_bits(level_fog_end_at_3abdc64_);
+    facts[next++] = level_fog_color_at_3abdc68_;
+    for (const auto &value : fog_table_at_3b10f78_)
+        facts[next++] = real_bits(value);
+    for (const auto &value : fog_device_.w_at_3d12a00)
+        facts[next++] = real_bits(value);
+    for (const auto &value : fog_device_.reciprocal_at_3d12c00)
+        facts[next++] = real_bits(value);
+    return facts;
 }
 std::array<std::optional<std::uint32_t>, 51> NativeGame::control_facts() const {
     const auto word = [](const auto &value) -> std::optional<std::uint32_t> {

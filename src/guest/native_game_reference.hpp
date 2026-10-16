@@ -22,6 +22,7 @@
 #include "engine/ninja_projection_range.hpp"
 #include "engine/ninja_view.hpp"
 #include "engine/ninja_fog.hpp"
+#include "engine/ninja_fog_initial_state.hpp"
 #include "engine/ninja_frame_calls.hpp"
 #include "game/mod_loader_frame.hpp"
 #include "game/game_winmain.hpp"
@@ -84,6 +85,8 @@ struct NativeGameConfig {
     std::optional<input::InputInitialState> input_defaults;
     // Explicit native coefficients; absent retains all-or-unknown PE table decoding.
     std::optional<NinjaQuarterSineTable> sine_table;
+    // Explicit native fog load-time values; device resources/capabilities remain separate.
+    std::optional<NinjaFogInitialState> fog_defaults;
     InputModPadConstants input_constants; // DLL .rdata bytes (caller-supplied)
     std::int32_t limiter_cadence=63;      // Speedrun FrameLimit "63FPS"
     SpeedrunLimiterClock clock;           // host counter owner (mac_clock in the app)
@@ -111,6 +114,7 @@ public:
     // Reference-only snapshots before startup can overwrite the initialized data.
     std::array<std::optional<std::uint8_t>, 1869> input_data_facts() const;
     std::array<std::optional<std::uint8_t>, 252> input_resource_facts() const;
+    std::array<std::optional<std::uint32_t>, 398> fog_facts() const;
     const std::optional<NinjaMath::SineTable> &sine_facts() const noexcept { return sine_table_at_88af78_; }
     // Live owners for a front end (keyboard/controller delivery each frame).
     InputModKeyboardPad keyboard_pad{};
@@ -182,6 +186,8 @@ private:
     void initialize_control_defaults();
     // NOTSA: decode input data or bind explicitly supplied native values.
     void initialize_input_defaults();
+    // NOTSA: bind native fog values or preserve injectable reference facts.
+    void initialize_fog_defaults();
     void initialize_source_facts();
     void report_screen_depth(); // the 78dbe0 assumptions, once
 };
