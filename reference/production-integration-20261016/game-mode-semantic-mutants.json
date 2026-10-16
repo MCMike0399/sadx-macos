@@ -1,0 +1,17 @@
+[
+  [
+    "logo_initialization",
+    "void queue_logo_initialization(FlowContext &flow) { write_mode(flow, GameMode::LogoInit); }",
+    "void queue_logo_initialization(FlowContext &flow) { write_mode(flow, GameMode::TvSettingEnd); }"
+  ],
+  [
+    "unsigned_title_guard",
+    "if (static_cast<std::uint32_t>(result) + 2U > 109U)",
+    "if (static_cast<std::uint32_t>(result) + 2U >= 109U)"
+  ],
+  [
+    "post_owner_mode_reread",
+    "write_mode(flow, next_mode(read_mode(flow)));",
+    "write_mode(flow, GameMode::TitleMenu);"
+  ]
+]

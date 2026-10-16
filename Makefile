@@ -113,6 +113,9 @@ $(REFERENCE_UNIT_TARGETS): build/%-test: tests/unit/$$(subst -,_,$$*).cpp build/
 # Native frame-control composition deliberately excludes the reference/core archive.
 build/native-frame-control-test: tests/unit/native_frame_control.cpp src/engine/game_frame_control.cpp src/engine/game_frame_control.hpp src/engine/speedrun.cpp src/engine/speedrun.hpp
 	$(CXX) $(CXXFLAGS) -Isrc tests/unit/native_frame_control.cpp src/engine/game_frame_control.cpp src/engine/speedrun.cpp -o $@
+# The semantic mode core and its native seams build without reference archives or PE inputs.
+build/native-game-mode-test: tests/unit/native_game_mode.cpp src/game/game_mode.cpp src/game/game_mode.hpp src/game/game_mode_internal.hpp src/game/game_mode_native.cpp
+	$(CXX) $(CXXFLAGS) -Isrc tests/unit/native_game_mode.cpp src/game/game_mode.cpp src/game/game_mode_native.cpp -o $@
 # Apple make 3.81 picks the first matching pattern rule: the guest rule must precede the generic one.
 build/guest-%-test: tests/unit/guest_$$(subst -,_,$$*).cpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -I$(UNICORN_DIR)/include $< $(GUEST_LINK) build/libsadx-core.a -o $@

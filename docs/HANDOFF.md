@@ -3559,3 +3559,53 @@ The product still needs native boot/title, resources and gameplay recovery.
 * Next: implement §6.6a's actual GameMode enum, semantic state, named STUB seams and
   structured game-tier control flow, preserving the oracle and obtaining STYLE review.
   Goal remains active.
+
+
+### 2026-10-16 — GOAL §6.6a semantic game-mode pilot (track R, gate 147)
+
+* Implemented the actual game-tier rewrite, source commit `ef29f18`: `game/game_mode`
+  now owns the structured `GameMode` dispatcher and plain `GameFlowState`. The enum follows
+  `MD_GameMode`; named `STUB` declarations follow the symbol database. Startup, logo, title,
+  action/adventure/trial/mission, summary/tutorial/staff-roll and shared transitions are
+  readable helpers. Game-tier files add zero readability debt.
+* Two private link-time bindings preserve the same core: native plain-state access with
+  explicit named missing-callee stops, and `guest/game_mode_reference` with provenance,
+  required-return metadata, guest arguments and lazy missing-fact checks. Every source store
+  publishes immediately, including same-value stores; callbacks may change or invalidate
+  later reads. No fallback interpreter, guest address in game logic, layer exception or
+  duplicate source-global owner. Sixty-seven callee STUBs and two composition seams still
+  need native composition; this does not complete native boot/title.
+* Context: REA dossier `ev_28110cd8c6363c153af486ea98025d11fb32b9870e9c3bd781ff859c77e66a12`,
+  global xrefs and prior reference preparation. Evidence:
+  `production-integration-20261016/game-mode-semantic-147-{evidence,gate,holdout,before-holdout}.json`
+  plus mutation log and `game-mode-semantic-mutants.json`. Explicit source-range profile
+  check finds three inactive test-spawn patches, zero active/unhandled overlaps.
+* Unchanged mode oracle **passes**, 24,000 cases / 252 paths / zero mismatches. All three
+  historical defects are re-expressed in the semantic source and caught with the original
+  1,629 / 54 / 10 mismatch counts; the restored oracle passes. Historic mutation specs are
+  preserved. Separate 2,048-case seeded holdout matches original x86 exactly, as did the old
+  interpreter before the final candidate run; case SHA-256 identities match.
+* Added native-only test registered in the gate: direct linkage of the two game `.cpp`
+  files, with no PE, reference archive or Unicorn; also passes from an empty temporary cwd.
+  Added lazy-absent, short-circuit, same-value store, ignored-EAX and callback-invalidation
+  cases; they pass both the old interpreter and new core. Independent STYLE review found
+  no blockers; two new test setup mistakes corrected, unused private accessors removed and
+  larger dispatch bodies extracted before final oracle/mutation/holdout runs.
+* Leaf oracle remains **pass**, 2,526 cases / 74 explicit boundaries / 45 outcomes.
+  Source implementation and judge refresh are separate commits. Judge changes only expand
+  source identities, protect the holdout runner, register native testing, preserve mutations
+  and refresh summaries/baseline/manifest; no fixture, comparison or tolerance changed.
+  STYLE §11 now quotes the actual logo helper; architecture and GOAL reflect the pilot.
+* Full gate **rc 0**, **129 native programs / 46 Python tests**. The 7,228-frame deterministic
+  intro, 600 override digests, 71,115 override comparisons/mutants, 900-frame controller
+  parity and 63 FPS title cadence pass unchanged; host 80.6 FPS. Twelve layers / zero
+  exceptions; 159,630 legacy owned bytes / 159,680 combined identities, 413 judge inputs.
+  Readability covers 229 files, with unchanged totals (12,348 hex literals, 2,062 address
+  identifiers, 94 callee-address calls, 2 gotos); all four new game files have zero debt.
+* Aggregate `make oracles-verdict` still rc 2: existing 9 fail / 46 partial / 1 missing.
+  Other standalone oracles, separate `make m1`, and four unregistered tests (`metal-sprite`,
+  `metal-sprite-composition`, `metal-texture`, `player-task`) skipped. Stage, Windows/physical-pad
+  and full-independence verification remain open. No assets/binaries committed or push;
+  hook settings and the user's two Ghidra request drafts untouched.
+* Next: §6.6b ground acceleration, retaining the census precision constraints (observed
+  entries CW 0x023f; this function unobserved, no plain-float premise). Goal remains active.

@@ -338,10 +338,13 @@ comes first, because every later port should copy a readable model, not the lega
 6. **Pilot refactors under the judge (R), one per step, each with an independent STYLE review.**
    Preparation: the legacy mode/leaf interpreters and their PE-backed boot composition are
    relocated to `src/guest` so the clean mode interface can be added without upward layer
-   dependencies. This relocation preserves behavior; the semantic game-mode rewrite is open.
+   dependencies. The semantic game-mode rewrite now follows this preparation.
    (a) **Game mode 40c090** → `GameMode` enum from `MD_GameMode`, `STUB` seams (plain function declarations) named
    from the symbol database, structured control flow, and the adapter holding every callee
-   address. The `game_mode` oracle verdict and counts are unchanged, and the mutants are re-run.
+   address. **Done at gate 147:** native plain-state core plus reference adapter; unchanged
+   `game_mode` pass (24,000 cases/252 paths), three preserved mutants caught, 2,048 holdout
+   cases exact, native-only test and independent STYLE review. Missing native callees remain
+   explicit STUB stops; this does not complete native boot/title. STYLE §11 now quotes real code.
    (b) **Ground acceleration 44c270 `PGetAcceleration`** → literal constants and the
    arithmetic level that the census and the `ground_acceleration` oracle allow ("partial" stays
    partial, values must still match). (c) **Frame control** → fixture optionals and

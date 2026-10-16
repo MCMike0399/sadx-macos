@@ -1,0 +1,103 @@
+{
+  "step": "GOAL 6.6a semantic game-mode pilot",
+  "source_commit": "ef29f1881d7a6a1f30bdfd4f29ad638c7f19c05d",
+  "prior_commit": "9fa9d3c",
+  "evidence_ids": [
+    "ev_28110cd8c6363c153af486ea98025d11fb32b9870e9c3bd781ff859c77e66a12"
+  ],
+  "source_files": {
+    "src/game/game_mode.hpp": "44230c85f069ad96fc7360b6b16536e1da4001b6cf9d35574f3af772bbaf4075",
+    "src/game/game_mode.cpp": "d8bfc64b3b1e16675f905e2891faa1c4807c2dfd895afdc77004c70d2063c656",
+    "src/game/game_mode_internal.hpp": "2d412d304d51b911036088dd6bd7580dae048d52244a91c48498d1dc4f51f6ab",
+    "src/game/game_mode_native.cpp": "8a94d7105acb3f35f86063a6f0e332f69589de89ee39addd3b821cc58804e9c8",
+    "src/guest/game_mode_reference.cpp": "db11678fd7fbdb2d0046a543c0954f1d6f45d98202e5f6a84710e43040d90029",
+    "tests/unit/game_mode.cpp": "af0e3bda405195d9d9b8a2b3244facbcb91fea89605469f60d5b0d14e089859c",
+    "tests/unit/native_game_mode.cpp": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+  },
+  "design": "Structured GameMode dispatcher; named STUB seams; typed lazy state access with immediate stores. Reference phase/callee metadata contains source sites and required-return flags; no old interpreter fallback. Native plain-state backend fails at named uncomposed callees.",
+  "oracle": {
+    "cases": 24000,
+    "paths": 252,
+    "mismatches": 0,
+    "fixture_and_comparison_changes": false
+  },
+  "mutants": {
+    "caught": 3,
+    "valid": 3,
+    "mismatch_counts": [
+      1629,
+      54,
+      10
+    ],
+    "historic_spec": "game-mode-reference-mutants.json",
+    "semantic_spec": "game-mode-semantic-mutants.json",
+    "reason": "Same three defects re-expressed after semantic source rewrite; historic specs preserved."
+  },
+  "holdout": {
+    "cases": 2048,
+    "mismatches": 0,
+    "baseline_mismatches": 0,
+    "case_sha256": "395e8edef45baec76db650177a01503afe3b4b2857333868559ce0c4cf8b9d2e",
+    "seed": "0x20261016",
+    "method": "Fixed independent generator before candidate final run; both compare unchanged 48-word input / 256-word output ABI to original x86."
+  },
+  "native_proof": "Explicit Makefile target links only tests/unit/native_game_mode.cpp + src/game/game_mode{,_native}.cpp; binary passes from empty temporary cwd, no PE, guest archive, or Unicorn.",
+  "units": "Reference missing facts/short circuit/same-value store/ignored EAX/callback invalidation cases pass both old interpreter and semantic core.",
+  "review": {
+    "agent": "mode_semantic_review",
+    "verdict": "no blocking findings",
+    "criteria": "STYLE 12: callback rereads, signed AX, short-circuit reads, ignored EAX, store prefixes, same-frame transitions, no hidden interpreter or duplicate owner.",
+    "corrections": "Two newly added unit scenario setup mistakes corrected; unused private accessors removed; startup/logo/title helper extraction."
+  },
+  "judge_refresh": "Metadata-only source identity expansion, protected holdout runner, native test registration, readability baseline, oracle summaries; no fixture, tolerance, or comparison changes.",
+  "limits": [
+    "67 native callee STUBs and two composition seams remain explicit failures; not native boot/title completion.",
+    "Existing game-mode reference owner and globals retained; no second mapped owner.",
+    "Only affected mode/leaves oracles rerun; existing aggregate partial/fail/missing verdicts remain.",
+    "No stage replay, Windows/physical-pad verification or full independence claim.",
+    "Hook settings pending approval remain untouched."
+  ],
+  "profile_check": {
+    "range": "0x40c090-0x40c9bd",
+    "inventory_sha256": "6089c78718e12791afb52bb1d2d78e54fc050028304f935388cebe59c3286e91",
+    "overlaps": [
+      {
+        "va": "0x40c106",
+        "size": 5,
+        "owner": "loader",
+        "kind": "jump",
+        "target": "ForceEventMode_asm",
+        "condition": "test-spawn command-line arguments (reference launch has none) -> false",
+        "active": false,
+        "source_ref": "testspawn.cpp:1035",
+        "handled_by": null,
+        "original_bytes": "c7057cdcab"
+      },
+      {
+        "va": "0x40c10c",
+        "size": 4,
+        "owner": "loader",
+        "kind": "data",
+        "target": "(GameModes)testspawn_gamemode",
+        "condition": "test-spawn command-line arguments (reference launch has none) -> false",
+        "active": false,
+        "source_ref": "testspawn.cpp:1039",
+        "handled_by": null,
+        "original_bytes": "18000000"
+      },
+      {
+        "va": "0x40c10c",
+        "size": 4,
+        "owner": "loader",
+        "kind": "data",
+        "target": "(GameModes)MD_MOVIE",
+        "condition": "test-spawn command-line arguments (reference launch has none) -> false",
+        "active": false,
+        "source_ref": "testspawn.cpp:860",
+        "handled_by": null,
+        "original_bytes": "18000000"
+      }
+    ],
+    "unhandled": 0
+  }
+}
