@@ -1,4 +1,4 @@
-#include "runtime/game_runtime.hpp"
+#include "guest/native_game_reference.hpp"
 #include "engine/d3d8_caps.hpp"
 #include "game/win32_profile.hpp"
 #include "player/player_task.hpp"

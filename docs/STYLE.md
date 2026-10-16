@@ -227,7 +227,8 @@ measure.
 The "after" versions are sketches showing the shape. Each becomes real only when its oracle
 passes unchanged (GOAL §6).
 
-**Game mode handler** (`src/game/game_mode.cpp`, 40c090 `GameModeHandler`):
+**Game mode handler** (legacy reference interpreter now in
+`src/guest/game_mode_reference.cpp`, 40c090 `GameModeHandler`; the game-tier rewrite is pending):
 
 ```cpp
 // before: transliterated assembly

@@ -69,7 +69,7 @@ Four requirements, each with its own acceptance tests:
 What readable means, concretely:
 
 ```cpp
-// before (src/game/game_mode.cpp today)
+// before (legacy interpreter: src/guest/game_mode_reference.cpp)
 case 0x01:
     r=ret(0x40c124,0x42cc70);
     if(r==1){call(0x40c130,0x411e30,1,1);goto L3bc;}
@@ -336,6 +336,9 @@ comes first, because every later port should copy a readable model, not the lega
    Reached entries show `0x023f` / MXCSR `0x1f80`; ground acceleration remains unobserved,
    and no stage replay is registered. This does not establish the plain-float premise.
 6. **Pilot refactors under the judge (R), one per step, each with an independent STYLE review.**
+   Preparation: the legacy mode/leaf interpreters and their PE-backed boot composition are
+   relocated to `src/guest` so the clean mode interface can be added without upward layer
+   dependencies. This relocation preserves behavior; the semantic game-mode rewrite is open.
    (a) **Game mode 40c090** → `GameMode` enum from `MD_GameMode`, `STUB` seams (plain function declarations) named
    from the symbol database, structured control flow, and the adapter holding every callee
    address. The `game_mode` oracle verdict and counts are unchanged, and the mutants are re-run.

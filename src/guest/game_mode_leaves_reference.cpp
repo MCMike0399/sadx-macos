@@ -1,4 +1,4 @@
-#include "game/game_mode_leaves.hpp"
+#include "guest/game_mode_leaves_reference.hpp"
 #include <cstring>
 namespace sadx {
 namespace {

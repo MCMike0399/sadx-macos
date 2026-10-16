@@ -13,7 +13,7 @@
 #import <Metal/Metal.h>
 #import <MetalKit/MetalKit.h>
 #include <map>
-#include "runtime/game_session.hpp"
+#include "guest/native_game_session.hpp"
 #include "platform/mac/mac_clock.hpp"
 #include "platform/mac/mac_xinput.hpp"
 #include "platform/mac/metal_guest_frame.hpp"

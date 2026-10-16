@@ -1,4 +1,4 @@
-#include "runtime/game_session.hpp"
+#include "guest/native_game_session.hpp"
 #include <cstdio>
 #include <fstream>
 #include <iterator>

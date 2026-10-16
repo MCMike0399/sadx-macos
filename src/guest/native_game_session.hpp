@@ -1,5 +1,5 @@
 #pragma once
-#include "runtime/game_runtime.hpp"
+#include "guest/native_game_reference.hpp"
 #include <memory>
 #include <string>
 namespace sadx {

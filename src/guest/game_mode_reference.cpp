@@ -1,4 +1,4 @@
-#include "game/game_mode.hpp"
+#include "guest/game_mode_reference.hpp"
 
 namespace sadx {
 namespace {

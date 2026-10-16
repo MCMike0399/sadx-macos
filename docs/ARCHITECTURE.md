@@ -33,7 +33,7 @@ src/
                 PATCH annotations)
   enhancements/ opt-in features and the hook/settings registry (STYLE.md §9); off by default
   session/      native composition: owns every system's state, boot → title → stage, the
-                frame loop, settings (today: runtime/)
+                frame loop, settings (the legacy PE-backed composition is now in guest/)
   platform/mac/ Metal, CoreAudio, GameController, AppKit backends of the engine interfaces
   reference/    (today guest/ and hle/) Unicorn guest, Win32/D3D8 HLE, per-system reference
                 adapters, the override table, PE loading; development only
@@ -85,9 +85,9 @@ from that file when fixed (a stale exception fails the check).
 | `engine` | the Ninja engine: task scheduler and work, the matrix stack and primitives (`ninja_matrix`), the camera/view/projection (`ninja_view`: 781570, 781250, 791170), controller records, game-logic timing/edge state and frame control, render states, sprites, texture lists, render queue, fog, screen, device/system init, frame thunks, keyboard, vibration, njMalloc, the speedrun limiter state | cpu loader math |
 | `input` | the Input mod DLL's pad/keyboard semantics (axes, pad records) | … engine |
 | `player` | player physics, collision, animation, Sonic, the scene input producer | … input |
-| `game` | WinMain, library init, startup, game loop, modes and leaves, resets, views, window, sound bookkeeping, model DLL bindings, mod loader frame, Win32 profile | … player |
-| `runtime` | `NativeGame` (composition of every ported owner, boot + frame loop) and `GameSession` (shared by the CLI and the app) | … game |
-| `guest` | (M1) in-process x86 guest on Unicorn: image mapping, calls, continuations (`redirect`), pause/resume, the override table (`override_table`), FPU shims (`fpu_shims`) | … runtime |
+| `game` | WinMain, library init, startup, game loop, resets, views, window, sound bookkeeping, model DLL bindings, mod loader frame, Win32 profile; the legacy mode/leaf interpreters now live in guest | … player |
+| `runtime` | reserved for maintained native composition; the former PE-backed composition moved to guest | … game |
+| `guest` | reference mode/leaf interpreters (`game_mode_reference`, `game_mode_leaves_reference`), PE-backed `NativeGame` survey and boot configuration (`native_game_reference`, `native_game_session`); in-process x86 guest on Unicorn, image mapping, continuations, pause/resume, override table and FPU shims | … runtime |
 | `hle` | (M1) the guest's Windows: `hle_registry` (imports → traps, call log), `hle_modules` (LoadLibrary & co., DLL linking), `hle_process` (one guest process, TEB/PEB, overlay, assumptions), `hle_kernel32`, `hle_crt` (+`hle_printf`, `hle_text`), `hle_user32` (headless window system), `hle_com`, `hle_dinput`, `hle_d3d8`, `hle_xinput` (synthetic pad state), `hle_raw_input` (HID identity/reports and WM_INPUT), `hle_device_bridge` (device-backed native overrides through verified HLE COM handlers). An unmodelled import stops the guest with its name; every chosen fact is a reported assumption | … guest |
 | `platform/mac` | Metal texture/sprite backends, `metal_guest_frame` (draws a recorded guest D3D8 frame: clears, DrawPrimitiveUP with guest textures, blending, depth), GameController input, the virtual 10 MHz clock | … hle |
 | `apps` | executables only: `sadx_boot.cpp` (headless CLI), `sadx_app.mm` (AppKit window), `metal_stage.mm` (asset viewer), `diagnostics/` (one-off HID/GameController probes, not built by default) | everything |
@@ -160,14 +160,20 @@ Each boundary still reports the source boundary and the missing fact.
 
 ## The runtime today and tomorrow
 
-`NativeGame` (`src/runtime/game_runtime.*`) composes every ported owner and runs the boot
+`NativeGame` (`src/guest/native_game_reference.*`) is a reference composition of ported
+owners and runs the boot
 and the frame loop, stopping at the first unported owner (or surveying past it as a
 no-op). D3D8 calls go to `D3D8StateOwner` (recording) unless a Metal backend is set.
 
-With M1, `NativeGame` becomes the override provider for the guest: the guest executes
-`sonic.exe` and, at every address in the override table, calls the native owner instead.
-Each HLE import logs its call for trace diffs. The headless runner and the AppKit app
-share one `GameSession` object: the app only adds a window, a Metal backend and input.
+Its PE-backed boot configuration and address-dispatched mode interpreters belong to the
+reference tier. They live beside it in `src/guest`, and are excluded from `libsadx-core.a`.
+The headless survey and the AppKit native survey branch share
+`guest/native_game_session.hpp`; the shipping native session remains future work.
+
+The hybrid guest executes `sonic.exe` with `process_overrides` supplying native owners.
+Each HLE import logs its call for trace diffs. These reference paths do not establish
+native boot/title or executable independence. The separate native frame-control pilot
+continues to exercise its maintained core without a guest or PE loader.
 
 Naming and provenance follow [ADR-0006](decisions/ADR-0006-symbol-names-and-provenance-annotations.md):
 identifiers are semantic, the source address sits in a `// FUNCTION:`/`// GLOBAL:`/`// DATA:`/

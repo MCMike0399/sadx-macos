@@ -1,7 +1,7 @@
 // sadx-boot: run the native composition of sonic.exe's game loop with the
 // updated speedrun profile and report how far native execution gets.
 //   sadx-boot SONIC.EXE INPUT_MOD.DLL [frames] [--survey]
-#include "runtime/game_session.hpp"
+#include "guest/native_game_session.hpp"
 #include "platform/mac/mac_clock.hpp"
 #include <cstdio>
 #include <cstdlib>

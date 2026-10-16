@@ -1,7 +1,7 @@
 #pragma once
 #include "cpu/crt_rand.hpp"
 #include "engine/game_logic.hpp"
-#include "game/game_mode.hpp"
+#include "guest/game_mode_reference.hpp"
 #include "game/model_dlls.hpp"
 #include "cpu/x87_math.hpp"
 #include "cpu/source_bytes.hpp"

@@ -3,7 +3,7 @@
 #include "hle/hle_user32.hpp"
 #include "hle/hle_xinput.hpp"
 #include "hle/hle_raw_input.hpp"
-#include "runtime/game_runtime.hpp"
+#include "guest/native_game_reference.hpp"
 #include <cstdio>
 #include <map>
 #include <memory>
