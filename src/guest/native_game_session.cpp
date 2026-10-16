@@ -21,6 +21,7 @@ BootLoadResult load_boot_config(const std::string& exe_path,const std::string& i
     config.engine_tables=runtime::engine_code_tables();
     config.control_defaults=runtime::session_control_defaults();
     config.input_defaults=input::input_initial_state();
+    config.sine_table=ninja_sine_table();
     config.clock=clock;config.max_frames=frames;config.policy=policy;
     {   // 401ac0's model DLLs from the game's system directory (slot 0: CHRMODELS_orig.dll behind the loader proxy).
         const auto system=directory_of(exe_path)+"/system/";

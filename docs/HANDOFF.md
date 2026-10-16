@@ -3975,3 +3975,34 @@ The product still needs native boot/title, resources and gameplay recovery.
   DLL lifecycle and other initialization families remain open; no complete native input,
   session, title or game independence claim. Goal active; two user Ghidra drafts and hook
   settings untouched. Commits remain local; no push.
+
+### 2026-10-16 — maintained Ninja sine coefficients (source step)
+
+* GOAL §6.7 fourth initialization family: `math/ninja_sine_table` supplies all 1,025
+  quarter-wave coefficients as exact, readable decimal float literals. A private constexpr
+  code-data template returns owner copies. Native boot explicitly supplies the table;
+  reference configurations without it retain the original all-or-unknown image decoder.
+  Native math/interpolation and its software x87 arithmetic are unchanged.
+* This is mathematical library data, not imported game content or regenerated analytic
+  sine. A development-only emitter renders shortest round-tripping decimal literals;
+  normal native builds use checked-in source. Exact compiled bits match all source words.
+  The gate checks emitter rendering and an isolated source/header/probe closure with no
+  PE, fixtures, reference runtime or core archive. A native-only consumer tests every
+  angle's wrap/phase, signed zeros and independent copy ownership.
+* Symbol evidence corrects the classic SDK pointer-cell declaration: BAMSTable is an inline
+  float[1025] array, directly scaled FLD-indexed by njSin. The justified type override and
+  non-owning DATA annotation preserve ownership. Dossiers:
+  sine `ev_88209916727c25f3af8874531f198f0ba02e2030cb2249123dfbc0573b1d5981`,
+  cosine `ev_fac1be9b81d2a45c9b3fb619771dd5a0f8217f39af13c388122b60deeff1ced6`,
+  base xrefs `ev_5858b60cee1081a78c4dd08c6a8086797a0467507866f121d4f9673dde27b393`.
+  Exact-base xrefs alone are not an exhaustive proof of no writes to any interior element.
+* Canonical/no-image/varied table transport preserves every bit, including signed zero,
+  infinities and NaN payloads. A partial final-knot byte leaves the entire reference table
+  unknown. Five old/new constructor snapshots match (33,810 bytes); native table over a
+  poisoned PE preserves the three-frame survey report/graphics. Prior initializer/session
+  CLI report is identical (5,427 bytes). These surveys issue no sprite draws.
+* Three coefficient and three adapter mutants caught; restored baseline passes. Original
+  math and Ninja-view oracles rerun with every prior numerical result unchanged; math covers
+  1,572,864 trig comparisons across 12 control words, plus vector/sqrt cases. Independent
+  final STYLE review approves source, classification and evidence. Full gate follows in a
+  separate judge commit; GOAL §6.7 and complete runtime independence remain open.

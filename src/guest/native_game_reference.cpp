@@ -154,7 +154,20 @@ void NativeGame::initialize_source_facts(){
     sound_fields_.listener_at_3b2cbb0=u32(0x3b2cbb0);
     frame_owners_.list_at_3b2c584=u32(0x3b2c584);frame_owners_.count_at_3b0e334=u32(0x3b0e334);frame_owners_.timer_at_3abdf88=u32(0x3abdf88);frame_owners_.buffer_at_3abdf84=u32(0x3abdf84);
     level_fog_start_at_3abdc60_=f32(0x3abdc60);level_fog_end_at_3abdc64_=f32(0x3abdc64);level_fog_color_at_3abdc68_=u32(0x3abdc68);
-    {NinjaMath::SineTable t{};bool ok=exe!=nullptr;for(unsigned i=0;i<1025&&ok;++i){const auto v=f32(0x88af78+4*i);ok=v.has_value();if(ok)t[i]=*v;}if(ok)sine_table_at_88af78_=t;}
+    if (config_.sine_table) {
+        sine_table_at_88af78_ = *config_.sine_table;
+    } else {
+        NinjaMath::SineTable table{};
+        bool complete = exe != nullptr;
+        for (unsigned i = 0; i < table.size() && complete; ++i) {
+            const auto value = f32(0x88af78 + 4 * i);
+            complete = value.has_value();
+            if (complete)
+                table[i] = *value;
+        }
+        if (complete)
+            sine_table_at_88af78_ = table;
+    }
     view_.emplace(GameViewState{f32(0x8928c0),f32(0x8928c4),view_code_constants_.width_scale,view_code_constants_.height_scale,view_code_constants_.half,view_code_constants_.horizontal_extent,view_code_constants_.vertical_extent,
         byte_at_3b280a8_,loop_.mode_at_3b28114,u32(0x3abd9cc),u32(0x3b28094),f32(0x3b28098),f32(0x3b2809c),f32(0x3b280a0),f32(0x3b280a4),u32(0x3d0f9ec),u32(0x3d0f9f0),u32(0x3aad0bc),u32(0x3ab98ec),u32(0x3b2cbb4),
         {u32(0x3ce7174),u32(0x3ce7178),u32(0x3ce717c),u32(0x3ce7180)},color_at_3b280ac_});

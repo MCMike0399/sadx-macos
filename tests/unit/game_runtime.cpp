@@ -2,6 +2,7 @@
 #include "engine/d3d8_caps.hpp"
 #include "../probes/session_control_probe.hpp"
 #include "../probes/input_initial_state_probe.hpp"
+#include "../probes/ninja_sine_table_probe.hpp"
 #include <algorithm>
 #include <fstream>
 #include <iostream>
@@ -96,6 +97,22 @@ void missing_input_facts() {
     same_input_facts(varied, *config.input_defaults);
     same_input_resources(varied, config);
 }
+void same_sine_facts(const sadx::NativeGame &game, const sadx::NinjaQuarterSineTable &table) {
+    require(game.sine_facts().has_value(), "complete sine table remains available");
+    require(sadx::test::sine_words(*game.sine_facts()) == sadx::test::sine_words(table),
+            "every initialized coefficient retains its exact bits");
+}
+void missing_sine_facts() {
+    sadx::NativeGameConfig config{};
+    const sadx::NativeGame missing(config);
+    require(!missing.sine_facts(), "absent reference image leaves the sine table unknown");
+    config.sine_table = sadx::ninja_sine_table();
+    const sadx::NativeGame native(config);
+    same_sine_facts(native, *config.sine_table);
+    config.sine_table = sadx::test::varied_sine_table();
+    const sadx::NativeGame varied(config);
+    same_sine_facts(varied, *config.sine_table);
+}
 void same_composition(const sadx::NativeGameReport &expected, const sadx::D3D8StateOwner &graphics,
                       const sadx::NativeGameReport &actual, const sadx::D3D8StateOwner &native) {
     require(expected.startup_completed == actual.startup_completed &&
@@ -141,9 +158,10 @@ void same_composition(const sadx::NativeGameReport &expected, const sadx::D3D8St
 }
 }
 int main(int argc,char** argv){try{
-    require(argc==3||argc==4||argc==7||argc==13,"usage: game-runtime-test SONIC.EXE INPUT_MOD.DLL [ENGINE_POISON [CONTROL_POISON CONTROL_VARIED CONTROL_PARTIAL]]");
+    require(argc==3||argc==4||argc==7||argc==13||argc==14,"usage: game-runtime-test SONIC.EXE INPUT_MOD.DLL [ENGINE_POISON [CONTROL_POISON CONTROL_VARIED CONTROL_PARTIAL]]");
     missing_control_facts();
     missing_input_facts();
+    missing_sine_facts();
     const auto exe=load(argv[1]),dll=load(argv[2]);
     require(exe->u32(0x7dce58)==0x42720000u&&exe->byte(0x3abdc7c)==0&&!exe->byte(0x3d14000+0x2000),"load image: .rdata 60.5f at 7dce58, zero-fill .data, outside the image");
     sadx::NativeGameConfig config;config.executable=exe;config.input_mod_dll=dll;
@@ -156,11 +174,13 @@ int main(int argc,char** argv){try{
     same_control_facts(original, sadx::runtime::session_control_defaults());
     same_input_facts(original, sadx::input::input_initial_state());
     reference_input_facts(original, config);
+    same_sine_facts(original, sadx::ninja_sine_table());
     const auto survey=original.run();
     require(survey.failure.empty()&&survey.startup_completed&&survey.frames_completed==3&&!survey.unported.empty(),"survey completes startup and three frames");
     config.engine_tables = sadx::runtime::engine_code_tables();
     config.control_defaults = sadx::runtime::session_control_defaults();
     config.input_defaults = sadx::input::input_initial_state();
+    config.sine_table = sadx::ninja_sine_table();
     now = 0;
     sadx::NativeGame native_tables(config);
     same_control_facts(native_tables, *config.control_defaults);
@@ -200,7 +220,7 @@ int main(int argc,char** argv){try{
         }
 
     }
-    if (argc == 13) {
+    if (argc >= 13) {
         config.control_defaults = sadx::runtime::session_control_defaults();
         config.executable = load(argv[7]);
         config.input_mod_dll = load(argv[8]);
@@ -237,6 +257,38 @@ int main(int argc,char** argv){try{
         same_input_facts(partial_native, *config.input_defaults);
         same_input_resources(partial_native, config);
     }
+    if (argc == 14) {
+        const std::string prefix = argv[13];
+        config.input_mod_dll = dll;
+        config.input_defaults = sadx::input::input_initial_state();
+        config.control_defaults = sadx::runtime::session_control_defaults();
+        config.executable = load((prefix + "-poisoned.exe").c_str());
+        require(config.executable->u32(0x88af78) != exe->u32(0x88af78),
+                "poison fixture changes the coefficient bytes");
+        now = 0;
+        sadx::NativeGame poisoned_sine(config);
+        same_sine_facts(poisoned_sine, *config.sine_table);
+        const auto report = poisoned_sine.run();
+        same_composition(survey, original.d3d8(), report, poisoned_sine.d3d8());
+        config.executable = load((prefix + "-varied.exe").c_str());
+        config.sine_table.reset();
+        const sadx::NativeGame varied_image(config);
+        same_sine_facts(varied_image, sadx::test::varied_sine_table());
+        config.sine_table = sadx::ninja_sine_table();
+        const sadx::NativeGame native_over_varied(config);
+        same_sine_facts(native_over_varied, *config.sine_table);
+        config.executable = load((prefix + "-partial.exe").c_str());
+        require(config.executable->u32(0x88bf74).has_value() &&
+                    config.executable->byte(0x88bf7a).has_value() && !config.executable->byte(0x88bf7b),
+                "partial fixture removes only the final knot byte within this table");
+        config.sine_table.reset();
+        const sadx::NativeGame partial(config);
+        require(!partial.sine_facts(), "incomplete final coefficient keeps the entire reference table unknown");
+        config.sine_table = sadx::test::varied_sine_table();
+        const sadx::NativeGame partial_native(config);
+        same_sine_facts(partial_native, *config.sine_table);
+    }
+    config.sine_table.reset();
     config.input_defaults.reset();
     config.input_mod_dll = load(argv[2]);
     config.control_defaults.reset();

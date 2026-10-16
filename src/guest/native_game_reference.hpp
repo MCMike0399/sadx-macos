@@ -3,6 +3,7 @@
 #include "runtime/engine_code_tables.hpp"
 #include "runtime/session_control_defaults.hpp"
 #include "input/input_initial_state.hpp"
+#include "math/ninja_sine_table.hpp"
 #include "game/audio_stream.hpp"
 #include "loader/executable_image.hpp"
 #include "guest/game_mode_reference.hpp"
@@ -81,6 +82,8 @@ struct NativeGameConfig {
     std::optional<runtime::SessionControlDefaults> control_defaults;
     // Explicit input values; name/extension/info facts remain image-backed.
     std::optional<input::InputInitialState> input_defaults;
+    // Explicit native coefficients; absent retains all-or-unknown PE table decoding.
+    std::optional<NinjaQuarterSineTable> sine_table;
     InputModPadConstants input_constants; // DLL .rdata bytes (caller-supplied)
     std::int32_t limiter_cadence=63;      // Speedrun FrameLimit "63FPS"
     SpeedrunLimiterClock clock;           // host counter owner (mac_clock in the app)
@@ -108,6 +111,7 @@ public:
     // Reference-only snapshots before startup can overwrite the initialized data.
     std::array<std::optional<std::uint8_t>, 1869> input_data_facts() const;
     std::array<std::optional<std::uint8_t>, 252> input_resource_facts() const;
+    const std::optional<NinjaMath::SineTable> &sine_facts() const noexcept { return sine_table_at_88af78_; }
     // Live owners for a front end (keyboard/controller delivery each frame).
     InputModKeyboardPad keyboard_pad{};
     std::array<InputModGamepadState,8> gamepads{};
