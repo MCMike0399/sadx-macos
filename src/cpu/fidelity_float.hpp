@@ -1,9 +1,19 @@
 #pragma once
 
 #include "cpu/x87_math.hpp"
+#include <cstring>
 #include <stdexcept>
 
 namespace sadx::fidelity {
+
+// NOTSA: FABS clears the sign without quieting a signaling binary32 NaN.
+inline float absolute_float(float value) {
+    std::uint32_t bits;
+    std::memcpy(&bits, &value, sizeof(bits));
+    bits &= ~(std::uint32_t{1} << 31);
+    std::memcpy(&value, &bits, sizeof(value));
+    return value;
+}
 
 // NOTSA: retained arithmetic value with the caller's precision, rounding and exception context.
 // A float operand is a source memory operand; an ExactFloat operand is already loaded.

@@ -154,7 +154,8 @@ order:
    Doubles are rejected: use the appropriate m64 fidelity helper. All values in an expression
    must share a live context. Sequence independent operand calculations in named temporaries
    when exception order matters; C++17 does not order the two sides of a binary expression.
-   The helper is verified as a foundation; ground acceleration has not yet migrated to it.
+   Ground acceleration and its shared friction tail use this arithmetic tier under their
+   unchanged differential oracles; existing flag-only discrepancies remain partial.
 4. **Explicit `X87Context` sequences**, only inside `src/cpu` helpers, or where an oracle shows
    that instruction-level ordering matters. Add a comment saying which oracle case shows it.
 
@@ -232,8 +233,7 @@ measure.
 
 ## 11. Before and after (from this repository)
 
-The game-mode example is implemented and judged. The ground-acceleration sketch below remains
-conditional on its precision evidence and oracle (GOAL §6).
+The game-mode and ground-acceleration examples are implemented and judged (GOAL §6).
 
 **Game mode handler** (`src/game/game_mode.cpp`, `update_logo`; source `GameModeHandler`).
 The adapter in `src/guest/game_mode_reference.cpp` holds call-site addresses, guest arguments,
@@ -275,9 +275,11 @@ frame, without putting fixture optionals in the game tier. The unchanged oracle 
 the rewrite. Native-only linkage proves the dispatcher builds without a PE or guest runtime;
 it does not claim the menu, logo, audio, or other missing callee implementations are complete.
 
-**Ground acceleration** (`src/player/player_acceleration_ground.cpp`, 44c270
-`PGetAcceleration`). The constants below are the actual values at 7dd568, 7dd584, 7e0178,
-7e00e4 and 7dccfc:
+**Ground acceleration** (`src/player/ground_acceleration.cpp`, `adjust_slope`; source
+`PGetAcceleration`). Native `GroundConstants` holds literal defaults, with all 24 binary32
+encodings checked against PE bytes by the reference unit. Its fields name the shared source
+constant roles. The census does not justify plain floats: the core uses `ExactFloat` and
+explicit binary32 stores, including a retained lateral value until drag consumes it.
 
 ```cpp
 // before: emulator calls and constants fetched by address
@@ -290,13 +292,25 @@ if(less(cf(player.dotp,c(0x7dd568))) && greater(cf(fabs32(cross.y),c(0x7dd584)))
 ```
 
 ```cpp
-// after: plain float, if the ground_acceleration oracle agrees under CW 0x007f
-if (pw.dotp < 0.1f && std::fabs(cross.y) > 0.6f && pw.speed.x > 1.16f) {
-    gravity = {0.0f, -params.weight, 0.0f};    // steep slope at speed: weight only
-} else if (pw.dotp < -0.4f && pw.speed.x > 1.16f) {
-    gravity.y -= params.weight * 5.0f;
+// after: actual game-tier slope cases; exact() constructs the retained value
+if (less(compare(state.alignment, tuning.cross_slope_alignment)) &&
+    greater(compare(fidelity::absolute_float(cross.y), tuning.cross_slope_threshold)) &&
+    greater(compare(state.player.speed.x, tuning.slide_speed))) {
+    gravity.x = 0;
+    gravity.y = (-exact(p.weight)).rounded();
+    retained_z = exact(zero);
+} else if (less(compare(state.alignment, tuning.steep_negative_alignment)) &&
+           greater(compare(state.player.speed.x, tuning.slide_speed))) {
+    gravity.y =
+        (gravity.y - (exact(p.weight) * tuning.steep_slope_weight_multiplier)).rounded();
 }
 ```
+
+The adapter validates gravity, contact and input scratch only when reached; no fixture
+optionals enter the core. Borrowed references preserve callback changes. The common friction
+implementation computes final Y, stores X, spills Y, then stores Y and Z; unmasked-exception
+tests distinguish arithmetic failure from store failure. Native-only testing completes a
+controlled inactive step; missing native mutation/yaw composition remains explicit.
 
 **Frame control** (`src/engine/game_frame_control.hpp`, the ADR-0006 pilot). The names and
 annotations are done, but the shape is still reference-tier: every field is `std::optional`,

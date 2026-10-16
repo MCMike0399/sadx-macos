@@ -1,5 +1,26 @@
 # PGetAccelerationGround native reconstruction
 
+## Native game-tier pilot (2026-10-16)
+
+The maintained algorithm is now `src/player/ground_acceleration.{hpp,cpp}` with its shared
+friction tail in `src/player/ground_friction.cpp`. It uses plain borrowed motion fields,
+named literal constants and `fidelity::ExactFloat`. The legacy call interface is defined by
+`src/guest/player_acceleration_ground.cpp`; source constant decoding, missing-fact checks
+and numeric failure boundaries live there. The legacy friction adapter calls the same tail.
+There is no old interpreter fallback. The historical recovery record below remains useful.
+
+Fresh Ghidra dossier `inventory-raw/ground-pilot-context.json`, evidence
+`ev_b9e2502725c195a77b096e64d97288e6b5f9db93725b1886a588320ac34dee6d`, covers the
+whole body through 44cde4 inclusive. Source profiles and the census do not justify plain
+float arithmetic. Ground and alternate each retain 29,952 exact value/call/CW comparisons
+and their existing flag-only partial verdict. Independent 3,840-case holdout matches the
+original; six arithmetic/selection/store-order mutants are caught. Unit tests check all
+24 native literal encodings, callback mutations, lazy scratch boundaries and unmasked
+final-Y addition/spill ordering. A native-only binary completes controlled inactive math
+without PE, guest or Unicorn linkage; missing native mutation/yaw owners stop explicitly.
+
+
+
 Source: supplied `Sonic Adventure DX/sonic.exe`, SHA-256
 `6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74`.
 REA Hopper dossier `movement/ground-acceleration.json`, Evidence

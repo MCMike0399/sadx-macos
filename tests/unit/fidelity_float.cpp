@@ -72,6 +72,10 @@ void rounding_controls() {
 }
 
 void memory_operand_identity() {
+    require(bits(sadx::fidelity::absolute_float(number(0xff812345))) == 0x7f812345,
+            "binary32 absolute value clears sign without quieting signaling NaN");
+    require(bits(sadx::fidelity::absolute_float(-0.0f)) == 0,
+            "binary32 absolute value clears negative zero sign");
     X87Context fp(0x037f);
     const auto quiet = ExactFloat(fp, number(0xffc00000));
     const float signaling = number(0x7f812345);

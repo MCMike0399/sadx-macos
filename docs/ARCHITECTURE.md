@@ -84,10 +84,10 @@ from that file when fixed (a stale exception fails the check).
 | `math` | `NinjaMath` (sine table, angles) and the D3DX8 math as linked into sonic.exe | cpu |
 | `engine` | the Ninja engine: task scheduler and work, the matrix stack and primitives (`ninja_matrix`), the camera/view/projection (`ninja_view`: 781570, 781250, 791170), controller records, game-logic timing/edge state and frame control, render states, sprites, texture lists, render queue, fog, screen, device/system init, frame thunks, keyboard, vibration, njMalloc, the speedrun limiter state | cpu loader math |
 | `input` | the Input mod DLL's pad/keyboard semantics (axes, pad records) | … engine |
-| `player` | player physics, collision, animation, Sonic, the scene input producer | … input |
+| `player` | native ground acceleration and shared friction, player physics, collision, animation, Sonic, the scene input producer | … input |
 | `game` | semantic game-mode flow, WinMain, library init, startup, game loop, resets, views, window, sound bookkeeping, model DLL bindings, mod loader frame, Win32 profile; mode provenance and legacy leaves live in guest | … player |
 | `runtime` | reserved for maintained native composition; the former PE-backed composition moved to guest | … game |
-| `guest` | mode provenance adapter and legacy leaf interpreter (`game_mode_reference`, `game_mode_leaves_reference`), PE-backed `NativeGame` survey and boot configuration (`native_game_reference`, `native_game_session`); in-process x86 guest on Unicorn, image mapping, continuations, pause/resume, override table and FPU shims | … runtime |
+| `guest` | ground/friction legacy-call adapters and constant decoding, mode provenance adapter and legacy leaf interpreter (`game_mode_reference`, `game_mode_leaves_reference`), PE-backed `NativeGame` survey and boot configuration (`native_game_reference`, `native_game_session`); in-process x86 guest on Unicorn, image mapping, continuations, pause/resume, override table and FPU shims | … runtime |
 | `hle` | (M1) the guest's Windows: `hle_registry` (imports → traps, call log), `hle_modules` (LoadLibrary & co., DLL linking), `hle_process` (one guest process, TEB/PEB, overlay, assumptions), `hle_kernel32`, `hle_crt` (+`hle_printf`, `hle_text`), `hle_user32` (headless window system), `hle_com`, `hle_dinput`, `hle_d3d8`, `hle_xinput` (synthetic pad state), `hle_raw_input` (HID identity/reports and WM_INPUT), `hle_device_bridge` (device-backed native overrides through verified HLE COM handlers). An unmodelled import stops the guest with its name; every chosen fact is a reported assumption | … guest |
 | `platform/mac` | Metal texture/sprite backends, `metal_guest_frame` (draws a recorded guest D3D8 frame: clears, DrawPrimitiveUP with guest textures, blending, depth), GameController input, the virtual 10 MHz clock | … hle |
 | `apps` | executables only: `sadx_boot.cpp` (headless CLI), `sadx_app.mm` (AppKit window), `metal_stage.mm` (asset viewer), `diagnostics/` (one-off HID/GameController probes, not built by default) | everything |
@@ -173,6 +173,14 @@ reference adapter with guest call-site metadata and lazy missing-fact checks. Th
 calls the same core; it contains no fallback mode interpreter.
 The headless survey and the AppKit native survey branch share
 `guest/native_game_session.hpp`; the shipping native session remains future work.
+
+`player/ground_acceleration.hpp` exposes plain borrowed motion fields and native dependency
+owners. Its shared friction tail lives in `ground_friction.cpp`; both ordinary and alternate
+acceleration use that one implementation. The legacy-call adapters in
+`guest/player_acceleration_{ground,friction}.cpp` retain missing fixture facts, constant-word
+decoding and source diagnostics. Native constants are literals; reference constant words
+remain injectable. Native input is supplied by its owner, and uncomposed mutation/yaw owners
+stop explicitly. The native-only test needs no PE or guest runtime.
 
 The hybrid guest executes `sonic.exe` with `process_overrides` supplying native owners.
 Each HLE import logs its call for trace diffs. These reference paths do not establish

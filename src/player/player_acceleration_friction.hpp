@@ -2,6 +2,7 @@
 
 #include "player/player_acceleration_ground.hpp"
 
+// Legacy reference-call interface; native game code uses ground_acceleration.hpp.
 namespace sadx {
 enum class LongitudinalFriction { apply, skip };
 

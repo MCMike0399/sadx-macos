@@ -45,8 +45,8 @@ in `AGENTS.md` and `STYLE.md`; this page holds facts and patterns.
   * `test ah,0x41` / `jnz` jumps on less, equal or unordered: `!(st0 > src)`.
 
   Plain C++ comparisons are false for NaN, so `!(a <= b)` keeps the unordered case exact.
-  Confirm each translation with the oracle (`player_acceleration_ground.cpp` has the
-  parity-mask helper for reference).
+  Confirm each translation with the oracle (`player/ground_arithmetic.hpp` now names
+  greater-or-unordered directly; legacy reference code retains the parity-mask idiom).
 * `fsubr`/`fdivr` reverse the operands: `fsubr m32` computes `m32 - st0`. For example,
   `update(g.y, reverse_subtract(product(w, 5.0f), g.y))` is `g.y -= w * 5.0f`.
 * Float literals live in a constant pool in `.rdata` and are shared between functions. The ones
@@ -106,3 +106,18 @@ in `AGENTS.md` and `STYLE.md`; this page holds facts and patterns.
   refactor.
 * `make` mtime races: the probe `.dylib` must be newer than the edited source before an oracle
   runs.
+
+
+## Ground acceleration refactor evidence
+
+* The old lift eagerly loaded the input magnitude before speed tests. The Ghidra assembly
+  shows branch-specific loads after those tests; active event input can leave both scratch
+  outputs untouched. An adapter must report the first consumed missing fact, preserving
+  prior contact/rotation work. Direction reset replaces the angle before its normal read.
+* In the fast input band, compare magnitude before multiplying by run acceleration. Reversing
+  those operations can change the first unmasked exception even when masked outputs match.
+* Shared ground/alternate friction computes the final Y sum before storing X, then spills Y
+  before storing Y/Z. A failed Y spill retains X; a failed Y addition precedes X. Dedicated
+  tests catch both reorderings; masked final-value comparisons alone cannot prove this.
+* Reference evidence: `inventory-raw/ground-pilot-context.json`,
+  `ev_b9e2502725c195a77b096e64d97288e6b5f9db93725b1886a588320ac34dee6d`.
