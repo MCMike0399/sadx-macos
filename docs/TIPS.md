@@ -207,3 +207,17 @@ in `AGENTS.md` and `STYLE.md`; this page holds facts and patterns.
   meanings; retain their observed values and those limits. Existing projection scale,
   center and color fields not loaded by this initializer remain untouched. Evidence:
   `screen-initial-156-*`, including exact values and seven caught mutations.
+
+
+## Sound queue load-time fields
+
+* SDK `_SEcallbuf`/`sebuf` starts at the priority word; the legacy native timer owner
+  starts four bytes later. Keep the 36-record stride at 56 bytes. Only the selected
+  numeric fields are migrated; priority and other unloaded fields stay untouched.
+* SDK `angle` feeds `SetPanPCM`, while `pitch` feeds `IsndPitch`. The existing adapter's
+  `frequency_at_3b2930c` and `pan_at_3b29318` names are misleading; native defaults use
+  `pan_angle` and `pitch`, preserving the old live owners at the boundary.
+* `gu8overlap_se` is 72 bytes, cleared by 18 word stores. Native storage is bytes, but
+  fallback reference availability remains word-granular: a three-byte partial word
+  must not publish three known bytes. The load-time tone is zero; -1 is the server's
+  later finished-record value. Evidence: `sound-initial-157-*` and fresh sound dossiers.

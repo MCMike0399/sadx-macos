@@ -36,6 +36,7 @@
 #include "engine/ninja_queue_lifecycle.hpp"
 #include "engine/ninja_screen.hpp"
 #include "engine/ninja_screen_initial_state.hpp"
+#include "game/sound_initial_state.hpp"
 #include "engine/ninja_debug_text.hpp"
 #include <cstdint>
 #include <map>
@@ -90,6 +91,8 @@ struct NativeGameConfig {
     std::optional<NinjaFogInitialState> fog_defaults;
     // Numeric load-time screen values; resources and device facts remain separate.
     std::optional<NinjaScreenInitialState> screen_defaults;
+    // Numeric sound defaults; queue identities and task/listener facts remain separate.
+    std::optional<SoundInitialState> sound_defaults;
     InputModPadConstants input_constants; // DLL .rdata bytes (caller-supplied)
     std::int32_t limiter_cadence=63;      // Speedrun FrameLimit "63FPS"
     SpeedrunLimiterClock clock;           // host counter owner (mac_clock in the app)
@@ -121,6 +124,8 @@ public:
     std::array<std::optional<std::uint32_t>, 90> screen_facts() const;
     // Reference-only POINT2COL resource identities; native numeric data does not replace them.
     std::array<std::optional<std::uint32_t>, 3> screen_resource_facts() const;
+    std::array<std::optional<std::uint32_t>, 329> sound_facts() const;
+    std::array<std::optional<std::uint32_t>, 73> sound_resource_facts() const;
     const std::optional<NinjaMath::SineTable> &sine_facts() const noexcept { return sine_table_at_88af78_; }
     // Live owners for a front end (keyboard/controller delivery each frame).
     InputModKeyboardPad keyboard_pad{};
@@ -196,6 +201,8 @@ private:
     void initialize_fog_defaults();
     // NOTSA: bind numeric native screen state or preserve reference availability.
     void initialize_screen_defaults();
+    // NOTSA: bind native sound numeric data or preserve reference availability.
+    void initialize_sound_defaults();
     void initialize_source_facts();
     void report_screen_depth(); // the 78dbe0 assumptions, once
 };

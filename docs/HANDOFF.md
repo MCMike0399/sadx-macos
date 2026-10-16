@@ -4149,3 +4149,29 @@ The product still needs native boot/title, resources and gameplay recovery.
   Resource/content, remaining input and other initialization families remain open. No
   complete native screen/session/game independence or physical GPU/FP claim. Goal active;
   hook settings and two user Ghidra drafts untouched. No binaries/assets committed. No push.
+
+
+### 2026-10-16 — native numeric sound initialization (GOAL §6.7)
+
+* New `game/sound_initial_state` supplies five scalars, 72 overlap bytes and seven
+  numeric fields in each of 36 records: 329 protocol atoms / 1,097 source bytes, all
+  load-time zero. Native boot selects these explicitly; omitted configuration keeps
+  the existing independent PE reads. Opaque record IDs, task origins and listener
+  remain 73 separate reference facts; unloaded priority/record fields and sound
+  object/event/thread/critical-section resources stay untouched.
+* SDK/callee evidence corrects names at the adapter boundary: angle feeds SetPanPCM,
+  pitch feeds IsndPitch. Legacy live owner names remain unchanged. Initial tone is
+  zero, not the server's later -1. Overlap is byte storage natively; reference
+  fallback preserves 18 whole-word availability boundaries. Borrowed timer/init
+  owners remain valid after moving the selected reads behind leaf emplacement.
+* Evidence `production-integration-20261016/sound-initial-157-*`: five fresh Ghidra
+  dossiers +16 xrefs, exact source data, isolated native closure, idle-server native
+  consumer, three numeric/four adapter mutants caught, five old/new constructors
+  comparing 2,010 numeric/resource facts (13,377 bytes), CLI 5,427 identical bytes.
+  Poisoned numeric PE preserves the three-frame report/graphics (no sprite draws);
+  varied signed fields, identities, no-image and incomplete overlap-word behavior
+  pass. Four existing oracle reports unchanged: sound manager 956 cases (544 active
+  boundaries counted but not compared), startup400/reset300/stream192.
+* Independent final STYLE review approved; no existing algorithm/judge modified.
+  Full gate follows in a separate judge commit. No full sound/session independence
+  or physical audio claim. GOAL §6.7 remains open.

@@ -378,7 +378,9 @@ comes first, because every later port should copy a readable model, not the lega
    decoding. Fog initialization adds 398 exact load-time words, isolated source builds and
    seven caught mutations while preserving frame ownership and unknown GPU capabilities.
    Numeric screen/viewport initialization adds 90 exact words, seven caught mutations and
-   independent POINT2COL resource preservation. Native boot configuration selects these
+   independent POINT2COL resource preservation. Sound initialization adds 329 numeric atoms
+   (1,097 source bytes), seven caught mutations and independent queue ID/task/listener
+   preservation. Native boot configuration selects these
    families explicitly; injectable reference decoding remains available. These families
    do not complete the runtime refactor:
    resource/content references, remaining input state and other load-image facts still need

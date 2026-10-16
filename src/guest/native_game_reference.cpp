@@ -30,8 +30,6 @@ void NativeGame::initialize_source_facts(){
     for(unsigned i=0;i<4;++i){controller_globals_.words_at_3b0e768[i]=u32(0x3b0e768+4*i);controller_globals_.words_at_3b0e344[i]=u32(0x3b0e344+4*i);
         controller_globals_.words_at_3b0e9b8[i]=u32(0x3b0e9b8+4*i);controller_globals_.bytes_at_3b0e9a4[i]=u8(0x3b0e9a4+i);}
     for(unsigned i=0;i<5;++i)controller_globals_.words_at_3b0e990[i]=u32(0x3b0e990+4*i);
-    audio_.word_at_3b29ce0=u32(0x3b29ce0);audio_.word_at_3b29ce4=u32(0x3b29ce4);audio_.word_at_3b29b7c=u32(0x3b29b7c);audio_.byte_at_3b29ce8=u8(0x3b29ce8);
-    for(unsigned i=0;i<36;++i)audio_.record_words_at_3b292fc[i]=u32(0x3b292fc+0x38*i);for(unsigned i=0;i<18;++i)audio_.words_at_3b292a8[i]=u32(0x3b292a8+4*i);
     for(unsigned i=0;i<48;++i){menu_.block_at_900e88[i]=u8(0x900e88+i);menu_.block_at_9008b4[i]=u8(0x9008b4+i);}menu_.byte_at_3abdbc1=u8(0x3abdbc1);menu_.byte_at_903e58=u8(0x903e58);
     for(unsigned i=0;i<32;++i)exit_callbacks_.slots_at_3d084b0[i]=u32(0x3d084b0+4*i);
     word_at_3abdc80_=u32(0x3abdc80);word_at_3abdc78_=u32(0x3abdc78);word_at_3abdc90_=u32(0x3abdc90);byte_at_3b280a8_=u8(0x3b280a8);
@@ -45,7 +43,7 @@ void NativeGame::initialize_source_facts(){
     depth_mode_at_8928c8_=u32(0x8928c8);
     rng_.seed_at_2bcbdf8=u32(0x2bcbdf8);
     {std::optional<std::uint16_t> w;if(const auto lo=u8(0x3b29d08),hi=u8(0x3b29d09);lo&&hi)w=static_cast<std::uint16_t>(*lo|(*hi<<8));reset_.emplace(GameResetState{loop_.word_at_3abdf80,w,u32(0x3b290d0),u32(0x3b0e330),rng_});}
-    audio_stream_.initialized_at_3b0ef2c=u32(0x3b0ef2c);window_at_3a8b088_=u32(0x3a8b088);
+    window_at_3a8b088_=u32(0x3a8b088);
     for(unsigned i=0;i<3;++i){words_at_900840_[i]=u32(0x900840+4*i);words_at_3ab9898_[i]=u32(0x3ab9898+4*i);words_at_900858_[i]=u32(0x900858+4*i);words_at_90084c_[i]=u32(0x90084c+4*i);}
     queue_runtime_.flag_at_3b12208=u32(0x3b12208);queue_runtime_.mode_at_3ab98ac=u32(0x3ab98ac);queue_runtime_.display_switch_at_3b1117c=&timing_.pending_logic_ticks;
     consumer_.mode_byte_at_3abdbc0=u8(0x3abdbc0);consumer_.count_at_3abd9d4=s32(0x3abd9d4);consumer_.count_at_3abd9dc=s32(0x3abd9dc);consumer_.maximum_at_3abd9d8=s32(0x3abd9d8);consumer_.maximum_at_3abd9e0=s32(0x3abd9e0);
@@ -66,7 +64,7 @@ void NativeGame::initialize_source_facts(){
         u32(0x3b11190),u32(0x3c5e8b8),timing_.word_at_3b1118c,u32(0x3b291b4),audio_.record_words_at_3b292fc,{},{},audio_stream_.initialized_at_3b0ef2c,
         u32(0x3abdf94),u32(0x3abdf9c),u32(0x3abdfa0),u32(0x3abdf98),u32(0x3abdfa8),u32(0x3abdfa4),u32(0x3a7cf3c),u32(0x38f6ec0),u32(0x3b0e338),{},u32(0x389d608),u32(0x3c4e458),u32(0x3c4e45c),{},{},{}});
     for(unsigned i=0;i<6;++i){leaves_->set_files_at_3abdf40[i]=u32(0x3abdf40+4*i);leaves_->cam_files_at_3abdf28[i]=u32(0x3abdf28+4*i);}
-    for(unsigned i=0;i<36;++i){leaves_->sound_record_flags_at_3b29304[i]=u32(0x3b29304+0x38*i);leaves_->words_at_3b29b90[i]=u32(0x3b29b90+4*i);}
+    for(unsigned i=0;i<36;++i){leaves_->words_at_3b29b90[i]=u32(0x3b29b90+4*i);}
     for(unsigned i=0;i<4;++i)leaves_->entry_words_at_3d08428[i]=u32(0x3d08428+24*i);
     if(const auto a=f32(0x3b280ac),b=f32(0x3b280b0),c=f32(0x3b280b4),d=f32(0x3b280b8);a&&b&&c&&d)color_at_3b280ac_=std::array<float,4>{*a,*b,*c,*d};
     queue_base_at_3abd960_=u32(0x3abd960);
@@ -136,9 +134,8 @@ void NativeGame::initialize_source_facts(){
         load(m.block_at_3b18250);load(m.block_at_3b0ef9c);load(m.block_at_3c4ae08);load(m.block_at_3b290c4);load(m.block_at_90ed54);load(m.block_at_3b2b5f9);m.color_at_3b29d5c=u32(0x3b29d5c);m.fp=&fp_;
         m.half_at_3b22e1c=u16(0x3b22e1c);m.half_at_3b18db8=u16(0x3b18db8);m.word_at_3b22e20=u32(0x3b22e20);m.callback_at_3d08420=u32(0x3d08420);
     }
-    for(unsigned i=0;i<36;++i){const auto at=0x3b292fc+0x38*i;auto& f=sound_fields_;
-        f.words_at_3b29300[i]=u32(at+4);f.ids_at_3b29308[i]=u32(at+0xc);f.frequency_at_3b2930c[i]=u32(at+0x10);f.volume_at_3b29310[i]=u32(at+0x14);f.pan_at_3b29318[i]=u32(at+0x1c);
-        f.current_volume_at_3b29c28[i]=u32(0x3b29c28+4*i);}
+    initialize_sound_defaults();
+    for(unsigned i=0;i<36;++i)sound_fields_.words_at_3b29300[i]=u32(0x3b29300+0x38*i);
     sound_fields_.listener_at_3b2cbb0=u32(0x3b2cbb0);
     frame_owners_.list_at_3b2c584=u32(0x3b2c584);frame_owners_.count_at_3b0e334=u32(0x3b0e334);frame_owners_.timer_at_3abdf88=u32(0x3abdf88);frame_owners_.buffer_at_3abdf84=u32(0x3abdf84);
     if (config_.sine_table) {
@@ -179,6 +176,91 @@ void NativeGame::initialize_source_facts(){
     }
     lifecycle_.emplace(NinjaQueueLifecycleOwners{queue_,queue_runtime_,consumer_,timing_,projection_,color_at_3b18230_,&depth_table_,one_at_7dcb10_,negative_one_at_7dcb0c_,depth_mode_at_8928c8_,
         words_at_900840_,words_at_3ab9898_,words_at_900858_,words_at_90084c_});
+}
+void NativeGame::initialize_sound_defaults() {
+    const auto *exe = config_.executable.get();
+    const auto u32 = [&](std::uint32_t address) -> std::optional<std::uint32_t> {
+        return exe ? exe->u32(address) : std::nullopt;
+    };
+    if (config_.sound_defaults) {
+        const auto &values = *config_.sound_defaults;
+        audio_.word_at_3b29ce0 = values.paused;
+        audio_.word_at_3b29ce4 = values.positional_paused;
+        audio_.word_at_3b29b7c = static_cast<std::uint32_t>(values.queue_count);
+        audio_.byte_at_3b29ce8 = values.frame_counter;
+        audio_stream_.initialized_at_3b0ef2c = values.stream_initialized;
+        for (unsigned i = 0; i < audio_.words_at_3b292a8.size(); ++i) {
+            std::uint32_t packed = 0;
+            for (unsigned byte = 0; byte < 4; ++byte)
+                packed |= static_cast<std::uint32_t>(values.overlap[4 * i + byte]) << (8 * byte);
+            audio_.words_at_3b292a8[i] = packed;
+        }
+        for (unsigned i = 0; i < values.records.size(); ++i) {
+            const auto &record = values.records[i];
+            audio_.record_words_at_3b292fc[i] = static_cast<std::uint32_t>(record.timer);
+            leaves_->sound_record_flags_at_3b29304[i] = record.flags;
+            sound_fields_.ids_at_3b29308[i] = static_cast<std::uint32_t>(record.tone);
+            // Legacy owner names predate the SDK/callee classification: angle feeds
+            // SetPanPCM, while pitch feeds IsndPitch. Preserve the owners' identities.
+            sound_fields_.frequency_at_3b2930c[i] = static_cast<std::uint32_t>(record.pan_angle);
+            sound_fields_.volume_at_3b29310[i] = static_cast<std::uint32_t>(record.volume);
+            sound_fields_.pan_at_3b29318[i] = static_cast<std::uint32_t>(record.pitch);
+            sound_fields_.current_volume_at_3b29c28[i] = static_cast<std::uint32_t>(record.current_volume);
+        }
+        return;
+    }
+    audio_.word_at_3b29ce0 = u32(0x3b29ce0);
+    audio_.word_at_3b29ce4 = u32(0x3b29ce4);
+    audio_.word_at_3b29b7c = u32(0x3b29b7c);
+    audio_.byte_at_3b29ce8 = exe ? exe->byte(0x3b29ce8) : std::nullopt;
+    audio_stream_.initialized_at_3b0ef2c = u32(0x3b0ef2c);
+    // Keep the reference's four-byte availability boundary for overlap storage.
+    for (unsigned i = 0; i < audio_.words_at_3b292a8.size(); ++i)
+        audio_.words_at_3b292a8[i] = u32(0x3b292a8 + 4 * i);
+    for (unsigned i = 0; i < 36; ++i) {
+        const auto address = 0x3b292fc + 0x38 * i;
+        audio_.record_words_at_3b292fc[i] = u32(address);
+        leaves_->sound_record_flags_at_3b29304[i] = u32(address + 8);
+        sound_fields_.ids_at_3b29308[i] = u32(address + 12);
+        sound_fields_.frequency_at_3b2930c[i] = u32(address + 16);
+        sound_fields_.volume_at_3b29310[i] = u32(address + 20);
+        sound_fields_.pan_at_3b29318[i] = u32(address + 28);
+        sound_fields_.current_volume_at_3b29c28[i] = u32(0x3b29c28 + 4 * i);
+    }
+}
+std::array<std::optional<std::uint32_t>, 329> NativeGame::sound_facts() const {
+    std::array<std::optional<std::uint32_t>, 329> facts{};
+    unsigned next = 0;
+    facts[next++] = audio_.word_at_3b29ce0;
+    facts[next++] = audio_.word_at_3b29ce4;
+    facts[next++] = audio_.word_at_3b29b7c;
+    facts[next++] = audio_.byte_at_3b29ce8;
+    facts[next++] = audio_stream_.initialized_at_3b0ef2c;
+    for (const auto &word : audio_.words_at_3b292a8)
+        for (unsigned byte = 0; byte < 4; ++byte) {
+            if (word)
+                facts[next] = (*word >> (8 * byte)) & 255U;
+            ++next;
+        }
+    for (unsigned i = 0; i < 36; ++i) {
+        facts[next++] = audio_.record_words_at_3b292fc[i];
+        facts[next++] = leaves_->sound_record_flags_at_3b29304[i];
+        facts[next++] = sound_fields_.ids_at_3b29308[i];
+        facts[next++] = sound_fields_.frequency_at_3b2930c[i];
+        facts[next++] = sound_fields_.volume_at_3b29310[i];
+        facts[next++] = sound_fields_.pan_at_3b29318[i];
+        facts[next++] = sound_fields_.current_volume_at_3b29c28[i];
+    }
+    return facts;
+}
+std::array<std::optional<std::uint32_t>, 73> NativeGame::sound_resource_facts() const {
+    std::array<std::optional<std::uint32_t>, 73> facts{};
+    for (unsigned i = 0; i < 36; ++i) {
+        facts[i] = sound_fields_.words_at_3b29300[i];
+        facts[36 + i] = leaves_->words_at_3b29b90[i];
+    }
+    facts[72] = sound_fields_.listener_at_3b2cbb0;
+    return facts;
 }
 void NativeGame::initialize_screen_defaults() {
     if (config_.screen_defaults) {
