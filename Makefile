@@ -83,8 +83,8 @@ build/libsadx-guest.a: $(GUEST_OBJECTS)
 	xcrun libtool -static -o $@ $^
 
 # Programs (src/apps).
-build/sadx-boot: src/apps/sadx_boot.cpp build/libsadx-macos.a build/libsadx-core.a
-	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/libsadx-macos.a build/libsadx-core.a -o $@
+build/sadx-boot: src/apps/sadx_boot.cpp build/libsadx-macos.a build/libsadx-guest.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/libsadx-macos.a build/libsadx-guest.a build/libsadx-core.a -o $@
 build/sadx-app: src/apps/sadx_app.mm build/libsadx-macos.a build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) -I$(UNICORN_DIR)/include $< build/libsadx-macos.a $(GUEST_LINK) build/libsadx-core.a $(MAC_FRAMEWORKS) -o $@
 build/sadx-metal: src/apps/metal_stage.mm Makefile | build
@@ -106,6 +106,10 @@ controllers: all
 # Unit tests: tests/unit/<name>.cpp -> build/<name-with-dashes>-test against libsadx-core; tests/unit/<name>.mm
 # additionally link libsadx-macos and the frameworks; tests/unit/guest_<name>.cpp link the guest + Unicorn.
 .SECONDEXPANSION:
+# Address-shaped boot/mode interpreters are reference adapters.
+REFERENCE_UNIT_TARGETS := build/game-mode-test build/game-mode-leaves-test build/game-runtime-test
+$(REFERENCE_UNIT_TARGETS): build/%-test: tests/unit/$$(subst -,_,$$*).cpp build/libsadx-guest.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/libsadx-guest.a build/libsadx-core.a -o $@
 # Native frame-control composition deliberately excludes the reference/core archive.
 build/native-frame-control-test: tests/unit/native_frame_control.cpp src/engine/game_frame_control.cpp src/engine/game_frame_control.hpp src/engine/speedrun.cpp src/engine/speedrun.hpp
 	$(CXX) $(CXXFLAGS) -Isrc tests/unit/native_frame_control.cpp src/engine/game_frame_control.cpp src/engine/speedrun.cpp -o $@
@@ -130,6 +134,10 @@ build/ninja-queue-consumer-test: tests/fixtures/ninja_sprite_test_fixture.hpp
 build/native-player-path-probe.dylib build/native-player-direction-reset-probe.dylib: tests/fixtures/path_probe_data.hpp
 
 # Native probes: tests/probes/native_<x>_probe.cpp -> build/native-<x>-probe.dylib, called by the Unicorn oracles.
+build/native-game-mode-probe.dylib: tests/probes/native_game_mode_probe.cpp build/libsadx-guest.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) $< build/libsadx-guest.a build/libsadx-core.a -o $@
+build/native-game-mode-leaves-probe.dylib: tests/probes/native_game_mode_leaves_probe.cpp build/libsadx-guest.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) $< build/libsadx-guest.a build/libsadx-core.a -o $@
 build/native-%-probe.dylib: tests/probes/native_$$(subst -,_,$$*)_probe.cpp build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) $< build/libsadx-core.a -o $@
 probes: $(PROBE_TARGETS)

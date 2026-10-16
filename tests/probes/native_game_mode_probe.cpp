@@ -1,4 +1,4 @@
-#include "game/game_mode.hpp"
+#include "guest/game_mode_reference.hpp"
 #include <algorithm>
 #include <vector>
 // Native 40c090 with the fixture of tools/verify_original_game_mode.py.

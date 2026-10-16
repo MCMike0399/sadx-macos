@@ -1,14 +1,14 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "7867b7946a343a3e26ae16532c5656451faa1e9ccc40530332ab1d12795e85c7",
+ "native_library_sha256": "4f6d46b62a62198143cfe104a9346575dc40ba43c7b7dcb110ba95eafbeb0cff",
  "source_files": {
-  "src/game/game_mode_leaves.hpp": "e666caebda16066c8222f2efe277b1139722a2fa25d6ab74c56000f64453aec6",
-  "src/game/game_mode_leaves.cpp": "6412ab51ebc3d04b20d416e3ad90d488dade30d538b3e1ca95b6c5625804d366",
+  "src/guest/game_mode_leaves_reference.hpp": "6b56cc029928777dfc317b67a14b9453ac4136b176f068ae9651d021895b2c95",
+  "src/guest/game_mode_leaves_reference.cpp": "93e2673e63c1e96bd6dcbeb9b4fc9e28cdb3dd9cd71983c1027dee41c29e3e95",
   "src/cpu/source_bytes.hpp": "37e617f88f363232a8e844dcac2c3328e28aa6db0ccbd9d7367c114c3b76c379",
   "src/game/model_dlls.cpp": "9640ce6cecf32a944922b68926e0d1987f0784334b8d02f406558ff35f23cfaa",
-  "src/loader/executable_image.cpp": "2ea03ee38d801a8f13890619b22f2f166004fa84b43d7f79f8549eab6862b126",
-  "tests/probes/native_game_mode_leaves_probe.cpp": "b3d55e79becc00daa25216d4f05552018c8bf044150127b872dcc39ed30c755c",
-  "tools/oracles/verify_original_game_mode_leaves.py": "e14e5867f8375c6947b4b3cf5028a33fe7d52f2086b81c6f27aec5657854acb8"
+  "src/loader/executable_image.cpp": "0f21f60ae1034911a271afe3de215683f6c4d5410965bdbfe6e67e4882d17c9b",
+  "tests/probes/native_game_mode_leaves_probe.cpp": "8df263881bf63a36e791f635354f52cd12a091d2e4e466e767a29ffa6758e6c7",
+  "tools/oracles/verify_original_game_mode_leaves.py": "b410da25b2db2ea70ca4bc7b3b213a57422c2729ae5c9811b6ed0f8f9eed2c1c"
  },
  "original_ranges_sha256": {
   "0x42c4f0": "2b8a8f8d569422dc7f1c79c1001d7a77643abba0f2999f01d83d375377b19600",
@@ -90,8 +90,8 @@
  "state_match": true,
  "limits": "40c090 game-mode leaves against original instructions: 4144e0, 421f70,\n421f80, 4f88a0, 4221e0, 426050, 42cea0, 421f90, 427ee0, 427ec0, 425af0,\n43b490, 42f5d0, 413300, 427f10, 420e90, 414470 (with 46b230), 42c730 (with\nthe real 42e470, 402f10/780c00, 42c4e0, 432ea0 and 78c5a0) and the composites\n415000 and 42c7b0.\n\nThe whole PE image is mapped. Unported or elsewhere-owned callees 422680,\n42d3b0, 403290, 4030d0, 4073b0, 785330, 40b1a0, 40b460, 421180 (LoadPVM, the\nloader's LoadPVM_r in the profile), 411e30 and 77ed40 are fixtures: each call either returns (EAX 0) or, at a\nchosen call, stops the source as the native nested owner stops. Compared:\ncompletion, nested-call count, every owned scalar and block byte, the\nborrowed words (3b290e4, 3b2a2fa, 3b11178, 3b2a2e4, 3b2a2e8, seed 2bcbdf8),\nwhether the level pointer 3b0ef4c and the event task 3b2c578 are null, and\nEAX where the native result defines it. Cases that reach 420e90's texture\nrelease walk (count 1, nonzero list) are a native explicit nested owner and\nare counted, not compared.\n\n422680 and its callers run the real per-character code against the model\nDLLs mapped at the native layout with relocations applied by this script (an\nimplementation independent of the native rebase); the three table pointers\n(38f6e7c, 3aad104, 3a7cf28) are inputs. Characters whose 422680 case loops\nforever (1, 4, above 7) are native explicit boundaries.\n",
  "tracked_summary": {
-  "full_sha256": "7c24798c149b91034e16b8598006688f437e4d021e5a48855c220a5fa2092686",
-  "full_bytes": 6149,
+  "full_sha256": "524336d06dbc51cbe3f0901ec0a5dfe813cc39b6baed47577a903ce18cae3595",
+  "full_bytes": 6171,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

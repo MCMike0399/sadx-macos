@@ -1,0 +1,106 @@
+{
+  "scope": "Preparatory reference-tier relocation for GOAL 6.6a; semantic pilot remains open",
+  "base_commit": "fed0d6dabc269ba2a66889ce20cc344668dee8c1",
+  "moved_files": [
+    {
+      "old": "src/game/game_mode.cpp",
+      "new": "src/guest/game_mode_reference.cpp",
+      "old_sha256": "95eb7cb5dbec15da691e3c1df0f2edc23345f06e764b6c03c3235c3fea6026bb",
+      "new_sha256": "e579a212305a3f912e071724061232d6cdda1eb68a393b430a549bb95f093e64",
+      "equivalent_after_include_substitution": true
+    },
+    {
+      "old": "src/game/game_mode.hpp",
+      "new": "src/guest/game_mode_reference.hpp",
+      "old_sha256": "a5e0f644ad592b50ce6d32eddc2d100997fe137e4145c379de0866adb14280f9",
+      "new_sha256": "a5e0f644ad592b50ce6d32eddc2d100997fe137e4145c379de0866adb14280f9",
+      "equivalent_after_include_substitution": true
+    },
+    {
+      "old": "src/game/game_mode_leaves.cpp",
+      "new": "src/guest/game_mode_leaves_reference.cpp",
+      "old_sha256": "ae1afd687a7a425a018fbd4172b235f74caafbd175908cd7d5d18c5f05089871",
+      "new_sha256": "93e2673e63c1e96bd6dcbeb9b4fc9e28cdb3dd9cd71983c1027dee41c29e3e95",
+      "equivalent_after_include_substitution": true
+    },
+    {
+      "old": "src/game/game_mode_leaves.hpp",
+      "new": "src/guest/game_mode_leaves_reference.hpp",
+      "old_sha256": "e666caebda16066c8222f2efe277b1139722a2fa25d6ab74c56000f64453aec6",
+      "new_sha256": "6b56cc029928777dfc317b67a14b9453ac4136b176f068ae9651d021895b2c95",
+      "equivalent_after_include_substitution": true
+    },
+    {
+      "old": "src/runtime/game_runtime.cpp",
+      "new": "src/guest/native_game_reference.cpp",
+      "old_sha256": "e1e0420f25e2b4af68efac6746998816eb2dd64bbcb76e293d24fd1f1834df50",
+      "new_sha256": "a9e56f26376fa0e231ea48e35c064836d79c4e2970fe1e8e49ddd9aa07a4c604",
+      "equivalent_after_include_substitution": true
+    },
+    {
+      "old": "src/runtime/game_runtime.hpp",
+      "new": "src/guest/native_game_reference.hpp",
+      "old_sha256": "6fd5da436629c266c956b9b6727a0344c1dcb253b6fc919f92289d6be4398544",
+      "new_sha256": "1c374c6c369c8eabcec99d7d4160383f27992f33cfac1b0f2537cbbb27802ece",
+      "equivalent_after_include_substitution": true
+    },
+    {
+      "old": "src/runtime/game_session.cpp",
+      "new": "src/guest/native_game_session.cpp",
+      "old_sha256": "86efae7f9db372ab0959b8387c18dd4cb4d2c57987edd77e2653b323dfb4d2f1",
+      "new_sha256": "b94ca3ae49dadd7b4a988f1f8e5778fe7664cb3165f35835b95ba842ecefb52a",
+      "equivalent_after_include_substitution": true
+    },
+    {
+      "old": "src/runtime/game_session.hpp",
+      "new": "src/guest/native_game_session.hpp",
+      "old_sha256": "713e1f887d2f824521bf5d033664a23f55b0948543835812b6fbcc138a37a46a",
+      "new_sha256": "1deb90f4cc2f475cae7724f15c82b1aa679d548f46f38007a2ed22eb059882ad",
+      "equivalent_after_include_substitution": true
+    }
+  ],
+  "rea_evidence_id": "ev_28110cd8c6363c153af486ea98025d11fb32b9870e9c3bd781ff859c77e66a12",
+  "source_body": {
+    "available": true,
+    "provenance": "ghidra-function-body-address-set",
+    "ranges": [
+      {
+        "start": "0x40c090",
+        "end": "0x40c9bc"
+      }
+    ],
+    "total_bytes": 2349,
+    "span_bytes": 2349,
+    "non_contiguous": false,
+    "contains_entry": true
+  },
+  "review": "Independent mode_reference_review found no blocking code defects; architecture table/current composition text corrected. Review did not certify a semantic refactor.",
+  "verification": {
+    "game_mode_cases": 24000,
+    "game_mode_paths": 252,
+    "game_mode_mismatches": 0,
+    "unchanged_case_sha256": "05c8ac3db56f68dcd6c7cb7334699f164bf2803b602a6694ec4dd7077f6d2ea0",
+    "leaf_cases": 2526,
+    "leaf_explicit_boundaries": 74,
+    "leaf_mismatches": 0,
+    "unit_programs": [
+      "game-mode",
+      "game-mode-leaves",
+      "game-runtime"
+    ],
+    "layer_violations": 0,
+    "duplicate_owner_bytes": 0,
+    "legacy_owned_bytes": 159630,
+    "combined_provenance_byte_identities": 159680,
+    "mutants_caught": 3,
+    "mutant_mismatches": [
+      1629,
+      54,
+      10
+    ]
+  },
+  "limits": [
+    "Mechanical relocation and unchanged behavior only; no clean GameMode enum/state/STUB interface implemented yet.",
+    "Source move and judge/build/probe path refresh are separate commits; final gate follows both."
+  ]
+}

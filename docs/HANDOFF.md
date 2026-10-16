@@ -3524,3 +3524,38 @@ The product still needs native boot/title, resources and gameplay recovery.
 * Hook settings still untouched pending approval; existing Ghidra drafts untouched.
   Next: §6.6a game-mode pilot under its unchanged oracle and independent STYLE review.
   Goal remains active.
+
+### 2026-10-16 — GOAL §6.6a reference-tier preparation (track R, gate 146)
+
+* Dependency inspection found the mode interpreter, mode-leaf interpreter, `NativeGame`
+  and its PE-backed boot session coupled through legacy fixture/address interfaces. Moved
+  all eight files to `guest/{game_mode_reference,game_mode_leaves_reference,
+  native_game_reference,native_game_session}`. Consumers and archive recipes follow them;
+  `libsadx-core.a` no longer contains those interpreters/composition objects. No new layer
+  exception or copied owner. This prepares the semantic rewrite; it does not implement it.
+* Source move committed separately as `09cc63b`; build/probe identity paths, legacy owner
+  paths, baselines and oracle-summary/manifest refresh follow as the judge commit. Probe
+  ABI/fixtures/comparisons/tolerances unchanged. Eight moved files match the prior source
+  exactly after include substitution; no function body was rewritten or reformatted.
+* REA: fresh full dossier `ev_28110cd8c6363c153af486ea98025d11fb32b9870e9c3bd781ff859c77e66a12`
+  (body through 40c9bc) and 15 global xref dossiers in inventory-raw. Owned runner closed
+  successfully. Evidence: `production-integration-20261016/game-mode-reference-146-*.json`
+  and `game-mode-reference-mutants.json`.
+* Affected oracles **pass** unchanged: game mode 24,000 cases/252 paths; leaves 2,526
+  cases/74 explicit boundaries/45 outcomes. Three mode mutants caught (1,629/54/10
+  mismatches); restored oracle passes. Mode, leaf and runtime unit programs pass. Fresh
+  independent review found no blocking code defect; requested architecture corrections fixed.
+* Full gate **rc 0**, **128 native programs / 46 Python tests**; standard 7,228-frame
+  determinism, 600 overridden digests, 900-frame controller parity and 63 FPS cadence
+  unchanged; 71,115 override comparisons/mutants pass; host 78.8 FPS. Twelve layers, zero
+  exceptions; 159,630 legacy bytes and 159,680 combined identities retained. Manifest 411.
+* Readability is a scope relocation: 233→225 game-tier files; hex 13,465→12,348, address
+  identifiers 2,621→2,062, callee-address calls 249→94, goto 73→2. The legacy code remains
+  address-shaped in the reference tier; no claim that it is a readable game implementation.
+* Aggregate oracle verdict still rc 2 (existing failures/partials/missing report). Other
+  standalone oracles, separate `make m1`, four unregistered tests skipped. Native
+  boot/title, stage/Windows/physical pads and full independence remain open. No assets or
+  binaries committed; two existing Ghidra request drafts and hook settings untouched.
+* Next: implement §6.6a's actual GameMode enum, semantic state, named STUB seams and
+  structured game-tier control flow, preserving the oracle and obtaining STYLE review.
+  Goal remains active.

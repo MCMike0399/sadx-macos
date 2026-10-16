@@ -2,10 +2,10 @@
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
  "native_library_sha256": "27506b958e9ec008459ec19332d5b33069b20d350498d12f0569d65d04ba9faa",
  "source_files": {
-  "src/game/game_mode.hpp": "a5e0f644ad592b50ce6d32eddc2d100997fe137e4145c379de0866adb14280f9",
-  "src/game/game_mode.cpp": "95eb7cb5dbec15da691e3c1df0f2edc23345f06e764b6c03c3235c3fea6026bb",
-  "tests/probes/native_game_mode_probe.cpp": "e05d8b2174c749260dde6e72b3f82d30d8bdbf148169c65cb4b30175a0af49a5",
-  "tools/oracles/verify_original_game_mode.py": "67560dd24532e6500b5819585e33944242cf3b72d5b65ddf64c0f934f3617a8b"
+  "src/guest/game_mode_reference.hpp": "a5e0f644ad592b50ce6d32eddc2d100997fe137e4145c379de0866adb14280f9",
+  "src/guest/game_mode_reference.cpp": "e579a212305a3f912e071724061232d6cdda1eb68a393b430a549bb95f093e64",
+  "tests/probes/native_game_mode_probe.cpp": "d1e1c146a4cc6b46819cac257b2dcba737cec41915f26e84887bc1252f0bb587",
+  "tools/oracles/verify_original_game_mode.py": "26dc3173feea32d154124b593ee252a0bdcb33b9165e2cb7e67704299a0471a9"
  },
  "original_range_sha256": "09f9d83f6875ff84677c411a81e573d66feb815e538e15847e1e11bfb653a78f",
  "cases": 24000,
@@ -84,8 +84,8 @@
  "order_arguments_stores_boundaries_match": true,
  "limits": "Game-mode state machine 40c090 against original instructions.\n\nEvery callee is an explicit owner fixture with a scripted EAX (callees whose\nresult the source ignores return 0x5a5a5a5a); up to two scripted callees\nrewrite a source global when called, to exercise the source's rereads after\ncalls; one call can fail. The level pointer at 3b0ef4c targets a mapped word or\nis null (source faults at the MOVSX). This compares call order, call sites,\narguments, stores and failure boundaries; it does not show any owner subsystem\n(menus, saves, file loads, cutscenes, audio) is implemented.\n",
  "tracked_summary": {
-  "full_sha256": "9a96c320c5017c8d52a2c96c7d8af1a9fac13550d10f4a995ca048a211568beb",
-  "full_bytes": 3363,
+  "full_sha256": "fe3db77392b882144844d03723218a5c1c5657c81451b0eb3859d07b132800fd",
+  "full_bytes": 3385,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

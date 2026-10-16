@@ -1,0 +1,17 @@
+[
+  [
+    "logo_initialization",
+    "mode=0x18;goto tail;",
+    "mode=0x17;goto tail;"
+  ],
+  [
+    "unsigned_title_guard",
+    "if(r+2U>0x6dU)goto tail;",
+    "if(r+2U>=0x6dU)goto tail;"
+  ],
+  [
+    "post_owner_mode_reread",
+    "mode=need(mode,0x40c4e6)+1;",
+    "mode=12;"
+  ]
+]

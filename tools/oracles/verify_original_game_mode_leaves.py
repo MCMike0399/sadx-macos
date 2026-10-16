@@ -138,7 +138,7 @@ def main():
         got=bytes(out);diff=[(x,w) for x,w,o in fields if got[o:o+w]!=bytes(e[o:o+w])]
         status=[res[0],res[1]]!=er[:2] or (res[0] and callee in DEFINED_EAX and (not res[3] or res[2]!=er[2])) or (callee==0x42c4f0 and list(res)[8:15]!=er[3:10])
         if diff or status:bad.append(dict(case=n,callee=hex(callee),argument=argument,fail_at=fail_at,fields=[hex(x) for x,w in diff[:8]],native_status=list(res)[:5],source_status=er))
-    names=['src/game/game_mode_leaves.hpp','src/game/game_mode_leaves.cpp','src/cpu/source_bytes.hpp','src/game/model_dlls.cpp','src/loader/executable_image.cpp','tests/probes/native_game_mode_leaves_probe.cpp','tools/oracles/verify_original_game_mode_leaves.py']
+    names=['src/guest/game_mode_leaves_reference.hpp','src/guest/game_mode_leaves_reference.cpp','src/cpu/source_bytes.hpp','src/game/model_dlls.cpp','src/loader/executable_image.cpp','tests/probes/native_game_mode_leaves_probe.cpp','tools/oracles/verify_original_game_mode_leaves.py']
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={x:sha((pathlib.Path(__file__).resolve().parents[2]/x).read_bytes()) for x in names},
         original_ranges_sha256={hex(x):sha(image.read(x,0x40)) for x in LEAVES},cases=cases,native_explicit_boundaries=explicit,source_outcomes=outcomes,mismatch_count=len(bad),mismatches=bad[:20],state_match=not bad,limits=__doc__)
     a.output.write_text(json.dumps(report,indent=1)+'\n');print(json.dumps(dict(cases=cases,explicit=explicit,outcome_kinds=len(outcomes),mismatches=len(bad))))
