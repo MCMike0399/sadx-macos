@@ -1,0 +1,102 @@
+{
+  "step": "GOAL 6.6b actual native ground/shared-friction migration",
+  "source_commit": "c31cbc60908b0efad1c9a449bfd5498afa6476b2",
+  "evidence_id": "ev_b9e2502725c195a77b096e64d97288e6b5f9db93725b1886a588320ac34dee6d",
+  "source_files": {
+    "src/player/ground_acceleration.hpp": "35bde538be42156764534857ec3458a443932ab20a6f77832f87a649119f288f",
+    "src/player/ground_acceleration.cpp": "c79890f79d3d092eb5bf45c73223467bc6bc20105199830f32a5fba44b4cecf0",
+    "src/player/ground_acceleration_internal.hpp": "c9938bc44091750a8faeca2c6915b298295ff1e5dc2774718bef183657824595",
+    "src/player/ground_acceleration_native.cpp": "f1729d583f165daf41bf49296fb839b3b9d0badbc73c5b13977060c0670eece9",
+    "src/player/ground_arithmetic.hpp": "703a0c6c05cc2d1a6ee2e694ea48b7cc094b3ff8ca6f3dfc786791870272e7c9",
+    "src/player/ground_friction.cpp": "63ef1ec097115555b2e7bcb33f212d3678efe69a3cb326b8db2edfd5af01b58d",
+    "src/guest/ground_acceleration_reference.hpp": "2da1d2ac5be19c17e4b71cdee209e07956b3ebebb0fdf03716044382e0e5471a",
+    "src/guest/player_acceleration_ground.cpp": "2dfdea7e29e79b2d6b95897b38165246821e7ccf5ff98e7a73f2acad1eaf4f75",
+    "src/guest/player_acceleration_friction.cpp": "c2b099a18a612ab4d8c11670827bea33b9066d262e79d65844f493a2ac7e2ad1",
+    "src/cpu/fidelity_float.hpp": "1dd70ee0f8f12813b27abdf1b15936069f42d90bd67249c3a864b9497a721940",
+    "tests/unit/player_acceleration_ground.cpp": "a0982a108fc244f8556d9ec74039035eb38c2b453b6fe2320ff7760ef63e5ab3",
+    "tests/unit/native_ground_acceleration.cpp": "af1f5cd4b49a4bfcb46d4bab16b3d1e92e16f34be6c5177f7b37a39d58b3414f"
+  },
+  "design": "One structured exact-arithmetic core, plain borrowed live fields, named literal defaults, private named composition seams; legacy wrapper and friction adapter in guest. No old algorithm fallback.",
+  "oracles": {
+    "ground": {
+      "cases": 29952,
+      "value_call_cw_mismatches": 0,
+      "flag_mismatches": 29952,
+      "verdict": "partial"
+    },
+    "alternate_default": {
+      "cases": 29952,
+      "value_call_cw_mismatches": 0,
+      "flag_mismatches": 29952,
+      "verdict": "partial"
+    },
+    "alternate_attribute20000": {
+      "cases": 29952,
+      "value_call_cw_mismatches": 0,
+      "flag_mismatches": 29952,
+      "verdict": "partial",
+      "purpose": "Explicit variant executes the shared friction tail; default attribute4000 does not."
+    },
+    "sonic_player": {
+      "cases": 28800,
+      "stored_mismatches": 0,
+      "status_mismatches": 2840,
+      "verdict": "partial"
+    },
+    "sonic_actions": {
+      "cases": 30192,
+      "stored_mismatches": 0,
+      "status_mismatches": 2172,
+      "verdict": "partial"
+    }
+  },
+  "holdout": {
+    "cases": 3840,
+    "baseline_mismatches": 0,
+    "candidate_mismatches": 0,
+    "case_sha256": "25bdfe05c464e928741091cc42c96ffd803fad67207da23957df82616bb7163a",
+    "method": "Independent seeded 320 rows across 12 controls; separately compiled old implementation and final candidate compare unchanged 63-word ABI to original x86."
+  },
+  "mutants": {
+    "core_value_mismatches": [
+      9948,
+      1136,
+      15204
+    ],
+    "friction_value_mismatches": 1805,
+    "order_mutants_caught": 2,
+    "total_caught": 6,
+    "total_valid": 6,
+    "restored": "all pass their declared value-exact/partial baseline"
+  },
+  "units": [
+    "All 24 default literal words equal the independently extracted PE constants.",
+    "Lazy missing contact/rotation/angle/magnitude, including all 5 magnitude source sites and reset angle replacement.",
+    "Callback task/physics/parameter mutation is live; earlier formed gravity retains the prior weight.",
+    "Final-Y addition failure precedes X, while final-Y spill failure retains X: native immediate-failure model; hardware deferred exception delivery is not claimed.",
+    "Native-only inactive step completes with controlled coordinates/input, event/yaw stops explicit, target prefix retained.",
+    "Native binary passes from empty cwd and has no legacy-ground/PE/Unicorn symbols."
+  ],
+  "independent_review": {
+    "agent": "ground_semantic_review",
+    "verdict": "approved, no blockers",
+    "corrected": "Fast input magnitude comparison precedes multiplication per source; removed old eager gain-load artifacts and split friction into semantic steps."
+  },
+  "profile": [
+    {
+      "range": "0x44c270-0x44cde5",
+      "overlaps": []
+    },
+    {
+      "range": "0x44b549-0x44b9b2",
+      "overlaps": []
+    }
+  ],
+  "judge_refresh": "Only build/test registration, full source identities, explicit range metadata, protected holdout runner, new mutation specs, baseline and summaries. Existing fixtures/comparisons/tolerances unchanged.",
+  "limits": [
+    "FP flags/status remain partial; census ground entry unobserved and no plain-float premise.",
+    "Native mutation/yaw owners still require composition; no full native movement/stage/Windows/physical-pad completion.",
+    "Four registered affected oracles rerun plus explicit attribute20000 variant; other standalone oracles and separate make m1 skipped.",
+    "Hook settings and existing user Ghidra drafts untouched."
+  ]
+}

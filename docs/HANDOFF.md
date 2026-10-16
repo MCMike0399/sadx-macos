@@ -3663,3 +3663,69 @@ The product still needs native boot/title, resources and gameplay recovery.
 * Next: complete §6.6b's actual ground/friction migration using the retained-value helper,
   semantic constants and reference-only diagnostics, with unchanged oracle counts, explicit
   callback/scratch coverage and independent final STYLE review. Goal remains active.
+
+
+### 2026-10-16 — GOAL §6.6b native ground/friction pilot (track R, gate 149)
+
+* Actual migration, source commit `c31cbc6`: `player/ground_acceleration` now owns
+  `PGetAcceleration` with plain borrowed motion fields, named literal defaults and
+  `fidelity::ExactFloat` arithmetic. Named slope/drag/input/yaw steps and shared
+  `ground_friction.cpp` replace address-shaped arithmetic. The legacy call wrappers,
+  constant-word decoding and numeric failure boundaries live in `guest/` under the original
+  CPP basenames; declaration-only legacy headers remain for unmigrated callers. Both
+  ordinary ground and alternate attribute20000 call the same friction implementation.
+  No old algorithm fallback. All six new game-tier files have zero readability debt.
+* Reference facts are read lazily, with live task/player/parameter references across owner
+  callbacks. Active input scratch is validated at its actual read: preceding contact and
+  rotation failures retain priority, reset can replace the angle, and all five magnitude
+  load sites are distinguished. Earlier formed gravity keeps its prior weight while later
+  friction reads observe callback changes. Native coordinates and an input owner support
+  a complete controlled inactive step; missing native mutation/yaw composition stops by
+  semantic name. No silent successful replacement.
+* Evidence: owned Ghidra dossier `ev_b9e2502725c195a77b096e64d97288e6b5f9db93725b1886a588320ac34dee6d`,
+  body 44c270..44cde4 inclusive; context bundle, SDK fields and exact PE bytes for all
+  24 literal encodings. Full ground and shared-tail ranges have no active profile overlap.
+  `production-integration-20261016/ground-semantic-149-*` retains evidence, holdouts,
+  mutation logs/results, explicit attribute20000 summary and gate. Original fixtures,
+  comparisons and tolerances remain unchanged; source and judge refresh are separate commits.
+* Independent STYLE review approved with no blockers. Fixed its Fast input ordering
+  finding: compare magnitude before gain multiplication. Source assembly also removes the
+  old lift's eager gain-load artifact. Friction is split into negative/positive drive,
+  longitudinal/lateral stages. The final Y sum precedes X's store; spilling Y follows X.
+  Two unmasked tests/mutants distinguish the failure prefixes in the native immediate-failure
+  model; deferred hardware x87 fault delivery remains unverified.
+* Oracles remain **partial**, with unchanged cases and zero stored-value/call/CW discrepancies:
+  ground **29,952**, default alternate **29,952**, and explicit attribute20000 **29,952**;
+  each retains **29,952 flag discrepancies**. The default alternate profile is attribute4000
+  and does not exercise this shared friction tail, so attribute20000 was run explicitly and
+  retained separately without replacing the registered default report. Sonic player
+  **28,800** and actions **30,192** remain stored-value exact, with existing **2,840 / 2,172**
+  status differences. Four affected registered reports refreshed with full core/adapter
+  identities; explicit range metadata now reaches the profile checker.
+* Independent seeded holdout: **3,840 cases / zero mismatches**, identical case SHA-256
+  to a separately compiled old implementation that also has zero mismatches. All six
+  mutations caught: slope sign **9,948** value discrepancies, retained lateral spill
+  **1,136**, wrong yaw owner **15,204**, friction excess **1,805**, plus the two final-Y
+  ordering defects caught by native failure-prefix tests. Restored source passes its
+  value-exact/partial baseline. A concurrent preliminary Sonic trial was discarded; final
+  Sonic runs and recorded identities were collected with restored source.
+* New/expanded units cover all 24 literal words, missing contact/rotation/angle/magnitude,
+  callback parameter mutation, native ownership, explicit event/yaw stops and partial
+  stores. Native binary also runs from an empty cwd; no legacy ground/PE/Unicorn symbols.
+  Core archive contains native ground/friction and excludes both reference adapters.
+  All probe/unit programs compile. STYLE §11 quotes the real code; architecture, TIPS,
+  provenance and GOAL describe the resulting interface and precision limits.
+* Full gate **rc 0**, **131 native programs / 46 Python tests**. The 7,228-frame intro,
+  first 600 override digests, 71,115 override comparisons/mutants, 900-frame controller
+  parity and 63 FPS cadence pass unchanged; host 79.5 FPS. Twelve layers / zero exceptions,
+  159,630 legacy owned bytes / 159,680 combined identities, 418 protected judge inputs.
+  Readability scope 234 files; hex 12,348→12,231, long lines 1,643→1,635 and multiple
+  statements 2,448→2,387; address identifiers 2,062, address calls 94 and gotos 2 unchanged.
+* Aggregate oracle verdict still rc 2: existing 9 fail / 46 partial / 1 missing. Other
+  standalone oracles, separate `make m1`, and four unregistered tests (`metal-sprite`,
+  `metal-sprite-composition`, `metal-texture`, `player-task`) skipped. Ground stage entry
+  remains unobserved by the census; no plain-float, hardware, full-native-movement, native
+  boot/title or full-independence claim. No assets/binaries committed or push; hook settings
+  and the user's two Ghidra request drafts untouched.
+* Next: §6.6c frame control, moving fixture optionals/CounterWords to its reference adapter
+  while retaining plain native values, existing oracle/mutants and STYLE review. Goal active.

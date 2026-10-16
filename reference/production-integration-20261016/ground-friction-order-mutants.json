@@ -1,0 +1,12 @@
+[
+  [
+    "spill_Y_before_X",
+    "    state.motion.acceleration.x = gravity.x;\n    gravity.y = final_y.rounded();",
+    "    gravity.y = final_y.rounded();\n    state.motion.acceleration.x = gravity.x;"
+  ],
+  [
+    "store_X_before_final_Y_arithmetic",
+    "    const auto final_y = fidelity::ExactFloat(fp, gravity.y) + extra_y;\n    state.motion.acceleration.x = gravity.x;",
+    "    state.motion.acceleration.x = gravity.x;\n    const auto final_y = fidelity::ExactFloat(fp, gravity.y) + extra_y;"
+  ]
+]

@@ -6,7 +6,7 @@
   "end_exclusive": "0x44750c",
   "sha256": "7788b57a50b387cb63fe8d35eaac9a3fd6a4a38808bd58e40ad746e2bf2c6dac"
  },
- "native_library_sha256": "2c3a21ab80dbc31d261efc0833cb7668ad269d5a24eb228b4833effdcb2116f4",
+ "native_library_sha256": "6ea38dc79eaf43aeb93e37ca24b81141dad546a58abe923be69406c860aabc7f",
  "fixture_sha256": "691b1f017689fbdfdbfea7393e4418bd7c098c91e2b001e6d149822c26dcba5f",
  "fixture_record": "80 little-endian uint32 words",
  "fixture_count": 2496,
@@ -15,10 +15,10 @@
   "src/player_acceleration_alternate.hpp": "bc15d77e8fddd57f88c03c21fe259a7f52063dc2ad7452c1db88b9c53f0ad36a",
   "src/player_acceleration_alternate_math.cpp": "6be8ab051a2fda7eddc50e6f558108f7f08691ccbead0d02db5979b2b6f8f500",
   "src/player_acceleration_alternate_math.hpp": "59bf729a6229e303570a2fef2d9aae8b0d3740de23a13c64618f42f23c684d1f",
-  "src/player_acceleration_friction.cpp": "bb104a7f294d0654fb8a15e3c93fd5b0b38db5caefa60caaa47e84cfad3af529",
-  "src/player_acceleration_friction.hpp": "9af0e4c75cff3815e231a260f24b8db6264a0b6db9f91d6c6077b0f87b8032c8",
-  "src/player_acceleration_ground.cpp": "95ac6dd7dfd1507279d58986a1e5aa9bf67dd29d5b9e39f473473004ed6568d0",
-  "src/player_acceleration_ground.hpp": "5ae622e467675d30addebb5d36395b7799b0e8b786ea51cc1fe00a161da93ad2",
+  "src/player_acceleration_friction.cpp": "c2b099a18a612ab4d8c11670827bea33b9066d262e79d65844f493a2ac7e2ad1",
+  "src/player_acceleration_friction.hpp": "fc27f80b502de6f0bcdf4ac8dd840eb9a176f6d04d6a8a57dea609cc8e11c705",
+  "src/player_acceleration_ground.cpp": "2dfdea7e29e79b2d6b95897b38165246821e7ccf5ff98e7a73f2acad1eaf4f75",
+  "src/player_acceleration_ground.hpp": "2b8bc9a2115dffbb8c442c24dfd82ec31d807dae04478e40b5b02d9a47e0e9f6",
   "src/player_rotation.cpp": "87e7f62da064257f47af017e596c3c61078a1c65ca05828d8d6c73903c835cbe",
   "src/player_rotation.hpp": "8bdf5a75ca53c7857db86c6f15778095257d3e58428de71b7f34e4b0b2cbeb32",
   "src/player_projection.cpp": "ac94968965936abb23389abf02f367c49e4053aa113712fba41535348ce3e203",
@@ -26,7 +26,7 @@
   "src/player_coordinates.cpp": "9727e8a6fb00ed7f1db362be426821405767b895e08f698b8ad231f2de578090",
   "src/player_coordinates.hpp": "322331b4ca9a51e4a58a8133d9c1a323e7a223d84cbe44f83f029540a65057c0",
   "src/ninja_matrix.cpp": "7045d50d871e7853935b7301ac90473bb06536f14c7b010ce7f75562d5b09bc4",
-  "src/ninja_matrix.hpp": "97ddcdb7b4f08e6a46d181b8f9d034a26762e62248cbb0643b34d55c61696a90",
+  "src/ninja_matrix.hpp": "685bb53adb905d5de2fa2a6accbb90586013797ae8dc7397e08dae19345d9c20",
   "src/player_heading.cpp": "c109cb4370cc006d0ddb7186cf9a8ab1396aa64fb61fed45b7a1b8b46dc6e491",
   "src/player_heading.hpp": "42df76e4801ce3d90ec1ce2a06bff00a328f05a0e13979d2f8d0d7487e8aaf1c",
   "src/player_input.cpp": "784b664b79fc29456911d253760fa59a763ff38f5b74aeafab65a4ec5aed962e",
@@ -41,10 +41,22 @@
   "src/crt_integer.hpp": "f88d5d9b73239055150a35d0fe6363f773c7e62f5b2c1ce62eff5eaabe8333a6",
   "src/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8",
   "src/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
-  "src/x87_transcendental.cpp": "00fa509396903586b83807f7aa53b7df8675d7d8efdef031f7264283e3c0529a",
-  "src/x87_transcendental.hpp": "443284c5e02df41950b33d2b58465f198af3679e8ceeac87c5513169beb99993",
+  "src/x87_transcendental.cpp": "5241f89cff162deec68fa95d19f26e908974be9c78a1bdc18044f2c893abd5ea",
+  "src/x87_transcendental.hpp": "d165b4c0aec64391b80f3fa68e2427ba2f2840fbc45562b87dac2145cad33a72",
   "src/ninja_math.cpp": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
-  "src/ninja_math.hpp": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530"
+  "src/ninja_math.hpp": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
+  "src/player/ground_acceleration.hpp": "35bde538be42156764534857ec3458a443932ab20a6f77832f87a649119f288f",
+  "src/player/ground_acceleration.cpp": "c79890f79d3d092eb5bf45c73223467bc6bc20105199830f32a5fba44b4cecf0",
+  "src/player/ground_acceleration_internal.hpp": "c9938bc44091750a8faeca2c6915b298295ff1e5dc2774718bef183657824595",
+  "src/player/ground_acceleration_native.cpp": "f1729d583f165daf41bf49296fb839b3b9d0badbc73c5b13977060c0670eece9",
+  "src/player/ground_arithmetic.hpp": "703a0c6c05cc2d1a6ee2e694ea48b7cc094b3ff8ca6f3dfc786791870272e7c9",
+  "src/player/ground_friction.cpp": "63ef1ec097115555b2e7bcb33f212d3678efe69a3cb326b8db2edfd5af01b58d",
+  "src/guest/ground_acceleration_reference.hpp": "2da1d2ac5be19c17e4b71cdee209e07956b3ebebb0fdf03716044382e0e5471a",
+  "src/guest/player_acceleration_ground.cpp": "2dfdea7e29e79b2d6b95897b38165246821e7ccf5ff98e7a73f2acad1eaf4f75",
+  "src/guest/player_acceleration_friction.cpp": "c2b099a18a612ab4d8c11670827bea33b9066d262e79d65844f493a2ac7e2ad1",
+  "src/player/player_acceleration_ground.hpp": "2b8bc9a2115dffbb8c442c24dfd82ec31d807dae04478e40b5b02d9a47e0e9f6",
+  "src/player/player_acceleration_friction.hpp": "fc27f80b502de6f0bcdf4ac8dd840eb9a176f6d04d6a8a57dea609cc8e11c705",
+  "src/cpu/fidelity_float.hpp": "1dd70ee0f8f12813b27abdf1b15936069f42d90bd67249c3a864b9497a721940"
  },
  "native_contracts": {
   "src/player_acceleration.hpp": "3ca9bd3f7dfccec590eec2926fa0d0b0eea194e1fa1f014b0dcf250411273257",
@@ -55,7 +67,7 @@
  "native_compiler": "Clang 21.0.0 (clang-2100.3.34.2); target arm64; source-specific software x87",
  "declared_build_profile": "arm64 C++17 O2 ffp-contract=off fno-fast-math native integer SoftFloat/Bochs",
  "native_probe_sha256": "7abc258ffdb325f057963209dcb7561efb6daadeb64eca76b4eec2daa0573a41",
- "verifier_sha256": "4edab9d25905208cf753d79e3ece6f91a11ddd8ce524cddc779beb9dd8c72785",
+ "verifier_sha256": "0d6be36372b0e584a17d8d1b3fe1e4a1a25b35a5aca64aea7abfcf40a53f22a0",
  "source_artifacts": {
   "quarter_table_sha256": "3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed",
   "unit_matrix_sha256": "5998e9d1dd9bf48af6af87a1ef8c7783b818ac8329637ada08cc5fb329042376",
@@ -831,10 +843,13 @@
   "Raw/nonfinite encodings are retained without caller-value normalization",
   "No physical controls, loaded mods or complete game/collision path"
  ],
+ "source_ranges": {
+  "0x447010-0x44750c": "7788b57a50b387cb63fe8d35eaac9a3fd6a4a38808bd58e40ad746e2bf2c6dac"
+ },
  "values_calls_cw_match": true,
  "tracked_summary": {
-  "full_sha256": "507076586aa293af9437ab1e1379916e68d08cc7722e639fea7ff1b55afdfc34",
-  "full_bytes": 86791925,
+  "full_sha256": "887eef2a23bcef6b1d9edb2b1b24324cc207d6d4879ee14dbe4d3bd8cf43bc2d",
+  "full_bytes": 86793404,
   "lists_cut_to": 10,
   "cut_lists": {
    "mismatches": 29952,

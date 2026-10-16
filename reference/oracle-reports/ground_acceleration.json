@@ -6,7 +6,7 @@
   "size": 2933,
   "sha256": "1282dd5c69b6bc2bf4978a834517a23a18c1d3a0d0a8b27553ccef35d73756f1"
  },
- "native_library_sha256": "62a4bee507abddd4d1b6ef67726b1bf73669cb8dbbbee1d6ea694b48c4ba7b2d",
+ "native_library_sha256": "1300b839b68964e96fbbfa17b8fdd0aec5b794d6347eec9ce3a876d967c59e0d",
  "fixture_sha256": "e0631b7959531377f4072279fcb719259d39013eaa39f77144d96bf43fb7e2d3",
  "controlled_callees": [
   "0x4491e0",
@@ -26,8 +26,8 @@
   "0x43ec90"
  ],
  "native_sources": {
-  "src/player_acceleration_ground.hpp": "5ae622e467675d30addebb5d36395b7799b0e8b786ea51cc1fe00a161da93ad2",
-  "src/player_acceleration_ground.cpp": "95ac6dd7dfd1507279d58986a1e5aa9bf67dd29d5b9e39f473473004ed6568d0",
+  "src/player_acceleration_ground.hpp": "2b8bc9a2115dffbb8c442c24dfd82ec31d807dae04478e40b5b02d9a47e0e9f6",
+  "src/player_acceleration_ground.cpp": "2dfdea7e29e79b2d6b95897b38165246821e7ccf5ff98e7a73f2acad1eaf4f75",
   "src/player_coordinates.hpp": "322331b4ca9a51e4a58a8133d9c1a323e7a223d84cbe44f83f029540a65057c0",
   "src/player_coordinates.cpp": "9727e8a6fb00ed7f1db362be426821405767b895e08f698b8ad231f2de578090",
   "src/ninja_matrix.hpp": "685bb53adb905d5de2fa2a6accbb90586013797ae8dc7397e08dae19345d9c20",
@@ -45,11 +45,23 @@
   "src/x87_transcendental.hpp": "d165b4c0aec64391b80f3fa68e2427ba2f2840fbc45562b87dac2145cad33a72",
   "src/x87_transcendental.cpp": "5241f89cff162deec68fa95d19f26e908974be9c78a1bdc18044f2c893abd5ea",
   "src/crt_integer.hpp": "f88d5d9b73239055150a35d0fe6363f773c7e62f5b2c1ce62eff5eaabe8333a6",
-  "src/crt_integer.cpp": "18d16777cc02344275575955f7773043ea9c6b48cf0197b725e838d1c5294a92"
+  "src/crt_integer.cpp": "18d16777cc02344275575955f7773043ea9c6b48cf0197b725e838d1c5294a92",
+  "src/player/ground_acceleration.hpp": "35bde538be42156764534857ec3458a443932ab20a6f77832f87a649119f288f",
+  "src/player/ground_acceleration.cpp": "c79890f79d3d092eb5bf45c73223467bc6bc20105199830f32a5fba44b4cecf0",
+  "src/player/ground_acceleration_internal.hpp": "c9938bc44091750a8faeca2c6915b298295ff1e5dc2774718bef183657824595",
+  "src/player/ground_acceleration_native.cpp": "f1729d583f165daf41bf49296fb839b3b9d0badbc73c5b13977060c0670eece9",
+  "src/player/ground_arithmetic.hpp": "703a0c6c05cc2d1a6ee2e694ea48b7cc094b3ff8ca6f3dfc786791870272e7c9",
+  "src/player/ground_friction.cpp": "63ef1ec097115555b2e7bcb33f212d3678efe69a3cb326b8db2edfd5af01b58d",
+  "src/guest/ground_acceleration_reference.hpp": "2da1d2ac5be19c17e4b71cdee209e07956b3ebebb0fdf03716044382e0e5471a",
+  "src/guest/player_acceleration_ground.cpp": "2dfdea7e29e79b2d6b95897b38165246821e7ccf5ff98e7a73f2acad1eaf4f75",
+  "src/guest/player_acceleration_friction.cpp": "c2b099a18a612ab4d8c11670827bea33b9066d262e79d65844f493a2ac7e2ad1",
+  "src/player/player_acceleration_ground.hpp": "2b8bc9a2115dffbb8c442c24dfd82ec31d807dae04478e40b5b02d9a47e0e9f6",
+  "src/player/player_acceleration_friction.hpp": "fc27f80b502de6f0bcdf4ac8dd840eb9a176f6d04d6a8a57dea609cc8e11c705",
+  "src/cpu/fidelity_float.hpp": "1dd70ee0f8f12813b27abdf1b15936069f42d90bd67249c3a864b9497a721940"
  },
  "native_task_owner_sha256": "ca3b911db75e90e2ddabc2a4bef3e4fae6578c0405f864001c2e68162e07650d",
  "native_probe_sha256": "a6c26229db849e83942403311f28f1972a46f231178f2226fd2eb8cd30d37820",
- "verifier_sha256": "81ae4f31dd26b208d67f8ee7ad7254c58c44c66527b810884933b2eaa3238840",
+ "verifier_sha256": "bff46d8c42c4bda92edba1d679f9383ddca53336fa74d9791f91f407a4922418",
  "native_compiler": "Clang 21.0.0 (clang-2100.3.34.2); target arm64; native integer x87 arithmetic",
  "declared_build_profile": "arm64 C++17 O2 ff-contract=off fno-fast-math native SoftFloat/Bochs",
  "quarter_table_sha256": "3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed",
@@ -752,10 +764,13 @@
   "No Windows startup, mods, physical input, collision response or full gameplay",
   "Unicorn x87 flags are weaker than hardware; no native approximation is introduced to match them"
  ],
+ "source_ranges": {
+  "0x44c270-0x44cde5": "1282dd5c69b6bc2bf4978a834517a23a18c1d3a0d0a8b27553ccef35d73756f1"
+ },
  "local_values_and_call_selections_match": true,
  "tracked_summary": {
-  "full_sha256": "1ff282f47d82cf76451a31f03d6a8b423cee8fbc5262a1af446f156a38b216da",
-  "full_bytes": 68892521,
+  "full_sha256": "255b091b0a1046180f8ce58b89589821f70ea168e4eab7d55632d691a712f3ac",
+  "full_bytes": 68894000,
   "lists_cut_to": 10,
   "cut_lists": {
    "mismatches": 29952,

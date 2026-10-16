@@ -345,12 +345,14 @@ comes first, because every later port should copy a readable model, not the lega
    `game_mode` pass (24,000 cases/252 paths), three preserved mutants caught, 2,048 holdout
    cases exact, native-only test and independent STYLE review. Missing native callees remain
    explicit STUB stops; this does not complete native boot/title. STYLE §11 now quotes real code.
-   (b) **Ground acceleration 44c270 `PGetAcceleration`** → literal constants and the
-   arithmetic level that the census and the `ground_acceleration` oracle allow ("partial" stays
-   partial, values must still match). Foundation: `cpu/fidelity_float.hpp` now supplies the
-   exact retained-value operators required by STYLE §7 tier 3, tested across 12 PC/RC profiles,
-   memory/loaded NaNs, explicit spills and unmasked store failures. The ground/friction source
-   migration and its independent post-migration oracle/mutants remain open.
+   (b) **Ground acceleration 44c270 `PGetAcceleration`** → **done at gate 149**: native
+   plain-field core and shared friction use `fidelity::ExactFloat` with named literal defaults;
+   reference adapters hold numeric boundaries, constant decoding and fixture unknowns.
+   Ground/default alternate/explicit attribute20000 each retain 29,952 exact value/call/CW
+   comparisons and their existing flag-only partial verdicts. The 3,840-case holdout, six
+   mutations, callback/scratch/store-prefix tests, native-only closure and independent STYLE
+   review pass. All 24 literal encodings match PE bytes. Native mutation/yaw composition and
+   live stage precision remain open; no plain-float or full-native-movement claim.
    (c) **Frame control** → fixture optionals and
    `CounterWords` move into the adapter, and the game tier holds plain values. Then replace the
    sketches in STYLE §11 with the real code.

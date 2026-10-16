@@ -1,0 +1,15 @@
+{
+  "mutants": [
+    {
+      "name": "spill_Y_before_X",
+      "caught": true,
+      "failure": "failed Y spill retains X store and precedes Y/Z destination stores"
+    },
+    {
+      "name": "store_X_before_final_Y_arithmetic",
+      "caught": true,
+      "failure": "failed final Y arithmetic precedes X store"
+    }
+  ],
+  "restored_exit": 0
+}

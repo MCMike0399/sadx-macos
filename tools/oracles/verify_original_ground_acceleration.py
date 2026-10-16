@@ -103,6 +103,8 @@ def main():
         quarter_table_sha256=sha(table),unit_matrix_sha256=sha(unit),parameter_row_sha256=sha(image.read(0x9154e8,132)),
         source_constants={hex(a):image.read(a,4).hex() for a in CONSTANTS},
         control_words=[],mismatches=[],limits=['No original behavior of the five rotation/reset callees is established by controlled boundaries','Fast yaw executes actual original/native heading and both matrix transforms','Matrix/input/physics/gravity/collision state is explicit seeded state, not observed running-game state','No Windows startup, mods, physical input, collision response or full gameplay','Unicorn x87 flags are weaker than hardware; no native approximation is introduced to match them'])
+    report['native_sources'].update({name:sha((root/name).read_bytes()) for name in ('src/player/ground_acceleration.hpp', 'src/player/ground_acceleration.cpp', 'src/player/ground_acceleration_internal.hpp', 'src/player/ground_acceleration_native.cpp', 'src/player/ground_arithmetic.hpp', 'src/player/ground_friction.cpp', 'src/guest/ground_acceleration_reference.hpp', 'src/guest/player_acceleration_ground.cpp', 'src/guest/player_acceleration_friction.cpp', 'src/player/player_acceleration_ground.hpp', 'src/player/player_acceleration_friction.hpp', 'src/cpu/fidelity_float.hpp')})
+    report['source_ranges']={'0x44c270-0x44cde5':sha(image.read(0x44c270,0xb75))}
     for cw in (pc|rc|0x7f for pc in (0,0x200,0x300) for rc in (0,0x400,0x800,0xc00)):
         original=GroundOriginal(image,cw,unit);item=dict(cw=hex(cw),cases=len(fixtures),value_mismatches=0,call_mismatches=0,flag_mismatches=0,cw_mismatches=0,actual_fast_yaw_cases=0,cases_without_controlled_callees=0)
         for index,w in enumerate(fixtures):

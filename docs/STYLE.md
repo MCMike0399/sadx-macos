@@ -309,7 +309,8 @@ if (less(compare(state.alignment, tuning.cross_slope_alignment)) &&
 The adapter validates gravity, contact and input scratch only when reached; no fixture
 optionals enter the core. Borrowed references preserve callback changes. The common friction
 implementation computes final Y, stores X, spills Y, then stores Y and Z; unmasked-exception
-tests distinguish arithmetic failure from store failure. Native-only testing completes a
+tests distinguish arithmetic failure from store failure in the native immediate-failure
+model; deferred hardware x87 fault delivery remains unverified. Native-only testing completes a
 controlled inactive step; missing native mutation/yaw composition remains explicit.
 
 **Frame control** (`src/engine/game_frame_control.hpp`, the ADR-0006 pilot). The names and

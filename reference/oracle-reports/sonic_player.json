@@ -1,6 +1,6 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "cf08c0141f193a69bfb6cf7f2abb003d0971a89c8752c40a45232cc2f00c2770",
+ "native_library_sha256": "1839c744069d6110d191d609da9252aba5e3ac9228c2823c0c0ce73bdf8afa9a",
  "profile": "actual Sonic control prefix plus explicitly seeded post-transform43eecc suffix",
  "cases": 28800,
  "by_entry": [
@@ -264,18 +264,30 @@
   "src/player/sonic_player.hpp": "418bf5996866cc2d11dd27c504f0697a72fc298ae90e3db00dfb0c1d7c33b666",
   "src/player/sonic_player.cpp": "9ea4fa5e53deac6158ebbad76bbc2f9358515d85414b78f0b7fabeb579e9e073",
   "tests/probes/native_sonic_player_probe.cpp": "ea27199dca1c3f9ea726e9e1be159ed14b4ec35ab594d975fe80d2f9cd25ca60",
-  "tools/oracles/verify_original_sonic_player.py": "f170107503ce1ba1f2b4834e012cca5a05565ed915f25accf87bfed50f9754a2"
+  "tools/oracles/verify_original_sonic_player.py": "d5b661520a090a7a4f4e4e6db71221c0e6bee1a24c9c8a01363f67af22f44c0a",
+  "src/player/ground_acceleration.hpp": "35bde538be42156764534857ec3458a443932ab20a6f77832f87a649119f288f",
+  "src/player/ground_acceleration.cpp": "c79890f79d3d092eb5bf45c73223467bc6bc20105199830f32a5fba44b4cecf0",
+  "src/player/ground_acceleration_internal.hpp": "c9938bc44091750a8faeca2c6915b298295ff1e5dc2774718bef183657824595",
+  "src/player/ground_acceleration_native.cpp": "f1729d583f165daf41bf49296fb839b3b9d0badbc73c5b13977060c0670eece9",
+  "src/player/ground_arithmetic.hpp": "703a0c6c05cc2d1a6ee2e694ea48b7cc094b3ff8ca6f3dfc786791870272e7c9",
+  "src/player/ground_friction.cpp": "63ef1ec097115555b2e7bcb33f212d3678efe69a3cb326b8db2edfd5af01b58d",
+  "src/guest/ground_acceleration_reference.hpp": "2da1d2ac5be19c17e4b71cdee209e07956b3ebebb0fdf03716044382e0e5471a",
+  "src/guest/player_acceleration_ground.cpp": "2dfdea7e29e79b2d6b95897b38165246821e7ccf5ff98e7a73f2acad1eaf4f75",
+  "src/guest/player_acceleration_friction.cpp": "c2b099a18a612ab4d8c11670827bea33b9066d262e79d65844f493a2ac7e2ad1",
+  "src/player/player_acceleration_ground.hpp": "2b8bc9a2115dffbb8c442c24dfd82ec31d807dae04478e40b5b02d9a47e0e9f6",
+  "src/player/player_acceleration_friction.hpp": "fc27f80b502de6f0bcdf4ac8dd840eb9a176f6d04d6a8a57dea609cc8e11c705",
+  "src/cpu/fidelity_float.hpp": "1dd70ee0f8f12813b27abdf1b15936069f42d90bd67249c3a864b9497a721940"
  },
  "ground_prefix_cases": 4032,
  "ground_prefix_stored_mismatches": 0,
  "ground_prefix_status_mismatches": 1632,
  "case_sha256": "2acd398b460a3c6691a178fcb7b0862219ac1e11818909ad41cb8fb14e6f34fe",
- "seconds": 12.14915758400457,
+ "seconds": 12.397659625043161,
  "stored_state_matches": true,
  "passed": false,
  "tracked_summary": {
-  "full_sha256": "43bf3f8fe9525fb85734630a1b7716f212809795efcbfeb759bb33ea12a50859",
-  "full_bytes": 23751,
+  "full_sha256": "d87810294d280e641642676df5c76fcb2269d65e67c7e0d1ca07f9388ed6f715",
+  "full_bytes": 25113,
   "lists_cut_to": 10,
   "cut_lists": {
    "examples": 30,

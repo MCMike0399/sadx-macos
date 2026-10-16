@@ -1,0 +1,17 @@
+[
+  [
+    "slope_weight_sign",
+    "gravity.y = (-exact(p.weight)).rounded();",
+    "gravity.y = exact(p.weight).rounded();"
+  ],
+  [
+    "spill_retained_lateral",
+    "return retained_z;",
+    "return exact(retained_z.rounded());"
+  ],
+  [
+    "wrong_regular_yaw_owner",
+    "auto yaw = GroundYaw::Regular;",
+    "auto yaw = GroundYaw::Fast;"
+  ]
+]
