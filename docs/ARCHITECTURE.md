@@ -211,6 +211,12 @@ reference configuration can still inject a complete PE table or leave it unknown
 coefficient source/probe builds without a PE or core archive. Existing Ninja interpolation
 and software x87 arithmetic are unchanged; this removes one initialization dependency.
 
+`engine/ninja_fog_initial_state` supplies load-time fog scalars and the three lookup
+buffers as plain values. Native boot selects them explicitly; reference decoding retains
+per-word availability. Frame flags/saved ranges, GPU capability bytes and device identities
+remain separate. The positive initial caches and zero tables precede device generation;
+this migration leaves the existing fog algorithms unchanged.
+
 The hybrid guest executes `sonic.exe` with `process_overrides` supplying native owners.
 Each HLE import logs its call for trace diffs. These reference paths do not establish
 native boot/title or executable independence. The separate native frame-control and game-mode pilots

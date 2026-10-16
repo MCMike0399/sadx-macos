@@ -1,0 +1,186 @@
+{
+  "step": "GOAL6.7 fog initial state",
+  "base_commit": "c185a32f2d9de36ab9a5df7cb8d6ec7bb2d3e76e",
+  "source_sha256": {
+    "src/engine/ninja_fog_initial_state.hpp": "a475f1114f191c22a683db3ff3b56198780c639c5f51a51129c9fb32878a8587",
+    "src/engine/ninja_fog_initial_state.cpp": "629e2271c1cd4ffbfce91522c43868e36b8f61c46c51c43c9488e14f62624794",
+    "src/guest/native_game_reference.hpp": "d9560635efd4d3803cb24d39048dcefe22ec3038075edbee73367158fdcb126d",
+    "src/guest/native_game_reference.cpp": "f5c2100e4c382bf42c843faf5be7f45de17856eeef71ac3b9dbfd06d044ec68e",
+    "src/guest/native_game_session.cpp": "a9a7539f48dcf9b98d9d9744d9462098088f6cdf2108c147fc4a31227e024101",
+    "reference/symbols/overrides.tsv": "bf13a1451eaa6c9606e8563625c25102784b779e7c5b4f60801d771fcf83de73"
+  },
+  "source_image_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "source_ranges_sha256": {
+    "3d12798-3d1279c": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d128a4-3d128a8": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0849c-3d084a0": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "90a098-90a09c": "5bd7a8186a831b11273227a383429269feeb7f624315c92f1bcc4c011879334a",
+    "90a09c-90a0a0": "5bd7a8186a831b11273227a383429269feeb7f624315c92f1bcc4c011879334a",
+    "3d12898-3d1289c": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d12950-3d12954": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0fce0-3d0fce4": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d0fac0-3d0fac4": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d12894-3d12898": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3d128a0-3d128a4": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3abdc60-3abdc64": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3abdc64-3abdc68": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3abdc68-3abdc6c": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+    "3b10f78-3b11178": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+    "3d12a00-3d12c00": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+    "3d12c00-3d12e00": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560"
+  },
+  "words_compared": 398,
+  "mismatches": 0,
+  "expected_words_sha256": "18f209f9e207ceb669324d1e44923753ed7d4b3ca76122b2b1b43791ce66a55e",
+  "dossiers": [
+    {
+      "label": "fog-initial-device",
+      "evidence_id": "ev_ea4d3942d2aa81aa3847a38ae8856b47ef4ad19fe88b07eccf93302063f59a0d"
+    },
+    {
+      "label": "fog-initial-disabled-update",
+      "evidence_id": "ev_e459d7896a39a0395f5e7bfde4acfeb3ceda6cf939d2f81d5708e02ace5d6436"
+    },
+    {
+      "label": "fog-initial-game-disable",
+      "evidence_id": "ev_5a38b3f257d677fd6e05f6b74eaf30b12c82013fa8eed104c04ba6c713243a56"
+    },
+    {
+      "label": "fog-initial-game-enable",
+      "evidence_id": "ev_3ac5b542f4075d71c40f4784a8ed8348d589ce70296a483998992f565e60d777"
+    },
+    {
+      "label": "fog-initial-level-update",
+      "evidence_id": "ev_4a7cf69dcebe4de74c74cda564ddb01735ecc81dc1fe21eb5f63cc955b3b0740"
+    },
+    {
+      "label": "fog-initial-reciprocal",
+      "evidence_id": "ev_263269abc7cfcc2ea45f779d376c1fe5d28580af4e956ef70f0fec5e285ef4b2"
+    },
+    {
+      "label": "fog-initial-xrefs-3abdc60",
+      "evidence_id": "ev_ce75f47c213d0521217e592e538a903404198e4f2ce74ffa7d8a29a4e29c0f12"
+    },
+    {
+      "label": "fog-initial-xrefs-3b10f78",
+      "evidence_id": "ev_a9030c580cf17b828d1734dd3750c29189fc97d0345ae071a4f4c81911262cf7"
+    },
+    {
+      "label": "fog-initial-xrefs-3d0849c",
+      "evidence_id": "ev_59200f28bea1cdf625540f2d1b1db2ccaf7d91334213ab9acc81af38dcb3c04c"
+    },
+    {
+      "label": "fog-initial-xrefs-3d0fac0",
+      "evidence_id": "ev_9298078a0da898bb196c749b016004244dcbd053085801d3ba3045a0735b369e"
+    },
+    {
+      "label": "fog-initial-xrefs-3d0fce0",
+      "evidence_id": "ev_a3743f665b300eba165df8d1a57db2f4dc7af1494baacfc5b5a7e69b3eb37942"
+    },
+    {
+      "label": "fog-initial-xrefs-3d12798",
+      "evidence_id": "ev_e1c88541f23119ebd4d20c68390d478dbdaeecf7b3f489b605e3cf3aa85a661b"
+    },
+    {
+      "label": "fog-initial-xrefs-3d12894",
+      "evidence_id": "ev_8c10134439105576c15cfe9d9671f2dae1ccf4569c947bea06dc41579abd5f23"
+    },
+    {
+      "label": "fog-initial-xrefs-3d12898",
+      "evidence_id": "ev_6af77c4ae0394698c7e646fdee98aa76352ac6f0d692a73933a01f87895df477"
+    },
+    {
+      "label": "fog-initial-xrefs-3d128a0",
+      "evidence_id": "ev_fd89a946660ab37db851eee394ea467b625240da6a7b95cce91a47129b30fc9f"
+    },
+    {
+      "label": "fog-initial-xrefs-3d128a4",
+      "evidence_id": "ev_63aa4d0bebbb2ba3f55f7ca47d2b94bfbb7ac7ae9e72243fbedd06dcf300100c"
+    },
+    {
+      "label": "fog-initial-xrefs-3d12950",
+      "evidence_id": "ev_b7bf743fb0ad8215af52cf6f8de8d98fee16293d7e1fd7c27ad500dd6f36bc68"
+    },
+    {
+      "label": "fog-initial-xrefs-3d12a00",
+      "evidence_id": "ev_ced37f56c710a7caa5f7512be26c87a7880a454bf42150ff5893a04a06db36c2"
+    },
+    {
+      "label": "fog-initial-xrefs-3d12c00",
+      "evidence_id": "ev_5cdd67af04063fc402d03267751e99e3112c9b10243117a7a84ce035a2320e4e"
+    },
+    {
+      "label": "fog-initial-xrefs-90a098",
+      "evidence_id": "ev_0d2afece10f2e47cfcae7c64224d75621d64f0af21f171f70e6fdec6f8290e95"
+    },
+    {
+      "label": "fog-initial-xrefs-90a09c",
+      "evidence_id": "ev_932291dae4acef22f3ec41733affa410c099265a7a7a697f34075ca9f2bc975f"
+    }
+  ],
+  "density_classification": "uint32 bit-pattern word. Four observed references are immediate stores; floating-point consumer semantics not established.",
+  "arrays_classification": "Game passes inline buffer address; device and reciprocal functions directly index 128 entries. SDK float* pointer-cell declarations corrected to float[128].",
+  "numeric_mutants_caught": 3,
+  "adapter_mutants_caught": 4,
+  "constructor": {
+    "configurations": [
+      "original",
+      "poisoned",
+      "varied",
+      "partial",
+      "no_image"
+    ],
+    "facts_per_configuration": 398,
+    "includes_availability": true,
+    "identical": true,
+    "artifacts": [
+      {
+        "variant": "before",
+        "bytes": 15132,
+        "sha256": "9bf430d618f7affd4f365b29c1d6f33be6905e985d5401c755366de412401c58",
+        "row_sha256": [
+          "d8ae261849b12d818c22fd9d85dda47284941d489972cdb88eede3cb94b5c758",
+          "885a7bf4455786b16fae85b1d69534c72ec6a0d15824708ab4bdfa139e8e6473",
+          "13ba8e495c539c91d858e83d6633538d6eb10740ac8771316f77c979f1b9efa8",
+          "c47fc6a022b7f1c763fdad08835aad404db4e9184bfa227c7ebe2395adbe39c7",
+          "d6abf940490fbd416877fa9f8a2aa1dec92ea19c97ae2e7540d6bff8e22f9e68"
+        ]
+      },
+      {
+        "variant": "after",
+        "bytes": 15132,
+        "sha256": "9bf430d618f7affd4f365b29c1d6f33be6905e985d5401c755366de412401c58",
+        "row_sha256": [
+          "d8ae261849b12d818c22fd9d85dda47284941d489972cdb88eede3cb94b5c758",
+          "885a7bf4455786b16fae85b1d69534c72ec6a0d15824708ab4bdfa139e8e6473",
+          "13ba8e495c539c91d858e83d6633538d6eb10740ac8771316f77c979f1b9efa8",
+          "c47fc6a022b7f1c763fdad08835aad404db4e9184bfa227c7ebe2395adbe39c7",
+          "d6abf940490fbd416877fa9f8a2aa1dec92ea19c97ae2e7540d6bff8e22f9e68"
+        ]
+      }
+    ]
+  },
+  "composition": {
+    "survey_frames": 3,
+    "poisoned_fog_values_match": true,
+    "before_after_cli_report_identical": true,
+    "report_bytes": 5427,
+    "report_sha256": "52254476457a377d2ac6d3f5eb7cd323f2154d6e22bf2e79e296833c8b070b7c"
+  },
+  "consumers": {
+    "fog_cases": 4700,
+    "fog_value_mismatches": 0,
+    "fog_fp_flag_differences": 2410,
+    "fog_declared_uncompared_boundaries": 19,
+    "game_loop_cases": 688,
+    "game_reset_cases": 300,
+    "prior_numerical_reports_unchanged": true
+  },
+  "independent_review": "fog_initial_review: final source, classification, isolation, seven mutations, consumer and constructor evidence approved; ready for full gate",
+  "limits": [
+    "398 load-time words only, not post-device-generated tables or recovered complete fog system. Existing fog algorithms unchanged.",
+    "Frame enable/profile/saved ranges and GPU capability bytes/resources remain with existing owners; these defaults do not invent capability facts.",
+    "Three-frame native survey has no sprite draws; not Windows, physical GPU or complete game proof.",
+    "No complete native session independence; resource/content, remaining input and other initialization families remain open."
+  ]
+}

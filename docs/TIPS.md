@@ -180,3 +180,16 @@ in `AGENTS.md` and `STYLE.md`; this page holds facts and patterns.
 * A missing byte in the final knot keeps the old reference initializer's entire table
   unknown. Earlier readable knots must not become a partially published/default-filled table.
   Source/range evidence and six caught mutations are in `sine-initial-154-*`.
+
+
+## Fog initialization boundaries
+
+* Cached fog start/end begin at positive65535.0F in file data. The disabled runtime
+  sentinel is negative65535.0F. Preloading that sentinel would skip the first source update.
+* All three128-entry fog buffers begin at zero before device setup generates W/reciprocal
+  data. The SDK's float* declarations describe inline buffers here: direct buffer arguments
+  and indexed writes establish float[128], not resource-pointer cells.
+* The fallback-density word has observed immediate bit-pattern stores but no established
+  floating-point consumer. Retain its word representation rather than guessing a new type.
+  Frame flags/profile and saved ranges have other owners; GPU capabilities are not initial
+  fog defaults. Evidence and seven caught mutations: `fog-initial-155-*`.

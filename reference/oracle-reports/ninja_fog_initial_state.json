@@ -1,0 +1,42 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "a445712b8746dcf281964400460c2cbb0fb588616d6717afdb60551f7ba7389b",
+ "source_files": {
+  "src/engine/ninja_fog_initial_state.hpp": "a475f1114f191c22a683db3ff3b56198780c639c5f51a51129c9fb32878a8587",
+  "src/engine/ninja_fog_initial_state.cpp": "629e2271c1cd4ffbfce91522c43868e36b8f61c46c51c43c9488e14f62624794",
+  "tests/probes/ninja_fog_initial_state_probe.hpp": "647f92a7f7f91f9db37aa8725512758d61ecacfa5b2f1464ffaaebc5393ea2e0",
+  "tests/probes/native_ninja_fog_initial_state_probe.cpp": "7bd3007987f7fede38bcdd1042f2b4e8f8128460613d863ee1479ccdebf1f345",
+  "tools/oracles/verify_original_ninja_fog_initial_state.py": "51eabe0d49598dfcd288c6587cede3a37f558d64ed7a5c05c0d4ae380a51bfd2"
+ },
+ "original_ranges_sha256": {
+  "3d12798-3d1279c": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3d128a4-3d128a8": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3d0849c-3d084a0": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "90a098-90a09c": "5bd7a8186a831b11273227a383429269feeb7f624315c92f1bcc4c011879334a",
+  "90a09c-90a0a0": "5bd7a8186a831b11273227a383429269feeb7f624315c92f1bcc4c011879334a",
+  "3d12898-3d1289c": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3d12950-3d12954": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3d0fce0-3d0fce4": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3d0fac0-3d0fac4": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3d12894-3d12898": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3d128a0-3d128a4": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3abdc60-3abdc64": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3abdc64-3abdc68": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3abdc68-3abdc6c": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119",
+  "3b10f78-3b11178": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+  "3d12a00-3d12c00": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560",
+  "3d12c00-3d12e00": "076a27c79e5ace2a3d47f9dd2e83e4ff6ea8872b3c2218f66c92b89b55f36560"
+ },
+ "cases": 1,
+ "words_compared": 398,
+ "expected_words_sha256": "18f209f9e207ceb669324d1e44923753ed7d4b3ca76122b2b1b43791ce66a55e",
+ "mismatches": [],
+ "returned_values_and_boundaries_match": true,
+ "limits": "Verify fog load-time values against pinned file bytes and PE virtual zero fill.\n\nOnly the listed fog facts are covered. Resources, capabilities and remaining\ninitialization families are outside this oracle; no complete native-session claim.\n",
+ "tracked_summary": {
+  "full_sha256": "4d8b61bb2bb762e717a91b5b7ad5aea927326611bec14aef09e6d0c6afb6bfd0",
+  "full_bytes": 2860,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

@@ -375,8 +375,10 @@ comes first, because every later port should copy a readable model, not the lega
    bytes preserved separately, seven caught behavioral mutations and seven old/new constructor
    configurations. Maintained Ninja sine coefficients add 1,025 exact binary32 words,
    isolated source builds, six caught mutations and preserved all-or-unknown reference
-   decoding. Native boot configuration selects these families explicitly; injectable
-   reference decoding remains available. These families do not complete the runtime refactor:
+   decoding. Fog initialization adds 398 exact load-time words, isolated source builds and
+   seven caught mutations while preserving frame ownership and unknown GPU capabilities.
+   Native boot configuration selects these families explicitly; injectable reference
+   decoding remains available. These families do not complete the runtime refactor:
    resource/content references, remaining input state and other load-image facts still need
    native initial values or importer seams.
    Existing unported stops remain. See the latest recorded gate and HANDOFF for verification.

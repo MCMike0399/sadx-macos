@@ -1,0 +1,17 @@
+[
+  [
+    "wrong initial cache sign",
+    "return {};",
+    "auto values = NinjaFogInitialState{}; values.cached_start = -65535.0F; return values;"
+  ],
+  [
+    "premature post-device W table",
+    "return {};",
+    "auto values = NinjaFogInitialState{}; values.device.w_depth[0] = 1.0F; return values;"
+  ],
+  [
+    "nonzero last reciprocal",
+    "return {};",
+    "auto values = NinjaFogInitialState{}; values.device.reciprocal[127] = 1.0F; return values;"
+  ]
+]

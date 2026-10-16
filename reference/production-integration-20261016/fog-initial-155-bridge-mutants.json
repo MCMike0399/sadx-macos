@@ -1,0 +1,60 @@
+{
+  "passed": true,
+  "source_sha256": "f5c2100e4c382bf42c843faf5be7f45de17856eeef71ac3b9dbfd06d044ec68e",
+  "baseline": {
+    "name": "baseline",
+    "exit_status": 0,
+    "killed": false,
+    "output": "Game runtime: survey ran startup + 3 frames (5 unported owners); native execution stops at 40cad0>40c090>415000>422680.",
+    "replacement": [
+      null,
+      null
+    ]
+  },
+  "mutants": [
+    {
+      "name": "ignore_native_fog",
+      "exit_status": 1,
+      "killed": true,
+      "output": "every fog initializer fact retains its exact bits",
+      "replacement": [
+        "if (config_.fog_defaults) {",
+        "if (false && config_.fog_defaults) {"
+      ]
+    },
+    {
+      "name": "cross_wire_cache",
+      "exit_status": 1,
+      "killed": true,
+      "output": "every fog initializer fact retains its exact bits",
+      "replacement": [
+        "consumer_.cached_fog_end_at_90a09c = values.cached_end;",
+        "consumer_.cached_fog_end_at_90a09c = values.cached_start;"
+      ]
+    },
+    {
+      "name": "overwrite_frame_flag",
+      "exit_status": 1,
+      "killed": true,
+      "output": "all initialized control facts retain their exact values",
+      "replacement": [
+        "consumer_.fog_enabled_at_3d12798 = values.enabled;",
+        "consumer_.fog_enabled_at_3d12798 = values.enabled; queue_runtime_.flag_at_3abdcfe = 0;"
+      ]
+    },
+    {
+      "name": "invent_missing_image_word",
+      "exit_status": 1,
+      "killed": true,
+      "output": "incomplete reciprocal word remains unknown",
+      "replacement": [
+        "    const auto word = [exe](std::uint32_t address) -> std::optional<std::uint32_t> {\n        return exe ? exe->u32(address) : std::nullopt;\n    };",
+        "    const auto word = [exe](std::uint32_t address) -> std::optional<std::uint32_t> {\n        return exe ? std::optional<std::uint32_t>{exe->u32(address).value_or(0)} : std::nullopt;\n    };"
+      ]
+    }
+  ],
+  "limits": [
+    "Temporary adapter copies linked before unchanged archives; no worktree mutation.",
+    "Three-frame survey only, no sprite draws or complete native input claim."
+  ]
+}

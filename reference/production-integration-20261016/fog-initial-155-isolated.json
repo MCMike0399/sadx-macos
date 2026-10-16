@@ -1,0 +1,86 @@
+{
+  "passed": true,
+  "source_sha256": {
+    "src/engine/ninja_fog_initial_state.hpp": "a475f1114f191c22a683db3ff3b56198780c639c5f51a51129c9fb32878a8587",
+    "src/engine/ninja_fog_initial_state.cpp": "629e2271c1cd4ffbfce91522c43868e36b8f61c46c51c43c9488e14f62624794",
+    "tests/probes/ninja_fog_initial_state_probe.hpp": "647f92a7f7f91f9db37aa8725512758d61ecacfa5b2f1464ffaaebc5393ea2e0",
+    "tests/probes/native_ninja_fog_initial_state_probe.cpp": "7bd3007987f7fede38bcdd1042f2b4e8f8128460613d863ee1479ccdebf1f345"
+  },
+  "compiler_dependencies": [
+    "src/engine/ninja_fog_initial_state.cpp",
+    "src/engine/ninja_fog_initial_state.hpp",
+    "tests/probes/native_ninja_fog_initial_state_probe.cpp",
+    "tests/probes/ninja_fog_initial_state_probe.hpp"
+  ],
+  "toolchain_metadata_sha256": {
+    "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb"
+  },
+  "linked_libraries": [
+    "/usr/lib/libc++.1.dylib",
+    "/usr/lib/libSystem.B.dylib"
+  ],
+  "reference_runtime_symbols_found": false,
+  "commands": [
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-0.d",
+      "-c",
+      "src/engine/ninja_fog_initial_state.cpp",
+      "-o",
+      "unit-0.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-1.d",
+      "-c",
+      "tests/probes/native_ninja_fog_initial_state_probe.cpp",
+      "-o",
+      "unit-1.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-dynamiclib",
+      "-Wl,-install_name,@rpath/ninja-fog-initial-state.dylib",
+      "unit-0.o",
+      "unit-1.o",
+      "-o",
+      "ninja-fog-initial-state.dylib"
+    ]
+  ],
+  "binary_sha256": "e3b617b6cf00ec69790f25748ad2cbb65c572b478a5a5340c3800436415d1836",
+  "serialized": {
+    "words": 398,
+    "sha256": "18f209f9e207ceb669324d1e44923753ed7d4b3ca76122b2b1b43791ce66a55e"
+  },
+  "copied_original_binary_inputs": [],
+  "copied_fixtures": [],
+  "inherited_environment": false,
+  "core_archive_linked": false,
+  "limits": [
+    "Load-time fog values only; fog algorithms, GPU capabilities and resource owners remain outside this source closure.",
+    "Isolated source/dependency closure, not an operating-system access sandbox.",
+    "Only the verified fingerprint is read before isolation; no original binary or table data is copied."
+  ]
+}

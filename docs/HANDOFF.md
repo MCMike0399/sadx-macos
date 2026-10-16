@@ -4064,3 +4064,30 @@ The product still needs native boot/title, resources and gameplay recovery.
   uncompared boundaries; loop688/reset300 have zero value mismatches. Algorithms and
   prior judges unchanged. Independent final STYLE review approves the bounded source and
   evidence. Full gate follows in a separate judge commit; GOAL §6.7 remains open.
+
+
+### 2026-10-16 — fog initialization verification complete (gate 155)
+
+* Completes source `e2e1bd3` with a separate judge commit. All 398 load-time words exact;
+  isolated native closure, five old/new constructor snapshots, poisoned-image composition,
+  varied/missing facts and all seven mutants pass. Independent final STYLE review approves
+  source, classification and evidence. Existing fog algorithms and consumer judges unchanged.
+* Full `make -j10 gate` **rc 0**, **137 native programs / 50 Python tests**. Unchanged
+  7,228-frame two-boot determinism and first-600 override digests; 71,115 comparisons/mutants,
+  900-frame controller parity and 63 FPS title cadence pass. Host throughput 80.2 FPS.
+  Twelve layers, zero exceptions; 159,630 owned bytes / 159,680 combined identities;
+  456 protected judge inputs. Readability 239 files with unchanged debt: hex11,628 /
+  identifiers1,796 / calls75 / gotos2 / long lines1,489 / multiple statements2,184.
+* Original fog, game-loop and reset numerical reports are unchanged. Fog keeps its
+  2,410 FP-flag differences across 4,700 cases (partial), plus 19 explicit uncompared
+  boundaries. Loop688/reset300 have zero value mismatches. Aggregate verdict command rc2:
+  tracked53pass/46partial/9fail/1missing. Other standalone oracles, separate `make m1` and
+  four unregistered tests skipped: metal-sprite, metal-sprite-composition, metal-texture,
+  player-task. Source/probe/app programs compile; no binaries or game assets committed.
+* Evidence: `production-integration-20261016/fog-initial-155-*`, including source/range
+  identities, six Ghidra dossiers and 15 xrefs, field map, constructor fingerprints/driver,
+  CLI reports, retained mutations, isolated closure and recorded gate. Native fog defaults
+  preserve separate frame owners and do not invent GPU capability facts. Resource/content,
+  remaining input and other initialization families remain open. No complete native fog,
+  session or game independence claim. Goal active; hook settings and two user Ghidra drafts
+  untouched. Commits local; no push.
