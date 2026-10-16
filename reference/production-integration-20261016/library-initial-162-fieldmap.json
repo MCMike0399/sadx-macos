@@ -1,0 +1,168 @@
+{
+  "fields": [
+    {
+      "name": "buffer_counts[0]",
+      "address": "0x389d864",
+      "bytes": 4
+    },
+    {
+      "name": "buffer_counts[1]",
+      "address": "0x389d868",
+      "bytes": 4
+    },
+    {
+      "name": "buffer_counts[2]",
+      "address": "0x389d86c",
+      "bytes": 4
+    },
+    {
+      "name": "buffer_counts[3]",
+      "address": "0x389d870",
+      "bytes": 4
+    },
+    {
+      "name": "buffer_counts[4]",
+      "address": "0x389d874",
+      "bytes": 4
+    },
+    {
+      "name": "buffer_counts[5]",
+      "address": "0x389d878",
+      "bytes": 4
+    },
+    {
+      "name": "buffer_counts[6]",
+      "address": "0x389d87c",
+      "bytes": 4
+    },
+    {
+      "name": "buffer_counts[7]",
+      "address": "0x389d880",
+      "bytes": 4
+    },
+    {
+      "name": "buffer_counts[8]",
+      "address": "0x389d884",
+      "bytes": 4
+    },
+    {
+      "name": "windowed",
+      "address": "0x38a5dc4",
+      "bytes": 4
+    },
+    {
+      "name": "back_buffer_width",
+      "address": "0x38a5dc8",
+      "bytes": 4
+    },
+    {
+      "name": "back_buffer_height",
+      "address": "0x38a5dcc",
+      "bytes": 4
+    },
+    {
+      "name": "scale",
+      "address": "0x3d0f800",
+      "bytes": 4
+    },
+    {
+      "name": "aspect",
+      "address": "0x3d0f9c0",
+      "bytes": 4
+    }
+  ],
+  "configuration": [
+    {
+      "name": "screen_flags",
+      "address": "0x892954",
+      "bytes": 4
+    },
+    {
+      "name": "setup_argument",
+      "address": "0x892958",
+      "bytes": 4
+    },
+    {
+      "name": "buffer_counts[0]",
+      "address": "0x892968",
+      "bytes": 4
+    },
+    {
+      "name": "buffer_counts[1]",
+      "address": "0x89296c",
+      "bytes": 4
+    },
+    {
+      "name": "buffer_counts[2]",
+      "address": "0x892970",
+      "bytes": 4
+    },
+    {
+      "name": "buffer_counts[3]",
+      "address": "0x892974",
+      "bytes": 4
+    },
+    {
+      "name": "buffer_counts[4]",
+      "address": "0x892978",
+      "bytes": 4
+    },
+    {
+      "name": "buffer_counts[5]",
+      "address": "0x89297c",
+      "bytes": 4
+    },
+    {
+      "name": "buffer_counts[6]",
+      "address": "0x892980",
+      "bytes": 4
+    },
+    {
+      "name": "buffer_counts[7]",
+      "address": "0x892984",
+      "bytes": 4
+    },
+    {
+      "name": "buffer_counts[8]",
+      "address": "0x892988",
+      "bytes": 4
+    },
+    {
+      "name": "high_precision_depth_request",
+      "address": "0x89298c",
+      "bytes": 4
+    },
+    {
+      "name": "back_buffer_width",
+      "address": "0x892990",
+      "bytes": 4
+    },
+    {
+      "name": "back_buffer_height",
+      "address": "0x892994",
+      "bytes": 4
+    }
+  ],
+  "atoms": 28,
+  "source_bytes": 112,
+  "excluded": {
+    "text_path_pointers": [
+      "892940",
+      "892944",
+      "892948",
+      "89294c"
+    ],
+    "shared_cursor": "892950",
+    "shared_frame_interval": "89295c",
+    "unused_config_words": [
+      "892960",
+      "892964"
+    ]
+  },
+  "decisions": [
+    "PolyBuff_Count is nine inline int32 counts, not a pointer; stores781070 and EDX use78e720/794540.",
+    "Cold lastcount12000 differs from configured32000.",
+    "Integer high_precision_depth_request invokes UseHighPrecisionZBuffer only for1.",
+    "setup_argument broader meaning unrecovered; preserve5."
+  ]
+}

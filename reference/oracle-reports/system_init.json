@@ -1,11 +1,11 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "f97493554eb1296551a276e487f047fff202328b654bab983be1c194c86747ea",
+ "native_library_sha256": "13961b7f4958e6c47213761527ab04b43ebda0b4760bfdad515034b81b0f81a4",
  "source_files": {
   "src/engine/ninja_system_init.hpp": "cbcd24a93f6d97834852234c73b73cb628fc28915c049e041c0ed31dc4c50151",
   "src/engine/ninja_system_init.cpp": "1de4f34f46c6ea58e457ef303ba33f04687a35373d4f3cd0478eda97f716d797",
   "src/engine/ninja_texture_pool.cpp": "e42829b715d9a0f0ec5dbe4fe8749a79e3e6895e5619fd8ae350925b3bbdb6eb",
-  "src/engine/ninja_memory.cpp": "3cbad521c7424c91edeb3d24c1588aed5565e6b906f625612a5c7c1f6d58f600",
+  "src/engine/ninja_memory.cpp": "668dca17f50a61813a1b05fb098f6288c048a0b30e0668b07f34008ce1b325b0",
   "src/loader/guest_heap.cpp": "4597e674c4c5fa69c4fef0451c8a2182eb25224e3c81e26306145593cb83d7ed",
   "tests/probes/native_system_init_probe.cpp": "31a4522cc846421e9c1c1981c3216150d5f196ac4f43909b497a045513471f47",
   "tools/oracles/verify_original_system_init.py": "885a16f7834999fca35a4fe6b11bd25f722b0ad5da184c7a17c9119a5856aad5"
@@ -57,7 +57,7 @@
  "state_traces_match": true,
  "limits": "401830 (system init) against its original instructions, as the pinned\nInput mod patches it (NOPs over 77f03e and 77f205 written in), with the real\n77f240, 780ea0, 780870, 7808c0, 780850/78e720, 7803b0, 77f610, 780140, 77ff60,\n402f10/780c00, 78c5a0, 77f150 (and its 785240 tail), 77efd0, 77ffc0 and 40bb20.\n\nFixtures: HeapCreate/HeapAlloc/HeapFree (njMalloc; GuestHeap's identity scheme),\nthe CRT malloc 645002 (a second GuestHeap scheme: handle 0x520000, blocks from\n0x60000000), QueryPerformanceCounter (the case's count), DirectInput8Create\n(IAT 7db014) and the interface/device COM objects (CreateDevice, SetDataFormat,\nSetCooperativeLevel, Acquire). 780180, 77f0a0, 793c70 and 794540 are\nrecording fixtures (any nested call can stop the source). Compared: completion,\nevery global the native owners hold (see FIELDS), the 0x22000-byte texture pool,\nthe 3ce6f48/3ce6e78/3ce6d80 record blocks, 3d0fae0, the callback list, the\nnested trace (callee, site, ECX, EDX, arguments) and the heap call traces. Not\ncovered: 77f0a0 under the Input mod (its own oracle and unit test), the\nnested owners, and the reference's actual heap addresses.\n",
  "tracked_summary": {
-  "full_sha256": "1d27f1f1b91fee4ef1f9be6704c49196b1162d3460987a6f7d9b6972bccf3bd7",
+  "full_sha256": "d7b7d2897554c26752eee78ff44a799911a1dc345341ec8598b0df25bc96e67a",
   "full_bytes": 4207,
   "lists_cut_to": 10,
   "cut_lists": {}

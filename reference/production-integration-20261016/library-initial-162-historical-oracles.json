@@ -1,0 +1,37 @@
+{
+ "passed": true,
+ "reports": [
+  {
+   "slug": "library_init",
+   "full_raw_sha256": "57a73b5d9f9cf98a34f49d0467dc189c5a6b0b889e93d6708d1960d276f73a4f",
+   "historical_full_sha256": "57a73b5d9f9cf98a34f49d0467dc189c5a6b0b889e93d6708d1960d276f73a4f",
+   "metadata_restored": [
+    "native_library_sha256"
+   ],
+   "cases": 2400,
+   "passed": true
+  },
+  {
+   "slug": "system_init",
+   "full_raw_sha256": "d7b7d2897554c26752eee78ff44a799911a1dc345341ec8598b0df25bc96e67a",
+   "historical_full_sha256": "1d27f1f1b91fee4ef1f9be6704c49196b1162d3460987a6f7d9b6972bccf3bd7",
+   "metadata_restored": [
+    "native_library_sha256",
+    "source_files"
+   ],
+   "cases": 600,
+   "passed": true
+  },
+  {
+   "slug": "screen_init",
+   "full_raw_sha256": "9cab77f98c2b0478cd0796cc155eadf590d9abbb97c7c704df153dc6b9556971",
+   "historical_full_sha256": "9cab77f98c2b0478cd0796cc155eadf590d9abbb97c7c704df153dc6b9556971",
+   "metadata_restored": [
+    "native_library_sha256"
+   ],
+   "cases": 3000,
+   "passed": true
+  }
+ ],
+ "limits": "Full raw JSON reconstructed with only native library identity and already-stale provenance hashes restored (current sources independently equal HEAD2078536); no test values/flags removed or changed."
+}

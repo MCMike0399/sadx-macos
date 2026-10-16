@@ -114,7 +114,7 @@ REFERENCE_UNIT_TARGETS := build/game-view-test \
  build/game-mode-test build/game-mode-leaves-test build/game-runtime-test \
  build/player-acceleration-ground-test build/player-acceleration-alternate-test \
  build/player-direction-reset-test build/sonic-player-test build/sonic-actions-test \
- build/player-scene-position-binding-test build/input-constants-boot-test build/startup-initial-boot-test
+ build/player-scene-position-binding-test build/input-constants-boot-test build/startup-initial-boot-test build/library-initial-boot-test
 $(REFERENCE_UNIT_TARGETS): build/%-test: tests/unit/$$(subst -,_,$$*).cpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< $(EXTRA_REFERENCE_SOURCES) build/libsadx-guest.a build/libsadx-core.a -o $@
 build/game-runtime-test: EXTRA_REFERENCE_SOURCES := tests/probes/native_session_control_defaults_probe.cpp tests/probes/native_input_initial_state_probe.cpp tests/probes/native_ninja_sine_table_probe.cpp tests/probes/native_ninja_fog_initial_state_probe.cpp tests/probes/native_ninja_screen_initial_state_probe.cpp tests/probes/native_sound_initial_state_probe.cpp tests/probes/native_game_view_initial_state_probe.cpp tests/probes/native_ninja_queue_initial_state_probe.cpp
@@ -123,6 +123,8 @@ build/input-constants-boot-test: EXTRA_REFERENCE_SOURCES := tests/probes/native_
 build/input-constants-boot-test: tests/probes/native_input_mod_constants_probe.cpp tests/probes/input_mod_constants_probe.hpp
 build/startup-initial-boot-test: EXTRA_REFERENCE_SOURCES := tests/probes/native_startup_initial_state_probe.cpp
 build/startup-initial-boot-test: tests/probes/native_startup_initial_state_probe.cpp tests/probes/startup_initial_state_probe.hpp
+build/library-initial-boot-test: EXTRA_REFERENCE_SOURCES := tests/probes/native_library_initial_state_probe.cpp
+build/library-initial-boot-test: tests/probes/native_library_initial_state_probe.cpp tests/probes/library_initial_state_probe.hpp
 # Native frame-control composition deliberately excludes the reference/core archive.
 build/native-frame-control-test: tests/unit/native_frame_control.cpp src/engine/game_frame_control.cpp src/engine/game_frame_control.hpp src/engine/game_frame_control_internal.hpp src/engine/game_frame_control_native.cpp src/engine/speedrun.cpp src/engine/speedrun.hpp
 	$(CXX) $(CXXFLAGS) -Isrc tests/unit/native_frame_control.cpp src/engine/game_frame_control.cpp src/engine/game_frame_control_native.cpp src/engine/speedrun.cpp -o $@
@@ -237,7 +239,7 @@ sound-initial-fixtures: build/native-sound-initial-state-probe.dylib
 screen-initial-fixtures: build/native-ninja-screen-initial-state-probe.dylib
 	$(REFERENCE_PYTHON) tools/oracles/verify_original_ninja_screen_initial_state.py "$(GAME_EXE)" build/native-ninja-screen-initial-state-probe.dylib --output build/oracles/ninja_screen_initial_state.json --poison-output build/screen-initial-poisoned.exe --varied-output build/screen-initial-varied.exe --partial-output build/screen-initial-partial.exe
 
-run-unit-tests: startup-initial-fixtures assets $(UNIT_TARGETS) $(UNIT_MM_TARGETS) $(OVERRIDE_CORPORA) build/engine-code-tables-poisoned.exe session-control-fixtures input-initial-fixtures sine-initial-fixtures fog-initial-fixtures screen-initial-fixtures sound-initial-fixtures view-initial-fixtures queue-initial-fixtures input-constants-fixtures
+run-unit-tests: library-initial-fixtures startup-initial-fixtures assets $(UNIT_TARGETS) $(UNIT_MM_TARGETS) $(OVERRIDE_CORPORA) build/engine-code-tables-poisoned.exe session-control-fixtures input-initial-fixtures sine-initial-fixtures fog-initial-fixtures screen-initial-fixtures sound-initial-fixtures view-initial-fixtures queue-initial-fixtures input-constants-fixtures
 unit-tests: run-unit-tests
 test: unit-tests
 	$(PY) -m unittest discover -s tests/python -p 'test_*.py'
@@ -285,7 +287,7 @@ native-ninja-queue-initial-state:
 .PHONY: native-input-mod-constants
 native-input-mod-constants:
 	python3 tools/gate/check_input_mod_constants.py
-check: native-startup-initial-state native-input-mod-constants native-ninja-queue-initial-state native-game-view-initial-state native-sound-initial-state check-symbols native-frame-control native-engine-code-tables native-session-control-defaults native-input-initial-state native-ninja-sine-table native-ninja-fog-initial-state native-ninja-screen-initial-state
+check: native-library-initial-state native-startup-initial-state native-input-mod-constants native-ninja-queue-initial-state native-game-view-initial-state native-sound-initial-state check-symbols native-frame-control native-engine-code-tables native-session-control-defaults native-input-initial-state native-ninja-sine-table native-ninja-fog-initial-state native-ninja-screen-initial-state
 	python3 tools/gate/check_layers.py
 	python3 tools/gate/check_global_owners.py
 	python3 tools/gate/check_provenance.py
@@ -327,3 +329,11 @@ startup-initial-fixtures: build/native-startup-initial-state-probe.dylib
 	$(REFERENCE_PYTHON) tools/oracles/verify_original_startup_initial_state.py "$(GAME_EXE)" build/native-startup-initial-state-probe.dylib --output build/oracles/startup_initial_state.json --poison-output build/startup-initial-poisoned.exe --varied-output build/startup-initial-varied.exe --partial-output build/startup-initial-partial.exe
 native-startup-initial-state:
 	python3 tools/gate/check_startup_initial_state.py
+
+build/native-library-initial-state-probe.dylib: tests/probes/native_library_initial_state_probe.cpp tests/probes/library_initial_state_probe.hpp src/game/library_initial_state.cpp src/game/library_initial_state.hpp
+	$(CXX) $(CXXFLAGS) -dynamiclib -Isrc tests/probes/native_library_initial_state_probe.cpp src/game/library_initial_state.cpp -o $@
+.PHONY: library-initial-fixtures native-library-initial-state
+library-initial-fixtures: build/native-library-initial-state-probe.dylib
+	$(REFERENCE_PYTHON) tools/oracles/verify_original_library_initial_state.py "$(GAME_EXE)" build/native-library-initial-state-probe.dylib --output build/oracles/library_initial_state.json --poison-output build/library-initial-poisoned.exe --varied-output build/library-initial-varied.exe --partial-output build/library-initial-partial.exe
+native-library-initial-state:
+	python3 tools/gate/check_library_initial_state.py

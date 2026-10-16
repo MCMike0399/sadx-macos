@@ -1,0 +1,66 @@
+{
+  "passed": true,
+  "source_sha256": "90233614f48e17d7b366f62867351bfac0e8687cb96bc26f12816c7bea51e023",
+  "baseline": {
+    "name": "baseline",
+    "exit_status": 0,
+    "killed": false,
+    "mismatches": [],
+    "mutation": null
+  },
+  "mutants": [
+    {
+      "name": "premature_config_count",
+      "exit_status": 1,
+      "killed": true,
+      "mismatches": [
+        {
+          "word": 8,
+          "expected": 12000,
+          "actual": 32000
+        }
+      ],
+      "mutation": "values.buffer_counts[8] = 32000;"
+    },
+    {
+      "name": "lost_configuration_count",
+      "exit_status": 1,
+      "killed": true,
+      "mismatches": [
+        {
+          "word": 24,
+          "expected": 32000,
+          "actual": 12000
+        }
+      ],
+      "mutation": "values.configuration.buffer_counts[8] = 12000;"
+    },
+    {
+      "name": "premature_viewport_scale",
+      "exit_status": 1,
+      "killed": true,
+      "mismatches": [
+        {
+          "word": 12,
+          "expected": 0,
+          "actual": 1065353216
+        }
+      ],
+      "mutation": "values.scale = 1.0F;"
+    },
+    {
+      "name": "premature_high_precision",
+      "exit_status": 1,
+      "killed": true,
+      "mismatches": [
+        {
+          "word": 25,
+          "expected": 0,
+          "actual": 1
+        }
+      ],
+      "mutation": "values.configuration.high_precision_depth_request = 1;"
+    }
+  ],
+  "worktree_mutated": false
+}

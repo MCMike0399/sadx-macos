@@ -1,0 +1,62 @@
+{
+  "passed": true,
+  "source_sha256": "c635fcb89ef4a76e1ffc6853372a898ee38e53283cbc0495eab0a71aa72c6977",
+  "baseline": {
+    "name": "baseline",
+    "exit_status": 0,
+    "killed": false,
+    "output": "Library boot: canonical/poison/varied/partial, injection, absent image and resources passed.",
+    "replacement": [
+      null,
+      null
+    ]
+  },
+  "mutants": [
+    {
+      "name": "ignore_native_library",
+      "exit_status": 1,
+      "killed": true,
+      "output": "all native library fields preserve injected values and widths",
+      "replacement": [
+        "if (config_.library_defaults) {",
+        "if (false && config_.library_defaults) {"
+      ]
+    },
+    {
+      "name": "ignore_numeric_config",
+      "exit_status": 1,
+      "killed": true,
+      "output": "native configuration reaches every post-startup library field",
+      "replacement": [
+        "return library_configuration_[i];",
+        "return config_.executable ? config_.executable->u32(address) : std::nullopt;"
+      ]
+    },
+    {
+      "name": "invent_missing_count",
+      "exit_status": 1,
+      "killed": true,
+      "output": "fallback preserves independent field availability and original widths",
+      "replacement": [
+        "library_.words_at_389d864[i] = word(0x389d864 + 4 * i);",
+        "library_.words_at_389d864[i] = word(0x389d864 + 4 * i).value_or(0);"
+      ]
+    },
+    {
+      "name": "invent_text_resource",
+      "exit_status": 1,
+      "killed": true,
+      "output": "native library values preserve independent resource availability and identity",
+      "replacement": [
+        "return config_.executable ? config_.executable->u32(address) : std::nullopt;",
+        "return config_.library_defaults ? std::optional<std::uint32_t>{0} : (config_.executable ? config_.executable->u32(address) : std::nullopt);"
+      ]
+    }
+  ],
+  "limits": [
+    "Temporary adapter copies linked before unchanged archives; no worktree mutation.",
+    "Three-frame survey only, no sprite draws or complete native library claim."
+  ],
+  "test_source_sha256": "8c4b8afa229fa3d320d85672f48648d5d80fa4abf6b2f783e3b526b2f2ed7ee4",
+  "coverage_note": "Report-only survey initially missed numeric-configuration bypass; new post-run28-field observer and distinct positive caller counts close that gap. Prior assertions retained."
+}

@@ -4480,3 +4480,27 @@ The product still needs native boot/title, resources and gameplay recovery.
   checks pass. Full gate pending; verification inputs/artifacts will be committed
   separately. Source initialization is one step toward the active overall GOAL, not
   full native library/window/device/session recovery. No push or binaries/assets.
+
+## 2026-10-16 — library initialization gate162 verification
+
+* Source f20f9a1; final independent STYLE §12 review approved. Exact 28-value data
+  oracle and isolated four-file source closure pass. Eight targeted mutations caught;
+  final boot test/source identities match tested versions. Full historical library
+  2,400/system 600/screen 3,000 reports reproduce identified hashes after metadata-only
+  restoration. Constructors 2,265 facts/10,093 bytes and CLI 5,427 bytes identical.
+* Full `make -j10 gate` **rc 0**, **147 native programs /50 Python tests**. Both new
+  library consumer and boot tests run. Unchanged 7,228-frame two-boot replay/first-600
+  override digests; 71,115 override comparisons/mutants, 900-frame controller parity and
+  63 FPS title cadence pass. Host 77.1 FPS. Twelve layers/zero exceptions;
+  159,630 owned bytes/159,680 combined identities; 505 protected judge inputs.
+  Readability 253 files; unchanged hex11,628/IDs1,796/calls75/gotos2/long1,489/multi2,184.
+* Recorded library-initial-162-gate.json with real terminal status; STATUS regenerated.
+  Aggregate verdict **rc 2**, tracked60 pass/46 partial/9 fail/1 missing. Other standalone
+  oracles, separate `make m1` and four unregistered tests skipped: metal-sprite,
+  metal-sprite-composition, metal-texture, player-task. Partials remain partial.
+* Evidence library-initial-162-* retains four fresh dossiers/21 xrefs metadata, mapping,
+  isolated source proof, independent review, final mutants, old/new constructor/CLI and
+  complete-report comparison harnesses. Reader partial image never executed. Only numeric
+  initialization proved: resources, native window/device/session and overall GOAL remain
+  open. Existing behavior/judges unchanged; no binaries/assets committed. Hook settings
+  and user drafts untouched. No push.
