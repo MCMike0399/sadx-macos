@@ -199,6 +199,12 @@ reference runtime and is checked against every source encoding. Reset state, con
 the sine table and other initialization families still need migration; this is not a native
 session or asset importer.
 
+`input/input_initial_state` supplies plain load-time edge buffers and controller input
+values for the game and pinned Input mod. Native boot configuration selects them explicitly;
+reference callers can still inject image bytes and observe byte-granular missing facts.
+PDS_PERIPHERAL name, extension and info pointers remain separate reference resources;
+this migration does not recover controller discovery or remove the session's image dependency.
+
 The hybrid guest executes `sonic.exe` with `process_overrides` supplying native owners.
 Each HLE import logs its call for trace diffs. These reference paths do not establish
 native boot/title or executable independence. The separate native frame-control and game-mode pilots

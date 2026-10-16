@@ -3915,3 +3915,37 @@ The product still needs native boot/title, resources and gameplay recovery.
   isolated closure and recorded gate. No assets or binaries committed. GOAL §6.7 remains
   open for remaining initialization families; no complete native session/game claim.
   User requested pushing work through this step to main; two user Ghidra drafts untouched.
+
+### 2026-10-16 — native input initialization values (source step)
+
+* GOAL §6.7 third family: `input/input_initial_state` supplies 1,869 load-time data bytes:
+  1,029 edge-buffer bytes and 40 scalar bytes in each of 21 controller records (template,
+  four engine raw, eight Input-mod raw and eight DreamPads). Typed native fields preserve
+  signed sticks and the pre-poll zero not-held mask; polling later writes the complement.
+* All three PDS_PERIPHERAL resource-pointer words (name/extend/info) remain independently
+  PE-backed, 252 bytes total. Native data cannot fabricate their identity or availability.
+  Direct reference configs retain per-byte image injection, including partial words and
+  absent game or mod images. Native boot selects the new values explicitly. This does not
+  complete controller discovery, input behavior, session initialization or independence.
+* The original game and pinned Input DLL compare exactly on every selected byte, including
+  mapped virtual zero fill. Isolated source/header/probe closure has no PE/fixtures/archive.
+  Seven prior/current constructor configurations match all 14,847 availability/value facts;
+  prior initializer/session produces the identical 5,427-byte native CLI survey report.
+  Poisoned game+mod input data preserve the existing three-frame report/graphics; no sprites
+  are drawn. Varied values, pointer sentinels, partial words and no-image tests pass.
+* Three data and four behavioral adapter mutants caught; restored baseline passes. A store
+  to extension before the unconditional resource reload was equivalent and is explicitly
+  excluded from the caught count. The retained harness and report document it. Tests and
+  existing expectations were not weakened. Five consumer oracles rerun unchanged: controller
+  init300, logic170, startup400, support1,737edges/4,117ticks; Input mod pad1,044 cases with
+  zero value differences and its existing300MXCSR differences (partial).
+* Owned Ghidra: controller `ev_6aab80132c1327b4f11093b770af771716158b2d1dd33c5eb6ddebaecbf304df`,
+  edge clear `ev_75aa54730d0a836a656905b3fb2b53a977b6ae4d0ae7c8eac6533fc7733ff0d9`,
+  aggregation `ev_aa77e88812968e42f6a69b5a175bf1b02c18d4282e3329e3a0ccd611c061dc9a`.
+  Eight global xrefs and pinned cached Input-mod poll/connect evidence are indexed in
+  `input-initial-153-evidence.json`. Initial wrong argument-name requests are retained as
+  errors, not used as evidence; corrected requests all succeeded.
+* Six existing edge identifiers move their lexical allowance to the new reference adapter;
+  no owner or source-byte extent changes. Two new game-tier files have zero readability
+  debt. Independent initial STYLE review found no source blockers; final review and full
+  gate follow in the separate judge commit. GOAL §6.7 remains open.

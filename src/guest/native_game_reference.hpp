@@ -2,6 +2,7 @@
 #include "guest/frame_control_reference.hpp"
 #include "runtime/engine_code_tables.hpp"
 #include "runtime/session_control_defaults.hpp"
+#include "input/input_initial_state.hpp"
 #include "game/audio_stream.hpp"
 #include "loader/executable_image.hpp"
 #include "guest/game_mode_reference.hpp"
@@ -78,6 +79,8 @@ struct NativeGameConfig {
     std::optional<runtime::EngineCodeTables> engine_tables;
     // Explicit scalar load-time state; resource/callback facts remain separate.
     std::optional<runtime::SessionControlDefaults> control_defaults;
+    // Explicit input values; name/extension/info facts remain image-backed.
+    std::optional<input::InputInitialState> input_defaults;
     InputModPadConstants input_constants; // DLL .rdata bytes (caller-supplied)
     std::int32_t limiter_cadence=63;      // Speedrun FrameLimit "63FPS"
     SpeedrunLimiterClock clock;           // host counter owner (mac_clock in the app)
@@ -102,6 +105,9 @@ public:
     NativeGameReport run();
     // Reference-only scalar facts in the session-control probe order; unknowns stay absent.
     std::array<std::optional<std::uint32_t>, 51> control_facts() const;
+    // Reference-only snapshots before startup can overwrite the initialized data.
+    std::array<std::optional<std::uint8_t>, 1869> input_data_facts() const;
+    std::array<std::optional<std::uint8_t>, 252> input_resource_facts() const;
     // Live owners for a front end (keyboard/controller delivery each frame).
     InputModKeyboardPad keyboard_pad{};
     std::array<InputModGamepadState,8> gamepads{};
@@ -170,6 +176,8 @@ private:
     void initialize_engine_code_tables();
     // NOTSA: apply native scalar defaults or the original injected image facts.
     void initialize_control_defaults();
+    // NOTSA: decode input data or bind explicitly supplied native values.
+    void initialize_input_defaults();
     void initialize_source_facts();
     void report_screen_depth(); // the 78dbe0 assumptions, once
 };

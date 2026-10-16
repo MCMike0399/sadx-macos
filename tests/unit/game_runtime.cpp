@@ -1,6 +1,7 @@
 #include "guest/native_game_reference.hpp"
 #include "engine/d3d8_caps.hpp"
 #include "../probes/session_control_probe.hpp"
+#include "../probes/input_initial_state_probe.hpp"
 #include <algorithm>
 #include <fstream>
 #include <iostream>
@@ -32,6 +33,68 @@ void missing_control_facts() {
     config.control_defaults = sadx::test::varied_control_defaults();
     const sadx::NativeGame varied(config);
     same_control_facts(varied, *config.control_defaults);
+}
+void same_input_facts(const sadx::NativeGame &game, const sadx::input::InputInitialState &values) {
+    const auto actual = game.input_data_facts();
+    const auto expected = sadx::test::input_initial_bytes(values);
+    for (std::size_t i = 0; i < expected.size(); ++i)
+        require(actual[i] && *actual[i] == expected[i], "native input facts retain every data byte");
+}
+void same_input_resources(const sadx::NativeGame &game, const sadx::NativeGameConfig &config) {
+    const auto actual = game.input_resource_facts();
+    unsigned next = 0;
+    const auto record = [&](const sadx::ExecutableImage *image, std::uint32_t base) {
+        for (unsigned offset : {36, 40, 48})
+            for (unsigned i = 0; i < 4; ++i)
+                require(actual[next++] == (image ? image->byte(base + offset + i) : std::nullopt),
+                        "native input values preserve independent resource availability and bytes");
+    };
+    record(config.executable.get(), 0x3b0eaa8);
+    for (unsigned i = 0; i < 4; ++i)
+        record(config.executable.get(), 0x3b0e9c8 + 52 * i);
+    for (unsigned i = 0; i < 8; ++i)
+        record(config.input_mod_dll.get(), 0x1000e748 + 52 * i);
+    for (unsigned i = 0; i < 8; ++i)
+        record(config.input_mod_dll.get(), 0x1000e950 + 96 * i);
+    require(next == actual.size(), "resource observer covers every pointer word");
+}
+void reference_input_facts(const sadx::NativeGame &game, const sadx::NativeGameConfig &config) {
+    const auto actual = game.input_data_facts();
+    unsigned next = 0;
+    const auto region = [&](const sadx::ExecutableImage *image, std::uint32_t base, unsigned size) {
+        for (unsigned i = 0; i < size; ++i)
+            require(actual[next++] == (image ? image->byte(base + i) : std::nullopt),
+                    "reference input values retain byte-granular missing facts");
+    };
+    for (auto span : {std::pair{0x3b0e3e2U, 768U}, {0x3b0eaf0U, 256U}, {0x3b0e3baU, 1U},
+                      {0x3b0eae8U, 1U}, {0x3b0e3e0U, 2U}, {0x3b0e3b9U, 1U}})
+        region(config.executable.get(), span.first, span.second);
+    const auto record = [&](const sadx::ExecutableImage *image, std::uint32_t base) {
+        region(image, base, 36);
+        region(image, base + 44, 4);
+    };
+    record(config.executable.get(), 0x3b0eaa8);
+    for (unsigned i = 0; i < 4; ++i)
+        record(config.executable.get(), 0x3b0e9c8 + 52 * i);
+    for (unsigned i = 0; i < 8; ++i)
+        record(config.input_mod_dll.get(), 0x1000e748 + 52 * i);
+    for (unsigned i = 0; i < 8; ++i)
+        record(config.input_mod_dll.get(), 0x1000e950 + 96 * i);
+    require(next == actual.size(), "data observer covers every selected source byte");
+    same_input_resources(game, config);
+}
+void missing_input_facts() {
+    sadx::NativeGameConfig config{};
+    const sadx::NativeGame missing(config);
+    reference_input_facts(missing, config);
+    config.input_defaults = sadx::input::input_initial_state();
+    const sadx::NativeGame known(config);
+    same_input_facts(known, *config.input_defaults);
+    same_input_resources(known, config);
+    config.input_defaults = sadx::test::varied_input_initial_state();
+    const sadx::NativeGame varied(config);
+    same_input_facts(varied, *config.input_defaults);
+    same_input_resources(varied, config);
 }
 void same_composition(const sadx::NativeGameReport &expected, const sadx::D3D8StateOwner &graphics,
                       const sadx::NativeGameReport &actual, const sadx::D3D8StateOwner &native) {
@@ -78,8 +141,9 @@ void same_composition(const sadx::NativeGameReport &expected, const sadx::D3D8St
 }
 }
 int main(int argc,char** argv){try{
-    require(argc==3||argc==4||argc==7,"usage: game-runtime-test SONIC.EXE INPUT_MOD.DLL [ENGINE_POISON [CONTROL_POISON CONTROL_VARIED CONTROL_PARTIAL]]");
+    require(argc==3||argc==4||argc==7||argc==13,"usage: game-runtime-test SONIC.EXE INPUT_MOD.DLL [ENGINE_POISON [CONTROL_POISON CONTROL_VARIED CONTROL_PARTIAL]]");
     missing_control_facts();
+    missing_input_facts();
     const auto exe=load(argv[1]),dll=load(argv[2]);
     require(exe->u32(0x7dce58)==0x42720000u&&exe->byte(0x3abdc7c)==0&&!exe->byte(0x3d14000+0x2000),"load image: .rdata 60.5f at 7dce58, zero-fill .data, outside the image");
     sadx::NativeGameConfig config;config.executable=exe;config.input_mod_dll=dll;
@@ -90,10 +154,13 @@ int main(int argc,char** argv){try{
     config.policy=sadx::OwnerPolicy::survey_unported_as_noop;config.max_frames=3;
     sadx::NativeGame original(config);
     same_control_facts(original, sadx::runtime::session_control_defaults());
+    same_input_facts(original, sadx::input::input_initial_state());
+    reference_input_facts(original, config);
     const auto survey=original.run();
     require(survey.failure.empty()&&survey.startup_completed&&survey.frames_completed==3&&!survey.unported.empty(),"survey completes startup and three frames");
     config.engine_tables = sadx::runtime::engine_code_tables();
     config.control_defaults = sadx::runtime::session_control_defaults();
+    config.input_defaults = sadx::input::input_initial_state();
     now = 0;
     sadx::NativeGame native_tables(config);
     same_control_facts(native_tables, *config.control_defaults);
@@ -108,7 +175,7 @@ int main(int argc,char** argv){try{
         const auto poisoned_report = poisoned.run();
         same_composition(survey, original.d3d8(), poisoned_report, poisoned.d3d8());
     }
-    if (argc == 7) {
+    if (argc >= 7) {
         config.executable = load(argv[4]);
         now = 0;
         sadx::NativeGame poisoned_controls(config);
@@ -133,6 +200,45 @@ int main(int argc,char** argv){try{
         }
 
     }
+    if (argc == 13) {
+        config.control_defaults = sadx::runtime::session_control_defaults();
+        config.executable = load(argv[7]);
+        config.input_mod_dll = load(argv[8]);
+        now = 0;
+        sadx::NativeGame poisoned_input(config);
+        same_input_facts(poisoned_input, *config.input_defaults);
+        same_input_resources(poisoned_input, config);
+        const auto report = poisoned_input.run();
+        same_composition(survey, original.d3d8(), report, poisoned_input.d3d8());
+        config.executable = load(argv[9]);
+        config.input_mod_dll = load(argv[10]);
+        config.input_defaults.reset();
+        const sadx::NativeGame varied_image(config);
+        same_input_facts(varied_image, sadx::test::varied_input_initial_state());
+        reference_input_facts(varied_image, config);
+        config.input_defaults = sadx::input::input_initial_state();
+        const sadx::NativeGame native_over_varied(config);
+        same_input_facts(native_over_varied, *config.input_defaults);
+        same_input_resources(native_over_varied, config);
+        require(native_over_varied.input_resource_facts() == varied_image.input_resource_facts(),
+                "explicit native data must not overwrite injected resources");
+        config.executable = load(argv[11]);
+        config.input_mod_dll = load(argv[12]);
+        config.input_defaults.reset();
+        const sadx::NativeGame partial(config);
+        reference_input_facts(partial, config);
+        const auto facts = partial.input_data_facts();
+        require(facts[1029] && facts[1030] && !facts[1031],
+                "partial template preserves two known bytes and the missing third byte");
+        require(facts[1229] && facts[1230] && !facts[1231],
+                "partial mod record preserves two known bytes and the missing third byte");
+        config.input_defaults = sadx::test::varied_input_initial_state();
+        const sadx::NativeGame partial_native(config);
+        same_input_facts(partial_native, *config.input_defaults);
+        same_input_resources(partial_native, config);
+    }
+    config.input_defaults.reset();
+    config.input_mod_dll = load(argv[2]);
     config.control_defaults.reset();
     config.executable = exe;
     config.engine_tables.reset();

@@ -17,6 +17,7 @@ NativeGame::NativeGame(NativeGameConfig config):config_(std::move(config)),speed
 void NativeGame::initialize_source_facts(){
     initialize_engine_code_tables();
     initialize_control_defaults();
+    initialize_input_defaults();
     const auto* exe=config_.executable.get();
     const auto u8=[&](std::uint32_t a)->std::optional<std::uint8_t>{if(!exe)return std::nullopt;return exe->byte(a);};
     const auto u32=[&](std::uint32_t a)->std::optional<std::uint32_t>{if(!exe)return std::nullopt;return exe->u32(a);};
@@ -24,11 +25,6 @@ void NativeGame::initialize_source_facts(){
     loop_.word_at_3abdcf8=u32(0x3abdcf8);
     loop_.special_flags_at_909eb4=&consumer_.special_flags_at_909eb4;loop_.fog_flag_at_3abdcfe=&queue_runtime_.flag_at_3abdcfe;
     // 3b0ef4c is a pointer; a null load-image value stays unknown (a source fault if reached).
-    for(unsigned r=0;r<256;++r)for(unsigned k=0;k<3;++k)edges_.raw_at_3b0e3e2[r][k]=u8(0x3b0e3e2+3*r+k);
-    for(unsigned i=0;i<256;++i)edges_.aggregate_at_3b0eaf0[i]=u8(0x3b0eaf0+i);
-    edges_.special_at_3b0e3ba=u8(0x3b0e3ba);edges_.aggregate_special_at_3b0eae8=u8(0x3b0eae8);edges_.bytes_at_3b0e3e0={u8(0x3b0e3e0),u8(0x3b0e3e1)};edges_.byte_at_3b0e3b9=u8(0x3b0e3b9);
-    for(unsigned w=0;w<52;++w)controller_template_.write_byte(w,u8(0x3b0eaa8+w));
-    for(unsigned r=0;r<4;++r)for(unsigned w=0;w<52;++w)controllers_raw_[r]->write_byte(w,u8(0x3b0e9c8+0x34*r+w));
     for(unsigned i=0;i<4;++i){controller_globals_.words_at_3b0e768[i]=u32(0x3b0e768+4*i);controller_globals_.words_at_3b0e344[i]=u32(0x3b0e344+4*i);
         controller_globals_.words_at_3b0e9b8[i]=u32(0x3b0e9b8+4*i);controller_globals_.bytes_at_3b0e9a4[i]=u8(0x3b0e9a4+i);}
     for(unsigned i=0;i<5;++i)controller_globals_.words_at_3b0e990[i]=u32(0x3b0e990+4*i);
@@ -37,12 +33,8 @@ void NativeGame::initialize_source_facts(){
     for(unsigned i=0;i<48;++i){menu_.block_at_900e88[i]=u8(0x900e88+i);menu_.block_at_9008b4[i]=u8(0x9008b4+i);}menu_.byte_at_3abdbc1=u8(0x3abdbc1);menu_.byte_at_903e58=u8(0x903e58);
     for(unsigned i=0;i<32;++i)exit_callbacks_.slots_at_3d084b0[i]=u32(0x3d084b0+4*i);
     word_at_3abdc80_=u32(0x3abdc80);word_at_3abdc78_=u32(0x3abdc78);word_at_3abdc90_=u32(0x3abdc90);byte_at_3b280a8_=u8(0x3b280a8);
-    // Input mod DLL data (its raw_input records and DreamPads) from its own image.
-    const auto* dll=config_.input_mod_dll.get();
-    for(unsigned i=0;i<8;++i){
-        for(unsigned w=0;w<52;++w){if(dll){input_raw_[i]->write_byte(w,dll->byte(0x1000e748+0x34*i+w));pads_[i].record.write_byte(w,dll->byte(0x1000e950+0x60*i+w));}}
-        pads_[i].settings=config_.pad_settings[i];
-    }
+    for (unsigned i = 0; i < pads_.size(); ++i)
+        pads_[i].settings = config_.pad_settings[i];
     input_frame_.game_mode_at_3abdc7c=&mode_at_3abdc7c_;input_frame_.demo_playing_at_3b2a2e4=&timing_.word_at_3b2a2e4;
     // Render queue facts.
     const auto f32=[&](std::uint32_t a)->std::optional<float>{const auto v=u32(a);if(!v)return std::nullopt;float x;std::memcpy(&x,&*v,4);return x;};

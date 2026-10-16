@@ -7,7 +7,7 @@
 namespace sadx {
 // One source52-byte PDS-style record. Raw ControllerPointers and engine pads
 // are separate owning collections; this record never maps physical key codes.
-// Pointer-valued source words (+24/+30) stay opaque bytes, not native pointers.
+// Pointer-valued source words (+0x24/+0x28/+0x30) stay opaque bytes, not native pointers.
 class GameLogicController {
 public:
     static constexpr std::size_t byte_count=52;
