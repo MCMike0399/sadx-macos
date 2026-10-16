@@ -12,9 +12,52 @@ namespace {
 void require(bool ok,const char* why){if(!ok)throw std::runtime_error(why);}
 std::shared_ptr<const sadx::ExecutableImage> load(const char* path){std::ifstream f(path,std::ios::binary);auto image=sadx::ExecutableImage::parse({std::istreambuf_iterator<char>(f),{}});
     require(image.has_value(),"PE image");return std::make_shared<const sadx::ExecutableImage>(std::move(*image));}
+void same_composition(const sadx::NativeGameReport &expected, const sadx::D3D8StateOwner &graphics,
+                      const sadx::NativeGameReport &actual, const sadx::D3D8StateOwner &native) {
+    require(expected.startup_completed == actual.startup_completed &&
+                expected.frames_completed == actual.frames_completed && expected.exited == actual.exited &&
+                expected.failure == actual.failure && expected.assumptions == actual.assumptions &&
+                expected.unported.size() == actual.unported.size(),
+            "native code tables preserve the full composition report");
+    for (std::size_t i = 0; i < expected.unported.size(); ++i) {
+        const auto &before = expected.unported[i];
+        const auto &after = actual.unported[i];
+        require(before.callee == after.callee && before.first_site == after.first_site &&
+                    before.path == after.path && before.calls == after.calls,
+                "native code tables preserve every unported boundary and call count");
+    }
+    require(graphics.render_states == native.render_states && graphics.stage0_states == native.stage0_states &&
+                graphics.transforms == native.transforms && graphics.render_calls == native.render_calls &&
+                graphics.stage_calls == native.stage_calls && graphics.texture_binds == native.texture_binds &&
+                graphics.vertex_formats == native.vertex_formats && graphics.viewport == native.viewport &&
+                graphics.begin_scenes == native.begin_scenes && graphics.end_scenes == native.end_scenes &&
+                graphics.presents == native.presents && graphics.clears == native.clears &&
+                graphics.last_clear_flags == native.last_clear_flags &&
+                graphics.draws.size() == native.draws.size() && graphics.polygons.size() == native.polygons.size(),
+            "native code tables preserve recorded graphics values and call counts");
+    require(bool(expected.stopped_at) == bool(actual.stopped_at), "same stopped-owner presence");
+    if (expected.stopped_at) {
+        const auto &before = *expected.stopped_at;
+        const auto &after = *actual.stopped_at;
+        require(before.callee == after.callee && before.first_site == after.first_site &&
+                    before.path == after.path && before.calls == after.calls,
+                "same stopped-owner report");
+    }
+    // This existing three-frame bootstrap does not issue sprite draws. Do not let it
+    // silently become an incomplete sprite-command comparator as recovery advances.
+    require(graphics.draws.empty() && native.draws.empty(),
+            "extend bootstrap observer before claiming sprite-command equivalence");
+    for (std::size_t i = 0; i < graphics.polygons.size(); ++i) {
+        const auto &before = graphics.polygons[i];
+        const auto &after = native.polygons[i];
+        require(before.vertex_bytes == after.vertex_bytes && before.primitive_type == after.primitive_type &&
+                    before.primitive_count == after.primitive_count && before.stride == after.stride,
+                "native code tables preserve screen geometry and metadata");
+    }
+}
 }
 int main(int argc,char** argv){try{
-    require(argc==3,"usage: game-runtime-test SONIC.EXE INPUT_MOD.DLL");
+    require(argc==3||argc==4,"usage: game-runtime-test SONIC.EXE INPUT_MOD.DLL [POISONED.EXE]");
     const auto exe=load(argv[1]),dll=load(argv[2]);
     require(exe->u32(0x7dce58)==0x42720000u&&exe->byte(0x3abdc7c)==0&&!exe->byte(0x3d14000+0x2000),"load image: .rdata 60.5f at 7dce58, zero-fill .data, outside the image");
     sadx::NativeGameConfig config;config.executable=exe;config.input_mod_dll=dll;
@@ -23,8 +66,24 @@ int main(int argc,char** argv){try{
     for(auto& s:config.pad_settings)s={false,7849,8689,true,false,30};config.pad_settings[0].allow_keyboard=true;
     std::int64_t now=0;config.clock={[]{return std::optional<std::int64_t>{10'000'000};},[&]{now+=200'000;return std::optional<std::int64_t>{now};}};
     config.policy=sadx::OwnerPolicy::survey_unported_as_noop;config.max_frames=3;
-    const auto survey=sadx::NativeGame(config).run();
+    sadx::NativeGame original(config);const auto survey=original.run();
     require(survey.failure.empty()&&survey.startup_completed&&survey.frames_completed==3&&!survey.unported.empty(),"survey completes startup and three frames");
+    config.engine_tables = sadx::runtime::engine_code_tables();
+    now = 0;
+    sadx::NativeGame native_tables(config);
+    const auto native_report = native_tables.run();
+    same_composition(survey, original.d3d8(), native_report, native_tables.d3d8());
+    if (argc == 4) {
+        config.executable = load(argv[3]);
+        require(config.executable->u32(0x88ad64) != exe->u32(0x88ad64),
+                "poison fixture actually changes source tables");
+        now = 0;
+        sadx::NativeGame poisoned(config);
+        const auto poisoned_report = poisoned.run();
+        same_composition(survey, original.d3d8(), poisoned_report, poisoned.d3d8());
+    }
+    config.executable = exe;
+    config.engine_tables.reset();
     config.policy=sadx::OwnerPolicy::stop_at_unported;
     sadx::NativeGame game(config);const auto stopped=game.run();
     require(stopped.stopped_at&&stopped.stopped_at->callee==survey.unported.front().callee&&stopped.failure.empty(),"stop policy halts at the first surveyed owner");

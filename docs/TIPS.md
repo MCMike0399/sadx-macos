@@ -135,3 +135,18 @@ in `AGENTS.md` and `STYLE.md`; this page holds facts and patterns.
 * The source settings at 389d7dc and 89295c are file-backed 1 and 3 respectively. The timing
   frame multiplier is zero-filled, so the earlier STYLE sketch's initial value 1 was not a
   recovered default. Native tests require the actual defaults.
+
+## Immutable engine code tables
+
+* BlendModes has twelve entries, but the unchecked four-bit selector can consume four
+  following words from CompareModes. Native tables must retain that adjacency behavior at
+  the reference boundary rather than inventing a sixteen-entry blend-mode meaning.
+* PollKeyboard consumes a kind halfword and a code byte per scan code: kind 0 emits a key,
+  kind 1 ORs a modifier, and other kinds emit neither. The pinned table has 237 entries and
+  zero reserved bytes. Native records need no original padding; the reference probe
+  serializes kind/code explicitly and verifies every source word.
+* The stored Ninja unit matrix is positive identity. njInitMatrix copies it and then
+  negates X/Y in the destination; pre-negating the maintained table would apply it twice.
+* Native code-table selection belongs before any PE decoding of that family. A poisoned-PE
+  runtime test catches an accidental read even when unchanged pinned table bytes would
+  hide it. This does not remove the composition's other image dependencies.

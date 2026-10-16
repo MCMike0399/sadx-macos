@@ -3791,3 +3791,40 @@ The product still needs native boot/title, resources and gameplay recovery.
   `metal-sprite-composition`, `metal-texture`, `player-task`). No assets/binaries committed.
   User hook settings and two Ghidra request drafts untouched. These two commits remain local;
   the earlier requested push ended at `3ab9558`. Goal active; next §6.7 runtime initialization.
+
+
+### 2026-10-16 — GOAL §6.7 runtime initialization: immutable engine code tables (source step)
+
+* First coherent initialization family migrated; §6.7 remains open. New
+  `runtime/engine_code_tables` holds typed blend/depth modes, all 237 keyboard translations,
+  the positive unit matrix, and sprite/view constants as maintained source. No addresses,
+  fixture optionals, original layouts, pointers or executable reads in those native files.
+  This is code data, not model/animation/content converted into literals.
+* Native boot configuration explicitly supplies the source tables. The reference adapter
+  converts enums/records and preserves blend12..15 reading depth0..3. Direct reference
+  configurations without tables retain prior PE decoding and missing-fact defaults.
+  Construction groups immutable reads before wiring owners; no callback runs in that phase.
+  Reset state, content pointers, sine data and other initial facts are still PE-backed.
+* All 287 serialized source words match bit-for-bit, including keyboard kind/code and zero
+  source padding. Native struct padding is never serialized. Isolated source build copies
+  only the table header/CPP and probe, with no PE/runtime/fixture or archive, and matches the
+  verified source fingerprint. Native unit consumes blend/depth aliases and keyboard
+  held-key ordering through existing owners.
+* Original initializer/native tables/XOR-poisoned table PE configurations preserve the
+  existing three-frame survey report and recorded graphics. Comparison includes every
+  report field, state map, transform, method count, viewport and polygon field. It asserts
+  no sprite draws, so this bounded journey does not claim sprite-command coverage.
+  Old original-binary consumer oracles remain numerically unchanged; existing view/sprite
+  flag partials remain explicit. Three data mutants and two adapter mutants are caught.
+* Owned Ghidra dossiers: blend `ev_ee3a4d4b48eb2e44528c10dd9e12dce330dc01b2e4b47a2389e53da63f704151`,
+  depth `ev_044249f68fddc1a2fc2ba6d8f03968df86ec252d0cb45dfdd09b602288f0ade0`,
+  keyboard `ev_7ddd507cd94a2a892dafefb06bec17f3b024b2f695c323cbcf43b38efcd20b41`,
+  matrix `ev_35705afbbcc10c8445f7e1e93403a0a163ca71290ec58527b5ba1f6c3c74ab37`,
+  sprite `ev_e292771c2440f95ae38c0e40d0fec9c5b019a5d58c2a2858d40e7792e677fddf`.
+  SDK BlendTargets/BlendModes/CompareModes/nj_unit_matrix names and exact PE bytes support
+  the table meanings; source metadata stays in reference evidence.
+* Independent STYLE review found no source blocker. Its comparison-scope concern is addressed
+  with complete stopped-owner/polygon checks and an explicit no-sprite-draw assertion.
+  Renamed only the private HLE CRT DLL-name variable runtime→runtime_library to avoid a
+  collision with the new namespace; DLL strings and handlers are unchanged. Full gate and
+  separate judge snapshot refresh pending. No native-session/full-game independence claim.

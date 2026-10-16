@@ -1,5 +1,6 @@
 #pragma once
 #include "guest/frame_control_reference.hpp"
+#include "runtime/engine_code_tables.hpp"
 #include "game/audio_stream.hpp"
 #include "loader/executable_image.hpp"
 #include "guest/game_mode_reference.hpp"
@@ -72,6 +73,8 @@ struct D3D8StateOwner {
 struct NativeGameConfig {
     OwnerPolicy policy=OwnerPolicy::stop_at_unported;
     std::uint32_t max_frames=1;
+    // Explicit native code tables; absent selects the injectable PE-backed reference facts.
+    std::optional<runtime::EngineCodeTables> engine_tables;
     InputModPadConstants input_constants; // DLL .rdata bytes (caller-supplied)
     std::int32_t limiter_cadence=63;      // Speedrun FrameLimit "63FPS"
     SpeedrunLimiterClock clock;           // host counter owner (mac_clock in the app)
@@ -157,6 +160,9 @@ private:
     // Reporting.
     NativeGameReport report_;std::map<std::uint32_t,std::size_t> unported_index_;std::string failure_detail_; // e.g. the fact a stopped owner required
     GameLogicOwnerResult unported(std::uint32_t callee,std::uint32_t site,const std::string& path);
+    runtime::ViewCodeConstants view_code_constants_{};
+    // NOTSA: select native code tables or injected reference facts before wiring owners.
+    void initialize_engine_code_tables();
     void initialize_source_facts();
     void report_screen_depth(); // the 78dbe0 assumptions, once
 };

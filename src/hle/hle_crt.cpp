@@ -13,7 +13,7 @@
 #include <memory>
 namespace sadx {
 namespace {
-constexpr const char* runtime="api-ms-win-crt-runtime-l1-1-0.dll";
+constexpr const char* runtime_library="api-ms-win-crt-runtime-l1-1-0.dll";
 constexpr const char* heap="api-ms-win-crt-heap-l1-1-0.dll";
 constexpr const char* strings="api-ms-win-crt-string-l1-1-0.dll";
 constexpr const char* vcruntime="VCRUNTIME140.dll";
@@ -59,28 +59,28 @@ void register_hle_crt(HleProcess& p){
     const auto arg=[](HleCall& c,unsigned i){return c.argument(i).value_or(0);};
     const auto C=[&](const char* dll,const char* name,unsigned logged,std::function<std::uint32_t(HleCall&)> body){r.add(dll,name,{0,logged,std::move(body)});}; // cdecl
     // --- startup
-    C(runtime,"_initterm",2,[arg](HleCall& c)->std::uint32_t{initterm(c,arg(c,0),arg(c,1),false);return c.guest.reg(19);});
-    C(runtime,"_initterm_e",2,[arg](HleCall& c)->std::uint32_t{initterm(c,arg(c,0),arg(c,1),true);return c.guest.reg(19);});
-    C(runtime,"_initialize_onexit_table",1,[P,arg](HleCall& c)->std::uint32_t{
+    C(runtime_library,"_initterm",2,[arg](HleCall& c)->std::uint32_t{initterm(c,arg(c,0),arg(c,1),false);return c.guest.reg(19);});
+    C(runtime_library,"_initterm_e",2,[arg](HleCall& c)->std::uint32_t{initterm(c,arg(c,0),arg(c,1),true);return c.guest.reg(19);});
+    C(runtime_library,"_initialize_onexit_table",1,[P,arg](HleCall& c)->std::uint32_t{
         const std::uint32_t z[3]={0,0,0};c.guest.write(arg(c,0),z,12);P->onexit_tables[arg(c,0)].clear();return 0;});
-    C(runtime,"_register_onexit_function",2,[P,arg](HleCall& c)->std::uint32_t{P->onexit_tables[arg(c,0)].push_back(arg(c,1));return 0;});
-    C(runtime,"_crt_atexit",1,[P,arg](HleCall& c)->std::uint32_t{P->onexit_tables[0].push_back(arg(c,0));return 0;});
-    C(runtime,"_execute_onexit_table",1,[](HleCall& c)->std::uint32_t{c.guest.stop("_execute_onexit_table: process/DLL teardown is not modelled");return 0;});
-    C(runtime,"_cexit",0,[](HleCall& c)->std::uint32_t{c.guest.stop("_cexit: process teardown is not modelled");return 0;});
-    C(runtime,"exit",1,[arg](HleCall& c)->std::uint32_t{c.guest.stop("exit("+std::to_string(arg(c,0))+")");return 0;});
-    C(runtime,"terminate",0,[](HleCall& c)->std::uint32_t{c.guest.stop("terminate()");return 0;});
-    C(runtime,"_invalid_parameter_noinfo",0,[](HleCall& c)->std::uint32_t{c.guest.stop("_invalid_parameter_noinfo: a CRT function rejected its arguments");return 0;});
-    C(runtime,"_invalid_parameter_noinfo_noreturn",0,[](HleCall& c)->std::uint32_t{c.guest.stop("_invalid_parameter_noinfo_noreturn: a CRT function rejected its arguments");return 0;});
-    C(runtime,"_seh_filter_dll",2,[](HleCall& c)->std::uint32_t{c.guest.stop("_seh_filter_dll: a structured exception reached a DLL entry point");return 0;});
-    C(runtime,"_configure_narrow_argv",1,[P](HleCall&)->std::uint32_t{
+    C(runtime_library,"_register_onexit_function",2,[P,arg](HleCall& c)->std::uint32_t{P->onexit_tables[arg(c,0)].push_back(arg(c,1));return 0;});
+    C(runtime_library,"_crt_atexit",1,[P,arg](HleCall& c)->std::uint32_t{P->onexit_tables[0].push_back(arg(c,0));return 0;});
+    C(runtime_library,"_execute_onexit_table",1,[](HleCall& c)->std::uint32_t{c.guest.stop("_execute_onexit_table: process/DLL teardown is not modelled");return 0;});
+    C(runtime_library,"_cexit",0,[](HleCall& c)->std::uint32_t{c.guest.stop("_cexit: process teardown is not modelled");return 0;});
+    C(runtime_library,"exit",1,[arg](HleCall& c)->std::uint32_t{c.guest.stop("exit("+std::to_string(arg(c,0))+")");return 0;});
+    C(runtime_library,"terminate",0,[](HleCall& c)->std::uint32_t{c.guest.stop("terminate()");return 0;});
+    C(runtime_library,"_invalid_parameter_noinfo",0,[](HleCall& c)->std::uint32_t{c.guest.stop("_invalid_parameter_noinfo: a CRT function rejected its arguments");return 0;});
+    C(runtime_library,"_invalid_parameter_noinfo_noreturn",0,[](HleCall& c)->std::uint32_t{c.guest.stop("_invalid_parameter_noinfo_noreturn: a CRT function rejected its arguments");return 0;});
+    C(runtime_library,"_seh_filter_dll",2,[](HleCall& c)->std::uint32_t{c.guest.stop("_seh_filter_dll: a structured exception reached a DLL entry point");return 0;});
+    C(runtime_library,"_configure_narrow_argv",1,[P](HleCall&)->std::uint32_t{
         if(!P->narrow_argv){const auto exe=P->allocate_string(P->modules().windows_dir()+"\\sonic.exe").value_or(0);P->narrow_argv=P->memory().allocate(8).value_or(0);
             const std::uint32_t v[2]={exe,0};P->guest().write(P->narrow_argv,v,8);}
         return 0;});
-    C(runtime,"_initialize_narrow_environment",0,[P](HleCall&)->std::uint32_t{
+    C(runtime_library,"_initialize_narrow_environment",0,[P](HleCall&)->std::uint32_t{
         P->assume("the process environment block is empty (the reference environment was not captured)");
         if(!P->environment){P->environment=P->memory().allocate(4).value_or(0);}
         return 0;});
-    C(runtime,"_errno",0,[P](HleCall&)->std::uint32_t{if(!P->errno_address)P->errno_address=P->memory().allocate(4).value_or(0);return P->errno_address;});
+    C(runtime_library,"_errno",0,[P](HleCall&)->std::uint32_t{if(!P->errno_address)P->errno_address=P->memory().allocate(4).value_or(0);return P->errno_address;});
     // --- heap
     C(heap,"malloc",1,[P,arg](HleCall& c)->std::uint32_t{return P->memory().allocate(arg(c,0)).value_or(0);});
     C(heap,"calloc",2,[P,arg](HleCall& c)->std::uint32_t{
@@ -279,7 +279,7 @@ void register_hle_crt_locale(HleProcess& p){
     const auto C=[&](const char* dll,const char* name,unsigned logged,std::function<std::uint32_t(HleCall&)> body){r.add(dll,name,{0,logged,std::move(body)});};
     constexpr const char* locale="api-ms-win-crt-locale-l1-1-0.dll";constexpr const char* strings="api-ms-win-crt-string-l1-1-0.dll";
     constexpr const char* convert="api-ms-win-crt-convert-l1-1-0.dll";constexpr const char* math="api-ms-win-crt-math-l1-1-0.dll";
-    constexpr const char* runtime="api-ms-win-crt-runtime-l1-1-0.dll";constexpr const char* time="api-ms-win-crt-time-l1-1-0.dll";
+    constexpr const char* runtime_library="api-ms-win-crt-runtime-l1-1-0.dll";constexpr const char* time="api-ms-win-crt-time-l1-1-0.dll";
     // The "C" locale the UCRT starts in (nothing in the guest calls setlocale with a name yet).
     auto data=std::make_shared<std::map<std::string,std::uint32_t>>();
     const auto block=[P,data](const std::string& key,const std::vector<std::uint8_t>& bytes)->std::uint32_t{
@@ -393,9 +393,9 @@ void register_hle_crt_locale(HleProcess& p){
     C(math,"_libm_sse2_asin_precise",0,[host_libm,sse2](HleCall& c){host_libm();return sse2([](double x){return std::asin(x);})(c);});
     C(math,"_except1",0,[](HleCall& c)->std::uint32_t{c.guest.stop("_except1: a libm floating-point exception report");return 0;});
     // runtime odds and ends
-    C(runtime,"_set_new_handler",1,[](HleCall&)->std::uint32_t{return 0;});
-    C(runtime,"abort",0,[](HleCall& c)->std::uint32_t{c.guest.stop("abort()");return 0;});
-    C(runtime,"_beginthreadex",6,[](HleCall& c)->std::uint32_t{c.guest.stop("_beginthreadex: guest threads are not modelled");return 0;});
+    C(runtime_library,"_set_new_handler",1,[](HleCall&)->std::uint32_t{return 0;});
+    C(runtime_library,"abort",0,[](HleCall& c)->std::uint32_t{c.guest.stop("abort()");return 0;});
+    C(runtime_library,"_beginthreadex",6,[](HleCall& c)->std::uint32_t{c.guest.stop("_beginthreadex: guest threads are not modelled");return 0;});
     C("api-ms-win-crt-heap-l1-1-0.dll","realloc",2,[P,arg](HleCall& c)->std::uint32_t{
         if(!arg(c,0))return P->memory().allocate(arg(c,1)).value_or(0);if(!arg(c,1)){P->memory().free(arg(c,0));return 0;}return P->memory().reallocate(arg(c,0),arg(c,1)).value_or(0);});
     // bsearch(key, base, count, width, compare): the UCRT's binary search, calling the guest's compare(key, element).
@@ -420,7 +420,7 @@ void register_hle_crt_locale(HleProcess& p){
     (void)double_bits;
     C(strings,"strlen",1,[P,arg](HleCall& c)->std::uint32_t{const auto s=P->string_at(arg(c,0),1u<<20);if(!s){c.guest.stop("strlen: unterminated or unreadable string");return 0;}return static_cast<std::uint32_t>(s->size());});
     // msvcrt.dll aliases
-    const std::pair<const char*,const char*> same[]={{runtime,"_initterm"},{runtime,"abort"},{"api-ms-win-crt-heap-l1-1-0.dll","calloc"},{"api-ms-win-crt-heap-l1-1-0.dll","free"},
+    const std::pair<const char*,const char*> same[]={{runtime_library,"_initterm"},{runtime_library,"abort"},{"api-ms-win-crt-heap-l1-1-0.dll","calloc"},{"api-ms-win-crt-heap-l1-1-0.dll","free"},
         {"VCRUNTIME140.dll","memcpy"},{"api-ms-win-crt-heap-l1-1-0.dll","realloc"},{strings,"strlen"},{strings,"strncmp"},{"api-ms-win-crt-stdio-l1-1-0.dll","fputs"},
         {"api-ms-win-crt-stdio-l1-1-0.dll","vfprintf"},{"api-ms-win-crt-stdio-l1-1-0.dll","_lock_file"}};
     for(const auto& [dll,name]:same)r.alias("msvcrt.dll",name,dll,name);

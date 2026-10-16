@@ -190,6 +190,15 @@ are in `guest/`; their public compatibility headers retain forward declarations 
 the moved timing types. These relocations do not complete semantic rewrites of those systems.
 The native host and portable frozen-corpus builds have separate isolated source closures.
 
+`runtime/engine_code_tables` supplies maintained, typed engine code tables: blend and depth
+modes, keyboard translations, the unit matrix, and sprite/view constants. The normal native
+boot configuration supplies these explicitly. The reference composition converts them at its
+boundary; callers omitting that configuration still receive injectable PE-decoded facts,
+including their previous missing-fact behavior. Native table source builds without a PE or
+reference runtime and is checked against every source encoding. Reset state, content pointers,
+the sine table and other initialization families still need migration; this is not a native
+session or asset importer.
+
 The hybrid guest executes `sonic.exe` with `process_overrides` supplying native owners.
 Each HLE import logs its call for trace diffs. These reference paths do not establish
 native boot/title or executable independence. The separate native frame-control and game-mode pilots

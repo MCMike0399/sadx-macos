@@ -15,6 +15,7 @@ NativeGame::NativeGame(NativeGameConfig config):config_(std::move(config)),speed
     initialize_source_facts();
 }
 void NativeGame::initialize_source_facts(){
+    initialize_engine_code_tables();
     const auto* exe=config_.executable.get();
     const auto u8=[&](std::uint32_t a)->std::optional<std::uint8_t>{if(!exe)return std::nullopt;return exe->byte(a);};
     const auto u32=[&](std::uint32_t a)->std::optional<std::uint32_t>{if(!exe)return std::nullopt;return exe->u32(a);};
@@ -68,9 +69,6 @@ void NativeGame::initialize_source_facts(){
     {std::optional<std::uint16_t> w;if(const auto lo=u8(0x3b29d08),hi=u8(0x3b29d09);lo&&hi)w=static_cast<std::uint16_t>(*lo|(*hi<<8));reset_.emplace(GameResetState{loop_.word_at_3abdf80,w,u32(0x3b290d0),u32(0x3b0e330),rng_});}
     audio_stream_.initialized_at_3b0ef2c=u32(0x3b0ef2c);window_at_3a8b088_=u32(0x3a8b088);
     for(unsigned i=0;i<3;++i){words_at_900840_[i]=u32(0x900840+4*i);words_at_3ab9898_[i]=u32(0x3ab9898+4*i);words_at_900858_[i]=u32(0x900858+4*i);words_at_90084c_[i]=u32(0x90084c+4*i);}
-    for(unsigned i=0;i<8;++i)depth_table_[i]=u32(0x88ad9c+4*i).value_or(0);
-    if(exe){std::array<std::uint8_t,88> raw{};bool ok=true;for(unsigned i=0;i<88;++i){const auto b=u8(0x88ad64+i);ok=ok&&b;raw[i]=b.value_or(0);}if(ok)blend_tables_=decode_ninja_blend_tables(raw.data(),raw.size());}
-    if(const auto v=f32(0x7dcb10))one_at_7dcb10_=*v;if(const auto v=f32(0x7dcb0c))negative_one_at_7dcb0c_=*v;
     queue_runtime_.flag_at_3b12208=u32(0x3b12208);queue_runtime_.mode_at_3ab98ac=u32(0x3ab98ac);queue_runtime_.display_switch_at_3b1117c=&timing_.pending_logic_ticks;
     consumer_.mode_byte_at_3abdbc0=u8(0x3abdbc0);consumer_.count_at_3abd9d4=s32(0x3abd9d4);consumer_.count_at_3abd9dc=s32(0x3abd9dc);consumer_.maximum_at_3abd9d8=s32(0x3abd9d8);consumer_.maximum_at_3abd9e0=s32(0x3abd9e0);
     // D3D8 device owner: native state table (identity 1 = the one source device).
@@ -81,7 +79,7 @@ void NativeGame::initialize_source_facts(){
     render_.set_texture_stage_state=[this](const NinjaRenderStageCommand& c){if(c.stage==0)d3d8_.stage0_states[c.state]=c.value;++d3d8_.stage_calls;return NinjaRenderCallResult{true,{}};};
     queue_runtime_.render_state=&render_;
     projection_range_.near_at_3d0f808=f32(0x3d0f808);projection_range_.far_at_3d0f968=f32(0x3d0f968);projection_range_.x_at_90082c=f32(0x90082c);projection_range_.y_bits_at_900830=u32(0x900830);
-    projection_range_.cache_x_at_3aad0c0=f32(0x3aad0c0);projection_range_.cache_y_at_3aad0c4=f32(0x3aad0c4);projection_range_.negative_one_at_7dcb0c=negative_one_at_7dcb0c_;projection_range_.limit_at_7dce50=f32(0x7dce50).value_or(0);
+    projection_range_.cache_x_at_3aad0c0=f32(0x3aad0c0);projection_range_.cache_y_at_3aad0c4=f32(0x3aad0c4);projection_range_.negative_one_at_7dcb0c=negative_one_at_7dcb0c_;projection_range_.limit_at_7dce50=fog_sentinel_at_7dce50_.value_or(0);
     transform_owner_.get=[this](std::uint32_t state)->std::optional<NinjaMatrix>{
         if(const auto found=d3d8_.transforms.find(state);found!=d3d8_.transforms.end())return found->second;
         report_.assumptions.push_back("D3D8 transform "+std::to_string(state)+" read before any SetTransform: using the D3D8 device-creation default (identity); pre-40cad0 device setup is unported");
@@ -96,12 +94,10 @@ void NativeGame::initialize_source_facts(){
     if(const auto a=f32(0x3b280ac),b=f32(0x3b280b0),c=f32(0x3b280b4),d=f32(0x3b280b8);a&&b&&c&&d)color_at_3b280ac_=std::array<float,4>{*a,*b,*c,*d};
     queue_base_at_3abd960_=u32(0x3abd960);consumer_.projection_width_at_3d0f9e4=f32(0x3d0f9e4);
     consumer_.fog_enabled_at_3d12798=u32(0x3d12798);consumer_.fog_supported_at_3d128a4=u32(0x3d128a4);consumer_.fog_mode_at_3d0849c=u32(0x3d0849c);
-    consumer_.cached_fog_start_at_90a098=f32(0x90a098);consumer_.cached_fog_end_at_90a09c=f32(0x90a09c);fog_sentinel_at_7dce50_=f32(0x7dce50);
+    consumer_.cached_fog_start_at_90a098=f32(0x90a098);consumer_.cached_fog_end_at_90a09c=f32(0x90a09c);
     for(unsigned i=0;i<128;++i){fog_table_at_3b10f78_[i]=f32(0x3b10f78+4*i);fog_device_.w_at_3d12a00[i]=f32(0x3d12a00+4*i);fog_device_.reciprocal_at_3d12c00[i]=f32(0x3d12c00+4*i);}
     fog_device_.color_at_3d12898=u32(0x3d12898);fog_device_.start_index_at_3d12950=u32(0x3d12950);fog_device_.end_index_at_3d0fce0=u32(0x3d0fce0);
     fog_device_.start_value_at_3d0fac0=f32(0x3d0fac0);fog_device_.end_value_at_3d12894=f32(0x3d12894);fog_device_.software_density_at_3d128a0=u32(0x3d128a0);
-    if(exe){std::array<std::uint8_t,0xed*4> raw{};bool ok=true;for(std::size_t i=0;i<raw.size()&&ok;++i){const auto b=u8(static_cast<std::uint32_t>(0x389d918+i));ok=b.has_value();raw[i]=b.value_or(0);}
-        if(ok)keyboard_table_=decode_ninja_keyboard_table(raw.data(),raw.size());}
     frame_calls_.scene_flags_at_3d08588=u32(0x3d08588);frame_calls_.device_flags_at_3d1289c=u32(0x3d1289c);frame_calls_.vertex_buffer_at_3d128ac=u32(0x3d128ac);
     frame_calls_.hook_at_3d0f7a4=u32(0x3d0f7a4);frame_calls_.hook_at_3d0f7a8=u32(0x3d0f7a8);frame_calls_.hook_at_3d0fa30=u32(0x3d0fa30);frame_calls_.argument_at_3d0fa38=u32(0x3d0fa38);
     for(unsigned i=0;i<16;++i)frame_calls_.hooks_at_3d08af0[i]=u32(0x3d08af0+4*i);
@@ -183,20 +179,14 @@ void NativeGame::initialize_source_facts(){
     frame_owners_.list_at_3b2c584=u32(0x3b2c584);frame_owners_.count_at_3b0e334=u32(0x3b0e334);frame_owners_.timer_at_3abdf88=u32(0x3abdf88);frame_owners_.buffer_at_3abdf84=u32(0x3abdf84);
     level_fog_start_at_3abdc60_=f32(0x3abdc60);level_fog_end_at_3abdc64_=f32(0x3abdc64);level_fog_color_at_3abdc68_=u32(0x3abdc68);
     {NinjaMath::SineTable t{};bool ok=exe!=nullptr;for(unsigned i=0;i<1025&&ok;++i){const auto v=f32(0x88af78+4*i);ok=v.has_value();if(ok)t[i]=*v;}if(ok)sine_table_at_88af78_=t;}
-    view_.emplace(GameViewState{f32(0x8928c0),f32(0x8928c4),f32(0x7dcb28).value_or(0),f32(0x7dcb24).value_or(0),f32(0x7dcc98).value_or(0),f32(0x7dd594).value_or(0),f32(0x7dd590).value_or(0),
+    view_.emplace(GameViewState{f32(0x8928c0),f32(0x8928c4),view_code_constants_.width_scale,view_code_constants_.height_scale,view_code_constants_.half,view_code_constants_.horizontal_extent,view_code_constants_.vertical_extent,
         byte_at_3b280a8_,loop_.mode_at_3b28114,u32(0x3abd9cc),u32(0x3b28094),f32(0x3b28098),f32(0x3b2809c),f32(0x3b280a0),f32(0x3b280a4),u32(0x3d0f9ec),u32(0x3d0f9f0),u32(0x3aad0bc),u32(0x3ab98ec),u32(0x3b2cbb4),
         {u32(0x3ce7174),u32(0x3ce7178),u32(0x3ce717c),u32(0x3ce7180)},color_at_3b280ac_});
     mode_leaves_->screen_width_at_8928c0=&view_->screen_width_at_8928c0;mode_leaves_->screen_height_at_8928c4=&view_->screen_height_at_8928c4;
     mode_leaves_->clear_colors_at_3ce7174=&view_->clear_colors_at_3ce7174;
     mode_leaves_->word_at_3b2c420=u32(0x3b2c420);mode_leaves_->state_at_3b29d6c=u32(0x3b29d6c);mode_leaves_->word_at_3b29d68=u32(0x3b29d68);
     for(std::size_t i=0;i<mode_leaves_->block_at_3b2c5e8.size;++i)mode_leaves_->block_at_3b2c5e8.bytes[i]=u8(static_cast<std::uint32_t>(0x3b2c5e8+i));
-    {NinjaMatrix unit{};bool ok=exe!=nullptr;for(unsigned i=0;i<16&&ok;++i){const auto v=f32(0x389d650+4*i);ok=v.has_value();if(ok)unit[i]=*v;}if(ok)unit_at_389d650_=unit;}
     {   // 4086f0 consumer composition from the load image.
-        const auto bytes=[&](std::initializer_list<std::pair<std::uint32_t,unsigned>> runs,std::vector<std::uint8_t>& out){
-            for(const auto& [a,n]:runs)for(unsigned i=0;i<n;++i){const auto b=u8(a+i);if(!b)return false;out.push_back(*b);}return true;};
-        std::vector<std::uint8_t> raw;
-        if(bytes({{0x7db2c4,4},{0x7dce6c,4},{0x7e9b40,4},{0x7dcb2c,4},{0x7dcb10,4}},raw))sprite_constants_=decode_ninja_sprite_constants(raw.data(),raw.size());
-        raw.clear();if(bytes({{0x7dcb0c,4},{0x7dce50,4}},raw))consumer_constants_=decode_ninja_queue_consumer_constants(raw.data(),raw.size());
         for(unsigned i=0;i<4;++i)texture_returns_at_389d458_[i]=u32(0x389d458+4*i).value_or(0);
         const auto null_or_unknown=[&](std::uint32_t a,auto& field){if(const auto v=u32(a);v&&*v==0)field=typename std::decay_t<decltype(field)>::value_type{};};
         null_or_unknown(0x3d0fa24,texture_selection_.current_list_at_3d0fa24);null_or_unknown(0x3ce7128,texture_selection_.requested_memory_at_3ce7128);
@@ -213,6 +203,113 @@ void NativeGame::initialize_source_facts(){
     }
     lifecycle_.emplace(NinjaQueueLifecycleOwners{queue_,queue_runtime_,consumer_,timing_,projection_,color_at_3b18230_,&depth_table_,one_at_7dcb10_,negative_one_at_7dcb0c_,depth_mode_at_8928c8_,
         words_at_900840_,words_at_3ab9898_,words_at_900858_,words_at_90084c_});
+}
+void NativeGame::initialize_engine_code_tables() {
+    if (config_.engine_tables) {
+        const auto &tables = *config_.engine_tables;
+        std::array<std::uint32_t, 2> targets{};
+        std::array<std::uint32_t, 12> modes{};
+        for (std::size_t i = 0; i < targets.size(); ++i)
+            targets[i] = static_cast<std::uint32_t>(tables.blend_targets[i]);
+        for (std::size_t i = 0; i < modes.size(); ++i)
+            modes[i] = static_cast<std::uint32_t>(tables.blend_modes[i]);
+        for (std::size_t i = 0; i < depth_table_.size(); ++i)
+            depth_table_[i] = static_cast<std::uint32_t>(tables.depth_comparisons[i]);
+        // Original unchecked blend indices 12..15 consume the adjacent depth table.
+        blend_tables_ = NinjaBlendTables{targets, modes,
+                                        std::array<std::uint32_t, 4>{depth_table_[0], depth_table_[1],
+                                                                     depth_table_[2], depth_table_[3]}};
+        NinjaKeyboardTable keyboard{};
+        for (std::size_t i = 0; i < tables.keyboard.size(); ++i) {
+            keyboard.kind[i] = static_cast<std::uint16_t>(tables.keyboard[i].kind);
+            keyboard.code[i] = tables.keyboard[i].code;
+        }
+        keyboard_table_ = keyboard;
+        unit_at_389d650_ = tables.unit_matrix;
+        const auto &sprite = tables.sprite;
+        sprite_constants_ = NinjaSpriteConstants{sprite.uv_scale, sprite.color_scale,
+                                                 sprite.minimum_depth, sprite.zero, sprite.one};
+        consumer_constants_ = NinjaQueueConsumerConstants{tables.negative_one, tables.fog_disabled};
+        one_at_7dcb10_ = sprite.one;
+        negative_one_at_7dcb0c_ = tables.negative_one;
+        fog_sentinel_at_7dce50_ = tables.fog_disabled;
+        view_code_constants_ = tables.view;
+        return;
+    }
+    const auto *exe = config_.executable.get();
+    const auto byte = [&](std::uint32_t address) -> std::optional<std::uint8_t> {
+        return exe ? exe->byte(address) : std::nullopt;
+    };
+    const auto word = [&](std::uint32_t address) -> std::optional<std::uint32_t> {
+        return exe ? exe->u32(address) : std::nullopt;
+    };
+    const auto real = [&](std::uint32_t address) -> std::optional<float> {
+        const auto value = word(address);
+        if (!value)
+            return std::nullopt;
+        float result;
+        std::memcpy(&result, &*value, sizeof(result));
+        return result;
+    };
+    for (unsigned i = 0; i < depth_table_.size(); ++i)
+        depth_table_[i] = word(0x88ad9c + 4 * i).value_or(0);
+    if (exe) {
+        std::array<std::uint8_t, 88> raw{};
+        bool known = true;
+        for (unsigned i = 0; i < raw.size(); ++i) {
+            const auto value = byte(0x88ad64 + i);
+            known = known && value.has_value();
+            raw[i] = value.value_or(0);
+        }
+        if (known)
+            blend_tables_ = decode_ninja_blend_tables(raw.data(), raw.size());
+    }
+    if (const auto value = real(0x7dcb10))
+        one_at_7dcb10_ = *value;
+    if (const auto value = real(0x7dcb0c))
+        negative_one_at_7dcb0c_ = *value;
+    fog_sentinel_at_7dce50_ = real(0x7dce50);
+    if (exe) {
+        std::array<std::uint8_t, 237 * 4> raw{};
+        bool known = true;
+        for (std::size_t i = 0; i < raw.size() && known; ++i) {
+            const auto value = byte(static_cast<std::uint32_t>(0x389d918 + i));
+            known = value.has_value();
+            raw[i] = value.value_or(0);
+        }
+        if (known)
+            keyboard_table_ = decode_ninja_keyboard_table(raw.data(), raw.size());
+    }
+    view_code_constants_ = {real(0x7dcb28).value_or(0), real(0x7dcb24).value_or(0),
+                            real(0x7dcc98).value_or(0), real(0x7dd594).value_or(0),
+                            real(0x7dd590).value_or(0)};
+    NinjaMatrix unit{};
+    bool known = exe != nullptr;
+    for (unsigned i = 0; i < unit.size() && known; ++i) {
+        const auto value = real(0x389d650 + 4 * i);
+        known = value.has_value();
+        if (known)
+            unit[i] = *value;
+    }
+    if (known)
+        unit_at_389d650_ = unit;
+    const auto bytes = [&](std::initializer_list<std::pair<std::uint32_t, unsigned>> runs,
+                           std::vector<std::uint8_t> &out) {
+        for (const auto &[address, size] : runs)
+            for (unsigned i = 0; i < size; ++i) {
+                const auto value = byte(address + i);
+                if (!value)
+                    return false;
+                out.push_back(*value);
+            }
+        return true;
+    };
+    std::vector<std::uint8_t> raw;
+    if (bytes({{0x7db2c4, 4}, {0x7dce6c, 4}, {0x7e9b40, 4}, {0x7dcb2c, 4}, {0x7dcb10, 4}}, raw))
+        sprite_constants_ = decode_ninja_sprite_constants(raw.data(), raw.size());
+    raw.clear();
+    if (bytes({{0x7dcb0c, 4}, {0x7dce50, 4}}, raw))
+        consumer_constants_ = decode_ninja_queue_consumer_constants(raw.data(), raw.size());
 }
 void NativeGame::report_screen_depth(){
     if(screen_depth_reported_)return;screen_depth_reported_=true;
