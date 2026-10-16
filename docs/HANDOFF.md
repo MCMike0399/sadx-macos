@@ -4091,3 +4091,34 @@ The product still needs native boot/title, resources and gameplay recovery.
   remaining input and other initialization families remain open. No complete native fog,
   session or game independence claim. Goal active; hook settings and two user Ghidra drafts
   untouched. Commits local; no push.
+
+### 2026-10-16 — native numeric screen initialization (source step)
+
+* GOAL §6.7 sixth initialization family: `engine/ninja_screen_initial_state` supplies
+  90 numeric words: clip values/caches, screen/preset values, rectangles, polygon count
+  and coordinates, viewport, half extents and three matrices. The stored range pair is
+  -1/-2049; the base matrix is identity. Other selected words are zero before device
+  setup, including projection/working matrices and both viewport depth bounds.
+* All three POINT2COL resource pointers (points/color/texture) remain independently
+  image-backed. Frame/fog owners and GPU capability facts remain separate. Existing
+  projection scale/center/color fields were not initialized here and remain untouched;
+  this is static preservation, not extra snapshot coverage. The second preset argument
+  and polygon setup word retain explicit comments that broader meanings are unestablished.
+* Five owned Ghidra dossiers and 27 xrefs are indexed in `screen-initial-156-evidence.json`.
+  Preset `ev_332421657976352101ec55f3ca5cfe477687e9b176b8cf8aceada95eaff67c3d`,
+  viewport `ev_38ac9457c14be00bf114c60f00337a6a45194fb27b93d7036f6daf55d6c987dc`,
+  clip `ev_85f7515b2799686ef807ae79025220fbde3285693e62f589eaa732f80141b9e7`,
+  device `ev_cb53bf479c58781ec7a5433b3ed8b893888524a4bad1c3e19b9920abfc48ef92`.
+  SDK NJS_POINT2COL confirms its third word is a texture pointer; it is not numeric data.
+* All 90 compiled words match source bytes/actual virtual zero fill. Isolated source/
+  header/probe closure passes without PE, fixtures or core archive. Native projection
+  consumer exercises first-update and cached no-op behavior, plus matrix independence.
+  No-image/varied IEEE payloads/partial projection and resource sentinels pass. Five
+  old/new constructors compare 465 numeric/resource availability/value facts exactly
+  (3,582 bytes); prior initializer/session CLI output matches (5,427 bytes). Poisoned
+  numeric data preserve the three-frame report/graphics; these surveys have no sprites.
+* Three data/four adapter mutants caught; restored baseline passes. Existing screen init
+  3,000, device setup 2,000 and projection range 3,000 numerical reports are unchanged.
+  Projection range retains its 1,251 FP-flag differences (partial). Algorithms and prior
+  judges unchanged. Independent final STYLE review approved source and evidence. Full
+  gate follows in a separate judge commit; GOAL §6.7 remains open.

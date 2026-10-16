@@ -19,6 +19,7 @@ void NativeGame::initialize_source_facts(){
     initialize_control_defaults();
     initialize_input_defaults();
     initialize_fog_defaults();
+    initialize_screen_defaults();
     const auto* exe=config_.executable.get();
     const auto u8=[&](std::uint32_t a)->std::optional<std::uint8_t>{if(!exe)return std::nullopt;return exe->byte(a);};
     const auto u32=[&](std::uint32_t a)->std::optional<std::uint32_t>{if(!exe)return std::nullopt;return exe->u32(a);};
@@ -55,8 +56,7 @@ void NativeGame::initialize_source_facts(){
     render_.set_render_state=[this](const NinjaRenderStateCommand& c){d3d8_.render_states[c.state]=c.value;++d3d8_.render_calls;return NinjaRenderCallResult{true,{}};};
     render_.set_texture_stage_state=[this](const NinjaRenderStageCommand& c){if(c.stage==0)d3d8_.stage0_states[c.state]=c.value;++d3d8_.stage_calls;return NinjaRenderCallResult{true,{}};};
     queue_runtime_.render_state=&render_;
-    projection_range_.near_at_3d0f808=f32(0x3d0f808);projection_range_.far_at_3d0f968=f32(0x3d0f968);projection_range_.x_at_90082c=f32(0x90082c);projection_range_.y_bits_at_900830=u32(0x900830);
-    projection_range_.cache_x_at_3aad0c0=f32(0x3aad0c0);projection_range_.cache_y_at_3aad0c4=f32(0x3aad0c4);projection_range_.negative_one_at_7dcb0c=negative_one_at_7dcb0c_;projection_range_.limit_at_7dce50=fog_sentinel_at_7dce50_.value_or(0);
+    projection_range_.negative_one_at_7dcb0c=negative_one_at_7dcb0c_;projection_range_.limit_at_7dce50=fog_sentinel_at_7dce50_.value_or(0);
     transform_owner_.get=[this](std::uint32_t state)->std::optional<NinjaMatrix>{
         if(const auto found=d3d8_.transforms.find(state);found!=d3d8_.transforms.end())return found->second;
         report_.assumptions.push_back("D3D8 transform "+std::to_string(state)+" read before any SetTransform: using the D3D8 device-creation default (identity); pre-40cad0 device setup is unported");
@@ -69,17 +69,12 @@ void NativeGame::initialize_source_facts(){
     for(unsigned i=0;i<36;++i){leaves_->sound_record_flags_at_3b29304[i]=u32(0x3b29304+0x38*i);leaves_->words_at_3b29b90[i]=u32(0x3b29b90+4*i);}
     for(unsigned i=0;i<4;++i)leaves_->entry_words_at_3d08428[i]=u32(0x3d08428+24*i);
     if(const auto a=f32(0x3b280ac),b=f32(0x3b280b0),c=f32(0x3b280b4),d=f32(0x3b280b8);a&&b&&c&&d)color_at_3b280ac_=std::array<float,4>{*a,*b,*c,*d};
-    queue_base_at_3abd960_=u32(0x3abd960);consumer_.projection_width_at_3d0f9e4=f32(0x3d0f9e4);
+    queue_base_at_3abd960_=u32(0x3abd960);
     frame_calls_.scene_flags_at_3d08588=u32(0x3d08588);frame_calls_.device_flags_at_3d1289c=u32(0x3d1289c);frame_calls_.vertex_buffer_at_3d128ac=u32(0x3d128ac);
     frame_calls_.hook_at_3d0f7a4=u32(0x3d0f7a4);frame_calls_.hook_at_3d0f7a8=u32(0x3d0f7a8);frame_calls_.hook_at_3d0fa30=u32(0x3d0fa30);frame_calls_.argument_at_3d0fa38=u32(0x3d0fa38);
     for(unsigned i=0;i<16;++i)frame_calls_.hooks_at_3d08af0[i]=u32(0x3d08af0+4*i);
     for(unsigned r=0;r<9;++r)for(unsigned w=0;w<4;++w)frame_calls_.records_at_3d0fe00[r][w]=u32(0x3d0fe00+0x24*r+4*w);
-    screen_.word_at_3d0f804=u32(0x3d0f804);screen_.flags_at_3d0f964=u32(0x3d0f964);screen_.word_at_3d0f814=u32(0x3d0f814);
-    screen_.width_at_3d0fa20=u32(0x3d0fa20);screen_.height_at_3d0f838=u32(0x3d0f838);screen_.height_at_3d0f9e8=f32(0x3d0f9e8);screen_.width_at_3d0fa04=f32(0x3d0fa04);screen_.height_at_3d0fa08=f32(0x3d0fa08);
-    screen_.word_at_3ce7160=u32(0x3ce7160);screen_.left_at_3d0f820=f32(0x3d0f820);screen_.top_at_3d0f824=f32(0x3d0f824);screen_.right_at_3d0f828=f32(0x3d0f828);screen_.bottom_at_3d0f82c=f32(0x3d0f82c);
-    screen_.points_at_3ce7164=u32(0x3ce7164);screen_.colors_at_3ce7168=u32(0x3ce7168);screen_.word_at_3ce716c=u32(0x3ce716c);screen_.count_at_3ce7170=u32(0x3ce7170);
-    for(unsigned i=0;i<8;++i)screen_.points_at_3ce7184[i]=u32(0x3ce7184+4*i);
-    screen_.invalid_at_3d0fd1c=u32(0x3d0fd1c);for(unsigned i=0;i<16;++i)screen_.projection_at_3d129c0[i]=u32(0x3d129c0+4*i);
+    screen_.points_at_3ce7164=u32(0x3ce7164);screen_.colors_at_3ce7168=u32(0x3ce7168);screen_.word_at_3ce716c=u32(0x3ce716c);
     // Screen device methods (recording owner; a Metal backend replaces it).
     screen_device_.set_viewport=[this](const D3D8FrameCommand&,const std::array<std::uint32_t,6>& v)->std::optional<std::int32_t>{d3d8_.viewport=v;return 0;};
     screen_device_.set_transform=[this](const D3D8FrameCommand&,std::uint32_t state,const D3dxMatrix& m)->std::optional<std::int32_t>{
@@ -103,11 +98,8 @@ void NativeGame::initialize_source_facts(){
     library_.word_at_38a5dc4=u32(0x38a5dc4);library_.word_at_38a5dc8=u32(0x38a5dc8);library_.word_at_38a5dcc=u32(0x38a5dcc);library_.scale_at_3d0f800=f32(0x3d0f800);library_.aspect_at_3d0f9c0=f32(0x3d0f9c0);
     for(std::size_t i=0;i<device_.block_at_3d0fae0.size;++i)device_.block_at_3d0fae0.bytes[i]=u8(static_cast<std::uint32_t>(0x3d0fae0+i));
     for(std::size_t i=0;i<device_.caps_at_3d127c0.size;++i)device_.caps_at_3d127c0.bytes[i]=u8(static_cast<std::uint32_t>(0x3d127c0+i));
-    device_.direct3d_at_3d11f60=u32(0x3d11f60);for(unsigned i=0;i<6;++i)device_.viewport_at_3d12780[i]=u32(0x3d12780+4*i);
-    device_.half_width_at_3d12948=f32(0x3d12948);device_.half_height_at_3d1294c=f32(0x3d1294c);
+    device_.direct3d_at_3d11f60=u32(0x3d11f60);
     for(unsigned i=0;i<7;++i)device_.words_at_3d0fd00[i]=u32(0x3d0fd00+4*i);
-    for(unsigned i=0;i<16;++i){device_.matrix_at_3d0fd80[i]=u32(0x3d0fd80+4*i);device_.matrix_at_389d318[i]=u32(0x389d318+4*i);}
-    device_.left_at_3d0fd20=f32(0x3d0fd20);device_.top_at_3d0fd24=f32(0x3d0fd24);device_.right_at_3d0fd28=f32(0x3d0fd28);device_.bottom_at_3d0fd2c=f32(0x3d0fd2c);
     for(std::size_t i=0;i<cd_drive_.root_at_3a8af78.size;++i)cd_drive_.root_at_3a8af78.bytes[i]=u8(static_cast<std::uint32_t>(0x3a8af78+i));
     winmain_.media_at_3ab918c=u32(0x3ab918c);winmain_.media_at_3ab9190=u32(0x3ab9190);winmain_.message_text_at_8929b0=u32(0x8929b0);winmain_.message_caption_at_8929c4=u32(0x8929c4);
     window_.last_wparam_at_3d08534=u32(0x3d08534);input_devices_.joysticks_at_3d08814=u32(0x3d08814);input_devices_.mouse_at_3d08834=u32(0x3d08834);
@@ -187,6 +179,186 @@ void NativeGame::initialize_source_facts(){
     }
     lifecycle_.emplace(NinjaQueueLifecycleOwners{queue_,queue_runtime_,consumer_,timing_,projection_,color_at_3b18230_,&depth_table_,one_at_7dcb10_,negative_one_at_7dcb0c_,depth_mode_at_8928c8_,
         words_at_900840_,words_at_3ab9898_,words_at_900858_,words_at_90084c_});
+}
+void NativeGame::initialize_screen_defaults() {
+    if (config_.screen_defaults) {
+        const auto &values = *config_.screen_defaults;
+        const auto bits = [](float value) {
+            std::uint32_t word;
+            std::memcpy(&word, &value, sizeof(word));
+            return word;
+        };
+        projection_range_.near_at_3d0f808 = values.clip.near_distance;
+        projection_range_.far_at_3d0f968 = values.clip.far_distance;
+        projection_range_.x_at_90082c = values.clip.range_near;
+        projection_range_.y_bits_at_900830 = bits(values.clip.range_far);
+        projection_range_.cache_x_at_3aad0c0 = values.clip.cached_near;
+        projection_range_.cache_y_at_3aad0c4 = values.clip.cached_far;
+        screen_.word_at_3d0f804 = values.setup_argument;
+        screen_.flags_at_3d0f964 = values.flags;
+        screen_.word_at_3d0f814 = values.timing_multiplier;
+        screen_.width_at_3d0fa20 = values.width_pixels;
+        screen_.height_at_3d0f838 = values.height_pixels;
+        screen_.height_at_3d0f9e8 = values.logical_height;
+        screen_.width_at_3d0fa04 = values.viewport_width;
+        screen_.height_at_3d0fa08 = values.viewport_height;
+        screen_.left_at_3d0f820 = values.screen_bounds.left;
+        screen_.top_at_3d0f824 = values.screen_bounds.top;
+        screen_.right_at_3d0f828 = values.screen_bounds.right;
+        screen_.bottom_at_3d0f82c = values.screen_bounds.bottom;
+        screen_.invalid_at_3d0fd1c = values.transform_invalid;
+        screen_.word_at_3ce7160 = values.polygon_setup_word;
+        screen_.count_at_3ce7170 = values.polygon_count;
+        device_.viewport_at_3d12780[0] = values.viewport.x;
+        device_.viewport_at_3d12780[1] = values.viewport.y;
+        device_.viewport_at_3d12780[2] = values.viewport.width;
+        device_.viewport_at_3d12780[3] = values.viewport.height;
+        device_.viewport_at_3d12780[4] = bits(values.viewport.min_z);
+        device_.viewport_at_3d12780[5] = bits(values.viewport.max_z);
+        device_.half_width_at_3d12948 = values.half_width;
+        device_.half_height_at_3d1294c = values.half_height;
+        device_.left_at_3d0fd20 = values.viewport_bounds.left;
+        device_.top_at_3d0fd24 = values.viewport_bounds.top;
+        device_.right_at_3d0fd28 = values.viewport_bounds.right;
+        device_.bottom_at_3d0fd2c = values.viewport_bounds.bottom;
+        consumer_.projection_width_at_3d0f9e4 = values.projection_width;
+        screen_.points_at_3ce7184[0] = bits(values.polygon_points[0].x);
+        screen_.points_at_3ce7184[1] = bits(values.polygon_points[0].y);
+        screen_.points_at_3ce7184[2] = bits(values.polygon_points[1].x);
+        screen_.points_at_3ce7184[3] = bits(values.polygon_points[1].y);
+        screen_.points_at_3ce7184[4] = bits(values.polygon_points[2].x);
+        screen_.points_at_3ce7184[5] = bits(values.polygon_points[2].y);
+        screen_.points_at_3ce7184[6] = bits(values.polygon_points[3].x);
+        screen_.points_at_3ce7184[7] = bits(values.polygon_points[3].y);
+        for (unsigned i = 0; i < 16; ++i) {
+            screen_.projection_at_3d129c0[i] = bits(values.projection[i]);
+            device_.matrix_at_3d0fd80[i] = bits(values.work_transform[i]);
+            device_.matrix_at_389d318[i] = bits(values.base_transform[i]);
+        }
+        return;
+    }
+    const auto *exe = config_.executable.get();
+    const auto word = [exe](std::uint32_t address) -> std::optional<std::uint32_t> {
+        return exe ? exe->u32(address) : std::nullopt;
+    };
+    const auto real = [&](std::uint32_t address) -> std::optional<float> {
+        const auto bits = word(address);
+        if (!bits)
+            return std::nullopt;
+        float value;
+        std::memcpy(&value, &*bits, sizeof(value));
+        return value;
+    };
+    projection_range_.near_at_3d0f808 = real(0x3d0f808);
+    projection_range_.far_at_3d0f968 = real(0x3d0f968);
+    projection_range_.x_at_90082c = real(0x90082c);
+    projection_range_.y_bits_at_900830 = word(0x900830);
+    projection_range_.cache_x_at_3aad0c0 = real(0x3aad0c0);
+    projection_range_.cache_y_at_3aad0c4 = real(0x3aad0c4);
+    screen_.word_at_3d0f804 = word(0x3d0f804);
+    screen_.flags_at_3d0f964 = word(0x3d0f964);
+    screen_.word_at_3d0f814 = word(0x3d0f814);
+    screen_.width_at_3d0fa20 = word(0x3d0fa20);
+    screen_.height_at_3d0f838 = word(0x3d0f838);
+    screen_.height_at_3d0f9e8 = real(0x3d0f9e8);
+    screen_.width_at_3d0fa04 = real(0x3d0fa04);
+    screen_.height_at_3d0fa08 = real(0x3d0fa08);
+    screen_.left_at_3d0f820 = real(0x3d0f820);
+    screen_.top_at_3d0f824 = real(0x3d0f824);
+    screen_.right_at_3d0f828 = real(0x3d0f828);
+    screen_.bottom_at_3d0f82c = real(0x3d0f82c);
+    screen_.invalid_at_3d0fd1c = word(0x3d0fd1c);
+    screen_.word_at_3ce7160 = word(0x3ce7160);
+    screen_.count_at_3ce7170 = word(0x3ce7170);
+    device_.viewport_at_3d12780[0] = word(0x3d12780);
+    device_.viewport_at_3d12780[1] = word(0x3d12784);
+    device_.viewport_at_3d12780[2] = word(0x3d12788);
+    device_.viewport_at_3d12780[3] = word(0x3d1278c);
+    device_.viewport_at_3d12780[4] = word(0x3d12790);
+    device_.viewport_at_3d12780[5] = word(0x3d12794);
+    device_.half_width_at_3d12948 = real(0x3d12948);
+    device_.half_height_at_3d1294c = real(0x3d1294c);
+    device_.left_at_3d0fd20 = real(0x3d0fd20);
+    device_.top_at_3d0fd24 = real(0x3d0fd24);
+    device_.right_at_3d0fd28 = real(0x3d0fd28);
+    device_.bottom_at_3d0fd2c = real(0x3d0fd2c);
+    consumer_.projection_width_at_3d0f9e4 = real(0x3d0f9e4);
+    screen_.points_at_3ce7184[0] = word(0x3ce7184);
+    screen_.points_at_3ce7184[1] = word(0x3ce7188);
+    screen_.points_at_3ce7184[2] = word(0x3ce718c);
+    screen_.points_at_3ce7184[3] = word(0x3ce7190);
+    screen_.points_at_3ce7184[4] = word(0x3ce7194);
+    screen_.points_at_3ce7184[5] = word(0x3ce7198);
+    screen_.points_at_3ce7184[6] = word(0x3ce719c);
+    screen_.points_at_3ce7184[7] = word(0x3ce71a0);
+    for (unsigned i = 0; i < 16; ++i) {
+        screen_.projection_at_3d129c0[i] = word(0x3d129c0 + 4 * i);
+        device_.matrix_at_3d0fd80[i] = word(0x3d0fd80 + 4 * i);
+        device_.matrix_at_389d318[i] = word(0x389d318 + 4 * i);
+    }
+}
+std::array<std::optional<std::uint32_t>, 90> NativeGame::screen_facts() const {
+    const auto real_bits = [](const std::optional<float> &value) -> std::optional<std::uint32_t> {
+        if (!value)
+            return std::nullopt;
+        std::uint32_t bits;
+        std::memcpy(&bits, &*value, sizeof(bits));
+        return bits;
+    };
+    std::array<std::optional<std::uint32_t>, 90> facts{};
+    unsigned next = 0;
+    facts[next++] = real_bits(projection_range_.near_at_3d0f808);
+    facts[next++] = real_bits(projection_range_.far_at_3d0f968);
+    facts[next++] = real_bits(projection_range_.x_at_90082c);
+    facts[next++] = projection_range_.y_bits_at_900830;
+    facts[next++] = real_bits(projection_range_.cache_x_at_3aad0c0);
+    facts[next++] = real_bits(projection_range_.cache_y_at_3aad0c4);
+    facts[next++] = screen_.word_at_3d0f804;
+    facts[next++] = screen_.flags_at_3d0f964;
+    facts[next++] = screen_.word_at_3d0f814;
+    facts[next++] = screen_.width_at_3d0fa20;
+    facts[next++] = screen_.height_at_3d0f838;
+    facts[next++] = real_bits(screen_.height_at_3d0f9e8);
+    facts[next++] = real_bits(screen_.width_at_3d0fa04);
+    facts[next++] = real_bits(screen_.height_at_3d0fa08);
+    facts[next++] = real_bits(screen_.left_at_3d0f820);
+    facts[next++] = real_bits(screen_.top_at_3d0f824);
+    facts[next++] = real_bits(screen_.right_at_3d0f828);
+    facts[next++] = real_bits(screen_.bottom_at_3d0f82c);
+    facts[next++] = screen_.invalid_at_3d0fd1c;
+    facts[next++] = screen_.word_at_3ce7160;
+    facts[next++] = screen_.count_at_3ce7170;
+    facts[next++] = device_.viewport_at_3d12780[0];
+    facts[next++] = device_.viewport_at_3d12780[1];
+    facts[next++] = device_.viewport_at_3d12780[2];
+    facts[next++] = device_.viewport_at_3d12780[3];
+    facts[next++] = device_.viewport_at_3d12780[4];
+    facts[next++] = device_.viewport_at_3d12780[5];
+    facts[next++] = real_bits(device_.half_width_at_3d12948);
+    facts[next++] = real_bits(device_.half_height_at_3d1294c);
+    facts[next++] = real_bits(device_.left_at_3d0fd20);
+    facts[next++] = real_bits(device_.top_at_3d0fd24);
+    facts[next++] = real_bits(device_.right_at_3d0fd28);
+    facts[next++] = real_bits(device_.bottom_at_3d0fd2c);
+    facts[next++] = real_bits(consumer_.projection_width_at_3d0f9e4);
+    facts[next++] = screen_.points_at_3ce7184[0];
+    facts[next++] = screen_.points_at_3ce7184[1];
+    facts[next++] = screen_.points_at_3ce7184[2];
+    facts[next++] = screen_.points_at_3ce7184[3];
+    facts[next++] = screen_.points_at_3ce7184[4];
+    facts[next++] = screen_.points_at_3ce7184[5];
+    facts[next++] = screen_.points_at_3ce7184[6];
+    facts[next++] = screen_.points_at_3ce7184[7];
+    for (const auto &value : screen_.projection_at_3d129c0)
+        facts[next++] = value;
+    for (const auto &value : device_.matrix_at_3d0fd80)
+        facts[next++] = value;
+    for (const auto &value : device_.matrix_at_389d318)
+        facts[next++] = value;
+    return facts;
+}
+std::array<std::optional<std::uint32_t>, 3> NativeGame::screen_resource_facts() const {
+    return {screen_.points_at_3ce7164, screen_.colors_at_3ce7168, screen_.word_at_3ce716c};
 }
 void NativeGame::initialize_fog_defaults() {
     if (config_.fog_defaults) {

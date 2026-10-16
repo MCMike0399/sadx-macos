@@ -4,6 +4,7 @@
 #include "../probes/input_initial_state_probe.hpp"
 #include "../probes/ninja_sine_table_probe.hpp"
 #include "../probes/ninja_fog_initial_state_probe.hpp"
+#include "../probes/ninja_screen_initial_state_probe.hpp"
 #include <algorithm>
 #include <fstream>
 #include <iostream>
@@ -137,6 +138,39 @@ void missing_fog_facts() {
     same_fog_facts(varied, *config.fog_defaults);
     same_control_facts(varied, *config.control_defaults);
 }
+void same_screen_facts(const sadx::NativeGame &game, const sadx::NinjaScreenInitialState &values) {
+    const auto actual = game.screen_facts();
+    const auto expected = sadx::test::screen_initial_words(values);
+    for (std::size_t i = 0; i < expected.size(); ++i)
+        require(actual[i] && *actual[i] == expected[i], "every numeric screen fact retains its exact bits");
+}
+void same_screen_resources(const sadx::NativeGame &game, const sadx::NativeGameConfig &config) {
+    const auto actual = game.screen_resource_facts();
+    const std::uint32_t addresses[] = {0x3ce7164, 0x3ce7168, 0x3ce716c};
+    for (unsigned i = 0; i < 3; ++i)
+        require(actual[i] == (config.executable ? config.executable->u32(addresses[i]) : std::nullopt),
+                "screen numeric defaults preserve point/color/texture resource facts");
+}
+void missing_screen_facts() {
+    sadx::NativeGameConfig config{};
+    const sadx::NativeGame missing(config);
+    for (const auto &fact : missing.screen_facts())
+        require(!fact, "absent image leaves numeric screen facts unknown");
+    config.screen_defaults = sadx::ninja_screen_initial_state();
+    config.control_defaults = sadx::test::varied_control_defaults();
+    config.fog_defaults = sadx::test::varied_fog_initial_state();
+    const sadx::NativeGame native(config);
+    same_screen_facts(native, *config.screen_defaults);
+    same_screen_resources(native, config);
+    same_control_facts(native, *config.control_defaults);
+    same_fog_facts(native, *config.fog_defaults);
+    for (const auto &byte : native.device_caps().bytes)
+        require(!byte, "screen defaults do not invent GPU capability bytes");
+    config.screen_defaults = sadx::test::varied_screen_initial_state();
+    const sadx::NativeGame varied(config);
+    same_screen_facts(varied, *config.screen_defaults);
+    same_screen_resources(varied, config);
+}
 void same_composition(const sadx::NativeGameReport &expected, const sadx::D3D8StateOwner &graphics,
                       const sadx::NativeGameReport &actual, const sadx::D3D8StateOwner &native) {
     require(expected.startup_completed == actual.startup_completed &&
@@ -182,11 +216,12 @@ void same_composition(const sadx::NativeGameReport &expected, const sadx::D3D8St
 }
 }
 int main(int argc,char** argv){try{
-    require(argc==3||argc==4||argc==7||argc==13||argc==14||argc==15,"usage: game-runtime-test SONIC.EXE INPUT_MOD.DLL [ENGINE_POISON [CONTROL_POISON CONTROL_VARIED CONTROL_PARTIAL]]");
+    require(argc==3||argc==4||argc==7||argc==13||argc==14||argc==15||argc==16,"usage: game-runtime-test SONIC.EXE INPUT_MOD.DLL [ENGINE_POISON [CONTROL_POISON CONTROL_VARIED CONTROL_PARTIAL]]");
     missing_control_facts();
     missing_input_facts();
     missing_sine_facts();
     missing_fog_facts();
+    missing_screen_facts();
     const auto exe=load(argv[1]),dll=load(argv[2]);
     require(exe->u32(0x7dce58)==0x42720000u&&exe->byte(0x3abdc7c)==0&&!exe->byte(0x3d14000+0x2000),"load image: .rdata 60.5f at 7dce58, zero-fill .data, outside the image");
     sadx::NativeGameConfig config;config.executable=exe;config.input_mod_dll=dll;
@@ -201,6 +236,8 @@ int main(int argc,char** argv){try{
     reference_input_facts(original, config);
     same_sine_facts(original, sadx::ninja_sine_table());
     same_fog_facts(original, sadx::ninja_fog_initial_state());
+    same_screen_facts(original, sadx::ninja_screen_initial_state());
+    same_screen_resources(original, config);
     const auto survey=original.run();
     require(survey.failure.empty()&&survey.startup_completed&&survey.frames_completed==3&&!survey.unported.empty(),"survey completes startup and three frames");
     config.engine_tables = sadx::runtime::engine_code_tables();
@@ -208,6 +245,7 @@ int main(int argc,char** argv){try{
     config.input_defaults = sadx::input::input_initial_state();
     config.sine_table = sadx::ninja_sine_table();
     config.fog_defaults = sadx::ninja_fog_initial_state();
+    config.screen_defaults = sadx::ninja_screen_initial_state();
     now = 0;
     sadx::NativeGame native_tables(config);
     same_control_facts(native_tables, *config.control_defaults);
@@ -315,7 +353,7 @@ int main(int argc,char** argv){try{
         const sadx::NativeGame partial_native(config);
         same_sine_facts(partial_native, *config.sine_table);
     }
-    if (argc == 15) {
+    if (argc >= 15) {
         const std::string prefix = argv[14];
         config.input_mod_dll = dll;
         config.sine_table = sadx::ninja_sine_table();
@@ -353,6 +391,52 @@ int main(int argc,char** argv){try{
         const sadx::NativeGame partial_native(config);
         same_fog_facts(partial_native, *config.fog_defaults);
     }
+    if (argc == 16) {
+        const std::string prefix = argv[15];
+        config.fog_defaults = sadx::ninja_fog_initial_state();
+        config.sine_table = sadx::ninja_sine_table();
+        config.executable = load((prefix + "-poisoned.exe").c_str());
+        require(config.executable->u32(0x389d318) != exe->u32(0x389d318) &&
+                    config.executable->u32(0x3d129c0) != exe->u32(0x3d129c0),
+                "screen poison fixture changes base and zero-filled projection matrices");
+        now = 0;
+        sadx::NativeGame poisoned_screen(config);
+        same_screen_facts(poisoned_screen, *config.screen_defaults);
+        same_screen_resources(poisoned_screen, config);
+        const auto report = poisoned_screen.run();
+        same_composition(survey, original.d3d8(), report, poisoned_screen.d3d8());
+        config.executable = load((prefix + "-varied.exe").c_str());
+        config.screen_defaults.reset();
+        const sadx::NativeGame varied_image(config);
+        same_screen_facts(varied_image, sadx::test::varied_screen_initial_state());
+        same_screen_resources(varied_image, config);
+        config.screen_defaults = sadx::ninja_screen_initial_state();
+        const sadx::NativeGame native_over_varied(config);
+        same_screen_facts(native_over_varied, *config.screen_defaults);
+        same_screen_resources(native_over_varied, config);
+        require(native_over_varied.screen_resource_facts() == varied_image.screen_resource_facts(),
+                "native numeric values must not replace injected polygon resources");
+        config.executable = load((prefix + "-partial.exe").c_str());
+        require(config.executable->byte(0x3d129fe).has_value() &&
+                    !config.executable->byte(0x3d129ff),
+                "partial screen fixture removes the final projection word byte");
+        config.screen_defaults.reset();
+        const sadx::NativeGame partial(config);
+        const auto facts = partial.screen_facts();
+        const auto expected = sadx::test::screen_initial_words(sadx::ninja_screen_initial_state());
+        for (std::size_t i = 0; i < facts.size(); ++i) {
+            if (i == 57)
+                require(!facts[i], "incomplete final projection word remains unknown");
+            else
+                require(facts[i] && *facts[i] == expected[i], "other screen words remain independently known");
+        }
+        same_screen_resources(partial, config);
+        config.screen_defaults = sadx::test::varied_screen_initial_state();
+        const sadx::NativeGame partial_native(config);
+        same_screen_facts(partial_native, *config.screen_defaults);
+        same_screen_resources(partial_native, config);
+    }
+    config.screen_defaults.reset();
     config.fog_defaults.reset();
     config.sine_table.reset();
     config.input_defaults.reset();
