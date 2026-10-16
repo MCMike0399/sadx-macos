@@ -1,0 +1,90 @@
+{
+  "passed": true,
+  "source_sha256": {
+    "src/runtime/session_control_defaults.hpp": "684459f1134a399e446bd3ab0c28026fbc5d6a92ddd47d1c24b19e2aec041c3b",
+    "src/runtime/session_control_defaults.cpp": "f2a9287cfaf8c0754556907b48273ba9f09e3b7e44ffc44f9a3b8d083605a4fe",
+    "src/engine/game_frame_control.hpp": "676b9b2915b4e826737130231825fbb333b59a15346c5cb09444d37113d074f3",
+    "src/game/game_mode.hpp": "44230c85f069ad96fc7360b6b16536e1da4001b6cf9d35574f3af772bbaf4075",
+    "tests/probes/session_control_probe.hpp": "126aa05cc9d9139b576ca6ca7f90ee14fa92bc9c7da772f5bc788add5f215fd3",
+    "tests/probes/native_session_control_defaults_probe.cpp": "09f4e19da8c5dfaf065dafe128879e0fdfef9e313b7b88e2da293897b9487a16"
+  },
+  "compiler_dependencies": [
+    "src/engine/game_frame_control.hpp",
+    "src/game/game_mode.hpp",
+    "src/runtime/session_control_defaults.cpp",
+    "src/runtime/session_control_defaults.hpp",
+    "tests/probes/native_session_control_defaults_probe.cpp",
+    "tests/probes/session_control_probe.hpp"
+  ],
+  "toolchain_metadata_sha256": {
+    "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb"
+  },
+  "linked_libraries": [
+    "/usr/lib/libc++.1.dylib",
+    "/usr/lib/libSystem.B.dylib"
+  ],
+  "reference_runtime_symbols_found": false,
+  "commands": [
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-0.d",
+      "-c",
+      "src/runtime/session_control_defaults.cpp",
+      "-o",
+      "unit-0.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-1.d",
+      "-c",
+      "tests/probes/native_session_control_defaults_probe.cpp",
+      "-o",
+      "unit-1.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-dynamiclib",
+      "-Wl,-install_name,@rpath/session-control-defaults.dylib",
+      "unit-0.o",
+      "unit-1.o",
+      "-o",
+      "session-control-defaults.dylib"
+    ]
+  ],
+  "binary_sha256": "f6ce2cab0f7c866dee8520c98d6022332150215d4e7c09647429b02fe6dc8e34",
+  "serialized": {
+    "words": 51,
+    "sha256": "4e3163bf8630565a5b23334ceaebff7d5f9dbb1c871bd5df1b5af34814282649"
+  },
+  "copied_original_binary_inputs": [],
+  "copied_fixtures": [],
+  "inherited_environment": false,
+  "core_archive_linked": false,
+  "limits": [
+    "Scalar load-time controls only; resource/callback ownership and other initial facts remain outside this closure.",
+    "Isolated source/dependency closure, not an operating-system access sandbox.",
+    "Only the verified fingerprint is read before isolation; no original binary or table data is copied."
+  ]
+}

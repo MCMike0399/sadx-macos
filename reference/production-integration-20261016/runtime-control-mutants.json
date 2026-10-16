@@ -1,0 +1,17 @@
+[
+  [
+    "wrong initial flow mode",
+    "flow::GameMode mode = flow::GameMode::Start;",
+    "flow::GameMode mode = flow::GameMode::LogoInit;"
+  ],
+  [
+    "inactive initial window",
+    "std::uint32_t window_active = 1;",
+    "std::uint32_t window_active = 0;"
+  ],
+  [
+    "wrong initial render interval",
+    "std::int32_t configured_frame_interval = 3;",
+    "std::int32_t configured_frame_interval = 1;"
+  ]
+]

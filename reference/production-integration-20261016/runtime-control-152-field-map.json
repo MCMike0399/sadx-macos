@@ -1,0 +1,461 @@
+[
+  {
+    "key": "mode",
+    "expr": "flow.mode",
+    "target": "mode_at_3abdc7c_",
+    "address": 61594748,
+    "width": 4,
+    "read": "s32",
+    "kind": "word"
+  },
+  {
+    "key": "pause",
+    "expr": "flow.pause_state",
+    "target": "loop_.mode_at_3b28114",
+    "address": 62030100,
+    "width": 4,
+    "read": "u32",
+    "kind": "word"
+  },
+  {
+    "key": "save_phase",
+    "expr": "flow.save_phase",
+    "target": "loop_.save_phase_at_3b291a4",
+    "address": 62034340,
+    "width": 4,
+    "read": "s32",
+    "kind": "word"
+  },
+  {
+    "key": "save_ready",
+    "expr": "flow.save_ready",
+    "target": "loop_.request_at_3b291ad",
+    "address": 62034349,
+    "width": 1,
+    "read": "u8",
+    "kind": "word"
+  },
+  {
+    "key": "action_restart_requested",
+    "expr": "flow.action_restart_requested",
+    "target": "mode_state_.byte_at_3abdf74",
+    "address": 61595508,
+    "width": 1,
+    "read": "u8",
+    "kind": "word"
+  },
+  {
+    "key": "title_mode",
+    "expr": "flow.title_mode",
+    "target": "mode_state_.byte_at_3abdcfc",
+    "address": 61594876,
+    "width": 1,
+    "read": "u8",
+    "kind": "word"
+  },
+  {
+    "key": "title_load_phase",
+    "expr": "flow.title_load_phase",
+    "target": "mode_state_.byte_at_3abdcfd",
+    "address": 61594877,
+    "width": 1,
+    "read": "u8",
+    "kind": "word"
+  },
+  {
+    "key": "playing_super_sonic",
+    "expr": "flow.playing_super_sonic",
+    "target": "mode_state_.byte_at_3b18db4",
+    "address": 61967796,
+    "width": 1,
+    "read": "u8",
+    "kind": "word"
+  },
+  {
+    "key": "tutorial_variant",
+    "expr": "flow.tutorial_variant",
+    "target": "mode_state_.byte_at_3b2a2fa",
+    "address": 62038778,
+    "width": 1,
+    "read": "u8",
+    "kind": "word"
+  },
+  {
+    "key": "alert_flag",
+    "expr": "flow.alert_flag",
+    "target": "mode_state_.byte_at_3b22e1e",
+    "address": 62008862,
+    "width": 1,
+    "read": "u8",
+    "kind": "word"
+  },
+  {
+    "key": "alert_blocked",
+    "expr": "flow.alert_blocked",
+    "target": "mode_state_.byte_at_3abdf78",
+    "address": 61595512,
+    "width": 1,
+    "read": "u8",
+    "kind": "word"
+  },
+  {
+    "key": "movie_number",
+    "expr": "flow.movie_number",
+    "target": "mode_state_.word_at_3b2c45c",
+    "address": 62047324,
+    "width": 4,
+    "read": "u32",
+    "kind": "word"
+  },
+  {
+    "key": "menu_message_enabled",
+    "expr": "flow.menu_message_enabled",
+    "target": "mode_state_.word_at_3b290e4",
+    "address": 62034148,
+    "width": 4,
+    "read": "u32",
+    "kind": "word"
+  },
+  {
+    "key": "frame_multiplier",
+    "expr": "frame_mode.frame_multiplier",
+    "target": "timing_.frame_multiplier",
+    "address": 61936008,
+    "width": 4,
+    "read": "s32",
+    "kind": "word"
+  },
+  {
+    "key": "logic_increment",
+    "expr": "frame_mode.logic_increment",
+    "target": "timing_.logic_increment",
+    "address": 61935992,
+    "width": 4,
+    "read": "s32",
+    "kind": "word"
+  },
+  {
+    "key": "pending_logic_ticks",
+    "expr": "frame_mode.pending_logic_ticks",
+    "target": "timing_.pending_logic_ticks",
+    "address": 61935996,
+    "width": 4,
+    "read": "s32",
+    "kind": "word"
+  },
+  {
+    "key": "counter_frequency_low",
+    "expr": "renderer.counter_frequency",
+    "target": "renderer_.counter_frequency.low",
+    "address": 63997240,
+    "width": 4,
+    "read": "u32",
+    "kind": "low64"
+  },
+  {
+    "key": "counter_frequency_high",
+    "expr": "renderer.counter_frequency",
+    "target": "renderer_.counter_frequency.high",
+    "address": 63997244,
+    "width": 4,
+    "read": "u32",
+    "kind": "high64"
+  },
+  {
+    "key": "frame_interval_low",
+    "expr": "renderer.frame_interval",
+    "target": "renderer_.frame_interval.low",
+    "address": 63997096,
+    "width": 4,
+    "read": "u32",
+    "kind": "low64"
+  },
+  {
+    "key": "frame_interval_high",
+    "expr": "renderer.frame_interval",
+    "target": "renderer_.frame_interval.high",
+    "address": 63997100,
+    "width": 4,
+    "read": "u32",
+    "kind": "high64"
+  },
+  {
+    "key": "interval_multiplier",
+    "expr": "renderer.frame_interval_multiplier",
+    "target": "renderer_.frame_interval_multiplier",
+    "address": 59365340,
+    "width": 4,
+    "read": "s32",
+    "kind": "word"
+  },
+  {
+    "key": "configured_interval",
+    "expr": "renderer.configured_frame_interval",
+    "target": "renderer_.configured_frame_interval",
+    "address": 8989020,
+    "width": 4,
+    "read": "s32",
+    "kind": "word"
+  },
+  {
+    "key": "previous_counter_low",
+    "expr": "renderer.previous_counter",
+    "target": null,
+    "address": 63997264,
+    "width": 4,
+    "read": "u32",
+    "kind": "previous_low"
+  },
+  {
+    "key": "previous_counter_high",
+    "expr": "renderer.previous_counter",
+    "target": null,
+    "address": 63997268,
+    "width": 4,
+    "read": "u32",
+    "kind": "previous_high"
+  },
+  {
+    "key": "extra_ticks",
+    "expr": "logic.extra_ticks",
+    "target": "timing_.word_at_3b11180",
+    "address": 61936000,
+    "width": 4,
+    "read": "s32",
+    "kind": "word"
+  },
+  {
+    "key": "logic_tick_count",
+    "expr": "logic.logic_tick_count",
+    "target": "timing_.word_at_3b1118c",
+    "address": 61936012,
+    "width": 4,
+    "read": "s32",
+    "kind": "word"
+  },
+  {
+    "key": "loop_starting",
+    "expr": "logic.loop_starting",
+    "target": "timing_.word_at_3b11198",
+    "address": 61936024,
+    "width": 4,
+    "read": "s32",
+    "kind": "word"
+  },
+  {
+    "key": "demo_playing",
+    "expr": "logic.demo_playing",
+    "target": "timing_.word_at_3b2a2e4",
+    "address": 62038756,
+    "width": 4,
+    "read": "s32",
+    "kind": "word"
+  },
+  {
+    "key": "logic_entry_flag",
+    "expr": "logic.logic_entry_flag",
+    "target": "logic_.word_at_3abdf70",
+    "address": 61595504,
+    "width": 4,
+    "read": "u32",
+    "kind": "word"
+  },
+  {
+    "key": "previous_loop_starting",
+    "expr": "logic.previous_loop_starting",
+    "target": "logic_.word_at_3b11194",
+    "address": 61936020,
+    "width": 4,
+    "read": "s32",
+    "kind": "word"
+  },
+  {
+    "key": "exit_requested",
+    "expr": "loop.exit_requested",
+    "target": "loop_.exit_at_3abdf7c",
+    "address": 61595516,
+    "width": 4,
+    "read": "u32",
+    "kind": "word"
+  },
+  {
+    "key": "window_active",
+    "expr": "loop.window_active",
+    "target": "loop_.focus_at_8929d4",
+    "address": 8989140,
+    "width": 4,
+    "read": "u32",
+    "kind": "word"
+  },
+  {
+    "key": "loading_file",
+    "expr": "loop.loading_file",
+    "target": "loop_.resync_at_3abdf68",
+    "address": 61595496,
+    "width": 1,
+    "read": "u8",
+    "kind": "word"
+  },
+  {
+    "key": "special_render_flags",
+    "expr": "loop.special_render_flags",
+    "target": "consumer_.special_flags_at_909eb4",
+    "address": 9477812,
+    "width": 1,
+    "read": "u8",
+    "kind": "word"
+  },
+  {
+    "key": "fog_profile",
+    "expr": "loop.fog_profile",
+    "target": "consumer_.fog_profile_at_3abdc6c",
+    "address": 61594732,
+    "width": 1,
+    "read": "u8",
+    "kind": "word"
+  },
+  {
+    "key": "queue_fog_enabled",
+    "expr": "loop.queue_fog_enabled",
+    "target": "queue_runtime_.flag_at_3abdcfe",
+    "address": 61594878,
+    "width": 1,
+    "read": "u8",
+    "kind": "word"
+  },
+  {
+    "key": "active_fog_near_distance",
+    "expr": "loop.active_fog.near_distance",
+    "target": "loop_.fog_range_at_3abdca0",
+    "address": 61594784,
+    "width": 4,
+    "read": "u32",
+    "kind": "float"
+  },
+  {
+    "key": "active_fog_far_distance",
+    "expr": "loop.active_fog.far_distance",
+    "target": "loop_.fog_range_at_3abdca4",
+    "address": 61594788,
+    "width": 4,
+    "read": "u32",
+    "kind": "float"
+  },
+  {
+    "key": "restored_fog_near_distance",
+    "expr": "loop.restored_fog.near_distance",
+    "target": "loop_.fog_range_at_3abdc70",
+    "address": 61594736,
+    "width": 4,
+    "read": "u32",
+    "kind": "float"
+  },
+  {
+    "key": "restored_fog_far_distance",
+    "expr": "loop.restored_fog.far_distance",
+    "target": "loop_.fog_range_at_3abdc74",
+    "address": 61594740,
+    "width": 4,
+    "read": "u32",
+    "kind": "float"
+  },
+  {
+    "key": "save_count",
+    "expr": "loop.save_count",
+    "target": "loop_.counter_at_3b291b2",
+    "address": 62034354,
+    "width": 1,
+    "read": "u8",
+    "kind": "word"
+  },
+  {
+    "key": "save_pending",
+    "expr": "loop.save_pending",
+    "target": "loop_.pending_at_3abdf76",
+    "address": 61595510,
+    "width": 1,
+    "read": "u8",
+    "kind": "word"
+  },
+  {
+    "key": "texture_pending",
+    "expr": "loop.texture_pending",
+    "target": "loop_.pending_at_3abdf79",
+    "address": 61595513,
+    "width": 1,
+    "read": "u8",
+    "kind": "word"
+  },
+  {
+    "key": "late_frame_work_enabled",
+    "expr": "loop.late_frame_work_enabled",
+    "target": "loop_.word_at_3abdf80",
+    "address": 61595520,
+    "width": 4,
+    "read": "u32",
+    "kind": "word"
+  },
+  {
+    "key": "game_frame_count",
+    "expr": "loop.game_frame_count",
+    "target": "loop_.frames_at_3abdf58",
+    "address": 61595480,
+    "width": 4,
+    "read": "u32",
+    "kind": "word"
+  },
+  {
+    "key": "local_frame_count",
+    "expr": "loop.local_frame_count",
+    "target": "loop_.frames_at_3abdf5c",
+    "address": 61595484,
+    "width": 4,
+    "read": "u32",
+    "kind": "word"
+  },
+  {
+    "key": "shutdown_cleanup_enabled",
+    "expr": "loop.shutdown_cleanup_enabled",
+    "target": "loop_.word_at_3c85804",
+    "address": 63461380,
+    "width": 4,
+    "read": "u32",
+    "kind": "word"
+  },
+  {
+    "key": "game_mode",
+    "expr": "loop.game_mode",
+    "target": "loop_.game_mode_at_3b22de4",
+    "address": 62008804,
+    "width": 2,
+    "read": "u16",
+    "kind": "word"
+  },
+  {
+    "key": "demo_cutscene",
+    "expr": "loop.demo_cutscene",
+    "target": "input_frame_.demo_cutscene_at_3b2a2e8",
+    "address": 62038760,
+    "width": 4,
+    "read": "s32",
+    "kind": "word"
+  },
+  {
+    "key": "soft_reset_flags",
+    "expr": "reset_input.soft_reset_flags",
+    "target": "input_.soft_reset_flags",
+    "address": 61926048,
+    "width": 1,
+    "read": "u8",
+    "kind": "word"
+  },
+  {
+    "key": "reset_input_mask",
+    "expr": "reset_input.reset_input_mask",
+    "target": "input_.reset_input_mask",
+    "address": 61924280,
+    "width": 1,
+    "read": "u8",
+    "kind": "word"
+  }
+]

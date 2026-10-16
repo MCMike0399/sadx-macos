@@ -68,7 +68,7 @@ audio-stream
 game-reset	
 game-view	
 ninja-projection-range	
-game-runtime	"$(GAME_EXE)" "$(INPUT_MOD_DLL)" build/engine-code-tables-poisoned.exe
+game-runtime	"$(GAME_EXE)" "$(INPUT_MOD_DLL)" build/engine-code-tables-poisoned.exe build/session-control-poisoned.exe build/session-control-varied.exe build/session-control-partial.exe
 input-mod-pad	
 input-chain	
 ninja-sprite-queue	build/assets/ninja-trig.f32 build/assets/ninja-unit.f32 build/assets/ninja-depth-tables.bin
@@ -132,3 +132,4 @@ fidelity-float
 native-ground-acceleration
 hle-screen-init-bridge	"$(GAME_EXE)" build/oracles/screen_init.cases.bin
 engine-code-tables
+session-control-defaults

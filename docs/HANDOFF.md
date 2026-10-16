@@ -3890,3 +3890,28 @@ The product still needs native boot/title, resources and gameplay recovery.
 * Independent STYLE review approved source/classifications and the missing-fact tests.
   Full gate and final verification record follow in a separate judge commit. No complete
   native runtime/session/game independence claim; GOAL §6.7 remains open.
+
+
+### 2026-10-16 — scalar control verification complete (gate 152)
+
+* Completes source `1c24e0c` with a separate judge commit. Exhaustive scalar-data oracle,
+  isolated native closure, constructor snapshots and all six mutations pass; baseline is
+  restored. The retained temporary-copy bridge harness includes exact replacements and
+  compile/run commands. Independent final review found no source or judge blockers.
+* Full `make -j10 gate` **rc 0**, **134 native programs / 50 Python tests**. Two 7,228-frame
+  boots and first-600 override digests unchanged; 71,115 comparisons/mutants, 900-frame
+  controller parity and 63 FPS title cadence pass. Host throughput 83.7 FPS. Twelve layers,
+  zero exceptions, 159,630 owned bytes / 159,680 combined identities, 435 protected judge
+  inputs. Readability 233 files: debt unchanged at hex11,628 / identifiers1,796 / calls75 /
+  gotos2 / long lines1,489 / multiple statements2,184; new native files have zero debt.
+* Seven consumer oracles (`game_mode`, `game_logic`, `game_logic_support`, `game_loop`,
+  `frame_completion`, `game_frame_control`, `speedrun_limiter`) retain their exact prior
+  numerical results; limiter keeps its one explicit exclusion. Aggregate verdict command
+  rc2 retains tracked 9 fail / 46 partial / 1 missing, now 50 pass. Other standalone oracles,
+  separate `make m1` and four unregistered tests skipped: metal-sprite,
+  metal-sprite-composition, metal-texture, player-task.
+* Evidence: `production-integration-20261016/runtime-control-152-*`: field/range/source
+  identities, Ghidra evidence ids, five constructor comparisons, CLI reports, six mutants,
+  isolated closure and recorded gate. No assets or binaries committed. GOAL §6.7 remains
+  open for remaining initialization families; no complete native session/game claim.
+  User requested pushing work through this step to main; two user Ghidra drafts untouched.

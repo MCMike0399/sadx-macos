@@ -1,0 +1,34 @@
+{
+  "passed": true,
+  "baseline": {
+    "name": "baseline",
+    "killed": false,
+    "exit_status": 0,
+    "output": "Game runtime: survey ran startup + 3 frames (5 unported owners); native execution stops at 40cad0>40c090>415000>422680."
+  },
+  "mutants": [
+    {
+      "name": "ignore_native_controls",
+      "killed": true,
+      "exit_status": 1,
+      "output": "all initialized control facts retain their exact values"
+    },
+    {
+      "name": "drop_known_zero_movie",
+      "killed": true,
+      "exit_status": 1,
+      "output": "all initialized control facts retain their exact values"
+    },
+    {
+      "name": "wrong_frequency_high",
+      "killed": true,
+      "exit_status": 1,
+      "output": "all initialized control facts retain their exact values"
+    }
+  ],
+  "source_sha256": "88c899620ccf60fb12ccfdfe9e52a0c36df54dec5c5a4e118d352913327d639d",
+  "limits": [
+    "Temporary source copies only; links explicit mutant composition before unchanged archives.",
+    "Three-frame survey composition only; no sprite draws or full native game claim."
+  ]
+}
