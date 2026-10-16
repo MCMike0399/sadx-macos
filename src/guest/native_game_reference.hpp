@@ -38,6 +38,7 @@
 #include "engine/ninja_screen_initial_state.hpp"
 #include "game/sound_initial_state.hpp"
 #include "game/game_view_initial_state.hpp"
+#include "engine/ninja_queue_initial_state.hpp"
 #include "engine/ninja_debug_text.hpp"
 #include <cstdint>
 #include <map>
@@ -96,6 +97,8 @@ struct NativeGameConfig {
     std::optional<SoundInitialState> sound_defaults;
     // Numeric game-view/colors; pause controls and resources remain independently owned.
     std::optional<GameViewInitialState> view_defaults;
+    // Numeric queue state; allocation, device and live controls remain separate.
+    std::optional<NinjaQueueInitialState> queue_defaults;
     InputModPadConstants input_constants; // DLL .rdata bytes (caller-supplied)
     std::int32_t limiter_cadence=63;      // Speedrun FrameLimit "63FPS"
     SpeedrunLimiterClock clock;           // host counter owner (mac_clock in the app)
@@ -130,6 +133,9 @@ public:
     std::array<std::optional<std::uint32_t>, 329> sound_facts() const;
     std::array<std::optional<std::uint32_t>, 73> sound_resource_facts() const;
     std::array<std::optional<std::uint32_t>, 30> view_facts() const;
+    std::array<std::optional<std::uint32_t>, 21> queue_facts() const;
+    // Reference allocation word and native device-presence fact before startup.
+    std::array<std::optional<std::uint32_t>, 2> queue_resource_facts() const;
     const std::optional<NinjaMath::SineTable> &sine_facts() const noexcept { return sine_table_at_88af78_; }
     // Live owners for a front end (keyboard/controller delivery each frame).
     InputModKeyboardPad keyboard_pad{};
@@ -209,6 +215,8 @@ private:
     void initialize_sound_defaults();
     // NOTSA: bind native view/color values or preserve reference availability.
     void initialize_view_defaults();
+    // NOTSA: bind numeric queue defaults or preserve independent PE availability.
+    void initialize_queue_defaults();
     void initialize_source_facts();
     void report_screen_depth(); // the 78dbe0 assumptions, once
 };

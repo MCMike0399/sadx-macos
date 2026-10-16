@@ -4259,3 +4259,32 @@ The product still needs native boot/title, resources and gameplay recovery.
   seams and unrecovered game behavior stay open. No complete native view/session
   independence or physical graphics/FP claim. Goal active; hook settings and two
   user Ghidra drafts untouched; no binaries/assets committed; no push.
+
+
+### 2026-10-16 — native render-queue initialization (GOAL §6.7)
+
+* `engine/ninja_queue_initial_state` supplies 21 atoms /78 source bytes: Ninja depth
+  comparison index1, execution/light state, light-copy/blend bytes, two counters and
+  high-water marks, plus four distinct float parameter groups. Native boot selects
+  these explicitly; absent config retains independent PE word/byte availability.
+  Allocation provenance, device presence, screen resources and shared controls remain
+  separate; no device/allocation is manufactured by numeric defaults.
+* Reset source(-3000,-1200,-1200), reset capture(0,0,0), allocation source
+  (-3200,-1600,-1600), allocation capture(-3000,-2000,-2000). Float types are supported
+  by the three-argument setter and CHAOS_Action's componentwise copies into those
+  fields. Only captured component0's depth comparison is established; other roles
+  stay explicitly unrecovered. Unrelated triangle/preceding-function candidates and
+  an unseeded procedure lookup are excluded from the evidence, not treated as proof.
+* Evidence `production-integration-20261016/queue-initial-159-*`: ten fresh dossiers
+  +21 xrefs and two cached verified blend dossiers, exact values, isolated data
+  closure, native blend-before-failure/device-boundary unit, three numeric/four
+  adapter mutants caught. Five historical constructors compare 985 queue/control/
+  view/screen/resource facts exactly (4,765 bytes); CLI reports match (5,427 bytes).
+  Poisoned PE composition, varied IEEE/signed/byte values, incomplete final parameter
+  word, injected resources, no-image and varied control/view coexistence pass.
+* Full historical oracle fingerprints reproduce after restoring only native-library
+  hashes: render8209 exact; lifecycle600/402 FP flags; consumer12 CW*187/180 flags
+  perprofile; sprite queue12 CW*1472records/1438 flags perprofile. Numerical results
+  and existing judges unchanged; partial verdicts remain partial. Independent final
+  STYLE review approved; full gate follows. No full queue/session/game or physical GPU/FP claim.
+  GOAL §6.7 remains open; no binaries/assets committed; no push.

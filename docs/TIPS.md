@@ -239,3 +239,22 @@ in `AGENTS.md` and `STYLE.md`; this page holds facts and patterns.
   the wider meaning of every nonzero value. The reset-pending byte belongs to view
   state, while the reset path's pause flag retains its session-control owner.
   Evidence: `view-initial-158-*`, including historical constructor equivalence.
+
+
+## Render-queue initialization and parameter copies
+
+* Default depth comparison is Ninja table index1, not a D3D comparison enumeration.
+  Packed blend starts at zero; source/destination nibble stores happen before the
+  render call can fail. Numeric defaults must not create a device or allocation.
+* Keep the four float triplets distinct: reset source(-3000,-1200,-1200), reset
+  capture(0,0,0), allocation source(-3200,-1600,-1600), allocation capture
+  (-3000,-2000,-2000). Reset/allocation later overwrite captures; those later
+  values are not load-time defaults.
+* Float types are established by the three-argument setter's x87 comparisons/stores
+  and CHAOS_Action's componentwise copy from allocation capture into those fields.
+  Only captured component0's comparison against model depth is established here;
+  do not invent spatial/vector semantics for the other components.
+* Nearest inventory entries are navigation hints, not containing-function evidence.
+  The candidate before CHAOS_DrawModel ends at its RET before the needed references.
+  CHAOS_DrawModel itself lacks a Ghidra procedure; use the existing CHAOS_Action
+  dossier for the copy chain instead of guessing boundaries. Evidence: queue-initial-159-*.

@@ -20,6 +20,7 @@ void NativeGame::initialize_source_facts(){
     initialize_input_defaults();
     initialize_fog_defaults();
     initialize_screen_defaults();
+    initialize_queue_defaults();
     const auto* exe=config_.executable.get();
     const auto u8=[&](std::uint32_t a)->std::optional<std::uint8_t>{if(!exe)return std::nullopt;return exe->byte(a);};
     const auto u32=[&](std::uint32_t a)->std::optional<std::uint32_t>{if(!exe)return std::nullopt;return exe->u32(a);};
@@ -38,16 +39,12 @@ void NativeGame::initialize_source_facts(){
     input_frame_.game_mode_at_3abdc7c=&mode_at_3abdc7c_;input_frame_.demo_playing_at_3b2a2e4=&timing_.word_at_3b2a2e4;
     // Render queue facts.
     const auto f32=[&](std::uint32_t a)->std::optional<float>{const auto v=u32(a);if(!v)return std::nullopt;float x;std::memcpy(&x,&*v,4);return x;};
-    depth_mode_at_8928c8_=u32(0x8928c8);
     rng_.seed_at_2bcbdf8=u32(0x2bcbdf8);
     {std::optional<std::uint16_t> w;if(const auto lo=u8(0x3b29d08),hi=u8(0x3b29d09);lo&&hi)w=static_cast<std::uint16_t>(*lo|(*hi<<8));reset_.emplace(GameResetState{loop_.word_at_3abdf80,w,u32(0x3b290d0),u32(0x3b0e330),rng_});}
     window_at_3a8b088_=u32(0x3a8b088);
-    for(unsigned i=0;i<3;++i){words_at_900840_[i]=u32(0x900840+4*i);words_at_3ab9898_[i]=u32(0x3ab9898+4*i);words_at_900858_[i]=u32(0x900858+4*i);words_at_90084c_[i]=u32(0x90084c+4*i);}
-    queue_runtime_.flag_at_3b12208=u32(0x3b12208);queue_runtime_.mode_at_3ab98ac=u32(0x3ab98ac);queue_runtime_.display_switch_at_3b1117c=&timing_.pending_logic_ticks;
-    consumer_.mode_byte_at_3abdbc0=u8(0x3abdbc0);consumer_.count_at_3abd9d4=s32(0x3abd9d4);consumer_.count_at_3abd9dc=s32(0x3abd9dc);consumer_.maximum_at_3abd9d8=s32(0x3abd9d8);consumer_.maximum_at_3abd9e0=s32(0x3abd9e0);
+    queue_runtime_.display_switch_at_3b1117c=&timing_.pending_logic_ticks;
     // D3D8 device owner: native state table (identity 1 = the one source device).
     if(const auto d=u32(0x3d128b0);d&&*d==0)render_.device_at_3d128b0=NinjaRenderDeviceHandle{}; // created by 791610's 7943c0
-    render_.packed_blend_at_3ab9890=u8(0x3ab9890);
     render_.blend_tables=blend_tables_?&*blend_tables_:nullptr;
     render_.set_render_state=[this](const NinjaRenderStateCommand& c){d3d8_.render_states[c.state]=c.value;++d3d8_.render_calls;return NinjaRenderCallResult{true,{}};};
     render_.set_texture_stage_state=[this](const NinjaRenderStageCommand& c){if(c.stage==0)d3d8_.stage0_states[c.state]=c.value;++d3d8_.stage_calls;return NinjaRenderCallResult{true,{}};};
@@ -171,6 +168,86 @@ void NativeGame::initialize_source_facts(){
     }
     lifecycle_.emplace(NinjaQueueLifecycleOwners{queue_,queue_runtime_,consumer_,timing_,projection_,color_at_3b18230_,&depth_table_,one_at_7dcb10_,negative_one_at_7dcb0c_,depth_mode_at_8928c8_,
         words_at_900840_,words_at_3ab9898_,words_at_900858_,words_at_90084c_});
+}
+void NativeGame::initialize_queue_defaults() {
+    if (config_.queue_defaults) {
+        const auto &values = *config_.queue_defaults;
+        const auto bits = [](float value) {
+            std::uint32_t word;
+            std::memcpy(&word, &value, sizeof(word));
+            return word;
+        };
+        depth_mode_at_8928c8_ = static_cast<std::uint32_t>(values.depth_comparison);
+        queue_runtime_.mode_at_3ab98ac = static_cast<std::uint32_t>(values.execution_mode);
+        queue_runtime_.flag_at_3b12208 = static_cast<std::uint32_t>(values.lighting_palette);
+        consumer_.mode_byte_at_3abdbc0 = values.lighting_copy;
+        render_.packed_blend_at_3ab9890 = values.packed_blend;
+        consumer_.count_at_3abd9d4 = values.primary_count;
+        consumer_.maximum_at_3abd9d8 = values.primary_high_water;
+        consumer_.count_at_3abd9dc = values.secondary_count;
+        consumer_.maximum_at_3abd9e0 = values.secondary_high_water;
+        for (unsigned i = 0; i < 3; ++i) {
+            words_at_900840_[i] = bits(values.reset_source[i]);
+            words_at_3ab9898_[i] = bits(values.reset_capture[i]);
+            words_at_900858_[i] = bits(values.allocation_source[i]);
+            words_at_90084c_[i] = bits(values.allocation_capture[i]);
+        }
+        return;
+    }
+    const auto *exe = config_.executable.get();
+    const auto word = [&](std::uint32_t address) -> std::optional<std::uint32_t> {
+        return exe ? exe->u32(address) : std::nullopt;
+    };
+    const auto byte = [&](std::uint32_t address) -> std::optional<std::uint8_t> {
+        return exe ? exe->byte(address) : std::nullopt;
+    };
+    const auto signed_word = [&](std::uint32_t address) -> std::optional<std::int32_t> {
+        const auto value = word(address);
+        return value ? std::optional<std::int32_t>(static_cast<std::int32_t>(*value)) : std::nullopt;
+    };
+    depth_mode_at_8928c8_ = word(0x8928c8);
+    queue_runtime_.mode_at_3ab98ac = word(0x3ab98ac);
+    queue_runtime_.flag_at_3b12208 = word(0x3b12208);
+    consumer_.mode_byte_at_3abdbc0 = byte(0x3abdbc0);
+    render_.packed_blend_at_3ab9890 = byte(0x3ab9890);
+    consumer_.count_at_3abd9d4 = signed_word(0x3abd9d4);
+    consumer_.maximum_at_3abd9d8 = signed_word(0x3abd9d8);
+    consumer_.count_at_3abd9dc = signed_word(0x3abd9dc);
+    consumer_.maximum_at_3abd9e0 = signed_word(0x3abd9e0);
+    for (unsigned i = 0; i < 3; ++i) {
+        words_at_900840_[i] = word(0x900840 + 4 * i);
+        words_at_3ab9898_[i] = word(0x3ab9898 + 4 * i);
+        words_at_900858_[i] = word(0x900858 + 4 * i);
+        words_at_90084c_[i] = word(0x90084c + 4 * i);
+    }
+}
+std::array<std::optional<std::uint32_t>, 21> NativeGame::queue_facts() const {
+    std::array<std::optional<std::uint32_t>, 21> facts{};
+    unsigned next = 0;
+    facts[next++] = depth_mode_at_8928c8_;
+    facts[next++] = queue_runtime_.mode_at_3ab98ac;
+    facts[next++] = queue_runtime_.flag_at_3b12208;
+    facts[next++] = consumer_.mode_byte_at_3abdbc0;
+    facts[next++] = render_.packed_blend_at_3ab9890;
+    facts[next++] = consumer_.count_at_3abd9d4;
+    facts[next++] = consumer_.maximum_at_3abd9d8;
+    facts[next++] = consumer_.count_at_3abd9dc;
+    facts[next++] = consumer_.maximum_at_3abd9e0;
+    for (const auto &word : words_at_900840_)
+        facts[next++] = word;
+    for (const auto &word : words_at_3ab9898_)
+        facts[next++] = word;
+    for (const auto &word : words_at_900858_)
+        facts[next++] = word;
+    for (const auto &word : words_at_90084c_)
+        facts[next++] = word;
+    return facts;
+}
+std::array<std::optional<std::uint32_t>, 2> NativeGame::queue_resource_facts() const {
+    std::array<std::optional<std::uint32_t>, 2> facts{queue_base_at_3abd960_, std::nullopt};
+    if (render_.device_at_3d128b0)
+        facts[1] = static_cast<bool>(*render_.device_at_3d128b0);
+    return facts;
 }
 void NativeGame::initialize_view_defaults() {
     const auto bits = [](float value) {
