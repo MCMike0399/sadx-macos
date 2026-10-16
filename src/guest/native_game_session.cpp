@@ -1,4 +1,5 @@
 #include "guest/native_game_session.hpp"
+#include "input/input_mod_constants.hpp"
 #include <cstdio>
 #include <fstream>
 #include <iterator>
@@ -10,7 +11,6 @@ std::shared_ptr<const ExecutableImage> load(const std::string& path,std::string&
     if(!image){error=path+": "+parse_error;return {};}
     return std::make_shared<const ExecutableImage>(std::move(*image));
 }
-Sse32 f32(const ExecutableImage& dll,std::uint32_t va){return {*dll.u32(va)};}
 std::string directory_of(const std::string& path){const auto slash=path.find_last_of('/');return slash==std::string::npos?std::string("."):path.substr(0,slash);}
 }
 BootLoadResult load_boot_config(const std::string& exe_path,const std::string& input_mod_path,std::uint32_t frames,OwnerPolicy policy,const SpeedrunLimiterClock& clock){
@@ -36,8 +36,7 @@ BootLoadResult load_boot_config(const std::string& exe_path,const std::string& i
     {   // WinMain's .\sonicDX.ini next to the executable (absent: Win32 fallbacks).
         std::ifstream f(directory_of(exe_path)+"/sonicDX.ini",std::ios::binary);if(f)config.sonicdx_ini=std::vector<std::uint8_t>(std::istreambuf_iterator<char>(f),{});
     }
-    const auto& dll=*config.input_mod_dll;
-    config.input_constants={{f32(dll,0x1000bb6c),f32(dll,0x1000bbb0),f32(dll,0x1000bba0),f32(dll,0x1000bba4),f32(dll,0x1000bb7c)},f32(dll,0x1000bba8),f32(dll,0x1000bb78)};
+    config.input_constants=input_mod_261_constants();
     for(auto& s:config.pad_settings)s={false,7849,8689,true,false,30}; // profile: deadzones, radial L, threshold 30
     config.pad_settings[0].allow_keyboard=true;                          // keyboardPlayer 0
     r.config=std::move(config);return r;

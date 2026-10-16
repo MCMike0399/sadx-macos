@@ -4,8 +4,8 @@
 #include <string>
 namespace sadx {
 // The boot configuration both front ends (sadx-boot CLI, sadx-app window) build the same way:
-// the game image, the Input mod DLL (its .rdata constants), the model DLLs next to the executable,
-// .\sonicDX.ini, and the pinned profile's pad settings. The clock is the host's (mac_clock).
+// the game image, Input mod DLL state/resources, maintained native arithmetic constants,
+// the model DLLs next to the executable, .\sonicDX.ini, and the pinned profile's pad settings. The clock is the host's (mac_clock).
 struct BootLoadResult {
     std::optional<NativeGameConfig> config;
     std::string error;     // which file could not be read or parsed

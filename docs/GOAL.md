@@ -384,7 +384,9 @@ comes first, because every later port should copy a readable model, not the lega
    (117 source bytes), seven caught mutations and preserved control/resource ownership.
    Render-queue initialization adds 21 exact atoms (78 source bytes), float parameter
    copy chains verified through their setters/consumers and seven caught mutations.
-   Allocation/device facts and shared controls retain separate owners.
+   Allocation/device facts and shared controls retain separate owners. Seven Input2.6.1
+   arithmetic coefficients now come from native literals (28 exact bytes), retaining
+   caller injection and reference decoders while removing boot-time DLL coefficient reads.
    Native boot configuration selects these
    families explicitly; injectable reference decoding remains available. These families
    do not complete the runtime refactor:

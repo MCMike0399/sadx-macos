@@ -258,3 +258,22 @@ in `AGENTS.md` and `STYLE.md`; this page holds facts and patterns.
   The candidate before CHAOS_DrawModel ends at its RET before the needed references.
   CHAOS_DrawModel itself lacks a Ghidra procedure; use the existing CHAOS_Action
   dossier for the copy chain instead of guessing boundaries. Evidence: queue-initial-159-*.
+
+
+## Input 2.6.1 immutable coefficients
+
+* Epsilon is exactly 2^-23, not an approximate decimal tolerance chosen by the port.
+  Raw-axis maximum is32767, keyboard scale127, controller scale128, magnitude cap1,
+  trigger scale255 and half-press scale0.5. The controller scale differs from its
+  final signed output clamp; do not merge keyboard/controller coefficients.
+* `input_mod_261_constants()` returns the existing Sse32-based InputModPadConstants
+  with readable literals copied as bits. Boot uses it explicitly; caller injection
+  and the reference decoder remain available. The DLL is still needed for other
+  state/resources, so this is not whole-DLL independence.
+* A missing-byte PE reader fixture must preserve exports and other sections to test
+  coefficient independence. The synthetic fixture splits .rdata around one byte,
+  retains the tail and verifies OnInput exports; it is never executed.
+* Standalone player-input-producer returns nonzero for its existing strict FP flag
+  discrepancies even when every value matches. Compare complete report fingerprints
+  after restoring only documented library/timing metadata; do not count partial as pass.
+  Evidence: `input-constants-160-*`.

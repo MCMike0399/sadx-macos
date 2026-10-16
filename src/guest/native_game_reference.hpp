@@ -99,7 +99,7 @@ struct NativeGameConfig {
     std::optional<GameViewInitialState> view_defaults;
     // Numeric queue state; allocation, device and live controls remain separate.
     std::optional<NinjaQueueInitialState> queue_defaults;
-    InputModPadConstants input_constants; // DLL .rdata bytes (caller-supplied)
+    InputModPadConstants input_constants; // caller-supplied; normal boot uses maintained native values
     std::int32_t limiter_cadence=63;      // Speedrun FrameLimit "63FPS"
     SpeedrunLimiterClock clock;           // host counter owner (mac_clock in the app)
     // Load images: source globals and Input mod DLL data start from these.
@@ -133,6 +133,8 @@ public:
     std::array<std::optional<std::uint32_t>, 329> sound_facts() const;
     std::array<std::optional<std::uint32_t>, 73> sound_resource_facts() const;
     std::array<std::optional<std::uint32_t>, 30> view_facts() const;
+    // Reference-only caller coefficient bits, including deliberately injected variants.
+    std::array<std::uint32_t, 7> input_constant_facts() const;
     std::array<std::optional<std::uint32_t>, 21> queue_facts() const;
     // Reference allocation word and native device-presence fact before startup.
     std::array<std::optional<std::uint32_t>, 2> queue_resource_facts() const;

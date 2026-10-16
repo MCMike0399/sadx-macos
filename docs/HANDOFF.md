@@ -4317,3 +4317,29 @@ The product still needs native boot/title, resources and gameplay recovery.
   seams and unrecovered gameplay remain open. No full native queue/session/game or
   physical GPU/FP claim. Goal active; hook settings and two user drafts untouched;
   no binaries/assets committed; no push.
+
+
+### 2026-10-16 — native Input 2.6.1 arithmetic coefficients (GOAL §6.7)
+
+* `input/input_mod_constants` provides the seven immutable arithmetic coefficients
+  as readable float literals, copied to the existing Sse32-based type. All28 source
+  bytes match pinned DLL c5ccdcc7: epsilon2^-23, maximum32767, keyboard127, controller128,
+  cap1, trigger255, half0.5. Boot selects native values; unchecked DLL coefficient
+  reads are removed. Explicit caller injection and existing reference decoder stay
+  available; mutable controller data/resources remain separate.
+* Evidence `production-integration-20261016/input-constants-160-*`: three fresh
+  consumer dossiers +seven xrefs; exact data oracle; strict isolated nine-file
+  transitive closure; native keyboard/controller/trigger/half-press unit. Dedicated
+  boot test covers canonical/poisoned/varied/partial DLLs, zero/IEEE injections,
+  missing-image errors, all252 existing resource bytes and four three-frame surveys
+  (no sprite draws). Synthetic partial mapping removes only one epsilon byte while
+  preserving other coefficients, exports and data; reader fixture only. Historical
+  CLI reports identical (5,427 bytes). Four data/three boot mutants caught.
+* Existing complete numerical reports reproduce historical fingerprints after only
+  library/timing metadata restoration: axes109,056 evaluations/93,104 MXCSR differences,
+  pad1,044/300 flags, producer24*5,050/108,240 FP differences. All values match, partials
+  remain partial. Standalone producer command returned rc2 due existing strict flags.
+  Algorithms and prior judges/decoder unchanged. Independent final STYLE review
+  approved; full gate follows.
+  DLL/game images remain required for other state/resources; no full native input/
+  session/game or physical-device/MXCSR claim. GOAL §6.7 remains open; no push.

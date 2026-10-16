@@ -169,6 +169,12 @@ void NativeGame::initialize_source_facts(){
     lifecycle_.emplace(NinjaQueueLifecycleOwners{queue_,queue_runtime_,consumer_,timing_,projection_,color_at_3b18230_,&depth_table_,one_at_7dcb10_,negative_one_at_7dcb0c_,depth_mode_at_8928c8_,
         words_at_900840_,words_at_3ab9898_,words_at_900858_,words_at_90084c_});
 }
+std::array<std::uint32_t, 7> NativeGame::input_constant_facts() const {
+    const auto &values = config_.input_constants;
+    return {values.axes.epsilon.bits, values.axes.maximum.bits, values.axes.keyboard_scale.bits,
+            values.axes.controller_scale.bits, values.axes.magnitude_cap.bits,
+            values.trigger_scale.bits, values.half_press_scale.bits};
+}
 void NativeGame::initialize_queue_defaults() {
     if (config_.queue_defaults) {
         const auto &values = *config_.queue_defaults;
