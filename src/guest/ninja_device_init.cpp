@@ -1,3 +1,4 @@
+#include "guest/frame_control_reference.hpp"
 #include "engine/ninja_device_init.hpp"
 #include <cstring>
 namespace sadx {

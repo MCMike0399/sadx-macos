@@ -233,7 +233,7 @@ measure.
 
 ## 11. Before and after (from this repository)
 
-The game-mode and ground-acceleration examples are implemented and judged (GOAL §6).
+The game-mode, ground-acceleration and frame-control examples are implemented (GOAL §6).
 
 **Game mode handler** (`src/game/game_mode.cpp`, `update_logo`; source `GameModeHandler`).
 The adapter in `src/guest/game_mode_reference.cpp` holds call-site addresses, guest arguments,
@@ -313,12 +313,42 @@ tests distinguish arithmetic failure from store failure in the native immediate-
 model; deferred hardware x87 fault delivery remains unverified. Native-only testing completes a
 controlled inactive step; missing native mutation/yaw composition remains explicit.
 
-**Frame control** (`src/engine/game_frame_control.hpp`, the ADR-0006 pilot). The names and
-annotations are done, but the shape is still reference-tier: every field is `std::optional`,
-`CounterWords` splits a 64-bit counter into optional halves to mirror fixtures, and results
-carry `source_boundary`. The game-tier version holds `std::int64_t counter_frequency` and
-`int frame_multiplier = 1`. The adapter keeps the optional halves and reports which word a
-fixture lacked.
+**Frame control** (`src/engine/game_frame_control`, source `dsInitInt`). The core owns
+plain `ModeState`, `RendererState` and borrowed input values. Zero-filled source fields start
+at zero; the two file-backed settings start at 1 and 3. In particular, the initial frame
+multiplier is zero, rather than the illustrative value 1 in the earlier sketch.
+
+```cpp
+// actual game-tier reset decision; fixture facts are checked in the adapter
+void update_soft_reset_flags(InputState &state) {
+    const auto flags = soft_reset_flags(state);
+    if (flags != 0) {
+        if (save_phase(state) == 0)
+            store_soft_reset_flags(state, flags | 1U);
+        return;
+    }
+    constexpr std::uint8_t kResetInputMask = 68;
+    if (reset_key_edge(state) != 0 && (reset_input_mask(state) & kResetInputMask) != 0) {
+        store_soft_reset_flags(state, flags | 4U);
+        return;
+    }
+    store_soft_reset_flags(state, flags & 251U);
+}
+```
+
+`guest/frame_control_reference` retains optional counter halves, mapped global identities,
+and source failure boundaries, with no duplicate algorithm. Private typed state seams let
+the native backend read plain fields and the reference backend check facts at each consumed
+read. Frequency validation precedes the multiplier store; all three mode stores precede the
+selected renderer branch; callback registration follows successful interval setup. The limiter
+reads the previous counter after each clock callback and commits the sampled time without
+accumulating a deadline. Its optional query results describe actual OS failure.
+
+The isolated checker builds two distinct closures: a plain native host journey with no
+reference header or fixture, and a portable fact adapter that preserves all missing-fact
+assertions and the unchanged 2,672-row frozen numeric corpus. Neither closure needs the PE
+loader, guest runtime or original binary. This proves the named frame-control slice, not
+native boot/title, complete game independence or physical timing fidelity.
 
 ## 12. Review checklist (author and independent reviewer)
 

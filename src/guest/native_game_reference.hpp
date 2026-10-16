@@ -1,4 +1,5 @@
 #pragma once
+#include "guest/frame_control_reference.hpp"
 #include "game/audio_stream.hpp"
 #include "loader/executable_image.hpp"
 #include "guest/game_mode_reference.hpp"

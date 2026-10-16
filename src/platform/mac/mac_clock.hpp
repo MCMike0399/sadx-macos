@@ -14,7 +14,7 @@ public:
     // Limiter clock; the wait hint sleeps until ~4 ms before the deadline and
     // leaves the final ~4 ms to the source spin: the limiter has no catch-up, so
     // any oversleep would slow the game.
-    SpeedrunLimiterClock limiter_clock()const;
+    frame::LimiterClock limiter_clock()const;
 private:
     std::uint32_t numer_,denom_;
 };

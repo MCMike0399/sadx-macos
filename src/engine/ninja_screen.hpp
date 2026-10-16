@@ -1,7 +1,7 @@
 #pragma once
 #include <optional>
 #include "math/d3dx_math.hpp"
-#include "engine/game_frame_control.hpp"
+#include "engine/frame_control_fwd.hpp"
 #include "engine/ninja_device_init.hpp"
 #include "engine/ninja_frame_calls.hpp"
 #include "engine/ninja_keyboard.hpp"

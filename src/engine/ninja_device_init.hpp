@@ -1,6 +1,6 @@
 #pragma once
 #include <optional>
-#include "engine/game_frame_control.hpp"
+#include "engine/frame_control_fwd.hpp"
 #include "engine/game_logic.hpp"
 #include "engine/ninja_frame_calls.hpp"
 #include "engine/ninja_render.hpp"

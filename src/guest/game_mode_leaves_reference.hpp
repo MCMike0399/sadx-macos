@@ -1,4 +1,5 @@
 #pragma once
+#include "guest/frame_control_reference.hpp"
 #include "cpu/crt_rand.hpp"
 #include "engine/game_logic.hpp"
 #include "guest/game_mode_reference.hpp"

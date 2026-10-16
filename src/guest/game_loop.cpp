@@ -1,3 +1,4 @@
+#include "guest/frame_control_reference.hpp"
 #include "game/game_loop.hpp"
 #include "engine/speedrun.hpp"
 

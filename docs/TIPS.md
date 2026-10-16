@@ -121,3 +121,17 @@ in `AGENTS.md` and `STYLE.md`; this page holds facts and patterns.
   tests catch both reorderings; masked final-value comparisons alone cannot prove this.
 * Reference evidence: `inventory-raw/ground-pilot-context.json`,
   `ev_b9e2502725c195a77b096e64d97288e6b5f9db93725b1886a588320ac34dee6d`.
+
+## Frame-control refactor evidence
+
+* The interval helper validates the frequency high word, then the low word, before storing
+  its multiplier. Ghidra pseudocode may reorder the apparent assignment; assembly and the
+  missing-word oracle establish the actual order.
+* Mode setup publishes all three timing stores before reading the selected renderer setting.
+  Frequency errors nested inside that call retain both the caller and missing-word boundary.
+* Limiter clock callbacks may mutate timing or previous-counter state. Read timing after QPF
+  and previous-counter after each QPC; a snapshot at entry loses those changes. Nested
+  reference wrappers restore the enclosing binding on both success and missing-fact stops.
+* The source settings at 389d7dc and 89295c are file-backed 1 and 3 respectively. The timing
+  frame multiplier is zero-filled, so the earlier STYLE sketch's initial value 1 was not a
+  recovered default. Native tests require the actual defaults.

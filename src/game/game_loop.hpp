@@ -1,5 +1,5 @@
 #pragma once
-#include "engine/game_frame_control.hpp"
+#include "engine/frame_control_fwd.hpp"
 #include "engine/game_logic.hpp"
 #include <array>
 #include <cstdint>

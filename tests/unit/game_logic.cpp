@@ -1,3 +1,4 @@
+#include "guest/frame_control_reference.hpp"
 #include "engine/game_logic.hpp"
 #include <iostream>
 #include <stdexcept>

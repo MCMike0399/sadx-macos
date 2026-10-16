@@ -3729,3 +3729,33 @@ The product still needs native boot/title, resources and gameplay recovery.
   and the user's two Ghidra request drafts untouched.
 * Next: §6.6c frame control, moving fixture optionals/CounterWords to its reference adapter
   while retaining plain native values, existing oracle/mutants and STYLE review. Goal active.
+
+### 2026-10-16 — GOAL §6.6c frame-control source separation (track R; verification in progress)
+
+* Frame control now has plain native ModeState, RendererState and borrowed input fields.
+  Private typed state seams select direct native fields or lazy reference facts. The
+  reference adapter owns CounterWords, fixture optionals, global identities and numeric
+  failure boundaries, and invokes the same core without an old algorithm fallback.
+* Preserved frequency high/low validation before multiplier stores, three timing stores
+  before selected interval setup, callback registration after success, lazy reset reads,
+  QPF stores before multiplier validation and QPC callbacks before previous-counter reads.
+  Nested wrappers restore the outer binding through normal and missing-fact exits. Native
+  Mac counter callers now use the plain-state interface. PE bytes establish settings 1/3;
+  source zero-filled timing starts at zero, correcting the earlier illustrative sketch.
+* Eight coupled legacy CPP interpreters moved to guest with byte-identical bodies after
+  one reference-header include. GameLogicTimingState moved whole; compatibility headers
+  use forward declarations. This is relocation, not a semantic rewrite of those systems.
+  All unit/probe targets compile; 12 layers/zero exceptions and no duplicate owners.
+* Frozen 2,672 cases unchanged and exact. Limiter 1,799 comparisons/one existing exclusion
+  exact. Seeded holdout 2,048/zero against both separately compiled prior source and the
+  candidate, same case hash. Three preserved numeric mutants caught (120/472/182
+  mismatches); three host mutations caught (deadline accumulation, cadence, callback).
+  Independent STYLE review found no correctness blocker, subject to final verification.
+* Separate isolated native and portable-corpus closures pass; native has no fixture,
+  reference header, PE or guest runtime. Portable closure retains every old missing-fact
+  assertion. New tests check clock mutations and nested successful/failing reference calls;
+  four Python guard tests prevent dependency exceptions from leaking into native closure.
+* Fourteen affected oracles rerun: value/call comparisons exact; game loop, game view and
+  projected depth retain existing FP-flag partial results. Aggregate verdict still rc 2.
+  Full gate and judge identity refresh pending in a separate judge commit. No full native
+  boot/title, physical timing or game independence claim. Goal remains active.

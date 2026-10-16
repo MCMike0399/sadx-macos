@@ -182,6 +182,14 @@ decoding and source diagnostics. Native constants are literals; reference consta
 remain injectable. Native input is supplied by its owner, and uncomposed mutation/yaw owners
 stop explicitly. The native-only test needs no PE or guest runtime.
 
+`engine/game_frame_control` owns plain native frame timing, reset input and the limiter.
+Its private state seams bind either to native fields or to `guest/frame_control_reference`,
+which owns fixture optionals, split counter words and numeric failure boundaries. Both use
+the same core. Legacy logic, startup, device, screen, queue and frame-call CPP interpreters
+are in `guest/`; their public compatibility headers retain forward declarations only for
+the moved timing types. These relocations do not complete semantic rewrites of those systems.
+The native host and portable frozen-corpus builds have separate isolated source closures.
+
 The hybrid guest executes `sonic.exe` with `process_overrides` supplying native owners.
 Each HLE import logs its call for trace diffs. These reference paths do not establish
 native boot/title or executable independence. The separate native frame-control and game-mode pilots

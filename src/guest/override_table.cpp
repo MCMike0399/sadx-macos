@@ -1,3 +1,4 @@
+#include "guest/frame_control_reference.hpp"
 #include "guest/override_table.hpp"
 #include "engine/game_frame_control.hpp"
 #include "engine/game_logic_support.hpp"
