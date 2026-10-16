@@ -1,0 +1,110 @@
+{
+  "scope": "GOAL 6.3 recovery-navigation tools; no game behavior changed",
+  "sha256": {
+    "tools/symbols/source_index.py": "3f813c844d662b8bf866632cbc63056cac4ca804faeaf47db0eac4b77acdbfbb",
+    "tools/symbols/lookup.py": "95b75a530a9586914a3a20c0aa2cfe6a5c82549b3e0e76184629dd7db544b8d4",
+    "tools/symbols/context_bundle.py": "8d4253cc088fc125243d0a00cd49d1498720aa80e4eee1997f77ef4f9fdbcd0c",
+    "tests/python/test_symbol_context.py": "e276e801136d0821369682beb43c42c0f460ff137123683d8c1150487eec2690"
+  },
+  "fixture_tests": 6,
+  "python_tests": 35,
+  "real_bundles": [
+    {
+      "address": "0x40c090",
+      "name": "GameModeHandler",
+      "native_status": "legacy_declaration_candidate",
+      "callees": 69,
+      "callers": 1,
+      "profile_scope": "entry_byte_only",
+      "body_ranges": [],
+      "cached_evidence_ids": [
+        "ev_9fee6b012b44fdaec4128143e408948851a7a497af62a03b4fb2f3ceaa1ad4a1",
+        "ev_e60187fe1e91bd13fbad47e41cb87127ea6419e2a0da14f7a194631b4bfa68b3",
+        "ev_dd16151a31f53665f903878c68081162b90fd56edfe6e4ea8437a6f8ee529b6c"
+      ],
+      "unreadable_caches": [],
+      "bundle_sha256": "6281429d0cd6c99040b3f4f65c76b46961865505197684cfd25d409b28ea1333"
+    },
+    {
+      "address": "0x411e30",
+      "name": "dsInitInt",
+      "native_status": "function_annotation",
+      "callees": 2,
+      "callers": 13,
+      "profile_scope": "cached_body_ranges",
+      "body_ranges": [
+        {
+          "start": "0x411e30",
+          "end": "0x411e8c"
+        },
+        {
+          "start": "0x411e30",
+          "end": "0x411e8c"
+        },
+        {
+          "start": "0x411e30",
+          "end": "0x411e8c"
+        }
+      ],
+      "cached_evidence_ids": [
+        "ev_828b81ca781f83dfdeb82bd02a3ade208d91d198855d18a599d536c08d4ada33",
+        "ev_8025d78e02363ceacfbc3655f872b1b4c0958c0d996c7ca576f9bda0e3a2136c",
+        "ev_65278bae4da5ac3cd7e721a2297d9e0a32c72b5035a5ab6c04bb06ee8b906058",
+        "ev_2d0e017f462c911d938c8132623f3a9211ff22316be42d52de0975808c47e5c1",
+        "ev_e60187fe1e91bd13fbad47e41cb87127ea6419e2a0da14f7a194631b4bfa68b3",
+        "ev_dd16151a31f53665f903878c68081162b90fd56edfe6e4ea8437a6f8ee529b6c",
+        "ev_6493ad0e3b555a150d66f041007da76146e34a7201ee77e3a256d5530fe3b75c"
+      ],
+      "unreadable_caches": [],
+      "bundle_sha256": "b6814b61020166b21d2e5137c84f88c1e719999ee345ccd950484312fa66152b"
+    },
+    {
+      "address": "0x7912e0",
+      "name": "Direct3D_SetViewportAndTransform",
+      "native_status": "literal_override",
+      "callees": 0,
+      "callers": 2,
+      "profile_scope": "cached_body_ranges",
+      "body_ranges": [
+        {
+          "start": "0x7912e0",
+          "end": "0x7913cb"
+        },
+        {
+          "start": "0x7912e0",
+          "end": "0x7913cb"
+        }
+      ],
+      "cached_evidence_ids": [
+        "ev_8c266aa5d123e45b98f46a587228313a2152f9837da72dfa760a053c08c18cea",
+        "ev_dfdee4c3ad81d849709dddb27b7e7b3cc2381c5ccf355d700fe9f3558a0a9517",
+        "ev_18fc826e741e88602b1e39b107fd83a63933bbafe2eda0b90596bb24a78b0195"
+      ],
+      "unreadable_caches": [],
+      "bundle_sha256": "da7bef73fbb4b574c481b013300dd4e3fdcf601eca5c36b82412e4f8638e47d3"
+    }
+  ],
+  "isolated_mutants": [
+    {
+      "name": "module_identity",
+      "exit_status": 1,
+      "caught": true
+    },
+    {
+      "name": "patch_at_entry_only",
+      "exit_status": 1,
+      "caught": true
+    },
+    {
+      "name": "unrelated_cache",
+      "exit_status": 1,
+      "caught": true
+    }
+  ],
+  "mutant_report_sha256": "2be7b1bc8c7ca33ae55e5399980a1ab07231dbd29db8c3a04230c93be161cd73",
+  "limits": [
+    "Source evidence is lexical; not proof of compiled native behavior or runtime override coverage.",
+    "No game-mode body extent in this cache: entry-only profile results are explicitly incomplete.",
+    "Cached profiles may be older; raw evidence paths and identities must be inspected before recovery."
+  ]
+}

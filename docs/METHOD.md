@@ -34,7 +34,32 @@ make symbols          # build/symbols/{symbols,conflicts,coverage}.json + rea-se
 | Is my code equal to the original? | its oracle: `make oracle-<slug>`, `python3 tools/oracles/verdict.py build/oracles/<slug>.json`; mutants: `tools/gate/mutate.py` (§3) |
 | Is REA/Ghidra healthy? | `node $REA doctor --provider ghidra --json` before blaming the provider |
 
-Symbol lookup (prints the preferred name and every alternative with its source header):
+Symbol lookup and context bundles (JSON, with alternatives and source evidence):
+
+```sh
+make symbols
+python3 tools/symbols/lookup.py 0x40c090 0x3abdc7c 0x44c270
+python3 tools/symbols/context_bundle.py 0x40c090 > build/game-mode-context.json
+```
+
+Both commands accept bare hexadecimal addresses and `--module` (default `SONIC`), and
+never open the game binary or launch REA. Lookup preserves all symbol alternatives,
+signatures and source declarations. A bundle joins direct callers/callees, annotation and
+legacy-declaration candidates, literal/loop override initializers, profile patches and cached
+`reference/inventory-raw/*.json` evidence (including batch envelopes and evidence ids).
+`--cache-dir` selects another recovery folder. Source matches are navigation aids, not
+proof that an implementation is linked, an override fires or behavior is verified.
+
+Profile intersection uses the union of available cached Ghidra body ranges (inclusive ends).
+When no body is available it reports only entry-byte overlaps and a missing fact; it does
+not certify the whole function. Obtain an `analyze_function` dossier through the owned
+runner, or pass `--end 0xEND` with an **exclusive** end established by that evidence. Keep
+the evidence with the bundle. Cache records retain subject identity and file hashes;
+inspect their profile/limitations before relying on older results. Unreadable caches and
+unrecognized initializer candidates are reported explicitly. The tools are lexical readers,
+not C++ parsers; they do not follow computed calls or evaluate arbitrary initializer code.
+
+Manual lookup equivalent (useful when inspecting the generated database):
 
 ```sh
 python3 - 0x40c090 0x3abdc7c 0x44c270 <<'EOF'

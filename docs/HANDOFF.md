@@ -3424,3 +3424,36 @@ The product still needs native boot/title, resources and gameplay recovery.
   deliberately restricted, not a C++ parser. Existing Ghidra request drafts untouched.
 * Next: remaining §6.3 lookup/context-bundle tools, then §6.4 tamper-evident judge.
   Goal remains active.
+
+### 2026-10-15 — GOAL §6.3 symbol lookup/context tools (track R, gate 143)
+
+* Added `tools/symbols/{lookup,context_bundle,source_index}.py`; METHOD §0 documents JSON
+  usage, scope and missing facts. Symbols retain module identity, canonical/alternative
+  declarations and signatures. Bundles join direct callers/callees, source annotations,
+  legacy declaration candidates, literal and hex-list loop override initializers, profile
+  patch intersections and cached REA evidence ids/subjects/hashes. No game binary is opened
+  and no REA session is launched. No recovered game code changed.
+* Cache records are matched by requested parameter addresses, not incidental callee or
+  pseudocode mentions. Full patch intersection uses cached inclusive Ghidra body ranges or
+  an evidence-backed explicit exclusive `--end`; missing bodies remain explicit. Inactive
+  and undetermined patch records retain their original tags. Source syntax is navigation
+  evidence, not proof of a compiled implementation, runtime binding or fidelity.
+* Evidence: `production-integration-20261015/symbol-context-143-{gate,evidence}.json`.
+  Real GameModeHandler bundle: 69 callees, 1 caller, 3 cached records; dsInitInt: 2/13/7;
+  viewport: 0/2/3. Frame and viewport have cached bodies; game mode has no cached extent,
+  so its profile result is explicitly entry-only and requests REA analysis before recovery.
+* Six new fixtures cover module collisions, unknowns, graph joins, source comments/strings,
+  loop entries, STUB-only evidence, cache envelopes/batches/errors, internal patch sites,
+  end boundaries and CLI operation in a fixture tree with no original binaries. Three
+  isolated code mutants caught: lost module identity, entry-only patch comparison, unrelated
+  cache acceptance. Maintained source was unchanged throughout the full gate.
+* Full gate **rc 0**, **128 native programs / 35 Python tests**; 7,228-frame determinism,
+  unchanged first 600 override digests, 71,115 override comparisons with all mutants caught,
+  900-frame controller parity, 63 FPS title cadence; host 80.7 FPS. Readability unchanged.
+* Limits: restricted lexical readers, unresolved indirect calls and other initializer
+  syntax remain unknown; two extra initializer candidates are reported for inspection.
+  Cached profiles can be older. No standalone oracles or separate `make m1`; four
+  unregistered tests skipped. Physical pads, Windows parity and full native independence
+  remain unverified. Existing Ghidra request drafts untouched; no assets/binaries committed.
+* §6.3 tooling is delivered across gates 141–143. Next: §6.4 tamper-evident judge; the
+  proposed settings hook requires user approval before application. Goal remains active.

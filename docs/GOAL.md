@@ -289,8 +289,10 @@ comes first, because every later port should copy a readable model, not the lega
 3. **Readability ratchet and tooling (R).**
    Formatting, the lexical ratchet, fixture/mutant tests and STATUS metrics landed in the
    2026-10-15 readability step (see HANDOFF). The separate provenance extension accepts
-   STUB reasons and ordinary member functions. Next: lookup/context-bundle tools.
-   The requirements below remain the scope.
+   STUB reasons and ordinary member functions. Lookup/context-bundle tools now join symbols,
+   source candidates, the direct-call graph, profile overlaps and cached evidence (METHOD §0).
+   Missing function extents remain explicit and require REA evidence. Next: item 4.
+   The requirements below document this item's scope.
    * Add `.clang-format` (LLVM base, 4 spaces, 100 columns). Apply it to new and migrated files
      only.
    * Add `tools/gate/check_readability.py` to `make check`. In game-tier files it counts hex
