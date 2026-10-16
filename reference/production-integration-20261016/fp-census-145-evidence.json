@@ -1,0 +1,209 @@
+{
+  "scope": "GOAL 6.5 reference FP entry-control census",
+  "sha256": {
+    "tools/analysis/fp_control_census.cpp": "8d9da215a14210c6977a86e3b342c033415ea117ba0a00bde2bd43c2ade78874",
+    "tools/analysis/run_fp_census.py": "280e88135ed284647c31a69ceb0109eea8feed344847f2246e3b6cf8c0333278",
+    "tests/python/test_fp_census.py": "b9e02faa363da0c833f339e960a96e8b5a69c6961f22b018d4ee9c4e53f46e36",
+    "reference/fp-control-census.json": "34a39c0e0050ba7cfa0afd4084bfa4b20ec1c2d701f33a39060fcb872ba0e141"
+  },
+  "post_capture_module_identity_check": {
+    "reference/updated-pc-reference/game/mods/sadx-input-mod/sadx-input-mod.dll": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+    "reference/updated-pc-reference/game/mods/sadx-input-mod/SDL2.dll": "25003b5bb2bda0d5b558d357cd8eb6c96fa20d776b815950b46ff3444791d1cf",
+    "reference/updated-pc-reference/game/mods/sadx-speedrun-mod/sadx-speedrun-mod.dll": "f3fc68a3058fb726142547018da860b170f137248e54b82712b52527e7b74802",
+    "reference/updated-pc-reference/game/mods/.modloader/SADXModLoader.dll": "3293cf354dcfc62274c2ad25c09041606d6ad55483f070c233111cd9b47a97ba",
+    "reference/updated-pc-reference/game/mods/.modloader/extlib/BASS/avformat-vgmstream-59.dll": "909cf4b58656b0ed6913ff6e9964b76eadeaf65f1396852d90d4c8bc0cc18f05",
+    "reference/updated-pc-reference/game/mods/.modloader/extlib/BASS/bass.dll": "0738dc614d751b3b08125c03a920fc243a3e5eea4f16d3374d8d94a6e2454477",
+    "reference/updated-pc-reference/game/mods/.modloader/extlib/BASS/libvorbis.dll": "f7b2b3d82abfcfeccf1c1135c7a333eb280c0d1ebf3951281bbb7759c055b092",
+    "reference/updated-pc-reference/game/mods/.modloader/extlib/BASS/avutil-vgmstream-57.dll": "e47b8076c7f7b478c94fd4fdb76e085dc9e2084def8b4a6347f80e01933c571d",
+    "reference/updated-pc-reference/game/mods/.modloader/extlib/BASS/avcodec-vgmstream-59.dll": "dc6f469c2f1728d8f8809223c190af693ee48e5e005b73711fc356c91b8c3adc",
+    "reference/updated-pc-reference/game/mods/.modloader/extlib/BASS/libmpg123-0.dll": "2bae5dcb2071b09d9b1c1803ec345954e80046bdc4cae08bc85853040ac6202b",
+    "reference/updated-pc-reference/game/mods/.modloader/extlib/BASS/bass_vgmstream.dll": "151f41429d3fde45baf6f5310f1ddb8f5a569a522c02afe7c4224e03211cdc4a",
+    "reference/updated-pc-reference/game/mods/.modloader/extlib/BASS/swresample-vgmstream-4.dll": "4e3db31079dddf7588c743a2e414f4eeb954acb55b0cd6d04d57f0e4148272e0",
+    "reference/updated-pc-reference/game/mods/.modloader/extlib/D3D8M/d3d8m.dll": "268efe19458c94f8bfa62236d39161bd85e091773a91af989c4a92dccb111126",
+    "reference/updated-pc-reference/game/mods/.modloader/extlib/d3d8to11/d3d8to11.dll": "3bc808cae02131975f02c2e9e891df52fd78b5188b9a15addf54159e4662ca7d",
+    "reference/updated-pc-reference/game/mods/.modloader/extlib/SDL2/SDL2.dll": "7806fe53d09bc2bb86c96b42b3dd493b179d5235b670470c405de6cef2cbfbba"
+  },
+  "runs": [
+    {
+      "profile": "intro",
+      "variant": "plain",
+      "frames": 7228,
+      "instrumented_addresses": 212,
+      "bound_addresses": 52,
+      "reached_addresses": 0,
+      "calls": 0,
+      "fpcw": [],
+      "mxcsr": [],
+      "ground_acceleration_calls": 0
+    },
+    {
+      "profile": "intro",
+      "variant": "original",
+      "frames": 7228,
+      "instrumented_addresses": 212,
+      "bound_addresses": 52,
+      "reached_addresses": 59,
+      "calls": 346052,
+      "fpcw": [
+        "0x23f"
+      ],
+      "mxcsr": [
+        "0x1f80"
+      ],
+      "ground_acceleration_calls": 0
+    },
+    {
+      "profile": "intro",
+      "variant": "native",
+      "frames": 7228,
+      "instrumented_addresses": 212,
+      "bound_addresses": 52,
+      "reached_addresses": 46,
+      "calls": 131929,
+      "fpcw": [
+        "0x23f"
+      ],
+      "mxcsr": [
+        "0x1f80"
+      ],
+      "ground_acceleration_calls": 0
+    },
+    {
+      "profile": "controller",
+      "variant": "plain",
+      "frames": 900,
+      "instrumented_addresses": 212,
+      "bound_addresses": 52,
+      "reached_addresses": 0,
+      "calls": 0,
+      "fpcw": [],
+      "mxcsr": [],
+      "ground_acceleration_calls": 0
+    },
+    {
+      "profile": "controller",
+      "variant": "original",
+      "frames": 900,
+      "instrumented_addresses": 212,
+      "bound_addresses": 52,
+      "reached_addresses": 61,
+      "calls": 580618,
+      "fpcw": [
+        "0x23f"
+      ],
+      "mxcsr": [
+        "0x1f80"
+      ],
+      "ground_acceleration_calls": 0
+    },
+    {
+      "profile": "controller",
+      "variant": "native",
+      "frames": 900,
+      "instrumented_addresses": 212,
+      "bound_addresses": 52,
+      "reached_addresses": 48,
+      "calls": 137255,
+      "fpcw": [
+        "0x23f"
+      ],
+      "mxcsr": [
+        "0x1f80"
+      ],
+      "ground_acceleration_calls": 0
+    }
+  ],
+  "comparisons": [
+    {
+      "profile": "intro",
+      "variant": "original",
+      "passed": true,
+      "first_digest_mismatch": null,
+      "baseline_frames": 7228,
+      "traced_frames": 7228,
+      "clocks_equal": true,
+      "modes_equal": true,
+      "stop": "census frames done"
+    },
+    {
+      "profile": "intro",
+      "variant": "native",
+      "passed": true,
+      "first_digest_mismatch": null,
+      "baseline_frames": 7228,
+      "traced_frames": 7228,
+      "clocks_equal": true,
+      "modes_equal": true,
+      "stop": "census frames done"
+    },
+    {
+      "profile": "controller",
+      "variant": "original",
+      "passed": true,
+      "first_digest_mismatch": null,
+      "baseline_frames": 900,
+      "traced_frames": 900,
+      "clocks_equal": true,
+      "modes_equal": true,
+      "stop": "census frames done"
+    },
+    {
+      "profile": "controller",
+      "variant": "native",
+      "passed": true,
+      "first_digest_mismatch": null,
+      "baseline_frames": 900,
+      "traced_frames": 900,
+      "clocks_equal": true,
+      "modes_equal": true,
+      "stop": "census frames done"
+    }
+  ],
+  "python_tests": 46,
+  "python_log_sha256": "c492062c258f66cc81c32eeb0bc48f2cdb8c517f66a174c4670fbd13fd2eeb7a",
+  "recorder_self_test": {
+    "passed": true,
+    "samples": 2,
+    "trace_is_read_only": true
+  },
+  "isolated_python_mutants": [
+    {
+      "name": "baseline",
+      "before": null,
+      "after": null,
+      "exit_status": 0
+    },
+    {
+      "name": "unknown_coverage",
+      "before": "if calls else None",
+      "after": "if calls else True",
+      "exit_status": 1
+    },
+    {
+      "name": "wrong_cw",
+      "before": "controls == [0x7f]",
+      "after": "controls == [0x27f]",
+      "exit_status": 1
+    },
+    {
+      "name": "ignore_clock",
+      "before": "baseline['clocks'] == traced['clocks'] and",
+      "after": "True and",
+      "exit_status": 1
+    }
+  ],
+  "recorder_mutant": {
+    "change": "FPCW sample replaced with literal zero in an isolated source copy",
+    "exit_status": 1,
+    "output": "map::at: key not found"
+  },
+  "limits": [
+    "Reference Unicorn observations under the pinned profile; not Windows hardware control-word capture.",
+    "Entry observations do not authorize plain-float arithmetic alone: STYLE 7 also requires assembly, oracle and mutant proofs.",
+    "Zero calls mean unobserved; no player-physics control-word inference from intro/title coverage.",
+    "Original variant observes original guest entry instructions; native variant observes bridge entry plus unbound player entries.",
+    "No available stage replay; ground acceleration remains unobserved.",
+    "Direct register self-test and smoke initially hit sandbox SIGILL; GUI/JIT-enabled runs succeeded.",
+    "Module identity hashes above were checked after capture, rather than sampled on every DLL load."
+  ]
+}

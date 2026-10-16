@@ -348,6 +348,22 @@ The oracle alone is not enough: its fixtures may never reach the divergent paths
 
 ## 4. Runtime work (M1+)
 
+For FP entry observations, run `python3 tools/analysis/run_fp_census.py --self-test`, then
+`python3 tools/analysis/run_fp_census.py`. This standalone reference executable uses the
+existing guest instruction hooks (read-only, original instruction still executes) and
+wraps actual process override entries before invoking their bridges. It compares complete
+frame digests, virtual clocks and mode histories for untraced/original-traced/native-traced
+7,228-frame intro and 900-frame controller journeys. Development smoke runs use
+`--smoke --output build/fp-census-smoke.json`; they do not establish the full census.
+
+`reference/fp-control-census.json` records per-run calls, raw FPCW/MXCSR values and caller
+return addresses. Its player targets conservatively include original procedure literals
+from player oracle provenance/verifiers, including dependencies and controlled callees.
+Zero calls remain unknown; no stage replay is currently registered. The captured intro and
+controller entries all had FPCW `0x023f`, MXCSR `0x1f80`; ground acceleration was unreached.
+This is reference-emulator evidence, not a Windows hardware census or permission to use
+plain floats. The collector, runner and census report are judge-manifest inputs.
+
 * The guest (`src/guest`) runs original code; HLE (`src/hle`) implements imports.
   Every HLE function records what it was asked (arguments, results) so a trace can be
   diffed between runs and against the reference.

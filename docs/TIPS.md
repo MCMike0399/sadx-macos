@@ -26,7 +26,15 @@ in `AGENTS.md` and `STYLE.md`; this page holds facts and patterns.
 * The mod loader headers are GPL. Use the *names and layouts* as facts; write our own
   declarations and do not copy header text or comments into `src/`.
 
-## MSVC 7.1 x87 idioms (the game thread runs control word 0x007f)
+## MSVC 7.1 x87 idioms (establish precision at the call site)
+
+* The reference census (`reference/fp-control-census.json`) observes raw FPCW `0x023f`
+  and MXCSR `0x1f80` at every reached entry in the intro/title and controller journeys.
+  The precision-control bits select 53-bit precision, not the 24-bit premise of plain
+  float rewrites. These are Unicorn observations, not Windows hardware captures. Ground
+  acceleration and other unreached physics entries have no measured runtime control word;
+  their oracle fixtures do not supply that missing stage evidence. Keep STYLE §7's four
+  preconditions when selecting an arithmetic level.
 
 * `fcom`/`fcomp` + `fnstsw ax` + `test ah, mask` + `jp`/`jnp`/`jz`/`jnz`. C0 is AH bit 0x01,
   C2 is 0x04, C3 is 0x40. Results: greater 000, less C0, equal C3, unordered C3|C2|C0.
@@ -57,7 +65,8 @@ in `AGENTS.md` and `STYLE.md`; this page holds facts and patterns.
   without `FPU_PRESERVE` (794060/794000). One Windows capture saw the earliest thread at
   `0x007f` (24-bit). Direct3D's documented default supports the hypothesis that the main thread
   runs at 24-bit, but it does not prove the full execution history (HANDOFF "Floating-point
-  observations"). The census in GOAL §6 item 5 settles it per call site.
+  observations"). The reference census above measures the emulator's reached entries;
+  stage call sites and Windows hardware history remain separate evidence gaps.
 * SSE paths (D3DX math, the Input mod) are IEEE single already. RCPSS/RSQRTSS estimates use the
   project's estimate models. Unicorn 2.1.4 raises no SSE flags, which is the cause of most
   "partial" verdicts.

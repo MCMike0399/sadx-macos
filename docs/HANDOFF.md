@@ -3489,3 +3489,38 @@ The product still needs native boot/title, resources and gameplay recovery.
   independence remain open. Existing Ghidra request drafts untouched.
 * Next: request the approval required by GOAL §6.4 for the concrete hook proposal; settings
   stay inactive unless approved. Continue §6.5 FP control-word census. Goal remains active.
+
+### 2026-10-16 — GOAL §6.5 FP control-word census (track R, gate 145)
+
+* Added standalone reference collector/runner `tools/analysis/{fp_control_census.cpp,
+  run_fp_census.py}` and `reference/fp-control-census.json`. Existing guest instruction hooks
+  observe registers and return false so original instructions execute; actual process-table
+  bridges are sampled before invocation. No game-tier/guest/HLE source changed.
+* Context/evidence: existing guest frame/controller harnesses, source symbol/inventory and
+  player oracle provenance; `production-integration-20261016/fp-census-145-{evidence,gate}.json`.
+  Target union has 212 addresses: all 52 actual process bindings plus 164 conservative
+  player/dependency procedure literals (with overlap). Names remain symbol hypotheses.
+* Six journeys: untraced, original-traced and native-traced full 7,228-frame intro and
+  900-frame controller replay. All four digest/virtual-clock/mode comparisons pass, including
+  the fully bound native run through the whole intro. First title remains frame 7,168;
+  all 60 following cadence samples are 15.873 ms. No game values were adjusted.
+* **Finding:** reached original/native entries are 59/46 (intro), 61/48 (controller), all
+  raw FPCW **0x023f**, MXCSR **0x1f80**; no missing caller-return reads. Ground acceleration
+  has zero calls. Every zero-call site stays unknown. No stage replay is registered, so
+  physics precision and Windows hardware behavior remain open; plain floats are not
+  authorized by this census. STYLE/METHOD/TIPS now state the measured scope explicitly.
+* Two-control recorder self-test passes. Four new Python fixtures cover zero coverage,
+  control/status counts, replay digests/clocks/modes/stops and primary target inclusion.
+  Three isolated Python mutants and a fabricated-FPCW recorder mutant are caught;
+  unmodified tests pass. Collector/runner identities still match the full capture.
+* Full gate **rc 0**, **128 native programs / 46 Python tests**; standard 7,228-frame
+  determinism, first 600 override digests and 900-frame controller parity unchanged,
+  71,115 override cases with all mutants caught; 63 FPS title cadence, host 82.0 FPS.
+  Judge manifest refreshed as a separate judge step (410 inputs). Readability unchanged.
+* Limits: sandboxed collector initially hit SIGILL; JIT-enabled runs succeeded. Module
+  identity hash prefixes checked against SOURCES after capture. No standalone oracles or
+  separate `make m1`; four unregistered tests skipped. Existing partial/fail verdicts,
+  stage/Windows/physical-pad/full-independence gaps remain. No assets/binaries committed.
+* Hook settings still untouched pending approval; existing Ghidra drafts untouched.
+  Next: §6.6a game-mode pilot under its unchanged oracle and independent STYLE review.
+  Goal remains active.

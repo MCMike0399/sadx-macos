@@ -1,12 +1,13 @@
 {
   "change": {
-    "base_commit": "4f5f63af10ed52d0f2b3ca45de7d05815a3f14ed",
-    "evidence": "reference/production-integration-20261015/judge-144-evidence.json",
-    "evidence_sha256": "0dd17d284bae79ed08b9a08d9ca2acdefcb12d93a434179be6fb035ae28bd86f",
-    "reason": "Bootstrap judge hashes including shared oracle helpers; drift, separation and hook fixtures verified"
+    "base_commit": "51021fa19cade4899e27d32705317cbfa707cb0e",
+    "evidence": "reference/production-integration-20261016/fp-census-145-evidence.json",
+    "evidence_sha256": "aa06bc4fa7d9eabb1209bc4bc1846d0cd96557afc70b571e53317f35241e0f3b",
+    "reason": "Freeze read-only FP census, control-word and replay fixtures; six full reference/native journeys match with unknown coverage retained"
   },
   "files": {
     "Makefile": "0a59bb53b4569a1c7c548226901d18cac9aa9bdf57540b4b26e8901540ed1d89",
+    "reference/fp-control-census.json": "34a39c0e0050ba7cfa0afd4084bfa4b20ec1c2d701f33a39060fcb872ba0e141",
     "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
     "reference/frame-control-corpus.tsv": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",
     "reference/judge-hook-settings.proposed.json": "22f468435f9752eeeddd6757875ab9033a6dce1adbca75b98aa3992df9515da0",
@@ -280,15 +281,18 @@
     "tests/probes/native_x87_memory_probe.cpp": "783c2f846a85ce29c65dd9ac02a98d1584da1e4752b090ad2d109c72b60e06e6",
     "tests/probes/native_x87_transcendental_probe.cpp": "895529f003f97f2d3a4d93ae2a7c8722e6a13a1e6a194d5d076e9d6d77790117",
     "tests/python/test_extraction.py": "d4cfeca88e6c47057705dd70c07921eb826b5b7d5fdb0b8cc7a8edb0f28ec04f",
+    "tests/python/test_fp_census.py": "b9e02faa363da0c833f339e960a96e8b5a69c6961f22b018d4ee9c4e53f46e36",
     "tests/python/test_judge.py": "719f9ea82d96b4bda93aceff207c156610ced808f79ffffda451afa38ab77b8a",
     "tests/python/test_provenance.py": "ce62fc0efc2ef9a92b2493adaf994fcbc38af4427c16c28eabe6aea72287fcc2",
     "tests/python/test_readability.py": "8090f2eb23f8c958972e071d94a4d77b99a8062953d456a89ccba2abafc78a3d",
     "tests/python/test_symbol_context.py": "e276e801136d0821369682beb43c42c0f460ff137123683d8c1150487eec2690",
     "tests/python/test_symbols.py": "9e9a03a6389d6cd58aa49c63272049754f55ccddb19eeb894b8b92ccce362e0f",
     "tests/unit/manifest.tsv": "7f8fdd4803b8b12459013be013fde0e94f59de7f07b523ad241030455099f225",
+    "tools/analysis/fp_control_census.cpp": "8d9da215a14210c6977a86e3b342c033415ea117ba0a00bde2bd43c2ade78874",
+    "tools/analysis/run_fp_census.py": "280e88135ed284647c31a69ceb0109eea8feed344847f2246e3b6cf8c0333278",
     "tools/gate/check_app_smoke.py": "5c709c9594a047ceb2c807cdeb855b9a213510a4b0589c9092b6c7361570f529",
     "tools/gate/check_global_owners.py": "764714cd1fbdeab7b77f3b50d9efb64f12992f791758e3f07602a938b32ef504",
-    "tools/gate/check_judge.py": "6c01cf5dbb2dd9db6409438e6266034bb2dd3eb2727302390c91b7b1723ca5d4",
+    "tools/gate/check_judge.py": "996baf4594a43babece7864f9c6cea16abd7dff8b1ffd8a9b5253a8c78253cc1",
     "tools/gate/check_layers.py": "2b72408ccd936baa5da22b36eefbf90ce2af4ebf1ab01dc63a5f45f5fa9615c1",
     "tools/gate/check_native_frame_control.py": "c2695744e67130fa70dc2e324429a1c0407c5a19b158cb90196602a3987f9fa2",
     "tools/gate/check_profile_patches.py": "1c9a845b3d07312b3e76233adeb56478a1d7edbdfed1873db6a50fe6e1407fda",

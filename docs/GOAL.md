@@ -330,6 +330,11 @@ comes first, because every later port should copy a readable model, not the lega
    in the reference tier). Write `reference/fp-control-census.json` (address, call count,
    distinct control words). Plain-float game-tier arithmetic is allowed only for call sites
    with a single `0x007f`. Report the sites that differ.
+   Census of available journeys (gate 145): `reference/fp-control-census.json`, 212 instrumented addresses
+   (52 actual bindings plus a conservative 164 player/dependency targets, with overlap).
+   Original and fully bound native intro/controller digests match their untraced references.
+   Reached entries show `0x023f` / MXCSR `0x1f80`; ground acceleration remains unobserved,
+   and no stage replay is registered. This does not establish the plain-float premise.
 6. **Pilot refactors under the judge (R), one per step, each with an independent STYLE review.**
    (a) **Game mode 40c090** → `GameMode` enum from `MD_GameMode`, `STUB` seams (plain function declarations) named
    from the symbol database, structured control flow, and the adapter holding every callee

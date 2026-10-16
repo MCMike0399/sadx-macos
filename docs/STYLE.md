@@ -128,10 +128,11 @@ Fidelity does not change. Use the most readable form that the module's oracle ac
 order:
 
 1. **Plain `float`/`int` expressions.** The build sets `-ffp-contract=off -fno-fast-math`.
-   With the game thread's x87 control word at 24-bit precision and round to nearest (the
-   capture in `HANDOFF.md`, "Floating-point observations"; a hypothesis until the census in
-   GOAL §6 confirms it per call site), `+ - * / sqrt` on floats round like IEEE single except
-   in the cases of the next item. All four of these preconditions must hold, because fixtures
+   With x87 at 24-bit precision and round to nearest, `+ - * / sqrt` on floats round like
+   IEEE single except in the cases of the next item. The reference census now records
+   `0x023f` (53-bit precision) at every reached intro/controller entry; ground acceleration
+   was unreached. The earlier Windows observation in HANDOFF does not establish a universal
+   24-bit premise. All four of these preconditions must hold, because fixtures
    may never reach the divergent paths:
    * the assembly (`ghidra_asm.py`) of the expression shows only single-precision (`m32`)
      memory operands, with no `fld qword`, `fistp` or transcendental in it;
