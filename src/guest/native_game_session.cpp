@@ -25,6 +25,7 @@ BootLoadResult load_boot_config(const std::string& exe_path,const std::string& i
     config.fog_defaults=ninja_fog_initial_state();
     config.screen_defaults=ninja_screen_initial_state();
     config.sound_defaults=sound_initial_state();
+    config.view_defaults=game_view_initial_state();
     config.clock=clock;config.max_frames=frames;config.policy=policy;
     {   // 401ac0's model DLLs from the game's system directory (slot 0: CHRMODELS_orig.dll behind the loader proxy).
         const auto system=directory_of(exe_path)+"/system/";

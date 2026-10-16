@@ -4201,3 +4201,31 @@ The product still needs native boot/title, resources and gameplay recovery.
   import seams and unrecovered sound/session/game behavior open. No physical audio
   or complete native-game claim. Goal active. Hook settings and user Ghidra drafts
   untouched; no binaries/assets committed; no push.
+
+
+### 2026-10-16 — native game-view/color initialization (GOAL §6.7)
+
+* `game/game_view_initial_state` provides 30 numeric atoms / 117 source bytes:
+  stretch factors, NJS_SCREEN geometry, reset-pending byte, projection-center copies,
+  three FOV caches, four clear colors and three ARGB groups shared with the queue.
+  Stretches start at 1; all other selected values at 0. Native boot selects these
+  explicitly. Omitted reference config retains per-word and whole-color availability.
+* Pause/frame-control owners, screen resource identities and device capabilities
+  stay separate. Unloaded projection scale/center/color fields remain untouched
+  (static review only); the separately stored center-copy words are selected.
+  The adapter constructs the existing view aggregate with native or PE facts and
+  exposes semantic snapshot bindings; no legacy-name/provenance allowances enlarged.
+* Evidence `production-integration-20261016/view-initial-158-*`: seven fresh dossiers
+  +14 xrefs; exact compiled source values; isolated native data closure; real native
+  material consumer; three numeric/four adapter mutants caught. Five historical
+  constructor configurations compare 870 view/control/screen/resource availability
+  and value facts exactly (4,269 bytes); old/new CLI reports identical (5,427 bytes).
+  Poisoned PE composition, varied IEEE payloads, missing last color-float byte,
+  injected screen resources, no-image and varied control/screen coexistence pass.
+* Existing numerical reports unchanged: game view500 (291 FP-flag differences),
+  frame owners2100, queue consumer12 CW*187 (180 flag differences per profile),
+  queue lifecycle600 (402 flag differences). Partial verdicts remain partial.
+  Native unit covers material colors; full view/lifecycle code still has reference-era
+  dependencies. Independent final STYLE review approved; full gate follows. No
+  complete native view/session
+  or physical GPU/FP claim. GOAL §6.7 remains open.

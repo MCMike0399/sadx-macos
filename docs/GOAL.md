@@ -380,7 +380,9 @@ comes first, because every later port should copy a readable model, not the lega
    Numeric screen/viewport initialization adds 90 exact words, seven caught mutations and
    independent POINT2COL resource preservation. Sound initialization adds 329 numeric atoms
    (1,097 source bytes), seven caught mutations and independent queue ID/task/listener
-   preservation. Native boot configuration selects these
+   preservation. Game-view/shared-color initialization adds 30 exact numeric atoms
+   (117 source bytes), seven caught mutations and preserved control/resource ownership.
+   Native boot configuration selects these
    families explicitly; injectable reference decoding remains available. These families
    do not complete the runtime refactor:
    resource/content references, remaining input state and other load-image facts still need

@@ -221,3 +221,21 @@ in `AGENTS.md` and `STYLE.md`; this page holds facts and patterns.
   fallback reference availability remains word-granular: a three-byte partial word
   must not publish three known bytes. The load-time tone is zero; -1 is the server's
   later finished-record value. Evidence: `sound-initial-157-*` and fresh sound dossiers.
+
+
+## Game-view load-time geometry and colors
+
+* `ScreenRaitoX/Y` are stretch factors (initially 1), despite the legacy view owner's
+  width/height names. View setup later multiplies by 640/480 to compute dimensions.
+* `NJS_SCREEN.dist` starts at zero, as do width/height/centers. Do not substitute the
+  common distance guess of 1. SetupScreen copies distance and center words; the
+  constructor's projection-center copies remain separate from the projection owner
+  fields it never initializes.
+* The three four-float ARGB groups (view material, reset material, current sprite
+  material) start at zero, including alpha. Clear colors also start at zero; opaque
+  black is written later by setup. Reference color availability is whole-group: an
+  incomplete fourth float keeps all four components unknown.
+* `QueueCharacterAnimations` is an int; initialization proves its zero default, not
+  the wider meaning of every nonzero value. The reset-pending byte belongs to view
+  state, while the reset path's pause flag retains its session-control owner.
+  Evidence: `view-initial-158-*`, including historical constructor equivalence.

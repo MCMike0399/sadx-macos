@@ -32,14 +32,12 @@ void NativeGame::initialize_source_facts(){
     for(unsigned i=0;i<5;++i)controller_globals_.words_at_3b0e990[i]=u32(0x3b0e990+4*i);
     for(unsigned i=0;i<48;++i){menu_.block_at_900e88[i]=u8(0x900e88+i);menu_.block_at_9008b4[i]=u8(0x9008b4+i);}menu_.byte_at_3abdbc1=u8(0x3abdbc1);menu_.byte_at_903e58=u8(0x903e58);
     for(unsigned i=0;i<32;++i)exit_callbacks_.slots_at_3d084b0[i]=u32(0x3d084b0+4*i);
-    word_at_3abdc80_=u32(0x3abdc80);word_at_3abdc78_=u32(0x3abdc78);word_at_3abdc90_=u32(0x3abdc90);byte_at_3b280a8_=u8(0x3b280a8);
+    word_at_3abdc80_=u32(0x3abdc80);word_at_3abdc78_=u32(0x3abdc78);word_at_3abdc90_=u32(0x3abdc90);
     for (unsigned i = 0; i < pads_.size(); ++i)
         pads_[i].settings = config_.pad_settings[i];
     input_frame_.game_mode_at_3abdc7c=&mode_at_3abdc7c_;input_frame_.demo_playing_at_3b2a2e4=&timing_.word_at_3b2a2e4;
     // Render queue facts.
     const auto f32=[&](std::uint32_t a)->std::optional<float>{const auto v=u32(a);if(!v)return std::nullopt;float x;std::memcpy(&x,&*v,4);return x;};
-    if(const auto a=f32(0x3b18230),b=f32(0x3b18234),c=f32(0x3b18238),d=f32(0x3b1823c);a&&b&&c&&d)color_at_3b18230_=std::array<float,4>{*a,*b,*c,*d};
-    if(const auto a=f32(0x3ab9864),b=f32(0x3ab9868),c=f32(0x3ab986c),d=f32(0x3ab9870);a&&b&&c&&d)queue_runtime_.color_at_3ab9864=std::array<float,4>{*a,*b,*c,*d};
     depth_mode_at_8928c8_=u32(0x8928c8);
     rng_.seed_at_2bcbdf8=u32(0x2bcbdf8);
     {std::optional<std::uint16_t> w;if(const auto lo=u8(0x3b29d08),hi=u8(0x3b29d09);lo&&hi)w=static_cast<std::uint16_t>(*lo|(*hi<<8));reset_.emplace(GameResetState{loop_.word_at_3abdf80,w,u32(0x3b290d0),u32(0x3b0e330),rng_});}
@@ -66,7 +64,6 @@ void NativeGame::initialize_source_facts(){
     for(unsigned i=0;i<6;++i){leaves_->set_files_at_3abdf40[i]=u32(0x3abdf40+4*i);leaves_->cam_files_at_3abdf28[i]=u32(0x3abdf28+4*i);}
     for(unsigned i=0;i<36;++i){leaves_->words_at_3b29b90[i]=u32(0x3b29b90+4*i);}
     for(unsigned i=0;i<4;++i)leaves_->entry_words_at_3d08428[i]=u32(0x3d08428+24*i);
-    if(const auto a=f32(0x3b280ac),b=f32(0x3b280b0),c=f32(0x3b280b4),d=f32(0x3b280b8);a&&b&&c&&d)color_at_3b280ac_=std::array<float,4>{*a,*b,*c,*d};
     queue_base_at_3abd960_=u32(0x3abd960);
     frame_calls_.scene_flags_at_3d08588=u32(0x3d08588);frame_calls_.device_flags_at_3d1289c=u32(0x3d1289c);frame_calls_.vertex_buffer_at_3d128ac=u32(0x3d128ac);
     frame_calls_.hook_at_3d0f7a4=u32(0x3d0f7a4);frame_calls_.hook_at_3d0f7a8=u32(0x3d0f7a8);frame_calls_.hook_at_3d0fa30=u32(0x3d0fa30);frame_calls_.argument_at_3d0fa38=u32(0x3d0fa38);
@@ -152,9 +149,7 @@ void NativeGame::initialize_source_facts(){
         if (complete)
             sine_table_at_88af78_ = table;
     }
-    view_.emplace(GameViewState{f32(0x8928c0),f32(0x8928c4),view_code_constants_.width_scale,view_code_constants_.height_scale,view_code_constants_.half,view_code_constants_.horizontal_extent,view_code_constants_.vertical_extent,
-        byte_at_3b280a8_,loop_.mode_at_3b28114,u32(0x3abd9cc),u32(0x3b28094),f32(0x3b28098),f32(0x3b2809c),f32(0x3b280a0),f32(0x3b280a4),u32(0x3d0f9ec),u32(0x3d0f9f0),u32(0x3aad0bc),u32(0x3ab98ec),u32(0x3b2cbb4),
-        {u32(0x3ce7174),u32(0x3ce7178),u32(0x3ce717c),u32(0x3ce7180)},color_at_3b280ac_});
+    initialize_view_defaults();
     mode_leaves_->screen_width_at_8928c0=&view_->screen_width_at_8928c0;mode_leaves_->screen_height_at_8928c4=&view_->screen_height_at_8928c4;
     mode_leaves_->clear_colors_at_3ce7174=&view_->clear_colors_at_3ce7174;
     mode_leaves_->word_at_3b2c420=u32(0x3b2c420);mode_leaves_->state_at_3b29d6c=u32(0x3b29d6c);mode_leaves_->word_at_3b29d68=u32(0x3b29d68);
@@ -176,6 +171,106 @@ void NativeGame::initialize_source_facts(){
     }
     lifecycle_.emplace(NinjaQueueLifecycleOwners{queue_,queue_runtime_,consumer_,timing_,projection_,color_at_3b18230_,&depth_table_,one_at_7dcb10_,negative_one_at_7dcb0c_,depth_mode_at_8928c8_,
         words_at_900840_,words_at_3ab9898_,words_at_900858_,words_at_90084c_});
+}
+void NativeGame::initialize_view_defaults() {
+    const auto bits = [](float value) {
+        std::uint32_t word;
+        std::memcpy(&word, &value, sizeof(word));
+        return word;
+    };
+    const auto &constants = view_code_constants_;
+    if (config_.view_defaults) {
+        const auto &values = *config_.view_defaults;
+        const auto color = [](const GameViewInitialColor &value) {
+            return std::array<float, 4>{value.alpha, value.red, value.green, value.blue};
+        };
+        byte_at_3b280a8_ = values.reset_pending;
+        color_at_3b280ac_ = color(values.view_color);
+        color_at_3b18230_ = color(values.reset_color);
+        queue_runtime_.color_at_3ab9864 = color(values.sprite_color);
+        view_.emplace(GameViewState{
+            values.stretch_x, values.stretch_y, constants.width_scale, constants.height_scale,
+            constants.half, constants.horizontal_extent, constants.vertical_extent,
+            byte_at_3b280a8_, loop_.mode_at_3b28114,
+            static_cast<std::uint32_t>(values.animation_queue_state), bits(values.screen.distance),
+            values.screen.width, values.screen.height, values.screen.center_x, values.screen.center_y,
+            bits(values.projection_center_x), bits(values.projection_center_y),
+            static_cast<std::uint32_t>(values.perspective),
+            static_cast<std::uint32_t>(values.perspective_copy),
+            static_cast<std::uint32_t>(values.last_perspective),
+            {values.clear_colors[0], values.clear_colors[1], values.clear_colors[2], values.clear_colors[3]},
+            color_at_3b280ac_});
+        return;
+    }
+    const auto *exe = config_.executable.get();
+    const auto word = [&](std::uint32_t address) -> std::optional<std::uint32_t> {
+        return exe ? exe->u32(address) : std::nullopt;
+    };
+    const auto floating = [&](std::uint32_t address) -> std::optional<float> {
+        const auto encoded = word(address);
+        if (!encoded)
+            return std::nullopt;
+        float value;
+        std::memcpy(&value, &*encoded, sizeof(value));
+        return value;
+    };
+    // Preserve the original all-or-unknown availability of each four-float color.
+    const auto color = [&](std::uint32_t address) -> std::optional<std::array<float, 4>> {
+        const auto a = floating(address), r = floating(address + 4);
+        const auto g = floating(address + 8), b = floating(address + 12);
+        if (!a || !r || !g || !b)
+            return std::nullopt;
+        return std::array<float, 4>{*a, *r, *g, *b};
+    };
+    byte_at_3b280a8_ = exe ? exe->byte(0x3b280a8) : std::nullopt;
+    color_at_3b280ac_ = color(0x3b280ac);
+    color_at_3b18230_ = color(0x3b18230);
+    queue_runtime_.color_at_3ab9864 = color(0x3ab9864);
+    view_.emplace(GameViewState{
+        floating(0x8928c0), floating(0x8928c4), constants.width_scale, constants.height_scale,
+        constants.half, constants.horizontal_extent, constants.vertical_extent,
+        byte_at_3b280a8_, loop_.mode_at_3b28114, word(0x3abd9cc), word(0x3b28094),
+        floating(0x3b28098), floating(0x3b2809c), floating(0x3b280a0), floating(0x3b280a4),
+        word(0x3d0f9ec), word(0x3d0f9f0), word(0x3aad0bc), word(0x3ab98ec), word(0x3b2cbb4),
+        {word(0x3ce7174), word(0x3ce7178), word(0x3ce717c), word(0x3ce7180)}, color_at_3b280ac_});
+}
+std::array<std::optional<std::uint32_t>, 30> NativeGame::view_facts() const {
+    std::array<std::optional<std::uint32_t>, 30> facts{};
+    unsigned next = 0;
+    const auto bits = [](const std::optional<float> &value) -> std::optional<std::uint32_t> {
+        if (!value)
+            return std::nullopt;
+        std::uint32_t word;
+        std::memcpy(&word, &*value, sizeof(word));
+        return word;
+    };
+    const auto &[stretch_x, stretch_y, scale_x, scale_y, half, fov_x, fov_y,
+                 reset_pending, pause_state, animation_queue_state, distance,
+                 width, height, center_x, center_y, projection_center_x, projection_center_y,
+                 perspective, perspective_copy, last_perspective, clear_colors, view_color] = *view_;
+    facts[next++] = bits(stretch_x);
+    facts[next++] = bits(stretch_y);
+    facts[next++] = animation_queue_state;
+    facts[next++] = distance;
+    facts[next++] = bits(width);
+    facts[next++] = bits(height);
+    facts[next++] = bits(center_x);
+    facts[next++] = bits(center_y);
+    facts[next++] = reset_pending;
+    facts[next++] = projection_center_x;
+    facts[next++] = projection_center_y;
+    facts[next++] = perspective;
+    facts[next++] = perspective_copy;
+    facts[next++] = last_perspective;
+    for (const auto &value : clear_colors)
+        facts[next++] = value;
+    for (const auto *color : {&view_color, &color_at_3b18230_, &queue_runtime_.color_at_3ab9864})
+        for (unsigned i = 0; i < 4; ++i) {
+            if (*color)
+                facts[next] = bits((**color)[i]);
+            ++next;
+        }
+    return facts;
 }
 void NativeGame::initialize_sound_defaults() {
     const auto *exe = config_.executable.get();
