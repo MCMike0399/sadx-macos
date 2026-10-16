@@ -1,4 +1,5 @@
 #pragma once
+#include "game/library_initial_state.hpp"
 #include "game/startup_initial_state.hpp"
 #include "guest/frame_control_reference.hpp"
 #include "runtime/engine_code_tables.hpp"
@@ -102,6 +103,8 @@ struct NativeGameConfig {
     std::optional<NinjaQueueInitialState> queue_defaults;
     // Numeric startup defaults; media and message resources remain image-backed.
     std::optional<StartupInitialState> startup_defaults;
+    // Numeric library state/configuration; text resources and shared controls stay separate.
+    std::optional<LibraryInitialState> library_defaults;
     InputModPadConstants input_constants; // caller-supplied; normal boot uses maintained native values
     std::int32_t limiter_cadence=63;      // Speedrun FrameLimit "63FPS"
     SpeedrunLimiterClock clock;           // host counter owner (mac_clock in the app)
@@ -143,6 +146,8 @@ public:
     std::array<std::optional<std::uint32_t>, 2> queue_resource_facts() const;
     std::array<std::optional<std::uint32_t>, 41> startup_facts() const;
     std::array<std::optional<std::uint32_t>, 4> startup_resource_facts() const;
+    std::array<std::optional<std::uint32_t>, 28> library_facts() const;
+    std::array<std::optional<std::uint32_t>, 4> library_resource_facts() const;
     const std::optional<NinjaMath::SineTable> &sine_facts() const noexcept { return sine_table_at_88af78_; }
     // Live owners for a front end (keyboard/controller delivery each frame).
     InputModKeyboardPad keyboard_pad{};
@@ -226,6 +231,11 @@ private:
     void initialize_queue_defaults();
     // NOTSA: install explicit native defaults or retain per-field reference availability.
     void initialize_startup_defaults();
+    // NOTSA: install native library data or preserve reference field availability.
+    void initialize_library_defaults();
+    std::array<std::optional<std::uint32_t>, 14> library_configuration_{};
+    // NOTSA: numeric configuration lookup; text/path resources remain image-backed.
+    std::optional<std::uint32_t> read_library_configuration(std::uint32_t address) const;
     void initialize_source_facts();
     void report_screen_depth(); // the 78dbe0 assumptions, once
 };

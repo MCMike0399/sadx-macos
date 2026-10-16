@@ -82,8 +82,7 @@ void NativeGame::initialize_source_facts(){
     if(const auto v=u32(0x3d0fa34);v&&*v==0)renderer_.input_callback=nullptr;
     initialize_startup_defaults();
     memory_.heap_at_389d628=u32(0x389d628);word_at_3d0f7a0_=u32(0x3d0f7a0);
-    for(unsigned i=0;i<9;++i)library_.words_at_389d864[i]=u32(0x389d864+4*i);
-    library_.word_at_38a5dc4=u32(0x38a5dc4);library_.word_at_38a5dc8=u32(0x38a5dc8);library_.word_at_38a5dcc=u32(0x38a5dcc);library_.scale_at_3d0f800=f32(0x3d0f800);library_.aspect_at_3d0f9c0=f32(0x3d0f9c0);
+    initialize_library_defaults();
     for(std::size_t i=0;i<device_.block_at_3d0fae0.size;++i)device_.block_at_3d0fae0.bytes[i]=u8(static_cast<std::uint32_t>(0x3d0fae0+i));
     for(std::size_t i=0;i<device_.caps_at_3d127c0.size;++i)device_.caps_at_3d127c0.bytes[i]=u8(static_cast<std::uint32_t>(0x3d127c0+i));
     device_.direct3d_at_3d11f60=u32(0x3d11f60);
@@ -170,6 +169,102 @@ std::array<std::uint32_t, 7> NativeGame::input_constant_facts() const {
     return {values.axes.epsilon.bits, values.axes.maximum.bits, values.axes.keyboard_scale.bits,
             values.axes.controller_scale.bits, values.axes.magnitude_cap.bits,
             values.trigger_scale.bits, values.half_press_scale.bits};
+}
+void NativeGame::initialize_library_defaults() {
+    if (config_.library_defaults) {
+        const auto &values = *config_.library_defaults;
+        for (unsigned i = 0; i < 9; ++i)
+            library_.words_at_389d864[i] = static_cast<std::uint32_t>(values.buffer_counts[i]);
+        library_.word_at_38a5dc4 = static_cast<std::uint32_t>(values.windowed);
+        library_.word_at_38a5dc8 = static_cast<std::uint32_t>(values.back_buffer_width);
+        library_.word_at_38a5dcc = static_cast<std::uint32_t>(values.back_buffer_height);
+        library_.scale_at_3d0f800 = values.scale;
+        library_.aspect_at_3d0f9c0 = values.aspect;
+        const auto &configuration = values.configuration;
+        library_configuration_[0] = static_cast<std::uint32_t>(configuration.screen_flags);
+        library_configuration_[1] = static_cast<std::uint32_t>(configuration.setup_argument);
+        library_configuration_[2] = static_cast<std::uint32_t>(configuration.buffer_counts[0]);
+        library_configuration_[3] = static_cast<std::uint32_t>(configuration.buffer_counts[1]);
+        library_configuration_[4] = static_cast<std::uint32_t>(configuration.buffer_counts[2]);
+        library_configuration_[5] = static_cast<std::uint32_t>(configuration.buffer_counts[3]);
+        library_configuration_[6] = static_cast<std::uint32_t>(configuration.buffer_counts[4]);
+        library_configuration_[7] = static_cast<std::uint32_t>(configuration.buffer_counts[5]);
+        library_configuration_[8] = static_cast<std::uint32_t>(configuration.buffer_counts[6]);
+        library_configuration_[9] = static_cast<std::uint32_t>(configuration.buffer_counts[7]);
+        library_configuration_[10] = static_cast<std::uint32_t>(configuration.buffer_counts[8]);
+        library_configuration_[11] = static_cast<std::uint32_t>(configuration.high_precision_depth_request);
+        library_configuration_[12] = static_cast<std::uint32_t>(configuration.back_buffer_width);
+        library_configuration_[13] = static_cast<std::uint32_t>(configuration.back_buffer_height);
+        return;
+    }
+    const auto *exe = config_.executable.get();
+    const auto word = [&](std::uint32_t address) -> std::optional<std::uint32_t> {
+        return exe ? exe->u32(address) : std::nullopt;
+    };
+    for (unsigned i = 0; i < 9; ++i)
+        library_.words_at_389d864[i] = word(0x389d864 + 4 * i);
+    library_.word_at_38a5dc4 = word(0x38a5dc4);
+    library_.word_at_38a5dc8 = word(0x38a5dc8);
+    library_.word_at_38a5dcc = word(0x38a5dcc);
+    if (const auto value = word(0x3d0f800)) {
+        float number;
+        std::memcpy(&number, &*value, sizeof(number));
+        library_.scale_at_3d0f800 = number;
+    }
+    if (const auto value = word(0x3d0f9c0)) {
+        float number;
+        std::memcpy(&number, &*value, sizeof(number));
+        library_.aspect_at_3d0f9c0 = number;
+    }
+    library_configuration_[0] = word(0x892954);
+    library_configuration_[1] = word(0x892958);
+    library_configuration_[2] = word(0x892968);
+    library_configuration_[3] = word(0x89296c);
+    library_configuration_[4] = word(0x892970);
+    library_configuration_[5] = word(0x892974);
+    library_configuration_[6] = word(0x892978);
+    library_configuration_[7] = word(0x89297c);
+    library_configuration_[8] = word(0x892980);
+    library_configuration_[9] = word(0x892984);
+    library_configuration_[10] = word(0x892988);
+    library_configuration_[11] = word(0x89298c);
+    library_configuration_[12] = word(0x892990);
+    library_configuration_[13] = word(0x892994);
+}
+std::optional<std::uint32_t> NativeGame::read_library_configuration(std::uint32_t address) const {
+    constexpr std::uint32_t addresses[] = {0x892954, 0x892958, 0x892968, 0x89296c, 0x892970, 0x892974, 0x892978, 0x89297c, 0x892980, 0x892984, 0x892988, 0x89298c, 0x892990, 0x892994};
+    for (unsigned i = 0; i < library_configuration_.size(); ++i)
+        if (address == addresses[i])
+            return library_configuration_[i];
+    return config_.executable ? config_.executable->u32(address) : std::nullopt;
+}
+std::array<std::optional<std::uint32_t>, 28> NativeGame::library_facts() const {
+    std::array<std::optional<std::uint32_t>, 28> facts{};
+    unsigned next = 0;
+    for (const auto &value : library_.words_at_389d864)
+        facts[next++] = value;
+    facts[next++] = library_.word_at_38a5dc4;
+    facts[next++] = library_.word_at_38a5dc8;
+    facts[next++] = library_.word_at_38a5dcc;
+    const auto floating = [&](const std::optional<float> &value) {
+        if (value) {
+            std::uint32_t word;
+            std::memcpy(&word, &*value, sizeof(word));
+            facts[next] = word;
+        }
+        ++next;
+    };
+    floating(library_.scale_at_3d0f800);
+    floating(library_.aspect_at_3d0f9c0);
+    for (const auto &value : library_configuration_)
+        facts[next++] = value;
+    return facts;
+}
+std::array<std::optional<std::uint32_t>, 4> NativeGame::library_resource_facts() const {
+    std::array<std::optional<std::uint32_t>, 4> facts{};
+    for (unsigned i = 0; i < facts.size(); ++i)
+        facts[i] = read_library_configuration(0x892940 + 4 * i);
+    return facts;
 }
 void NativeGame::initialize_startup_defaults() {
     if (config_.startup_defaults) {
@@ -1414,7 +1509,7 @@ NativeGameReport NativeGame::run(){
             [&](std::uint32_t a)->std::optional<std::uint32_t>{
                 if(a==0x892950)return winmain_.screen_at_892950;
                 if(a==0x89295c){if(!renderer_.configured_frame_interval)return std::nullopt;return static_cast<std::uint32_t>(*renderer_.configured_frame_interval);}
-                return config_.executable?config_.executable->u32(a):std::nullopt;},  // config words without another owner: load image
+                return read_library_configuration(a);},  // numeric defaults; text/path resources stay image-backed
             [&](std::uint32_t a)->std::optional<std::uint32_t>{return a==0x3d12788?device_.viewport_at_3d12780[2]:a==0x3d1278c?device_.viewport_at_3d12780[3]:std::nullopt;},
             fp_,[&](const GameLibraryCall& c)->GameLibraryOwnerResult{
                 switch(c.callee){

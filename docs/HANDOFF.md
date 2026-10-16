@@ -4438,3 +4438,45 @@ The product still needs native boot/title, resources and gameplay recovery.
   or binaries committed. Partial PE is a reader fixture, never executed. This proves
   selected numeric initialization only; full native startup/session, importer resources
   and overall GOAL remain open. No push; hook settings and two user drafts untouched.
+
+## 2026-10-16 — GOAL §6.7 library numeric initialization (source step)
+
+* Added `LibraryInitialState` and numeric `LibraryConfigurationDefaults`: 28 atoms /
+  112 exact source bytes. Cold ninth polygon-buffer count12000 remains distinct from
+  configured32000. Initial windowed1 /640x480 and scale/aspect0 precede library config
+  copies and viewport-derived aspect. Screen flags49/setup_argument5 retain observed
+  roles; integer high_precision_depth_request calls UseHighPrecisionZBuffer only for1.
+* Normal boot selects native values; absent config preserves individual PE availability.
+  Four string/path pointers, shared cursor and frame interval, unused config float words,
+  devices/capabilities and resources remain separate. Numeric configuration now reaches
+  the existing library consumer without14 runtime executable reads. Existing behavior
+  and owner structs are unchanged; PolyBuff_Count's SDK pointer declaration is corrected
+  to inline int32[9] in symbol overrides, proven by stores and count/stride allocation.
+* Fresh owned Ghidra dossiers: library781070
+  ev_e777d661ed00330a61ae90973a953367749619115634112c191c889bdb9acb26;
+  InitPolyBuffers78e720 ev_6d59f34ff7e3a2eaf68f0810344f4d95492ccd3935db9fa2d653ab11ba55278d;
+  string-copy793ef0 ev_1d0724863d67c8869c8964c505aeab7a5baa39a8ee59f7253d434f79eb352dce;
+  buffer794540 ev_98334ab2fb50901f89f84274438d811f207941a4da118374120c20f33a6a5d5b.
+  Seven base and14 config xrefs retained as metadata. Width/height direct writes are
+  WinMain screensize stores bypassed by pinned loader40297a->402a90; other observed
+  width refs are absolute loads. No exhaustive alias/window behavior claim.
+* Exact28-value data oracle, strict isolated four-file source closure and existing native
+  library consumer pass. Boot covers canonical/poison/varied/partial/absent inputs,
+  signed/FP payload injection, all four resource identities, shared controls/sound/startup
+  owners and unknown capabilities. Reader-only partial .data cutoff389d887 shrinks raw
+  and virtual mapping, removing final cold count's fourth byte; never executed.
+* Four numeric/four adapter mutants caught. Report-only survey initially missed the
+  numeric-config bypass: skipped drawing owners make counts invisible there. New test
+  adds all28 post-run library facts without removing assertions; the mutant now fails.
+  Positive distinct caller counts and1280x720/request2 also reach actual runtime owners.
+  Canonical/poisoned surveys preserve full reports/graphics, with no sprite draws.
+* Historical2078536 vs current constructors: five configurations,2,265 facts /10,093
+  bytes exact (library28/resources4/control51/sound329/startup41). CLI5,427 bytes exact.
+  Existing library2,400/system600/screen3,000 full reports reproduce historical hashes
+  after identified library/provenance metadata restoration; system's preexisting stale
+  hashes independently checked against2078536 before restoration. No compared values,
+  flags or cases removed. Independent final STYLE §12 review approved.
+* Readability253 files/debt unchanged; profile overlap, layers, ownership and provenance
+  checks pass. Full gate pending; verification inputs/artifacts will be committed
+  separately. Source initialization is one step toward the active overall GOAL, not
+  full native library/window/device/session recovery. No push or binaries/assets.

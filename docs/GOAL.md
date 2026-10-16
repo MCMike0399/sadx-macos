@@ -390,6 +390,9 @@ comes first, because every later port should copy a readable model, not the lega
    Startup settings add 41 exact numeric atoms (138 source bytes), including typed text
    language, load-time audio/cursor modes and both controller mapping tables, with
    media/message resources and shared controls kept separate.
+   Library initialization adds 28 exact numeric atoms (112 source bytes), separating
+   cold counts from configured counts and replacing runtime numeric configuration reads;
+   window-text/path resources and shared settings keep their existing boundaries.
    Native boot configuration selects these
    families explicitly; injectable reference decoding remains available. These families
    do not complete the runtime refactor:

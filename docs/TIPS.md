@@ -295,3 +295,18 @@ accepts/clamps a full signed mode to 0..3, while WinMain clamps its INI input to
 Evidence: startup-initial-161-evidence.json (CheckSettings, Enable3DSound,
 SetMouseMode, voicevolchange). Numeric native defaults exclude media objects,
 message pointers and the independently owned frame/fog controls.
+
+### Library cold values and configured buffer counts
+
+PolyBuff_Count is nine inline signed words, despite the classic `int*` declaration:
+781070 stores each config word directly; 78e720 loads indexed values into EDX for
+794540's count/stride arithmetic and allocation. Cold counts end in `12000`; library
+configuration changes the ninth count to `32000`. Keep both initialization phases.
+The four config prefix words are string pointers copied by 793ef0 and remain resource
+facts. The cursor and frame interval entries borrow their existing owners; +0x20/+0x24
+are unused by this consumer. High-precision depth setup occurs only for request == 1,
+so keep its integer value. See library-initial-162-evidence.json and fieldmap.json.
+
+A survey report can remain identical when buffer counts change: the relevant drawing
+owners are still skipped. Verify initialized state after the consumer as well as the
+report. The library-defaults configuration-bypass mutant exposed exactly this gap.
