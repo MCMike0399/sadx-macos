@@ -7,6 +7,7 @@
 #include "../probes/ninja_screen_initial_state_probe.hpp"
 #include "../probes/sound_initial_state_probe.hpp"
 #include "../probes/game_view_initial_state_probe.hpp"
+#include "../probes/ninja_queue_initial_state_probe.hpp"
 #include <algorithm>
 #include <fstream>
 #include <iostream>
@@ -283,6 +284,59 @@ void missing_view_facts() {
     same_control_facts(varied, *config.control_defaults);
     same_screen_facts(varied, *config.screen_defaults);
 }
+void same_queue_facts(const sadx::NativeGame &game, const sadx::NinjaQueueInitialState &values) {
+    const auto actual = game.queue_facts();
+    const auto expected = sadx::test::queue_initial_words(values);
+    for (std::size_t i = 0; i < expected.size(); ++i)
+        require(actual[i] && *actual[i] == expected[i], "native queue facts retain exact encodings");
+}
+void same_queue_resources(const sadx::NativeGame &game, const sadx::NativeGameConfig &config) {
+    const auto actual = game.queue_resource_facts();
+    const auto base = config.executable ? config.executable->u32(0x3abd960) : std::nullopt;
+    const auto device = config.executable ? config.executable->u32(0x3d128b0) : std::nullopt;
+    require(actual[0] == base, "queue allocation provenance remains image-backed");
+    const auto expected_device = device && *device == 0 ? std::optional<std::uint32_t>(0) : std::nullopt;
+    require(actual[1] == expected_device, "numeric defaults do not invent a device for unknown/foreign identities");
+    same_screen_resources(game, config);
+}
+void reference_queue_facts(const sadx::NativeGame &game, const sadx::NativeGameConfig &config) {
+    const auto actual = game.queue_facts();
+    const auto word = [&](std::uint32_t address) {
+        return config.executable ? config.executable->u32(address) : std::nullopt;
+    };
+    unsigned next = 0;
+    for (auto address : {0x8928c8U, 0x3ab98acU, 0x3b12208U})
+        require(actual[next++] == word(address), "queue depth/execution/lighting word availability");
+    for (auto address : {0x3abdbc0U, 0x3ab9890U})
+        require(actual[next++] == (config.executable ? config.executable->byte(address) : std::nullopt),
+                "queue byte widths and availability");
+    for (auto address : {0x3abd9d4U, 0x3abd9d8U, 0x3abd9dcU, 0x3abd9e0U})
+        require(actual[next++] == word(address), "queue signed counter/high-water encodings");
+    for (auto address : {0x900840U, 0x3ab9898U, 0x900858U, 0x90084cU})
+        for (unsigned i = 0; i < 3; ++i)
+            require(actual[next++] == word(address + 4 * i), "queue parameters remain independently available");
+    require(next == actual.size(), "all queue initialization atoms observed");
+    same_queue_resources(game, config);
+}
+void missing_queue_facts() {
+    sadx::NativeGameConfig config{};
+    const sadx::NativeGame missing(config);
+    reference_queue_facts(missing, config);
+    config.queue_defaults = sadx::ninja_queue_initial_state();
+    config.control_defaults = sadx::test::varied_control_defaults();
+    config.view_defaults = sadx::test::varied_view_initial_state();
+    const sadx::NativeGame native(config);
+    same_queue_facts(native, *config.queue_defaults);
+    same_queue_resources(native, config);
+    same_control_facts(native, *config.control_defaults);
+    same_view_facts(native, *config.view_defaults);
+    for (const auto &byte : native.device_caps().bytes)
+        require(!byte, "queue defaults do not invent GPU capability facts");
+    config.queue_defaults = sadx::test::varied_queue_initial_state();
+    const sadx::NativeGame varied(config);
+    same_queue_facts(varied, *config.queue_defaults);
+    same_queue_resources(varied, config);
+}
 void same_composition(const sadx::NativeGameReport &expected, const sadx::D3D8StateOwner &graphics,
                       const sadx::NativeGameReport &actual, const sadx::D3D8StateOwner &native) {
     require(expected.startup_completed == actual.startup_completed &&
@@ -328,7 +382,7 @@ void same_composition(const sadx::NativeGameReport &expected, const sadx::D3D8St
 }
 }
 int main(int argc,char** argv){try{
-    require(argc==3||argc==4||argc==7||argc==13||argc==14||argc==15||argc==16||argc==17||argc==18,"usage: game-runtime-test SONIC.EXE INPUT_MOD.DLL [ENGINE_POISON [CONTROL_POISON CONTROL_VARIED CONTROL_PARTIAL]]");
+    require(argc==3||argc==4||argc==7||argc==13||argc==14||argc==15||argc==16||argc==17||argc==18||argc==19,"usage: game-runtime-test SONIC.EXE INPUT_MOD.DLL [ENGINE_POISON [CONTROL_POISON CONTROL_VARIED CONTROL_PARTIAL]]");
     missing_control_facts();
     missing_input_facts();
     missing_sine_facts();
@@ -336,6 +390,7 @@ int main(int argc,char** argv){try{
     missing_screen_facts();
     missing_sound_facts();
     missing_view_facts();
+    missing_queue_facts();
     const auto exe=load(argv[1]),dll=load(argv[2]);
     require(exe->u32(0x7dce58)==0x42720000u&&exe->byte(0x3abdc7c)==0&&!exe->byte(0x3d14000+0x2000),"load image: .rdata 60.5f at 7dce58, zero-fill .data, outside the image");
     sadx::NativeGameConfig config;config.executable=exe;config.input_mod_dll=dll;
@@ -355,6 +410,8 @@ int main(int argc,char** argv){try{
     reference_sound_facts(original, config);
     same_view_facts(original, sadx::game_view_initial_state());
     reference_view_facts(original, config);
+    same_queue_facts(original, sadx::ninja_queue_initial_state());
+    reference_queue_facts(original, config);
     same_screen_resources(original, config);
     const auto survey=original.run();
     require(survey.failure.empty()&&survey.startup_completed&&survey.frames_completed==3&&!survey.unported.empty(),"survey completes startup and three frames");
@@ -367,6 +424,7 @@ int main(int argc,char** argv){try{
     now = 0;
     config.sound_defaults = sadx::sound_initial_state();
     config.view_defaults = sadx::game_view_initial_state();
+    config.queue_defaults = sadx::ninja_queue_initial_state();
     sadx::NativeGame native_tables(config);
     same_control_facts(native_tables, *config.control_defaults);
     const auto native_report = native_tables.run();
@@ -632,6 +690,45 @@ int main(int argc,char** argv){try{
         same_view_facts(partial_native, *config.view_defaults);
         same_screen_resources(partial_native, config);
     }
+    if (argc >= 19) {
+        const std::string prefix = argv[18];
+        config.view_defaults = sadx::game_view_initial_state();
+        config.queue_defaults = sadx::ninja_queue_initial_state();
+        config.executable = load((prefix + "-poisoned.exe").c_str());
+        require(config.executable->u32(0x900840) != exe->u32(0x900840) &&
+                    config.executable->u32(0x3ab9898) != exe->u32(0x3ab9898),
+                "queue poison changes source and captured parameters");
+        now = 0;
+        sadx::NativeGame poisoned(config);
+        same_queue_facts(poisoned, *config.queue_defaults);
+        same_queue_resources(poisoned, config);
+        const auto report = poisoned.run();
+        same_composition(survey, original.d3d8(), report, poisoned.d3d8());
+        config.executable = load((prefix + "-varied.exe").c_str());
+        config.queue_defaults.reset();
+        const sadx::NativeGame varied_image(config);
+        same_queue_facts(varied_image, sadx::test::varied_queue_initial_state());
+        reference_queue_facts(varied_image, config);
+        config.queue_defaults = sadx::ninja_queue_initial_state();
+        const sadx::NativeGame native_over_varied(config);
+        same_queue_facts(native_over_varied, *config.queue_defaults);
+        same_queue_resources(native_over_varied, config);
+        require(!native_over_varied.queue_resource_facts()[1], "injected nonzero device remains unowned");
+        config.executable = load((prefix + "-partial.exe").c_str());
+        require(config.executable->byte(0x3ab98a2).has_value() && !config.executable->byte(0x3ab98a3),
+                "partial fixture removes the last reset parameter byte");
+        config.queue_defaults.reset();
+        const sadx::NativeGame partial(config);
+        reference_queue_facts(partial, config);
+        const auto facts = partial.queue_facts();
+        require(facts[12].has_value() && facts[13].has_value() && !facts[14],
+                "queue parameter words preserve individual availability");
+        config.queue_defaults = sadx::test::varied_queue_initial_state();
+        const sadx::NativeGame partial_native(config);
+        same_queue_facts(partial_native, *config.queue_defaults);
+        same_queue_resources(partial_native, config);
+    }
+    config.queue_defaults.reset();
     config.view_defaults.reset();
     config.sound_defaults.reset();
     config.screen_defaults.reset();

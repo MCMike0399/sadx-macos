@@ -1,0 +1,60 @@
+{
+  "passed": true,
+  "source_sha256": "882a3179dab2ca3d025c3461a73edadea2f95b6a8a2a94c77e238252657e81f6",
+  "baseline": {
+    "name": "baseline",
+    "exit_status": 0,
+    "killed": false,
+    "output": "Game runtime: survey ran startup + 3 frames (5 unported owners); native execution stops at 40cad0>40c090>415000>422680.",
+    "replacement": [
+      null,
+      null
+    ]
+  },
+  "mutants": [
+    {
+      "name": "ignore_native_queue",
+      "exit_status": 1,
+      "killed": true,
+      "output": "native queue facts retain exact encodings",
+      "replacement": [
+        "if (config_.queue_defaults) {",
+        "if (false && config_.queue_defaults) {"
+      ]
+    },
+    {
+      "name": "merge_allocation_groups",
+      "exit_status": 1,
+      "killed": true,
+      "output": "native queue facts retain exact encodings",
+      "replacement": [
+        "bits(values.allocation_source[i])",
+        "bits(values.allocation_capture[i])"
+      ]
+    },
+    {
+      "name": "invent_missing_reset_word",
+      "exit_status": 1,
+      "killed": true,
+      "output": "queue parameters remain independently available",
+      "replacement": [
+        "words_at_3ab9898_[i] = word(0x3ab9898 + 4 * i);",
+        "words_at_3ab9898_[i] = word(0x3ab9898 + 4 * i).value_or(0);"
+      ]
+    },
+    {
+      "name": "invent_null_device",
+      "exit_status": 1,
+      "killed": true,
+      "output": "numeric defaults do not invent a device for unknown/foreign identities",
+      "replacement": [
+        "const auto &values = *config_.queue_defaults;",
+        "const auto &values = *config_.queue_defaults; render_.device_at_3d128b0 = NinjaRenderDeviceHandle{};"
+      ]
+    }
+  ],
+  "limits": [
+    "Temporary adapter copies linked before unchanged archives; no worktree mutation.",
+    "Three-frame survey only, no sprite draws or complete native queue claim."
+  ]
+}

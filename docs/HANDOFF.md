@@ -4288,3 +4288,32 @@ The product still needs native boot/title, resources and gameplay recovery.
   and existing judges unchanged; partial verdicts remain partial. Independent final
   STYLE review approved; full gate follows. No full queue/session/game or physical GPU/FP claim.
   GOAL §6.7 remains open; no binaries/assets committed; no push.
+
+
+### 2026-10-16 — render-queue initialization verification complete (gate 159)
+
+* Completes source `dbbc3e1` in a separate judge commit. Twenty-one exact atoms,
+  isolated data closure, native blend-before-failure/device-boundary consumer,
+  historical constructor/CLI equivalence, poisoned composition and seven mutants
+  pass. Independent final STYLE review approved. No existing algorithm/judge changes.
+* Full `make -j10 gate` **rc 0**, **141 native programs /50 Python tests**. Unchanged
+  7,228-frame two-boot determinism and first-600 override digests; 71,115 override
+  comparisons/mutants, 900-frame controller parity and 63 FPS title cadence pass.
+  Host throughput 82.3 FPS. Twelve layers/zero exceptions; 159,630 owned bytes /
+  159,680 combined identities; 484 protected judge inputs. Readability 247 files,
+  unchanged debt: hex11,628 / identifiers1,796 / calls75 / gotos2 / long1,489 / multi2,184.
+* Full historical report hashes reproduce after restoring only library hashes:
+  render8209 exact; lifecycle600/402 FP flags; consumer12 CW*187/180 flags perprofile;
+  sprite12 CW*1472records/1438 flags perprofile. Partial remains partial. Aggregate
+  verdict command rc2: tracked57pass/46partial/9fail/1missing. Other standalone
+  oracles, separate `make m1` and four unregistered tests skipped: metal-sprite,
+  metal-sprite-composition, metal-texture, player-task. All source/probe/app programs compile.
+* Evidence `production-integration-20261016/queue-initial-159-*` records ten fresh
+  Ghidra dossiers +21 xrefs and two cached blend dossiers, float copy-chain proof,
+  field map and source/data hashes, reproducible historical/mutant harnesses, isolated
+  closure and recorded gate. Unrelated/rejected navigation candidates explicitly
+  excluded. Unknown parameter meanings remain explicit; allocation/device resources
+  and shared controls remain separate. Remaining initialization, resource/content
+  seams and unrecovered gameplay remain open. No full native queue/session/game or
+  physical GPU/FP claim. Goal active; hook settings and two user drafts untouched;
+  no binaries/assets committed; no push.

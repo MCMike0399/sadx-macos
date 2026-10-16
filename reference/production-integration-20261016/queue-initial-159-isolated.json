@@ -1,0 +1,86 @@
+{
+  "passed": true,
+  "source_sha256": {
+    "src/engine/ninja_queue_initial_state.hpp": "beab3e83d252738f6771c12cbb7d81c6920d36b1738d533e9238a915bed8ffcb",
+    "src/engine/ninja_queue_initial_state.cpp": "aced0a247c731cf72dcea9a0dcc7474f6d98ef047d4d85ebf9a4695f3c4b897a",
+    "tests/probes/ninja_queue_initial_state_probe.hpp": "4927eb9a8bae57ca2a4831884bcd03c10fbc29d68765ca7b75437ebb7638e4f1",
+    "tests/probes/native_ninja_queue_initial_state_probe.cpp": "063c7f0dfa2ad124b4bf886401ca61aaa7f673b8810be49aab3c42768d37fe16"
+  },
+  "compiler_dependencies": [
+    "src/engine/ninja_queue_initial_state.cpp",
+    "src/engine/ninja_queue_initial_state.hpp",
+    "tests/probes/native_ninja_queue_initial_state_probe.cpp",
+    "tests/probes/ninja_queue_initial_state_probe.hpp"
+  ],
+  "toolchain_metadata_sha256": {
+    "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/SDKSettings.json": "7b93ad7e534cc4b31c6a4e39d19b5e0288acf2168c2649479a796d1cb51939fb"
+  },
+  "linked_libraries": [
+    "/usr/lib/libc++.1.dylib",
+    "/usr/lib/libSystem.B.dylib"
+  ],
+  "reference_runtime_symbols_found": false,
+  "commands": [
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-0.d",
+      "-c",
+      "src/engine/ninja_queue_initial_state.cpp",
+      "-o",
+      "unit-0.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-fPIC",
+      "-Isrc",
+      "-MMD",
+      "-MF",
+      "unit-1.d",
+      "-c",
+      "tests/probes/native_ninja_queue_initial_state_probe.cpp",
+      "-o",
+      "unit-1.o"
+    ],
+    [
+      "/usr/bin/c++",
+      "-dynamiclib",
+      "-Wl,-install_name,@rpath/ninja-queue-initial-state.dylib",
+      "unit-0.o",
+      "unit-1.o",
+      "-o",
+      "ninja-queue-initial-state.dylib"
+    ]
+  ],
+  "binary_sha256": "13aab3649ef3f5a941f5aa5809460c3f72eb2f7293f38cd89689671c2fc1c83b",
+  "serialized": {
+    "words": 21,
+    "sha256": "c93b024e6dc3b0fbb4f468ba48d1e2ac07f5fc1e6feda8dcc48dd3bc8f89074d"
+  },
+  "copied_original_binary_inputs": [],
+  "copied_fixtures": [],
+  "inherited_environment": false,
+  "core_archive_linked": false,
+  "limits": [
+    "Load-time numeric queue values only; queue algorithms, allocation and device resources remain outside this source closure.",
+    "Isolated source/dependency closure, not an operating-system access sandbox.",
+    "Only the verified fingerprint is read before isolation; no original binary or table data is copied."
+  ]
+}

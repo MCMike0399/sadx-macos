@@ -1,0 +1,63 @@
+{
+  "passed": true,
+  "source_sha256": "aced0a247c731cf72dcea9a0dcc7474f6d98ef047d4d85ebf9a4695f3c4b897a",
+  "baseline": {
+    "name": "baseline",
+    "exit_status": 0,
+    "killed": false,
+    "mismatches": [],
+    "mutation": null
+  },
+  "mutants": [
+    {
+      "name": "wrong_depth_index",
+      "exit_status": 1,
+      "killed": true,
+      "mismatches": [
+        {
+          "word": 0,
+          "expected": 1,
+          "actual": 0
+        }
+      ],
+      "mutation": "values.depth_comparison = 0;"
+    },
+    {
+      "name": "premature_reset_capture",
+      "exit_status": 1,
+      "killed": true,
+      "mismatches": [
+        {
+          "word": 12,
+          "expected": 0,
+          "actual": 3309010944
+        },
+        {
+          "word": 13,
+          "expected": 0,
+          "actual": 3298164736
+        },
+        {
+          "word": 14,
+          "expected": 0,
+          "actual": 3298164736
+        }
+      ],
+      "mutation": "values.reset_capture = values.reset_source;"
+    },
+    {
+      "name": "allocation_capture_endpoint",
+      "exit_status": 1,
+      "killed": true,
+      "mismatches": [
+        {
+          "word": 20,
+          "expected": 3304718336,
+          "actual": 3301441536
+        }
+      ],
+      "mutation": "values.allocation_capture[2] = -1600.0F;"
+    }
+  ],
+  "worktree_mutated": false
+}

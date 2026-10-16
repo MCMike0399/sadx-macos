@@ -1,0 +1,121 @@
+{
+  "numeric_atoms": 21,
+  "numeric_bytes": 78,
+  "fields": [
+    {
+      "name": "depth_comparison",
+      "address": "8928c8",
+      "width": 4
+    },
+    {
+      "name": "execution_mode",
+      "address": "3ab98ac",
+      "width": 4
+    },
+    {
+      "name": "lighting_palette",
+      "address": "3b12208",
+      "width": 4
+    },
+    {
+      "name": "lighting_copy",
+      "address": "3abdbc0",
+      "width": 1
+    },
+    {
+      "name": "packed_blend",
+      "address": "3ab9890",
+      "width": 1
+    },
+    {
+      "name": "primary_count",
+      "address": "3abd9d4",
+      "width": 4
+    },
+    {
+      "name": "primary_high_water",
+      "address": "3abd9d8",
+      "width": 4
+    },
+    {
+      "name": "secondary_count",
+      "address": "3abd9dc",
+      "width": 4
+    },
+    {
+      "name": "secondary_high_water",
+      "address": "3abd9e0",
+      "width": 4
+    },
+    {
+      "name": "reset_source[0]",
+      "address": "900840",
+      "width": 4
+    },
+    {
+      "name": "reset_source[1]",
+      "address": "900844",
+      "width": 4
+    },
+    {
+      "name": "reset_source[2]",
+      "address": "900848",
+      "width": 4
+    },
+    {
+      "name": "reset_capture[0]",
+      "address": "3ab9898",
+      "width": 4
+    },
+    {
+      "name": "reset_capture[1]",
+      "address": "3ab989c",
+      "width": 4
+    },
+    {
+      "name": "reset_capture[2]",
+      "address": "3ab98a0",
+      "width": 4
+    },
+    {
+      "name": "allocation_source[0]",
+      "address": "900858",
+      "width": 4
+    },
+    {
+      "name": "allocation_source[1]",
+      "address": "90085c",
+      "width": 4
+    },
+    {
+      "name": "allocation_source[2]",
+      "address": "900860",
+      "width": 4
+    },
+    {
+      "name": "allocation_capture[0]",
+      "address": "90084c",
+      "width": 4
+    },
+    {
+      "name": "allocation_capture[1]",
+      "address": "900850",
+      "width": 4
+    },
+    {
+      "name": "allocation_capture[2]",
+      "address": "900854",
+      "width": 4
+    }
+  ],
+  "resource_addresses": [
+    "3abd960",
+    "3d128b0",
+    "3ce7164",
+    "3ce7168",
+    "3ce716c"
+  ],
+  "parameter_representation": "float[3] justified by setter comparisons/stores and componentwise action copies; only captured component0 depth role established",
+  "availability": "Independent word/byte reads; no grouping of the three parameters",
+  "device_observer": "Native device presence: absent when source identity unknown or nonzero/unowned; known false for original zero. Not a raw pointer observer."
+}

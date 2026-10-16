@@ -1,0 +1,446 @@
+{
+  "step": "GOAL6.7 native render-queue initialization",
+  "base_commit": "ef45485033351c9a018151c0dac8969de0a9d55f",
+  "source_sha256": {
+    "src/engine/ninja_queue_initial_state.hpp": "beab3e83d252738f6771c12cbb7d81c6920d36b1738d533e9238a915bed8ffcb",
+    "src/engine/ninja_queue_initial_state.cpp": "aced0a247c731cf72dcea9a0dcc7474f6d98ef047d4d85ebf9a4695f3c4b897a",
+    "src/guest/native_game_reference.hpp": "d3783e76412f80d94bbcc7b2359af6eb33b6bd1c6c7b3646db1ce50a3c2bb577",
+    "src/guest/native_game_reference.cpp": "882a3179dab2ca3d025c3461a73edadea2f95b6a8a2a94c77e238252657e81f6",
+    "src/guest/native_game_session.cpp": "58b55d32fc2375c1d7e88d06ca99211c7f260f1de5de26931d7a720ce18204dc"
+  },
+  "source_image_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "numeric_atoms": 21,
+  "numeric_bytes": 78,
+  "data_report": "reference/oracle-reports/ninja_queue_initial_state.json",
+  "field_map": "reference/production-integration-20261016/queue-initial-159-field-map.json",
+  "evidence": [
+    {
+      "path": "reference/inventory-raw/queue-initial-action-capture-use.json",
+      "evidence_id": "ev_2f8b9b6e19788bfd1d90fd62b591706e6278786c07560306dada52ad8300f8f3",
+      "sha256": "6e708017c70047f2d6501afd43bb1745d13692592b075da9549ccc7a880c8943"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-allocate.json",
+      "evidence_id": "ev_5714dc81d5f59720501e2dcc7bb2efd231d0c52ca96bb385df91a4c000b9800d",
+      "sha256": "f610892e9a9d7aa3e1ee096a209f223b344736ec262be32501ee316f6482bd2c"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-allocation-parameters.json",
+      "evidence_id": "ev_d63922989492c9dabe965a03f48a0c6e40e658a8874d2b6ceb3f32edfe17906c",
+      "sha256": "e88dc3014ca8fe6dc52e3f1ca2da9c94b4cec38ccd96c652cec30160da00ef1f"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-depth.json",
+      "evidence_id": "ev_28c917301e07454221fd81618af0871bd8d6584415ed517b9bd818875a322d50",
+      "sha256": "1906cadf7ff5735c791cc316955791c3a0539c9c72d788cab7b971f033a816e3"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-light.json",
+      "evidence_id": "ev_ef3107cf878c3d74321a90e9d59fd1727675077cdddc65d0f07080e1e88585e2",
+      "sha256": "0a6dd1559e8c9b092357fdac499b7c053eb8f0127f01a76abeccce0373cee123"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-parameter-test.json",
+      "evidence_id": "ev_98dc1637beffcab8c954869cb3553671aeef95eb44e9017d707ae1460accb399",
+      "sha256": "7cfe43527c49855b18d092c7690555d97727edf878dbd88a26ef85f244e16f36"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-reset-copy.json",
+      "evidence_id": "ev_1a333d0128b86ea5c05e23c55b50c265643aa6ff339a287f332962bf582e7d05",
+      "sha256": "c333c815768549f071553b2ce58f78b25722431ea97cdd7eedb0ed3db6a25507"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-reset-parameters.json",
+      "evidence_id": "ev_7b5291593192df67d19ca4147a45130d84150418cfa9f9b2a32343aca99e745f",
+      "sha256": "ba814a6f2f18fe5f68cd3a189ad9a91216196a2f3deb2b605e992724648129fd"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-reset-state.json",
+      "evidence_id": "ev_880793b7f203ae918f558b17d7fed9f12eacfaabefbf44a2953d71ae60e09d21",
+      "sha256": "13e622c49aca7d8c12e52941b140ceae16d5f1265fc1f50a20a523e43e1d3571"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-reset.json",
+      "evidence_id": "ev_9f04b1ec119b3e31460419161289062a3d94c1389db7b35b3c97abb26dd4b4f3",
+      "sha256": "803b9e91667b05ce509a74dab65e7c457c130150d2dbd0e90bedc9a30f41cecc"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-xrefs-3ab9890.json",
+      "evidence_id": "ev_b864a4c4f02f8e29b254b8b9d1bbac49b06fe2f7c95516967b2fcd81b4da6619",
+      "sha256": "202093afa5699a23088c823309f0a51263443e0eba4a3bf71b6158dabc9a24fd"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-xrefs-3ab9898.json",
+      "evidence_id": "ev_bcab8398f5572b88a32f273b4e6c06ff4c2b0e7a314cdf44f2b79bcae3a0dd8c",
+      "sha256": "4643806993eb2093f7bb0b440585408ec3a4c117d89ff838580832df1b5eb3cf"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-xrefs-3ab989c.json",
+      "evidence_id": "ev_6c2318b3fb4b09d464ea24233225533616d52dd354f8e29367fbacb99960538c",
+      "sha256": "2fb789ba575dac2ad7ea396d6a345eff3f7862115405794c1be0baa3e9618239"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-xrefs-3ab98a0.json",
+      "evidence_id": "ev_68fb30fcd4fc55c27dc5b866cfff24738171c5b27671358bae6af23a4a3a4714",
+      "sha256": "2637c2d76cebd31b26c1962f6e8dfbe3dec1425fe75224a524b8a78fcaa9d9a7"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-xrefs-3ab98ac.json",
+      "evidence_id": "ev_d4fa1f89750b62af3151dc77b373a54900cd40fd3bcf2108fb786ea14fcc1b73",
+      "sha256": "da4d60d5b3c49f9e933fdab638e43ad5790a310d43885149f1c5b12e26d9c20a"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-xrefs-3abd9d4.json",
+      "evidence_id": "ev_673bf20496db2ff00c20e948cd311ed52552600959cf3e1d6dea7e5b53953d2d",
+      "sha256": "c097947f8a837bc012437a3eecc72bca6d86fc7eaaa638e14f2a9ca63efdee5d"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-xrefs-3abd9d8.json",
+      "evidence_id": "ev_36c8d0b9d94a17fbe5403056e9ddb5f2e5c4fe467253f4d19041e5d9d4f66b3c",
+      "sha256": "f9765d4401885eb64c7859d8b2c9ac5d6cf782728e1ddd848388b87dbcac35be"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-xrefs-3abd9dc.json",
+      "evidence_id": "ev_765c38c34e95e5df4eeba4416887ebe51f52be0a27325a6728b38fd13c7c381d",
+      "sha256": "c868adfd61371291adf9dc0302d182f636547b960d738118588a5873eac7b6b7"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-xrefs-3abd9e0.json",
+      "evidence_id": "ev_e0f2ba0dd4b0ec5807de566d91a1ad1e96e94f2bebf3db1880721f000da9dd5a",
+      "sha256": "d6bde40e172a1ac4344da4d947a96d2e343f335a952474949d069591db420f9c"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-xrefs-3abdbc0.json",
+      "evidence_id": "ev_ba6d47e3a8775fb1ab20894277b6cc8899f74586da233c68cd3fd7a436a201ef",
+      "sha256": "e60730f71126f839669542562feaa93288761988c502db97ca3fd9fbb65503d9"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-xrefs-3b12208.json",
+      "evidence_id": "ev_60caf41cbdd246acc950b2182dadd5cadadbfbcc121366c5175a73db5cb59da5",
+      "sha256": "33963e072cd94966e78ea5af27600a74f25918097e67b2d26eab02bacd3edeba"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-xrefs-8928c8.json",
+      "evidence_id": "ev_469f01347296dc69185d38119bf71fee16ac4605c5bf539e75cbc303dbda5a4c",
+      "sha256": "a638e9988d4ee6f71285a09330ba5c8f0b33eab0f03b102a3389e0da969186e5"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-xrefs-900840.json",
+      "evidence_id": "ev_0602ae8c17eef1bb314942ddc2f17032f5a2cb09d7aa628e76ae2512af0cfd11",
+      "sha256": "0280abf1b10d04ad0767f791761d127ad0fe19df649d7b286a814126eedf4af4"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-xrefs-900844.json",
+      "evidence_id": "ev_638c2dc74a1ecc2dccdda0216930225bb465069aa609ac0b46dce3e2802f7a3b",
+      "sha256": "b837ff7199641cbf65eb14b360c448bd7c96ac0eefa4fbe845a43f233561eafe"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-xrefs-900848.json",
+      "evidence_id": "ev_848b2eb271f4d39fa8350a002e6d5f58c397fcd4782795cfb9fa364f71400190",
+      "sha256": "df76c2edfdc9ab5a2d9be31bd74c06284342abab71915240855fc76754d66f85"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-xrefs-90084c.json",
+      "evidence_id": "ev_23ec9f5a0464845812e9fe1ae58ce131bccb069db6732f7746dc60fa0a56e61b",
+      "sha256": "0017719abfcfc0d21ff70609263fdb5ef106e2606c4578616f7ee09afc9a4a2f"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-xrefs-900850.json",
+      "evidence_id": "ev_540cfedc3bcbee67448363824c424aea0515922be16c912cee880748c3020eee",
+      "sha256": "3c9dc97763dd7a62f0ad05f35358bb6ee8462ec4b6eb76e109f7a4a8ef0e5246"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-xrefs-900854.json",
+      "evidence_id": "ev_3bd69fcc699315091d7b8ced77c9c309e8c495fc4a4d106befe3843e38fefb3f",
+      "sha256": "bba4425ba5ffc20381766f3ef2f334b49e5fed1237a2936e664d6a40ca64e78e"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-xrefs-900858.json",
+      "evidence_id": "ev_0496363a589ce975c8272ab8dca72a619b4cf45eea8e8d764ccf7e9202923772",
+      "sha256": "4d4ed23f6a384daecccf3f472d39df5da446b56267db336b953c440d212e05ef"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-xrefs-90085c.json",
+      "evidence_id": "ev_72414322d4abdf175167a3f6083e829b76144996159a918e2cda9ff3f1dc520a",
+      "sha256": "663a268044103dbe60f9e26949ad94c60c45ca1af0f64d7dfa91f31920ed10f4"
+    },
+    {
+      "path": "reference/inventory-raw/queue-initial-xrefs-900860.json",
+      "evidence_id": "ev_dc192e464c5322006a5675b8485abec867a469a562ad28f26dadd664329ecb88",
+      "sha256": "f025962284d9ad0b71c4e1d7b49eb7fadbdb93387cd3be7282b0c439f1ff0455"
+    },
+    {
+      "path": "reference/inventory-raw/bridge-blend-4030d0.json",
+      "evidence_id": "ev_34900e62ff547faabd2a85706f9c2cd864bd98ccf438ed4b1d2cda17e8418e80",
+      "sha256": "377a189e0316732dcec870d5baecc6565d1da5f949fc9b8fbc21ee3dd6f3ab95",
+      "cached_verified_blend": true
+    },
+    {
+      "path": "reference/inventory-raw/bridge-blend-77ec60.json",
+      "evidence_id": "ev_2d469eb1d543985500c182ce741c2a672a5825733d1c92c2b751e0311abf79cf",
+      "sha256": "f8be2ee8a8fe75d47c7922b6fcd152e9b197a41cbbf97f4adbb57529cfd162d4",
+      "cached_verified_blend": true
+    }
+  ],
+  "excluded_navigation_candidates": {
+    "unrelated_triangle": "queue-initial-blend.json (77ec30)",
+    "preceding_function_ends_before_copy": "queue-initial-parameter-use.json (409e70)",
+    "no_ghidra_procedure": "queue-initial-allocation-capture-use.json (409ef0)"
+  },
+  "constructor_comparison": {
+    "passed": true,
+    "inputs": [
+      "game/Sonic Adventure DX/sonic.exe",
+      "build/queue-initial-poisoned.exe",
+      "build/queue-initial-varied.exe",
+      "build/queue-initial-partial.exe",
+      "-"
+    ],
+    "configurations": 5,
+    "facts_per_configuration": 197,
+    "facts_compared": 985,
+    "bytes_compared": 4765,
+    "sha256": "708b00c1d0fa0cf0999eac9562a74c8ecab872dfe526dc613aa08a4880f1bb2c",
+    "rows_sha256": [
+      "19a32e6d90a836b059f58176b1abbfed2d45a986c6bde866590129b59d9717f3",
+      "837c7f75fffa00695fe24e47eda045bea6977fbda6543b7d5802d0b7d7550649",
+      "d7f9524b582b923c0b8cf3ba7cd15233099e168b02e1114e1c57ce6cbe175198",
+      "cd735e642030262e9ba686ad52777893d6f8c5d599040bc9169e1f472e130b0c",
+      "c089b26a2d0416f694f294e392098a09dc61b20f84aa8b4e8f5214c007ab34b4"
+    ]
+  },
+  "cli_comparison": {
+    "passed": true,
+    "bytes_compared": 5427,
+    "sha256": "52254476457a377d2ac6d3f5eb7cd323f2154d6e22bf2e79e296833c8b070b7c"
+  },
+  "numeric_mutants": 3,
+  "adapter_mutants": 4,
+  "existing_oracles": {
+    "ninja_render": {
+      "full_report_matches_after_restoring_only_library_hash": true,
+      "historical_full_report_sha256": "fbbf664b5ab38245efe31c1e30ca18b07729843ee6e303e6f6ca5f5d64cb61b1",
+      "cases": 8209
+    },
+    "ninja_queue_lifecycle": {
+      "full_report_matches_after_restoring_only_library_hash": true,
+      "historical_full_report_sha256": "ce500514fb8f6dbee7f2813ed643c20c86038db1929c7bc231ed6ffc946bebff",
+      "cases": 600,
+      "fp_flag_mismatches": 402
+    },
+    "ninja_queue_consumer": {
+      "full_report_matches_after_restoring_only_library_hash": true,
+      "historical_full_report_sha256": "b0c0f5d3679a6b7bea8b9f8c4e584d8af7512fcfce76878f5dfeb616be04de22",
+      "cases": 187,
+      "profiles": 12,
+      "profile_counts": [
+        {
+          "cw": "0x7f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0x47f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0x87f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0xc7f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0x27f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0x67f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0xa7f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0xe7f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0x37f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0x77f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0xb7f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0xf7f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        }
+      ]
+    },
+    "ninja_sprite_queue": {
+      "full_report_matches_after_restoring_only_library_hash": true,
+      "historical_full_report_sha256": "510ccf7f9b0f5de813ce1f787a1e67cbc2a1d50b121be8bd288359d3128d6acd",
+      "profiles": 12,
+      "profile_counts": [
+        {
+          "cw": "0x7f",
+          "sequences": 10,
+          "records": 1472,
+          "state_mismatches": 0,
+          "bucket_mismatches": 0,
+          "trace_mismatches": 0,
+          "flag_mismatches": 1438
+        },
+        {
+          "cw": "0x47f",
+          "sequences": 10,
+          "records": 1472,
+          "state_mismatches": 0,
+          "bucket_mismatches": 0,
+          "trace_mismatches": 0,
+          "flag_mismatches": 1438
+        },
+        {
+          "cw": "0x87f",
+          "sequences": 10,
+          "records": 1472,
+          "state_mismatches": 0,
+          "bucket_mismatches": 0,
+          "trace_mismatches": 0,
+          "flag_mismatches": 1438
+        },
+        {
+          "cw": "0xc7f",
+          "sequences": 10,
+          "records": 1472,
+          "state_mismatches": 0,
+          "bucket_mismatches": 0,
+          "trace_mismatches": 0,
+          "flag_mismatches": 1438
+        },
+        {
+          "cw": "0x27f",
+          "sequences": 10,
+          "records": 1472,
+          "state_mismatches": 0,
+          "bucket_mismatches": 0,
+          "trace_mismatches": 0,
+          "flag_mismatches": 1438
+        },
+        {
+          "cw": "0x67f",
+          "sequences": 10,
+          "records": 1472,
+          "state_mismatches": 0,
+          "bucket_mismatches": 0,
+          "trace_mismatches": 0,
+          "flag_mismatches": 1438
+        },
+        {
+          "cw": "0xa7f",
+          "sequences": 10,
+          "records": 1472,
+          "state_mismatches": 0,
+          "bucket_mismatches": 0,
+          "trace_mismatches": 0,
+          "flag_mismatches": 1438
+        },
+        {
+          "cw": "0xe7f",
+          "sequences": 10,
+          "records": 1472,
+          "state_mismatches": 0,
+          "bucket_mismatches": 0,
+          "trace_mismatches": 0,
+          "flag_mismatches": 1438
+        },
+        {
+          "cw": "0x37f",
+          "sequences": 10,
+          "records": 1472,
+          "state_mismatches": 0,
+          "bucket_mismatches": 0,
+          "trace_mismatches": 0,
+          "flag_mismatches": 1438
+        },
+        {
+          "cw": "0x77f",
+          "sequences": 10,
+          "records": 1472,
+          "state_mismatches": 0,
+          "bucket_mismatches": 0,
+          "trace_mismatches": 0,
+          "flag_mismatches": 1438
+        },
+        {
+          "cw": "0xb7f",
+          "sequences": 10,
+          "records": 1472,
+          "state_mismatches": 0,
+          "bucket_mismatches": 0,
+          "trace_mismatches": 0,
+          "flag_mismatches": 1438
+        },
+        {
+          "cw": "0xf7f",
+          "sequences": 10,
+          "records": 1472,
+          "state_mismatches": 0,
+          "bucket_mismatches": 0,
+          "trace_mismatches": 0,
+          "flag_mismatches": 1438
+        }
+      ]
+    }
+  },
+  "independent_review": "Approved by fresh queue_initial_review under STYLE \u00a712: all5 source and33 evidence hashes, typed float copy chains, separate resource ownership, preserved unknown boundaries, exact data/isolated closure/historical reports and seven caught mutants verified. Full gate pending; no full queue/session/physical GPU claim.",
+  "limits": [
+    "Selected numeric initialization only; queue allocation/device resources and shared frame/view/color owners remain separate.",
+    "Only captured parameter0 comparison against model depth established; no invented meanings for components1/2.",
+    "Native unit tests real blend-nibble stores before missing tables and unknown-device boundary; not physical rendering.",
+    "Per-word reference parameter availability retained, including missing last reset-capture word.",
+    "Historical constructor comparison includes queue21, allocation/device2, control51, view30, screen90, screen resources3 facts perconfiguration.",
+    "Three-frame poison survey has no sprite draws; no complete native queue/view/session/title/game or physical GPU/FP claim.",
+    "Existing lifecycle/consumer/sprite FP partials remain partial. Native isolation proves only the maintained initialization data closure."
+  ],
+  "reproduce": [
+    "make queue-initial-fixtures build/ninja-queue-initial-state-test build/game-runtime-test",
+    "python3 reference/production-integration-20261016/queue-initial-159-constructor-harness.py",
+    "python3 reference/production-integration-20261016/queue-initial-159-cli-harness.py (after constructor harness creates historical reference source)",
+    "python3 reference/production-integration-20261016/queue-initial-159-numeric-harness.py",
+    "python3 reference/production-integration-20261016/queue-initial-159-bridge-harness.py",
+    "python3 tools/gate/check_ninja_queue_initial_state.py"
+  ],
+  "source_commit": "dbbc3e1"
+}
