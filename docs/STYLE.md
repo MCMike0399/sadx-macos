@@ -145,8 +145,16 @@ order:
    current rounding control), x87 transcendentals (Bochs models), unordered comparisons used
    through `fnstsw`/parity, and results that leave the single exponent range while still in a
    register.
-3. **An exact value type with operators** (to be built over `X87Context`), so that
-   `(speed.x - max_x_speed) * air_resist` reads as math in modules where (1) fails.
+3. **An exact value type with operators** (`src/cpu/fidelity_float.hpp`,
+   `sadx::fidelity::ExactFloat`) over `X87Context`, for modules where (1) fails.
+   `ExactFloat(fp, speed.x) - max_x_speed` retains the selected precision and exponent range;
+   `value.rounded()` explicitly stores binary32. A `float` right operand represents memory,
+   while another `ExactFloat` represents an already loaded value; this distinction preserves
+   signaling-NaN selection. Memory-first subtraction/division use reverse operations.
+   Doubles are rejected: use the appropriate m64 fidelity helper. All values in an expression
+   must share a live context. Sequence independent operand calculations in named temporaries
+   when exception order matters; C++17 does not order the two sides of a binary expression.
+   The helper is verified as a foundation; ground acceleration has not yet migrated to it.
 4. **Explicit `X87Context` sequences**, only inside `src/cpu` helpers, or where an oracle shows
    that instruction-level ordering matters. Add a comment saying which oracle case shows it.
 
