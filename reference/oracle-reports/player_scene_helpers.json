@@ -1,25 +1,35 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "library_sha256": "0d1efb6a7d1ad80835f6e43cc704f32199dc4d9141da62519be219823f36cfa5",
+ "library_sha256": "1b7bfc11a2fd2a8b83dac4caea4d2117eb0e41da029025b20caf39dc0b16cbe8",
  "compiler": "Clang 21.0.0 (clang-2100.3.34.2); ARM64 C++17 O2 source-native scene helpers; explicit Bochs P5/P6 FPATAN model",
  "sources": {
-  "src/player_scene_position_helpers.cpp": "4e060c19e9435503ec75e6e1df0cb1a802b8aa733e931b7f326e5b7b0eca13ec",
+  "src/player_scene_position_helpers.cpp": "a21a6a34f237a17c0e08744c9f729aa025773ffc5a12c4345c866c2a0b967d07",
   "src/player_coordinates.cpp": "9727e8a6fb00ed7f1db362be426821405767b895e08f698b8ad231f2de578090",
   "src/ninja_matrix.cpp": "7045d50d871e7853935b7301ac90473bb06536f14c7b010ce7f75562d5b09bc4",
   "src/ninja_math.cpp": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
   "src/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8",
-  "src/x87_transcendental.cpp": "00fa509396903586b83807f7aa53b7df8675d7d8efdef031f7264283e3c0529a",
+  "src/x87_transcendental.cpp": "5241f89cff162deec68fa95d19f26e908974be9c78a1bdc18044f2c893abd5ea",
   "src/crt_integer.cpp": "18d16777cc02344275575955f7773043ea9c6b48cf0197b725e838d1c5294a92",
   "src/player_scene_position.hpp": "4f35c2174d5cd3ad3ead1535f88cb0bb036513e336d0a70d90d6651f0c13ffc8",
   "src/player_coordinates.hpp": "322331b4ca9a51e4a58a8133d9c1a323e7a223d84cbe44f83f029540a65057c0",
-  "src/ninja_matrix.hpp": "97ddcdb7b4f08e6a46d181b8f9d034a26762e62248cbb0643b34d55c61696a90",
+  "src/ninja_matrix.hpp": "685bb53adb905d5de2fa2a6accbb90586013797ae8dc7397e08dae19345d9c20",
   "src/ninja_math.hpp": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
   "src/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
-  "src/x87_transcendental.hpp": "443284c5e02df41950b33d2b58465f198af3679e8ceeac87c5513169beb99993",
+  "src/x87_transcendental.hpp": "d165b4c0aec64391b80f3fa68e2427ba2f2840fbc45562b87dac2145cad33a72",
   "src/crt_integer.hpp": "f88d5d9b73239055150a35d0fe6363f773c7e62f5b2c1ce62eff5eaabe8333a6",
-  "tests/probes/native_player_scene_helpers_probe.cpp": "8e88078a01035777660cb44a695f5010d7a8d1c51752d40fc00c290577d90179"
+  "tests/probes/native_player_scene_helpers_probe.cpp": "8e88078a01035777660cb44a695f5010d7a8d1c51752d40fc00c290577d90179",
+  "src/player/player_scene_position.cpp": "066a603a040db5c220078269480944d15db74c023108d8df46f22efee1aa069f",
+  "src/player/player_scene_position.hpp": "4f35c2174d5cd3ad3ead1535f88cb0bb036513e336d0a70d90d6651f0c13ffc8",
+  "src/player/player_scene_position_binding.cpp": "56a3dd0294a9dcfa3d13233d7e7b86e5d8aa3bc47c46de2d4a47c8a0d14b9f78",
+  "src/player/player_scene_position_binding.hpp": "e69dde3f1335cf44f252e6a99989a92ab8ef0bd2e87e2839fe873172651128f5",
+  "src/player/player_scene_position_helpers.cpp": "a21a6a34f237a17c0e08744c9f729aa025773ffc5a12c4345c866c2a0b967d07",
+  "src/player/player_scene_position_helpers.hpp": "af9e6699201f84220d9766d4d62dea718fc41a169a8cdccf530ab8d477971701",
+  "src/player/player_scene_position_helpers_internal.hpp": "4e47583c59e3df4884e839796d68c2badaeae8c87204f029d5773b63caf34f46",
+  "src/player/player_scene_position_helpers_native.cpp": "dd7b26edf62d933f9201f8e38975833d518766abb4eeba1fbeb2e7dddac8cfce",
+  "src/guest/player_scene_position_reference.cpp": "803303e34a9d3adc7b96e4be714d6913a22eb3e76e71e14764ba45a965352caa",
+  "src/cpu/fidelity_float.hpp": "b2e0a46df39f8e47413808ad3113899a04b7c2b19ea739abb464045939eb7e21"
  },
- "verifier_sha256": "6df264d9d727c214e0416579bedda48a7bb2318c29b1500b37992fb49aebdab2",
+ "verifier_sha256": "9a3abe1664e610d24f82527689d6a426fce38e7a650f68b1d1366ad6bee1940c",
  "case_sha256": "f9f3a28b61b4410891845cc21242d190c863d1f003ee965df0204d65765267d2",
  "profiles": [
   {
@@ -95,8 +105,8 @@
  "values_cw_frames_match": true,
  "strict_match": false,
  "tracked_summary": {
-  "full_sha256": "b3665255fb1bb24a63be970af2b081012ce93c3b92293148614d623c1fac79ad",
-  "full_bytes": 4089,
+  "full_sha256": "2414e8febfb3cfe883e8f406547720c51b3f49658b4541c6a78d3945ad9d2cf7",
+  "full_bytes": 5272,
   "lists_cut_to": 10,
   "cut_lists": {
    "profiles": 12

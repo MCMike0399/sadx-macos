@@ -4690,3 +4690,12 @@ The product still needs native boot/title, resources and gameplay recovery.
 * Gate 173 rc 0: 164 native invocations / 66 Python tests; R1–R4 pass; STATUS refreshed.
 * Limits: no new journey/performance/Windows-parity claim; full oracle suite and m1 skipped.
   Next: migrate the entire scene dispatcher under these judges; this module is not complete. No push.
+
+### 2026-10-17 — scene-motion oracle provenance refresh (gate 174)
+
+* Tracked both final native/reference source identities after 8518dda; comparisons/cases unchanged.
+* Helpers remain partial (8,076 / 0 values / 6,040 flags), full scene partial
+  (1,632 / 0 values or boundaries / 1,344 flags). Aggregate verdict rc 2; nine existing failures.
+* Gate 174 rc 0: 164 native invocations / 66 Python; R1–R4 pass. STATUS refreshed.
+* Next: continue the full scene dispatcher/header migration. Native scene composition, broader
+  journeys and performance remain open; full oracle suite/m1 skipped. No push.

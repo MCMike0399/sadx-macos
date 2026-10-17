@@ -1,10 +1,9 @@
 {
   "change": {
-    "base_commit": "aa5533745e348a03bdbeb0a224640e630af0f748",
-    "evidence": "reference/production-integration-20261017/scene-position-rewrite-evidence.md",
-    "evidence_sha256": "3958d650c1b10bde16fedc770b687ab546020ec68c5d398559031f7124f2df30",
-    "mode": "additions-only",
-    "reason": "Register native scene-motion and lazy reference diagnostic tests; preserve all existing judges"
+    "base_commit": "8518ddaee53c1ca88e1db65d0cd4fda24a0b32c1",
+    "evidence": "reference/production-integration-20261017/scene-motion-173-summary.json",
+    "evidence_sha256": "51a5781eedd49a21bdebfa09e07c8b4f43f6d215494da27593f86e4184d86ca5",
+    "reason": "Track unchanged scene-motion partial verdicts and final native/reference source identities after the source commit"
   },
   "files": {
     "Makefile": "08ddd3f430fba81fe6946cc68e12e4f05fe7de51c5a99eb9bbd8f452adfe9137",
@@ -141,9 +140,9 @@
     "reference/oracle-reports/player_scene.cases.bin": "dc7e0bc5e4c3dd420d80503ee3a16bcbd0551dba7d3fd0250009f2e2074dcee3",
     "reference/oracle-reports/player_scene.json": "ba1ae30ae76dc8554e4eb9a8f2f2ae35da43a13e8374b91d2297f261ac2c857e",
     "reference/oracle-reports/player_scene_helpers.cases.bin": "f9f3a28b61b4410891845cc21242d190c863d1f003ee965df0204d65765267d2",
-    "reference/oracle-reports/player_scene_helpers.json": "98df7a690272a114a7d9647d6feda2afc0cef0bbbd7039e807532aa9a5f7d16e",
+    "reference/oracle-reports/player_scene_helpers.json": "f01c714886fd586e694fd3e39f052d663f442955d52da5d41d1f034142df801f",
     "reference/oracle-reports/player_scene_position.cases.bin": "e3006f51ed725e1fa698ad9d0b2662287abc30cb9115bdaae5ba7b3ff134f2f2",
-    "reference/oracle-reports/player_scene_position.json": "ca685ef6c6c3c31e62db01d7975f3f64bbb10c9182f4b34d8587943f2d90cc6f",
+    "reference/oracle-reports/player_scene_position.json": "c7cb8070350e1b2392c915d4132e1dd45c425c98baa861ad211919fde3709076",
     "reference/oracle-reports/player_speed.cases.bin": "fb82240c307cc4b973f6a24136a8b1ecfc27d79396dc332daa005bd1dc34ca66",
     "reference/oracle-reports/player_speed.json": "4086b06dab590a113611db507bc6823680a827a24637fe61d1d680161185a7ea",
     "reference/oracle-reports/player_startup.cases.bin": "7eb3128a4cc3e14b1f29944121e2de4e7972b25625a5a187b9fc46b1c0236bf4",
