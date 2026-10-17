@@ -6,16 +6,17 @@ in [`docs/METHOD.md`](METHOD.md) §0. Append new entries **at the end**. Everyth
 next heading down to the 2026-10-12 sections is the historical record of the `rea` repository
 era. It mentions Hopper and `SADX_AGENT_GUIDE.md`, which are retired; read it as history.
 
-New entries are short (about 15–30 lines). Use this template:
+New entries are short (at most 15 lines), one per step, in plain words with spaces between
+numbers and words. Since 2026-10-16 (ADR-0008) a step has one entry, not a "source" entry plus a
+"verification" entry. Use this template:
 
 ```markdown
-### <date> — <item from GOAL §6> (track R/S/I/V/E, gate <n> or "no gate")
+### <date> — <item from GOAL §6> (track J/R/S/V/E, gate <n> or "no gate")
 
-* Context: evidence ids (REA `ev_…`), symbol decisions (overrides.tsv rows), files read.
-* Changed: what is now true, in game-tier terms (system, functions, state), plus the adapter.
-* Verified: oracle verdicts with counts (pass / partial / fail), mutants caught,
-  dev/holdout cases, replay digests, gate name and real rc.
-* Readability: baseline delta (hex, _at_, address calls, goto) for the touched files.
+* Outcome: what the user can now see (journey row + `make` command), or the debt removed
+  (file, ratchet counts before → after), or what this unblocks.
+* Changed: the system, functions and state in game-tier terms, plus the adapter.
+* Verified: the level GOAL §7 requires for this kind of change, with counts; gate name and rc.
 * Not run / unverified: skipped tests, scope limits, assumptions added.
 * Next: the item a fresh agent should take.
 ```
@@ -1293,11 +1294,11 @@ Toolkit metadata lives under `_reference/sadx/tools/ghidra-*.json`; actual porta
 
   - **Repository move and the hybrid-runtime decision (gate `repo-move-99-gate.json`):** The user measured the pace (a late-2027 estimate from the per-function method) and asked for a review, a tested roadmap, a modular codebase, agent documentation, something visible, a public repo, and better use of REA. Measured facts: `.text` is 4,038,656 bytes with ~9,268 direct call targets; the 89 oracle reports pin 6,022 verified bytes (0.15 %) across 92 functions, produced in one day of gates. Decision (user-confirmed, ADR-0001): a hybrid runtime — every unported function runs from original bytes in-process (Unicorn, already the oracle engine) behind native Win32/D3D8→Metal/DirectInput/DirectSound layers; ported modules become native overrides; the guest is the runtime oracle. ADR-0002: analysis through REA's Ghidra runner only (Hopper hangs; it was one function per query); REA offers `list_procedures`, `batch_decompile`, callers/callees, snapshots and a seed file that were never used. ADR-0003: this repository (`sadx-macos`, public, MIT), `src/<area>/`, manifests, generated `build/*.mk`, generated `docs/STATUS.md`, hygiene checker, mod loader as a GPL submodule.
     - Moved `rea/sadx-native` → `~/Developer/sadx-macos` with includes rewritten (`"ninja/ninja_screen.hpp"` form), tests split into unit/probes/fixtures/python, oracles under `tools/oracles`, the old Makefile's 103 test invocations and 89 oracle targets parsed into `tests/unit/manifest.tsv` and `tools/oracles/manifest.tsv` (`tools/gen_make.py`), per-object `.d` dependencies. The game install, the pristine download (`game/pristine/sonic.exe`, same hash) and the retail disc images (`game/disc/`) live under `game/` (ignored); the 6 GB reference tree is `reference/` with its large parts ignored. The full gate passes unchanged in the new layout: 103 native programs, 4 Python tests, owner checker 0 duplicates, profile patches 0 UNHANDLED, hygiene 0 violations.
-    - New docs: `AGENTS.md` (+`CLAUDE.md` import), `docs/ROADMAP.md` (M0–M5, each with its test table), `docs/REVIEW-2026-10-12.md`, `docs/ARCHITECTURE.md`, `docs/METHOD.md`, `docs/SOURCES.md`, `docs/decisions/ADR-0001..0003`, `docs/NEXT-AGENT-PROMPT.md`, generated `docs/STATUS.md`. The old guide is `docs/AGENT_GUIDE_v1.md` (history; its method section is superseded by METHOD.md).
+    - New docs: `AGENTS.md` (+`CLAUDE.md` import), `docs/ROADMAP.md` (M0–M5, each with its test table), `docs/REVIEW-2026-10-12.md`, `docs/ARCHITECTURE.md`, `docs/METHOD.md`, `docs/SOURCES.md`, `docs/decisions/ADR-0001..0003`, `docs/history/NEXT-AGENT-PROMPT.md`, generated `docs/STATUS.md`. The old guide is `docs/AGENT_GUIDE_v1.md` (history; its method section is superseded by METHOD.md).
     - Code since gate 98: `d3dx_math` gained 7716df (perspective, FSINCOS) and 7757e0 (the SSE cofactor inverse, slot 18 of the D3DX table) — **no oracles yet**; `x87_transcendental` gained Bochs FSINCOS/FPTAN wrappers (`fsincos.cc` vendored at the pinned revision, `upstream.json` updated) — **no oracle yet**; `runtime/game_session` (shared boot config + report text for the CLI and the app); `platform/mac/sadx_app.mm` (`build/sadx-app`: AppKit + MetalKit window drawing exactly the D3D8 stream the native boot issued — the Clear and BeginScene's polygon — with the boot report as an overlay; `--exit-after N --screenshot out.ppm` for the M2 `app-smoke` test, not yet in the gate); `src/guest/x86_guest.*` (Unicorn-backed guest: image mapping, calls with a stop address, overrides via code hooks + TB flush) with `tests/unit/guest_smoke.cpp`: **7899a0 executed from the original bytes inside the process equals the native port on 4 cases, and an override replaces it** — the first M1 evidence. `guest-smoke` is in the unit manifest (needs `UNICORN_DIR`, defaulting to the venv wheel's `libunicorn.a`).
     - Found by the new status generator: 19 comparison reports under `post-repair-comparisons/` are mutant leftovers (`tools/mutate.py` used to leave the last mutant's report in `build/`; it now reruns the oracle after restoring the source). They are being rerun and recopied; `docs/STATUS.md` lists any still failing.
     - WinMain 402c92..402d7c analysis is done but unported: `reference/ghidra-game-loop-recovery/wm-*.json` (5850f0, 556e40, 556d60, 568d20, 4f68e0, 5adc40, 600700, 781570, 781500, 781250, 40e2e0, 7716df, 770d10) and `proj-791170.json`; 781250's listing and FixFOV's patches (inactive under the profile) are in the previous session's notes above. 7757e0's listing came from Hopper (`ev_f344ba3f…`).
-    - Next: `docs/NEXT-AGENT-PROMPT.md`.
+    - Next: `docs/history/NEXT-AGENT-PROMPT.md`.
 
 ## Second layout iteration: layers, one slug, discovered oracles (2026-10-13)
 
@@ -4504,3 +4505,30 @@ The product still needs native boot/title, resources and gameplay recovery.
   initialization proved: resources, native window/device/session and overall GOAL remain
   open. Existing behavior/judges unchanged; no binaries/assets committed. Hook settings
   and user drafts untouched. No push.
+
+### 2026-10-16 — review of five days of agent work; docs, journeys and the test harness (track J/V, no gate)
+
+* Outcome: `docs/REVIEW-2026-10-16.md` explains why rounds showed only the SEGA screen. The
+  gate checks only frame 120; the movie is drawn black; 3D is not drawn. ADR-0008 and a
+  rewritten `docs/GOAL.md` replace the constant-family queue with a visible journey ladder,
+  proportionate verification and a step-size floor. `docs/TESTING.md` maps the test layers,
+  their gaps and the complete suite to build.
+* Changed: `sadx-app --guest` gained a harness (`src/apps/app_harness.hpp`): `--script` and
+  `--control -` commands (press, hold, pad, sticks, triggers, screenshots at any frame as PNG
+  or PPM, game-state JSON, pause/step/quit) and `--offscreen`. Added
+  `tools/journey/run_journeys.py` (journeys R1–R3 required, R4 open) and
+  `tools/journey/sadx_driver.py` (a step-by-step `Session`, plus `demo` and `shell`).
+  `NEXT-AGENT-PROMPT.md` and `AGENT_GUIDE_v1.md` moved to `docs/history/`.
+* Verified:
+  * Journeys: SEGA 4 s, title 26 s and character select 110 s pass; world-3d is open (101
+    skipped frames, FVF 0x142). Goldens rerun at distance 0.0.
+  * Offscreen script run: three screenshots and two states in 105 s.
+  * Driver demo: Station Square at frame 2,157 in 178 s.
+  * Driver movement test: stick forward 120 frames moved Sonic (62.7, 0, 1454.3) →
+    (12.5, 26, 1352.5).
+  * `check_layers`, `check_readability`, `check_repo_hygiene` and `check_global_owners` pass.
+* Not run: full `make gate`. The uncommitted input-device step from the previous session
+  fails `check_provenance` and `check_judge` (GOAL §6 item 0), and it was left untouched and
+  uncommitted. The guest FPU precision fix is described, not applied (GOAL item 2).
+* Next: GOAL §6 item 0, then item 1 (`make play`, journeys in the gate on `--offscreen`, the
+  judge `--additions-only` flag).

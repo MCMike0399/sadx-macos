@@ -88,6 +88,8 @@ Definition of done (`make m2`):
 |---|---|
 | `golden-frames` | Offscreen renders of fixed frames (SEGA logo, title screen, first Emerald Coast frame) match committed golden PNGs (perceptual diff under threshold; goldens are reviewed once, then frozen). |
 | `app-smoke` | `sadx-app` launches, renders 300 frames in a window, exits 0, no Metal validation errors. |
+| `journey-title`, `journey-menus` | Scripted Enter/Start presses reach the title, file select and character select; frame-property checks plus local golden hashes (GOAL §3.1 R2–R3). |
+| `guest-3d` | The first frames after choosing Sonic draw with no `not drawn` entries: fixed-function transform, lighting, fog, texture stages, vertex and index buffers in Metal (GOAL §3.1 R4). |
 | `state-dump-ui` | The in-app overlay (frame, mode, FPS, native-vs-guest ratio) matches the headless report for the same frame. |
 
 ### M3 — Playable
@@ -142,7 +144,7 @@ fidelity; whole-game guest execution and original-code fallback may not.
 Static recompilation is an optional recovery aid, with separate compiler correctness
 and maintenance requirements. REA's bounded analysis graph and pseudocode export alone
 are insufficient. See [the source investigation](RESEARCH-native-recompilation.md) and
-`docs/GOAL.md` §4.5 for the recovery workflow.
+`docs/GOAL.md` §3 and `docs/METHOD.md` §3 for the recovery workflow.
 
 Definition of done (planned `make m5`; these targets are not implemented yet):
 
@@ -158,15 +160,16 @@ Definition of done (planned `make m5`; these targets are not implemented yet):
 | `native-reference-parity` | Existing module oracles, mutants, full native replays, Windows trace parity and reference-frame comparisons retain their stated fidelity scopes. Numeric/flag differences remain reported; a partial oracle is not promoted to pass by removing the guest. |
 | `native-performance` | The native replay suite sustains the profile's 63 FPS cadence on the recorded M-series test configuration, with frame-time distributions and headroom reported. Native execution and executable independence are also enforced structurally; a near-zero guest-time measurement cannot substitute for them. |
 
-The frame-control slice was pulled forward first (GOAL §6 item 2, done). Then come the
-readability foundation and pilot refactors (track R, GOAL §6 items 3–7), native boot/title
-and a stage. Preserve the working reference while these grow; retire a production binary
+The frame-control slice, the readability foundation and the pilot refactors are done
+(2026-10-15/16). Since ADR-0008 the order follows the journey ladder in GOAL §3.1. The
+reference app goes into 3D and becomes playable (M2/M3). Native boot/title, the menus and a
+stage follow (N1–N5), and readability rewrites alternate with them. Preserve the working reference while these grow; retire a production binary
 dependency only after its replacement is proven. M5 remains incomplete until every row passes.
 
 ### M6 — Enhancements on a faithful base
 
 The port is meant to be extended. M6 adds the mechanism for opt-in features without
-weakening anything M1–M5 prove (ADR-0007 §8, `docs/STYLE.md` §9). It is GOAL §6 item 16 and
+weakening anything M1–M5 prove (ADR-0007 §8, `docs/STYLE.md` §9). It is GOAL §6 item 15 and
 starts once a native session runs a stage (items 11 and 15). Hook points can be added to systems earlier,
 as they are refactored.
 
@@ -194,8 +197,8 @@ and reference corpora frozen per system. For readability (ADR-0007) it adds the
 `check_readability.py` totals for the game tier (hex literals outside annotations, `_at_`
 identifiers, callee-address calls, `goto`, long and multi-statement lines), per file
 against the tracked baseline, which may only go down. This is the "readable" number,
-reported next to "verified": SM64DS's CONVERTED metric. Baseline 2026-10-15: about 7,700
-hex literals, 1,950 `_at_` uses, 249 address calls, 73 `goto` in the game layers. Every gate record (`reference/production-integration-*/`)
+reported next to "verified": SM64DS's CONVERTED metric. The current totals are in STATUS only, so they are not copied by hand into other docs. Moving
+code into the reference tier does not reduce them (ADR-0008 §5). Every gate record (`reference/production-integration-*/`)
 is the audit trail. A milestone is complete only when its table is green in a recorded
 gate.
 

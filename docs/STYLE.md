@@ -129,11 +129,14 @@ order:
 
 1. **Plain `float`/`int` expressions.** The build sets `-ffp-contract=off -fno-fast-math`.
    With x87 at 24-bit precision and round to nearest, `+ - * / sqrt` on floats round like
-   IEEE single except in the cases of the next item. The reference census now records
-   `0x023f` (53-bit precision) at every reached intro/controller entry; ground acceleration
-   was unreached. The earlier Windows observation in HANDOFF does not establish a universal
-   24-bit premise. All four of these preconditions must hold, because fixtures
-   may never reach the divergent paths:
+   IEEE single except in the cases of the next item. **This is the goal for game code.**
+   Today's census records `0x023f` (53-bit) at every reached entry, but it was taken in a guest
+   whose Direct3D 8 `CreateDevice` does not do what the real one does. Without
+   `D3DCREATE_FPU_PRESERVE` (SADX omits it), the real one sets the thread to single precision,
+   and the Windows capture saw the main thread at `0x007f`. GOAL §6 item 2 fixes the guest and
+   reruns the census (ADR-0008 §4). Until that result is recorded, level 3 is the working
+   default for x87 game math. Once it is recorded, level 1 is the default. All four of these
+   preconditions must hold, because fixtures may never reach the divergent paths:
    * the assembly (`ghidra_asm.py`) of the expression shows only single-precision (`m32`)
      memory operands, with no `fld qword`, `fistp` or transcendental in it;
    * the census shows only `0x007f` at the function's call sites;
@@ -159,6 +162,12 @@ order:
 4. **Explicit `X87Context` sequences**, only inside `src/cpu` helpers, or where an oracle shows
    that instruction-level ordering matters. Add a comment saying which oracle case shows it.
 
+Never write `op.at(0x…)` instruction markers or `fp.multiply_float_memory(…)`-style emulator
+calls in the game tier. `src/engine/ninja_fog.cpp` and most of `src/player` still do, and
+GOAL §6 item 4 rewrites them. Choosing a level is per expression, not per module. A module
+can be plain `float` throughout, except for the one `_ftol` or `double`-constant site that
+uses a helper.
+
 Integer code mirrors the source's widths and signedness explicitly (`std::int16_t` for a
 `MOVSX` short, unsigned comparisons where the source used `JA`), with a comment where it
 matters.
@@ -168,7 +177,9 @@ matters.
 * Compiler constant-pool values are source literals: write `0.1f`, `1.16f`, `5.0f`. Use the
   shortest decimal that round-trips exactly, or a hex-float when no short decimal does.
   Give a constant a `constexpr` name when the name explains it (`kSlopeSlideThreshold`). A
-  unit test or the oracle confirms the value. Fetching a constant from the executable at run
+  unit test or the oracle confirms the value. Do not wrap arithmetic identities in names:
+  `0.0f`, `1.0f`, `0.5f` and `2.0f` used as plain arithmetic are written as literals, not as
+  `tuning.zero` or `tuning.half`. Fetching a constant from the executable at run
   time (`c(0x7e0178)`, `image.u32(...)`) is reference-tier only.
 * Content tables (physics parameters, models, animations, texlists, object, sound and SET
   lists) come from the imported pack (ADR-0005, GOAL stage E), typed and named.
@@ -353,7 +364,8 @@ native boot/title, complete game independence or physical timing fidelity.
 ## 12. Review checklist (author and independent reviewer)
 
 1. No address outside annotations in game-tier files. No `*_at_<hex>`, `goto`, address labels,
-   or callee-address calls. `check_readability.py` passes once it exists.
+   or callee-address calls. `check_readability.py` passes, and the touched files' counts went
+   down. Relocating code into `src/guest` does not count.
 2. Every name traced to the symbol database or justified in `overrides.tsv`.
 3. Control flow structured; side-effect order unchanged; quirks commented.
 4. Arithmetic at the most readable level the oracle accepts, and the level chosen is stated

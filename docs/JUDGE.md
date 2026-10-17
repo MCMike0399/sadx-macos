@@ -45,6 +45,23 @@ archives still verify the supplied hashes; commit separation requires Git histor
    separate commits: verify and commit the port first, then update tracked oracle summaries
    and the manifest as an evidenced judge step. The raw oracle results stay in `build/`.
 
+## Additions (ADR-0008)
+
+Most steps only **add** judge files: a new unit test, probe, oracle script or manifest row for
+the code they introduce. That is not a judge change in the sense above, because nothing that
+already judged other code moved. ADR-0008 lets those additions travel with their code, so a
+step needs one full gate, not two:
+
+* **Target:** `check_judge.py --update --additions-only --reason … --evidence …` records new
+  paths (and the new `Makefile`/`tests/unit/manifest.tsv` lines that register them) while
+  `src/` is dirty. It refuses the refresh if any existing protected file changed or disappeared,
+  other than appended registration lines. GOAL §6 item 1 builds this as a `fix(judge)` step
+  with fixtures for both cases.
+* **Until then:** commit the game source, refresh the manifest, run `make -j10 gate` once,
+  record it, and commit the refresh. Do not run the gate twice.
+* Any edit to an existing tolerance, fixture, expected value, mutant, harness, gate script,
+  recorded digest or tracked oracle summary is still a full judge step, as described above.
+
 ## Proposed edit hook (approval pending)
 
 `reference/judge-hook-settings.proposed.json` is the complete proposed project settings file;

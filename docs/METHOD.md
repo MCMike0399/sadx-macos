@@ -339,7 +339,7 @@ and round-to-nearest (control word `0x007f`, observed on the Windows reference m
 `HANDOFF.md` "Floating-point observations"). With that control word, `+ - * / sqrt` round
 like IEEE single unless an operand is a `double` (an `fld qword` constant), a result leaves
 the single exponent range while still in a register, or the value is converted to an integer.
-The premise is checked, not assumed: the census in GOAL §6 records `FPCW` at the entry of
+The premise is checked, not assumed: the census (GOAL §6 item 2) records `FPCW` at the entry of
 every override in the guest across the boot/title/attract run and the replays. A module may
 use plain floats only for call sites where the census saw `0x007f`, only for expressions
 whose assembly has single-precision operands only (no `fld qword`, `fistp` or
@@ -363,6 +363,11 @@ Zero calls remain unknown; no stage replay is currently registered. The captured
 controller entries all had FPCW `0x023f`, MXCSR `0x1f80`; ground acceleration was unreached.
 This is reference-emulator evidence, not a Windows hardware census or permission to use
 plain floats. The collector, runner and census report are judge-manifest inputs.
+
+**Known gap (ADR-0008 §4):** the guest's `CreateDevice` (`src/hle/hle_d3d8.cpp`) does not yet
+apply Direct3D's documented FPU side effect. Without `D3DCREATE_FPU_PRESERVE`, Direct3D sets
+single precision and round-to-nearest, which gives `0x007f` from `0x027f`. So the `0x023f`
+above describes the emulator, not the game. GOAL §6 item 2 fixes that and reruns this census.
 
 * The guest (`src/guest`) runs original code; HLE (`src/hle`) implements imports.
   Every HLE function records what it was asked (arguments, results) so a trace can be

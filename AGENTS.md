@@ -14,26 +14,37 @@ The emulated hybrid runtime is the development reference that proves the native 
 it is not the product. The source must read like a game codebase, organised by game system, so
 anyone can download it, play with their own assets, maintain it, and extend it with opt-in
 features that leave the faithful game untouched (ADR-0007, `docs/STYLE.md`).
+Progress is measured on screen: the journey ladder in `docs/GOAL.md` §3 (the reference app
+first, then the native app showing the same screens without `sonic.exe`). ADR-0008 is why.
 
 ## Orientation (5 minutes)
 
-1. `docs/STATUS.md` — where we are (generated from the last gate; do not hand-edit facts).
-2. `docs/ROADMAP.md` — the milestones and their tests; pick work from the current milestone.
-3. `docs/ARCHITECTURE.md` — where things live and the ownership rules.
-4. `docs/METHOD.md` — how to analyse the binary (REA + Ghidra), how to port, how to test.
-5. `docs/SOURCES.md` — the inputs (exe, profile DLLs, disc) and their hashes.
-6. `docs/decisions/` — decisions already made; do not relitigate them silently. Add an ADR
-   if you change direction, and say so in your report. ADR-0005 (native source and executable
-   independence), ADR-0006 (symbol names, provenance annotations) and ADR-0007 (readable game
-   tier, reference tier, enhancements) define the destination.
-   `docs/RESEARCH-native-recompilation.md` is why; `CONTEXT.md` is the vocabulary.
-7. `docs/HANDOFF.md` — the per-step journal (append an entry when you finish a step).
-8. `docs/GOAL.md` — the standing brief `/goal` loads (`.claude/commands/goal.md`): history, the
-   five tracks, how REA is used, the ordered next items and the per-step loop.
-9. `docs/STYLE.md` — **how recovered code is written** (two tiers, names, control flow, seams,
-   readable exact arithmetic, constants, enhancements, review checklist). ADR-0007 is why.
-10. `docs/TIPS.md` — SADX/MSVC idioms and lessons (x87 compare masks, constant pools, tail
-    merging…). Add to it.
+Read before every step (about 1,000 lines):
+
+1. `docs/STATUS.md`, the top section: where we are (generated from the last gate; do not
+   hand-edit facts).
+2. `docs/GOAL.md`: the standing brief `/goal` loads (Codex: `/goal implement @docs/GOAL.md`;
+   Claude Code: `.claude/commands/goal.md`). It holds the journey ladder, the ordered next
+   items, the step size and verification rules, and the per-step loop.
+3. `docs/STYLE.md`: **how game code is written** (two tiers, names, control flow, seams,
+   arithmetic, constants, enhancements, review checklist). ADR-0007 is why.
+4. The last entry of `docs/HANDOFF.md`.
+
+Consult when the step touches the subject:
+
+* `docs/METHOD.md` §0: the tool cookbook (REA + Ghidra, symbols, oracles).
+* `docs/TIPS.md`: SADX/MSVC idioms and lessons. Add to it when you learn something.
+* `docs/ARCHITECTURE.md`: layers, ownership, where things live.
+* `docs/ROADMAP.md`: milestone test tables.
+* `docs/SOURCES.md`: inputs and their hashes.
+* `docs/JUDGE.md`: the judge manifest and judge commits.
+* `docs/TESTING.md`: the test layers, what they do not catch, and the complete suite to build.
+* `docs/decisions/`: decisions already made. Do not relitigate them silently. Add an ADR if
+  you change direction, and say so in your report. ADR-0005..0008 define the destination and
+  the current way of working. `docs/RESEARCH-native-recompilation.md` is why, and
+  `CONTEXT.md` is the vocabulary.
+
+`docs/history/` and the `REVIEW-*` files are history, not instructions.
 
 ## Non-negotiables
 
@@ -47,9 +58,8 @@ features that leave the faithful game untouched (ADR-0007, `docs/STYLE.md`).
   named from the symbol database (`docs/GOAL.md` §4.4; the mod loader's `*New.h` headers first)
   in the project's style, with `// FUNCTION: SONIC 0x411e30 dsInitInt`-style provenance on the
   line above. Never put a `sub_<hex>`/`FUN_<hex>` function or a Ghidra `DAT_`/`local_`/`param_`
-  name into `src/`. Once `tools/gate/check_provenance.py` is in the gate, no new `*_at_<hex>`
-  identifier either; until then a new *owner* may keep the legacy form so the existing checker
-  still sees it (behaviour and interfaces are named regardless). Guest addresses, register
+  name into `src/`. No new `*_at_<hex>` identifier either: `tools/gate/check_provenance.py`
+  runs in the gate. Guest addresses, register
   marshalling and override registration exist only in the reference adapters (`src/guest`,
   `src/hle`).
 * **Readable game tier, address-shaped reference tier** (ADR-0007, `docs/STYLE.md`). Game code
@@ -60,11 +70,12 @@ features that leave the faithful game untouched (ADR-0007, `docs/STYLE.md`).
   reference adapter (`src/guest`, `src/hle`). Invent nothing: every field, callee and guard
   traces to evidence, and helpers that are not in the original are tagged `// NOTSA:`. A
   transliterated draft may exist only inside a step and is refactored under the same oracle
-  before the commit. Once `tools/gate/check_readability.py` is in the gate, its per-file
-  baseline may only go down.
+  before the commit. `tools/gate/check_readability.py` runs in the gate, and its per-file
+  baseline may only go down. Moving game behaviour into `src/guest` or `src/hle` is not
+  readability progress (ADR-0008 §5). Rewrite it, or leave it where it is and say so.
 * **One owner per source address.** Legacy `*_at_<hex>` members live in exactly one struct
   (`tools/gate/check_global_owners.py`); annotated `GLOBAL`s are checked the same way
-  (`check_provenance.py` once it lands). Borrow with references/pointers. Migrate an owner
+  (`check_provenance.py`). Borrow with references/pointers. Migrate an owner
   whole (name + annotation + check) or not at all.
 * **Tagged results, explicit unknowns.** Failures carry the source boundary (the
   instruction address) and the fact that was missing. Unported callees are reported, not
@@ -117,9 +128,9 @@ project's own sessions.
   Ghidra's `DAT_`, `local_`, `param_` or pointer-arithmetic shapes into `src/`. Keep exact
   arithmetic, operation order and FP width where the oracle says they matter.
 * **One function or one tight cluster per attempt**, with the differential judge (oracle,
-  override-equivalence, replay) as the only definition of "works". Use a fresh context per
-  function or module, and reread `docs/STYLE.md` before writing; instructions decay over long
-  sessions.
+  override-equivalence, replay) as the only definition of "works". A *step* is larger: a whole
+  system, a whole module rewrite or a journey row (GOAL §3.3), made of several such attempts.
+  Reread `docs/STYLE.md` before writing; instructions decay over long sessions.
 * **Readable but wrong is the default failure** of agent decompilation (RESEARCH third pass).
   Readability is never judged by eye: every readability change reruns the same oracle and
   mutants. Iterate on dev cases, and keep holdout cases for the final run.
@@ -127,7 +138,7 @@ project's own sessions.
   oracle harness or the gate scripts to get your own code through; do not narrow a test's
   inputs to dodge a mismatch. If the judge is wrong, fix it in a separate commit with evidence
   (`fix(judge): …`), never mixed with a port. Agents in other projects edited verifiers and
-  hashes when they could, so the judge is being made tamper-evident (GOAL §6 item 4).
+  hashes when they could, so the judge is tamper-evident (`docs/JUDGE.md`).
 * **Bound dead ends.** After three failed approaches on one function, stop; record the unknown
   (evidence id, what was tried, the mismatch) in the handoff and move on.
 * **Independent review** for a recovered system or pilot refactor: a fresh subagent reads the
@@ -155,8 +166,10 @@ project's own sessions.
    `tools/oracles/verify_original_<slug>.py`; the target `oracle-<slug-with-dashes>` and the
    report `build/oracles/<slug>.json` exist by themselves (`tools/oracles/manifest.tsv`
    only when it needs other inputs than the exe and the probe).
-4. Verify at the level the roadmap asks for: unit test; oracle with mutants for exact
-   ports; override-equivalence / replay / golden tests for runtime work.
+4. Verify at the level the change needs (the table in GOAL §7 step 4): a byte-comparison
+   unit test for moved constants; journey checks for platform work; the unchanged oracle for a
+   rewrite; oracle, mutants and holdout for a new exact port. Do not add ceremony that the table
+   does not require.
 5. Run the gate: `make -j10 gate 2>&1 | tee build/gate.log; echo rc=$?`. Record it only
    when rc is 0: `python3 tools/gate/record_gate.py --log build/gate.log --command "make -j10 gate"
    --exit-status 0 --limit "…" --output reference/production-integration-<date>/<name>-gate.json`,
@@ -166,11 +179,22 @@ project's own sessions.
    you reran with `python3 tools/gate/track_reports.py <slug>…` (size-bounded summaries in
    `reference/oracle-reports/`). "partial" (values exact, FP flags differ) is not "pass":
    say which it is.
-6. Append a `docs/HANDOFF.md` entry: evidence ids, what was done, test counts, limits.
+6. Append one short `docs/HANDOFF.md` entry (template in its header): the outcome (what is
+   visible, or the debt removed), test counts, limits.
 7. Commit with a Conventional Commit subject (`feat(guest): …`, `fix(ninja): …`,
    `docs: …`). Push only when asked.
 
 ## Pitfalls that cost time before
+
+* `app-smoke` stops at frame 120 on the SEGA logo, and the intro movie is drawn black. To see
+  the game, skip the movie with Enter: `./build/sadx-app --guest
+  reference/updated-pc-reference/game reference/windows-system --keys 450:13` (or `make play`
+  once GOAL §6 item 1 adds it). Look at a screenshot before claiming visible progress.
+  Automated runs use the harness (`docs/TESTING.md` §3.0):
+  * `sadx-app --guest … --offscreen --script FILE` for screenshots and game-state JSON at any
+    frame, with no window;
+  * `tools/journey/sadx_driver.py` to play step by step (`press`, `stick`, `advance`,
+    `screenshot`, `state`).
 
 * The build uses `-Werror -Wmissing-field-initializers`: aggregate initialisers must list
   every field (`{}` for the rest).

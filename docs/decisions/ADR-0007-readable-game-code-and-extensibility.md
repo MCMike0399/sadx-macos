@@ -84,8 +84,8 @@ additions that cannot disturb the faithful game.
    events, adventure fields, Chao, minigames, UI, sound, save, game flow, and the pinned
    profile. Each system has one public header. The layer checker keeps enforcing the
    dependency order.
-7. **A readability ratchet in the gate.** A checker (`tools/gate/check_readability.py`, to
-   be built: GOAL §6) counts per file the address-shaped constructs outside the reference
+7. **A readability ratchet in the gate.** A checker (`tools/gate/check_readability.py`, in
+   the gate since 2026-10-15) counts per file the address-shaped constructs outside the reference
    tier: hex literals not in annotations, `*_at_<hex>` identifiers, callee-address calls,
    address-named labels and `goto`, and over-long or multi-statement lines. A tracked baseline
    may only go down. New files must be clean. `.clang-format` applies to every new or migrated

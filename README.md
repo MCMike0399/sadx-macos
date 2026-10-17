@@ -19,7 +19,10 @@ make -j10 test       # unit tests + owner checker
 make -j10 gate       # everything a gate requires (tests, probes, Metal tests, layer/owner/profile/hygiene checks)
 make oracle-screen-init          # one Unicorn oracle (needs reference/python venv); `make oracles` = all
 make oracles-verdict             # pass / partial / fail per report in build/oracles/
-make app-smoke       # opens the window for 120 frames and writes build/app-smoke.ppm
+make app-smoke       # opens the window for 120 frames (the SEGA logo) and writes build/app-smoke.ppm
+# play the reference app: Enter at frame 450 skips the intro movie (drawn black for now);
+# keyboard and controllers work live. The 3D stages do not draw yet (docs/GOAL.md §3.1 R4).
+./build/sadx-app --guest reference/updated-pc-reference/game reference/windows-system --keys 450:13
 ./build/sadx-boot "game/Sonic Adventure DX/sonic.exe" "game/Sonic Adventure DX/mods/sadx-input-mod/sadx-input-mod.dll" 5 --survey
 ```
 
@@ -38,7 +41,8 @@ deterministically and serves as the judge. Native code, verified function by fun
 against the original with Unicorn oracles, replaces it progressively. The earliest native
 code was written in an address-shaped style that is being refactored into readable form under
 the same oracles. Details in [`docs/STATUS.md`](docs/STATUS.md) and
-[`docs/REVIEW-2026-10-12.md`](docs/REVIEW-2026-10-12.md).
+[`docs/REVIEW-2026-10-12.md`](docs/REVIEW-2026-10-12.md) and
+[`docs/REVIEW-2026-10-16.md`](docs/REVIEW-2026-10-16.md).
 
 ## Licence
 
