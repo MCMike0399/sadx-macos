@@ -1,6 +1,10 @@
 // sadx-app: a window on the game.
 //   sadx-app --guest GAME_DIR WINDOWS_SYSTEM_DIR [--exit-after N] [--screenshot out.ppm] [--keys FRAME:VK[:FRAMES],...] [--pad FRAME:BUTTONS[:FRAMES],...]
+//            [--script FILE] [--control -] [--offscreen]
 //     (the keyboard is forwarded to the guest as Windows keys; --keys scripts presses by guest frame)
+//     --script/--control drive the game through the test harness (src/apps/app_harness.hpp: press, hold, sticks,
+//     screenshots at any frame, game-state JSON, pause/step); --offscreen runs without a window, as fast as the
+//     guest allows, and does not stall when no window is visible. tools/journey/sadx_driver.py wraps both.
 //     The guest (M1): sonic.exe runs from its entry point in the in-process x86 guest with the mod loader and
 //     mods (src/hle); every IDirect3DDevice8::Present pauses it, the frame it issued (Clears and
 //     DrawPrimitiveUP draws with their textures and states) is drawn with Metal (platform/mac/metal_guest_frame),
@@ -19,6 +23,8 @@
 #include "platform/mac/metal_guest_frame.hpp"
 #include "guest/fpu_shims.hpp"
 #include "hle/hle_device_bridge.hpp"
+#include "apps/app_harness.hpp"
+#import <ImageIO/ImageIO.h>
 #include <iterator>
 #include <cstdio>
 #include <cstdlib>
@@ -40,7 +46,7 @@ vertex Out polygon_vertex(uint index [[vertex_id]],constant uint* bytes [[buffer
 }
 fragment float4 polygon_fragment(Out in [[stage_in]]){return in.color;}
 )METAL";
-struct Options {std::string exe,dll,screenshot,game_dir,system_dir,keys,pad;std::uint32_t frames=5;bool survey=true,guest=false;int exit_after=-1;};
+struct Options {std::string exe,dll,screenshot,game_dir,system_dir,keys,pad,script;std::uint32_t frames=5;bool survey=true,guest=false,control=false,offscreen=false;int exit_after=-1;};
 bool parse(int argc,char** argv,Options& o){
     if(argc<3)return false;int first=3;
     if(!std::strcmp(argv[1],"--guest")){if(argc<4)return false;o.guest=true;o.game_dir=argv[2];o.system_dir=argv[3];first=4;}else{o.exe=argv[1];o.dll=argv[2];}
@@ -52,6 +58,9 @@ bool parse(int argc,char** argv,Options& o){
         else if(!std::strcmp(argv[i],"--screenshot")&&i+1<argc)o.screenshot=argv[++i];
         else if(!std::strcmp(argv[i],"--keys")&&i+1<argc)o.keys=argv[++i];
         else if(!std::strcmp(argv[i],"--pad")&&i+1<argc)o.pad=argv[++i];
+        else if(!std::strcmp(argv[i],"--script")&&i+1<argc)o.script=argv[++i];
+        else if(!std::strcmp(argv[i],"--control")&&i+1<argc&&!std::strcmp(argv[i+1],"-")){o.control=true;++i;}
+        else if(!std::strcmp(argv[i],"--offscreen"))o.offscreen=true;
         else return false;
     }
     return true;
@@ -79,6 +88,39 @@ std::uint32_t windows_key(unsigned short code){
         {0x38,0xa0},{0x3c,0xa1},{0x3b,0xa2},{0x3e,0xa3},{0x3a,0xa4},{0x3d,0xa5},
         {0x52,0x60},{0x53,0x61},{0x54,0x62},{0x55,0x63},{0x56,0x64},{0x57,0x65},{0x58,0x66},{0x59,0x67},{0x5b,0x68},{0x5c,0x69}};
     const auto it=table.find(code);return it==table.end()?0:it->second;}
+// Writes a BGRA8 texture (after its command buffer completed) as PNG (by extension) or binary PPM.
+bool write_image(id<MTLTexture> texture,const std::string& path){
+    const auto width=texture.width,height=texture.height;
+    std::vector<std::uint8_t> bgra(width*height*4);
+    [texture getBytes:bgra.data() bytesPerRow:width*4 fromRegion:MTLRegionMake2D(0,0,width,height) mipmapLevel:0];
+    if(path.size()>4&&path.compare(path.size()-4,4,".png")==0){
+        CGColorSpaceRef space=CGColorSpaceCreateDeviceRGB();
+        CGContextRef context=CGBitmapContextCreate(bgra.data(),width,height,8,width*4,space,
+            static_cast<CGBitmapInfo>(kCGImageAlphaNoneSkipFirst)|kCGBitmapByteOrder32Little);
+        CGImageRef image=context?CGBitmapContextCreateImage(context):nullptr;
+        NSURL* url=[NSURL fileURLWithPath:[NSString stringWithUTF8String:path.c_str()]];
+        CGImageDestinationRef destination=image?CGImageDestinationCreateWithURL((__bridge CFURLRef)url,CFSTR("public.png"),1,nullptr):nullptr;
+        bool ok=false;
+        if(destination){CGImageDestinationAddImage(destination,image,nullptr);ok=CGImageDestinationFinalize(destination);CFRelease(destination);}
+        if(image)CGImageRelease(image);
+        if(context)CGContextRelease(context);
+        CGColorSpaceRelease(space);
+        return ok;
+    }
+    std::ofstream f(path,std::ios::binary);
+    f<<"P6\n"<<width<<" "<<height<<"\n255\n";
+    for(std::size_t i=0;i<width*height;++i){f.put(static_cast<char>(bgra[4*i+2]));f.put(static_cast<char>(bgra[4*i+1]));f.put(static_cast<char>(bgra[4*i]));}
+    return static_cast<bool>(f);
+}
+// Writes the requested screenshots of FRAME, answering each on stdout for the harness driver.
+void write_screenshots(id<MTLTexture> texture,const std::vector<std::string>& paths,std::uint64_t frame){
+    for(const auto& path:paths)sadx::harness::Harness::reply(frame,"screenshot",write_image(texture,path)?"ok "+path:"error cannot write "+path);
+}
+void print_frame(int drawn,std::uint64_t presents,const sadx::MetalGuestFrameStats& stats,bool stopped,const std::string& stop){
+    std::string unsupported;for(const auto& [why,n]:stats.unsupported)unsupported+=" "+why+" x"+std::to_string(n);
+    std::printf("frame %d: guest present %llu, %zu draws (%zu textured), %zu clears%s%s\n",drawn,static_cast<unsigned long long>(presents),stats.draws,stats.textured,stats.clears,
+        unsupported.empty()?"":(", not drawn:"+unsupported).c_str(),stopped?(", guest stopped: "+stop).c_str():"");
+}
 // Triangle fan -> triangle list indices.
 std::vector<std::uint32_t> fan_indices(std::uint32_t vertex_count){std::vector<std::uint32_t> out;for(std::uint32_t i=1;i+1<vertex_count;++i){out.push_back(0);out.push_back(i);out.push_back(i+1);}return out;}
 }
@@ -94,6 +136,8 @@ std::vector<std::uint32_t> fan_indices(std::uint32_t vertex_count){std::vector<s
 @property(nonatomic) int framesDrawn;
 @property(nonatomic) int exitAfter;
 @property(nonatomic) NSString* screenshot;
+@property(nonatomic) sadx::harness::Harness* harness;
+@property(nonatomic) std::uint64_t lastShown;
 @property(nonatomic,weak) NSTextField* status;
 @end
 @implementation SADXAppView
@@ -138,27 +182,75 @@ std::vector<std::uint32_t> fan_indices(std::uint32_t vertex_count){std::vector<s
     if(self.exitAfter>0&&self.framesDrawn>=self.exitAfter)[NSApp terminate:nil];
 }
 // Guest mode: draw the frame the guest closed with its last Present, then let it run to the next one.
+// While the harness is paused, the same frame is drawn again and the guest does not advance.
 - (void)drawGuest:(id<MTLCommandBuffer>)commands pass:(MTLRenderPassDescriptor*)pass drawable:(id<CAMetalDrawable>)drawable{
+    auto& harness=*self.harness;
+    const std::uint64_t shown=self.guest->d3d8.presents;
+    const bool fresh=shown!=self.lastShown;
+    auto shots=harness.take_screenshots(shown);
+    if(fresh&&self.screenshot!=nil&&self.framesDrawn+1==(self.exitAfter>0?self.exitAfter:1))shots.push_back(self.screenshot.UTF8String);
     const auto stats=self.guestRenderer->encode(self.guest->last_frame,self.guest->guest(),commands,pass);
-    const bool capture=self.screenshot!=nil&&self.framesDrawn+1==(self.exitAfter>0?self.exitAfter:1);
-    if(capture){id<MTLTexture> texture=drawable.texture;NSString* path=self.screenshot;
-        [commands addCompletedHandler:^(id<MTLCommandBuffer>){
-            const auto w=texture.width,h=texture.height;std::vector<std::uint8_t> bgra(w*h*4);
-            [texture getBytes:bgra.data() bytesPerRow:w*4 fromRegion:MTLRegionMake2D(0,0,w,h) mipmapLevel:0];
-            std::ofstream f(path.UTF8String,std::ios::binary);f<<"P6\n"<<w<<" "<<h<<"\n255\n";
-            for(std::size_t i=0;i<w*h;++i){f.put(static_cast<char>(bgra[4*i+2]));f.put(static_cast<char>(bgra[4*i+1]));f.put(static_cast<char>(bgra[4*i]));}}];}
-    [commands presentDrawable:drawable];[commands commit];if(capture)[commands waitUntilCompleted];
-    ++self.framesDrawn;
-    std::string unsupported;for(const auto& [why,n]:stats.unsupported)unsupported+=" "+why+" x"+std::to_string(n);
-    if(!self.guestStopped){if(!self.scriptedPad)self.guest->host_xinput(host_pad());const auto r=self.guest->guest().resume();if(!r.paused){self.guestStopped=YES;*self.guestStop=r.completed?"the guest returned from its entry point":r.error;}}
-    std::printf("frame %d: guest present %llu, %zu draws (%zu textured), %zu clears%s%s\n",self.framesDrawn,static_cast<unsigned long long>(self.guest->d3d8.presents),stats.draws,stats.textured,stats.clears,
-        unsupported.empty()?"":(", not drawn:"+unsupported).c_str(),self.guestStopped?(", guest stopped: "+*self.guestStop).c_str():"");
-    self.status.stringValue=[NSString stringWithFormat:@"Guest: sonic.exe + mod loader + mods, frame %llu (%zu draws, %zu textured)%@",static_cast<unsigned long long>(self.guest->d3d8.presents),stats.draws,stats.textured,
-        self.guestStopped?[NSString stringWithFormat:@" — guest stopped: %s",self.guestStop->c_str()]:@""];
-    if(self.exitAfter>0&&self.framesDrawn>=self.exitAfter)[NSApp terminate:nil];
+    [commands presentDrawable:drawable];[commands commit];
+    if(!shots.empty()){[commands waitUntilCompleted];write_screenshots(drawable.texture,shots,shown);}
+    if(fresh){++self.framesDrawn;self.lastShown=shown;}
+    if(!self.guestStopped&&harness.may_advance()){
+        if(!self.scriptedPad&&!harness.drives_pad())self.guest->host_xinput(host_pad());
+        const auto r=self.guest->guest().resume();
+        if(!r.paused){self.guestStopped=YES;*self.guestStop=r.completed?"the guest returned from its entry point":r.error;}
+    }
+    if(fresh){
+        print_frame(self.framesDrawn,self.guest->d3d8.presents,stats,self.guestStopped,*self.guestStop);
+        self.status.stringValue=[NSString stringWithFormat:@"Guest: sonic.exe + mod loader + mods, frame %llu (%zu draws, %zu textured)%@",static_cast<unsigned long long>(self.guest->d3d8.presents),stats.draws,stats.textured,
+            self.guestStopped?[NSString stringWithFormat:@" — guest stopped: %s",self.guestStop->c_str()]:@""];
+    }
+    // A quit arrives while the guest runs to its next Present: draw that frame (and its screenshots) first.
+    const bool drawn_all=self.guest->d3d8.presents==self.lastShown;
+    if((harness.quit_requested()&&drawn_all)||(self.exitAfter>0&&self.framesDrawn>=self.exitAfter))[NSApp terminate:nil];
 }
 @end
 namespace {
+// Offscreen guest mode: the same frames, drawn into a texture in a plain loop. No window, no display link,
+// no 63 Hz cap: the guest runs as fast as it can, and nothing stalls when the screen is locked or covered.
+int run_offscreen(sadx::HleProcess& process,sadx::MetalGuestFrameRenderer& renderer,id<MTLDevice> device,sadx::harness::Harness& harness,const Options& o,std::string& stop){
+    MTLTextureDescriptor* colour=[MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatBGRA8Unorm width:640 height:480 mipmapped:NO];
+    colour.usage=MTLTextureUsageRenderTarget|MTLTextureUsageShaderRead;colour.storageMode=MTLStorageModeShared;
+    MTLTextureDescriptor* depth=[MTLTextureDescriptor texture2DDescriptorWithPixelFormat:MTLPixelFormatDepth32Float width:640 height:480 mipmapped:NO];
+    depth.usage=MTLTextureUsageRenderTarget;depth.storageMode=MTLStorageModePrivate;
+    id<MTLTexture> target=[device newTextureWithDescriptor:colour];
+    MTLRenderPassDescriptor* pass=[MTLRenderPassDescriptor renderPassDescriptor];
+    pass.colorAttachments[0].texture=target;pass.colorAttachments[0].storeAction=MTLStoreActionStore;
+    pass.depthAttachment.texture=[device newTextureWithDescriptor:depth];pass.depthAttachment.storeAction=MTLStoreActionStore;
+    id<MTLCommandQueue> queue=[device newCommandQueue];
+    int drawn=0;std::uint64_t last_shown=0;bool stopped=false;sadx::MetalGuestFrameStats stats;
+    for(;;){@autoreleasepool{
+        const std::uint64_t shown=process.d3d8.presents;
+        const bool fresh=shown!=last_shown;
+        auto shots=harness.take_screenshots(shown);
+        if(fresh&&!o.screenshot.empty()&&drawn+1==(o.exit_after>0?o.exit_after:1))shots.push_back(o.screenshot);
+        if(fresh||!shots.empty()){
+            pass.colorAttachments[0].loadAction=MTLLoadActionClear;pass.colorAttachments[0].clearColor=MTLClearColorMake(0,0,0,1);
+            pass.depthAttachment.loadAction=MTLLoadActionClear;pass.depthAttachment.clearDepth=1;
+            id<MTLCommandBuffer> commands=[queue commandBuffer];
+            stats=renderer.encode(process.last_frame,process.guest(),commands,pass);
+            [commands commit];[commands waitUntilCompleted];
+            write_screenshots(target,shots,shown);
+        }
+        if(fresh){++drawn;last_shown=shown;}
+        bool advanced=false;
+        if(!stopped&&!harness.quit_requested()&&!(o.exit_after>0&&drawn>=o.exit_after)&&harness.may_advance()){
+            const auto r=process.guest().resume();advanced=true;
+            if(!r.paused){stopped=true;stop=r.completed?"the guest returned from its entry point":r.error;}
+        }
+        if(fresh)print_frame(drawn,process.d3d8.presents,stats,stopped,stop);
+        // A quit arrives while the guest runs to its next Present: draw that frame (and its screenshots) first.
+        if((harness.quit_requested()&&process.d3d8.presents==last_shown)||(o.exit_after>0&&drawn>=o.exit_after))break;
+        if(harness.quit_requested())continue;
+        if(stopped&&!harness.active())break;
+        if(harness.control_closed()&&!advanced)break;
+        if(!advanced)usleep(2000);
+    }}
+    return stopped&&o.exit_after>0&&drawn<o.exit_after?5:0;
+}
 // Guest mode: boot the guest to its first Present, then hand it to the view.
 int run_guest(const Options& o){
     std::ifstream f(o.game_dir+"/sonic.exe",std::ios::binary);if(!f){std::fprintf(stderr,"cannot read %s/sonic.exe\n",o.game_dir.c_str());return 2;}
@@ -166,28 +258,38 @@ int run_guest(const Options& o){
     auto process=sadx::HleProcess::create(o.game_dir,"build/sadx-app-overlay",&error);if(!process){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
     process->use_real_cpp_runtime(o.system_dir);process->hle().set_logging(false);
     process->assume("GameController host sampling: first extended controller is exposed as synthetic user 0; printed face labels resolved when available, Apple deadzones retained; no physical Windows HID parity or vibration output claimed");
-    if(!o.pad.empty())process->host_xinput(sadx::HleXInputGamepad{});
+    if(!o.pad.empty()||o.offscreen)process->host_xinput(sadx::HleXInputGamepad{}); // offscreen runs never sample a physical pad
     else process->host_xinput(host_pad());
     if(!process->map_main(*image,&error)){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
     sadx::FpuShimStats shims;if(!sadx::install_fpu_shims(process->guest(),sadx::load_fpu_sites("reference/inventory/fpu-sites.json"),shims,&error)){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
     if(!sadx::install_overrides(process->guest(),sadx::process_overrides(*process,*image),&error)){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
     auto* P=process.get();const auto script=parse_keys(o.keys),pads=parse_keys(o.pad);
     for(const auto& k:pads)if(k.vk&~0xf7ffU){std::fprintf(stderr,"unsupported --pad button mask\n");return 2;}
-    process->on_present=[P,script,pads](sadx::X86Guest& g){
+    sadx::harness::Harness harness;
+    if(!o.script.empty()&&!harness.load_script(o.script,&error)){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
+    if(o.control)harness.enable_stdin_control();
+    auto* H=&harness;
+    process->on_present=[P,H,script,pads](sadx::X86Guest& g){
         for(const auto& k:script){if(P->d3d8.presents==k.frame)P->host_key(k.vk,true);if(P->d3d8.presents==k.frame+k.hold)P->host_key(k.vk,false);}
         for(const auto& k:pads){if(P->d3d8.presents==k.frame)P->host_xinput(sadx::HleXInputGamepad{static_cast<std::uint16_t>(k.vk),0,0,0,0,0,0});if(P->d3d8.presents==k.frame+k.hold)P->host_xinput(sadx::HleXInputGamepad{});}
+        H->on_present(*P,P->d3d8.presents);
         g.pause();};
     const auto first=process->guest().call(0x643f96,{});
     std::string stop;if(!first.paused){std::fprintf(stderr,"the guest did not reach its first Present: %s\n",first.error.c_str());return 4;}
-    [NSApplication sharedApplication];[NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
     id<MTLDevice> device=MTLCreateSystemDefaultDevice();if(!device){std::fprintf(stderr,"no Metal device\n");return 3;}
     auto renderer=sadx::MetalGuestFrameRenderer::create(device,&error);if(!renderer){std::fprintf(stderr,"shader: %s\n",error.c_str());return 3;}
+    if(o.offscreen){
+        const int rc=run_offscreen(*process,*renderer,device,harness,o,stop);
+        std::printf("guest assumptions (%zu):\n",process->assumptions.size());for(const auto& a:process->assumptions)std::printf("  %s\n",a.c_str());
+        return rc;
+    }
+    [NSApplication sharedApplication];[NSApp setActivationPolicy:NSApplicationActivationPolicyRegular];
     NSWindow* window=[[NSWindow alloc] initWithContentRect:NSMakeRect(0,0,1280,960) styleMask:NSWindowStyleMaskTitled|NSWindowStyleMaskClosable|NSWindowStyleMaskMiniaturizable backing:NSBackingStoreBuffered defer:NO];
     window.title=@"sadx-macos — guest: sonic.exe with the speedrun profile";
     SADXAppView* view=[[SADXAppView alloc] initWithFrame:NSMakeRect(0,0,1280,960) device:device];
     view.colorPixelFormat=MTLPixelFormatBGRA8Unorm;view.depthStencilPixelFormat=MTLPixelFormatDepth32Float;view.framebufferOnly=NO;view.preferredFramesPerSecond=63;view.drawableSize=CGSizeMake(640,480);view.autoResizeDrawable=NO;
     view.queue=[device newCommandQueue];view.exitAfter=o.exit_after;view.screenshot=o.screenshot.empty()?nil:[NSString stringWithUTF8String:o.screenshot.c_str()];
-    view.scriptedPad=!o.pad.empty();view.guest=process.get();view.guestRenderer=renderer.get();view.guestStop=&stop;window.contentView=view;
+    view.scriptedPad=!o.pad.empty();view.guest=process.get();view.guestRenderer=renderer.get();view.guestStop=&stop;view.harness=&harness;window.contentView=view;
     NSTextField* status=[NSTextField labelWithString:@"Guest"];status.font=[NSFont monospacedSystemFontOfSize:11 weight:NSFontWeightRegular];
     status.textColor=[NSColor colorWithWhite:0.9 alpha:1];status.backgroundColor=[NSColor colorWithWhite:0 alpha:0.55];status.drawsBackground=YES;
     status.frame=NSMakeRect(8,8,1264,36);[view addSubview:status];view.status=status;
@@ -198,7 +300,7 @@ int run_guest(const Options& o){
 }
 }
 int main(int argc,char** argv){
-    Options o;if(!parse(argc,argv,o)){std::fprintf(stderr,"usage: %s --guest GAME_DIR WINDOWS_SYSTEM_DIR [--exit-after N] [--screenshot out.ppm] [--keys FRAME:VK[:FRAMES],...] [--pad FRAME:BUTTONS[:FRAMES],...]\n       %s SONIC.EXE INPUT_MOD.DLL [--frames N] [--survey|--stop] [--exit-after N] [--screenshot out.ppm]\n",argv[0],argv[0]);return 2;}
+    Options o;if(!parse(argc,argv,o)){std::fprintf(stderr,"usage: %s --guest GAME_DIR WINDOWS_SYSTEM_DIR [--exit-after N] [--screenshot out.ppm|.png] [--keys FRAME:VK[:FRAMES],...] [--pad FRAME:BUTTONS[:FRAMES],...] [--script FILE] [--control -] [--offscreen]\n       %s SONIC.EXE INPUT_MOD.DLL [--frames N] [--survey|--stop] [--exit-after N] [--screenshot out.ppm]\n",argv[0],argv[0]);return 2;}
     if(o.guest){@autoreleasepool{return run_guest(o);}}
     @autoreleasepool{
         sadx::MacPerformanceCounter counter;
