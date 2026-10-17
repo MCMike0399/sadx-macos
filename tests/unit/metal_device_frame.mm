@@ -171,6 +171,9 @@ int main() {
                         pixel(16, 40) == std::array<std::uint8_t, 4>{0, 0, 255, 255},
                     "generated camera normals feed the texture matrix");
             auto fog = triangle();
+            // W fog uses the current W-friendly projection even for XYZRHW vertices.
+            fog.projection[11] = 1;
+            fog.projection[15] = 0;
             fog.space = PositionSpace::Screen;
             fog.vertices[0].position = {8, 8, 0.5F, 1};
             fog.vertices[1].position = {56, 8, 0.5F, 1};
