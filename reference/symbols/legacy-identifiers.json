@@ -59,48 +59,6 @@
       "viewport_at_3d12780",
       "words_at_3d0fd00"
     ],
-    "src/engine/ninja_fog.cpp": [
-      "cached_fog_end_at_90a09c",
-      "cached_fog_start_at_90a098",
-      "color_at_3d12898",
-      "device_at_3d128b0",
-      "display_switch_at_3b1117c",
-      "end_index_at_3d0fce0",
-      "end_value_at_3d12894",
-      "flag_at_3abdcfe",
-      "fog_enabled_at_3d12798",
-      "fog_mode_at_3d0849c",
-      "fog_profile_at_3abdc6c",
-      "fog_sentinel_at_7dce50",
-      "fog_supported_at_3d128a4",
-      "level_color_at_3abdc68",
-      "level_end_at_3abdc64",
-      "level_start_at_3abdc60",
-      "reciprocal_at_3d12c00",
-      "software_density_at_3d128a0",
-      "special_flags_at_909eb4",
-      "start_index_at_3d12950",
-      "start_value_at_3d0fac0",
-      "table_at_3b10f78",
-      "w_at_3d12a00"
-    ],
-    "src/engine/ninja_fog.hpp": [
-      "color_at_3d12898",
-      "display_switch_at_3b1117c",
-      "end_index_at_3d0fce0",
-      "end_value_at_3d12894",
-      "flag_at_3abdcfe",
-      "fog_sentinel_at_7dce50",
-      "level_color_at_3abdc68",
-      "level_end_at_3abdc64",
-      "level_start_at_3abdc60",
-      "reciprocal_at_3d12c00",
-      "software_density_at_3d128a0",
-      "start_index_at_3d12950",
-      "start_value_at_3d0fac0",
-      "table_at_3b10f78",
-      "w_at_3d12a00"
-    ],
     "src/engine/ninja_frame_calls.hpp": [
       "argument_at_3d0fa38",
       "device_flags_at_3d1289c",
@@ -179,7 +137,6 @@
       "display_switch_at_3b1117c",
       "flag_at_3abdcfe",
       "flag_at_3b12208",
-      "fog_sentinel_at_7dce50",
       "initial_color_at_3b18230",
       "maximum_at_3abd9d8",
       "maximum_at_3abd9e0",
@@ -1432,6 +1389,48 @@
       "viewport_at_3d12780",
       "words_at_3d0fd00"
     ],
+    "src/guest/ninja_fog_reference.cpp": [
+      "cached_fog_end_at_90a09c",
+      "cached_fog_start_at_90a098",
+      "color_at_3d12898",
+      "device_at_3d128b0",
+      "display_switch_at_3b1117c",
+      "end_index_at_3d0fce0",
+      "end_value_at_3d12894",
+      "flag_at_3abdcfe",
+      "fog_enabled_at_3d12798",
+      "fog_mode_at_3d0849c",
+      "fog_profile_at_3abdc6c",
+      "fog_sentinel_at_7dce50",
+      "fog_supported_at_3d128a4",
+      "level_color_at_3abdc68",
+      "level_end_at_3abdc64",
+      "level_start_at_3abdc60",
+      "reciprocal_at_3d12c00",
+      "software_density_at_3d128a0",
+      "special_flags_at_909eb4",
+      "start_index_at_3d12950",
+      "start_value_at_3d0fac0",
+      "table_at_3b10f78",
+      "w_at_3d12a00"
+    ],
+    "src/guest/ninja_fog_reference.hpp": [
+      "color_at_3d12898",
+      "display_switch_at_3b1117c",
+      "end_index_at_3d0fce0",
+      "end_value_at_3d12894",
+      "flag_at_3abdcfe",
+      "fog_sentinel_at_7dce50",
+      "level_color_at_3abdc68",
+      "level_end_at_3abdc64",
+      "level_start_at_3abdc60",
+      "reciprocal_at_3d12c00",
+      "software_density_at_3d128a0",
+      "start_index_at_3d12950",
+      "start_value_at_3d0fac0",
+      "table_at_3b10f78",
+      "w_at_3d12a00"
+    ],
     "src/guest/ninja_frame_calls.cpp": [
       "argument_at_3d0fa38",
       "count_at_3ce712c",
@@ -2244,7 +2243,7 @@
       ]
     },
     {
-      "identity": "src/engine/ninja_fog.hpp:NinjaFogDeviceState.color_at_3d12898",
+      "identity": "src/guest/ninja_fog_reference.hpp:NinjaFogDeviceState.color_at_3d12898",
       "module": "SONIC",
       "ranges": [
         [
@@ -2254,7 +2253,7 @@
       ]
     },
     {
-      "identity": "src/engine/ninja_fog.hpp:NinjaFogDeviceState.end_index_at_3d0fce0",
+      "identity": "src/guest/ninja_fog_reference.hpp:NinjaFogDeviceState.end_index_at_3d0fce0",
       "module": "SONIC",
       "ranges": [
         [
@@ -2264,7 +2263,7 @@
       ]
     },
     {
-      "identity": "src/engine/ninja_fog.hpp:NinjaFogDeviceState.end_value_at_3d12894",
+      "identity": "src/guest/ninja_fog_reference.hpp:NinjaFogDeviceState.end_value_at_3d12894",
       "module": "SONIC",
       "ranges": [
         [
@@ -2274,7 +2273,7 @@
       ]
     },
     {
-      "identity": "src/engine/ninja_fog.hpp:NinjaFogDeviceState.reciprocal_at_3d12c00",
+      "identity": "src/guest/ninja_fog_reference.hpp:NinjaFogDeviceState.reciprocal_at_3d12c00",
       "module": "SONIC",
       "ranges": [
         [
@@ -2284,7 +2283,7 @@
       ]
     },
     {
-      "identity": "src/engine/ninja_fog.hpp:NinjaFogDeviceState.software_density_at_3d128a0",
+      "identity": "src/guest/ninja_fog_reference.hpp:NinjaFogDeviceState.software_density_at_3d128a0",
       "module": "SONIC",
       "ranges": [
         [
@@ -2294,7 +2293,7 @@
       ]
     },
     {
-      "identity": "src/engine/ninja_fog.hpp:NinjaFogDeviceState.start_index_at_3d12950",
+      "identity": "src/guest/ninja_fog_reference.hpp:NinjaFogDeviceState.start_index_at_3d12950",
       "module": "SONIC",
       "ranges": [
         [
@@ -2304,7 +2303,7 @@
       ]
     },
     {
-      "identity": "src/engine/ninja_fog.hpp:NinjaFogDeviceState.start_value_at_3d0fac0",
+      "identity": "src/guest/ninja_fog_reference.hpp:NinjaFogDeviceState.start_value_at_3d0fac0",
       "module": "SONIC",
       "ranges": [
         [
@@ -2314,7 +2313,7 @@
       ]
     },
     {
-      "identity": "src/engine/ninja_fog.hpp:NinjaFogDeviceState.w_at_3d12a00",
+      "identity": "src/guest/ninja_fog_reference.hpp:NinjaFogDeviceState.w_at_3d12a00",
       "module": "SONIC",
       "ranges": [
         [

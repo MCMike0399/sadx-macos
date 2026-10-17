@@ -164,8 +164,9 @@ order:
    that instruction-level ordering matters. Add a comment saying which oracle case shows it.
 
 Never write `op.at(0x…)` instruction markers or `fp.multiply_float_memory(…)`-style emulator
-calls in the game tier. `src/engine/ninja_fog.cpp` and most of `src/player` still do, and
-GOAL §6 item 4 rewrites them. Choosing a level is per expression, not per module. A module
+calls in the game tier. Most of `src/player` still does, and GOAL §6 item 4 rewrites those modules.
+`engine/ninja_fog` uses exact value expressions and named CPU helpers; its reference
+adapter maps logical calculations and observed arithmetic to source diagnostics. Choosing a level is per expression, not per module. A module
 can be plain `float` throughout, except for the one `_ftol` or `double`-constant site that
 uses a helper.
 

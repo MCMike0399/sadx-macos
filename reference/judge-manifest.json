@@ -1,9 +1,10 @@
 {
   "change": {
-    "base_commit": "8f127587ceb6b5cab779c4b31e39ab2546ab82c4",
-    "evidence": "reference/production-integration-20261016/fog-reference-169-evidence.json",
-    "evidence_sha256": "58c93574c4f6e90144fb8b006fd6af8c6c54d65c84e423cfe023adc2d2bfc6d8",
-    "reason": "Prepare fog reference linkage and record nested fog source provenance without changing cases or comparisons"
+    "base_commit": "45f4075c9ffd4669b14de613c61efab8c540b817",
+    "evidence": "reference/production-integration-20261016/fog-rewrite-170-evidence.json",
+    "evidence_sha256": "a794c2c266cd5f608b3cb15a170fa657dd93fa49d5a2419d70e60d0ef8ca2022",
+    "mode": "additions-only",
+    "reason": "Add native-only fog and reference diagnostics units without changing existing judgments"
   },
   "files": {
     "Makefile": "c4fd46433ca9e151316d39fdcbcc53055c2acf089969536eeb1cd4f27cf27032",
@@ -357,7 +358,7 @@
     "tests/python/test_readability.py": "8090f2eb23f8c958972e071d94a4d77b99a8062953d456a89ccba2abafc78a3d",
     "tests/python/test_symbol_context.py": "e276e801136d0821369682beb43c42c0f460ff137123683d8c1150487eec2690",
     "tests/python/test_symbols.py": "9e9a03a6389d6cd58aa49c63272049754f55ccddb19eeb894b8b92ccce362e0f",
-    "tests/unit/manifest.tsv": "250385b7ded7b84dc4e34b265aba0fe6d056b0205874c98b76304ca8900d661a",
+    "tests/unit/manifest.tsv": "92b02a580ff9017999eca03d21734836592459d9e351b57f77daceef5b4c7176",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",

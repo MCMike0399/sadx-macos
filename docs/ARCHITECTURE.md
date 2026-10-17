@@ -92,6 +92,13 @@ from that file when fixed (a stale exception fails the check).
 | `platform/mac` | Metal texture/sprite backends; `metal_device_frame` consumes the owned engine graphics stream, independently of guest memory; `metal_guest_frame` decodes guest resources into that same stream; GameController input, the virtual 10 MHz clock | … hle |
 | `apps` | executables only: `sadx_boot.cpp` (headless CLI), `sadx_app.mm` (AppKit window), `metal_stage.mm` (asset viewer), `diagnostics/` (one-off HID/GameController probes, not built by default) | everything |
 
+Fog has one game implementation in `engine/ninja_fog`: native callers provide plain session
+values and a typed render sink. Its internal context preserves lazy reads and immediate stores
+for the reference adapter. `guest/ninja_fog_reference` supplies fixture availability, source
+instruction diagnostics and queue composition. Logical calculation phases observe arithmetic
+through `cpu/fidelity_float`; game decisions and table loops remain in the engine. The native
+backend builds and runs without guest archives or game files.
+
 Archives: `libsadx-core.a` = cpu…runtime (portable, no frameworks), `libsadx-macos.a` =
 platform/mac, `libsadx-guest.a` = guest + hle (+ Unicorn). Programs link what they need.
 

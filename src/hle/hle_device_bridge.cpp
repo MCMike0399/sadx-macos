@@ -4,7 +4,7 @@
 #include "hle/hle_heap_bridge.hpp"
 #include "hle/hle_task_bridge.hpp"
 #include "engine/ninja_render.hpp"
-#include "engine/ninja_fog.hpp"
+#include "guest/ninja_fog_reference.hpp"
 #include "engine/ninja_view.hpp"
 #include "engine/ninja_queue_lifecycle.hpp"
 #include <unicorn/unicorn.h>

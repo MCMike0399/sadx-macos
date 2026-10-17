@@ -1,0 +1,116 @@
+{
+  "scope": "GOAL 6.4 whole fog readability rewrite",
+  "base_commit": "45f4075",
+  "architecture": "All fog decisions, loops, device state selection and cache stores remain engine behavior. Native Runtime owns plain values and typed render sink. Reference adapter owns legacy optional availability, instruction diagnostics and queue composition; no game behavior moved to guest.",
+  "arithmetic": "ExactFloat expressions preserve all selected controls, retained/spilled values, memory/register NaN handling and exponent range. Named CPU operations cover m64, Bochs log, canonical ln2 and sqrt. Conversion reuses maintained crt_ftol. Pure exact powers use native expressions.",
+  "raw_comparison": {
+    "cases": 32900,
+    "original_cases": 4700,
+    "mask_variants": 7,
+    "words_per_case": 480,
+    "all_outputs_identical": true,
+    "output_sha256": "1f91348f9fa6e5efc967e1ad6caf9cf31b0264beab14121804df61f75ecfaaf7"
+  },
+  "oracle_before_and_after": {
+    "cases": 4700,
+    "compared": 4681,
+    "explicit": 19,
+    "state_mismatches": 0,
+    "fp_flag_mismatches": 2410,
+    "verdict": "partial"
+  },
+  "mutations": {
+    "mean_coefficient": {
+      "caught": true,
+      "value_mismatches": 2
+    },
+    "log_sign": {
+      "caught": true,
+      "value_mismatches": 8
+    },
+    "density_state": {
+      "caught": true,
+      "value_mismatches": 8
+    },
+    "restored": "partial; zero values/2410 flags differ"
+  },
+  "native_proof": "Native fog unit executes setup, color, table generation/scan, level/profile/display transitions and explicit failures across12 control words. Runs cwd/private/tmp with no assets. nm shows no guest, loader or Unicorn symbols. Only core archive linked.",
+  "diagnostic_proof": "New tests check first/second missing reciprocal, out-of-range reciprocal reached site, missing end factor after index stores, unmasked SNaN trailing load and known-null setup store. All pass. Reference signatures guard arithmetic event kinds before operations.",
+  "owner_migration": "482 unique global legacy identifiers and505 owner records retain exact source ranges. Optional state definitions moved whole into reference header. No new global legacy identifier. Both ownership checkers pass.",
+  "readability": {
+    "src/engine/ninja_fog.cpp": {
+      "before": {
+        "hex_literals": 263,
+        "address_identifiers": 68,
+        "address_calls": 0,
+        "goto": 0,
+        "address_labels": 0,
+        "long_lines": 41,
+        "multi_statement_lines": 68
+      },
+      "after": {
+        "hex_literals": 0,
+        "address_identifiers": 0,
+        "address_calls": 0,
+        "goto": 0,
+        "address_labels": 0,
+        "long_lines": 0,
+        "multi_statement_lines": 0
+      }
+    },
+    "src/engine/ninja_fog.hpp": {
+      "before": {
+        "hex_literals": 0,
+        "address_identifiers": 15,
+        "address_calls": 0,
+        "goto": 0,
+        "address_labels": 0,
+        "long_lines": 2,
+        "multi_statement_lines": 2
+      },
+      "after": {
+        "hex_literals": 0,
+        "address_identifiers": 0,
+        "address_calls": 0,
+        "goto": 0,
+        "address_labels": 0,
+        "long_lines": 0,
+        "multi_statement_lines": 0
+      }
+    },
+    "src/engine/ninja_queue_consumer.cpp": {
+      "before": {
+        "hex_literals": 119,
+        "address_identifiers": 56,
+        "address_calls": 0,
+        "goto": 0,
+        "address_labels": 0,
+        "long_lines": 55,
+        "multi_statement_lines": 63
+      },
+      "after": {
+        "hex_literals": 118,
+        "address_identifiers": 53,
+        "address_calls": 0,
+        "goto": 0,
+        "address_labels": 0,
+        "long_lines": 48,
+        "multi_statement_lines": 59
+      }
+    }
+  },
+  "cold_state_evidence": {
+    "display_switch": "3b1117c:4 mapped zero fill",
+    "profile": "3abdc6c:1 mapped zero fill",
+    "active": "3abdcfe:1 mapped zero fill",
+    "special_flags": "909eb4:1 file byte00",
+    "other_values": "existing maintained ninja_fog_initial_state"
+  },
+  "analysis": "Ten fresh REA analyze_function dossiers fog-rewrite-{794ec0,7949b0,7949f0,794db0,787260,794e40,411af0,411b40,4119b0,411a20}; assembly reviewed; owned provider exported and closed. Profile checker0 UNHANDLED.",
+  "independent_review": "Fresh STYLE reviewer approved final source, arithmetic and diagnostic mapping; independently ran native12CW and diagnostic units successfully; confirmed unchanged global legacy set and all owner ranges.",
+  "pending_verification": "Additional inherited FOV/color/frame-owner consumers of the queue object need guest linkage in the separate judge follow-up. No fixture/comparison change. Final impact oracle reports and full gate follow that commit separation.",
+  "limits": [
+    "Existing FP partials retained; no Windows hardware FP equivalence claim.",
+    "Native fog subsystem is executable-independent; full native game journeys and audio remain open."
+  ]
+}

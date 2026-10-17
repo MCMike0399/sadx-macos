@@ -1,5 +1,4 @@
 #include "engine/ninja_queue_consumer.hpp"
-#include "engine/ninja_fog.hpp"
 #include <cstring>
 #include <set>
 namespace sadx {
@@ -22,19 +21,8 @@ struct Operation {
     std::int32_t display(std::uint32_t at){auto pointer=runtime.queue_runtime.display_switch_at_3b1117c;if(!pointer){result.required_fact=0x3b1117c;stop(NinjaQueueConsumerFailure::unknown_fact,at);}return need(*pointer,at,0x3b1117c);}
     void mode(std::uint32_t value){runtime.queue_runtime.flag_at_3b12208=value;runtime.state.mode_byte_at_3abdbc0=static_cast<std::uint8_t>(value);}//412160→401440
     void fog(bool enabled){
-        NinjaFogOwners owners{runtime.state,runtime.queue_runtime.flag_at_3abdcfe,runtime.queue_runtime.display_switch_at_3b1117c,runtime.queue_runtime.render_state,runtime.constants.fog_sentinel_at_7dce50,nullptr,nullptr,nullptr,nullptr,nullptr};
-        auto r=ninja_fog_411af0_411b40(enabled,owners,fp);if(r.last_fp_site)fp_site=*r.last_fp_site;
-        auto& all=result.render;all.commands.insert(all.commands.end(),r.render.commands.begin(),r.render.commands.end());all.ignored_hresults.insert(all.ignored_hresults.end(),r.render.ignored_hresults.begin(),r.render.ignored_hresults.end());
-        switch(r.failure){
-        case NinjaFogFailure::none:return;
-        case NinjaFogFailure::unknown_fact:result.required_fact=r.required_fact;stop(NinjaQueueConsumerFailure::unknown_fact,r.source_boundary);
-        case NinjaFogFailure::unlifted_callee:stop(NinjaQueueConsumerFailure::unlifted_callee,r.source_boundary,r.callee_boundary);
-        case NinjaFogFailure::render_failed:if(!runtime.queue_runtime.render_state)stop(NinjaQueueConsumerFailure::render_failed,0x77ed04);
-            all.failure=r.render.failure;all.source_boundary=r.render.source_boundary;all.pending_command=r.render.pending_command;stop(NinjaQueueConsumerFailure::render_failed,r.source_boundary);
-        case NinjaFogFailure::fp_failed:throw X87Error(*r.fp_failure,r.fp_exceptions,"fog");
-        // Only reachable with a fog-device owner, which the consumer does not supply yet.
-        case NinjaFogFailure::unmodeled_operation:case NinjaFogFailure::index_out_of_range:stop(NinjaQueueConsumerFailure::unlifted_callee,r.source_boundary,r.callee_boundary);
-        }
+        if(!update_queue_fog(enabled,runtime,fp,result,fp_site))
+            stop(result.failure,result.source_boundary,result.callee_boundary);
     }
     NinjaMatrixPrimitives& coordinates(std::uint32_t at){if(!runtime.sprite.projection.coordinates)stop(NinjaQueueConsumerFailure::missing_coordinates,at);return *runtime.sprite.projection.coordinates;}
     void body(){

@@ -23,7 +23,7 @@
 #include "input/input_mod_pad.hpp"
 #include "engine/ninja_projection_range.hpp"
 #include "engine/ninja_view.hpp"
-#include "engine/ninja_fog.hpp"
+#include "guest/ninja_fog_reference.hpp"
 #include "engine/ninja_fog_initial_state.hpp"
 #include "engine/ninja_frame_calls.hpp"
 #include "game/mod_loader_frame.hpp"

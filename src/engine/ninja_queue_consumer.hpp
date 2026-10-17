@@ -70,4 +70,7 @@ bool ninja_queue_color_402f40(const std::optional<std::array<float,4>>& input,Ni
 // native bodies. Unlifted draw/fog branches stop at their exact required callee
 // after prior stores; no skipped unknown dispatch or renderer success fallback.
 NinjaQueueConsumerResult ninja_consume_queue(NinjaQueueConsumerRuntime&,X87Context&);
+// NOTSA: compose queue fog with the selected fog storage and device diagnostics.
+bool update_queue_fog(bool enabled, NinjaQueueConsumerRuntime &, X87Context &,
+                      NinjaQueueConsumerResult &, std::uint32_t &last_fp_site);
 } // namespace sadx
