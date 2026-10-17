@@ -1,9 +1,10 @@
 {
   "change": {
-    "base_commit": "9e9570aec84df213a6e9de8e224aca9a07e49afe",
-    "evidence": "reference/production-integration-20261016/metal-world-166-evidence.md",
-    "evidence_sha256": "38642a32b3c3b7c08c5e2ea116dc10ee893189240dedf3cdbf8869665875eba0",
-    "reason": "Require the newly visible R4 Station Square journey and add a direct play-world launch without changing existing thresholds or goldens"
+    "base_commit": "e101efc3a845c87ae9cbc68a944ef0302b5fc2d4",
+    "evidence": "reference/production-integration-20261016/task-sync-167-evidence.md",
+    "evidence_sha256": "9d13a8abe94736cbd686c12f7a1994d367d6fb3f27172916fd8ed8ab6bac4e3c",
+    "mode": "additions-only",
+    "reason": "Register callback-boundary task graph synchronization efficiency regression with preserved byte/mutation checks"
   },
   "files": {
     "Makefile": "cee34e9b75f9bc5cd828c8f325b8cdb8c65090872a6831a48ad82b3afb88437f",
@@ -357,7 +358,7 @@
     "tests/python/test_readability.py": "8090f2eb23f8c958972e071d94a4d77b99a8062953d456a89ccba2abafc78a3d",
     "tests/python/test_symbol_context.py": "e276e801136d0821369682beb43c42c0f460ff137123683d8c1150487eec2690",
     "tests/python/test_symbols.py": "9e9a03a6389d6cd58aa49c63272049754f55ccddb19eeb894b8b92ccce362e0f",
-    "tests/unit/manifest.tsv": "c065be0ad3b636e1b728fcdda38ce439916e2177ff5cdf3674c300afa61e7f87",
+    "tests/unit/manifest.tsv": "685ecd18f78b2900a672f9b4300587d2dc793434362972bc2580985127e3792a",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",

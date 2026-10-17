@@ -41,6 +41,9 @@ public:
     bool unmap(std::uint32_t base,std::uint32_t size,std::string* error);
     bool write(std::uint32_t address,const void* bytes,std::size_t size);
     bool read(std::uint32_t address,void* bytes,std::size_t size)const;
+    // Reference diagnostics: counts API memory reads, including failed reads; never guest-visible.
+    struct MemoryReads {std::uint64_t calls=0,bytes=0;};
+    MemoryReads memory_reads()const noexcept{return memory_reads_;}
     std::optional<std::uint32_t> u32(std::uint32_t address)const;
     bool set_u32(std::uint32_t address,std::uint32_t value);
     std::uint32_t reg(int unicorn_register)const;
@@ -113,6 +116,7 @@ private:
     X86Guest()=default;
     static void code_hook(void*,std::uint64_t address,std::uint32_t size,void* user);
     void* uc_=nullptr;
+    mutable MemoryReads memory_reads_{};
     std::uint32_t stack_base_=0x7ff00000,stack_size_=0x100000,stop_address_=0xfeed0000;
     std::map<std::uint32_t,Override> overrides_;
     std::vector<std::uint32_t> handles_;

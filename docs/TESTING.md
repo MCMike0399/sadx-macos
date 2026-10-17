@@ -198,6 +198,11 @@ Journeys are `required` (a failure is a regression) or `open` (a ladder row not 
   defines its own "values match" boolean. Give every report the same fields: values, boundary,
   calls, control word, flags. Then pass/partial/fail means the same thing everywhere.
 
+The task-graph synchronization regression exercises 128 guest callback boundaries and checks
+read-API call count, complete byte count, dispatch order and callback stores. This is an
+efficiency guard without a timing threshold. `X86Guest::memory_reads()` counts explicit host
+memory-read API requests, including failures; it does not count emulated CPU load instructions.
+
 ### 3.4 Windows parity (L8) (GOAL item 13)
 
 * Run the replay input scripts on the Windows machine with the collector, which records the

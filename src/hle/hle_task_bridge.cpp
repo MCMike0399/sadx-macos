@@ -4,7 +4,7 @@
 #include "engine/task_work.hpp"
 #include "engine/task.hpp"
 #include <algorithm>
-#include <set>
+#include <bitset>
 #include <utility>
 #include <unicorn/unicorn.h>
 #include <array>
@@ -31,6 +31,7 @@ struct TaskBridge {
     std::map<const void*,std::uint32_t> source_resources;
     std::map<const Task::ObjectControl*,std::uint32_t> controls;
     std::vector<std::array<std::uint32_t,13>> serialized;
+    std::vector<std::array<std::uint32_t,13>> guest_snapshot;
     TaskCallback callback(std::uint32_t address){
         if(!address)return nullptr;
         if(const auto i=functions.find(address);i!=functions.end())return i->second;
@@ -105,17 +106,18 @@ struct TaskBridge {
     void import_graph(){
         if(!scheduler||!pool){process.guest().stop("task bridge: pool unavailable at "+hex(entry));throw MetadataUnavailable{};}
         auto& g=process.guest();if(!g.read(pool,serialized.data(),4096*52)){g.stop("task bridge: unreadable pool at "+hex(entry));throw MetadataUnavailable{};}
-        TaskGraphState state;std::set<std::uint16_t> free;auto next=slot(word(0x3abdbec));std::optional<std::uint16_t> previous;
-        while(next){if(!free.insert(*next).second||slot(serialized[*next][1])!=previous){g.stop("task bridge: corrupt task free list at "+hex(entry));throw MetadataUnavailable{};}state.free_slots.push_back(*next);previous=next;next=slot(serialized[*next][0]);}
+        TaskGraphState state;std::bitset<4096> free;auto next=slot(word(0x3abdbec));std::optional<std::uint16_t> previous;
+        while(next){if(free.test(*next)||slot(serialized[*next][1])!=previous){g.stop("task bridge: corrupt task free list at "+hex(entry));throw MetadataUnavailable{};}free.set(*next);state.free_slots.push_back(*next);previous=next;next=slot(serialized[*next][0]);}
         std::reverse(state.free_slots.begin(),state.free_slots.end());
         for(unsigned k=0;k<8;++k)state.heads[k]=slot(word(0x3abdbc4+4*k));
-        std::set<std::uint16_t> linked;
-        std::function<void(std::optional<std::uint16_t>)> visit=[&](std::optional<std::uint16_t> h){while(h){if(free.count(*h)||!linked.insert(*h).second){g.stop("task bridge: corrupt active graph at "+hex(entry));throw MetadataUnavailable{};}visit(slot(serialized[*h][3]));h=slot(serialized[*h][0]);}};
+        // Membership is by bounded pool slot; traversal order stays in free_slots.
+        std::bitset<4096> linked;
+        std::function<void(std::optional<std::uint16_t>)> visit=[&](std::optional<std::uint16_t> h){while(h){if(free.test(*h)||linked.test(*h)){g.stop("task bridge: corrupt active graph at "+hex(entry));throw MetadataUnavailable{};}linked.set(*h);visit(slot(serialized[*h][3]));h=slot(serialized[*h][0]);}};
         for(const auto& h:state.heads)visit(h);
-        for(unsigned k=0;k<4096;++k)if(!free.count(k)&&!linked.count(k)&&!serialized[k][2])visit(slot(serialized[k][3]));
+        for(unsigned k=0;k<4096;++k)if(!free.test(k)&&!linked.test(k)&&!serialized[k][2])visit(slot(serialized[k][3]));
         controls.clear();std::vector<std::pair<std::shared_ptr<Task::ObjectControl>,std::optional<std::uint16_t>>> control_tasks;
-        for(unsigned k=0;k<4096;++k)if(!free.count(k)){
-            const auto& words=serialized[k];TaskGraphNode n{};n.slot=k;n.linked=linked.count(k)!=0;n.next=slot(words[0]);n.previous=slot(words[1]);n.parent=slot(words[2]);n.child=slot(words[3]);
+        for(unsigned k=0;k<4096;++k)if(!free.test(k)){
+            const auto& words=serialized[k];TaskGraphNode n{};n.slot=k;n.linked=linked.test(k)!=0;n.next=slot(words[0]);n.previous=slot(words[1]);n.parent=slot(words[2]);n.child=slot(words[3]);
             n.exec=callback(words[4]);n.display=callback(words[5]);n.destructor=callback(words[6]);
             n.primary=work(words[8]);n.motion=work(words[9]);n.force=work(words[10]);n.auxiliary=work(words[11]);n.field30=resource(words[12]);
             if(words[7]){auto control=std::make_shared<Task::ObjectControl>();if(!g.read(words[7]+2,&control->flags_at_2,1)){g.stop("task bridge: missing control flag at "+hex(entry));throw MetadataUnavailable{};}control_tasks.push_back({control,slot(word(words[7]+4))});controls[control.get()]=words[7];n.control=control;}
@@ -133,9 +135,17 @@ struct TaskBridge {
             const TaskWorkHandle handles[4]={n.primary,n.motion,n.force,n.auxiliary};for(unsigned k=0;k<4;++k){words[8+k]=address(handles[k]);if(handles[k])allocations[words[8+k]]=handles[k];}words[12]=raw(n.field30);
         }
         for(unsigned k=0;k<state.free_slots.size();++k){auto& words=serialized[state.free_slots[k]];words[0]=k?address(state.free_slots[k-1]):0;words[1]=k+1<state.free_slots.size()?address(state.free_slots[k+1]):0;}
-        // Serialize only changed words so guest-owned fields/partial callback stores
-        // are not overwritten by an unchanged native snapshot.
-        for(unsigned k=0;k<4096;++k)for(unsigned f=0;f<13;++f){const auto at=pool+52*k+4*f;if(g.u32(at)!=serialized[k][f])g.set_u32(at,serialized[k][f]);}
+        // Compare the pool in one read: no guest code runs between these independent
+        // word stores. Retain scalar writes and their order so unchanged guest-owned
+        // fields and partial callback stores are never republished from a stale snapshot.
+        guest_snapshot.resize(serialized.size());
+        const bool complete=g.read(pool,guest_snapshot.data(),guest_snapshot.size()*sizeof(guest_snapshot.front()));
+        for(unsigned k=0;k<4096;++k)for(unsigned f=0;f<13;++f){
+            const auto at=pool+52*k+4*f;
+            // An incomplete read keeps the old scalar path and its failure behavior.
+            const bool changed=complete?guest_snapshot[k][f]!=serialized[k][f]:g.u32(at)!=serialized[k][f];
+            if(changed)g.set_u32(at,serialized[k][f]);
+        }
         for(unsigned k=0;k<8;++k)g.set_u32(0x3abdbc4+4*k,address(state.heads[k]));
         g.set_u32(0x3abdbec,state.free_slots.empty()?0:address(state.free_slots.back()));
         g.set_u32(0x3abdbf4,raw(state.context.current_function));g.set_u32(0x3abdbf8,raw(state.context.field30));

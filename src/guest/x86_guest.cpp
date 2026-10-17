@@ -46,7 +46,11 @@ bool X86Guest::write(std::uint32_t address,const void* bytes,std::size_t size){
     if(uc_mem_write(engine(uc_),address,bytes,size)!=UC_ERR_OK)return false;
     if(size)uc_ctl_remove_cache(engine(uc_),address,static_cast<std::uint64_t>(address)+size);
     return true;}
-bool X86Guest::read(std::uint32_t address,void* bytes,std::size_t size)const{return uc_mem_read(engine(uc_),address,bytes,size)==UC_ERR_OK;}
+bool X86Guest::read(std::uint32_t address,void* bytes,std::size_t size)const{
+    ++memory_reads_.calls;
+    memory_reads_.bytes+=size;
+    return uc_mem_read(engine(uc_),address,bytes,size)==UC_ERR_OK;
+}
 std::optional<std::uint32_t> X86Guest::u32(std::uint32_t address)const{std::uint32_t v;if(!read(address,&v,4))return std::nullopt;return v;}
 bool X86Guest::set_u32(std::uint32_t address,std::uint32_t value){return write(address,&value,4);}
 std::uint32_t X86Guest::reg(int r)const{std::uint32_t v=0;uc_reg_read(engine(uc_),r,&v);return v;}

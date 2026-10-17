@@ -4595,3 +4595,19 @@ The product still needs native boot/title, resources and gameplay recovery.
 * Unverified: vertex fog, reflection UVs, active extra stages, other formats/scenes, Windows GPU
   parity, physical pads, audio and native game journeys. Performance is not practice-ready.
 * Next: continue §6.3 coverage/performance, alternating with §6.4's unchanged-oracle fog rewrite.
+
+### 2026-10-16 — GOAL §6.3 task graph synchronization performance (track J/V, gate 167)
+
+* Outcome: rendered Station Square advances about 3× faster: 4.91 -> 14.47 FPS offscreen.
+* Bulk pool comparison and membership bitsets remove the task bridge bottleneck found by profiling.
+  Every callback still resynchronizes and validates; changed-word store order/fallback stay intact.
+* New regression: 128 callbacks, 6,871,571 -> 2,708 API reads, same 54,966,380 bytes,
+  callback order and own/free-slot stores. Forced scalar fallback fails the regression.
+* Unchanged full task-bridge arena/trace/register scenarios and all existing mutants pass.
+* Native intro 7,228 / controller 900 / stage 2,150 digests and transitions match the census.
+  Live world screenshot and frozen-frame pixel hashes are identical before/after.
+* Gate 167 rc 0: 156 native invocations / 66 Python tests; R1–R4 pass; STATUS refreshed.
+  Guest-only median 187.09 -> 65.17 ms; the overall 63 FPS budget still fails.
+* Limits: this fixes synchronization overhead, not all latency; renderer state coverage,
+  Windows/physical-pad parity, audio, full oracle suite and native game journeys remain open.
+* Next: continue measured performance/renderer coverage, alternating with §6.4 fog readability.
