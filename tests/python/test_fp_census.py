@@ -28,6 +28,22 @@ class FpCensusTests(unittest.TestCase):
         self.assertFalse(summarize(self.site([[0x27f, 0x1f80, 0x401000, 1]]))['observed_cw_precondition'])
         self.assertFalse(summarize(self.site([[0x7f, 0x1f80, 0, 1], [0x37f, 0x1f80, 0, 1]]))['observed_cw_precondition'])
 
+    def test_pre_device_samples_are_retained_without_blocking_post_device_evidence(self):
+        row = summarize(self.site([[0x23f, 0x1f80, 0x401000, 5, 0],
+                                   [0x7f, 0x1fa0, 0x402000, 3, 1]]))
+        self.assertEqual(row['calls'], 8)
+        self.assertEqual(row['fpcw'], ['0x7f', '0x23f'])
+        self.assertFalse(row['observed_cw_precondition'])
+        self.assertEqual(row['post_device_calls'], 3)
+        self.assertEqual(row['post_device_fpcw'], ['0x7f'])
+        self.assertTrue(row['post_device_cw_precondition'])
+        self.assertFalse(row['samples'][0]['device_created'])
+        self.assertTrue(row['samples'][1]['device_created'])
+        wrong = summarize(self.site([[0x23f, 0x1f80, 0x401000, 5, 0],
+                                     [0x27f, 0x1f80, 0x402000, 3, 1]]))
+        self.assertFalse(wrong['post_device_cw_precondition'])
+        self.assertIsNone(summarize(self.site([]))['post_device_cw_precondition'])
+
     def test_replay_digests_clocks_modes_and_stop_all_matter(self):
         original = dict(digests=[1, 2, 3], clocks=[10, 20, 30], modes=[[1, 8]],
                         frames=3, stop='census frames done')

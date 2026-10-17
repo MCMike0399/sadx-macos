@@ -333,7 +333,7 @@ and the readability items (R) alternate from item 4 on.
      files while `src/` is dirty, and refuse it if any existing protected file changed or was
      removed. Add fixtures for both cases. Then a step with new tests is one commit and one
      gate (`docs/JUDGE.md` "Additions").
-2. **Direct3D FPU precision in the reference (V/R, ADR-0008 §4).**
+2. **Direct3D FPU precision in the reference (done, gate 165; ADR-0008 §4).**
    * In `src/hle/hle_d3d8.cpp`, make `CreateDevice` and `Reset` without
      `D3DCREATE_FPU_PRESERVE` (behaviour bit `0x2`) set the calling guest thread's x87
      precision control to 24-bit and rounding to nearest, leaving the exception masks as

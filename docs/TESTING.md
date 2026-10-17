@@ -33,11 +33,13 @@ These are the weaknesses the review found, most important first. Each has an add
    * The 7,228-frame digests cover the logo, movie and title only.
    * So composition, state carried between frames, and call order between systems are
      unverified.
-2. **The reference runs at the wrong FPU precision.**
-   * The guest's Direct3D `CreateDevice` does not set single precision, so every runtime
-     digest and the FPU census describe a 53-bit game.
-   * The oracles themselves sweep 0x007f, 0x027f and 0x037f, so their verdicts are unaffected.
-   * The census has zero calls for every player entry.
+2. **Precision coverage still has limits.**
+   * Direct3D now selects 24-bit/nearest unless PRESERVE is requested. The census retains
+     pre-device 53-bit startup samples and observes post-device 24-bit game entries.
+   * The oracles still sweep 0x007f, 0x027f and 0x037f. Fog, ground acceleration and frame
+     control reproduce their full pre-fix reports; this does not settle hardware parity.
+   * The corrected census includes Station Square player entries; zero calls elsewhere
+     still mean unobserved. It is not a complete gameplay or Windows trace.
 3. **Circular floating-point evidence.**
    * Guest FPU shims replace every FPATAN/FSINCOS/FYL2X with the same Bochs models the native
      code uses, and RCPSS with an assumed estimate model. The guest and native agree on these
@@ -175,9 +177,10 @@ Journeys are `required` (a failure is a regression) or `open` (a ladder row not 
 
 ### 3.3 Make the existing judge stronger (L2–L5)
 
-* **Fix the guest FPU precision** (GOAL item 2), then re-baseline the digests in one evidenced
-  `fix(judge)` commit. Rerun the census with a stage entry, so the player entries have a
-  measured control word.
+* **Guest FPU precision** (GOAL item 2): corrected; the census includes Station Square
+  and separates pre-device startup from post-device calls. Paired before/after digest
+  hashes and unchanged clock traces are recorded in `d3d8-fpu-digest-delta.json` under
+  `reference/production-integration-20261016/`. Windows stage control words remain unverified.
 * **Real fixtures.** Add to each player oracle a holdout corpus of states captured from the
   replays (L7), alongside the synthetic cases. Report each oracle's branch coverage of the
   original function (Unicorn block coverage), and list the uncovered branches.

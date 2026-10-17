@@ -100,14 +100,19 @@ def summarize(site):
     samples = site['samples']
     calls = sum(row[3] for row in samples)
     controls = sorted({row[0] for row in samples})
+    post_controls = sorted({row[0] for row in samples if len(row) > 4 and row[4]})
     return dict(address=hex(site['address']), name=site['name'], bound_override=site['bound'],
                 calls=calls, fpcw=[hex(v) for v in controls],
                 mxcsr=[hex(v) for v in sorted({row[1] for row in samples})],
                 mxcsr_control=[hex(v) for v in sorted({row[1] & ~0x3f for row in samples})],
-                samples=[dict(fpcw=hex(cw), mxcsr=hex(mxcsr), caller_return_address=hex(caller), calls=count)
-                         for cw, mxcsr, caller, count in samples],
+                samples=[dict(fpcw=hex(cw), mxcsr=hex(mxcsr), caller_return_address=hex(caller), calls=row[3],
+                              device_created=bool(row[4]) if len(row) > 4 else None)
+                         for row in samples for cw, mxcsr, caller in [row[:3]]],
                 missing_caller_return=site['missing_return'],
-                observed_cw_precondition=(controls == [0x7f]) if calls else None)
+                observed_cw_precondition=(controls == [0x7f]) if calls else None,
+                post_device_fpcw=[hex(v) for v in post_controls],
+                post_device_calls=sum(row[3] for row in samples if len(row) > 4 and row[4]),
+                post_device_cw_precondition=(post_controls == [0x7f]) if post_controls else None)
 
 
 def parity(baseline, traced):
@@ -140,7 +145,8 @@ def main():
     target_file = ROOT / 'build/fp-control-targets.tsv'
     target_file.write_text(''.join(f'{at}\t{row["name"] or "unnamed"}\n' for at, row in sorted(targets.items())))
     runs = {}
-    for profile, frames in [('intro', 120 if args.smoke else 7228), ('controller', 120 if args.smoke else 900)]:
+    for profile, frames in [('intro', 120 if args.smoke else 7228), ('controller', 120 if args.smoke else 900),
+                            ('stage', 120 if args.smoke else 2150)]:
         for variant in ['plain', 'original', 'native']:
             with tempfile.TemporaryDirectory(prefix='fp-census-', dir=ROOT / 'build') as temporary:
                 output = ROOT / f'build/fp-census-{profile}-{variant}.json'
@@ -156,17 +162,18 @@ def main():
                   runner_sha256=sha(Path(__file__)), build=json.loads((ROOT / 'build/fp-control-census-build.json').read_text()),
                   profile_patches_sha256=sha(ROOT / 'tools/gate/profile_patches.json'),
                   fpu_sites_sha256=sha(ROOT / 'reference/inventory/fpu-sites.json'), player_targets=targets,
-                  stage_replay=dict(available=False, reason='No stage replay is registered in tests/unit/manifest.tsv; ROADMAP M3 stage replays remain open.'),
+                  stage_replay=dict(available=not args.smoke, frames=2150,
+                                    reason='Same menu keys as R3/R4 journeys, then observe Station Square; no rendered 3D or goal-reaching R5 replay claim.'),
                   runs=[], comparisons=[], limits=[
                       'Reference Unicorn observations under the pinned profile; not Windows hardware control-word capture.',
                       'Entry observations do not authorize plain-float arithmetic alone: STYLE 7 also requires assembly, oracle and mutant proofs.',
-                      'Zero calls mean unobserved; no player-physics control-word inference from intro/title coverage.',
+                      'Zero calls mean unobserved. Pre-device startup controls remain recorded separately from post-device game entries.',
                       'Original variant observes original guest entry instructions; native variant observes bridge entry plus unbound player entries.',
                   ])
     for (profile, variant), run in runs.items():
         encoded = json.dumps(run['digests'], separators=(',', ':')).encode()
         report['runs'].append(dict(profile=profile, variant=variant, frames=run['frames'], stop=run['stop'],
-                                  modes=run['modes'], digest_sha256=hashlib.sha256(encoded).hexdigest(),
+                                  modes=run['modes'], stages=run['stages'], digest_sha256=hashlib.sha256(encoded).hexdigest(),
                                   sites=[summarize(site) for site in run['sites']]))
         if variant != 'plain':
             report['comparisons'].append(dict(profile=profile, variant=variant,

@@ -22,12 +22,12 @@ void require(bool value, const std::string& message) {
 struct Site {
     std::string name;
     bool bound = false;
-    std::map<std::tuple<std::uint32_t, std::uint32_t, std::uint32_t>, std::uint64_t> samples;
+    std::map<std::tuple<std::uint32_t, std::uint32_t, std::uint32_t, bool>, std::uint64_t> samples;
     std::uint64_t missing_return = 0;
-    void observe(X86Guest& guest) {
+    void observe(X86Guest& guest, bool device_created = false) {
         const auto caller = guest.u32(guest.esp());
         if (!caller) ++missing_return;
-        ++samples[{guest.reg(UC_X86_REG_FPCW), guest.mxcsr(), caller.value_or(0)}];
+        ++samples[{guest.reg(UC_X86_REG_FPCW), guest.mxcsr(), caller.value_or(0), device_created}];
     }
 };
 struct Hash {
@@ -63,14 +63,14 @@ void self_test() {
     require(guest->set_u32(0x101000, 0x37f) && guest->set_u32(0x101004, 0x3f80), "second controls");
     require(bool(guest->call(0x100000, {})), "second sample");
     require(site.samples.size() == 2 && site.missing_return == 0, "sample separation");
-    require(site.samples.at({0x7f, 0x5f80, guest->stop_address()}) == 1 &&
-            site.samples.at({0x37f, 0x3f80, guest->stop_address()}) == 1, "sample values");
+    require(site.samples.at({0x7f, 0x5f80, guest->stop_address(), false}) == 1 &&
+            site.samples.at({0x37f, 0x3f80, guest->stop_address(), false}) == 1, "sample values");
     std::cout << "{\"passed\":true,\"samples\":2,\"trace_is_read_only\":true}\n";
 }
 void run(int argc, char** argv) {
     require(argc == 8, "usage: fp-census GAME SYSTEM TARGETS PROFILE VARIANT FRAMES OVERLAY");
     const std::string dir = argv[1], system = argv[2], profile = argv[4], variant = argv[5];
-    require(profile == "intro" || profile == "controller", "unknown profile");
+    require(profile == "intro" || profile == "controller" || profile == "stage", "unknown profile");
     require(variant == "plain" || variant == "original" || variant == "native", "unknown variant");
     const auto frames = std::stoul(argv[6]);
     std::ifstream input(dir + "/sonic.exe", std::ios::binary);
@@ -82,7 +82,7 @@ void run(int argc, char** argv) {
     require(!std::filesystem::exists(argv[7]), "overlay must be fresh");
     auto process = HleProcess::create(dir, argv[7], &error);
     require(bool(process), error);
-    if (profile == "controller") process->host_xinput(HleXInputGamepad{});
+    if (profile == "controller" || profile == "stage") process->host_xinput(HleXInputGamepad{});
     process->use_real_cpp_runtime(system);
     process->hle().set_logging(false);
     require(process->map_main(*image, &error), error);
@@ -101,8 +101,8 @@ void run(int argc, char** argv) {
         if (site.name.empty()) site.name = entry.name;
         if (variant == "native") {
             const auto bridge = entry.bridge;
-            require(process->guest().add_override(entry.address, [&site, bridge](X86Guest& g) {
-                site.observe(g);
+            require(process->guest().add_override(entry.address, [&site, bridge, &process](X86Guest& g) {
+                site.observe(g, !process->d3d8_presentation.empty());
                 return bridge(g);
             }, &error), error);
         }
@@ -111,15 +111,15 @@ void run(int argc, char** argv) {
         for (auto& [entry, site] : sites) {
             if (variant == "native" && site.bound) continue;
             auto* const observed = &site;
-            require(process->guest().add_instruction_hook(entry, [observed](X86Guest& g, std::uint32_t) {
-                observed->observe(g);
+            require(process->guest().add_instruction_hook(entry, [observed, &process](X86Guest& g, std::uint32_t) {
+                observed->observe(g, !process->d3d8_presentation.empty());
                 return false;  // Execute the original instruction unchanged.
             }, &error), error);
         }
     }
     std::size_t polygons_seen = 0;
     std::vector<std::uint64_t> digests, clocks;
-    std::vector<std::pair<std::size_t, std::uint32_t>> modes;
+    std::vector<std::pair<std::size_t, std::uint32_t>> modes, stages;
     process->on_present = [&](X86Guest& guest) {
         const auto& device = process->d3d8;
         Hash h;
@@ -141,6 +141,16 @@ void run(int argc, char** argv) {
         require(mode.has_value(), "missing mode");
         if (modes.empty() || modes.back().second != *mode) modes.push_back({digests.size(), *mode});
         const auto frame = digests.size();
+        std::uint16_t stage = 0;
+        require(guest.read(0x3b22dcc, &stage, sizeof stage), "missing stage");
+        if (stages.empty() || stages.back().second != stage) stages.push_back({frame, stage});
+        if (profile == "stage") {
+            constexpr std::size_t presses[] = {450, 800, 950, 1100, 1250, 1400, 1550, 1700, 1850};
+            for (const auto press : presses) {
+                if (frame == press) process->host_key(13, true);
+                if (frame == press + 5) process->host_key(13, false);
+            }
+        }
         if (profile == "controller") {
             if (frame == 450 || frame == 800)
                 process->host_xinput(HleXInputGamepad{0x10, 0, 0, 0, 0, 0, 0});
@@ -159,6 +169,9 @@ void run(int argc, char** argv) {
     std::cout << "],\"modes\":[";
     for (std::size_t i = 0; i < modes.size(); ++i)
         std::cout << (i ? "," : "") << '[' << modes[i].first << ',' << modes[i].second << ']';
+    std::cout << "],\"stages\":[";
+    for (std::size_t i = 0; i < stages.size(); ++i)
+        std::cout << (i ? "," : "") << '[' << stages[i].first << ',' << stages[i].second << ']';
     std::cout << "],\"sites\":[";
     bool comma = false;
     for (const auto& [entry, site] : sites) {
@@ -167,8 +180,8 @@ void run(int argc, char** argv) {
                   << ",\"missing_return\":" << site.missing_return << ",\"samples\":[";
         bool sample_comma = false;
         for (const auto& [key, count] : site.samples) {
-            const auto& [cw, mxcsr, caller] = key;
-            std::cout << (sample_comma ? "," : "") << '[' << cw << ',' << mxcsr << ',' << caller << ',' << count << ']';
+            const auto& [cw, mxcsr, caller, device_created] = key;
+            std::cout << (sample_comma ? "," : "") << '[' << cw << ',' << mxcsr << ',' << caller << ',' << count << ',' << (device_created ? 1 : 0) << ']';
             sample_comma = true;
         }
         std::cout << "]}";

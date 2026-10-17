@@ -1,0 +1,385 @@
+{
+  "source_before": "35e6d0a:src/hle/hle_d3d8.cpp",
+  "source_after": "d0c039a:src/hle/hle_d3d8.cpp",
+  "old_runtime_only_replaced_d3d8_object": true,
+  "collector": "tools/analysis/fp_control_census.cpp",
+  "rows": [
+    {
+      "profile": "intro",
+      "frames_before": 7228,
+      "frames_after": 7228,
+      "before_digest_sha256": "cb10153d7e13da35db036ded1a22eeca0ba47d93c1f93ebe38fb2c5b4cb013e2",
+      "after_digest_sha256": "547c053f40fd1176151ff54470f1544f1d8b5431c3ed004b7d2b47c8ab45103e",
+      "first_changed_frame": 390,
+      "before_clock_sha256": "7482b436e0b5e8e1b22d2bb4902474263a3e7d654face6c7fe55cbea8e80b823",
+      "after_clock_sha256": "7482b436e0b5e8e1b22d2bb4902474263a3e7d654face6c7fe55cbea8e80b823",
+      "clocks_equal": true,
+      "modes_before": [
+        [
+          1,
+          24
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          388,
+          8
+        ],
+        [
+          7167,
+          11
+        ],
+        [
+          7168,
+          12
+        ]
+      ],
+      "modes_after": [
+        [
+          1,
+          24
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          388,
+          8
+        ],
+        [
+          7167,
+          11
+        ],
+        [
+          7168,
+          12
+        ]
+      ],
+      "stages_before": [
+        [
+          1,
+          0
+        ]
+      ],
+      "stages_after": [
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "profile": "controller",
+      "frames_before": 900,
+      "frames_after": 900,
+      "before_digest_sha256": "fe37a2cc28cafd9f5827932837e035762582feab79e74f865b50621fbd066c12",
+      "after_digest_sha256": "9ae36a4bdcc91d6f6868168d0ab7eebaabfb0263c4ff02cdedc60621b803f5c6",
+      "first_changed_frame": 390,
+      "before_clock_sha256": "9f961687c97f0e38c70b22fac7346b125dd90e7cd2a176831e66ce0590a3f2a9",
+      "after_clock_sha256": "9f961687c97f0e38c70b22fac7346b125dd90e7cd2a176831e66ce0590a3f2a9",
+      "clocks_equal": true,
+      "modes_before": [
+        [
+          1,
+          24
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          388,
+          8
+        ],
+        [
+          453,
+          11
+        ],
+        [
+          454,
+          12
+        ]
+      ],
+      "modes_after": [
+        [
+          1,
+          24
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          388,
+          8
+        ],
+        [
+          453,
+          11
+        ],
+        [
+          454,
+          12
+        ]
+      ],
+      "stages_before": [
+        [
+          1,
+          0
+        ]
+      ],
+      "stages_after": [
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "profile": "stage",
+      "frames_before": 2150,
+      "frames_after": 2150,
+      "before_digest_sha256": "65818120a2336d21291a60e5b8ee54bcdb16e1eb44e2354327ee15f474a80ac0",
+      "after_digest_sha256": "67378f3665bcb330246830aee76439cdf7037a5c6bf0934f50407dee37c524a9",
+      "first_changed_frame": 390,
+      "before_clock_sha256": "67a519f0b3d029426d14367fdf4be02f2d1fed3040fbf7b5144972d35469eae6",
+      "after_clock_sha256": "67a519f0b3d029426d14367fdf4be02f2d1fed3040fbf7b5144972d35469eae6",
+      "clocks_equal": true,
+      "modes_before": [
+        [
+          1,
+          24
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          388,
+          8
+        ],
+        [
+          453,
+          11
+        ],
+        [
+          454,
+          12
+        ],
+        [
+          1894,
+          17
+        ],
+        [
+          1895,
+          5
+        ]
+      ],
+      "modes_after": [
+        [
+          1,
+          24
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          388,
+          8
+        ],
+        [
+          453,
+          11
+        ],
+        [
+          454,
+          12
+        ],
+        [
+          1894,
+          17
+        ],
+        [
+          1895,
+          5
+        ]
+      ],
+      "stages_before": [
+        [
+          1,
+          0
+        ],
+        [
+          1895,
+          26
+        ]
+      ],
+      "stages_after": [
+        [
+          1,
+          0
+        ],
+        [
+          1895,
+          26
+        ]
+      ]
+    },
+    {
+      "profile": "intro-native-first-600",
+      "frames_before": 600,
+      "frames_after": 600,
+      "before_digest_sha256": "096df710d0144b30f0df88fc704e01da361db60505353d7fc5d80b554e044ff8",
+      "after_digest_sha256": "2d073815814b69ae331601015878d51579da7e3e345fb74c00c1d99d55b4fc8b",
+      "first_changed_frame": 390,
+      "clocks_equal": true
+    }
+  ],
+  "identities": {
+    "before_guest_archive": "74a5cbd7d0aa4e4202cb66563dfe1805e63ac2c9cde40a23d4b131a83209211c",
+    "before_census": "2e957547bbc8385626f6967d986c8ff5efee8158161a8c9ceac3aa088ec05abc",
+    "after_guest_archive": "bc98e101ac661095a9d851738e403aae116d8788effb6cd41e9e25ac16ecacda",
+    "after_census": "1845a6f157811e6cb3a4df1ae259b0d8500707a0dbb0e82e2c8385a5172a4f8e",
+    "shared_core_archive": "2cc6a710548e589a721df36453fe0095c6c9a871bb0bfe150f74bc334293a0ca",
+    "collector": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc"
+  },
+  "oracles": {
+    "fog": {
+      "complete_reports_byte_identical": true,
+      "before_sha256": "42a29424d4b386289d646193518e30399fb23ccb200de3216a9e757d141b71d6",
+      "after_sha256": "42a29424d4b386289d646193518e30399fb23ccb200de3216a9e757d141b71d6"
+    },
+    "ground_acceleration": {
+      "complete_reports_byte_identical": true,
+      "before_sha256": "255b091b0a1046180f8ce58b89589821f70ea168e4eab7d55632d691a712f3ac",
+      "after_sha256": "255b091b0a1046180f8ce58b89589821f70ea168e4eab7d55632d691a712f3ac"
+    },
+    "game_frame_control": {
+      "complete_reports_byte_identical": true,
+      "before_sha256": "b1a3acf4f0669014358d7f686e156c6a229bfbb5697a5d28ce0a4189ccfc9dca",
+      "after_sha256": "b1a3acf4f0669014358d7f686e156c6a229bfbb5697a5d28ce0a4189ccfc9dca"
+    }
+  },
+  "census_report_sha256": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
+  "trace_comparisons_passed": true,
+  "phase_coverage": [
+    {
+      "profile": "intro",
+      "variant": "original",
+      "frames": 7228,
+      "reached_post_device_sites": 59,
+      "post_device_calls": 345983,
+      "post_device_fpcw": [
+        "0x7f"
+      ],
+      "stages": [
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "profile": "intro",
+      "variant": "native",
+      "frames": 7228,
+      "reached_post_device_sites": 46,
+      "post_device_calls": 131860,
+      "post_device_fpcw": [
+        "0x7f"
+      ],
+      "stages": [
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "profile": "controller",
+      "variant": "original",
+      "frames": 900,
+      "reached_post_device_sites": 61,
+      "post_device_calls": 580549,
+      "post_device_fpcw": [
+        "0x7f"
+      ],
+      "stages": [
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "profile": "controller",
+      "variant": "native",
+      "frames": 900,
+      "reached_post_device_sites": 48,
+      "post_device_calls": 137186,
+      "post_device_fpcw": [
+        "0x7f"
+      ],
+      "stages": [
+        [
+          1,
+          0
+        ]
+      ]
+    },
+    {
+      "profile": "stage",
+      "variant": "original",
+      "frames": 2150,
+      "reached_post_device_sites": 159,
+      "post_device_calls": 9791330,
+      "post_device_fpcw": [
+        "0x7f"
+      ],
+      "stages": [
+        [
+          1,
+          0
+        ],
+        [
+          1895,
+          26
+        ]
+      ]
+    },
+    {
+      "profile": "stage",
+      "variant": "native",
+      "frames": 2150,
+      "reached_post_device_sites": 148,
+      "post_device_calls": 8023016,
+      "post_device_fpcw": [
+        "0x7f"
+      ],
+      "stages": [
+        [
+          1,
+          0
+        ],
+        [
+          1895,
+          26
+        ]
+      ]
+    }
+  ],
+  "control_word_pair": {
+    "before_profile": "intro/native, 600 frames",
+    "before_post_device": [
+      "0x23f"
+    ],
+    "after_profile": "intro/native, 7228 frames",
+    "after_post_device": [
+      "0x7f"
+    ]
+  }
+}

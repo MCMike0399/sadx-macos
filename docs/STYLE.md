@@ -130,13 +130,14 @@ order:
 1. **Plain `float`/`int` expressions.** The build sets `-ffp-contract=off -fno-fast-math`.
    With x87 at 24-bit precision and round to nearest, `+ - * / sqrt` on floats round like
    IEEE single except in the cases of the next item. **This is the goal for game code.**
-   Today's census records `0x023f` (53-bit) at every reached entry, but it was taken in a guest
-   whose Direct3D 8 `CreateDevice` does not do what the real one does. Without
-   `D3DCREATE_FPU_PRESERVE` (SADX omits it), the real one sets the thread to single precision,
-   and the Windows capture saw the main thread at `0x007f`. GOAL §6 item 2 fixes the guest and
-   reruns the census (ADR-0008 §4). Until that result is recorded, level 3 is the working
-   default for x87 game math. Once it is recorded, level 1 is the default. All four of these
-   preconditions must hold, because fixtures may never reach the divergent paths:
+   The 2026-10-16 census (`reference/fp-control-census.json`) after the Direct3D fix
+   records `0x007f` (24-bit/nearest) at every observed post-device entry in the intro,
+   controller and Station Square routes. This supports level 1 as the default for
+   rewritten post-device game math, subject to all four proofs below. Shared startup
+   functions also have pre-device `0x023f` samples: retain level 3 where their full
+   call-site evidence is mixed or unknown. Zero calls remain unobserved. The Windows
+   capture saw main-thread `0x007f`; Windows stage parity remains M4 work (ADR-0008 §4).
+   All four preconditions must hold, because fixtures may miss divergent paths:
    * the assembly (`ghidra_asm.py`) of the expression shows only single-precision (`m32`)
      memory operands, with no `fld qword`, `fistp` or transcendental in it;
    * the census shows only `0x007f` at the function's call sites;
@@ -289,8 +290,9 @@ it does not claim the menu, logo, audio, or other missing callee implementations
 **Ground acceleration** (`src/player/ground_acceleration.cpp`, `adjust_slope`; source
 `PGetAcceleration`). Native `GroundConstants` holds literal defaults, with all 24 binary32
 encodings checked against PE bytes by the reference unit. Its fields name the shared source
-constant roles. The census does not justify plain floats: the core uses `ExactFloat` and
-explicit binary32 stores, including a retained lateral value until drag consumes it.
+constant roles. This pilot still uses `ExactFloat` and explicit binary32 stores, including a
+retained lateral value until drag consumes it. The corrected stage census supplies its
+24-bit premise; any further simplification still needs the unchanged oracle and mutants.
 
 ```cpp
 // before: emulator calls and constants fetched by address

@@ -4563,3 +4563,19 @@ The product still needs native boot/title, resources and gameplay recovery.
   71,115 override comparisons/mutants pass. Recorded `journeys-164-gate.json`; STATUS refreshed.
 * Unverified: 3D, audio, native journeys, physical pads and Windows parity; full oracles not run.
 * Next: §6.2 Direct3D FPU precision, unchanged-oracle evidence, digests and census.
+
+### 2026-10-16 — GOAL §6.2 Direct3D precision and stage census (track V/R, gate 165)
+
+* Outcome: reference D3D8 uses 24-bit/nearest unless PRESERVE is set; source `d0c039a`.
+  14 guest COM cases pass; wrong-bit mutation caught. Reset's resource STUB remains explicit.
+* Nine census runs / six trace comparisons pass: intro 7,228, controller 900, stage 2,150.
+  All observed post-device entries use CW 0x007f; pre-device CW 0x023f samples stay recorded.
+  Station Square starts at frame 1,895; original stage has 9,791,330 post-device observations.
+* Paired old/new runtimes differ only in D3D8: first digest change is frame 390 for intro,
+  controller, stage and native first 600. All clock arrays match. Hashes: `d3d8-fpu-digest-delta.json`.
+* Fog 4,700 cases / ground 29,952 remain partial; frame control 2,672 passes. All three full
+  reports are byte-identical to pre-fix runs; STYLE retains oracle/mutant/assembly requirements.
+* Full gate rc 0: 152 native invocations / 65 Python tests; 151 unit programs run. R1–R3
+  pass against existing goldens, R4 open. Recorded `d3d8-fpu-165-gate.json`; STATUS refreshed.
+* Unverified: Reset recreation, Windows stage parity, full oracle suite, 3D/audio/native journeys.
+* Next: §6.3 shared Metal 3D transform path; keep R4 open until its frame checks pass.
