@@ -1,9 +1,10 @@
 {
   "change": {
-    "base_commit": "d0c039a1485aa4f983b7c45a8ea1fdc7408f10c8",
-    "evidence": "reference/production-integration-20261016/d3d8-fpu-165-evidence.md",
-    "evidence_sha256": "ae1e38d7fa8ac06d2cca5ff1018e05e107bfec684ac22b4cf85000dbd19fea98",
-    "reason": "ADR-0008: record corrected FPU controls and digest deltas, retain pre-device observations, add Station Square census coverage"
+    "base_commit": "a0044d5d98ba8e2d02c2b82434fa0c49874cac5f",
+    "evidence": "reference/production-integration-20261016/metal-world-source-evidence.md",
+    "evidence_sha256": "f387d7edf668b5def10d63fbedc7f89e444e1e56d341f94f2d439118ae6fcd6d",
+    "mode": "additions-only",
+    "reason": "Add synthetic CPU/GPU and guest draw-capture tests for the shared 3D device slice"
   },
   "files": {
     "Makefile": "30e83c3e62cd872c104ba36eb27df95d912bd90cb71cc43e412f5be744bb5451",
@@ -357,7 +358,7 @@
     "tests/python/test_readability.py": "8090f2eb23f8c958972e071d94a4d77b99a8062953d456a89ccba2abafc78a3d",
     "tests/python/test_symbol_context.py": "e276e801136d0821369682beb43c42c0f460ff137123683d8c1150487eec2690",
     "tests/python/test_symbols.py": "9e9a03a6389d6cd58aa49c63272049754f55ccddb19eeb894b8b92ccce362e0f",
-    "tests/unit/manifest.tsv": "1cbca4fafdfccb98896ec3d4f8ec482d4efb47c1d3e11b3c28034b5955fa36d8",
+    "tests/unit/manifest.tsv": "c065be0ad3b636e1b728fcdda38ce439916e2177ff5cdf3674c300afa61e7f87",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",

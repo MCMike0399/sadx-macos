@@ -142,7 +142,8 @@ void register_hle_d3d8(HleProcess& p){
     // Device-held objects: the back buffer and depth surface, bound textures/streams/indices, lights, materials.
     struct Bound {std::uint32_t back_buffer=0,depth=0,render_target=0,indices=0,base_vertex=0;std::map<std::uint32_t,std::uint32_t> textures;
         std::map<std::uint32_t,std::pair<std::uint32_t,std::uint32_t>> streams;std::map<std::uint32_t,std::vector<std::uint8_t>> lights,clip_planes;std::map<std::uint32_t,std::uint32_t> light_enabled;
-        std::vector<std::uint8_t> material;};
+        std::vector<std::uint8_t> material;
+        std::map<std::uint32_t,std::map<std::uint32_t,std::uint32_t>> texture_stages;};
     auto bound=std::make_shared<Bound>();
     const auto display_mode=[P](HleCall& c,std::uint32_t at){
         P->assume("the D3D8 adapter is the 1920x1080 desktop at 60 Hz in D3DFMT_X8R8G8B8 (the reference GPU and display mode were not captured)");
@@ -167,6 +168,7 @@ void register_hle_d3d8(HleProcess& p){
         b["EndScene"]=[&d3d8](HleCall&)->std::uint32_t{++d3d8.end_scenes;return D3D_OK;};
         b["Clear"]=[P,&d3d8,arg](HleCall& c)->std::uint32_t{++d3d8.clears;d3d8.last_clear_flags=arg(c,3);
             if(arg(c,1)){c.guest.stop("IDirect3DDevice8::Clear of sub-rectangles is not modelled");return 0;}
+            P->frame.events.push_back({false,P->frame.clears.size()});
             P->frame.clears.push_back({arg(c,3),arg(c,4),arg(c,5),arg(c,6)});return D3D_OK;}; // flags, colour, Z (float bits), stencil
         b["Present"]=[P,&d3d8](HleCall& c)->std::uint32_t{++d3d8.presents;P->frame.viewport=d3d8.viewport;P->last_frame=std::move(P->frame);P->frame={};
             if(P->on_present)P->on_present(c.guest);return D3D_OK;};
@@ -174,7 +176,7 @@ void register_hle_d3d8(HleProcess& p){
         b["GetRenderState"]=[&d3d8,arg](HleCall& c)->std::uint32_t{
             const auto i=d3d8.render_states.find(arg(c,1));if(i==d3d8.render_states.end()){c.guest.stop("GetRenderState("+std::to_string(arg(c,1))+") before any SetRenderState: the device's default is not modelled");return 0;}
             c.guest.set_u32(arg(c,2),i->second);return D3D_OK;};
-        b["SetTextureStageState"]=[&d3d8,arg](HleCall& c)->std::uint32_t{if(arg(c,1)==0)d3d8.stage0_states[arg(c,2)]=arg(c,3);++d3d8.stage_calls;return D3D_OK;};
+        b["SetTextureStageState"]=[&d3d8,arg,bound](HleCall& c)->std::uint32_t{bound->texture_stages[arg(c,1)][arg(c,2)]=arg(c,3);if(arg(c,1)==0)d3d8.stage0_states[arg(c,2)]=arg(c,3);++d3d8.stage_calls;return D3D_OK;};
         const auto set_matrix=[&d3d8,arg](HleCall& c)->std::uint32_t{NinjaMatrix m{};c.guest.read(arg(c,2),m.data(),64);d3d8.transforms[arg(c,1)]=m;return D3D_OK;};
         b["SetTransform"]=set_matrix;
         b["MultiplyTransform"]=[P,&d3d8,arg](HleCall& c)->std::uint32_t{
@@ -201,7 +203,16 @@ void register_hle_d3d8(HleProcess& p){
         b["ResourceManagerDiscardBytes"]=[](HleCall&)->std::uint32_t{return D3D_OK;};
         b["SetLight"]=[bound,arg](HleCall& c)->std::uint32_t{std::vector<std::uint8_t> l(104);c.guest.read(arg(c,2),l.data(),104);bound->lights[arg(c,1)]=l;return D3D_OK;};
         b["GetLight"]=[bound,arg](HleCall& c)->std::uint32_t{const auto i=bound->lights.find(arg(c,1));if(i==bound->lights.end())return 0x8876086cU;c.guest.write(arg(c,2),i->second.data(),104);return D3D_OK;};
-        b["LightEnable"]=[bound,arg](HleCall& c)->std::uint32_t{bound->light_enabled[arg(c,1)]=arg(c,2)?1:0;if(!bound->lights.count(arg(c,1)))bound->lights[arg(c,1)]=std::vector<std::uint8_t>(104,0);return D3D_OK;};
+        b["LightEnable"]=[bound,arg](HleCall& c)->std::uint32_t{
+            bound->light_enabled[arg(c,1)]=arg(c,2)?1:0;
+            if(!bound->lights.count(arg(c,1))){
+                // Direct3D's implicit light is white directional, pointing along +Z.
+                std::array<std::uint32_t,26> light{};light[0]=3;
+                light[1]=light[2]=light[3]=light[18]=0x3f800000U;
+                auto& bytes=bound->lights[arg(c,1)];bytes.resize(104);std::memcpy(bytes.data(),light.data(),104);
+            }
+            return D3D_OK;
+        };
         b["GetLightEnable"]=[bound,arg](HleCall& c)->std::uint32_t{const auto i=bound->light_enabled.find(arg(c,1));if(i==bound->light_enabled.end())return 0x8876086cU;c.guest.set_u32(arg(c,2),i->second);return D3D_OK;};
         b["SetMaterial"]=[bound,arg](HleCall& c)->std::uint32_t{bound->material.resize(68);c.guest.read(arg(c,1),bound->material.data(),68);return D3D_OK;};
         b["GetMaterial"]=[bound,arg](HleCall& c)->std::uint32_t{if(bound->material.empty()){c.guest.stop("GetMaterial before SetMaterial: the default material is not modelled");return 0;}c.guest.write(arg(c,1),bound->material.data(),68);return D3D_OK;};
@@ -221,18 +232,101 @@ void register_hle_d3d8(HleProcess& p){
         b["GetPixelShader"]=[arg](HleCall& c)->std::uint32_t{c.guest.set_u32(arg(c,1),0);return D3D_OK;}; // only the fixed-function pipeline is ever set
         b["SetPixelShader"]=[](HleCall& c)->std::uint32_t{if(c.argument(1).value_or(0))c.guest.stop("IDirect3DDevice8::SetPixelShader with a shader is not modelled");return D3D_OK;};
         b["ValidateDevice"]=[arg](HleCall& c)->std::uint32_t{c.guest.set_u32(arg(c,1),1);return D3D_OK;};
-        // Draws are recorded (counts; DrawPrimitiveUP bytes as polygons, the native owner's form).
-        b["DrawPrimitive"]=[&d3d8](HleCall&)->std::uint32_t{++d3d8.render_calls;return D3D_OK;};
-        b["DrawIndexedPrimitive"]=[&d3d8](HleCall&)->std::uint32_t{++d3d8.render_calls;return D3D_OK;};
-        b["DrawPrimitiveUP"]=[P,&d3d8,arg,bound](HleCall& c)->std::uint32_t{
-            const auto type=arg(c,1),count=arg(c,2),stride=arg(c,4);const auto vertices=type==6||type==5?count+2:type==4?count*3:type==3?count+1:type==2?count*2:count;
-            NinjaScreenPolygon poly;poly.primitive_type=type;poly.primitive_count=count;poly.stride=stride;poly.vertex_bytes.resize(static_cast<std::size_t>(vertices)*stride);
-            c.guest.read(arg(c,3),poly.vertex_bytes.data(),poly.vertex_bytes.size());
-            HleProcess::D3D8Draw draw;draw.primitive_type=type;draw.primitive_count=count;draw.fvf=P->vertex_shader;draw.stride=stride;draw.vertices=poly.vertex_bytes;
-            draw.texture=bound->textures.count(0)?bound->textures[0]:0;draw.render_states=d3d8.render_states;draw.stage0_states=d3d8.stage0_states;
+        // Snapshot device state at the draw, not the state left over at Present.
+        const auto snapshot=[P,&d3d8,bound](std::uint32_t type,std::uint32_t count,std::uint32_t stride){
+            HleProcess::D3D8Draw draw;
+            draw.primitive_type=type;draw.primitive_count=count;draw.stride=stride;draw.fvf=P->vertex_shader;
+            draw.texture=bound->textures.count(0)?bound->textures.at(0):0;
+            draw.render_states=d3d8.render_states;draw.stage0_states=d3d8.stage0_states;
+            draw.transforms=d3d8.transforms;draw.viewport=d3d8.viewport;draw.texture_stages=bound->texture_stages;
+            draw.material=bound->material;draw.lights=bound->lights;draw.light_enabled=bound->light_enabled;
+            if(!draw.render_states.count(7)&&P->d3d8_presentation.size()>8)
+                draw.render_states[7]=P->d3d8_presentation[8]?1:0; // D3D initial ZENABLE follows auto depth.
+            return draw;
+        };
+        const auto submit=[P](HleProcess::D3D8Draw draw){
+            P->frame.events.push_back({true,P->frame.draws.size()});
             P->frame.draws.push_back(std::move(draw));
-            d3d8.polygons.push_back(std::move(poly));return D3D_OK;};
-        b["DrawIndexedPrimitiveUP"]=[&d3d8](HleCall&)->std::uint32_t{++d3d8.render_calls;return D3D_OK;};
+        };
+        const auto vertex_count=[](std::uint32_t type,std::uint32_t count)->std::uint64_t{
+            return type==6||type==5?std::uint64_t(count)+2:type==4?std::uint64_t(count)*3:
+                   type==3?std::uint64_t(count)+1:type==2?std::uint64_t(count)*2:count;
+        };
+        const auto read_vertices=[](HleCall& c,HleProcess::D3D8Draw& draw,std::uint32_t address,
+                                    std::uint64_t count,std::uint64_t available){
+            if(!draw.stride||count>0xffffffffULL/draw.stride){draw.unsupported="vertex buffer range";return;}
+            const auto bytes=count*draw.stride;
+            if(bytes>available||std::uint64_t(address)+bytes>0x100000000ULL){draw.unsupported="vertex buffer range";return;}
+            draw.vertices.resize(static_cast<std::size_t>(bytes));
+            if(!c.guest.read(address,draw.vertices.data(),draw.vertices.size()))draw.unsupported="unmapped vertices";
+        };
+        const auto read_indices=[vertex_count](HleCall& c,HleProcess::D3D8Draw& draw,
+                std::uint32_t address,std::uint32_t format,std::uint32_t minimum,
+                std::uint32_t vertices,std::uint64_t available){
+            const unsigned size=format==101?2:format==102?4:0;
+            const auto count=vertex_count(draw.primitive_type,draw.primitive_count);
+            if(!size||count*size>available||count>0xffffffffULL){draw.unsupported="index buffer range/format";return;}
+            for(std::uint64_t index=0;index<count;++index){
+                std::uint32_t value=0;
+                if(!c.guest.read(address+static_cast<std::uint32_t>(index*size),&value,size)){
+                    draw.unsupported="unmapped indices";return;
+                }
+                if(value<minimum||std::uint64_t(value)>=std::uint64_t(minimum)+vertices){
+                    draw.unsupported="index outside declared vertex range";return;
+                }
+                draw.indices.push_back(value-minimum);
+            }
+        };
+        b["DrawPrimitive"]=[&d3d8,arg,bound,field,snapshot,submit,vertex_count,read_vertices](HleCall& c)->std::uint32_t{
+            ++d3d8.render_calls;
+            const auto stream=bound->streams[0];
+            auto draw=snapshot(arg(c,1),arg(c,3),stream.second);
+            const auto offset=std::uint64_t(arg(c,2))*stream.second;
+            const auto size=field(c.guest,stream.first,28);
+            if(!stream.first||offset>size)draw.unsupported="missing vertex stream/range";
+            else read_vertices(c,draw,field(c.guest,stream.first,24)+static_cast<std::uint32_t>(offset),
+                               vertex_count(draw.primitive_type,draw.primitive_count),size-offset);
+            submit(std::move(draw));return D3D_OK;
+        };
+        b["DrawIndexedPrimitive"]=[&d3d8,arg,bound,field,snapshot,submit,read_vertices,read_indices](HleCall& c)->std::uint32_t{
+            ++d3d8.render_calls;
+            const auto stream=bound->streams[0];
+            auto draw=snapshot(arg(c,1),arg(c,5),stream.second);
+            const auto minimum=arg(c,2),vertices=arg(c,3);
+            const auto offset=(std::uint64_t(bound->base_vertex)+minimum)*stream.second;
+            const auto size=field(c.guest,stream.first,28);
+            if(!stream.first||offset>size)draw.unsupported="missing vertex stream/range";
+            else read_vertices(c,draw,field(c.guest,stream.first,24)+static_cast<std::uint32_t>(offset),vertices,size-offset);
+            const auto format=field(c.guest,bound->indices,16);
+            const auto index_offset=std::uint64_t(arg(c,4))*(format==101?2:4);
+            const auto index_size=field(c.guest,bound->indices,28);
+            if(!bound->indices||index_offset>index_size)draw.unsupported="missing index buffer/range";
+            else read_indices(c,draw,field(c.guest,bound->indices,24)+static_cast<std::uint32_t>(index_offset),
+                              format,minimum,vertices,index_size-index_offset);
+            submit(std::move(draw));return D3D_OK;
+        };
+        b["DrawPrimitiveUP"]=[&d3d8,arg,snapshot,submit,vertex_count,read_vertices,bound,release](HleCall& c)->std::uint32_t{
+            auto draw=snapshot(arg(c,1),arg(c,2),arg(c,4));
+            read_vertices(c,draw,arg(c,3),vertex_count(draw.primitive_type,draw.primitive_count),0xffffffffULL);
+            // Preserve the existing legacy numeric stream used by unchanged guest digests.
+            NinjaScreenPolygon poly;poly.primitive_type=draw.primitive_type;
+            poly.primitive_count=draw.primitive_count;poly.stride=draw.stride;poly.vertex_bytes=draw.vertices;
+            submit(std::move(draw));d3d8.polygons.push_back(std::move(poly));
+            release(c.guest,bound->streams[0].first);bound->streams[0]={0,0};
+            return D3D_OK;
+        };
+        b["DrawIndexedPrimitiveUP"]=[&d3d8,arg,snapshot,submit,read_vertices,read_indices,bound,release](HleCall& c)->std::uint32_t{
+            ++d3d8.render_calls;
+            auto draw=snapshot(arg(c,1),arg(c,4),arg(c,8));
+            const auto offset=std::uint64_t(arg(c,2))*draw.stride;
+            if(offset>0xffffffffULL)draw.unsupported="user vertex offset";
+            else read_vertices(c,draw,arg(c,7)+static_cast<std::uint32_t>(offset),arg(c,3),0xffffffffULL);
+            read_indices(c,draw,arg(c,5),arg(c,6),arg(c,2),arg(c,3),0xffffffffULL);
+            submit(std::move(draw));
+            release(c.guest,bound->streams[0].first);bound->streams[0]={0,0};
+            release(c.guest,bound->indices);bound->indices=0;bound->base_vertex=0;
+            return D3D_OK;
+        };
         // Resources.
         b["CreateTexture"]=[P,texture_interface,new_surface,arg](HleCall& c)->std::uint32_t{
             auto width=arg(c,1),height=arg(c,2),levels=arg(c,3);const auto usage=arg(c,4),format=arg(c,5);
