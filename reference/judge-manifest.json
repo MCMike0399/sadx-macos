@@ -1,9 +1,10 @@
 {
   "change": {
-    "base_commit": "6fec6227b7c2195680264b3cab75deaa1e009d72",
-    "evidence": "reference/production-integration-20261016/journeys-164-evidence.md",
-    "evidence_sha256": "465ed1906fe16a7e64cec3ab99e4165d92628a6725de57a7663830ffd1defbe6",
-    "reason": "GOAL 6.1: put offscreen R2/R3 journeys in the gate, support additions-only judge registration, register all unit tests and repair missing reset-probe pages"
+    "base_commit": "35e6d0ad84ffd8805f28253342fd9b52ab80d39c",
+    "evidence": "reference/production-integration-20261016/d3d8-fpu-source-evidence.md",
+    "evidence_sha256": "5e492579ec870161d77f33a228522d83f3d6009fadf85b3577c65a566f39a964",
+    "mode": "additions-only",
+    "reason": "Add guest COM FPU-policy tests alongside the D3D8 platform correction"
   },
   "files": {
     "Makefile": "30e83c3e62cd872c104ba36eb27df95d912bd90cb71cc43e412f5be744bb5451",
@@ -357,7 +358,7 @@
     "tests/python/test_readability.py": "8090f2eb23f8c958972e071d94a4d77b99a8062953d456a89ccba2abafc78a3d",
     "tests/python/test_symbol_context.py": "e276e801136d0821369682beb43c42c0f460ff137123683d8c1150487eec2690",
     "tests/python/test_symbols.py": "9e9a03a6389d6cd58aa49c63272049754f55ccddb19eeb894b8b92ccce362e0f",
-    "tests/unit/manifest.tsv": "19b32e0cedf32e448276a9b5b4b8ac44cbbf4f0b0ee60a02aeb874f2955492a5",
+    "tests/unit/manifest.tsv": "1cbca4fafdfccb98896ec3d4f8ec482d4efb47c1d3e11b3c28034b5955fa36d8",
     "tools/analysis/fp_control_census.cpp": "8d9da215a14210c6977a86e3b342c033415ea117ba0a00bde2bd43c2ade78874",
     "tools/analysis/run_fp_census.py": "280e88135ed284647c31a69ceb0109eea8feed344847f2246e3b6cf8c0333278",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",

@@ -7,6 +7,7 @@
 #include "engine/d3d8_caps.hpp"
 #include <cstring>
 #include <memory>
+#include <unicorn/unicorn.h>
 namespace sadx {
 namespace {
 // (name, argument bytes including `this`) in vtable order.
@@ -58,6 +59,24 @@ std::uint32_t rows_of(std::uint32_t format,std::uint32_t height){
 D3D8CapsBytes device_caps(HleProcess& p){
     p.assume(d3d8_caps_assumption());
     return assumed_d3d8_caps();}
+// [platform:d3d8] Direct3D owns the calling thread's x87 PC/RC unless requested otherwise.
+// Bit 6 is architecturally fixed at one; Unicorn can expose zero after CRT FLDCW.
+// Preserve exception masks, sticky status, stack registers and MXCSR.
+void set_device_fpu(HleProcess& process, X86Guest& guest, std::uint32_t behavior_flags) {
+    constexpr std::uint32_t kFpuPreserve = 0x2;
+    if (behavior_flags & kFpuPreserve)
+        return;
+    const auto control = guest.reg(UC_X86_REG_FPCW);
+    guest.set_reg(UC_X86_REG_FPCW, (control & ~0x0f00U) | 0x0040U);
+    process.assume("D3D8 CreateDevice/Reset without D3DCREATE_FPU_PRESERVE sets the calling "
+                   "guest thread to x87 24-bit precision and round-to-nearest, retaining exception "
+                   "masks and status, x87 stack and MXCSR; reserved CW bit 6 is one. Microsoft "
+                   "https://learn.microsoft.com/en-us/windows/win32/direct3d9/d3dcreate and "
+                   "https://learn.microsoft.com/en-us/windows/win32/dxtecharts/top-issues-for-windows-titles; "
+                   "Windows capture: docs/HANDOFF.md Floating-point observations, main thread CW 0x007f. "
+                   "Reset resource recreation remains unmodelled; stage Windows parity is unverified.");
+}
+
 }
 void register_hle_d3d8(HleProcess& p){
     auto* P=&p;
@@ -135,6 +154,14 @@ void register_hle_d3d8(HleProcess& p){
         b["AddRef"]=com_add_ref().body;b["Release"]=com_release().body;
         b["GetDirect3D"]=[d3d_object,arg](HleCall& c)->std::uint32_t{c.guest.set_u32(arg(c,1),*d3d_object);return D3D_OK;};
         b["GetDisplayMode"]=[display_mode,arg](HleCall& c)->std::uint32_t{display_mode(c,arg(c,1));return D3D_OK;};
+        b["Reset"]=[P,arg](HleCall& c)->std::uint32_t{
+            // HLE-owned device word +8 retains this device's creation flags.
+            const auto flags=c.guest.u32(arg(c,0)+8);
+            if(!flags){c.guest.stop("IDirect3DDevice8::Reset creation flags unavailable");return 0x8876086cU;}
+            set_device_fpu(*P,c.guest,*flags);
+            c.guest.stop("IDirect3DDevice8::Reset is not modelled yet");
+            return 0x8876086cU;
+        };
         b["TestCooperativeLevel"]=[](HleCall&)->std::uint32_t{return D3D_OK;};
         b["BeginScene"]=[&d3d8](HleCall&)->std::uint32_t{++d3d8.begin_scenes;return D3D_OK;};
         b["EndScene"]=[&d3d8](HleCall&)->std::uint32_t{++d3d8.end_scenes;return D3D_OK;};
@@ -268,9 +295,11 @@ void register_hle_d3d8(HleProcess& p){
         b["CheckDeviceMultiSampleType"]=[arg](HleCall& c)->std::uint32_t{return arg(c,5)==0?D3D_OK:0x88760866U;}; // no multisampling
         b["GetAdapterMonitor"]=[](HleCall&)->std::uint32_t{return 0x00010001U;};
         b["CreateDevice"]=[P,device,arg,bound,new_surface](HleCall& c)->std::uint32_t{
+            set_device_fpu(*P,c.guest,arg(c,4));
             std::uint32_t pp[13]={};c.guest.read(arg(c,5),pp,52); // D3DPRESENT_PARAMETERS
             P->d3d8_presentation.assign(pp,pp+13);
             const auto object=device().create(16);if(!object)return 0x8007000eU;
+            c.guest.set_u32(*object+8,arg(c,4)); // HLE metadata, not an original game layout.
             // The implicit back buffer (and the depth surface when EnableAutoDepthStencil): BackBufferWidth/Height/Format, AutoDepthStencilFormat.
             const auto width=pp[0]?pp[0]:640,height=pp[1]?pp[1]:480,format=pp[2]?pp[2]:adapter_format;
             if(const auto s=new_surface(c.guest,width,height,format,1,0))bound->back_buffer=*s;
