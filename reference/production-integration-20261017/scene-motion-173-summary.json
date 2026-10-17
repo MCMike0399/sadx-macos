@@ -1,0 +1,61 @@
+{
+  "scope": "Three scene-position leaf helpers only; full dispatcher/header migration remains required",
+  "source_sha256": {
+    "src/player/player_scene_position_helpers.cpp": "a21a6a34f237a17c0e08744c9f729aa025773ffc5a12c4345c866c2a0b967d07",
+    "src/player/player_scene_position_helpers.hpp": "af9e6699201f84220d9766d4d62dea718fc41a169a8cdccf530ab8d477971701",
+    "src/player/player_scene_position_helpers_internal.hpp": "4e47583c59e3df4884e839796d68c2badaeae8c87204f029d5773b63caf34f46",
+    "src/player/player_scene_position_helpers_native.cpp": "dd7b26edf62d933f9201f8e38975833d518766abb4eeba1fbeb2e7dddac8cfce",
+    "src/guest/player_scene_position_reference.cpp": "803303e34a9d3adc7b96e4be714d6913a22eb3e76e71e14764ba45a965352caa",
+    "src/cpu/fidelity_float.hpp": "b2e0a46df39f8e47413808ad3113899a04b7c2b19ea739abb464045939eb7e21"
+  },
+  "direct_comparison": {
+    "runs": 56532,
+    "controls": 84,
+    "mismatches": 0,
+    "output_sha256": "62789ae649857a1f5fdc56dc0223d141746c74f30daea407169c5e140524a90c",
+    "first_failures": []
+  },
+  "independent_holdout": {
+    "runs": 21504,
+    "controls": 84,
+    "mismatches": 0,
+    "output_sha256": "0f9db3ae6210b5d68a7a01899db3bbc4ee83050314b23c2a25faf0e1eb48231d",
+    "first_failures": []
+  },
+  "review": {
+    "reviewer": "scene_position_review",
+    "approved_scope": "three-helper cluster; dispatcher excluded",
+    "fixed_defects": [
+      "copied registry callback argument; regression failed before fix",
+      "explicit numerator/denominator FPATAN interface"
+    ]
+  },
+  "limits": [
+    "Existing probe publishes no partial state after arithmetic traps; targeted overflow partial-write unit passes against old and new helper source",
+    "New native callback success/alias tests are native contract checks, not Windows captures",
+    "No native scene dispatcher or collision composition claim",
+    "R5/R6 and N1-N5 remain open; no performance improvement claim"
+  ],
+  "oracles": {
+    "player_scene_helpers": {
+      "cases": 8076,
+      "value_mismatches": 0,
+      "flag_mismatches": 6040,
+      "boundary_failures": 0,
+      "verdict": "partial"
+    },
+    "player_scene_position": {
+      "cases": 1632,
+      "value_mismatches": 0,
+      "flag_mismatches": 1344,
+      "boundary_failures": 0,
+      "verdict": "partial"
+    }
+  },
+  "gate": {
+    "exit_status": 0,
+    "native_invocations": 164,
+    "python_tests": 66,
+    "journeys": "R1-R4 pass"
+  }
+}

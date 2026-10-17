@@ -4671,8 +4671,22 @@ The product still needs native boot/title, resources and gameplay recovery.
 
 * Outcome: existing scene/helper probes and unit can link the reference adapter; their
   source identities follow both halves of the pending split. No cases/comparisons changed.
-* Baselines: helpers 8,076 evaluations / zero values / 6,036 FP-flag differences; full scene
+* Baselines: helpers 8,076 evaluations / zero values / 6,040 FP-flag differences; full scene
   1,632 / zero values or boundaries / 1,344 flags (both partial). Old dylibs retained locally.
 * Gate 172 rc 0: 162 native invocations / 66 Python tests; R1–R4 pass; STATUS refreshed.
 * Next: rewrite leaf helpers, then the dispatcher, preserving lazy facts and partial writes.
   This preparation completes no readability module or new native journey. No push.
+
+### 2026-10-17 — GOAL §6.4 scene-motion leaves, first attempt (gate 173)
+
+* Outcome: normal push, moving platforms and floor turns share readable game calculations
+  between plain native owners and lazy reference diagnostics. Full dispatcher/header remain legacy.
+* Helper debt 49 hex / 16 address names / 2 gotos / 27 long / 26 compressed lines -> zero.
+* ExactFloat keeps retained arithmetic, spills, FPATAN/m64/CRT and all 12 control profiles.
+* Old/new: 56,532 development + 21,504 holdout runs identical; 4 deliberate faults caught/restored.
+  Native callbacks preserve live rows, copied handles and temporary pose on failure; review approved.
+* Helpers 8,076 / zero values / 6,040 flags; full scene 1,632 / zero values or boundaries /
+  1,344 flags, unchanged partials. Final report source/library hashes verified against the build.
+* Gate 173 rc 0: 164 native invocations / 66 Python tests; R1–R4 pass; STATUS refreshed.
+* Limits: no new journey/performance/Windows-parity claim; full oracle suite and m1 skipped.
+  Next: migrate the entire scene dispatcher under these judges; this module is not complete. No push.

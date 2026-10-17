@@ -30,7 +30,8 @@ enum class ExactEvent {
     Compare,
     IntegerConversion,
     Logarithm,
-    SquareRoot
+    SquareRoot,
+    ArcTangent
 };
 struct ExactObserver {
     virtual ~ExactObserver() = default;
@@ -135,6 +136,26 @@ class ExactFloat {
         require_same_context(other);
         observe(ExactEvent::Compare);
         return context_->compare_quiet(value_, other.value_);
+    }
+    // NOTSA: the source scalar sqrt compares against m64 zero, reloads the input,
+    // and preserves the sign of a negative argument after its positive square root.
+    static ExactFloat signed_square_root(X87Context &context, float value) {
+        const auto loaded = context.from_float(value);
+        const auto comparison = context.compare_double_memory(loaded, 0.0);
+        const auto reloaded = context.from_float(value);
+        if (comparison == X87Comparison::less) {
+            const auto positive = context.multiply_float_memory(reloaded, -1.0f);
+            return ExactFloat(context, context.sqrt(positive).negated(), nullptr);
+        }
+        return ExactFloat(context, context.sqrt(reloaded), nullptr);
+    }
+    // NOTSA: selected Bochs P5/P6 atan2(numerator, denominator), with numerator ST1
+    // and denominator ST0. Callers explicitly order their two loads before this operation.
+    static ExactFloat arctangent(const ExactFloat &numerator, const ExactFloat &denominator) {
+        numerator.require_same_context(denominator);
+        denominator.observe(ExactEvent::ArcTangent);
+        return denominator.retain(X87Transcendental::fpatan_bochs_p5_p6(
+            *denominator.context_, numerator.value_, denominator.value_));
     }
     // NOTSA: FLDLN2's canonical constant and the selected Bochs FYL2X model.
     ExactFloat natural_log() const {

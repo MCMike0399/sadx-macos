@@ -99,6 +99,15 @@ instruction diagnostics and queue composition. Logical calculation phases observ
 through `cpu/fidelity_float`; game decisions and table loops remain in the engine. The native
 backend builds and runs without guest archives or game files.
 
+The three scene-motion leaves in `player/player_scene_position_helpers` share readable
+calculations between a plain native backend and `guest/player_scene_position_reference`.
+The game code owns normal pushes, platform callback order/displacement and floor turns;
+the reference backend validates fixture facts lazily and reports numeric failure sites.
+The native backend borrows its actor, motion, contact and platform owners directly. It
+needs no guest archive or executable data. The full `player_scene_position` dispatcher
+and its legacy public types still require the same migration; this helper split does
+not establish native scene collision composition.
+
 Archives: `libsadx-core.a` = cpu…runtime (portable, no frameworks), `libsadx-macos.a` =
 platform/mac, `libsadx-guest.a` = guest + hle (+ Unicorn). Programs link what they need.
 

@@ -1,9 +1,10 @@
 {
   "change": {
-    "base_commit": "155c1631b1ec040c7116a65ac68bd80aa6724360",
+    "base_commit": "aa5533745e348a03bdbeb0a224640e630af0f748",
     "evidence": "reference/production-integration-20261017/scene-position-rewrite-evidence.md",
-    "evidence_sha256": "0edb8049509c6532eaa85726ffd3e68b858b08765ed5dc3f9bf8bebce78cbf02",
-    "reason": "Prepare scene-position source identities and reference linkage for the unchanged differential judges"
+    "evidence_sha256": "3958d650c1b10bde16fedc770b687ab546020ec68c5d398559031f7124f2df30",
+    "mode": "additions-only",
+    "reason": "Register native scene-motion and lazy reference diagnostic tests; preserve all existing judges"
   },
   "files": {
     "Makefile": "08ddd3f430fba81fe6946cc68e12e4f05fe7de51c5a99eb9bbd8f452adfe9137",
@@ -219,6 +220,7 @@
     "reference/production-integration-20261016/startup-initial-161-numeric-mutants.json": "9847677196d911b4851feeb4ceb73ec290aae2f8b89fbfd25e2dc406b8770996",
     "reference/production-integration-20261016/view-initial-158-bridge-mutants.json": "aeec9cf7a4f4f577ae034b8704eb63a3847d86035d281c2466cca15dd35c8de1",
     "reference/production-integration-20261016/view-initial-158-numeric-mutants.json": "9641157dd305f26f109982069f9fbc66906c694b9d48690cc50adaa3bfe69fa0",
+    "reference/production-integration-20261017/scene-motion-173-mutants.json": "4b91a49f3e41986ecfde07fd10858d91021e4c24bbaf1e2ede70b30ae8fc6be8",
     "tests/fixtures/input_keyboard_goldens.hpp": "0a9f25e5a0d336a1f4381af39257fdc6f7403f43ca2aef743345284fb1c18fda",
     "tests/fixtures/ninja_sprite_test_fixture.hpp": "1b4fa2a0ac6270d896f9e54c297829bdf3d43c378d195cbe34d0d6e87fd2b24e",
     "tests/fixtures/path_probe_data.hpp": "3f8803b9afa695f6f1ca411fb7b58ae66e60609b2af2df3dd74463c3b9dadda0",
@@ -357,7 +359,7 @@
     "tests/python/test_readability.py": "8090f2eb23f8c958972e071d94a4d77b99a8062953d456a89ccba2abafc78a3d",
     "tests/python/test_symbol_context.py": "e276e801136d0821369682beb43c42c0f460ff137123683d8c1150487eec2690",
     "tests/python/test_symbols.py": "9e9a03a6389d6cd58aa49c63272049754f55ccddb19eeb894b8b92ccce362e0f",
-    "tests/unit/manifest.tsv": "74ef1bbbe5a074219824c0c1e88a14c301d4c2928cfcba1072db43f089db2fa9",
+    "tests/unit/manifest.tsv": "74e1f948869a04c6185e17ae80f1e24f82df3d455c9104358744bff969f9a5ee",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",

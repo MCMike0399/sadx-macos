@@ -1,0 +1,35 @@
+{
+  "source_sha256": "a21a6a34f237a17c0e08744c9f729aa025773ffc5a12c4345c866c2a0b967d07",
+  "mutants": [
+    {
+      "name": "normal push distance",
+      "detected": true,
+      "mismatches": 12356,
+      "runs": 56532
+    },
+    {
+      "name": "floor slow speed clamp",
+      "detected": true,
+      "mismatches": 144,
+      "runs": 56532
+    },
+    {
+      "name": "platform angle wrap",
+      "detected": true,
+      "mismatches": 12261,
+      "runs": 56532
+    },
+    {
+      "name": "successful callback pose restoration",
+      "detected": true,
+      "diagnostic": "restore saved position only after callback completion"
+    }
+  ],
+  "restored": {
+    "runs": 56532,
+    "controls": 84,
+    "mismatches": 0,
+    "output_sha256": "62789ae649857a1f5fdc56dc0223d141746c74f30daea407169c5e140524a90c",
+    "first_failures": []
+  }
+}
