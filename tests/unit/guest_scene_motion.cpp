@@ -1,5 +1,5 @@
 #include "math/ninja_sine_table.hpp"
-#include "player/player_scene_position.hpp"
+#include "guest/player_scene_position_reference.hpp"
 #include "player/player_scene_position_helpers.hpp"
 #include <cstring>
 #include <fstream>

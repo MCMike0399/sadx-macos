@@ -4699,3 +4699,10 @@ The product still needs native boot/title, resources and gameplay recovery.
 * Gate 174 rc 0: 164 native invocations / 66 Python; R1–R4 pass. STATUS refreshed.
 * Next: continue the full scene dispatcher/header migration. Native scene composition, broader
   journeys and performance remain open; full oracle suite/m1 skipped. No push.
+
+### 2026-10-17 — scene dispatcher include preparation (gate 175)
+
+* Existing scene/helper probes and three units now include the reference compatibility header;
+  assertions, fixtures, arithmetic and comparison loops are unchanged.
+* Gate 175 rc 0: 164 native invocations / 66 Python; R1–R4 pass. STATUS refreshed.
+* Next: apply the staged whole dispatcher/header rewrite. No module-completion or journey claim.

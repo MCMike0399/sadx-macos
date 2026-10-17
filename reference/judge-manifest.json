@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "8518ddaee53c1ca88e1db65d0cd4fda24a0b32c1",
-    "evidence": "reference/production-integration-20261017/scene-motion-173-summary.json",
-    "evidence_sha256": "51a5781eedd49a21bdebfa09e07c8b4f43f6d215494da27593f86e4184d86ca5",
-    "reason": "Track unchanged scene-motion partial verdicts and final native/reference source identities after the source commit"
+    "base_commit": "47f5e25ea630d0f29386c75408134731a3bdebde",
+    "evidence": "reference/production-integration-20261017/scene-dispatch-include-evidence.md",
+    "evidence_sha256": "73a0571ee66c9dcf6cfb8f0e4d3e108a60e365fc09293e7d6d39597fa44f2858",
+    "reason": "Keep existing scene-position judges on their fixture types during the native header split; include changes only"
   },
   "files": {
     "Makefile": "08ddd3f430fba81fe6946cc68e12e4f05fe7de51c5a99eb9bbd8f452adfe9137",
@@ -314,8 +314,8 @@
     "tests/probes/native_player_position_probe.cpp": "2f1dd1794f4935afd91cbb7368c1b070a0e11f237d00875bf5ebd19585d95b8e",
     "tests/probes/native_player_reaction_probe.cpp": "84bc18d727e16d3e2981b5f1cba2ca3d4e7caf2c6f36f2e0506d7c1acdea7feb",
     "tests/probes/native_player_rotation_probe.cpp": "6433e3fd16c1537c73a9dcd253d48ca20f625d6bebe128c9b207e93c50d3dd91",
-    "tests/probes/native_player_scene_helpers_probe.cpp": "8e88078a01035777660cb44a695f5010d7a8d1c51752d40fc00c290577d90179",
-    "tests/probes/native_player_scene_position_probe.cpp": "9cff234e71b6e2424fd36e9337ce5a256ee957dc00b93ea3cb9e4f14bd33aba2",
+    "tests/probes/native_player_scene_helpers_probe.cpp": "161a0eb0f67cd9a7cd6e8e5c88e4457eabaf5293d4bb471bad3fcbcc12028b07",
+    "tests/probes/native_player_scene_position_probe.cpp": "3be75f98dab2056c8b7f9ec398391155850bc872aed7906870e7174b8a8f7bb4",
     "tests/probes/native_player_scene_probe.cpp": "65a03499f679229979558b676bd8834592f60c8cb2a20370043cf2f9ef5901b1",
     "tests/probes/native_player_speed_probe.cpp": "8c9c29829d1ca4dc696ebb03197c1c1add4c5509bef6474859a59eb885b9b3d4",
     "tests/probes/native_player_startup_probe.cpp": "3f19fe2625681280cd69a28a9c91cf1fccd4a33c23894adc34f65f87a8db9261",
