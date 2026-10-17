@@ -10,7 +10,7 @@
 #include "loader/executable_image.hpp"
 #include "guest/game_mode_reference.hpp"
 #include "guest/game_mode_leaves_reference.hpp"
-#include "player/player_scene_position.hpp"
+#include "guest/player_scene_position_reference.hpp"
 #include "player/sonic_player.hpp"
 #include "game/sound_manager.hpp"
 #include "game/game_frame_owners.hpp"
