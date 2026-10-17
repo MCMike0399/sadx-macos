@@ -4624,3 +4624,17 @@ The product still needs native boot/title, resources and gameplay recovery.
 * Limits: Windows GPU bit parity, affine Z table fog, broader states, 63 FPS, audio and native
   game journeys remain open. Full standalone oracles and separate make m1 not run.
 * Next: continue §6.3 coverage/performance, alternating with §6.4's unchanged-oracle fog rewrite.
+
+### 2026-10-16 — GOAL §6.4 fog reference judge preparation (track R/V, gate 169)
+
+* Outcome: existing fog/queue judges can follow the required reference-adapter split.
+* Five probe/unit/Metal targets guest-link; fog tests use the forwarding reference header.
+  Oracle identities now cover nested engine fog and reference sources; AST logic unchanged.
+* Fog: all 4,700 × 480 output words identical; 4,681 compared / 19 explicit boundaries,
+  zero value mismatches / 2,410 FP flags differ (partial). Queue: 2,244 cases / 12 profiles,
+  zero value mismatches / 2,160 flag differences (partial). Wrong EXP2 mode catches 8 cases.
+* Independent review found no fixture/comparison changes; engine source bytes unchanged.
+* Gate 169 rc 0: 158 native invocations / 66 Python tests; R1–R4 pass; STATUS refreshed.
+* Limits: readability debt remains; full standalone oracles and separate make m1 not run.
+  Aggregate verdict still rc 2. No new native journey or performance claim; no push.
+* Next: perform the whole fog rewrite with lazy reads, partial stores and exact arithmetic.

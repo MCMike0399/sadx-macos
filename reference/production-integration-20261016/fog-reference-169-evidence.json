@@ -1,0 +1,67 @@
+{
+  "kind": "judge preparation for GOAL 6.4 fog readability migration",
+  "source_prerequisite_commit": "8f12758",
+  "problem": "Fog and queue judges linked only the core archive. Moving diagnostic adapters to guest would make them untestable through the unchanged judge. Queue oracle provenance also omitted fog implementation files already called by its fixtures.",
+  "change": [
+    "Fog and queue probes/tests now link guest before core; Metal composition preserves macOS/framework links and adds guest archive.",
+    "Fog probe and unit test include through guest/ninja_fog_reference.hpp. Its forwarding declarations still resolve the original engine interface.",
+    "Both oracle provenance lists cover engine fog and guest fog reference sources. Queue now records its nested fog implementation."
+  ],
+  "unchanged": "No fixtures, comparisons, EXPLICIT boundaries, case generation, tolerances or game behavior changed. Engine fog and queue source bytes equal HEAD. Forwarding reference source has no behavior.",
+  "oracle_ast_review": {
+    "tools/oracles/verify_original_fog.py": {
+      "identical_except_provenance_assignment": true,
+      "normalized_ast_sha256": "fb762c707fda75dbc56f7d904a948949ced68e9532aaf9853c4e390271471f06"
+    },
+    "tools/oracles/verify_original_ninja_queue_consumer.py": {
+      "identical_except_provenance_assignment": true,
+      "normalized_ast_sha256": "04290e6e1d3a3a233ee06be77308f3c744e7f2bb4a1e75000f7916302adcfea1"
+    }
+  },
+  "fog_raw_comparison": {
+    "cases": 4700,
+    "words_per_case": 480,
+    "all_outputs_identical": true,
+    "output_sha256": "07221eed61ac7d49085abdeda40d0a4b119f442cb541f648e4a51815b1d0238c",
+    "report_fields_identical_except": [
+      "source_files",
+      "native_library_sha256"
+    ],
+    "source_cases_sha256": "0b5ffb7308b40939e51e538d0d82c6514ee1c961aba153dc52711a8a9fd52961",
+    "fp_flag_mismatches": 2410
+  },
+  "fog_result": {
+    "cases": 4700,
+    "compared": 4681,
+    "explicit_past_table": 19,
+    "state_mismatches": 0,
+    "fp_flag_mismatches": 2410,
+    "verdict": "partial"
+  },
+  "queue_result": {
+    "profiles": 12,
+    "cases_per_profile": 187,
+    "cases_total": 2244,
+    "state_mismatches": 0,
+    "fp_flag_mismatches": 2160,
+    "verdict": "partial",
+    "report_fields_identical_except": [
+      "native_library_sha256",
+      "source_files"
+    ]
+  },
+  "deliberate_break": {
+    "change": "EXP2 state 2 -> linear state 3",
+    "exit_status": 2,
+    "state_mismatch_count": 8
+  },
+  "restored": "Wrong EXP2 mode reverted; original fog report fields and counts restored. Queue rerun after restoring archive and relinking probes, same results. All five target compile commands with guest linkage observed in build/fog-reference-169-build.log.",
+  "independent_review": "Fresh reviewer checked both oracle ASTs, include-only changes, five link targets and full preservation of macOS flags/frameworks; no issues found. Warned about force-relink; all five observed relinked.",
+  "aggregate_verdict_exit_status": 2,
+  "limits": [
+    "Preparatory judge change only; engine/ninja_fog.cpp readability debt remains, actual semantic rewrite is next.",
+    "The two oracles retain existing FP partials; aggregate verdict still fails due existing reports.",
+    "Full standalone oracle suite and separate make m1 not rerun.",
+    "No new native journey, performance improvement, Windows GPU parity or executable independence claim."
+  ]
+}

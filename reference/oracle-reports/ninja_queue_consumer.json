@@ -2,6 +2,10 @@
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
  "native_library_sha256": "5cc98a2029b3e516e5ef0f494858d7989b967cd435b26eb0d66ba6c27b280eca",
  "source_files": {
+  "src/engine/ninja_fog.hpp": "fad92d751154601d070ab8cc5872848f9e2f807275ca51086e1200d3f7d30907",
+  "src/engine/ninja_fog.cpp": "07c01f365ca35fdfc5b23db24a7b4929e986381775969df2a6a89d9275cff618",
+  "src/guest/ninja_fog_reference.hpp": "1bb2afef79ce20e269c6c828f8b3277898ed70bc4e4e026c7efbc91805f6025b",
+  "src/guest/ninja_fog_reference.cpp": "da6b6ba29b2acef7760b2e978f1e5a47c849b1a0aa324e31219677119a42a925",
   "src/engine/ninja_queue_consumer.hpp": "81d5037026e1eb4f4685bfe025ff2e0d15973aa808a6e53d6c849a49704dcdf6",
   "src/engine/ninja_queue_consumer.cpp": "cb8faee4629f9d07c20f062458df246b66f5e7d6d55d4fe8d07e5eb035845de5",
   "src/engine/ninja_sprite_display.cpp": "2d7f69d9a5b56101aadbb91508a2355f1151ce992fa4bbfda30749f1abe5a0a3",
@@ -10,7 +14,7 @@
   "src/engine/ninja_render.cpp": "d18ca70f7a617ea3a0b26f31e461ad18d36994279982e968ea0634dc4b7d3db9",
   "src/engine/ninja_texture_selection.cpp": "cee6edafaba3d9f6d18071c9e4b0098b1a41597a0f08877d39567a4d585b85d8",
   "tests/probes/native_ninja_queue_consumer_probe.cpp": "2bbfbdeef98284a4b58d2f86ee731487067962f1924b69b6c2ab6911bc74f711",
-  "tools/oracles/verify_original_ninja_queue_consumer.py": "52d790b80111b14c42f251b00893007bdba079ac07b76bf1dea3e2ecc8638972"
+  "tools/oracles/verify_original_ninja_queue_consumer.py": "e6dcf37016217c28c4f53d2a59dba4e94b85843cdddc9576c664e4ffa8e84539"
  },
  "assets_sha256": "16ceb6aaaa80e666bfab2722ce6679a4737b445aa946b7efd5e18fde3d50f819",
  "original_ranges_sha256": {
@@ -99,8 +103,8 @@
   "Flag difference (strict_flags_match): the native x87 status exception bits after the vertex arithmetic are set where Unicorn 2.1.4 does not raise them. All compared values match; the hardware flags need the Intel capture (M4)."
  ],
  "tracked_summary": {
-  "full_sha256": "b0c0f5d3679a6b7bea8b9f8c4e584d8af7512fcfce76878f5dfeb616be04de22",
-  "full_bytes": 4305,
+  "full_sha256": "bf2fd82c61b22b2a9a91727fe301618cdf789c06d37636f028b68e2cb5b831b4",
+  "full_bytes": 4715,
   "lists_cut_to": 10,
   "cut_lists": {
    "profiles": 12

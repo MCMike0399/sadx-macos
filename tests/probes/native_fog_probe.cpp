@@ -1,4 +1,4 @@
-#include "engine/ninja_fog.hpp"
+#include "guest/ninja_fog_reference.hpp"
 #include "cpu/x87_transcendental.hpp"
 #include <algorithm>
 #include <cstring>
