@@ -1,4 +1,4 @@
-"""40bf40 with its ported leaves running as real source code, over eleven randomized pages.
+"""40bf40 with its ported leaves running as real source code, over fourteen randomized pages.
 
 Real source: 40bf40, 422440, 4224b0 (PrintDebug 401000 skipped after checking
 its constant format), 40cd10, 401410, 785330, 403e60, 4257c0, 4257e0, 424460,
@@ -16,7 +16,7 @@ from pe_image import PEImage
 from extract import SOURCE_SHA256
 from verify_original_math import Original,STACK,STOP,CODE
 sha=lambda b:hashlib.sha256(b).hexdigest()
-PAGES=[0x3abd000,0x892000,0x3ab9000,0x912000,0x3b29000,0x3b11000,0x3c5e000,0x3b0e000,0x3d08000,0x389d000,0x2bcb000,0x3c4e000]
+PAGES=[0x3abd000,0x892000,0x3ab9000,0x912000,0x3b29000,0x3b11000,0x3c5e000,0x3b0e000,0x3d08000,0x389d000,0x2bcb000,0x3c4e000,0x3a7c000,0x38f6000]
 CALLBACK=CODE+0x800
 FIXTURES={0x4208e0:'none',0x40b1a0:'none',0x40b460:'none',0x411af0:'none',0x780fb0:'arg',0x401000:'print',0x42291e:'callback',0x504ed0:'tail',0x411760:'ecx',0x411720:'ecx',0x41010d:'stop'}
 def get(m,a,n):return int.from_bytes(m.mem_read(a,n),'little')
@@ -55,7 +55,7 @@ class Source:
         for e in self.trace[:60]:out+=e
         return b''.join(bytes(m.mem_read(p,4096)) for p in PAGES),out+[0]*(200-len(out))
 def fixtures():
-    rng=random.Random(0x40bf41);cases=[]
+    rng=random.Random(0x40bf41);extra_rng=random.Random(0x40bf42);cases=[]
     for n in range(300):
         pages=bytearray(rng.getrandbits(8) for _ in range(12*4096))
         struct.pack_into('<I',pages,4*4096+0x1b4,rng.choice([0,0x592370,0x401234]))       # 3b291b4
@@ -64,6 +64,9 @@ def fixtures():
         for off in(0xf94,0xfa0):struct.pack_into('<I',pages,off,rng.choice([0,rng.getrandbits(32)]))
         for i in range(12):struct.pack_into('<I',pages,0xf28+4*i,rng.choice([0,0,rng.getrandbits(32)]))   # 3abdf28..3abdf54
         struct.pack_into('<I',pages,8*4096+0x428,rng.choice([0,2,3,0xffffffff]))        # 3d08428
+        # Preserve every existing byte and failure index. Independent RNG adds the
+        # two configuration pages that the native probe always reads at construction.
+        pages.extend(extra_rng.getrandbits(8) for _ in range(2*4096))
         cases.append((bytes(pages),0 if n%4 else rng.randrange(1,30)))
     return cases
 def main():

@@ -9,8 +9,9 @@ files are development outputs, not frozen corpora. New frozen corpora belong und
 `reference/frozen-corpora/`; top-level `reference/*corpus*` files are also covered.
 
 Changed, added and removed inputs fail the check. A manifest refresh records its reason,
-evidence-file hash and base commit. In Git checkouts, refreshing the manifest while any
-`src/` file differs from HEAD is rejected, including staged and untracked source. Source
+evidence-file hash and base commit. In Git checkouts, a full refresh while any
+`src/` file differs from HEAD is rejected, including staged and untracked source. The
+additions-only exception below supports new tests alongside their implementation. Source
 archives still verify the supplied hashes; commit separation requires Git history.
 
 ## A judge step
@@ -52,13 +53,18 @@ the code they introduce. That is not a judge change in the sense above, because 
 already judged other code moved. ADR-0008 lets those additions travel with their code, so a
 step needs one full gate, not two:
 
-* **Target:** `check_judge.py --update --additions-only --reason … --evidence …` records new
-  paths (and the new `Makefile`/`tests/unit/manifest.tsv` lines that register them) while
-  `src/` is dirty. It refuses the refresh if any existing protected file changed or disappeared,
-  other than appended registration lines. GOAL §6 item 1 builds this as a `fix(judge)` step
-  with fixtures for both cases.
-* **Until then:** commit the game source, refresh the manifest, run `make -j10 gate` once,
-  record it, and commit the refresh. Do not run the gate twice.
+* `check_judge.py --update --additions-only --reason … --evidence …` records new
+  protected paths while `src/` is dirty. It compares against the **committed** manifest,
+  refusing changed or removed protected inputs even if the worktree manifest was edited.
+* The only existing-file exceptions are an unchanged prefix followed by new registrations:
+  unique rows in `tests/unit/manifest.tsv` with corresponding test sources, and explicit
+  `build/<name>-test` / `build/native-<name>-probe.dylib` Make rules for sources absent from
+  HEAD. Make recipes must be compiler invocations ending in `-o $@`. Variable changes,
+  existing targets, includes and other Make syntax require a full separate judge step.
+* `make check` independently rechecks these conditions against HEAD for an additions-only
+  refresh mixed with game-source changes. The mutable mode label cannot authorize edits
+  to old protected hashes. Source archives can verify hashes but cannot establish a Git
+  baseline; additions-only updates require Git history.
 * Any edit to an existing tolerance, fixture, expected value, mutant, harness, gate script,
   recorded digest or tracked oracle summary is still a full judge step, as described above.
 

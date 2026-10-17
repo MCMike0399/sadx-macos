@@ -20,9 +20,12 @@ make -j10 gate       # everything a gate requires (tests, probes, Metal tests, l
 make oracle-screen-init          # one Unicorn oracle (needs reference/python venv); `make oracles` = all
 make oracles-verdict             # pass / partial / fail per report in build/oracles/
 make app-smoke       # opens the window for 120 frames (the SEGA logo) and writes build/app-smoke.ppm
-# play the reference app: Enter at frame 450 skips the intro movie (drawn black for now);
-# keyboard and controllers work live. The 3D stages do not draw yet (docs/GOAL.md §3.1 R4).
-./build/sadx-app --guest reference/updated-pc-reference/game reference/windows-system --keys 450:13
+# Enter / pad Start skips the black intro movie; live keyboard and controllers.
+# The 3D stages do not draw yet (docs/GOAL.md §3.1 R4).
+make play
+make play-title             # automatically skip the movie, then play live
+make play-character-select  # automatically navigate the menus using the reference save
+make journeys        # one offscreen run checks SEGA, title and character select; reports open 3D
 ./build/sadx-boot "game/Sonic Adventure DX/sonic.exe" "game/Sonic Adventure DX/mods/sadx-input-mod/sadx-input-mod.dll" 5 --survey
 ```
 

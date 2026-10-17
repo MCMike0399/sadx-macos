@@ -12,12 +12,12 @@ upper ones are missing.
 | Layer | Question it answers | Today | In `make gate`? |
 |---|---|---|---|
 | L0 static checks | Is the code structured as agreed? (layers, owners, provenance, readability ratchet, judge manifest, profile patches, hygiene) | complete | yes (`make check`) |
-| L1 unit tests | Does each module do what its author intended? (148 manifest rows; 8 Python files with 50 tests) | broad; 4 more tests (`metal-sprite`, `metal-sprite-composition`, `metal-texture`, `player-task`) pass by hand but have no manifest row | yes, except those 4 |
-| L2 function oracles | Does a native function equal the original bytes on many inputs? (117 Unicorn oracles: 60 pass, 46 partial, 9 fail, 1 never run: `game_reset_composed`) | broad but synthetic; 54 of the reports in `build/oracles` date from 10-12 | **no** (`make oracles`, ~10 min); only the 11 initial-state data oracles and the 20 override corpora are rebuilt by the gate |
+| L1 unit tests | Does each module do what its author intended? (150 manifest rows; Python checker fixtures) | all 150 unit programs registered, including Metal sprite/composition/texture and player task | yes |
+| L2 function oracles | Does a native function equal the original bytes on many inputs? (116 Unicorn oracles; see STATUS for verdict counts) | broad but synthetic; 54 of the reports in `build/oracles` date from 10-12 | **no** (`make oracles`, ~10 min); only the 11 initial-state data oracles and the 20 override corpora are rebuilt by the gate |
 | L3 mutants and holdouts | Would the oracle notice a realistic porting bug or an overfitted port? | 1–3 hand mutants per module; holdouts for three modules | **no** (`tools/gate/mutate.py`, `tools/analysis/verify_*_holdout.py`, run by hand) |
 | L4 override-equivalence | Does the native function behave the same inside the running game? (21 overrides + 5 HLE bridges, 71,115 corpus comparisons) | bound owners only; by frame 600 the collision, task and D3DX overrides have not been called yet | yes |
 | L5 whole-run digests | Is the running game deterministic and unchanged? (7,228-frame two-boot determinism, first 600 digests with overrides, 900-frame controller parity, title cadence) | intro/title/menu only | yes |
-| L6 journeys | Does the app show the right screens to a player? (`tools/journey/run_journeys.py`) | SEGA → title → character select; 3D world open | app-smoke only; the runner is not wired yet |
+| L6 journeys | Does the app show the right screens to a player? (`tools/gate/run_journeys.py`) | SEGA → title → character select; 3D world open | yes (`make journeys` after app-smoke) |
 | L7 gameplay replays | Does a recorded input reach the same game states? (Emerald Coast, Egg Hornet, speedrun techniques) | **missing** | — |
 | L8 Windows parity | Does our run match the real game on Windows, frame by frame? (traces, screenshots, FPU tables) | **missing** (collector exists in `reference/windows-transfer`) | — |
 | L9 native-only | Do the native journeys and replays pass with no `sonic.exe`, guest or Unicorn present? | frame control only | partly |
@@ -73,11 +73,11 @@ These are the weaknesses the review found, most important first. Each has an add
    * save/load and the quick save/load round trip;
    * audio output: `DirectSoundCreate8` returns `DSERR_NODRIVER`, so the game runs silent;
    * FMV drawing, Chao, bosses, events and cutscenes, EHCF, Skipma.
-10. **The app is barely tested.**
-   * `app-smoke` checks one frame (the SEGA logo).
+10. **App coverage is incomplete.**
+   * `app-smoke` checks one frame (the SEGA logo); offscreen journeys add title and character select.
    * The 3D world is not drawn: untransformed vertices are skipped, and only the journey runner
      notices.
-   * No golden frames, no audio checks and no performance thresholds.
+   * Only local optional golden signatures; no Windows screenshot parity, audio checks or performance thresholds.
 
 ## 3. The complete suite to build
 
@@ -108,24 +108,30 @@ Three tools, from lowest to highest level:
     the game was in mode 5, stage 26, with a player.
   * `sadx_driver.py shell` reads the same commands from stdin.
   * SADX takes no mouse input, so the harness has no clicks.
-* **`tools/journey/run_journeys.py`**: the pass/fail journey checks, described next.
+* **`tools/gate/run_journeys.py`**: the pass/fail journey checks, described next.
 
 Agents check visible claims with these: take a screenshot, read the PNG, and read the state.
 
 ### 3.1 Journeys (L6): what the player sees (GOAL items 1, 3, 7, 8)
 
-`tools/journey/run_journeys.py` drives `sadx-app` with scripted keys and checks the frame. It
+`tools/gate/run_journeys.py` drives `sadx-app` with scripted keys and checks the frame. It
 checks the size, colour statistics and textured draw counts. It requires that no draw is
 skipped (`not drawn`) and that the guest never stops. It also compares the frame with an
 optional local golden signature (`--bless`, kept under `build/journeys/`, never committed).
 Journeys are `required` (a failure is a regression) or `open` (a ladder row not reached yet).
 
-* Wire it into the gate as `make journeys` (GOAL item 1). On 2026-10-16 it took about 6.5
-  minutes: SEGA 4 s, title 26 s, character select 110 s, 3D world 254 s. On a rerun the
-  golden signatures matched exactly (distance 0.0), because the virtual clock makes the
-  frames deterministic.
-* The app must stay visible while it runs: a hidden or covered window pauses the Metal view
-  and the guest. The runner reports a stall after 45 s. GOAL item 1 removes this dependency.
+* `make journeys` runs one `--offscreen --script` route, capturing frames 120, 700, 1,700
+  and 2,000 as PPM and game-state JSON. The full gate runs it after app-smoke, so the two
+  app processes cannot race on their shared save overlay. No visible window is needed for
+  journeys. `make app-smoke` retains the separate windowed R1 check.
+* R3 uses the user's local completed save, `savedata/SonicDX01.snc`, in the pinned reference
+  install. Supply your own completed adventure save in its first slot. The report records
+  save-file hashes; no save or game image is committed. Wrong/missing saves may stop the
+  route at another menu and must be diagnosed from the captured frame/state.
+* `--only title,character-select` limits checkpoints, `--bless` refreshes local golden
+  signatures, and `--game-dir` / `--system-dir` select equivalent local input directories.
+  Thresholds are unchanged from the original windowed runner. Frame properties and a
+  locally blessed signature are not Windows GPU parity.
 * Add one journey per new ladder row:
   * `world-3d` becomes required when the renderer lands (item 3);
   * then `emerald-coast-start`;
@@ -221,11 +227,11 @@ Journeys are `required` (a failure is a regression) or `open` (a ladder row not 
 
 ### 3.7 Quick fixes (fold into GOAL item 1)
 
-* Register the four unregistered tests. They pass by hand.
-* Run `game_reset_composed` once and record its verdict.
-* Rebuild the override corpora when the native code they exercise changes, not only when the
-  oracle script changes.
-* Record each test's wall time in the gate log, so slow tests are visible.
+Implemented in GOAL item 1: all four formerly unregistered unit programs run in the gate;
+`game_reset_composed` has a tracked 300-case verdict; corpus files depend on native probes,
+which depend on the native archives; each unit invocation uses `/usr/bin/time -p` and writes
+its wall time immediately after the result. Python unittest and the journey report also
+record durations. These checks retain their existing tolerances and expected values.
 
 ## 4. Rules for agents
 
@@ -244,9 +250,9 @@ Journeys are `required` (a failure is a regression) or `open` (a ladder row not 
 ## 5. Running the suite
 
 ```sh
-make -j10 gate                              # L0, L1, L4, L5 and app-smoke (about 7 min)
-python3 tools/journey/run_journeys.py       # L6 journeys (about 5 min; opens a window)
-python3 tools/journey/run_journeys.py --list
+make -j10 gate                              # L0, L1, L4, L5, app-smoke and L6 journeys
+make journeys                              # L6 journeys alone, one offscreen route
+python3 tools/gate/run_journeys.py --list
 make -j6 oracles && make oracles-verdict    # L2 (about 10 min)
 make m1                                     # the M1 table
 ```

@@ -95,6 +95,17 @@ build/sadx-metal: src/apps/metal_stage.mm Makefile | build
 # (in the gate; it opens a window, so the gate needs a logged-in GUI session).
 REFERENCE_GAME_DIR ?= reference/updated-pc-reference/game
 WINDOWS_SYSTEM_DIR ?= reference/windows-system
+.PHONY: play play-title play-character-select play-help journeys
+play-help:
+	@echo 'Enter / pad Start: skip the black intro movie and confirm; arrows / left stick: move and select; Esc / pad B: back.'
+play: build/sadx-app play-help
+	./build/sadx-app --guest "$(REFERENCE_GAME_DIR)" "$(WINDOWS_SYSTEM_DIR)"
+play-title: build/sadx-app play-help
+	./build/sadx-app --guest "$(REFERENCE_GAME_DIR)" "$(WINDOWS_SYSTEM_DIR)" --keys 450:13
+play-character-select: build/sadx-app play-help
+	./build/sadx-app --guest "$(REFERENCE_GAME_DIR)" "$(WINDOWS_SYSTEM_DIR)" --keys 450:13,800:13,950:13,1100:13,1250:13,1400:13,1550:13
+journeys: build/sadx-app
+	python3 tools/gate/run_journeys.py --game-dir "$(REFERENCE_GAME_DIR)" --system-dir "$(WINDOWS_SYSTEM_DIR)"
 app-smoke: build/sadx-app
 	./build/sadx-app --guest "$(REFERENCE_GAME_DIR)" "$(WINDOWS_SYSTEM_DIR)" --exit-after 120 --screenshot build/app-smoke.ppm > build/app-smoke.log && test -s build/app-smoke.ppm && python3 tools/gate/check_app_smoke.py build/app-smoke.ppm build/app-smoke.log
 
@@ -195,7 +206,7 @@ include build/oracles.mk
 
 # guest-overrides replays these oracle corpora (each verify script writes its <slug>.cases.bin next to the report).
 OVERRIDE_CORPORA := build/oracles/screen_polygon.cases.bin build/oracles/screen_init.cases.bin build/oracles/collision_shapes.cases.bin build/oracles/controller_init.cases.bin build/oracles/game_startup.cases.bin build/oracles/ninja_queue_lifecycle.cases.bin build/oracles/task_lifecycle.cases.bin build/oracles/task_work.cases.bin build/oracles/ninja_memory.cases.bin build/oracles/fog.cases.bin build/oracles/ninja_render.cases.bin build/oracles/game_frame_control.cases.bin build/oracles/projection_range.cases.bin build/oracles/fov.cases.bin build/oracles/ninja_view.cases.bin build/oracles/d3dx_perspective.cases.bin build/oracles/d3dx_matrix_inverse.cases.bin build/oracles/d3dx_project.cases.bin build/oracles/ninja_queue_color.cases.bin build/oracles/ninja_projected_depth.cases.bin
-build/oracles/%.cases.bin: tools/oracles/verify_original_%.py
+build/oracles/%.cases.bin: tools/oracles/verify_original_%.py build/native-$$(subst _,-,$$*)-probe.dylib
 	$(MAKE) oracle-$(subst _,-,$*)
 # A poisoned reference image proves explicit native code tables do not reread PE bytes.
 build/engine-code-tables-poisoned.exe: $(subst $(game_path_space),\$(game_path_space),$(GAME_EXE)) tools/oracles/verify_original_engine_code_tables.py build/native-engine-code-tables-probe.dylib
@@ -297,6 +308,7 @@ check: native-library-initial-state native-startup-initial-state native-input-mo
 	python3 tools/gate/check_repo_hygiene.py
 # The full gate command recorded by tools/gate/record_gate.py (every program built and run, then the checkers).
 gate: all test probes $(UNIT_MM_TARGETS) check app-smoke
+	$(MAKE) journeys
 status:
 	python3 tools/gate/gen_status.py
 clean:

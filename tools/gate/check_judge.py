@@ -109,6 +109,85 @@ def load_manifest(path):
     return data
 
 
+def committed_manifest(root):
+    result = git(root, 'show', f'HEAD:{MANIFEST}')
+    if result.returncode:
+        raise ValueError('additions-only requires a committed judge manifest')
+    return json.loads(result.stdout)['files']
+
+
+def registration_append(root, path, expected_hash):
+    """Allow only new test/probe registrations after an unchanged committed prefix."""
+    before = git(root, 'show', f'HEAD:{path}')
+    if before.returncode or hashlib.sha256(before.stdout.encode()).hexdigest() != expected_hash:
+        raise ValueError(f'cannot verify committed registration baseline: {path}')
+    text = (root / path).read_text()
+    prefix = before.stdout
+    if not prefix.endswith('\n') or not text.startswith(prefix):
+        raise ValueError(f'additions-only requires unchanged registration prefix: {path}')
+    tail = text[len(prefix):]
+    if path == 'tests/unit/manifest.tsv':
+        names = {line.split('\t')[0] for line in prefix.splitlines() if line and not line.startswith('#')}
+        for line in tail.splitlines():
+            if not line.strip() or line.startswith('#'):
+                continue
+            name = line.split('\t')[0]
+            if not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', name) or name in names:
+                raise ValueError(f'not a new test registration: {name}')
+            source = 'tests/unit/' + name.replace('-', '_')
+            if not any((root / (source + suffix)).is_file() for suffix in ('.cpp', '.mm')):
+                raise ValueError(f'test registration has no source: {name}')
+            names.add(name)
+        return
+    # Make's syntax can override old recipes/variables even with append-only text.
+    # Limit this exception to explicit build rules for newly added test/probe sources.
+    # Other build changes use the ordinary separate judge-change workflow.
+    active = False
+    targets = set()
+    for line in tail.splitlines():
+        if not line.strip() or line.startswith('#'):
+            continue
+        if line.startswith('\t'):
+            if (not active or not line.startswith('\t$(CXX) ') or
+                    not line.endswith(' -o $@') or any(c in line for c in ';|`\\#')):
+                raise ValueError('not an appended test/probe compiler recipe')
+            continue
+        match = re.fullmatch(r'(build/[a-z0-9-]+(?:-test|-probe\.dylib)): ([a-zA-Z0-9_./ -]+)', line)
+        if not match:
+            raise ValueError('not an appended test/probe build rule')
+        target, prerequisites = match.groups()
+        first = prerequisites.split()[0]
+        if target.endswith('-test'):
+            slug = target[len('build/'):-len('-test')].replace('-', '_')
+            sources = {f'tests/unit/{slug}.cpp', f'tests/unit/{slug}.mm'}
+        else:
+            slug = target[len('build/native-'):-len('-probe.dylib')].replace('-', '_')
+            sources = {f'tests/probes/native_{slug}_probe.cpp'} if target.startswith('build/native-') else set()
+        if (first not in sources or not (root / first).is_file() or target in targets or
+                git(root, 'cat-file', '-e', f'HEAD:{first}').returncode == 0):
+            raise ValueError(f'not a build registration for a new source: {target}')
+        if target in prefix:
+            raise ValueError(f'build target already mentioned: {target}')
+        targets.add(target)
+        active = True
+
+
+def addition_errors(root, expected, current):
+    errors = []
+    for path, value in expected.items():
+        if path not in current:
+            errors.append(f'additions-only cannot remove protected input: {path}')
+        elif current[path] != value:
+            if path in ('Makefile', 'tests/unit/manifest.tsv'):
+                try:
+                    registration_append(root, path, value)
+                except ValueError as error:
+                    errors.append(str(error))
+            else:
+                errors.append(f'additions-only cannot change protected input: {path}')
+    return errors
+
+
 def check(root):
     expected = load_manifest(root / MANIFEST)['files']
     current = snapshot(root)
@@ -124,7 +203,13 @@ def check(root):
         committed = git(root, 'show', f'HEAD:{MANIFEST}')
         manifest_changed = committed.returncode != 0 or committed.stdout != (root / MANIFEST).read_text()
         if manifest_changed and game_changes(root):
-            errors.append('manifest update mixed with game-source changes; commit the port and judge separately')
+            data = load_manifest(root / MANIFEST)
+            if data['change'].get('mode') == 'additions-only':
+                # Recheck against HEAD rather than trusting mutable mode metadata or
+                # the worktree manifest. A forged refresh cannot hide an old edit.
+                errors.extend(addition_errors(root, committed_manifest(root), current))
+            else:
+                errors.append('manifest update mixed with game-source changes; commit the port and judge separately')
     return errors, len(current)
 
 
@@ -134,15 +219,25 @@ def main():
     operation = parser.add_mutually_exclusive_group()
     operation.add_argument('--update', action='store_true')
     operation.add_argument('--declare-change', action='store_true')
+    parser.add_argument('--additions-only', action='store_true',
+                        help='register new judge files and appended test/probe registrations with dirty src')
     parser.add_argument('--reason')
     parser.add_argument('--evidence')
     args = parser.parse_args()
     root = args.root.resolve()
     try:
+        if args.additions_only and not args.update:
+            raise ValueError('--additions-only requires --update')
         if args.update or args.declare_change:
-            if game_changes(root):
+            if args.additions_only:
+                errors = addition_errors(root, committed_manifest(root), snapshot(root))
+                if errors:
+                    raise ValueError('; '.join(errors))
+            elif game_changes(root):
                 raise ValueError('judge change mixed with game-source changes; commit separately')
             record = evidence_record(root, args.reason, args.evidence)
+            if args.additions_only:
+                record['mode'] = 'additions-only'
             if args.update:
                 data = dict(schema=1, change=record, files=snapshot(root))
                 path = root / MANIFEST

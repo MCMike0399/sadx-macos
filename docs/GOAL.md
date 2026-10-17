@@ -133,8 +133,8 @@ traces, replays, digests) that native systems are later compared against.
 | Row | Journey | State on 2026-10-16 |
 |---|---|---|
 | R1 | SEGA logo | done (`app-smoke`, 120 frames) |
-| R2 | Title "Press ENTER" (Enter at 450 skips the movie) | works by hand (frame 700, 24 s); no check, no `make play` |
-| R3 | File select → main menu → character select | works by hand (frames 800–1,700); no check |
+| R2 | Title "Press ENTER" (Enter at 450 skips the movie) | checked (`make journeys`, frame 700); open with `make play-title` |
+| R3 | File select → main menu → character select | checked (`make journeys`, frame 1,700); open with `make play-character-select` |
 | R4 | 3D world drawn: Station Square / Emerald Coast with geometry, textures, characters | **blocked by the renderer only.** The game reaches Station Square (mode 5, stage 26) by frame ~1,950, and Sonic moves under stick input (`sadx_driver.py`). But the Metal guest renderer draws only XYZRHW 2D vertices; 3D draws (`FVF 0x142` …) are skipped, and the screen is a solid clear. |
 | R5 | Sonic playable: keyboard/pad moves Sonic through Emerald Coast act 1; a recorded input replay reaches the goal with state assertions (ROADMAP M3 `replay-emerald-coast`) | open; needs R4 and a stage frame-rate measurement |
 | R6 | Sound and the intro movie (CoreAudio for DirectSound; movie drawn or cleanly skipped) | open. The movie is black and ran at ~6 fps in the app. `DirectSoundCreate8` returns `DSERR_NODRIVER`, so the game takes its no-sound paths, which the Windows reference does not. Settle this before trusting traces in M4. |
@@ -180,9 +180,9 @@ per system (F), the independence gate (G) and enhancements (H). See ROADMAP M5/M
 * **One full gate per step, one HANDOFF entry per step.** Edits to *existing* judge files
   (tolerances, fixtures, harnesses, gate scripts, recorded digests) are always a separate
   `fix(judge): …` commit with evidence (`docs/JUDGE.md`). Purely *added* tests and probes
-  should travel with the code they judge. `check_judge.py` cannot do that yet (§6 item 1,
-  last bullet). Until it can: commit the source, refresh the manifest for the added files, run
-  the gate **once**, then commit the refresh.
+  should travel with the code they judge. Use `check_judge.py --update --additions-only`
+  with evidence to register additions while source is dirty (`docs/JUDGE.md`, "Additions").
+  Existing protected edits still require a separate judge commit.
 * **Evidence that is committed is small.** It is the gate record plus a short JSON or Markdown
   summary. A reusable harness goes to `tools/` with a test. One-off harness scripts, constructor
   dumps and "historical comparison" reruns are not committed.
@@ -299,14 +299,14 @@ own declarations.
 Take the first open item. Each item is one or more whole steps (§3.3). The visible items (J)
 and the readability items (R) alternate from item 4 on.
 
-0. **Close the in-flight work (one short step).** Finish the uncommitted input-device
+0. **Close the in-flight work (done, gate 163; draft stashed).** Finish the uncommitted input-device
    initial-state step only if its tests already pass, as part of item 6's batch. Otherwise
    stash it with a note in HANDOFF. Do not start another single-family initialization step.
    As of 2026-10-16 it fails `check_provenance.py`: a new legacy identifier
    `device_at_3d08820` in `src/guest/native_game_reference.cpp`. Its judge files are also
    unmanifested, and its manifest row has no test source. So `make gate` fails until it is
    finished or stashed.
-1. **`make play` and journey checks R2–R3 (J, small).**
+1. **`make play` and journey checks R2–R3 (done, gate 164).**
    * `make play` opens `sadx-app --guest` with the pinned directories so the user can play
      with live keyboard and controllers.
    * The game itself skips the movie on Enter or Start. The launch line says so, because
@@ -489,8 +489,8 @@ and the readability items (R) alternate from item 4 on.
      then `python3 tools/gate/gen_status.py`.
    * If ported code changed, run `make oracle-<slug>`, then `make oracles-verdict`, then
      `python3 tools/gate/track_reports.py <slug>…`.
-   * New tests and probes registered by the step go into the judge manifest. See §3.3 for the
-     interim two-commit, one-gate flow until `--additions-only` exists.
+   * New tests and probes registered by the step go into the judge manifest with
+     `--update --additions-only` (§3.3); existing judge edits remain separate commits.
 6. **Journal and commit.**
    * One HANDOFF entry, at most 15 lines, plain words with spaces between numbers and words.
      Cover: item, outcome (what is visible, or debt removed), verdicts with counts, what was not

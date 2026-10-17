@@ -18,7 +18,8 @@ from pathlib import Path
 
 SOURCE_GLOBS = ("Makefile", "*.mk", "tools/**/*.py", "tools/**/*.tsv", "src/**/*.hpp", "src/**/*.cpp", "src/**/*.mm", "tests/**/*.hpp", "tests/**/*.cpp", "tests/**/*.mm", "tests/**/*.py", "tests/**/*.tsv")
 ARTIFACT_GLOBS = ("build/*.a", "build/*-test", "build/native-*-probe.dylib", "build/sadx-metal")
-PROGRAM_LINE = re.compile(rb"^\./build/([A-Za-z0-9_.-]+)(?:\s|$)")
+PROGRAM_LINE = re.compile(rb"^(?:/usr/bin/time -p )?\./build/([A-Za-z0-9_.-]+)(?:\s|$)")
+JOURNEY_LINE = re.compile(rb"^R([1-6])\s+([a-z0-9-]+)\s+(pass|FAIL|open)(?:\s|$)")
 UNITTEST_LINE = re.compile(rb"^Ran (\d+) tests? in ")
 
 
@@ -43,10 +44,15 @@ def main() -> int:
     log_bytes = args.log.read_bytes()
     programs: list[str] = []
     python_tests: int | None = None
+    journeys = []
     for line in log_bytes.splitlines():
         program = PROGRAM_LINE.match(line)
         if program:
             programs.append("./build/" + program.group(1).decode("ascii"))
+        journey = JOURNEY_LINE.match(line)
+        if journey:
+            journeys.append(dict(row='R' + journey[1].decode(), name=journey[2].decode(),
+                                 verdict=journey[3].decode()))
         tests = UNITTEST_LINE.match(line)
         if tests:
             python_tests = (python_tests or 0) + int(tests.group(1))
@@ -66,6 +72,7 @@ def main() -> int:
         "native_programs": len(programs),
         "python_tests": python_tests,
         "programs": programs,
+        "journeys": journeys,
         "log_sha256": hashlib.sha256(log_bytes).hexdigest(),
         "source_and_artifact_sha256": identities,
         "limits": args.limit,

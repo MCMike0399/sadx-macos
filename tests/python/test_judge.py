@@ -88,6 +88,67 @@ class JudgeTests(unittest.TestCase):
         self.assertIn('mixed with game-source', self.cli('--update', '--reason', 'mixed',
                                                       '--evidence', 'evidence.txt').stdout)
 
+    def additions(self):
+        return self.cli('--update', '--additions-only', '--reason', 'new test',
+                        '--evidence', 'evidence.txt')
+
+    def test_additions_only_accepts_dirty_staged_and_untracked_game_source(self):
+        self.commit_fixture()
+        self.write('src/game/flow.cpp', 'void flow() {}\n')
+        self.write('tests/probes/new_probe.cpp', 'void new_probe();\n')
+        result = self.additions()
+        self.assertEqual(result.returncode, 0, result.stdout)
+        self.assertEqual(check(self.root)[0], [])
+        self.git('add', 'src')
+        self.assertEqual(self.additions().returncode, 0)
+        self.assertEqual(check(self.root)[0], [])
+
+    def test_additions_only_rejects_existing_edits_deletions_and_forged_mode(self):
+        self.commit_fixture()
+        self.write('src/game/flow.cpp', 'void flow() {}\n')
+        for operation in ('edit', 'delete'):
+            with self.subTest(operation=operation):
+                path = self.root / 'tools/oracles/check.py'
+                if operation == 'edit':
+                    path.write_text('changed tolerance\n')
+                else:
+                    path.unlink()
+                self.assertEqual(self.additions().returncode, 1)
+                # Updating hashes and tagging them additions-only must not bypass
+                # the independent check against the committed manifest.
+                data = json.loads((self.root / MANIFEST).read_text())
+                data['files'] = snapshot(self.root)
+                data['change']['mode'] = 'additions-only'
+                self.write(MANIFEST, json.dumps(data))
+                self.assertTrue(check(self.root)[0])
+                path.write_text('pass\n')
+
+    def test_additions_only_registration_prefixes(self):
+        self.commit_fixture()
+        self.write('src/game/flow.cpp', 'void flow() {}\n')
+        self.write('tests/unit/new_test.cpp', 'int main() {}\n')
+        self.write('tests/unit/manifest.tsv', 'fixture\nnew-test\n')
+        self.write('Makefile', 'fixture\nbuild/new-test-test: tests/unit/new_test.cpp\n'
+                   '\t$(CXX) $(CXXFLAGS) $< -o $@\n')
+        self.assertEqual(self.additions().returncode, 0)
+        self.assertEqual(check(self.root)[0], [])
+        for name, text in [('tests/unit/manifest.tsv', 'fixture\nfixture\n'),
+                           ('tests/unit/manifest.tsv', 'changed\nnew-test\n'),
+                           ('Makefile', 'fixture\nrun-unit-tests:; true\n'),
+                           ('Makefile', 'fixture\nCXXFLAGS := -DWEAKENED\n'),
+                           ('Makefile', 'changed\nbuild/new-test-test: tests/unit/new_test.cpp\n')]:
+            with self.subTest(text=text):
+                original = (self.root / name).read_text()
+                self.write(name, text)
+                self.assertEqual(self.additions().returncode, 1)
+                self.write(name, original)
+
+    def test_additions_only_needs_update_git_and_evidence(self):
+        self.assertEqual(self.additions().returncode, 1)
+        self.commit_fixture()
+        self.assertEqual(self.cli('--additions-only').returncode, 1)
+        self.assertEqual(self.cli('--update', '--additions-only').returncode, 1)
+
     def test_invalid_manifest_and_symlink(self):
         self.write(MANIFEST, '{"schema": 1, "files": {"../escape": "no"}}')
         self.assertEqual(self.cli().returncode, 1)

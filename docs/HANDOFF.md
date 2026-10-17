@@ -4547,3 +4547,19 @@ The product still needs native boot/title, resources and gameplay recovery.
 * Unverified: no new journey or native-game behavior; standalone oracles, separate M1 and
   four unregistered tests not run. Existing partial/failing oracle verdicts unchanged.
 * Next: §6.1 `make play`, offscreen R2/R3 checks and additions-only judge registration.
+
+### 2026-10-16 — GOAL §6.1 playable launch and offscreen journeys (track J/V, gate 164)
+
+* Outcome: `make play`, `make play-title` and `make play-character-select` open the reference
+  app with live input and controls printed. R2/R3 are now required gate journeys.
+* `make journeys` captures four checkpoints offscreen; R4 reports 101 skipped 3D frames; images inspected.
+* Added additions-only judge registration with dirty-source/edit/deletion/Make-override fixtures;
+  all 150 unit sources registered, per-unit wall times, and native-probe corpus dependencies.
+* Reset probe's missing pages caused an always-reject compiled body. Judge-only repair:
+  300 cases / 14 pages pass; all 14,745,600 old bytes and failure indices preserved.
+  Evidence: `journeys-164-evidence.md`; game code/digests unchanged; dependency mutant caught.
+* Full gate rc 0: 151 native invocations / 64 Python tests; all 150 unit programs run.
+  R1–R3 golden distances 0; R4 open; final route 149.16 s. Replay/controller/timing and
+  71,115 override comparisons/mutants pass. Recorded `journeys-164-gate.json`; STATUS refreshed.
+* Unverified: 3D, audio, native journeys, physical pads and Windows parity; full oracles not run.
+* Next: §6.2 Direct3D FPU precision, unchanged-oracle evidence, digests and census.

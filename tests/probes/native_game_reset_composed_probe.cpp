@@ -3,16 +3,16 @@
 #include <algorithm>
 #include <cstring>
 #include <vector>
-// Native 40bf40 + ported leaves over the eleven pages of tools/verify_original_game_reset_composed.py.
+// Native 40bf40 + ported leaves over the fourteen pages of tools/oracles/verify_original_game_reset_composed.py.
 namespace {
-constexpr std::uint32_t kPages[12]={0x3abd000,0x892000,0x3ab9000,0x912000,0x3b29000,0x3b11000,0x3c5e000,0x3b0e000,0x3d08000,0x389d000,0x2bcb000,0x3c4e000};
+constexpr std::uint32_t kPages[14]={0x3abd000,0x892000,0x3ab9000,0x912000,0x3b29000,0x3b11000,0x3c5e000,0x3b0e000,0x3d08000,0x389d000,0x2bcb000,0x3c4e000,0x3a7c000,0x38f6000};
 struct Memory {std::vector<std::uint8_t> b;
-    std::uint8_t* at(std::uint32_t a){for(unsigned p=0;p<12;++p)if(a>=kPages[p]&&a<kPages[p]+4096)return b.data()+p*4096+(a-kPages[p]);return nullptr;}
+    std::uint8_t* at(std::uint32_t a){for(unsigned p=0;p<14;++p)if(a>=kPages[p]&&a<kPages[p]+4096)return b.data()+p*4096+(a-kPages[p]);return nullptr;}
     std::uint32_t w(std::uint32_t a){std::uint32_t v;std::memcpy(&v,at(a),4);return v;} std::uint16_t h(std::uint32_t a){std::uint16_t v;std::memcpy(&v,at(a),2);return v;}
     template<class T>void put(std::uint32_t a,const std::optional<T>& v){if(v){T x=*v;std::memcpy(at(a),&x,sizeof x);}}};
 }
 extern "C" int sadx_native_game_reset_composed(const std::uint8_t* pages,std::size_t size,std::uint32_t fail,std::uint8_t* out_pages,std::uint32_t* out,std::size_t capacity){
-    if(size!=12*4096||capacity<200)return 0;Memory m{std::vector<std::uint8_t>(pages,pages+size)};
+    if(size!=14*4096||capacity<200)return 0;Memory m{std::vector<std::uint8_t>(pages,pages+size)};
     std::optional<std::uint32_t> w80=m.w(0x3abdf80),depth=m.w(0x8928c8),qmode=m.w(0x3ab98ac),init=m.w(0x3b0ef2c);std::optional<std::int32_t> t18c=static_cast<std::int32_t>(m.w(0x3b1118c));
     std::array<std::optional<std::uint32_t>,36> rec;for(unsigned i=0;i<36;++i)rec[i]=m.w(0x3b292fc+0x38*i);
     sadx::CrtRandState rng{m.w(0x2bcbdf8)};sadx::GameResetState s{w80,m.h(0x3b29d08),m.w(0x3b290d0),m.w(0x3b0e330),rng};

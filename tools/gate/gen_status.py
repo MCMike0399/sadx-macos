@@ -51,6 +51,13 @@ def main():
         for lim in g.get('limits',[]):out.append(f'* {lim}')
         out.append('')
     else:out.append('No gate recorded yet.\n')
+    if g.get('journeys'):
+        out.append('## Visible journeys (last gate)\n')
+        out.append('| Row | Journey | Result |\n|---|---|---|')
+        for journey in g['journeys']:
+            out.append(f'| {journey["row"]} | {journey["name"]} | {journey["verdict"]} |')
+        out.append('')
+        out.append('R5–R6 and native N1–N5 remain unverified by this gate. See `docs/GOAL.md`.\n')
     out.append('## Verification inventory\n')
     out.append(f'* Unit test programs: {units}\n* Native probes: {probes}\n* Oracles: {len(oracles)} — '
                +', '.join(f'{len(buckets.get(k,[]))} {k}' for k in('pass','partial','fail','missing'))
