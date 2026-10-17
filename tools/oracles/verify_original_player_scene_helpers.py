@@ -47,6 +47,12 @@ def main():
     buffers=[(ctypes.c_uint8*len(data)).from_buffer_copy(data) for data in (constants,parameters,image.read(TABLE_ADDRESS,4100),unit)]
     cases=fixtures();blob=b''.join(struct.pack('<42I',mode,*w) for mode,w in cases);a.output.with_suffix('.cases.bin').write_bytes(blob)
     root=pathlib.Path(__file__).resolve().parents[2];names=('player_scene_position_helpers','player_scene_position','player_coordinates','ninja_matrix','ninja_math','x87_math','x87_transcendental','crt_integer');paths=[f'src/{name}.cpp' for name in names if name!='player_scene_position']+[f'src/{name}.hpp' for name in names if name!='player_scene_position_helpers']+['tests/probes/native_player_scene_helpers_probe.cpp']
+    # Follow the native/reference split without changing cases or comparisons.
+    paths += [str(path.relative_to(root)) for pattern in
+              ('src/player/player_scene_position*', 'src/guest/player_scene_position_reference*')
+              for path in sorted(root.glob(pattern)) if path.is_file()
+              and str(path.relative_to(root)) not in paths]
+    paths += ['src/cpu/fidelity_float.hpp']
     report=dict(source_sha256=image.sha256,library_sha256=sha(a.library.read_bytes()),compiler=lib.sadx_native_player_scene_helpers_compiler().decode(),sources={path:sha((native_source(root,path)).read_bytes()) for path in paths},verifier_sha256=sha(pathlib.Path(__file__).read_bytes()),case_sha256=sha(blob),profiles=[],mismatches=[],limits=['Actual43cb40/444f10/43ca40 instructions without overlays','Platform profiles have observed-null task+28 or observed-null row callback; nonnull callback execution remains separately unavailable','Caller-selected source parameter row, task/contact vectors, fixed matrix stack and masked CWs are synthetic state facts','FPATAN uses explicitly selected Bochs P5/P6 native model; Unicorn uses host-double and incomplete exception semantics','Unnormalized/raw nonfinite fixtures are retained without native value adjustments','Full449500/445d10 positioning is not established by these leaf checks'])
     oracle=HelperOriginal(image,0x27f,unit)
     for cw in (pc|rc|0x7f for pc in (0,0x200,0x300) for rc in (0,0x400,0x800,0xc00)):

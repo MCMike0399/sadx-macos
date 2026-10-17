@@ -4666,3 +4666,13 @@ The product still needs native boot/title, resources and gameplay recovery.
 * Limits: Windows GPU bit parity, zero intervals/noncanonical matrices, broader renderer states,
   audio and native game journeys remain open. Full game oracles/m1 not rerun; no push.
 * Next: measured stage performance or R5 gameplay evidence, alternating with player readability.
+
+### 2026-10-17 — GOAL §6.4 scene-position judge preparation (gate 172)
+
+* Outcome: existing scene/helper probes and unit can link the reference adapter; their
+  source identities follow both halves of the pending split. No cases/comparisons changed.
+* Baselines: helpers 8,076 evaluations / zero values / 6,036 FP-flag differences; full scene
+  1,632 / zero values or boundaries / 1,344 flags (both partial). Old dylibs retained locally.
+* Gate 172 rc 0: 162 native invocations / 66 Python tests; R1–R4 pass; STATUS refreshed.
+* Next: rewrite leaf helpers, then the dispatcher, preserving lazy facts and partial writes.
+  This preparation completes no readability module or new native journey. No push.

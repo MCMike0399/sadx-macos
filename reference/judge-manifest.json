@@ -1,13 +1,12 @@
 {
   "change": {
-    "base_commit": "5e2e14436bb2f5dea7653a0cad4210e399f51db9",
-    "evidence": "reference/production-integration-20261016/table-fog-171-evidence.json",
-    "evidence_sha256": "e8ec3c2098900ee918a3b8a8ac9b817266cdcddb4f50522f8bb325b9b93003d9",
-    "mode": "additions-only",
-    "reason": "Register projection-aware table fog CPU and Metal tests; existing checks unchanged after separate W fixture correction"
+    "base_commit": "155c1631b1ec040c7116a65ac68bd80aa6724360",
+    "evidence": "reference/production-integration-20261017/scene-position-rewrite-evidence.md",
+    "evidence_sha256": "0edb8049509c6532eaa85726ffd3e68b858b08765ed5dc3f9bf8bebce78cbf02",
+    "reason": "Prepare scene-position source identities and reference linkage for the unchanged differential judges"
   },
   "files": {
-    "Makefile": "174ecc946aa9ff1ef0e717be08da305bd496fc38c648f078b882654d75a9a31b",
+    "Makefile": "08ddd3f430fba81fe6946cc68e12e4f05fe7de51c5a99eb9bbd8f452adfe9137",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
     "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
     "reference/frame-control-corpus.tsv": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",
@@ -487,8 +486,8 @@
     "tools/oracles/verify_original_player_reaction.py": "fde58626c2815e8ff39ea978f9e69b655b99d218bc1a2517c88fe00afd5c8eaf",
     "tools/oracles/verify_original_player_rotation.py": "2d1c638102dd64fcf646083f8082c1be5fc793d53ea501619e5cca473d20611d",
     "tools/oracles/verify_original_player_scene.py": "e77ec6e64fedbf25ecf6a74e1ad5464bd1b4079baee2df2b3baa7a2c5a61f86f",
-    "tools/oracles/verify_original_player_scene_helpers.py": "6df264d9d727c214e0416579bedda48a7bb2318c29b1500b37992fb49aebdab2",
-    "tools/oracles/verify_original_player_scene_position.py": "51fdce3dfaf929829fbfbecf49a6b7ce497471733532341405be856305d326f0",
+    "tools/oracles/verify_original_player_scene_helpers.py": "9a3abe1664e610d24f82527689d6a426fce38e7a650f68b1d1366ad6bee1940c",
+    "tools/oracles/verify_original_player_scene_position.py": "2ae61a8f437c898babcaced37b634d75e110d4a456317530406d5a8fe4634dfb",
     "tools/oracles/verify_original_player_speed.py": "a697db4836864f1728b9b6a8b4f0b2f85d10b1ab46e6e8491c86e0e9319661f5",
     "tools/oracles/verify_original_player_startup.py": "54ad16c1dbb488eef85455ec4e15a9100a0e31ff54f59fd3f7a8ccec2bab9d44",
     "tools/oracles/verify_original_projection_angle.py": "6a84c79806366161b119a6246dc96d8a751b99d821b39b4fb1b01d30a88a4113",
