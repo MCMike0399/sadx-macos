@@ -77,6 +77,16 @@ struct PreparedDraw {
     std::vector<std::uint32_t> indices;
     std::string unsupported;
 };
+enum class FogDepthSource : std::uint32_t { Disabled, DeviceZ, EyeW };
+// NOTSA: decoded table-fog device state. Inactive parameters are not evaluated.
+struct TableFog {
+    FogDepthSource depth = FogDepthSource::Disabled;
+    std::uint32_t mode = 0;
+    float start = 0, end = 1, density = 1;
+    std::string unsupported;
+};
+// NOTSA: current projection selects device Z or W even for pretransformed vertices.
+TableFog table_fog(const Draw &);
 // NOTSA: FVF decoding consumes owned API bytes, never a guest address or executable.
 std::string decode_vertices(Draw &draw, std::uint32_t fvf, const std::vector<std::uint8_t> &bytes,
                             std::uint32_t stride);

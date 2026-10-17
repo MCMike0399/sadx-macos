@@ -14,12 +14,12 @@ struct Vertex {
     packed_float2 uv0, uv1;
     float eye_depth, texture_q, fog_factor;
 };
-struct Out {float4 position [[position]];float4 diffuse;float4 specular;float2 uv;float eye_depth;float texture_q;float fog_factor;};
+struct Out {float4 position [[position]];float4 diffuse;float4 specular;float2 uv;float texture_q;float fog_factor;};
 struct Mode {
     uint textured, color_op, alpha_op, color_arg1;
     uint color_arg2, alpha_arg1, alpha_arg2, texcoord;
     uint alpha_test, alpha_func, alpha_ref, specular;
-    uint fog_mode, fog_vertex, pad0, pad1;
+    uint fog_mode, fog_vertex, fog_depth, pad1;
     float4 factor, fog_color;
     float fog_start, fog_end, fog_density, pad2;
 };
@@ -27,7 +27,7 @@ vertex Out device_vertex(uint id [[vertex_id]],constant Vertex* vertices [[buffe
                          constant Mode& mode [[buffer(1)]]) {
     const auto v = vertices[id]; Out o;
     o.position=float4(v.clip); o.diffuse=float4(v.diffuse); o.specular=float4(v.specular);
-    o.uv=float2(v.uv0); o.eye_depth=v.eye_depth; o.texture_q=v.texture_q; o.fog_factor=v.fog_factor;
+    o.uv=float2(v.uv0); o.texture_q=v.texture_q; o.fog_factor=v.fog_factor;
     return o;
 }
 float4 argument(uint kind,float4 tex,float4 diffuse,float4 specular,float4 factor) {
@@ -57,7 +57,8 @@ fragment float4 device_fragment(Out in [[stage_in]],texture2d<float> texture [[t
     if(m.alpha_test&&!compare_alpha(m.alpha_func,round(color.a*255.0f),float(m.alpha_ref)))discard_fragment();
     if(m.specular)color.rgb=clamp(color.rgb+in.specular.rgb,0.0f,1.0f);
     if(m.fog_mode) {
-        float depth=in.eye_depth;
+        // Fragment position contains device Z and interpolated RHW. Reconstruct W here.
+        float depth=m.fog_depth==1?in.position.z:1.0f/in.position.w;
         float fog=m.fog_mode==1?exp(-m.fog_density*depth):m.fog_mode==2?
             exp(-pow(m.fog_density*depth,2.0f)):(m.fog_end-depth)/(m.fog_end-m.fog_start);
         color.rgb=mix(m.fog_color.rgb,color.rgb,clamp(fog,0.0f,1.0f));
@@ -70,7 +71,7 @@ struct Mode {
     std::uint32_t textured, color_op, alpha_op, color_arg1;
     std::uint32_t color_arg2, alpha_arg1, alpha_arg2, texcoord;
     std::uint32_t alpha_test, alpha_func, alpha_ref, specular;
-    std::uint32_t fog_mode, fog_vertex, pad0, pad1;
+    std::uint32_t fog_mode, fog_vertex, fog_depth, pad1;
     float factor[4], fog_color[4];
     float fog_start, fog_end, fog_density, pad2;
 };
@@ -175,11 +176,6 @@ std::string validate(const graphics::Draw &draw) {
         return "texture addressing";
     if (t(16, 1) < 1 || t(16, 1) > 2 || t(17, 1) < 1 || t(17, 1) > 2 || t(18, 0) > 2)
         return "texture filter";
-    if (r(28, 0) && r(35, 0) > 3)
-        return "fog mode";
-    if (r(28, 0) && r(35, 0) && draw.space == graphics::PositionSpace::Object &&
-        (draw.projection[11] != 1 || draw.projection[15] != 0))
-        return "non-W table fog";
     return {};
 }
 } // namespace
@@ -324,6 +320,11 @@ MetalFrameStats MetalDeviceFrameRenderer::encode(const graphics::Frame &frame,
             ++stats.unsupported[problem];
             continue;
         }
+        const auto fog = graphics::table_fog(draw);
+        if (!fog.unsupported.empty()) {
+            ++stats.unsupported[fog.unsupported];
+            continue;
+        }
         auto prepared = graphics::prepare_draw(draw);
         if (!prepared.unsupported.empty()) {
             ++stats.unsupported[prepared.unsupported];
@@ -353,18 +354,15 @@ MetalFrameStats MetalDeviceFrameRenderer::encode(const graphics::Frame &frame,
         mode.alpha_ref = r(24, 0);
         mode.specular = r(29, 0);
         if (r(28, 0)) {
-            mode.fog_mode = r(35, 0);
+            mode.fog_mode = fog.mode;
+            mode.fog_depth = std::uint32_t(fog.depth);
             mode.fog_vertex = !mode.fog_mode;
         }
         color(r(60, 0xffffffffU), mode.factor);
         color(r(34, 0), mode.fog_color);
-        mode.fog_start = float_word(r(36, 0));
-        mode.fog_end = float_word(r(37, 0x3f800000U));
-        mode.fog_density = float_word(r(38, 0x3f800000U));
-        if (mode.fog_mode == 3 && mode.fog_start == mode.fog_end) {
-            ++stats.unsupported["zero fog interval"];
-            continue;
-        }
+        mode.fog_start = fog.start;
+        mode.fog_end = fog.end;
+        mode.fog_density = fog.density;
         id<MTLTexture> texture = nil;
         if (mode.textured) {
             if (draw.texture->format == graphics::TextureFormat::Rgba32Float &&

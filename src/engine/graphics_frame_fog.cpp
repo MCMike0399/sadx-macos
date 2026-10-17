@@ -20,6 +20,38 @@ float parameter(const Draw &draw, std::uint32_t key, float fallback) {
     return value;
 }
 } // namespace
+TableFog table_fog(const Draw &draw) {
+    TableFog result;
+    if (!state(draw, 28) || !state(draw, 35))
+        return result;
+    result.mode = state(draw, 35);
+    if (result.mode > 3) {
+        result.unsupported = "fog mode";
+        return result;
+    }
+    const auto &projection = draw.projection;
+    if (projection[3] == 0 && projection[7] == 0 && projection[11] == 0 && projection[15] == 1)
+        result.depth = FogDepthSource::DeviceZ;
+    else if (projection[3] == 0 && projection[7] == 0 && projection[11] == 1 && projection[15] == 0)
+        result.depth = FogDepthSource::EyeW;
+    else {
+        result.unsupported = "table fog projection";
+        return result;
+    }
+    if (result.mode == 3) {
+        result.start = parameter(draw, 36, 0);
+        result.end = parameter(draw, 37, 1);
+        if (!std::isfinite(result.start) || !std::isfinite(result.end))
+            result.unsupported = "nonfinite table fog interval";
+        else if (result.start == result.end)
+            result.unsupported = "zero fog interval";
+    } else {
+        result.density = parameter(draw, 38, 1);
+        if (!std::isfinite(result.density) || result.density < 0 || result.density > 1)
+            result.unsupported = "table fog density outside [0,1]";
+    }
+    return result;
+}
 std::string vertex_fog(const Draw &draw, const Vertex &vertex, const std::array<float, 4> &eye,
                        float &factor) {
     factor = 1;

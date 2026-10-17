@@ -4653,3 +4653,16 @@ The product still needs native boot/title, resources and gameplay recovery.
   First compile attempt rc 2 fixed one legacy test include/link; assertions stayed unchanged.
 * Limits: full oracle suite/m1 skipped; native game journeys, Windows parity, audio and 63 FPS open.
 * Next: alternate to §6.3 renderer/gameplay progress, then §6.4 player_scene_position. No push.
+
+### 2026-10-17 — GOAL §6.3 table-fog depth coordinates (track J, gate 171)
+
+* Outcome: shared device draws affine Z table fog and reconstructs perspective W per fragment,
+  for object and XYZRHW vertices. All three formulas preserve alpha and table precedence.
+* CPU decoder validates active parameters; unknown projections/invalid intervals remain counted.
+* New CPU/GPU checks cover viewport, unequal RHW, interpolation and failures. Both faults caught.
+  Existing W fixture corrected separately (5e2e144), same expected pixel; other judges unchanged.
+* Gate 171 rc 0: 162 native invocations / 66 Python tests; R1–R4 pass; STATUS refreshed.
+  Station Square image byte-identical; 100 rendered frames measured 13.64 FPS, still below 63.
+* Limits: Windows GPU bit parity, zero intervals/noncanonical matrices, broader renderer states,
+  audio and native game journeys remain open. Full game oracles/m1 not rerun; no push.
+* Next: measured stage performance or R5 gameplay evidence, alternating with player readability.

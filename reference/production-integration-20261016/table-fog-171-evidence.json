@@ -1,0 +1,55 @@
+{
+  "scope": "GOAL 6.3 projection-aware table fog device feature",
+  "judge_fixture_commit": "5e2e144",
+  "contract_sources": [
+    "https://learn.microsoft.com/en-us/windows/win32/direct3d9/pixel-fog",
+    "https://learn.microsoft.com/en-us/windows/win32/direct3d9/projection-transform",
+    "https://learn.microsoft.com/en-us/windows/win32/direct3d9/fog-formulas",
+    "https://developer.apple.com/metal/Metal-Shading-Language-Specification.pdf",
+    "https://github.com/wine-mirror/wine/blob/master/dlls/d3d8/tests/visual.c"
+  ],
+  "implementation": "Owned draw projection fourth column selects affine device-Z or canonical W-friendly eye-W for either FVF. Fragment position supplies viewport-mapped Z and interpolated RHW; reconstruct true W before applying the selected per-pixel fog formula. CPU decoder checks active modes/parameters. Arbitrary noncompliant projections and invalid parameters produce explicit not-drawn counts. Vertex/range fog precedence and opacity preserved. PreparedVertex76-byte and Mode112-byte buffer ABIs retained; unused shader eye-depth varying removed.",
+  "fixture_correction": "Existing linear W GPU fixture now explicitly sets its W-friendly projection, in a separate commit before implementation. Its geometry and expected pixel are unchanged. That corrected fixture passed on original renderer.",
+  "cpu_coverage": "Both vertex spaces; affine/W-friendly columns; noncanonical coefficients; linear/reversed/zero/nonfinite intervals; EXP/EXP2 density; inactive parameter/projection handling; unknown formulas.",
+  "gpu_coverage": "Both vertex spaces; affine Z and W; nonidentity projection and viewport; all three formulas; nonconstant Z and unequal RHW barycentrics; post-interpolation W reconstruction; per-fragment exponential rather than interpolated vertex exponentials; alpha; table precedence; unsupported counts.",
+  "fault_injection": [
+    {
+      "change": "force W for affine",
+      "tests": [
+        {
+          "test": "graphics-table-fog",
+          "exit_status": 1,
+          "failure": "affine projection selects device Z"
+        },
+        {
+          "test": "metal-table-fog",
+          "exit_status": 1,
+          "failure": "affine Z fog, both vertex spaces, preserves opacity"
+        }
+      ]
+    },
+    {
+      "change": "use RHW as W",
+      "tests": [
+        {
+          "test": "metal-table-fog",
+          "exit_status": 1,
+          "failure": "W reconstructed after RHW interpolation; table overrides vertex/range fog"
+        }
+      ]
+    }
+  ],
+  "restored_tests": [
+    "graphics-table-fog",
+    "metal-table-fog",
+    "metal-device-frame",
+    "metal-fog",
+    "graphics-fog"
+  ],
+  "limits": [
+    "Synthetic device-contract proof, not Windows hardware pixel-bit parity.",
+    "Zero fog intervals and noncanonical projection columns remain explicit unsupported states.",
+    "Full recovered-game oracle suite and separate make m1 not required for platform feature and not rerun.",
+    "Broader renderer coverage, 63 FPS, audio, R5-R6 and native whole-game journeys remain open."
+  ]
+}

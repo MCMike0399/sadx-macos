@@ -1,0 +1,69 @@
+{
+  "fixture_commit": "5e2e144",
+  "source_evidence": "../production-integration-20261016/table-fog-171-evidence.json",
+  "cpu_gpu_tests": "pass",
+  "deliberate_breaks": [
+    {
+      "change": "force W for affine",
+      "tests": [
+        {
+          "test": "graphics-table-fog",
+          "exit_status": 1,
+          "failure": "affine projection selects device Z"
+        },
+        {
+          "test": "metal-table-fog",
+          "exit_status": 1,
+          "failure": "affine Z fog, both vertex spaces, preserves opacity"
+        }
+      ]
+    },
+    {
+      "change": "use RHW as W",
+      "tests": [
+        {
+          "test": "metal-table-fog",
+          "exit_status": 1,
+          "failure": "W reconstructed after RHW interpolation; table overrides vertex/range fog"
+        }
+      ]
+    }
+  ],
+  "journeys": [
+    {
+      "row": "R1",
+      "passed": true,
+      "golden_distance": 0.0
+    },
+    {
+      "row": "R2",
+      "passed": true,
+      "golden_distance": 0.0
+    },
+    {
+      "row": "R3",
+      "passed": true,
+      "golden_distance": 5.86
+    },
+    {
+      "row": "R4",
+      "passed": true,
+      "golden_distance": 0.0
+    }
+  ],
+  "journey_seconds": 83.85,
+  "rendered_stage": {
+    "frames": 100,
+    "seconds": 7.330309165990911,
+    "fps": 13.641989408025466,
+    "limit": "Offscreen guest plus shared Metal renderer and boundary screenshot; not windowed or Windows performance. Neutral input, not an Emerald Coast goal replay."
+  },
+  "world_ppm_sha256": "c83172ff0c0cf6bc21ff3cd30e020048a352408391b54d4bc9996a16b6734c4f",
+  "world_unchanged": true,
+  "limits": [
+    "Synthetic device-contract proof, not Windows GPU pixel-bit parity",
+    "Zero intervals and noncanonical projection columns remain explicit unsupported states",
+    "Full standalone recovered-game oracle suite and separate make m1 not rerun",
+    "63 FPS, broader renderer coverage, audio and whole native game remain open"
+  ]
+}

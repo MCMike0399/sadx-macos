@@ -1,9 +1,10 @@
 {
   "change": {
-    "base_commit": "0eefc0b85cbdfa6e7e9b5113dd7cc32bb1de91e7",
-    "evidence": "reference/production-integration-20261016/fog-rewrite-170-verification.json",
-    "evidence_sha256": "95f0bbc34228810cc21d184dc35c028d1f98fdf398e39f4b2960e32a92b1e676",
-    "reason": "Record fog source split and CPU dependencies; fix inherited reference linkage and include-only fog defaults test migration; preserve all assertions"
+    "base_commit": "5e2e14436bb2f5dea7653a0cad4210e399f51db9",
+    "evidence": "reference/production-integration-20261016/table-fog-171-evidence.json",
+    "evidence_sha256": "e8ec3c2098900ee918a3b8a8ac9b817266cdcddb4f50522f8bb325b9b93003d9",
+    "mode": "additions-only",
+    "reason": "Register projection-aware table fog CPU and Metal tests; existing checks unchanged after separate W fixture correction"
   },
   "files": {
     "Makefile": "174ecc946aa9ff1ef0e717be08da305bd496fc38c648f078b882654d75a9a31b",
@@ -357,7 +358,7 @@
     "tests/python/test_readability.py": "8090f2eb23f8c958972e071d94a4d77b99a8062953d456a89ccba2abafc78a3d",
     "tests/python/test_symbol_context.py": "e276e801136d0821369682beb43c42c0f460ff137123683d8c1150487eec2690",
     "tests/python/test_symbols.py": "9e9a03a6389d6cd58aa49c63272049754f55ccddb19eeb894b8b92ccce362e0f",
-    "tests/unit/manifest.tsv": "92b02a580ff9017999eca03d21734836592459d9e351b57f77daceef5b4c7176",
+    "tests/unit/manifest.tsv": "74ef1bbbe5a074219824c0c1e88a14c301d4c2928cfcba1072db43f089db2fa9",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",
