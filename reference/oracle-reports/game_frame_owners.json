@@ -1,6 +1,6 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "d0ca3c9695d951bdf57a7b0578e6a4da1951dd911be1110bc84f884486b8f7de",
+ "native_library_sha256": "5c2d1b63b765ea2d721d2a534a01e3a08d46c10f3146555ac6d28b8f39859e75",
  "source_files": {
   "src/game/game_frame_owners.hpp": "5752b82e87aba68ebab15ecbe58fadf00cb81a1c48daf9d4d979d08aadcf994b",
   "src/game/game_frame_owners.cpp": "69a07c2b39f14534c35543a6e2dcf9aa664e9b3b7345afd4a94ee29076726e6b",
@@ -43,7 +43,7 @@
  "state_traces_match": true,
  "limits": "Per-frame GameLoop owners 40d4d0 (402f00, 77ed00/77ed20, 402ed0 with the real\n7815c0, 40bcf0), 40eab0, 42f990, 40d3c0, 420840 (77ed00/77ed20, 4128f0 with\nthe real 402f40/77ff90) and the key queries 40ef30/40ef20, against original\ninstructions. SetRenderState is a recording COM fixture; 40e2c0 and 780fb0\nare recording fixtures (one can stop the source). The draw-list, effect and\nrelease-walk bodies are native nested owners: the source stops when it reaches\ntheir first body instruction (40d520, 40eac0, 42f9cc, 40d3f5). Compared:\ncompletion, EAX for the key queries, every touched global (FOV words, the\n3d0f9e0 projection scale, counters, list/buffer words, 3b280a8, the 3ab9864\nand 3d0f7f0 colours), the render-state trace and the nested-owner trace.\n",
  "tracked_summary": {
-  "full_sha256": "87337e7426f551633926a95db99e51c360dc862fb14f45c2b598399a912bfe8f",
+  "full_sha256": "67d2683bc49a31dcb2db1220294822b1c8ec01c2d74e5ac95d8c48d28327809c",
   "full_bytes": 3166,
   "lists_cut_to": 10,
   "cut_lists": {}

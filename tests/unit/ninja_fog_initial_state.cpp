@@ -1,5 +1,5 @@
 #include "engine/ninja_fog_initial_state.hpp"
-#include "engine/ninja_fog.hpp"
+#include "guest/ninja_fog_reference.hpp"
 #include <iostream>
 #include <stdexcept>
 

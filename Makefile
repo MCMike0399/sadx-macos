@@ -123,7 +123,7 @@ controllers: all
 # additionally link libsadx-macos and the frameworks; tests/unit/guest_<name>.cpp link the guest + Unicorn.
 .SECONDEXPANSION:
 # Address-shaped boot/mode interpreters are reference adapters.
-REFERENCE_UNIT_TARGETS := build/ninja-fog-test build/ninja-queue-consumer-test build/game-view-test \
+REFERENCE_UNIT_TARGETS := build/ninja-fog-initial-state-test build/game-frame-owners-test build/game-view-initial-state-test build/ninja-fog-test build/ninja-queue-consumer-test build/game-view-test \
  build/game-frame-control-test build/reference-frame-control-test build/game-logic-test build/game-logic-support-test build/game-loop-test build/game-startup-test build/ninja-device-init-test build/ninja-frame-calls-test build/ninja-screen-test build/ninja-queue-lifecycle-test \
  build/game-mode-test build/game-mode-leaves-test build/game-runtime-test \
  build/player-acceleration-ground-test build/player-acceleration-alternate-test \
@@ -170,7 +170,7 @@ build/ninja-queue-consumer-test: tests/fixtures/ninja_sprite_test_fixture.hpp
 build/native-player-path-probe.dylib build/native-player-direction-reset-probe.dylib: tests/fixtures/path_probe_data.hpp
 
 # Native probes: tests/probes/native_<x>_probe.cpp -> build/native-<x>-probe.dylib, called by the Unicorn oracles.
-REFERENCE_PLAYER_PROBES := build/native-fog-probe.dylib build/native-ninja-queue-consumer-probe.dylib build/native-screen-polygon-probe.dylib build/native-ninja-projected-depth-probe.dylib build/native-game-view-probe.dylib  build/native-game-frame-control-probe.dylib build/native-speedrun-limiter-probe.dylib build/native-device-setup-probe.dylib build/native-screen-init-probe.dylib build/native-game-startup-probe.dylib build/native-game-logic-support-probe.dylib build/native-game-logic-probe.dylib build/native-game-loop-probe.dylib build/native-frame-completion-probe.dylib build/native-ninja-frame-calls-probe.dylib build/native-ninja-queue-lifecycle-probe.dylib build/native-ground-acceleration-probe.dylib build/native-alternate-acceleration-probe.dylib build/native-sonic-player-probe.dylib build/native-sonic-action-probe.dylib
+REFERENCE_PLAYER_PROBES := build/native-fov-probe.dylib build/native-ninja-queue-color-probe.dylib build/native-game-frame-owners-probe.dylib build/native-fog-probe.dylib build/native-ninja-queue-consumer-probe.dylib build/native-screen-polygon-probe.dylib build/native-ninja-projected-depth-probe.dylib build/native-game-view-probe.dylib  build/native-game-frame-control-probe.dylib build/native-speedrun-limiter-probe.dylib build/native-device-setup-probe.dylib build/native-screen-init-probe.dylib build/native-game-startup-probe.dylib build/native-game-logic-support-probe.dylib build/native-game-logic-probe.dylib build/native-game-loop-probe.dylib build/native-frame-completion-probe.dylib build/native-ninja-frame-calls-probe.dylib build/native-ninja-queue-lifecycle-probe.dylib build/native-ground-acceleration-probe.dylib build/native-alternate-acceleration-probe.dylib build/native-sonic-player-probe.dylib build/native-sonic-action-probe.dylib
 $(REFERENCE_PLAYER_PROBES): build/native-%-probe.dylib: tests/probes/native_$$(subst -,_,$$*)_probe.cpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) $< build/libsadx-guest.a build/libsadx-core.a -o $@
 

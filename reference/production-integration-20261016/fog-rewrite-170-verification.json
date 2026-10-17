@@ -1,0 +1,260 @@
+{
+  "source_commit": "0eefc0b",
+  "purpose": "Record the unchanged fog rewrite under complete source identities and correct inherited reference linkage.",
+  "source_evidence": "fog-rewrite-170-evidence.json",
+  "verifier_ast": {
+    "tools/oracles/verify_original_fog.py": {
+      "logic_unchanged": true,
+      "normalized_ast_sha256": "fb762c707fda75dbc56f7d904a948949ced68e9532aaf9853c4e390271471f06"
+    },
+    "tools/oracles/verify_original_ninja_queue_consumer.py": {
+      "logic_unchanged": true,
+      "normalized_ast_sha256": "04290e6e1d3a3a233ee06be77308f3c744e7f2bb4a1e75000f7916302adcfea1"
+    }
+  },
+  "fixture_and_comparison_changes": false,
+  "link_fix": "Three probes (FOV, queue color, frame owners) and three units (frame owners, view defaults, fog defaults) pull reference queue/fog adapters. Add them to existing reference archive rules; no tests removed. Full all/probes build and all159 unit program builds pass.",
+  "reports": {
+    "fog": {
+      "native_library_sha256": "7b909432fa715c820d28101df6f07c5df3202f139b807687a7bf47a3209fd976",
+      "cases": 4700,
+      "state_mismatch_count": 0,
+      "fp_flag_mismatches": 2410,
+      "state_trace_tables_match": true
+    },
+    "ninja_queue_consumer": {
+      "native_library_sha256": "f0d6d6bad235a89888de136eebfc89fa2bc9d6b7969f5bdd70cfef57100ec97e",
+      "cases": 187,
+      "profiles": [
+        {
+          "cw": "0x7f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0x47f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0x87f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0xc7f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0x27f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0x67f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0xa7f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0xe7f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0x37f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0x77f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0xb7f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        },
+        {
+          "cw": "0xf7f",
+          "cases": 187,
+          "state_mismatches": 0,
+          "flag_mismatches": 180
+        }
+      ],
+      "state_calls_vertices_boundaries_match": true
+    },
+    "ground_acceleration": {
+      "native_library_sha256": "12a0c1c91a6063ed25946140f07227415cca71ec5c09770e2fa9b9852f38c721",
+      "control_words": [
+        {
+          "cw": "0x7f",
+          "cases": 2496,
+          "value_mismatches": 0,
+          "call_mismatches": 0,
+          "flag_mismatches": 2496,
+          "cw_mismatches": 0,
+          "actual_fast_yaw_cases": 13,
+          "cases_without_controlled_callees": 192
+        },
+        {
+          "cw": "0x47f",
+          "cases": 2496,
+          "value_mismatches": 0,
+          "call_mismatches": 0,
+          "flag_mismatches": 2496,
+          "cw_mismatches": 0,
+          "actual_fast_yaw_cases": 13,
+          "cases_without_controlled_callees": 192
+        },
+        {
+          "cw": "0x87f",
+          "cases": 2496,
+          "value_mismatches": 0,
+          "call_mismatches": 0,
+          "flag_mismatches": 2496,
+          "cw_mismatches": 0,
+          "actual_fast_yaw_cases": 13,
+          "cases_without_controlled_callees": 192
+        },
+        {
+          "cw": "0xc7f",
+          "cases": 2496,
+          "value_mismatches": 0,
+          "call_mismatches": 0,
+          "flag_mismatches": 2496,
+          "cw_mismatches": 0,
+          "actual_fast_yaw_cases": 13,
+          "cases_without_controlled_callees": 192
+        },
+        {
+          "cw": "0x27f",
+          "cases": 2496,
+          "value_mismatches": 0,
+          "call_mismatches": 0,
+          "flag_mismatches": 2496,
+          "cw_mismatches": 0,
+          "actual_fast_yaw_cases": 13,
+          "cases_without_controlled_callees": 192
+        },
+        {
+          "cw": "0x67f",
+          "cases": 2496,
+          "value_mismatches": 0,
+          "call_mismatches": 0,
+          "flag_mismatches": 2496,
+          "cw_mismatches": 0,
+          "actual_fast_yaw_cases": 13,
+          "cases_without_controlled_callees": 192
+        },
+        {
+          "cw": "0xa7f",
+          "cases": 2496,
+          "value_mismatches": 0,
+          "call_mismatches": 0,
+          "flag_mismatches": 2496,
+          "cw_mismatches": 0,
+          "actual_fast_yaw_cases": 13,
+          "cases_without_controlled_callees": 192
+        },
+        {
+          "cw": "0xe7f",
+          "cases": 2496,
+          "value_mismatches": 0,
+          "call_mismatches": 0,
+          "flag_mismatches": 2496,
+          "cw_mismatches": 0,
+          "actual_fast_yaw_cases": 13,
+          "cases_without_controlled_callees": 192
+        },
+        {
+          "cw": "0x37f",
+          "cases": 2496,
+          "value_mismatches": 0,
+          "call_mismatches": 0,
+          "flag_mismatches": 2496,
+          "cw_mismatches": 0,
+          "actual_fast_yaw_cases": 13,
+          "cases_without_controlled_callees": 192
+        },
+        {
+          "cw": "0x77f",
+          "cases": 2496,
+          "value_mismatches": 0,
+          "call_mismatches": 0,
+          "flag_mismatches": 2496,
+          "cw_mismatches": 0,
+          "actual_fast_yaw_cases": 13,
+          "cases_without_controlled_callees": 192
+        },
+        {
+          "cw": "0xb7f",
+          "cases": 2496,
+          "value_mismatches": 0,
+          "call_mismatches": 0,
+          "flag_mismatches": 2496,
+          "cw_mismatches": 0,
+          "actual_fast_yaw_cases": 13,
+          "cases_without_controlled_callees": 192
+        },
+        {
+          "cw": "0xf7f",
+          "cases": 2496,
+          "value_mismatches": 0,
+          "call_mismatches": 0,
+          "flag_mismatches": 2496,
+          "cw_mismatches": 0,
+          "actual_fast_yaw_cases": 13,
+          "cases_without_controlled_callees": 192
+        }
+      ]
+    },
+    "fov": {
+      "native_library_sha256": "a23267d127b79f2b6ba10a4a59dd174b4a73c48c4cdbde0e686f1f03d2ffbc67",
+      "cases": 10260,
+      "mismatch_count": 0,
+      "fp_flag_mismatches": 10160
+    },
+    "ninja_queue_color": {
+      "native_library_sha256": "c03743077f1a3e7e9d4a6f249b926ab1fc9d41d4e107a8d3ce9b2ee66b22c62c",
+      "cases": 4000,
+      "mismatch_count": 0,
+      "fp_flag_mismatches": 1797
+    },
+    "game_frame_owners": {
+      "native_library_sha256": "5c2d1b63b765ea2d721d2a534a01e3a08d46c10f3146555ac6d28b8f39859e75",
+      "cases": 2100,
+      "mismatch_count": 0
+    }
+  },
+  "ground_comparison": "Every report field unchanged except library/header identities; only cpu/fidelity_float.hpp changed in native_sources. Ground verifier source is byte-identical to HEAD.",
+  "review": "Fresh reviewer approved whole source and separately confirmed both metadata-only ASTs and five reference link additions; no remaining issues.",
+  "aggregate_verdict_exit_status": 2,
+  "limits": [
+    "Existing FP partials and other failing oracles remain. No values/fixtures/tolerances changed.",
+    "Full standalone oracle suite and separate make m1 not rerun.",
+    "No native game journey or performance improvement claim."
+  ],
+  "first_gate": {
+    "exit_status": 2,
+    "reason": "Fog defaults unit still included old game header for legacy declarations; no assertions ran or changed.",
+    "fix": "Include guest/ninja_fog_reference.hpp and add unit to reference link targets; all unit programs rebuilt."
+  }
+}

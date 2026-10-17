@@ -4638,3 +4638,18 @@ The product still needs native boot/title, resources and gameplay recovery.
 * Limits: readability debt remains; full standalone oracles and separate make m1 not run.
   Aggregate verdict still rc 2. No new native journey or performance claim; no push.
 * Next: perform the whole fog rewrite with lazy reads, partial stores and exact arithmetic.
+
+### 2026-10-16 — GOAL §6.4 whole fog readability rewrite (track R, gate 170)
+
+* Outcome: fog game code now has plain state, named calculations and typed device commands;
+  source-address diagnostics and optional facts live in the reference adapter, not game logic.
+* Fog implementation/header debt is zero; main file removed 263 hex literals / 68 address names,
+  41 long lines / 68 compressed lines. All 505 owner ranges remain; native fog runs asset-free.
+* All 480 output words match old code in 32,900 masked/unmasked runs. Three mutants caught,
+  same 2/8/8 mismatches. Native 12-control and diagnostic tests pass; independent review approved.
+* Fog: 4,700 cases / 0 values / 2,410 flag differences; queue: 2,244 / 0 / 2,160 (partials).
+  Ground/FOV/color impact oracles unchanged partial; frame owners 2,100 pass.
+* Gate 170 final rc 0: 160 native invocations / 66 Python; R1–R4 pass; STATUS refreshed.
+  First compile attempt rc 2 fixed one legacy test include/link; assertions stayed unchanged.
+* Limits: full oracle suite/m1 skipped; native game journeys, Windows parity, audio and 63 FPS open.
+* Next: alternate to §6.3 renderer/gameplay progress, then §6.4 player_scene_position. No push.

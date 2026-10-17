@@ -124,7 +124,7 @@ def main():
         diff=[i for i in range(480) if i not in(14,15) and got[i]!=e[i]]
         if diff:bad.append(dict(case=n,kind=c[0],input=[hex(x) for x in c[:28]],fields=diff[:12],source=[hex(e[i]) for i in diff[:12]],native=[hex(got[i]) for i in diff[:12]],native_boundary=hex(got[15])))
         if got[14]!=e[14]:flags+=1;fk=f'source{e[14]:#x}:native{got[14]:#x}';flag_kinds[fk]=flag_kinds.get(fk,0)+1
-    names=['src/engine/ninja_fog.hpp','src/engine/ninja_fog.cpp','src/guest/ninja_fog_reference.hpp','src/guest/ninja_fog_reference.cpp','tests/probes/native_fog_probe.cpp','tools/oracles/verify_original_fog.py']
+    names=['src/engine/ninja_fog_internal.hpp', 'src/engine/ninja_fog_native.cpp', 'src/engine/ninja_fog_initial_state.hpp', 'src/engine/ninja_fog_initial_state.cpp', 'src/cpu/fidelity_float.hpp', 'src/cpu/crt_integer.hpp', 'src/cpu/crt_integer.cpp', 'src/cpu/x87_math.hpp', 'src/cpu/x87_math.cpp', 'src/cpu/x87_transcendental.hpp', 'src/cpu/x87_transcendental.cpp','src/engine/ninja_fog.hpp','src/engine/ninja_fog.cpp','src/guest/ninja_fog_reference.hpp','src/guest/ninja_fog_reference.cpp','tests/probes/native_fog_probe.cpp','tools/oracles/verify_original_fog.py']
     blob=b''.join(struct.pack('<416I',*c) for c in cases)
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={x:sha((pathlib.Path(__file__).resolve().parents[2]/x).read_bytes()) for x in names},
         original_ranges_sha256={hex(s):sha(image.read(s,n)) for s,n in((0x794ec0,0x134),(0x7949b0,0x35),(0x7949f0,0x3b4),(0x794db0,0x90),(0x787260,0x385),(0x4119b0,0x68),(0x411a20,0x120))},

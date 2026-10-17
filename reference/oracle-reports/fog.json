@@ -1,13 +1,24 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "53facd0a3fe9669b426d13c780883ab9ffdbe141fb57fc79348a8e4b14372941",
+ "native_library_sha256": "7b909432fa715c820d28101df6f07c5df3202f139b807687a7bf47a3209fd976",
  "source_files": {
-  "src/engine/ninja_fog.hpp": "fad92d751154601d070ab8cc5872848f9e2f807275ca51086e1200d3f7d30907",
-  "src/engine/ninja_fog.cpp": "07c01f365ca35fdfc5b23db24a7b4929e986381775969df2a6a89d9275cff618",
-  "src/guest/ninja_fog_reference.hpp": "1bb2afef79ce20e269c6c828f8b3277898ed70bc4e4e026c7efbc91805f6025b",
-  "src/guest/ninja_fog_reference.cpp": "da6b6ba29b2acef7760b2e978f1e5a47c849b1a0aa324e31219677119a42a925",
+  "src/engine/ninja_fog_internal.hpp": "dc67eb0d2952d71ce1ccbc85226d5469e4988ab5520912b3326b3813ba4626a7",
+  "src/engine/ninja_fog_native.cpp": "43ab38205924321dcac64720ec88ae042fdcc1bd94e96a3ae49820a6e8d378bb",
+  "src/engine/ninja_fog_initial_state.hpp": "a475f1114f191c22a683db3ff3b56198780c639c5f51a51129c9fb32878a8587",
+  "src/engine/ninja_fog_initial_state.cpp": "629e2271c1cd4ffbfce91522c43868e36b8f61c46c51c43c9488e14f62624794",
+  "src/cpu/fidelity_float.hpp": "d403508df341014867b0fb80fe47edf2f2065a7ac062389d37504aa5550ed60e",
+  "src/cpu/crt_integer.hpp": "f88d5d9b73239055150a35d0fe6363f773c7e62f5b2c1ce62eff5eaabe8333a6",
+  "src/cpu/crt_integer.cpp": "18d16777cc02344275575955f7773043ea9c6b48cf0197b725e838d1c5294a92",
+  "src/cpu/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
+  "src/cpu/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8",
+  "src/cpu/x87_transcendental.hpp": "d165b4c0aec64391b80f3fa68e2427ba2f2840fbc45562b87dac2145cad33a72",
+  "src/cpu/x87_transcendental.cpp": "5241f89cff162deec68fa95d19f26e908974be9c78a1bdc18044f2c893abd5ea",
+  "src/engine/ninja_fog.hpp": "9be67bab4fa2455d3b41dbac90c69a27bd20ac9ce05d4050856f0ae3e104768e",
+  "src/engine/ninja_fog.cpp": "cb64705542c8d6b430d09d064a939a0815f97108e2dfab7c5d6cadb067069a9c",
+  "src/guest/ninja_fog_reference.hpp": "f98c4aee3be0ad3aa038014cdbbd0dcdb37561fc4de1888acfe4f9894136f8aa",
+  "src/guest/ninja_fog_reference.cpp": "27a12d7abc6e9b31b431a40ec41695b8ee9c86b60d9c4d3e4683feba22363f6f",
   "tests/probes/native_fog_probe.cpp": "d137c740bab4d8e596b750f8aba61ae21441b9a14586e9fd84211ece13d9ddab",
-  "tools/oracles/verify_original_fog.py": "0b2b73a19384698bb124616035610db4d1bc69639991d681e11136196ce53e5d"
+  "tools/oracles/verify_original_fog.py": "f30be22160a51a66dcca4f58218343e5f3e66dadb7cb77c263b3fcae6c687177"
  },
  "original_ranges_sha256": {
   "0x794ec0": "90bf1be9c97401688095e04022e81e574f3617ed8cfef61bf202e295493a4824",
@@ -72,8 +83,8 @@
  "state_trace_tables_match": true,
  "limits": "Ninja fog owners against original instructions: device fog init 794ec0 (with\n795930, CRT pow 6447a0 on both its x87 and SSE2 paths, 794db0, 7949f0), fog\ncolour 7949b0, njGenerateFogTable3 787260 (CRT frexp 7b5eef, _ftol2 644340,\n794db0, 7949f0), fog-table edges 794e40 (7949f0) and the switches 411af0/411b40\nwith 4119b0, 411a20, 787220/787230 and 794950/794980.\n\nThe whole PE image (including .data and its zero tail) is mapped; the D3D8\ndevice's SetRenderState is a fixture (recorded site, state, value) and one\ncall can fail. Compared: completion, every fog global, the three 128-entry\ntables, the 411af0 cache/flag words and the render trace; x87 status flags are\nreported separately. FYL2X at 794afc runs the Bochs model, as in the production guest FPU shims.\nNative explicit boundaries (frexp of Inf/NaN 78728e, 787260 reference past the table 78753a) are counted,\nnot compared: the source continues past them.\n",
  "tracked_summary": {
-  "full_sha256": "03d41a46e0a892a057dbd3d204f20cdfc1d8c29eed93e1c6f196f68112349153",
-  "full_bytes": 3982,
+  "full_sha256": "b8deb0dfd179462dfd17818602824663c8356bfd4d6283acca3d17ad0878e4b9",
+  "full_bytes": 5108,
   "lists_cut_to": 10,
   "cut_lists": {}
  }
