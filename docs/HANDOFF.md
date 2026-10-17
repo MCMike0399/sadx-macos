@@ -4611,3 +4611,16 @@ The product still needs native boot/title, resources and gameplay recovery.
 * Limits: this fixes synchronization overhead, not all latency; renderer state coverage,
   Windows/physical-pad parity, audio, full oracle suite and native game journeys remain open.
 * Next: continue measured performance/renderer coverage, alternating with §6.4 fog readability.
+
+### 2026-10-16 — GOAL §6.3 shared vertex fog (track J, gate 168)
+
+* Outcome: the shared device now draws vertex-fog states previously rejected by the renderer.
+* Linear, exponential, squared-exponential and range fog use camera-space vertex distances;
+  XYZRHW uses supplied factors. Table fog wins; specular input and diffuse alpha stay separate.
+* New CPU and Metal readbacks cover formulas, range, interpolation, supplied/absent factors,
+  invalid parameters and precedence. Disabled generation and fragment-formula mutations fail.
+* Gate 168 rc 0: 158 native invocations / 66 Python tests; R1–R4 pass; STATUS refreshed.
+  Station Square golden distance 0 and pixel hash unchanged; 100 rendered frames: 14.07 FPS.
+* Limits: Windows GPU bit parity, affine Z table fog, broader states, 63 FPS, audio and native
+  game journeys remain open. Full standalone oracles and separate make m1 not run.
+* Next: continue §6.3 coverage/performance, alternating with §6.4's unchanged-oracle fog rewrite.

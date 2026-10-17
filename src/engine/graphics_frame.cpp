@@ -71,10 +71,11 @@ std::string texture_coordinates(const Draw &draw, const Vertex &vertex,
 std::string prepare_vertices(const Draw &draw, PreparedDraw &result, bool valid_normals) {
     const auto &viewport = draw.viewport;
     for (const auto &vertex : draw.vertices) {
-        PreparedVertex output{vertex.position, vertex.diffuse, vertex.specular, vertex.uv, 0, 1};
+        PreparedVertex output{vertex.position, vertex.diffuse, vertex.specular, vertex.uv, 0, 1, 1};
+        std::array<float, 4> eye{};
         if (draw.space == PositionSpace::Object) {
             const auto world = transform(vertex.position, draw.world);
-            const auto eye = transform(world, draw.view);
+            eye = transform(world, draw.view);
             output.eye_depth = eye[2];
             if (const auto problem =
                     valid_normals ? light_vertex(draw, vertex, eye, output) : std::string{};
@@ -114,6 +115,8 @@ std::string prepare_vertices(const Draw &draw, PreparedDraw &result, bool valid_
                     (viewport.far_depth - viewport.near_depth) * clip_w,
                 clip_w};
         }
+        if (auto problem = vertex_fog(draw, vertex, eye, output.fog_factor); !problem.empty())
+            return problem;
         for (const auto value : output.clip) {
             if (!std::isfinite(value)) {
                 return "nonfinite clip position";

@@ -12,9 +12,9 @@ using namespace metal;
 struct Vertex {
     packed_float4 clip, diffuse, specular;
     packed_float2 uv0, uv1;
-    float eye_depth, texture_q;
+    float eye_depth, texture_q, fog_factor;
 };
-struct Out {float4 position [[position]];float4 diffuse;float4 specular;float2 uv;float eye_depth;float texture_q;};
+struct Out {float4 position [[position]];float4 diffuse;float4 specular;float2 uv;float eye_depth;float texture_q;float fog_factor;};
 struct Mode {
     uint textured, color_op, alpha_op, color_arg1;
     uint color_arg2, alpha_arg1, alpha_arg2, texcoord;
@@ -27,7 +27,7 @@ vertex Out device_vertex(uint id [[vertex_id]],constant Vertex* vertices [[buffe
                          constant Mode& mode [[buffer(1)]]) {
     const auto v = vertices[id]; Out o;
     o.position=float4(v.clip); o.diffuse=float4(v.diffuse); o.specular=float4(v.specular);
-    o.uv=float2(v.uv0); o.eye_depth=v.eye_depth; o.texture_q=v.texture_q;
+    o.uv=float2(v.uv0); o.eye_depth=v.eye_depth; o.texture_q=v.texture_q; o.fog_factor=v.fog_factor;
     return o;
 }
 float4 argument(uint kind,float4 tex,float4 diffuse,float4 specular,float4 factor) {
@@ -61,11 +61,11 @@ fragment float4 device_fragment(Out in [[stage_in]],texture2d<float> texture [[t
         float fog=m.fog_mode==1?exp(-m.fog_density*depth):m.fog_mode==2?
             exp(-pow(m.fog_density*depth,2.0f)):(m.fog_end-depth)/(m.fog_end-m.fog_start);
         color.rgb=mix(m.fog_color.rgb,color.rgb,clamp(fog,0.0f,1.0f));
-    } else if(m.fog_vertex)color.rgb=mix(m.fog_color.rgb,color.rgb,in.specular.a);
+    } else if(m.fog_vertex)color.rgb=mix(m.fog_color.rgb,color.rgb,in.fog_factor);
     return color;
 }
 )METAL";
-static_assert(sizeof(graphics::PreparedVertex) == 72, "Metal vertex ABI");
+static_assert(sizeof(graphics::PreparedVertex) == 76, "Metal vertex ABI");
 struct Mode {
     std::uint32_t textured, color_op, alpha_op, color_arg1;
     std::uint32_t color_arg2, alpha_arg1, alpha_arg2, texcoord;
@@ -137,7 +137,7 @@ std::string validate(const graphics::Draw &draw) {
     for (auto key : {145U, 146U, 147U, 148U})
         if (r(key, key == 145 ? 1 : key == 146 ? 2 : 0) > 2)
             return "material color source";
-    for (auto key : {26U, 48U, 52U, 128U, 151U, 152U})
+    for (auto key : {26U, 52U, 128U, 151U, 152U})
         if (r(key, 0))
             return "render state " + std::to_string(key);
     if (r(9, 2) != 2)
@@ -175,10 +175,8 @@ std::string validate(const graphics::Draw &draw) {
         return "texture addressing";
     if (t(16, 1) < 1 || t(16, 1) > 2 || t(17, 1) < 1 || t(17, 1) > 2 || t(18, 0) > 2)
         return "texture filter";
-    if (r(28, 0) && (r(35, 0) > 3 || r(140, 0) > 3))
+    if (r(28, 0) && r(35, 0) > 3)
         return "fog mode";
-    if (r(28, 0) && !r(35, 0) && r(140, 0))
-        return "vertex fog";
     if (r(28, 0) && r(35, 0) && draw.space == graphics::PositionSpace::Object &&
         (draw.projection[11] != 1 || draw.projection[15] != 0))
         return "non-W table fog";
@@ -355,7 +353,7 @@ MetalFrameStats MetalDeviceFrameRenderer::encode(const graphics::Frame &frame,
         mode.alpha_ref = r(24, 0);
         mode.specular = r(29, 0);
         if (r(28, 0)) {
-            mode.fog_mode = r(35, 0) ? r(35, 0) : r(140, 0);
+            mode.fog_mode = r(35, 0);
             mode.fog_vertex = !mode.fog_mode;
         }
         color(r(60, 0xffffffffU), mode.factor);

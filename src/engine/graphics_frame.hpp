@@ -70,7 +70,7 @@ struct PreparedVertex {
     std::array<float, 4> clip;
     std::array<float, 4> diffuse, specular;
     std::array<std::array<float, 2>, 2> uv;
-    float eye_depth = 0, texture_q = 1;
+    float eye_depth = 0, texture_q = 1, fog_factor = 1;
 };
 struct PreparedDraw {
     std::vector<PreparedVertex> vertices;

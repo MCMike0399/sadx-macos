@@ -1,0 +1,51 @@
+{
+  "base_commit": "bdfaf4a",
+  "cpu_and_gpu_tests": "pass",
+  "fault_injection": {
+    "disabled_vertex_generation": "CPU and GPU rc 1",
+    "fragment_formula_instead_of_vertex_factor": "GPU rc 1",
+    "restored_tests": "pass"
+  },
+  "journeys": [
+    {
+      "row": "R1",
+      "name": "sega-logo",
+      "passed": true,
+      "golden_distance": 0.0
+    },
+    {
+      "row": "R2",
+      "name": "title",
+      "passed": true,
+      "golden_distance": 0.0
+    },
+    {
+      "row": "R3",
+      "name": "character-select",
+      "passed": true,
+      "golden_distance": 5.86
+    },
+    {
+      "row": "R4",
+      "name": "world-3d",
+      "passed": true,
+      "golden_distance": 0.0
+    }
+  ],
+  "journey_seconds": 80.87,
+  "rendered_stage": {
+    "frames": 100,
+    "seconds": 7.105821667006239,
+    "fps": 14.07296786863089,
+    "limit": "Offscreen guest plus shared Metal renderer and boundary screenshot; not windowed or Windows performance. Neutral input, not an Emerald Coast goal replay."
+  },
+  "world_ppm_sha256": "c83172ff0c0cf6bc21ff3cd30e020048a352408391b54d4bc9996a16b6734c4f",
+  "world_pixel_payload_sha256": "33e7659ad2d5bcd6677b9cbe1f87ce6c1afe1777ac0f62a778b6f60e1935c488",
+  "world_ppm_unchanged_from_gate_167": true,
+  "limits": [
+    "Device contract tests, not Windows GPU bit parity",
+    "Affine Z table fog and arbitrary projections remain open",
+    "Full standalone oracle suite and separate make m1 not run",
+    "63 FPS, audio, broader renderer coverage and native game journeys remain open"
+  ]
+}

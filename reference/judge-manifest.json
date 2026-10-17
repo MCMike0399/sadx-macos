@@ -1,10 +1,10 @@
 {
   "change": {
-    "base_commit": "e101efc3a845c87ae9cbc68a944ef0302b5fc2d4",
-    "evidence": "reference/production-integration-20261016/task-sync-167-evidence.md",
-    "evidence_sha256": "9d13a8abe94736cbd686c12f7a1994d367d6fb3f27172916fd8ed8ab6bac4e3c",
+    "base_commit": "bdfaf4a3aae2c590f611cbba4fa42022b9f27e76",
+    "evidence": "reference/production-integration-20261016/fog-168-evidence.md",
+    "evidence_sha256": "4397606f6ffd4b3392e5553d57433333dbf9a60acb45576a0df0986c9fc58f46",
     "mode": "additions-only",
-    "reason": "Register callback-boundary task graph synchronization efficiency regression with preserved byte/mutation checks"
+    "reason": "Register CPU and Metal vertex fog tests; existing judge inputs unchanged"
   },
   "files": {
     "Makefile": "cee34e9b75f9bc5cd828c8f325b8cdb8c65090872a6831a48ad82b3afb88437f",
@@ -358,7 +358,7 @@
     "tests/python/test_readability.py": "8090f2eb23f8c958972e071d94a4d77b99a8062953d456a89ccba2abafc78a3d",
     "tests/python/test_symbol_context.py": "e276e801136d0821369682beb43c42c0f460ff137123683d8c1150487eec2690",
     "tests/python/test_symbols.py": "9e9a03a6389d6cd58aa49c63272049754f55ccddb19eeb894b8b92ccce362e0f",
-    "tests/unit/manifest.tsv": "685ecd18f78b2900a672f9b4300587d2dc793434362972bc2580985127e3792a",
+    "tests/unit/manifest.tsv": "250385b7ded7b84dc4e34b265aba0fe6d056b0205874c98b76304ca8900d661a",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",
