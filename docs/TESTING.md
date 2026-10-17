@@ -12,12 +12,12 @@ upper ones are missing.
 | Layer | Question it answers | Today | In `make gate`? |
 |---|---|---|---|
 | L0 static checks | Is the code structured as agreed? (layers, owners, provenance, readability ratchet, judge manifest, profile patches, hygiene) | complete | yes (`make check`) |
-| L1 unit tests | Does each module do what its author intended? (150 manifest rows; Python checker fixtures) | all 150 unit programs registered, including Metal sprite/composition/texture and player task | yes |
+| L1 unit tests | Does each module do what its author intended? (see STATUS for counts) | all unit programs registered, including a guest-free graphics CPU/GPU slice and all four guest draw entry points | yes |
 | L2 function oracles | Does a native function equal the original bytes on many inputs? (116 Unicorn oracles; see STATUS for verdict counts) | broad but synthetic; 54 of the reports in `build/oracles` date from 10-12 | **no** (`make oracles`, ~10 min); only the 11 initial-state data oracles and the 20 override corpora are rebuilt by the gate |
 | L3 mutants and holdouts | Would the oracle notice a realistic porting bug or an overfitted port? | 1–3 hand mutants per module; holdouts for three modules | **no** (`tools/gate/mutate.py`, `tools/analysis/verify_*_holdout.py`, run by hand) |
 | L4 override-equivalence | Does the native function behave the same inside the running game? (21 overrides + 5 HLE bridges, 71,115 corpus comparisons) | bound owners only; by frame 600 the collision, task and D3DX overrides have not been called yet | yes |
 | L5 whole-run digests | Is the running game deterministic and unchanged? (7,228-frame two-boot determinism, first 600 digests with overrides, 900-frame controller parity, title cadence) | intro/title/menu only | yes |
-| L6 journeys | Does the app show the right screens to a player? (`tools/gate/run_journeys.py`) | SEGA → title → character select; 3D world open | yes (`make journeys` after app-smoke) |
+| L6 journeys | Does the app show the right screens to a player? (`tools/gate/run_journeys.py`) | SEGA → title → character select → Station Square (3D) | yes (`make journeys` after app-smoke) |
 | L7 gameplay replays | Does a recorded input reach the same game states? (Emerald Coast, Egg Hornet, speedrun techniques) | **missing** | — |
 | L8 Windows parity | Does our run match the real game on Windows, frame by frame? (traces, screenshots, FPU tables) | **missing** (collector exists in `reference/windows-transfer`) | — |
 | L9 native-only | Do the native journeys and replays pass with no `sonic.exe`, guest or Unicorn present? | frame control only | partly |
@@ -77,8 +77,8 @@ These are the weaknesses the review found, most important first. Each has an add
    * FMV drawing, Chao, bosses, events and cutscenes, EHCF, Skipma.
 10. **App coverage is incomplete.**
    * `app-smoke` checks one frame (the SEGA logo); offscreen journeys add title and character select.
-   * The 3D world is not drawn: untransformed vertices are skipped, and only the journey runner
-     notices.
+   * Station Square now draws through the shared device backend. Broader scene/state coverage,
+     Windows GPU parity and playable stage performance remain open.
    * Only local optional golden signatures; no Windows screenshot parity, audio checks or performance thresholds.
 
 ## 3. The complete suite to build
@@ -122,8 +122,8 @@ skipped (`not drawn`) and that the guest never stops. It also compares the frame
 optional local golden signature (`--bless`, kept under `build/journeys/`, never committed).
 Journeys are `required` (a failure is a regression) or `open` (a ladder row not reached yet).
 
-* `make journeys` runs one `--offscreen --script` route, capturing frames 120, 700, 1,700
-  and 2,000 as PPM and game-state JSON. The full gate runs it after app-smoke, so the two
+* `make journeys` runs one `--offscreen --script` route, capturing required frames 120, 700,
+  1,700 and 2,000 as PPM and game-state JSON. R4 also requires mode 5 and stage 26. The full gate runs it after app-smoke, so the two
   app processes cannot race on their shared save overlay. No visible window is needed for
   journeys. `make app-smoke` retains the separate windowed R1 check.
 * R3 uses the user's local completed save, `savedata/SonicDX01.snc`, in the pinned reference
@@ -135,7 +135,7 @@ Journeys are `required` (a failure is a regression) or `open` (a ladder row not 
   Thresholds are unchanged from the original windowed runner. Frame properties and a
   locally blessed signature are not Windows GPU parity.
 * Add one journey per new ladder row:
-  * `world-3d` becomes required when the renderer lands (item 3);
+  * `world-3d` is required for Station Square after the first renderer slice (item 3);
   * then `emerald-coast-start`;
   * then the native rows `native-sega-logo`, `native-title` and `native-menus`. Each native
     journey compares its frame signature with the reference journey's frame.

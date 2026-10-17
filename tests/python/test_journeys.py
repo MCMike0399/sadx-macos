@@ -119,6 +119,26 @@ class JourneyTests(unittest.TestCase):
                 self.assertEqual(run([JOURNEYS[1]], 'fake-app', 'game', 'system', output), 1)
         self.assertFalse(target.exists())
 
+    def test_world_capture_checks_stage_and_mode(self):
+        from contextlib import redirect_stdout
+        import io
+        import json
+        import subprocess
+        from unittest.mock import patch
+        output = Path(self.temp.name)
+        self.colourful()
+        pixels = self.shot.read_bytes()
+        for mode, stage, expected in [(5, 26, 0), (12, 26, 1), (5, 0, 1)]:
+            def simulate(command, stdout, **kwargs):
+                stdout.write(log_lines(2000))
+                (output / 'world-3d.ppm').write_bytes(pixels)
+                (output / 'world-3d.state.json').write_text(json.dumps(
+                    {'frame': 2000, 'game_mode': mode, 'stage': stage}))
+                return subprocess.CompletedProcess(command, 0)
+            with patch('run_journeys.subprocess.run', side_effect=simulate):
+                with redirect_stdout(io.StringIO()):
+                    self.assertEqual(run([JOURNEYS[3]], 'fake-app', 'game', 'system', output), expected)
+
     def test_unit_registration_is_complete(self):
         root = Path(__file__).resolve().parents[2]
         sources = {p.stem.replace('_', '-') for p in (root / 'tests/unit').iterdir()

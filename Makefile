@@ -95,7 +95,7 @@ build/sadx-metal: src/apps/metal_stage.mm Makefile | build
 # (in the gate; it opens a window, so the gate needs a logged-in GUI session).
 REFERENCE_GAME_DIR ?= reference/updated-pc-reference/game
 WINDOWS_SYSTEM_DIR ?= reference/windows-system
-.PHONY: play play-title play-character-select play-help journeys
+.PHONY: play play-title play-character-select play-world play-help journeys
 play-help:
 	@echo 'Enter / pad Start: skip the black intro movie and confirm; arrows / left stick: move and select; Esc / pad B: back.'
 play: build/sadx-app play-help
@@ -104,6 +104,9 @@ play-title: build/sadx-app play-help
 	./build/sadx-app --guest "$(REFERENCE_GAME_DIR)" "$(WINDOWS_SYSTEM_DIR)" --keys 450:13
 play-character-select: build/sadx-app play-help
 	./build/sadx-app --guest "$(REFERENCE_GAME_DIR)" "$(WINDOWS_SYSTEM_DIR)" --keys 450:13,800:13,950:13,1100:13,1250:13,1400:13,1550:13
+play-world: build/sadx-app play-help
+	@echo 'Auto-navigation to Station Square; keep input neutral until the world appears.'
+	./build/sadx-app --guest "$(REFERENCE_GAME_DIR)" "$(WINDOWS_SYSTEM_DIR)" --keys 450:13,800:13,950:13,1100:13,1250:13,1400:13,1550:13,1700:13,1850:13
 journeys: build/sadx-app
 	python3 tools/gate/run_journeys.py --game-dir "$(REFERENCE_GAME_DIR)" --system-dir "$(WINDOWS_SYSTEM_DIR)"
 app-smoke: build/sadx-app

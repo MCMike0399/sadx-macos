@@ -135,8 +135,8 @@ traces, replays, digests) that native systems are later compared against.
 | R1 | SEGA logo | done (`app-smoke`, 120 frames) |
 | R2 | Title "Press ENTER" (Enter at 450 skips the movie) | checked (`make journeys`, frame 700); open with `make play-title` |
 | R3 | File select → main menu → character select | checked (`make journeys`, frame 1,700); open with `make play-character-select` |
-| R4 | 3D world drawn: Station Square / Emerald Coast with geometry, textures, characters | **blocked by the renderer only.** The game reaches Station Square (mode 5, stage 26) by frame ~1,950, and Sonic moves under stick input (`sadx_driver.py`). But the Metal guest renderer draws only XYZRHW 2D vertices; 3D draws (`FVF 0x142` …) are skipped, and the screen is a solid clear. |
-| R5 | Sonic playable: keyboard/pad moves Sonic through Emerald Coast act 1; a recorded input replay reaches the goal with state assertions (ROADMAP M3 `replay-emerald-coast`) | open; needs R4 and a stage frame-rate measurement |
+| R4 | 3D world drawn: Station Square / Emerald Coast with geometry, textures, characters | Station Square drawn through the shared device (`make play-world`, frame 2,000); required journey check. Broader scenes/states and playable performance remain open. |
+| R5 | Sonic playable: keyboard/pad moves Sonic through Emerald Coast act 1; a recorded input replay reaches the goal with state assertions (ROADMAP M3 `replay-emerald-coast`) | open; Station Square renders and stage FPS was measured, but performance and the Emerald Coast goal replay remain unfinished |
 | R6 | Sound and the intro movie (CoreAudio for DirectSound; movie drawn or cleanly skipped) | open. The movie is black and ran at ~6 fps in the app. `DirectSoundCreate8` returns `DSERR_NODRIVER`, so the game takes its no-sound paths, which the Windows reference does not. Settle this before trusting traces in M4. |
 
 **Native app** (`sadx-app --native`, added by §6 item 7: game-tier code only, no guest, no
@@ -350,7 +350,7 @@ and the readability items (R) alternate from item 4 on.
    * Update STYLE §7 with the result. Expected: `0x007f` at game entries, so plain `float`
      becomes the default for rewritten game code. If the census disagrees, record why and stop
      there.
-3. **Metal fixed-function 3D renderer for the reference app (J, R4; several steps).**
+3. **Metal fixed-function 3D renderer for the reference app (J, R4; Station Square slice implemented, coverage/performance still open).**
    * Draw the guest's untransformed draws:
      * world/view/projection from `SetTransform`;
      * FVFs with XYZ, NORMAL, DIFFUSE, SPECULAR and TEX1/TEX2;

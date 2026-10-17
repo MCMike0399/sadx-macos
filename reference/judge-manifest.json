@@ -1,13 +1,12 @@
 {
   "change": {
-    "base_commit": "a0044d5d98ba8e2d02c2b82434fa0c49874cac5f",
-    "evidence": "reference/production-integration-20261016/metal-world-source-evidence.md",
-    "evidence_sha256": "f387d7edf668b5def10d63fbedc7f89e444e1e56d341f94f2d439118ae6fcd6d",
-    "mode": "additions-only",
-    "reason": "Add synthetic CPU/GPU and guest draw-capture tests for the shared 3D device slice"
+    "base_commit": "9e9570aec84df213a6e9de8e224aca9a07e49afe",
+    "evidence": "reference/production-integration-20261016/metal-world-166-evidence.md",
+    "evidence_sha256": "38642a32b3c3b7c08c5e2ea116dc10ee893189240dedf3cdbf8869665875eba0",
+    "reason": "Require the newly visible R4 Station Square journey and add a direct play-world launch without changing existing thresholds or goldens"
   },
   "files": {
-    "Makefile": "30e83c3e62cd872c104ba36eb27df95d912bd90cb71cc43e412f5be744bb5451",
+    "Makefile": "cee34e9b75f9bc5cd828c8f325b8cdb8c65090872a6831a48ad82b3afb88437f",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
     "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
     "reference/frame-control-corpus.tsv": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",
@@ -352,7 +351,7 @@
     "tests/python/test_extraction.py": "d4cfeca88e6c47057705dd70c07921eb826b5b7d5fdb0b8cc7a8edb0f28ec04f",
     "tests/python/test_fp_census.py": "db9dee0f0942b7558f3358f27d41a04c787344ef83ea970ce744e8eedd6c007a",
     "tests/python/test_frame_control_isolation.py": "daf2e782d32c889cfe28e752997782a308846a39965db38eefb4e4afb586e3f1",
-    "tests/python/test_journeys.py": "d49111ccae78f10ec954dfb556cee39907e4a9f5a5a738c8a6b201a1a66981f9",
+    "tests/python/test_journeys.py": "3ed81eac9ccace35e9cde0aafa17773bf645f6fb63e9ef81ae7625f666673ba3",
     "tests/python/test_judge.py": "251004fe830e843d3740b4e4affb67efaf0f973e062a2f9b54cea3552471bc2a",
     "tests/python/test_provenance.py": "ce62fc0efc2ef9a92b2493adaf994fcbc38af4427c16c28eabe6aea72287fcc2",
     "tests/python/test_readability.py": "8090f2eb23f8c958972e071d94a4d77b99a8062953d456a89ccba2abafc78a3d",
@@ -392,7 +391,7 @@
     "tools/gate/mutate.py": "9028799e852ca72ae2e49229647171ec68ecbc26eeb234db3fd510a4eeb33719",
     "tools/gate/profile_patches.json": "6089c78718e12791afb52bb1d2d78e54fc050028304f935388cebe59c3286e91",
     "tools/gate/record_gate.py": "c74237a970ebfac47cf3c15357b4d16baf6ff28b6ba67e1a31c02dc249c70e3b",
-    "tools/gate/run_journeys.py": "beb3495e47b4ab2a314f15de2f887a0f8063a19178fae96a66290e13cd824a21",
+    "tools/gate/run_journeys.py": "ccf2816a8b0463a5cc57b0edd9ed1335ea9c2a6228daa437f8c669e7b6915ae0",
     "tools/gate/track_reports.py": "f936d454c3d07a0614dc27e6370396c41428763cc05c473b9b34773b7f96abc9",
     "tools/lib/extract.py": "d2c2cb1479003401ba1faf0211281a6c6d35949c2bd27e55acc48f7cc7825bd8",
     "tools/lib/pe_image.py": "94694dc5fb38e459d26b35c25a7cdb7e3fad7128e1178363340606bb9db299f2",

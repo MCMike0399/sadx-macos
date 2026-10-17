@@ -21,11 +21,12 @@ make oracle-screen-init          # one Unicorn oracle (needs reference/python ve
 make oracles-verdict             # pass / partial / fail per report in build/oracles/
 make app-smoke       # opens the window for 120 frames (the SEGA logo) and writes build/app-smoke.ppm
 # Enter / pad Start skips the black intro movie; live keyboard and controllers.
-# The 3D stages do not draw yet (docs/GOAL.md §3.1 R4).
+# Station Square draws in 3D; stage performance and broader renderer coverage remain open.
 make play
 make play-title             # automatically skip the movie, then play live
 make play-character-select  # automatically navigate the menus using the reference save
-make journeys        # one offscreen run checks SEGA, title and character select; reports open 3D
+make play-world             # Station Square, with Sonic and textured 3D geometry
+make journeys              # one offscreen run checks SEGA, title, character select and Station Square
 ./build/sadx-boot "game/Sonic Adventure DX/sonic.exe" "game/Sonic Adventure DX/mods/sadx-input-mod/sadx-input-mod.dll" 5 --survey
 ```
 

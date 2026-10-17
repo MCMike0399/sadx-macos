@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check R1–R3 and report open R4 using one offscreen reference-app run.
+"""Check R1–R4 using one offscreen reference-app run.
 
 Checkpoints retain the original windowed runner's frame properties and thresholds.
 Screenshots, state snapshots and optional local goldens stay under build/journeys.
@@ -35,11 +35,12 @@ JOURNEYS = [
      'expect': {'colours_min': 2000, 'textured_draws_min': 30, 'no_skipped_from': 455},
      'about': 'title -> file select -> main menu -> "Select a character" (needs the 100% save '
               'in reference/updated-pc-reference/game/savedata)'},
-    {'name': 'world-3d', 'row': 'R4', 'state': 'open', 'frames': 2000,
+    {'name': 'world-3d', 'row': 'R4', 'state': 'required', 'frames': 2000,
      'presses': (*MENU_PRESSES, 1700, 1850),
-     'expect': {'colours_min': 500, 'no_skipped_from': 455, 'textured_draws_min': 20},
+     'expect': {'colours_min': 500, 'no_skipped_from': 455, 'textured_draws_min': 20,
+                'game_mode': 5, 'stage': 26},
      'about': 'choosing Sonic loads the 3D world; every draw must be drawn and textured. '
-              'Open until the Metal fixed-function renderer exists (GOAL §6 item 3)'},
+              'Station Square geometry, textures and Sonic through the shared Metal device'},
 ]
 
 def read_ppm(path):
@@ -182,6 +183,9 @@ def run(chosen, app, game_dir, system_dir, output, bless=False):
             if state.get('frame') != journey['frames']:
                 raise ValueError('state frame does not match checkpoint')
             result['game_state'] = state
+            for key in ('game_mode', 'stage'):
+                if key in journey['expect'] and state.get(key) != journey['expect'][key]:
+                    result['problems'].append(f'{key} is {state.get(key)}, expected {journey["expect"][key]}')
         except (OSError, ValueError) as error:
             result['problems'].append(f'state snapshot: {error}')
         result['problems'].extend(run_problems)

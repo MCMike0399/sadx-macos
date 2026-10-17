@@ -1,0 +1,255 @@
+{
+  "source_commit": "9e9570a",
+  "stream_comparison": {
+    "rows": [
+      {
+        "profile": "intro",
+        "frames": 7228,
+        "before_sha256": "547c053f40fd1176151ff54470f1544f1d8b5431c3ed004b7d2b47c8ab45103e",
+        "after_sha256": "547c053f40fd1176151ff54470f1544f1d8b5431c3ed004b7d2b47c8ab45103e",
+        "matched": true,
+        "modes_match": true,
+        "stages_match": true
+      },
+      {
+        "profile": "controller",
+        "frames": 900,
+        "before_sha256": "9ae36a4bdcc91d6f6868168d0ab7eebaabfb0263c4ff02cdedc60621b803f5c6",
+        "after_sha256": "9ae36a4bdcc91d6f6868168d0ab7eebaabfb0263c4ff02cdedc60621b803f5c6",
+        "matched": true,
+        "modes_match": true,
+        "stages_match": true
+      },
+      {
+        "profile": "stage",
+        "frames": 2150,
+        "before_sha256": "67378f3665bcb330246830aee76439cdf7037a5c6bf0934f50407dee37c524a9",
+        "after_sha256": "67378f3665bcb330246830aee76439cdf7037a5c6bf0934f50407dee37c524a9",
+        "matched": true,
+        "modes_match": true,
+        "stages_match": true
+      }
+    ],
+    "passed": true
+  },
+  "stage_performance": {
+    "frames": 100,
+    "seconds": 20.38074420799967,
+    "fps": 4.906592172465856,
+    "app_sha256": "9c6f5745605428f98d80b1c8c144c3aec705aece77220d9c116cd38c74dd847b",
+    "limit": "Offscreen guest plus shared Metal renderer and boundary screenshot; not windowed or Windows performance. Neutral input, not an Emerald Coast goal replay."
+  },
+  "checkpoint": {
+    "name": "world-3d",
+    "row": "R4",
+    "state": "open",
+    "passed": true,
+    "problems": [],
+    "screenshot": "build/render-stage-proof/world.ppm",
+    "picture": {
+      "width": 640,
+      "height": 480,
+      "colours": 75008,
+      "white_fraction": 0.0006901041666666667,
+      "blue": 400
+    },
+    "last_frame": {
+      "frame": 2000,
+      "draws": 443,
+      "textured": 439
+    }
+  },
+  "screenshots_sha256": {
+    "build/render-stage-proof/world.ppm": "c83172ff0c0cf6bc21ff3cd30e020048a352408391b54d4bc9996a16b6734c4f",
+    "build/render-stage-proof/first-world.ppm": "706331977d0dd974b6e25522af532a0ff80c4b8086adb3b1d2342202fe55c0e6"
+  },
+  "new_world_golden_sha256": "67ca4d9b7437418c7c558e8c7c8b3789ee3a234ba4b36b59afe0ef52462fea7e",
+  "existing_golden_values_unchanged": true,
+  "existing_golden_names": [
+    "sega-logo",
+    "title",
+    "character-select"
+  ],
+  "source_and_gpu_tests": [
+    "graphics-frame",
+    "guest-graphics-frame",
+    "metal-device-frame"
+  ],
+  "caught_mutation": "Removed fragment texture-projection division",
+  "native_gpu_test_uses_guest_or_assets": false,
+  "final_app_sha256": "4f8572d9899515b575844ca29c946a7894759bc777691c0a8358de3dcce5d1cd",
+  "gate_journeys": [
+    {
+      "name": "sega-logo",
+      "row": "R1",
+      "state": "required",
+      "passed": true,
+      "problems": [],
+      "screenshot": "build/journeys/sega-logo.ppm",
+      "picture": {
+        "width": 640,
+        "height": 480,
+        "colours": 109,
+        "white_fraction": 0.9549186197916667,
+        "blue": 12155,
+        "golden_distance": 0.0
+      },
+      "last_frame": {
+        "frame": 120,
+        "draws": 8,
+        "textured": 6
+      },
+      "game_state": {
+        "frame": 120,
+        "presents": 120,
+        "game_mode": 1,
+        "game_state": 21,
+        "stage": 0,
+        "act": 0,
+        "rings": 0,
+        "level_frames": 0,
+        "global_timer": 120,
+        "player": null
+      }
+    },
+    {
+      "name": "title",
+      "row": "R2",
+      "state": "required",
+      "passed": true,
+      "problems": [],
+      "screenshot": "build/journeys/title.ppm",
+      "picture": {
+        "width": 640,
+        "height": 480,
+        "colours": 7076,
+        "white_fraction": 0.12022135416666667,
+        "blue": 151294,
+        "golden_distance": 0.0
+      },
+      "last_frame": {
+        "frame": 700,
+        "draws": 29,
+        "textured": 28
+      },
+      "game_state": {
+        "frame": 700,
+        "presents": 700,
+        "game_mode": 12,
+        "game_state": 21,
+        "stage": 0,
+        "act": 0,
+        "rings": 0,
+        "level_frames": 0,
+        "global_timer": 248,
+        "player": null
+      }
+    },
+    {
+      "name": "character-select",
+      "row": "R3",
+      "state": "required",
+      "passed": true,
+      "problems": [],
+      "screenshot": "build/journeys/character-select.ppm",
+      "picture": {
+        "width": 640,
+        "height": 480,
+        "colours": 15740,
+        "white_fraction": 0.182685546875,
+        "blue": 139528,
+        "golden_distance": 5.86
+      },
+      "last_frame": {
+        "frame": 1700,
+        "draws": 420,
+        "textured": 412
+      },
+      "game_state": {
+        "frame": 1700,
+        "presents": 1700,
+        "game_mode": 12,
+        "game_state": 21,
+        "stage": 0,
+        "act": 1,
+        "rings": 0,
+        "level_frames": 0,
+        "global_timer": 188415,
+        "player": {
+          "action": 20,
+          "status": 4096,
+          "character": 0,
+          "rotation": [
+            0,
+            16384,
+            0
+          ],
+          "position": [
+            0,
+            -3.5,
+            -20
+          ],
+          "speed": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    },
+    {
+      "name": "world-3d",
+      "row": "R4",
+      "state": "required",
+      "passed": true,
+      "problems": [],
+      "screenshot": "build/journeys/world-3d.ppm",
+      "picture": {
+        "width": 640,
+        "height": 480,
+        "colours": 75008,
+        "white_fraction": 0.0006901041666666667,
+        "blue": 400,
+        "golden_distance": 0.0
+      },
+      "last_frame": {
+        "frame": 2000,
+        "draws": 443,
+        "textured": 439
+      },
+      "game_state": {
+        "frame": 2000,
+        "presents": 2000,
+        "game_mode": 5,
+        "game_state": 15,
+        "stage": 26,
+        "act": 3,
+        "rings": 0,
+        "level_frames": 0,
+        "global_timer": 187634,
+        "player": {
+          "action": 1,
+          "status": 1,
+          "character": 0,
+          "rotation": [
+            0,
+            11547,
+            0
+          ],
+          "position": [
+            62.7000008,
+            0,
+            1454.30005
+          ],
+          "speed": [
+            0,
+            0,
+            0
+          ]
+        }
+      }
+    }
+  ],
+  "gate_journey_seconds": 151.33,
+  "gate_app_sha256": "4f8572d9899515b575844ca29c946a7894759bc777691c0a8358de3dcce5d1cd"
+}

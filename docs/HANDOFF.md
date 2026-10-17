@@ -4579,3 +4579,19 @@ The product still needs native boot/title, resources and gameplay recovery.
   pass against existing goldens, R4 open. Recorded `d3d8-fpu-165-gate.json`; STATUS refreshed.
 * Unverified: Reset recreation, Windows stage parity, full oracle suite, 3D/audio/native journeys.
 * Next: §6.3 shared Metal 3D transform path; keep R4 open until its frame checks pass.
+
+### 2026-10-16 — GOAL §6.3 shared Metal transform/lighting slice (track J, gate 166)
+
+* Outcome: `make play-world` opens Station Square with textured geometry and Sonic in the reference app.
+* Source `9e9570a`: owned engine graphics commands, guest draw/resource decoding and a shared
+  Metal backend with no guest dependency. All four draw paths retain state and clear order.
+* Three new CPU/guest/GPU programs cover transforms, lighting, generated/projective UVs,
+  texture precision, depth/cull/alpha/fog and raster no-ops; projection-division mutation caught.
+* Driver's full R4 prefix passes without skipped draws. Stable frame 2000: 443 draws,
+  439 textured, 75,008 colors; image inspected. 100 stage frames measured 4.91 FPS offscreen.
+* Intro 7,228 / controller 900 / stage 2,150 stream hashes equal gate 165; `metal-world-166-summary.json`.
+* R4 promoted to required with mode/stage checks; existing thresholds and old goldens retained.
+  Gate 166 rc 0: 155 native invocations / 66 Python tests; R1–R4 pass; STATUS refreshed.
+* Unverified: vertex fog, reflection UVs, active extra stages, other formats/scenes, Windows GPU
+  parity, physical pads, audio and native game journeys. Performance is not practice-ready.
+* Next: continue §6.3 coverage/performance, alternating with §6.4's unchanged-oracle fog rewrite.
