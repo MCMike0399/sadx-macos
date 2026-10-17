@@ -4532,3 +4532,18 @@ The product still needs native boot/title, resources and gameplay recovery.
   uncommitted. The guest FPU precision fix is described, not applied (GOAL item 2).
 * Next: GOAL §6 item 0, then item 1 (`make play`, journeys in the gate on `--offscreen`, the
   judge `--additions-only` flag).
+
+### 2026-10-16 — GOAL §6.0 defer incomplete input-device draft (track V, gate 163)
+
+* Outcome: removed the in-flight draft from the worktree so journey work can proceed.
+  Provenance and judge checks now report 0 errors across 505 protected inputs.
+* Preserved all 12 draft files in stash `003ea0d86971d6d9ef7e1bf9c9cfd62c381e30f2`
+  (`GOAL 6.0: defer incomplete input-device initialization to batch item 6`). Recover it
+  for §6.6's full numeric batch; its missing `input_device_initial_state.cpp` unit test
+  and new legacy identifier were verified before stashing. Two Ghidra request drafts untouched.
+* Verification: sandboxed gate exited 2 at Unicorn/app execution (`Illegal instruction`);
+  outside-sandbox rerun exited 0, recorded in `input-device-deferred-163-gate.json`.
+  147 native programs / 50 Python tests; replay, override mutants, controller and timing pass.
+* Unverified: no new journey or native-game behavior; standalone oracles, separate M1 and
+  four unregistered tests not run. Existing partial/failing oracle verdicts unchanged.
+* Next: §6.1 `make play`, offscreen R2/R3 checks and additions-only judge registration.
