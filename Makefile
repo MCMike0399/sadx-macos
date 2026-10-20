@@ -46,7 +46,7 @@ NATIVE_SOURCES := \
  src/engine/ninja_view_native.cpp src/engine/pvr_device.cpp src/engine/pvr_draw.cpp \
  src/engine/sprite_immediate.cpp src/engine/speedrun.cpp src/engine/task.cpp src/engine/task_work.cpp \
  src/input/input_initial_state.cpp src/input/input_mod_axes.cpp src/input/input_mod_constants.cpp src/input/input_mod_pad.cpp \
- src/player/player_input_producer.cpp src/player/scene_input_producer.cpp src/player/player_heading.cpp \
+ src/player/player_input_producer.cpp src/player/scene_input_producer.cpp src/player/player_heading.cpp src/player/player_coordinates.cpp \
  src/game/game_bootstrap.cpp src/game/game_mode.cpp src/game/game_mode_native.cpp \
  src/game/movie.cpp src/game/logo.cpp src/game/logo_display.cpp src/game/logo_startup.cpp src/game/save_data.cpp \
  src/runtime/engine_code_tables.cpp src/runtime/logo_renderer.cpp src/runtime/logo_scene.cpp \
@@ -57,7 +57,7 @@ NATIVE_SOURCES += src/engine/ninja_sprite_queue.cpp src/engine/ninja_render.cpp 
  src/engine/ninja_fog.cpp src/engine/ninja_fog_native.cpp src/game/sound_initial_state.cpp \
  $(wildcard src/engine/ninja_queue_native.cpp src/game/game_view_native.cpp \
  src/game/game_cleanup.cpp src/game/audio_playback.cpp src/game/title_menu.cpp \
- src/game/sound_bank.cpp src/engine/native_texture_lifetime.cpp)
+ src/game/sound_bank.cpp src/game/stage_lighting.cpp src/engine/native_texture_lifetime.cpp)
 # Native engine adapters and runtime compositions use these explicit naming scopes.
 NATIVE_SOURCES := $(sort $(NATIVE_SOURCES) $(wildcard src/engine/*_native.cpp src/runtime/native_*.cpp))
 NATIVE_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(NATIVE_SOURCES))
