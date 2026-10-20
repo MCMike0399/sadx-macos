@@ -1,0 +1,27 @@
+{
+  "reason": "Reran unchanged new logo oracles after gate built generic archive-linked probes; comparisons and inputs unchanged.",
+  "reports": {
+    "logo": {
+      "library_sha256": "e8ff226a5c8562d4bba9dac29f1ec52fc42cf39da50f8d07b9fffb2e44cada65",
+      "cases": 5320,
+      "mismatches": 0,
+      "flag_mismatches": 0,
+      "limits": [
+        "Object runner, profile-scaled display and texture release are fixtures.",
+        "Initialization, rendering and native N1 journey are not verified."
+      ]
+    },
+    "logo_display": {
+      "library_sha256": "0f16d7d4f220bfea5d2596ef4a8f21540e50687a38c84c4b56787c1b716fda1b",
+      "cases": 3936,
+      "mismatches": 0,
+      "flag_mismatches": 1902,
+      "limits": [
+        "Unpatched original display body with setup/draw call fixtures.",
+        "Active profile scaling wrapper, downstream pixels and N1 unverified.",
+        "Only low-six x87 exception bits compared; full status/tag/stack outside native API.",
+        "Soft x87 and Unicorn can differ on exception flags; these remain explicit partials."
+      ]
+    }
+  }
+}

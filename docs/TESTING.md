@@ -124,6 +124,11 @@ Three tools, from lowest to highest level:
   and checks image properties and unsupported draws. Each run creates its own save overlay.
   The report separates the configured 63 FPS scalar from measured uncapped host throughput.
   This is reference-app input coverage, not the R5 Emerald Coast goal replay or native N5.
+  * `--route fresh-adventure --original-tasks --out build/journeys/UNIQUE-CHAOS-RUN` creates
+    a save through the normal menus, uses normal Start/A skips and checks Sonic's keyboard,
+    pad and jump actions against Chaos 0. Motion checks require locomotion actions so boss
+    knockback cannot pass. The report names original x86 task execution explicitly.
+    Battle camera control and a complete boss fight are outside this short replay.
 * **`tools/gate/run_journeys.py`**: the pass/fail journey checks, described next.
 
 Agents check visible claims with these: take a screenshot, read the PNG, and read the state.

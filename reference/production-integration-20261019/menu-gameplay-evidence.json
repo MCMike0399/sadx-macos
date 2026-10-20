@@ -1,0 +1,269 @@
+{
+  "format_version": 1,
+  "evidence_type": "observed menu and gameplay input journeys",
+  "runs": {
+    "station_square": {
+      "command": "python3 tools/journey/check_gameplay.py --out build/journeys/station-square-final-e",
+      "local_report": "build/journeys/station-square-final-e/report.json",
+      "passed": true,
+      "engine": "guest-reference",
+      "task_execution": "native-task-adapter",
+      "checks": [
+        {
+          "name": "expected-stage",
+          "passed": true,
+          "stage": 26
+        },
+        {
+          "name": "adventure-active",
+          "passed": true
+        },
+        {
+          "name": "pinned-profile-live-patches",
+          "passed": true,
+          "observed": {
+            "ccef_reset_1": "810d",
+            "ccef_reset_2": "810d",
+            "ehcf_dereference": "909090",
+            "ehcf_branch": "9090",
+            "skipma_ingame_to_speedrun": true,
+            "skipma_movie_to_speedrun": true,
+            "limiter_to_speedrun": true,
+            "extra_ticks_to_speedrun": true,
+            "frame_rate_scalar": 63
+          },
+          "expected": {
+            "ccef_reset_1": "810d",
+            "ccef_reset_2": "810d",
+            "ehcf_dereference": "909090",
+            "ehcf_branch": "9090",
+            "skipma_ingame_to_speedrun": true,
+            "skipma_movie_to_speedrun": true,
+            "limiter_to_speedrun": true,
+            "extra_ticks_to_speedrun": true,
+            "frame_rate_scalar": 63
+          }
+        },
+        {
+          "name": "keyboard-moves-sonic",
+          "passed": true,
+          "distance": 20.98794424779384
+        },
+        {
+          "name": "keyboard-jump-rises",
+          "passed": true,
+          "rise": 20.5941601,
+          "actions": [
+            8,
+            8,
+            8,
+            8,
+            8,
+            8
+          ]
+        },
+        {
+          "name": "pad-moves-sonic",
+          "passed": true,
+          "distance": 18.61797596836875
+        },
+        {
+          "name": "camera-observed",
+          "passed": true,
+          "errors": [
+            null,
+            null,
+            null
+          ]
+        },
+        {
+          "name": "camera-input-changes-view",
+          "passed": true,
+          "idle_distance": 1.1279408788433631,
+          "input_distance": 59.45663624498447,
+          "angle_changed": true,
+          "player_drift": 0.0
+        },
+        {
+          "name": "world-frame-visible",
+          "passed": true,
+          "width": 640,
+          "height": 480,
+          "colours": 77868
+        },
+        {
+          "name": "gameplay-draws-supported",
+          "passed": true,
+          "frames": 751,
+          "skipped_frames": []
+        }
+      ],
+      "performance": {
+        "presents": 120,
+        "wall_seconds": 9.905930000008084,
+        "observed_host_fps": 12.113955983931046,
+        "offscreen_uncapped": true,
+        "configured_profile_fps": 63
+      },
+      "input_sha256": {
+        "build/sadx-app": "ceedb426f37ff26268b6d82f61505e2c4492e881cf203c8903c7a1a0e1977863",
+        "/Users/burbujamc/Developer/sadx-macos/tools/journey/check_gameplay.py": "c47ec2829d2db0b34a2fb4427d2d37dd4ecae75f22647d5ca97d0352dd8908b7",
+        "/Users/burbujamc/Developer/sadx-macos/tools/journey/sadx_driver.py": "0924b77810dfa1125863d6dab646352cd84930c6987f3d0cfa61c4764c188e75",
+        "reference/updated-pc-reference/game/sonic.exe": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+        "reference/updated-pc-reference/game/savedata/SonicDX01.snc": "15ac61323e0508d72a279f0f648f4b5007793cc0c8fb42bce9d893f00c265cf6",
+        "reference/updated-pc-reference/game/mods/.modloader/profiles/updated-speedrun.json": "3402bf11fa59c52990bf670689794725b350f5089e7ed1b97ac354bda171572d",
+        "reference/updated-pc-reference/game/mods/.modloader/SADXModLoader.dll": "3293cf354dcfc62274c2ad25c09041606d6ad55483f070c233111cd9b47a97ba",
+        "reference/updated-pc-reference/game/mods/sadx-input-mod/sadx-input-mod.dll": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+        "reference/updated-pc-reference/game/mods/sadx-input-mod/config.ini": "f5ac427b9fd270bebc2383afa24948849d17bd2a700f330c2adf4f11ed262cbf",
+        "reference/updated-pc-reference/game/mods/sadx-speedrun-mod/sadx-speedrun-mod.dll": "f3fc68a3058fb726142547018da860b170f137248e54b82712b52527e7b74802",
+        "reference/updated-pc-reference/game/mods/sadx-speedrun-mod/config.ini": "184e1158b2bbfc1be1c2c2a4ab67bae07f83d428efe9fbd1469f695fd5eaffa7"
+      },
+      "whole_route_rejected_draw_lines": 0,
+      "whole_route_guest_stop_lines": 0,
+      "checks_not_run": []
+    },
+    "chaos_zero": {
+      "command": "python3 tools/journey/check_gameplay.py --route fresh-adventure --original-tasks --out build/journeys/chaos-zero-final-h",
+      "local_report": "build/journeys/chaos-zero-final-h/report.json",
+      "local_report_sha256": "fff63c9032b7852d3ef0bbe3590ae1fd4dadb2d995593f63633676773814ceff",
+      "passed": true,
+      "engine": "guest-reference",
+      "task_execution": "original-x86",
+      "checks": [
+        {
+          "name": "fresh-sonic-intro",
+          "passed": true,
+          "stage": 26,
+          "mode": 5
+        },
+        {
+          "name": "expected-stage",
+          "passed": true,
+          "stage": 15
+        },
+        {
+          "name": "expected-gameplay-mode",
+          "passed": true,
+          "expected": 4,
+          "observed": 4
+        },
+        {
+          "name": "pinned-profile-live-patches",
+          "passed": true,
+          "observed": {
+            "ccef_reset_1": "810d",
+            "ccef_reset_2": "810d",
+            "ehcf_dereference": "909090",
+            "ehcf_branch": "9090",
+            "skipma_ingame_to_speedrun": true,
+            "skipma_movie_to_speedrun": true,
+            "limiter_to_speedrun": true,
+            "extra_ticks_to_speedrun": true,
+            "frame_rate_scalar": 63
+          },
+          "expected": {
+            "ccef_reset_1": "810d",
+            "ccef_reset_2": "810d",
+            "ehcf_dereference": "909090",
+            "ehcf_branch": "9090",
+            "skipma_ingame_to_speedrun": true,
+            "skipma_movie_to_speedrun": true,
+            "limiter_to_speedrun": true,
+            "extra_ticks_to_speedrun": true,
+            "frame_rate_scalar": 63
+          }
+        },
+        {
+          "name": "keyboard-moves-sonic",
+          "passed": true,
+          "distance": 8.94265711021422,
+          "action": 2
+        },
+        {
+          "name": "pad-moves-sonic",
+          "passed": true,
+          "distance": 7.435484863048638,
+          "action": 2
+        },
+        {
+          "name": "keyboard-jump-rises",
+          "passed": true,
+          "rise": 17.544735,
+          "action": 8
+        },
+        {
+          "name": "world-frame-visible",
+          "passed": true,
+          "width": 640,
+          "height": 480,
+          "colours": 75026
+        },
+        {
+          "name": "gameplay-draws-supported",
+          "passed": true,
+          "frames": 556,
+          "skipped_frames": []
+        }
+      ],
+      "performance": {
+        "presents": 120,
+        "wall_seconds": 12.356702707940713,
+        "observed_host_fps": 9.711328566874489,
+        "offscreen_uncapped": true,
+        "configured_profile_fps": 63
+      },
+      "input_sha256": {
+        "build/sadx-app": "d9ffc37965b5e243c82238dadd229034e64b0812de89fb0f63f41a0fdbcfaf1d",
+        "/Users/burbujamc/Developer/sadx-macos/tools/journey/check_gameplay.py": "c2337528be708c9cde191784b22222b23c352a76e015f1208ff539f9fe51d8c1",
+        "/Users/burbujamc/Developer/sadx-macos/tools/journey/sadx_driver.py": "5e19e054d94e79312f85f496cb3f9c727ec339056fa2b392d19c332d12c73a1a",
+        "reference/updated-pc-reference/game/sonic.exe": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+        "reference/updated-pc-reference/game/savedata/SonicDX01.snc": "15ac61323e0508d72a279f0f648f4b5007793cc0c8fb42bce9d893f00c265cf6",
+        "reference/updated-pc-reference/game/mods/.modloader/profiles/updated-speedrun.json": "3402bf11fa59c52990bf670689794725b350f5089e7ed1b97ac354bda171572d",
+        "reference/updated-pc-reference/game/mods/.modloader/SADXModLoader.dll": "3293cf354dcfc62274c2ad25c09041606d6ad55483f070c233111cd9b47a97ba",
+        "reference/updated-pc-reference/game/mods/sadx-input-mod/sadx-input-mod.dll": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+        "reference/updated-pc-reference/game/mods/sadx-input-mod/config.ini": "f5ac427b9fd270bebc2383afa24948849d17bd2a700f330c2adf4f11ed262cbf",
+        "reference/updated-pc-reference/game/mods/sadx-speedrun-mod/sadx-speedrun-mod.dll": "f3fc68a3058fb726142547018da860b170f137248e54b82712b52527e7b74802",
+        "reference/updated-pc-reference/game/mods/sadx-speedrun-mod/config.ini": "184e1158b2bbfc1be1c2c2a4ab67bae07f83d428efe9fbd1469f695fd5eaffa7"
+      },
+      "whole_route_rejected_draw_lines": 0,
+      "whole_route_guest_stop_lines": 0,
+      "checks_not_run": [
+        "Chaos 0 camera control; use station-square for camera input checks",
+        "complete boss fight",
+        "Emerald Coast goal replay"
+      ],
+      "clean_repeat": {
+        "prior_local_report": "build/journeys/chaos-zero-final-g/report.json",
+        "matching_checkpoint_count": 14,
+        "all_checkpoint_states_equal": true,
+        "all_checkpoint_pixel_hashes_equal": true
+      },
+      "reviewed_screenshots": {
+        "keyboard-moved.png": "580ef2ac92f115241086c4df7b4cef3c4d335a32ff5dd867f5b1bd32dd8d4df6",
+        "pad-moved.png": "6927d48e9d82d7a17b70c90a9b7289ce9c0800553b50b02e9b77cf58ec8b2138",
+        "jump.png": "234f1176c8617f9e2bc4569a03ab85acadadad6294d15e2cc47255d656d04ed1"
+      }
+    }
+  },
+  "new_python_driver_tests": {
+    "count": 4,
+    "passed": true,
+    "command": "python3 -m unittest discover -s tests/python -p test_journey_driver.py -q"
+  },
+  "chaos_arrival_equivalence": {
+    "frame": 2360,
+    "mode": 4,
+    "stage": 15,
+    "native_task_local_run": "build/journeys/chaos-zero-c",
+    "original_task_local_run": "build/journeys/chaos-zero-original-tasks-d",
+    "state_equal": true,
+    "screenshot_sha256": "0483177f66da48093e1ffd821db322818614e92cb6bba8905a48121a17157531"
+  },
+  "limits": [
+    "Guest reference requires original executable and DLLs; this is not native N5.",
+    "Chaos final run explicitly executes original x86 task routines; native task ownership remains separately qualified.",
+    "Configured63FPS is verified at live patch sites; measured host throughput remains below63FPS.",
+    "Synthetic pad input is not physical Windows-controller parity.",
+    "Complete Chaos0 fight, EmeraldCoast goal replay, audio and Windows GPU pixel parity are unverified."
+  ]
+}

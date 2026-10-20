@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "e46157f4c55b1238ea68e2b426ee723e2ee526ac",
-    "evidence": "reference/production-integration-20261019/library-constants-judge-evidence.json",
-    "evidence_sha256": "9f630b682659468e24d616b15f7b2dda00e0cd3261c7a21edd8756e062b39773",
-    "reason": "Repair the remaining legacy constants-unit include/link after semantic library migration; assertions unchanged"
+    "base_commit": "13c5528212cd22ec6ed85a5c3730d2bdf30e0b00",
+    "evidence": "reference/production-integration-20261019/final-probe-identities.json",
+    "evidence_sha256": "b18f0747a9277e01336ccde3ff9e2a3f25d8e15e2e1d36c946e32cc632faee94",
+    "reason": "Record unchanged logo oracle results with gate-built probe identities"
   },
   "files": {
     "Makefile": "763f480eaa54630de499b517ec94d72b1e82ae2259cbf9d3edde025df1ea0680",
@@ -70,8 +70,8 @@
     "reference/oracle-reports/keyboard.json": "ac045e8cfbb4a2cd0229b2d030999950f2e53eed66b64ddb042a581d72c34d29",
     "reference/oracle-reports/library_init.json": "4a2ec8997cf23a592ce9cfc205aeec016dd80d8db52f55ca749b4441497e620a",
     "reference/oracle-reports/library_initial_state.json": "d90bcb3f1887c16b05cb93fab680f1e2b7db2c094fdd52c70f80751d8dd2c4c4",
-    "reference/oracle-reports/logo.json": "c01c993756adc37dd920afc2d9907894b7daf3a5ee3b8d821d403bc591a1073c",
-    "reference/oracle-reports/logo_display.json": "ccdae08b4411205e7c552780573d2c22560c0e9c1ccdb56f0588201c8f4162af",
+    "reference/oracle-reports/logo.json": "777085f04962aab08d648a32918e1845c0506391193104ab52e4161624e5b65c",
+    "reference/oracle-reports/logo_display.json": "36ffe19f608eb59bb1e562038f3ee3a5aa33b329f4280d6834139f0c189f3c69",
     "reference/oracle-reports/math.json": "5382042413acd9577eaa5e3732f7bf3ebdbf025eef95d4d3f03d3eae23793278",
     "reference/oracle-reports/message_pump.json": "77cfa96878ddbbed2f454501e015d3ef7b79927246faadbe0813f381b6109f88",
     "reference/oracle-reports/model_dlls.json": "c683e9c0d7ad1b66566867db9edd782b7f634e96c6d3b21b4e41fa242e833e3c",

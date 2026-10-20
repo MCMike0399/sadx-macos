@@ -4706,3 +4706,15 @@ The product still needs native boot/title, resources and gameplay recovery.
   assertions, fixtures, arithmetic and comparison loops are unchanged.
 * Gate 175 rc 0: 164 native invocations / 66 Python; R1–R4 pass. STATUS refreshed.
 * Next: apply the staged whole dispatcher/header rewrite. No module-completion or journey claim.
+
+### 2026-10-19 — readable initialization and controlled Chaos 0 (J/R/S, gate 176)
+
+* Outcome: fresh menus reach Chaos 0; keyboard, pad and jump pass with zero rejected draws across 3,005 frames, using explicit original-task reference mode. H/G states and images match at all 14 checkpoints.
+* The quoted library initializer is now named configuration, state and services; its four alleged rectangle words are company/application/system/backup strings. Scene dispatcher is also rewritten, not relocated.
+* Library: unchanged 2,400 cases / 72 outcomes / zero mismatches; 36 native callback/failure-prefix runs; three faults caught. Scene: 1,632 / zero values or boundaries / 1,344 FP flags; helpers 8,076 / zero values / 6,040 flags (partials).
+* Scene old/new: 11,424 development + 10,752 holdout runs identical; three faults caught (horizontal offset needs rotated holdouts). Game-tier totals remove 479 hex literals, 189 address names and 11 address calls.
+* Logo update: 5,320 pass; display: 3,936 / zero values / 1,902 flags (partial). Assets-only native visual is a direct-entry fixture, not N1 or pixel parity. New line-list CPU/GPU checks and deliberate topology fault pass.
+* CompareStringA unblocks new-save creation; camera/profile telemetry, isolated overlays and prompt failure reporting support unattended checks. Station Square passes movement/jump/pad/camera checks.
+* Gate 176 exit 0: 170 native programs / 70 Python tests; R1–R4 pass. First gate exit 2 was a remaining legacy test include/link; assertions unchanged. Temporary task tracing was removed before the final build.
+* Limits: Chaos run is guest-reference, 9.71 host FPS with configured 63; no boss defeat, Emerald Coast goal, audio/Windows parity or native boot. Full standalone oracle suite and separate make m1 skipped; nine known oracle failures remain.
+* Next: qualify the pinned Input mod CRT RumbleTimer ownership bridge, then rerun Chaos with the default native task adapter. Research and bounded evidence: RESEARCH-breakthrough-2026-10-19.md and production-integration-20261019.
