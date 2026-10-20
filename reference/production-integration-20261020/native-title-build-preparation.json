@@ -1,0 +1,9 @@
+{
+  "reason": "Prepare explicit native closure for upcoming title initialization, real sound banks and reference-counted texture lifetime; no expected values, fixtures or tolerances change.",
+  "base_commit": "1e14116",
+  "protected_ignored_inputs_copied": 53,
+  "verification_scope": "make dry run and judge regression tests; full gate belongs to subsequent coherent native integration.",
+  "limits": [
+    "No title/gameplay completion claim; gate180 predates these build declarations."
+  ]
+}
