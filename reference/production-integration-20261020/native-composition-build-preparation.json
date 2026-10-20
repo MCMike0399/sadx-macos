@@ -1,0 +1,9 @@
+{
+  "reason": "Include named native engine adapters/runtime compositions without linking the reference/core closure. This admits frame_loop_native and native_title_scene; source algorithms and oracle comparisons are unchanged.",
+  "base_commit": "d89f85f",
+  "scope": [
+    "src/engine/*_native.cpp",
+    "src/runtime/native_*.cpp"
+  ],
+  "verification": "Judge regression tests and native-target dry run; subsequent integration gate remains required."
+}
