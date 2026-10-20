@@ -124,23 +124,21 @@ Three tools, from lowest to highest level:
   and checks image properties and unsupported draws. Each run creates its own save overlay.
   The report separates the configured 63 FPS scalar from measured uncapped host throughput.
   This is reference-app input coverage, not the R5 Emerald Coast goal replay or native N5.
-  * `--route fresh-adventure --original-tasks --out build/journeys/UNIQUE-CHAOS-RUN` creates
+  * `--route fresh-adventure --out build/journeys/UNIQUE-CHAOS-RUN` creates
     a save through the normal menus, uses normal Start/A skips and checks Sonic's keyboard,
     pad and jump actions against Chaos 0. Motion checks require locomotion actions so boss
-    knockback cannot pass. The report names original x86 task execution explicitly.
-    Battle camera control and a complete boss fight are outside this short replay.
+    knockback cannot pass. The default native task adapter and the `--original-tasks`
+    comparison produce identical states and images at all 14 checkpoints in the verified
+    route. The report identifies which task execution was used. Both remain guest-reference
+    runs. Battle camera control and a complete boss fight are outside this short replay.
 * **`tools/gate/run_journeys.py`**: the pass/fail journey checks, described next.
 
 Agents check visible claims with these: take a screenshot, read the PNG, and read the state.
 
-`python3 tools/journey/check_gameplay.py --out build/journeys/gameplay-run-1` adds
-behavioral checks to the completed-save route: keyboard movement, a sampled jump,
-controller movement and camera input after an idle-camera comparison. It stores commands,
-state snapshots, PNG hashes, observed profile patches and measured uncapped host throughput
-in `report.json`. Use a fresh output directory for each run so save changes cannot contaminate
-the next replay. Loaded patch sites and a 63 FPS scalar prove configuration; measured host FPS
-and Windows behavior parity are separate claims. This scenario does not complete the Emerald
-Coast goal replay or the native journey rows.
+Use a fresh output directory for each gameplay run so save changes cannot contaminate the
+next replay. Loaded patch sites and a 63 FPS scalar prove configuration; measured host FPS
+and Windows behavior parity are separate claims. These scenarios do not complete the Emerald
+Coast goal replay or native journey rows.
 
 The driver now reports a guest stop immediately instead of waiting for an unreachable future
 frame. A stopped app still accepts observation and quit commands. Camera reads report absent

@@ -4718,3 +4718,13 @@ The product still needs native boot/title, resources and gameplay recovery.
 * Gate 176 exit 0: 170 native programs / 70 Python tests; R1–R4 pass. First gate exit 2 was a remaining legacy test include/link; assertions unchanged. Temporary task tracing was removed before the final build.
 * Limits: Chaos run is guest-reference, 9.71 host FPS with configured 63; no boss defeat, Emerald Coast goal, audio/Windows parity or native boot. Full standalone oracle suite and separate make m1 skipped; nine known oracle failures remain.
 * Next: qualify the pinned Input mod CRT RumbleTimer ownership bridge, then rerun Chaos with the default native task adapter. Research and bounded evidence: RESEARCH-breakthrough-2026-10-19.md and production-integration-20261019.
+
+### 2026-10-19 — default task ownership through Chaos 0 (J, gate 177)
+
+* Outcome: fresh menus reach controllable Sonic against Chaos 0 with the default native task adapter. Nine checks pass; all 14 states and PNG hashes exactly match the explicit original-task reference.
+* Fixed: the pinned Input mod owns a CRT RumbleTimer in task +0x28, not arena force work. Its scoped adapter sidecar preserves the pointer and requires the real destructor to clear it before arena cleanup; unknown external work still stops.
+* Actual-DLL test covers creation, six dispatches, deferred deletion, CRT free, complete arena bytes, slot reuse and repeated pool initialization. Three ownership negatives and all 12 existing task-corpus mutants are caught.
+* Full 3,005-frame Chaos route has zero stops/rejected draws; keyboard/pad actions are locomotion, jump is airborne (damage cannot pass). Live CCEF/EHCF/Skipma/63 FPS configuration is checked.
+* Gate 177 exit 0: 171 native programs / 70 Python tests; R1–R4 pass. Report source/artifact identities and gameplay evidence are under production-integration-20261019.
+* Limits: guest-reference game, not native product; measured 4.72 host FPS during the concurrent gate, not real-time 63 FPS. No boss defeat, Emerald Coast goal, audio or Windows parity claim. Full standalone oracles and separate make m1 skipped; nine prior oracle failures remain.
+* Next: complete a native session closure and profile guest/task-transfer costs; continue whole-module readability work under unchanged judges. Do not regress into address-call wrappers or per-constant steps.

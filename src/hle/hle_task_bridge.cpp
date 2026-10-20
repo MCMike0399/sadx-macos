@@ -24,6 +24,22 @@ struct TaskBridge {
     HleProcess& process;std::shared_ptr<TaskWorkArena> arena;
     std::map<std::uint32_t,TaskWorkHandle> allocations;
     std::uint32_t base=0,entry=0,pool=0;
+    // The pinned input mod owns this CRT allocation. Its destructor clears the
+    // task's UnknownA_ptr before deleting the timer; it is not arena force work.
+    struct InputRumbleTimer { std::uint32_t address; };
+    std::map<unsigned, InputRumbleTimer> input_rumble_timers;
+    bool is_input_rumble_timer(const std::array<std::uint32_t,13>& words) const {
+        const auto* input = process.modules().by_name("sadx-input-mod.dll");
+        return input && words[6] == input->base + 0x8f20 &&
+               (words[4] == input->base + 0x8e00 || words[4] == 0x40b570);
+    }
+    bool valid_input_rumble_timer(std::uint32_t pointer) const {
+        const auto bytes = process.memory().size(pointer);
+        std::array<std::uint8_t,8> timer{};
+        return bytes && *bytes >= timer.size() &&
+               process.guest().read(pointer,timer.data(),timer.size()) &&
+               timer[0] <= 1 && timer[1] < 8 && (timer[2] == 1 || timer[2] == 2);
+    }
     std::unique_ptr<TaskScheduler> scheduler;
     std::map<std::uint32_t,TaskCallback> functions;
     std::map<TaskCallback,std::uint32_t> source_functions;
@@ -64,7 +80,7 @@ struct TaskBridge {
 
     explicit TaskBridge(HleProcess& p):process(p){}
     void bind(std::uint32_t address){
-        base=address;pool=0;scheduler.reset();allocations.clear();arena=std::make_shared<TaskWorkArena>(base);
+        base=address;pool=0;scheduler.reset();allocations.clear();input_rumble_timers.clear();arena=std::make_shared<TaskWorkArena>(base);
         arena->set_metadata_writer([this](std::uint32_t offset,std::optional<std::uint32_t> value){
             if(!value||!process.guest().set_u32(base+offset,*value)){
                 process.guest().stop("task bridge: unavailable metadata at "+hex(entry)+" ("+hex(base+offset)+")");throw MetadataUnavailable{};
@@ -110,7 +126,7 @@ struct TaskBridge {
     void flush_work(){process.guest().set_u32(0x3abdbe8,arena->free_head()?base+*arena->free_head():0);}
     void initialize_pool(){
         entry=0x40b460;if(!ready())return;
-        try{scheduler=std::make_unique<TaskScheduler>();const auto result=scheduler->initialize_source_pool(arena,resource(word(0x38f6e08)));
+        try{input_rumble_timers.clear();scheduler=std::make_unique<TaskScheduler>();const auto result=scheduler->initialize_source_pool(arena,resource(word(0x38f6e08)));
             if(!result){if(result.work_failure==TaskWorkFailure::exhausted){pool=0;process.guest().set_u32(0x3abdbe4,0);process.guest().set_u32(0x3abdbec,0);process.guest().set_u32(0x3abdbf8,0);process.guest().set_eax(0);flush_work();scheduler.reset();return;}process.guest().stop("task bridge: pool native boundary "+hex(result.source_boundary));return;}
             pool=address(scheduler->source_pool_work());process.guest().set_u32(0x3abdbe4,pool);allocations[pool]=scheduler->source_pool_work();serialized.assign(4096,{});
             const auto current=word(0x3abdbf4);export_graph();process.guest().set_u32(0x3abdbf4,current);process.guest().set_eax(0);process.guest().set_reg(UC_X86_REG_EDX,0);process.guest().set_reg(UC_X86_REG_ECX,0);flush_work();
@@ -128,24 +144,34 @@ struct TaskBridge {
         std::function<void(std::optional<std::uint16_t>)> visit=[&](std::optional<std::uint16_t> h){while(h){if(free.test(*h)||linked.test(*h)){g.stop("task bridge: corrupt active graph at "+hex(entry));throw MetadataUnavailable{};}linked.set(*h);visit(slot(serialized[*h][3]));h=slot(serialized[*h][0]);}};
         for(const auto& h:state.heads)visit(h);
         for(unsigned k=0;k<4096;++k)if(!free.test(k)&&!linked.test(k)&&!serialized[k][2])visit(slot(serialized[k][3]));
+        std::map<unsigned, InputRumbleTimer> imported_rumble_timers;
         controls.clear();std::vector<std::pair<std::shared_ptr<Task::ObjectControl>,std::optional<std::uint16_t>>> control_tasks;
         for(unsigned k=0;k<4096;++k)if(!free.test(k)){
             const auto& words=serialized[k];TaskGraphNode n{};n.slot=k;n.linked=linked.test(k)!=0;n.next=slot(words[0]);n.previous=slot(words[1]);n.parent=slot(words[2]);n.child=slot(words[3]);
             n.exec=callback(words[4]);n.display=callback(words[5]);n.destructor=callback(words[6]);
-            n.primary=work(words[8],k,32);n.motion=work(words[9],k,36);n.force=work(words[10],k,40);n.auxiliary=work(words[11],k,44);n.field30=resource(words[12]);
+            n.primary=work(words[8],k,32);n.motion=work(words[9],k,36);
+            if (words[10] && is_input_rumble_timer(words) && valid_input_rumble_timer(words[10]))
+                imported_rumble_timers.emplace(k,InputRumbleTimer{words[10]});
+            else
+                n.force=work(words[10],k,40);
+            n.auxiliary=work(words[11],k,44);n.field30=resource(words[12]);
             if(words[7]){auto control=std::make_shared<Task::ObjectControl>();if(!g.read(words[7]+2,&control->flags_at_2,1)){g.stop("task bridge: missing control flag at "+hex(entry));throw MetadataUnavailable{};}control_tasks.push_back({control,slot(word(words[7]+4))});controls[control.get()]=words[7];n.control=control;}
             state.nodes.push_back(std::move(n));
         }
         state.context.current_function=callback(word(0x3abdbf4));state.context.field30=resource(word(0x3abdbf8));
         scheduler->set_default_field30(resource(word(0x38f6e08)));
         const auto result=scheduler->restore_source_graph(state);if(!result){g.stop("task bridge: invalid native graph at "+hex(entry));throw MetadataUnavailable{};}
+        input_rumble_timers=std::move(imported_rumble_timers);
         for(auto& [control,target]:control_tasks){control->task_at_4=target?scheduler->source_task(*target):TaskHandle{};if(target&&!control->task_at_4){g.stop("task bridge: unbound control task at "+hex(entry));throw MetadataUnavailable{};}}
     }
     void export_graph(){
         auto& g=process.guest();const auto state=scheduler->source_graph();if(state.failure!=TaskFailure::none){g.stop("task bridge: incomplete native graph at "+hex(entry));throw MetadataUnavailable{};}
         for(const auto& n:state.nodes){auto& words=serialized[n.slot];words[0]=address(n.next);words[1]=address(n.previous);words[2]=address(n.parent);words[3]=address(n.child);
             words[4]=raw(n.exec);words[5]=raw(n.display);words[6]=raw(n.destructor);words[7]=n.control?controls.at(n.control.get()):0;
-            const TaskWorkHandle handles[4]={n.primary,n.motion,n.force,n.auxiliary};for(unsigned k=0;k<4;++k){words[8+k]=address(handles[k]);if(handles[k])allocations[words[8+k]]=handles[k];}words[12]=raw(n.field30);
+            const TaskWorkHandle handles[4]={n.primary,n.motion,n.force,n.auxiliary};for(unsigned k=0;k<4;++k){words[8+k]=address(handles[k]);if(handles[k])allocations[words[8+k]]=handles[k];}
+            if (const auto timer=input_rumble_timers.find(n.slot); timer!=input_rumble_timers.end())
+                words[10]=timer->second.address;
+            words[12]=raw(n.field30);
         }
         for(unsigned k=0;k<state.free_slots.size();++k){auto& words=serialized[state.free_slots[k]];words[0]=k?address(state.free_slots[k-1]):0;words[1]=k+1<state.free_slots.size()?address(state.free_slots[k+1]):0;}
         // Compare the pool in one read: no guest code runs between these independent
@@ -196,10 +222,19 @@ struct TaskBridge {
         std::uint32_t owner=0,source_pool=0;
         std::array<std::uint32_t,4> saved{}; // EBP, ESI, EBX, EDI
         bool children=false;
+        std::optional<unsigned> input_rumble_destructor;
     };
     void lifetime_next(const std::shared_ptr<LifetimeRun>& run,bool returned=false){
         auto& g=process.guest();entry=run->owner;
         try{
+            if (returned && pool == run->source_pool && run->input_rumble_destructor) {
+                const auto slot_index=*run->input_rumble_destructor;
+                if (word(pool+52*slot_index+40)!=0) {
+                    g.stop("task bridge: input rumble destructor did not clear work at 40b596");
+                    return;
+                }
+                run->input_rumble_destructor.reset();
+            }
             if(returned){if(pool!=run->source_pool){g.stop("task bridge: changed lifetime pool at 40b596");return;}if(!ready())return;import_graph();}
             auto before=scheduler->source_graph();std::vector<std::pair<std::shared_ptr<Task::ObjectControl>,std::uint32_t>> borrowed;
             for(const auto& n:before.nodes)if(n.control)borrowed.push_back({n.control,controls.at(n.control.get())});
@@ -213,7 +248,10 @@ struct TaskBridge {
             if(run->children){target=call.callee==TaskLifetimeCallee::run_children?0x40b420:0x40b570;back=call.callee==TaskLifetimeCallee::run_children?0x40b7f4:0x40b826;reserve=8;g.set_u32(sp-4,run->saved[1]);g.set_reg(UC_X86_REG_ESI,address(run->cursor.task->source_slot()));g.set_eax(task);}
             else {
                 g.set_u32(sp-4,run->saved[1]);g.set_u32(sp-8,run->saved[0]);g.set_reg(UC_X86_REG_ESI,address(run->cursor.task->source_slot()));g.set_reg(UC_X86_REG_EBP,0);
-                if(call.callee==TaskLifetimeCallee::destructor){target=raw(call.callback);back=0x40b593;reserve=12;g.set_eax(target);}
+                if(call.callee==TaskLifetimeCallee::destructor){
+                    if (input_rumble_timers.count(*call.task->source_slot()))
+                        run->input_rumble_destructor=*call.task->source_slot();
+                    target=raw(call.callback);back=0x40b593;reserve=12;g.set_eax(target);}
                 else {target=0x40b7e0;back=0x40b5b1;reserve=20;g.set_u32(sp-12,run->saved[2]);g.set_u32(sp-16,run->saved[3]);g.set_reg(UC_X86_REG_EBX,run->cursor.previous?address(run->cursor.previous->source_slot()):0);g.set_reg(UC_X86_REG_EDI,run->cursor.next?address(run->cursor.next->source_slot()):0);}
             }
             g.redirect(target,{task},0,[this,run](X86Guest&){lifetime_next(run,true);},reserve,back);

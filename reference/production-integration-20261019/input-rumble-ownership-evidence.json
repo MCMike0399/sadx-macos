@@ -1,0 +1,48 @@
+{
+  "reproduction": {
+    "full_route": "python3 /private/tmp/sadx-task-ownership-repro.py",
+    "log": "build/journeys/task-ownership-exact/app.log",
+    "failure_frame": 2504,
+    "pointer": "0x446c4160",
+    "arena": "0x41193660",
+    "slot": 163,
+    "field": "0x28",
+    "exec": "0x213a8e00",
+    "writer": "0x213a90c7"
+  },
+  "minimal": {
+    "command": "/private/tmp/sadx-rumble-repro",
+    "seconds": 0.568,
+    "exit_status": 2,
+    "source": "/private/tmp/sadx-rumble-repro.cpp",
+    "error": "task bridge: unowned work field 4000e100 at 40b170 (arena 40270000, slot 0, field +28, exec 213a8e00, current 0)"
+  },
+  "source": {
+    "commit": "68e2a91bec4a55967674c1420ecd9abf89bcd0ce",
+    "url": "https://raw.githubusercontent.com/michael-fadely/sadx-input-mod/68e2a91bec4a55967674c1420ecd9abf89bcd0ce/sadx-input-mod/rumble.cpp",
+    "local": "/private/tmp/sadx-input-rumble.cpp"
+  },
+  "facts": [
+    "Input mod base 0x213a0000 from startup-only module map.",
+    "Rumble_Load_hook RVA0x8f60 creates task flags0, allocates CRT RumbleTimer and stores task+0x28 atRVA0x90c7.",
+    "Rumble_Main_hook RVA0x8e00 consumes +0x28; Rumble_Delete RVA0x8f20 clears +0x28 atRVA0x8f2a then callsCRTdelete atRVA0x8f53."
+  ],
+  "sha256": {
+    "/private/tmp/sadx-input-rumble.cpp": "6dc4599e47b257d575b8518e931a6672af763b34f3f17df7c927484252859afd",
+    "reference/updated-pc-reference/game/mods/sadx-input-mod/sadx-input-mod.dll": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5"
+  },
+  "resolution": "The reference adapter retains the known pinned Input RumbleTimer as a CRT-owned sidecar for task field +0x28. Arena work remains strict. Native deferred deletion is allowed, but the original destructor must clear the field before arena cleanup. Sidecars reset on import, slot reuse and pool initialization.",
+  "validation": {
+    "test": "tests/unit/hle_task_rumble.cpp",
+    "actual_pinned_dll": "create, six original/native dispatches, deferred destruction, CRT release; complete 16 MiB+32 arena bytes, task links and heap liveness match",
+    "additional": "reused slot and repeated pool initialization match; wrong destructor, nonheap payload and destructor without clear rejected",
+    "existing_corpus": "16 work sequences/4890 operations; 19 graph sequences/2316 operations; 18 dispatch and 6 lifetime scenarios pass; all 12 existing mutants caught",
+    "independent_review": "boss_rendering approved private source and independently ran the real-DLL fixture; root reviewed the field layout and final pool-reset addition",
+    "canonical_tests": "Both canonical hle-task-rumble-test and unchanged hle-task-bridge-test exited 0"
+  },
+  "limits": [
+    "Pinned Input 2.6.1 callbacks and timer layout only; unknown external task data still rejects.",
+    "This composes the reference adapter with original mod code; native Input mod recovery and physical vibration output are not claimed.",
+    "Final default-task Chaos replay and full integrated gate pending at this evidence snapshot."
+  ]
+}

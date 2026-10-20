@@ -1,0 +1,210 @@
+{
+  "format_version": 1,
+  "evidence_type": "frozen Chaos0 replay with default native task adapter",
+  "command": "python3 tools/journey/check_gameplay.py --route fresh-adventure --out build/journeys/chaos-zero-final-i-native-tasks",
+  "engine": "guest-reference",
+  "task_execution": "native-task-adapter",
+  "passed": true,
+  "local_report": "build/journeys/chaos-zero-final-i-native-tasks/report.json",
+  "local_report_sha256": "bb9383ef54e67d9c2a768f9a450baae857da6ffbd7898bdd27d5094c77c4e459",
+  "checks": [
+    {
+      "name": "fresh-sonic-intro",
+      "passed": true,
+      "stage": 26,
+      "mode": 5
+    },
+    {
+      "name": "expected-stage",
+      "passed": true,
+      "stage": 15
+    },
+    {
+      "name": "expected-gameplay-mode",
+      "passed": true,
+      "expected": 4,
+      "observed": 4
+    },
+    {
+      "name": "pinned-profile-live-patches",
+      "passed": true,
+      "observed": {
+        "ccef_reset_1": "810d",
+        "ccef_reset_2": "810d",
+        "ehcf_dereference": "909090",
+        "ehcf_branch": "9090",
+        "skipma_ingame_to_speedrun": true,
+        "skipma_movie_to_speedrun": true,
+        "limiter_to_speedrun": true,
+        "extra_ticks_to_speedrun": true,
+        "frame_rate_scalar": 63
+      },
+      "expected": {
+        "ccef_reset_1": "810d",
+        "ccef_reset_2": "810d",
+        "ehcf_dereference": "909090",
+        "ehcf_branch": "9090",
+        "skipma_ingame_to_speedrun": true,
+        "skipma_movie_to_speedrun": true,
+        "limiter_to_speedrun": true,
+        "extra_ticks_to_speedrun": true,
+        "frame_rate_scalar": 63
+      }
+    },
+    {
+      "name": "keyboard-moves-sonic",
+      "passed": true,
+      "distance": 8.94265711021422,
+      "action": 2
+    },
+    {
+      "name": "pad-moves-sonic",
+      "passed": true,
+      "distance": 7.435484863048638,
+      "action": 2
+    },
+    {
+      "name": "keyboard-jump-rises",
+      "passed": true,
+      "rise": 17.544735,
+      "action": 8
+    },
+    {
+      "name": "world-frame-visible",
+      "passed": true,
+      "width": 640,
+      "height": 480,
+      "colours": 75026
+    },
+    {
+      "name": "gameplay-draws-supported",
+      "passed": true,
+      "frames": 556,
+      "skipped_frames": []
+    }
+  ],
+  "performance": {
+    "presents": 120,
+    "wall_seconds": 25.4099954579724,
+    "observed_host_fps": 4.722551021249787,
+    "offscreen_uncapped": true,
+    "configured_profile_fps": 63
+  },
+  "performance_environment": "Full gate177 ran concurrently; this is observed host throughput, not an isolated benchmark.",
+  "original_task_reference": "build/journeys/chaos-zero-final-h/report.json",
+  "checkpoint_comparisons": [
+    {
+      "name": "file-select",
+      "frame": 950,
+      "state_equal": true,
+      "pixels_equal": true
+    },
+    {
+      "name": "new-file-created",
+      "frame": 1140,
+      "state_equal": true,
+      "pixels_equal": true
+    },
+    {
+      "name": "sonic-intro",
+      "frame": 2040,
+      "state_equal": true,
+      "pixels_equal": true
+    },
+    {
+      "name": "intro-before-skip",
+      "frame": 2340,
+      "state_equal": true,
+      "pixels_equal": true
+    },
+    {
+      "name": "chaos-zero-intro",
+      "frame": 2360,
+      "state_equal": true,
+      "pixels_equal": true
+    },
+    {
+      "name": "boss-intro-before-skip",
+      "frame": 2420,
+      "state_equal": true,
+      "pixels_equal": true
+    },
+    {
+      "name": "chaos-zero-start",
+      "frame": 2450,
+      "state_equal": true,
+      "pixels_equal": true
+    },
+    {
+      "name": "chaos-ready",
+      "frame": 2720,
+      "state_equal": true,
+      "pixels_equal": true
+    },
+    {
+      "name": "keyboard-moved",
+      "frame": 2750,
+      "state_equal": true,
+      "pixels_equal": true
+    },
+    {
+      "name": "before-pad",
+      "frame": 2780,
+      "state_equal": true,
+      "pixels_equal": true
+    },
+    {
+      "name": "pad-moved",
+      "frame": 2810,
+      "state_equal": true,
+      "pixels_equal": true
+    },
+    {
+      "name": "before-jump",
+      "frame": 2870,
+      "state_equal": true,
+      "pixels_equal": true
+    },
+    {
+      "name": "jump",
+      "frame": 2885,
+      "state_equal": true,
+      "pixels_equal": true
+    },
+    {
+      "name": "fight-after-inputs",
+      "frame": 3005,
+      "state_equal": true,
+      "pixels_equal": true
+    }
+  ],
+  "all_states_equal": true,
+  "all_pixels_equal": true,
+  "first_divergence": null,
+  "whole_route_rejected_draw_lines": 0,
+  "whole_route_guest_stop_lines": 0,
+  "input_sha256": {
+    "build/sadx-app": "000a9e42d35b4f000a36c3422dfe58f2de4ff23a12f7136a0dc233c08a31b2e7",
+    "/Users/burbujamc/Developer/sadx-macos/tools/journey/check_gameplay.py": "c2337528be708c9cde191784b22222b23c352a76e015f1208ff539f9fe51d8c1",
+    "/Users/burbujamc/Developer/sadx-macos/tools/journey/sadx_driver.py": "5e19e054d94e79312f85f496cb3f9c727ec339056fa2b392d19c332d12c73a1a",
+    "reference/updated-pc-reference/game/sonic.exe": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "reference/updated-pc-reference/game/savedata/SonicDX01.snc": "15ac61323e0508d72a279f0f648f4b5007793cc0c8fb42bce9d893f00c265cf6",
+    "reference/updated-pc-reference/game/mods/.modloader/profiles/updated-speedrun.json": "3402bf11fa59c52990bf670689794725b350f5089e7ed1b97ac354bda171572d",
+    "reference/updated-pc-reference/game/mods/.modloader/SADXModLoader.dll": "3293cf354dcfc62274c2ad25c09041606d6ad55483f070c233111cd9b47a97ba",
+    "reference/updated-pc-reference/game/mods/sadx-input-mod/sadx-input-mod.dll": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+    "reference/updated-pc-reference/game/mods/sadx-input-mod/config.ini": "f5ac427b9fd270bebc2383afa24948849d17bd2a700f330c2adf4f11ed262cbf",
+    "reference/updated-pc-reference/game/mods/sadx-speedrun-mod/sadx-speedrun-mod.dll": "f3fc68a3058fb726142547018da860b170f137248e54b82712b52527e7b74802",
+    "reference/updated-pc-reference/game/mods/sadx-speedrun-mod/config.ini": "184e1158b2bbfc1be1c2c2a4ab67bae07f83d428efe9fbd1469f695fd5eaffa7"
+  },
+  "verified_source_sha256": {
+    "src/hle/hle_task_bridge.cpp": "a49c2ba4e5b80810edd8922b6a5bdacf13a9b3eec77f43263a41d3c8dcc7b8d9",
+    "tests/unit/hle_task_rumble.cpp": "ffa9ee0a4f5c68fa6189ee67c7d6d60b6ee74fef0bfc09c54efecf06179c47d0"
+  },
+  "app_matched_disk_after_run": true,
+  "limits": [
+    "Guest reference still requires sonic.exe and original DLLs; this is not native product N5.",
+    "The native task adapter matches14 observed checkpoints; full game and Windows parity remain unverified.",
+    "Complete Chaos0 fight, EmeraldCoast goal replay and battle camera controls were not checked.",
+    "Observed host throughput remains below the configured63FPS profile."
+  ]
+}
