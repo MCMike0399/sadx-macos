@@ -1,0 +1,61 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "3b91d591bcad8b7820d7cb576a46e3d9a1d2aca2d606877d5a15e61e9031bd29",
+ "original_ranges_sha256": {
+  "0x781570-0x7815b4": "bb1c80663b208d473155332f93defa96f2e81213be4aa2d8dcecf324f7175208",
+  "0x781250-0x781565": "66ed7c49e203c698937fd0e36a3cfb1edb66387d8c3f3ab90b7de6233d7bf7be",
+  "0x791170-0x7912d8": "b53163841b3a4b08636fc389fcabc81044a6b4146e48a332189360aeb0634e44",
+  "0x787e30-0x787e4b": "8b88c9438ff69fce2a739a9511c48ecef0c173efa3c822362f2bc41ad2b91792",
+  "0x7716df-0x771773": "798e8ec191de74f25faf5c83f2fb8a55e9cf5154abf2c2ac7a45ae23c1f519d6"
+ },
+ "dispatch_seed": {
+  "0x389b784": "0x774310",
+  "0x389b7c0": "0x7757e0"
+ },
+ "profiles": {
+  "primary": {
+   "cases": 3000,
+   "native_failures": 0,
+   "value_mismatches": 0,
+   "field_mismatches": {},
+   "examples": []
+  },
+  "seeded": {
+   "cases": 3000,
+   "native_failures": 0,
+   "value_mismatches": 0,
+   "field_mismatches": {},
+   "examples": []
+  }
+ },
+ "seeded_values_match": true,
+ "primary_values_with_unicorn_transcendentals_match": true,
+ "limits": [
+  "781570 / 781250 / 791170 (the camera block, view matrix and projection WinMain sets at 402d4f..402d5e)\nagainst their original instructions.\n\nEvery instruction of 781570, 781250 and 791170 runs, with all their callees from the original bytes:\n788290/7883c0 (the 88af78 sine table), 7871f0, 787e30, 7716df, 770804 -> 774310 and 770d10 -> 7757e0\n(dispatch slots 389b784 / 389b7c0 written as 77350c leaves them on an SSE CPU without 3DNow!; 77350c is\nnot executed). The D3D8 device is a fixture: [3d128b0] -> object -> vtable whose +0x94 (SetTransform)\nand +0x9c (MultiplyTransform) are `ret 0xc` stubs that record (state, the 16 words passed). The matrix\nstack is a fixture block of 1..4 slots at [3d0fa1c] with a random current depth. Mode 0 runs 781570\n(thiscall, ECX = 3aad0a0) and then 781250; mode 1 runs 781250 on a random block.\n\nCompared: 3d0f760 (view), matrix-stack slot 0, 3d0f818 (current = base) and 3d0fa2c (depth),\n3d0f980, 3d0f9e0, 3d0f808, 3d0f968, 3d12960, 3d129c0, 389d398, 389d358 (sentinel when 7757e0\nreturns NULL), the block after 781570, the three device calls and the x87 control word.\n\nTwo profiles:\n  primary  Unicorn executes FPTAN (791240), FPATAN (79124a) and FSINCOS (771706) itself: QEMU computes\n           them with host doubles, the native side with the Bochs P5/P6 models.\n  seeded   right after each of those instructions the result registers are overwritten with the native\n           Bochs results (exported by the probe), so every other instruction is compared exactly.\n           Seeding proves the transcription, not Intel FPTAN/FPATAN/FSINCOS (roadmap M4).\nRCPSS/RCPPS are Unicorn's IEEE division in both the source and the native probe (not a real CPU's\nestimate). MXCSR profiles vary the rounding mode only (Unicorn ignores FZ/DAZ). At most one NaN source per\ncase (Unicorn applies the x87 NaN rule to SSE operands). VIEW_SMOKE=1 in the environment stops each profile\nafter 300 cases (for mutant runs); the recorded report never uses it.",
+  "primary value mismatches come from FPTAN/FPATAN/FSINCOS: Unicorn uses host doubles, the native Bochs models are not changed to match; settling them needs the Intel capture (roadmap M4). The report stays fail while they exist; the seeded profile is the transcription check",
+  "x87 and MXCSR exception flags are not compared (Unicorn 2.1.4 raises few x87 and no SSE flags)"
+ ],
+ "legacy_judge_source_files": {
+  "src/engine/ninja_view.hpp": "c5e41ad558ca1629c00001a772021546bdfa6fe3e03f9a9af2f5e5193af04c96",
+  "src/engine/ninja_view.cpp": "aad37d5b8a2ff72bc2f8f3ab43459aef6d119f64a4304eb9880d4c8993d2c232",
+  "src/math/d3dx_math.cpp": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171",
+  "src/math/ninja_math.cpp": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
+  "src/cpu/x87_transcendental.cpp": "5241f89cff162deec68fa95d19f26e908974be9c78a1bdc18044f2c893abd5ea",
+  "tests/probes/native_ninja_view_probe.cpp": "bed6c6761bc790c243206a98c94590779d0b7402cbdb7d8af1e8205cb1f7e511",
+  "tools/oracles/verify_original_ninja_view.py": "a5d22b42004b142534ff8e994dee32352e8031a941e5789ba9368161416b125f"
+ },
+ "native_sources": {
+  "src/engine/ninja_view_native.hpp": "db574ecb5115ebc24f9b60d7eeeb37da0edec1ba2106f2cf8246437591d59d93",
+  "src/engine/ninja_view_native.cpp": "8bf6c91240be8edaa6623768c8435ed181aa5ee4c477bb8f0e0207bf0ae8ce43",
+  "src/cpu/fidelity_float.hpp": "f8ab14de7dc01f0d054ce4098e61af34b7e5ba39f2281fc506be9d1864869dcb",
+  "tests/probes/native_ninja_view_native_probe.cpp": "f9dbf50b78cd98aa55907032e94ca707c641e8a4c5de96df917950f9756d66e3"
+ },
+ "unchanged_judge_sha256": "a5d22b42004b142534ff8e994dee32352e8031a941e5789ba9368161416b125f",
+ "source_identity_adapter": "Run the unchanged original view judge against the semantic native view probe.\n\nCase generation, comparisons, numeric models and exit status are delegated intact.\nOnly source identities are amended to describe the implementation actually linked.",
+ "tracked_summary": {
+  "full_sha256": "4ce3730318aea1b4da3ce5df607f9ebf2cbd5159466285e2527b1cf8251c7014",
+  "full_bytes": 5214,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

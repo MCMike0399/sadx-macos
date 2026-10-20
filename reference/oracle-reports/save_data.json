@@ -1,0 +1,37 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "input_mod_sha256": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+ "profile_patch": {
+  "site": "0x42d52d",
+  "target": "0x10009240",
+  "replacement_bytes": "c684246a02000001ff25dcb30010"
+ },
+ "source_ranges": {
+  "0x42d3b0-0x42d622": "9ed9c9124a6a40b3f8c83c1c267a0b1b5652b2f02b7e15b16d3c08b3173f75d0"
+ },
+ "native_sources": {
+  "src/game/save_data.hpp": "6eb46f3df135b1ec73fb9979ba7e3a8188524994c67ea66b59345c23326cd61e",
+  "src/game/save_data.cpp": "d0175338a858b42d58bda6155d4886a86a590d874d19c46e945c4b3d235f9eb4",
+  "tests/probes/native_save_data_probe.cpp": "8f12f8624c250cb5f9355d63651351b61ee5920b0812b194fd3849297aea78d0"
+ },
+ "native_library_sha256": "f3007f668b8261d4c089dc6a335312835208ec0a9f1cef4bbc6e7ffbeec0d865",
+ "seed": 20261020,
+ "cases": 1029,
+ "initialization_cases": 24,
+ "checksum_cases": 1005,
+ "initial_save_sha256": "e3789a332281fc97514f1de73443495871df6ac2237f249259220ae0277dc5ec",
+ "mismatches": 0,
+ "first_mismatches": [],
+ "passed": true,
+ "limits": [
+  "Tests initial save record and CRC; persistence and story progression need journeys.",
+  "Compiler security-cookie epilogue is bypassed; all save callees execute.",
+  "Pinned Input default-rumble replacement executes from the actual DLL."
+ ],
+ "tracked_summary": {
+  "full_sha256": "8541a81ad7536a5ef07390c065e2db84c96197ff3b1adc8fa54fd9f64a48329d",
+  "full_bytes": 1379,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

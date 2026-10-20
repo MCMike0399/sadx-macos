@@ -92,7 +92,7 @@ def main():
         key=f"mode{c[0]:#x}:failure{e[0]}";outcomes[key]=outcomes.get(key,0)+1;paths.add(tuple(e[15+5*i] for i in range(e[13])))
         if list(out)!=e:bad.append(dict(case=n,input=c[:42],fields=[i for i,(x,y) in enumerate(zip(out,e)) if x!=y][:12],source=[hex(v) for v in e[:30]],native=[hex(v) for v in list(out)[:30]]))
     blob=b''.join(struct.pack('<48I',*c) for c in cases);a.output.with_suffix('.cases.bin').write_bytes(blob)
-    names=['src/game/game_mode.hpp','src/game/game_mode.cpp','src/game/game_mode_internal.hpp','src/game/game_mode_native.cpp','src/guest/game_mode_reference.hpp','src/guest/game_mode_reference.cpp','tests/probes/native_game_mode_probe.cpp','tools/oracles/verify_original_game_mode.py']
+    names=['src/game/game_mode.hpp','src/game/game_mode_services.hpp','src/game/game_mode.cpp','src/game/game_mode_internal.hpp','src/game/game_mode_native.cpp','src/guest/game_mode_reference.hpp','src/guest/game_mode_reference.cpp','tests/probes/native_game_mode_probe.cpp','tools/oracles/verify_original_game_mode.py']
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={k:sha((pathlib.Path(__file__).resolve().parents[2]/k).read_bytes()) for k in names},original_range_sha256=sha(image.read(0x40c090,0x92d)),
         cases=len(cases),distinct_call_site_paths=len(paths),case_sha256=sha(blob),source_outcomes=dict(sorted(outcomes.items())),mismatch_count=len(bad),mismatches=bad[:30],order_arguments_stores_boundaries_match=not bad,limits=__doc__)
     a.output.write_text(json.dumps(report,indent=1)+'\n');print(json.dumps(dict(cases=len(cases),paths=len(paths),mismatches=len(bad))));return int(bool(bad))

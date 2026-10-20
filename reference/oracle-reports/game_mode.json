@@ -1,15 +1,16 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "db89219b80771b5ac9df16ddb3adef10fa5f643f79acd50a4da3967c7ff4c5f0",
+ "native_library_sha256": "22396cb2dbc5f003fdb86f5d893a6664966a7b28ad12137fc89327d449b95469",
  "source_files": {
   "src/game/game_mode.hpp": "44230c85f069ad96fc7360b6b16536e1da4001b6cf9d35574f3af772bbaf4075",
-  "src/game/game_mode.cpp": "d8bfc64b3b1e16675f905e2891faa1c4807c2dfd895afdc77004c70d2063c656",
-  "src/game/game_mode_internal.hpp": "2d412d304d51b911036088dd6bd7580dae048d52244a91c48498d1dc4f51f6ab",
-  "src/game/game_mode_native.cpp": "8a94d7105acb3f35f86063a6f0e332f69589de89ee39addd3b821cc58804e9c8",
+  "src/game/game_mode_services.hpp": "3e9a9663e178cc0295744c58d8ccb571aba7d17a55cba7290ec3258ae2ae7f26",
+  "src/game/game_mode.cpp": "8f830dabd7b2f3e594333799b47af001a6afebb7548ec2e95119b45c9dae5a43",
+  "src/game/game_mode_internal.hpp": "ff11b20acc87537c272eb42fbb1b274f7329f0492b6ed7cd9ed82ddd6bb54449",
+  "src/game/game_mode_native.cpp": "0b851e4ff34f4ef7554b866f62df3692d73f98d7ffe084f019aabf3ee4917e34",
   "src/guest/game_mode_reference.hpp": "a5e0f644ad592b50ce6d32eddc2d100997fe137e4145c379de0866adb14280f9",
   "src/guest/game_mode_reference.cpp": "db11678fd7fbdb2d0046a543c0954f1d6f45d98202e5f6a84710e43040d90029",
   "tests/probes/native_game_mode_probe.cpp": "d1e1c146a4cc6b46819cac257b2dcba737cec41915f26e84887bc1252f0bb587",
-  "tools/oracles/verify_original_game_mode.py": "b6d43481107aaced2b9b5ff593a83500df3115ede5d189dce754c6e8a41c676f"
+  "tools/oracles/verify_original_game_mode.py": "a8df08e0f9d0b995213f45f94652de08077bf56b3e056adc7001faaef0b4fd69"
  },
  "original_range_sha256": "09f9d83f6875ff84677c411a81e573d66feb815e538e15847e1e11bfb653a78f",
  "cases": 24000,
@@ -88,8 +89,8 @@
  "order_arguments_stores_boundaries_match": true,
  "limits": "Game-mode state machine 40c090 against original instructions.\n\nEvery callee is an explicit owner fixture with a scripted EAX (callees whose\nresult the source ignores return 0x5a5a5a5a); up to two scripted callees\nrewrite a source global when called, to exercise the source's rereads after\ncalls; one call can fail. The level pointer at 3b0ef4c targets a mapped word or\nis null (source faults at the MOVSX). This compares call order, call sites,\narguments, stores and failure boundaries; it does not show any owner subsystem\n(menus, saves, file loads, cutscenes, audio) is implemented.\n",
  "tracked_summary": {
-  "full_sha256": "c832e387d545e71833f42334459e2f5ee052221a4d5ab33663f8f917abcce4a8",
-  "full_bytes": 3785,
+  "full_sha256": "d64d9c19ad1a126b81d82f31628d64aea648ca04d904eaa3b8ea93696058a560",
+  "full_bytes": 3890,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

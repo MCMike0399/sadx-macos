@@ -4739,3 +4739,9 @@ The product still needs native boot/title, resources and gameplay recovery.
 * Reference normal inputs defeated Chaos 0 and entered/played Emerald Coast. Inactive source DestroyTask no-op fixes death retry; boss telemetry is read-only. Replay files preserve inputs; new extended replay determinism and Emerald Coast goal remain open. Later train/boss/stone/Windy Valley unverified.
 * Gate first attempt exit 2: new service declarations changed a fingerprinted scalar-state header. Moved services to their own header; original state header and its unchanged fingerprint check now pass. Gate 178 exit 0: 182 native programs, 81 Python tests and R1–R4 pass. STATUS refreshed. Full standalone oracles/m1 skipped; aggregate verdict still exit 2 with nine existing failures.
 * Next: integrate staged native movie decoder (full real intro completed), recovered movie control/fade, immediate Sprite2D, then real title tasks/resources. Isolated stages: /private/tmp/sadx-movie-stage, /private/tmp/sadx-movie-game-stage, /private/tmp/sadx-sprite-stage. Preserve worker ownership; no game assets/binaries committed, no push.
+
+### 2026-10-20 — native movie build preparation and startup reports (judge, gate 179)
+
+* Refreshed seven verified startup oracle summaries after source commit 640522f; game-mode source identities now include the separated native service header. Existing cases/comparisons unchanged; 24,000 game-mode cases still match.
+* Declared Apple movie frameworks, qualification target and next native movie source closure. New movie sources remain staged outside the repository until this judge commit; no movie/title implementation claim from this step.
+* Gate 179 exit 0: 182 native programs, 81 Python tests, R1–R4 pass. STATUS refreshed; PVR/depth partials and nine existing failures retained. Next: integrate staged movie/platform/immediate-rendering callers and native input, then post-intro cleanup/title. No push.

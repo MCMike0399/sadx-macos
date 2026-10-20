@@ -1,0 +1,28 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_ranges": {
+  "0x42c730": "55bf4ba6b5924e96f760340371a2eab390a4546d471b242a34e3d8bea43c08f5",
+  "0x42c7b0": "0aaf5fa89f446041e4bec2d10ef0f24c57706a9a963788c37eccc3f10f430743"
+ },
+ "native_sources": {
+  "src/game/logo_startup.hpp": "4534870b27dc73c29d89f69d12122e1a5eb34b31085813a7631d3f59d6133bef",
+  "src/game/logo_startup.cpp": "3a73866f8001a6bd2a7488a4da56d1aa73ba76d15dbe6d32c816719aea671fdf",
+  "tests/probes/native_logo_startup_probe.cpp": "87d4f0e3c1dfc8cf2c4f8b89aa595c191de181d4c34ba699b3488e8051447c06"
+ },
+ "native_library_sha256": "42711a6f5cb136fb4b090c8d37d738a5836fb6b6748bfd0b823bd8650b7b4cc8",
+ "seed": 20261020,
+ "cases": 1338,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "passed": true,
+ "limits": [
+  "Callees are fixtures; verifies order, arguments, stores and failure prefixes.",
+  "Full save initialization, rendering and native boot need integration checks."
+ ],
+ "tracked_summary": {
+  "full_sha256": "9eaea2bb5ff77f29f0283b75887277bb9e64e3d2eb25bdf4da3159fcc34514e1",
+  "full_bytes": 1011,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

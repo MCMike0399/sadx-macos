@@ -1,0 +1,30 @@
+{
+  "schema": 1,
+  "source_commit": "640522f",
+  "reason": "Refresh verified startup source summaries and prepare native movie platform build closure. Game-mode oracle only adds the separated native services header to source identity tracking; cases/comparisons unchanged.",
+  "source_game_mode_cases": 24000,
+  "source_game_mode_mismatches": 0,
+  "startup_gate": "reference/production-integration-20261020/native-startup-178-gate.json",
+  "movie_platform_evidence": "Full native RE-US decoder/audio-clock completion:3233video frames,4757517presented audio frames,device_error0 at -7400 volume; staged code remains outside repo until this preparation commits.",
+  "build_changes": [
+    "Link Apple AVFoundation/CoreMedia/CoreVideo frameworks.",
+    "Declare native movie/core/runtime source closure for the following integration; no original executable dependency.",
+    "Add movie qualification application build target."
+  ],
+  "identities": {
+    "Makefile": "eb141240a39c3859eb8bbdd6c5a5e50d5d2973bc72f6f205e7f299359887b070",
+    "tools/oracles/verify_original_game_mode.py": "a8df08e0f9d0b995213f45f94652de08077bf56b3e056adc7001faaef0b4fd69",
+    "reference/oracle-reports/logo_startup.json": "005d9ffb3e9b5bd1c999deaeccd5d9a72ca05fefdfd97f3d0578ba3a01ba628f",
+    "reference/oracle-reports/save_data.json": "b29069c80e88d45361a8c7c664c974de39cef3125ad86971689a5396b34ba5e3",
+    "reference/oracle-reports/ninja_view_native.json": "382d05c6fef65f0740e1d5910adef8f81463a637758a0d4f0df461f7dba2f7a2",
+    "reference/oracle-reports/pvr_draw.json": "5ad866ce9480223f86352809c7c3e1c7840ae07bd2e3be3cc26bcec850425a72",
+    "reference/oracle-reports/game_bootstrap.json": "710f5495d69c7a2be8567200891de4b086ccf0c7c83bdd6fc33657b07fd5871c",
+    "reference/oracle-reports/game_mode.json": "4d8b77a29545a6a7d3c1299ea654a03be7f98596a8f2735c4da8a12be008b213",
+    "reference/oracle-reports/ninja_projected_depth.json": "b55792532bd73af7b462ac893d54b3ad42f1b9145f6280d04bcd72a93124198d"
+  },
+  "limits": [
+    "This judge step does not implement native movie/title gameplay.",
+    "PVR/depth remain FP-only partials; nine prior oracle failures remain.",
+    "Full gate pending; will record actual exit status separately."
+  ]
+}

@@ -1,0 +1,39 @@
+{
+ "cases": 3957,
+ "seed": 20261020,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "flag_mismatches": 1932,
+ "values_match": true,
+ "passed": false,
+ "native_sources": {
+  "src/engine/pvr_draw.hpp": "fb5310eab3b9d2882a9a244852b414f77d1cfd3e3dfb9ff499674bb3f25b3f6c",
+  "src/engine/pvr_draw.cpp": "7a5d395287633bcad53146acd0adfae953c10787d7312edc06ac4554e76d63b3",
+  "src/engine/pvr_device.hpp": "c3e7ad6e4ab98a5c76154b1d233819216acfd6f150976593837077cb64883170",
+  "src/engine/pvr_device.cpp": "446a29ae3631d4379b046708742bf08e8ab1e20894b495385566b9f02e56e085",
+  "tests/probes/native_pvr_draw_probe.cpp": "4e6570cf92c427980037ad26410b6a4bbf9e4d53ba8d363fe4580550c2fb124d"
+ },
+ "native_library_sha256": "6e8bf3b51780a2e3007fd61f2b65a86a71aa62b4fff7224a069a1f2fe04bae64",
+ "source_ranges": {
+  "0x4338d0-0x433c8b": "92c0db90ce7a019cd734fb633c1791e895c7317a883daf41c185c05d39fe5449",
+  "0x4071c0-0x4072e5": "5ecf3b3347f236b654f04168b584e9b3fae9b973f1ae71df832137feb0c9db3d",
+  "0x432ea0-0x432f40": "12a8a13da4294f6dce9d444e6d75afc04b200b27c2e3ea7fd4c516507609bfb7",
+  "0x432df0-0x432e9c": "e0226ab6988145475fb92e705baab61d81221b2973bf84c2d3f165db4c9df426",
+  "0x432f40-0x432f83": "e16a07d1083a79e7efc196fb73422ecb9be19c4f2da39ff774ebfdae9eeb72d0",
+  "0x433010-0x43305d": "533b9e76aadf8478f6a58e8e7798d2cf75c098e03b5d6ec4fa1adedacf0c7ed2",
+  "0x791860-0x791933": "51de76d578682c5aa579292bac9765bd8ee8f879010742c685c2b6c5df445629",
+  "0x7943f0-0x7944a5": "e183b711f31e6d0aa767982a29ecdda0a90737ca7f86a8578dd4a9d8fe3c18df"
+ },
+ "limits": [
+  "Pinned loader GVR alpha-mask patch applied at 0x433c56.",
+  "Valid anchors only; invalid anchors read uninitialized source stack.",
+  "Texture metadata and scratch allocation are supplied fixtures; downstream Ninja draw calls are observed, device pixels are not certified.",
+  "Low-six FP exception flags compared separately."
+ ],
+ "tracked_summary": {
+  "full_sha256": "c63f6f0d6a350005778905174d88f1504882937e9da2d0c4836012be9324ce63",
+  "full_bytes": 1916,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

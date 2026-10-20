@@ -8,7 +8,7 @@
 CXX := xcrun clang++
 CXXFLAGS := -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0
 MACFLAGS := -fobjc-arc
-MAC_FRAMEWORKS := -framework Foundation -framework AppKit -framework Metal -framework MetalKit -framework QuartzCore -framework CoreGraphics -framework ImageIO -framework GameController -framework AudioToolbox
+MAC_FRAMEWORKS := -framework Foundation -framework AppKit -framework Metal -framework MetalKit -framework QuartzCore -framework CoreGraphics -framework ImageIO -framework GameController -framework AudioToolbox -framework AVFoundation -framework CoreMedia -framework CoreVideo
 NATIVE_CONTROLLER_CMAKE ?= cmake
 INCLUDES := -Isrc -Itests/fixtures
 GAME_DIR ?= game/Sonic Adventure DX
@@ -44,14 +44,14 @@ NATIVE_SOURCES := \
  src/engine/graphics_frame.cpp src/engine/graphics_frame_fog.cpp src/engine/graphics_frame_lighting.cpp \
  src/engine/ninja_matrix.cpp src/engine/ninja_projected_depth.cpp src/engine/ninja_texture.cpp \
  src/engine/ninja_view_native.cpp src/engine/pvr_device.cpp src/engine/pvr_draw.cpp \
- src/engine/speedrun.cpp src/engine/task.cpp src/engine/task_work.cpp \
+ src/engine/sprite_immediate.cpp src/engine/speedrun.cpp src/engine/task.cpp src/engine/task_work.cpp \
  src/game/game_bootstrap.cpp src/game/game_mode.cpp src/game/game_mode_native.cpp \
- src/game/logo.cpp src/game/logo_display.cpp src/game/logo_startup.cpp src/game/save_data.cpp \
+ src/game/movie.cpp src/game/logo.cpp src/game/logo_display.cpp src/game/logo_startup.cpp src/game/save_data.cpp \
  src/runtime/engine_code_tables.cpp src/runtime/logo_renderer.cpp src/runtime/logo_scene.cpp \
- src/runtime/native_display.cpp src/runtime/native_session.cpp
+ src/runtime/movie_scene.cpp src/runtime/native_display.cpp src/runtime/native_session.cpp
 NATIVE_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(NATIVE_SOURCES))
 NATIVE_PLATFORM_OBJECTS := build/obj/platform/mac/mac_clock.o build/obj/platform/mac/mac_audio.o \
- build/obj/platform/mac/hid_switch_controller.o build/obj/platform/mac/metal_device_frame.o
+ build/obj/platform/mac/hid_switch_controller.o build/obj/platform/mac/mac_movie.o build/obj/platform/mac/metal_device_frame.o
 MAC_SOURCES := $(wildcard src/platform/mac/*.cpp src/platform/mac/*.mm)
 MAC_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(filter %.cpp,$(MAC_SOURCES))) $(patsubst src/%.mm,build/obj/%.o,$(filter %.mm,$(MAC_SOURCES)))
 UNIT_SOURCES := $(wildcard tests/unit/*.cpp)
@@ -391,3 +391,7 @@ native-library-initial-state:
 
 build/mac-switch-backend-test: tests/unit/mac_switch_backend.mm build/libsadx-macos.a build/libsadx-core.a build/native-controller-deps/include/SDL3/SDL.h
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) -Ibuild/native-controller-deps/include $< build/libsadx-macos.a build/libsadx-core.a $(MAC_FRAMEWORKS) -o $@
+
+# Native media decoder qualification; source is introduced by the following movie integration.
+build/sadx-movie-qualify: src/apps/movie_qualify.mm build/libsadx-macos.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-macos.a build/libsadx-core.a $(MAC_FRAMEWORKS) -o $@
