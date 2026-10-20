@@ -1,11 +1,14 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "341dd1ecdbacdefeccd43c189027bfe288dcff526a39157d83a82053ba626ed3",
+ "native_library_sha256": "823d3cd8e4894c062c31a5800d95a09358f80522afcc9e66b5868a8d9388da36",
  "source_files": {
   "src/cpu/fidelity_float.hpp": "79ce87e96aec07a470e26bf800849a0838c11178ce765e7d01b7fa6caf0f56eb",
-  "src/game/game_library_init.cpp": "6b7bd62529d898af3b1701161872c1f9c3815d51fb163b5bfbaf245d25b155fc",
-  "src/game/game_library_init.hpp": "aa22d7ea520412cb4f805d48c171a0f7d99ef258bd6f8a6e1a4312ac282acd84",
-  "src/guest/game_library_init_reference.hpp": "9094439e37567dec9dd237a6ee8ac0d53340d1ba517ec822e2cd30c0e21e9e67",
+  "src/game/game_library_init.cpp": "a35a5677dc9a612a2ce468d118660b425615968eb6a8d763d1b3d1f93bad6595",
+  "src/game/game_library_init.hpp": "0110ff37a0e3d98962dc41f8ad0fd04436852a08e0e3c30f34e6d970b67520e0",
+  "src/game/game_library_init_internal.hpp": "ed4e75c2eea0a7ae91b498dd7e0c86cf4f88a27b3924f8afdc80663a8a9c5137",
+  "src/game/game_library_init_native.cpp": "607bed1326477ee96836805e63674a8eddce99d34e4fcdfb2b01a6a2c719bd08",
+  "src/guest/game_library_init_reference.cpp": "f01561a3cd1cad9fa88442175614ac51331969883c6a8115f6cd44e6c966617c",
+  "src/guest/game_library_init_reference.hpp": "d36e534f46195ed29b5119ba93ff6d41ffa77adfb742fed38469e3ad8beb4e24",
   "tests/probes/native_library_init_probe.cpp": "a2727ca48802ebd0fc5880e653843187968a145aabaf840f778213ebbeef3696",
   "tools/oracles/verify_original_library_init.py": "769243bb37e0055eb95b652850286109a02b3488595d8e9cbfe4a66448bdd6f3"
  },
@@ -92,8 +95,8 @@
  "state_traces_match": true,
  "limits": "781070 \"Sonic Library Initialize\" against its original instructions.\n\nThe whole PE is mapped; the 892940 config block and the viewport words\n3d12788/3d1278c are case inputs. Every callee is a recording fixture (hooked at\nentry; 793ef0's local rect is recorded by value; 788000 returns a scripted\nresult per try) and any nested call can stop the source; the 78c5a0 calls run\n(RET). Compared: completion, the 788000 tries left, 389d864..389d884,\n38a5dc4/38a5dc8/38a5dcc, 3d0f800, 3d0f9c0 (x87 under the case's control word)\nand the nested trace (callee, site, arguments). Not covered: the callees.\n",
  "tracked_summary": {
-  "full_sha256": "6bf687a2b9feadf6112c23c41270fff365dae3435ed14ba0b3e4e11a81b06685",
-  "full_bytes": 3776,
+  "full_sha256": "dbb1226fae7f4bde2fbdfe0b9c394967e1b8f18e4fecd4804ba61e6deaac0cdc",
+  "full_bytes": 4115,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

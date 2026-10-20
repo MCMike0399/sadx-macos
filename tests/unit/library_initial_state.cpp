@@ -1,5 +1,5 @@
 #include "game/library_initial_state.hpp"
-#include "game/game_library_init.hpp"
+#include "guest/game_library_init_reference.hpp"
 #include <algorithm>
 #include <iostream>
 #include <stdexcept>

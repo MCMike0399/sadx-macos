@@ -123,7 +123,7 @@ controllers: all
 # additionally link libsadx-macos and the frameworks; tests/unit/guest_<name>.cpp link the guest + Unicorn.
 .SECONDEXPANSION:
 # Address-shaped boot/mode interpreters are reference adapters.
-REFERENCE_UNIT_TARGETS := build/game-library-init-test build/player-scene-position-test build/ninja-fog-initial-state-test build/game-frame-owners-test build/game-view-initial-state-test build/ninja-fog-test build/ninja-queue-consumer-test build/game-view-test \
+REFERENCE_UNIT_TARGETS := build/library-initial-state-test build/game-library-init-test build/player-scene-position-test build/ninja-fog-initial-state-test build/game-frame-owners-test build/game-view-initial-state-test build/ninja-fog-test build/ninja-queue-consumer-test build/game-view-test \
  build/game-frame-control-test build/reference-frame-control-test build/game-logic-test build/game-logic-support-test build/game-loop-test build/game-startup-test build/ninja-device-init-test build/ninja-frame-calls-test build/ninja-screen-test build/ninja-queue-lifecycle-test \
  build/game-mode-test build/game-mode-leaves-test build/game-runtime-test \
  build/player-acceleration-ground-test build/player-acceleration-alternate-test \

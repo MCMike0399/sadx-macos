@@ -1,0 +1,7 @@
+{
+  "defect": "The first integrated gate exited 2 because the existing library_initial_state unit still included the old game-tier header after the semantic split.",
+  "correction": "Change only its include to guest/game_library_init_reference.hpp and register its target for guest-reference linkage. No assertions, constants, tolerances or fixtures changed.",
+  "validation": "build/library-initial-state-test passes: cold/configuration counts, display values and existing consumer.",
+  "source": "e46157f semantic library initialization",
+  "oracle": "library_init: 2400 cases, 72 outcomes, zero mismatches; report source identity refreshed after rewrite."
+}

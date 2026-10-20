@@ -1,13 +1,12 @@
 {
   "change": {
-    "base_commit": "7f35e9434813016925df303c00d380b712a02a43",
-    "evidence": "reference/production-integration-20261019/library-and-lines-source-evidence.json",
-    "evidence_sha256": "706f0ed7ad13dcfc01502d898b39d99898a228822dc914756780f2597ab336d8",
-    "mode": "additions-only",
-    "reason": "Register new native library and line-list tests; existing fixture assertions unchanged"
+    "base_commit": "e46157f4c55b1238ea68e2b426ee723e2ee526ac",
+    "evidence": "reference/production-integration-20261019/library-constants-judge-evidence.json",
+    "evidence_sha256": "9f630b682659468e24d616b15f7b2dda00e0cd3261c7a21edd8756e062b39773",
+    "reason": "Repair the remaining legacy constants-unit include/link after semantic library migration; assertions unchanged"
   },
   "files": {
-    "Makefile": "7998fb06b3f04f4a0a1d6fd35e63075f2e33ab03eba261515f9d702d5ed2e09c",
+    "Makefile": "763f480eaa54630de499b517ec94d72b1e82ae2259cbf9d3edde025df1ea0680",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
     "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
     "reference/frame-control-corpus.tsv": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",
@@ -69,7 +68,7 @@
     "reference/oracle-reports/input_mod_constants.json": "bb79f5c26b8ce16f38986ccacc4aad3a4b719c6f6218d207fe72bf855d431ae4",
     "reference/oracle-reports/input_mod_pad.json": "4007b85920c774b6421537794d3d0f100f6e846efffd56485803e8243c6bb03c",
     "reference/oracle-reports/keyboard.json": "ac045e8cfbb4a2cd0229b2d030999950f2e53eed66b64ddb042a581d72c34d29",
-    "reference/oracle-reports/library_init.json": "755368406287652c5344f246a5cf59e77d7e8425ef895ddea2a2732e91b2b084",
+    "reference/oracle-reports/library_init.json": "4a2ec8997cf23a592ce9cfc205aeec016dd80d8db52f55ca749b4441497e620a",
     "reference/oracle-reports/library_initial_state.json": "d90bcb3f1887c16b05cb93fab680f1e2b7db2c094fdd52c70f80751d8dd2c4c4",
     "reference/oracle-reports/logo.json": "c01c993756adc37dd920afc2d9907894b7daf3a5ee3b8d821d403bc591a1073c",
     "reference/oracle-reports/logo_display.json": "ccdae08b4411205e7c552780573d2c22560c0e9c1ccdb56f0588201c8f4162af",
