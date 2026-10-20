@@ -1,0 +1,26 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "26c67e22787067e90b44e85a1f32da4167d3ad7739285f4962a177311f11e4ed",
+ "original_range_sha256": "6d05db8e833f886992fa4aca291805a50c362033bdc9f6c84f72753b322681ce",
+ "cases": 3000,
+ "mismatch_count": 0,
+ "fp_flag_mismatches": 1251,
+ "mismatches": [],
+ "stores_transform_match": true,
+ "limits": "Projection range 403180 + 7815e0 against original instructions.\n\nThe D3D8 device is a COM fixture: GetTransform (+0x98) writes the case matrix,\nSetTransform (+0x94) records the written matrix. Each case runs with a random\ncache and again with the cache equal to the first run's stored values (the\nunchanged path). x87 status flags are reported separately.\n",
+ "legacy_judge_source_files": {},
+ "native_sources": {
+  "src/engine/ninja_view_native.hpp": "be3fdbeb26aa06b5cd4bf7251fff8b59d41294a3ba9e46f77dcb405c192097ff",
+  "src/engine/ninja_view_native.cpp": "e5a0ca309fee0c20d8485c6b6d02041b556670c82239a85106b8618e6112e939",
+  "src/cpu/fidelity_float.hpp": "f8ab14de7dc01f0d054ce4098e61af34b7e5ba39f2281fc506be9d1864869dcb",
+  "tests/probes/native_projection_range_native_probe.cpp": "fea7088b1a820d4a0895584b3360fc3b855301f8d96d0e496db32d8c7e45dc59"
+ },
+ "unchanged_judge_sha256": "541d4369a1e3b4bccd414d60781f316114bd4f0e413c366b018d5a019564a67d",
+ "source_identity_adapter": "Run the unchanged original projection-range judge against the semantic native clip-range probe.\n\nCase generation, comparisons, numeric models and exit status are delegated intact.\nOnly source identities are amended to describe the implementation actually linked.",
+ "tracked_summary": {
+  "full_sha256": "d189f428de0b1edc0d68d97004c93e8e8f07201ef2355d45d7aae1e116ff3a42",
+  "full_bytes": 1684,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

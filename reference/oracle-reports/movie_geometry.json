@@ -1,0 +1,26 @@
+{
+ "cases": 768,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "values_match": true,
+ "fp_flag_mismatches": 192,
+ "exception_flags_match": false,
+ "passed": false,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "9eafb4843840edba8a8a78061e7f158e12154c564dbf07fb9cc055037646fd06",
+ "source_ranges": {
+  "0x512d30-0x512dea": "19566fb2ad1bc4a1f2c887e4bf30b4742d492b5d88bb77c89d719bd2a7f7bc59"
+ },
+ "native_sources": {
+  "src/game/movie.hpp": "ae01d1a667c6cc2ab54ed42a1e6bbb776557f33a73b16c10c0607d6a54da68a5",
+  "src/game/movie.cpp": "242f48af5181c15950881cc09bde4c06eef3509695dd4be1049b9d936eb55895",
+  "tests/probes/native_movie_probe.cpp": "ef7f324d64eb34e8bab9849a33091552e58420782ff1afaa346ef9712aaee7bb"
+ },
+ "limits": "Compare DrawFadePoly's full point/color strip and ordered blend/draw calls.\n\nNo downstream renderer is replaced by guessed geometry. The boundary is the\nactual __njDrawPolygon2D call; low-six x87 flags are reported independently.\nUnicorn x87 flags differ from the software arithmetic context; exact hardware\nexception/status and deferred delivery parity are not established.\n",
+ "tracked_summary": {
+  "full_sha256": "aa7a1e1df00b2cfac0ada10d01e2d83a980b02163fdeb951f1834aedb28d7fbb",
+  "full_bytes": 1192,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

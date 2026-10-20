@@ -1,0 +1,29 @@
+{
+ "cases": 1927,
+ "producer_cases": 727,
+ "quad_cases": 1200,
+ "seed": 776050,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "flag_mismatches": 1920,
+ "values_match": true,
+ "limits": [
+  "Producer renderer and matrix services are explicit fixtures. Quad executes original vertex writes and primitive-UP arguments with an explicit projected-depth FLD fixture; actual projected depth judged separately. Device pixels not certified.",
+  "FP exception flags remain separate from compared values."
+ ],
+ "source_files": {
+  "src/engine/sprite_immediate.hpp": "bd0d8bc8b4d41050eab31c1cb0204e71d890ded6bc2daa951e5d49295bedbb1d",
+  "src/engine/sprite_immediate.cpp": "f1db7e0317f7d826cb89d2fa7f54f678ad43583c316d91ed0529d3b9c3e9c8bd",
+  "src/cpu/fidelity_float.hpp": "f8ab14de7dc01f0d054ce4098e61af34b7e5ba39f2281fc506be9d1864869dcb",
+  "tests/probes/native_sprite_immediate_probe.cpp": "f2e9d28cd8b7a14d783630edf1bf85539490bf65d1f2f279985d77eb5b940ac1",
+  "tools/oracles/verify_original_sprite_immediate.py": "480c18bcbaf11de34600fade6c4a7f8682757a5f302140f1021d1e9347d1d054"
+ },
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "a33c67a08fa0eda5cd2e9beb3add18561f2c9407ad432316bd95be7bb1eb42d6",
+ "tracked_summary": {
+  "full_sha256": "d5281270b7293c2b2f13552162fd24486abf23ef053b5b0d8f40cd08fc7fca86",
+  "full_bytes": 1281,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

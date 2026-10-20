@@ -4778,3 +4778,17 @@ The product still needs native boot/title, resources and gameplay recovery.
   matches the unchanged 500-case judge (291 FP partials); it is not integrated yet.
   Reference worker continues Emerald Coast from normal retries. Full persistent goal active;
   no assets/binaries committed, no push.
+
+### 2026-10-20 — native movie report refresh (judge, gate 180)
+
+* Source commit ba931d7 is now covered by gate 180: actual exit 0, 186 native programs,
+  92 Python tests and R1–R4 reference journeys pass. Native intro/skip evidence remains
+  separate and still ends at `clear_game`; no native title/story completion claim.
+* Refreshed 12 source-verified reports. The coefficient isolation checker also needed the
+  newly separated `engine/controller_values.hpp` in its copied/hash-checked include closure:
+  before exit 1 on undeclared include; after pass, unchanged seven source words match.
+  Input initialization still compares all 1,869 bytes. Eleven judge regression tests pass.
+* Aggregate oracle verdict exits 2; existing nine failures and all FP partials remain
+  explicit. Full standalone oracle sweep/m1 skipped. No tolerances, cases or expected values
+  were changed. Next: integrate staged cleanup/save/audio/queue/screen owners and continue
+  through title initialization. No push.

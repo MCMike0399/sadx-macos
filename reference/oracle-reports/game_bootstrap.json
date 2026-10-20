@@ -4,12 +4,12 @@
  "mismatches": 0,
  "first_mismatches": [],
  "passed": true,
- "native_library_sha256": "2fa1e8d9e3ccdc22c3d7fde0fa25c7b9bbc1931b23991b84780991c3b7293720",
+ "native_library_sha256": "9093e30c868169041cecdbe5e1a943f1c92ab8b01ced81af20d58a6e75534ab6",
  "native_sources": {
   "src/engine/character_resources.hpp": "33e1c852d47b128bda60d0fdaab6d8fd1120113f752bf212be4009a190d11928",
-  "src/game/game_bootstrap.hpp": "56291ee302a24f01dfd02fe696eac11b20ed5425928e026e320b9419c4d74481",
+  "src/game/game_bootstrap.hpp": "df46f4e508378f30f3c6699fec50f38efe90bc5fe0dbeacf0bbbf672484925b4",
   "src/game/game_bootstrap.cpp": "3461ee0394189845c5d7d54b39179b2870fd35508c355c80129b7e755f3d7670",
-  "tests/probes/native_game_bootstrap_probe.cpp": "62853b8f6ec1fab1fcc46530a7c4cc7c26b8d7be0e213949418e37d24173f5e7"
+  "tests/probes/native_game_bootstrap_probe.cpp": "53bbad0381d0c77ef20bceb0e884fd4fbe5fef1cd480f3c7857ea463cd1c2373"
  },
  "source_ranges": {
   "0x415000-0x415041": "0f40d8a13e1f5f459c34143687410f9a5740dc1e9d7c72d044e837d38976b180",
@@ -32,7 +32,7 @@
  "shared_owners": {
   "card_result": {
    "source": "0x3b290e4",
-   "borrowed_from": "GameFlowState.save_phase"
+   "borrowed_from": "Session.card_result_ (distinct from GameFlowState.save_phase)"
   },
   "global_timer": {
    "source": "0x3b0f13c",
@@ -57,8 +57,8 @@
  },
  "limits": "Execute actual game Start initialization and compare native scalar/table effects.\n\nCharacter texture release and pinned Input vibration-stop are explicit service\nfixtures. Actual Sonic action pointer identities come from a supplied table; the\nsource copies entries100/101 without dereferencing their object/motion payloads.\nCRT srand is a fixture receipt for the separately recovered CRT store.\n",
  "tracked_summary": {
-  "full_sha256": "d35be8d49792807ebbc769e44ad86c077e90bde9217d304d41c3e132620f84be",
-  "full_bytes": 3122,
+  "full_sha256": "554db32ca30593a87baa15d62b85b758f84d9c30b58d5f6c2b1c16d5c34c98f6",
+  "full_bytes": 3159,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

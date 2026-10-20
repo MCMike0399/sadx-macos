@@ -1,0 +1,33 @@
+{
+ "cases": 756,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "limits": "Compare movie wrapper/control flow with explicit media/input service fixtures.\n\nThe decoder readiness fixture is false: this judges playlist, held-skip, reset,\nquit, wrapper order and return values. Fade/render have separate judgments.\n",
+ "passed": true,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "9eafb4843840edba8a8a78061e7f158e12154c564dbf07fb9cc055037646fd06",
+ "native_sources": {
+  "src/game/movie.hpp": "ae01d1a667c6cc2ab54ed42a1e6bbb776557f33a73b16c10c0607d6a54da68a5",
+  "src/game/movie.cpp": "242f48af5181c15950881cc09bde4c06eef3509695dd4be1049b9d936eb55895",
+  "tests/probes/native_movie_probe.cpp": "ef7f324d64eb34e8bab9849a33091552e58420782ff1afaa346ef9712aaee7bb"
+ },
+ "source_ranges": {
+  "0x42f020-0x42f072": "0dfe2c973e23fa84fb12185a0917290699dd7594793d36ba0104596b3983e413",
+  "0x5130a0-0x5133b7": "7d479312edbadf1af2ff556dc488dfada8d10eea24ed28e0b5f0e0a9f1377e3f"
+ },
+ "profile": "Executes pinned compiled Skipma replacement; decoder readiness false.",
+ "speedrun_dll_sha256": "f3fc68a3058fb726142547018da860b170f137248e54b82712b52527e7b74802",
+ "compiled_skipma": {
+  "hook": "0x10007a40",
+  "bytes": "b8a8e3b0038b00a80cff254c000110",
+  "return_pointer": "0x1001004c",
+  "return_bytes": "ba325100",
+  "executed": 1093
+ },
+ "tracked_summary": {
+  "full_sha256": "898dc3bea25c89dc4ba81ce22e68da883a7480055cc2ba1eb9ffa0f6e32425d4",
+  "full_bytes": 1425,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

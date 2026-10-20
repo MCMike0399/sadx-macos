@@ -1,0 +1,37 @@
+{
+  "reason": "Refresh verified oracle summaries after separate native movie/input source commit; unchanged comparisons and explicit FP partials retained.",
+  "source_commit": "ba931d7809c9ba27982f90106b3190361195d8e8",
+  "reports": {
+    "input_initial_state": "90a45e74bf5662e97de05234e5ba8eb255aeb582d7e59234c2ffdc8aafb2afa1",
+    "input_mod_constants": "8c5b1f78a13a44ee1251bf6b0abd611d26c985ca377fb9a6923f8492f3752273",
+    "game_bootstrap": "554db32ca30593a87baa15d62b85b758f84d9c30b58d5f6c2b1c16d5c34c98f6",
+    "game_mode": "2984ad7a7491cd0ba4de4673aee48bfb730075c39f487212eea8752b8f4b846a",
+    "ninja_view_native": "4935286a3b5db922ea97c65641d9153b3ae42b46c8496f0e3768e7a038efcf8c",
+    "sprite_immediate": "d5281270b7293c2b2f13552162fd24486abf23ef053b5b0d8f40cd08fc7fca86",
+    "projection_range_native": "d189f428de0b1edc0d68d97004c93e8e8f07201ef2355d45d7aae1e116ff3a42",
+    "movie": "898dc3bea25c89dc4ba81ce22e68da883a7480055cc2ba1eb9ffa0f6e32425d4",
+    "movie_fade": "ba127c1cd89574f14292a6ccc81198c19dff63f4f052699612ef17d4f161dd3b",
+    "movie_geometry": "aa7a1e1df00b2cfac0ada10d01e2d83a980b02163fdeb951f1834aedb28d7fbb",
+    "movie_timing": "ee9f4e1f77dd5bbbc7e98f3da54784cd04708f972b43a93382ace0622e7aa4f2",
+    "native_input": "1adfcd85745223dac5a0863cf55466ab1ddbbe7c79d87dcfdcc72b50c12f4d47"
+  },
+  "evidence": "native-movie-integration.json and native-movie-production-closure.json",
+  "initialization_checks": "Unchanged1869-byte input initialization and pinned Input coefficient comparisons both zero mismatches.",
+  "gate": "Pending; prior exit2 was stale input report source fingerprints.",
+  "coefficient_closure_correction": {
+    "before": "checker exits1: undeclared maintained include src/engine/game_controller.hpp: engine/controller_values.hpp",
+    "change": "Add actual minimal DTO include to isolated copy/hash closure and oracle source identities; no values, expectations, cases or tolerances changed.",
+    "source_comparison": {
+      "cases": 1,
+      "words_compared": 7,
+      "mismatches": 0
+    },
+    "source_verifier_sha256": "c31824cd82f792f67a49f236b7cae495ea0399fae2f5147eb1f814e8271bda2f"
+  },
+  "scoped_check": {
+    "command": "make -j10 oracle-input-mod-constants oracle-input-initial-state test",
+    "exit_status": 0,
+    "python_tests": 92,
+    "log_sha256": "7a9b713bbeb83fb59f4408340f1e89684511a55ca4a84bc9fa93e7c56e216359"
+  }
+}

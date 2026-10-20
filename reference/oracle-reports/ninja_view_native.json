@@ -1,6 +1,6 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "3b91d591bcad8b7820d7cb576a46e3d9a1d2aca2d606877d5a15e61e9031bd29",
+ "native_library_sha256": "2456b0b62e2b31b5ee9af91de10a36c17949d985ee7c032201761681f10ead85",
  "original_ranges_sha256": {
   "0x781570-0x7815b4": "bb1c80663b208d473155332f93defa96f2e81213be4aa2d8dcecf324f7175208",
   "0x781250-0x781565": "66ed7c49e203c698937fd0e36a3cfb1edb66387d8c3f3ab90b7de6233d7bf7be",
@@ -45,15 +45,15 @@
   "tools/oracles/verify_original_ninja_view.py": "a5d22b42004b142534ff8e994dee32352e8031a941e5789ba9368161416b125f"
  },
  "native_sources": {
-  "src/engine/ninja_view_native.hpp": "db574ecb5115ebc24f9b60d7eeeb37da0edec1ba2106f2cf8246437591d59d93",
-  "src/engine/ninja_view_native.cpp": "8bf6c91240be8edaa6623768c8435ed181aa5ee4c477bb8f0e0207bf0ae8ce43",
+  "src/engine/ninja_view_native.hpp": "be3fdbeb26aa06b5cd4bf7251fff8b59d41294a3ba9e46f77dcb405c192097ff",
+  "src/engine/ninja_view_native.cpp": "e5a0ca309fee0c20d8485c6b6d02041b556670c82239a85106b8618e6112e939",
   "src/cpu/fidelity_float.hpp": "f8ab14de7dc01f0d054ce4098e61af34b7e5ba39f2281fc506be9d1864869dcb",
   "tests/probes/native_ninja_view_native_probe.cpp": "f9dbf50b78cd98aa55907032e94ca707c641e8a4c5de96df917950f9756d66e3"
  },
  "unchanged_judge_sha256": "a5d22b42004b142534ff8e994dee32352e8031a941e5789ba9368161416b125f",
  "source_identity_adapter": "Run the unchanged original view judge against the semantic native view probe.\n\nCase generation, comparisons, numeric models and exit status are delegated intact.\nOnly source identities are amended to describe the implementation actually linked.",
  "tracked_summary": {
-  "full_sha256": "4ce3730318aea1b4da3ce5df607f9ebf2cbd5159466285e2527b1cf8251c7014",
+  "full_sha256": "4935286a3b5db922ea97c65641d9153b3ae42b46c8496f0e3768e7a038efcf8c",
   "full_bytes": 5214,
   "lists_cut_to": 10,
   "cut_lists": {}

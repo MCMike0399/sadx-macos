@@ -22,7 +22,7 @@ ROOT = Path(__file__).resolve().parents[2]
 SOURCES = ('src/input/input_mod_constants.hpp', 'src/input/input_mod_constants.cpp',
            'tests/probes/input_mod_constants_probe.hpp', 'tests/probes/native_input_mod_constants_probe.cpp',
            'src/input/input_mod_pad.hpp', 'src/input/input_mod_axes.hpp', 'src/input/input.hpp',
-           'src/engine/game_controller.hpp', 'src/cpu/sse_math.hpp',
+           'src/engine/game_controller.hpp', 'src/cpu/sse_math.hpp', 'src/engine/controller_values.hpp',
            'tools/oracles/verify_original_input_mod_constants.py')
 
 

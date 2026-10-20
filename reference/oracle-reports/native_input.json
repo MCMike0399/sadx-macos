@@ -1,0 +1,93 @@
+{
+ "source_sha256": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+ "constants_inverse_match": true,
+ "vanilla_key_map_inverse_match": true,
+ "vanilla_key_map_count": 102,
+ "soft_reset_cases": 256,
+ "soft_reset_mismatches": 0,
+ "constants_hex": "00004045000040c5917b30290000803f000000000000f0400ae3e4b4305fc43f0ae3e4b4305fc4bf",
+ "seed": 20261020,
+ "trace_count": 77,
+ "poll_evaluations": 3292,
+ "value_mismatches": 0,
+ "mxcsr_mismatches": 2731,
+ "first_mismatches": [],
+ "values_match": true,
+ "passed": false,
+ "scope": "Compare native keyboard->DreamPad traces with actual pinned Input DLL instructions.\n\nMouse is disabled. The actual DLL six-key map and game KeyboardUpdate instructions\nare exercised; the map tree is populated from original constructor setup values.\nWindow hook install is excluded (native host owns events). Focus uses the original reset range.\nUnicorn2.1.4 does not raise SSE sticky flags: values and MXCSR are reported separately.\n",
+ "native_probe_sha256": "53f7d4610af59c1b4d247e72edd3ca997254cf8ca7854098b261abba153c934e",
+ "cases_sha256": "11486a54d369a1567c88cfb03a202f5b7daae15c7ec53ad465b6fc58bfe781d1",
+ "source_files": {
+  "src/runtime/native_input.hpp": "f581ad2466e6fc0825035d61fd9517bc3d350450a695fc9bc967eca51faa7f59",
+  "src/runtime/native_input.cpp": "44d2c39a2e3a5030d05e3757e227d20097dcabd01eea33f6f062a005a9104f92",
+  "tests/probes/native_native_input_probe.cpp": "73a93a5ca028d0e3e58d7e4adea43b8d0fdf86ca8a08e26e028d567abb3dd037",
+  "tools/oracles/verify_original_native_input.py": "ee69acf7ad717200bfcce0c4dd13d0b48784353537352844588a314c69052df7",
+  "src/engine/controller_values.hpp": "abbfb8000a4dc77da937481cff321e86a48dd1204507c348d1c39083424106b5",
+  "src/engine/game_controller.hpp": "cdb1f924ad72369f2a6e5c1073b857042a3a2317197aed53ef0041cd6f025336",
+  "src/engine/game_controller.cpp": "20e3df5b8f7d8173b39c47f633ec41e5882d5f020073d6c2b284f7b7cb801c76",
+  "src/input/input_initial_state.hpp": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b",
+  "src/input/input_mod_pad.hpp": "2d4a57f647b648b169fbf63211d08a88af26f1f851cc3d19638d87bea65eba21",
+  "src/input/input_mod_pad.cpp": "236237ddd8fc2d46eb941012ff6bf495524e6026bb764cfbe01135499f7c0525",
+  "src/player/scene_input_producer.hpp": "11e4605a970dcb2a27251e3e4d5c6d480d903b42da28edba31f7556999f8b133",
+  "src/player/scene_input_producer.cpp": "a995ae53cdcb46727994b0febaf61644c8f2a0b5d02aa38123d608625989e8e3",
+  "tools/oracles/verify_original_native_input_config.py": "eab4eb7516e71851be7e6797d128e8b35eec2fb49d8b22f10a758075d1201fec",
+  "tools/oracles/verify_original_native_input_pipeline.py": "61472ee2f83ebdfad8d9e7ab36d92327c31a56566653e9d5a7b1fb26cb5c6689"
+ },
+ "source_ranges_sha256": {
+  "keyboard_poll": "8cfc516366732ee0237bed8a52dc87c78afe209a3940dfcbebfb6ecaaa7c1d72",
+  "keyboard_ramp": "f79a99b389c1430e9ca56fe4305e6665068950060e7d806117ed65c3809693f4",
+  "keyboard_events": "d9841569aaea848b6e226b6a9f1e3cb18828a5c249f89c7405cdb79223a920b6",
+  "keyboard_update": "d474260a9e9dda07057adc211efa8e6165e2d7d45e17bbe51e63e5d1b4e15c94",
+  "keyboard_create": "d851af5d7143ae2e31664a58f85eea46f73cb57b5eeee8798272db68a18458c8"
+ },
+ "limits": [
+  "Native SSE values match; Unicorn2.1.4 omits sticky exception flags, so MXCSR parity remains partial.",
+  "Window message dispatch/hardware delivery are separate qualification; raw event normalization is host owned."
+ ],
+ "cohorts": {
+  "raw_keyboard_pad": {
+   "traces": 77,
+   "polls": 3292,
+   "value_mismatches": 0,
+   "mxcsr_mismatches": 2731
+  },
+  "soft_reset": {
+   "cases": 256,
+   "value_mismatches": 0
+  },
+  "source_tables": {
+   "key_pairs": 102,
+   "coefficient_bytes": 40,
+   "inverse_match": true
+  },
+  "configuration": {
+   "source_sha256": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+   "seed": 20261020,
+   "cases": 2019,
+   "mismatch_count": 0,
+   "mismatches": [],
+   "passed": true,
+   "scope": "Exact Input DLL Init narrowing instructions, with getInt results as caller inputs.\n\nNo INI parser/import/Windows startup executes. Key WORD store+MOVSX, signed-WORD\nclamps, byte threshold store and signed keyboard-player clamp are actual code.\n",
+   "cases_sha256": "1c88a7cab5c3c17795beaa36910d0fe29a08b84d2d93eff5e5cf1fa76ae0ba47",
+   "native_probe_sha256": "53f7d4610af59c1b4d247e72edd3ca997254cf8ca7854098b261abba153c934e"
+  },
+  "on_input_get_controllers": {
+   "cases": 567,
+   "traces": 35,
+   "seed": 20261020,
+   "value_mismatches": 0,
+   "mxcsr_mismatches": 487,
+   "x87_exception_mismatches": 482,
+   "mismatches": [],
+   "values_match": true,
+   "passed": false,
+   "scope": "Native OnInput -> GetControllers against the actual patched two-image chain.\n\nSDL event queue, raw gamepad samples, connection facts, stage and absent gameplay\ncamera are explicit caller fixtures. Keyboard events, KeyboardUpdate, all8 pad\npolls/publications, OnInput reset/demo predicate, full WriteAnalogs + real Input\nreturn-hook and full GetControllers execute actual instructions. No analog stub.\n"
+  }
+ },
+ "tracked_summary": {
+  "full_sha256": "1adfcd85745223dac5a0863cf55466ab1ddbbe7c79d87dcfdcc72b50c12f4d47",
+  "full_bytes": 5230,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}
