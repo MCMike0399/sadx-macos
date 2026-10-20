@@ -1,13 +1,12 @@
 {
   "change": {
-    "base_commit": "07d196a07196693ca5bcdf6befb20979c71b6fc6",
-    "evidence": "reference/production-integration-20261019/input-rumble-ownership-evidence.json",
-    "evidence_sha256": "2b8f407dc31edec2afa8c5405868a0827a1460c04f442f1602d9139deceb94ef",
-    "mode": "additions-only",
-    "reason": "Register actual pinned Input mod rumble task lifecycle and ownership regression without changing existing task assertions"
+    "base_commit": "0f8154ad4d3a7240bf1c1febe5ac9b7ca22596cc",
+    "evidence": "reference/production-integration-20261020/native-startup-judge-preparation.json",
+    "evidence_sha256": "a9dcca4b998bf051d2626b927e25ccdc717f567e326ee20ec13550c6c868ab0c",
+    "reason": "Prepare native audio/controller build dependencies and evidence-backed save/PVR profile coverage"
   },
   "files": {
-    "Makefile": "763f480eaa54630de499b517ec94d72b1e82ae2259cbf9d3edde025df1ea0680",
+    "Makefile": "e3468ea9fca2e9ceb05cfac04a9f3f6d428d39c414127f1337dfe28f6d31933a",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
     "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
     "reference/frame-control-corpus.tsv": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",
@@ -396,7 +395,7 @@
     "tools/gate/guard_judge_edit.py": "6fa117651c735c3a152343da978945a426138ce455d0494e7ca707f46ff82935",
     "tools/gate/layer_exceptions.tsv": "45ec99765961f1f4f36760d706dd561ad9362ca3220080c0aebedb105f7c4649",
     "tools/gate/mutate.py": "9028799e852ca72ae2e49229647171ec68ecbc26eeb234db3fd510a4eeb33719",
-    "tools/gate/profile_patches.json": "827f6ea508cc93490d50835f68793c15a05c13ea13fc95f935bc0876a7747df6",
+    "tools/gate/profile_patches.json": "deffd206879cde815cde006e6e8ebef7d829794d12ce659dd1990531f393d908",
     "tools/gate/record_gate.py": "c74237a970ebfac47cf3c15357b4d16baf6ff28b6ba67e1a31c02dc249c70e3b",
     "tools/gate/run_journeys.py": "ccf2816a8b0463a5cc57b0edd9ed1335ea9c2a6228daa437f8c669e7b6915ae0",
     "tools/gate/track_reports.py": "f936d454c3d07a0614dc27e6370396c41428763cc05c473b9b34773b7f96abc9",

@@ -1801,7 +1801,7 @@
    "condition": "unconditional: loader applies exported Jumps PointerList (DLL 0x1000e0b8 -> array 0x1000e070, count 9 set by static init) at mod load",
    "active": true,
    "source_ref": "_reference/sadx/updated-pc-reference/sources/input-mod.cpp:27-38 (jumps[7])",
-   "handled_by": null,
+   "handled_by": "src/game/save_data.cpp enable_default_vibration; actual pinned Input DLL replacement executed by verify_original_save_data.py",
    "original_bytes": "889c246a02"
   },
   {
@@ -2209,7 +2209,7 @@
    "condition": "unconditional (GVR_Init from InitMods)",
    "active": true,
    "source_ref": "gvm.cpp:850",
-   "handled_by": null,
+   "handled_by": "src/engine/pvr_draw.cpp draw_texture; loader GVR alpha-mask patch executed by verify_original_pvr_draw.py",
    "original_bytes": "38"
   },
   {

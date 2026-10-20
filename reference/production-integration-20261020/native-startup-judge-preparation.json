@@ -1,0 +1,31 @@
+{
+  "purpose": "Prepare existing build and profile coverage inputs for integrated native startup, audio and physical controller delivery",
+  "base": "0f8154a",
+  "changes": [
+    "Link AudioToolbox for the new native AudioQueue implementation and qualification utility.",
+    "Build the declared pinned SDL3/libusb hardware dependency before compiling the Switch 2 adapter; its runtime path is supplied explicitly.",
+    "Recognize the recovered Input default-rumble save patch and loader GVR alpha-mask patch when new full-range oracle reports cover them."
+  ],
+  "profile_evidence": {
+    "input_dll_sha256": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+    "default_rumble": {
+      "exported_jump_entry": "0x1000e0a8",
+      "source_site": "0x42d52d",
+      "replacement": "0x10009240",
+      "replacement_bytes": "c684246a02000001ff25dcb30010",
+      "return_pointer": "0x1000b3dc -> 0x42d534",
+      "effect": "Write save vibration byte to 1 before original CRC computation.",
+      "validation": "New initializer oracle executes the actual pinned DLL replacement; 1029 cases, no mismatches before final source-hash refresh."
+    },
+    "gvr_alpha": {
+      "source_site": "0x433c56",
+      "effect": "Loader GVR_Init changes the format-mask immediate from 56 to 0; alpha is enabled.",
+      "validation": "New PVR oracle executes the patched source; 2400 cases, zero value mismatches, 1503 FP flag differences (partial). Deliberately removing the profile behavior is caught."
+    }
+  },
+  "limits": [
+    "This preparatory commit does not claim native boot or story progression.",
+    "Implementation and added tests are integrated in the following source commit.",
+    "Full gate is required at the coherent integration boundary; this is not a gate record."
+  ]
+}

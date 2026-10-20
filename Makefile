@@ -8,7 +8,8 @@
 CXX := xcrun clang++
 CXXFLAGS := -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0
 MACFLAGS := -fobjc-arc
-MAC_FRAMEWORKS := -framework Foundation -framework AppKit -framework Metal -framework MetalKit -framework QuartzCore -framework CoreGraphics -framework ImageIO -framework GameController
+MAC_FRAMEWORKS := -framework Foundation -framework AppKit -framework Metal -framework MetalKit -framework QuartzCore -framework CoreGraphics -framework ImageIO -framework GameController -framework AudioToolbox
+NATIVE_CONTROLLER_CMAKE ?= cmake
 INCLUDES := -Isrc -Itests/fixtures
 GAME_DIR ?= game/Sonic Adventure DX
 GAME_EXE ?= $(GAME_DIR)/sonic.exe
@@ -65,6 +66,10 @@ build/obj/%.o: src/%.mm Makefile | build
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) -MMD -MP $(INCLUDES) -c $< -o $@
 build/obj/cpu/x87_transcendental.o: CXXFLAGS += -Ithird_party/bochs_fpatan -Ithird_party/bochs_fpatan/source -Ithird_party/bochs_fpatan/source/softfloat3e/include
 build/obj/cpu/sse_math.o: third_party/softfloat/source/include/softfloat.h third_party/softfloat/source/include/softfloat_types.h
+build/obj/platform/mac/hid_switch_controller.o: CXXFLAGS += -Ibuild/native-controller-deps/include
+build/obj/platform/mac/hid_switch_controller.o: build/native-controller-deps/include/SDL3/SDL.h
+build/native-controller-deps/include/SDL3/SDL.h: third_party/native_controller/build.py third_party/native_controller/upstream.json third_party/native_controller/shared-iohid.patch
+	python3 third_party/native_controller/build.py --cmake "$(NATIVE_CONTROLLER_CMAKE)"
 build/obj/guest/%.o: CXXFLAGS += -I$(UNICORN_DIR)/include
 build/obj/hle/%.o: CXXFLAGS += -I$(UNICORN_DIR)/include
 -include $(CORE_OBJECTS:.o=.d) $(MAC_OBJECTS:.o=.d) $(GUEST_OBJECTS:.o=.d)
@@ -91,6 +96,10 @@ build/sadx-app: src/apps/sadx_app.mm build/libsadx-macos.a build/libsadx-guest.a
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) -I$(UNICORN_DIR)/include $< build/libsadx-macos.a $(GUEST_LINK) build/libsadx-core.a $(MAC_FRAMEWORKS) -o $@
 build/sadx-metal: src/apps/metal_stage.mm Makefile | build
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $< -framework Foundation -framework Metal -framework CoreGraphics -framework GameController -o $@
+build/sadx-audio-qualify: src/apps/audio_qualify.mm build/libsadx-macos.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-macos.a build/libsadx-core.a $(MAC_FRAMEWORKS) -o $@
+build/sadx-controller-qualify: src/apps/controller_qualify.mm build/libsadx-macos.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-macos.a build/libsadx-core.a $(MAC_FRAMEWORKS) -o $@
 # The window smoke test of the roadmap (M2 app-smoke): the guest in the app for 120 frames, a screenshot, exit 0
 # (in the gate; it opens a window, so the gate needs a logged-in GUI session).
 REFERENCE_GAME_DIR ?= reference/updated-pc-reference/game
