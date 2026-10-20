@@ -1,12 +1,12 @@
 {
   "change": {
-    "base_commit": "640522ffefe087c6ead818af61abf059c1c0d67b",
-    "evidence": "reference/production-integration-20261020/movie-build-and-startup-reports.json",
-    "evidence_sha256": "414df62bac2acd87edd531b29ae1ddc73f5e11dc48919892daecbd9eba7667aa",
-    "reason": "Track verified native startup reports and prepare native movie build closure"
+    "base_commit": "8758d440eabd4194bcd6af2c71d13b650bae64fb",
+    "evidence": "reference/production-integration-20261020/native-input-build-preparation.json",
+    "evidence_sha256": "84323cbc25b92a069e09ff2bf1812e288446f02c9bd21276a69e3c9f6d2dcb77",
+    "reason": "Prepare native Input closure and new movie/input oracle recipes"
   },
   "files": {
-    "Makefile": "eb141240a39c3859eb8bbdd6c5a5e50d5d2973bc72f6f205e7f299359887b070",
+    "Makefile": "18a5236f94fbc127a093e67757c5dc7bd4ea495883cc59c15b86d3363f636dab",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
     "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
     "reference/frame-control-corpus.tsv": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",
@@ -415,7 +415,7 @@
     "tools/lib/import_audio.py": "91f0db9f658c306a4a5637b4180c4e0d6033da72d927f1ba59c18965e5a49e30",
     "tools/lib/pe_image.py": "94694dc5fb38e459d26b35c25a7cdb7e3fad7128e1178363340606bb9db299f2",
     "tools/oracles/freeze_frame_control.py": "d2363d9722a647c00e02805b6b93efdb1b222c165e237d0992034f4969418e88",
-    "tools/oracles/manifest.tsv": "876d20de89843a4245812e37adbf5901f34c45b1d61ab2f48c6595301ec74c3f",
+    "tools/oracles/manifest.tsv": "b2fd48dfd3950bb9ce1f1048b28300f117890cc15315812573aea7323e26e111",
     "tools/oracles/verdict.py": "333ac997dd1211ab70ed04d8fe7a7a424f418d00f13cd913a355f39773e1a63a",
     "tools/oracles/verify_original_air_acceleration.py": "a1f2fdeb24e84173f73538f9d1c02c4758d801b17568c58a679554f77c0b00c8",
     "tools/oracles/verify_original_alternate_acceleration.py": "0d6be36372b0e584a17d8d1b3fe1e4a1a25b35a5aca64aea7abfcf40a53f22a0",

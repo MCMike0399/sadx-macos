@@ -40,15 +40,17 @@ GUEST_LINK := build/libsadx-guest.a $(UNICORN_DIR)/lib/libunicorn.a -lpthread
 NATIVE_SOURCES := \
  src/cpu/crt_integer.cpp src/cpu/sse_math.cpp src/cpu/x87_math.cpp src/cpu/x87_transcendental.cpp \
  src/math/d3dx_math.cpp src/math/ninja_math.cpp src/math/ninja_sine_table.cpp \
- src/engine/character_pack.cpp src/engine/game_frame_control.cpp src/engine/game_frame_control_native.cpp \
+ src/engine/character_pack.cpp src/engine/game_controller.cpp src/engine/game_frame_control.cpp src/engine/game_frame_control_native.cpp \
  src/engine/graphics_frame.cpp src/engine/graphics_frame_fog.cpp src/engine/graphics_frame_lighting.cpp \
  src/engine/ninja_matrix.cpp src/engine/ninja_projected_depth.cpp src/engine/ninja_texture.cpp \
  src/engine/ninja_view_native.cpp src/engine/pvr_device.cpp src/engine/pvr_draw.cpp \
  src/engine/sprite_immediate.cpp src/engine/speedrun.cpp src/engine/task.cpp src/engine/task_work.cpp \
+ src/input/input_initial_state.cpp src/input/input_mod_axes.cpp src/input/input_mod_constants.cpp src/input/input_mod_pad.cpp \
+ src/player/player_input_producer.cpp src/player/scene_input_producer.cpp \
  src/game/game_bootstrap.cpp src/game/game_mode.cpp src/game/game_mode_native.cpp \
  src/game/movie.cpp src/game/logo.cpp src/game/logo_display.cpp src/game/logo_startup.cpp src/game/save_data.cpp \
  src/runtime/engine_code_tables.cpp src/runtime/logo_renderer.cpp src/runtime/logo_scene.cpp \
- src/runtime/movie_scene.cpp src/runtime/native_display.cpp src/runtime/native_session.cpp
+ src/runtime/native_input.cpp src/runtime/movie_scene.cpp src/runtime/native_display.cpp src/runtime/native_session.cpp
 NATIVE_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(NATIVE_SOURCES))
 NATIVE_PLATFORM_OBJECTS := build/obj/platform/mac/mac_clock.o build/obj/platform/mac/mac_audio.o \
  build/obj/platform/mac/hid_switch_controller.o build/obj/platform/mac/mac_movie.o build/obj/platform/mac/metal_device_frame.o

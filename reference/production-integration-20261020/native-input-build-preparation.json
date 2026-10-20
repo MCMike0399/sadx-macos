@@ -1,0 +1,27 @@
+{
+  "schema": 1,
+  "base_source_commit": "8758d44",
+  "reason": "Prepare production native Input link closure and register new movie/input oracle recipes; no existing judgment cases, expectations or tolerances change.",
+  "native_input_link_closure": "Isolated -why_load extracts sse_math,x87_math,input_mod_pad,game_controller,scene_input_producer,input_mod_constants,input_mod_axes,player_input_producer,input_initial_state,crt_integer,x87_transcendental,ninja_math plus SoftFloat/Bochs. No loader/guest/HLE.",
+  "new_oracle_recipes": [
+    "movie_fade",
+    "movie_geometry",
+    "movie_timing",
+    "native_input"
+  ],
+  "source_evidence": "New modules are being implemented outside this clean judge worktree and will be integrated with real native callers before the next coherent full gate.",
+  "limits": [
+    "Build/oracle recipe preparation only, not new native journey completion.",
+    "Existing gate179 passes; next integration must record its actual full-gate status."
+  ],
+  "changed_judge_sha256": {
+    "Makefile": "18a5236f94fbc127a093e67757c5dc7bd4ea495883cc59c15b86d3363f636dab",
+    "tools/oracles/manifest.tsv": "b2fd48dfd3950bb9ce1f1048b28300f117890cc15315812573aea7323e26e111"
+  },
+  "checks": {
+    "judge_tests": 11,
+    "judge_tests_exit_status": 0,
+    "protected_paths_removed": 0,
+    "corpus_hashes_preserved": 53
+  }
+}
