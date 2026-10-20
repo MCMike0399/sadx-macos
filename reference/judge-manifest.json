@@ -1,9 +1,10 @@
 {
   "change": {
-    "base_commit": "47f5e25ea630d0f29386c75408134731a3bdebde",
-    "evidence": "reference/production-integration-20261017/scene-dispatch-include-evidence.md",
-    "evidence_sha256": "73a0571ee66c9dcf6cfb8f0e4d3e108a60e365fc09293e7d6d39597fa44f2858",
-    "reason": "Keep existing scene-position judges on their fixture types during the native header split; include changes only"
+    "base_commit": "b79fffc56fafa6d60605284873262964c49d2066",
+    "evidence": "reference/production-integration-20261019/breakthrough-source-evidence.json",
+    "evidence_sha256": "bb88103cd8fa0d370166fd20e66c49f95d281d08877fcdaf6090e1c319aa7ccb",
+    "mode": "additions-only",
+    "reason": "Register new logo update/display differential tests, driver fixtures and native/HLE units without changing existing judgments"
   },
   "files": {
     "Makefile": "08ddd3f430fba81fe6946cc68e12e4f05fe7de51c5a99eb9bbd8f452adfe9137",
@@ -274,6 +275,8 @@
     "tests/probes/native_keyboard_probe.cpp": "168098ef5d2b4f02e511210cf6e65231a998334c920885b09be6f747e811721b",
     "tests/probes/native_library_init_probe.cpp": "9fc2b911a7c3520145933162c534b90c1315e1497370fc473100f96de6791ed5",
     "tests/probes/native_library_initial_state_probe.cpp": "4a9fb18a08c71999c557a25b7e9c53a8746bf64cee1990f7ffdd08c328eae93f",
+    "tests/probes/native_logo_display_probe.cpp": "566f70ef9d7fa3e43072f2abf839bf63426233540854b313108e312fd55879ff",
+    "tests/probes/native_logo_probe.cpp": "f12b4586e1f91cf3c5717955a0687b7650cd9c488c6de461038776c4245cb0d0",
     "tests/probes/native_math_probe.cpp": "9314941068f29475fc6dc37c0c52e6162a64fc4e60dd2b0c1220fd3df966bb1a",
     "tests/probes/native_message_pump_probe.cpp": "9fb63664ea94e069180babd9a0be8a9ca4b408976ed8df95f661ad09af3b818c",
     "tests/probes/native_model_dlls_probe.cpp": "cd81ccf23a12b78198fc046ed58e719b290e67f06bde9ea1c35dcd3f324adae7",
@@ -352,13 +355,14 @@
     "tests/python/test_extraction.py": "d4cfeca88e6c47057705dd70c07921eb826b5b7d5fdb0b8cc7a8edb0f28ec04f",
     "tests/python/test_fp_census.py": "db9dee0f0942b7558f3358f27d41a04c787344ef83ea970ce744e8eedd6c007a",
     "tests/python/test_frame_control_isolation.py": "daf2e782d32c889cfe28e752997782a308846a39965db38eefb4e4afb586e3f1",
+    "tests/python/test_journey_driver.py": "5d9bb8325b4585e4c66206f092b708951c76b61adba756c8736239a2b414470a",
     "tests/python/test_journeys.py": "3ed81eac9ccace35e9cde0aafa17773bf645f6fb63e9ef81ae7625f666673ba3",
     "tests/python/test_judge.py": "251004fe830e843d3740b4e4affb67efaf0f973e062a2f9b54cea3552471bc2a",
     "tests/python/test_provenance.py": "ce62fc0efc2ef9a92b2493adaf994fcbc38af4427c16c28eabe6aea72287fcc2",
     "tests/python/test_readability.py": "8090f2eb23f8c958972e071d94a4d77b99a8062953d456a89ccba2abafc78a3d",
     "tests/python/test_symbol_context.py": "e276e801136d0821369682beb43c42c0f460ff137123683d8c1150487eec2690",
     "tests/python/test_symbols.py": "9e9a03a6389d6cd58aa49c63272049754f55ccddb19eeb894b8b92ccce362e0f",
-    "tests/unit/manifest.tsv": "74e1f948869a04c6185e17ae80f1e24f82df3d455c9104358744bff969f9a5ee",
+    "tests/unit/manifest.tsv": "997f70ea152ac87c5f641f902e3ed4f7e8a07ebf481e56e5dd721e7e8a8f9c6d",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",
@@ -446,6 +450,8 @@
     "tools/oracles/verify_original_keyboard.py": "3c54c38b5c14d538af61e079004266a20656aa2d9376e922520f47114e56601d",
     "tools/oracles/verify_original_library_init.py": "3e0fba11bc41194b012c7ca708b7593e3ddc0b1a0b6ae5c212ea11d473e3f664",
     "tools/oracles/verify_original_library_initial_state.py": "0179d556f4a3f365cc288262cd2826d1ed5d26df5e2090b66cba4b05be8aeac6",
+    "tools/oracles/verify_original_logo.py": "57a410d25a278cc926a8a589bd2ed50398b53d57640b1697543fedd0a1353ef9",
+    "tools/oracles/verify_original_logo_display.py": "6968bab2146c8ebed7219b35b8500ddb61d0905ea3c7e8be8c8bca27e030fcb9",
     "tools/oracles/verify_original_math.py": "9a57e94ff5539c9683ccb29c3df3353c161d8e55a9dc415dd1cd565c21692c6a",
     "tools/oracles/verify_original_message_pump.py": "bdc24aafe3f1a8ea5633735911f93d664bd0ddf82f9c39a5d55024836d2b316f",
     "tools/oracles/verify_original_model_dlls.py": "ceca51184f0ea04bd973d64da3915929e874f5dca16332d662359689363cb1e8",

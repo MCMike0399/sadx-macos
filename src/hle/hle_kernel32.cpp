@@ -3,6 +3,7 @@
 // values the reference machine would have supplied are fixed and listed as assumptions.
 #include "hle/hle_process.hpp"
 #include "hle/hle_text.hpp"
+#include "hle/hle_compare_string.hpp"
 #include "game/win32_profile.hpp"
 #include <fstream>
 #include <iterator>
@@ -32,6 +33,7 @@ void write_find_data(HleProcess* P,X86Guest& g,std::uint32_t at,const std::files
 }
 }
 void register_hle_kernel32(HleProcess& p){
+    register_hle_compare_string(p);
     auto& r=p.hle();auto* P=&p;
     const auto K=[&](const char* name,std::uint32_t pops,unsigned logged,std::function<std::uint32_t(HleCall&)> body){r.add("KERNEL32.dll",name,{pops,logged,std::move(body)});};
     const auto arg=[](HleCall& c,unsigned i){return c.argument(i).value_or(0);};

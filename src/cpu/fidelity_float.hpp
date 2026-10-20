@@ -51,6 +51,11 @@ class ExactFloat {
         : context_(&context), observer_(observer), value_(load(context, value, observer)) {}
     ExactFloat(X87Context &, double, ExactObserver * = nullptr) = delete;
 
+    // NOTSA: retain a named math/CRT callee's already loaded return value without another FLD.
+    static ExactFloat retained(X87Context &context, X87Value value) {
+        return ExactFloat(context, value, nullptr);
+    }
+    bool is_negative() const { return value_.negative(); }
     float rounded() const {
         observe(ExactEvent::Store);
         return context_->to_float(value_);

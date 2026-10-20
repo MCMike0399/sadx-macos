@@ -45,7 +45,7 @@ struct TaskBridge {
     std::uint32_t raw(const std::shared_ptr<void>& value){return value?source_resources.at(value.get()):0;}
     std::uint32_t address(std::optional<std::uint16_t> slot)const{return slot?pool+52U*(*slot):0;}
     std::optional<std::uint16_t> slot(std::uint32_t address_value){if(!address_value)return {};if(address_value<pool||(address_value-pool)%52||(address_value-pool)/52>=4096){process.guest().stop("task bridge: non-pool task at "+hex(entry));throw MetadataUnavailable{};}return static_cast<std::uint16_t>((address_value-pool)/52);}
-    TaskWorkHandle work(std::uint32_t address_value){if(!address_value)return {};const auto i=allocations.find(address_value);if(i==allocations.end()||i->second->released()){process.guest().stop("task bridge: unowned work field at "+hex(entry));throw MetadataUnavailable{};}return i->second;}
+    TaskWorkHandle work(std::uint32_t address_value){if(!address_value)return {};const auto i=allocations.find(address_value);if(i==allocations.end()||i->second->released()){process.guest().stop("task bridge: unowned work field "+hex(address_value)+" at "+hex(entry)+" (arena "+hex(base)+")");throw MetadataUnavailable{};}return i->second;}
     std::uint32_t address(const TaskWorkHandle& w){return w?base+w->data_offset():0;}
     std::uint32_t word(std::uint32_t at){const auto v=process.guest().u32(at);if(!v){process.guest().stop("task bridge: missing field "+hex(at)+" at "+hex(entry));throw MetadataUnavailable{};}return *v;}
 
@@ -140,11 +140,18 @@ struct TaskBridge {
         // fields and partial callback stores are never republished from a stale snapshot.
         guest_snapshot.resize(serialized.size());
         const bool complete=g.read(pool,guest_snapshot.data(),guest_snapshot.size()*sizeof(guest_snapshot.front()));
-        for(unsigned k=0;k<4096;++k)for(unsigned f=0;f<13;++f){
+        for(unsigned k=0;k<4096;++k){
+            // Most callbacks leave most rows unchanged. Compare all their bytes
+            // together, retaining scalar field order for every changed row.
+            if (complete && std::memcmp(guest_snapshot[k].data(), serialized[k].data(),
+                                        sizeof(serialized[k])) == 0)
+                continue;
+            for(unsigned f=0;f<13;++f){
             const auto at=pool+52*k+4*f;
             // An incomplete read keeps the old scalar path and its failure behavior.
             const bool changed=complete?guest_snapshot[k][f]!=serialized[k][f]:g.u32(at)!=serialized[k][f];
             if(changed)g.set_u32(at,serialized[k][f]);
+            }
         }
         for(unsigned k=0;k<8;++k)g.set_u32(0x3abdbc4+4*k,address(state.heads[k]));
         g.set_u32(0x3abdbec,state.free_slots.empty()?0:address(state.free_slots.back()));

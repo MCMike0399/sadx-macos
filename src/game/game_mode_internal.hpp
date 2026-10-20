@@ -124,7 +124,7 @@ void request_file_module(FlowContext &flow, FlowModule module);
 void on_edit(FlowContext &flow);
 // STUB: SONIC 0x42c7b0 InitializeSegaLogo
 void initialize_sega_logo(FlowContext &flow);
-// STUB: SONIC 0x42cc70 RunSegaSonicTeamLogos
+// NOTSA: composition seam for the recovered logo update; native wiring is still incomplete.
 std::uint32_t run_logos(FlowContext &flow);
 // NOTSA: composition seam for recovered dsInitInt; its FUNCTION belongs to frame control.
 void set_frame_rate_mode(FlowContext &flow, std::int32_t mode, std::int32_t multiplier);

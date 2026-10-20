@@ -3,6 +3,9 @@
 #include "player/player_scene_position.hpp"
 
 namespace sadx {
+struct PlayerScenePositionConstants;
+struct PlayerScenePositionRuntime;
+struct PlayerSceneLandscape;
 // Replace only the two mandatory scene callbacks. All captured resources must
 // outlive the callbacks. Parameters, matrix owner and x87 context come from the
 // position caller; the binder never owns a second mutable copy of those values.

@@ -1535,6 +1535,24 @@
       "words_at_3b0e990",
       "words_at_3b0e9b8"
     ],
+    "src/guest/player_scene_position_reference.cpp": [
+      "amy_offset_at_915d74",
+      "amy_radius_at_915d78",
+      "environment_at_3b22dec",
+      "event_task_at_3b2c578",
+      "motion_override_at_3b42e70",
+      "render_at_3b0f0ec",
+      "special_surface_at_3b42e74"
+    ],
+    "src/guest/player_scene_position_reference.hpp": [
+      "amy_offset_at_915d74",
+      "amy_radius_at_915d78",
+      "environment_at_3b22dec",
+      "event_task_at_3b2c578",
+      "motion_override_at_3b42e70",
+      "render_at_3b0f0ec",
+      "special_surface_at_3b42e74"
+    ],
     "src/hle/hle_device_bridge.cpp": [
       "active_memory_at_3d129a0",
       "bottom_at_3d0f82c",
@@ -1645,24 +1663,6 @@
     ],
     "src/player/player_mesh_registry.hpp": [
       "source_word_at_3b42ff8"
-    ],
-    "src/player/player_scene_position.cpp": [
-      "amy_offset_at_915d74",
-      "amy_radius_at_915d78",
-      "environment_at_3b22dec",
-      "event_task_at_3b2c578",
-      "motion_override_at_3b42e70",
-      "render_at_3b0f0ec",
-      "special_surface_at_3b42e74"
-    ],
-    "src/player/player_scene_position.hpp": [
-      "amy_offset_at_915d74",
-      "amy_radius_at_915d78",
-      "environment_at_3b22dec",
-      "event_task_at_3b2c578",
-      "motion_override_at_3b42e70",
-      "render_at_3b0f0ec",
-      "special_surface_at_3b42e74"
     ],
     "src/player/scene_input_producer.cpp": [
       "control_enabled_at_909fb0",
@@ -6303,7 +6303,7 @@
       ]
     },
     {
-      "identity": "src/player/player_scene_position.hpp:PlayerScenePositionGlobals.amy_offset_at_915d74",
+      "identity": "src/guest/player_scene_position_reference.hpp:PlayerScenePositionGlobals.amy_offset_at_915d74",
       "module": "SONIC",
       "ranges": [
         [
@@ -6313,7 +6313,7 @@
       ]
     },
     {
-      "identity": "src/player/player_scene_position.hpp:PlayerScenePositionGlobals.amy_radius_at_915d78",
+      "identity": "src/guest/player_scene_position_reference.hpp:PlayerScenePositionGlobals.amy_radius_at_915d78",
       "module": "SONIC",
       "ranges": [
         [
@@ -6323,7 +6323,7 @@
       ]
     },
     {
-      "identity": "src/player/player_scene_position.hpp:PlayerScenePositionGlobals.environment_at_3b22dec",
+      "identity": "src/guest/player_scene_position_reference.hpp:PlayerScenePositionGlobals.environment_at_3b22dec",
       "module": "SONIC",
       "ranges": [
         [
@@ -6333,7 +6333,7 @@
       ]
     },
     {
-      "identity": "src/player/player_scene_position.hpp:PlayerScenePositionGlobals.event_task_at_3b2c578",
+      "identity": "src/guest/player_scene_position_reference.hpp:PlayerScenePositionGlobals.event_task_at_3b2c578",
       "module": "SONIC",
       "ranges": [
         [
@@ -6343,7 +6343,7 @@
       ]
     },
     {
-      "identity": "src/player/player_scene_position.hpp:PlayerScenePositionGlobals.motion_override_at_3b42e70",
+      "identity": "src/guest/player_scene_position_reference.hpp:PlayerScenePositionGlobals.motion_override_at_3b42e70",
       "module": "SONIC",
       "ranges": [
         [
@@ -6353,7 +6353,7 @@
       ]
     },
     {
-      "identity": "src/player/player_scene_position.hpp:PlayerScenePositionGlobals.render_at_3b0f0ec",
+      "identity": "src/guest/player_scene_position_reference.hpp:PlayerScenePositionGlobals.render_at_3b0f0ec",
       "module": "SONIC",
       "ranges": [
         [
@@ -6363,7 +6363,7 @@
       ]
     },
     {
-      "identity": "src/player/player_scene_position.hpp:PlayerScenePositionGlobals.special_surface_at_3b42e74",
+      "identity": "src/guest/player_scene_position_reference.hpp:PlayerScenePositionGlobals.special_surface_at_3b42e74",
       "module": "SONIC",
       "ranges": [
         [

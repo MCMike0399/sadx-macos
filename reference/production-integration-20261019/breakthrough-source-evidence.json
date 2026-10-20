@@ -1,0 +1,243 @@
+{
+  "stage": "validated source integration before separate protected judge updates",
+  "gate": "not yet run; logo profile qualification and library-init judge compatibility prepared next",
+  "scene": {
+    "outcome": "Whole scene dispatcher/header rewritten with shared semantic algorithms and native owners; no gameplay decisions relocated into reference adapter.",
+    "evidence": {
+      "scene-helper-43dca0": "ev_76f9a1949f1328b9ce3796972eb3c71f96ba885bee622f7d865972ffc60f9007",
+      "scene-helper-43df60": "ev_b31972da57a2515747d04a5339b63547e089a64f297aad204693e401d8bae55f",
+      "scene-wall-response": "ev_6d0added4a1b1bde2c8731817514737f99b663b26c77af26e2e9f04c4e4d132e",
+      "scene-corner-response": "ev_19d20ae5b89a1bc7cd330b4ca36cd886360fbe2cc57f9e9795138a14e71f6376",
+      "scene-contact-gate": "ev_75f926011a3e634accc4abb1be7eb65c8c060bf5de6188e1269a7b5edddf3dc2"
+    },
+    "direct": {
+      "runs": 11424,
+      "controls": 84,
+      "mismatches": 0,
+      "output_sha256": "13e59700d6bde4792553c1662ff3ac77f062651a8797a786b3c2323bc20828f8",
+      "first_failures": []
+    },
+    "holdout": {
+      "runs": 10752,
+      "controls": 84,
+      "mismatches": 0,
+      "output_sha256": "ced13be034cfdd28b951e41d61fc837bd07ca465fa533e20bd74cbe96d027f20",
+      "first_failures": []
+    },
+    "mutants": [
+      {
+        "name": "retain old grounded flag",
+        "caught": true,
+        "mismatches": 52,
+        "runs": 136
+      },
+      {
+        "name": "reverse steep contact selection",
+        "caught": true,
+        "mismatches": 16,
+        "runs": 136
+      },
+      {
+        "name": "lose center subtraction",
+        "caught": false,
+        "mismatches": 0,
+        "runs": 136,
+        "holdout_runs": 128,
+        "holdout_mismatches": 3,
+        "holdout_caught": true
+      }
+    ],
+    "native_unit": "tests/unit/player_scene_position_native.cpp:24 prefix-path calls; both variants under12 x87 controls; no assets or guest archive",
+    "native_constant_defaults": 25,
+    "limits": [
+      "Native dispatcher first stops at initialize_player_contact_offset STUB; broadphase, query, response, attributes, angle/asin, floor-coordinate, input and render composition remain open.",
+      "Original fixed fixtures do not catch horizontal offset sign; rotated heldouts catch3/128.",
+      "Unicorn exception-flag partials remain; no Windows hardware or new native journey claim."
+    ],
+    "oracles": {
+      "player_scene_position": {
+        "verdict": [
+          "partial",
+          "values match; strict_match=false (see limits)"
+        ],
+        "profiles": 12,
+        "cases": 1632,
+        "value_mismatches": 0,
+        "flag_mismatches": 1344,
+        "boundary_failures": 0,
+        "library_sha256": "b8642f2644c44a4f295cebd91465dd0851625200ae7a43b2b7f2590850e119c2",
+        "sources_match": true,
+        "library_match": true
+      },
+      "player_scene_helpers": {
+        "verdict": [
+          "partial",
+          "values match; strict_match=false (see limits)"
+        ],
+        "profiles": 12,
+        "cases": 8076,
+        "value_mismatches": 0,
+        "flag_mismatches": 6040,
+        "boundary_failures": 0,
+        "library_sha256": "31edb2afeef270bd74fc3f1fbadbab011abc995104c70054826b9982b2c47f3a",
+        "sources_match": true,
+        "library_match": true
+      }
+    }
+  },
+  "logo": {
+    "created": "2026-10-19",
+    "scope": "Recovered logo update and original display call plan; direct-entry assets-only Metal fixture. Native boot and N1 remain open.",
+    "source_evidence": {
+      "update": "ev_11d4646288706920f09891c29e3a1829f45042ce58a3e2ae9c0c4ebfcbbcfb03",
+      "display_initial_incomplete": "ev_65f8bf084be40a6bf48c7e52dd6da03b586c88370edd61db20daece16fee158d",
+      "display_callees": "ev_0a49ee357f5412ea62468553b013dcd8642630fa51f4336e1e73feebf08dd68f",
+      "display_continuation": "Exact PEImage bytes 0x42cb20..0x42cc6a, independently decoded by Capstone5.0.7; Ghidra falsely infers njSetTexture no-return."
+    },
+    "native_sources": {
+      "src/game/logo.hpp": "5ffa209a3554db4d6ed9b2c1654a1897cdc021b9a38702f26d67b1e7c5989732",
+      "src/game/logo.cpp": "4912adc3056a533a97845e1d5ef4528918358b7078496535ef471dd685f98be0",
+      "src/game/logo_display.cpp": "fee9feef1f2fdf00167b765e4a7fee4afefaa751a0a1a894ef9a6a87ed47f72f",
+      "tests/unit/mac_logo_demo.mm": "f0b659abb49e7526b230a310224b52893d9d5f97e15e50738df719e7158f5639"
+    },
+    "update": {
+      "development_cases": 5320,
+      "value_mismatches": 0,
+      "holdout_new_random_inputs": 10000,
+      "holdout_repeated_boundaries": 1320,
+      "holdout_value_mismatches": 0,
+      "mutant_mismatches": [
+        8,
+        374,
+        390
+      ],
+      "native_sequence_updates": 387
+    },
+    "display": {
+      "development_cases": 3936,
+      "value_mismatches": 0,
+      "exception_flag_mismatches": 1902,
+      "holdout_cases": 8544,
+      "holdout_value_mismatches": 0,
+      "holdout_exception_flag_mismatches": 5139,
+      "mutant_mismatches": [
+        192,
+        2070,
+        1013
+      ],
+      "verdict": "partial: call values/control/prefixes exact; low-six x87 flags differ"
+    },
+    "profile": {
+      "patch_va": "0x42cb20",
+      "source_files_sha256": {
+        "reference/sadx-mod-loader/SADXModLoader/bgscale.cpp": "7e522b19f3cae7a0770784279ce1d31469e25298ebd40c0fc31e970ef1576fc4",
+        "reference/sadx-mod-loader/SADXModLoader/uiscale.cpp": "e19b958986520bdecd99ba1ce46ecac932fe179a24d2f63385ad84e26a05793b",
+        "reference/sadx-mod-loader/SADXModLoader/uiscale.h": "c846f17609948ce59e20b420bd137c4cb58f3c42d7cbb9da38e80fbf74800087"
+      },
+      "supported": "display_profile_640 accepts only 640x480 and unit source stretch; center/fill wrapper is identity, other viewport/stretch combinations explicitly rejected",
+      "recommended_handled_by": "logo_display original call plan and display_profile_640: pinned DisplayLogoScreen_r center/background wrapper is identity only at 640x480 with unit source stretch; other viewport/stretch inputs explicitly rejected. Downstream draw composition remains a declared native demo fixture, not N1."
+    },
+    "visual_fixture": {
+      "artifact": "build/native-logo-demo.ppm",
+      "sha256": "17d9d2c1095e463fbeb6717e1dffe3614018016bf7f2780ea32e34bb48d6fd7d",
+      "width": 640,
+      "height": 480,
+      "source_frames": 120,
+      "texture_records": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "compared_guest_artifact": "build/app-smoke.ppm",
+      "differing_rgb_channels": 36751,
+      "total_rgb_channels": 921600,
+      "pixel_parity": false,
+      "dependencies": "Only supplied SEGALOGO_E.PVM, native game/math/texture code and shared Metal device renderer; no PE or guest runtime input. Renderer defaults/painter order explicitly fixtures."
+    },
+    "review": "Independent scene_readability agent approved bounded update/display/native visual scope; neutral logic_entry_flag name retained.",
+    "limits": [
+      "Save/task initialization and ghDrawPvrTexture/queue composition remain unported.",
+      "No full native game-mode/boot/N1 or guest pixel parity claim.",
+      "Full x87 condition/tag/stack state outside native arithmetic interface."
+    ]
+  },
+  "station_square": {
+    "checks": [
+      {
+        "name": "station-square",
+        "passed": true,
+        "stage": 26
+      },
+      {
+        "name": "adventure-active",
+        "passed": true
+      },
+      {
+        "name": "keyboard-moves-sonic",
+        "passed": true,
+        "distance": 20.98794424779384
+      },
+      {
+        "name": "keyboard-jump-rises",
+        "passed": true,
+        "rise": 20.5941601,
+        "actions": [
+          8,
+          8,
+          8,
+          8,
+          8,
+          8
+        ]
+      },
+      {
+        "name": "pad-moves-sonic",
+        "passed": true,
+        "distance": 18.61797596836875
+      },
+      {
+        "name": "camera-observed",
+        "passed": true,
+        "errors": [
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "name": "camera-input-changes-view",
+        "passed": true,
+        "idle_distance": 1.1279408788433631,
+        "input_distance": 59.45663624498447,
+        "angle_changed": true,
+        "player_drift": 0.0
+      }
+    ],
+    "performance": {
+      "presents": 120,
+      "wall_seconds": 10.562631333013996,
+      "observed_host_fps": 11.360805486501683,
+      "offscreen_uncapped": true,
+      "configured_profile_fps": 63
+    },
+    "passed": true
+  },
+  "performance_exploration": {
+    "host_fps": {
+      "task-before": 10.973610626872459,
+      "task-after": 13.98923697254526,
+      "task-original-dispatch": 14.852592506867255
+    },
+    "pixel_sha256_all_three": "599940d6160095a2987c3d848c8f2b08b2f2e68a483588093ec51f669af0ac49",
+    "limits": "Concurrent workloads; no 63 FPS claim. Original-dispatch-only experiment not retained."
+  },
+  "new_save": {
+    "before": "frame 992 unbound CompareStringA return 0x422094",
+    "after": "Create New File succeeds; isolated SonicDX03.snc and fresh opening event reached",
+    "next_boundary": "native task adapter unowned work at frame 2504; explicit original-task reference route under investigation"
+  },
+  "judge_additions": "New logo update/display probes and oracles, driver fixtures and appended unit registrations; existing comparison logic unchanged."
+}

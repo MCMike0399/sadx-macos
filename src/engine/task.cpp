@@ -292,8 +292,16 @@ TaskResult TaskScheduler::restore_source_graph(const TaskGraphState& state){
     if(!arena_||walk_depth_||state.failure!=TaskFailure::none)return bad();
     for(const auto& [p,t]:storage_){(void)p;if(!t->retired_&&(t->destructor_active_||t->destruction_stage_!=Task::DestructionStage::live))return bad();}
     std::array<bool,4096> free{},used{};
+    // NOTSA: index the validated snapshot once; list traversal must not scan
+    // every live task again for each link at every guest callback boundary.
+    std::array<const TaskGraphNode*, 4096> nodes_by_slot{};
     for(auto slot:state.free_slots){if(slot>=4096||free[slot])return bad();free[slot]=true;}
-    for(const auto& n:state.nodes){if(n.slot>=4096||free[n.slot]||used[n.slot])return bad();used[n.slot]=true;}
+    for (const auto& node : state.nodes) {
+        if (node.slot >= nodes_by_slot.size() || free[node.slot] || used[node.slot])
+            return bad();
+        used[node.slot] = true;
+        nodes_by_slot[node.slot] = &node;
+    }
     const auto valid=[&](std::optional<std::uint16_t> v,bool permit_free=false){return !v||(*v<4096&&(used[*v]||(permit_free&&free[*v])));};
     for(unsigned k=0;k<4096;++k)if(!used[k]&&!free[k])return bad();
     for(const auto& n:state.nodes){if(!valid(n.next,!n.linked)||!valid(n.previous)||!valid(n.parent)||!valid(n.child))return bad();
@@ -302,10 +310,9 @@ TaskResult TaskScheduler::restore_source_graph(const TaskGraphState& state){
     for(const auto& h:state.heads)if(!valid(h))return bad();
     std::array<unsigned,4096> visits{};
     std::array<std::size_t,4096> lists{};
-    const auto find=[&](std::uint16_t id)->const TaskGraphNode*{for(const auto& n:state.nodes)if(n.slot==id)return &n;return nullptr;};
     std::function<bool(std::optional<std::uint16_t>,std::optional<std::uint16_t>,unsigned)> walk;
     walk=[&](std::optional<std::uint16_t> head,std::optional<std::uint16_t> parent,unsigned list){std::optional<std::uint16_t> previous;
-        while(head){if(++visits[*head]!=1)return false;const auto* n=find(*head);if(!n||!n->linked||n->previous!=previous||n->parent!=parent)return false;
+        while(head){if(++visits[*head]!=1)return false;const auto* n=nodes_by_slot[*head];if(!n||!n->linked||n->previous!=previous||n->parent!=parent)return false;
             lists[*head]=list;if(!walk(n->child,head,list))return false;previous=head;head=n->next;}return true;};
     for(unsigned k=0;k<8;++k)if(!walk(state.heads[k],{},k))return bad();
     for(const auto& n:state.nodes)if(!n.linked&&!n.parent&&!walk(n.child,n.slot,0))return bad();

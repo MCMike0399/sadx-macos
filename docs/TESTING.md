@@ -95,11 +95,15 @@ Three tools, from lowest to highest level:
     * `press KEY [FRAMES]`, `down`/`up KEY`;
     * `pad BUTTONS [FRAMES]`, `stick X Y [FRAMES]`, `rstick`, `triggers`, `release`;
     * `screenshot PATH.png|.ppm` at any frame, any number per run;
-    * `state [PATH]`: JSON with game mode, game state, stage, act, rings, timers, and the
-      first player's action, status, rotation, position and speed;
+    * `state [PATH]`: JSON with game mode, game state, stage, act, rings, timers, the
+      first player's action, status, rotation, position and speed, camera pose, and observed
+      speedrun patch bytes/targets and frame-rate scalar;
     * `pause`, `run`, `step N`, `quit`.
   * `--offscreen` renders into a texture in a plain loop. There is no window, no 63 Hz cap,
     and no stall when the screen is covered or locked. Use it for every automated run.
+  * `--overlay DIR` isolates guest writes from other runs. It reads the supplied install
+    first when a file is absent from the overlay; it does not manufacture a blank save.
+    The default remains `build/sadx-app-overlay` for ordinary play.
   * Frame numbers equal the guest's Present count, the same as in `--keys` and `--exit-after`.
     Runs are deterministic.
 * **`tools/journey/sadx_driver.py`**: a Python `Session` for step-by-step play. It starts paused,
@@ -113,6 +117,19 @@ Three tools, from lowest to highest level:
 * **`tools/gate/run_journeys.py`**: the pass/fail journey checks, described next.
 
 Agents check visible claims with these: take a screenshot, read the PNG, and read the state.
+
+`python3 tools/journey/check_gameplay.py --out build/journeys/gameplay-run-1` adds
+behavioral checks to the completed-save route: keyboard movement, a sampled jump,
+controller movement and camera input after an idle-camera comparison. It stores commands,
+state snapshots, PNG hashes, observed profile patches and measured uncapped host throughput
+in `report.json`. Use a fresh output directory for each run so save changes cannot contaminate
+the next replay. Loaded patch sites and a 63 FPS scalar prove configuration; measured host FPS
+and Windows behavior parity are separate claims. This scenario does not complete the Emerald
+Coast goal replay or the native journey rows.
+
+The driver now reports a guest stop immediately instead of waiting for an unreachable future
+frame. A stopped app still accepts observation and quit commands. Camera reads report absent
+or unmapped owners explicitly; they do not replace missing state with a default pose.
 
 ### 3.1 Journeys (L6): what the player sees (GOAL items 1, 3, 7, 8)
 

@@ -140,9 +140,11 @@ std::string prepare_indices(const Draw &draw, PreparedDraw &result) {
     const std::uint64_t required = draw.primitive_type == 4
                                        ? std::uint64_t(draw.primitive_count) * 3
                                        : std::uint64_t(draw.primitive_count) + 2;
-    if (draw.primitive_type < 4 || draw.primitive_type > 6 || required > count) {
-        return "primitive count or type";
-    }
+    if (draw.primitive_type < 4 || draw.primitive_type > 6)
+        return "unsupported primitive type " + std::to_string(draw.primitive_type);
+    if (required > count)
+        return "primitive type " + std::to_string(draw.primitive_type) + " needs " +
+               std::to_string(required) + " vertices/indices, received " + std::to_string(count);
     const auto index = [&](std::uint32_t at) {
         return draw.indices.empty() ? at : draw.indices[at];
     };

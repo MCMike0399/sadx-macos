@@ -1,6 +1,6 @@
 // sadx-app: a window on the game.
 //   sadx-app --guest GAME_DIR WINDOWS_SYSTEM_DIR [--exit-after N] [--screenshot out.ppm] [--keys FRAME:VK[:FRAMES],...] [--pad FRAME:BUTTONS[:FRAMES],...]
-//            [--script FILE] [--control -] [--offscreen]
+//            [--script FILE] [--control -] [--offscreen] [--overlay DIR]
 //     (the keyboard is forwarded to the guest as Windows keys; --keys scripts presses by guest frame)
 //     --script/--control drive the game through the test harness (src/apps/app_harness.hpp: press, hold, sticks,
 //     screenshots at any frame, game-state JSON, pause/step); --offscreen runs without a window, as fast as the
@@ -46,7 +46,7 @@ vertex Out polygon_vertex(uint index [[vertex_id]],constant uint* bytes [[buffer
 }
 fragment float4 polygon_fragment(Out in [[stage_in]]){return in.color;}
 )METAL";
-struct Options {std::string exe,dll,screenshot,game_dir,system_dir,keys,pad,script;std::uint32_t frames=5;bool survey=true,guest=false,control=false,offscreen=false;int exit_after=-1;};
+struct Options {std::string exe,dll,screenshot,game_dir,system_dir,keys,pad,script;std::string overlay="build/sadx-app-overlay";std::uint32_t frames=5;bool survey=true,guest=false,control=false,offscreen=false,original_tasks=false;int exit_after=-1;};
 bool parse(int argc,char** argv,Options& o){
     if(argc<3)return false;int first=3;
     if(!std::strcmp(argv[1],"--guest")){if(argc<4)return false;o.guest=true;o.game_dir=argv[2];o.system_dir=argv[3];first=4;}else{o.exe=argv[1];o.dll=argv[2];}
@@ -59,8 +59,10 @@ bool parse(int argc,char** argv,Options& o){
         else if(!std::strcmp(argv[i],"--keys")&&i+1<argc)o.keys=argv[++i];
         else if(!std::strcmp(argv[i],"--pad")&&i+1<argc)o.pad=argv[++i];
         else if(!std::strcmp(argv[i],"--script")&&i+1<argc)o.script=argv[++i];
+        else if(!std::strcmp(argv[i],"--overlay")&&i+1<argc)o.overlay=argv[++i];
         else if(!std::strcmp(argv[i],"--control")&&i+1<argc&&!std::strcmp(argv[i+1],"-")){o.control=true;++i;}
         else if(!std::strcmp(argv[i],"--offscreen"))o.offscreen=true;
+        else if(!std::strcmp(argv[i],"--original-tasks"))o.original_tasks=true;
         else return false;
     }
     return true;
@@ -120,6 +122,10 @@ void print_frame(int drawn,std::uint64_t presents,const sadx::MetalGuestFrameSta
     std::string unsupported;for(const auto& [why,n]:stats.unsupported)unsupported+=" "+why+" x"+std::to_string(n);
     std::printf("frame %d: guest present %llu, %zu draws (%zu textured), %zu clears%s%s\n",drawn,static_cast<unsigned long long>(presents),stats.draws,stats.textured,stats.clears,
         unsupported.empty()?"":(", not drawn:"+unsupported).c_str(),stopped?(", guest stopped: "+stop).c_str():"");
+    // The driver may be waiting for a future frame that a stopped guest cannot
+    // reach. Deliver its failure immediately even when stdout is a pipe.
+    if (stopped)
+        std::fflush(stdout);
 }
 // Triangle fan -> triangle list indices.
 std::vector<std::uint32_t> fan_indices(std::uint32_t vertex_count){std::vector<std::uint32_t> out;for(std::uint32_t i=1;i+1<vertex_count;++i){out.push_back(0);out.push_back(i);out.push_back(i+1);}return out;}
@@ -185,6 +191,8 @@ std::vector<std::uint32_t> fan_indices(std::uint32_t vertex_count){std::vector<s
 // While the harness is paused, the same frame is drawn again and the guest does not advance.
 - (void)drawGuest:(id<MTLCommandBuffer>)commands pass:(MTLRenderPassDescriptor*)pass drawable:(id<CAMetalDrawable>)drawable{
     auto& harness=*self.harness;
+    if (self.guestStopped)
+        harness.poll_stopped();
     const std::uint64_t shown=self.guest->d3d8.presents;
     const bool fresh=shown!=self.lastShown;
     auto shots=harness.take_screenshots(shown);
@@ -223,6 +231,8 @@ int run_offscreen(sadx::HleProcess& process,sadx::MetalGuestFrameRenderer& rende
     id<MTLCommandQueue> queue=[device newCommandQueue];
     int drawn=0;std::uint64_t last_shown=0;bool stopped=false;sadx::MetalGuestFrameStats stats;
     for(;;){@autoreleasepool{
+        if (stopped)
+            harness.poll_stopped();
         const std::uint64_t shown=process.d3d8.presents;
         const bool fresh=shown!=last_shown;
         auto shots=harness.take_screenshots(shown);
@@ -255,14 +265,22 @@ int run_offscreen(sadx::HleProcess& process,sadx::MetalGuestFrameRenderer& rende
 int run_guest(const Options& o){
     std::ifstream f(o.game_dir+"/sonic.exe",std::ios::binary);if(!f){std::fprintf(stderr,"cannot read %s/sonic.exe\n",o.game_dir.c_str());return 2;}
     std::string error;const auto image=sadx::ExecutableImage::parse({std::istreambuf_iterator<char>(f),{}},&error);if(!image){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
-    auto process=sadx::HleProcess::create(o.game_dir,"build/sadx-app-overlay",&error);if(!process){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
+    auto process=sadx::HleProcess::create(o.game_dir,o.overlay,&error);if(!process){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
     process->use_real_cpp_runtime(o.system_dir);process->hle().set_logging(false);
     process->assume("GameController host sampling: first extended controller is exposed as synthetic user 0; printed face labels resolved when available, Apple deadzones retained; no physical Windows HID parity or vibration output claimed");
     if(!o.pad.empty()||o.offscreen)process->host_xinput(sadx::HleXInputGamepad{}); // offscreen runs never sample a physical pad
     else process->host_xinput(host_pad());
     if(!process->map_main(*image,&error)){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
     sadx::FpuShimStats shims;if(!sadx::install_fpu_shims(process->guest(),sadx::load_fpu_sites("reference/inventory/fpu-sites.json"),shims,&error)){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
-    if(!sadx::install_overrides(process->guest(),sadx::process_overrides(*process,*image),&error)){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
+    auto overrides = sadx::process_overrides(*process, *image);
+    if (o.original_tasks) {
+        overrides.erase(std::remove_if(overrides.begin(), overrides.end(), [](const auto &entry) {
+                            return entry.name.rfind("task_", 0) == 0;
+                        }), overrides.end());
+        process->assume("--original-tasks: task allocation, work ownership and dispatch execute "
+                        "the original x86 subsystem; native task adapter qualification is separate");
+    }
+    if(!sadx::install_overrides(process->guest(),overrides,&error)){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
     auto* P=process.get();const auto script=parse_keys(o.keys),pads=parse_keys(o.pad);
     for(const auto& k:pads)if(k.vk&~0xf7ffU){std::fprintf(stderr,"unsupported --pad button mask\n");return 2;}
     sadx::harness::Harness harness;
@@ -300,7 +318,7 @@ int run_guest(const Options& o){
 }
 }
 int main(int argc,char** argv){
-    Options o;if(!parse(argc,argv,o)){std::fprintf(stderr,"usage: %s --guest GAME_DIR WINDOWS_SYSTEM_DIR [--exit-after N] [--screenshot out.ppm|.png] [--keys FRAME:VK[:FRAMES],...] [--pad FRAME:BUTTONS[:FRAMES],...] [--script FILE] [--control -] [--offscreen]\n       %s SONIC.EXE INPUT_MOD.DLL [--frames N] [--survey|--stop] [--exit-after N] [--screenshot out.ppm]\n",argv[0],argv[0]);return 2;}
+    Options o;if(!parse(argc,argv,o)){std::fprintf(stderr,"usage: %s --guest GAME_DIR WINDOWS_SYSTEM_DIR [--exit-after N] [--screenshot out.ppm|.png] [--keys FRAME:VK[:FRAMES],...] [--pad FRAME:BUTTONS[:FRAMES],...] [--script FILE] [--control -] [--offscreen] [--overlay DIR]\n       %s SONIC.EXE INPUT_MOD.DLL [--frames N] [--survey|--stop] [--exit-after N] [--screenshot out.ppm]\n",argv[0],argv[0]);return 2;}
     if(o.guest){@autoreleasepool{return run_guest(o);}}
     @autoreleasepool{
         sadx::MacPerformanceCounter counter;

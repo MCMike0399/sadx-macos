@@ -44,9 +44,14 @@ class HarnessError(RuntimeError):
 
 class Session:
     def __init__(self, app='build/sadx-app', window=False, log_path='build/journeys/driver.log',
-                 timeout=600):
+                 timeout=600, overlay=None, game_dir=REFERENCE_GAME_DIR,
+                 system_dir=WINDOWS_SYSTEM_DIR, original_tasks=False):
         os.makedirs(os.path.dirname(log_path) or '.', exist_ok=True)
-        command = [app, '--guest', REFERENCE_GAME_DIR, WINDOWS_SYSTEM_DIR, '--control', '-']
+        command = [app, '--guest', str(game_dir), str(system_dir), '--control', '-']
+        if overlay is not None:
+            command.extend(['--overlay', str(overlay)])
+        if original_tasks:
+            command.append('--original-tasks')
         if not window:
             command.append('--offscreen')
         self.timeout = timeout
@@ -56,13 +61,20 @@ class Session:
         self.replies = queue.Queue()
         self.reader = threading.Thread(target=self._read, daemon=True)
         self.reader.start()
-        self.frame = self.state()['frame']
+        try:
+            self.frame = self.state()['frame']
+        except BaseException:
+            self.close()
+            raise
 
     def _read(self):
         for line in self.process.stdout:
             self.log.write(line)
+            self.log.flush()
             if line.startswith('harness: '):
                 self.replies.put(line[len('harness: '):].rstrip('\n'))
+            elif 'guest stopped:' in line:
+                self.replies.put(HarnessError(line.strip()))
         self.replies.put(None)
 
     def send(self, command, verb=None):
@@ -79,6 +91,8 @@ class Session:
                 raise HarnessError(f'no reply to {command!r} within {self.timeout} s')
             if reply is None:
                 raise HarnessError(f'sadx-app exited while waiting for {command!r} (see {self.log.name})')
+            if isinstance(reply, HarnessError):
+                raise reply
             frame, got, rest = (reply.split(' ', 2) + ['', ''])[:3]
             if got != verb:
                 continue
@@ -98,9 +112,15 @@ class Session:
 
     def _wait_for(self, verb, frame):
         while True:
-            reply = self.replies.get(timeout=self.timeout)
+            try:
+                reply = self.replies.get(timeout=self.timeout)
+            except queue.Empty:
+                raise HarnessError(f'no reply before frame {frame} within {self.timeout} s '
+                                   f'(see {self.log.name})')
             if reply is None:
                 raise HarnessError(f'sadx-app exited before frame {frame} (see {self.log.name})')
+            if isinstance(reply, HarnessError):
+                raise reply
             at, got = reply.split(' ', 2)[:2]
             if got == verb and int(at) >= frame:
                 self.frame = int(at)
@@ -161,6 +181,8 @@ class Session:
                 self.process.wait(timeout=30)
             except subprocess.TimeoutExpired:
                 self.process.kill()
+                self.process.wait(timeout=30)
+        self.reader.join(timeout=1)
         self.log.close()
 
     def __enter__(self):
@@ -197,8 +219,9 @@ stick X Y [FRAMES] | rstick X Y [FRAMES] | triggers L R [FRAMES] | release |
 screenshot PATH | state | frame | quit"""
 
 
-def shell(window):
-    with Session(window=window) as game:
+def shell(window, overlay=None, log_path='build/journeys/driver.log', original_tasks=False):
+    with Session(window=window, overlay=overlay, log_path=log_path,
+                 original_tasks=original_tasks) as game:
         print(f'paused at frame {game.frame}; `help` lists commands', flush=True)
         for line in sys.stdin:
             words = line.split()
@@ -233,11 +256,14 @@ def main():
     d.add_argument('--out', default='build/journeys/demo')
     s = sub.add_parser('shell')
     s.add_argument('--window', action='store_true')
+    s.add_argument('--overlay', help='isolated save/write directory (requires app --overlay support)')
+    s.add_argument('--log-path', default='build/journeys/driver.log')
+    s.add_argument('--original-tasks', action='store_true')
     args = parser.parse_args()
     if args.command == 'demo':
         demo(args.window, args.out)
     else:
-        shell(args.window)
+        shell(args.window, args.overlay, args.log_path, args.original_tasks)
 
 
 if __name__ == '__main__':

@@ -182,6 +182,58 @@ inline std::string game_state_json(HleProcess& process, std::uint64_t frame) {
     } else {
         out << ",\"player\":null";
     }
+    // SADXVariablesNew.h: camera_twp; SADXStructsNew.h: taskwk::ang/pos.
+    // Observe the camera that actually ran, without changing it or substituting a default.
+    const auto camera = g.u32(0x3b2cbb0);
+    if (!camera) {
+        out << ",\"camera\":null,\"camera_error\":\"unmapped camera_twp\"";
+    } else if (*camera == 0) {
+        out << ",\"camera\":null";
+    } else {
+        std::int32_t angles[3] = {};
+        float position[3] = {};
+        if (!g.read(*camera + 0x14, angles, sizeof angles) ||
+            !g.read(*camera + 0x20, position, sizeof position)) {
+            out << ",\"camera\":null,\"camera_error\":\"unmapped camera taskwk\"";
+        } else {
+            out << ",\"camera\":{\"rotation\":[" << angles[0] << "," << angles[1] << ","
+                << angles[2] << "],\"position\":" << vector(*camera + 0x20) << "}";
+        }
+    }
+    // Source-bound patch sites: reference/updated-pc-reference/expected-hooks.json.
+    // These are observed bytes, not a claim that every patched behavior was exercised.
+    const auto bytes = [&](std::uint32_t address, std::size_t count) {
+        std::vector<std::uint8_t> data(count);
+        if (!g.read(address, data.data(), data.size()))
+            return std::string("null");
+        std::string text = "\"";
+        constexpr char digits[] = "0123456789abcdef";
+        for (const auto byte : data) {
+            text += digits[byte >> 4];
+            text += digits[byte & 15];
+        }
+        return text + "\"";
+    };
+    const auto speedrun_jump = [&](std::uint32_t address) -> std::string {
+        std::uint8_t opcode = 0;
+        const auto relative = g.u32(address + 1);
+        if (!g.read(address, &opcode, 1) || !relative)
+            return "null";
+        const auto* module = process.modules().by_name("sadx-speedrun-mod.dll");
+        const auto target = address + 5 + *relative;
+        const bool matches = opcode == 0xe9 && module && target >= module->base &&
+                             target - module->base < module->size;
+        return matches ? "true" : "false";
+    };
+    out << ",\"profile\":{\"ccef_reset_1\":" << bytes(0x434870, 2)
+        << ",\"ccef_reset_2\":" << bytes(0x438330, 2)
+        << ",\"ehcf_dereference\":" << bytes(0x533939, 3)
+        << ",\"ehcf_branch\":" << bytes(0x440ef5, 2)
+        << ",\"skipma_ingame_to_speedrun\":" << speedrun_jump(0x431517)
+        << ",\"skipma_movie_to_speedrun\":" << speedrun_jump(0x5132b1)
+        << ",\"limiter_to_speedrun\":" << speedrun_jump(0x7899e0)
+        << ",\"extra_ticks_to_speedrun\":" << speedrun_jump(0x411d1c)
+        << ",\"frame_rate_scalar\":" << f32(0x7dce58) << "}";
     out << "}";
     return out.str();
 }
@@ -227,6 +279,14 @@ public:
     bool active() const { return control_ || !scheduled_.empty(); }
     bool quit_requested() const { return quit_; }
     bool control_closed() const { return control_ && stdin_closed_; }
+
+    // A stopped guest cannot reach another Present. Keep observation/quit commands
+    // available at its last boundary, without advancing it or replaying scheduled input.
+    void poll_stopped() {
+        paused_ = true;
+        step_budget_ = 0;
+        poll_control(current_frame_);
+    }
 
     // Whether the guest may run its next frame. A paused harness keeps polling its control input.
     bool may_advance() {
