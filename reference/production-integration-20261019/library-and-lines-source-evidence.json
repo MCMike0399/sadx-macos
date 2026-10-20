@@ -1,0 +1,113 @@
+{
+  "stage": "semantic library initialization and line-list renderer integration",
+  "library": {
+    "outcome": "Whole Sonic library initialization is a shared semantic algorithm with plain native configuration/state, named service operations and a lazy reference diagnostic adapter.",
+    "evidence": {
+      "main": "ev_ae33a380015810ee3501c3aa976f69c4ed6ff6536cdfdbde5073f1ca25269ada",
+      "callees": "ev_a8eac79a7413acf8ea1d5863ff8332b0be91b19eb825c5c3ef618dd2d4077648",
+      "application_paths": "ev_1d0724863d67c8869c8964c505aeab7a5baa39a8ee59f7253d434f79eb352dce",
+      "file_io_owners": "ev_4c9c40e97309cc95a0ef0a8405770a2314c02aeccff727507d3e45620664bc0a"
+    },
+    "oracle": {
+      "cases": 2400,
+      "outcome_kinds": 72,
+      "mismatches": 0,
+      "sources_match": true,
+      "library_match": true,
+      "library_sha256": "823d3cd8e4894c062c31a5800d95a09358f80522afcc9e66b5868a8d9388da36"
+    },
+    "direct": {
+      "cases": 2400,
+      "mismatches": 0,
+      "first_failures": []
+    },
+    "mutants": [
+      {
+        "name": "nonzero depth request instead of exact one",
+        "caught": true,
+        "cases": 2400,
+        "mismatches": 600
+      },
+      {
+        "name": "skip alternate retry shutdown",
+        "caught": true,
+        "cases": 2400,
+        "mismatches": 718
+      },
+      {
+        "name": "lose unsigned viewport correction",
+        "caught": true,
+        "cases": 2400,
+        "mismatches": 1169
+      }
+    ],
+    "native_unit": {
+      "path": "tests/unit/game_library_init_native.cpp",
+      "cases": 36,
+      "controls": 12,
+      "coverage": "Live screen/viewport callback changes, pre-callback text identities, state stores before callback and unmasked arithmetic failures.",
+      "dependencies": "Core archive only; no assets, guest archive or executable."
+    },
+    "readability": {
+      "game_library_init_native.cpp": {
+        "hex_literals": 0,
+        "address_identifiers": 0,
+        "address_calls": 0,
+        "goto": 0,
+        "address_labels": 0,
+        "long_lines": 0,
+        "multi_statement_lines": 0
+      },
+      "game_library_init.hpp": {
+        "hex_literals": 0,
+        "address_identifiers": 0,
+        "address_calls": 0,
+        "goto": 0,
+        "address_labels": 0,
+        "long_lines": 0,
+        "multi_statement_lines": 0
+      },
+      "game_library_init.cpp": {
+        "hex_literals": 0,
+        "address_identifiers": 0,
+        "address_calls": 0,
+        "goto": 0,
+        "address_labels": 0,
+        "long_lines": 0,
+        "multi_statement_lines": 0
+      },
+      "game_library_init_internal.hpp": {
+        "hex_literals": 0,
+        "address_identifiers": 0,
+        "address_calls": 0,
+        "goto": 0,
+        "address_labels": 0,
+        "long_lines": 0,
+        "multi_statement_lines": 0
+      }
+    },
+    "limits": [
+      "Named native services require host implementations; this is not native game boot or library-callee recovery.",
+      "Original error statuses -23/-33 retain caller cleanup policy; actual recovered file-system initializer returns zero.",
+      "The four-string configuration layout contradicts the first fields of the New.h NES_LIB_PARAM declaration; names follow code and actual source strings.",
+      "No protected comparisons, fixtures, tolerances or cases changed as part of the source rewrite."
+    ],
+    "rea_closed_cleanly": true
+  },
+  "renderer": {
+    "actual_failure": "Chaos 0 frames 2351 onward: unsupported D3D primitive type 2 (line lists)",
+    "regression": "tests/unit/graphics_line_list.mm failed before implementation; CPU/GPU endpoint validation, disconnected pairs, indexed counts, transforms, fog and singular-normal safety pass",
+    "deliberate_fault": "Temporary Metal line topology changed to triangles; GPU check failed; restored checks pass",
+    "existing_tests": "graphics-frame and metal-device-frame pass",
+    "limits": [
+      "Windows line rasterization pixel parity unverified",
+      "Point and line-strip topologies remain explicitly unsupported"
+    ]
+  },
+  "registration": "Only new native library and graphics-line-list unit rows added; no existing assertions or fixtures changed",
+  "integrated_gate": {
+    "first_exit_status": 2,
+    "failure": "One legacy constants unit, tests/unit/library_initial_state.cpp, still included the migrated game-tier header and linked core only. Its include/link compatibility is corrected separately with assertions unchanged.",
+    "temporary_diagnostic_build": "Native task pointer tracing briefly overlapped the build window; removed before final rebuild. No successful gate was recorded."
+  }
+}

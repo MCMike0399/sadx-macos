@@ -134,20 +134,33 @@ std::string prepare_vertices(const Draw &draw, PreparedDraw &result, bool valid_
     }
     return {};
 }
-// NOTSA: normalize lists, alternating strips and fans to one indexed triangle stream.
+// [platform:d3d8] Preserve isolated line pairs; normalize triangle lists, strips and fans.
 std::string prepare_indices(const Draw &draw, PreparedDraw &result) {
     const auto count = draw.indices.empty() ? draw.vertices.size() : draw.indices.size();
-    const std::uint64_t required = draw.primitive_type == 4
-                                       ? std::uint64_t(draw.primitive_count) * 3
-                                       : std::uint64_t(draw.primitive_count) + 2;
-    if (draw.primitive_type < 4 || draw.primitive_type > 6)
+    const bool lines = draw.primitive_type == 2;
+    const std::uint64_t required = lines ? std::uint64_t(draw.primitive_count) * 2
+                                  : draw.primitive_type == 4
+                                      ? std::uint64_t(draw.primitive_count) * 3
+                                      : std::uint64_t(draw.primitive_count) + 2;
+    if (!lines && (draw.primitive_type < 4 || draw.primitive_type > 6))
         return "unsupported primitive type " + std::to_string(draw.primitive_type);
     if (required > count)
         return "primitive type " + std::to_string(draw.primitive_type) + " needs " +
                std::to_string(required) + " vertices/indices, received " + std::to_string(count);
+    if (required > std::numeric_limits<std::uint32_t>::max())
+        return "primitive index range exceeds 32 bits";
     const auto index = [&](std::uint32_t at) {
         return draw.indices.empty() ? at : draw.indices[at];
     };
+    if (lines) {
+        for (std::uint64_t endpoint = 0; endpoint < required; ++endpoint) {
+            const auto vertex = index(std::uint32_t(endpoint));
+            if (vertex >= draw.vertices.size())
+                return "index outside vertex range";
+            result.indices.push_back(vertex);
+        }
+        return {};
+    }
     for (std::uint32_t primitive = 0; primitive < draw.primitive_count; ++primitive) {
         std::array<std::uint32_t, 3> triangle{};
         if (draw.primitive_type == 4)
@@ -251,7 +264,8 @@ PreparedDraw prepare_draw(const Draw &draw) {
     if (!result.unsupported.empty())
         return result;
     if (!valid_normals) {
-        if (!zero_raster_area(result))
+        // Line endpoints do not define triangle area; the triangle exemption cannot apply.
+        if (draw.primitive_type == 2 || !zero_raster_area(result))
             result.unsupported = "singular visible normal transform";
         else
             result.indices.clear();

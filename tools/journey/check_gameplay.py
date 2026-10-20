@@ -105,6 +105,14 @@ class Scenario:
         self.capture('intro-before-skip')
         self.command('press', 'enter')  # normal Start/Skipma path, no state injection
         self.command('advance', 20)
+        self.capture('chaos-zero-intro')
+        # The boss intro arrives during MD_GAME_FADEIN; Start can be ignored there.
+        # The observed main-state boundary at frame 2420 accepts the next normal skip.
+        self.command('press', 'enter')
+        self.command('advance', 60)
+        self.capture('boss-intro-before-skip')
+        self.command('press', 'enter')
+        self.command('advance', 30)
         return self.capture('chaos-zero-start')
 
     def verify_playable_profile(self, start):
@@ -124,29 +132,39 @@ class Scenario:
     def chaos_controls(self, start, measure_frames):
         """Short fight input checks; camera input is qualified by the Station Square route."""
         self.verify_playable_profile(start)
-        baseline = self.capture('before-keyboard')
+        # Observed entry sequence: the boss camera holds control before its name/HUD.
+        # Normal A input also uses the pinned Skipma path; no timer/state is overwritten.
+        self.command('advance', 210)
+        self.command('key_down', 'x')
+        self.command('advance', 60)
+        self.command('release')
+        baseline = self.capture('chaos-ready')
         self.command('key_down', 'right')
         self.command('advance', 30)
         moved = self.capture('keyboard-moved')
         self.command('release')
         movement = distance(player(baseline)['position'], player(moved)['position'])
-        self.check('keyboard-moves-sonic', movement > 1, distance=movement)
-        self.command('advance', 60)
-        before_jump = self.capture('before-jump')
-        self.command('press', 'x', 8)
-        self.command('advance', 15)
-        jumped = self.capture('jump')
-        rise = player(jumped)['position'][1] - player(before_jump)['position'][1]
-        self.check('keyboard-jump-rises', rise > 1, rise=rise, action=player(jumped)['action'])
-        self.command('release')
-        self.command('advance', 60)
+        self.check('keyboard-moves-sonic', movement > 1 and player(moved)['action'] == 2,
+                   distance=movement, action=player(moved)['action'])
+        # Check the pad before the first projectile; a hurt/knockback action cannot pass.
+        self.command('advance', 30)
         before_pad = self.capture('before-pad')
         self.command('stick', -1, 0, 30)
         self.command('advance', 30)
         moved_pad = self.capture('pad-moved')
         self.command('release')
         movement = distance(player(before_pad)['position'], player(moved_pad)['position'])
-        self.check('pad-moves-sonic', movement > 1, distance=movement)
+        self.check('pad-moves-sonic', movement > 1 and player(moved_pad)['action'] == 2,
+                   distance=movement, action=player(moved_pad)['action'])
+        self.command('advance', 60)
+        before_jump = self.capture('before-jump')
+        self.command('press', 'x', 8)
+        self.command('advance', 15)
+        jumped = self.capture('jump')
+        rise = player(jumped)['position'][1] - player(before_jump)['position'][1]
+        self.check('keyboard-jump-rises', rise > 1 and player(jumped)['action'] == 8,
+                   rise=rise, action=player(jumped)['action'])
+        self.command('release')
         started = time.perf_counter()
         frame = self.game.frame
         self.command('advance', measure_frames)
@@ -174,7 +192,8 @@ class Scenario:
         moved = self.capture('keyboard-moved')
         self.command('release')
         moved_distance = distance(player(baseline)['position'], player(moved)['position'])
-        self.check('keyboard-moves-sonic', moved_distance > 1, distance=moved_distance)
+        self.check('keyboard-moves-sonic', moved_distance > 1 and player(moved)['action'] == 2,
+                   distance=moved_distance, action=player(moved)['action'])
         self.command('advance', 90)
         before_jump = self.capture('before-jump')
         self.command('press', 'x', 8)
@@ -193,7 +212,8 @@ class Scenario:
         pad_moved = self.capture('pad-moved')
         self.command('release')
         pad_distance = distance(player(before_pad)['position'], player(pad_moved)['position'])
-        self.check('pad-moves-sonic', pad_distance > 1, distance=pad_distance)
+        self.check('pad-moves-sonic', pad_distance > 1 and player(pad_moved)['action'] == 2,
+                   distance=pad_distance, action=player(pad_moved)['action'])
         self.command('advance', 120)
         idle_start = self.capture('camera-idle-start')
         self.command('advance', 45)

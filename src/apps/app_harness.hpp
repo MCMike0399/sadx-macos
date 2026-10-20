@@ -141,6 +141,10 @@ inline std::string game_state_json(HleProcess& process, std::uint64_t frame) {
         std::int16_t v = 0;
         return g.read(address, &v, sizeof v) ? v : -1;
     };
+    const auto u8 = [&](std::uint32_t address) -> std::string {
+        std::uint8_t value = 0;
+        return g.read(address, &value, sizeof value) ? std::to_string(value) : "null";
+    };
     const auto f32 = [&](std::uint32_t address) -> std::string {
         float v = 0;
         if (!g.read(address, &v, sizeof v))
@@ -162,7 +166,9 @@ inline std::string game_state_json(HleProcess& process, std::uint64_t frame) {
         << ",\"act\":" << s16(0x3b22dec)             // ssActNumber (CurrentAct)
         << ",\"rings\":" << s16(0x3b0f0e4)           // Rings
         << ",\"level_frames\":" << u32(0x3b0f108)    // LevelFrameCount
-        << ",\"global_timer\":" << u32(0x3b0f13c);   // ulGlobalTimer (FrameCounter)
+        << ",\"global_timer\":" << u32(0x3b0f13c)    // ulGlobalTimer (FrameCounter)
+        << ",\"control_enabled\":" << u8(0x909fb0)    // ControlEnabled (SADXVariables.h)
+        << ",\"controller_enabled\":" << u8(0x909fb4); // ControllerEnabled[0]
     // playertwp[0] (EntityData1Ptrs[0]) and CharObj2Ptrs[0]: the first player, when it exists.
     const auto task = g.u32(0x3b42e10).value_or(0);
     if (task != 0) {

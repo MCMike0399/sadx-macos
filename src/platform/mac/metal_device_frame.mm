@@ -116,7 +116,7 @@ std::string validate(const graphics::Draw &draw) {
     const auto t = [&](unsigned key, unsigned fallback) {
         return state(draw.stage0_states, key, fallback);
     };
-    // Accept implemented states and documented inert states for this triangle pipeline.
+    // Accept implemented states and documented inert states for this fixed-function pipeline.
     // Unknown API states remain visible rather than falling through to a guessed mode.
     static const std::set<unsigned> render_states = {
         7,   8,   9,   14,  15,  16,  19,  20,  22,  23,  24,  25,  26,  27,
@@ -423,7 +423,10 @@ MetalFrameStats MetalDeviceFrameRenderer::encode(const graphics::Frame &frame,
         [encoder
             setFragmentSamplerState:impl->sampler(t(16, 1), t(17, 1), t(18, 0), t(13, 1), t(14, 1))
                             atIndex:0];
-        [encoder drawIndexedPrimitives:MTLPrimitiveTypeTriangle
+        // [platform:d3d8] LINELIST consumes independent endpoint pairs, without triangle culling.
+        const auto topology = draw.primitive_type == 2 ? MTLPrimitiveTypeLine
+                                                       : MTLPrimitiveTypeTriangle;
+        [encoder drawIndexedPrimitives:topology
                             indexCount:prepared.indices.size()
                              indexType:MTLIndexTypeUInt32
                            indexBuffer:indices

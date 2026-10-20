@@ -45,7 +45,20 @@ struct TaskBridge {
     std::uint32_t raw(const std::shared_ptr<void>& value){return value?source_resources.at(value.get()):0;}
     std::uint32_t address(std::optional<std::uint16_t> slot)const{return slot?pool+52U*(*slot):0;}
     std::optional<std::uint16_t> slot(std::uint32_t address_value){if(!address_value)return {};if(address_value<pool||(address_value-pool)%52||(address_value-pool)/52>=4096){process.guest().stop("task bridge: non-pool task at "+hex(entry));throw MetadataUnavailable{};}return static_cast<std::uint16_t>((address_value-pool)/52);}
-    TaskWorkHandle work(std::uint32_t address_value){if(!address_value)return {};const auto i=allocations.find(address_value);if(i==allocations.end()||i->second->released()){process.guest().stop("task bridge: unowned work field "+hex(address_value)+" at "+hex(entry)+" (arena "+hex(base)+")");throw MetadataUnavailable{};}return i->second;}
+    TaskWorkHandle work(std::uint32_t address_value, unsigned task_slot, unsigned field) {
+        if (!address_value)
+            return {};
+        const auto found = allocations.find(address_value);
+        if (found == allocations.end() || found->second->released()) {
+            process.guest().stop(
+                "task bridge: unowned work field " + hex(address_value) + " at " + hex(entry) +
+                " (arena " + hex(base) + ", slot " + std::to_string(task_slot) + ", field +" +
+                hex(field) + ", exec " + hex(serialized[task_slot][4]) + ", current " +
+                hex(process.guest().u32(0x3abdbf4).value_or(0)) + ")");
+            throw MetadataUnavailable{};
+        }
+        return found->second;
+    }
     std::uint32_t address(const TaskWorkHandle& w){return w?base+w->data_offset():0;}
     std::uint32_t word(std::uint32_t at){const auto v=process.guest().u32(at);if(!v){process.guest().stop("task bridge: missing field "+hex(at)+" at "+hex(entry));throw MetadataUnavailable{};}return *v;}
 
@@ -119,7 +132,7 @@ struct TaskBridge {
         for(unsigned k=0;k<4096;++k)if(!free.test(k)){
             const auto& words=serialized[k];TaskGraphNode n{};n.slot=k;n.linked=linked.test(k)!=0;n.next=slot(words[0]);n.previous=slot(words[1]);n.parent=slot(words[2]);n.child=slot(words[3]);
             n.exec=callback(words[4]);n.display=callback(words[5]);n.destructor=callback(words[6]);
-            n.primary=work(words[8]);n.motion=work(words[9]);n.force=work(words[10]);n.auxiliary=work(words[11]);n.field30=resource(words[12]);
+            n.primary=work(words[8],k,32);n.motion=work(words[9],k,36);n.force=work(words[10],k,40);n.auxiliary=work(words[11],k,44);n.field30=resource(words[12]);
             if(words[7]){auto control=std::make_shared<Task::ObjectControl>();if(!g.read(words[7]+2,&control->flags_at_2,1)){g.stop("task bridge: missing control flag at "+hex(entry));throw MetadataUnavailable{};}control_tasks.push_back({control,slot(word(words[7]+4))});controls[control.get()]=words[7];n.control=control;}
             state.nodes.push_back(std::move(n));
         }

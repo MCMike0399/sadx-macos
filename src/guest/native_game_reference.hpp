@@ -28,7 +28,7 @@
 #include "engine/ninja_frame_calls.hpp"
 #include "game/mod_loader_frame.hpp"
 #include "game/game_winmain.hpp"
-#include "game/game_library_init.hpp"
+#include "guest/game_library_init_reference.hpp"
 #include "engine/ninja_device_init.hpp"
 #include "engine/ninja_system_init.hpp"
 #include "game/game_window.hpp"

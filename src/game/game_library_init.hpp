@@ -1,41 +1,70 @@
 #pragma once
-#include <optional>
-#include "engine/game_logic.hpp"
 #include "cpu/x87_math.hpp"
 #include <array>
 #include <cstdint>
-#include <functional>
-namespace sadx {
-// 781070 "Sonic Library Initialize" (WinMain calls it with the 892940 block),
-// from exact instructions. It copies config words into globals, runs the
-// window, device (793d80 -> 791610 + 7800a0), memory and library owners, retries
-// 788000 up to eight times (a cleanup chain after the -0x17/-0x21 results and
-// when every try fails), then sets 3d0f800 = 1.0f and 3d0f9c0 = height/width
-// from the viewport and calls 789c50. Every callee is an owner.
-struct GameLibraryInitState {
-    std::array<std::optional<std::uint32_t>,9> words_at_389d864; // config +0x28..+0x48
-    std::optional<std::uint32_t> word_at_38a5dc4,word_at_38a5dc8,word_at_38a5dcc; // config +0x10, +0x50, +0x54
-    std::optional<float> scale_at_3d0f800,aspect_at_3d0f9c0;
+#include <string_view>
+
+namespace sadx::library {
+// NOTSA: borrowed text resources copied by the original library path setup.
+struct ApplicationPaths {
+    std::string_view company;
+    std::string_view application;
+    std::string_view system_root;
+    std::string_view backup_root;
 };
-struct GameLibraryCall {std::uint32_t source_call,callee;std::array<std::optional<std::uint32_t>,4> arguments={};};
-struct GameLibraryOwnerResult {GameLogicOwnerResult owner;std::optional<std::uint32_t> eax;};
-struct GameLibraryInitRuntime {
-    GameLibraryInitState& state;
-    std::uint32_t config=0x892940;
-    // Reads a config word: its words have several owners (892950 WinMain, 89295c the renderer...).
-    std::function<std::optional<std::uint32_t>(std::uint32_t address)> read;
-    // The device viewport's Width/Height (3d12788, 3d1278c), read after 791610 filled them.
-    std::function<std::optional<std::uint32_t>(std::uint32_t address)> read_viewport;
-    X87Context& fp;
-    std::function<GameLibraryOwnerResult(const GameLibraryCall&)> invoke;
+// NOTSA: startup values consumed by library initialization, named from its readers.
+struct Configuration {
+    ApplicationPaths paths;
+    std::array<std::uint32_t, 9> polygon_buffer_counts;
+    std::uint32_t windowed, back_buffer_width, back_buffer_height;
+    std::uint32_t high_precision_depth_request;
+    std::uint32_t screen_flags, screen_setup_argument, frame_interval;
 };
-enum class GameLibraryInitFailure {none,unknown_state,missing_owner,owner_failed,cancelled,fp_failed};
-struct GameLibraryInitResult {
-    GameLibraryInitFailure failure=GameLibraryInitFailure::none;
-    std::uint32_t source_boundary=0;std::optional<std::uint32_t> required_fact;
-    std::optional<GameLibraryCall> pending_call;
-    std::uint32_t tries_left=0; // EBX after the 788000 loop (0 = every try failed)
-    explicit operator bool()const noexcept{return failure==GameLibraryInitFailure::none;}
+struct State {
+    std::array<std::uint32_t, 9> polygon_buffer_counts;
+    std::uint32_t windowed, back_buffer_width, back_buffer_height;
+    float scale, aspect;
 };
-GameLibraryInitResult run_library_init_781070(GameLibraryInitRuntime&);
-} // namespace sadx
+struct Viewport {
+    std::uint32_t width, height;
+};
+// NOTSA: named startup callees; native hosts own their windows, buffers and heaps.
+// Implementations can inspect or mutate the borrowed configuration and state.
+// An unavailable implementation must throw; it must not report a guessed success.
+struct Services {
+    virtual ~Services() = default;
+    virtual void enable_high_precision_depth() = 0;
+    virtual void configure_application_paths(const ApplicationPaths &) = 0;
+    virtual void initialize_window() = 0;
+    virtual void set_library_mode(std::uint32_t) = 0;
+    virtual void initialize_graphics() = 0;
+    virtual void create_heap() = 0;
+    virtual void configure_screen(std::uint32_t flags, std::uint32_t setup_argument,
+                                  std::uint32_t interval) = 0;
+    virtual void initialize_input() = 0;
+    virtual void register_debug_text() = 0;
+    // Meaning of nonzero statuses is not established. The caller retains the
+    // original retry policy, including its two cleanup-triggering error codes.
+    virtual std::int32_t initialize_file_system(std::uint32_t handle_capacity,
+                                               std::uint32_t entry_capacity) = 0;
+    virtual void shutdown_file_system() = 0;
+    virtual void unregister_debug_text() = 0;
+    virtual void shutdown_input() = 0;
+    virtual void release_system_pool() = 0;
+    virtual void destroy_heap() = 0;
+    virtual void release_graphics() = 0;
+    virtual void close_instance_mutex() = 0;
+    virtual void focus_window() = 0;
+};
+// NOTSA: borrowed native owners; viewport values are read after device setup.
+struct Runtime {
+    const Configuration &configuration;
+    State &state;
+    const Viewport &viewport;
+    Services &services;
+    X87Context &arithmetic;
+};
+// Returns the attempts remaining; zero still follows the original shutdown/
+// viewport/focus tail. Exceptions retain stores completed before the failed call.
+std::uint32_t initialize_libraries(Runtime &);
+} // namespace sadx::library

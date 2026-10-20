@@ -113,7 +113,17 @@ Three tools, from lowest to highest level:
     Square, with a PNG and a state JSON per screen. On 2026-10-16 it took 178 s; at frame 2,157
     the game was in mode 5, stage 26, with a player.
   * `sadx_driver.py shell` reads the same commands from stdin.
+  * `shell --overlay DIR --log-path FILE` keeps save writes and logs isolated. Add
+    `--original-tasks` only for the explicit reference experiment that executes the original
+    x86 task subsystem; the default continues to exercise the native task adapter.
   * SADX takes no mouse input, so the harness has no clicks.
+* **`tools/journey/check_gameplay.py --out build/journeys/UNIQUE-RUN`** drives the completed
+  first save into Station Square, then checks keyboard movement, jumping, synthetic pad
+  movement and camera input against a stationary idle observation. It records screenshots,
+  state, command history and input hashes; verifies live CCEF/EHCF/Skipma/limiter patch sites;
+  and checks image properties and unsupported draws. Each run creates its own save overlay.
+  The report separates the configured 63 FPS scalar from measured uncapped host throughput.
+  This is reference-app input coverage, not the R5 Emerald Coast goal replay or native N5.
 * **`tools/gate/run_journeys.py`**: the pass/fail journey checks, described next.
 
 Agents check visible claims with these: take a screenshot, read the PNG, and read the state.

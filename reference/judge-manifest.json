@@ -1,9 +1,10 @@
 {
   "change": {
-    "base_commit": "d580e7a7612a4feeb590fbe5976d102fcdb1ccfc",
-    "evidence": "reference/production-integration-20261019/library-and-logo-judge-evidence.json",
-    "evidence_sha256": "182156fde26cf19c033529e9892f74a194a6961c33d6fc5b79ddb3f1ec7744b4",
-    "reason": "Prepare library initialization adapter verification and qualify the bounded 640x480 logo profile; comparisons and fixtures unchanged"
+    "base_commit": "7f35e9434813016925df303c00d380b712a02a43",
+    "evidence": "reference/production-integration-20261019/library-and-lines-source-evidence.json",
+    "evidence_sha256": "706f0ed7ad13dcfc01502d898b39d99898a228822dc914756780f2597ab336d8",
+    "mode": "additions-only",
+    "reason": "Register new native library and line-list tests; existing fixture assertions unchanged"
   },
   "files": {
     "Makefile": "7998fb06b3f04f4a0a1d6fd35e63075f2e33ab03eba261515f9d702d5ed2e09c",
@@ -363,7 +364,7 @@
     "tests/python/test_readability.py": "8090f2eb23f8c958972e071d94a4d77b99a8062953d456a89ccba2abafc78a3d",
     "tests/python/test_symbol_context.py": "e276e801136d0821369682beb43c42c0f460ff137123683d8c1150487eec2690",
     "tests/python/test_symbols.py": "9e9a03a6389d6cd58aa49c63272049754f55ccddb19eeb894b8b92ccce362e0f",
-    "tests/unit/manifest.tsv": "997f70ea152ac87c5f641f902e3ed4f7e8a07ebf481e56e5dd721e7e8a8f9c6d",
+    "tests/unit/manifest.tsv": "ac5c0410a70c4bf203197e019ba5ed7eb729dcfc2cab979f1080e45ba163d0e8",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",

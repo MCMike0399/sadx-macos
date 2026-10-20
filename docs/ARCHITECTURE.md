@@ -99,14 +99,25 @@ instruction diagnostics and queue composition. Logical calculation phases observ
 through `cpu/fidelity_float`; game decisions and table loops remain in the engine. The native
 backend builds and runs without guest archives or game files.
 
-The three scene-motion leaves in `player/player_scene_position_helpers` share readable
-calculations between a plain native backend and `guest/player_scene_position_reference`.
-The game code owns normal pushes, platform callback order/displacement and floor turns;
-the reference backend validates fixture facts lazily and reports numeric failure sites.
-The native backend borrows its actor, motion, contact and platform owners directly. It
-needs no guest archive or executable data. The full `player_scene_position` dispatcher
-and its legacy public types still require the same migration; this helper split does
-not establish native scene collision composition.
+The scene-position dispatcher and motion helpers share semantic calculations between
+plain native owners and `guest/player_scene_position_reference`. The player module owns
+contact selection, wall/corner response, normal pushes, moving-platform displacement and
+floor turns. The reference adapter validates facts lazily and reports original instruction
+boundaries. The native interface borrows actor, motion, contact, geometry and platform state;
+uncomposed collision callees fail explicitly. Completing this rewrite does not establish
+native scene collision composition.
+
+`game/game_library_init` owns startup configuration publication, ordered library setup,
+retry/cleanup policy and viewport aspect calculation. Its public native interface uses plain
+configuration/state/viewport records and named platform operations. The reference adapter
+supplies the legacy calling convention, optional fixture facts and failure addresses. Startup
+paths name the company, application, system root and backup root; the first four words are
+not a window rectangle. The native service implementations still need session composition.
+
+`game/logo` owns the two-logo update sequence and the six-tile display call plan. Its bounded
+profile adapter accepts 640×480 with unit stretch; other dimensions remain explicit unknowns.
+The native visual fixture loads the user's PVM and feeds the shared Metal renderer, but its
+device defaults and draw ordering are fixtures. It does not complete native boot or N1.
 
 Archives: `libsadx-core.a` = cpu…runtime (portable, no frameworks), `libsadx-macos.a` =
 platform/mac, `libsadx-guest.a` = guest + hle (+ Unicorn). Programs link what they need.
