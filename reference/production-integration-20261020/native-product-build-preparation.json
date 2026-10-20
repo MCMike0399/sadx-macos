@@ -1,0 +1,18 @@
+{
+  "purpose": "Declare a separate production source/link closure for the assets-only native application",
+  "changes": [
+    "Native archive lists maintained CPU/math/engine/game/session sources explicitly.",
+    "Native application links only native archive and four platform objects.",
+    "No PE loader, guest runtime, HLE module, original executable or Unicorn library is a native target dependency.",
+    "The native target and play-native remain separate from reference all/play targets while later game modes are recovered."
+  ],
+  "evidence": [
+    "The composed native Start-to-logo integration uses character_pack, game_bootstrap, game_mode, logo_scene, original camera/view operations and shared Metal rendering.",
+    "The preceding native composed-scene executable has no ExecutableImage, X86Guest, HleProcess, ModelDll or uc_emu_start symbols.",
+    "Its frame120 PPM is byte-identical to the reference app-smoke PPM: SHA256 5784b5b1c09cf33fe763186caaed6534d5d9a287ccdbd2a72cbd8f88c099773e."
+  ],
+  "limits": [
+    "This preparatory build commit makes no whole-game independence or story-route claim.",
+    "The new production target is verified with the following implementation integration; full gate remains pending."
+  ]
+}

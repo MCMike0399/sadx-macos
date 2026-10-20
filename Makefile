@@ -36,6 +36,22 @@ CORE_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(CORE_SOURCES))
 GUEST_SOURCES := $(wildcard src/guest/*.cpp src/hle/*.cpp)
 GUEST_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(GUEST_SOURCES))
 GUEST_LINK := build/libsadx-guest.a $(UNICORN_DIR)/lib/libunicorn.a -lpthread
+# Shipping native closure: maintained game/profile sources only, without loader/guest/HLE objects.
+NATIVE_SOURCES := \
+ src/cpu/crt_integer.cpp src/cpu/sse_math.cpp src/cpu/x87_math.cpp src/cpu/x87_transcendental.cpp \
+ src/math/d3dx_math.cpp src/math/ninja_math.cpp src/math/ninja_sine_table.cpp \
+ src/engine/character_pack.cpp src/engine/game_frame_control.cpp src/engine/game_frame_control_native.cpp \
+ src/engine/graphics_frame.cpp src/engine/graphics_frame_fog.cpp src/engine/graphics_frame_lighting.cpp \
+ src/engine/ninja_matrix.cpp src/engine/ninja_projected_depth.cpp src/engine/ninja_texture.cpp \
+ src/engine/ninja_view_native.cpp src/engine/pvr_device.cpp src/engine/pvr_draw.cpp \
+ src/engine/speedrun.cpp src/engine/task.cpp src/engine/task_work.cpp \
+ src/game/game_bootstrap.cpp src/game/game_mode.cpp src/game/game_mode_native.cpp \
+ src/game/logo.cpp src/game/logo_display.cpp src/game/logo_startup.cpp src/game/save_data.cpp \
+ src/runtime/engine_code_tables.cpp src/runtime/logo_renderer.cpp src/runtime/logo_scene.cpp \
+ src/runtime/native_display.cpp src/runtime/native_session.cpp
+NATIVE_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(NATIVE_SOURCES))
+NATIVE_PLATFORM_OBJECTS := build/obj/platform/mac/mac_clock.o build/obj/platform/mac/mac_audio.o \
+ build/obj/platform/mac/hid_switch_controller.o build/obj/platform/mac/metal_device_frame.o
 MAC_SOURCES := $(wildcard src/platform/mac/*.cpp src/platform/mac/*.mm)
 MAC_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(filter %.cpp,$(MAC_SOURCES))) $(patsubst src/%.mm,build/obj/%.o,$(filter %.mm,$(MAC_SOURCES)))
 UNIT_SOURCES := $(wildcard tests/unit/*.cpp)
@@ -88,6 +104,8 @@ build/libsadx-macos.a: $(MAC_OBJECTS)
 	xcrun libtool -static -o $@ $^
 build/libsadx-guest.a: $(GUEST_OBJECTS)
 	xcrun libtool -static -o $@ $^
+build/libsadx-native.a: $(NATIVE_OBJECTS) build/softfloat_sse/softfloat-sse.a build/softfloat/softfloat.a build/bochs_fpatan/libbochs_fpatan.a
+	xcrun libtool -static -o $@ $^
 
 # Programs (src/apps).
 build/sadx-boot: src/apps/sadx_boot.cpp build/libsadx-macos.a build/libsadx-guest.a build/libsadx-core.a
@@ -100,6 +118,12 @@ build/sadx-audio-qualify: src/apps/audio_qualify.mm build/libsadx-macos.a build/
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-macos.a build/libsadx-core.a $(MAC_FRAMEWORKS) -o $@
 build/sadx-controller-qualify: src/apps/controller_qualify.mm build/libsadx-macos.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-macos.a build/libsadx-core.a $(MAC_FRAMEWORKS) -o $@
+build/sadx-native: src/apps/sadx_native.mm build/libsadx-native.a $(NATIVE_PLATFORM_OBJECTS)
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< $(NATIVE_PLATFORM_OBJECTS) build/libsadx-native.a $(MAC_FRAMEWORKS) -o $@
+NATIVE_ASSETS ?= game/imported
+.PHONY: play-native
+play-native: build/sadx-native
+	./build/sadx-native --assets "$(NATIVE_ASSETS)"
 # The window smoke test of the roadmap (M2 app-smoke): the guest in the app for 120 frames, a screenshot, exit 0
 # (in the gate; it opens a window, so the gate needs a logged-in GUI session).
 REFERENCE_GAME_DIR ?= reference/updated-pc-reference/game
