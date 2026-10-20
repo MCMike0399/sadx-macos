@@ -1,4 +1,5 @@
 #include "runtime/native_session.hpp"
+#include "runtime/movie_scene.hpp"
 #include <stdexcept>
 
 namespace sadx::native {
@@ -14,7 +15,7 @@ bootstrap::SonicActions actions(const std::shared_ptr<const character_pack::Char
 
 Session::Session(LogoOutput &output, std::shared_ptr<const character_pack::CharacterPack> pack,
                  LogoFrame frame, X87Context &fp, std::function<void(std::uint32_t)> stop)
-    : bootstrap_({flow_.save_phase, global_timer_, rings_, flow_.movie_number, game_mode_}),
+    : bootstrap_({card_result_, global_timer_, rings_, flow_.movie_number, game_mode_}),
       character_pack_(std::move(pack)), actions_(actions(character_pack_)),
       services_{[this](std::uint16_t character) {
                     character_textures_.at(character).clear();
@@ -60,4 +61,9 @@ void Session::setup_character(std::uint32_t character) {
                                 save_, actions_, services_);
 }
 void Session::reset_player_work() { bootstrap::reset_rings(bootstrap_); }
+std::int32_t Session::run_movie(std::uint32_t movie_id) {
+    if (!movie_)
+        throw flow::UnrecoveredGameFlowCall("native_movie_scene");
+    return movie_->play(movie_id);
+}
 } // namespace sadx::native

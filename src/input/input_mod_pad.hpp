@@ -126,4 +126,18 @@ struct InputModFrameOwners {
     const GameLogicControllers& controller_pointers_at_3b0e77c;
 };
 InputModResult input_mod_on_input(InputModFrameOwners&,const InputModKeyboardPad&,const std::array<InputModGamepadState,8>&,InputModFrameState&,const InputModPadConstants&,SseContext&);
+// NOTSA: complete native frame facts, adapted only at the existing Input owner.
+struct NativeInputModFrame {
+    std::int32_t game_mode, demo_playing, demo_enabled, demo_cutscene;
+    bool demo_active;
+    std::uint8_t soft_reset;
+};
+struct NativeInputModOwners {
+    std::array<InputModDreamPad,8>& pads;
+    const std::array<std::shared_ptr<GameLogicController>,4>& engine_raw;
+    const InputModRawRecords& raw_input;
+};
+InputModResult input_mod_on_input(NativeInputModOwners&, const InputModKeyboardPad&,
+    const std::array<InputModGamepadState,8>&, NativeInputModFrame&,
+    const InputModPadConstants&, SseContext&);
 } // namespace sadx

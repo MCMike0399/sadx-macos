@@ -1,5 +1,46 @@
 #include "engine/game_controller.hpp"
 namespace sadx {
+GameLogicController GameLogicController::from_input_values(const ControllerInputValues& values) {
+    GameLogicController record;
+    for (std::size_t index = 0; index < byte_count; ++index)
+        record.write_byte(index, 0);
+    record.write_u32(0, values.id);
+    record.write_u32(4, values.support);
+    record.write_u32(8, values.held);
+    record.write_u32(12, values.not_held);
+    record.write_u32(16, values.pressed);
+    record.write_u32(20, values.released);
+    record.write_u16(24, values.right_trigger);
+    record.write_u16(26, values.left_trigger);
+    record.write_u16(28, static_cast<std::uint16_t>(values.left_x));
+    record.write_u16(30, static_cast<std::uint16_t>(values.left_y));
+    record.write_u16(32, static_cast<std::uint16_t>(values.right_x));
+    record.write_u16(34, static_cast<std::uint16_t>(values.right_y));
+    record.write_u32(44, values.previous_held);
+    return record;
+}
+std::optional<ControllerInputValues> GameLogicController::input_values() const noexcept {
+    // The public byte adapter may represent unknown reference data. Native callers
+    // initialize every byte through from_input_values before requesting a snapshot.
+    for (const auto& byte : bytes_)
+        if (!byte)
+            return {};
+    const auto word = [&](std::size_t field) {
+        return *read_u32(field);
+    };
+    const auto pressure = [&](std::size_t field) {
+        return *read_u16(field);
+    };
+    const auto axis = [&](std::size_t field) {
+        const auto value = pressure(field);
+        return static_cast<std::int16_t>(value < 32768 ? static_cast<int>(value)
+                                                     : static_cast<int>(value) - 65536);
+    };
+    return ControllerInputValues{word(0), word(4), word(8), word(12), word(16), word(20),
+                                 pressure(24), pressure(26), axis(28), axis(30), axis(32),
+                                 axis(34), word(44)};
+}
+
 std::optional<std::uint8_t> GameLogicController::read_byte(std::size_t at)const noexcept {return at<byte_count?bytes_[at]:std::optional<std::uint8_t>{};}
 std::optional<std::uint16_t> GameLogicController::read_u16(std::size_t at)const noexcept {
     if(at>byte_count-2||!bytes_[at]||!bytes_[at+1])return {};return std::uint16_t(*bytes_[at])|(std::uint16_t(*bytes_[at+1])<<8);

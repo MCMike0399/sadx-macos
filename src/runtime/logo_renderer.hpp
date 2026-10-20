@@ -9,6 +9,7 @@ namespace sadx::native {
 class LogoRenderer final : public LogoOutput {
   public:
     LogoRenderer(std::filesystem::path system_directory, graphics::Draw &device_state,
+                 graphics::Frame &frame,
                  NinjaDepthProjection &, X87Context &, SseContext &,
                  SseReciprocalEstimate);
     void begin_frame();
@@ -37,7 +38,7 @@ class LogoRenderer final : public LogoOutput {
     X87Context &arithmetic_;
     SseContext &sse_;
     SseReciprocalEstimate reciprocal_;
-    graphics::Frame frame_;
+    graphics::Frame &frame_;
     std::vector<TextureSlot> textures_;
     bool selected_ = false;
     std::uint32_t background_ = 4278190080U;

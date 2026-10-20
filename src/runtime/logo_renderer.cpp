@@ -35,10 +35,11 @@ graphics::Texture texture_level(const NinjaTextureLevel &level, std::uint8_t for
 } // namespace
 
 LogoRenderer::LogoRenderer(std::filesystem::path directory, graphics::Draw &state,
+                           graphics::Frame &frame,
                            NinjaDepthProjection &projection, X87Context &fp, SseContext &sse,
                            SseReciprocalEstimate reciprocal)
     : system_directory_(std::move(directory)), state_(state), projection_(projection),
-      arithmetic_(fp), sse_(sse), reciprocal_(std::move(reciprocal)) {}
+      arithmetic_(fp), sse_(sse), reciprocal_(std::move(reciprocal)), frame_(frame) {}
 
 void LogoRenderer::begin_frame() {
     frame_.commands.clear();

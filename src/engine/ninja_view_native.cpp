@@ -129,3 +129,47 @@ Result set_camera(State &state, Services &services, X87Context &fp, SseContext &
     return set_projection(fov, state.far_distance, state, services, fp, sse);
 }
 } // namespace sadx::view
+
+namespace sadx::view {
+void clamp_clip_range(float near_distance, float far_distance, State &state, X87Context &fp) {
+    if (ExactFloat(fp, near_distance).compare(-1.0f) == X87Comparison::greater)
+        near_distance = -1;
+    else if (ExactFloat(fp, near_distance).compare(-65535.0f) == X87Comparison::less)
+        near_distance = -65535;
+    auto far_value = ExactFloat(fp, far_distance);
+    if (far_value.compare(-1.0f) == X87Comparison::greater)
+        far_value = ExactFloat(fp, -1.0f);
+    else if (far_value.compare(-65535.0f) == X87Comparison::less)
+        far_value = ExactFloat(fp, -65535.0f);
+    state.near_distance = (-ExactFloat(fp, near_distance)).rounded();
+    state.far_distance = (-far_value).rounded();
+}
+bool set_clip_range(float near_distance, float far_distance, State &state,
+                    ClipServices &services, X87Context &fp) {
+    clamp_clip_range(near_distance, far_distance, state, fp);
+    const auto near_value = -ExactFloat(fp, state.near_distance);
+    const auto far_value = (-ExactFloat(fp, state.far_distance)).rounded();
+    state.negative_near_distance = near_value.rounded();
+    state.negative_far_distance = far_value;
+    // The source's negative-distance cache is the live camera's near/far pair.
+    bool changed = ExactFloat(fp, state.camera.near_distance).compare(near_value) !=
+                   X87Comparison::equal;
+    if (!changed)
+        changed = ExactFloat(fp, state.camera.far_distance).compare(far_value) !=
+                  X87Comparison::equal;
+    if (!changed)
+        return false;
+    state.camera.near_distance = near_value.rounded();
+    const auto positive_near = (-near_value).rounded();
+    const auto positive_far_value = -ExactFloat(fp, far_value);
+    state.camera.far_distance = far_value;
+    const auto positive_far = positive_far_value.rounded();
+    auto projection = services.get_projection();
+    const auto span = ExactFloat(fp, positive_far) - positive_near;
+    const auto quotient = positive_far / span;
+    projection[10] = quotient.rounded();
+    projection[14] = (-(quotient * positive_near)).rounded();
+    services.set_projection(projection);
+    return true;
+}
+} // namespace sadx::view

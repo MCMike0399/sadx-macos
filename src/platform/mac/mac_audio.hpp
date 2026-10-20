@@ -2,6 +2,7 @@
 #include <cstddef>
 #include <cstdint>
 #include <memory>
+#include <optional>
 #include <string>
 #include <vector>
 
@@ -36,6 +37,8 @@ public:
     void stop(std::uint64_t token);
     void stop_all();
     AudioStats stats() const;
+    // Actual output queue sample clock, relative to its start; empty/error-free means not ready.
+    std::optional<std::uint64_t> presentation_frames(std::string& error) const;
     // Same mixer as the device callback. Available only while device output is stopped.
     bool render(float* stereo, std::size_t frames);
 

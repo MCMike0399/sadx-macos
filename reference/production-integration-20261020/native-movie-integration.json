@@ -1,0 +1,469 @@
+{
+  "schema": 1,
+  "reason": "Register only new movie/input/render probes, source oracles, importer tests and unique unit registrations for the integrated native intro. Existing comparisons and tolerances are unchanged.",
+  "base_commit": "1c98d1146f446978be1374c1050fb597079cf1f4",
+  "native_application": {
+    "full_intro": {
+      "command": [
+        "./build/sadx-native",
+        "--assets",
+        "game/imported",
+        "--offscreen",
+        "--exit-after",
+        "10000",
+        "--capture-directory",
+        "build/native-full-intro",
+        "--capture-at",
+        "480,3000,6000",
+        "--screenshot",
+        "build/native-full-intro/final.ppm"
+      ],
+      "exit_status": 1,
+      "elapsed_seconds": 109.2512791659683,
+      "final_state": {
+        "execution": "native",
+        "frames": 7180,
+        "game_mode": 8,
+        "game_state": 21,
+        "stage": 0,
+        "rings": 0,
+        "global_timer": 388,
+        "logo_frames": 0,
+        "logo_mode": 0,
+        "textures": 0,
+        "completed_frames": 7178,
+        "input_held": 0,
+        "movie_decoded_frames": 3233,
+        "movie_textures": 0,
+        "movie_media_open": false,
+        "movie_phase": 1,
+        "movie_source_padding_defined": false,
+        "movie_audio_frames": 4761600,
+        "movie_audio_nonzero_samples": 9269451,
+        "movie_audio_completed_buffers": 4647,
+        "movie_audio_device_error": 0
+      },
+      "last_line": "native session stopped: clear_game",
+      "limits": [
+        "Full native intro integration checkpoint only; following clear_game remains unrecovered.",
+        "RSS sampling is resource qualification, not gameplay FPS measurement."
+      ]
+    },
+    "peak_sampled_rss_kib": 214320,
+    "skip": {
+      "exit_status": 1,
+      "input": "500:13:down,501:13:up",
+      "final_state": {
+        "execution": "native",
+        "frames": 500,
+        "game_mode": 8,
+        "game_state": 21,
+        "stage": 0,
+        "rings": 0,
+        "global_timer": 388,
+        "logo_frames": 0,
+        "logo_mode": 0,
+        "textures": 0,
+        "completed_frames": 498,
+        "input_held": 8,
+        "movie_decoded_frames": 52,
+        "movie_textures": 0,
+        "movie_media_open": false,
+        "movie_phase": 5,
+        "movie_source_padding_defined": false,
+        "movie_audio_frames": 78848,
+        "movie_audio_nonzero_samples": 94266,
+        "movie_audio_completed_buffers": 74,
+        "movie_audio_device_error": 0
+      },
+      "boundary": "clear_game"
+    },
+    "startup": {
+      "passed": true,
+      "checkpoints": 16
+    },
+    "inspected_images": [
+      "build/native-movie-journey/480.png",
+      "build/native-full-intro/6000.png"
+    ]
+  },
+  "oracles": {
+    "sprite_immediate": {
+      "cases": 1927,
+      "producer_cases": 727,
+      "quad_cases": 1200,
+      "seed": 776050,
+      "mismatches": 0,
+      "flag_mismatches": 1920,
+      "values_match": true,
+      "limits": [
+        "Producer renderer and matrix services are explicit fixtures. Quad executes original vertex writes and primitive-UP arguments with an explicit projected-depth FLD fixture; actual projected depth judged separately. Device pixels not certified.",
+        "FP exception flags remain separate from compared values."
+      ],
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "native_library_sha256": "a33c67a08fa0eda5cd2e9beb3add18561f2c9407ad432316bd95be7bb1eb42d6",
+      "report_sha256": "d5281270b7293c2b2f13552162fd24486abf23ef053b5b0d8f40cd08fc7fca86",
+      "source_identities_current": true
+    },
+    "projection_range_native": {
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "native_library_sha256": "26c67e22787067e90b44e85a1f32da4167d3ad7739285f4962a177311f11e4ed",
+      "original_range_sha256": "6d05db8e833f886992fa4aca291805a50c362033bdc9f6c84f72753b322681ce",
+      "cases": 3000,
+      "mismatch_count": 0,
+      "fp_flag_mismatches": 1251,
+      "stores_transform_match": true,
+      "limits": "Projection range 403180 + 7815e0 against original instructions.\n\nThe D3D8 device is a COM fixture: GetTransform (+0x98) writes the case matrix,\nSetTransform (+0x94) records the written matrix. Each case runs with a random\ncache and again with the cache equal to the first run's stored values (the\nunchanged path). x87 status flags are reported separately.\n",
+      "unchanged_judge_sha256": "541d4369a1e3b4bccd414d60781f316114bd4f0e413c366b018d5a019564a67d",
+      "source_identity_adapter": "Run the unchanged original projection-range judge against the semantic native clip-range probe.\n\nCase generation, comparisons, numeric models and exit status are delegated intact.\nOnly source identities are amended to describe the implementation actually linked.",
+      "report_sha256": "d189f428de0b1edc0d68d97004c93e8e8f07201ef2355d45d7aae1e116ff3a42",
+      "source_identities_current": true
+    },
+    "movie": {
+      "cases": 756,
+      "mismatches": 0,
+      "limits": "Compare movie wrapper/control flow with explicit media/input service fixtures.\n\nThe decoder readiness fixture is false: this judges playlist, held-skip, reset,\nquit, wrapper order and return values. Fade/render have separate judgments.\n",
+      "passed": true,
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "native_library_sha256": "9eafb4843840edba8a8a78061e7f158e12154c564dbf07fb9cc055037646fd06",
+      "profile": "Executes pinned compiled Skipma replacement; decoder readiness false.",
+      "speedrun_dll_sha256": "f3fc68a3058fb726142547018da860b170f137248e54b82712b52527e7b74802",
+      "report_sha256": "898dc3bea25c89dc4ba81ce22e68da883a7480055cc2ba1eb9ffa0f6e32425d4",
+      "source_identities_current": true
+    },
+    "movie_fade": {
+      "cases": 2936,
+      "mismatches": 0,
+      "passed": true,
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "native_library_sha256": "9eafb4843840edba8a8a78061e7f158e12154c564dbf07fb9cc055037646fd06",
+      "report_sha256": "ba127c1cd89574f14292a6ccc81198c19dff63f4f052699612ef17d4f161dd3b",
+      "source_identities_current": true
+    },
+    "movie_geometry": {
+      "cases": 768,
+      "mismatches": 0,
+      "values_match": true,
+      "fp_flag_mismatches": 192,
+      "exception_flags_match": false,
+      "passed": false,
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "native_library_sha256": "9eafb4843840edba8a8a78061e7f158e12154c564dbf07fb9cc055037646fd06",
+      "limits": "Compare DrawFadePoly's full point/color strip and ordered blend/draw calls.\n\nNo downstream renderer is replaced by guessed geometry. The boundary is the\nactual __njDrawPolygon2D call; low-six x87 flags are reported independently.\nUnicorn x87 flags differ from the software arithmetic context; exact hardware\nexception/status and deferred delivery parity are not established.\n",
+      "report_sha256": "aa7a1e1df00b2cfac0ada10d01e2d83a980b02163fdeb951f1834aedb28d7fbb",
+      "source_identities_current": true
+    },
+    "movie_timing": {
+      "cases": 688,
+      "mismatches": 0,
+      "values_match": true,
+      "fp_flag_mismatches": 652,
+      "exception_flags_match": false,
+      "passed": false,
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "native_library_sha256": "9eafb4843840edba8a8a78061e7f158e12154c564dbf07fb9cc055037646fd06",
+      "limits": "Execute the real movie loop timing and MSVC conversions with sampled microsecond fixtures.\n\nOnly timer sampling replaces QPC; subtraction and identity conversion are exact\nnative services. This compares stores and low-six FP flags separately.\nUnicorn x87 flags differ from the software arithmetic context; exact hardware\nexception/status and deferred delivery parity are not established.\n",
+      "report_sha256": "ee9f4e1f77dd5bbbc7e98f3da54784cd04708f972b43a93382ace0622e7aa4f2",
+      "source_identities_current": true
+    },
+    "native_input": {
+      "source_sha256": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+      "constants_inverse_match": true,
+      "vanilla_key_map_inverse_match": true,
+      "vanilla_key_map_count": 102,
+      "soft_reset_cases": 256,
+      "soft_reset_mismatches": 0,
+      "constants_hex": "00004045000040c5917b30290000803f000000000000f0400ae3e4b4305fc43f0ae3e4b4305fc4bf",
+      "seed": 20261020,
+      "trace_count": 77,
+      "poll_evaluations": 3292,
+      "value_mismatches": 0,
+      "mxcsr_mismatches": 2731,
+      "values_match": true,
+      "passed": false,
+      "scope": "Compare native keyboard->DreamPad traces with actual pinned Input DLL instructions.\n\nMouse is disabled. The actual DLL six-key map and game KeyboardUpdate instructions\nare exercised; the map tree is populated from original constructor setup values.\nWindow hook install is excluded (native host owns events). Focus uses the original reset range.\nUnicorn2.1.4 does not raise SSE sticky flags: values and MXCSR are reported separately.\n",
+      "native_probe_sha256": "53f7d4610af59c1b4d247e72edd3ca997254cf8ca7854098b261abba153c934e",
+      "cases_sha256": "11486a54d369a1567c88cfb03a202f5b7daae15c7ec53ad465b6fc58bfe781d1",
+      "limits": [
+        "Native SSE values match; Unicorn2.1.4 omits sticky exception flags, so MXCSR parity remains partial.",
+        "Window message dispatch/hardware delivery are separate qualification; raw event normalization is host owned."
+      ],
+      "report_sha256": "1adfcd85745223dac5a0863cf55466ab1ddbbe7c79d87dcfdcc72b50c12f4d47",
+      "source_identities_current": true
+    },
+    "game_bootstrap": {
+      "cases": 418,
+      "seed": 20261020,
+      "mismatches": 0,
+      "passed": true,
+      "native_library_sha256": "9093e30c868169041cecdbe5e1a943f1c92ab8b01ced81af20d58a6e75534ab6",
+      "initialization_result_checks": 418,
+      "menu_state_checked": true,
+      "limits": "Execute actual game Start initialization and compare native scalar/table effects.\n\nCharacter texture release and pinned Input vibration-stop are explicit service\nfixtures. Actual Sonic action pointer identities come from a supplied table; the\nsource copies entries100/101 without dereferencing their object/motion payloads.\nCRT srand is a fixture receipt for the separately recovered CRT store.\n",
+      "report_sha256": "554db32ca30593a87baa15d62b85b758f84d9c30b58d5f6c2b1c16d5c34c98f6",
+      "source_identities_current": true
+    },
+    "game_mode": {
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "native_library_sha256": "22396cb2dbc5f003fdb86f5d893a6664966a7b28ad12137fc89327d449b95469",
+      "original_range_sha256": "09f9d83f6875ff84677c411a81e573d66feb815e538e15847e1e11bfb653a78f",
+      "cases": 24000,
+      "distinct_call_site_paths": 252,
+      "case_sha256": "05c8ac3db56f68dcd6c7cb7334699f164bf2803b602a6694ec4dd7077f6d2ea0",
+      "mismatch_count": 0,
+      "order_arguments_stores_boundaries_match": true,
+      "limits": "Game-mode state machine 40c090 against original instructions.\n\nEvery callee is an explicit owner fixture with a scripted EAX (callees whose\nresult the source ignores return 0x5a5a5a5a); up to two scripted callees\nrewrite a source global when called, to exercise the source's rereads after\ncalls; one call can fail. The level pointer at 3b0ef4c targets a mapped word or\nis null (source faults at the MOVSX). This compares call order, call sites,\narguments, stores and failure boundaries; it does not show any owner subsystem\n(menus, saves, file loads, cutscenes, audio) is implemented.\n",
+      "report_sha256": "2984ad7a7491cd0ba4de4673aee48bfb730075c39f487212eea8752b8f4b846a",
+      "source_identities_current": true
+    },
+    "ninja_view_native": {
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "native_library_sha256": "2456b0b62e2b31b5ee9af91de10a36c17949d985ee7c032201761681f10ead85",
+      "seeded_values_match": true,
+      "primary_values_with_unicorn_transcendentals_match": true,
+      "limits": [
+        "781570 / 781250 / 791170 (the camera block, view matrix and projection WinMain sets at 402d4f..402d5e)\nagainst their original instructions.\n\nEvery instruction of 781570, 781250 and 791170 runs, with all their callees from the original bytes:\n788290/7883c0 (the 88af78 sine table), 7871f0, 787e30, 7716df, 770804 -> 774310 and 770d10 -> 7757e0\n(dispatch slots 389b784 / 389b7c0 written as 77350c leaves them on an SSE CPU without 3DNow!; 77350c is\nnot executed). The D3D8 device is a fixture: [3d128b0] -> object -> vtable whose +0x94 (SetTransform)\nand +0x9c (MultiplyTransform) are `ret 0xc` stubs that record (state, the 16 words passed). The matrix\nstack is a fixture block of 1..4 slots at [3d0fa1c] with a random current depth. Mode 0 runs 781570\n(thiscall, ECX = 3aad0a0) and then 781250; mode 1 runs 781250 on a random block.\n\nCompared: 3d0f760 (view), matrix-stack slot 0, 3d0f818 (current = base) and 3d0fa2c (depth),\n3d0f980, 3d0f9e0, 3d0f808, 3d0f968, 3d12960, 3d129c0, 389d398, 389d358 (sentinel when 7757e0\nreturns NULL), the block after 781570, the three device calls and the x87 control word.\n\nTwo profiles:\n  primary  Unicorn executes FPTAN (791240), FPATAN (79124a) and FSINCOS (771706) itself: QEMU computes\n           them with host doubles, the native side with the Bochs P5/P6 models.\n  seeded   right after each of those instructions the result registers are overwritten with the native\n           Bochs results (exported by the probe), so every other instruction is compared exactly.\n           Seeding proves the transcription, not Intel FPTAN/FPATAN/FSINCOS (roadmap M4).\nRCPSS/RCPPS are Unicorn's IEEE division in both the source and the native probe (not a real CPU's\nestimate). MXCSR profiles vary the rounding mode only (Unicorn ignores FZ/DAZ). At most one NaN source per\ncase (Unicorn applies the x87 NaN rule to SSE operands). VIEW_SMOKE=1 in the environment stops each profile\nafter 300 cases (for mutant runs); the recorded report never uses it.",
+        "primary value mismatches come from FPTAN/FPATAN/FSINCOS: Unicorn uses host doubles, the native Bochs models are not changed to match; settling them needs the Intel capture (roadmap M4). The report stays fail while they exist; the seeded profile is the transcription check",
+        "x87 and MXCSR exception flags are not compared (Unicorn 2.1.4 raises few x87 and no SSE flags)"
+      ],
+      "unchanged_judge_sha256": "a5d22b42004b142534ff8e994dee32352e8031a941e5789ba9368161416b125f",
+      "source_identity_adapter": "Run the unchanged original view judge against the semantic native view probe.\n\nCase generation, comparisons, numeric models and exit status are delegated intact.\nOnly source identities are amended to describe the implementation actually linked.",
+      "report_sha256": "4935286a3b5db922ea97c65641d9153b3ae42b46c8496f0e3768e7a038efcf8c",
+      "source_identities_current": true
+    },
+    "input_initial_state": {
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "input_mod_sha256": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+      "native_library_sha256": "321dd7453594bd8dd513327e319c5f063ac54cb62476d2f75b63c8621e089733",
+      "cases": 1,
+      "bytes_compared": 1869,
+      "expected_bytes_sha256": "4cfbc7e186da614b5d74630a2a6e235354ece9c8352b076c11569b6bf66c551f",
+      "returned_values_and_boundaries_match": true,
+      "limits": "Verify load-time input values against both pinned images, before startup/polling.\n\nResource-pointer fields are excluded. No full native input/session independence claim.\n",
+      "report_sha256": "90a45e74bf5662e97de05234e5ba8eb255aeb582d7e59234c2ffdc8aafb2afa1",
+      "source_identities_current": true
+    }
+  },
+  "native_input_cohorts": {
+    "raw_keyboard_pad": {
+      "traces": 77,
+      "polls": 3292,
+      "value_mismatches": 0,
+      "mxcsr_mismatches": 2731
+    },
+    "soft_reset": {
+      "cases": 256,
+      "value_mismatches": 0
+    },
+    "source_tables": {
+      "key_pairs": 102,
+      "coefficient_bytes": 40,
+      "inverse_match": true
+    },
+    "configuration": {
+      "source_sha256": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+      "seed": 20261020,
+      "cases": 2019,
+      "mismatch_count": 0,
+      "mismatches": [],
+      "passed": true,
+      "scope": "Exact Input DLL Init narrowing instructions, with getInt results as caller inputs.\n\nNo INI parser/import/Windows startup executes. Key WORD store+MOVSX, signed-WORD\nclamps, byte threshold store and signed keyboard-player clamp are actual code.\n",
+      "cases_sha256": "1c88a7cab5c3c17795beaa36910d0fe29a08b84d2d93eff5e5cf1fa76ae0ba47",
+      "native_probe_sha256": "53f7d4610af59c1b4d247e72edd3ca997254cf8ca7854098b261abba153c934e"
+    },
+    "on_input_get_controllers": {
+      "cases": 567,
+      "traces": 35,
+      "seed": 20261020,
+      "value_mismatches": 0,
+      "mxcsr_mismatches": 487,
+      "x87_exception_mismatches": 482,
+      "mismatches": [],
+      "values_match": true,
+      "passed": false,
+      "scope": "Native OnInput -> GetControllers against the actual patched two-image chain.\n\nSDL event queue, raw gamepad samples, connection facts, stage and absent gameplay\ncamera are explicit caller fixtures. Keyboard events, KeyboardUpdate, all8 pad\npolls/publications, OnInput reset/demo predicate, full WriteAnalogs + real Input\nreturn-hook and full GetControllers execute actual instructions. No analog stub.\n"
+    }
+  },
+  "holdouts": {
+    "sprite": {
+      "cases": 3727,
+      "producer_cases": 1327,
+      "quad_cases": 2400,
+      "seed": 20261020,
+      "mismatches": 0,
+      "first_mismatches": [],
+      "flag_mismatches": 3721,
+      "values_match": true,
+      "limits": [
+        "Producer renderer and matrix services are explicit fixtures. Quad executes original vertex writes and primitive-UP arguments with an explicit projected-depth FLD fixture; actual projected depth judged separately. Device pixels not certified.",
+        "FP exception flags remain separate from compared values."
+      ],
+      "source_files": {
+        "src/engine/sprite_immediate.hpp": "bd0d8bc8b4d41050eab31c1cb0204e71d890ded6bc2daa951e5d49295bedbb1d",
+        "src/engine/sprite_immediate.cpp": "f1db7e0317f7d826cb89d2fa7f54f678ad43583c316d91ed0529d3b9c3e9c8bd",
+        "src/cpu/fidelity_float.hpp": "f8ab14de7dc01f0d054ce4098e61af34b7e5ba39f2281fc506be9d1864869dcb",
+        "tests/probes/native_sprite_immediate_probe.cpp": "f2e9d28cd8b7a14d783630edf1bf85539490bf65d1f2f279985d77eb5b940ac1",
+        "tools/oracles/verify_original_sprite_immediate.py": "480c18bcbaf11de34600fade6c4a7f8682757a5f302140f1021d1e9347d1d054"
+      },
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "native_library_sha256": "a33c67a08fa0eda5cd2e9beb3add18561f2c9407ad432316bd95be7bb1eb42d6"
+    },
+    "movie": {
+      "control": {
+        "cases": 2000,
+        "mismatches": 0,
+        "flag_mismatches": 0,
+        "first_mismatches": []
+      },
+      "fade": {
+        "cases": 2000,
+        "mismatches": 0,
+        "flag_mismatches": 0,
+        "first_mismatches": []
+      },
+      "geometry": {
+        "cases": 600,
+        "mismatches": 0,
+        "flag_mismatches": 593,
+        "first_mismatches": []
+      },
+      "timing": {
+        "cases": 400,
+        "mismatches": 0,
+        "flag_mismatches": 400,
+        "first_mismatches": []
+      },
+      "native_library_sha256": "9eafb4843840edba8a8a78061e7f158e12154c564dbf07fb9cc055037646fd06",
+      "sources": {
+        "src/game/movie.cpp": "242f48af5181c15950881cc09bde4c06eef3509695dd4be1049b9d936eb55895",
+        "src/game/movie.hpp": "ae01d1a667c6cc2ab54ed42a1e6bbb776557f33a73b16c10c0607d6a54da68a5",
+        "tests/probes/native_movie_probe.cpp": "ef7f324d64eb34e8bab9849a33091552e58420782ff1afaa346ef9712aaee7bb"
+      }
+    }
+  },
+  "mutants": {
+    "render": [
+      {
+        "mutation": "sprite_uv",
+        "source": "src/engine/sprite_immediate.cpp",
+        "mutant_source_sha256": "1a82303e2afae1164ac7c7079d52b8b9186b4ab7a9f0329b195ecd20defd8cbf",
+        "build_exit_status": 0,
+        "oracle_exit_status": 1,
+        "value_mismatches": 723,
+        "killed": true
+      },
+      {
+        "mutation": "sprite_alpha",
+        "source": "src/engine/sprite_immediate.cpp",
+        "mutant_source_sha256": "7c713acfd87b9543b3b4a91663d95aaeac9bf799047dcad05826cdc408efea0d",
+        "build_exit_status": 0,
+        "oracle_exit_status": 1,
+        "value_mismatches": 328,
+        "killed": true
+      },
+      {
+        "mutation": "quad_half_pixel",
+        "source": "src/engine/sprite_immediate.cpp",
+        "mutant_source_sha256": "53836611b68e27d8480281f778f41a9930f93e620fb061a907f32d81c998ab15",
+        "build_exit_status": 0,
+        "oracle_exit_status": 1,
+        "value_mismatches": 1200,
+        "killed": true
+      },
+      {
+        "mutation": "quad_retained_v",
+        "source": "src/engine/sprite_immediate.cpp",
+        "mutant_source_sha256": "5eac27b4b0bc9a05f566a596cb36f9209aa8f061f8bc82014fdad31cca3daef9",
+        "build_exit_status": 0,
+        "oracle_exit_status": 1,
+        "value_mismatches": 84,
+        "killed": true
+      },
+      {
+        "mutation": "clip_cache",
+        "source": "src/engine/ninja_view_native.cpp",
+        "mutant_source_sha256": "7a7884dbbfdf0d3113d346f80a08417330ca607593d8d744dabe27a072da3a69",
+        "build_exit_status": 0,
+        "oracle_exit_status": 1,
+        "value_mismatches": 1747,
+        "killed": true
+      },
+      {
+        "mutation": "clip_projection_sign",
+        "source": "src/engine/ninja_view_native.cpp",
+        "mutant_source_sha256": "47c33efc1668dc19432711b1cd55ae3b17b3e24ca5d12db1ed3a1ad3bd850c28",
+        "build_exit_status": 0,
+        "oracle_exit_status": 1,
+        "value_mismatches": 1747,
+        "killed": true
+      }
+    ],
+    "movie": [
+      {
+        "mutant": "held_start_only",
+        "caught": true,
+        "mismatches": 63
+      },
+      {
+        "mutant": "negative_result",
+        "caught": true,
+        "mismatches": 117
+      },
+      {
+        "mutant": "wrapper_clear",
+        "caught": true,
+        "mismatches": 756
+      },
+      {
+        "mutant": "fade_in_rate",
+        "caught": true,
+        "mismatches": 203
+      },
+      {
+        "mutant": "fade_geometry_alpha",
+        "caught": true,
+        "mismatches": 768
+      },
+      {
+        "mutant": "timing_rate",
+        "caught": true,
+        "mismatches": 652
+      }
+    ],
+    "native_input": "10 compiled mutants detected; final readable dev/holdout and source hashes in hashed repair handoff"
+  },
+  "independent_reviews": {
+    "review_native_movie": "No confirmed defect; reviewed source evidence, unit-matrix/clip-cache aliases, frame-counter ordering, texture readiness and fade resource semantics; reran movie-scene test and inspected live image. Later autoreleasepool/keypad/controller generation changes built and full intro ran.",
+    "review_movie_input": "Config narrowing and runtime byte layout concerns repaired; canonical DTO, exact casts and full publication oracle rerun. Media lifetime review found no defect."
+  },
+  "artifacts_sha256": {
+    "build/native-full-intro/report.json": "ad9f4c59cd98d7359a446fe741c5926539e62cf1c240041ae09d9e614775b700",
+    "build/native-full-intro/app.log": "59cea49b038bdc02354d6f1e6dc1db4eb97d344a6f39d85199ee6db612454f3f",
+    "build/native-full-intro/480.ppm": "661c86e8db03f3738de4ba192cefdc11ca6e1199fbf74eb80b3a7b2fc674af5a",
+    "build/native-full-intro/6000.ppm": "704543e8ba71239f452ef549615de308f28b1c5d9e3a3e5ab9e570e558e6f469",
+    "build/native-movie-journey-final/500.json": "5f74635f1b030a737f03e0711f1568c76b76c073389e59ac6a07a5ea054640ad",
+    "build/native-movie-journey-final/480.ppm": "661c86e8db03f3738de4ba192cefdc11ca6e1199fbf74eb80b3a7b2fc674af5a",
+    "build/native-startup-journey/report.json": "e006ad2b6ccd6348a7bc572f192b8ff83ce99229ed385f128616d7ff0f177774",
+    "/private/tmp/sprite-immediate-holdout.json": "efb16ffb7d0a3629b30483e26e5ce404405e91789952eb14f66c2d39f042ebe0",
+    "/private/tmp/movie-all-holdouts.json": "78bef6167db2c06c454a4d060e419396eb2ba36a38c9020cd930b27ae44aa849",
+    "/private/tmp/movie-mutants.json": "1bbb3a4e5388b07ed1a2e37abccc1791be802a12ba3a8fabf4a1508cbdc2379f",
+    "/private/tmp/sadx-movie-render-mutants/report.json": "0d4ae96b105f65a3c882ecae360eb2c352c4fc8f96a6aed99fb32ca115d30d26",
+    "/private/tmp/sadx-native-input-repair-handoff.json": "81d15485241c0345b890654c75361223c61e31843d4ef48aad920800ecd0dda5"
+  },
+  "limits": [
+    "Native full app exits1 at missing clear_game; title and connected Sonic route are not implemented by this checkpoint.",
+    "Floating-point flag partials remain partial, including native input; nine prior oracle failures remain.",
+    "Movie padding was undefined in original source; native clears it and makes no movie pixel parity claim.",
+    "Audio numbers measure submitted nonzero PCM and completed native AudioQueue buffers, not game sound event fidelity.",
+    "No native gameplay63FPS qualification. Earlier physical controller tests are separate from this native journey.",
+    "Raw input initialization bytes match; tracked summary refresh must follow source commit under docs/JUDGE.md. Full gate pending.",
+    "Movie7 remains explicitly unrecovered. Before enabling it, its special counter must borrow frame::ModeState.pending_logic_ticks rather than the draft separate field; intro0 is unaffected."
+  ],
+  "gate_attempt": {
+    "command": "make -j10 gate",
+    "exit_status": 2,
+    "log": "build/native-movie-gate-attempt.log",
+    "log_sha256": "9a7c001a7b5927766fcddbce9a43e986885f1b9d25d6db854eb3a171701a2e56",
+    "boundary": "stale source-data comparison: src/input/input_mod_pad.hpp; source-first report refresh required"
+  }
+}

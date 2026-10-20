@@ -4745,3 +4745,36 @@ The product still needs native boot/title, resources and gameplay recovery.
 * Refreshed seven verified startup oracle summaries after source commit 640522f; game-mode source identities now include the separated native service header. Existing cases/comparisons unchanged; 24,000 game-mode cases still match.
 * Declared Apple movie frameworks, qualification target and next native movie source closure. New movie sources remain staged outside the repository until this judge commit; no movie/title implementation claim from this step.
 * Gate 179 exit 0: 182 native programs, 81 Python tests, R1–R4 pass. STATUS refreshed; PVR/depth partials and nine existing failures retained. Next: integrate staged movie/platform/immediate-rendering callers and native input, then post-intro cleanup/title. No push.
+
+### 2026-10-20 — native intro, input and immediate rendering (integration; gate pending)
+
+* Real native Start/logos now enter the original movie loop. Normal Enter input skips it;
+  a separate full intro decodes 3,233 frames and submits 4,761,600 audio frames with
+  9,269,451 nonzero samples, 4,647 completed AudioQueue buffers and zero device errors.
+  Both release movie textures/media and exit 1 at explicit `clear_game`; title/story remain open.
+  Full-run sampled peak RSS 214,320 KiB, ending 64,320 KiB. Images inspected; no gameplay FPS claim.
+* Native Input runs pinned key/config normalization, OnInput, GetControllers and soft reset;
+  service callbacks consume actual session mode and input. Card result is a separate owner
+  from save phase. Native sprite UVs, clipping cache, retained vertices, fades and nested
+  frame counters preserve source ordering. Source movie padding is undefined; native clears it.
+* Startup still matches all 16 complete images/states. Movie control 756 and fade 2,936
+  match; geometry 768/192 flags, timing 688/652 flags, sprite 1,927/1,920 flags and clip
+  3,000/1,251 flags have zero value mismatches but remain partial. Native Input covers
+  3,292 polls, 2,019 config cases, 567 composed frames and 256 reset cases with zero value
+  mismatches and explicit FP partials. Game-mode 24,000 and bootstrap 418 still match.
+  Six movie, six rendering and ten input mutants detected; fresh reviews resolved input
+  casts/DTO boundaries and found no remaining confirmed integration defect.
+* Independent clean ARM64 build with nonexistent original/Unicorn paths exits 0; no
+  loader/guest/HLE/Unicorn linkage or original PE files in its build tree. That executable
+  displays SEGA (exit 0), then plays/skips the intro to the same `clear_game` stop (exit 1).
+  Evidence: `production-integration-20261020/native-movie-{integration,production-closure}.json`.
+* Full gate attempt exits 2 on stale tracked Input source-data fingerprints, not an altered
+  comparison. Raw initialization/constants checks are rerun; source-first commit followed
+  by a separate report/judge refresh is required by JUDGE.md. No successful gate recorded
+  for this source step yet. Existing nine oracle failures remain; full oracle sweep/m1 skipped.
+* Next: finish the report-refresh gate, then integrate staged Clear/Reset, save loading and
+  audio ownership with native screen setup. Private stages: `sadx-cleanup-stage`,
+  `sadx-audio-cleanup-stage`, `sadx-game-view-stage` under `/private/tmp`. Screen setup
+  matches the unchanged 500-case judge (291 FP partials); it is not integrated yet.
+  Reference worker continues Emerald Coast from normal retries. Full persistent goal active;
+  no assets/binaries committed, no push.

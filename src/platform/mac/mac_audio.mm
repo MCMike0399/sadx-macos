@@ -94,6 +94,7 @@ struct AudioOutput::Impl {
     std::uint64_t next_token = 1;
     AudioQueueRef queue = nullptr;
     std::atomic<bool> stopping = false;
+    bool presentation_clock_seen = false;
     std::ofstream capture;
     std::uint32_t capture_bytes = 0;
     AudioStats statistics;
@@ -177,6 +178,7 @@ bool AudioOutput::start(const std::string& capture_path, std::string& error) {
     auto format = mix_format();
     impl_->stopping = false;
     impl_->statistics = {};
+    impl_->presentation_clock_seen = false;
     auto status = AudioQueueNewOutput(&format, Impl::callback, impl_.get(), nullptr,
                                      nullptr, 0, &impl_->queue);
     for (unsigned index = 0; status == noErr && index < 3; ++index) {
@@ -240,6 +242,32 @@ void AudioOutput::stop_all() {
 AudioStats AudioOutput::stats() const {
     std::lock_guard lock(impl_->mutex);
     return impl_->statistics;
+}
+std::optional<std::uint64_t> AudioOutput::presentation_frames(std::string& error) const {
+    std::lock_guard lock(impl_->mutex);
+    error.clear();
+    if (!impl_->queue || impl_->stopping) {
+        error = "audio presentation clock requires a running output";
+        return std::nullopt;
+    }
+    AudioTimeStamp stamp{};
+    const auto status = AudioQueueGetCurrentTime(impl_->queue, nullptr, &stamp, nullptr);
+    // AudioQueueStart is asynchronous: before playback begins its sample clock can
+    // report InvalidRunState. Expose pending clock readiness instead of inventing zero.
+    if (status == kAudioQueueErr_InvalidRunState && !impl_->presentation_clock_seen)
+        return std::nullopt;
+    if (status != noErr) {
+        error = "audio presentation clock failed: " + std::to_string(status);
+        return std::nullopt;
+    }
+    if (!(stamp.mFlags & kAudioTimeStampSampleTimeValid) || stamp.mSampleTime < 0)
+        return std::nullopt;
+    if (!std::isfinite(stamp.mSampleTime)) {
+        error = "audio presentation clock is not finite";
+        return std::nullopt;
+    }
+    impl_->presentation_clock_seen = true;
+    return static_cast<std::uint64_t>(stamp.mSampleTime);
 }
 bool AudioOutput::render(float* stereo, std::size_t frames) {
     std::lock_guard lock(impl_->mutex);

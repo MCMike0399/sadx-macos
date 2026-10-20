@@ -1,4 +1,5 @@
 #pragma once
+#include "engine/controller_values.hpp"
 #include <array>
 #include <cstddef>
 #include <cstdint>
@@ -11,6 +12,9 @@ namespace sadx {
 class GameLogicController {
 public:
     static constexpr std::size_t byte_count=52;
+    // NOTSA: semantic native initialization/snapshot at the record owner boundary.
+    static GameLogicController from_input_values(const ControllerInputValues&);
+    std::optional<ControllerInputValues> input_values() const noexcept;
     // Source field offsets used by consumers (SDK ControllerData names).
     static constexpr std::size_t held_offset=0x08,pressed_offset=0x10,
         stick_x_offset=0x1c,stick_y_offset=0x1e,old_offset=0x2c;

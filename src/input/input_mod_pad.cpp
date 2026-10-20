@@ -114,4 +114,23 @@ bool input_mod_vibration_stop(InputModRumbleTasks& tasks,std::array<InputModDrea
         if(!owners.stop_rumble||!owners.stop_rumble(i))return false;}
     return true;
 }
+// NOTSA: typed native boundary for the existing verified OnInput algorithm.
+InputModResult input_mod_on_input(
+    NativeInputModOwners& owners, const InputModKeyboardPad& keyboard,
+    const std::array<InputModGamepadState, 8>& gamepads, NativeInputModFrame& state,
+    const InputModPadConstants& constants, SseContext& sse) {
+    const std::optional<std::int32_t> mode = state.game_mode;
+    const std::optional<std::int32_t> demo = state.demo_playing;
+    InputModFrameState adapter{&mode, &demo, state.demo_cutscene,
+                              static_cast<std::uint32_t>(state.demo_enabled),
+                              state.demo_active, state.soft_reset};
+    GameLogicControllers pointers;
+    input_mod_init_raw_controllers(owners.raw_input, pointers);
+    InputModFrameOwners legacy_owners{owners.pads, owners.engine_raw, owners.raw_input, pointers};
+    const auto result = input_mod_on_input(legacy_owners, keyboard, gamepads, adapter, constants, sse);
+    const auto& [mode_owner, demo_owner, cutscene_owner, enabled_owner, demo_active, soft_reset] = adapter;
+    state.demo_active = demo_active;
+    state.soft_reset = soft_reset.value();
+    return result;
+}
 } // namespace sadx

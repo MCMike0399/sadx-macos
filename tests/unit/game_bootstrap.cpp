@@ -5,11 +5,11 @@
 
 namespace {
 struct World {
-    std::int32_t save_phase = 8;
+    std::int32_t card_result = 8;
     std::uint32_t global_timer = 123, movie = 4;
     std::int16_t rings = 19;
     std::uint16_t mode = 0;
-    sadx::bootstrap::State state{{save_phase, global_timer, rings, movie, mode}};
+    sadx::bootstrap::State state{{card_result, global_timer, rings, movie, mode}};
     sadx::save::Data save;
 };
 }
@@ -23,7 +23,7 @@ int main() {
     bootstrap::Services services{
         [&](std::uint16_t old_character) {
             assert(++calls == 1 && old_character == 7);
-            assert(world.state.card_state == 1 && world.save_phase == 0);
+            assert(world.state.card_state == 1 && world.card_result == 0);
             assert(world.state.character == 7 && world.global_timer == 123);
             world.save.lives[0] = 127;
         },
@@ -75,7 +75,7 @@ int main() {
     } catch (const std::runtime_error &) {
         failed = true;
     }
-    assert(failed && early.state.card_state == 1 && early.save_phase == 0);
+    assert(failed && early.state.card_state == 1 && early.card_result == 0);
     assert(early.state.character == 7 && early.global_timer == 123 && early.rings == 19);
     std::uint8_t menu_mode = 9;
     world.state.menu.flags.fill(165);

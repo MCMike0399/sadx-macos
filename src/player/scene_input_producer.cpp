@@ -82,10 +82,107 @@ SceneInputResult produce_scene_input(SceneInputProducerRuntime& runtime,X87Conte
     result.analogs=runtime.analog_owner(fp);
     if(!*result.analogs)return stop(SceneInputFailure::analog_producer_failed,0x40fee6,result.analogs->source_boundary);
     for(std::uint32_t slot=0;slot<4;++slot){
-        result.slot=slot;
-        const auto keys=update_scene_directional_keys(slot,s.raw_controllers,s.directional,s.control_enabled_at_909fb0);
-        if(!keys){result.directional_failure=keys.failure;return stop(SceneInputFailure::directional_failed,0x40fef1,keys.source_boundary);}
+        result.slot = slot;
+        const auto keys = update_scene_directional_keys(slot, s.raw_controllers, s.directional,
+                                                        s.control_enabled_at_909fb0);
+        if (!keys) {
+            result.directional_failure = keys.failure;
+            return stop(SceneInputFailure::directional_failed, 0x40fef1, keys.source_boundary);
+        }
     }
-    result.completed=true;return result;
+    result.completed = true;
+    return result;
+}
+// NOTSA: translate complete native owners at the existing controller boundary;
+// execute the same verified GetControllers/WriteAnalogs algorithms unchanged.
+SceneInputResult produce_native_scene_input(
+    const std::array<std::shared_ptr<GameLogicController>, 8> &raw,
+    const std::array<NativeScenePad, 8> &pads, const std::array<std::uint8_t, 8> &enabled,
+    std::uint8_t pad_reading, std::uint16_t stage, const PlayerInputCamera &camera,
+    const PlayerInputProducerConstants &constants, NativeSceneInputState &state, X87Context &fp) {
+    GameLogicControllers pointers;
+    for (std::size_t index = 0; index < pointers.size(); ++index)
+        pointers[index] = raw[index];
+    GameLogicEnginePads engine;
+    for (std::size_t index = 0; index < engine.records.size(); ++index)
+        engine.records[index] = GameLogicController::from_input_values(state.engine_pads[index]);
+    GameControllerButtonMasks masks{state.masks[0], state.masks[1], state.masks[2], state.masks[3],
+                                    state.masks[4]};
+    SceneDirectionalKeyState keys;
+    auto &[held_owner, pressed_owner, repeat_owner, held_output_owner, pressed_output_owner] = keys;
+    auto &held_adapter = held_owner;
+    auto &pressed_adapter = pressed_owner;
+    auto &repeat_adapter = repeat_owner;
+    auto &held_output_adapter = held_output_owner;
+    auto &pressed_output_adapter = pressed_output_owner;
+    for (std::size_t index = 0; index < state.held.size(); ++index) {
+        held_adapter[index] = state.held[index];
+        pressed_adapter[index] = state.pressed[index];
+        repeat_adapter[index] = state.repeat[index];
+        held_output_adapter[index] = state.held_output[index];
+        pressed_output_adapter[index] = state.pressed_output[index];
+    }
+    PlayerInputProducedState analogs;
+    for (std::size_t index = 0; index < pads.size(); ++index) {
+        analogs.raw_unused[index] = NormalizedPlayerInput{state.raw_analogs[index].angle,
+                                                          state.raw_analogs[index].magnitude};
+        analogs.normalized[index] = NormalizedPlayerInput{
+            state.normalized_analogs[index].angle, state.normalized_analogs[index].magnitude};
+    }
+    const std::optional<std::uint16_t> stage_adapter = stage;
+    const std::optional<std::uint8_t> reading_adapter = pad_reading;
+    SceneInputProducerState scene{
+        pointers,
+        engine,
+        masks,
+        keys,
+        stage_adapter,
+        reading_adapter,
+        [&](std::size_t index) -> std::optional<std::uint8_t> { return enabled.at(index); }};
+    PlayerInputProducerRuntime producer;
+    producer.raw_controllers = &pointers;
+    producer.camera = camera;
+    producer.control_enabled = pad_reading;
+    for (std::size_t index = 0; index < pads.size(); ++index) {
+        const auto &pad = pads[index];
+        producer.controller_enabled[index] = enabled[index];
+        producer.input_mod_pads[index] =
+            InputMod261Pad{static_cast<std::uint8_t>(pad.connected),
+                           static_cast<std::uint8_t>(pad.keyboard_allowed),
+                           PlayerInputPadAxes{pad.input.left_x, pad.input.left_y}, pad.magnitude};
+    }
+    SceneInputProducerRuntime runtime{scene, [&](X87Context &context) {
+                                          return produce_input_mod_261_bochs_p5_p6(
+                                              producer, constants, analogs, context);
+                                      }};
+    // Preserve committed stores even when a later recovered callee reports failure.
+    const auto commit = [&] {
+        for (std::size_t index = 0; index < engine.records.size(); ++index)
+            state.engine_pads[index] = engine.records[index].input_values().value();
+        for (std::size_t index = 0; index < state.held.size(); ++index) {
+            state.held[index] = held_adapter[index].value();
+            state.pressed[index] = pressed_adapter[index].value();
+            state.repeat[index] = repeat_adapter[index].value();
+            state.held_output[index] = held_output_adapter[index].value();
+            state.pressed_output[index] = pressed_output_adapter[index].value();
+        }
+        const auto &[action, jump, secondary_action, first_auxiliary, second_auxiliary] = masks;
+        state.masks = {{action.value(), jump.value(), secondary_action.value(),
+                        first_auxiliary.value(), second_auxiliary.value()}};
+        for (std::size_t index = 0; index < pads.size(); ++index) {
+            const auto &raw_analog = analogs.raw_unused[index].value();
+            const auto &normalized = analogs.normalized[index].value();
+            state.raw_analogs[index] = {raw_analog.angle.value(), raw_analog.magnitude};
+            state.normalized_analogs[index] = {normalized.angle.value(), normalized.magnitude};
+        }
+    };
+    try {
+        const auto result = produce_scene_input(runtime, fp);
+        commit();
+        return result;
+    } catch (...) {
+        commit();
+        throw;
+    }
 }
 } // namespace sadx

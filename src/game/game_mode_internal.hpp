@@ -155,7 +155,7 @@ void prepare_action_return(FlowContext &flow);
 std::uint32_t check_return_mode(FlowContext &flow);
 // STUB: SONIC 0x4173b0 GameStateHandler_Adventure
 std::int16_t run_adventure(FlowContext &flow);
-// STUB: SONIC 0x42f020 MsMovie
+// NOTSA: session composition delegates to the recovered movie system.
 std::int32_t run_movie(FlowContext &flow, std::uint32_t movie);
 // STUB: SONIC 0x40ef70 PadReadOnP
 void enable_player_pad_reading(FlowContext &flow, std::uint32_t player);

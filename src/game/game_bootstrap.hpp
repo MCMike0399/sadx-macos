@@ -41,7 +41,7 @@ struct MenuState {
 };
 // NOTSA: shared flow, frame, save and loop owners, borrowed without a second stored copy.
 struct SharedState {
-    std::int32_t &save_phase;
+    std::int32_t &card_result;
     std::uint32_t &global_timer;
     std::int16_t &rings;
     std::uint32_t &movie_number;
@@ -49,7 +49,7 @@ struct SharedState {
 };
 struct State {
     explicit State(SharedState shared)
-        : card_result(shared.save_phase), global_timer(shared.global_timer), rings(shared.rings),
+        : card_result(shared.card_result), global_timer(shared.global_timer), rings(shared.rings),
           game_mode(shared.game_mode), movie_number(shared.movie_number) {}
     std::uint8_t card_state = 0, card_operation = 0, card_complete = 0;
     std::int32_t &card_result;

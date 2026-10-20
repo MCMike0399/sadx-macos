@@ -49,4 +49,29 @@ SceneInputResult update_scene_directional_keys(std::uint32_t,const GameLogicCont
 // Full local40fdc0: classifier and ordered mask stores, engine pad copy/clear,
 // then40f170 and40f070 slots0..3. Earlier stores survive later failures.
 SceneInputResult produce_scene_input(SceneInputProducerRuntime&,X87Context&);
+// NOTSA: complete native owners. The older optional record API remains the
+// reference adapter; its conversion is confined to this controller boundary.
+struct NativeAnalogInput {
+    std::int32_t angle = 0;
+    float magnitude = 0;
+};
+struct NativeSceneInputState {
+    std::array<ControllerInputValues, 8> engine_pads{};
+    std::array<std::uint32_t, 4> held{}, pressed{}, held_output{}, pressed_output{};
+    std::array<std::int32_t, 4> repeat{};
+    std::array<NativeAnalogInput, 8> raw_analogs{}, normalized_analogs{};
+    // Source load-image values, in GameControllerButtonMasks declaration order.
+    std::array<std::uint32_t, 5> masks{{1026, 4, 1026, 512, 512}};
+};
+struct NativeScenePad {
+    bool connected, keyboard_allowed;
+    ControllerInputValues input;
+    float magnitude;
+};
+SceneInputResult produce_native_scene_input(
+    const std::array<std::shared_ptr<GameLogicController>, 8>& raw,
+    const std::array<NativeScenePad, 8>& pads,
+    const std::array<std::uint8_t, 8>& enabled, std::uint8_t pad_reading,
+    std::uint16_t stage, const PlayerInputCamera&, const PlayerInputProducerConstants&,
+    NativeSceneInputState&, X87Context&);
 } // namespace sadx

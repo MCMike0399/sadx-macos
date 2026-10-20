@@ -13,6 +13,8 @@ import subprocess
 import sys
 
 from character_actions import SOURCE_SHA
+from movie_assets import import_content, import_movies
+from input_config import input_configuration
 
 
 def digest(path):
@@ -52,6 +54,10 @@ def import_assets(game, output):
         manifest["textures"].append({"path": str(target.relative_to(output)),
                                      "sha256": source_hash, "bytes": target.stat().st_size})
     (output / "startup-assets.json").write_text(json.dumps(manifest, indent=2) + "\n")
+    import_content(game, output)
+    import_movies(game, output)
+    configuration = input_configuration(game / "mods/sadx-input-mod/config.ini")
+    (output / "input-configuration.json").write_text(json.dumps(configuration, indent=2) + "\n")
     return manifest
 
 

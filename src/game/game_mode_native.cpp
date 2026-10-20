@@ -104,7 +104,11 @@ std::uint32_t check_return_mode(FlowContext &) {
     throw UnrecoveredGameFlowCall("check_return_mode");
 }
 std::int16_t run_adventure(FlowContext &) { throw UnrecoveredGameFlowCall("run_adventure"); }
-std::int32_t run_movie(FlowContext &, std::uint32_t) { throw UnrecoveredGameFlowCall("run_movie"); }
+std::int32_t run_movie(FlowContext &flow, std::uint32_t movie) {
+    if (!flow.native)
+        throw UnrecoveredGameFlowCall("run_movie");
+    return flow.native->run_movie(movie);
+}
 void enable_player_pad_reading(FlowContext &, std::uint32_t) {
     throw UnrecoveredGameFlowCall("enable_player_pad_reading");
 }

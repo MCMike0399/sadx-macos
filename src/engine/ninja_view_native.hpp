@@ -16,6 +16,8 @@ struct State {
     D3dxMatrix perspective{}, inverse{}, device_view{};
     NinjaDepthProjection depth;
     float sprite_scale = 0, near_distance = 0, far_distance = 0;
+    // File-backed clip-range defaults, distinct from the camera's negative-distance cache.
+    float negative_near_distance = -1, negative_far_distance = -2049;
 };
 struct Services {
     NinjaMatrixStack &matrices;
@@ -37,4 +39,12 @@ Result set_projection(float field_of_view, float far_distance, State &, Services
                        X87Context &, SseContext &);
 // FUNCTION: SONIC 0x781250 njSetCamera
 Result set_camera(State &, Services &, X87Context &, SseContext &);
+struct ClipServices {
+    std::function<NinjaMatrix()> get_projection;
+    std::function<void(const NinjaMatrix &)> set_projection;
+};
+// FUNCTION: SONIC 0x7815e0 SetDrawDistance
+void clamp_clip_range(float near_distance, float far_distance, State &, X87Context &);
+// FUNCTION: SONIC 0x403180 ___njClipZ
+bool set_clip_range(float near_distance, float far_distance, State &, ClipServices &, X87Context &);
 } // namespace sadx::view

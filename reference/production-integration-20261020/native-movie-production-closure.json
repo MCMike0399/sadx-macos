@@ -1,0 +1,261 @@
+{
+  "scope": "Independent ARM64 native production closure build and bounded imported-assets execution; not gameplay completion.",
+  "stage": "/private/tmp/sadx-native-closure.l7ml1rn4",
+  "recorded_at_utc": "2026-10-20T18:29:29.077680+00:00",
+  "build": {
+    "command": [
+      "make",
+      "-j4",
+      "build/sadx-native",
+      "GAME_EXE=/nonexistent/sadx-original/sonic.exe",
+      "INPUT_DLL=/nonexistent/sadx-original/input.dll",
+      "LOADER_DLL=/nonexistent/sadx-original/loader.dll",
+      "SPEEDRUN_DLL=/nonexistent/sadx-original/speedrun.dll",
+      "UNICORN_DIR=/nonexistent/sadx-reference/unicorn",
+      "NATIVE_CONTROLLER_CMAKE=/private/tmp/sadx-controller-build-deps/cmake-wheel/cmake/data/bin/cmake"
+    ],
+    "cwd": "/private/tmp/sadx-native-closure.l7ml1rn4",
+    "exit_status": 0,
+    "elapsed_seconds": 36.85667133331299,
+    "cmake_sha256": "9b0fd29d7e7a2adc331fd9b866fe1b1b6f7f52d06dec66c643762988fb8a8f22",
+    "log_sha256": "9df0507e24cff141c4d41219da08da49c948bd8e698b622f08dca4fd10d407ed"
+  },
+  "inspection_summary": {
+    "architecture": "arm64",
+    "forbidden_objects": [],
+    "forbidden_runtime_symbols": [],
+    "original_exe_or_dll_files_in_stage": [],
+    "artifacts": {
+      "build/sadx-native": "fef24bd27bb4317796c8a3d8d450afcd23bf8bd843e77f7f2fc5d875bd85ceb9",
+      "build/native-controller-deps/lib/libSDL3.0.dylib": "5c6288b2a1508c25b554b622e963ace899eb53828be013a4f5754fa18a1bec39",
+      "build/native-controller-deps/lib/libusb-1.0.a": "63033461a0a5a5808a3b9216c3c91ebbd80d785e4f61ed9eb3cab632e96e7823",
+      "build/libsadx-native.a": "5439ac0ae69c2458ce442ec66fac484c891f07ec44385dbc5438df320ac0a0d2"
+    }
+  },
+  "native_source_count": 45,
+  "native_platform_and_app_source_count": 6,
+  "native_source_hashes": {
+    "src/cpu/crt_integer.cpp": "18d16777cc02344275575955f7773043ea9c6b48cf0197b725e838d1c5294a92",
+    "src/cpu/sse_math.cpp": "b7ddd9dc425ac2e1ebd49929de1dcdf4bd7671466bf041544a6ba57157ca12b7",
+    "src/cpu/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8",
+    "src/cpu/x87_transcendental.cpp": "5241f89cff162deec68fa95d19f26e908974be9c78a1bdc18044f2c893abd5ea",
+    "src/math/d3dx_math.cpp": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171",
+    "src/math/ninja_math.cpp": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
+    "src/math/ninja_sine_table.cpp": "5843cdcab33b2ec76edff60437bfb908db6d8afe720374c47b13c25ddc57c454",
+    "src/engine/character_pack.cpp": "4c5d7980c40af6860502ae838accb464b8e281f03ddc64dcd3ce6334a6a33f7d",
+    "src/engine/game_controller.cpp": "20e3df5b8f7d8173b39c47f633ec41e5882d5f020073d6c2b284f7b7cb801c76",
+    "src/engine/game_frame_control.cpp": "930a94809ee8f84acc82b3da960766a14d73905455f6ff831b4541b1d90b1746",
+    "src/engine/game_frame_control_native.cpp": "551c58594cf51f4686aa65b35f4a686fd58dc36b661110e285a1774c8dcd347a",
+    "src/engine/graphics_frame.cpp": "738509ac0a918990e8ea8a285beabba60acc677ab1631d8c6cb0d19ac32fde8a",
+    "src/engine/graphics_frame_fog.cpp": "4fb817fac7f8410c4102d6988ef8f2cde73821375756461dfc0c2cd19ff88d67",
+    "src/engine/graphics_frame_lighting.cpp": "f723e80096997e234138bedb069d5e29df526676bc9b07bedfe875257ae30b16",
+    "src/engine/ninja_matrix.cpp": "7045d50d871e7853935b7301ac90473bb06536f14c7b010ce7f75562d5b09bc4",
+    "src/engine/ninja_projected_depth.cpp": "12378c9eaf694af14e338affa098653cac077bfeb08fe53930b993f24a43e646",
+    "src/engine/ninja_texture.cpp": "f73e71d7891b682f3d9bba7c3aa27561c37da9a9dd63bb6b1eb4ca1b99171fa4",
+    "src/engine/ninja_view_native.cpp": "e5a0ca309fee0c20d8485c6b6d02041b556670c82239a85106b8618e6112e939",
+    "src/engine/pvr_device.cpp": "446a29ae3631d4379b046708742bf08e8ab1e20894b495385566b9f02e56e085",
+    "src/engine/pvr_draw.cpp": "7a5d395287633bcad53146acd0adfae953c10787d7312edc06ac4554e76d63b3",
+    "src/engine/sprite_immediate.cpp": "f1db7e0317f7d826cb89d2fa7f54f678ad43583c316d91ed0529d3b9c3e9c8bd",
+    "src/engine/speedrun.cpp": "aadb023ca23dbf2bb2abcb772b46ebc5c90b3b247e78f816baf5c870cc207fe3",
+    "src/engine/task.cpp": "e4372dbff4249f528739fda394732f01af662a1769275a7834e7a577ee98a3f9",
+    "src/engine/task_work.cpp": "08e679e66ab28ceda7a942033489cbd1f49356875766babe9e66236870c84691",
+    "src/input/input_initial_state.cpp": "0eda2b014281062e72921c54192c164b1bff83e0215081089be538aa00097c3a",
+    "src/input/input_mod_axes.cpp": "1d9aee1c76bb2c09b937bca9b5525d9fbaba9c7af95521364076c8dac1dd3df4",
+    "src/input/input_mod_constants.cpp": "dc2f26b82c0d631afe1f42c910cbeb85e39601d24a90e126a194884e8c783e3b",
+    "src/input/input_mod_pad.cpp": "236237ddd8fc2d46eb941012ff6bf495524e6026bb764cfbe01135499f7c0525",
+    "src/player/player_input_producer.cpp": "611e26e7e79647ce09db2be9d4310c1faf099078b16e8a23306445016dd7562e",
+    "src/player/scene_input_producer.cpp": "a995ae53cdcb46727994b0febaf61644c8f2a0b5d02aa38123d608625989e8e3",
+    "src/game/game_bootstrap.cpp": "3461ee0394189845c5d7d54b39179b2870fd35508c355c80129b7e755f3d7670",
+    "src/game/game_mode.cpp": "8f830dabd7b2f3e594333799b47af001a6afebb7548ec2e95119b45c9dae5a43",
+    "src/game/game_mode_native.cpp": "b35b5df1a4751c9bebffe2b8be653a89d5d6d15054ed487cc31d2ff299fc8cbe",
+    "src/game/movie.cpp": "242f48af5181c15950881cc09bde4c06eef3509695dd4be1049b9d936eb55895",
+    "src/game/logo.cpp": "4912adc3056a533a97845e1d5ef4528918358b7078496535ef471dd685f98be0",
+    "src/game/logo_display.cpp": "fee9feef1f2fdf00167b765e4a7fee4afefaa751a0a1a894ef9a6a87ed47f72f",
+    "src/game/logo_startup.cpp": "3a73866f8001a6bd2a7488a4da56d1aa73ba76d15dbe6d32c816719aea671fdf",
+    "src/game/save_data.cpp": "d0175338a858b42d58bda6155d4886a86a590d874d19c46e945c4b3d235f9eb4",
+    "src/runtime/engine_code_tables.cpp": "c5d42992c4c82d474532cd9bd95f064e519e997e43289a98aeff2d11159d7a6f",
+    "src/runtime/logo_renderer.cpp": "235e0e873d035630db86228a57b000dd0c2d13de1bc0dfeec92b6b053962a993",
+    "src/runtime/logo_scene.cpp": "a226781e325620ec2453b971735b0ae9899d8d33218a89b1b523372a9fecc360",
+    "src/runtime/native_input.cpp": "44d2c39a2e3a5030d05e3757e227d20097dcabd01eea33f6f062a005a9104f92",
+    "src/runtime/movie_scene.cpp": "f030bf7955a490ab0c35a3f2079af530aa400a131fd0e65fe2fd1c72cb31479a",
+    "src/runtime/native_display.cpp": "97c5821bdbfa8ffa624a906a76ccb4c02844de4705c1fede4303a0dcdc2e0a56",
+    "src/runtime/native_session.cpp": "a2806619e3bafd5dcad199e34cd37e5a247ad4267fa58111dd0c373687d27368",
+    "src/platform/mac/mac_audio.mm": "3d2b8d081a6f242e19995e70b6385a6ab85fb688b1aa5a8c45aee71be89ca841",
+    "src/platform/mac/hid_switch_controller.mm": "7bff158c87bf9a4c84176953b7d51d516772141e3bc2bccdf11bb59dd5511b99",
+    "src/platform/mac/mac_movie.mm": "8996fa785c3ce2bf2da292e48785c2b9789c54549e243b608d0319bc26c10014",
+    "src/platform/mac/metal_device_frame.mm": "5f535b2c905496bb123f3a53e560d23ae1ab7a050a2f8cdef35d992eb4be3837",
+    "src/platform/mac/mac_clock.cpp": "644ef561034ee133844dfb50c01d35a3bb9705a160533866c10ca5c1fb814994",
+    "src/apps/sadx_native.mm": "d57e173893fd9f3e5c69d51e8da3f5f628d976c192139852e01676cee00c339f"
+  },
+  "toolchain": [
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "--version"
+      ],
+      "exit_status": 0,
+      "stdout": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin27.0.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "xcrun",
+        "--sdk",
+        "macosx",
+        "--show-sdk-version"
+      ],
+      "exit_status": 0,
+      "stdout": "27.0\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "uname",
+        "-m"
+      ],
+      "exit_status": 0,
+      "stdout": "arm64\n",
+      "stderr": ""
+    }
+  ],
+  "dependencies": {
+    "upstream": {
+      "purpose": "Native controller hardware support; pinned Input mod semantics remain in src/input",
+      "sdl3": {
+        "repository": "https://github.com/libsdl-org/SDL",
+        "version": "3.4.2",
+        "commit": "683181b47cfabd293e3ea409f838915b8297a4fd",
+        "archive_sha256": "f5b3a3b27ae296da479ab4642c456ff620d268e65d642bdfc934aa210107593f",
+        "license": "Zlib",
+        "protocol_source": "src/joystick/hidapi/SDL_hidapi_switch2.c",
+        "platform_patch": {
+          "file": "shared-iohid.patch",
+          "purpose": "macOS shared IOHID input interface0 plus libusb bulk interface1; upstream report/calibration/rumble protocol unchanged; multiple identical controllers fail explicitly",
+          "files": {
+            "src/hidapi/SDL_hidapi.c": {
+              "original": "0ed89650a0782f5c160302b8c9a86731dc74d7814f89f92e3bcb3bfebcaeffa7",
+              "patched": "c156e8c34961bb3d6a1829e5bd847baf266e812462bfb3c8342d0ede8dc71428"
+            },
+            "src/joystick/hidapi/SDL_hidapi_switch2.c": {
+              "original": "f819238ba05a26092e19b9844a34c5891c677a1850ff3636fe2cbf9cb69db953",
+              "patched": "68ebd355986480c2ee0df3b5643cf1b0ee8ba7f27fc5e39c7c7843fe2e7bc6b4"
+            }
+          }
+        }
+      },
+      "libusb": {
+        "repository": "https://github.com/libusb/libusb",
+        "version": "1.0.29",
+        "commit": "15a7ebb4d426c5ce196684347d2b7cafad862626",
+        "archive_sha256": "5977fc950f8d1395ccea9bd48c06b3f808fd3c2c961b44b0c2e6e29fc3a70a85",
+        "license": "LGPL-2.1-or-later"
+      },
+      "distribution": "Build output retains license texts under licenses/. Redistributed native dependencies must retain notices and satisfy libusb LGPL relinking/source obligations. No binaries or original game assets are checked in."
+    },
+    "patched_source_hashes": {
+      "src/hidapi/SDL_hidapi.c": "c156e8c34961bb3d6a1829e5bd847baf266e812462bfb3c8342d0ede8dc71428",
+      "src/joystick/hidapi/SDL_hidapi_switch2.c": "68ebd355986480c2ee0df3b5643cf1b0ee8ba7f27fc5e39c7c7843fe2e7bc6b4"
+    },
+    "dynamic_load": [
+      {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-fobjc-arc",
+          "-Isrc",
+          "dependency-load.mm",
+          "build/obj/platform/mac/hid_switch_controller.o",
+          "-framework",
+          "Foundation",
+          "-o",
+          "build/dependency-load"
+        ],
+        "exit_status": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      {
+        "command": [
+          "./build/dependency-load",
+          "/private/tmp/sadx-native-closure.l7ml1rn4/build/native-controller-deps/lib/libSDL3.0.dylib"
+        ],
+        "exit_status": 0,
+        "stdout": "{\"native_dependency_initialized\":true,\"controller_attached\":true}\n",
+        "stderr": ""
+      }
+    ]
+  },
+  "startup": {
+    "command": [
+      "./build/sadx-native",
+      "--assets",
+      "/Users/burbujamc/Developer/sadx-macos/game/imported",
+      "--offscreen",
+      "--exit-after",
+      "120",
+      "--screenshot",
+      "/private/tmp/sadx-native-closure.l7ml1rn4/startup120.ppm"
+    ],
+    "cwd": "/private/tmp/sadx-native-closure.l7ml1rn4",
+    "exit_status": 0,
+    "elapsed_seconds": 0.5713942050933838,
+    "stdout": "{\"execution\":\"native\",\"frames\":120,\"game_mode\":1,\"game_state\":21,\"stage\":0,\"rings\":0,\"global_timer\":120,\"logo_frames\":119,\"logo_mode\":1,\"textures\":18,\"completed_frames\":120,\"input_held\":0,\"movie_decoded_frames\":0,\"movie_textures\":0,\"movie_media_open\":false,\"movie_phase\":0,\"movie_source_padding_defined\":false,\"movie_audio_frames\":0,\"movie_audio_nonzero_samples\":0,\"movie_audio_completed_buffers\":0,\"movie_audio_device_error\":0}\n",
+    "stderr": "",
+    "screenshot_sha256": "5784b5b1c09cf33fe763186caaed6534d5d9a287ccdbd2a72cbd8f88c099773e"
+  },
+  "movie_skip": {
+    "command": [
+      "./build/sadx-native",
+      "--assets",
+      "/Users/burbujamc/Developer/sadx-macos/game/imported",
+      "--offscreen",
+      "--exit-after",
+      "510",
+      "--key-events",
+      "500:13:down",
+      "--capture-directory",
+      "/private/tmp/sadx-native-closure.l7ml1rn4/movie-captures",
+      "--capture-at",
+      "480,499",
+      "--screenshot",
+      "/private/tmp/sadx-native-closure.l7ml1rn4/movie-skip.ppm"
+    ],
+    "cwd": "/private/tmp/sadx-native-closure.l7ml1rn4",
+    "exit_status": 1,
+    "elapsed_seconds": 2.667393207550049,
+    "stdout": "{\"execution\":\"native\",\"frames\":500,\"game_mode\":8,\"game_state\":21,\"stage\":0,\"rings\":0,\"global_timer\":388,\"logo_frames\":0,\"logo_mode\":0,\"textures\":0,\"completed_frames\":498,\"input_held\":8,\"movie_decoded_frames\":52,\"movie_textures\":0,\"movie_media_open\":false,\"movie_phase\":5,\"movie_source_padding_defined\":false,\"movie_audio_frames\":78848,\"movie_audio_nonzero_samples\":94266,\"movie_audio_completed_buffers\":74,\"movie_audio_device_error\":0}\n",
+    "stderr": "native session stopped: clear_game\n",
+    "scope": "Native imported-assets movie+held Enter skip; nonzero next unsupported seam is recorded, not gameplay completion.",
+    "captures": {
+      "movie-captures/480.json": "331abca27a79d5bc208a72c5e5a0206b4e26bb13722c75973ad0a2f1ce9fe224",
+      "movie-captures/480.ppm": "661c86e8db03f3738de4ba192cefdc11ca6e1199fbf74eb80b3a7b2fc674af5a",
+      "movie-captures/499.json": "0096beb67d94248fea379891d666f0edd6bf632d58ed84a679513491cea6c9dc",
+      "movie-captures/499.ppm": "df52b49e71cb353234cad409580f8fb28863ca9e853373c0a05984aca4ddebc8"
+    }
+  },
+  "evidence": {
+    "source-snapshot.json": "1b26a30c89634a2e2be8d44743ba5fcff5a8234bae6d6a6879b268de34788992",
+    "build.log": "9df0507e24cff141c4d41219da08da49c948bd8e698b622f08dca4fd10d407ed",
+    "inspection.json": "34c24f98433daf9ae4df594c28aa7565d9fcae5a368ec5e70e1f53489474663a",
+    "native-link.map": "a4ac5dcc968fb770fa1817adcfbbdbe6c34c2d155118409122065e0a32c5a191",
+    "relink.log": "e8ceb07744b0daa24decb101eea8fb582a490b1d2296ad1b337775870d160922",
+    "startup120.ppm": "5784b5b1c09cf33fe763186caaed6534d5d9a287ccdbd2a72cbd8f88c099773e",
+    "movie-captures/499.ppm": "df52b49e71cb353234cad409580f8fb28863ca9e853373c0a05984aca4ddebc8"
+  },
+  "limits": [
+    "Imported assets are supplied from an external directory; no assets/binaries committed.",
+    "No OS-level denial of arbitrary host paths was configured; stage has no original PE files and build receives nonexistent original/Unicorn paths.",
+    "Movie skip stops at explicit unported clear_game with real exit1; this is not a completed journey.",
+    "Controller dependency initialization succeeds; no new button/rumble physical qualification requested or claimed.",
+    "Audio cleanup stage remains unchanged and not integrated into this snapshot."
+  ]
+}

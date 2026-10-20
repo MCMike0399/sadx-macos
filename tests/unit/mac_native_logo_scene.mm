@@ -30,6 +30,9 @@ void run(int argc, char **argv) {
     auto &initial_flow = const_cast<flow::GameFlowState &>(session.flow_state());
     initial_flow.title_mode = 7;
     initial_flow.tutorial_variant = 9;
+    initial_flow.save_phase = 11;
+    require(&session.game_state().card_result != &session.flow_state().save_phase,
+            "card operation result and game save phase have distinct native owners");
     for (unsigned frame = 0; frame < 120; ++frame) {
         output.begin_frame();
         session.advance();
@@ -39,7 +42,9 @@ void run(int argc, char **argv) {
                     "first native frame follows original game startup before logo initialization");
         if (frame == 0)
             require(session.flow_state().title_mode == 7 &&
-                        session.flow_state().tutorial_variant == 0,
+                        session.flow_state().tutorial_variant == 0 &&
+                        session.flow_state().save_phase == 11 &&
+                        session.game_state().card_result == 0,
                     "advertise initialization resets its selection owner and preserves title mode");
     }
     require(output.loaded_textures() == 18 && session.save_data().vibration == 1 &&

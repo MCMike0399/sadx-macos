@@ -4,8 +4,11 @@
 #include "game/game_bootstrap.hpp"
 #include "game/game_mode_services.hpp"
 #include "runtime/logo_scene.hpp"
+#include "game/movie.hpp"
+#include "runtime/native_input.hpp"
 
 namespace sadx::native {
+class MovieScene;
 // NOTSA: native game session owns canonical flow/bootstrap/save state and imported actions.
 // Starts at the original Start mode; unrecovered later modes keep their explicit failures.
 class Session final : private flow::NativeServices {
@@ -22,10 +25,28 @@ class Session final : private flow::NativeServices {
     std::int16_t rings() const { return rings_; }
     frame::RendererState &renderer_timing() { return renderer_; }
     const frame::ModeState &frame_mode() const { return timing_; }
+    frame::ModeState &frame_mode() { return timing_; }
+    movie::SharedState movie_state() { return {quit_, flow_.movie_number, presented_frames_}; }
+    void attach_movie(MovieScene &scene) { movie_ = &scene; }
+    bool quit_requested() const { return quit_ != 0; }
+    void request_quit() { quit_ = 1; }
+    // Normal GameLoop completion increments once; the nested movie loop owns its own increments.
+    void complete_frame() { ++presented_frames_; }
+    std::uint32_t completed_frames() const { return presented_frames_; }
+    InputFrameContext input_frame_context() const {
+        return {static_cast<std::int32_t>(flow_.mode), logo_.demo_mode(),
+                demo_enabled_, logo_.demo_event()};
+    }
+    SoftResetState &soft_reset_state() { return soft_reset_; }
 
   private:
     flow::GameFlowState flow_;
     std::uint32_t global_timer_ = 0;
+    std::uint32_t quit_ = 0, presented_frames_ = 0;
+    MovieScene *movie_ = nullptr;
+    std::int32_t demo_enabled_ = 0;
+    SoftResetState soft_reset_;
+    std::int32_t card_result_ = 0;
     std::int16_t rings_ = 0, stage_ = 0;
     std::uint16_t game_mode_ = 0;
     bootstrap::State bootstrap_;
@@ -54,5 +75,6 @@ class Session final : private flow::NativeServices {
     std::uint32_t initialize_level_game() override;
     void setup_character(std::uint32_t) override;
     void reset_player_work() override;
+    std::int32_t run_movie(std::uint32_t) override;
 };
 } // namespace sadx::native
