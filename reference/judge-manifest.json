@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "8758d440eabd4194bcd6af2c71d13b650bae64fb",
-    "evidence": "reference/production-integration-20261020/native-input-build-preparation.json",
-    "evidence_sha256": "84323cbc25b92a069e09ff2bf1812e288446f02c9bd21276a69e3c9f6d2dcb77",
-    "reason": "Prepare native Input closure and new movie/input oracle recipes"
+    "base_commit": "05de37bc71f126fab77b3b6d3a2859c7d80e2793",
+    "evidence": "reference/production-integration-20261020/movie-profile-owner-preparation.json",
+    "evidence_sha256": "0f9db01d26ef75a6f00532235dfcf4d6a209e5823b2254c65dc6a98ea913c38a",
+    "reason": "Correct startup owner provenance and prepare compiled movie/profile and controller-value verification"
   },
   "files": {
     "Makefile": "18a5236f94fbc127a093e67757c5dc7bd4ea495883cc59c15b86d3363f636dab",
@@ -258,7 +258,7 @@
     "tests/probes/native_fog_probe.cpp": "d137c740bab4d8e596b750f8aba61ae21441b9a14586e9fd84211ece13d9ddab",
     "tests/probes/native_fov_probe.cpp": "1e39e4edd86f5b97dfcd099e790c3e4853a4f92b15030a9e522ad45bb9405324",
     "tests/probes/native_frame_completion_probe.cpp": "e27a9fdd4c8e2cbfd0d42a3ecfbf55a78d2adbf9308d0c92a8d7914674a756cf",
-    "tests/probes/native_game_bootstrap_probe.cpp": "62853b8f6ec1fab1fcc46530a7c4cc7c26b8d7be0e213949418e37d24173f5e7",
+    "tests/probes/native_game_bootstrap_probe.cpp": "53bbad0381d0c77ef20bceb0e884fd4fbe5fef1cd480f3c7857ea463cd1c2373",
     "tests/probes/native_game_frame_control_probe.cpp": "be649c165a97af1b3a01e5831fa8d48ef0887a5cfabaf4e7972211c9b189019d",
     "tests/probes/native_game_frame_owners_probe.cpp": "56d8f463f79306bbc1dc830dd1a17bbe12cd0f84395b41e73d74e5f96ad4481d",
     "tests/probes/native_game_logic_probe.cpp": "b653470127127cd112d33350e2d04973aae3e2d603901c9ddb1172dcd3d37318",
@@ -385,7 +385,7 @@
     "tools/gate/check_engine_code_tables.py": "719f13283648656d906baf79b9e77ea3e607ac5c258d16a6a49f0466adf25813",
     "tools/gate/check_game_view_initial_state.py": "dd7815f65d73e4272e153c3d80cb349261f723ba0ea360d8dc54aeb7e0c735e1",
     "tools/gate/check_global_owners.py": "764714cd1fbdeab7b77f3b50d9efb64f12992f791758e3f07602a938b32ef504",
-    "tools/gate/check_input_initial_state.py": "26256115be545a20f92e349a5cea87d6e7fa5c14e6248e86b3a54eecae830c94",
+    "tools/gate/check_input_initial_state.py": "2a9de3ce38d6a1c8bef12e6c87fd8181a0888c15e5033b5c8b8b6a873f2352e1",
     "tools/gate/check_input_mod_constants.py": "2e84c1a6f913266d95e8ca9693394e6869e10f758a174d2a19b91939a30a363c",
     "tools/gate/check_judge.py": "f4f1b9b23b97ce468db31b1a639a364205272d3559d7e790237edd2671839ddb",
     "tools/gate/check_layers.py": "2b72408ccd936baa5da22b36eefbf90ce2af4ebf1ab01dc63a5f45f5fa9615c1",
@@ -407,7 +407,7 @@
     "tools/gate/guard_judge_edit.py": "6fa117651c735c3a152343da978945a426138ce455d0494e7ca707f46ff82935",
     "tools/gate/layer_exceptions.tsv": "45ec99765961f1f4f36760d706dd561ad9362ca3220080c0aebedb105f7c4649",
     "tools/gate/mutate.py": "9028799e852ca72ae2e49229647171ec68ecbc26eeb234db3fd510a4eeb33719",
-    "tools/gate/profile_patches.json": "deffd206879cde815cde006e6e8ebef7d829794d12ce659dd1990531f393d908",
+    "tools/gate/profile_patches.json": "ccb667fd3f7d423ba906c0af64413ac18f67e4501e68af10b330a9511532bc3d",
     "tools/gate/record_gate.py": "c74237a970ebfac47cf3c15357b4d16baf6ff28b6ba67e1a31c02dc249c70e3b",
     "tools/gate/run_journeys.py": "ccf2816a8b0463a5cc57b0edd9ed1335ea9c2a6228daa437f8c669e7b6915ae0",
     "tools/gate/track_reports.py": "f936d454c3d07a0614dc27e6370396c41428763cc05c473b9b34773b7f96abc9",
@@ -441,7 +441,7 @@
     "tools/oracles/verify_original_fog.py": "f30be22160a51a66dcca4f58218343e5f3e66dadb7cb77c263b3fcae6c687177",
     "tools/oracles/verify_original_fov.py": "c47d626b475e91a6e24cc9905702689be1c34ad897901ae6dd2fab1ba122885e",
     "tools/oracles/verify_original_frame_completion.py": "d1f18a46ebeea4c982d81bb883e5f0f43319a5220c888f6024e74785e68df9aa",
-    "tools/oracles/verify_original_game_bootstrap.py": "c6b11f34c5ce32dfc4b18c4050c597ccbe91bbab18121009a06d6442e41648ac",
+    "tools/oracles/verify_original_game_bootstrap.py": "f82d6d8c8e00d1542b68c116ab8690e0eed56c9926ccaa33745b42eefbe1593c",
     "tools/oracles/verify_original_game_frame_control.py": "3d9b54203c8cb1be6120eeabe4f41374b5878e1f31cce54c0d8799c984cc4777",
     "tools/oracles/verify_original_game_frame_owners.py": "3b8553e85f7df1f7dc37e7c31b671cd10006f893a4221aa8dbebbef0bf76cb1b",
     "tools/oracles/verify_original_game_logic.py": "d0e98854022f8349808664c8993adadfe976da15f3b3140ee1f17f7e9485acae",
@@ -458,7 +458,7 @@
     "tools/oracles/verify_original_game_winmain.py": "0f219e36bd3896d51931e3faa295e8b070fb12e489c0549509d54750e67c1f95",
     "tools/oracles/verify_original_ground_acceleration.py": "bff46d8c42c4bda92edba1d679f9383ddca53336fa74d9791f91f407a4922418",
     "tools/oracles/verify_original_input_devices.py": "a7862b4d9826b5df763da43bbba10af24630c883f6b36ca74b537ef6def0906d",
-    "tools/oracles/verify_original_input_initial_state.py": "331cea744a1884b0c42eadd80dc8182b17ff8b0d55c6770dece6dbf25551ad60",
+    "tools/oracles/verify_original_input_initial_state.py": "4351fc2fce2d43770d9ac92a9ccb039cba507bf36b77001c1071e51bbe129dd4",
     "tools/oracles/verify_original_input_mod_axes.py": "f20c214141bfa217c423463d90b8ba62d2f387c3c674dad3ed8d459606e9ace2",
     "tools/oracles/verify_original_input_mod_constants.py": "fe126bb3ae04dc4c502494c6027f0a0455532a02120cf80024d31bcd84d2dc11",
     "tools/oracles/verify_original_input_mod_pad.py": "39dd6b79e99bbf76d5cc86d9ab85007c725d36b9ff6f28c31bde9bf2b1063158",

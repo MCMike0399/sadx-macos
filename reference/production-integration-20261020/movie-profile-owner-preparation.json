@@ -1,0 +1,34 @@
+{
+  "schema": 1,
+  "reason": "Correct card-result provenance, certify recovered compiled Skipma patch coverage, and include the newly separated plain controller-value header in isolated initialization verification. No expected values, cases or tolerances change.",
+  "card_owner_evidence": {
+    "card_result": "original bootstrap reset uses3b290e4; native Session owns card_result_",
+    "save_phase": "guest/game_mode_reference.cpp read_save_phase reads loop.save_phase_at_3b291a4; distinct owner",
+    "regression": "Native session test seeds save_phase11 while Start resets card_result0 and preserves save_phase11; source oracle unchanged"
+  },
+  "skipma_evidence": {
+    "dll_sha256": "f3fc68a3058fb726142547018da860b170f137248e54b82712b52527e7b74802",
+    "entry": "0x10007a40",
+    "bytes": "b8a8e3b0038b00a80cff254c000110",
+    "return_pointer": "0x1001004c ->0x5132ba",
+    "control_cases": 756,
+    "compiled_hook_executions": 1093,
+    "mismatches": 0,
+    "held_mask_mutant_mismatches": 63
+  },
+  "input_initial_state": "Only source copy/hash closure expands to the minimal semantic DTO header; original1869-byte fingerprint and all comparison assertions stay unchanged. The verified summary will refresh separately after source integration.",
+  "limits": [
+    "Judge preparation while source integration is pending in main workspace. Full integration gate not yet run; do not claim green from this preparation."
+  ],
+  "changed_judge_sha256": {
+    "tools/oracles/verify_original_game_bootstrap.py": "f82d6d8c8e00d1542b68c116ab8690e0eed56c9926ccaa33745b42eefbe1593c",
+    "tests/probes/native_game_bootstrap_probe.cpp": "53bbad0381d0c77ef20bceb0e884fd4fbe5fef1cd480f3c7857ea463cd1c2373",
+    "tools/gate/profile_patches.json": "ccb667fd3f7d423ba906c0af64413ac18f67e4501e68af10b330a9511532bc3d",
+    "tools/gate/check_input_initial_state.py": "2a9de3ce38d6a1c8bef12e6c87fd8181a0888c15e5033b5c8b8b6a873f2352e1",
+    "tools/oracles/verify_original_input_initial_state.py": "4351fc2fce2d43770d9ac92a9ccb039cba507bf36b77001c1071e51bbe129dd4"
+  },
+  "judge_tests": {
+    "count": 11,
+    "exit_status": 0
+  }
+}

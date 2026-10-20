@@ -13,9 +13,9 @@ import tempfile
 # Reuse the pilot's dependency, environment, symbol and library guards unchanged.
 from check_native_frame_control import compile_closure, inspect_libraries, FORBIDDEN, ROOT, run
 
-SOURCES = ('src/input/input_initial_state.hpp', 'src/input/input_initial_state.cpp',
+SOURCES = ('src/engine/controller_values.hpp', 'src/input/input_initial_state.hpp', 'src/input/input_initial_state.cpp',
            'tests/probes/input_initial_state_probe.hpp', 'tests/probes/native_input_initial_state_probe.cpp')
-UNITS = (SOURCES[1], SOURCES[-1])
+UNITS = ('src/input/input_initial_state.cpp', 'tests/probes/native_input_initial_state_probe.cpp')
 WORKER = r'''
 import ctypes,hashlib,json,sys
 library=ctypes.CDLL(sys.argv[1])

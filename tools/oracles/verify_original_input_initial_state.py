@@ -29,7 +29,7 @@ RECORDS += [('mod', f'dream_pad_{i}', 0x1000e950 + 96 * i) for i in range(8)]
 for image, name, address in RECORDS:
     REGIONS += [(image, name + '_values', address, 36),
                 (image, name + '_previous_held', address + 44, 4)]
-SOURCES = ['src/input/input_initial_state.hpp', 'src/input/input_initial_state.cpp',
+SOURCES = ['src/engine/controller_values.hpp', 'src/input/input_initial_state.hpp', 'src/input/input_initial_state.cpp',
            'tests/probes/input_initial_state_probe.hpp',
            'tests/probes/native_input_initial_state_probe.cpp',
            'tools/oracles/verify_original_input_initial_state.py']

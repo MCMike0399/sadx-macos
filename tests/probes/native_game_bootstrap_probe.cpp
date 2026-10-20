@@ -11,11 +11,11 @@ std::uint32_t bits(float value) {
 }
 extern "C" void sadx_native_game_bootstrap(const std::uint32_t *in, std::uint32_t *out) {
     using namespace sadx;
-    std::int32_t save_phase = 0;
+    std::int32_t card_result = 0;
     std::uint32_t global_timer = 0, movie_number = 0;
     std::uint16_t game_mode = 0;
     std::int16_t rings = 0;
-    bootstrap::State state({save_phase, global_timer, rings, movie_number, game_mode});
+    bootstrap::State state({card_result, global_timer, rings, movie_number, game_mode});
     TaskScheduler tasks;
     state.cutscene_task = tasks.append_task(0, [](TaskScheduler &, const TaskHandle &) {}).task;
     std::memset(state.sequences.data(), 165, sizeof(state.sequences));
@@ -75,11 +75,11 @@ extern "C" void sadx_native_game_bootstrap(const std::uint32_t *in, std::uint32_
     append(state.character_work.records);
 }
 extern "C" std::uint32_t sadx_native_game_bootstrap_result(const std::uint32_t *in) {
-    std::int32_t save_phase = 0;
+    std::int32_t card_result = 0;
     std::uint32_t global_timer = 0, movie = 0;
     std::int16_t rings = 0;
     std::uint16_t mode = 0;
-    sadx::bootstrap::State state({save_phase, global_timer, rings, movie, mode});
+    sadx::bootstrap::State state({card_result, global_timer, rings, movie, mode});
     sadx::save::Data save;
     save.options = static_cast<std::uint8_t>(in[1]);
     state.lives = static_cast<std::int8_t>(in[2]);

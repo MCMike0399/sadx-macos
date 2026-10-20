@@ -169,7 +169,7 @@ def main():
               'source_ranges': {f'{hex(start)}-{hex(end)}': hashlib.sha256(PEImage(a.exe).read(start, end - start)).hexdigest() for start, end in ranges},
               'initialization_result_checks': len(cases), 'menu_state_checked': True,
               'shared_owners': {
-                  'card_result': {'source': '0x3b290e4', 'borrowed_from': 'GameFlowState.save_phase'},
+                  'card_result': {'source': '0x3b290e4', 'borrowed_from': 'Session.card_result_ (distinct from GameFlowState.save_phase)'},
                   'global_timer': {'source': '0x3b0f13c', 'borrowed_from': 'session frame counter'},
                   'rings': {'source': '0x3b0f0e4', 'borrowed_from': 'LogoScene/save rings'},
                   'movie_number': {'source': '0x3b2c45c', 'borrowed_from': 'GameFlowState.movie_number'},
