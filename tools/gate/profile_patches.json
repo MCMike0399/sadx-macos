@@ -1789,7 +1789,7 @@
    "condition": "FillModeBackground in 0..3 (2) -> bgscale::initialize() runs",
    "active": true,
    "source_ref": "bgscale.cpp:114",
-   "handled_by": null,
+   "handled_by": "logo_display original call plan and display_profile_640: pinned DisplayLogoScreen_r center/background wrapper is identity only at 640x480 with unit source stretch; other viewport/stretch inputs explicitly rejected. Downstream draw composition remains a declared native demo fixture, not N1.",
    "original_bytes": "83ec0c68483a9100"
   },
   {

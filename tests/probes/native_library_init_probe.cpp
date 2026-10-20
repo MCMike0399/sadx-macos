@@ -1,4 +1,4 @@
-#include "game/game_library_init.hpp"
+#include "guest/game_library_init_reference.hpp"
 #include <algorithm>
 #include <cstring>
 #include <vector>

@@ -2,10 +2,12 @@
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
  "native_library_sha256": "341dd1ecdbacdefeccd43c189027bfe288dcff526a39157d83a82053ba626ed3",
  "source_files": {
-  "src/game/game_library_init.hpp": "aa22d7ea520412cb4f805d48c171a0f7d99ef258bd6f8a6e1a4312ac282acd84",
+  "src/cpu/fidelity_float.hpp": "79ce87e96aec07a470e26bf800849a0838c11178ce765e7d01b7fa6caf0f56eb",
   "src/game/game_library_init.cpp": "6b7bd62529d898af3b1701161872c1f9c3815d51fb163b5bfbaf245d25b155fc",
-  "tests/probes/native_library_init_probe.cpp": "9fc2b911a7c3520145933162c534b90c1315e1497370fc473100f96de6791ed5",
-  "tools/oracles/verify_original_library_init.py": "3e0fba11bc41194b012c7ca708b7593e3ddc0b1a0b6ae5c212ea11d473e3f664"
+  "src/game/game_library_init.hpp": "aa22d7ea520412cb4f805d48c171a0f7d99ef258bd6f8a6e1a4312ac282acd84",
+  "src/guest/game_library_init_reference.hpp": "9094439e37567dec9dd237a6ee8ac0d53340d1ba517ec822e2cd30c0e21e9e67",
+  "tests/probes/native_library_init_probe.cpp": "a2727ca48802ebd0fc5880e653843187968a145aabaf840f778213ebbeef3696",
+  "tools/oracles/verify_original_library_init.py": "769243bb37e0055eb95b652850286109a02b3488595d8e9cbfe4a66448bdd6f3"
  },
  "original_ranges_sha256": {
   "0x781070-0x781243": "fb76ef99884cde18f4e7ca677777b652f8394221cc7a08a1963a416beca6c1ed"
@@ -90,8 +92,8 @@
  "state_traces_match": true,
  "limits": "781070 \"Sonic Library Initialize\" against its original instructions.\n\nThe whole PE is mapped; the 892940 config block and the viewport words\n3d12788/3d1278c are case inputs. Every callee is a recording fixture (hooked at\nentry; 793ef0's local rect is recorded by value; 788000 returns a scripted\nresult per try) and any nested call can stop the source; the 78c5a0 calls run\n(RET). Compared: completion, the 788000 tries left, 389d864..389d884,\n38a5dc4/38a5dc8/38a5dcc, 3d0f800, 3d0f9c0 (x87 under the case's control word)\nand the nested trace (callee, site, arguments). Not covered: the callees.\n",
  "tracked_summary": {
-  "full_sha256": "57a73b5d9f9cf98a34f49d0467dc189c5a6b0b889e93d6708d1960d276f73a4f",
-  "full_bytes": 3561,
+  "full_sha256": "6bf687a2b9feadf6112c23c41270fff365dae3435ed14ba0b3e4e11a81b06685",
+  "full_bytes": 3776,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

@@ -55,7 +55,7 @@ def main():
         m.mem_write(0x389d864,struct.pack('<9I',*c[35:44]));m.mem_write(0x38a5dc4,struct.pack('<3I',*c[44:47]));m.mem_write(0x3d0f800,struct.pack('<I',c[47]));m.mem_write(0x3d0f9c0,struct.pack('<I',c[48]))
         m.reg_write(UC_X86_REG_FPCW,c[1]);m.reg_write(UC_X86_REG_FPSW,0);m.reg_write(UC_X86_REG_FPTAG,0xffff)
         m.mem_write(STACK,struct.pack('<II',STOP,0x892940));m.reg_write(UC_X86_REG_ESP,STACK)
-        try:m.emu_start(0x781070,STOP,count=100000)
+        try:m.emu_start(0x781070,STOP,timeout=1000000)
         except unicorn.UcError as err:raise RuntimeError(f'case {n}: {err} at {m.reg_read(UC_X86_REG_EIP):#x}')
         if not st['stopped'] and m.reg_read(UC_X86_REG_EIP)!=STOP:raise RuntimeError('Source return ABI')
         g=lambda at:word(m,at);e=[0]*300;e[0]=int(not st['stopped'])
@@ -68,7 +68,13 @@ def main():
         cases+=1;key=f"completed{e[0]}:nested{e[20]}";outcomes[key]=outcomes.get(key,0)+1
         d=[i for i in range(300) if got[i]!=e[i]]
         if d:bad.append(dict(case=n,fields=d[:12],source=[hex(e[i]) for i in d[:12]],native=[hex(got[i]) for i in d[:12]]))
-    names=['src/game/game_library_init.hpp','src/game/game_library_init.cpp','tests/probes/native_library_init_probe.cpp','tools/oracles/verify_original_library_init.py']
+    root = pathlib.Path(__file__).resolve().parents[2]
+    names = ['tests/probes/native_library_init_probe.cpp',
+             'tools/oracles/verify_original_library_init.py', 'src/cpu/fidelity_float.hpp']
+    for pattern in ('src/game/game_library_init*', 'src/guest/game_library_init_reference*'):
+        names.extend(str(path.relative_to(root)) for path in sorted(root.glob(pattern))
+                     if path.is_file())
+    names = sorted(set(names))
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={x:sha((pathlib.Path(__file__).resolve().parents[2]/x).read_bytes()) for x in names},
         original_ranges_sha256={'0x781070-0x781243':sha(image.read(0x781070,0x1d3))},cases=cases,source_outcomes=outcomes,mismatch_count=len(bad),mismatches=bad[:20],state_traces_match=not bad,limits=__doc__)
     a.output.write_text(json.dumps(report,indent=1)+'\n');print(json.dumps(dict(cases=cases,outcome_kinds=len(outcomes),mismatches=len(bad))))

@@ -1,0 +1,92 @@
+{
+  "purpose": "Separate protected judge update: prepare unchanged library-init judge for semantic/reference source split; qualify bounded logo profile wrapper",
+  "source_unchanged": {
+    "src/game/game_library_init.cpp": "6b7bd62529d898af3b1701161872c1f9c3815d51fb163b5bfbaf245d25b155fc",
+    "src/game/game_library_init.hpp": "aa22d7ea520412cb4f805d48c171a0f7d99ef258bd6f8a6e1a4312ac282acd84"
+  },
+  "library": {
+    "cases": 2400,
+    "baseline_mismatches": 0,
+    "unit": "success, retry exhaustion, unknown viewport and store order pass",
+    "changes": "Probe/unit include forwarding reference header; guest archive linkage; identity inventory covers both families. Replaced legacy per-instruction cap with one-second wall timeout per AGENTS; all 2400 cases/72 outcome kinds/zero mismatches unchanged. No fixtures, comparisons or tolerances changed."
+  },
+  "logo_profile": {
+    "created": "2026-10-19",
+    "scope": "Recovered logo update and original display call plan; direct-entry assets-only Metal fixture. Native boot and N1 remain open.",
+    "source_evidence": {
+      "update": "ev_11d4646288706920f09891c29e3a1829f45042ce58a3e2ae9c0c4ebfcbbcfb03",
+      "display_initial_incomplete": "ev_65f8bf084be40a6bf48c7e52dd6da03b586c88370edd61db20daece16fee158d",
+      "display_callees": "ev_0a49ee357f5412ea62468553b013dcd8642630fa51f4336e1e73feebf08dd68f",
+      "display_continuation": "Exact PEImage bytes 0x42cb20..0x42cc6a, independently decoded by Capstone5.0.7; Ghidra falsely infers njSetTexture no-return."
+    },
+    "native_sources": {
+      "src/game/logo.hpp": "5ffa209a3554db4d6ed9b2c1654a1897cdc021b9a38702f26d67b1e7c5989732",
+      "src/game/logo.cpp": "4912adc3056a533a97845e1d5ef4528918358b7078496535ef471dd685f98be0",
+      "src/game/logo_display.cpp": "fee9feef1f2fdf00167b765e4a7fee4afefaa751a0a1a894ef9a6a87ed47f72f",
+      "tests/unit/mac_logo_demo.mm": "f0b659abb49e7526b230a310224b52893d9d5f97e15e50738df719e7158f5639"
+    },
+    "update": {
+      "development_cases": 5320,
+      "value_mismatches": 0,
+      "holdout_new_random_inputs": 10000,
+      "holdout_repeated_boundaries": 1320,
+      "holdout_value_mismatches": 0,
+      "mutant_mismatches": [
+        8,
+        374,
+        390
+      ],
+      "native_sequence_updates": 387
+    },
+    "display": {
+      "development_cases": 3936,
+      "value_mismatches": 0,
+      "exception_flag_mismatches": 1902,
+      "holdout_cases": 8544,
+      "holdout_value_mismatches": 0,
+      "holdout_exception_flag_mismatches": 5139,
+      "mutant_mismatches": [
+        192,
+        2070,
+        1013
+      ],
+      "verdict": "partial: call values/control/prefixes exact; low-six x87 flags differ"
+    },
+    "profile": {
+      "patch_va": "0x42cb20",
+      "source_files_sha256": {
+        "reference/sadx-mod-loader/SADXModLoader/bgscale.cpp": "7e522b19f3cae7a0770784279ce1d31469e25298ebd40c0fc31e970ef1576fc4",
+        "reference/sadx-mod-loader/SADXModLoader/uiscale.cpp": "e19b958986520bdecd99ba1ce46ecac932fe179a24d2f63385ad84e26a05793b",
+        "reference/sadx-mod-loader/SADXModLoader/uiscale.h": "c846f17609948ce59e20b420bd137c4cb58f3c42d7cbb9da38e80fbf74800087"
+      },
+      "supported": "display_profile_640 accepts only 640x480 and unit source stretch; center/fill wrapper is identity, other viewport/stretch combinations explicitly rejected",
+      "recommended_handled_by": "logo_display original call plan and display_profile_640: pinned DisplayLogoScreen_r center/background wrapper is identity only at 640x480 with unit source stretch; other viewport/stretch inputs explicitly rejected. Downstream draw composition remains a declared native demo fixture, not N1."
+    },
+    "visual_fixture": {
+      "artifact": "build/native-logo-demo.ppm",
+      "sha256": "17d9d2c1095e463fbeb6717e1dffe3614018016bf7f2780ea32e34bb48d6fd7d",
+      "width": 640,
+      "height": 480,
+      "source_frames": 120,
+      "texture_records": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "compared_guest_artifact": "build/app-smoke.ppm",
+      "differing_rgb_channels": 36751,
+      "total_rgb_channels": 921600,
+      "pixel_parity": false,
+      "dependencies": "Only supplied SEGALOGO_E.PVM, native game/math/texture code and shared Metal device renderer; no PE or guest runtime input. Renderer defaults/painter order explicitly fixtures."
+    },
+    "review": "Independent scene_readability agent approved bounded update/display/native visual scope; neutral logic_entry_flag name retained.",
+    "limits": [
+      "Save/task initialization and ghDrawPvrTexture/queue composition remain unported.",
+      "No full native game-mode/boot/N1 or guest pixel parity claim.",
+      "Full x87 condition/tag/stack state outside native arithmetic interface."
+    ]
+  }
+}

@@ -1,0 +1,30 @@
+{
+ "source_ranges": {
+  "0x42cb20-0x42cc6a": "e160e3c62b8b757a6b417d576f3bb197601c7ca3726b5008ee49da4dd69fb20d"
+ },
+ "native_sources": {
+  "src/game/logo.hpp": "5ffa209a3554db4d6ed9b2c1654a1897cdc021b9a38702f26d67b1e7c5989732",
+  "src/game/logo_display.cpp": "fee9feef1f2fdf00167b765e4a7fee4afefaa751a0a1a894ef9a6a87ed47f72f",
+  "tests/probes/native_logo_display_probe.cpp": "566f70ef9d7fa3e43072f2abf839bf63426233540854b313108e312fd55879ff"
+ },
+ "native_library_sha256": "ddceb240bc6f5bd5ae77dd4524821c66ac7948dadb3b781ecbbbfd5ba9f15f87",
+ "seed": 20261019,
+ "cases": 3936,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "values_match": true,
+ "flag_mismatches": 1902,
+ "passed": false,
+ "limits": [
+  "Unpatched original display body with setup/draw call fixtures.",
+  "Active profile scaling wrapper, downstream pixels and N1 unverified.",
+  "Only low-six x87 exception bits compared; full status/tag/stack outside native API.",
+  "Soft x87 and Unicorn can differ on exception flags; these remain explicit partials."
+ ],
+ "tracked_summary": {
+  "full_sha256": "8b7687b43a8af8c3ffda38d3132022d37bfb0311a8ae5b095ff97f00177595f2",
+  "full_bytes": 1052,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

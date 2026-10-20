@@ -1,0 +1,28 @@
+{
+ "source_function": "SONIC 0x42cc70 RunSegaSonicTeamLogos",
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_ranges": {
+  "0x42cc70-0x42cda7": "d1746267f542f8b24f31896b9b10f9eeaa9521f1c76a2034c11479fd24e4bb84"
+ },
+ "native_library_sha256": "41dbcff4704f1c5308fedd1e828140e5ebace2926372c094a044f4dfaee08be6",
+ "native_sources": {
+  "src/game/logo.cpp": "4912adc3056a533a97845e1d5ef4528918358b7078496535ef471dd685f98be0",
+  "src/game/logo.hpp": "4962179fad2dbeb27b35e2449e9620b811c207261c76d441187e8ac653ef34eb",
+  "tests/probes/native_logo_probe.cpp": "f12b4586e1f91cf3c5717955a0687b7650cd9c488c6de461038776c4245cb0d0"
+ },
+ "seed": 20261019,
+ "cases": 5320,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "passed": true,
+ "limits": [
+  "Object runner, profile-scaled display and texture release are fixtures.",
+  "Initialization, rendering and native N1 journey are not verified."
+ ],
+ "tracked_summary": {
+  "full_sha256": "bee31a82812f67bf86182d8d13d7fe2141e4743520856636db76bd48d58a8a16",
+  "full_bytes": 956,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}
