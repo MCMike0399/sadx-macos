@@ -51,9 +51,16 @@ NATIVE_SOURCES := \
  src/game/movie.cpp src/game/logo.cpp src/game/logo_display.cpp src/game/logo_startup.cpp src/game/save_data.cpp \
  src/runtime/engine_code_tables.cpp src/runtime/logo_renderer.cpp src/runtime/logo_scene.cpp \
  src/runtime/native_input.cpp src/runtime/movie_scene.cpp src/runtime/native_display.cpp src/runtime/native_session.cpp
+# Cleanup/title integration uses the native queue, fog and sound owners. Pending modules
+# enter this explicit production closure when their separately verified sources land.
+NATIVE_SOURCES += src/engine/ninja_sprite_queue.cpp src/engine/ninja_render.cpp \
+ src/engine/ninja_fog.cpp src/engine/ninja_fog_native.cpp src/game/sound_initial_state.cpp \
+ $(wildcard src/engine/ninja_queue_native.cpp src/game/game_view_native.cpp \
+ src/game/game_cleanup.cpp src/game/audio_playback.cpp)
 NATIVE_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(NATIVE_SOURCES))
 NATIVE_PLATFORM_OBJECTS := build/obj/platform/mac/mac_clock.o build/obj/platform/mac/mac_audio.o \
  build/obj/platform/mac/hid_switch_controller.o build/obj/platform/mac/mac_movie.o build/obj/platform/mac/metal_device_frame.o
+NATIVE_PLATFORM_OBJECTS += $(patsubst src/%.mm,build/obj/%.o,$(wildcard src/platform/mac/mac_audio_playback.mm))
 MAC_SOURCES := $(wildcard src/platform/mac/*.cpp src/platform/mac/*.mm)
 MAC_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(filter %.cpp,$(MAC_SOURCES))) $(patsubst src/%.mm,build/obj/%.o,$(filter %.mm,$(MAC_SOURCES)))
 UNIT_SOURCES := $(wildcard tests/unit/*.cpp)

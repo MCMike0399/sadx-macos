@@ -1,0 +1,13 @@
+{
+  "reason": "Declare the native queue/fog/sound closure and forthcoming cleanup modules before source integration; no judge comparisons change.",
+  "base_commit": "17f4d32",
+  "build": {
+    "command": "make -j10 build/sadx-native",
+    "exit_status": 0,
+    "log_sha256": "c7e6f8d826921547507188a97ecbf96b8977a6c538552bea4a8fd37cc52b58cc"
+  },
+  "limits": [
+    "Build preparation only; next integration gate will verify new source callers. Gate180 predates this Makefile change.",
+    "No native title or story completion claim."
+  ]
+}
