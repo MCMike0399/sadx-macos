@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "dc692dd418950a6c1806ac065936238a6e51a3ba",
-    "evidence": "reference/production-integration-20261020/native-product-build-preparation.json",
-    "evidence_sha256": "b45a1ff3fca6ffd6ab96b90a3486af43179b0cb964759ae005059243d30e3084",
-    "reason": "Declare isolated production native source and link closure"
+    "base_commit": "2eedbd3402d13b11c14dedaeceec7fe3fce57ede",
+    "evidence": "reference/production-integration-20261020/native-depth-source-identity.json",
+    "evidence_sha256": "1e3618b55af8364050ba711f3bbbe44e653901b1ddcad93fd1eeea3aa7d3ae84",
+    "reason": "Track the complete semantic projected-depth implementation without changing comparisons"
   },
   "files": {
     "Makefile": "7945a5d87886b4da8446383503a3c8fecb2a105fc6019b026d987d2700aa4864",
@@ -459,7 +459,7 @@
     "tools/oracles/verify_original_ninja_fog_initial_state.py": "51eabe0d49598dfcd288c6587cede3a37f558d64ed7a5c05c0d4ae380a51bfd2",
     "tools/oracles/verify_original_ninja_frame_calls.py": "047aee2b7c9b43349b08fc6006dbe4eb8c6d9ee2386ba1d27d3967e916730ed1",
     "tools/oracles/verify_original_ninja_memory.py": "dfa82fb9eb3863436be31336e3f92743ea8e3812480eeea25df43cc1f70dcc32",
-    "tools/oracles/verify_original_ninja_projected_depth.py": "5b971cbf5685e071f19e3d502d5633db43caf227fefaf536fd61b9063bed5480",
+    "tools/oracles/verify_original_ninja_projected_depth.py": "bf8a16f7aedd02c68ba1a9bb5fce9e866ce31520c64fe737b4cb549030672be6",
     "tools/oracles/verify_original_ninja_queue_color.py": "14a7b41b28a3889615f0f9859022156ae19e601f02d44fc511efcb37053fb1a1",
     "tools/oracles/verify_original_ninja_queue_consumer.py": "cee462bbdc3f4ae38ae14855d99ca55dffe450f639f2deafdef43fc144911b99",
     "tools/oracles/verify_original_ninja_queue_initial_state.py": "47be98d050516fd3044d4b6847634dc8b4e2a59b9f27e5a505dd88689e247594",

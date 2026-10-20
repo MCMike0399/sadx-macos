@@ -1,0 +1,19 @@
+{
+  "problem": "Projected-depth arithmetic now lives in a semantic native helper shared with its reference adapter; the existing oracle's source identity list omitted the new implementation.",
+  "change": "Add the semantic helper, its header, and directly relevant arithmetic headers/implementation to the source hashes. No execution, input, expected value, tolerance, comparison, fixture or mutation changes.",
+  "evidence": {
+    "original_judge": "tools/oracles/verify_original_ninja_projected_depth.py",
+    "new_implementation": "src/engine/ninja_projected_depth.cpp",
+    "reference_adapter": "src/guest/ninja_screen.cpp",
+    "unchanged_comparison": {
+      "cases": 4000,
+      "value_mismatches": 0,
+      "fp_flag_mismatches": 3879,
+      "verdict": "partial"
+    }
+  },
+  "limits": [
+    "The partial FP-status verdict is unchanged.",
+    "Final reports must be regenerated after this metadata correction and the implementation build."
+  ]
+}
