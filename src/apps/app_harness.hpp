@@ -188,6 +188,33 @@ inline std::string game_state_json(HleProcess& process, std::uint64_t frame) {
     } else {
         out << ",\"player\":null";
     }
+    // BossChaos0 (0x548640), ev_6fda6d361119c04a5ca9a6545c0fc2799b04e1222a66ee7fd2dcf2773efaa890:
+    // Initialization stores chaostwp; its update publishes chaoswk::HitPoint to boss_life_f.
+    // These globals are named in SADXVariablesNew.h. Observe only Chaos 0's stage;
+    // other stages may retain the shared globals after the boss has been destroyed.
+    if (s16(0x3b22dcc) != 15) {
+        out << ",\"boss\":null";
+    } else if (const auto boss = g.u32(0x3c5a7d8); !boss) {
+        out << ",\"boss\":null,\"boss_error\":\"unmapped chaostwp owner\"";
+    } else if (*boss == 0) {
+        out << ",\"boss\":null";
+    } else {
+        std::uint8_t mode = 0;
+        float position[3] = {}, life = 0;
+        if (!g.read(*boss, &mode, sizeof mode) ||
+            !g.read(*boss + 0x20, position, sizeof position) ||
+            !g.read(0x3c58158, &life, sizeof life)) {
+            out << ",\"boss\":null,\"boss_error\":\"unmapped Chaos 0 state\"";
+        } else if (!std::isfinite(life) ||
+                   !std::all_of(std::begin(position), std::end(position),
+                                [](float value) { return std::isfinite(value); })) {
+            out << ",\"boss\":null,\"boss_error\":\"non-finite Chaos 0 state\"";
+        } else {
+            out << ",\"boss\":{\"kind\":\"chaos-zero\",\"mode\":" << unsigned(mode)
+                << ",\"life\":" << f32(0x3c58158)
+                << ",\"position\":" << vector(*boss + 0x20) << "}";
+        }
+    }
     // SADXVariablesNew.h: camera_twp; SADXStructsNew.h: taskwk::ang/pos.
     // Observe the camera that actually ran, without changing it or substituting a default.
     const auto camera = g.u32(0x3b2cbb0);

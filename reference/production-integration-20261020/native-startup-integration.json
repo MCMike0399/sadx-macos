@@ -1,0 +1,1136 @@
+{
+  "schema": 1,
+  "scope": "Connected native Start through both logos and transition to Movie, plus platform and reference-story support. Full user acceptance remains incomplete.",
+  "native_journey": {
+    "native_command": [
+      "build/sadx-native",
+      "--assets",
+      "game/imported",
+      "--offscreen",
+      "--exit-after",
+      "388",
+      "--capture-directory",
+      "build/native-startup-journey/native",
+      "--capture-at",
+      "1,2,16,31,32,120,153,180,194,195,220,300,346,370,387,388"
+    ],
+    "reference_command": [
+      "build/sadx-app",
+      "--guest",
+      "reference/updated-pc-reference/game",
+      "reference/windows-system",
+      "--offscreen",
+      "--overlay",
+      "build/native-startup-journey/overlay",
+      "--script",
+      "build/native-startup-journey/reference.script"
+    ],
+    "native_app_sha256": "0a773dc525a73270ca1dc359929721dad75dbae02cd9d1fd85a134b3a1025bef",
+    "reference_app_sha256": "e9a8766095b0457f07be549f5279647535f0a2d3fe7269c36e6a6b73a79f16fb",
+    "checkpoints": [
+      {
+        "frame": 1,
+        "passed": true,
+        "problems": [],
+        "native_state": {
+          "execution": "native",
+          "frames": 1,
+          "game_mode": 24,
+          "game_state": 21,
+          "stage": 0,
+          "rings": 0,
+          "global_timer": 1,
+          "logo_frames": 0,
+          "logo_mode": 0,
+          "textures": 0
+        },
+        "native_image_sha256": "a6087ec5178c7619d8136de2aa159dde7161d56f9e4c3b899b7165935d0353d8",
+        "reference_image_sha256": "a6087ec5178c7619d8136de2aa159dde7161d56f9e4c3b899b7165935d0353d8"
+      },
+      {
+        "frame": 2,
+        "passed": true,
+        "problems": [],
+        "native_state": {
+          "execution": "native",
+          "frames": 2,
+          "game_mode": 1,
+          "game_state": 21,
+          "stage": 0,
+          "rings": 0,
+          "global_timer": 2,
+          "logo_frames": 1,
+          "logo_mode": 1,
+          "textures": 18
+        },
+        "native_image_sha256": "f32fe6df44949a014a4cebc35acba82cb8332561cae302a49ffa12dfb069c24a",
+        "reference_image_sha256": "f32fe6df44949a014a4cebc35acba82cb8332561cae302a49ffa12dfb069c24a"
+      },
+      {
+        "frame": 16,
+        "passed": true,
+        "problems": [],
+        "native_state": {
+          "execution": "native",
+          "frames": 16,
+          "game_mode": 1,
+          "game_state": 21,
+          "stage": 0,
+          "rings": 0,
+          "global_timer": 16,
+          "logo_frames": 15,
+          "logo_mode": 1,
+          "textures": 18
+        },
+        "native_image_sha256": "c5889201259cb001fde39f28e6a7de2bc0af5df243ee11c8bfaebf811a1a4935",
+        "reference_image_sha256": "c5889201259cb001fde39f28e6a7de2bc0af5df243ee11c8bfaebf811a1a4935"
+      },
+      {
+        "frame": 31,
+        "passed": true,
+        "problems": [],
+        "native_state": {
+          "execution": "native",
+          "frames": 31,
+          "game_mode": 1,
+          "game_state": 21,
+          "stage": 0,
+          "rings": 0,
+          "global_timer": 31,
+          "logo_frames": 30,
+          "logo_mode": 1,
+          "textures": 18
+        },
+        "native_image_sha256": "4b48f0e0865b728f337e68ab4eb9fd5ee94aa8a296673ac3de7c25c226754c3a",
+        "reference_image_sha256": "4b48f0e0865b728f337e68ab4eb9fd5ee94aa8a296673ac3de7c25c226754c3a"
+      },
+      {
+        "frame": 32,
+        "passed": true,
+        "problems": [],
+        "native_state": {
+          "execution": "native",
+          "frames": 32,
+          "game_mode": 1,
+          "game_state": 21,
+          "stage": 0,
+          "rings": 0,
+          "global_timer": 32,
+          "logo_frames": 31,
+          "logo_mode": 1,
+          "textures": 18
+        },
+        "native_image_sha256": "e26c4f6fd6bfba2618bc1af4237437f05c41a6edff2737103bdce8fa2c285b17",
+        "reference_image_sha256": "e26c4f6fd6bfba2618bc1af4237437f05c41a6edff2737103bdce8fa2c285b17"
+      },
+      {
+        "frame": 120,
+        "passed": true,
+        "problems": [],
+        "native_state": {
+          "execution": "native",
+          "frames": 120,
+          "game_mode": 1,
+          "game_state": 21,
+          "stage": 0,
+          "rings": 0,
+          "global_timer": 120,
+          "logo_frames": 119,
+          "logo_mode": 1,
+          "textures": 18
+        },
+        "native_image_sha256": "5784b5b1c09cf33fe763186caaed6534d5d9a287ccdbd2a72cbd8f88c099773e",
+        "reference_image_sha256": "5784b5b1c09cf33fe763186caaed6534d5d9a287ccdbd2a72cbd8f88c099773e"
+      },
+      {
+        "frame": 153,
+        "passed": true,
+        "problems": [],
+        "native_state": {
+          "execution": "native",
+          "frames": 153,
+          "game_mode": 1,
+          "game_state": 21,
+          "stage": 0,
+          "rings": 0,
+          "global_timer": 153,
+          "logo_frames": 40,
+          "logo_mode": 2,
+          "textures": 18
+        },
+        "native_image_sha256": "5784b5b1c09cf33fe763186caaed6534d5d9a287ccdbd2a72cbd8f88c099773e",
+        "reference_image_sha256": "5784b5b1c09cf33fe763186caaed6534d5d9a287ccdbd2a72cbd8f88c099773e"
+      },
+      {
+        "frame": 180,
+        "passed": true,
+        "problems": [],
+        "native_state": {
+          "execution": "native",
+          "frames": 180,
+          "game_mode": 1,
+          "game_state": 21,
+          "stage": 0,
+          "rings": 0,
+          "global_timer": 180,
+          "logo_frames": 13,
+          "logo_mode": 2,
+          "textures": 18
+        },
+        "native_image_sha256": "3d5f7978a3988cfdeac69d3a72b4b33f717b7853129a2635ee47b7a7d6536e29",
+        "reference_image_sha256": "3d5f7978a3988cfdeac69d3a72b4b33f717b7853129a2635ee47b7a7d6536e29"
+      },
+      {
+        "frame": 194,
+        "passed": true,
+        "problems": [],
+        "native_state": {
+          "execution": "native",
+          "frames": 194,
+          "game_mode": 1,
+          "game_state": 21,
+          "stage": 0,
+          "rings": 0,
+          "global_timer": 194,
+          "logo_frames": 0,
+          "logo_mode": 16,
+          "textures": 18
+        },
+        "native_image_sha256": "a6087ec5178c7619d8136de2aa159dde7161d56f9e4c3b899b7165935d0353d8",
+        "reference_image_sha256": "a6087ec5178c7619d8136de2aa159dde7161d56f9e4c3b899b7165935d0353d8"
+      },
+      {
+        "frame": 195,
+        "passed": true,
+        "problems": [],
+        "native_state": {
+          "execution": "native",
+          "frames": 195,
+          "game_mode": 1,
+          "game_state": 21,
+          "stage": 0,
+          "rings": 0,
+          "global_timer": 195,
+          "logo_frames": 1,
+          "logo_mode": 16,
+          "textures": 18
+        },
+        "native_image_sha256": "a6087ec5178c7619d8136de2aa159dde7161d56f9e4c3b899b7165935d0353d8",
+        "reference_image_sha256": "a6087ec5178c7619d8136de2aa159dde7161d56f9e4c3b899b7165935d0353d8"
+      },
+      {
+        "frame": 220,
+        "passed": true,
+        "problems": [],
+        "native_state": {
+          "execution": "native",
+          "frames": 220,
+          "game_mode": 1,
+          "game_state": 21,
+          "stage": 0,
+          "rings": 0,
+          "global_timer": 220,
+          "logo_frames": 26,
+          "logo_mode": 16,
+          "textures": 18
+        },
+        "native_image_sha256": "d2bdce2a6dbbbda7fc4f4669c8580842c3bd5bf20ce7e3b4d1e2723f15046f39",
+        "reference_image_sha256": "d2bdce2a6dbbbda7fc4f4669c8580842c3bd5bf20ce7e3b4d1e2723f15046f39"
+      },
+      {
+        "frame": 300,
+        "passed": true,
+        "problems": [],
+        "native_state": {
+          "execution": "native",
+          "frames": 300,
+          "game_mode": 1,
+          "game_state": 21,
+          "stage": 0,
+          "rings": 0,
+          "global_timer": 300,
+          "logo_frames": 106,
+          "logo_mode": 16,
+          "textures": 18
+        },
+        "native_image_sha256": "229b2020988550087057dbec8368216a6013f1f98c60cad240ed023c1bbcc876",
+        "reference_image_sha256": "229b2020988550087057dbec8368216a6013f1f98c60cad240ed023c1bbcc876"
+      },
+      {
+        "frame": 346,
+        "passed": true,
+        "problems": [],
+        "native_state": {
+          "execution": "native",
+          "frames": 346,
+          "game_mode": 1,
+          "game_state": 21,
+          "stage": 0,
+          "rings": 0,
+          "global_timer": 346,
+          "logo_frames": 40,
+          "logo_mode": 17,
+          "textures": 18
+        },
+        "native_image_sha256": "229b2020988550087057dbec8368216a6013f1f98c60cad240ed023c1bbcc876",
+        "reference_image_sha256": "229b2020988550087057dbec8368216a6013f1f98c60cad240ed023c1bbcc876"
+      },
+      {
+        "frame": 370,
+        "passed": true,
+        "problems": [],
+        "native_state": {
+          "execution": "native",
+          "frames": 370,
+          "game_mode": 1,
+          "game_state": 21,
+          "stage": 0,
+          "rings": 0,
+          "global_timer": 370,
+          "logo_frames": 16,
+          "logo_mode": 17,
+          "textures": 18
+        },
+        "native_image_sha256": "43cb9c6ae879ad6198e2399c5c6e303d96026265d1b402d3cbf5b25d2a5663bb",
+        "reference_image_sha256": "43cb9c6ae879ad6198e2399c5c6e303d96026265d1b402d3cbf5b25d2a5663bb"
+      },
+      {
+        "frame": 387,
+        "passed": true,
+        "problems": [],
+        "native_state": {
+          "execution": "native",
+          "frames": 387,
+          "game_mode": 1,
+          "game_state": 21,
+          "stage": 0,
+          "rings": 0,
+          "global_timer": 387,
+          "logo_frames": 0,
+          "logo_mode": 15,
+          "textures": 18
+        },
+        "native_image_sha256": "a6087ec5178c7619d8136de2aa159dde7161d56f9e4c3b899b7165935d0353d8",
+        "reference_image_sha256": "a6087ec5178c7619d8136de2aa159dde7161d56f9e4c3b899b7165935d0353d8"
+      },
+      {
+        "frame": 388,
+        "passed": true,
+        "problems": [],
+        "native_state": {
+          "execution": "native",
+          "frames": 388,
+          "game_mode": 8,
+          "game_state": 21,
+          "stage": 0,
+          "rings": 0,
+          "global_timer": 388,
+          "logo_frames": 0,
+          "logo_mode": 0,
+          "textures": 0
+        },
+        "native_image_sha256": "a6087ec5178c7619d8136de2aa159dde7161d56f9e4c3b899b7165935d0353d8",
+        "reference_image_sha256": "a6087ec5178c7619d8136de2aa159dde7161d56f9e4c3b899b7165935d0353d8"
+      }
+    ],
+    "passed": true,
+    "limits": [
+      "Covers Start, both logos/fades, and transition to Movie only.",
+      "WinMain equivalence, movie/title, native story and gameplay FPS remain open."
+    ]
+  },
+  "source_identities": {
+    "src/apps/audio_qualify.mm": "1a4a3d38bbdbd72cb57eda40354de47cb9b4e9ac7b12e643fc2f033c9c22efdc",
+    "src/apps/controller_qualify.mm": "dce22a9ac083f13b8502d3b3c53b547f1fc8cf2df9d7b5616380f58e9755d484",
+    "src/apps/sadx_native.mm": "9c979d651e0558ba23372c7c1c1e3a3a727e73786ae62a7ad1992b9ab8945290",
+    "src/engine/character_pack.cpp": "4c5d7980c40af6860502ae838accb464b8e281f03ddc64dcd3ce6334a6a33f7d",
+    "src/engine/character_pack.hpp": "d05b53782085d0f406690f7e6f1946fad86f83b0f4c1555327828ad42dc40ca0",
+    "src/engine/character_resources.hpp": "33e1c852d47b128bda60d0fdaab6d8fd1120113f752bf212be4009a190d11928",
+    "src/engine/ninja_projected_depth.cpp": "12378c9eaf694af14e338affa098653cac077bfeb08fe53930b993f24a43e646",
+    "src/engine/ninja_projected_depth.hpp": "1495f6c93c60cfbc77ff6c7e03244402c7042eb3716dd033ac405184b627c7fd",
+    "src/engine/ninja_view_native.cpp": "8bf6c91240be8edaa6623768c8435ed181aa5ee4c477bb8f0e0207bf0ae8ce43",
+    "src/engine/ninja_view_native.hpp": "db574ecb5115ebc24f9b60d7eeeb37da0edec1ba2106f2cf8246437591d59d93",
+    "src/engine/pvr_device.cpp": "446a29ae3631d4379b046708742bf08e8ab1e20894b495385566b9f02e56e085",
+    "src/engine/pvr_device.hpp": "c3e7ad6e4ab98a5c76154b1d233819216acfd6f150976593837077cb64883170",
+    "src/engine/pvr_draw.cpp": "7a5d395287633bcad53146acd0adfae953c10787d7312edc06ac4554e76d63b3",
+    "src/engine/pvr_draw.hpp": "fb5310eab3b9d2882a9a244852b414f77d1cfd3e3dfb9ff499674bb3f25b3f6c",
+    "src/game/game_bootstrap.cpp": "3461ee0394189845c5d7d54b39179b2870fd35508c355c80129b7e755f3d7670",
+    "src/game/game_bootstrap.hpp": "56291ee302a24f01dfd02fe696eac11b20ed5425928e026e320b9419c4d74481",
+    "src/game/game_mode_services.hpp": "3e9a9663e178cc0295744c58d8ccb571aba7d17a55cba7290ec3258ae2ae7f26",
+    "src/game/logo_startup.cpp": "3a73866f8001a6bd2a7488a4da56d1aa73ba76d15dbe6d32c816719aea671fdf",
+    "src/game/logo_startup.hpp": "4534870b27dc73c29d89f69d12122e1a5eb34b31085813a7631d3f59d6133bef",
+    "src/game/save_data.cpp": "d0175338a858b42d58bda6155d4886a86a590d874d19c46e945c4b3d235f9eb4",
+    "src/game/save_data.hpp": "6eb46f3df135b1ec73fb9979ba7e3a8188524994c67ea66b59345c23326cd61e",
+    "src/platform/mac/hid_switch_controller.hpp": "55996d9cf11be54227eccca1c148be093f0b6ab83d0d03c03b791e66bafd18ed",
+    "src/platform/mac/hid_switch_controller.mm": "7bff158c87bf9a4c84176953b7d51d516772141e3bc2bccdf11bb59dd5511b99",
+    "src/platform/mac/mac_audio.hpp": "c2fd6d31b65486ccbe73e24c891c2333945785214d9270d120648773b42bf49c",
+    "src/platform/mac/mac_audio.mm": "bddfd52b6e114445c1e6aee67c20244cdbef6a448420d61d19bc99f86566db68",
+    "src/runtime/logo_renderer.cpp": "eda18ec06a5e6254ce6d8b75b9797bc01837fb631d059b099ea9641a4c5ed3a8",
+    "src/runtime/logo_renderer.hpp": "01e4688cabe84abc066d91e03a85d2592ef61a4b1550f0103eaf3aa455f2d2bf",
+    "src/runtime/logo_scene.cpp": "a226781e325620ec2453b971735b0ae9899d8d33218a89b1b523372a9fecc360",
+    "src/runtime/logo_scene.hpp": "ba9e4df0c61ee260f42f4e229d9165361daafc43109c337db5bc59ab0657ee12",
+    "src/runtime/native_display.cpp": "aa3d4989e0de000603a6a8e3eae099077b14ea6d2427686720d85440758c2f60",
+    "src/runtime/native_display.hpp": "211f29717864c0a800f6dbfeb2146c9b43a193e3d68465910a91598499802788",
+    "src/runtime/native_session.cpp": "baf2bf29cefc4b324f6af4d9969fc1508031ffa35d43bdfc53b0f599edde2cf4",
+    "src/runtime/native_session.hpp": "2d11e619e672ebdf5b63d19b7836998126f36d9bda0c4715e733080cae7cf103",
+    "tests/probes/native_game_bootstrap_probe.cpp": "62853b8f6ec1fab1fcc46530a7c4cc7c26b8d7be0e213949418e37d24173f5e7",
+    "tests/probes/native_logo_startup_probe.cpp": "87d4f0e3c1dfc8cf2c4f8b89aa595c191de181d4c34ba699b3488e8051447c06",
+    "tests/probes/native_ninja_view_native_probe.cpp": "f9dbf50b78cd98aa55907032e94ca707c641e8a4c5de96df917950f9756d66e3",
+    "tests/probes/native_pvr_draw_probe.cpp": "4e6570cf92c427980037ad26410b6a4bbf9e4d53ba8d363fe4580550c2fb124d",
+    "tests/probes/native_save_data_probe.cpp": "8f12f8624c250cb5f9355d63651351b61ee5920b0812b194fd3849297aea78d0",
+    "tests/python/test_character_import.py": "d8c5725ba98c470b424a88e84783298c874aa91a10da920ef6c550ad5ed93b5f",
+    "tests/python/test_import_audio.py": "b47832a63d48404cde275a7723ff3d1f1897d212f2d3a590d1199d173efa4ae6",
+    "tests/unit/character_pack.cpp": "5146a7dea132d4629385695fa41654b7a87700c82d6f9410b1d168b9eec8cf49",
+    "tests/unit/game_bootstrap.cpp": "c9d471ec30b0138d8be30d632b19ae3c5e5b9b7f50a8c60316cded7357f12fc7",
+    "tests/unit/hle_story_state.cpp": "8de68998c68c8035f8c0f28bb80b9535669186bb869a79dc84fe68d96885254d",
+    "tests/unit/hle_task_inactive_lifetime.cpp": "45cf3a4eb1149d4210c6cb88c1bbbf5bf316cb51982060d17da9636d619ccfb9",
+    "tests/unit/hle_xinput_vibration.cpp": "b29677addbe00f70dc2a2ad72b91935ae8a30ff36a96aba81c903be519d3f235",
+    "tests/unit/mac_audio.mm": "676cfc8cb12f320803c8842952b09245c01df395965d5c588e4ddfc53a477bc1",
+    "tests/unit/mac_native_logo_scene.mm": "28da9e229c2fc4d705ce742b46de0e543941ea522b9b48a6bea9c98deb81a8bf",
+    "tests/unit/mac_switch_backend.mm": "41bfa327bd9b9fa12413edbf57fd83f62472ab43adc6cb37a6f144b96f2eca88",
+    "tests/unit/mac_switch_xinput.mm": "6c5f12542e92c8df54e5233fa12e6e9216357bfc259a9b49eac7079ae53d99ff",
+    "tests/unit/native_logo_scene.cpp": "524e00cab82ee3e7f8824fb11ff15aaa2f7ec27c75033c5e77c7a748cada34c6",
+    "tests/unit/pvr_draw.cpp": "a365f59158bb30850dd1e5ccd4e22764e74cfcc925ca492a5a284c3687345849",
+    "third_party/native_controller/LICENSE-SDL3.txt": "1c040b8271b37e5076359f8fd54240e371114112924d2df81ef87c7d6a1dfdfd",
+    "third_party/native_controller/LICENSE-libusb.txt": "5df07007198989c622f5d41de8d703e7bef3d0e79d62e24332ee739a452af62a",
+    "third_party/native_controller/build.py": "b9e6e3af6fed4989cff6f09036fdfff3de3236eb84236a2d1f4d193cadc922e8",
+    "third_party/native_controller/shared-iohid.patch": "4e93f54bae2219374d49c53621e48afbad2b476dca2e3d71f4a51e17503dcc65",
+    "third_party/native_controller/upstream.json": "9e9eedfc05f4de10de05f7832d257c6ac816d09604a777d350fece08d77bb916",
+    "tools/import/character_actions.py": "cd9b5f14bb8784b4dcdac62105d53e6486cb9f4ed9d3fb1933dc39f6afc65566",
+    "tools/import/native_assets.py": "241a8791a1fce6d0dc730ea76901b131c9b78d5b8dceded58cd23ada87de5d1e",
+    "tools/journey/compare_native_startup.py": "22abf54348d38620e18e2d101bc4a5ca747300510e11f3bc7cae950b7caea308",
+    "tools/journey/replay_story_route.py": "1a2e33879651fd9c8401e618fb216f687fa5f522f5910d5028b95065e6929769",
+    "tools/journey/sonic_chaos_zero_death_retry.json": "3c547f02879a8dcc9516853135db9c14c4553aaa59dc8634785132bb8f556616",
+    "tools/journey/sonic_story_chaos_zero.json": "5300acaf3f1e852abc11c36a4c1e6d28ca92176e87f324e0ec8cecd3927b5ed5",
+    "tools/journey/sonic_story_to_emerald_coast.json": "ab669e1bd8dec36d38530e722a54eb7ee548e6e563f50856ebe192bd14374d46",
+    "tools/lib/import_audio.py": "91f0db9f658c306a4a5637b4180c4e0d6033da72d927f1ba59c18965e5a49e30",
+    "src/apps/app_harness.hpp": "bed2aa6f5d0b66161f52c23a3305dc705737180c33d84683a06b0d18abb682c2",
+    "src/apps/sadx_app.mm": "383d27b089638e3a0960eda76291fca3cb201e954df31598ab428a97ee337fca",
+    "src/cpu/fidelity_float.hpp": "f8ab14de7dc01f0d054ce4098e61af34b7e5ba39f2281fc506be9d1864869dcb",
+    "src/game/game_mode.cpp": "8f830dabd7b2f3e594333799b47af001a6afebb7548ec2e95119b45c9dae5a43",
+    "src/game/game_mode_internal.hpp": "ff11b20acc87537c272eb42fbb1b274f7329f0492b6ed7cd9ed82ddd6bb54449",
+    "src/game/game_mode_native.cpp": "0b851e4ff34f4ef7554b866f62df3692d73f98d7ffe084f019aabf3ee4917e34",
+    "src/guest/ninja_screen.cpp": "b4c6ebe92ba45852e7a046234b2f03edec02ddf21a4f4d73cc7999275c0fe408",
+    "src/hle/hle_task_bridge.cpp": "10818587a4542bc7794138c8589fb17b2ff89afaa4b766e6fc8219f3160922a4",
+    "src/hle/hle_xinput.cpp": "7ed34c51c2e511b35c177007421994ecc330015c057dbd974e16a6102a09cbd0",
+    "src/hle/hle_xinput.hpp": "ffa67a84f491056c70770b5244c03eb1084d78dc230f31e1b5c24536a40b958e",
+    "src/platform/mac/mac_xinput.hpp": "3f8f53865af0bc46fbc23bf4d57dc93de38ceb6ba47abf392b9ee93604eb85b8",
+    "src/platform/mac/mac_xinput.mm": "51a3725255f1247b23940e8ab698bb582e311418bcdb92d670ce0f5512fb8e43",
+    "tests/unit/manifest.tsv": "0575ad42eabee02d9a48887eaf4bdb70f363cb16741a858448bffab037a87cf6"
+  },
+  "oracles": {
+    "logo_startup": {
+      "path": "build/oracles/logo_startup.json",
+      "sha256": "9eaea2bb5ff77f29f0283b75887277bb9e64e3d2eb25bdf4da3159fcc34514e1",
+      "result": {
+        "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+        "native_library_sha256": "42711a6f5cb136fb4b090c8d37d738a5836fb6b6748bfd0b823bd8650b7b4cc8",
+        "seed": 20261020,
+        "cases": 1338,
+        "mismatches": 0,
+        "passed": true
+      }
+    },
+    "save_data": {
+      "path": "build/oracles/save_data.json",
+      "sha256": "8541a81ad7536a5ef07390c065e2db84c96197ff3b1adc8fa54fd9f64a48329d",
+      "result": {
+        "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+        "input_mod_sha256": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+        "profile_patch": {
+          "site": "0x42d52d",
+          "target": "0x10009240",
+          "replacement_bytes": "c684246a02000001ff25dcb30010"
+        },
+        "native_library_sha256": "f3007f668b8261d4c089dc6a335312835208ec0a9f1cef4bbc6e7ffbeec0d865",
+        "seed": 20261020,
+        "cases": 1029,
+        "initialization_cases": 24,
+        "checksum_cases": 1005,
+        "initial_save_sha256": "e3789a332281fc97514f1de73443495871df6ac2237f249259220ae0277dc5ec",
+        "mismatches": 0,
+        "passed": true
+      }
+    },
+    "game_bootstrap": {
+      "path": "build/oracles/game_bootstrap.json",
+      "sha256": "d35be8d49792807ebbc769e44ad86c077e90bde9217d304d41c3e132620f84be",
+      "result": {
+        "cases": 418,
+        "seed": 20261020,
+        "mismatches": 0,
+        "passed": true,
+        "native_library_sha256": "2fa1e8d9e3ccdc22c3d7fde0fa25c7b9bbc1931b23991b84780991c3b7293720",
+        "initialization_result_checks": 418,
+        "menu_state_checked": true,
+        "shared_owners": {
+          "card_result": {
+            "source": "0x3b290e4",
+            "borrowed_from": "GameFlowState.save_phase"
+          },
+          "global_timer": {
+            "source": "0x3b0f13c",
+            "borrowed_from": "session frame counter"
+          },
+          "rings": {
+            "source": "0x3b0f0e4",
+            "borrowed_from": "LogoScene/save rings"
+          },
+          "movie_number": {
+            "source": "0x3b2c45c",
+            "borrowed_from": "GameFlowState.movie_number"
+          },
+          "game_mode": {
+            "source": "0x3b22de4",
+            "borrowed_from": "loop game mode"
+          },
+          "menu_mode": {
+            "source": "0x3b2a2fa",
+            "borrowed_from": "GameFlowState.tutorial_variant"
+          }
+        }
+      }
+    },
+    "pvr_draw": {
+      "path": "build/oracles/pvr_draw.json",
+      "sha256": "c63f6f0d6a350005778905174d88f1504882937e9da2d0c4836012be9324ce63",
+      "result": {
+        "cases": 3957,
+        "seed": 20261020,
+        "mismatches": 0,
+        "flag_mismatches": 1932,
+        "values_match": true,
+        "passed": false,
+        "native_library_sha256": "6e8bf3b51780a2e3007fd61f2b65a86a71aa62b4fff7224a069a1f2fe04bae64"
+      }
+    },
+    "ninja_view_native": {
+      "path": "build/oracles/ninja_view_native.json",
+      "sha256": "4ce3730318aea1b4da3ce5df607f9ebf2cbd5159466285e2527b1cf8251c7014",
+      "result": {
+        "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+        "native_library_sha256": "3b91d591bcad8b7820d7cb576a46e3d9a1d2aca2d606877d5a15e61e9031bd29",
+        "original_ranges_sha256": {
+          "0x781570-0x7815b4": "bb1c80663b208d473155332f93defa96f2e81213be4aa2d8dcecf324f7175208",
+          "0x781250-0x781565": "66ed7c49e203c698937fd0e36a3cfb1edb66387d8c3f3ab90b7de6233d7bf7be",
+          "0x791170-0x7912d8": "b53163841b3a4b08636fc389fcabc81044a6b4146e48a332189360aeb0634e44",
+          "0x787e30-0x787e4b": "8b88c9438ff69fce2a739a9511c48ecef0c173efa3c822362f2bc41ad2b91792",
+          "0x7716df-0x771773": "798e8ec191de74f25faf5c83f2fb8a55e9cf5154abf2c2ac7a45ae23c1f519d6"
+        },
+        "dispatch_seed": {
+          "0x389b784": "0x774310",
+          "0x389b7c0": "0x7757e0"
+        },
+        "profiles": {
+          "primary": {
+            "cases": 3000,
+            "native_failures": 0,
+            "value_mismatches": 0,
+            "field_mismatches": {},
+            "examples": []
+          },
+          "seeded": {
+            "cases": 3000,
+            "native_failures": 0,
+            "value_mismatches": 0,
+            "field_mismatches": {},
+            "examples": []
+          }
+        },
+        "seeded_values_match": true,
+        "primary_values_with_unicorn_transcendentals_match": true,
+        "unchanged_judge_sha256": "a5d22b42004b142534ff8e994dee32352e8031a941e5789ba9368161416b125f",
+        "source_identity_adapter": "Run the unchanged original view judge against the semantic native view probe.\n\nCase generation, comparisons, numeric models and exit status are delegated intact.\nOnly source identities are amended to describe the implementation actually linked."
+      }
+    },
+    "game_mode": {
+      "path": "build/oracles/game_mode.json",
+      "sha256": "0cc40c584a2473eeed1e310cbefded1ffebee7b2edb932abf19b7008be68a49f",
+      "result": {
+        "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+        "native_library_sha256": "22396cb2dbc5f003fdb86f5d893a6664966a7b28ad12137fc89327d449b95469",
+        "original_range_sha256": "09f9d83f6875ff84677c411a81e573d66feb815e538e15847e1e11bfb653a78f",
+        "cases": 24000,
+        "distinct_call_site_paths": 252,
+        "case_sha256": "05c8ac3db56f68dcd6c7cb7334699f164bf2803b602a6694ec4dd7077f6d2ea0",
+        "source_outcomes": {
+          "mode0x0:failure0": 790,
+          "mode0x0:failure3": 14,
+          "mode0x10:failure0": 848,
+          "mode0x10:failure3": 7,
+          "mode0x11:failure0": 811,
+          "mode0x11:failure1": 6,
+          "mode0x11:failure3": 16,
+          "mode0x12:failure0": 867,
+          "mode0x12:failure1": 1,
+          "mode0x12:failure3": 4,
+          "mode0x13:failure0": 781,
+          "mode0x13:failure1": 2,
+          "mode0x13:failure3": 13,
+          "mode0x14:failure0": 849,
+          "mode0x14:failure3": 5,
+          "mode0x15:failure0": 809,
+          "mode0x15:failure3": 20,
+          "mode0x16:failure0": 823,
+          "mode0x16:failure3": 7,
+          "mode0x17:failure0": 832,
+          "mode0x17:failure3": 5,
+          "mode0x18:failure0": 780,
+          "mode0x18:failure3": 6,
+          "mode0x19:failure0": 809,
+          "mode0x19:failure3": 6,
+          "mode0x1:failure0": 834,
+          "mode0x1:failure3": 12,
+          "mode0x1a:failure0": 867,
+          "mode0x1a:failure3": 7,
+          "mode0x1b:failure0": 897,
+          "mode0x1b:failure3": 3,
+          "mode0x2:failure0": 838,
+          "mode0x2:failure3": 9,
+          "mode0x3:failure0": 857,
+          "mode0x3:failure3": 11,
+          "mode0x4:failure0": 892,
+          "mode0x4:failure3": 3,
+          "mode0x5:failure0": 823,
+          "mode0x5:failure3": 4,
+          "mode0x6:failure0": 827,
+          "mode0x6:failure3": 3,
+          "mode0x7:failure0": 880,
+          "mode0x7:failure3": 3,
+          "mode0x7fffffff:failure0": 87,
+          "mode0x80000000:failure0": 118,
+          "mode0x80000000:failure3": 1,
+          "mode0x8:failure0": 859,
+          "mode0x8:failure3": 10,
+          "mode0x9:failure0": 878,
+          "mode0x9:failure3": 5,
+          "mode0xa:failure0": 831,
+          "mode0xa:failure3": 10,
+          "mode0xb:failure0": 801,
+          "mode0xb:failure1": 1,
+          "mode0xb:failure3": 29,
+          "mode0xc:failure0": 811,
+          "mode0xc:failure1": 4,
+          "mode0xc:failure3": 10,
+          "mode0xd:failure0": 873,
+          "mode0xd:failure3": 9,
+          "mode0xe:failure0": 825,
+          "mode0xe:failure3": 5,
+          "mode0xf:failure0": 834,
+          "mode0xf:failure3": 4,
+          "mode0xffffffff:failure0": 113,
+          "mode0xffffffff:failure3": 1
+        },
+        "mismatch_count": 0,
+        "mismatches": [],
+        "order_arguments_stores_boundaries_match": true
+      }
+    },
+    "ninja_projected_depth": {
+      "path": "build/oracles/ninja_projected_depth.json",
+      "sha256": "5e6d47f385ed442f8ca49f5de85429f6f0963c998234f48f9e4ab048248243c0",
+      "result": {
+        "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+        "native_library_sha256": "b0616996838e9a643003a948df78c34e716b29097322e774cef3fa3248a41d6a",
+        "original_ranges_sha256": {
+          "0x78dbe0-0x78dc49": "700f37d11ed7607388f880c582b0dd5e37286c441dd93c5d13d85bea99be5af5",
+          "0x772615-0x7727a2": "92b14c0c20d229007b58ad27ce5d457047e2a00f2c10785e2f9a6ef80205f430",
+          "0x774150-0x774243": "2e4a96d6d2c559f1aebccd08e4050963b11fd68fb458f536f55d35c24c14ad27",
+          "0x774310-0x774456": "63512349cc3bd37f37668d4d47d8fabe516e1ceb56fc824ee2b472a841bbe2db",
+          "0x770295": "a25b6b27a2f21f8b9572ec660c2512034e5ab745b00d25e5f59f26427496be46"
+        },
+        "cases": 4000,
+        "source_outcomes": {
+          "small": 880,
+          "divided": 2786,
+          "near": 325,
+          "nan": 9
+        },
+        "mismatch_count": 0,
+        "mismatches": [],
+        "state_traces_match": true,
+        "fp_flag_mismatches": 3879,
+        "exception_flags_match": false
+      }
+    }
+  },
+  "heldout": {
+    "save-data-holdout.json": {
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "input_mod_sha256": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+      "profile_patch": {
+        "site": "0x42d52d",
+        "target": "0x10009240",
+        "replacement_bytes": "c684246a02000001ff25dcb30010"
+      },
+      "source_ranges": {
+        "0x42d3b0-0x42d622": "9ed9c9124a6a40b3f8c83c1c267a0b1b5652b2f02b7e15b16d3c08b3173f75d0"
+      },
+      "native_sources": {
+        "src/game/save_data.hpp": "6eb46f3df135b1ec73fb9979ba7e3a8188524994c67ea66b59345c23326cd61e",
+        "src/game/save_data.cpp": "d0175338a858b42d58bda6155d4886a86a590d874d19c46e945c4b3d235f9eb4",
+        "tests/probes/native_save_data_probe.cpp": "8f12f8624c250cb5f9355d63651351b61ee5920b0812b194fd3849297aea78d0"
+      },
+      "native_library_sha256": "f3007f668b8261d4c089dc6a335312835208ec0a9f1cef4bbc6e7ffbeec0d865",
+      "seed": 724811,
+      "cases": 1053,
+      "initialization_cases": 24,
+      "checksum_cases": 1029,
+      "initial_save_sha256": "e3789a332281fc97514f1de73443495871df6ac2237f249259220ae0277dc5ec",
+      "mismatches": 0,
+      "first_mismatches": [],
+      "passed": true,
+      "limits": [
+        "Tests initial save record and CRC; persistence and story progression need journeys.",
+        "Compiler security-cookie epilogue is bypassed; all save callees execute.",
+        "Pinned Input default-rumble replacement executes from the actual DLL."
+      ]
+    },
+    "logo-startup-holdout.json": {
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "source_ranges": {
+        "0x42c730": "55bf4ba6b5924e96f760340371a2eab390a4546d471b242a34e3d8bea43c08f5",
+        "0x42c7b0": "0aaf5fa89f446041e4bec2d10ef0f24c57706a9a963788c37eccc3f10f430743"
+      },
+      "native_sources": {
+        "src/game/logo_startup.hpp": "4534870b27dc73c29d89f69d12122e1a5eb34b31085813a7631d3f59d6133bef",
+        "src/game/logo_startup.cpp": "3a73866f8001a6bd2a7488a4da56d1aa73ba76d15dbe6d32c816719aea671fdf",
+        "tests/probes/native_logo_startup_probe.cpp": "87d4f0e3c1dfc8cf2c4f8b89aa595c191de181d4c34ba699b3488e8051447c06"
+      },
+      "native_library_sha256": "42711a6f5cb136fb4b090c8d37d738a5836fb6b6748bfd0b823bd8650b7b4cc8",
+      "seed": 724811,
+      "cases": 1362,
+      "mismatches": 0,
+      "first_mismatches": [],
+      "passed": true,
+      "limits": [
+        "Callees are fixtures; verifies order, arguments, stores and failure prefixes.",
+        "Full save initialization, rendering and native boot need integration checks."
+      ]
+    },
+    "pvr-draw-holdout.json": {
+      "cases": 7038,
+      "seed": 724811,
+      "mismatches": 0,
+      "first_mismatches": [],
+      "flag_mismatches": 4406,
+      "values_match": true,
+      "passed": false,
+      "native_sources": {
+        "src/engine/pvr_draw.hpp": "fb5310eab3b9d2882a9a244852b414f77d1cfd3e3dfb9ff499674bb3f25b3f6c",
+        "src/engine/pvr_draw.cpp": "7a5d395287633bcad53146acd0adfae953c10787d7312edc06ac4554e76d63b3",
+        "src/engine/pvr_device.hpp": "c3e7ad6e4ab98a5c76154b1d233819216acfd6f150976593837077cb64883170",
+        "src/engine/pvr_device.cpp": "446a29ae3631d4379b046708742bf08e8ab1e20894b495385566b9f02e56e085",
+        "tests/probes/native_pvr_draw_probe.cpp": "4e6570cf92c427980037ad26410b6a4bbf9e4d53ba8d363fe4580550c2fb124d"
+      },
+      "native_library_sha256": "6e8bf3b51780a2e3007fd61f2b65a86a71aa62b4fff7224a069a1f2fe04bae64",
+      "source_ranges": {
+        "0x4338d0-0x433c8b": "92c0db90ce7a019cd734fb633c1791e895c7317a883daf41c185c05d39fe5449",
+        "0x4071c0-0x4072e5": "5ecf3b3347f236b654f04168b584e9b3fae9b973f1ae71df832137feb0c9db3d",
+        "0x432ea0-0x432f40": "12a8a13da4294f6dce9d444e6d75afc04b200b27c2e3ea7fd4c516507609bfb7",
+        "0x432df0-0x432e9c": "e0226ab6988145475fb92e705baab61d81221b2973bf84c2d3f165db4c9df426",
+        "0x432f40-0x432f83": "e16a07d1083a79e7efc196fb73422ecb9be19c4f2da39ff774ebfdae9eeb72d0",
+        "0x433010-0x43305d": "533b9e76aadf8478f6a58e8e7798d2cf75c098e03b5d6ec4fa1adedacf0c7ed2",
+        "0x791860-0x791933": "51de76d578682c5aa579292bac9765bd8ee8f879010742c685c2b6c5df445629",
+        "0x7943f0-0x7944a5": "e183b711f31e6d0aa767982a29ecdda0a90737ca7f86a8578dd4a9d8fe3c18df"
+      },
+      "limits": [
+        "Pinned loader GVR alpha-mask patch applied at 0x433c56.",
+        "Valid anchors only; invalid anchors read uninitialized source stack.",
+        "Texture metadata and scratch allocation are supplied fixtures; downstream Ninja draw calls are observed, device pixels are not certified.",
+        "Low-six FP exception flags compared separately."
+      ]
+    },
+    "game-bootstrap-holdout.json": {
+      "cases": 1186,
+      "seed": 724811,
+      "mismatches": 0,
+      "first_mismatches": [],
+      "passed": true,
+      "native_library_sha256": "9093e30c868169041cecdbe5e1a943f1c92ab8b01ced81af20d58a6e75534ab6",
+      "native_sources": {
+        "src/engine/character_resources.hpp": "33e1c852d47b128bda60d0fdaab6d8fd1120113f752bf212be4009a190d11928",
+        "src/game/game_bootstrap.hpp": "56291ee302a24f01dfd02fe696eac11b20ed5425928e026e320b9419c4d74481",
+        "src/game/game_bootstrap.cpp": "3461ee0394189845c5d7d54b39179b2870fd35508c355c80129b7e755f3d7670",
+        "tests/probes/native_game_bootstrap_probe.cpp": "62853b8f6ec1fab1fcc46530a7c4cc7c26b8d7be0e213949418e37d24173f5e7"
+      },
+      "source_ranges": {
+        "0x415000-0x415041": "0f40d8a13e1f5f459c34143687410f9a5740dc1e9d7c72d044e837d38976b180",
+        "0x414470-0x4144c8": "e78e1e4a1483c55c16c6ea9c6d8778aa01090775c267062ee1389524e9b684d1",
+        "0x46b230-0x46b2c0": "6ba1ba7b6fb1828c5100640797a51903764bcb1d31a9a9acd67e41d843a5dce4",
+        "0x413300-0x413379": "a9f62b06d6cae1a7c7d336fdf3421086d9d7ec920f1afb56b1c21064f2f96eaa",
+        "0x413c00-0x413c90": "aec446cd5abe5df7e4b07af9ce8e54772bb3402fa9a47820ddfe719656766160",
+        "0x494820-0x49483e": "5b036eae6c56d56f325a0b2b042f528e786ea857c26329385a88215125029f62",
+        "0x421f90-0x421fae": "920deef3c1bad7b36508e2eaff74e3eae3c5650744e76d2c2d64f686e6c4a93c",
+        "0x427f10-0x427f4a": "8e1d94b51b42e1269637a3fddf3205eadd82d63b7a23877770176133f85e5ca0",
+        "0x427ee0-0x427eee": "700e0e9fc71912835b2a4af836aac99061a6d3fa1fc1e6b772eceed6da9aa24b",
+        "0x42f5d0-0x42f606": "edd17f3236ea8c8023d060058458f2031476a9eb0b733572d606348ce7609b68",
+        "0x43b490-0x43b4bb": "2cdd66d0b45e599ab43a5cec7c58d99d8ae9cd033569f12da01def59ca52a158",
+        "0x42cea0-0x42cec2": "0c5e845a6f9f800fbd93d518282caaef2e6c151600dae0b7e5e50a344adec5bc",
+        "0x421f70-0x421f76": "3ad3b8de377ca39afd03c964973bac1c1cc34b6b19c61339fa64498eda6bffac",
+        "0x421f80-0x421f86": "2db31f4e09597946e56e859813bfdad7046d457c32332c3a882654d1e3ffdf67"
+      },
+      "initialization_result_checks": 1186,
+      "menu_state_checked": true,
+      "shared_owners": {
+        "card_result": {
+          "source": "0x3b290e4",
+          "borrowed_from": "GameFlowState.save_phase"
+        },
+        "global_timer": {
+          "source": "0x3b0f13c",
+          "borrowed_from": "session frame counter"
+        },
+        "rings": {
+          "source": "0x3b0f0e4",
+          "borrowed_from": "LogoScene/save rings"
+        },
+        "movie_number": {
+          "source": "0x3b2c45c",
+          "borrowed_from": "GameFlowState.movie_number"
+        },
+        "game_mode": {
+          "source": "0x3b22de4",
+          "borrowed_from": "loop game mode"
+        },
+        "menu_mode": {
+          "source": "0x3b2a2fa",
+          "borrowed_from": "GameFlowState.title_mode"
+        }
+      },
+      "limits": "Execute actual game Start initialization and compare native scalar/table effects.\n\nCharacter texture release and pinned Input vibration-stop are explicit service\nfixtures. Actual Sonic action pointer identities come from a supplied table; the\nsource copies entries100/101 without dereferencing their object/motion payloads.\nCRT srand is a fixture receipt for the separately recovered CRT store.\n"
+    }
+  },
+  "mutants": {
+    "startup_save": [
+      {
+        "slug": "logo_startup",
+        "mutation": "frame-zero",
+        "exit_status": 1,
+        "mismatches": 208,
+        "caught": true
+      },
+      {
+        "slug": "logo_startup",
+        "mutation": "save-call",
+        "exit_status": 1,
+        "mismatches": 52,
+        "caught": true
+      },
+      {
+        "slug": "logo_startup",
+        "mutation": "demo-reset",
+        "exit_status": 1,
+        "mismatches": 52,
+        "caught": true
+      },
+      {
+        "slug": "save_data",
+        "mutation": "crc-polynomial",
+        "exit_status": 1,
+        "mismatches": 29,
+        "caught": true
+      },
+      {
+        "slug": "save_data",
+        "mutation": "best-time-count",
+        "exit_status": 1,
+        "mismatches": 24,
+        "caught": true
+      },
+      {
+        "slug": "save_data",
+        "mutation": "profile-rumble",
+        "exit_status": 1,
+        "mismatches": 24,
+        "caught": true
+      }
+    ],
+    "bootstrap": {
+      "seed": 162,
+      "record_state": 162,
+      "section_clear": 162,
+      "action_pair": 162
+    },
+    "pvr": {
+      "half_width": 288,
+      "profile_alpha": 864,
+      "box_alpha": 384,
+      "unsigned_fild": 60
+    },
+    "view": {
+      "projection_flip": 3000,
+      "view_column_sign": 3000,
+      "camera_far": 375
+    }
+  },
+  "controller": {
+    "schema": 1,
+    "native_source_identities": {
+      "src/platform/mac/hid_switch_controller.hpp": "55996d9cf11be54227eccca1c148be093f0b6ab83d0d03c03b791e66bafd18ed",
+      "src/platform/mac/hid_switch_controller.mm": "2c7c10e4065808c23a78ee6d611fa32624ec0d8ba2832bb25458d2a9ff2e3d0d",
+      "src/apps/controller_qualify.mm": "dce22a9ac083f13b8502d3b3c53b547f1fc8cf2df9d7b5616380f58e9755d484",
+      "third_party/native_controller/build.py": "e6cd440b108712fe758611c9e1878ba066fe48ac7533a526bf310c63ef1747a9",
+      "third_party/native_controller/upstream.json": "9e9eedfc05f4de10de05f7832d257c6ac816d09604a777d350fece08d77bb916",
+      "third_party/native_controller/shared-iohid.patch": "4e93f54bae2219374d49c53621e48afbad2b476dca2e3d71f4a51e17503dcc65",
+      "third_party/native_controller/LICENSE-SDL3.txt": "1c040b8271b37e5076359f8fd54240e371114112924d2df81ef87c7d6a1dfdfd",
+      "third_party/native_controller/LICENSE-libusb.txt": "5df07007198989c622f5d41de8d703e7bef3d0e79d62e24332ee739a452af62a"
+    },
+    "native_library": {
+      "path": "build/native-controller-deps/lib/libSDL3.0.dylib",
+      "sha256": "5c6288b2a1508c25b554b622e963ace899eb53828be013a4f5754fa18a1bec39"
+    },
+    "build_script_exit_status": 0,
+    "pristine_source_patch_hash_check": "pass",
+    "captures": {
+      "physical.csv": "eeffe2606583642fc7104737e7b74a025de9c676f9bfda6df7058a2f8962a06d",
+      "physical.json": "d4c672cc0f6c3a2bff7efffa54f0e4470f89b70b52614db20348049f968f433c",
+      "physical2.csv": "31f2c5690b54f17d0ede9040ac9cd4ce9709a2714aa4b563b0e69cebcd3c2d18",
+      "physical2.json": "887edda240ba4da897cced2911d9d04161f5027abf730f2cde269189dbad825c"
+    },
+    "limits": [
+      "Native hardware qualification app, not normal game-app integration.",
+      "Individual raw runs preserve their partial results; combined checks draw buttons from first run and sticks/triggers/reconnect from second.",
+      "SDL3 supplies USB protocol and calibrated raw axes; pinned Input module remains responsible for game profile mapping/deadzones.",
+      "Multiple identical Switch2Pro devices fail explicitly in macOS platform patch; only this USB controller qualified.",
+      "No Bluetooth Switch2 support claimed."
+    ],
+    "physical_runs": [
+      {
+        "capture": "physical.csv",
+        "source_identities": "report-first.json",
+        "result": {
+          "backend": "native SDL3 shared IOHID/libusb",
+          "vendor_id": 1406,
+          "product_id": 8297,
+          "samples": 5367,
+          "connections": 1,
+          "disconnections": 0,
+          "rumble_supported": true,
+          "rumble_request_accepted": true,
+          "rumble_stop_accepted": true,
+          "buttons_observed": [
+            true,
+            true,
+            true,
+            true,
+            true,
+            false,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true,
+            true
+          ],
+          "axis_ranges": [
+            [
+              -1535,
+              2410
+            ],
+            [
+              -1703,
+              3164
+            ],
+            [
+              -4964,
+              1259
+            ],
+            [
+              -5192,
+              625
+            ],
+            [
+              0,
+              32767
+            ],
+            [
+              0,
+              0
+            ]
+          ],
+          "buttons_press_release_verified": true,
+          "stick_directions_verified": false,
+          "triggers_verified": false,
+          "reconnect_verified": false,
+          "physical_gestures_verified": false,
+          "physical_rumble_feedback_verified": false
+        }
+      },
+      {
+        "capture": "physical2.csv",
+        "source_identities": {
+          "src/platform/mac/hid_switch_controller.hpp": "55996d9cf11be54227eccca1c148be093f0b6ab83d0d03c03b791e66bafd18ed",
+          "src/platform/mac/hid_switch_controller.mm": "2c7c10e4065808c23a78ee6d611fa32624ec0d8ba2832bb25458d2a9ff2e3d0d",
+          "src/apps/controller_qualify.mm": "dce22a9ac083f13b8502d3b3c53b547f1fc8cf2df9d7b5616380f58e9755d484",
+          "third_party/native_controller/build.py": "e6cd440b108712fe758611c9e1878ba066fe48ac7533a526bf310c63ef1747a9",
+          "third_party/native_controller/upstream.json": "9e9eedfc05f4de10de05f7832d257c6ac816d09604a777d350fece08d77bb916",
+          "third_party/native_controller/shared-iohid.patch": "4e93f54bae2219374d49c53621e48afbad2b476dca2e3d71f4a51e17503dcc65",
+          "third_party/native_controller/LICENSE-SDL3.txt": "1c040b8271b37e5076359f8fd54240e371114112924d2df81ef87c7d6a1dfdfd",
+          "third_party/native_controller/LICENSE-libusb.txt": "5df07007198989c622f5d41de8d703e7bef3d0e79d62e24332ee739a452af62a"
+        },
+        "result": {
+          "backend": "native SDL3 shared IOHID/libusb",
+          "vendor_id": 1406,
+          "product_id": 8297,
+          "samples": 9630,
+          "connections": 3,
+          "disconnections": 2,
+          "rumble_supported": true,
+          "rumble_request_accepted": true,
+          "rumble_stop_accepted": true,
+          "buttons_observed": [
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false
+          ],
+          "axis_ranges": [
+            [
+              -32768,
+              32767
+            ],
+            [
+              -32768,
+              32767
+            ],
+            [
+              -32768,
+              32767
+            ],
+            [
+              -32768,
+              32767
+            ],
+            [
+              0,
+              32767
+            ],
+            [
+              0,
+              32767
+            ]
+          ],
+          "buttons_press_release_verified": false,
+          "stick_directions_verified": true,
+          "triggers_verified": true,
+          "reconnect_verified": true,
+          "physical_gestures_verified": false,
+          "physical_rumble_feedback_verified": false
+        }
+      }
+    ],
+    "combined_checks": {
+      "buttons_press_release_verified": true,
+      "stick_directions_verified": true,
+      "triggers_verified": true,
+      "reconnect_verified": true,
+      "rumble_request_and_stop_accepted": true,
+      "physical_gestures_verified": true,
+      "physical_rumble_feedback_verified": true
+    },
+    "user_observation": {
+      "physical_rumble_feedback": "yes i felt it",
+      "source": "explicit user confirmation after physical controller qualification"
+    }
+  },
+  "audio": {
+    "schema": 1,
+    "outcome": "native macOS AudioQueue output accepted imported effect, WMA-decoded music and voice PCM; callback delivery and exact submitted PCM captured",
+    "closure": "platform/mac/mac_audio.mm plus apps/audio_qualify.mm; Foundation and AudioToolbox only; no exe/DLL/Unicorn",
+    "qualification": [
+      {
+        "path": "build/native-audio-qualification/effect.wav",
+        "sha256": "2f29b4c58df18cd85ce6b04fc9363357e11a00d7e9c8524dab36e0f72586eb8e",
+        "submitted_frames": 90112,
+        "completed_buffers": 85,
+        "nonzero_samples": 23044,
+        "peak": 0.5922385454177856,
+        "rms": 0.026404275718149357,
+        "device_error": 0
+      },
+      {
+        "path": "build/native-audio-qualification/music-voice.wav",
+        "sha256": "87a825cad2747c546916fc3efc8f2e8ecf623180c36d7c5e68e9e0c3b0b615e3",
+        "submitted_frames": 135168,
+        "completed_buffers": 129,
+        "nonzero_samples": 270299,
+        "peak": 0.8331451416015625,
+        "rms": 0.15319085633827445,
+        "device_error": 0
+      }
+    ],
+    "unit_tests": "native mixer passes; 4 Python importer tests pass",
+    "source_identities": {
+      "src/platform/mac/mac_audio.hpp": "c2fd6d31b65486ccbe73e24c891c2333945785214d9270d120648773b42bf49c",
+      "src/platform/mac/mac_audio.mm": "bddfd52b6e114445c1e6aee67c20244cdbef6a448420d61d19bc99f86566db68",
+      "src/apps/audio_qualify.mm": "1a4a3d38bbdbd72cb57eda40354de47cb9b4e9ac7b12e643fc2f033c9c22efdc",
+      "tools/lib/import_audio.py": "91f0db9f658c306a4a5637b4180c4e0d6033da72d927f1ba59c18965e5a49e30",
+      "tests/unit/mac_audio.mm": "676cfc8cb12f320803c8842952b09245c01df395965d5c588e4ddfc53a477bc1",
+      "tests/python/test_import_audio.py": "b47832a63d48404cde275a7723ff3d1f1897d212f2d3a590d1199d173efa4ae6"
+    },
+    "limits": [
+      "Platform qualification app, not a recovered game caller or audio scheduling fidelity claim.",
+      "Captures are device queue submissions, not microphone/physical speaker loopback.",
+      "No DirectSound mixer/pan/resampling bit-parity claim.",
+      "WMA decoder exists only in one-time importer; external FFmpeg 7.1 temporary binary not shipped.",
+      "DAT compressed entries fail explicitly; only validated PCM RIFF entries imported."
+    ],
+    "failure_retry": "Real macOS AudioQueue failure -66680: render remains enabled, retry reaches device rather than already-started rejection; no API failure injection.",
+    "controller_discovery": "controller-discovery.json"
+  },
+  "independent_reviews": {
+    "startup": "review_startup: startup/save source and fault checks reviewed",
+    "render": "review_native_render: corrected full-dimension conversion and store-before-trap ordering, faults caught",
+    "native_start": "review_native_start: borrowed owners and imported action identities reviewed; later owner correction tests tutorial_variant independently of title_mode",
+    "platform": "review_platform_delivery: no blocker; independently ran backend, exhaustive axis and audio tests exit0; physical capture predates polling/build changes, current polling separately tested"
+  },
+  "reference_story": {
+    "normal_inputs_only": true,
+    "chaos_zero_defeated": true,
+    "emerald_coast_entered": true,
+    "replays": [
+      "tools/journey/sonic_story_chaos_zero.json",
+      "tools/journey/sonic_story_to_emerald_coast.json"
+    ],
+    "limits": [
+      "New extended replay has not yet been rerun from fresh launch for determinism.",
+      "Emerald Coast goal and later route remain incomplete.",
+      "Reference execution only; not native story."
+    ]
+  },
+  "checks": {
+    "native_build_exit_status": 0,
+    "native_journey_exit_status": 0,
+    "nonzero_shared_owner_unit_exit_status": 0,
+    "character_import_tests": 7,
+    "audio_import_tests": 4,
+    "profile_unhandled": 0,
+    "provenance_errors": 0,
+    "readability_regressions": 0,
+    "full_gate": "pending"
+  },
+  "limits": [
+    "No native movie/title/story yet; full WinMain equivalence remains open.",
+    "No measured native gameplay at63FPS; platform playback is not game audio scheduling fidelity.",
+    "PVR and projected-depth oracles retain FP-only partial verdicts.",
+    "Aggregate oracle verdict exit2: nine existing failures remain; no full standalone oracle rerun.",
+    "Physical USB tests qualified one controller; Bluetooth and multiple identical devices unverified.",
+    "Game assets and qualification binaries remain local and ignored."
+  ],
+  "judge_additions": "New probes/oracles/Python tests plus append-only unit manifest and explicit test build rule; no existing cases, tolerances or assertions weakened."
+}

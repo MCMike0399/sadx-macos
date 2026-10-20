@@ -1,5 +1,6 @@
 #include "guest/frame_control_reference.hpp"
 #include "engine/ninja_screen.hpp"
+#include "engine/ninja_projected_depth.hpp"
 #include <cstring>
 namespace sadx {
 namespace {
@@ -101,9 +102,7 @@ struct Depth:Base {
     NinjaDepthRuntime& rt;explicit Depth(NinjaDepthRuntime& r_):rt(r_){}
     X87Value run(float w){
         auto& fp=rt.fp;
-        std::uint32_t z=0x477fff00U;                                    // 65535.0
-        if(fp.compare_float_memory(fp.from_float(w),bits_float(0x37800080U))!=X87Comparison::less)
-            z=float_bits(fp.to_float(fp.divide_float_memory(fp.from_float(1.0F),w)));
+        const auto position=ninja_depth_position(w,fp);
         D3dxViewport vp;std::array<std::uint32_t,6> words{};
         for(std::size_t i=0;i<6;++i)words[i]=need(rt.device_state.viewport_at_3d12780[i],0x78dc3a,0x3d12780+4*static_cast<std::uint32_t>(i));
         vp={words[0],words[1],words[2],words[3],words[4],words[5]};
@@ -112,8 +111,7 @@ struct Depth:Base {
             projection[i]=need(rt.state.projection_at_3d129c0[i],0x78dc3a,0x3d129c0+4*static_cast<std::uint32_t>(i));
             world[i]=need(rt.device_state.matrix_at_389d318[i],0x78dc3a,0x389d318+4*static_cast<std::uint32_t>(i));}
         if(!rt.reciprocal)fail(NinjaScreenFailure::sse_failed,0x78dc3a);
-        const auto out=d3dx_vec3_project_772615({0,0,z},vp,D3dxMatrixArgument{projection,true},D3dxMatrixArgument{world,false},D3dxMatrixArgument{world,false},rt.sse,fp,rt.reciprocal);
-        return fp.from_float(bits_float(out[2]));                       // FLD out.z
+        return ninja_project_depth_position(position,{vp,projection,world},rt.sse,fp,rt.reciprocal);
     }
 };
 struct Polygon:Base {

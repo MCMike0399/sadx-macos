@@ -1,5 +1,5 @@
 #pragma once
-#include "game/game_mode.hpp"
+#include "game/game_mode_services.hpp"
 
 namespace sadx::flow {
 // NOTSA: logical game-flow steps also identify reference diagnostics and future observers.
@@ -67,6 +67,7 @@ struct Rgba {
 struct FlowContext {
     GameFlowState &state;
     FlowPhase phase = FlowPhase::Dispatch;
+    NativeServices *native = nullptr;
 };
 // NOTSA: enter a logical flow step, resetting adapter-local provenance counters.
 void enter_phase(FlowContext &, FlowPhase);
@@ -110,19 +111,19 @@ void write_movie_number(FlowContext &, std::uint32_t);
 std::uint32_t read_menu_message_enabled(FlowContext &);
 // NOTSA: the active sequence can be absent; validate it at the actual level use.
 std::int16_t current_sequence_level(FlowContext &);
-// STUB: SONIC 0x415000 FUN_00415000
+// NOTSA: composition seam for bootstrap::start.
 void initialize_game(FlowContext &flow);
-// STUB: SONIC 0x42cea0 FUN_0042cea0
+// NOTSA: composition seam for bootstrap::initialize_advertise.
 void initialize_demo_state(FlowContext &flow);
-// STUB: SONIC 0x421f70 FUN_00421f70
+// NOTSA: composition seam for bootstrap::loading_status.
 std::uint32_t startup_status(FlowContext &flow);
-// STUB: SONIC 0x421f80 FUN_00421f80
+// NOTSA: composition seam for bootstrap::loading_ready.
 std::int32_t startup_readiness(FlowContext &flow);
 // STUB: SONIC 0x4221e0 FUN_004221e0
 void request_file_module(FlowContext &flow, FlowModule module);
 // STUB: SONIC 0x4f88a0 OnEdit
 void on_edit(FlowContext &flow);
-// STUB: SONIC 0x42c7b0 InitializeSegaLogo
+// NOTSA: composition seam for logo::initialize_sega.
 void initialize_sega_logo(FlowContext &flow);
 // NOTSA: composition seam for the recovered logo update; native wiring is still incomplete.
 std::uint32_t run_logos(FlowContext &flow);
@@ -132,7 +133,7 @@ void set_frame_rate_mode(FlowContext &flow, std::int32_t mode, std::int32_t mult
 std::uint32_t run_title(FlowContext &flow);
 // STUB: SONIC 0x4212e0 LoadRegObjTextures
 void load_regular_object_textures(FlowContext &flow, std::int32_t kind);
-// STUB: SONIC 0x413c00 InitGame
+// NOTSA: composition seam for bootstrap::initialize_game.
 std::uint32_t initialize_level_game(FlowContext &flow);
 // STUB: SONIC 0x42f590 FUN_0042f590
 void initialize_player_selection(FlowContext &flow);
@@ -190,9 +191,9 @@ void prepare_title(FlowContext &flow);
 void start_screen_fade(FlowContext &flow);
 // STUB: SONIC 0x4144e0 GetPlayerNumber
 std::uint32_t current_player_number(FlowContext &flow);
-// STUB: SONIC 0x414470 SetupCharacter
+// NOTSA: composition seam for bootstrap::setup_character.
 void setup_character(FlowContext &flow, std::uint32_t character);
-// STUB: SONIC 0x427ee0 FUN_00427ee0
+// NOTSA: composition seam for bootstrap::reset_rings.
 void reset_player_work(FlowContext &flow);
 // STUB: SONIC 0x427ec0 FUN_00427ec0
 void reset_player_parameters(FlowContext &flow);
@@ -228,7 +229,7 @@ std::uint32_t run_tutorial(FlowContext &flow, std::int32_t value);
 void initialize_staff_roll(FlowContext &flow, std::int32_t value);
 // STUB: SONIC 0x640f20 FUN_00640f20
 std::int32_t run_staff_roll(FlowContext &flow, std::int32_t value);
-// STUB: SONIC 0x42c730 Load_SEGALOGO_E
+// NOTSA: composition seam for logo::load_sega_textures.
 void load_sega_logo(FlowContext &flow);
 // STUB: SONIC 0x402f10 ___njSetBackColor
 void set_background_color(FlowContext &flow, Rgba top, Rgba middle, Rgba bottom);

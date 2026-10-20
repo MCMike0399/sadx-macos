@@ -388,3 +388,6 @@ library-initial-fixtures: build/native-library-initial-state-probe.dylib
 	$(REFERENCE_PYTHON) tools/oracles/verify_original_library_initial_state.py "$(GAME_EXE)" build/native-library-initial-state-probe.dylib --output build/oracles/library_initial_state.json --poison-output build/library-initial-poisoned.exe --varied-output build/library-initial-varied.exe --partial-output build/library-initial-partial.exe
 native-library-initial-state:
 	python3 tools/gate/check_library_initial_state.py
+
+build/mac-switch-backend-test: tests/unit/mac_switch_backend.mm build/libsadx-macos.a build/libsadx-core.a build/native-controller-deps/include/SDL3/SDL.h
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) -Ibuild/native-controller-deps/include $< build/libsadx-macos.a build/libsadx-core.a $(MAC_FRAMEWORKS) -o $@

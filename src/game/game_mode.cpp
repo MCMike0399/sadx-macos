@@ -437,8 +437,8 @@ void finish_frame(FlowContext &flow) {
 }
 } // namespace
 
-void advance_game_mode(GameFlowState &state) {
-    FlowContext flow{state, FlowPhase::Dispatch};
+// NOTSA: both entry points share the original dispatcher and frame tail.
+static void advance(FlowContext &flow) {
     enter_phase(flow, FlowPhase::Dispatch);
     switch (read_mode(flow)) {
     case GameMode::Start:
@@ -540,5 +540,15 @@ void advance_game_mode(GameFlowState &state) {
         break;
     }
     finish_frame(flow);
+}
+
+void advance_game_mode(GameFlowState &state) {
+    FlowContext flow{state, FlowPhase::Dispatch};
+    advance(flow);
+}
+
+void advance_game_mode(GameFlowState &state, NativeServices &services) {
+    FlowContext flow{state, FlowPhase::Dispatch, &services};
+    advance(flow);
 }
 } // namespace sadx::flow

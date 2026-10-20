@@ -162,6 +162,13 @@ class ExactFloat {
         return denominator.retain(X87Transcendental::fpatan_bochs_p5_p6(
             *denominator.context_, numerator.value_, denominator.value_));
     }
+    // NOTSA: FPTAN reports its architectural range failure without inventing a tangent.
+    std::optional<ExactFloat> tangent() const {
+        const auto result = X87Transcendental::fptan_bochs(*context_, value_);
+        if (!result)
+            return std::nullopt;
+        return retain(*result);
+    }
     // NOTSA: FLDLN2's canonical constant and the selected Bochs FYL2X model.
     ExactFloat natural_log() const {
         const auto ln2 = context_->from_canonical_ext80(16382, 12786308645202655660ULL);

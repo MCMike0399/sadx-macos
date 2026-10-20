@@ -46,7 +46,7 @@ vertex Out polygon_vertex(uint index [[vertex_id]],constant uint* bytes [[buffer
 }
 fragment float4 polygon_fragment(Out in [[stage_in]]){return in.color;}
 )METAL";
-struct Options {std::string exe,dll,screenshot,game_dir,system_dir,keys,pad,script;std::string overlay="build/sadx-app-overlay";std::uint32_t frames=5;bool survey=true,guest=false,control=false,offscreen=false,original_tasks=false;int exit_after=-1;};
+struct Options {std::string exe,dll,screenshot,game_dir,system_dir,keys,pad,script,controller_library;std::string overlay="build/sadx-app-overlay";std::uint32_t frames=5;bool survey=true,guest=false,control=false,offscreen=false,original_tasks=false;int exit_after=-1;};
 bool parse(int argc,char** argv,Options& o){
     if(argc<3)return false;int first=3;
     if(!std::strcmp(argv[1],"--guest")){if(argc<4)return false;o.guest=true;o.game_dir=argv[2];o.system_dir=argv[3];first=4;}else{o.exe=argv[1];o.dll=argv[2];}
@@ -60,6 +60,7 @@ bool parse(int argc,char** argv,Options& o){
         else if(!std::strcmp(argv[i],"--pad")&&i+1<argc)o.pad=argv[++i];
         else if(!std::strcmp(argv[i],"--script")&&i+1<argc)o.script=argv[++i];
         else if(!std::strcmp(argv[i],"--overlay")&&i+1<argc)o.overlay=argv[++i];
+        else if(!std::strcmp(argv[i],"--controller-library")&&i+1<argc)o.controller_library=argv[++i];
         else if(!std::strcmp(argv[i],"--control")&&i+1<argc&&!std::strcmp(argv[i+1],"-")){o.control=true;++i;}
         else if(!std::strcmp(argv[i],"--offscreen"))o.offscreen=true;
         else if(!std::strcmp(argv[i],"--original-tasks"))o.original_tasks=true;
@@ -75,10 +76,28 @@ std::vector<ScriptedKey> parse_keys(const std::string& text){
         ScriptedKey k;const auto a=item.find(':'),b=item.find(':',a+1);k.frame=std::stoull(item.substr(0,a));k.vk=static_cast<std::uint32_t>(std::stoul(item.substr(a+1,b-a-1),nullptr,0));
         if(b!=std::string::npos)k.hold=static_cast<std::uint32_t>(std::stoul(item.substr(b+1)));out.push_back(k);}
     return out;}
-std::optional<sadx::HleXInputGamepad> host_pad(){
-    for(GCController* controller in [GCController controllers])
-        if(auto sample=sadx::input::mac::xinput_sample(controller))return sample;
-    return std::nullopt;
+std::string controller_library_path(const Options& options) {
+    if (!options.controller_library.empty()) return options.controller_library;
+    NSBundle* bundle = NSBundle.mainBundle;
+    if ([bundle.bundlePath.pathExtension isEqualToString:@"app"])
+        return std::string(bundle.privateFrameworksPath.UTF8String) + "/libSDL3.0.dylib";
+    return (std::filesystem::path(bundle.executablePath.UTF8String).parent_path() /
+            "native-controller-deps/lib/libSDL3.0.dylib").string();
+}
+void host_pad(sadx::input::mac::HostControllerInput& owner, sadx::HleProcess& process,
+              std::uint64_t& previous_connection) {
+    std::string error;
+    auto sample = owner.poll(error);
+    if (!error.empty()) {
+        process.guest().stop("native controller sample: " + error);
+        return;
+    }
+    const auto connection = owner.connection_id();
+    if (sample && previous_connection != 0 && connection != previous_connection && process.xinput.pad)
+        process.host_xinput(std::nullopt); // Publish device replacement even between two Presents.
+    previous_connection = connection;
+    process.xinput.vibration_supported = sample.has_value() && owner.rumble_supported();
+    process.host_xinput(sample);
 }
 // macOS virtual key codes (Carbon kVK_*) to Windows virtual keys (US layout); 0: not forwarded.
 std::uint32_t windows_key(unsigned short code){
@@ -143,6 +162,8 @@ std::vector<std::uint32_t> fan_indices(std::uint32_t vertex_count){std::vector<s
 @property(nonatomic) int exitAfter;
 @property(nonatomic) NSString* screenshot;
 @property(nonatomic) sadx::harness::Harness* harness;
+@property(nonatomic) sadx::input::mac::HostControllerInput* hostController;
+@property(nonatomic) std::uint64_t controllerConnection;
 @property(nonatomic) std::uint64_t lastShown;
 @property(nonatomic,weak) NSTextField* status;
 @end
@@ -202,7 +223,17 @@ std::vector<std::uint32_t> fan_indices(std::uint32_t vertex_count){std::vector<s
     if(!shots.empty()){[commands waitUntilCompleted];write_screenshots(drawable.texture,shots,shown);}
     if(fresh){++self.framesDrawn;self.lastShown=shown;}
     if(!self.guestStopped&&harness.may_advance()){
-        if(!self.scriptedPad&&!harness.drives_pad())self.guest->host_xinput(host_pad());
+        if(!self.scriptedPad&&!harness.drives_pad()&&self.hostController) {
+            auto connection = self.controllerConnection;
+            host_pad(*self.hostController,*self.guest,connection);
+            self.controllerConnection = connection;
+        } else if (self.hostController && self.guest->xinput.vibration_supported) {
+            std::string error;
+            if (!self.hostController->rumble(0,0,error))
+                self.guest->assume("native controller stop while scripted input takes ownership: " + error);
+            self.guest->xinput.vibration_supported=false;
+            self.guest->xinput.requested_vibration={};
+        }
         const auto r=self.guest->guest().resume();
         if(!r.paused){self.guestStopped=YES;*self.guestStop=r.completed?"the guest returned from its entry point":r.error;}
     }
@@ -267,9 +298,26 @@ int run_guest(const Options& o){
     std::string error;const auto image=sadx::ExecutableImage::parse({std::istreambuf_iterator<char>(f),{}},&error);if(!image){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
     auto process=sadx::HleProcess::create(o.game_dir,o.overlay,&error);if(!process){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
     process->use_real_cpp_runtime(o.system_dir);process->hle().set_logging(false);
-    process->assume("GameController host sampling: first extended controller is exposed as synthetic user 0; printed face labels resolved when available, Apple deadzones retained; no physical Windows HID parity or vibration output claimed");
+    process->assume("Host controller: first extended GameController retains priority; native USB Switch2Pro is the fallback. Both enter synthetic user 0 before the pinned SDL2/Input mod mapping. Switch raw SDL axes are preserved via the inverse raw-input conversion; Apple deadzones remain for GameController. Vibration is advertised only for a selected supported native owner; physical Windows HID identity/parity is unverified");
+    std::unique_ptr<sadx::input::mac::HostControllerInput> host_controller;
+    std::uint64_t controller_connection=0;
     if(!o.pad.empty()||o.offscreen)process->host_xinput(sadx::HleXInputGamepad{}); // offscreen runs never sample a physical pad
-    else process->host_xinput(host_pad());
+    else {
+        host_controller=std::make_unique<sadx::input::mac::HostControllerInput>();
+        if(!host_controller->initialize(controller_library_path(o),error)) {
+            std::fprintf(stderr,"native controller backend: %s\n",error.c_str());
+            return 2;
+        }
+        host_pad(*host_controller,*process,controller_connection);
+        auto* owner=host_controller.get();
+        auto* owner_process=process.get();
+        process->xinput.set_vibration=[owner,owner_process](std::uint16_t low,std::uint16_t high) {
+            std::string error;
+            if(owner->rumble(low,high,error)) return 0U;
+            owner_process->assume("native controller vibration failed: " + error);
+            return 31U; // ERROR_GEN_FAILURE, rather than claiming successful output.
+        };
+    }
     if(!process->map_main(*image,&error)){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
     sadx::FpuShimStats shims;if(!sadx::install_fpu_shims(process->guest(),sadx::load_fpu_sites("reference/inventory/fpu-sites.json"),shims,&error)){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
     auto overrides = sadx::process_overrides(*process, *image);
@@ -308,11 +356,22 @@ int run_guest(const Options& o){
     view.colorPixelFormat=MTLPixelFormatBGRA8Unorm;view.depthStencilPixelFormat=MTLPixelFormatDepth32Float;view.framebufferOnly=NO;view.preferredFramesPerSecond=63;view.drawableSize=CGSizeMake(640,480);view.autoResizeDrawable=NO;
     view.queue=[device newCommandQueue];view.exitAfter=o.exit_after;view.screenshot=o.screenshot.empty()?nil:[NSString stringWithUTF8String:o.screenshot.c_str()];
     view.scriptedPad=!o.pad.empty();view.guest=process.get();view.guestRenderer=renderer.get();view.guestStop=&stop;view.harness=&harness;window.contentView=view;
+    view.hostController=host_controller.get();view.controllerConnection=controller_connection;
     NSTextField* status=[NSTextField labelWithString:@"Guest"];status.font=[NSFont monospacedSystemFontOfSize:11 weight:NSFontWeightRegular];
     status.textColor=[NSColor colorWithWhite:0.9 alpha:1];status.backgroundColor=[NSColor colorWithWhite:0 alpha:0.55];status.drawsBackground=YES;
     status.frame=NSMakeRect(8,8,1264,36);[view addSubview:status];view.status=status;
     [window center];[window makeKeyAndOrderFront:nil];[window makeFirstResponder:view];[NSApp activateIgnoringOtherApps:YES];
+    auto* controller=host_controller.get();
+    auto* controller_process=process.get();
+    id termination_observer=[NSNotificationCenter.defaultCenter
+        addObserverForName:NSApplicationWillTerminateNotification object:nil queue:nil
+        usingBlock:^(NSNotification*) {
+            controller_process->xinput.vibration_supported=false;
+            controller_process->xinput.set_vibration={};
+            if(controller) controller->shutdown();
+        }];
     [NSApp run];
+    [NSNotificationCenter.defaultCenter removeObserver:termination_observer];
     std::printf("guest assumptions (%zu):\n",process->assumptions.size());for(const auto& a:process->assumptions)std::printf("  %s\n",a.c_str());
     return view.guestStopped&&o.exit_after>0&&view.framesDrawn<o.exit_after?5:0;
 }

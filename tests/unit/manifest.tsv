@@ -170,3 +170,14 @@ mac-logo-demo	"$(GAME_SYSTEM)/SEGALOGO_E.PVM" build/native-logo-demo.ppm
 graphics-line-list
 game-library-init-native
 hle-task-rumble	"$(REFERENCE_GAME_DIR)" "$(WINDOWS_SYSTEM_DIR)"
+hle-task-inactive-lifetime	"$(GAME_EXE)"
+hle-story-state
+mac-switch-xinput
+hle-xinput-vibration
+mac-switch-backend	build/native-controller-deps/lib/libSDL3.0.dylib
+mac-audio
+pvr-draw
+native-logo-scene
+mac-native-logo-scene	"$(GAME_SYSTEM)" game/imported/characters/sonic-startup.actions build/native-logo-composed.ppm
+character-pack	game/imported/characters/sonic-startup.actions
+game-bootstrap

@@ -1,0 +1,33 @@
+{
+  "purpose": "Native controller hardware support; pinned Input mod semantics remain in src/input",
+  "sdl3": {
+    "repository": "https://github.com/libsdl-org/SDL",
+    "version": "3.4.2",
+    "commit": "683181b47cfabd293e3ea409f838915b8297a4fd",
+    "archive_sha256": "f5b3a3b27ae296da479ab4642c456ff620d268e65d642bdfc934aa210107593f",
+    "license": "Zlib",
+    "protocol_source": "src/joystick/hidapi/SDL_hidapi_switch2.c",
+    "platform_patch": {
+      "file": "shared-iohid.patch",
+      "purpose": "macOS shared IOHID input interface0 plus libusb bulk interface1; upstream report/calibration/rumble protocol unchanged; multiple identical controllers fail explicitly",
+      "files": {
+        "src/hidapi/SDL_hidapi.c": {
+          "original": "0ed89650a0782f5c160302b8c9a86731dc74d7814f89f92e3bcb3bfebcaeffa7",
+          "patched": "c156e8c34961bb3d6a1829e5bd847baf266e812462bfb3c8342d0ede8dc71428"
+        },
+        "src/joystick/hidapi/SDL_hidapi_switch2.c": {
+          "original": "f819238ba05a26092e19b9844a34c5891c677a1850ff3636fe2cbf9cb69db953",
+          "patched": "68ebd355986480c2ee0df3b5643cf1b0ee8ba7f27fc5e39c7c7843fe2e7bc6b4"
+        }
+      }
+    }
+  },
+  "libusb": {
+    "repository": "https://github.com/libusb/libusb",
+    "version": "1.0.29",
+    "commit": "15a7ebb4d426c5ce196684347d2b7cafad862626",
+    "archive_sha256": "5977fc950f8d1395ccea9bd48c06b3f808fd3c2c961b44b0c2e6e29fc3a70a85",
+    "license": "LGPL-2.1-or-later"
+  },
+  "distribution": "Build output retains license texts under licenses/. Redistributed native dependencies must retain notices and satisfy libusb LGPL relinking/source obligations. No binaries or original game assets are checked in."
+}

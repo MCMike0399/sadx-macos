@@ -1,0 +1,72 @@
+--- a/src/hidapi/SDL_hidapi.c
++++ b/src/hidapi/SDL_hidapi.c
+@@ -861,6 +861,12 @@
+ 
+ static bool RequiresLibUSB(Uint16 vendor, Uint16 product)
+ {
++#ifdef SDL_PLATFORM_MACOS
++    /* sadx-macos: keep interface 0 with shared IOHID; bulk initialization uses interface 1. */
++    if (vendor == USB_VENDOR_NINTENDO && product == USB_PRODUCT_NINTENDO_SWITCH2_PRO) {
++        return false;
++    }
++#endif
+     for (int i = 0; i < SDL_arraysize(SDL_libusb_required); ++i) {
+         if (vendor == SDL_libusb_required[i].vendor &&
+             product == SDL_libusb_required[i].product) {
+--- a/src/joystick/hidapi/SDL_hidapi_switch2.c
++++ b/src/joystick/hidapi/SDL_hidapi_switch2.c
+@@ -95,6 +95,7 @@
+     SDL_LibUSBContext *libusb;
+     libusb_device_handle *device_handle;
+     bool interface_claimed;
++    bool owns_device_handle;
+     Uint8 interface_number;
+     Uint8 out_endpoint;
+     Uint8 in_endpoint;
+@@ -374,6 +375,34 @@
+     }
+ 
+     ctx->device_handle = (libusb_device_handle *)SDL_GetPointerProperty(SDL_hid_get_properties(device->dev), SDL_PROP_HIDAPI_LIBUSB_DEVICE_HANDLE_POINTER, NULL);
++#ifdef SDL_PLATFORM_MACOS
++    /* sadx-macos: IOHID owns input interface 0. Open USB separately for bulk interface 1. */
++    if (!ctx->device_handle && device->product_id == USB_PRODUCT_NINTENDO_SWITCH2_PRO) {
++        libusb_device **devices = NULL;
++        libusb_device *matched = NULL;
++        int matches = 0;
++        ssize_t count = ctx->libusb->get_device_list(NULL, &devices);
++        for (ssize_t i = 0; i < count; ++i) {
++            struct libusb_device_descriptor descriptor;
++            if (ctx->libusb->get_device_descriptor(devices[i], &descriptor) == 0 &&
++                descriptor.idVendor == device->vendor_id && descriptor.idProduct == device->product_id) {
++                matched = devices[i];
++                ++matches;
++            }
++        }
++        int result = -1;
++        if (matches == 1) {
++            result = ctx->libusb->open(matched, &ctx->device_handle);
++        }
++        if (devices) {
++            ctx->libusb->free_device_list(devices, 1);
++        }
++        if (matches != 1 || result != 0) {
++            return SDL_SetError("Switch2 shared IOHID/bulk open failed: matches=%d status=%d", matches, result);
++        }
++        ctx->owns_device_handle = true;
++    }
++#endif
+     if (!ctx->device_handle) {
+         return SDL_SetError("Couldn't get libusb device handle");
+     }
+@@ -1305,6 +1334,11 @@
+             ctx->libusb->release_interface(ctx->device_handle, ctx->interface_number);
+             ctx->interface_claimed = false;
+         }
++        if (ctx->owns_device_handle && ctx->device_handle) {
++            ctx->libusb->close(ctx->device_handle);
++            ctx->device_handle = NULL;
++            ctx->owns_device_handle = false;
++        }
+         if (ctx->libusb) {
+             SDL_QuitLibUSB();
+             ctx->libusb = NULL;

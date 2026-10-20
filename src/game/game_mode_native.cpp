@@ -38,29 +38,53 @@ std::int16_t current_sequence_level(FlowContext &flow) {
         throw UnrecoveredGameFlowCall("current_sequence_level");
     return flow.state.sequence->level;
 }
-void initialize_game(FlowContext &) { throw UnrecoveredGameFlowCall("initialize_game"); }
-void initialize_demo_state(FlowContext &) {
-    throw UnrecoveredGameFlowCall("initialize_demo_state");
+void initialize_game(FlowContext &flow) {
+    if (!flow.native)
+        throw UnrecoveredGameFlowCall("initialize_game");
+    flow.native->initialize_game();
 }
-std::uint32_t startup_status(FlowContext &) { throw UnrecoveredGameFlowCall("startup_status"); }
-std::int32_t startup_readiness(FlowContext &) {
-    throw UnrecoveredGameFlowCall("startup_readiness");
+void initialize_demo_state(FlowContext &flow) {
+    if (!flow.native)
+        throw UnrecoveredGameFlowCall("initialize_demo_state");
+    flow.native->initialize_demo_state();
+}
+std::uint32_t startup_status(FlowContext &flow) {
+    if (!flow.native)
+        throw UnrecoveredGameFlowCall("startup_status");
+    return flow.native->startup_status();
+}
+std::int32_t startup_readiness(FlowContext &flow) {
+    if (!flow.native)
+        throw UnrecoveredGameFlowCall("startup_readiness");
+    return flow.native->startup_readiness();
 }
 void request_file_module(FlowContext &, FlowModule) {
     throw UnrecoveredGameFlowCall("request_file_module");
 }
 void on_edit(FlowContext &) { throw UnrecoveredGameFlowCall("on_edit"); }
-void initialize_sega_logo(FlowContext &) { throw UnrecoveredGameFlowCall("initialize_sega_logo"); }
-std::uint32_t run_logos(FlowContext &) { throw UnrecoveredGameFlowCall("run_logos"); }
-void set_frame_rate_mode(FlowContext &, std::int32_t, std::int32_t) {
-    throw UnrecoveredGameFlowCall("set_frame_rate_mode");
+void initialize_sega_logo(FlowContext &flow) {
+    if (!flow.native)
+        throw UnrecoveredGameFlowCall("initialize_sega_logo");
+    flow.native->initialize_sega_logo();
+}
+std::uint32_t run_logos(FlowContext &flow) {
+    if (!flow.native)
+        throw UnrecoveredGameFlowCall("run_logos");
+    return flow.native->run_logos();
+}
+void set_frame_rate_mode(FlowContext &flow, std::int32_t mode, std::int32_t multiplier) {
+    if (!flow.native)
+        throw UnrecoveredGameFlowCall("set_frame_rate_mode");
+    flow.native->set_frame_rate_mode(mode, multiplier);
 }
 std::uint32_t run_title(FlowContext &) { throw UnrecoveredGameFlowCall("run_title"); }
 void load_regular_object_textures(FlowContext &, std::int32_t) {
     throw UnrecoveredGameFlowCall("load_regular_object_textures");
 }
-std::uint32_t initialize_level_game(FlowContext &) {
-    throw UnrecoveredGameFlowCall("initialize_level_game");
+std::uint32_t initialize_level_game(FlowContext &flow) {
+    if (!flow.native)
+        throw UnrecoveredGameFlowCall("initialize_level_game");
+    return flow.native->initialize_level_game();
 }
 void initialize_player_selection(FlowContext &) {
     throw UnrecoveredGameFlowCall("initialize_player_selection");
@@ -105,8 +129,10 @@ void prepare_title_dialogs(FlowContext &) {
 void initialize_title_menu(FlowContext &) {
     throw UnrecoveredGameFlowCall("initialize_title_menu");
 }
-void set_wait_vsync_count(FlowContext &, std::int32_t) {
-    throw UnrecoveredGameFlowCall("set_wait_vsync_count");
+void set_wait_vsync_count(FlowContext &flow, std::int32_t count) {
+    if (!flow.native)
+        throw UnrecoveredGameFlowCall("set_wait_vsync_count");
+    flow.native->set_wait_vsync_count(count);
 }
 void load_level_sounds(FlowContext &) { throw UnrecoveredGameFlowCall("load_level_sounds"); }
 std::int32_t run_title_menu(FlowContext &) { throw UnrecoveredGameFlowCall("run_title_menu"); }
@@ -118,10 +144,16 @@ void start_screen_fade(FlowContext &) { throw UnrecoveredGameFlowCall("start_scr
 std::uint32_t current_player_number(FlowContext &) {
     throw UnrecoveredGameFlowCall("current_player_number");
 }
-void setup_character(FlowContext &, std::uint32_t) {
-    throw UnrecoveredGameFlowCall("setup_character");
+void setup_character(FlowContext &flow, std::uint32_t character) {
+    if (!flow.native)
+        throw UnrecoveredGameFlowCall("setup_character");
+    flow.native->setup_character(character);
 }
-void reset_player_work(FlowContext &) { throw UnrecoveredGameFlowCall("reset_player_work"); }
+void reset_player_work(FlowContext &flow) {
+    if (!flow.native)
+        throw UnrecoveredGameFlowCall("reset_player_work");
+    flow.native->reset_player_work();
+}
 void reset_player_parameters(FlowContext &) {
     throw UnrecoveredGameFlowCall("reset_player_parameters");
 }
@@ -167,7 +199,11 @@ void initialize_staff_roll(FlowContext &, std::int32_t) {
 std::int32_t run_staff_roll(FlowContext &, std::int32_t) {
     throw UnrecoveredGameFlowCall("run_staff_roll");
 }
-void load_sega_logo(FlowContext &) { throw UnrecoveredGameFlowCall("load_sega_logo"); }
+void load_sega_logo(FlowContext &flow) {
+    if (!flow.native)
+        throw UnrecoveredGameFlowCall("load_sega_logo");
+    flow.native->load_sega_logo();
+}
 void set_background_color(FlowContext &, Rgba, Rgba, Rgba) {
     throw UnrecoveredGameFlowCall("set_background_color");
 }
@@ -185,8 +221,14 @@ void release_mission_clear_texlist(FlowContext &) {
     throw UnrecoveredGameFlowCall("release_mission_clear_texlist");
 }
 void display_message(FlowContext &) { throw UnrecoveredGameFlowCall("display_message"); }
-void draw_screen_fade(FlowContext &) { throw UnrecoveredGameFlowCall("draw_screen_fade"); }
-void increment_frame_counter(FlowContext &) {
-    throw UnrecoveredGameFlowCall("increment_frame_counter");
+void draw_screen_fade(FlowContext &flow) {
+    if (!flow.native)
+        throw UnrecoveredGameFlowCall("draw_screen_fade");
+    flow.native->draw_screen_fade();
+}
+void increment_frame_counter(FlowContext &flow) {
+    if (!flow.native)
+        throw UnrecoveredGameFlowCall("increment_frame_counter");
+    flow.native->increment_frame_counter();
 }
 } // namespace sadx::flow

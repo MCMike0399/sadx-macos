@@ -7,6 +7,7 @@ bool HleXInputGamepad::operator==(const HleXInputGamepad& o)const noexcept{
         left_x==o.left_x&&left_y==o.left_y&&right_x==o.right_x&&right_y==o.right_y;
 }
 void HleXInputState::sample(std::optional<HleXInputGamepad> next){
+    if (pad.has_value() != next.has_value()) requested_vibration = {};
     if(!(next==pad)){++packet;pad=next;}
 }
 namespace {
@@ -44,16 +45,48 @@ void register_hle_xinput(HleProcess& p){
         p.hle().add(dll,"XInputGetCapabilities",{12,3,[P](HleCall& c)->std::uint32_t{
             if(!connected(*P,c))return 1167;
             const auto flags=c.argument(1);if(!flags||(*flags!=0&&*flags!=1)){c.guest.stop("XInputGetCapabilities: unsupported flags");return 87;}
-            P->assume("XInput capabilities: synthetic wired gamepad, standard buttons, 8-bit triggers and 16-bit sticks; no voice or vibration actuators");
+            P->assume("XInput capabilities: synthetic wired gamepad, standard buttons, 8-bit triggers and 16-bit sticks; voice unavailable; vibration is present only with a supported native owner");
             std::array<std::uint8_t,20> out{};out[0]=1;out[1]=1;
             put(out,4,0xf3ff,2);out[6]=out[7]=0xff;for(unsigned k=8;k<16;++k)out[k]=0xff;
+            if (P->xinput.vibration_supported && P->xinput.set_vibration) {
+                put(out,2,1,2); // XINPUT_CAPS_FFB_SUPPORTED
+                put(out,16,65535,2);put(out,18,65535,2);
+            }
             write(c,2,out.data(),out.size(),"XInputGetCapabilities");return 0;}});
         p.hle().add(dll,"XInputEnable",{4,1,[P](HleCall& c)->std::uint32_t{
-            P->xinput.enabled=c.argument(0).value_or(0)!=0;return 0;}});
+            P->xinput.enabled=c.argument(0).value_or(0)!=0;
+            // XInputEnable stops vibration while disabled, and restores the last registered
+            // request when enabled (Microsoft XInputEnable API contract).
+            if (P->xinput.pad && P->xinput.vibration_supported && P->xinput.set_vibration) {
+                const auto request=P->xinput.enabled?P->xinput.requested_vibration:std::array<std::uint16_t,2>{};
+                P->xinput.vibration_status=P->xinput.set_vibration(request[0],request[1]);
+            }
+            return 0;}});
         p.hle().add(dll,"XInputSetState",{8,2,[P](HleCall& c)->std::uint32_t{
             if(!connected(*P,c))return 1167;
-            P->assume("XInputSetState: the synthetic gamepad has no vibration actuators; requests return ERROR_NOT_SUPPORTED");
-            return 50;}});
+            if (!P->xinput.vibration_supported || !P->xinput.set_vibration) {
+                P->assume("XInputSetState: selected controller has no native vibration owner; requests return ERROR_NOT_SUPPORTED");
+                return 50;
+            }
+            const auto at=c.argument(1);
+            std::array<std::uint8_t,4> bytes{};
+            if (!at || !c.guest.read(*at,bytes.data(),bytes.size())) {
+                c.guest.stop("XInputSetState: unreadable vibration buffer");
+                return 87;
+            }
+            const std::array<std::uint16_t,2> request={
+                static_cast<std::uint16_t>(bytes[0]|(bytes[1]<<8)),
+                static_cast<std::uint16_t>(bytes[2]|(bytes[3]<<8))};
+            ++P->xinput.vibration_requests;
+            if (!P->xinput.enabled) {
+                P->xinput.requested_vibration=request;
+                P->xinput.vibration_status=0;
+                return 0;
+            }
+            const auto status=P->xinput.set_vibration(request[0],request[1]);
+            P->xinput.vibration_status=status;
+            if (status==0) P->xinput.requested_vibration=request;
+            return status;}});
         p.hle().add(dll,"XInputGetBatteryInformation",{12,3,[P](HleCall& c)->std::uint32_t{
             if(!connected(*P,c))return 1167;
             if(c.argument(1)!=0){c.guest.stop("XInputGetBatteryInformation: only the gamepad is modelled");return 50;}

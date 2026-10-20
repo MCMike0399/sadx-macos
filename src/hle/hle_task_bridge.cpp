@@ -259,7 +259,13 @@ struct TaskBridge {
     }
     std::uint32_t lifetime(X86Guest& g,std::uint32_t at){
         entry=at;if(at==0x40b570&&g.u32(g.esp()+4)==0){g.set_eax(0);return 0;}if(!ready())return 0;
-        try{import_graph();const auto id=slot(word(g.esp()+4));const auto task=id?scheduler->source_task(*id):TaskHandle{};if(!task){g.stop("task bridge: unobserved lifetime task "+hex(word(g.esp()+4))+" at "+hex(at));return 0;}
+        try{import_graph();const auto id=slot(word(g.esp()+4));const auto task=id?scheduler->source_task(*id):TaskHandle{};
+            // DestroyTask calls CheckTask before reading the destructor or work.
+            // Known free pool rows and detached tasks are inactive, so retained
+            // cleanup pointers after another owner destroyed a task are no-ops.
+            // slot() still rejects foreign identities before this guard.
+            if(at==0x40b570&&!scheduler->active_member(task)){g.set_eax(0);return 0;}
+            if(!task){g.stop("task bridge: unobserved lifetime task "+hex(word(g.esp()+4))+" at "+hex(at));return 0;}
             auto run=std::make_shared<LifetimeRun>();run->owner=at;run->source_pool=pool;run->children=at==0x40b7e0;
             const int regs[4]={UC_X86_REG_EBP,UC_X86_REG_ESI,UC_X86_REG_EBX,UC_X86_REG_EDI};for(unsigned k=0;k<4;++k)run->saved[k]=g.reg(regs[k]);
             run->cursor=run->children?scheduler->begin_free_children(task):scheduler->begin_destruction(task);lifetime_next(run);
