@@ -63,7 +63,7 @@ NATIVE_SOURCES := $(sort $(NATIVE_SOURCES) $(wildcard src/engine/*_native.cpp sr
 NATIVE_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(NATIVE_SOURCES))
 NATIVE_PLATFORM_OBJECTS := build/obj/platform/mac/mac_clock.o build/obj/platform/mac/mac_audio.o \
  build/obj/platform/mac/hid_switch_controller.o build/obj/platform/mac/mac_movie.o build/obj/platform/mac/metal_device_frame.o
-NATIVE_PLATFORM_OBJECTS += $(patsubst src/%.mm,build/obj/%.o,$(wildcard src/platform/mac/mac_audio_playback.mm src/platform/mac/mac_sound_bank.mm))
+NATIVE_PLATFORM_OBJECTS += $(patsubst src/%.mm,build/obj/%.o,$(wildcard src/platform/mac/mac_audio_playback.mm src/platform/mac/mac_sound_bank.mm src/platform/mac/mac_sound_effects.mm))
 NATIVE_PLATFORM_OBJECTS += $(patsubst src/%.cpp,build/obj/%.o,$(wildcard src/platform/mac/mac_sound_bank.cpp))
 MAC_SOURCES := $(wildcard src/platform/mac/*.cpp src/platform/mac/*.mm)
 MAC_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(filter %.cpp,$(MAC_SOURCES))) $(patsubst src/%.mm,build/obj/%.o,$(filter %.mm,$(MAC_SOURCES)))
