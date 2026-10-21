@@ -35,6 +35,18 @@ def run(application, assets, output_root):
         result = subprocess.run(command, cwd=ROOT, check=False)
         checkpoints.append({'journey': name, 'exit_status': result.returncode,
                             'output': str(output), 'checker': 'tools/journey/' + checker})
+        # Preserve actual checkpoint evidence in the gate log, which the recorder freezes.
+        evidence = output / 'result.json'
+        if result.returncode == 0:
+            if not evidence.is_file():
+                raise RuntimeError(f'native checker returned success without {evidence}')
+            summary = json.loads(evidence.read_text())
+            if summary.get('passed') is not True or summary.get('execution') != 'native':
+                raise RuntimeError(f'native checker did not certify native execution: {evidence}')
+            checkpoints[-1]['result'] = summary
+            if 'frames' not in summary and 'create_frames' in summary and 'restart_frames' in summary:
+                summary['frames'] = summary['create_frames'] + summary['restart_frames']
+        print('NATIVE_JOURNEY ' + json.dumps(checkpoints[-1], sort_keys=True), flush=True)
         report = dict(checkpoints[0], checkpoints=checkpoints, exit_status=result.returncode)
         (output_root / 'native-journeys.json').write_text(json.dumps(report, indent=2) + '\n')
         if result.returncode != 0:

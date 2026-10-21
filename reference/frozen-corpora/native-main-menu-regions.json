@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "source": "Pinned original-task reference MainMenu frame1250",
+  "reference_capture": "build/native-main-menu-reference/1250.ppm",
+  "reference_ppm_sha256": "bc615de47c0ef6cc6e5e08d87145fc0ccd17ea879a1db9965c5813c8c77c8580",
+  "source_executable_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "native_frames": [
+    1100,
+    1250,
+    1690,
+    1850
+  ],
+  "regions": [
+    {
+      "name": "upper-image",
+      "rectangle": [
+        0,
+        0,
+        640,
+        144
+      ],
+      "rgb_sha256": "e30409fda107da12b21ff11520bd45a175d28c899c38b32d077dd7777cc541a9"
+    },
+    {
+      "name": "selection-left",
+      "rectangle": [
+        0,
+        144,
+        232,
+        170
+      ],
+      "rgb_sha256": "d4c5959f67bf7c082bbf72361f3089d9a32a9c77ced3739d41245a29c5362eee"
+    },
+    {
+      "name": "selection-right",
+      "rectangle": [
+        410,
+        144,
+        640,
+        170
+      ],
+      "rgb_sha256": "1d60dae9df7093c361f026e330fcd524a3dceb06472014504b4f0e38ac2ace3a"
+    },
+    {
+      "name": "lower-image",
+      "rectangle": [
+        0,
+        170,
+        640,
+        480
+      ],
+      "rgb_sha256": "0957434441587a8307d7fffe775b008d5987d2e7dca061f5ffa55d0350c35c09"
+    }
+  ],
+  "excluded_rectangle": [
+    232,
+    144,
+    410,
+    170
+  ],
+  "scope": "Exact RGB outside the animated Adventure highlight. Unchanged required native inputs950/1050 differ in delivery from reference; raw selected-highlight differences remain unqualified. The independently aligned native952/1052 reference950/1050 five-frame whole-image proof is separate. No production input adjustment.",
+  "reference_route": "build/native-main-menu-reference/route.txt",
+  "reference_route_sha256": "e02718edf8c20a79b4a2daa3a6ab3d77abe63ff35fcc0f2a4622ba666e940986",
+  "reference_state": "build/native-main-menu-reference/1250.json",
+  "reference_state_sha256": "24018f4b259681199f5aaef034b9bbd75fd09fff709cb595826fb9c953c11101",
+  "selection": {
+    "name": "SonicDX01.snc",
+    "native_selection_input": "normal Down900; source filesystem order starts on01"
+  }
+}

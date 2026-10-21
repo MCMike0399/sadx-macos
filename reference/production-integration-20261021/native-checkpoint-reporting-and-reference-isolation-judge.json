@@ -1,0 +1,12 @@
+{
+  "problem": "Shared reference writableoverlay introduced fresh03 save; route selecteddifferent save and failed unchangedR4golden.",
+  "contaminating_overlay_save": "build/sadx-app-overlay/SAVEDATA/SonicDX03.snc",
+  "sha256": "5eb5df01ffe807fb2c05681941f53dc98924ed3b5f72900a4e7dac88e42fdffe",
+  "unchanged_current_and_old_binary_images_equal": true,
+  "red_report": "build/native-fov-r4-baseline/report.json",
+  "green_report": "build/native-fov-r4-isolated/report.json",
+  "green_actual_exit_status": 0,
+  "input_and_tolerance_changes": false,
+  "preserved_contaminated_overlay": true,
+  "fix": "Unique empty retained overlay for every required reference run. Native checkpoints emit actual resultJSON summaries into frozen gate logs; generated N3 remains partial."
+}

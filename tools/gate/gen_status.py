@@ -57,7 +57,18 @@ def main():
         for journey in g['journeys']:
             out.append(f'| {journey["row"]} | {journey["name"]} | {journey["verdict"]} |')
         out.append('')
-        out.append('R5–R6 and native N1–N5 remain unverified by this gate. See `docs/GOAL.md`.\n')
+        out.append('R5–R6 remain unverified by this gate. See `docs/GOAL.md`.\n')
+    if g.get('native_journeys'):
+        out.append('## Native checkpoints (last gate)\n')
+        out.append('| Checkpoint | Result | Frames |\n|---|---|---|')
+        for checkpoint in g['native_journeys']:
+            result = checkpoint.get('result', {})
+            passed = checkpoint.get('exit_status') == 0 and result.get('passed') is True
+            out.append(f'| {checkpoint["journey"]} | {"pass" if passed else "FAIL"} | {result.get("frames", "unreported")} |')
+        out.append('')
+        out.append('These are connected native menu/save checkpoints. N3 remains partial until CharacterSelect works; native story/gameplay N4–N5 and gameplay63FPS remain unverified. See `docs/GOAL.md`.\n')
+    else:
+        out.append('Native N1–N5 were not recorded by this gate. See `docs/GOAL.md`.\n')
     out.append('## Verification inventory\n')
     out.append(f'* Unit test programs: {units}\n* Native probes: {probes}\n* Oracles: {len(oracles)} — '
                +', '.join(f'{len(buckets.get(k,[]))} {k}' for k in('pass','partial','fail','missing'))

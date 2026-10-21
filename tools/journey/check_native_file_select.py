@@ -136,7 +136,8 @@ def run(application, assets, output):
                   f'loading/navigation changed seeded save {name}')
             check(hashlib.sha256((assets / 'saves' / name).read_bytes()).hexdigest() == digest,
                   f'loading/navigation changed imported save {name}')
-    report = {'execution': 'native', 'application_exit_status': result.returncode,
+    report = {'passed': True, 'frames': frames[-1], 'execution': 'native',
+              'application_exit_status': result.returncode,
               'normal_input_command': command, 'state_checkpoints': states,
               'screenshot_sha256': {str(frame): hashlib.sha256(
                   (captures / f'{frame}.ppm').read_bytes()).hexdigest() for frame in frames},

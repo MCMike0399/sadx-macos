@@ -13,6 +13,7 @@ import re
 import shlex
 import subprocess
 import sys
+import tempfile
 import time
 
 REFERENCE_GAME_DIR = 'reference/updated-pc-reference/game'
@@ -157,8 +158,11 @@ def run(chosen, app, game_dir, system_dir, output, bless=False):
     script = output / 'route.txt'
     script.write_text(script_text(chosen, output))
     log_path = output / 'route.log'
+    # Each verification starts from the pinned installation, never a prior
+    # developer run's writable save overlay. Retain this run's overlay as evidence.
+    overlay = Path(tempfile.mkdtemp(prefix='reference-overlay-', dir=output)).resolve()
     command = [app, '--guest', game_dir, system_dir, '--offscreen', '--script', str(script),
-               '--exit-after', str(max(j['frames'] for j in chosen))]
+               '--exit-after', str(max(j['frames'] for j in chosen)), '--overlay', str(overlay)]
     started = time.monotonic()
     run_problems = []
     with log_path.open('w') as log:
@@ -201,7 +205,8 @@ def run(chosen, app, game_dir, system_dir, output, bless=False):
     saves = {p.name: hashlib.sha256(p.read_bytes()).hexdigest()
              for p in sorted((Path(game_dir) / 'savedata').glob('*.snc'))}
     report = {'journeys': results, 'seconds': seconds, 'command': shlex.join(command),
-              'log': str(log_path), 'save_sha256': saves, 'run_problems': run_problems}
+              'log': str(log_path), 'overlay': str(overlay),
+              'save_sha256': saves, 'run_problems': run_problems}
     (output / 'report.json').write_text(json.dumps(report, indent=1) + '\n')
     failed = [r for r in results if r['state'] == 'required' and not r['passed']]
     print(f'journeys: {sum(r["passed"] for r in results)}/{len(results)} pass, '

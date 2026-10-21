@@ -57,17 +57,72 @@ def play(application, assets, profile, output, frames, capture_frames, keys):
     return states
 
 
-def check_main(state):
+def check_main(state, save_name='SonicDX03.snc'):
     check(state['game_mode'] == 12 and state['sequence_mode'] == state['sequence_fixed_mode'] == 6
           and state['sequence_waiting'] == 0 and state['main_menu_phase'] == 2
           and state['main_menu_submode'] == 1 and state['dialog_phase'] == 2,
           'normal confirmation did not reach the actual live MainMenu/dialog')
-    check(state['active_save_name'] == 'SonicDX03.snc' and state['fallback_save_name'] is None,
+    check(state['active_save_name'] == save_name and state['fallback_save_name'] is None,
           'MainMenu did not retain the real newly created SaveName binding')
     check(state['texture_slots_in_use'] == 355 and state['message_texture_release_count'] == 0
           and not state['caption_buffer_live'] and state['caption_timer'] == 0
           and state['caption_buffers_allocated'] == state['caption_buffers_freed'],
           'fresh-save menu resources survived their source frame/reentry release boundaries')
+
+
+def check_empty_profile(application, assets, profile, output, expected_save):
+    # Existing empty directory invokes the real zero-save path, without importing
+    # the two populated fixture saves through first-launch profile seeding.
+    profile.mkdir()
+    created = play(application, assets, profile, output / 'create-empty', 1300,
+                   (899, 950, 951, 960, 1000, 1300),
+                   '500:13:down,501:13:up,750:13:down,751:13:up,'
+                   '950:13:down,951:13:up')
+    check(created[899]['save_file_count'] == 0 and created[899]['selected_save'] == 0,
+          'existing empty profile did not start on Create New File with zero saves')
+    pending, written = created[950], created[951]
+    check(pending['file_select_submode'] == 12 and pending['save_phase'] == 1
+          and pending['save_ready'] == pending['save_write_count'] == pending['save_exec'] == 1
+          and pending['saving_message_pending'] == 1 and pending['save_ok'] == 0
+          and pending['active_save_name'] is None,
+          'empty-profile creation skipped the real pending-message/pre-write frame')
+    check(hashlib.sha256(image_region(output / 'create-empty/captures/950.ppm')).hexdigest()
+          == SAVING_REGION_SHA256, 'empty-profile saving text differs from original-task reference')
+    check(written['save_phase'] == written['save_ready'] == written['save_exec']
+          == written['save_write_count'] == written['saving_message_pending'] == 0
+          and written['save_ok'] == 1 and written['active_save_name'] == 'SonicDX01.snc',
+          'empty-profile source frame completion did not write the first native slot')
+    check(pending['texture_slots_in_use'] == written['texture_slots_in_use'] + 1
+          and created[960]['file_select_submode'] == 13,
+          'empty-profile creation lost source saving-text release or minimum wait')
+    for frame in (1000, 1300):
+        check_main(created[frame], 'SonicDX01.snc')
+    persisted = file_hashes(profile)
+    check(set(persisted) == {'SonicDX01.snc'}, 'empty-profile creation published unexpected files')
+    saved_bytes = (profile / 'SonicDX01.snc').read_bytes()
+    check(saved_bytes == expected_save and len(saved_bytes) == 1392,
+          'empty-profile01 and populated-profile03 fresh saves differ in actual encoded bytes')
+    check(int.from_bytes(saved_bytes[:4], 'little') == created[1300]['save_checksum'],
+          'empty-profile written checksum differs from the live canonical save')
+    restarted = play(application, assets, profile, output / 'restart-empty', 1300,
+                     (899, 970, 1100, 1300),
+                     '500:13:down,501:13:up,750:13:down,751:13:up,'
+                     '950:13:down,951:13:up,1050:13:down,1051:13:up')
+    check(restarted[899]['save_file_count'] == 1
+          and restarted[899]['selected_save_name'] == 'SonicDX01.snc'
+          and restarted[899]['save_checksum'] == created[1300]['save_checksum'],
+          'empty-profile restart did not enumerate and load the actual saved01 bytes')
+    check(restarted[970]['file_select_submode'] == 2 and restarted[970]['dialog_phase'] == 2
+          and restarted[970]['dialog_cursor'] == 0,
+          'normal Enter did not open the restarted01 confirmation')
+    for frame in (1100, 1300):
+        check_main(restarted[frame], 'SonicDX01.snc')
+        check(restarted[frame]['menu_voice_cursor'] == 1,
+              'normal01 confirmation lost the real menu-voice cursor')
+    check(file_hashes(profile) == persisted, 'empty-profile restart/confirmation changed saved bytes')
+    return {'created_file': 'SonicDX01.snc', 'create_frames': 1300, 'restart_frames': 1300,
+            'save_sha256': persisted['SonicDX01.snc'], 'normal_confirmation': True,
+            'initial_save_count': 0, 'restarted_save_count': 1}
 
 
 def run(application, assets, output):
@@ -150,10 +205,14 @@ def run(application, assets, output):
                   f'{kind} did not deliver native audio samples')
         check(file_hashes(profile) == persisted and file_hashes(snapshot) == imported,
               'restart, cancel, confirm or reentry changed native/source save bytes')
+        empty = check_empty_profile(application, assets, Path(temporary) / 'empty-savedata',
+                                    output, saved_bytes)
+        check(file_hashes(snapshot) == imported, 'empty-profile run changed imported save fixtures')
         (output / 'result.json').write_text(json.dumps({
-            'passed': True, 'execution': 'native', 'create_frames': 1300, 'restart_frames': 2150,
+            'passed': True, 'execution': 'native', 'frames': 6050,
+            'create_frames': 1300, 'restart_frames': 2150,
             'created_file': 'SonicDX03.snc', 'save_sha256': persisted['SonicDX03.snc'],
-            'save_checksum': created[1300]['save_checksum'], 'saving_region_matches_reference': True,
+            'save_checksum': created[1300]['save_checksum'], 'saving_region_matches_reference': True, 'empty_profile': empty,
             'limits': ['Fresh-save/MainMenu checkpoint only; CharacterSelect and gameplay remain separate.',
                        'The saving region alone is reference-image qualified; file ordering/calendar differ elsewhere.',
                        'No gameplay63FPS or new physical-controller qualification.']}, indent=2) + '\n')

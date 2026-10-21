@@ -2,7 +2,7 @@
 """Normal-input native save confirmation, MainMenu navigation, cancel and reentry.
 
 This functional checkpoint does not certify CharacterSelect, fresh-save creation,
-full reference pixels, floating-point status parity, gameplay or performance.
+the animated selection highlight, floating-point status parity, gameplay or performance.
 """
 import argparse
 import hashlib
@@ -15,6 +15,23 @@ import tempfile
 def check(condition, message):
     if not condition:
         raise RuntimeError(message)
+
+
+def check_reference_regions(captures):
+    fixture = Path(__file__).resolve().parents[2] / 'reference/frozen-corpora/native-main-menu-regions.json'
+    reference = json.loads(fixture.read_text())
+    for frame in reference['native_frames']:
+        data = (captures / f'{frame}.ppm').read_bytes()
+        header = b'P6\n640 480\n255\n'
+        check(data.startswith(header) and len(data) == 921615,
+              f'{frame}: actual native capture missing or malformed')
+        pixels = data[len(header):]
+        for region in reference['regions']:
+            left, top, right, bottom = region['rectangle']
+            rgb = b''.join(pixels[3 * (y * 640 + left):3 * (y * 640 + right)]
+                           for y in range(top, bottom))
+            check(hashlib.sha256(rgb).hexdigest() == region['rgb_sha256'],
+                  f"{frame}: MainMenu source image region {region['name']} differs")
 
 
 def run(application, assets, output):
@@ -95,13 +112,15 @@ def run(application, assets, output):
             data = (captures / f'{frame}.ppm').read_bytes()
             check(data.startswith(b'P6\n640 480\n255\n') and len(data) == 921615,
                   f'{frame}: actual native capture missing or malformed')
+        check_reference_regions(captures)
         saved = {path.name: hashlib.sha256(path.read_bytes()).hexdigest()
                  for path in profile.iterdir() if path.is_file()}
         check(saved == imported, 'confirmation/cancel/reentry changed the native save snapshot')
         (output / 'result.json').write_text(json.dumps({
             'passed': True, 'frames': 1850, 'execution': 'native', 'save_files_unchanged': True,
             'canonical_mode': 6, 'music_song': 101,
-            'limits': ['Functional menu checkpoint only; reference image differences and FP partials remain separate.',
+            'source_image_regions_match': True, 'source_image_frames': [1100, 1250, 1690, 1850],
+            'limits': ['Exact source image regions exclude the animated Adventure highlight; raw timing differences and FP partials remain separate.',
                        'No fresh-save persistence, CharacterSelect, gameplay or63FPS qualification.']}, indent=2) + '\n')
     print('Native save confirmation, MainMenu navigation/cancel/reentry and song101 delivery pass')
 

@@ -1,0 +1,161 @@
+{
+  "source_capture": "/Users/burbujamc/Developer/sadx-macos/build/native-main-menu-reference/1250.ppm",
+  "source_ppm_sha256": "bc615de47c0ef6cc6e5e08d87145fc0ccd17ea879a1db9965c5813c8c77c8580",
+  "source_state_sha256": "24018f4b259681199f5aaef034b9bbd75fd09fff709cb595826fb9c953c11101",
+  "reference_state": {
+    "frame": 1250,
+    "presents": 1250,
+    "game_mode": 12,
+    "game_state": 21,
+    "stage": 0,
+    "act": 0,
+    "rings": 0,
+    "level_frames": 0,
+    "global_timer": 188015,
+    "control_enabled": 1,
+    "controller_enabled": 1,
+    "player": null,
+    "boss": null,
+    "camera": null,
+    "profile": {
+      "ccef_reset_1": "810d",
+      "ccef_reset_2": "810d",
+      "ehcf_dereference": "909090",
+      "ehcf_branch": "9090",
+      "skipma_ingame_to_speedrun": true,
+      "skipma_movie_to_speedrun": true,
+      "limiter_to_speedrun": true,
+      "extra_ticks_to_speedrun": true,
+      "frame_rate_scalar": 63
+    }
+  },
+  "native_app_sha256": "9fb670057740bdd8cadd0944b7f505174be0f79e3ce8767a7b8b7327861875c7",
+  "native_frames": {
+    "1100": {
+      "ppm_sha256": "4ffd753c1ea42a1c720c48159c5881877c584dd52522d26ce98fe730826286bd",
+      "raw_different_channel_bytes": 13074,
+      "raw_different_pixels": 4358,
+      "difference_bounds_half_open": [
+        232,
+        144,
+        410,
+        170
+      ],
+      "all_protected_source_regions_exact": true
+    },
+    "1250": {
+      "ppm_sha256": "128b4d38a8f9dc36e07bf0413b35a8d42f859b69c5a7523a3f075fd61ab1f88c",
+      "raw_different_channel_bytes": 13048,
+      "raw_different_pixels": 4356,
+      "difference_bounds_half_open": [
+        232,
+        144,
+        410,
+        170
+      ],
+      "all_protected_source_regions_exact": true
+    },
+    "1690": {
+      "ppm_sha256": "1b5a1ca7089919fbc67cef13b78b67f48232a38240c78fe81134365d06044257",
+      "raw_different_channel_bytes": 13045,
+      "raw_different_pixels": 4356,
+      "difference_bounds_half_open": [
+        232,
+        144,
+        410,
+        170
+      ],
+      "all_protected_source_regions_exact": true
+    },
+    "1850": {
+      "ppm_sha256": "23f6765ffe83eb74bfc86f755270784c2d1c8c3844367905c4f1d6e5fe6001e2",
+      "raw_different_channel_bytes": 13074,
+      "raw_different_pixels": 4358,
+      "difference_bounds_half_open": [
+        232,
+        144,
+        410,
+        170
+      ],
+      "all_protected_source_regions_exact": true
+    }
+  },
+  "source_coverage_pixels": 302572,
+  "total_pixels": 307200,
+  "preserved_input_delivery_limit": "No new alignment or timing adjustment. Source reference1250 vs unchanged requirednative1100/1250/1690/1850; excludedAdventurehighlight retains raw differences. Earlier alignednative952/1052 vsreference950/1050 whole-image proof stays separate.",
+  "real_run_result": {
+    "passed": true,
+    "frames": 1850,
+    "execution": "native",
+    "save_files_unchanged": true,
+    "canonical_mode": 6,
+    "music_song": 101,
+    "source_image_regions_match": true,
+    "source_image_frames": [
+      1100,
+      1250,
+      1690,
+      1850
+    ],
+    "limits": [
+      "Exact source image regions exclude the animated Adventure highlight; raw timing differences and FP partials remain separate.",
+      "No fresh-save persistence, CharacterSelect, gameplay or63FPS qualification."
+    ]
+  },
+  "draw_suppression_regression": {
+    "state_source": "build/native-main-menu-checker-counter-fixed/captures",
+    "old_checker": "accepts identical genuine semantic states and unchanged fixture save bytes with all ten black rasters",
+    "new_checker": "RuntimeError: 1100: MainMenu source image region upper-image differs",
+    "protected_test": "tests/python/test_native_main_menu_journey.py",
+    "old_checker_expected_red_log": "old-checker-regression.log",
+    "game_mutation": false
+  },
+  "fresh_save_result": {
+    "passed": true,
+    "execution": "native",
+    "create_frames": 1300,
+    "restart_frames": 2150,
+    "created_file": "SonicDX03.snc",
+    "save_sha256": "5eb5df01ffe807fb2c05681941f53dc98924ed3b5f72900a4e7dac88e42fdffe",
+    "save_checksum": 50276,
+    "saving_region_matches_reference": true,
+    "empty_profile": {
+      "created_file": "SonicDX01.snc",
+      "create_frames": 1300,
+      "restart_frames": 1300,
+      "save_sha256": "5eb5df01ffe807fb2c05681941f53dc98924ed3b5f72900a4e7dac88e42fdffe",
+      "normal_confirmation": true,
+      "initial_save_count": 0,
+      "restarted_save_count": 1
+    },
+    "limits": [
+      "Fresh-save/MainMenu checkpoint only; CharacterSelect and gameplay remain separate.",
+      "The saving region alone is reference-image qualified; file ordering/calendar differ elsewhere.",
+      "No gameplay63FPS or new physical-controller qualification."
+    ]
+  },
+  "fresh_save_original_populated_cases_retained": true,
+  "native_app_after_sha256": "9fb670057740bdd8cadd0944b7f505174be0f79e3ce8767a7b8b7327861875c7",
+  "verification": {
+    "old_checker_black_replay": "PASS (defect reproduced); protected test expects rejection and is RED against old checker",
+    "new_checker_black_replay": "REJECT; protected test1 passed",
+    "main_menu_actual_exit": 0,
+    "fresh_save_actual_exit": 0,
+    "native_total_frames": 7900,
+    "shared_builds": false,
+    "source_changes": false,
+    "full_gate": "Not run by worker; parent integration owns complete gate",
+    "draw_mutation_scope": "Raster suppression in replay of genuine states, no compiled game-source mutation"
+  },
+  "file_sha256": {
+    "tools/journey/check_native_main_menu.py": "15649a6575fa1147a4a1982c5d9ef27687b0960f420927004dff01558a6855af",
+    "tools/journey/check_native_fresh_save.py": "8c3b4e7f5b5e9a7c2848d069a07afcd4064400f8bb5ce5e641858bdd0fc9f999",
+    "tests/python/test_native_main_menu_journey.py": "f6fb468ca52139e7c585c1d09004c41216b37e3a17e2f0fdaf0faea812ca409c",
+    "reference/frozen-corpora/native-main-menu-regions.json": "ba692a71de9cfa93870a0979b6224293ef88f8498d73e3376785ac797cdf93ed",
+    "reference/frozen-corpora/native-main-menu-state-replay.json": "1f294e57aa37f2e37974d71e4acfef4bfcdc6326b52aae3c434d1b74365b1e39"
+  },
+  "base_checker_sha256": {
+    "tools/journey/check_native_main_menu.py": "b92bcba286b332a2781f3e843442f324deb628a16421ecfb66ad5ec4043ed631",
+    "tools/journey/check_native_fresh_save.py": "59e0c36fb32f37e47c08baf01fb2e528ec53a13e8922019f441c17d5331f6495"
+  }
+}

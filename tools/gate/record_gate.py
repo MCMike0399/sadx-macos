@@ -45,7 +45,11 @@ def main() -> int:
     programs: list[str] = []
     python_tests: int | None = None
     journeys = []
+    native_journeys = []
     for line in log_bytes.splitlines():
+        if line.startswith(b'NATIVE_JOURNEY '):
+            checkpoint = json.loads(line[len(b'NATIVE_JOURNEY '):])
+            native_journeys.append(checkpoint)
         program = PROGRAM_LINE.match(line)
         if program:
             programs.append("./build/" + program.group(1).decode("ascii"))
@@ -73,6 +77,7 @@ def main() -> int:
         "python_tests": python_tests,
         "programs": programs,
         "journeys": journeys,
+        "native_journeys": native_journeys,
         "log_sha256": hashlib.sha256(log_bytes).hexdigest(),
         "source_and_artifact_sha256": identities,
         "limits": args.limit,
