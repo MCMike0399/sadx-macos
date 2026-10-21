@@ -408,3 +408,6 @@ build/mac-switch-backend-test: tests/unit/mac_switch_backend.mm build/libsadx-ma
 # Native media decoder qualification; source is introduced by the following movie integration.
 build/sadx-movie-qualify: src/apps/movie_qualify.mm build/libsadx-macos.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-macos.a build/libsadx-core.a $(MAC_FRAMEWORKS) -o $@
+
+build/guest-draw-history-test: tests/unit/guest_draw_history.cpp build/libsadx-guest.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $< $(GUEST_LINK) build/libsadx-core.a -o $@

@@ -1,0 +1,58 @@
+{
+  "problem": "Interactive reference observer retained every legacy DrawPrimitiveUP vertex buffer for process lifetime",
+  "live_process": {
+    "pid": 68216,
+    "frame": 16396,
+    "physical_footprint": "9.2G",
+    "legacy_draws": 2761642,
+    "record_capacity": 4194304,
+    "dominant_vertex_allocations": 1893143,
+    "allocation_bytes": 3584
+  },
+  "regression": {
+    "frames": 2001,
+    "before_exit": 134,
+    "before_history_records": 2001,
+    "after_exit": 0,
+    "after_history_records": 1,
+    "rendered_vertex_bytes_match": true,
+    "default_oracle_capture_preserved": true
+  },
+  "graphics_regression_exit": 0,
+  "review": "review_observer_memory: no blocking findings; existing live process recovery separate",
+  "limits": [
+    "No frame pacing claim",
+    "Full connected native story remains incomplete; this fix bounds development reference diagnostics"
+  ],
+  "live_recovery": {
+    "same_frame_before_after": 16396,
+    "retired_legacy_records": 2761642,
+    "state_json_and_png_byte_identical": true,
+    "continued_by_normal_input_to_frame": 16426,
+    "legacy_records_after_30_frames": 0,
+    "legacy_capacity_after_30_frames": 256,
+    "physical_footprint_after": "1.7G",
+    "allocated_heap_after": "208.0M",
+    "helper_source_sha256": "0c8447b9a97d5c1c766c68fa706eea685e312d3a150fce25fdd33418009ad8b8",
+    "review": "review_observer_memory: no blocking findings; private recovery test also passed ASan+UBSan",
+    "scope": "Private development observer only; no guest state writes or restart"
+  },
+  "gate_attempts": [
+    {
+      "exit_status": 2,
+      "reason": "isolated build initially lacked cmake on PATH; pinned private CMake supplied subsequently"
+    },
+    {
+      "exit_status": 2,
+      "reason": "isolated checkout lacked initialized pinned symbol repositories; mod-loader and sa-tools restored before final attempt"
+    },
+    {
+      "exit_status": 2,
+      "reason": "isolated checkout lacked local reference executable input; linked pinned inputs without changing tracked data"
+    },
+    {
+      "exit_status": 2,
+      "reason": "isolated checkout lacked pinned real scene-position corpus; mirrored fixture then preflighted every unit reference/game input with no missing paths; failed test rerun passed"
+    }
+  ]
+}

@@ -305,13 +305,22 @@ void register_hle_d3d8(HleProcess& p){
                               format,minimum,vertices,index_size-index_offset);
             submit(std::move(draw));return D3D_OK;
         };
-        b["DrawPrimitiveUP"]=[&d3d8,arg,snapshot,submit,vertex_count,read_vertices,bound,release](HleCall& c)->std::uint32_t{
+        b["DrawPrimitiveUP"]=[P,&d3d8,arg,snapshot,submit,vertex_count,read_vertices,bound,release](HleCall& c)->std::uint32_t{
             auto draw=snapshot(arg(c,1),arg(c,2),arg(c,4));
             read_vertices(c,draw,arg(c,3),vertex_count(draw.primitive_type,draw.primitive_count),0xffffffffULL);
-            // Preserve the existing legacy numeric stream used by unchanged guest digests.
-            NinjaScreenPolygon poly;poly.primitive_type=draw.primitive_type;
-            poly.primitive_count=draw.primitive_count;poly.stride=draw.stride;poly.vertex_bytes=draw.vertices;
-            submit(std::move(draw));d3d8.polygons.push_back(std::move(poly));
+            // Differential fixtures retain the legacy numeric history. Interactive
+            // observers already own the current frame and must not retain every past buffer.
+            std::optional<NinjaScreenPolygon> poly;
+            if (P->capture_legacy_draw_history) {
+                poly.emplace();
+                poly->primitive_type = draw.primitive_type;
+                poly->primitive_count = draw.primitive_count;
+                poly->stride = draw.stride;
+                poly->vertex_bytes = draw.vertices;
+            }
+            submit(std::move(draw));
+            if (poly)
+                d3d8.polygons.push_back(std::move(*poly));
             release(c.guest,bound->streams[0].first);bound->streams[0]={0,0};
             return D3D_OK;
         };

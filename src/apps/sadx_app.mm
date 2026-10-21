@@ -298,6 +298,7 @@ int run_guest(const Options& o){
     std::string error;const auto image=sadx::ExecutableImage::parse({std::istreambuf_iterator<char>(f),{}},&error);if(!image){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
     auto process=sadx::HleProcess::create(o.game_dir,o.overlay,&error);if(!process){std::fprintf(stderr,"%s\n",error.c_str());return 2;}
     process->use_real_cpp_runtime(o.system_dir);process->hle().set_logging(false);
+    process->capture_legacy_draw_history = false;
     process->assume("Host controller: first extended GameController retains priority; native USB Switch2Pro is the fallback. Both enter synthetic user 0 before the pinned SDL2/Input mod mapping. Switch raw SDL axes are preserved via the inverse raw-input conversion; Apple deadzones remain for GameController. Vibration is advertised only for a selected supported native owner; physical Windows HID identity/parity is unverified");
     std::unique_ptr<sadx::input::mac::HostControllerInput> host_controller;
     std::uint64_t controller_connection=0;

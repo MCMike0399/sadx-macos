@@ -4792,3 +4792,13 @@ The product still needs native boot/title, resources and gameplay recovery.
   explicit. Full standalone oracle sweep/m1 skipped. No tolerances, cases or expected values
   were changed. Next: integrate staged cleanup/save/audio/queue/screen owners and continue
   through title initialization. No push.
+
+### 2026-10-20 — Bound reference observer draw history (track E, full gate exit 0)
+
+* Outcome: preserved the live normal-input Emerald Coast route while reducing observer footprint from 9.2 GB to 1.7 GB.
+* Changed: interactive reference sessions disable legacy whole-session draw capture; current frame rendering and default differential capture remain intact.
+* Verified: regression fails before the fix (2,001 retained draws, exit 134), passes after it (one explicitly captured draw, 2,001 presents); graphics frame regression passes. Fresh independent review found no blocker.
+* Live recovery: retired 2,761,642 historical draws using a separately reviewed development-only helper; same-frame state and PNG remained byte identical; 30 normal frames later history was empty and footprint was 1.7 GB.
+* Gate: make -j10 gate with pinned private CMake exited 0; 187 native programs, 92 Python tests, four reference journeys passed. Four earlier isolated-checkout attempts exited 2 because tool/asset/corpus inputs were absent; complete input preflight and exact fixture reruns resolved them.
+* Limits: no gameplay performance claim; native title WIP was excluded from this isolated gate. Native connected story remains incomplete.
+* Next: integrate native title input and actual music playback, then continue the normal-input story route.

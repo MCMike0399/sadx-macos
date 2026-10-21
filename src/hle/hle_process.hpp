@@ -82,6 +82,9 @@ public:
         std::vector<Event> events;
     };
     D3D8Frame frame,last_frame;std::uint32_t vertex_shader=0;
+    // Full legacy draw history is for differential fixtures. Interactive rendering
+    // consumes last_frame and does not need a second copy of every prior draw.
+    bool capture_legacy_draw_history = true;
     std::map<std::string,std::string> environment_variables; // names compared case-insensitively (stored upper-case)
     std::map<std::uint32_t,std::uint32_t> tls;std::uint32_t next_tls=0;std::set<std::uint32_t> heaps;std::uint32_t process_heap=0;std::uint32_t command_line_a_env=0;
     std::uint32_t errno_address=0,iob_address=0,narrow_argv=0,environment=0,command_line_w=0,command_line_a=0;

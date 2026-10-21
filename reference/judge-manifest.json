@@ -1,12 +1,13 @@
 {
   "change": {
-    "base_commit": "55b28bf34c35b8cd964608284f62ef3af8a69835",
-    "evidence": "reference/production-integration-20261020/native-title-profile-build-preparation.json",
-    "evidence_sha256": "36d8fb4d7f861e2d9a28af16cd39a87d8dcc14e8de5156bdbcdd38dea84eee45",
-    "reason": "Prepare level sound native dependency and record recovered active loader hooks"
+    "base_commit": "44febc557b8a1f748da51aca4300e5e8901b2d07",
+    "evidence": "reference/production-integration-20261020/observer-draw-history-memory.json",
+    "evidence_sha256": "19bd2fdd52615efb0959bdcb022fc5c9895bd98e9b127871669ad64979ab2f5e",
+    "mode": "additions-only",
+    "reason": "Add bounded observer draw-history regression; preserve default differential capture"
   },
   "files": {
-    "Makefile": "a89caba15776f58e50fae4b171a9d143e6b068b09e864e2f31f6a5d02e9ab8f9",
+    "Makefile": "c0ae4b212acbe843c4d1fa8e2934f97a5f4b4dfffb15411c0ddb5b4be7564f4a",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
     "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
     "reference/frame-control-corpus.tsv": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",
@@ -388,7 +389,7 @@
     "tests/python/test_readability.py": "8090f2eb23f8c958972e071d94a4d77b99a8062953d456a89ccba2abafc78a3d",
     "tests/python/test_symbol_context.py": "e276e801136d0821369682beb43c42c0f460ff137123683d8c1150487eec2690",
     "tests/python/test_symbols.py": "9e9a03a6389d6cd58aa49c63272049754f55ccddb19eeb894b8b92ccce362e0f",
-    "tests/unit/manifest.tsv": "ee05042850f6b35a93d0c89e32819e6bf6d4457ec2bced65bbcfaeeaf50d68cb",
+    "tests/unit/manifest.tsv": "d07f4c3cd8d9931b7a3377ed06c953a12dcaa3cb6ee32406ccd8a38250c77abd",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",
