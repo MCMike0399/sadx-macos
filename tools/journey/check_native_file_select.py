@@ -25,7 +25,7 @@ def run(application, assets, output):
     check(not captures.exists(), 'choose a fresh output directory; stale captures cannot verify this run')
     fixture_path = Path(__file__).resolve().parents[2] / 'reference/frozen-corpora/native-file-select-panel.json'
     panel_reference = json.loads(fixture_path.read_text())
-    frames = (740, 899, 902, 950, 1002, 1100)
+    frames = (740, 899, 902, 950, 1002, 1100, 1190, 1251, 1300, 1450, 1850)
     imported = {path.name: hashlib.sha256(path.read_bytes()).hexdigest()
                 for path in (assets / 'saves').glob('*') if path.is_file()}
     with tempfile.TemporaryDirectory(prefix='sadx-native-file-select-') as temporary:
@@ -33,7 +33,9 @@ def run(application, assets, output):
         command = [str(application), '--assets', str(assets), '--offscreen', '--paced',
                    '--exit-after', str(frames[-1]), '--save-directory', str(profile),
                    '--key-events', '500:13:down,501:13:up,750:13:down,751:13:up,'
-                   '900:40:down,901:40:up,1000:38:down,1001:38:up',
+                   '900:40:down,901:40:up,1000:38:down,1001:38:up,'
+                   '1150:13:down,1151:13:up,1250:90:down,1251:90:up,'
+                   '1400:90:down,1401:90:up,1650:13:down,1651:13:up',
                    '--capture-directory', str(captures), '--capture-at',
                    ','.join(map(str, frames))]
         with (output / 'application.log').open('w') as log:
@@ -90,6 +92,45 @@ def run(application, assets, output):
                   last[f'{kind}_audio_completed_buffers'] > 0 and
                   last[f'{kind}_audio_device_error'] == 0,
                   f'{kind} did not deliver samples successfully')
+        check(states[1190]['dialog_phase'] == 2 and states[1190]['dialog_cursor'] == 0 and
+              states[1190]['file_select_submode'] == 2,
+              'normal Enter did not open the real selected-save dialog')
+        check(states[1251]['dialog_cursor'] == 1 and states[1251]['dialog_phase'] in (3, 4),
+              'normal cancel input did not select and close the dialog cancel branch')
+        check(states[1300]['dialog_phase'] == 5 and states[1300]['file_select_submode'] == 1,
+              'dialog cancel did not return control to FileSelect')
+        check(states[1450]['file_select_submode'] == 10,
+              'normal cancel did not leave FileSelect through its menu transition')
+        reentered = states[1850]
+        check(reentered['file_select_phase'] == 2 and reentered['file_select_submode'] == 1,
+              'normal title confirmation did not reenter FileSelect')
+        check(reentered['selected_save_name'] == last['selected_save_name'] and
+              reentered['save_checksum'] == last['save_checksum'],
+              'menu reentry did not reload the same real save')
+        check(reentered['voice_start_events'] == 2 and reentered['music_start_events'] == 4 and
+              reentered['sound_play_events'] == 9,
+              'menu reentry did not request and deliver its real audio resources')
+        for kind in ('music', 'voice', 'sound'):
+            check(reentered[f'{kind}_audio_nonzero_samples'] > 0 and
+                  reentered[f'{kind}_audio_completed_buffers'] > 0 and
+                  reentered[f'{kind}_audio_device_error'] == 0,
+                  f'menu reentry {kind} delivery failed')
+        resources = states[1190]
+        check(resources['caption_buffers_allocated'] > 0 and
+              resources['caption_buffers_allocated'] == resources['caption_buffers_freed'] ==
+              resources['caption_thread_waits'],
+              'empty-English help skipped its actual allocation/wait/release caller chain')
+        for frame in (1190, 1251, 1300, 1850):
+            state = states[frame]
+            check(not state['caption_buffer_live'] and state['caption_timer'] == 0 and
+                  state['message_texture_release_count'] == 0 and
+                  state['caption_buffers_allocated'] == state['caption_buffers_freed'],
+                  f'{frame}: caption resources survived their source frame tail')
+            check(state['texture_slots_in_use'] == last['texture_slots_in_use'],
+                  f'{frame}: dialog/cancel/reentry changed resident texture ownership')
+            image = (captures / f'{frame}.ppm').read_bytes()
+            check(image.startswith(b'P6\n640 480\n255\n') and len(image) == 921615,
+                  f'{frame}: native dialog/reentry image is missing or malformed')
         for name, digest in imported.items():
             check(hashlib.sha256((profile / name).read_bytes()).hexdigest() == digest,
                   f'loading/navigation changed seeded save {name}')
@@ -103,9 +144,9 @@ def run(application, assets, output):
               'reference_panel_fixture_sha256': hashlib.sha256(fixture_path.read_bytes()).hexdigest(),
               'limits': ['No native story gameplay or gameplay63FPS proof.',
                          'Screenshots captured; reference pixel comparison is a separate check.',
-                         'Two-save fixture; fresh-file creation is a later checkpoint.']}
+                         'Two-save fixture; popup cancel, return and reentry are covered. Fresh-file creation and main-menu confirmation remain later checkpoints.']}
     (output / 'result.json').write_text(json.dumps(report, indent=2) + '\n')
-    print('Native FileSelect boot, save navigation, texture lifetime and delivered audio pass')
+    print('Native FileSelect navigation, dialog cancel, title return/reentry, resource lifetime and delivered audio pass')
 
 
 def main():

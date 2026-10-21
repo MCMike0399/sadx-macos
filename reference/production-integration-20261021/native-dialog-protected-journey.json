@@ -1,0 +1,23 @@
+{
+  "requirement": "Extend enforced native journey as connected dialog/cancel/title-return/reentry becomes functional.",
+  "preserved": "All original1100-frame save-navigation, exactsourcepanel, sound/music/voice event/sample, save-preservation and texture assertions remain.",
+  "new_normal_inputs": "Enter1150opensdialog; pinnedB/Z1250cancels; B/Z1400returnsTitle; Enter1650reentersFileSelect; exit1850.",
+  "new_assertions": [
+    "realpopupopen/cancel/closed phases",
+    "normalmenu transition and real save reload",
+    "4musicstarts/2voice/9soundevents aftersameentry+reentry (originalconstructor/cancel/close sourcecalls)",
+    "actualCaptionallocate/wait/freecounts equal andnonzero whilepopupvisible",
+    "no livecaptionbuffer/timer/queuedtextures afterframetail",
+    "residenttextureownership andimported/userseedbytesstable"
+  ],
+  "pilot": {
+    "exit_status": 0,
+    "report": "build/native-dialog-protected-pilot/result.json",
+    "captures": "actual native popup and return paths; parentinspected prioridenticalcomposed1000popup"
+  },
+  "source_judges": "Originaldialogrequest/update/draw/confirmation andunchangedFileSelectcontrols/Titleprefix valuesmatch; FPpartialsremainpartial.",
+  "limits": [
+    "Existing-saveconfirm separatelyreachesexplicitnative_main_menu_initialization, not counted as a passing menu checkpoint.",
+    "No freshsave/persistence/nativegameplay/63FPSclaim."
+  ]
+}

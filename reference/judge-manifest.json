@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "2f898ae323873e39ea5ead8d919984e9465db949",
-    "evidence": "reference/production-integration-20261021/native-voice-resource-qualification.json",
-    "evidence_sha256": "75ae488786e615f31e1d0e10fec5b60398540b58d94ee15cda3684ab31df7c57",
-    "reason": "Retain exact original two-clip playback cases while adding complete menu resource and native gain qualification"
+    "base_commit": "dcb9ee16b6d4022f89134518630c14002342ef5c",
+    "evidence": "reference/production-integration-20261021/native-dialog-protected-journey.json",
+    "evidence_sha256": "47e18d8bb6a9935ae7a611dbbe5ba76ba3c2d1191301b41f379a0165b310d8e4",
+    "reason": "Extend the protected native FileSelect journey through actual dialog cancellation and normal title return/reentry without removing prior assertions"
   },
   "files": {
     "Makefile": "37b5a62363d5fb6b87994ba87cd87470694c65c886834cd8e81e0a7c939e5dd8",
@@ -536,7 +536,7 @@
     "tools/gate/run_journeys.py": "ccf2816a8b0463a5cc57b0edd9ed1335ea9c2a6228daa437f8c669e7b6915ae0",
     "tools/gate/run_native_journeys.py": "aeb4115609f5f6633b238887a94afbd567c40c460737b3e9daf3c89f4b3cbc1a",
     "tools/gate/track_reports.py": "f936d454c3d07a0614dc27e6370396c41428763cc05c473b9b34773b7f96abc9",
-    "tools/journey/check_native_file_select.py": "8f726d524ad17ddf0a4d8e47bc98558066bf37fd8a9c118ccc857e3a6ddb1794",
+    "tools/journey/check_native_file_select.py": "a4329f69052ce50fc6fc5a026cbe0d4fd9a9fc096d1a0179b13068e99412c2d8",
     "tools/lib/extract.py": "d2c2cb1479003401ba1faf0211281a6c6d35949c2bd27e55acc48f7cc7825bd8",
     "tools/lib/import_audio.py": "91f0db9f658c306a4a5637b4180c4e0d6033da72d927f1ba59c18965e5a49e30",
     "tools/lib/pe_image.py": "94694dc5fb38e459d26b35c25a7cdb7e3fad7128e1178363340606bb9db299f2",
