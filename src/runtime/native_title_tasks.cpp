@@ -145,20 +145,6 @@ void TitleScene::display_sound_test(TaskScheduler &scheduler, const TaskHandle &
     if (!work) throw std::runtime_error("native sound_test task has no work");
     scene.require_drawn(title_menu::draw_sound_test(*work), "native_sound_test_drawing");
 }
-void TitleScene::exec_main_menu(TaskScheduler &scheduler, const TaskHandle &task) {
-    auto &scene = callback_scene(scheduler, exec_main_menu);
-    auto work = std::static_pointer_cast<title_menu::MainMenuWork>(task->auxiliary_native_work);
-    if (!work || !scene.state_.sequence_work)
-        throw std::runtime_error("native main_menu task has no work");
-    scene.require_complete(title_menu::update_main_menu(*work, *scene.state_.sequence_work),
-                            "native_main_menu");
-}
-void TitleScene::display_main_menu(TaskScheduler &scheduler, const TaskHandle &task) {
-    auto &scene = callback_scene(scheduler, display_main_menu);
-    auto work = std::static_pointer_cast<title_menu::MainMenuWork>(task->auxiliary_native_work);
-    if (!work) throw std::runtime_error("native main_menu task has no work");
-    scene.require_drawn(title_menu::draw_main_menu(*work), "native_main_menu_drawing");
-}
 void TitleScene::exec_options(TaskScheduler &scheduler, const TaskHandle &task) {
     auto &scene = callback_scene(scheduler, exec_options);
     auto work = std::static_pointer_cast<title_menu::OptionWork>(task->auxiliary_native_work);

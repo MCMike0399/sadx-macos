@@ -150,7 +150,7 @@ struct DialogSounds {
     std::int32_t open = 0, close = 0, move = 0, decide = 0, cancel = 0;
 };
 // NOTSA: semantic identity of the source EachDrawFnc; no code pointers enter assets.
-enum class DialogContent { None, FileSelectHelp };
+enum class DialogContent { None, FileSelectHelp , MainMenuBackdrop, TrialMenuBackdrop};
 struct DialogParameters {
     DialogStyle style = DialogStyle::Blue;
     DialogContent content = DialogContent::None;
@@ -540,7 +540,7 @@ MenuDrawResult draw_file_select(const FileSelectWork &);
 MenuDrawResult draw_level_select(const StageSelectWork &);
 // FUNCTION: SONIC 0x511390 SoundTest_Display
 MenuDrawResult draw_sound_test(const SoundTestWork &);
-// FUNCTION: SONIC 0x50bcb0 title_menu_display
+// NOTSA: retained inactive-prefix reference adapter for the source main-menu display.
 MenuDrawResult draw_main_menu(const MainMenuWork &);
 // FUNCTION: SONIC 0x509810 OptionsMenu_Display
 MenuDrawResult draw_options(const OptionWork &);
@@ -571,7 +571,7 @@ MenuCallbackResult update_file_select(FileSelectWork &, SequenceWork &);
 MenuCallbackResult update_level_select(StageSelectWork &, SequenceWork &);
 // FUNCTION: SONIC 0x511270 SoundTest_Main
 MenuCallbackResult update_sound_test(SoundTestWork &, SequenceWork &);
-// FUNCTION: SONIC 0x50bde0 title_menu_exec
+// NOTSA: retained inactive-prefix reference adapter for the source main-menu update.
 MenuCallbackResult update_main_menu(MainMenuWork &, SequenceWork &);
 // FUNCTION: SONIC 0x5086e0 FUN_005086e0
 void update_option_animation(OptionWork &);

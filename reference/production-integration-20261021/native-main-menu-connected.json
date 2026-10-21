@@ -1,0 +1,312 @@
+{
+  "outcome": "Connected compiled native startup\u2192normal existing-save confirmation\u2192full MainMenu. Downnavigation, cancel toTitle, normalEnter reentry, real101music and balancedresourcesverified; Adventureselection reaches explicitnextCharacterSelectinitializationboundary.",
+  "source_files": {
+    "src/apps/native_main_menu_assets.hpp": "aa70ffe7ed9e1062f4a24864c4ec2b97cb5a612190fab759d172ec8ba2d49b45",
+    "src/apps/sadx_native.mm": "e364ce964f366445dff4e749f5118ae9997def95a04bdee7f22c7757bd8ad9c8",
+    "src/engine/menu_square.cpp": "1cd2b084c32336c369cf7fc4dc352084e08b53ed4da6d21e128191519877dfb1",
+    "src/engine/menu_square.hpp": "0f1dae06b13e38f4182c51d21f74751dce42412f1a3d17a0af45c331504f6339",
+    "src/game/file_select_display.cpp": "b4745bfd3d105b68dd023cb8570ed762edfeac8a99bf0a9412f6045128436deb",
+    "src/game/main_menu.cpp": "2b3966f3e35dbcbb1d70ad8a947b74d74bdc197cade512fe4f6824aae4a7da13",
+    "src/game/main_menu.hpp": "5ae39f7e0b52574ac8f3be5b78370d47df2acc420c1b5917f3ec4bce0c760bc7",
+    "src/game/main_menu_content.cpp": "8b374c36a5a780e6d823a45f003f2ef9c8d9536d4b117486a5adefdf70ed7383",
+    "src/game/main_menu_content.hpp": "b0b5784ce4eeff1ea1e9b74bd3a48ed6b4b28b2276c6584ed4e1d501048876ac",
+    "src/game/main_menu_eligibility.cpp": "5ca7c0e54a3e2d9bd6459188daa2b49af3a3a1089a0a4e6a3bc3ba4da5faee76",
+    "src/game/main_menu_eligibility.hpp": "bf32a383a2ec665138c6cd6e508770e050d72133031eb7798d33ea9c6689ebcc",
+    "src/game/menu_dialog.hpp": "a2b634842674e7002a3b9a875121011a81c31647f36f9ee0c9a7b0ec853038b9",
+    "src/game/menu_dialog_control.cpp": "e14f08443aefb4fdc9616a1ef8221996a8d060049db562a9b8774b73d751dd22",
+    "src/game/menu_dialog_control.hpp": "10de3160686253db80a9fdac3b605ff3908073ec416a52e9f607aab18338b9a5",
+    "src/game/menu_dialog_draw.cpp": "dab22cb5d33e237ce4381ec2dfc155a6f88900749fbed749588fb16d458c4eb2",
+    "src/game/menu_dialog_file_select.hpp": "0f51df88dfb2f40dba582405713d29cbc2adac827fc8c1e76d10f27d8c3fa7de",
+    "src/game/menu_eligibility.cpp": "cf76022d0d362fcefed25327173331282b6fe705d035f1eeff14eafc1e2a9e14",
+    "src/game/menu_eligibility.hpp": "5d6a4dabe9c734ac43e80ff70e961f298535d00e4ee3c66cf903ae7e3dd0a72d",
+    "src/game/menu_navigation.cpp": "77b4c4887fa4228844e717b1049eaa1e3a1e87fdc378b4af7262d84ad1f10934",
+    "src/game/menu_navigation.hpp": "78866ebf2734a27a9f8733d1a88a042a6acfe32f6e6accc270e5450a42b21db7",
+    "src/game/title_menu.hpp": "da37831d3df45679bb3e79aa0288f6c948236262e77c938fa11dd53ac7ec102f",
+    "src/runtime/main_menu_assets.hpp": "9b0bed561332f609d228b1180958abcf7cb655bb1432de04381602b554422f67",
+    "src/runtime/native_file_select_display.cpp": "89b7c5795aa08312ef91670989728356e053b311b13dfb0d1969212e39cc40a7",
+    "src/runtime/native_main_menu.cpp": "1ae463115acce944702dbb08dc777d96458072006d9e2386c0c85c75020f8d1e",
+    "src/runtime/native_session.hpp": "77dc99b224668ae81834250a2d99c63294f90579eed22578d060201f26b281b8",
+    "src/runtime/native_title_scene.hpp": "1bf15616f9765c1a5e8b948d0e45bbe3d598f64c0d0fb43b6a1a85bba70d2889",
+    "src/runtime/native_title_tasks.cpp": "ca6419cc429f5d7a47a7747c0a53a0b9a47e72d045f17a850a1470bb4731de39"
+  },
+  "full_gate": {
+    "exit_status": 0,
+    "report": "native-main-menu-integration-gate.json",
+    "native_programs": 236,
+    "python_tests": 245,
+    "existing_filesystem_skips": 1,
+    "reference_journeys": 4,
+    "required_native_journeys": [
+      {
+        "name": "FileSelect",
+        "frames": 1850
+      },
+      {
+        "name": "MainMenu",
+        "frames": 1850
+      }
+    ]
+  },
+  "canonical_oracles": {
+    "main_menu": {
+      "sha256": "2b0a749c09f5c4ed5b80b323c4fcf4c1ff718a26d4ca4163361a2ac952e6a586",
+      "cases": 1602,
+      "values_match": true,
+      "passed": false,
+      "fp_flag_mismatches": 163
+    },
+    "menu_eligibility": {
+      "sha256": "8be8134d733a4ae716bb56c5c05b87bc60d6e7d0a6464f603a808d31e9dc2034",
+      "cases": 7388,
+      "values_match": true,
+      "passed": true,
+      "fp_flag_mismatches": null
+    },
+    "main_menu_eligibility": {
+      "sha256": "45a1f995d4a63aefe6f223c3c08313674b80f585ec2e77f997f72df28316397a",
+      "cases": 11488,
+      "values_match": true,
+      "passed": true,
+      "fp_flag_mismatches": null
+    },
+    "main_menu_content": {
+      "sha256": "e2a92e9762106dcbcffa53b896b7f1094d5570f876726eede6fa8a9e03990e59",
+      "cases": 3612,
+      "values_match": true,
+      "passed": false,
+      "fp_flag_mismatches": 3540
+    },
+    "menu_dialog_control": {
+      "sha256": "6b3f9bed0017a32730940ca23d13852665eb8ca16be0ed989886adbe8c9197df",
+      "cases": 4116,
+      "values_match": true,
+      "passed": true,
+      "fp_flag_mismatches": null
+    },
+    "menu_navigation": {
+      "sha256": "0e92d3373d40549abf4b677a691cbac85053e92791e34091fe1fda1323b975b3",
+      "cases": 1488,
+      "values_match": true,
+      "passed": true,
+      "fp_flag_mismatches": null
+    },
+    "menu_dialog_square": {
+      "sha256": "7bf1a084d03961d03693f4548efcb0b84781474d9e9cb7f79f6d7dea4d939e3b",
+      "cases": 1713,
+      "values_match": true,
+      "passed": false,
+      "fp_flag_mismatches": 1646
+    },
+    "file_select_display": {
+      "sha256": "f219d571ef944c9a335a1abec5bf1d0bb64da4c3474df3edc29f554723c1d2ca",
+      "cases": 600,
+      "values_match": true,
+      "passed": false,
+      "fp_flag_mismatches": 340
+    },
+    "menu_dialog_draw": {
+      "sha256": "6d6ce9ddbf168a59e841321b577bace472ba278406cba0e9bd451995784e6ac1",
+      "cases": 1090,
+      "values_match": true,
+      "passed": false,
+      "fp_flag_mismatches": 1023
+    },
+    "title_dialog": {
+      "sha256": "e5fea49b1871544da87a229df330f1c5d9111f7b19766dbb36ac6ae7efe71458",
+      "cases": 2652,
+      "values_match": true,
+      "passed": false,
+      "fp_flag_mismatches": 667
+    }
+  },
+  "actual_oracle_exits": [
+    {
+      "slug": "main_menu",
+      "make_exit": 2,
+      "verdict_exit": 0,
+      "report_exists": true
+    },
+    {
+      "slug": "menu_eligibility",
+      "make_exit": 0,
+      "verdict_exit": 0,
+      "report_exists": true
+    },
+    {
+      "slug": "main_menu_eligibility",
+      "make_exit": 0,
+      "verdict_exit": 0,
+      "report_exists": true
+    },
+    {
+      "slug": "main_menu_content",
+      "make_exit": 2,
+      "verdict_exit": 0,
+      "report_exists": true
+    },
+    {
+      "slug": "menu_dialog_control",
+      "make_exit": 0,
+      "verdict_exit": 0,
+      "report_exists": true
+    },
+    {
+      "slug": "menu_navigation",
+      "make_exit": 0,
+      "verdict_exit": 0,
+      "report_exists": true
+    },
+    {
+      "slug": "menu_dialog_square",
+      "make_exit": 2,
+      "verdict_exit": 0,
+      "report_exists": true
+    },
+    {
+      "slug": "file_select_display",
+      "make_exit": 0,
+      "verdict_exit": 0,
+      "report_exists": true
+    },
+    {
+      "slug": "menu_dialog_draw",
+      "make_exit": 2,
+      "verdict_exit": 0,
+      "report_exists": true
+    },
+    {
+      "slug": "title_dialog",
+      "make_exit": 2,
+      "verdict_exit": 0,
+      "report_exists": true
+    }
+  ],
+  "corrected_control_final_exits": [
+    {
+      "command": [
+        "build/menu-dialog-control-test"
+      ],
+      "exit_status": 0
+    },
+    {
+      "command": [
+        "make",
+        "oracle-menu-dialog-control"
+      ],
+      "exit_status": 0
+    },
+    {
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_menu_dialog_control.py",
+        "reference/updated-pc-reference/game/sonic.exe",
+        "build/native-menu-dialog-control-probe.dylib",
+        "--output",
+        "build/oracles/menu_dialog_control_holdout.json",
+        "--seed",
+        "9473201",
+        "--cases",
+        "3000"
+      ],
+      "exit_status": 0
+    }
+  ],
+  "holdout_exits": [
+    {
+      "slug": "main_menu",
+      "exit_status": 1,
+      "cases_argument": 4000,
+      "seed": 505631
+    },
+    {
+      "slug": "menu_eligibility",
+      "exit_status": 0,
+      "cases_argument": 7000,
+      "seed": 506631
+    },
+    {
+      "slug": "main_menu_eligibility",
+      "exit_status": 0,
+      "cases_argument": 10000,
+      "seed": 506841
+    },
+    {
+      "slug": "main_menu_content",
+      "exit_status": 1,
+      "cases_argument": 4000,
+      "seed": 505591
+    },
+    {
+      "slug": "menu_dialog_square",
+      "exit_status": 1,
+      "cases_argument": 2200,
+      "seed": 432481
+    },
+    {
+      "slug": "menu_navigation",
+      "exit_status": 0,
+      "cases_argument": 2400,
+      "seed": 505661
+    }
+  ],
+  "verdict": "Value-exact FPpartials remainpartial. Finalcorrectedcontrol4116dev7716holdoutstrictPASS. Otherrawreportsreadwithverdict.py, no tolerancechanges.",
+  "independent_reviews": [
+    "review_main_menu: core/control/profileidentityview",
+    "review_menu_primitives: singleowner extraction+fullstyle4 underunchangedstyle5/FileSelect judges",
+    "review_menu_helpers: eligibility/backdrop/quickhelper/routing; originalquickmappingmistake later independentlycorrected",
+    "review_menu_music: atomicresources+samelegacy2clipcases+real101sampledelivery",
+    "review_main_menu_runtime: canonicalactualtaskauxwork/callerchain/resourcealiasing; revisedhash1ae463115acce944702dbb08dc777d96458072006d9e2386c0c85c75020f8d1e",
+    "review_quick_dialog_fix: independentPEfieldmapping/redgreen/mutants+fivewholeimages"
+  ],
+  "images": {
+    "inspected": "build/native-main-menu-private-composed/captures/1250.png",
+    "same_save_original_comparison": "SonicDX01 reached throughnormalDown; Native/Windowsfilesystemenumeration differs.",
+    "discovered_real_bug": "Quickopen clearedfadeinsteadcounter; functionjudge sharedincorrectmapping. Separatefix(judge)b196129 corrects32angle/20fade andpreservesall48wordoldinputsplusadditionalfade/knownness.",
+    "fixed_full_reference_images": {
+      "frames": [
+        1248,
+        1249,
+        1250,
+        1251,
+        1252
+      ],
+      "dimensions": [
+        640,
+        480
+      ],
+      "different_pixels": 0,
+      "observed_input_delivery_alignment": "native952/1052 vsreferencepress950/1050. Nativeproductionandoldrequiredjourneyinputsunchanged. Globalmoviepresentoffsetremainsseparate."
+    },
+    "source_only_current_build": "native-main-menu-production-closure.json: build0,MainMenujourney0,all10capturesexacttomain,noEXE/DLL/referenceexecutiondependencies."
+  },
+  "resources": {
+    "canonicalMode": 6,
+    "activeSaveName": "SonicDX01.snc",
+    "fallbackSaveName": null,
+    "sourceSonicVoiceRow": 1,
+    "real_main_music_song": 101,
+    "music_starts_first_main": 3,
+    "music_starts_after_reentry": 5,
+    "balanced_caption_calls": 118,
+    "stable_main_texture_slots": 355,
+    "main_menu_cancel_title_texture_slots": 435,
+    "native_save_files_unchanged": true,
+    "native_menu_assets_malformed_cases": 11,
+    "profile_identity_guard_cases": 8,
+    "profile_scope": "640\u00d7480/scales1only,unsupportedviewsstop explicitly."
+  },
+  "next_native_boundary": {
+    "run": "build/native-main-menu-adventure-private",
+    "exit_status": 1,
+    "frame": 1381,
+    "call": "native_character_select_initialization",
+    "input": "normalEnter1350atAdventure"
+  },
+  "limits": [
+    "No fresh-savecreation/restartpersistence yet; currentlyreviewedprivateSavingpipelineisnext.",
+    "NoCharacterSelect3D/gameplay/Chaos0defeat/connectedstoryroute/actualgameplay63FPSqualification.",
+    "BroaderexistingoraclefailuresandFPpartial statusesnotcleared.",
+    "PhysicalSwitch2evidence reusedbecauseInput/hardwarebackendunchanged.",
+    "No push afterexplicitlyauthorized1a8261f."
+  ]
+}

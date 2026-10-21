@@ -21,6 +21,7 @@
 #include "apps/native_save_directory.hpp"
 #include "apps/native_file_select_assets.hpp"
 #include "apps/native_menu_dialog_assets.hpp"
+#include "apps/native_main_menu_assets.hpp"
 #include "apps/native_audio_mix.hpp"
 #import <AppKit/AppKit.h>
 #import <MetalKit/MetalKit.h>
@@ -194,6 +195,7 @@ class Application {
             sadx::native::app::load_menu_texture_assets(this->configuration.assets));
         session.attach_menu_dialogs(
             sadx::native::app::load_menu_dialog_assets(this->configuration.assets));
+        session.attach_main_menu(sadx::native::app::load_main_menu_assets(this->configuration.assets));
         session.attach_font(sadx::native::app::load_font_assets(this->configuration.assets));
         session.attach_menu_voices(sadx::native::app::load_menu_voice_assets(this->configuration.assets));
         session.attach_file_select_display(
@@ -470,6 +472,18 @@ class Application {
         const auto file_work = file_task
             ? std::static_pointer_cast<const sadx::title_menu::FileSelectWork>(file_task->auxiliary_native_work)
             : std::shared_ptr<const sadx::title_menu::FileSelectWork>{};
+        const auto main_task = title ? title->state().factories.main_menu_task : sadx::TaskHandle{};
+        const auto main_work = main_task
+            ? std::static_pointer_cast<const sadx::title_menu::MainMenuWork>(main_task->auxiliary_native_work)
+            : std::shared_ptr<const sadx::title_menu::MainMenuWork>{};
+        const auto sequence_task = title ? title->state().sequence_task : sadx::TaskHandle{};
+        const auto sequence_work = sequence_task
+            ? std::static_pointer_cast<const sadx::title_menu::SequenceWork>(sequence_task->auxiliary_native_work)
+            : std::shared_ptr<const sadx::title_menu::SequenceWork>{};
+        const auto character_task = title ? title->state().factories.character_select_task : sadx::TaskHandle{};
+        const auto character_work = character_task
+            ? std::static_pointer_cast<const sadx::title_menu::CharacterSelectWork>(character_task->auxiliary_native_work)
+            : std::shared_ptr<const sadx::title_menu::CharacterSelectWork>{};
         const auto dialog_task = title ? title->state().dialog_task : sadx::TaskHandle{};
         const auto dialog_work = dialog_task
             ? std::static_pointer_cast<const sadx::title_menu::DialogWork>(dialog_task->auxiliary_native_work)
@@ -498,6 +512,7 @@ class Application {
         else
             output << "null";
         output << ",\"logic_loop_count\":" << session.logic_loop_count();
+        output << ",\"music_song\":" << session.current_music_song();
         output << ",\"native_music_gain\":" << configuration.audio_mix.music
                << ",\"native_effects_gain\":" << configuration.audio_mix.effects
                << ",\"native_voice_gain\":" << configuration.audio_mix.voice;
@@ -517,6 +532,18 @@ class Application {
                    << ",\"caption_buffers_freed\":" << resources.freed
                    << ",\"caption_thread_waits\":" << resources.waits;
         }
+        if (main_work) {
+            output << ",\"main_menu_phase\":" << static_cast<unsigned>(main_work->presentation.phase)
+                   << ",\"main_menu_submode\":" << main_work->submode
+                   << ",\"main_menu_selected\":" << main_work->selected_menu;
+        }
+        if (sequence_work) {
+            output << ",\"sequence_mode\":" << static_cast<std::int32_t>(sequence_work->mode)
+                   << ",\"sequence_fixed_mode\":" << static_cast<std::int32_t>(sequence_work->fixed_mode)
+                   << ",\"sequence_waiting\":" << static_cast<unsigned>(sequence_work->waiting);
+        }
+        if (character_work)
+            output << ",\"character_select_next\":" << static_cast<std::int32_t>(character_work->presentation.next);
         if (dialog_work) {
             output << ",\"dialog_phase\":" << dialog_work->phase
                    << ",\"dialog_cursor\":" << static_cast<unsigned>(dialog_work->cursor)

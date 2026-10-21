@@ -1,5 +1,7 @@
 #include "game/file_select_display.hpp"
+#include "game/menu_eligibility.hpp"
 #include "cpu/fidelity_float.hpp"
+#include "engine/menu_square.hpp"
 #include <cstdio>
 #include <stdexcept>
 
@@ -55,35 +57,11 @@ class Display {
         menu_draw::set_vertex_colors({top, bottom, top, bottom}, pvr_state);
     }
     void select(MenuTexture list) { calls.select_menu_texture(list); }
-    // FUNCTION: SONIC 0x4b3f90 GetEmblemCount
-    std::int32_t emblem_count() const {
-        std::int32_t result = 0;
-        for (auto byte : view.save.emblems) {
-            while (byte != 0) {
-                if ((byte & 1U) != 0)
-                    ++result;
-                byte >>= 1;
-            }
-        }
-        return result;
-    }
-    // FUNCTION: SONIC 0x506630 GetEachCharEnable
+    // NOTSA: both native menus consume the same source eligibility helpers.
+    std::int32_t emblem_count() const { return menu_eligibility::emblem_count(view.save); }
     bool character_enabled(unsigned character) {
-        if (view.unlock_override != 0)
-            return true;
-        constexpr std::array<unsigned, 7> flags{65, 66, 67, 68, 70, 69, 71};
-        if (character >= flags.size())
-            throw std::runtime_error("character availability has no source case");
-        if (character == 6 && view.tutorial_variant == 1) {
-            if (view.event_flags[89] != 0)
-                return true;
-            if (emblem_count() >= 130) {
-                view.event_flags[89] = 1;
-                return true;
-            }
-            return false;
-        }
-        return view.event_flags[flags[character]] != 0;
+        return menu_eligibility::character_enabled(character,
+            {view.save, view.event_flags, view.unlock_override, view.tutorial_variant}) != 0;
     }
     // FUNCTION: SONIC 0x506950 FileSelect_LastCharacter
     unsigned last_character() const {
@@ -126,30 +104,31 @@ class Display {
                                      view.display_disabled, calls, fp);
         }
     }
-    // FUNCTION: SONIC 0x431cb0 DrawSquareC
+    // NOTSA: adapts the shared square drawings to this display's canonical PVR owner.
+    struct SquareCalls final : menu_square::Calls {
+        Display &display;
+        explicit SquareCalls(Display &owner) : display(owner) {}
+        void select_square() override {
+            display.calls.select_standard_texture(menu_draw::StandardTexture::Square);
+        }
+        void set_material(std::uint32_t color) override { display.material(color); }
+        void draw_scaled(std::uint32_t index, float x, float y, float depth, float sx,
+                         float sy) override {
+            pvr::draw_scaled_texture(index, x, y, depth, sx, sy, display.pvr_state,
+                                     display.view.display_disabled, display.calls, display.fp);
+        }
+    };
+    // NOTSA: borrowed adapter for the source square helper.
     void square(std::uint32_t color, float x, float y, float depth, float sx, float sy) {
-        calls.select_standard_texture(menu_draw::StandardTexture::Square);
-        material(color | 16777215U);
-        const auto offset_y = (value(y) - 240.0f).rounded();
-        const auto offset_x = (value(x) - 320.0f).rounded();
-        const auto shadow_y = (value(sy) * 1.177024483680725f).rounded();
-        const auto shadow_x = (value(sx) * 1.0460431575775146f).rounded();
-        const auto py = (value(view.vertical_scale) * 240.0f + offset_y).rounded();
-        const auto px = (value(view.horizontal_scale) * 320.0f + offset_x).rounded();
-        pvr::draw_scaled_texture(67108865U, px, py, depth, shadow_x, shadow_y, pvr_state,
-                                 view.display_disabled, calls, fp);
-        material(color);
-        const auto foreground_depth = (value(depth) - 0.3f).rounded();
-        const auto foreground_y = (value(view.vertical_scale) * 240.0f + offset_y).rounded();
-        const auto foreground_x = (value(view.horizontal_scale) * 320.0f + offset_x).rounded();
-        pvr::draw_scaled_texture(67108864U, foreground_x, foreground_y, foreground_depth, sx, sy,
-                                 pvr_state, view.display_disabled, calls, fp);
+        SquareCalls square_calls(*this);
+        menu_square::draw(color, x, y, depth, sx, sy,
+                          {view.horizontal_scale, view.vertical_scale}, square_calls, fp);
     }
-    // FUNCTION: SONIC 0x431bb0 DrawSquareCursor
+    // NOTSA: borrowed adapter for the source square cursor helper.
     void cursor(std::uint8_t alpha, float x, float y, float depth, float sx, float sy) {
-        calls.select_standard_texture(menu_draw::StandardTexture::Square);
-        material((static_cast<std::uint32_t>(alpha) << 24) | 15505408U);
-        scaled(67108866U, value(x), value(y), value(depth), sx, sy);
+        SquareCalls square_calls(*this);
+        menu_square::draw_cursor(alpha, x, y, depth, sx, sy,
+                                 {view.horizontal_scale, view.vertical_scale}, square_calls, fp);
     }
     // FUNCTION: SONIC 0x5077b0 MenuDrawArrow
     void arrow(bool up, float x, float y, float depth) {

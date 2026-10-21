@@ -48,6 +48,9 @@ void TitleScene::clear_screen_fade() { session_.logo_.set_fade_color(0); }
 void TitleScene::set_back_colors(std::uint32_t top, std::uint32_t middle, std::uint32_t bottom) {
     display_.output().set_background(top, middle, bottom);
 }
+void TitleScene::select_square() {
+    select_standard_texture(menu_draw::StandardTexture::Square);
+}
 void TitleScene::select_cursors() {
     if (!session_.menu_dialog_assets_)
         throw flow::UnrecoveredGameFlowCall("native_menu_dialog_assets");
@@ -75,6 +78,11 @@ void TitleScene::draw_shadow_window(float x, float y, float depth, float width, 
 void TitleScene::draw_content(title_menu::DialogContent content,
                                const menu_dialog::ContentArguments &arguments) {
     if (content == title_menu::DialogContent::None) return;
+    if (content == title_menu::DialogContent::MainMenuBackdrop ||
+        content == title_menu::DialogContent::TrialMenuBackdrop) {
+        draw_main_menu_content(content, arguments);
+        return;
+    }
     if (!session_.menu_dialog_assets_)
         throw flow::UnrecoveredGameFlowCall("native_menu_dialog_assets");
     menu_caption::draw_help(static_cast<std::int8_t>(arguments.cursor),

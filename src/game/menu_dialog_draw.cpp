@@ -68,7 +68,8 @@ void draw_window(const Work &work, DrawState state, DrawCalls &calls, X87Context
 }
 void draw_panels(const Work &work, Owner owner, DrawState state, DrawCalls &calls, X87Context &fp) {
     const auto &parameters = parameters_of(work);
-    if (parameters.style != title_menu::DialogStyle::BlueFourth)
+    if (parameters.style != title_menu::DialogStyle::BlueFourth &&
+        parameters.style != title_menu::DialogStyle::CyanSecond)
         throw Error(Boundary::NavigationStyle,
                     "dialog panel layout is not recovered for this style");
     for (int choice = 0; choice < parameters.choice_count; ++choice) {
@@ -80,15 +81,26 @@ void draw_panels(const Work &work, Owner owner, DrawState state, DrawCalls &call
         const auto color = disabled ? (work.lower_color & 16777215U) | 805306368U
                            : static_cast<std::int8_t>(work.cursor) == choice ? work.upper_color
                                                                              : work.lower_color;
-        const auto px = centered(x, state.screen_scale_x, 320.0f, fp);
-        const auto py = centered(y, state.screen_scale_y, 240.0f, fp);
+        float px = 0, py = 0;
+        if (parameters.style == title_menu::DialogStyle::BlueFourth) {
+            px = centered(x, state.screen_scale_x, 320.0f, fp);
+            py = centered(y, state.screen_scale_y, 240.0f, fp);
+        }
         const auto sx = (ExactFloat(fp, work.scale_x) * parameters.scale_x).rounded();
         const auto sy = (ExactFloat(fp, work.scale_y) * parameters.scale_y).rounded();
-        draw_round(color, px, py, offset_depth(parameters.depth, 6.0f, fp), sx, sy, calls, fp);
+        if (parameters.style == title_menu::DialogStyle::CyanSecond)
+            menu_square::draw(color, x, y, offset_depth(parameters.depth, 6.0f, fp), sx, sy,
+                              {state.screen_scale_x, state.screen_scale_y}, calls, fp);
+        else
+            draw_round(color, px, py, offset_depth(parameters.depth, 6.0f, fp), sx, sy, calls, fp);
         if (!parameters.textures)
             throw Error(Boundary::MissingParameters, "dialog panel texture list is absent");
         calls.select_panels(*parameters.textures);
         calls.set_material(disabled ? 2969567231U : 4294967295U);
+        if (parameters.style == title_menu::DialogStyle::CyanSecond) {
+            py = centered(y, state.screen_scale_y, 240.0f, fp);
+            px = centered(x, state.screen_scale_x, 320.0f, fp);
+        }
         calls.draw_scaled(static_cast<std::uint32_t>(panel.texture) | 67108864U, px, py,
                           offset_depth(parameters.depth, 8.0f, fp), work.scale_x, work.scale_y);
     }
@@ -103,8 +115,12 @@ void draw_panels(const Work &work, Owner owner, DrawState state, DrawCalls &call
     const auto sy = (ExactFloat(fp, parameters.scale_y) * work.scale_y * work.fade).rounded();
     const auto x = (ExactFloat(fp, panel.x) * work.scale_x + parameters.center_x).rounded();
     const auto y = (ExactFloat(fp, panel.y) * work.scale_y + parameters.center_y).rounded();
-    draw_round_cursor(alpha, x, y, offset_depth(parameters.depth, 10.0f, fp), sx, sy, state, calls,
-                      fp);
+    if (parameters.style == title_menu::DialogStyle::CyanSecond)
+        menu_square::draw_cursor(alpha, x, y, offset_depth(parameters.depth, 10.0f, fp), sx, sy,
+                                 {state.screen_scale_x, state.screen_scale_y}, calls, fp);
+    else
+        draw_round_cursor(alpha, x, y, offset_depth(parameters.depth, 10.0f, fp), sx, sy, state,
+                          calls, fp);
 }
 void draw(const Work &work, Owner owner, DrawState state, DrawCalls &calls, X87Context &fp) {
     if (title_menu::draw_dialog(work, fp) == title_menu::MenuDrawResult::Complete)

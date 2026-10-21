@@ -25,6 +25,7 @@
 #include "runtime/font_assets.hpp"
 #include "runtime/file_select_display_assets.hpp"
 #include "runtime/menu_dialog_assets.hpp"
+#include "runtime/main_menu_assets.hpp"
 #include "game/sound_effects.hpp"
 
 namespace sadx::native {
@@ -50,6 +51,7 @@ class Session final : private flow::NativeServices {
     const save::Data &save_data() const { return save_; }
     const menu_caption::State &menu_caption_state() const { return menu_caption_; }
     const char *active_save_name() const { return save_name_.value; }
+    std::int32_t current_music_song() const { return tracks_.current_song; }
     std::uint32_t logic_loop_count() const { return secondary_loop_count_; }
     std::optional<file_select::FileInfo> selected_save_file() const {
         auto node = list_data_;
@@ -97,6 +99,7 @@ class Session final : private flow::NativeServices {
     void attach_regular_textures(RegularTextureAssets);
     void attach_menu_textures(const MenuTextureAssets &);
     void attach_menu_dialogs(MenuDialogAssets);
+    void attach_main_menu(MainMenuAssets);
     sound_bank::Channels sound_channels() { return {sound_.records, sound_tasks_, bank_channels_}; }
     void attach_sound_banks(const sound_bank::Catalog &catalog, sound_bank::Services services,
                             std::string cd_prefix) {
@@ -215,6 +218,7 @@ class Session final : private flow::NativeServices {
     font::State font_state_;
     std::unique_ptr<FileSelectDisplayAssets> file_select_display_assets_;
     std::unique_ptr<MenuDialogAssets> menu_dialog_assets_;
+    std::unique_ptr<MainMenuAssets> main_menu_assets_;
     menu_caption::State menu_caption_;
     // GLOBAL: SONIC 0x3c5e8c4 FileSelectionBackup size=2
     std::uint16_t file_selection_backup_ = 0;

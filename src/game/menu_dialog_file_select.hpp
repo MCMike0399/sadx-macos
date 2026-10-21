@@ -13,7 +13,7 @@ struct ConfirmationState {
 };
 struct ConfirmationCalls : file_select::ControlCalls {
     virtual std::int32_t dialog_result() = 0;
-    // STUB: SONIC 0x5057d0 AdvaOpenDialogCsrLet
+    // NOTSA: delete request uses the shared source dialog wrapper with its own resource definition.
     virtual void request_delete_confirmation() = 0;
     virtual void free_save_name(const char *) = 0;
     virtual char *allocate_save_name(std::size_t) = 0;

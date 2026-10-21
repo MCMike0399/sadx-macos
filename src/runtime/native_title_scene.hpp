@@ -74,6 +74,8 @@ class TitleScene final : private title_menu::Calls,
     title_menu::MenuTextureState textures_;
     CaptionResources caption_resources_;
     struct CallbackContext;
+    struct MainMenuServices;
+    void draw_main_menu_content(title_menu::DialogContent, const menu_dialog::ContentArguments &);
     std::shared_ptr<CallbackContext> callback_context_;
     static TitleScene &callback_scene(TaskScheduler &, TaskCallback);
     static void update_sequence(TaskScheduler &, const TaskHandle &);
@@ -182,6 +184,7 @@ class TitleScene final : private title_menu::Calls,
     void play_sound(std::int32_t) override;
     void clear_screen_fade() override;
     void set_back_colors(std::uint32_t, std::uint32_t, std::uint32_t) override;
+    void select_square() override;
     void select_cursors() override;
     void select_panels(texture_lifetime::List &) override;
     void set_vertex_colors(const std::array<std::uint32_t, 4> &) override;

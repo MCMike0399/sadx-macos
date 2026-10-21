@@ -1,5 +1,6 @@
 #pragma once
 #include "game/title_menu.hpp"
+#include "engine/menu_square.hpp"
 #include "math/ninja_math.hpp"
 #include <cstddef>
 #include <stdexcept>
@@ -87,7 +88,7 @@ struct ContentArguments {
     float center_x, center_y, depth, scale_x, scale_y;
     std::uint8_t cursor;
 };
-struct DrawCalls {
+struct DrawCalls : menu_square::Calls {
     virtual ~DrawCalls() = default;
     virtual void select_cursors() = 0;
     virtual void select_panels(texture_lifetime::List &) = 0;

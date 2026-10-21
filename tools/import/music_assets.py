@@ -7,8 +7,10 @@ from pathlib import Path
 import shutil
 import struct
 import subprocess
+import tempfile
 import sys
 sys.path.insert(0, str(Path(__file__).resolve().parent))
+from menu_voice import publish_json
 from regular_textures import profile_evidence
 from pe_image import PEImage
 from extract import SOURCE_SHA256
@@ -88,6 +90,10 @@ def float_wave_frames(path):
 def import_music_assets(game, output, selected=(102,), *, ffmpeg=None, mod_directories=None,
                         menu_request_count=1):
     game,output=Path(game),Path(output)
+    if output.resolve()==game.resolve() or game.resolve() in output.resolve().parents:
+        raise ValueError('music output must be outside the owned install')
+    if output.is_symlink():
+        raise ValueError('music output cannot redirect through a symlink')
     catalog,proof=read_catalog(PEImage(game/'sonic.exe'),menu_request_count)
     profile=profile_evidence(game,{'groups':[],'lists':[],'localizations':[]},mod_directories)
     if mod_directories is None:
@@ -101,9 +107,14 @@ def import_music_assets(game, output, selected=(102,), *, ffmpeg=None, mod_direc
         raise ValueError('WMA import requires ffmpeg (pass ffmpeg= or SADX_FFMPEG)')
     decoder=Path(decoder)
     if not decoder.is_file():raise ValueError('music decoder executable is missing')
+    for filename in ('music-assets.json','music-assets-evidence.json'):
+        if (output/filename).is_symlink():
+            raise ValueError('music manifest destination cannot be a symlink')
     clips=[]
     directory=game/'system/SoundData/BGM/WMA'
     children=list(directory.iterdir())
+    if (output/'music').is_symlink():
+        raise ValueError('music destination cannot redirect through a symlink')
     (output/'music').mkdir(parents=True,exist_ok=True)
     for song in dict.fromkeys(selected):
         if type(song) is not int or not 0<=song<len(catalog['songs']):raise ValueError('unsupported selected music index')
@@ -113,20 +124,30 @@ def import_music_assets(game, output, selected=(102,), *, ffmpeg=None, mod_direc
         source=matches[0]
         relative=Path('music')/(str(song)+'-'+name+'.wav')
         destination=output/relative
+        if destination.is_symlink():
+            raise ValueError('music destination cannot redirect through a symlink')
+        descriptor,temporary_name=tempfile.mkstemp(prefix='.music-copy-',suffix='.wav',dir=destination.parent)
+        os.close(descriptor);temporary=Path(temporary_name)
         command=[str(decoder),'-nostdin','-hide_banner','-loglevel','error','-i',str(source),
                  '-map','0:a:0','-vn','-ac','2','-ar','44100','-c:a','pcm_f32le',
-                 '-fflags','+bitexact','-flags:a','+bitexact','-y',str(destination)]
-        completed=subprocess.run(command,capture_output=True,text=True)
-        if completed.returncode:
-            raise ValueError('music decoder failed: '+completed.stderr.strip())
-        frames=float_wave_frames(destination)
+                 '-fflags','+bitexact','-flags:a','+bitexact','-y',str(temporary)]
+        source_hash=sha(source.read_bytes())
+        try:
+            completed=subprocess.run(command,capture_output=True,text=True)
+            if completed.returncode:
+                raise ValueError('music decoder failed: '+completed.stderr.strip())
+            frames=float_wave_frames(temporary)
+            if sha(source.read_bytes())!=source_hash:
+                raise ValueError('owned music changed during decode')
+            os.replace(temporary,destination)
+        finally:temporary.unlink(missing_ok=True)
         clips.append({'song':song,'source_path':'SYSTEM\\SoundData\\BGM\\WMA\\'+name+'.wma',
                       'pcm_path':relative.as_posix(),'frames':frames,
-                      'source_sha256':sha(source.read_bytes()),'pcm_sha256':sha(destination.read_bytes())})
+                      'source_sha256':source_hash,'pcm_sha256':sha(destination.read_bytes())})
     metadata={'version':1,'catalog':catalog,'clips':clips}
     proof['profile']=profile
     proof['decoder_sha256']=sha(decoder.read_bytes())
     proof['decoded_clips']=clips
-    (output/'music-assets.json').write_text(json.dumps(metadata,indent=2)+'\n')
-    (output/'music-assets-evidence.json').write_text(json.dumps(proof,indent=2)+'\n')
+    publish_json(output/'music-assets.json',metadata)
+    publish_json(output/'music-assets-evidence.json',proof)
     return metadata
