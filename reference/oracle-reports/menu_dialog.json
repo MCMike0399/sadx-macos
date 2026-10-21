@@ -1,0 +1,31 @@
+{
+ "passed": true,
+ "cases": 2024,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "seed": 432520,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "d81f35c1de5ddc0ce226a693e5db819316d2785b9f9adef0cfb93a1b859c7cbe",
+ "native_sources": {
+  "src/game/menu_dialog.hpp": "7399cd7e3c2b1edcb7b55c897a71b3c468d3281c4fbc41d5ed08831fd15858e3",
+  "src/game/menu_dialog.cpp": "be7bde8af793659090d487cb6a97e35e5936ebdb53992bbfb8e7bd5561293b58",
+  "src/game/title_menu.hpp": "e435bd3c16ffeb1984413db62ccfd9df17aabf28d2a17a792268aaefc1adca32",
+  "tests/probes/native_menu_dialog_probe.cpp": "f139ee92fbcfb84da872162f784be306981d3bf8f8ff150d59c6cccffbe55bcd"
+ },
+ "source_ranges": {
+  "0x4325e0-0x432646": "43d431ebebbeb1851310787cff3234f14855b82fd9dc49aa037d423b2cd16d8a",
+  "0x432d20-0x432da6": "84dae35278706b28ab81f4d991c0c9251e4cb56f57521d1f4c3d214e5c70464d",
+  "0x432db0-0x432dc1": "5765ee0ce2791f791e7845c9b7e21f6e16d8898bbf04883ee15aa2ee92a23819",
+  "0x5057b0-0x5057c5": "f55493f26912d43783512993d9c588a8238ef2de57bea9a09f705514b4b00b8f",
+  "0x432550-0x43257d": "386c6517d07d3e21065cef0dd21d2b9ea45fb8b3e79d81e3def694ba5538dc76"
+ },
+ "limits": [
+  "Full request/open/cursor/result bodies execute. Parameters/disabled bytes are resource inputs; audio is an ordered receipt. Disabled-list aliasing, missing result-owner, and sound-callback replacement of canonical task are compared. Invalid missing request owners or unterminated/overflowing choice resources are explicit native boundaries, not successful original executions."
+ ],
+ "tracked_summary": {
+  "full_sha256": "5e36e9a52dddc13a609039150f3657b59f5c34a993ef319dc5f19fe83a394293",
+  "full_bytes": 1617,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

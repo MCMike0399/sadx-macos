@@ -1,0 +1,25 @@
+{
+ "passed": true,
+ "cases": 1812,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "seed": 40888,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_range_sha256": "17bf8f45ead5b16249df5ef032581af03ce5fbd9b9bb7f223c8a645a8e75ecf8",
+ "native_library_sha256": "7c49590badc0be329e117306675e8ecb709413ba5326d0ca25845e63b4fa335a",
+ "native_sources": {
+  "src/game/menu_caption.hpp": "1038ab046655581647f33b0318b4775f5e7ab6acaed2453bd1478659cd2efc39",
+  "src/game/menu_caption.cpp": "8e9034d86477fe8e0b00a4ddb3ea8fa68a78e9dc33c0aaa78cc3c1db95104c95",
+  "src/guest/caption_frame_reference.hpp": "d13cfdd3dc11edf6e6b7b9a6a218dee8a151055dc141c092273a0d5bf88a0530",
+  "tests/probes/native_caption_frame_reference_probe.cpp": "a08440202ffce3fc0d2ef2c2e5b687926b3e0b40c056fb2a4afba2b4668478b7"
+ },
+ "limits": [
+  "Original caption tail plus reference fact-validation boundaries and resource identity reentry.\n\nUnknown reference facts stop immediately before the original instruction that would\nread them. The source caller's earlier stores and callee failure prefixes still execute.\nGuest pointer identities are transported only by the reference adapter, never game state.\n"
+ ],
+ "tracked_summary": {
+  "full_sha256": "498825586b01d63e40d99265bebd04aa1f40275a88992cfe5821ef2fac3c88b1",
+  "full_bytes": 1235,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

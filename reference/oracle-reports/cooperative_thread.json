@@ -1,0 +1,23 @@
+{
+ "passed": true,
+ "cases": 1008,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "seed": 401450,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_range_sha256": "12e9204eecb82dce60627fc4d7441eb7f3a5b4cd2f3e3cf69e9f9324caaeeeb9",
+ "native_sources": {
+  "src/engine/cooperative_thread_native.hpp": "cc43f9b507f5b3e036198e96b793f4c6eb97732260a06c39550405f886081005",
+  "src/engine/cooperative_thread_native.cpp": "ccb29a47f539e2b626446fe37b03ee4cb0cfa36628e9648154b6687802a5949a",
+  "tests/probes/native_cooperative_thread_probe.cpp": "81326c1fbaf09b214e31476b4e45697e067c07eafe125df78b10790b9dbe3a49"
+ },
+ "limits": [
+  "TH_Wait real null-current-thread return, or explicit first continuation-store boundary.\n\nThe active branch stops BEFORE writing its original stack continuation. That branch\nis not reported as a completed native switch. Repeated calls observe the same live\nresource owner, including a caller reset between calls; no guest addresses enter it.\n"
+ ],
+ "tracked_summary": {
+  "full_sha256": "a818c1ca13942d4d6ec169b50221fcd4b5eb8c6e0d60d735dcd1ed7eb06f8e6f",
+  "full_bytes": 1035,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

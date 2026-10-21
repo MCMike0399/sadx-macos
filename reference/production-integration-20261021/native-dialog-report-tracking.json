@@ -1,0 +1,25 @@
+{
+  "reason": "Track unchanged source judges rerun for committed native dialog, caption, SaveName and single FileSelect dispatcher integration ecbd088; no oracle expected values or tolerances change.",
+  "raw_reports": {
+    "menu_dialog": "5e36e9a52dddc13a609039150f3657b59f5c34a993ef319dc5f19fe83a394293",
+    "menu_dialog_update": "375e7cdbbe1004608a041542ec46398a33c0a463659145876fe32b94dc5f6ec1",
+    "menu_dialog_draw": "428147662eee340ba0e0572a0c3b81233044a019ed1d566422a35d755796bd2a",
+    "menu_dialog_confirmation": "cc20ec5349a69a02c3bf184b9337239bae8f4460d2d49bdee79420c6832501a5",
+    "menu_caption": "b4b55cbd9ff7467d9f2dd02bbf5284fdb653f2accd96f44b423664b2b76633f6",
+    "cooperative_thread": "a818c1ca13942d4d6ec169b50221fcd4b5eb8c6e0d60d735dcd1ed7eb06f8e6f",
+    "caption_frame_reference": "498825586b01d63e40d99265bebd04aa1f40275a88992cfe5821ef2fac3c88b1",
+    "game_frame_owners": "fd9ac9b6214a0816118bb4c64ac1239bcd0d658669c14702dea56853e30e571c",
+    "game_mode_leaves": "68b67f28c89335a4cbe2c1f2cdc43e444904f7de45b87318bde1c298c09a4063",
+    "file_select_controls": "b7728b351e6547a07c5654ab4edb103986f6950530f03f1ce7246a6c6555fc04",
+    "file_select_display": "371730e506e77f3e404e5cfa08040b7a2894c2ebdf4258475a931e19b01df237",
+    "title_dialog": "20563a793ab7d4f9d9bf77b0b93ba99268125d9d443929dfd185542a44d84313"
+  },
+  "classification": "Strict passes and value-exact FP partials retained separately by verdict.py; file_select_display exits0 but remains partial. Existing unrelated raw oracle failures untouched.",
+  "verification": "Full gate exit0 recorded native-dialog-integration-gate.json for same compiled source; report refresh does not alter executable behavior.",
+  "port_commit": "ecbd088",
+  "report_refresh_full_gate": {
+    "exit_status": 0,
+    "report": "native-dialog-report-refresh-gate.json",
+    "required_native_frames": 1850
+  }
+}

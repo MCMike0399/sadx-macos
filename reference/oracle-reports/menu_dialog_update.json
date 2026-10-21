@@ -1,0 +1,27 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_cluster_sha256": "2cef78dfdbce7993200729ff9b5f4b3b2b41cd9c80916f7e9e19e8c176c861d9",
+ "passed": false,
+ "values_match": true,
+ "cases": 1840,
+ "mismatches": 0,
+ "fp_flag_mismatches": 675,
+ "first_mismatches": [],
+ "seed": 432720,
+ "native_sources": {
+  "src/game/menu_dialog.hpp": "7399cd7e3c2b1edcb7b55c897a71b3c468d3281c4fbc41d5ed08831fd15858e3",
+  "src/game/menu_dialog.cpp": "be7bde8af793659090d487cb6a97e35e5936ebdb53992bbfb8e7bd5561293b58",
+  "src/game/title_menu.hpp": "e435bd3c16ffeb1984413db62ccfd9df17aabf28d2a17a792268aaefc1adca32",
+  "tests/probes/native_menu_dialog_update_probe.cpp": "161bf6afda0a61559933c9b127128f3059ac348de32ad774c6d8627cc0d13fee"
+ },
+ "native_library_sha256": "cc052b79b015c985a44118f951d772233a7ebdd3fa934c734dd4bf5813bc3191",
+ "limits": [
+  "Style2 nearest-point navigation remains an explicit native boundary; reached FileSelect style5 and other linear/threeway styles execute fully. Renderer/caption resources are separate pending clusters."
+ ],
+ "tracked_summary": {
+  "full_sha256": "375e7cdbbe1004608a041542ec46398a33c0a463659145876fe32b94dc5f6ec1",
+  "full_bytes": 1107,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

@@ -1,0 +1,28 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_ranges": {
+  "0x503600": "08b28a4cf4937a9153a5bc4e62c9cd611e4f7b210cb9392bdecc7b7d5fd2d746",
+  "0x505e90": "69a921d95e3b3a0293e743161400d4cd5c08827224178f0233aef6ef4b482434",
+  "0x5068e0": "2139d8f6bd8887014bdfbac3a42ff7f938dcd11e828d72ab6f1a56d38b8db6e4"
+ },
+ "passed": false,
+ "values_match": true,
+ "cases": 1192,
+ "mismatches": 0,
+ "fp_flag_mismatches": 243,
+ "first_mismatches": [],
+ "native_sources": {
+  "src/game/menu_dialog_file_select.hpp": "5eddd822827022613a0289aff5c8f1367e8e8f8434e86def5b7827a82e3fddc0",
+  "src/game/menu_dialog_file_select.cpp": "d089e6e3aa787cd6b72da914366543c132de9d1680ad589079244b7e3a04d8d7",
+  "tests/probes/native_menu_dialog_confirmation_probe.cpp": "f5267581e4eaeaf7c0e43327dda5dee4838ec3e184f56e68bbb348c9b14ae278"
+ },
+ "limits": [
+  "Stage2 complete branches including delete-request seam are compared. Other established stages delegate their unchanged helper; later delete/new-save stages remain explicit. Source saved-character mapping and loading_status execute, not receipts. Heap allocation/free/string copy and common transition are ordered resource receipts."
+ ],
+ "tracked_summary": {
+  "full_sha256": "cc20ec5349a69a02c3bf184b9337239bae8f4460d2d49bdee79420c6832501a5",
+  "full_bytes": 1238,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

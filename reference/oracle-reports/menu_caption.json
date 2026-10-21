@@ -1,0 +1,21 @@
+{
+ "passed": true,
+ "cases": 604,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "native_sources": {
+  "src/game/menu_caption.hpp": "1038ab046655581647f33b0318b4775f5e7ab6acaed2453bd1478659cd2efc39",
+  "src/game/menu_caption.cpp": "8e9034d86477fe8e0b00a4ddb3ea8fa68a78e9dc33c0aaa78cc3c1db95104c95",
+  "tests/probes/native_menu_caption_probe.cpp": "2750facb1674386b0f521298f05453a5bc393bb23044fabc7aaf3854356ba9a3"
+ },
+ "limits": [
+  "Original caption allocation/open/clear/empty-help/close/deferred release lifecycle.\n\nThe Windows SEH chain has its own page0 fixture; every accepted context and bitmap\npointer is valid, so no intended null-fault case can be concealed. TH_Wait executes\nits real null-current-thread branch. Source lower allocation/free/texture calls\nare receipts. Nonempty text runs all source caller logic through named message seams.\n",
+  "Caption owner is PRIVATE proposed replacement; legacy GameFrameOwners owner/adapter migration still required before landing."
+ ],
+ "tracked_summary": {
+  "full_sha256": "b4b55cbd9ff7467d9f2dd02bbf5284fdb653f2accd96f44b423664b2b76633f6",
+  "full_bytes": 1010,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}
