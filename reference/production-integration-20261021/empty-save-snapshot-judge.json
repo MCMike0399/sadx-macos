@@ -1,0 +1,9 @@
+{
+  "requirement": "A source installation without SAVEDATA imports successfully as an empty save snapshot.",
+  "source_boundary": "505050 FindFirstFileA invalid handle returns0, as recovered in native-file-select-find-save-files dossier and compiled save_file_list.",
+  "old_judge_observation": "Unchanged14-case save importer test run fails only test_missing_directory_is_error; filesystem case-alias test reports its existingvolume-specific skip.",
+  "correction": "Change that one obsolete rejection to require exact version1/files-empty snapshot; all malformed/ambiguous/symlink/hardlink/source-preservation checks remain.",
+  "independent_review": "review_menu_voice_import independently reran unchangedold failure and corrected14caseproposal (one existingfilesystemskip); no importer correctness blocker.",
+  "test_patch_sha256": "69e7d7007b36364056801657a19e0a0dc89fda8746e3bd430986cf096ab6b712",
+  "implementation_separate": true
+}

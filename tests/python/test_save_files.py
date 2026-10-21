@@ -59,10 +59,9 @@ class SaveFilesTests(unittest.TestCase):
     def test_empty_existing_directory(self):
         self.assertEqual(module.import_save_files(self.game, self.output)['files'], [])
 
-    def test_missing_directory_is_error(self):
+    def test_missing_directory_is_empty_snapshot(self):
         self.source.rmdir()
-        with self.assertRaises(ValueError):
-            module.import_save_files(self.game, self.output)
+        self.assertEqual(module.import_save_files(self.game, self.output), {'version': 1, 'files': []})
 
     def test_cannot_write_inside_owned_install(self):
         with self.assertRaises(ValueError):

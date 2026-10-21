@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "b6eea55c86d035efb811866c15166b3d1d558916",
-    "evidence": "reference/production-integration-20261021/required-native-verification.json",
-    "evidence_sha256": "efdc610807b5a0031e22ff0713933c2254cbfa86b1d0f683682eee5e23a72662",
-    "reason": "Require the native production build and protected normal-input FileSelect journey in every full gate"
+    "base_commit": "477d5b741438a9678511c9c1ce7229b2bc725457",
+    "evidence": "reference/production-integration-20261021/empty-save-snapshot-judge.json",
+    "evidence_sha256": "50869126fc05a084303faaac437bd36d2d38bde7567f6ba0400b1f9addac6c71",
+    "reason": "Accept an absent source SAVEDATA directory as the source-proved empty snapshot, retaining malformed storage checks"
   },
   "files": {
     "Makefile": "3b11de6a63d6f44f607df796971e0aa885743e5b8127f9c3f66958ea9a3678e4",
@@ -488,7 +488,7 @@
     "tests/python/test_provenance.py": "ce62fc0efc2ef9a92b2493adaf994fcbc38af4427c16c28eabe6aea72287fcc2",
     "tests/python/test_readability.py": "8090f2eb23f8c958972e071d94a4d77b99a8062953d456a89ccba2abafc78a3d",
     "tests/python/test_regular_textures.py": "b5ae871253c6c2e2fcaf69ce3f8c967b906e295c2c80cf49882f539b26dd268f",
-    "tests/python/test_save_files.py": "8a319374d18f40924e1f605e3f8f10b394f9cdf42db8f510979f3920431cef88",
+    "tests/python/test_save_files.py": "de514de19a12ca015a891d61d1c49b930262ddeff9bfbad383c48df1ac1ca108",
     "tests/python/test_sound_banks.py": "4ac4c51ac9cf5d98acf471a0d22aaae9a7b210b97b37fadb8a5b124c073e5eec",
     "tests/python/test_sound_effects_import.py": "f4b356a1fada9e475e1bd7cbd243f9435990825fd20c80adbd6eab2fe8a8fbf7",
     "tests/python/test_stage_lighting.py": "c9a22693e183512dd38b4e2f57c42ce4dbada0aea136c1a663dcca1ac240c10c",
