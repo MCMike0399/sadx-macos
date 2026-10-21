@@ -1,0 +1,32 @@
+{
+  "native_frame": 1100,
+  "reference_frame": 950,
+  "reference_sha256": "0a4c46e3f1c86323a1128e9a0fc67c5be34e0741cc90d1756902fdcdd40c6bb4",
+  "comparison_decode": "macOS sips PNG\u2192uncompressedBMP, RGBbytes vsnativePPM",
+  "whole_image_compared": true,
+  "different_pixels": 8776,
+  "total_pixels": 307200,
+  "maximum_channel_difference": 249,
+  "byte_exact": false,
+  "scope": "Both actualscreenshots inspected; no masks/tolerances or fullpixelparitypass.",
+  "known_input_differences": [
+    "NativeSonicDX02 vsreferenceSonicDX01 selection",
+    "Actualnativefilesystem/localdates vsHLEvirtualdates",
+    "Differentstage/time/emblem/unlock savedata",
+    "Differentframes/cursoranimation"
+  ],
+  "observation": "StaticUIlayout/background/cards/panels/fonts visibleinboth. White squaresbeside labels alsoappear inoriginal-task execution.",
+  "initial_capture_has_corrected_bug": "Historical native1100 wrongly bound event_work; grayicons were a real integration defect, not solely input differences.",
+  "after_corrected_binding": {
+    "native_frame": 950,
+    "whole_image_different_pixels": 5702,
+    "whole_image_byte_exact": false,
+    "right_panel_322x362_byte_exact": true,
+    "different_inputs": [
+      "Provider order and selected-card position",
+      "Real native local dates versus HLE virtual dates",
+      "Cursor animation timing"
+    ],
+    "screenshot": "build/native-file-select-story-flags-fixed/captures/950.png"
+  }
+}

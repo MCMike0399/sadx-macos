@@ -1,0 +1,157 @@
+{
+  "file_select_update": {
+    "command": [
+      "reference/python/bin/python",
+      "tools/oracles/verify_original_file_select_update.py",
+      "game/Sonic Adventure DX/sonic.exe",
+      "build/native-file-select-update-probe.dylib",
+      "--output",
+      "build/oracles/file_select_update.json"
+    ],
+    "exit_status": 1,
+    "log": "build/native-file-select-oracle-logs/file_select_update.log",
+    "verifier_sha256": "5810ded894971469239c6e227eb231950b3df8a0b638a5fa3b1583ecf7347b6d",
+    "instruction_budget": false
+  },
+  "file_select": {
+    "command": [
+      "reference/python/bin/python",
+      "tools/oracles/verify_original_file_select.py",
+      "game/Sonic Adventure DX/sonic.exe",
+      "build/native-file-select-probe.dylib",
+      "--output",
+      "build/oracles/file_select.json"
+    ],
+    "exit_status": 0,
+    "log": "build/native-file-select-oracle-logs/file_select.log",
+    "verifier_sha256": "4c0edf5183abd6894c21c202bf3159f056275a6d9343279b83ccadd8f7205921",
+    "instruction_budget": false
+  },
+  "file_select_controls": {
+    "command": [
+      "reference/python/bin/python",
+      "tools/oracles/verify_original_file_select_controls.py",
+      "game/Sonic Adventure DX/sonic.exe",
+      "build/native-file-select-controls-probe.dylib",
+      "--output",
+      "build/oracles/file_select_controls.json"
+    ],
+    "exit_status": 1,
+    "log": "build/native-file-select-oracle-logs/file_select_controls.log",
+    "verifier_sha256": "fb888fe3e2897a7203c6ba2dc65e553c63e727f24e670ca65981b64a94b37a20",
+    "instruction_budget": false
+  },
+  "font_native": {
+    "command": [
+      "reference/python/bin/python",
+      "tools/oracles/verify_original_font_native.py",
+      "game/Sonic Adventure DX/sonic.exe",
+      "build/native-font-native-probe.dylib",
+      "--output",
+      "build/oracles/font_native.json"
+    ],
+    "exit_status": 0,
+    "log": "build/native-file-select-oracle-logs/font_native.log",
+    "verifier_sha256": "46539fcfc0a7252e5997ff2f51d99395b8d482e9c4c339acc8604db1c8a2808a",
+    "instruction_budget": false
+  },
+  "save_list_free": {
+    "command": [
+      "reference/python/bin/python",
+      "tools/oracles/verify_original_save_list_free.py",
+      "game/Sonic Adventure DX/sonic.exe",
+      "build/native-save-list-free-probe.dylib",
+      "--output",
+      "build/oracles/save_list_free.json"
+    ],
+    "exit_status": 0,
+    "log": "build/native-file-select-oracle-logs/save_list_free.log",
+    "verifier_sha256": "182108e2bced7e74a369601f77d28fd9fd6fbe24aa46eece3d0c820dfd3d6f84",
+    "instruction_budget": false
+  },
+  "menu_voice": {
+    "command": [
+      "reference/python/bin/python",
+      "tools/oracles/verify_original_menu_voice.py",
+      "game/Sonic Adventure DX/sonic.exe",
+      "build/native-menu-voice-probe.dylib",
+      "--output",
+      "build/oracles/menu_voice.json"
+    ],
+    "exit_status": 0,
+    "log": "build/native-file-select-oracle-logs/menu_voice.log",
+    "verifier_sha256": "c71a3a9c91d2c87ef3f2e1474ecc563ee9aa20101f88c80146de590a875c5283",
+    "instruction_budget": false
+  },
+  "voice_playback": {
+    "command": [
+      "reference/python/bin/python",
+      "tools/oracles/verify_original_voice_playback.py",
+      "game/Sonic Adventure DX/sonic.exe",
+      "build/native-voice-playback-probe.dylib",
+      "--output",
+      "build/oracles/voice_playback.json"
+    ],
+    "exit_status": 0,
+    "log": "build/native-file-select-oracle-logs/voice_playback.log"
+  },
+  "menu_resource_lifetime": {
+    "command": [
+      "reference/python/bin/python",
+      "tools/oracles/verify_original_menu_resource_lifetime.py",
+      "game/Sonic Adventure DX/sonic.exe",
+      "build/native-menu-resource-lifetime-probe.dylib",
+      "--output",
+      "build/oracles/menu_resource_lifetime.json"
+    ],
+    "exit_status": 0,
+    "log": "build/native-file-select-oracle-logs/menu_resource_lifetime.log"
+  },
+  "load_selected_save": {
+    "command": [
+      "reference/python/bin/python",
+      "tools/oracles/verify_original_load_selected_save.py",
+      "game/Sonic Adventure DX/sonic.exe",
+      "build/native-load-selected-save-probe.dylib",
+      "--output",
+      "build/oracles/load_selected_save.json"
+    ],
+    "exit_status": 0,
+    "log": "build/native-file-select-oracle-logs/load_selected_save.log",
+    "verifier_sha256": "16c0999ea4c798c6cbcfccfbedeb7bba922491114b03a1eb3552f825371e807a",
+    "instruction_budget": false
+  },
+  "save_file_list": {
+    "command": [
+      "reference/python/bin/python",
+      "tools/oracles/verify_original_save_file_list.py",
+      "game/Sonic Adventure DX/sonic.exe",
+      "build/native-save-file-list-probe.dylib",
+      "--output",
+      "build/oracles/save_file_list.json"
+    ],
+    "exit_status": 0,
+    "log": "build/native-file-select-oracle-logs/save_file_list.log",
+    "verifier_sha256": "2e6cdf5ad65bc0253c2f8a0a6b630a0345c2e905db65859ab93637c73431fd85",
+    "instruction_budget": false
+  },
+  "colored_polygon": {
+    "exit_status": 1,
+    "log": "build/native-colored-polygon-oracle.log",
+    "qualification": "Raw2CW119 trace divergences remain FAIL; normal884 value-exact; no tolerance or expectedtrace changes."
+  },
+  "file_select_display": {
+    "exit_status": 0,
+    "cases": 600,
+    "mismatch_count": 0,
+    "fp_flag_partials": 340,
+    "qualification": "partial despite exit0"
+  },
+  "menu_draw_primitives": {
+    "exit_status": 0,
+    "cases": 2434,
+    "mismatch_count": 0,
+    "fp_flag_partials": 1300,
+    "qualification": "partial despite exit0"
+  }
+}

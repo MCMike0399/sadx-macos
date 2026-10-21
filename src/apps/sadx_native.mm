@@ -3,6 +3,7 @@
 #include "platform/mac/mac_audio_playback.hpp"
 #include "platform/mac/mac_sound_bank.hpp"
 #include "platform/mac/mac_sound_effects.hpp"
+#include "platform/mac/mac_save_files.hpp"
 #include "platform/mac/mac_clock.hpp"
 #include "platform/mac/metal_device_frame.hpp"
 #include "runtime/native_display.hpp"
@@ -15,7 +16,10 @@
 #include "apps/native_regular_texture_assets.hpp"
 #include "apps/native_menu_texture_assets.hpp"
 #include "apps/native_music_assets.hpp"
+#include "apps/native_voice_assets.hpp"
 #include "apps/native_sound_effects_assets.hpp"
+#include "apps/native_save_directory.hpp"
+#include "apps/native_file_select_assets.hpp"
 #import <AppKit/AppKit.h>
 #import <MetalKit/MetalKit.h>
 #import <QuartzCore/CAMetalLayer.h>
@@ -27,15 +31,18 @@
 #include <map>
 #include <cstring>
 #include <thread>
+#include <iomanip>
 
 namespace {
 void save_image(id<MTLTexture>, const std::filesystem::path &);
 struct Options {
     struct KeyEvent { std::uint32_t key; bool down; };
     std::filesystem::path assets, controller_library, screenshot, capture_directory;
+    std::filesystem::path save_directory;
     std::set<std::uint32_t> capture_frames;
     std::uint32_t frames = 0;
     bool offscreen = false;
+    bool paced = false;
     std::multimap<std::uint32_t, KeyEvent> keys;
 };
 Options options(int argc, char **argv) {
@@ -46,8 +53,12 @@ Options options(int argc, char **argv) {
         const std::string argument = argv[index];
         if (argument == "--offscreen")
             result.offscreen = true;
+        else if (argument == "--paced")
+            result.paced = true;
         else if (index + 1 < argc && argument == "--assets")
             result.assets = argv[++index];
+        else if (index + 1 < argc && argument == "--save-directory")
+            result.save_directory = argv[++index];
         else if (index + 1 < argc && argument == "--controller-library")
             result.controller_library = argv[++index];
         else if (index + 1 < argc && argument == "--screenshot")
@@ -98,6 +109,7 @@ class Application {
     Options configuration;
     sadx::native::app::ImportedAssets assets;
     sadx::native::MusicAssets music_assets;
+    sadx::native::VoiceAssets voice_assets;
     sadx::frame::ModeState frame_mode;
     sadx::native::Display display;
     std::shared_ptr<const sadx::character_pack::CharacterPack> characters;
@@ -105,6 +117,7 @@ class Application {
     sadx::audio::mac::AudioOutput audio;
     sadx::sound_bank::mac::Banks banks;
     std::unique_ptr<sadx::sound_effects::mac::Output> sound_effects;
+    std::unique_ptr<sadx::file_select::mac::SaveFiles> save_files;
     sadx::MacPerformanceCounter clock;
     sadx::native::Session session;
     std::unique_ptr<sadx::native::Input> input;
@@ -121,6 +134,7 @@ class Application {
     std::uint32_t key_event_frame = 0, decoded_frames = 0;
     std::uint32_t controller_instance = 0;
     std::uint32_t music_open_events = 0, music_start_events = 0;
+    std::uint32_t voice_open_events = 0, voice_start_events = 0;
     bool focused = true;
     NSWindow *window = nil;
     std::int32_t pending_movie_volume = 0;
@@ -129,6 +143,7 @@ class Application {
         : configuration(std::move(configuration)),
           assets(sadx::native::app::load_assets(this->configuration.assets)),
           music_assets(sadx::native::app::load_music_assets(this->configuration.assets)),
+          voice_assets(sadx::native::app::load_voice_assets(this->configuration.assets)),
           display(this->configuration.assets / "system", frame_mode),
           characters(std::make_shared<sadx::character_pack::CharacterPack>(
               sadx::character_pack::CharacterPack::load(
@@ -168,6 +183,11 @@ class Application {
             sadx::native::app::load_regular_texture_assets(this->configuration.assets));
         session.attach_menu_textures(
             sadx::native::app::load_menu_texture_assets(this->configuration.assets));
+        session.attach_font(sadx::native::app::load_font_assets(this->configuration.assets));
+        session.attach_menu_voices(sadx::native::app::load_menu_voice_assets(this->configuration.assets));
+        session.attach_file_select_display(
+            sadx::native::app::load_file_select_display_assets(this->configuration.assets),
+            sadx::native::app::local_file_calendar);
         session.attach_lighting(sadx::native::app::load_lighting_assets(this->configuration.assets));
         if (!audio.start({}, failure) ||
             !sadx::audio::mac::bind_pcm_output(session.pcm_state(), audio, failure))
@@ -181,6 +201,8 @@ class Application {
         if (!media_initialization.voice_error.empty())
             throw std::runtime_error(media_initialization.voice_error);
         configure_music();
+        configure_voice();
+        configure_saves();
         // NOTSA: imported CD assets have a logical native root, independent of Windows drive letters.
         session.attach_sound_banks(banks.catalog(), banks.services(session.sound_channels(),
                                                                     session.pcm_state()), "cd\\");
@@ -215,6 +237,20 @@ class Application {
             throw std::runtime_error("native music player is unavailable");
         return *player;
     }
+    void configure_saves() {
+        if (configuration.save_directory.empty()) {
+            const auto roots = [NSFileManager.defaultManager URLsForDirectory:NSApplicationSupportDirectory
+                                                                    inDomains:NSUserDomainMask];
+            if (roots.count == 0)
+                throw std::runtime_error("native application support directory is unavailable");
+            configuration.save_directory = std::filesystem::path(roots.firstObject.path.UTF8String) /
+                                           "sadx-macos" / "savedata";
+        }
+        configuration.save_directory = std::filesystem::absolute(configuration.save_directory);
+        sadx::native::app::prepare_save_directory(configuration.assets, configuration.save_directory);
+        save_files = std::make_unique<sadx::file_select::mac::SaveFiles>(configuration.save_directory);
+        session.attach_save_files(*save_files);
+    }
     static std::int32_t reader_state(sadx::audio::StreamPlayer *owner) {
         auto *player = dynamic_cast<sadx::audio::mac::StreamPlayer *>(owner);
         if (!player)
@@ -224,6 +260,46 @@ class Application {
             throw std::runtime_error(progress.error);
         // Native reader states corresponding to the source STARTED/STOPPED callbacks.
         return progress.running ? 1 : 2;
+    }
+    sadx::audio::mac::StreamPlayer &voice_player() {
+        auto *player = dynamic_cast<sadx::audio::mac::StreamPlayer *>(
+            session.media_state().voice_player.get());
+        if (!player)
+            throw std::runtime_error("native voice player is unavailable");
+        return *player;
+    }
+    void configure_voice() {
+        // Windows logical paths are ASCII and case-insensitive in this imported closure.
+        const auto key = [](std::string_view source) {
+            std::string value(source);
+            for (auto &character : value) {
+                if (character == '/') character = '\\';
+                if (character >= 'A' && character <= 'Z')
+                    character = static_cast<char>(character + ('a' - 'A'));
+            }
+            return value;
+        };
+        session.attach_voice({
+            [this, key](std::string_view path) {
+                for (const auto &clip : voice_assets.clips) {
+                    if (key(path) != key(clip.source_path)) continue;
+                    std::string error;
+                    if (!voice_player().prepare_clip((configuration.assets / clip.pcm_path).string(), error))
+                        throw std::runtime_error(error);
+                    ++voice_open_events;
+                    return std::int32_t{0};
+                }
+                throw std::runtime_error("unimported native voice resource: " + std::string(path));
+            },
+            [this](std::int32_t attenuation) {
+                std::string error;
+                if (!voice_player().play(attenuation, false, error))
+                    throw std::runtime_error(error);
+                ++voice_start_events;
+            },
+            [this] { return reader_state(session.media_state().voice_player.get()); },
+            [] { std::this_thread::yield(); }
+        });
     }
     void configure_music() {
         const auto resource_key = [](std::string_view source) {
@@ -355,6 +431,14 @@ class Application {
         const auto *music = dynamic_cast<const sadx::audio::mac::StreamPlayer *>(
             session.media_state().music_player.get());
         const auto music_audio = music ? music->stats() : sadx::audio::mac::AudioStats{};
+        const auto *voice = dynamic_cast<const sadx::audio::mac::StreamPlayer *>(
+            session.media_state().voice_player.get());
+        const auto voice_audio = voice ? voice->stats() : sadx::audio::mac::AudioStats{};
+        const auto selected_save = session.selected_save_file();
+        const auto file_task = title ? title->state().factories.file_select_task : sadx::TaskHandle{};
+        const auto file_work = file_task
+            ? std::static_pointer_cast<const sadx::title_menu::FileSelectWork>(file_task->auxiliary_native_work)
+            : std::shared_ptr<const sadx::title_menu::FileSelectWork>{};
         std::size_t bank_count = 0, bank_sample_count = 0;
         for (const auto &bank : session.sound_banks().slots) {
             if (bank) {
@@ -369,6 +453,23 @@ class Application {
                   << ",\"act\":" << session.act()
                   << ",\"rings\":" << session.rings()
                   << ",\"global_timer\":" << session.global_timer()
+                  << ",\"save_file_count\":" << static_cast<unsigned>(session.game_state().card_operation)
+                  << ",\"selected_save\":" << static_cast<unsigned>(session.game_state().card_state)
+                  << ",\"menu_selected_save\":" << static_cast<unsigned>(session.game_state().menu.selected_file)
+                  << ",\"save_checksum\":" << session.save_data().checksum
+                  << ",\"selected_save_name\":";
+        if (selected_save)
+            output << std::quoted(selected_save->name);
+        else
+            output << "null";
+        output << ",\"logic_loop_count\":" << session.logic_loop_count();
+        if (file_work) {
+            output << ",\"file_select_phase\":" << static_cast<unsigned>(file_work->presentation.phase)
+                   << ",\"file_select_submode\":" << file_work->submode
+                   << ",\"file_select_color\":" << file_work->presentation.color
+                   << ",\"file_select_fade\":" << file_work->presentation.fade_progress;
+        }
+        output
                   << ",\"logo_frames\":" << session.logo_scene().state().frames
                   << ",\"logo_mode\":" << static_cast<unsigned>(session.logo_scene().state().mode)
                   << ",\"textures\":" << display.output().loaded_textures()
@@ -396,6 +497,12 @@ class Application {
                   << ",\"music_audio_nonzero_samples\":" << music_audio.nonzero_samples
                   << ",\"music_audio_completed_buffers\":" << music_audio.completed_buffers
                   << ",\"music_audio_device_error\":" << music_audio.device_error
+                  << ",\"voice_open_events\":" << voice_open_events
+                  << ",\"voice_start_events\":" << voice_start_events
+                  << ",\"voice_audio_frames\":" << voice_audio.submitted_frames
+                  << ",\"voice_audio_nonzero_samples\":" << voice_audio.nonzero_samples
+                  << ",\"voice_audio_completed_buffers\":" << voice_audio.completed_buffers
+                  << ",\"voice_audio_device_error\":" << voice_audio.device_error
                   << ",\"sound_load_events\":" << sound_effects->load_events()
                   << ",\"sound_play_events\":" << sound_effects->play_events()
                   << ",\"sound_audio_frames\":" << audio.stats().submitted_frames
@@ -570,7 +677,7 @@ void run_offscreen(Application &app, id<MTLDevice> device) {
         pass.depthAttachment.clearDepth = 1;
         app.encode(pass);
         app.capture(texture);
-        if (app.session.flow_state().mode == sadx::flow::GameMode::Movie)
+        if (app.configuration.paced || app.session.flow_state().mode == sadx::flow::GameMode::Movie)
             app.pace();
     };
     try {

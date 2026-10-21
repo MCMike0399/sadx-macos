@@ -28,10 +28,13 @@ void set_default_texture_stage_state(graphics::Draw &state) {
     state.stage0_states[18] = 2;
 }
 namespace {
-// NOTSA: shared source calls njAlphaMode then Direct3D_TextureFilterPoint.
-void begin(std::uint32_t alpha, graphics::Draw &state) {
+// NOTSA: njAlphaMode's device state, before texture binding/filter operations.
+void begin_alpha(std::uint32_t alpha, graphics::Draw &state) {
     state.render_states[27] = alpha != 0;
     state.stage0_states[4] = alpha != 0 ? 4 : 3;
+}
+// NOTSA: source Direct3D_TextureFilterPoint also selects strip rasterization state.
+void point_filter(graphics::Draw &state) {
     state.render_states[22] = 1;
     state.render_states[137] = 0;
     state.render_states[145] = 1;
@@ -65,7 +68,8 @@ void submit_texture(const std::array<Vertex, 4> &vertices,
         throw std::runtime_error("PVR submission requires texture and native projected depth");
     if (fog_enabled)
         device.state.render_states[28] = 0;
-    begin(alpha, device.state);
+    begin_alpha(alpha, device.state);
+    point_filter(device.state);
     device.state.texture = std::move(texture);
     device.state.stage0_states[13] = 3;
     device.state.stage0_states[14] = 3;
@@ -91,27 +95,43 @@ void submit_texture(const std::array<Vertex, 4> &vertices,
 }
 void submit_box(const std::array<Point, 4> &points, std::uint32_t color, float priority,
                 std::uint32_t flags, ImmediateDevice &device, X87Context &fp) {
-    if (!device.projected_depth)
-        throw std::runtime_error("PVR box submission requires native projected depth");
-    auto reciprocal = fidelity::ExactFloat(fp, -1.0f) / priority;
-    if (reciprocal.compare(1.0f) == X87Comparison::greater)
-        reciprocal = fidelity::ExactFloat(fp, 1.0f);
-    const auto argument = reciprocal.rounded();
-    begin((flags >> 6) & 1, device.state);
-    device.state.texture.reset();
+    submit_colored_polygon(points, {color, color, color, color}, priority, flags, device, fp,
+                           [&device] { device.state.texture.reset(); });
+}
+void submit_colored_polygon(const std::array<Point, 4> &points,
+                            const std::array<std::uint32_t, 4> &colors, float priority,
+                            std::uint32_t flags, ImmediateDevice &device, X87Context &fp,
+                            const std::function<void()> &unbind_texture) {
+    if (!device.projected_depth || !unbind_texture)
+        throw std::runtime_error("PVR polygon requires native depth and texture-cache services");
+    if ((flags & 2147483648U) != 0)
+        throw std::runtime_error("PVR packed-coordinate polygon path is not recovered");
+    // The source spills to binary32 before testing the clamp. An unmasked overflow
+    // therefore faults before any device calls, even when the eventual clamp is one.
+    auto argument = (fidelity::ExactFloat(fp, -1.0f) / priority).rounded();
+    if (fidelity::ExactFloat(fp, argument).compare(1.0f) == X87Comparison::greater)
+        argument = 1.0f;
+    begin_alpha((flags >> 6) & 1, device.state);
+    unbind_texture();
+    point_filter(device.state);
+    std::vector<graphics::Vertex> vertices;
+    vertices.reserve(points.size());
+    for (std::size_t index = 0; index < points.size(); ++index) {
+        const auto depth = device.projected_depth(argument);
+        vertices.push_back(vertex(points[index].x, points[index].y, depth, colors[index], fp));
+    }
+    // The source strip converter clears again after depth projection and before submission.
+    unbind_texture();
     auto draw = device.state;
     draw.space = graphics::PositionSpace::Screen;
     draw.primitive_type = 5;
     draw.primitive_count = 2;
     draw.texture_coordinates = 0;
+    draw.has_diffuse = true;
     draw.has_normals = false;
     draw.has_specular = false;
     draw.indices.clear();
-    draw.vertices.clear();
-    for (const auto &point : points) {
-        const auto depth = device.projected_depth(argument);
-        draw.vertices.push_back(vertex(point.x, point.y, depth, color, fp));
-    }
+    draw.vertices = std::move(vertices);
     device.frame.commands.emplace_back(std::move(draw));
     end(device.state);
 }

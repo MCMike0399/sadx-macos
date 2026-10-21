@@ -28,10 +28,14 @@ class LogoRenderer final : public LogoOutput {
     void set_background(std::uint32_t, std::uint32_t, std::uint32_t) override;
     void set_blending(std::uint32_t, std::uint32_t) override;
     pvr::TextureInfo texture(std::uint32_t index) override;
+    std::uint32_t texture_global_index(const texture_lifetime::List &, std::uint32_t) const;
     void draw_texture(const std::array<pvr::Vertex, 4> &, std::uint32_t global_index,
                       std::uint32_t alpha) override;
     void draw_polygon(const std::array<pvr::Point, 4> &, std::uint32_t color,
                       float priority, std::uint32_t flags) override;
+    void draw_colored_polygon(const std::array<pvr::Point, 4> &,
+                              const std::array<std::uint32_t, 4> &, float priority,
+                              std::uint32_t flags);
     void queue_box(float, float, float, float, float, std::uint32_t) override;
 
   private:

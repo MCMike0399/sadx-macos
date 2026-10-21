@@ -134,7 +134,7 @@ struct MenuTextureCalls {
 struct SequenceCalls {
     virtual ~SequenceCalls() = default;
     virtual void set_entrance(std::int32_t) = 0;
-    // STUB: SONIC 0x505fe0 FUN_00505fe0
+    // NOTSA: composition seam; menu_resource_lifetime owns the recovered release.
     virtual void release_menu_textures() = 0;
     // STUB: SONIC 0x5064d0 FUN_005064d0
     virtual void finalize_selection() = 0;
@@ -381,7 +381,7 @@ struct TitleUpdateCalls {
     virtual std::uint32_t fade_out_color(float) = 0;
     virtual std::uint32_t fade_in_color(float) = 0;
     virtual void update_title_input(TitleWork &) = 0;
-    // STUB: SONIC 0x506040 AvaReleaseTexForEachMode
+    // NOTSA: source ignores this argument and uses the canonical sequence work.
     virtual void release_mode_textures(MenuMode) = 0;
     virtual void release_japanese_title_textures() = 0;
 };
@@ -497,7 +497,7 @@ struct Calls {
     virtual void load_player_motion(std::int32_t) = 0;
     virtual void load_loading_font() = 0;
     virtual void copy_loading_font() = 0;
-    // STUB: SONIC 0x420a30 ABC_TXT_release
+    // NOTSA: loading-screen composition of the recovered font resource release.
     virtual void release_font_resource() = 0;
     virtual void set_font_color(std::uint32_t, std::uint32_t, std::uint32_t,
                                 std::uint32_t) = 0;
@@ -517,7 +517,7 @@ struct Calls {
 enum class MenuDrawResult { Complete, NeedsDrawing };
 // FUNCTION: SONIC 0x512450 CharacterSelectMenu_Display
 MenuDrawResult draw_character_select(const CharacterSelectWork &);
-// FUNCTION: SONIC 0x505550 file_sel_disp
+// NOTSA: inactive-prefix adapter retained for the legacy title-menu oracle.
 MenuDrawResult draw_file_select(const FileSelectWork &);
 // FUNCTION: SONIC 0x50b410 trial_act_sel_disp
 MenuDrawResult draw_level_select(const StageSelectWork &);
@@ -548,7 +548,7 @@ MenuCallbackResult update_puti(const TaskHandle &, const SequenceWork &, PutiCal
 MenuCallbackResult update_character_select(CharacterSelectWork &, SequenceWork &,
                                             std::uint8_t &character_cursor,
                                             std::uint8_t &player_character);
-// FUNCTION: SONIC 0x5053f0 FileSelect_Main
+// NOTSA: retained inactive-prefix adapter; file_select::update owns the full source callback.
 MenuCallbackResult update_file_select(FileSelectWork &, SequenceWork &);
 // FUNCTION: SONIC 0x50b220 trial_act_sel_exec
 MenuCallbackResult update_level_select(StageSelectWork &, SequenceWork &);

@@ -39,6 +39,7 @@ class LogoScene final : private logo::StartupCalls,
     logo::Completion advance();
     const logo::State &state() const { return state_; }
     const pvr::State &drawing_state() const { return drawing_; }
+    pvr::State &drawing_state() { return drawing_; }
     std::uint32_t fade_color() const { return fade_color_; }
     const TaskScheduler *tasks() const { return tasks_.get(); }
     TaskScheduler &task_scheduler();

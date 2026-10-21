@@ -196,6 +196,12 @@ pvr::TextureInfo LogoRenderer::texture(std::uint32_t index) {
     // The active GVR patch ignores source surface-format flags for alpha selection.
     return {static_cast<std::uint32_t>(memory.global_index), 0, memory.width, memory.height};
 }
+std::uint32_t LogoRenderer::texture_global_index(const texture_lifetime::List &list,
+                                                std::uint32_t index) const {
+    if (index >= list.entries.size() || !list.entries[index])
+        throw std::runtime_error("native texture global index is unavailable");
+    return static_cast<std::uint32_t>(list.entries[index]->global_index);
+}
 pvr::ImmediateDevice LogoRenderer::immediate_device() {
     return {state_, frame_, [this](float reciprocal_depth) {
                 return arithmetic_.to_float(ninja_projected_depth(
@@ -222,8 +228,18 @@ void LogoRenderer::draw_texture(const std::array<pvr::Vertex, 4> &vertices,
 }
 void LogoRenderer::draw_polygon(const std::array<pvr::Point, 4> &points, std::uint32_t color,
                                 float priority, std::uint32_t flags) {
+    draw_colored_polygon(points, {color, color, color, color}, priority, flags);
+}
+void LogoRenderer::draw_colored_polygon(const std::array<pvr::Point, 4> &points,
+                                       const std::array<std::uint32_t, 4> &colors,
+                                       float priority, std::uint32_t flags) {
     auto device = immediate_device();
-    pvr::submit_box(points, color, priority, flags, device, arithmetic_);
+    texture_lifetime::Services services{[this] {
+        state_.texture.reset();
+    }};
+    pvr::submit_colored_polygon(points, colors, priority, flags, device, arithmetic_, [&] {
+        texture_lifetime::unbind_cached_texture(texture_state_, services);
+    });
 }
 void LogoRenderer::queue_box(float, float, float, float, float, std::uint32_t) {
     throw std::runtime_error("native fog-emulation queue is not composed");

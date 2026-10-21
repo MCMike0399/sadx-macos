@@ -57,8 +57,15 @@ void TitleScene::update_child(TaskScheduler &scheduler, const TaskHandle &task) 
         throw std::runtime_error("native title sequence child has no work");
     title_menu::update_sequence_child(task, *work, scene);
 }
-void TitleScene::delete_sequence(TaskScheduler &, const TaskHandle &) {
-    throw flow::UnrecoveredGameFlowCall("native_title_sequence_destructor");
+void TitleScene::delete_sequence(TaskScheduler &scheduler, const TaskHandle &task) {
+    auto &scene = callback_scene(scheduler, delete_sequence);
+    const auto work = std::static_pointer_cast<title_menu::SequenceWork>(task->auxiliary_native_work);
+    if (!work)
+        throw std::runtime_error("native title sequence destructor has no task-owned work");
+    auto startup = scene.session_.logo_.startup_state();
+    auto textures = scene.texture_release_state();
+    auto services = scene.texture_release_services();
+    menu_resource_lifetime::destroy_sequence(*work, startup.demo_mode, scene.state_, textures, services);
 }
 void TitleScene::update_dialog(TaskScheduler &scheduler, const TaskHandle &task) {
     auto &scene = callback_scene(scheduler, update_dialog);
@@ -224,7 +231,9 @@ void TitleScene::set_entrance(std::int32_t) {
     throw flow::UnrecoveredGameFlowCall("native_title_entrance_selection");
 }
 void TitleScene::release_menu_textures() {
-    throw flow::UnrecoveredGameFlowCall("native_title_menu_texture_release");
+    auto textures = texture_release_state();
+    auto services = texture_release_services();
+    menu_resource_lifetime::release_all(textures, services);
 }
 void TitleScene::finalize_selection() {
     throw flow::UnrecoveredGameFlowCall("native_title_selection_finalization");

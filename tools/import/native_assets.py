@@ -24,6 +24,11 @@ from native_settings import import_settings
 from regular_textures import import_regular_textures
 from menu_textures import import_menu_textures
 from music_assets import import_music_assets
+from voice_assets import import_voice_assets
+from save_files import import_save_files
+from font_assets import import_font_assets
+from menu_voice import import_menu_voice
+from file_select_display import import_file_select_display
 from sound_effects import import_sound_effects
 
 
@@ -57,7 +62,12 @@ def import_assets(game, output):
     import_settings(game, output)
     import_regular_textures(game, output)
     import_menu_textures(game, output)
-    import_music_assets(game, output)
+    import_font_assets(game, output)
+    import_menu_voice(game, output)
+    import_file_select_display(game, output)
+    import_music_assets(game, output, selected=(102, 72), menu_request_count=3)
+    import_voice_assets(game, output)
+    import_save_files(game, output)
     import_banks(game / "sonic.exe", system / "SoundData/SE", output,
                  selected=(42, 36, 1, 71, 72),
                  mod_directories=(game / "mods/sadx-input-mod", game / "mods/sadx-speedrun-mod"))

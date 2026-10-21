@@ -1,0 +1,90 @@
+{
+  "frozen_files": {
+    "tests/probes/native_colored_polygon_probe.cpp": "9dda6a5062edf77d644ec5eadfae4ee21bcd4e809af4f61e87666aeeb696ac1c",
+    "tools/oracles/verify_original_colored_polygon.py": "58548d8157a08af241d1f839f6221c87acb56e0adae9942806be753b10d8f8b6"
+  },
+  "reports": {
+    "dev": {
+      "cases": 886,
+      "normal_cases": 884,
+      "normal_case_mismatch_count": 0,
+      "mismatch_count": 2,
+      "flag_mismatches": 646,
+      "architectural_prefix_mismatches": 0,
+      "passed": false,
+      "values_match": false
+    },
+    "holdout": {
+      "cases": 1886,
+      "normal_cases": 1884,
+      "normal_case_mismatch_count": 0,
+      "mismatch_count": 2,
+      "flag_mismatches": 1646,
+      "architectural_prefix_mismatches": 0,
+      "passed": false,
+      "values_match": false
+    }
+  },
+  "mutants": {
+    "source_sha256": "fa20452948394b115f0922b90139912a94d490045adacfbf75dde3f24962fe27",
+    "judge_sha256": "58548d8157a08af241d1f839f6221c87acb56e0adae9942806be753b10d8f8b6",
+    "baseline_raw_unicorn_divergences": 2,
+    "mutants": [
+      {
+        "name": "broadcast_color",
+        "cases": 486,
+        "introduced_normal_mismatches": 484,
+        "architectural_prefix_mismatches": 0,
+        "raw_mismatch_count": 486,
+        "killed": true
+      },
+      {
+        "name": "omit_second_unbind",
+        "cases": 486,
+        "introduced_normal_mismatches": 484,
+        "architectural_prefix_mismatches": 0,
+        "raw_mismatch_count": 486,
+        "killed": true
+      },
+      {
+        "name": "omit_half_pixel",
+        "cases": 486,
+        "introduced_normal_mismatches": 484,
+        "architectural_prefix_mismatches": 0,
+        "raw_mismatch_count": 486,
+        "killed": true
+      },
+      {
+        "name": "clamp_before_spill",
+        "cases": 486,
+        "introduced_normal_mismatches": 0,
+        "architectural_prefix_mismatches": 1,
+        "raw_mismatch_count": 1,
+        "killed": true
+      },
+      {
+        "name": "omit_diffuse_fvf",
+        "cases": 486,
+        "introduced_normal_mismatches": 254,
+        "architectural_prefix_mismatches": 0,
+        "raw_mismatch_count": 256,
+        "killed": true
+      }
+    ]
+  },
+  "profile_proposal": "/private/tmp/sadx-colored-polygon-stage/profile-proposal.json",
+  "scope": "CPU original D3D8 API/converted-vertex/state boundary; seeded projected-depth service, no GPU/pixel claim. No protected judges, expected values, tolerances or corpus filters changed.",
+  "qualification": "NOT strict pass: raw CW119 divergences remain red and separate from FP partials. Native unmasked status flags unqualified. Pinned normal CW127 all exceptions masked.",
+  "profile_tracking": "Separate metadata commits8ed53cb/76c13c8; bounded source-qualified forwarding, no global UI scaling claim.",
+  "main_oracle": {
+    "cases": 886,
+    "normal_cases": 884,
+    "normal_case_mismatch_count": 0,
+    "mismatch_count": 2,
+    "flag_mismatches": 646,
+    "architectural_prefix_mismatches": 0,
+    "passed": false,
+    "values_match": false
+  },
+  "fresh_review": "review_file_select_integration finalboundedrecheck: no blockingfindings, allfingerprints current; rawdivergences andotherlimits retained."
+}

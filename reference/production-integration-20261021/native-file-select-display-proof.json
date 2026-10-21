@@ -1,0 +1,167 @@
+{
+  "files": {
+    "src/engine/menu_draw_primitives.hpp": "32ae18ecc63d2b280dfde54ad8dc628aabdf6eec4e2b88a50e1bbf1d850e2cb6",
+    "src/engine/menu_draw_primitives.cpp": "163b20359b1d1b0ae1f4342fc38797bafedc3aa70be96a2423fd9a9ef61bdad2",
+    "src/game/file_select_display.hpp": "5d38ef20fab0a6c397127da38719e0328f806cdf7576eedbe0c78c9bbb35d0d3",
+    "src/game/file_select_display.cpp": "a4596294479f682826269a554d1b847465aa94a465524ab58626afa07462aa54",
+    "src/runtime/file_select_display_assets.hpp": "be0e4a1f904aa75c768e87adabb77beb27f8ce79f2b2e16b22471e49218a8f39",
+    "tools/import/file_select_display.py": "a5e989dbcce8f265fc39061f77999287b88018b48ef869bd3dc1a848806cf2de",
+    "tests/probes/native_file_select_display_probe.cpp": "57b6025fc07e0135ba6cb4d8a08b6ead22931898c09a81f6b6cd5587a6e5b2be",
+    "tests/probes/native_menu_draw_primitives_probe.cpp": "39599266a122b1faac7f31f76e4b62272aca011216a989eb0b1f842f0a0868b1",
+    "tools/oracles/verify_original_file_select_display.py": "e7017ffb0505b98178431d8f9e66a98b111a005479f7156b58015b4220e2ce5b",
+    "tools/oracles/verify_original_menu_draw_primitives.py": "d00991551c635de925b462dfd87009290b207e50e3c59bf711bf1ae689dfc374",
+    "tests/unit/menu_draw_primitives.cpp": "e11ef8ad54979d33773aaecb47e1d1bbf115bd8e2b7f5115582a8718ed85543f",
+    "tests/python/test_file_select_display_assets.py": "0e4b0443ab85ffcd7301faae275476ffafee4c8e12e9444089a77eb42bfeac26"
+  },
+  "reports": {
+    "display-dev.json": {
+      "cases": 600,
+      "seed": 20261118,
+      "mismatch_count": 0,
+      "fp_flag_partials": 340,
+      "native_sources": {
+        "src/engine/menu_draw_primitives.hpp": "32ae18ecc63d2b280dfde54ad8dc628aabdf6eec4e2b88a50e1bbf1d850e2cb6",
+        "src/engine/menu_draw_primitives.cpp": "163b20359b1d1b0ae1f4342fc38797bafedc3aa70be96a2423fd9a9ef61bdad2",
+        "src/game/file_select_display.hpp": "5d38ef20fab0a6c397127da38719e0328f806cdf7576eedbe0c78c9bbb35d0d3",
+        "src/game/file_select_display.cpp": "a4596294479f682826269a554d1b847465aa94a465524ab58626afa07462aa54",
+        "tests/probes/native_file_select_display_probe.cpp": "57b6025fc07e0135ba6cb4d8a08b6ead22931898c09a81f6b6cd5587a6e5b2be"
+      },
+      "limits": "Actual505550 file-select display with pinned loader patches and typed resources.\n\nOriginal entry/helper/primitive/font instructions execute to quad/polygon boundaries.\nNative resource selection, decoder-free texture metadata, local calendar conversion,\nsprintf and optional message task dispatch are explicit receipts. No GPU-pixel or\nWindows/native timezone-order parity is claimed. All source save/list/font data is\nfixture input; sentinel filename/time remains indeterminate and is never supplied.\n"
+    },
+    "display-holdout.json": {
+      "cases": 1500,
+      "seed": 53817329,
+      "mismatch_count": 0,
+      "fp_flag_partials": 895,
+      "native_sources": {
+        "src/engine/menu_draw_primitives.hpp": "32ae18ecc63d2b280dfde54ad8dc628aabdf6eec4e2b88a50e1bbf1d850e2cb6",
+        "src/engine/menu_draw_primitives.cpp": "163b20359b1d1b0ae1f4342fc38797bafedc3aa70be96a2423fd9a9ef61bdad2",
+        "src/game/file_select_display.hpp": "5d38ef20fab0a6c397127da38719e0328f806cdf7576eedbe0c78c9bbb35d0d3",
+        "src/game/file_select_display.cpp": "a4596294479f682826269a554d1b847465aa94a465524ab58626afa07462aa54",
+        "tests/probes/native_file_select_display_probe.cpp": "57b6025fc07e0135ba6cb4d8a08b6ead22931898c09a81f6b6cd5587a6e5b2be"
+      },
+      "limits": "Actual505550 file-select display with pinned loader patches and typed resources.\n\nOriginal entry/helper/primitive/font instructions execute to quad/polygon boundaries.\nNative resource selection, decoder-free texture metadata, local calendar conversion,\nsprintf and optional message task dispatch are explicit receipts. No GPU-pixel or\nWindows/native timezone-order parity is claimed. All source save/list/font data is\nfixture input; sentinel filename/time remains indeterminate and is never supplied.\n"
+    },
+    "primitives-dev.json": {
+      "cases": 2434,
+      "seed": 20261117,
+      "mismatch_count": 0,
+      "fp_flag_partials": 1300,
+      "native_sources": {
+        "src/engine/menu_draw_primitives.hpp": "32ae18ecc63d2b280dfde54ad8dc628aabdf6eec4e2b88a50e1bbf1d850e2cb6",
+        "src/engine/menu_draw_primitives.cpp": "163b20359b1d1b0ae1f4342fc38797bafedc3aa70be96a2423fd9a9ef61bdad2",
+        "tests/probes/native_menu_draw_primitives_probe.cpp": "39599266a122b1faac7f31f76e4b62272aca011216a989eb0b1f842f0a0868b1"
+      },
+      "limits": "Actual source menu PVR producers under the pinned GVR format-mask patch.\n\nResource lookup/submission are receipts; actual vertex stores, color multiplication,\nanchor arithmetic and reciprocal execute. This does not certify GPU pixels.\n"
+    },
+    "primitives-holdout.json": {
+      "cases": 4434,
+      "seed": 49013721,
+      "mismatch_count": 0,
+      "fp_flag_partials": 2195,
+      "native_sources": {
+        "src/engine/menu_draw_primitives.hpp": "32ae18ecc63d2b280dfde54ad8dc628aabdf6eec4e2b88a50e1bbf1d850e2cb6",
+        "src/engine/menu_draw_primitives.cpp": "163b20359b1d1b0ae1f4342fc38797bafedc3aa70be96a2423fd9a9ef61bdad2",
+        "tests/probes/native_menu_draw_primitives_probe.cpp": "39599266a122b1faac7f31f76e4b62272aca011216a989eb0b1f842f0a0868b1"
+      },
+      "limits": "Actual source menu PVR producers under the pinned GVR format-mask patch.\n\nResource lookup/submission are receipts; actual vertex stores, color multiplication,\nanchor arithmetic and reciprocal execute. This does not certify GPU pixels.\n"
+    },
+    "display-mutants.json": {
+      "source_hashes": {
+        "src/game/file_select_display.cpp": "a4596294479f682826269a554d1b847465aa94a465524ab58626afa07462aa54",
+        "src/engine/menu_draw_primitives.cpp": "163b20359b1d1b0ae1f4342fc38797bafedc3aa70be96a2423fd9a9ef61bdad2"
+      },
+      "judge_sha256": "e7017ffb0505b98178431d8f9e66a98b111a005479f7156b58015b4220e2ce5b",
+      "mutants": [
+        {
+          "name": "guard",
+          "cases": 120,
+          "mismatches": 120,
+          "killed": true
+        },
+        {
+          "name": "profile_bind_loop",
+          "cases": 120,
+          "mismatches": 35,
+          "killed": true
+        },
+        {
+          "name": "frame_order",
+          "cases": 120,
+          "mismatches": 18,
+          "killed": true
+        },
+        {
+          "name": "offset_store",
+          "cases": 120,
+          "mismatches": 64,
+          "killed": true
+        },
+        {
+          "name": "empty_selected_file",
+          "cases": 120,
+          "mismatches": 9,
+          "killed": true
+        },
+        {
+          "name": "empty_selected_card",
+          "cases": 120,
+          "mismatches": 9,
+          "killed": true
+        },
+        {
+          "name": "low_sequence_byte",
+          "cases": 120,
+          "mismatches": 5,
+          "killed": true
+        },
+        {
+          "name": "character_mapping",
+          "cases": 120,
+          "mismatches": 2,
+          "killed": true
+        },
+        {
+          "name": "hours_divisor",
+          "cases": 120,
+          "mismatches": 7,
+          "killed": true
+        },
+        {
+          "name": "omit_base_color",
+          "cases": 120,
+          "mismatches": 41,
+          "killed": true
+        },
+        {
+          "name": "font_cell_width",
+          "cases": 120,
+          "mismatches": 49,
+          "killed": true
+        },
+        {
+          "name": "font_centering",
+          "cases": 120,
+          "mismatches": 52,
+          "killed": true
+        },
+        {
+          "name": "white_vertex_color",
+          "cases": 120,
+          "mismatches": 27,
+          "killed": true
+        }
+      ]
+    }
+  },
+  "strict_cpp_standard": 17,
+  "unit_passed": true,
+  "python_tests_passed": 8,
+  "limits": [
+    "GPU-device/source-colored-strip oracle deferred; parent has dedicated colored lower unit and source dossiers.",
+    "Source421920 optional message task dispatch is an explicit STUB receipt, not recovered task work; both initial visibility flags are sourceBSS0.",
+    "Native provider ordering/local dates are real platform facts; no Windows timezone/order parity assertion.",
+    "640x480 background wrapper identity and ASCII text knownstage0..43+sentinel100 only; other inputs explicit boundaries."
+  ],
+  "review": "Independent FileSelect worker review plus fresh integration reviewer; current report hashes rechecked by root."
+}

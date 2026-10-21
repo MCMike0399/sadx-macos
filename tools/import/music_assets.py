@@ -21,9 +21,11 @@ AUDIO_EXTENSIONS = {'.wma','.wav','.adx','.ogg','.mp3','.flac','.aif','.aiff','.
 sha = lambda raw: hashlib.sha256(raw).hexdigest()
 
 
-def read_catalog(image):
+def read_catalog(image, menu_request_count=1):
     if image.sha256 != SOURCE_SHA256:
         raise ValueError('music catalog requires the pinned executable SHA256')
+    if type(menu_request_count) is not int or not 1 <= menu_request_count <= 3:
+        raise ValueError('menu request prefix exceeds recovered caller indices')
     raw = image.read(SONGS, 125 * 8)
     songs, strings, inverse = [], {}, bytearray()
     for index in range(125):
@@ -43,10 +45,10 @@ def read_catalog(image):
     en_raw = image.read(ENGLISH_DURATIONS, 2049 * 2)
     japanese = list(struct.unpack('<2049H',jp_raw))
     english = list(struct.unpack('<2049H',en_raw))
-    # Only title request index0 is required/proved by this connected caller.
+    # Title and FileSelect prove request indices0 and2, so retain their whole prefix.
     # The rest of the unbounded source request array is not assigned a guessed size.
-    request_raw = image.read(MENU_REQUESTS,4)
-    requests = list(struct.unpack('<i',request_raw))
+    request_raw = image.read(MENU_REQUESTS,menu_request_count*4)
+    requests = list(struct.unpack(f'<{menu_request_count}i',request_raw))
     if any(song < 0 or song >= len(songs) for song in requests):
         raise ValueError('title music mapping is outside the source song catalog')
     if bytes(inverse) != raw or struct.pack('<2049H',*japanese) != jp_raw or struct.pack('<2049H',*english) != en_raw:
@@ -57,7 +59,7 @@ def read_catalog(image):
     proof = {'source_sha256':image.sha256,'source_ranges':{f'{hex(address)}-{hex(address+len(data))}':sha(data) for address,data in ranges},
              'records': [{'address':hex(address),'bytes':data.hex(),'inverse_exact':True} for address,data in ranges],
              'strings':strings,'voice_duration_element_bytes':2,
-             'scope':'125songs,2049uint16durations per language,proved title request index0 only.'}
+             'scope':f'125songs,2049uint16durations per language,proved menu request prefix of {menu_request_count} entries.'}
     return metadata,proof
 
 
@@ -83,9 +85,10 @@ def float_wave_frames(path):
     return len(data)//8
 
 
-def import_music_assets(game, output, selected=(102,), *, ffmpeg=None, mod_directories=None):
+def import_music_assets(game, output, selected=(102,), *, ffmpeg=None, mod_directories=None,
+                        menu_request_count=1):
     game,output=Path(game),Path(output)
-    catalog,proof=read_catalog(PEImage(game/'sonic.exe'))
+    catalog,proof=read_catalog(PEImage(game/'sonic.exe'),menu_request_count)
     profile=profile_evidence(game,{'groups':[],'lists':[],'localizations':[]},mod_directories)
     if mod_directories is None:
         directories=[game/'mods'/name for name in profile['enabled_mods']]

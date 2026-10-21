@@ -272,9 +272,12 @@ texture_lifetime::Services Display::texture_services() {
     }};
 }
 void Display::release_texture_list(sprite::TextureList &list) {
+    release_texture_list(&list);
+}
+void Display::release_texture_list(sprite::TextureList *list) {
     auto state = texture_state();
     auto services = texture_services();
-    texture_lifetime::release_texture_list(&list, state, services);
+    texture_lifetime::release_texture_list(list, state, services);
 }
 void Display::release_movie_texture_list(sprite::TextureList &list) {
     auto state = texture_state();

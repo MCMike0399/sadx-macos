@@ -21,4 +21,10 @@ void submit_texture(const std::array<Vertex, 4> &, std::shared_ptr<const graphic
 // NOTSA: composes ___SAnjDrawPolygon2D's non-textured strip path for ds_DrawBoxFill2D.
 void submit_box(const std::array<Point, 4> &, std::uint32_t color, float priority,
                 std::uint32_t flags, ImmediateDevice &, X87Context &);
+// NOTSA: composes the positive-flags four-color strip path. The unbind service
+// borrows the canonical Ninja texture cache, including its second clear before DrawPrimitiveUP.
+void submit_colored_polygon(const std::array<Point, 4> &,
+                            const std::array<std::uint32_t, 4> &colors, float priority,
+                            std::uint32_t flags, ImmediateDevice &, X87Context &,
+                            const std::function<void()> &unbind_texture);
 } // namespace sadx::pvr

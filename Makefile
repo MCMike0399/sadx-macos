@@ -417,3 +417,6 @@ build/guest-draw-history-test: tests/unit/guest_draw_history.cpp build/libsadx-g
 
 build/native-game-view-native-probe.dylib: tests/probes/native_game_view_native_probe.cpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) $< build/libsadx-guest.a build/libsadx-core.a -o $@
+
+build/native-load-selected-save-probe.dylib: tests/probes/native_load_selected_save_probe.cpp tests/probes/native_save_file_list_probe.cpp build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) $< build/libsadx-core.a -o $@

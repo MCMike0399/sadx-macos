@@ -1,6 +1,11 @@
 #pragma once
 #include "game/title_menu.hpp"
+#include "game/menu_resource_lifetime.hpp"
 #include "game/music.hpp"
+#include "game/file_select.hpp"
+#include "game/file_select_display.hpp"
+#include "game/menu_voice.hpp"
+#include "engine/font_native.hpp"
 #include "runtime/title_assets.hpp"
 #include <functional>
 
@@ -25,7 +30,12 @@ class TitleScene final : private title_menu::Calls,
                          private title_menu::FadeCalls,
                          private title_menu::BackgroundCalls,
                          private title_menu::TitleInputCalls,
-                         private title_menu::ModeTransitionCalls {
+                         private title_menu::ModeTransitionCalls,
+                         private file_select::InitCalls,
+                         private file_select::UpdateCalls,
+                         private file_select::ControlCalls,
+                         private file_select_display::Calls,
+                         private font::Calls {
   public:
     TitleScene(Session &, Display &, const TitleAssets &);
     ~TitleScene();
@@ -138,6 +148,44 @@ class TitleScene final : private title_menu::Calls,
     static void exec_tv_settings(TaskScheduler &, const TaskHandle &);
     static void display_tv_settings(TaskScheduler &, const TaskHandle &);
     music::TaskServices music_task_services();
+    menu_resource_lifetime::State texture_release_state();
+    menu_resource_lifetime::Services texture_release_services();
+    void initialize_file_select(title_menu::FileSelectWork &) override;
+    void request_menu_voice(std::int32_t) override;
+    std::uint8_t count_save_files() override;
+    void load_selected_save() override;
+    void load_font() override;
+    void copy_font() override;
+    void apply_save() override;
+    void load_texture(texture_lifetime::List &) override;
+    void update_controls(title_menu::FileSelectWork &) override;
+    void request_dialog(std::int32_t) override;
+    void prepare_new_save() override;
+    void request_save() override;
+    std::int32_t close_warning() override;
+    void play_navigation_sound() override;
+    void play_cancel_sound() override;
+    void draw_file_select(title_menu::FileSelectWork &);
+    void select_menu_texture(file_select_display::MenuTexture) override;
+    file_select_display::Calendar local_calendar(std::uint64_t) override;
+    void display_message(const TaskHandle &) override;
+    void select_standard_texture(menu_draw::StandardTexture) override;
+    void set_blend(std::uint32_t, std::uint32_t) override;
+    void reset_material() override;
+    void set_depth_compare(std::uint32_t) override;
+    void set_depth_write(std::uint32_t) override;
+    void restore_depth_compare() override;
+    pvr::TextureInfo texture(std::uint32_t) override;
+    void draw_texture(const std::array<pvr::Vertex, 4> &, std::uint32_t, std::uint32_t) override;
+    void draw_polygon(const std::array<pvr::Point, 4> &, std::uint32_t, float, std::uint32_t) override;
+    void draw_colored_polygon(const std::array<pvr::Point, 4> &,
+                              const std::array<std::uint32_t, 4> &, float, std::uint32_t) override;
+    std::uint32_t texture_global_index(const texture_lifetime::List &, std::uint32_t) override;
+    void queue_box(float, float, float, float, float, std::uint32_t) override;
+    void release_font() override;
+    void free_save_list() override;
+    menu_voice::TaskServices voice_task_services();
+    static void update_voice_request(TaskScheduler &, const TaskHandle &);
     static void load_music_manager(TaskScheduler &, const TaskHandle &);
     static void update_music_manager(TaskScheduler &, const TaskHandle &);
     static void delete_music_manager(TaskScheduler &, const TaskHandle &);

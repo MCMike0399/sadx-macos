@@ -4,6 +4,7 @@
 #include "runtime/native_title_scene.hpp"
 #include "game/level_sounds.hpp"
 #include <iostream>
+#include <cstring>
 #include <stdexcept>
 
 namespace sadx::native {
@@ -161,10 +162,10 @@ void Session::reset_game() {
         [this] { logo_.initialize_tasks(); },
         [this](std::uint32_t mode) { run_level_destructor(mode); },
         [this] {
-            cleanup::LoopState state{reset_work_, secondary_loop_count_, list_data_};
-            cleanup::reset_loop_state(state, [] {
-                throw flow::UnrecoveredGameFlowCall("native_menu_list_release");
-            });
+            // The recovered reset snapshots list presence; the session retains its typed owner.
+            const void *list = list_data_.get();
+            cleanup::LoopState state{reset_work_, secondary_loop_count_, list};
+            cleanup::reset_loop_state(state, [this] { file_select::free_save_list(list_data_); });
         },
         [this](void *buffer) { release_buffer(buffer); },
         [this] { display_->enable_fog(); }
@@ -288,6 +289,17 @@ void Session::attach_regular_textures(RegularTextureAssets assets) {
         auto services = regular_texture_services();
         regular_textures::load_archive(name, &list, *regular_texture_state_, services);
     });
+}
+void Session::attach_font(FontAssets assets) {
+    if (font_assets_)
+        throw std::runtime_error("native font resources are already attached");
+    font_assets_ = std::make_unique<FontAssets>(std::move(assets));
+    font_textures_ = bind_texture_list(font_assets_->texture_list);
+    std::array<float, 4> dimensions{};
+    static_assert(sizeof(dimensions) == sizeof(font_assets_->dimension_words));
+    std::memcpy(dimensions.data(), font_assets_->dimension_words.data(), sizeof(dimensions));
+    font_info_ = {dimensions[0], dimensions[1], dimensions[2], dimensions[3], &font_textures_,
+                   &font_assets_->proportions, font_assets_->colors};
 }
 regular_textures::Services Session::regular_texture_services() {
     if (!display_)

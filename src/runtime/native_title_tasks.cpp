@@ -3,6 +3,7 @@
 #include "runtime/native_session.hpp"
 #include "engine/frame_loop_native.hpp"
 #include "game/sound_effects.hpp"
+#include "math/ninja_sine_table.hpp"
 #include <stdexcept>
 #include <string>
 
@@ -107,14 +108,14 @@ void TitleScene::exec_file_select(TaskScheduler &scheduler, const TaskHandle &ta
     auto work = std::static_pointer_cast<title_menu::FileSelectWork>(task->auxiliary_native_work);
     if (!work || !scene.state_.sequence_work)
         throw std::runtime_error("native file_select task has no work");
-    scene.require_complete(title_menu::update_file_select(*work, *scene.state_.sequence_work),
-                            "native_file_select");
+    file_select::update(*work, scene.state_, scene.session_.secondary_loop_count_,
+        scene.session_.file_select_fade_in_marker_, scene, scene.display_.arithmetic());
 }
 void TitleScene::display_file_select(TaskScheduler &scheduler, const TaskHandle &task) {
     auto &scene = callback_scene(scheduler, display_file_select);
     auto work = std::static_pointer_cast<title_menu::FileSelectWork>(task->auxiliary_native_work);
     if (!work) throw std::runtime_error("native file_select task has no work");
-    scene.require_drawn(title_menu::draw_file_select(*work), "native_file_select_drawing");
+    scene.draw_file_select(*work);
 }
 void TitleScene::exec_level_select(TaskScheduler &scheduler, const TaskHandle &task) {
     auto &scene = callback_scene(scheduler, exec_level_select);
@@ -451,6 +452,97 @@ void TitleScene::request_menu_music(std::int32_t index) {
     auto services = music_task_services();
     music::request_menu_music(index, *session_.music_catalog_, sound_, session_.tracks_, services);
 }
+menu_voice::TaskServices TitleScene::voice_task_services() {
+    return {
+        [this] { return create_task(0, 4, update_voice_request); },
+        [this](const TaskHandle &task) { return allocate_menu_work<menu_voice::RequestWork>(task, 8); },
+        [this](const TaskHandle &task) {
+            if (!session_.logo_.task_scheduler().destroy_task(task))
+                throw std::runtime_error("native menu voice request destruction failed");
+        }
+    };
+}
+void TitleScene::request_menu_voice(std::int32_t index) {
+    auto services = voice_task_services();
+    // The canonical source slot is named volume_task in the earlier menu recovery.
+    menu_voice::request_character_voice(index, session_.bootstrap_.menu.flags[2],
+        session_.menu_voices_, sound_.volume_task, services);
+}
+void TitleScene::update_voice_request(TaskScheduler &scheduler, const TaskHandle &task) {
+    auto &scene = callback_scene(scheduler, update_voice_request);
+    auto services = scene.voice_task_services();
+    menu_voice::update_request(task, scene.sound_.volume_task, scene.session_.tracks_,
+        scene.session_.voice_requested_enabled_, scene.textures_.ready, services);
+}
+void TitleScene::initialize_file_select(title_menu::FileSelectWork &work) {
+    file_select::InitState state{
+        session_.bootstrap_.menu.selected_file, session_.bootstrap_.card_state,
+        session_.bootstrap_.card_operation, session_.save_word_before_selection_,
+        session_.first_visible_file_, session_.saving_disabled_, session_.selected_card_index_,
+        session_.displayed_save_index_};
+    file_select::initialize(work, state, *this);
+}
+std::uint8_t TitleScene::count_save_files() {
+    if (!session_.save_files_)
+        throw flow::UnrecoveredGameFlowCall("native_save_file_provider");
+    return file_select::count_save_files(session_.list_data_, session_.save_, *session_.save_files_);
+}
+void TitleScene::load_selected_save() {
+    if (!session_.save_files_)
+        throw flow::UnrecoveredGameFlowCall("native_save_file_provider");
+    file_select::LoadState state{session_.saving_disabled_, session_.bootstrap_.card_state,
+        session_.bootstrap_.save_name, session_.list_data_, session_.save_, session_.rings_};
+    file_select::load_selected_save(state, *session_.save_files_);
+}
+void TitleScene::load_texture(texture_lifetime::List &list) {
+    if (!session_.regular_texture_state_)
+        throw flow::UnrecoveredGameFlowCall("native_font_texture_loader");
+    auto services = session_.regular_texture_services();
+    regular_textures::load_individual(list, *session_.regular_texture_state_, services);
+}
+void TitleScene::load_font() {
+    if (!session_.font_assets_)
+        throw flow::UnrecoveredGameFlowCall("native_ascii_font_assets");
+    font::load(&session_.font_info_, session_.font_state_, *this);
+}
+void TitleScene::copy_font() { font::copy(session_.font_info_, session_.font_state_); }
+void TitleScene::apply_save() { session_.load_save(); }
+void TitleScene::release_font() {
+    font::release(session_.font_info_, [this](auto &list) { display_.release_texture_list(list); });
+}
+void TitleScene::free_save_list() { file_select::free_save_list(session_.list_data_); }
+void TitleScene::update_controls(title_menu::FileSelectWork &work) {
+    file_select::ControlState state{
+        session_.bootstrap_.card_operation, session_.bootstrap_.menu.selected_file,
+        session_.displayed_save_index_, session_.bootstrap_.card_state,
+        session_.first_visible_file_, session_.selected_card_index_,
+        session_.file_operation_pending_, session_.flow_.alert_blocked, textures_.ready,
+        session_.secondary_loop_count_, session_.bootstrap_.character,
+        session_.new_file_requested_};
+    auto &fp = display_.arithmetic();
+    const NinjaMath math(ninja_sine_table(), fp);
+    file_select::update_controls(work, state, *this, math, fp);
+}
+void TitleScene::request_dialog(std::int32_t) {
+    throw flow::UnrecoveredGameFlowCall("native_file_select_dialog_request");
+}
+void TitleScene::prepare_new_save() {
+    throw flow::UnrecoveredGameFlowCall("native_file_select_prepare_new_save");
+}
+void TitleScene::request_save() {
+    throw flow::UnrecoveredGameFlowCall("native_file_select_request_save");
+}
+std::int32_t TitleScene::close_warning() {
+    throw flow::UnrecoveredGameFlowCall("native_file_select_close_warning");
+}
+void TitleScene::play_navigation_sound() {
+    sound_effects::Queue queue{session_.sound_, session_.bank_channels_, session_.sound_effects_};
+    sound_effects::play_one_shot(1, nullptr, 0, 0, queue);
+}
+void TitleScene::play_cancel_sound() {
+    sound_effects::Queue queue{session_.sound_, session_.bank_channels_, session_.sound_effects_};
+    sound_effects::play_one_shot(3, nullptr, 0, 0, queue);
+}
 void TitleScene::load_music_manager(TaskScheduler &scheduler, const TaskHandle &task) {
     auto &scene = callback_scene(scheduler, load_music_manager);
     auto services = scene.music_task_services();
@@ -485,8 +577,9 @@ void TitleScene::update_music_manager(TaskScheduler &scheduler, const TaskHandle
                 session.music_media_services_);
         },
         [&session] { return music::music_status(session.media_); },
-        [](std::string_view) -> std::int32_t {
-            throw flow::UnrecoveredGameFlowCall("native_menu_voice_file_playback");
+        [&session, &configuration](std::string_view path) {
+            return voice_playback::play_file(path, session.media_, configuration.voice_attenuation,
+                                            session.voice_services_);
         },
         [&session] { return music::voice_status(session.media_, session.music_media_services_); },
         [&session] {
@@ -516,10 +609,35 @@ void TitleScene::play_title_confirm_sound() {
     sound_effects::play_title_confirmation(queue);
 }
 void TitleScene::release_mode_textures(title_menu::MenuMode) {
-    throw flow::UnrecoveredGameFlowCall("native_title_mode_texture_release");
+    const auto sequence = state_.sequence_work;
+    if (!sequence)
+        throw std::runtime_error("native title texture release has no sequence work");
+    auto textures = texture_release_state();
+    auto services = texture_release_services();
+    menu_resource_lifetime::release_mode_textures(*sequence, textures, services);
 }
 void TitleScene::release_japanese_title_textures() {
-    throw flow::UnrecoveredGameFlowCall("native_japanese_title_texture_release");
+    auto *list = session_.japanese_title_texture_.textures;
+    if (!list)
+        throw std::runtime_error("native Japanese title texture owner is unavailable");
+    auto services = texture_release_services();
+    menu_resource_lifetime::release_japanese_title(*list, services);
+}
+menu_resource_lifetime::State TitleScene::texture_release_state() {
+    return {textures_, session_.text_language_, session_.menu_texture_catalog_, assets_.mode_textures};
+}
+menu_resource_lifetime::Services TitleScene::texture_release_services() {
+    return {
+        [this](texture_lifetime::List *list) { display_.release_texture_list(list); },
+        [this](const TaskHandle &task) {
+            if (!session_.logo_.task_scheduler().destroy_task(task))
+                throw std::runtime_error("native menu resource task destruction failed");
+        },
+        [this](const TaskHandle &task) {
+            if (!session_.logo_.task_scheduler().free_task(task))
+                throw std::runtime_error("native menu resource deferred destruction failed");
+        }
+    };
 }
 void TitleScene::default_blending() { session_.logo_.default_blending(); }
 void TitleScene::set_base_color(std::uint32_t color) { session_.logo_.set_base_color(color); }

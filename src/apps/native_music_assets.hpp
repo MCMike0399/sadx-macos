@@ -27,7 +27,7 @@ inline MusicAssets load_music_assets(const std::filesystem::path &directory) {
     };
     durations(catalog[@"japanese_voice_durations"], result.catalog.japanese_voice_durations);
     durations(catalog[@"english_voice_durations"], result.catalog.english_voice_durations);
-    const auto requests = array(catalog[@"menu_requests"], 1, "proved menu music requests");
+    const auto requests = array(catalog[@"menu_requests"], 3, "proved menu music requests");
     for (id request in requests)
         result.catalog.menu_requests.push_back(static_cast<std::int32_t>(
             integer(request, 0, result.catalog.songs.size() - 1, "menu song")));

@@ -16,6 +16,12 @@
 #include "runtime/regular_texture_assets.hpp"
 #include "runtime/menu_texture_assets.hpp"
 #include "game/music.hpp"
+#include "game/voice_playback.hpp"
+#include "game/save_file_list.hpp"
+#include "game/menu_voice.hpp"
+#include "engine/font_native.hpp"
+#include "runtime/font_assets.hpp"
+#include "runtime/file_select_display_assets.hpp"
 #include "game/sound_effects.hpp"
 
 namespace sadx::native {
@@ -38,6 +44,13 @@ class Session final : private flow::NativeServices {
     const flow::GameFlowState &flow_state() const { return flow_; }
     const bootstrap::State &game_state() const { return bootstrap_; }
     const save::Data &save_data() const { return save_; }
+    std::uint32_t logic_loop_count() const { return secondary_loop_count_; }
+    std::optional<file_select::FileInfo> selected_save_file() const {
+        auto node = list_data_;
+        for (unsigned index = 0; node && index < bootstrap_.card_state; ++index)
+            node = node->next;
+        return node ? node->file : std::nullopt;
+    }
     const LogoScene &logo_scene() const { return logo_; }
     std::uint32_t global_timer() const { return global_timer_; }
     std::int16_t stage() const { return stage_; }
@@ -101,6 +114,15 @@ class Session final : private flow::NativeServices {
         music_media_services_ = std::move(services);
         music_milliseconds_ = std::move(milliseconds);
     }
+    void attach_voice(voice_playback::Services services) { voice_services_ = std::move(services); }
+    void attach_save_files(file_select::SaveFileCalls &files) { save_files_ = &files; }
+    void attach_menu_voices(menu_voice::Catalog catalog) { menu_voices_ = std::move(catalog); }
+    void attach_font(FontAssets);
+    void attach_file_select_display(FileSelectDisplayAssets assets,
+        std::function<file_select_display::Calendar(std::uint64_t)> calendar) {
+        file_select_display_assets_ = std::make_unique<FileSelectDisplayAssets>(std::move(assets));
+        file_time_calendar_ = std::move(calendar);
+    }
     // The nested movie loop and the game-mode dispatcher share these exact owners.
     void clear_game() override;
     void reset_game() override;
@@ -129,6 +151,23 @@ class Session final : private flow::NativeServices {
     std::uint32_t demo_wait_ticks_ = 0;
     // Native session storage: SONIC 0x91268c Music_Enabled
     std::int32_t music_requested_enabled_ = 1;
+    // Native session storage: SONIC 0x912690 Serif_Enabled
+    std::int32_t voice_requested_enabled_ = 1;
+    // Native session storage: SONIC 0x3c5e8a4, 0x3c5e8b4, 0x10d77ad.
+    std::int16_t first_visible_file_ = 0;
+    std::uint8_t selected_card_index_ = 0, displayed_save_index_ = 0;
+    // Native session storage: SONIC 0x3b2c58c
+    std::uint8_t file_select_fade_in_marker_ = 0;
+    // GLOBAL: SONIC 0x3b291b8 FileOperationPending size=1
+    std::uint8_t file_operation_pending_ = 0;
+    // GLOBAL: SONIC 0x3b291b3 FirstCreateFlag size=1
+    std::uint8_t new_file_requested_ = 0;
+    // GLOBAL: SONIC 0x3c5e8bc FileMessageVisible size=1
+    std::uint8_t file_message_visible_ = 0;
+    // GLOBAL: SONIC 0x3c5e8b0 FileMessageTask size=4
+    TaskHandle file_message_;
+    // GLOBAL: SONIC 0x3c5e8a8 SaveWarningTask size=4
+    TaskHandle save_warning_message_;
     std::int16_t rings_ = 0, stage_ = 0;
     std::uint16_t game_mode_ = 0;
     bootstrap::State bootstrap_;
@@ -162,6 +201,13 @@ class Session final : private flow::NativeServices {
     MenuTextureCatalog menu_texture_catalog_{};
     regular_textures::Binding japanese_title_texture_{};
     bool menu_textures_attached_ = false;
+    menu_voice::Catalog menu_voices_;
+    std::unique_ptr<FontAssets> font_assets_;
+    sprite::TextureList font_textures_;
+    font::Info font_info_;
+    font::State font_state_;
+    std::unique_ptr<FileSelectDisplayAssets> file_select_display_assets_;
+    std::function<file_select_display::Calendar(std::uint64_t)> file_time_calendar_;
     const regular_textures::Binding &menu_texture_binding(std::uint32_t) const;
     void load_menu_texture(std::uint32_t);
     void load_japanese_title_textures();
@@ -180,6 +226,7 @@ class Session final : private flow::NativeServices {
     std::unique_ptr<music::Catalog> music_catalog_;
     music::VoiceTiming voice_timing_;
     music::MediaServices music_media_services_;
+    voice_playback::Services voice_services_;
     std::function<std::uint32_t()> music_milliseconds_;
     std::array<TaskHandle, 36> sound_tasks_{};
     cleanup::TrackState tracks_;
@@ -217,7 +264,8 @@ class Session final : private flow::NativeServices {
     std::array<void *, 6> set_files_{}, camera_files_{};
     cleanup::LevelDestructor level_destructor_ = nullptr;
     void *level_destructor_context_ = nullptr;
-    const void *list_data_ = nullptr;
+    file_select::List list_data_;
+    file_select::SaveFileCalls *save_files_ = nullptr;
     std::string debug_message_;
     cleanup::TextureState texture_state();
     cleanup::LevelState level_state();

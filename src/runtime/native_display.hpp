@@ -17,6 +17,7 @@ class Display {
     LogoRenderer &output() { return *output_; }
     const LogoRenderer &output() const { return *output_; }
     LogoFrame frame_state();
+    const D3dxViewport &viewport() const { return view_.depth.viewport; }
     X87Context &arithmetic() { return arithmetic_; }
     SseContext &sse() { return sse_; }
     void set_camera();
@@ -33,6 +34,7 @@ class Display {
     void release_all_textures();
     void clear_texture_binding();
     void release_texture_list(sprite::TextureList &);
+    void release_texture_list(sprite::TextureList *);
     void release_movie_texture_list(sprite::TextureList &);
     texture_lifetime::Memory *create_argb_texture(
         std::uint32_t global_index, std::shared_ptr<const std::vector<std::uint8_t>> pixels,

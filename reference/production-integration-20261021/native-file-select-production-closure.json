@@ -1,0 +1,147 @@
+{
+  "isolated_root": "/private/tmp/sadx-native-file-select-closure-aw5tp91j",
+  "source_files": 1332,
+  "exported_game_assets": false,
+  "exported_original_executables": false,
+  "exported_prebuilt_objects": false,
+  "source_state": "Current tracked and new implementation sources; no source archive generated from staleHEAD.",
+  "first_launch_exit": 1,
+  "first_launch_limit": "Shell redirection attempted before creating the new build directory; make did not run. Created build directory and launched normally.",
+  "build_exit": 0,
+  "journey_exit": 0,
+  "linked_libraries": [
+    "/private/tmp/sadx-native-file-select-closure-aw5tp91j/build/sadx-native:",
+    "\t/System/Library/Frameworks/Foundation.framework/Versions/C/Foundation (compatibility version 300.0.0, current version 5027.0.69)",
+    "\t/System/Library/Frameworks/AppKit.framework/Versions/C/AppKit (compatibility version 45.0.0, current version 2775.10.103)",
+    "\t/System/Library/Frameworks/Metal.framework/Versions/A/Metal (compatibility version 1.0.0, current version 382.5.3)",
+    "\t/System/Library/Frameworks/MetalKit.framework/Versions/A/MetalKit (compatibility version 1.0.0, current version 174.4.0)",
+    "\t/System/Library/Frameworks/QuartzCore.framework/Versions/A/QuartzCore (compatibility version 1.2.0, current version 1223.2.2)",
+    "\t/System/Library/Frameworks/CoreGraphics.framework/Versions/A/CoreGraphics (compatibility version 64.0.0, current version 2050.0.0)",
+    "\t/System/Library/Frameworks/ImageIO.framework/Versions/A/ImageIO (compatibility version 1.0.0, current version 1.0.0)",
+    "\t/System/Library/Frameworks/GameController.framework/Versions/A/GameController (compatibility version 1.0.0, current version 14.0.24)",
+    "\t/System/Library/Frameworks/AudioToolbox.framework/Versions/A/AudioToolbox (compatibility version 1.0.0, current version 1000.0.0)",
+    "\t/System/Library/Frameworks/AVFoundation.framework/Versions/A/AVFoundation (compatibility version 1.0.0, current version 2.0.0)",
+    "\t/System/Library/Frameworks/CoreMedia.framework/Versions/A/CoreMedia (compatibility version 1.0.0, current version 3350.77.5)",
+    "\t/System/Library/Frameworks/CoreVideo.framework/Versions/A/CoreVideo (compatibility version 1.2.0, current version 758.27.0)",
+    "\t/usr/lib/libobjc.A.dylib (compatibility version 1.0.0, current version 228.0.0)",
+    "\t/usr/lib/libc++.1.dylib (compatibility version 1.0.0, current version 2200.27.0)",
+    "\t/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1359.0.0)",
+    "\t/System/Library/Frameworks/AVFAudio.framework/Versions/A/AVFAudio (compatibility version 1.0.0, current version 1.0.0)",
+    "\t/System/Library/Frameworks/CoreFoundation.framework/Versions/A/CoreFoundation (compatibility version 150.0.0, current version 5027.0.69)"
+  ],
+  "forbidden_dependency_matches": [],
+  "original_executable_files": [],
+  "production_source_mismatches": [],
+  "isolated_and_main_images": {
+    "740": {
+      "byte_exact": true,
+      "sha256": "ca247abf942b936bd7635b0099916db3ea618b1b4c34d34210657638f6bbaad5"
+    },
+    "899": {
+      "byte_exact": true,
+      "sha256": "d562a857141e9b8ccae15c8d8dd2bf785b4054b35821e4addb001ee1e2b187e7"
+    },
+    "902": {
+      "byte_exact": true,
+      "sha256": "69b1df3f8ed347d81487992092858394e51b89974e3e01f38aeed6c53281f80b"
+    },
+    "950": {
+      "byte_exact": true,
+      "sha256": "2a45567444924333ee8b49265b7f1c80345501462d8a9baa2c0b23fb8948c349"
+    },
+    "1002": {
+      "byte_exact": true,
+      "sha256": "c9650fa1534870f77679c709fa94ebdb7ab7ec1494b7f48d6c4d0638d992528e"
+    },
+    "1100": {
+      "byte_exact": true,
+      "sha256": "d562a857141e9b8ccae15c8d8dd2bf785b4054b35821e4addb001ee1e2b187e7"
+    }
+  },
+  "state": {
+    "execution": "native",
+    "frames": 1100,
+    "game_mode": 12,
+    "game_state": 21,
+    "stage": 0,
+    "act": 0,
+    "rings": 0,
+    "global_timer": 145695,
+    "save_file_count": 2,
+    "selected_save": 1,
+    "menu_selected_save": 1,
+    "save_checksum": 44416,
+    "selected_save_name": "SonicDX02.snc",
+    "logic_loop_count": 1,
+    "file_select_phase": 2,
+    "file_select_submode": 1,
+    "file_select_color": 4294967295,
+    "file_select_fade": 1,
+    "logo_frames": 0,
+    "logo_mode": 0,
+    "textures": 0,
+    "texture_slots_in_use": 477,
+    "completed_frames": 1097,
+    "pending_logic_ticks": 0,
+    "elapsed_logic_ticks": 0,
+    "frame_resync": 0,
+    "input_held": 0,
+    "movie_decoded_frames": 52,
+    "movie_textures": 0,
+    "movie_media_open": false,
+    "movie_phase": 5,
+    "movie_source_padding_defined": false,
+    "movie_audio_frames": 78848,
+    "movie_audio_nonzero_samples": 94266,
+    "movie_audio_completed_buffers": 74,
+    "movie_audio_device_error": 0,
+    "sound_banks_loaded": 7,
+    "sound_bank_samples": 157,
+    "sound_bank_open_attempts": 19,
+    "music_open_events": 2,
+    "music_start_events": 2,
+    "music_audio_frames": 234496,
+    "music_audio_nonzero_samples": 460928,
+    "music_audio_completed_buffers": 226,
+    "music_audio_device_error": 0,
+    "voice_open_events": 1,
+    "voice_start_events": 1,
+    "voice_audio_frames": 233472,
+    "voice_audio_nonzero_samples": 92288,
+    "voice_audio_completed_buffers": 225,
+    "voice_audio_device_error": 0,
+    "sound_load_events": 3,
+    "sound_play_events": 3,
+    "sound_audio_frames": 798464,
+    "sound_audio_nonzero_samples": 122380,
+    "sound_audio_completed_buffers": 3116,
+    "sound_audio_device_error": 0
+  },
+  "limits": [
+    "Production source-only build and native FileSelect checkpoint; no gameplay or63FPS proof.",
+    "Build passed with pinned native CMake explicitly supplied.",
+    "Later Makefile addition changes only selected-save probe registration, not production sources or dependency selection."
+  ],
+  "production_source_updates": [
+    {
+      "build_exit": 0,
+      "change": "Explicit sourceFVF diffuse vertex flag"
+    },
+    {
+      "build_exit": 0,
+      "change": "Source alpha, unbind and strip-state ordering"
+    },
+    {
+      "build_exit": 0,
+      "change": "Bind persisted sequence_variables, not event_work, for story flags"
+    }
+  ],
+  "unchanged_title_matches_reference": {
+    "native_frame": 740,
+    "reference_frame": 742,
+    "global_timer": 240,
+    "byte_exact": true,
+    "two_present_offset_remains": true
+  },
+  "reference_panel_matches": 1
+}
