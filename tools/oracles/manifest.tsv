@@ -23,3 +23,5 @@ movie_fade	build/native-movie-probe.dylib	tools/oracles/verify_original_movie_fa
 movie_geometry	build/native-movie-probe.dylib	tools/oracles/verify_original_movie_geometry.py "$(GAME_EXE)" build/native-movie-probe.dylib --output build/oracles/movie_geometry.json
 movie_timing	build/native-movie-probe.dylib	tools/oracles/verify_original_movie_timing.py "$(GAME_EXE)" build/native-movie-probe.dylib --output build/oracles/movie_timing.json
 native_input	build/native-native-input-probe.dylib	tools/oracles/verify_original_native_input.py "$(INPUT_DLL)" build/native-native-input-probe.dylib --game-exe "$(GAME_EXE)" --output build/oracles/native_input.json
+sound_parameters	build/native-sound-effects-probe.dylib	tools/oracles/verify_original_sound_parameters.py "$(GAME_EXE)" build/native-sound-effects-probe.dylib --output build/oracles/sound_parameters.json
+sound_wave_metadata		tools/oracles/verify_original_sound_wave_metadata.py "$(GAME_EXE)" --assets game/imported --output build/oracles/sound_wave_metadata.json

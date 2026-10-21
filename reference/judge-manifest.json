@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "2949859a3aff579fa725e03a3faa612c41f3d6bb",
-    "evidence": "reference/production-integration-20261020/native-sound-platform-build-preparation.json",
-    "evidence_sha256": "a71f28215ec0a544a5dd77bfc96d34b23c9a573552b3d31024b7fb501b93dcec",
-    "reason": "Declare native PCM resource adapter dependency"
+    "base_commit": "18d5ea74797accc9ac8847bb2c137ebc95829d69",
+    "evidence": "reference/production-integration-20261020/native-sound-oracle-registration.json",
+    "evidence_sha256": "dc934bb426fcd9925ef3b85eb3d4a6b0b496dd4a32f5dcfb8ad77967c178bbf2",
+    "reason": "Register new sound parameter and WAV data judges with correct inputs"
   },
   "files": {
     "Makefile": "be5177c5c3ef2c48df0d9122076fb456dfa21db4803b4350a0144054d0ed79df",
@@ -428,7 +428,7 @@
     "tools/lib/import_audio.py": "91f0db9f658c306a4a5637b4180c4e0d6033da72d927f1ba59c18965e5a49e30",
     "tools/lib/pe_image.py": "94694dc5fb38e459d26b35c25a7cdb7e3fad7128e1178363340606bb9db299f2",
     "tools/oracles/freeze_frame_control.py": "d2363d9722a647c00e02805b6b93efdb1b222c165e237d0992034f4969418e88",
-    "tools/oracles/manifest.tsv": "b2fd48dfd3950bb9ce1f1048b28300f117890cc15315812573aea7323e26e111",
+    "tools/oracles/manifest.tsv": "38b69e8ee765ead5459c413729764a2e31c9940e885e5ea0cfafc30eecedba2b",
     "tools/oracles/verdict.py": "333ac997dd1211ab70ed04d8fe7a7a424f418d00f13cd913a355f39773e1a63a",
     "tools/oracles/verify_original_air_acceleration.py": "a1f2fdeb24e84173f73538f9d1c02c4758d801b17568c58a679554f77c0b00c8",
     "tools/oracles/verify_original_alternate_acceleration.py": "0d6be36372b0e584a17d8d1b3fe1e4a1a25b35a5aca64aea7abfcf40a53f22a0",
@@ -549,6 +549,8 @@
     "tools/oracles/verify_original_sonic_player.py": "d5b661520a090a7a4f4e4e6db71221c0e6bee1a24c9c8a01363f67af22f44c0a",
     "tools/oracles/verify_original_sound_initial_state.py": "f4a4874929fcd05c30673a72203924ad2fd4b529c4668ace783b86820ed0a6cd",
     "tools/oracles/verify_original_sound_manager.py": "a13e403920f75e1e52da4cf84071e1accd33a50530f4f1c339f54a0cf1701087",
+    "tools/oracles/verify_original_sound_parameters.py": "7c3b9121a1f2b032264cfaf3d87f62346289e64b9f8fb0d93e70018ddd2c3e01",
+    "tools/oracles/verify_original_sound_wave_metadata.py": "85a1278bf6f4abab3e25740a0e4f162ea203a23399f82885a64b0b1e567e7e8d",
     "tools/oracles/verify_original_speedrun_limiter.py": "b4c79dff8d96f3bc15c075d86940f8221a2e89699dbb323c41be31e32858d0b3",
     "tools/oracles/verify_original_speedrun_on_frame.py": "1e8405303efa4890e36c512a1a73e87499efd6a7fbb2552d3ae6bae52b6c892e",
     "tools/oracles/verify_original_sprite_immediate.py": "480c18bcbaf11de34600fade6c4a7f8682757a5f302140f1021d1e9347d1d054",
