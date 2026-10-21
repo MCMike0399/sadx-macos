@@ -1,6 +1,8 @@
 #include "platform/mac/metal_device_frame.hpp"
 #include "runtime/native_display.hpp"
 #include "runtime/native_session.hpp"
+#include "apps/native_assets.hpp"
+#include "apps/native_regular_texture_assets.hpp"
 #import <Foundation/Foundation.h>
 #include <cstring>
 #include <fstream>
@@ -16,14 +18,22 @@ void require(bool value, const std::string &message) {
 void run(int argc, char **argv) {
     require(argc == 4,
             "usage: mac-native-logo-scene-test SYSTEM_DIRECTORY CHARACTER_PACK OUTPUT.ppm");
-    native::Display display(argv[1]);
+    frame::ModeState frame_mode;
+    native::Display display(argv[1], frame_mode);
+    auto assets = native::app::load_assets(std::filesystem::path(argv[2]).parent_path().parent_path());
+    display.apply_fog_emulation_setting(assets.fog_emulation_setting);
     auto pack = std::make_shared<character_pack::CharacterPack>(character_pack::CharacterPack::load(argv[2]));
     unsigned vibration_stops = 0;
-    native::Session session(display.output(), pack, display.frame_state(), display.arithmetic(),
+    native::Session session(display.output(), pack, display.frame_state(), display.arithmetic(), frame_mode,
+                            assets.character_textures, assets.frame_rate_setting,
                             [&](std::uint32_t port) {
                                 require(port == 0, "startup vibration port");
                                 ++vibration_stops;
                             });
+    session.attach_cleanup(display, assets.audio);
+    session.attach_languages(assets.text_language, assets.voice_language);
+    session.attach_regular_textures(native::app::load_regular_texture_assets(
+        std::filesystem::path(argv[2]).parent_path().parent_path()));
     auto &output = display.output();
     require(session.flow_state().mode == flow::GameMode::Start, "native session begins at Start");
     // Seed distinct owners to expose aliasing hidden by fresh-session zero defaults.

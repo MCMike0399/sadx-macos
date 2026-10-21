@@ -1,0 +1,381 @@
+{
+  "scope": "Connected assets-only native Start through title main and imported title music",
+  "native_exit_status": 0,
+  "normal_inputs": [
+    {
+      "frame": 500,
+      "key": "Enter",
+      "action": "down"
+    },
+    {
+      "frame": 501,
+      "key": "Enter",
+      "action": "up"
+    }
+  ],
+  "native_state": {
+    "execution": "native",
+    "frames": 740,
+    "game_mode": 12,
+    "game_state": 21,
+    "stage": 0,
+    "act": 0,
+    "rings": 0,
+    "global_timer": 240,
+    "logo_frames": 0,
+    "logo_mode": 0,
+    "textures": 0,
+    "completed_frames": 737,
+    "pending_logic_ticks": 0,
+    "elapsed_logic_ticks": 0,
+    "frame_resync": 0,
+    "input_held": 0,
+    "movie_decoded_frames": 52,
+    "movie_textures": 0,
+    "movie_media_open": false,
+    "movie_phase": 5,
+    "movie_source_padding_defined": false,
+    "movie_audio_frames": 78848,
+    "movie_audio_nonzero_samples": 94266,
+    "movie_audio_completed_buffers": 74,
+    "movie_audio_device_error": 0,
+    "sound_banks_loaded": 7,
+    "sound_bank_samples": 157,
+    "sound_bank_open_attempts": 19,
+    "music_open_events": 1,
+    "music_start_events": 1,
+    "music_audio_frames": 47104,
+    "music_audio_nonzero_samples": 57728,
+    "music_audio_completed_buffers": 43,
+    "music_audio_device_error": 0
+  },
+  "reference_state": {
+    "frame": 742,
+    "presents": 742,
+    "game_mode": 12,
+    "game_state": 21,
+    "stage": 0,
+    "act": 0,
+    "rings": 0,
+    "level_frames": 0,
+    "global_timer": 240,
+    "control_enabled": 1,
+    "controller_enabled": 1,
+    "player": null,
+    "boss": null,
+    "camera": null,
+    "profile": {
+      "ccef_reset_1": "810d",
+      "ccef_reset_2": "810d",
+      "ehcf_dereference": "909090",
+      "ehcf_branch": "9090",
+      "skipma_ingame_to_speedrun": true,
+      "skipma_movie_to_speedrun": true,
+      "limiter_to_speedrun": true,
+      "extra_ticks_to_speedrun": true,
+      "frame_rate_scalar": 63
+    }
+  },
+  "image": {
+    "native_frame": 740,
+    "reference_frame": 742,
+    "title_global_timer": 240,
+    "byte_equal": true,
+    "sha256": "ca247abf942b936bd7635b0099916db3ea618b1b4c34d34210657638f6bbaad5",
+    "visually_inspected": true
+  },
+  "startup_regression": {
+    "exit_status": 0,
+    "checkpoints": [
+      {
+        "frame": 1,
+        "pixel_bytes_equal": true,
+        "native_sha256": "a6087ec5178c7619d8136de2aa159dde7161d56f9e4c3b899b7165935d0353d8",
+        "state_equal": {
+          "game_mode": true,
+          "game_state": true,
+          "stage": true,
+          "act": true,
+          "rings": true,
+          "global_timer": true
+        }
+      },
+      {
+        "frame": 2,
+        "pixel_bytes_equal": true,
+        "native_sha256": "f32fe6df44949a014a4cebc35acba82cb8332561cae302a49ffa12dfb069c24a",
+        "state_equal": {
+          "game_mode": true,
+          "game_state": true,
+          "stage": true,
+          "act": true,
+          "rings": true,
+          "global_timer": true
+        }
+      },
+      {
+        "frame": 16,
+        "pixel_bytes_equal": true,
+        "native_sha256": "c5889201259cb001fde39f28e6a7de2bc0af5df243ee11c8bfaebf811a1a4935",
+        "state_equal": {
+          "game_mode": true,
+          "game_state": true,
+          "stage": true,
+          "act": true,
+          "rings": true,
+          "global_timer": true
+        }
+      },
+      {
+        "frame": 31,
+        "pixel_bytes_equal": true,
+        "native_sha256": "4b48f0e0865b728f337e68ab4eb9fd5ee94aa8a296673ac3de7c25c226754c3a",
+        "state_equal": {
+          "game_mode": true,
+          "game_state": true,
+          "stage": true,
+          "act": true,
+          "rings": true,
+          "global_timer": true
+        }
+      },
+      {
+        "frame": 32,
+        "pixel_bytes_equal": true,
+        "native_sha256": "e26c4f6fd6bfba2618bc1af4237437f05c41a6edff2737103bdce8fa2c285b17",
+        "state_equal": {
+          "game_mode": true,
+          "game_state": true,
+          "stage": true,
+          "act": true,
+          "rings": true,
+          "global_timer": true
+        }
+      },
+      {
+        "frame": 120,
+        "pixel_bytes_equal": true,
+        "native_sha256": "5784b5b1c09cf33fe763186caaed6534d5d9a287ccdbd2a72cbd8f88c099773e",
+        "state_equal": {
+          "game_mode": true,
+          "game_state": true,
+          "stage": true,
+          "act": true,
+          "rings": true,
+          "global_timer": true
+        }
+      },
+      {
+        "frame": 153,
+        "pixel_bytes_equal": true,
+        "native_sha256": "5784b5b1c09cf33fe763186caaed6534d5d9a287ccdbd2a72cbd8f88c099773e",
+        "state_equal": {
+          "game_mode": true,
+          "game_state": true,
+          "stage": true,
+          "act": true,
+          "rings": true,
+          "global_timer": true
+        }
+      },
+      {
+        "frame": 180,
+        "pixel_bytes_equal": true,
+        "native_sha256": "3d5f7978a3988cfdeac69d3a72b4b33f717b7853129a2635ee47b7a7d6536e29",
+        "state_equal": {
+          "game_mode": true,
+          "game_state": true,
+          "stage": true,
+          "act": true,
+          "rings": true,
+          "global_timer": true
+        }
+      },
+      {
+        "frame": 194,
+        "pixel_bytes_equal": true,
+        "native_sha256": "a6087ec5178c7619d8136de2aa159dde7161d56f9e4c3b899b7165935d0353d8",
+        "state_equal": {
+          "game_mode": true,
+          "game_state": true,
+          "stage": true,
+          "act": true,
+          "rings": true,
+          "global_timer": true
+        }
+      },
+      {
+        "frame": 195,
+        "pixel_bytes_equal": true,
+        "native_sha256": "a6087ec5178c7619d8136de2aa159dde7161d56f9e4c3b899b7165935d0353d8",
+        "state_equal": {
+          "game_mode": true,
+          "game_state": true,
+          "stage": true,
+          "act": true,
+          "rings": true,
+          "global_timer": true
+        }
+      },
+      {
+        "frame": 220,
+        "pixel_bytes_equal": true,
+        "native_sha256": "d2bdce2a6dbbbda7fc4f4669c8580842c3bd5bf20ce7e3b4d1e2723f15046f39",
+        "state_equal": {
+          "game_mode": true,
+          "game_state": true,
+          "stage": true,
+          "act": true,
+          "rings": true,
+          "global_timer": true
+        }
+      },
+      {
+        "frame": 300,
+        "pixel_bytes_equal": true,
+        "native_sha256": "229b2020988550087057dbec8368216a6013f1f98c60cad240ed023c1bbcc876",
+        "state_equal": {
+          "game_mode": true,
+          "game_state": true,
+          "stage": true,
+          "act": true,
+          "rings": true,
+          "global_timer": true
+        }
+      },
+      {
+        "frame": 346,
+        "pixel_bytes_equal": true,
+        "native_sha256": "229b2020988550087057dbec8368216a6013f1f98c60cad240ed023c1bbcc876",
+        "state_equal": {
+          "game_mode": true,
+          "game_state": true,
+          "stage": true,
+          "act": true,
+          "rings": true,
+          "global_timer": true
+        }
+      },
+      {
+        "frame": 370,
+        "pixel_bytes_equal": true,
+        "native_sha256": "43cb9c6ae879ad6198e2399c5c6e303d96026265d1b402d3cbf5b25d2a5663bb",
+        "state_equal": {
+          "game_mode": true,
+          "game_state": true,
+          "stage": true,
+          "act": true,
+          "rings": true,
+          "global_timer": true
+        }
+      },
+      {
+        "frame": 387,
+        "pixel_bytes_equal": true,
+        "native_sha256": "a6087ec5178c7619d8136de2aa159dde7161d56f9e4c3b899b7165935d0353d8",
+        "state_equal": {
+          "game_mode": true,
+          "game_state": true,
+          "stage": true,
+          "act": true,
+          "rings": true,
+          "global_timer": true
+        }
+      },
+      {
+        "frame": 388,
+        "pixel_bytes_equal": true,
+        "native_sha256": "a6087ec5178c7619d8136de2aa159dde7161d56f9e4c3b899b7165935d0353d8",
+        "state_equal": {
+          "game_mode": true,
+          "game_state": true,
+          "stage": true,
+          "act": true,
+          "rings": true,
+          "global_timer": true
+        }
+      }
+    ]
+  },
+  "limits": [
+    "Two-present movie-skip offset; title image comparison is at matching game timer, not matching total presents.",
+    "Actual imported title2 music samples delivered; reference DirectShow has no actual audio renderer, so audio waveform equality is not claimed.",
+    "No native gameplay or target FPS claim.",
+    "File-select initialization is the next real normal-input boundary; advanced SFX rate/loop/3D/voice branches remain explicit unsupported resource boundaries.",
+    "Full native integration gate not yet run; independent title input/background reviews clear with documented FP partials."
+  ],
+  "music_playback_regression": {
+    "music_frames": 579584,
+    "nonzero_samples": 1087872,
+    "completed_buffers": 566,
+    "device_error": 0,
+    "mute_without_restart": true,
+    "eof_and_restart": true,
+    "exit_status": 0
+  },
+  "start_input_before_lifetime_fix": {
+    "key_frame": 750,
+    "exit_status": -11,
+    "last_checkpoint": 749,
+    "boundary": "TaskScheduler::destroy_task callback resets aliased caller TaskHandle; LLDB EXC_BAD_ACCESS address0x128",
+    "fix_status": "in progress"
+  },
+  "start_input_after_lifetime_fix": {
+    "exit_status": 1,
+    "state": {
+      "execution": "native",
+      "frames": 759,
+      "game_mode": 12,
+      "game_state": 21,
+      "stage": 0,
+      "act": 0,
+      "rings": 0,
+      "global_timer": 259,
+      "logo_frames": 0,
+      "logo_mode": 0,
+      "textures": 0,
+      "completed_frames": 757,
+      "pending_logic_ticks": 0,
+      "elapsed_logic_ticks": 0,
+      "frame_resync": 0,
+      "input_held": 0,
+      "movie_decoded_frames": 52,
+      "movie_textures": 0,
+      "movie_media_open": false,
+      "movie_phase": 5,
+      "movie_source_padding_defined": false,
+      "movie_audio_frames": 78848,
+      "movie_audio_nonzero_samples": 94266,
+      "movie_audio_completed_buffers": 74,
+      "movie_audio_device_error": 0,
+      "sound_banks_loaded": 7,
+      "sound_bank_samples": 157,
+      "sound_bank_open_attempts": 19,
+      "music_open_events": 1,
+      "music_start_events": 1,
+      "music_audio_frames": 45056,
+      "music_audio_nonzero_samples": 53632,
+      "music_audio_completed_buffers": 41,
+      "music_audio_device_error": 0,
+      "sound_load_events": 1,
+      "sound_play_events": 1,
+      "sound_audio_frames": 173824,
+      "sound_audio_nonzero_samples": 4608,
+      "sound_audio_completed_buffers": 676,
+      "sound_audio_device_error": 0
+    },
+    "boundary": "native session stopped: native_file_select_initialization",
+    "task_regression": "Original source exit139; pinned TaskHandle owner regression exit0; unchanged lifecycle/display/delete values exact",
+    "note": "Actual confirmation enqueued and played through original per-frame sound server order; next boundary file-select initialization"
+  },
+  "sound_delivery_regression": {
+    "source_cue_bytes": 38190,
+    "load_without_play": true,
+    "play_events": 1,
+    "nonzero_samples": 1024,
+    "completed_buffers": 18,
+    "device_error": 0,
+    "source_expiry_released": true
+  },
+  "platform_pan_reference": "https://learn.microsoft.com/en-us/previous-versions/windows/desktop/mt708938(v=vs.85)"
+}

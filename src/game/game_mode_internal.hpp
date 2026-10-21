@@ -119,7 +119,7 @@ void initialize_demo_state(FlowContext &flow);
 std::uint32_t startup_status(FlowContext &flow);
 // NOTSA: composition seam for bootstrap::loading_ready.
 std::int32_t startup_readiness(FlowContext &flow);
-// STUB: SONIC 0x4221e0 FUN_004221e0
+// FUNCTION: SONIC 0x4221e0 FUN_004221e0
 void request_file_module(FlowContext &flow, FlowModule module);
 // STUB: SONIC 0x4f88a0 OnEdit
 void on_edit(FlowContext &flow);
@@ -131,7 +131,7 @@ std::uint32_t run_logos(FlowContext &flow);
 void set_frame_rate_mode(FlowContext &flow, std::int32_t mode, std::int32_t multiplier);
 // STUB: SONIC 0x42e890 FUN_0042e890
 std::uint32_t run_title(FlowContext &flow);
-// STUB: SONIC 0x4212e0 LoadRegObjTextures
+// NOTSA: composition seam; regular_textures owns this recovered source entry.
 void load_regular_object_textures(FlowContext &flow, std::int32_t kind);
 // NOTSA: composition seam for bootstrap::initialize_game.
 std::uint32_t initialize_level_game(FlowContext &flow);
@@ -143,9 +143,9 @@ void get_switch_data(FlowContext &flow);
 void enable_pad_reading(FlowContext &flow);
 // STUB: SONIC 0x42f240 FUN_0042f240
 std::int16_t run_player_selection(FlowContext &flow);
-// STUB: SONIC 0x40bf30 Clear
+// NOTSA: composition seam; the game system owns this recovered source entry.
 void clear_game(FlowContext &flow);
-// STUB: SONIC 0x40bf40 Reset
+// NOTSA: composition seam; the game system owns this recovered source entry.
 void reset_game(FlowContext &flow);
 // STUB: SONIC 0x416610 GameStateHandler_Trial
 std::int16_t run_action(FlowContext &flow);
@@ -161,35 +161,35 @@ std::int32_t run_movie(FlowContext &flow, std::uint32_t movie);
 void enable_player_pad_reading(FlowContext &flow, std::uint32_t player);
 // STUB: SONIC 0x415af0 GameStateHandler_Mission
 std::int16_t run_mission(FlowContext &flow);
-// STUB: SONIC 0x4228f0 RunLevelDestructor
+// NOTSA: composition seam; the game system owns this recovered source entry.
 void run_level_destructor(FlowContext &flow, std::uint32_t kind);
 // STUB: SONIC 0x780fb0 syFree
 void free_message_resource(FlowContext &flow, MenuResource resource);
-// STUB: SONIC 0x420f40 FreeRegObjTexlists
+// NOTSA: composition seam; the game system owns this recovered source entry.
 void free_regular_object_texlists(FlowContext &flow);
-// STUB: SONIC 0x420ef0 FreeCharacterTexlists
+// NOTSA: composition seam; the game system owns this recovered source entry.
 void free_character_texlists(FlowContext &flow);
-// STUB: SONIC 0x406f00 njReleaseTextureAll_
+// NOTSA: composition seam; native texture lifetime owns this recovered entry.
 void release_all_textures(FlowContext &flow);
-// STUB: SONIC 0x5034a0 FUN_005034a0
+// NOTSA: composition seam; the game system owns this recovered source entry.
 void prepare_title_assets(FlowContext &flow);
-// STUB: SONIC 0x5033f0 FUN_005033f0
+// NOTSA: composition seam; the game system owns this recovered source entry.
 void prepare_title_dialogs(FlowContext &flow);
-// STUB: SONIC 0x5032e0 FUN_005032e0
+// NOTSA: composition seam; the game system owns this recovered source entry.
 void initialize_title_menu(FlowContext &flow);
 // NOTSA: composition seam for recovered njSetWaitVsyncCount; frame control owns its FUNCTION.
 void set_wait_vsync_count(FlowContext &flow, std::int32_t count);
-// STUB: SONIC 0x424c80 LoadLevelSounds
+// NOTSA: composition seam; level_sounds owns this recovered entry.
 void load_level_sounds(FlowContext &flow);
-// STUB: SONIC 0x5033b0 FUN_005033b0
+// NOTSA: composition seam; title_menu owns this recovered entry.
 std::int32_t run_title_menu(FlowContext &flow);
-// STUB: SONIC 0x503380 FUN_00503380
+// NOTSA: composition seam; title_menu owns this recovered entry.
 void close_title_menu(FlowContext &flow, std::int32_t value);
 // STUB: SONIC 0x42e780 FUN_0042e780
 void prepare_title(FlowContext &flow);
 // STUB: SONIC 0x42c630 ScreenFade_Start_CopyAlpha
 void start_screen_fade(FlowContext &flow);
-// STUB: SONIC 0x4144e0 GetPlayerNumber
+// NOTSA: composition seam; the game system owns this recovered source entry.
 std::uint32_t current_player_number(FlowContext &flow);
 // NOTSA: composition seam for bootstrap::setup_character.
 void setup_character(FlowContext &flow, std::uint32_t character);
@@ -197,7 +197,7 @@ void setup_character(FlowContext &flow, std::uint32_t character);
 void reset_player_work(FlowContext &flow);
 // STUB: SONIC 0x427ec0 FUN_00427ec0
 void reset_player_parameters(FlowContext &flow);
-// STUB: SONIC 0x42d770 LoadSave
+// NOTSA: composition seam; the game system owns this recovered source entry.
 void load_save(FlowContext &flow);
 // STUB: SONIC 0x412ac0 FUN_00412ac0
 void prepare_sequence(FlowContext &flow);
@@ -205,7 +205,7 @@ void prepare_sequence(FlowContext &flow);
 void set_sequence_player(FlowContext &flow, std::uint32_t character);
 // STUB: SONIC 0x4133e0 FUN_004133e0
 void apply_sequence_level(FlowContext &flow, std::int16_t level);
-// STUB: SONIC 0x414570 SetStageNumber
+// NOTSA: composition seam; the game system owns this recovered source entry.
 void set_stage_number(FlowContext &flow, std::int32_t level, std::int32_t act);
 // STUB: SONIC 0x4147f0 SetEntranceNumber
 void set_entrance_number(FlowContext &flow, std::int32_t entrance);
@@ -233,7 +233,7 @@ std::int32_t run_staff_roll(FlowContext &flow, std::int32_t value);
 void load_sega_logo(FlowContext &flow);
 // STUB: SONIC 0x402f10 ___njSetBackColor
 void set_background_color(FlowContext &flow, Rgba top, Rgba middle, Rgba bottom);
-// STUB: SONIC 0x42ca10 FUN_0042ca10
+// NOTSA: composition seam; the game system owns this recovered source entry.
 void prepare_title_initialization(FlowContext &flow);
 // STUB: SONIC 0x785330 pdVibMxStop
 void stop_vibration(FlowContext &flow, std::uint32_t port);
@@ -243,7 +243,7 @@ void pause_all_sound(FlowContext &flow);
 std::uint32_t mission_clear_status(FlowContext &flow);
 // STUB: SONIC 0x590660 Release_MIS_C_TEXLIST
 void release_mission_clear_texlist(FlowContext &flow);
-// STUB: SONIC 0x40d490 MSG_Disp
+// NOTSA: composition seam; the game system owns this recovered source entry.
 void display_message(FlowContext &flow);
 // STUB: SONIC 0x42c4f0 ScreenFade_DrawColor
 void draw_screen_fade(FlowContext &flow);

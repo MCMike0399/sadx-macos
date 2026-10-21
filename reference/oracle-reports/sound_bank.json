@@ -1,0 +1,18 @@
+{
+ "loader_sha256": "3293cf354dcfc62274c2ad25c09041606d6ad55483f070c233111cd9b47a97ba",
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "probe_sha256": "ccdedf0b919ba8e4caba9139622577ed6db17168fadef1e039c9aa7fd30f62a2",
+ "seed": 20261029,
+ "selection_cases": 705,
+ "release_cases": 700,
+ "mismatch_count": 0,
+ "mismatches": [],
+ "stores_calls_boundaries_match": true,
+ "scope": "Effective pinned LoadSoundList_r and original ReleaseBankSounds instructions with explicit native-owner fixtures.\n\n40ff10 readiness executes unchanged. The active loader jump is applied. Formatting/ASCII comparison, replacement priorities and archive/PCM\nresource boundaries are declared fixtures. Importer independently verifies source\ncatalog bytes; this judges selection/release ordering and partial failure stores.\n",
+ "tracked_summary": {
+  "full_sha256": "fa7a55dcf87e148e1cf0c26ff1e29cb36e8daa5a174b668f8f9ec70369b82665",
+  "full_bytes": 856,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

@@ -1,4 +1,5 @@
 #include "runtime/logo_renderer.hpp"
+#include "engine/ninja_queue_native.hpp"
 #include "engine/ninja_texture.hpp"
 #include "runtime/engine_code_tables.hpp"
 #include <algorithm>
@@ -7,6 +8,15 @@
 
 namespace sadx::native {
 namespace {
+// NOTSA: imported Windows asset filenames use a canonical ASCII uppercase spelling.
+std::string asset_name(std::string_view name) {
+    std::string result(name);
+    for (auto &character : result) {
+        if (character >= 'a' && character <= 'z')
+            character = static_cast<char>(character - 'a' + 'A');
+    }
+    return result;
+}
 // [platform:texture] Preserve packed-format normalization until GPU sampling. Expanding
 // through integer RGBA8 first loses precision and differs from the reference device.
 graphics::Texture texture_level(const NinjaTextureLevel &level, std::uint8_t format) {
@@ -37,59 +47,129 @@ graphics::Texture texture_level(const NinjaTextureLevel &level, std::uint8_t for
 LogoRenderer::LogoRenderer(std::filesystem::path directory, graphics::Draw &state,
                            graphics::Frame &frame,
                            NinjaDepthProjection &projection, X87Context &fp, SseContext &sse,
-                           SseReciprocalEstimate reciprocal)
+                           SseReciprocalEstimate reciprocal, texture_lifetime::State textures)
     : system_directory_(std::move(directory)), state_(state), projection_(projection),
-      arithmetic_(fp), sse_(sse), reciprocal_(std::move(reciprocal)), frame_(frame) {}
+      arithmetic_(fp), sse_(sse), reciprocal_(std::move(reciprocal)), frame_(frame),
+      texture_state_(textures) {
+    // SEGALOGO_E_TEXLIST has eighteen named entries; only attributes/handles start zero.
+    constexpr std::array<const char *, 18> names{
+        "segalogo0", "segalogo1", "segalogo2", "segalogo3", "segalogo4", "segalogo5",
+        "mwlogo0", "mwlogo1", "mwlogo2", "mwlogo3", "mwlogo4", "mwlogo5",
+        "stlogo0", "stlogo1", "stlogo2", "stlogo3", "stlogo4", "stlogo5"};
+    texture_list_.entries.resize(names.size());
+    texture_list_.attributes.resize(names.size());
+    for (const auto *name : names)
+        texture_list_.filenames.push_back(std::make_shared<const std::string>(name));
+}
 
 void LogoRenderer::begin_frame() {
     frame_.commands.clear();
     // [platform:graphics] The source begins a scene by clearing its color and depth buffers.
     frame_.commands.emplace_back(graphics::Clear{3, background_, 1065353216U, 0});
 }
-void LogoRenderer::load_logo_archive(std::string_view name) {
-    const auto path = system_directory_ / (std::string(name) + ".PVM");
+std::vector<texture_lifetime::Memory *> LogoRenderer::load_pvm_archive(std::string_view name) {
+    const auto path = system_directory_ / (asset_name(name) + ".PVM");
     std::ifstream file(path, std::ios::binary);
     if (!file)
-        throw std::runtime_error("missing native logo asset: " + path.string());
+        throw std::runtime_error("missing native texture archive: " + path.string());
     auto parsed = parse_ninja_texture_resource({std::istreambuf_iterator<char>(file), {}});
     if (!parsed)
-        throw std::runtime_error("invalid native logo PVM: " + path.string());
-    std::vector<TextureSlot> loaded;
-    for (std::size_t index = 0; index < parsed.archive.records.size(); ++index) {
-        const auto &record = parsed.archive.records[index];
+        throw std::runtime_error("invalid native PVM: " + path.string());
+    auto archive = std::make_shared<NinjaTextureArchive>(std::move(parsed.archive));
+    std::vector<texture_lifetime::Memory *> loaded;
+    for (std::size_t index = 0; index < archive->records.size(); ++index) {
+        const auto &record = archive->records[index];
         if (!record.table_global_index)
-            throw std::runtime_error("logo PVM has no table global texture index");
-        if (std::any_of(loaded.begin(), loaded.end(), [&](const auto &slot) {
-                return slot.global_index == *record.table_global_index;
-            }))
-            throw std::runtime_error("duplicate logo global texture index");
-        const auto decoded = decode_ninja_texture(parsed.archive, index);
+            throw std::runtime_error("PVM has no table global texture index");
+        loaded.push_back(load_record(archive, index, *record.table_global_index));
+    }
+    return loaded;
+}
+texture_lifetime::Memory *LogoRenderer::load_record(
+    const std::shared_ptr<NinjaTextureArchive> &archive, std::size_t index,
+    std::uint32_t global_index) {
+    const auto &record = archive->records.at(index);
+    const std::shared_ptr<const std::vector<std::uint8_t>> source_bytes(archive, &archive->bytes);
+    auto *slot = texture_lifetime::find_memory(global_index, texture_state_);
+    if (!slot)
+        throw std::runtime_error("native texture pool is full");
+    std::shared_ptr<graphics::Texture> texture;
+    if (slot->references == 0) {
+        const auto decoded = decode_ninja_texture(*archive, index);
         if (!decoded || decoded.levels.empty())
-            throw std::runtime_error("unsupported native logo texture encoding");
-        auto texture = std::make_shared<graphics::Texture>();
+            throw std::runtime_error("unsupported native texture encoding");
+        texture = std::make_shared<graphics::Texture>();
         for (std::size_t mip = 0; mip < decoded.levels.size(); ++mip) {
-            const auto &level = decoded.levels[mip];
-            auto converted = texture_level(level, record.pixel_format);
+            auto converted = texture_level(decoded.levels[mip], record.pixel_format);
             if (mip == 0)
                 *texture = std::move(converted);
             else
                 texture->mipmaps.push_back(std::move(converted));
         }
-        loaded.push_back({*record.table_global_index, std::move(texture)});
     }
-    if (loaded.size() != 18)
-        throw std::runtime_error("logo archive does not match its eighteen-entry texture list");
-    textures_ = std::move(loaded);
-    selected_ = false;
+    auto prepared = texture_lifetime::prepare_pvr(
+        global_index, record, archive->bytes.data() + record.chunk.offset);
+    auto *memory = texture_lifetime::acquire_prepared(
+        std::move(prepared), std::move(texture), texture_state_, source_bytes);
+    if (!memory)
+        throw std::runtime_error("native texture pool is full");
+    return memory;
+}
+std::int32_t LogoRenderer::load_individual_textures(texture_lifetime::List &list) {
+    if (list.filenames.size() != list.entries.size() || list.attributes.size() != list.entries.size())
+        throw std::runtime_error("individual textures require imported filename and attribute members");
+    for (std::size_t index = 0; index < list.entries.size(); ++index) {
+        // stSetPaletteBank(NULL) finds no entry: native raw 16-bit loads never register
+        // indexed palettes, and source device initialization marks empty identities -1.
+        if (!list.filenames[index] || list.attributes[index] != 0)
+            throw std::runtime_error("native individual texture type is not recovered");
+        const auto path = system_directory_ / (asset_name(*list.filenames[index]) + ".PVR");
+        std::ifstream file(path, std::ios::binary);
+        if (!file)
+            throw std::runtime_error("missing imported individual texture: " + path.string());
+        auto parsed = parse_ninja_texture_resource({std::istreambuf_iterator<char>(file), {}});
+        if (!parsed || parsed.archive.records.size() != 1)
+            throw std::runtime_error("invalid imported individual PVR: " + path.string());
+        auto archive = std::make_shared<NinjaTextureArchive>(std::move(parsed.archive));
+        const auto global_index = archive->records[0].gbix_global_index.value_or(4294967279U);
+        list.entries[index] = load_record(archive, 0, global_index);
+    }
+    return 1;
+}
+void LogoRenderer::load_logo_archive(std::string_view name) {
+    if (!archive_loader_)
+        throw std::runtime_error("native logo requires the effective profile archive loader");
+    archive_loader_(name, texture_list_);
+    textures_.clear();
+    for (auto *memory : texture_list_.entries) {
+        if (!memory)
+            throw std::runtime_error("native logo texture did not load");
+        textures_.push_back({static_cast<std::uint32_t>(memory->global_index), memory});
+    }
 }
 void LogoRenderer::select_logo_archive() {
     if (textures_.empty())
         throw std::runtime_error("logo texture selection before resource load");
-    selected_ = true;
+    select_texture_list(texture_list_);
+}
+void LogoRenderer::select_texture_list(const texture_lifetime::List &list) {
+    texture_state_.current_list = &list;
 }
 void LogoRenderer::release_logo_archive() {
-    textures_.clear();
-    selected_ = false;
+    texture_lifetime::Services services{[this] {
+        state_.texture.reset();
+    }};
+    texture_lifetime::release_texture_list(&texture_list_, texture_state_, services);
+}
+std::size_t LogoRenderer::loaded_textures() const {
+    return std::count_if(textures_.begin(), textures_.end(), [](const auto &slot) {
+        return slot.memory && slot.memory->references != 0 &&
+               static_cast<std::uint32_t>(slot.memory->global_index) == slot.global_index;
+    });
+}
+std::size_t LogoRenderer::texture_slots_in_use() const {
+    return std::count_if(texture_state_.pool.begin(), texture_state_.pool.end(),
+                         [](const auto &slot) { return slot.references != 0; });
 }
 void LogoRenderer::set_background(std::uint32_t top, std::uint32_t middle, std::uint32_t bottom) {
     if (top != middle || top != bottom)
@@ -98,17 +178,23 @@ void LogoRenderer::set_background(std::uint32_t top, std::uint32_t middle, std::
 }
 void LogoRenderer::set_blending(std::uint32_t side, std::uint32_t mode) {
     const auto tables = runtime::engine_code_tables();
-    if (side >= tables.blend_targets.size() || mode >= tables.blend_modes.size())
-        throw std::runtime_error("invalid Ninja blending mode");
-    state_.render_states[static_cast<std::uint32_t>(tables.blend_targets[side])] =
-        static_cast<std::uint32_t>(tables.blend_modes[mode]);
+    queue::BlendTables blend{};
+    for (std::size_t index = 0; index < blend.targets.size(); ++index)
+        blend.targets[index] = static_cast<std::uint32_t>(tables.blend_targets[index]);
+    for (std::size_t index = 0; index < blend.modes.size(); ++index)
+        blend.modes[index] = static_cast<std::uint32_t>(tables.blend_modes[index]);
+    for (std::size_t index = 0; index < blend.following_depth_modes.size(); ++index)
+        blend.following_depth_modes[index] =
+            static_cast<std::uint32_t>(tables.depth_comparisons[index]);
+    queue::set_device_blend(side, mode, blend, state_);
 }
 pvr::TextureInfo LogoRenderer::texture(std::uint32_t index) {
-    if (!selected_ || index >= textures_.size())
-        throw std::runtime_error("logo texture index is unavailable");
-    const auto &slot = textures_[index];
+    const auto *list = texture_state_.current_list;
+    if (!list || index >= list->entries.size() || !list->entries[index])
+        throw std::runtime_error("selected texture index is unavailable");
+    const auto &memory = *list->entries[index];
     // The active GVR patch ignores source surface-format flags for alpha selection.
-    return {slot.global_index, 0, slot.texture->width, slot.texture->height};
+    return {static_cast<std::uint32_t>(memory.global_index), 0, memory.width, memory.height};
 }
 pvr::ImmediateDevice LogoRenderer::immediate_device() {
     return {state_, frame_, [this](float reciprocal_depth) {
@@ -118,14 +204,20 @@ pvr::ImmediateDevice LogoRenderer::immediate_device() {
 }
 void LogoRenderer::draw_texture(const std::array<pvr::Vertex, 4> &vertices,
                                 std::uint32_t global_index, std::uint32_t alpha) {
-    const auto found = std::find_if(textures_.begin(), textures_.end(), [&](const auto &slot) {
-        return slot.global_index == global_index;
+    const auto found = std::find_if(texture_state_.pool.begin(), texture_state_.pool.end(),
+                                    [&](const auto &memory) {
+        return static_cast<std::uint32_t>(memory.global_index) == global_index;
     });
-    if (found == textures_.end())
-        throw std::runtime_error("native logo texture resource has been released");
+    if (found == texture_state_.pool.end())
+        throw std::runtime_error("native texture resource has been released");
+    auto *memory = &*found;
+    if (!memory || !memory->surface || !memory->surface->texture)
+        throw std::runtime_error("native logo texture has no resident surface");
+    texture_state_.cached_global_index = memory->global_index;
+    texture_state_.active_memory = memory;
     auto device = immediate_device();
     const auto fog = state_.render_states.find(28);
-    pvr::submit_texture(vertices, found->texture, alpha,
+    pvr::submit_texture(vertices, memory->surface->texture, alpha,
                         fog != state_.render_states.end() && fog->second != 0, device, arithmetic_);
 }
 void LogoRenderer::draw_polygon(const std::array<pvr::Point, 4> &points, std::uint32_t color,

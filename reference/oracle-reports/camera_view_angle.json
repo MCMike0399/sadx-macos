@@ -1,0 +1,27 @@
+{
+ "status": "pass",
+ "cases": 2379,
+ "mismatches": 0,
+ "examples": [],
+ "seed": 20261020,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "probe_sha256": "6a7d32c696b83533ff394c860fc3f1da618754483f9748c22048b7da4f8a26e7",
+ "scope": "SetViewAngle plus real AdjustAngle; perspective callback/store order",
+ "source_ranges": {
+  "0x437240-0x437293": "afc5f8e6cdc4291739e61058868e2e196da842e0f2c17063e8957a5528db332c",
+  "0x438350-0x438392": "f06c90f9b9d76ea93112938f0a02d1b641ab73b96a847038b1e5eceffe2dee15"
+ },
+ "source_files": {
+  "src/game/game_view_native.hpp": "a484e17c07d4d9f4d98493330029a77419c48222d6975d35b2d85b82681e4469",
+  "src/game/game_view_native.cpp": "a3cfebd2bebcd9358a050e604ee1b3dc459e97573ad6e5caaee24457a5a4f60b",
+  "src/player/player_heading.cpp": "c109cb4370cc006d0ddb7186cf9a8ab1396aa64fb61fed45b7a1b8b46dc6e491",
+  "tests/probes/native_camera_view_angle_probe.cpp": "929b87622ad41072d5b950a2ffe2d879469054658b6c3061123d3a1fbcae9bc9",
+  "tools/oracles/verify_original_camera_view_angle.py": "a48d35d9e2b9c70269e0de03ffdada57df250f3f722b5ae643cf908fce08601e"
+ },
+ "tracked_summary": {
+  "full_sha256": "baa7657fa96586a7eaf5e8ad87321ad2b5e3d46536222fc8df5602556446370c",
+  "full_bytes": 1152,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

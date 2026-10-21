@@ -1,0 +1,106 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "probe_sha256": "7650ac8e1161e7406a25dde1e13e265ab6b50ea7caeac4e6d43ea0ae22c569e6",
+ "seed": 20261108,
+ "cases": 1301,
+ "group_cases": {
+  "manager": 405,
+  "media": 432,
+  "tasks": 464
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "stores_calls_live_reads_match": true,
+ "limits": "Title music tasks, ADX manager and WMP game wrappers against original instructions.\n\nTask allocation/destruction, reader open/start/stop/reset/volume, clock and child\ntraversal are declared native-resource receipts. Original task publication, work\nstores, catalog reads, path construction, media flags, fallback/loop decisions and\nlive state reloads execute. Media group executes actual reader-state getter; it\nnever maps page0, and checks null-player/allocation faults at their real boundary.\nReads outside the imported voice-duration catalog stop at a tagged reference\nmissing-data boundary and are reported separately as bounded-prefix cases; their\nadjacent source memory is not fabricated as a voice duration. No WMA codec/sample\nequivalence or Windows thread latency claim.\n",
+ "reader_contract_proof": {
+  "readiness_values_preserved": [
+   0,
+   1,
+   17,
+   4294967295
+  ],
+  "initial_reader_state": 2,
+  "original_status_to_reader_state": {
+   "2": 0,
+   "3": 1,
+   "11": 1,
+   "12": 2
+  },
+  "scope": "Actual getter/init store/status callback instructions; DSBuffer.Stop/SetEvent are opaque notification receipts."
+ },
+ "fully_executed_cases": 1299,
+ "bounded_prefix_cases": 2,
+ "unsupported_data_boundaries": [
+  {
+   "group": "manager",
+   "case": 158,
+   "input": [
+    124,
+    3921515906,
+    4294967295,
+    1,
+    74243319,
+    4229885288,
+    49292,
+    2714398579,
+    1,
+    1
+   ],
+   "instruction": "0x42552b",
+   "voice": -1,
+   "fact": "voice duration outside imported2049-entry table"
+  },
+  {
+   "group": "manager",
+   "case": 386,
+   "input": [
+    4294967295,
+    362897657,
+    4294967295,
+    1,
+    3794262117,
+    3251973734,
+    19413,
+    4230842425,
+    1,
+    1
+   ],
+   "instruction": "0x42559e",
+   "voice": -1,
+   "fact": "voice duration outside imported2049-entry table"
+  }
+ ],
+ "native_sources": {
+  "src/game/music.hpp": "e17acc4d593dc83c84ad5e16a0741286cdd2f4ef7626fe2cdae64ffc82e1d781",
+  "src/game/music.cpp": "225ebc59537b71a071c54296f82a7ad6b1ed368eb325c14db5b933053cfaf12d",
+  "tests/probes/native_music_probe.cpp": "6c4c1e7ff56790c74d87ca6ad8ff54fcdaaafa36a4822fec3c0082af265dba5d"
+ },
+ "source_ranges": {
+  "0x505870-0x5058ad": "aea01fa9ffc86896254cfb6d42a6526779e30bb4bf90612c028745492b1208a0",
+  "0x505900-0x50598d": "a67f12167359bb9bef10ab5f919a90845c0bf8c0a7df7e1c6ccc79ccd6b51716",
+  "0x505990-0x5059a4": "9a0bf7327e4f4ba26d9b9b9e3475bc4c5bcad898f1f77aff439a90c3d3f12f17",
+  "0x5058c0-0x5058fc": "b94d8ee5fe041bf4372ba676b8d084c0cc996e3c63e6b5e8edcebbc01fdfe945",
+  "0x4258b0-0x4258e6": "422289b9e54954486ec753dc9d4388a24a9b748eb53185d2858aa6edbbf77a77",
+  "0x425830-0x425856": "04ce6cf1e29aad54390784e7c3f1739f7ab4c514328488c1c3708e6136b584de",
+  "0x425690-0x4256a8": "b52c25ed204a91050e86c2fc30373d7e4dee52526c6470aa5696f6fcbf2be9ef",
+  "0x4256d0-0x4256d6": "f3d4058202c77811b416fda5b6fb6398b1d19d8de91c6258a01a929b280aa0a2",
+  "0x4253d0-0x425620": "b7908587339a9af90948af31af3fb2325574910f60f4184908a34c2e4ed393e6",
+  "0x40cd20-0x40ce2e": "5146499305c813bbc147d7251402f1a1d7bdef400cb11d7577048dbeec18eecc",
+  "0x40cf50-0x40cfe0": "2c7886dd1b734c598746fd6281461812530d17d9a34a431f270a978e8c7f9c87",
+  "0x40cfe0-0x40cfe6": "41b3aacffc01db76bd1b6ddd0eb0d3db20205de3076ef4d9f2d05a4fca82fe2c",
+  "0x40cf20-0x40cf50": "0062b58bc3f0a5701962b52fd4f2bdb6c84005a6c6ca1cd7e4b748af13318b35",
+  "0x40ff10-0x40ff16": "1db1b7fb7b36776f04b416bcb16e649627982100bb88329d0d3cc39db937159c",
+  "0x4113e0-0x4113e4": "75315a13a7503cb9a126675518a19ff201faa8c510e8a849d0f971d9c61bbb2b",
+  "0x4116ee-0x4116f5": "0f0c2b80f7ba7c6fb6862193ff9ad5bc94948f9b52c879e8a08b9ff28aad5a87",
+  "0x411490-0x4116a0": "2e0d085d430a20c23aefbcbeabc8f1eb5c6bb7fe52f75e3b4fd9ae757aea9635"
+ },
+ "tracked_summary": {
+  "full_sha256": "bf5d44df8d810216f3839f60692644d7a20e27ba34014d94812ba6a93895bc79",
+  "full_bytes": 4829,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "unsupported_data_boundaries[0].input": 30,
+   "unsupported_data_boundaries[1].input": 30
+  }
+ }
+}

@@ -80,8 +80,12 @@ void MovieScene::start_renderer() {
         // [platform:movie] Source HeapAlloc leaves padding and alpha unspecified.
         // Native storage clears these bytes explicitly; only uploaded RGB is source-defined.
         // The source UV range can sample padding, so those pixels are not a parity claim.
-        texture_->bgra.resize(1024 * 1024 * 4, 0);
-        textures_ = {texture_};
+        backing_pixels_ = std::make_shared<std::vector<std::uint8_t>>(1024 * 1024 * 4, 0);
+        texture_->bgra = *backing_pixels_;
+        constexpr std::uint32_t kMovieGlobalTextureIndex = 3489661136U;
+        texture_memory_ =
+            display_.create_argb_texture(kMovieGlobalTextureIndex, backing_pixels_, texture_);
+        textures_.entries = {texture_memory_};
     }
     // RendererStart uses fixed256 UV units; Sprite2D subsequently scales by1/255.
     animation_ = {{640, 480, 0, 0, 0, 0, 160, 120, 0, 0}};
@@ -89,27 +93,36 @@ void MovieScene::start_renderer() {
 }
 void MovieScene::end_renderer() {
     host_.close_clip();
-    display_.release_all_textures();
-    textures_.clear();
+    if (backing_pixels_) {
+        backing_pixels_.reset();
+        display_.release_movie_texture_list(textures_);
+    }
+    textures_.entries.clear();
+    texture_memory_ = nullptr;
     texture_.reset();
     texture_ready_ = false;
 }
 bool MovieScene::update_texture() {
     const auto decoded = host_.decoded_frame();
     if (decoded) {
-        if (!texture_ || !decoded->bgra || decoded->width > 1024 || decoded->height > 1024 ||
+        if (!texture_ || !backing_pixels_ || !texture_memory_ || !decoded->bgra ||
+            decoded->width > 1024 || decoded->height > 1024 ||
             decoded->width == 0 || decoded->height == 0 ||
             decoded->bytes != std::size_t(decoded->width) * decoded->height * 4)
             throw std::runtime_error("native movie surface requires supported decoded dimensions");
-        auto updated = std::make_shared<graphics::Texture>(*texture_);
         for (std::uint32_t row = 0; row < decoded->height; ++row)
             for (std::uint32_t column = 0; column < decoded->width; ++column) {
                 const auto source = (std::size_t(row) * decoded->width + column) * 4;
                 const auto target = (std::size_t(row) * 1024 + column) * 4;
-                std::copy_n(decoded->bgra + source, 3, updated->bgra.data() + target);
+                std::copy_n(decoded->bgra + source, 3, backing_pixels_->data() + target);
             }
+        auto updated = std::make_shared<graphics::Texture>();
+        updated->width = texture_->width;
+        updated->height = texture_->height;
+        updated->format = texture_->format;
+        updated->bgra = *backing_pixels_;
         texture_ = std::move(updated);
-        textures_[0] = texture_;
+        texture_lifetime::update_surface(*texture_memory_, texture_);
         texture_ready_ = true;
     }
     // GetNJTexture retains its ready bit: redraw the latest decoded surface every game present.

@@ -1,0 +1,47 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "25e3c29ad54165682ed1dd86777d41a83757ef588cfe72773ac342500578bf8c",
+ "source_files": {
+  "src/engine/ninja_queue_lifecycle.hpp": "aae93525a8c00d39e16ff12b5a515ca1d1d31bf0e81b8000df0c9d6cc1c9364b",
+  "src/guest/ninja_queue_lifecycle.cpp": "3a3d47aacd4150227f5b8ac7fdfc4759393f1dfddd5a39f1740f0dc05b2a8496",
+  "src/engine/ninja_queue_consumer.cpp": "b5a6cb784a570507e9844cee6607d785a3522ce486b0a3a0ce23cb7d52d7d43a",
+  "src/engine/ninja_sprite_queue.cpp": "a33865beed1726432a385f43468ca2918ed1ae0d9cbbc39f228c43bbac614aa8",
+  "tests/probes/native_ninja_queue_lifecycle_probe.cpp": "44cce018570de8f731e2d085037a672fe982322f249e37c1f217d8c887fc0e6f",
+  "tools/oracles/verify_original_ninja_queue_lifecycle.py": "3758ba5abc92e9025ce563e6315499af71548e3ac53d57c3b7e2c1082a1b10dd"
+ },
+ "original_ranges_sha256": {
+  "408630": "697a839ff01b85d9839f9b503d416766187bfa405542f4916f072cb7d0a693a2",
+  "407ab0": "30adc410559a7d45dca59e7b81736cbddcb8cd758da301b3e71c9f6db8f80012",
+  "407330": "dfb0a1bf94d5dec1c7ab865ec9e96fbd7044473b139b98177cef47b9b34b169d",
+  "402f40": "783cae18b6ee1f73b9b2a19f0ab4a27c120d181181f7cff0e0902f159f56c855",
+  "401420": "04ab0a69d6444d81e26c995c80c428e75e64e6957006e28c910a52361fffc5b0",
+  "412400": "a10c2961b5258ff44b7df88bffb4593264827094cd6959a160e1926efab5c7ae",
+  "77ff90": "3b7846d913dce085a945ecaf9ede3c16bf0cd4cd6314b00a14a3c07d1c326732"
+ },
+ "cases": 600,
+ "case_sha256": "92c8bfdf5f56f82dabe1dfe1d4e09cf1aa1490e2d42526eabbbbc1ccdbfbce7b",
+ "source_outcomes": {
+  "failure2:calls2": 24,
+  "failure0:calls3": 511,
+  "failure2:calls1": 24,
+  "failure2:calls3": 41
+ },
+ "state_mismatch_count": 0,
+ "fp_flag_mismatches": 402,
+ "mismatches": [],
+ "stores_trace_boundaries_match": true,
+ "limits": "Render-queue lifecycle 408630 -> 407ab0 -> (4128f0/402f40, 407330) against original instructions.\n\nReal source code runs for 408630, 407ab0, 4128f0, 402f40, 407330, 401420, 77ed00,\n77ed20, 77ece0, 412400, 401440 and 77ff90. Fixtures: 780f60 (HeapAlloc) returns\nthe case's heap address, 780fb0 (HeapFree) is a no-op, and the D3D8 device's\nSetRenderState (vtable +0xc8) records (site, state, value) and may fail at call N.\nCompared: buffer cursor offset and zeroing, overflow flag, colours, captured\nwords, mode/count stores, bucket sentinels and the render-state trace. FP status\nflags are reported separately (Unicorn's x87 flag behaviour is not hardware).\n",
+ "native_queue_sources": {
+  "src/engine/ninja_queue_native.hpp": "15cedb7cd3e6c04096d9f5dd3b9f986acfea3d010fb7b7b5d08653586355511b",
+  "src/engine/ninja_queue_native.cpp": "937a14c992604e61f869b05c533ed3f57549450f8f5a78c82457a7c3e49c1887",
+  "tests/probes/native_ninja_queue_native_probe.cpp": "df69f4b983b4c93915565870911fe947ec096733af04916eb9b132db1f39a202",
+  "tools/oracles/verify_original_ninja_queue_native.py": "2a9d59eae3987025b5a5313b170af59441df2515104f12c8ed8ba897e9980c10"
+ },
+ "native_queue_scope": "Native queue ownership using the unchanged lifecycle instruction judge.\n\nThe child report retains its original comparisons/cases and explicitly reports\nFP partials. This wrapper additionally fingerprints the new maintained owner.\n",
+ "tracked_summary": {
+  "full_sha256": "3385163da2c99253d27806d8868bede6c492fa9b47308fcca594ca756f8b0f3e",
+  "full_bytes": 3318,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

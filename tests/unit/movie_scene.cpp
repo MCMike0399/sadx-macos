@@ -4,8 +4,8 @@
 
 int main() {
     using namespace sadx;
-    native::Display display(".");
     frame::ModeState mode{1, 1, 0};
+    native::Display display(".", mode);
     frame::RendererState renderer;
     std::uint32_t quit = 0, movie_number = 77, completed = 388;
     movie::Content content{};

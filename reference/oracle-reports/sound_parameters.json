@@ -1,0 +1,29 @@
+{
+ "passed": false,
+ "values_match": true,
+ "cases": 2440,
+ "mismatches": 0,
+ "fp_flag_mismatches": 553,
+ "first_mismatches": [],
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_ranges": {
+  "0x423c20-0x423c79": "cb9fba55562975096e410f5bec000f6a576282b554ac9af6d811a8cc5b409b4e",
+  "0x423c80-0x423cc0": "3a9686c1d505af4cf1e2ee1b81bed0bb5a134d73d99179b3a23f3f3134964c05",
+  "0x423cc0-0x423d0b": "a75b934e7badead24fcb4bf22951971794865e631679b1db0ef2eef8c9db1e3d"
+ },
+ "native_library_sha256": "b38d8b75c06a5119966c1e247925e04573cd38d45c6430fd74c2687b566819bd",
+ "native_sources": {
+  "src/game/sound_effects.hpp": "d2ab0d32b7a4c8d6c6e8a8e8c75f7671e21282f5e7cb3409ab9489df6dacebcd",
+  "src/game/sound_effects.cpp": "839aa88de010e3751aa261629d8cda3f4638d9e7d2e9c5fab35c3830603e20c2",
+  "tests/probes/native_sound_effects_probe.cpp": "0a14b6682123cd1148d0335c226fb8ab0ace790d32b3bfb96714c5769147fa25"
+ },
+ "limits": [
+  "Final volume/pan/frequency/3D-position callees are traced resource receipts; no hardware output is claimed. Low-six x87 exception flags are separately reported."
+ ],
+ "tracked_summary": {
+  "full_sha256": "fad1c1a7c82266a7c58aa7a51c749de1d493bf9d05a2b22e626774b11580ca61",
+  "full_bytes": 1158,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

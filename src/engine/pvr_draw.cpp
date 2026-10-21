@@ -111,6 +111,66 @@ void draw_texture(std::uint32_t index, float x, float y, float depth, State &sta
     calls.draw_texture(state.vertices, texture.global_index, 1);
 }
 
+void draw_scaled_texture(std::uint32_t index, float x, float y, float depth,
+                          float scale_x, float scale_y, State &state,
+                          std::int32_t display_disabled, Calls &calls, X87Context &fp) {
+    if (display_disabled != 0) return;
+    const auto texture = calls.texture(index & 822083583U);
+    const auto flip = index >> 30;
+    for (unsigned vertex = 0; vertex < 4; ++vertex) {
+        state.vertices[vertex].u = float((vertex >= 2) != bool(flip & 2));
+        state.vertices[vertex].v = float(bool(vertex & 1) != bool(flip & 1));
+    }
+    const auto anchor = (index >> 24) & 15U;
+    if (anchor > 8)
+        throw std::runtime_error("ghDrawPvrTextureS invalid anchor uses uninitialized source locals");
+    using fidelity::ExactFloat;
+    const auto dimension = [&](std::uint32_t value) {
+        auto result = ExactFloat::integer(fp, static_cast<std::int32_t>(value));
+        if (static_cast<std::int32_t>(value) < 0) result = result + 4294967296.0f;
+        return result;
+    };
+    auto left = ExactFloat(fp, x), top = ExactFloat(fp, y);
+    float right = x, bottom = y;
+    const auto horizontal = anchor % 3;
+    const auto vertical = anchor / 3;
+    if (horizontal == 0) {
+        right = (dimension(texture.width) * scale_x + x).rounded();
+    } else if (horizontal == 1) {
+        const auto half = (ExactFloat::integer(fp, texture.width >> 1) * scale_x).rounded();
+        left = ExactFloat(fp, x) - half;
+        right = (ExactFloat(fp, half) + x).rounded();
+    } else {
+        left = x - dimension(texture.width) * scale_x;
+    }
+    if (vertical == 0) {
+        bottom = (dimension(texture.height) * scale_y + y).rounded();
+    } else if (vertical == 1) {
+        const auto half = (ExactFloat::integer(fp, texture.height >> 1) * scale_y).rounded();
+        top = ExactFloat(fp, y) - half;
+        bottom = (ExactFloat(fp, half) + y).rounded();
+    } else {
+        top = y - dimension(texture.height) * scale_y;
+    }
+    const auto reciprocal = ExactFloat(fp, 1.0f) / depth;
+    state.vertices[1].y = bottom;
+    state.vertices[2].x = right;
+    state.vertices[3].x = right;
+    const auto reciprocal_value = reciprocal.rounded();
+    // Unshifted edges retain their input words; only shifted edges perform coordinate arithmetic.
+    state.vertices[0].x = horizontal == 0 ? x : left.rounded();
+    state.vertices[0].y = vertical == 0 ? y : top.rounded();
+    state.vertices[2].reciprocal_depth = reciprocal_value;
+    state.vertices[3].y = bottom;
+    state.vertices[0].reciprocal_depth = reciprocal.rounded();
+    state.vertices[3].reciprocal_depth = reciprocal_value;
+    state.vertices[1].x = horizontal == 0 ? x : left.rounded();
+    state.vertices[1].reciprocal_depth = reciprocal.rounded();
+    state.vertices[2].y = vertical == 0 ? y : top.rounded();
+    // Effective GVR_Init clears the source format-mask byte, so every format enables alpha.
+    calls.draw_texture(state.vertices, texture.global_index, 1);
+}
+
 void draw_box_fill_2d(float left, float top, float right, float bottom, float priority,
                       std::uint32_t color, std::int32_t &display_disabled,
                       std::uint8_t &fog_emulation, std::uint8_t &fog_enabled,

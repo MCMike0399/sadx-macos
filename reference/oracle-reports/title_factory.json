@@ -1,0 +1,46 @@
+{
+ "passed": true,
+ "values_match": true,
+ "cases": 2268,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "seed": 423723,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_sources": {
+  "src/game/title_menu.hpp": "4c3b8720c1d2fee267baee1ce0682bcab5c31b7916f9226d7658b6e9e169ea5f",
+  "src/game/title_menu.cpp": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d",
+  "tests/probes/native_title_factory_probe.cpp": "c9387906d8683b980b36916eb0afa3b861ff3f43d61c7dbf01dd5533cc9f8241"
+ },
+ "native_library_sha256": "f5a0e2421311a823899b4fb14328b98b70d1a339b1e8e55d8d2f009c59643841",
+ "limits": [
+  "Task and allocation dependencies are traced seams; full source auxiliary bytes and callback stores are compared.",
+  "Allocation failure faults are not modeled; native composition reports null allocation explicitly."
+ ],
+ "source_ranges": {
+  "0x5124a0-0x512513": "4e11cdd142e2b1f94e4a0e64db463e36156aef56e7d26bf35d43ba76da7d8111",
+  "0x505600-0x505692": "5138ea3e1020d20b7eea670560c2dd6eefdd06b20212c5ab01a82190fba9216f",
+  "0x50b490-0x50b4dd": "e963679045878d5d547865406707c17ae81aa5a06f9eaf8f18aefae23d4bd76e",
+  "0x511400-0x511472": "40db772ed4b0c934ab5f9f5b63715e28b6c6b7c94c2b83b53ef38380b3da8cc5",
+  "0x50bf30-0x50bfba": "0905471713a0fefd612eba701c0aba7fc29835e61a9ada1bc6c3da6373310fbe",
+  "0x509860-0x5098aa": "77295d143d78383b190f3b925810ddacb4dccab04c7bf60d2bfcc9e61c5a6975",
+  "0x50e270-0x50e2d2": "9933a3a2fc912bf6464e22d6a745da112c3caf4cd7ceab8abc184a1ba72e51df",
+  "0x50a6c0-0x50a70d": "20a1b384d90f326ee5b8e9ac3b91d3d6fe676399222ceea68060f7153beb43f6",
+  "0x50e020-0x50e080": "b185d9098769091ddb2573a226f515f99c7369e60f282fd374a4b3769c0def11",
+  "0x50d470-0x50d4d2": "cae92ed1b6e24e043a5f934d2a0efad0aad8164fb176623297d46e56a8239de7",
+  "0x5084a0-0x50850a": "b10c5ed9773b0b92bd161ad7b4796c34a16786a97e4159bb263bf2716157ad81",
+  "0x50c140-0x50c157": "f1139c8d8c76400f80aed9182835034bbb3869d39060c703e06b62dfb86ab23a",
+  "0x50dc60-0x50dc97": "5a4c6ba3c62fa60c407791fdb3c1135420f91dee75bc7abb73a5eb40893f3731",
+  "0x509b40-0x509b7d": "d2770c5759992ecdb477b704bcf1b98cdd3c41fe2c87d23fd1be554d7be137b6",
+  "0x50b1c0-0x50b220": "f4af7ee4ee07c9e088fab3fbe7026ff3a3f37e61ec4dfede9538cd9a9cf1958d",
+  "0x50a3f0-0x50a450": "af676b7650898c92933463c5194cabdd4a4cc59962fb993ac2a17bad60406d7e",
+  "0x509690-0x5096f0": "10d43bcbb3e4dfeea76d40753bf65b8012c8ef44388c87aa566fee967471e1b5",
+  "0x506230-0x506359": "dd9312face9c70f324cff27446a9179e573480b04beb2d66fb1b3dc743b7540d",
+  "0x506360-0x5063e0": "6018ddd3036cabb506f86b7ce15fc7616d55e2b3dacd22f2e697e107f65a085e"
+ },
+ "tracked_summary": {
+  "full_sha256": "421e49429654065a7fb7b4a61d307078f26106e7c73488141ef3d1b6726aa98f",
+  "full_bytes": 2685,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

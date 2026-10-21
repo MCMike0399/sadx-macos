@@ -10,6 +10,10 @@ namespace sadx::character_pack {
 // NOTSA: typed, pointer-free imported Ninja resources; zero is a null resource reference.
 using ResourceId = std::uint32_t;
 enum class StartupAction : std::uint32_t { ClearPose = 100, ClearPoseTransition = 101 };
+enum class TitleAction : std::uint32_t {
+    SonicClearPose, SonicClearPoseTransition, KnucklesClearPose, KnucklesClearPoseTransition,
+    BigSittingToFish, BigPreparingToCast, BigCast
+};
 enum class ResourceKind : std::uint32_t {
     Action = 1,
     Object,
@@ -69,6 +73,7 @@ class CharacterPack {
     static CharacterPack load(const std::filesystem::path& path);
     static CharacterPack decode(const std::vector<std::uint8_t>& bytes);
     ActionHandle action(StartupAction action) const;
+    ActionHandle action(TitleAction action) const;
     ActionResource resolve(ActionHandle handle) const;
     ObjectResource object(ResourceId id) const;
     ModelResource model(ResourceId id) const;
@@ -79,6 +84,6 @@ class CharacterPack {
   private:
     void validate() const;
     std::vector<ResourceRecord> records_;
-    std::vector<std::array<std::uint32_t, 2>> actions_;
+    std::vector<std::array<std::uint32_t, 3>> actions_;
 };
 } // namespace sadx::character_pack

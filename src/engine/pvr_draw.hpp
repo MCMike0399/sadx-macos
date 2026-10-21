@@ -47,6 +47,10 @@ void default_blending(const std::function<void(std::uint32_t, std::uint32_t)> &s
 // FUNCTION: SONIC 0x4338d0 ghDrawPvrTexture
 void draw_texture(std::uint32_t index, float x, float y, float depth, State &,
                   std::int32_t display_disabled, Calls &, X87Context &);
+// FUNCTION: SONIC 0x433f80 ghDrawPvrTextureS
+void draw_scaled_texture(std::uint32_t index, float x, float y, float depth,
+                          float scale_x, float scale_y, State &, std::int32_t display_disabled,
+                          Calls &, X87Context &);
 // FUNCTION: SONIC 0x4071c0 ds_DrawBoxFill2D
 void draw_box_fill_2d(float left, float top, float right, float bottom, float priority,
                       std::uint32_t color, std::int32_t &display_disabled,

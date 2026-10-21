@@ -1,0 +1,46 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "loader_sha256": "3293cf354dcfc62274c2ad25c09041606d6ad55483f070c233111cd9b47a97ba",
+ "probe_sha256": "c23197ce37920c0fe62bdfb6e5864ee4309a609bfd728242bacb7935d9553546",
+ "seed": 20261102,
+ "cases": 609,
+ "mismatch_count": 0,
+ "mismatches": [],
+ "scope": "Original regular/localized traversal and pinned compiled loader wrappers.\n\nExecutes compiled LoadPVM_r, check_cache and njLoadTexture_Wrapper_r. The raw\nasset fixture bypasses replacement path discovery (independently qualified by\nimporter selected-profile proof), executing its compiled check_cache and resync\nstore prefix. PVM decoding, individual uploads, CRT allocation/string/memory and\nopaque cache destruction are explicit resource receipts. No pixel data judged.\n",
+ "palette_initial_miss_proof": {
+  "initial_records": 128,
+  "identities": -1,
+  "ordinal_banks": true,
+  "initial_palette": 0,
+  "initial_texture_palette_selector": 0,
+  "null_selector_writes": 0,
+  "scope": "No indexed palette registrations in qualified16bit raw native backend."
+ },
+ "source_ranges": {
+  "0x420d80-0x420e81": "727a40b4a68c850e79dccb82d21d8cbeff1997e12bcd9f6dea4728187f355072",
+  "0x4212e0-0x4213a0": "559d8a46f5c73f91f50de7e33e2c11e6670adde5f1ac8efdd834a3f91fd8fe60",
+  "0x421180-0x421185": "5b834569f92b7daca0fb9aab412001d60f42fffb0b98c5bcfd670a8277d373ec",
+  "0x4228e0-0x4228e5": "ebb5f8bb980affe4f52fa93c30dcd65eab2d8a515fd830a1a6b751b4d628d260",
+  "0x100a75e0-0x100a7665": "9292fe755f4e72078f88cad9571d0e340ef124cdcebcc888708ac9e9df600245",
+  "0x100a9cf0-0x100a9db8": "141a05e5fce9a4c77dfb477877216d3268ea98329107d502599d01b6a901c526",
+  "0x100a9a30-0x100a9a35": "34cab4cc6572f396a310522fecb8754e40cbb8deb281b234933b26a76c9e31b7",
+  "0x100a9a40-0x100a9a43": "62b1d4332c2eb9e592e7385e2f091c62b3917aad5e86b9447cca40de87bd13f0",
+  "0x788260-0x788282": "68ebd927519a4b2da08f9ab762b107d9e3294e89294016a085308efce2db7a87",
+  "0x78d0d0-0x78d109": "4d9ac449acccf18e23c7358c4228184e9061c49ad0c96469d2e8b33fb85a16fa",
+  "0x78cf80-0x78cfa0": "fe79ad93c10141b25304e7796755ebe95505769879c5df6946481d7ca3abadb8",
+  "0x100a9dc0-0x100a9f1f": "0596b8271e440e7955fc23cc971e30e5c265e66f275072c9b72a5b5109b34a10",
+  "0x100ab2d0-0x100ab2e6": "2e41ef1fa620a26bf434c197ab73728e6663d044bc640c241979db243c6835a0"
+ },
+ "native_sources": {
+  "src/game/regular_textures.cpp": "66ffcb849c16911ba7c678245362f706ac47fc46bd8aef8a1e41532b85eb5553",
+  "src/game/regular_textures.hpp": "f0c17f3c50a0a0b1567c87fd474a9d24f6a7956cdc48d3d62f72a86f65f5b532",
+  "src/engine/native_texture_lifetime.hpp": "0e6883f0c6ca2457060a61a16daeec4e84a3f7e6e6206e5a0b3d894f0e7485c3",
+  "tests/probes/native_regular_textures_probe.cpp": "795e52a52390b6ecdce58423e6ea25b268122b3b9877b7b8c9a64ec945efc7b5"
+ },
+ "tracked_summary": {
+  "full_sha256": "d5e66ef1423b89ecb08da61035137941c78e35b661e35e0d9ec39bb9005bc52a",
+  "full_bytes": 2867,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

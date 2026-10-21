@@ -41,8 +41,21 @@ class LogoScene final : private logo::StartupCalls,
     const pvr::State &drawing_state() const { return drawing_; }
     std::uint32_t fade_color() const { return fade_color_; }
     const TaskScheduler *tasks() const { return tasks_.get(); }
+    TaskScheduler &task_scheduler();
     std::int32_t demo_mode() const { return demo_mode_; }
     std::int32_t demo_event() const { return demo_event_; }
+    logo::StartupState startup_state() {
+        return {state_, demo_mode_, demo_event_, demo_reset_};
+    }
+    void initialize_texture_drawing() override;
+    void set_material(std::uint32_t) override;
+    void default_blending() override;
+    void set_base_color(std::uint32_t) override;
+    void draw_scaled_texture(std::uint32_t index, float x, float y, float depth,
+                             float scale_x, float scale_y);
+    void initialize_heap() override;
+    void initialize_tasks() override;
+    void set_fade_color(std::uint32_t) override;
 
   private:
     LogoOutput &output_;
@@ -60,25 +73,20 @@ class LogoScene final : private logo::StartupCalls,
     // The task-pool initializer clears four auxiliary words; their wider role is unrecovered.
     std::array<std::uint32_t, 4> task_auxiliary_{};
     std::shared_ptr<TaskWorkArena> arena_;
+    // Source default task resource context starts null; callback context is a separate owner.
+    std::shared_ptr<void> default_task_resources_;
     std::unique_ptr<TaskScheduler> tasks_;
 
-    void initialize_heap() override;
-    void initialize_tasks() override;
     void set_character_selection(std::int32_t) override;
     void set_background(std::uint32_t, std::uint32_t, std::uint32_t) override;
     void load_textures(std::string_view) override;
     void set_frame_rate(std::int32_t, std::int32_t) override;
     void set_wait_vsync(std::int32_t) override;
-    void set_fade_color(std::uint32_t) override;
-    void initialize_texture_drawing() override;
     void initialize_save_data() override;
     void run_objects() override;
     void display(std::uint8_t) override;
     void release_textures() override;
     void select_logo_textures() override;
-    void set_material(std::uint32_t) override;
-    void default_blending() override;
-    void set_base_color(std::uint32_t) override;
     void draw_texture(std::uint32_t, float, float, float) override;
     void draw_box(float, float, float, std::uint32_t) override;
 };

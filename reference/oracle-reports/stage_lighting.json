@@ -1,0 +1,34 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "cases": 704,
+ "mismatch_count": 0,
+ "mismatches": [],
+ "selected_bytes_and_query_boundaries_match": true,
+ "native_library_sha256": "a8cd258a0965571614c8c54b67dce9e468b5bec84f2fb661040267ab51a35f6e",
+ "native_sources": {
+  "src/game/stage_lighting.hpp": "cf4eac4456cebefb3d2361427a8286acb3606d90d91427ff9d9d76579213a58d",
+  "src/game/stage_lighting.cpp": "c94e4ca32dcee4f6a2115b91f5ce52ba9bb0078f3de81e279fa8d2c965804cee",
+  "tests/probes/native_stage_lighting_probe.cpp": "e3db6318462ef51389af3359e31f40acd08a230383b6075f53d30a540f57bb5f"
+ },
+ "source_ranges": {
+  "0x40a420-0x40a496": "824bab5e5cb7d69bf5abdd59f701bea92d8839d9d002d001c20060a13da0c65d",
+  "0x40a4a0-0x40a50e": "22d07316111fed3ab94d9eb4c5e7049a84f7b8ad42194a592861e001ba12450f",
+  "0x40a8a0-0x40a8f0": "f10094fdc104d244b4840723301eca6d53f719ef1a2374f59c4a35260baad6f7",
+  "0x40a950-0x40aa24": "400c41ac0d0f33c55230d08d532672dd83c8d0f16db7e54abd3a0ddf3f6959fc",
+  "0x40aa30-0x40aa5d": "e4da2970b8c00b9d19031d8a7ce4834839c5f5ff49a6ebb35ba0cfed943317c4",
+  "0x40aa60-0x40aaab": "95d98de189f5fec34ab4acdfe43f36b9fe50dc8b381b155fae055239566424a9",
+  "0x40aab0-0x40ab58": "431ec5c5daa151beaff60545881d76ecaaee2cf73be3854b9c1f674cdea1feff",
+  "0x40ab60-0x40ac08": "014f357414b980e9900b8101576e7847dcfab51402bd97b422272fadec379470",
+  "0x40ad60-0x40adb6": "0e0d87fcdb97de0583e7b177c866ad37116855d5f9995013832ce1d0611dfb08",
+  "0x40aeb0-0x40aed4": "23e6ad9f17b9868b5949acfd8c953346118f398f5719503556479f21600b04ba",
+  "0x40aee0-0x40af05": "20dea43fee495ba9aae2d1baba7eaa67902e6a0cbf4057afdb487ca69feff606",
+  "0x412c10-0x412c28": "9982a7babdd3467b2303df7a7bc1320ddaa8f276311ca392645db140a79a6f49"
+ },
+ "limits": "Stage/character light and palette selection against original instructions.\n\nInteger control and byte copies only: arbitrary binary32 payloads are retained.\nGame-owned sequence/hotel queries are explicit receipts for time adjustment;\nSeqGetTime itself is separately executed with null/non-null source pointers.\nThe current title path needs no hotel query. No hotel geometry, light-palette\nshading, GPU upload or rendered pixels are certified by this CPU-state judge.\n",
+ "tracked_summary": {
+  "full_sha256": "e49e985e128001453da90f58bd014a82b51d9669534223b08fda53e7f3b400ca",
+  "full_bytes": 2279,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

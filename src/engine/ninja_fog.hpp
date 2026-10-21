@@ -38,4 +38,6 @@ void set_color(Runtime &, std::uint32_t);
 void generate_table(Runtime &, float start, float end);
 void set_table(Runtime &);
 void set_enabled(Runtime &, bool);
+// NOTSA: actual session composition borrows the canonical frame counter.
+void set_enabled(Runtime &, bool, const std::int32_t &pending_logic_ticks);
 } // namespace sadx::fog

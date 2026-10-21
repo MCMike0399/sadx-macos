@@ -1,0 +1,27 @@
+{
+ "cases": 5877,
+ "mismatches": 0,
+ "examples": [],
+ "seed": 50300,
+ "passed": true,
+ "values_match": true,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_ranges": {
+  "0x50e300-0x50e435": "9b2d4da8caf6a4bb5f30ef749af5dbd0eb0f47babed169b99cbee6c8bcea2bcd",
+  "0x505b40-0x505b5b": "1b392bf71571a5a3cac0ee440281fed5b1f13cf80878959ae6435dd4a0b45dd5",
+  "0x505c20-0x505d65": "472a756f97c1fd37d51c1d17539fb8ea5faf033df21e76a1e86c20af7cf9ec27"
+ },
+ "native_library_sha256": "16af80881bb3310538c195027dba344487db8be0808bebefd2e88f9f473be2d6",
+ "native_sources": {
+  "src/game/title_menu.cpp": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d",
+  "src/game/title_menu.hpp": "4c3b8720c1d2fee267baee1ce0682bcab5c31b7916f9226d7658b6e9e169ea5f",
+  "tests/probes/native_title_input_probe.cpp": "920eb7691e70bfadb91a43da0fb5609a17cd63bc067e4ce4b47314be01d62bb9"
+ },
+ "scope": "Full title input caller with input/audio/transition snapshot receipts; transition wrapper also executes with the real sequence update to check waiting/countdown composition.",
+ "tracked_summary": {
+  "full_sha256": "cef72e0d0838e2f3cf0fce498ef98e2faf261cbc2c30d919b459defe3004294c",
+  "full_bytes": 1131,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

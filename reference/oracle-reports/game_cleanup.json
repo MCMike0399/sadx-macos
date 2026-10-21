@@ -1,0 +1,79 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "fbc1216d71a2c20cbd54a445b79013c424797270c6a72ee375400471276f081d",
+ "native_sources": {
+  "src/game/game_cleanup.cpp": "b03a1bb62b391f331f929a4f544ae2846f70b1c34af1018956ba9396d8a54649",
+  "src/game/game_cleanup.hpp": "4270bb3d55e7f3ab79ddfedf187c7a0c07672360f1ef43e49ac68ab3c9fa5270",
+  "tests/probes/native_game_cleanup_probe.cpp": "231926e3f042e41645b5e7e4cbeaadc278e70901b2c46a6b350c04000d020315",
+  "src/game/save_data.cpp": "d0175338a858b42d58bda6155d4886a86a590d874d19c46e945c4b3d235f9eb4",
+  "src/game/save_data.hpp": "6eb46f3df135b1ec73fb9979ba7e3a8188524994c67ea66b59345c23326cd61e",
+  "src/game/game_bootstrap.hpp": "df46f4e508378f30f3c6699fec50f38efe90bc5fe0dbeacf0bbbf672484925b4",
+  "src/game/game_bootstrap.cpp": "3461ee0394189845c5d7d54b39179b2870fd35508c355c80129b7e755f3d7670",
+  "src/game/sound_initial_state.hpp": "0a0ca4936202a736a73ddbda24c625d679c909346ba3aa37004e116fc483d3da",
+  "src/engine/task.hpp": "4b375e2d3d5250e43ba1999715644510d678675d826c0719ed18926f05f47cfc",
+  "src/engine/sprite_immediate.hpp": "e48a0779b794eb5df6cb2e06cf9eba5029e70d312d85a6398f0e693a84531de7"
+ },
+ "source_ranges": {
+  "0x40bf30-0x40bf40": "38bea53f341a5e6f5dee4a9f426cd15a66ec5a1a8ebaec51b6c3d97859e06e57",
+  "0x40bf40-0x40c023": "b7a107484cc7753a0f24258c28e55e24a52238497585f6adde4d229c82181dfe",
+  "0x40cd10-0x40cd1b": "8f6e56d59309fc2885f8558dbe597433f72607745dfe5b793af95e218a023ad5",
+  "0x40d490-0x40d4d0": "bcb9f2ea79e7dd5c2951b51314bf45f84461a0d89ac7801dc0350777320984ac",
+  "0x412ad0-0x412adb": "23f2a7a2c0656a2f1584e9b3d9bf5cf5554b5a8ec4e7c7dd6381d56562190a43",
+  "0x4144d0-0x4144dc": "2dfbb0198f984a1bd515dd0600c28478840558dd889ac1329da1a9a373b5c904",
+  "0x4144e0-0x4144e8": "59d4c6719d198fa7a265fd96993d62ea4f31baf2a95dcf62f77941f970da84d6",
+  "0x414570-0x4145a4": "dd022096085c2a7e40e68caa8c154c91672494572ebfdbdecb1af15ebde9fa67",
+  "0x420e90-0x420ef0": "c22f9fe168a2108af1155586561bec62a7e9f3022cef4c2dc28c1e3e6232ee03",
+  "0x420ef0-0x420f35": "7adebae599bdefa99ff8cb1827c4e62a54cdfd09a3997d6c7408ad523000f9a5",
+  "0x420f40-0x420f8d": "fe2233d323f15ff94d7d745f687a8c9aa85bc85212962e52d58c45ab168da754",
+  "0x421fb0-0x421fcc": "534505612486a811049644f8ba5ca3078be80c0a9d3203aac1fc958dc46dc7d3",
+  "0x422440-0x4224b0": "c1e571c5d25990190f13d7f612901ae9c6bd595769e1246b6ca7f40f8aff5d0d",
+  "0x4224b0-0x422520": "9e2156f475c6de9af29aa4cf28307f7ca7a0f71f7770adf15d53156b4078f00b",
+  "0x4228f0-0x42292b": "9b04b5cd096e16f7d14c59c8c9cda83558639de71428d3a8b45f5806a2c37cbb",
+  "0x424460-0x42449c": "afc95cd38c28de353dffc9f19f92eccf235a58259a72daad844b793bfdfdd90f",
+  "0x4257c0-0x4257dd": "422783a6be9004e240bc3d355cad63fe1acde0b002ab4fd1c8d1dcc08f075dfd",
+  "0x4257e0-0x4257f5": "2d70f9794fbfa2866a22f5545bbcb7ae0ea1e4406fdb635c89a7afabed366d36",
+  "0x42ca10-0x42ca99": "780932f7185c6cbe14d6d6ad3dbecda9feb97f4a9f53c5a831550e56b93e8559",
+  "0x42d250-0x42d29c": "5afffe02b96184d3f73074b3ed703e63349918f136145e96648fc4d1f4d4daec",
+  "0x42d2a0-0x42d2ec": "72c4e2ae5acd225dc7e292fe9fe9f637af052f1242e68c1c9a3a137fec090537",
+  "0x42d2f0-0x42d351": "5c0163decca00103a735ca58f79e7644adbcb471ee578aab6842b2bedd5d4c31",
+  "0x42d360-0x42d3aa": "83070d84f87a71053b488ee903c14aeb58760b6e09d83f4e3b414621a75e245b",
+  "0x42d770-0x42d873": "1f737fc4522f962b596ba55d53f10793c26c47bed318caf569393093fe0729a5",
+  "0x457060-0x4570a5": "72909587b24de1bea55f84b5e8495d8bcbcbbce58976cbe42a1b078b305ac2f1"
+ },
+ "source_initial_values": {
+  "sequence_running": 1,
+  "tracks": [
+   -1,
+   -1,
+   -1,
+   -1
+  ],
+  "auxiliary_limit": 50
+ },
+ "unchanged_reset_judge_sha256": "a6f0868a6f23274feb404bbbc2f463e2a2e1e6d24b253363a713373e629c2c7e",
+ "unchanged_reset_judge": {
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "native_library_sha256": "fbc1216d71a2c20cbd54a445b79013c424797270c6a72ee375400471276f081d",
+  "original_range_sha256": "b7a107484cc7753a0f24258c28e55e24a52238497585f6adde4d229c82181dfe",
+  "cases": 300,
+  "mismatch_count": 0,
+  "mismatches": [],
+  "order_stores_seed_match": true,
+  "limits": "Game-state reset 40bf40 against original instructions.\n\nEvery callee except the 51f680 RET and srand 6443b5 is an owner fixture that\nrecords (callee, site, first argument) and may fail at call N. Compared: call\norder/sites/arguments, 3abdf80, word 3b29d08, the conditional free-and-zero of\n3b290d0 and 3b0e330, and the CRT seed 2bcbdf8.\n"
+ },
+ "cases": 2604,
+ "case_groups": {
+  "load_save": 1024,
+  "helpers": 1280
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "values_and_call_order_match": true,
+ "limits": "Native Clear/Reset/title preparation and save restoration against pinned x86.\n\nReset uses the unchanged existing judge, including service-failure prefixes.\nOther source callees are executed except explicit external-owner receipts for\nheap/tasks, fade/stage services, texture release and list clearing. Invalid\nnegative MSG_Disp indices are outside the four-slot native view and excluded;\nall nonnegative counts, signed character flags and full regular tables remain.\n",
+ "tracked_summary": {
+  "full_sha256": "5b121bb076064e2bf0c6931abaf5000bd83728baf7b2f9d02ea12bd1531ff55c",
+  "full_bytes": 5279,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

@@ -1,0 +1,135 @@
+{
+ "passed": true,
+ "values_match": true,
+ "cases": 244,
+ "attempted_cases": 250,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "seed": 423723,
+ "source_unsupported_cases": 6,
+ "source_unsupported": [
+  {
+   "case": 85,
+   "input": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    3,
+    0,
+    2,
+    0
+   ],
+   "reason": "source reentrant destructor boundary"
+  },
+  {
+   "case": 87,
+   "input": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    4,
+    0,
+    2,
+    0
+   ],
+   "reason": "source reentrant destructor boundary"
+  },
+  {
+   "case": 91,
+   "input": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    2,
+    0,
+    4,
+    0
+   ],
+   "reason": "source reentrant destructor boundary"
+  },
+  {
+   "case": 121,
+   "input": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    3,
+    0,
+    8,
+    0
+   ],
+   "reason": "source free list cycle"
+  },
+  {
+   "case": 143,
+   "input": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    1,
+    1,
+    0,
+    0,
+    0
+   ],
+   "reason": "source reentrant destructor boundary"
+  },
+  {
+   "case": 201,
+   "input": [
+    0,
+    0,
+    0,
+    3,
+    0,
+    1,
+    3,
+    0,
+    0,
+    0
+   ],
+   "reason": "source reentrant destructor boundary"
+  }
+ ],
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_ranges": {
+  "0x40b730-0x40b771": "2788a0ebbd3b4607372938ba8aab450386e368e71f43a22f5b2628eee60a83af"
+ },
+ "native_sources": {
+  "src/engine/task.hpp": "4b375e2d3d5250e43ba1999715644510d678675d826c0719ed18926f05f47cfc",
+  "src/engine/task.cpp": "568212ddb83426f5742625aa9cd8fa8bad081a96d80864d85777199567533bd6",
+  "tests/probes/native_task_delete_probe.cpp": "6a6878c3824c6fe9424157f66807eba6b2f489d190eae41bd26459f5b0502d2c"
+ },
+ "limits": [
+  "Source destructors that recursively destroy their own already-unlinked task are outside the lifecycle API contract; those individually listed reentrant boundaries/free-list cycles are not compared or claimed.",
+  "Freed saved-next source pointers without slot reuse stop at the source exec-load boundary and report unsupported; no success is claimed through source free-list memory."
+ ],
+ "native_library_sha256": "6e65c82a50535aa72d83ded5695e518fd1411ecf5addb3ece1afeba548aaa8a2",
+ "tracked_summary": {
+  "full_sha256": "457f15fa2ecad82c7c5abc7d11c9cee5064bcbb1896e6d775efb132d15f0fb36",
+  "full_bytes": 3501,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "source_unsupported[0].input": 26,
+   "source_unsupported[1].input": 32,
+   "source_unsupported[2].input": 20,
+   "source_unsupported[3].input": 26,
+   "source_unsupported[4].input": 14,
+   "source_unsupported[5].input": 26
+  }
+ }
+}

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Import the two Sonic startup actions as a typed, pointer-free resource graph.
+"""Import startup/title character actions as a typed, pointer-free resource graph.
 
 Schema facts: pinned sa_tools CHRMODELS.ini (___SONIC_ACTIONS, entries100/101),
 Ninja NJS_ACTION/OBJECT/MODEL_SADX/MESHSET_SADX/MOTION/MDATA2 declarations.
@@ -15,6 +15,9 @@ import sys
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "lib"))
 from pe_image import PEImage
+
+TITLE_ACTIONS = ((0, "SONIC", (100, 101)), (3, "KNUCKLES", (40, 41)),
+                 (7, "BIG", (4, 29, 30)))
 
 SOURCE_SHA = "76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5"
 KINDS = {"action": 1, "object": 2, "model": 3, "meshsets": 4,
@@ -193,12 +196,12 @@ class Importer:
                                self.motion(motion, self.animated_objects(root)))
         return self.record("action", address, 1, build)
 
-    def write(self, output, actions):
+    def write(self, output, actions, title=False):
         self.verify_round_trip()
-        body = bytearray(b"SDXACT01")
+        body = bytearray(b"SDXACT02" if title else b"SDXACT01")
         body.extend(struct.pack("<II", len(self.records), len(actions)))
-        for index, identity in actions:
-            body.extend(struct.pack("<II", index, identity))
+        for descriptor in actions:
+            body.extend(struct.pack("<III" if title else "<II", *descriptor))
         for kind, payload in self.records:
             body.extend(struct.pack("<II", kind, len(payload)))
             body.extend(payload)
@@ -242,18 +245,28 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("model_dll", type=Path)
     parser.add_argument("output", type=Path)
+    parser.add_argument("--title", action="store_true", help="one combined Sonic/Knuckles/Big title pack")
     args = parser.parse_args()
     image = PEImage(args.model_dll)
     if image.sha256 != SOURCE_SHA:
         raise ValueError("unsupported character archive SHA256")
-    table = export(image, "___SONIC_ACTIONS")
     importer = Importer(image)
-    actions = [(index, importer.action(image.unpack("<I", table + index * 4)[0]))
-               for index in (100, 101)]
-    digest = importer.write(args.output, actions)
-    evidence = {"schema": "SDXACT01", "source_sha256": image.sha256, "pack_sha256": digest,
-                "descriptor": "sa_tools b72d52f3 CHRMODELS.ini ___SONIC_ACTIONS[100,101]",
-                "actions": dict(actions), "records": importer.evidence}
+    if args.title:
+        actions = []
+        for character, name, indices in TITLE_ACTIONS:
+            table = export(image, "___" + name + "_ACTIONS")
+            for index in indices:
+                identity = importer.action(image.unpack("<I", table + index * 4)[0])
+                actions.append((character, index, identity))
+    else:
+        table = export(image, "___SONIC_ACTIONS")
+        actions = [(index, importer.action(image.unpack("<I", table + index * 4)[0]))
+                   for index in (100, 101)]
+    digest = importer.write(args.output, actions, title=args.title)
+    evidence = {"schema": "SDXACT02" if args.title else "SDXACT01", "source_sha256": image.sha256, "pack_sha256": digest,
+                "descriptor": ("sa_tools b72d52f3 CHRMODELS.ini SONIC[100,101], KNUCKLES[40,41], BIG[4,29,30]"
+                               if args.title else "sa_tools b72d52f3 CHRMODELS.ini ___SONIC_ACTIONS[100,101]"),
+                "actions": actions if args.title else dict(actions), "records": importer.evidence}
     args.output.with_suffix(".provenance.json").write_text(json.dumps(evidence, indent=2) + "\n")
     print(json.dumps({"records": len(importer.records), "bytes": args.output.stat().st_size,
                       "sha256": digest, "actions": actions}))

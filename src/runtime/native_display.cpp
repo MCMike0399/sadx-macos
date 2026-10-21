@@ -27,9 +27,13 @@ NinjaMatrixStack initial_matrices() {
 }
 } // namespace
 
-Display::Display(const std::filesystem::path &directory)
-    : sine_(ninja_sine_table()), matrices_(initial_matrices()),
-      screen_transform_(words(runtime::engine_code_tables().unit_matrix)) {
+Display::Display(const std::filesystem::path &directory, frame::ModeState &mode,
+                 std::uint32_t renderer_control_flags)
+    : frame_mode_(mode), sine_(ninja_sine_table()), matrices_(initial_matrices()),
+      screen_transform_(words(runtime::engine_code_tables().unit_matrix)),
+      renderer_control_flags_(renderer_control_flags) {
+    auto fog_runtime = this->fog_runtime();
+    fog::initialize(fog_runtime);
     // [platform:graphics] Native 640x480 device creation exposes the same initial
     // viewport as the pinned Direct3D profile. Arbitrary viewports remain unsupported.
     device_state_.viewport = {0, 0, 640, 480, 0, 1};
@@ -42,7 +46,10 @@ Display::Display(const std::filesystem::path &directory)
     view::initialize_camera(view_.camera);
     set_camera();
     output_ = std::make_unique<LogoRenderer>(directory, device_state_, frame_, view_.depth,
-                                           arithmetic_, sse_, sse_reciprocal_by_division);
+                                           arithmetic_, sse_, sse_reciprocal_by_division,
+                                           texture_state());
+    auto owners = queue_owners();
+    queue::initialize(owners, queue_services(), arithmetic_);
 }
 view::Services Display::view_services() {
     return {
@@ -62,6 +69,25 @@ void Display::set_camera() {
     if (!view::set_camera(view_, services, arithmetic_, sse_))
         throw std::runtime_error("native camera update failed");
 }
+void Display::set_perspective(std::int32_t angle, std::uint32_t &pause_state) {
+    screen::State state{horizontal_scale_, vertical_scale_, reset_pending_, pause_state,
+                        animation_queue_state_, screen_descriptor_, view_.sprite_scale,
+                        projection_center_x_, projection_center_y_, view_.camera.angle,
+                        perspective_copy_, last_perspective_, view_material_};
+    auto services = screen_services();
+    screen::set_perspective(angle, state, services);
+}
+void Display::set_view_angle(std::int32_t angle, std::uint32_t &pause_state) {
+    screen::CameraAngleState state{camera_type_, interpolate_camera_angle_,
+                                   previous_camera_angle_, last_perspective_};
+    screen::set_view_angle(angle, state, [this, &pause_state](std::int32_t value) {
+        set_perspective(value, pause_state);
+    });
+}
+void Display::set_lighting(bool enabled) {
+    // [platform:graphics] Direct3D's LIGHTING state has a native shader equivalent.
+    device_state_.render_states[137] = enabled;
+}
 void Display::set_clip_range(float near_distance, float far_distance) {
     view::ClipServices services{
         [this] { return device_state_.projection; },
@@ -72,16 +98,15 @@ void Display::set_clip_range(float near_distance, float far_distance) {
 }
 void Display::set_depth_comparison(std::uint32_t mode) {
     const auto table = runtime::engine_code_tables().depth_comparisons;
-    if (mode >= table.size())
-        throw std::runtime_error("native depth comparison is out of range");
-    device_state_.render_states[23] = static_cast<std::uint32_t>(table[mode]);
+    device_state_.render_states[23] = static_cast<std::uint32_t>(table[mode & 7]);
 }
 void Display::set_depth_write(bool enabled) { device_state_.render_states[14] = enabled; }
 void Display::restore_depth_comparison() { set_depth_comparison(default_depth_comparison_); }
 void Display::release_all_textures() {
-    output_->release_logo_archive();
-    sprite_textures_ = nullptr;
-    device_state_.texture.reset();
+    auto state = texture_state();
+    auto services = texture_services();
+    texture_lifetime::release_scene_textures(state, services, queue_state_.values.execution_mode,
+                                             registered_texture_list_count_);
 }
 void Display::submit_sprite_quad(const sprite::Quad &quad) {
     sprite::QuadServices services{
@@ -111,7 +136,7 @@ void Display::submit_sprite_quad(const sprite::Quad &quad) {
 void Display::draw_sprite(const sprite::Sprite &value, std::int32_t frame, float priority,
                           std::uint8_t attributes) {
     sprite::ImmediateServices services{
-        [this](const sprite::TextureList &textures) { sprite_textures_ = &textures; },
+        [this](const sprite::TextureList &textures) { current_texture_list_ = &textures; },
         [this] { coordinates_->push_unit_frame(); },
         [this](std::int32_t angle) {
             coordinates_->rotate_z(coordinates_->current_matrix(), angle, arithmetic_);
@@ -128,10 +153,15 @@ void Display::draw_sprite(const sprite::Sprite &value, std::int32_t frame, float
         [this](bool alpha) { sprite::begin_quad(alpha, device_state_); },
         [this](std::uint32_t color) { hud_color_ = color; },
         [this](std::int16_t index) {
-            if (!sprite_textures_ || index < 0 ||
-                static_cast<std::size_t>(index) >= sprite_textures_->size())
+            if (!current_texture_list_ || index < 0 ||
+                static_cast<std::size_t>(index) >= current_texture_list_->entries.size())
                 throw std::runtime_error("native sprite texture is unavailable");
-            device_state_.texture = sprite_textures_->at(static_cast<std::size_t>(index));
+            auto *memory = current_texture_list_->entries.at(static_cast<std::size_t>(index));
+            if (!memory || !memory->surface || !memory->surface->texture)
+                throw std::runtime_error("native sprite texture has no resident surface");
+            cached_texture_global_index_ = memory->global_index;
+            active_texture_memory_ = memory;
+            device_state_.texture = memory->surface->texture;
         },
         [this](const sprite::Quad &quad) { submit_sprite_quad(quad); },
         [this] {
@@ -142,7 +172,158 @@ void Display::draw_sprite(const sprite::Sprite &value, std::int32_t frame, float
     sprite::draw_sprite(&value, frame, priority, attributes, material_argb_, services, arithmetic_);
 }
 LogoFrame Display::frame_state() {
-    return {horizontal_scale_, vertical_scale_, display_disabled_,
-            fog_emulation_, fog_enabled_, queued_depth_};
+    return {horizontal_scale_, vertical_scale_, frame_mode_.pending_logic_ticks,
+            fog_.special_flags, fog_.active, queued_depth_};
+}
+queue::Owners Display::queue_owners() {
+    return {queue_storage_, queue_state_, reset_material_, frame_mode_.pending_logic_ticks};
+}
+queue::Services Display::queue_services() {
+    return {
+        [this](std::uint32_t mode) {
+            set_depth_comparison(mode);
+            return true;
+        },
+        [this](bool enabled) {
+            set_depth_write(enabled);
+            return true;
+        },
+        [this](bool enabled) {
+            device_state_.render_states[27] = enabled;
+            return true;
+        },
+        [this](const std::array<float, 4> &color) { set_constant_material(color); },
+        [this](std::uint32_t side, std::uint32_t mode) {
+            output_->set_blending(side, mode);
+            return true;
+        }};
+}
+screen::Services Display::screen_services() {
+    return {
+        [this] { set_blank_queue_mode(); },
+        [this] {
+            auto owners = queue_owners();
+            queue::reset(owners, queue_services(), arithmetic_);
+        },
+        [this] { output_->set_background(4278190080U, 4278190080U, 4278190080U); },
+        [this](std::uint32_t side, std::uint32_t mode) {
+            queue::set_blend(side, mode, queue_state_, queue_services());
+        },
+        [this] {
+            auto owners = queue_owners();
+            queue::reset_material(owners, queue_services(), arithmetic_);
+        },
+        [this](float x, float y, float width, float height, float depth, std::uint32_t color) {
+            pvr::draw_box_fill_2d(x, y, width, height, depth, color, frame_mode_.pending_logic_ticks,
+                                fog_.special_flags, fog_.active, queued_depth_, *output_, arithmetic_);
+        },
+        [this](std::int32_t angle) {
+            view::set_screen_distance(angle, static_cast<float>(view_.depth.viewport.width),
+                                      view_, sine_, arithmetic_);
+        },
+        [this](std::uint32_t control) { control_3d_ = control; },
+        [this](std::uint32_t mask, std::uint32_t attributes) {
+            constant_attribute_mask_ = mask;
+            constant_attributes_ = attributes;
+        },
+        [this](const std::array<float, 4> &color) {
+            queue::set_material(color, queue_state_, queue_services(), arithmetic_);
+        },
+        [this](float near_distance, float far_distance) { set_clip_range(near_distance, far_distance); },
+        [this](std::uint32_t mode) { set_depth_comparison(mode); },
+        [this](bool enabled) { set_depth_write(enabled); }
+    };
+}
+void Display::begin_game_frame() {
+    screen::begin_frame(reset_pending_);
+    auto owners = queue_owners();
+    queue::reset(owners, queue_services(), arithmetic_);
+    set_depth_comparison(3);
+}
+void Display::end_game_frame() {
+    auto services = screen_services();
+    screen::end_frame(reset_pending_, services);
+}
+void Display::setup_screen(std::uint32_t &pause_state) {
+    screen::State state{horizontal_scale_, vertical_scale_, reset_pending_, pause_state,
+                        animation_queue_state_, screen_descriptor_, view_.sprite_scale,
+                        projection_center_x_, projection_center_y_, view_.camera.angle,
+                        perspective_copy_, last_perspective_, view_material_};
+    auto services = screen_services();
+    screen::setup(state, services, arithmetic_);
+}
+void Display::set_blank_queue_mode() { queue_state_.values.execution_mode = 2; }
+void Display::set_depth_compare_mode(std::uint32_t mode) {
+    default_depth_comparison_ = mode;
+    queue_state_.values.depth_comparison = static_cast<std::int32_t>(mode);
+}
+void Display::clear_texture_binding() {
+    auto state = texture_state();
+    auto services = texture_services();
+    texture_lifetime::clear_temporary_info(state, services);
+}
+texture_lifetime::State Display::texture_state() {
+    return {texture_pool_, cached_texture_global_index_, active_texture_memory_,
+            current_texture_list_, temporary_texture_info_};
+}
+texture_lifetime::Services Display::texture_services() {
+    return {[this] {
+        device_state_.texture.reset();
+    }};
+}
+void Display::release_texture_list(sprite::TextureList &list) {
+    auto state = texture_state();
+    auto services = texture_services();
+    texture_lifetime::release_texture_list(&list, state, services);
+}
+void Display::release_movie_texture_list(sprite::TextureList &list) {
+    auto state = texture_state();
+    auto services = texture_services();
+    texture_lifetime::release_list(&list, state, services);
+}
+texture_lifetime::Memory *Display::create_argb_texture(
+    std::uint32_t global_index, std::shared_ptr<const std::vector<std::uint8_t>> pixels,
+    std::shared_ptr<const graphics::Texture> texture) {
+    if (!pixels || !texture)
+        throw std::runtime_error("native image texture requires owned image data");
+    auto state = texture_state();
+    auto prepared = texture_lifetime::prepare_argb_image(
+        global_index, pixels->data(), texture->width, texture->height);
+    auto *memory =
+        texture_lifetime::acquire_prepared(std::move(prepared), std::move(texture), state, pixels);
+    if (!memory)
+        throw std::runtime_error("native texture pool is full");
+    return memory;
+}
+fog::Runtime Display::fog_runtime() {
+    // [platform:graphics] The native shader implements W-fog; this is the native
+    // device capability, not a claim about the uncaptured Windows GPU/registry.
+    constexpr std::uint32_t kNativeRasterCaps = 1U << 20;
+    return {fog_, arithmetic_,
+            [this](fog::RenderState state, std::uint32_t value) {
+                device_state_.render_states[static_cast<std::uint32_t>(state)] = value;
+            },
+            kNativeRasterCaps, renderer_control_flags_};
+}
+void Display::enable_fog() {
+    auto runtime = fog_runtime();
+    fog::set_enabled(runtime, true, frame_mode_.pending_logic_ticks);
+}
+void Display::apply_fog_emulation_setting(std::int32_t value) {
+    // NOTSA: WinMain modifies only bit0 of the shared SpecialFlags byte.
+    fog_.special_flags = static_cast<std::uint8_t>(
+        value <= 0 ? (fog_.special_flags & 254U) : (fog_.special_flags | 1U));
+}
+void Display::disable_fog() {
+    auto runtime = fog_runtime();
+    fog::set_enabled(runtime, false, frame_mode_.pending_logic_ticks);
+}
+void Display::reset_material() {
+    auto owners = queue_owners();
+    queue::reset_material(owners, queue_services(), arithmetic_);
+}
+void Display::set_alpha_test_enabled(bool enabled) {
+    // [platform:graphics] Native shader alpha testing implements this device state.
+    device_state_.render_states[29] = enabled;
 }
 } // namespace sadx::native

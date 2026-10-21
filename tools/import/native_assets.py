@@ -15,6 +15,16 @@ import sys
 from character_actions import SOURCE_SHA
 from movie_assets import import_content, import_movies
 from input_config import input_configuration
+from audio_settings import audio_settings
+from character_textures import import_character_textures
+from sound_banks import import_banks
+from title_menu import import_title_menu
+from stage_lighting import import_stage_lighting
+from native_settings import import_settings
+from regular_textures import import_regular_textures
+from menu_textures import import_menu_textures
+from music_assets import import_music_assets
+from sound_effects import import_sound_effects
 
 
 def digest(path):
@@ -32,13 +42,26 @@ def import_assets(game, output):
             break
     if model is None:
         raise ValueError("this install has no supported original character archive")
-    textures = sorted((path for path in files.values() if path.suffix.casefold() == ".pvm"),
+    textures = sorted((path for path in files.values() if path.suffix.casefold() in (".pvm", ".pvr")),
                       key=lambda path: path.name.casefold())
     if "segalogo_e.pvm" not in files:
         raise ValueError("missing SEGALOGO_E.PVM")
     output.mkdir(parents=True, exist_ok=True)
     subprocess.run([sys.executable, str(Path(__file__).with_name("character_actions.py")),
                     str(model), str(output / "characters/sonic-startup.actions")], check=True)
+    subprocess.run([sys.executable, str(Path(__file__).with_name("character_actions.py")),
+                    str(model), str(output / "characters/title.actions"), "--title"], check=True)
+    import_character_textures(game, output)
+    import_title_menu(game, output)
+    import_stage_lighting(game, output)
+    import_settings(game, output)
+    import_regular_textures(game, output)
+    import_menu_textures(game, output)
+    import_music_assets(game, output)
+    import_banks(game / "sonic.exe", system / "SoundData/SE", output,
+                 selected=(42, 36, 1, 71, 72),
+                 mod_directories=(game / "mods/sadx-input-mod", game / "mods/sadx-speedrun-mod"))
+    import_sound_effects(game, output)
     texture_directory = output / "system"
     texture_directory.mkdir(exist_ok=True)
     manifest = {"version": 1, "scope": "startup character actions and PVM textures",
@@ -58,6 +81,8 @@ def import_assets(game, output):
     import_movies(game, output)
     configuration = input_configuration(game / "mods/sadx-input-mod/config.ini")
     (output / "input-configuration.json").write_text(json.dumps(configuration, indent=2) + "\n")
+    audio = audio_settings(game / "sonicDX.ini")
+    (output / "audio-configuration.json").write_text(json.dumps(audio, indent=2) + "\n")
     return manifest
 
 

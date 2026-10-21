@@ -1,0 +1,32 @@
+{
+ "passed": false,
+ "values_match": true,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "fp_flag_mismatches": 1277,
+ "cases": 3810,
+ "seed": 423723,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_sources": {
+  "src/game/title_menu.hpp": "4c3b8720c1d2fee267baee1ce0682bcab5c31b7916f9226d7658b6e9e169ea5f",
+  "src/game/title_menu.cpp": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d",
+  "tests/probes/native_title_resources_probe.cpp": "df4cb764ff54025fbde2b9bc2109d89b59966da617d58a7548044e1c8e772250"
+ },
+ "limits": [
+  "Post-device x87 control0x007f; rendering/texture callees are traced owner seams. Flag mismatches remain partial."
+ ],
+ "source_ranges": {
+  "0x506010-0x50603f": "a560ac92a18eecb97bd42058fa6279943e059a7eb75c8d1699a50495db9f63f2",
+  "0x50bd10-0x50bd20": "ab26c4cc7316e27f1bf4fcbbcbca173a3356fc0501afcd7a743596dc6809b0ef",
+  "0x4319d0-0x431b01": "d4f455ce5ebcad27aca0b37a866717674977a9bf64b655d2921a6a22c932d616",
+  "0x506e10-0x506e37": "67415322a3e2580821aba5f8212c09dece737ae27d9b6428ebd395e4b49f0c01",
+  "0x506e40-0x506e90": "07e3193d8da4c6eb0314642934a19b1523c68ab55015ef2d01cc46db31a08a86"
+ },
+ "native_library_sha256": "9e4720cd126afb58538add948a424189159f985781d8d92f648e74108417c9a7",
+ "tracked_summary": {
+  "full_sha256": "d0c3f4b89ee5d7792a9c2a0b9f1fea0701205df2a27c12cf3ac5367501482b33",
+  "full_bytes": 1311,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

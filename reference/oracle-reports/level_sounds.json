@@ -1,0 +1,33 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "probe_sha256": "8689b8492a1de37a6ec0d583ce87adfcdab86e460de9c9119e7d052c3c7f7929",
+ "cases": 2296,
+ "seed": 20261105,
+ "mismatch_count": 0,
+ "mismatches": [],
+ "stores_calls_live_reads_match": true,
+ "limits": "LoadLevelSounds/LoadCharVoices selection, live owner reads and failure stores.\n\nExecutes original bodies and GetPlayerNumber. SetBankDir is a resource receipt for\nits separately verified pinned LoadSoundList_r implementation; dsStop_all is a\nreceipt for separately verified native cleanup::stop_all_sounds. Their internal\nbank decoding/PCM lifetimes are not retested here. The compatibility792f60 entry\nexecutes its actual RET0. Return values of LoadCharVoices are unused by its caller\nand excluded; LoadLevelSounds returns the actual dsStop_all receipt result.\n",
+ "initial_reset_words": {
+  "queue": 0,
+  "bank": 0
+ },
+ "native_sources": {
+  "src/game/level_sounds.hpp": "b464061b8311237d6ba1cbe5f694820f56df4d6a689f696d6fc9cd4b1332aa90",
+  "src/game/level_sounds.cpp": "11ca277befbbab24562fbab6bbf52ba8d43058efae351b5e42d56167c7d45cdf",
+  "tests/probes/native_level_sounds_probe.cpp": "901cdcc9fe279e1e787c9565cc56cc21679e45272b736214a42f059f40852428",
+  "src/game/game_cleanup.cpp": "b03a1bb62b391f331f929a4f544ae2846f70b1c34af1018956ba9396d8a54649",
+  "src/game/game_cleanup.hpp": "4270bb3d55e7f3ab79ddfedf187c7a0c07672360f1ef43e49ac68ab3c9fa5270"
+ },
+ "source_ranges": {
+  "0x424c80-0x424fb4": "cbe391a97fb1e2cea5933be240fe75e775f2e1799762f36cde8e220e5052d471",
+  "0x4245f0-0x4246b8": "2548e90db389b1133cd8fae033f4a313aec0f0785a5932bec35c535f76c59401",
+  "0x4144e0-0x4144e8": "59d4c6719d198fa7a265fd96993d62ea4f31baf2a95dcf62f77941f970da84d6",
+  "0x792f60-0x792f63": "4bc724f3b1d0caf4fe369c18cba3102e6c4ea057f63fe1587e3973134a7f755e"
+ },
+ "tracked_summary": {
+  "full_sha256": "6366584c346ac3314d139d2d047bf9736f6805b5282cea9dcd19c0827192b45d",
+  "full_bytes": 1890,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

@@ -1,0 +1,33 @@
+{
+ "passed": false,
+ "values_match": true,
+ "cases": 3291,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "fp_flag_mismatches": 2764,
+ "seed": 423723,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_ranges": {
+  "0x433f80-0x434370": "ee80c46793298b6fbbadcc99b478b7fe6a0b3bf621ac9a1ef6d2be7d088f7b8c"
+ },
+ "native_sources": {
+  "src/engine/pvr_draw.hpp": "0d8858d8f803e8776b6107449f7efa1571b32c9f26e624916a0103711e6e9101",
+  "src/engine/pvr_draw.cpp": "573d99925f4ef53a72205612eedbecf2d3330593e89beba140dd8ffe657dbad9",
+  "tests/probes/native_pvr_scaled_probe.cpp": "e4a7bf9f60d4b7b9ef450d6700aa98170cc7dc4515e1ace17be869276dc70763",
+  "src/cpu/fidelity_float.hpp": "f8ab14de7dc01f0d054ce4098e61af34b7e5ba39f2281fc506be9d1864869dcb",
+  "src/cpu/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
+  "src/cpu/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8",
+  "src/cpu/crt_integer.hpp": "f88d5d9b73239055150a35d0fe6363f773c7e62f5b2c1ce62eff5eaabe8333a6",
+  "src/cpu/crt_integer.cpp": "18d16777cc02344275575955f7773043ea9c6b48cf0197b725e838d1c5294a92"
+ },
+ "native_library_sha256": "5bc63127dd28916bc129d58410e7c9a5eedb844d6b023b09ff0e32f8201d42a2",
+ "limits": [
+  "Effective GVR_Init43434a mask byte applied; alpha submission1 for every format. Texture metadata is fixture-supplied; device pixels not claimed. Valid anchors0..8; unknown anchors read uninitialized source stack and native reports an explicit boundary. Low-six x87 flags are compared separately."
+ ],
+ "tracked_summary": {
+  "full_sha256": "9a879b92136dd45e2a0750055f7498015b9fafdfe7fb82d8fe866e51c15cd371",
+  "full_bytes": 1609,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

@@ -411,3 +411,6 @@ build/sadx-movie-qualify: src/apps/movie_qualify.mm build/libsadx-macos.a build/
 
 build/guest-draw-history-test: tests/unit/guest_draw_history.cpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< $(GUEST_LINK) build/libsadx-core.a -o $@
+
+build/native-game-view-native-probe.dylib: tests/probes/native_game_view_native_probe.cpp build/libsadx-guest.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) $< build/libsadx-guest.a build/libsadx-core.a -o $@

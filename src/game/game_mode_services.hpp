@@ -21,6 +21,18 @@ struct NativeServices {
     virtual void setup_character(std::uint32_t) = 0;
     virtual void reset_player_work() = 0;
     virtual std::int32_t run_movie(std::uint32_t) = 0;
+    virtual void clear_game() = 0;
+    virtual void reset_game() = 0;
+    virtual void prepare_title_initialization() = 0;
+    virtual void run_level_destructor(std::uint32_t) = 0;
+    virtual void free_regular_object_texlists() = 0;
+    virtual void free_character_texlists() = 0;
+    virtual void release_all_textures() = 0;
+    virtual void prepare_title_assets() = 0;
+    virtual void initialize_title_menu() = 0;
+    virtual void load_level_sounds() = 0;
+    virtual std::int32_t run_title_menu() = 0;
+    virtual void close_title_menu(std::int32_t) = 0;
 };
 
 // NOTSA: the same dispatcher with native session services.

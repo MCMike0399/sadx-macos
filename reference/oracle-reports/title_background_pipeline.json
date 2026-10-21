@@ -1,0 +1,35 @@
+{
+ "passed": false,
+ "values_match": true,
+ "cases": 437,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "fp_flag_mismatches": 437,
+ "seed": 423723,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_sources": {
+  "src/game/title_menu.hpp": "4c3b8720c1d2fee267baee1ce0682bcab5c31b7916f9226d7658b6e9e169ea5f",
+  "src/game/title_menu.cpp": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d",
+  "src/engine/pvr_draw.hpp": "0d8858d8f803e8776b6107449f7efa1571b32c9f26e624916a0103711e6e9101",
+  "src/engine/pvr_draw.cpp": "573d99925f4ef53a72205612eedbecf2d3330593e89beba140dd8ffe657dbad9",
+  "tests/probes/native_title_background_pipeline_probe.cpp": "e9bda27cf2e3aa3b7d5c1db444b12d0ada877bb53c3a2460ea96210a30d6c79c"
+ },
+ "native_library_sha256": "cd5b7ff5cfbb44be9af32a6058aad0a68ef91af237f64c4f0258477c0c07edbc",
+ "source_ranges": {
+  "0x50e470-0x51011c": "069a3f84267b5a359c9cd0a5051bb0e2ab5c9b22530384240e1648776d95cdb8",
+  "0x433f80-0x434370": "ee80c46793298b6fbbadcc99b478b7fe6a0b3bf621ac9a1ef6d2be7d088f7b8c",
+  "0x432ea0-0x432f40": "12a8a13da4294f6dce9d444e6d75afc04b200b27c2e3ea7fd4c516507609bfb7",
+  "0x432df0-0x432e9c": "e0226ab6988145475fb92e705baab61d81221b2973bf84c2d3f165db4c9df426",
+  "0x432f40-0x432f83": "e16a07d1083a79e7efc196fb73422ecb9be19c4f2da39ff774ebfdae9eeb72d0",
+  "0x433010-0x43305d": "533b9e76aadf8478f6a58e8e7798d2cf75c098e03b5d6ec4fa1adedacf0c7ed2"
+ },
+ "limits": [
+  "Runs actual background/color/scaled-quad bodies together; synthetic texture metadata and selector/submission receipts do not prove imported archive pixels. Effective43434a patch applied. Control0x007f, low-six flags separately reported."
+ ],
+ "tracked_summary": {
+  "full_sha256": "504d597a6566cdede609a4de697b7df0b648b316717e440d38e5e5e3979b3bd1",
+  "full_bytes": 1734,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

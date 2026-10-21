@@ -1,12 +1,21 @@
 #include "platform/mac/hid_switch_controller.hpp"
 #include "platform/mac/mac_audio.hpp"
+#include "platform/mac/mac_audio_playback.hpp"
+#include "platform/mac/mac_sound_bank.hpp"
+#include "platform/mac/mac_sound_effects.hpp"
 #include "platform/mac/mac_clock.hpp"
 #include "platform/mac/metal_device_frame.hpp"
 #include "runtime/native_display.hpp"
 #include "runtime/native_session.hpp"
+#include "runtime/native_title_scene.hpp"
 #include "runtime/movie_scene.hpp"
 #include "platform/mac/mac_movie.hpp"
 #include "apps/native_assets.hpp"
+#include "apps/native_lighting_assets.hpp"
+#include "apps/native_regular_texture_assets.hpp"
+#include "apps/native_menu_texture_assets.hpp"
+#include "apps/native_music_assets.hpp"
+#include "apps/native_sound_effects_assets.hpp"
 #import <AppKit/AppKit.h>
 #import <MetalKit/MetalKit.h>
 #import <QuartzCore/CAMetalLayer.h>
@@ -17,6 +26,7 @@
 #include <sstream>
 #include <map>
 #include <cstring>
+#include <thread>
 
 namespace {
 void save_image(id<MTLTexture>, const std::filesystem::path &);
@@ -87,14 +97,19 @@ class Application {
   public:
     Options configuration;
     sadx::native::app::ImportedAssets assets;
+    sadx::native::MusicAssets music_assets;
+    sadx::frame::ModeState frame_mode;
     sadx::native::Display display;
     std::shared_ptr<const sadx::character_pack::CharacterPack> characters;
     sadx::input::mac::HidSwitchController controller;
     sadx::audio::mac::AudioOutput audio;
+    sadx::sound_bank::mac::Banks banks;
+    std::unique_ptr<sadx::sound_effects::mac::Output> sound_effects;
     sadx::MacPerformanceCounter clock;
     sadx::native::Session session;
     std::unique_ptr<sadx::native::Input> input;
     std::unique_ptr<sadx::native::MovieScene> movie;
+    std::unique_ptr<sadx::native::TitleScene> title;
     std::unique_ptr<sadx::movie::mac::MoviePlayer> media;
     sadx::movie::mac::MovieUpdate media_update;
     sadx::audio::mac::AudioStats last_movie_audio{};
@@ -105,6 +120,7 @@ class Application {
     std::string failure;
     std::uint32_t key_event_frame = 0, decoded_frames = 0;
     std::uint32_t controller_instance = 0;
+    std::uint32_t music_open_events = 0, music_start_events = 0;
     bool focused = true;
     NSWindow *window = nil;
     std::int32_t pending_movie_volume = 0;
@@ -112,11 +128,14 @@ class Application {
     explicit Application(Options configuration, id<MTLDevice> device)
         : configuration(std::move(configuration)),
           assets(sadx::native::app::load_assets(this->configuration.assets)),
-          display(this->configuration.assets / "system"),
+          music_assets(sadx::native::app::load_music_assets(this->configuration.assets)),
+          display(this->configuration.assets / "system", frame_mode),
           characters(std::make_shared<sadx::character_pack::CharacterPack>(
               sadx::character_pack::CharacterPack::load(
-                  this->configuration.assets / "characters/sonic-startup.actions"))),
-          session(display.output(), characters, display.frame_state(), display.arithmetic(),
+                  this->configuration.assets / "characters/title.actions"))),
+          audio(36, 256), banks(this->configuration.assets),
+          session(display.output(), characters, display.frame_state(), display.arithmetic(), frame_mode,
+                  assets.character_textures, assets.frame_rate_setting,
                   [this](std::uint32_t port) {
                       if (port != 0)
                           throw std::runtime_error("native vibration port is unsupported");
@@ -141,13 +160,117 @@ class Application {
         if (!this->configuration.offscreen) {
             if (!controller.initialize(this->configuration.controller_library.string(), failure))
                 throw std::runtime_error(failure);
-            if (!audio.start({}, failure))
-                throw std::runtime_error(failure);
         }
+        session.attach_cleanup(display, assets.audio);
+        display.apply_fog_emulation_setting(assets.fog_emulation_setting);
+        session.attach_languages(assets.text_language, assets.voice_language);
+        session.attach_regular_textures(
+            sadx::native::app::load_regular_texture_assets(this->configuration.assets));
+        session.attach_menu_textures(
+            sadx::native::app::load_menu_texture_assets(this->configuration.assets));
+        session.attach_lighting(sadx::native::app::load_lighting_assets(this->configuration.assets));
+        if (!audio.start({}, failure) ||
+            !sadx::audio::mac::bind_pcm_output(session.pcm_state(), audio, failure))
+            throw std::runtime_error(failure);
+        sadx::audio::mac::MediaInitialization media_initialization;
+        if (!sadx::audio::mac::create_media_players(session.media_state(), session.pcm_state(),
+                                                   assets.audio, media_initialization, failure))
+            throw std::runtime_error(failure);
+        if (!media_initialization.music_error.empty())
+            throw std::runtime_error(media_initialization.music_error);
+        if (!media_initialization.voice_error.empty())
+            throw std::runtime_error(media_initialization.voice_error);
+        configure_music();
+        // NOTSA: imported CD assets have a logical native root, independent of Windows drive letters.
+        session.attach_sound_banks(banks.catalog(), banks.services(session.sound_channels(),
+                                                                    session.pcm_state()), "cd\\");
+        sound_effects = std::make_unique<sadx::sound_effects::mac::Output>(
+            this->configuration.assets, session.sound_queue(), session.sound_banks(),
+            banks, session.pcm_state(), audio, display.arithmetic());
+        session.attach_sound_effects(
+            sadx::native::app::load_sound_effects_assets(this->configuration.assets), *sound_effects);
+        title = std::make_unique<sadx::native::TitleScene>(session, display, assets.title);
+        session.attach_title(*title);
         input = sadx::native::Input::create(assets.input, display.sse(), failure);
         if (!input)
             throw std::runtime_error(failure);
+        title->attach_input({
+            [this] { update_controllers(); },
+            [this] { input->enable_pad_reading(); },
+            [this](std::int32_t) {
+                return static_cast<std::int32_t>(
+                    sadx::native::consume_soft_reset(session.soft_reset_state()));
+            },
+            [this](std::int32_t index) {
+                return static_cast<std::int32_t>(input->key_state(index).pressed);
+            },
+            [this] { return input->pressed(0); }
+        });
         configure_movie();
+    }
+    sadx::audio::mac::StreamPlayer &music_player() {
+        auto *player = dynamic_cast<sadx::audio::mac::StreamPlayer *>(
+            session.media_state().music_player.get());
+        if (!player)
+            throw std::runtime_error("native music player is unavailable");
+        return *player;
+    }
+    static std::int32_t reader_state(sadx::audio::StreamPlayer *owner) {
+        auto *player = dynamic_cast<sadx::audio::mac::StreamPlayer *>(owner);
+        if (!player)
+            throw std::runtime_error("native media reader is unavailable");
+        const auto progress = player->progress();
+        if (!progress)
+            throw std::runtime_error(progress.error);
+        // Native reader states corresponding to the source STARTED/STOPPED callbacks.
+        return progress.running ? 1 : 2;
+    }
+    void configure_music() {
+        const auto resource_key = [](std::string_view source) {
+            std::string result(source);
+            for (auto &character : result) {
+                if (character == '/')
+                    character = '\\';
+                if (character >= 'A' && character <= 'Z')
+                    character = static_cast<char>(character + ('a' - 'A'));
+            }
+            return result;
+        };
+        sadx::music::MediaServices services{
+            [this, resource_key](std::string_view source) {
+                const auto key = resource_key(source);
+                for (const auto &clip : music_assets.clips) {
+                    if (resource_key(clip.source_path) != key)
+                        continue;
+                    const auto path = configuration.assets / clip.pcm_path;
+                    std::string error;
+                    if (!music_player().prepare_clip(path.string(), error))
+                        throw std::runtime_error(error);
+                    ++music_open_events;
+                    return std::int32_t{0};
+                }
+                throw std::runtime_error("unimported native music resource: " +
+                                         std::string(source));
+            },
+            [this](std::int32_t attenuation) {
+                std::string error;
+                if (!music_player().play(attenuation, false, error))
+                    throw std::runtime_error(error);
+                ++music_start_events;
+            },
+            [this] { return reader_state(session.media_state().music_player.get()); },
+            [this] { return music_player().buffer_available(); },
+            [this](std::int32_t attenuation) {
+                std::string error;
+                if (!music_player().set_attenuation(attenuation, error))
+                    throw std::runtime_error(error);
+            },
+            [this] { return reader_state(session.media_state().voice_player.get()); },
+            [] { std::this_thread::yield(); }
+        };
+        session.attach_music(music_assets.catalog, std::move(services), [this] {
+            return static_cast<std::uint32_t>(clock.now() / 10000);
+        });
     }
     void encode(MTLRenderPassDescriptor *pass, id<CAMetalDrawable> drawable = nil) {
         @autoreleasepool {
@@ -167,10 +290,15 @@ class Application {
         }
     }
     void advance() {
+        session.begin_frame();
         pump_events();
         poll_devices();
         display.output().begin_frame();
+        display.begin_game_frame();
         session.advance();
+        session.update_sounds();
+        display.end_game_frame();
+        session.complete_frame_counters();
         present_target();
         session.complete_frame();
     }
@@ -224,16 +352,31 @@ class Application {
     }
     void report(std::ostream &output = std::cout) const {
         const auto movie_audio = media ? media->audio_stats() : last_movie_audio;
+        const auto *music = dynamic_cast<const sadx::audio::mac::StreamPlayer *>(
+            session.media_state().music_player.get());
+        const auto music_audio = music ? music->stats() : sadx::audio::mac::AudioStats{};
+        std::size_t bank_count = 0, bank_sample_count = 0;
+        for (const auto &bank : session.sound_banks().slots) {
+            if (bank) {
+                ++bank_count;
+                bank_sample_count += banks.sample_count(bank);
+            }
+        }
         output << "{\"execution\":\"native\",\"frames\":" << frames
                   << ",\"game_mode\":" << static_cast<int>(session.flow_state().mode)
                   << ",\"game_state\":" << session.game_state().game_mode
                   << ",\"stage\":" << session.stage()
+                  << ",\"act\":" << session.act()
                   << ",\"rings\":" << session.rings()
                   << ",\"global_timer\":" << session.global_timer()
                   << ",\"logo_frames\":" << session.logo_scene().state().frames
                   << ",\"logo_mode\":" << static_cast<unsigned>(session.logo_scene().state().mode)
                   << ",\"textures\":" << display.output().loaded_textures()
+                  << ",\"texture_slots_in_use\":" << display.output().texture_slots_in_use()
                   << ",\"completed_frames\":" << session.completed_frames()
+                  << ",\"pending_logic_ticks\":" << session.frame_mode().pending_logic_ticks
+                  << ",\"elapsed_logic_ticks\":" << session.loop_state().elapsed_ticks
+                  << ",\"frame_resync\":" << static_cast<unsigned>(session.loop_state().resync)
                   << ",\"input_held\":" << (input ? input->held(0) : 0)
                   << ",\"movie_decoded_frames\":" << decoded_frames
                   << ",\"movie_textures\":" << movie->loaded_textures()
@@ -244,6 +387,21 @@ class Application {
                   << ",\"movie_audio_nonzero_samples\":" << movie_audio.nonzero_samples
                   << ",\"movie_audio_completed_buffers\":" << movie_audio.completed_buffers
                   << ",\"movie_audio_device_error\":" << movie_audio.device_error
+                  << ",\"sound_banks_loaded\":" << bank_count
+                  << ",\"sound_bank_samples\":" << bank_sample_count
+                  << ",\"sound_bank_open_attempts\":" << banks.attempts().size()
+                  << ",\"music_open_events\":" << music_open_events
+                  << ",\"music_start_events\":" << music_start_events
+                  << ",\"music_audio_frames\":" << music_audio.submitted_frames
+                  << ",\"music_audio_nonzero_samples\":" << music_audio.nonzero_samples
+                  << ",\"music_audio_completed_buffers\":" << music_audio.completed_buffers
+                  << ",\"music_audio_device_error\":" << music_audio.device_error
+                  << ",\"sound_load_events\":" << sound_effects->load_events()
+                  << ",\"sound_play_events\":" << sound_effects->play_events()
+                  << ",\"sound_audio_frames\":" << audio.stats().submitted_frames
+                  << ",\"sound_audio_nonzero_samples\":" << audio.stats().nonzero_samples
+                  << ",\"sound_audio_completed_buffers\":" << audio.stats().completed_buffers
+                  << ",\"sound_audio_device_error\":" << audio.stats().device_error
                   << "}\n";
     }
 };
@@ -365,11 +523,11 @@ void Application::configure_movie() {
     host.reset_input_mask = [this] { return input->switch_data(); };
     host.reset_key = [this](std::uint32_t key) { return input->check_key(key); };
     host.held_buttons = [this] { return input->held(0); };
-    host.clear_game = [] { throw sadx::flow::UnrecoveredGameFlowCall("clear_game"); };
-    host.reset_game = [] { throw sadx::flow::UnrecoveredGameFlowCall("reset_game"); };
+    host.clear_game = [this] { session.clear_game(); };
+    host.reset_game = [this] { session.reset_game(); };
     movie = std::make_unique<sadx::native::MovieScene>(
         display, session.frame_mode(), session.renderer_timing(), session.movie_state(),
-        assets.movies, assets.music_volume, std::move(host));
+        assets.movies, assets.audio.music_attenuation, std::move(host));
     session.attach_movie(*movie);
 }
 

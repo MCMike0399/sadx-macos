@@ -1,0 +1,37 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "cases": 1416,
+ "mismatch_count": 0,
+ "mismatches": [],
+ "values_order_and_failure_prefix_match": true,
+ "native_library_sha256": "b24819bbc3201cb15867b343d5741a47ea5b0eda69bb7d82eddfe299d02bee61",
+ "native_sources": {
+  "src/engine/native_texture_lifetime.hpp": "0e6883f0c6ca2457060a61a16daeec4e84a3f7e6e6206e5a0b3d894f0e7485c3",
+  "src/engine/native_texture_lifetime.cpp": "a3b34ab7ea588b2a470b24c9dd6d73b5a27515204c36445681209e5788aa7fdc",
+  "tests/probes/native_native_texture_lifetime_probe.cpp": "86d48734ec7cf1f6b5ee4d12d3eed1f9aee1b1eb0a12c2085a652a19c5350e99"
+ },
+ "source_ranges": {
+  "0x77fb30-0x77fbc1": "37a61730b3032784c55eb403f1fcb969430b9f1d66fd8466f79da00287570edf",
+  "0x77fc50-0x77fc80": "6ffbb6b415e45c5fad03acaa7465f58e4513412007062b6e0059c00725e96373",
+  "0x406f00-0x406f64": "1406ab5cfa02a82817c2a51a87a88285cdf8392be213e5dbfc205fd115b830b6",
+  "0x40d3b0-0x40d3bb": "c2afb05ef96a06fa87865fc59c2cd2f55d4495a27c518d6119a37d362345d8ac",
+  "0x78cd50-0x78cdb8": "f7c689518c0f42726ace47fe532b308ce9413bed512192d0e384466e5846b5ab",
+  "0x77f5b0-0x77f607": "8a52c605bf3d74082accccc80856e8dae13a6585027e0ea0105851ff6fc5e64a",
+  "0x77f610-0x77f6d5": "68da087b8a9e09e6e865d7fac9b7a77143fb48ae9a9ae9db1061bc758602f3f6",
+  "0x77f7f0-0x77f90c": "230e724a9cf93d5a1388ea4e68bb1857c36a8e8d09679175f2cb24656f77edb0",
+  "0x78cbd0-0x78cd42": "e7773e53985d39961bfabd16b1358765edcb010ab0b11fc2bf18583284fa6e78",
+  "0x77f910-0x77f9c2": "6bf11d729994ec58113870d96c60eade35424a6ec172f3fe0b2d11525df226bf",
+  "0x77fbd0-0x77fc4b": "90498ec610c8441e14b4e7f8e7a4c5ca3c913ce972602cf74368f95ca33a3065",
+  "0x77f2f0-0x77f3d0": "e420dffdb1c774f74424ebc9510c667dd43901718a954c4b44bdd40b5bd0d846",
+  "0x77fa70-0x77fb21": "9977755c0515bbcb1d15f3bb89bef730316a251584e3494ca1ea9f7122525f1a",
+  "0x403290-0x403328": "728a9a535244580784ec7fc759846f876ae3bc8331417006d311cde7bb2c64f3",
+  "0x78bba0-0x78bbd0": "fb9f3ec6aac8b85b4af1fb6939cb5fc953ad4a6c47212ed47e38729e2f60eba9"
+ },
+ "limits": "Texture pool/list release and native lifetime ownership against original instructions.\n\nValid allocated texture objects only. D3D SetTexture/COM Release and CRT free are\nreceipts; unbind failure stops before the external call returns. No surface/data\nbytes or ignored HRESULTs are compared. Native in-flight retention is checked by\nthe unit test, not by substituting guessed source image bytes. Genuine source\nuninitialized acquisition fields TSP/texture parameters/palette version are\nreported undefined. Acquire executes original PVR parse/memory descriptor and\nconversion selection; native D3D image creation is an explicit upload receipt.\nRegistration currently supports valid empty slots and cached records; orphaned\nzero-count allocations from reference-count wrap are explicitly unsupported.\n",
+ "tracked_summary": {
+  "full_sha256": "74c3563e970a568646cf75adcead9c1db77cc2eb40663b159dc5daa36d987ab4",
+  "full_bytes": 2923,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

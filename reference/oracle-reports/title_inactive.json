@@ -1,0 +1,40 @@
+{
+ "passed": true,
+ "values_match": true,
+ "cases": 3753,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "seed": 423723,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_sources": {
+  "src/game/title_menu.hpp": "4c3b8720c1d2fee267baee1ce0682bcab5c31b7916f9226d7658b6e9e169ea5f",
+  "src/game/title_menu.cpp": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d",
+  "tests/probes/native_title_inactive_probe.cpp": "237598806cc44f4e75ae85eb77c6e39e7de9613c7bc2f11e826d34b4cb0fb485"
+ },
+ "limits": [
+  "Judges inactive phase0 and source invalid-phase returns; active initialization stops before its first call. Active phases1/2/3 remain tagged missing branches. All menu display wrappers compare their guard or stop before the first draw call. Puti first exec/MAlloc callbacks and wait-phase stores are compared; its unused indeterminate exit countdown is not read/claimed."
+ ],
+ "source_ranges": {
+  "0x5122d0-0x5124a0": "454e4c0df1f23e05b5f7fce476fc7888f29710c8cb5c70761085348ac8221da2",
+  "0x5053f0-0x505600": "26aa3127cffa12785f2fdb363c48c62ba13770ecd01af2cb91a976ea304f3511",
+  "0x50b220-0x50b490": "0818f6652c9eb968167b5c032565cdd1dd181ba68eab84e5c774dc4457c6f017",
+  "0x511270-0x511400": "b4a0c22bd2c788b370f10bee251e3689e1af73308ac71315721d5e10ee6d9ade",
+  "0x50bcb0-0x50bd10": "e5fda17db039e360e13cc344f6d1df736da96bd18e6ae47c3402aa18abc95995",
+  "0x50bde0-0x50bf30": "565880194b0a850cf449d41fdc4439a9538526902d6c48a0c0f938326f8844b0",
+  "0x5096f0-0x509860": "9f6e23e82a4f3dffb7dcd93bbf2d6a98753b81f5943bcdcb52c5891feffafbfd",
+  "0x5086e0-0x5087cc": "58ec7b0cba422fd79d3a8cfce20b4cf861cac157416b77d6dbff8f26a02fe7d1",
+  "0x50e110-0x50e270": "03a2edf279e8648534a904b3fdc9a2ee0b7b4d81132c97858f97ab85dfd5eaf0",
+  "0x50a450-0x50a6c0": "1f1489919b20b45f7be0dee14ab499613a80ff217a6f95f6af193715c14a21c5",
+  "0x50dea0-0x50e020": "0b40e6a230677dfe6fd7e723d28e2a0378177e08f71a22b2421becdbcbd62095",
+  "0x50d310-0x50d470": "18b3ee47bd9681be0646b3a4b001013f07418a21a11943bc3f934560c5a2a776",
+  "0x508300-0x5084a0": "5e2dd00d35b04f9a79282649102164b094e8165aba193786b9f6691935ad306c",
+  "0x50c010-0x50c126": "bd3877ebfb4cc15a14dc8d49c67dc2eec886b9a0ee4e1353855f922c702ec0bd"
+ },
+ "native_library_sha256": "7bed44b0a6811cb298eee41e51f52463068a0b966e1e6157eed3478811662aa7",
+ "tracked_summary": {
+  "full_sha256": "974c70eb8ecbd6917cf0a40c06164aed882dceadeccafe7f5875d35e60bd7346",
+  "full_bytes": 2374,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

@@ -23,9 +23,14 @@ void LogoScene::initialize_heap() {
 void LogoScene::initialize_tasks() {
     task_auxiliary_.fill(0);
     tasks_ = std::make_unique<TaskScheduler>();
-    const auto result = tasks_->initialize_source_pool(arena_);
+    const auto result = tasks_->initialize_source_pool(arena_, default_task_resources_);
     if (!result)
         throw std::runtime_error("native logo task-pool initialization failed");
+}
+TaskScheduler &LogoScene::task_scheduler() {
+    if (!tasks_)
+        throw std::runtime_error("native task scheduler used before initialization");
+    return *tasks_;
 }
 void LogoScene::set_character_selection(std::int32_t value) { character_selection_ = value; }
 void LogoScene::set_background(std::uint32_t top, std::uint32_t middle, std::uint32_t bottom) {
@@ -64,6 +69,11 @@ void LogoScene::default_blending() {
 void LogoScene::set_base_color(std::uint32_t color) { pvr::set_base_color(color, drawing_); }
 void LogoScene::draw_texture(std::uint32_t index, float x, float y, float depth) {
     pvr::draw_texture(index, x, y, depth, drawing_, frame_.display_disabled, output_, arithmetic_);
+}
+void LogoScene::draw_scaled_texture(std::uint32_t index, float x, float y, float depth,
+                                    float scale_x, float scale_y) {
+    pvr::draw_scaled_texture(index, x, y, depth, scale_x, scale_y, drawing_,
+                             frame_.display_disabled, output_, arithmetic_);
 }
 void LogoScene::draw_box(float width, float height, float depth, std::uint32_t color) {
     pvr::draw_box_fill_2d(0, 0, width, height, depth, color, frame_.display_disabled,

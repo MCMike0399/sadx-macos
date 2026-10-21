@@ -1,0 +1,30 @@
+{
+ "passed": true,
+ "cases": 1956,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "seed": 42500,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_ranges": {
+  "0x4250d0-0x4253bd": "74e82d862f9002f3eb20486a6e5f28c10134eb5fd044354bb5951f686ace594c",
+  "0x423ad0-0x423b19": "50d7ccc594ea4f60c89d47ac9b43d9aea539d301e41336648601942e954de9e0",
+  "0x423b20-0x423bdb": "88513047f1c30e7014357d2424707af6457ca81919e295da355622b4ca28df89",
+  "0x424590-0x4245d9": "6592addccc9bdd05813d62dd6085c71e9e968c310825c7a81d50f356eadde429",
+  "0x4246c0-0x42475e": "c5a469dff453b9e61f922413f9e7413828c8c1da8d43c34753599efafe8e1143"
+ },
+ "native_sources": {
+  "src/game/sound_effects.hpp": "d2ab0d32b7a4c8d6c6e8a8e8c75f7671e21282f5e7cb3409ab9489df6dacebcd",
+  "src/game/sound_effects.cpp": "839aa88de010e3751aa261629d8cda3f4638d9e7d2e9c5fab35c3830603e20c2",
+  "tests/probes/native_sound_server_probe.cpp": "b0c6bbe30465c0f16559aca8a5b2a299dfd78d63b53460f727205e077c396f4e"
+ },
+ "native_library_sha256": "4a1d9e529fd0e354b856181473880a8f8c8899a2bafc9da9e5aa35bf56824652",
+ "limits": [
+  "Original server, overlap, boss-bank and bank-sample selection bodies execute. PCM/3D/positional/distance/voice callees are exact traced resource seams; no physical playback claim. Valid native sample names include cues\u22121..1400; absent bank/data is covered; missing-name out-of-array source access remains explicit native boundary."
+ ],
+ "tracked_summary": {
+  "full_sha256": "5ce2ac70431692127478207cbb74ca257aba1f121957faf94244cd2889d6a71b",
+  "full_bytes": 1481,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

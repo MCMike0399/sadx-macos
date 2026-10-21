@@ -173,3 +173,15 @@ bool set_clip_range(float near_distance, float far_distance, State &state,
     return true;
 }
 } // namespace sadx::view
+
+namespace sadx::view {
+void set_screen_distance(std::int32_t angle, float width, State &state,
+                         const NinjaMath::SineTable &table, X87Context &fp) {
+    const NinjaMath math(table, fp);
+    const auto half_angle = angle / 2;
+    const auto sine = math.sin(half_angle);
+    const auto tangent = ExactFloat(fp, sine) /
+                         ExactFloat::retained(fp, math.cos_extended(half_angle));
+    state.sprite_scale = (ExactFloat(fp, width) / (tangent + tangent)).rounded();
+}
+}

@@ -1,6 +1,7 @@
 #pragma once
 #include "cpu/x87_math.hpp"
 #include "engine/graphics_frame.hpp"
+#include "engine/native_texture_lifetime.hpp"
 #include <array>
 #include <functional>
 #include <memory>
@@ -12,7 +13,7 @@ struct AnimationFrame {
     std::int16_t u_begin, v_begin, u_end, v_end;
     std::int16_t texture_index, attributes;
 };
-using TextureList = std::vector<std::shared_ptr<const graphics::Texture>>;
+using TextureList = texture_lifetime::List;
 struct Sprite {
     std::array<float, 3> position;
     float scale_x, scale_y;

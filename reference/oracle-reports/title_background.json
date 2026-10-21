@@ -1,0 +1,35 @@
+{
+ "passed": false,
+ "values_match": true,
+ "cases": 2125,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "fp_flag_mismatches": 1112,
+ "seed": 423723,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_ranges": {
+  "0x50e470-0x51011c": "069a3f84267b5a359c9cd0a5051bb0e2ab5c9b22530384240e1648776d95cdb8"
+ },
+ "native_sources": {
+  "src/game/title_menu.hpp": "4c3b8720c1d2fee267baee1ce0682bcab5c31b7916f9226d7658b6e9e169ea5f",
+  "src/game/title_menu.cpp": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d",
+  "tests/probes/native_title_background_probe.cpp": "4376ebadc9e78aa05872e6d3253d3b95397a82f16aeddad1ed4b566a354cfb88",
+  "src/cpu/fidelity_float.hpp": "f8ab14de7dc01f0d054ce4098e61af34b7e5ba39f2281fc506be9d1864869dcb",
+  "src/cpu/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
+  "src/cpu/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8",
+  "src/cpu/crt_integer.hpp": "f88d5d9b73239055150a35d0fe6363f773c7e62f5b2c1ce62eff5eaabe8333a6",
+  "src/cpu/crt_integer.cpp": "18d16777cc02344275575955f7773043ea9c6b48cf0197b725e838d1c5294a92",
+  "src/engine/task.hpp": "4b375e2d3d5250e43ba1999715644510d678675d826c0719ed18926f05f47cfc",
+  "src/engine/task_work.hpp": "f2a5c6b93f7a6bded90fb267d88ace2d0bcb45e34524750f3314bde7c9a4660c"
+ },
+ "native_library_sha256": "a2c75e49f351aeaa667ddb5bb20117198110082c2015075c8258c86bba00ef1d",
+ "limits": [
+  "Full original entry includes alternate tail after the firstRET. Renderer callees are traced receipts; scaled quad has a separate oracle. Caller uses post-device control0x007f; low-six flags remain separately reported."
+ ],
+ "tracked_summary": {
+  "full_sha256": "98cb22f8580762554eda7ab464dafc5e75d3a3d1dbf253e49f5e3bc953aa2106",
+  "full_bytes": 1732,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

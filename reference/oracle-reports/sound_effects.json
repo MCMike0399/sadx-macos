@@ -1,0 +1,30 @@
+{
+ "passed": true,
+ "cases": 2580,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "seed": 42370,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_ranges": {
+  "0x423d10-0x423d67": "6ccab825edd84e0334eb883a915994b925a9218d58fefffa7845bd7e4a045bae",
+  "0x423d70-0x423e19": "3e1ee07e8e5cec5ec9be9dfeeb39023aa7642acaf8e3cc8c6c0e733f9484f23e",
+  "0x505810-0x505821": "298c1970572dd92d0fe1fddb620662c162688a32accd594034c772945269e5be"
+ },
+ "native_sources": {
+  "src/game/sound_effects.hpp": "d2ab0d32b7a4c8d6c6e8a8e8c75f7671e21282f5e7cb3409ab9489df6dacebcd",
+  "src/game/sound_effects.cpp": "839aa88de010e3751aa261629d8cda3f4638d9e7d2e9c5fab35c3830603e20c2",
+  "src/game/sound_initial_state.hpp": "0a0ca4936202a736a73ddbda24c625d679c909346ba3aa37004e116fc483d3da",
+  "src/game/sound_bank.hpp": "d8206790236b142d5c2fb8da7e211766c8bfaf8f0268b82eb7261d6cbc436d85",
+  "tests/probes/native_sound_effects_probe.cpp": "0a14b6682123cd1148d0335c226fb8ab0ace790d32b3bfb96714c5769147fa25"
+ },
+ "native_library_sha256": "b38d8b75c06a5119966c1e247925e04573cd38d45c6430fd74c2687b566819bd",
+ "limits": [
+  "Cursor inputs0..35 are covered. Out-of-range source-array access is an explicit native boundary. Queueing only; sound-server/sample/PCM playback is outside these entrypoints."
+ ],
+ "tracked_summary": {
+  "full_sha256": "878f44d2397faf571b54f8d27b2106217cbb4c23e52f3bb92c6451a2cf219574",
+  "full_bytes": 1342,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

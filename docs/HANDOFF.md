@@ -4802,3 +4802,195 @@ The product still needs native boot/title, resources and gameplay recovery.
 * Gate: make -j10 gate with pinned private CMake exited 0; 187 native programs, 92 Python tests, four reference journeys passed. Four earlier isolated-checkout attempts exited 2 because tool/asset/corpus inputs were absent; complete input preflight and exact fixture reruns resolved them.
 * Limits: no gameplay performance claim; native title WIP was excluded from this isolated gate. Native connected story remains incomplete.
 * Next: integrate native title input and actual music playback, then continue the normal-input story route.
+
+## 2026-10-20 — Native title dependency integration in progress (no new gate yet)
+
+The real assets-only application follows normal Enter at frame500 through Movie,
+Clear, Reset and save preparation into TitleInit. Latest completed run
+`build/native-title-lighting-journey.log` exits1 at
+`native_regular_object_texture_loading`, after the real title initializer loaded
+four effective-profile sound banks (91 decoded samples,11 open attempts) and ran
+native stage lighting and camera setup. Its movie delivered78848 frames,
+94266 nonzero sample values,74 completed buffers,error0. The inspected frame501
+is black; this is NOT visible Title/N2 or native gameplay. Earlier bank-only run
+stopped at stage lighting. No new full gate has been run; gate180 remains last pass.
+
+Current source is uncommitted integration, with independent owners active. Root
+owns App/Session/Display/TitleScene composition and shared builds. `native_title`
+owns title core/factories/probes/imported menu data; `native_logo` finished task
+rendering+lighting and now owns effective regular texture wrappers/importer;
+`story_route` owns the durable reference continuation. Do not overwrite their files.
+Task/display and lighting handoffs: `/private/tmp/sadx-task-display-handoff.txt`,
+`/private/tmp/sadx-stage-lighting-handoff.txt`. Fresh Sol6.1 medium review
+`review_title_dependencies` found no defect in task/lighting/camera and independently
+compared all36960 imported/native lighting bytes with the original image.
+
+Task display:236 dev/556 holdout zero mismatches,6 mutants killed; old lifecycle19
+and work16 sequence judges pass unchanged. Lighting:704 dev/1408 holdout zero,
+7 mutants killed. Camera SetViewAngle:2379 dev/2379 holdout zero,4 mutants killed
+(`/private/tmp/sadx-camera-view-mutants/summary.json`). Frame counter scalar source
+and native code were added by title worker; root wires outer-loop start before
+input and completion scalars before presentation. Nested movie WaitVSync is a
+separate entry and does not perform those scalar stores.
+
+Important recovered facts: stage lighting table entry255 starts zero; first source
+sentinel is174, and InitDefaultStageLight writes255's sentinel later. Palette255
+already contains FF. Cocoa decimal parsing can change the intermediate binary64
+number, but native binary32 conversion matches all source bits (unit
+`native_lighting_assets`, source hashes from importer). SetViewAngle437240 is NOT
+just njSetPerspective402ed0; it has signed camera-type28..30 interpolation and a
+post-call owner reload. Effective language comes from the selected loader JSON
+profile, not sonicDX.ini. Current imported selection gives text1/voice1.
+
+Regular texture dependency must implement active loader LoadPVM_r at421180 and
+njLoadTexture_Wrapper_r at4228e0. The original wrapper is not the production rule.
+The loader can expand a target list or repeat its final loaded entry; no strict
+archive-count equality. It sets canonical LoadingFile/resync before backend load.
+Root exposed LogoRenderer::load_pvm_archive as a raw asset backend only; worker
+owns the semantic wrapper. Apply the same wrapper to the original logo caller
+when ready, preserving the previously exact16 screenshots.
+
+Build preparation commits since gate180:1e14116,3231ca2,479dd27,7c96922,773ddcc.
+They are explicit native dependency/judge preparations, not additional gate passes.
+The camera build preparation first used a wrong unittest pattern (0 tests); the
+correct test_judge.py was subsequently run and all11 passed. New test rows and
+one explicit native screen probe rule are being added with the additions-only
+judge procedure. Original judges/tolerances/cases remain unchanged.
+
+### 2026-10-20 — native title constructors, task callbacks and caller composition (worker)
+
+* Actual fresh-title sequence now has all thirteen native factories, typed auxiliary work and
+  real scheduler callbacks in native_title_scene/native_title_tasks. Source inactive exec/display
+  guards preserve CharacterSelect aliases, unconditional option animations and Puti first-exec
+  MAlloc/callback stores; active unrecovered branches fail explicitly. Dialog preserves genuinely
+  indeterminate allocation counters with semantic optionals. Mode-resource caller506010 and title
+  fade/color helpers are composed; next resource stop is actual menu texture ID18 acquisition.
+* Standalone repository C++17/Werror builds and unit pass;15 importer tests pass. Original-instruction
+  dev/holdout: factories2268/2816 PASS; inactive exec/display/Puti3753/4301 PASS. Main21372/21920,
+  dialog2652/3200 and resource/color3810/4358 compare every value exactly but remain FP partials
+  (271/282,667/753 and1277/1514 flag differences respectively). Prior32 mutations and18 new
+  mutations caught, plus earlier three frame-counter mutations. Standard frame-counter CLI2004 PASS.
+* Engine DeleteAllObjects40b730 preserves ascending list order, exec-null survivors and recycled
+  saved-next slots:244/305 compared cases match;6/9 individually listed reentrant-destructor/source
+  free-list paths remain unverified. Unchanged display236 and lifecycle19-sequence judges pass.
+  Readability/global owners pass; profile check0UNHANDLED/0undetermined. No shared make/full gate,
+  live title image, independent review or complete title/story claim from this worker. Parent owns
+  final integration/review. Evidence: ignored native-menu-family/native-menu-callback/title-support
+  dossiers; private /private/tmp/sadx-title-menu-stage/*-final-{dev,holdout}.json and mutation reports.
+  No original assets/binaries committed; no push.
+
+### 2026-10-20 — title review fix: Puti task-owned work
+
+* Fresh review found that a second Puti task reused scene-cached work and skipped its own
+  auxiliary allocation/callback stores. Removed that cache; source update_puti now reads and
+  publishes only the current task's typed auxiliary work. Scene passes the task directly.
+* Regression runs two actual source-pool tasks through scheduler callbacks while retaining and
+  poisoning the first work: two distinct16-byte allocations and callback installations, then
+  both tasks reuse their own work. Unit and strict C++17 runtime compilation pass; unchanged
+  inactive original oracle3753/4301 dev/holdout passes. A stale-cache mutant fails the new
+  repeat-task assertion. Readability0 regressions. Reviewer recheck pending; background unstarted.
+
+### 2026-10-20 — native title background and scaled PVR caller (worker)
+
+* Full original50e470 background now draws clouds/water, sliding logo, lettering and blinking
+  prompt through native433f80 scaled PVR quads. Scene binds canonical menu texture lists,
+  material/color state and Display scale/tick owners. Importer preserves nine layout floats
+  with inverse-checked binary32 words. Original-PC work+34 is now float cloud_offset; the
+  existing title judge retains its raw words. Corrected runtime adva counter binding to
+  Session.title_logic_ticks_3b11184; cleanup reset_work_3b11190 remains a separate owner.
+* Private strict C++17 builds/unit and17 importer tests pass. Original-instruction dev/holdout
+  compare every value exactly: background2125/2673, scaled3291/3839, composed background→real
+  color/material→scaled vertices437/649, unchanged title21372/21920, unchanged PVR3957.
+  These are FP partials, not full passes: respective flag differences1112/1444,2764/3184,
+  437/649,270/282 and1932. Composed tests include inherited colors and odd texture dimensions;
+  texture lookup/final submission remain receipt seams, with no GPU/pixel-image claim.
+* All15 background/scaled/base mutations and prior32 title mutations are caught. Source
+  evidence: native-title-pvr-scaled-texture dossier ev_32f5e382a25fc601720bdcf85a82d272de240aaa12076e96b1db5c93167b218a;
+  full background PEImage continuation through51011c, since Ghidra falsely truncates at the
+  texture setter. Reports/mutants live in /private/tmp/sadx-title-menu-stage. Parent owns
+  profile registry update for GVR43434a byte38→00 (native alpha1), symbol integration, fresh
+  review, full gate and actual title image. No shared make/gate or live image claimed here;
+  source LoadLevelSounds and then Title input/music remain required connected boundaries.
+
+### 2026-10-20 — connected native title input and transition (worker)
+
+* Actual title control50e300 now initializes timing/save-menu state, starts music once per
+  task, waits150ticks, checks Escape/Start and follows signed demo timeout/music-state rules.
+  Original-PC work+2c is a scalar music_started sentinel, replacing the misleading camera
+  handle; existing probe raw inputs/results are preserved. Scene borrows canonical save,
+  exit, input, texture-ready and configured-audio owners. Real music request/manager tasks
+  compose the other worker's music core, with source levels/callbacks/CAlloc8 and canonical
+  media state. Voice-file playback remains an explicit boundary when actually requested.
+* Mode transition505b40 stops menu music before setting sequence.waiting=1 and waiting_mode.
+  An initial semantic-field mismatch (fade_out versus waiting) was caught during composition
+  inspection and fixed; new original comparison also executes actual sequence505c20 to prove
+  its nine-ticks-remaining state after the first update. Per-task unit uses two actual source
+  pool handles and verifies one music request each, with sentinel published before the call.
+* New original-instruction dev5589/holdout6137 PASS;17 new input/transition mutations and
+  prior32 title mutations caught. Strict private C++17/Werror unit/runtime compilation pass;
+  unchanged old title judge21372/21920 values match (FP flags remain partial). Profile0
+  UNHANDLED/0undetermined, readability0 regressions, layers0 violations, owners0duplicates.
+  Evidence: native-menu-callback-50e300 ev_5ed243f8385424e716e14920a702d73eefe6de9ab3eb219356ba34515ee45d13;
+  native-title-common-mode-procedure ev_570d8ddd20295f092b909dc8a3ac3ea6e732838ab0e4bc80b3f51e67234fb07d.
+  Private reports: /private/tmp/sadx-title-menu-stage/title-input-{dev,holdout}.json and
+  title-{input,transition}-mutants.json. Next Start-specific boundary505810 is confirmed
+  dsPlay_oneshot423d70(2,0,0,0), still explicit native_title_confirm_sound. No shared build,
+  full gate or live image claim from this worker; parent owns fresh review and actual run.
+
+### 2026-10-20 — native task owner cleared inside destructor
+
+* Actual Start transition crashed in TaskScheduler::destroy_task after the music destructor
+  cleared the canonical TaskHandle passed by reference. The source passes its task pointer by
+  value. Scheduler now pins that pointer value at entry, covering every caller without a
+  music-only workaround. New task_callback_lifetime regression clears or replaces the same
+  caller owner, checks four arena-work releases and auxiliary-native release order: old source
+  rc139, fixed source rc0. Unchanged lifecycle19-sequence/display236/delete244 original judges
+  match; existing source-reentrant exclusions remain. Parent owns actual rebuilt Start run.
+* New title-input reentry vectors mutate live buttons/menu-ready/BGM during keyboard/readiness
+  callbacks: original5877/6425 dev/holdout PASS, three cached-owner mutants caught. Existing
+  vectors/expectations retained; no existing registered judge edited. Prior title FP dev count
+  corrected to270 in the background handoff. Sound server/confirmation recovery continues.
+
+### 2026-10-20 — connected confirmation sound and native sound server (worker)
+
+* Title confirmation505810 now queues actual dsPlay_oneshot423d70 through native channel
+  search423d10. New semantic sound_effects module consumes canonical SoundInitialState,
+  bank identities and positional-task owners through real dsSoundServer4250d0. Includes
+  exact overlap/boss-bank/sample-name selection, record expiry, parameter conversion and
+  explicit resource/3D/distance/voice callees. Existing address-shaped sound_manager reference
+  remains unchanged readability debt. Parent binds the real LoadPCM→volume→Play backend;
+  load does not start playback. New imported bank thresholds and raw-WAV loop metadata are
+  typed data, with source-byte/hash/inverse and new-record zero-fill validation.
+* Private strict C++17/Werror builds/unit pass; importer11 tests and actual importer→Cocoa
+  roundtrip pass. Original dev/holdout: requests2580/3128 PASS; server2084/2468 PASS (real
+  overlap, boss-bank, sample lookup and composed confirmation entry). Volume/pan/pitch2440/
+  3488 every value matches but x87 flags remain partial553/920. WAV parser506 PASS includes
+  203 actual imported payloads; three policy mutations and fifteen queue/server/parameter
+  mutations caught. Unchanged legacy sound-manager956, lifecycle19 sequences, display236
+  and delete244 compare exactly, retaining previously documented reentrant exclusions.
+* Scope: final PCM, distance, 3D/positional and voice operations in the server judge are traced
+  resource receipts. LoadPCM's source guard/order matters: initialized→parse/validate nonzero
+  data→close parser→resolve loopflag2 from sampler metadata→publish loop mode→StopPCM→create
+  buffer, then the caller sets volume and PlayPCM starts it. Failed parsing must not invent a
+  replacement buffer. Source volume0 maps−1280 hundredths dB; pitch is integer Hz despite SDK
+  float prototype. Original WAV endpoints left uninitialized remain JSONnull when loopcount0.
+* Parent's rebuilt actual Start run no longer crashes, loads/plays one real SFX with nonzero
+  output/deviceerror0 and reaches next explicit native_file_select_initialization at frame759.
+  This worker did not run a shared build/full gate or claim Windows/native PCM equivalence.
+  Fresh SFX/platform review pending. Evidence native-title-one-shot-sound ev_c4824c5ceaff1a9d576aec5168f28de07ed1fefd6030677d1dc8f3e16c9c2d49;
+  native-title-sound-server ev_e8ee66ebba02a616ae72d1d63e2a9be0c54b890f4452b0f452ab77854a6a7400;
+  native-sfx-wave-read-format ev_cf81429602776b261e8442439b49b0eb5c3291ec2ae13e9d539fea26baa4a1ba.
+  Reports/mutants: /private/tmp/sadx-title-menu-stage/sound-*.json. Profile0UNHANDLED/
+  0undetermined; readability0 regressions/layers0 violations. Parent owns423d10 symbol override,
+  new judge/unit registration, final integration/review and live journey reporting. No push.
+
+### 2026-10-20 — Native title and audible Start transition (track J/R/E, full gate exit 0)
+
+* Outcome: the assets-only native app now runs Start → logos → real movie/normal Enter skip → full Sonic title, plays imported title music, and accepts normal Enter with real confirmation SFX. It stops at `native_file_select_initialization` (frame 759); no native gameplay claim.
+* Connected: canonical cleanup/texture lifetimes, regular/menu resources, title tasks/background/input, task display/camera/lighting, frame counters, level banks, music and the per-frame sound server. A destructor clearing its own caller handle exposed a real crash; scheduler entry now retains the task, with old-source red exit 139 / fixed green regression.
+* Images/state: 16 startup checkpoints exactly match reference pixels and state; the full title matches every pixel at global timer 240 (native 740/reference 742). The two-present movie-skip offset remains an explicit limit. Final snapshots report 432 live texture slots and released movie resources.
+* Audio: actual title music and confirmation buffers delivered nonzero samples without device errors. Full imported 579,584-frame title stream also passed mute/resume, EOF and restart; PCM load-without-play, failure preservation, disabled guard and source timer expiry were checked. Advanced variable-rate/sampler/3D/voice branches still stop explicitly.
+* Verified: `make -j10 gate build/sadx-native NATIVE_CONTROLLER_CMAKE=…` exited 0: 211 native programs, 172 Python tests, four reference journeys. Thirty-six targeted oracle commands all matched compared values; three exited 1 for recorded FP flags. FP partials and wider existing failures are unresolved, not promoted to pass. Fresh independent reviews covered the recovered clusters and runtime sound/task ownership.
+* Production separation: a clean source-only checkout built without original EXE/DLLs or prebuilt game objects, then ran against imported assets and reproduced the exact title. First isolated build exited 2 for absent CMake; supplied pinned native CMake resolved it. See `native-title-production-closure.json`, `native-title-connected.json`, `native-title-oracle-exits.json` and `native-title-integration-gate.json`.
+* Memory: reference observer remains 1.8 GB after 1,027 more normal frames following the 9.2 GB diagnostic-history recovery; the connected Emerald Coast replay survives. Reference progress remains distinct from native.
+* Next: integrate reviewed private menu resource cleanup; native file-select initializer/save-list codec and menu voice recovery are staged privately. Preserve the canonical `list_data_` owner during its typed migration; use real save enumeration and prefix reads. Native Chaos 0 through Windy Valley, relevant voice playback, gameplay 63 FPS and full acceptance remain open.

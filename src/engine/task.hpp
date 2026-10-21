@@ -38,6 +38,9 @@ public:
     TaskWorkHandle motion_work;            // +0x24
     TaskWorkHandle force_work;             // +0x28
     TaskWorkHandle auxiliary_work;         // +0x2c
+    // NOTSA: typed native auxiliary data. Arena storage retains allocation identity;
+    // menu and other native callbacks use this object as the authoritative work.
+    std::shared_ptr<void> auxiliary_native_work;
     struct ObjectControl {
         std::uint8_t flags_at_2 = 0;
         TaskHandle task_at_4;
@@ -117,6 +120,7 @@ struct TaskGraphNode {
     TaskWorkHandle primary,motion,force,auxiliary;
     std::shared_ptr<PlayerTaskState> primary_state;
     std::shared_ptr<PlayerAuxiliaryEffectTaskWork> auxiliary_effect_work;
+    std::shared_ptr<void> auxiliary_native_work{};
     std::shared_ptr<Task::ObjectControl> control;
 };
 struct TaskGraphState {
@@ -234,6 +238,16 @@ public:
     // original invalid indirect call as a tagged failure, not a silent skip.
     TaskResult run_children(const TaskHandle& parent);
 
+    // Display traversal leaves the execution callback context untouched.
+    // FUNCTION: SONIC 0x40b4f0 DisplayObjectIndex
+    TaskResult display_index(int list_index);
+    // FUNCTION: SONIC 0x40b130 DisplayObjectChildren
+    TaskResult display_children(const TaskHandle& parent);
+    // FUNCTION: SONIC 0x40b540 DisplayTask
+    TaskResult display_game_tasks(const std::function<void()>& reset_material);
+    // FUNCTION: SONIC 0x40b730 DeleteAllObjects
+    TaskResult delete_all_tasks();
+
     // FreeTask 0x40b6c0 replaces exec with the recovered destructor for members.
     TaskResult free_task(const TaskHandle& task);
     // Explicit host lifetime operation, not an implementation of guest FreeTask.
@@ -273,6 +287,8 @@ private:
     TaskResult source_work_failure(const TaskHandle&, const TaskWorkResult&,
                                   std::uint32_t boundary) const;
     TaskHandle resolve_snapshot(const TaskHandle&) const;
+    // NOTSA: common sibling loop shared by indexed and recursive child display.
+    TaskResult display_chain(TaskHandle next);
 };
 
 } // namespace sadx

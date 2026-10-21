@@ -1,0 +1,85 @@
+{
+ "passed": false,
+ "values_match": true,
+ "fp_flag_mismatches": 270,
+ "first_fp_flag_mismatches": [
+  {
+   "case": 14116,
+   "source": 0,
+   "native": 32
+  },
+  {
+   "case": 14118,
+   "source": 0,
+   "native": 32
+  },
+  {
+   "case": 14121,
+   "source": 0,
+   "native": 32
+  }
+ ],
+ "cases": 20872,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "seed": 20261020,
+ "limits": [
+  "Dependency bodies are traced seams, not recovered by this comparison.",
+  "CAlloc/MAlloc null faults are not compared; native allocations report explicit failure.",
+  "Compared low-six x87 exception flags differ; all compared stores, calls and returns match. Full stack/tag/condition flags are outside the arithmetic API.",
+  "Title floating-point cases use explicit post-device control word0x007f; other control words are not claimed."
+ ],
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_ranges": {
+  "0x5031e0-0x503269": "d033124154e620234c24eeaf5fc3fa92e4d05393f2100ceb0bf94049f43ad5cd",
+  "0x5032e0-0x503376": "7beebbc5f7eafbf021e317582ad99c72b1ca73d22ba4fa1a4892f8b8efec915e",
+  "0x5033f0-0x503441": "1c6f18b2dbb7a623dcbb9ba2767c7006f15a21040a8062a806271f34749481f0",
+  "0x5034a0-0x503508": "4ac99e8dd9149aa42acb87b3b58bd4c7f0c145640121fe008573e4aad2eff87c",
+  "0x505b90-0x505c1d": "52e60b85c7eaeb18cff758dbe5468e862bbaf2850a1dc6dd7f5e20b62f56c5a4",
+  "0x505e00-0x505e5d": "e7a998813c23c6ee3aa3a78fa3b86e740fe116c0b031c64623756a47ea8b272c",
+  "0x505850-0x505867": "46872337eea23d97db02b007b91014ba220bed1ecf029e510dc5a1b9e3dbfa11",
+  "0x503480-0x50349e": "27af7d23ae3734a5321609d8a8402addd98ddead2a96a9b824e004220a7d76d5",
+  "0x505ed0-0x505f33": "131a4318e47885ccb181101846a4ba29a11096e3e5a24d7d96f8da15923e206a",
+  "0x505fb0-0x505fd4": "0a67fb8dbb36d5f5984aa861f49b09407c9818951c1e53307c8a3fd3f51ab7b9",
+  "0x425670-0x42568d": "b8e38807f8320ccfe961beaeef0f7aaf7280725182298efb6ee6d15c099aed7f",
+  "0x425620-0x425662": "8323430cbfd8c6078613a113c32a3ff593190ae10cad760c37cfff1ba52ca9b1",
+  "0x432650-0x43268c": "970a4a69a3b974fa878728269c074d011880b9c56cdbcc74a438fe2318fbc6b4",
+  "0x432690-0x4326ee": "7731613269d60af29c96397e5a06f7cf5f7fc92229a90cb7c888995839d197a6",
+  "0x432c60-0x432ca4": "2f6b782ef7392e37cb346b64a632541a5fb2685d0b1c5e5bda52225ac685fe0e",
+  "0x505c20-0x505d65": "472a756f97c1fd37d51c1d17539fb8ea5faf033df21e76a1e86c20af7cf9ec27",
+  "0x505b60-0x505b87": "04f910755b62ca01f4bd04bf33fc211683ba3c4ade7e7599931a931ae208132e",
+  "0x510390-0x5103f2": "ef6e1529e139fa95d3c7b714ac3bd0f78dbad591d2c159f135da2e8e3cb145ca",
+  "0x505a80-0x505ad3": "6fc52ea5a1f86efcb0a542962c2f9452bafa161f7c9e0ea611194aacf36c8bf8",
+  "0x413920-0x41397b": "9ef2fbd26e4bca8dca79b38723c6331b5f86c3cd7767287ec1935b1e4a68022a",
+  "0x510120-0x51019e": "81e0d7b98899470f27ad026824af7167e5078c30ec4cddcb8d060a665f419407",
+  "0x5101a0-0x51033e": "b8c219e44ab3894cbe2df6b00fbfc67fcc4a5c761c5b5548d47ba0556718859b",
+  "0x510350-0x510385": "855fb798388320527817fb6c99bf70ea22001cdc32e5bfac6231ff92770193b9",
+  "0x5033b0-0x5033e3": "1732912879ac2374015801e55d1519d61b39c4f63e338fff71508f342ced0f77",
+  "0x503380-0x5033a1": "8e5ddd6f124ea015295e60e34580b27e86b521559083dc10e0f4348b369e9bae",
+  "0x503270-0x5032d6": "c8968dd11badc2a46ad4795771d299a5b3d1a4ff06dff14814666ee3003e2cd5",
+  "0x503450-0x503476": "85420c9b847c30fb9e3dd408c0a3fa56bd40d1e2a3d3916c895df874a9c6a97d",
+  "0x505b20-0x505b3d": "9ce10cd5886c3d0e2f5512c2af1e3edf763fa5faf48dc55ee236637ee660d326",
+  "0x5060e0-0x5060ed": "8fdbf2df707d335efb45f3726243788f9fd5e00544bd8284beb5d3035824e171"
+ },
+ "native_sources": {
+  "src/game/title_menu.hpp": "4c3b8720c1d2fee267baee1ce0682bcab5c31b7916f9226d7658b6e9e169ea5f",
+  "src/game/title_menu.cpp": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d",
+  "tests/probes/native_title_menu_probe.cpp": "d995162b63f435001e27220c41e2516303208201f6d4a9a9f7e31a26b95e03bf",
+  "src/engine/task.hpp": "4b375e2d3d5250e43ba1999715644510d678675d826c0719ed18926f05f47cfc",
+  "src/engine/character_resources.hpp": "33e1c852d47b128bda60d0fdaab6d8fd1120113f752bf212be4009a190d11928",
+  "src/game/game_cleanup.hpp": "4270bb3d55e7f3ab79ddfedf187c7a0c07672360f1ef43e49ac68ab3c9fa5270",
+  "src/engine/game_frame_control.hpp": "676b9b2915b4e826737130231825fbb333b59a15346c5cb09444d37113d074f3",
+  "src/engine/frame_loop_native.hpp": "af759d873cd01e3bc2a7e6e4101067ef62eb4e6c1e13234ff7583a92e7e45aeb",
+  "src/engine/frame_loop_native.cpp": "195c4a6c30602b9d7669b3deb66f8ea8571fdfbdd6993528b9558199a3cd36b6",
+  "src/cpu/fidelity_float.hpp": "f8ab14de7dc01f0d054ce4098e61af34b7e5ba39f2281fc506be9d1864869dcb",
+  "src/cpu/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
+  "src/cpu/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8"
+ },
+ "native_library_sha256": "9f8bbf4c31d6aa49c3f03b09af6ddfb362739d15300f47f5a22e7b16d7de4c61",
+ "tracked_summary": {
+  "full_sha256": "61bd7fcd07e68c999a98850ef95e4c1111d2de2c2939cd779fd07cb82b33a524",
+  "full_bytes": 5046,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

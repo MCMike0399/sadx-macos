@@ -5,6 +5,7 @@
 #include <atomic>
 #include <cmath>
 #include <fstream>
+#include <limits>
 #include <mutex>
 
 namespace sadx::audio::mac {
@@ -91,10 +92,12 @@ struct AudioOutput::Impl {
     };
     mutable std::mutex mutex;
     std::vector<Voice> voices;
+    std::size_t buffer_frames = 1024;
     std::uint64_t next_token = 1;
     AudioQueueRef queue = nullptr;
     std::atomic<bool> stopping = false;
     bool presentation_clock_seen = false;
+    bool started = false;
     std::ofstream capture;
     std::uint32_t capture_bytes = 0;
     AudioStats statistics;
@@ -131,10 +134,10 @@ struct AudioOutput::Impl {
         self.fill(queue, buffer);
     }
     void fill(AudioQueueRef target, AudioQueueBufferRef buffer) {
-        constexpr std::size_t frames = 1024;
+        const auto frames = buffer_frames;
         auto* samples = static_cast<float*>(buffer->mAudioData);
         mix(samples, frames);
-        buffer->mAudioDataByteSize = frames * 8;
+        buffer->mAudioDataByteSize = static_cast<UInt32>(frames * 8);
         const auto status = AudioQueueEnqueueBuffer(target, buffer, 0, nullptr);
         if (status != noErr) {
             statistics.device_error = status;
@@ -152,7 +155,9 @@ struct AudioOutput::Impl {
     }
 };
 
-AudioOutput::AudioOutput(std::size_t capacity) : impl_(std::make_unique<Impl>()) {
+AudioOutput::AudioOutput(std::size_t capacity, std::size_t buffer_frames)
+    : impl_(std::make_unique<Impl>()) {
+    impl_->buffer_frames = buffer_frames;
     impl_->voices.resize(capacity);
 }
 AudioOutput::~AudioOutput() { shutdown(); }
@@ -163,6 +168,11 @@ bool AudioOutput::start(const std::string& capture_path, std::string& error) {
     error.clear();
     if (impl_->queue) {
         error = "audio output already started";
+        return false;
+    }
+    if (impl_->buffer_frames == 0 ||
+        impl_->buffer_frames > std::numeric_limits<UInt32>::max() / 8) {
+        error = "audio buffer frame count is outside the native queue range";
         return false;
     }
     if (!capture_path.empty()) {
@@ -178,12 +188,14 @@ bool AudioOutput::start(const std::string& capture_path, std::string& error) {
     auto format = mix_format();
     impl_->stopping = false;
     impl_->statistics = {};
+    impl_->started = false;
     impl_->presentation_clock_seen = false;
     auto status = AudioQueueNewOutput(&format, Impl::callback, impl_.get(), nullptr,
                                      nullptr, 0, &impl_->queue);
     for (unsigned index = 0; status == noErr && index < 3; ++index) {
         AudioQueueBufferRef buffer = nullptr;
-        status = AudioQueueAllocateBuffer(impl_->queue, 8192, &buffer);
+        status = AudioQueueAllocateBuffer(impl_->queue,
+                                          static_cast<UInt32>(impl_->buffer_frames * 8), &buffer);
         if (status == noErr)
             impl_->fill(impl_->queue, buffer);
     }
@@ -198,6 +210,7 @@ bool AudioOutput::start(const std::string& capture_path, std::string& error) {
         shutdown();
         return false;
     }
+    impl_->started = true;
     return true;
 }
 void AudioOutput::shutdown() {
@@ -208,6 +221,7 @@ void AudioOutput::shutdown() {
         impl_->queue = nullptr;
     }
     std::lock_guard lock(impl_->mutex);
+    impl_->started = false;
     if (impl_->capture.is_open()) {
         write_header(impl_->capture, impl_->capture_bytes);
         impl_->capture.close();
@@ -234,6 +248,19 @@ void AudioOutput::stop(std::uint64_t token) {
         if (voice.token == token)
             voice = {};
 }
+bool AudioOutput::set_gain(std::uint64_t token, float left_gain, float right_gain) {
+    if (!token || !std::isfinite(left_gain) || !std::isfinite(right_gain))
+        return false;
+    std::lock_guard lock(impl_->mutex);
+    for (auto &voice : impl_->voices) {
+        if (voice.clip && voice.token == token) {
+            voice.left = left_gain;
+            voice.right = right_gain;
+            return true;
+        }
+    }
+    return false;
+}
 void AudioOutput::stop_all() {
     std::lock_guard lock(impl_->mutex);
     for (auto& voice : impl_->voices)
@@ -242,6 +269,19 @@ void AudioOutput::stop_all() {
 AudioStats AudioOutput::stats() const {
     std::lock_guard lock(impl_->mutex);
     return impl_->statistics;
+}
+bool AudioOutput::ready() const {
+    std::lock_guard lock(impl_->mutex);
+    return impl_->started && !impl_->stopping && impl_->statistics.device_error == 0;
+}
+std::size_t AudioOutput::capacity() const {
+    std::lock_guard lock(impl_->mutex);
+    return impl_->voices.size();
+}
+std::size_t AudioOutput::active_voice_count() const {
+    std::lock_guard lock(impl_->mutex);
+    return std::count_if(impl_->voices.begin(), impl_->voices.end(),
+                         [](const auto& voice) { return voice.clip != nullptr; });
 }
 std::optional<std::uint64_t> AudioOutput::presentation_frames(std::string& error) const {
     std::lock_guard lock(impl_->mutex);

@@ -1,0 +1,24 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "a850b9b64716d92ec794a8bdd68961d60ee4e5ef6408b05e3ac70b1e44092aab",
+ "original_range_sha256": "cdb6fd3cd38a3200831eab5e7f583e506ada4a42139dbaafa76e7cf24423fd21",
+ "cases": 10260,
+ "mismatch_count": 0,
+ "fp_flag_mismatches": 10160,
+ "mismatches": [],
+ "scale_matches": true,
+ "limits": "Field-of-view setter 7815c0 (787e30, 788290, 7883c0 real code, source sine table) against original instructions.\n\nCompares the stored projection scale 3d0f9e0 bitwise across angles, widths and\nx87 control words; status flags are reported separately.\n\nRun the unchanged FOV judge against the native screen-distance implementation.",
+ "source_files": {
+  "src/engine/ninja_view_native.hpp": "b398943d7db560ad944d3eb87afe6fb0e8e6f3b1ef9de8d3d11b782c9fa2d36a",
+  "src/engine/ninja_view_native.cpp": "f84e70db6daf2a58dc8c098c095ddeede0371a18de8db93d83ed4c02843f6985",
+  "tests/probes/native_screen_distance_probe.cpp": "5ad176aff11c7525364de3b0b350d0dcb841fe37fd1c15b71331cbc2753a7b69",
+  "tools/oracles/verify_original_fov.py": "c47d626b475e91a6e24cc9905702689be1c34ad897901ae6dd2fab1ba122885e",
+  "tools/oracles/verify_original_screen_distance.py": "033b36e1f18856c57e5c0753f4803fa4c422edb97848020fa43d3d2027ebca6f"
+ },
+ "tracked_summary": {
+  "full_sha256": "568ee1dc868f69b0e733787c8e558ca318031703af94581fba306e53a9d5155b",
+  "full_bytes": 1344,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

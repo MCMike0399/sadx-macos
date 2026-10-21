@@ -1,0 +1,33 @@
+{
+ "passed": true,
+ "values_match": true,
+ "cases": 2004,
+ "seed": 20261020,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "speedrun_dll_sha256": "f3fc68a3058fb726142547018da860b170f137248e54b82712b52527e7b74802",
+ "source_ranges": {
+  "0x411d00-0x411dc5": "99cb8d0f8a3a6e3d9c3e65fa46e0da146737e660fc64582ef5d532a4fab20331"
+ },
+ "native_sources": {
+  "src/engine/frame_loop_native.hpp": "af759d873cd01e3bc2a7e6e4101067ef62eb4e6c1e13234ff7583a92e7e45aeb",
+  "src/engine/frame_loop_native.cpp": "195c4a6c30602b9d7669b3deb66f8ea8571fdfbdd6993528b9558199a3cd36b6",
+  "src/engine/speedrun.hpp": "464998cab62c811d833dd10dd6fc3ac1ad72f63e3f26636d94468932dd6dbac8",
+  "src/engine/speedrun.cpp": "aadb023ca23dbf2bb2abcb772b46ebc5c90b3b247e78f816baf5c870cc207fe3",
+  "tests/probes/native_frame_counter_probe.cpp": "0be5fa6634b417d11ec8bb85f74e4a6abd93d3e0417b9fd78049b8ebd4adfb4d",
+  "tools/oracles/verify_original_frame_completion.py": "d1f18a46ebeea4c982d81bb883e5f0f43319a5220c888f6024e74785e68df9aa"
+ },
+ "native_library_sha256": "414e4fb74397893c73fdff333f220344d320ab28fd726449c3e654cbb8e8cd22",
+ "case_sha256": "4fc9ea597462725dcea3e2045aff187939e98750e7a8b5963106301aa25378c9",
+ "limits": [
+  "Compares the scalar prefix only; rendering/limiter callbacks remain caller-owned.",
+  "Original profile without the pinned Speedrun hook is not claimed."
+ ],
+ "tracked_summary": {
+  "full_sha256": "b7e25d5372a231efde13915c447b6948bb29d692a30929dbeb0d9b192c9ab1c6",
+  "full_bytes": 1469,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

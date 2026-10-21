@@ -1,0 +1,691 @@
+{
+  "commands": [
+    {
+      "slug": "audio_playback",
+      "exit_status": 0,
+      "seconds": 1.827,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_audio_playback.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-audio-playback-probe.dylib",
+        "--output",
+        "build/oracles/audio_playback.json"
+      ],
+      "log": "build/native-title-oracle-logs/audio_playback.log",
+      "cases": null,
+      "passed": true,
+      "values_match": null,
+      "mismatches": [],
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "camera_view_angle",
+      "exit_status": 0,
+      "seconds": 1.426,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_camera_view_angle.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-camera-view-angle-probe.dylib",
+        "--output",
+        "build/oracles/camera_view_angle.json"
+      ],
+      "log": "build/native-title-oracle-logs/camera_view_angle.log",
+      "cases": 2379,
+      "passed": null,
+      "values_match": null,
+      "mismatches": 0,
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "frame_counter",
+      "exit_status": 0,
+      "seconds": 1.545,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_frame_counter.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-frame-counter-probe.dylib",
+        "--output",
+        "build/oracles/frame_counter.json"
+      ],
+      "log": "build/native-title-oracle-logs/frame_counter.log",
+      "cases": 2004,
+      "passed": true,
+      "values_match": true,
+      "mismatches": 0,
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "game_bootstrap",
+      "exit_status": 0,
+      "seconds": 1.386,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_game_bootstrap.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-game-bootstrap-probe.dylib",
+        "--output",
+        "build/oracles/game_bootstrap.json"
+      ],
+      "log": "build/native-title-oracle-logs/game_bootstrap.log",
+      "cases": 418,
+      "passed": true,
+      "values_match": null,
+      "mismatches": 0,
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "game_cleanup",
+      "exit_status": 0,
+      "seconds": 2.196,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_game_cleanup.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-game-cleanup-probe.dylib",
+        "--output",
+        "build/oracles/game_cleanup.json"
+      ],
+      "log": "build/native-title-oracle-logs/game_cleanup.log",
+      "cases": 2604,
+      "passed": null,
+      "values_match": null,
+      "mismatches": [],
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "game_view_native",
+      "exit_status": 0,
+      "seconds": 2.533,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_game_view_native.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-game-view-native-probe.dylib",
+        "--output",
+        "build/oracles/game_view_native.json"
+      ],
+      "log": "build/native-title-oracle-logs/game_view_native.log",
+      "cases": 540,
+      "passed": null,
+      "values_match": null,
+      "mismatches": [],
+      "fp_flag_mismatches": 291
+    },
+    {
+      "slug": "level_sounds",
+      "exit_status": 0,
+      "seconds": 1.608,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_level_sounds.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-level-sounds-probe.dylib",
+        "--output",
+        "build/oracles/level_sounds.json"
+      ],
+      "log": "build/native-title-oracle-logs/level_sounds.log",
+      "cases": 2296,
+      "passed": null,
+      "values_match": null,
+      "mismatches": [],
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "logo_startup",
+      "exit_status": 0,
+      "seconds": 0.421,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_logo_startup.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-logo-startup-probe.dylib",
+        "--output",
+        "build/oracles/logo_startup.json"
+      ],
+      "log": "build/native-title-oracle-logs/logo_startup.log",
+      "cases": 1338,
+      "passed": true,
+      "values_match": null,
+      "mismatches": 0,
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "music",
+      "exit_status": 0,
+      "seconds": 1.291,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_music.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-music-probe.dylib",
+        "--output",
+        "build/oracles/music.json"
+      ],
+      "log": "build/native-title-oracle-logs/music.log",
+      "cases": 1301,
+      "passed": null,
+      "values_match": null,
+      "mismatches": [],
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "native_texture_lifetime",
+      "exit_status": 0,
+      "seconds": 1.141,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_native_texture_lifetime.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-native-texture-lifetime-probe.dylib",
+        "--output",
+        "build/oracles/native_texture_lifetime.json"
+      ],
+      "log": "build/native-title-oracle-logs/native_texture_lifetime.log",
+      "cases": 1416,
+      "passed": null,
+      "values_match": null,
+      "mismatches": [],
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "ninja_queue_native",
+      "exit_status": 0,
+      "seconds": 6.825,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_ninja_queue_native.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-ninja-queue-native-probe.dylib",
+        "--output",
+        "build/oracles/ninja_queue_native.json"
+      ],
+      "log": "build/native-title-oracle-logs/ninja_queue_native.log",
+      "cases": 600,
+      "passed": null,
+      "values_match": null,
+      "mismatches": [],
+      "fp_flag_mismatches": 402
+    },
+    {
+      "slug": "ninja_queue_render",
+      "exit_status": 0,
+      "seconds": 1.141,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_ninja_queue_render.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-ninja-queue-render-probe.dylib",
+        "--output",
+        "build/oracles/ninja_queue_render.json"
+      ],
+      "log": "build/native-title-oracle-logs/ninja_queue_render.log",
+      "cases": 8209,
+      "passed": null,
+      "values_match": null,
+      "mismatches": [],
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "pvr_draw",
+      "exit_status": 0,
+      "seconds": 1.743,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_pvr_draw.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-pvr-draw-probe.dylib",
+        "--output",
+        "build/oracles/pvr_draw.json"
+      ],
+      "log": "build/native-title-oracle-logs/pvr_draw.log",
+      "cases": 3957,
+      "passed": false,
+      "values_match": true,
+      "mismatches": 0,
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "pvr_scaled",
+      "exit_status": 0,
+      "seconds": 1.885,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_pvr_scaled.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-pvr-scaled-probe.dylib",
+        "--output",
+        "build/oracles/pvr_scaled.json"
+      ],
+      "log": "build/native-title-oracle-logs/pvr_scaled.log",
+      "cases": 3291,
+      "passed": false,
+      "values_match": true,
+      "mismatches": 0,
+      "fp_flag_mismatches": 2764
+    },
+    {
+      "slug": "regular_textures",
+      "exit_status": 0,
+      "seconds": 2.048,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_regular_textures.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-regular-textures-probe.dylib",
+        "--output",
+        "build/oracles/regular_textures.json"
+      ],
+      "log": "build/native-title-oracle-logs/regular_textures.log",
+      "cases": 609,
+      "passed": null,
+      "values_match": null,
+      "mismatches": [],
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "save_data",
+      "exit_status": 0,
+      "seconds": 0.637,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_save_data.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-save-data-probe.dylib",
+        "--output",
+        "build/oracles/save_data.json"
+      ],
+      "log": "build/native-title-oracle-logs/save_data.log",
+      "cases": 1029,
+      "passed": true,
+      "values_match": null,
+      "mismatches": 0,
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "screen_distance",
+      "exit_status": 0,
+      "seconds": 0.993,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_screen_distance.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-screen-distance-probe.dylib",
+        "--output",
+        "build/oracles/screen_distance.json"
+      ],
+      "log": "build/native-title-oracle-logs/screen_distance.log",
+      "cases": 10260,
+      "passed": null,
+      "values_match": null,
+      "mismatches": [],
+      "fp_flag_mismatches": 10160
+    },
+    {
+      "slug": "sound_bank",
+      "exit_status": 0,
+      "seconds": 1.43,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_sound_bank.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-sound-bank-probe.dylib",
+        "--output",
+        "build/oracles/sound_bank.json"
+      ],
+      "log": "build/native-title-oracle-logs/sound_bank.log",
+      "cases": null,
+      "passed": null,
+      "values_match": null,
+      "mismatches": [],
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "sound_effects",
+      "exit_status": 0,
+      "seconds": 1.118,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_sound_effects.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-sound-effects-probe.dylib",
+        "--output",
+        "build/oracles/sound_effects.json"
+      ],
+      "log": "build/native-title-oracle-logs/sound_effects.log",
+      "cases": 2580,
+      "passed": true,
+      "values_match": null,
+      "mismatches": 0,
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "sound_manager",
+      "exit_status": 0,
+      "seconds": 0.84,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_sound_manager.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-sound-manager-probe.dylib",
+        "--output",
+        "build/oracles/sound_manager.json"
+      ],
+      "log": "build/native-title-oracle-logs/sound_manager.log",
+      "cases": 956,
+      "passed": null,
+      "values_match": null,
+      "mismatches": [],
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "sound_parameters",
+      "exit_status": 0,
+      "seconds": 0.161,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_sound_parameters.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-sound-effects-probe.dylib",
+        "--output",
+        "build/oracles/sound_parameters.json"
+      ],
+      "log": "build/native-title-oracle-logs/sound_parameters.log",
+      "cases": 2440,
+      "passed": false,
+      "values_match": true,
+      "mismatches": 0,
+      "fp_flag_mismatches": 553
+    },
+    {
+      "slug": "sound_server",
+      "exit_status": 0,
+      "seconds": 8.841,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_sound_server.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-sound-server-probe.dylib",
+        "--output",
+        "build/oracles/sound_server.json"
+      ],
+      "log": "build/native-title-oracle-logs/sound_server.log",
+      "cases": 1956,
+      "passed": true,
+      "values_match": null,
+      "mismatches": 0,
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "sound_wave_metadata",
+      "exit_status": 0,
+      "seconds": 0.199,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_sound_wave_metadata.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "--assets",
+        "game/imported",
+        "--output",
+        "build/oracles/sound_wave_metadata.json"
+      ],
+      "log": "build/native-title-oracle-logs/sound_wave_metadata.log",
+      "cases": 506,
+      "passed": true,
+      "values_match": null,
+      "mismatches": 0,
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "stage_lighting",
+      "exit_status": 0,
+      "seconds": 1.683,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_stage_lighting.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-stage-lighting-probe.dylib",
+        "--output",
+        "build/oracles/stage_lighting.json"
+      ],
+      "log": "build/native-title-oracle-logs/stage_lighting.log",
+      "cases": 704,
+      "passed": null,
+      "values_match": null,
+      "mismatches": [],
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "task_delete",
+      "exit_status": 0,
+      "seconds": 1.871,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_task_delete.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-task-delete-probe.dylib",
+        "--output",
+        "build/oracles/task_delete.json"
+      ],
+      "log": "build/native-title-oracle-logs/task_delete.log",
+      "cases": 244,
+      "passed": true,
+      "values_match": true,
+      "mismatches": 0,
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "task_display",
+      "exit_status": 0,
+      "seconds": 1.151,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_task_display.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-task-display-probe.dylib",
+        "--output",
+        "build/oracles/task_display.json"
+      ],
+      "log": "build/native-title-oracle-logs/task_display.log",
+      "cases": 236,
+      "passed": null,
+      "values_match": null,
+      "mismatches": [],
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "task_lifecycle",
+      "exit_status": 0,
+      "seconds": 9.069,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_task_lifecycle.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-task-lifecycle-probe.dylib",
+        "--output",
+        "build/oracles/task_lifecycle.json"
+      ],
+      "log": "build/native-title-oracle-logs/task_lifecycle.log",
+      "cases": null,
+      "passed": null,
+      "values_match": null,
+      "mismatches": null,
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "task_work",
+      "exit_status": 0,
+      "seconds": 7.548,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_task_work.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-task-work-probe.dylib",
+        "--output",
+        "build/oracles/task_work.json"
+      ],
+      "log": "build/native-title-oracle-logs/task_work.log",
+      "cases": null,
+      "passed": null,
+      "values_match": null,
+      "mismatches": null,
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "title_background",
+      "exit_status": 0,
+      "seconds": 2.36,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_title_background.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-title-background-probe.dylib",
+        "--output",
+        "build/oracles/title_background.json"
+      ],
+      "log": "build/native-title-oracle-logs/title_background.log",
+      "cases": 2125,
+      "passed": false,
+      "values_match": true,
+      "mismatches": 0,
+      "fp_flag_mismatches": 1112
+    },
+    {
+      "slug": "title_background_pipeline",
+      "exit_status": 0,
+      "seconds": 5.111,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_title_background_pipeline.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-title-background-pipeline-probe.dylib",
+        "--output",
+        "build/oracles/title_background_pipeline.json"
+      ],
+      "log": "build/native-title-oracle-logs/title_background_pipeline.log",
+      "cases": 437,
+      "passed": false,
+      "values_match": true,
+      "mismatches": 0,
+      "fp_flag_mismatches": 437
+    },
+    {
+      "slug": "title_dialog",
+      "exit_status": 1,
+      "seconds": 0.823,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_title_dialog.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-title-dialog-probe.dylib",
+        "--output",
+        "build/oracles/title_dialog.json"
+      ],
+      "log": "build/native-title-oracle-logs/title_dialog.log",
+      "cases": 2652,
+      "passed": false,
+      "values_match": true,
+      "mismatches": 0,
+      "fp_flag_mismatches": 667
+    },
+    {
+      "slug": "title_factory",
+      "exit_status": 0,
+      "seconds": 0.8,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_title_factory.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-title-factory-probe.dylib",
+        "--output",
+        "build/oracles/title_factory.json"
+      ],
+      "log": "build/native-title-oracle-logs/title_factory.log",
+      "cases": 2268,
+      "passed": true,
+      "values_match": true,
+      "mismatches": 0,
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "title_inactive",
+      "exit_status": 0,
+      "seconds": 0.608,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_title_inactive.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-title-inactive-probe.dylib",
+        "--output",
+        "build/oracles/title_inactive.json"
+      ],
+      "log": "build/native-title-oracle-logs/title_inactive.log",
+      "cases": 3753,
+      "passed": true,
+      "values_match": true,
+      "mismatches": 0,
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "title_input",
+      "exit_status": 0,
+      "seconds": 1.093,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_title_input.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-title-input-probe.dylib",
+        "--output",
+        "build/oracles/title_input.json"
+      ],
+      "log": "build/native-title-oracle-logs/title_input.log",
+      "cases": 5877,
+      "passed": true,
+      "values_match": true,
+      "mismatches": 0,
+      "fp_flag_mismatches": 0
+    },
+    {
+      "slug": "title_menu",
+      "exit_status": 1,
+      "seconds": 5.562,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_title_menu.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-title-menu-probe.dylib",
+        "--output",
+        "build/oracles/title_menu.json"
+      ],
+      "log": "build/native-title-oracle-logs/title_menu.log",
+      "cases": 20872,
+      "passed": false,
+      "values_match": true,
+      "mismatches": 0,
+      "fp_flag_mismatches": 270
+    },
+    {
+      "slug": "title_resources",
+      "exit_status": 1,
+      "seconds": 0.992,
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_title_resources.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-title-resources-probe.dylib",
+        "--output",
+        "build/oracles/title_resources.json"
+      ],
+      "log": "build/native-title-oracle-logs/title_resources.log",
+      "cases": 3810,
+      "passed": false,
+      "values_match": true,
+      "mismatches": 0,
+      "fp_flag_mismatches": 1277
+    }
+  ],
+  "scope": "Native title checkpoint relevant new and unchanged oracles; exit0 does not override partial flags or explicit limits in each report",
+  "limits": "Known FP flag differences remain partial. Existing broader oracle failures are not resolved by this checkpoint."
+}

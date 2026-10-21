@@ -24,7 +24,8 @@ struct AudioStats {
 // Calls may come from the session thread while AudioQueue fills on its own thread.
 class AudioOutput {
 public:
-    explicit AudioOutput(std::size_t capacity = 36);
+    // Buffer size is a native delivery latency choice; existing readers keep 1024 frames.
+    explicit AudioOutput(std::size_t capacity = 36, std::size_t buffer_frames = 1024);
     ~AudioOutput();
     AudioOutput(const AudioOutput&) = delete;
     AudioOutput& operator=(const AudioOutput&) = delete;
@@ -35,8 +36,14 @@ public:
     std::uint64_t play(std::shared_ptr<const AudioClip> clip, bool loop = false,
                        float left_gain = 1.0f, float right_gain = 1.0f);
     void stop(std::uint64_t token);
+    // Update a live voice without restarting its sample cursor.
+    bool set_gain(std::uint64_t token, float left_gain, float right_gain);
     void stop_all();
     AudioStats stats() const;
+    // Actual queue-start success and current device status; never an HLE flag.
+    bool ready() const;
+    std::size_t capacity() const;
+    std::size_t active_voice_count() const;
     // Actual output queue sample clock, relative to its start; empty/error-free means not ready.
     std::optional<std::uint64_t> presentation_frames(std::string& error) const;
     // Same mixer as the device callback. Available only while device output is stopped.

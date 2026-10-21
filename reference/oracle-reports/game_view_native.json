@@ -1,0 +1,50 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "0c45b3949d1c978c52c25f0a94d3cf6febe4f1d014d26bec93363263eacd1e2c",
+ "source_files": {
+  "src/game/game_view_native.hpp": "a484e17c07d4d9f4d98493330029a77419c48222d6975d35b2d85b82681e4469",
+  "src/game/game_view_native.cpp": "a3cfebd2bebcd9358a050e604ee1b3dc459e97573ad6e5caaee24457a5a4f60b",
+  "tests/probes/native_game_view_native_probe.cpp": "cc89e2be7c588efc655d1b671ccb2c7f6b33800802d76cf54a0bd46f00ca0da8",
+  "tools/oracles/verify_original_game_view.py": "6542f3d4a088e56cdea89b179081ee1b32ad5838ad2bb708a52700269252eeb2",
+  "tools/oracles/verify_original_game_view_native.py": "43a9d824362c7c97f03948ff7d9988e02cc0650c9e6f021e1780331b8dc17554"
+ },
+ "original_range_sha256": "f690f4b95989d57290d8da5ab99f94e60dbcec80460ffa15c65981b9a3fc4dc6",
+ "cases": 540,
+ "source_outcomes": {
+  "reset0:completed1:calls2": 221,
+  "reset1:completed1:calls8": 91,
+  "reset1:completed0:calls6": 5,
+  "reset0:completed1:calls1": 117,
+  "reset1:completed1:calls7": 43,
+  "reset0:completed0:calls1": 2,
+  "reset1:completed0:calls5": 2,
+  "reset1:completed0:calls4": 1,
+  "reset1:completed0:calls3": 6,
+  "reset1:completed0:calls2": 3,
+  "reset1:completed0:calls8": 2,
+  "reset0:completed0:calls2": 5,
+  "reset1:completed0:calls7": 2
+ },
+ "state_mismatch_count": 0,
+ "fp_flag_mismatches": 291,
+ "mismatches": [],
+ "stores_trace_match": true,
+ "limits": "View setup 4208e0 (with 420860, 403e60, 788240, 402ed0, 402f10/780c00, 77ff60,\n77ff70, 402f40, 77ed50 and, on the reset path, 407ab0/407330/4030d0/4128f0) against\noriginal instructions. Fixtures: 4071c0, 7815c0, 403180 (recorded callee, site,\nfirst two arguments) and the D3D8 device's SetRenderState (recorded site, state,\nvalue); one call can fail. x87 status flags are reported separately.\n\nRun the unchanged screen-setup judge plus the native outer-frame entry points.\n\nThe original judge retains all500 fixtures, failure prefixes and FP comparisons.\nThe additional frame entries record depth/material calls and their failure prefixes.\n",
+ "frame_entries": {
+  "cases": 40,
+  "mismatches": 0,
+  "examples": []
+ },
+ "reference_adapter_source_files": {
+  "src/game/game_view.hpp": "5067cb1a6fb669beffe96407de97fdd1b1cc031b6e32b459dc0f95da938db9f1",
+  "src/game/game_view.cpp": "73304c7d72cb670852cab4ca013067e50a5c60d6e35d714f5477f29915624f7a",
+  "tests/probes/native_game_view_probe.cpp": "8662d10d023ee20125cda297ed375f3026ae257dfb240124d364caf50e16960f",
+  "tools/oracles/verify_original_game_view.py": "6542f3d4a088e56cdea89b179081ee1b32ad5838ad2bb708a52700269252eeb2"
+ },
+ "tracked_summary": {
+  "full_sha256": "0f62cc830f74eaa79dab52578abed5c9b57b00f7e4afeffcd613e5c6c5356831",
+  "full_bytes": 2711,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

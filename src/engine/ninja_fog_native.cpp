@@ -7,7 +7,10 @@ class NativeContext final : public Context {
   public:
     explicit NativeContext(Runtime &runtime)
         : Context(runtime.arithmetic), runtime_(runtime), state_(runtime.state),
-          values_(state_.values) {}
+          values_(state_.values), display_switch_(state_.display_switch) {}
+    NativeContext(Runtime &runtime, const std::int32_t &pending_logic_ticks)
+        : Context(runtime.arithmetic), runtime_(runtime), state_(runtime.state),
+          values_(state_.values), display_switch_(pending_logic_ticks) {}
     void device_load() override {}
     void require_device() override {
         if (!runtime_.render)
@@ -50,7 +53,7 @@ class NativeContext final : public Context {
     std::uint32_t supported() override { return values_.table_supported; }
     void supported(std::uint32_t value) override { values_.table_supported = value; }
     void mode(std::uint32_t value) override { values_.mode = value; }
-    std::int32_t display_switch() override { return state_.display_switch; }
+    std::int32_t display_switch() override { return display_switch_; }
     std::uint8_t profile() override { return state_.profile; }
     std::uint8_t special_flags() override { return state_.special_flags; }
     float cached_start() override { return values_.cached_start; }
@@ -67,6 +70,7 @@ class NativeContext final : public Context {
     Runtime &runtime_;
     State &state_;
     NinjaFogInitialState &values_;
+    const std::int32_t &display_switch_;
 };
 } // namespace
 void initialize(Runtime &runtime) {
@@ -87,6 +91,10 @@ void set_table(Runtime &runtime) {
 }
 void set_enabled(Runtime &runtime, bool enabled) {
     NativeContext context(runtime);
+    set_enabled(context, enabled);
+}
+void set_enabled(Runtime &runtime, bool enabled, const std::int32_t &pending_logic_ticks) {
+    NativeContext context(runtime, pending_logic_ticks);
     set_enabled(context, enabled);
 }
 } // namespace sadx::fog

@@ -34,7 +34,7 @@ class MovieScene {
                const movie::Content &, const std::int32_t &music_volume, MovieHost);
     std::int32_t play(std::uint32_t movie_id);
     const movie::State &state() const { return state_; }
-    std::size_t loaded_textures() const { return textures_.size(); }
+    std::size_t loaded_textures() const { return textures_.entries.size(); }
     bool source_padding_is_defined() const { return false; }
   private:
     Display &display_;
@@ -46,6 +46,8 @@ class MovieScene {
     MovieHost host_;
     movie::Services services_;
     std::shared_ptr<graphics::Texture> texture_;
+    std::shared_ptr<std::vector<std::uint8_t>> backing_pixels_;
+    texture_lifetime::Memory *texture_memory_ = nullptr;
     sprite::TextureList textures_;
     std::vector<sprite::AnimationFrame> animation_;
     bool texture_ready_ = false;

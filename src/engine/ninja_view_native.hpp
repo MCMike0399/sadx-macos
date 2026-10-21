@@ -48,3 +48,9 @@ void clamp_clip_range(float near_distance, float far_distance, State &, X87Conte
 // FUNCTION: SONIC 0x403180 ___njClipZ
 bool set_clip_range(float near_distance, float far_distance, State &, ClipServices &, X87Context &);
 } // namespace sadx::view
+
+namespace sadx::view {
+// FUNCTION: SONIC 0x7815c0 njSetScreenDist
+void set_screen_distance(std::int32_t angle, float width, State &,
+                         const NinjaMath::SineTable &, X87Context &);
+}

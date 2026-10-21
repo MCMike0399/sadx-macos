@@ -1,0 +1,30 @@
+{
+ "passed": false,
+ "values_match": true,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "fp_flag_mismatches": 667,
+ "cases": 2652,
+ "seed": 423723,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_sources": {
+  "src/game/title_menu.hpp": "4c3b8720c1d2fee267baee1ce0682bcab5c31b7916f9226d7658b6e9e169ea5f",
+  "src/game/title_menu.cpp": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d",
+  "tests/probes/native_title_dialog_probe.cpp": "4f6297ef353034285018501c885db54aa66caf9a00e1fe19141b82d41792f64b"
+ },
+ "limits": [
+  "Active dialog phase bodies stop before their first instruction and remain explicitly unimplemented. Known poison animation counters are compared; genuinely indeterminate MAlloc counter is a native optional, whose all-u32 set is closed under wrapping increment."
+ ],
+ "source_ranges": {
+  "0x431960-0x4319c5": "ee4a49bc1dbffae81e1fb3ecba94bdd4a9c4d548339351f8ede6f9c6563a9fdd",
+  "0x432720-0x432c0d": "38f4f8e2f916d6b66810615b37025be58d7bbf1b5567a86d3b93d96225a80e8c",
+  "0x432480-0x43252d": "ada2e2fe7fe0245aa274d9d63fded32ad417f8fe5e12cedf9f69f208e6d5103f"
+ },
+ "native_library_sha256": "bd0f71b4510e5d79e32b6a3b8a89a280d0a6a9d8cdef83477748218c789f96f9",
+ "tracked_summary": {
+  "full_sha256": "4d246c9bf990278bc0fc01cf3af3fbb48de09ed335d2e0d9d5e18b2a0746096b",
+  "full_bytes": 1269,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

@@ -179,6 +179,92 @@ TaskResult TaskScheduler::run_children(const TaskHandle& parent) {
     }
 }
 
+TaskResult TaskScheduler::display_chain(TaskHandle next) {
+    while (next) {
+        auto task = resolve_snapshot(next);
+        if (!task || task->retired_)
+            return {TaskFailure::deleted_snapshot_next, next};
+        if (task->source_slot_ && !task->linked_)
+            return {TaskFailure::detached_snapshot_next, task};
+        const auto callback = task->display;
+        next = retain(task->next_);
+        if (callback != nullptr) {
+            try {
+                callback(*this, task);
+            } catch (const SourceTaskFailure& failed) {
+                return failed.result;
+            }
+        }
+        // A callback can replace this pool slot. The source reloads the child
+        // pointer through that slot after returning, rather than caching it.
+        task = resolve_snapshot(task);
+        if (task && !task->retired_ && task->first_child_ != nullptr) {
+            const auto result = display_children(task);
+            if (!result)
+                return result;
+        }
+    }
+    return {};
+}
+
+TaskResult TaskScheduler::display_index(int list_index) {
+    const auto index = canonical_index(list_index);
+    if (index < 0)
+        return {TaskFailure::invalid_list_index, {}};
+    WalkGuard guard(*this);
+    return display_chain(retain(heads_[static_cast<std::size_t>(index)]));
+}
+
+TaskResult TaskScheduler::display_children(const TaskHandle& parent) {
+    const auto accepted = validate(parent);
+    if (!accepted)
+        return accepted;
+    WalkGuard guard(*this);
+    return display_chain(retain(parent->first_child_));
+}
+
+TaskResult TaskScheduler::display_game_tasks(const std::function<void()>& reset_material) {
+    try {
+        reset_material();
+    } catch (const SourceTaskFailure& failed) {
+        return failed.result;
+    }
+    auto result = display_index(8);
+    if (!result)
+        return result;
+    for (int index = 0; index < 7; ++index) {
+        result = display_index(index);
+        if (!result)
+            return result;
+    }
+    return {};
+}
+
+TaskResult TaskScheduler::delete_all_tasks() {
+    WalkGuard guard(*this);
+    for (std::size_t index = 0; index < heads_.size(); ++index) {
+        auto next = retain(heads_[index]);
+        while (next) {
+            auto task = resolve_snapshot(next);
+            if (!task || task->retired_)
+                return {TaskFailure::deleted_snapshot_next, next};
+            if (task->source_slot_ && !task->linked_)
+                return {TaskFailure::detached_snapshot_next, task};
+            next = retain(task->next_);
+            // The source leaves exec-null top-level tasks and their descendants alive.
+            if (task->exec != nullptr) {
+                try {
+                    const auto result = destroy_task(task);
+                    if (!result) return result;
+                } catch (const SourceTaskFailure& failed) {
+                    return failed.result;
+                }
+            }
+        }
+    }
+    return {};
+}
+
 TaskResult TaskScheduler::free_task(const TaskHandle& task) {
     const auto accepted = validate(task);
     if (!accepted) {
@@ -283,6 +369,7 @@ TaskGraphState TaskScheduler::source_graph() const {
         node.previous=slot(t->previous_);node.parent=slot(t->parent_);node.child=slot(t->first_child_);node.linked=t->linked_;
         node.exec=t->exec;node.display=t->display;node.destructor=t->destructor;node.field30=t->field30;
         node.primary=t->primary_work;node.motion=t->motion_work;node.force=t->force_work;node.auxiliary=t->auxiliary_work;node.control=t->object_control;node.primary_state=t->primary_state;node.auxiliary_effect_work=t->auxiliary_effect_work;
+        node.auxiliary_native_work = t->auxiliary_native_work;
         out.nodes.push_back(std::move(node));
     }
     return out;
@@ -323,6 +410,7 @@ TaskResult TaskScheduler::restore_source_graph(const TaskGraphState& state){
     storage_.clear();source_slots_.fill({});heads_.fill(nullptr);free_slots_=state.free_slots;context_=state.context;
     for(const auto& n:state.nodes){TaskHandle t(new Task);t->owner_=this;t->source_slot_=n.slot;t->linked_=n.linked;t->list_=lists[n.slot];
         t->exec=n.exec;t->display=n.display;t->destructor=n.destructor;t->field30=n.field30;t->primary_work=n.primary;t->motion_work=n.motion;t->force_work=n.force;t->auxiliary_work=n.auxiliary;t->object_control=n.control;t->primary_state=n.primary_state;t->auxiliary_effect_work=n.auxiliary_effect_work;
+        t->auxiliary_native_work = n.auxiliary_native_work;
         if(!n.linked)t->detached_free_next_slot_=n.next;source_slots_[n.slot]=t;storage_[t.get()]=t;}
     const auto pointer=[&](std::optional<std::uint16_t> v){return v?source_slots_[*v].get():nullptr;};
     for(const auto& n:state.nodes){auto& t=source_slots_[n.slot];if(n.linked)t->next_=pointer(n.next);t->previous_=pointer(n.previous);t->parent_=pointer(n.parent);t->first_child_=pointer(n.child);}
@@ -463,7 +551,10 @@ TaskResult TaskScheduler::free_children(const TaskHandle& parent){
         const auto result=call.callee==TaskLifetimeCallee::run_children?run_children(call.task):destroy_task(call.task);if(!result)return result;
     }
 }
-TaskResult TaskScheduler::destroy_task(const TaskHandle& task){
+TaskResult TaskScheduler::destroy_task(const TaskHandle& requested_task){
+    // NOTSA: the source takes its task pointer by value. A destructor may clear or
+    // replace the canonical owner passed by reference without changing this call.
+    const TaskHandle task = requested_task;
     auto state=begin_destruction(task);
     for(;;){const auto call=advance_lifetime(state);if(!call.result)return call.result;if(call.completed)return {};
         if(call.callee==TaskLifetimeCallee::destructor){task->destructor_active_=true;try{call.callback(*this,call.task);}catch(...){task->destructor_active_=false;throw;}task->destructor_active_=false;}
@@ -607,6 +698,8 @@ TaskResult TaskScheduler::finish_destruction(const TaskHandle& task) {
             if (!released) return source_work_failure(task, released, field.boundary);
             work.reset();
         }
+        if (field.stage == Stage::auxiliary)
+            task->auxiliary_native_work.reset();
         task->destruction_stage_ = field.next;
     }
     if (task->object_control) {
