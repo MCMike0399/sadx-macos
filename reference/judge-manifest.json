@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "dcb9ee16b6d4022f89134518630c14002342ef5c",
-    "evidence": "reference/production-integration-20261021/native-dialog-protected-journey.json",
-    "evidence_sha256": "47e18d8bb6a9935ae7a611dbbe5ba76ba3c2d1191301b41f379a0165b310d8e4",
-    "reason": "Extend the protected native FileSelect journey through actual dialog cancellation and normal title return/reentry without removing prior assertions"
+    "base_commit": "66a09b26b51fd64106f94cd7ea857e7fcaa074b2",
+    "evidence": "reference/production-integration-20261021/native-audio-test-registration-fix.json",
+    "evidence_sha256": "0a7fe9747433b1c0c80cc47ef0fba99eb03330474998cfb8d1ce74a3fc694114",
+    "reason": "Keep the original per-voice gain test and new native balance test as distinct registered programs"
   },
   "files": {
     "Makefile": "37b5a62363d5fb6b87994ba87cd87470694c65c886834cd8e81e0a7c939e5dd8",
@@ -498,7 +498,7 @@
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",
     "tests/python/test_voice_publication.py": "5c00051d9b3de640f64e224dda4d810cdd7d26acafd91d7b1dc44e9786a734f3",
-    "tests/unit/manifest.tsv": "d39244e6291b38a70b3b9935b3f4d9d7cff564d9670afd1c6987b2a8cf3a4122",
+    "tests/unit/manifest.tsv": "53c77115a2e607e3a9ea8aae5fcd8cdd3b29d6fbd6771468c2fcc5f7691fff47",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",

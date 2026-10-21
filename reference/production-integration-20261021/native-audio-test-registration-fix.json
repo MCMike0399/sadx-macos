@@ -1,0 +1,9 @@
+{
+  "observed_gate_exit_status": 2,
+  "gate_log": "build/native-dialog-gate.log",
+  "failure": "test_unit_registration_is_complete correctly detected duplicate mac-audio-gain registration. The AddFile operation had also overwritten the existing tracked mac_audio_gain.mm test; this was discovered during correction and the original file has been restored byte-for-byte from HEAD.",
+  "fix": "Keep originalmac_audio_gain.mm/mac-audio-gain unchanged; preserve new test as mac_audio_balance.mm/mac-audio-balance and rename only its added manifest row.",
+  "coverage": "Both original per-voice-gain and new output-bus-gain/device-sample tests now have distinct targets; no assertion/input/expected/tolerance change.",
+  "source_change_separate": true,
+  "original_test_sha256": "f856f7771b14b9c4e90cbcd08c2861a1f8585a351b20b75ae7732589427ffc90"
+}
