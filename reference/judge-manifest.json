@@ -1,12 +1,12 @@
 {
   "change": {
-    "base_commit": "bad176b5d56a0d7abde2b7c6595652b270f8901e",
-    "evidence": "reference/production-integration-20261020/native-regular-textures-build-preparation.json",
-    "evidence_sha256": "090e7d981fa8684592428b392cdd8af93ea9fb70f00e7616c6e696d302493291",
-    "reason": "Add native regular texture wrapper dependency"
+    "base_commit": "55b28bf34c35b8cd964608284f62ef3af8a69835",
+    "evidence": "reference/production-integration-20261020/native-title-profile-build-preparation.json",
+    "evidence_sha256": "36d8fb4d7f861e2d9a28af16cd39a87d8dcc14e8de5156bdbcdd38dea84eee45",
+    "reason": "Prepare level sound native dependency and record recovered active loader hooks"
   },
   "files": {
-    "Makefile": "1d5dda2fcac667ae471e683f465caa79b59ecf48c84eab5e2f8d4dbf8f9e19c4",
+    "Makefile": "a89caba15776f58e50fae4b171a9d143e6b068b09e864e2f31f6a5d02e9ab8f9",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
     "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
     "reference/frame-control-corpus.tsv": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",
@@ -420,7 +420,7 @@
     "tools/gate/guard_judge_edit.py": "6fa117651c735c3a152343da978945a426138ce455d0494e7ca707f46ff82935",
     "tools/gate/layer_exceptions.tsv": "45ec99765961f1f4f36760d706dd561ad9362ca3220080c0aebedb105f7c4649",
     "tools/gate/mutate.py": "9028799e852ca72ae2e49229647171ec68ecbc26eeb234db3fd510a4eeb33719",
-    "tools/gate/profile_patches.json": "ccb667fd3f7d423ba906c0af64413ac18f67e4501e68af10b330a9511532bc3d",
+    "tools/gate/profile_patches.json": "bbbb9087d150c6a4172a7cfba182a6dc8dbd2299e8d663250e2a11741d65c494",
     "tools/gate/record_gate.py": "c74237a970ebfac47cf3c15357b4d16baf6ff28b6ba67e1a31c02dc249c70e3b",
     "tools/gate/run_journeys.py": "ccf2816a8b0463a5cc57b0edd9ed1335ea9c2a6228daa437f8c669e7b6915ae0",
     "tools/gate/track_reports.py": "f936d454c3d07a0614dc27e6370396c41428763cc05c473b9b34773b7f96abc9",

@@ -1,0 +1,16 @@
+{
+  "scope": "Prepare native level sound closure and record implemented active loader profile patches",
+  "native_dependency": "src/game/level_sounds.cpp",
+  "actual_caller": "Native TitleInit LoadLevelSounds; Session borrows canonical stage/character/PCM owners",
+  "patches": {
+    "0x43434a": "src/engine/pvr_draw.cpp draw_scaled_texture; pinned GVR format-mask byte 38 to 00 is applied by verify_original_pvr_scaled.py and forces alpha for every texture format",
+    "0x421180": "src/game/regular_textures.cpp load_archive; verify_original_regular_textures.py executes pinned loader LoadPVM_r",
+    "0x4228e0": "src/game/regular_textures.cpp load_individual; verify_original_regular_textures.py executes pinned loader njLoadTexture_Wrapper_r",
+    "0x4238e0": "src/game/sound_bank.cpp select; verify_original_sound_bank.py executes pinned loader LoadSoundList_r"
+  },
+  "verification": "Existing patch bytes, active flags and expected values unchanged; new ports use actual pinned DLL oracle bodies and exact GVR instruction patch. Main integration gate pending.",
+  "source_handoffs": [
+    "/private/tmp/sadx-level-sounds-handoff.txt",
+    "/private/tmp/sadx-regular-textures-handoff.txt"
+  ]
+}

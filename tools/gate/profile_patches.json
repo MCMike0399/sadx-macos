@@ -1201,7 +1201,7 @@
    "condition": "unconditional (texpack::init from InitMods)",
    "active": true,
    "source_ref": "TextureReplacement.cpp:71",
-   "handled_by": null,
+   "handled_by": "src/game/regular_textures.cpp load_archive; verify_original_regular_textures.py executes pinned loader LoadPVM_r",
    "original_bytes": "b8dc200000"
   },
   {
@@ -1393,7 +1393,7 @@
    "condition": "unconditional (texpack::init from InitMods)",
    "active": true,
    "source_ref": "TextureReplacement.cpp:70",
-   "handled_by": null,
+   "handled_by": "src/game/regular_textures.cpp load_individual; verify_original_regular_textures.py executes pinned loader njLoadTexture_Wrapper_r",
    "original_bytes": "c60568dfab"
   },
   {
@@ -1405,7 +1405,7 @@
    "condition": "unconditional (InitMods)",
    "active": true,
    "source_ref": "dllmain.cpp:949",
-   "handled_by": null,
+   "handled_by": "src/game/sound_bank.cpp select; verify_original_sound_bank.py executes pinned loader LoadSoundList_r",
    "original_bytes": "81ec0c0100"
   },
   {
@@ -2233,7 +2233,7 @@
    "condition": "unconditional (GVR_Init from InitMods)",
    "active": true,
    "source_ref": "gvm.cpp:848",
-   "handled_by": null,
+   "handled_by": "src/engine/pvr_draw.cpp draw_scaled_texture; pinned GVR format-mask byte 38 to 00 is applied by verify_original_pvr_scaled.py and forces alpha for every texture format",
    "original_bytes": "38"
   },
   {
