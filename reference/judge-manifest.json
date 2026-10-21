@@ -1,12 +1,12 @@
 {
   "change": {
-    "base_commit": "2e8309ad9ec4b8a0213778fe01972c4b59fd9b72",
-    "evidence": "reference/production-integration-20261021/native-file-select-report-tracking.json",
-    "evidence_sha256": "12716e4f8fc6b2cc3f5ab4571d26b3503f24b49407bc6097798e84bf71fd4f85",
-    "reason": "Track actual FileSelect oracle outcomes including explicit partials and raw colored-strip failures"
+    "base_commit": "1a8261f6acfb32c1204101c3e229720a4ef0bd81",
+    "evidence": "reference/production-integration-20261021/native-dialog-build-dependencies.json",
+    "evidence_sha256": "2fbdb65e43daf1353d6531e8192719af9ff09e8ec01b0de4f03dbf5c0876b964",
+    "reason": "Declare compiled native confirmation dialog and caption dependencies for the next actual caller"
   },
   "files": {
-    "Makefile": "c6ac771eb89ab206deaa7024e23fbb315e9f838ae3aa21100ffbf0c1ea070b86",
+    "Makefile": "fe3a8aae17c59f33a9bc50b56641d05dca1e34859d3f4a2c3375045645679d9f",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
     "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
     "reference/frame-control-corpus.tsv": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",

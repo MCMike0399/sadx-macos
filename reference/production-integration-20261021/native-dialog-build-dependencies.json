@@ -1,0 +1,15 @@
+{
+  "scope": "Compiled native dependencies for the actual FileSelect confirmation caller",
+  "modules": [
+    "game/menu_dialog.cpp",
+    "game/menu_dialog_draw.cpp",
+    "game/menu_dialog_file_select.cpp",
+    "game/menu_caption.cpp"
+  ],
+  "caller": "Normal Enter on selected save reaches5057b0 request; dialog update/draw and503600 stage2 follow through actual native task callbacks.",
+  "basis": "Independently reviewed frozen private dialog core with source oracles and22mutants; Caption integration remains gated on whole-owner migration.",
+  "limits": [
+    "Build declaration only; does not certify unlanded Caption or dialog behavior.",
+    "Existing targets, fixtures, tolerances and expectations remain unchanged."
+  ]
+}

@@ -60,7 +60,8 @@ NATIVE_SOURCES += src/engine/ninja_sprite_queue.cpp src/engine/ninja_render.cpp 
  src/game/sound_bank.cpp src/game/stage_lighting.cpp src/game/regular_textures.cpp src/game/level_sounds.cpp src/game/music.cpp src/game/sound_effects.cpp src/game/menu_resource_lifetime.cpp \
  src/game/voice_playback.cpp src/game/file_select.cpp src/game/save_file_list.cpp \
  src/game/menu_voice.cpp src/game/file_select_display.cpp src/game/file_select_controls.cpp \
- src/engine/menu_draw_primitives.cpp src/engine/native_texture_lifetime.cpp)
+ src/game/menu_dialog.cpp src/game/menu_dialog_draw.cpp src/game/menu_dialog_file_select.cpp \
+ src/game/menu_caption.cpp src/engine/menu_draw_primitives.cpp src/engine/native_texture_lifetime.cpp)
 # Native engine adapters and runtime compositions use these explicit naming scopes.
 NATIVE_SOURCES := $(sort $(NATIVE_SOURCES) $(wildcard src/engine/*_native.cpp src/runtime/native_*.cpp))
 NATIVE_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(NATIVE_SOURCES))
