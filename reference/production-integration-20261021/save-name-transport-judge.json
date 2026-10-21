@@ -1,0 +1,12 @@
+{
+  "requirement": "Whole canonical SaveName3b290dc pointer-owner migration shared by native/reference worlds, distinct fromfallback3b290d0.",
+  "changes": [
+    "Existing probe raw scalar slot is transported via SaveNameReference import/export; ABI,inputs,expectedoutcomes unchanged.",
+    "Remove only3obsolete legacy identifier spellings; retain frozen sourceownership extentrecords.",
+    "Register new identity unit."
+  ],
+  "source_judge": "Unchanged2600inputs,2526compared/74existingexplicit,0mismatches; additional3018holdout0mismatches withoutinstructionbudget.",
+  "independent_review": "review_save_name reran bothunits,unchangedregisteredjudge andadditionalholdout; no blockingfindings.",
+  "protected_patch_sha256": "dc36827e27e1fcc74bfe8b1576fdb36f4e5988afa52725d593226ffe49f1cd0b",
+  "implementation_separate": true
+}

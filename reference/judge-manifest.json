@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "477d5b741438a9678511c9c1ce7229b2bc725457",
-    "evidence": "reference/production-integration-20261021/empty-save-snapshot-judge.json",
-    "evidence_sha256": "50869126fc05a084303faaac437bd36d2d38bde7567f6ba0400b1f9addac6c71",
-    "reason": "Accept an absent source SAVEDATA directory as the source-proved empty snapshot, retaining malformed storage checks"
+    "base_commit": "97241a8dc495d7035138403d84200f32997ff4bf",
+    "evidence": "reference/production-integration-20261021/save-name-transport-judge.json",
+    "evidence_sha256": "fb9e8bbf15601c95ff7ab66e4659069baa27c7847d9dfd8e98f0cc319e52d17b",
+    "reason": "Preserve SaveName pointer identity through a whole-owner migration without altering source oracle inputs or expected outcomes"
   },
   "files": {
     "Makefile": "3b11de6a63d6f44f607df796971e0aa885743e5b8127f9c3f66958ea9a3678e4",
@@ -327,7 +327,7 @@
     "tests/probes/native_game_logic_probe.cpp": "b653470127127cd112d33350e2d04973aae3e2d603901c9ddb1172dcd3d37318",
     "tests/probes/native_game_logic_support_probe.cpp": "e11c5c8846c49a4338ed8797113b55657424ef3bedd6626331704d8b9bfa3279",
     "tests/probes/native_game_loop_probe.cpp": "2ecf50dc4f72e6660023bf7b413e5c8b532348db2f32f2fc896059507e99ca1d",
-    "tests/probes/native_game_mode_leaves_probe.cpp": "4c804aa7670f7b0b8a4a238f0f9b1c46488bd2bd2a47ba218aa7a120005727c4",
+    "tests/probes/native_game_mode_leaves_probe.cpp": "caeec50d03527b16dc871faea6342095ab1e340b4c606df0de6af0bfca3e1976",
     "tests/probes/native_game_mode_probe.cpp": "d1e1c146a4cc6b46819cac257b2dcba737cec41915f26e84887bc1252f0bb587",
     "tests/probes/native_game_reset_composed_probe.cpp": "3829fe4f8feec2eb65dab64a1a4ffee7efdb612a8f889f57ddb65d77c3db29ba",
     "tests/probes/native_game_reset_probe.cpp": "cb20c0754951e28fa02abb8edf701a61365f061059319751d8be87d17976008d",
@@ -496,7 +496,7 @@
     "tests/python/test_symbols.py": "9e9a03a6389d6cd58aa49c63272049754f55ccddb19eeb894b8b92ccce362e0f",
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",
-    "tests/unit/manifest.tsv": "b80294f66d4ea12a40ab94e32d11a7faa5fd6b0aae4f3b6bdfb1f9a4e86fd83c",
+    "tests/unit/manifest.tsv": "3273368b463cb9e1648ba452b745e299a4bc0e7ae7870af0b0c87709e6835989",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",

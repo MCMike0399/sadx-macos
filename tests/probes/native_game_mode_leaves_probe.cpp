@@ -54,7 +54,8 @@ extern "C" int sadx_native_game_mode_leaves(const std::uint32_t* in,const std::u
     std::optional<std::uint32_t>* motions[]={&s.motion_at_3c566c0,&s.motion_at_3c566d0,&s.motion_at_3c559c0,&s.motion_at_3c559d0,&s.motion_at_3c559e0,&s.motion_at_3c559f0,&s.motion_at_3c55a00,&s.motion_at_3c53510,&s.motion_at_3c53520};
     const auto table_slot=[&](std::uint32_t global)->std::optional<std::uint32_t>&{for(std::size_t i=0;i<kModelDllBindings.size();++i)if(kModelDllBindings[i].global==global)return bindings.values[i];return bindings.values[0];};
     const std::uint32_t tables[3]={0x38f6e7c,0x3aad104,0x3a7cf28};
-    std::optional<std::uint32_t>* scalars32[]={&s.word_at_3b0f13c,&s.word_at_3b0f108,&s.word_at_3b0ef44,&s.word_at_3b290dc,&s.word_at_3b2a2f0,&s.word_at_3b2a2f4,&s.word_at_3b2a2fc,&s.word_at_3b2b358,&s.word_at_3b2c47c,&s.word_at_3b2919c,
+    std::optional<std::uint32_t> save_name_word; // reference transport slot, not another global owner
+    std::optional<std::uint32_t>* scalars32[]={&s.word_at_3b0f13c,&s.word_at_3b0f108,&s.word_at_3b0ef44,&save_name_word,&s.word_at_3b2a2f0,&s.word_at_3b2a2f4,&s.word_at_3b2a2fc,&s.word_at_3b2b358,&s.word_at_3b2c47c,&s.word_at_3b2919c,
         &s.word_at_3b0f0f8,&s.word_at_3b0f0fc,&s.word_at_3b0f100,&s.word_at_3b0f10c,&s.word_at_3b0f0f4,&s.word_at_3b2c560,&s.word_at_914788,&s.word_at_3b18244,&s.word_at_3b22e20,&s.callback_at_3d08420};
     std::optional<std::uint8_t>* scalars8[]={&s.byte_at_3b0ef34,&s.byte_at_3b0ef35,&s.byte_at_3b0f128,&s.byte_at_3b0ef48,&s.byte_at_3abe134,&s.byte_at_3b0f0e0,&s.byte_at_3b290d8,&s.byte_at_3b290e0,&s.byte_at_3b290e8,&s.byte_at_3b2a2f8,&s.byte_at_3b2a2f9,&s.byte_at_3b2a2fb,&s.byte_at_3b2c565,&s.byte_at_3b2c574};
     std::optional<std::uint16_t>* scalars16[]={&s.character_at_3b22dc0,&s.half_at_3b0f0e4,&s.half_at_3b2a300,&s.half_at_3b22e1c,&s.half_at_3b18db8};
@@ -72,11 +73,13 @@ extern "C" int sadx_native_game_mode_leaves(const std::uint32_t* in,const std::u
             case 22:s.color_at_3b29d5c=v;break;case 23:screen_w=as_float(v);break;case 24:screen_h=as_float(v);break;
             case 25:s.word_at_3b2c420=v;break;case 26:s.state_at_3b29d6c=v;break;case 27:s.word_at_3b29d68=v;break;case 28:case 29:case 30:case 31:clear[i-28]=v;break;
             default:if(i<11)table_slot(tables[i-8])=v;else *motions[i-13]=v;break;}});
+    s.save_name_reference.import_value(s.save_name,save_name_word);
     auto blocks=[&](auto&& f){std::size_t o=kScalarBytes;f(s.block_at_3b18250,o);o+=0xb64;f(s.block_at_3b0ef9c,o);o+=0x3c;f(s.block_at_3c4ae08,o);o+=0x3638;f(s.block_at_3b290c4,o);o+=8;f(s.block_at_90ed54,o);o+=0x20;f(s.block_at_3b2b5f9,o);o+=7;f(s.block_at_3b2c5e8,o);};
     blocks([&](auto& b,std::size_t o){for(std::size_t i=0;i<b.size;++i)b.bytes[i]=bytes[o+i];});
     if(in[3]&&g_loaded){s.model_bindings=&bindings;s.model_dlls=&g_models;}
     std::uint32_t calls=0;bool release_walk=false;
     const auto r=run_game_mode_leaf(in[0],in[1],s,[&](const GameModeLeafCall& c){++calls;release_walk|=c.callee==0x403290;if(c.callee==0x4073b0)for(int k=0;k<7;++k)rect[k]=c.arguments[k].value_or(0xdeadbeef);return GameLogicOwnerResult{in[2]&&calls==in[2]?GameLogicOwnerState::unavailable:GameLogicOwnerState::completed,c.callee,{}};});
+    save_name_word=s.save_name_reference.export_value(s.save_name);
     each([&](auto& v,std::size_t o){get(v,out+o,1);},[&](auto& v,std::size_t o){get(v,out+o,2);},[&](auto& v,std::size_t o){get(v,out+o,4);},
         [&](std::size_t i,std::size_t o){std::uint32_t v=0xdeadbeef;
             switch(i){case 0:v=mode.word_at_3b290e4.value_or(0xdeadbeef);break;case 1:v=mode.byte_at_3b2a2fa.value_or(0xef);break;case 2:v=mode.level_word_via_3b0ef4c?1U:0U;break;
