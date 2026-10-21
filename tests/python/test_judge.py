@@ -50,6 +50,17 @@ class JudgeTests(unittest.TestCase):
         self.git('add', '.')
         self.git('commit', '-qm', 'fixture baseline')
 
+    def test_native_journey_tampering_is_detected(self):
+        for name in ('tools/journey/check_native_file_select.py',
+                     'tools/journey/check_native_main_menu.py'):
+            with self.subTest(checker=name):
+                self.assertTrue(protected(name))
+                original = (self.root / name).read_text()
+                self.write(name, original + '# changed verification behavior\n')
+                self.assertTrue(any('changed judge input' in error for error in check(self.root)[0]))
+                self.write(name, original)
+        self.assertEqual(check(self.root)[0], [])
+
     def test_hash_addition_removal_and_generated_files(self):
         self.assertEqual(check(self.root)[0], [])
         self.write('tools/oracles/check.py', 'mutated\n')

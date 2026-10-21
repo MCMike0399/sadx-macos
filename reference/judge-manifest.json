@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "f2069314a3ed443e3a769661020fab9fa36ac02b",
-    "evidence": "reference/production-integration-20261021/native-main-menu-judge-preparation.json",
-    "evidence_sha256": "04562fd28662f36cde900e6ddbec14bba9a5219e5633f7e1a66aaa479091bdab",
-    "reason": "Register reviewed MainMenu judges and source build dependencies without changing fidelity expectations; retain original2 music checks and add real101 delivery"
+    "base_commit": "efbb015ccca5ef8730ea5a7979f500c36f5093b1",
+    "evidence": "reference/production-integration-20261021/native-main-menu-required-journey.json",
+    "evidence_sha256": "f17183eaa1a5a9bd24f7ce149abba4afe29bb6a52f56d6f938fe65c9b8510352",
+    "reason": "Require and tamper-protect verified native MainMenu journey alongside unchanged FileSelect journey; native music queue statistics reset peropen"
   },
   "files": {
     "Makefile": "e196397acda201ccde959a5342c034ca33589294f5c2c46c1928d926de6f0b2e",
@@ -491,7 +491,7 @@
     "tests/python/test_input_config.py": "fa5d1d7f518d68e17618617cd3863b1f9553a505446af646d21b7e1cd771f0ef",
     "tests/python/test_journey_driver.py": "5d9bb8325b4585e4c66206f092b708951c76b61adba756c8736239a2b414470a",
     "tests/python/test_journeys.py": "3ed81eac9ccace35e9cde0aafa17773bf645f6fb63e9ef81ae7625f666673ba3",
-    "tests/python/test_judge.py": "251004fe830e843d3740b4e4affb67efaf0f973e062a2f9b54cea3552471bc2a",
+    "tests/python/test_judge.py": "1421829e2b821cbcd83c2868721c640c753e642b8bcc68ba9e0d9ecd8c41d56a",
     "tests/python/test_main_menu_dialog_import.py": "979f6ce93a2bfb58219af180700172b450b52aa17f988938e98776f67878e3d3",
     "tests/python/test_menu_dialog_import.py": "d92712d15cc8ebb657813d22fccbc21a821f7d589ea0ff09f67c4b8ea63d37a9",
     "tests/python/test_menu_textures.py": "3e5cff9e92ffa2e1a522943cd42ce0457d5fd0334630b84dc1f5a35c6e09b22a",
@@ -514,7 +514,7 @@
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",
     "tests/python/test_voice_publication.py": "5c00051d9b3de640f64e224dda4d810cdd7d26acafd91d7b1dc44e9786a734f3",
-    "tests/unit/manifest.tsv": "e3cab0f0da4065b603f6e165e8a3c0b9775df6ef0274cc49b707043831268104",
+    "tests/unit/manifest.tsv": "77c2518b3efa26b2e8f48deb6e8e688b50b08e46594fe09848cd590654bee9aa",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",
@@ -526,7 +526,7 @@
     "tools/gate/check_global_owners.py": "764714cd1fbdeab7b77f3b50d9efb64f12992f791758e3f07602a938b32ef504",
     "tools/gate/check_input_initial_state.py": "2a9de3ce38d6a1c8bef12e6c87fd8181a0888c15e5033b5c8b8b6a873f2352e1",
     "tools/gate/check_input_mod_constants.py": "be8443495170b4ecbc7388c3e60f387242847ae7318e3e310b6a53c74300614b",
-    "tools/gate/check_judge.py": "538339ac7508f5961214034c6221e53d171dda3dc2e17ad5ce48ec2acdfb2bd0",
+    "tools/gate/check_judge.py": "79c45bb5db689a74cbef7eed50f019687b15b56e9d3fedfaaa4eef0e4e88ac42",
     "tools/gate/check_layers.py": "2b72408ccd936baa5da22b36eefbf90ce2af4ebf1ab01dc63a5f45f5fa9615c1",
     "tools/gate/check_library_initial_state.py": "6d5d21de9176f715328496408b5e87e5d80f72793cdfe13a4e7dc09931201080",
     "tools/gate/check_native_frame_control.py": "4b63a311a35287d1df5abb5140ef03f6f840eab5e1abcca67c97c415a5f5a76c",
@@ -550,9 +550,10 @@
     "tools/gate/profile_patches.json": "d748cfe0a9f95e2b6898d5efea5576f8c8e3c8539bb2ab157161eb2a86cc312c",
     "tools/gate/record_gate.py": "c74237a970ebfac47cf3c15357b4d16baf6ff28b6ba67e1a31c02dc249c70e3b",
     "tools/gate/run_journeys.py": "ccf2816a8b0463a5cc57b0edd9ed1335ea9c2a6228daa437f8c669e7b6915ae0",
-    "tools/gate/run_native_journeys.py": "aeb4115609f5f6633b238887a94afbd567c40c460737b3e9daf3c89f4b3cbc1a",
+    "tools/gate/run_native_journeys.py": "8c8a65ff93561c19e1021a946d72c91a06c286bbfc41ef6e5379932daa0fa8da",
     "tools/gate/track_reports.py": "f936d454c3d07a0614dc27e6370396c41428763cc05c473b9b34773b7f96abc9",
     "tools/journey/check_native_file_select.py": "a4329f69052ce50fc6fc5a026cbe0d4fd9a9fc096d1a0179b13068e99412c2d8",
+    "tools/journey/check_native_main_menu.py": "b92bcba286b332a2781f3e843442f324deb628a16421ecfb66ad5ec4043ed631",
     "tools/lib/extract.py": "d2c2cb1479003401ba1faf0211281a6c6d35949c2bd27e55acc48f7cc7825bd8",
     "tools/lib/import_audio.py": "91f0db9f658c306a4a5637b4180c4e0d6033da72d927f1ba59c18965e5a49e30",
     "tools/lib/pe_image.py": "94694dc5fb38e459d26b35c25a7cdb7e3fad7128e1178363340606bb9db299f2",

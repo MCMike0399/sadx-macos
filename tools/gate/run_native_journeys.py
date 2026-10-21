@@ -24,14 +24,22 @@ def run(application, assets, output_root):
         raise RuntimeError('required native FileSelect journey needs two distinct valid imported '
                            f'SonicDX saves in {snapshot}; no checkpoint was skipped')
     output_root.mkdir(parents=True, exist_ok=True)
-    output = Path(tempfile.mkdtemp(prefix='native-file-select-', dir=output_root))
-    command = [sys.executable, str(ROOT / 'tools/journey/check_native_file_select.py'),
-               '--app', str(application), '--assets', str(assets), '--output', str(output)]
-    result = subprocess.run(command, cwd=ROOT, check=False)
-    report = {'journey': 'native-file-select', 'exit_status': result.returncode,
-              'output': str(output), 'checker': 'tools/journey/check_native_file_select.py'}
-    (output_root / 'native-journeys.json').write_text(json.dumps(report, indent=2) + '\n')
-    return result.returncode
+    checkpoints = []
+    for name, checker in (
+            ('native-file-select', 'check_native_file_select.py'),
+            ('native-main-menu', 'check_native_main_menu.py')):
+        output = Path(tempfile.mkdtemp(prefix=name + '-', dir=output_root))
+        command = [sys.executable, str(ROOT / 'tools/journey' / checker),
+                   '--app', str(application), '--assets', str(assets), '--output', str(output)]
+        result = subprocess.run(command, cwd=ROOT, check=False)
+        checkpoints.append({'journey': name, 'exit_status': result.returncode,
+                            'output': str(output), 'checker': 'tools/journey/' + checker})
+        report = dict(checkpoints[0], checkpoints=checkpoints, exit_status=result.returncode)
+        (output_root / 'native-journeys.json').write_text(json.dumps(report, indent=2) + '\n')
+        if result.returncode != 0:
+            return result.returncode
+    return 0
+
 
 
 def main():
