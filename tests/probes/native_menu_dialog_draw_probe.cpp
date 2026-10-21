@@ -9,6 +9,7 @@ struct Calls final:d::DrawCalls {
  std::uint32_t *out;std::uint32_t &flag;std::uint32_t mutation;unsigned count=0;
  Calls(std::uint32_t *o,std::uint32_t &f,std::uint32_t m):out(o),flag(f),mutation(m){}
  void receipt(std::initializer_list<std::uint32_t> values){std::copy(values.begin(),values.end(),out+32+count*8);++count;out[1]=count;}
+ void select_square()override{receipt({1,6});}
  void select_cursors()override{receipt({1,4});}
  void select_panels(sadx::texture_lifetime::List &)override{receipt({1,5});}
  void set_material(std::uint32_t a)override{receipt({2,a});}

@@ -1,0 +1,44 @@
+{
+  "reason": "Register reviewed MainMenu source judges and production build dependencies, plus same-assertion old2clip fixture and actual third101clip qualification. Preserve existing expected values/tolerances and source coverage.",
+  "ports": "Private reviewed modules, not landed in main game source yet. Root integrates actual callers continuously; full gate at connected MainMenu boundary.",
+  "original_two_clip_test": "Original exact102/72 and all8 malformed expectations retained with isolated2clip view; new test qualifies101 and4 new malformed third cases plus actual sample delivery.",
+  "old_probe_transport": "One select_square override added to DrawCalls implementation. Existing style5 receipt outputs/expected cases unchanged.",
+  "new_oracle_wording_correction": "MainMenu original reviewer found all signednegativebytes overclaim; report now accurately names generated-128 and-1 cases. No input case changed.",
+  "independent_reviewers": [
+    "review_main_menu",
+    "review_menu_primitives",
+    "review_menu_helpers",
+    "review_menu_music"
+  ],
+  "files_before_registration": {
+    "tests/probes/native_main_menu_probe.cpp": "2645466b3ce54e555832570b949268fd7b25a33e7ae51ebe7f8b425ea96b4b76",
+    "tools/oracles/verify_original_main_menu.py": "5a9d3ab9e040ab68e6279ace0cc8ef9a7272f81b9f21b1b5e9d944f745378e67",
+    "tests/probes/native_menu_dialog_draw_probe.cpp": "badea0312584e54bac557758fe297805aee9fedba5a8b83966a1b9684d3301bb",
+    "tests/probes/native_menu_dialog_square_probe.cpp": "8e86172c747ee65e61e1137c09c9d569316f0ad5ded97c85d327fc44afa5f2e5",
+    "tools/oracles/verify_original_menu_dialog_square.py": "960d9d0fe65ac430e3d313e3f7209c0261622043a7e611ea8e9426b79dbfd1e5",
+    "tests/probes/native_menu_eligibility_probe.cpp": "95f705f0596801425b789a59ce176bcad1203c322d221a3f77989a333adc0156",
+    "tools/oracles/verify_original_menu_eligibility.py": "a6020665dfefa905413b31b2f6396e42f2458e92e8649888f5f1d745a58a5a78",
+    "tests/unit/menu_eligibility.cpp": "738bc0698034663629fa0f344e18220d66f623c946d10a60fe2908f56d556d95",
+    "tests/probes/native_main_menu_eligibility_probe.cpp": "07694eccb0ccfd9537837fc39e5638743d9bea1016ca456b899eabf0649d621c",
+    "tools/oracles/verify_original_main_menu_eligibility.py": "ad4841c1b47eaac11d364116c98b1965422e29499153985a9e318221913bed0f",
+    "tests/unit/main_menu_eligibility.cpp": "0769bb1cd5d58da859399c2dc7082ca05d3ed8bd3704838e1c528b49ef9896cc",
+    "tests/probes/native_main_menu_content_probe.cpp": "24256509b4743632dc64d2f96cbc7a33a3295146a8b08b2ebe17720bc4ed4531",
+    "tools/oracles/verify_original_main_menu_content.py": "3f513fcee7f0a3aae63a53c3c75443cc1fda6f87336e4e62a8033664d14f30d2",
+    "tests/unit/main_menu_content.cpp": "9ae62d33ab3981c4050da8fd8ede955a08c2ecbcfd91d865de895e5d39c49145",
+    "tests/probes/native_menu_dialog_control_probe.cpp": "abee66b1ff2e8aba6acd59d5f5be39e59f4b7116edb870b88c80da0f83ad938d",
+    "tools/oracles/verify_original_menu_dialog_control.py": "c6fe7f1b48e39d1395d6fdd8eb9c74cd63a7b903c842c170a7de886bbc42bc00",
+    "tests/unit/menu_dialog_control.cpp": "912f1b0d08cff75f5d2fc078e8e308f37fb02b80e0f393febb0e2258221419b0",
+    "tests/probes/native_menu_navigation_probe.cpp": "86e956867c4e3827aa3683f13bdceb48258e4fcb0c29e1f74c5830218b3705a3",
+    "tools/oracles/verify_original_menu_navigation.py": "0673c323a27bd5a42a7c0aadcc10eed27edb9ea129329387b2c1c5ac0471059e",
+    "tests/unit/menu_navigation.cpp": "75d4cb516b496c88421a70fdb2a6bc5a17f4d59f5bad4faf9c92c65719e73ae8",
+    "tests/unit/native_music_assets.mm": "4671e3103fe1649eddf235c07e9fdcca8715cb3fe311e000b170e36d3332fcc7",
+    "tests/unit/native_main_menu_music.mm": "10686974fe2847539767d7e73f044962d35e65c31d180373a079a3b0e6559a61",
+    "tests/python/test_music_publication.py": "b144d5359b9e0e53d148c63c7dabe248237321d35d592ba5f3d7da82a3100856",
+    "tests/python/test_main_menu_dialog_import.py": "979f6ce93a2bfb58219af180700172b450b52aa17f988938e98776f67878e3d3"
+  },
+  "limits": [
+    "Source core partials remain partial; no actual MainMenu or CharacterSelect qualification from source-only judges.",
+    "Missing actual lower behavior remains explicit."
+  ],
+  "protected_fidelity_expectations_changed": false
+}

@@ -3697,7 +3697,7 @@
    "condition": "FillModeBackground in 0..3 (2) -> bgscale::initialize() runs",
    "active": true,
    "source_ref": "bgscale.cpp:113",
-   "handled_by": null,
+   "handled_by": "src/game/main_menu.cpp draw_profiled: pinned DrawAVA_TITLE_BACK_r centered/background scale_trampoline is identity for qualified640x480/scales1; other source views throw explicitly after wrapper blending/base color. Original body and identity caller are differential-oracle compared; private profile guard tests reject unsupported view. Source bgscale.cpp23/113 and uiscale.h scale_trampoline.",
    "original_bytes": "5668787c0d01"
   },
   {

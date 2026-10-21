@@ -6,7 +6,27 @@ int main(int argc, char **argv) {
     @autoreleasepool {
         assert(argc == 2);
         using namespace sadx::native::app;
-        const std::filesystem::path source(argv[1]);
+        // Keep the exact legacy two-clip judge over a bounded view of production imports.
+        const std::filesystem::path imported(argv[1]);
+        const std::string fixture_identity = [NSUUID.UUID.UUIDString UTF8String];
+        const auto source = std::filesystem::temp_directory_path() /
+                            ("sadx-two-music-clips-" + fixture_identity);
+        std::filesystem::create_directories(source);
+        std::filesystem::create_directory_symlink(std::filesystem::canonical(imported / "music"),
+                                                   source / "music");
+        NSMutableDictionary *fixture = [NSJSONSerialization JSONObjectWithData:
+            [NSData dataWithContentsOfFile:[NSString stringWithUTF8String:
+                (imported / "music-assets.json").c_str()]]
+            options:NSJSONReadingMutableContainers error:nullptr];
+        assert(fixture);
+        NSMutableArray *legacy_clips = [NSMutableArray array];
+        for (id clip in fixture[@"clips"])
+            if ([clip[@"song"] intValue] == 102 || [clip[@"song"] intValue] == 72)
+                [legacy_clips addObject:clip];
+        fixture[@"clips"] = legacy_clips;
+        const auto fixture_data = [NSJSONSerialization dataWithJSONObject:fixture options:0 error:nullptr];
+        assert([fixture_data writeToFile:[NSString stringWithUTF8String:
+            (source / "music-assets.json").c_str()] atomically:YES]);
         const auto assets = load_music_assets(source);
         assert(assets.catalog.menu_requests.at(0) == 102);
         assert(assets.catalog.songs[102].name == "title2");
@@ -57,6 +77,7 @@ int main(int argc, char **argv) {
             assert(rejected);
         }
         std::filesystem::remove_all(temporary);
+        std::filesystem::remove_all(source);
         std::cout << "Imported title/option music catalog and eight malformed resource boundaries passed.\n";
     }
 }
