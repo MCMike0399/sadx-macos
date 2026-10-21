@@ -1,0 +1,43 @@
+{
+  "defect": "Existing native_music_assets unit assumes the earlier title-only import contains exactly one clip. The connected FileSelect caller requires option music as a second clip; the old shape assertion aborts before resource validation.",
+  "old_gate_exit": 2,
+  "old_unit_failure": "assert(assets.clips.size()==1 &&assets.clips[0].song==102)",
+  "source_request_table": {
+    "address": "0x7ee8f8",
+    "values": [
+      102,
+      101,
+      72
+    ],
+    "sha256": "15490a8f3d1493bec6fabd3bf9ab5958ac97a5a290b2f896c88e4a8841fe47e9"
+  },
+  "actual_imported_songs": [
+    102,
+    72
+  ],
+  "source_caller": "Original505320 initializes FileSelect with menu request2; native game/file_select.cpp matches the source oracle2364cases.",
+  "change": "Require exactly clips102and72, full unchanged source request prefix102/101/72 and optionloop1. Retain all four original malformed-resource cases verbatim and add four second-clip/request/duplicate boundaries.",
+  "expected_count_changed": {
+    "old": 1,
+    "new": 2,
+    "reason": "Original-game FileSelect music caller expands the actual imported asset package, not a change to music behavior."
+  },
+  "verification": {
+    "strict_cpp17_current_parser_exit": 0,
+    "malformed_cases": 8,
+    "original_four_retained": true,
+    "mutant": {
+      "command": [
+        "build/native-music-assets-expanded-mutant-test",
+        "/Users/burbujamc/Developer/sadx-macos/game/imported"
+      ],
+      "exit_status": -6,
+      "reason": "New duplicate-clip corruption case fails assert(rejected); original four malformed cases retained"
+    }
+  },
+  "independent_review": "Fresh review_file_select_integration verified PE table bytes, importer output, complete retained cases and added checks; no weakening/narrowing found.",
+  "limits": [
+    "Judge correction only; production implementation remains in the following source integration commit.",
+    "No tolerance changes, ignored failure, skipped case or manufactured resource."
+  ]
+}
