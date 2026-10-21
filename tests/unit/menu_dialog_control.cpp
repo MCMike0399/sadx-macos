@@ -29,8 +29,9 @@ int main() {
     assert(work->phase == 1 && work->cursor == 1 && calls.sounds == 1);
     assert(!c::close(owner));
     work->fade = 1;
+    work->animation_angle = 123456;
     c::open_advanced_quick(4, 2, {}, defs, owner);
-    assert(work->phase == 2 && work->fade == 0 && work->cursor == 2);
+    assert(work->phase == 2 && work->fade == 1 && work->animation_angle == 0 && work->cursor == 2);
     assert(calls.sounds == 1);
     c::reset_idle_frames(-32768, owner);
     assert(c::idle_frames(owner) == -32768);

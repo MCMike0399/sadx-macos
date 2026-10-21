@@ -1,0 +1,48 @@
+{
+  "reason": "Actual native MainMenu comparison exposed a shared field-mapping error in the quick-dialog implementation and its function judge. Correct sourcework offset0x20 is animation_angle; fade is0x14.",
+  "source_evidence": {
+    "source_instruction": "432d0e: c7 46 20 00 00 00 00 MOV[ESI+0x20],0",
+    "dossier": "ev_4a336cabcaf5fddd6a38836e34f31db8b28bb75feb7b50a6a0299ac143c2be44",
+    "cross_check": "Unchanged complete MenuObj_Main432720 source judge independently maps fade20/angle32/blink64."
+  },
+  "red_green": {
+    "old_implementation": "Corrected judge fails actual animation-angle state at case180; separate nonzero fade profile observes preservation, and directedunit aborts134.",
+    "fixed_implementation": "4116dev and7716holdout strictPASS, script exits0; unit0.",
+    "mutants": "Wrong-field store and disengaged optional counter both fail; output36 catches missing knownangle."
+  },
+  "coverage_preserved": {
+    "input_words": 48,
+    "vector_generator_unchanged": true,
+    "original_rows_first": 2058,
+    "baseline_fade": 0,
+    "additional_same_rows_fade": 1.5,
+    "reserved_input": 15,
+    "added_output_fade": 35,
+    "added_output_counter_known": 36,
+    "tolerances_changed": false
+  },
+  "independent_review": "review_quick_dialog_fix independently rebuilt old/fixed/reset probes and confirmed4116/7716, exactsourcebytes, alloldrows preserved and48wordABI.",
+  "runtime_proof": {
+    "original_mismatched_pixels": 4358,
+    "scope": "Selectedpaneinterior only, sameSonicDX01 save; remainingwholeimageexact.",
+    "fixed_zero_pixel_difference_frames": [
+      1248,
+      1249,
+      1250,
+      1251,
+      1252
+    ],
+    "dimensions": [
+      640,
+      480
+    ],
+    "input_alignment": "Actualdelivery telemetry Native952/1052 corresponds originalpress950/1050. Productioninputsandoldjourneysunchanged; globalmovie2presentoffset remainsseparate."
+  },
+  "private_packet_sha256": "7d2c91dfacb867073c8b64edbb1a8777e8e4897082057633573c659cb87f0a74",
+  "actual_private_inputs": "Eachreport records trueprivatecompilerfiles+headers+corearchive SHA256.",
+  "limits": [
+    "This commit changes only the faulty judge mapping and its assertions, never gameplaysource. The single semantic store fix lands in the separatelyverified nativeport.",
+    "Private reports include exact actual compilerinput hashes; sharedarchive has sincechanged, and independent reviewer repeatedred/green againstcurrentarchive.",
+    "No CharacterSelect/gameplay/performance completion claim."
+  ]
+}

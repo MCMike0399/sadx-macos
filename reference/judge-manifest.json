@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "efbb015ccca5ef8730ea5a7979f500c36f5093b1",
-    "evidence": "reference/production-integration-20261021/native-main-menu-required-journey.json",
-    "evidence_sha256": "f17183eaa1a5a9bd24f7ce149abba4afe29bb6a52f56d6f938fe65c9b8510352",
-    "reason": "Require and tamper-protect verified native MainMenu journey alongside unchanged FileSelect journey; native music queue statistics reset peropen"
+    "base_commit": "1858025d2d143dde14ff32685278a9143eb17251",
+    "evidence": "reference/production-integration-20261021/native-quick-open-counter-judge-correction.json",
+    "evidence_sha256": "5600aa1ae99a7b00ecfb6d2e576ad191a8730cfd2075c788b228b452cee45c33",
+    "reason": "Correct evidenced quick-open animation-counter field mapping; retain all original vectors and add independent fade/knownness checks"
   },
   "files": {
     "Makefile": "e196397acda201ccde959a5342c034ca33589294f5c2c46c1928d926de6f0b2e",
@@ -364,7 +364,7 @@
     "tests/probes/native_math_probe.cpp": "9314941068f29475fc6dc37c0c52e6162a64fc4e60dd2b0c1220fd3df966bb1a",
     "tests/probes/native_menu_caption_probe.cpp": "2750facb1674386b0f521298f05453a5bc393bb23044fabc7aaf3854356ba9a3",
     "tests/probes/native_menu_dialog_confirmation_probe.cpp": "f5267581e4eaeaf7c0e43327dda5dee4838ec3e184f56e68bbb348c9b14ae278",
-    "tests/probes/native_menu_dialog_control_probe.cpp": "abee66b1ff2e8aba6acd59d5f5be39e59f4b7116edb870b88c80da0f83ad938d",
+    "tests/probes/native_menu_dialog_control_probe.cpp": "48640167f4f552de2fda0e5188bf2e02a3eac75829370223e6a321b1531c7efe",
     "tests/probes/native_menu_dialog_draw_probe.cpp": "badea0312584e54bac557758fe297805aee9fedba5a8b83966a1b9684d3301bb",
     "tests/probes/native_menu_dialog_probe.cpp": "f139ee92fbcfb84da872162f784be306981d3bf8f8ff150d59c6cccffbe55bcd",
     "tests/probes/native_menu_dialog_square_probe.cpp": "8e86172c747ee65e61e1137c09c9d569316f0ad5ded97c85d327fc44afa5f2e5",
@@ -637,7 +637,7 @@
     "tools/oracles/verify_original_menu_caption.py": "bcafd45f34cdf3bb00b00c1f43c9c28df0336e290fa1065483f21707318ad472",
     "tools/oracles/verify_original_menu_dialog.py": "bcc7ecadbe75a4e944073cc189308a3210aa2fd630957db9da038488ef91e7c7",
     "tools/oracles/verify_original_menu_dialog_confirmation.py": "b7e4d9c817a191f995ed42fceca8de033e84100fb7419e2c7f89636a9c965bd0",
-    "tools/oracles/verify_original_menu_dialog_control.py": "c6fe7f1b48e39d1395d6fdd8eb9c74cd63a7b903c842c170a7de886bbc42bc00",
+    "tools/oracles/verify_original_menu_dialog_control.py": "763542f74bce4bfdd6a5117eab8e583fa97fedd22ba0dbd0f9cbd501df2a2742",
     "tools/oracles/verify_original_menu_dialog_draw.py": "c2191574eb70be48c983865002c50d0083a85b81b5c2719814a332eb165762ed",
     "tools/oracles/verify_original_menu_dialog_square.py": "960d9d0fe65ac430e3d313e3f7209c0261622043a7e611ea8e9426b79dbfd1e5",
     "tools/oracles/verify_original_menu_dialog_update.py": "58400e7e579d67077ed23c3822bc333eee7b0cb276e3c8bbc267f9fad94cdbd0",

@@ -45,7 +45,8 @@ extern "C" void sadx_native_menu_dialog_control_probe(const std::uint32_t *i, st
     work->phase = static_cast<std::int32_t>(i[1]);
     work->repeat_frames = static_cast<std::int16_t>(i[2]);
     work->opening_frames = static_cast<std::int16_t>(i[3]);
-    work->fade = number(i[4]);
+    work->animation_angle = i[4];
+    work->fade = number(i[15]);
     work->cursor = static_cast<std::uint8_t>(i[5]);
     work->previous_choice = static_cast<std::int32_t>(i[6]);
     work->parameters = &defs.rows[0];
@@ -74,7 +75,9 @@ extern "C" void sadx_native_menu_dialog_control_probe(const std::uint32_t *i, st
     o[1] = static_cast<std::uint32_t>(work->phase);
     o[2] = static_cast<std::uint16_t>(work->repeat_frames);
     o[3] = static_cast<std::uint16_t>(work->opening_frames);
-    o[4] = bits(work->fade);
+    o[4] = work->animation_angle.value_or(0);
+    o[35] = bits(work->fade);
+    o[36] = work->animation_angle.has_value();
     o[5] = work->cursor;
     o[6] = static_cast<std::uint32_t>(work->previous_choice);
     for (unsigned n = 0; n < 3; ++n)

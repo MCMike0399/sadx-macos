@@ -23,7 +23,7 @@ class Source:
   for n in range(3):
    self.m.mem_write(TABLE+60*n,bytes(60));self.put(TABLE+60*n+56,v[9],1);self.put(TABLE+60*n+16,SOUNDS+n*20 if v[10] else 0);self.put(SOUNDS+n*20,v[11]+n)
   self.m.mem_write(WORK,bytes(68));self.m.mem_write(OTHERWORK,bytes(68));self.put(TASK+44,WORK);self.put(OTHER+44,OTHERWORK);self.put(OWNER,TASK)
-  self.put(WORK,TABLE);self.put(WORK+4,v[1]);self.put(WORK+36,v[2],2);self.put(WORK+38,v[3],2);self.put(WORK+32,v[4]);self.put(WORK+40,v[5],1);self.put(WORK+60,v[6]);self.m.mem_write(WORK+42,bytes(x&255 for x in v[16:32]));self.m.mem_write(DISABLED,bytes(x&255 for x in v[32:48]))
+  self.put(WORK+20,v[15]);self.put(WORK,TABLE);self.put(WORK+4,v[1]);self.put(WORK+36,v[2],2);self.put(WORK+38,v[3],2);self.put(WORK+32,v[4]);self.put(WORK+40,v[5],1);self.put(WORK+60,v[6]);self.m.mem_write(WORK+42,bytes(x&255 for x in v[16:32]));self.m.mem_write(DISABLED,bytes(x&255 for x in v[32:48]))
   disabled={0:0,1:DISABLED,2:WORK+42,3:WORK+43}[v[12]];op=v[0]
   args=() if op<2 else (v[14],) if op==2 else (v[7] if op<5 else TABLE+60*v[7],v[8],disabled)
   addr=[0x432580,0x4325b0,0x4325c0,0x5057d0,0x5057f0,0x432cb0][op]
@@ -31,7 +31,7 @@ class Source:
   assert self.m.reg_read(UC_X86_REG_EIP)==STOP and self.m.reg_read(UC_X86_REG_ESP)==STACK-252
   out=[0]*64;out[0]=self.m.reg_read(UC_X86_REG_EAX) if op==0 else self.m.reg_read(UC_X86_REG_EAX)&65535 if op==1 else 0
   out[1:8]=[self.word(WORK+4),self.word(WORK+36,2),self.word(WORK+38,2),self.word(WORK+32),self.word(WORK+40,1),self.word(WORK+60),(self.word(WORK)-TABLE)//60]
-  out[8:24]=list(self.m.mem_read(WORK+42,16));out[32:34]=self.sound;out[34]=int(self.word(OWNER)==OTHER);return out
+  out[8:24]=list(self.m.mem_read(WORK+42,16));out[32:34]=self.sound;out[34]=int(self.word(OWNER)==OTHER);out[35]=self.word(WORK+20);out[36]=1;return out
 
 def vectors(seed,count):
  rng=random.Random(seed);rows=[]
@@ -55,7 +55,7 @@ def vectors(seed,count):
  return rows
 
 def main():
- p=argparse.ArgumentParser();p.add_argument('exe');p.add_argument('library');p.add_argument('--output',required=True);p.add_argument('--seed',type=int,default=432580);p.add_argument('--cases',type=int,default=1200);a=p.parse_args();image=PEImage(a.exe);assert image.sha256==SOURCE_SHA256;source=Source(image);lib=ctypes.CDLL(a.library);probe=lib.sadx_native_menu_dialog_control_probe;probe.argtypes=[ctypes.POINTER(ctypes.c_uint32)]*2;rows=vectors(a.seed,a.cases);bad=[]
+ p=argparse.ArgumentParser();p.add_argument('exe');p.add_argument('library');p.add_argument('--output',required=True);p.add_argument('--seed',type=int,default=432580);p.add_argument('--cases',type=int,default=1200);a=p.parse_args();image=PEImage(a.exe);assert image.sha256==SOURCE_SHA256;source=Source(image);lib=ctypes.CDLL(a.library);probe=lib.sadx_native_menu_dialog_control_probe;probe.argtypes=[ctypes.POINTER(ctypes.c_uint32)]*2;original_rows=vectors(a.seed,a.cases);rows=[v[:] for v in original_rows];rows += [v[:15]+[0x3fc00000]+v[16:] for v in rows];bad=[]
  for n,v in enumerate(rows):
   expected=source.run(v);out=(ctypes.c_uint32*64)();probe((ctypes.c_uint32*48)(*v),out);diff=[[i,x,y] for i,(x,y) in enumerate(zip(expected,out)) if x!=y]
   if diff:
