@@ -160,3 +160,19 @@ LOADER	0x100aea50	function	DisplayVideoFrame_r		selected source background scope
 SONIC	0x38f6ce4	global	MessageScreenSprite			32	tools/oracles/verify_original_center_screen_sprite.py source401070+40d4d0 complete original instruction proofs	Semantic source owner/function recovered on the connected native fresh-save caller.
 SONIC	0x42d0d0	function	WriteEventFlagsToSaveFile				tools/oracles/verify_original_save_prepare.py complete original flag pack loop; save_creation frozen packet	Semantic source owner/function recovered on the connected native fresh-save caller.
 SONIC	0x42d130	function	WriteNPCFlagsToSaveFile				tools/oracles/verify_original_save_prepare.py complete original flag pack loop; save_creation frozen packet	Semantic source owner/function recovered on the connected native fresh-save caller.
+SONIC	0x512ca0	function	CharacterCompletion				tools/oracles/verify_original_character_completion.py complete source2399/5399 strict cases	Last authored passing row value; full source512ca0 and flag helpers verified; not a popcount
+SONIC	0x507050	function	Menu_CharacterLabel				tools/oracles/verify_original_character_select_labels.py full original entry	Source label lookup/menu14 and locale variant; exact original instruction and FP-qualified judge
+SONIC	0x5071d0	function	Menu_CharacterName				tools/oracles/verify_original_character_select_labels.py full original entry	Existing name lookup borrowed from FileSelect; menu15/28 and locale scaling
+SONIC	0x3abdb50	global	CurrentDeviceLight	D3DLIGHT8		104	ev_a65a6504251472b2aa04f057cddef598d5bd5787b2769758a2cf0e8ec97ee9cd	Source104-byte scratch BSS then full light definition; existing graphics Light owns typed value
+SONIC	0x775630	function	D3DXVec3Normalize_SSE				ev_a65a6504251472b2aa04f057cddef598d5bd5787b2769758a2cf0e8ec97ee9cd; exact PE thunk76ff01	Unrecovered actual SSE mode0 normalization; not reached by preview mode2
+SONIC	0x433410	function	CharSelCamera				tools/oracles/verify_original_selection_camera.py complete original source body	Actual selection camera pose and existing Ninja/view owners; GhidraNoProcedure remains explicit
+SONIC	0x3c5ff80	global	CharSelPreviewTask	task*		4	ev_4ca564fd4c7b9ddeee584b8b149e3afe4fb53b27e4bee4754283363734cffd77	Preview factory publishes actual task before work allocation
+SONIC	0x3c5ff64	global	CharSelResetMarker	uint32		4	ev_177a03fb0f0b9fbc00c15b380d81f082f8a727f982da799c6411b8e07c69ae17	Actual preview reset marker numeric stores
+SONIC	0x3c5ff10	global	CharSelPositions	NJS_POINT3[7]		84	ev_177a03fb0f0b9fbc00c15b380d81f082f8a727f982da799c6411b8e07c69ae17	Seven live source actor positions copied from imported source declaration
+SONIC	0x512550	function	LoadCharSelTextures				tools/oracles/verify_original_selection_preview.py complete original entry	Selection-specific texture request wrapper distinct from ordinary first-entry guarded loader
+SONIC	0x512840	function	PrepareCharSelActors				ev_6b67841fe64cbbcaf67756e1d0c176de79a7f243bd2bc4e4cd579d1ea77882ac	Actual seven factories and one camera; raw ID2 Gamma binding
+SONIC	0x512640	function	ResetCharSelActors				ev_177a03fb0f0b9fbc00c15b380d81f082f8a727f982da799c6411b8e07c69ae17	Shared actor reset and source pose owners
+SONIC	0x5127f0	function	PositionCharSelActor				ev_69eeca19ec3ffb985ce68a59b1a4ad711cdcc0ee2d2113bf126a6ed47e817e3c	Source actor carousel position and yaw math
+SONIC	0x512af0	function	InitializeCharSelPreview				ev_4ca564fd4c7b9ddeee584b8b149e3afe4fb53b27e4bee4754283363734cffd77	Actual calloc56, palette2, camera and source preview callbacks
+SONIC	0x512a70	function	ReleaseCharSelActors				tools/oracles/verify_original_selection_preview.py complete original entry	All nonnull declared lists release; no first-entry guard
+SONIC	0x3b11184	global	CharacterSelectSavedFrameIncrement	int32		4	tools/oracles/verify_original_character_select_menu.py source511e90/511570	Distinct BSS saved frame owner; never alias pending ticks or secondary loop count

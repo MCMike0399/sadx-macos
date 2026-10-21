@@ -8,6 +8,10 @@
 #include "game/menu_caption.hpp"
 #include "game/message_texture.hpp"
 #include "game/saved_fov.hpp"
+#include "game/lighting_palette.hpp"
+#include "game/selection_camera.hpp"
+#include "game/selection_question.hpp"
+#include "engine/device_lights.hpp"
 #include "engine/native_message_texture.hpp"
 #include "engine/queue_consumer_native.hpp"
 #include "engine/message_sprite_queue.hpp"
@@ -32,6 +36,12 @@ class Display {
     void set_perspective(std::int32_t, std::uint32_t &pause_state);
     void set_view_angle(std::int32_t, std::uint32_t &pause_state);
     void set_lighting(bool enabled);
+    void set_lighting_palette(std::int32_t, lighting::State &, lighting::StageView,
+                              lighting::TimeServices &);
+    void update_selection_camera(selection_camera::Pose);
+    void draw_selection_question(selection_question::Pose, const std::uint32_t &,
+                                 selection_question::Assets,
+                                 const std::function<void(std::uint32_t)> &select_texture);
     void set_clip_range(float near_distance, float far_distance);
     ui_scale::State &ui_scaling() { return ui_scaling_; }
     void draw_screen_sprite(const sprite::ScreenSprite &, std::int32_t, float, std::uint8_t);
@@ -83,6 +93,9 @@ class Display {
     X87Context arithmetic_{127};
     SseContext sse_{8064};
     graphics::Draw device_state_;
+    device_lights::State device_lights_;
+    lighting::DeviceState lighting_device_;
+    lighting::DeviceServices lighting_services();
     graphics::Frame frame_;
     view::State view_;
     NinjaMath::SineTable sine_;

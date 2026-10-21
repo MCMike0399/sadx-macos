@@ -15,6 +15,7 @@ namespace sadx {
 class TaskScheduler;
 class Task;
 struct PlayerTaskState;
+struct PlayerMotionState;
 struct PlayerAuxiliaryEffectTaskWork;
 struct TaskCallbackContext { virtual ~TaskCallbackContext() = default; };
 struct TaskCallbackDiagnostic { virtual ~TaskCallbackDiagnostic() = default; };
@@ -71,6 +72,10 @@ private:
     TaskHandle destruction_previous_, destruction_next_;
     TaskWorkHandle cleanup_object_, cleanup_cursor_;
     bool destructor_active_ = false;
+public:
+    // NOTSA: one canonical native motion owner, bound from actual source calloc.
+    // Appended so existing fields retain their layout in private compatibility tests.
+    std::shared_ptr<PlayerMotionState> motion_state;
 };
 
 enum class TaskFailure {
@@ -121,6 +126,8 @@ struct TaskGraphNode {
     std::shared_ptr<PlayerTaskState> primary_state;
     std::shared_ptr<PlayerAuxiliaryEffectTaskWork> auxiliary_effect_work;
     std::shared_ptr<void> auxiliary_native_work{};
+    // NOTSA: structural interchange preserves the canonical native motion owner.
+    std::shared_ptr<PlayerMotionState> motion_state{};
     std::shared_ptr<Task::ObjectControl> control;
 };
 struct TaskGraphState {

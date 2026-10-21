@@ -196,12 +196,12 @@ class Importer:
                                self.motion(motion, self.animated_objects(root)))
         return self.record("action", address, 1, build)
 
-    def write(self, output, actions, title=False):
+    def write(self, output, actions, title=False, selection=False):
         self.verify_round_trip()
-        body = bytearray(b"SDXACT02" if title else b"SDXACT01")
+        body = bytearray(b"SDXACT03" if selection else b"SDXACT02" if title else b"SDXACT01")
         body.extend(struct.pack("<II", len(self.records), len(actions)))
         for descriptor in actions:
-            body.extend(struct.pack("<III" if title else "<II", *descriptor))
+            body.extend(struct.pack("<IIII" if selection else "<III" if title else "<II", *descriptor))
         for kind, payload in self.records:
             body.extend(struct.pack("<II", kind, len(payload)))
             body.extend(payload)
@@ -239,6 +239,8 @@ class Importer:
             row["source_size"] = len(restored)
             row["source_sha256"] = hashlib.sha256(original).hexdigest()
             row["round_trip_exact"] = True
+            if hasattr(self.image, "provenance"):
+                row.update(self.image.provenance(int(row["source_address"], 16), len(restored)))
 
 
 def main():

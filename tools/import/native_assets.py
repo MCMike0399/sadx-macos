@@ -11,6 +11,7 @@ from pathlib import Path
 import shutil
 import subprocess
 import sys
+import tempfile
 
 from character_actions import SOURCE_SHA
 from movie_assets import import_content, import_movies
@@ -28,11 +29,18 @@ from voice_assets import import_voice_assets
 from save_files import import_save_files
 from font_assets import import_font_assets
 from message_fonts import import_message_fonts
-from menu_voice import import_menu_voice
+from menu_voice import import_menu_voice, required_voices
 from file_select_display import import_file_select_display
 from menu_dialog import import_menu_dialog
 from main_menu_dialog import import_main_menu_dialog
 from sound_effects import import_sound_effects
+from selection_actions import import_selection_actions
+from sonic_actor_resources import import_sonic_actor_resources
+from character_select_menu import import_character_select_menu
+from character_select_labels import import_character_select_labels
+from character_completion import import_character_completion
+from file_select_display import atomic_json
+from pe_image import PEImage
 
 
 def digest(path):
@@ -59,6 +67,22 @@ def import_assets(game, output):
                     str(model), str(output / "characters/sonic-startup.actions")], check=True)
     subprocess.run([sys.executable, str(Path(__file__).with_name("character_actions.py")),
                     str(model), str(output / "characters/title.actions"), "--title"], check=True)
+    # Derive declarations in temporary storage, then publish one combined graph.
+    # No resource ID changes between the preview prefix and Sonic's extension.
+    with tempfile.TemporaryDirectory(prefix="sadx-selection-declarations-") as temporary:
+        base = Path(temporary) / "selection.actions"
+        selection = import_selection_actions(model, game / "sonic.exe", base)
+        preview_proof = json.loads(base.with_suffix(".provenance.json").read_text())
+        combined = import_sonic_actor_resources(
+            model, game / "sonic.exe", output / "characters/sonic-selection.actions")
+        atomic_json(output / "characters/selection-preview.json", selection["metadata"])
+        atomic_json(output / "characters/selection-preview-evidence.json", {
+            "source_preview": preview_proof,
+            "combined_pack_sha256": combined["sha256"],
+            "scope": "Intermediate preview declarations; runtime owns one Sonic extension graph."})
+    selection_menu = import_character_select_menu(game, output)
+    import_character_select_labels(game, output)
+    import_character_completion(game, output)
     import_character_textures(game, output)
     import_title_menu(game, output)
     import_stage_lighting(game, output)
@@ -71,8 +95,18 @@ def import_assets(game, output):
     import_file_select_display(game, output)
     import_menu_dialog(game, output)
     import_main_menu_dialog(game, output)
-    import_music_assets(game, output, selected=(102, 72, 101), menu_request_count=3)
-    import_voice_assets(game, output)
+    import_music_assets(game, output, selected=(102, 72, 101, 24, 103), menu_request_count=5)
+    # The eight-entry source cue table remains intact. Cue2047 is absent from
+    # both pinned voice directories; preserve that explicit asset boundary.
+    # These seven source-backed clips cover the reached six-character menu.
+    selected_cues = (1837, 1800, 1787, 1730, 1744, 1767, 396)
+    if selection_menu["selected_voice_cues"] != [*selected_cues, 2047]:
+        raise ValueError("CharacterSelect voice cue catalog changed")
+    voices = list(dict.fromkeys(required_voices(PEImage(game / "sonic.exe")) + list(selected_cues)))
+    import_voice_assets(game, output, selected=voices)
+    atomic_json(output / "character-select-missing-resources.json", {
+        "version": 1, "selected_voice_cues": [2047], "languages": [0, 1],
+        "boundary": "Runtime request2047 remains a missing resource; no substitute clip."})
     import_save_files(game, output)
     import_banks(game / "sonic.exe", system / "SoundData/SE", output,
                  selected=(42, 36, 1, 71, 72),

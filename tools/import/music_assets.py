@@ -26,7 +26,7 @@ sha = lambda raw: hashlib.sha256(raw).hexdigest()
 def read_catalog(image, menu_request_count=1):
     if image.sha256 != SOURCE_SHA256:
         raise ValueError('music catalog requires the pinned executable SHA256')
-    if type(menu_request_count) is not int or not 1 <= menu_request_count <= 3:
+    if type(menu_request_count) is not int or not 1 <= menu_request_count <= 5:
         raise ValueError('menu request prefix exceeds recovered caller indices')
     raw = image.read(SONGS, 125 * 8)
     songs, strings, inverse = [], {}, bytearray()
@@ -47,7 +47,7 @@ def read_catalog(image, menu_request_count=1):
     en_raw = image.read(ENGLISH_DURATIONS, 2049 * 2)
     japanese = list(struct.unpack('<2049H',jp_raw))
     english = list(struct.unpack('<2049H',en_raw))
-    # Title and FileSelect prove request indices0 and2, so retain their whole prefix.
+    # Title/FileSelect/MainMenu prove indices0..2; CharacterSelect5114e0 proves3/4.
     # The rest of the unbounded source request array is not assigned a guessed size.
     request_raw = image.read(MENU_REQUESTS,menu_request_count*4)
     requests = list(struct.unpack(f'<{menu_request_count}i',request_raw))

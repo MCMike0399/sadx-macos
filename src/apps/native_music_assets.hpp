@@ -27,7 +27,12 @@ inline MusicAssets load_music_assets(const std::filesystem::path &directory) {
     };
     durations(catalog[@"japanese_voice_durations"], result.catalog.japanese_voice_durations);
     durations(catalog[@"english_voice_durations"], result.catalog.english_voice_durations);
-    const auto requests = array(catalog[@"menu_requests"], 3, "proved menu music requests");
+    id requests = catalog[@"menu_requests"];
+    // Retain the startup three-request resource set; CharacterSelect adds both
+    // source variant requests together, for a complete five-request resource set.
+    if (![requests isKindOfClass:NSArray.class] ||
+        ([requests count] != 3 && [requests count] != 5))
+        throw std::runtime_error("invalid imported proved menu music requests");
     for (id request in requests)
         result.catalog.menu_requests.push_back(static_cast<std::int32_t>(
             integer(request, 0, result.catalog.songs.size() - 1, "menu song")));

@@ -1,0 +1,193 @@
+{
+  "execution": "native",
+  "base_commit": "5311f40",
+  "application_build_exit_status": 0,
+  "asset_import_exit_status": 0,
+  "normal_input_run": {
+    "command": [
+      "/Users/burbujamc/Developer/sadx-macos/build/sadx-native",
+      "--assets",
+      "/Users/burbujamc/Developer/sadx-macos/game/imported",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1500",
+      "--save-directory",
+      "/private/tmp/sadx-native-character-main-frontier/savedata",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,900:38:down,901:38:up,950:13:down,951:13:up,1350:13:down,1351:13:up",
+      "--capture-directory",
+      "/private/tmp/sadx-native-character-main-frontier/captures",
+      "--capture-at",
+      "1300,1380,1381,1382,1383,1390"
+    ],
+    "exit_status": 1
+  },
+  "observed": {
+    "frames": 1382,
+    "stage": 0,
+    "act": 1,
+    "logic_loop_count": 1,
+    "pending_logic_ticks": 0,
+    "preview_camera_live": true,
+    "texture_slots_in_use": 762
+  },
+  "question_yaw": 17112,
+  "other_actor_modes": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "boundary": "native_basic_object_renderer; source Question prefix executed, no final model draw or other actor initialization success claimed",
+  "first_ui_frame": "Transparent source fade at1382 retains outgoing logo; captured/inspected. Not completed CharacterSelect.",
+  "unit_tests": [
+    {
+      "command": [
+        "build/player-initialization-test"
+      ],
+      "exit_status": 0
+    },
+    {
+      "command": [
+        "build/player-motion-graph-test"
+      ],
+      "exit_status": 0
+    },
+    {
+      "command": [
+        "build/selection-question-test"
+      ],
+      "exit_status": 0
+    },
+    {
+      "command": [
+        "build/selection-character-pack-test",
+        "game/imported/characters/sonic-selection.actions",
+        "game/imported/characters/title.actions"
+      ],
+      "exit_status": 0
+    },
+    {
+      "command": [
+        "build/native-character-selection-assets-test",
+        "game/imported",
+        "game/imported/characters/title.actions"
+      ],
+      "exit_status": 0
+    },
+    {
+      "command": [
+        "build/native-character-select-music-test",
+        "game/imported"
+      ],
+      "exit_status": 0
+    },
+    {
+      "command": [
+        "build/character-select-labels-test",
+        "game/imported"
+      ],
+      "exit_status": 0
+    },
+    {
+      "command": [
+        "build/character-completion-test",
+        "game/imported"
+      ],
+      "exit_status": 0
+    }
+  ],
+  "source_oracle_invocations": {
+    "character_select_menu": 2,
+    "character_select_availability": 0,
+    "selection_preview": 0,
+    "selection_camera": 2,
+    "lighting_palette": 2,
+    "selection_question": 0,
+    "character_select_labels": 2,
+    "character_completion": 0,
+    "file_select_display": 0,
+    "player_startup": 0
+  },
+  "source_verdicts": {
+    "character_select_menu": {
+      "verdict": "partial  /Users/burbujamc/Developer/sadx-macos/build/oracles/character_select_menu.json: values match; flag_mismatches=733 (see limits)",
+      "report_sha256": "2e00384234e2775eb9aa81e3a7544080d48ed9da969e51c8e8223f52cc51048f",
+      "cases": 3326
+    },
+    "character_select_availability": {
+      "verdict": "pass     /Users/burbujamc/Developer/sadx-macos/build/oracles/character_select_availability.json: passed",
+      "report_sha256": "25f7a8f1760cb6fad656ba54ab5f25b9d4594aaa6dd1f9d36d9ad9b9896540a8",
+      "cases": 2920
+    },
+    "selection_preview": {
+      "verdict": "pass     /Users/burbujamc/Developer/sadx-macos/build/oracles/selection_preview.json: passed",
+      "report_sha256": "d4248bb08778123f3954916d7db575b83e424f3fd6843390dee87800b27755ba",
+      "cases": 1608
+    },
+    "selection_camera": {
+      "verdict": "partial  /Users/burbujamc/Developer/sadx-macos/build/oracles/selection_camera.json: values match; fp_flag_mismatches=25152 (see limits)",
+      "report_sha256": "78c0c3728d8f2cdc5a3432a94c22918adeec6fb1cee50c37281f9bb4e9575116",
+      "cases": 26808
+    },
+    "lighting_palette": {
+      "verdict": "partial  /Users/burbujamc/Developer/sadx-macos/build/oracles/lighting_palette.json: values match; fp_flag_mismatches=11 (see limits)",
+      "report_sha256": "1faf118b496885c9d4e8a9fa59be41b69f07fb0f8356ad6f0994d6f7311fcc3c",
+      "cases": 1597
+    },
+    "selection_question": {
+      "verdict": "pass     /Users/burbujamc/Developer/sadx-macos/build/oracles/selection_question.json: passed",
+      "report_sha256": "e3cf959909f95f64c26df6e17e6543faa577aeee76d34d755507bce550670435",
+      "cases": 3235
+    },
+    "character_select_labels": {
+      "verdict": "partial  /Users/burbujamc/Developer/sadx-macos/build/oracles/character_select_labels.json: values match; fp_flag_mismatches=2014 (see limits)",
+      "report_sha256": "e0e0e5e065f8905eeecfb9835fd4a0faaf4c48235a6ae68287bc53668c312ca1",
+      "cases": 4264
+    },
+    "character_completion": {
+      "verdict": "pass     /Users/burbujamc/Developer/sadx-macos/build/oracles/character_completion.json: passed",
+      "report_sha256": "b73d897914b3c19b3c773ef32673fff694a2284ce0af65600149138ee64d3ada",
+      "cases": 2399
+    },
+    "file_select_display": {
+      "verdict": "partial  /Users/burbujamc/Developer/sadx-macos/build/oracles/file_select_display.json: values match; flag_mismatches=340 (see limits)",
+      "report_sha256": "43f8ed0d23c276e3d730e153210f0d13d87f309cc105ce52290d84e550d3a030",
+      "cases": 600
+    },
+    "player_startup": {
+      "verdict": "partial  /Users/burbujamc/Developer/sadx-macos/build/oracles/player_startup.json: values match; full_emulator_match=false (see limits)",
+      "report_sha256": "105877c1b7eee272ea6edb1e0809867723895c18b85811695c5b07f66627453d",
+      "cases": null
+    }
+  },
+  "gate": {
+    "command": [
+      "make",
+      "-j10",
+      "gate"
+    ],
+    "exit_status": 2,
+    "log": "/Users/burbujamc/Developer/sadx-macos/build/native-character-integration-gate.log"
+  },
+  "pending_judge_integration": [
+    "Reference-only player-auxiliary-effect-test must link the migrated Startup facade.",
+    "New source-backed Python test setup requires repository default root and the existing reference venv Capstone dependency; no skip.",
+    "New selection_camera report fingerprint root incorrectly assumed probe next to src; all26808 original cases rerun via owned copy of Mainprobe/same three Main source files,0value/25152FP partial. Canonicaltarget fix follows separately."
+  ],
+  "production_separation": "nm undefined imports contain no Unicorn/guest/legacy Startup facade symbols; native library whitelist excludes guest source. Private source-only build succeeded before Main integration.",
+  "limits": [
+    "No full CharacterSelect lifecycle/animation/image/input/cancel/reentry success yet.",
+    "No native Chaos0/gameplay63FPS evidence; audio/controller prior evidence retains its existing scope.",
+    "New music24/103 PCM delivery is isolated unit evidence; actual CharacterSelect manager delivery still blocked behind actor frame."
+  ],
+  "python_qualification": {
+    "command": "SADX_SOURCE_ROOT=$PWD PYTHONPATH=tools/lib:tools/oracles reference/python/bin/python -m unittest discover -s tests/python -p test_*.py",
+    "exit_status": 0,
+    "log": "build/native-character-python-qualified.log",
+    "limits": "Canonical gate recipe setup corrections pending separate judge commit; no skips added."
+  }
+}

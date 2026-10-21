@@ -26,6 +26,8 @@
 #include "runtime/file_select_display_assets.hpp"
 #include "runtime/menu_dialog_assets.hpp"
 #include "runtime/main_menu_assets.hpp"
+#include "runtime/character_selection_assets.hpp"
+#include "game/character_completion.hpp"
 #include "runtime/message_font_assets.hpp"
 #include "game/save_creation.hpp"
 #include "game/save_write.hpp"
@@ -121,6 +123,17 @@ class Session final : private flow::NativeServices {
     void attach_menu_textures(const MenuTextureAssets &);
     void attach_menu_dialogs(MenuDialogAssets);
     void attach_main_menu(MainMenuAssets);
+    void attach_character_selection(CharacterSelectionAssets);
+    void attach_character_completion(character_completion::Catalog catalog) {
+        if (character_completion_)
+            throw std::runtime_error("native character completion resources already attached");
+        character_completion_ = std::make_unique<character_completion::Catalog>(std::move(catalog));
+    }
+    void attach_character_labels(std::array<std::uint8_t, 7> labels) {
+        if (character_label_textures_)
+            throw std::runtime_error("native character label resources already attached");
+        character_label_textures_ = std::make_unique<std::array<std::uint8_t, 7>>(labels);
+    }
     sound_bank::Channels sound_channels() { return {sound_.records, sound_tasks_, bank_channels_}; }
     void attach_sound_banks(const sound_bank::Catalog &catalog, sound_bank::Services services,
                             std::string cd_prefix) {
@@ -241,6 +254,11 @@ class Session final : private flow::NativeServices {
     std::unique_ptr<FileSelectDisplayAssets> file_select_display_assets_;
     std::unique_ptr<MenuDialogAssets> menu_dialog_assets_;
     std::unique_ptr<MainMenuAssets> main_menu_assets_;
+    std::unique_ptr<CharacterSelectionAssets> character_selection_assets_;
+    std::unique_ptr<character_completion::Catalog> character_completion_;
+    std::unique_ptr<std::array<std::uint8_t, 7>> character_label_textures_;
+    // GLOBAL: SONIC 0x3b11184 CharacterSelectSavedFrameIncrement size=4
+    std::int32_t selection_saved_frame_increment_ = 0;
     menu_caption::State menu_caption_;
     std::unique_ptr<MessageFontAssets> message_font_assets_;
     message_text::State message_fonts_;

@@ -64,13 +64,6 @@ void TitleScene::install_menu_callbacks(title_menu::MenuMode mode, const TaskHan
     task->exec = menu_exec(mode);
     task->display = display;
 }
-template<class Work>
-std::shared_ptr<Work> TitleScene::allocate_menu_work(const TaskHandle &task, std::uint32_t size) {
-    if (!allocate_auxiliary(task, size, true)) return {};
-    auto work = std::make_shared<Work>();
-    task->auxiliary_native_work = work;
-    return work;
-}
 title_menu::MenuFactoryInputs TitleScene::factory_inputs() {
     return {session_.bootstrap_.menu.character_cursor, session_.bootstrap_.menu.selected_file,
             session_.bootstrap_.card_operation, session_.bootstrap_.card_state,
@@ -87,21 +80,6 @@ void TitleScene::calculate_ticks() {
     const auto result = frame_loop::calculate_ticks(state);
     if (result != frame_loop::TickFailure::None)
         throw std::runtime_error("native menu timing divide fault");
-}
-void TitleScene::exec_character_select(TaskScheduler &scheduler, const TaskHandle &task) {
-    auto &scene = callback_scene(scheduler, exec_character_select);
-    auto work = std::static_pointer_cast<title_menu::CharacterSelectWork>(task->auxiliary_native_work);
-    if (!work || !scene.state_.sequence_work)
-        throw std::runtime_error("native character_select task has no work");
-    scene.require_complete(title_menu::update_character_select(*work, *scene.state_.sequence_work,
-        scene.session_.bootstrap_.menu.character_cursor, scene.session_.bootstrap_.menu.player_character),
-                            "native_character_select");
-}
-void TitleScene::display_character_select(TaskScheduler &scheduler, const TaskHandle &task) {
-    auto &scene = callback_scene(scheduler, display_character_select);
-    auto work = std::static_pointer_cast<title_menu::CharacterSelectWork>(task->auxiliary_native_work);
-    if (!work) throw std::runtime_error("native character_select task has no work");
-    scene.require_drawn(title_menu::draw_character_select(*work), "native_character_select_drawing");
 }
 void TitleScene::exec_file_select(TaskScheduler &scheduler, const TaskHandle &task) {
     auto &scene = callback_scene(scheduler, exec_file_select);

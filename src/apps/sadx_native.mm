@@ -24,6 +24,10 @@
 #include "apps/native_file_select_assets.hpp"
 #include "apps/native_menu_dialog_assets.hpp"
 #include "apps/native_main_menu_assets.hpp"
+#include "apps/native_character_selection_assets.hpp"
+#include "apps/native_character_select_label_assets.hpp"
+#include "apps/native_character_completion_assets.hpp"
+#include "player/player_initialization.hpp"
 #include "apps/native_audio_mix.hpp"
 #import <AppKit/AppKit.h>
 #import <MetalKit/MetalKit.h>
@@ -159,7 +163,7 @@ class Application {
           display(this->configuration.assets / "system", frame_mode),
           characters(std::make_shared<sadx::character_pack::CharacterPack>(
               sadx::character_pack::CharacterPack::load(
-                  this->configuration.assets / "characters/title.actions"))),
+                  this->configuration.assets / "characters/sonic-selection.actions"))),
           audio(36, 256), banks(this->configuration.assets),
           session(display.output(), characters, display.frame_state(), display.arithmetic(), frame_mode,
                   assets.character_textures, assets.frame_rate_setting,
@@ -199,6 +203,12 @@ class Application {
         session.attach_menu_dialogs(
             sadx::native::app::load_menu_dialog_assets(this->configuration.assets));
         session.attach_main_menu(sadx::native::app::load_main_menu_assets(this->configuration.assets));
+        session.attach_character_selection(sadx::native::app::load_character_selection_assets(
+            this->configuration.assets, *characters));
+        session.attach_character_labels(sadx::native::app::load_character_label_textures(
+            this->configuration.assets));
+        session.attach_character_completion(sadx::native::app::load_character_completion_assets(
+            this->configuration.assets));
         session.attach_font(sadx::native::app::load_font_assets(this->configuration.assets));
         session.attach_menu_voices(sadx::native::app::load_menu_voice_assets(this->configuration.assets));
         session.attach_file_select_display(
@@ -555,6 +565,42 @@ class Application {
             output << ",\"caption_buffers_allocated\":" << resources.allocated
                    << ",\"caption_buffers_freed\":" << resources.freed
                    << ",\"caption_thread_waits\":" << resources.waits;
+        }
+        if (title && title->preview_state().task) {
+            const auto preview_task = title->preview_state().task;
+            const auto preview_work = std::static_pointer_cast<const sadx::selection_preview::Work>(
+                preview_task->auxiliary_native_work);
+            output << ",\"preview_task_retired\":" << (preview_task->retired() ? "true" : "false");
+            if (preview_work) {
+                output << ",\"preview_camera_live\":"
+                       << (preview_work->camera && !preview_work->camera->retired() ? "true" : "false")
+                       << ",\"preview_warmup_frames\":" << static_cast<int>(preview_work->warmup_frames)
+                       << ",\"preview_actors\":[";
+                bool first_actor = true;
+                for (const auto &actor : preview_work->actors) {
+                    if (!first_actor) output << ',';
+                    first_actor = false;
+                    if (!actor) { output << "null"; continue; }
+                    if (actor->retired()) { output << "{\"retired\":true}"; continue; }
+                    if (!actor->primary_state || !actor->motion_state) {
+                        output << "{\"primary_bound\":" << (actor->primary_state ? "true" : "false")
+                               << ",\"motion_bound\":" << (actor->motion_state ? "true" : "false") << '}';
+                        continue;
+                    }
+                    const auto primary = sadx::player_initialization::bind_primary_view(actor);
+                    const auto motion = sadx::player_initialization::bind_existing_motion(actor);
+                    output << "{\"retired\":" << (actor->retired() ? "true" : "false")
+                           << ",\"mode\":" << static_cast<unsigned>(primary.mode)
+                           << ",\"id\":" << static_cast<unsigned>(primary.id)
+                           << ",\"player_index\":" << static_cast<unsigned>(primary.player_index)
+                           << ",\"character\":" << static_cast<unsigned>(primary.character)
+                           << ",\"status\":" << primary.status
+                           << ",\"position\":[" << primary.position.x << ',' << primary.position.y << ',' << primary.position.z
+                           << "],\"rotation\":[" << primary.rotation[0] << ',' << primary.rotation[1] << ',' << primary.rotation[2]
+                           << "],\"aim_y\":" << motion->target_yaw << '}';
+                }
+                output << ']';
+            }
         }
         if (main_work) {
             output << ",\"main_menu_phase\":" << static_cast<unsigned>(main_work->presentation.phase)

@@ -64,6 +64,26 @@ struct Calls : menu_draw::Calls {
     // STUB: SONIC 0x421920 MessageWindow_Display
     virtual void display_message(const TaskHandle &) = 0;
 };
+// NOTSA: sky drawing borrows only its existing source resource/scaling owners.
+struct SkyView {
+    const float &horizontal_scale, &vertical_scale;
+    const std::int32_t &display_disabled;
+    const std::uint32_t &screen_width, &screen_height;
+    const std::vector<SkyTile> &tiles;
+};
+// FUNCTION: SONIC 0x507bb0 DrawSkyBg
+void draw_sky(float depth, SkyView, pvr::State &, Calls &, X87Context &);
+void draw_sky_profiled(float depth, SkyView, pvr::State &, Calls &, X87Context &, ui_scale::State &);
+// NOTSA: number rendering shares the source digit table and live scale owners.
+struct NumberView {
+    const float &horizontal_scale, &vertical_scale;
+    const std::int32_t &display_disabled;
+    const std::array<std::uint8_t, 10> &digits;
+};
+// FUNCTION: SONIC 0x507410 Menu_DrawNumber
+void draw_number(std::int32_t value, std::int32_t digits, bool zero_fill,
+                 float x, float y, float depth, float spacing, NumberView,
+                 pvr::State &, Calls &, X87Context &);
 // FUNCTION: SONIC 0x505550 file_sel_disp
 void draw(title_menu::FileSelectWork &, View &, pvr::State &, Calls &, X87Context &);
 // NOTSA: selected native profile runs the real background scope, then draws

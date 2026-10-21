@@ -370,6 +370,7 @@ TaskGraphState TaskScheduler::source_graph() const {
         node.exec=t->exec;node.display=t->display;node.destructor=t->destructor;node.field30=t->field30;
         node.primary=t->primary_work;node.motion=t->motion_work;node.force=t->force_work;node.auxiliary=t->auxiliary_work;node.control=t->object_control;node.primary_state=t->primary_state;node.auxiliary_effect_work=t->auxiliary_effect_work;
         node.auxiliary_native_work = t->auxiliary_native_work;
+        node.motion_state = t->motion_state;
         out.nodes.push_back(std::move(node));
     }
     return out;
@@ -394,6 +395,14 @@ TaskResult TaskScheduler::restore_source_graph(const TaskGraphState& state){
     for(const auto& n:state.nodes){if(!valid(n.next,!n.linked)||!valid(n.previous)||!valid(n.parent)||!valid(n.child))return bad();
         for(const auto& work:{n.primary,n.motion,n.force,n.auxiliary})if(work&&!arena_->read(work,0,nullptr,0))return bad();
     }
+    // NOTSA: raw-only imports cannot silently discard or replace a canonical
+    // numeric owner while retaining its same actual motion allocation.
+    for (const auto& node : state.nodes) {
+        if (node.motion_state && !node.motion) return bad();
+        const auto& current = source_slots_[node.slot];
+        if (current && current->motion_state && current->motion_work == node.motion &&
+            current->motion_state != node.motion_state) return bad();
+    }
     for(const auto& h:state.heads)if(!valid(h))return bad();
     std::array<unsigned,4096> visits{};
     std::array<std::size_t,4096> lists{};
@@ -411,6 +420,7 @@ TaskResult TaskScheduler::restore_source_graph(const TaskGraphState& state){
     for(const auto& n:state.nodes){TaskHandle t(new Task);t->owner_=this;t->source_slot_=n.slot;t->linked_=n.linked;t->list_=lists[n.slot];
         t->exec=n.exec;t->display=n.display;t->destructor=n.destructor;t->field30=n.field30;t->primary_work=n.primary;t->motion_work=n.motion;t->force_work=n.force;t->auxiliary_work=n.auxiliary;t->object_control=n.control;t->primary_state=n.primary_state;t->auxiliary_effect_work=n.auxiliary_effect_work;
         t->auxiliary_native_work = n.auxiliary_native_work;
+        t->motion_state = n.motion_state;
         if(!n.linked)t->detached_free_next_slot_=n.next;source_slots_[n.slot]=t;storage_[t.get()]=t;}
     const auto pointer=[&](std::optional<std::uint16_t> v){return v?source_slots_[*v].get():nullptr;};
     for(const auto& n:state.nodes){auto& t=source_slots_[n.slot];if(n.linked)t->next_=pointer(n.next);t->previous_=pointer(n.previous);t->parent_=pointer(n.parent);t->first_child_=pointer(n.child);}

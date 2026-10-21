@@ -11,6 +11,7 @@
 #include "game/save_completion.hpp"
 #include "engine/font_native.hpp"
 #include "runtime/title_assets.hpp"
+#include "game/selection_preview.hpp"
 #include <functional>
 
 namespace sadx::native {
@@ -64,6 +65,7 @@ class TitleScene final : private title_menu::Calls,
     void before_save_frame_completion();
     void after_save_frame_completion();
     const title_menu::State &state() const { return state_; }
+    const selection_preview::State &preview_state() const { return preview_; }
     // NOTSA: runtime resource evidence for the otherwise invisible empty-English caption path.
     struct CaptionResources {
         std::uint64_t allocated = 0, freed = 0, waits = 0;
@@ -81,6 +83,23 @@ class TitleScene final : private title_menu::Calls,
     CaptionResources caption_resources_;
     struct CallbackContext;
     struct MainMenuServices;
+    struct CharacterMenuServices;
+    struct PreviewServices;
+    selection_preview::State preview_;
+    void create_character_preview();
+    void remove_character_preview();
+    void draw_character_menu(title_menu::CharacterSelectWork &);
+    static void exec_preview(TaskScheduler &, const TaskHandle &);
+    static void display_preview(TaskScheduler &, const TaskHandle &);
+    static void delete_preview(TaskScheduler &, const TaskHandle &);
+    static void exec_selection_camera(TaskScheduler &, const TaskHandle &);
+    static void exec_selection_sonic(TaskScheduler &, const TaskHandle &);
+    static void exec_selection_miles(TaskScheduler &, const TaskHandle &);
+    static void exec_selection_knuckles(TaskScheduler &, const TaskHandle &);
+    static void exec_selection_amy(TaskScheduler &, const TaskHandle &);
+    static void exec_selection_big(TaskScheduler &, const TaskHandle &);
+    static void exec_selection_gamma(TaskScheduler &, const TaskHandle &);
+    static void exec_selection_question(TaskScheduler &, const TaskHandle &);
     struct MessageServices;
     void draw_main_menu_content(title_menu::DialogContent, const menu_dialog::ContentArguments &);
     std::shared_ptr<CallbackContext> callback_context_;
@@ -97,7 +116,13 @@ class TitleScene final : private title_menu::Calls,
     static TaskCallback menu_display(title_menu::MenuMode);
     static void exec_puti(TaskScheduler &, const TaskHandle &);
     static void delete_puti(TaskScheduler &, const TaskHandle &);
-    template<class Work> std::shared_ptr<Work> allocate_menu_work(const TaskHandle &, std::uint32_t);
+    template<class Work>
+    std::shared_ptr<Work> allocate_menu_work(const TaskHandle &task, std::uint32_t size) {
+        if (!allocate_auxiliary(task, size, true)) return {};
+        auto work = std::make_shared<Work>();
+        task->auxiliary_native_work = work;
+        return work;
+    }
     title_menu::MenuFactoryInputs factory_inputs();
     title_menu::StageSelectionInputs selection_inputs();
     void require_complete(title_menu::MenuCallbackResult, const char *);

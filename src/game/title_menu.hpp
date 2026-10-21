@@ -532,7 +532,7 @@ struct Calls {
     virtual void sequence_already_active() = 0;
 };
 enum class MenuDrawResult { Complete, NeedsDrawing };
-// FUNCTION: SONIC 0x512450 CharacterSelectMenu_Display
+// NOTSA: retained inactive-prefix adapter; character_select_menu::draw owns source512450.
 MenuDrawResult draw_character_select(const CharacterSelectWork &);
 // NOTSA: inactive-prefix adapter retained for the legacy title-menu oracle.
 MenuDrawResult draw_file_select(const FileSelectWork &);
@@ -561,7 +561,7 @@ enum class MenuCallbackResult { Complete, NeedsInitialization, NeedsLeave,
                                 NeedsFadeIn, NeedsControl, NeedsFadeOut };
 // FUNCTION: SONIC 0x50c010 puti_exec
 MenuCallbackResult update_puti(const TaskHandle &, const SequenceWork &, PutiCalls &);
-// FUNCTION: SONIC 0x5122d0 CharacterSelectMenu_Main
+// NOTSA: retained inactive-prefix adapter; character_select_menu::update owns source5122d0.
 MenuCallbackResult update_character_select(CharacterSelectWork &, SequenceWork &,
                                             std::uint8_t &character_cursor,
                                             std::uint8_t &player_character);

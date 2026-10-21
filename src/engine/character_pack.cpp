@@ -11,6 +11,14 @@ namespace {
 // NOTSA: schema descriptors use source Characters IDs and source action-table indices.
 constexpr std::array<std::array<std::uint32_t, 2>, 7> kTitleActionDescriptors{{
     {0, 100}, {0, 101}, {3, 40}, {3, 41}, {7, 4}, {7, 29}, {7, 30}}};
+// NOTSA: domain0 names a DLL action index; domain1 names a constructor-derived selection action.
+constexpr std::array<std::array<std::uint32_t, 3>, 19> kSelectionActionDescriptors{{
+    {0,0,5}, {0,0,100}, {1,0,0},
+    {0,2,17}, {0,2,39}, {1,2,0},
+    {0,3,81}, {0,3,40}, {1,3,0},
+    {0,5,70}, {0,5,29}, {1,5,0},
+    {0,7,16}, {0,7,29}, {0,7,30}, {1,7,0},
+    {0,6,2}, {1,6,0}, {1,6,1}}};
 // NOTSA: decode the documented little-endian pack schema without host-layout casts.
 std::uint16_t word(const std::vector<std::uint8_t>& bytes, std::size_t offset) {
     return static_cast<std::uint16_t>(bytes.at(offset) | (bytes.at(offset + 1) << 8));
@@ -333,22 +341,30 @@ CharacterPack CharacterPack::load(const std::filesystem::path& path) {
 
 CharacterPack CharacterPack::decode(const std::vector<std::uint8_t>& bytes) {
     const bool title = bytes.size() >= 16 && std::memcmp(bytes.data(), "SDXACT02", 8) == 0;
-    if (bytes.size() < 16 || (!title && std::memcmp(bytes.data(), "SDXACT01", 8) != 0)) {
+    const bool selection = bytes.size() >= 16 && std::memcmp(bytes.data(), "SDXACT03", 8) == 0;
+    if (bytes.size() < 16 || (!selection && !title && std::memcmp(bytes.data(), "SDXACT01", 8) != 0)) {
         invalid("invalid SDXACT01 header");
     }
     const auto records = integer(bytes, 8);
     const auto actions = integer(bytes, 12);
-    const std::uint32_t descriptor_size = title ? 12 : 8;
-    if (!records || actions != (title ? 7U : 2U) ||
+    const std::uint32_t descriptor_size = selection ? 16 : title ? 12 : 8;
+    if (!records || actions != (selection ? 22U : title ? 7U : 2U) ||
         std::uint64_t(records) * 8 + 16 + std::uint64_t(actions) * descriptor_size > bytes.size()) {
         invalid("invalid record or startup action count");
     }
     CharacterPack pack;
+    pack.schema_ = selection ? Schema::Selection : title ? Schema::Title : Schema::Startup;
     std::size_t cursor = 16;
     for (std::uint32_t index = 0; index < actions; ++index) {
-        pack.actions_.push_back(title ? std::array<std::uint32_t, 3>{integer(bytes, cursor),
-            integer(bytes, cursor + 4), integer(bytes, cursor + 8)}
-            : std::array<std::uint32_t, 3>{0, integer(bytes, cursor), integer(bytes, cursor + 4)});
+        if (selection) {
+            pack.actions_.push_back({integer(bytes, cursor), integer(bytes, cursor + 4),
+                                     integer(bytes, cursor + 8), integer(bytes, cursor + 12)});
+        } else if (title) {
+            pack.actions_.push_back({0, integer(bytes, cursor), integer(bytes, cursor + 4),
+                                     integer(bytes, cursor + 8)});
+        } else {
+            pack.actions_.push_back({0, 0, integer(bytes, cursor), integer(bytes, cursor + 4)});
+        }
         cursor += descriptor_size;
     }
     pack.records_.reserve(records);
@@ -374,18 +390,25 @@ CharacterPack CharacterPack::decode(const std::vector<std::uint8_t>& bytes) {
 }
 
 void CharacterPack::validate() const {
-    std::vector<std::array<std::uint32_t, 2>> seen;
+    std::vector<std::array<std::uint32_t, 3>> seen;
     for (const auto& action : actions_) {
-        const std::array<std::uint32_t, 2> descriptor{action[0], action[1]};
+        const std::array<std::uint32_t, 3> descriptor{action[0], action[1], action[2]};
         if (std::find(seen.begin(), seen.end(), descriptor) != seen.end()) {
             invalid("duplicate startup action descriptor");
         }
-        const auto end = actions_.size() == 2 ? kTitleActionDescriptors.begin() + 2 : kTitleActionDescriptors.end();
-        if (std::find(kTitleActionDescriptors.begin(), end, descriptor) == end) {
+        const std::array<std::uint32_t, 2> title_descriptor{action[1], action[2]};
+        const auto end = schema_ == Schema::Startup ? kTitleActionDescriptors.begin() + 2
+                                                   : kTitleActionDescriptors.end();
+        const bool title_action = action[0] == 0 &&
+            std::find(kTitleActionDescriptors.begin(), end, title_descriptor) != end;
+        const bool selection_action = schema_ == Schema::Selection &&
+            std::find(kSelectionActionDescriptors.begin(), kSelectionActionDescriptors.end(),
+                       descriptor) != kSelectionActionDescriptors.end();
+        if (!title_action && !selection_action) {
             invalid("unknown startup action descriptor");
         }
         seen.push_back(descriptor);
-        payload(*this, action[2], ResourceKind::Action, 8);
+        payload(*this, action[3], ResourceKind::Action, 8);
     }
     Validator validator(*this);
     validator.records();
@@ -402,8 +425,8 @@ const ResourceRecord& CharacterPack::record(ResourceId id) const {
 ActionHandle CharacterPack::action(StartupAction action) const {
     const auto index = static_cast<std::uint32_t>(action);
     for (const auto& entry : actions_) {
-        if (entry[0] == 0 && entry[1] == index) {
-            return ActionHandle{entry[2]};
+        if (entry[0] == 0 && entry[1] == 0 && entry[2] == index) {
+            return ActionHandle{entry[3]};
         }
     }
     invalid("missing startup action descriptor " + std::to_string(index));
@@ -414,11 +437,25 @@ ActionHandle CharacterPack::action(TitleAction action) const {
         invalid("unknown title action descriptor");
     }
     for (const auto& entry : actions_) {
-        if (entry[0] == kTitleActionDescriptors[index][0] && entry[1] == kTitleActionDescriptors[index][1]) {
-            return ActionHandle{entry[2]};
+        if (entry[0] == 0 && entry[1] == kTitleActionDescriptors[index][0] &&
+            entry[2] == kTitleActionDescriptors[index][1]) {
+            return ActionHandle{entry[3]};
         }
     }
     invalid("missing title action descriptor " + std::to_string(index));
+}
+ActionHandle CharacterPack::action(SelectionAction action) const {
+    const auto index = static_cast<std::uint32_t>(action);
+    if (index >= kSelectionActionDescriptors.size()) {
+        invalid("unknown selection action descriptor");
+    }
+    const auto& descriptor = kSelectionActionDescriptors[index];
+    for (const auto& entry : actions_) {
+        if (entry[0] == descriptor[0] && entry[1] == descriptor[1] && entry[2] == descriptor[2]) {
+            return ActionHandle{entry[3]};
+        }
+    }
+    invalid("missing selection action descriptor " + std::to_string(index));
 }
 ActionResource CharacterPack::resolve(ActionHandle handle) const {
     if (handle.identity > std::numeric_limits<ResourceId>::max()) {

@@ -14,6 +14,15 @@ enum class TitleAction : std::uint32_t {
     SonicClearPose, SonicClearPoseTransition, KnucklesClearPose, KnucklesClearPoseTransition,
     BigSittingToFish, BigPreparingToCast, BigCast
 };
+// NOTSA: semantic bindings for the original selection action sequences.
+enum class SelectionAction : std::uint32_t {
+    SonicIdle, SonicSelected, SonicSettled,
+    MilesIdle, MilesSelected, MilesSettled,
+    KnucklesIdle, KnucklesSelected, KnucklesSettled,
+    AmyIdle, AmySelected, AmySettled,
+    BigIdle, BigPrepare, BigCast, BigSettled,
+    GammaIdle, GammaSelected, GammaSettled
+};
 enum class ResourceKind : std::uint32_t {
     Action = 1,
     Object,
@@ -74,6 +83,7 @@ class CharacterPack {
     static CharacterPack decode(const std::vector<std::uint8_t>& bytes);
     ActionHandle action(StartupAction action) const;
     ActionHandle action(TitleAction action) const;
+    ActionHandle action(SelectionAction action) const;
     ActionResource resolve(ActionHandle handle) const;
     ObjectResource object(ResourceId id) const;
     ModelResource model(ResourceId id) const;
@@ -84,6 +94,8 @@ class CharacterPack {
   private:
     void validate() const;
     std::vector<ResourceRecord> records_;
-    std::vector<std::array<std::uint32_t, 3>> actions_;
+    enum class Schema { Startup, Title, Selection };
+    Schema schema_ = Schema::Startup;
+    std::vector<std::array<std::uint32_t, 4>> actions_;
 };
 } // namespace sadx::character_pack

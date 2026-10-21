@@ -86,23 +86,10 @@ class Display {
                 "file-select stage label is outside the imported source prefix");
         return view.tables.stage_names[stage];
     }
-    // FUNCTION: SONIC 0x507bb0 DrawSkyBg
     void sky(float depth) {
-        // The pinned background scaling wrapper is identity at this qualified
-        // native display size. Other loader UI scaling is not guessed.
-        if (view.screen_width != 640 || view.screen_height != 480 ||
-            view.horizontal_scale != 1.0f || view.vertical_scale != 1.0f)
-            throw std::runtime_error("file-select background scaling outside qualified640x480");
-        select(MenuTexture::Background);
-        material(4294967295U);
-        for (const auto &tile : view.tables.sky_tiles) {
-            const auto y = (ExactFloat::integer(fp, tile.y) * view.vertical_scale + 0.0f).rounded();
-            const auto x =
-                (ExactFloat::integer(fp, tile.x) * view.horizontal_scale + 0.0f).rounded();
-            pvr::draw_scaled_texture(static_cast<std::uint32_t>(tile.texture), x, y, depth,
-                                     view.horizontal_scale, view.vertical_scale, pvr_state,
-                                     view.display_disabled, calls, fp);
-        }
+        draw_sky(depth, {view.horizontal_scale, view.vertical_scale, view.display_disabled,
+                         view.screen_width, view.screen_height, view.tables.sky_tiles},
+                 pvr_state, calls, fp);
     }
     // NOTSA: adapts the shared square drawings to this display's canonical PVR owner.
     struct SquareCalls final : menu_square::Calls {
@@ -318,38 +305,11 @@ class Display {
         scaled(67108872U, panel_x() + 160.0f, value(122.0f), value(work.presentation.depth) - 6.0f,
                1.8830000162124634f, 1.0f);
     }
-    // FUNCTION: SONIC 0x507410 Menu_DrawNumber
     void number(std::int32_t value_number, std::int32_t digits, bool zero_fill, float x, float y,
                 float depth, float spacing) {
-        if (digits == 0)
-            return;
-        auto count = digits;
-        std::int32_t visible = 0;
-        auto quotient = value_number;
-        do {
-            quotient /= 10;
-            ++visible;
-        } while (quotient != 0);
-        select(MenuTexture::Digits);
-        material(4294967295U);
-        const auto size = calls.texture(1);
-        const auto width = static_cast<std::int32_t>(size.width);
-        const auto initial =
-            static_cast<std::int32_t>((static_cast<std::uint32_t>(digits) - 1U) * size.width);
-        x = (ExactFloat::integer(fp, initial) * spacing + x).rounded();
-        do {
-            if (zero_fill || visible > 0) {
-                const auto digit = value_number % 10;
-                if (digit < 0)
-                    throw std::runtime_error("negative number indexes before source digit table");
-                texture(view.tables.digits[static_cast<unsigned>(digit)] | 67108864U, value(x),
-                        value(y), value(depth));
-                x = (value(x) - ExactFloat::integer(fp, width) * spacing).rounded();
-            }
-            --visible;
-            --count;
-            value_number /= 10;
-        } while (count != 0);
+        draw_number(value_number, digits, zero_fill, x, y, depth, spacing,
+                    {view.horizontal_scale, view.vertical_scale, view.display_disabled, view.tables.digits},
+                    pvr_state, calls, fp);
     }
     // FUNCTION: SONIC 0x504100 FileSelect_Emblems
     void emblems() {
@@ -450,6 +410,65 @@ class Display {
     }
 };
 } // namespace
+void draw_sky(float depth, SkyView view, pvr::State &state, Calls &calls, X87Context &fp) {
+    if (view.screen_width != 640 || view.screen_height != 480 ||
+        view.horizontal_scale != 1.0f || view.vertical_scale != 1.0f)
+        throw std::runtime_error("menu background scaling outside qualified640x480");
+    calls.select_menu_texture(MenuTexture::Background);
+    pvr::set_material(4294967295U, state);
+    for (const auto &tile : view.tiles) {
+        const auto y = (ExactFloat::integer(fp, tile.y) * view.vertical_scale + 0.0f).rounded();
+        const auto x = (ExactFloat::integer(fp, tile.x) * view.horizontal_scale + 0.0f).rounded();
+        pvr::draw_scaled_texture(static_cast<std::uint32_t>(tile.texture), x, y, depth,
+                                 view.horizontal_scale, view.vertical_scale, state,
+                                 view.display_disabled, calls, fp);
+    }
+}
+void draw_sky_profiled(float depth, SkyView view, pvr::State &state, Calls &calls,
+                       X87Context &fp, ui_scale::State &scaling) {
+    ui_scale::run_identity_background(scaling, view.screen_width, view.screen_height,
+        [&] { draw_sky(depth, view, state, calls, fp); });
+}
+void draw_number(std::int32_t value_number, std::int32_t digits, bool zero_fill,
+                 float x, float y, float depth, float spacing, NumberView view,
+                 pvr::State &state, Calls &calls, X87Context &fp) {
+    if (digits == 0)
+        return;
+    auto count = digits;
+    std::int32_t visible = 0;
+    auto quotient = value_number;
+    do {
+        quotient /= 10;
+        ++visible;
+    } while (quotient != 0);
+    calls.select_menu_texture(MenuTexture::Digits);
+    pvr::set_material(4294967295U, state);
+    const auto size = calls.texture(1);
+    const auto width = static_cast<std::int32_t>(size.width);
+    const auto initial =
+        static_cast<std::int32_t>((static_cast<std::uint32_t>(digits) - 1U) * size.width);
+    x = (ExactFloat::integer(fp, initial) * spacing + x).rounded();
+    do {
+        if (zero_fill || visible > 0) {
+            const auto digit = value_number % 10;
+            if (digit < 0)
+                throw std::runtime_error("negative number indexes before source digit table");
+            const auto z = ExactFloat(fp, depth).rounded();
+            const auto offset_y = ExactFloat(fp, y) - 240.0f;
+            const auto center_y = ExactFloat(fp, view.vertical_scale) * 240.0f;
+            const auto py = (offset_y + center_y).rounded();
+            const auto offset_x = ExactFloat(fp, x) - 320.0f;
+            const auto center_x = ExactFloat(fp, view.horizontal_scale) * 320.0f;
+            const auto px = (offset_x + center_x).rounded();
+            pvr::draw_texture(view.digits[static_cast<unsigned>(digit)] | 67108864U,
+                              px, py, z, state, view.display_disabled, calls, fp);
+            x = (ExactFloat(fp, x) - ExactFloat::integer(fp, width) * spacing).rounded();
+        }
+        --visible;
+        --count;
+        value_number /= 10;
+    } while (count != 0);
+}
 // NOTSA: original drawing and native profile share this ordered body.
 static void draw_impl(title_menu::FileSelectWork &work, View &view, pvr::State &state, Calls &calls,
           X87Context &fp, ui_scale::State *scaling) {
