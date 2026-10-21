@@ -138,6 +138,9 @@ build/sadx-controller-qualify: src/apps/controller_qualify.mm build/libsadx-maco
 build/sadx-native: src/apps/sadx_native.mm build/libsadx-native.a $(NATIVE_PLATFORM_OBJECTS)
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< $(NATIVE_PLATFORM_OBJECTS) build/libsadx-native.a $(MAC_FRAMEWORKS) -o $@
 NATIVE_ASSETS ?= game/imported
+.PHONY: native-journeys
+native-journeys: build/sadx-native
+	python3 tools/gate/run_native_journeys.py --app build/sadx-native --assets "$(NATIVE_ASSETS)"
 .PHONY: play-native
 play-native: build/sadx-native
 	./build/sadx-native --assets "$(NATIVE_ASSETS)"
@@ -363,8 +366,9 @@ check: native-library-initial-state native-startup-initial-state native-input-mo
 	python3 tools/gate/check_profile_patches.py
 	python3 tools/gate/check_repo_hygiene.py
 # The full gate command recorded by tools/gate/record_gate.py (every program built and run, then the checkers).
-gate: all test probes $(UNIT_MM_TARGETS) check app-smoke
+gate: all test probes $(UNIT_MM_TARGETS) check app-smoke build/sadx-native
 	$(MAKE) journeys
+	$(MAKE) native-journeys
 status:
 	python3 tools/gate/gen_status.py
 clean:

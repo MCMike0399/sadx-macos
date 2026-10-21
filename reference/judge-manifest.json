@@ -1,12 +1,12 @@
 {
   "change": {
-    "base_commit": "6097526c853eda4ff98be92c95ca161bd7dcaa61",
-    "evidence": "reference/production-integration-20261021/native-caption-transport.json",
-    "evidence_sha256": "5723b467b4e6d028cb835d1248be40d72db662c7d134ea0fce5100b336bb0cbf",
-    "reason": "Migrate Caption probe ownership without changing its source corpus; register native dialog fidelity checks and tighten readability allowances"
+    "base_commit": "b6eea55c86d035efb811866c15166b3d1d558916",
+    "evidence": "reference/production-integration-20261021/required-native-verification.json",
+    "evidence_sha256": "efdc610807b5a0031e22ff0713933c2254cbfa86b1d0f683682eee5e23a72662",
+    "reason": "Require the native production build and protected normal-input FileSelect journey in every full gate"
   },
   "files": {
-    "Makefile": "fe3a8aae17c59f33a9bc50b56641d05dca1e34859d3f4a2c3375045645679d9f",
+    "Makefile": "3b11de6a63d6f44f607df796971e0aa885743e5b8127f9c3f66958ea9a3678e4",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
     "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
     "reference/frame-control-corpus.tsv": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",
@@ -508,7 +508,7 @@
     "tools/gate/check_global_owners.py": "764714cd1fbdeab7b77f3b50d9efb64f12992f791758e3f07602a938b32ef504",
     "tools/gate/check_input_initial_state.py": "2a9de3ce38d6a1c8bef12e6c87fd8181a0888c15e5033b5c8b8b6a873f2352e1",
     "tools/gate/check_input_mod_constants.py": "be8443495170b4ecbc7388c3e60f387242847ae7318e3e310b6a53c74300614b",
-    "tools/gate/check_judge.py": "f4f1b9b23b97ce468db31b1a639a364205272d3559d7e790237edd2671839ddb",
+    "tools/gate/check_judge.py": "538339ac7508f5961214034c6221e53d171dda3dc2e17ad5ce48ec2acdfb2bd0",
     "tools/gate/check_layers.py": "2b72408ccd936baa5da22b36eefbf90ce2af4ebf1ab01dc63a5f45f5fa9615c1",
     "tools/gate/check_library_initial_state.py": "6d5d21de9176f715328496408b5e87e5d80f72793cdfe13a4e7dc09931201080",
     "tools/gate/check_native_frame_control.py": "4b63a311a35287d1df5abb5140ef03f6f840eab5e1abcca67c97c415a5f5a76c",
@@ -531,7 +531,9 @@
     "tools/gate/profile_patches.json": "4fcfa89e12d2b0161da4f357dcd3d0e457b0c43d8257a20472a9efdd98d8db22",
     "tools/gate/record_gate.py": "c74237a970ebfac47cf3c15357b4d16baf6ff28b6ba67e1a31c02dc249c70e3b",
     "tools/gate/run_journeys.py": "ccf2816a8b0463a5cc57b0edd9ed1335ea9c2a6228daa437f8c669e7b6915ae0",
+    "tools/gate/run_native_journeys.py": "aeb4115609f5f6633b238887a94afbd567c40c460737b3e9daf3c89f4b3cbc1a",
     "tools/gate/track_reports.py": "f936d454c3d07a0614dc27e6370396c41428763cc05c473b9b34773b7f96abc9",
+    "tools/journey/check_native_file_select.py": "8f726d524ad17ddf0a4d8e47bc98558066bf37fd8a9c118ccc857e3a6ddb1794",
     "tools/lib/extract.py": "d2c2cb1479003401ba1faf0211281a6c6d35949c2bd27e55acc48f7cc7825bd8",
     "tools/lib/import_audio.py": "91f0db9f658c306a4a5637b4180c4e0d6033da72d927f1ba59c18965e5a49e30",
     "tools/lib/pe_image.py": "94694dc5fb38e459d26b35c25a7cdb7e3fad7128e1178363340606bb9db299f2",

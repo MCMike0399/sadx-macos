@@ -1,0 +1,26 @@
+{
+  "requirement": "Native production build and existing FileSelect journey must be enforced by the required gate, not optional manual evidence.",
+  "basis": "User checkpoint review and prior independently verified1100-frame native normal-input journey with exact saved-story panel comparison.",
+  "changes": [
+    "gate requires build/sadx-native",
+    "gate runs native-journeys after other tests/reference journeys finish",
+    "existing checker is added to protected judge inputs without changing its assertions",
+    "runner fails explicitly for missing application/imported assets/two-save qualification and propagates the child exit status; fresh capture directory per run"
+  ],
+  "unchanged": [
+    "native FileSelect checker inputs/expected images/assertions",
+    "all existing source oracle corpora and tolerances"
+  ],
+  "limits": [
+    "Current FileSelect qualification needs two valid distinct imported saves; empty-snapshot and fresh-save checkpoints are separate.",
+    "No gameplay or63FPS certification."
+  ],
+  "pilot": {
+    "exit_status": 0,
+    "report": "build/required-native-pilot/native-journeys.json",
+    "existing_checker_unchanged": true,
+    "native_source_panel_comparison": "passed",
+    "missing_application_preflight": "explicit RuntimeError, no skipped result",
+    "missing_two_save_snapshot_preflight": "explicit RuntimeError, no skipped result"
+  }
+}
