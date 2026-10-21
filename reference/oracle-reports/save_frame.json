@@ -1,0 +1,21 @@
+{
+ "cases": 2420,
+ "mismatch_count": 0,
+ "values_match": true,
+ "passed": true,
+ "mismatches": [],
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_ranges": {
+  "0x40cba4": "0x40cbf2",
+  "0x40cc18": "0x40cc62"
+ },
+ "seed": 20261022,
+ "limits": "Actual GameLoop saving slices before/after411d00; resource callees are receipts.\n\n40cba4..40cbf1 and40cc1d..40cc61 execute unmodified. The composed case executes\nthe actual CALL411d00 at40cc18 between them, trapping its separate timing owner.\nIntervening40cbf2..40cc17 render/message owners are outside this bounded proof.\nCaller EBX=0/ESI=1 are source40cad0 prologue facts, preserved by callee ABI.\nCallbacks can replace all live fields or stop, testing exact stores/reloads/failure\nprefixes. Actual MSGC identity is preserved; neither message rendering nor disk I/O\nis faked as a production implementation by these oracle receipts.\n",
+ "native_library_sha256": "7092499efe4d064547708c41e62e7369d8fdf41074f6f656dc23f4d02b434440",
+ "tracked_summary": {
+  "full_sha256": "44d204b082a01d431e0cd8aeb4611bb9454a02992081d4a6ed2838ee97ac5b09",
+  "full_bytes": 1047,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

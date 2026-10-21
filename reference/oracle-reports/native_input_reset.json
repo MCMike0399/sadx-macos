@@ -1,0 +1,26 @@
+{
+ "source_ranges": {
+  "0x40f350-0x40f39a": {
+   "sha256": "3c45b4e8e65a39e089be9ffabfa04c7e65be9a5d968246d6d151c6bd2c94cc60"
+  }
+ },
+ "seed": 20261021,
+ "seeded_cases": 512,
+ "seeded_mismatches": 0,
+ "traces": 68,
+ "frames": 3365,
+ "resets": 763,
+ "mismatches": 0,
+ "first": [],
+ "values_match": true,
+ "limits": [
+  "FP exception flags are outside this reset-only integer/store claim; underlying native_input remains FP-partial.",
+  "Physical backend unchanged; no new hardware qualification."
+ ],
+ "tracked_summary": {
+  "full_sha256": "a13ea983253e550402d6cf60da871fbf666484db85fdd0595c2430207f5b3f80",
+  "full_bytes": 526,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

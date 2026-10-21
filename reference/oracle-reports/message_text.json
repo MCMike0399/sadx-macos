@@ -1,0 +1,27 @@
+{
+ "passed": true,
+ "cases": 3635,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "seed": 409900,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "font_sha256": {
+  "single": "1704e5b3ee390aa241eda5faa65fc0a24bed6acc6e9d54200c8faf9bc602ecb0",
+  "wide": "43f35f5e89659a176498565ef9f834803c3b3bc1b0bfc53b45286da8ad033d8a"
+ },
+ "native_library_sha256": "314e5552d7dfda9c17fa2a2b3bcb254ab6a0fb6f152d889e7ad72ce4d145a8ca",
+ "native_sources": {
+  "src/game/message_text.hpp": "92d0c03391f46eb81c0be5019184ff093f46fda90a624a0b31fcf80462c4592c",
+  "src/game/message_text.cpp": "4c3244f3e3cb1613497a2185e88da6d500f34ef77c114782554aa476761ded43",
+  "tests/probes/native_message_text_probe.cpp": "00c45f7c81f8fea3c74b9cafb9e84adcd9bc5c04e7206d85b22de335bdb33107"
+ },
+ "limits": [
+  "Original MSG24 lookup/advance/rasterizer/plain-text/font initialization and dirty flag.\n\nThe actual user's FONTDATA0/1 files provide bitmap bytes, not the unrelated menu font.\nEvery bitmap word is compared, including allocation padding reached by source clipping.\nAligned text prefixes7/9 and invalid asset/resource indices remain explicit boundaries.\n"
+ ],
+ "tracked_summary": {
+  "full_sha256": "f2a2ddb9d56fbabbdabe3573b2a4a908fa14e1e58ab282d6dc98d3d0d5ffa431",
+  "full_bytes": 1197,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

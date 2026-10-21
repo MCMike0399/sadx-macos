@@ -1,0 +1,71 @@
+{
+  "source_commit": "f8c2875",
+  "raw_exit_evidence": "build/native-fresh-save-oracle-exits.json",
+  "verdicts": {
+    "save_creation": {
+      "verdict": "pass"
+    },
+    "save_prepare": {
+      "verdict": "pass"
+    },
+    "save_request": {
+      "verdict": "pass"
+    },
+    "save_completion": {
+      "verdict": "pass"
+    },
+    "save_write": {
+      "verdict": "pass"
+    },
+    "save_frame": {
+      "verdict": "pass"
+    },
+    "message_text": {
+      "verdict": "pass"
+    },
+    "message_texture": {
+      "verdict": "pass"
+    },
+    "saving_message": {
+      "verdict": "partial"
+    },
+    "message_frame": {
+      "verdict": "partial"
+    },
+    "message_image": {
+      "verdict": "pass"
+    },
+    "message_reload": {
+      "verdict": "pass"
+    },
+    "palette": {
+      "verdict": "pass"
+    },
+    "palette_initial": {
+      "verdict": "pass"
+    },
+    "center_screen_sprite": {
+      "verdict": "partial"
+    },
+    "empty_queue": {
+      "verdict": "pass"
+    },
+    "end_borrow": {
+      "verdict": "pass"
+    },
+    "late_sprite": {
+      "verdict": "partial"
+    },
+    "native_input_reset": {
+      "verdict": "pass"
+    },
+    "ui_scale_profile": {
+      "verdict": "pass"
+    },
+    "queue_blank_frame": {
+      "verdict": "partial"
+    }
+  },
+  "gate": "native-fresh-save-integration-gate.json",
+  "scope": "Track actual current-core source reports, no expected values/tolerances/fixture changes. FP partial remains partial."
+}

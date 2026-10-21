@@ -1,0 +1,46 @@
+{
+ "cases": 1200,
+ "mismatch_count": 0,
+ "flag_mismatches": 325,
+ "values_match": true,
+ "passed": false,
+ "mismatches": [],
+ "outcomes": {
+  "mode2:complete1:calls3": 72,
+  "mode2:complete0:calls2": 64,
+  "mode4294967295:complete1:calls1": 128,
+  "mode1:complete1:calls1": 135,
+  "mode2:complete0:calls1": 76,
+  "mode2:complete1:calls4": 204,
+  "mode3:complete1:calls1": 132,
+  "mode3:complete0:calls1": 23,
+  "mode2:complete0:calls5": 17,
+  "mode2:complete0:calls4": 64,
+  "mode0:complete1:calls1": 122,
+  "mode2:complete0:calls3": 69,
+  "mode0:complete0:calls1": 18,
+  "mode4294967295:complete0:calls1": 25,
+  "mode2:complete1:calls5": 35,
+  "mode1:complete0:calls1": 16
+ },
+ "seed": 409024,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "limits": "Actual4086f0 early-mode path including real4071c0 and401420 instructions.\n\n403d30 temporary allocations are actual-owned-memory service fixtures; allocation\ncursor/growth is not certified.4073b0 queued-box and4010d0 polygon bodies are ordered renderer receipts; the\nexisting PVR primitive port is reused, not fabricated. Nonzero-mode branch and\nmode0 with displaydisabled are compared; normal mode0 record traversal remains\noutside this bounded path. Finite scale inputs, all-masked x87 controls; FP status\nis reported separately. No GPU image, active UI scaling or queued-box consumer claim.\n",
+ "native_library_sha256": "a2406c786abc3d0b7e52bf8f5b615498f3c36bb37570567c024a77c6f295b9ea",
+ "native_sources": {
+  "src/engine/queue_blank_frame.hpp": "9d406d6f82e065299e55884758bd961bcd36dfba24d6380f10b39e24f7b06785",
+  "src/engine/queue_blank_frame.cpp": "0b8f6961014e69705d5327ea19b80df711f2cb3aee2a4b0f02c8fa65bef69414",
+  "tests/probes/native_queue_blank_frame_probe.cpp": "51a05b76c1982e319058495866b33d7758dbc1eb405b882b1e123ed05d43dd51"
+ },
+ "source_ranges": {
+  "0x4086f0-0x40903b": "bea51c23b1b6e7a66c2ed65c1f0ebfc8f2676596fd587bade9ff2d6a9d4ae485",
+  "0x4071c0-0x4072e5": "5ecf3b3347f236b654f04168b584e9b3fae9b973f1ae71df832137feb0c9db3d",
+  "0x401420-0x40142d": "04ab0a69d6444d81e26c995c80c428e75e64e6957006e28c910a52361fffc5b0"
+ },
+ "tracked_summary": {
+  "full_sha256": "2cce7bebce1544bfb3e76ff1e02795998b711c5df3bd5f1ea9a4b979fbbfffb8",
+  "full_bytes": 2205,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

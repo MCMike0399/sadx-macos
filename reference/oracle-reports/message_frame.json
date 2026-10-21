@@ -1,0 +1,25 @@
+{
+ "passed": false,
+ "values_match": true,
+ "cases": 1244,
+ "mismatches": 0,
+ "fp_partials": 502,
+ "first_mismatches": [],
+ "seed": 404004,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "28c7d363e2d2cf2ebbd79bc5c2cedd02d503c838312fae7bfcef94391cc5d03b",
+ "native_sources": {
+  "src/game/message_frame.hpp": "771a194e2becb5ce4543a9c34eb93a99044cc654f57daff7b89694d4bcd35a32",
+  "src/game/message_frame.cpp": "97eb31a051b6dd3b05ced2c7d86c8ca8437af0a07551342c254d2338a7ccf4f6",
+  "tests/probes/native_message_frame_probe.cpp": "1bd60a04986622f363d29443fb4ac04115c490fe9467f7dc5e7d182271eedfad"
+ },
+ "limits": [
+  "Original full MSG frame producer, with lower renderer/resource calls as receipts.\n\nThe actual401070 sprite copy/centering instructions execute. Uninitialized source\nsprite z/angle words are not compared: attributes34 never consumes them. Queue\nidentities and reentry are compared; native type2 consumption is a separate proof.\n"
+ ],
+ "tracked_summary": {
+  "full_sha256": "60e2d173e57498115477da947c043027b7efafa17ed57b9976c327974f7ffff9",
+  "full_bytes": 1037,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

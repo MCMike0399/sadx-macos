@@ -1,0 +1,19 @@
+{
+ "cases": 1000,
+ "mismatch_count": 0,
+ "values_match": true,
+ "passed": true,
+ "mismatches": [],
+ "limits": "Original421fd0 write ordering, filename allocation and first-free slot selection.\n\nCRT/filesystem allocation,formatting,CompareStringA and I/O are receipts, never\nproduction implementations. Source canonical ASCII filenames bound comparison;\nwrite return0/1 is retained (the original ignores it). Native real-I/O failure\nmust instead report a platform boundary, not fabricate source success.\n",
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_ranges": {
+  "0x421fd0": "0x4221cc"
+ },
+ "seed": 20261021,
+ "tracked_summary": {
+  "full_sha256": "1bae9809a1fd2888bf40815c0f9b9bc0b8e3cce68e721668b8c38c51c557b1f8",
+  "full_bytes": 679,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

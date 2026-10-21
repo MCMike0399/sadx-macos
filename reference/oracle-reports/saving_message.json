@@ -1,0 +1,27 @@
+{
+ "passed": false,
+ "values_match": true,
+ "cases": 1144,
+ "mismatches": 0,
+ "fp_partials": 28,
+ "first_mismatches": [],
+ "seed": 400040,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "6d846cbf41ea527f5c9db4b1904bc19b5d885b780ab007f085dd31d61dd77d26",
+ "native_sources": {
+  "src/game/saving_message.hpp": "fd3a1225413eecf6a8e3599a97438b5803e29253dc3a2023364be3c3e3b73201",
+  "src/game/saving_message.cpp": "2f2a7d1920d87449ac5c5ab140d338ca4dcece44ccc60880591bfc9dc55cc8d5",
+  "src/game/menu_caption.hpp": "da9056b59a3512b113aab774afea7120df56e1381915fb603262e1c9c2520772",
+  "src/game/menu_caption.cpp": "2304bcdaa3be7bb7ff5f1d0580830f515b93a82d1eecaadd69b9a54c506aa294",
+  "tests/probes/native_saving_message_probe.cpp": "2a9b7855eeb8a5782aa74f1f533afd660d65740f4b1d07f0e048a72d5080eb85"
+ },
+ "limits": [
+  "Original saving-message caller composed with real MSG24 rasterizer/open/clear/queue.\n\nThe real arena-end pointer calculation, null cooperative wait and MSG_Disp execute.\nFog/box/device-reset are receipts; arena reset still zeroes the SAME bitmap bytes.\nNo native upload/render delivery is claimed. Source queue entries remain identities.\n"
+ ],
+ "tracked_summary": {
+  "full_sha256": "5607f437775f638459e2fe19d6c68b18c7e33e0a7f0bdcbc66d56de0d99e0ac6",
+  "full_bytes": 1252,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

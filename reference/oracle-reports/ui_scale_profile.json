@@ -1,0 +1,30 @@
+{
+ "seed": 404660,
+ "scope_cases": 800,
+ "movie_scope_cases": 200,
+ "wrapper_cases": 36,
+ "mismatch_count": 0,
+ "passed": true,
+ "mismatches": [],
+ "source_dll_sha256": "3293cf354dcfc62274c2ad25c09041606d6ad55483f070c233111cd9b47a97ba",
+ "limits": "Pinned compiled loader scope and MSG-forwarding qualification.\nActual wrapper100ae290 and actual scale_trampoline10038ef0 run. Original drawing\nis an ordered receipt; active sprite_push is an explicit unsupported boundary.\nMovie wrapper100aea50 is also executed with its temporary fill state. Scopes run against actual vector ownership with preallocated capacity; allocation\nand C++runtime vector growth are not claimed. No sprite or FPpixel claim.\n",
+ "native_library_sha256": "521fc6fd4c8f1ccbe12889ef99d54a062e0a364d58ceffd41ed6251bf9a84743",
+ "native_sources": {
+  "src/engine/ui_scale_profile.hpp": "ca30146f35161d4120d44bec8a567bfa9ea64c1812eaa4ca6fd24e7fb1ee74fc",
+  "src/engine/ui_scale_profile.cpp": "8d98b009389b16dc9225618be80e17df59e808ad482db3385044a95f19032e9c",
+  "tests/probes/native_ui_scale_profile_probe.cpp": "417784467908c4fb939b3af4dccdaa9af81a38ea8a7201f47085787053a1d725"
+ },
+ "source_module": "LOADER",
+ "source_ranges": {
+  "0x10038eb0-0x10039089": "584f1f19fc1f810648de731a0eb37abcdd28885a3527c507232933683a43e3db",
+  "0x100ae290-0x100ae39f": "580e4e32b541caa64189449e4958d93f8b181e5fd79d4595d708ab0b39b1412b",
+  "0x100aea50-0x100aea84": "b6299a7009e57a6e2ef9d2947d5318949fa98b0171c531171aef404cff5b0ef4",
+  "0x100887d0-0x10088960": "0a024e5876ff9313b1c464490d1c6c22e1f308a4f4e8b074b1564480830ed99a"
+ },
+ "tracked_summary": {
+  "full_sha256": "7630071463fe43d5e5a168a17bda6580445f111e4465135cecfffaaa49c39b07",
+  "full_bytes": 1615,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}
