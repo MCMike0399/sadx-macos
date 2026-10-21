@@ -1,0 +1,19 @@
+{
+  "old_oracle": "tools/oracles/verify_original_game_frame_owners.py",
+  "old_oracle_sha256": "3b8553e85f7df1f7dc37e7c31b671cd10006f893a4221aa8dbebbef0bf76cb1b",
+  "old_probe_before_sha256": "56d8f463f79306bbc1dc830dd1a17bbe12cd0f84395b41e73d74e5f96ad4481d",
+  "old_probe_after_sha256": "ab2906aec9650e4833242ee8ba32a2706e191306d31066d47041024d72d142ae",
+  "input_expected_or_tolerance_changes": false,
+  "staged_adapter_only": "judge-prep-old-probe.patch",
+  "behavior_patch": "migration-main.patch",
+  "baseline_proposal": "readability-baseline-proposal.json",
+  "note": "Unchanged oracle source_files fingerprints refer to current main; actual staged build sources and library hashes are documented separately. Probe new owner bindings require the migration adapter/type API; main integration and separate judge-prep ordering belong to root.",
+  "registrations": [
+    "caption-frame-reference unit",
+    "native-menu-dialog-assets unit (imported assets prerequisite)"
+  ],
+  "new_judges": "New dialog, caption, reference-validation and cooperative-thread probes/oracles retain worker source-qualified corpora; no prior expected results change.",
+  "baseline": "Only six legacy readability allowances decrease; no increase.",
+  "legacy_names": "Remove only six obsolete timer/buffer spelling allowances after whole owner migration; frozen ownership extents remain unchanged and covered by semantic GLOBALs.",
+  "existing_unit_transport": "game_frame_owners.cpp uses the same observed timer/buffer words and receipt adapter; all assertions, inputs and expected outcomes retained."
+}

@@ -1,4 +1,5 @@
 #include "game/game_frame_owners.hpp"
+#include "guest/caption_frame_reference.hpp"
 #include <algorithm>
 #include <cstring>
 // Native frame owners with the layout of tools/verify_original_game_frame_owners.py.
@@ -20,17 +21,17 @@ extern "C" int sadx_native_game_frame_owners(const std::uint32_t* in,const std::
     std::optional<NinjaMath::SineTable> sine=NinjaMath::SineTable{};std::memcpy(sine->data(),table,4100);
     NinjaSpriteProjection projection{};projection.scale_at_3d0f9e0=f(in[11]);std::optional<float> width=f(in[12]);
     X87Context fp(static_cast<std::uint16_t>(in[2]));
-    GameFrameOwnersState s;s.list_at_3b2c584=in[13];s.count_at_3b0e334=in[14];s.timer_at_3abdf88=in[15];s.buffer_at_3abdf84=in[16];
+    GameFrameOwnersState s;s.list_at_3b2c584=in[13];s.count_at_3b0e334=in[14];reference::CaptionFrameReference caption(s.caption);caption.observe_timer(in[15]);caption.observe_buffer(in[16]);
     std::vector<std::array<std::uint32_t,3>> nested;
     GameFrameOwnersRuntime rt{s,view,reset,draws,effect,keys,edges,render,&depth,sine,projection,width,color,NinjaQueueColorOwners{queue_color,projection_color,1.0F,-1.0F},fp,
         [&](const GameFrameOwnerCall& c){nested.push_back({c.callee,c.source_call,c.arguments[0].value_or(0xdeadbeef)});
             const bool stop=c.callee==0x40d520||c.callee==0x40eac0||c.callee==0x42f9cc||c.callee==0x40d3f5||(in[3]&&nested.size()==in[3]);
-            return GameLogicOwnerResult{stop?GameLogicOwnerState::unavailable:GameLogicOwnerState::completed,c.callee,{}};}};
+            return GameLogicOwnerResult{stop?GameLogicOwnerState::unavailable:GameLogicOwnerState::completed,c.callee,{}};},[&](const GameFrameOwnerInvoke& invoke){return caption.complete_frame(invoke);}};
     const auto r=run_game_frame_owner(in[0],in[1],rt);
     std::fill(out,out+128,0);out[0]=r?1U:0U;out[1]=r.eax.value_or(0xdeadbeef);out[2]=r.eax.has_value();
     const auto v=[](const auto& o){return static_cast<std::uint32_t>(o.value_or(0xdeadbeef));};
     out[4]=v(reset);out[6]=v(draws);out[8]=v(view.word_at_3b2cbb4);out[9]=v(view.fov_copy_at_3ab98ec);out[10]=v(view.fov_at_3aad0bc);out[11]=projection.scale_at_3d0f9e0?b(*projection.scale_at_3d0f9e0):0xdeadbeef;
-    out[13]=v(s.list_at_3b2c584);out[14]=v(s.count_at_3b0e334);out[15]=v(s.timer_at_3abdf88);out[16]=v(s.buffer_at_3abdf84);
+    out[13]=v(s.list_at_3b2c584);out[14]=v(s.count_at_3b0e334);out[15]=v(caption.timer_word());out[16]=v(caption.buffer_word());
     for(int i=0;i<4;++i){out[36+i]=queue_color?b((*queue_color)[i]):0xdeadbeef;out[40+i]=projection_color?b((*projection_color)[i]):0xdeadbeef;}
     out[60]=static_cast<std::uint32_t>(trace.size());for(std::size_t i=0;i<trace.size()&&i<8;++i)std::copy(trace[i].begin(),trace[i].end(),out+64+3*i);
     out[90]=static_cast<std::uint32_t>(nested.size());for(std::size_t i=0;i<nested.size()&&i<8;++i)std::copy(nested[i].begin(),nested[i].end(),out+92+3*i);
