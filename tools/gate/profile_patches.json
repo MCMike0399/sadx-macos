@@ -6265,7 +6265,7 @@
    "condition": "uiscale::initialize_common via setup_background_scale (FillModeBackground=2) -> runs once",
    "active": true,
    "source_ref": "uiscale.cpp:681",
-   "handled_by": null,
+   "handled_by": "src/engine/pvr_device.cpp submit_colored_polygon: current FileSelect positive-flags caller after background scale_pop has an empty UI scaling stack; active njDrawTriangle2D_r forwards unchanged. Only this scale-disabled640x480 caller is qualified; other scaling contexts remain unrecovered. See native-file-select-color-profile.json.",
    "original_bytes": "83ec10538b5c2424"
   },
   {
@@ -6277,7 +6277,7 @@
    "condition": "uiscale::initialize_common via setup_background_scale (FillModeBackground=2) -> runs once",
    "active": true,
    "source_ref": "uiscale.cpp:689",
-   "handled_by": null,
+   "handled_by": "src/engine/pvr_device.cpp submit_colored_polygon composition from4010d0: positive flags normalize(flags &0x80000062)|2, clearing bit0; circle branch and this patched call are unreachable for the qualified FileSelect strip caller. See native-file-select-color-profile.json.",
    "original_bytes": "e8abf5ffff"
   },
   {

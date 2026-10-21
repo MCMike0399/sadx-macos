@@ -1,0 +1,29 @@
+{
+  "scope": "Qualified current FileSelect colored polygon caller, not general UI scaling",
+  "active_patch": "77e9f0 triangle wrapper",
+  "forwarding": "uiscale.cpp483-507 calls original unchanged whenis_scale_enabledfalse; do_scale initialfalse at37, scale_pop restoresfalse whenstackempty at126. FileSelect505550 DrawSkyBg background wrapper pushes/pops withinitscall (bgscale.cpp28); remainingFileSelectforegroundcalls haveempty scalingstack.",
+  "unreachable_active_call": "4010d0 positiveflags normalize(flags &0x80000062)|2, bit0clear, so circlebranch at77ea10 cannotexecute forthiscaller.",
+  "limits": [
+    "Other UI-scale-enabled callers are not certified by this bounded handler.",
+    "Native FileSelect background is explicitly qualified640x480; wider displaystate fails loudly.",
+    "No original mod DLL is executed in production."
+  ],
+  "source_files": {
+    "reference/sadx-mod-loader/SADXModLoader/uiscale.cpp": "e19b958986520bdecd99ba1ce46ecac932fe179a24d2f63385ad84e26a05793b",
+    "reference/sadx-mod-loader/SADXModLoader/uiscale.h": "c846f17609948ce59e20b420bd137c4cb58f3c42d7cbb9da38e80fbf74800087",
+    "reference/sadx-mod-loader/SADXModLoader/bgscale.cpp": "7e522b19f3cae7a0770784279ce1d31469e25298ebd40c0fc31e970ef1576fc4"
+  },
+  "overlap_fixture": {
+    "source_ranges": {
+      "0x77e9f0-0x77eaca": "72c62916fedcb03d22830d9f75f8a179f10faeb2e741b54ae17c04867bcea1fb"
+    }
+  },
+  "before": {
+    "exit_status": 1,
+    "unhandled_overlaps": 2
+  },
+  "after": {
+    "exit_status": 0,
+    "unhandled_overlaps": 0
+  }
+}

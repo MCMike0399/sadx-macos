@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "d870d1ce7b26a4e44124034607461b324cf1d8c3",
-    "evidence": "reference/production-integration-20261021/native-file-select-draw-build.json",
-    "evidence_sha256": "bfb7aa329128449c69edb9303ee2e0aa944f1abb5613ad7d41fd0dd6d408dc06",
-    "reason": "Declare compiled native FileSelect control and draw dependencies"
+    "base_commit": "82ffbecb4768d2b677c353a72b4913d8a4c62632",
+    "evidence": "reference/production-integration-20261021/native-file-select-color-profile.json",
+    "evidence_sha256": "68680da1546ca6c1e8f0bc270e832669a059683aed4550310e98564219417568",
+    "reason": "Register bounded profile forwarding for the native FileSelect colored strip and its unreachable circle branch"
   },
   "files": {
     "Makefile": "5e3142741d9a65182bfc117530ac6faaeca75a1faea59b7c116fd13594bc8637",
@@ -487,7 +487,7 @@
     "tools/gate/guard_judge_edit.py": "6fa117651c735c3a152343da978945a426138ce455d0494e7ca707f46ff82935",
     "tools/gate/layer_exceptions.tsv": "45ec99765961f1f4f36760d706dd561ad9362ca3220080c0aebedb105f7c4649",
     "tools/gate/mutate.py": "9028799e852ca72ae2e49229647171ec68ecbc26eeb234db3fd510a4eeb33719",
-    "tools/gate/profile_patches.json": "bbbb9087d150c6a4172a7cfba182a6dc8dbd2299e8d663250e2a11741d65c494",
+    "tools/gate/profile_patches.json": "ad075d2580ab794b06307eebc1c1e543cff0e6771892a286023aa099dd632b22",
     "tools/gate/record_gate.py": "c74237a970ebfac47cf3c15357b4d16baf6ff28b6ba67e1a31c02dc249c70e3b",
     "tools/gate/run_journeys.py": "ccf2816a8b0463a5cc57b0edd9ed1335ea9c2a6228daa437f8c669e7b6915ae0",
     "tools/gate/track_reports.py": "f936d454c3d07a0614dc27e6370396c41428763cc05c473b9b34773b7f96abc9",
