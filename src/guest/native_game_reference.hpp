@@ -19,6 +19,7 @@
 #include "game/game_reset_leaves.hpp"
 #include "game/game_startup.hpp"
 #include "game/game_view.hpp"
+#include "guest/saved_fov_reference.hpp"
 #include "engine/task.hpp"
 #include "engine/task_work.hpp"
 #include "input/input_mod_pad.hpp"
@@ -177,7 +178,10 @@ private:
     std::array<std::optional<std::uint32_t>,3> words_at_900840_,words_at_3ab9898_,words_at_900858_,words_at_90084c_;
     float one_at_7dcb10_=1.0F,negative_one_at_7dcb0c_=-1.0F;X87Context fp_{0x7f}; // capture-tied main-thread CW
     std::optional<NinjaQueueLifecycleOwners> lifecycle_;
-    CrtRandState rng_;std::optional<GameResetState> reset_;std::optional<ResetLeafState> leaves_;std::optional<GameViewState> view_;std::optional<std::array<float,4>> color_at_3b280ac_;std::optional<std::uint32_t> queue_base_at_3abd960_;
+    CrtRandState rng_;std::optional<GameResetState> reset_;std::optional<ResetLeafState> leaves_;std::optional<GameViewState> view_;
+    view::SavedFovState saved_fov_;
+    reference::SavedFovReference saved_fov_reference_;
+    std::optional<std::array<float,4>> color_at_3b280ac_;std::optional<std::uint32_t> queue_base_at_3abd960_;
     std::optional<NinjaMath::SineTable> sine_table_at_88af78_;std::optional<float> fog_sentinel_at_7dce50_;
     NinjaFogDeviceState fog_device_;NinjaFogTable fog_table_at_3b10f78_{};std::optional<float> level_fog_start_at_3abdc60_,level_fog_end_at_3abdc64_;std::optional<std::uint32_t> level_fog_color_at_3abdc68_;
     NinjaFogOwners fog_owners();

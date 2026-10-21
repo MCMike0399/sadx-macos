@@ -19,6 +19,8 @@
 #include "apps/native_voice_assets.hpp"
 #include "apps/native_sound_effects_assets.hpp"
 #include "apps/native_save_directory.hpp"
+#include "apps/native_message_font_assets.hpp"
+#include "platform/mac/mac_save_writer.hpp"
 #include "apps/native_file_select_assets.hpp"
 #include "apps/native_menu_dialog_assets.hpp"
 #include "apps/native_main_menu_assets.hpp"
@@ -189,6 +191,7 @@ class Application {
         session.attach_cleanup(display, assets.audio);
         display.apply_fog_emulation_setting(assets.fog_emulation_setting);
         session.attach_languages(assets.text_language, assets.voice_language);
+        session.attach_message_fonts(sadx::native::app::load_message_font_assets(this->configuration.assets));
         session.attach_regular_textures(
             sadx::native::app::load_regular_texture_assets(this->configuration.assets));
         session.attach_menu_textures(
@@ -269,6 +272,7 @@ class Application {
             throw std::runtime_error("native music player is unavailable");
         return *player;
     }
+    std::unique_ptr<sadx::save::mac::SaveWriter> save_writer;
     void configure_saves() {
         if (configuration.save_directory.empty()) {
             const auto roots = [NSFileManager.defaultManager URLsForDirectory:NSApplicationSupportDirectory
@@ -282,6 +286,11 @@ class Application {
         sadx::native::app::prepare_save_directory(configuration.assets, configuration.save_directory);
         save_files = std::make_unique<sadx::file_select::mac::SaveFiles>(configuration.save_directory);
         session.attach_save_files(*save_files);
+        save_writer = std::make_unique<sadx::save::mac::SaveWriter>(configuration.save_directory, [this] {
+            if (!input) throw std::runtime_error("native save completion requires the live input owner");
+            input->reset_source();
+        });
+        session.attach_save_writer(*save_writer);
     }
     static std::int32_t reader_state(sadx::audio::StreamPlayer *owner) {
         auto *player = dynamic_cast<sadx::audio::mac::StreamPlayer *>(owner);
@@ -405,10 +414,18 @@ class Application {
         display.begin_game_frame();
         session.advance();
         session.update_sounds();
+        display.consume_draw_queue();
+        session.before_save_frame_completion();
         session.complete_menu_messages();
+        // CursorTriangle_Draw's source guard; positive effect requires its actual renderer.
+        if (input->cursor_state().magnitude > 0)
+            throw sadx::flow::UnrecoveredGameFlowCall("native_cursor_triangle_draw");
+        session.release_lazy_textures();
+        title->release_message_textures();
         display.end_game_frame();
         session.complete_frame_counters();
         present_target();
+        session.after_save_frame_completion();
         session.complete_frame();
     }
     void pace() {
@@ -468,6 +485,7 @@ class Application {
             session.media_state().voice_player.get());
         const auto voice_audio = voice ? voice->stats() : sadx::audio::mac::AudioStats{};
         const auto selected_save = session.selected_save_file();
+        const auto save_progress = session.save_progress();
         const auto file_task = title ? title->state().factories.file_select_task : sadx::TaskHandle{};
         const auto file_work = file_task
             ? std::static_pointer_cast<const sadx::title_menu::FileSelectWork>(file_task->auxiliary_native_work)
@@ -511,6 +529,12 @@ class Application {
             output << std::quoted(selected_save->name);
         else
             output << "null";
+        output << ",\"save_phase\":" << save_progress.phase
+               << ",\"save_ready\":" << static_cast<unsigned>(save_progress.ready)
+               << ",\"save_write_count\":" << static_cast<unsigned>(save_progress.count)
+               << ",\"save_exec\":" << static_cast<unsigned>(save_progress.executing)
+               << ",\"save_ok\":" << static_cast<unsigned>(save_progress.complete)
+               << ",\"saving_message_pending\":" << static_cast<unsigned>(save_progress.message_pending);
         output << ",\"logic_loop_count\":" << session.logic_loop_count();
         output << ",\"music_song\":" << session.current_music_song();
         output << ",\"native_music_gain\":" << configuration.audio_mix.music

@@ -27,6 +27,7 @@ from music_assets import import_music_assets
 from voice_assets import import_voice_assets
 from save_files import import_save_files
 from font_assets import import_font_assets
+from message_fonts import import_message_fonts
 from menu_voice import import_menu_voice
 from file_select_display import import_file_select_display
 from menu_dialog import import_menu_dialog
@@ -65,6 +66,7 @@ def import_assets(game, output):
     import_regular_textures(game, output)
     import_menu_textures(game, output)
     import_font_assets(game, output)
+    import_message_fonts(game, output)
     import_menu_voice(game, output)
     import_file_select_display(game, output)
     import_menu_dialog(game, output)

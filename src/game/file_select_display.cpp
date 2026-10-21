@@ -450,15 +450,21 @@ class Display {
     }
 };
 } // namespace
-void draw(title_menu::FileSelectWork &work, View &view, pvr::State &state, Calls &calls,
-          X87Context &fp) {
+// NOTSA: original drawing and native profile share this ordered body.
+static void draw_impl(title_menu::FileSelectWork &work, View &view, pvr::State &state, Calls &calls,
+          X87Context &fp, ui_scale::State *scaling) {
     if (work.presentation.color == 0)
         return;
     Display display(work, view, state, calls, fp);
     pvr::default_blending([&](auto target, auto mode) { calls.set_blend(target, mode); });
     const auto background_depth = ExactFloat(fp, work.presentation.depth) - 2.0f;
     work.offset_x = 20.0f;
-    display.sky(background_depth.rounded());
+    const auto depth = background_depth.rounded();
+    if (scaling)
+        ui_scale::run_identity_background(*scaling, view.screen_width, view.screen_height,
+                                          [&] { display.sky(depth); });
+    else
+        display.sky(depth);
     display.memory_card();
     pvr::set_base_color(work.presentation.color, state);
     display.dialog_frame();
@@ -473,5 +479,14 @@ void draw(title_menu::FileSelectWork &work, View &view, pvr::State &state, Calls
         calls.display_message(view.first_message);
     if (view.second_message_visible != 0)
         calls.display_message(view.second_message);
+}
+void draw(title_menu::FileSelectWork &work, View &view, pvr::State &state, Calls &calls,
+           X87Context &fp) {
+    draw_impl(work, view, state, calls, fp, nullptr);
+}
+void draw_profiled(title_menu::FileSelectWork &work, View &view, pvr::State &state, Calls &calls,
+                   X87Context &fp, ui_scale::State &scaling) {
+    ui_scale::require_stretch_owners(scaling, view.horizontal_scale, view.vertical_scale);
+    draw_impl(work, view, state, calls, fp, &scaling);
 }
 } // namespace sadx::file_select_display

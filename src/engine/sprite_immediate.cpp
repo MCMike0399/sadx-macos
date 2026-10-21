@@ -4,13 +4,14 @@
 
 namespace sadx::sprite {
 using fidelity::ExactFloat;
-void draw_sprite(const Sprite *sprite, std::int32_t animation_index, float priority,
-                 std::uint8_t attributes, const std::array<float, 4> &material_argb,
-                 ImmediateServices &services, X87Context &fp) {
+void draw_screen_sprite(const ScreenSpriteView *sprite, std::int32_t animation_index,
+                        float priority, std::uint8_t attributes,
+                        const std::array<float, 4> &material_argb, ImmediateServices &services,
+                        X87Context &fp) {
     if (!sprite || !sprite->textures)
         return;
     services.select_texture_list(*sprite->textures);
-    const auto &frame = sprite->animation.at(static_cast<std::size_t>(animation_index));
+    const auto &frame = sprite->frame_at(animation_index);
     constexpr float uv_unit = 0.003921568859368563f;
     float u_begin = (ExactFloat::integer(fp, frame.u_begin) * uv_unit).rounded();
     float v_begin = (ExactFloat::integer(fp, frame.v_begin) * uv_unit).rounded();
@@ -27,10 +28,10 @@ void draw_sprite(const Sprite *sprite, std::int32_t animation_index, float prior
     Quad quad{};
     if (attributes & 1) {
         services.push_unit_matrix();
-        services.rotate_z(sprite->angle);
+        services.rotate_z(sprite->angle());
         const auto corner = services.transform_vector({x_begin, y_begin, 0});
-        quad.origin[0] = (ExactFloat(fp, corner[0]) + sprite->position[0]).rounded();
-        quad.origin[1] = (ExactFloat(fp, corner[1]) + sprite->position[1]).rounded();
+        quad.origin[0] = (ExactFloat(fp, corner[0]) + sprite->x).rounded();
+        quad.origin[1] = (ExactFloat(fp, corner[1]) + sprite->y).rounded();
         quad.origin[2] = (ExactFloat(fp, -1.0f) / priority).rounded();
         const auto horizontal = services.transform_vector({x_end, y_begin, 0});
         quad.horizontal[0] = (ExactFloat(fp, horizontal[0]) - corner[0]).rounded();
@@ -40,8 +41,8 @@ void draw_sprite(const Sprite *sprite, std::int32_t animation_index, float prior
         quad.vertical[1] = (ExactFloat(fp, vertical[1]) - corner[1]).rounded();
         services.pop_matrix();
     } else {
-        quad.origin[0] = (ExactFloat(fp, x_begin) + sprite->position[0]).rounded();
-        quad.origin[1] = (ExactFloat(fp, y_begin) + sprite->position[1]).rounded();
+        quad.origin[0] = (ExactFloat(fp, x_begin) + sprite->x).rounded();
+        quad.origin[1] = (ExactFloat(fp, y_begin) + sprite->y).rounded();
         quad.origin[2] = (ExactFloat(fp, -1.0f) / priority).rounded();
         quad.horizontal[0] = (ExactFloat(fp, x_end) - x_begin).rounded();
         quad.vertical[1] = (ExactFloat(fp, y_end) - y_begin).rounded();
@@ -57,8 +58,8 @@ void draw_sprite(const Sprite *sprite, std::int32_t animation_index, float prior
     if (attributes & 2) {
         color = 0;
         for (unsigned component = 0; component < 4; ++component) {
-            const auto value = (ExactFloat(fp, material_argb[3 - component]) * 255.0f)
-                                   .truncated_integer();
+            const auto value =
+                (ExactFloat(fp, material_argb[3 - component]) * 255.0f).truncated_integer();
             color |= (static_cast<std::uint32_t>(value) & 255U) << (component * 8);
         }
     }
@@ -67,6 +68,24 @@ void draw_sprite(const Sprite *sprite, std::int32_t animation_index, float prior
     services.select_texture(frame.texture_index);
     services.draw_quad(quad);
     services.restore_linear_filter();
+}
+void draw_sprite(const Sprite *sprite, std::int32_t animation_index, float priority,
+                 std::uint8_t attributes, const std::array<float, 4> &material_argb,
+                 ImmediateServices &services, X87Context &fp) {
+    if (!sprite)
+        return;
+    const ScreenSpriteView view{sprite->position[0],
+                                sprite->position[1],
+                                sprite->scale_x,
+                                sprite->scale_y,
+                                sprite->textures,
+                                [sprite](std::int32_t index) -> const AnimationFrame & {
+                                    return sprite->animation.at(static_cast<std::size_t>(index));
+                                },
+                                [sprite] {
+                                    return sprite->angle;
+                                }};
+    draw_screen_sprite(&view, animation_index, priority, attributes, material_argb, services, fp);
 }
 } // namespace sadx::sprite
 

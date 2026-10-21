@@ -168,7 +168,7 @@ void TitleScene::display_main_menu(TaskScheduler &scheduler, const TaskHandle &t
                              {frame.horizontal_scale, frame.vertical_scale,
                               scene.session_.dialog_window_after_content_, viewport.width,
                               viewport.height},
-                             services, scene.display_.arithmetic());
+                             services, scene.display_.arithmetic(), scene.display_.ui_scaling());
 }
 void Session::attach_main_menu(MainMenuAssets assets) {
     if (main_menu_assets_)

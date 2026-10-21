@@ -3,6 +3,7 @@
 #include "engine/pvr_draw.hpp"
 #include "engine/task.hpp"
 #include "game/logo_startup.hpp"
+#include "engine/ui_scale_profile.hpp"
 #include "game/save_data.hpp"
 #include <memory>
 #include <string_view>
@@ -34,6 +35,7 @@ class LogoScene final : private logo::StartupCalls,
   public:
     LogoScene(LogoOutput &, frame::ModeState &, frame::RendererState &, save::Data &,
               std::int16_t &rings, LogoFrame, X87Context &);
+    void attach_ui_scaling(ui_scale::State &state) { scaling_ = &state; }
     void initialize();
     void load();
     logo::Completion advance();
@@ -62,6 +64,7 @@ class LogoScene final : private logo::StartupCalls,
     void set_fade_color(std::uint32_t) override;
 
   private:
+    ui_scale::State *scaling_ = nullptr;
     LogoOutput &output_;
     frame::ModeState &frame_mode_;
     frame::RendererState &renderer_;

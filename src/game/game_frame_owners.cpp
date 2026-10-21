@@ -34,11 +34,13 @@ GameFrameOwnerResult run_game_frame_owner(std::uint32_t callee,std::optional<std
     try{
         switch(callee){
         case 0x40d4d0:{
-            rt.view.word_at_3b2cbb4=op.need(rt.view.fov_copy_at_3ab98ec,0x40d4d4,0x3ab98ec); // 402f00
+            view::set_saved_fov_bits(rt.view.saved_fov,op.need(rt.view.fov_copy_at_3ab98ec,0x40d4d4,0x3ab98ec));
+            if(rt.view.observe_saved_fov_write)
+                rt.view.observe_saved_fov_write(); // NOTSA: reference write receipt.
             op.depth(7,0);op.fov(0x31c7,0x40d4f2);
             const auto entries=static_cast<std::int32_t>(op.need(rt.draw_count_at_3b0e338,0x40d4f7,0x3b0e338));
             if(entries-1>=0)op.call(0x40d520,0x40d520,{static_cast<std::uint32_t>(entries-1)}); // the 3abe13c draw-list body
-            if(const auto saved=op.need(rt.view.word_at_3b2cbb4,0x40d819,0x3b2cbb4);saved!=0)op.fov(saved,0x40d823);
+            if(const auto saved=rt.view.saved_fov.value;saved!=0)op.fov(saved,0x40d823);
             op.depth(1,1);rt.draw_count_at_3b0e338=0;op.complete_caption();break;}
         case 0x40eab0:
             if(static_cast<std::int32_t>(op.need(rt.effect_at_3b0e998,0x40eab0,0x3b0e998))>0)op.call(0x40eac0,0x40eac0); // the effect body

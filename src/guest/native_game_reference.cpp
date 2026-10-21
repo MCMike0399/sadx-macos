@@ -435,6 +435,7 @@ void NativeGame::initialize_view_defaults() {
         color_at_3b280ac_ = color(values.view_color);
         color_at_3b18230_ = color(values.reset_color);
         queue_runtime_.color_at_3ab9864 = color(values.sprite_color);
+        saved_fov_reference_.import_value(saved_fov_, static_cast<std::uint32_t>(values.last_perspective));
         view_.emplace(GameViewState{
             values.stretch_x, values.stretch_y, constants.width_scale, constants.height_scale,
             constants.half, constants.horizontal_extent, constants.vertical_extent,
@@ -444,7 +445,7 @@ void NativeGame::initialize_view_defaults() {
             bits(values.projection_center_x), bits(values.projection_center_y),
             static_cast<std::uint32_t>(values.perspective),
             static_cast<std::uint32_t>(values.perspective_copy),
-            static_cast<std::uint32_t>(values.last_perspective),
+            saved_fov_, [this] { saved_fov_reference_.observe_write(); },
             {values.clear_colors[0], values.clear_colors[1], values.clear_colors[2], values.clear_colors[3]},
             color_at_3b280ac_});
         return;
@@ -473,12 +474,13 @@ void NativeGame::initialize_view_defaults() {
     color_at_3b280ac_ = color(0x3b280ac);
     color_at_3b18230_ = color(0x3b18230);
     queue_runtime_.color_at_3ab9864 = color(0x3ab9864);
+    saved_fov_reference_.import_value(saved_fov_, word(0x3b2cbb4));
     view_.emplace(GameViewState{
         floating(0x8928c0), floating(0x8928c4), constants.width_scale, constants.height_scale,
         constants.half, constants.horizontal_extent, constants.vertical_extent,
         byte_at_3b280a8_, loop_.mode_at_3b28114, word(0x3abd9cc), word(0x3b28094),
         floating(0x3b28098), floating(0x3b2809c), floating(0x3b280a0), floating(0x3b280a4),
-        word(0x3d0f9ec), word(0x3d0f9f0), word(0x3aad0bc), word(0x3ab98ec), word(0x3b2cbb4),
+        word(0x3d0f9ec), word(0x3d0f9f0), word(0x3aad0bc), word(0x3ab98ec), saved_fov_, [this] { saved_fov_reference_.observe_write(); },
         {word(0x3ce7174), word(0x3ce7178), word(0x3ce717c), word(0x3ce7180)}, color_at_3b280ac_});
 }
 std::array<std::optional<std::uint32_t>, 30> NativeGame::view_facts() const {
@@ -494,7 +496,7 @@ std::array<std::optional<std::uint32_t>, 30> NativeGame::view_facts() const {
     const auto &[stretch_x, stretch_y, scale_x, scale_y, half, fov_x, fov_y,
                  reset_pending, pause_state, animation_queue_state, distance,
                  width, height, center_x, center_y, projection_center_x, projection_center_y,
-                 perspective, perspective_copy, last_perspective, clear_colors, view_color] = *view_;
+                 perspective, perspective_copy, saved_fov, saved_fov_write_observer, clear_colors, view_color] = *view_;
     facts[next++] = bits(stretch_x);
     facts[next++] = bits(stretch_y);
     facts[next++] = animation_queue_state;
@@ -508,7 +510,8 @@ std::array<std::optional<std::uint32_t>, 30> NativeGame::view_facts() const {
     facts[next++] = projection_center_y;
     facts[next++] = perspective;
     facts[next++] = perspective_copy;
-    facts[next++] = last_perspective;
+    facts[next++] = saved_fov_reference_.export_value(saved_fov);
+    (void)saved_fov_write_observer;
     for (const auto &value : clear_colors)
         facts[next++] = value;
     for (const auto *color : {&view_color, &color_at_3b18230_, &queue_runtime_.color_at_3ab9864})

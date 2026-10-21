@@ -199,7 +199,16 @@ have two link-time bindings: plain native state with explicit missing-callee sto
 reference adapter with guest call-site metadata and lazy missing-fact checks. The adapter
 calls the same core; it contains no fallback mode interpreter.
 The headless survey and the AppKit native survey branch share
-`guest/native_game_session.hpp`; the shipping native session remains future work.
+`guest/native_game_session.hpp`. They are development tools.
+
+The production executable `sadx-native` composes `runtime/native_session`,
+`native_display`, `native_input`, movie/title/menu task callbacks and the macOS
+graphics/audio/controller/save backends. It builds independently of guest archives
+and executes imported assets without original EXE/DLLs. Startup through MainMenu
+is connected; native fresh-save creation and restart/reload are verified in the
+current integration work. CharacterSelect actors and native story gameplay remain
+unfinished. `Makefile` keeps this production dependency graph separate from the
+reference executable `sadx-app`.
 
 `player/ground_acceleration.hpp` exposes plain borrowed motion fields and native dependency
 owners. Its shared friction tail lives in `ground_friction.cpp`; both ordinary and alternate

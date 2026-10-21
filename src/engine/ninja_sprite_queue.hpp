@@ -37,6 +37,11 @@ public:
     NinjaQueueAllocationResult allocate(std::uint32_t,const NinjaQueueLogger&);
     NinjaQueueFailure write(const NinjaQueueBlock&,std::uint32_t,const void*,std::uint32_t);
     NinjaQueueFailure read(const NinjaQueueBlock&,std::uint32_t,void*,std::uint32_t)const;
+    // NOTSA:403db0 borrows end-size without advancing either cursor/end. The
+    // owned byte allocation stays stable through407ab0 full-zero resets.
+    std::uint8_t *borrow_from_end(std::uint32_t size);
+    // NOTSA: actual validated allocation storage for a typed native resource.
+    std::uint8_t *mutable_block(const NinjaQueueBlock &);
     std::uint32_t cursor()const noexcept{return cursor_;}
     std::uint32_t end()const noexcept{return end_;}
     std::optional<std::uint32_t> overflow_reported()const noexcept{return overflow_reported_;}

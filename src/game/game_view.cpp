@@ -42,7 +42,11 @@ GameViewResult run_game_view_4208e0(GameViewRuntime& rt,X87Context& fp){
         v.projection_words_at_3d0f9ec=bits(*v.view_at_3b280a0);v.projection_words_at_3d0f9f0=bits(*v.view_at_3b280a4);
         // 402ed0(0x31c7)
         if(need(v.fov_at_3aad0bc,0x402ed0)!=0x31c7U)call(0x402edf,0x7815c0,{0x31c7});
-        v.fov_copy_at_3ab98ec=0x31c7;v.fov_at_3aad0bc=0x31c7;v.word_at_3b2cbb4=0x31c7;
+        v.fov_copy_at_3ab98ec=0x31c7;
+        v.fov_at_3aad0bc=0x31c7;
+        v.saved_fov.value=0x31c7;
+        if(v.observe_saved_fov_write)
+            v.observe_saved_fov_write();
         // Local {0,0,w*fov_x,h*fov_y} passed to the 78c5a0 RET: computed for the x87 state only.
         (void)product(v.screen_width_at_8928c0,0x420953,v.fov_x_at_7dd594,0x420959);
         (void)product(v.screen_height_at_8928c4,0x420972,v.fov_y_at_7dd590,0x420980);

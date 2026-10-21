@@ -86,10 +86,10 @@ struct ControlCalls {
     virtual std::uint32_t pressed_buttons() = 0;
     // NOTSA: delegates the recovered menu_dialog request entry.
     virtual void request_dialog(std::int32_t) = 0;
-    // STUB: SONIC 0x5065d0 FUN_005065d0
+    // NOTSA: delegates the recovered native service through its canonical owner.
     virtual void prepare_new_save() = 0;
     virtual void apply_save() = 0;
-    // STUB: SONIC 0x5065e0 FUN_005065e0
+    // NOTSA: delegates the recovered native service through its canonical owner.
     virtual void request_save() = 0;
     // STUB: SONIC 0x421bd0 FUN_00421bd0
     virtual std::int32_t close_warning() = 0;

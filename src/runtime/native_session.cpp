@@ -46,6 +46,7 @@ Session::Session(LogoOutput &output, std::shared_ptr<const character_pack::Chara
     frame::set_frame_rate_mode(1, 1, timing_, renderer_);
 }
 
+void Session::attach_logo_scaling(Display &display) { logo_.attach_ui_scaling(display.ui_scaling()); }
 void Session::advance() { flow::advance_game_mode(flow_, *this); }
 void Session::update_sounds() {
     if (!sound_server_calls_)

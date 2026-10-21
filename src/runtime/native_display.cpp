@@ -73,13 +73,13 @@ void Display::set_perspective(std::int32_t angle, std::uint32_t &pause_state) {
     screen::State state{horizontal_scale_, vertical_scale_, reset_pending_, pause_state,
                         animation_queue_state_, screen_descriptor_, view_.sprite_scale,
                         projection_center_x_, projection_center_y_, view_.camera.angle,
-                        perspective_copy_, last_perspective_, view_material_};
+                        perspective_copy_, saved_fov_.value, view_material_};
     auto services = screen_services();
     screen::set_perspective(angle, state, services);
 }
 void Display::set_view_angle(std::int32_t angle, std::uint32_t &pause_state) {
     screen::CameraAngleState state{camera_type_, interpolate_camera_angle_,
-                                   previous_camera_angle_, last_perspective_};
+                                   previous_camera_angle_, saved_fov_.value};
     screen::set_view_angle(angle, state, [this, &pause_state](std::int32_t value) {
         set_perspective(value, pause_state);
     });
@@ -133,9 +133,8 @@ void Display::submit_sprite_quad(const sprite::Quad &quad) {
         }};
     sprite::draw_quad(quad, hud_color_, sprite_vertices_, services, arithmetic_);
 }
-void Display::draw_sprite(const sprite::Sprite &value, std::int32_t frame, float priority,
-                          std::uint8_t attributes) {
-    sprite::ImmediateServices services{
+sprite::ImmediateServices Display::sprite_services() {
+    return {
         [this](const sprite::TextureList &textures) { current_texture_list_ = &textures; },
         [this] { coordinates_->push_unit_frame(); },
         [this](std::int32_t angle) {
@@ -169,7 +168,17 @@ void Display::draw_sprite(const sprite::Sprite &value, std::int32_t frame, float
             device_state_.stage0_states[17] = 2;
             device_state_.stage0_states[18] = 2;
         }};
+}
+void Display::draw_sprite(const sprite::Sprite &value, std::int32_t frame, float priority,
+                          std::uint8_t attributes) {
+    auto services = sprite_services();
     sprite::draw_sprite(&value, frame, priority, attributes, material_argb_, services, arithmetic_);
+}
+void Display::draw_screen_sprite(const sprite::ScreenSprite &value, std::int32_t frame, float priority,
+                                 std::uint8_t attributes) {
+    auto services = sprite_services();
+    const auto view = sprite::screen_view(value);
+    sprite::draw_screen_sprite(&view, frame, priority, attributes, material_argb_, services, arithmetic_);
 }
 LogoFrame Display::frame_state() {
     return {horizontal_scale_, vertical_scale_, frame_mode_.pending_logic_ticks,
@@ -248,7 +257,7 @@ void Display::setup_screen(std::uint32_t &pause_state) {
     screen::State state{horizontal_scale_, vertical_scale_, reset_pending_, pause_state,
                         animation_queue_state_, screen_descriptor_, view_.sprite_scale,
                         projection_center_x_, projection_center_y_, view_.camera.angle,
-                        perspective_copy_, last_perspective_, view_material_};
+                        perspective_copy_, saved_fov_.value, view_material_};
     auto services = screen_services();
     screen::setup(state, services, arithmetic_);
 }

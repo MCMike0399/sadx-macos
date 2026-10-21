@@ -8,6 +8,7 @@
 #include "game/menu_dialog.hpp"
 #include "game/menu_dialog_file_select.hpp"
 #include "game/menu_caption.hpp"
+#include "game/save_completion.hpp"
 #include "engine/font_native.hpp"
 #include "runtime/title_assets.hpp"
 #include <functional>
@@ -40,6 +41,7 @@ class TitleScene final : private title_menu::Calls,
                          private menu_dialog::UpdateCalls,
                          private menu_dialog::DrawCalls,
                          private menu_caption::Calls,
+                         private file_select::SaveCompletionCalls,
                          private file_select_display::Calls,
                          private font::Calls {
   public:
@@ -57,6 +59,10 @@ class TitleScene final : private title_menu::Calls,
     std::int32_t run();
     std::int32_t close();
     void complete_caption_frame();
+    void release_message_textures();
+    void render_messages();
+    void before_save_frame_completion();
+    void after_save_frame_completion();
     const title_menu::State &state() const { return state_; }
     // NOTSA: runtime resource evidence for the otherwise invisible empty-English caption path.
     struct CaptionResources {
@@ -75,6 +81,7 @@ class TitleScene final : private title_menu::Calls,
     CaptionResources caption_resources_;
     struct CallbackContext;
     struct MainMenuServices;
+    struct MessageServices;
     void draw_main_menu_content(title_menu::DialogContent, const menu_dialog::ContentArguments &);
     std::shared_ptr<CallbackContext> callback_context_;
     static TitleScene &callback_scene(TaskScheduler &, TaskCallback);
@@ -175,6 +182,10 @@ class TitleScene final : private title_menu::Calls,
     void load_texture(texture_lifetime::List &) override;
     void update_controls(title_menu::FileSelectWork &) override;
     void update_confirmation(title_menu::FileSelectWork &, file_select::ControlState &) override;
+    void update_save_completion(title_menu::FileSelectWork &, file_select::ControlState &) override;
+    TaskHandle create_save_warning() override;
+    std::int8_t dialog_selection() override;
+    void close_save_warning(TaskHandle) override;
     void request_dialog(std::int32_t) override;
     std::int32_t dialog_result() override;
     void request_delete_confirmation() override;

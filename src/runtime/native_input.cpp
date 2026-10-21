@@ -59,7 +59,8 @@ struct Input::Impl {
     InputModKeyboardPad keyboard;
     std::array<std::uint8_t, 6> vanilla_keys{};
     std::array<KeyboardKeyState, 256> keyboard_records{};
-    std::uint8_t modifier_input = 0, modifier_held = 0, modifier_previous = 0, modifier_pressed = 0;
+    std::uint8_t modifier_input = 0;
+    KeyboardKeyState modifier;
     std::array<KeyboardStick, 2> sticks{};
     bool keyboard_half_press = false, keyboard_center_camera = false, demo_active = false;
     std::array<InputModDreamPad, 8> pads{};
@@ -67,6 +68,7 @@ struct Input::Impl {
     InputModRawRecords raw_records;
     std::array<std::shared_ptr<GameLogicController>, 4> engine_raw;
     NativeSceneInputState scene;
+    InputCursorState cursor;
     std::array<std::uint8_t, 8> enabled{{1, 1, 0, 0, 0, 0, 0, 0}};
     std::uint8_t pad_reading = 1; // Source load-time PadReadOn flag.
 
@@ -99,9 +101,9 @@ struct Input::Impl {
             keyboard_records[index].held = 1; // Zero slots mark key0 too.
         for (auto &key : keyboard_records)
             key.pressed = (key.previous ^ key.held) & key.held;
-        modifier_previous = modifier_held;
-        modifier_pressed = (modifier_held ^ modifier_input) & modifier_input;
-        modifier_held = modifier_input;
+        modifier.previous = modifier.held;
+        modifier.pressed = (modifier.held ^ modifier_input) & modifier_input;
+        modifier.held = modifier_input;
     }
     bool poll_keyboard(std::string &error) {
         sticks[0].update();
@@ -248,6 +250,27 @@ void Input::focus_lost() {
     state.keyboard.ry = 0;
     // Source WM_KILLFOCUS preserves ramp positions and half-press/e-held booleans.
 }
+void reset_input_edges(std::array<KeyboardKeyState, 256> &keys, KeyboardKeyState &modifier,
+                       InputCursorState &cursor) {
+    keys.fill({});
+    modifier.pressed = 0;
+    modifier.previous = 0;
+    modifier.held = 0;
+    cursor.magnitude = 0;
+    cursor.cosine = 0;
+    cursor.sine = 0;
+    cursor.y = 0;
+    cursor.x = 0;
+}
+// NOTSA: bind source input_init to the live native input owners.
+void Input::reset_source() {
+    // Physical keys, ramps and pad records survive; held keys can produce new edges.
+    reset_input_edges(impl_->keyboard_records, impl_->modifier, impl_->cursor);
+}
+// NOTSA: borrow the cursor owner without copying or resetting controller state.
+InputCursorState &Input::cursor_state() {
+    return impl_->cursor;
+}
 void Input::gamepad(std::size_t player, const std::optional<InputModGamepadState> &sample) {
     auto &state = *impl_;
     auto &pad = state.pads.at(player);
@@ -333,7 +356,7 @@ std::uint8_t Input::check_key(std::size_t index) const {
 }
 // FUNCTION: SONIC 0x40ef30 KeyCtrlGetOn
 std::uint8_t Input::switch_data() const {
-    return impl_->modifier_held;
+    return impl_->modifier.held;
 }
 void Input::keyboard_modifiers(std::uint8_t bits) {
     impl_->modifier_input = bits;

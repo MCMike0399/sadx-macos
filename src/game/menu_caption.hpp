@@ -15,6 +15,11 @@ struct Buffer {
     std::unique_ptr<std::uint8_t[]> bytes;
     std::size_t size;
 };
+// NOTSA: source bitmap storage borrowed from a heap buffer or the maintained draw arena.
+struct BitmapView {
+    std::uint8_t *bytes;
+    std::size_t size;
+};
 // MSGC. The texture list retains canonical texture-memory references when copied for release.
 struct Context : cleanup::Message {
     Context() : cleanup::Message{0} {}
@@ -58,9 +63,9 @@ struct Calls {
     virtual void free_buffer(std::shared_ptr<Buffer>) = 0;
     // NOTSA: source TH_Wait; service must use the actual cooperative-thread owner.
     virtual void wait_for_cooperative_thread() = 0;
-    // STUB: SONIC 0x40e570 MSG_Puts
+    // NOTSA: composition service delegates to message_text::put_text.
     virtual void append_message(Context &, const std::string &) = 0;
-    // STUB: SONIC 0x40d290 MSG_LoadTexture
+    // NOTSA: composition service delegates to message_text::request_texture_upload.
     virtual void load_message_texture(Context &) = 0;
     // NOTSA: connects message contexts to cleanup::display_message's canonical queue.
     virtual void draw_message(Context &) = 0;
@@ -71,6 +76,10 @@ struct Calls {
 // FUNCTION: SONIC 0x40d850 MSG_Cls
 void clear_message(Context &, std::uint32_t &pause_state, Calls &);
 // FUNCTION: SONIC 0x40e1e0 NH_MSG_Open
+void open_message(Context &, std::int16_t x, std::int16_t y, std::int32_t width,
+                  std::int32_t height, std::uint32_t global_index, BitmapView,
+                  std::uint32_t &pause_state, Calls &);
+// NOTSA: compatibility overload retains owning Caption allocations and their existing callers.
 void open_message(Context &, std::int16_t x, std::int16_t y, std::int32_t width,
                   std::int32_t height, std::uint32_t global_index, Buffer *,
                   std::uint32_t &pause_state, Calls &);

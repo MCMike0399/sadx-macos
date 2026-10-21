@@ -1,4 +1,5 @@
 #pragma once
+#include "engine/ui_scale_profile.hpp"
 #include "engine/menu_draw_primitives.hpp"
 #include "game/save_file_list.hpp"
 #include "game/title_menu.hpp"
@@ -65,4 +66,8 @@ struct Calls : menu_draw::Calls {
 };
 // FUNCTION: SONIC 0x505550 file_sel_disp
 void draw(title_menu::FileSelectWork &, View &, pvr::State &, Calls &, X87Context &);
+// NOTSA: selected native profile runs the real background scope, then draws
+// foreground with that same owner after the source pop.
+void draw_profiled(title_menu::FileSelectWork &, View &, pvr::State &, Calls &, X87Context &,
+                    ui_scale::State &);
 } // namespace sadx::file_select_display

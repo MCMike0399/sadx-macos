@@ -524,10 +524,25 @@ void TitleScene::request_dialog(std::int32_t index) {
                           {state_.dialog_task}, *this);
 }
 void TitleScene::prepare_new_save() {
-    throw flow::UnrecoveredGameFlowCall("native_file_select_prepare_new_save");
+    save::prepare_new(session_.bootstrap_, session_.save_, session_.rings_);
 }
 void TitleScene::request_save() {
-    throw flow::UnrecoveredGameFlowCall("native_file_select_request_save");
+    save::request_write(session_.saving_disabled_, session_.flow_.save_ready,
+                         [this] { session_.capture_live_save(); });
+}
+void TitleScene::update_save_completion(title_menu::FileSelectWork &work, file_select::ControlState &) {
+    file_select::SaveCompletionState state{session_.flow_.alert_blocked, session_.save_ok_,
+        session_.file_select_fade_in_marker_, session_.flow_.save_phase, session_.flow_.save_ready,
+        session_.save_exec_, session_.flow_.alert_flag, session_.bootstrap_.menu.selected_file,
+        session_.file_selection_backup_, session_.saving_disabled_, session_.save_warning_message_};
+    (void)file_select::update_save_completion(work, state, *this);
+}
+TaskHandle TitleScene::create_save_warning() {
+    throw flow::UnrecoveredGameFlowCall("native_save_warning_message");
+}
+std::int8_t TitleScene::dialog_selection() { return static_cast<std::int8_t>(dialog_result()); }
+void TitleScene::close_save_warning(TaskHandle) {
+    throw flow::UnrecoveredGameFlowCall("native_save_warning_close");
 }
 std::int32_t TitleScene::close_warning() {
     throw flow::UnrecoveredGameFlowCall("native_file_select_close_warning");

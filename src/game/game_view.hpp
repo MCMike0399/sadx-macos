@@ -1,5 +1,6 @@
 #pragma once
 #include "engine/game_logic.hpp"
+#include "game/saved_fov.hpp"
 #include "engine/ninja_queue_lifecycle.hpp"
 #include <array>
 #include <cstdint>
@@ -18,7 +19,10 @@ struct GameViewState {
     std::optional<std::uint32_t> scale_word_at_3b28094;
     std::optional<float> view_at_3b28098,view_at_3b2809c,view_at_3b280a0,view_at_3b280a4;
     std::optional<std::uint32_t> projection_words_at_3d0f9ec,projection_words_at_3d0f9f0; // 788240 copies of +0xc/+0x10
-    std::optional<std::uint32_t> fov_at_3aad0bc,fov_copy_at_3ab98ec,word_at_3b2cbb4;
+    std::optional<std::uint32_t> fov_at_3aad0bc,fov_copy_at_3ab98ec;
+    view::SavedFovState& saved_fov;
+    // NOTSA: reference transport can observe this write without owning another word.
+    std::function<void()> observe_saved_fov_write;
     std::array<std::optional<std::uint32_t>,4> clear_colors_at_3ce7174; // 780c00
     const std::optional<std::array<float,4>>& color_at_3b280ac;
 };

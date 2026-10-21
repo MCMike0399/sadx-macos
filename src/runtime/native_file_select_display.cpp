@@ -111,14 +111,15 @@ void TitleScene::wait_for_cooperative_thread() {
     if (result != cooperative_threads::WaitResult::Completed)
         throw flow::UnrecoveredGameFlowCall("native_cooperative_thread_continuation_4014bc");
 }
-void TitleScene::append_message(menu_caption::Context &, const std::string &) {
-    throw flow::UnrecoveredGameFlowCall("native_message_puts_40e570");
+void TitleScene::append_message(menu_caption::Context &context, const std::string &text) {
+    message_text::put_text(context, text, session_.message_fonts_, session_.text_language_);
 }
-void TitleScene::load_message_texture(menu_caption::Context &) {
-    throw flow::UnrecoveredGameFlowCall("native_message_load_texture_40d290");
+void TitleScene::load_message_texture(menu_caption::Context &context) {
+    message_text::request_texture_upload(context);
 }
-void TitleScene::draw_message(menu_caption::Context &) {
-    throw flow::UnrecoveredGameFlowCall("native_message_display_40d490");
+void TitleScene::draw_message(menu_caption::Context &context) {
+    cleanup::display_message(&context, session_.messages_, session_.bootstrap_.saved_option_gate,
+                             session_.timing_.pending_logic_ticks);
 }
 void TitleScene::release_texture_list(texture_lifetime::List &list) {
     display_.release_texture_list(list);
@@ -129,12 +130,22 @@ void TitleScene::release_queue_overflow() {
 void TitleScene::complete_caption_frame() {
     auto &releases = display_.message_texture_releases();
     menu_caption::complete_frame(session_.menu_caption_, releases, *this);
-    menu_caption::release_queued(releases, *this);
+}
+void TitleScene::release_message_textures() {
+    menu_caption::release_queued(display_.message_texture_releases(), *this);
 }
 void Session::complete_menu_messages() {
     if (!title_)
         throw flow::UnrecoveredGameFlowCall("native_menu_message_services");
-    title_->complete_caption_frame();
+    if (text_window_pending_ != 0)
+        throw flow::UnrecoveredGameFlowCall("native_pending_text_window");
+    title_->render_messages();
+}
+void Session::release_lazy_textures() {
+    if (!lazy_texture_release_list_) return;
+    // The source clears its published owner before walking the detached list.
+    lazy_texture_release_list_ = nullptr;
+    throw flow::UnrecoveredGameFlowCall("native_lazy_texture_list_release");
 }
 void TitleScene::draw_file_select(title_menu::FileSelectWork &work) {
     if (!session_.file_select_display_assets_)
@@ -150,8 +161,8 @@ void TitleScene::draw_file_select(title_menu::FileSelectWork &work) {
         session_.bootstrap_.card_state, session_.list_data_, session_.font_state_,
         session_.file_select_display_assets_->tables, session_.file_message_visible_,
         session_.flow_.alert_blocked, session_.file_message_, session_.save_warning_message_};
-    file_select_display::draw(work, view, session_.logo_.drawing_state(), *this,
-                              display_.arithmetic());
+    file_select_display::draw_profiled(work, view, session_.logo_.drawing_state(), *this,
+                              display_.arithmetic(), display_.ui_scaling());
 }
 void TitleScene::select_menu_texture(file_select_display::MenuTexture texture) {
     const auto &binding = session_.menu_texture_binding(static_cast<std::uint32_t>(texture));

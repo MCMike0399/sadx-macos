@@ -26,6 +26,10 @@
 #include "runtime/file_select_display_assets.hpp"
 #include "runtime/menu_dialog_assets.hpp"
 #include "runtime/main_menu_assets.hpp"
+#include "runtime/message_font_assets.hpp"
+#include "game/save_creation.hpp"
+#include "game/save_write.hpp"
+#include "game/save_frame.hpp"
 #include "game/sound_effects.hpp"
 
 namespace sadx::native {
@@ -42,6 +46,13 @@ class Session final : private flow::NativeServices {
             std::function<void(std::uint32_t)> stop_vibration);
     void advance();
     void complete_menu_messages();
+    void release_lazy_textures();
+    void before_save_frame_completion();
+    void after_save_frame_completion();
+    void attach_save_writer(save::WriteCalls &calls) { save_writer_ = &calls; }
+    void attach_message_fonts(MessageFontAssets);
+    void capture_live_save();
+    void write_live_save();
     void begin_frame() { loop_.loop_starting = 1; }
     void complete_frame_counters() {
         frame_loop::complete_counter_state(loop_, timing_, renderer_);
@@ -49,6 +60,15 @@ class Session final : private flow::NativeServices {
     const flow::GameFlowState &flow_state() const { return flow_; }
     const bootstrap::State &game_state() const { return bootstrap_; }
     const save::Data &save_data() const { return save_; }
+    // NOTSA: read-only journey evidence from the canonical scheduler/writer fields.
+    struct SaveProgress {
+        std::int32_t phase;
+        std::uint8_t ready, count, executing, complete, message_pending;
+    };
+    SaveProgress save_progress() const {
+        return {flow_.save_phase, flow_.save_ready, save_count_, save_exec_, save_ok_,
+                saving_message_pending_};
+    }
     const menu_caption::State &menu_caption_state() const { return menu_caption_; }
     const char *active_save_name() const { return save_name_.value; }
     std::int32_t current_music_song() const { return tracks_.current_song; }
@@ -82,6 +102,7 @@ class Session final : private flow::NativeServices {
     SoftResetState &soft_reset_state() { return soft_reset_; }
     void attach_cleanup(Display &display, audio::AudioConfiguration &configuration) {
         display_ = &display;
+        attach_logo_scaling(display);
         audio_configuration_ = &configuration;
     }
     void attach_title(TitleScene &scene) { title_ = &scene; }
@@ -139,6 +160,7 @@ class Session final : private flow::NativeServices {
 
   private:
     friend class TitleScene;
+    void attach_logo_scaling(Display &);
     flow::GameFlowState flow_;
     std::uint32_t global_timer_ = 0;
     std::uint32_t quit_ = 0, presented_frames_ = 0;
@@ -220,6 +242,18 @@ class Session final : private flow::NativeServices {
     std::unique_ptr<MenuDialogAssets> menu_dialog_assets_;
     std::unique_ptr<MainMenuAssets> main_menu_assets_;
     menu_caption::State menu_caption_;
+    std::unique_ptr<MessageFontAssets> message_font_assets_;
+    message_text::State message_fonts_;
+    save::WriteCalls *save_writer_ = nullptr;
+    // Source native-world storage:40cad0/421fd0 BSS counterparts, not reference availability.
+    std::uint8_t save_count_ = 0, save_exec_ = 0, saving_message_pending_ = 0;
+    std::uint8_t save_ok_ = 0, save_retry_ = 0, file_delete_flag_ = 0;
+    menu_caption::Context saving_message_;
+    std::uint8_t skip_message_mipmaps_ = 0;
+    // Native BSS storage: SONIC 0x3abdf80; source conditional4326f0 caller.
+    std::uint32_t text_window_pending_ = 0;
+    // Native BSS storage: SONIC 0x3b2c584; source42f990 deferred list owner.
+    void *lazy_texture_release_list_ = nullptr;
     // GLOBAL: SONIC 0x3c5e8c4 FileSelectionBackup size=2
     std::uint16_t file_selection_backup_ = 0;
     // GLOBAL: SONIC 0x3b2c5e4 DialogWindowAfterContent size=4

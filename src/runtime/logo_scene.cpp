@@ -56,7 +56,11 @@ void LogoScene::run_objects() {
 void LogoScene::display(std::uint8_t first_texture) {
     logo::DisplayState display{state_.frames, frame_.horizontal_scale, frame_.vertical_scale,
                                drawing_.vertices[0].color};
-    logo::display_profile_640(first_texture, display, *this, arithmetic_, 640, 480);
+    if (!scaling_) throw std::runtime_error("native logo profile state is unavailable");
+    ui_scale::require_stretch_owners(*scaling_, frame_.horizontal_scale, frame_.vertical_scale);
+    ui_scale::run_identity_background(*scaling_, 640, 480, [&] {
+        logo::display_profile_640(first_texture, display, *this, arithmetic_, 640, 480);
+    });
 }
 void LogoScene::release_textures() { output_.release_logo_archive(); }
 void LogoScene::select_logo_textures() { output_.select_logo_archive(); }

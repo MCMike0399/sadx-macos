@@ -249,4 +249,16 @@ void draw_profiled(const Work &work, DrawState state, DrawCalls &calls, X87Conte
     draw_background(work.presentation.depth, state, calls, fp);
     state.window_after_menu = 1;
 }
+void draw_profiled(const Work &work, DrawState state, DrawCalls &calls, X87Context &fp,
+                   ui_scale::State &scaling) {
+    if (work.presentation.color == 0)
+        return;
+    calls.default_blending();
+    calls.set_base_color(work.presentation.color);
+    ui_scale::require_stretch_owners(scaling, state.horizontal_scale, state.vertical_scale);
+    ui_scale::run_identity_background(scaling, state.screen_width, state.screen_height, [&] {
+        draw_background(work.presentation.depth, state, calls, fp);
+    });
+    state.window_after_menu = 1;
+}
 } // namespace sadx::main_menu

@@ -1,4 +1,5 @@
 #pragma once
+#include "engine/ui_scale_profile.hpp"
 #include "game/save_data.hpp"
 #include "game/title_menu.hpp"
 
@@ -93,4 +94,6 @@ void draw_background(float depth, DrawState, DrawCalls &, X87Context &);
 void draw(const Work &, DrawState, DrawCalls &, X87Context &);
 // NOTSA: pinned loader's centered background wrapper is qualified only at the source view.
 void draw_profiled(const Work &, DrawState, DrawCalls &, X87Context &);
+// NOTSA: actual pinned background hook consumes the shared live scale owner.
+void draw_profiled(const Work &, DrawState, DrawCalls &, X87Context &, ui_scale::State &);
 } // namespace sadx::main_menu

@@ -70,6 +70,12 @@ std::uint32_t consume_soft_reset(SoftResetState &);
 struct InputFrameContext {
     std::int32_t game_mode, demo_playing, demo_enabled, demo_cutscene;
 };
+// NOTSA: native storage for the source cursor globals, independent of controller records.
+struct InputCursorState {
+    std::int32_t y = 0, x = 0, magnitude = 0, cosine = 0, sine = 0;
+};
+// FUNCTION: SONIC 0x40f350 input_init
+void reset_input_edges(std::array<KeyboardKeyState, 256> &, KeyboardKeyState &, InputCursorState &);
 struct AnalogSnapshot {
     std::int32_t angle;
     float magnitude;
@@ -94,6 +100,8 @@ class Input {
     Input &operator=(const Input &) = delete;
     void key_event(std::uint32_t source_virtual_key, bool down);
     void focus_lost();
+    void reset_source();
+    InputCursorState &cursor_state();
     void gamepad(std::size_t player, const std::optional<InputModGamepadState> &);
     // Raw producer only (qualification/oracles). Production uses poll_frame.
     bool poll(std::string &error);

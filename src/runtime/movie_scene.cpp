@@ -39,7 +39,7 @@ MovieScene::MovieScene(Display &display, frame::ModeState &mode, frame::Renderer
         return update_texture();
     };
     services_.draw_movie_texture = [this](std::int32_t width, std::int32_t height) {
-        draw_movie_texture(width, height);
+        ui_scale::run_movie_scope(display_.ui_scaling(), [&] { draw_movie_texture(width, height); });
     };
     services_.draw_fade = [this](std::uint8_t opacity) {
         draw_fade(opacity);

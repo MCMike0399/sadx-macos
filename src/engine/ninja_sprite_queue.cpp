@@ -42,6 +42,14 @@ NinjaQueueFailure NinjaRenderQueueArena::read(const NinjaQueueBlock& block,std::
     for(std::uint32_t i=0;i<size;++i)if(!known_[block.offset+at+i])return NinjaQueueFailure::unobserved_bytes;
     if(size)std::memcpy(output,bytes_.data()+block.offset+at,size);return NinjaQueueFailure::none;
 }
+std::uint8_t *NinjaRenderQueueArena::mutable_block(const NinjaQueueBlock &block){
+    if(read(block,0,nullptr,0)!=NinjaQueueFailure::none)throw std::invalid_argument("foreign queue allocation view");
+    return bytes_.data()+block.offset;
+}
+std::uint8_t *NinjaRenderQueueArena::borrow_from_end(std::uint32_t size){
+    if(size>end_||end_>bytes_.size())throw std::out_of_range("queue end borrow exceeds the canonical arena");
+    return bytes_.data()+end_-size;
+}
 NinjaQueueFailure NinjaRenderQueueArena::reset_407ab0(std::uint32_t base){
     const auto start=((base+0x1fU)&~0x1fU)-base;
     if(start>end_)return NinjaQueueFailure::out_of_bounds;

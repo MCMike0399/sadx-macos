@@ -21,6 +21,14 @@ struct Sprite {
     const TextureList *textures;
     const std::vector<AnimationFrame> &animation;
 };
+// NOTSA: source-used sprite fields only. References preserve live reloads after
+// renderer callbacks; no unused source position.z or unknown angle is invented.
+struct ScreenSpriteView {
+    const float &x, &y, &scale_x, &scale_y;
+    const TextureList *const &textures;
+    std::function<const AnimationFrame &(std::int32_t)> frame_at;
+    std::function<std::int32_t()> angle;
+};
 struct Quad {
     std::array<float, 3> origin;
     std::array<float, 2> horizontal, vertical;
@@ -38,6 +46,12 @@ struct ImmediateServices {
     std::function<void(const Quad &)> draw_quad;
     std::function<void()> restore_linear_filter;
 };
+// NOTSA: defined-field adapter for source stack sprites whose angle is genuinely
+// uninitialized when attributes bit0 is clear. The original entry below shares
+// this same readable body; a selected angle branch requires an actual getter.
+void draw_screen_sprite(const ScreenSpriteView *, std::int32_t animation_index, float priority,
+                        std::uint8_t attributes, const std::array<float, 4> &material_argb,
+                        ImmediateServices &, X87Context &);
 // FUNCTION: SONIC 0x77e050 njDrawSprite2D
 void draw_sprite(const Sprite *, std::int32_t animation_index, float priority,
                  std::uint8_t attributes, const std::array<float, 4> &material_argb,

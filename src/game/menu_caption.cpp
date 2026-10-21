@@ -31,15 +31,15 @@ void clear_message(Context &message, std::uint32_t &pause_state, Calls &calls) {
     pause_state = 0;
 }
 void open_message(Context &message, std::int16_t x, std::int16_t y, std::int32_t width,
-                  std::int32_t height, std::uint32_t global_index, Buffer *buffer,
+                  std::int32_t height, std::uint32_t global_index, BitmapView buffer,
                   std::uint32_t &pause_state, Calls &calls) {
     message.bitmap_width = bitmap_dimension(width, 1024);
     message.bitmap_height = bitmap_dimension(height, 512);
-    void *aligned = buffer ? buffer->bytes.get() : nullptr;
-    auto remaining = buffer ? buffer->size : 0;
+    void *aligned = buffer.bytes;
+    auto remaining = buffer.size;
     const auto required =
         static_cast<std::size_t>(message.bitmap_width) * message.bitmap_height * 2;
-    if (buffer && !std::align(32, required, aligned, remaining))
+    if (buffer.bytes && !std::align(32, required, aligned, remaining))
         throw std::runtime_error(
             "message bitmap allocation cannot hold the aligned source dimensions");
     message.x = x;
@@ -63,6 +63,12 @@ void open_message(Context &message, std::int16_t x, std::int16_t y, std::int32_t
     message.flags = 0;
     message.scale = 1;
     clear_message(message, pause_state, calls);
+}
+void open_message(Context &message, std::int16_t x, std::int16_t y, std::int32_t width,
+                  std::int32_t height, std::uint32_t global_index, Buffer *buffer,
+                  std::uint32_t &pause_state, Calls &calls) {
+    const BitmapView view{buffer ? buffer->bytes.get() : nullptr, buffer ? buffer->size : 0};
+    open_message(message, x, y, width, height, global_index, view, pause_state, calls);
 }
 void initialize(State &state, std::uint32_t &pause_state, Calls &calls) {
     if (!state.buffer) {
