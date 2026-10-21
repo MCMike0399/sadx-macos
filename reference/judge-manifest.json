@@ -1,13 +1,12 @@
 {
   "change": {
-    "base_commit": "bfa4d107141cb190d77551747d6714449fec75e9",
-    "evidence": "reference/production-integration-20261020/native-title-connected.json",
-    "evidence_sha256": "debeef9a2e609e3da96c93452c71b67ec7dd5c7852934df2af740e62881f0a44",
-    "mode": "additions-only",
-    "reason": "Register new native title tests and report summaries; final registration whitespace leaves generated recipes byte identical to the passing gate"
+    "base_commit": "eba0377b93db506722426c5d7d7fd76b75e0f98b",
+    "evidence": "reference/production-integration-20261020/native-file-select-build-preparation.json",
+    "evidence_sha256": "ea8b52bd97c227158b6818c0f40cc2a2e0dce09e5741fc292fee910e4941bf2e",
+    "reason": "Declare connected native file-select dependencies"
   },
   "files": {
-    "Makefile": "5511999f5d12acf92303c74f41fbd76d53413da57d3a6f0ee751e25518091a35",
+    "Makefile": "b87a65888df94ebe958e713a1b896579cc293dc7214517b902c2ced874446591",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
     "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
     "reference/frame-control-corpus.tsv": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",

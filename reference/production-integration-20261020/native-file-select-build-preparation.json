@@ -1,0 +1,14 @@
+{
+  "scope": "Production dependency closure for connected Title\u2192FileSelect native system",
+  "game_modules": [
+    "menu_resource_lifetime",
+    "voice_playback",
+    "file_select",
+    "save_file_list",
+    "menu_voice",
+    "file_select_display"
+  ],
+  "platform_module": "mac_save_files.cpp",
+  "caller": "Real native Start reaches FileSelect callback, save loading, menu music/voice and rendering",
+  "limits": "Dependency preparation; full source integration gate follows completed system. No expected results, tolerances or old tests changed."
+}

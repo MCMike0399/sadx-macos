@@ -57,14 +57,16 @@ NATIVE_SOURCES += src/engine/ninja_sprite_queue.cpp src/engine/ninja_render.cpp 
  src/engine/ninja_fog.cpp src/engine/ninja_fog_native.cpp src/game/sound_initial_state.cpp \
  $(wildcard src/engine/ninja_queue_native.cpp src/game/game_view_native.cpp \
  src/game/game_cleanup.cpp src/game/audio_playback.cpp src/game/title_menu.cpp \
- src/game/sound_bank.cpp src/game/stage_lighting.cpp src/game/regular_textures.cpp src/game/level_sounds.cpp src/game/music.cpp src/game/sound_effects.cpp src/engine/native_texture_lifetime.cpp)
+ src/game/sound_bank.cpp src/game/stage_lighting.cpp src/game/regular_textures.cpp src/game/level_sounds.cpp src/game/music.cpp src/game/sound_effects.cpp src/game/menu_resource_lifetime.cpp \
+ src/game/voice_playback.cpp src/game/file_select.cpp src/game/save_file_list.cpp \
+ src/game/menu_voice.cpp src/game/file_select_display.cpp src/engine/native_texture_lifetime.cpp)
 # Native engine adapters and runtime compositions use these explicit naming scopes.
 NATIVE_SOURCES := $(sort $(NATIVE_SOURCES) $(wildcard src/engine/*_native.cpp src/runtime/native_*.cpp))
 NATIVE_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(NATIVE_SOURCES))
 NATIVE_PLATFORM_OBJECTS := build/obj/platform/mac/mac_clock.o build/obj/platform/mac/mac_audio.o \
  build/obj/platform/mac/hid_switch_controller.o build/obj/platform/mac/mac_movie.o build/obj/platform/mac/metal_device_frame.o
 NATIVE_PLATFORM_OBJECTS += $(patsubst src/%.mm,build/obj/%.o,$(wildcard src/platform/mac/mac_audio_playback.mm src/platform/mac/mac_sound_bank.mm src/platform/mac/mac_sound_effects.mm))
-NATIVE_PLATFORM_OBJECTS += $(patsubst src/%.cpp,build/obj/%.o,$(wildcard src/platform/mac/mac_sound_bank.cpp))
+NATIVE_PLATFORM_OBJECTS += $(patsubst src/%.cpp,build/obj/%.o,$(wildcard src/platform/mac/mac_sound_bank.cpp src/platform/mac/mac_save_files.cpp))
 MAC_SOURCES := $(wildcard src/platform/mac/*.cpp src/platform/mac/*.mm)
 MAC_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(filter %.cpp,$(MAC_SOURCES))) $(patsubst src/%.mm,build/obj/%.o,$(filter %.mm,$(MAC_SOURCES)))
 UNIT_SOURCES := $(wildcard tests/unit/*.cpp)
