@@ -14,6 +14,7 @@
 #include "player/sonic_player.hpp"
 #include "game/sound_manager.hpp"
 #include "game/game_frame_owners.hpp"
+#include "guest/caption_frame_reference.hpp"
 #include "game/game_reset.hpp"
 #include "game/game_reset_leaves.hpp"
 #include "game/game_startup.hpp"
@@ -203,6 +204,7 @@ private:
     // Ninja matrix stack (base 3d0fa1c, current 3d0f818, capacity 3d0fa28, depth 3d0fa2c over 3a7cf48)
     // and its coordinate owner; created by 401830's njInitMatrix 780180 before 40cad0.
     GameFrameOwnersState frame_owners_;
+    reference::CaptionFrameReference caption_reference_{frame_owners_.caption};
     std::optional<NinjaMatrixStack> matrix_stack_;std::optional<PlayerCoordinates> coordinates_;std::optional<NinjaMatrix> unit_at_389d650_;
     NinjaProjectionRangeState projection_range_{};NinjaViewState ninja_view_;NinjaTransformOwner transform_owner_;
     // Task heap 40b1a0 and pool 40b460 (fresh owners each reset, as the source rebuilds them).

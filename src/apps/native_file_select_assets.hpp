@@ -43,7 +43,7 @@ inline menu_voice::Catalog load_menu_voice_assets(const std::filesystem::path &d
     for (id item in entries) {
         const auto entry = dictionary(item, "menu voice entry");
         menu_voice::Entry value{
-            static_cast<std::uint8_t>(integer(entry[@"character"], 0, 7, "voice character")),
+            static_cast<std::uint8_t>(integer(entry[@"character"], 0, 8, "menu voice row")),
             static_cast<std::int32_t>(integer(entry[@"request"], 0, 8, "voice request")),
             static_cast<std::int32_t>(integer(entry[@"voice"], -1, 2048, "menu voice ID"))};
         if (!identities.emplace(value.character, value.request).second)

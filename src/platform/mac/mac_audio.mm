@@ -101,6 +101,7 @@ struct AudioOutput::Impl {
     std::ofstream capture;
     std::uint32_t capture_bytes = 0;
     AudioStats statistics;
+    float output_gain = 1.0f;
 
     void mix(float* output, std::size_t frames) {
         std::fill(output, output + frames * 2, 0.0f);
@@ -122,7 +123,7 @@ struct AudioOutput::Impl {
             }
         }
         for (std::size_t sample = 0; sample < frames * 2; ++sample)
-            output[sample] = std::clamp(output[sample], -1.0f, 1.0f);
+            output[sample] = std::clamp(output[sample] * output_gain, -1.0f, 1.0f);
     }
 
     static void callback(void* context, AudioQueueRef queue, AudioQueueBufferRef buffer) {
@@ -247,6 +248,13 @@ void AudioOutput::stop(std::uint64_t token) {
     for (auto& voice : impl_->voices)
         if (voice.token == token)
             voice = {};
+}
+bool AudioOutput::set_output_gain(float gain) {
+    if (!std::isfinite(gain) || gain < 0.0f || gain > 8.0f)
+        return false;
+    std::lock_guard lock(impl_->mutex);
+    impl_->output_gain = gain;
+    return true;
 }
 bool AudioOutput::set_gain(std::uint64_t token, float left_gain, float right_gain) {
     if (!token || !std::isfinite(left_gain) || !std::isfinite(right_gain))

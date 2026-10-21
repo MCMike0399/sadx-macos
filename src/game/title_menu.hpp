@@ -142,8 +142,25 @@ struct SequenceCalls {
     virtual void destroy_sequence_child(const TaskHandle &) = 0;
 };
 enum class DialogStyle : std::int32_t { Blue, Cyan, BlueSecond, BlueThird, CyanSecond, BlueFourth };
+struct DialogPanel {
+    float x = 0, y = 0;
+    std::uint8_t texture = 0;
+};
+struct DialogSounds {
+    std::int32_t open = 0, close = 0, move = 0, decide = 0, cancel = 0;
+};
+// NOTSA: semantic identity of the source EachDrawFnc; no code pointers enter assets.
+enum class DialogContent { None, FileSelectHelp };
 struct DialogParameters {
     DialogStyle style = DialogStyle::Blue;
+    DialogContent content = DialogContent::None;
+    texture_lifetime::List *textures = nullptr;
+    std::shared_ptr<const std::vector<DialogPanel>> panels = {};
+    std::shared_ptr<const DialogSounds> sounds = {};
+    std::uint32_t upper_color = 0, lower_color = 0;
+    float center_x = 0, center_y = 0, depth = 0, width = 0, height = 0;
+    float scale_x = 0, scale_y = 0;
+    std::int8_t choice_count = 0, cancel_choice = 0;
 };
 struct DialogWork {
     const DialogParameters *parameters = nullptr;
@@ -365,7 +382,7 @@ struct TitleInitCalls {
     virtual void initialize_character_lighting() = 0;
     virtual void load_mode_textures(MenuMode) = 0;
     virtual void load_japanese_title_textures() = 0;
-    // STUB: SONIC 0x505e90 FUN_00505e90
+    // NOTSA: saved-character restoration supplied by the native menu composition.
     virtual void prepare_menu_voice() = 0;
     virtual void set_title_menu_previous() = 0;
 };
@@ -537,7 +554,7 @@ MenuDrawResult draw_emblem_results(const EmblemWork &);
 MenuDrawResult draw_internet_demo(const InternetDemoWork &);
 // FUNCTION: SONIC 0x508450 tv_settings_display
 MenuDrawResult draw_tv_settings(const TvSettingsWork &);
-// FUNCTION: SONIC 0x432480 MenuObj_Display
+// NOTSA: inactive dialog prefix retained for the existing source-equivalence probe.
 MenuDrawResult draw_dialog(const DialogWork &, X87Context &);
 // A bounded native callback reports the first branch whose body is not recovered yet.
 enum class MenuCallbackResult { Complete, NeedsInitialization, NeedsLeave,
@@ -658,7 +675,7 @@ enum class DialogUpdateResult { Complete, NeedsOpening, NeedsControl, NeedsClose
 // FUNCTION: SONIC 0x431960 FUN_00431960
 void update_dialog_animation(std::uint8_t &, std::optional<std::uint32_t> &angle,
                               float &fade, std::uint32_t loop_count, X87Context &);
-// FUNCTION: SONIC 0x432720 MenuObj_Main
+// NOTSA: initialization/idle dialog prefix retained for the existing source-equivalence probe.
 DialogUpdateResult update_dialog(DialogWork &, DialogWork &canonical,
                                   std::uint32_t loop_count, X87Context &);
 // FUNCTION: SONIC 0x432650 FUN_00432650

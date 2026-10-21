@@ -29,14 +29,16 @@ def import_save_files(game, output):
     if output == game or game in output.parents:
         raise ValueError('save snapshot output must be outside the owned install')
     directories = [entry for entry in game.iterdir() if entry.name.casefold() == 'savedata']
-    if len(directories) != 1 or not directories[0].is_dir() or directories[0].is_symlink():
-        raise ValueError('owned SAVEDATA directory is missing, ambiguous or a symlink')
-    source = directories[0]
+    if len(directories) > 1 or (directories and (not directories[0].is_dir() or directories[0].is_symlink())):
+        raise ValueError('owned SAVEDATA directory is malformed, ambiguous or a symlink')
+    source = directories[0] if directories else None
     files, names = [], set()
     # Preserve observed provider order in evidence only; native runtime enumerates
     # its real user directory. This is not a claim about NTFS enumeration order.
-    with os.scandir(source) as entries:
-        selected = [Path(entry.path) for entry in entries if entry.name.casefold().endswith('.snc')]
+    selected = []
+    if source is not None:
+        with os.scandir(source) as entries:
+            selected = [Path(entry.path) for entry in entries if entry.name.casefold().endswith('.snc')]
     for path in selected:
         if path.is_symlink() or not path.is_file():
             raise ValueError('save snapshot requires an ordinary file: ' + path.name)

@@ -1,0 +1,233 @@
+{
+  "outcome": "Native normal-input FileSelect confirmation dialog, real selected filename publication, cancel/title-return/reentry; next stop actual MainMenu initialization. Full acceptance remains incomplete.",
+  "gate": {
+    "report": "native-dialog-integration-gate.json",
+    "exit_status": 0,
+    "native_programs": 228,
+    "python_tests": 232,
+    "existing_filesystem_skips": 1,
+    "reference_journeys": 4,
+    "required_native_frames": 1850,
+    "first_attempt_exit": 2,
+    "first_failure": "Duplicate new audio test registration caught. Original mac_audio_gain.mm restored byte-identical, distinct mac_audio_balance.mm registered in separate judge commit aeb6e05."
+  },
+  "canonical_oracles": {
+    "menu_dialog": {
+      "sha256": "5e36e9a52dddc13a609039150f3657b59f5c34a993ef319dc5f19fe83a394293",
+      "raw_report": "build/oracles/menu_dialog.json",
+      "passed": true,
+      "values_match": null,
+      "cases": 2024,
+      "fp_flag_mismatches": null,
+      "mismatches": 0
+    },
+    "menu_dialog_update": {
+      "sha256": "375e7cdbbe1004608a041542ec46398a33c0a463659145876fe32b94dc5f6ec1",
+      "raw_report": "build/oracles/menu_dialog_update.json",
+      "passed": false,
+      "values_match": true,
+      "cases": 1840,
+      "fp_flag_mismatches": 675,
+      "mismatches": 0
+    },
+    "menu_dialog_draw": {
+      "sha256": "428147662eee340ba0e0572a0c3b81233044a019ed1d566422a35d755796bd2a",
+      "raw_report": "build/oracles/menu_dialog_draw.json",
+      "passed": false,
+      "values_match": true,
+      "cases": 1090,
+      "fp_flag_mismatches": 1023,
+      "mismatches": 0
+    },
+    "menu_dialog_confirmation": {
+      "sha256": "cc20ec5349a69a02c3bf184b9337239bae8f4460d2d49bdee79420c6832501a5",
+      "raw_report": "build/oracles/menu_dialog_confirmation.json",
+      "passed": false,
+      "values_match": true,
+      "cases": 1192,
+      "fp_flag_mismatches": 243,
+      "mismatches": 0
+    },
+    "menu_caption": {
+      "sha256": "b4b55cbd9ff7467d9f2dd02bbf5284fdb653f2accd96f44b423664b2b76633f6",
+      "raw_report": "build/oracles/menu_caption.json",
+      "passed": true,
+      "values_match": null,
+      "cases": 604,
+      "fp_flag_mismatches": null,
+      "mismatches": 0
+    },
+    "cooperative_thread": {
+      "sha256": "a818c1ca13942d4d6ec169b50221fcd4b5eb8c6e0d60d735dcd1ed7eb06f8e6f",
+      "raw_report": "build/oracles/cooperative_thread.json",
+      "passed": true,
+      "values_match": null,
+      "cases": 1008,
+      "fp_flag_mismatches": null,
+      "mismatches": 0
+    },
+    "caption_frame_reference": {
+      "sha256": "498825586b01d63e40d99265bebd04aa1f40275a88992cfe5821ef2fac3c88b1",
+      "raw_report": "build/oracles/caption_frame_reference.json",
+      "passed": true,
+      "values_match": null,
+      "cases": 1812,
+      "fp_flag_mismatches": null,
+      "mismatches": 0
+    },
+    "game_frame_owners": {
+      "sha256": "fd9ac9b6214a0816118bb4c64ac1239bcd0d658669c14702dea56853e30e571c",
+      "raw_report": "build/oracles/game_frame_owners.json",
+      "passed": null,
+      "values_match": null,
+      "cases": 2100,
+      "fp_flag_mismatches": null,
+      "mismatches": []
+    },
+    "game_mode_leaves": {
+      "sha256": "68b67f28c89335a4cbe2c1f2cdc43e444904f7de45b87318bde1c298c09a4063",
+      "raw_report": "build/oracles/game_mode_leaves.json",
+      "passed": null,
+      "values_match": null,
+      "cases": 2526,
+      "fp_flag_mismatches": null,
+      "mismatches": []
+    },
+    "file_select_controls": {
+      "sha256": "b7728b351e6547a07c5654ab4edb103986f6950530f03f1ce7246a6c6555fc04",
+      "raw_report": "build/oracles/file_select_controls.json",
+      "passed": false,
+      "values_match": true,
+      "cases": 2438,
+      "fp_flag_mismatches": null,
+      "mismatches": 0
+    },
+    "file_select_display": {
+      "sha256": "371730e506e77f3e404e5cfa08040b7a2894c2ebdf4258475a931e19b01df237",
+      "raw_report": "build/oracles/file_select_display.json",
+      "passed": false,
+      "values_match": true,
+      "cases": 600,
+      "fp_flag_mismatches": null,
+      "mismatches": []
+    },
+    "title_dialog": {
+      "sha256": "20563a793ab7d4f9d9bf77b0b93ba99268125d9d443929dfd185542a44d84313",
+      "raw_report": "build/oracles/title_dialog.json",
+      "passed": false,
+      "values_match": true,
+      "cases": 2652,
+      "fp_flag_mismatches": 667,
+      "mismatches": 0
+    }
+  },
+  "fp_status_limits": "verdict.py read canonical and holdout reports. Value-exact FP partials remain partial, including file_select_display whose oracle process exits0; raw flags are not relaxed.",
+  "holdouts": {
+    "menu_dialog": [
+      3124,
+      0,
+      0
+    ],
+    "menu_dialog_update": [
+      4340,
+      0,
+      2035
+    ],
+    "menu_dialog_draw": [
+      3090,
+      0,
+      2932
+    ],
+    "menu_dialog_confirmation": [
+      3192,
+      0,
+      770
+    ],
+    "menu_caption": [
+      1604,
+      0,
+      0
+    ],
+    "cooperative_thread": [
+      3008,
+      0,
+      0
+    ],
+    "caption_frame_reference": [
+      4312,
+      0,
+      0
+    ],
+    "file_select_controls": [
+      3538,
+      0,
+      1370
+    ]
+  },
+  "holdout_fields": [
+    "cases",
+    "value_mismatches",
+    "fp_status_partials"
+  ],
+  "mutants": {
+    "core": 22,
+    "caption_thread_migration": 18,
+    "single_dispatch_confirmation": 6,
+    "dispatch_report": "build/native-dialog-dispatch-mutants/result.json",
+    "all_reported_detected_by_values": true
+  },
+  "canonical_bindings": [
+    "SaveName3b290dc distinct from bootstrap fallback3b290d0",
+    "Caption buffer/timer migrated whole from legacy frame owners",
+    "FileSelect single control dispatcher/named source-valued stages",
+    "Caption real buffer allocation/TH_Wait/free, and Display canonical registered-texture release count"
+  ],
+  "resource_qualification": {
+    "menu_voice_rows": 9,
+    "entries": 81,
+    "real_jp_us_clips": 162,
+    "restored_sonic_cursor": 1,
+    "restored_menu_request1_voice": 37,
+    "native_catalog_all_bindings_test": true,
+    "device_clip_delivery_events": 5,
+    "actual_dialog_cancel_reentry_music_voice_sfx": [
+      4,
+      2,
+      9
+    ],
+    "caption_resource_calls": [
+      118,
+      118,
+      118
+    ],
+    "resident_texture_slots": 477
+  },
+  "audio_mix": {
+    "optional_post_source_gain": true,
+    "defaults_unity": true,
+    "original_mix_bypasses_preferences": true,
+    "live_update_ms": 500,
+    "current_local_preferences": {
+      "music": 0.05,
+      "effects": 0.22,
+      "voice": 2
+    },
+    "previous_live_test": "build/native-live-audio-mix/result.json"
+  },
+  "fresh_independent_reviews": [
+    "review_caption_delivery, dialog source/oracles/mutants/ownership",
+    "review_audio_cleanup, voice/source ownership and actual clip qualification",
+    "review_save_frame, SaveName live owner/source oracle transport"
+  ],
+  "images": [
+    "build/native-dialog-first-composed/captures/1000.png inspected",
+    "protected1850journey retains unchanged original saved-story panel SHA comparison"
+  ],
+  "limits": [
+    "No fresh save creation or restart persistence yet",
+    "No actual native MainMenu/CharacterSelect yet",
+    "No native gameplay, connected story route or measured63FPS",
+    "Full popup reference pixel parity remains unqualified",
+    "Broader source oracle raw failures retained"
+  ]
+}

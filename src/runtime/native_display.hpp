@@ -5,6 +5,7 @@
 #include "engine/ninja_fog.hpp"
 #include "game/game_view_native.hpp"
 #include "runtime/logo_renderer.hpp"
+#include "game/menu_caption.hpp"
 #include <memory>
 
 namespace sadx::native {
@@ -49,6 +50,10 @@ class Display {
     void disable_fog();
     void reset_material();
     void set_alpha_test_enabled(bool enabled);
+    menu_caption::DeferredRelease &message_texture_releases() { return message_texture_releases_; }
+    const menu_caption::DeferredRelease &message_texture_releases() const {
+        return message_texture_releases_;
+    }
 
   private:
     frame::ModeState &frame_mode_;
@@ -70,6 +75,8 @@ class Display {
     const sprite::TextureList *current_texture_list_ = nullptr;
     std::array<std::uint32_t, 8> temporary_texture_info_{};
     std::uint32_t registered_texture_list_count_ = 0;
+    // NOTSA: the message release queue borrows the existing canonical count.
+    menu_caption::DeferredRelease message_texture_releases_{registered_texture_list_count_, {}};
     std::unique_ptr<LogoRenderer> output_;
     texture_lifetime::State texture_state();
     texture_lifetime::Services texture_services();

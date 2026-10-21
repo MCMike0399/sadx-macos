@@ -19,9 +19,12 @@
 #include "game/voice_playback.hpp"
 #include "game/save_file_list.hpp"
 #include "game/menu_voice.hpp"
+#include "game/menu_caption.hpp"
+#include "game/save_file_name.hpp"
 #include "engine/font_native.hpp"
 #include "runtime/font_assets.hpp"
 #include "runtime/file_select_display_assets.hpp"
+#include "runtime/menu_dialog_assets.hpp"
 #include "game/sound_effects.hpp"
 
 namespace sadx::native {
@@ -37,6 +40,7 @@ class Session final : private flow::NativeServices {
             std::int32_t frame_rate_setting,
             std::function<void(std::uint32_t)> stop_vibration);
     void advance();
+    void complete_menu_messages();
     void begin_frame() { loop_.loop_starting = 1; }
     void complete_frame_counters() {
         frame_loop::complete_counter_state(loop_, timing_, renderer_);
@@ -44,6 +48,8 @@ class Session final : private flow::NativeServices {
     const flow::GameFlowState &flow_state() const { return flow_; }
     const bootstrap::State &game_state() const { return bootstrap_; }
     const save::Data &save_data() const { return save_; }
+    const menu_caption::State &menu_caption_state() const { return menu_caption_; }
+    const char *active_save_name() const { return save_name_.value; }
     std::uint32_t logic_loop_count() const { return secondary_loop_count_; }
     std::optional<file_select::FileInfo> selected_save_file() const {
         auto node = list_data_;
@@ -90,6 +96,7 @@ class Session final : private flow::NativeServices {
     }
     void attach_regular_textures(RegularTextureAssets);
     void attach_menu_textures(const MenuTextureAssets &);
+    void attach_menu_dialogs(MenuDialogAssets);
     sound_bank::Channels sound_channels() { return {sound_.records, sound_tasks_, bank_channels_}; }
     void attach_sound_banks(const sound_bank::Catalog &catalog, sound_bank::Services services,
                             std::string cd_prefix) {
@@ -207,6 +214,15 @@ class Session final : private flow::NativeServices {
     font::Info font_info_;
     font::State font_state_;
     std::unique_ptr<FileSelectDisplayAssets> file_select_display_assets_;
+    std::unique_ptr<MenuDialogAssets> menu_dialog_assets_;
+    menu_caption::State menu_caption_;
+    // GLOBAL: SONIC 0x3c5e8c4 FileSelectionBackup size=2
+    std::uint16_t file_selection_backup_ = 0;
+    // GLOBAL: SONIC 0x3b2c5e4 DialogWindowAfterContent size=4
+    std::uint32_t dialog_window_after_content_ = 0;
+    // NOTSA: owns the allocation published by the source SaveName pointer.
+    std::unique_ptr<char[]> selected_save_name_;
+    save::SaveNameState save_name_;
     std::function<file_select_display::Calendar(std::uint64_t)> file_time_calendar_;
     const regular_textures::Binding &menu_texture_binding(std::uint32_t) const;
     void load_menu_texture(std::uint32_t);

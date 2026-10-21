@@ -388,7 +388,8 @@ void TitleScene::load_mode_textures(title_menu::MenuMode mode) {
 }
 void TitleScene::load_japanese_title_textures() { session_.load_japanese_title_textures(); }
 void TitleScene::prepare_menu_voice() {
-    throw flow::UnrecoveredGameFlowCall("native_menu_voice_preparation");
+    menu_dialog::restore_saved_character_cursor(session_.save_.last_character,
+                                                session_.bootstrap_.menu.flags[2]);
 }
 void TitleScene::set_title_menu_previous() {
     if (!state_.factories.main_menu_work)
@@ -523,8 +524,18 @@ void TitleScene::update_controls(title_menu::FileSelectWork &work) {
     const NinjaMath math(ninja_sine_table(), fp);
     file_select::update_controls(work, state, *this, math, fp);
 }
-void TitleScene::request_dialog(std::int32_t) {
-    throw flow::UnrecoveredGameFlowCall("native_file_select_dialog_request");
+void TitleScene::update_confirmation(title_menu::FileSelectWork &work,
+                                      file_select::ControlState &state) {
+    menu_dialog::ConfirmationState confirmation{state, session_.file_selection_backup_,
+        session_.file_select_fade_in_marker_, session_.save_.last_character,
+        session_.bootstrap_.menu.flags[2], session_.list_data_, session_.save_name_.value};
+    menu_dialog::confirm_selection(work, confirmation, *this);
+}
+void TitleScene::request_dialog(std::int32_t index) {
+    if (!session_.menu_dialog_assets_)
+        throw flow::UnrecoveredGameFlowCall("native_menu_dialog_assets");
+    menu_dialog::request(index, session_.menu_dialog_assets_->definitions,
+                          {state_.dialog_task}, *this);
 }
 void TitleScene::prepare_new_save() {
     throw flow::UnrecoveredGameFlowCall("native_file_select_prepare_new_save");

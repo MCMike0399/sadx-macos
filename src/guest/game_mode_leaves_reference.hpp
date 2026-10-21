@@ -1,5 +1,6 @@
 #pragma once
 #include "guest/frame_control_reference.hpp"
+#include "guest/save_name_reference.hpp"
 #include "cpu/crt_rand.hpp"
 #include "engine/game_logic.hpp"
 #include "guest/game_mode_reference.hpp"
@@ -18,7 +19,7 @@ namespace sadx {
 struct GameModeLeafState {
     GameModeLeafState(GameModeState& m,GameLogicTimingState& t,std::optional<std::int32_t>& cutscene,std::optional<TaskHandle>& event,CrtRandState& r,
         std::optional<std::uint16_t>& game_mode,std::optional<std::uint16_t>& stage)
-        :mode(m),timing(t),demo_cutscene_at_3b2a2e8(cutscene),event_task_at_3b2c578(event),rng(r),game_mode_at_3b22de4(game_mode),stage_at_3b22dcc(stage){}
+        :mode(m),timing(t),demo_cutscene_at_3b2a2e8(cutscene),event_task_at_3b2c578(event),rng(r),game_mode_at_3b22de4(game_mode),stage_at_3b22dcc(stage){save_name_reference.import_value(save_name,std::nullopt);}
     GameModeState& mode;                                   // 3b290e4, 3b2a2fa, level pointer 3b0ef4c
     GameLogicTimingState& timing;                          // 3b11178 frame delta, 3b2a2e4 demo
     std::optional<std::int32_t>& demo_cutscene_at_3b2a2e8; // InputModFrameState
@@ -31,7 +32,8 @@ struct GameModeLeafState {
     std::optional<std::uint32_t> word_at_3b0f13c,word_at_3b0f108,word_at_3b0ef44;
     std::optional<std::uint16_t> half_at_3b0f0e4;
     // 421f90
-    std::optional<std::uint8_t> byte_at_3b290d8,byte_at_3b290e0,byte_at_3b290e8;std::optional<std::uint32_t> word_at_3b290dc;
+    std::optional<std::uint8_t> byte_at_3b290d8,byte_at_3b290e0,byte_at_3b290e8;save::SaveNameState save_name;
+    SaveNameReference save_name_reference;
     // 42cea0: the dword at 3b2a2f8 spans these bytes and the borrowed 3b2a2fa
     std::optional<std::uint32_t> word_at_3b2a2f0,word_at_3b2a2f4,word_at_3b2a2fc,word_at_3b2b358;
     std::optional<std::uint8_t> byte_at_3b2a2f8,byte_at_3b2a2f9,byte_at_3b2a2fb;std::optional<std::uint16_t> half_at_3b2a300;

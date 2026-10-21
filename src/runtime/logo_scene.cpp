@@ -23,7 +23,7 @@ void LogoScene::initialize_heap() {
 void LogoScene::initialize_tasks() {
     task_auxiliary_.fill(0);
     tasks_ = std::make_unique<TaskScheduler>();
-    const auto result = tasks_->initialize_source_pool(arena_, default_task_resources_);
+    const auto result = tasks_->initialize_source_pool(arena_, current_cooperative_thread_);
     if (!result)
         throw std::runtime_error("native logo task-pool initialization failed");
 }

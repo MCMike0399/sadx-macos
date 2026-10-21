@@ -5,6 +5,9 @@
 #include "game/file_select.hpp"
 #include "game/file_select_display.hpp"
 #include "game/menu_voice.hpp"
+#include "game/menu_dialog.hpp"
+#include "game/menu_dialog_file_select.hpp"
+#include "game/menu_caption.hpp"
 #include "engine/font_native.hpp"
 #include "runtime/title_assets.hpp"
 #include <functional>
@@ -33,7 +36,10 @@ class TitleScene final : private title_menu::Calls,
                          private title_menu::ModeTransitionCalls,
                          private file_select::InitCalls,
                          private file_select::UpdateCalls,
-                         private file_select::ControlCalls,
+                         private menu_dialog::ConfirmationCalls,
+                         private menu_dialog::UpdateCalls,
+                         private menu_dialog::DrawCalls,
+                         private menu_caption::Calls,
                          private file_select_display::Calls,
                          private font::Calls {
   public:
@@ -50,7 +56,13 @@ class TitleScene final : private title_menu::Calls,
     void initialize();
     std::int32_t run();
     std::int32_t close();
+    void complete_caption_frame();
     const title_menu::State &state() const { return state_; }
+    // NOTSA: runtime resource evidence for the otherwise invisible empty-English caption path.
+    struct CaptionResources {
+        std::uint64_t allocated = 0, freed = 0, waits = 0;
+    };
+    const CaptionResources &caption_resources() const { return caption_resources_; }
 
   private:
     InputServices input_;
@@ -60,6 +72,7 @@ class TitleScene final : private title_menu::Calls,
     title_menu::State state_;
     title_menu::MenuSoundState sound_;
     title_menu::MenuTextureState textures_;
+    CaptionResources caption_resources_;
     struct CallbackContext;
     std::shared_ptr<CallbackContext> callback_context_;
     static TitleScene &callback_scene(TaskScheduler &, TaskCallback);
@@ -159,7 +172,30 @@ class TitleScene final : private title_menu::Calls,
     void apply_save() override;
     void load_texture(texture_lifetime::List &) override;
     void update_controls(title_menu::FileSelectWork &) override;
+    void update_confirmation(title_menu::FileSelectWork &, file_select::ControlState &) override;
     void request_dialog(std::int32_t) override;
+    std::int32_t dialog_result() override;
+    void request_delete_confirmation() override;
+    void free_save_name(const char *) override;
+    char *allocate_save_name(std::size_t) override;
+    void copy_save_name(char *, std::string_view) override;
+    void play_sound(std::int32_t) override;
+    void clear_screen_fade() override;
+    void set_back_colors(std::uint32_t, std::uint32_t, std::uint32_t) override;
+    void select_cursors() override;
+    void select_panels(texture_lifetime::List &) override;
+    void set_vertex_colors(const std::array<std::uint32_t, 4> &) override;
+    void draw_scaled(std::uint32_t, float, float, float, float, float) override;
+    void draw_shadow_window(float, float, float, float, float) override;
+    void draw_content(title_menu::DialogContent, const menu_dialog::ContentArguments &) override;
+    std::shared_ptr<menu_caption::Buffer> allocate_buffer(std::size_t) override;
+    void free_buffer(std::shared_ptr<menu_caption::Buffer>) override;
+    void wait_for_cooperative_thread() override;
+    void append_message(menu_caption::Context &, const std::string &) override;
+    void load_message_texture(menu_caption::Context &) override;
+    void draw_message(menu_caption::Context &) override;
+    void release_texture_list(texture_lifetime::List &) override;
+    void release_queue_overflow() override;
     void prepare_new_save() override;
     void request_save() override;
     std::int32_t close_warning() override;

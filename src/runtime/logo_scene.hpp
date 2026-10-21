@@ -43,6 +43,9 @@ class LogoScene final : private logo::StartupCalls,
     std::uint32_t fade_color() const { return fade_color_; }
     const TaskScheduler *tasks() const { return tasks_.get(); }
     TaskScheduler &task_scheduler();
+    const std::shared_ptr<void> &current_cooperative_thread() const {
+        return current_cooperative_thread_;
+    }
     std::int32_t demo_mode() const { return demo_mode_; }
     std::int32_t demo_event() const { return demo_event_; }
     logo::StartupState startup_state() {
@@ -74,8 +77,9 @@ class LogoScene final : private logo::StartupCalls,
     // The task-pool initializer clears four auxiliary words; their wider role is unrecovered.
     std::array<std::uint32_t, 4> task_auxiliary_{};
     std::shared_ptr<TaskWorkArena> arena_;
-    // Source default task resource context starts null; callback context is a separate owner.
-    std::shared_ptr<void> default_task_resources_;
+    // BSS starts null. TH_Init first sets a sentinel during LoadLevel, after the startup menus.
+    // GLOBAL: SONIC 0x38f6e08 CurrentCooperativeThread size=4
+    std::shared_ptr<void> current_cooperative_thread_;
     std::unique_ptr<TaskScheduler> tasks_;
 
     void set_character_selection(std::int32_t) override;

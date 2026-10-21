@@ -38,6 +38,9 @@ public:
     void stop(std::uint64_t token);
     // Update a live voice without restarting its sample cursor.
     bool set_gain(std::uint64_t token, float left_gain, float right_gain);
+    // NOTSA: optional native listening preference, applied after the source voice gains.
+    // Unity preserves the faithful mix; changing this does not restart voice cursors.
+    bool set_output_gain(float gain);
     void stop_all();
     AudioStats stats() const;
     // Actual queue-start success and current device status; never an HLE flag.

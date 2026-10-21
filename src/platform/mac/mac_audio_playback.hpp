@@ -29,6 +29,8 @@ class StreamPlayer final : public audio::StreamPlayer {
     bool prepare_clip(const std::string &imported_path, std::string &error);
     bool play(std::int32_t attenuation, bool loop, std::string &error);
     bool set_attenuation(std::int32_t attenuation, std::string &error);
+    // NOTSA: native mixer preference stays independent of source attenuation and reader state.
+    bool set_output_gain(float gain) { return output_.set_output_gain(gain); }
     void stop() override;
     void reset() override;
     bool ready() const;

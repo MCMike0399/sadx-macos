@@ -45,7 +45,7 @@ struct Operation {
         const auto& sw=s.screen_width_at_8928c0?*s.screen_width_at_8928c0:std::optional<float>{};
         const auto w=fp.to_float(fp.multiply_float_memory(fp.from_float(need(sw,0x42c54f,0x8928c0)),640.0F));
         call(0x42c562,0x4073b0,{0u,0u,f32(w),f32(h),0x46ac3dfbu,color,1u});}
-    void leaf_421f90(){s.byte_at_3b290d8=1;s.byte_at_3b290e0=0;s.mode.word_at_3b290e4=0;s.byte_at_3b290e8=0;s.word_at_3b290dc=0;}
+    void leaf_421f90(){s.byte_at_3b290d8=1;s.byte_at_3b290e0=0;s.mode.word_at_3b290e4=0;s.byte_at_3b290e8=0;s.save_name.value=nullptr;}
     void leaf_427ee0(){s.half_at_3b0f0e4=0;s.word_at_3b0ef44=0;}
     void leaf_43b490(){s.word_at_3b0f0f8=0;s.word_at_3b0f0fc=0xbf800000U;s.word_at_3b0f100=0;s.word_at_3b0f10c=0;s.word_at_3b0f0f4=0;}
     void leaf_42f5d0(){zero(s.block_at_3b18250,0x3b18608,0x200,0x42f5dd);s.word_at_3b2c560=0;s.event_task_at_3b2c578=TaskHandle{};

@@ -20,6 +20,8 @@
 #include "apps/native_sound_effects_assets.hpp"
 #include "apps/native_save_directory.hpp"
 #include "apps/native_file_select_assets.hpp"
+#include "apps/native_menu_dialog_assets.hpp"
+#include "apps/native_audio_mix.hpp"
 #import <AppKit/AppKit.h>
 #import <MetalKit/MetalKit.h>
 #import <QuartzCore/CAMetalLayer.h>
@@ -32,6 +34,7 @@
 #include <cstring>
 #include <thread>
 #include <iomanip>
+#include <chrono>
 
 namespace {
 void save_image(id<MTLTexture>, const std::filesystem::path &);
@@ -40,9 +43,11 @@ struct Options {
     std::filesystem::path assets, controller_library, screenshot, capture_directory;
     std::filesystem::path save_directory;
     std::set<std::uint32_t> capture_frames;
+    sadx::native::app::AudioMix audio_mix;
     std::uint32_t frames = 0;
     bool offscreen = false;
     bool paced = false;
+    bool original_mix = false;
     std::multimap<std::uint32_t, KeyEvent> keys;
 };
 Options options(int argc, char **argv) {
@@ -55,6 +60,8 @@ Options options(int argc, char **argv) {
             result.offscreen = true;
         else if (argument == "--paced")
             result.paced = true;
+        else if (argument == "--original-mix")
+            result.original_mix = true;
         else if (index + 1 < argc && argument == "--assets")
             result.assets = argv[++index];
         else if (index + 1 < argc && argument == "--save-directory")
@@ -90,6 +97,7 @@ Options options(int argc, char **argv) {
         else
             throw std::runtime_error("unknown or incomplete native option: " + argument);
     }
+    if (!result.original_mix) result.audio_mix = sadx::native::app::load_audio_mix();
     if (result.assets.empty() || (result.offscreen && result.frames == 0))
         throw std::runtime_error(
             "usage: sadx-native --assets IMPORTED_ROOT [--offscreen --exit-after N] "
@@ -138,6 +146,7 @@ class Application {
     bool focused = true;
     NSWindow *window = nil;
     std::int32_t pending_movie_volume = 0;
+    std::chrono::steady_clock::time_point next_audio_mix_check{};
 
     explicit Application(Options configuration, id<MTLDevice> device)
         : configuration(std::move(configuration)),
@@ -183,6 +192,8 @@ class Application {
             sadx::native::app::load_regular_texture_assets(this->configuration.assets));
         session.attach_menu_textures(
             sadx::native::app::load_menu_texture_assets(this->configuration.assets));
+        session.attach_menu_dialogs(
+            sadx::native::app::load_menu_dialog_assets(this->configuration.assets));
         session.attach_font(sadx::native::app::load_font_assets(this->configuration.assets));
         session.attach_menu_voices(sadx::native::app::load_menu_voice_assets(this->configuration.assets));
         session.attach_file_select_display(
@@ -200,6 +211,7 @@ class Application {
             throw std::runtime_error(media_initialization.music_error);
         if (!media_initialization.voice_error.empty())
             throw std::runtime_error(media_initialization.voice_error);
+        apply_audio_mix(this->configuration.audio_mix);
         configure_music();
         configure_voice();
         configure_saves();
@@ -229,6 +241,24 @@ class Application {
             [this] { return input->pressed(0); }
         });
         configure_movie();
+    }
+    void apply_audio_mix(sadx::native::app::AudioMix mix) {
+        if (!audio.set_output_gain(mix.effects) ||
+            (session.media_state().music_player &&
+             !music_player().set_output_gain(mix.music)) ||
+            (session.media_state().voice_player &&
+             !voice_player().set_output_gain(mix.voice)))
+            throw std::runtime_error("native mixer preference is outside the supported range");
+        configuration.audio_mix = mix;
+    }
+    void refresh_audio_mix() {
+        const auto now = std::chrono::steady_clock::now();
+        if (configuration.original_mix || now < next_audio_mix_check) return;
+        next_audio_mix_check = now + std::chrono::milliseconds(500);
+        const auto mix = sadx::native::app::load_audio_mix();
+        if (mix.music != configuration.audio_mix.music || mix.effects != configuration.audio_mix.effects ||
+            mix.voice != configuration.audio_mix.voice)
+            apply_audio_mix(mix);
     }
     sadx::audio::mac::StreamPlayer &music_player() {
         auto *player = dynamic_cast<sadx::audio::mac::StreamPlayer *>(
@@ -373,6 +403,7 @@ class Application {
         display.begin_game_frame();
         session.advance();
         session.update_sounds();
+        session.complete_menu_messages();
         display.end_game_frame();
         session.complete_frame_counters();
         present_target();
@@ -439,6 +470,10 @@ class Application {
         const auto file_work = file_task
             ? std::static_pointer_cast<const sadx::title_menu::FileSelectWork>(file_task->auxiliary_native_work)
             : std::shared_ptr<const sadx::title_menu::FileSelectWork>{};
+        const auto dialog_task = title ? title->state().dialog_task : sadx::TaskHandle{};
+        const auto dialog_work = dialog_task
+            ? std::static_pointer_cast<const sadx::title_menu::DialogWork>(dialog_task->auxiliary_native_work)
+            : std::shared_ptr<const sadx::title_menu::DialogWork>{};
         std::size_t bank_count = 0, bank_sample_count = 0;
         for (const auto &bank : session.sound_banks().slots) {
             if (bank) {
@@ -463,6 +498,30 @@ class Application {
         else
             output << "null";
         output << ",\"logic_loop_count\":" << session.logic_loop_count();
+        output << ",\"native_music_gain\":" << configuration.audio_mix.music
+               << ",\"native_effects_gain\":" << configuration.audio_mix.effects
+               << ",\"native_voice_gain\":" << configuration.audio_mix.voice;
+        output << ",\"active_save_name\":";
+        if (session.active_save_name()) output << std::quoted(session.active_save_name());
+        else output << "null";
+        output << ",\"fallback_save_name\":";
+        if (session.game_state().save_name) output << std::quoted(session.game_state().save_name);
+        else output << "null";
+        output << ",\"menu_voice_cursor\":" << static_cast<unsigned>(session.game_state().menu.flags[2])
+               << ",\"caption_buffer_live\":" << (session.menu_caption_state().buffer ? "true" : "false")
+               << ",\"caption_timer\":" << session.menu_caption_state().timer
+               << ",\"message_texture_release_count\":" << display.message_texture_releases().count;
+        if (title) {
+            const auto &resources = title->caption_resources();
+            output << ",\"caption_buffers_allocated\":" << resources.allocated
+                   << ",\"caption_buffers_freed\":" << resources.freed
+                   << ",\"caption_thread_waits\":" << resources.waits;
+        }
+        if (dialog_work) {
+            output << ",\"dialog_phase\":" << dialog_work->phase
+                   << ",\"dialog_cursor\":" << static_cast<unsigned>(dialog_work->cursor)
+                   << ",\"dialog_opening_frames\":" << dialog_work->opening_frames;
+        }
         if (file_work) {
             output << ",\"file_select_phase\":" << static_cast<unsigned>(file_work->presentation.phase)
                    << ",\"file_select_submode\":" << file_work->submode
@@ -536,6 +595,7 @@ std::uint32_t windows_key(unsigned short code) {
     return found == keys.end() ? 0 : found->second;
 }
 void Application::pump_events() {
+    refresh_audio_mix();
     if (!configuration.offscreen) {
         const bool active = NSApp.active;
         if (focused && !active)

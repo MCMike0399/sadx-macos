@@ -29,6 +29,7 @@ from save_files import import_save_files
 from font_assets import import_font_assets
 from menu_voice import import_menu_voice
 from file_select_display import import_file_select_display
+from menu_dialog import import_menu_dialog
 from sound_effects import import_sound_effects
 
 
@@ -65,6 +66,7 @@ def import_assets(game, output):
     import_font_assets(game, output)
     import_menu_voice(game, output)
     import_file_select_display(game, output)
+    import_menu_dialog(game, output)
     import_music_assets(game, output, selected=(102, 72), menu_request_count=3)
     import_voice_assets(game, output)
     import_save_files(game, output)

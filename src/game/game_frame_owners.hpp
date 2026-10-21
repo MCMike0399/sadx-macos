@@ -1,6 +1,7 @@
 #pragma once
 #include "engine/game_logic_support.hpp"
 #include "game/game_view.hpp"
+#include "game/menu_caption.hpp"
 #include "engine/ninja_queue_consumer.hpp"
 #include <array>
 #include <cstdint>
@@ -11,9 +12,17 @@ namespace sadx {
 // 420840) and the key queries 40ef30/40ef20, each from exact instructions.
 // Draw lists, the 40eab0 effect and texture-release walks are nested owners.
 struct GameFrameOwnersState {
-    std::optional<std::uint32_t> list_at_3b2c584,count_at_3b0e334,timer_at_3abdf88,buffer_at_3abdf84;
+    std::optional<std::uint32_t> list_at_3b2c584,count_at_3b0e334;
+    menu_caption::State caption;
 };
 struct GameFrameOwnerCall {std::uint32_t source_call,callee;std::array<std::optional<std::uint32_t>,2> arguments={};};
+enum class GameFrameOwnerFailure {none,not_ported,unknown_state,owner_failed,missing_owner,render_failed,fp_failed};
+struct GameFrameOwnerResult {
+    GameFrameOwnerFailure failure=GameFrameOwnerFailure::none;std::uint32_t source_boundary=0;std::optional<std::uint32_t> required_fact,eax;
+    std::optional<GameFrameOwnerCall> pending_call;
+    explicit operator bool()const noexcept{return failure==GameFrameOwnerFailure::none;}
+};
+using GameFrameOwnerInvoke=std::function<GameLogicOwnerResult(const GameFrameOwnerCall&)>;
 struct GameFrameOwnersRuntime {
     GameFrameOwnersState& state;
     GameViewState& view;                                      // 3b2cbb4, 3ab98ec, 3aad0bc
@@ -26,13 +35,9 @@ struct GameFrameOwnersRuntime {
     const std::optional<NinjaMath::SineTable>& sine_table;NinjaSpriteProjection& projection;const std::optional<float>& width_at_3d0f9e4;
     const std::optional<std::array<float,4>>& color_at_3b18230;NinjaQueueColorOwners colors;
     X87Context& fp;
-    std::function<GameLogicOwnerResult(const GameFrameOwnerCall&)> invoke;
-};
-enum class GameFrameOwnerFailure {none,not_ported,unknown_state,owner_failed,missing_owner,render_failed,fp_failed};
-struct GameFrameOwnerResult {
-    GameFrameOwnerFailure failure=GameFrameOwnerFailure::none;std::uint32_t source_boundary=0;std::optional<std::uint32_t> required_fact,eax;
-    std::optional<GameFrameOwnerCall> pending_call;
-    explicit operator bool()const noexcept{return failure==GameFrameOwnerFailure::none;}
+    GameFrameOwnerInvoke invoke;
+    // NOTSA: reference validation and source-callee transport around shared caption game steps.
+    std::function<GameFrameOwnerResult(const GameFrameOwnerInvoke&)> complete_caption_frame;
 };
 GameFrameOwnerResult run_game_frame_owner(std::uint32_t callee,std::optional<std::uint32_t> argument,GameFrameOwnersRuntime&);
 } // namespace sadx

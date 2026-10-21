@@ -112,10 +112,11 @@ void NativeGame::initialize_source_facts(){
         mode_leaves_.emplace(mode_state_,timing_,input_frame_.demo_cutscene_at_3b2a2e8,scene_globals_.event_task_at_3b2c578,rng_,loop_.game_mode_at_3b22de4,sonic_globals_.stage_at_3b22dcc);
         auto& m=*mode_leaves_;
         m.character_at_3b22dc0=u16(0x3b22dc0);
+        m.save_name_reference.import_value(m.save_name,u32(0x3b290dc));
         for(auto [o,a]:{std::pair{&m.byte_at_3b0ef34,0x3b0ef34u},{&m.byte_at_3b0ef35,0x3b0ef35u},{&m.byte_at_3b0f128,0x3b0f128u},{&m.byte_at_3b0ef48,0x3b0ef48u},{&m.byte_at_3abe134,0x3abe134u},{&m.byte_at_3b0f0e0,0x3b0f0e0u},
             {&m.byte_at_3b290d8,0x3b290d8u},{&m.byte_at_3b290e0,0x3b290e0u},{&m.byte_at_3b290e8,0x3b290e8u},{&m.byte_at_3b2a2f8,0x3b2a2f8u},{&m.byte_at_3b2a2f9,0x3b2a2f9u},{&m.byte_at_3b2a2fb,0x3b2a2fbu},
             {&m.byte_at_3b2c565,0x3b2c565u},{&m.byte_at_3b2c574,0x3b2c574u}})*o=u8(a);
-        for(auto [o,a]:{std::pair{&m.word_at_3b0f13c,0x3b0f13cu},{&m.word_at_3b0f108,0x3b0f108u},{&m.word_at_3b0ef44,0x3b0ef44u},{&m.word_at_3b290dc,0x3b290dcu},{&m.word_at_3b2a2f0,0x3b2a2f0u},{&m.word_at_3b2a2f4,0x3b2a2f4u},
+        for(auto [o,a]:{std::pair{&m.word_at_3b0f13c,0x3b0f13cu},{&m.word_at_3b0f108,0x3b0f108u},{&m.word_at_3b0ef44,0x3b0ef44u},{&m.word_at_3b2a2f0,0x3b2a2f0u},{&m.word_at_3b2a2f4,0x3b2a2f4u},
             {&m.word_at_3b2a2fc,0x3b2a2fcu},{&m.word_at_3b2b358,0x3b2b358u},{&m.word_at_3b2c47c,0x3b2c47cu},{&m.word_at_3b2919c,0x3b2919cu},{&m.word_at_3b0f0f8,0x3b0f0f8u},{&m.word_at_3b0f0fc,0x3b0f0fcu},
             {&m.word_at_3b0f100,0x3b0f100u},{&m.word_at_3b0f10c,0x3b0f10cu},{&m.word_at_3b0f0f4,0x3b0f0f4u},{&m.word_at_3b2c560,0x3b2c560u},{&m.word_at_914788,0x914788u},{&m.word_at_3b18244,0x3b18244u}})*o=u32(a);
         m.half_at_3b0f0e4=u16(0x3b0f0e4);m.half_at_3b2a300=u16(0x3b2a300);
@@ -126,7 +127,7 @@ void NativeGame::initialize_source_facts(){
     initialize_sound_defaults();
     for(unsigned i=0;i<36;++i)sound_fields_.words_at_3b29300[i]=u32(0x3b29300+0x38*i);
     sound_fields_.listener_at_3b2cbb0=u32(0x3b2cbb0);
-    frame_owners_.list_at_3b2c584=u32(0x3b2c584);frame_owners_.count_at_3b0e334=u32(0x3b0e334);frame_owners_.timer_at_3abdf88=u32(0x3abdf88);frame_owners_.buffer_at_3abdf84=u32(0x3abdf84);
+    frame_owners_.list_at_3b2c584=u32(0x3b2c584);frame_owners_.count_at_3b0e334=u32(0x3b0e334);caption_reference_.observe_timer(u32(0x3abdf88));caption_reference_.observe_buffer(u32(0x3abdf84));
     if (config_.sine_table) {
         sine_table_at_88af78_ = *config_.sine_table;
     } else {
@@ -1365,7 +1366,8 @@ NativeGameReport NativeGame::run(){
             GameFrameOwnersRuntime owners{frame_owners_,*view_,byte_at_3b280a8_,leaves_->word_at_3b0e338,controller_globals_.words_at_3b0e990[2],input_.reset_input_mask,edges_,render_,&depth_table_,
                 sine_table_at_88af78_,projection_,consumer_.projection_width_at_3d0f9e4,color_at_3b18230_,
                 NinjaQueueColorOwners{queue_runtime_.color_at_3ab9864,projection_.color_argb_at_3d0f7f0,one_at_7dcb10_,negative_one_at_7dcb0c_},fp_,
-                [&](const GameFrameOwnerCall& n){return unported(n.callee,n.source_call,"40cad0>"+hex(c.callee));}};
+                [&](const GameFrameOwnerCall& n){return unported(n.callee,n.source_call,"40cad0>"+hex(c.callee));},
+                [&](const GameFrameOwnerInvoke& invoke){return caption_reference_.complete_frame(invoke);}};
             const auto r=run_game_frame_owner(c.callee,c.arguments[0],owners);
             if(r.failure==GameFrameOwnerFailure::not_ported){auto owner=unported(c.callee,c.source_call,"40cad0");return {owner,owner.state==GameLogicOwnerState::completed?std::optional<std::uint32_t>{0}:std::nullopt};}
             if(r.required_fact)failure_detail_=" ("+hex(c.callee)+" requires "+hex(*r.required_fact)+")";

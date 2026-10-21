@@ -1,6 +1,7 @@
 #include "runtime/native_title_scene.hpp"
 #include "runtime/native_display.hpp"
 #include "runtime/native_session.hpp"
+#include "math/ninja_sine_table.hpp"
 
 namespace sadx::native {
 struct TitleScene::CallbackContext final : TaskCallbackContext {
@@ -70,19 +71,24 @@ void TitleScene::delete_sequence(TaskScheduler &scheduler, const TaskHandle &tas
 void TitleScene::update_dialog(TaskScheduler &scheduler, const TaskHandle &task) {
     auto &scene = callback_scene(scheduler, update_dialog);
     auto work = std::static_pointer_cast<title_menu::DialogWork>(task->auxiliary_native_work);
-    if (!work || !scene.state_.dialog_work)
+    if (!work)
         throw std::runtime_error("native title dialog has no work");
-    const auto result = title_menu::update_dialog(*work, *scene.state_.dialog_work,
-        scene.session_.secondary_loop_count_, scene.display_.arithmetic());
-    if (result != title_menu::DialogUpdateResult::Complete)
-        throw flow::UnrecoveredGameFlowCall("native_title_dialog_active_phase");
+    if (!scene.session_.menu_dialog_assets_)
+        throw flow::UnrecoveredGameFlowCall("native_menu_dialog_assets");
+    auto &fp = scene.display_.arithmetic();
+    const NinjaMath math(ninja_sine_table(), fp);
+    menu_dialog::update(*work, {scene.state_.dialog_task},
+        scene.session_.menu_dialog_assets_->tables, scene.session_.secondary_loop_count_,
+        scene, math, fp);
 }
 void TitleScene::display_dialog(TaskScheduler &scheduler, const TaskHandle &task) {
     auto &scene = callback_scene(scheduler, display_dialog);
     auto work = std::static_pointer_cast<title_menu::DialogWork>(task->auxiliary_native_work);
     if (!work) throw std::runtime_error("native title dialog has no work");
-    scene.require_drawn(title_menu::draw_dialog(*work, scene.display_.arithmetic()),
-                         "native_title_dialog_drawing");
+    const auto frame = scene.display_.frame_state();
+    menu_dialog::draw(*work, {scene.state_.dialog_task},
+        {frame.horizontal_scale, frame.vertical_scale, scene.session_.dialog_window_after_content_},
+        scene, scene.display_.arithmetic());
 }
 
 title_menu::SharedState TitleScene::shared() {

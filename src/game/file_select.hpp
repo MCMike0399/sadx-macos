@@ -1,9 +1,9 @@
 #pragma once
-#include "game/title_menu.hpp"
 #include "game/save_data.hpp"
+#include "game/title_menu.hpp"
 #include "math/ninja_math.hpp"
-#include <stdexcept>
 #include <cstdint>
+#include <stdexcept>
 
 namespace sadx::file_select {
 // NOTSA: borrows the canonical card, bootstrap and save-menu owners.
@@ -64,10 +64,27 @@ struct ControlState {
     std::uint16_t &character;
     std::uint8_t &new_file_requested;
 };
+// FileSelect_Controls source submode values. Other raw values retain their source default path.
+enum class ControlStage : std::int32_t {
+    Initialize = 0,
+    ChooseFile = 1,
+    ConfirmExisting = 2,
+    ConfirmDelete = 3,
+    Cancel = 9,
+    Leaving = 10,
+    WaitForNewSave = 12,
+    CompleteNewSave = 13
+};
+inline ControlStage control_stage(const title_menu::FileSelectWork &work) {
+    return static_cast<ControlStage>(work.submode);
+}
+inline void set_control_stage(title_menu::FileSelectWork &work, ControlStage stage) {
+    work.submode = static_cast<std::int32_t>(stage);
+}
 struct ControlCalls {
     virtual ~ControlCalls() = default;
     virtual std::uint32_t pressed_buttons() = 0;
-    // STUB: SONIC 0x5057b0 MenuDialog_Req
+    // NOTSA: delegates the recovered menu_dialog request entry.
     virtual void request_dialog(std::int32_t) = 0;
     // STUB: SONIC 0x5065d0 FUN_005065d0
     virtual void prepare_new_save() = 0;
@@ -80,12 +97,16 @@ struct ControlCalls {
     virtual void transition_menu(title_menu::MenuMode) = 0;
     virtual void play_navigation_sound() = 0;
     virtual void play_cancel_sound() = 0;
+    // NOTSA: named source stages share this dispatcher's single animation prefix.
+    virtual void update_confirmation(title_menu::FileSelectWork &, ControlState &);
+    virtual void update_save_completion(title_menu::FileSelectWork &, ControlState &);
 };
 class ControlStageError : public std::runtime_error {
   public:
     explicit ControlStageError(std::int32_t stage)
         : std::runtime_error("FileSelect control stage is not recovered"), stage_(stage) {}
     std::int32_t stage() const { return stage_; }
+
   private:
     std::int32_t stage_;
 };

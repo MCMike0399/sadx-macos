@@ -21,12 +21,12 @@ struct Operation {
             const auto f=ninja_set_fov_7815c0(static_cast<std::int32_t>(angle),*rt.sine_table,rt.projection,rt.width_at_3d0f9e4,rt.fp);
             if(!f)fail(f.fp_failure?GameFrameOwnerFailure::fp_failed:GameFrameOwnerFailure::owner_failed,f.source_boundary);}
         rt.view.fov_copy_at_3ab98ec=angle;rt.view.fov_at_3aad0bc=angle;}
-    // Actual 40bcf0 (40d4d0's tail).
-    void tail_40bcf0(){
-        auto t=static_cast<std::int32_t>(need(rt.state.timer_at_3abdf88,0x40bcf0,0x3abdf88));
-        if(t>0){--t;rt.state.timer_at_3abdf88=static_cast<std::uint32_t>(t);}
-        const auto buffer=need(rt.state.buffer_at_3abdf84,0x40bcff,0x3abdf84);
-        if(buffer!=0&&t==0){call(0x40bd12,0x40e2c0,{0x3abdc18u});call(0x40bd1d,0x780fb0,{buffer});rt.state.buffer_at_3abdf84=0;}}
+    // NOTSA: caption owns the timer/release algorithm; its adapter validates source facts in order.
+    void complete_caption(){
+        if(!rt.complete_caption_frame)fail(GameFrameOwnerFailure::missing_owner,0x40bcf0);
+        const auto result=rt.complete_caption_frame(rt.invoke);
+        if(!result){r=result;throw Stop{};}}
+
 };
 }
 GameFrameOwnerResult run_game_frame_owner(std::uint32_t callee,std::optional<std::uint32_t> argument,GameFrameOwnersRuntime& rt){
@@ -39,7 +39,7 @@ GameFrameOwnerResult run_game_frame_owner(std::uint32_t callee,std::optional<std
             const auto entries=static_cast<std::int32_t>(op.need(rt.draw_count_at_3b0e338,0x40d4f7,0x3b0e338));
             if(entries-1>=0)op.call(0x40d520,0x40d520,{static_cast<std::uint32_t>(entries-1)}); // the 3abe13c draw-list body
             if(const auto saved=op.need(rt.view.word_at_3b2cbb4,0x40d819,0x3b2cbb4);saved!=0)op.fov(saved,0x40d823);
-            op.depth(1,1);rt.draw_count_at_3b0e338=0;op.tail_40bcf0();break;}
+            op.depth(1,1);rt.draw_count_at_3b0e338=0;op.complete_caption();break;}
         case 0x40eab0:
             if(static_cast<std::int32_t>(op.need(rt.effect_at_3b0e998,0x40eab0,0x3b0e998))>0)op.call(0x40eac0,0x40eac0); // the effect body
             break;
