@@ -1,0 +1,57 @@
+{
+  "purpose": "Register the reached native CharacterSelect system and preserve existing music fixture coverage as the source-backed request prefix grows from3 to5.",
+  "base_commit": "627006d5c0b9cc437dd4abae3ee5a3ad4ac5cc49",
+  "judge_changes": [
+    "Native source whitelist adds maintained preview/camera/lighting/UI/primary-motion owners; old startup reference facade stays outside production archive.",
+    "Existing legacy music tests project their original three-request inputs explicitly; all old malformed assertions remain. New CharacterSelect test checks allfive source mappings and real24/103 PCMdelivery.",
+    "New original-source judges/probes, imported-asset tests, canonical player-motion graph tests and registrations add coverage. No existing original verifier, oracle expected value, tolerance or mutation is changed.",
+    "New UI probe records the source single-argument completion call and the separately prepared full Number arguments; independent x492\u2192493 mutant produced eight mismatches."
+  ],
+  "evidence_files": [
+    {
+      "path": "/private/tmp/sadx-character-menu-music-stage/packet.json",
+      "sha256": "6b07418628231b24152e598e2cc47211da7b2842232849fec647db76007cb6e3"
+    },
+    {
+      "path": "/private/tmp/character-completion-and-number-abi-independent-review.json",
+      "sha256": "0dbefb6f59c7d7f978a659a88f1c489078f2fc9cfbb41ebe53ce809b8f3d4d05"
+    },
+    {
+      "path": "/private/tmp/sadx-question-independent-review/review.json",
+      "sha256": "d50ec8c5aaa292be92adf7d93cab2d2716d64bf80224f3c22ef4c8ff0acc3701"
+    },
+    {
+      "path": "/private/tmp/sadx-character-composition-independent-review/review.json",
+      "sha256": "41432480c1255a186233849cfe995141016f4f3aff91bbbb68c997e4b7af11bd"
+    },
+    {
+      "path": "/private/tmp/player-initialization-independent-review.json",
+      "sha256": "a37b03a58c8bedd1c800386b3d5d3b2fc26eb5c30dbae00ddfda1feb604f7a9e"
+    },
+    {
+      "path": "/private/tmp/sadx-native-character-runtime-stage/character-menu-clean-calls.json",
+      "sha256": "2e00384234e2775eb9aa81e3a7544080d48ed9da969e51c8e8223f52cc51048f"
+    },
+    {
+      "path": "/private/tmp/sadx-native-character-runtime-stage/file-select-shared-owners.json",
+      "sha256": "49b398a208fb15b784a85a02cbfbf85dd15881827a5d6d7d71a90ae68cd3045f"
+    },
+    {
+      "path": "/private/tmp/sadx-native-character-runtime-stage/normal-fresh-entry-question/exit.json",
+      "sha256": "7caa7d0067e6d527345a5060fe37f1f3d304b53b18f0256577e24d9c619fe1ea"
+    }
+  ],
+  "verified_private": {
+    "native_build_exit_status": 0,
+    "whole_import_exit_status": 0,
+    "normal_input_exit_status": 1,
+    "normal_input_boundary": "native_basic_object_renderer after actual Question yaw16384\u219217112; first CharacterSelect UI frame remains transparent; not full CharacterSelect.",
+    "ui_original_cases": 3326,
+    "ui_value_mismatches": 0,
+    "ui_fp_partials": 733,
+    "shared_file_select_cases": 600,
+    "shared_value_mismatches": 0,
+    "shared_fp_partials": 340
+  },
+  "integration_requirement": "The same coherent integration boundary must run the required full gate after the following source commit is present. This preparatory judge commit does not claim a Main gate or completed CharacterSelect."
+}

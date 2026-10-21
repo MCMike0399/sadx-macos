@@ -72,6 +72,10 @@ NATIVE_SOURCES += src/game/save_creation.cpp src/game/save_completion.cpp src/ga
  src/engine/native_message_texture.cpp src/engine/native_texture_palette.cpp \
  src/engine/message_sprite_queue.cpp src/engine/message_sprite_profile.cpp \
  src/engine/queue_blank_frame.cpp src/engine/screen_sprite.cpp
+# Connected CharacterSelect system dependencies.
+NATIVE_SOURCES += src/engine/device_lights.cpp src/game/lighting_palette.cpp \
+ src/game/selection_camera.cpp src/game/selection_question.cpp src/game/selection_preview.cpp src/game/selection_preview_textures.cpp \
+ src/game/character_select_menu.cpp src/game/character_select_labels.cpp src/game/character_completion.cpp src/player/player_startup.cpp src/player/player_state.cpp
 # Native engine adapters and runtime compositions use these explicit naming scopes.
 NATIVE_SOURCES := $(sort $(NATIVE_SOURCES) $(wildcard src/engine/*_native.cpp src/runtime/native_*.cpp))
 NATIVE_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(NATIVE_SOURCES))
@@ -222,6 +226,9 @@ build/mac-%-test: tests/unit/mac_$$(subst -,_,$$*).cpp build/libsadx-macos.a bui
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/libsadx-macos.a build/libsadx-core.a $(MAC_FRAMEWORKS) -o $@
 build/metal-%-test: tests/unit/metal_$$(subst -,_,$$*).cpp build/libsadx-macos.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/libsadx-macos.a build/libsadx-core.a $(MAC_FRAMEWORKS) -o $@
+# Legacy startup fixtures use their reference adapter; the product uses the new native interface.
+build/player-startup-test: tests/unit/player_startup.cpp build/libsadx-guest.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/libsadx-guest.a build/libsadx-core.a -o $@
 build/%-test: tests/unit/$$(subst -,_,$$*).cpp build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/libsadx-core.a -o $@
 build/%-test: tests/unit/$$(subst -,_,$$*).mm build/libsadx-macos.a build/libsadx-core.a
@@ -236,7 +243,7 @@ build/ninja-queue-consumer-test: tests/fixtures/ninja_sprite_test_fixture.hpp
 build/native-player-path-probe.dylib build/native-player-direction-reset-probe.dylib: tests/fixtures/path_probe_data.hpp
 
 # Native probes: tests/probes/native_<x>_probe.cpp -> build/native-<x>-probe.dylib, called by the Unicorn oracles.
-REFERENCE_PLAYER_PROBES := build/native-library-init-probe.dylib build/native-player-scene-helpers-probe.dylib build/native-player-scene-position-probe.dylib build/native-fov-probe.dylib build/native-ninja-queue-color-probe.dylib build/native-game-frame-owners-probe.dylib build/native-fog-probe.dylib build/native-ninja-queue-consumer-probe.dylib build/native-screen-polygon-probe.dylib build/native-ninja-projected-depth-probe.dylib build/native-game-view-probe.dylib  build/native-game-frame-control-probe.dylib build/native-speedrun-limiter-probe.dylib build/native-device-setup-probe.dylib build/native-screen-init-probe.dylib build/native-game-startup-probe.dylib build/native-game-logic-support-probe.dylib build/native-game-logic-probe.dylib build/native-game-loop-probe.dylib build/native-frame-completion-probe.dylib build/native-ninja-frame-calls-probe.dylib build/native-ninja-queue-lifecycle-probe.dylib build/native-ground-acceleration-probe.dylib build/native-alternate-acceleration-probe.dylib build/native-sonic-player-probe.dylib build/native-sonic-action-probe.dylib
+REFERENCE_PLAYER_PROBES := build/native-library-init-probe.dylib build/native-player-scene-helpers-probe.dylib build/native-player-scene-position-probe.dylib build/native-fov-probe.dylib build/native-ninja-queue-color-probe.dylib build/native-game-frame-owners-probe.dylib build/native-fog-probe.dylib build/native-ninja-queue-consumer-probe.dylib build/native-screen-polygon-probe.dylib build/native-ninja-projected-depth-probe.dylib build/native-game-view-probe.dylib  build/native-game-frame-control-probe.dylib build/native-speedrun-limiter-probe.dylib build/native-device-setup-probe.dylib build/native-screen-init-probe.dylib build/native-game-startup-probe.dylib build/native-game-logic-support-probe.dylib build/native-game-logic-probe.dylib build/native-game-loop-probe.dylib build/native-frame-completion-probe.dylib build/native-ninja-frame-calls-probe.dylib build/native-ninja-queue-lifecycle-probe.dylib build/native-ground-acceleration-probe.dylib build/native-alternate-acceleration-probe.dylib build/native-sonic-player-probe.dylib build/native-sonic-action-probe.dylib build/native-player-startup-probe.dylib
 $(REFERENCE_PLAYER_PROBES): build/native-%-probe.dylib: tests/probes/native_$$(subst -,_,$$*)_probe.cpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) $< build/libsadx-guest.a build/libsadx-core.a -o $@
 

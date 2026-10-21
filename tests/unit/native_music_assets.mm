@@ -24,6 +24,8 @@ int main(int argc, char **argv) {
             if ([clip[@"song"] intValue] == 102 || [clip[@"song"] intValue] == 72)
                 [legacy_clips addObject:clip];
         fixture[@"clips"] = legacy_clips;
+        fixture[@"catalog"][@"menu_requests"] =
+            [fixture[@"catalog"][@"menu_requests"] subarrayWithRange:NSMakeRange(0, 3)];
         const auto fixture_data = [NSJSONSerialization dataWithJSONObject:fixture options:0 error:nullptr];
         assert([fixture_data writeToFile:[NSString stringWithUTF8String:
             (source / "music-assets.json").c_str()] atomically:YES]);

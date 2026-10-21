@@ -248,3 +248,13 @@ native-input-reset
 ui-scale-profile	
 message-font-assets	
 queue-blank-frame	
+
+# Reached CharacterSelect resources, real audio and canonical task/motion ownership.
+selection-character-pack	"$(NATIVE_ASSETS)/characters/sonic-selection.actions" "$(NATIVE_ASSETS)/characters/title.actions"
+native-character-selection-assets	"$(NATIVE_ASSETS)" "$(NATIVE_ASSETS)/characters/title.actions"
+native-character-select-music	"$(NATIVE_ASSETS)"
+character-select-labels	"$(NATIVE_ASSETS)"
+character-completion	"$(NATIVE_ASSETS)"
+player-initialization
+player-motion-graph
+selection-question

@@ -8,7 +8,29 @@
 int main(int argc, char **argv) {
     assert(argc == 2);
     @autoreleasepool {
-        const std::filesystem::path source(argv[1]);
+        const std::filesystem::path imported(argv[1]);
+        const std::string fixture_identity = [NSUUID.UUID.UUIDString UTF8String];
+        const auto source = std::filesystem::temp_directory_path() /
+                            ("sadx-three-music-clips-" + fixture_identity);
+        std::filesystem::create_directories(source);
+        std::filesystem::create_directory_symlink(std::filesystem::canonical(imported / "music"),
+                                                   source / "music");
+        NSMutableDictionary *fixture = [NSJSONSerialization JSONObjectWithData:
+            [NSData dataWithContentsOfFile:[NSString stringWithUTF8String:
+                (imported / "music-assets.json").c_str()]]
+            options:NSJSONReadingMutableContainers error:nullptr];
+        assert(fixture);
+        NSMutableArray *legacy_clips = [NSMutableArray array];
+        for (id clip in fixture[@"clips"])
+            if ([clip[@"song"] intValue] == 102 || [clip[@"song"] intValue] == 72 ||
+                [clip[@"song"] intValue] == 101)
+                [legacy_clips addObject:clip];
+        fixture[@"clips"] = legacy_clips;
+        fixture[@"catalog"][@"menu_requests"] =
+            [fixture[@"catalog"][@"menu_requests"] subarrayWithRange:NSMakeRange(0, 3)];
+        const auto fixture_data = [NSJSONSerialization dataWithJSONObject:fixture options:0 error:nullptr];
+        assert([fixture_data writeToFile:[NSString stringWithUTF8String:
+            (source / "music-assets.json").c_str()] atomically:YES]);
         const auto assets = sadx::native::app::load_music_assets(source);
         assert((assets.catalog.menu_requests == std::vector<std::int32_t>{102, 101, 72}));
         assert(assets.clips.size() == 3);
@@ -68,6 +90,7 @@ int main(int argc, char **argv) {
         assert(!player->clip_open());
         assert(!player->prepare_clip((source / "music/missing.wav").string(), error));
         assert(!player->buffer_available() && !player->clip_open());
+        std::filesystem::remove_all(source);
         std::cout << "{\"song\":101,\"frames\":" << clip.frames
                   << ",\"nonzero_samples\":" << before.nonzero_samples
                   << ",\"completed_buffers\":" << before.completed_buffers
