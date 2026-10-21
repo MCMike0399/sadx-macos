@@ -68,6 +68,8 @@ int main() {
     native::LogoScene scene(output, mode, renderer, save, rings,
                             {horizontal, vertical, display_disabled, fog_emulation,
                              fog_enabled, queued_depth}, fp);
+    ui_scale::State scaling(horizontal, vertical);
+    scene.attach_ui_scaling(scaling);
     output.fail_load = true;
     bool failed = false;
     try {
@@ -88,6 +90,7 @@ int main() {
     assert(scene.state().mode == logo::Mode::SegaHold && scene.fade_color() == 0);
     assert(scene.advance() == logo::Completion::Running);
     assert((output.order == std::vector<unsigned>{1, 1, 1, 1, 1, 1, 2}));
+    assert(!scaling.enabled && scaling.entries.empty());
 
     // A live frame suppresses both immediate draw paths without suppressing logo logic.
     display_disabled = 1;

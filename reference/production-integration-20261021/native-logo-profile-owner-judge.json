@@ -1,0 +1,12 @@
+{
+  "reason": "The existing isolated native LogoScene test constructs its own renderer/frame owners; it must supply the newly recovered persistent UI-scale state, just as production Display/Session does.",
+  "failure": {
+    "gate_log": "build/native-fresh-save-gate-third.log",
+    "exit_status": 2,
+    "test": "native-logo-scene",
+    "boundary": "native logo profile state is unavailable"
+  },
+  "change": "Bind one ui_scale::State to the SAME existing horizontal/vertical fixture owners before initialization; retain every original expected draw/state/failure assertion; add scope-lifetime assertion after actual draw.",
+  "source_evidence": "/private/tmp/sadx-message-profile-stage/final-packet-v2.json; compiled original background hook with independent review. Pinned source initial state is enabled=false, empty stack, BGfill2 and FMVfill1.",
+  "limits": "No runtime behavior/tolerance/old expectation changed; production remains required to bind the real Display-lifetime state."
+}
