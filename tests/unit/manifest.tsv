@@ -214,7 +214,7 @@ menu-resource-lifetime
 voice-playback
 mac-save-files
 native-save-directory
-mac-voice-playback	game/imported
+mac-voice-playback	build/voice-playback-fixture
 save-file-codec
 menu-voice
 colored-polygon
@@ -224,3 +224,6 @@ menu-draw-primitives
 caption-frame-reference	
 native-menu-dialog-assets	"$(NATIVE_ASSETS)"
 save-name-reference	
+mac-menu-voice-delivery	"$(NATIVE_ASSETS)"
+mac-audio-gain	
+native-menu-voice-catalog	"$(NATIVE_ASSETS)"

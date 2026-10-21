@@ -1,12 +1,12 @@
 {
   "change": {
-    "base_commit": "97241a8dc495d7035138403d84200f32997ff4bf",
-    "evidence": "reference/production-integration-20261021/save-name-transport-judge.json",
-    "evidence_sha256": "fb9e8bbf15601c95ff7ab66e4659069baa27c7847d9dfd8e98f0cc319e52d17b",
-    "reason": "Preserve SaveName pointer identity through a whole-owner migration without altering source oracle inputs or expected outcomes"
+    "base_commit": "2f898ae323873e39ea5ead8d919984e9465db949",
+    "evidence": "reference/production-integration-20261021/native-voice-resource-qualification.json",
+    "evidence_sha256": "75ae488786e615f31e1d0e10fec5b60398540b58d94ee15cda3684ab31df7c57",
+    "reason": "Retain exact original two-clip playback cases while adding complete menu resource and native gain qualification"
   },
   "files": {
-    "Makefile": "3b11de6a63d6f44f607df796971e0aa885743e5b8127f9c3f66958ea9a3678e4",
+    "Makefile": "37b5a62363d5fb6b87994ba87cd87470694c65c886834cd8e81e0a7c939e5dd8",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
     "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
     "reference/frame-control-corpus.tsv": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",
@@ -481,6 +481,7 @@
     "tests/python/test_menu_dialog_import.py": "d92712d15cc8ebb657813d22fccbc21a821f7d589ea0ff09f67c4b8ea63d37a9",
     "tests/python/test_menu_textures.py": "3e5cff9e92ffa2e1a522943cd42ce0457d5fd0334630b84dc1f5a35c6e09b22a",
     "tests/python/test_menu_voice_assets.py": "dccbb687662b15e68a6f4a8badba1e72a60aa5656fc58db3dcba20dba463ca2b",
+    "tests/python/test_menu_voice_rows.py": "8b844c098b2768a996a4f09a1a8cb7c48e869797907cb0232cba6e037aac2081",
     "tests/python/test_movie_assets.py": "030438304015b9e42422cd315a3d14fe6b2e9503578d5bd9ef535d7b0857590e",
     "tests/python/test_music_assets.py": "929643acf9079e3502ca33efeef85f3b8eb01fa05d40814137f5c415835390be",
     "tests/python/test_music_menu_prefix.py": "2a1701e22d32e7b50ef1d84a5b9028cb0f6648687867adda207fcff04c535b3a",
@@ -496,7 +497,8 @@
     "tests/python/test_symbols.py": "9e9a03a6389d6cd58aa49c63272049754f55ccddb19eeb894b8b92ccce362e0f",
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",
-    "tests/unit/manifest.tsv": "3273368b463cb9e1648ba452b745e299a4bc0e7ae7870af0b0c87709e6835989",
+    "tests/python/test_voice_publication.py": "5c00051d9b3de640f64e224dda4d810cdd7d26acafd91d7b1dc44e9786a734f3",
+    "tests/unit/manifest.tsv": "d39244e6291b38a70b3b9935b3f4d9d7cff564d9670afd1c6987b2a8cf3a4122",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",
@@ -528,6 +530,7 @@
     "tools/gate/guard_judge_edit.py": "6fa117651c735c3a152343da978945a426138ce455d0494e7ca707f46ff82935",
     "tools/gate/layer_exceptions.tsv": "45ec99765961f1f4f36760d706dd561ad9362ca3220080c0aebedb105f7c4649",
     "tools/gate/mutate.py": "9028799e852ca72ae2e49229647171ec68ecbc26eeb234db3fd510a4eeb33719",
+    "tools/gate/prepare_voice_playback_fixture.py": "3c544cd26fcb27e170cee33847a118170ee0f4a123d6c545a22449a4e6479cd4",
     "tools/gate/profile_patches.json": "4fcfa89e12d2b0161da4f357dcd3d0e457b0c43d8257a20472a9efdd98d8db22",
     "tools/gate/record_gate.py": "c74237a970ebfac47cf3c15357b4d16baf6ff28b6ba67e1a31c02dc249c70e3b",
     "tools/gate/run_journeys.py": "ccf2816a8b0463a5cc57b0edd9ed1335ea9c2a6228daa437f8c669e7b6915ae0",

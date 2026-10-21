@@ -1,0 +1,14 @@
+{
+  "requirement": "Qualify actual menuvoice rows after Sonic confirmation restores cursor1, plus reentry; retain original playback fixture coverage.",
+  "source_mapping": "GetMenuVoice(savedSonic0)=1; row1request1=voice37; full7ee930 table has9rowsx9requests.",
+  "production_catalog": "81source-backedmenuentries and162ownedJP/USPCMclips.",
+  "existing_fixture": "Originalmac_voice_playback unchanged: exactsameactualvoice1JP/US resources are copied/hash-verified from production into explicit2clipfixture. No old playback expected values or logic change.",
+  "new_coverage": [
+    "all81multi-entry request lookups and162resource bindings",
+    "5realplaysJP/US1,JP/US37,US37reentry",
+    "fresh-inodevoicepublication/malformedsourceprotections",
+    "nativeaudiooutputgaindevicecapture"
+  ],
+  "independent_review": "review_menu_voice_import independently verified rawtable/all162resources,mapper/requestsourcejudges,5realPCMplays,retained+newPythonchecks; no importerblocker.",
+  "implementation_separate": true
+}

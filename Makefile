@@ -138,6 +138,9 @@ build/sadx-controller-qualify: src/apps/controller_qualify.mm build/libsadx-maco
 build/sadx-native: src/apps/sadx_native.mm build/libsadx-native.a $(NATIVE_PLATFORM_OBJECTS)
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< $(NATIVE_PLATFORM_OBJECTS) build/libsadx-native.a $(MAC_FRAMEWORKS) -o $@
 NATIVE_ASSETS ?= game/imported
+.PHONY: voice-playback-fixture
+voice-playback-fixture:
+	python3 tools/gate/prepare_voice_playback_fixture.py --assets "$(NATIVE_ASSETS)" --output build/voice-playback-fixture
 .PHONY: native-journeys
 native-journeys: build/sadx-native
 	python3 tools/gate/run_native_journeys.py --app build/sadx-native --assets "$(NATIVE_ASSETS)"
@@ -176,7 +179,7 @@ controllers: all
 # additionally link libsadx-macos and the frameworks; tests/unit/guest_<name>.cpp link the guest + Unicorn.
 .SECONDEXPANSION:
 # Address-shaped boot/mode interpreters are reference adapters.
-REFERENCE_UNIT_TARGETS := build/library-initial-state-test build/game-library-init-test build/player-scene-position-test build/ninja-fog-initial-state-test build/game-frame-owners-test build/game-view-initial-state-test build/ninja-fog-test build/ninja-queue-consumer-test build/game-view-test \
+REFERENCE_UNIT_TARGETS := build/save-name-reference-test build/library-initial-state-test build/game-library-init-test build/player-scene-position-test build/ninja-fog-initial-state-test build/game-frame-owners-test build/game-view-initial-state-test build/ninja-fog-test build/ninja-queue-consumer-test build/game-view-test \
  build/game-frame-control-test build/reference-frame-control-test build/game-logic-test build/game-logic-support-test build/game-loop-test build/game-startup-test build/ninja-device-init-test build/ninja-frame-calls-test build/ninja-screen-test build/ninja-queue-lifecycle-test \
  build/game-mode-test build/game-mode-leaves-test build/game-runtime-test \
  build/player-acceleration-ground-test build/player-acceleration-alternate-test \
@@ -309,7 +312,7 @@ sound-initial-fixtures: build/native-sound-initial-state-probe.dylib
 screen-initial-fixtures: build/native-ninja-screen-initial-state-probe.dylib
 	$(REFERENCE_PYTHON) tools/oracles/verify_original_ninja_screen_initial_state.py "$(GAME_EXE)" build/native-ninja-screen-initial-state-probe.dylib --output build/oracles/ninja_screen_initial_state.json --poison-output build/screen-initial-poisoned.exe --varied-output build/screen-initial-varied.exe --partial-output build/screen-initial-partial.exe
 
-run-unit-tests: library-initial-fixtures startup-initial-fixtures assets $(UNIT_TARGETS) $(UNIT_MM_TARGETS) $(OVERRIDE_CORPORA) build/engine-code-tables-poisoned.exe session-control-fixtures input-initial-fixtures sine-initial-fixtures fog-initial-fixtures screen-initial-fixtures sound-initial-fixtures view-initial-fixtures queue-initial-fixtures input-constants-fixtures
+run-unit-tests: voice-playback-fixture library-initial-fixtures startup-initial-fixtures assets $(UNIT_TARGETS) $(UNIT_MM_TARGETS) $(OVERRIDE_CORPORA) build/engine-code-tables-poisoned.exe session-control-fixtures input-initial-fixtures sine-initial-fixtures fog-initial-fixtures screen-initial-fixtures sound-initial-fixtures view-initial-fixtures queue-initial-fixtures input-constants-fixtures
 unit-tests: run-unit-tests
 test: unit-tests
 	$(PY) -m unittest discover -s tests/python -p 'test_*.py'
