@@ -52,7 +52,8 @@ class JudgeTests(unittest.TestCase):
 
     def test_native_journey_tampering_is_detected(self):
         for name in ('tools/journey/check_native_file_select.py',
-                     'tools/journey/check_native_main_menu.py'):
+                     'tools/journey/check_native_main_menu.py',
+                     'tools/journey/check_native_fresh_save.py'):
             with self.subTest(checker=name):
                 self.assertTrue(protected(name))
                 original = (self.root / name).read_text()

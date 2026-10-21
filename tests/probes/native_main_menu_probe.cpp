@@ -87,13 +87,14 @@ extern "C" void sadx_native_main_menu_probe(const std::uint32_t *in, std::uint32
     auto save = sadx::file_select::decode_save(save_bytes), backup = sadx::file_select::decode_save(backup_bytes);
     Calls calls(in, work, save); sadx::X87Context fp{static_cast<std::uint16_t>(in[33])};
     auto sx = number(in[34]), sy = number(in[35]); auto window = in[36];
+    sadx::ui_scale::State scaling(sx,sy);
     m::DrawState view{sx, sy, window, in[52], in[53]};
     if (in[0] == 0) m::initialize(work, state, calls);
     else if (in[0] == 1) m::update(work, sequence, state, in[15], calls, fp);
     else if (in[0] == 2) m::draw_background(work.presentation.depth, view, calls, fp);
     else if (in[0] == 3) m::draw(work, view, calls, fp);
     else if (in[0] == 5) {
-        try { m::draw_profiled(work, view, calls, fp); }
+        try { m::draw_profiled(work, view, calls, fp, scaling); sadx::ui_scale::require_message_forwarding(scaling); }
         catch (const std::out_of_range &) { out[30] = 2; }
     }
     else if (in[0] == 4) {

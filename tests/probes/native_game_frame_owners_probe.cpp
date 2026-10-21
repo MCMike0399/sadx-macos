@@ -1,4 +1,5 @@
 #include "game/game_frame_owners.hpp"
+#include "guest/saved_fov_reference.hpp"
 #include "guest/caption_frame_reference.hpp"
 #include <algorithm>
 #include <cstring>
@@ -13,7 +14,10 @@ extern "C" int sadx_native_game_frame_owners(const std::uint32_t* in,const std::
     for(int r=0;r<256;++r)for(int k=0;k<3;++k)edges.raw_at_3b0e3e2[r][k]=static_cast<std::uint8_t>(in[50+3*r+k]);
     std::optional<std::array<float,4>> color=std::array<float,4>{f(in[32]),f(in[33]),f(in[34]),f(in[35])};
     std::optional<std::array<float,4>> queue_color=std::array<float,4>{f(in[36]),f(in[37]),f(in[38]),f(in[39])},projection_color=std::array<float,4>{f(in[40]),f(in[41]),f(in[42]),f(in[43])};
-    GameViewState view{1.0F,1.0F,640,480,0.5F,639,479,reset,mode,0,0,0,0,0,0,0,0,in[10],in[9],in[8],{},color}; // 3aad0bc, 3ab98ec, 3b2cbb4
+    sadx::view::SavedFovState saved_fov;
+    sadx::reference::SavedFovReference saved_fov_reference;
+    saved_fov_reference.import_value(saved_fov,in[8]);
+    GameViewState view{1.0F,1.0F,640,480,0.5F,639,479,reset,mode,0,0,0,0,0,0,0,0,in[10],in[9],saved_fov,[&] { saved_fov_reference.observe_write(); },{},color}; // 3aad0bc, 3ab98ec, 3b2cbb4
     NinjaRenderState render;render.device_at_3d128b0=std::make_shared<NinjaRenderDevice>(NinjaRenderDevice{1});
     std::vector<std::array<std::uint32_t,3>> trace;
     render.set_render_state=[&](const NinjaRenderStateCommand& c){trace.push_back({c.state,c.value,c.source_call});return NinjaRenderCallResult{true,{}};};
@@ -30,7 +34,7 @@ extern "C" int sadx_native_game_frame_owners(const std::uint32_t* in,const std::
     const auto r=run_game_frame_owner(in[0],in[1],rt);
     std::fill(out,out+128,0);out[0]=r?1U:0U;out[1]=r.eax.value_or(0xdeadbeef);out[2]=r.eax.has_value();
     const auto v=[](const auto& o){return static_cast<std::uint32_t>(o.value_or(0xdeadbeef));};
-    out[4]=v(reset);out[6]=v(draws);out[8]=v(view.word_at_3b2cbb4);out[9]=v(view.fov_copy_at_3ab98ec);out[10]=v(view.fov_at_3aad0bc);out[11]=projection.scale_at_3d0f9e0?b(*projection.scale_at_3d0f9e0):0xdeadbeef;
+    out[4]=v(reset);out[6]=v(draws);out[8]=v(saved_fov_reference.export_value(saved_fov));out[9]=v(view.fov_copy_at_3ab98ec);out[10]=v(view.fov_at_3aad0bc);out[11]=projection.scale_at_3d0f9e0?b(*projection.scale_at_3d0f9e0):0xdeadbeef;
     out[13]=v(s.list_at_3b2c584);out[14]=v(s.count_at_3b0e334);out[15]=v(caption.timer_word());out[16]=v(caption.buffer_word());
     for(int i=0;i<4;++i){out[36+i]=queue_color?b((*queue_color)[i]):0xdeadbeef;out[40+i]=projection_color?b((*projection_color)[i]):0xdeadbeef;}
     out[60]=static_cast<std::uint32_t>(trace.size());for(std::size_t i=0;i<trace.size()&&i<8;++i)std::copy(trace[i].begin(),trace[i].end(),out+64+3*i);

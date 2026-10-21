@@ -191,7 +191,8 @@ extern "C" int sadx_native_file_select_display(const U *input, const std::uint8_
                     &widths,
                     {input[30], input[31], input[32], input[33]}};
     auto data = tables(input);
-    const float sx = 1, sy = 1;
+    float sx = 1, sy = 1;
+    ui_scale::State scaling(sx,sy);
     const U width = 640, height = 480;
     const auto first = static_cast<std::uint8_t>(input[22]),
                second = static_cast<std::uint8_t>(input[23]);
@@ -209,7 +210,8 @@ extern "C" int sadx_native_file_select_display(const U *input, const std::uint8_
     calls.fail = input[40];
     X87Context fp(static_cast<std::uint16_t>(input[18]));
     try {
-        file_select_display::draw(work, view, pvr, calls, fp);
+        file_select_display::draw_profiled(work, view, pvr, calls, fp, scaling);
+        ui_scale::require_message_forwarding(scaling);
     } catch (const std::runtime_error &) {
         output[63] = 1;
     }

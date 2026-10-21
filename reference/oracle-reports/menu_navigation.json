@@ -1,0 +1,28 @@
+{
+ "passed": true,
+ "values_match": true,
+ "cases": 1488,
+ "executed": 1488,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_ranges": {
+  "0x512540": "6f63e545d231b04cb8d39e18304afb2afc25278260d9c354ad4c96b352c3ea7a",
+  "0x505e60": "79811a84aeb2cbea4b3a98df0ac0c9e5080fbfbb7e714b7d48cf221d579c2ea7"
+ },
+ "native_sources": {
+  "src/game/menu_navigation.hpp": "78866ebf2734a27a9f8733d1a88a042a6acfe32f6e6accc270e5450a42b21db7",
+  "src/game/menu_navigation.cpp": "77b4c4887fa4228844e717b1049eaa1e3a1e87fdc378b4af7262d84ad1f10934",
+  "tests/probes/native_menu_navigation_probe.cpp": "86e956867c4e3827aa3683f13bdceb48258e4fcb0c29e1f74c5830218b3705a3"
+ },
+ "native_library_sha256": "ba1457d6c9183b9f91c6335e9a740d8bf972124f327bc60cf2a9ac57dd760603",
+ "limits": [
+  "Both actual source entries execute512540 within505e60. Only actual505870 menu music shutdown is receipt, recording visible pre-call fields and mutating canonical task owners. Captured sequence work remains destination after callback owner replacement. Missing task/work fail explicitly in native boundary tests; successful source runs use valid owners. No CharacterSelect initialization/render/gameplay claim."
+ ],
+ "tracked_summary": {
+  "full_sha256": "0e92d3373d40549abf4b677a691cbac85053e92791e34091fe1fda1323b975b3",
+  "full_bytes": 1292,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

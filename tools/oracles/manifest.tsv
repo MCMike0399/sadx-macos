@@ -25,3 +25,13 @@ movie_timing	build/native-movie-probe.dylib	tools/oracles/verify_original_movie_
 native_input	build/native-native-input-probe.dylib	tools/oracles/verify_original_native_input.py "$(INPUT_DLL)" build/native-native-input-probe.dylib --game-exe "$(GAME_EXE)" --output build/oracles/native_input.json
 sound_parameters	build/native-sound-effects-probe.dylib	tools/oracles/verify_original_sound_parameters.py "$(GAME_EXE)" build/native-sound-effects-probe.dylib --output build/oracles/sound_parameters.json
 sound_wave_metadata		tools/oracles/verify_original_sound_wave_metadata.py "$(GAME_EXE)" --assets game/imported --output build/oracles/sound_wave_metadata.json
+save_prepare	build/native-save-creation-probe.dylib	tools/oracles/verify_original_save_prepare.py "$(GAME_EXE)" build/native-save-creation-probe.dylib --input-dll "$(INPUT_DLL)" --output build/oracles/save_prepare.json
+save_request	build/native-save-creation-probe.dylib	tools/oracles/verify_original_save_request.py "$(GAME_EXE)" build/native-save-creation-probe.dylib --output build/oracles/save_request.json
+save_completion	build/native-save-creation-probe.dylib	tools/oracles/verify_original_save_completion.py "$(GAME_EXE)" build/native-save-creation-probe.dylib --output build/oracles/save_completion.json
+save_write	build/native-save-creation-probe.dylib	tools/oracles/verify_original_save_write.py "$(GAME_EXE)" build/native-save-creation-probe.dylib --output build/oracles/save_write.json
+message_reload	build/native-message-image-probe.dylib	tools/oracles/verify_original_message_reload.py "$(GAME_EXE)" build/native-message-image-probe.dylib --output build/oracles/message_reload.json
+palette	build/native-message-image-probe.dylib	tools/oracles/verify_original_palette.py "$(GAME_EXE)" build/native-message-image-probe.dylib --output build/oracles/palette.json
+palette_initial	build/native-message-image-probe.dylib	tools/oracles/verify_original_palette_initial.py "$(GAME_EXE)" build/native-message-image-probe.dylib --output build/oracles/palette_initial.json
+message_text	build/native-message-text-probe.dylib	tools/oracles/verify_original_message_text.py "$(GAME_EXE)" build/native-message-text-probe.dylib --font-directory "$(GAME_SYSTEM)" --output build/oracles/message_text.json
+native_input_reset	build/native-input-reset-probe.dylib	tools/oracles/verify_original_native_input_reset.py "$(INPUT_DLL)" "$(GAME_EXE)" build/native-input-reset-probe.dylib --output build/oracles/native_input_reset.json
+ui_scale_profile	build/native-ui-scale-profile-probe.dylib	tools/oracles/verify_original_ui_scale_profile.py "$(LOADER_DLL)" build/native-ui-scale-profile-probe.dylib --output build/oracles/ui_scale_profile.json

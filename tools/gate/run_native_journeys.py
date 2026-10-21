@@ -27,7 +27,8 @@ def run(application, assets, output_root):
     checkpoints = []
     for name, checker in (
             ('native-file-select', 'check_native_file_select.py'),
-            ('native-main-menu', 'check_native_main_menu.py')):
+            ('native-main-menu', 'check_native_main_menu.py'),
+            ('native-fresh-save', 'check_native_fresh_save.py')):
         output = Path(tempfile.mkdtemp(prefix=name + '-', dir=output_root))
         command = [sys.executable, str(ROOT / 'tools/journey' / checker),
                    '--app', str(application), '--assets', str(assets), '--output', str(output)]

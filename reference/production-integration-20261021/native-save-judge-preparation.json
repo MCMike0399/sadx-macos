@@ -1,0 +1,695 @@
+{
+  "private_only": true,
+  "worktree": "/private/tmp/sadx-native-save-judge",
+  "base_commit": "fe178cd7c0f23813b0136c6a7202ab56671fa368",
+  "purpose": "Separate protected judge preparation for already reviewed native fresh-save/message/profile/owner resources; implementation remains root-owned.",
+  "inputs": {
+    "/private/tmp/sadx-save-frame-stage/final-packet.json": "cd99aebfd8aab8cfba707773e47e59bca66d870851d759b2b0658a378e92e271",
+    "/private/tmp/sadx-save-creation-stage/final-packet.json": "574805098c8c7d1bfc56d6750e89e3db5397c33b9a39da7b4fd64ea49de42262",
+    "/private/tmp/sadx-saving-message-stage/frozen-saving-message-packet.json": "f48dde0f7640d1e7ddc13fd61bc20c0efffa7b114106fcb3012d85b058ac66a2",
+    "/private/tmp/sadx-message-texture-backend-stage/frozen-message-texture-backend-packet.json": "0a58e2d852a8538d5ba6c41d0a739a583d702e0080a694300d1c9bcc873c3e8e",
+    "/private/tmp/sadx-message-queue-stage/final-packet.json": "df01812311dd47120c7cae3ef4971b53d9447d4b24343fbbf3bddee5e3d58f66",
+    "/private/tmp/sadx-saved-fov-stage/final-packet.json": "cd34329e3aca2ae7a5710a5d9c308258e9774684b825bc72dcf6db08a5d87c84",
+    "/private/tmp/sadx-save-input-reset-stage/final-packet.json": "edae5839140e56bb36ea6c86994fec49a763aa807a1aaec15cdb46c3e77e1a65",
+    "/private/tmp/sadx-message-profile-stage/final-packet-v2.json": "acd443b0eb790d25eddaaaacc169eaa8a9ea19929ad7f0929eff57793d937bcb",
+    "/private/tmp/sadx-message-font-delivery-stage/font-delivery-packet-v3.json": "b202d13ec175c9606cdc834642cc178a06fa8549af225b239eb997c70348c592"
+  },
+  "copies_and_reviewed_surgical_patches": [
+    {
+      "source": "/private/tmp/sadx-save-frame-stage/tests/unit/save_creation.cpp",
+      "source_sha256": "11312f59661c8b0b83304379f8187cf38a17ab90e982a8f7ad7bb4c43554cbcd",
+      "destination": "tests/unit/save_creation.cpp",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-save-frame-stage/tests/unit/save_write.cpp",
+      "source_sha256": "416797df92f00bf59601813a619caadea0daf6a3236f235315488ea11663bd09",
+      "destination": "tests/unit/save_write.cpp",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-save-frame-stage/tests/unit/save_frame.cpp",
+      "source_sha256": "20ff9563a4d87b74a0b117d603cb20d56421692a71ca93c9eb7bf2cd7ba4130f",
+      "destination": "tests/unit/save_frame.cpp",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-save-frame-stage/tests/probes/native_save_creation_probe.cpp",
+      "source_sha256": "7b97306fb3d911a3b675906b498b54f40e5319e7bece3c290d010bb525760f92",
+      "destination": "tests/probes/native_save_creation_probe.cpp",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-save-frame-stage/tests/probes/native_save_frame_probe.cpp",
+      "source_sha256": "a7164374ac895f6e04808b3a23083bd16ad161408e172b791ddabf70b617bcbf",
+      "destination": "tests/probes/native_save_frame_probe.cpp",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-save-frame-stage/tools/oracles/verify_original_save_frame.py",
+      "source_sha256": "4bc1998b479827452c1ff178f51ad76948bb04d2936153e906f0db21b4d79e2c",
+      "destination": "tools/oracles/verify_original_save_frame.py",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-save-creation-stage/tools/oracles/verify_original_save_prepare.py",
+      "source_sha256": "fee10382a67c5246bfab92578a0e6582931703d9c6fd2385d3518c1980318e11",
+      "destination": "tools/oracles/verify_original_save_prepare.py",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-save-creation-stage/tools/oracles/verify_original_save_request.py",
+      "source_sha256": "cd8d35807ff03eb2f1bbec64188c654552139013a350e2df33d36417a634adaf",
+      "destination": "tools/oracles/verify_original_save_request.py",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-save-creation-stage/tools/oracles/verify_original_save_completion.py",
+      "source_sha256": "ec92ebfbbd9a67c108ea35200bccb0070756f61bc425cf8f70ecef3e696d00ba",
+      "destination": "tools/oracles/verify_original_save_completion.py",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-save-creation-stage/tools/oracles/verify_original_save_write.py",
+      "source_sha256": "a99eca14677270d000d0047a7ac0de984ba317c577c8f82933f522863d6509ea",
+      "destination": "tools/oracles/verify_original_save_write.py",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-save-creation-stage/tools/oracles/verify_original_save_creation.py",
+      "source_sha256": "52b7c4f6ea2b2b05992f2583363fec85428bfdf3c2a1bb3d1339d214aa496431",
+      "destination": "tools/oracles/verify_original_save_creation.py",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-saving-message-stage/tests/probes/native_message_text_probe.cpp",
+      "source_sha256": "00c45f7c81f8fea3c74b9cafb9e84adcd9bc5c04e7206d85b22de335bdb33107",
+      "destination": "tests/probes/native_message_text_probe.cpp",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-saving-message-stage/tools/oracles/verify_original_message_text.py",
+      "source_sha256": "a819782e4a6f7e4329092fc5e6387fac779d65688adbc8baa880cf3d9348008f",
+      "destination": "tools/oracles/verify_original_message_text.py",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-saving-message-stage/tests/probes/native_message_texture_probe.cpp",
+      "source_sha256": "b76553d1c319609e79d056f82db124783cede99b31ac415ac67a2366d8a78120",
+      "destination": "tests/probes/native_message_texture_probe.cpp",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-saving-message-stage/tools/oracles/verify_original_message_texture.py",
+      "source_sha256": "200fd7cdf8c187a59595bd143052998f5abbb8c9826f7103199f86997bd3160f",
+      "destination": "tools/oracles/verify_original_message_texture.py",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-saving-message-stage/tests/probes/native_saving_message_probe.cpp",
+      "source_sha256": "2a9b7855eeb8a5782aa74f1f533afd660d65740f4b1d07f0e048a72d5080eb85",
+      "destination": "tests/probes/native_saving_message_probe.cpp",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-saving-message-stage/tools/oracles/verify_original_saving_message.py",
+      "source_sha256": "46af40486dbb4c2572ec7a57fac15c9ef2c8d508764da2f3866d03762a094431",
+      "destination": "tools/oracles/verify_original_saving_message.py",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-saving-message-stage/tests/probes/native_message_frame_probe.cpp",
+      "source_sha256": "6e15db53486ebbc384f7141ed3367866af702ef62d203f9fa9eae3fe87e976eb",
+      "destination": "tests/probes/native_message_frame_probe.cpp",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-saving-message-stage/tools/oracles/verify_original_message_frame.py",
+      "source_sha256": "22ab05f3569f788a69380221cc9093dc4fa7fa4bbece8627d3147d77d0aa7355",
+      "destination": "tools/oracles/verify_original_message_frame.py",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-message-texture-backend-stage/tests/unit/native_message_texture.cpp",
+      "source_sha256": "28510de7728ab76ac0dc55dec4ed9d5c404d66e63ae754ca853120d2f64388f6",
+      "destination": "tests/unit/native_message_texture.cpp",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-message-texture-backend-stage/tests/unit/native_message_texture_metal.mm",
+      "source_sha256": "00334b08d39071cd65b447de189a0a05d4014160f57a0332071f9473059f50f2",
+      "destination": "tests/unit/native_message_texture_metal.mm",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-message-texture-backend-stage/tests/probes/native_message_image_probe.cpp",
+      "source_sha256": "990726b2db49d3fe9d712127dc01158bc91d0a382bbf21c9db60895882dfc04e",
+      "destination": "tests/probes/native_message_image_probe.cpp",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-message-queue-stage/tests/unit/message_queue_resources.cpp",
+      "source_sha256": "df2ca75b318cfb0fac88cbfc4691a78da23d774e8159431796de6d41f2f1136e",
+      "destination": "tests/unit/message_queue_resources.cpp",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-message-queue-stage/tests/probes/native_center_screen_sprite_probe.cpp",
+      "source_sha256": "3284d5000cdcd2fd23b92e9719bc0d6d415ef8498371a5605dd0673f1e82746f",
+      "destination": "tests/probes/native_center_screen_sprite_probe.cpp",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-message-queue-stage/tests/probes/native_empty_queue_probe.cpp",
+      "source_sha256": "f226f4a0caa31e1550ab9ee8c901ff3371dfeece1ebd816e2ef2ad70a446befb",
+      "destination": "tests/probes/native_empty_queue_probe.cpp",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-message-queue-stage/tests/probes/native_late_sprite_probe.cpp",
+      "source_sha256": "fb2e648c48bf1b9ec1cba091bae07a09db1c1ad29efe2317d171fa889ba2b043",
+      "destination": "tests/probes/native_late_sprite_probe.cpp",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-message-queue-stage/tests/probes/native_end_borrow_probe.cpp",
+      "source_sha256": "3b1a42a506862cfb46e33dd9a056432825b4c3dad5884d6fc7c507eb4e27a7e4",
+      "destination": "tests/probes/native_end_borrow_probe.cpp",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-saved-fov-stage/tests/unit/saved_fov_reference.cpp",
+      "source_sha256": "f3e878926536d15fedaa154635d34a1ef55096d60005f8515aaa2dfb9c7d7482",
+      "destination": "tests/unit/saved_fov_reference.cpp",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-saved-fov-stage/patches/tests_probes_native_game_view_probe.cpp.patch",
+      "source_sha256": "afef0ecd771437e6061db2bc072d86ae4da929656a331e82ce7b2ea793917b87",
+      "transform": "reviewed surgical patch"
+    },
+    {
+      "source": "/private/tmp/sadx-saved-fov-stage/patches/tests_unit_game_view.cpp.patch",
+      "source_sha256": "1595b79ed2be1eb170df77464000bdbb447769bc089318017ddf3e464dfa3fc7",
+      "transform": "reviewed surgical patch"
+    },
+    {
+      "source": "/private/tmp/sadx-saved-fov-stage/patches/tests_probes_native_game_frame_owners_probe.cpp.patch",
+      "source_sha256": "a874b5db5f3674fa605ad44ca4e0a344a06d3d66e88bc0b29b00f5fb3d8568e5",
+      "transform": "reviewed surgical patch"
+    },
+    {
+      "source": "/private/tmp/sadx-saved-fov-stage/patches/tests_unit_game_frame_owners.cpp.patch",
+      "source_sha256": "96117a3c8c8851934ad97e0b3f92a816901570ff849685c4301e267e21d333a7",
+      "transform": "reviewed surgical patch"
+    },
+    {
+      "source": "/private/tmp/sadx-saved-fov-stage/patches/saving_tests_probes_native_message_frame_probe.cpp.patch",
+      "source_sha256": "210e1c0d4e88166523dcdc1b252ab6da4107d26b3949c9356cda240d15d39675",
+      "transform": "reviewed surgical patch"
+    },
+    {
+      "source": "/private/tmp/sadx-save-input-reset-stage/tests/unit/native_input_reset.cpp",
+      "source_sha256": "1ef601cad5d660990c9dfcc9b31dd3ea609133d01bb3086ac8a59a0444277773",
+      "destination": "tests/unit/native_input_reset.cpp",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-save-input-reset-stage/tests/probes/native_input_reset_probe.cpp",
+      "source_sha256": "36db557ae4a0a993fb5c79b88cb08c8bf39b1c599bc5b5cb4d8fb6064d2e53ba",
+      "destination": "tests/probes/native_input_reset_probe.cpp",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-save-input-reset-stage/tools/oracles/verify_original_native_input_reset.py",
+      "source_sha256": "e1c34afb4cf94ba12a040b3cce2da5cd3fe350e62e0915a867237cb0bacee23b",
+      "destination": "tools/oracles/verify_original_native_input_reset.py",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-message-profile-stage/tests/unit/ui_scale_profile.cpp",
+      "source_sha256": "572636a4b17de14f84b01476cf14ab09b7c6b830bf0e61cdeff1128a92903bb4",
+      "destination": "tests/unit/ui_scale_profile.cpp",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-message-profile-stage/tests/probes/native_ui_scale_profile_probe.cpp",
+      "source_sha256": "417784467908c4fb939b3af4dccdaa9af81a38ea8a7201f47085787053a1d725",
+      "destination": "tests/probes/native_ui_scale_profile_probe.cpp",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-message-profile-stage/tools/oracles/verify_original_ui_scale_profile.py",
+      "source_sha256": "5b1d9bf52646b7c100f27c3d5d6cde5030a1af805934ca087a9bb9184393c8b7",
+      "destination": "tools/oracles/verify_original_ui_scale_profile.py",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-message-profile-stage/patches/tests_probes_native_main_menu_probe.cpp.patch",
+      "source_sha256": "b034345fbe5bfaed66fc210d6b93c6e3ad0ff6fc3e9e4ce76893f27144d788a0",
+      "transform": "reviewed surgical patch"
+    },
+    {
+      "source": "/private/tmp/sadx-message-profile-stage/patches/tests_probes_native_file_select_display_probe.cpp.patch",
+      "source_sha256": "8dd7170b17ec95c76c0f10fc62e79002f3418319f144596f8f9d9cb6182cfb7e",
+      "transform": "reviewed surgical patch"
+    },
+    {
+      "source": "/private/tmp/sadx-message-font-delivery-stage/tests/private/message_font_assets.mm",
+      "source_sha256": "a070e2fcc538f28c1feaa995a604d2aafa240acd4bf6bcde991b4e81796f6592",
+      "destination": "tests/unit/message_font_assets.mm",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-message-font-delivery-stage/tools/import/test_message_fonts.py",
+      "source_sha256": "fcc6b5ce39704ca8662fcce2cbbba56ea8216db3ef1526aca0b022e9fdd0cd07",
+      "destination": "tests/python/test_message_fonts.py",
+      "transform": "byte-identical"
+    },
+    {
+      "source": "/private/tmp/sadx-message-font-delivery-stage/tools/import/test_message_font_publication.py",
+      "source_sha256": "1c358aeb9562d92ae4a7bff51c5ac41c6b19bed737f0b19c0bac541a2b7ec837",
+      "destination": "tests/python/test_message_font_publication.py",
+      "transform": "byte-identical"
+    }
+  ],
+  "new_judge_io_adaptations": [
+    {
+      "source": "/private/tmp/sadx-message-texture-backend-stage/tools/oracles/verify_message_image.py",
+      "source_sha256": "bb85ed8ac441c13ede5b9b3dca5ff280128d8093535e45dcbea53d7c382748d8",
+      "target": "tools/oracles/verify_original_message_image.py",
+      "target_sha256": "167887fc45984b15e80591c0e1fc088fb45b3e18709510f3c3942350e1cdfe07",
+      "io_transforms": [
+        {
+          "before": "from pathlib import Path",
+          "after": "from pathlib import Path\nimport argparse\nparser=argparse.ArgumentParser(description=__doc__)\nparser.add_argument('exe',type=Path);parser.add_argument('native_library',type=Path)\nparser.add_argument('--output',type=Path,required=True)\nparser.add_argument('--seed',type=int,default=7861760);parser.add_argument('--cases',type=int,default=600)\nargs=parser.parse_args()\nsys.argv=[__file__,str(args.native_library.resolve()),str(args.output),str(args.seed),str(args.cases),str(args.exe)]\n"
+        },
+        {
+          "before": "PEImage('game/Sonic Adventure DX/sonic.exe')",
+          "after": "PEImage(sys.argv[5])"
+        }
+      ]
+    },
+    {
+      "source": "/private/tmp/sadx-message-texture-backend-stage/tools/oracles/verify_message_reload.py",
+      "source_sha256": "7c97dbe5f87eab78242c6ceab324ce041e2c610db964db7501adb3d0aabbcc4e",
+      "target": "tools/oracles/verify_original_message_reload.py",
+      "target_sha256": "dd99b58a8ca33d58fed6c097ec5a11c58d4a5a2aedc6d0cafdd09140a4ae559b",
+      "io_transforms": [
+        {
+          "before": "from pathlib import Path",
+          "after": "from pathlib import Path\nimport argparse\nparser=argparse.ArgumentParser(description=__doc__)\nparser.add_argument('exe',type=Path);parser.add_argument('native_library',type=Path)\nparser.add_argument('--output',type=Path,required=True)\nparser.add_argument('--seed',type=int,default=7862800);parser.add_argument('--cases',type=int,default=700)\nargs=parser.parse_args()\nsys.argv=[__file__,str(args.native_library.resolve()),str(args.output),str(args.seed),str(args.cases),str(args.exe)]\n"
+        },
+        {
+          "before": "PEImage('game/Sonic Adventure DX/sonic.exe')",
+          "after": "PEImage(sys.argv[5])"
+        }
+      ]
+    },
+    {
+      "source": "/private/tmp/sadx-message-texture-backend-stage/tools/oracles/verify_palette.py",
+      "source_sha256": "c0888f870d965af9ad62398dc33c12d468ab9bbf0a026b325b52a904f673c9d3",
+      "target": "tools/oracles/verify_original_palette.py",
+      "target_sha256": "81402d0eaf28e737c859dbaa10535af1d501e158ce307585fcf3df78005584a2",
+      "io_transforms": [
+        {
+          "before": "from pathlib import Path",
+          "after": "from pathlib import Path\nimport argparse\nparser=argparse.ArgumentParser(description=__doc__)\nparser.add_argument('exe',type=Path);parser.add_argument('native_library',type=Path)\nparser.add_argument('--output',type=Path,required=True)\nparser.add_argument('--seed',type=int,default=7868288);parser.add_argument('--cases',type=int,default=800)\nargs=parser.parse_args()\nsys.argv=[__file__,str(args.native_library.resolve()),str(args.output),str(args.seed),str(args.cases),str(args.exe)]\n"
+        },
+        {
+          "before": "PEImage('game/Sonic Adventure DX/sonic.exe')",
+          "after": "PEImage(sys.argv[5])"
+        }
+      ]
+    },
+    {
+      "source": "/private/tmp/sadx-message-texture-backend-stage/tools/oracles/verify_palette_initial.py",
+      "source_sha256": "cde352a034773b88cf624d4b50aa7d5d8b4dba224bb9488b9913a04b133d43c1",
+      "target": "tools/oracles/verify_original_palette_initial.py",
+      "target_sha256": "2a9a4775cc6f4f8342b3260b7937b5a8b3bf56775010236d9f0056fdee119afe",
+      "io_transforms": [
+        {
+          "before": "from pathlib import Path",
+          "after": "from pathlib import Path\nimport argparse\nparser=argparse.ArgumentParser(description=__doc__)\nparser.add_argument('exe',type=Path);parser.add_argument('native_library',type=Path)\nparser.add_argument('--output',type=Path,required=True)\nparser.add_argument('--seed',type=int,default=0);parser.add_argument('--cases',type=int,default=1)\nargs=parser.parse_args()\nsys.argv=[__file__,str(args.native_library.resolve()),str(args.output),str(args.seed),str(args.cases),str(args.exe)]\n"
+        },
+        {
+          "before": "PEImage('game/Sonic Adventure DX/sonic.exe')",
+          "after": "PEImage(sys.argv[5])"
+        }
+      ]
+    },
+    {
+      "source": "/private/tmp/sadx-message-queue-stage/proofs/verify_empty_consumer.py",
+      "source_sha256": "b500a259bb313e660ad39dc9a876504e1e433f16d6f47070c37e282f6403f377",
+      "target": "tools/oracles/verify_original_empty_queue.py",
+      "target_sha256": "0fa5737c7349efc792ffb49765a206a6bb17905bc5f146e5bdd54ead2c4f76d3",
+      "io_transforms": [
+        {
+          "before": "root=Path('/Users/burbujamc/Developer/sadx-macos');stage=Path('/private/tmp/sadx-message-queue-stage');sys.path[:0]=[str(root/'tools/lib'),str(root/'tools/oracles')]",
+          "after": "root=Path(__file__).resolve().parents[2];sys.path[:0]=[str(root/'tools/lib'),str(root/'tools/oracles')]"
+        },
+        {
+          "before": "PEImage(root/'reference/updated-pc-reference/game/sonic.exe')",
+          "after": "PEImage(oracle_exe)"
+        },
+        {
+          "before": "ctypes.CDLL(str(stage/'consumer.dylib'))",
+          "after": "ctypes.CDLL(str(oracle_library))"
+        },
+        {
+          "before": "(stage/'proofs'/output).write_text",
+          "after": "Path(output).write_text"
+        },
+        {
+          "before": "if __name__=='__main__':raise SystemExit(run())",
+          "after": "if __name__=='__main__':\n import argparse\n parser=argparse.ArgumentParser(description=__doc__)\n parser.add_argument('exe',type=Path);parser.add_argument('native_library',type=Path)\n parser.add_argument('--output',type=Path,required=True)\n parser.add_argument('--cases',type=int,default=600);parser.add_argument('--seed',type=int,default=408600)\n args=parser.parse_args();oracle_exe=args.exe;oracle_library=args.native_library.resolve()\n raise SystemExit(run(args.cases,args.seed,args.output))"
+        }
+      ]
+    },
+    {
+      "source": "/private/tmp/sadx-message-queue-stage/proofs/verify_late_sprite.py",
+      "source_sha256": "c7468dbdaa5e2761bbb544acd350513a479f2a867c57ceeedbb3ac90b849260d",
+      "target": "tools/oracles/verify_original_late_sprite.py",
+      "target_sha256": "8d6e5356c0f8bab7e29a70e0447b487850729405f8ac6edc2eb41b8cfdac51ee",
+      "io_transforms": [
+        {
+          "before": "root=Path('/Users/burbujamc/Developer/sadx-macos');stage=Path('/private/tmp/sadx-message-queue-stage');sys.path[:0]=[str(root/'tools/lib'),str(root/'tools/oracles')]",
+          "after": "root=Path(__file__).resolve().parents[2];sys.path[:0]=[str(root/'tools/lib'),str(root/'tools/oracles')]"
+        },
+        {
+          "before": "PEImage(root/'reference/updated-pc-reference/game/sonic.exe')",
+          "after": "PEImage(oracle_exe)"
+        },
+        {
+          "before": "ctypes.CDLL(str(stage/'late.dylib'))",
+          "after": "ctypes.CDLL(str(oracle_library))"
+        },
+        {
+          "before": "(stage/'proofs'/output).write_text",
+          "after": "Path(output).write_text"
+        },
+        {
+          "before": "if __name__=='__main__':raise SystemExit(run())",
+          "after": "if __name__=='__main__':\n import argparse\n parser=argparse.ArgumentParser(description=__doc__)\n parser.add_argument('exe',type=Path);parser.add_argument('native_library',type=Path)\n parser.add_argument('--output',type=Path,required=True)\n parser.add_argument('--cases',type=int,default=1000);parser.add_argument('--seed',type=int,default=404660)\n args=parser.parse_args();oracle_exe=args.exe;oracle_library=args.native_library.resolve()\n raise SystemExit(run(args.cases,args.seed,args.output))"
+        }
+      ]
+    },
+    {
+      "source": "/private/tmp/sadx-message-queue-stage/proofs/verify_center_sprite.py",
+      "source_sha256": "95470599a9a1ad0f3d24acff8009b89f6133045bb5c03763b98430260d73285b",
+      "target": "tools/oracles/verify_original_center_screen_sprite.py",
+      "target_sha256": "c1791d672e2e93aa75222c55942528793c56302e87e944e22d3572538ba9987d",
+      "io_transforms": [
+        {
+          "before": "from verify_late_sprite import Source,root,stage,PEImage,STACK,STOP,DATA",
+          "after": "from verify_original_late_sprite import Source,root,PEImage,STACK,STOP,DATA"
+        },
+        {
+          "before": "PEImage(root/'reference/updated-pc-reference/game/sonic.exe')",
+          "after": "PEImage(oracle_exe)"
+        },
+        {
+          "before": "ctypes.CDLL(str(stage/'center.dylib'))",
+          "after": "ctypes.CDLL(str(oracle_library))"
+        },
+        {
+          "before": "(stage/'proofs'/output).write_text",
+          "after": "Path(output).write_text"
+        },
+        {
+          "before": "if __name__=='__main__':raise SystemExit(run())",
+          "after": "if __name__=='__main__':\n import argparse\n parser=argparse.ArgumentParser(description=__doc__)\n parser.add_argument('exe',type=Path);parser.add_argument('native_library',type=Path)\n parser.add_argument('--output',type=Path,required=True)\n parser.add_argument('--cases',type=int,default=1200);parser.add_argument('--seed',type=int,default=401070)\n args=parser.parse_args();oracle_exe=args.exe;oracle_library=args.native_library.resolve()\n raise SystemExit(run(args.cases,args.seed,args.output))"
+        }
+      ]
+    },
+    {
+      "source": "/private/tmp/sadx-message-queue-stage/proofs/verify_end_borrow.py",
+      "source_sha256": "6ac45383b646f032181fc39c9a28f7f5af679199276890d8d3bf0250fe0fef05",
+      "target": "tools/oracles/verify_original_end_borrow.py",
+      "target_sha256": "1247c600f7ab405e996d628ff36fc9b27e48b82d783c872206c12af4bd77f25c",
+      "io_transforms": [
+        {
+          "before": "from pathlib import Path",
+          "after": "from pathlib import Path\nimport argparse\nparser=argparse.ArgumentParser(description=__doc__)\nparser.add_argument('exe',type=Path);parser.add_argument('native_library',type=Path)\nparser.add_argument('--output',type=Path,required=True)\nargs=parser.parse_args()\n"
+        },
+        {
+          "before": "from verify_late_sprite import Source,root,stage,PEImage,STACK,STOP",
+          "after": "from verify_original_late_sprite import Source,root,PEImage,STACK,STOP"
+        },
+        {
+          "before": "PEImage(root/'reference/updated-pc-reference/game/sonic.exe')",
+          "after": "PEImage(args.exe)"
+        },
+        {
+          "before": "ctypes.CDLL(str(stage/'borrow.dylib'))",
+          "after": "ctypes.CDLL(str(args.native_library.resolve()))"
+        },
+        {
+          "before": "(stage/'proofs/borrow.json').write_text",
+          "after": "args.output.write_text"
+        }
+      ]
+    }
+  ],
+  "registrations": {
+    "units": [
+      "save-creation",
+      "save-write",
+      "save-frame",
+      "native-message-texture",
+      "native-message-texture-metal",
+      "message-queue-resources",
+      "saved-fov-reference",
+      "native-input-reset",
+      "ui-scale-profile",
+      "message-font-assets"
+    ],
+    "oracle_overrides": [
+      [
+        "save_prepare",
+        "build/native-save-creation-probe.dylib",
+        "tools/oracles/verify_original_save_prepare.py \"$(GAME_EXE)\" build/native-save-creation-probe.dylib --input-dll \"$(INPUT_DLL)\" --output build/oracles/save_prepare.json"
+      ],
+      [
+        "save_request",
+        "build/native-save-creation-probe.dylib",
+        "tools/oracles/verify_original_save_request.py \"$(GAME_EXE)\" build/native-save-creation-probe.dylib --output build/oracles/save_request.json"
+      ],
+      [
+        "save_completion",
+        "build/native-save-creation-probe.dylib",
+        "tools/oracles/verify_original_save_completion.py \"$(GAME_EXE)\" build/native-save-creation-probe.dylib --output build/oracles/save_completion.json"
+      ],
+      [
+        "save_write",
+        "build/native-save-creation-probe.dylib",
+        "tools/oracles/verify_original_save_write.py \"$(GAME_EXE)\" build/native-save-creation-probe.dylib --output build/oracles/save_write.json"
+      ],
+      [
+        "message_reload",
+        "build/native-message-image-probe.dylib",
+        "tools/oracles/verify_original_message_reload.py \"$(GAME_EXE)\" build/native-message-image-probe.dylib --output build/oracles/message_reload.json"
+      ],
+      [
+        "palette",
+        "build/native-message-image-probe.dylib",
+        "tools/oracles/verify_original_palette.py \"$(GAME_EXE)\" build/native-message-image-probe.dylib --output build/oracles/palette.json"
+      ],
+      [
+        "palette_initial",
+        "build/native-message-image-probe.dylib",
+        "tools/oracles/verify_original_palette_initial.py \"$(GAME_EXE)\" build/native-message-image-probe.dylib --output build/oracles/palette_initial.json"
+      ],
+      [
+        "message_text",
+        "build/native-message-text-probe.dylib",
+        "tools/oracles/verify_original_message_text.py \"$(GAME_EXE)\" build/native-message-text-probe.dylib --font-directory \"$(GAME_SYSTEM)\" --output build/oracles/message_text.json"
+      ],
+      [
+        "native_input_reset",
+        "build/native-input-reset-probe.dylib",
+        "tools/oracles/verify_original_native_input_reset.py \"$(INPUT_DLL)\" \"$(GAME_EXE)\" build/native-input-reset-probe.dylib --output build/oracles/native_input_reset.json"
+      ],
+      [
+        "ui_scale_profile",
+        "build/native-ui-scale-profile-probe.dylib",
+        "tools/oracles/verify_original_ui_scale_profile.py \"$(LOADER_DLL)\" build/native-ui-scale-profile-probe.dylib --output build/oracles/ui_scale_profile.json"
+      ]
+    ],
+    "main_reports": [
+      {
+        "slug": "main_menu",
+        "source": "/Users/burbujamc/Developer/sadx-macos/build/oracles/main_menu.json",
+        "raw_sha256": "2b0a749c09f5c4ed5b80b323c4fcf4c1ff718a26d4ca4163361a2ac952e6a586",
+        "raw_bytes": 3390,
+        "verdict": [
+          "partial",
+          "values match; fp_flag_mismatches=163 (see limits)"
+        ],
+        "rerun_by_worker": false
+      },
+      {
+        "slug": "menu_eligibility",
+        "source": "/Users/burbujamc/Developer/sadx-macos/build/oracles/menu_eligibility.json",
+        "raw_sha256": "8be8134d733a4ae716bb56c5c05b87bc60d6e7d0a6464f603a808d31e9dc2034",
+        "raw_bytes": 1496,
+        "verdict": [
+          "pass",
+          "passed"
+        ],
+        "rerun_by_worker": false
+      },
+      {
+        "slug": "main_menu_eligibility",
+        "source": "/Users/burbujamc/Developer/sadx-macos/build/oracles/main_menu_eligibility.json",
+        "raw_sha256": "45a1f995d4a63aefe6f223c3c08313674b80f585ec2e77f997f72df28316397a",
+        "raw_bytes": 522,
+        "verdict": [
+          "pass",
+          "passed"
+        ],
+        "rerun_by_worker": false
+      },
+      {
+        "slug": "main_menu_content",
+        "source": "/Users/burbujamc/Developer/sadx-macos/build/oracles/main_menu_content.json",
+        "raw_sha256": "e2a92e9762106dcbcffa53b896b7f1094d5570f876726eede6fa8a9e03990e59",
+        "raw_bytes": 1315,
+        "verdict": [
+          "partial",
+          "values match; fp_flag_mismatches=3540 (see limits)"
+        ],
+        "rerun_by_worker": false
+      },
+      {
+        "slug": "menu_dialog_control",
+        "source": "/Users/burbujamc/Developer/sadx-macos/build/oracles/menu_dialog_control.json",
+        "raw_sha256": "6b3f9bed0017a32730940ca23d13852665eb8ca16be0ed989886adbe8c9197df",
+        "raw_bytes": 1715,
+        "verdict": [
+          "pass",
+          "passed"
+        ],
+        "rerun_by_worker": false
+      },
+      {
+        "slug": "menu_navigation",
+        "source": "/Users/burbujamc/Developer/sadx-macos/build/oracles/menu_navigation.json",
+        "raw_sha256": "0e92d3373d40549abf4b677a691cbac85053e92791e34091fe1fda1323b975b3",
+        "raw_bytes": 1292,
+        "verdict": [
+          "pass",
+          "passed"
+        ],
+        "rerun_by_worker": false
+      },
+      {
+        "slug": "menu_dialog_square",
+        "source": "/Users/burbujamc/Developer/sadx-macos/build/oracles/menu_dialog_square.json",
+        "raw_sha256": "7bf1a084d03961d03693f4548efcb0b84781474d9e9cb7f79f6d7dea4d939e3b",
+        "raw_bytes": 1363,
+        "verdict": [
+          "partial",
+          "values match; fp_flag_mismatches=1646 (see limits)"
+        ],
+        "rerun_by_worker": false
+      }
+    ]
+  },
+  "proposed_files": {
+    "Makefile": "d6deb582cb54dde292dd8fb5a8812108b254454edf2131a565f9b0fc51380577",
+    "reference/oracle-reports/main_menu.json": "840459480a9e287fcc6c0395247768a40aeffb80dade593dac6b1a6aef32fe75",
+    "reference/oracle-reports/main_menu_content.json": "80ff6aebfb7ee7806b8a8a275584dc7148147b6b827535e82604ef4b0906ef2d",
+    "reference/oracle-reports/main_menu_eligibility.json": "2a33db188507e482028c2040e1ce477774aa9e21462dc8c4c54a8aabfa6f01b2",
+    "reference/oracle-reports/menu_dialog_control.json": "436ba2f3ef3f4dba6ca2fc29b1fb4f3f4d0c5b46da0a5ac85c5d91311c62a3f2",
+    "reference/oracle-reports/menu_dialog_square.json": "83b7a4ec701856b1977aa4137500a270cd0ce2f0bca4924307e3d1aa75711bd7",
+    "reference/oracle-reports/menu_eligibility.json": "d94ec10916ada8a4ec50809c9ab8a9b69c1459224a441921d022f66a44f293cb",
+    "reference/oracle-reports/menu_navigation.json": "31cfe34975290e14f73963248a28fc21f414aaed6ec1a2ba01c03183767ef8cb",
+    "tests/probes/native_center_screen_sprite_probe.cpp": "3284d5000cdcd2fd23b92e9719bc0d6d415ef8498371a5605dd0673f1e82746f",
+    "tests/probes/native_empty_queue_probe.cpp": "f226f4a0caa31e1550ab9ee8c901ff3371dfeece1ebd816e2ef2ad70a446befb",
+    "tests/probes/native_end_borrow_probe.cpp": "3b1a42a506862cfb46e33dd9a056432825b4c3dad5884d6fc7c507eb4e27a7e4",
+    "tests/probes/native_file_select_display_probe.cpp": "c961e88cfa5b92bae8682bb781f14b19283b0b7ba875efc15bbf71fd70a7a59a",
+    "tests/probes/native_game_frame_owners_probe.cpp": "92053bc2e7bdfc33b2f108116b92fcecbcd1fa4e03021509d002e63e51c98f88",
+    "tests/probes/native_game_view_probe.cpp": "57abcdb06f2faa6d7b45f452699ae1afea2348ee5c1587be0e1bd5987c7bb686",
+    "tests/probes/native_input_reset_probe.cpp": "36db557ae4a0a993fb5c79b88cb08c8bf39b1c599bc5b5cb4d8fb6064d2e53ba",
+    "tests/probes/native_late_sprite_probe.cpp": "fb2e648c48bf1b9ec1cba091bae07a09db1c1ad29efe2317d171fa889ba2b043",
+    "tests/probes/native_main_menu_probe.cpp": "f298a3ecbdeadbcca71591c31eb6faa961f38bc032bd2be25801f7cc304d0f82",
+    "tests/probes/native_message_frame_probe.cpp": "1bd60a04986622f363d29443fb4ac04115c490fe9467f7dc5e7d182271eedfad",
+    "tests/probes/native_message_image_probe.cpp": "990726b2db49d3fe9d712127dc01158bc91d0a382bbf21c9db60895882dfc04e",
+    "tests/probes/native_message_text_probe.cpp": "00c45f7c81f8fea3c74b9cafb9e84adcd9bc5c04e7206d85b22de335bdb33107",
+    "tests/probes/native_message_texture_probe.cpp": "b76553d1c319609e79d056f82db124783cede99b31ac415ac67a2366d8a78120",
+    "tests/probes/native_save_creation_probe.cpp": "7b97306fb3d911a3b675906b498b54f40e5319e7bece3c290d010bb525760f92",
+    "tests/probes/native_save_frame_probe.cpp": "a7164374ac895f6e04808b3a23083bd16ad161408e172b791ddabf70b617bcbf",
+    "tests/probes/native_saving_message_probe.cpp": "2a9b7855eeb8a5782aa74f1f533afd660d65740f4b1d07f0e048a72d5080eb85",
+    "tests/probes/native_ui_scale_profile_probe.cpp": "417784467908c4fb939b3af4dccdaa9af81a38ea8a7201f47085787053a1d725",
+    "tests/python/test_message_font_publication.py": "1c358aeb9562d92ae4a7bff51c5ac41c6b19bed737f0b19c0bac541a2b7ec837",
+    "tests/python/test_message_fonts.py": "fcc6b5ce39704ca8662fcce2cbbba56ea8216db3ef1526aca0b022e9fdd0cd07",
+    "tests/unit/game_frame_owners.cpp": "bf9780a141cda3055c631d56215ba99c71c165c33b46e25718ca5d4156cb5572",
+    "tests/unit/game_view.cpp": "a5e6a60bac5620ce01e62cd1c6289a6c93194bb95c57834e5c0c94bd96651828",
+    "tests/unit/manifest.tsv": "02df2849ae6d956727b292ca8b7fa7984d12a0a44173ba49addc8e0a3cd8d82d",
+    "tests/unit/message_font_assets.mm": "a070e2fcc538f28c1feaa995a604d2aafa240acd4bf6bcde991b4e81796f6592",
+    "tests/unit/message_queue_resources.cpp": "df2ca75b318cfb0fac88cbfc4691a78da23d774e8159431796de6d41f2f1136e",
+    "tests/unit/native_input_reset.cpp": "1ef601cad5d660990c9dfcc9b31dd3ea609133d01bb3086ac8a59a0444277773",
+    "tests/unit/native_message_texture.cpp": "28510de7728ab76ac0dc55dec4ed9d5c404d66e63ae754ca853120d2f64388f6",
+    "tests/unit/native_message_texture_metal.mm": "00334b08d39071cd65b447de189a0a05d4014160f57a0332071f9473059f50f2",
+    "tests/unit/save_creation.cpp": "11312f59661c8b0b83304379f8187cf38a17ab90e982a8f7ad7bb4c43554cbcd",
+    "tests/unit/save_frame.cpp": "20ff9563a4d87b74a0b117d603cb20d56421692a71ca93c9eb7bf2cd7ba4130f",
+    "tests/unit/save_write.cpp": "416797df92f00bf59601813a619caadea0daf6a3236f235315488ea11663bd09",
+    "tests/unit/saved_fov_reference.cpp": "f3e878926536d15fedaa154635d34a1ef55096d60005f8515aaa2dfb9c7d7482",
+    "tests/unit/ui_scale_profile.cpp": "572636a4b17de14f84b01476cf14ab09b7c6b830bf0e61cdeff1128a92903bb4",
+    "tools/gate/profile_patches.json": "926395f83d0c5d92455ef93df91c950718057ae77b99622fb8e1e19cbf0f0e1e",
+    "tools/oracles/manifest.tsv": "0258d43a10068ed58a3d68b93c2a975b9ed2f60f0e3228dcdfb025b5adca9a1c",
+    "tools/oracles/verify_original_center_screen_sprite.py": "c1791d672e2e93aa75222c55942528793c56302e87e944e22d3572538ba9987d",
+    "tools/oracles/verify_original_empty_queue.py": "0fa5737c7349efc792ffb49765a206a6bb17905bc5f146e5bdd54ead2c4f76d3",
+    "tools/oracles/verify_original_end_borrow.py": "1247c600f7ab405e996d628ff36fc9b27e48b82d783c872206c12af4bd77f25c",
+    "tools/oracles/verify_original_late_sprite.py": "8d6e5356c0f8bab7e29a70e0447b487850729405f8ac6edc2eb41b8cfdac51ee",
+    "tools/oracles/verify_original_message_frame.py": "22ab05f3569f788a69380221cc9093dc4fa7fa4bbece8627d3147d77d0aa7355",
+    "tools/oracles/verify_original_message_image.py": "167887fc45984b15e80591c0e1fc088fb45b3e18709510f3c3942350e1cdfe07",
+    "tools/oracles/verify_original_message_reload.py": "dd99b58a8ca33d58fed6c097ec5a11c58d4a5a2aedc6d0cafdd09140a4ae559b",
+    "tools/oracles/verify_original_message_text.py": "a819782e4a6f7e4329092fc5e6387fac779d65688adbc8baa880cf3d9348008f",
+    "tools/oracles/verify_original_message_texture.py": "200fd7cdf8c187a59595bd143052998f5abbb8c9826f7103199f86997bd3160f",
+    "tools/oracles/verify_original_native_input_reset.py": "e1c34afb4cf94ba12a040b3cce2da5cd3fe350e62e0915a867237cb0bacee23b",
+    "tools/oracles/verify_original_palette.py": "81402d0eaf28e737c859dbaa10535af1d501e158ce307585fcf3df78005584a2",
+    "tools/oracles/verify_original_palette_initial.py": "2a9a4775cc6f4f8342b3260b7937b5a8b3bf56775010236d9f0056fdee119afe",
+    "tools/oracles/verify_original_save_completion.py": "ec92ebfbbd9a67c108ea35200bccb0070756f61bc425cf8f70ecef3e696d00ba",
+    "tools/oracles/verify_original_save_creation.py": "52b7c4f6ea2b2b05992f2583363fec85428bfdf3c2a1bb3d1339d214aa496431",
+    "tools/oracles/verify_original_save_frame.py": "4bc1998b479827452c1ff178f51ad76948bb04d2936153e906f0db21b4d79e2c",
+    "tools/oracles/verify_original_save_prepare.py": "fee10382a67c5246bfab92578a0e6582931703d9c6fd2385d3518c1980318e11",
+    "tools/oracles/verify_original_save_request.py": "cd8d35807ff03eb2f1bbec64188c654552139013a350e2df33d36417a634adaf",
+    "tools/oracles/verify_original_save_write.py": "a99eca14677270d000d0047a7ac0de984ba317c577c8f82933f522863d6509ea",
+    "tools/oracles/verify_original_saving_message.py": "46af40486dbb4c2572ec7a57fac15c9ef2c8d508764da2f3866d03762a094431",
+    "tools/oracles/verify_original_ui_scale_profile.py": "5b1d9bf52646b7c100f27c3d5d6cde5030a1af805934ca087a9bb9184393c8b7"
+  },
+  "structural_validation": {
+    "python_syntax": "pass",
+    "unit_registrations": 245,
+    "oracle_targets": 208,
+    "io_transform_exact": "pass",
+    "patch_applies_to_HEAD_index": true,
+    "new_native_paths_exist_in_root_private_source": true,
+    "source_worktree_changes": 0,
+    "builds_run": false,
+    "gate_run": false,
+    "judge_manifest_refreshed": false
+  },
+  "changes_to_existing_protected_inputs": [
+    "Make shipping source closure and save-writer test link rule",
+    "SavedFov transport in game-view/game-frame-owner unit/probes; original fields and assertions retained",
+    "MainMenu/FileSelect probes consume real UI-scale owner and forwarding guard; ABI/input/output fixed",
+    "unit/oracle registration append",
+    "active404660 handled_by bounded forwarding receipt; active/config/source bytes unchanged"
+  ],
+  "limits": [
+    "Implementation is not in this worktree. No compile, native unit, oracle rerun or full gate is claimed.",
+    "Main seven report summaries are actual root Main build reports only; no fresh private implementation fingerprint claim.",
+    "Main FP partials remain partial: main_menu163, main_menu_content3540, menu_dialog_square1646.",
+    "Old private queue/backend test loops and masks preserved; only CLI/source/library/output paths adapted. Runtime execution still required after implementation lands.",
+    "No commit or judge-manifest refresh. Root must independently review proposed protected diff, integrate source separately, refresh manifest with this evidence and run full gate.",
+    "No modified source, live asset publication, runtime attachment, journey or GPU-delivery claim."
+  ],
+  "patch": {
+    "path": "/private/tmp/sadx-message-font-delivery-stage/native-save-judge-protected.patch",
+    "sha256": "78d4aae06cb315db01c13b61153db8b731f023bda06d98859cbd706a1b89e099",
+    "bytes": 247305
+  }
+}

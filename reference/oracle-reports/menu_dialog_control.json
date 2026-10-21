@@ -1,0 +1,32 @@
+{
+ "passed": true,
+ "values_match": true,
+ "cases": 4116,
+ "executed": 4116,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_ranges": {
+  "0x432580": "7ea9ee2ac30d4646e4432c25b2f6dda4d09feb566e5990bdae227a64ae30d5e3",
+  "0x4325b0": "ca33a4bf249cce22b502e041a88f8ff3c51b240b87083101e037584685282614",
+  "0x4325c0": "c195035193593174fed0eda0d23e1e5ab65063a303fcb9d188063a7aa2326ead",
+  "0x432cb0": "99afe914d545e28fa20044b4c72868fd52059171a74ee13f6875e8ec6fe10418",
+  "0x5057d0": "e993b1a8df815fae5b12a89cff587fd2621f6533eb3bb6f85759139c8eca1a33",
+  "0x5057f0": "d9273caeb3c1d589396bb2395af2778b374c1fe907dfeecf88f27cb618cf5ee0"
+ },
+ "native_sources": {
+  "src/game/menu_dialog_control.hpp": "10de3160686253db80a9fdac3b605ff3908073ec416a52e9f607aab18338b9a5",
+  "src/game/menu_dialog_control.cpp": "e14f08443aefb4fdc9616a1ef8221996a8d060049db562a9b8774b73d751dd22",
+  "tests/probes/native_menu_dialog_control_probe.cpp": "48640167f4f552de2fda0e5188bf2e02a3eac75829370223e6a321b1531c7efe"
+ },
+ "native_library_sha256": "3f6bde5a26489b019b03333c55795d145c5abf70b7c6b5fd31b0de870b26cae4",
+ "limits": [
+  "All six actual source entries plus full SetDialogCursor and normal open execute; only actual sound callee423d70 is a receipt. AX-only source idle result compares semantic16-bit return. Real resource choices include aliases/overlap and audio callback canonical-owner mutation. Missing task/work and invalid resource definitions remain explicit native errors; successful original executions require valid owners and terminated bounded choices. No native visible MainMenu/gameplay claim."
+ ],
+ "tracked_summary": {
+  "full_sha256": "6b3f9bed0017a32730940ca23d13852665eb8ca16be0ed989886adbe8c9197df",
+  "full_bytes": 1715,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

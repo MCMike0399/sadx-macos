@@ -65,13 +65,20 @@ NATIVE_SOURCES += src/engine/ninja_sprite_queue.cpp src/engine/ninja_render.cpp 
  src/game/main_menu.cpp src/game/main_menu_content.cpp src/game/main_menu_eligibility.cpp \
  src/game/menu_eligibility.cpp src/game/menu_dialog_control.cpp src/game/menu_navigation.cpp \
  src/engine/menu_square.cpp)
+# Fresh-save resources and message rendering ship from maintained source only.
+NATIVE_SOURCES += src/game/save_creation.cpp src/game/save_completion.cpp src/game/save_write.cpp \
+ src/game/save_frame.cpp src/game/saving_message.cpp src/game/message_text.cpp \
+ src/game/message_texture.cpp src/game/message_frame.cpp src/engine/ui_scale_profile.cpp \
+ src/engine/native_message_texture.cpp src/engine/native_texture_palette.cpp \
+ src/engine/message_sprite_queue.cpp src/engine/message_sprite_profile.cpp \
+ src/engine/queue_blank_frame.cpp src/engine/screen_sprite.cpp
 # Native engine adapters and runtime compositions use these explicit naming scopes.
 NATIVE_SOURCES := $(sort $(NATIVE_SOURCES) $(wildcard src/engine/*_native.cpp src/runtime/native_*.cpp))
 NATIVE_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(NATIVE_SOURCES))
 NATIVE_PLATFORM_OBJECTS := build/obj/platform/mac/mac_clock.o build/obj/platform/mac/mac_audio.o \
  build/obj/platform/mac/hid_switch_controller.o build/obj/platform/mac/mac_movie.o build/obj/platform/mac/metal_device_frame.o
 NATIVE_PLATFORM_OBJECTS += $(patsubst src/%.mm,build/obj/%.o,$(wildcard src/platform/mac/mac_audio_playback.mm src/platform/mac/mac_sound_bank.mm src/platform/mac/mac_sound_effects.mm))
-NATIVE_PLATFORM_OBJECTS += $(patsubst src/%.cpp,build/obj/%.o,$(wildcard src/platform/mac/mac_sound_bank.cpp src/platform/mac/mac_save_files.cpp))
+NATIVE_PLATFORM_OBJECTS += $(patsubst src/%.cpp,build/obj/%.o,$(wildcard src/platform/mac/mac_sound_bank.cpp src/platform/mac/mac_save_files.cpp src/platform/mac/mac_save_writer.cpp))
 MAC_SOURCES := $(wildcard src/platform/mac/*.cpp src/platform/mac/*.mm)
 MAC_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(filter %.cpp,$(MAC_SOURCES))) $(patsubst src/%.mm,build/obj/%.o,$(filter %.mm,$(MAC_SOURCES)))
 UNIT_SOURCES := $(wildcard tests/unit/*.cpp)
@@ -182,7 +189,7 @@ controllers: all
 # additionally link libsadx-macos and the frameworks; tests/unit/guest_<name>.cpp link the guest + Unicorn.
 .SECONDEXPANSION:
 # Address-shaped boot/mode interpreters are reference adapters.
-REFERENCE_UNIT_TARGETS := build/save-name-reference-test build/library-initial-state-test build/game-library-init-test build/player-scene-position-test build/ninja-fog-initial-state-test build/game-frame-owners-test build/game-view-initial-state-test build/ninja-fog-test build/ninja-queue-consumer-test build/game-view-test \
+REFERENCE_UNIT_TARGETS := build/saved-fov-reference-test build/save-name-reference-test build/library-initial-state-test build/game-library-init-test build/player-scene-position-test build/ninja-fog-initial-state-test build/game-frame-owners-test build/game-view-initial-state-test build/ninja-fog-test build/ninja-queue-consumer-test build/game-view-test \
  build/game-frame-control-test build/reference-frame-control-test build/game-logic-test build/game-logic-support-test build/game-loop-test build/game-startup-test build/ninja-device-init-test build/ninja-frame-calls-test build/ninja-screen-test build/ninja-queue-lifecycle-test \
  build/game-mode-test build/game-mode-leaves-test build/game-runtime-test \
  build/player-acceleration-ground-test build/player-acceleration-alternate-test \
@@ -431,3 +438,7 @@ build/native-game-view-native-probe.dylib: tests/probes/native_game_view_native_
 
 build/native-load-selected-save-probe.dylib: tests/probes/native_load_selected_save_probe.cpp tests/probes/native_save_file_list_probe.cpp build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) $< build/libsadx-core.a -o $@
+
+# Save writer filesystem qualification links the maintained backend directly.
+build/save-write-test: tests/unit/save_write.cpp src/platform/mac/mac_save_writer.cpp build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/save_write.cpp src/platform/mac/mac_save_writer.cpp build/libsadx-core.a -o $@

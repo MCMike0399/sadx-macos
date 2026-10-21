@@ -1,5 +1,6 @@
 #include "guest/frame_control_reference.hpp"
 #include "game/game_view.hpp"
+#include "guest/saved_fov_reference.hpp"
 #include <algorithm>
 #include <cstring>
 #include <vector>
@@ -21,14 +22,16 @@ extern "C" int sadx_native_game_view(const std::uint8_t* k,std::size_t ks,const 
     const std::optional<std::uint32_t> depth_mode=in[14];const std::array<std::optional<std::uint32_t>,3> w840{{1,2,3}},w858{{4,5,6}};std::array<std::optional<std::uint32_t>,3> w898{{0,0,0}},w84c{{0,0,0}};
     sadx::NinjaQueueLifecycleOwners lifecycle{queue,q,consumer,timing,projection,initial,&depth,c[5],c[6],depth_mode,w840,w898,w858,w84c};
     std::optional<std::uint8_t> pending=static_cast<std::uint8_t>(in[1]);std::optional<std::uint32_t> mode28114=7;
-    sadx::GameViewState v{f(in[2]),f(in[3]),c[0],c[1],c[2],c[3],c[4],pending,mode28114,{},in[4],{},{},{},{},{},{},in[5],{},{},{},view_color};
+    sadx::view::SavedFovState saved_fov;
+    sadx::reference::SavedFovReference saved_fov_reference;
+    sadx::GameViewState v{f(in[2]),f(in[3]),c[0],c[1],c[2],c[3],c[4],pending,mode28114,{},in[4],{},{},{},{},{},{},in[5],{},saved_fov,[&] { saved_fov_reference.observe_write(); },{},view_color};
     sadx::GameViewRuntime rt{v,lifecycle,in[16],[&](const sadx::GameViewCall& call){trace.push_back({call.callee,call.source_call,call.arguments[0].value_or(0),call.arguments[1].value_or(0)});
         return sadx::GameLogicOwnerResult{fail()?sadx::GameLogicOwnerState::failed:sadx::GameLogicOwnerState::completed,0,{}};}};
     sadx::X87Context fp(static_cast<std::uint16_t>(in[0]));const auto r=sadx::run_game_view_4208e0(rt,fp);std::fill(out,out+capacity,0);
     out[0]=static_cast<std::uint32_t>(r.failure);out[1]=r.completed;out[2]=q.mode_at_3ab98ac.value_or(0xdeadbeef);out[3]=mode28114.value_or(0);out[4]=v.word_at_3abd9cc.value_or(0xdeadbeef);
     const auto o=[&](const std::optional<float>& x){return x?bits(*x):0xdeadbeefU;};out[5]=o(v.view_at_3b28098);out[6]=o(v.view_at_3b2809c);out[7]=o(v.view_at_3b280a0);out[8]=o(v.view_at_3b280a4);
     out[9]=projection.scale_at_3d0f9e0?bits(*projection.scale_at_3d0f9e0):0xdeadbeef;out[10]=v.projection_words_at_3d0f9ec.value_or(0xdeadbeef);out[11]=v.projection_words_at_3d0f9f0.value_or(0xdeadbeef);
-    out[12]=v.fov_at_3aad0bc.value_or(0);out[13]=v.fov_copy_at_3ab98ec.value_or(0xdeadbeef);out[14]=v.word_at_3b2cbb4.value_or(0xdeadbeef);
+    out[12]=v.fov_at_3aad0bc.value_or(0);out[13]=v.fov_copy_at_3ab98ec.value_or(0xdeadbeef);out[14]=saved_fov_reference.export_value(saved_fov).value_or(0xdeadbeef);
     for(unsigned i=0;i<4;++i){out[15+i]=v.clear_colors_at_3ce7174[i].value_or(0xdeadbeef);out[19+i]=q.color_at_3ab9864?bits((*q.color_at_3ab9864)[i]):0;out[23+i]=projection.color_argb_at_3d0f7f0?bits((*projection.color_argb_at_3d0f7f0)[i]):0xdeadbeef;}
     out[27]=q.captured_word_at_3d0f9c8.value_or(0xdeadbeef);out[28]=q.captured_word_at_3d0f840.value_or(0xdeadbeef);out[29]=q.captured_word_at_3d0f9c4.value_or(0xdeadbeef);out[30]=render.packed_blend_at_3ab9890.value_or(0);
     out[31]=static_cast<std::uint32_t>(trace.size());for(std::size_t i=0;i<trace.size()&&i<20;++i)std::copy(trace[i].begin(),trace[i].end(),out+32+4*i);

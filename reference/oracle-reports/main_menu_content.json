@@ -1,0 +1,26 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_cluster_sha256": "cbc628072d4d7c47997d56f3d1e9884078362de1d6a24684195c7433f2deeee5",
+ "passed": false,
+ "values_match": true,
+ "cases": 3612,
+ "executed": 3612,
+ "mismatches": 0,
+ "fp_flag_mismatches": 3540,
+ "first_mismatches": [],
+ "native_sources": {
+  "src/game/main_menu_content.hpp": "b0b5784ce4eeff1ea1e9b74bd3a48ed6b4b28b2276c6584ed4e1d501048876ac",
+  "src/game/main_menu_content.cpp": "8b374c36a5a780e6d823a45f003f2ef9c8d9536d4b117486a5adefdf70ed7383",
+  "tests/probes/native_main_menu_content_probe.cpp": "24256509b4743632dc64d2f96cbc7a33a3295146a8b08b2ebe17720bc4ed4531"
+ },
+ "native_library_sha256": "e030a88d088fba6ca049717647926bc7fe31f6284f7c2b6f124c9dee09e98ef2",
+ "limits": [
+  "Entire original 50b4e0/50b590 instructions run. Only actual select-texture, material, optional-entry predicate and scaled-draw callees are receipts. Eligibility predicate is independently recovered by its owner. Canonical imported four-float trial layout plus live mutation cases are exercised. Unicorn 2.1.4 reports different x87 precision flags from the native exact context; values and flags remain separate. General unmasked exception delivery and final rendered pixels remain unqualified."
+ ],
+ "tracked_summary": {
+  "full_sha256": "e2a92e9762106dcbcffa53b896b7f1094d5570f876726eede6fa8a9e03990e59",
+  "full_bytes": 1315,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

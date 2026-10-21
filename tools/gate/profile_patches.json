@@ -253,7 +253,7 @@
    "condition": "uiscale::initialize_common via setup_background_scale (FillModeBackground=2) -> runs once",
    "active": true,
    "source_ref": "uiscale.cpp:679",
-   "handled_by": null,
+   "handled_by": "src/engine/ui_scale_profile.cpp require_message_forwarding: pinned compiled njDrawSprite2D_Queue_r wrapper forwards only with the real persistent UI-scale state inactive; actual wrapper100ae290 and scale trampoline10038ef0 are judged by verify_original_ui_scale_profile.py. Runtime message drawing calls this guard on its shared state; active/scaled states stop explicitly. This is a bounded forwarding qualification, not general UIScale support.",
    "original_bytes": "51a17c11b103"
   },
   {

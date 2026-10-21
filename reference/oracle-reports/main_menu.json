@@ -1,0 +1,94 @@
+{
+ "passed": false,
+ "values_match": true,
+ "cases": 1602,
+ "tested": 1602,
+ "mismatches": 0,
+ "fp_flag_mismatches": 163,
+ "flag_examples": [
+  {
+   "case": 15,
+   "operation": 1,
+   "control_word": 127,
+   "original_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case": 16,
+   "operation": 1,
+   "control_word": 127,
+   "original_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case": 17,
+   "operation": 1,
+   "control_word": 127,
+   "original_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case": 18,
+   "operation": 1,
+   "control_word": 127,
+   "original_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case": 19,
+   "operation": 1,
+   "control_word": 127,
+   "original_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case": 20,
+   "operation": 1,
+   "control_word": 127,
+   "original_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case": 21,
+   "operation": 1,
+   "control_word": 127,
+   "original_flags": 0,
+   "native_flags": 32
+  },
+  {
+   "case": 22,
+   "operation": 1,
+   "control_word": 127,
+   "original_flags": 0,
+   "native_flags": 32
+  }
+ ],
+ "first_mismatches": [],
+ "seed": 506300,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_ranges": {
+  "0x50b630-0x50ba90": "234957963e0f98b66dce0f6f4ba0a6b5812c893763207ea43868f594142ef07c",
+  "0x50ba90-0x50bca1": "fd147f998129f1a5afd5e261d7a17708fcb3f9e3a9b6cee8282a3c7f12745b71",
+  "0x50bcb0-0x50bce5": "2c666d92e8faf40a49ff4824165358093a9638e40e0753b72ef75e4d72dd2472",
+  "0x50bd20-0x50bdd1": "fcd5d185c97b4357c4d105675854af965c0e46674d2d959662704b55157880db",
+  "0x50bde0-0x50bf16": "04d36dd5020a517edc2cee18341efb26c345799be7906b336487ec8b6b720af3"
+ },
+ "native_sources": {
+  "src/game/main_menu.hpp": "5ae39f7e0b52574ac8f3be5b78370d47df2acc420c1b5917f3ec4bce0c760bc7",
+  "src/game/main_menu.cpp": "2b3966f3e35dbcbb1d70ad8a947b74d74bdc197cade512fe4f6824aae4a7da13",
+  "tests/probes/native_main_menu_probe.cpp": "2645466b3ce54e555832570b949268fd7b25a33e7ae51ebe7f8b425ea96b4b76"
+ },
+ "limits": [
+  "FP status-only partials remain visible: values and draw receipts are exact, but Unicorn2.1.4 and native X87Context disagree on status/precision flags; recorded examples identify the actual flag bits. No FP comparison is relaxed.",
+  "Original entries execute fully. Service boundaries are ordered receipts; enable predicates, dialog engine, save application, character factory, fades and renderer have separate owners. Phase op uses the control service receipt; control entry is independently judged in op4.",
+  "Producer-reachable main dialog results through cancel6 are compared, including signed negative byte cases-128 and-1. An optional-disabled synthetic result6 maps outside the imported table and remains an explicit boundary rather than guessed data.",
+  "Runtime-facing draw_profiled compares against the original body only for the pinned loader identity view640x480/scales1; other views stop at an explicit boundary after blending/base color. Loader source bgscale.cpp23 and uiscale.h scale_trampoline define this bounded qualification.",
+  "Full serialized1392byte save and backup are compared after each operation; renderer receipts compare all8texture draws, not GPU pixels."
+ ],
+ "tracked_summary": {
+  "full_sha256": "2b0a749c09f5c4ed5b80b323c4fcf4c1ff718a26d4ca4163361a2ac952e6a586",
+  "full_bytes": 3390,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

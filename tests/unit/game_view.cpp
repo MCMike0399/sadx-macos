@@ -12,7 +12,8 @@ int main(){try{
     std::optional<std::uint32_t> depth_mode=0;std::array<std::optional<std::uint32_t>,3> a{},b{},c{},d{};
     sadx::NinjaQueueLifecycleOwners lifecycle{queue,q,consumer,timing,projection,initial,&depth,1.0F,-1.0F,depth_mode,a,b,c,d};
     std::optional<std::uint8_t> pending=0;std::optional<std::uint32_t> mode=7;const std::optional<std::array<float,4>> color=std::array<float,4>{0.5F,2,-2,1};
-    sadx::GameViewState v{1.0F,1.0F,640.0F,480.0F,0.5F,639.0F,479.0F,pending,mode,{},0x3f800000U,{},{},{},{},{},{},0x31c7U,{},{},{},color};
+    sadx::view::SavedFovState saved_fov;
+    sadx::GameViewState v{1.0F,1.0F,640.0F,480.0F,0.5F,639.0F,479.0F,pending,mode,{},0x3f800000U,{},{},{},{},{},{},0x31c7U,{},saved_fov,{},{},color};
     std::vector<std::uint32_t> calls;sadx::GameViewRuntime rt{v,lifecycle,0,[&](const sadx::GameViewCall& call){calls.push_back(call.callee);return sadx::GameLogicOwnerResult{sadx::GameLogicOwnerState::completed,0,{}};}};
     sadx::X87Context fp(0x27f);auto r=sadx::run_game_view_4208e0(rt,fp);
     require(r&&v.view_at_3b28098==640.0F&&v.view_at_3b280a4==240.0F&&projection.scale_at_3d0f9e0==1.0F&&calls==std::vector<std::uint32_t>{0x403180},"plain path: 640x480 view, no FOV call when unchanged");

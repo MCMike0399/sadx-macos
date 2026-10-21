@@ -1,0 +1,67 @@
+{
+  "purpose": "Require and protect actual native fresh-save creation/restart/confirm/cancel/reentry and its reviewed source resources. Existing source-oracle tolerances/inputs/assertions are unchanged; reviewed whole-owner/profiling probe transports are surgical.",
+  "base_commit": "fe178cd",
+  "source_preparation": "native-save-judge-preparation.json",
+  "native_journey": {
+    "passed": true,
+    "execution": "native",
+    "create_frames": 1300,
+    "restart_frames": 2150,
+    "created_file": "SonicDX03.snc",
+    "save_sha256": "5eb5df01ffe807fb2c05681941f53dc98924ed3b5f72900a4e7dac88e42fdffe",
+    "save_checksum": 50276,
+    "saving_region_matches_reference": true,
+    "limits": [
+      "Fresh-save/MainMenu checkpoint only; CharacterSelect and gameplay remain separate.",
+      "The saving region alone is reference-image qualified; file ordering/calendar differ elsewhere.",
+      "No gameplay63FPS or new physical-controller qualification."
+    ]
+  },
+  "native_journey_first_attempt": {
+    "exit_status": 1,
+    "reason": "AudioQueueStart -66681 CannotStart during restart track open; retained failure, no retry/fix inside app/checker. Separate 100-generation audio start/dispose loop exit0; second full connected checker exit0."
+  },
+  "saving_region": {
+    "native_frame": 950,
+    "reference_frame": 952,
+    "region": [
+      455,
+      35,
+      635,
+      78
+    ],
+    "differing_pixels": 0,
+    "native_sha256": "3bef1326d9d91d38a113eade1a12ab27d095b4ed28d20d026641f4888f2e90a3",
+    "reference_sha256": "742c2eaba6744336da88f94ea0fba1504295620e47f58d6b56202460ce8ca5ee",
+    "reference_process_exit": 143,
+    "limits": [
+      "Normal-input fresh-save reference uses original task execution, separate COW-owned install clone.",
+      "Reference acquisition stopped with SIGTERM after required captures, not a successful completed-process claim.",
+      "File ordering/calendar differ elsewhere; no whole image parity claim.",
+      "Observed two-frame input delivery offset is bounded comparison, not globally resolved startup timing."
+    ]
+  },
+  "invisible_material_regression": {
+    "old_region_sha256": "ecd94aa092c4942cd92b10009b5c6fe9e8169ceb2bf348201c36a3af5dda1605",
+    "new_expected_source_region_sha256": "f49c8a15e9cadd8aab3e1ff1f9df608d91b5d588ccd5f972aa77831d05aec217",
+    "old_fails_new_checker": true
+  },
+  "prepublication_checker_corrections": [
+    "Save checksum is uint32 at encoded byte0, confirmed save_data.hpp/cpp; no published expectation changed.",
+    "Menu voice prerequisite is menu-voice.json, actual shipped catalog.",
+    "Cancel choice uses normal Right; Down does not change horizontal confirmation cursor.",
+    "Title ignores input until source timer150; reentry1950 follows actual source wait."
+  ],
+  "independent_reviews": [
+    "/private/tmp/fresh-save-composition-review.json",
+    "/private/tmp/sadx-font-delivery-independent-review-vav3t5bh/review-v3.txt",
+    "/private/tmp/sadx-message-profile-stage/final-packet-v2.json",
+    "/private/tmp/sadx-queue-blank-frame-stage/final-packet.json"
+  ],
+  "limits": [
+    "No CharacterSelect, gameplay,63FPS or new physical-controller claim.",
+    "Known FP partials retained in existing/new reports.",
+    "Original PVR temporary arena allocation equivalence remains unqualified; native immediate geometry has maintained array ownership.",
+    "Full gate remains pending until implementation is integrated."
+  ]
+}
