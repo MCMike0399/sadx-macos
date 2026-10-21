@@ -1,0 +1,8 @@
+{
+  "reason": "Add recovered file-select controls and drawing primitives to the explicit compiled native dependency closure. Existing tests, expectations and source selection are unchanged; pending source paths remain wildcard entries until their implementations land.",
+  "files": [
+    "src/game/file_select_controls.cpp",
+    "src/engine/menu_draw_primitives.cpp"
+  ],
+  "verification": "Make dependency declaration only. Main checkout integration and full gate follow with the actual implementations."
+}
