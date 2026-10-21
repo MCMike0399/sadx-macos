@@ -2221,7 +2221,7 @@
    "condition": "unconditional (GVR_Init from InitMods)",
    "active": true,
    "source_ref": "gvm.cpp:851",
-   "handled_by": null,
+   "handled_by": "src/engine/menu_draw_primitives.cpp draw_sized_texture: pinned GVR_Init clears the format-mask byte and always enables texture alpha. Both verify_original_menu_draw_primitives.py and full FileSelect display oracle execute effective00 byte, comparing quad/UV/color/state output.",
    "original_bytes": "38"
   },
   {
@@ -3565,7 +3565,7 @@
    "condition": "unconditional (InitMods)",
    "active": true,
    "source_ref": "dllmain.cpp:944",
-   "handled_by": null,
+   "handled_by": "src/game/file_select_display.cpp detail_panel: active loader75f0\u2192eb00 removes the65536-bind loop; native performs one FileCommon bind. verify_original_file_select_display.py executes the effectiveEB00 bytes and checks complete ordered resource receipts.",
    "original_bytes": "75f0"
   },
   {
@@ -3649,7 +3649,7 @@
    "condition": "FillModeBackground in 0..3 (2) -> bgscale::initialize() runs",
    "active": true,
    "source_ref": "bgscale.cpp:112",
-   "handled_by": null,
+   "handled_by": "src/game/file_select_display.cpp sky: pinned DrawTiledBG_AVA_BACK_r center/background scale_push/pop is identity for the qualified640x480/scale1 caller. Other display/scaling state throws explicitly. Source bgscale.cpp28 and uiscale.h scale_trampoline; upper original-body oracle reports the bounded wrapper qualification.",
    "original_bytes": "68907c0d01"
   },
   {

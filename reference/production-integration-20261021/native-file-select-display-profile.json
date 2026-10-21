@@ -1,0 +1,43 @@
+{
+  "scope": "Register three already implemented and source-verified FileSelect profile patches; no expectations or tolerances changed.",
+  "before": {
+    "exit_status": 1,
+    "unhandled_overlaps": 4
+  },
+  "handlers": {
+    "0x507bb0": "src/game/file_select_display.cpp sky: pinned DrawTiledBG_AVA_BACK_r center/background scale_push/pop is identity for the qualified640x480/scale1 caller. Other display/scaling state throws explicitly. Source bgscale.cpp28 and uiscale.h scale_trampoline; upper original-body oracle reports the bounded wrapper qualification.",
+    "0x50473e": "src/game/file_select_display.cpp detail_panel: active loader75f0\u2192eb00 removes the65536-bind loop; native performs one FileCommon bind. verify_original_file_select_display.py executes the effectiveEB00 bytes and checks complete ordered resource receipts.",
+    "0x433f4d": "src/engine/menu_draw_primitives.cpp draw_sized_texture: pinned GVR_Init clears the format-mask byte and always enables texture alpha. Both verify_original_menu_draw_primitives.py and full FileSelect display oracle execute effective00 byte, comparing quad/UV/color/state output."
+  },
+  "source_sha256": {
+    "src/game/file_select_display.cpp": "a4596294479f682826269a554d1b847465aa94a465524ab58626afa07462aa54",
+    "src/engine/menu_draw_primitives.cpp": "163b20359b1d1b0ae1f4342fc38797bafedc3aa70be96a2423fd9a9ef61bdad2",
+    "tools/oracles/verify_original_file_select_display.py": "e7017ffb0505b98178431d8f9e66a98b111a005479f7156b58015b4220e2ce5b",
+    "tools/oracles/verify_original_menu_draw_primitives.py": "d00991551c635de925b462dfd87009290b207e50e3c59bf711bf1ae689dfc374",
+    "reference/sadx-mod-loader/SADXModLoader/bgscale.cpp": "7e522b19f3cae7a0770784279ce1d31469e25298ebd40c0fc31e970ef1576fc4",
+    "reference/sadx-mod-loader/SADXModLoader/uiscale.h": "c846f17609948ce59e20b420bd137c4cb58f3c42d7cbb9da38e80fbf74800087",
+    "reference/sadx-mod-loader/SADXModLoader/dllmain.cpp": "00e17a72b9e720b6ee042b35d3642096b17a9395318755b7e4db5bb252915605",
+    "reference/sadx-mod-loader/SADXModLoader/gvm.cpp": "96d1d21050f40fb05dd5e9254b0244052e122957dfc4c94aef9b96316bdf5330"
+  },
+  "original_results": {
+    "file_select_display.json": {
+      "cases": 600,
+      "mismatch_count": 0,
+      "fp_flag_partials": 340
+    },
+    "menu_draw_primitives.json": {
+      "cases": 2434,
+      "mismatch_count": 0,
+      "fp_flag_partials": 1300
+    }
+  },
+  "limits": [
+    "640x480 scaling qualification remains bounded; wider UI scaling unimplemented.",
+    "FP flags remain partial; source call/quad values match.",
+    "First main integration gate exited2 because these four overlaps lacked tracking metadata; no failed gate was recorded as passing."
+  ],
+  "after": {
+    "exit_status": 0,
+    "unhandled_overlaps": 0
+  }
+}
