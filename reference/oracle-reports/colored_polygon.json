@@ -1,0 +1,255 @@
+{
+ "cases": 886,
+ "normal_cases": 884,
+ "normal_case_mismatch_count": 0,
+ "architectural_prefix_mismatches": 0,
+ "architectural_spill_checks": [
+  {
+   "case": 884,
+   "source_spill_observation": {
+    "pc": "0x77ea46",
+    "opcode": "d95c2420",
+    "control_word": 119,
+    "st0_significand": 9223372036854775808,
+    "st0_sign_exponent": 49300,
+    "device_state": [
+     0,
+     2,
+     1,
+     0,
+     1,
+     4,
+     2,
+     3,
+     2,
+     2
+    ],
+    "depth_calls": 0,
+    "unbind_calls": 0
+   },
+   "float32_overflow_from_finite_st0": true,
+   "overflow_mask_clear": true,
+   "source_prefix_before_device": true,
+   "native_exception_prefix_matches_architecture": true,
+   "raw_unicorn_failed": 0,
+   "raw_unicorn_draws": 1,
+   "raw_unicorn_flags": 0
+  },
+  {
+   "case": 885,
+   "source_spill_observation": {
+    "pc": "0x77ea46",
+    "opcode": "d95c2420",
+    "control_word": 119,
+    "st0_significand": 9223372036854775808,
+    "st0_sign_exponent": 16532,
+    "device_state": [
+     0,
+     2,
+     1,
+     0,
+     1,
+     4,
+     2,
+     3,
+     2,
+     2
+    ],
+    "depth_calls": 0,
+    "unbind_calls": 0
+   },
+   "float32_overflow_from_finite_st0": true,
+   "overflow_mask_clear": true,
+   "source_prefix_before_device": true,
+   "native_exception_prefix_matches_architecture": true,
+   "raw_unicorn_failed": 0,
+   "raw_unicorn_draws": 1,
+   "raw_unicorn_flags": 0
+  }
+ ],
+ "pinned_profile_control_word": 127,
+ "architectural_reference": "https://cdrdv2-public.intel.com/671110/325383-sdm-vol-2abcd.pdf FST/FSTP: unmasked overflow to memory suppresses store; instruction bytes and finite ST0 exponent independently establish the boundary.",
+ "unicorn_limit": "Raw two CW119 traces remain value mismatches: Unicorn2.1.4 silently stores overflowing float32 instead of trapping. Architectural checks are separate; expected execution is never replaced. Low-six FP flags also remain partial; unmasked status-flag exactness is unqualified.",
+ "profile_qualification": {
+  "kind": "original body with bounded active-hook forwarding",
+  "hook": "77e9f0 njDrawTriangle2D_r; original forwarded when uiscale::is_scale_enabled() is false",
+  "actual_caller": "FileSelect after background scale_pop, 640x480; pinned normal CW127",
+  "unreachable_hook": "77ea10 circle call requires bit0, cleared by positive flags normalization in4010d0",
+  "not_proved": "compiled loader wrapper execution; scaling-enabled behavior; full wrapper implementation",
+  "source_evidence": {
+   "reference/sadx-mod-loader/SADXModLoader/uiscale.cpp": "e19b958986520bdecd99ba1ce46ecac932fe179a24d2f63385ad84e26a05793b",
+   "reference/sadx-mod-loader/SADXModLoader/bgscale.cpp": "7e522b19f3cae7a0770784279ce1d31469e25298ebd40c0fc31e970ef1576fc4",
+   "tools/gate/profile_patches.json": "4fcfa89e12d2b0161da4f357dcd3d0e457b0c43d8257a20472a9efdd98d8db22"
+  }
+ },
+ "source_ranges": {
+  "0x4010d0": "0x40140f",
+  "0x77e9f0": "0x77eaca",
+  "0x78eab0": "0x78eb4f",
+  "0x791940": "0x79198b",
+  "0x78bba0": "0x78bbd0",
+  "0x78b780": "0x78b7f9",
+  "0x78b800": "0x78b83d"
+ },
+ "seed": 20261119,
+ "mismatch_count": 2,
+ "flag_mismatches": 646,
+ "values_match": false,
+ "passed": false,
+ "mismatches": [
+  {
+   "case": 884,
+   "input": [
+    119,
+    0,
+    1,
+    96,
+    0,
+    0,
+    0,
+    1139802112,
+    1142947840,
+    0
+   ],
+   "differences": [
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     0
+    ],
+    [
+     2,
+     5,
+     0
+    ],
+    [
+     3,
+     2,
+     0
+    ],
+    [
+     5,
+     1056964608,
+     0
+    ],
+    [
+     6,
+     1056964608,
+     0
+    ],
+    [
+     7,
+     1036831949,
+     0
+    ],
+    [
+     8,
+     1065353216,
+     0
+    ],
+    [
+     9,
+     4279312947,
+     0
+    ],
+    [
+     10,
+     1056964608,
+     0
+    ]
+   ]
+  },
+  {
+   "case": 885,
+   "input": [
+    119,
+    0,
+    2147483649,
+    96,
+    0,
+    0,
+    0,
+    1139802112,
+    1142947840,
+    0
+   ],
+   "differences": [
+    [
+     0,
+     0,
+     1
+    ],
+    [
+     1,
+     1,
+     0
+    ],
+    [
+     2,
+     5,
+     0
+    ],
+    [
+     3,
+     2,
+     0
+    ],
+    [
+     5,
+     1056964608,
+     0
+    ],
+    [
+     6,
+     1056964608,
+     0
+    ],
+    [
+     7,
+     1036831949,
+     0
+    ],
+    [
+     8,
+     1065353216,
+     0
+    ],
+    [
+     9,
+     4279312947,
+     0
+    ],
+    [
+     10,
+     1056964608,
+     0
+    ]
+   ]
+  }
+ ],
+ "limits": "Original4010d0 ->77e9f0 ->78eab0 colored strips, through actual D3D8 API calls.\n\nThe real alpha/filter/cache/strip instructions execute; device methods are receipts\nrecording their state and converted bytes. Projected-depth78dbe0 is a declared\nseeded FLD/RET service, independently covered by the existing projection oracle.\nDepth receipts can rebind the live texture cache to test the required second clear.\nNo GPU-pixel, projection-math or Windows driver-failure parity is asserted here.\n\nProfile qualification: the active loader njDrawTriangle2D_r hook forwards to this\noriginal body unchanged only when its UIScale stack is inactive. Current FileSelect\ncalls follow background scale_pop, with scaling disabled at 640x480. This proves\nthe original body plus that bounded forwarding condition, not the hook globally.\nThe 4010d0 positive-flags normalization clears bit0, so the patched circle-call\nbranch is unreachable for these cases. Scaling-enabled wrapper behavior is outside\nthis proof; no source inputs or expectations are filtered to conceal mismatches.\n",
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "24ffa86f90e5909a7cbd9058038f24ccb7eb12025e00625427be34d81afe6eed",
+ "native_sources": {
+  "src/engine/pvr_device.hpp": "8ae571102b54abfd4af93fc1d5c3dd6ab4585bbdc44ee98bcec41ce69e81f6cd",
+  "src/engine/pvr_device.cpp": "fa20452948394b115f0922b90139912a94d490045adacfbf75dde3f24962fe27"
+ },
+ "tracked_summary": {
+  "full_sha256": "1d358e7b19ccf668c7a9aca8ea424e57564914415fe2a7cb429fc68aedcc10de",
+  "full_bytes": 11005,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "architectural_spill_checks[0].source_spill_observation.device_state": 11,
+   "architectural_spill_checks[1].source_spill_observation.device_state": 11,
+   "mismatches[0].input": 64,
+   "mismatches[0].differences": 32,
+   "mismatches[1].input": 64,
+   "mismatches[1].differences": 32
+  }
+ }
+}

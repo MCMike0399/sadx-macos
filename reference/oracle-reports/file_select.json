@@ -1,0 +1,30 @@
+{
+ "passed": true,
+ "cases": 2364,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "seed": 50532,
+ "source_ranges": {
+  "0x505320-0x5053e2": "495415e49209692b50d55c024c083137ecfad9403fcae07dfb75bbd07e44de6e"
+ },
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_sources": {
+  "src/game/file_select.cpp": "1e33dada07ca40679992137b0b0e18c6bea5ee53c320684927c500ecd3d27c46",
+  "src/game/file_select.hpp": "cad63509970070624f505db98d91dc42ab3a979553f38e4ff33908e3697a07b1",
+  "tests/probes/native_file_select_probe.cpp": "6b1f8def34f76d6c00c82d444df5ecdebcb8ac6b245135f04b8834d231affdbf"
+ },
+ "source_functions": {
+  "0x505320-0x5053e2": "495415e49209692b50d55c024c083137ecfad9403fcae07dfb75bbd07e44de6e",
+  "0x42d0b0-0x42d0d6": "78c1c7a4ca58a789862ad0b288e0115faa772154acc34633e3b1d861c27ed2d2"
+ },
+ "native_library_sha256": "4d2c4c9e35c8b955f200c61cb0e296e9e6ea6fc928abab62947cd644b204bf74",
+ "limits": [
+  "Initialization caller only; texture/music/voice/save/font callees are exact ordered receipts. Save discovery and real load backends are not claimed by this caller judge."
+ ],
+ "tracked_summary": {
+  "full_sha256": "1af75bbb1fb44f6338eb66f79271721bba3553e0700adec3030877e5f0fa1ac1",
+  "full_bytes": 1152,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

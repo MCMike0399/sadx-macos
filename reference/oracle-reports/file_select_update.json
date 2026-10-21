@@ -1,0 +1,100 @@
+{
+ "passed": false,
+ "values_match": true,
+ "cases": 2636,
+ "mismatches": 0,
+ "fp_flag_partials": 1119,
+ "first_mismatches": [],
+ "first_fp_partials": [
+  {
+   "case": 73,
+   "input": [
+    0,
+    2,
+    0,
+    0,
+    123,
+    9,
+    7,
+    1,
+    6,
+    0
+   ],
+   "diff": [
+    [
+     11,
+     0,
+     32
+    ]
+   ]
+  },
+  {
+   "case": 74,
+   "input": [
+    0,
+    2,
+    0,
+    0,
+    123,
+    9,
+    7,
+    2,
+    6,
+    0
+   ],
+   "diff": [
+    [
+     11,
+     0,
+     32
+    ]
+   ]
+  },
+  {
+   "case": 75,
+   "input": [
+    0,
+    2,
+    0,
+    0,
+    123,
+    9,
+    7,
+    4294967295,
+    6,
+    0
+   ],
+   "diff": [
+    [
+     11,
+     0,
+     32
+    ]
+   ]
+  }
+ ],
+ "seed": 5053,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "2d12c47f983ea0d6deea7a2aafeedb231ed441089fd59cb4d3838d222cbdd88a",
+ "native_sources": {
+  "src/game/file_select.cpp": "1e33dada07ca40679992137b0b0e18c6bea5ee53c320684927c500ecd3d27c46",
+  "src/game/file_select.hpp": "cad63509970070624f505db98d91dc42ab3a979553f38e4ff33908e3697a07b1",
+  "tests/probes/native_file_select_update_probe.cpp": "e1f93def09fa0726522db3d7abb4f8ac43dc52caa4f374d7aa42f3a5fad63a3b"
+ },
+ "source_ranges": {
+  "0x5053f0-0x50554c": "98a955c9aa8d2b78add3cce501a31bf041e3e62f103372d0f6dcd38210054958"
+ },
+ "limits": [
+  "Full phase caller executes, including indirect jump suffixes. Initialization, fade-color, active controls and resource-release calls are ordered receipts; their internals are separate modules/boundaries. Callback mutations include replacing canonical sequence work."
+ ],
+ "tracked_summary": {
+  "full_sha256": "0ca5fb785801d1f2279c74721c3e6497c69794e92fd93d6c598bf4d024a82d56",
+  "full_bytes": 2085,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "first_fp_partials[0].input": 16,
+   "first_fp_partials[1].input": 16,
+   "first_fp_partials[2].input": 16
+  }
+ }
+}

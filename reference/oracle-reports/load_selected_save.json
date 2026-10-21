@@ -1,0 +1,28 @@
+{
+ "passed": true,
+ "cases": 368,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "seed": 42180,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "input_sha256": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+ "native_sources": {
+  "src/game/save_file_list.cpp": "6f5a7474fea7b977747f3df8b605224634176eef6c554a0a5c135d25c5cadf54",
+  "src/game/save_file_list.hpp": "87151c6639404ce7d4ddb25c149495405fe0ed29d791eeb0972966b4f88deeca",
+  "tests/probes/native_save_file_list_probe.cpp": "8d04b72f060080006b9eb380a90d7d7fd3213683534fdaea988997d0dc9c2df0"
+ },
+ "source_functions": {
+  "0x421de0-0x421e87": "442ea3e5f89c5e477fe27ca9545e166e8e181e159024a4f0fe3a2595f05400f0",
+  "0x42d3b0-0x42d5cb": "8cb51fd6f6c1588e1363460d1927088c3b08a655913f8adabd49198304b64604"
+ },
+ "native_library_sha256": "c158ba7f353dc10a7a7312c2b5874f969e5aac5290d770b7b96e75a6a285ee8b",
+ "limits": [
+  "Actual selected-save loader, save initializer and pinned Input default-rumble replacement execute; filesystem I/O is exact partial-write resource fixture. Selected unknown sentinel, invalid list traversal and missing FILE are explicit native boundaries, not successful source loads."
+ ],
+ "tracked_summary": {
+  "full_sha256": "b94e93f3ea836489aed3fc10bf75e8acb53967e0577fe49815f0d77110c59c6b",
+  "full_bytes": 1241,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

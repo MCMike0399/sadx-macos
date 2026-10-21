@@ -1,0 +1,25 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "probe_sha256": "c6832e40744df7dd1cf4c3178c0c41ef5369acf344ebceff597e3b64c6315b0b",
+ "seed": 20261115,
+ "cases": 1000,
+ "mismatch_count": 0,
+ "mismatches": [],
+ "stores_calls_waits_failure_prefixes_match": true,
+ "limits": "PlayVoiceFile original instructions with existing native reader resource receipts.\n\nActual40ce30 control flow, conversion call, live attenuation load, state getter and\nstartup polling execute. Stop/reset/open/start/Sleep are explicit resource receipts\nfor independently qualified native reader ownership. State0/2/other waits until1.\nNull reader after reentrant resource callback faults in original helper and is a\ntagged native boundary; page0 is never mapped. No codec-bit/Windows latency claim.\n",
+ "native_sources": {
+  "src/game/voice_playback.hpp": "deb30d5d167ed9555a35dd326e4f348d2c3c188a3d4b45946cc4a7459703d807",
+  "src/game/voice_playback.cpp": "2e6b46802fd3d25ac144d2e6eddfdc69c97075c04471622cc4e50ab5ecfc2e21",
+  "tests/probes/native_voice_playback_probe.cpp": "d6a0bcdce9dbfd969ab83f7cd517eb599fb59ac9f9f5261f2f93b5406a426539"
+ },
+ "source_ranges": {
+  "0x40ce30-0x40cf13": "421c884b27e36f09c1eeb5c2310ca98d35cd4cee388a5271c3274c9d1fa63f6b",
+  "0x4113e0-0x4113e4": "75315a13a7503cb9a126675518a19ff201faa8c510e8a849d0f971d9c61bbb2b"
+ },
+ "tracked_summary": {
+  "full_sha256": "2973ba495ad1ecec097b7fc3569a04e05efef25ad3ae4693b13a6c9476091f48",
+  "full_bytes": 1393,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

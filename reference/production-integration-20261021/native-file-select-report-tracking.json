@@ -1,0 +1,29 @@
+{
+  "purpose": "Track the actual reports already run for committed native FileSelect integration; no source, fixture, expectation, tolerance or verifier changes.",
+  "source_commit": "2e8309a",
+  "full_gate": "reference/production-integration-20261021/native-file-select-integration-gate.json",
+  "gate_exit": 0,
+  "tracked_reports": [
+    "colored_polygon",
+    "file_select",
+    "file_select_controls",
+    "file_select_display",
+    "file_select_update",
+    "font_native",
+    "load_selected_save",
+    "menu_draw_primitives",
+    "menu_resource_lifetime",
+    "menu_voice",
+    "save_file_list",
+    "save_list_free",
+    "voice_playback",
+    "pvr_draw",
+    "native_texture_lifetime"
+  ],
+  "limits": [
+    "Colored polygon remains FAIL for two rawCW119 divergences; native unmaskedstatus flags unqualified.",
+    "Four new FileSelect/drawing reports retain FPpartials; all compared values exact.",
+    "Broader pre-existing failures remain; no native story/gameplay63FPS claim."
+  ],
+  "verification": "Only summary/manifest inventory updates after the completed coherent source gate; judge/profile checks repeated without rerunning unchanged expensive suites."
+}

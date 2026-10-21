@@ -1,0 +1,29 @@
+{
+ "passed": true,
+ "cases": 348,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "seed": 505050,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_sources": {
+  "src/game/save_file_list.cpp": "6f5a7474fea7b977747f3df8b605224634176eef6c554a0a5c135d25c5cadf54",
+  "src/game/save_file_list.hpp": "87151c6639404ce7d4ddb25c149495405fe0ed29d791eeb0972966b4f88deeca",
+  "src/game/file_select.cpp": "1e33dada07ca40679992137b0b0e18c6bea5ee53c320684927c500ecd3d27c46",
+  "tests/probes/native_save_file_list_probe.cpp": "8d04b72f060080006b9eb380a90d7d7fd3213683534fdaea988997d0dc9c2df0"
+ },
+ "source_functions": {
+  "0x505050-0x5051da": "48d583e0f5436dfece7f77d790f06579cf7b36400b687a7fd31f64a4cb213a49",
+  "0x504e50-0x504ec2": "988851f475cf02a966d17e3922ede9c71d04c8479339308c53322f0cf09a6d08",
+  "0x42d0b0-0x42d0d6": "78c1c7a4ca58a789862ad0b288e0115faa772154acc34633e3b1d861c27ed2d2"
+ },
+ "native_library_sha256": "41f8207db8f408b10fd90f924c8c5b941109d4bc584a74c8feaf8f3d1b16abf9",
+ "limits": [
+  "FindFirst/Next/File I/O and allocator are resource fixtures; real FindSaveFiles/AddLineList/CheckSaveFile/CRC instructions execute. First malloc sentinel name/time remain an unknown tag, not compared values. Normal matched ASCII save filenames; missing FILE and malformed provider names are explicit native boundaries."
+ ],
+ "tracked_summary": {
+  "full_sha256": "c620364a6c22cf69423c4b28d104411ed845e0c1cae892072d6a796b739c0a4c",
+  "full_bytes": 1385,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

@@ -1,0 +1,105 @@
+{
+ "passed": false,
+ "values_match": true,
+ "cases": 2438,
+ "mismatches": 0,
+ "fp_flag_partials": 938,
+ "first_mismatches": [],
+ "first_fp_partials": [
+  {
+   "case": 150,
+   "input": [
+    1,
+    1065353216,
+    0,
+    0,
+    0,
+    0,
+    0,
+    123,
+    0,
+    0
+   ],
+   "diff": [
+    [
+     25,
+     0,
+     32
+    ]
+   ]
+  },
+  {
+   "case": 151,
+   "input": [
+    1,
+    1065353216,
+    0,
+    0,
+    0,
+    0,
+    0,
+    123,
+    0,
+    0
+   ],
+   "diff": [
+    [
+     25,
+     0,
+     32
+    ]
+   ]
+  },
+  {
+   "case": 152,
+   "input": [
+    1,
+    1065353216,
+    0,
+    0,
+    0,
+    0,
+    0,
+    123,
+    0,
+    0
+   ],
+   "diff": [
+    [
+     25,
+     0,
+     32
+    ]
+   ]
+  }
+ ],
+ "seed": 503600,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "144108168881498f411736032283e312a3ea7effad0e8f16d8768fa18a9077ab",
+ "native_sources": {
+  "src/game/file_select_controls.cpp": "1f93d5da2bfe5ed009c830168b8106f674f8de8cd12dee77123bc4bcb40a1bfe",
+  "src/game/file_select.hpp": "cad63509970070624f505db98d91dc42ab3a979553f38e4ff33908e3697a07b1",
+  "tests/probes/native_file_select_controls_probe.cpp": "5d2b362a18f0fc9d14cac524ceb3e84a4cd41cef5f94c4a4a717f7fdac7f03b1"
+ },
+ "source_ranges": {
+  "0x5035d0-0x503e48": "7a5304dca8f6bac32df8a8190f38da44b9b336aee69474ba05b4809ea909eeca",
+  "0x5067e0-0x5067e9": "64619e99382ee6b47f038089042aea68e4af0a048409078323b783bb43cd0748",
+  "0x5067f0-0x5067fb": "0705a8d5780a46bf6772571e9ce609b9415f165421699fdfc8fae1fcd73933f0",
+  "0x431960-0x4319c5": "ee4a49bc1dbffae81e1fb3ecba94bdd4a9c4d548339351f8ede6f9c6563a9fdd",
+  "0x4319d0-0x431ac7": "dfc7e3cdedc9c9006e931d104b4dc4bfb1ef756c062b090ffc03d2addfeae8fc",
+  "0x7883c0-0x7884f0": "02b231bcc0ff17942c2bd0b84671eb27b289297a8744802aae9d9dbcbdbefd64"
+ },
+ "limits": [
+  "Full startup0/select1/cancel9/wait10 bodies and invalid-stage guard; remaining dialog stages explicitly stop at their original switch entry after common animation. Original animation/cosine/interpolation/mask helpers execute; save/dialog/audio calls are ordered resource receipts. All float words are compared; software FPflag differences are reported separately."
+ ],
+ "tracked_summary": {
+  "full_sha256": "fa9aa90e0205515bc6bf96af96fd0a925fd37ce5dc152cc0e1c4e877bd2998e3",
+  "full_bytes": 3011,
+  "lists_cut_to": 10,
+  "cut_lists": {
+   "first_fp_partials[0].input": 26,
+   "first_fp_partials[1].input": 26,
+   "first_fp_partials[2].input": 26
+  }
+ }
+}

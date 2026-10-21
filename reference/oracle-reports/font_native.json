@@ -1,0 +1,32 @@
+{
+ "passed": true,
+ "cases": 1368,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "seed": 420050,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_sources": {
+  "src/engine/font_native.cpp": "9c2193ea572134acb88b237133b1180359024f7e4b4da147186349b5b33de55d",
+  "src/engine/font_native.hpp": "472729efac29752c9e8a525a95e7fd64c7d0b237cb9498963a08499f1991aead",
+  "tests/probes/native_font_native_probe.cpp": "6aa2015896a6e379e05f1d86a99ecf18aeeabbb518138f17bd43cbe55b4e9b4e"
+ },
+ "source_functions": {
+  "0x420a00-0x420a2f": "e41de87d8427c97d373bb18be8dfd7bbf6ee94a11041f7e6e97528640a136f3e",
+  "0x420a50-0x420a65": "2ff7d2af224c77ea0df47fa09f990fca175eaa3877453833fa0976a8acc63337",
+  "0x420a30-0x420a45": "1c991d1d4ae59aafded6f851ad1a0f980181696d0c33300a34126cd41989f1b5"
+ },
+ "native_library_sha256": "41c65a634c0e11af4f3e44558357294a30323f316c919770b82cc90df5fbe184",
+ "source_ranges": {
+  "0x420a00": "e41de87d8427c97d373bb18be8dfd7bbf6ee94a11041f7e6e97528640a136f3e",
+  "0x420a50": "2ff7d2af224c77ea0df47fa09f990fca175eaa3877453833fa0976a8acc63337"
+ },
+ "limits": [
+  "Original load, copy and release execute. Texture backend is a receipt comparing published state. Pointer identities are native resources; float payloads compare as unchanged raw words."
+ ],
+ "tracked_summary": {
+  "full_sha256": "459fec898b9b75ee9dae7224bd4012ff6e7ef939857f96fef1325a77e9f253a3",
+  "full_bytes": 1340,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

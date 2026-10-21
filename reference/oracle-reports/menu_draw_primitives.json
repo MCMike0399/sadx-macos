@@ -1,0 +1,36 @@
+{
+ "cases": 2434,
+ "sized_cases": 1432,
+ "vertex_color_cases": 1000,
+ "mismatch_count": 0,
+ "mismatches": [],
+ "fp_flag_partials": 1300,
+ "flag_mismatches": 1300,
+ "values_match": true,
+ "passed": false,
+ "seed": 20261117,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_sources": {
+  "src/engine/menu_draw_primitives.hpp": "32ae18ecc63d2b280dfde54ad8dc628aabdf6eec4e2b88a50e1bbf1d850e2cb6",
+  "src/engine/menu_draw_primitives.cpp": "163b20359b1d1b0ae1f4342fc38797bafedc3aa70be96a2423fd9a9ef61bdad2",
+  "tests/probes/native_menu_draw_primitives_probe.cpp": "39599266a122b1faac7f31f76e4b62272aca011216a989eb0b1f842f0a0868b1"
+ },
+ "source_ranges": {
+  "0x432f90-0x433001": "9086665bbb84578591c0762f08a0976d6b75de07517cd3ab8a357a7751c6bf14",
+  "0x433c90-0x433f73": "e6870bda8b02d1fdcc6f2cdc03025f1e84d2e90cf62026f5274de813813c1530",
+  "0x420cf0-0x420d26": "007741b5ea0fb50093796abf488d37de7081c1db1b328ea24ea557af4e2acf8e"
+ },
+ "profile_patch": {
+  "va": "0x433f4d",
+  "original_bytes": "38",
+  "effective_bytes": "00",
+  "source": "GVR_Init gvm.cpp851"
+ },
+ "limits": "Actual source menu PVR producers under the pinned GVR format-mask patch.\n\nResource lookup/submission are receipts; actual vertex stores, color multiplication,\nanchor arithmetic and reciprocal execute. This does not certify GPU pixels.\n",
+ "tracked_summary": {
+  "full_sha256": "4d872e60026765d989312a1a46a3e5e2012cb6bf342bd8f195eaa5fd60396498",
+  "full_bytes": 1395,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

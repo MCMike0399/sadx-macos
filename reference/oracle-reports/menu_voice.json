@@ -1,0 +1,29 @@
+{
+ "passed": true,
+ "cases": 4888,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "seed": 50590,
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_sources": {
+  "src/game/menu_voice.cpp": "dcc5f56590658a3c86a1f756233389491b830fff207945afaf85455ee4d856c1",
+  "src/game/menu_voice.hpp": "4916b69ee0ab19bcef39e45a787b474e158ea145854c0b227ff07257570e368a",
+  "tests/probes/native_menu_voice_probe.cpp": "43c6795a70f0b3972220a442019d23ea26fe22587cd376a202f574f9c3c55400"
+ },
+ "source_functions": {
+  "0x425710-0x425720": "021e6fdfe456185063f4104495290e8cc8228e30e7df624b2923d63552692690",
+  "0x5059b0-0x5059ee": "ac295bebdba0f64b233a61c74e6d45429cf87866a34717f853c25e5d186a7987",
+  "0x5059f0-0x505a3b": "f11fdb867c4892ca23f7da3ac57e19aeb8ff01179cfa5a9bcdaab9627c4baa0d",
+  "0x505a40-0x505a70": "c80950f3e9b8913184250dd33b7920b685de992ae40dbcbe2b8767d2010b36e8"
+ },
+ "native_library_sha256": "7db860d3c3ce3f855457b1086993fa6f69df337b6c00b17b72696a9337bbd25a",
+ "limits": [
+  "Actual queue/constructor/map/updater instructions execute; task creation/CAlloc/destruction are ordered receipts. CAlloc null faults and unsupported imported request indices remain explicit native boundaries."
+ ],
+ "tracked_summary": {
+  "full_sha256": "91807e538d411bdd33141895ba45f181091c8f8d4dbf9cab8d0c1ba0870164ed",
+  "full_bytes": 1256,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}
