@@ -197,7 +197,7 @@ REFERENCE_UNIT_TARGETS := build/saved-fov-reference-test build/save-name-referen
  build/game-frame-control-test build/reference-frame-control-test build/game-logic-test build/game-logic-support-test build/game-loop-test build/game-startup-test build/ninja-device-init-test build/ninja-frame-calls-test build/ninja-screen-test build/ninja-queue-lifecycle-test \
  build/game-mode-test build/game-mode-leaves-test build/game-runtime-test \
  build/player-acceleration-ground-test build/player-acceleration-alternate-test \
- build/player-direction-reset-test build/sonic-player-test build/sonic-actions-test \
+ build/player-auxiliary-effect-test build/player-direction-reset-test build/sonic-player-test build/sonic-actions-test \
  build/player-scene-position-binding-test build/input-constants-boot-test build/startup-initial-boot-test build/library-initial-boot-test
 $(REFERENCE_UNIT_TARGETS): build/%-test: tests/unit/$$(subst -,_,$$*).cpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< $(EXTRA_REFERENCE_SOURCES) build/libsadx-guest.a build/libsadx-core.a -o $@
@@ -332,7 +332,7 @@ screen-initial-fixtures: build/native-ninja-screen-initial-state-probe.dylib
 run-unit-tests: voice-playback-fixture library-initial-fixtures startup-initial-fixtures assets $(UNIT_TARGETS) $(UNIT_MM_TARGETS) $(OVERRIDE_CORPORA) build/engine-code-tables-poisoned.exe session-control-fixtures input-initial-fixtures sine-initial-fixtures fog-initial-fixtures screen-initial-fixtures sound-initial-fixtures view-initial-fixtures queue-initial-fixtures input-constants-fixtures
 unit-tests: run-unit-tests
 test: unit-tests
-	$(PY) -m unittest discover -s tests/python -p 'test_*.py'
+	$(REFERENCE_PYTHON) -m unittest discover -s tests/python -p 'test_*.py'
 	python3 tools/gate/check_global_owners.py
 # Every oracle; reports in build/oracles/<slug>.json. `make oracles-verdict` reads them (tools/oracles/verdict.py).
 oracles: $(ORACLE_TARGETS)

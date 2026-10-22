@@ -1,7 +1,7 @@
 import importlib.util, json, os, struct, tempfile, unittest
 from pathlib import Path
 STAGE=Path(__file__).resolve().parents[2]
-ROOT=Path(os.environ['SADX_SOURCE_ROOT'])
+ROOT=Path(os.environ.get('SADX_SOURCE_ROOT', STAGE))
 spec=importlib.util.spec_from_file_location('character_select_menu',STAGE/'tools/import/character_select_menu.py')
 module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
 class Mutated:

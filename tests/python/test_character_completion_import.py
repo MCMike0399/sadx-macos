@@ -2,7 +2,7 @@ import importlib.util,json,os,struct,tempfile,unittest
 from pathlib import Path
 STAGE=Path(__file__).resolve().parents[2]
 spec=importlib.util.spec_from_file_location('completion',STAGE/'tools/import/character_completion.py');module=importlib.util.module_from_spec(spec);spec.loader.exec_module(module)
-ROOT=Path(os.environ['SADX_SOURCE_ROOT']);GAME=ROOT/'reference/updated-pc-reference/game'
+ROOT=Path(os.environ.get('SADX_SOURCE_ROOT', STAGE));GAME=ROOT/'reference/updated-pc-reference/game'
 class Changed:
  def __init__(self,image,address=0,data=b'',sha=None):self.image=image;self.address=address;self.data=data;self.sha256=sha or image.sha256
  def read(self,address,size):

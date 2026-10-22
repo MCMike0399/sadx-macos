@@ -10,7 +10,14 @@ int main(int argc, char **argv) {
         using namespace sadx;
         auto catalog = native::app::load_menu_voice_assets(argv[1]);
         const auto clips = native::app::load_voice_assets(argv[1]);
-        assert(catalog.size() == 81 && clips.clips.size() == 162);
+        // Keep this fixture scoped to all81 original menu requests as other
+        // reached source callers add their own voice resources to the install.
+        const auto menu_clips = std::count_if(clips.clips.begin(), clips.clips.end(),
+            [&](const auto &clip) {
+                return std::any_of(catalog.begin(), catalog.end(),
+                    [&](const auto &entry) { return entry.voice == clip.voice; });
+            });
+        assert(catalog.size() == 81 && menu_clips == 162);
         const auto expected = catalog;
         std::reverse(catalog.begin(), catalog.end()); // Lookup must use row/request, not vector position.
         TaskScheduler scheduler;

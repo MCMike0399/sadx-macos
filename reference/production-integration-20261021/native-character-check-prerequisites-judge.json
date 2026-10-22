@@ -1,0 +1,89 @@
+{
+  "purpose": "Correct reached integration judge prerequisites without changing expected behavior, inputs or tolerance.",
+  "before": {
+    "gate_exit_status": 2,
+    "link_failure": "player-auxiliary-effect-test unresolved legacy bind_player_task_primary/initialize_player_startup now owned by reference adapter",
+    "python_failure": "Three new import tests require private-only SADX_SOURCE_ROOT; default Python lacks required Capstone5.0.7 already installed in project reference venv.",
+    "camera_failure": "Canonical build/ probe path fingerprints nonexistent build/src/ after executing source corpus."
+  },
+  "corrections": [
+    "Classify the existing auxiliary-effect unit among existing reference units; native production whitelist remains unchanged.",
+    "Run the unchanged complete Python discovery with the existing reference interpreter and give the three new test source roots a repository-derived default. No skips.",
+    "Give selection-camera producer an explicit --native-source-root defaulting to existing ROOT; only provenance file lookup changes. Compare unchanged full cases/FP counts before and after."
+  ],
+  "evidence": [
+    {
+      "path": "build/native-character-integration-gate-exit.json",
+      "sha256": "da4e6e0722fe95bed4fa3891527817f2bf97c63d306fa629f6b07738304c0026"
+    },
+    {
+      "path": "build/native-character-oracle-selection_camera.log",
+      "sha256": "5cd57af3a60c468ee72ecd9ad6f3575280a1fb33a4f2be67460fdf507b984b5d"
+    },
+    {
+      "path": "build/native-character-import-python.log",
+      "sha256": "ff08f64a01c380eb55acf02c42c83e609dd0ac9a8ebede57ad9fa79a5fcbee64"
+    },
+    {
+      "path": "build/native-character-python-qualified.log",
+      "sha256": "c836ee613bbe3a3a1f8683901572feaee4a623daa11860c5f0a39aa6bcaf27d6"
+    },
+    {
+      "path": "build/native-character-camera-main-qualified.log",
+      "sha256": "85b54cf8048a2ac71e683e958804fe3b2683a6a78869ed16ad13b92a9022480f"
+    }
+  ],
+  "qualified_before_fix": {
+    "python_tests": 312,
+    "python_exit_status": 0,
+    "existing_filesystem_skip": 1,
+    "selection_camera_cases": 26808,
+    "selection_camera_value_mismatches": 0,
+    "selection_camera_fp_partials": 25152,
+    "selection_camera_producer_exit_status": 1
+  },
+  "after": "Targeted checks passed as recorded; final required full gate was interrupted by the user, not passed.",
+  "after_second_gate": {
+    "exit_status": 2,
+    "failure": "native-menu-voice-catalog legacy test assumes total162 clips; actual source-backed CharacterSelect adds14 while its81 catalog requests remain intact. Correct old fixture projection, preserve all81clip/hash assertions; complete176 coverage exists in new selection-assets unit.",
+    "manual_auxiliary_invocation_exit": 1,
+    "manual_auxiliary_invocation_cause": "Required fixture arguments omitted; canonical fullgate invocation with both fixtures passed unchanged.",
+    "camera_canonical_cases": 26808,
+    "camera_canonical_value_mismatches": 0,
+    "camera_canonical_fp_partials": 25152,
+    "camera_canonical_make_exit": 2
+  },
+  "user_requested_pause": {
+    "goal_status": "paused",
+    "request": "Stop all running project processes and push current work to main.",
+    "final_gate": {
+      "command": [
+        "make",
+        "-j10",
+        "gate"
+      ],
+      "exit_status": -15,
+      "log": "build/native-character-integration-gate-final.log"
+    },
+    "interpretation": "SIGTERM at user request; incomplete gate, never recorded as successful.",
+    "log_sha256": "1c7ce7317788a58d99ef31b9306c6705ca6aa3cdd990233c630f1cbfee4f8ed3",
+    "latest_reference_journeys": "4/4 passed before termination; reference only.",
+    "native_file_select": "1850-frame check completed before termination; remaining native journeys not completed in this run.",
+    "processes": "Project workers, native test applications, gate and reference observer stopped; private recovery files preserved locally."
+  },
+  "legacy_voice_fixture": {
+    "purpose": "Retain exact81-request/162-language-clip assertions while fourteen separately verified CharacterSelect clips coexist. All per-request/language assertions unchanged.",
+    "targeted_test_exit_status": 0,
+    "new_selection_assets_full_catalog": "Existing new unit separately asserts all176source-backed clips.",
+    "missing_old_clip_mutant": {
+      "mutation": "Remove one previously-required menu voice clip from manifest, preserving81source requests and all14newselectedclips.",
+      "removed_identity": {
+        "voice": 0,
+        "language": 0
+      },
+      "exit_status": -6,
+      "stderr": "Assertion failed: (catalog.size() == 81 && menu_clips == 162), function main, file native_menu_voice_catalog.mm, line 20.\n",
+      "detected": true
+    }
+  }
+}
