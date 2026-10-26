@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "a6b73cc562b5158913f0df45bf96135b27676fd5",
-    "evidence": "reference/production-integration-20261026/selection-player-queries/proof.json",
-    "evidence_sha256": "66046ecb79b6b44bdf34d77594918c84ae78feda673ed7a09b33cda14de24abb",
-    "reason": "Register newly integrated f806211 bootstrap predicate oracle and appended unit/compiler recipes; existing source and old judge inputs unchanged"
+    "base_commit": "5125fab23280d27a68a1091e866922eee6ca9361",
+    "evidence": "reference/production-integration-20261026/native-gamma-gate-interrupted-registration.json",
+    "evidence_sha256": "fab695496c09119dff402bbfb3d20c09526223309cea2b01c7b20dba2db8ac08",
+    "reason": "Run the existing frozen Gamma core unit in the gate; its manifest row was omitted during dependency integration"
   },
   "files": {
     "Makefile": "ed8e228dfcbd1a420488e260e0f9dee316173ce72da2544dc036ad570d0a0e1a",
@@ -617,7 +617,7 @@
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",
     "tests/python/test_voice_publication.py": "5c00051d9b3de640f64e224dda4d810cdd7d26acafd91d7b1dc44e9786a734f3",
-    "tests/unit/manifest.tsv": "5dfb47b5e17619a8ad8fb7bbe44dfd6b6b1eb5babb840eb6f9e87015df4dd790",
+    "tests/unit/manifest.tsv": "cff13fc74717ebd5e69209f7c554afecc5cc0831dbd3023257da30f63cbc2976",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",

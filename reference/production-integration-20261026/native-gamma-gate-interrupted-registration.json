@@ -1,0 +1,10 @@
+{
+  "command": "SADX_CONTENT_CORPUS=/Users/burbujamc/Developer/sadx-macos make -j10 gate",
+  "head": "5125fab23280d27a68a1091e866922eee6ca9361",
+  "exit_status": 143,
+  "passed": false,
+  "reason": "Root terminated its exact make process after discovering the frozen Gamma core unit lacked a run manifest row; no green gate recorded.",
+  "log_sha256": "9d9539ece83e04b066194b2a0d17b411562e5cfc93fcee6ecb1542e910eecb94",
+  "log_path": "build/gamma-gate-interrupted-registration.log",
+  "correction": "Append gamma-selection-core to tests/unit/manifest.tsv so the existing unchanged native unit runs in the gate; no existing judge behavior or expectation changed."
+}
