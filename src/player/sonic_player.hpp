@@ -1,4 +1,5 @@
 #pragma once
+#include "player/actor_current.hpp"
 #include "engine/game_controller.hpp"
 #include "player/player_startup.hpp"
 #include "player/player_position.hpp"
@@ -59,11 +60,11 @@ struct SonicPlayerGlobals {
     std::optional<std::int16_t> forced_at_3b29d0c;
     const std::optional<std::uint16_t>* forced_at_3b29d08=nullptr; // borrowed GameResetState word; null is unknown
     std::optional<std::uint16_t> stage_at_3b22dcc;
-    std::optional<std::uint8_t> alternate_model_at_3b18db5,range_at_3c55d45;
+    std::optional<std::uint8_t> alternate_model_at_3b18db5;
     std::optional<std::uint8_t> sound_latch_at_3c55d44;
     std::array<std::optional<TaskHandle>,10> tasks_at_3c5a27c;
-    // Actual source pointer stores; IDs/handles preserve native resource identity.
-    std::optional<TaskWorkHandle> current_task_at_3abdf60,current_player_at_3abdf64;
+    actor_current::State current{};
+    const actor_current::Observation* current_observation = nullptr;
 };
 struct SonicPlayerConstants {
     static constexpr std::array<std::uint32_t,13> addresses{{

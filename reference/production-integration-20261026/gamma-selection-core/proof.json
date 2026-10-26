@@ -1,0 +1,156 @@
+{
+  "scope": "Original E102 mode 0 and mandatory common tail; lower calls remain explicit link-time seams.",
+  "source_files_sha256": {
+    "src/player/gamma_selection_core.cpp": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea",
+    "src/player/gamma_selection_core.hpp": "4d4259960f8cd59e610300683812bc5081a809d5938b0441ecc3a8ae1db3ce7d",
+    "tests/probes/native_gamma_selection_core_probe.cpp": "f1f5119da472f78651428ac79b4a5435e80acb359bf2a0c2f816b2670195a517",
+    "tests/unit/gamma_selection_core.cpp": "d6aadb3b53e94fed35b696822e1271b7eb2e23d5e908a5e0bf8b8ce4ea144db1",
+    "tools/oracles/verify_original_gamma_selection_core.py": "b62020db7b643a941079b15b2e0b931885ace95b40bb1ec3329a61439604aada",
+    "tools/oracles/mutate_gamma_selection_core.py": "f19c1e581df6b56c2f4c88d3c97881765863d342119490fd9acb77ba03e7b538",
+    "tools/analysis/prove_gamma_selection_sources.py": "f80890f5f53fae56b4ec3d33bff682172673235c26093f09f8a9131d2109e2e0"
+  },
+  "native_unit": {
+    "target": "build/gamma-selection-core-test",
+    "exit_status": 0,
+    "output": "PASS: real Gamma mode 0, ID 2, task/motion/PInitialize ownership and common tail",
+    "closure": "private libsadx-core.a only; no guest library or original binary"
+  },
+  "development": {
+    "cases": 1422,
+    "value_failures": 0,
+    "fp_flag_partials": 498,
+    "oracle_exit_status": 2,
+    "verdict": "partial"
+  },
+  "holdout": {
+    "cases": 1080,
+    "value_failures": 0,
+    "fp_flag_partials": 690,
+    "oracle_exit_status": 2,
+    "verdict": "partial",
+    "executed_once_after_final_source_and_mutants": true
+  },
+  "mutants": {
+    "mutants": [
+      {
+        "name": "skip_id2",
+        "build_exit_status": 0,
+        "judge_exit_status": 1,
+        "value_failures": 1044,
+        "caught": true,
+        "library_sha256": "8ae8fd5988a907368f858a461689f4f9093a970462ceaa1f06c2fecff8791beb"
+      },
+      {
+        "name": "republish_player",
+        "build_exit_status": 0,
+        "judge_exit_status": 1,
+        "value_failures": 1140,
+        "caught": true,
+        "library_sha256": "6b9210d48ebdf9255502e26128592caf2b847d22c15069f34d2758c8c6b2d1db"
+      },
+      {
+        "name": "wrong_texture_character",
+        "build_exit_status": 0,
+        "judge_exit_status": 1,
+        "value_failures": 1134,
+        "caught": true,
+        "library_sha256": "0bf262929fae0a40d50079939352971b9036d4fc6b42adb160be0508dec89ba0"
+      },
+      {
+        "name": "wrong_material_mask",
+        "build_exit_status": 0,
+        "judge_exit_status": 1,
+        "value_failures": 858,
+        "caught": true,
+        "library_sha256": "232f50941009c8f9192231e97e3aec87914931ccac2926427bffdf1e787026d3"
+      },
+      {
+        "name": "stale_extra_after_display",
+        "build_exit_status": 0,
+        "judge_exit_status": 1,
+        "value_failures": 114,
+        "caught": true,
+        "library_sha256": "6b194ef6d04eefe252103052cfa6c24f3c8ae8fa9111f509d1c4ab797b8ec2ab"
+      },
+      {
+        "name": "omit_join",
+        "build_exit_status": 0,
+        "judge_exit_status": 1,
+        "value_failures": 1062,
+        "caught": true,
+        "library_sha256": "645c0d226cb1b7d689a93a11317877687ff8064d5fde4ba95926944ddd8d54d9"
+      },
+      {
+        "name": "spill_shadow_return",
+        "build_exit_status": 0,
+        "judge_exit_status": 1,
+        "value_failures": 71,
+        "caught": true,
+        "library_sha256": "7bff1bf89c192337805a92b90d793877a73414883ed519611f61063ea92778ff"
+      }
+    ],
+    "caught": 7,
+    "total": 7,
+    "source_sha256": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea"
+  },
+  "source_producers": {
+    "exit_status": 0,
+    "complete_original_initializers": [
+      "0x7ca300-0x7cb560",
+      "0x7cb560-0x7cb66b"
+    ],
+    "recipe_count": 91,
+    "declarations": 78,
+    "constructed_rows": [
+      72
+    ],
+    "null_declarations": [
+      61
+    ]
+  },
+  "profile": {
+    "patches": 618,
+    "active_patches": 121,
+    "active_unhandled_patches": 79,
+    "reports": 1,
+    "declared_exe_ranges": 1,
+    "unhandled_overlaps": 0,
+    "handled_overlaps": 0,
+    "undetermined_overlaps": 0,
+    "reports_without_addressed_ranges": []
+  },
+  "static_checks": {
+    "layers": 0,
+    "global_owners": 0,
+    "provenance": 0,
+    "readability": 0,
+    "repo_hygiene": 0,
+    "judge_manifest": 0
+  },
+  "limits": [
+    "No apps, full gate, rendering, GPU, N3b, story or full-controller claim.",
+    "Other modes and all declared lower callees remain explicit boundaries.",
+    "Fresh independent STYLE review and Root binding are pending.",
+    "The first mask mutant was equivalent because a final OR forces that bit; the final bit-26 mask mutant is meaningful and caught.",
+    "No existing oracle/probe/expected value/tolerance changed.",
+    "Root owns the separately reviewed shared current-state migration and product consumption."
+  ],
+  "source_context_profile": {
+    "patches": 618,
+    "active_patches": 121,
+    "active_unhandled_patches": 79,
+    "reports": 3,
+    "declared_exe_ranges": 3,
+    "unhandled_overlaps": 0,
+    "handled_overlaps": 0,
+    "undetermined_overlaps": 0,
+    "reports_without_addressed_ranges": [
+      "profile.json",
+      "symbols.json"
+    ]
+  },
+  "worktree_setup": {
+    "restored_missing_ignored_corpus_inputs": 53,
+    "restoration_rule": "Copy only bytes matching the pre-existing canonical judge manifest hashes; no expectations changed."
+  }
+}

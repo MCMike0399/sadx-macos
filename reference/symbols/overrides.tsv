@@ -190,3 +190,29 @@ SONIC	0x791a80	function	PrepareBasicModelMatrices	void	(const D3DMATRIX*)	36	ev_
 SONIC	0x3d0fe00	global	PolygonBuffers	PolyBuff[9]		324	ev_da94eca7e26a899355bb6f1886c863ed55c8d3a262790876c5fde88647193940	Complete nine 36-byte records; migrated from NinjaFrameCallState prefix views
 SONIC	0x3d127a0	global	PolygonBufferBase	void*		4	ev_da94eca7e26a899355bb6f1886c863ed55c8d3a262790876c5fde88647193940	Retained caller base identity; InitPolyBuffers stores without dereferencing
 SONIC	0x3d0fae0	global	PolygonBufferScratch	uint32[128]		512	ev_da94eca7e26a899355bb6f1886c863ed55c8d3a262790876c5fde88647193940	Complete BSS scratch block cleared after all nine helper calls and during device setup
+SONIC	0x3c53b18	global	GammaEventEnabled			1	ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Unique E102 store owner and source width from complete dossier.
+SONIC	0x3c53bf8	global	GammaTimeHudEnabled			1	ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Unique E102 store owner and source width from complete dossier.
+SONIC	0x3c54608	global	GammaHeadlightMaterial			4	ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Unique E102 store owner and source width from complete dossier.
+SONIC	0x3c53b60	global	GammaLinePoints			4	ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Unique E102 store owner and source width from complete dossier.
+SONIC	0x3c53b64	global	GammaLineColors			4	ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Unique E102 store owner and source width from complete dossier.
+SONIC	0x3c53b68	global	GammaLineTexture			4	ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Unique E102 store owner and source width from complete dossier.
+SONIC	0x3c53b6c	global	GammaLinePointCount			4	ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Unique E102 store owner and source width from complete dossier.
+SONIC	0x3c53ad8	global	GammaModelNode54Matrix			48	ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Unique E102 store owner and source width from complete dossier.
+SONIC	0x3c53c48	global	GammaModelNode30Matrix			48	ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Unique E102 store owner and source width from complete dossier.
+SONIC	0x3c53b78	global	GammaModelNode39Matrix			48	ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Unique E102 store owner and source width from complete dossier.
+SONIC	0x3c53b20	global	GammaModelNode2Matrix			48	ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Unique E102 store owner and source width from complete dossier.
+SONIC	0x3c53c00	global	GammaModelNode37Matrix			48	ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Unique E102 store owner and source width from complete dossier.
+SONIC	0x4c3780	function	GammaUpdateLaserMode				ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Descriptive source caller role from complete E102 dossier; lower callee remains unrecovered.
+SONIC	0x481460	function	GammaProcessAction				ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Descriptive source caller role from complete E102 dossier; lower callee remains unrecovered.
+SONIC	0x47fb90	function	GammaUpdateActionState				ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Descriptive source caller role from complete E102 dossier; lower callee remains unrecovered.
+SONIC	0x4c2e10	function	GammaInitializeCursors				ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Descriptive source caller role from complete E102 dossier; lower callee remains unrecovered.
+SONIC	0x4c5420	function	GammaLoadSetupResource				ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Descriptive source caller role from complete E102 dossier; lower callee remains unrecovered.
+SONIC	0x49fb10	function	GammaInitializeEffects				ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Descriptive source caller role from complete E102 dossier; lower callee remains unrecovered.
+SONIC	0x4c3870	function	GammaUpdateLaserTargets				ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Descriptive source caller role from complete E102 dossier; lower callee remains unrecovered.
+SONIC	0x4c2e90	function	GammaUpdateFan				ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Descriptive source caller role from complete E102 dossier; lower callee remains unrecovered.
+SONIC	0x4c4da0	function	GammaUpdateTargetEffects				ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Descriptive source caller role from complete E102 dossier; lower callee remains unrecovered.
+SONIC	0x4c44a0	function	GammaUpdateGunEffects				ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Descriptive source caller role from complete E102 dossier; lower callee remains unrecovered.
+SONIC	0x481180	function	GammaUpdateHeldTask				ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Descriptive source caller role from complete E102 dossier; lower callee remains unrecovered.
+SONIC	0x4c2f50	function	GammaGroundAttributes				ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Descriptive source caller role from complete E102 dossier; lower callee remains unrecovered.
+SONIC	0x4c33c0	function	GammaRunningEffects				ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Descriptive source caller role from complete E102 dossier; lower callee remains unrecovered.
+SONIC	0x3c53f68	global	GammaLineVertices	NJS_POINT3[2]		24	ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f	Mutable endpoint buffer passed through NJS_POINT3COL to late_DrawLine3D; source 4c4d00 and 4c4d1d write adjacent NJS_POINT3 X fields.

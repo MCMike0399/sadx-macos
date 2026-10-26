@@ -167,8 +167,8 @@ REFERENCE_UNIT_TARGETS := build/ninja-texture-selection-test build/saved-fov-ref
  build/game-frame-control-test build/reference-frame-control-test build/game-logic-test build/game-logic-support-test build/game-loop-test build/game-startup-test build/ninja-queue-lifecycle-test \
  build/game-mode-test build/game-mode-leaves-test build/game-runtime-test \
  build/player-acceleration-ground-test build/player-acceleration-alternate-test \
- build/player-auxiliary-effect-test build/player-direction-reset-test build/sonic-player-test build/sonic-actions-test \
- build/player-scene-position-binding-test build/input-constants-boot-test build/startup-initial-boot-test build/library-initial-boot-test
+ build/player-auxiliary-effect-test build/player-direction-reset-test \
+ build/input-constants-boot-test build/startup-initial-boot-test build/library-initial-boot-test
 $(REFERENCE_UNIT_TARGETS): build/%-test: tests/unit/$$(subst -,_,$$*).cpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< $(EXTRA_REFERENCE_SOURCES) build/libsadx-guest.a build/libsadx-core.a -o $@
 build/game-runtime-test: EXTRA_REFERENCE_SOURCES := tests/probes/native_session_control_defaults_probe.cpp tests/probes/native_input_initial_state_probe.cpp tests/probes/native_ninja_sine_table_probe.cpp tests/probes/native_ninja_fog_initial_state_probe.cpp tests/probes/native_ninja_screen_initial_state_probe.cpp tests/probes/native_sound_initial_state_probe.cpp tests/probes/native_game_view_initial_state_probe.cpp tests/probes/native_ninja_queue_initial_state_probe.cpp
@@ -213,7 +213,7 @@ build/ninja-queue-consumer-test: tests/fixtures/ninja_sprite_test_fixture.hpp
 build/native-player-path-probe.dylib build/native-player-direction-reset-probe.dylib: tests/fixtures/path_probe_data.hpp
 
 # Native probes: tests/probes/native_<x>_probe.cpp -> build/native-<x>-probe.dylib, called by the Unicorn oracles.
-REFERENCE_PLAYER_PROBES := build/native-ninja-texture-selection-probe.dylib build/native-ninja-sprite-display-probe.dylib build/native-library-init-probe.dylib build/native-player-scene-helpers-probe.dylib build/native-player-scene-position-probe.dylib build/native-fov-probe.dylib build/native-ninja-queue-color-probe.dylib build/native-game-frame-owners-probe.dylib build/native-fog-probe.dylib build/native-ninja-queue-consumer-probe.dylib build/native-game-view-probe.dylib  build/native-game-frame-control-probe.dylib build/native-speedrun-limiter-probe.dylib build/native-game-startup-probe.dylib build/native-game-logic-support-probe.dylib build/native-game-logic-probe.dylib build/native-game-loop-probe.dylib build/native-frame-completion-probe.dylib build/native-ninja-queue-lifecycle-probe.dylib build/native-ground-acceleration-probe.dylib build/native-alternate-acceleration-probe.dylib build/native-sonic-player-probe.dylib build/native-sonic-action-probe.dylib build/native-player-startup-probe.dylib
+REFERENCE_PLAYER_PROBES := build/native-ninja-texture-selection-probe.dylib build/native-ninja-sprite-display-probe.dylib build/native-library-init-probe.dylib build/native-player-scene-helpers-probe.dylib build/native-player-scene-position-probe.dylib build/native-fov-probe.dylib build/native-ninja-queue-color-probe.dylib build/native-game-frame-owners-probe.dylib build/native-fog-probe.dylib build/native-ninja-queue-consumer-probe.dylib build/native-game-view-probe.dylib  build/native-game-frame-control-probe.dylib build/native-speedrun-limiter-probe.dylib build/native-game-startup-probe.dylib build/native-game-logic-support-probe.dylib build/native-game-logic-probe.dylib build/native-game-loop-probe.dylib build/native-frame-completion-probe.dylib build/native-ninja-queue-lifecycle-probe.dylib build/native-ground-acceleration-probe.dylib build/native-alternate-acceleration-probe.dylib build/native-player-startup-probe.dylib
 $(REFERENCE_PLAYER_PROBES): build/native-%-probe.dylib: tests/probes/native_$$(subst -,_,$$*)_probe.cpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) $< build/libsadx-guest.a build/libsadx-core.a -o $@
 
@@ -450,3 +450,13 @@ build/native-polybuff-initialization-probe.dylib: tests/probes/native_polybuff_i
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) tests/probes/native_polybuff_initialization_probe.cpp src/engine/polybuff_initialization.cpp src/engine/normal_uv_strip.cpp src/cpu/x87_math.cpp build/softfloat/softfloat.a -o $@
 build/polybuff-initialization-test: tests/unit/polybuff_initialization.cpp tests/probes/native_polybuff_initialization_probe.cpp src/engine/polybuff_initialization.cpp src/engine/polybuff_initialization_binding.cpp src/engine/polybuff_initialization.hpp src/engine/normal_uv_strip.cpp src/cpu/x87_math.cpp build/softfloat/softfloat.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -DPOLYBUFF_INITIALIZATION_NATIVE_BINDING tests/unit/polybuff_initialization.cpp tests/probes/native_polybuff_initialization_probe.cpp src/engine/polybuff_initialization.cpp src/engine/polybuff_initialization_binding.cpp src/engine/normal_uv_strip.cpp src/cpu/x87_math.cpp build/softfloat/softfloat.a -o $@
+
+# Frozen current-publication fixtures receive observation syntax only in their own TU.
+CURRENT_REFERENCE_UNITS := build/sonic-player-test build/sonic-actions-test build/player-scene-position-binding-test
+$(CURRENT_REFERENCE_UNITS): build/%-test: tests/unit/$$(subst -,_,$$*).cpp tests/reference/actor_current_fixture.hpp build/libsadx-guest.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -include tests/reference/actor_current_fixture.hpp $< build/libsadx-guest.a build/libsadx-core.a -o $@
+CURRENT_REFERENCE_PROBES := build/native-sonic-player-probe.dylib build/native-sonic-action-probe.dylib
+$(CURRENT_REFERENCE_PROBES): build/native-%-probe.dylib: tests/probes/native_$$(subst -,_,$$*)_probe.cpp tests/reference/actor_current_fixture.hpp build/libsadx-guest.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) -include tests/reference/actor_current_fixture.hpp $< build/libsadx-guest.a build/libsadx-core.a -o $@
+build/actor-current-test: tests/unit/actor_current.cpp src/player/actor_current.cpp src/player/actor_current.hpp src/engine/task_work.cpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/actor_current.cpp src/player/actor_current.cpp src/engine/task_work.cpp -o $@

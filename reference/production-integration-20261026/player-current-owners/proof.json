@@ -1,0 +1,466 @@
+{
+  "schema": 1,
+  "base_commit": "c29d687a319d30ea986ea7ad2b0795751e8e7a7d",
+  "branch": "packet/player-current-owners",
+  "independent_review": "pending Root-initiated fresh STYLE review before native/Gamma consumption",
+  "frozen_judges": {
+    "tests/probes/native_sonic_player_probe.cpp": "ea27199dca1c3f9ea726e9e1be159ed14b4ec35ab594d975fe80d2f9cd25ca60",
+    "tests/probes/native_sonic_action_probe.cpp": "a32e1be6081014140f4cf1a46dff9d891016432b66da1c841d9223a9d07b7031",
+    "tests/unit/sonic_player.cpp": "c8696302d5c10c310aaf98058625bdb903841cec436661d9114a96961a817457",
+    "tests/unit/sonic_actions.cpp": "09124d809199c0f196c4ad729d0e359bb9ea5788826a5c90961020896677831d",
+    "tests/unit/player_scene_position_binding.cpp": "f8a4e36652e9af2169a85441898f1cd170cf7bd4e9a2d009bf989e85d2afef82",
+    "tools/oracles/verify_original_sonic_player.py": "d5b661520a090a7a4f4e4e6db71221c0e6bee1a24c9c8a01363f67af22f44c0a",
+    "tools/oracles/verify_original_sonic_actions.py": "d4076e926d22b4a2cfc0a5f4a4cf58b889f338a5019e0cf3d0a4b98a4560faf6",
+    "tests/fixtures/texture_list_gate_mutants.json": "78419c35b7356656fc78b29fc4a0ceaee8e74201738f26c10b91b9735100da9e",
+    "tests/fixtures/input_keyboard_goldens.hpp": "0a9f25e5a0d336a1f4381af39257fdc6f7403f43ca2aef743345284fb1c18fda",
+    "tests/fixtures/object_draw_original_mutants.json": "60e7225cbcdd2af591bac4a3aaeec4667f3aa53424123a091e8c10d2b837b54b",
+    "tests/fixtures/path_probe_data.hpp": "3f8803b9afa695f6f1ca411fb7b58ae66e60609b2af2df3dd74463c3b9dadda0",
+    "tests/fixtures/ninja_sprite_test_fixture.hpp": "1b4fa2a0ac6270d896f9e54c297829bdf3d43c378d195cbe34d0d6e87fd2b24e",
+    "tests/fixtures/texture_selection_core_mutants.json": "eeb6efa3485c4c91e3852d511ec0522293f923710b4ca0e106af9389f6f6def7"
+  },
+  "frozen_files_unchanged": true,
+  "oracles": {
+    "sonic_player": {
+      "baseline": {
+        "cases": 28800,
+        "by_entry": [
+          10608,
+          7008,
+          7152
+        ],
+        "stored_mismatches": 0,
+        "status_mismatches": 2840,
+        "ground_prefix_cases": 4032,
+        "ground_prefix_stored_mismatches": 0,
+        "ground_prefix_status_mismatches": 1632,
+        "case_sha256": "2acd398b460a3c6691a178fcb7b0862219ac1e11818909ad41cb8fb14e6f34fe",
+        "stored_state_matches": true,
+        "passed": false
+      },
+      "final": {
+        "cases": 28800,
+        "by_entry": [
+          10608,
+          7008,
+          7152
+        ],
+        "stored_mismatches": 0,
+        "status_mismatches": 2840,
+        "ground_prefix_cases": 4032,
+        "ground_prefix_stored_mismatches": 0,
+        "ground_prefix_status_mismatches": 1632,
+        "case_sha256": "2acd398b460a3c6691a178fcb7b0862219ac1e11818909ad41cb8fb14e6f34fe",
+        "stored_state_matches": true,
+        "passed": false
+      },
+      "baseline_verdict": [
+        "partial",
+        "values match; status_mismatches=2840, ground_prefix_status_mismatches=1632 (see limits)"
+      ],
+      "final_verdict": [
+        "partial",
+        "values match; status_mismatches=2840, ground_prefix_status_mismatches=1632 (see limits)"
+      ],
+      "baseline_report_sha256": "7c9fa0e4009cad7cbd07f2176371fc928b2eedc39e0f26df5799f38b489156e3",
+      "final_report_sha256": "46974a0b120657a79c2d32deb3f50a3b2baac3ccb53882b5136b1a59ac8e0e13",
+      "native_library_sha256": "3e95a3a2abb58878541c2c3a1bddc6b3d5cf347e52d051e992572c33e9ca6c0b",
+      "baseline_native_library_sha256": "d4b1a5e76114b787cdd9c9e7c3d9b9b4715ba6a80ce85f7b276605ea15103492",
+      "final_native_sources": {
+        "src/player/sonic_player.hpp": "8ab874d28623af1876eebed149625c447f112a677098c0fa4f6e56da3286b0b4",
+        "src/player/sonic_player.cpp": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483",
+        "tests/probes/native_sonic_player_probe.cpp": "ea27199dca1c3f9ea726e9e1be159ed14b4ec35ab594d975fe80d2f9cd25ca60",
+        "tools/oracles/verify_original_sonic_player.py": "d5b661520a090a7a4f4e4e6db71221c0e6bee1a24c9c8a01363f67af22f44c0a",
+        "src/player/ground_acceleration.hpp": "35bde538be42156764534857ec3458a443932ab20a6f77832f87a649119f288f",
+        "src/player/ground_acceleration.cpp": "c79890f79d3d092eb5bf45c73223467bc6bc20105199830f32a5fba44b4cecf0",
+        "src/player/ground_acceleration_internal.hpp": "c9938bc44091750a8faeca2c6915b298295ff1e5dc2774718bef183657824595",
+        "src/player/ground_acceleration_native.cpp": "f1729d583f165daf41bf49296fb839b3b9d0badbc73c5b13977060c0670eece9",
+        "src/player/ground_arithmetic.hpp": "703a0c6c05cc2d1a6ee2e694ea48b7cc094b3ff8ca6f3dfc786791870272e7c9",
+        "src/player/ground_friction.cpp": "63ef1ec097115555b2e7bcb33f212d3678efe69a3cb326b8db2edfd5af01b58d",
+        "src/guest/ground_acceleration_reference.hpp": "2da1d2ac5be19c17e4b71cdee209e07956b3ebebb0fdf03716044382e0e5471a",
+        "src/guest/player_acceleration_ground.cpp": "2dfdea7e29e79b2d6b95897b38165246821e7ccf5ff98e7a73f2acad1eaf4f75",
+        "src/guest/player_acceleration_friction.cpp": "c2b099a18a612ab4d8c11670827bea33b9066d262e79d65844f493a2ac7e2ad1",
+        "src/player/player_acceleration_ground.hpp": "2b8bc9a2115dffbb8c442c24dfd82ec31d807dae04478e40b5b02d9a47e0e9f6",
+        "src/player/player_acceleration_friction.hpp": "fc27f80b502de6f0bcdf4ac8dd840eb9a176f6d04d6a8a57dea609cc8e11c705",
+        "src/cpu/fidelity_float.hpp": "f8ab14de7dc01f0d054ce4098e61af34b7e5ba39f2281fc506be9d1864869dcb"
+      },
+      "verifier_rc": 0
+    },
+    "sonic_actions": {
+      "baseline": {
+        "cases": 30192,
+        "entry_cases": {
+          "0x495fa0": 2880,
+          "0x492f90": 2472,
+          "0x494f70": 936,
+          "0x495e60": 1308,
+          "0x493120": 924,
+          "0x496ee0": 2424,
+          "0x442680": 972,
+          "0x442570": 1344,
+          "0x43bf40": 1020,
+          "0x4b83f0": 3132,
+          "0x4b8320": 876,
+          "0x494ff0": 948,
+          "0x4429c0": 1080,
+          "0x495c30": 1056,
+          "0x495b50": 1068,
+          "0x495ba0": 996,
+          "0x4930d0": 1128,
+          "0x495080": 2496,
+          "0x496f50": 3132
+        },
+        "mandatory_boundaries": {
+          "0x49308d": 144,
+          "0x494fc9": 204,
+          "0x495eaa": 432,
+          "0x495f07": 48,
+          "0x496f33": 1644,
+          "0x4951d8": 1008,
+          "0x495286": 1128,
+          "0x49506b": 48,
+          "0x495fb9": 720,
+          "0x49526f": 240,
+          "0x4950b6": 240,
+          "0x495190": 324,
+          "0x495ff8": 36,
+          "0x4973b6": 48
+        },
+        "stored_mismatches": 0,
+        "boundary_mismatches": 0,
+        "status_mismatches": 2172,
+        "case_sha256": "011512a72d2c21b1ea2362ba8cf86393b52f13601b89055fa8137cd3d505053b",
+        "stored_state_matches": true,
+        "passed": false
+      },
+      "final": {
+        "cases": 30192,
+        "entry_cases": {
+          "0x495fa0": 2880,
+          "0x492f90": 2472,
+          "0x494f70": 936,
+          "0x495e60": 1308,
+          "0x493120": 924,
+          "0x496ee0": 2424,
+          "0x442680": 972,
+          "0x442570": 1344,
+          "0x43bf40": 1020,
+          "0x4b83f0": 3132,
+          "0x4b8320": 876,
+          "0x494ff0": 948,
+          "0x4429c0": 1080,
+          "0x495c30": 1056,
+          "0x495b50": 1068,
+          "0x495ba0": 996,
+          "0x4930d0": 1128,
+          "0x495080": 2496,
+          "0x496f50": 3132
+        },
+        "mandatory_boundaries": {
+          "0x49308d": 144,
+          "0x494fc9": 204,
+          "0x495eaa": 432,
+          "0x495f07": 48,
+          "0x496f33": 1644,
+          "0x4951d8": 1008,
+          "0x495286": 1128,
+          "0x49506b": 48,
+          "0x495fb9": 720,
+          "0x49526f": 240,
+          "0x4950b6": 240,
+          "0x495190": 324,
+          "0x495ff8": 36,
+          "0x4973b6": 48
+        },
+        "stored_mismatches": 0,
+        "boundary_mismatches": 0,
+        "status_mismatches": 2172,
+        "case_sha256": "011512a72d2c21b1ea2362ba8cf86393b52f13601b89055fa8137cd3d505053b",
+        "stored_state_matches": true,
+        "passed": false
+      },
+      "baseline_verdict": [
+        "partial",
+        "values match; status_mismatches=2172 (see limits)"
+      ],
+      "final_verdict": [
+        "partial",
+        "values match; status_mismatches=2172 (see limits)"
+      ],
+      "baseline_report_sha256": "237b84288b0458cdb6cc2ac1e1c9890e7830faff77e51916cedf2bf8447dfc3b",
+      "final_report_sha256": "8941e6fd491a4b50f1caeb7928440d048e46c05687b013bbc9b342789da57b31",
+      "native_library_sha256": "7692b3bf838359c719821bf8609b988691fd545394dc910be3f1c1adeb77f0c9",
+      "baseline_native_library_sha256": "0a5af90a223a17c3e511002844c810e2fe0717b39c01914339e1606ada2408de",
+      "final_native_sources": {
+        "src/player/sonic_player.hpp": "8ab874d28623af1876eebed149625c447f112a677098c0fa4f6e56da3286b0b4",
+        "src/player/sonic_player.cpp": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483",
+        "tests/probes/native_sonic_action_probe.cpp": "a32e1be6081014140f4cf1a46dff9d891016432b66da1c841d9223a9d07b7031",
+        "tools/oracles/verify_original_sonic_actions.py": "d4076e926d22b4a2cfc0a5f4a4cf58b889f338a5019e0cf3d0a4b98a4560faf6",
+        "src/player/player_task.hpp": "ca3b911db75e90e2ddabc2a4bef3e4fae6578c0405f864001c2e68162e07650d",
+        "src/player/player_physics.hpp": "08bf9f1949cdb7fd1605429c9b9663265e61d62352b9f5d018e7244a74738530",
+        "src/player/player_position.hpp": "4a9343e6107b2cad271dfe2c369084a282f32b5c088f90c4bbd73fb40e3165de",
+        "src/player/ground_acceleration.hpp": "35bde538be42156764534857ec3458a443932ab20a6f77832f87a649119f288f",
+        "src/player/ground_acceleration.cpp": "c79890f79d3d092eb5bf45c73223467bc6bc20105199830f32a5fba44b4cecf0",
+        "src/player/ground_acceleration_internal.hpp": "c9938bc44091750a8faeca2c6915b298295ff1e5dc2774718bef183657824595",
+        "src/player/ground_acceleration_native.cpp": "f1729d583f165daf41bf49296fb839b3b9d0badbc73c5b13977060c0670eece9",
+        "src/player/ground_arithmetic.hpp": "703a0c6c05cc2d1a6ee2e694ea48b7cc094b3ff8ca6f3dfc786791870272e7c9",
+        "src/player/ground_friction.cpp": "63ef1ec097115555b2e7bcb33f212d3678efe69a3cb326b8db2edfd5af01b58d",
+        "src/guest/ground_acceleration_reference.hpp": "2da1d2ac5be19c17e4b71cdee209e07956b3ebebb0fdf03716044382e0e5471a",
+        "src/guest/player_acceleration_ground.cpp": "2dfdea7e29e79b2d6b95897b38165246821e7ccf5ff98e7a73f2acad1eaf4f75",
+        "src/guest/player_acceleration_friction.cpp": "c2b099a18a612ab4d8c11670827bea33b9066d262e79d65844f493a2ac7e2ad1",
+        "src/player/player_acceleration_ground.hpp": "2b8bc9a2115dffbb8c442c24dfd82ec31d807dae04478e40b5b02d9a47e0e9f6",
+        "src/player/player_acceleration_friction.hpp": "fc27f80b502de6f0bcdf4ac8dd840eb9a176f6d04d6a8a57dea609cc8e11c705",
+        "src/cpu/fidelity_float.hpp": "f8ab14de7dc01f0d054ce4098e61af34b7e5ba39f2281fc506be9d1864869dcb"
+      },
+      "verifier_rc": 0
+    }
+  },
+  "source_owners": {
+    "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "owners": [
+      {
+        "address": "0x3abdf60",
+        "source_size": 4,
+        "section": {
+          "name": ".data",
+          "rva": 4792320,
+          "virtual_size": 55053888,
+          "raw_size": 50745344,
+          "file_offset": 4792320
+        },
+        "default": "zero-filled virtual tail"
+      },
+      {
+        "address": "0x3abdf64",
+        "source_size": 4,
+        "section": {
+          "name": ".data",
+          "rva": 4792320,
+          "virtual_size": 55053888,
+          "raw_size": 50745344,
+          "file_offset": 4792320
+        },
+        "default": "zero-filled virtual tail"
+      },
+      {
+        "address": "0x3c55d45",
+        "source_size": 1,
+        "section": {
+          "name": ".data",
+          "rva": 4792320,
+          "virtual_size": 55053888,
+          "raw_size": 50745344,
+          "file_offset": 4792320
+        },
+        "default": "zero-filled virtual tail"
+      }
+    ]
+  },
+  "host_layout": {
+    "platform": "arm64 macOS",
+    "handle_size": 16,
+    "state_size": 40,
+    "primary_offset": 0,
+    "player_offset": 16,
+    "super_sonic_offset": 32,
+    "sonic_globals_size": 312
+  },
+  "mutants": [
+    {
+      "name": "drop-primary",
+      "original": "    state.primary = std::move(value);",
+      "replacement": "    (void)value;",
+      "source_sha256": "afb14df5324e7a9a23c596c7ed15165c0b7fb3f62ecb7a31d349933706027221",
+      "compile_rc": 0,
+      "run_rc": -6,
+      "detected": true,
+      "diagnostic": "Assertion failed: (value == state.primary && state.primary == second), function operator(), file actor_current.cpp, line 34."
+    },
+    {
+      "name": "wrong-player-slot",
+      "original": "    state.player = std::move(value);",
+      "replacement": "    state.primary = std::move(value);",
+      "source_sha256": "b91138d2e8d2b162075f627cc14033da1ebe837fdd499869e2ef0847be1ed44e",
+      "compile_rc": 0,
+      "run_rc": -6,
+      "detected": true,
+      "diagnostic": "Assertion failed: (actor_current::read_player(state) == first), function main, file actor_current.cpp, line 28."
+    },
+    {
+      "name": "retain-on-null",
+      "original": "    state.player = std::move(value);",
+      "replacement": "    if (value) state.player = std::move(value);",
+      "source_sha256": "cae291414ce0cd1deafb98ba30dabe02c712923973f3067abdae26e02f2dadca",
+      "compile_rc": 0,
+      "run_rc": -6,
+      "detected": true,
+      "diagnostic": "Assertion failed: (value == state.player && !state.player), function operator(), file actor_current.cpp, line 38."
+    },
+    {
+      "name": "observe-before-store",
+      "original": "    state.super_sonic = value;\n    if (observation && observation->super_sonic)\n        observation->super_sonic(state.super_sonic);",
+      "replacement": "    if (observation && observation->super_sonic)\n        observation->super_sonic(state.super_sonic);\n    state.super_sonic = value;",
+      "source_sha256": "ac79da6fe49f610d5e91721e8f0228897b40348909bb9abef0bdddb352d8695b",
+      "compile_rc": 0,
+      "run_rc": -6,
+      "detected": true,
+      "diagnostic": "Assertion failed: ((stores == std::vector<int>{1, 1, 2, 4, 3})), function main, file actor_current.cpp, line 51."
+    },
+    {
+      "name": "skip-same-primary",
+      "original": "    state.primary = std::move(value);",
+      "replacement": "    if (state.primary == value) return;\n    state.primary = std::move(value);",
+      "source_sha256": "b5541f11e00a6ab113bc7436544ab85c24019753cd25f0f0b24c1e8c96896bce",
+      "compile_rc": 0,
+      "run_rc": -6,
+      "detected": true,
+      "diagnostic": "Assertion failed: ((stores == std::vector<int>{1, 1, 2, 4, 3})), function main, file actor_current.cpp, line 51."
+    },
+    {
+      "name": "require-observation",
+      "original": "    state.super_sonic = value;",
+      "replacement": "    if (!observation || !observation->super_sonic) return;\n    state.super_sonic = value;",
+      "source_sha256": "0837393e3f3983007fa453b9f7aabf8c99bc896fedc8137b2ca339266ed84ef9",
+      "compile_rc": 0,
+      "run_rc": -6,
+      "detected": true,
+      "diagnostic": "Assertion failed: (state.primary == first && state.player == second && state.super_sonic == 173), function main, file actor_current.cpp, line 57."
+    },
+    {
+      "name": "normalize-byte",
+      "original": "    state.super_sonic = value;",
+      "replacement": "    state.super_sonic = value ? 1 : 0;",
+      "source_sha256": "e6ed3d4c6009a3912cad2dfc345f69a6e5fa3cf974ecbff300b09a60dc96d313",
+      "compile_rc": 0,
+      "run_rc": -6,
+      "detected": true,
+      "diagnostic": "Assertion failed: (state.primary == first && state.player == second && state.super_sonic == 173), function main, file actor_current.cpp, line 57."
+    }
+  ],
+  "unit_results": {
+    "core_only_rc": 0,
+    "standalone_actor_current_and_task_work_only_rc": 0,
+    "holdout_worlds": 257,
+    "frozen_legacy_units_rc": [
+      0,
+      0,
+      0
+    ],
+    "legacy_output": "Sonic control dispatch and source availability tests passed across 12 explicit CW profiles\nGrounded/running/jump/spindash predicate and partial-owner tests passed across12 explicit CW profiles\nScene binding: 136 actual ECoast PSetPosition paths, 96 retained responses, live parameters, renderer failure and Sonic later-boundary diagnostics passed.\n"
+  },
+  "checks": {
+    "provenance_rc": 0,
+    "global_owners_rc": 0,
+    "layers_rc": 0,
+    "readability_rc": 0,
+    "diff_check_rc": 0,
+    "profile": {
+      "summary": {
+        "patches": 618,
+        "active_patches": 121,
+        "active_unhandled_patches": 79,
+        "reports": 2,
+        "declared_exe_ranges": 5,
+        "unhandled_overlaps": 0,
+        "handled_overlaps": 0,
+        "undetermined_overlaps": 0,
+        "reports_without_addressed_ranges": [
+          "sonic_actions.json"
+        ]
+      },
+      "unhandled_overlaps": [],
+      "handled_overlaps": [],
+      "undetermined_overlaps": [],
+      "report_ranges": {
+        "sonic_actions.json": {
+          "exe_ranges": 0,
+          "dll_ranges_skipped": 0,
+          "opaque_range_hashes": [],
+          "unparsed_keys": []
+        },
+        "sonic_player.json": {
+          "exe_ranges": 5,
+          "dll_ranges_skipped": 0,
+          "opaque_range_hashes": [],
+          "unparsed_keys": []
+        }
+      }
+    }
+  },
+  "readability": {
+    "new_files_all_metrics_zero": true,
+    "sonic_cpp_address_identifiers": [
+      174,
+      171
+    ],
+    "sonic_hpp_address_identifiers": [
+      9,
+      6
+    ],
+    "all_other_metrics_unchanged": true
+  },
+  "build": {
+    "max_jobs": 2,
+    "core_rc": 0,
+    "reference_rc": 0,
+    "fixture_compile_rc": 0,
+    "standalone_compile_rc": 0,
+    "compile_flags": "-std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc -Itests/fixtures",
+    "fixture_only_forced_include": "tests/reference/actor_current_fixture.hpp",
+    "core_archive_sha256": "a657aca42657e8515281563257fc74862834fe618ad6f159a0ad497c7e6668a4",
+    "reference_archive_sha256": "116c39b0b821a2a6fefc3a7a511457a81db40884df3263b2b587d1dabe036adf",
+    "standalone_binary_sha256": "a9df09e64f6a06ff6f7cf433eaffa5f91d8e328f895dfe6186d7c8c21b8c3edb"
+  },
+  "salvage": {
+    "attempts": 1,
+    "verdict": "incomplete",
+    "recovered_files": 0,
+    "unsupported": 71,
+    "transcript": "21/rollout-2026-10-21T17-31-27-01a160ce-300a-7732-8cfa-c278cfebf989.jsonl",
+    "executed_recovered_commands": false
+  },
+  "not_run": [
+    "full gate",
+    "apps/journeys",
+    "Ghidra",
+    "Root fresh independent review",
+    "push"
+  ],
+  "not_edited": [
+    "Gamma",
+    "Session/runtime",
+    "Makefile",
+    "native-sources.txt",
+    "judge manifest",
+    "existing judges/probes/units/expectations/tolerances"
+  ],
+  "source_and_registration_sha256": {
+    "src/player/actor_current.hpp": "2a4b95915be5bf2c9fb2f7f1b37f99e4eb3323435e0fa3c2f9d21ff4ddb95b41",
+    "src/player/actor_current.cpp": "94d0b802a2267a808b3baf9ce675408a339d99da4eaf5a35ac7951f7220f7fd6",
+    "src/player/sonic_player.hpp": "8ab874d28623af1876eebed149625c447f112a677098c0fa4f6e56da3286b0b4",
+    "src/player/sonic_player.cpp": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483",
+    "tests/reference/actor_current_fixture.hpp": "0eb3cfe9854f6fd9cee067ad84bdf52325dbb47a0c555eb32f74da2fc1a83131",
+    "tests/unit/actor_current.cpp": "02d5706cc1783a0e05a91f2e8890fdbde421ba6341f2ee1541a99db9677a25c7",
+    "tests/unit/manifest.tsv": "605eef6c9314aa089ed790dbbf2e5f2041ad6b0a6134e9b538305e62d5fac600",
+    "reference/readability-baseline.json": "33ed467cf7e2fb1f9c5751b403d4cdc0df16e9526471454cc69b40319b43e56b",
+    "reference/symbols/legacy-identifiers.json": "541b2db511db7fabbcb546a0bf6a4d86161b484696e03d8156a5b26faf00e158"
+  },
+  "read_only_external_inputs_sha256": {
+    "build/assets/sonic-player-constants.bin": "cac3a43b8a00509706505b79771f4f9c2ec6b500a925b2cb4820b611fffe34b7",
+    "build/assets/sonic-action-dispatch.bin": "e78b7fb8a08356eca526539587e821b2ac2a642a623411ad374f1cfee846ab77",
+    "build/assets/ninja-trig.f32": "3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed",
+    "build/assets/ninja-unit.f32": "5998e9d1dd9bf48af6af87a1ef8c7783b818ac8329637ada08cc5fb329042376",
+    "build/assets/player-parameters.bin": "3f69076118fcc6a77c55e600eb337944eb6562e5b0979104b58058ad64ba5107",
+    "build/assets/player-scene-position-constants.bin": "ade5df1cd0323c829696ef023192a61e3ba22c5662abbcd48c0d7dafc374c87c",
+    "build/assets/player-rotation-constants.bin": "e57e7537f25e6b0628370057deb2f9034ddf01f9b5aa8a337cf7d77c1a597f7e",
+    "build/assets/player-contact-initialization-constants.bin": "e79730822bdc1cb8d10a78fcc832bf7080b4aa4efa9cf64c1c71e670f5188576",
+    "build/assets/player-contact-response-constants.bin": "10889309fdb5c0b466b1f62c5d0adcda8f271ce9a4b5a6332feee9397899e557",
+    "build/assets/player-contact-attribute-constants.bin": "04a4468e8e720781a8855884a62f4a745c95af3c58b61a6dca28afd7be1b7561",
+    "build/assets/floor-angle-constants.bin": "78313b62673c30407e9f765030d8586011681f83aded82325b1f9ccad4ed29b1",
+    "build/assets/player-mesh-query-constants.bin": "d1564af16fb5ea7d59d2ebdf87a61dcd1139ec4930a8c188a07ed5e3a762398c",
+    "build/assets/coordinate-axis-constants.bin": "22b6f43bd8d27738d3213f29e96b62d01d9d6c0ab4f9732aaae803186f51eab7",
+    "build/assets/player-scene-constants.bin": "4b9586c2ff38668c58b07e8539030e37f3d2372c1e5e5f22ac5f8a39b30a4829",
+    "build/assets/player-position-constants.bin": "f7be1c27e17fce5d129d33681b2ac8e1f279559ae671a9486ede618daa7112a6",
+    "reference/original-player-scene-position-comparison.cases.bin": "e3006f51ed725e1fa698ad9d0b2662287abc30cb9115bdaae5ba7b3ff134f2f2"
+  },
+  "reference_archive_limit": "Legacy Sonic still resolves ground acceleration from the existing guest implementation; native owner-only standalone unit does not link any guest code."
+}

@@ -1517,8 +1517,11 @@ namespace sadx  {
         if(!f.task)return fail(SonicPlayerFailure::unknown_field,0x49a9b8);
         if(!f.world)return fail(SonicPlayerFailure::unknown_motion_binding,0x49a9c0);
         if(!f.player)return fail(SonicPlayerFailure::unknown_player_binding,0x49a9c0);
-        rt.globals.current_task_at_3abdf60=f.object->primary_work;
-        rt.globals.current_player_at_3abdf64=player(f)?player(f)->player_work:TaskWorkHandle{};
+        actor_current::set_primary(rt.globals.current, f.object->primary_work,
+                                  rt.globals.current_observation);
+        actor_current::set_player(rt.globals.current,
+                                 player(f) ? player(f)->player_work : TaskWorkHandle{},
+                                 rt.globals.current_observation);
         auto& flags=f.task->orientation.flags;
         if((flags&0x20)&&!gt_unordered(fp.compare_float_memory(fp.from_float(f.world->motion.speed.y),rt.constants.at(0x7dcb2c))))  {
             flags|=2;
@@ -1599,7 +1602,8 @@ namespace sadx  {
             timer=static_cast<std::uint16_t>(*timer+1);
         }
         auto action=static_cast<std::int8_t>(*f.task->action_at_0);
-        rt.globals.range_at_3c55d45=action>=75&&action<=82?1:0;
+        actor_current::set_super_sonic(rt.globals.current, action >= 75 && action <= 82 ? 1 : 0,
+                                       rt.globals.current_observation);
         return dispatch_sonic_player_action(f,rt,fp);
     }
 }

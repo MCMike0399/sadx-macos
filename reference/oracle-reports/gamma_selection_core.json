@@ -1,0 +1,30 @@
+{
+ "profile": "original E102 mode0 plus mandatory common tail; concrete lower receipts",
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "original_ranges_sha256": {
+  "0x483430-0x4841cf": "75e0a0b41f8c60e9b27ae1befd885782f698964bdaa8fd9cd77407a530c7875c"
+ },
+ "case_count": 1422,
+ "value_failures": 0,
+ "fp_flag_partials": 498,
+ "passed": false,
+ "values_match": true,
+ "flag_mismatches": 498,
+ "holdout": false,
+ "native_library_sha256": "4f11ec2c478ba8e8aead02d68af5ba8f69451bbfb328c2da3747c12ce8b543a5",
+ "failures": [],
+ "limits": [
+  "Lower callees are concrete receipt contracts, not recovered implementations.",
+  "Only mode0 is recovered; other modes stop at explicit dispatch boundary.",
+  "No rendering, full gate, route or story claim.",
+  "Unicorn reports zero where native x87 records precision or invalid flags; partials remain failures of strict FP fidelity.",
+  "Shadow receipts include binary32 and the retained 1+2^-24 return; other lower return values remain bounded fixtures.",
+  "Hardware unmasked exception delivery is unverified."
+ ],
+ "tracked_summary": {
+  "full_sha256": "d69597a3900ea63a53929d7f2e27207324402e5c780be9644ff23cb8594c740c",
+  "full_bytes": 1127,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

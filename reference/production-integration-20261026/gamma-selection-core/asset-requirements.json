@@ -1,0 +1,163 @@
+{
+  "exe_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "dll_sha256": "76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5",
+  "recipe_count": 91,
+  "declaration_count": 78,
+  "null_declarations": [
+    61
+  ],
+  "constructed_rows": [
+    72
+  ],
+  "sentinel_recipe_bytes_sha256": "67f54e57e879e7f831653c842440e92d5ea2cfd174a75ccec96fdb09a74addcd",
+  "stand": {
+    "export_index": 0,
+    "action": "0x1020e344",
+    "object": "0x10207290",
+    "motion": "0x1020e338",
+    "frames": 16,
+    "channels": 3,
+    "interpolation": 2,
+    "object_count": 77
+  },
+  "weld": {
+    "rows": [
+      {
+        "root_object_row": 0,
+        "source_object_row": 24,
+        "vertex_count": 2,
+        "input_mode": 4
+      },
+      {
+        "root_object_row": 0,
+        "source_object_row": 25,
+        "vertex_count": 2,
+        "input_mode": 5
+      },
+      {
+        "root_object_row": 0,
+        "source_object_row": 26,
+        "vertex_count": 0,
+        "input_mode": 6
+      },
+      {
+        "root_object_row": 0,
+        "source_object_row": 27,
+        "vertex_count": 0,
+        "input_mode": 7
+      }
+    ],
+    "sentinel_row": 4,
+    "sentinel_bytes": 24,
+    "source_object_pointers": [
+      "0x10207290",
+      "0x1020323c",
+      "0x10202744",
+      "0x10205cc8",
+      "0x102070f0"
+    ]
+  },
+  "collision": {
+    "address": "0x91c5b8",
+    "count": 3,
+    "stride": 48,
+    "sha256": "85d7f74acbcbcf10d5654fafc2404ce02dea65ad9d74b0b75bb932f997272e03"
+  },
+  "materials_export": "0x100074f8",
+  "materials": [
+    {
+      "table_row": 1,
+      "material_index": 6,
+      "array": "0x10200d48",
+      "record": "0x10200dc0",
+      "sha256": "b0854ef0e519117c4fa98bd23eb53bc6050f49c1a61307f75eca2c4e24d22794"
+    },
+    {
+      "table_row": 5,
+      "material_index": 2,
+      "array": "0x102009c0",
+      "record": "0x102009e8",
+      "sha256": "7116401dbaacc5193de144aebd82de1c58a9e524517ee917942beab70a2e40b0"
+    },
+    {
+      "table_row": 4,
+      "material_index": 2,
+      "array": "0x1020052c",
+      "record": "0x10200554",
+      "sha256": "5ec9c3e8148f7959805c200d0f3ea26905eac556946f5f39c76ae998e7e20cb4"
+    },
+    {
+      "table_row": 3,
+      "material_index": 2,
+      "array": "0x10204ec8",
+      "record": "0x10204ef0",
+      "sha256": "8021d2eeef9a581f06240324d2ae8404a77e3d28df9b1bd465072c780bf4ba58"
+    },
+    {
+      "table_row": 2,
+      "material_index": 2,
+      "array": "0x102062d8",
+      "record": "0x10206300",
+      "sha256": "8c0f11a5b05ddae5c9ae50fcefe744aa7fef6f17d646080c654e265eda8d0049"
+    }
+  ],
+  "texture_character": 6,
+  "texture_declaration": [
+    {
+      "row": 0,
+      "archive": "E102",
+      "texture_list": "0x91c560"
+    },
+    {
+      "row": 1,
+      "archive": "E102BEAM",
+      "texture_list": "0x91c568"
+    },
+    {
+      "row": 2,
+      "archive": "E102EFFECT",
+      "texture_list": "0x91c570"
+    },
+    {
+      "row": 3,
+      "archive": "E102TIME",
+      "texture_list": "0x91d5e0"
+    },
+    {
+      "row": 4,
+      "archive": "E102HIT",
+      "texture_list": "0x91d15c"
+    },
+    {
+      "row": 5,
+      "archive": null,
+      "texture_list": null
+    }
+  ],
+  "line_vertices": {
+    "address": "0x3c53f68",
+    "count": 2,
+    "stride": 12,
+    "storage": "mutable BSS"
+  },
+  "line_colors": {
+    "address": "0x91c648",
+    "count": 2,
+    "stride": 4,
+    "sha256": "fadb83669dd365561fc2af4d4792958d462f6fbafc75b47323c6e0c37cde30ee"
+  },
+  "line_point_count": 2,
+  "setup_source_ranges": {
+    "0x49fb10-0x49fb29": "640587874714fff946ca09220a4d5f42fc428bd20dcd3a2cd2aeb0ae0704cbc6",
+    "0x4c5420-0x4c5436": "b6fbb51beab3d38800a84fe3b140c42419ba33755fdc6a4810ade1c4257caf22",
+    "0x4c2e10-0x4c2e48": "9c6112f335d944bf5e73d5f6c7baa657dcbf08bd880f2ffce4089dbe46181e32",
+    "0x4c2e90-0x4c2f42": "15976642974927fb71d85a55eac870e405532d3a38964d4ab60dc44a36f4d3ed",
+    "0x4c4cf2-0x4c4d2f": "12f010fbd9af1ef85cf0f525090c4382a563e09283b9ec338b86e50e9db044db"
+  },
+  "limits": [
+    "No payloads exported; Root owns importer changes.",
+    "Constructed row72 references source action3c5d530; its producer is a separate dependency.",
+    "Controller source has no direct event580 call.",
+    "Source lower setup bodies are byte-hashed navigation; their implementation is not claimed."
+  ]
+}
