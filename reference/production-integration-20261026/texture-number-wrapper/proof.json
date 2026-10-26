@@ -1,0 +1,130 @@
+{
+  "reason": "Correct actual SpriteImmediate78d140 caller semantics; indexed77f440 wrongly wrote requested memory and returned1.",
+  "source_dossier": "reference/ghidra-game-loop-recovery/dbg-78d140.json",
+  "dossier_sha256": "e9a67115669ae51c38347c1518206f586b8086cc06541775fb34e3ca1d0c2ea0",
+  "evidence_id": "ev_fb45801d594544b47490559aecd18b682f0bca06d60e77ba9a21eb47618ff9db",
+  "source_body": {
+    "available": true,
+    "provenance": "ghidra-function-body-address-set",
+    "ranges": [
+      {
+        "start": "0x78d140",
+        "end": "0x78d153"
+      }
+    ],
+    "total_bytes": 20,
+    "span_bytes": 20,
+    "non_contiguous": false,
+    "contains_entry": true
+  },
+  "assembly": [
+    "0x78d140: LEA EAX, [ECX + ECX*0x2]",
+    "0x78d143: MOV ECX, dword ptr [0x03d0fa24]",
+    "0x78d149: MOV EDX, dword ptr [ECX]",
+    "0x78d14b: MOV ECX, dword ptr [EDX + EAX*0x4 + 0x8]",
+    "0x78d14f: JMP 0x0078cf20"
+  ],
+  "source_effects": [
+    "ECX input index;32-bit wrapped12-byte name addressing.",
+    "Read current list and memory binding;tail jump to existing78cf20 cache.",
+    "No queued/current/requested stores;return cache format result.",
+    "Null current list is a source read fault, not the guarded77f440 minus-one return."
+  ],
+  "validation": {
+    "dev_cases": 3408,
+    "holdout_cases": 5408,
+    "value_mismatches": 0,
+    "mutants": [
+      {
+        "name": "writes_requested",
+        "compile_exit_status": 0,
+        "oracle_exit_status": 1,
+        "cases": 3408,
+        "mismatches": 590,
+        "first_case": 124,
+        "source_sha256": "9b15a20632611d6f402988b54d680918a893051c725eaac286be4b56ecf8d8ee",
+        "library_sha256": "763b54e294d043f8d02aecb343d67ef124c5a30d11017d58a21cd73d5171571b"
+      },
+      {
+        "name": "wrong_return",
+        "compile_exit_status": 0,
+        "oracle_exit_status": 1,
+        "cases": 3408,
+        "mismatches": 133,
+        "first_case": 264,
+        "source_sha256": "bae83265fe708d19f8380d5ec69b69ae717c07c39d14712b81963ea850e69f4d",
+        "library_sha256": "39a579e7387997f77d2018e324e85f034764a83ea13a10026466f06a8c9e1f01"
+      },
+      {
+        "name": "wrong_stride",
+        "compile_exit_status": 0,
+        "oracle_exit_status": 1,
+        "cases": 3408,
+        "mismatches": 346,
+        "first_case": 140,
+        "source_sha256": "8b0548324da472c5dfa4e09d96b1c80f1b23750164d283dc9320950581740b05",
+        "library_sha256": "db02a658a6a54b8eba17f2fb37d9d39a2c21d673222799dfdefcc3448a9da2f3"
+      },
+      {
+        "name": "null_list_success",
+        "compile_exit_status": 0,
+        "oracle_exit_status": 1,
+        "cases": 3408,
+        "mismatches": 1643,
+        "first_case": 0,
+        "source_sha256": "1573dd5b9ac9554cfb9ad830d32bc76102367a39316d250014e2e1903bafeb4f",
+        "library_sha256": "f2fa5129181f8586b108eb053813e9cdf7d92dcf94e53869d5903aff3227cb3a"
+      },
+      {
+        "name": "clobbers_current",
+        "compile_exit_status": 0,
+        "oracle_exit_status": 1,
+        "cases": 3408,
+        "mismatches": 785,
+        "first_case": 124,
+        "source_sha256": "d60f776a5f02aab468bd1c287eda37b36fcd12eb9ee007285e37bd264c6d615b",
+        "library_sha256": "08b00f7eda3ab96fc01f7c14d39895834bc9295ebfba75417e9bdfb7382bc1fd"
+      }
+    ]
+  },
+  "probe_scope": [
+    "Concrete canonical native texture records, with original cache/palette bodies executed.",
+    "Unprovided array/non-memory words stop at their original source read boundary, not invented pointer values.",
+    "Unsupported palette upload retains the unchanged prefix boundary."
+  ],
+  "stopped_gate": {
+    "make_pid": 1186,
+    "terminated_processes": [
+      1186,
+      1189,
+      8236,
+      8251,
+      8610,
+      8611,
+      8631,
+      8632,
+      8643,
+      8644,
+      8661,
+      8662,
+      8676,
+      8679,
+      8715,
+      8724,
+      8725,
+      8726,
+      8729,
+      8730,
+      8740,
+      8741
+    ],
+    "reason": "Confirmed runtime SpriteImmediate caller used77f440 rather than actual78d140; gate stopped before recording success.",
+    "source_commit": "4c34bd7",
+    "limit": "No successful full gate claimed for this attempt.",
+    "observed_exit_status": 2
+  },
+  "limits": [
+    "No completed N3b/model/GPU claim.",
+    "Root integration gate and source-only export must be repeated after this correction."
+  ]
+}

@@ -12,7 +12,7 @@ struct DisplayTextureProbe {
     }
     static void alias_and_lifetime(Display &display) {
         constexpr std::int32_t kAliasedIndex = 41, kOtherIndex = 83;
-        constexpr std::uint32_t kOpaqueWhite = 0xffffffff;
+        constexpr std::uint32_t kOpaqueWhite = 0xffffffff, kAlternateFormat = 0x08000000;
         auto first_image = image({11, 12, 13, 255});
         auto old_image = image({21, 22, 23, 255});
         auto next_image = image({31, 32, 33, 255});
@@ -21,6 +21,7 @@ struct DisplayTextureProbe {
         auto &next = display.texture_pool_[2];
         first.global_index = old.global_index = kAliasedIndex;
         next.global_index = kOtherIndex;
+        next.pixel_format = kAlternateFormat;
         first.references = old.references = next.references = 1;
         first.surface =
             std::make_shared<texture_lifetime::Surface>(texture_lifetime::Surface{first_image, {}});
@@ -63,6 +64,10 @@ struct DisplayTextureProbe {
         assert(display.cached_texture_global_index_ == kOtherIndex);
         assert(display.device_state_.texture == next_image);
         assert(display.output().select_texture_index(0) == 1);
+        display.requested_texture_memory_ = &first;
+        assert(display.output().set_texture_number(0) == 0);
+        assert(display.requested_texture_memory_ == &first);
+        assert(display.active_texture_memory_ == &next);
         display.release_texture_list(old_list);
         assert(old.references == 0 && !old.surface);
         old_image.reset();

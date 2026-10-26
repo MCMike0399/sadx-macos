@@ -87,6 +87,16 @@ std::uint32_t select_index(std::uint32_t index, State &state, const BindSurface 
     NativeTextures textures{state, bind_surface};
     return detail::select_index(textures, index);
 }
+std::uint32_t set_texture_number(std::uint32_t index, State &state,
+                                 const BindSurface &bind_surface) {
+    const auto offset = index * detail::kTextureNameSourceSize;
+    const auto *list = state.current_list;
+    if (!list)
+        throw Error(Boundary::ListEntry, "texture-number current list is null");
+    NativeTextures textures{state, bind_surface};
+    const auto memory = textures.entry(list, offset, true);
+    return detail::cache(textures, memory);
+}
 std::uint32_t cache(Memory *memory, State &state, const BindSurface &bind_surface) {
     NativeTextures textures{state, bind_surface};
     return detail::cache(textures, memory);

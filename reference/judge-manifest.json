@@ -1,9 +1,10 @@
 {
   "change": {
-    "base_commit": "940dca3a7da7ac2bc41d3aa7cf3d9af1ff7dbd61",
-    "evidence": "reference/production-integration-20261026/native-object-texture-binding.json",
-    "evidence_sha256": "7a3ed0f54d72e22ec3f4d70b2534a5f80193f2a9ed0763856843841c2d5bb227",
-    "reason": "Track rerun texture/object/gate and downstream oracle identities after native composition; preserve inherited partial verdicts and all expected inputs"
+    "base_commit": "09421ac9e5c2b50173522f8554fcebac6aa05b80",
+    "evidence": "reference/production-integration-20261026/texture-number-wrapper/proof.json",
+    "evidence_sha256": "68bd1c877f636ecace5cac0c96f39ec950a9a5cbc2cf2329f24720e5b0666aa7",
+    "mode": "additions-only",
+    "reason": "Register the actual78d140 texture-number wrapper judge while preserving all existing texture/sprite judges"
   },
   "files": {
     "Makefile": "70f0bac9f98a9805db7a0e86e04aa9587e6e13eee73faca2c8e7ad0fdae7cea9",
@@ -522,6 +523,7 @@
     "tests/probes/native_task_lifecycle_probe.cpp": "0c115f0336fdc78c83daaf786bc56b83ced651eafeedf17cc0de31b1f1f831b9",
     "tests/probes/native_task_work_probe.cpp": "3adf1caeaba1197e8ec84c920abcf1a59d8056db0bc45321d04ae619ba11c18b",
     "tests/probes/native_texture_list_gate_probe.cpp": "1010da1841e1af9e79ba6dd378e86f31feb7a19d424d469776125c4dc7e4045d",
+    "tests/probes/native_texture_number_probe.cpp": "9b27165d7f387cb67fe91eecd41ee387d4b1a1355f3377e7f6a3aab0e39a8450",
     "tests/probes/native_texture_selection_core_probe.cpp": "1a9356d386aeab32483ef0e517992ddb60f14ff1ce3a1285420b43b6ce039ab1",
     "tests/probes/native_title_background_pipeline_probe.cpp": "e9bda27cf2e3aa3b7d5c1db444b12d0ada877bb53c3a2460ea96210a30d6c79c",
     "tests/probes/native_title_background_probe.cpp": "4376ebadc9e78aa05872e6d3253d3b95397a82f16aeddad1ed4b566a354cfb88",
@@ -856,6 +858,7 @@
     "tools/oracles/verify_original_task_lifecycle.py": "010c3770e264bd05a26b34fa2d20381e79aa51c492c062ff01755ee3cf20bf93",
     "tools/oracles/verify_original_task_work.py": "b1057b2ff375b54bb21848f5a557f5c1ff447a70fef6bfde04ae292435c36329",
     "tools/oracles/verify_original_texture_list_gate.py": "0bd931d1bb9789fa71ad8efdd5a345181ed84df48dc1b2871475ba56827b7b2a",
+    "tools/oracles/verify_original_texture_number.py": "5edd33e62ec58451081f0943e1b44dde5f0b52722b5130a5a4ad8ed9f55ddc66",
     "tools/oracles/verify_original_texture_selection_core.py": "0426c5d896baef60d035be567f71fd37fe531e15a8b20360cfb73a792cbc58f6",
     "tools/oracles/verify_original_title_background.py": "dc6df15a93f827846b8015454033afb3f06fe62cbef1a8bf55cc6554200e5b14",
     "tools/oracles/verify_original_title_background_pipeline.py": "75efd90c59ecd81e5a649b258c46293914fe4f49a77f83c07a704746caf133f4",

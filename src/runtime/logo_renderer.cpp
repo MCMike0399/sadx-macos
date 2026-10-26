@@ -165,6 +165,9 @@ void LogoRenderer::select_direct_texture_list(const texture_lifetime::List &list
 std::uint32_t LogoRenderer::select_texture_index(std::uint32_t index) {
     return texture_selection::select_index(index, texture_selection_, texture_binding());
 }
+std::uint32_t LogoRenderer::set_texture_number(std::uint32_t index) {
+    return texture_selection::set_texture_number(index, texture_selection_, texture_binding());
+}
 texture_selection::BindSurface LogoRenderer::texture_binding() {
     return [this](const texture_selection::Surface &surface) {
         // [platform:texture] The device keeps its own immutable image reference.

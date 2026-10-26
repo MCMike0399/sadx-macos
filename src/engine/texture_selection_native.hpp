@@ -39,6 +39,8 @@ std::uint32_t select_queued_list(const List *, const List *&queued_list,
 std::uint32_t select_list(const List *, State &, const BindSurface &);
 // FUNCTION: SONIC 0x77f440 njSetTextureNum_
 std::uint32_t select_index(std::uint32_t, State &, const BindSurface &);
+// FUNCTION: SONIC 0x78d140 Direct3D_SetTextureNum
+std::uint32_t set_texture_number(std::uint32_t, State &, const BindSurface &);
 // FUNCTION: SONIC 0x78cf20 Direct3D_SetNJSTexture
 std::uint32_t cache(Memory *, State &, const BindSurface &);
 } // namespace sadx::texture_selection

@@ -25,6 +25,7 @@ class LogoRenderer final : public LogoOutput {
     void select_texture_list(const texture_lifetime::List &);
     void select_direct_texture_list(const texture_lifetime::List &);
     std::uint32_t select_texture_index(std::uint32_t index);
+    std::uint32_t set_texture_number(std::uint32_t index);
     // NOTSA: observe source in-place uploads while Draw snapshots retain older images.
     void snapshot_bound_texture();
     void unbind_texture();

@@ -156,7 +156,7 @@ sprite::ImmediateServices Display::sprite_services() {
         [this](bool alpha) { sprite::begin_quad(alpha, device_state_); },
         [this](std::uint32_t color) { hud_color_ = color; },
         [this](std::int16_t index) {
-            output_->select_texture_index(static_cast<std::uint32_t>(index));
+            output_->set_texture_number(static_cast<std::uint32_t>(index));
         },
         [this](const sprite::Quad &quad) { submit_sprite_quad(quad); },
         [this] {
