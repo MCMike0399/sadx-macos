@@ -39,6 +39,8 @@
 #include <cstdlib>
 #include <fstream>
 #include <map>
+#include <set>
+#include <functional>
 #include <optional>
 #include <sstream>
 #include <string>
@@ -170,24 +172,70 @@ inline std::string game_state_json(HleProcess& process, std::uint64_t frame) {
         << ",\"control_enabled\":" << u8(0x909fb0)    // ControlEnabled (SADXVariables.h)
         << ",\"controller_enabled\":" << u8(0x909fb4); // ControllerEnabled[0]
     // playertwp[0] (EntityData1Ptrs[0]) and CharObj2Ptrs[0]: the first player, when it exists.
-    const auto task = g.u32(0x3b42e10).value_or(0);
-    if (task != 0) {
+    const auto task = g.u32(0x3b42e10);
+    if (!task) {
+        out << ",\"player\":null,\"player_error\":\"unmapped playertwp owner\"";
+    } else if (*task != 0) {
         std::uint8_t action = 0, character = 0;
         std::uint16_t status = 0;
         std::int32_t rotation[3] = {};
-        g.read(task + 0x00, &action, 1);
-        g.read(task + 0x04, &status, 2);
-        g.read(task + 0x09, &character, 1);
-        g.read(task + 0x14, rotation, sizeof rotation);
-        out << ",\"player\":{\"action\":" << int(action) << ",\"status\":" << status
-            << ",\"character\":" << int(character) << ",\"rotation\":[" << rotation[0] << ","
-            << rotation[1] << "," << rotation[2] << "],\"position\":" << vector(task + 0x20);
-        if (const auto physics = g.u32(0x3b3cdf0).value_or(0))
-            out << ",\"speed\":" << vector(physics + 0x38);
-        out << "}";
+        float position[3] = {};
+        const auto physics = g.u32(0x3b3cdf0);
+        float speed[3] = {};
+        if (!g.read(*task, &action, 1) || !g.read(*task + 4, &status, 2) ||
+            !g.read(*task + 9, &character, 1) ||
+            !g.read(*task + 0x14, rotation, sizeof rotation) ||
+            !g.read(*task + 0x20, position, sizeof position) ||
+            !physics || !*physics || !g.read(*physics + 0x38, speed, sizeof speed)) {
+            out << ",\"player\":null,\"player_error\":\"unmapped player taskwk/playerwk\"";
+        } else {
+            out << ",\"player\":{\"action\":" << int(action) << ",\"status\":" << status
+                << ",\"character\":" << int(character) << ",\"rotation\":[" << rotation[0] << ","
+                << rotation[1] << "," << rotation[2] << "],\"position\":" << vector(*task + 0x20)
+                << ",\"speed\":" << vector(*physics + 0x38) << "}";
+        }
     } else {
         out << ",\"player\":null";
     }
+    // NOTSA: read-only active-list observation. Layout matches hle_task_bridge::import_graph:
+    // eight heads, task::next/child and exec/display/dest. Paths remove host/guest addresses.
+    std::set<std::uint32_t> visited_tasks;
+    std::ostringstream tasks;
+    bool first_task = true;
+    bool tasks_valid = true;
+    std::function<void(std::uint32_t, const std::string &)> visit_tasks =
+        [&](std::uint32_t task_address, const std::string &parent) {
+            unsigned index = 0;
+            while (task_address && tasks_valid) {
+                std::uint32_t words[7] = {};
+                if (visited_tasks.size() >= 4096 ||
+                    !visited_tasks.insert(task_address).second ||
+                    !g.read(task_address, words, sizeof words)) {
+                    tasks_valid = false;
+                    return;
+                }
+                const auto path = parent + "/" + std::to_string(index++);
+                if (!first_task)
+                    tasks << ',';
+                first_task = false;
+                tasks << "{\"path\":\"" << path << "\",\"exec\":"
+                      << (words[4] ? "true" : "false") << ",\"display\":"
+                      << (words[5] ? "true" : "false") << ",\"destructor\":"
+                      << (words[6] ? "true" : "false") << '}';
+                visit_tasks(words[3], path);
+                task_address = words[0];
+            }
+        };
+    for (unsigned list = 0; list < 8; ++list) {
+        const auto head = g.u32(0x3abdbc4 + 4 * list);
+        if (!head)
+            tasks_valid = false;
+        else
+            visit_tasks(*head, std::to_string(list));
+    }
+    out << ",\"tasks\":[" << tasks.str() << ']';
+    if (!tasks_valid)
+        out << ",\"tasks_error\":\"unmapped, cyclic or oversized reference task graph\"";
     // BossChaos0 (0x548640), ev_6fda6d361119c04a5ca9a6545c0fc2799b04e1222a66ee7fd2dcf2773efaa890:
     // Initialization stores chaostwp; its update publishes chaoswk::HitPoint to boss_life_f.
     // These globals are named in SADXVariablesNew.h. Observe only Chaos 0's stage;

@@ -486,6 +486,47 @@ class Application {
             report(state);
         }
     }
+    // NOTSA: diagnostic observation of the canonical scheduler, without callback execution.
+    void trace_state(std::ostream &output) const {
+        // Session has no canonical gameplay playertwp/camera_twp binding yet. Preview actors
+        // and the renderer View are different owners and cannot supply these observations.
+        output << ",\"player\":null,\"player_error\":\"unrecovered native gameplay player owner\""
+               << ",\"camera\":null,\"camera_error\":\"unrecovered native gameplay camera owner\"";
+        const auto *scheduler = session.logo_scene().tasks();
+        if (!scheduler) {
+            output << ",\"tasks\":null,\"tasks_error\":\"native task scheduler uninitialized\"";
+            return;
+        }
+        std::set<const sadx::Task *> visited;
+        std::ostringstream tasks;
+        bool first = true;
+        bool valid = true;
+        std::function<void(sadx::TaskHandle, const std::string &)> visit =
+            [&](sadx::TaskHandle task, const std::string &parent) {
+                unsigned index = 0;
+                while (task && valid) {
+                    if (visited.size() >= 4096 || !visited.insert(task.get()).second) {
+                        valid = false;
+                        return;
+                    }
+                    const auto path = parent + "/" + std::to_string(index++);
+                    if (!first)
+                        tasks << ',';
+                    first = false;
+                    tasks << "{\"path\":\"" << path << "\",\"exec\":"
+                          << (task->exec ? "true" : "false") << ",\"display\":"
+                          << (task->display ? "true" : "false") << ",\"destructor\":"
+                          << (task->destructor ? "true" : "false") << '}';
+                    visit(scheduler->first_child(task), path);
+                    task = scheduler->next_task(task);
+                }
+            };
+        for (int list = 0; list < 8; ++list)
+            visit(scheduler->list_head(list), std::to_string(list));
+        output << ",\"tasks\":[" << tasks.str() << ']';
+        if (!valid)
+            output << ",\"tasks_error\":\"cyclic or oversized native task graph\"";
+    }
     void report(std::ostream &output = std::cout) const {
         const auto movie_audio = media ? media->audio_stats() : last_movie_audio;
         const auto *music = dynamic_cast<const sadx::audio::mac::StreamPlayer *>(
@@ -545,6 +586,7 @@ class Application {
                << ",\"save_exec\":" << static_cast<unsigned>(save_progress.executing)
                << ",\"save_ok\":" << static_cast<unsigned>(save_progress.complete)
                << ",\"saving_message_pending\":" << static_cast<unsigned>(save_progress.message_pending);
+        trace_state(output);
         output << ",\"logic_loop_count\":" << session.logic_loop_count();
         output << ",\"music_song\":" << session.current_music_song();
         output << ",\"native_music_gain\":" << configuration.audio_mix.music
