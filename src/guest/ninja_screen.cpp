@@ -1,3 +1,4 @@
+#include "guest/polybuff_owners.hpp"
 #include "guest/frame_control_reference.hpp"
 #include "engine/ninja_screen.hpp"
 #include "engine/ninja_projected_depth.hpp"
@@ -15,7 +16,7 @@ X87Value unsigned_load(X87Context& fp,std::uint32_t v){
 struct Base {
     NinjaScreenResult r;
     [[noreturn]]void fail(NinjaScreenFailure f,std::uint32_t at,std::optional<std::uint32_t> fact={}){r.failure=f;r.source_boundary=at;r.required_fact=fact;throw Stop{};}
-    template<class T>T need(const std::optional<T>& v,std::uint32_t at,std::uint32_t fact){if(!v)fail(NinjaScreenFailure::unknown_state,at,fact);return *v;}
+    template<class V>auto need(const V& v,std::uint32_t at,std::uint32_t fact){if(!v)fail(NinjaScreenFailure::unknown_state,at,fact);return *v;}
     // mov eax,[3d128b0] (load) ; mov ecx,[eax] (dereference) ; ... call [ecx+n].
     D3D8FrameCommand device(const NinjaRenderState& render,std::uint32_t load,std::uint32_t dereference,std::uint32_t site){
         if(!render.device_at_3d128b0)fail(NinjaScreenFailure::unknown_device,load,0x3d128b0);

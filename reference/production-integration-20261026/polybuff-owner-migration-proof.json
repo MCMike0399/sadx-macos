@@ -1,0 +1,667 @@
+{
+  "status": "implementation-complete-independent-review-pending",
+  "followup_task_id": "node:delegated-task:command%3Amcp%3A1867b6b7-4d7f-4ffe-be5b-55ebb7752376%3Athread-send%3Apolybuff-owner-migration-continue-20261026-1",
+  "checkpoint": "52ce302",
+  "full_initializer": {
+    "unit": "141 native checks pass",
+    "dev_exit_status": 0,
+    "holdout_exit_status": 0,
+    "dev": {
+      "passed": true,
+      "values_match": true,
+      "cases": 280,
+      "value_mismatches": 0,
+      "ordered_receipts": 427317,
+      "input_sha256": "1a111272bae7394cba042afd22766f22f12ed19b18de063dbf75ef5c2f2e1d89",
+      "reference_receipt_sha256": "6a63e8624520c9d81206d8b734d1be98065f9376a2718fd0b52b558cb040cdae",
+      "native_receipt_sha256": "6a63e8624520c9d81206d8b734d1be98065f9376a2718fd0b52b558cb040cdae",
+      "source_ranges": {
+        "0x78e720-0x78e791": "3f4d3f86208e5a6f2a825d28be2f7d9ff389193935226696794b7786545ffc4f",
+        "0x794540-0x7945ba": "cfab4702ed074a61e0636ebfed0b8989b50422da53cb29cdca00df0e6d29aa96"
+      }
+    },
+    "holdout": {
+      "passed": true,
+      "values_match": true,
+      "cases": 1048,
+      "value_mismatches": 0,
+      "ordered_receipts": 547793,
+      "input_sha256": "4c3028af1eb30fe83dc7259648836394f84dd01cdcb48e024ee7f620a2562e05",
+      "reference_receipt_sha256": "cae811771a8bb22c3c5d8d1beb4f56432b1d14ff4048f69863e9eb9b175704e5",
+      "native_receipt_sha256": "cae811771a8bb22c3c5d8d1beb4f56432b1d14ff4048f69863e9eb9b175704e5",
+      "source_ranges": {
+        "0x78e720-0x78e791": "3f4d3f86208e5a6f2a825d28be2f7d9ff389193935226696794b7786545ffc4f",
+        "0x794540-0x7945ba": "cfab4702ed074a61e0636ebfed0b8989b50422da53cb29cdca00df0e6d29aa96"
+      }
+    },
+    "mutants": {
+      "omit-ninth-record": {
+        "killed": true,
+        "value_mismatches": 15
+      },
+      "wrong-scratch-capacity": {
+        "killed": true,
+        "value_mismatches": 56
+      },
+      "wrong-count-owner-slot": {
+        "killed": true,
+        "value_mismatches": 54
+      },
+      "retain-null-base": {
+        "killed": true,
+        "value_mismatches": 56
+      },
+      "short-scratch-clear": {
+        "killed": true,
+        "value_mismatches": 9
+      }
+    },
+    "checkpoint_input_and_receipt_hashes_identical": true
+  },
+  "migrated_legacy": {
+    "system_init": {
+      "exit_status": 0,
+      "cases": 600,
+      "mismatch_count": 0,
+      "state_traces_match": true,
+      "report_sha256": "46aaff0df3e073103d41df6d0d3a768a69a54d70e68b3f95ecf9c9240b0bc921",
+      "unit_exit_status": 0,
+      "unit_output": "System init 401830: profile path, pools, registrations, CRT block, unknown window and null DirectInput passed."
+    },
+    "device_setup": {
+      "exit_status": 0,
+      "cases": 2000,
+      "mismatch_count": 0,
+      "state_traces_match": true,
+      "report_sha256": "d76e03789978e3132bbff37d3885c675a26502323492caab9c35652a44dcc1da",
+      "unit_exit_status": 0,
+      "unit_output": "Device setup 791610: viewport math, nested order, the 7943c0 device contract and a missing host passed."
+    },
+    "ninja_frame_calls": {
+      "exit_status": 0,
+      "cases": 3969,
+      "mismatch_count": 0,
+      "state_traces_match": true,
+      "report_sha256": "ec41e00f5d1f2976b01b2974cb247d7823ac6ad5c9e386f425b605c39c980119",
+      "unit_exit_status": 0,
+      "unit_output": "Ninja frame calls: callback list/3d0fa34/slot bound, BeginScene/EndScene, loader and original Present, Clear records and device boundaries passed."
+    },
+    "owner_unit": "71 ownership and shared-core checks pass",
+    "legacy_regression_mutants": {
+      "ninja_frame_calls-restore-swap": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": 347,
+        "oracle_aborted": false,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "21f5117830b384f8bc8d99e0f7fadb384b304733b3816bb13de1c4241504f9ce"
+      },
+      "ninja_frame_calls-stencil-flags": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": 296,
+        "oracle_aborted": false,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "01d6551ddd1e4306bda3b5914dd414950414b3605ad00225d66f03df95068976"
+      },
+      "ninja_frame_calls-no-count-reread": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": null,
+        "oracle_aborted": true,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "610494a36785c4f0bd055413a8617b64e4f35abb7ab060be574d6e106a2382ad"
+      },
+      "ninja_frame_calls-record-remaining-operands": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": 712,
+        "oracle_aborted": false,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "747f5e3d3b5c1c809be024df33badbc66f8b07eb84c668dbbbbab1d4a54262f6"
+      },
+      "ninja_frame_calls-only-fifteen-hooks": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": 103,
+        "oracle_aborted": false,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "32ec7eb99352e456c7d6f1d50d1f0c721b1d13394b45dd9255b51070ad941880"
+      },
+      "ninja_frame_calls-begin-scene-flag": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": 800,
+        "oracle_aborted": false,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "06349177c8c59ca050f11263a2b08e59c61ffbc887536b7547a4a8771caeb32f"
+      },
+      "ninja_frame_calls-blend-order": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": 361,
+        "oracle_aborted": false,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "08fe8a78fa48fbc3d571c9f9cd9f69ef1c36c472d1f4626dda73cea3a3aba14a"
+      },
+      "device_setup-interval-multiplier": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": 2000,
+        "oracle_aborted": false,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "5e0fc7b4e0cb46e5f0610a5802ec2173a1a7f69ad27d60ed68a5fd715fc444d3"
+      },
+      "device_setup-scratch-clear-value": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": 2000,
+        "oracle_aborted": false,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "24d506160ca43cf0679183ae00192b60d540ac33b155fde265d152a75e3a914b"
+      },
+      "device_setup-record-resource-clear": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": 2000,
+        "oracle_aborted": false,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "89539c8066113e3d944bb27a5ba3490c73f0aad0ffd3f98382440a377f6ec882"
+      },
+      "device_setup-direct3d-sdk": {
+        "killed": true,
+        "exit_status": 0,
+        "mismatch_count": 0,
+        "oracle_aborted": false,
+        "original_oracle_detected": false,
+        "owner_unit_exit_status": 1,
+        "log_sha256": "d9adf18e3c5e86450ec45c40c96852288fb01bb5a4302d676ab8a39ea1a68e05"
+      },
+      "device_setup-half-width": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": 1282,
+        "oracle_aborted": false,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "4c471e7034eafd5122bd855bc4a8eb1824b8d09519aa07da50941bf5c9d0f0bc"
+      },
+      "device_setup-viewport-right-edge": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": 396,
+        "oracle_aborted": false,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "e168d028ef2725774d2db7994b0e7011d41482a2606b1bd808471c05af37d29d"
+      },
+      "device_setup-tail-owner": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": 1510,
+        "oracle_aborted": false,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "da10ddec4731a109dd9435fab99a487a2ae9820571d676d4ebedf34112d0e437"
+      },
+      "system_init-controller-reset-word": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": 518,
+        "oracle_aborted": false,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "3f487fefe9cb9c46b4c78358ec0b9e8400711b6241d2f52eaa8868fc568be2d0"
+      },
+      "system_init-startup-scale": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": 595,
+        "oracle_aborted": false,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "44ed3187513fadcd7f6adbe8f560dac3bc3fc58537e80137e4603554bc4fdac6"
+      },
+      "system_init-mouse-cooperative-flags": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": 483,
+        "oracle_aborted": false,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "8d082c238b90b43387d4830f90bf512280921ebea517c4099b9494b753ea6f2d"
+      },
+      "system_init-mouse-registration": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": 506,
+        "oracle_aborted": false,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "af07a51ac8525e3da8885e1a04db2dae529e2488f3b61449740d434d1023f482"
+      },
+      "system_init-shared-core-omit-ninth-record": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": 532,
+        "oracle_aborted": false,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "64c415ff64bac6ccaecb8302ca58b7acc170843dee5c2608f751b0be1df6df65"
+      },
+      "system_init-shared-core-wrong-scratch-capacity": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": 595,
+        "oracle_aborted": false,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "5b08c3f4651c951b0d10420cf7889d18e6b838ea29604278bd649058cf39c3e1"
+      },
+      "system_init-shared-core-wrong-count-owner-slot": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": 595,
+        "oracle_aborted": false,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "6bc58b4ca94bffd739710803e4b5d6a13d2649723d50c30bc3e502919f4f60ad"
+      },
+      "system_init-shared-core-retain-null-base": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": 595,
+        "oracle_aborted": false,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "76ec16b2ae3d2ad83e641a57140539e4999c966435d0b4d5bca04cb939cec743"
+      },
+      "system_init-shared-core-short-scratch-clear": {
+        "killed": true,
+        "exit_status": 1,
+        "mismatch_count": 526,
+        "oracle_aborted": false,
+        "original_oracle_detected": true,
+        "owner_unit_exit_status": null,
+        "log_sha256": "1451b9089103003b1fb718599a0648e74808a37d87422d996b90756a4b93a8d8"
+      }
+    },
+    "historical_mutant_scope": "All seven historical frame-call categories are reproduced. Original historical system/device spec files are absent from tracked history; new 9/7 regressions cover their live behavior, with five system mutants proving shared-core coupling.",
+    "screen_polygon": {
+      "exit_status": 0,
+      "cases": 3000,
+      "mismatch_count": 0
+    },
+    "screen_unit": {
+      "exit_status": 0,
+      "output": "Screen 780c30/7912e0/78dbe0/77dfc0: 640x480 setup, depth, fan and stops passed."
+    },
+    "dependency_archives": {
+      "/Users/burbujamc/Developer/sadx-macos/build/libsadx-guest.a": "a1929c85fe6e34c389dd125ae4e9b6518a632fc68bf0058e822d6acb29804584",
+      "/Users/burbujamc/Developer/sadx-macos/build/libsadx-core.a": "6c41952e3d4f22fa2d7fe01255b532af0c9b2212de7794aeffeb32c995dbaaad",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-791addd8/build/normal-uv-strip/softfloat/softfloat.a": "3f0b14bb467f8a74d49bab50dceb94ce878574313ad3290cee1d84f12a9e7ed5"
+    },
+    "changed_sources_compiled_privately": [
+      "src/engine/game_frame_control.cpp",
+      "src/engine/ninja_memory.cpp",
+      "src/engine/ninja_projected_depth.cpp",
+      "src/engine/ninja_render.cpp",
+      "src/engine/ninja_system_init.cpp",
+      "src/engine/ninja_texture_pool.cpp",
+      "src/engine/polybuff_initialization.cpp",
+      "src/guest/ninja_device_init.cpp",
+      "src/guest/ninja_frame_calls.cpp",
+      "src/guest/ninja_screen.cpp",
+      "src/guest/polybuff_initialization_reference.cpp",
+      "src/guest/polybuff_owners.cpp",
+      "src/loader/guest_heap.cpp"
+    ],
+    "limits": [
+      "Root archives supply unchanged dependencies; not full source-only product.",
+      "No apps, full gate, runtime binding, rendering or N3b claim."
+    ]
+  },
+  "strip_dependency": {
+    "unit": "normal_uv_strip: 12 checks passed",
+    "dev_exit_status": 2,
+    "holdout_exit_status": 2,
+    "dev": {
+      "passed": false,
+      "values_match": true,
+      "cases": 1014,
+      "value_mismatches": 0,
+      "flag_mismatches": 154,
+      "ordered_receipts": 15720,
+      "input_sha256": "7f9653d230c256942b4e88a2fafb06bd4db5bc37ce4f09d2c944d2381a8e1c43",
+      "source_ranges": {
+        "0x7835f0-0x783822": "1de62e7fa0abfc2783e0bddbe3c563c022cd9c007e0fd0c174586c188fb49008",
+        "0x794540-0x7945b8": "86ea29a4faf1a638362147a8bf0c3a91c4f4507bb1799ecf653190e5f28c1b79",
+        "0x7945c0-0x7945f2": "3c94193aeb47be8099bfdcdf262c52bad5ce6ff84ba961e7f498e4bfc90e7e53",
+        "0x794600-0x79462e": "584bc633ee3d4c24b090f221d524cbb5d44cc2a3f074a3e3fbf030eefb04e736",
+        "0x794630-0x7946b1": "3279104ee34b6fda6db3bf2a6fcec2c2399971455efaa81885a1b77e1bda39dd",
+        "0x794750-0x794759": "c49559e888fd5e6de4986d2ef949ff91e2c33dc602f6b8531fac3c20376d6ec5",
+        "0x794760-0x7947ac": "6e73187607397bda1c7db2bbc01f07dac237ea0b494604fe6e689ee0f965985d",
+        "0x794800-0x794835": "1d6d63ab0a3b9ea8c1d4ed522cd06d39d468736ad651ad9686fd52ed8260d03b"
+      },
+      "reference_state_api_vertex_sha256": "ac3cc34770941cdeae705a26110ab2fb870cb45eb56185cae4752d6a3417f707",
+      "native_state_api_vertex_sha256": "ac3cc34770941cdeae705a26110ab2fb870cb45eb56185cae4752d6a3417f707",
+      "flag_patterns": {
+        "cw=0x7f:source=0x0,native=0x20": 88,
+        "cw=0x27f:source=0x0,native=0x20": 12,
+        "cw=0x37f:source=0x0,native=0x20": 13,
+        "cw=0x47f:source=0x0,native=0x20": 13,
+        "cw=0x87f:source=0x0,native=0x20": 16,
+        "cw=0xc7f:source=0x0,native=0x20": 12
+      }
+    },
+    "holdout": {
+      "passed": false,
+      "values_match": true,
+      "cases": 2662,
+      "value_mismatches": 0,
+      "flag_mismatches": 198,
+      "ordered_receipts": 29088,
+      "input_sha256": "cdf259c8ef2799107018b1b73640b848a6d922434cf86e898fa03e396c7bf51b",
+      "source_ranges": {
+        "0x7835f0-0x783822": "1de62e7fa0abfc2783e0bddbe3c563c022cd9c007e0fd0c174586c188fb49008",
+        "0x794540-0x7945b8": "86ea29a4faf1a638362147a8bf0c3a91c4f4507bb1799ecf653190e5f28c1b79",
+        "0x7945c0-0x7945f2": "3c94193aeb47be8099bfdcdf262c52bad5ce6ff84ba961e7f498e4bfc90e7e53",
+        "0x794600-0x79462e": "584bc633ee3d4c24b090f221d524cbb5d44cc2a3f074a3e3fbf030eefb04e736",
+        "0x794630-0x7946b1": "3279104ee34b6fda6db3bf2a6fcec2c2399971455efaa81885a1b77e1bda39dd",
+        "0x794750-0x794759": "c49559e888fd5e6de4986d2ef949ff91e2c33dc602f6b8531fac3c20376d6ec5",
+        "0x794760-0x7947ac": "6e73187607397bda1c7db2bbc01f07dac237ea0b494604fe6e689ee0f965985d",
+        "0x794800-0x794835": "1d6d63ab0a3b9ea8c1d4ed522cd06d39d468736ad651ad9686fd52ed8260d03b"
+      },
+      "reference_state_api_vertex_sha256": "55781d1ef9d10ca261fb0ce49cc8463ba6a982766fddc501e96b9823ad420b10",
+      "native_state_api_vertex_sha256": "55781d1ef9d10ca261fb0ce49cc8463ba6a982766fddc501e96b9823ad420b10",
+      "flag_patterns": {
+        "cw=0x7f:source=0x0,native=0x20": 95,
+        "cw=0x27f:source=0x0,native=0x20": 20,
+        "cw=0x37f:source=0x0,native=0x20": 17,
+        "cw=0x47f:source=0x0,native=0x20": 22,
+        "cw=0x87f:source=0x0,native=0x20": 26,
+        "cw=0xc7f:source=0x0,native=0x20": 18
+      }
+    },
+    "mutants": {
+      "remaining-equality": {
+        "killed": true,
+        "value_mismatches": 4
+      },
+      "header-mask": {
+        "killed": true,
+        "value_mismatches": 68
+      },
+      "signed-index": {
+        "killed": true,
+        "value_mismatches": 127
+      },
+      "uv-divisor": {
+        "killed": true,
+        "value_mismatches": 218
+      },
+      "initial-degenerate": {
+        "killed": true,
+        "value_mismatches": 237
+      },
+      "trailing-uv": {
+        "killed": true,
+        "value_mismatches": 157
+      },
+      "argument-store-order": {
+        "killed": true,
+        "value_mismatches": 318
+      }
+    },
+    "algorithms_byte_identical_to": "1960fed6b8a982138cce6c54b3bd7a53d3f25f6b"
+  },
+  "context_coexistence": {
+    "passed": true,
+    "exit_status": 0,
+    "native_context": "Root actual Context { Display& }",
+    "reference_context": "sadx::polybuff_reference::Context",
+    "native_startup": "Unbound hooks throw; native full startup not executed or claimed.",
+    "output": "One process: nine reference initializer calls and Root actual native device unit pass",
+    "native_archive": "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/libsadx-core.a",
+    "native_archive_sha256": "54e69167e8ff5a17ec8ee6f9583a240f5cdbb19f509524aa4ce9a072663ae549",
+    "native_unit_source_sha256": "82908d8378e68864f0154798e2bf9f53b76848b62baa3a3033c6c0a4ec2ad1d9",
+    "native_context_header_sha256": "d72d6de1b2f8d28bfea7d94f8f63c2b56a00ff99245915aa9da5f423460da89a",
+    "reference_defined_symbols": "0000000000000000 T sadx::polybuff_reference::configured_count(sadx::polybuff_reference::Context&, unsigned long)\n0000000000000174 T sadx::polybuff_reference::initialize_record(sadx::polybuff_reference::Context&, sadx::polybuff::BufferState&, unsigned long, unsigned int, sadx::polybuff::BufferDescription)\n0000000000000048 T sadx::polybuff_reference::buffer_description(sadx::polybuff_reference::Context&, unsigned long)\n00000000000000c0 T sadx::polybuff_reference::allocate_vertex_scratch(sadx::polybuff_reference::Context&, unsigned int)\n0000000000000104 T sadx::polybuff_reference::observe_initialization_store(sadx::polybuff_reference::Context&, sadx::polybuff::InitializationField, unsigned long)\n00000000000002e0 T sadx::NinjaSystemOwnerResult::~NinjaSystemOwnerResult()\n0000000000000330 T sadx::initialize_system_polygon_buffers(sadx::NinjaSystemInitRuntime&, unsigned int, unsigned int)\n00000000000003e8 T void sadx::polybuff::initialize_buffers<sadx::polybuff_reference::Context>(sadx::polybuff_reference::Context&, sadx::polybuff::Buffers&, sadx::polybuff::RetainedBase&, sadx::polybuff::Scratch&, unsigned int, unsigned int, void*)\n",
+    "undefined_dynamic_lookup_used": false,
+    "limits": [
+      "Actual Root unit exercises its real resource types/device functions in the same executable.",
+      "Native initializer specialization is linked, not executed: Root still binds actual counts/storage."
+    ]
+  },
+  "hle_device_bridge": {
+    "exit_status": 0,
+    "output": "Polygon bridge: 3006 corpus/callback/alias/wrapper cases equivalent; four input/body mutants caught\nViewport bridge: 3021 corpus/callback/direction cases equivalent; four input/body mutants caught; three foreign methods rejected; source COM frames/registers and callback-time globals match\nDevice bridge: 16418 blend wrapper/leaf and 300 fog-colour oracle cases equivalent; identical globals, HLE device states and COM traces/HRESULTs; unknown/null/live-changing devices and declared boundaries verified; 11 bridge input mutants caught; foreign vtable rejected; 3000 view and 3000 projection cases equivalent; 400 fog init and 1200 table cases (19 declared table boundaries); 1200 generate, 1600 switch cases; 3000 projection range cases and its argument mutant",
+    "limits": "Unchanged consumer path tested before header-only Context generalization; that path does not instantiate startup initialization."
+  },
+  "profile": {
+    "summary": {
+      "patches": 618,
+      "active_patches": 121,
+      "active_unhandled_patches": 79,
+      "reports": 8,
+      "declared_exe_ranges": 56,
+      "unhandled_overlaps": 0,
+      "handled_overlaps": 7,
+      "undetermined_overlaps": 0,
+      "reports_without_addressed_ranges": []
+    },
+    "unhandled_overlaps": [],
+    "handled_overlaps": [
+      {
+        "report": "ninja_frame_calls.json",
+        "range": "0x78b960-0x78ba23",
+        "range_key": "/original_ranges_sha256/0x78b960-0x78ba23",
+        "patch_va": "0x78b960",
+        "patch_end": "0x78b965",
+        "size": 5,
+        "owner": "loader",
+        "kind": "trampoline",
+        "target": "Direct3D_EndScene_r",
+        "active": true,
+        "handled_by": "ninja_frame_calls: trampolines run the original",
+        "source_ref": "direct3d.cpp:290"
+      },
+      {
+        "report": "ninja_frame_calls.json",
+        "range": "0x78ba30-0x78ba50",
+        "range_key": "/original_ranges_sha256/0x78ba30-0x78ba50",
+        "patch_va": "0x78ba30",
+        "patch_end": "0x78ba35",
+        "size": 5,
+        "owner": "loader",
+        "kind": "jump",
+        "target": "Direct3D_Present_r",
+        "active": true,
+        "handled_by": "ninja_frame_calls mod_loader Present",
+        "source_ref": "direct3d.cpp:324"
+      },
+      {
+        "report": "ninja_frame_calls.json",
+        "range": "0x78b880-0x78b958",
+        "range_key": "/original_ranges_sha256/0x78b880-0x78b958",
+        "patch_va": "0x78b880",
+        "patch_end": "0x78b885",
+        "size": 5,
+        "owner": "loader",
+        "kind": "trampoline",
+        "target": "Direct3D_BeginScene_r",
+        "active": true,
+        "handled_by": "ninja_frame_calls: trampolines run the original",
+        "source_ref": "direct3d.cpp:315"
+      },
+      {
+        "report": "ninja_frame_calls.json",
+        "range": "0x78b880-0x78b958",
+        "range_key": "/original_ranges_sha256/0x78b880-0x78b958",
+        "patch_va": "0x78b922",
+        "patch_end": "0x78b927",
+        "size": 5,
+        "owner": "loader",
+        "kind": "call",
+        "target": "njDrawCircle2D_t->Target()",
+        "active": true,
+        "handled_by": "equivalent: uiscale rewrites the call to an unhooked copy of the original 77dfc0",
+        "source_ref": "uiscale.cpp:692"
+      },
+      {
+        "report": "screen_polygon.json",
+        "range": "0x77dfc0-0x77e04e",
+        "range_key": "/original_ranges_sha256/0x77dfc0-0x77e04e",
+        "patch_va": "0x77dfc0",
+        "patch_end": "0x77dfc7",
+        "size": 7,
+        "owner": "loader",
+        "kind": "trampoline",
+        "target": "njDrawCircle2D_r",
+        "active": true,
+        "handled_by": "ninja_screen / hle_device_bridge: common body 77dfc7 bound after original or relocated prologue; actual njDrawCircle2D_r UI wrapper retained, including unscaled BeginScene trampoline calls",
+        "source_ref": "uiscale.cpp:682"
+      },
+      {
+        "report": "system_init.json",
+        "range": "0x77f150-0x77f21f",
+        "range_key": "/original_ranges_sha256/0x77f150-0x77f21f",
+        "patch_va": "0x77f205",
+        "patch_end": "0x77f20a",
+        "size": 5,
+        "owner": "input",
+        "kind": "data",
+        "target": "nop x5 (DirectInput_Init call)",
+        "active": true,
+        "handled_by": "ninja_system_init: 77f150 skips 7928e0",
+        "source_ref": "_reference/sadx/updated-pc-reference/sources/input-mod.cpp:81"
+      },
+      {
+        "report": "system_init.json",
+        "range": "0x77efd0-0x77f053",
+        "range_key": "/original_ranges_sha256/0x77efd0-0x77f053",
+        "patch_va": "0x77f03e",
+        "patch_end": "0x77f043",
+        "size": 5,
+        "owner": "input",
+        "kind": "data",
+        "target": "nop x5 (CreateMouseDevice call)",
+        "active": true,
+        "handled_by": "ninja_system_init: 77efd0 skips 791d60",
+        "source_ref": "_reference/sadx/updated-pc-reference/sources/input-mod.cpp:79"
+      }
+    ],
+    "undetermined_overlaps": [],
+    "report_ranges": {
+      "device_setup.json": {
+        "exe_ranges": 2,
+        "dll_ranges_skipped": 0,
+        "opaque_range_hashes": [],
+        "unparsed_keys": []
+      },
+      "init-dev.json": {
+        "exe_ranges": 2,
+        "dll_ranges_skipped": 0,
+        "opaque_range_hashes": [],
+        "unparsed_keys": []
+      },
+      "init-holdout.json": {
+        "exe_ranges": 2,
+        "dll_ranges_skipped": 0,
+        "opaque_range_hashes": [],
+        "unparsed_keys": []
+      },
+      "ninja_frame_calls.json": {
+        "exe_ranges": 10,
+        "dll_ranges_skipped": 0,
+        "opaque_range_hashes": [],
+        "unparsed_keys": []
+      },
+      "screen_polygon.json": {
+        "exe_ranges": 9,
+        "dll_ranges_skipped": 0,
+        "opaque_range_hashes": [],
+        "unparsed_keys": []
+      },
+      "strip-dev.json": {
+        "exe_ranges": 8,
+        "dll_ranges_skipped": 0,
+        "opaque_range_hashes": [],
+        "unparsed_keys": []
+      },
+      "strip-holdout.json": {
+        "exe_ranges": 8,
+        "dll_ranges_skipped": 0,
+        "opaque_range_hashes": [],
+        "unparsed_keys": []
+      },
+      "system_init.json": {
+        "exe_ranges": 15,
+        "dll_ranges_skipped": 0,
+        "opaque_range_hashes": [],
+        "unparsed_keys": []
+      }
+    }
+  },
+  "source_files": {
+    "src/engine/ninja_device_init.hpp": "babf555f359b71b5c3bcb4538e689bf165895436f1b39e469e4a9a8cc6c926a0",
+    "src/engine/ninja_frame_calls.hpp": "914dd83a429d326e7a41a949146faa3cc95c5fd170ea7562b533a92e4bfb8828",
+    "src/engine/ninja_screen.hpp": "554dec07c880ea81960217110019c79770513ba25e7c7d9410e91286aa9567d5",
+    "src/engine/ninja_system_init.cpp": "8b4de4a49c9f8be8d55e08a7752f1e120ccd12ccb08fa406cd1c3c1a2b0c9210",
+    "src/engine/ninja_system_init.hpp": "14736c82ec84341cfe19192bd72870b8ba12189bae4b77cf84b52e007cfa000f",
+    "src/engine/polybuff_initialization.cpp": "499d85be7d1a6fc17c692138438db6eefd0a253b9ad01265407bff876c304cfb",
+    "src/engine/polybuff_initialization.hpp": "1fddffec54d94ea03ecabc303360272e5d77fcc25413bbc150af7baf4993e47c",
+    "src/engine/polybuff_initialization_binding.cpp": "4af509b2b68a76d49f83de85705ff159d709f0696ded8f3e33fb5d22eef6744e",
+    "src/guest/native_game_reference.cpp": "fd993665165d4fc238ac7f818202d44c084c4d778528967ef7a9617de5cc8683",
+    "src/guest/native_game_reference.hpp": "bf1f2d8040355e4f6e627894f5c74e52b9f0146ec3c16ac0dff03ce8dfed0e15",
+    "src/guest/ninja_device_init.cpp": "7c56e9acfdb5e159dff742d5fdadea14ffa25b1808bd9b60c649922b3b252fd6",
+    "src/guest/ninja_frame_calls.cpp": "236c527fd28c955e5f8d4e195af5092693f0c41efbdf34d0bfdcc0122f624055",
+    "src/guest/ninja_screen.cpp": "c4e4dffbfbbe8ea1c8427b19ca12b985a1d7757f5b0a58a5c0054ea472f3511a",
+    "src/guest/polybuff_initialization_reference.cpp": "247a1a2c6a72c2143efedbc1214cd125fd99a3d8e6199b0da84283283d4fd386",
+    "src/guest/polybuff_owners.cpp": "cb95128438ead29912f7a99bad4b04dc6083f64ad668977979d77458d86aabc0",
+    "src/guest/polybuff_owners.hpp": "e2c75545acd8e27861805f0e4fc799569cbd4162728f17149f69ad0f37f7c401",
+    "src/hle/hle_device_bridge.cpp": "6169c3f9b5ddcfc62832a5eccfb1743eada2b535bdca5783369ffd274465d11b",
+    "tests/fixtures/polybuff_owner_regression_mutants.json": "04ed045223c5785401dd6c7f74f5fdd9393dbd363458fed751beccba937e7898",
+    "tests/probes/native_polybuff_initialization_probe.cpp": "064ed1b3efb0b4563b69605f4acd19613b604273072454429ace98503241b38e",
+    "tests/probes/polybuff_coexistence_hooks.cpp": "1a48cd4b6cde3125b41d239e65096bdd6dae08220d8ca8298c514673e120bcca",
+    "tests/probes/polybuff_native_context_link_probe.cpp": "45808ca8d88bfe75d7076a49e2533ec6aa93bfb38c166e0527c987b06e288a0f",
+    "tests/unit/polybuff_ownership.cpp": "45f985053e349cdf6589b3456419dc0c7cfda6cf8b19dd8cce5d18f2e056cf05",
+    "tools/oracles/check_polybuff_context_coexistence.py": "f736811aa227561a3e6f3e305c3b367387936098aa0596135ab4b3302794596a",
+    "tools/oracles/check_polybuff_initialization_packet.py": "c69b26c603d16f4318d0f5d137a650fd7c4ec10650e3b0aae48d33a7f9042651",
+    "tools/oracles/check_polybuff_owner_migration.py": "8244223eb352bb98b87825f136982c92a1164a302bdaefd44fd7c6decaf309c0",
+    "tools/oracles/check_polybuff_strip_dependency.py": "a504c8a7789c95b8ec28fdd85c18fb1ab8248b5ab150d4da069e905534174f1e",
+    "tests/probes/polybuff_coexistence_main.cpp": "da4e4bf20656607121c46663267846c67969c5b9052387e27e9cf6ccf6bccf7c"
+  },
+  "protected_judges_probes_and_units_unchanged": {
+    "tests/probes/native_system_init_probe.cpp": "31a4522cc846421e9c1c1981c3216150d5f196ac4f43909b497a045513471f47",
+    "tools/oracles/verify_original_system_init.py": "885a16f7834999fca35a4fe6b11bd25f722b0ad5da184c7a17c9119a5856aad5",
+    "tests/unit/ninja_system_init.cpp": "096903759c431309b584653577758d6263fd3cd200aef93d0b106ef77df7544f",
+    "tests/probes/native_device_setup_probe.cpp": "aa79f3adc472f09f5a610e8af6ceb43b8b87e994f9bc0d5b04739b71b8d2ea6f",
+    "tools/oracles/verify_original_device_setup.py": "ec5dba89fa022db7d42ff780cd1a5efb94b43169279b176108fc263ba8e8a963",
+    "tests/unit/ninja_device_init.cpp": "7d9a5c81f41c2ecc278a537b399c5f401cf11301734f8040827b736572840ae1",
+    "tests/probes/native_ninja_frame_calls_probe.cpp": "ca88712cb367ccb300649747087d80f8ee32618a9cf8c43acd8f98368ec2728a",
+    "tools/oracles/verify_original_ninja_frame_calls.py": "047aee2b7c9b43349b08fc6006dbe4eb8c6d9ee2386ba1d27d3967e916730ed1",
+    "tests/unit/ninja_frame_calls.cpp": "eed86df54f85276743a4830b9e71464a2ea6d67992e780b7cd4d5e94c5af738e",
+    "tests/probes/native_screen_polygon_probe.cpp": "dcd4d808f68dcf8ad2b92d8f32e3bc3e1ac82734633e1edbe2b2209327ce8325",
+    "tools/oracles/verify_original_screen_polygon.py": "1c83efd5d540155282c795c64872454fcc8dc284888857d9481e514033be5d24",
+    "tests/unit/ninja_screen.cpp": "9c178c817e8204f46071a97edc2176d61fd5c3e8457f50c277be6004bf0df672",
+    "tools/oracles/verify_original_polybuff_initialization.py": "98878d7137d05936ae83a6d05288207ef5afc379b88bb2a6c4c625cc5d4b620b"
+  },
+  "full_gate_run": false,
+  "independent_style_review": "Pending Root; no additional agent spawned.",
+  "limits": [
+    "No Main integration, push, apps, Ghidra, shared build writes or actual render/N3b claim.",
+    "Root owns build registrations, real counts/storage/product binding and full gate.",
+    "Private changed sources plus read-only dependency archives; not a full source-only product proof."
+  ]
+}

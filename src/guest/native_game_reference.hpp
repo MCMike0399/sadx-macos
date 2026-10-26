@@ -1,4 +1,5 @@
 #pragma once
+#include "guest/polybuff_owners.hpp"
 #include "game/library_initial_state.hpp"
 #include "game/startup_initial_state.hpp"
 #include "guest/frame_control_reference.hpp"

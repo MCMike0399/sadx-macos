@@ -1,6 +1,8 @@
 #pragma once
 #include <optional>
 #include "engine/frame_control_fwd.hpp"
+#include "engine/polybuff_initialization.hpp"
+#include <memory>
 #include "engine/game_logic.hpp"
 #include "engine/ninja_keyboard.hpp"
 #include "engine/ninja_render.hpp"
@@ -9,6 +11,13 @@
 #include <functional>
 #include <optional>
 namespace sadx {
+namespace polybuff_reference {
+struct Word;
+struct Record;
+struct FrameFacts;
+Word& frame_vertices(FrameFacts&);
+std::array<Record,9>& frame_records(FrameFacts&);
+}
 // 411d00's D3D8 frame thunks, each from exact instructions:
 //   781010 -> 78bab0: 780030 (the 3d0fa40 callback list, then the 3d0f7a4,
 //             3d0f7a8, 3d0fa34 and 3d0fa30(3d0fa38) hooks) + 7959a0 (the 16
@@ -38,11 +47,17 @@ constexpr std::int32_t kD3DErrDeviceLost=static_cast<std::int32_t>(0x88760868u);
 struct NinjaFrameCallState {
     std::optional<std::uint32_t> scene_flags_at_3d08588;  // bit 0: inside BeginScene..EndScene
     std::optional<std::uint32_t> device_flags_at_3d1289c; // bit 0 adds D3DCLEAR_STENCIL
-    std::optional<std::uint32_t> vertex_buffer_at_3d128ac;
+    polybuff::Buffers polygon_buffers{};
+    std::unique_ptr<polybuff_reference::FrameFacts> polygon_facts;
+    polybuff_reference::Word& vertex_buffer_at_3d128ac = polybuff_reference::frame_vertices(*polygon_facts);
     std::optional<std::uint32_t> hook_at_3d0f7a4,hook_at_3d0f7a8,hook_at_3d0fa30,argument_at_3d0fa38;
     std::array<std::optional<std::uint32_t>,16> hooks_at_3d08af0;
     // 3d0fe00 + 0x24*i: +0 vertex buffer (native handle, 0 = none), +4, +8, +0xc words.
-    std::array<std::array<std::optional<std::uint32_t>,4>,9> records_at_3d0fe00;
+    std::array<polybuff_reference::Record,9>& records_at_3d0fe00 = polybuff_reference::frame_records(*polygon_facts);
+    NinjaFrameCallState();
+    ~NinjaFrameCallState();
+    NinjaFrameCallState(const NinjaFrameCallState&) = delete;
+    NinjaFrameCallState& operator=(const NinjaFrameCallState&) = delete;
 };
 // Nested owner call. `ecx` is set for thiscall/register callees (793cc0 ECX=1).
 struct NinjaFrameCall {std::uint32_t source_call,callee;std::optional<std::uint32_t> ecx;std::array<std::optional<std::uint32_t>,4> arguments={};};

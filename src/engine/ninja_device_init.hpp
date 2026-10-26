@@ -18,8 +18,17 @@ namespace sadx {
 // 78d0d0, 78c5a0, 796710, 791860, 7943f0, 78c5a0; Clear; GetViewport(3d12780);
 // the half extents, the -1 words, the 389d318 matrix copy and the viewport
 // floats; then a tail jump to 7914b0. Device calls go to a host owner.
+// Reference methods require guest/polybuff_owners.hpp; keep the primary byte owner uninstantiated.
+template<> struct SourceBytes<0x3d0fae0, polybuff::kScratchWords * polybuff::kWordBytes>;
+using PolygonScratchFacts = SourceBytes<0x3d0fae0, polybuff::kScratchWords * polybuff::kWordBytes>;
 struct NinjaDeviceState {
-    SourceBytes<0x3d0fae0,0x200> block_at_3d0fae0;     // rep stosd x 0x80
+    NinjaDeviceState();
+    ~NinjaDeviceState();
+    NinjaDeviceState(const NinjaDeviceState&) = delete;
+    NinjaDeviceState& operator=(const NinjaDeviceState&) = delete;
+    polybuff::Scratch polygon_scratch{};
+    std::unique_ptr<PolygonScratchFacts> polygon_scratch_facts;
+    PolygonScratchFacts& block_at_3d0fae0 = *polygon_scratch_facts;     // rep stosd x 0x80
     std::optional<std::uint32_t> direct3d_at_3d11f60;  // the IDirect3D8 identity
     SourceBytes<0x3d127c0,0xd4> caps_at_3d127c0;       // D3DCAPS8
     std::array<std::optional<std::uint32_t>,6> viewport_at_3d12780; // X, Y, Width, Height, MinZ, MaxZ (float bits)

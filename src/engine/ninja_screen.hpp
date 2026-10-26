@@ -12,6 +12,7 @@
 #include <functional>
 #include <vector>
 namespace sadx {
+namespace polybuff_reference { struct VertexScratchRead; }
 // Screen owners from exact instructions:
 //   780c30 (781070 site 78113f, arguments config +0x14 flags, +0x18, +0x1c): the three
 //          argument words, 7899a0(+0x1c), the 320/640 x 240/480 screen size (bits 0x10,
@@ -85,7 +86,7 @@ struct NinjaPolygonRuntime {
     // Guest words of the argument block, its points and colours (callers map them to their owners).
     std::function<std::optional<std::uint32_t>(std::uint32_t address)> read;
     NinjaRenderState& render;NinjaTextureSelectionState& textures;NinjaTextureSelectionRuntime& texture_runtime;
-    const std::optional<std::uint32_t>& vertex_buffer_at_3d128ac; // NinjaFrameCallState
+    const polybuff_reference::VertexScratchRead& vertex_buffer_at_3d128ac; // NinjaFrameCallState
     NinjaScreenDevice& device;NinjaDepthRuntime depth;
     std::function<bool(float)> argument_ready={};
     std::function<bool(std::uint32_t,std::uint32_t)> vertices_begin={};

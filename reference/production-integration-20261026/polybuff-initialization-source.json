@@ -1,0 +1,96 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "reviewed_dependency_commit": "1960fed6b8a982138cce6c54b3bd7a53d3f25f6b",
+  "reviewed_dependency_review_commit": "95913d8",
+  "dossiers": [
+    {
+      "entry": "0x794540",
+      "evidence_id": "ev_b5a58dd382b6abd9cc8ae889d061434f82ecef8b1818dc67ba584b22d56cd784",
+      "dossier": "/Users/burbujamc/Developer/sadx-wt-normal-uv-strip/reference/inventory-raw/normal-uv-strip-recovery-20261026/buffer-794540.json",
+      "dossier_sha256": "2ebbcab85994c324c90068a2885aa1741b426ae39aaec17f6603af85efc94b9b",
+      "source_ranges": {
+        "0x794540-0x7945ba": "cfab4702ed074a61e0636ebfed0b8989b50422da53cb29cdca00df0e6d29aa96"
+      },
+      "symbol": "PolyBuff_Init"
+    },
+    {
+      "entry": "0x78e720",
+      "evidence_id": "ev_da94eca7e26a899355bb6f1886c863ed55c8d3a262790876c5fde88647193940",
+      "dossier": "/Users/burbujamc/Developer/sadx-wt-normal-uv-strip/reference/inventory-raw/normal-uv-strip-recovery-20261026/buffer-78e720.json",
+      "dossier_sha256": "7be76d0313f7ced6ecb01b3cd661b9afce404c1c17eff528272b9ad42cb0cbf9",
+      "source_ranges": {
+        "0x78e720-0x78e791": "3f4d3f86208e5a6f2a825d28be2f7d9ff389193935226696794b7786545ffc4f"
+      },
+      "symbol": "InitPolyBuffers"
+    }
+  ],
+  "copied_component_sha256": {
+    "src/engine/normal_uv_strip.cpp": "43fb5388e4169b999a61cbe9c021c40a63017169d6db001835f57ae27d446b17",
+    "src/engine/normal_uv_strip.hpp": "a678a26b6cfb7ea3994aaf9b174f7b3fa96e239474bc4161351760cea420f106"
+  },
+  "description_table": {
+    "address": "0x389d888",
+    "bytes": 108,
+    "sha256": "752dd333a39ab87abd0494429f9e626b4ba60cd5f6d7c25b4109ebc17d3bcdc6"
+  },
+  "count_table_before_configuration": [
+    8000,
+    4000,
+    8000,
+    12000,
+    24000,
+    4000,
+    4000,
+    12000,
+    12000
+  ],
+  "configured_count_owner": "sadx::library::State::polygon_buffer_counts, produced by InitializeSonicLibrary configuration copy",
+  "caller": {
+    "address": "0x780850",
+    "range": "0x780850-0x780865",
+    "sha256": "74bfe8ae44321c54279426b9d9ac80b738248bb38714d168c8ea4f944181bd8b",
+    "arguments": [
+      32,
+      24576,
+      "0x38fcf08"
+    ]
+  },
+  "initial_storage": [
+    {
+      "address": "0x3d0fe00",
+      "size": 324,
+      "section": ".data",
+      "offset_in_section": 55041536,
+      "section_raw_size": 50745344,
+      "section_virtual_size": 55053888,
+      "source_initialization": "mapped virtual-tail zero fill"
+    },
+    {
+      "address": "0x3d128ac",
+      "size": 4,
+      "section": ".data",
+      "offset_in_section": 55052460,
+      "section_raw_size": 50745344,
+      "section_virtual_size": 55053888,
+      "source_initialization": "mapped virtual-tail zero fill"
+    },
+    {
+      "address": "0x3d127a0",
+      "size": 4,
+      "section": ".data",
+      "offset_in_section": 55052192,
+      "section_raw_size": 50745344,
+      "section_virtual_size": 55053888,
+      "source_initialization": "mapped virtual-tail zero fill"
+    },
+    {
+      "address": "0x3d0fae0",
+      "size": 512,
+      "section": ".data",
+      "offset_in_section": 55040736,
+      "section_raw_size": 50745344,
+      "section_virtual_size": 55053888,
+      "source_initialization": "mapped virtual-tail zero fill"
+    }
+  ]
+}

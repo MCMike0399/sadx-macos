@@ -1,0 +1,163 @@
+[
+  {
+    "slug": "ninja_frame_calls",
+    "name": "restore-swap",
+    "file": "src/guest/ninja_frame_calls.cpp",
+    "before": "set_state(0xe,depth_write,0x78b9eb",
+    "after": "set_state(0xe,depth_function,0x78b9eb"
+  },
+  {
+    "slug": "ninja_frame_calls",
+    "name": "stencil-flags",
+    "file": "src/guest/ninja_frame_calls.cpp",
+    "before": "stencil?7:3",
+    "after": "stencil?3:3"
+  },
+  {
+    "slug": "ninja_frame_calls",
+    "name": "no-count-reread",
+    "file": "src/guest/ninja_frame_calls.cpp",
+    "before": "count=need(rt.callbacks.count_at_3ce712c,0x780044,0x3ce712c);++index;",
+    "after": "++index;"
+  },
+  {
+    "slug": "ninja_frame_calls",
+    "name": "record-remaining-operands",
+    "file": "src/guest/ninja_frame_calls.cpp",
+    "before": "record[2]=end-size;",
+    "after": "record[2]=end+size;"
+  },
+  {
+    "slug": "ninja_frame_calls",
+    "name": "only-fifteen-hooks",
+    "file": "src/guest/ninja_frame_calls.cpp",
+    "before": "i<16;++i)if",
+    "after": "i<15;++i)if"
+  },
+  {
+    "slug": "ninja_frame_calls",
+    "name": "begin-scene-flag",
+    "file": "src/guest/ninja_frame_calls.cpp",
+    "before": "if((need(flags,0x78b880,0x3d08588)&1)!=0)return;",
+    "after": "if((need(flags,0x78b880,0x3d08588)&1)==0)return;"
+  },
+  {
+    "slug": "ninja_frame_calls",
+    "name": "blend-order",
+    "file": "src/guest/ninja_frame_calls.cpp",
+    "before": "blend(0,8);blend(1,6);",
+    "after": "blend(1,6);blend(0,8);"
+  },
+  {
+    "slug": "device_setup",
+    "name": "interval-multiplier",
+    "file": "src/guest/ninja_device_init.cpp",
+    "before": "set_frame_interval_multiplier(1,rt.renderer)",
+    "after": "set_frame_interval_multiplier(2,rt.renderer)"
+  },
+  {
+    "slug": "device_setup",
+    "name": "scratch-clear-value",
+    "file": "src/guest/ninja_device_init.cpp",
+    "before": "fill(0x3d0fae0,0x200,0)",
+    "after": "fill(0x3d0fae0,0x200,1)"
+  },
+  {
+    "slug": "device_setup",
+    "name": "record-resource-clear",
+    "file": "src/guest/ninja_device_init.cpp",
+    "before": ")record[0]=0;",
+    "after": ")record[0]=1;"
+  },
+  {
+    "slug": "device_setup",
+    "name": "direct3d-sdk",
+    "file": "src/guest/ninja_device_init.cpp",
+    "before": "rt.host.create_direct3d(0xdc)",
+    "after": "rt.host.create_direct3d(0xdd)"
+  },
+  {
+    "slug": "device_setup",
+    "name": "half-width",
+    "file": "src/guest/ninja_device_init.cpp",
+    "before": "unsigned_load(width),0.5F",
+    "after": "unsigned_load(width),1.0F"
+  },
+  {
+    "slug": "device_setup",
+    "name": "viewport-right-edge",
+    "file": "src/guest/ninja_device_init.cpp",
+    "before": "unsigned_load(width-1U)",
+    "after": "unsigned_load(width-2U)"
+  },
+  {
+    "slug": "device_setup",
+    "name": "tail-owner",
+    "file": "src/guest/ninja_device_init.cpp",
+    "before": "call(0x7917dc,0x7914b0)",
+    "after": "call(0x7917dc,0x789dd0)"
+  },
+  {
+    "slug": "system_init",
+    "name": "controller-reset-word",
+    "file": "src/engine/ninja_system_init.cpp",
+    "before": "rt.borrowed.entry_words_at_3d08428)w=0;",
+    "after": "rt.borrowed.entry_words_at_3d08428)w=1;"
+  },
+  {
+    "slug": "system_init",
+    "name": "startup-scale",
+    "file": "src/engine/ninja_system_init.cpp",
+    "before": "rt.fp.from_int64(0xc)",
+    "after": "rt.fp.from_int64(0xb)"
+  },
+  {
+    "slug": "system_init",
+    "name": "mouse-cooperative-flags",
+    "file": "src/engine/ninja_system_init.cpp",
+    "before": "{*s.mouse_at_3abdc14,window,6u}",
+    "after": "{*s.mouse_at_3abdc14,window,7u}"
+  },
+  {
+    "slug": "system_init",
+    "name": "mouse-registration",
+    "file": "src/engine/ninja_system_init.cpp",
+    "before": "ninja_callback_register_77ffc0(rt.borrowed.callbacks,0x77efc0)",
+    "after": "ninja_callback_register_77ffc0(rt.borrowed.callbacks,0x77f110)"
+  },
+  {
+    "slug": "system_init",
+    "name": "shared-core-omit-ninth-record",
+    "file": "src/engine/polybuff_initialization.hpp",
+    "before": "index != kBufferCount;",
+    "after": "index != kBufferCount - 1;"
+  },
+  {
+    "slug": "system_init",
+    "name": "shared-core-wrong-scratch-capacity",
+    "file": "src/engine/polybuff_initialization.hpp",
+    "before": "vertex_count * kScratchVertexBytes",
+    "after": "vertex_count * 32U"
+  },
+  {
+    "slug": "system_init",
+    "name": "shared-core-wrong-count-owner-slot",
+    "file": "src/engine/polybuff_initialization.hpp",
+    "before": "configured_count(context, index)",
+    "after": "configured_count(context, (index + 1) % kBufferCount)"
+  },
+  {
+    "slug": "system_init",
+    "name": "shared-core-retain-null-base",
+    "file": "src/engine/polybuff_initialization.hpp",
+    "before": "retained.value = base;",
+    "after": "retained.value = nullptr;\n    (void)base;"
+  },
+  {
+    "slug": "system_init",
+    "name": "shared-core-short-scratch-clear",
+    "file": "src/engine/polybuff_initialization.hpp",
+    "before": "index != kScratchWords;",
+    "after": "index != kScratchWords - 1;"
+  }
+]

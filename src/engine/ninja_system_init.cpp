@@ -23,16 +23,9 @@ struct Operation {
         std::uint32_t sum=0;for(auto v:a)sum+=static_cast<std::uint32_t>(v<0?0:v);
         const auto size=sum<<2;s.size_at_3ce71a4=size;
         if(size!=0)s.pool_at_3ce71b0=malloc_780f60(size,0x780f07);}
-    // 78e720(count 0x20, size, base): 3d127a0 = base; 3d128ac = malloc(size * 36) (CRT 645002);
-    // 794540 per 3d0fe00 record with the 389d864/389d888/389d8ac/389d8d0 words; 3d0fae0..cdf = 0.
     void buffers_78e720(std::uint32_t size,std::uint32_t base){
-        auto& s=rt.state;s.word_at_3d127a0=base;
-        rt.borrowed.frame.vertex_buffer_at_3d128ac=rt.borrowed.crt_heap.alloc(rt.borrowed.crt_heap.create(),size*36U).value_or(0);
-        for(std::uint32_t i=0;i<9;++i){
-            const auto e=need(s.tables_at_389d888[18+i],0x78e750,0x389d8d0+4*i),f=need(s.tables_at_389d888[9+i],0x78e756,0x389d8ac+4*i),g=need(s.tables_at_389d888[i],0x78e75c,0x389d888+4*i);
-            const auto d=need(rt.borrowed.sizes_at_389d864[i],0x78e763,0x389d864+4*i);
-            call(0x78e76d,0x794540,0x3d0fe00+0x24*i,d,{g,f,e});}
-        if(!rt.borrowed.block_at_3d0fae0.fill(0x3d0fae0,0x200,0))fail(NinjaSystemInitFailure::store_outside_owner,0x78e78c,0x3d0fae0);}
+        const auto initialized=initialize_system_polygon_buffers(rt,size,base);
+        if(!initialized){r=initialized;throw Stop{};}}
     // 77f150: zero the 4 x 0x78 records at 3ce6f48 and the 4 x 0x34 records at 3ce6e78 (+0x30 = &3ce6f48[i]);
     // the 7928e0 call at 77f205 is NOP'd by the Input mod; register 77f110; tail-jump 785240.
     void controllers_77f150(){

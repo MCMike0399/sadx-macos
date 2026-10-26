@@ -1,3 +1,4 @@
+#include "guest/polybuff_owners.hpp"
 #include "guest/frame_control_reference.hpp"
 #include "hle/hle_device_bridge.hpp"
 #include "hle/hle_process.hpp"
