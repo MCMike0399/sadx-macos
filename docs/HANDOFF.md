@@ -456,3 +456,14 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Gate rc 0: 255 native programs, 364 Python tests with one existing filesystem skip, R1 through R4, three native journeys and 16 exact startup comparisons. Evidence: reference/production-integration-20261026/tooling-integration-gate.json; STATUS generated.
 * Stale census guidance and generated status were corrected; pre-October 19 journal text is preserved verbatim in docs/history. No game oracles were changed or rerun for this tooling step; existing partials/failures remain.
 * Next: one bounded extraction attempt for texture selection, then fresh recovery if incomplete, under unchanged oracle/mutants/holdout. Packet branches/worktrees are durable; no push.
+
+### 2026-10-26 — Bounded packet salvage and fresh recovery started (track S, no new gate)
+
+* The reusable static extractor is committed in ca14482; 18 focused tests pass and are registered in Python gate discovery. Transcript commands are never executed.
+* One texture-selection attempt recovers nine authored files but reports 196 unsupported operations; one object-draw attempt recovers zero files and reports 280 unsupported operations. Both are incomplete and untrusted.
+* Raw manifests/snippets stay in build/salvage. Small evidence and delegated task identities are in reference/production-integration-20261026/packet-recovery-started.json.
+* Fresh texture recovery runs on packet/texture-selection-core; fresh object wrapper/traversal recovery runs on packet/object-traversal-core. Both own private worktrees and builds; Root owns composition and the next full gate.
+* Object source dossiers survive under reference/inventory-raw/native-object-render-recovery-20261021. Basic-model dossiers also survive under native-basic-model-render-recovery-20261021; context_bundle needs an explicit nested cache directory to find those.
+* Root has not trusted or integrated recovered behavior. Require exact source/oracle evidence, mutants, holdout and fresh STYLE review before each packet is consumed. No Ghidra during a gate.
+* Native make play-native still reaches menus/save paths and stops at native_basic_object_renderer, frame 1382. Next dependency is real queued/current texture selection and cache binding, then shared graph traversal and model drawing.
+* Last full gate remains tooling-integration at b833ed4, rc 0; no gameplay, CharacterSelect completion or 63 FPS claim. Continue automatically when the active recovery tasks return; no push.

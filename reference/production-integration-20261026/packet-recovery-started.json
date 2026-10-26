@@ -1,0 +1,42 @@
+{
+  "base_commit": "ca14482",
+  "extractor_focused_tests": 18,
+  "attempts": [
+    {
+      "prefix": "/private/tmp/sadx-native-texture-selection-stage",
+      "session": "/Users/burbujamc/Developer/sadx-agent-history/codex-rollouts/21/rollout-2026-10-21T16-05-06-01a1607f-216c-7ff3-b29e-fadbbe0b87c6.jsonl",
+      "session_sha256": "e462b5b70d66ebaaebe8c01b2d823a14ba588b2ee5a44a2202a17612e209fc9f",
+      "static_replay_verdict": "incomplete",
+      "authored_files": 9,
+      "unsupported_operations": 196,
+      "manifest_sha256": "ddbf5c2f14af4508fa4b03de3b1505071b5efe9adf1d0a3a854178134b77b612",
+      "limit": "One static extraction attempt; no recovered command executed and no salvaged game behavior trusted."
+    },
+    {
+      "prefix": "/private/tmp/sadx-object-draw-stage",
+      "session": "/Users/burbujamc/Developer/sadx-agent-history/codex-rollouts/21/rollout-2026-10-21T15-29-40-01a1605e-aee5-7f60-b8de-cc465688d689.jsonl",
+      "session_sha256": "44103232ab92b64f775179b3eb0b84367d7f07609af2686f115f04652b961658",
+      "static_replay_verdict": "incomplete",
+      "authored_files": 0,
+      "unsupported_operations": 280,
+      "manifest_sha256": "c94fe4581b819c34246c608de0879dee0947da3a5bc2ead1dfa0a55ef6fd08b3",
+      "limit": "One static extraction attempt; no recovered command executed and no salvaged game behavior trusted."
+    }
+  ],
+  "next": "Fresh recovery under source dossiers, unchanged legacy oracle where available, mutants and holdout; independent STYLE review before native composition.",
+  "tasks": {
+    "texture_selection": {
+      "branch": "packet/texture-selection-core",
+      "task_id": "node:delegated-task:command%3Amcp%3A1867b6b7-4d7f-4ffe-be5b-55ebb7752376%3Adelegate-task%3Asadx-texture-selection-recovery-20261026-1"
+    },
+    "object_traversal": {
+      "branch": "packet/object-traversal-core",
+      "task_id": "node:delegated-task:command%3Amcp%3A1867b6b7-4d7f-4ffe-be5b-55ebb7752376%3Adelegate-task%3Asadx-object-traversal-recovery-20261026-1"
+    }
+  },
+  "limits": [
+    "Recovery tasks are running; no new port or native image claim.",
+    "No root gate will run while recovery workers compile or run Ghidra.",
+    "Next actual native stop remains native_basic_object_renderer at frame1382; queued/current texture binding403070 must precede object drawing."
+  ]
+}
