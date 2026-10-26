@@ -503,3 +503,15 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Gamma recovery runs on packet/gamma-selection-core; shared current-owner migration runs on packet/player-current-owners under unchanged Sonic judges. Gamma borrows the shared slots and never adds shadows or super-byte writes.
 * Fresh full E102 483430, InitGammaAnimData 7ca300 and InitGammaWeldInfo 7cb560 dossiers are retained at packet/normal-uv-strip commit 0eed0d8. Ghidra exited 0 and closed before gate preparation; no 7cdd60 guess was queried.
 * Continue through actual actor callbacks; all-preview initialization/update/drawing, cancel/reentry, story entry, gameplay and 63 FPS remain unverified. No push.
+
+### 2026-10-26 — Model source-only repeat and gate preparation (track J/V)
+
+* Binding branch packet/basic-model-binding is clean at 1b7b94d. Its maintained-source export 88eb56e builds without game EXE/DLLs or prebuilt game objects, reusing only pinned source-built SDL/libusb.
+* The exported native app follows the same normal fresh-save input to native_gamma_player_controller at frame 1382, actual exit 1. Capture 1382 is byte-identical to the binding frontier. No all-actor pixels or N3b claim.
+* Explicit compatibility recipes apply guest/polybuff_owners.hpp only to frozen fixture TUs; no global or inherited CXXFLAGS changed. Seven legacy/new units pass with original manifest arguments. An initial ninja-view invocation omitted its required trig argument and failed usage; corrected invocation passes.
+* Root reran unchanged system init 600, device setup 2000 and frame calls 3969 cases with zero mismatches; the default initializer target passes 152 cases. Producer dev/holdout and inherited FP partial limits remain separate.
+* Symbol generation now uses pinned source headers/labels with read-only local Git metadata. Provenance, readability, layers and owner checks pass; the updated judge manifest protects 893 inputs with zero drift. No original expectation or tolerance changed.
+* Source-only and setup receipts are committed under reference/production-integration-20261026 in the binding branch. Final startup and shared-current review is active; it must finish before the combined full gate and Main code integration.
+* Shared current-owner migration 28b3974 on packet/player-current-owners preserves Player 28800/2840 FP partial and Actions 30192/2172 FP partial, three old units, 257 worlds and seven mutants. Root review/native consumption remain pending.
+* Gamma core recovery uses actual 483430 source. Its body has no direct event 580 call; 49fb10 and 4c5420 remain neutral setup seams. Full source corrected earlier guesses; no guessed event or TimeZero implementation is accepted.
+* Main's last recorded full gate remains 04c40ae, rc 0. Continue final review/gate, then the actual Gamma callback and its reached dependencies; the complete Sonic story route remains active. No push.
