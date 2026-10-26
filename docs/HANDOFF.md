@@ -5108,3 +5108,12 @@ Policy correction: STYLE§8/ADR0007§5 permit typed imported physics parameters;
 * The repaired windowed smoke reaches the AppKit run loop but receives no display frames; macOS screen capture also reports no display. That run was terminated, not counted as passing.
 * Evidence: reference/production-integration-20261026/controller-pipe-portability.json. Physical controller delivery and the complete gate remain unverified.
 * Next: run the full gate with a visible DiveMac GUI session, then land the prepared GOAL section 6 item 2 tooling packets.
+
+### 2026-10-26 — Green gate on DiveMac at the CharacterSelect frontier (track J/V)
+
+* Outcome: make -j10 gate exits 0 at 9e10e47 after the libusb deployment-target repair. The visible GUI session also passes the 120-frame windowed smoke check.
+* Reference R1 through R4 pass. Required native FileSelect 1850, MainMenu 1850 and fresh-save 6050 frame journeys all pass.
+* The existing independent startup comparison also passes all 16 exact state/image checkpoints. Python discovery passes 312 tests with one pre-existing filesystem skip.
+* Gate evidence: reference/production-integration-20261026/divemac-head-gate.json. STATUS was regenerated from that real result.
+* Native make play-native still reaches menus and creates/loads saves; CharacterSelect remains stopped at native_basic_object_renderer, frame 1382. No gameplay or 63 FPS claim.
+* Next: integrate GOAL section 6 item 2 packets, acquire the two missing reference return-transition captures, then recover the next reached CharacterSelect dependency. No push.
