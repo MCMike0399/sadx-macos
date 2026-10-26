@@ -1,0 +1,2389 @@
+{
+  "base_commit": "da25501e97d72d65d73e965232d8841658aa1031",
+  "new_captures_taken": 0,
+  "root_read_only": true,
+  "old_checker_replays": [
+    {
+      "checker": "tools/journey/check_native_file_select.py",
+      "completed_source": "build/native-file-select-cvya2gsi",
+      "suppressed_frame": 1190,
+      "old_result": "accepted",
+      "new_unmodified_capture": "accepted",
+      "new_suppressed_capture": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-d5cf871a/build/content-evidence/old-file_select/captures/1190.ppm: full-frame blank (uniform RGB)",
+      "scope": "Full old checker replay; only raster replaced, genuine states and seed saves retained."
+    },
+    {
+      "checker": "tools/journey/check_native_main_menu.py",
+      "completed_source": "build/native-main-menu-dor_txwa",
+      "suppressed_frame": 902,
+      "old_result": "accepted",
+      "new_unmodified_capture": "accepted",
+      "new_suppressed_capture": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-d5cf871a/build/content-evidence/old-main_menu/captures/902.ppm: full-frame blank (uniform RGB)",
+      "scope": "Full old checker replay; only raster replaced, genuine states and seed saves retained."
+    },
+    {
+      "checker": "tools/journey/check_native_fresh_save.py",
+      "completed_source": "build/native-fresh-save-fpe02hag",
+      "suppressed_frame": 899,
+      "old_result": "accepted",
+      "new_unmodified_capture": "accepted",
+      "new_suppressed_capture": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-d5cf871a/build/content-evidence/old-fresh_save/captures/899.ppm: full-frame blank (uniform RGB)",
+      "scope": "Fresh-save replay exercises play(), not fabricated persistence/save writes."
+    }
+  ],
+  "completed_native_content": [
+    {
+      "checkpoint": "native-file-select/1002",
+      "capture": "build/native-file-select-cvya2gsi/captures/1002.ppm",
+      "capture_sha256": "c9650fa1534870f77679c709fa94ebdb7ab7ec1494b7f48d6c4d0638d992528e",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-file-select/1100",
+      "capture": "build/native-file-select-cvya2gsi/captures/1100.ppm",
+      "capture_sha256": "d562a857141e9b8ccae15c8d8dd2bf785b4054b35821e4addb001ee1e2b187e7",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-file-select/1190",
+      "capture": "build/native-file-select-cvya2gsi/captures/1190.ppm",
+      "capture_sha256": "17456956a3c6b0a4b67dc56f10f52e95922a547795296842d835c3d0f5bd320a",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-file-select/1251",
+      "capture": "build/native-file-select-cvya2gsi/captures/1251.ppm",
+      "capture_sha256": "4ffc07ed297563db90dfee84522b35ee7e56cd668382984abeb986a8507e8d76",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-file-select/1300",
+      "capture": "build/native-file-select-cvya2gsi/captures/1300.ppm",
+      "capture_sha256": "d562a857141e9b8ccae15c8d8dd2bf785b4054b35821e4addb001ee1e2b187e7",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-file-select/1450",
+      "capture": "build/native-file-select-cvya2gsi/captures/1450.ppm",
+      "capture_sha256": "9511cdc44dfb610f3bd713802bb571336758d406df3eb5be6626fc3d3a357282",
+      "result": "blocked",
+      "reason": "native-file-select/1450: missing qualified reference content expectation; see capture-content.json blockers (no native-only blessing)"
+    },
+    {
+      "checkpoint": "native-file-select/1850",
+      "capture": "build/native-file-select-cvya2gsi/captures/1850.ppm",
+      "capture_sha256": "d562a857141e9b8ccae15c8d8dd2bf785b4054b35821e4addb001ee1e2b187e7",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-file-select/740",
+      "capture": "build/native-file-select-cvya2gsi/captures/740.ppm",
+      "capture_sha256": "ca247abf942b936bd7635b0099916db3ea618b1b4c34d34210657638f6bbaad5",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-file-select/899",
+      "capture": "build/native-file-select-cvya2gsi/captures/899.ppm",
+      "capture_sha256": "d562a857141e9b8ccae15c8d8dd2bf785b4054b35821e4addb001ee1e2b187e7",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-file-select/902",
+      "capture": "build/native-file-select-cvya2gsi/captures/902.ppm",
+      "capture_sha256": "69b1df3f8ed347d81487992092858394e51b89974e3e01f38aeed6c53281f80b",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-file-select/950",
+      "capture": "build/native-file-select-cvya2gsi/captures/950.ppm",
+      "capture_sha256": "2a45567444924333ee8b49265b7f1c80345501462d8a9baa2c0b23fb8948c349",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-main-menu/1100",
+      "capture": "build/native-main-menu-dor_txwa/captures/1100.ppm",
+      "capture_sha256": "4ffd753c1ea42a1c720c48159c5881877c584dd52522d26ce98fe730826286bd",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-main-menu/1250",
+      "capture": "build/native-main-menu-dor_txwa/captures/1250.ppm",
+      "capture_sha256": "128b4d38a8f9dc36e07bf0413b35a8d42f859b69c5a7523a3f075fd61ab1f88c",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-main-menu/1301",
+      "capture": "build/native-main-menu-dor_txwa/captures/1301.ppm",
+      "capture_sha256": "82a5db762ede91f932753e2366124681ff7f5ede0c05d3d937680c8a165a1265",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-main-menu/1390",
+      "capture": "build/native-main-menu-dor_txwa/captures/1390.ppm",
+      "capture_sha256": "b7ca0214e32916521d90617aa74880875de35d9d3b588d28a118638e85ee2c64",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-main-menu/1450",
+      "capture": "build/native-main-menu-dor_txwa/captures/1450.ppm",
+      "capture_sha256": "5c67e64e542f734e4dca09f8e79b08c908ad47f6205c1e1406e6b86b9ac9e4d1",
+      "result": "blocked",
+      "reason": "native-main-menu/1450: missing qualified reference content expectation; see capture-content.json blockers (no native-only blessing)"
+    },
+    {
+      "checkpoint": "native-main-menu/1690",
+      "capture": "build/native-main-menu-dor_txwa/captures/1690.ppm",
+      "capture_sha256": "1b5a1ca7089919fbc67cef13b78b67f48232a38240c78fe81134365d06044257",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-main-menu/1850",
+      "capture": "build/native-main-menu-dor_txwa/captures/1850.ppm",
+      "capture_sha256": "23f6765ffe83eb74bfc86f755270784c2d1c8c3844367905c4f1d6e5fe6001e2",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-main-menu/899",
+      "capture": "build/native-main-menu-dor_txwa/captures/899.ppm",
+      "capture_sha256": "d562a857141e9b8ccae15c8d8dd2bf785b4054b35821e4addb001ee1e2b187e7",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-main-menu/902",
+      "capture": "build/native-main-menu-dor_txwa/captures/902.ppm",
+      "capture_sha256": "69b1df3f8ed347d81487992092858394e51b89974e3e01f38aeed6c53281f80b",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-main-menu/970",
+      "capture": "build/native-main-menu-dor_txwa/captures/970.ppm",
+      "capture_sha256": "15dea40b615b2e44544520475f09374afc2140bb73e581e9b056be50c64cced9",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/create/1000",
+      "capture": "build/native-fresh-save-fpe02hag/create/captures/1000.ppm",
+      "capture_sha256": "e61ce8c56a2e7fa13daed7af1f262fee4745475284643ca69e85a7e8cc51d391",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/create/1300",
+      "capture": "build/native-fresh-save-fpe02hag/create/captures/1300.ppm",
+      "capture_sha256": "7348617dd872f8dd2cf000052678e4bdc3948ce576e380a336162d696d1bcaf5",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/create/899",
+      "capture": "build/native-fresh-save-fpe02hag/create/captures/899.ppm",
+      "capture_sha256": "d562a857141e9b8ccae15c8d8dd2bf785b4054b35821e4addb001ee1e2b187e7",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/create/902",
+      "capture": "build/native-fresh-save-fpe02hag/create/captures/902.ppm",
+      "capture_sha256": "a31fd303d9e72648c7f665b567b890a19e22e075f0333111e6590ba69a68c9bd",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/create/950",
+      "capture": "build/native-fresh-save-fpe02hag/create/captures/950.ppm",
+      "capture_sha256": "3bef1326d9d91d38a113eade1a12ab27d095b4ed28d20d026641f4888f2e90a3",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/create/951",
+      "capture": "build/native-fresh-save-fpe02hag/create/captures/951.ppm",
+      "capture_sha256": "93658c64a075525e43e4fa4b84ef33f701082f1a6d7db7bc0d0afee9b7126f8c",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/create/960",
+      "capture": "build/native-fresh-save-fpe02hag/create/captures/960.ppm",
+      "capture_sha256": "93658c64a075525e43e4fa4b84ef33f701082f1a6d7db7bc0d0afee9b7126f8c",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/create-empty/1000",
+      "capture": "build/native-fresh-save-fpe02hag/create-empty/captures/1000.ppm",
+      "capture_sha256": "e61ce8c56a2e7fa13daed7af1f262fee4745475284643ca69e85a7e8cc51d391",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/create-empty/1300",
+      "capture": "build/native-fresh-save-fpe02hag/create-empty/captures/1300.ppm",
+      "capture_sha256": "7348617dd872f8dd2cf000052678e4bdc3948ce576e380a336162d696d1bcaf5",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/create-empty/899",
+      "capture": "build/native-fresh-save-fpe02hag/create-empty/captures/899.ppm",
+      "capture_sha256": "c67f4555d7e110b23f0db027bcd0de7a18070ba0cb52f1a42176802bb88e3b6a",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/create-empty/950",
+      "capture": "build/native-fresh-save-fpe02hag/create-empty/captures/950.ppm",
+      "capture_sha256": "a66b982e348b09fa98cf930502afbfa1c7d8f15bb4cbfe385969c9a920894ee4",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/create-empty/951",
+      "capture": "build/native-fresh-save-fpe02hag/create-empty/captures/951.ppm",
+      "capture_sha256": "c67f4555d7e110b23f0db027bcd0de7a18070ba0cb52f1a42176802bb88e3b6a",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/create-empty/960",
+      "capture": "build/native-fresh-save-fpe02hag/create-empty/captures/960.ppm",
+      "capture_sha256": "c67f4555d7e110b23f0db027bcd0de7a18070ba0cb52f1a42176802bb88e3b6a",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/restart/1050",
+      "capture": "build/native-fresh-save-fpe02hag/restart/captures/1050.ppm",
+      "capture_sha256": "4ea56098fd36c2d3e7bc67cfa1831b42a6d84740e3c6c9b7a15faa2dbd632d3a",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/restart/1140",
+      "capture": "build/native-fresh-save-fpe02hag/restart/captures/1140.ppm",
+      "capture_sha256": "fc28a263d74eb9671c6da5b4ee6d5b99169e923107f6ff1b5a116222bdc6278f",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/restart/1190",
+      "capture": "build/native-fresh-save-fpe02hag/restart/captures/1190.ppm",
+      "capture_sha256": "85ac8b5edc608be8cd4dc71db44b81ec74b440bccae6e5dadb113358761764b9",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/restart/1270",
+      "capture": "build/native-fresh-save-fpe02hag/restart/captures/1270.ppm",
+      "capture_sha256": "4ea56098fd36c2d3e7bc67cfa1831b42a6d84740e3c6c9b7a15faa2dbd632d3a",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/restart/1370",
+      "capture": "build/native-fresh-save-fpe02hag/restart/captures/1370.ppm",
+      "capture_sha256": "fc28a263d74eb9671c6da5b4ee6d5b99169e923107f6ff1b5a116222bdc6278f",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/restart/1500",
+      "capture": "build/native-fresh-save-fpe02hag/restart/captures/1500.ppm",
+      "capture_sha256": "26d11e30c32f878d04720075eed2982d9fc0e5e3a46d053874b771687e8b1b2c",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/restart/1600",
+      "capture": "build/native-fresh-save-fpe02hag/restart/captures/1600.ppm",
+      "capture_sha256": "2ffcc7b16fe682a4a26e2676860bbb1bab0282b30069131565c04c679afee6c7",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/restart/1770",
+      "capture": "build/native-fresh-save-fpe02hag/restart/captures/1770.ppm",
+      "capture_sha256": "b469400a51c2b0e3857acd37c586252e4887e7ffe21d7ce17a2db2d47c18504d",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/restart/2000",
+      "capture": "build/native-fresh-save-fpe02hag/restart/captures/2000.ppm",
+      "capture_sha256": "7273d0038d589d072f3e81dd8aeda924497c6ac932b7f3d6396c471ad6e29997",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/restart/2150",
+      "capture": "build/native-fresh-save-fpe02hag/restart/captures/2150.ppm",
+      "capture_sha256": "aa11d86ea24804cbfbcb26dcd709aeccbe27c2b8910aff0add50d6c6722de0a7",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/restart/899",
+      "capture": "build/native-fresh-save-fpe02hag/restart/captures/899.ppm",
+      "capture_sha256": "4ea56098fd36c2d3e7bc67cfa1831b42a6d84740e3c6c9b7a15faa2dbd632d3a",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/restart/970",
+      "capture": "build/native-fresh-save-fpe02hag/restart/captures/970.ppm",
+      "capture_sha256": "fc28a263d74eb9671c6da5b4ee6d5b99169e923107f6ff1b5a116222bdc6278f",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/restart-empty/1100",
+      "capture": "build/native-fresh-save-fpe02hag/restart-empty/captures/1100.ppm",
+      "capture_sha256": "26d11e30c32f878d04720075eed2982d9fc0e5e3a46d053874b771687e8b1b2c",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/restart-empty/1300",
+      "capture": "build/native-fresh-save-fpe02hag/restart-empty/captures/1300.ppm",
+      "capture_sha256": "f11d5a576467d6a5bac6422acdc60435d42299de60bf8bd8453caddd24fe2427",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/restart-empty/899",
+      "capture": "build/native-fresh-save-fpe02hag/restart-empty/captures/899.ppm",
+      "capture_sha256": "f865bd707b953bead9a7cf6fdaca9fef7e09e3817d7572b671c67d77d44e169c",
+      "result": "pass"
+    },
+    {
+      "checkpoint": "native-fresh-save/restart-empty/970",
+      "capture": "build/native-fresh-save-fpe02hag/restart-empty/captures/970.ppm",
+      "capture_sha256": "2369ce59cb5a61ff6f643ecd91b0a17e1e3001649995188096ba37ea1d5955f7",
+      "result": "pass"
+    }
+  ],
+  "completion_attempt": {
+    "reference_provenance": {
+      "report": "build/journeys/report.json",
+      "report_sha256": "304899b9ed56bbf015c38e61833d21f15caaa86719291cbf8cac250f20772df6",
+      "log": "build/journeys/route.log",
+      "log_sha256": "6d6645c366c930dc49cbfcad766256386dd43616fac93a6d4784cd3bf941e3f2",
+      "script": "build/journeys/route.txt",
+      "script_sha256": "4be20e0aeb2921ce39afaa97faccaa90ff7ef31d7ec471f5ef9d5c2dec092261",
+      "qualification": "Completed make journeys EXIT0, 4/4; user reports Root visually inspected real title Sonic/Press ENTER and CharacterSelect Sonic/select banner."
+    },
+    "native_title_distances": {
+      "native-file-select/1450": 58.486111111111114,
+      "native-file-select/740": 3.3880208333333335,
+      "native-main-menu/1450": 53.54991319444444,
+      "native-fresh-save/restart/1770": 15.75217013888889
+    },
+    "region_qualification": "Restart title face [70,70,170,170] exactly matches original reference RGB; region contains Sonic eyes and blue head. Does not certify full frame. Return transitions have no Sonic/logo; reference footer/copyright RGB also differs due to dimming.",
+    "reference_full_run_replays": [
+      {
+        "checkpoint": "title",
+        "mutation": "original",
+        "exit_status": 0,
+        "passed": true,
+        "problems": [],
+        "last_frame": {
+          "frame": 700,
+          "draws": 29,
+          "textured": 28
+        },
+        "state_sha256": "5cc1545550a944525993d92f16a76ed0f588048321b5d5314e54eb048701dab5",
+        "scope": "Offline full run() replay: genuine original PPM/state/log; recorded process exit 0, original source save hashes not replayed (no save checks for R2/R3). Mutants replace only raster; no executable source mutation or app launch."
+      },
+      {
+        "checkpoint": "title",
+        "mutation": "black",
+        "exit_status": 1,
+        "passed": false,
+        "problems": [
+          "1 colours, expected at least 2000",
+          "screenshot content: build/content-evidence/reference-replay/title/black/title.ppm: full-frame blank (uniform RGB)"
+        ],
+        "last_frame": {
+          "frame": 700,
+          "draws": 29,
+          "textured": 28
+        },
+        "state_sha256": "5cc1545550a944525993d92f16a76ed0f588048321b5d5314e54eb048701dab5",
+        "scope": "Offline full run() replay: genuine original PPM/state/log; recorded process exit 0, original source save hashes not replayed (no save checks for R2/R3). Mutants replace only raster; no executable source mutation or app launch."
+      },
+      {
+        "checkpoint": "title",
+        "mutation": "white",
+        "exit_status": 1,
+        "passed": false,
+        "problems": [
+          "1 colours, expected at least 2000",
+          "screenshot content: build/content-evidence/reference-replay/title/white/title.ppm: full-frame blank (uniform RGB)"
+        ],
+        "last_frame": {
+          "frame": 700,
+          "draws": 29,
+          "textured": 28
+        },
+        "state_sha256": "5cc1545550a944525993d92f16a76ed0f588048321b5d5314e54eb048701dab5",
+        "scope": "Offline full run() replay: genuine original PPM/state/log; recorded process exit 0, original source save hashes not replayed (no save checks for R2/R3). Mutants replace only raster; no executable source mutation or app launch."
+      },
+      {
+        "checkpoint": "title",
+        "mutation": "colour",
+        "exit_status": 1,
+        "passed": false,
+        "problems": [
+          "1 colours, expected at least 2000",
+          "screenshot content: build/content-evidence/reference-replay/title/colour/title.ppm: full-frame blank (uniform RGB)"
+        ],
+        "last_frame": {
+          "frame": 700,
+          "draws": 29,
+          "textured": 28
+        },
+        "state_sha256": "5cc1545550a944525993d92f16a76ed0f588048321b5d5314e54eb048701dab5",
+        "scope": "Offline full run() replay: genuine original PPM/state/log; recorded process exit 0, original source save hashes not replayed (no save checks for R2/R3). Mutants replace only raster; no executable source mutation or app launch."
+      },
+      {
+        "checkpoint": "title",
+        "mutation": "unrelated",
+        "exit_status": 1,
+        "passed": false,
+        "problems": [
+          "screenshot content: reference/title: reference content signature distance 113.9 > 12"
+        ],
+        "last_frame": {
+          "frame": 700,
+          "draws": 29,
+          "textured": 28
+        },
+        "state_sha256": "5cc1545550a944525993d92f16a76ed0f588048321b5d5314e54eb048701dab5",
+        "scope": "Offline full run() replay: genuine original PPM/state/log; recorded process exit 0, original source save hashes not replayed (no save checks for R2/R3). Mutants replace only raster; no executable source mutation or app launch."
+      },
+      {
+        "checkpoint": "character-select",
+        "mutation": "original",
+        "exit_status": 0,
+        "passed": true,
+        "problems": [],
+        "last_frame": {
+          "frame": 1700,
+          "draws": 420,
+          "textured": 412
+        },
+        "state_sha256": "e1b22e38f7af9d34a9a80dad3d30e7e6482c815195247f31165b1ce9f9d73580",
+        "scope": "Offline full run() replay: genuine original PPM/state/log; recorded process exit 0, original source save hashes not replayed (no save checks for R2/R3). Mutants replace only raster; no executable source mutation or app launch."
+      },
+      {
+        "checkpoint": "character-select",
+        "mutation": "black",
+        "exit_status": 1,
+        "passed": false,
+        "problems": [
+          "1 colours, expected at least 2000",
+          "screenshot content: build/content-evidence/reference-replay/character-select/black/character-select.ppm: full-frame blank (uniform RGB)"
+        ],
+        "last_frame": {
+          "frame": 1700,
+          "draws": 420,
+          "textured": 412
+        },
+        "state_sha256": "e1b22e38f7af9d34a9a80dad3d30e7e6482c815195247f31165b1ce9f9d73580",
+        "scope": "Offline full run() replay: genuine original PPM/state/log; recorded process exit 0, original source save hashes not replayed (no save checks for R2/R3). Mutants replace only raster; no executable source mutation or app launch."
+      },
+      {
+        "checkpoint": "character-select",
+        "mutation": "white",
+        "exit_status": 1,
+        "passed": false,
+        "problems": [
+          "1 colours, expected at least 2000",
+          "screenshot content: build/content-evidence/reference-replay/character-select/white/character-select.ppm: full-frame blank (uniform RGB)"
+        ],
+        "last_frame": {
+          "frame": 1700,
+          "draws": 420,
+          "textured": 412
+        },
+        "state_sha256": "e1b22e38f7af9d34a9a80dad3d30e7e6482c815195247f31165b1ce9f9d73580",
+        "scope": "Offline full run() replay: genuine original PPM/state/log; recorded process exit 0, original source save hashes not replayed (no save checks for R2/R3). Mutants replace only raster; no executable source mutation or app launch."
+      },
+      {
+        "checkpoint": "character-select",
+        "mutation": "colour",
+        "exit_status": 1,
+        "passed": false,
+        "problems": [
+          "1 colours, expected at least 2000",
+          "screenshot content: build/content-evidence/reference-replay/character-select/colour/character-select.ppm: full-frame blank (uniform RGB)"
+        ],
+        "last_frame": {
+          "frame": 1700,
+          "draws": 420,
+          "textured": 412
+        },
+        "state_sha256": "e1b22e38f7af9d34a9a80dad3d30e7e6482c815195247f31165b1ce9f9d73580",
+        "scope": "Offline full run() replay: genuine original PPM/state/log; recorded process exit 0, original source save hashes not replayed (no save checks for R2/R3). Mutants replace only raster; no executable source mutation or app launch."
+      },
+      {
+        "checkpoint": "character-select",
+        "mutation": "unrelated",
+        "exit_status": 1,
+        "passed": false,
+        "problems": [
+          "screenshot content: reference/character-select: reference content signature distance 120.6 > 12"
+        ],
+        "last_frame": {
+          "frame": 1700,
+          "draws": 420,
+          "textured": 412
+        },
+        "state_sha256": "e1b22e38f7af9d34a9a80dad3d30e7e6482c815195247f31165b1ce9f9d73580",
+        "scope": "Offline full run() replay: genuine original PPM/state/log; recorded process exit 0, original source save hashes not replayed (no save checks for R2/R3). Mutants replace only raster; no executable source mutation or app launch."
+      }
+    ],
+    "rejected_region_candidates": [
+      {
+        "checkpoint": "native-file-select/1450",
+        "rectangle": [
+          280,
+          432,
+          604,
+          445
+        ],
+        "reference_rgb_sha256": "53126a4b23d337a8ea5f5aaf687c6787a40d081557487ee4a44d1d7618472f3b",
+        "native_rgb_sha256": "7b2dac2fc31bba26059e68c4a8bfd58b2141fd24ca72666860ce89aa71911d85",
+        "exact_match": false,
+        "mean_absolute_rgb_distance": 31.07312440645774
+      },
+      {
+        "checkpoint": "native-file-select/1450",
+        "rectangle": [
+          0,
+          0,
+          640,
+          54
+        ],
+        "reference_rgb_sha256": "3375643d87926126dce54fa5d4f4987408cce2d5a5954789a9e182a455af221a",
+        "native_rgb_sha256": "ff037400444b9c1a69c059af2b288f8fe7d71487412b2d56c8dc587631f910f8",
+        "exact_match": false,
+        "mean_absolute_rgb_distance": 30.93124035493827
+      },
+      {
+        "checkpoint": "native-file-select/1450",
+        "rectangle": [
+          360,
+          430,
+          640,
+          480
+        ],
+        "reference_rgb_sha256": "2e5e720c1dc4faf853e51fa0c0bd50ac70888a9b787883167fa401b19ec56e6b",
+        "native_rgb_sha256": "38c567f6c79339182f2482e802e72f704910f80b633bc7e0d836e44d44c00026",
+        "exact_match": false,
+        "mean_absolute_rgb_distance": 31.94597619047619
+      },
+      {
+        "checkpoint": "native-file-select/1450",
+        "rectangle": [
+          250,
+          180,
+          610,
+          290
+        ],
+        "reference_rgb_sha256": "639bff06f0b48c7f0f30e4150994b49c01066ce4d2bebcfa8f49bb0f59760a60",
+        "native_rgb_sha256": "027515b4a808f413252aacdfed9e4abb91778e5e70b0f7b6643a8d442e67eb59",
+        "exact_match": false,
+        "mean_absolute_rgb_distance": 101.80920875420875
+      },
+      {
+        "checkpoint": "native-file-select/1450",
+        "rectangle": [
+          70,
+          70,
+          170,
+          170
+        ],
+        "reference_rgb_sha256": "8273a3c2e045635cd4afa1872dc64140f0f1819309bfa71a394cfd3fcd748fa7",
+        "native_rgb_sha256": "7203dbd990099539fff6b26eaac010f46bd0435ed91ee98e45396da8f8fc6dd9",
+        "exact_match": false,
+        "mean_absolute_rgb_distance": 66.0798
+      },
+      {
+        "checkpoint": "native-main-menu/1450",
+        "rectangle": [
+          280,
+          432,
+          604,
+          445
+        ],
+        "reference_rgb_sha256": "53126a4b23d337a8ea5f5aaf687c6787a40d081557487ee4a44d1d7618472f3b",
+        "native_rgb_sha256": "4941fb6fd694384ed4a775ef015db9d0209a9a580e9427ead5681c0cb9b57aa4",
+        "exact_match": false,
+        "mean_absolute_rgb_distance": 20.663263691041468
+      },
+      {
+        "checkpoint": "native-main-menu/1450",
+        "rectangle": [
+          0,
+          0,
+          640,
+          54
+        ],
+        "reference_rgb_sha256": "3375643d87926126dce54fa5d4f4987408cce2d5a5954789a9e182a455af221a",
+        "native_rgb_sha256": "2c87cd9a4dc6359a9ac55bc0729407694eb524d52e102cf015e5d80cf75703c4",
+        "exact_match": false,
+        "mean_absolute_rgb_distance": 23.969560185185184
+      },
+      {
+        "checkpoint": "native-main-menu/1450",
+        "rectangle": [
+          360,
+          430,
+          640,
+          480
+        ],
+        "reference_rgb_sha256": "2e5e720c1dc4faf853e51fa0c0bd50ac70888a9b787883167fa401b19ec56e6b",
+        "native_rgb_sha256": "4257a9d9da196cb499af2385ca4f90ae4f2dff35c49cc4d06a55b21a81e1542c",
+        "exact_match": false,
+        "mean_absolute_rgb_distance": 23.741285714285713
+      },
+      {
+        "checkpoint": "native-main-menu/1450",
+        "rectangle": [
+          250,
+          180,
+          610,
+          290
+        ],
+        "reference_rgb_sha256": "639bff06f0b48c7f0f30e4150994b49c01066ce4d2bebcfa8f49bb0f59760a60",
+        "native_rgb_sha256": "419d8a5b95865e636ba450bdb58adee97c661323a0b899ed6283f6f65c24d3a9",
+        "exact_match": false,
+        "mean_absolute_rgb_distance": 112.06892255892257
+      },
+      {
+        "checkpoint": "native-main-menu/1450",
+        "rectangle": [
+          70,
+          70,
+          170,
+          170
+        ],
+        "reference_rgb_sha256": "8273a3c2e045635cd4afa1872dc64140f0f1819309bfa71a394cfd3fcd748fa7",
+        "native_rgb_sha256": "cc026ce4e22c15b6c6bd7585cab4386ae48c71daabd8ef0b1351815c8d2ec352",
+        "exact_match": false,
+        "mean_absolute_rgb_distance": 61.61723333333333
+      }
+    ],
+    "focused_tests": {
+      "capture_content": 9,
+      "native_main_menu_journey": 1,
+      "journeys": 11,
+      "all_exit_status": 0
+    }
+  },
+  "completion_final": {
+    "branch": "packet/capture-content-complete",
+    "return_transitions": [
+      {
+        "checkpoint": "native-file-select/1450",
+        "expectation_frame": 1450,
+        "distance": 2.9058159722222223,
+        "ceiling": 12,
+        "provenance": {
+          "capture": "build/content-return-reference/file_select/1450.ppm",
+          "capture_sha256": "1d5c41ae7440738bce8262b0c4999f23f7816181e2ba57b7df11bac0e1d15362",
+          "state": "build/content-return-reference/file_select/1450.json",
+          "state_sha256": "e82c9a9ad782da43ed12d375ee3b8aec43fdd23f101a40aa5d6ae78d93035442",
+          "log": "build/content-return-reference/file_select/application.log",
+          "log_sha256": "4d9764b8ec933d7d06f70d06178a00b4a620a9ab3f4e55096d04fa07b7f86071",
+          "script": "build/content-return-reference/file_select/route.script",
+          "script_sha256": "cbd04a58258d7c36860e7ea948b3ae346f7b1ee2323d332094b4777739adbcc4",
+          "input_metadata": "build/content-return-reference/file_select/input-provenance.json",
+          "input_metadata_sha256": "e0b0ea823a30c37ee5e5023384af38210ce6d742e8efb5cbebf1601307ffd7c8",
+          "application": "build/sadx-app",
+          "application_sha256": "d9f167a6291d9d96fc66d21855ab8fb126ae67b9f8a42ac3900d3cb1b91bb3a2",
+          "frame": 1450,
+          "decode": "Original 640x480 P6 RGB payload; no conversion.",
+          "process_exit": {
+            "status": 0,
+            "evidence": "Root attestation in task brief; not inferred from log or a pre-existing semantic checker report."
+          },
+          "qualification": "Root attests completed --offscreen --script route.script --overlay unique --exit-after 1470 process EXIT0 and visual inspection of genuine dimmed title-background return transition in source1450.png.",
+          "input_validation": "Unchanged native checker key string verified against input metadata; reference down/up events equal native F-1 through exit frame 1470; later native reentry inputs remain unchanged in native checker.",
+          "state_observed": {
+            "frame": 1450,
+            "presents": 1450,
+            "game_mode": 12,
+            "game_state": 21,
+            "stage": 0,
+            "act": 0,
+            "rings": 0,
+            "level_frames": 0,
+            "global_timer": 187976,
+            "control_enabled": 1,
+            "controller_enabled": 1,
+            "player": null,
+            "boss": null,
+            "camera": null,
+            "profile": {
+              "ccef_reset_1": "810d",
+              "ccef_reset_2": "810d",
+              "ehcf_dereference": "909090",
+              "ehcf_branch": "9090",
+              "skipma_ingame_to_speedrun": true,
+              "skipma_movie_to_speedrun": true,
+              "limiter_to_speedrun": true,
+              "extra_ticks_to_speedrun": true,
+              "frame_rate_scalar": 63
+            }
+          },
+          "limits": [
+            "Input metadata pending-qualification text predates Root completion attestation; original file preserved and hashed.",
+            "No old semantic assertion proof is claimed for these source runs. State facts verified directly offline.",
+            "Reference HLE renderer/platform limits remain; no Windows GPU parity claim."
+          ]
+        },
+        "diagnostic_only": {
+          "source_frame": 1451,
+          "capture_sha256": "9511cdc44dfb610f3bd713802bb571336758d406df3eb5be6626fc3d3a357282",
+          "state_sha256": "06046889c9829214c7b80206c1b171b72819dd41db17ab90eef40ef23beef072",
+          "distance": 0.0,
+          "byte_exact_to_native1450": true,
+          "timing": "Native 1450 equals reference 1451. One Present raw timing difference; no offset search or expectation substitution."
+        }
+      },
+      {
+        "checkpoint": "native-main-menu/1450",
+        "expectation_frame": 1450,
+        "distance": 3.5503472222222223,
+        "ceiling": 12,
+        "provenance": {
+          "capture": "build/content-return-reference/main_menu/1450.ppm",
+          "capture_sha256": "f7974ab4112436644b255e8c27f4ab5c84bff2ed42fe4e1cf76b7d2becdb6967",
+          "state": "build/content-return-reference/main_menu/1450.json",
+          "state_sha256": "1b262a844575fe03c47e7270c5e0c49ccf015f46948b655d43baf9441fbc9e3e",
+          "log": "build/content-return-reference/main_menu/application.log",
+          "log_sha256": "d7ec10f258ee48c58a1e1b47ac2434f5380aa965fc2d2376729e4633b7ed2666",
+          "script": "build/content-return-reference/main_menu/route.script",
+          "script_sha256": "fe1c2b0903ff4954403fa3e3a5584260c966fc5bb46ea7e5a65b547de8642331",
+          "input_metadata": "build/content-return-reference/main_menu/input-provenance.json",
+          "input_metadata_sha256": "887b542448e6cab120b4e16a4d596f25ecaf2781c19b5742cfdc1d55cc3dde4a",
+          "application": "build/sadx-app",
+          "application_sha256": "d9f167a6291d9d96fc66d21855ab8fb126ae67b9f8a42ac3900d3cb1b91bb3a2",
+          "frame": 1450,
+          "decode": "Original 640x480 P6 RGB payload; no conversion.",
+          "process_exit": {
+            "status": 0,
+            "evidence": "Root attestation in task brief; not inferred from log or a pre-existing semantic checker report."
+          },
+          "qualification": "Root attests completed --offscreen --script route.script --overlay unique --exit-after 1470 process EXIT0 and visual inspection of genuine dimmed title-background return transition in source1450.png.",
+          "input_validation": "Unchanged native checker key string verified against input metadata; reference down/up events equal native F-1 through exit frame 1470; later native reentry inputs remain unchanged in native checker.",
+          "state_observed": {
+            "frame": 1450,
+            "presents": 1450,
+            "game_mode": 12,
+            "game_state": 21,
+            "stage": 0,
+            "act": 0,
+            "rings": 0,
+            "level_frames": 0,
+            "global_timer": 145653,
+            "control_enabled": 1,
+            "controller_enabled": 1,
+            "player": null,
+            "boss": null,
+            "camera": null,
+            "profile": {
+              "ccef_reset_1": "810d",
+              "ccef_reset_2": "810d",
+              "ehcf_dereference": "909090",
+              "ehcf_branch": "9090",
+              "skipma_ingame_to_speedrun": true,
+              "skipma_movie_to_speedrun": true,
+              "limiter_to_speedrun": true,
+              "extra_ticks_to_speedrun": true,
+              "frame_rate_scalar": 63
+            }
+          },
+          "limits": [
+            "Input metadata pending-qualification text predates Root completion attestation; original file preserved and hashed.",
+            "No old semantic assertion proof is claimed for these source runs. State facts verified directly offline.",
+            "Reference HLE renderer/platform limits remain; no Windows GPU parity claim."
+          ]
+        },
+        "diagnostic_only": {
+          "source_frame": 1451,
+          "capture_sha256": "5c67e64e542f734e4dca09f8e79b08c908ad47f6205c1e1406e6b86b9ac9e4d1",
+          "state_sha256": "420ae0307d702302ac5be3f810cf684a2bc5d8437843a904fc445a934e2df3a3",
+          "distance": 0.0,
+          "byte_exact_to_native1450": true,
+          "timing": "Native 1450 equals reference 1451. One Present raw timing difference; no offset search or expectation substitution."
+        }
+      }
+    ],
+    "scope": "Offline qualification only. No app launch/build/gate; Root supplies process EXIT0 and visual attestations. Previous attempts remain historical.",
+    "offline_replay_artifacts_sha256": {
+      "build/native-file-select-cvya2gsi/captures/1002.json": "4319eac6eb090212b7d356e24ecdc1ef04727c53d1c8e840691818976fc829cc",
+      "build/native-file-select-cvya2gsi/captures/1100.json": "e9846b89cd3249096001d9a449d459238d0d991f88255ba1b10bd7c45dcfbfed",
+      "build/native-file-select-cvya2gsi/captures/1190.json": "b7e8e6d10bedb3e96c1e58e4851fed4912c80c1ca785a4aa921f2fada5b73039",
+      "build/native-file-select-cvya2gsi/captures/1251.json": "aa43a36465f3f8f4030eb889557cd0201d4715c3b97a2c3df7a58497880a3f65",
+      "build/native-file-select-cvya2gsi/captures/1300.json": "65e56b10413c8bd1e3168e40272ad781665cfa04a2f0e6aa1cd01f8bac4bbc61",
+      "build/native-file-select-cvya2gsi/captures/1450.json": "ed281c74efcf3d03781f7e23a1b97a6772fc3a6e48d99516aca7041de70c8ee4",
+      "build/native-file-select-cvya2gsi/captures/1850.json": "f663e92b5afff3ab7e023ac7efe6ea7bd6edd7ff4130853384e8b3340d846bfd",
+      "build/native-file-select-cvya2gsi/captures/740.json": "3c991ec1a5acc203ef759411be5c220d549edb1bb7d519e2a0527bedafd068c9",
+      "build/native-file-select-cvya2gsi/captures/899.json": "a11e2a51a641019099e29583c22bb9e650cd6c1767c2c44dde450a2738dea87c",
+      "build/native-file-select-cvya2gsi/captures/902.json": "3f0bad5f125bd5a3d5a8a9dfe8af82701020ea0acf7f76999286e76f29eeece2",
+      "build/native-file-select-cvya2gsi/captures/950.json": "a652a26a81a48cc5a2d331726e62648331f91a2934c4ee4989879136601ad1fc",
+      "build/native-main-menu-dor_txwa/captures/1100.json": "aae9e7cbcd4195c563f04e8864281adb10db834e499c0c4bb12fd041d2602bbf",
+      "build/native-main-menu-dor_txwa/captures/1250.json": "151f50c8e4d8a5d0c6d0b0303a2dc5ca266c60e2144a057461d363ec30aa349c",
+      "build/native-main-menu-dor_txwa/captures/1301.json": "cfecb5085cfdcd55583745e2cc78e382df02cd4d1390f00ede0f66f3600f9d23",
+      "build/native-main-menu-dor_txwa/captures/1390.json": "7b5399a1d750fcaf43b4074f5ba5f64ac32d22d5f36229d0efedbf6dcefc54e9",
+      "build/native-main-menu-dor_txwa/captures/1450.json": "263a45face251e66e8aab32807b209fb26c249d4000ed7a191a7ab8f1d2a06a0",
+      "build/native-main-menu-dor_txwa/captures/1690.json": "acde5f612bd7ac85ded958042063d21e48ef925116e4a49527ee4f3aaf19a5d4",
+      "build/native-main-menu-dor_txwa/captures/1850.json": "8ae75232e0f033f7cf4c9043b76fd47da19efea17735d12e7c3fec3332c2581e",
+      "build/native-main-menu-dor_txwa/captures/899.json": "336eebfef1a3c000e206094b779aa643fd615f0e4410445950fa19cc9e16e0f6",
+      "build/native-main-menu-dor_txwa/captures/902.json": "9e38180c630c249ab5749804b84d04eafe5cf622ebdd2f7d2e47fd9cfe903fd2",
+      "build/native-main-menu-dor_txwa/captures/970.json": "520e75dc7b0f537c2cc7c51b0dd914bb85dfef589286330e80ae65302f1f8d3f",
+      "build/native-fresh-save-fpe02hag/create/captures/1000.json": "d790c6fa4ba6505250656fe588df1f0fe6e75ca89548a9ab25e71b2e499a658d",
+      "build/native-fresh-save-fpe02hag/create/captures/1300.json": "1bda880fa178fdb188867b045e194e0b4ba9c8190f42143816a8d99a8d13c4e6",
+      "build/native-fresh-save-fpe02hag/create/captures/899.json": "336eebfef1a3c000e206094b779aa643fd615f0e4410445950fa19cc9e16e0f6",
+      "build/native-fresh-save-fpe02hag/create/captures/902.json": "a9121fc4f967fd6063b29fc468734cb6d2c241a7c6030c27cf9a5618145f6f94",
+      "build/native-fresh-save-fpe02hag/create/captures/950.json": "6019ba6f524467075130634b80b6a65b4449ae3744fc104c18e34dc9ce639ca9",
+      "build/native-fresh-save-fpe02hag/create/captures/951.json": "f8ae0349cd33dcd3b1b1673fd7b777f4c661efcd6f8b89969b623f4ef076639a",
+      "build/native-fresh-save-fpe02hag/create/captures/960.json": "2592e30a71d581d6f7a55327de4d834f94089ca696f09583e1b5825d317800c6",
+      "build/native-fresh-save-fpe02hag/create-empty/captures/1000.json": "6579ca76c5241e8d77c6256a66a8f4157a5f023038400d419943d66147b7511b",
+      "build/native-fresh-save-fpe02hag/create-empty/captures/1300.json": "b817b39fb15cbca1944c6a7cb3e8288ccf2783d85a5f3c177a51c1e8d9875478",
+      "build/native-fresh-save-fpe02hag/create-empty/captures/899.json": "4dd8172d1d959d397e2698c4d223a69c020115896a5dc294d61f93b3b878cba9",
+      "build/native-fresh-save-fpe02hag/create-empty/captures/950.json": "3acc103c84009c091898872329ac0e840e9934aadc80616191d8c0eb0d7ffd2d",
+      "build/native-fresh-save-fpe02hag/create-empty/captures/951.json": "979b88148f589ccb202f8963fbd3b638a3660d6b92ff568701782b1f930db207",
+      "build/native-fresh-save-fpe02hag/create-empty/captures/960.json": "aaa9bc1d76ce7b5a8d250bfda0f8445012b4c9945a9ebbec7a477eddec5a829f",
+      "build/native-fresh-save-fpe02hag/restart/captures/1050.json": "6db5a9512249134ef2ce53707dbe35539222be64d1d053575f2091176c15d084",
+      "build/native-fresh-save-fpe02hag/restart/captures/1140.json": "f78495c8f6504f4709a60f78eaa0ee2a31d78c0bfe4c0842b4c53a4f4e03b1c3",
+      "build/native-fresh-save-fpe02hag/restart/captures/1190.json": "685c009e19fbbeefdf34ab45379a062b0ea8a209c91dec9c63faf50701f2d4cc",
+      "build/native-fresh-save-fpe02hag/restart/captures/1270.json": "aead59c8e5d19e7a527e000b6a6f2b44fc654360ececb52b6b5c11174f205041",
+      "build/native-fresh-save-fpe02hag/restart/captures/1370.json": "1e39ace3ffae44597a89f266f8b92c4d674198aee3bb7d11642e3b2102322d3d",
+      "build/native-fresh-save-fpe02hag/restart/captures/1500.json": "3b1cc08cb1d3d0f86ad74ed5a90804a133c2098a880fba4d588c5b44be0fe5e8",
+      "build/native-fresh-save-fpe02hag/restart/captures/1600.json": "b1c5c366cd0b50bf65c5733e795c472e6ae81e00f5a768968e7967f87970912f",
+      "build/native-fresh-save-fpe02hag/restart/captures/1770.json": "73f869586c567800882965394445ce8f892c6bc4a12e9dd2d0d5e6e4a8050fcd",
+      "build/native-fresh-save-fpe02hag/restart/captures/2000.json": "459f204c42a572767725f74cd77d605665cad2727366a06e0bf90dd198faa257",
+      "build/native-fresh-save-fpe02hag/restart/captures/2150.json": "a901de589cce924420955a0deb571ae8c2049989ca67d76fb53d4aa433c8762f",
+      "build/native-fresh-save-fpe02hag/restart/captures/899.json": "2a9f1cccee247a422d59d80487a9f4027133d59d2131d459f2b90bedbe8c6e3f",
+      "build/native-fresh-save-fpe02hag/restart/captures/970.json": "b12ca1a010e698382729324cd3a2955714aef938feff9b27ef70d4dc31b8cdd3",
+      "build/native-fresh-save-fpe02hag/restart-empty/captures/1100.json": "bfe213963b2c657b50c3c2b6b9c7321d85a024579a373c08bf20faa878b95bc3",
+      "build/native-fresh-save-fpe02hag/restart-empty/captures/1300.json": "eafd662396ccd47f8d5cf67464b74e06e27eff8d3a1d627aaf0e6503aeafb974",
+      "build/native-fresh-save-fpe02hag/restart-empty/captures/899.json": "39d9445fcb8f3cef9399464c07b47d7a6d40630f0c53c4a5802dcca248b576f4",
+      "build/native-fresh-save-fpe02hag/restart-empty/captures/970.json": "2b9cac009b6c234a7871a2b59fdd45a15818f25cde730e927161cabc8a268b2a",
+      "build/native-file-select-cvya2gsi/result.json": "c29df8ce4a9411cb4527d50e41e174704f1148696ab29e7b9ab398bc672fdd97",
+      "build/native-file-select-cvya2gsi/application.log": "9632f5bb2da9ee5377e23e484b823c9c2c3c024a9ddc85d33297e106126617aa",
+      "build/native-main-menu-dor_txwa/result.json": "d6e113f373f67c3aede6c7e8d0487f546f4e6d77e2f5d47728e1a0973bd35ef3",
+      "build/native-main-menu-dor_txwa/application.log": "82609b745966e837fe31496a93cb18a6c0831c2a2abb3326063d59655fcfd95d",
+      "build/native-fresh-save-fpe02hag/result.json": "26f4d954f0797a47a5f9171d0c68c622fa5b012a58befe8abb2f5883701bbd62",
+      "build/native-fresh-save-fpe02hag/restart-empty/application.log": "28f44a30b71bb555835a8b3b273babad57c9348fd1f2422269f7d0d3e1519071",
+      "build/native-fresh-save-fpe02hag/restart/application.log": "8dbb0c10f5cf96ee376dc1654f1c22e79b4d1b817dcf6bc1088b8026a63735e2",
+      "build/native-fresh-save-fpe02hag/create-empty/application.log": "6fcec1d2d4c306d03f0d892ab0a42d01885157ba0d4549a5dbb993509532d3c5",
+      "build/native-fresh-save-fpe02hag/create/application.log": "481741918ee90a33b86c0d9abcdf3997d890c065b89b95ab074d94e984605a6f",
+      "game/imported/saves/SONICADVENTURE_DX_CHAOGARDEN.snc": "53b585755ada51c7ed07d2f69ad3ddb195b5a6e48a838fc98533910205dae3e3",
+      "game/imported/saves/SonicDX02.snc": "3249b31891872b96be539348c005abf812c76af5e3e7c5f198ee65de008943e4",
+      "game/imported/saves/SonicDX01.snc": "15ac61323e0508d72a279f0f648f4b5007793cc0c8fb42bce9d893f00c265cf6"
+    },
+    "offline_results": [
+      {
+        "checkpoint": "native-file-select/1002",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-file-select/1002",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1002",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1002",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1002",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1100",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-file-select/1100",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1100",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1100",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1100",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1190",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-file-select/1190",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1190",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1190",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1190",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1251",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-file-select/1251",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1251",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1251",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1251",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1300",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-file-select/1300",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1300",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1300",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1300",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1450",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-file-select/1450",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1450",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1450",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1450",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1850",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-file-select/1850",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1850",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1850",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/1850",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/740",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-file-select/740",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/740",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/740",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/740",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/899",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-file-select/899",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/899",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/899",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/899",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/902",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-file-select/902",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/902",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/902",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/902",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/950",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-file-select/950",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/950",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/950",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-file-select/950",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1100",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-main-menu/1100",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1100",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1100",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1100",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1250",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-main-menu/1250",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1250",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1250",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1250",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1301",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-main-menu/1301",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1301",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1301",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1301",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1390",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-main-menu/1390",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1390",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1390",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1390",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1450",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-main-menu/1450",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1450",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1450",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1450",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1690",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-main-menu/1690",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1690",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1690",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1690",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1850",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-main-menu/1850",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1850",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1850",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/1850",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/899",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-main-menu/899",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/899",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/899",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/899",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/902",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-main-menu/902",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/902",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/902",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/902",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/970",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-main-menu/970",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/970",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/970",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-main-menu/970",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/1000",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/1000",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/1000",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/1000",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/1000",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/1300",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/1300",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/1300",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/1300",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/1300",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/899",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/899",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/899",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/899",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/899",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/902",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/902",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/902",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/902",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/902",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/950",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/950",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/950",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/950",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/950",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/951",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/951",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/951",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/951",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/951",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/960",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/960",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/960",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/960",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create/960",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/1000",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/1000",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/1000",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/1000",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/1000",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/1300",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/1300",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/1300",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/1300",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/1300",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/899",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/899",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/899",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/899",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/899",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/950",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/950",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/950",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/950",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/950",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/951",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/951",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/951",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/951",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/951",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/960",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/960",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/960",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/960",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/create-empty/960",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1050",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1050",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1050",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1050",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1050",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1140",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1140",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1140",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1140",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1140",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1190",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1190",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1190",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1190",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1190",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1270",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1270",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1270",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1270",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1270",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1370",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1370",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1370",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1370",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1370",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1500",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1500",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1500",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1500",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1500",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1600",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1600",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1600",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1600",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1600",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1770",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1770",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1770",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1770",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/1770",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/2000",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/2000",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/2000",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/2000",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/2000",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/2150",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/2150",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/2150",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/2150",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/2150",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/899",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/899",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/899",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/899",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/899",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/970",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/970",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/970",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/970",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart/970",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart-empty/1100",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart-empty/1100",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart-empty/1100",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart-empty/1100",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart-empty/1100",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart-empty/1300",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart-empty/1300",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart-empty/1300",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart-empty/1300",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart-empty/1300",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart-empty/899",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart-empty/899",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart-empty/899",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart-empty/899",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart-empty/899",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart-empty/970",
+        "mutation": "original",
+        "passed": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart-empty/970",
+        "mutation": "black",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart-empty/970",
+        "mutation": "white",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart-empty/970",
+        "mutation": "colour",
+        "rejected": true
+      },
+      {
+        "checkpoint": "native-fresh-save/restart-empty/970",
+        "mutation": "unrelated",
+        "rejected": true
+      },
+      {
+        "route": "create",
+        "mutation": "original",
+        "accepted": true,
+        "scope": "play() only; no fabricated save persistence"
+      },
+      {
+        "route": "create",
+        "mutation": "black",
+        "accepted": false,
+        "scope": "play() only; no fabricated save persistence"
+      },
+      {
+        "route": "create",
+        "mutation": "white",
+        "accepted": false,
+        "scope": "play() only; no fabricated save persistence"
+      },
+      {
+        "route": "create",
+        "mutation": "colour",
+        "accepted": false,
+        "scope": "play() only; no fabricated save persistence"
+      },
+      {
+        "route": "create",
+        "mutation": "unrelated",
+        "accepted": false,
+        "scope": "play() only; no fabricated save persistence"
+      },
+      {
+        "route": "restart",
+        "mutation": "original",
+        "accepted": true,
+        "scope": "play() only; no fabricated save persistence"
+      },
+      {
+        "route": "restart",
+        "mutation": "black",
+        "accepted": false,
+        "scope": "play() only; no fabricated save persistence"
+      },
+      {
+        "route": "restart",
+        "mutation": "white",
+        "accepted": false,
+        "scope": "play() only; no fabricated save persistence"
+      },
+      {
+        "route": "restart",
+        "mutation": "colour",
+        "accepted": false,
+        "scope": "play() only; no fabricated save persistence"
+      },
+      {
+        "route": "restart",
+        "mutation": "unrelated",
+        "accepted": false,
+        "scope": "play() only; no fabricated save persistence"
+      },
+      {
+        "route": "create-empty",
+        "mutation": "original",
+        "accepted": true,
+        "scope": "play() only; no fabricated save persistence"
+      },
+      {
+        "route": "create-empty",
+        "mutation": "black",
+        "accepted": false,
+        "scope": "play() only; no fabricated save persistence"
+      },
+      {
+        "route": "create-empty",
+        "mutation": "white",
+        "accepted": false,
+        "scope": "play() only; no fabricated save persistence"
+      },
+      {
+        "route": "create-empty",
+        "mutation": "colour",
+        "accepted": false,
+        "scope": "play() only; no fabricated save persistence"
+      },
+      {
+        "route": "create-empty",
+        "mutation": "unrelated",
+        "accepted": false,
+        "scope": "play() only; no fabricated save persistence"
+      },
+      {
+        "route": "restart-empty",
+        "mutation": "original",
+        "accepted": true,
+        "scope": "play() only; no fabricated save persistence"
+      },
+      {
+        "route": "restart-empty",
+        "mutation": "black",
+        "accepted": false,
+        "scope": "play() only; no fabricated save persistence"
+      },
+      {
+        "route": "restart-empty",
+        "mutation": "white",
+        "accepted": false,
+        "scope": "play() only; no fabricated save persistence"
+      },
+      {
+        "route": "restart-empty",
+        "mutation": "colour",
+        "accepted": false,
+        "scope": "play() only; no fabricated save persistence"
+      },
+      {
+        "route": "restart-empty",
+        "mutation": "unrelated",
+        "accepted": false,
+        "scope": "play() only; no fabricated save persistence"
+      },
+      {
+        "checker": "file_select",
+        "target_frame": 1450,
+        "mutation": "original",
+        "accepted": true,
+        "scope": "full checker offline replay"
+      },
+      {
+        "checker": "file_select",
+        "target_frame": 1450,
+        "mutation": "black",
+        "accepted": false,
+        "scope": "full checker offline replay"
+      },
+      {
+        "checker": "file_select",
+        "target_frame": 1450,
+        "mutation": "white",
+        "accepted": false,
+        "scope": "full checker offline replay"
+      },
+      {
+        "checker": "file_select",
+        "target_frame": 1450,
+        "mutation": "colour",
+        "accepted": false,
+        "scope": "full checker offline replay"
+      },
+      {
+        "checker": "file_select",
+        "target_frame": 1450,
+        "mutation": "unrelated",
+        "accepted": false,
+        "scope": "full checker offline replay"
+      },
+      {
+        "checker": "main_menu",
+        "target_frame": 1450,
+        "mutation": "original",
+        "accepted": true,
+        "scope": "full checker offline replay"
+      },
+      {
+        "checker": "main_menu",
+        "target_frame": 1450,
+        "mutation": "black",
+        "accepted": false,
+        "scope": "full checker offline replay"
+      },
+      {
+        "checker": "main_menu",
+        "target_frame": 1450,
+        "mutation": "white",
+        "accepted": false,
+        "scope": "full checker offline replay"
+      },
+      {
+        "checker": "main_menu",
+        "target_frame": 1450,
+        "mutation": "colour",
+        "accepted": false,
+        "scope": "full checker offline replay"
+      },
+      {
+        "checker": "main_menu",
+        "target_frame": 1450,
+        "mutation": "unrelated",
+        "accepted": false,
+        "scope": "full checker offline replay"
+      },
+      {
+        "reference": "title",
+        "mutation": "original",
+        "exit_status": 0,
+        "scope": "full run() offline replay; only raster mutated"
+      },
+      {
+        "reference": "title",
+        "mutation": "black",
+        "exit_status": 1,
+        "scope": "full run() offline replay; only raster mutated"
+      },
+      {
+        "reference": "title",
+        "mutation": "white",
+        "exit_status": 1,
+        "scope": "full run() offline replay; only raster mutated"
+      },
+      {
+        "reference": "title",
+        "mutation": "colour",
+        "exit_status": 1,
+        "scope": "full run() offline replay; only raster mutated"
+      },
+      {
+        "reference": "title",
+        "mutation": "unrelated",
+        "exit_status": 1,
+        "scope": "full run() offline replay; only raster mutated"
+      },
+      {
+        "reference": "character-select",
+        "mutation": "original",
+        "exit_status": 0,
+        "scope": "full run() offline replay; only raster mutated"
+      },
+      {
+        "reference": "character-select",
+        "mutation": "black",
+        "exit_status": 1,
+        "scope": "full run() offline replay; only raster mutated"
+      },
+      {
+        "reference": "character-select",
+        "mutation": "white",
+        "exit_status": 1,
+        "scope": "full run() offline replay; only raster mutated"
+      },
+      {
+        "reference": "character-select",
+        "mutation": "colour",
+        "exit_status": 1,
+        "scope": "full run() offline replay; only raster mutated"
+      },
+      {
+        "reference": "character-select",
+        "mutation": "unrelated",
+        "exit_status": 1,
+        "scope": "full run() offline replay; only raster mutated"
+      }
+    ],
+    "tests": {
+      "passed": 27,
+      "skipped": 0,
+      "commands": [
+        "SADX_CONTENT_CORPUS=/Users/burbujamc/Developer/sadx-macos python3 -m unittest discover -s tests/python -p 'test_capture_content*.py' -v",
+        "python3 -m unittest discover -s tests/python -p 'test_native_main_menu_journey.py' -v",
+        "python3 -m unittest discover -s tests/python -p 'test_journeys.py' -v"
+      ],
+      "original_native_content": 50,
+      "native_content_raster_mutants_rejected": 200,
+      "native_full_checker_positives": 2,
+      "native_full_checker_single_1450_mutants_rejected": 8,
+      "fresh_save_play_positives": 4,
+      "fresh_save_play_mutants_rejected": 16,
+      "reference_full_run_positives": 2,
+      "reference_full_run_mutants_rejected": 8
+    },
+    "reference_report_drift": {
+      "path": "build/journeys/report.json",
+      "historical_sha256": "304899b9ed56bbf015c38e61833d21f15caaa86719291cbf8cac250f20772df6",
+      "observed_sha256": "9b790a8e9c2b19235dc6e90c48825e4a673d01f77fc803bb93fc39d882409ad1",
+      "resolution": "Old expected provenance unchanged. Report is not consumed by offline run(); all PPM/state/log/script replay inputs still match pinned hashes."
+    }
+  }
+}

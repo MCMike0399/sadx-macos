@@ -12,6 +12,8 @@ import re
 import subprocess
 import tempfile
 
+from capture_content import check_captures
+
 # Original-task reference952, native950: identical source MSG glyph/render region.
 # Durable provenance accompanies the separate evidenced judge change.
 SAVING_REGION = (455, 35, 635, 78)
@@ -54,6 +56,7 @@ def play(application, assets, profile, output, frames, capture_frames, keys):
     for frame in capture_frames:
         check(states[frame]['execution'] == 'native', 'fresh-save proof must use native execution')
         image_region(captures / f'{frame}.ppm')
+    check_captures(captures, capture_frames, f'native-fresh-save/{output.name}')
     return states
 
 

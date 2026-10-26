@@ -11,6 +11,8 @@ from pathlib import Path
 import subprocess
 import tempfile
 
+from capture_content import check_captures
+
 
 def check(condition, message):
     if not condition:
@@ -58,6 +60,7 @@ def run(application, assets, output):
             result = subprocess.run(command, stdout=log, stderr=subprocess.STDOUT, timeout=120)
         check(result.returncode == 0, f'native MainMenu application exit {result.returncode}; see application.log')
         states = {frame: json.loads((captures / f'{frame}.json').read_text()) for frame in frames}
+        check_captures(captures, frames, 'native-main-menu')
         chosen = states[902]
         check(chosen['selected_save_name'] == 'SonicDX01.snc',
               'MainMenu qualification needs the pinned SonicDX01 snapshot reached by normal Down input')

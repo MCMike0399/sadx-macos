@@ -3,10 +3,13 @@ from pathlib import Path
 import sys
 import tempfile
 import unittest
+import json
+from unittest.mock import patch
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / 'tools/gate'))
 from run_journeys import JOURNEYS, check_checkpoint, picture_facts, script_text, signature_distance, run
 from record_gate import PROGRAM_LINE, JOURNEY_LINE
+import capture_content
 
 
 def log_lines(count, textured=40, skipped=()):
@@ -20,6 +23,18 @@ class JourneyTests(unittest.TestCase):
         self.temp = tempfile.TemporaryDirectory()
         self.addCleanup(self.temp.cleanup)
         self.shot = Path(self.temp.name) / 'fixture.ppm'
+        # Synthetic expectations isolate the pre-existing log/threshold tests.
+        # They are never written to the production committed fixture.
+        self.colourful()
+        expectation = {'provenance': 'synthetic test only',
+                       'signature': picture_facts(self.shot)['signature']}
+        fixture = Path(self.temp.name) / 'synthetic-content.json'
+        fixture.write_text(json.dumps({'references': {'test': expectation},
+            'checkpoints': {'reference/title': 'test', 'reference/character-select': 'test'}}))
+        self.content_patch = patch.object(capture_content, 'FIXTURE', fixture)
+        self.content_patch.start()
+        self.addCleanup(self.content_patch.stop)
+        self.shot.unlink()
 
     def ppm(self, pixels, width=640, height=480):
         self.shot.write_bytes(f'P6\n{width} {height}\n255\n'.encode() + pixels)

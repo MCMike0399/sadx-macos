@@ -12,6 +12,8 @@ from pathlib import Path
 import subprocess
 import tempfile
 
+from capture_content import check_captures
+
 
 def check(condition, message):
     if not condition:
@@ -42,6 +44,7 @@ def run(application, assets, output):
             result = subprocess.run(command, stdout=log, stderr=subprocess.STDOUT, timeout=120)
         check(result.returncode == 0, f'native application exit {result.returncode}; see application.log')
         states = {frame: json.loads((captures / f'{frame}.json').read_text()) for frame in frames}
+        check_captures(captures, frames, 'native-file-select')
         check(states[740]['execution'] == 'native' and states[740]['game_mode'] == 12 and
               states[740]['global_timer'] == 240,
               'native title checkpoint did not retain the verified startup timing')

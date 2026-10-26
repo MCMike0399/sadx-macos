@@ -4,11 +4,13 @@ import json
 from pathlib import Path
 import shutil
 import subprocess
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(ROOT / 'tools/journey'))
 spec = importlib.util.spec_from_file_location('native_main_menu', ROOT / 'tools/journey/check_native_main_menu.py')
 checker = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(checker)
@@ -39,7 +41,7 @@ class NativeMainMenuRaster(unittest.TestCase):
                 return subprocess.CompletedProcess(command, 0)
 
             with patch.object(checker.subprocess, 'run', suppressed_draw):
-                with self.assertRaisesRegex(RuntimeError, 'MainMenu source image region'):
+                with self.assertRaisesRegex(RuntimeError, 'full-frame blank'):
                     checker.run(app, assets, root / 'output')
             self.assertFalse((root / 'output/result.json').exists())
 

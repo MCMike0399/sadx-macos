@@ -13,7 +13,7 @@ MANIFEST = 'reference/judge-manifest.json'
 DECLARATION = '.claude/judge-change.json'
 DIRECTORIES = ('tools/oracles', 'tools/gate', 'tools/lib', 'tests/probes', 'tests/fixtures',
                'tests/python', 'reference/oracle-reports')
-FILES = ('tools/journey/compare_native_startup.py', 'tools/journey/check_native_file_select.py', 'tools/journey/check_native_main_menu.py', 'tools/journey/check_native_fresh_save.py', 'Makefile', 'tests/unit/manifest.tsv', 'reference/frame-control-corpus.tsv',
+FILES = ('tools/journey/capture_content.py', 'tools/journey/compare_native_startup.py', 'tools/journey/check_native_file_select.py', 'tools/journey/check_native_main_menu.py', 'tools/journey/check_native_fresh_save.py', 'Makefile', 'tests/unit/manifest.tsv', 'reference/frame-control-corpus.tsv',
          'reference/frame-control-corpus.json', 'reference/keyboard-sampling-goldens.json',
          'reference/judge-hook-settings.proposed.json',
          'tools/analysis/fp_control_census.cpp', 'tools/analysis/run_fp_census.py',

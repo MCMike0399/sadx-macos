@@ -16,6 +16,9 @@ import sys
 import tempfile
 import time
 
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / 'journey'))
+from capture_content import check_content, read_capture
+
 REFERENCE_GAME_DIR = 'reference/updated-pc-reference/game'
 WINDOWS_SYSTEM_DIR = 'reference/windows-system'
 OUT = 'build/journeys'
@@ -117,6 +120,12 @@ def check_checkpoint(journey, text, shot, goldens, bless=False):
             problems.append(f'{picture["blue"]} blue pixels, expected at least {expect["blue_min"]}')
         if last and last[2] < expect.get('textured_draws_min', 0):
             problems.append(f'last frame has {last[2]} textured draws, expected at least {expect["textured_draws_min"]}')
+        try:
+            read_capture(shot)
+            if journey['row'] in ('R2', 'R3'):
+                check_content(shot, f'reference/{journey["name"]}')
+        except (OSError, ValueError) as error:
+            problems.append(f'screenshot content: {error}')
         name = journey['name']
         if bless and not problems:
             goldens[name] = picture['signature']
