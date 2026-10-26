@@ -1,0 +1,27 @@
+{
+  "problem": "Copied libusb configure output enables pipe2 on macOS where pipe2 is absent; SDL gamepad initialization calls null weak import.",
+  "head_gate": {
+    "commit": "da25501",
+    "log": "build/divemac-head-gate.log",
+    "exit_status": 2,
+    "smoke_exit_status": 139
+  },
+  "reproducer": "Load SDL with ctypes and call SDL_InitSubSystem(SDL_INIT_GAMEPAD), then SDL_QuitSubSystem.",
+  "before": {
+    "exit_status": -11,
+    "library_sha256": "5c6288b2a1508c25b554b622e963ace899eb53828be013a4f5754fa18a1bec39"
+  },
+  "after": {
+    "exit_status": 0,
+    "initialized": true,
+    "library_sha256": "98d32eb9ac4c8784c418f70fa33f7f58c1360417b749800bc599d84857b76d6a",
+    "HAVE_PIPE2": false,
+    "pipe2_import": false
+  },
+  "fix": "Pin ac_cv_func_pipe2=no in the local libusb configure invocation; use upstream pipe/fcntl fallback for macOS 14 deployment.",
+  "limits": [
+    "Full gate remains pending: windowed smoke has no active display frames.",
+    "Physical Switch 2 Pro behavior has not been requalified on DiveMac.",
+    "No game logic, original judge expectations or dependency versions changed."
+  ]
+}

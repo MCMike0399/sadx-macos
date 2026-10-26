@@ -52,7 +52,11 @@ def main():
     usb_build = ROOT / "build/native-controller-libusb"
     usb_build.mkdir(exist_ok=True)
     run([source_root / SOURCES[0][3] / "configure", f"--prefix={prefix}",
-         "--disable-shared", "--enable-static", "CFLAGS=-O2 -mmacosx-version-min=14.0"], usb_build)
+         "--disable-shared", "--enable-static", "CFLAGS=-O2 -mmacosx-version-min=14.0",
+         # New SDKs can weak-link pipe2 even though the deployment OS lacks it.
+         # libusb calls it unconditionally when configure's link-only test succeeds.
+         # Its existing pipe + fcntl path supports our macOS 14 deployment target.
+         "ac_cv_func_pipe2=no"], usb_build)
     run(["make", f"-j{args.jobs}", "install"], usb_build)
     sdl_build = ROOT / "build/native-controller-sdl3"
     sdl_build.mkdir(exist_ok=True)
