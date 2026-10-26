@@ -33,7 +33,7 @@ def main():
                  image.read(words[18+i], 64).split(b'\0')[0].decode()) for i in range(9)]
     assert entries == expected, 'maintained table differs from pinned source'
     table_hash = hashlib.sha256(image.read(0x389d888, 108)).hexdigest()
-    build = ROOT / 'build/polybuff-initialization' 
+    build = ROOT / 'build/polybuff-initialization'
     build.mkdir(parents=True, exist_ok=True)
     def run(command, name):
         r = subprocess.run([str(x) for x in command], cwd=ROOT, text=True,

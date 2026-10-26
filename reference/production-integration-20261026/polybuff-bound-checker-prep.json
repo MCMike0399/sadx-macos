@@ -1,0 +1,9 @@
+{
+  "scope": "New initializer checker integration setup; existing legacy expectations unchanged",
+  "initialization_driver_whitespace_only": true,
+  "old_hash": "c69b26c603d16f4318d0f5d137a650fd7c4ec10650e3b0aae48d33a7f9042651",
+  "new_hash": "bb90bb316f7f908bd6ccaa317410f0cab77431305b602ad50205aa6d12791091",
+  "python_ast_identical": true,
+  "coexistence_flag": "--bound-native-startup omits old throwing test hooks because native archive now defines and executes real startup hooks. Both reference and native device units still run.",
+  "coexistence_exit_status": 0
+}

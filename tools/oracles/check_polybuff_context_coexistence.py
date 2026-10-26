@@ -16,6 +16,8 @@ def main():
     p = argparse.ArgumentParser()
     p.add_argument('--native-root',type=Path,required=True)
     p.add_argument('--system',type=Path,required=True)
+    p.add_argument('--bound-native-startup', action='store_true',
+                   help='use actual native startup hooks already defined in the native archive')
     a = p.parse_args()
     b = ROOT/'build/polybuff-context-coexistence'
     b.mkdir(parents=True,exist_ok=True)
@@ -45,7 +47,8 @@ def main():
     objects = []
     for name in ['src/guest/polybuff_owners.cpp','src/guest/polybuff_initialization_reference.cpp',
                  'src/engine/polybuff_initialization.cpp','src/engine/polybuff_initialization_binding.cpp',
-                 'tests/probes/polybuff_coexistence_hooks.cpp','tests/probes/polybuff_coexistence_main.cpp']:
+                 'tests/probes/polybuff_coexistence_main.cpp'] + (
+                     [] if a.bound_native_startup else ['tests/probes/polybuff_coexistence_hooks.cpp']):
         obj = b/(Path(name).stem+'.o')
         run(flags+['-Isrc','-c',name,'-o',obj],Path(name).stem+'-compile')
         objects.append(obj)
@@ -66,14 +69,18 @@ def main():
     assert archive_hash == hashlib.sha256(archive.read_bytes()).hexdigest()
     result = {'passed':True,'exit_status':0,'native_context':'Root actual Context { Display& }',
               'reference_context':'sadx::polybuff_reference::Context',
-              'native_startup':'Unbound hooks throw; native full startup not executed or claimed.',
+              'native_startup':('Actual Display startup executes through the native device unit.'
+                                if a.bound_native_startup else
+                                'Unbound hooks throw; native full startup not executed or claimed.'),
               'output':(b/'unit.log').read_text().strip(),
               'native_archive':str(archive),'native_archive_sha256':archive_hash,
               'native_unit_source_sha256':hashlib.sha256(native_source.read_bytes()).hexdigest(),
               'native_context_header_sha256':hashlib.sha256((a.native_root/'src/runtime/model_device.hpp').read_bytes()).hexdigest(),
               'reference_defined_symbols':symbols,'undefined_dynamic_lookup_used':False,
               'limits':['Actual Root unit exercises its real resource types/device functions in the same executable.',
-                        'Native initializer specialization is linked, not executed: Root still binds actual counts/storage.']}
+                        ('Native Display constructor executes its actual configured startup; no GPU proof.'
+                         if a.bound_native_startup else
+                         'Native initializer specialization is linked, not executed: Root still binds actual counts/storage.')]}
     (b/'proof.json').write_text(json.dumps(result,indent=2)+'\n')
     print(result['output'])
 if __name__ == '__main__': main()
