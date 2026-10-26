@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "b48b50439d724843349716675434abebd4472f2c",
-    "evidence": "reference/production-integration-20261026/native-closure-evidence.json",
-    "evidence_sha256": "dfefbed999e5389eee881c5b7c535bfc53b0ae8b0f110f459065baabc942b637",
-    "reason": "Verify whole native archive closure and move unchanged production sources outside protected Makefile; real forced link and hidden guest-link mutant verified"
+    "base_commit": "e44bc408bb088020055ec85a039b5db2b2a6b8d5",
+    "evidence": "reference/production-integration-20261026/readability-metric-evidence.json",
+    "evidence_sha256": "d194bf8226ae34493ed3d6d51e2f5cfa7efeae6eb1ede8d91f8e2883342fee9f",
+    "reason": "Ratchet decimal constants, emulator arithmetic and per-line address comments from immutable HEAD; named constexpr literals exempt"
   },
   "files": {
     "Makefile": "23ea29a16e35d59d4a95d5f9c096ccfa463cde4b14fb849142cf3bd3ffdde98b",
@@ -563,7 +563,7 @@
     "tests/python/test_native_main_menu_journey.py": "f6fb468ca52139e7c585c1d09004c41216b37e3a17e2f0fdaf0faea812ca409c",
     "tests/python/test_native_settings.py": "6496b84d39012c5ea69aacd06ad1d41475f580016da9c22ab4a5f2b44dea58d6",
     "tests/python/test_provenance.py": "ce62fc0efc2ef9a92b2493adaf994fcbc38af4427c16c28eabe6aea72287fcc2",
-    "tests/python/test_readability.py": "8090f2eb23f8c958972e071d94a4d77b99a8062953d456a89ccba2abafc78a3d",
+    "tests/python/test_readability.py": "5593d449e6b7f507e233903a14aaae0a6c3621db888b31ae2169a3ca5229db94",
     "tests/python/test_regular_textures.py": "b5ae871253c6c2e2fcaf69ce3f8c967b906e295c2c80cf49882f539b26dd268f",
     "tests/python/test_save_files.py": "de514de19a12ca015a891d61d1c49b930262ddeff9bfbad383c48df1ac1ca108",
     "tests/python/test_selection_actions_import.py": "3a0b037498a983bfd65dd4835b469d1f36b79024bc48b0573ba986d7fe3b2a21",
@@ -599,7 +599,7 @@
     "tools/gate/check_ninja_sine_table.py": "3476a71e07de4b1f98db2cc9924052995517ef16da5a61be1d1ff7ea82e16fb5",
     "tools/gate/check_profile_patches.py": "1c9a845b3d07312b3e76233adeb56478a1d7edbdfed1873db6a50fe6e1407fda",
     "tools/gate/check_provenance.py": "67b03f53ae1843e5fb4febf9322344955598f152c85e1e6f4332b05c55f6ed35",
-    "tools/gate/check_readability.py": "9073f92c597025e2b1f64dfe574bcbb1dec99625b06be8f2602d9f6b938c9054",
+    "tools/gate/check_readability.py": "4be4b86842b84692df425fbd8456c2964c69e79bf8c3222b701e0ec1c7fd7d51",
     "tools/gate/check_repo_hygiene.py": "68839116ffd89250e666116fa254e538c7dc847af5c365016c868a135d9efdd0",
     "tools/gate/check_session_control_defaults.py": "0b610a128768e26ce7082c7f609f5f544b6c3931dea7a27ef593dd58a492c89d",
     "tools/gate/check_sound_initial_state.py": "7b10ffa2def797a669f6deff6021139d864d917f492ac160c668d0f160edac6f",

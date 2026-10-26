@@ -1,0 +1,90 @@
+{
+  "base_commit": "da25501e97d72d65d73e965232d8841658aa1031",
+  "source_tree": "1bffb47a26ab1b6ddd6c76a173aac0baf54447ce",
+  "scope": [
+    "tools/gate/check_readability.py",
+    "tests/python/test_readability.py",
+    "reference/readability-baseline.json",
+    "PACKET.md",
+    "reference/production-integration-20261026/readability-metric-evidence.json"
+  ],
+  "source_files_measured": 447,
+  "original_source_equals_working_source": true,
+  "new_baseline_exactly_matches_original_head_measurements": true,
+  "legacy_allowance_increases": [],
+  "legacy_baseline_files": 269,
+  "legacy_allowance_totals": {
+    "hex_literals": 10828,
+    "address_identifiers": 1499,
+    "address_calls": 62,
+    "goto": 0,
+    "address_labels": 0,
+    "long_lines": 1216,
+    "multi_statement_lines": 1897
+  },
+  "new_baseline_totals": {
+    "hex_literals": 3294,
+    "address_identifiers": 1494,
+    "address_calls": 62,
+    "goto": 0,
+    "address_labels": 0,
+    "long_lines": 1210,
+    "multi_statement_lines": 1843,
+    "large_decimal_literals": 233,
+    "emulator_arithmetic": 3322,
+    "address_comments": 1059
+  },
+  "blind_spots_reproduced_against_original_head_checker": {
+    "large_decimal_literals": {
+      "source": "use(16777215U);\n",
+      "original_nonzero_metrics": {},
+      "new_count": 1
+    },
+    "emulator_arithmetic": {
+      "source": "fp.multiply_float_memory(x, y);\n",
+      "original_nonzero_metrics": {},
+      "new_count": 1
+    },
+    "address_comments": {
+      "source": "work(); // 0x79500e\n",
+      "original_nonzero_metrics": {},
+      "new_count": 1
+    }
+  },
+  "focused_tests": {
+    "command": "python3 -m unittest discover -s tests/python -p test_readability.py -v",
+    "exit_status": 0,
+    "tests": 17,
+    "coverage": [
+      "CLI source mutants for all three metrics and constexpr removal",
+      "edited working baseline, refresh refusal, new files",
+      "schema-1 migration from immutable HEAD including unlisted tracked files",
+      "schema-2 reductions committed then reintroduced",
+      "archives, numeric tokens, multiline constexpr, renamed contexts, annotations"
+    ]
+  },
+  "readability_check": {
+    "command": "python3 tools/gate/check_readability.py",
+    "exit_status": 0,
+    "output": "Readability: 447 files, {'hex_literals': 3294, 'address_identifiers': 1494, 'address_calls': 62, 'goto': 0, 'address_labels': 0, 'long_lines': 1210, 'multi_statement_lines': 1843, 'large_decimal_literals': 233, 'emulator_arithmetic': 3322, 'address_comments': 1059}, 0 regressions"
+  },
+  "sha256": {
+    "tools/gate/check_readability.py": "4be4b86842b84692df425fbd8456c2964c69e79bf8c3222b701e0ec1c7fd7d51",
+    "tests/python/test_readability.py": "5593d449e6b7f507e233903a14aaae0a6c3621db888b31ae2169a3ca5229db94",
+    "reference/readability-baseline.json": "c3dee3c9a92238451aeffe2b068702cb7cb1af5abf5215785ea981c24e7fcc81"
+  },
+  "not_run": [
+    "compile",
+    "Ghidra",
+    "full gate",
+    "judge-manifest refresh",
+    "independent worker review"
+  ],
+  "limits": [
+    "Lexical debt indicators, not a C++ parser or a fidelity verdict.",
+    "Ambiguous identifier-first parenthesized constexpr initializers remain counted.",
+    "X87Context type/declaration mentions also count; arbitrary aliases and cross-file receiver types are not resolved.",
+    "Address comment detection uses 6-8 digit 0x addresses or loc/LAB/lab address labels; standalone provenance annotations are exempt.",
+    "Archives enforce supplied schema-2 allowances but cannot prove baseline edits against Git history."
+  ]
+}

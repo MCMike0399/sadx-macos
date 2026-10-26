@@ -1,5 +1,5 @@
 {
-  "schema": 1,
+  "schema": 2,
   "files": {
     "src/cpu/crt_acos.cpp": {
       "hex_literals": 17,
@@ -8,7 +8,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 15,
+      "address_comments": 0
     },
     "src/cpu/crt_acos.hpp": {
       "hex_literals": 0,
@@ -17,7 +20,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 1
     },
     "src/cpu/crt_argument.cpp": {
       "hex_literals": 6,
@@ -26,7 +32,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 3,
+      "address_comments": 0
     },
     "src/cpu/crt_argument.hpp": {
       "hex_literals": 0,
@@ -35,7 +44,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/cpu/crt_asin.cpp": {
       "hex_literals": 25,
@@ -44,7 +56,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 23,
+      "address_comments": 1
     },
     "src/cpu/crt_asin.hpp": {
       "hex_literals": 0,
@@ -53,16 +68,22 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 3,
+      "address_comments": 2
     },
     "src/cpu/crt_atan2.cpp": {
-      "hex_literals": 56,
+      "hex_literals": 40,
       "address_identifiers": 0,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 31,
+      "address_comments": 0
     },
     "src/cpu/crt_atan2.hpp": {
       "hex_literals": 1,
@@ -71,7 +92,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 1
     },
     "src/cpu/crt_fabs.cpp": {
       "hex_literals": 9,
@@ -80,7 +104,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 7
+      "multi_statement_lines": 7,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 19,
+      "address_comments": 0
     },
     "src/cpu/crt_fabs.hpp": {
       "hex_literals": 0,
@@ -89,7 +116,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/cpu/crt_floor.cpp": {
       "hex_literals": 19,
@@ -98,7 +128,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 3
+      "multi_statement_lines": 3,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 30,
+      "address_comments": 0
     },
     "src/cpu/crt_floor.hpp": {
       "hex_literals": 0,
@@ -107,7 +140,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 1
     },
     "src/cpu/crt_integer.cpp": {
       "hex_literals": 5,
@@ -116,7 +152,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 9,
+      "address_comments": 0
     },
     "src/cpu/crt_integer.hpp": {
       "hex_literals": 0,
@@ -125,7 +164,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 1
     },
     "src/cpu/crt_inverse_internal.hpp": {
       "hex_literals": 0,
@@ -134,7 +176,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/cpu/crt_rand.cpp": {
       "hex_literals": 3,
@@ -143,7 +188,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/cpu/crt_rand.hpp": {
       "hex_literals": 0,
@@ -152,7 +200,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 1
     },
     "src/cpu/crt_sqrt.cpp": {
       "hex_literals": 13,
@@ -161,7 +212,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 3
+      "multi_statement_lines": 3,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 9,
+      "address_comments": 0
     },
     "src/cpu/crt_sqrt.hpp": {
       "hex_literals": 0,
@@ -170,7 +224,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/cpu/fidelity_float.hpp": {
       "hex_literals": 0,
@@ -179,7 +236,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 1,
+      "emulator_arithmetic": 37,
+      "address_comments": 0
     },
     "src/cpu/source_bytes.hpp": {
       "hex_literals": 0,
@@ -188,7 +248,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 1,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/cpu/sse_math.cpp": {
       "hex_literals": 28,
@@ -197,7 +260,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 10,
-      "multi_statement_lines": 34
+      "multi_statement_lines": 34,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/cpu/sse_math.hpp": {
       "hex_literals": 0,
@@ -206,7 +272,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 3
+      "multi_statement_lines": 3,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/cpu/x87_math.cpp": {
       "hex_literals": 40,
@@ -215,7 +284,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 30
+      "multi_statement_lines": 30,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 69,
+      "address_comments": 0
     },
     "src/cpu/x87_math.hpp": {
       "hex_literals": 5,
@@ -224,7 +296,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 3
+      "multi_statement_lines": 3,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 29,
+      "address_comments": 0
     },
     "src/cpu/x87_transcendental.cpp": {
       "hex_literals": 10,
@@ -233,7 +308,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 32,
+      "address_comments": 0
     },
     "src/cpu/x87_transcendental.hpp": {
       "hex_literals": 0,
@@ -242,7 +320,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 8,
+      "address_comments": 0
     },
     "src/math/d3dx_math.cpp": {
       "hex_literals": 41,
@@ -251,7 +332,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 12,
-      "multi_statement_lines": 62
+      "multi_statement_lines": 62,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 40,
+      "address_comments": 1
     },
     "src/math/d3dx_math.hpp": {
       "hex_literals": 0,
@@ -260,7 +344,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 2,
-      "multi_statement_lines": 3
+      "multi_statement_lines": 3,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/math/ninja_math.cpp": {
       "hex_literals": 2,
@@ -269,7 +356,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 5
+      "multi_statement_lines": 5,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 69,
+      "address_comments": 6
     },
     "src/math/ninja_math.hpp": {
       "hex_literals": 0,
@@ -278,7 +368,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 10,
+      "address_comments": 0
     },
     "src/math/ninja_sine_table.cpp": {
       "hex_literals": 0,
@@ -287,7 +380,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/math/ninja_sine_table.hpp": {
       "hex_literals": 0,
@@ -296,7 +392,82 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/engine/character_pack.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/engine/character_pack.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/engine/character_resources.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/engine/controller_values.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/engine/cooperative_thread_native.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/engine/cooperative_thread_native.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/d3d8_caps.cpp": {
       "hex_literals": 5,
@@ -305,7 +476,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 1,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/d3d8_caps.hpp": {
       "hex_literals": 1,
@@ -314,7 +488,58 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/engine/device_lights.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/engine/device_lights.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/engine/font_native.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/engine/font_native.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/frame_control_fwd.hpp": {
       "hex_literals": 0,
@@ -323,7 +548,34 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/engine/frame_loop_native.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/engine/frame_loop_native.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/game_controller.cpp": {
       "hex_literals": 0,
@@ -332,16 +584,22 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 9,
-      "multi_statement_lines": 8
+      "multi_statement_lines": 8,
+      "large_decimal_literals": 1,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/game_controller.hpp": {
-      "hex_literals": 5,
+      "hex_literals": 0,
       "address_identifiers": 13,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/game_frame_control.cpp": {
       "hex_literals": 0,
@@ -350,7 +608,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/game_frame_control.hpp": {
       "hex_literals": 0,
@@ -359,7 +620,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/game_frame_control_internal.hpp": {
       "hex_literals": 0,
@@ -368,7 +632,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/game_frame_control_native.cpp": {
       "hex_literals": 0,
@@ -377,7 +644,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/game_logic.hpp": {
       "hex_literals": 0,
@@ -386,7 +656,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/game_logic_support.hpp": {
       "hex_literals": 0,
@@ -395,7 +668,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/graphics_frame.cpp": {
       "hex_literals": 0,
@@ -404,7 +680,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/graphics_frame.hpp": {
       "hex_literals": 0,
@@ -413,7 +692,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/graphics_frame_fog.cpp": {
       "hex_literals": 0,
@@ -422,7 +704,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/graphics_frame_internal.hpp": {
       "hex_literals": 0,
@@ -431,7 +716,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/graphics_frame_lighting.cpp": {
       "hex_literals": 0,
@@ -440,7 +728,178 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/engine/menu_draw_primitives.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 8,
+      "emulator_arithmetic": 6,
+      "address_comments": 0
+    },
+    "src/engine/menu_draw_primitives.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 6,
+      "address_comments": 0
+    },
+    "src/engine/menu_square.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 5,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
+    },
+    "src/engine/menu_square.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
+    },
+    "src/engine/message_sprite_profile.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
+    },
+    "src/engine/message_sprite_profile.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
+    },
+    "src/engine/message_sprite_queue.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
+    },
+    "src/engine/message_sprite_queue.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
+    },
+    "src/engine/native_message_texture.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 4,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/engine/native_message_texture.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/engine/native_texture_lifetime.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 3,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/engine/native_texture_lifetime.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/engine/native_texture_palette.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/engine/native_texture_palette.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_debug_text.cpp": {
       "hex_literals": 0,
@@ -449,16 +908,22 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_debug_text.hpp": {
-      "hex_literals": 1,
+      "hex_literals": 0,
       "address_identifiers": 0,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_device_init.hpp": {
       "hex_literals": 4,
@@ -467,7 +932,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 6,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/engine/ninja_fog.cpp": {
       "hex_literals": 0,
@@ -476,7 +944,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 3,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_fog.hpp": {
       "hex_literals": 0,
@@ -485,7 +956,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/engine/ninja_fog_initial_state.cpp": {
       "hex_literals": 0,
@@ -494,7 +968,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_fog_initial_state.hpp": {
       "hex_literals": 0,
@@ -503,7 +980,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_fog_internal.hpp": {
       "hex_literals": 0,
@@ -512,7 +992,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/engine/ninja_fog_native.cpp": {
       "hex_literals": 0,
@@ -521,16 +1004,22 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_frame_calls.hpp": {
-      "hex_literals": 1,
+      "hex_literals": 0,
       "address_identifiers": 9,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 2,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 1
     },
     "src/engine/ninja_input_devices.cpp": {
       "hex_literals": 6,
@@ -539,7 +1028,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 4,
-      "multi_statement_lines": 3
+      "multi_statement_lines": 3,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_input_devices.hpp": {
       "hex_literals": 0,
@@ -548,25 +1040,34 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 1,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_keyboard.cpp": {
-      "hex_literals": 22,
+      "hex_literals": 19,
       "address_identifiers": 19,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 12,
-      "multi_statement_lines": 18
+      "multi_statement_lines": 18,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_keyboard.hpp": {
-      "hex_literals": 3,
+      "hex_literals": 2,
       "address_identifiers": 8,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 3,
-      "multi_statement_lines": 3
+      "multi_statement_lines": 3,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 1
     },
     "src/engine/ninja_matrix.cpp": {
       "hex_literals": 2,
@@ -575,7 +1076,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 1,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 347,
+      "address_comments": 256
     },
     "src/engine/ninja_matrix.hpp": {
       "hex_literals": 0,
@@ -584,7 +1088,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 9,
+      "address_comments": 8
     },
     "src/engine/ninja_memory.cpp": {
       "hex_literals": 6,
@@ -593,7 +1100,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 4,
-      "multi_statement_lines": 10
+      "multi_statement_lines": 10,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_memory.hpp": {
       "hex_literals": 0,
@@ -602,7 +1112,34 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 1
+    },
+    "src/engine/ninja_projected_depth.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 4,
+      "address_comments": 0
+    },
+    "src/engine/ninja_projected_depth.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 3,
+      "address_comments": 0
     },
     "src/engine/ninja_projection_range.cpp": {
       "hex_literals": 38,
@@ -611,7 +1148,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 14,
-      "multi_statement_lines": 26
+      "multi_statement_lines": 26,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 32,
+      "address_comments": 0
     },
     "src/engine/ninja_projection_range.hpp": {
       "hex_literals": 0,
@@ -620,16 +1160,22 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 3,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/engine/ninja_queue_consumer.cpp": {
-      "hex_literals": 118,
+      "hex_literals": 104,
       "address_identifiers": 53,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 48,
-      "multi_statement_lines": 59
+      "multi_statement_lines": 59,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 15,
+      "address_comments": 0
     },
     "src/engine/ninja_queue_consumer.hpp": {
       "hex_literals": 0,
@@ -638,7 +1184,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 3,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 4,
+      "address_comments": 0
     },
     "src/engine/ninja_queue_initial_state.cpp": {
       "hex_literals": 0,
@@ -647,7 +1196,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_queue_initial_state.hpp": {
       "hex_literals": 0,
@@ -656,7 +1208,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_queue_lifecycle.hpp": {
       "hex_literals": 0,
@@ -665,7 +1220,34 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 2,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
+    },
+    "src/engine/ninja_queue_native.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 10,
+      "address_comments": 0
+    },
+    "src/engine/ninja_queue_native.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 4,
+      "address_comments": 0
     },
     "src/engine/ninja_render.cpp": {
       "hex_literals": 36,
@@ -674,7 +1256,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 24,
-      "multi_statement_lines": 25
+      "multi_statement_lines": 25,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_render.hpp": {
       "hex_literals": 0,
@@ -683,7 +1268,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 5,
-      "multi_statement_lines": 4
+      "multi_statement_lines": 4,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_screen.hpp": {
       "hex_literals": 1,
@@ -692,7 +1280,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 12,
-      "multi_statement_lines": 11
+      "multi_statement_lines": 11,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 1
     },
     "src/engine/ninja_screen_initial_state.cpp": {
       "hex_literals": 0,
@@ -701,7 +1292,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_screen_initial_state.hpp": {
       "hex_literals": 0,
@@ -710,7 +1304,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_sprite.cpp": {
       "hex_literals": 44,
@@ -719,7 +1316,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 25,
-      "multi_statement_lines": 44
+      "multi_statement_lines": 44,
+      "large_decimal_literals": 1,
+      "emulator_arithmetic": 53,
+      "address_comments": 0
     },
     "src/engine/ninja_sprite.hpp": {
       "hex_literals": 0,
@@ -728,7 +1328,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 1,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/engine/ninja_sprite_display.cpp": {
       "hex_literals": 43,
@@ -737,7 +1340,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 19,
-      "multi_statement_lines": 18
+      "multi_statement_lines": 18,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 7,
+      "address_comments": 0
     },
     "src/engine/ninja_sprite_display.hpp": {
       "hex_literals": 0,
@@ -746,7 +1352,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/engine/ninja_sprite_queue.cpp": {
       "hex_literals": 96,
@@ -755,7 +1364,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 60,
-      "multi_statement_lines": 76
+      "multi_statement_lines": 76,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 21,
+      "address_comments": 0
     },
     "src/engine/ninja_sprite_queue.hpp": {
       "hex_literals": 0,
@@ -764,7 +1376,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 7,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/engine/ninja_system_init.cpp": {
       "hex_literals": 101,
@@ -773,7 +1388,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 30,
-      "multi_statement_lines": 21
+      "multi_statement_lines": 21,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/engine/ninja_system_init.hpp": {
       "hex_literals": 8,
@@ -782,7 +1400,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 6,
-      "multi_statement_lines": 7
+      "multi_statement_lines": 7,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/engine/ninja_texture.cpp": {
       "hex_literals": 1,
@@ -791,7 +1412,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 21,
-      "multi_statement_lines": 32
+      "multi_statement_lines": 32,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_texture.hpp": {
       "hex_literals": 0,
@@ -800,7 +1424,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 8
+      "multi_statement_lines": 8,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_texture_pool.cpp": {
       "hex_literals": 11,
@@ -809,7 +1436,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 3,
-      "multi_statement_lines": 4
+      "multi_statement_lines": 4,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_texture_pool.hpp": {
       "hex_literals": 2,
@@ -818,16 +1448,22 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 2,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_texture_selection.cpp": {
-      "hex_literals": 40,
+      "hex_literals": 34,
       "address_identifiers": 27,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 24,
-      "multi_statement_lines": 25
+      "multi_statement_lines": 25,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_texture_selection.hpp": {
       "hex_literals": 0,
@@ -836,7 +1472,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 4,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_vibration.cpp": {
       "hex_literals": 20,
@@ -845,7 +1484,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 3,
-      "multi_statement_lines": 12
+      "multi_statement_lines": 12,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_vibration.hpp": {
       "hex_literals": 0,
@@ -854,7 +1496,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 1,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/ninja_view.cpp": {
       "hex_literals": 42,
@@ -863,7 +1508,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 11,
-      "multi_statement_lines": 24
+      "multi_statement_lines": 24,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 92,
+      "address_comments": 0
     },
     "src/engine/ninja_view.hpp": {
       "hex_literals": 0,
@@ -872,7 +1520,130 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 1,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
+    },
+    "src/engine/ninja_view_native.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 6,
+      "address_comments": 0
+    },
+    "src/engine/ninja_view_native.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 5,
+      "address_comments": 0
+    },
+    "src/engine/pvr_device.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 1,
+      "emulator_arithmetic": 4,
+      "address_comments": 0
+    },
+    "src/engine/pvr_device.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 3,
+      "address_comments": 0
+    },
+    "src/engine/pvr_draw.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 10,
+      "emulator_arithmetic": 3,
+      "address_comments": 0
+    },
+    "src/engine/pvr_draw.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 3,
+      "address_comments": 0
+    },
+    "src/engine/queue_blank_frame.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 1,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
+    },
+    "src/engine/queue_blank_frame.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 1
+    },
+    "src/engine/queue_consumer_native.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
+    },
+    "src/engine/queue_consumer_native.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/engine/scene_resource_reference.hpp": {
       "hex_literals": 0,
@@ -881,7 +1652,34 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/engine/screen_sprite.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
+    },
+    "src/engine/screen_sprite.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/engine/speedrun.cpp": {
       "hex_literals": 0,
@@ -890,16 +1688,46 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/speedrun.hpp": {
-      "hex_literals": 3,
+      "hex_literals": 0,
       "address_identifiers": 0,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 2
+    },
+    "src/engine/sprite_immediate.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 1,
+      "emulator_arithmetic": 3,
+      "address_comments": 0
+    },
+    "src/engine/sprite_immediate.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 3,
+      "address_comments": 0
     },
     "src/engine/task.cpp": {
       "hex_literals": 76,
@@ -908,7 +1736,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 34,
-      "multi_statement_lines": 67
+      "multi_statement_lines": 67,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/engine/task.hpp": {
       "hex_literals": 0,
@@ -917,7 +1748,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 11
     },
     "src/engine/task_work.cpp": {
       "hex_literals": 1,
@@ -926,16 +1760,46 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 4,
-      "multi_statement_lines": 11
+      "multi_statement_lines": 11,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 1
     },
     "src/engine/task_work.hpp": {
-      "hex_literals": 1,
+      "hex_literals": 0,
       "address_identifiers": 0,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 1,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 1
+    },
+    "src/engine/ui_scale_profile.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/engine/ui_scale_profile.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 3
     },
     "src/input/input.cpp": {
       "hex_literals": 7,
@@ -944,7 +1808,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/input/input.hpp": {
       "hex_literals": 0,
@@ -953,7 +1820,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 4
+      "multi_statement_lines": 4,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/input/input_initial_state.cpp": {
       "hex_literals": 0,
@@ -962,7 +1832,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/input/input_initial_state.hpp": {
       "hex_literals": 0,
@@ -971,7 +1844,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/input/input_mod_axes.cpp": {
       "hex_literals": 0,
@@ -980,7 +1856,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 2,
-      "multi_statement_lines": 8
+      "multi_statement_lines": 8,
+      "large_decimal_literals": 1,
+      "emulator_arithmetic": 32,
+      "address_comments": 6
     },
     "src/input/input_mod_axes.hpp": {
       "hex_literals": 0,
@@ -989,7 +1868,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 6
     },
     "src/input/input_mod_constants.cpp": {
       "hex_literals": 0,
@@ -998,7 +1880,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/input/input_mod_constants.hpp": {
       "hex_literals": 0,
@@ -1007,16 +1892,22 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/input/input_mod_pad.cpp": {
-      "hex_literals": 59,
+      "hex_literals": 47,
       "address_identifiers": 23,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 29,
-      "multi_statement_lines": 46
+      "multi_statement_lines": 46,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/input/input_mod_pad.hpp": {
       "hex_literals": 0,
@@ -1025,7 +1916,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 5,
-      "multi_statement_lines": 3
+      "multi_statement_lines": 3,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 1
     },
     "src/player/collision_normal.cpp": {
       "hex_literals": 37,
@@ -1034,7 +1928,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 13,
-      "multi_statement_lines": 32
+      "multi_statement_lines": 32,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 38,
+      "address_comments": 0
     },
     "src/player/collision_normal.hpp": {
       "hex_literals": 0,
@@ -1043,7 +1940,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/player/collision_shapes.cpp": {
       "hex_literals": 37,
@@ -1052,7 +1952,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 7,
-      "multi_statement_lines": 16
+      "multi_statement_lines": 16,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 27,
+      "address_comments": 0
     },
     "src/player/collision_shapes.hpp": {
       "hex_literals": 0,
@@ -1061,7 +1964,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 4,
+      "address_comments": 0
     },
     "src/player/floor_angles.cpp": {
       "hex_literals": 7,
@@ -1070,7 +1976,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 16,
+      "address_comments": 0
     },
     "src/player/floor_angles.hpp": {
       "hex_literals": 0,
@@ -1079,7 +1988,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 1
     },
     "src/player/ground_acceleration.cpp": {
       "hex_literals": 0,
@@ -1088,7 +2000,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/player/ground_acceleration.hpp": {
       "hex_literals": 0,
@@ -1097,7 +2012,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/player/ground_acceleration_internal.hpp": {
       "hex_literals": 0,
@@ -1106,7 +2024,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/player/ground_acceleration_native.cpp": {
       "hex_literals": 0,
@@ -1115,7 +2036,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/player/ground_arithmetic.hpp": {
       "hex_literals": 0,
@@ -1124,7 +2048,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/player/ground_friction.cpp": {
       "hex_literals": 0,
@@ -1133,7 +2060,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 5,
+      "address_comments": 0
     },
     "src/player/player_acceleration.hpp": {
       "hex_literals": 0,
@@ -1142,7 +2072,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/player/player_acceleration_air.cpp": {
       "hex_literals": 19,
@@ -1151,7 +2084,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 4,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 26,
+      "address_comments": 0
     },
     "src/player/player_acceleration_air.hpp": {
       "hex_literals": 0,
@@ -1160,7 +2096,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 4,
+      "address_comments": 4
     },
     "src/player/player_acceleration_alternate.cpp": {
       "hex_literals": 98,
@@ -1169,7 +2108,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 33,
-      "multi_statement_lines": 87
+      "multi_statement_lines": 87,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 93,
+      "address_comments": 0
     },
     "src/player/player_acceleration_alternate.hpp": {
       "hex_literals": 0,
@@ -1178,7 +2120,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 4,
+      "address_comments": 0
     },
     "src/player/player_acceleration_alternate_math.cpp": {
       "hex_literals": 1,
@@ -1187,7 +2132,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 25,
+      "address_comments": 1
     },
     "src/player/player_acceleration_alternate_math.hpp": {
       "hex_literals": 0,
@@ -1196,7 +2144,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 3,
+      "address_comments": 0
     },
     "src/player/player_acceleration_friction.hpp": {
       "hex_literals": 0,
@@ -1205,7 +2156,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 2
     },
     "src/player/player_acceleration_ground.hpp": {
       "hex_literals": 0,
@@ -1214,7 +2168,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 4,
+      "address_comments": 10
     },
     "src/player/player_animation.cpp": {
       "hex_literals": 105,
@@ -1223,7 +2180,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 39,
-      "multi_statement_lines": 47
+      "multi_statement_lines": 47,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 44,
+      "address_comments": 0
     },
     "src/player/player_animation.hpp": {
       "hex_literals": 0,
@@ -1232,7 +2192,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 4,
-      "multi_statement_lines": 6
+      "multi_statement_lines": 6,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 5,
+      "address_comments": 0
     },
     "src/player/player_animation_blend.cpp": {
       "hex_literals": 90,
@@ -1241,7 +2204,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 40,
-      "multi_statement_lines": 43
+      "multi_statement_lines": 43,
+      "large_decimal_literals": 2,
+      "emulator_arithmetic": 19,
+      "address_comments": 0
     },
     "src/player/player_animation_decode.cpp": {
       "hex_literals": 6,
@@ -1250,7 +2216,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 22,
-      "multi_statement_lines": 24
+      "multi_statement_lines": 24,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/player/player_animation_decode.hpp": {
       "hex_literals": 0,
@@ -1259,7 +2228,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 1,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/player/player_animation_state.hpp": {
       "hex_literals": 0,
@@ -1268,7 +2240,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/player/player_auxiliary_effect.cpp": {
       "hex_literals": 90,
@@ -1277,16 +2252,22 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 39,
-      "multi_statement_lines": 49
+      "multi_statement_lines": 49,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 4,
+      "address_comments": 0
     },
     "src/player/player_auxiliary_effect.hpp": {
-      "hex_literals": 3,
+      "hex_literals": 1,
       "address_identifiers": 3,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 6,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/player/player_contact.hpp": {
       "hex_literals": 0,
@@ -1295,16 +2276,22 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 1,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/player/player_contact_attributes.cpp": {
-      "hex_literals": 18,
+      "hex_literals": 13,
       "address_identifiers": 0,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 3,
-      "multi_statement_lines": 5
+      "multi_statement_lines": 5,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 19,
+      "address_comments": 0
     },
     "src/player/player_contact_attributes.hpp": {
       "hex_literals": 0,
@@ -1313,7 +2300,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/player/player_contact_initializer.cpp": {
       "hex_literals": 26,
@@ -1322,25 +2312,34 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 2,
-      "multi_statement_lines": 18
+      "multi_statement_lines": 18,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 28,
+      "address_comments": 0
     },
     "src/player/player_contact_initializer.hpp": {
-      "hex_literals": 13,
+      "hex_literals": 0,
       "address_identifiers": 0,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/player/player_contact_response.cpp": {
-      "hex_literals": 117,
+      "hex_literals": 48,
       "address_identifiers": 25,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 34,
-      "multi_statement_lines": 44
+      "multi_statement_lines": 44,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 98,
+      "address_comments": 0
     },
     "src/player/player_contact_response.hpp": {
       "hex_literals": 0,
@@ -1349,7 +2348,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/player/player_coordinates.cpp": {
       "hex_literals": 13,
@@ -1358,7 +2360,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 6,
+      "address_comments": 0
     },
     "src/player/player_coordinates.hpp": {
       "hex_literals": 0,
@@ -1367,7 +2372,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 5,
+      "address_comments": 2
     },
     "src/player/player_direction_reset.cpp": {
       "hex_literals": 16,
@@ -1376,7 +2384,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 13,
-      "multi_statement_lines": 16
+      "multi_statement_lines": 16,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 53,
+      "address_comments": 0
     },
     "src/player/player_direction_reset.hpp": {
       "hex_literals": 0,
@@ -1385,7 +2396,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/player/player_heading.cpp": {
       "hex_literals": 10,
@@ -1394,7 +2408,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 1,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/player/player_heading.hpp": {
       "hex_literals": 0,
@@ -1403,7 +2420,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 3
     },
     "src/player/player_hold.cpp": {
       "hex_literals": 32,
@@ -1412,7 +2432,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/player/player_hold.hpp": {
       "hex_literals": 0,
@@ -1421,7 +2444,22 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/player/player_initialization.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/player/player_input.cpp": {
       "hex_literals": 21,
@@ -1430,7 +2468,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 11,
+      "address_comments": 0
     },
     "src/player/player_input.hpp": {
       "hex_literals": 0,
@@ -1439,7 +2480,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 3,
+      "address_comments": 9
     },
     "src/player/player_input_producer.cpp": {
       "hex_literals": 16,
@@ -1448,7 +2492,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 36,
+      "address_comments": 0
     },
     "src/player/player_input_producer.hpp": {
       "hex_literals": 0,
@@ -1457,7 +2504,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 9
     },
     "src/player/player_mesh_math.cpp": {
       "hex_literals": 2,
@@ -1466,7 +2516,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 1,
-      "multi_statement_lines": 9
+      "multi_statement_lines": 9,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 41,
+      "address_comments": 0
     },
     "src/player/player_mesh_math.hpp": {
       "hex_literals": 0,
@@ -1475,16 +2528,22 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 3,
+      "address_comments": 0
     },
     "src/player/player_mesh_matrix.cpp": {
-      "hex_literals": 1,
+      "hex_literals": 0,
       "address_identifiers": 0,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 508,
+      "address_comments": 501
     },
     "src/player/player_mesh_matrix.hpp": {
       "hex_literals": 0,
@@ -1493,7 +2552,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 3,
+      "address_comments": 1
     },
     "src/player/player_mesh_query.cpp": {
       "hex_literals": 42,
@@ -1502,7 +2564,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 49,
-      "multi_statement_lines": 69
+      "multi_statement_lines": 69,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 64,
+      "address_comments": 0
     },
     "src/player/player_mesh_query.hpp": {
       "hex_literals": 0,
@@ -1511,16 +2576,22 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/player/player_mesh_registry.cpp": {
-      "hex_literals": 162,
+      "hex_literals": 146,
       "address_identifiers": 8,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 88,
-      "multi_statement_lines": 110
+      "multi_statement_lines": 110,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 45,
+      "address_comments": 0
     },
     "src/player/player_mesh_registry.hpp": {
       "hex_literals": 0,
@@ -1529,7 +2600,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 1,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 5,
+      "address_comments": 0
     },
     "src/player/player_motion.cpp": {
       "hex_literals": 1,
@@ -1538,7 +2612,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 13,
+      "address_comments": 0
     },
     "src/player/player_motion.hpp": {
       "hex_literals": 0,
@@ -1547,7 +2624,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 5
     },
     "src/player/player_movement.cpp": {
       "hex_literals": 0,
@@ -1556,7 +2636,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 5,
+      "address_comments": 0
     },
     "src/player/player_movement.hpp": {
       "hex_literals": 0,
@@ -1565,7 +2648,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/player/player_path.cpp": {
       "hex_literals": 8,
@@ -1574,7 +2660,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 15,
-      "multi_statement_lines": 30
+      "multi_statement_lines": 30,
+      "large_decimal_literals": 1,
+      "emulator_arithmetic": 70,
+      "address_comments": 0
     },
     "src/player/player_path.hpp": {
       "hex_literals": 0,
@@ -1583,7 +2672,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/player/player_physics.hpp": {
       "hex_literals": 0,
@@ -1592,7 +2684,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 1,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/player/player_plane.cpp": {
       "hex_literals": 1,
@@ -1601,7 +2696,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 176,
+      "address_comments": 140
     },
     "src/player/player_plane.hpp": {
       "hex_literals": 0,
@@ -1610,7 +2708,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 2
     },
     "src/player/player_position.cpp": {
       "hex_literals": 94,
@@ -1619,7 +2720,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 36,
-      "multi_statement_lines": 37
+      "multi_statement_lines": 37,
+      "large_decimal_literals": 1,
+      "emulator_arithmetic": 51,
+      "address_comments": 0
     },
     "src/player/player_position.hpp": {
       "hex_literals": 0,
@@ -1628,7 +2732,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 1,
-      "multi_statement_lines": 3
+      "multi_statement_lines": 3,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 5,
+      "address_comments": 7
     },
     "src/player/player_projection.cpp": {
       "hex_literals": 3,
@@ -1637,7 +2744,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 8
+      "multi_statement_lines": 8,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 9,
+      "address_comments": 0
     },
     "src/player/player_projection.hpp": {
       "hex_literals": 0,
@@ -1646,7 +2756,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/player/player_reaction.cpp": {
       "hex_literals": 13,
@@ -1655,7 +2768,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 1,
-      "multi_statement_lines": 9
+      "multi_statement_lines": 9,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 20,
+      "address_comments": 0
     },
     "src/player/player_reaction.hpp": {
       "hex_literals": 0,
@@ -1664,7 +2780,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/player/player_rotation.cpp": {
       "hex_literals": 54,
@@ -1673,16 +2792,22 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 4,
-      "multi_statement_lines": 13
+      "multi_statement_lines": 13,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 99,
+      "address_comments": 0
     },
     "src/player/player_rotation.hpp": {
-      "hex_literals": 19,
+      "hex_literals": 0,
       "address_identifiers": 0,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 5,
+      "address_comments": 4
     },
     "src/player/player_rotation_result.hpp": {
       "hex_literals": 0,
@@ -1691,7 +2816,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/player/player_scene_broadphase.cpp": {
       "hex_literals": 56,
@@ -1700,7 +2828,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 21,
-      "multi_statement_lines": 31
+      "multi_statement_lines": 31,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 58,
+      "address_comments": 0
     },
     "src/player/player_scene_broadphase.hpp": {
       "hex_literals": 0,
@@ -1709,7 +2840,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/player/player_scene_decode.cpp": {
       "hex_literals": 11,
@@ -1718,7 +2852,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 32,
-      "multi_statement_lines": 45
+      "multi_statement_lines": 45,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/player/player_scene_decode.hpp": {
       "hex_literals": 0,
@@ -1727,7 +2864,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/player/player_scene_position.cpp": {
       "hex_literals": 0,
@@ -1736,7 +2876,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 10,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/player/player_scene_position.hpp": {
       "hex_literals": 0,
@@ -1745,7 +2888,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/player/player_scene_position_binding.hpp": {
       "hex_literals": 0,
@@ -1754,7 +2900,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/player/player_scene_position_helpers.cpp": {
       "hex_literals": 0,
@@ -1763,7 +2912,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/player/player_scene_position_helpers.hpp": {
       "hex_literals": 0,
@@ -1772,7 +2924,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 4,
+      "address_comments": 0
     },
     "src/player/player_scene_position_helpers_internal.hpp": {
       "hex_literals": 0,
@@ -1781,7 +2936,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 6,
+      "address_comments": 0
     },
     "src/player/player_scene_position_helpers_native.cpp": {
       "hex_literals": 0,
@@ -1790,7 +2948,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 6,
+      "address_comments": 0
     },
     "src/player/player_scene_position_internal.hpp": {
       "hex_literals": 0,
@@ -1799,7 +2960,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/player/player_scene_position_native.cpp": {
       "hex_literals": 0,
@@ -1808,16 +2972,22 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/player/player_scene_registration.cpp": {
-      "hex_literals": 51,
+      "hex_literals": 38,
       "address_identifiers": 0,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 16,
-      "multi_statement_lines": 22
+      "multi_statement_lines": 22,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 31,
+      "address_comments": 0
     },
     "src/player/player_scene_registration.hpp": {
       "hex_literals": 0,
@@ -1826,7 +2996,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/player/player_scene_resources.hpp": {
       "hex_literals": 0,
@@ -1835,7 +3008,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/player/player_speed.cpp": {
       "hex_literals": 33,
@@ -1844,7 +3020,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 42,
+      "address_comments": 3
     },
     "src/player/player_speed.hpp": {
       "hex_literals": 0,
@@ -1853,16 +3032,22 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 4,
+      "address_comments": 4
     },
     "src/player/player_startup.cpp": {
-      "hex_literals": 95,
-      "address_identifiers": 58,
+      "hex_literals": 0,
+      "address_identifiers": 57,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
-      "long_lines": 5,
-      "multi_statement_lines": 52
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 5,
+      "address_comments": 0
     },
     "src/player/player_startup.hpp": {
       "hex_literals": 0,
@@ -1871,7 +3056,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 5
     },
     "src/player/player_state.cpp": {
       "hex_literals": 26,
@@ -1880,7 +3068,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 6
+      "multi_statement_lines": 6,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 5,
+      "address_comments": 2
     },
     "src/player/player_state.hpp": {
       "hex_literals": 0,
@@ -1889,7 +3080,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 3
     },
     "src/player/player_task.cpp": {
       "hex_literals": 1,
@@ -1898,7 +3092,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/player/player_task.hpp": {
       "hex_literals": 0,
@@ -1907,16 +3104,22 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 2
     },
     "src/player/scene_input_producer.cpp": {
-      "hex_literals": 52,
+      "hex_literals": 46,
       "address_identifiers": 29,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
-      "long_lines": 9,
-      "multi_statement_lines": 26
+      "long_lines": 8,
+      "multi_statement_lines": 25,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 3,
+      "address_comments": 0
     },
     "src/player/scene_input_producer.hpp": {
       "hex_literals": 0,
@@ -1925,16 +3128,22 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 3,
+      "address_comments": 0
     },
     "src/player/sonic_animation_operations.hpp": {
-      "hex_literals": 6162,
+      "hex_literals": 0,
       "address_identifiers": 0,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 1,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/player/sonic_animation_table.cpp": {
       "hex_literals": 1,
@@ -1943,7 +3152,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 3,
-      "multi_statement_lines": 12
+      "multi_statement_lines": 12,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/player/sonic_animation_table.hpp": {
       "hex_literals": 0,
@@ -1952,34 +3164,70 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/player/sonic_animation_table_data.hpp": {
-      "hex_literals": 882,
+      "hex_literals": 0,
       "address_identifiers": 0,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 1,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/player/sonic_player.cpp": {
-      "hex_literals": 635,
+      "hex_literals": 547,
       "address_identifiers": 174,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 65,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 86,
+      "address_comments": 0
     },
     "src/player/sonic_player.hpp": {
-      "hex_literals": 32,
+      "hex_literals": 19,
       "address_identifiers": 9,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 3,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 9,
+      "address_comments": 0
+    },
+    "src/game/audio_playback.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/audio_playback.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/audio_stream.cpp": {
       "hex_literals": 9,
@@ -1988,7 +3236,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 2,
-      "multi_statement_lines": 10
+      "multi_statement_lines": 10,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/audio_stream.hpp": {
       "hex_literals": 2,
@@ -1997,16 +3248,202 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 2,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/character_completion.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/character_completion.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 3
+    },
+    "src/game/character_select_labels.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 1,
+      "emulator_arithmetic": 3,
+      "address_comments": 0
+    },
+    "src/game/character_select_labels.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 2
+    },
+    "src/game/character_select_menu.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 48,
+      "emulator_arithmetic": 8,
+      "address_comments": 0
+    },
+    "src/game/character_select_menu.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 7,
+      "address_comments": 0
+    },
+    "src/game/file_select.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 2,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
+    },
+    "src/game/file_select.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
+    },
+    "src/game/file_select_controls.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 3,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
+    },
+    "src/game/file_select_display.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 42,
+      "emulator_arithmetic": 8,
+      "address_comments": 0
+    },
+    "src/game/file_select_display.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 5,
+      "address_comments": 0
+    },
+    "src/game/game_bootstrap.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 3,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/game_bootstrap.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/game_cleanup.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 2,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/game_cleanup.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/game_frame_owners.cpp": {
-      "hex_literals": 45,
-      "address_identifiers": 19,
+      "hex_literals": 43,
+      "address_identifiers": 17,
       "address_calls": 4,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 12,
-      "multi_statement_lines": 17
+      "multi_statement_lines": 17,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/game_frame_owners.hpp": {
       "hex_literals": 0,
@@ -2015,7 +3452,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 3,
-      "multi_statement_lines": 5
+      "multi_statement_lines": 5,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/game/game_library_init.cpp": {
       "hex_literals": 0,
@@ -2024,7 +3464,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 2,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/game/game_library_init.hpp": {
       "hex_literals": 0,
@@ -2033,7 +3476,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/game/game_library_init_internal.hpp": {
       "hex_literals": 0,
@@ -2042,7 +3488,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/game/game_library_init_native.cpp": {
       "hex_literals": 0,
@@ -2051,7 +3500,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/game_loop.hpp": {
       "hex_literals": 0,
@@ -2060,7 +3512,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 1
     },
     "src/game/game_mode.cpp": {
       "hex_literals": 0,
@@ -2069,7 +3524,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/game_mode.hpp": {
       "hex_literals": 0,
@@ -2078,7 +3536,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/game_mode_internal.hpp": {
       "hex_literals": 0,
@@ -2087,7 +3548,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/game_mode_native.cpp": {
       "hex_literals": 0,
@@ -2096,7 +3560,22 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/game_mode_services.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/game_reset.cpp": {
       "hex_literals": 41,
@@ -2105,7 +3584,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 4,
-      "multi_statement_lines": 10
+      "multi_statement_lines": 10,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/game_reset.hpp": {
       "hex_literals": 0,
@@ -2114,7 +3596,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 1
     },
     "src/game/game_reset_leaves.cpp": {
       "hex_literals": 76,
@@ -2123,7 +3608,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 18,
-      "multi_statement_lines": 28
+      "multi_statement_lines": 28,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/game_reset_leaves.hpp": {
       "hex_literals": 0,
@@ -2132,7 +3620,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 3,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/game_scene_logic.cpp": {
       "hex_literals": 24,
@@ -2141,7 +3632,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 7,
-      "multi_statement_lines": 13
+      "multi_statement_lines": 13,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/game_scene_logic.hpp": {
       "hex_literals": 0,
@@ -2150,7 +3644,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/game/game_startup.hpp": {
       "hex_literals": 0,
@@ -2159,25 +3656,34 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 2,
-      "multi_statement_lines": 5
+      "multi_statement_lines": 5,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/game_view.cpp": {
       "hex_literals": 50,
-      "address_identifiers": 45,
+      "address_identifiers": 44,
       "address_calls": 3,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 10,
-      "multi_statement_lines": 21
+      "multi_statement_lines": 20,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 4,
+      "address_comments": 0
     },
     "src/game/game_view.hpp": {
       "hex_literals": 0,
-      "address_identifiers": 22,
+      "address_identifiers": 21,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 3
+      "multi_statement_lines": 3,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
     },
     "src/game/game_view_initial_state.cpp": {
       "hex_literals": 0,
@@ -2186,7 +3692,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/game_view_initial_state.hpp": {
       "hex_literals": 0,
@@ -2195,7 +3704,34 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/game_view_native.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 2,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
+    },
+    "src/game/game_view_native.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/game/game_window.cpp": {
       "hex_literals": 16,
@@ -2204,7 +3740,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 6,
-      "multi_statement_lines": 11
+      "multi_statement_lines": 11,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/game_window.hpp": {
       "hex_literals": 0,
@@ -2213,7 +3752,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 4,
-      "multi_statement_lines": 3
+      "multi_statement_lines": 3,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/game_winmain.cpp": {
       "hex_literals": 81,
@@ -2222,7 +3764,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 25,
-      "multi_statement_lines": 38
+      "multi_statement_lines": 38,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 1
     },
     "src/game/game_winmain.hpp": {
       "hex_literals": 2,
@@ -2231,7 +3776,34 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 6,
-      "multi_statement_lines": 7
+      "multi_statement_lines": 7,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/level_sounds.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/level_sounds.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/library_initial_state.cpp": {
       "hex_literals": 0,
@@ -2240,7 +3812,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/library_initial_state.hpp": {
       "hex_literals": 0,
@@ -2249,7 +3824,34 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/lighting_palette.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 5,
+      "address_comments": 0
+    },
+    "src/game/lighting_palette.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/game/logo.cpp": {
       "hex_literals": 0,
@@ -2258,7 +3860,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/logo.hpp": {
       "hex_literals": 0,
@@ -2267,7 +3872,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/game/logo_display.cpp": {
       "hex_literals": 0,
@@ -2276,7 +3884,382 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 2,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
+    },
+    "src/game/logo_startup.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/logo_startup.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/main_menu.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 2,
+      "emulator_arithmetic": 5,
+      "address_comments": 0
+    },
+    "src/game/main_menu.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 5,
+      "address_comments": 0
+    },
+    "src/game/main_menu_content.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 4,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
+    },
+    "src/game/main_menu_content.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
+    },
+    "src/game/main_menu_eligibility.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/main_menu_eligibility.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/menu_caption.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 5,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/menu_caption.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/menu_dialog.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 11,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
+    },
+    "src/game/menu_dialog.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 7,
+      "address_comments": 0
+    },
+    "src/game/menu_dialog_control.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/menu_dialog_control.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/menu_dialog_draw.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 11,
+      "emulator_arithmetic": 8,
+      "address_comments": 0
+    },
+    "src/game/menu_dialog_file_select.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 1,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/menu_dialog_file_select.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/menu_eligibility.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/menu_eligibility.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/menu_navigation.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/menu_navigation.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/menu_resource_lifetime.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/menu_resource_lifetime.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/menu_voice.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/menu_voice.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/message_frame.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
+    },
+    "src/game/message_frame.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
+    },
+    "src/game/message_text.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/message_text.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/message_texture.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 2,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/message_texture.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/mod_loader_frame.cpp": {
       "hex_literals": 29,
@@ -2285,7 +4268,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 3,
-      "multi_statement_lines": 12
+      "multi_statement_lines": 12,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/mod_loader_frame.hpp": {
       "hex_literals": 0,
@@ -2294,7 +4280,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/model_dlls.cpp": {
       "hex_literals": 3,
@@ -2303,16 +4292,418 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 3,
-      "multi_statement_lines": 5
+      "multi_statement_lines": 5,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/model_dlls.hpp": {
-      "hex_literals": 86,
+      "hex_literals": 1,
       "address_identifiers": 1,
       "address_calls": 0,
       "goto": 0,
       "address_labels": 0,
       "long_lines": 2,
-      "multi_statement_lines": 2
+      "multi_statement_lines": 2,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 1
+    },
+    "src/game/movie.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
+    },
+    "src/game/movie.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 4,
+      "address_comments": 0
+    },
+    "src/game/music.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/music.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/regular_textures.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/regular_textures.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/save_completion.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/save_completion.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/save_creation.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/save_creation.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/save_data.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/save_data.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/save_file_list.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/save_file_list.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/save_file_name.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/save_frame.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/save_frame.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/save_write.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/save_write.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/saved_fov.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/saving_message.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 3,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
+    },
+    "src/game/saving_message.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
+    },
+    "src/game/selection_camera.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 1
+    },
+    "src/game/selection_camera.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
+    },
+    "src/game/selection_preview.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 3,
+      "address_comments": 0
+    },
+    "src/game/selection_preview.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 3,
+      "address_comments": 0
+    },
+    "src/game/selection_preview_textures.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/selection_question.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/selection_question.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/sound_bank.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/sound_bank.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/sound_effects.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 1,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
+    },
+    "src/game/sound_effects.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
     },
     "src/game/sound_initial_state.cpp": {
       "hex_literals": 0,
@@ -2321,7 +4712,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/sound_initial_state.hpp": {
       "hex_literals": 0,
@@ -2330,7 +4724,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/sound_manager.cpp": {
       "hex_literals": 68,
@@ -2339,7 +4736,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 10,
-      "multi_statement_lines": 16
+      "multi_statement_lines": 16,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/sound_manager.hpp": {
       "hex_literals": 0,
@@ -2348,7 +4748,34 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 2,
-      "multi_statement_lines": 3
+      "multi_statement_lines": 3,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/stage_lighting.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/stage_lighting.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/startup_initial_state.cpp": {
       "hex_literals": 0,
@@ -2357,7 +4784,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/startup_initial_state.hpp": {
       "hex_literals": 0,
@@ -2366,7 +4796,58 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/title_menu.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 19,
+      "emulator_arithmetic": 18,
+      "address_comments": 0
+    },
+    "src/game/title_menu.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 9,
+      "address_comments": 0
+    },
+    "src/game/voice_playback.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/voice_playback.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/win32_profile.cpp": {
       "hex_literals": 0,
@@ -2375,7 +4856,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 5,
-      "multi_statement_lines": 12
+      "multi_statement_lines": 12,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/game/win32_profile.hpp": {
       "hex_literals": 0,
@@ -2384,7 +4868,34 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 1,
-      "multi_statement_lines": 1
+      "multi_statement_lines": 1,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/character_selection_assets.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/character_texture_assets.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/runtime/engine_code_tables.cpp": {
       "hex_literals": 0,
@@ -2393,7 +4904,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/runtime/engine_code_tables.hpp": {
       "hex_literals": 0,
@@ -2402,7 +4916,406 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/file_select_display_assets.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/font_assets.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/logo_renderer.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 3,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
+    },
+    "src/runtime/logo_renderer.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 1,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
+    },
+    "src/runtime/logo_scene.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
+    },
+    "src/runtime/logo_scene.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
+    },
+    "src/runtime/main_menu_assets.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/menu_dialog_assets.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/menu_texture_assets.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/message_font_assets.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/movie_scene.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/movie_scene.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/music_assets.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/native_character_select.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/native_display.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 4,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/native_display.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 2,
+      "address_comments": 0
+    },
+    "src/runtime/native_file_select_display.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/native_input.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 3,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
+    },
+    "src/runtime/native_input.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
+    },
+    "src/runtime/native_lighting_palette.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/native_main_menu.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/native_message_display.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 1,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/native_message_frame.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/native_save.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/native_selection_camera.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/native_selection_preview.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/native_selection_question.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/native_session.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 0
+    },
+    "src/runtime/native_session.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 1,
+      "address_comments": 14
+    },
+    "src/runtime/native_title_scene.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/native_title_scene.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/native_title_tasks.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/regular_texture_assets.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/runtime/session_control_defaults.cpp": {
       "hex_literals": 0,
@@ -2411,7 +5324,10 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     },
     "src/runtime/session_control_defaults.hpp": {
       "hex_literals": 0,
@@ -2420,7 +5336,34 @@
       "goto": 0,
       "address_labels": 0,
       "long_lines": 0,
-      "multi_statement_lines": 0
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/title_assets.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/runtime/voice_assets.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
     }
   }
 }
