@@ -1,0 +1,187 @@
+{
+  "scope": "Deliberate native binding failures; unit coverage only, not GPU or native startup proof",
+  "base_source_commit": "83f0ded",
+  "mutants": [
+    {
+      "name": "drop-draw",
+      "source": "src/runtime/model_device.cpp",
+      "unit": "model_device",
+      "compile_exit_status": 0,
+      "unit_exit_status": -6,
+      "caught": true,
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "tests/unit/model_device.cpp",
+        "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/binding-mutants/drop-draw/mutant.cpp",
+        "build/libsadx-core.a",
+        "-o",
+        "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/binding-mutants/drop-draw/unit"
+      ],
+      "run": [
+        "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/binding-mutants/drop-draw/unit",
+        "/Users/burbujamc/Developer/sadx-macos/game/imported/system"
+      ],
+      "mutant_cpp_sha256": "8cc1b8352d03c1484b6da9f14427552e5cdb86e1a37ab69f848c9fe8d77514cd"
+    },
+    {
+      "name": "drop-retain",
+      "source": "src/runtime/model_device.cpp",
+      "unit": "model_device",
+      "compile_exit_status": 0,
+      "unit_exit_status": -6,
+      "caught": true,
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "tests/unit/model_device.cpp",
+        "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/binding-mutants/drop-retain/mutant.cpp",
+        "build/libsadx-core.a",
+        "-o",
+        "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/binding-mutants/drop-retain/unit"
+      ],
+      "run": [
+        "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/binding-mutants/drop-retain/unit",
+        "/Users/burbujamc/Developer/sadx-macos/game/imported/system"
+      ],
+      "mutant_cpp_sha256": "3f13dc94a64f40a4e58c5e659526aab130f722c4deb035d0ec0c53df04443334"
+    },
+    {
+      "name": "wrong-power",
+      "source": "src/runtime/model_draw.cpp",
+      "unit": "model_binding",
+      "compile_exit_status": 0,
+      "unit_exit_status": -6,
+      "caught": true,
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "tests/unit/model_binding.cpp",
+        "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/binding-mutants/wrong-power/mutant.cpp",
+        "build/libsadx-core.a",
+        "-o",
+        "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/binding-mutants/wrong-power/unit"
+      ],
+      "run": [
+        "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/binding-mutants/wrong-power/unit",
+        "/Users/burbujamc/Developer/sadx-macos/game/imported/characters/sonic-selection.actions",
+        "/Users/burbujamc/Developer/sadx-macos/game/imported/system"
+      ],
+      "mutant_cpp_sha256": "d06697652db84c412181b4d6f96ba721ac14e71ccb71869529eb694e2fa51b3b"
+    },
+    {
+      "name": "swap-vectors",
+      "source": "src/runtime/model_draw.cpp",
+      "unit": "model_binding",
+      "compile_exit_status": 0,
+      "unit_exit_status": -6,
+      "caught": true,
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-Isrc",
+        "tests/unit/model_binding.cpp",
+        "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/binding-mutants/swap-vectors/mutant.cpp",
+        "build/libsadx-core.a",
+        "-o",
+        "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/binding-mutants/swap-vectors/unit"
+      ],
+      "run": [
+        "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/binding-mutants/swap-vectors/unit",
+        "/Users/burbujamc/Developer/sadx-macos/game/imported/characters/sonic-selection.actions",
+        "/Users/burbujamc/Developer/sadx-macos/game/imported/system"
+      ],
+      "mutant_cpp_sha256": "e6679cf9f7d65ff6ce181c55d940b80ed3012c675467daed92a89dffb897fab6"
+    },
+    {
+      "name": "swap-view-reset",
+      "source": "src/runtime/model_draw.cpp",
+      "unit": "model_binding",
+      "compile_exit_status": 0,
+      "unit_exit_status": -6,
+      "caught": true,
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-arch",
+        "arm64",
+        "-mmacosx-version-min=14.0",
+        "-I/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/binding-mutants/swap-view-reset",
+        "-Isrc",
+        "tests/unit/model_binding.cpp",
+        "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/binding-mutants/swap-view-reset/mutant.cpp",
+        "build/libsadx-core.a",
+        "-o",
+        "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/binding-mutants/swap-view-reset/unit"
+      ],
+      "run": [
+        "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/binding-mutants/swap-view-reset/unit",
+        "/Users/burbujamc/Developer/sadx-macos/game/imported/characters/sonic-selection.actions",
+        "/Users/burbujamc/Developer/sadx-macos/game/imported/system"
+      ],
+      "mutant_cpp_sha256": "9aa0fd984960e13561f818ed0315743d3dff7a98f5f33d0f01040791046b00df"
+    }
+  ],
+  "unit_assertions": {
+    "drop-draw": "Assertion failed: (buffer.lock_count == 0 && context.frame().commands.size() == 1), function main, file model_device.cpp, line 71.",
+    "drop-retain": "Assertion failed: (resource->references == 2), function main, file model_device.cpp, line 36.",
+    "wrong-power": "Assertion failed: (device.device().material.power == 61), function main, file model_binding.cpp, line 77.",
+    "swap-vectors": "Assertion failed: (std::get<graphics::Draw>(device.frame().commands[1]).vertices.front().position[0] == kChangedX), function main, file model_binding.cpp, line 129.",
+    "swap-view-reset": "Assertion failed: (&owners.inverse_view == &display.view_.inverse), function verify_matrix_owners, file model_binding.cpp, line 27."
+  },
+  "limits": [
+    "A first driver attempt stopped on a patch-whitespace assertion before the last two builds; the completed corrected run contains all five compiled failures.",
+    "Source working files were never mutated; modified copies and compiled artifacts remain in build/binding-mutants.",
+    "Only assertion failures from compiled mutants count here; no compilation error counted."
+  ]
+}
