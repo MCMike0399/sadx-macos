@@ -37,47 +37,7 @@ GUEST_SOURCES := $(wildcard src/guest/*.cpp src/hle/*.cpp)
 GUEST_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(GUEST_SOURCES))
 GUEST_LINK := build/libsadx-guest.a $(UNICORN_DIR)/lib/libunicorn.a -lpthread
 # Shipping native closure: maintained game/profile sources only, without loader/guest/HLE objects.
-NATIVE_SOURCES := \
- src/cpu/crt_integer.cpp src/cpu/sse_math.cpp src/cpu/x87_math.cpp src/cpu/x87_transcendental.cpp \
- src/math/d3dx_math.cpp src/math/ninja_math.cpp src/math/ninja_sine_table.cpp \
- src/engine/character_pack.cpp src/engine/game_controller.cpp src/engine/game_frame_control.cpp src/engine/game_frame_control_native.cpp \
- src/engine/graphics_frame.cpp src/engine/graphics_frame_fog.cpp src/engine/graphics_frame_lighting.cpp \
- src/engine/ninja_matrix.cpp src/engine/ninja_projected_depth.cpp src/engine/ninja_texture.cpp \
- src/engine/ninja_view_native.cpp src/engine/pvr_device.cpp src/engine/pvr_draw.cpp \
- src/engine/sprite_immediate.cpp src/engine/speedrun.cpp src/engine/task.cpp src/engine/task_work.cpp \
- src/input/input_initial_state.cpp src/input/input_mod_axes.cpp src/input/input_mod_constants.cpp src/input/input_mod_pad.cpp \
- src/player/player_input_producer.cpp src/player/scene_input_producer.cpp src/player/player_heading.cpp src/player/player_coordinates.cpp \
- src/game/game_bootstrap.cpp src/game/game_mode.cpp src/game/game_mode_native.cpp \
- src/game/movie.cpp src/game/logo.cpp src/game/logo_display.cpp src/game/logo_startup.cpp src/game/save_data.cpp \
- src/runtime/engine_code_tables.cpp src/runtime/logo_renderer.cpp src/runtime/logo_scene.cpp \
- src/runtime/native_input.cpp src/runtime/movie_scene.cpp src/runtime/native_display.cpp src/runtime/native_session.cpp
-# Cleanup/title integration uses the native queue, fog and sound owners. Pending modules
-# enter this explicit production closure when their separately verified sources land.
-NATIVE_SOURCES += src/engine/ninja_sprite_queue.cpp src/engine/ninja_render.cpp \
- src/engine/ninja_fog.cpp src/engine/ninja_fog_native.cpp src/game/sound_initial_state.cpp \
- $(wildcard src/engine/ninja_queue_native.cpp src/game/game_view_native.cpp \
- src/game/game_cleanup.cpp src/game/audio_playback.cpp src/game/title_menu.cpp \
- src/game/sound_bank.cpp src/game/stage_lighting.cpp src/game/regular_textures.cpp src/game/level_sounds.cpp src/game/music.cpp src/game/sound_effects.cpp src/game/menu_resource_lifetime.cpp \
- src/game/voice_playback.cpp src/game/file_select.cpp src/game/save_file_list.cpp \
- src/game/menu_voice.cpp src/game/file_select_display.cpp src/game/file_select_controls.cpp \
- src/game/menu_dialog.cpp src/game/menu_dialog_draw.cpp src/game/menu_dialog_file_select.cpp \
- src/game/menu_caption.cpp src/engine/menu_draw_primitives.cpp src/engine/native_texture_lifetime.cpp \
- src/game/main_menu.cpp src/game/main_menu_content.cpp src/game/main_menu_eligibility.cpp \
- src/game/menu_eligibility.cpp src/game/menu_dialog_control.cpp src/game/menu_navigation.cpp \
- src/engine/menu_square.cpp)
-# Fresh-save resources and message rendering ship from maintained source only.
-NATIVE_SOURCES += src/game/save_creation.cpp src/game/save_completion.cpp src/game/save_write.cpp \
- src/game/save_frame.cpp src/game/saving_message.cpp src/game/message_text.cpp \
- src/game/message_texture.cpp src/game/message_frame.cpp src/engine/ui_scale_profile.cpp \
- src/engine/native_message_texture.cpp src/engine/native_texture_palette.cpp \
- src/engine/message_sprite_queue.cpp src/engine/message_sprite_profile.cpp \
- src/engine/queue_blank_frame.cpp src/engine/screen_sprite.cpp
-# Connected CharacterSelect system dependencies.
-NATIVE_SOURCES += src/engine/device_lights.cpp src/game/lighting_palette.cpp \
- src/game/selection_camera.cpp src/game/selection_question.cpp src/game/selection_preview.cpp src/game/selection_preview_textures.cpp \
- src/game/character_select_menu.cpp src/game/character_select_labels.cpp src/game/character_completion.cpp src/player/player_startup.cpp src/player/player_state.cpp
-# Native engine adapters and runtime compositions use these explicit naming scopes.
-NATIVE_SOURCES := $(sort $(NATIVE_SOURCES) $(wildcard src/engine/*_native.cpp src/runtime/native_*.cpp))
+NATIVE_SOURCES := $(sort $(shell cat native-sources.txt) $(wildcard src/engine/*_native.cpp src/runtime/native_*.cpp))
 NATIVE_OBJECTS := $(patsubst src/%.cpp,build/obj/%.o,$(NATIVE_SOURCES))
 NATIVE_PLATFORM_OBJECTS := build/obj/platform/mac/mac_clock.o build/obj/platform/mac/mac_audio.o \
  build/obj/platform/mac/hid_switch_controller.o build/obj/platform/mac/mac_movie.o build/obj/platform/mac/metal_device_frame.o
@@ -135,8 +95,8 @@ build/libsadx-macos.a: $(MAC_OBJECTS)
 	xcrun libtool -static -o $@ $^
 build/libsadx-guest.a: $(GUEST_OBJECTS)
 	xcrun libtool -static -o $@ $^
-build/libsadx-native.a: $(NATIVE_OBJECTS) build/softfloat_sse/softfloat-sse.a build/softfloat/softfloat.a build/bochs_fpatan/libbochs_fpatan.a
-	xcrun libtool -static -o $@ $^
+build/libsadx-native.a: $(NATIVE_OBJECTS) build/softfloat_sse/softfloat-sse.a build/softfloat/softfloat.a build/bochs_fpatan/libbochs_fpatan.a native-sources.txt
+	xcrun libtool -static -o $@ $(filter %.o %.a,$^)
 
 # Programs (src/apps).
 build/sadx-boot: src/apps/sadx_boot.cpp build/libsadx-macos.a build/libsadx-guest.a build/libsadx-core.a
@@ -151,6 +111,13 @@ build/sadx-controller-qualify: src/apps/controller_qualify.mm build/libsadx-maco
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-macos.a build/libsadx-core.a $(MAC_FRAMEWORKS) -o $@
 build/sadx-native: src/apps/sadx_native.mm build/libsadx-native.a $(NATIVE_PLATFORM_OBJECTS)
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< $(NATIVE_PLATFORM_OBJECTS) build/libsadx-native.a $(MAC_FRAMEWORKS) -o $@
+# Force-load every member: ordinary app linkage can hide a guest-only dependency
+# in an archive member the current frontier has not reached yet.
+build/sadx-native-closure: src/apps/sadx_native.mm build/libsadx-native.a $(NATIVE_PLATFORM_OBJECTS)
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< $(NATIVE_PLATFORM_OBJECTS) -Wl,-force_load,build/libsadx-native.a $(MAC_FRAMEWORKS) -o $@
+.PHONY: native-closure
+native-closure: build/sadx-native-closure
+	python3 tools/gate/check_native_closure.py --archive build/libsadx-native.a --platform $(NATIVE_PLATFORM_OBJECTS) --sources $(NATIVE_SOURCES) --linked build/sadx-native-closure
 NATIVE_ASSETS ?= game/imported
 .PHONY: voice-playback-fixture
 voice-playback-fixture:
@@ -386,7 +353,7 @@ check: native-library-initial-state native-startup-initial-state native-input-mo
 	python3 tools/gate/check_profile_patches.py
 	python3 tools/gate/check_repo_hygiene.py
 # The full gate command recorded by tools/gate/record_gate.py (every program built and run, then the checkers).
-gate: all test probes $(UNIT_MM_TARGETS) check app-smoke build/sadx-native
+gate: all test probes $(UNIT_MM_TARGETS) check app-smoke build/sadx-native native-closure
 	$(MAKE) journeys
 	$(MAKE) native-journeys
 status:

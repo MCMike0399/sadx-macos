@@ -1,0 +1,36 @@
+{
+  "requirement": "GOAL section 6 item 2: whole-archive native closure and unprotected source manifest",
+  "base_commit": "da25501",
+  "source_equivalence": {
+    "explicit_sources": 109,
+    "expanded_sources": 125,
+    "equal_to_original_make_variables": true
+  },
+  "verification": {
+    "focused_python_tests": 4,
+    "force_load_native_application_link_exit_status": 0,
+    "nm_archive_and_platform_check_exit_status": 0,
+    "ground_guest_link_nm_mutant_exit_status": 1,
+    "ground_guest_link_forced_link_mutant_exit_status": 1
+  },
+  "mutant": "A separate unused archive member refers to the exact mangled get_player_acceleration_ground symbol provided only by the guest adapter. Both independent checks reject it.",
+  "logs_in_root_build": [
+    "native-closure-force-link.log",
+    "native-closure-verified.json",
+    "native-closure-ground-mutant.json",
+    "native-closure-ground-mutant-link.log"
+  ],
+  "limits": [
+    "No behavior, image parity or gameplay claim.",
+    "Private packet has no full gate; root must refresh the judge manifest and integrate after green HEAD.",
+    "Source manifest is deliberately outside the judge hash list; native closure and forced linkage guard it."
+  ],
+  "root_integration": {
+    "source_instrumentation_commit": "b48b504",
+    "command": "make -j10 native-closure",
+    "exit_status": 0,
+    "focused_tests": 4,
+    "log": "build/native-closure-integration.log",
+    "integration_gate": "pending full tooling checkpoint"
+  }
+}

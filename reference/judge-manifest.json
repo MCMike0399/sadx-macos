@@ -1,12 +1,12 @@
 {
   "change": {
-    "base_commit": "060097960285b8968e49cea6b608e4985e939982",
-    "evidence": "reference/production-integration-20261021/native-character-check-prerequisites-judge.json",
-    "evidence_sha256": "10efd77198abac69a01b5929cb3013fcbf457235250d3a3ba8792ae05fb55d71",
-    "reason": "Qualify native character checkpoint prerequisites and preserve legacy voice coverage; full gate interrupted by user pause"
+    "base_commit": "b48b50439d724843349716675434abebd4472f2c",
+    "evidence": "reference/production-integration-20261026/native-closure-evidence.json",
+    "evidence_sha256": "dfefbed999e5389eee881c5b7c535bfc53b0ae8b0f110f459065baabc942b637",
+    "reason": "Verify whole native archive closure and move unchanged production sources outside protected Makefile; real forced link and hidden guest-link mutant verified"
   },
   "files": {
-    "Makefile": "9b05610d4ce5d11f984dfd4482cd226323f905889c2b39c021fe03606f18e8a6",
+    "Makefile": "23ea29a16e35d59d4a95d5f9c096ccfa463cde4b14fb849142cf3bd3ffdde98b",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
     "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
     "reference/frame-control-corpus.tsv": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",
@@ -559,6 +559,7 @@
     "tests/python/test_music_assets.py": "929643acf9079e3502ca33efeef85f3b8eb01fa05d40814137f5c415835390be",
     "tests/python/test_music_menu_prefix.py": "55459f5b68f95a4b46aef9b47bd05c906182d38ec99b77c474bc1f9fd65be4e4",
     "tests/python/test_music_publication.py": "b144d5359b9e0e53d148c63c7dabe248237321d35d592ba5f3d7da82a3100856",
+    "tests/python/test_native_closure.py": "b41630f057e2f69982e8257d03de98ca07c7952de193d34b8d3b21388cad1f85",
     "tests/python/test_native_main_menu_journey.py": "f6fb468ca52139e7c585c1d09004c41216b37e3a17e2f0fdaf0faea812ca409c",
     "tests/python/test_native_settings.py": "6496b84d39012c5ea69aacd06ad1d41475f580016da9c22ab4a5f2b44dea58d6",
     "tests/python/test_provenance.py": "ce62fc0efc2ef9a92b2493adaf994fcbc38af4427c16c28eabe6aea72287fcc2",
@@ -590,6 +591,7 @@
     "tools/gate/check_judge.py": "7001f246744cfe0af44eaff71c0689200ab514fa3c722415df70b9d01e89c4d1",
     "tools/gate/check_layers.py": "2b72408ccd936baa5da22b36eefbf90ce2af4ebf1ab01dc63a5f45f5fa9615c1",
     "tools/gate/check_library_initial_state.py": "6d5d21de9176f715328496408b5e87e5d80f72793cdfe13a4e7dc09931201080",
+    "tools/gate/check_native_closure.py": "405656d6154dc89aec53cdc49c854ae6ec9287b7bb58dc894daa6ee07d8bc2d2",
     "tools/gate/check_native_frame_control.py": "4b63a311a35287d1df5abb5140ef03f6f840eab5e1abcca67c97c415a5f5a76c",
     "tools/gate/check_ninja_fog_initial_state.py": "b4f78c3945b297016419735160c15baf817d0cd46567e742750e390db6f24679",
     "tools/gate/check_ninja_queue_initial_state.py": "783536e1128bf6cbe007d80f67efb2c03d2f907126c53adfed95cc1e4b02ea92",
