@@ -425,3 +425,15 @@ build/object-draw-test: tests/unit/object_draw.cpp tests/probes/object_draw_comp
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -include tests/probes/object_draw_compat.hpp $< tests/probes/object_draw_compat.cpp build/libsadx-core.a -o $@
 build/native-object-draw-probe.dylib: tests/probes/native_object_draw_probe.cpp tests/probes/object_draw_compat.cpp tests/probes/object_draw_compat.hpp build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) -include tests/probes/object_draw_compat.hpp $< tests/probes/object_draw_compat.cpp build/libsadx-core.a -o $@
+
+# Original normal/UV strip packet: isolated source closure plus link-time device receipts.
+build/normal-uv-strip-test: tests/unit/normal_uv_strip.cpp tests/probes/native_normal_uv_strip_probe.cpp tests/probes/normal_uv_strip_probe.hpp src/engine/normal_uv_strip.cpp src/engine/normal_uv_strip.hpp src/cpu/x87_math.cpp build/softfloat/softfloat.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -Itests/probes tests/unit/normal_uv_strip.cpp tests/probes/native_normal_uv_strip_probe.cpp src/engine/normal_uv_strip.cpp src/cpu/x87_math.cpp build/softfloat/softfloat.a -o $@
+build/native-normal-uv-strip-probe.dylib: tests/probes/native_normal_uv_strip_probe.cpp tests/probes/normal_uv_strip_probe.hpp src/engine/normal_uv_strip.cpp src/engine/normal_uv_strip.hpp src/cpu/x87_math.cpp build/softfloat/softfloat.a
+	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) -Itests/probes tests/probes/native_normal_uv_strip_probe.cpp src/engine/normal_uv_strip.cpp src/cpu/x87_math.cpp build/softfloat/softfloat.a -o $@
+
+# The concrete material probe supplies link-time device receipts.
+build/native-material-correction-probe.dylib: tests/probes/native_material_correction_probe.cpp src/engine/material_correction.cpp src/engine/material_correction.hpp build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) tests/probes/native_material_correction_probe.cpp src/engine/material_correction.cpp build/libsadx-core.a -o $@
+build/material-correction-test: tests/unit/material_correction.cpp src/engine/material_correction.cpp src/engine/material_correction.hpp build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/material_correction.cpp src/engine/material_correction.cpp build/libsadx-core.a -o $@
