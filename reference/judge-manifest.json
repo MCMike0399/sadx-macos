@@ -1,12 +1,12 @@
 {
   "change": {
-    "base_commit": "2e15b87614c469348f083e59a777f7619742cabb",
-    "evidence": "reference/production-integration-20261026/gamma-native-binding/setup-evidence.json",
-    "evidence_sha256": "a4d4c1e0b319a766009dcd9a1c65aa508d195799c68a4853a057753cf4a780ec",
-    "reason": "Register reviewed Gamma dependencies and actual native binding compiler/test setup; refresh unchanged startup oracle receipt"
+    "base_commit": "a6b73cc562b5158913f0df45bf96135b27676fd5",
+    "evidence": "reference/production-integration-20261026/selection-player-queries/proof.json",
+    "evidence_sha256": "66046ecb79b6b44bdf34d77594918c84ae78feda673ed7a09b33cda14de24abb",
+    "reason": "Register newly integrated f806211 bootstrap predicate oracle and appended unit/compiler recipes; existing source and old judge inputs unchanged"
   },
   "files": {
-    "Makefile": "6ec3d0c46af7c09e5faca183672853fb4642bf027a33cedc8d1c63e8dd099e71",
+    "Makefile": "ed8e228dfcbd1a420488e260e0f9dee316173ce72da2544dc036ad570d0a0e1a",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
     "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
     "reference/frame-control-corpus.tsv": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",
@@ -511,6 +511,7 @@
     "tests/probes/native_screen_init_probe.cpp": "f14cbf553b934adb7152d3ccbc272a3e438ca9b30e8aedc6febfcdb052a6c9ed",
     "tests/probes/native_screen_polygon_probe.cpp": "dcd4d808f68dcf8ad2b92d8f32e3bc3e1ac82734633e1edbe2b2209327ce8325",
     "tests/probes/native_selection_camera_probe.cpp": "39632ae98b8463d91cad9b677d2c0778c1874f2eb412d315b76afc73d81de1e1",
+    "tests/probes/native_selection_player_queries_probe.cpp": "52db7a55773982a58653b18bb4a17abb303469f9ed4c6b0caf24d6e0cc9af32d",
     "tests/probes/native_selection_preview_probe.cpp": "ef6c6e2f505058720b4571acdc572a0e6ea7c4696edba9c3e6580c320f8ece22",
     "tests/probes/native_selection_question_probe.cpp": "2c63fa62fb2e7217bc3d7515e4ec7059cfb1af1f286a64efd78970f3e5346946",
     "tests/probes/native_session_control_defaults_probe.cpp": "09f4e19da8c5dfaf065dafe128879e0fdfef9e313b7b88e2da293897b9487a16",
@@ -616,7 +617,7 @@
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",
     "tests/python/test_voice_publication.py": "5c00051d9b3de640f64e224dda4d810cdd7d26acafd91d7b1dc44e9786a734f3",
-    "tests/unit/manifest.tsv": "457f0f70e7afa666aba6c70840e17aaa19deeda3e706d7a226ebee7d5b971023",
+    "tests/unit/manifest.tsv": "5dfb47b5e17619a8ad8fb7bbe44dfd6b6b1eb5babb840eb6f9e87015df4dd790",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",
@@ -864,6 +865,7 @@
     "tools/oracles/verify_original_screen_init.py": "896bc6521c4a99248669d64b4f8a25b0b19213df165aef6ac3f84f0fb881ab3a",
     "tools/oracles/verify_original_screen_polygon.py": "1c83efd5d540155282c795c64872454fcc8dc284888857d9481e514033be5d24",
     "tools/oracles/verify_original_selection_camera.py": "00f1dc05261f4b2ec388671f4b8e38cd09b6cc0c546045ec38b77af4c675a6e1",
+    "tools/oracles/verify_original_selection_player_queries.py": "5a6642aeb290ca48e767637399a9f64b11f70878459054057ea09ba7cacb8c74",
     "tools/oracles/verify_original_selection_preview.py": "3d14e7e5ddbd82730eecd4a68b6a6f173a9158149a38e1726a12ea9ebb1aaf8c",
     "tools/oracles/verify_original_selection_question.py": "28077bbaad71c612a405e5c960842b64952f474b75b7e1a1db13203325047118",
     "tools/oracles/verify_original_session_control_defaults.py": "0135a005267b13919da3272dc89085722bc73682fd431ca379d6b40c4d9a31e0",

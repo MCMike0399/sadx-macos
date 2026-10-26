@@ -464,3 +464,9 @@ build/actor-current-test: tests/unit/actor_current.cpp src/player/actor_current.
 # Native Gamma binding test uses actual imported metadata and the shipping closure.
 build/native-gamma-binding-test: tests/unit/native_gamma_binding.mm src/apps/native_gamma_actor_assets.hpp build/libsadx-native.a
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-native.a -framework Foundation -o $@
+
+# Native bootstrap predicates, isolated from reference runtime and original binaries.
+build/native-selection-player-queries-probe.dylib: tests/probes/native_selection_player_queries_probe.cpp src/player/selection_player_queries.cpp src/player/selection_player_queries.hpp
+	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) tests/probes/native_selection_player_queries_probe.cpp src/player/selection_player_queries.cpp -o $@
+build/selection-player-queries-test: tests/unit/selection_player_queries.cpp src/player/selection_player_queries.cpp src/player/selection_player_queries.hpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/selection_player_queries.cpp src/player/selection_player_queries.cpp -o $@
