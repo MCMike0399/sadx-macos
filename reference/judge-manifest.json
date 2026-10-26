@@ -1,10 +1,9 @@
 {
   "change": {
-    "base_commit": "09421ac9e5c2b50173522f8554fcebac6aa05b80",
+    "base_commit": "cb86c98f831e9d8aee8ba87985b77a4ab316d6d4",
     "evidence": "reference/production-integration-20261026/texture-number-wrapper/proof.json",
-    "evidence_sha256": "68bd1c877f636ecace5cac0c96f39ec950a9a5cbc2cf2329f24720e5b0666aa7",
-    "mode": "additions-only",
-    "reason": "Register the actual78d140 texture-number wrapper judge while preserving all existing texture/sprite judges"
+    "evidence_sha256": "7d2825554011dc2908828d23beb73b5bc792fe670e990598bbf5a22f7340df63",
+    "reason": "Track actual78d140 texture-number wrapper and rerun unchanged texture identities after correcting SpriteImmediate caller; no expected inputs changed"
   },
   "files": {
     "Makefile": "70f0bac9f98a9805db7a0e86e04aa9587e6e13eee73faca2c8e7ad0fdae7cea9",
@@ -267,7 +266,8 @@
     "reference/oracle-reports/task_work.cases.bin": "e2a3c03d9d67f4162c8838ca06f0664104d7e81201a946cf9e423749303da192",
     "reference/oracle-reports/task_work.json": "d6207dbe834866bd25b2191bdd4c82ed30685370226b65d2a2f1fa61fe071897",
     "reference/oracle-reports/texture_list_gate.json": "f1b4b69a21915a6f1f365db390883d3a1f586d7d1b4eeeba761544007a9d2a90",
-    "reference/oracle-reports/texture_selection_core.json": "6d22aaabc570dcd6fcc17e642438b09cbd2d859bbb284a2ceb6cab3bab88fd01",
+    "reference/oracle-reports/texture_number.json": "cef6820ffe60b7376abb8da1572a86da3b4e16c22a11a208b892176e3e87c1af",
+    "reference/oracle-reports/texture_selection_core.json": "986ac81b426427a23201fac53c8efb1b9d1c153e24f1291a51c18360ea98e81d",
     "reference/oracle-reports/title_background.json": "25e380ac26578c080187b4a53bb59e0f43bb8ef707bc7ebcca79a984e243676e",
     "reference/oracle-reports/title_background_pipeline.json": "dc6588e84136a39e6794571c1b2c7786bda71b6ca0a4b8c5d5ee025e60dfe140",
     "reference/oracle-reports/title_dialog.json": "4cae5067b1d986aa61040dc78f0343543aa7dea9714cc4e947dc852f6cfa2aa3",

@@ -1,0 +1,758 @@
+{
+  "schema": 1,
+  "scope": "Source-context design packet only; no implementation, build, recovery launch, oracle or gate.",
+  "base_commit": "940dca3",
+  "prior_packet_commit": "8ae7ea3",
+  "prior_packet": {
+    "path": "/Users/burbujamc/Developer/sadx-wt-basic-model/reference/production-integration-20261026/basic-model-context.json",
+    "sha256": "406b77aecbdc8e65ddf184cb8f5eb6cf2ea65d6f9a1a78387c28e75262938d08"
+  },
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "resource_observation": {
+    "runtime_pack": "characters/sonic-selection.actions",
+    "runtime_pack_sha256": "df53cf2eb5427491cd444350b231f9b168060602b65a8cf93371f6ad0f38d423",
+    "record_count": 3302,
+    "metadata_sha256": "79e1edec69679f303318f290b068be17f60ec38e331c04258234074325711b33",
+    "question_object_id": 2942,
+    "objects": [
+      {
+        "object_id": 2942,
+        "model_id": 2943,
+        "child_id": 0,
+        "sibling_id": 0
+      }
+    ],
+    "models": [
+      {
+        "model_id": 2943,
+        "vertex_count": 350,
+        "mesh_count": 1,
+        "material_count": 1,
+        "has_vertex_normals": true,
+        "meshes": [
+          {
+            "ordinal": 0,
+            "primitive_index": 3,
+            "material_index": 0,
+            "polygons": 37,
+            "layout_index": 5,
+            "has_runtime_buffer": false
+          }
+        ]
+      }
+    ]
+  },
+  "local_cache_root": "/Users/burbujamc/Developer/sadx-macos",
+  "dossiers": [
+    {
+      "path": "reference/inventory-raw/native-basic-model-render-recovery-20261021/native-basic-model-begin.json",
+      "sha256": "2a602d843b359377174e52233a8ee85404dcc5e2154489f83225fce5a0879714",
+      "evidence_id": "ev_d287b4e6f623dd945a7b51e867e5b76057a81afda3f1e492cd2ed4e4ee136aac",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x781cc0",
+      "instruction_count": 79,
+      "direct_call_targets": [
+        "0x00644340",
+        "0x00791a80"
+      ],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x781cc0",
+          "end": "0x781de9"
+        }
+      ]
+    },
+    {
+      "path": "reference/inventory-raw/native-basic-model-render-recovery-20261021/native-basic-model-dispatch.json",
+      "sha256": "25e1a15d28d7610adff5e75026dc78b6dfe41aaa1b6d6ca90c888db5ee2aac0b",
+      "evidence_id": "ev_8156aa71a36fb1ef6e6a9e079e00d4f81d2eae5b67852d2cf259ab0211d99b57",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x77eda0",
+      "instruction_count": 149,
+      "direct_call_targets": [
+        "0x00784850",
+        "0x00791a50",
+        "0x00791ab0",
+        "0x00791ad0"
+      ],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x77eda0",
+          "end": "0x77ef4d"
+        }
+      ]
+    },
+    {
+      "path": "reference/inventory-raw/native-basic-model-render-recovery-20261021/native-basic-model-draw.json",
+      "sha256": "4ae4c5b5c2e75c398e3004da20170169d57b73716a669434f55549bbee405a0b",
+      "evidence_id": "ev_0fc28c97c1cc4362a7b6809e75a9060d63c3d331fd8b045c58bed503d72805ad",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x77ef70",
+      "instruction_count": 6,
+      "direct_call_targets": [
+        "0x0077eda0",
+        "0x00781cc0"
+      ],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x77ef70",
+          "end": "0x77ef86"
+        }
+      ]
+    },
+    {
+      "path": "reference/inventory-raw/native-basic-model-render-recovery-20261021/native-basic-model-end.json",
+      "sha256": "262c4f0691832a24e275b347bc79faa0ee904994b7ec12948899c345a29001ec",
+      "evidence_id": "ev_ceebbc3a8b5b2e4afd7d16309c03b125538eec883560ba884bbad6a3b78c8ca4",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x781df0",
+      "instruction_count": 9,
+      "direct_call_targets": [
+        "0x00794500"
+      ],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x781df0",
+          "end": "0x781e13"
+        }
+      ]
+    },
+    {
+      "path": "reference/inventory-raw/native-basic-model-render-recovery-20261021/native-basic-model-material.json",
+      "sha256": "185cb53011e163f8ab66ba67bc23699d7596744e23a51747f18c2b0e146e034c",
+      "evidence_id": "ev_2bc1c582e585ff1d1ec6c26e282bb009f9ad42e1e7c57fe33bc51e96d72648d8",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x784850",
+      "instruction_count": 187,
+      "direct_call_targets": [
+        "0x00781ec0",
+        "0x0078bba0",
+        "0x0078d140",
+        "0x00791990",
+        "0x007944b0",
+        "0x00794500"
+      ],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x784850",
+          "end": "0x784ade"
+        }
+      ]
+    },
+    {
+      "path": "reference/inventory-raw/native-basic-model-render-recovery-20261021/native-basic-model-transform.json",
+      "sha256": "f1d56323e77cb21321913e11afdd75ca0d911cc52c026a7d9fab70dc49904d90",
+      "evidence_id": "ev_f7eafd959e6b044caea7da32d31649c75bbb6d603722faeae5ed5b3224f9c975",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x791a80",
+      "instruction_count": 12,
+      "direct_call_targets": [
+        "0x00770804",
+        "0x00770d10"
+      ],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x791a80",
+          "end": "0x791aa3"
+        }
+      ]
+    },
+    {
+      "path": "reference/ghidra-action-fp-recovery/extra-791a50.json",
+      "sha256": "2f6e6bd9f2d97cfcb2a08f6c3b6fca083d3c265afcd45eeac1261d0ed6be770f",
+      "evidence_id": "ev_feb290914c8d74a7451ff5dcea27c81ac8910d2bcf23e3b27c164ee8ea8647eb",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x791a50",
+      "instruction_count": 11,
+      "direct_call_targets": [
+        "0x00770804"
+      ],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x791a50",
+          "end": "0x791a7b"
+        }
+      ]
+    },
+    {
+      "path": "reference/ghidra-action-fp-recovery/extra-791ab0.json",
+      "sha256": "9fc81e7da2c5e997e03c36c20d0eb42222333fab7c521d118a2abe4c94825838",
+      "evidence_id": "ev_89291099fcd2db3c8f8e83d2c4d0cf2209e99abd6734cb12568ffda25aebd73e",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x791ab0",
+      "instruction_count": 7,
+      "direct_call_targets": [],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x791ab0",
+          "end": "0x791ac8"
+        }
+      ]
+    },
+    {
+      "path": "reference/ghidra-action-fp-recovery/extra-791ad0.json",
+      "sha256": "67cfd538bc86c347af38bb32b785dcaace87f3e301e5f1b952398ac8f67b75a4",
+      "evidence_id": "ev_b1baaacd47aba92b159c1fe9573b454fbd1a2f21d95028ca1325435da88756e7",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x791ad0",
+      "instruction_count": 7,
+      "direct_call_targets": [],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x791ad0",
+          "end": "0x791ae8"
+        }
+      ]
+    },
+    {
+      "path": "reference/ghidra-action-fp-recovery/extra-791990.json",
+      "sha256": "a9d64ff1bbd3e7b98616c2cf42d33407e7ae61460e866a881e9f923cc13656e4",
+      "evidence_id": "ev_512f305a2768e634c52e3e0e6f4c282b070d0c1599e1cee38224f7caed4b2531",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x791990",
+      "instruction_count": 66,
+      "direct_call_targets": [],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x791990",
+          "end": "0x791a49"
+        }
+      ]
+    },
+    {
+      "path": "reference/ghidra-action-fp-recovery/extra-78cf20.json",
+      "sha256": "97dd8f6f31e9cb23e1a116c2a38f08c30fc1b14c96cf4ccc48f478c0ec488258",
+      "evidence_id": "ev_62ad6ef39b7259413cce0c1b5635dcafebbd3ac4a759a97ec025d8be9ba0f9c5",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x78cf20",
+      "instruction_count": 29,
+      "direct_call_targets": [
+        "0x0078cdc0"
+      ],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x78cf20",
+          "end": "0x78cf72"
+        }
+      ]
+    },
+    {
+      "path": "reference/ghidra-action-fp-recovery/extra-78cdc0.json",
+      "sha256": "615ff7665e5716bc77c8decdd5c4df4c9cd35272c506c0f9f7df4f4eeb522611",
+      "evidence_id": "ev_1bdfca595761ae729e01fb92a6c7cad3ff6c9c94f069c708feed46b816c28c6d",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x78cdc0",
+      "instruction_count": 125,
+      "direct_call_targets": [
+        "0x0078bad0",
+        "0x0078bb20"
+      ],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x78cdc0",
+          "end": "0x78cf13"
+        }
+      ]
+    },
+    {
+      "path": "reference/ghidra-action-fp-recovery/extra-77f440.json",
+      "sha256": "a8d3c58f7d83d467cec12b78b396a508e97340c32ea3ea25ce1436fdf958e4e2",
+      "evidence_id": "ev_396efff0678fd78ca737c4199d9781b4fd00dde4d403de7052ce69d3ee336221",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x77f440",
+      "instruction_count": 12,
+      "direct_call_targets": [
+        "0x0078cf20"
+      ],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x77f440",
+          "end": "0x77f466"
+        }
+      ]
+    },
+    {
+      "path": "reference/ghidra-game-loop-recovery/dbg-78d140.json",
+      "sha256": "e9a67115669ae51c38347c1518206f586b8086cc06541775fb34e3ca1d0c2ea0",
+      "evidence_id": "ev_fb45801d594544b47490559aecd18b682f0bca06d60e77ba9a21eb47618ff9db",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x78d140",
+      "instruction_count": 5,
+      "direct_call_targets": [],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x78d140",
+          "end": "0x78d153"
+        }
+      ]
+    },
+    {
+      "path": "reference/inventory-raw/bridge-projection-791170.json",
+      "sha256": "3b54a1e1de3d3f18a2088ac4151d6bc44128a73631d88818ff6be1666aad2194",
+      "evidence_id": "ev_052edf0562fc941f446ac21b3bdf6c105e26e3165f200a647b83e51bc6682882",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x791170",
+      "instruction_count": 85,
+      "direct_call_targets": [
+        "0x00770804",
+        "0x00770d10",
+        "0x007716df"
+      ],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x791170",
+          "end": "0x7912d7"
+        }
+      ]
+    },
+    {
+      "path": "reference/inventory-raw/native-bootstrap-game-init.json",
+      "sha256": "436fbee051f4a7f6eae1a6a6981e680d4355ce11b0b8dbe40c7181ce5865f7d6",
+      "evidence_id": "ev_9a1873c9485eef3f291c3a4ab246b4b986fb42edeb1634d9517b886c900b5a86",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x413c00",
+      "instruction_count": 40,
+      "direct_call_targets": [
+        "0x00425af0",
+        "0x00425fe0",
+        "0x0043b490",
+        "0x00783260",
+        "0x00785330"
+      ],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x413c00",
+          "end": "0x413c8f"
+        }
+      ]
+    },
+    {
+      "path": "reference/inventory-raw/bridge-d3dx-multiply-lazy.json",
+      "sha256": "602521564d7d42de02e9b340643c51877bac48ea938f1048700a51d65eb46b79",
+      "evidence_id": "ev_43f40b642ed5a0cdbfcac15fbf13261bbc81c9037e79d17e09a799d4224929d6",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x7707f7",
+      "instruction_count": 3,
+      "direct_call_targets": [
+        "0x0077350c"
+      ],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x7707f7",
+          "end": "0x770803"
+        }
+      ]
+    },
+    {
+      "path": "reference/inventory-raw/native-texture-lifetime-78bba0.json",
+      "sha256": "b41dce19f65139d3adadd98029db8d3b72b949e04e4dc26707736515cb061fe4",
+      "evidence_id": "ev_819acfec334710b7889d9ad715d2313ca4017945d7895b8d4282a26273d8274f",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x78bba0",
+      "instruction_count": 11,
+      "direct_call_targets": [],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x78bba0",
+          "end": "0x78bbcf"
+        }
+      ]
+    }
+  ],
+  "navigation_only_missing_full_dossiers": [
+    {
+      "procedure": "0x7835f0",
+      "path": "reference/inventory-raw/inv-callees-7835f0.json",
+      "sha256": "c7cd70a5c9266ca9c803b2c2e26fcc8136bb614df1698a45203b09952b57a5c3",
+      "evidence_id": "ev_873865b28eb87df9ffd1fd309a6fd3fb54f99320d60408648f42b1cc796589f7",
+      "operation": "procedure_callees",
+      "direct_callees": [
+        "0x794600",
+        "0x794630",
+        "0x794750",
+        "0x794760"
+      ],
+      "body_available": false
+    },
+    {
+      "procedure": "0x794600",
+      "path": "reference/inventory-raw/inv-callees-794600.json",
+      "sha256": "332cc309acb018b5f6805094c7a11a633d57e336e98a346ae4d7143215211efa",
+      "evidence_id": "ev_7fd6afc11f7d01961ccdf81479de2186a6d456db553dd05c6eb85de0f7641427",
+      "operation": "procedure_callees",
+      "direct_callees": [],
+      "body_available": false
+    },
+    {
+      "procedure": "0x794630",
+      "path": "reference/inventory-raw/inv-callees-794630.json",
+      "sha256": "6f82e8518679cf15c3a7dc2970527a2de6da6598e9779be54a2d19951fb61bec",
+      "evidence_id": "ev_46e166f691e3966025ebc1a3d68562c8f55073e3a5742cf37851595494e663fb",
+      "operation": "procedure_callees",
+      "direct_callees": [],
+      "body_available": false
+    },
+    {
+      "procedure": "0x794750",
+      "path": "reference/inventory-raw/inv-callees-794750.json",
+      "sha256": "f5f8629b4e0e3bd1ae98a0b25052056be32cd20a24f02673380598639366828b",
+      "evidence_id": "ev_317121ee0e624ee658e456117f57e9dc034c434d66ed4fd65f44c11231e3d9d2",
+      "operation": "procedure_callees",
+      "direct_callees": [],
+      "body_available": false
+    },
+    {
+      "procedure": "0x794760",
+      "path": "reference/inventory-raw/inv-callees-794760.json",
+      "sha256": "c0cbb4b5b8bc18bdf264867b852c8916730d9cdbd37e8440a8af49d642e9e7e1",
+      "evidence_id": "ev_b844a23c9eebb04cec9c891a712eb5fcdfc074f1b23e98bff6ad9fdba3c10a45",
+      "operation": "procedure_callees",
+      "direct_callees": [],
+      "body_available": false
+    },
+    {
+      "procedure": "0x781ec0",
+      "path": "reference/inventory-raw/inv-callees-781ec0.json",
+      "sha256": "1dcafa934350a2b286be8e1e641a4374ed401863f7bc4a3495264908a1af070f",
+      "evidence_id": "ev_4dd2b4fbca59af3ea8c46391bb1a0229cee9b7ca1c7b83996e1c14147dfe9a0e",
+      "operation": "procedure_callees",
+      "direct_callees": [
+        "0x644340"
+      ],
+      "body_available": false
+    },
+    {
+      "procedure": "0x7944b0",
+      "path": "reference/inventory-raw/inv-callees-7944b0.json",
+      "sha256": "548eebdda516a390966fd2ba1052e10c45e94cc71bdad0a1dd2bdb742522424d",
+      "evidence_id": "ev_45a0730f8d111d31985d974293e22235b1ba6015cb0151154222a56af0700ee4",
+      "operation": "procedure_callees",
+      "direct_callees": [],
+      "body_available": false
+    },
+    {
+      "procedure": "0x794500",
+      "path": "reference/inventory-raw/inv-callees-794500.json",
+      "sha256": "8dc17469baa2043b322af5a2e5e0a6ce384cf6ecabe2b46d5d0148757ce14a57",
+      "evidence_id": "ev_fb3b148c316874dd615f136afb5de08af36a696b82934e409592c04e043261db",
+      "operation": "procedure_callees",
+      "direct_callees": [],
+      "body_available": false
+    },
+    {
+      "procedure": "0x644340",
+      "path": "reference/inventory-raw/inv-callees-644340.json",
+      "sha256": "431e0a84a6304f24a4c8883a86409a1ec559d2a9200a9b1a3aac3bec905b8087",
+      "evidence_id": "ev_5f5ebab2b81717a8ab3ab53402c95a2dcee7355119bc8f67420031dd4470672a",
+      "operation": "procedure_callees",
+      "direct_callees": [],
+      "body_available": false
+    }
+  ],
+  "profile": {
+    "manifest_sha256": "926395f83d0c5d92455ef93df91c950718057ae77b99622fb8e1e19cbf0f0e1e",
+    "full_body_intersections": [
+      {
+        "procedure": "0x78cf20",
+        "patch": {
+          "va": "0x78cf20",
+          "size": 5,
+          "owner": "loader",
+          "kind": "jump",
+          "target": "stSetTexture_r",
+          "condition": "IsGamePatchEnabled(\"CrashGuard\") -> false",
+          "active": false,
+          "source_ref": "CrashGuard.cpp:238",
+          "handled_by": null,
+          "original_bytes": "568bf1578b"
+        }
+      },
+      {
+        "procedure": "0x78cdc0",
+        "patch": {
+          "va": "0x78cf06",
+          "size": 5,
+          "owner": "loader",
+          "kind": "jump",
+          "target": "GeneratePalletizedMipmaps_asm",
+          "condition": "EnableForcedMipmapping -> false (mipmap::enable_auto_mipmaps)",
+          "active": false,
+          "source_ref": "AutoMipmap.cpp:744",
+          "handled_by": null,
+          "original_bytes": "e905ffffff"
+        }
+      },
+      {
+        "procedure": "0x77f440",
+        "patch": {
+          "va": "0x77f440",
+          "size": 5,
+          "owner": "loader",
+          "kind": "jump",
+          "target": "njSetTextureNum_r",
+          "condition": "IsGamePatchEnabled(\"CrashGuard\") -> false",
+          "active": false,
+          "source_ref": "CrashGuard.cpp:239",
+          "handled_by": null,
+          "original_bytes": "a124fad003"
+        }
+      },
+      {
+        "procedure": "0x791170",
+        "patch": {
+          "va": "0x79124a",
+          "size": 5,
+          "owner": "loader",
+          "kind": "jump",
+          "target": "set_fov",
+          "condition": "IsGamePatchEnabled(\"FOVFix\") -> false (fov::initialize from PatchWindow)",
+          "active": false,
+          "source_ref": "FixFOV.cpp:180",
+          "handled_by": null,
+          "original_bytes": "d9f3dcc0d9"
+        }
+      },
+      {
+        "procedure": "0x413c00",
+        "patch": {
+          "va": "0x413c13",
+          "size": 6,
+          "owner": "loader",
+          "kind": "data",
+          "target": "0x90u",
+          "condition": "test-spawn command-line arguments (reference launch has none) -> false",
+          "active": false,
+          "source_ref": "testspawn.cpp:861",
+          "handled_by": null,
+          "original_bytes": "89355cc4b203"
+        }
+      }
+    ],
+    "limits": [
+      "No profile checker executed. Empty intersections certify only these cached body ranges against static manifest, not the missing lower bodies or indirect table writes.",
+      "FixVertexColorRendering=false and E102NGonFix=false; original tables retained."
+    ]
+  },
+  "source_files": [
+    {
+      "path": "src/runtime/native_display.hpp",
+      "sha256": "4436956c6d0545ab8ffd9818d8b3690c2e063c7dfd4174995bcea709d15f10c0"
+    },
+    {
+      "path": "src/runtime/native_display.cpp",
+      "sha256": "446ff0ef51babba8c02d8e2e1c389bbac4378746884e3a23a900f8d665d286fe"
+    },
+    {
+      "path": "src/runtime/native_object_draw.cpp",
+      "sha256": "dc490a92c6f956bb21587f1529e18c210a5cb98432301e99bf629fc0824944cc"
+    },
+    {
+      "path": "src/runtime/native_object_render_seams.cpp",
+      "sha256": "442807da1938e3654d7d40bf8a068436cd5accb66f07db9e4fb2e15236ff2f67"
+    },
+    {
+      "path": "src/runtime/native_selection_question.cpp",
+      "sha256": "ce329256af0cd916195e917a409834f58cdb2892dbd6ff9da538581474098407"
+    },
+    {
+      "path": "src/runtime/logo_renderer.cpp",
+      "sha256": "79305072dacde9be4b43f862ff062c0e5aef7e11c1468cb0ff3f40e982893b5c"
+    },
+    {
+      "path": "src/engine/ninja_view_native.cpp",
+      "sha256": "f84e70db6daf2a58dc8c098c095ddeede0371a18de8db93d83ed4c02843f6985"
+    },
+    {
+      "path": "src/engine/ninja_view.cpp",
+      "sha256": "aad37d5b8a2ff72bc2f8f3ab43459aef6d119f64a4304eb9880d4c8993d2c232"
+    },
+    {
+      "path": "src/engine/ninja_queue_native.cpp",
+      "sha256": "937a14c992604e61f869b05c533ed3f57549450f8f5a78c82457a7c3e49c1887"
+    },
+    {
+      "path": "src/engine/texture_selection_native.cpp",
+      "sha256": "48ffd34ae287ce947f8193d7ae4d352605383f2ba9ba4170f76707bc65e673ac"
+    },
+    {
+      "path": "src/engine/texture_selection_internal.hpp",
+      "sha256": "9417bbd4372efdae2958b8a060c77074625aaf18fab3caacfc7a9ee238857389"
+    },
+    {
+      "path": "src/engine/native_texture_palette.hpp",
+      "sha256": "7bb4a4d1081a3a4e8c0c77e3283ff613e40384e97f6c4c72aed774894cd7f6b8"
+    },
+    {
+      "path": "src/engine/character_pack.hpp",
+      "sha256": "0622405eeb2a6c8157a051bcc922a6c653e3878f076a0afbaf0ff94eac6c1065"
+    },
+    {
+      "path": "src/engine/graphics_frame.hpp",
+      "sha256": "001ebff8c298d0dd252433bfe9e5110a19b50ada0204185330db12a48ab22b09"
+    },
+    {
+      "path": "src/game/game_bootstrap.cpp",
+      "sha256": "3461ee0394189845c5d7d54b39179b2870fd35508c355c80129b7e755f3d7670"
+    },
+    {
+      "path": "src/apps/sadx_native.mm",
+      "sha256": "059227f5432b1651b6edf4ff981d994dc7d3dc89a41e2d4332dc8b75dd4c5c54"
+    },
+    {
+      "path": "src/platform/mac/metal_device_frame.mm",
+      "sha256": "5f535b2c905496bb123f3a53e560d23ae1ab7a050a2f8cdef35d992eb4be3837"
+    },
+    {
+      "path": "src/cpu/crt_integer.hpp",
+      "sha256": "f88d5d9b73239055150a35d0fe6363f773c7e62f5b2c1ce62eff5eaabe8333a6"
+    },
+    {
+      "path": "src/math/d3dx_math.hpp",
+      "sha256": "3b997c26013a774f6b85e099f774187ffe9af64369316d2e3e769f6ff26ea8f0"
+    },
+    {
+      "path": "tools/gate/profile_patches.json",
+      "sha256": "926395f83d0c5d92455ef93df91c950718057ae77b99622fb8e1e19cbf0f0e1e"
+    },
+    {
+      "path": "reference/fp-control-census.json",
+      "sha256": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "sha256": "7eaab8cb3fe16e3a62818d1cc2408a2531120185304b05d64fd5a6f7a4f84f85"
+    },
+    {
+      "path": "src/runtime/native_message_display.cpp",
+      "sha256": "316df90f42c68b08fe7f85ffdded40d751dd90530df607deba1fdf18d4943acc"
+    },
+    {
+      "path": "src/engine/character_pack.cpp",
+      "sha256": "b2c5e28e05279a2bd20608aec766d3bfcb471bd11e659f9113dd77e677214a8d"
+    },
+    {
+      "path": "src/engine/ninja_queue_native.hpp",
+      "sha256": "15cedb7cd3e6c04096d9f5dd3b9f986acfea3d010fb7b7b5d08653586355511b"
+    },
+    {
+      "path": "src/engine/texture_selection_native.hpp",
+      "sha256": "70f16e203cc9733fc1cf11cab77608f47b0189e7525841dcfb42b115d89c7b49"
+    },
+    {
+      "path": "src/engine/texture_list_gate.cpp",
+      "sha256": "f066052be94a3c951928a194cb217d3816d06831ecb955575a543f780d4ccfe3"
+    },
+    {
+      "path": "src/hle/hle_d3d8.cpp",
+      "sha256": "e46c265671127836783e402b8ccc3e2326a30ee40238632f63ca9120b50f301c"
+    },
+    {
+      "path": "tools/oracles/verify_original_crt_integer.py",
+      "sha256": "29bbd3c4373f5d33f9323373c9c184b10fde46b2656cba412cdf5fbc741a36cc"
+    },
+    {
+      "path": "tools/oracles/verify_original_ninja_view.py",
+      "sha256": "a5d22b42004b142534ff8e994dee32352e8031a941e5789ba9368161416b125f"
+    }
+  ],
+  "external_declarations": [
+    {
+      "path": "reference/sadx-mod-loader/SADXModLoader/direct3d.h",
+      "sha256": "de6748f7329e98f026c5d32837e7a3373ee85605d4d10919a184580752956036"
+    },
+    {
+      "path": "reference/sadx-mod-loader/SADXModLoader/include/ninja.h",
+      "sha256": "9d8a5bea4427cfd7fbbb2c5a0eeaac66ae1977bf385d3f5db474f4ab833a8a49"
+    },
+    {
+      "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+      "sha256": "a2e634caff8d12d20adfe910b5b2db19e2da59cc1c4bb5e913e1df212d55327c"
+    },
+    {
+      "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXVariables.h",
+      "sha256": "a18ab56e9273928765428b9a99ac672266ba59e5f175b9ee43ca9c81723b0c81"
+    }
+  ],
+  "limits": [
+    "Evidence IDs identify full dossiers only where operation=analyze_function; procedure_callees does not recover any function body.",
+    "Resource observation inherited from 8ae7ea3; no new asset decode or live run.",
+    "No active material callback receipt or exact Question FP-entry receipt acquired.",
+    "No cache modifications; all writes restricted to this worktree packet files."
+  ],
+  "dossier_limitations": [
+    "Ghidra Listing reports a terminal call at 0x77edb3 to 0x784ae0 njDrawModel_ (external=false, thunk=false, hasNoReturn=false); fallthrough is excluded by Ghidra's flow model. The reason for the terminal flow is not established by this observation.",
+    "Ghidra Listing reports a terminal call at 0x77ef82 to 0x781df0 RenderFlags_Reset (external=false, thunk=false, hasNoReturn=false); fallthrough is excluded by Ghidra's flow model. The reason for the terminal flow is not established by this observation.",
+    "Ghidra Listing reports a terminal call at 0x78d14f to 0x78cf20 FUN_0078cf20 (external=false, thunk=false, hasNoReturn=false); fallthrough is excluded by Ghidra's flow model. The reason for the terminal flow is not established by this observation.",
+    "Pseudocode and assembly are Ghidra-specific representations, not original source or Hopper-equivalent text.",
+    "Synthetic Ghidra entry-point references without actionable memory sources are omitted.",
+    "Thunk and external classifications are Ghidra FunctionManager observations; they do not resolve targetless calls.",
+    "Unresolved computed or indirect flows without target addresses are not represented as reference edges."
+  ],
+  "explicit_missing_facts": [
+    {
+      "id": "BM-U1",
+      "entries": [
+        "0x7835f0",
+        "0x794600",
+        "0x794630",
+        "0x794750",
+        "0x794760"
+      ],
+      "fact": "Original conversion and buffer helper full bodies, indirect API calls and initialization."
+    },
+    {
+      "id": "BM-U2",
+      "entries": [
+        "0x40a340",
+        "0x3d08420"
+      ],
+      "fact": "CorrectMaterial body, live route callback value and mutations."
+    },
+    {
+      "id": "BM-U3",
+      "entries": [
+        "0x781ec0",
+        "0x7944b0",
+        "0x794500",
+        "0x784ae0"
+      ],
+      "fact": "Conditional helper full bodies and actual reached flag branches."
+    },
+    {
+      "id": "BM-U4",
+      "entries": [
+        "0x389d318",
+        "0x88ae0c",
+        "0x88ae1c"
+      ],
+      "fact": "Reset-world source lifetime/provenance and exact maintained material lookup bytes; no equal-value alias assumed."
+    },
+    {
+      "id": "BM-U5",
+      "entries": [
+        "0x7835f0",
+        "0x794630",
+        "0x791a80"
+      ],
+      "fact": "Actual lower ABI/cleanup, D3DX dispatch and Question FPCW/MXCSR premises."
+    }
+  ]
+}

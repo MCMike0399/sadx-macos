@@ -1,0 +1,30 @@
+{
+ "passed": true,
+ "cases": 3408,
+ "seed": 781140,
+ "mismatches": 0,
+ "first": [],
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_range_sha256": "729ad8f4d2eb050191685d1477db587ddb223dd0938a8be0cf26200a5ff759ec",
+ "library_sha256": "05cc8ac88f308543ac63f834de6b0f836a5326dbf5df6af84923c4ce7e93cca5",
+ "source_files_sha256": {
+  "src/engine/texture_selection_native.cpp": "1d17d34f1bf3110360686ffad4bc4a66a3fdb9f282d7415bc687b72dd39e04cd",
+  "src/engine/texture_selection_native.hpp": "d64d89b89981a676b330e66c8e096d8b0ba8efb784b9c102da094a7e7036f195",
+  "src/engine/texture_selection_internal.hpp": "9417bbd4372efdae2958b8a060c77074625aaf18fab3caacfc7a9ee238857389",
+  "tests/probes/native_texture_number_probe.cpp": "9b27165d7f387cb67fe91eecd41ee387d4b1a1355f3377e7f6a3aab0e39a8450",
+  "tools/oracles/verify_original_texture_number.py": "5edd33e62ec58451081f0943e1b44dde5f0b52722b5130a5a4ad8ed9f55ddc66"
+ },
+ "cases_sha256": "6f2a3e5a8c902471d81f9acd7d976a3d137b403c3c0141e49647727a9d161144",
+ "limits": [
+  "Original78d140 and cache bodies execute without source-byte patches.",
+  "Unprovided array words and non-Memory wrapped fields stop at the original read.",
+  "Palette lock and unavailable device receipts retain established explicit boundaries.",
+  "No physical GPU or completed CharacterSelect proof."
+ ],
+ "tracked_summary": {
+  "full_sha256": "faf6e1fcdc8a100b54dd31883df7620d39a49715bf275b8000693644e5e529cd",
+  "full_bytes": 1397,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

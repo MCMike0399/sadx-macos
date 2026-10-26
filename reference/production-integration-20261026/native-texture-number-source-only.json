@@ -1,0 +1,33 @@
+{
+  "commit": "cb86c98",
+  "source_archive": true,
+  "original_game_inputs_present": false,
+  "prebuilt_game_objects_present": false,
+  "reused_platform_dependency": "Pinned SDL/libusb only, with identical dependency-builder source.",
+  "dependency_builder_sha256": "a1709c569d4b4cc255f56e19a0d5717e87cfcb9fab89361f6c871478de65db50",
+  "build_command": "make -j10 -o build/native-controller-deps/include/SDL3/SDL.h build/sadx-native",
+  "build_exit_status": 0,
+  "app_exit_status": 1,
+  "command": [
+    "/Users/burbujamc/Developer/sadx-macos/build/source-only-native-cb86c98/build/sadx-native",
+    "--assets",
+    "/Users/burbujamc/Developer/sadx-macos/game/imported",
+    "--offscreen",
+    "--paced",
+    "--exit-after",
+    "1500",
+    "--save-directory",
+    "/Users/burbujamc/Developer/sadx-macos/build/source-only-native-cb86c98/qualification/savedata",
+    "--key-events",
+    "500:13:down,501:13:up,750:13:down,751:13:up,900:38:down,901:38:up,950:13:down,951:13:up,1350:13:down,1351:13:up",
+    "--capture-directory",
+    "/Users/burbujamc/Developer/sadx-macos/build/source-only-native-cb86c98/qualification/captures",
+    "--capture-at",
+    "1300,1380,1381,1382,1383,1390"
+  ],
+  "boundary": "native_basic_model_renderer",
+  "frame": 1382,
+  "native_app_sha256": "e8264b966c626519d31b03b530490917a33381584a45387e7318b7e875210917",
+  "image_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+  "main_frontier_image_exact": true
+}
