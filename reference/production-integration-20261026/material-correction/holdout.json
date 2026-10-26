@@ -1,0 +1,70 @@
+{
+  "passed": false,
+  "values_match": true,
+  "cases": 6227,
+  "mismatches": 0,
+  "fp_flag_mismatches": 4567,
+  "flag_examples": [
+    {
+      "case": 0,
+      "expected": 0,
+      "actual": 32
+    },
+    {
+      "case": 1,
+      "expected": 0,
+      "actual": 32
+    },
+    {
+      "case": 2,
+      "expected": 0,
+      "actual": 50
+    },
+    {
+      "case": 3,
+      "expected": 0,
+      "actual": 50
+    },
+    {
+      "case": 4,
+      "expected": 0,
+      "actual": 48
+    },
+    {
+      "case": 5,
+      "expected": 0,
+      "actual": 32
+    },
+    {
+      "case": 6,
+      "expected": 0,
+      "actual": 32
+    },
+    {
+      "case": 7,
+      "expected": 0,
+      "actual": 32
+    }
+  ],
+  "seed": 1662431,
+  "first": [],
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "source_ranges": {
+    "0x40a340-0x40a3f4": "271b31ba602704f0ee2cc05591481cb26c7122064778e5a7f3e31354307ac61b"
+  },
+  "library_sha256": "60568e7eff9bae58a230716e84ee057512d8e3fe6c60d8f1f7dd976757fb709e",
+  "source_files_sha256": {
+    "src/engine/material_correction.cpp": "f5295f412e80a88c9433fd644ed2e4336cca70d01250a0187f38afa44fcb2f93",
+    "src/engine/material_correction.hpp": "bdf8ca0e9c022ee22f1c20e31494cbf6b17f3913f0026346473ea3e65488d02d",
+    "tests/probes/native_material_correction_probe.cpp": "cb2e8acae39b98661f6813e871ef75afc59aab1f0bb30978760e2c34aec6c24f",
+    "tools/oracles/verify_original_material_correction.py": "866b7678d951e55ed91f39ea30f60cb5ab0231851446fab4c930f7b428092923"
+  },
+  "cases_sha256": "6981ba2a3dfa7b2247b26d590139f73421203901c423b292bdb29d8d7998540a",
+  "limits": [
+    "Concrete GetMaterial receipts supply all 17 words even for failing HRESULTs.",
+    "Missing device receipts stop before the call; no uninitialized stack values invented.",
+    "Arithmetic exceptions remain masked, across six precision/rounding control words.",
+    "FP status differences are reported as partial, never a strict pass.",
+    "No native runtime binding, GPU pixels or CharacterSelect completion claim."
+  ]
+}

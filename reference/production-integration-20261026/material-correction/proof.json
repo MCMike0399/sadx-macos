@@ -1,0 +1,33 @@
+{
+  "scope": "Recovered component only, not runtime or GPU closure",
+  "development": {
+    "cases": 4227,
+    "value_mismatches": 0,
+    "fp_status_mismatches": 3231,
+    "verdict": "partial"
+  },
+  "holdout": {
+    "cases": 6227,
+    "value_mismatches": 0,
+    "fp_status_mismatches": 4567,
+    "verdict": "partial"
+  },
+  "mutants": {
+    "caught": 5,
+    "valid": 5,
+    "invalid": 0,
+    "method": "Unchanged tools/gate/mutate.py; every mutant changes value verdict partial to fail."
+  },
+  "ordering_unit": "pass",
+  "new_game_readability_debt": 0,
+  "provenance_errors": 0,
+  "layer_violations": 0,
+  "owner_violations": 0,
+  "profile_unhandled_overlaps": 0,
+  "api": "Plain link-time material operations and borrowed exact arithmetic; no owning state or virtual service interface.",
+  "limits": [
+    "All arithmetic cases use masked exceptions; unmasked fault prefixes unverified.",
+    "Source specular power owner/producer still needs runtime binding evidence.",
+    "No native callback runtime attachment, actual rendering, CharacterSelect or gameplay claim."
+  ]
+}

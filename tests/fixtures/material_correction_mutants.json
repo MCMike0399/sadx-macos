@@ -1,0 +1,27 @@
+[
+  [
+    "wrong_channel_scale",
+    "kColorChannelScale = 0.003921569f",
+    "kColorChannelScale = 0.00390625f"
+  ],
+  [
+    "omit_ambient_red_store",
+    "material.ambient[0] = ambient_red.rounded();",
+    "(void)ambient_red;"
+  ],
+  [
+    "skip_specular_normalization",
+    "normalize_rgb(context, material.specular);",
+    "// mutant: leave specular unnormalized"
+  ],
+  [
+    "normalize_diffuse_alpha",
+    "normalize_rgb(context, material.diffuse);",
+    "normalize_rgb(context, material.diffuse);\n    material.diffuse[3] = (exact(context, material.diffuse[3]) * kColorChannelScale).rounded();"
+  ],
+  [
+    "capture_power_before_device_get",
+    "auto material = get_material(context);\n    // The original publishes Power after the first multiply and before its store.\n    const auto ambient_red = exact(context, material.ambient[0]) * kColorChannelScale;\n    material.power = specular_power(context);",
+    "const auto stale_power = specular_power(context);\n    auto material = get_material(context);\n    const auto ambient_red = exact(context, material.ambient[0]) * kColorChannelScale;\n    material.power = stale_power;"
+  ]
+]
