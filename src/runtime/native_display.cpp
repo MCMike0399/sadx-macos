@@ -1,6 +1,8 @@
 #include "runtime/native_display.hpp"
 #include "math/ninja_sine_table.hpp"
 #include "runtime/engine_code_tables.hpp"
+#include "runtime/model_device.hpp"
+#include "game/library_initial_state.hpp"
 #include <cstring>
 #include <stdexcept>
 
@@ -37,6 +39,27 @@ Display::Display(const std::filesystem::path &directory, frame::ModeState &mode,
     // [platform:graphics] Native 640x480 device creation exposes the same initial
     // viewport as the pinned Direct3D profile. Arbitrary viewports remain unsupported.
     device_state_.viewport = {0, 0, 640, 480, 0, 1};
+    // [platform:graphics] Native host startup performs the library configuration copy
+    // before constructing the source polygon buffers. Counts remain live system state.
+    const auto initial_library = library_initial_state();
+    for (std::size_t index = 0; index < graphics_library_.polygon_buffer_counts.size(); ++index)
+        graphics_library_.polygon_buffer_counts[index] =
+            static_cast<std::uint32_t>(initial_library.configuration.buffer_counts[index]);
+    graphics_library_.windowed = static_cast<std::uint32_t>(initial_library.windowed);
+    graphics_library_.back_buffer_width =
+        static_cast<std::uint32_t>(initial_library.configuration.back_buffer_width);
+    graphics_library_.back_buffer_height =
+        static_cast<std::uint32_t>(initial_library.configuration.back_buffer_height);
+    graphics_library_.scale = 1;
+    graphics_library_.aspect =
+        (fidelity::ExactFloat(arithmetic_, float(device_state_.viewport.height)) /
+         float(device_state_.viewport.width)).rounded();
+    constexpr std::uint32_t kIgnoredBufferArgument = 32;
+    constexpr std::uint32_t kStartupScratchVertices = 0x6000;
+    polybuff::Context polygon_context{*this};
+    polybuff::initialize_buffers(polygon_context, polygon_resources_.buffers, polygon_resources_.base,
+                                 polygon_resources_.scratch, kIgnoredBufferArgument,
+                                 kStartupScratchVertices, &polygon_resources_.workspace);
     pvr::set_default_render_state(device_state_);
     pvr::set_default_texture_stage_state(device_state_);
     view_.depth.viewport = {0, 0, 640, 480, 0, 1065353216U};
@@ -51,6 +74,14 @@ Display::Display(const std::filesystem::path &directory, frame::ModeState &mode,
                                            queued_texture_list_, queued_texture_index_);
     auto owners = queue_owners();
     queue::initialize(owners, queue_services(), arithmetic_);
+}
+Display::~Display() {
+    // [platform:graphics] Device and game handles have independent references.
+    polybuff::Context context{*this};
+    polybuff::set_stream_source(context, nullptr, 0, 0);
+    for (auto &buffer : polygon_resources_.buffers.records)
+        polybuff::release(context, &buffer);
+    delete polygon_resources_.buffers.vertices;
 }
 view::Services Display::view_services() {
     return {
@@ -241,6 +272,10 @@ screen::Services Display::screen_services() {
 }
 void Display::begin_game_frame() {
     screen::begin_frame(reset_pending_);
+    // Source frame Clear discards every initialized polygon buffer before drawing.
+    polybuff::Context polygon_context{*this};
+    for (auto &buffer : polygon_resources_.buffers.records)
+        polybuff::discard(polygon_context, buffer);
     auto owners = queue_owners();
     queue::reset(owners, queue_services(), arithmetic_);
     set_depth_comparison(3);

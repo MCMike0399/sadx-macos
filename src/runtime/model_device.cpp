@@ -110,6 +110,15 @@ void observe_argument_store(Context &, std::uint32_t, ArgumentField, std::uint32
 fidelity::ExactFloat exact(Context &context, float value) {
     return {context.display.arithmetic(), value};
 }
+ConfiguredCounts configured_counts(Context &context) { return {context.counts()}; }
+BufferMemory *allocate_vertex_scratch(Context &, std::uint32_t bytes) {
+    try {
+        return new BufferMemory{std::vector<std::uint8_t>(bytes)};
+    } catch (const std::bad_alloc &) {
+        return nullptr;
+    }
+}
+void observe_initialization_store(Context &, InitializationField, std::size_t) {}
 } // namespace sadx::polybuff
 
 namespace sadx::native {

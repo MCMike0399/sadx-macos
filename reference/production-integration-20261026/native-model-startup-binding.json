@@ -1,0 +1,63 @@
+{
+  "scope": "Actual native host startup and real model pipeline reach next actor; no complete N3b",
+  "initializer_source_commit": "bdf110a",
+  "initializer_review": "afc50a7",
+  "normal_input_command": [
+    "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/sadx-native",
+    "--assets",
+    "/Users/burbujamc/Developer/sadx-macos/game/imported",
+    "--offscreen",
+    "--paced",
+    "--exit-after",
+    "1500",
+    "--save-directory",
+    "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/model-startup-frontier/savedata",
+    "--key-events",
+    "500:13:down,501:13:up,750:13:down,751:13:up,900:38:down,901:38:up,950:13:down,951:13:up,1350:13:down,1351:13:up",
+    "--capture-directory",
+    "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/model-startup-frontier/captures",
+    "--capture-at",
+    "1300,1380,1381,1382,1383,1390"
+  ],
+  "native_exit_status": 1,
+  "next_missing_call": "native_gamma_player_controller (E102483430)",
+  "frames": 1382,
+  "build_exit_status": 0,
+  "native_closure_exit_status": 0,
+  "units": {
+    "model-binding": 0,
+    "model-device": 0,
+    "character-geometry": 0
+  },
+  "native_startup": [
+    "Nine canonical buffers initialized through reviewed shared core, not a second record8.",
+    "Actual library State count array populated from maintained profile configuration before initialization; per-record native getter borrows it.",
+    "Scratch allocated as24576*36 bytes; retained base is an opaque workspace identity only, with no byte extent/content claimed.",
+    "Frame begin discards every live polygon buffer through the recovered helper.",
+    "Game/resource and stream references are independent; native host destructor releases actual storage."
+  ],
+  "native_reference_coexistence": {
+    "passed": true,
+    "exit_status": 0,
+    "native_context": "Root actual Context { Display& }",
+    "reference_context": "sadx::polybuff_reference::Context",
+    "native_startup": "Actual Display startup executes through the native device unit.",
+    "output": "One process: nine reference initializer calls and Root actual native device unit pass",
+    "native_archive": "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/libsadx-core.a",
+    "native_archive_sha256": "bf55116471b24d18e15ecdb6ffc79a160d943ce59e89dc498e97fd1c9cd3ee9a",
+    "native_unit_source_sha256": "82908d8378e68864f0154798e2bf9f53b76848b62baa3a3033c6c0a4ec2ad1d9",
+    "native_context_header_sha256": "8a5ecbfd6440ba88d2854940363e37315ab99c419bec106e231ff8334f8809a4",
+    "reference_defined_symbols": "0000000000000000 T sadx::polybuff_reference::configured_count(sadx::polybuff_reference::Context&, unsigned long)\n0000000000000174 T sadx::polybuff_reference::initialize_record(sadx::polybuff_reference::Context&, sadx::polybuff::BufferState&, unsigned long, unsigned int, sadx::polybuff::BufferDescription)\n0000000000000048 T sadx::polybuff_reference::buffer_description(sadx::polybuff_reference::Context&, unsigned long)\n00000000000000c0 T sadx::polybuff_reference::allocate_vertex_scratch(sadx::polybuff_reference::Context&, unsigned int)\n0000000000000104 T sadx::polybuff_reference::observe_initialization_store(sadx::polybuff_reference::Context&, sadx::polybuff::InitializationField, unsigned long)\n00000000000002e0 T sadx::NinjaSystemOwnerResult::~NinjaSystemOwnerResult()\n0000000000000330 T sadx::initialize_system_polygon_buffers(sadx::NinjaSystemInitRuntime&, unsigned int, unsigned int)\n00000000000003e8 T void sadx::polybuff::initialize_buffers<sadx::polybuff_reference::Context>(sadx::polybuff_reference::Context&, sadx::polybuff::Buffers&, sadx::polybuff::RetainedBase&, sadx::polybuff::Scratch&, unsigned int, unsigned int, void*)\n",
+    "undefined_dynamic_lookup_used": false,
+    "limits": [
+      "Actual Root unit exercises its real resource types/device functions in the same executable.",
+      "Native Display constructor executes its actual configured startup; no GPU proof."
+    ]
+  },
+  "limits": [
+    "Source-only product repeat, full combined gate and fresh startup-binding review remain pending.",
+    "All six actual player controllers remain unrecovered at this stage; next callback is Gamma.",
+    "No all-actor update/draw, cancel/reentry, GPU parity or N3b/gameplay/63FPS claim.",
+    "No native direct-workspace byte consumer recovered; retained identity is not guessed data."
+  ]
+}

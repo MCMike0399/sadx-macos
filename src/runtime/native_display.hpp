@@ -22,6 +22,8 @@
 #include "runtime/model_draw_environment.hpp"
 #include "engine/basic_model.hpp"
 #include "engine/material_correction.hpp"
+#include "engine/polybuff_initialization.hpp"
+#include "game/game_library_init.hpp"
 #include <memory>
 
 namespace sadx::native {
@@ -31,6 +33,7 @@ class Display {
     // Native configuration defaults to the source's absent CTRLFLAG0 setting.
     Display(const std::filesystem::path &system_directory, frame::ModeState &,
             std::uint32_t renderer_control_flags = 0);
+    ~Display();
     LogoRenderer &output() { return *output_; }
     const LogoRenderer &output() const { return *output_; }
     LogoFrame frame_state();
@@ -111,6 +114,16 @@ class Display {
     graphics::Draw device_state_;
     ModelVertexStream model_vertex_stream_;
     basic_model::State model_state_;
+    // NOTSA: graphics startup owns the configured count state and canonical polygon resources.
+    library::State graphics_library_{};
+    struct PolygonResources {
+        polybuff::Buffers buffers;
+        polybuff::RetainedBase base;
+        polybuff::Scratch scratch;
+        // NOTSA: the caller's workspace is retained only by identity on this path.
+        // Direct-workspace byte consumers remain unrecovered; no contents or extent are invented.
+        struct WorkspaceIdentity {} workspace;
+    } polygon_resources_;
     device_lights::State device_lights_;
     lighting::DeviceState lighting_device_;
     lighting::DeviceServices lighting_services();

@@ -5,7 +5,6 @@
 #include <cstring>
 
 namespace {
-sadx::polybuff::BufferState *fixture_buffer = nullptr;
 sadx::D3dxMatrix words(const sadx::graphics::Matrix &matrix) {
     sadx::D3dxMatrix value;
     std::memcpy(value.data(), matrix.data(), sizeof(value));
@@ -13,13 +12,30 @@ sadx::D3dxMatrix words(const sadx::graphics::Matrix &matrix) {
 }
 } // namespace
 namespace sadx::native {
-// This unit supplies only the pending startup owner; every rendering algorithm/device is real.
-// It does not certify native InitPolyBuffers or its legacy owner migration.
-polybuff::BufferState &normal_uv_buffer(Display &) {
-    assert(fixture_buffer);
-    return *fixture_buffer;
-}
 struct DisplayModelProbe {
+    static void verify_startup(Display &display, polybuff::Context &context) {
+        const auto &resources = display.polygon_resources_;
+        assert(resources.base.value == &resources.workspace);
+        assert(resources.buffers.vertices);
+        constexpr std::size_t kScratchVertices = 0x6000;
+        assert(resources.buffers.vertices->bytes.size() ==
+               kScratchVertices * polybuff::kScratchVertexBytes);
+        for (const auto &record : resources.buffers.records) {
+            assert(record.resource && record.resource->references == 1);
+            assert(record.render_arguments.words.data && record.lock_count == 0);
+        }
+        for (const auto word : resources.scratch.words)
+            assert(word == 0);
+        assert(&context.counts() == &display.graphics_library_.polygon_buffer_counts);
+        const auto configured = context.counts().back();
+        assert(configured == 32000);
+        assert(configured !=
+               static_cast<std::uint32_t>(library_initial_state().buffer_counts.back()));
+        context.counts().back() = 17;
+        assert(polybuff::configured_count(context, polybuff::kBufferCount - 1) == 17);
+        context.counts().back() = configured;
+        assert(display.graphics_library_.scale == 1 && display.graphics_library_.aspect == 0.75f);
+    }
     static void verify_null_texture(Display &display, basic_model::Context &context,
                                     texture_lifetime::Memory *memory,
                                     const std::shared_ptr<graphics::Texture> &image) {
@@ -78,6 +94,7 @@ int main(int argc, char **argv) {
     frame::ModeState mode{};
     native::Display display(argv[2], mode);
     pb::Context device{display};
+    native::DisplayModelProbe::verify_startup(display, device);
     basic_model::Context model{display, environment};
     native::DisplayModelProbe::verify_matrix_owners(display, model);
 
@@ -98,12 +115,14 @@ int main(int argc, char **argv) {
     hook = bootstrap::MaterialCallback::CorrectMaterial;
     lighting.active_palette.upper_specular_power = 37;
 
-    pb::BufferState buffer{};
-    fixture_buffer = &buffer;
-    constexpr std::uint32_t kNormalUvFormat = 0x152;
+    auto &buffer = native::normal_uv_buffer(display);
+    assert(&buffer == &device.buffer(8));
+    assert(buffer.resource && buffer.vertex_format == 0x152);
     const auto configured = library_initial_state().configuration.buffer_counts.back();
-    pb::initialize(device, &buffer, static_cast<std::uint32_t>(configured),
-                   pb::kNormalUvVertexBytes, kNormalUvFormat, "composed model unit");
+    assert(buffer.capacity_bytes ==
+           static_cast<std::uint32_t>(configured) * pb::kNormalUvVertexBytes);
+    display.begin_game_frame();
+    assert(buffer.remaining_bytes == buffer.capacity_bytes - buffer.stride);
     std::array<texture_lifetime::Memory *, 8> texture_memories{};
     auto image = std::make_shared<graphics::Texture>();
     image->width = image->height = 1;
@@ -150,6 +169,4 @@ int main(int argc, char **argv) {
                 sizeof(serialized));
     assert(serialized == first_coordinate);
     native::DisplayModelProbe::verify_null_texture(display, model, texture_memories.back(), image);
-    pb::release(device, &buffer);
-    fixture_buffer = nullptr;
 }

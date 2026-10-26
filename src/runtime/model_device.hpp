@@ -20,5 +20,7 @@ struct Context {
     auto &stream() { return display.model_vertex_stream_; }
     auto &device() { return display.device_state_; }
     auto &frame() { return display.frame_; }
+    auto &counts() { return display.graphics_library_.polygon_buffer_counts; }
+    auto &buffer(std::size_t index) { return display.polygon_resources_.buffers.records.at(index); }
 };
 } // namespace sadx::polybuff
