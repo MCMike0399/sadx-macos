@@ -490,3 +490,16 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Root integration lives on packet/basic-model-binding in /Users/burbujamc/Developer/sadx-wt-basic-model-binding, at 5ccc04f. Reviewed strip/material sources are byte-identical; 878 judge inputs have zero drift. Native runtime attachment and product source registration remain pending.
 * Full InitPolyBuffers and its shared legacy owners are being migrated on packet/polybuff-initialization under unchanged legacy judges. Do not duplicate the nine buffer heads, scratch allocation or clear block, hardcode a capacity, or fake initialization of only the reached buffer.
 * Next: close model review and initialization ownership, bind the real shared device and generated texture coordinates, run normal-input Question output, then continue the actual actor controllers. All Ghidra providers are closed. No push.
+
+### 2026-10-26 — Native model pipeline reaches Gamma (track J/S, combined gate pending)
+
+* packet/basic-model-binding now reaches native_gamma_player_controller at frame 1382 under the same normal fresh-save input. Native app build and forced closure exit 0; diagnostic journey exits 1. Main's last recorded full gate remains 04c40ae, rc 0.
+* Source buffers, shared geometry, material correction, environment coordinates, transforms, strip conversion and native frame submission are bound. Runtime stage faf1d87 received bounded review 635df95; no actor pixels or N3b approval.
+* Root found and corrected an untextured-material adapter mistake in 004d03f: 78bba0 must unbind the cache, not call 77fc50 texture cleanup. Regression checks preserve loaded references/surfaces and the cache minus-one guard.
+* Five native binding mutants compile and fail assertions: suppressed draw, missing stream retain, wrong Power, swapped vectors and swapped view/reset owners. Earlier component FP partials remain partial.
+* Full canonical initializer bdf110a received fresh review afc50a7 and is integrated at 7bacea7. Actual Display startup a316c9a initializes all nine buffers from the live library count state, allocates scratch, retains only workspace identity and discards buffers at frame begin.
+* Rendering composition now uses actual startup, with the test-only buffer owner removed. Device, geometry and composed model units pass. Native/reference coexistence runs actual native constructor and nine reference calls in one process, exit 0. No direct-workspace byte consumer is recovered.
+* Latest binding branch commit is 46f561f in /Users/burbujamc/Developer/sadx-wt-basic-model-binding. Fresh startup-binding review, explicit fixture-only build rules, judge registration, source-only product repeat and combined gate remain pending.
+* Gamma recovery runs on packet/gamma-selection-core; shared current-owner migration runs on packet/player-current-owners under unchanged Sonic judges. Gamma borrows the shared slots and never adds shadows or super-byte writes.
+* Fresh full E102 483430, InitGammaAnimData 7ca300 and InitGammaWeldInfo 7cb560 dossiers are retained at packet/normal-uv-strip commit 0eed0d8. Ghidra exited 0 and closed before gate preparation; no 7cdd60 guess was queried.
+* Continue through actual actor callbacks; all-preview initialization/update/drawing, cancel/reentry, story entry, gameplay and 63 FPS remain unverified. No push.
