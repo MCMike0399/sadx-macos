@@ -1,5 +1,6 @@
 #pragma once
 #include "engine/character_pack.hpp"
+#include "engine/character_geometry.hpp"
 #include "engine/graphics_frame.hpp"
 #include "game/game_bootstrap.hpp"
 #include "game/game_mode_services.hpp"
@@ -220,7 +221,7 @@ class Session final : private flow::NativeServices {
     save::Data save_backup_;
     std::shared_ptr<const character_pack::CharacterPack> character_pack_;
     bootstrap::SonicActions actions_;
-    character_pack::ObjectState character_objects_;
+    character_pack::SceneState character_scene_;
     ActionHandle knuckles_clear_, knuckles_transition_;
     ActionHandle big_sit_, big_sit_repeat_, big_prepare_, big_cast_, big_cast_repeat_;
     bootstrap::Services services_;
