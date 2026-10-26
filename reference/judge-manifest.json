@@ -1,13 +1,12 @@
 {
   "change": {
-    "base_commit": "bab9b5b67559fa8ea715e5aca679ec947b9740e6",
-    "evidence": "tools/agents/rollout-extractor-evidence.md",
-    "evidence_sha256": "8463bb1d995d6a908b46e7f6d4436a13d7fc7de954e8b99d188c8712b7c1ab64",
-    "mode": "additions-only",
-    "reason": "Register conservative rollout file-write replay regression tests; transcript commands are never executed"
+    "base_commit": "4d055a202653de324e1f5575e822cfa3040e2217",
+    "evidence": "reference/production-integration-20261026/texture-selection-link-prep.json",
+    "evidence_sha256": "ff121f80b1064e6820cd8db28299b1250b648acfc4b73ab314bcdb37b5c3de80",
+    "reason": "Prepare unchanged texture-selection and sprite-display reference targets for fact-adapter relocation; no expected inputs, probes, recipes or tolerance changes"
   },
   "files": {
-    "Makefile": "a736a3c479c51a89e9c045a7852c2d92f8b993ac9f1b7daa4bb7b1a7ea3d508d",
+    "Makefile": "7b76fc55b035daa9afdf94437dafebc10946ab1b9ab5c647afe3c0c387e0448e",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
     "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
     "reference/frame-control-corpus.tsv": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",

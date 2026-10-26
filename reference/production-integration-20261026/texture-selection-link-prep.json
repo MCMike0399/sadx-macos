@@ -1,0 +1,24 @@
+{
+  "reason": "Classify unchanged texture-selection unit and selection/sprite-display probes as reference closures before moving their fact facade implementation into the reference adapter.",
+  "component_commit": "c54386a",
+  "independent_review": "a1ec9dd7b9d72eeaf6e832cdc59547f024eda312",
+  "changed_inputs": [
+    "Makefile reference target registration only"
+  ],
+  "unchanged_judges": {
+    "tests/unit/ninja_texture_selection.cpp": "cf847b37e84fcda6add20015580b73521b449b2deaec60d887f491eab84f6c71",
+    "tests/probes/native_ninja_texture_selection_probe.cpp": "d70a25c1b74b7b87ff96c73290a6ecaedcef6b8f2d1a9f02419da9ea26f28905",
+    "tests/probes/native_ninja_sprite_display_probe.cpp": "afaa058efbe5d1e8ea2461688dc5ba34813e4794b17992b9ff83ecebe458fdf5",
+    "tools/oracles/verify_original_ninja_texture_selection.py": "cb1e6bcdefa674c6cca37bc3e47d7e64e03b877570cb631266b226752aa6a04c"
+  },
+  "verification": {
+    "target_link_exit_status": 0,
+    "unchanged_unit_exit_status": 0,
+    "unchanged_oracle_exit_status": 0,
+    "oracle_cases": 683,
+    "limits": "Full gate pending the coherent integration checkpoint."
+  },
+  "limits": [
+    "No source implementation or expected inputs changed in this preparation."
+  ]
+}
