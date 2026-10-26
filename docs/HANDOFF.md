@@ -561,3 +561,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Collision component 78c2c59 has fresh bounded review 70965e5. Private Gamma collision draft 6596719 is released for focused qualification after the actual gate terminal; it must report its next real stop before integration.
 * Ordinary LoadCharTextures 421280 is distinct from selection wrapper 512550. Existing lower texture primitives may be reused only after complete original-wrapper proof; no guessed delegation or count mutation is accepted. Root starts owned source analysis now that the gate is terminal.
 * Continue actual collision/texture/weld/effects/animated-cache calls, all preview actors, cancel/reentry, audio and Sonic confirmation, then the full native story route. No push.
+
+### 2026-10-26 — Reviewed canonical Gamma collision reaches ordinary texture load (track J/S)
+
+* Canonical collision component 78c2c59 and native binding 6e9a1ec have fresh bounded reviews 70965e5 and d28e14f, with no fidelity blockers. Two comment-only review corrections clarify the helper and still-unbound common-tail range seam.
+* Private normal-input app stops at native_gamma_load_character_textures, frame 1382, diagnostic exit 1; image remains outgoing title. Real CCL_Init, live status/info aliases, full 48-byte imports and the first extent store now run. No range recalculation is invented after the height overwrite.
+* Native binding/core/startup/component units and force-load closure pass; seven component and five composition mutants are caught. Gamma 1422/1080 cases retain 498/690 FP partials; startup 2004 retains 924; component 7964/8864 retains 6462/6834. Values match; partials remain partial.
+* Root registers the component unit and unchanged original judge paths in a separate setup commit, extending the composed consumer to its next source boundary. Judge has 905 protected inputs and zero drift; no old original oracle, probe, mutant, tolerance or expectation changed.
+* Last recorded Main full gate remains native-gamma-integration-gate.json, rc 0, at the prior CCL stop. This collision integration still needs the combined consumer rebuild, source-only export and full gate; no actor/GPU/N3b claim.
+* Ordinary 421280 source is now complete and its owned provider closed. Its recovery proceeds separately using existing texture owners and lower primitives, with no substitution of selection wrapper 512550. Continue the actual source path, then all preview actors and Sonic story. No push.
