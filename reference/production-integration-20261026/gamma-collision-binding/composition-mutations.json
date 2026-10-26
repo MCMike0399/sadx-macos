@@ -1,0 +1,48 @@
+{
+  "mutants": [
+    {
+      "name": "skip_collision_init",
+      "build_exit": 0,
+      "test_exit": 1,
+      "caught": true,
+      "mutated_source_sha256": "f37d2d5fadf4ea226a56d012d951b3235a98d008693ff7d7c237570561f86b5f",
+      "failure": "first real lower boundary"
+    },
+    {
+      "name": "copied_status",
+      "build_exit": 0,
+      "test_exit": 1,
+      "caught": true,
+      "mutated_source_sha256": "b9e54da66fbedb842565b9e5a6f9bef60d07e55248e5c22f1bc9b3e382a29fd0",
+      "failure": "CCL clears actual status and Gamma edits the actual first copied extent"
+    },
+    {
+      "name": "wrong_extent",
+      "build_exit": 0,
+      "test_exit": 1,
+      "caught": true,
+      "mutated_source_sha256": "cb5713b97af69273c1e858d955de132cef35ba9710452fc42fe374fcd490cc32",
+      "failure": "CCL clears actual status and Gamma edits the actual first copied extent"
+    },
+    {
+      "name": "wrong_form_byte",
+      "build_exit": 0,
+      "test_exit": 1,
+      "caught": true,
+      "mutated_source_sha256": "7ad239151e5049a358fe21c6942423ab9c0046a2dfca406927f9f71d5afecbc6",
+      "failure": "packed CCL bytes and attributes retain exact offsets, including unknown form"
+    },
+    {
+      "name": "wrong_first_angle",
+      "build_exit": 0,
+      "test_exit": 1,
+      "caught": true,
+      "mutated_source_sha256": "09673d9dd4cfd141ee450329e7d7f06cf4d625a5bc089899cbbb705fc281921d",
+      "failure": "all three signed collision angle words retain source bits"
+    }
+  ],
+  "caught": 5,
+  "total": 5,
+  "judge": "unchanged actual native binding consumer test",
+  "limits": "composition wiring/decode mutations only, not original algorithm proofs"
+}

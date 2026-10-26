@@ -1,0 +1,285 @@
+{
+  "scope": "Actual canonical Gamma collision initialization/access/extent binding to the ordinary texture boundary.",
+  "source_sha256": {
+    "src/runtime/native_gamma_binding.cpp": "1c5ddda68d70233a99688c2cee97f7fae74272fc2c37f1fd870eb4aba813991c",
+    "src/runtime/gamma_actor_assets.hpp": "bf3d4eb54cf0631be96724e1c892ef59276e3121a6b0b9d80cb4674e59370bc6",
+    "src/apps/native_gamma_actor_assets.hpp": "7c8c906b638c15c7d3e7c790cde63e646cf6e5e4b616b274d28caaca17fb7db5",
+    "src/player/gamma_selection_core.hpp": "cfa7d093e9a57c77287cc5568f1b8fc03a701b6323a6142026ac556579b0e6e1",
+    "src/player/gamma_selection_core.cpp": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea",
+    "src/cpu/fidelity_float.hpp": "b0e0e9ae131404916d9e9e9d544ea67868ae037164a7b2379c206ec621fb1d85",
+    "src/engine/task_work.hpp": "d0df9e59dec1dfcbeff7d9100ac0044b5a6e3e4683f691d85d60534416109f9d",
+    "src/engine/collision_component.cpp": "e6a9e37e956ebe2f7a54344f5b17e447f182c8e502432ee28aeef115717ee3e5",
+    "src/engine/collision_component.hpp": "fa4fb6a7a96459b94cf173b32c0b0d96eb5d4b0dfd19a79139f828e70e91392c",
+    "src/math/ninja_length.cpp": "dc803f7399f49d809d5a467e76203103da8507f08fee5306626282573b7a3c75",
+    "src/math/ninja_length.hpp": "30aa69ad39447239e4a8e88fe4abef9228282f2bfb7a0e23cd917045e06ce584",
+    "tests/probes/native_collision_component_probe.cpp": "b065feed332d3dfd95b6849d109c33415a8499cc62ce16564a0c2e35d7f281db",
+    "tests/unit/collision_component.cpp": "5e6cc81ce6ebc1d870872524287779282f7a60b2e691793ebf19e8ab18d9b0e5",
+    "tools/oracles/check_collision_component.py": "b94e339cc003d7f954dcb71775c61ba221c859c51881157e60bbe653bbd3d567",
+    "tools/oracles/verify_original_collision_component.py": "3105d7e9acaf4a5509b45cfff6753a2daf0678548b831f325fdd883a2b82c90c",
+    "tests/unit/native_gamma_binding.mm": "cbd66449b65ebfaa5234b793b8cfe06de313ad40da2fd2d87059388ab75e49a8",
+    "native-sources.txt": "3bca9e3c1341a79f028634d1d914cc4b67e5c05e5b5547a629edf79465aa83e3"
+  },
+  "approved_collision_78c2c59_byte_identical": {
+    "src/cpu/fidelity_float.hpp": "b0e0e9ae131404916d9e9e9d544ea67868ae037164a7b2379c206ec621fb1d85",
+    "src/engine/task_work.hpp": "d0df9e59dec1dfcbeff7d9100ac0044b5a6e3e4683f691d85d60534416109f9d",
+    "src/engine/collision_component.cpp": "e6a9e37e956ebe2f7a54344f5b17e447f182c8e502432ee28aeef115717ee3e5",
+    "src/engine/collision_component.hpp": "fa4fb6a7a96459b94cf173b32c0b0d96eb5d4b0dfd19a79139f828e70e91392c",
+    "src/math/ninja_length.cpp": "dc803f7399f49d809d5a467e76203103da8507f08fee5306626282573b7a3c75",
+    "src/math/ninja_length.hpp": "30aa69ad39447239e4a8e88fe4abef9228282f2bfb7a0e23cd917045e06ce584",
+    "tests/probes/native_collision_component_probe.cpp": "b065feed332d3dfd95b6849d109c33415a8499cc62ce16564a0c2e35d7f281db",
+    "tests/unit/collision_component.cpp": "5e6cc81ce6ebc1d870872524287779282f7a60b2e691793ebf19e8ab18d9b0e5",
+    "tools/oracles/check_collision_component.py": "b94e339cc003d7f954dcb71775c61ba221c859c51881157e60bbe653bbd3d567",
+    "tools/oracles/verify_original_collision_component.py": "3105d7e9acaf4a5509b45cfff6753a2daf0678548b831f325fdd883a2b82c90c"
+  },
+  "gamma_algorithm_and_frozen_judges_byte_identical": {
+    "src/player/gamma_selection_core.cpp": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea",
+    "tests/probes/native_gamma_selection_core_probe.cpp": "f1f5119da472f78651428ac79b4a5435e80acb359bf2a0c2f816b2670195a517",
+    "tests/unit/gamma_selection_core.cpp": "d6aadb3b53e94fed35b696822e1271b7eb2e23d5e908a5e0bf8b8ce4ea144db1",
+    "tools/oracles/verify_original_gamma_selection_core.py": "b62020db7b643a941079b15b2e0b931885ace95b40bb1ec3329a61439604aada",
+    "tools/oracles/mutate_gamma_selection_core.py": "f19c1e581df6b56c2f4c88d3c97881765863d342119490fd9acb77ba03e7b538"
+  },
+  "startup_judges_byte_identical": {
+    "tests/probes/native_player_startup_probe.cpp": "3f19fe2625681280cd69a28a9c91cf1fccd4a33c23894adc34f65f87a8db9261",
+    "tests/unit/player_startup.cpp": "3c433f9b0e965f581e9982a854c2425b471aac472fe0d787b1d2bf711c0bd218",
+    "tools/oracles/verify_original_player_startup.py": "54ad16c1dbb488eef85455ec4e15a9100a0e31ff54f59fd3f7a8ccec2bab9d44"
+  },
+  "gamma_header_only_two_authorized_comment_changes": true,
+  "annotation_evidence": "annotation-evidence.json",
+  "build": {
+    "command": "make -j2 build/native-gamma-binding-test build/sadx-native native-closure",
+    "exit_status": 0,
+    "private_archive": "build/libsadx-native.a",
+    "force_load_closure_passed": true,
+    "closure_sha256": "9e386edaff3cc5dc5917987de7ed86da44e91f7a346e1107e37a08ce13dff095"
+  },
+  "native_consumer_unit": {
+    "command": "./build/native-gamma-binding-test build/gamma-native-assets",
+    "exit_status": 0,
+    "source_sha256": "cbd66449b65ebfaa5234b793b8cfe06de313ad40da2fd2d87059388ab75e49a8",
+    "log_sha256": "8467b122bbd353dbe4616b4ddcecf7a7b1ed21e1d63f6abb4151d12b3f56ef84",
+    "checks": [
+      "all48-byte fields with distinct bytes/angles/negativezero/NaNbits",
+      "actual primary/status/arena/component/info identity",
+      "height edits actual copied first extent after init range",
+      "damage/attribute mutable aliases and canonical backlink rotation",
+      "actual scheduler frees SAME owned component/info allocations",
+      "bootstrap predicate owners and real PInitialize/current states"
+    ]
+  },
+  "native_app": {
+    "command": [
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-b75da23e/build/sadx-native",
+      "--assets",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-b75da23e/build/gamma-native-assets",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1500",
+      "--save-directory",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-b75da23e/build/gamma-collision-frontier/savedata",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,900:38:down,901:38:up,950:13:down,951:13:up,1350:13:down,1351:13:up",
+      "--capture-directory",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-b75da23e/build/gamma-collision-frontier/captures",
+      "--capture-at",
+      "1300,1380,1381,1382,1383,1390",
+      "--screenshot",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-b75da23e/build/gamma-collision-frontier/frontier.ppm"
+    ],
+    "exit_status": 1,
+    "frame": 1382,
+    "first_missing_call": "native_gamma_load_character_textures",
+    "original_callee": "LoadCharTextures421280",
+    "gamma_primary": {
+      "retired": false,
+      "mode": 0,
+      "id": 2,
+      "player_index": 5,
+      "character": 6,
+      "status": 0,
+      "position": [
+        400,
+        0,
+        -20
+      ],
+      "rotation": [
+        0,
+        16384,
+        0
+      ],
+      "aim_y": 0
+    },
+    "texture_slots": 762,
+    "log_sha256": "233c49bf2f216cc9e36bbca6266c314752fc46353aca129c3a17b859a5b66b0d",
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "screenshot_inspected": true,
+    "visible_output": "Outgoing title screen; no actor pixels claimed.",
+    "prior_screenshot_identical": true
+  },
+  "gamma_original_rerun": {
+    "gamma-dev": {
+      "case_count": 1422,
+      "value_failures": 0,
+      "fp_flag_partials": 498,
+      "exit_status": 2,
+      "verdict": "partial",
+      "report_sha256": "8f9dd204907bbeef5cd044e8467f88a5ec8dd4dbe0b0cad099b2d20ddbd63dd9"
+    },
+    "gamma-holdout": {
+      "case_count": 1080,
+      "value_failures": 0,
+      "fp_flag_partials": 690,
+      "exit_status": 2,
+      "verdict": "partial",
+      "report_sha256": "bc4228a7425108cc4481177277f0abe570bdb77be430c9cc51c962270bcdddb8"
+    }
+  },
+  "startup_original_rerun": {
+    "cases": 2004,
+    "mismatches": 0,
+    "fp_partials": 924,
+    "exit_status": 0,
+    "verdict": "partial",
+    "report_sha256": "7f1ef8636b35bd4ef960efaabecc182c8275eee531ac4cbef5d338f3a94dab40"
+  },
+  "frozen_native_units": {
+    "gamma_core": 0,
+    "startup": 0,
+    "commands_and_logs": "build/gamma-collision-qualification/frozen-runs.json",
+    "receipt_sha256": "63e5574878f26f45a9400f73fd2bf2a44fd28b77e2ecc5da2dfe9ce2881a233f"
+  },
+  "component_rerun": {
+    "unit_exit": 0,
+    "dev_exit": 2,
+    "holdout_exit": 2,
+    "dev": {
+      "cases": 7964,
+      "value_mismatches": 0,
+      "fp_partials": 6462,
+      "scalar": {
+        "cases": 888,
+        "value_mismatches": 0,
+        "fp_partials": 834
+      }
+    },
+    "holdout": {
+      "cases": 8864,
+      "value_mismatches": 0,
+      "fp_partials": 6834,
+      "scalar": {
+        "cases": 888,
+        "value_mismatches": 0,
+        "fp_partials": 834
+      }
+    },
+    "mutants": [
+      {
+        "name": "sphere_extent",
+        "oracle_exit": 1,
+        "value_mismatches": 444,
+        "caught": true
+      },
+      {
+        "name": "capsule_extent",
+        "oracle_exit": 1,
+        "value_mismatches": 366,
+        "caught": true
+      },
+      {
+        "name": "cylinder_ignores_c",
+        "oracle_exit": 1,
+        "value_mismatches": 678,
+        "caught": true
+      },
+      {
+        "name": "range_fallback",
+        "oracle_exit": 1,
+        "value_mismatches": 3232,
+        "caught": true
+      },
+      {
+        "name": "length_sum_order",
+        "oracle_exit": 1,
+        "value_mismatches": 45,
+        "caught": true
+      },
+      {
+        "name": "clear_primary_status",
+        "oracle_exit": 1,
+        "value_mismatches": 1074,
+        "caught": true
+      },
+      {
+        "name": "allocation_orphan",
+        "oracle_exit": 1,
+        "value_mismatches": 14,
+        "caught": true
+      }
+    ],
+    "verdict": "partial",
+    "proof_sha256": "d5fda1eb7492f77b5385f5cc085ce5adeabafa46c89b648f846cf18ed41293bf"
+  },
+  "composition_mutations": {
+    "mutants": [
+      {
+        "name": "skip_collision_init",
+        "build_exit": 0,
+        "test_exit": 1,
+        "caught": true,
+        "mutated_source_sha256": "f37d2d5fadf4ea226a56d012d951b3235a98d008693ff7d7c237570561f86b5f",
+        "failure": "first real lower boundary"
+      },
+      {
+        "name": "copied_status",
+        "build_exit": 0,
+        "test_exit": 1,
+        "caught": true,
+        "mutated_source_sha256": "b9e54da66fbedb842565b9e5a6f9bef60d07e55248e5c22f1bc9b3e382a29fd0",
+        "failure": "CCL clears actual status and Gamma edits the actual first copied extent"
+      },
+      {
+        "name": "wrong_extent",
+        "build_exit": 0,
+        "test_exit": 1,
+        "caught": true,
+        "mutated_source_sha256": "cb5713b97af69273c1e858d955de132cef35ba9710452fc42fe374fcd490cc32",
+        "failure": "CCL clears actual status and Gamma edits the actual first copied extent"
+      },
+      {
+        "name": "wrong_form_byte",
+        "build_exit": 0,
+        "test_exit": 1,
+        "caught": true,
+        "mutated_source_sha256": "7ad239151e5049a358fe21c6942423ab9c0046a2dfca406927f9f71d5afecbc6",
+        "failure": "packed CCL bytes and attributes retain exact offsets, including unknown form"
+      },
+      {
+        "name": "wrong_first_angle",
+        "build_exit": 0,
+        "test_exit": 1,
+        "caught": true,
+        "mutated_source_sha256": "09673d9dd4cfd141ee450329e7d7f06cf4d625a5bc089899cbbb705fc281921d",
+        "failure": "all three signed collision angle words retain source bits"
+      }
+    ],
+    "caught": 5,
+    "total": 5,
+    "judge": "unchanged actual native binding consumer test",
+    "limits": "composition wiring/decode mutations only, not original algorithm proofs"
+  },
+  "static_checks": {
+    "readability": "0 regressions; baseline unchanged, no alias debt-removal claim",
+    "provenance": "0 errors; canonical component owns complete callee annotations",
+    "layers": "0 violations",
+    "global_owners": "0 duplicates"
+  },
+  "execution_limits": [
+    "Every action ran only after Root explicitly revoked the gate pause.",
+    "At most2 compiler processes privately; no Main/shared archive/full gate/provider writes.",
+    "Ordinary421280 remains loud; no512550 delegation or counter mutation.",
+    "No weld/effects/material/animated matrices/display/tail success invented.",
+    "No GPU/N3b/story/gameplay/hardware/63FPS claim.",
+    "No old oracle/probe/fixture/tolerance/corpus/expectation changed.",
+    "Root owns fresh binding review and Main registrations/integration/full gate."
+  ]
+}

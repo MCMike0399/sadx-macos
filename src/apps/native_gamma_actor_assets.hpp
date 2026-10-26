@@ -47,6 +47,42 @@ inline GammaActionDeclaration gamma_declaration(NSDictionary *row,
     } else throw std::runtime_error("unknown Gamma declaration status");
     return result;
 }
+// NOTSA: lossless signed-word conversion at the imported-content boundary.
+inline std::int32_t actor_signed_word(std::uint32_t word) {
+    std::int32_t value;
+    std::memcpy(&value, &word, sizeof(value));
+    return value;
+}
+// NOTSA: decode every field of the source's three 48-byte CCL_INFO templates.
+// Work receives the source memcpy copy; these imported templates are never live collision state.
+inline std::vector<collision_component::Info> gamma_collision_info(
+    const std::array<std::uint32_t, 36> &words) {
+    constexpr std::size_t kInfoCount = 3, kWordsPerInfo = 12;
+    constexpr unsigned kBitsPerByte = 8;
+    constexpr std::uint32_t kByteMask = 0xff;
+    std::vector<collision_component::Info> result;
+    result.reserve(kInfoCount);
+    for (std::size_t index = 0; index < kInfoCount; ++index) {
+        const auto first = index * kWordsPerInfo;
+        const auto header = words[first];
+        collision_component::Info info{};
+        info.kind = static_cast<std::uint8_t>(header & kByteMask);
+        info.form = static_cast<collision_component::Form>((header >> kBitsPerByte) & kByteMask);
+        info.push = static_cast<std::uint8_t>((header >> (2 * kBitsPerByte)) & kByteMask);
+        info.damage = static_cast<std::uint8_t>(header >> (3 * kBitsPerByte));
+        info.attributes = words[first + 1];
+        info.center = {actor_scalar(words[first + 2]), actor_scalar(words[first + 3]),
+                       actor_scalar(words[first + 4])};
+        info.a = actor_scalar(words[first + 5]);
+        info.b = actor_scalar(words[first + 6]);
+        info.c = actor_scalar(words[first + 7]);
+        info.d = actor_scalar(words[first + 8]);
+        info.angles = {actor_signed_word(words[first + 9]), actor_signed_word(words[first + 10]),
+                       actor_signed_word(words[first + 11])};
+        result.push_back(info);
+    }
+    return result;
+}
 // NOTSA: complete source recipe metadata binds to the SAME validated CharacterPack.
 inline GammaActorAssets load_gamma_actor_assets(const std::filesystem::path &directory,
                                                 const character_pack::CharacterPack &pack) {
@@ -130,9 +166,11 @@ inline GammaActorAssets load_gamma_actor_assets(const std::filesystem::path &dir
         throw std::runtime_error("Gamma request zero does not use Stand");
     result.animation_table = std::move(table);
     const auto collision = array(metadata[@"collision_words"], 36, "Gamma collision records");
-    for (std::size_t index = 0; index < result.collision_words.size(); ++index)
-        result.collision_words[index] = static_cast<std::uint32_t>(
+    std::array<std::uint32_t, 36> collision_words{};
+    for (std::size_t index = 0; index < collision_words.size(); ++index)
+        collision_words[index] = static_cast<std::uint32_t>(
             integer(collision[index], 0, UINT32_MAX, "Gamma collision word"));
+    result.collision_info = gamma_collision_info(collision_words);
     const auto colors = array(metadata[@"line_color_words"], 2, "Gamma line colors");
     for (std::size_t index = 0; index < result.line_colors.size(); ++index)
         result.line_colors[index] = static_cast<std::uint32_t>(

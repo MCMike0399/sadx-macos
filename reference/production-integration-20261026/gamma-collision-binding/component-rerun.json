@@ -1,0 +1,71 @@
+{
+  "unit_exit": 0,
+  "dev_exit": 2,
+  "holdout_exit": 2,
+  "dev": {
+    "cases": 7964,
+    "value_mismatches": 0,
+    "fp_partials": 6462,
+    "scalar": {
+      "cases": 888,
+      "value_mismatches": 0,
+      "fp_partials": 834
+    }
+  },
+  "holdout": {
+    "cases": 8864,
+    "value_mismatches": 0,
+    "fp_partials": 6834,
+    "scalar": {
+      "cases": 888,
+      "value_mismatches": 0,
+      "fp_partials": 834
+    }
+  },
+  "mutants": [
+    {
+      "name": "sphere_extent",
+      "oracle_exit": 1,
+      "value_mismatches": 444,
+      "caught": true
+    },
+    {
+      "name": "capsule_extent",
+      "oracle_exit": 1,
+      "value_mismatches": 366,
+      "caught": true
+    },
+    {
+      "name": "cylinder_ignores_c",
+      "oracle_exit": 1,
+      "value_mismatches": 678,
+      "caught": true
+    },
+    {
+      "name": "range_fallback",
+      "oracle_exit": 1,
+      "value_mismatches": 3232,
+      "caught": true
+    },
+    {
+      "name": "length_sum_order",
+      "oracle_exit": 1,
+      "value_mismatches": 45,
+      "caught": true
+    },
+    {
+      "name": "clear_primary_status",
+      "oracle_exit": 1,
+      "value_mismatches": 1074,
+      "caught": true
+    },
+    {
+      "name": "allocation_orphan",
+      "oracle_exit": 1,
+      "value_mismatches": 14,
+      "caught": true
+    }
+  ],
+  "verdict": "partial",
+  "proof_sha256": "d5fda1eb7492f77b5385f5cc085ce5adeabafa46c89b648f846cf18ed41293bf"
+}

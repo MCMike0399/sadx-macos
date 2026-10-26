@@ -1,0 +1,75 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "native_library_sha256": "89cf19fdf4d8a0edd71c2bf95e7413acde089923dcc1a5b74ac094c1f4acaefc",
+  "case_blob_sha256": "bb9eb8f84138105538a42608216ec64b12812c296b56619d28c55ee23888f455",
+  "holdout": true,
+  "source_ranges": {
+    "0x41caf0": {
+      "size": 207,
+      "sha256": "0e00c5a07222ce77f13fd38531bb7ff7a999b777564623eb5b193e33fefd178a"
+    },
+    "0x41c4e0": {
+      "size": 65,
+      "sha256": "6d16a5fcff8fc3195c9b1a3a1167d32721228b37c8dc57a9c68d1476e337b833"
+    },
+    "0x41caa0": {
+      "size": 72,
+      "sha256": "ef321ac3f87eec9920ee4517e9fb679b70448e8419a43392b46895ec42009f73"
+    },
+    "0x418b60": {
+      "size": 122,
+      "sha256": "c35d82bac92034c513cefe30eb5c66b9e7db6f2f61f16bea218b1fca951ca49e"
+    },
+    "0x41bac0": {
+      "size": 282,
+      "sha256": "caa151f9f6e7c746f543bff990cc6b360adca30dcef504c3d267174f5628d822"
+    },
+    "0x787cc0": {
+      "size": 38,
+      "sha256": "8394622b2f31ae87570f34c5cd791dfa7338a9a82f7cfec0533069c7bd7a74e0"
+    },
+    "0x7871f0": {
+      "size": 43,
+      "sha256": "4eb9860ab520e2ec4fd1fafefd7b97330dd1a9a04adcec057ca24ab916d96376"
+    },
+    "0x40b2d0": {
+      "size": 52,
+      "sha256": "b1910d7f567983b9d942b334f0d918441ffeccf600eda82d45745d838918205f"
+    },
+    "0x40b220": {
+      "size": 172,
+      "sha256": "716db7e1f95e35ccbffdab66e93ebff03c7f5c4baf168952d6d1ec456382549e"
+    },
+    "0x40b310": {
+      "size": 270,
+      "sha256": "9b504c24eadc8a79d1c22f9c12cf80bb00b01899be5d6551b68137ae447005a0"
+    }
+  },
+  "cases": 8864,
+  "numeric_cases": 7830,
+  "lifecycle_cases": 146,
+  "scalar": {
+    "cases": 888,
+    "value_mismatches": 0,
+    "fp_partials": 834
+  },
+  "value_mismatches": 0,
+  "fp_partials": 6834,
+  "values_match": true,
+  "failures": [],
+  "limits": [
+    "FP exception flags are compared and partials remain partial; full stack/status/tag flags are not claimed",
+    "Native source closure and component only; no collision-list registration, collision solver, actor rendering or journey claim",
+    "Task linkage is an explicit original fixture; original allocation/free bodies execute unchanged",
+    "Unsupported partial info layouts and allocator wrap/corruption stop at tagged native boundaries"
+  ],
+  "flag_mismatches": 6834,
+  "passed": false,
+  "report_metadata_note": "Added standard verdict aliases from existing counters after execution; no case, comparison or result changed.",
+  "lifecycle_summary": {
+    "cases": 146,
+    "value_mismatches": 0,
+    "flag_partials": 120
+  },
+  "full_report_sha256": "89bb9908c182eca37d2c6f9a89235af96a6c5b9792435376e24d738a28d358c9"
+}

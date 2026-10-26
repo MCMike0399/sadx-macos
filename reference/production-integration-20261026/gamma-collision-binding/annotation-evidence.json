@@ -1,0 +1,18 @@
+{
+  "scope": "Canonical callee provenance belongs to complete collision component FUNCTION annotations; exactly two Gamma seam comments become binding comments.",
+  "authorization": "Root continuation explicitly approved this separate annotation commit; frozen3477fda remains in history.",
+  "gamma_header_before_sha256": "4d4259960f8cd59e610300683812bc5081a809d5938b0441ecc3a8ae1db3ce7d",
+  "gamma_header_after_sha256": "cfa7d093e9a57c77287cc5568f1b8fc03a701b6323a6142026ac556579b0e6e1",
+  "annotation_changes": [
+    "CCL_Init STUB to NOTSA binding comment",
+    "CCL_CalcRange STUB to NOTSA binding comment"
+  ],
+  "unchanged_algorithm_sha256": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea",
+  "preserved_judges": {
+    "tests/probes/native_gamma_selection_core_probe.cpp": "f1f5119da472f78651428ac79b4a5435e80acb359bf2a0c2f816b2670195a517",
+    "tests/unit/gamma_selection_core.cpp": "d6aadb3b53e94fed35b696822e1271b7eb2e23d5e908a5e0bf8b8ce4ea144db1",
+    "tools/oracles/verify_original_gamma_selection_core.py": "b62020db7b643a941079b15b2e0b931885ace95b40bb1ec3329a61439604aada",
+    "tools/oracles/mutate_gamma_selection_core.py": "f19c1e581df6b56c2f4c88d3c97881765863d342119490fd9acb77ba03e7b538"
+  },
+  "verification": "NOT RUN while Root full gate pause active; unchanged judges must be rerun after release."
+}

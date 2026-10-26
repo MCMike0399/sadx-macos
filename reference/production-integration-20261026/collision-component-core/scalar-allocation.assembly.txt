@@ -1,0 +1,53 @@
+0x787cc0: fld dword ptr [ecx]
+0x787cc2: push ecx
+0x787cc3: fld st(0)
+0x787cc5: fmulp st(1)
+0x787cc7: fld dword ptr [ecx + 4]
+0x787cca: fld st(0)
+0x787ccc: fmulp st(1)
+0x787cce: fld dword ptr [ecx + 8]
+0x787cd1: fld st(0)
+0x787cd3: fmulp st(1)
+0x787cd5: fadd st(1)
+0x787cd7: fadd st(2)
+0x787cd9: fstp dword ptr [esp]
+0x787cdc: fstp st(0)
+0x787cde: fstp st(0)
+0x787ce0: call 0x7871f0
+0x787ce5: ret 
+0x7871f0: fld dword ptr [esp + 4]
+0x7871f4: fcomp qword ptr [0x7e0048]
+0x7871fa: fnstsw ax
+0x7871fc: test ah, 5
+0x7871ff: jp 0x787212
+0x787201: fld dword ptr [esp + 4]
+0x787205: fmul dword ptr [0x7dcb0c]
+0x78720b: fsqrt 
+0x78720d: fchs 
+0x78720f: ret 4
+0x787212: fld dword ptr [esp + 4]
+0x787216: fsqrt 
+0x787218: ret 4
+0x40b2d0: push esi
+0x40b2d1: mov esi, dword ptr [esp + 0xc]
+0x40b2d5: add esi, 3
+0x40b2d8: and esi, 0xfffffffc
+0x40b2db: imul esi, dword ptr [esp + 8]
+0x40b2e0: push esi
+0x40b2e1: call 0x40b220
+0x40b2e6: mov edx, eax
+0x40b2e8: add esp, 4
+0x40b2eb: test edx, edx
+0x40b2ed: je 0x40b300
+0x40b2ef: shr esi, 2
+0x40b2f2: mov ecx, esi
+0x40b2f4: test ecx, ecx
+0x40b2f6: je 0x40b300
+0x40b2f8: push edi
+0x40b2f9: xor eax, eax
+0x40b2fb: mov edi, edx
+0x40b2fd: rep stosd dword ptr es:[edi], eax
+0x40b2ff: pop edi
+0x40b300: mov eax, edx
+0x40b302: pop esi
+0x40b303: ret 

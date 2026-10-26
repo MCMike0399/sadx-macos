@@ -114,7 +114,7 @@ std::int32_t check_edit_mode(Context &);
 void process_action(Context &, const TaskHandle &, const TaskWorkHandle &, const Player &);
 // STUB: SONIC 0x47fb90 GammaUpdateActionState
 void update_action_state(Context &, Primary, const Player &);
-// STUB: SONIC 0x41caf0 CCL_Init
+// NOTSA: native binding to canonical collision_component::initialize.
 void initialize_collision(Context &, const TaskHandle &, unsigned records, std::uint8_t id);
 // STUB: SONIC 0x421280 LoadCharTextures
 void load_character_textures(Context &, std::uint8_t character);
@@ -156,7 +156,7 @@ fidelity::ExactFloat shadow(Context &, Primary, float scale);
 std::uint32_t ground_attributes(Context &, Primary);
 // STUB: SONIC 0x4c33c0 GammaRunningEffects
 void running_effects(Context &, Primary, const TaskWorkHandle &, const Player &);
-// STUB: SONIC 0x41bac0 CCL_CalcRange
+// NOTSA: native binding to canonical collision_component::calculate_range.
 void calculate_collision_range(Context &, Primary);
 // STUB: SONIC 0x41c280 EntryColliList
 void enter_collision_list(Context &, Primary);

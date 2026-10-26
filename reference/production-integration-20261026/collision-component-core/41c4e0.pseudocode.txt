@@ -1,0 +1,17 @@
+
+void FreeColliWork(int param_1)
+
+{
+  int iVar1;
+  
+  if ((param_1 != 0) && (iVar1 = *(int *)(param_1 + 0x38), iVar1 != 0)) {
+    if (((*(byte *)(iVar1 + 5) & 0x80) != 0) && (*(int *)(iVar1 + 0xc) != 0)) {
+      FreeMemory(*(int *)(iVar1 + 0xc));
+      *(undefined4 *)(iVar1 + 0xc) = 0;
+    }
+    FreeMemory(iVar1);
+    *(undefined4 *)(param_1 + 0x38) = 0;
+  }
+  return;
+}
+

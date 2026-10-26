@@ -1,0 +1,100 @@
+{
+  "compiler": "clang++",
+  "compiler_flags": [
+    "-std=c++17",
+    "-O2",
+    "-Wall",
+    "-Wextra",
+    "-Werror",
+    "-Wmissing-field-initializers",
+    "-ffp-contract=off",
+    "-fno-fast-math",
+    "-Isrc"
+  ],
+  "private_output": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-b306f87e/build/collision-component-core",
+  "source_hashes": {
+    "src/engine/collision_component.cpp": "e6a9e37e956ebe2f7a54344f5b17e447f182c8e502432ee28aeef115717ee3e5",
+    "src/math/ninja_length.cpp": "dc803f7399f49d809d5a467e76203103da8507f08fee5306626282573b7a3c75",
+    "src/engine/task.cpp": "69a568d3577c8a0b7050d2de9774441082f4304931c0b9580f249fb1cb601774",
+    "src/engine/task_work.cpp": "08e679e66ab28ceda7a942033489cbd1f49356875766babe9e66236870c84691",
+    "src/cpu/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8",
+    "src/engine/collision_component.hpp": "fa4fb6a7a96459b94cf173b32c0b0d96eb5d4b0dfd19a79139f828e70e91392c",
+    "src/math/ninja_length.hpp": "30aa69ad39447239e4a8e88fe4abef9228282f2bfb7a0e23cd917045e06ce584",
+    "src/engine/task_work.hpp": "d0df9e59dec1dfcbeff7d9100ac0044b5a6e3e4683f691d85d60534416109f9d",
+    "src/cpu/fidelity_float.hpp": "b0e0e9ae131404916d9e9e9d544ea67868ae037164a7b2379c206ec621fb1d85",
+    "tests/unit/collision_component.cpp": "5e6cc81ce6ebc1d870872524287779282f7a60b2e691793ebf19e8ab18d9b0e5",
+    "tests/probes/native_collision_component_probe.cpp": "b065feed332d3dfd95b6849d109c33415a8499cc62ce16564a0c2e35d7f281db",
+    "tools/oracles/verify_original_collision_component.py": "3105d7e9acaf4a5509b45cfff6753a2daf0678548b831f325fdd883a2b82c90c"
+  },
+  "unit_exit": 0,
+  "dev_exit": 2,
+  "holdout_exit": 2,
+  "dev": {
+    "cases": 7964,
+    "value_mismatches": 0,
+    "fp_partials": 6462,
+    "scalar": {
+      "cases": 888,
+      "value_mismatches": 0,
+      "fp_partials": 834
+    }
+  },
+  "holdout": {
+    "cases": 8864,
+    "value_mismatches": 0,
+    "fp_partials": 6834,
+    "scalar": {
+      "cases": 888,
+      "value_mismatches": 0,
+      "fp_partials": 834
+    }
+  },
+  "mutants": [
+    {
+      "name": "sphere_extent",
+      "oracle_exit": 1,
+      "value_mismatches": 444,
+      "caught": true
+    },
+    {
+      "name": "capsule_extent",
+      "oracle_exit": 1,
+      "value_mismatches": 366,
+      "caught": true
+    },
+    {
+      "name": "cylinder_ignores_c",
+      "oracle_exit": 1,
+      "value_mismatches": 678,
+      "caught": true
+    },
+    {
+      "name": "range_fallback",
+      "oracle_exit": 1,
+      "value_mismatches": 3232,
+      "caught": true
+    },
+    {
+      "name": "length_sum_order",
+      "oracle_exit": 1,
+      "value_mismatches": 45,
+      "caught": true
+    },
+    {
+      "name": "clear_primary_status",
+      "oracle_exit": 1,
+      "value_mismatches": 1074,
+      "caught": true
+    },
+    {
+      "name": "allocation_orphan",
+      "oracle_exit": 1,
+      "value_mismatches": 14,
+      "caught": true
+    }
+  ],
+  "full_gate": "not run; Root owned",
+  "apps": "not run",
+  "verdict": "partial",
+  "report_metadata_note": "Standard verdict aliases were added to dev/holdout reports from existing fp_partials counters; numeric execution and expectations were unchanged."
+}

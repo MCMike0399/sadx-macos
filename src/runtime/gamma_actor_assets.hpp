@@ -1,5 +1,6 @@
 #pragma once
 #include "engine/character_pack.hpp"
+#include "engine/collision_component.hpp"
 #include "player/player_initialization.hpp"
 #include "player/player_animation.hpp"
 #include <string>
@@ -26,7 +27,7 @@ struct GammaActorAssets {
     std::array<GammaAnimationRecipe, 91> recipes{};
     std::shared_ptr<const PlayerAnimationTable> animation_table;
     ActionHandle stand;
-    std::array<std::uint32_t, 36> collision_words{};
+    std::vector<collision_component::Info> collision_info;
     std::array<std::uint32_t, 2> line_colors{};
 };
 } // namespace sadx::native

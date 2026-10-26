@@ -1,0 +1,39 @@
+
+void CCL_ClearInfo(int param_1)
+
+{
+  ushort uVar1;
+  int iVar2;
+  int iVar3;
+  byte *pbVar4;
+  undefined1 *puVar5;
+  uint uVar6;
+  
+  iVar2 = *(int *)(param_1 + 0x38);
+  *(byte *)(iVar2 + 4) = *(byte *)(iVar2 + 4) & 0xc0;
+  iVar3 = *(int *)(iVar2 + 0xc);
+  uVar1 = *(ushort *)(iVar2 + 6);
+  *(undefined2 *)(iVar2 + 2) = 0;
+  *(byte *)(param_1 + 4) = *(byte *)(param_1 + 4) & 0xc3;
+  puVar5 = (undefined1 *)(iVar2 + 0x10);
+  *(undefined2 *)(iVar2 + 0xa0) = 0xffff;
+  *(undefined2 *)(iVar2 + 0xa2) = 0xffff;
+  *(undefined4 *)(iVar2 + 0xa4) = 0;
+  if (uVar1 != 0) {
+    pbVar4 = (byte *)(iVar3 + 3);
+    uVar6 = (uint)uVar1;
+    do {
+      *pbVar4 = *pbVar4 & 0xef;
+      pbVar4 = pbVar4 + 0x30;
+      uVar6 = uVar6 - 1;
+    } while (uVar6 != 0);
+  }
+  for (; puVar5 != (undefined1 *)(iVar2 + 0x90); puVar5 = puVar5 + 8) {
+    *(ushort *)(puVar5 + 2) = *(ushort *)(puVar5 + 2) & 0xfffc;
+    *puVar5 = 0xff;
+    puVar5[1] = 0xff;
+    *(undefined4 *)(puVar5 + 4) = 0;
+  }
+  return;
+}
+

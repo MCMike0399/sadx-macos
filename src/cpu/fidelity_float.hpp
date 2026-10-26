@@ -8,6 +8,8 @@
 
 namespace sadx::fidelity {
 
+using Context = X87Context;
+
 // NOTSA: FABS clears the sign without quieting a signaling binary32 NaN.
 inline float absolute_float(float value) {
     std::uint32_t bits;
@@ -47,12 +49,12 @@ struct ExactObserver {
 // matters; C++ does not specify which side of a binary expression is evaluated first.
 class ExactFloat {
   public:
-    ExactFloat(X87Context &context, float value, ExactObserver *observer = nullptr)
+    ExactFloat(Context &context, float value, ExactObserver *observer = nullptr)
         : context_(&context), observer_(observer), value_(load(context, value, observer)) {}
-    ExactFloat(X87Context &, double, ExactObserver * = nullptr) = delete;
+    ExactFloat(Context &, double, ExactObserver * = nullptr) = delete;
 
     // NOTSA: retain a named math/CRT callee's already loaded return value without another FLD.
-    static ExactFloat retained(X87Context &context, X87Value value) {
+    static ExactFloat retained(Context &context, X87Value value) {
         return ExactFloat(context, value, nullptr);
     }
     bool is_negative() const { return value_.negative(); }
@@ -112,12 +114,12 @@ class ExactFloat {
     }
 
     // NOTSA: explicit wide loads/stores and m64 operations retain their source width.
-    static ExactFloat integer(X87Context &context, std::int64_t value,
+    static ExactFloat integer(Context &context, std::int64_t value,
                               ExactObserver *observer = nullptr) {
         notify(observer, ExactEvent::Load);
         return ExactFloat(context, context.from_int64(value), observer);
     }
-    static ExactFloat wide(X87Context &context, double value, ExactObserver *observer = nullptr) {
+    static ExactFloat wide(Context &context, double value, ExactObserver *observer = nullptr) {
         notify(observer, ExactEvent::Load);
         return ExactFloat(context, context.from_double(value), observer);
     }
@@ -144,7 +146,7 @@ class ExactFloat {
     }
     // NOTSA: the source scalar sqrt compares against m64 zero, reloads the input,
     // and preserves the sign of a negative argument after its positive square root.
-    static ExactFloat signed_square_root(X87Context &context, float value) {
+    static ExactFloat signed_square_root(Context &context, float value) {
         const auto loaded = context.from_float(value);
         const auto comparison = context.compare_double_memory(loaded, 0.0);
         const auto reloaded = context.from_float(value);
@@ -203,10 +205,10 @@ class ExactFloat {
     friend ExactFloat operator/(double, const ExactFloat &) = delete;
 
   private:
-    X87Context *context_;
+    Context *context_;
     ExactObserver *observer_;
     X87Value value_;
-    ExactFloat(X87Context &context, X87Value value, ExactObserver *observer)
+    ExactFloat(Context &context, X87Value value, ExactObserver *observer)
         : context_(&context), observer_(observer), value_(value) {}
     ExactFloat retain(X87Value value) const { return ExactFloat(*context_, value, observer_); }
     static void notify(ExactObserver *observer, ExactEvent event) {
@@ -214,7 +216,7 @@ class ExactFloat {
             observer->before(event);
     }
     void observe(ExactEvent event) const { notify(observer_, event); }
-    static X87Value load(X87Context &context, float value, ExactObserver *observer) {
+    static X87Value load(Context &context, float value, ExactObserver *observer) {
         notify(observer, ExactEvent::Load);
         return context.from_float(value);
     }

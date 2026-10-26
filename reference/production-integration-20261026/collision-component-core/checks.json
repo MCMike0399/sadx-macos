@@ -1,0 +1,69 @@
+{
+  "readability": {
+    "exit": 0,
+    "command": [
+      "/opt/homebrew/bin/python3",
+      "tools/gate/check_readability.py"
+    ],
+    "stdout": "Readability: 479 files, {'hex_literals': 3244, 'address_identifiers': 1460, 'address_calls': 61, 'goto': 0, 'address_labels': 0, 'long_lines': 1183, 'multi_statement_lines': 1818, 'large_decimal_literals': 233, 'emulator_arithmetic': 3297, 'address_comments': 1059}, 0 regressions\n",
+    "stderr": ""
+  },
+  "provenance": {
+    "exit": 0,
+    "command": [
+      "/opt/homebrew/bin/python3",
+      "tools/gate/check_provenance.py",
+      "--database",
+      "/Users/burbujamc/Developer/sadx-macos/build/symbols/symbols.json"
+    ],
+    "stdout": "Provenance: {'GLOBAL': 61, 'FUNCTION': 477, 'STUB': 52, 'PATCH': 2, 'DATA': 2}, 164168 legacy/annotated byte identities, 0 errors\n",
+    "stderr": ""
+  },
+  "owners": {
+    "exit": 0,
+    "command": [
+      "/opt/homebrew/bin/python3",
+      "tools/gate/check_global_owners.py"
+    ],
+    "stdout": "159093 owned bytes, 0 with more than one owner struct\n",
+    "stderr": ""
+  },
+  "layers": {
+    "exit": 0,
+    "command": [
+      "/opt/homebrew/bin/python3",
+      "tools/gate/check_layers.py"
+    ],
+    "stdout": "12 layers, 0 known exceptions, 0 violations\n",
+    "stderr": ""
+  },
+  "profile": {
+    "exit": 0,
+    "command": [
+      "/opt/homebrew/bin/python3",
+      "tools/gate/check_profile_patches.py",
+      "--build-dir",
+      "build/collision-component-core",
+      "--json"
+    ],
+    "stdout": "{\n \"summary\": {\n  \"patches\": 618,\n  \"active_patches\": 121,\n  \"active_unhandled_patches\": 79,\n  \"reports\": 3,\n  \"declared_exe_ranges\": 20,\n  \"unhandled_overlaps\": 0,\n  \"handled_overlaps\": 0,\n  \"undetermined_overlaps\": 0,\n  \"reports_without_addressed_ranges\": [\n   \"proof.json\"\n  ]\n },\n \"unhandled_overlaps\": [],\n \"handled_overlaps\": [],\n \"undetermined_overlaps\": [],\n \"report_ranges\": {\n  \"dev.json\": {\n   \"exe_ranges\": 10,\n   \"dll_ranges_skipped\": 0,\n   \"opaque_range_hashes\": [],\n   \"unparsed_keys\": []\n  },\n  \"holdout.json\": {\n   \"exe_ranges\": 10,\n   \"dll_ranges_skipped\": 0,\n   \"opaque_range_hashes\": [],\n   \"unparsed_keys\": []\n  },\n  \"proof.json\": {\n   \"exe_ranges\": 0,\n   \"dll_ranges_skipped\": 0,\n   \"opaque_range_hashes\": [],\n   \"unparsed_keys\": []\n  }\n }\n}\n",
+    "stderr": ""
+  },
+  "cpu_type_alias": {
+    "algorithm_and_preexisting_file_identical_after_reversing_alias": true,
+    "original_sha256": "f8ab14de7dc01f0d054ce4098e61af34b7e5ba39f2281fc506be9d1864869dcb",
+    "baseline_allowance": 37,
+    "debt_removal_claim": false
+  },
+  "baseline_byte_unchanged": true,
+  "native_link": {
+    "undefined_symbols": "__Unwind_Resume\n__ZNKSt13runtime_error4whatEv\n__ZNKSt3__119__shared_weak_count13__get_deleterERKSt9type_info\n__ZNSt11logic_errorC1EPKc\n__ZNSt11logic_errorC2EPKc\n__ZNSt11logic_errorD1Ev\n__ZNSt12length_errorD1Ev\n__ZNSt12out_of_rangeD1Ev\n__ZNSt13runtime_errorC2EPKc\n__ZNSt13runtime_errorD2Ev\n__ZNSt20bad_array_new_lengthC1Ev\n__ZNSt20bad_array_new_lengthD1Ev\n__ZNSt3__112__next_primeEm\n__ZNSt3__117bad_function_callD1Ev\n__ZNSt3__119__shared_weak_count14__release_weakEv\n__ZNSt3__119__shared_weak_count4lockEv\n__ZNSt3__119__shared_weak_countD2Ev\n__ZSt9terminatev\n__ZTINSt3__117bad_function_callE\n__ZTINSt3__119__shared_weak_countE\n__ZTISt11logic_error\n__ZTISt12length_error\n__ZTISt12out_of_range\n__ZTISt13runtime_error\n__ZTISt20bad_array_new_length\n__ZTVN10__cxxabiv117__class_type_infoE\n__ZTVN10__cxxabiv120__si_class_type_infoE\n__ZTVNSt3__117bad_function_callE\n__ZTVSt12length_error\n__ZTVSt12out_of_range\n__ZdlPv\n__Znwm\n___chkstk_darwin\n___cxa_allocate_exception\n___cxa_begin_catch\n___cxa_end_catch\n___cxa_free_exception\n___cxa_rethrow\n___cxa_throw\n___gxx_personality_v0\n___stack_chk_fail\n___stack_chk_guard\n__tlv_bootstrap\n_bzero\n_memcpy\n_memmove\n_memset\n_pthread_self\n_strcmp\n",
+    "no_guest_pe_unicorn_symbols": true
+  },
+  "processes": {
+    "all_private_builds_oracles_mutants_terminal": true,
+    "last_qualification_exec_session": 13677,
+    "last_qualification_exit": 0,
+    "no_new_builds_oracles_apps_providers_after_root_gate_request": true
+  }
+}

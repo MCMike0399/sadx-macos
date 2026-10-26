@@ -21,6 +21,20 @@ PlayerPhysicsState &physics(const Player &player) {
     if (!player || !player->physics) missing("native_gamma_player_physics");
     return *player->physics;
 }
+// NOTSA: per-consumption access follows the actual primary allocation reference.
+std::shared_ptr<collision_component::Work> collision(Context &context,
+                                                     const TaskWorkHandle &primary_work) {
+    auto component = collision_component::component(arena(context), primary_work);
+    if (!component) missing("native_gamma_null_collision_component");
+    return component;
+}
+collision_component::Info &collision_info(Context &context, const TaskWorkHandle &primary_work,
+                                          unsigned record) {
+    auto component = collision(context, primary_work);
+    if (record >= component->info_count || record >= component->info.size())
+        missing("native_gamma_collision_info_record");
+    return component->info[record];
+}
 constexpr unsigned kMotionPlayerField = 0, kCollisionField = 56, kFreeWorkField = 124;
 } // namespace
 State &state(Context &context) { return context.players.gamma; }
@@ -95,17 +109,21 @@ bool has_collision(Context &context, const TaskWorkHandle &primary_work) {
     if (!reference) missing("native_gamma_collision_reference");
     return bool(reference.work);
 }
-std::uint8_t &collision_damage(Context &, const TaskWorkHandle &, unsigned) {
-    missing("native_gamma_collision_damage_binding");
+std::uint8_t &collision_damage(Context &context, const TaskWorkHandle &primary_work,
+                               unsigned record) {
+    return collision_info(context, primary_work, record).damage;
 }
-std::uint32_t &collision_attributes(Context &, const TaskWorkHandle &, unsigned) {
-    missing("native_gamma_collision_attributes_binding");
+std::uint32_t &collision_attributes(Context &context, const TaskWorkHandle &primary_work,
+                                    unsigned record) {
+    return collision_info(context, primary_work, record).attributes;
 }
-float &collision_first_extent(Context &, const TaskWorkHandle &) {
-    missing("native_gamma_collision_extent_binding");
+float &collision_first_extent(Context &context, const TaskWorkHandle &primary_work) {
+    return collision_info(context, primary_work, 0).a;
 }
-std::int32_t floor_angle(Context &, const TaskWorkHandle &, unsigned) {
-    missing("native_gamma_collision_floor_binding");
+std::int32_t floor_angle(Context &context, const TaskWorkHandle &primary_work, unsigned axis) {
+    const auto task = collision(context, primary_work)->task.lock();
+    if (!task) missing("native_gamma_collision_task_backlink");
+    return player_initialization::bind_primary_view(task).rotation.at(axis);
 }
 SceneMaterial &material(Context &, unsigned, unsigned) {
     missing("native_gamma_shared_material_binding");
@@ -147,8 +165,14 @@ std::uint8_t is_time_zero(Context &context) {
 std::int16_t stage(Context &context) { return context.stage; }
 std::uint16_t act(Context &context) { return context.act; }
 // NOTSA: native CCL_Init boundary; source seam declared in the Gamma core.
-void initialize_collision(Context &, const TaskHandle &, unsigned, std::uint8_t) {
-    missing("native_gamma_CCL_Init");
+void initialize_collision(Context &context, const TaskHandle &task, unsigned records,
+                           std::uint8_t id) {
+    auto primary = player_initialization::bind_primary_view(task);
+    // Gamma ignores the source return. A failed allocation remains null and
+    // faults at the subsequent first-extent access; do not turn failure into success.
+    (void)collision_component::initialize(arena(context), task, primary.status,
+        assets(context).collision_info, static_cast<std::int32_t>(records), id,
+        context.rendering.arithmetic());
 }
 TaskWorkHandle allocate_zero(Context &context, unsigned count, unsigned bytes) {
     constexpr unsigned kWordAlignmentMask = 3;
