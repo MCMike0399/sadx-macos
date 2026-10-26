@@ -1,0 +1,509 @@
+{
+  "scope": "Static one-time Gamma mode0 resource closure, no behavior/runtime integration",
+  "source_files_sha256": {
+    "tools/import/sonic_actor_resources.py": "657c0509f0ea47d31b8b520a85bc44b7298d4e5def9c45b956bf604546f6274f",
+    "tools/import/gamma_actor_resources.py": "1c5145a449fece7b0793828d51c1d582a9473d92a34b73792232ce7cf0ab423d",
+    "tools/import/gamma_declarations.py": "b6795f8fb13af2151f0b0b6c02b75ff1f3122b257bf3c3c0f52251ff400aef27",
+    "tools/analysis/verify_gamma_import.py": "25fbf7d1a7d8a7b48c1a369481b3a9116be512162e4e85d78823accccc1e3544",
+    "tests/python/test_gamma_actor_resources.py": "1fe664aefeca475c104e4c8d8ce454ca6bdabef1220a8c5d3b203436847ea87f",
+    "tests/probes/gamma_asset_pack_check.cpp": "390f4ebc551d8c30f4d1dee3163b203401f55bd893059b626f3b7e89b0979d17"
+  },
+  "source_game_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "source_dll_sha256": "76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5",
+  "pack": {
+    "records": 3328,
+    "bytes": 766112,
+    "sha256": "c414e173bf4bf9f803f24d61642e233ff9650fe9276d70da2ac3939fee2b5d7f",
+    "local_output": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-3c7e487d/build/gamma-actor-assets/extended/sonic-selection.actions",
+    "prefix": {
+      "records": 3302,
+      "bytes": 760168,
+      "pack_sha256": "df53cf2eb5427491cd444350b231f9b168060602b65a8cf93371f6ad0f38d423",
+      "bindings_sha256": "93dda5e55a9739385e1a9ba6059b6be451ee9bfa0e91549784c8eed22ae7282b",
+      "record_bytes_sha256": "10c09181d59fc16c13fba8a10326ff16cf06189a7fe13f5ecd60a1643e3a6baa",
+      "metadata_preserved": true,
+      "record_byte_range": [
+        368,
+        760168
+      ],
+      "binding_byte_range": [
+        16,
+        368
+      ],
+      "header_change": "record count at bytes8..11 increases; whole-file prefix is not identical"
+    },
+    "initial_stand_action": 3303
+  },
+  "appended_records": [
+    {
+      "id": 3303,
+      "kind": "action",
+      "source_address": "0x1020e344",
+      "count": 1,
+      "source_sha256": "08132bedd3ef5ff1fd828cfe87290d7177ad0d9eebb4faa4d7a29c3870cb96b3",
+      "payload_sha256": "dde9f97f08ef23348f9a4d71ae51bf8f55cd7620ce69229c0eb1ae493ce7074a",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3304,
+      "kind": "motion",
+      "source_address": "0x1020e338",
+      "count": 77,
+      "source_sha256": "5bf481fb28681ab6d5e8ba920a37221340d66ca874e8de145d7ac7579726558d",
+      "payload_sha256": "9a8f663414e6a7e74fb2846e020d0ab7050e9de6dc2d2f3675f73925cf68fce2",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3305,
+      "kind": "tracks",
+      "source_address": "0x1020de68",
+      "count": 77,
+      "source_sha256": "03168c9433f58d2cf80ba6a73e4f0a7ad7807354b3f4c3813e6213029e6a1ada",
+      "payload_sha256": "033439b024039a3c8b66fd0022a38d5603f4833a0b7a1ee61f20d7daab9a016b",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3306,
+      "kind": "position_keys",
+      "source_address": "0x1020ce18",
+      "count": 16,
+      "source_sha256": "c103e13df3ddfd664723958f587f63959fba8e635bc269bc1c66d74e929eb10f",
+      "payload_sha256": "da0bb8899b28d022be2d3f6e7ddd41fa0387894c7063893ace3de9c734ba52f5",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3307,
+      "kind": "rotation_keys",
+      "source_address": "0x1020cf18",
+      "count": 2,
+      "source_sha256": "308dc18f61b7bbce19f04e0d4df10de5ad7a73897a0a093b029d411c699026af",
+      "payload_sha256": "cec300cabe0c7ec8395c35bdd8c31358f35852cd47931a7f7d5dbd087188623d",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3308,
+      "kind": "rotation_keys",
+      "source_address": "0x1020cf38",
+      "count": 16,
+      "source_sha256": "d2ab097ffaa278213dd4ececbb3b05bfcf94a66f6b3c51d0d9ea5ada2d11be97",
+      "payload_sha256": "b2141348ee1c427005fb814a43d930f137863103b6ca999ce355c61379a1addc",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3309,
+      "kind": "rotation_keys",
+      "source_address": "0x1020d038",
+      "count": 16,
+      "source_sha256": "1a976246c75221fef2003d1f13766d31a6886549112129080eb107b71bbdb72b",
+      "payload_sha256": "a8ae77783506bacd75268ef125235e5c369ae3c688ad65e44644d3496486d3fa",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3310,
+      "kind": "rotation_keys",
+      "source_address": "0x1020d138",
+      "count": 16,
+      "source_sha256": "ff5d72d384307df8c5d96dffbdcb89bebe5d05ba9359becf19e16b88dcfb4bdb",
+      "payload_sha256": "8663e746706e02113e4e11512116369a9fdc6a851199af6dd56e64658950d893",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3311,
+      "kind": "rotation_keys",
+      "source_address": "0x1020d238",
+      "count": 16,
+      "source_sha256": "ef9b170aa8181fa7759623697bdb4628a4c898f79cb061c2f3caa917df72b717",
+      "payload_sha256": "06057ff402cc0694869867bfe3ffb8b0ad811fab664e099aace6ce950d2a1602",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3312,
+      "kind": "rotation_keys",
+      "source_address": "0x1020d338",
+      "count": 2,
+      "source_sha256": "308dc18f61b7bbce19f04e0d4df10de5ad7a73897a0a093b029d411c699026af",
+      "payload_sha256": "cec300cabe0c7ec8395c35bdd8c31358f35852cd47931a7f7d5dbd087188623d",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3313,
+      "kind": "rotation_keys",
+      "source_address": "0x1020d358",
+      "count": 16,
+      "source_sha256": "d2ab097ffaa278213dd4ececbb3b05bfcf94a66f6b3c51d0d9ea5ada2d11be97",
+      "payload_sha256": "b2141348ee1c427005fb814a43d930f137863103b6ca999ce355c61379a1addc",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3314,
+      "kind": "rotation_keys",
+      "source_address": "0x1020d458",
+      "count": 16,
+      "source_sha256": "1a976246c75221fef2003d1f13766d31a6886549112129080eb107b71bbdb72b",
+      "payload_sha256": "a8ae77783506bacd75268ef125235e5c369ae3c688ad65e44644d3496486d3fa",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3315,
+      "kind": "rotation_keys",
+      "source_address": "0x1020d558",
+      "count": 16,
+      "source_sha256": "ff5d72d384307df8c5d96dffbdcb89bebe5d05ba9359becf19e16b88dcfb4bdb",
+      "payload_sha256": "8663e746706e02113e4e11512116369a9fdc6a851199af6dd56e64658950d893",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3316,
+      "kind": "rotation_keys",
+      "source_address": "0x1020d658",
+      "count": 16,
+      "source_sha256": "993835b0f2db003887597c9655b622b1564eb6e8313116a10465237611d34a6c",
+      "payload_sha256": "5000b3ca03f1ea11b0b80f73a9a0657414a849cf8a29fa8f2c85a7aabc69a7e1",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3317,
+      "kind": "rotation_keys",
+      "source_address": "0x1020d758",
+      "count": 15,
+      "source_sha256": "af0ce2724e3419b966b8cd68722118aedddb875ddd4d9669d19fcd715139658f",
+      "payload_sha256": "74b1635e2b9233b54e1993191e830d818785f420e19649032b16e788f8833178",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3318,
+      "kind": "rotation_keys",
+      "source_address": "0x1020d848",
+      "count": 16,
+      "source_sha256": "b0a50f6406bbd6e093da5adb01fb6482f529bd26ef6d467ded83105466dc36bc",
+      "payload_sha256": "40d02588a124fdd7c29c8f9f473e6d1ec9c0b9c1cdcd6c194f39e53838fe08a5",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3319,
+      "kind": "rotation_keys",
+      "source_address": "0x1020d948",
+      "count": 16,
+      "source_sha256": "99491366c84c2ffa0d4b4d6238db128cbf37064851abc9760450de98d5ff5a36",
+      "payload_sha256": "0f753bea34c605555c04b54b8e91499ec93871a054c6c1aeb1d5d490ade31c32",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3320,
+      "kind": "rotation_keys",
+      "source_address": "0x1020da48",
+      "count": 16,
+      "source_sha256": "9aac37a80353b01a2cd0a22109b053d9ce9373d29c2a853692ae1538e746c537",
+      "payload_sha256": "b045411774a380a6fe625d126021cd0a0b11efdd8d572a1b1dd09a460d630d20",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3321,
+      "kind": "rotation_keys",
+      "source_address": "0x1020db48",
+      "count": 16,
+      "source_sha256": "82256acdb75678eeea31d9ea511683fe43417c80596b5f44295ff218bc6e94a8",
+      "payload_sha256": "8d7f7b07fda492c027ad4b5ffbac5461d2fbeddd41cb683ff4f6847972d92b7b",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3322,
+      "kind": "rotation_keys",
+      "source_address": "0x1020dc48",
+      "count": 16,
+      "source_sha256": "ed5dcba2a4ba9b70c6122ae496497dcdf596b9bc738979f62649e2886bbbb43c",
+      "payload_sha256": "4dd0c7129573db15d3a9d56fb51c04ac7730b4e527b1e26e0b9327c8d7c4ab8a",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3323,
+      "kind": "rotation_keys",
+      "source_address": "0x1020dd48",
+      "count": 16,
+      "source_sha256": "8844e6b45caab1609b23c5c84c29be36419a62d171d30ed8dc5c640aa2ca4ae2",
+      "payload_sha256": "d8cd755fee24dc275049b9cdbc72954b3156b0a8368e9966a4d16d93eed1c585",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3324,
+      "kind": "rotation_keys",
+      "source_address": "0x1020de48",
+      "count": 2,
+      "source_sha256": "50aa20e858f602cc50c630a241427b7438e45a875009fc9dd209a955953a762c",
+      "payload_sha256": "5a18a283a1d56006e2e53eb43e4eb6badf319cb6d94039674c68bccc59f4c549",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3325,
+      "kind": "vectors",
+      "source_address": "0x981dd0",
+      "count": 8,
+      "source_sha256": "1b9fbc9d409dda97bff2f6fdb471108aae0f2f8530eb960e63c8b3c19cf6776a",
+      "payload_sha256": "9e14451a554dcf879c469daed68339eb9351a03a32bcf942a513e178f33ea108",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3326,
+      "kind": "colors",
+      "source_address": "0x981e30",
+      "count": 8,
+      "source_sha256": "f9d2bc2ea8345a97d8a514eae7f50c165175355a80ca805309429d83748f7ee2",
+      "payload_sha256": "7006837566ba8729ac4cc0e5180ba8ffaf54ec165e07ec9090342e92de651124",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3327,
+      "kind": "indices",
+      "source_address": "0x981e70",
+      "count": 24,
+      "source_sha256": "7dd221c01974626cccca1e24e402f66f3ab2eeb9bc58f9ef60cc7c8b8f4fa2c1",
+      "payload_sha256": "0b974158ce838a82684076688870d9cb28e83d164e198dde5a16d269e6ccd7e3",
+      "round_trip_exact": true
+    },
+    {
+      "id": 3328,
+      "kind": "colors",
+      "source_address": "0x981e50",
+      "count": 8,
+      "source_sha256": "a32669d0664b1d9af16c73e09897d6d2083e298df0fb6cf35b7ffea7c725ad91",
+      "payload_sha256": "4e48df37daac50f8221dfe9b0ab87c95a7e4ee392b13c1d18f870c400843bcc6",
+      "round_trip_exact": true
+    }
+  ],
+  "metadata_sha256": "26f0643c7b8572d1601b23ef071b4346c46bdf1d8eaa3c654f3152582c90357e",
+  "object_export_bindings": [
+    {
+      "index": 0,
+      "object": 2411
+    },
+    {
+      "index": 24,
+      "object": 2630
+    },
+    {
+      "index": 25,
+      "object": 2671
+    },
+    {
+      "index": 26,
+      "object": 2500
+    },
+    {
+      "index": 27,
+      "object": 2419
+    }
+  ],
+  "matrix_node_bindings": [
+    {
+      "node": 54,
+      "object": 2716
+    },
+    {
+      "node": 30,
+      "object": 2579
+    },
+    {
+      "node": 39,
+      "object": 2648
+    },
+    {
+      "node": 2,
+      "object": 2413
+    },
+    {
+      "node": 37,
+      "object": 2630
+    }
+  ],
+  "matrix_cache_dependency": {
+    "status": "animated_runtime_result_required",
+    "producer": "CalcMMMatrix/ScanMotionModel",
+    "consumer": "GetMMMatrix",
+    "cache_provenance": "0x3c58278",
+    "valid_count_provenance": "0x3c58270",
+    "static_object_pose_is_not_matrix_value": true
+  },
+  "material_bindings": [
+    {
+      "table_row": 1,
+      "material_index": 6,
+      "materials": 2742,
+      "record_index": 6
+    },
+    {
+      "table_row": 5,
+      "material_index": 2,
+      "materials": 2752,
+      "record_index": 2
+    },
+    {
+      "table_row": 4,
+      "material_index": 2,
+      "materials": 2764,
+      "record_index": 2
+    },
+    {
+      "table_row": 3,
+      "material_index": 2,
+      "materials": 2555,
+      "record_index": 2
+    },
+    {
+      "table_row": 2,
+      "material_index": 2,
+      "materials": 2474,
+      "record_index": 2
+    }
+  ],
+  "declaration_status_counts": {
+    "loaded": 2,
+    "unavailable": 75,
+    "known_null": 1
+  },
+  "static_declaration_proofs": {
+    "recipe_declarations": {
+      "address": "0x7ca300",
+      "size": 4704,
+      "sha256": "4ff64cf262910383a7a78e195fdec89ac1fa1910375b17c26c9da3b95a529622",
+      "initial_zero_fill": {
+        "section": ".data",
+        "raw_end": "0x38f7000",
+        "virtual_end": "0x3d12e40"
+      }
+    },
+    "weld_declarations": {
+      "address": "0x7cb560",
+      "size": 267,
+      "sha256": "ed7c9e93f9ad8429caaab524a555121b033644b81a71d9e05c8e35f05a38ecd0",
+      "initial_zero_fill": {
+        "section": ".data",
+        "raw_end": "0x38f7000",
+        "virtual_end": "0x3d12e40"
+      }
+    }
+  },
+  "constructed_action_proof": {
+    "character": 6,
+    "ordinal": "recipe72",
+    "model_export": "___E102_OBJECTS",
+    "model_index": 0,
+    "constructor_address": "0x7d2330",
+    "constructor_sha256": "2a96845507c2f80069d5e339102a2e677039ff55f85a1915ce8e592880217fc3",
+    "destination_provenance": "0x3c5d530",
+    "model_provenance": "0x10207290",
+    "motion_provenance": "0x9c1050",
+    "initial_zero_fill": {
+      "section": ".data",
+      "raw_end": "0x38f7000",
+      "virtual_end": "0x3d12e40"
+    },
+    "origin": "statically reconstructed initializer; not original BSS payload bytes"
+  },
+  "independent_producer_comparison": {
+    "recipes_equal_original_producer": 91,
+    "weld_rows_equal_original_producer": 5,
+    "producer_receipt_sha256": "726af0fee81cd355dbb3e833ba0196c4f304d5bb5767ce92d3c956850ccf33ea",
+    "pack_sha256": "c414e173bf4bf9f803f24d61642e233ff9650fe9276d70da2ac3939fee2b5d7f",
+    "records": 3328,
+    "preserved_record_prefix": 3302,
+    "preserved_bindings": 22,
+    "all_record_inverse_proofs": true
+  },
+  "focused_tests": {
+    "new_gamma_python": {
+      "tests": 14,
+      "exit_status": 0
+    },
+    "unchanged_sonic_python": {
+      "tests": 9,
+      "exit_status": 0
+    },
+    "unchanged_selection_python": {
+      "tests": 10,
+      "exit_status": 0
+    },
+    "strict_cpp_pack_decoder": {
+      "exit_status": 0,
+      "records": 3328,
+      "stand_parts": 77,
+      "stand_frames": 16
+    },
+    "initial_failures": [
+      "Initial fold lacked SI16 alias; added explicit correct register width without changing known-bit rule.",
+      "Initial matrix export-row interpretation rejected at row54; corrected to Root-confirmed preorder node identities, never read beyond28 exports in final source.",
+      "First independent comparison used committed summary lacking recipes; used full independently executed private producer receipt instead.",
+      "Two old selection checks initially errored on absent ignored fixtures; copied unchanged existing startup/title packs locally and reran10/10."
+    ]
+  },
+  "known_bits_source_mutant": {
+    "mutation": "disable indeterminate register read rejection",
+    "tests_run": 1,
+    "failures": 1,
+    "errors": 0,
+    "caught": true
+  },
+  "content_corruption_checks": [
+    {
+      "name": "recipe_transition",
+      "caught": true,
+      "reason": "Gamma recipes differ from independent original producer"
+    },
+    {
+      "name": "known_null",
+      "caught": true,
+      "reason": "Gamma genuine NULL declaration set changed"
+    },
+    {
+      "name": "material_alias",
+      "caught": true,
+      "reason": "Gamma material alias identity differs"
+    },
+    {
+      "name": "stand_motion",
+      "caught": true,
+      "reason": "Gamma Stand differs from independent source receipt"
+    },
+    {
+      "name": "binding_bytes",
+      "caught": true,
+      "reason": "Gamma output pack hash differs from provenance"
+    }
+  ],
+  "profile": {
+    "patches": 618,
+    "active_patches": 121,
+    "active_unhandled_patches": 79,
+    "reports": 1,
+    "declared_exe_ranges": 10,
+    "unhandled_overlaps": 0,
+    "handled_overlaps": 0,
+    "undetermined_overlaps": 0,
+    "reports_without_addressed_ranges": []
+  },
+  "source_ranges": {
+    "0x7ca300-0x7cb560": "4ff64cf262910383a7a78e195fdec89ac1fa1910375b17c26c9da3b95a529622",
+    "0x7cb560-0x7cb66b": "ed7c9e93f9ad8429caaab524a555121b033644b81a71d9e05c8e35f05a38ecd0",
+    "0x7d2330-0x7d2348": "2a96845507c2f80069d5e339102a2e677039ff55f85a1915ce8e592880217fc3",
+    "0x4b7d00-0x4b81e6": "31f2fc11181c318103f05eb29f16bb60ca7affb4763d009b061a875cc6dbc708",
+    "0x4b81f0-0x4b82c2": "7355a347b892f969fa25739cddfd90d5323abcf3402c7dbbfb600dca25002d8f",
+    "0x4b82d0-0x4b82f7": "50291b1dbb053fbc653be15989576ac9596d92ee6aa2b215096aeb4f886a860b",
+    "0x4c2d40-0x4c2de4": "c7cdcd215e8080ed2c4b9f26a171645c4a4fd760460750facd6740d31a8b62d8",
+    "0x4c2e10-0x4c2e48": "9c6112f335d944bf5e73d5f6c7baa657dcbf08bd880f2ffce4089dbe46181e32",
+    "0x49fb10-0x49fb29": "640587874714fff946ca09220a4d5f42fc428bd20dcd3a2cd2aeb0ae0704cbc6",
+    "0x4c5420-0x4c5436": "b6fbb51beab3d38800a84fe3b140c42419ba33755fdc6a4810ade1c4257caf22"
+  },
+  "limits": [
+    "Only reached request0 action payload is appended; complete91 recipes retain explicit unavailable boundaries and known NULL export61.",
+    "Recipe72 constructor is statically proved; its payload is not claimed loaded.",
+    "Cursor allocator/expansion and setup/effects behavior remain native lower dependencies.",
+    "No actor, renderer, GPU, native application, N3b or full-gate claim.",
+    "No original producer executed by this packet; comparison consumes core worker independently proved original producer receipt.",
+    "No apps, Ghidra, shared build writes or full gate. Root owns native metadata reader, mutable graph, animated matrix cache and integration.",
+    "No existing judge, fixture, expected value, tolerance, decoder or native source list changed."
+  ],
+  "worktree_setup": {
+    "restored_ignored_canonical_judge_inputs": 53,
+    "rule": "copied only pre-existing manifest SHA-matched bytes; expectations unchanged",
+    "initial_additions_only_attempt_exit_status": 1
+  }
+}

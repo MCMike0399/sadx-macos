@@ -1,9 +1,10 @@
 {
   "change": {
-    "base_commit": "a294653d11b7e9f4f5edd8ed0f1a04201152a202",
-    "evidence": "reference/production-integration-20261026/model-startup-judge-prep.json",
-    "evidence_sha256": "ee40551e7602c6dc6e7f54a13dc1b8bdf9e225bf85c1f7bfb4de32ef12c531f7",
-    "reason": "Register reviewed canonical buffer initializer, owner and coexistence checks with required fixture-only compiler setup; original expectations unchanged"
+    "base_commit": "d5b33d92a3253b2100cced144453d9e2ba16b631",
+    "evidence": "reference/production-integration-20261026/gamma-actor-assets/proof.json",
+    "evidence_sha256": "1bb36539e6bb2102c130aae535bc94f70b8213aac6757ed87effcc4b7a4c0aca",
+    "mode": "additions-only",
+    "reason": "Add focused static Gamma importer inverse/prefix/alias/publication tests and strict pack probe"
   },
   "files": {
     "Makefile": "7d7f57dfd0e1e3ebe13b496837dcc48d4c4e958bdf12c7ab48ebdc772931971d",
@@ -334,6 +335,7 @@
     "tests/probes/audio_stop_latency.mm": "eac622fb816614f8cbb13686abd4917f818fd6ad015913555806877fa4fdc47f",
     "tests/probes/basic_model_backend.hpp": "1cd770ae8bacd65b17185973fdc234a2c60d38764d5b2983041da5bbabbc441f",
     "tests/probes/game_view_initial_state_probe.hpp": "6c93980d864dc9ab7f56ee56260a3992ad5683d8992c1401893cf04ccc65b22a",
+    "tests/probes/gamma_asset_pack_check.cpp": "390f4ebc551d8c30f4d1dee3163b203401f55bd893059b626f3b7e89b0979d17",
     "tests/probes/input_initial_state_probe.hpp": "9e93ad6c5ba55f7dfb853059ef1db1f9a971353acf4b600a374505e607a1cc40",
     "tests/probes/input_mod_constants_probe.hpp": "729788565862a6fadfb0496b004b516ec195de2ceaef262c9a677669b35e8305",
     "tests/probes/library_initial_state_probe.hpp": "4ec981ff0b2e35a4e43fe5480c219fa6ae2b445f92181f58247ec9d68757a915",
@@ -574,6 +576,7 @@
     "tests/python/test_font_assets.py": "43a127e8defe3daaccccde24885af2ba9510c7ee256020dbac96705172094ee8",
     "tests/python/test_fp_census.py": "db9dee0f0942b7558f3358f27d41a04c787344ef83ea970ce744e8eedd6c007a",
     "tests/python/test_frame_control_isolation.py": "daf2e782d32c889cfe28e752997782a308846a39965db38eefb4e4afb586e3f1",
+    "tests/python/test_gamma_actor_resources.py": "1fe664aefeca475c104e4c8d8ce454ca6bdabef1220a8c5d3b203436847ea87f",
     "tests/python/test_gate_native_reporting.py": "2c1edef12f605b6bbf83eef28c061cc578723db76cb45c58f782f7128aceb3de",
     "tests/python/test_import_audio.py": "b47832a63d48404cde275a7723ff3d1f1897d212f2d3a590d1199d173efa4ae6",
     "tests/python/test_input_config.py": "fa5d1d7f518d68e17618617cd3863b1f9553a505446af646d21b7e1cd771f0ef",

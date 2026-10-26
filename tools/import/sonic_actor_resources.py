@@ -66,11 +66,7 @@ def declarations(dll,exe,spec):
   if offset<0 or offset+dst.size>len(buffer):raise ValueError('initializer writes outside its declaration owner')
   raw=(value&((1<<(8*dst.size))-1)).to_bytes(dst.size,'little');buffer[offset:offset+dst.size]=raw;written.update(range(offset,offset+dst.size));writes.append({'instruction':hex(i.address),'destination':hex(dst.mem.disp),'bytes':raw.hex()})
  return bytes(buffer),{'name':name,'address':hex(start),'size':len(code),'sha256':expected,'code_bytes':code.hex(),'origin':'statically folded linear source data declarations; not original BSS payload bytes','initial_zero_fill':initial,'written_bytes':len(written),'reads':reads,'writes':writes}
-def import_sonic_actor_resources(model_dll,game_exe,output):
- model_dll=Path(model_dll).resolve();game_exe=Path(game_exe).resolve();output=Path(output).resolve()
- if output.is_relative_to(model_dll.parent) or output.is_relative_to(game_exe.parent):raise ValueError('Sonic actor output must be outside owned source directories')
- dll=PEImage(model_dll);exe=PEImage(game_exe)
- if dll.sha256!=SOURCE_SHA or exe.sha256!=SOURCE_SHA256:raise ValueError('unsupported Sonic actor source hash')
+def build_sonic_actor_resources(dll,exe):
  imp,actions,sequences,sources=build(dll,exe);table=export(dll,'___SONIC_OBJECTS');model_addresses=list(dll.unpack('<79I',table));models=[{'index':i,'object':imp.object(model_addresses[i])} for i in [5,6,22]];action_table=export(dll,'___SONIC_ACTIONS');initial_action=imp.action(dll.unpack('<I',action_table+4)[0]);pairs=[];pair_ids={};proofs=[];lists={}
  for spec in CONSTRUCTORS:
   raw,proof=declarations(dll,exe,spec);proofs.append(proof);entries=[]
@@ -94,6 +90,14 @@ def import_sonic_actor_resources(model_dll,game_exe,output):
  direct_ahead=[imp.object(model_addresses[i]) for i in [50,52,51]]
  parameters=exe.read(0x9154e8,8*132)
  collision=exe.read(0x91cbf0,2*48);metadata={'version':1,'pack_schema':'SDXACT03','objects':models,'initial_animation_action':initial_action,'initial_animation_export_index':1,'direct_ahead_objects':direct_ahead,'player_parameter_words':[list(struct.unpack_from('<33I',parameters,i*132)) for i in range(8)],'joins':lists,'vertex_pairs':pairs,'collision_words':list(struct.unpack('<24I',collision))}
+ return imp,actions,metadata,proofs,pair_ids,table,action_table,direct_code,parameters,collision
+
+def import_sonic_actor_resources(model_dll,game_exe,output):
+ model_dll=Path(model_dll).resolve();game_exe=Path(game_exe).resolve();output=Path(output).resolve()
+ if output.is_relative_to(model_dll.parent) or output.is_relative_to(game_exe.parent):raise ValueError('Sonic actor output must be outside owned source directories')
+ dll=PEImage(model_dll);exe=PEImage(game_exe)
+ if dll.sha256!=SOURCE_SHA or exe.sha256!=SOURCE_SHA256:raise ValueError('unsupported Sonic actor source hash')
+ imp,actions,metadata,proofs,pair_ids,table,action_table,direct_code,parameters,collision=build_sonic_actor_resources(dll,exe)
  output.parent.mkdir(parents=True,exist_ok=True);fd,tmp=tempfile.mkstemp(prefix=output.name+'.',dir=output.parent);os.close(fd)
  try:pack_hash=imp.write(Path(tmp),actions,selection=True);os.replace(tmp,output)
  finally:
