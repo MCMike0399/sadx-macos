@@ -78,7 +78,7 @@ void clear_indices(Context &context) { context.device().indices.clear(); }
 void set_texture_number(Context &context, std::uint32_t index) {
     (void)context.display.output().set_texture_number(index);
 }
-void set_null_texture(Context &context) { context.display.clear_texture_binding(); }
+void set_null_texture(Context &context) { context.unbind_cached_texture(); }
 MaterialCallback snapshot_material_callback(Context &context) {
     switch (context.environment.material_callback) {
     case bootstrap::MaterialCallback::None:

@@ -8,6 +8,11 @@ struct Context {
     const native::ModelDrawEnvironment &environment;
     auto &device() { return display.device_state_; }
     auto &state() { return display.model_state_; }
+    void unbind_cached_texture() {
+        auto texture = display.texture_state();
+        auto services = display.texture_services();
+        texture_lifetime::unbind_cached_texture(texture, services);
+    }
     Owners owners() {
         return {display.model_state_,
                 display.control_3d_,

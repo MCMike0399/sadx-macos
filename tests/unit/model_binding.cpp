@@ -20,6 +20,24 @@ polybuff::BufferState &normal_uv_buffer(Display &) {
     return *fixture_buffer;
 }
 struct DisplayModelProbe {
+    static void verify_null_texture(Display &display, basic_model::Context &context,
+                                    texture_lifetime::Memory *memory,
+                                    const std::shared_ptr<graphics::Texture> &image) {
+        const auto references = memory->references;
+        const auto surface = memory->surface;
+        basic_model::set_null_texture(context);
+        assert(display.cached_texture_global_index_ == -1);
+        assert(display.active_texture_memory_ == nullptr);
+        assert(context.device().texture == nullptr);
+        assert(memory->references == references && memory->surface == surface);
+        assert(surface->texture == image);
+        // The original guard does not touch a stale active owner or separately bound image.
+        display.active_texture_memory_ = memory;
+        context.device().texture = image;
+        basic_model::set_null_texture(context);
+        assert(display.active_texture_memory_ == memory && context.device().texture == image);
+        assert(memory->references == references && memory->surface == surface);
+    }
     static void verify_matrix_owners(Display &display, basic_model::Context &context) {
         auto owners = context.owners();
         auto &current = display.coordinates_->current_matrix();
@@ -131,6 +149,7 @@ int main(int argc, char **argv) {
     std::memcpy(&serialized, pack.record(model_resource.points).payload.data() + 4,
                 sizeof(serialized));
     assert(serialized == first_coordinate);
+    native::DisplayModelProbe::verify_null_texture(display, model, texture_memories.back(), image);
     pb::release(device, &buffer);
     fixture_buffer = nullptr;
 }

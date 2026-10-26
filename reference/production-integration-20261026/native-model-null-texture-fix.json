@@ -1,0 +1,21 @@
+{
+  "scope": "Correct untextured-material native adapter to source78bba0; no engine algorithm or existing judge change",
+  "problem": "Display.clear_texture_binding actually calls77fc50 clear_temporary_info/release_all. The material parser requires78bba0 unbind_cached_texture, preserving loaded surfaces and reference counts.",
+  "change": "Context borrows actual texture lifetime state/services and calls existing unbind_cached_texture. Cache=-1 preserves active/image, otherwise unbind then cache/active clears.",
+  "unit": "model-binding",
+  "unit_exit_status": 0,
+  "regression_assertions": [
+    "Loaded memory reference count and surface/image survive unbinding.",
+    "Actual cached index/active/image clear on bound path.",
+    "A stale active owner and separately bound image survive cache=-1 guard."
+  ],
+  "files_sha256": {
+    "src/runtime/model_draw.cpp": "65ce0096a92c729414601d6055767c7fa7aa2669bd2d34674f86736dee56ea81",
+    "src/runtime/model_draw_context.hpp": "ebc2b553ba00cc6b6e1736e8ea28ff644a891481d44b1a98a3cc655d2348ea03",
+    "tests/unit/model_binding.cpp": "7e78e185ee70c72ba37ee6e44dc40ccdfd439e5644f1ceaa8af166e7ec274cf3"
+  },
+  "limits": [
+    "Question material is textured, so previous diagnostic frontier did not exercise this branch.",
+    "Full gate and GPU qualification still pending."
+  ]
+}
