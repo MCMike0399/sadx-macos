@@ -1,0 +1,467 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "base_commit": "04c40ae0b0840b9982cda95452057c1d678eeec1",
+  "dossiers": [
+    {
+      "path": "reference/inventory-raw/native-basic-model-render-recovery-20261021/native-basic-model-begin.json",
+      "sha256": "2a602d843b359377174e52233a8ee85404dcc5e2154489f83225fce5a0879714",
+      "evidence_id": "ev_d287b4e6f623dd945a7b51e867e5b76057a81afda3f1e492cd2ed4e4ee136aac",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x781cc0",
+      "instruction_count": 79,
+      "direct_call_targets": [
+        "0x00644340",
+        "0x00791a80"
+      ],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x781cc0",
+          "end": "0x781de9"
+        }
+      ],
+      "absolute_path": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/native-basic-model-render-recovery-20261021/native-basic-model-begin.json"
+    },
+    {
+      "path": "reference/inventory-raw/native-basic-model-render-recovery-20261021/native-basic-model-dispatch.json",
+      "sha256": "25e1a15d28d7610adff5e75026dc78b6dfe41aaa1b6d6ca90c888db5ee2aac0b",
+      "evidence_id": "ev_8156aa71a36fb1ef6e6a9e079e00d4f81d2eae5b67852d2cf259ab0211d99b57",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x77eda0",
+      "instruction_count": 149,
+      "direct_call_targets": [
+        "0x00784850",
+        "0x00791a50",
+        "0x00791ab0",
+        "0x00791ad0"
+      ],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x77eda0",
+          "end": "0x77ef4d"
+        }
+      ],
+      "absolute_path": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/native-basic-model-render-recovery-20261021/native-basic-model-dispatch.json"
+    },
+    {
+      "path": "reference/inventory-raw/native-basic-model-render-recovery-20261021/native-basic-model-draw.json",
+      "sha256": "4ae4c5b5c2e75c398e3004da20170169d57b73716a669434f55549bbee405a0b",
+      "evidence_id": "ev_0fc28c97c1cc4362a7b6809e75a9060d63c3d331fd8b045c58bed503d72805ad",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x77ef70",
+      "instruction_count": 6,
+      "direct_call_targets": [
+        "0x0077eda0",
+        "0x00781cc0"
+      ],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x77ef70",
+          "end": "0x77ef86"
+        }
+      ],
+      "absolute_path": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/native-basic-model-render-recovery-20261021/native-basic-model-draw.json"
+    },
+    {
+      "path": "reference/inventory-raw/native-basic-model-render-recovery-20261021/native-basic-model-end.json",
+      "sha256": "262c4f0691832a24e275b347bc79faa0ee904994b7ec12948899c345a29001ec",
+      "evidence_id": "ev_ceebbc3a8b5b2e4afd7d16309c03b125538eec883560ba884bbad6a3b78c8ca4",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x781df0",
+      "instruction_count": 9,
+      "direct_call_targets": [
+        "0x00794500"
+      ],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x781df0",
+          "end": "0x781e13"
+        }
+      ],
+      "absolute_path": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/native-basic-model-render-recovery-20261021/native-basic-model-end.json"
+    },
+    {
+      "path": "reference/inventory-raw/native-basic-model-render-recovery-20261021/native-basic-model-material.json",
+      "sha256": "185cb53011e163f8ab66ba67bc23699d7596744e23a51747f18c2b0e146e034c",
+      "evidence_id": "ev_2bc1c582e585ff1d1ec6c26e282bb009f9ad42e1e7c57fe33bc51e96d72648d8",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x784850",
+      "instruction_count": 187,
+      "direct_call_targets": [
+        "0x00781ec0",
+        "0x0078bba0",
+        "0x0078d140",
+        "0x00791990",
+        "0x007944b0",
+        "0x00794500"
+      ],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x784850",
+          "end": "0x784ade"
+        }
+      ],
+      "absolute_path": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/native-basic-model-render-recovery-20261021/native-basic-model-material.json"
+    },
+    {
+      "path": "reference/inventory-raw/native-basic-model-render-recovery-20261021/native-basic-model-transform.json",
+      "sha256": "f1d56323e77cb21321913e11afdd75ca0d911cc52c026a7d9fab70dc49904d90",
+      "evidence_id": "ev_f7eafd959e6b044caea7da32d31649c75bbb6d603722faeae5ed5b3224f9c975",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x791a80",
+      "instruction_count": 12,
+      "direct_call_targets": [
+        "0x00770804",
+        "0x00770d10"
+      ],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x791a80",
+          "end": "0x791aa3"
+        }
+      ],
+      "absolute_path": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/native-basic-model-render-recovery-20261021/native-basic-model-transform.json"
+    },
+    {
+      "path": "reference/ghidra-action-fp-recovery/extra-791a50.json",
+      "sha256": "2f6e6bd9f2d97cfcb2a08f6c3b6fca083d3c265afcd45eeac1261d0ed6be770f",
+      "evidence_id": "ev_feb290914c8d74a7451ff5dcea27c81ac8910d2bcf23e3b27c164ee8ea8647eb",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x791a50",
+      "instruction_count": 11,
+      "direct_call_targets": [
+        "0x00770804"
+      ],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x791a50",
+          "end": "0x791a7b"
+        }
+      ],
+      "absolute_path": "/Users/burbujamc/Developer/sadx-macos/reference/ghidra-action-fp-recovery/extra-791a50.json"
+    },
+    {
+      "path": "reference/ghidra-action-fp-recovery/extra-791ab0.json",
+      "sha256": "9fc81e7da2c5e997e03c36c20d0eb42222333fab7c521d118a2abe4c94825838",
+      "evidence_id": "ev_89291099fcd2db3c8f8e83d2c4d0cf2209e99abd6734cb12568ffda25aebd73e",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x791ab0",
+      "instruction_count": 7,
+      "direct_call_targets": [],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x791ab0",
+          "end": "0x791ac8"
+        }
+      ],
+      "absolute_path": "/Users/burbujamc/Developer/sadx-macos/reference/ghidra-action-fp-recovery/extra-791ab0.json"
+    },
+    {
+      "path": "reference/ghidra-action-fp-recovery/extra-791ad0.json",
+      "sha256": "67cfd538bc86c347af38bb32b785dcaace87f3e301e5f1b952398ac8f67b75a4",
+      "evidence_id": "ev_b1baaacd47aba92b159c1fe9573b454fbd1a2f21d95028ca1325435da88756e7",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x791ad0",
+      "instruction_count": 7,
+      "direct_call_targets": [],
+      "body_ranges_inclusive": [
+        {
+          "start": "0x791ad0",
+          "end": "0x791ae8"
+        }
+      ],
+      "absolute_path": "/Users/burbujamc/Developer/sadx-macos/reference/ghidra-action-fp-recovery/extra-791ad0.json"
+    },
+    {
+      "path": "/Users/burbujamc/Developer/sadx-wt-normal-uv-strip/reference/inventory-raw/basic-material-helper-recovery-20261026/material-781ec0.json",
+      "absolute_path": "/Users/burbujamc/Developer/sadx-wt-normal-uv-strip/reference/inventory-raw/basic-material-helper-recovery-20261026/material-781ec0.json",
+      "sha256": "e0418e66a9609be246ab2d0c95145dc07ed83c4b0e779b8c091f9fe2f65e4072",
+      "evidence_id": "ev_dba16d643b4f62e0d09d71ce3accb36e388bbf1746ea946a7e1d7e89f0ff6d11",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x781ec0",
+      "body_ranges_inclusive": [
+        {
+          "start": "0x781ec0",
+          "end": "0x78202b"
+        }
+      ],
+      "instruction_count": 98
+    },
+    {
+      "path": "/Users/burbujamc/Developer/sadx-wt-normal-uv-strip/reference/inventory-raw/basic-material-helper-recovery-20261026/material-7944b0.json",
+      "absolute_path": "/Users/burbujamc/Developer/sadx-wt-normal-uv-strip/reference/inventory-raw/basic-material-helper-recovery-20261026/material-7944b0.json",
+      "sha256": "bbe13d006d39c660c345b95d595e4abd5dfd7d25f1be53a7e05ae06aa8bbb883",
+      "evidence_id": "ev_f28870a7f3d138448004fd709256be5c2ec72a52674458a1f79a2dcc5b9a2ab7",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x7944b0",
+      "body_ranges_inclusive": [
+        {
+          "start": "0x7944b0",
+          "end": "0x7944f0"
+        }
+      ],
+      "instruction_count": 21
+    },
+    {
+      "path": "/Users/burbujamc/Developer/sadx-wt-normal-uv-strip/reference/inventory-raw/basic-material-helper-recovery-20261026/material-794500.json",
+      "absolute_path": "/Users/burbujamc/Developer/sadx-wt-normal-uv-strip/reference/inventory-raw/basic-material-helper-recovery-20261026/material-794500.json",
+      "sha256": "875871798bea4b7750bc60a7974eaceecaa4b3e51239017e273660d21ff70fe5",
+      "evidence_id": "ev_bce098f353576b957a35ce6f8b760b58b87665080ac0445f981ec8c630868603",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x794500",
+      "body_ranges_inclusive": [
+        {
+          "start": "0x794500",
+          "end": "0x79453d"
+        }
+      ],
+      "instruction_count": 21
+    },
+    {
+      "path": "/Users/burbujamc/Developer/sadx-wt-basic-model/reference/ghidra-action-fp-recovery/extra-791990.json",
+      "absolute_path": "/Users/burbujamc/Developer/sadx-wt-basic-model/reference/ghidra-action-fp-recovery/extra-791990.json",
+      "sha256": "a9d64ff1bbd3e7b98616c2cf42d33407e7ae61460e866a881e9f923cc13656e4",
+      "evidence_id": "ev_512f305a2768e634c52e3e0e6f4c282b070d0c1599e1cee38224f7caed4b2531",
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "operation": "analyze_function",
+      "procedure": "0x791990",
+      "body_ranges_inclusive": [
+        {
+          "start": "0x791990",
+          "end": "0x791a49"
+        }
+      ],
+      "instruction_count": 66
+    }
+  ],
+  "data": [
+    {
+      "name": "texture-address-modes",
+      "address": "0x88ae0c",
+      "size": 16,
+      "bytes_hex": "01000000030000000200000003000000",
+      "sha256": "2900a2262ac4f0d55b6af2e4fbf3647a17889572b233e3462a5cc3d5212041c7"
+    },
+    {
+      "name": "blend-modes",
+      "address": "0x88ae1c",
+      "size": 32,
+      "bytes_hex": "0100000002000000030000000400000005000000060000000700000008000000",
+      "sha256": "8b4b2444e57aed8c2d05a1293255da1b048c63224317d4666230760935fa4a18"
+    },
+    {
+      "name": "color-byte-scale",
+      "address": "0x7dce6c",
+      "size": 4,
+      "bytes_hex": "00007f43",
+      "sha256": "270696d298cc689d8e5bd75897918aa617a25a5030ccae98017053dddd974995"
+    },
+    {
+      "name": "comparison-zero",
+      "address": "0x7dcb2c",
+      "size": 4,
+      "bytes_hex": "00000000",
+      "sha256": "df3f619804a92fdb4057192dc43dd748ea778adc52bc498ce80524c014b81119"
+    },
+    {
+      "name": "reset-world-source",
+      "address": "0x389d318",
+      "size": 64,
+      "bytes_hex": "0000803f000000000000000000000000000000000000803f000000000000000000000000000000000000803f000000000000000000000000000000000000803f",
+      "sha256": "5998e9d1dd9bf48af6af87a1ef8c7783b818ac8329637ada08cc5fb329042376"
+    },
+    {
+      "name": "primitive-dispatch-rows",
+      "address": "0x389d690",
+      "size": 128,
+      "bytes_hex": "7021780000227800a0c5780030207800f0247800c0257800a0c578001023780040297800102a7800a0c5780030277800f02e780060307800a0c57800802b780010347800c0347800a0c57800703278003038780020397800a0c57800f0357800903d7800c03e7800a0c57800c03a78008044780020467800a0c5780060407800",
+      "sha256": "441aaa23faad9da53934fa319555e413d56d204e53ef0f4b620d15b88a18a14c"
+    },
+    {
+      "name": "vertex-color-layouts",
+      "address": "0x389d710",
+      "size": 32,
+      "bytes_hex": "90d68903a0d68903b0d68903c0d68903d0d68903e0d68903f0d6890300d78903",
+      "sha256": "cda508cd7ced2d92d870dc21b39d1e2b670b4c49b97cd80af61b0f57de6722c7"
+    },
+    {
+      "name": "no-color-layouts",
+      "address": "0x389d730",
+      "size": 32,
+      "bytes_hex": "90d68903a0d6890390d68903a0d68903d0d68903e0d68903d0d68903e0d68903",
+      "sha256": "bc4b675fbc5f043876ca98f331310db6d6a686e3e5adb718334893827870c17e"
+    },
+    {
+      "name": "environment-texture-transform",
+      "address": "0x38a5dd0",
+      "size": 64,
+      "bytes_hex": "000000bf000000000000000000000000000000000000003f000000000000000000000000000000000000803f000000000000003f0000003f000000000000803f",
+      "sha256": "7dcb5f6391c375c281aa30c206da9a167e54bd0b409e83c63c95150e5a241e8e"
+    },
+    {
+      "name": "reset-texture-transform",
+      "address": "0x38a5e10",
+      "size": 64,
+      "bytes_hex": "0000803f000000000000000000000000000000000000803f000000000000000000000000000000000000803f000000000000000000000000000000000000803f",
+      "sha256": "5998e9d1dd9bf48af6af87a1ef8c7783b818ac8329637ada08cc5fb329042376"
+    },
+    {
+      "name": "material-byte-reciprocal",
+      "address": "0x7db2c4",
+      "size": 4,
+      "bytes_hex": "8180803b",
+      "sha256": "52c37b242f7ae8185a2b223b5b9d0b8772d97180a46b1d6a4d6c8b018c803d64"
+    },
+    {
+      "name": "material-unit-clamp",
+      "address": "0x7dcb10",
+      "size": 4,
+      "bytes_hex": "0000803f",
+      "sha256": "e00e5eb9444182f352323374ef4e08ebcb784725fdd4fd612d7730540b3e0c8c"
+    }
+  ],
+  "semantic_decisions": [
+    {
+      "address": "0x791a80",
+      "name": "PrepareBasicModelMatrices",
+      "reason": "Current times inverse-view followed by inverse-current preparation; full original dossier, no imported symbol name known"
+    }
+  ],
+  "symbol_declarations": {
+    "path": "/Users/burbujamc/Developer/sadx-macos/reference/sadx-mod-loader/SADXModLoader/include/SADXVariables.h",
+    "names": {
+      "0x3d12900": "WorldMatrix",
+      "0x3d128c0": "_nj_current_matrix_extracted_view_"
+    }
+  },
+  "mapped_zero_initial_state": [
+    {
+      "field": "render_flags",
+      "address": "0x3d08498",
+      "size": 4,
+      "section": {
+        "name": ".data",
+        "rva": 4792320,
+        "virtual_size": 55053888,
+        "raw_size": 50745344,
+        "file_offset": 4792320
+      },
+      "reason": "Entire source range after section raw bytes and within mapped virtual extent; no invented identity defaults"
+    },
+    {
+      "field": "constant_color",
+      "address": "0x3d08488",
+      "size": 4,
+      "section": {
+        "name": ".data",
+        "rva": 4792320,
+        "virtual_size": 55053888,
+        "raw_size": 50745344,
+        "file_offset": 4792320
+      },
+      "reason": "Entire source range after section raw bytes and within mapped virtual extent; no invented identity defaults"
+    },
+    {
+      "field": "vertex_color",
+      "address": "0x3d0848c",
+      "size": 4,
+      "section": {
+        "name": ".data",
+        "rva": 4792320,
+        "virtual_size": 55053888,
+        "raw_size": 50745344,
+        "file_offset": 4792320
+      },
+      "reason": "Entire source range after section raw bytes and within mapped virtual extent; no invented identity defaults"
+    },
+    {
+      "field": "cull_mode",
+      "address": "0x3d08490",
+      "size": 4,
+      "section": {
+        "name": ".data",
+        "rva": 4792320,
+        "virtual_size": 55053888,
+        "raw_size": 50745344,
+        "file_offset": 4792320
+      },
+      "reason": "Entire source range after section raw bytes and within mapped virtual extent; no invented identity defaults"
+    },
+    {
+      "field": "landtable_color",
+      "address": "0x3d08494",
+      "size": 4,
+      "section": {
+        "name": ".data",
+        "rva": 4792320,
+        "virtual_size": 55053888,
+        "raw_size": 50745344,
+        "file_offset": 4792320
+      },
+      "reason": "Entire source range after section raw bytes and within mapped virtual extent; no invented identity defaults"
+    },
+    {
+      "field": "current_no_view",
+      "address": "0x3d12e00",
+      "size": 64,
+      "section": {
+        "name": ".data",
+        "rva": 4792320,
+        "virtual_size": 55053888,
+        "raw_size": 50745344,
+        "file_offset": 4792320
+      },
+      "reason": "Entire source range after section raw bytes and within mapped virtual extent; no invented identity defaults"
+    },
+    {
+      "field": "inverse_current",
+      "address": "0x3d0fd40",
+      "size": 64,
+      "section": {
+        "name": ".data",
+        "rva": 4792320,
+        "virtual_size": 55053888,
+        "raw_size": 50745344,
+        "file_offset": 4792320
+      },
+      "reason": "Entire source range after section raw bytes and within mapped virtual extent; no invented identity defaults"
+    },
+    {
+      "field": "world",
+      "address": "0x3d12900",
+      "size": 64,
+      "section": {
+        "name": ".data",
+        "rva": 4792320,
+        "virtual_size": 55053888,
+        "raw_size": 50745344,
+        "file_offset": 4792320
+      },
+      "reason": "Entire source range after section raw bytes and within mapped virtual extent; no invented identity defaults"
+    },
+    {
+      "field": "extracted",
+      "address": "0x3d128c0",
+      "size": 64,
+      "section": {
+        "name": ".data",
+        "rva": 4792320,
+        "virtual_size": 55053888,
+        "raw_size": 50745344,
+        "file_offset": 4792320
+      },
+      "reason": "Entire source range after section raw bytes and within mapped virtual extent; no invented identity defaults"
+    }
+  ]
+}

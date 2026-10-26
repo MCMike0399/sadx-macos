@@ -1,0 +1,101 @@
+{
+  "base_commit": "16f880580d96444991c8826462b27e166d767566",
+  "scope": "Current matrix representation adapter only; actual current float matrix borrowed live",
+  "unchanged_files_sha256": {
+    "tools/oracles/verify_original_basic_model.py": "d4d92a0efaf206c07a4113cdc1dcd17b78ffd9236f97bb846938fe2a72f290e0",
+    "tools/oracles/check_basic_model_packet.py": "ebed363eb2c7ba7e20097d24237223b82d9c6e20d609940519908acbd57214cc",
+    "src/engine/basic_model.cpp": "92c102056e70380186cdb295e121916837ed9caead67996c6d99fda5c8ad0815",
+    "tests/unit/manifest.tsv": "fe970bc50bdb61297ed2d03368870e9cf8ff161183ba58708e70ddaf4af58652"
+  },
+  "unchanged_raw_outputs": {
+    "dev.cases.bin": {
+      "sha256": "3792e2c9a7d9e7a357b68795dd57dc65d599111ce3a7b00f2c4ac00d6e1fa3b7",
+      "byte_identical_to_frozen_base": true
+    },
+    "holdout.cases.bin": {
+      "sha256": "673e0a725b7ed05ff36cbe7264fb8abcc8b42ed3607650c6789de4bc17d52d63",
+      "byte_identical_to_frozen_base": true
+    },
+    "dev.receipts.jsonl": {
+      "sha256": "7eaa75cc26422d4e34c20a204c058d415dc51b38669dc4d7fd8fbca0ff02b60d",
+      "byte_identical_to_frozen_base": true
+    },
+    "holdout.receipts.jsonl": {
+      "sha256": "4b5385dd1b43c49890a8a87283b940077c36a27b932ff8216e58a1a133fe8139",
+      "byte_identical_to_frozen_base": true
+    }
+  },
+  "dev": {
+    "cases": 2427,
+    "mismatch_count": 0,
+    "fp_status_mismatches": 172,
+    "values_match": true,
+    "passed": false,
+    "exit_status": 2,
+    "case_sha256": "3792e2c9a7d9e7a357b68795dd57dc65d599111ce3a7b00f2c4ac00d6e1fa3b7"
+  },
+  "holdout": {
+    "cases": 3427,
+    "mismatch_count": 0,
+    "fp_status_mismatches": 274,
+    "values_match": true,
+    "passed": false,
+    "exit_status": 2,
+    "case_sha256": "673e0a725b7ed05ff36cbe7264fb8abcc8b42ed3607650c6789de4bc17d52d63"
+  },
+  "unit_exit_status": 0,
+  "mutants": [
+    {
+      "name": "normalized-material",
+      "value_mismatches": 1263,
+      "exit_status": 1,
+      "source_sha256": "09f71dd4dcb3b92373598619910887b76137ff092f7ba7ca8a8361fe3a1cc3c2"
+    },
+    {
+      "name": "destination-blend-field",
+      "value_mismatches": 1080,
+      "exit_status": 1,
+      "source_sha256": "e08e25084dc391f552d0336105a29e474fcdf8f27e71d8be067970006194ca83"
+    },
+    {
+      "name": "environment-off-skipped",
+      "value_mismatches": 42,
+      "exit_status": 1,
+      "source_sha256": "7cc0e2788249faf53972dc608a6a710c8f095d8647fb8601ff7f319aafae7f21"
+    },
+    {
+      "name": "callback-reloaded",
+      "value_mismatches": 38,
+      "exit_status": 1,
+      "source_sha256": "c589ed4b956a7b3c6e0fc8034e7c8d8e5bbc241376c5ce6afabb70ed49c42604"
+    },
+    {
+      "name": "reset-world-alias",
+      "value_mismatches": 180,
+      "exit_status": 1,
+      "source_sha256": "65c01c3fe6303a8a26bdf73936977355a3ff9da6ad4c78278cb5d268e2d864dd"
+    },
+    {
+      "name": "constant-channel-order",
+      "value_mismatches": 73,
+      "exit_status": 1,
+      "source_sha256": "6dc8d3429c62baa6f1673caafe858b1494323d7ea79e059b2cbbfec80c76152d"
+    },
+    {
+      "name": "environment-generator",
+      "value_mismatches": 31,
+      "exit_status": 1,
+      "source_sha256": "eab8ff8417527b32a83371df93d00b98d032a3860eff158e303a92a51ffa519d"
+    }
+  ],
+  "algorithm_byte_unchanged": true,
+  "oracle_harness_fixtures_byte_unchanged": true,
+  "unit_expectations_unchanged": true,
+  "notes": [
+    "Unit current declaration and two raw-word initialization sites adapted to new API; assertions and expected words unchanged",
+    "No reinterpret cast, arithmetic float copy, retained shadow/cache or new game storage",
+    "Multiply/invert copy current words into local D3dxMatrix with memcpy per call",
+    "Inverse view, reset world and four source scratch matrices stay D3dxMatrix",
+    "Runtime binding, native registration and fresh independent review remain Root owned"
+  ]
+}
