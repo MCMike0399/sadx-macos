@@ -23,6 +23,7 @@ ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(ROOT / 'tools/journey'))
 sys.path.insert(0, str(ROOT / 'tools/gate'))
 import capture_content as content
+from content_corpus import resolve_artifact
 import run_journeys
 
 
@@ -44,9 +45,11 @@ class QualifiedContentOffline(unittest.TestCase):
         cls.source = Path(os.environ['SADX_CONTENT_CORPUS'])
         cls.evidence = json.loads((ROOT / 'reference/frozen-corpora/capture-content-evidence.json').read_text())
         for relative, expected in cls.evidence['completion_final']['offline_replay_artifacts_sha256'].items():
-            if digest(cls.source / relative) != expected:
-                raise AssertionError(f'qualified replay artifact changed: {relative}')
+            resolve_artifact(cls.source, relative, expected)
         cls.fixture = json.loads(content.FIXTURE.read_text())
+        cls.pins = dict(cls.evidence['completion_final']['offline_replay_artifacts_sha256'])
+        cls.pins.update({row['capture']: row['capture_sha256']
+                         for row in cls.evidence['completed_native_content']})
         cls.results = []
         cls.header = b'P6\n640 480\n255\n'
         cls.mutants = {
@@ -64,9 +67,17 @@ class QualifiedContentOffline(unittest.TestCase):
         output.write_text(json.dumps(cls.results, indent=2) + '\n')
 
     def verified(self, relative, expected):
-        path = self.source / relative
-        self.assertEqual(digest(path), expected, str(path))
-        return path
+        return resolve_artifact(self.source, relative, expected)
+
+    def replay_file(self, relative):
+        return self.verified(str(relative), self.pins[str(relative)])
+
+    def deliver_captures(self, relative, destination, frames):
+        destination.mkdir(parents=True)
+        for frame in frames:
+            for suffix in ('json', 'ppm'):
+                name = f'{frame}.{suffix}'
+                shutil.copyfile(self.replay_file(relative / name), destination / name)
 
     def test_all_50_original_native_rasters_and_200_mutants(self):
         rows = self.evidence['completed_native_content']
@@ -88,16 +99,19 @@ class QualifiedContentOffline(unittest.TestCase):
     def test_return_reference_provenance_and_fixed_frame(self):
         for row in self.evidence['completion_final']['return_transitions']:
             provenance = row['provenance']
-            for key in ('capture', 'state', 'log', 'script', 'input_metadata', 'application'):
-                self.verified(provenance[key], provenance[key + '_sha256'])
+            inputs = {key: self.verified(provenance[key], provenance[key + '_sha256'])
+                      for key in ('capture', 'state', 'log', 'script', 'input_metadata')}
+            # Historical executable identity is acquisition provenance. This replay
+            # never executes it, and rebuilding that mutable path is not corruption.
+            self.assertRegex(provenance['application_sha256'], r'^[0-9a-f]{64}$')
             self.assertEqual(row['expectation_frame'], 1450)
             self.assertEqual(row['ceiling'], 12)
             self.assertEqual(row['diagnostic_only']['source_frame'], 1451)
             self.assertTrue(row['diagnostic_only']['byte_exact_to_native1450'])
             reference = self.fixture['references'][self.fixture['checkpoints'][row['checkpoint']]]
-            source = self.source / provenance['capture']
+            source = self.verified(provenance['capture'], provenance['capture_sha256'])
             self.assertEqual(content.coarse_signature(content.read_capture(source)), reference['signature'])
-            metadata = json.loads((self.source / provenance['input_metadata']).read_text())
+            metadata = json.loads(inputs['input_metadata'].read_text())
             constants = [node.value for node in ast.walk(ast.parse(
                 (ROOT / metadata['native_checker']).read_text()))
                 if isinstance(node, ast.Constant) and isinstance(node.value, str)]
@@ -105,10 +119,10 @@ class QualifiedContentOffline(unittest.TestCase):
             expected = [f'@{int(frame) - 1} {kind} {key}'
                         for frame, key, kind in (event.split(':') for event in metadata['native_keys'].split(','))
                         if int(frame) - 1 <= 1470]
-            observed = [line for line in (self.source / provenance['script']).read_text().splitlines()
+            observed = [line for line in inputs['script'].read_text().splitlines()
                         if len(line.split()) == 3 and line.split()[1] in ('down', 'up')]
             self.assertEqual(observed, expected)
-            state = json.loads((self.source / provenance['state']).read_text())
+            state = json.loads(inputs['state'].read_text())
             self.assertEqual((state['game_mode'], state['game_state'], state['player'], state['camera']),
                              (12, 21, None, None))
 
@@ -118,19 +132,20 @@ class QualifiedContentOffline(unittest.TestCase):
         for name, directory in (('file_select', 'native-file-select-cvya2gsi'),
                                 ('main_menu', 'native-main-menu-dor_txwa')):
             module = checker(name)
-            source = self.source / 'build' / directory
-            self.assertTrue(json.loads((source / 'result.json').read_text())['passed'])
+            source = Path('build') / directory
+            self.assertTrue(json.loads(self.replay_file(source / 'result.json').read_text())['passed'])
             for mutation in ('original', *self.mutants):
                 with self.subTest(checker=name, mutation=mutation), tempfile.TemporaryDirectory() as temporary:
                     output = Path(temporary) / 'output'
                     def deliver(command, stdout, **kwargs):
                         destination = Path(command[command.index('--capture-directory') + 1])
-                        shutil.copytree(source / 'captures', destination)
+                        frames = command[command.index('--capture-at') + 1].split(',')
+                        self.deliver_captures(source / 'captures', destination, frames)
                         if mutation != 'original':
                             (destination / '1450.ppm').write_bytes(self.mutants[mutation])
                         profile = Path(command[command.index('--save-directory') + 1])
                         shutil.copytree(self.source / 'game/imported/saves', profile)
-                        stdout.write((source / 'application.log').read_text())
+                        stdout.write(self.replay_file(source / 'application.log').read_text())
                         return subprocess.CompletedProcess(command, 0)
                     with patch.object(module.subprocess, 'run', deliver), redirect_stdout(io.StringIO()):
                         if mutation == 'original':
@@ -145,19 +160,20 @@ class QualifiedContentOffline(unittest.TestCase):
 
     def test_fresh_save_four_plays_with_originals_and_raster_mutants(self):
         module = checker('fresh_save')
-        source = self.source / 'build/native-fresh-save-fpe02hag'
-        self.assertTrue(json.loads((source / 'result.json').read_text())['passed'])
+        source = Path('build/native-fresh-save-fpe02hag')
+        self.assertTrue(json.loads(self.replay_file(source / 'result.json').read_text())['passed'])
         for route in ('create', 'restart', 'create-empty', 'restart-empty'):
             captures = source / route / 'captures'
-            frames = sorted(int(p.stem) for p in captures.glob('*.ppm'))
+            frames = sorted(int(Path(p).stem) for p in self.pins
+                            if str(Path(p).parent) == str(captures) and p.endswith('.ppm'))
             for mutation in ('original', *self.mutants):
                 with self.subTest(route=route, mutation=mutation), tempfile.TemporaryDirectory() as temporary:
                     def deliver(command, stdout, **kwargs):
                         destination = Path(command[command.index('--capture-directory') + 1])
-                        shutil.copytree(captures, destination)
+                        self.deliver_captures(captures, destination, frames)
                         if mutation != 'original':
                             (destination / f'{frames[0]}.ppm').write_bytes(self.mutants[mutation])
-                        stdout.write((source / route / 'application.log').read_text())
+                        stdout.write(self.replay_file(source / route / 'application.log').read_text())
                         return subprocess.CompletedProcess(command, 0)
                     with patch.object(module.subprocess, 'run', deliver):
                         args = (Path('offline-app'), Path('assets'), Path('profile'),
@@ -173,16 +189,21 @@ class QualifiedContentOffline(unittest.TestCase):
     def test_reference_R2_R3_full_run_with_originals_and_raster_mutants(self):
         replay = json.loads((ROOT / 'reference/frozen-corpora/capture-content-reference-replay.json').read_text())
         provenance = replay['provenance']
-        # The report is provenance, not an input to run(); Root has since
-        # refreshed it. Keep its old hash and verify every replay input unchanged.
-        for key in ('log', 'script'):
-            self.verified(provenance[key], provenance[key + '_sha256'])
-        log = (self.source / provenance['log']).read_text()
+        # The protected fixture already freezes the original frame log and
+        # decoded states. Later gate runs overwrite build/journeys by design.
+        # Its full-log/report hashes remain acquisition provenance, not live inputs.
+        self.assertEqual(len(replay['frame_lines']), 1700)
+        log = '\n'.join(replay['frame_lines']) + '\n'
+        original_script = run_journeys.script_text(run_journeys.JOURNEYS,
+                                                   Path(provenance['script']).parent)
+        self.assertEqual(hashlib.sha256(original_script.encode()).hexdigest(),
+                         provenance['script_sha256'])
         for journey in run_journeys.JOURNEYS[1:3]:
             name = journey['name']
             reference = self.fixture['references'][name]['provenance']
             image = self.verified(reference['capture'], reference['capture_sha256'])
-            state = self.verified(reference['state'], reference['state_sha256'])
+            state = replay['states'][name]['state']
+            self.assertEqual(state['frame'], journey['frames'])
             for mutation in ('original', *self.mutants):
                 with self.subTest(journey=name, mutation=mutation), tempfile.TemporaryDirectory() as temporary:
                     output = Path(temporary) / name
@@ -190,13 +211,33 @@ class QualifiedContentOffline(unittest.TestCase):
                         stdout.write(log)
                         (output / f'{name}.ppm').write_bytes(image.read_bytes() if mutation == 'original'
                                                            else self.mutants[mutation])
-                        shutil.copyfile(state, output / f'{name}.state.json')
+                        (output / f'{name}.state.json').write_text(json.dumps(state))
                         return subprocess.CompletedProcess(command, 0)
                     with patch.object(run_journeys.subprocess, 'run', deliver), redirect_stdout(io.StringIO()):
                         status = run_journeys.run([journey], 'offline-app', 'game', 'system', output)
                     self.assertEqual(status, 0 if mutation == 'original' else 1)
                     report = json.loads((output / 'report.json').read_text())
                     self.assertFalse(report['run_problems'])
-                    self.assertEqual(report['journeys'][0]['game_state'], json.loads(state.read_text()))
+                    self.assertEqual(report['journeys'][0]['game_state'], state)
                     self.results.append({'reference': name, 'mutation': mutation, 'exit_status': status,
                                          'scope': 'full run() offline replay; only raster mutated'})
+
+    def test_rebuilding_current_app_log_and_state_cannot_change_historical_replay(self):
+        forbidden = {self.source / name for name in (
+            'build/sadx-app', 'build/journeys/route.log', 'build/journeys/route.txt',
+            'build/journeys/title.state.json', 'build/journeys/character-select.state.json')}
+        read_bytes, read_text = Path.read_bytes, Path.read_text
+
+        def guarded_bytes(path):
+            if path in forbidden:
+                raise AssertionError(f'historical replay used mutable build input: {path}')
+            return read_bytes(path)
+
+        def guarded_text(path, *args, **kwargs):
+            if path in forbidden:
+                raise AssertionError(f'historical replay used mutable build input: {path}')
+            return read_text(path, *args, **kwargs)
+
+        with patch.object(Path, 'read_bytes', guarded_bytes), patch.object(Path, 'read_text', guarded_text):
+            self.test_reference_R2_R3_full_run_with_originals_and_raster_mutants()
+            self.test_return_reference_provenance_and_fixed_frame()

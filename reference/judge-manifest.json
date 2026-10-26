@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "cb86c98f831e9d8aee8ba87985b77a4ab316d6d4",
-    "evidence": "reference/production-integration-20261026/texture-number-wrapper/proof.json",
-    "evidence_sha256": "7d2825554011dc2908828d23beb73b5bc792fe670e990598bbf5a22f7340df63",
-    "reason": "Track actual78d140 texture-number wrapper and rerun unchanged texture identities after correcting SpriteImmediate caller; no expected inputs changed"
+    "base_commit": "1f13f694a3dc5391b0c5ef87de84433facd95764",
+    "evidence": "reference/production-integration-20261026/content-corpus-portability-judge.json",
+    "evidence_sha256": "eab965a5c0e20dc4084dbb2a22335f06d60dd60a29fede8a19a0f145c62b5698",
+    "reason": "Archive historical replay inputs under unchanged hashes; use frozen log/state and exact script provenance; protect content resolver itself"
   },
   "files": {
     "Makefile": "70f0bac9f98a9805db7a0e86e04aa9587e6e13eee73faca2c8e7ad0fdae7cea9",
@@ -550,12 +550,13 @@
     "tests/probes/startup_initial_state_probe.hpp": "d516c7fd80ec55032b9abca542054530b6a930b469cdf48d292ecc73571b30cd",
     "tests/python/test_audio_settings.py": "53705ea6df640980d77f9906325db988541c5e83f072b54e432be0b57fb9524e",
     "tests/python/test_capture_content.py": "0339284190f6baeaa986241db8c0a0569b23cd35c0dcfc51e21f3e75ac326c93",
-    "tests/python/test_capture_content_offline.py": "a825cbea1086853cfa715e43969c655d575cf910d23a0e3e0f3aadb69da9e53b",
+    "tests/python/test_capture_content_offline.py": "ab458fc35f58bfd8c113d0c1efde47c027ebebf610b27a5c31580b8a08753496",
     "tests/python/test_character_completion_import.py": "677931420a5bd7881bc7051e2d9528375771362f8223b5c7a433536dfbc73659",
     "tests/python/test_character_import.py": "d8c5725ba98c470b424a88e84783298c874aa91a10da920ef6c550ad5ed93b5f",
     "tests/python/test_character_select_labels_import.py": "86be765d4b0368bcbcf5d88d7ba5f89feade35cd565145d8d8a4fd7a638c74ae",
     "tests/python/test_character_select_menu_import.py": "cde93c4d185677032aed569350fe159a6867d65fcca3902d2e2d773f0de4c4ad",
     "tests/python/test_character_textures.py": "9d7657e983234ec9999b4bd20ade60bb33f5dc6a9707afa8789ed229d4f59321",
+    "tests/python/test_content_corpus.py": "e4bda634112c281eed7517b24565e4fbc63fa00c8f04461126a83139a1a931ec",
     "tests/python/test_extraction.py": "d4cfeca88e6c47057705dd70c07921eb826b5b7d5fdb0b8cc7a8edb0f28ec04f",
     "tests/python/test_file_select_display_assets.py": "0e4b0443ab85ffcd7301faae275476ffafee4c8e12e9444089a77eb42bfeac26",
     "tests/python/test_font_assets.py": "43a127e8defe3daaccccde24885af2ba9510c7ee256020dbac96705172094ee8",
@@ -610,7 +611,7 @@
     "tools/gate/check_global_owners.py": "764714cd1fbdeab7b77f3b50d9efb64f12992f791758e3f07602a938b32ef504",
     "tools/gate/check_input_initial_state.py": "2a9de3ce38d6a1c8bef12e6c87fd8181a0888c15e5033b5c8b8b6a873f2352e1",
     "tools/gate/check_input_mod_constants.py": "be8443495170b4ecbc7388c3e60f387242847ae7318e3e310b6a53c74300614b",
-    "tools/gate/check_judge.py": "f02ee013a056b7a11c90d14ec4af630b9f259bafdec969a48a181d8d96a53b88",
+    "tools/gate/check_judge.py": "a522bca23995da6896bcfa5fb85da66ae34a8cbbe9363b11d9fd604a473a2903",
     "tools/gate/check_layers.py": "2b72408ccd936baa5da22b36eefbf90ce2af4ebf1ab01dc63a5f45f5fa9615c1",
     "tools/gate/check_library_initial_state.py": "6d5d21de9176f715328496408b5e87e5d80f72793cdfe13a4e7dc09931201080",
     "tools/gate/check_native_closure.py": "405656d6154dc89aec53cdc49c854ae6ec9287b7bb58dc894daa6ee07d8bc2d2",
@@ -626,6 +627,7 @@
     "tools/gate/check_session_control_defaults.py": "0b610a128768e26ce7082c7f609f5f544b6c3931dea7a27ef593dd58a492c89d",
     "tools/gate/check_sound_initial_state.py": "7b10ffa2def797a669f6deff6021139d864d917f492ac160c668d0f160edac6f",
     "tools/gate/check_startup_initial_state.py": "1c1c43935ed63639c66a50e783f8183d9f319f83ce360a3be4839e8ce1bd5691",
+    "tools/gate/freeze_content_corpus.py": "64f57c595638bee1e76002e1fcb0f1cabb884734136f06214a831fd6811c4a43",
     "tools/gate/gen_make.py": "8152b42718d0f9fcd6ac08e4bdbe3eae67e82d0a38ce99e60ce8410f888f89fe",
     "tools/gate/gen_status.py": "264209607e3c0c7aaee13d8f455ddcfb3365f70fc0bc59ed68afafc7dbf8f4b6",
     "tools/gate/guard_judge_edit.py": "6fa117651c735c3a152343da978945a426138ce455d0494e7ca707f46ff82935",
@@ -642,6 +644,7 @@
     "tools/journey/check_native_fresh_save.py": "76ecc58997331de9b8123bfd3b20347331bccf8736214eb6cec946763218ff05",
     "tools/journey/check_native_main_menu.py": "e3628e8a039c7ef623f48b38d6bd63d6f43bc419ed8f916b93ffbd67f7f8e8f1",
     "tools/journey/compare_native_startup.py": "86756c9f5988b8d42793654fa4c36910b7f5fce82ba06f317bbfc6733b3feaf0",
+    "tools/journey/content_corpus.py": "3be64d867b3e0cabbc1e29d1023d87105d3b4e96ee70320442fe7f2dc1fb0c9e",
     "tools/lib/extract.py": "d2c2cb1479003401ba1faf0211281a6c6d35949c2bd27e55acc48f7cc7825bd8",
     "tools/lib/import_audio.py": "91f0db9f658c306a4a5637b4180c4e0d6033da72d927f1ba59c18965e5a49e30",
     "tools/lib/pe_image.py": "94694dc5fb38e459d26b35c25a7cdb7e3fad7128e1178363340606bb9db299f2",

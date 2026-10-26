@@ -1,0 +1,43 @@
+{
+  "problem": "Historical offline replay read mutable build/sadx-app and build/journeys log/state paths. Legitimate rebuilds invalidated archival provenance despite unchanged qualified raster/semantic inputs.",
+  "failed_gate": {
+    "source_commit": "1f13f69",
+    "log": "build/object-texture-integration-gate-corrected.log",
+    "observed_exit_status": 2,
+    "python_tests": 382,
+    "python_failures": 2,
+    "additional_windowed_limit": "GUI display unavailable; own waiting smoke process terminated after test failure."
+  },
+  "changes": [
+    "Qualified artifacts are archived at ignored content-addressed paths, matched to existing hashes before archival; resolver never blesses new output.",
+    "Reference R2/R3 replay uses already committed frozen frame lines and decoded states; reconstructed normal input script still matches original script SHA.",
+    "Historical binary identity remains recorded acquisition provenance; offline mocks do not require or execute it.",
+    "Existing mutable build inputs cannot change historical replay; corrupt sources/blobs still fail closed."
+  ],
+  "unchanged_expected_fixtures_sha256": {
+    "reference/frozen-corpora/capture-content.json": "28d6f2e8159caf6a77cd4220e2f5ee79b6873fb426423cdfcb33e6c399f19ca0",
+    "reference/frozen-corpora/capture-content-reference-replay.json": "032140ec976913a35326ab2af9bfb4e7e11f2f60d41d2cf9cdbe21bcbd23536b",
+    "reference/frozen-corpora/capture-content-evidence.json": "ae3247944c0b6da4aac80b662fded39a27fd6264d47e501ebe8a5beb7dfb3409"
+  },
+  "verification": {
+    "focused_tests": 19,
+    "focused_exit_status": 0,
+    "archived_inputs": 124,
+    "isolated_archive_replay": {
+      "exit_status": 0,
+      "historical_build_tree_present": false,
+      "reference_executable_present": false,
+      "mutable_reference_log_state_present": false,
+      "qualified_archive_inputs": 124,
+      "limits": [
+        "Only mocked process delivery replays; no application was executed.",
+        "Original raster hashes, frozen states/frames and script SHA are unchanged."
+      ]
+    }
+  },
+  "limits": [
+    "Only replay delivery is mocked; qualified original images, semantic state, thresholds and draw-suppression mutants remain unchanged.",
+    "This judge correction does not qualify a new native checkpoint.",
+    "Full gate awaits visible GUI and no Ghidra/compiler recovery jobs."
+  ]
+}
