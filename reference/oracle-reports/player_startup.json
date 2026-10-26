@@ -1,6 +1,6 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "46dfb817b801ad26aac19d0a68433b9adf4563c3e9654cb4e8e79278820e850a",
+ "native_library_sha256": "c6cc1d9b041b15e47c9bb24bc80c371cf2585c78b39f052b930226cc6b282f55",
  "parameter_table_sha256": "3f69076118fcc6a77c55e600eb337944eb6562e5b0979104b58058ad64ba5107",
  "case_blob": {
   "path": "build/oracles/player_startup.cases.bin",
@@ -27,13 +27,13 @@
   }
  },
  "native_sources": {
-  "src/player/player_startup.cpp": "2d6aacc547a36312b9969b7d44bde0f632fe3c5620eff43283c1a9c3e2294e96",
+  "src/player/player_startup.cpp": "2e52efc04b32fd50139200d099c3288ed47b890610149629cedb128e12e9614a",
   "src/player/player_startup.hpp": "caf9869ca53aa415652f368ed0228b7d712be8ead731fa467a51adfd2e7c3c32",
   "src/player/player_state.cpp": "50c12dc9f34152a746062a3933611965cc02bb6487bf063d0b42e47611ee205c",
-  "src/engine/task.cpp": "b7e931c0acf62b9e8ca1f78fe0b26605f6e8be21aa5e27888080291d8e449e3b",
+  "src/engine/task.cpp": "69a568d3577c8a0b7050d2de9774441082f4304931c0b9580f249fb1cb601774",
   "src/player/player_task.hpp": "ca3b911db75e90e2ddabc2a4bef3e4fae6578c0405f864001c2e68162e07650d",
   "src/player/player_task.cpp": "2e76cd51fb6d4e58e95fffb2245a76f686243035074cf331890e240e61e8bf71",
-  "src/engine/task_work.cpp": "b044c4dfb8c85b054216443b35d4e5a42481cf55277e8c9386c4564b4c7797d7",
+  "src/engine/task_work.cpp": "08e679e66ab28ceda7a942033489cbd1f49356875766babe9e66236870c84691",
   "tests/probes/native_player_startup_probe.cpp": "3f19fe2625681280cd69a28a9c91cf1fccd4a33c23894adc34f65f87a8db9261",
   "tools/oracles/verify_original_player_startup.py": "54ad16c1dbb488eef85455ec4e15a9100a0e31ff54f59fd3f7a8ccec2bab9d44"
  },
@@ -433,7 +433,7 @@
  "original_return_observed": false,
  "full_emulator_match": false,
  "tracked_summary": {
-  "full_sha256": "b723d63e02a6d2d61f4708cd00c7df62970ecfbbb5ef20d74f6ae9a263be8a8c",
+  "full_sha256": "c8c964efaf9224a5d8d4609e26ed976c023d4c96e0b714a76b46d91f9e047dc4",
   "full_bytes": 12539,
   "lists_cut_to": 10,
   "cut_lists": {

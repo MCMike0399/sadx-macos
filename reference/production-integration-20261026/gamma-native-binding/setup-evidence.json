@@ -1,0 +1,41 @@
+{
+  "scope": "Separate compiler, source-registration and report receipt setup for the frozen native Gamma binding; no judge algorithm/fixture/probe/expectation/tolerance edits.",
+  "implementation_commit": "2e15b87614c469348f083e59a777f7619742cabb",
+  "changed_existing_protected_inputs": [
+    {
+      "path": "Makefile",
+      "before_sha256": "7d7f57dfd0e1e3ebe13b496837dcc48d4c4e958bdf12c7ab48ebdc772931971d",
+      "after_sha256": "6ec3d0c46af7c09e5faca183672853fb4642bf027a33cedc8d1c63e8dd099e71"
+    },
+    {
+      "path": "reference/oracle-reports/player_startup.json",
+      "before_sha256": "7ccabdc32d746b972f7de64de178ae294252f13e816250e86fd76fae4e6c29fe",
+      "after_sha256": "64fa58cb36abe377bbf51417d1770a98d5dfba284021b7837b2711ff9e90e67c"
+    },
+    {
+      "path": "tests/unit/manifest.tsv",
+      "before_sha256": "d90e5839ce56554edcba7cd6138a1399c2291f67008113cf449c67d88f706990",
+      "after_sha256": "457f0f70e7afa666aba6c70840e17aaa19deeda3e706d7a226ebee7d5b971023"
+    }
+  ],
+  "registration": [
+    "Approved shared-current frozen fixture compiler recipes inherited from Root integration9f5877a.",
+    "Register new actual native Gamma binding test target and manifest row.",
+    "Register byte-identical approved Gamma core probe/oracle/mutants and query mutant receipt.",
+    "Refresh startup report summary after unchanged original oracle rerun:2004 cases,zero values/boundaries/resources/control,924 FP partials."
+  ],
+  "ignored_canonical_inputs_restored": {
+    "count": 53,
+    "rule": "Missing files only; every source byte matched its pre-existing manifest hash before local restoration."
+  },
+  "validation": [
+    "Actual native binding unit rc0",
+    "Frozen Gamma core unit rc0",
+    "Frozen startup unit rc0",
+    "Frozen startup oracle rc0 with honest FP partial",
+    "Actual native normal-input app rc1 at CCL_Init frame1382",
+    "Force-load native closure rc0",
+    "Readability/provenance/layers/owners/whitespace clean"
+  ],
+  "gate": "NOT RUN: Root owns fresh independent review and the full gate."
+}

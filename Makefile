@@ -460,3 +460,7 @@ $(CURRENT_REFERENCE_PROBES): build/native-%-probe.dylib: tests/probes/native_$$(
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) -include tests/reference/actor_current_fixture.hpp $< build/libsadx-guest.a build/libsadx-core.a -o $@
 build/actor-current-test: tests/unit/actor_current.cpp src/player/actor_current.cpp src/player/actor_current.hpp src/engine/task_work.cpp
 	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/actor_current.cpp src/player/actor_current.cpp src/engine/task_work.cpp -o $@
+
+# Native Gamma binding test uses actual imported metadata and the shipping closure.
+build/native-gamma-binding-test: tests/unit/native_gamma_binding.mm src/apps/native_gamma_actor_assets.hpp build/libsadx-native.a
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-native.a -framework Foundation -o $@

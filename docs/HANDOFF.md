@@ -535,3 +535,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Gamma asset worker resumed after the actual terminal. Strict import produces 3328 records, preserving 3302 existing encoded records and 22 bindings. Original recipes/weld and inverse checks pass; final review and product consumption remain pending.
 * Matrix numbers 54, 30, 39, 2 and 37 are animated Ninja preorder cache indices for GetMMMatrix, not E102_OBJECTS export rows. Root independently confirmed the 77-node child/sibling traversal and exact pointer identities. Matrix contents require the actual animation cache; no static-pose fallback is accepted.
 * Next: finish Gamma assets/review and current-owner fixture validation, bind the actual controller with existing native PInitialize, then recover its first real missing lower call. Continue all preview actors, cancel/reentry, audio, Sonic story and the full route. No push.
+
+### 2026-10-26 — Native Gamma initialization reaches actual CCL boundary (track J)
+
+* Private packet/gamma-native-binding connects the actual TitleScene callback, shared current State and eight-slot Registry to real PInitialize, imported parameters and all 91 animation recipes with real Stand 0. Source algorithms and frozen judges stay unchanged.
+* Normal fresh-save input exits 1 at frame 1382 at native_gamma_CCL_Init. Inspected screenshot remains the outgoing title screen. No actor-pixel, N3b, GPU or story claim.
+* Actual binding unit, frozen Gamma core unit and frozen startup unit exit 0. Consumer checks distinguish actual bootstrap timer bytes and cutscene task nullness from unrelated state. Force-load native closure exits 0 without guest or PE dependencies.
+* Unchanged startup oracle rerun has 2,004 cases, zero value/boundary/resource/control mismatches and 924 FP flag partials; existing script exits 0, verdict remains partial. Inherited Gamma 1,422/1,080 cases remain partial with 498/690 FP differences and rc 2.
+* Proof, source hashes, exact app command and limits are in reference/production-integration-20261026/gamma-native-binding. Compiler/test registration and receipt refresh are separate from implementation. Root owns fresh review and full gate; no provider, full gate or push run here.
