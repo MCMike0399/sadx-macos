@@ -1,0 +1,32 @@
+{
+  "scope": "Semantic InitializedPlayerView at existing NativeAccess boundary; source initialization store order and algorithms unchanged.",
+  "source_startup_oracle": {
+    "exit_status": 0,
+    "cases": 2004,
+    "value_boundary_resource_control_failures": 0,
+    "flag_partials": 924,
+    "verdict": "partial",
+    "original_return_observed": false,
+    "report_sha256": "c8c964efaf9224a5d8d4609e26ed976c023d4c96e0b714a76b46d91f9e047dc4"
+  },
+  "frozen_startup_unit_exit_status": 0,
+  "frozen_gamma_core_unit_exit_status": 0,
+  "frozen_judges": {
+    "tests/unit/player_startup.cpp": "3c433f9b0e965f581e9982a854c2425b471aac472fe0d787b1d2bf711c0bd218",
+    "tests/probes/native_player_startup_probe.cpp": "3f19fe2625681280cd69a28a9c91cf1fccd4a33c23894adc34f65f87a8db9261",
+    "tools/oracles/verify_original_player_startup.py": "54ad16c1dbb488eef85455ec4e15a9100a0e31ff54f59fd3f7a8ccec2bab9d44",
+    "src/player/gamma_selection_core.cpp": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea",
+    "src/player/gamma_selection_core.hpp": "4d4259960f8cd59e610300683812bc5081a809d5938b0441ecc3a8ae1db3ce7d",
+    "tests/probes/native_gamma_selection_core_probe.cpp": "f1f5119da472f78651428ac79b4a5435e80acb359bf2a0c2f816b2670195a517",
+    "tools/oracles/verify_original_gamma_selection_core.py": "b62020db7b643a941079b15b2e0b931885ace95b40bb1ec3329a61439604aada"
+  },
+  "limits": [
+    "Actual source prefix only: stop before44297b because native4a2b60 owner remains missing; no original return or running game claim",
+    "Heap/task-pool initialization is an explicit fixture after unlifted CRT/Win32 acquisition",
+    "No source task/work/object/event callees are replaced",
+    "Canonical probe snapshot reads authoritative typed task/player/motion views; allocated bytes are initialization provenance",
+    "Caller-selected parameter/save/FP/resource fixtures, not actual initialized mods or hardware captures",
+    "Source crash/corrupt-registration/unknown-owner cases stop before the unsafe instruction and retain native partial failures",
+    "Flag difference: the native x87 model sets the precision bit (PE 0x20) of the status word on inexact results; Unicorn 2.1.4 does not raise x87 exception bits for these instructions (source 0x0). All compared values match; the hardware flags need the Intel capture (M4)."
+  ]
+}

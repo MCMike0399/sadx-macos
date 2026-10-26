@@ -40,24 +40,37 @@ void store_animation_shadow(PlayerPhysicsState &player, float shadow) {
     player.shadow_scale_at_1fc = shadow;
     player.join_vertex_mode_at_122 = 0;
 }
+// NOTSA: legacy availability remains at this existing native initialization boundary.
+struct PlayerFields {
+    std::optional<std::int16_t> &timer;
+    std::optional<std::uint16_t> &flags, &requested_animation, &current_animation;
+    std::optional<TaskHandle> &held_task;
+    std::optional<std::shared_ptr<const PlayerAnimationTable>> &animation_table;
+};
+PlayerFields player_fields(PlayerPhysicsState &player) {
+    return {player.timer_at_80, player.source_flags_at_6,
+            player.requested_animation_at_124, player.current_animation_at_126,
+            player.held_task_at_68, player.animation_tail.table_at_140};
+}
 // NOTSA: fields established by the successful source player calloc.
 void initialize_physics(PlayerPhysicsState &player) {
+    auto fields = player_fields(player);
     player.floor_normal = NinjaVector{0, 0, 0};
     player.source_vector_at_44 = NinjaVector{0, 0, 0};
     player.prior_attributes = 0;
     player.path_distance = 0;
-    player.held_task_at_68 = TaskHandle{};
+    fields.held_task = TaskHandle{};
     player.flags_at_10 = 0;
     player.no_control_time_at_a = 0;
-    player.source_flags_at_6 = 0;
+    fields.flags = 0;
     player.timer_at_7e = 0;
     player.source_charge_at_0 = 0;
     player.jump_timer_at_8 = 0;
     player.idle_timer_at_e = 0;
-    player.timer_at_80 = 0;
+    fields.timer = 0;
     player.timer_at_82 = 0;
-    player.requested_animation_at_124 = 0;
-    player.current_animation_at_126 = 0;
+    fields.requested_animation = 0;
+    fields.current_animation = 0;
     player.previous_animation_at_128 = 0;
     // The actual 512-byte calloc includes these mtnjvwk fields. Keep them
     // unknown in generic state; only this source producer establishes zero/null.
@@ -66,7 +79,7 @@ void initialize_physics(PlayerPhysicsState &player) {
     player.animation_tail.flags_at_12e = 0;
     player.animation_tail.frame_at_130 = 0;
     player.animation_tail.start_at_134 = 0;
-    player.animation_tail.table_at_140 = std::shared_ptr<const PlayerAnimationTable>{};
+    fields.animation_table = std::shared_ptr<const PlayerAnimationTable>{};
     player.animation_tail.buffer_at_148 = std::shared_ptr<PlayerAnimationAllocatedAction>{};
     player.moving_task_at_6c = TaskHandle{};
     player.cached_land_object_at_74 = SceneResourceReference{};
@@ -410,6 +423,17 @@ std::shared_ptr<PlayerMotionState> bind_existing_motion(const TaskHandle &task) 
     if (!task->motion_work || !task->motion_state)
         throw Error(Boundary::MotionState);
     return task->motion_state;
+}
+InitializedPlayerView bind_initialized_player(const PlayerHandle &record) {
+    if (!record || !record->physics)
+        throw Error(Boundary::PlayerAllocation);
+    auto fields = player_fields(*record->physics);
+    const auto boundary = Boundary::Parameters;
+    auto &timer = required(fields.timer, boundary);
+    return {reinterpret_cast<std::uint16_t &>(timer), required(fields.flags, boundary),
+            required(fields.requested_animation, boundary),
+            required(fields.current_animation, boundary), required(fields.held_task, boundary),
+            required(fields.animation_table, boundary)};
 }
 std::shared_ptr<PlayerTaskState> NativeAccess::primary(const TaskHandle &task) {
     return required_primary(task);

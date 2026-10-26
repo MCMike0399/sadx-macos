@@ -94,6 +94,15 @@ struct Player {
     Stage stage = Stage::Entry;
 };
 using PlayerHandle = std::shared_ptr<Player>;
+// NOTSA: native consumers borrow the initialized legacy fields through semantic names.
+// Missing initialization is rejected here, before a game callback consumes the value.
+struct InitializedPlayerView {
+    std::uint16_t &timer, &flags, &requested_animation, &current_animation;
+    TaskHandle &held_task;
+    std::shared_ptr<const PlayerAnimationTable> &animation_table;
+};
+InitializedPlayerView bind_initialized_player(const PlayerHandle &);
+
 struct Registry {
     // GLOBAL: SONIC 0x3b42e30 playertp size=32
     std::array<TaskHandle, 8> tasks = {};
