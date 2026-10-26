@@ -543,3 +543,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Actual binding unit, frozen Gamma core unit and frozen startup unit exit 0. Consumer checks distinguish actual bootstrap timer bytes and cutscene task nullness from unrelated state. Force-load native closure exits 0 without guest or PE dependencies.
 * Unchanged startup oracle rerun has 2,004 cases, zero value/boundary/resource/control mismatches and 924 FP flag partials; existing script exits 0, verdict remains partial. Inherited Gamma 1,422/1,080 cases remain partial with 498/690 FP differences and rc 2.
 * Proof, source hashes, exact app command and limits are in reference/production-integration-20261026/gamma-native-binding. Compiler/test registration and receipt refresh are separate from implementation. Root owns fresh review and full gate; no provider, full gate or push run here.
+
+### 2026-10-26 — Reviewed native Gamma composition reaches collision (track J/S)
+
+* Native TitleScene now runs the approved Gamma core through real PInitialize, imported 91-entry animation table and request 0. Normal input stops at native_gamma_CCL_Init, frame 1382, actual diagnostic exit 1. The inspected image remains outgoing title; no actor or N3b claim.
+* One PlayerSystem owns shared current slots, eight-slot Registry and Gamma state. Arena references determine player allocation identity; captured old/null current-player publication is preserved. NativeAccess exposes initialized fields without additional runtime legacy debt.
+* Original predicate leaves pass 4867 development and 1795 holdout cases, all timer byte combinations and five mutants. Binding, frozen Gamma/startup units and force-load native closure pass. Unchanged startup oracle has 2004 cases, zero value/boundary mismatches and 924 FP partials; partial is not pass.
+* Fresh review 8394d3c approves bounded composition and predicate leaves with 67 matching identities and no blockers. Tests were not rerun by the reviewer. Root integration registers 902 protected inputs with zero drift and no old expectation changes.
+* Source-only candidate build and combined gate remain pending. Collision recovery is isolated in its own packet; later textures, welds, effects, animation cache and drawing remain explicit seams. Last Main full gate remains rc 0 from the model/startup slice. No push.
