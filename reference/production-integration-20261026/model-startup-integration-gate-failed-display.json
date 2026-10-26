@@ -1,0 +1,13 @@
+{
+  "commit": "6b617c81e3b9c93fbbd098d6d89d24cbdd6e54a2",
+  "command": "SADX_CONTENT_CORPUS=$PWD make -j10 gate",
+  "exit_status": 2,
+  "passed": false,
+  "log_sha256": "5bec9b5ea76c5aa50b1f0106615da47493da6691d38f9f1c55d15639d9abe752",
+  "stop": "Required windowed smoke emitted zero frames; macOS reported Display Asleep: Yes. Bounded wake removed asleep status, normal activation returned false. Exact stale smokePID41327 was SIGKILLed, then make returned2.",
+  "limits": [
+    "Not a green gate; required journeys were not reached by this make invocation.",
+    "Compilation, native unit and Python sections completed before the wait; previous full gate remains authoritative.",
+    "Fresh GUI readiness and complete rerun required."
+  ]
+}
