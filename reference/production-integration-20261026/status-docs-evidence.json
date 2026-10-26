@@ -1,0 +1,21 @@
+{
+  "requirement": "GOAL section 6 item 2 stale generated status, stale precision guidance and journal archive",
+  "verification": {
+    "focused_python_tests": 3,
+    "archived_section_sha256": "75f95d889e99c51587bbc8c0aeed4734b04996221a1ea6f0d333ebd7a931fb70",
+    "archived_content_verbatim": true,
+    "new_journal_keeps_all_entries_since": "2026-10-19"
+  },
+  "changes": [
+    "Status native evidence derives only from certified machine-readable checkpoint results; no hardcoded current M1 claim.",
+    "Duplicate smoke/reference R1 rows coalesce, retaining any failure.",
+    "Historical boot survey is explicitly development reference evidence, not the current native frontier.",
+    "Override source is checked at actual override_table.cpp; symbol coverage prefers current build output.",
+    "TIPS cites post-device 24-bit census with startup/Windows limitations."
+  ],
+  "limits": [
+    "No milestone definition or fidelity policy changes.",
+    "No game source or judge expectations change.",
+    "Root integrates and records generated STATUS only after real successful gate."
+  ]
+}

@@ -10,3 +10,5 @@ disagree with `AGENTS.md`, `docs/GOAL.md` or `docs/STYLE.md`, those win.
 * `GOAL-2026-10-16.md`: the standing brief from the ADR-0008 review until 2026-10-26. It
   planned the reference-app ladder (R1–R6) and the first native rows (N1–N5). The
   2026-10-26 `docs/GOAL.md` replaces it with the native Sonic story route.
+
+* [Handoff journal, 2026-10-10 to 18](HANDOFF-2026-10-10-to-18.md): archived verbatim; current entries remain in `../HANDOFF.md`.

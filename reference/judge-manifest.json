@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "5d31b283d8de65f5dd16b404b5d64fcd2d488dfc",
-    "evidence": "reference/production-integration-20261026/state-trace-diff-evidence.json",
-    "evidence_sha256": "c01c7ac69a98282589e684bb56fb6ff10a5227b04af4f89e61b6eab6eb8c3086",
-    "reason": "Protect and gate unchanged startup comparisons; strict ordered mode/stage-act/player/camera/task traces expose unrecovered owners and observed one-frame movie skip divergence"
+    "base_commit": "f53709a8ca6b69d12c0ec421686153ca8d81b3e6",
+    "evidence": "reference/production-integration-20261026/status-docs-evidence.json",
+    "evidence_sha256": "19e6a78cb48f0fe630d3f4dfa6936734c4d3fd7b5c4343b4b4e6191e2c267b53",
+    "reason": "Generate status from actual checkpoint/source evidence, preserve duplicate failures, and archive historical guidance"
   },
   "files": {
     "Makefile": "a736a3c479c51a89e9c045a7852c2d92f8b993ac9f1b7daa4bb7b1a7ea3d508d",
@@ -572,6 +572,7 @@
     "tests/python/test_sound_effects_import.py": "f4b356a1fada9e475e1bd7cbd243f9435990825fd20c80adbd6eab2fe8a8fbf7",
     "tests/python/test_stage_lighting.py": "c9a22693e183512dd38b4e2f57c42ce4dbada0aea136c1a663dcca1ac240c10c",
     "tests/python/test_state_trace_diff.py": "c04caae6478b9973d1c86074ac90f1e0a7da6ab7940e0f7e93bb27f9b8b5e4a4",
+    "tests/python/test_status_generation.py": "2c2ab103c933e1309850c72a511fc1e43dd40f56663c3c6155d2336e6be7ed0a",
     "tests/python/test_symbol_context.py": "e276e801136d0821369682beb43c42c0f460ff137123683d8c1150487eec2690",
     "tests/python/test_symbols.py": "9e9a03a6389d6cd58aa49c63272049754f55ccddb19eeb894b8b92ccce362e0f",
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
@@ -606,7 +607,7 @@
     "tools/gate/check_sound_initial_state.py": "7b10ffa2def797a669f6deff6021139d864d917f492ac160c668d0f160edac6f",
     "tools/gate/check_startup_initial_state.py": "1c1c43935ed63639c66a50e783f8183d9f319f83ce360a3be4839e8ce1bd5691",
     "tools/gate/gen_make.py": "8152b42718d0f9fcd6ac08e4bdbe3eae67e82d0a38ce99e60ce8410f888f89fe",
-    "tools/gate/gen_status.py": "9489bbce5c6249d65607d21504a5fc4f3804d190739dbda02eaef5638a772a5c",
+    "tools/gate/gen_status.py": "264209607e3c0c7aaee13d8f455ddcfb3365f70fc0bc59ed68afafc7dbf8f4b6",
     "tools/gate/guard_judge_edit.py": "6fa117651c735c3a152343da978945a426138ce455d0494e7ca707f46ff82935",
     "tools/gate/layer_exceptions.tsv": "45ec99765961f1f4f36760d706dd561ad9362ca3220080c0aebedb105f7c4649",
     "tools/gate/mutate.py": "9028799e852ca72ae2e49229647171ec68ecbc26eeb234db3fd510a4eeb33719",

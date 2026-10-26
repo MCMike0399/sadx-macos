@@ -28,13 +28,13 @@ in `AGENTS.md` and `STYLE.md`; this page holds facts and patterns.
 
 ## MSVC 7.1 x87 idioms (establish precision at the call site)
 
-* The reference census (`reference/fp-control-census.json`) observes raw FPCW `0x023f`
-  and MXCSR `0x1f80` at every reached entry in the intro/title and controller journeys.
-  The precision-control bits select 53-bit precision, not the 24-bit premise of plain
-  float rewrites. These are Unicorn observations, not Windows hardware captures. Ground
-  acceleration and other unreached physics entries have no measured runtime control word;
-  their oracle fixtures do not supply that missing stage evidence. Keep STYLE §7's four
-  preconditions when selecting an arithmetic level.
+* The post-Direct3D-fix census (`reference/fp-control-census.json`) records raw
+  FPCW `0x007f` (24-bit, nearest) at every observed post-device intro, controller
+  and Station Square entry. Plain float is the default there, subject to all four
+  proofs in STYLE section 7. Shared startup functions also have pre-device `0x023f`
+  samples; retain exact arithmetic where call-site precision is mixed or unknown.
+  Unobserved entries remain unobserved. These are Unicorn observations; Windows
+  stage parity remains M4 work (ADR-0008 section 4).
 
 * `fcom`/`fcomp` + `fnstsw ax` + `test ah, mask` + `jp`/`jnp`/`jz`/`jnz`. C0 is AH bit 0x01,
   C2 is 0x04, C3 is 0x40. Results: greater 000, less C0, equal C3, unordered C3|C2|C0.
