@@ -1,0 +1,63 @@
+{
+  "scope": "Resolved source ownership and static reached-resource facts; no new runtime or N3b claim",
+  "power": {
+    "source_address": "0x3abdb20",
+    "whole_owner_source": "0x3abdaf0 LSPalette, 96 bytes",
+    "field_offset": 48,
+    "sdk_field": "PaletteLight::SP_pow",
+    "native_owner": "Session.lighting_->active_palette.upper_specular_power",
+    "producer": "lighting::select_palette, source40aab0: clear whole active_palette, select source table row and copy96 bytes",
+    "binding_rule": "Borrow this live float; do not create another Power owner, use asset material.power, or guess BSS zero."
+  },
+  "question_material": {
+    "pack": "game/imported/characters/sonic-selection.actions",
+    "pack_sha256": "df53cf2eb5427491cd444350b231f9b168060602b65a8cf93371f6ad0f38d423",
+    "model": 2943,
+    "material_record": 2949,
+    "material_index": 0,
+    "diffuse": "0xffffff00",
+    "specular": "0xffffffff",
+    "asset_power": 11.0,
+    "texture_index": 7,
+    "attributes": "0x9461a400",
+    "textured": true,
+    "environment_map": true,
+    "lighting_disabled": false,
+    "shading_flag": false,
+    "limit": "Imported record context only, not executed actor or drawn pixels."
+  },
+  "environment": {
+    "source_helper": "0x7944b0",
+    "ordered_operations": [
+      "stage0 state24 =2",
+      "transform16 = original matrix38a5dd0",
+      "stage0 state11 =65536"
+    ],
+    "matrix_sha256": "7dcb5f6391c375c281aa30c206da9a167e54bd0b409e83c63c95150e5a241e8e",
+    "reset_helper": "0x794500",
+    "reset_matrix_source": "0x38a5e10",
+    "reset_matrix_sha256": "5998e9d1dd9bf48af6af87a1ef8c7783b818ac8329637ada08cc5fb329042376",
+    "shared_graphics_support": "graphics::prepare already supports camera-normal coordinate generation and texture transforms; native device snapshot binding remains unverified."
+  },
+  "fresh_context_packet": "packet/normal-uv-strip, BASIC-MATERIAL-SOURCE.json; owned runner exited0 and closed after gate terminal0",
+  "source_files_sha256": {
+    "reference/sadx-mod-loader/SADXModLoader/include/SADXStructs.h": "30d75a6ad73085bd9aff34795599f320206556230a8bcbc3ceb1da93b048803c",
+    "reference/sadx-mod-loader/SADXModLoader/include/SADXVariables.h": "a18ab56e9273928765428b9a99ac672266ba59e5f175b9ee43ca9c81723b0c81",
+    "src/game/stage_lighting.hpp": "cf4eac4456cebefb3d2361427a8286acb3606d90d91427ff9d9d76579213a58d",
+    "src/game/stage_lighting.cpp": "c94e4ca32dcee4f6a2115b91f5ce52ba9bb0078f3de81e279fa8d2c965804cee",
+    "src/runtime/native_session.hpp": "7eaab8cb3fe16e3a62818d1cc2408a2531120185304b05d64fd5a6f7a4f84f85",
+    "src/runtime/native_lighting_palette.cpp": "7be5c36bfc97879d2e9208af990dfade64ed319d6258d4c02f3d306dc84dba5b",
+    "tests/probes/native_lighting_palette_probe.cpp": "59ffc32f6a2921bf9e8bed572f956d09a706f22aafb64a94e87a8a55c78ce26f",
+    "tools/oracles/verify_original_lighting_palette.py": "7edb25b3ab25b8e7553c3466db63c8506e0182f1ee467a20e06d71320e30f9e3",
+    "src/engine/graphics_frame.cpp": "738509ac0a918990e8ea8a285beabba60acc677ab1631d8c6cb0d19ac32fde8a"
+  },
+  "review": {
+    "components": [
+      "normal_uv_strip",
+      "material_correction"
+    ],
+    "commit": "95913d8",
+    "branch": "packet/review-render-primitives",
+    "verdict": "bounded component approval; both FP partial, runtime/combined gate unverified"
+  }
+}
