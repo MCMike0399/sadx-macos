@@ -1,9 +1,10 @@
 {
   "change": {
-    "base_commit": "76cf6c85b4779bb333193efdecf73aeaeea0ab6d",
-    "evidence": "reference/frozen-corpora/capture-content-evidence.json",
-    "evidence_sha256": "ae3247944c0b6da4aac80b662fded39a27fd6264d47e501ebe8a5beb7dfb3409",
-    "reason": "Require nonblank reference-derived content on every native capture and reference R2/R3; preserve all existing expectations and ceilings; genuine raster-suppression mutants rejected"
+    "base_commit": "bab9b5b67559fa8ea715e5aca679ec947b9740e6",
+    "evidence": "tools/agents/rollout-extractor-evidence.md",
+    "evidence_sha256": "8463bb1d995d6a908b46e7f6d4436a13d7fc7de954e8b99d188c8712b7c1ab64",
+    "mode": "additions-only",
+    "reason": "Register conservative rollout file-write replay regression tests; transcript commands are never executed"
   },
   "files": {
     "Makefile": "a736a3c479c51a89e9c045a7852c2d92f8b993ac9f1b7daa4bb7b1a7ea3d508d",
@@ -571,6 +572,7 @@
     "tests/python/test_provenance.py": "ce62fc0efc2ef9a92b2493adaf994fcbc38af4427c16c28eabe6aea72287fcc2",
     "tests/python/test_readability.py": "5593d449e6b7f507e233903a14aaae0a6c3621db888b31ae2169a3ca5229db94",
     "tests/python/test_regular_textures.py": "b5ae871253c6c2e2fcaf69ce3f8c967b906e295c2c80cf49882f539b26dd268f",
+    "tests/python/test_rollout_salvage.py": "6823ff25fa979fb7299e99f50aeb2ba1828b85ea3c9b5a65e635d093ef9c2a37",
     "tests/python/test_save_files.py": "de514de19a12ca015a891d61d1c49b930262ddeff9bfbad383c48df1ac1ca108",
     "tests/python/test_selection_actions_import.py": "3a0b037498a983bfd65dd4835b469d1f36b79024bc48b0573ba986d7fe3b2a21",
     "tests/python/test_sonic_actor_resources.py": "18f77c63337f3c3cc19e7285eff9429209b487d20283541f279615468fe44c51",
