@@ -488,6 +488,8 @@ class Application {
     }
     // NOTSA: diagnostic observation of the canonical scheduler, without callback execution.
     void trace_state(std::ostream &output) const {
+        constexpr std::size_t kTaskPoolCapacity = 4096;
+        constexpr int kTaskListCount = 8;
         // Session has no canonical gameplay playertwp/camera_twp binding yet. Preview actors
         // and the renderer View are different owners and cannot supply these observations.
         output << ",\"player\":null,\"player_error\":\"unrecovered native gameplay player owner\""
@@ -505,7 +507,7 @@ class Application {
             [&](sadx::TaskHandle task, const std::string &parent) {
                 unsigned index = 0;
                 while (task && valid) {
-                    if (visited.size() >= 4096 || !visited.insert(task.get()).second) {
+                    if (visited.size() >= kTaskPoolCapacity || !visited.insert(task.get()).second) {
                         valid = false;
                         return;
                     }
@@ -521,7 +523,7 @@ class Application {
                     task = scheduler->next_task(task);
                 }
             };
-        for (int list = 0; list < 8; ++list)
+        for (int list = 0; list < kTaskListCount; ++list)
             visit(scheduler->list_head(list), std::to_string(list));
         output << ",\"tasks\":[" << tasks.str() << ']';
         if (!valid)
