@@ -1,0 +1,34 @@
+{
+  "scope": "Register independently reviewed rendering component additions; not runtime completion",
+  "source_commits": [
+    "1960fed6b8a982138cce6c54b3bd7a53d3f25f6b",
+    "1a5a0f3a7b09a7a9390f421d158b11255ffa958d"
+  ],
+  "review_commit": "95913d8",
+  "review": "reference/production-integration-20261026/render-primitives-review.md",
+  "existing_changed_inputs": [
+    "Makefile",
+    "tests/unit/manifest.tsv"
+  ],
+  "registration_prefix_verified_against": "04c40ae and previous manifest hashes",
+  "existing_expectations_changed": false,
+  "ignored_pinned_inputs_copied_from_Main_under_unchanged_hashes": 53,
+  "port_and_new_judge_files_byte_identical_to_reviewed_packets": {
+    "src/engine/normal_uv_strip.cpp": "43fb5388e4169b999a61cbe9c021c40a63017169d6db001835f57ae27d446b17",
+    "src/engine/normal_uv_strip.hpp": "a678a26b6cfb7ea3994aaf9b174f7b3fa96e239474bc4161351760cea420f106",
+    "tests/probes/native_normal_uv_strip_probe.cpp": "7b0baaad583c0d1c0ab40be4c9567d802f4d15bce9340283cb1f7b631680e3dc",
+    "tests/probes/normal_uv_strip_probe.hpp": "e92b2c39e3bef3e3b1fbbb657a4c91a03eea31012a902d849ea41c890adef9d8",
+    "tools/oracles/verify_original_normal_uv_strip.py": "9f07a52f34f74320126f105392cc28152e48a442e2d49b6695ce6ed1874a6f2c",
+    "tools/oracles/check_normal_uv_strip_packet.py": "367792beba15da9ef0b9a28ac10b64e7507a2bcf6876a732d65f43260a99d66c",
+    "src/engine/material_correction.cpp": "f5295f412e80a88c9433fd644ed2e4336cca70d01250a0187f38afa44fcb2f93",
+    "src/engine/material_correction.hpp": "bdf8ca0e9c022ee22f1c20e31494cbf6b17f3913f0026346473ea3e65488d02d",
+    "tests/probes/native_material_correction_probe.cpp": "cb2e8acae39b98661f6813e871ef75afc59aab1f0bb30978760e2c34aec6c24f",
+    "tools/oracles/verify_original_material_correction.py": "866b7678d951e55ed91f39ea30f60cb5ab0231851446fab4c930f7b428092923",
+    "tests/fixtures/material_correction_mutants.json": "e34f023704a87b4663d5c56fed1c1beabaa697cd3a3770bbe24962ab28f66f41"
+  },
+  "limits": [
+    "Both component oracles remain FP partial.",
+    "Native source registration and real ownership/device binding pending.",
+    "No gate run or rendering claim for this integration branch yet."
+  ]
+}
