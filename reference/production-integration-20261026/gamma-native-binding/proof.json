@@ -1,0 +1,137 @@
+{
+  "scope": "Actual native Gamma callback through canonical PInitialize and imported complete animation table/request0 to CCL_Init; no lower algorithm recovered here.",
+  "source_sha256": {
+    "src/runtime/native_gamma_binding.cpp": "f3a393e4249a68753eb1924ad2e05c03835d538434c0fa0a2f0c45dcb3e0d66c",
+    "src/runtime/native_player_system.hpp": "8236ad24ec2f24eee592267b118ff8c0f0d5533c01378df8dedd5a82e6311752",
+    "src/runtime/gamma_actor_assets.hpp": "5034c85d36f892ce168c4f2f2404b3835df5a9163abe829e90f72b569af01a44",
+    "src/runtime/native_selection_preview.cpp": "f91c398c7cffcca3fbfbbc8e9565a8e8c7ce59d63862b12899b68cd16a05374a",
+    "src/runtime/native_session.hpp": "6ecc593cc5a76c2260fb510d445ad1be64fcf95cc422106e3a30b1adf0d19131",
+    "src/runtime/native_title_scene.hpp": "6bbeb90ebb857292266180d33d2519eadcb8a8ac076cc6b667a9573951382d07",
+    "src/apps/native_gamma_actor_assets.hpp": "4358174289e6f76a141b66759ac095092f419edeb80be7445012322075d65939",
+    "src/apps/native_character_selection_assets.hpp": "0ebab824c093c2bdca9bca0dd1bfa7dbcac017075461ab4f5e01a4a7e106db09",
+    "src/apps/sadx_native.mm": "c2e02c23d57d4691651c5516da1f6947d946aee751e7318d0c40589bb311a179",
+    "src/player/player_initialization.hpp": "3038b7b454b29d1b9a17f375cdf4d20bb1daec7c2eca9b272bfe94057f72df5b",
+    "src/player/player_startup.cpp": "2e52efc04b32fd50139200d099c3288ed47b890610149629cedb128e12e9614a",
+    "src/player/selection_player_queries.hpp": "07a0a89e522e7a7b4fa562f562fba7a936eb6ac5e4b2954c9fa3d4dbdbf94511",
+    "src/player/selection_player_queries.cpp": "c97229c52b15fdb9b1efb3048dfb61a6e81cafb688364f9562b717883a117d7c",
+    "tools/import/native_assets.py": "77a45eb581c9e7936ea5747e2bef60693fd69c06dddb7c56b653ac9b6727cf5e"
+  },
+  "frozen_gamma_inputs_byte_unchanged": {
+    "src/player/gamma_selection_core.cpp": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea",
+    "src/player/gamma_selection_core.hpp": "4d4259960f8cd59e610300683812bc5081a809d5938b0441ecc3a8ae1db3ce7d",
+    "tests/probes/native_gamma_selection_core_probe.cpp": "f1f5119da472f78651428ac79b4a5435e80acb359bf2a0c2f816b2670195a517",
+    "tests/unit/gamma_selection_core.cpp": "d6aadb3b53e94fed35b696822e1271b7eb2e23d5e908a5e0bf8b8ce4ea144db1",
+    "tools/oracles/verify_original_gamma_selection_core.py": "b62020db7b643a941079b15b2e0b931885ace95b40bb1ec3329a61439604aada",
+    "tools/oracles/mutate_gamma_selection_core.py": "f19c1e581df6b56c2f4c88d3c97881765863d342119490fd9acb77ba03e7b538",
+    "tools/analysis/prove_gamma_selection_sources.py": "f80890f5f53fae56b4ec3d33bff682172673235c26093f09f8a9131d2109e2e0"
+  },
+  "asset_pack": {
+    "records": 3328,
+    "sha256": "c414e173bf4bf9f803f24d61642e233ff9650fe9276d70da2ac3939fee2b5d7f",
+    "existing_3302_records_and_22_bindings_byte_identical": true,
+    "stand_action": 3303,
+    "recipe_count": 91
+  },
+  "native_binding_unit": {
+    "command": "./build/native-gamma-binding-test build/gamma-native-assets",
+    "exit_status": 0,
+    "test_sha256": "c1108df795fa2b815f917b4d140ea074a80156b6e4a85cf92dd1e52e80bfbd6e",
+    "bootstrap_consumer_checks": [
+      "frames byte independently",
+      "seconds byte independently",
+      "minutes byte independently",
+      "actual cutscene task nullness",
+      "unrelated active/control/work/game timer do not substitute"
+    ],
+    "real_owners": [
+      "TaskScheduler source pool and arena",
+      "primary_state and motion_state",
+      "eight-slot PInitialize Registry and allocation identity",
+      "shared actor_current State",
+      "typed imported parameter table and actual event_work",
+      "complete animation table/request0",
+      "distinct island-list and Gamma free-work allocations"
+    ],
+    "log_sha256": "59c75cd63ac35dca1978e2222580efcc9d06794e65e40db30d9d060e61630b04"
+  },
+  "native_app": {
+    "command": [
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-b75da23e/build/sadx-native",
+      "--assets",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-b75da23e/build/gamma-native-assets",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1500",
+      "--save-directory",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-b75da23e/build/gamma-native-frontier/savedata",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,900:38:down,901:38:up,950:13:down,951:13:up,1350:13:down,1351:13:up",
+      "--capture-directory",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-b75da23e/build/gamma-native-frontier/captures",
+      "--capture-at",
+      "1300,1380,1381,1382,1383,1390",
+      "--screenshot",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-b75da23e/build/gamma-native-frontier/frontier.ppm"
+    ],
+    "exit_status": 1,
+    "frame": 1382,
+    "missing_call": "native_gamma_CCL_Init",
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "screenshot_inspected": true,
+    "visible_output": "Outgoing title screen; no actor rendering claim.",
+    "log_sha256": "5410284e0f518ec544281e63807eceb95bebf7ecd0ece421fcc4c1d7b7d9a8f9",
+    "canonical_gamma_task": {
+      "retired": false,
+      "mode": 0,
+      "id": 2,
+      "player_index": 5,
+      "character": 6,
+      "status": 0,
+      "position": [
+        400,
+        0,
+        -20
+      ],
+      "rotation": [
+        0,
+        16384,
+        0
+      ],
+      "aim_y": 0
+    }
+  },
+  "force_load_closure": {
+    "exit_status": 0,
+    "passed": true,
+    "report_sha256": "9dd00215fe25ab9e010e0e73f18018f0f59ae9ea853c973545c9c7b3c589c130",
+    "no_guest_or_emulator_or_PE_or_ground_acceleration_closure": true
+  },
+  "startup_rerun": "initialized-view-proof.json",
+  "gamma_original_verdict_unchanged": {
+    "development_cases": 1422,
+    "development_value_mismatches": 0,
+    "development_fp_partials": 498,
+    "development_exit_status": 2,
+    "holdout_cases": 1080,
+    "holdout_value_mismatches": 0,
+    "holdout_fp_partials": 690,
+    "holdout_exit_status": 2,
+    "qualification": "Inherited frozen core results; source/probe/judge byte unchanged. No new lower-function proof claimed."
+  },
+  "static_checks": {
+    "readability": "0 regressions",
+    "provenance": "0 errors",
+    "layers": "0 violations",
+    "global_owners": "0 duplicate owners",
+    "whitespace": "clean"
+  },
+  "limits": [
+    "CCL_Init and every later unported source call throw explicitly.",
+    "No material owner or renderer change required before this boundary; material/weld/texture/collision/matrix bindings remain explicit later boundaries.",
+    "No static matrix or pose fallback. Metadata node IDs are not animated matrix values.",
+    "Runtime auxiliary/display/destructor wrappers throw when their unported algorithms are invoked.",
+    "No full gate, provider, GPU parity, N3b completion, story or hardware input qualification.",
+    "All existing judges/probes/fixtures/expectations/tolerances unchanged. Registration and report receipt refresh recorded separately."
+  ]
+}

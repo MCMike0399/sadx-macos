@@ -1,5 +1,6 @@
 #pragma once
 #include "engine/character_pack.hpp"
+#include "runtime/native_player_system.hpp"
 #include "engine/character_geometry.hpp"
 #include "engine/graphics_frame.hpp"
 #include "game/game_bootstrap.hpp"
@@ -125,6 +126,11 @@ class Session final : private flow::NativeServices {
     void attach_menu_dialogs(MenuDialogAssets);
     void attach_main_menu(MainMenuAssets);
     void attach_character_selection(CharacterSelectionAssets);
+    void load_player_assets(GammaActorAssets assets) {
+        if (players_.gamma_assets)
+            throw std::runtime_error("native player assets already loaded");
+        players_.gamma_assets = std::make_unique<GammaActorAssets>(std::move(assets));
+    }
     void attach_character_completion(character_completion::Catalog catalog) {
         if (character_completion_)
             throw std::runtime_error("native character completion resources already attached");
@@ -222,6 +228,7 @@ class Session final : private flow::NativeServices {
     std::shared_ptr<const character_pack::CharacterPack> character_pack_;
     bootstrap::SonicActions actions_;
     character_pack::SceneState character_scene_;
+    PlayerSystem players_;
     ActionHandle knuckles_clear_, knuckles_transition_;
     ActionHandle big_sit_, big_sit_repeat_, big_prepare_, big_cast_, big_cast_repeat_;
     bootstrap::Services services_;

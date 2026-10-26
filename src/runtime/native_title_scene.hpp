@@ -99,6 +99,10 @@ class TitleScene final : private title_menu::Calls,
     static void exec_selection_amy(TaskScheduler &, const TaskHandle &);
     static void exec_selection_big(TaskScheduler &, const TaskHandle &);
     static void exec_selection_gamma(TaskScheduler &, const TaskHandle &);
+    static void display_selection_gamma(TaskScheduler &, const TaskHandle &);
+    static void destroy_selection_gamma(TaskScheduler &, const TaskHandle &);
+    // STUB: SONIC 0x4a2b60 CharBubble_Init
+    static void initialize_player_auxiliary(TaskScheduler &, const TaskHandle &);
     static void exec_selection_question(TaskScheduler &, const TaskHandle &);
     struct MessageServices;
     void draw_main_menu_content(title_menu::DialogContent, const menu_dialog::ContentArguments &);

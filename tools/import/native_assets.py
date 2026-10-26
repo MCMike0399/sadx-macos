@@ -36,6 +36,7 @@ from main_menu_dialog import import_main_menu_dialog
 from sound_effects import import_sound_effects
 from selection_actions import import_selection_actions
 from sonic_actor_resources import import_sonic_actor_resources
+from gamma_actor_resources import import_gamma_actor_resources
 from character_select_menu import import_character_select_menu
 from character_select_labels import import_character_select_labels
 from character_completion import import_character_completion
@@ -74,6 +75,8 @@ def import_assets(game, output):
         selection = import_selection_actions(model, game / "sonic.exe", base)
         preview_proof = json.loads(base.with_suffix(".provenance.json").read_text())
         combined = import_sonic_actor_resources(
+            model, game / "sonic.exe", output / "characters/sonic-selection.actions")
+        combined = import_gamma_actor_resources(
             model, game / "sonic.exe", output / "characters/sonic-selection.actions")
         atomic_json(output / "characters/selection-preview.json", selection["metadata"])
         atomic_json(output / "characters/selection-preview-evidence.json", {

@@ -186,8 +186,28 @@ void TitleScene::exec_selection_amy(TaskScheduler &, const TaskHandle &) {
 void TitleScene::exec_selection_big(TaskScheduler &, const TaskHandle &) {
     throw flow::UnrecoveredGameFlowCall("native_big_player_controller");
 }
-void TitleScene::exec_selection_gamma(TaskScheduler &, const TaskHandle &) {
-    throw flow::UnrecoveredGameFlowCall("native_gamma_player_controller");
+void TitleScene::exec_selection_gamma(TaskScheduler &scheduler, const TaskHandle &task) {
+    auto &scene = callback_scene(scheduler, exec_selection_gamma);
+    scene.register_callback(display_selection_gamma);
+    scene.register_callback(destroy_selection_gamma);
+    scene.register_callback(initialize_player_auxiliary);
+    gamma_selection::Context context{scene.session_.players_, scheduler,
+        scene.session_.bootstrap_, scene.display_, task,
+        scene.session_.stage_, scene.session_.act_,
+        display_selection_gamma, destroy_selection_gamma, initialize_player_auxiliary};
+    gamma_selection::run(context, task);
+}
+// NOTSA: native boundary for E102Display; source seam declared in the Gamma core.
+void TitleScene::display_selection_gamma(TaskScheduler &, const TaskHandle &) {
+    throw flow::UnrecoveredGameFlowCall("native_gamma_E102Display");
+}
+// NOTSA: native boundary for E102Destruct; source seam declared in the Gamma core.
+void TitleScene::destroy_selection_gamma(TaskScheduler &, const TaskHandle &) {
+    throw flow::UnrecoveredGameFlowCall("native_gamma_E102Destruct");
+}
+// NOTSA: native callback wrapper for the unported CharBubble_Init.
+void TitleScene::initialize_player_auxiliary(TaskScheduler &, const TaskHandle &) {
+    throw flow::UnrecoveredGameFlowCall("native_player_auxiliary_initializer");
 }
 void TitleScene::exec_selection_question(TaskScheduler &scheduler, const TaskHandle &task) {
     auto &scene = callback_scene(scheduler, exec_selection_question);

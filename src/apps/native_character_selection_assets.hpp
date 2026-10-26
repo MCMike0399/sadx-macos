@@ -6,7 +6,7 @@ namespace sadx::native::app {
 // NOTSA: declarations bind to the one validated combined pack owned by the app.
 inline CharacterSelectionAssets load_character_selection_assets(
     const std::filesystem::path &directory, const character_pack::CharacterPack &pack) {
-    if (pack.record_count() != 3302)
+    if (pack.record_count() != 3302 && pack.record_count() != 3328)
         throw std::runtime_error("CharacterSelect requires the complete Sonic/selection resource graph");
     CharacterSelectionAssets result{};
     const auto preview = read_metadata(directory / "characters/selection-preview.json");
