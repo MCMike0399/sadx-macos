@@ -28,6 +28,7 @@ std::shared_ptr<collision_component::Work> collision(Context &context,
     if (!component) missing("native_gamma_null_collision_component");
     return component;
 }
+// NOTSA: borrows the live mutable info record without a cached numeric copy.
 collision_component::Info &collision_info(Context &context, const TaskWorkHandle &primary_work,
                                           unsigned record) {
     auto component = collision(context, primary_work);

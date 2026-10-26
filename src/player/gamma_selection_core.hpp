@@ -156,7 +156,7 @@ fidelity::ExactFloat shadow(Context &, Primary, float scale);
 std::uint32_t ground_attributes(Context &, Primary);
 // STUB: SONIC 0x4c33c0 GammaRunningEffects
 void running_effects(Context &, Primary, const TaskWorkHandle &, const Player &);
-// NOTSA: native binding to canonical collision_component::calculate_range.
+// NOTSA: pending native seam; the source entry belongs to collision_component::calculate_range.
 void calculate_collision_range(Context &, Primary);
 // STUB: SONIC 0x41c280 EntryColliList
 void enter_collision_list(Context &, Primary);

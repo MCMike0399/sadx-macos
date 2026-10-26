@@ -1,0 +1,21 @@
+{
+  "review": "d28e14f",
+  "scope": "Two comment-only corrections; source control flow, values, APIs and existing tests unchanged.",
+  "changes": [
+    {
+      "path": "src/runtime/native_gamma_binding.cpp",
+      "before_sha256": "1c5ddda68d70233a99688c2cee97f7fae74272fc2c37f1fd870eb4aba813991c",
+      "after_sha256": "383580b1cf615d3b423b0ea63253b17e950550464b3da7a5cdce51c4729964e7",
+      "before": "collision_component::Info &collision_info(Context &context, const TaskWorkHandle &primary_work,",
+      "after": "// NOTSA: borrows the live mutable info record without a cached numeric copy.\ncollision_component::Info &collision_info(Context &context, const TaskWorkHandle &primary_work,"
+    },
+    {
+      "path": "src/player/gamma_selection_core.hpp",
+      "before_sha256": "cfa7d093e9a57c77287cc5568f1b8fc03a701b6323a6142026ac556579b0e6e1",
+      "after_sha256": "55dbca67e9c1d03ba986eb7366c7c22aac653964e2ef5b24aa3a1bb29b71f027",
+      "before": "// NOTSA: native binding to canonical collision_component::calculate_range.",
+      "after": "// NOTSA: pending native seam; the source entry belongs to collision_component::calculate_range."
+    }
+  ],
+  "tests": "Not rerun for comments alone; frozen composition qualification remains the behavior evidence."
+}
