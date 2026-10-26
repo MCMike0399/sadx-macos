@@ -433,3 +433,26 @@ Policy correction: STYLE§8/ADR0007§5 permit typed imported physics parameters;
 * Gate evidence: reference/production-integration-20261026/divemac-head-gate.json. STATUS was regenerated from that real result.
 * Native make play-native still reaches menus and creates/loads saves; CharacterSelect remains stopped at native_basic_object_renderer, frame 1382. No gameplay or 63 FPS claim.
 * Next: integrate GOAL section 6 item 2 packets, acquire the two missing reference return-transition captures, then recover the next reached CharacterSelect dependency. No push.
+
+### 2026-10-26 — N3b dependency map before packet recovery (track J/S, tooling gate pending)
+
+The native frontier remains Question drawing at frame 1382. Integrate in reached-call order; each packet must pass its unchanged judge before use.
+
+| Actual caller/callback | Canonical owner | Missing behavior or resource | Packet | Owner | Integration check |
+|---|---|---|---|---|---|
+| Question selects menu textures; njSetTexture 403070 | Display current and queued lists, texture pool/cache and palette state | Queued/current selection and real surface cache binding | packet/native-texture-selection, to recover from rollout | Root | Queued list is live before 403250; unchanged selection oracle and cancel/reentry |
+| dsDrawObject 408530 to DrawObject 4034b0 | Session single CharacterPack; shared mutable object view still to bind | Guarded traversal preserving object identity | packet/object-draw, to recover | Root | Real Question traversal reaches model draw; unchanged oracle and graph alias checks |
+| Model draw 77ef70 | Display matrix, shared graphics Draw and Frame | Original basic-model conversion and actual Metal submission | Next reached renderer packet | Root | Source-backed Question pixels and draw-suppression mutant |
+| Gamma mode 0 / ID 2, Sonic 49a9b0 and other preview callbacks | Actual Task primary/motion, player registry and imported actor tables | Full initialization, CCL, animation, common tail, update and display | Durable actor packets after their dependencies | Root | All real actors draw and survive cursor/cancel/reentry; no static substitutes |
+| Character menu confirmation to Sonic story | Bootstrap/menu/save owners and actual sound resources | Normal confirmation and first story callee; cue 2047 stays explicit missing asset | Reached story packet | Root | Natural Sonic entry, source images and delivered music/voice |
+
+### 2026-10-26 — GOAL section 6 item 2 tooling integrated (track V, gate rc 0)
+
+* Outcome: the full strengthened gate passes at b833ed4. Native menus/save paths remain visible with make play-native; CharacterSelect still stops at native_basic_object_renderer, frame 1382.
+* Native closure force-loads every archive member, checks nm symbols and keeps the unchanged 125-source product set in native-sources.txt. The hidden ground-acceleration guest-link mutant fails both checks.
+* Readability now ratchets large decimals, emulator arithmetic and address comments: baseline totals 233, 3322 and 1059. Naming constexpr literals changes the metric, not the game source.
+* All 50 native captures and reference R2/R3 require qualified content; genuine clear/rich-raster mutants fail. Both return transitions retain source frame 1450 and the unchanged ceiling; exact pixels occur one source frame later.
+* Startup parity is required in the gate. A strict 520-frame normal-input trace stays failing on unrecovered native player/camera owners and the movie-skip mode difference, native 452 versus reference 453. No mismatch is aligned away.
+* Gate rc 0: 255 native programs, 364 Python tests with one existing filesystem skip, R1 through R4, three native journeys and 16 exact startup comparisons. Evidence: reference/production-integration-20261026/tooling-integration-gate.json; STATUS generated.
+* Stale census guidance and generated status were corrected; pre-October 19 journal text is preserved verbatim in docs/history. No game oracles were changed or rerun for this tooling step; existing partials/failures remain.
+* Next: one bounded extraction attempt for texture selection, then fresh recovery if incomplete, under unchanged oracle/mutants/holdout. Packet branches/worktrees are durable; no push.
