@@ -1,0 +1,330 @@
+{
+  "candidate": "6e9a1ec9aafa255591ede7c9ca7695b54e2a377a",
+  "base": "f6fb4ce",
+  "tests_rerun": false,
+  "identity_checks": [
+    {
+      "group": "source_sha256",
+      "path": "src/runtime/native_gamma_binding.cpp",
+      "sha256": "1c5ddda68d70233a99688c2cee97f7fae74272fc2c37f1fd870eb4aba813991c",
+      "reference": null,
+      "matches": true
+    },
+    {
+      "group": "source_sha256",
+      "path": "src/runtime/gamma_actor_assets.hpp",
+      "sha256": "bf3d4eb54cf0631be96724e1c892ef59276e3121a6b0b9d80cb4674e59370bc6",
+      "reference": null,
+      "matches": true
+    },
+    {
+      "group": "source_sha256",
+      "path": "src/apps/native_gamma_actor_assets.hpp",
+      "sha256": "7c8c906b638c15c7d3e7c790cde63e646cf6e5e4b616b274d28caaca17fb7db5",
+      "reference": null,
+      "matches": true
+    },
+    {
+      "group": "source_sha256",
+      "path": "src/player/gamma_selection_core.hpp",
+      "sha256": "cfa7d093e9a57c77287cc5568f1b8fc03a701b6323a6142026ac556579b0e6e1",
+      "reference": null,
+      "matches": true
+    },
+    {
+      "group": "source_sha256",
+      "path": "src/player/gamma_selection_core.cpp",
+      "sha256": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea",
+      "reference": null,
+      "matches": true
+    },
+    {
+      "group": "source_sha256",
+      "path": "src/cpu/fidelity_float.hpp",
+      "sha256": "b0e0e9ae131404916d9e9e9d544ea67868ae037164a7b2379c206ec621fb1d85",
+      "reference": null,
+      "matches": true
+    },
+    {
+      "group": "source_sha256",
+      "path": "src/engine/task_work.hpp",
+      "sha256": "d0df9e59dec1dfcbeff7d9100ac0044b5a6e3e4683f691d85d60534416109f9d",
+      "reference": null,
+      "matches": true
+    },
+    {
+      "group": "source_sha256",
+      "path": "src/engine/collision_component.cpp",
+      "sha256": "e6a9e37e956ebe2f7a54344f5b17e447f182c8e502432ee28aeef115717ee3e5",
+      "reference": null,
+      "matches": true
+    },
+    {
+      "group": "source_sha256",
+      "path": "src/engine/collision_component.hpp",
+      "sha256": "fa4fb6a7a96459b94cf173b32c0b0d96eb5d4b0dfd19a79139f828e70e91392c",
+      "reference": null,
+      "matches": true
+    },
+    {
+      "group": "source_sha256",
+      "path": "src/math/ninja_length.cpp",
+      "sha256": "dc803f7399f49d809d5a467e76203103da8507f08fee5306626282573b7a3c75",
+      "reference": null,
+      "matches": true
+    },
+    {
+      "group": "source_sha256",
+      "path": "src/math/ninja_length.hpp",
+      "sha256": "30aa69ad39447239e4a8e88fe4abef9228282f2bfb7a0e23cd917045e06ce584",
+      "reference": null,
+      "matches": true
+    },
+    {
+      "group": "source_sha256",
+      "path": "tests/probes/native_collision_component_probe.cpp",
+      "sha256": "b065feed332d3dfd95b6849d109c33415a8499cc62ce16564a0c2e35d7f281db",
+      "reference": null,
+      "matches": true
+    },
+    {
+      "group": "source_sha256",
+      "path": "tests/unit/collision_component.cpp",
+      "sha256": "5e6cc81ce6ebc1d870872524287779282f7a60b2e691793ebf19e8ab18d9b0e5",
+      "reference": null,
+      "matches": true
+    },
+    {
+      "group": "source_sha256",
+      "path": "tools/oracles/check_collision_component.py",
+      "sha256": "b94e339cc003d7f954dcb71775c61ba221c859c51881157e60bbe653bbd3d567",
+      "reference": null,
+      "matches": true
+    },
+    {
+      "group": "source_sha256",
+      "path": "tools/oracles/verify_original_collision_component.py",
+      "sha256": "3105d7e9acaf4a5509b45cfff6753a2daf0678548b831f325fdd883a2b82c90c",
+      "reference": null,
+      "matches": true
+    },
+    {
+      "group": "source_sha256",
+      "path": "tests/unit/native_gamma_binding.mm",
+      "sha256": "cbd66449b65ebfaa5234b793b8cfe06de313ad40da2fd2d87059388ab75e49a8",
+      "reference": null,
+      "matches": true
+    },
+    {
+      "group": "source_sha256",
+      "path": "native-sources.txt",
+      "sha256": "3bca9e3c1341a79f028634d1d914cc4b67e5c05e5b5547a629edf79465aa83e3",
+      "reference": null,
+      "matches": true
+    },
+    {
+      "group": "approved_collision_78c2c59_byte_identical",
+      "path": "src/cpu/fidelity_float.hpp",
+      "sha256": "b0e0e9ae131404916d9e9e9d544ea67868ae037164a7b2379c206ec621fb1d85",
+      "reference": "78c2c59",
+      "matches": true
+    },
+    {
+      "group": "approved_collision_78c2c59_byte_identical",
+      "path": "src/engine/task_work.hpp",
+      "sha256": "d0df9e59dec1dfcbeff7d9100ac0044b5a6e3e4683f691d85d60534416109f9d",
+      "reference": "78c2c59",
+      "matches": true
+    },
+    {
+      "group": "approved_collision_78c2c59_byte_identical",
+      "path": "src/engine/collision_component.cpp",
+      "sha256": "e6a9e37e956ebe2f7a54344f5b17e447f182c8e502432ee28aeef115717ee3e5",
+      "reference": "78c2c59",
+      "matches": true
+    },
+    {
+      "group": "approved_collision_78c2c59_byte_identical",
+      "path": "src/engine/collision_component.hpp",
+      "sha256": "fa4fb6a7a96459b94cf173b32c0b0d96eb5d4b0dfd19a79139f828e70e91392c",
+      "reference": "78c2c59",
+      "matches": true
+    },
+    {
+      "group": "approved_collision_78c2c59_byte_identical",
+      "path": "src/math/ninja_length.cpp",
+      "sha256": "dc803f7399f49d809d5a467e76203103da8507f08fee5306626282573b7a3c75",
+      "reference": "78c2c59",
+      "matches": true
+    },
+    {
+      "group": "approved_collision_78c2c59_byte_identical",
+      "path": "src/math/ninja_length.hpp",
+      "sha256": "30aa69ad39447239e4a8e88fe4abef9228282f2bfb7a0e23cd917045e06ce584",
+      "reference": "78c2c59",
+      "matches": true
+    },
+    {
+      "group": "approved_collision_78c2c59_byte_identical",
+      "path": "tests/probes/native_collision_component_probe.cpp",
+      "sha256": "b065feed332d3dfd95b6849d109c33415a8499cc62ce16564a0c2e35d7f281db",
+      "reference": "78c2c59",
+      "matches": true
+    },
+    {
+      "group": "approved_collision_78c2c59_byte_identical",
+      "path": "tests/unit/collision_component.cpp",
+      "sha256": "5e6cc81ce6ebc1d870872524287779282f7a60b2e691793ebf19e8ab18d9b0e5",
+      "reference": "78c2c59",
+      "matches": true
+    },
+    {
+      "group": "approved_collision_78c2c59_byte_identical",
+      "path": "tools/oracles/check_collision_component.py",
+      "sha256": "b94e339cc003d7f954dcb71775c61ba221c859c51881157e60bbe653bbd3d567",
+      "reference": "78c2c59",
+      "matches": true
+    },
+    {
+      "group": "approved_collision_78c2c59_byte_identical",
+      "path": "tools/oracles/verify_original_collision_component.py",
+      "sha256": "3105d7e9acaf4a5509b45cfff6753a2daf0678548b831f325fdd883a2b82c90c",
+      "reference": "78c2c59",
+      "matches": true
+    },
+    {
+      "group": "gamma_algorithm_and_frozen_judges_byte_identical",
+      "path": "src/player/gamma_selection_core.cpp",
+      "sha256": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea",
+      "reference": "f6fb4ce",
+      "matches": true
+    },
+    {
+      "group": "gamma_algorithm_and_frozen_judges_byte_identical",
+      "path": "tests/probes/native_gamma_selection_core_probe.cpp",
+      "sha256": "f1f5119da472f78651428ac79b4a5435e80acb359bf2a0c2f816b2670195a517",
+      "reference": "f6fb4ce",
+      "matches": true
+    },
+    {
+      "group": "gamma_algorithm_and_frozen_judges_byte_identical",
+      "path": "tests/unit/gamma_selection_core.cpp",
+      "sha256": "d6aadb3b53e94fed35b696822e1271b7eb2e23d5e908a5e0bf8b8ce4ea144db1",
+      "reference": "f6fb4ce",
+      "matches": true
+    },
+    {
+      "group": "gamma_algorithm_and_frozen_judges_byte_identical",
+      "path": "tools/oracles/verify_original_gamma_selection_core.py",
+      "sha256": "b62020db7b643a941079b15b2e0b931885ace95b40bb1ec3329a61439604aada",
+      "reference": "f6fb4ce",
+      "matches": true
+    },
+    {
+      "group": "gamma_algorithm_and_frozen_judges_byte_identical",
+      "path": "tools/oracles/mutate_gamma_selection_core.py",
+      "sha256": "f19c1e581df6b56c2f4c88d3c97881765863d342119490fd9acb77ba03e7b538",
+      "reference": "f6fb4ce",
+      "matches": true
+    },
+    {
+      "group": "startup_judges_byte_identical",
+      "path": "tests/probes/native_player_startup_probe.cpp",
+      "sha256": "3f19fe2625681280cd69a28a9c91cf1fccd4a33c23894adc34f65f87a8db9261",
+      "reference": "f6fb4ce",
+      "matches": true
+    },
+    {
+      "group": "startup_judges_byte_identical",
+      "path": "tests/unit/player_startup.cpp",
+      "sha256": "3c433f9b0e965f581e9982a854c2425b471aac472fe0d787b1d2bf711c0bd218",
+      "reference": "f6fb4ce",
+      "matches": true
+    },
+    {
+      "group": "startup_judges_byte_identical",
+      "path": "tools/oracles/verify_original_player_startup.py",
+      "sha256": "54ad16c1dbb488eef85455ec4e15a9100a0e31ff54f59fd3f7a8ccec2bab9d44",
+      "reference": "f6fb4ce",
+      "matches": true
+    }
+  ],
+  "receipt_checks": [
+    {
+      "path": "build/gamma-collision-qualification/gamma-dev.json",
+      "sha256": "8f9dd204907bbeef5cd044e8467f88a5ec8dd4dbe0b0cad099b2d20ddbd63dd9",
+      "matches": true
+    },
+    {
+      "path": "build/gamma-collision-qualification/gamma-holdout.json",
+      "sha256": "bc4228a7425108cc4481177277f0abe570bdb77be430c9cc51c962270bcdddb8",
+      "matches": true
+    },
+    {
+      "path": "build/gamma-collision-qualification/startup.json",
+      "sha256": "7f1ef8636b35bd4ef960efaabecc182c8275eee531ac4cbef5d338f3a94dab40",
+      "matches": true
+    },
+    {
+      "path": "build/gamma-collision-qualification/frozen-runs.json",
+      "sha256": "63e5574878f26f45a9400f73fd2bf2a44fd28b77e2ecc5da2dfe9ce2881a233f",
+      "matches": true
+    },
+    {
+      "path": "build/gamma-collision-qualification/component/proof.json",
+      "sha256": "d5fda1eb7492f77b5385f5cc085ce5adeabafa46c89b648f846cf18ed41293bf",
+      "matches": true
+    },
+    {
+      "path": "build/gamma-collision-binding-test.log",
+      "sha256": "8467b122bbd353dbe4616b4ddcecf7a7b1ed21e1d63f6abb4151d12b3f56ef84",
+      "matches": true
+    },
+    {
+      "path": "build/native-closure.json",
+      "sha256": "9e386edaff3cc5dc5917987de7ed86da44e91f7a346e1107e37a08ce13dff095",
+      "matches": true
+    },
+    {
+      "path": "build/gamma-collision-frontier/application.log",
+      "sha256": "233c49bf2f216cc9e36bbca6266c314752fc46353aca129c3a17b859a5b66b0d",
+      "matches": true
+    },
+    {
+      "path": "build/gamma-collision-frontier/frontier.ppm",
+      "sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+      "matches": true
+    }
+  ],
+  "composition_mutant_checks": [
+    {
+      "name": "skip_collision_init",
+      "mutated_source_and_failure_log_match": true
+    },
+    {
+      "name": "copied_status",
+      "mutated_source_and_failure_log_match": true
+    },
+    {
+      "name": "wrong_extent",
+      "mutated_source_and_failure_log_match": true
+    },
+    {
+      "name": "wrong_form_byte",
+      "mutated_source_and_failure_log_match": true
+    },
+    {
+      "name": "wrong_first_angle",
+      "mutated_source_and_failure_log_match": true
+    }
+  ],
+  "unchanged_against_base": [
+    "reference/readability-baseline.json",
+    "reference/judge-manifest.json"
+  ],
+  "limits": [
+    "Read/hash/byte comparison only; no execution qualification rerun.",
+    "Historical execution order and holdout secrecy are not independently established.",
+    "Root owns registration, manifest refresh, source-only export and full gate."
+  ]
+}
