@@ -1,0 +1,37 @@
+[
+  {
+    "name": "invert-task",
+    "before": "cutscene_task != nullptr",
+    "after": "cutscene_task == nullptr",
+    "rc": 1,
+    "mismatches": 4867
+  },
+  {
+    "name": "omit-frames",
+    "before": "frames == 0 && seconds == 0 && minutes == 0",
+    "after": "seconds == 0 && minutes == 0",
+    "rc": 1,
+    "mismatches": 255
+  },
+  {
+    "name": "omit-seconds",
+    "before": "frames == 0 && seconds == 0 && minutes == 0",
+    "after": "frames == 0 && minutes == 0",
+    "rc": 1,
+    "mismatches": 255
+  },
+  {
+    "name": "omit-minutes",
+    "before": "frames == 0 && seconds == 0 && minutes == 0",
+    "after": "frames == 0 && seconds == 0",
+    "rc": 1,
+    "mismatches": 255
+  },
+  {
+    "name": "any-zero",
+    "before": "frames == 0 && seconds == 0 && minutes == 0",
+    "after": "frames == 0 || seconds == 0 || minutes == 0",
+    "rc": 1,
+    "mismatches": 818
+  }
+]
