@@ -525,3 +525,13 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Gamma's build pause is revoked after the actual gate terminal. Its final source/oracle/unit/mutant/holdout work may resume privately; no Ghidra or app launch without Root coordination.
 * Root prepared the approved shared current owners in packet/gamma-runtime-binding, /Users/burbujamc/Developer/sadx-wt-gamma-runtime-binding: db0edf6, b00f413, 281b6de. Core-only actor-current unit exits 0. No Main code or gate source was changed during the run.
 * Continue GUI smoke/full gate and the reached Gamma callback. All actor drawing, cancellation/reentry, Sonic confirmation, gameplay and 63 FPS remain unverified. No push.
+
+### 2026-10-26 — Native model/startup full gate green (track J/V)
+
+* Full make -j10 gate retry exits 0: 270 native programs, 386 Python tests with one existing filesystem skip, R1 through R4, three native menu/save journeys and 16 startup comparisons. Record: reference/production-integration-20261026/native-model-startup-gate.json; STATUS generated.
+* Fresh windowed smoke drew 120 frames after the user restored the visible GUI. Prior display-stalled attempt remains recorded as rc 2; no checker or expectation was changed. All providers were closed during both gates.
+* Native source-only export and normal fresh-save input reach native_gamma_player_controller at frame 1382, diagnostic exit 1. The inspected capture is still outgoing title fade; no all-actor or N3b qualification. Earlier FP partials remain partial.
+* Gamma mode 0/common-tail core 3477fda received fresh bounded review 0acbb8f. Root imported it only into packet/gamma-runtime-binding at 9f5877a; actual lower calls and product binding remain pending. Shared current owners 28b3974 are in that same worktree.
+* Gamma asset worker resumed after the actual terminal. Strict import produces 3328 records, preserving 3302 existing encoded records and 22 bindings. Original recipes/weld and inverse checks pass; final review and product consumption remain pending.
+* Matrix numbers 54, 30, 39, 2 and 37 are animated Ninja preorder cache indices for GetMMMatrix, not E102_OBJECTS export rows. Root independently confirmed the 77-node child/sibling traversal and exact pointer identities. Matrix contents require the actual animation cache; no static-pose fallback is accepted.
+* Next: finish Gamma assets/review and current-owner fixture validation, bind the actual controller with existing native PInitialize, then recover its first real missing lower call. Continue all preview actors, cancel/reentry, audio, Sonic story and the full route. No push.
