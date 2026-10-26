@@ -1,0 +1,41 @@
+{
+  "scope": "Reviewed initializer migration and native startup checker registration",
+  "initializer": "bdf110a",
+  "initializer_review": "afc50a7",
+  "existing_changed_protected_inputs": [
+    "Makefile",
+    "tests/unit/manifest.tsv"
+  ],
+  "setup_evidence": "reference/production-integration-20261026/polybuff-reference-registration.json",
+  "expected_values_tolerances_changed": false,
+  "focused_original_reports": {
+    "system_init": {
+      "cases": 600,
+      "mismatch_count": 0,
+      "mismatches": [],
+      "passed": null
+    },
+    "device_setup": {
+      "cases": 2000,
+      "mismatch_count": 0,
+      "mismatches": [],
+      "passed": null
+    },
+    "ninja_frame_calls": {
+      "cases": 3969,
+      "mismatch_count": 0,
+      "mismatches": [],
+      "passed": null
+    },
+    "polybuff_initialization": {
+      "cases": 152,
+      "mismatch_count": null,
+      "mismatches": [],
+      "passed": true
+    }
+  },
+  "source_only": "reference/production-integration-20261026/native-model-source-only.json",
+  "limits": [
+    "Fresh final startup review and full combined gate pending; no N3b claim."
+  ]
+}

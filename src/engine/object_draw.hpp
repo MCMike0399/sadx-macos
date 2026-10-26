@@ -51,7 +51,7 @@ bool texture_list_not_ready(Context &context);
 
 // STUB: SONIC 0x407b70 late_DrawObject actual queued rendering required
 void draw_late_object(Context &context, ObjectId id, std::uint32_t flags);
-// STUB: SONIC 0x77ef70 njDrawModel actual model rendering required
+// NOTSA: runtime handoff to the recovered basic_model::draw_model engine wrapper.
 void draw_model(Context &context, ModelId id);
 
 // FUNCTION: SONIC 0x401430 dsSimpleDrawModel

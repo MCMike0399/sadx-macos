@@ -1,0 +1,46 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "cases": 3427,
+  "mismatch_count": 0,
+  "fp_status_mismatches": 274,
+  "values_match": true,
+  "passed": false,
+  "exit_status": 2,
+  "case_sha256": "673e0a725b7ed05ff36cbe7264fb8abcc8b42ed3607650c6789de4bc17d52d63",
+  "library_sha256": "429fe8e846e190352695dffa10d78c8938f8dd4119664a3ffabaefd20703b2c6",
+  "raw_receipts": {
+    "path": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-2ef7e860/build/basic-model-core/holdout.receipts.jsonl",
+    "sha256": "4b5385dd1b43c49890a8a87283b940077c36a27b932ff8216e58a1a133fe8139"
+  },
+  "source_files_sha256": {
+    "src/engine/basic_model.cpp": "92c102056e70380186cdb295e121916837ed9caead67996c6d99fda5c8ad0815",
+    "src/engine/basic_model.hpp": "c6fe34c45795605be9a7385fd590fb4505ebe57592a79537faf9b934f4a029a7",
+    "tests/probes/native_basic_model_probe.cpp": "1180a9941fe8695cbd027c8c234341d0fef992824a539949a61b6769267c58fd",
+    "tests/probes/basic_model_backend.hpp": "1cd770ae8bacd65b17185973fdc234a2c60d38764d5b2983041da5bbabbc441f",
+    "tools/oracles/verify_original_basic_model.py": "d4d92a0efaf206c07a4113cdc1dcd17b78ffd9236f97bb846938fe2a72f290e0"
+  },
+  "original_ranges_sha256": {
+    "0x77ef70-0x77ef87": "4f5977cb691edaa04c982a4dc417eaeea893aa03592b5a6e87c5764cc71491a9",
+    "0x77eda0-0x77ef4e": "8263cd042dc3ffa7a2a13f14b159c47e113da1dab46513cd256e6a695516f68e",
+    "0x781cc0-0x781dea": "10ec7f111b297f36c00b1af5edd3605d1d7ce335f0fd5f42e3fe7eacac1e2be1",
+    "0x781df0-0x781e14": "43e7eaecdd25401cb4832afab1600affa25c9c5116e61a176c243bbb309053c2",
+    "0x781ec0-0x78202c": "37d0ef25b1a6dbf1096b4c21b3b2a0a02cc1529431ab2c6851f9aa5c9930d41d",
+    "0x7944b0-0x7944f1": "b89491d221eb7dab3b8a00626b0c7ab67a5980bb67cdf8a58576a43e5c160126",
+    "0x794500-0x79453e": "e7d26eb669767c67201c4eecdf445fafa3576ac4cf9f4bd0e3231119a7765a13",
+    "0x784850-0x784adf": "48c720d61746b56396a4b357fe21e61e8c2eeebf1ab9d74559d33c460875da88",
+    "0x791a50-0x791a7c": "2d5e4aeaacf1c2c257fb257aea0bf82a7ae9bd55d0e180a6138d7e2361e078d0",
+    "0x791a80-0x791aa4": "6947bc74529b5d2b87af4c603080cb74992edccaa9e44f49bf5e737522b1aeb0",
+    "0x791990-0x791a4a": "0e7f45547011c434e1883a4ee2c1b03f401ccfb9d2d6ec78e2f4c0a10f62c1b3",
+    "0x791ab0-0x791ac9": "a3e41ac30905827503386d50372ff6cdba6a5e302521a42f2d0e4e51adb0ae41",
+    "0x791ad0-0x791ae9": "22073fc5b9ec4e9890d76725175c11afdaf4b86b7025dac0ab4a27a0056397ab"
+  },
+  "mismatches": [],
+  "limits": [
+    "Unmodified complete wrapper/parser/transform instruction bodies",
+    "D3DX calls use operand/store receipts, not numerical matrix proof",
+    "Texture and strip calls are synthetic lower receipts; all three material helpers execute original bodies",
+    "Alternate/other primitive/buffer paths remain explicit stops",
+    "Actual source _ftol instructions; FP-status differences remain partial",
+    "No runtime, GPU, Windows-device or Question-entry FP-state claim"
+  ]
+}

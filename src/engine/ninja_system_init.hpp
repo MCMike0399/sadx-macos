@@ -19,11 +19,17 @@ namespace sadx {
 // allocation work the source delegates (794540, 793c70, 7928e0, 785240, 791d60,
 // DirectInput8 COM) are owners; the 77f110/77efc0 callbacks join NinjaCallbackList.
 struct NinjaSystemInitState {
+    NinjaSystemInitState();
+    ~NinjaSystemInitState();
+    NinjaSystemInitState(const NinjaSystemInitState&) = delete;
+    NinjaSystemInitState& operator=(const NinjaSystemInitState&) = delete;
     std::optional<std::uint32_t> word_at_3d0f83c,word_at_3d0f810;           // 77f240
     std::optional<std::uint32_t> pool_at_3ce71b0,size_at_3ce71a4;           // 780ea0
     std::optional<std::uint32_t> color_at_3ce715c,buffer_at_3ce7158;        // 780870
     std::optional<float> scale_at_3ce7154;                                   // 780870 / 7808c0
-    std::optional<std::uint32_t> word_at_3d127a0;                            // 78e720
+    polybuff::RetainedBase polygon_base{};
+    std::unique_ptr<polybuff_reference::Word> polygon_base_fact;
+    polybuff_reference::Word& word_at_3d127a0 = *polygon_base_fact;                            // 78e720
     std::optional<std::uint32_t> word_at_3d0f740;                            // 7803b0
     std::optional<std::uint32_t> flag_at_3ce7150,counter_low_at_3ce7130,counter_high_at_3ce7134; // 780140
     SourceBytes<0x3ce6f48,0x1e0> records_at_3ce6f48;                         // 77f150: 4 x 0x78
@@ -32,13 +38,21 @@ struct NinjaSystemInitState {
     // 3ce6de0..3ce6de2, the object 791d60 receives) and 4 x 0x12 records at 3ce6df0: one block.
     SourceBytes<0x3ce6d80,0xb8> block_at_3ce6d80;
     std::optional<std::uint32_t> direct_input_at_3abdc10,mouse_at_3abdc14;  // 40bb20
+    // NOTSA: reference-only table availability remains borrowed by the initializer adapter.
+    const std::array<std::optional<std::uint32_t>,27>& polygon_descriptions() const;
     std::array<std::optional<std::uint32_t>,27> tables_at_389d888;          // 78e720's 794540 argument tables (389d888, 389d8ac, 389d8d0)
 };
+// Reference methods require guest/polybuff_owners.hpp; keep the primary byte owner uninstantiated.
+template<> struct SourceBytes<0x3d0fae0, polybuff::kScratchWords * polybuff::kWordBytes>;
+using PolygonScratchBorrowed = SourceBytes<0x3d0fae0, polybuff::kScratchWords * polybuff::kWordBytes>;
 struct NinjaSystemInitBorrowed {
+    // NOTSA: semantic views for the reference adapter; no copied count or scratch owner.
+    const std::array<std::optional<std::uint32_t>,9>& polygon_counts() const;
+    PolygonScratchBorrowed& polygon_scratch() const;
     NinjaMemoryState& memory;GuestHeap& heap;  // njMalloc
     GuestHeap& crt_heap;                       // the CRT's malloc 645002
     NinjaFrameCallState& frame;                // 3d128ac
-    SourceBytes<0x3d0fae0,0x200>& block_at_3d0fae0; // NinjaDeviceState
+    PolygonScratchBorrowed& block_at_3d0fae0; // NinjaDeviceState
     const std::array<std::optional<std::uint32_t>,9>& sizes_at_389d864; // GameLibraryInitState
     NinjaTexturePoolState& textures;NinjaTextureSelectionState& selection;
     NinjaCallbackList& callbacks;
@@ -68,6 +82,9 @@ struct NinjaSystemInitResult {
     std::optional<NinjaSystemCall> pending_call;
     explicit operator bool()const noexcept{return failure==NinjaSystemInitFailure::none;}
 };
+// NOTSA: reference binding for the shared recovered polygon-buffer initializer.
+NinjaSystemInitResult initialize_system_polygon_buffers(NinjaSystemInitRuntime&, std::uint32_t size,
+                                                       std::uint32_t base);
 NinjaSystemInitResult run_system_init_401830(NinjaSystemInitRuntime&);
 // 77f150 alone (781070 calls it before 401830 does): the record resets, the Input mod's NOP over
 // 7928e0, the 77f110 registration and its 785240 tail (3d08428 + 0x18i = 0, then 785190 registered).

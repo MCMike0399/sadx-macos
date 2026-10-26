@@ -61,10 +61,10 @@ void NativeGame::initialize_source_facts(){
     for(unsigned i=0;i<36;++i){leaves_->words_at_3b29b90[i]=u32(0x3b29b90+4*i);}
     for(unsigned i=0;i<4;++i)leaves_->entry_words_at_3d08428[i]=u32(0x3d08428+24*i);
     queue_base_at_3abd960_=u32(0x3abd960);
-    frame_calls_.scene_flags_at_3d08588=u32(0x3d08588);frame_calls_.device_flags_at_3d1289c=u32(0x3d1289c);frame_calls_.vertex_buffer_at_3d128ac=u32(0x3d128ac);
+    frame_calls_.scene_flags_at_3d08588=u32(0x3d08588);frame_calls_.device_flags_at_3d1289c=u32(0x3d1289c);frame_calls_.polygon_facts->vertices=u32(0x3d128ac);
     frame_calls_.hook_at_3d0f7a4=u32(0x3d0f7a4);frame_calls_.hook_at_3d0f7a8=u32(0x3d0f7a8);frame_calls_.hook_at_3d0fa30=u32(0x3d0fa30);frame_calls_.argument_at_3d0fa38=u32(0x3d0fa38);
     for(unsigned i=0;i<16;++i)frame_calls_.hooks_at_3d08af0[i]=u32(0x3d08af0+4*i);
-    for(unsigned r=0;r<9;++r)for(unsigned w=0;w<4;++w)frame_calls_.records_at_3d0fe00[r][w]=u32(0x3d0fe00+0x24*r+4*w);
+    for(unsigned r=0;r<9;++r)for(unsigned w=0;w<9;++w)frame_calls_.polygon_facts->records[r][w]=u32(0x3d0fe00+0x24*r+4*w);
     screen_.points_at_3ce7164=u32(0x3ce7164);screen_.colors_at_3ce7168=u32(0x3ce7168);screen_.word_at_3ce716c=u32(0x3ce716c);
     // Screen device methods (recording owner; a Metal backend replaces it).
     screen_device_.set_viewport=[this](const D3D8FrameCommand&,const std::array<std::uint32_t,6>& v)->std::optional<std::int32_t>{d3d8_.viewport=v;return 0;};
@@ -83,7 +83,7 @@ void NativeGame::initialize_source_facts(){
     initialize_startup_defaults();
     memory_.heap_at_389d628=u32(0x389d628);word_at_3d0f7a0_=u32(0x3d0f7a0);
     initialize_library_defaults();
-    for(std::size_t i=0;i<device_.block_at_3d0fae0.size;++i)device_.block_at_3d0fae0.bytes[i]=u8(static_cast<std::uint32_t>(0x3d0fae0+i));
+    for(std::size_t i=0;i<device_.polygon_scratch_facts->size;++i)device_.polygon_scratch_facts->bytes[i]=u8(static_cast<std::uint32_t>(0x3d0fae0+i));
     for(std::size_t i=0;i<device_.caps_at_3d127c0.size;++i)device_.caps_at_3d127c0.bytes[i]=u8(static_cast<std::uint32_t>(0x3d127c0+i));
     device_.direct3d_at_3d11f60=u32(0x3d11f60);
     for(unsigned i=0;i<7;++i)device_.words_at_3d0fd00[i]=u32(0x3d0fd00+4*i);
@@ -92,7 +92,7 @@ void NativeGame::initialize_source_facts(){
     window_.last_wparam_at_3d08534=u32(0x3d08534);input_devices_.joysticks_at_3d08814=u32(0x3d08814);input_devices_.mouse_at_3d08834=u32(0x3d08834);
     for(unsigned i=0;i<4;++i){vibration_.strength_at_3d0842e[i]=u8(0x3d0842e +0x18*i);vibration_.duration_at_3d08434[i]=u32(0x3d08434+0x18*i);vibration_.counter_at_3d0843c[i]=u32(0x3d0843c+0x18*i);}window_at_3d0fd30_=u32(0x3d0fd30);instance_at_3d0fd34_=u32(0x3d0fd34);keyboard_.input_pointer_at_3b0e340=u32(0x3b0e340);
     system_.word_at_3d0f83c=u32(0x3d0f83c);system_.word_at_3d0f810=u32(0x3d0f810);system_.pool_at_3ce71b0=u32(0x3ce71b0);system_.size_at_3ce71a4=u32(0x3ce71a4);
-    system_.color_at_3ce715c=u32(0x3ce715c);system_.buffer_at_3ce7158=u32(0x3ce7158);system_.scale_at_3ce7154=f32(0x3ce7154);system_.word_at_3d127a0=u32(0x3d127a0);
+    system_.color_at_3ce715c=u32(0x3ce715c);system_.buffer_at_3ce7158=u32(0x3ce7158);system_.scale_at_3ce7154=f32(0x3ce7154);*system_.polygon_base_fact=u32(0x3d127a0);
     system_.word_at_3d0f740=u32(0x3d0f740);system_.flag_at_3ce7150=u32(0x3ce7150);system_.counter_low_at_3ce7130=u32(0x3ce7130);system_.counter_high_at_3ce7134=u32(0x3ce7134);
     system_.direct_input_at_3abdc10=u32(0x3abdc10);system_.mouse_at_3abdc14=u32(0x3abdc14);
     for(std::size_t i=0;i<system_.records_at_3ce6f48.size;++i)system_.records_at_3ce6f48.bytes[i]=u8(static_cast<std::uint32_t>(0x3ce6f48+i));
@@ -1337,7 +1337,7 @@ NativeGameReport NativeGame::run(){
                             if(a>=0x3ce7174&&a<0x3ce7184)return view_->clear_colors_at_3ce7174[(a-0x3ce7174)/4];
                             if(a>=0x3ce7184&&a<0x3ce71a4)return screen_.points_at_3ce7184[(a-0x3ce7184)/4];
                             return std::nullopt;},
-                        render_,texture_selection_,*texture_runtime_,frame_calls_.vertex_buffer_at_3d128ac,screen_device_,NinjaDepthRuntime{screen_,device_,sse_,fp_,sse_reciprocal_by_division}};
+                        render_,texture_selection_,*texture_runtime_,frame_calls_.polygon_facts->vertices,screen_device_,NinjaDepthRuntime{screen_,device_,sse_,fp_,sse_reciprocal_by_division}};
                     float argument;std::memcpy(&argument,&*n.arguments[2],4);
                     const auto p=run_screen_polygon_77dfc0(*n.arguments[0],*n.arguments[1],argument,*n.arguments[3],rt);
                     if(p.status.required_fact)failure_detail_=" (77dfc0 requires "+hex(*p.status.required_fact)+")";
@@ -1469,7 +1469,7 @@ NativeGameReport NativeGame::run(){
     if(!winmain_settings())return report_;
     // 401830's owners (also used for 781070's own 77f150 call), with the pinned Input mod's 77f0d7/77f03e/77f205 patches.
     std::vector<std::string> system_skipped;
-    NinjaSystemInitRuntime sys{system_,{memory_,heap_,crt_heap_,frame_calls_,device_.block_at_3d0fae0,library_.words_at_389d864,texture_pool_,texture_selection_,callbacks_,queue_runtime_.captured_word_at_3d0f9c8,leaves_->entry_words_at_3d08428,
+    NinjaSystemInitRuntime sys{system_,{memory_,heap_,crt_heap_,frame_calls_,*device_.polygon_scratch_facts,library_.words_at_389d864,texture_pool_,texture_selection_,callbacks_,queue_runtime_.captured_word_at_3d0f9c8,leaves_->entry_words_at_3d08428,
             &view_->clear_colors_at_3ce7174,window_at_3d0fd30_,instance_at_3d0fd34_},fp_,
         [&](const NinjaSystemCall& c)->NinjaSystemOwnerResult{
             const auto ok=[](std::optional<std::uint32_t> eax={}){return NinjaSystemOwnerResult{{GameLogicOwnerState::completed,0,{}},eax};};

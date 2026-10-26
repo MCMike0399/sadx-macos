@@ -1,0 +1,21 @@
+{
+  "scope": "Register reviewed basic-model judge additions and four appended native unit registrations",
+  "existing_changed_inputs": [
+    "tests/unit/manifest.tsv"
+  ],
+  "registration_prefix_verified": "5ccc04f; prior manifest hash unchanged",
+  "existing_expected_values_tolerances_changed": false,
+  "new_basic_model_judges_byte_identical_to_reviewed": "9220d1b; review857b0cf",
+  "unit_registrations": [
+    "basic-model",
+    "model-device",
+    "character-geometry",
+    "model-binding"
+  ],
+  "native_runtime_stage": "faf1d87",
+  "proof": "reference/production-integration-20261026/native-model-binding-stage.json",
+  "limits": [
+    "Product still throws native_polybuff_owner_binding.",
+    "No full integration gate, GPU or N3b qualification."
+  ]
+}

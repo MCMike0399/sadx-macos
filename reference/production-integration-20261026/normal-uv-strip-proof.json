@@ -1,0 +1,187 @@
+{
+  "base_commit": "04c40ae0b0840b9982cda95452057c1d678eeec1",
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "unit_exit_status": 0,
+  "unit_output": "normal_uv_strip: 12 checks passed",
+  "dev": {
+    "passed": false,
+    "values_match": true,
+    "cases": 1014,
+    "value_mismatches": 0,
+    "flag_mismatches": 154,
+    "ordered_receipts": 15720,
+    "vertex_word_stores": 9309,
+    "reference_state_api_vertex_sha256": "ac3cc34770941cdeae705a26110ab2fb870cb45eb56185cae4752d6a3417f707",
+    "native_state_api_vertex_sha256": "ac3cc34770941cdeae705a26110ab2fb870cb45eb56185cae4752d6a3417f707",
+    "input_sha256": "7f9653d230c256942b4e88a2fafb06bd4db5bc37ce4f09d2c944d2381a8e1c43",
+    "flag_patterns": {
+      "cw=0x7f:source=0x0,native=0x20": 88,
+      "cw=0x27f:source=0x0,native=0x20": 12,
+      "cw=0x37f:source=0x0,native=0x20": 13,
+      "cw=0x47f:source=0x0,native=0x20": 13,
+      "cw=0x87f:source=0x0,native=0x20": 16,
+      "cw=0xc7f:source=0x0,native=0x20": 12
+    }
+  },
+  "holdout": {
+    "passed": false,
+    "values_match": true,
+    "cases": 2662,
+    "value_mismatches": 0,
+    "flag_mismatches": 198,
+    "ordered_receipts": 29088,
+    "vertex_word_stores": 14934,
+    "reference_state_api_vertex_sha256": "55781d1ef9d10ca261fb0ce49cc8463ba6a982766fddc501e96b9823ad420b10",
+    "native_state_api_vertex_sha256": "55781d1ef9d10ca261fb0ce49cc8463ba6a982766fddc501e96b9823ad420b10",
+    "input_sha256": "cdf259c8ef2799107018b1b73640b848a6d922434cf86e898fa03e396c7bf51b",
+    "flag_patterns": {
+      "cw=0x7f:source=0x0,native=0x20": 95,
+      "cw=0x27f:source=0x0,native=0x20": 20,
+      "cw=0x37f:source=0x0,native=0x20": 17,
+      "cw=0x47f:source=0x0,native=0x20": 22,
+      "cw=0x87f:source=0x0,native=0x20": 26,
+      "cw=0xc7f:source=0x0,native=0x20": 18
+    }
+  },
+  "dev_exit_status": 2,
+  "holdout_exit_status": 2,
+  "mutants": {
+    "remaining-equality": {
+      "killed": true,
+      "value_mismatches": 4
+    },
+    "header-mask": {
+      "killed": true,
+      "value_mismatches": 68
+    },
+    "signed-index": {
+      "killed": true,
+      "value_mismatches": 127
+    },
+    "uv-divisor": {
+      "killed": true,
+      "value_mismatches": 218
+    },
+    "initial-degenerate": {
+      "killed": true,
+      "value_mismatches": 237
+    },
+    "trailing-uv": {
+      "killed": true,
+      "value_mismatches": 157
+    },
+    "argument-store-order": {
+      "killed": true,
+      "value_mismatches": 318
+    }
+  },
+  "source_ranges": {
+    "0x7835f0-0x783822": "1de62e7fa0abfc2783e0bddbe3c563c022cd9c007e0fd0c174586c188fb49008",
+    "0x794540-0x7945b8": "86ea29a4faf1a638362147a8bf0c3a91c4f4507bb1799ecf653190e5f28c1b79",
+    "0x7945c0-0x7945f2": "3c94193aeb47be8099bfdcdf262c52bad5ce6ff84ba961e7f498e4bfc90e7e53",
+    "0x794600-0x79462e": "584bc633ee3d4c24b090f221d524cbb5d44cc2a3f074a3e3fbf030eefb04e736",
+    "0x794630-0x7946b1": "3279104ee34b6fda6db3bf2a6fcec2c2399971455efaa81885a1b77e1bda39dd",
+    "0x794750-0x794759": "c49559e888fd5e6de4986d2ef949ff91e2c33dc602f6b8531fac3c20376d6ec5",
+    "0x794760-0x7947ac": "6e73187607397bda1c7db2bbc01f07dac237ea0b494604fe6e689ee0f965985d",
+    "0x794800-0x794835": "1d6d63ab0a3b9ea8c1d4ed522cd06d39d468736ad651ad9686fd52ed8260d03b"
+  },
+  "engine_sha256": "43fb5388e4169b999a61cbe9c021c40a63017169d6db001835f57ae27d446b17",
+  "limits": "COM/CRT receipts; no GPU, model composition or N3b claim. Compared low-six x87 exception flags differ: see flag_patterns (native inexact versus source clear in observed rows). Strict pass is false. Full FPSW/tag/stack and unmasked/deferred exceptions unverified.",
+  "full_gate_run": false,
+  "profile_summary": {
+    "patches": 618,
+    "active_patches": 121,
+    "active_unhandled_patches": 79,
+    "reports": 10,
+    "declared_exe_ranges": 80,
+    "unhandled_overlaps": 0,
+    "handled_overlaps": 0,
+    "undetermined_overlaps": 0,
+    "reports_without_addressed_ranges": []
+  },
+  "profile_report_ranges": {
+    "argument-store-order.json": {
+      "exe_ranges": 8,
+      "dll_ranges_skipped": 0,
+      "opaque_range_hashes": [],
+      "unparsed_keys": []
+    },
+    "dev.json": {
+      "exe_ranges": 8,
+      "dll_ranges_skipped": 0,
+      "opaque_range_hashes": [],
+      "unparsed_keys": []
+    },
+    "header-mask.json": {
+      "exe_ranges": 8,
+      "dll_ranges_skipped": 0,
+      "opaque_range_hashes": [],
+      "unparsed_keys": []
+    },
+    "holdout.json": {
+      "exe_ranges": 8,
+      "dll_ranges_skipped": 0,
+      "opaque_range_hashes": [],
+      "unparsed_keys": []
+    },
+    "initial-degenerate.json": {
+      "exe_ranges": 8,
+      "dll_ranges_skipped": 0,
+      "opaque_range_hashes": [],
+      "unparsed_keys": []
+    },
+    "proof.json": {
+      "exe_ranges": 8,
+      "dll_ranges_skipped": 0,
+      "opaque_range_hashes": [],
+      "unparsed_keys": []
+    },
+    "remaining-equality.json": {
+      "exe_ranges": 8,
+      "dll_ranges_skipped": 0,
+      "opaque_range_hashes": [],
+      "unparsed_keys": []
+    },
+    "signed-index.json": {
+      "exe_ranges": 8,
+      "dll_ranges_skipped": 0,
+      "opaque_range_hashes": [],
+      "unparsed_keys": []
+    },
+    "trailing-uv.json": {
+      "exe_ranges": 8,
+      "dll_ranges_skipped": 0,
+      "opaque_range_hashes": [],
+      "unparsed_keys": []
+    },
+    "uv-divisor.json": {
+      "exe_ranges": 8,
+      "dll_ranges_skipped": 0,
+      "opaque_range_hashes": [],
+      "unparsed_keys": []
+    }
+  },
+  "report_sha256": {
+    "dev.json": "77c4f65205e5b7f64443be0bf648f2fdbffc133f00c7d1df559236df7cc8fa29",
+    "holdout.json": "afabb76fb213f5131f08748afb0e617d299e6aa94b4cf7f7847b5ce5655a131a"
+  },
+  "checks": {
+    "readability_regressions": 0,
+    "provenance_errors": 0,
+    "layer_violations": 0,
+    "duplicate_global_owners": 0,
+    "old_judge_edits": "none; only appended isolated unit/probe Make registrations and one unit manifest row",
+    "judge_manifest_violations": 0
+  },
+  "existing_oracles_rerun": false,
+  "ignored_corpus_restoration": "53 absent ignored inputs copied read-only from Root after matching every pre-existing manifest hash; no regeneration or pin changes",
+  "packet_files_sha256": {
+    "src/engine/normal_uv_strip.cpp": "43fb5388e4169b999a61cbe9c021c40a63017169d6db001835f57ae27d446b17",
+    "src/engine/normal_uv_strip.hpp": "a678a26b6cfb7ea3994aaf9b174f7b3fa96e239474bc4161351760cea420f106",
+    "tests/unit/normal_uv_strip.cpp": "476c8335c1044a680fd81bbe48c0a0b34a39da99a5a210747bfd1e33b6dc465a",
+    "tests/probes/native_normal_uv_strip_probe.cpp": "7b0baaad583c0d1c0ab40be4c9567d802f4d15bce9340283cb1f7b631680e3dc",
+    "tests/probes/normal_uv_strip_probe.hpp": "e92b2c39e3bef3e3b1fbbb657a4c91a03eea31012a902d849ea41c890adef9d8",
+    "tools/oracles/verify_original_normal_uv_strip.py": "9f07a52f34f74320126f105392cc28152e48a442e2d49b6695ce6ed1874a6f2c",
+    "tools/oracles/check_normal_uv_strip_packet.py": "367792beba15da9ef0b9a28ac10b64e7507a2bcf6876a732d65f43260a99d66c"
+  }
+}

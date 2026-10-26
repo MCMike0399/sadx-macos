@@ -1,3 +1,4 @@
+#include "guest/polybuff_owners.hpp"
 #include "guest/frame_control_reference.hpp"
 #include "engine/ninja_device_init.hpp"
 #include <cstring>
@@ -24,9 +25,9 @@ struct Operation {
     void run(){
         auto& s=rt.state;
         if(!set_frame_interval_multiplier(1,rt.renderer))fail(NinjaDeviceFailure::multiplier_failed,0x791616);
-        if(!s.block_at_3d0fae0.fill(0x3d0fae0,0x200,0))fail(NinjaDeviceFailure::unknown_state,0x79162c,0x3d0fae0);
+        if(!s.polygon_scratch_facts->fill(0x3d0fae0,0x200,0))fail(NinjaDeviceFailure::unknown_state,0x79162c,0x3d0fae0);
         rt.frame.device_flags_at_3d1289c=0;
-        for(auto& record:rt.frame.records_at_3d0fe00)record[0]=0;
+        for(auto& record:rt.frame.polygon_facts->records)record[0]=0;
         if(!rt.host.create_direct3d)fail(NinjaDeviceFailure::host_unavailable,0x791651);
         const auto d3d=rt.host.create_direct3d(0xdc);if(!d3d)fail(NinjaDeviceFailure::host_unavailable,0x791651);
         s.direct3d_at_3d11f60=*d3d;

@@ -28,8 +28,9 @@ void draw_late_object(Context &, ObjectId, std::uint32_t) {
 
 namespace sadx::native {
 struct DisplayObjectProbe {
-    static void verify(Display &display, character_pack::ObjectState &objects,
+    static void verify(Display &display, const ModelDrawEnvironment &environment,
                        character_pack::ResourceId id, std::uint8_t source_simple_flag) {
+        auto &objects = environment.scene.objects;
         assert(display.simple_model_enabled_ == source_simple_flag);
         auto &memory = display.texture_pool_[0];
         memory.global_index = 17;
@@ -51,16 +52,16 @@ struct DisplayObjectProbe {
         object.evaluation_flags = kUnitTransform | kHidden | kBreak;
         object.child = std::numeric_limits<character_pack::ResourceId>::max();
         object.sibling = 0;
-        display.draw_object_graph(id, objects); // hidden + Break never resolves the invalid child
+        display.draw_object_graph(id, environment); // hidden + Break never resolves the invalid child
         assert(model_calls.empty());
         object.evaluation_flags &= ~kHidden;
         const auto depth = display.matrices_.depth();
-        display.draw_object_graph(id, objects);
+        display.draw_object_graph(id, environment);
         assert(model_calls == std::vector<object_draw::ModelId>{object.model});
         fail_model = true;
         bool model_failed = false;
         try {
-            display.draw_object_graph(id, objects);
+            display.draw_object_graph(id, environment);
         } catch (const std::runtime_error &error) {
             model_failed = std::string(error.what()) == "model unavailable";
         }
@@ -69,11 +70,11 @@ struct DisplayObjectProbe {
         assert(display.matrices_.depth() == depth);
 
         display.queued_texture_list_ = nullptr;
-        display.draw_object_graph(id, objects); // source not-ready route is intentionally undrawn
+        display.draw_object_graph(id, environment); // source not-ready route is intentionally undrawn
         assert(model_calls.size() == 2);
         display.output().select_texture_list(textures);
         display.frame_mode_.pending_logic_ticks = 1;
-        display.draw_object_graph(std::numeric_limits<character_pack::ResourceId>::max(), objects);
+        display.draw_object_graph(std::numeric_limits<character_pack::ResourceId>::max(), environment);
         display.frame_mode_.pending_logic_ticks = 0;
 
         constexpr std::uint8_t kFogEnabled = 1, kFogEmulated = 2;
@@ -83,7 +84,7 @@ struct DisplayObjectProbe {
         fail_late = true;
         bool late_called = false;
         try {
-            display.draw_object_graph(id, objects);
+            display.draw_object_graph(id, environment);
         } catch (const std::runtime_error &error) {
             late_called = std::string(error.what()) == "late object unavailable";
         }
@@ -111,10 +112,13 @@ int main(int argc, char **argv) {
     assert(source);
     auto simple_flag = source->byte(0x90a0a0);
     assert(simple_flag);
-    sadx::character_pack::ObjectState objects(pack);
+    sadx::character_pack::SceneState resources(pack);
+    sadx::lighting::State lighting({});
+    auto callback = sadx::bootstrap::MaterialCallback::None;
+    const sadx::native::ModelDrawEnvironment environment{pack, resources, callback, lighting};
     sadx::frame::ModeState timing{};
     sadx::native::Display display({}, timing);
-    sadx::native::DisplayObjectProbe::verify(display, objects, root, *simple_flag);
+    sadx::native::DisplayObjectProbe::verify(display, environment, root, *simple_flag);
     std::cout
         << "Object binding: shared graph, actual texture gate, live mutations, source initial "
            "byte and explicit model/late boundaries pass\n";

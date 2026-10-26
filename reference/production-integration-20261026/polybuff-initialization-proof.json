@@ -1,0 +1,200 @@
+{
+  "status": "verified-core-candidate-owner-migration-incomplete",
+  "dev_exit_status": 0,
+  "holdout_exit_status": 0,
+  "dev": {
+    "passed": true,
+    "values_match": true,
+    "cases": 280,
+    "value_mismatches": 0,
+    "ordered_receipts": 427317,
+    "input_sha256": "1a111272bae7394cba042afd22766f22f12ed19b18de063dbf75ef5c2f2e1d89",
+    "reference_receipt_sha256": "6a63e8624520c9d81206d8b734d1be98065f9376a2718fd0b52b558cb040cdae",
+    "native_receipt_sha256": "6a63e8624520c9d81206d8b734d1be98065f9376a2718fd0b52b558cb040cdae",
+    "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "source_ranges": {
+      "0x78e720-0x78e791": "3f4d3f86208e5a6f2a825d28be2f7d9ff389193935226696794b7786545ffc4f",
+      "0x794540-0x7945ba": "cfab4702ed074a61e0636ebfed0b8989b50422da53cb29cdca00df0e6d29aa96"
+    },
+    "fault_boundaries": [
+      [
+        7947674,
+        0
+      ]
+    ],
+    "mismatches": [],
+    "limits": [
+      "No runtime or canonical owner migration certified.",
+      "D3D and CRT resource operations are receipts; real allocation/device errors unverified.",
+      "Integer-only initialization; no FP result or flag certification implied."
+    ]
+  },
+  "holdout": {
+    "passed": true,
+    "values_match": true,
+    "cases": 1048,
+    "value_mismatches": 0,
+    "ordered_receipts": 547793,
+    "input_sha256": "4c3028af1eb30fe83dc7259648836394f84dd01cdcb48e024ee7f620a2562e05",
+    "reference_receipt_sha256": "cae811771a8bb22c3c5d8d1beb4f56432b1d14ff4048f69863e9eb9b175704e5",
+    "native_receipt_sha256": "cae811771a8bb22c3c5d8d1beb4f56432b1d14ff4048f69863e9eb9b175704e5",
+    "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "source_ranges": {
+      "0x78e720-0x78e791": "3f4d3f86208e5a6f2a825d28be2f7d9ff389193935226696794b7786545ffc4f",
+      "0x794540-0x7945ba": "cfab4702ed074a61e0636ebfed0b8989b50422da53cb29cdca00df0e6d29aa96"
+    },
+    "fault_boundaries": [
+      [
+        7947674,
+        0
+      ]
+    ],
+    "mismatches": [],
+    "limits": [
+      "No runtime or canonical owner migration certified.",
+      "D3D and CRT resource operations are receipts; real allocation/device errors unverified.",
+      "Integer-only initialization; no FP result or flag certification implied."
+    ]
+  },
+  "mutants": {
+    "omit-ninth-record": {
+      "killed": true,
+      "value_mismatches": 15
+    },
+    "wrong-scratch-capacity": {
+      "killed": true,
+      "value_mismatches": 56
+    },
+    "wrong-count-owner-slot": {
+      "killed": true,
+      "value_mismatches": 54
+    },
+    "retain-null-base": {
+      "killed": true,
+      "value_mismatches": 56
+    },
+    "short-scratch-clear": {
+      "killed": true,
+      "value_mismatches": 9
+    }
+  },
+  "description_table_sha256": "752dd333a39ab87abd0494429f9e626b4ba60cd5f6d7c25b4109ebc17d3bcdc6",
+  "unit": "141 native checks pass",
+  "full_gate_run": false,
+  "files": {
+    "src/engine/polybuff_initialization.cpp": "a8a0a9686c3e7e1a2f91edd965f06623b8c589bab421d1f2726c724e7b46370a",
+    "src/engine/polybuff_initialization.hpp": "69f3c0c602fdde659862b6ce79a9e6218e64d0e814ab58ff9025c703127bb86e",
+    "src/engine/polybuff_initialization_binding.cpp": "89e586e166f094c497ec31313a21cd73ea390db0629ea0de19042e6962a2348b"
+  },
+  "legacy_oracles": {
+    "system_init": {
+      "exit_status": 0,
+      "verdict": "pass",
+      "reason": "mismatch_count=0",
+      "cases": 600,
+      "mismatch_count": 0,
+      "full_report_path": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-14735049/build/polybuff-initialization/system_init.json",
+      "full_report_sha256": "b906c1891d1ed20a14ac34ba399f177d373f0f6b01550a4407834d61db621dc9",
+      "unchanged_judge_files": {
+        "src/engine/ninja_system_init.hpp": "cbcd24a93f6d97834852234c73b73cb628fc28915c049e041c0ed31dc4c50151",
+        "src/engine/ninja_system_init.cpp": "1de4f34f46c6ea58e457ef303ba33f04687a35373d4f3cd0478eda97f716d797",
+        "src/engine/ninja_texture_pool.cpp": "e42829b715d9a0f0ec5dbe4fe8749a79e3e6895e5619fd8ae350925b3bbdb6eb",
+        "src/engine/ninja_memory.cpp": "668dca17f50a61813a1b05fb098f6288c048a0b30e0668b07f34008ce1b325b0",
+        "src/loader/guest_heap.cpp": "4597e674c4c5fa69c4fef0451c8a2182eb25224e3c81e26306145593cb83d7ed",
+        "tests/probes/native_system_init_probe.cpp": "31a4522cc846421e9c1c1981c3216150d5f196ac4f43909b497a045513471f47",
+        "tools/oracles/verify_original_system_init.py": "885a16f7834999fca35a4fe6b11bd25f722b0ad5da184c7a17c9119a5856aad5"
+      },
+      "implementation_changed": false
+    },
+    "device_setup": {
+      "exit_status": 0,
+      "verdict": "pass",
+      "reason": "mismatch_count=0",
+      "cases": 2000,
+      "mismatch_count": 0,
+      "full_report_path": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-14735049/build/polybuff-initialization/device_setup.json",
+      "full_report_sha256": "ad5ad5b35687fbae0261431373fa8d1883b009f0468413e4aa4d64aa9708a4af",
+      "unchanged_judge_files": {
+        "src/engine/ninja_device_init.hpp": "8c81569b89a858e0f18580b34354eacc36f708eba758e265dce0f446c24c2821",
+        "src/guest/ninja_device_init.cpp": "01ddc2afb9b8c7ed68dd95f0e53a49b3b4776d85d255a1de81775a6d408a9a2f",
+        "src/engine/game_frame_control.cpp": "930a94809ee8f84acc82b3da960766a14d73905455f6ff831b4541b1d90b1746",
+        "tests/probes/native_device_setup_probe.cpp": "aa79f3adc472f09f5a610e8af6ceb43b8b87e994f9bc0d5b04739b71b8d2ea6f",
+        "tools/oracles/verify_original_device_setup.py": "ec5dba89fa022db7d42ff780cd1a5efb94b43169279b176108fc263ba8e8a963"
+      },
+      "implementation_changed": false
+    },
+    "ninja_frame_calls": {
+      "exit_status": 0,
+      "verdict": "pass",
+      "reason": "mismatch_count=0",
+      "cases": 3969,
+      "mismatch_count": 0,
+      "full_report_path": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-14735049/build/polybuff-initialization/ninja_frame_calls.json",
+      "full_report_sha256": "e870b738141986e888abe68e8a7e1d7e340d3e90611ee68b4977a89a3da70cc4",
+      "unchanged_judge_files": {
+        "src/engine/ninja_frame_calls.hpp": "efa208480edd5aac9a4d00c8123fafb4a53314f51da267a95fad513401cd663c",
+        "src/guest/ninja_frame_calls.cpp": "3842c7cf6cd7fe49dc78498be54846c535ce18e5e9556ad40c86005153bdcebe",
+        "src/engine/ninja_render.cpp": "d18ca70f7a617ea3a0b26f31e461ad18d36994279982e968ea0634dc4b7d3db9",
+        "tests/probes/native_ninja_frame_calls_probe.cpp": "ca88712cb367ccb300649747087d80f8ee32618a9cf8c43acd8f98368ec2728a",
+        "tools/oracles/verify_original_ninja_frame_calls.py": "047aee2b7c9b43349b08fc6006dbe4eb8c6d9ee2386ba1d27d3967e916730ed1"
+      },
+      "implementation_changed": false
+    }
+  },
+  "legacy_units": {
+    "ninja_system_init": {
+      "exit_status": 0,
+      "output": "System init 401830: profile path, pools, registrations, CRT block, unknown window and null DirectInput passed."
+    },
+    "ninja_device_init": {
+      "exit_status": 0,
+      "output": "Device setup 791610: viewport math, nested order, the 7943c0 device contract and a missing host passed."
+    },
+    "ninja_frame_calls": {
+      "exit_status": 0,
+      "output": "Ninja frame calls: callback list/3d0fa34/slot bound, BeginScene/EndScene, loader and original Present, Clear records and device boundaries passed."
+    }
+  },
+  "legacy_linkage_limit": "Private probes compile the named legacy modules explicitly and use read-only Root core/guest archives for unchanged dependencies. Unit binaries use those read-only archives. No full source-only product claim.",
+  "legacy_archive_sha256": {
+    "/Users/burbujamc/Developer/sadx-macos/build/libsadx-core.a": "6c41952e3d4f22fa2d7fe01255b532af0c9b2212de7794aeffeb32c995dbaaad",
+    "/Users/burbujamc/Developer/sadx-macos/build/libsadx-guest.a": "a1929c85fe6e34c389dd125ae4e9b6518a632fc68bf0058e822d6acb29804584"
+  },
+  "profile": {
+    "summary": {
+      "patches": 618,
+      "active_patches": 121,
+      "active_unhandled_patches": 79,
+      "reports": 2,
+      "declared_exe_ranges": 4,
+      "unhandled_overlaps": 0,
+      "handled_overlaps": 0,
+      "undetermined_overlaps": 0,
+      "reports_without_addressed_ranges": []
+    },
+    "unhandled_overlaps": [],
+    "handled_overlaps": [],
+    "undetermined_overlaps": [],
+    "report_ranges": {
+      "dev.json": {
+        "exe_ranges": 2,
+        "dll_ranges_skipped": 0,
+        "opaque_range_hashes": [],
+        "unparsed_keys": []
+      },
+      "holdout.json": {
+        "exe_ranges": 2,
+        "dll_ranges_skipped": 0,
+        "opaque_range_hashes": [],
+        "unparsed_keys": []
+      }
+    }
+  },
+  "skipped": [
+    "Canonical owner migration and legacy shared-core adapter not implemented.",
+    "Fresh independent STYLE review pending Root; candidate not approved for consumption.",
+    "Old legacy mutants and copied strip judges not rerun; source files unchanged. Strip 154/198 FP partials remain inherited partials.",
+    "Full gate, apps, runtime bindings, actual rendering and N3b not run or claimed.",
+    "Make/unit manifest registration deliberately not edited under delegated scope."
+  ]
+}

@@ -274,7 +274,6 @@
     ],
     "src/engine/ninja_system_init.cpp": [
       "block_at_3ce6d80",
-      "block_at_3d0fae0",
       "buffer_at_3ce7158",
       "clear_colors_at_3ce7174",
       "color_at_3ce715c",
@@ -290,15 +289,11 @@
       "records_at_3ce6f48",
       "scale_at_3ce7154",
       "size_at_3ce71a4",
-      "sizes_at_389d864",
-      "tables_at_389d888",
-      "vertex_buffer_at_3d128ac",
       "window_at_3d0fd30",
       "word_at_3d0f740",
       "word_at_3d0f810",
       "word_at_3d0f83c",
-      "word_at_3d0f9c8",
-      "word_at_3d127a0"
+      "word_at_3d0f9c8"
     ],
     "src/engine/ninja_system_init.hpp": [
       "block_at_3ce6d80",
@@ -1014,7 +1009,6 @@
       "block_at_3b2c5e8",
       "block_at_3c4ae08",
       "block_at_3ce6d80",
-      "block_at_3d0fae0",
       "block_at_9008b4",
       "block_at_900e88",
       "block_at_90ed54",
@@ -1188,7 +1182,6 @@
       "records_at_3ce6e78",
       "records_at_3ce6f48",
       "records_at_3d08818",
-      "records_at_3d0fe00",
       "request_at_3b291ad",
       "requested_memory_at_3ce7128",
       "resync_at_3abdf68",
@@ -1223,7 +1216,6 @@
       "top_at_3d0f824",
       "top_at_3d0fd24",
       "unit_at_389d650_",
-      "vertex_buffer_at_3d128ac",
       "viewport_at_3d12780",
       "voice_language_at_3b0ef38",
       "volume_at_3b29310",
@@ -1287,7 +1279,6 @@
       "word_at_3d0f83c",
       "word_at_3d0f960",
       "word_at_3d0fa14",
-      "word_at_3d127a0",
       "word_at_914788",
       "words_at_389d864",
       "words_at_3ab9898_",
@@ -1351,7 +1342,6 @@
       "special_at_3b0e3ba"
     ],
     "src/guest/ninja_device_init.cpp": [
-      "block_at_3d0fae0",
       "bottom_at_3d0fd2c",
       "caps_at_3d127c0",
       "device_at_3d128b0",
@@ -1362,7 +1352,6 @@
       "left_at_3d0fd20",
       "matrix_at_389d318",
       "matrix_at_3d0fd80",
-      "records_at_3d0fe00",
       "right_at_3d0fd28",
       "top_at_3d0fd24",
       "viewport_at_3d12780",
@@ -1419,10 +1408,8 @@
       "hook_at_3d0f7a8",
       "hook_at_3d0fa30",
       "hooks_at_3d08af0",
-      "records_at_3d0fe00",
       "scene_flags_at_3d08588",
-      "slots_at_3d0fa40",
-      "vertex_buffer_at_3d128ac"
+      "slots_at_3d0fa40"
     ],
     "src/guest/ninja_queue_lifecycle.cpp": [
       "color_argb_at_3d0f7f0",
@@ -1697,6 +1684,11 @@
       "palette_table_at_3d11f80",
       "requested_memory_at_3ce7128",
       "return_table_at_389d458"
+    ],
+    "src/guest/polybuff_owners.cpp": [
+      "block_at_3d0fae0",
+      "sizes_at_389d864",
+      "tables_at_389d888"
     ]
   },
   "owners": [

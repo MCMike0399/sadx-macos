@@ -1,3 +1,4 @@
+#include "guest/polybuff_owners.hpp"
 #include "guest/frame_control_reference.hpp"
 #include "engine/ninja_frame_calls.hpp"
 namespace sadx {
@@ -6,7 +7,7 @@ struct Stop{};
 struct Operation {
     NinjaFrameRuntime& rt;NinjaFrameResult r;
     [[noreturn]]void fail(NinjaFrameFailure f,std::uint32_t at,std::optional<std::uint32_t> fact={}){r.failure=f;r.source_boundary=at;r.required_fact=fact;throw Stop{};}
-    template<class T>T need(const std::optional<T>& v,std::uint32_t at,std::uint32_t fact){if(!v)fail(NinjaFrameFailure::unknown_state,at,fact);return *v;}
+    template<class V>auto need(const V& v,std::uint32_t at,std::uint32_t fact){if(!v)fail(NinjaFrameFailure::unknown_state,at,fact);return *v;}
     void call(std::uint32_t site,std::uint32_t callee,std::optional<std::uint32_t> ecx={},std::array<std::optional<std::uint32_t>,4> arguments={}){
         r.pending_call=NinjaFrameCall{site,callee,ecx,arguments};
         if(!rt.invoke)fail(NinjaFrameFailure::missing_owner,site);
@@ -89,7 +90,7 @@ struct Operation {
         if(!rt.device.clear)fail(NinjaFrameFailure::device_unavailable,c.source_call);
         if(!rt.device.clear(c,stencil?7:3,0,1.0F,0))fail(NinjaFrameFailure::device_unavailable,c.source_call);
         for(std::uint32_t i=0;i<9;++i){
-            auto& record=rt.state.records_at_3d0fe00[i];const auto at=0x3d0fe00+0x24*i;
+            auto& record=rt.state.polygon_facts->records[i];const auto at=0x3d0fe00+0x24*i;
             if(need(record[0],0x794804,at)==0)continue;
             const auto size=need(record[3],0x79480a,at+0xc),end=need(record[1],0x79480d,at+4);
             record[2]=end-size;
@@ -103,7 +104,7 @@ struct Operation {
         *flags|=1;
         method(rt.device.begin_scene,device(0x78b897,0x78b89c,0x78b89f));
         blend(0,8);blend(1,6);
-        if(need(rt.state.vertex_buffer_at_3d128ac,0x78b8b7,0x3d128ac)==0)return;
+        if(need(rt.state.polygon_facts->vertices,0x78b8b7,0x3d128ac)==0)return;
         const auto depth_write=get_state(0xe,0x78b8c7,0x78b8cc,0x78b8d5),depth_function=get_state(0x17,0x78b8db,0x78b8e0,0x78b8ea);
         set_state(0xe,0,0x78b8f0,0x78b8f5,0x78b8fc);set_state(0x17,8,0x78b902,0x78b907,0x78b90e);
         call(0x78b922,0x77dfc0,{},{0x3ce7164u,4u,0xbf800000u,0x22u});

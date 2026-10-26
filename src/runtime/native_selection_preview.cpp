@@ -195,9 +195,14 @@ void TitleScene::exec_selection_question(TaskScheduler &scheduler, const TaskHan
         throw flow::UnrecoveredGameFlowCall("native_character_selection_assets");
     const auto primary = player_initialization::bind_primary_view(task);
     const auto &assets = *scene.session_.character_selection_assets_;
+    if (!scene.session_.lighting_)
+        throw flow::UnrecoveredGameFlowCall("native_stage_lighting_tables");
+    const ModelDrawEnvironment environment{
+        *scene.session_.character_pack_, scene.session_.character_scene_,
+        scene.session_.bootstrap_.material_callback, *scene.session_.lighting_};
     scene.display_.draw_selection_question({primary.rotation, primary.position},
         scene.session_.secondary_loop_count_, {assets.question_object, assets.question_menu_texture},
-        scene.session_.character_objects_,
+        environment,
         [&scene](std::uint32_t texture) {
             scene.select_menu_texture(static_cast<file_select_display::MenuTexture>(texture));
         });

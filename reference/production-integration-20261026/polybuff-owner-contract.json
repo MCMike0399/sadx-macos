@@ -1,0 +1,57 @@
+{
+  "owners": [
+    {
+      "address": "0x3d0fe00",
+      "source_size": 324,
+      "field": "sadx::polybuff::Buffers::records",
+      "legacy_session": "NinjaFrameCallState::polygon_buffers"
+    },
+    {
+      "address": "0x3d128ac",
+      "source_size": 4,
+      "field": "sadx::polybuff::Buffers::vertices",
+      "native_type": "BufferMemory*"
+    },
+    {
+      "address": "0x3d127a0",
+      "source_size": 4,
+      "field": "sadx::polybuff::RetainedBase::value",
+      "native_type": "void*"
+    },
+    {
+      "address": "0x3d0fae0",
+      "source_size": 512,
+      "field": "sadx::polybuff::Scratch::words",
+      "native_type": "array<uint32_t,128>"
+    }
+  ],
+  "algorithm": "Header template initialize_buffers<InitContext>; ordinary free-function ADL, one body.",
+  "native_context": "Root runtime/model_device.hpp actual sadx::polybuff::Context { Display& }",
+  "reference_context": "sadx::polybuff_reference::Context, private to guest adapter",
+  "count_contract": "Native configured_counts(Context&) returns ConfiguredCounts{actual library State.polygon_buffer_counts}; reference configured_count reads the existing borrowed optional count owner lazily.",
+  "required_native_hooks": [
+    "configured_counts(Context&)",
+    "allocate_vertex_scratch(Context&, uint32_t bytes)",
+    "observe_initialization_store(Context&, InitializationField, size_t)"
+  ],
+  "caller": {
+    "ignored_count": 32,
+    "vertex_count": 24576,
+    "base": "Native actual borrowed void*; only reference adapter uses guest identity 0x38fcf08."
+  },
+  "native_sources": [
+    "src/engine/polybuff_initialization.hpp",
+    "src/engine/polybuff_initialization.cpp",
+    "src/engine/polybuff_initialization_binding.cpp",
+    "src/engine/normal_uv_strip.cpp"
+  ],
+  "reference_sources": [
+    "src/guest/polybuff_owners.hpp",
+    "src/guest/polybuff_owners.cpp",
+    "src/guest/polybuff_initialization_reference.cpp"
+  ],
+  "fixture_only_include": "guest/polybuff_owners.hpp on frozen fixture TU command only; never inherited/global CXXFLAGS or game TUs.",
+  "no_duplicate_native_context_resource_or_device_seam_definitions_in_reference": true,
+  "source_evidence": "polybuff-initialization-source.json",
+  "proof": "polybuff-owner-migration-proof.json"
+}

@@ -1,0 +1,88 @@
+{
+  "scope": "Native rendering pipeline binding up to explicit pending polygon-buffer owner; not complete startup, GPU or N3b",
+  "component_reviews": {
+    "strip_and_material": "95913d8",
+    "basic_model_and_live_matrix": "857b0cf"
+  },
+  "sources_byte_unchanged_from_reviewed_components": {
+    "normal_uv_strip": "1960fed",
+    "material_correction": "1a5a0f3",
+    "basic_model": "9220d1b"
+  },
+  "unit_results": {
+    "model-device": 0,
+    "character-geometry": 0,
+    "model-binding": 0,
+    "object-draw-binding": 0
+  },
+  "unit_scope": [
+    "Real source strip -> native vertex buffers -> shared graphics Draw; resource retention and earlier draw immutability.",
+    "All imported vector/index/UV bytes match independent raw byte comparisons; live vector edits share one resource identity and preserve immutable pack.",
+    "Real imported Question model through native model/material/env/matrix/texture/strip/device bindings; unit injects ONLY pending startup buffer owner.",
+    "Distinct matrix owners and live current-matrix mutation; callback identity snapshot and late active-palette Power; texture-transform reset cannot rewrite earlier snapshots."
+  ],
+  "native_build_exit_status": 0,
+  "native_closure_exit_status": 0,
+  "normal_input_frontier": {
+    "command": [
+      "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/sadx-native",
+      "--assets",
+      "/Users/burbujamc/Developer/sadx-macos/game/imported",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1500",
+      "--save-directory",
+      "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/model-binding-frontier/savedata",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,900:38:down,901:38:up,950:13:down,951:13:up,1350:13:down,1351:13:up",
+      "--capture-directory",
+      "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/model-binding-frontier/captures",
+      "--capture-at",
+      "1300,1380,1381,1382,1383,1390"
+    ],
+    "exit_status": 1,
+    "stop": "native_polybuff_owner_binding",
+    "capture1382_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "capture1382_same_as_previous_model_frontier": true,
+    "image_inspected": "Outgoing title fade. No rendered preview actor claim."
+  },
+  "style": {
+    "provenance_errors": 0,
+    "readability_regressions": 0,
+    "layer_violations": 0,
+    "multiple_owners": 0,
+    "new_game_debt": 0
+  },
+  "source_files_sha256": {
+    "src/engine/character_geometry.hpp": "449682f8abf2dc936fbac05c8799441b000859fae207a7ca953ad39b5936e266",
+    "src/engine/character_geometry.cpp": "e750eda2bcc2dd5776dff6ea78fc3550ee45b8ba9883e6d3cce19075aee8f780",
+    "src/runtime/model_vertex_stream.hpp": "813070d6403bddc91c47dc0c4de5a0e87a22d7a7917aa287d695a65762cac8f4",
+    "src/runtime/model_device.hpp": "d72d6de1b2f8d28bfea7d94f8f63c2b56a00ff99245915aa9da5f423460da89a",
+    "src/runtime/model_device.cpp": "54465c1768a7e473ce6e977360abf95b1e23e6633595819a865c595bb0d2b296",
+    "src/runtime/model_draw_environment.hpp": "dec1918cb2cf188f886b0bad0289bb9eb929f5accf7d13f3e1637eac17278ef6",
+    "src/runtime/model_draw_context.hpp": "ec34ed9ecf10b212e1cfdbeac8bd56f15352d6048e9444a6f214ec3d383ea51c",
+    "src/runtime/object_draw_context.hpp": "3c08a53c06118c39f36341e5b627503ab2e051b1351271b9952b947d9a30ce81",
+    "src/runtime/model_draw.cpp": "9aa0fd984960e13561f818ed0315743d3dff7a98f5f33d0f01040791046b00df",
+    "src/runtime/model_buffer_seam.cpp": "8787a1cdb896ee5943c6897b1090b3b41eae8563f278d2f148bf48c27a7668cd",
+    "src/runtime/native_display.hpp": "0e87c03f68a6b20572a5952ed56026e3548aabb8746db91894bff5beffcb4fa1",
+    "src/runtime/native_object_draw.cpp": "0c63670b1b0dabeddf22944b076a93f4d12b0262c4c7410873cdd6e30092bfcd",
+    "src/runtime/native_object_render_seams.cpp": "db91added4c69aca03465bb339c5881233611f7312ca20a8457a40fb9bcb2d0f",
+    "src/runtime/native_selection_question.cpp": "1079bfd2fb4480ad7c0ee9184b480a536c451a7c17e9e8654e7e0b155d8abaae",
+    "src/runtime/native_selection_preview.cpp": "1bfcf1642abfeb6df97236284c5947a1e7a543a45885123992fa9d4127c351ce",
+    "src/runtime/native_session.hpp": "c7d665cee188c78e7991b877b2225c86dc21f5aaabdd86e604234781185bf2b9",
+    "src/runtime/native_session.cpp": "dd4926c099d5640f08e9e288b9152a87a045af2d39d9cbaf52ff65a3f3ed8901",
+    "tests/unit/character_geometry.cpp": "5b72d26daf91297ba0f3820a03225c22e4d484da9056255ff84806f1c1d4de15",
+    "tests/unit/model_device.cpp": "82908d8378e68864f0154798e2bf9f53b76848b62baa3a3033c6c0a4ec2ad1d9",
+    "tests/unit/model_binding.cpp": "dfd2a12b1aa3adccdf3f8d6f21c8c0cb0f1cd2f04711cd3130100a3b5dedc865",
+    "tests/unit/object_draw_binding.cpp": "46cbab378b7264aa622029d2279cfd2e9343ce76e80dfe393cdb57f684e43778",
+    "native-sources.txt": "6860b2b2c555ac2a250d25eacf083654d7471006fec372b7c484049b44853663"
+  },
+  "limits": [
+    "Product normal_uv_buffer binding throws before drawing; no fabricated record or partial startup success.",
+    "InitPolyBuffers canonical owner migration/shared legacy binding is active and not consumed yet.",
+    "Composition unit uses a real native buffer with a test-only owner getter, not a normal-input startup proof.",
+    "Full combined gate, actual GPU image comparison, all preview controllers, N3b and gameplay remain unverified.",
+    "Supporting CPU/D3DX component flags remain partial; no flag-only mismatch hidden."
+  ]
+}

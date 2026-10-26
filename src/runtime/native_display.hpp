@@ -18,6 +18,12 @@
 #include "engine/message_sprite_queue.hpp"
 #include "engine/screen_sprite.hpp"
 #include "engine/message_sprite_profile.hpp"
+#include "runtime/model_vertex_stream.hpp"
+#include "runtime/model_draw_environment.hpp"
+#include "engine/basic_model.hpp"
+#include "engine/material_correction.hpp"
+#include "engine/polybuff_initialization.hpp"
+#include "game/game_library_init.hpp"
 #include <memory>
 
 namespace sadx::native {
@@ -27,6 +33,7 @@ class Display {
     // Native configuration defaults to the source's absent CTRLFLAG0 setting.
     Display(const std::filesystem::path &system_directory, frame::ModeState &,
             std::uint32_t renderer_control_flags = 0);
+    ~Display();
     LogoRenderer &output() { return *output_; }
     const LogoRenderer &output() const { return *output_; }
     LogoFrame frame_state();
@@ -41,7 +48,7 @@ class Display {
                               lighting::TimeServices &);
     void update_selection_camera(selection_camera::Pose);
     void draw_selection_question(selection_question::Pose, const std::uint32_t &,
-                                 selection_question::Assets, character_pack::ObjectState &,
+                                 selection_question::Assets, const ModelDrawEnvironment &,
                                  const std::function<void(std::uint32_t)> &select_texture);
     void set_clip_range(float near_distance, float far_distance);
     ui_scale::State &ui_scaling() { return ui_scaling_; }
@@ -92,15 +99,31 @@ class Display {
   private:
     friend struct DisplayTextureProbe; // test-only observation of actual borrowed owners
     friend struct DisplayObjectProbe;
+    friend struct DisplayModelProbe;
     friend struct object_draw::Context;
+    friend struct polybuff::Context;
+    friend struct basic_model::Context;
+    friend struct material_correction::Context;
     // NOTSA: bind traversal to the same session graph, matrix and render owners.
-    void draw_object_graph(character_pack::ResourceId, character_pack::ObjectState &);
+    void draw_object_graph(character_pack::ResourceId, const ModelDrawEnvironment &);
     // GLOBAL: SONIC 0x90a0a0 SimpleModelDrawingEnabled size=1
     std::uint8_t simple_model_enabled_ = 1;
     frame::ModeState &frame_mode_;
     X87Context arithmetic_{127};
     SseContext sse_{8064};
     graphics::Draw device_state_;
+    ModelVertexStream model_vertex_stream_;
+    basic_model::State model_state_;
+    // NOTSA: graphics startup owns the configured count state and canonical polygon resources.
+    library::State graphics_library_{};
+    struct PolygonResources {
+        polybuff::Buffers buffers;
+        polybuff::RetainedBase base;
+        polybuff::Scratch scratch;
+        // NOTSA: the caller's workspace is retained only by identity on this path.
+        // Direct-workspace byte consumers remain unrecovered; no contents or extent are invented.
+        struct WorkspaceIdentity {} workspace;
+    } polygon_resources_;
     device_lights::State device_lights_;
     lighting::DeviceState lighting_device_;
     lighting::DeviceServices lighting_services();
