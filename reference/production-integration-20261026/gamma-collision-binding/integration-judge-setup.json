@@ -1,0 +1,18 @@
+{
+  "implementation": "f906178",
+  "comment_corrections": "c473091",
+  "component_review": "70965e5",
+  "binding_review": "d28e14f",
+  "new_paths": [
+    "tests/probes/native_collision_component_probe.cpp",
+    "tests/unit/collision_component.cpp",
+    "tests/unit/native_gamma_binding.mm",
+    "tools/oracles/check_collision_component.py",
+    "tools/oracles/verify_original_collision_component.py"
+  ],
+  "registration": "Append collision-component unit row; automatic original oracle and probe discovery unchanged.",
+  "existing_protected_change": "Extend native_gamma_binding unit to actual CCL initialization and next ordinary texture boundary, with live alias/cleanup/decode checks; no old original judge/probe/mutant/expectation/tolerance changed.",
+  "qualification": "Exact frozen component and binding qualification receipts retained; FP partials remain partial.",
+  "ignored_inputs_restored_exact_hash": 53,
+  "gate": "Not run for this integration; last Main gate afc3e94 is the prior stop."
+}
