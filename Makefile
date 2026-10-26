@@ -122,6 +122,9 @@ NATIVE_ASSETS ?= game/imported
 .PHONY: voice-playback-fixture
 voice-playback-fixture:
 	python3 tools/gate/prepare_voice_playback_fixture.py --assets "$(NATIVE_ASSETS)" --output build/voice-playback-fixture
+.PHONY: native-startup-diff
+native-startup-diff: build/sadx-native build/sadx-app
+	python3 tools/journey/compare_native_startup.py --assets "$(NATIVE_ASSETS)" --game "$(REFERENCE_GAME_DIR)" --windows "$(WINDOWS_SYSTEM_DIR)" --output "$$(mktemp -d build/native-startup-journey.XXXXXX)"
 .PHONY: native-journeys
 native-journeys: build/sadx-native
 	python3 tools/gate/run_native_journeys.py --app build/sadx-native --assets "$(NATIVE_ASSETS)"
@@ -356,6 +359,7 @@ check: native-library-initial-state native-startup-initial-state native-input-mo
 gate: all test probes $(UNIT_MM_TARGETS) check app-smoke build/sadx-native native-closure
 	$(MAKE) journeys
 	$(MAKE) native-journeys
+	$(MAKE) native-startup-diff
 status:
 	python3 tools/gate/gen_status.py
 clean:

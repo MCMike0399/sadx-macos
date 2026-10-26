@@ -1,12 +1,12 @@
 {
   "change": {
-    "base_commit": "e44bc408bb088020055ec85a039b5db2b2a6b8d5",
-    "evidence": "reference/production-integration-20261026/readability-metric-evidence.json",
-    "evidence_sha256": "d194bf8226ae34493ed3d6d51e2f5cfa7efeae6eb1ede8d91f8e2883342fee9f",
-    "reason": "Ratchet decimal constants, emulator arithmetic and per-line address comments from immutable HEAD; named constexpr literals exempt"
+    "base_commit": "5d31b283d8de65f5dd16b404b5d64fcd2d488dfc",
+    "evidence": "reference/production-integration-20261026/state-trace-diff-evidence.json",
+    "evidence_sha256": "c01c7ac69a98282589e684bb56fb6ff10a5227b04af4f89e61b6eab6eb8c3086",
+    "reason": "Protect and gate unchanged startup comparisons; strict ordered mode/stage-act/player/camera/task traces expose unrecovered owners and observed one-frame movie skip divergence"
   },
   "files": {
-    "Makefile": "23ea29a16e35d59d4a95d5f9c096ccfa463cde4b14fb849142cf3bd3ffdde98b",
+    "Makefile": "a736a3c479c51a89e9c045a7852c2d92f8b993ac9f1b7daa4bb7b1a7ea3d508d",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
     "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
     "reference/frame-control-corpus.tsv": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",
@@ -571,6 +571,7 @@
     "tests/python/test_sound_banks.py": "4ac4c51ac9cf5d98acf471a0d22aaae9a7b210b97b37fadb8a5b124c073e5eec",
     "tests/python/test_sound_effects_import.py": "f4b356a1fada9e475e1bd7cbd243f9435990825fd20c80adbd6eab2fe8a8fbf7",
     "tests/python/test_stage_lighting.py": "c9a22693e183512dd38b4e2f57c42ce4dbada0aea136c1a663dcca1ac240c10c",
+    "tests/python/test_state_trace_diff.py": "c04caae6478b9973d1c86074ac90f1e0a7da6ab7940e0f7e93bb27f9b8b5e4a4",
     "tests/python/test_symbol_context.py": "e276e801136d0821369682beb43c42c0f460ff137123683d8c1150487eec2690",
     "tests/python/test_symbols.py": "9e9a03a6389d6cd58aa49c63272049754f55ccddb19eeb894b8b92ccce362e0f",
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
@@ -588,7 +589,7 @@
     "tools/gate/check_global_owners.py": "764714cd1fbdeab7b77f3b50d9efb64f12992f791758e3f07602a938b32ef504",
     "tools/gate/check_input_initial_state.py": "2a9de3ce38d6a1c8bef12e6c87fd8181a0888c15e5033b5c8b8b6a873f2352e1",
     "tools/gate/check_input_mod_constants.py": "be8443495170b4ecbc7388c3e60f387242847ae7318e3e310b6a53c74300614b",
-    "tools/gate/check_judge.py": "7001f246744cfe0af44eaff71c0689200ab514fa3c722415df70b9d01e89c4d1",
+    "tools/gate/check_judge.py": "594c193257586953f975d709f0108674f1336b644e740db32e8e3f42d9379b6f",
     "tools/gate/check_layers.py": "2b72408ccd936baa5da22b36eefbf90ce2af4ebf1ab01dc63a5f45f5fa9615c1",
     "tools/gate/check_library_initial_state.py": "6d5d21de9176f715328496408b5e87e5d80f72793cdfe13a4e7dc09931201080",
     "tools/gate/check_native_closure.py": "405656d6154dc89aec53cdc49c854ae6ec9287b7bb58dc894daa6ee07d8bc2d2",
@@ -618,6 +619,7 @@
     "tools/journey/check_native_file_select.py": "d02edec5e8c7a365b0bc3a8a2431a679820059928ffc1927f61f511010c8ed84",
     "tools/journey/check_native_fresh_save.py": "3712ffbbe552cc28155899840838ef299de70aaf0c8d985603ce560b3538688c",
     "tools/journey/check_native_main_menu.py": "15649a6575fa1147a4a1982c5d9ef27687b0960f420927004dff01558a6855af",
+    "tools/journey/compare_native_startup.py": "86756c9f5988b8d42793654fa4c36910b7f5fce82ba06f317bbfc6733b3feaf0",
     "tools/lib/extract.py": "d2c2cb1479003401ba1faf0211281a6c6d35949c2bd27e55acc48f7cc7825bd8",
     "tools/lib/import_audio.py": "91f0db9f658c306a4a5637b4180c4e0d6033da72d927f1ba59c18965e5a49e30",
     "tools/lib/pe_image.py": "94694dc5fb38e459d26b35c25a7cdb7e3fad7128e1178363340606bb9db299f2",

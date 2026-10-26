@@ -1,0 +1,86 @@
+{
+  "requirement": "GOAL section 6 item 2: gate exact startup comparison and generalize per-frame native/reference state traces on the same normal input",
+  "base_commit": "9e10e47",
+  "source_commit": "8489dc1",
+  "old_checker_defects": [
+    "compare({}, {}) returned no problems because absent fields were both None",
+    "only 16 startup snapshots were compared; no player/camera/task or ordered frame validation"
+  ],
+  "preserved_checks": {
+    "frames": [
+      1,
+      2,
+      16,
+      31,
+      32,
+      120,
+      153,
+      180,
+      194,
+      195,
+      220,
+      300,
+      346,
+      370,
+      387,
+      388
+    ],
+    "fields": [
+      "game_mode",
+      "game_state",
+      "global_timer",
+      "stage",
+      "rings"
+    ],
+    "images": "byte-for-byte PPM equality, no tolerance or stored golden"
+  },
+  "focused_test_command": "python3 -m unittest discover -s tests/python -p test_state_trace_diff.py -v",
+  "focused_test_count": 20,
+  "focused_test_exit_status": 0,
+  "negative_evidence": [
+    "missing/duplicate/out-of-order/extra frame cases fail",
+    "missing mode/player/camera/task fields on both sides fail",
+    "player/camera/task presence changes fail independently in both directions",
+    "changed mode/player/camera/task values fail",
+    "identical unrecovered observations fail",
+    "one changed startup image byte fails frame 16",
+    "mocked application stops/missing captures leave a failing report"
+  ],
+  "runtime_baseline_read_only": "/Users/burbujamc/Developer/sadx-macos/build/divemac-native-startup-baseline/report.json",
+  "runtime_baseline_result": "root baseline only: 16/16 exact startup comparisons at base; not rerun for packet source",
+  "not_run": [
+    "compilation",
+    "applications",
+    "Ghidra",
+    "full gate",
+    "judge manifest refresh"
+  ],
+  "limitations": [
+    "native canonical gameplay player and camera bindings unrecovered; strict runtime traces explicitly fail",
+    "task list covers active topology/callback presence, not callback identities or work contents",
+    "same normal input compiler supports keyboard only and reports F to F+1 boundary translation",
+    "root must validate actual runtime alignment and instrumentation",
+    "no native gameplay completeness claim"
+  ],
+  "root_verification": {
+    "build_command": "make -j10 build/sadx-native build/sadx-app",
+    "build_exit_status": 0,
+    "focused_tests": 20,
+    "startup_command": "make native-startup-diff",
+    "startup_exit_status": 0,
+    "startup_exact_checkpoints": 16,
+    "strict_input_command": "python3 tools/journey/compare_native_startup.py --frames 520 --script <normal @450 press enter 5> --output build/state-trace-input-qualification",
+    "strict_input_exit_status": 1,
+    "strict_runtime_errors": [],
+    "strict_startup_image_state_failures": [],
+    "strict_limit": "Unrecovered native gameplay player/camera bindings fail explicitly; task topology observations and a real input-driven mode timing mismatch are reported. This is not a passing N5 judge.",
+    "observed_movie_skip_mode_11_frame": {
+      "native": 452,
+      "reference": 453
+    },
+    "input_translation": "reference post-Present F input -> native pre-update F+1; no offset search or output alignment applied",
+    "root_strengthening": "Strict traces also compare stage act independently; original startup five fields and sixteen exact images unchanged.",
+    "protected_comparator": true,
+    "full_tooling_gate": "pending"
+  }
+}
