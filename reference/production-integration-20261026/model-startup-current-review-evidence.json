@@ -1,0 +1,732 @@
+{
+  "reviewed_commits": {
+    "88eb56e": "88eb56e7eca1ec558afa7f2729d86740f9ead81a",
+    "28b3974": "28b3974d53ad30ebc7be49582b4b39cac950aaf6",
+    "83f0ded": "83f0ded4eb0fca29ffaa003e09cf6a3c8feaf9f0",
+    "635df95": "635df9593d5d73276076022253662f69b50aef9d",
+    "bdf110a": "bdf110a9469b051fa1adedad27ca1ca704beb67e",
+    "afc50a7": "afc50a7068ce9789dfaa7425acc02da0e2af7028"
+  },
+  "tests_rerun": false,
+  "checks": [
+    {
+      "group": "frozen_judges",
+      "path": "tests/probes/native_sonic_player_probe.cpp",
+      "sha256": "ea27199dca1c3f9ea726e9e1be159ed14b4ec35ab594d975fe80d2f9cd25ca60",
+      "matches": true
+    },
+    {
+      "group": "frozen_judges",
+      "path": "tests/probes/native_sonic_action_probe.cpp",
+      "sha256": "a32e1be6081014140f4cf1a46dff9d891016432b66da1c841d9223a9d07b7031",
+      "matches": true
+    },
+    {
+      "group": "frozen_judges",
+      "path": "tests/unit/sonic_player.cpp",
+      "sha256": "c8696302d5c10c310aaf98058625bdb903841cec436661d9114a96961a817457",
+      "matches": true
+    },
+    {
+      "group": "frozen_judges",
+      "path": "tests/unit/sonic_actions.cpp",
+      "sha256": "09124d809199c0f196c4ad729d0e359bb9ea5788826a5c90961020896677831d",
+      "matches": true
+    },
+    {
+      "group": "frozen_judges",
+      "path": "tests/unit/player_scene_position_binding.cpp",
+      "sha256": "f8a4e36652e9af2169a85441898f1cd170cf7bd4e9a2d009bf989e85d2afef82",
+      "matches": true
+    },
+    {
+      "group": "frozen_judges",
+      "path": "tools/oracles/verify_original_sonic_player.py",
+      "sha256": "d5b661520a090a7a4f4e4e6db71221c0e6bee1a24c9c8a01363f67af22f44c0a",
+      "matches": true
+    },
+    {
+      "group": "frozen_judges",
+      "path": "tools/oracles/verify_original_sonic_actions.py",
+      "sha256": "d4076e926d22b4a2cfc0a5f4a4cf58b889f338a5019e0cf3d0a4b98a4560faf6",
+      "matches": true
+    },
+    {
+      "group": "frozen_judges",
+      "path": "tests/fixtures/texture_list_gate_mutants.json",
+      "sha256": "78419c35b7356656fc78b29fc4a0ceaee8e74201738f26c10b91b9735100da9e",
+      "matches": true
+    },
+    {
+      "group": "frozen_judges",
+      "path": "tests/fixtures/input_keyboard_goldens.hpp",
+      "sha256": "0a9f25e5a0d336a1f4381af39257fdc6f7403f43ca2aef743345284fb1c18fda",
+      "matches": true
+    },
+    {
+      "group": "frozen_judges",
+      "path": "tests/fixtures/object_draw_original_mutants.json",
+      "sha256": "60e7225cbcdd2af591bac4a3aaeec4667f3aa53424123a091e8c10d2b837b54b",
+      "matches": true
+    },
+    {
+      "group": "frozen_judges",
+      "path": "tests/fixtures/path_probe_data.hpp",
+      "sha256": "3f8803b9afa695f6f1ca411fb7b58ae66e60609b2af2df3dd74463c3b9dadda0",
+      "matches": true
+    },
+    {
+      "group": "frozen_judges",
+      "path": "tests/fixtures/ninja_sprite_test_fixture.hpp",
+      "sha256": "1b4fa2a0ac6270d896f9e54c297829bdf3d43c378d195cbe34d0d6e87fd2b24e",
+      "matches": true
+    },
+    {
+      "group": "frozen_judges",
+      "path": "tests/fixtures/texture_selection_core_mutants.json",
+      "sha256": "eeb6efa3485c4c91e3852d511ec0522293f923710b4ca0e106af9389f6f6def7",
+      "matches": true
+    },
+    {
+      "group": "source_and_registration",
+      "path": "src/player/actor_current.hpp",
+      "sha256": "2a4b95915be5bf2c9fb2f7f1b37f99e4eb3323435e0fa3c2f9d21ff4ddb95b41",
+      "matches": true
+    },
+    {
+      "group": "source_and_registration",
+      "path": "src/player/actor_current.cpp",
+      "sha256": "94d0b802a2267a808b3baf9ce675408a339d99da4eaf5a35ac7951f7220f7fd6",
+      "matches": true
+    },
+    {
+      "group": "source_and_registration",
+      "path": "src/player/sonic_player.hpp",
+      "sha256": "8ab874d28623af1876eebed149625c447f112a677098c0fa4f6e56da3286b0b4",
+      "matches": true
+    },
+    {
+      "group": "source_and_registration",
+      "path": "src/player/sonic_player.cpp",
+      "sha256": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483",
+      "matches": true
+    },
+    {
+      "group": "source_and_registration",
+      "path": "tests/reference/actor_current_fixture.hpp",
+      "sha256": "0eb3cfe9854f6fd9cee067ad84bdf52325dbb47a0c555eb32f74da2fc1a83131",
+      "matches": true
+    },
+    {
+      "group": "source_and_registration",
+      "path": "tests/unit/actor_current.cpp",
+      "sha256": "02d5706cc1783a0e05a91f2e8890fdbde421ba6341f2ee1541a99db9677a25c7",
+      "matches": true
+    },
+    {
+      "group": "source_and_registration",
+      "path": "tests/unit/manifest.tsv",
+      "sha256": "605eef6c9314aa089ed790dbbf2e5f2041ad6b0a6134e9b538305e62d5fac600",
+      "matches": true
+    },
+    {
+      "group": "source_and_registration",
+      "path": "reference/readability-baseline.json",
+      "sha256": "33ed467cf7e2fb1f9c5751b403d4cdc0df16e9526471454cc69b40319b43e56b",
+      "matches": true
+    },
+    {
+      "group": "source_and_registration",
+      "path": "reference/symbols/legacy-identifiers.json",
+      "sha256": "541b2db511db7fabbcb546a0bf6a4d86161b484696e03d8156a5b26faf00e158",
+      "matches": true
+    },
+    {
+      "group": "sonic_player_native_sources",
+      "path": "src/player/sonic_player.hpp",
+      "sha256": "8ab874d28623af1876eebed149625c447f112a677098c0fa4f6e56da3286b0b4",
+      "matches": true
+    },
+    {
+      "group": "sonic_player_native_sources",
+      "path": "src/player/sonic_player.cpp",
+      "sha256": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483",
+      "matches": true
+    },
+    {
+      "group": "sonic_player_native_sources",
+      "path": "tests/probes/native_sonic_player_probe.cpp",
+      "sha256": "ea27199dca1c3f9ea726e9e1be159ed14b4ec35ab594d975fe80d2f9cd25ca60",
+      "matches": true
+    },
+    {
+      "group": "sonic_player_native_sources",
+      "path": "tools/oracles/verify_original_sonic_player.py",
+      "sha256": "d5b661520a090a7a4f4e4e6db71221c0e6bee1a24c9c8a01363f67af22f44c0a",
+      "matches": true
+    },
+    {
+      "group": "sonic_player_native_sources",
+      "path": "src/player/ground_acceleration.hpp",
+      "sha256": "35bde538be42156764534857ec3458a443932ab20a6f77832f87a649119f288f",
+      "matches": true
+    },
+    {
+      "group": "sonic_player_native_sources",
+      "path": "src/player/ground_acceleration.cpp",
+      "sha256": "c79890f79d3d092eb5bf45c73223467bc6bc20105199830f32a5fba44b4cecf0",
+      "matches": true
+    },
+    {
+      "group": "sonic_player_native_sources",
+      "path": "src/player/ground_acceleration_internal.hpp",
+      "sha256": "c9938bc44091750a8faeca2c6915b298295ff1e5dc2774718bef183657824595",
+      "matches": true
+    },
+    {
+      "group": "sonic_player_native_sources",
+      "path": "src/player/ground_acceleration_native.cpp",
+      "sha256": "f1729d583f165daf41bf49296fb839b3b9d0badbc73c5b13977060c0670eece9",
+      "matches": true
+    },
+    {
+      "group": "sonic_player_native_sources",
+      "path": "src/player/ground_arithmetic.hpp",
+      "sha256": "703a0c6c05cc2d1a6ee2e694ea48b7cc094b3ff8ca6f3dfc786791870272e7c9",
+      "matches": true
+    },
+    {
+      "group": "sonic_player_native_sources",
+      "path": "src/player/ground_friction.cpp",
+      "sha256": "63ef1ec097115555b2e7bcb33f212d3678efe69a3cb326b8db2edfd5af01b58d",
+      "matches": true
+    },
+    {
+      "group": "sonic_player_native_sources",
+      "path": "src/guest/ground_acceleration_reference.hpp",
+      "sha256": "2da1d2ac5be19c17e4b71cdee209e07956b3ebebb0fdf03716044382e0e5471a",
+      "matches": true
+    },
+    {
+      "group": "sonic_player_native_sources",
+      "path": "src/guest/player_acceleration_ground.cpp",
+      "sha256": "2dfdea7e29e79b2d6b95897b38165246821e7ccf5ff98e7a73f2acad1eaf4f75",
+      "matches": true
+    },
+    {
+      "group": "sonic_player_native_sources",
+      "path": "src/guest/player_acceleration_friction.cpp",
+      "sha256": "c2b099a18a612ab4d8c11670827bea33b9066d262e79d65844f493a2ac7e2ad1",
+      "matches": true
+    },
+    {
+      "group": "sonic_player_native_sources",
+      "path": "src/player/player_acceleration_ground.hpp",
+      "sha256": "2b8bc9a2115dffbb8c442c24dfd82ec31d807dae04478e40b5b02d9a47e0e9f6",
+      "matches": true
+    },
+    {
+      "group": "sonic_player_native_sources",
+      "path": "src/player/player_acceleration_friction.hpp",
+      "sha256": "fc27f80b502de6f0bcdf4ac8dd840eb9a176f6d04d6a8a57dea609cc8e11c705",
+      "matches": true
+    },
+    {
+      "group": "sonic_player_native_sources",
+      "path": "src/cpu/fidelity_float.hpp",
+      "sha256": "f8ab14de7dc01f0d054ce4098e61af34b7e5ba39f2281fc506be9d1864869dcb",
+      "matches": true
+    },
+    {
+      "group": "sonic_actions_native_sources",
+      "path": "src/player/sonic_player.hpp",
+      "sha256": "8ab874d28623af1876eebed149625c447f112a677098c0fa4f6e56da3286b0b4",
+      "matches": true
+    },
+    {
+      "group": "sonic_actions_native_sources",
+      "path": "src/player/sonic_player.cpp",
+      "sha256": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483",
+      "matches": true
+    },
+    {
+      "group": "sonic_actions_native_sources",
+      "path": "tests/probes/native_sonic_action_probe.cpp",
+      "sha256": "a32e1be6081014140f4cf1a46dff9d891016432b66da1c841d9223a9d07b7031",
+      "matches": true
+    },
+    {
+      "group": "sonic_actions_native_sources",
+      "path": "tools/oracles/verify_original_sonic_actions.py",
+      "sha256": "d4076e926d22b4a2cfc0a5f4a4cf58b889f338a5019e0cf3d0a4b98a4560faf6",
+      "matches": true
+    },
+    {
+      "group": "sonic_actions_native_sources",
+      "path": "src/player/player_task.hpp",
+      "sha256": "ca3b911db75e90e2ddabc2a4bef3e4fae6578c0405f864001c2e68162e07650d",
+      "matches": true
+    },
+    {
+      "group": "sonic_actions_native_sources",
+      "path": "src/player/player_physics.hpp",
+      "sha256": "08bf9f1949cdb7fd1605429c9b9663265e61d62352b9f5d018e7244a74738530",
+      "matches": true
+    },
+    {
+      "group": "sonic_actions_native_sources",
+      "path": "src/player/player_position.hpp",
+      "sha256": "4a9343e6107b2cad271dfe2c369084a282f32b5c088f90c4bbd73fb40e3165de",
+      "matches": true
+    },
+    {
+      "group": "sonic_actions_native_sources",
+      "path": "src/player/ground_acceleration.hpp",
+      "sha256": "35bde538be42156764534857ec3458a443932ab20a6f77832f87a649119f288f",
+      "matches": true
+    },
+    {
+      "group": "sonic_actions_native_sources",
+      "path": "src/player/ground_acceleration.cpp",
+      "sha256": "c79890f79d3d092eb5bf45c73223467bc6bc20105199830f32a5fba44b4cecf0",
+      "matches": true
+    },
+    {
+      "group": "sonic_actions_native_sources",
+      "path": "src/player/ground_acceleration_internal.hpp",
+      "sha256": "c9938bc44091750a8faeca2c6915b298295ff1e5dc2774718bef183657824595",
+      "matches": true
+    },
+    {
+      "group": "sonic_actions_native_sources",
+      "path": "src/player/ground_acceleration_native.cpp",
+      "sha256": "f1729d583f165daf41bf49296fb839b3b9d0badbc73c5b13977060c0670eece9",
+      "matches": true
+    },
+    {
+      "group": "sonic_actions_native_sources",
+      "path": "src/player/ground_arithmetic.hpp",
+      "sha256": "703a0c6c05cc2d1a6ee2e694ea48b7cc094b3ff8ca6f3dfc786791870272e7c9",
+      "matches": true
+    },
+    {
+      "group": "sonic_actions_native_sources",
+      "path": "src/player/ground_friction.cpp",
+      "sha256": "63ef1ec097115555b2e7bcb33f212d3678efe69a3cb326b8db2edfd5af01b58d",
+      "matches": true
+    },
+    {
+      "group": "sonic_actions_native_sources",
+      "path": "src/guest/ground_acceleration_reference.hpp",
+      "sha256": "2da1d2ac5be19c17e4b71cdee209e07956b3ebebb0fdf03716044382e0e5471a",
+      "matches": true
+    },
+    {
+      "group": "sonic_actions_native_sources",
+      "path": "src/guest/player_acceleration_ground.cpp",
+      "sha256": "2dfdea7e29e79b2d6b95897b38165246821e7ccf5ff98e7a73f2acad1eaf4f75",
+      "matches": true
+    },
+    {
+      "group": "sonic_actions_native_sources",
+      "path": "src/guest/player_acceleration_friction.cpp",
+      "sha256": "c2b099a18a612ab4d8c11670827bea33b9066d262e79d65844f493a2ac7e2ad1",
+      "matches": true
+    },
+    {
+      "group": "sonic_actions_native_sources",
+      "path": "src/player/player_acceleration_ground.hpp",
+      "sha256": "2b8bc9a2115dffbb8c442c24dfd82ec31d807dae04478e40b5b02d9a47e0e9f6",
+      "matches": true
+    },
+    {
+      "group": "sonic_actions_native_sources",
+      "path": "src/player/player_acceleration_friction.hpp",
+      "sha256": "fc27f80b502de6f0bcdf4ac8dd840eb9a176f6d04d6a8a57dea609cc8e11c705",
+      "matches": true
+    },
+    {
+      "group": "sonic_actions_native_sources",
+      "path": "src/cpu/fidelity_float.hpp",
+      "sha256": "f8ab14de7dc01f0d054ce4098e61af34b7e5ba39f2281fc506be9d1864869dcb",
+      "matches": true
+    },
+    {
+      "group": "A_coexistence",
+      "path": "tests/unit/model_device.cpp",
+      "sha256": "82908d8378e68864f0154798e2bf9f53b76848b62baa3a3033c6c0a4ec2ad1d9",
+      "matches": true
+    },
+    {
+      "group": "A_coexistence",
+      "path": "src/runtime/model_device.hpp",
+      "sha256": "8a5ecbfd6440ba88d2854940363e37315ab99c419bec106e231ff8334f8809a4",
+      "matches": true
+    }
+  ],
+  "B_frozen_judges_unchanged": 13,
+  "B_raw_report_hashes": [
+    {
+      "path": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-20f7cff9/build/player-current-proof/baseline-live-sonic_player.json",
+      "sha256": "7c9fa0e4009cad7cbd07f2176371fc928b2eedc39e0f26df5799f38b489156e3",
+      "matches": true
+    },
+    {
+      "path": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-20f7cff9/build/player-current-proof/migrated-sonic_player.json",
+      "sha256": "46974a0b120657a79c2d32deb3f50a3b2baac3ccb53882b5136b1a59ac8e0e13",
+      "matches": true
+    },
+    {
+      "path": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-20f7cff9/build/player-current-proof/baseline-live-sonic_actions.json",
+      "sha256": "237b84288b0458cdb6cc2ac1e1c9890e7830faff77e51916cedf2bf8447dfc3b",
+      "matches": true
+    },
+    {
+      "path": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-20f7cff9/build/player-current-proof/migrated-sonic_actions.json",
+      "sha256": "8941e6fd491a4b50f1caeb7928440d048e46c05687b013bbc9b342789da57b31",
+      "matches": true
+    }
+  ],
+  "A_raw_receipts": {
+    "build/source-only-native-model-build.exit": {
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "content": "0"
+    },
+    "build/source-only-native-model/qualification/exit.json": {
+      "sha256": "5192f108ce07bcb45ffa65b13097ae55da1877f0920528130fecda01596585dc",
+      "content": {
+        "exit_status": 1
+      }
+    },
+    "build/source-only-native-model/qualification/command.json": {
+      "sha256": "7f6cfe64628513c348c81429b12a6f2dae0c10d87f3d097998ee7d6b03179d51",
+      "content": [
+        "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/source-only-native-model/build/sadx-native",
+        "--assets",
+        "/Users/burbujamc/Developer/sadx-macos/game/imported",
+        "--offscreen",
+        "--paced",
+        "--exit-after",
+        "1500",
+        "--save-directory",
+        "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/source-only-native-model/qualification/savedata",
+        "--key-events",
+        "500:13:down,501:13:up,750:13:down,751:13:up,900:38:down,901:38:up,950:13:down,951:13:up,1350:13:down,1351:13:up",
+        "--capture-directory",
+        "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/source-only-native-model/qualification/captures",
+        "--capture-at",
+        "1300,1380,1381,1382,1383,1390"
+      ]
+    },
+    "build/polybuff-reference-units.json": {
+      "sha256": "253e87a59bf8de4ad298199259fae6e889a8debd627821cd4f625221e2f692ef",
+      "content": [
+        {
+          "unit": "ninja-system-init",
+          "exit_status": 0
+        },
+        {
+          "unit": "ninja-device-init",
+          "exit_status": 0
+        },
+        {
+          "unit": "ninja-frame-calls",
+          "exit_status": 0
+        },
+        {
+          "unit": "ninja-screen",
+          "exit_status": 0
+        },
+        {
+          "unit": "ninja-view",
+          "exit_status": 1
+        },
+        {
+          "unit": "polybuff-ownership",
+          "exit_status": 0
+        },
+        {
+          "unit": "polybuff-initialization",
+          "exit_status": 0
+        }
+      ]
+    },
+    "build/ninja-view-integration-corrected.exit": {
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "content": "0"
+    },
+    "build/polybuff-bound-coexistence.exit": {
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "content": "0"
+    },
+    "build/polybuff-integration-oracles.exit": {
+      "sha256": "9a271f2a916b0b6ee6cecb2426f0b3206ef074578be55d9bc94f6f3fe3ab86aa",
+      "content": "0"
+    },
+    "build/polybuff-context-coexistence/proof.json": {
+      "sha256": "7ee61a6ad8aff3ea5a2396750dc668bdc714e6080dcc3a9360bee3d7142b1e7b",
+      "content": {
+        "passed": true,
+        "exit_status": 0,
+        "native_context": "Root actual Context { Display& }",
+        "reference_context": "sadx::polybuff_reference::Context",
+        "native_startup": "Actual Display startup executes through the native device unit.",
+        "output": "One process: nine reference initializer calls and Root actual native device unit pass",
+        "native_archive": "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/libsadx-core.a",
+        "native_archive_sha256": "bf55116471b24d18e15ecdb6ffc79a160d943ce59e89dc498e97fd1c9cd3ee9a",
+        "native_unit_source_sha256": "82908d8378e68864f0154798e2bf9f53b76848b62baa3a3033c6c0a4ec2ad1d9",
+        "native_context_header_sha256": "8a5ecbfd6440ba88d2854940363e37315ab99c419bec106e231ff8334f8809a4",
+        "reference_defined_symbols": "0000000000000000 T sadx::polybuff_reference::configured_count(sadx::polybuff_reference::Context&, unsigned long)\n0000000000000174 T sadx::polybuff_reference::initialize_record(sadx::polybuff_reference::Context&, sadx::polybuff::BufferState&, unsigned long, unsigned int, sadx::polybuff::BufferDescription)\n0000000000000048 T sadx::polybuff_reference::buffer_description(sadx::polybuff_reference::Context&, unsigned long)\n00000000000000c0 T sadx::polybuff_reference::allocate_vertex_scratch(sadx::polybuff_reference::Context&, unsigned int)\n0000000000000104 T sadx::polybuff_reference::observe_initialization_store(sadx::polybuff_reference::Context&, sadx::polybuff::InitializationField, unsigned long)\n00000000000002e0 T sadx::NinjaSystemOwnerResult::~NinjaSystemOwnerResult()\n0000000000000330 T sadx::initialize_system_polygon_buffers(sadx::NinjaSystemInitRuntime&, unsigned int, unsigned int)\n00000000000003e8 T void sadx::polybuff::initialize_buffers<sadx::polybuff_reference::Context>(sadx::polybuff_reference::Context&, sadx::polybuff::Buffers&, sadx::polybuff::RetainedBase&, sadx::polybuff::Scratch&, unsigned int, unsigned int, void*)\n",
+        "undefined_dynamic_lookup_used": false,
+        "limits": [
+          "Actual Root unit exercises its real resource types/device functions in the same executable.",
+          "Native Display constructor executes its actual configured startup; no GPU proof."
+        ]
+      }
+    },
+    "build/source-only-native-model-prep.json": {
+      "sha256": "03e20e61157f08d9d6a8b1fb4f1dfb41172fcc67b1171dd1524a634e1179bf26",
+      "content": {
+        "commit": "88eb56e7eca1ec558afa7f2729d86740f9ead81a",
+        "source_archive": true,
+        "game_exe_dll_present": false,
+        "prebuilt_game_objects_present": false,
+        "reused_dependency": "Pinned source-built SDL/libusb platform dependency only",
+        "dependency_builder_sha256": "a1709c569d4b4cc255f56e19a0d5717e87cfcb9fab89361f6c871478de65db50"
+      }
+    },
+    "build/ninja-view-integration-corrected.log": {
+      "sha256": "bfd87fd9de0f018fc2036bf0b8a311269b0ee380adcc28ba86456f70aac52f17",
+      "content": "Ninja view: 781570 block, default view, stack reset, projection scale, 3d129c0, device calls, inverse and failures passed."
+    },
+    "build/ninja-view-integration.log": {
+      "sha256": "a7e21e2eca71e91f6eae8156a0b00bb1ac689cc3c174bcb19d329bb0bd7fb3ff",
+      "content": "usage: ninja-view-test ninja-trig.f32"
+    }
+  },
+  "A_driver_ast_identical": true,
+  "A_driver_old_sha256": "c69b26c603d16f4318d0f5d137a650fd7c4ec10650e3b0aae48d33a7f9042651",
+  "A_driver_new_sha256": "bb90bb316f7f908bd6ccaa317410f0cab77431305b602ad50205aa6d12791091",
+  "A_legacy_judges": [
+    {
+      "path": "tests/probes/native_system_init_probe.cpp",
+      "sha256": "31a4522cc846421e9c1c1981c3216150d5f196ac4f43909b497a045513471f47",
+      "unchanged_from_83f0ded": true
+    },
+    {
+      "path": "tests/probes/native_device_setup_probe.cpp",
+      "sha256": "aa79f3adc472f09f5a610e8af6ceb43b8b87e994f9bc0d5b04739b71b8d2ea6f",
+      "unchanged_from_83f0ded": true
+    },
+    {
+      "path": "tests/probes/native_ninja_frame_calls_probe.cpp",
+      "sha256": "ca88712cb367ccb300649747087d80f8ee32618a9cf8c43acd8f98368ec2728a",
+      "unchanged_from_83f0ded": true
+    },
+    {
+      "path": "tests/probes/native_screen_polygon_probe.cpp",
+      "sha256": "dcd4d808f68dcf8ad2b92d8f32e3bc3e1ac82734633e1edbe2b2209327ce8325",
+      "unchanged_from_83f0ded": true
+    },
+    {
+      "path": "tests/unit/ninja_system_init.cpp",
+      "sha256": "096903759c431309b584653577758d6263fd3cd200aef93d0b106ef77df7544f",
+      "unchanged_from_83f0ded": true
+    },
+    {
+      "path": "tests/unit/ninja_device_init.cpp",
+      "sha256": "7d9a5c81f41c2ecc278a537b399c5f401cf11301734f8040827b736572840ae1",
+      "unchanged_from_83f0ded": true
+    },
+    {
+      "path": "tests/unit/ninja_frame_calls.cpp",
+      "sha256": "eed86df54f85276743a4830b9e71464a2ea6d67992e780b7cd4d5e94c5af738e",
+      "unchanged_from_83f0ded": true
+    },
+    {
+      "path": "tests/unit/ninja_screen.cpp",
+      "sha256": "9c178c817e8204f46071a97edc2176d61fd5c3e8457f50c277be6004bf0df672",
+      "unchanged_from_83f0ded": true
+    },
+    {
+      "path": "tests/unit/ninja_view.cpp",
+      "sha256": "861834dab38ef2d9bc47dd6966f1198910dc2b8036ca278387cbcebd682d3c10",
+      "unchanged_from_83f0ded": true
+    },
+    {
+      "path": "tools/oracles/verify_original_system_init.py",
+      "sha256": "885a16f7834999fca35a4fe6b11bd25f722b0ad5da184c7a17c9119a5856aad5",
+      "unchanged_from_83f0ded": true
+    },
+    {
+      "path": "tools/oracles/verify_original_device_setup.py",
+      "sha256": "ec5dba89fa022db7d42ff780cd1a5efb94b43169279b176108fc263ba8e8a963",
+      "unchanged_from_83f0ded": true
+    },
+    {
+      "path": "tools/oracles/verify_original_ninja_frame_calls.py",
+      "sha256": "047aee2b7c9b43349b08fc6006dbe4eb8c6d9ee2386ba1d27d3967e916730ed1",
+      "unchanged_from_83f0ded": true
+    }
+  ],
+  "A_mutants": [
+    {
+      "name": "drop-draw",
+      "sha256": "8cc1b8352d03c1484b6da9f14427552e5cdb86e1a37ab69f848c9fe8d77514cd",
+      "matches": true,
+      "compile_exit_status": 0,
+      "unit_exit_status": -6
+    },
+    {
+      "name": "drop-retain",
+      "sha256": "3f13dc94a64f40a4e58c5e659526aab130f722c4deb035d0ec0c53df04443334",
+      "matches": true,
+      "compile_exit_status": 0,
+      "unit_exit_status": -6
+    },
+    {
+      "name": "wrong-power",
+      "sha256": "d06697652db84c412181b4d6f96ba721ac14e71ccb71869529eb694e2fa51b3b",
+      "matches": true,
+      "compile_exit_status": 0,
+      "unit_exit_status": -6
+    },
+    {
+      "name": "swap-vectors",
+      "sha256": "e6679cf9f7d65ff6ce181c55d940b80ed3012c675467daed92a89dffb897fab6",
+      "matches": true,
+      "compile_exit_status": 0,
+      "unit_exit_status": -6
+    },
+    {
+      "name": "swap-view-reset",
+      "sha256": "9aa0fd984960e13561f818ed0315743d3dff7a98f5f33d0f01040791046b00df",
+      "matches": true,
+      "compile_exit_status": 0,
+      "unit_exit_status": -6
+    }
+  ],
+  "A_imported_implementations": [
+    {
+      "path": "src/engine/polybuff_initialization.hpp",
+      "matches_bdf110a": true
+    },
+    {
+      "path": "src/engine/polybuff_initialization.cpp",
+      "matches_bdf110a": true
+    },
+    {
+      "path": "src/engine/polybuff_initialization_binding.cpp",
+      "matches_bdf110a": true
+    },
+    {
+      "path": "src/guest/polybuff_initialization_reference.cpp",
+      "matches_bdf110a": true
+    },
+    {
+      "path": "src/guest/polybuff_owners.cpp",
+      "matches_bdf110a": true
+    },
+    {
+      "path": "src/guest/polybuff_owners.hpp",
+      "matches_bdf110a": true
+    }
+  ],
+  "A_source_only_frozen_paths": {
+    "count": 618,
+    "missing": [],
+    "different": []
+  },
+  "A_focused_reports": {
+    "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/oracles/system_init.json": {
+      "sha256": "0c1335e09bc0de54067b4f58ecdbb056897906ed4de82dc6f0fc78669d963933",
+      "summary": {
+        "cases": 600,
+        "mismatches": []
+      }
+    },
+    "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/oracles/device_setup.json": {
+      "sha256": "070713620fbb96f6a061ca62869adb5b9a66fba74aaf58e44a33bd561bbffbe1",
+      "summary": {
+        "cases": 2000,
+        "mismatches": []
+      }
+    },
+    "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/oracles/ninja_frame_calls.json": {
+      "sha256": "b8a04b8f250662e67b04f6c60b49cd7680ff6eeaac2eb00e612aec9d6a70a630",
+      "summary": {
+        "cases": 3969,
+        "mismatches": []
+      }
+    },
+    "/Users/burbujamc/Developer/sadx-wt-basic-model-binding/build/oracles/polybuff_initialization.json": {
+      "sha256": "e47672ec1cd0ac4c41df4366e385ab30de0d6d8790854b5951d62e6153c06774",
+      "summary": {
+        "passed": true,
+        "cases": 152,
+        "value_mismatches": 0,
+        "mismatches": []
+      }
+    }
+  },
+  "A_coexistence_private_copy_matches_exact_transform": true,
+  "B_mutant_reconstruction": [
+    {
+      "name": "drop-primary",
+      "matches_frozen_source_replacement": true,
+      "compile_rc": 0,
+      "run_rc": -6
+    },
+    {
+      "name": "wrong-player-slot",
+      "matches_frozen_source_replacement": true,
+      "compile_rc": 0,
+      "run_rc": -6
+    },
+    {
+      "name": "retain-on-null",
+      "matches_frozen_source_replacement": true,
+      "compile_rc": 0,
+      "run_rc": -6
+    },
+    {
+      "name": "observe-before-store",
+      "matches_frozen_source_replacement": true,
+      "compile_rc": 0,
+      "run_rc": -6
+    },
+    {
+      "name": "skip-same-primary",
+      "matches_frozen_source_replacement": true,
+      "compile_rc": 0,
+      "run_rc": -6
+    },
+    {
+      "name": "require-observation",
+      "matches_frozen_source_replacement": true,
+      "compile_rc": 0,
+      "run_rc": -6
+    },
+    {
+      "name": "normalize-byte",
+      "matches_frozen_source_replacement": true,
+      "compile_rc": 0,
+      "run_rc": -6
+    }
+  ],
+  "A_null_fix_receipt_hashes": [
+    {
+      "path": "src/runtime/model_draw.cpp",
+      "matches_at_004d03f": true
+    },
+    {
+      "path": "src/runtime/model_draw_context.hpp",
+      "matches_at_004d03f": true
+    },
+    {
+      "path": "tests/unit/model_binding.cpp",
+      "matches_at_004d03f": true
+    }
+  ],
+  "A_source_only_build_log_sha256": "05976a98efe224cab0f89e9448b68b8f271c9f59c69e54bc0c69e5c4144b35d4"
+}
