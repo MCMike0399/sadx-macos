@@ -55,7 +55,7 @@ Consult when the step touches the subject:
 * **Never commit binaries or game assets.** `game/`, DLLs, `.exe`, disc images, large
   reference captures stay local and ignored. `tools/gate/check_repo_hygiene.py` runs in the gate.
 * **Names in identifiers, addresses in annotations** (ADR-0006). New and migrated code is
-  named from the symbol database (`docs/GOAL.md` §4.4; the mod loader's `*New.h` headers first)
+  named from the symbol database (`docs/GOAL.md` §10; the mod loader's `*New.h` headers first)
   in the project's style, with `// FUNCTION: SONIC 0x411e30 dsInitInt`-style provenance on the
   line above. Never put a `sub_<hex>`/`FUN_<hex>` function or a Ghidra `DAT_`/`local_`/`param_`
   name into `src/`. No new `*_at_<hex>` identifier either: `tools/gate/check_provenance.py`
@@ -89,25 +89,30 @@ Consult when the step touches the subject:
   `tools/gate/profile_patches.json` (`tools/gate/check_profile_patches.py`, 0 UNHANDLED). Under the
   profile the loader and mods replace game code; the port implements what actually runs.
 * **No attribution lines in commits** (no Co-Authored-By / Generated-with).
+* **Durable work only.** Reviewed work lives in git, as a `packet/<name>` branch in its own
+  worktree (`docs/GOAL.md` §8), never only under `/tmp` or `/private/tmp`. A reboot on
+  2026-10-22 wiped about ten reviewed packets kept there.
+* **Readable journal.** HANDOFF entries are plain sentences with spaces between words and
+  numbers, at most 15 lines.
 
 ## Toolbox: what to use for what
 
 Paths are relative to the repo. **Exact command lines for every row are in the cookbook,
-`docs/METHOD.md` §0**, with details in §1–2 and `docs/GOAL.md` §4.
+`docs/METHOD.md` §0**, with details in §1–2 and `docs/GOAL.md` §10.
 
 | Question | Tool |
 |---|---|
 | What is this address called, what is its signature/struct? | the symbol database (`make symbols`, then the lookup snippet in METHOD §0 over `build/symbols/symbols.json`); the declaration via `grep -in 0x0*ADDR reference/sadx-mod-loader/SADXModLoader/include/*.h`. Treat names as hypotheses; record decisions in `reference/symbols/overrides.tsv` |
 | Is this idiom/quirk known? | `docs/TIPS.md` |
 | Pseudocode / dossier / CFG of functions (batch of new questions) | the owned runner `reference/ghidra-live.mjs reference/ghidra-inventory-config.json` (REA → Ghidra, snapshot cached); `batch_decompile` for clusters, `analyze_function` for what you port |
-| One quick or cached question | REA CLI `node reference/tools/rea/node_modules/rea-agents/scripts/rea.mjs function\|decompile\|xrefs\|instructions …` with `--snapshot` (GOAL §4.2); `rea doctor --provider ghidra` before blaming Ghidra |
+| One quick or cached question | REA CLI `node reference/tools/rea/node_modules/rea-agents/scripts/rea.mjs function\|decompile\|xrefs\|instructions …` with `--snapshot` (GOAL §10); `rea doctor --provider ghidra` before blaming Ghidra |
 | Who reads/writes a global | runner `xrefs`; `tools/analysis/xscan.py ADDR…` for raw `.text` references |
 | Callback/vtable targets Ghidra missed; names into Ghidra | the seed TSV (`address<TAB>function\|label<TAB>name`), then one fresh snapshot (seed digest is part of the profile) |
 | Assembly of a stored result | `tools/analysis/ghidra_asm.py reference/inventory-raw/<label>.json` |
 | Exact bytes / constants | `tools/lib/pe_image.py` (`PEImage(path).read(va, n)`), never a listing |
 | Call graph, sizes, hot paths, FPU sites | `reference/inventory/{functions,hot-paths,fpu-sites}.json` (`tools/inventory/run_inventory.py`) |
 | Does a mod patch this range? | `tools/gate/check_profile_patches.py` (0 UNHANDLED), `tools/gate/profile_patches.json`, mod loader source in `reference/sadx-mod-loader/` |
-| Embedded models/landtables/animations/texlists in the exe | X-Hax sa_tools `GameConfig/PC_SADX` mappings (fetch pinned, ignored; GOAL §4.4); `tools/lib/extract.py` is only a bring-up extractor |
+| Embedded models/landtables/animations/texlists in the exe | X-Hax sa_tools `GameConfig/PC_SADX` mappings (fetch pinned, ignored; GOAL §10); `tools/lib/extract.py` is only a bring-up extractor |
 | Is my native code equal to the original? | oracle: `tests/probes/native_<slug>_probe.cpp` + `tools/oracles/verify_original_<slug>.py`, `make oracle-<slug>`, `make oracles-verdict`, `tools/gate/mutate.py`; overrides: corpus replay + live digests (`make m1`) |
 | Runtime facts (values, order, what actually runs) | the guest (`sadx-app --guest …`, `make m1` targets); HLE assumptions printed by the runtime |
 | Generated tables from source data | `tools/emit/` emitters (check them into the gate like any test) |
@@ -118,7 +123,7 @@ session and blocks the snapshot save; use the seed file), Ghidra GUI edits (not 
 
 ## Decompiling with an LLM (you): rules that keep it honest
 
-These come from projects that ran agent decompilation at scale (GOAL §4.3) and from this
+These come from projects that ran agent decompilation at scale (GOAL §10) and from this
 project's own sessions.
 
 * **Context first, code second.** Build the context bundle of GOAL §7 step 2 (names, structs,
@@ -188,8 +193,8 @@ project's own sessions.
 
 * `app-smoke` stops at frame 120 on the SEGA logo, and the intro movie is drawn black. To see
   the game, skip the movie with Enter: `./build/sadx-app --guest
-  reference/updated-pc-reference/game reference/windows-system --keys 450:13` (or `make play`
-  once GOAL §6 item 1 adds it). Look at a screenshot before claiming visible progress.
+  reference/updated-pc-reference/game reference/windows-system --keys 450:13` (or `make play`).
+  Look at a screenshot before claiming visible progress.
   Automated runs use the harness (`docs/TESTING.md` §3.0):
   * `sadx-app --guest … --offscreen --script FILE` for screenshots and game-state JSON at any
     frame, with no window;
