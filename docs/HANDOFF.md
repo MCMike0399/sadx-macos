@@ -515,3 +515,13 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Shared current-owner migration 28b3974 on packet/player-current-owners preserves Player 28800/2840 FP partial and Actions 30192/2172 FP partial, three old units, 257 worlds and seven mutants. Root review/native consumption remain pending.
 * Gamma core recovery uses actual 483430 source. Its body has no direct event 580 call; 49fb10 and 4c5420 remain neutral setup seams. Full source corrected earlier guesses; no guessed event or TimeZero implementation is accepted.
 * Main's last recorded full gate remains 04c40ae, rc 0. Continue final review/gate, then the actual Gamma callback and its reached dependencies; the complete Sonic story route remains active. No push.
+
+### 2026-10-26 — Model landed; windowed gate stopped without display frames (track J/V)
+
+* Main 6b617c8 contains the reviewed model/material/geometry/device and canonical nine-buffer startup closure. Normal input and the source-only export both reach native_gamma_player_controller at frame 1382, actual diagnostic exit 1. N3b remains open.
+* Full make -j10 gate exited 2. Compilation, unit and Python sections completed, but required windowed smoke PID 41327 emitted zero frames while macOS reported Display Asleep: Yes. The process sample showed the AppKit event loop idle.
+* A bounded caffeinate assertion woke the display; normal NSRunningApplication activation returned false and the smoke stayed idle. Root killed only that exact stalled smoke, then observed make return 2. No green gate was recorded. Evidence: model-startup-integration-gate-failed-display.json.
+* User GUI readiness is pending. Require a fresh real windowed smoke before rerunning the full gate; do not infer readiness from screencapture alone or alter gate expectations. Last recorded successful full gate remains 04c40ae, rc 0.
+* Gamma's build pause is revoked after the actual gate terminal. Its final source/oracle/unit/mutant/holdout work may resume privately; no Ghidra or app launch without Root coordination.
+* Root prepared the approved shared current owners in packet/gamma-runtime-binding, /Users/burbujamc/Developer/sadx-wt-gamma-runtime-binding: db0edf6, b00f413, 281b6de. Core-only actor-current unit exits 0. No Main code or gate source was changed during the run.
+* Continue GUI smoke/full gate and the reached Gamma callback. All actor drawing, cancellation/reentry, Sonic confirmation, gameplay and 63 FPS remain unverified. No push.
