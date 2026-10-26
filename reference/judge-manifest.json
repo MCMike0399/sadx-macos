@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "5125fab23280d27a68a1091e866922eee6ca9361",
-    "evidence": "reference/production-integration-20261026/native-gamma-gate-interrupted-registration.json",
-    "evidence_sha256": "fab695496c09119dff402bbfb3d20c09526223309cea2b01c7b20dba2db8ac08",
-    "reason": "Run the existing frozen Gamma core unit in the gate; its manifest row was omitted during dependency integration"
+    "base_commit": "0b8c7a6ba4dac32a4ff408305017747d5f62464d",
+    "evidence": "reference/production-integration-20261026/gamma-pack-shape-judge-evidence.json",
+    "evidence_sha256": "b120c1ef6d9fa259008643cb2e2d48fd8f5b860ea4d2207433c1632ef407e4f9",
+    "reason": "Update two exact combined-pack shape assertions for approved Gamma append; preserve old namespaces/aliases/malformed checks and assert real Stand closure"
   },
   "files": {
     "Makefile": "ed8e228dfcbd1a420488e260e0f9dee316173ce72da2544dc036ad570d0a0e1a",

@@ -15,7 +15,10 @@ void reject(Bytes b) {try{CharacterPack::decode(b);}catch(const std::runtime_err
 int main(int argc,char **argv) {
  try {
   require(argc==3,"usage: selection-pack-test SELECTION TITLE");const auto bytes=read(argv[1]);const auto p=CharacterPack::decode(bytes);const auto old=CharacterPack::decode(read(argv[2]));
-  require(p.record_count()==3302 && bytes.size()==760168,"full source resource graph size");
+  require(p.record_count()==3328 && bytes.size()==766112,"full source resource graph size");
+  const auto stand=p.resolve(sadx::ActionHandle{3303});
+  require(stand.motion==3304 && p.motion(stand.motion).part_count==77 &&
+          p.motion(stand.motion).frame_count==16,"actual Gamma Stand closure");
   for(ResourceId id=1;id<=old.record_count();++id) {const auto &a=p.record(id),&b=old.record(id);require(a.kind==b.kind && a.payload==b.payload,"old title resource namespace changed");}
   for(unsigned i=0;i<7;++i)require(p.action(static_cast<TitleAction>(i)).identity==old.action(static_cast<TitleAction>(i)).identity,"title handle changed");
   const std::array<unsigned,19> frames{32,65,2,16,68,2,16,75,2,32,90,2,32,25,45,2,16,80,2};
@@ -35,7 +38,7 @@ int main(int argc,char **argv) {
   b=bytes;put(b,28,999999);reject(b);
   for(unsigned n=16;n<368;++n)reject(Bytes(bytes.begin(),bytes.begin()+n));
   try{p.action(static_cast<SelectionAction>(19));throw std::logic_error("invalid selection enum accepted");}catch(const std::runtime_error &){}
-  std::cout<<"selection pack:22 bindings,3302 records,19 source sequences/frames, old title namespace and malformed rejection pass\n";
+  std::cout<<"selection pack:22 bindings,3328 records,19 source sequences/frames, old title namespace and malformed rejection pass\n";
   return 0;
  }catch(const std::exception &e){std::cerr<<e.what()<<'\n';return 1;}
 }

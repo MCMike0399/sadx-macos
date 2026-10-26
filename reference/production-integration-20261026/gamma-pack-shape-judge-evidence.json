@@ -1,0 +1,47 @@
+{
+  "scope": "Correct stale combined resource-pack shape assertions after approved Gamma append; unchanged Sonic-only builder tests remain3302.",
+  "gate_exit_status": 2,
+  "failed_test": "selection-character-pack",
+  "failure": "full source resource graph size",
+  "gate_log_sha256": "c14c61208b6a126277dc8a801d734162d9521b43bfbe17efa25c1d00b862e67e",
+  "gate_log": "build/gamma-gate-failed-pack-size.log",
+  "old_pack_reconstructed_sha256": "df53cf2eb5427491cd444350b231f9b168060602b65a8cf93371f6ad0f38d423",
+  "matches_previously_approved_old_pack": true,
+  "old_unit_old_pack_rc": 0,
+  "new_pack": {
+    "records": 3328,
+    "bytes": 766112,
+    "sha256": "c414e173bf4bf9f803f24d61642e233ff9650fe9276d70da2ac3939fee2b5d7f",
+    "local_output": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-3c7e487d/build/gamma-actor-assets/extended/sonic-selection.actions",
+    "prefix": {
+      "records": 3302,
+      "bytes": 760168,
+      "pack_sha256": "df53cf2eb5427491cd444350b231f9b168060602b65a8cf93371f6ad0f38d423",
+      "bindings_sha256": "93dda5e55a9739385e1a9ba6059b6be451ee9bfa0e91549784c8eed22ae7282b",
+      "record_bytes_sha256": "10c09181d59fc16c13fba8a10326ff16cf06189a7fe13f5ecd60a1643e3a6baa",
+      "metadata_preserved": true,
+      "record_byte_range": [
+        368,
+        760168
+      ],
+      "binding_byte_range": [
+        16,
+        368
+      ],
+      "header_change": "record count at bytes8..11 increases; whole-file prefix is not identical"
+    },
+    "initial_stand_action": 3303
+  },
+  "changes": [
+    "Exact combined graph expectation3302/760168 becomes3328/766112 in two consuming units.",
+    "Add exact Gamma Stand3303/motion3304/77nodes/16frames assertions to strict pack unit.",
+    "Preserve every old title/action/alias/malformed rejection assertion.",
+    "Sonic-only importer fixture expectations remainunchanged."
+  ],
+  "gate_passed": false,
+  "corrected_pack_unit_current_pack_rc": 0,
+  "corrected_pack_unit_omitted_gamma_rc": 1,
+  "corrected_pack_unit_omitted_gamma_error": "full source resource graph size",
+  "corrected_metadata_unit_current_pack_rc": 0,
+  "preserved_metadata_malformed_cases": 28
+}

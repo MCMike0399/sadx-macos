@@ -10,7 +10,7 @@ int main(int argc, char **argv) {
         const std::filesystem::path source(argv[1]);
         const auto pack = sadx::character_pack::CharacterPack::load(source / "characters/sonic-selection.actions");
         const auto title = sadx::character_pack::CharacterPack::load(argv[2]);
-        assert(pack.record_count() == 3302 && title.record_count() == 1157);
+        assert(pack.record_count() == 3328 && title.record_count() == 1157);
         for (sadx::character_pack::ResourceId id = 1; id <= title.record_count(); ++id) {
             const auto &actual = pack.record(id), &previous = title.record(id);
             assert(actual.kind == previous.kind && actual.payload == previous.payload);
@@ -121,6 +121,6 @@ int main(int argc, char **argv) {
             assert(rejected);
         }
         std::filesystem::remove_all(temporary);
-        std::cout << "CharacterSelect DTO: single 3302-record pack, title1157 prefix, 19 actions, 4 sparse dialogs, 176 real voices (cue2047 explicitly absent) and 28 malformed boundaries pass.\n";
+        std::cout << "CharacterSelect DTO: single 3328-record pack, title1157 prefix, 19 actions, 4 sparse dialogs, 176 real voices (cue2047 explicitly absent) and 28 malformed boundaries pass.\n";
     }
 }
