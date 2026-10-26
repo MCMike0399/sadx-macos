@@ -1,0 +1,33 @@
+{
+  "scope": "Necessary compiler/linkage setup for reviewed canonical owner migration, not altered tests",
+  "source_commit": "bdf110a",
+  "review": "afc50a7",
+  "changed_existing_judge_inputs": [
+    "Makefile",
+    "tests/unit/manifest.tsv"
+  ],
+  "existing_legacy_sources_byte_unchanged": [
+    "tests/probes/native_system_init_probe.cpp",
+    "tests/probes/native_device_setup_probe.cpp",
+    "tests/probes/native_ninja_frame_calls_probe.cpp",
+    "tests/probes/native_screen_polygon_probe.cpp",
+    "tests/unit/ninja_system_init.cpp",
+    "tests/unit/ninja_device_init.cpp",
+    "tests/unit/ninja_frame_calls.cpp",
+    "tests/unit/ninja_screen.cpp",
+    "tests/unit/ninja_view.cpp",
+    "tools/oracles/verify_original_system_init.py",
+    "tools/oracles/verify_original_device_setup.py",
+    "tools/oracles/verify_original_ninja_frame_calls.py"
+  ],
+  "fixture_only_header": "-include guest/polybuff_owners.hpp occurs directly on frozen fixture compiler commands; no inherited/global CXXFLAGS modification",
+  "reference_linkage": "Guest adapters supply compatibility constructors and availability; native product never links them",
+  "new_tests": [
+    "polybuff-initialization",
+    "polybuff-ownership"
+  ],
+  "expected_values_tolerances_fixtures_changed": false,
+  "limits": [
+    "Focused build running; complete gate pending."
+  ]
+}
