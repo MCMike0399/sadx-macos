@@ -1,0 +1,36 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_ranges": {
+  "0x408530-0x40859b": "5e0db300fc1baf53468ded5aa29cc7a33b6332e44dfa9b9f915cebff85e25508",
+  "0x4034b0-0x4037c5": "7fc0a2181d8f61906717259df9d746ef6d333d9c8e370e2fcaa9891b9b1a29ee",
+  "0x401430-0x401440": "9286ec41a0151e03ded6f4f59a2555efdfa5536a0bfaf409183efd32dceb6750",
+  "0x403250-0x40328d": "6df189d84533a30623a99b4e6c68bf5a4b5053abcfb8acf19899035bac7d7eb8",
+  "0x4037c8-0x4037e4": "8517cf8bd0ab63bf1faf888231e286344515bd334d5df138fa09fe2a1994e045"
+ },
+ "passed": true,
+ "values_match": true,
+ "cases": 2918,
+ "executed": 2918,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "native_library_sha256": "e98af01a5da7fca14dcc984fab408877863dc509fcc331f54a9bb512fc173658",
+ "native_sources": {
+  "src/engine/object_draw.hpp": "11f67c21610e2b15d33715e9cd112c245ee07ec6704c6f902347f162d5e74e8f",
+  "src/engine/object_draw.cpp": "e79fe1a43e35b5b84566bd7c14b676a6ab23f7081d399e9b6b0d029e09952803",
+  "tests/probes/native_object_draw_probe.cpp": "ff770b7dc8d84d8b9ba4b4a317acf2a3417ded84980b39c5cd91691a9feaecb2"
+ },
+ "limits": [
+  "Actual408530/4034b0/401430 execute with recursive child/sibling traversal. Actual403250 texture gate executes unhooked, with entry observation only; native probe delegates the existing gate and never duplicates it.",
+  "Only original lower matrix primitives, queuedlate407b70 and njDrawModel77ef70 become receipts. Model geometry/culling/pixels and late queue bodies remain required native owners, never false draw success.",
+  "Raw source model pointers below1MiB normalize to typed nondrawable0 only in this reference probe. Valid imported model IDs remain address-independent. Object/model metadata is borrowed from one stable mutable graph.",
+  "Source flags are cached per node; model/child/sibling links remain live across actual child-call boundaries. Adversarial receipt mutations discriminate stale snapshots and state restoration. Source numeric transform arguments are exact words; transformed matrix outputs remain existing primitive scope.",
+  "Simple401430 executes actual77ef70 thenreturns0; traversal return is void per recovered body. Rendering branch choice retained in code; both branches ultimately call the same actual model renderer.",
+  "Unmasked exception delivery, malformed cyclic graphs, real GPU output and application composition are unqualified here."
+ ],
+ "tracked_summary": {
+  "full_sha256": "00a1065f09567f167c63498da4dba3bf5a0ca368cbd9bf36807f734ed6cbc6e3",
+  "full_bytes": 2462,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

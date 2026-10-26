@@ -1,11 +1,11 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "1612f3bba49f55f817ff3537af1b5596ab695ca8836fc0198b61ff02624aa11e",
+ "native_library_sha256": "98891b1d663dfc79f9609adbc218d416132dbe19792109391f3ef452e6184de3",
  "source_files": {
   "src/engine/ninja_sprite_display.hpp": "4eb8e418ec7b25304a722a4c4cbfecd961e463d96256d4bf8a7eb96b20604ac9",
   "src/engine/ninja_sprite_display.cpp": "2d7f69d9a5b56101aadbb91508a2355f1151ce992fa4bbfda30749f1abe5a0a3",
   "src/engine/ninja_sprite.cpp": "ac67ce87fd086d4d7ad3de41f8a43cb89b3835e8f8030799e14717debeba65c7",
-  "src/engine/ninja_texture_selection.cpp": "cee6edafaba3d9f6d18071c9e4b0098b1a41597a0f08877d39567a4d585b85d8",
+  "src/engine/ninja_texture_selection.cpp": "52e20dc525e709bdbd46b2096036f0399a5b7ef910e11d703e2ffb760065f1f3",
   "src/engine/ninja_render.cpp": "d18ca70f7a617ea3a0b26f31e461ad18d36994279982e968ea0634dc4b7d3db9",
   "tests/probes/native_ninja_sprite_display_probe.cpp": "afaa058efbe5d1e8ea2461688dc5ba34813e4794b17992b9ff83ecebe458fdf5",
   "tools/oracles/verify_original_ninja_sprite_display.py": "67d237a94faed100d3658260e34307109daab3342c0f6524923f9d552b5bac44"
@@ -91,7 +91,7 @@
  "strict_flags_match": false,
  "limits": "Full 77e390 sprite display against original instructions.\n\nExecutes actual 77f3d0/77f440/78cf20/78cdc0 texture selection, 781670 and the\nsprite geometry, 78b840/791940 state helpers, vertex stores, the D3D8 calls and\n78c5a0 RET. The D3D8 device is an explicit recording COM fixture returning the\ncase HRESULT (ignored by the source). D3DX 78dbe0 is unlifted: it is either a\nrequired stop or an explicit seeded `fld [seed]; ret 4` fixture, never a model\nof projection. The world (flags&0x10==0) branch stops at unlifted 791a50.\nPalette banks are off (id 0xffffffff); texture indices stay inside the list.\nThis does not establish Windows GPU raster/filter equality or full queue use.\n",
  "tracked_summary": {
-  "full_sha256": "121b5bac28e4202a220048ead77f6d4734c8f4c7fe5f8ac645f2464c3ed4edd1",
+  "full_sha256": "de5198b7b31dd5fe3fa48056206b78fcca2dbf4a494007a7dd7d2088dec49e4b",
   "full_bytes": 3442,
   "lists_cut_to": 10,
   "cut_lists": {

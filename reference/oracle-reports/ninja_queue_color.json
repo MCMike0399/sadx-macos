@@ -1,6 +1,6 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "c03743077f1a3e7e9d4a6f249b926ab1fc9d41d4e107a8d3ce9b2ee66b22c62c",
+ "native_library_sha256": "7df9d2a9bbb00e406d89ddfd6603f402dab8ec5301085abbec5078c4e185c18b",
  "source_files": {
   "src/engine/ninja_queue_consumer.hpp": "077454a832be85748d3e9d3891a10d97b00912328f37b1c2b0a41fca6348b006",
   "src/engine/ninja_queue_consumer.cpp": "b5a6cb784a570507e9844cee6607d785a3522ce486b0a3a0ce23cb7d52d7d43a",
@@ -34,7 +34,7 @@
  "exception_flags_match": false,
  "limits": "Render-queue colour 402f40 (with its 77ff90 tail jump) against original instructions.\n\n402f40 (cdecl, pointer to four floats) copies the colour into 3ab9864 word by\nword, clamps each component to [-1, 1] with FLD/FCOMP against 7dcb10 (1.0) and\n7dcb0c (-1.0), then jumps to 77ff90(&3ab9864), which copies the four words into\n3d0f7f0. Cases: finite values around the clamp edges, signed zeros, infinities,\ndenormals, quiet and signalling NaNs (any number per case: nothing is computed,\nso no NaN-propagation rule applies), under the four masked x87 control words\nthe game uses. Compared: the eight stored words (bitwise), and EAX/ECX/EDX and\nthe x87 condition bits after the call against the values the source leaves\n(EAX = 3ab9864, ECX/EDX = the last two copied words, C3/C2/C0 = the last FCOMP).\nx87 exception flags are compared separately: Unicorn 2.1.4 raises neither IE\nfor a NaN FCOMP operand / SNaN FLD nor DE for a denormal FLD m32, which the\nnative model raises as the Intel SDM documents, so those cases differ in flags\nonly (verdict partial). Unmasked-exception control words are not exercised.\nThe corpus (CW, the input words, the prior 3ab9864 words) goes to\nninja_queue_color.cases.bin for the guest override-equivalence test.\n",
  "tracked_summary": {
-  "full_sha256": "929f4f23297e68a0c4403f9b51fd48281d7a3f5540fc1653a0a5abf67293caeb",
+  "full_sha256": "62d3fe11f03b5edf89f14b87a5a76a26c0416985dc929ab6a004e651fc6d3c5b",
   "full_bytes": 2681,
   "lists_cut_to": 10,
   "cut_lists": {}

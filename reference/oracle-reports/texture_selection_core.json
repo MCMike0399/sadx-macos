@@ -1,0 +1,36 @@
+{
+ "passed": true,
+ "cases": 3669,
+ "seed": 314159,
+ "mismatches": 0,
+ "first": [],
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "library_sha256": "febf3452fdfb6596dacdafb916c1fdb8c9669836ba96ca56698edb0bd97e2248",
+ "source_ranges": {
+  "0x403070-0x403089": "2cb881edbe2225f7f04293ebace1c03a0f4acdbb8fe9c0d5a9177e48a9e3bab5",
+  "0x77f3d0-0x77f3f0": "1a2bbb0c9d1040001078eb8ac028c3f263dedf77f02b73579bc089bb6308c2a2",
+  "0x77f440-0x77f467": "091cb2c9d8b1fb30329f07ff0d5eddb853018c196f906e85c6ea7bcc59abf214",
+  "0x78cdc0-0x78cf14": "2abc08ee12059d0cfa85a8c6008b246f5978a0a75fa445cce798fa29805463b5",
+  "0x78cf20-0x78cf73": "3373f5ed5c98aa2f75dfabc3ef84da975cef1f28b03abfcd22e5558f278af9d5"
+ },
+ "source_files_sha256": {
+  "src/engine/texture_selection_native.hpp": "70f16e203cc9733fc1cf11cab77608f47b0189e7525841dcfb42b115d89c7b49",
+  "src/engine/texture_selection_native.cpp": "48ffd34ae287ce947f8193d7ae4d352605383f2ba9ba4170f76707bc65e673ac",
+  "src/engine/texture_selection_internal.hpp": "9417bbd4372efdae2958b8a060c77074625aaf18fab3caacfc7a9ee238857389",
+  "tests/probes/native_texture_selection_core_probe.cpp": "1a9356d386aeab32483ef0e517992ddb60f14ff1ce3a1285420b43b6ce039ab1",
+  "tools/oracles/verify_original_texture_selection_core.py": "0426c5d896baef60d035be567f71fd37fe531e15a8b20360cfb73a792cbc58f6",
+  "tools/oracles/verify_original_ninja_texture_selection.py": "cb1e6bcdefa674c6cca37bc3e47d7e64e03b877570cb631266b226752aa6a04c"
+ },
+ "cases_sha256": "7f7f08d66d735297cb6e6e240e77a974e9baae2e2f17668cbec716f832cc48fa",
+ "limits": [
+  "Synthetic completed/unavailable device receipts, no physical GPU claim",
+  "Dirty palette paths stop at the original surface lock after revision store",
+  "Concrete native records; unchanged legacy 683-case judge separately covers missing facts"
+ ],
+ "tracked_summary": {
+  "full_sha256": "7e9d58256fa3faf2d2b35528019c9002153e2e1c489f7b4665f01666c4ddeb9e",
+  "full_bytes": 1884,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}

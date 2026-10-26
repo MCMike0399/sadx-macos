@@ -174,7 +174,20 @@
       "cases": 1000,
       "value_mismatches": 0,
       "flag_mismatches": 1,
-      "scope": "worker before/after factor proof; root final rerun pending"
+      "scope": "Root rerun of unchanged oracle"
     }
-  }
+  },
+  "tracked_reports": [
+    "ninja_texture_selection",
+    "texture_selection_core",
+    "texture_list_gate",
+    "object_draw",
+    "sprite_immediate",
+    "ninja_sprite_display",
+    "ninja_sprite_queue",
+    "ninja_queue_color",
+    "fov",
+    "late_sprite"
+  ],
+  "runtime_composition_review": "043fa85"
 }

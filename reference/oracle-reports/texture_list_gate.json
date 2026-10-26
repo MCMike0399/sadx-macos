@@ -1,0 +1,39 @@
+{
+ "passed": true,
+ "values_match": true,
+ "cases": 4256,
+ "directed_cases": 1256,
+ "random_cases": 3000,
+ "seed": 403250,
+ "outcomes": {
+  "1": 3811,
+  "0": 445
+ },
+ "mismatch_count": 0,
+ "mismatches": [],
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "source_ranges": {
+  "0x403250-0x40328d": "6df189d84533a30623a99b4e6c68bf5a4b5053abcfb8acf19899035bac7d7eb8"
+ },
+ "source_files_sha256": {
+  "src/engine/texture_list_gate.hpp": "5f2bf5f3af170b4225332da314078c066a3fbdb098ec37188540b2a699f59684",
+  "src/engine/texture_list_gate.cpp": "f066052be94a3c951928a194cb217d3816d06831ecb955575a543f780d4ccfe3",
+  "src/engine/native_texture_lifetime.hpp": "0e6883f0c6ca2457060a61a16daeec4e84a3f7e6e6206e5a0b3d894f0e7485c3",
+  "tests/probes/native_texture_list_gate_probe.cpp": "1010da1841e1af9e79ba6dd378e86f31feb7a19d424d469776125c4dc7e4045d",
+  "tools/oracles/verify_original_texture_list_gate.py": "0bd931d1bb9789fa71ad8efdd5a345181ed84df48dc1b2871475ba56827b7b2a"
+ },
+ "library_sha256": "8d07f88bfc4782e50959b44497d6ad0ff7f963a9d514568e9eae1e1056ad9177",
+ "cases_sha256": "eda2ee11778ba66cf309970f9455d50aeb5fcce4027bf3827155d4402a00da24",
+ "limits": [
+  "Compare the native typed List gate with every original isTextureNG instruction.\n\nConcrete imports only: entries.size() is the full validated source count and\narray, and first_filename_invalid represents exactly the first -1 filename.\nThe legacy queue judge retains responsibility for missing guest/fixture facts.\nNo callee interception, source substitutions, game execution or graphics claims.\n",
+  "Native inputs require validated complete imports; no raw guest pointers",
+  "Integer BOOL result and native List nonmutation compared; native CPU flags not compared",
+  "Original ABI, exact input read order and stack-only write trace checked for every case"
+ ],
+ "tracked_summary": {
+  "full_sha256": "d381eeb391a9703569cb5c24c4c4dcc44fef1947995fc54c6ad3040a4e7a790e",
+  "full_bytes": 1905,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}
