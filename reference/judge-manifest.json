@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "7ac09ea74caa1651a2ef885379b808ee24a6dad0",
-    "evidence": "reference/production-integration-20261026/render-primitives-judge-prep.json",
-    "evidence_sha256": "376848a708e261a5139beef0de9f189372d0df267da30716006a250120afcfbc",
-    "reason": "Register reviewed renderer component additions and append-only standalone target registrations; all original expected inputs preserved"
+    "base_commit": "7eaec8789cf6601038e5fc667bc5849863689a36",
+    "evidence": "reference/production-integration-20261026/model-binding-judge-prep.json",
+    "evidence_sha256": "e04358551c872ffff50d18b75b7a97ac9ba66262e24a12e8e678b41aef5627a9",
+    "reason": "Register original model judges and native binding unit additions without changing existing expectations"
   },
   "files": {
     "Makefile": "1f9ddbe18fc71a9be56d5cc42ef3a8c1fbef1e227844b2c6f35077d09520e772",
@@ -330,6 +330,7 @@
     "tests/fixtures/texture_list_gate_mutants.json": "78419c35b7356656fc78b29fc4a0ceaee8e74201738f26c10b91b9735100da9e",
     "tests/fixtures/texture_selection_core_mutants.json": "eeb6efa3485c4c91e3852d511ec0522293f923710b4ca0e106af9389f6f6def7",
     "tests/probes/audio_stop_latency.mm": "eac622fb816614f8cbb13686abd4917f818fd6ad015913555806877fa4fdc47f",
+    "tests/probes/basic_model_backend.hpp": "1cd770ae8bacd65b17185973fdc234a2c60d38764d5b2983041da5bbabbc441f",
     "tests/probes/game_view_initial_state_probe.hpp": "6c93980d864dc9ab7f56ee56260a3992ad5683d8992c1401893cf04ccc65b22a",
     "tests/probes/input_initial_state_probe.hpp": "9e93ad6c5ba55f7dfb853059ef1db1f9a971353acf4b600a374505e607a1cc40",
     "tests/probes/input_mod_constants_probe.hpp": "729788565862a6fadfb0496b004b516ec195de2ceaef262c9a677669b35e8305",
@@ -339,6 +340,7 @@
     "tests/probes/native_audio_playback_probe.cpp": "07462098addc47910387de7006facf841998169a06fcc7619abf5d8c6fbfcbd0",
     "tests/probes/native_audio_stream_probe.cpp": "de34143de74dda9e031c70b46e546f2e1efb1ac1ed7796006e2562b7bea4ef11",
     "tests/probes/native_axis_projection_probe.cpp": "513eb0821a25f5db94dee9626e8bf4352113c32e47dcc1e0c49ed763f646bf16",
+    "tests/probes/native_basic_model_probe.cpp": "1180a9941fe8695cbd027c8c234341d0fef992824a539949a61b6769267c58fd",
     "tests/probes/native_camera_view_angle_probe.cpp": "929b87622ad41072d5b950a2ffe2d879469054658b6c3061123d3a1fbcae9bc9",
     "tests/probes/native_caption_frame_reference_probe.cpp": "a08440202ffce3fc0d2ef2c2e5b687926b3e0b40c056fb2a4afba2b4668478b7",
     "tests/probes/native_cd_drive_scan_probe.cpp": "f25716483e1075efad9128ae7a0134b3aed9d8ab35bb6164a8b6f716dbebf2ce",
@@ -603,7 +605,7 @@
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",
     "tests/python/test_voice_publication.py": "5c00051d9b3de640f64e224dda4d810cdd7d26acafd91d7b1dc44e9786a734f3",
-    "tests/unit/manifest.tsv": "fa8dd27ee0f610dce66fd05e55b3c535920d2c1283ba0a2ba74eb76f9c469dc5",
+    "tests/unit/manifest.tsv": "8fa869bbcc0ccaa70bd4534bd1578f3214cc8db856315a4d282fe1869a50c4f2",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",
@@ -652,6 +654,7 @@
     "tools/lib/extract.py": "d2c2cb1479003401ba1faf0211281a6c6d35949c2bd27e55acc48f7cc7825bd8",
     "tools/lib/import_audio.py": "91f0db9f658c306a4a5637b4180c4e0d6033da72d927f1ba59c18965e5a49e30",
     "tools/lib/pe_image.py": "94694dc5fb38e459d26b35c25a7cdb7e3fad7128e1178363340606bb9db299f2",
+    "tools/oracles/check_basic_model_packet.py": "ebed363eb2c7ba7e20097d24237223b82d9c6e20d609940519908acbd57214cc",
     "tools/oracles/check_normal_uv_strip_packet.py": "367792beba15da9ef0b9a28ac10b64e7507a2bcf6876a732d65f43260a99d66c",
     "tools/oracles/check_object_draw_packet.py": "aa027623609537e09e49cce811f6385085c73ffd37a4399f9de4d0886d5f868e",
     "tools/oracles/freeze_frame_control.py": "d2363d9722a647c00e02805b6b93efdb1b222c165e237d0992034f4969418e88",
@@ -666,6 +669,7 @@
     "tools/oracles/verify_original_audio_playback.py": "ce9f765ee69cc00725513b672a0a673bc255acfce122a8ec7542cc45551725ce",
     "tools/oracles/verify_original_audio_stream.py": "0d043ed86c718edc6d95b438e23597c2ebcce526623a3d105fcc8f5bae6ecb5e",
     "tools/oracles/verify_original_axis_projection.py": "aff9bd306ab2fb981f654d62afda2967aa5fcc92f1ac32141a0eba51523b8d47",
+    "tools/oracles/verify_original_basic_model.py": "d4d92a0efaf206c07a4113cdc1dcd17b78ffd9236f97bb846938fe2a72f290e0",
     "tools/oracles/verify_original_camera_view_angle.py": "a48d35d9e2b9c70269e0de03ffdada57df250f3f722b5ae643cf908fce08601e",
     "tools/oracles/verify_original_caption_frame_reference.py": "a58a50d51ce9de14cd2c115d026ade5f9c7bb47e2b113a5ccce68c78bbb37e21",
     "tools/oracles/verify_original_cd_drive_scan.py": "e16e337028ca72ec10fa54378bda865dec57f532ca1c0eb313ffeb35a4f3d939",
