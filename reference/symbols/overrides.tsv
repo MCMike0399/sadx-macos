@@ -176,3 +176,4 @@ SONIC	0x5127f0	function	PositionCharSelActor				ev_69eeca19ec3ffb985ce68a59b1a4a
 SONIC	0x512af0	function	InitializeCharSelPreview				ev_4ca564fd4c7b9ddeee584b8b149e3afe4fb53b27e4bee4754283363734cffd77	Actual calloc56, palette2, camera and source preview callbacks
 SONIC	0x512a70	function	ReleaseCharSelActors				tools/oracles/verify_original_selection_preview.py complete original entry	All nonnull declared lists release; no first-entry guard
 SONIC	0x3b11184	global	CharacterSelectSavedFrameIncrement	int32		4	tools/oracles/verify_original_character_select_menu.py source511e90/511570	Distinct BSS saved frame owner; never alias pending ticks or secondary loop count
+SONIC	0x389d458	data	TextureFormatResults	std::uint32_t[4]		16	PE-SHA256:814dd7b9784d57c15b9c2972e9b4fd6cf7e164f8162a934bdb2452a413dab1f7	Pinned source bytes are 1,0,1,0; 78cf69 reads the four-entry table indexed by pixel format bits 27..28.

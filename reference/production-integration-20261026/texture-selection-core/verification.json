@@ -1,0 +1,296 @@
+{
+  "base_commit": "ca144825d81605947a6078e0f842e49c0c126ff3",
+  "scope": "Fresh N3b texture queued/current selection and cache binding; palette prefix through surface lock",
+  "reports": {
+    "texture_selection_baseline": {
+      "cases": 683,
+      "passed": true,
+      "mismatches": [],
+      "case_sha256": "6692319c20a036952dbebb8e1ab0bc19cd733361d4022a513aec3339ae250ce0",
+      "library_sha256": "b84d6b94b8fbef286e69d10d8915854423e10c7c16e19ce4c1d947cf4edfd287",
+      "report_sha256": "057e796f2b3d06dcfb9ec2e8ab3bae6dfea2f3adbf0e606f01cc4146e7a6e09d"
+    },
+    "ninja_texture_selection": {
+      "cases": 683,
+      "passed": true,
+      "mismatches": [],
+      "case_sha256": "6692319c20a036952dbebb8e1ab0bc19cd733361d4022a513aec3339ae250ce0",
+      "library_sha256": "b2c2836ce0a02b852ba129f14d89b99a9de2b53d35ef791c8342505add350747",
+      "report_sha256": "9136e0805e9d051af9cff09502e3bd1f5c5088da0e3c5756b2c089528d4bb26d"
+    },
+    "texture_selection_core": {
+      "cases": 3669,
+      "passed": true,
+      "mismatches": 0,
+      "seed": 314159,
+      "cases_sha256": "7f7f08d66d735297cb6e6e240e77a974e9baae2e2f17668cbec716f832cc48fa",
+      "library_sha256": "f839a2ecb4f2b1dd6a4d4b8d2de3658561d3572f791c1ea1fa64cb792a40c633",
+      "source_ranges": {
+        "0x403070-0x403089": "2cb881edbe2225f7f04293ebace1c03a0f4acdbb8fe9c0d5a9177e48a9e3bab5",
+        "0x77f3d0-0x77f3f0": "1a2bbb0c9d1040001078eb8ac028c3f263dedf77f02b73579bc089bb6308c2a2",
+        "0x77f440-0x77f467": "091cb2c9d8b1fb30329f07ff0d5eddb853018c196f906e85c6ea7bcc59abf214",
+        "0x78cdc0-0x78cf14": "2abc08ee12059d0cfa85a8c6008b246f5978a0a75fa445cce798fa29805463b5",
+        "0x78cf20-0x78cf73": "3373f5ed5c98aa2f75dfabc3ef84da975cef1f28b03abfcd22e5558f278af9d5"
+      },
+      "report_sha256": "ad201da16d6624cc8fcf543b8dcf961ac3ad65d6ebff71aaa8a862d0869d4d5a"
+    },
+    "texture_selection_core_holdout": {
+      "cases": 3669,
+      "passed": true,
+      "mismatches": 0,
+      "seed": 271828,
+      "cases_sha256": "ed01a1bc6baf6698ec8cd5323f1d623ae527166eb658582086b831428e3df296",
+      "library_sha256": "f839a2ecb4f2b1dd6a4d4b8d2de3658561d3572f791c1ea1fa64cb792a40c633",
+      "source_ranges": {
+        "0x403070-0x403089": "2cb881edbe2225f7f04293ebace1c03a0f4acdbb8fe9c0d5a9177e48a9e3bab5",
+        "0x77f3d0-0x77f3f0": "1a2bbb0c9d1040001078eb8ac028c3f263dedf77f02b73579bc089bb6308c2a2",
+        "0x77f440-0x77f467": "091cb2c9d8b1fb30329f07ff0d5eddb853018c196f906e85c6ea7bcc59abf214",
+        "0x78cdc0-0x78cf14": "2abc08ee12059d0cfa85a8c6008b246f5978a0a75fa445cce798fa29805463b5",
+        "0x78cf20-0x78cf73": "3373f5ed5c98aa2f75dfabc3ef84da975cef1f28b03abfcd22e5558f278af9d5"
+      },
+      "report_sha256": "a9e6115905fb3e238b78a869b22111133e2a6969d5f0bc9978aca75b10af1236"
+    }
+  },
+  "legacy_judge_unchanged": {
+    "tests/probes/native_ninja_texture_selection_probe.cpp": {
+      "sha256": "d70a25c1b74b7b87ff96c73290a6ecaedcef6b8f2d1a9f02419da9ea26f28905",
+      "unchanged": true
+    },
+    "tools/oracles/verify_original_ninja_texture_selection.py": {
+      "sha256": "cb1e6bcdefa674c6cca37bc3e47d7e64e03b877570cb631266b226752aa6a04c",
+      "unchanged": true
+    },
+    "src/engine/ninja_texture_selection.hpp": {
+      "sha256": "15c689ee134df1e30584f005ab5aa84e2141f6c7f0d6e049f7442fe877b2a124",
+      "unchanged": true
+    },
+    "tests/unit/ninja_texture_selection.cpp": {
+      "sha256": "cf847b37e84fcda6add20015580b73521b449b2deaec60d887f491eab84f6c71",
+      "unchanged": true
+    }
+  },
+  "compiled_implementation_sha256": {
+    "src/engine/texture_selection_native.hpp": "70f16e203cc9733fc1cf11cab77608f47b0189e7525841dcfb42b115d89c7b49",
+    "src/engine/texture_selection_native.cpp": "48ffd34ae287ce947f8193d7ae4d352605383f2ba9ba4170f76707bc65e673ac",
+    "src/engine/texture_selection_internal.hpp": "9417bbd4372efdae2958b8a060c77074625aaf18fab3caacfc7a9ee238857389",
+    "src/guest/texture_selection_reference.cpp": "3cd999e216ba0244bc1febdb456a896d7489e0c49ac0d2072166d1522286fa5d",
+    "tests/probes/native_texture_selection_core_probe.cpp": "1a9356d386aeab32483ef0e517992ddb60f14ff1ce3a1285420b43b6ce039ab1",
+    "tools/oracles/verify_original_texture_selection_core.py": "0426c5d896baef60d035be567f71fd37fe531e15a8b20360cfb73a792cbc58f6",
+    "tests/unit/texture_selection_core.cpp": "35c8f71db643c2bed2f2380d2a2b1c32fe2a8c519d34de4a7bb827a15f03e21f",
+    "tests/fixtures/texture_selection_core_mutants.json": "eeb6efa3485c4c91e3852d511ec0522293f923710b4ca0e106af9389f6f6def7"
+  },
+  "mutants": [
+    {
+      "name": "palette_format_guard",
+      "judge": "legacy",
+      "compile_exit": 0,
+      "judge_exit": 1,
+      "cases": 683,
+      "mismatches": 30,
+      "caught": true
+    },
+    {
+      "name": "palette_bank_guard",
+      "judge": "legacy",
+      "compile_exit": 0,
+      "judge_exit": 1,
+      "cases": 683,
+      "mismatches": 25,
+      "caught": true
+    },
+    {
+      "name": "version_store",
+      "judge": "legacy",
+      "compile_exit": 0,
+      "judge_exit": 1,
+      "cases": 683,
+      "mismatches": 23,
+      "caught": true
+    },
+    {
+      "name": "palette_equal_cache",
+      "judge": "legacy",
+      "compile_exit": 0,
+      "judge_exit": 1,
+      "cases": 683,
+      "mismatches": 24,
+      "caught": true
+    },
+    {
+      "name": "direct_equal_cache",
+      "judge": "legacy",
+      "compile_exit": 0,
+      "judge_exit": 1,
+      "cases": 683,
+      "mismatches": 30,
+      "caught": true
+    },
+    {
+      "name": "null_surface_guard",
+      "judge": "legacy",
+      "compile_exit": 0,
+      "judge_exit": 1,
+      "cases": 683,
+      "mismatches": 30,
+      "caught": true
+    },
+    {
+      "name": "requested_store",
+      "judge": "legacy",
+      "compile_exit": 0,
+      "judge_exit": 1,
+      "cases": 683,
+      "mismatches": 30,
+      "caught": true
+    },
+    {
+      "name": "current_store",
+      "judge": "legacy",
+      "compile_exit": 0,
+      "judge_exit": 1,
+      "cases": 683,
+      "mismatches": 30,
+      "caught": true
+    },
+    {
+      "name": "index_stride",
+      "judge": "legacy",
+      "compile_exit": 0,
+      "judge_exit": 1,
+      "cases": 683,
+      "mismatches": 3,
+      "caught": true
+    },
+    {
+      "name": "null_index_result",
+      "judge": "legacy",
+      "compile_exit": 0,
+      "judge_exit": 1,
+      "cases": 683,
+      "mismatches": 9,
+      "caught": true
+    },
+    {
+      "name": "list_result",
+      "judge": "legacy",
+      "compile_exit": 0,
+      "judge_exit": 1,
+      "cases": 683,
+      "mismatches": 30,
+      "caught": true
+    },
+    {
+      "name": "render_lighting_state",
+      "judge": "legacy",
+      "compile_exit": 0,
+      "judge_exit": 1,
+      "cases": 683,
+      "mismatches": 6,
+      "caught": true
+    },
+    {
+      "name": "render_lighting_value",
+      "judge": "legacy",
+      "compile_exit": 0,
+      "judge_exit": 1,
+      "cases": 683,
+      "mismatches": 6,
+      "caught": true
+    },
+    {
+      "name": "native_queued_index",
+      "judge": "native",
+      "compile_exit": 0,
+      "judge_exit": 1,
+      "cases": 3669,
+      "mismatches": 1229,
+      "caught": true
+    },
+    {
+      "name": "native_active_store",
+      "judge": "native",
+      "compile_exit": 0,
+      "judge_exit": 1,
+      "cases": 3669,
+      "mismatches": 247,
+      "caught": true
+    },
+    {
+      "name": "native_result_table",
+      "judge": "native",
+      "compile_exit": 0,
+      "judge_exit": 1,
+      "cases": 3669,
+      "mismatches": 799,
+      "caught": true
+    },
+    {
+      "name": "queued_list_store",
+      "judge": "native",
+      "compile_exit": 0,
+      "judge_exit": 1,
+      "cases": 3669,
+      "mismatches": 725,
+      "caught": true
+    },
+    {
+      "name": "queued_stores_after_call",
+      "judge": "native",
+      "compile_exit": 0,
+      "judge_exit": 1,
+      "cases": 3669,
+      "mismatches": 389,
+      "caught": true
+    },
+    {
+      "name": "native_cache_before_callback",
+      "judge": "native",
+      "compile_exit": 0,
+      "judge_exit": 1,
+      "cases": 3669,
+      "mismatches": 565,
+      "caught": true
+    },
+    {
+      "name": "native_wrapped_index",
+      "judge": "native",
+      "compile_exit": 0,
+      "judge_exit": 1,
+      "cases": 3669,
+      "mismatches": 411,
+      "caught": true
+    }
+  ],
+  "profile": {
+    "patches": 618,
+    "active_patches": 121,
+    "active_unhandled_patches": 79,
+    "reports": 4,
+    "declared_exe_ranges": 10,
+    "unhandled_overlaps": 0,
+    "handled_overlaps": 0,
+    "undetermined_overlaps": 0,
+    "reports_without_addressed_ranges": [
+      "ninja_texture_selection.json",
+      "texture_selection_baseline.json"
+    ]
+  },
+  "checks": {
+    "readability": "Readability: 450 files, {'hex_literals': 3260, 'address_identifiers': 1467, 'address_calls': 62, 'goto': 0, 'address_labels': 0, 'long_lines': 1186, 'multi_statement_lines': 1818, 'large_decimal_literals': 233, 'emulator_arithmetic': 3322, 'address_comments': 1059}, 0 regressions",
+    "layers": "12 layers, 0 known exceptions, 0 violations",
+    "owners": "159614 owned bytes, 0 with more than one owner struct",
+    "provenance": "Provenance: {'FUNCTION': 444, 'PATCH': 2, 'GLOBAL': 47, 'STUB': 48, 'DATA': 2}, 163568 legacy/annotated byte identities, 0 errors",
+    "units": {
+      "texture_selection_core": "pass",
+      "unchanged_ninja_texture_selection": "pass",
+      "flags": "C++17 O2 ARM64 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math"
+    }
+  },
+  "limits": [
+    "No full gate or runtime integration: owned by Root",
+    "No physical D3D/Metal binding or native CharacterSelect image claim",
+    "Palette lock/upload remains explicit unsupported boundary; revised version already published",
+    "Makefile reference linkage requires separate evidenced judge-prep; patch proposed, not applied",
+    "Legacy reference DTO header retained byte-for-byte to preserve unchanged probe include/ABI"
+  ]
+}

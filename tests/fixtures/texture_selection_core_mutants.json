@@ -1,0 +1,142 @@
+[
+  {
+    "name": "palette_format_guard",
+    "judge": "legacy",
+    "path": "src/engine/texture_selection_internal.hpp",
+    "old": "format != kIndexedPixelFormat",
+    "new": "format == kIndexedPixelFormat"
+  },
+  {
+    "name": "palette_bank_guard",
+    "judge": "legacy",
+    "path": "src/engine/texture_selection_internal.hpp",
+    "old": "bank != kNoPaletteBank",
+    "new": "bank == kNoPaletteBank"
+  },
+  {
+    "name": "version_store",
+    "judge": "legacy",
+    "path": "src/engine/texture_selection_internal.hpp",
+    "old": "textures.store_palette_version(memory, revision);",
+    "new": "(void)revision;"
+  },
+  {
+    "name": "palette_equal_cache",
+    "judge": "legacy",
+    "path": "src/engine/texture_selection_internal.hpp",
+    "old": "cached_global_index(BindingPath::Palette) != global_index",
+    "new": "cached_global_index(BindingPath::Palette) == global_index"
+  },
+  {
+    "name": "direct_equal_cache",
+    "judge": "legacy",
+    "path": "src/engine/texture_selection_internal.hpp",
+    "old": "cached_global_index(BindingPath::Direct) != global_index",
+    "new": "cached_global_index(BindingPath::Direct) == global_index"
+  },
+  {
+    "name": "null_surface_guard",
+    "judge": "legacy",
+    "path": "src/engine/texture_selection_internal.hpp",
+    "old": "if (!textures.is_null(surface))",
+    "new": "if (textures.is_null(surface))"
+  },
+  {
+    "name": "requested_store",
+    "judge": "legacy",
+    "path": "src/engine/texture_selection_internal.hpp",
+    "old": "textures.store_requested_memory(memory);",
+    "new": "(void)memory;"
+  },
+  {
+    "name": "current_store",
+    "judge": "legacy",
+    "path": "src/engine/texture_selection_internal.hpp",
+    "old": "textures.store_current_list(list);",
+    "new": "(void)list;"
+  },
+  {
+    "name": "index_stride",
+    "judge": "legacy",
+    "path": "src/engine/texture_selection_internal.hpp",
+    "old": "index * kTextureNameSourceSize",
+    "new": "index * 4U"
+  },
+  {
+    "name": "null_index_result",
+    "judge": "legacy",
+    "path": "src/engine/texture_selection_internal.hpp",
+    "old": "return kNoPaletteBank;",
+    "new": "return 0;"
+  },
+  {
+    "name": "list_result",
+    "judge": "legacy",
+    "path": "src/engine/texture_selection_internal.hpp",
+    "old": "    return 1;",
+    "new": "    return 0;"
+  },
+  {
+    "name": "render_lighting_state",
+    "judge": "legacy",
+    "path": "src/engine/texture_selection_internal.hpp",
+    "old": "kLighting = 137",
+    "new": "kLighting = 138"
+  },
+  {
+    "name": "render_lighting_value",
+    "judge": "legacy",
+    "path": "src/engine/texture_selection_internal.hpp",
+    "old": "values{{kCullNone, 0, 1}}",
+    "new": "values{{kCullNone, 1, 1}}"
+  },
+  {
+    "name": "native_queued_index",
+    "judge": "native",
+    "path": "src/engine/texture_selection_native.cpp",
+    "old": "queued_index = 0;",
+    "new": "queued_index = 1;"
+  },
+  {
+    "name": "native_active_store",
+    "judge": "native",
+    "path": "src/engine/texture_selection_native.cpp",
+    "old": "state.active_memory = memory;",
+    "new": "(void)memory;"
+  },
+  {
+    "name": "native_result_table",
+    "judge": "native",
+    "path": "src/engine/texture_selection_native.cpp",
+    "old": "values{{1, 0, 1, 0}}",
+    "new": "values{{0, 1, 0, 1}}"
+  },
+  {
+    "name": "queued_list_store",
+    "judge": "native",
+    "path": "src/engine/texture_selection_native.cpp",
+    "old": "queued_list = list;",
+    "new": "queued_list = nullptr;"
+  },
+  {
+    "name": "queued_stores_after_call",
+    "judge": "native",
+    "path": "src/engine/texture_selection_native.cpp",
+    "old": "    queued_list = list;\n    queued_index = 0;\n    return select_list(list, state, bind_surface);",
+    "new": "    const auto result = select_list(list, state, bind_surface);\n    queued_list = list;\n    queued_index = 0;\n    return result;"
+  },
+  {
+    "name": "native_cache_before_callback",
+    "judge": "native",
+    "path": "src/engine/texture_selection_native.cpp",
+    "old": "        bind_surface(surface);\n        // The device callback completes before these stores, ID first, then active memory.\n        state.cached_global_index = static_cast<std::int32_t>(global_index);",
+    "new": "        state.cached_global_index = static_cast<std::int32_t>(global_index);\n        bind_surface(surface);"
+  },
+  {
+    "name": "native_wrapped_index",
+    "judge": "native",
+    "path": "src/engine/texture_selection_internal.hpp",
+    "old": "const auto byte_offset = index * kTextureNameSourceSize;",
+    "new": "const auto byte_offset = (index & 0x3fffffffU) ? index : 1U;"
+  }
+]

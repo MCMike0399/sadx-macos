@@ -1,9 +1,10 @@
 {
   "change": {
-    "base_commit": "4d055a202653de324e1f5575e822cfa3040e2217",
-    "evidence": "reference/production-integration-20261026/texture-selection-link-prep.json",
-    "evidence_sha256": "ff121f80b1064e6820cd8db28299b1250b648acfc4b73ab314bcdb37b5c3de80",
-    "reason": "Prepare unchanged texture-selection and sprite-display reference targets for fact-adapter relocation; no expected inputs, probes, recipes or tolerance changes"
+    "base_commit": "02c5f39f680e24bf7bb9f48bfd1dd465019f89a7",
+    "evidence": "reference/production-integration-20261026/texture-selection-core/verification.json",
+    "evidence_sha256": "4826b2bcdda8f9bac1d6aeb662b18c287b766901638d664fc0cb8db1b6d94d64",
+    "mode": "additions-only",
+    "reason": "Register freshly recovered native texture-selection probe, unit and oracle without changing the legacy judge"
   },
   "files": {
     "Makefile": "7b76fc55b035daa9afdf94437dafebc10946ab1b9ab5c647afe3c0c387e0448e",
@@ -321,6 +322,7 @@
     "tests/fixtures/input_keyboard_goldens.hpp": "0a9f25e5a0d336a1f4381af39257fdc6f7403f43ca2aef743345284fb1c18fda",
     "tests/fixtures/ninja_sprite_test_fixture.hpp": "1b4fa2a0ac6270d896f9e54c297829bdf3d43c378d195cbe34d0d6e87fd2b24e",
     "tests/fixtures/path_probe_data.hpp": "3f8803b9afa695f6f1ca411fb7b58ae66e60609b2af2df3dd74463c3b9dadda0",
+    "tests/fixtures/texture_selection_core_mutants.json": "eeb6efa3485c4c91e3852d511ec0522293f923710b4ca0e106af9389f6f6def7",
     "tests/probes/audio_stop_latency.mm": "eac622fb816614f8cbb13686abd4917f818fd6ad015913555806877fa4fdc47f",
     "tests/probes/game_view_initial_state_probe.hpp": "6c93980d864dc9ab7f56ee56260a3992ad5683d8992c1401893cf04ccc65b22a",
     "tests/probes/input_initial_state_probe.hpp": "9e93ad6c5ba55f7dfb853059ef1db1f9a971353acf4b600a374505e607a1cc40",
@@ -514,6 +516,7 @@
     "tests/probes/native_task_display_probe.cpp": "e5d3b41f8cd950c5363e43ba9df7a8a42129e9f95119926572dc6ec9040ed74c",
     "tests/probes/native_task_lifecycle_probe.cpp": "0c115f0336fdc78c83daaf786bc56b83ced651eafeedf17cc0de31b1f1f831b9",
     "tests/probes/native_task_work_probe.cpp": "3adf1caeaba1197e8ec84c920abcf1a59d8056db0bc45321d04ae619ba11c18b",
+    "tests/probes/native_texture_selection_core_probe.cpp": "1a9356d386aeab32483ef0e517992ddb60f14ff1ce3a1285420b43b6ce039ab1",
     "tests/probes/native_title_background_pipeline_probe.cpp": "e9bda27cf2e3aa3b7d5c1db444b12d0ada877bb53c3a2460ea96210a30d6c79c",
     "tests/probes/native_title_background_probe.cpp": "4376ebadc9e78aa05872e6d3253d3b95397a82f16aeddad1ed4b566a354cfb88",
     "tests/probes/native_title_dialog_probe.cpp": "4f6297ef353034285018501c885db54aa66caf9a00e1fe19141b82d41792f64b",
@@ -585,7 +588,7 @@
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",
     "tests/python/test_voice_publication.py": "5c00051d9b3de640f64e224dda4d810cdd7d26acafd91d7b1dc44e9786a734f3",
-    "tests/unit/manifest.tsv": "f86ee8a3ad917ffd0895d3aba14e4ac6d25533629d6a26b1af99b4f56b210c9a",
+    "tests/unit/manifest.tsv": "193dfa504545489c98d84e7867a00b68d44bd3dbff4c393e4462e7066c058ff6",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",
@@ -842,6 +845,7 @@
     "tools/oracles/verify_original_task_display.py": "d247cf8cd0f65ddb68f74597c66b809158cee314d21de8ad2e54220c26386f99",
     "tools/oracles/verify_original_task_lifecycle.py": "010c3770e264bd05a26b34fa2d20381e79aa51c492c062ff01755ee3cf20bf93",
     "tools/oracles/verify_original_task_work.py": "b1057b2ff375b54bb21848f5a557f5c1ff447a70fef6bfde04ae292435c36329",
+    "tools/oracles/verify_original_texture_selection_core.py": "0426c5d896baef60d035be567f71fd37fe531e15a8b20360cfb73a792cbc58f6",
     "tools/oracles/verify_original_title_background.py": "dc6df15a93f827846b8015454033afb3f06fe62cbef1a8bf55cc6554200e5b14",
     "tools/oracles/verify_original_title_background_pipeline.py": "75efd90c59ecd81e5a649b258c46293914fe4f49a77f83c07a704746caf133f4",
     "tools/oracles/verify_original_title_dialog.py": "f763a0ec23086c4dba1c20803ddfa8555849805bcc57d11e39f08cec0f639329",
