@@ -467,3 +467,15 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Root has not trusted or integrated recovered behavior. Require exact source/oracle evidence, mutants, holdout and fresh STYLE review before each packet is consumed. No Ghidra during a gate.
 * Native make play-native still reaches menus/save paths and stops at native_basic_object_renderer, frame 1382. Next dependency is real queued/current texture selection and cache binding, then shared graph traversal and model drawing.
 * Last full gate remains tooling-integration at b833ed4, rc 0; no gameplay, CharacterSelect completion or 63 FPS claim. Continue automatically when the active recovery tasks return; no push.
+
+### 2026-10-26 — Native shared object/texture composition at the real model boundary (track J/S, gate rc 0)
+
+* Approved texture core 3878f33, typed gate and object traversal now share Display's actual owners and Session's one mutable ObjectState. Root code is frozen in 940dca3; the normal native route reaches native_basic_model_renderer at frame 1382.
+* Source-only archive builds without original EXE/DLLs or prebuilt game objects and reaches the same model boundary; its image is byte-exact to Main. Both still show the outgoing title fade, not CharacterSelect actors.
+* Root preserves strict 683 legacy, 3669 development/holdout texture cases, 4256/4096 gate cases and 2918/5918 object cases. Four binding mutants fail assertions; object mutants remain 18 oracle plus one alias-unit detection. Downstream sprite/queue/color/FOV partials remain partial.
+* A context review found the SpriteImmediate caller is 78d140, not 77f440. The first combined gate was stopped with actual rc 2 before recording green. Correction cb86c98 preserves requested memory and returns cache format; 3408 development and 5408 holdout cases match, and five mutants fail.
+* Fresh correction review ced9052 approved; corrected source-only archive also builds and reaches the identical frame/image. Current source/report commit is 1f13f69. No old oracle, expected input or tolerance changed.
+* Combined gate at 1f13f69 exited 2: two archival replay checks used mutable build paths. The no-display windowed smoke also waited and was terminated; no green gate was recorded. The separate corpus judge correction preserves all expected hashes.
+* Combined gate at 04c40ae now exits 0: 262 native programs, 386 Python tests with one existing filesystem skip, R1 through R4, three native journeys and 16 startup comparisons. Record: reference/production-integration-20261026/object-texture-integration-gate.json; STATUS generated.
+* Ten fresh strip, buffer and CorrectMaterial dossiers are retained on packet/normal-uv-strip at 5eb554c; Ghidra closed before the gate. The next reached call is still njDrawModel 77ef70. Independent strip and model packets plus Root material correction are under verification, not runtime claims.
+* Default/alternate object rotation, late queue and real model rendering remain named loud seams. Native gameplay, full N3b, controller requalification and 63 FPS remain unverified. No push.
