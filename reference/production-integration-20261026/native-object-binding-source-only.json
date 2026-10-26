@@ -1,0 +1,41 @@
+{
+  "commit": "940dca3",
+  "source_archive": true,
+  "original_game_inputs_present": false,
+  "prebuilt_game_objects_present": false,
+  "reused_platform_dependency": "Pinned native SDL/libusb build only; unchanged dependency-builder source hash verified.",
+  "dependency_builder_sha256": "a1709c569d4b4cc255f56e19a0d5717e87cfcb9fab89361f6c871478de65db50",
+  "dependency_library_sha256": "98d32eb9ac4c8784c418f70fa33f7f58c1360417b749800bc599d84857b76d6a",
+  "build_command": "make -j10 -o build/native-controller-deps/include/SDL3/SDL.h build/sadx-native",
+  "limits": [
+    "The archived game directory contains only tracked documentation, no EXE/DLL/assets.",
+    "Reuses platform controller dependency, not a game/archive object.",
+    "Imported assets are supplied separately only for runtime qualification."
+  ],
+  "build_exit_status": 0,
+  "app_exit_status": 1,
+  "command": [
+    "/Users/burbujamc/Developer/sadx-macos/build/source-only-native-940dca3/build/sadx-native",
+    "--assets",
+    "/Users/burbujamc/Developer/sadx-macos/game/imported",
+    "--offscreen",
+    "--paced",
+    "--exit-after",
+    "1500",
+    "--save-directory",
+    "/Users/burbujamc/Developer/sadx-macos/build/source-only-native-940dca3/qualification/savedata",
+    "--key-events",
+    "500:13:down,501:13:up,750:13:down,751:13:up,900:38:down,901:38:up,950:13:down,951:13:up,1350:13:down,1351:13:up",
+    "--capture-directory",
+    "/Users/burbujamc/Developer/sadx-macos/build/source-only-native-940dca3/qualification/captures",
+    "--capture-at",
+    "1300,1380,1381,1382,1383,1390"
+  ],
+  "frame": 1382,
+  "boundary": "native_basic_model_renderer",
+  "native_app_sha256": "16477fea1e2f9efeee64bbf2f674eaac39f38455b6b023a960161b4566702109",
+  "state_sha256": "10c8ce3e1b1d07e47c38e370a232eb1aad5ab9c3de8fa59d0bfc53f32ccb8981",
+  "image_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+  "game_objects_built_from_source": true,
+  "isolated_frontier_matches_main_image_bytes": true
+}
