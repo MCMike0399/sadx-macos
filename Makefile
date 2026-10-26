@@ -420,3 +420,8 @@ build/native-load-selected-save-probe.dylib: tests/probes/native_load_selected_s
 # Save writer filesystem qualification links the maintained backend directly.
 build/save-write-test: tests/unit/save_write.cpp src/platform/mac/mac_save_writer.cpp build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/save_write.cpp src/platform/mac/mac_save_writer.cpp build/libsadx-core.a -o $@
+
+build/object-draw-test: tests/unit/object_draw.cpp tests/probes/object_draw_compat.cpp tests/probes/object_draw_compat.hpp build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -include tests/probes/object_draw_compat.hpp $< tests/probes/object_draw_compat.cpp build/libsadx-core.a -o $@
+build/native-object-draw-probe.dylib: tests/probes/native_object_draw_probe.cpp tests/probes/object_draw_compat.cpp tests/probes/object_draw_compat.hpp build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) -include tests/probes/object_draw_compat.hpp $< tests/probes/object_draw_compat.cpp build/libsadx-core.a -o $@

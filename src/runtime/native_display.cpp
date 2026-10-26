@@ -47,7 +47,8 @@ Display::Display(const std::filesystem::path &directory, frame::ModeState &mode,
     set_camera();
     output_ = std::make_unique<LogoRenderer>(directory, device_state_, frame_, view_.depth,
                                            arithmetic_, sse_, sse_reciprocal_by_division,
-                                           texture_state());
+                                           texture_state(), texture_selection_state(),
+                                           queued_texture_list_, queued_texture_index_);
     auto owners = queue_owners();
     queue::initialize(owners, queue_services(), arithmetic_);
 }
@@ -115,6 +116,7 @@ void Display::submit_sprite_quad(const sprite::Quad &quad) {
                                          sse_reciprocal_by_division);
         },
         [this](const std::array<sprite::ScreenVertex, 4> &vertices) {
+            output_->snapshot_bound_texture();
             auto draw = device_state_;
             draw.primitive_type = 5;
             draw.primitive_count = 2;
@@ -135,7 +137,9 @@ void Display::submit_sprite_quad(const sprite::Quad &quad) {
 }
 sprite::ImmediateServices Display::sprite_services() {
     return {
-        [this](const sprite::TextureList &textures) { current_texture_list_ = &textures; },
+        [this](const sprite::TextureList &textures) {
+            output_->select_direct_texture_list(textures);
+        },
         [this] { coordinates_->push_unit_frame(); },
         [this](std::int32_t angle) {
             coordinates_->rotate_z(coordinates_->current_matrix(), angle, arithmetic_);
@@ -152,15 +156,7 @@ sprite::ImmediateServices Display::sprite_services() {
         [this](bool alpha) { sprite::begin_quad(alpha, device_state_); },
         [this](std::uint32_t color) { hud_color_ = color; },
         [this](std::int16_t index) {
-            if (!current_texture_list_ || index < 0 ||
-                static_cast<std::size_t>(index) >= current_texture_list_->entries.size())
-                throw std::runtime_error("native sprite texture is unavailable");
-            auto *memory = current_texture_list_->entries.at(static_cast<std::size_t>(index));
-            if (!memory || !memory->surface || !memory->surface->texture)
-                throw std::runtime_error("native sprite texture has no resident surface");
-            cached_texture_global_index_ = memory->global_index;
-            active_texture_memory_ = memory;
-            device_state_.texture = memory->surface->texture;
+            output_->select_texture_index(static_cast<std::uint32_t>(index));
         },
         [this](const sprite::Quad &quad) { submit_sprite_quad(quad); },
         [this] {
@@ -275,9 +271,13 @@ texture_lifetime::State Display::texture_state() {
     return {texture_pool_, cached_texture_global_index_, active_texture_memory_,
             current_texture_list_, temporary_texture_info_};
 }
+texture_selection::State Display::texture_selection_state() {
+    return {current_texture_list_, requested_texture_memory_, cached_texture_global_index_,
+            active_texture_memory_, texture_palettes_};
+}
 texture_lifetime::Services Display::texture_services() {
     return {[this] {
-        device_state_.texture.reset();
+        output_->unbind_texture();
     }};
 }
 void Display::release_texture_list(sprite::TextureList &list) {

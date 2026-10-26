@@ -24,6 +24,7 @@ Session::Session(LogoOutput &output, std::shared_ptr<const character_pack::Chara
                  std::function<void(std::uint32_t)> stop)
     : bootstrap_({card_result_, global_timer_, rings_, flow_.movie_number, game_mode_}),
       character_pack_(std::move(pack)), actions_(actions(character_pack_)),
+      character_objects_(*character_pack_),
     services_{[this](std::uint16_t character) { unload_character_textures(character); },
                 std::move(stop)}, timing_(mode),
       logo_(output, timing_, renderer_, save_, rings_, frame, fp), texture_assets_(textures) {

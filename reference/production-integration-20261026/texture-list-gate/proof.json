@@ -1,0 +1,342 @@
+{
+  "scope": "N3b reached dependency: actual texture-list not-ready gate; no runtime integration",
+  "base_commit": "3878f33d8179a0ea9805655c726dfaad9c5de4c0",
+  "api": "bool sadx::texture_selection::list_not_ready(const texture_lifetime::List*)",
+  "source": {
+    "dossier_path": "reference/ghidra-action-fp-recovery/sprite-403250.json",
+    "dossier_sha256": "588941b87597ccba49904161d9fca4531ad170631dd43db364a1e55c80daa14f",
+    "evidence_id": "ev_8a080598de70eac5bd22d0f4bb023ad47a7ea2a6a50e72b41ac7b622040fae91",
+    "subject_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "body_inclusive": {
+      "available": true,
+      "provenance": "ghidra-function-body-address-set",
+      "ranges": [
+        {
+          "start": "0x403250",
+          "end": "0x40328c"
+        }
+      ],
+      "total_bytes": 61,
+      "span_bytes": 61,
+      "non_contiguous": false,
+      "contains_entry": true
+    },
+    "source_range": "0x403250-0x40328d",
+    "range_sha256": "6df189d84533a30623a99b4e6c68bf5a4b5053abcfb8acf19899035bac7d7eb8",
+    "callees": [],
+    "mutable_globals": [],
+    "name": "isTextureNG",
+    "name_declaration": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h:160",
+    "classic_alternative": "VerifyTexList; SADXFunctions.h:3004",
+    "native_mapping": [
+      "Null List returns true",
+      "entries.size() is the complete validated source unsigned count; empty returns true",
+      "Every Memory binding is checked in order, returning true at first null",
+      "Only after all bindings: return first_filename_invalid, encoding source first filename == -1",
+      "Memory contents, live surfaces, other filenames and attributes are not read"
+    ]
+  },
+  "development": {
+    "passed": true,
+    "values_match": true,
+    "cases": 4256,
+    "directed_cases": 1256,
+    "random_cases": 3000,
+    "seed": 403250,
+    "outcomes": {
+      "1": 3811,
+      "0": 445
+    },
+    "mismatch_count": 0,
+    "cases_sha256": "eda2ee11778ba66cf309970f9455d50aeb5fcce4027bf3827155d4402a00da24",
+    "library_sha256": "8d07f88bfc4782e50959b44497d6ad0ff7f963a9d514568e9eae1e1056ad9177",
+    "source_files_sha256": {
+      "src/engine/texture_list_gate.hpp": "5f2bf5f3af170b4225332da314078c066a3fbdb098ec37188540b2a699f59684",
+      "src/engine/texture_list_gate.cpp": "f066052be94a3c951928a194cb217d3816d06831ecb955575a543f780d4ccfe3",
+      "src/engine/native_texture_lifetime.hpp": "0e6883f0c6ca2457060a61a16daeec4e84a3f7e6e6206e5a0b3d894f0e7485c3",
+      "tests/probes/native_texture_list_gate_probe.cpp": "1010da1841e1af9e79ba6dd378e86f31feb7a19d424d469776125c4dc7e4045d",
+      "tools/oracles/verify_original_texture_list_gate.py": "0bd931d1bb9789fa71ad8efdd5a345181ed84df48dc1b2871475ba56827b7b2a"
+    }
+  },
+  "holdout": {
+    "passed": true,
+    "values_match": true,
+    "cases": 4096,
+    "directed_cases": 0,
+    "random_cases": 4096,
+    "seed": 91734011,
+    "outcomes": {
+      "1": 3488,
+      "0": 608
+    },
+    "mismatch_count": 0,
+    "cases_sha256": "a8a899fe4ad7c1e53d3509b145a6e76265b52171cd3b7f316a941be8137cc755",
+    "library_sha256": "8d07f88bfc4782e50959b44497d6ad0ff7f963a9d514568e9eae1e1056ad9177",
+    "source_files_sha256": {
+      "src/engine/texture_list_gate.hpp": "5f2bf5f3af170b4225332da314078c066a3fbdb098ec37188540b2a699f59684",
+      "src/engine/texture_list_gate.cpp": "f066052be94a3c951928a194cb217d3816d06831ecb955575a543f780d4ccfe3",
+      "src/engine/native_texture_lifetime.hpp": "0e6883f0c6ca2457060a61a16daeec4e84a3f7e6e6206e5a0b3d894f0e7485c3",
+      "tests/probes/native_texture_list_gate_probe.cpp": "1010da1841e1af9e79ba6dd378e86f31feb7a19d424d469776125c4dc7e4045d",
+      "tools/oracles/verify_original_texture_list_gate.py": "0bd931d1bb9789fa71ad8efdd5a345181ed84df48dc1b2871475ba56827b7b2a"
+    }
+  },
+  "mutants": [
+    {
+      "name": "null_list_ready",
+      "caught": true,
+      "exit_status": 1,
+      "cases": 4256,
+      "mismatches": 386,
+      "first": {
+        "case": 0,
+        "input": [
+          0,
+          0,
+          0
+        ],
+        "expected": [
+          1,
+          1
+        ],
+        "actual": [
+          0,
+          1
+        ]
+      },
+      "library_sha256": "9b1c898eb7601e8b15744f0f3f92e2b5a1636f1faff6d7e3c02e482b49dfc756",
+      "mutated_source_sha256": "8af852e32bbfc90c1212ad05afb5396ed98769eaef6b3831ff0f2273d6b469f4"
+    },
+    {
+      "name": "empty_list_ready",
+      "caught": true,
+      "exit_status": 1,
+      "cases": 4256,
+      "mismatches": 20,
+      "first": {
+        "case": 2,
+        "input": [
+          1,
+          0,
+          0
+        ],
+        "expected": [
+          1,
+          1
+        ],
+        "actual": [
+          0,
+          1
+        ]
+      },
+      "library_sha256": "ed6c629f5cad3f29f52af0ca64a207eaa6b332d253d5d425df009e0df1de7282",
+      "mutated_source_sha256": "bdf979dc0894d8912ec15dcbd2d2efe241cc1c145ef2b7c6ca1fef68143bc066"
+    },
+    {
+      "name": "only_first_binding",
+      "caught": true,
+      "exit_status": 1,
+      "cases": 4256,
+      "mismatches": 1118,
+      "first": {
+        "case": 8,
+        "input": [
+          1,
+          2,
+          0,
+          1,
+          0
+        ],
+        "expected": [
+          1,
+          1
+        ],
+        "actual": [
+          0,
+          1
+        ]
+      },
+      "library_sha256": "9c3e5f4ffb3597849a26e806fa0ef3775a371f45f3d176a421a7012d7181a610",
+      "mutated_source_sha256": "feb7215e4aa9230d7e9284abfdb03d38bc212502f68e0ecdd17b05764fcaa4e6"
+    },
+    {
+      "name": "omit_last_binding",
+      "caught": true,
+      "exit_status": 1,
+      "cases": 4256,
+      "mismatches": 37,
+      "first": {
+        "case": 4,
+        "input": [
+          1,
+          1,
+          0,
+          0
+        ],
+        "expected": [
+          1,
+          1
+        ],
+        "actual": [
+          0,
+          1
+        ]
+      },
+      "library_sha256": "75ceb1017cd8ebd8688d5c472abda8d1be7fe9e3a2e15c2ed99c4826760fcae3",
+      "mutated_source_sha256": "964f6c4372c8c6c36309476a9cd12f14ff87ec502a162099e7e29d71cfacc33b"
+    },
+    {
+      "name": "filename_polarity",
+      "caught": true,
+      "exit_status": 1,
+      "cases": 4256,
+      "mismatches": 912,
+      "first": {
+        "case": 3,
+        "input": [
+          1,
+          1,
+          0,
+          1
+        ],
+        "expected": [
+          0,
+          1
+        ],
+        "actual": [
+          1,
+          1
+        ]
+      },
+      "library_sha256": "77a0f60b170a9937bce491980a9d130f51479ecbb360f7553898d03064b60408",
+      "mutated_source_sha256": "9dbfc2f0a84362d24ad44345f5c6bfaed25dfa26a56b8966e19fcd946c3e1ae0"
+    },
+    {
+      "name": "require_live_surface",
+      "caught": true,
+      "exit_status": 1,
+      "cases": 4256,
+      "mismatches": 445,
+      "first": {
+        "case": 3,
+        "input": [
+          1,
+          1,
+          0,
+          1
+        ],
+        "expected": [
+          0,
+          1
+        ],
+        "actual": [
+          1,
+          1
+        ]
+      },
+      "library_sha256": "71c9657f1cecbeca7fcb5eb680c58054f7e58c40b5aa2ed62f7ac34dd41d161d",
+      "mutated_source_sha256": "de1d5b6651812c5e7c6e6f712983d77ee70fee8aaa3d1fd5ebcd9d92d123f293"
+    }
+  ],
+  "late_sprite": {
+    "before": {
+      "passed": false,
+      "values_match": true,
+      "cases": 1000,
+      "mismatch_count": 0,
+      "flag_mismatches": 1,
+      "outcomes": {
+        "0": 884,
+        "99": 75,
+        "1": 29,
+        "2": 12
+      },
+      "seed": 404660
+    },
+    "after": {
+      "passed": false,
+      "values_match": true,
+      "cases": 1000,
+      "mismatch_count": 0,
+      "flag_mismatches": 1,
+      "outcomes": {
+        "0": 884,
+        "99": 75,
+        "1": 29,
+        "2": 12
+      },
+      "seed": 404660
+    },
+    "old_judges_and_legacy_gate_sha256": {
+      "tests/probes/native_late_sprite_probe.cpp": "fb2e648c48bf1b9ec1cba091bae07a09db1c1ad29efe2317d171fa889ba2b043",
+      "tools/oracles/verify_original_late_sprite.py": "8d6e5356c0f8bab7e29a70e0447b487850729405f8ac6edc2eb41b8cfdac51ee",
+      "src/engine/ninja_sprite_queue.cpp": "ba62f7f2250e0ff7ec8183431be7f102f5a9e984e1e5656f1c6d4342717787ed"
+    }
+  },
+  "focused_checks": {
+    "unit_exit_status": 0,
+    "clang_format_exit_status": 0,
+    "layers_exit_status": 0,
+    "provenance_exit_status": 0,
+    "profile": {
+      "patches": 618,
+      "active_patches": 121,
+      "active_unhandled_patches": 79,
+      "reports": 10,
+      "declared_exe_ranges": 8,
+      "unhandled_overlaps": 0,
+      "handled_overlaps": 0,
+      "undetermined_overlaps": 0,
+      "reports_without_addressed_ranges": [
+        "late_sprite.json",
+        "late_sprite_before.json"
+      ]
+    },
+    "readability": {
+      "src/engine/texture_list_gate.hpp": {
+        "hex_literals": 0,
+        "address_identifiers": 0,
+        "address_calls": 0,
+        "goto": 0,
+        "address_labels": 0,
+        "long_lines": 0,
+        "multi_statement_lines": 0,
+        "large_decimal_literals": 0,
+        "emulator_arithmetic": 0,
+        "address_comments": 0
+      },
+      "src/engine/texture_list_gate.cpp": {
+        "hex_literals": 0,
+        "address_identifiers": 0,
+        "address_calls": 0,
+        "goto": 0,
+        "address_labels": 0,
+        "long_lines": 0,
+        "multi_statement_lines": 0,
+        "large_decimal_literals": 0,
+        "emulator_arithmetic": 0,
+        "address_comments": 0
+      },
+      "src/engine/message_sprite_queue.cpp": {
+        "hex_literals": 0,
+        "address_identifiers": 0,
+        "address_calls": 0,
+        "goto": 0,
+        "address_labels": 0,
+        "long_lines": 0,
+        "multi_statement_lines": 0,
+        "large_decimal_literals": 0,
+        "emulator_arithmetic": 2,
+        "address_comments": 0
+      }
+    }
+  },
+  "limits": [
+    "No full gate or shared builds run; Root independently reviews, registers and gates",
+    "No native-sources.txt, Makefile, unit manifest or judge-manifest edits; new oracle discovered automatically after probe rule is registered",
+    "Typed input contract requires importer-validated complete count/array and sentinel facts; unknown guest data stays in unchanged legacy queue path",
+    "Oracle fixtures cover counts 0..128; they do not exhaust the source uint32 count domain",
+    "Holdout is 4096 independent random fixtures with seed 91734011; directed 1256 cases belong only to development",
+    "Late sprite remains partial with one pre-existing FP-flag mismatch; no existing judge edits",
+    "No app, GPU, physical device, CharacterSelect completion or traversal integration claim"
+  ]
+}

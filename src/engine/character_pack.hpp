@@ -3,7 +3,9 @@
 #include <array>
 #include <cstddef>
 #include <cstdint>
+#include <deque>
 #include <filesystem>
+#include <optional>
 #include <vector>
 
 namespace sadx::character_pack {
@@ -97,5 +99,20 @@ class CharacterPack {
     enum class Schema { Startup, Title, Selection };
     Schema schema_ = Schema::Startup;
     std::vector<std::array<std::uint32_t, 4>> actions_;
+};
+
+// NOTSA: publish one live object per imported identity. Asset payloads remain
+// immutable; callbacks share these stable mutable objects across draws/reentry.
+class ObjectState {
+  public:
+    explicit ObjectState(const CharacterPack &);
+    ObjectState(const ObjectState &) = delete;
+    ObjectState &operator=(const ObjectState &) = delete;
+    ObjectResource &object(ResourceId);
+    const ObjectResource &object(ResourceId) const;
+
+  private:
+    // A non-object record has no object; this is resource kind, not fixture knownness.
+    std::deque<std::optional<ObjectResource>> objects_;
 };
 } // namespace sadx::character_pack

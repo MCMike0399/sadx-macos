@@ -4,13 +4,16 @@
 namespace sadx::native {
 void Display::draw_selection_question(selection_question::Pose pose, const std::uint32_t &ticks,
                                       selection_question::Assets assets,
+                                      character_pack::ObjectState &objects,
                                       const std::function<void(std::uint32_t)> &select_texture) {
     // NOTSA: the source callback borrows the display's existing matrix and device.
     struct Calls final : selection_question::Calls {
         Display &display;
+        character_pack::ObjectState &objects;
         const std::function<void(std::uint32_t)> &select_texture;
-        Calls(Display &owner, const std::function<void(std::uint32_t)> &select)
-            : display(owner), select_texture(select) {}
+        Calls(Display &owner, character_pack::ObjectState &graph,
+              const std::function<void(std::uint32_t)> &select)
+            : display(owner), objects(graph), select_texture(select) {}
         void push_current_matrix() override { display.coordinates_->push_current_frame(); }
         void translate_current(const NinjaVector &position) override {
             display.coordinates_->translate_matrix(display.coordinates_->current_matrix(), position,
@@ -30,14 +33,12 @@ void Display::draw_selection_question(selection_question::Pose pose, const std::
         }
         void enable_specular() override { display.device_state_.render_states[29] = 1; }
         void select_menu_texture(std::uint32_t texture) override { select_texture(texture); }
-        void draw_object(std::uint32_t) override {
-            throw flow::UnrecoveredGameFlowCall("native_basic_object_renderer");
-        }
+        void draw_object(std::uint32_t id) override { display.draw_object_graph(id, objects); }
         void pop_matrix(std::uint32_t count) override {
             for (std::uint32_t index = 0; index < count; ++index)
                 display.coordinates_->end_frame();
         }
-    } calls(*this, select_texture);
+    } calls(*this, objects, select_texture);
     selection_question::execute(pose, ticks, assets, calls);
 }
 } // namespace sadx::native

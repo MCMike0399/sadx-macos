@@ -12,6 +12,7 @@
 #include "game/selection_camera.hpp"
 #include "game/selection_question.hpp"
 #include "engine/device_lights.hpp"
+#include "engine/object_draw.hpp"
 #include "engine/native_message_texture.hpp"
 #include "engine/queue_consumer_native.hpp"
 #include "engine/message_sprite_queue.hpp"
@@ -40,7 +41,7 @@ class Display {
                               lighting::TimeServices &);
     void update_selection_camera(selection_camera::Pose);
     void draw_selection_question(selection_question::Pose, const std::uint32_t &,
-                                 selection_question::Assets,
+                                 selection_question::Assets, character_pack::ObjectState &,
                                  const std::function<void(std::uint32_t)> &select_texture);
     void set_clip_range(float near_distance, float far_distance);
     ui_scale::State &ui_scaling() { return ui_scaling_; }
@@ -89,6 +90,13 @@ class Display {
     }
 
   private:
+    friend struct DisplayTextureProbe; // test-only observation of actual borrowed owners
+    friend struct DisplayObjectProbe;
+    friend struct object_draw::Context;
+    // NOTSA: bind traversal to the same session graph, matrix and render owners.
+    void draw_object_graph(character_pack::ResourceId, character_pack::ObjectState &);
+    // GLOBAL: SONIC 0x90a0a0 SimpleModelDrawingEnabled size=1
+    std::uint8_t simple_model_enabled_ = 1;
     frame::ModeState &frame_mode_;
     X87Context arithmetic_{127};
     SseContext sse_{8064};
@@ -108,6 +116,7 @@ class Display {
         std::vector<texture_lifetime::Memory>(2048);
     std::int32_t cached_texture_global_index_ = -1;
     texture_lifetime::Memory *active_texture_memory_ = nullptr;
+    texture_lifetime::Memory *requested_texture_memory_ = nullptr;
     const sprite::TextureList *current_texture_list_ = nullptr;
     std::array<std::uint32_t, 8> temporary_texture_info_{};
     std::uint32_t registered_texture_list_count_ = 0;
@@ -115,6 +124,8 @@ class Display {
     menu_caption::DeferredRelease message_texture_releases_{registered_texture_list_count_, {}};
     std::unique_ptr<LogoRenderer> output_;
     texture_lifetime::State texture_state();
+    // NOTSA: borrows the existing current/cache/palette owners for source selection.
+    texture_selection::State texture_selection_state();
     texture_lifetime::Services texture_services();
     std::uint32_t hud_color_ = 0;
     std::uint32_t default_depth_comparison_ = 1;
@@ -137,6 +148,7 @@ class Display {
     sprite::ScreenSpriteScratch message_sprite_;
     // Native world storage: SONIC0x3abd950, separate from the selected device texture list.
     const texture_lifetime::List *queued_texture_list_ = nullptr;
+    std::uint32_t queued_texture_index_ = 0;
     std::uint32_t control_3d_ = 0, constant_attribute_mask_ = 0, constant_attributes_ = 0;
     queue::Owners queue_owners();
     queue::Services queue_services();

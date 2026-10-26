@@ -1,0 +1,360 @@
+{
+  "outcome": "Fresh independent object wrapper/traversal core; real model and late rendering remain required link-time seams. No application integration or visual claim.",
+  "base_commit": "ca14482",
+  "branch": "packet/object-traversal-core",
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "source_ranges": {
+    "0x408530-0x40859b": "5e0db300fc1baf53468ded5aa29cc7a33b6332e44dfa9b9f915cebff85e25508",
+    "0x4034b0-0x4037c5": "7fc0a2181d8f61906717259df9d746ef6d333d9c8e370e2fcaa9891b9b1a29ee",
+    "0x401430-0x401440": "9286ec41a0151e03ded6f4f59a2555efdfa5536a0bfaf409183efd32dceb6750",
+    "0x403250-0x40328d": "6df189d84533a30623a99b4e6c68bf5a4b5053abcfb8acf19899035bac7d7eb8",
+    "0x4037c8-0x4037e4": "8517cf8bd0ab63bf1faf888231e286344515bd334d5df138fa09fe2a1994e045"
+  },
+  "context": [
+    {
+      "file": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/native-object-render-recovery-20261021/native-object-wrapper.json",
+      "sha256": "a5257edb8730b073f63301683f08e399346eda43122b67927c517968f1771612",
+      "evidence_id": "ev_92dc19e4c4696bb271705438c14861e9964ebc4c21eb489d5016f7517b6b8bb9",
+      "subject": {
+        "name": "sonic.exe",
+        "digest": {
+          "sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+        },
+        "format": "pe",
+        "architecture": "x86",
+        "local_path": "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/sonic.exe"
+      },
+      "analysis_profile_digest": "406a6ba816fc8af1fba763ff4a56179df146625ad8f1fcb7324d60039e0bd7fb",
+      "procedure": {
+        "address": "0x408530",
+        "name": "dsDrawObject",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x408530",
+              "end": "0x40859a"
+            }
+          ],
+          "total_bytes": 107,
+          "span_bytes": 107,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined dsDrawObject()",
+        "locals": []
+      }
+    },
+    {
+      "file": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/native-object-render-recovery-20261021/native-object-traversal.json",
+      "sha256": "0b8ff17b8dc56beccbccc78b8f7fdbe8fab3b350c15034a106fc018e33f1fb61",
+      "evidence_id": "ev_0b71112c12397a01a7b0f1306628529c40de2509054865a8cfa1ba8576316565",
+      "subject": {
+        "name": "sonic.exe",
+        "digest": {
+          "sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+        },
+        "format": "pe",
+        "architecture": "x86",
+        "local_path": "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/sonic.exe"
+      },
+      "analysis_profile_digest": "406a6ba816fc8af1fba763ff4a56179df146625ad8f1fcb7324d60039e0bd7fb",
+      "procedure": {
+        "address": "0x4034b0",
+        "name": "DrawObject",
+        "classification": {
+          "external": false,
+          "thunk": false,
+          "thunk_target": null,
+          "provenance": "ghidra-function-manager"
+        },
+        "body": {
+          "available": true,
+          "provenance": "ghidra-function-body-address-set",
+          "ranges": [
+            {
+              "start": "0x4034b0",
+              "end": "0x4037c4"
+            }
+          ],
+          "total_bytes": 789,
+          "span_bytes": 789,
+          "non_contiguous": false,
+          "contains_entry": true
+        },
+        "signature": "undefined DrawObject()",
+        "locals": []
+      }
+    }
+  ],
+  "frozen_harness_inputs": {
+    "tests/probes/native_object_draw_probe.cpp": "ff770b7dc8d84d8b9ba4b4a317acf2a3417ded84980b39c5cd91691a9feaecb2",
+    "tests/unit/object_draw.cpp": "ced626b4bbfe345c0eef36efbe18c22b9974c672f3578bc2bce8e60e43bbcf15",
+    "tools/oracles/verify_original_object_draw.py": "012abf1afad8e6c9c65e47d1990a9cb013ca21843822cdd36220d2e2ed5a85e3",
+    "tests/fixtures/object_draw_original_mutants.json": "60e7225cbcdd2af591bac4a3aaeec4667f3aa53424123a091e8c10d2b837b54b"
+  },
+  "verification": {
+    "dev": {
+      "cases": 2918,
+      "executed": 2918,
+      "mismatches": 0,
+      "passed": true
+    },
+    "holdout": {
+      "cases": 5918,
+      "executed": 5918,
+      "mismatches": 0,
+      "passed": true
+    },
+    "recovered_unit_exit_status": 0,
+    "native_unit_exit_status": 0,
+    "frozen_inputs": {
+      "tests/probes/native_object_draw_probe.cpp": "ff770b7dc8d84d8b9ba4b4a317acf2a3417ded84980b39c5cd91691a9feaecb2",
+      "tests/unit/object_draw.cpp": "ced626b4bbfe345c0eef36efbe18c22b9974c672f3578bc2bce8e60e43bbcf15",
+      "tools/oracles/verify_original_object_draw.py": "012abf1afad8e6c9c65e47d1990a9cb013ca21843822cdd36220d2e2ed5a85e3",
+      "tests/fixtures/object_draw_original_mutants.json": "60e7225cbcdd2af591bac4a3aaeec4667f3aa53424123a091e8c10d2b837b54b"
+    },
+    "mutants": [
+      {
+        "name": "wrong-fog-bits",
+        "group": "preserved",
+        "oracle_exit_status": 1,
+        "alias_unit_exit_status": null,
+        "executed": 1160,
+        "mismatches": 8,
+        "source_sha256": "19c10f883f078613b9f04693f77149c5e24766e2bdee5f0608ba96043f6f805f"
+      },
+      {
+        "name": "wrong-fog-active",
+        "group": "preserved",
+        "oracle_exit_status": 1,
+        "alias_unit_exit_status": null,
+        "executed": 1286,
+        "mismatches": 8,
+        "source_sha256": "ab0e65c63fb2e4bcdd6659f828d19947a19aa42872dab4d02b2caa694c9ef4cb"
+      },
+      {
+        "name": "wrong-late-depth",
+        "group": "preserved",
+        "oracle_exit_status": 1,
+        "alias_unit_exit_status": null,
+        "executed": 1286,
+        "mismatches": 8,
+        "source_sha256": "31ee5cd095d51e4c0d31d61b0d280ea8db58ae65012b0663746b97a90a26930c"
+      },
+      {
+        "name": "wrong-flag-restore",
+        "group": "preserved",
+        "oracle_exit_status": 1,
+        "alias_unit_exit_status": null,
+        "executed": 1349,
+        "mismatches": 8,
+        "source_sha256": "62059f6dde49f441fe756bd9ae1b925d9130240b50044318ce5ed78e1a0b7584"
+      },
+      {
+        "name": "wrong-pending-guard",
+        "group": "preserved",
+        "oracle_exit_status": 1,
+        "alias_unit_exit_status": null,
+        "executed": 1118,
+        "mismatches": 8,
+        "source_sha256": "60741a983e6ebf738fda466e92dc7f3a68ce056eebda80d4bbdff80cd050f8e7"
+      },
+      {
+        "name": "wrong-gate-polarity",
+        "group": "preserved",
+        "oracle_exit_status": 1,
+        "alias_unit_exit_status": null,
+        "executed": 8,
+        "mismatches": 8,
+        "source_sha256": "4ad5b04298c7471ae9ae95c0010f2c7c6641c3e761f94f8f2c2fc08f5c4edfd7"
+      },
+      {
+        "name": "wrong-transform-case",
+        "group": "preserved",
+        "oracle_exit_status": 1,
+        "alias_unit_exit_status": null,
+        "executed": 8,
+        "mismatches": 8,
+        "source_sha256": "ab3f626bd30bb67041d978293a258e2f2d2229a1a7003895182bdc6039997c04"
+      },
+      {
+        "name": "wrong-translation-mask",
+        "group": "preserved",
+        "oracle_exit_status": 1,
+        "alias_unit_exit_status": null,
+        "executed": 16,
+        "mismatches": 8,
+        "source_sha256": "312e6f2e5507892b4433052855ae4e03c8f6ac3a9328095a512806518018324b"
+      },
+      {
+        "name": "wrong-rotation-order",
+        "group": "preserved",
+        "oracle_exit_status": 1,
+        "alias_unit_exit_status": null,
+        "executed": 8,
+        "mismatches": 8,
+        "source_sha256": "12e174777426be032e378b7c4751f8c647589cd87b2f88ddd681bbe081421c21"
+      },
+      {
+        "name": "wrong-scale-mask",
+        "group": "preserved",
+        "oracle_exit_status": 1,
+        "alias_unit_exit_status": null,
+        "executed": 24,
+        "mismatches": 8,
+        "source_sha256": "539bdda3d1bd504333e898291cded68c91e68eb56308030df6fb53001f768b17"
+      },
+      {
+        "name": "wrong-model-mask",
+        "group": "preserved",
+        "oracle_exit_status": 1,
+        "alias_unit_exit_status": null,
+        "executed": 48,
+        "mismatches": 8,
+        "source_sha256": "c4541fec8d9c01923b6794b1cef487eaf9c8ad17937838eb8f7fa44ea61ee4e3"
+      },
+      {
+        "name": "wrong-child-mask",
+        "group": "preserved",
+        "oracle_exit_status": 1,
+        "alias_unit_exit_status": null,
+        "executed": 1032,
+        "mismatches": 8,
+        "source_sha256": "3eea57137f972c032b7897599df5feda649875c25ecd67ba485782f7ab1cc6f9"
+      },
+      {
+        "name": "copied-node-not-live",
+        "group": "preserved",
+        "oracle_exit_status": 1,
+        "alias_unit_exit_status": null,
+        "executed": 1489,
+        "mismatches": 8,
+        "source_sha256": "7b680195170858b1a648ac37e3502f79068b220a647f381d5b8d342d1cf375c1"
+      },
+      {
+        "name": "missing-pop",
+        "group": "preserved",
+        "oracle_exit_status": 1,
+        "alias_unit_exit_status": null,
+        "executed": 8,
+        "mismatches": 8,
+        "source_sha256": "82e1bf9f74c45ee17cc67183ce395eccf54eda171dc910e0bf51c4b2df353f82"
+      },
+      {
+        "name": "simple-return",
+        "group": "preserved",
+        "oracle_exit_status": 1,
+        "alias_unit_exit_status": null,
+        "executed": 1532,
+        "mismatches": 8,
+        "source_sha256": "629b1a6dcf56aadb14535bbe717a4a4cb0d83639171e057b8ef582f1f069b954"
+      },
+      {
+        "name": "model-before-push",
+        "group": "new",
+        "oracle_exit_status": 1,
+        "alias_unit_exit_status": null,
+        "executed": 1721,
+        "mismatches": 8,
+        "source_sha256": "eb77892b89090ebd02dc9b4c462bff7b0fd30f4d7677043f34e128f365ee4d2a"
+      },
+      {
+        "name": "child-before-render",
+        "group": "new",
+        "oracle_exit_status": 1,
+        "alias_unit_exit_status": null,
+        "executed": 1499,
+        "mismatches": 8,
+        "source_sha256": "dd343a33347b36811e92b0524a7ff613959531e5bf134957a8933a05663d9b3b"
+      },
+      {
+        "name": "sibling-before-child",
+        "group": "new",
+        "oracle_exit_status": 0,
+        "alias_unit_exit_status": -6,
+        "executed": 2918,
+        "mismatches": 0,
+        "source_sha256": "fe92ee410dea889f2f31312c35f4129aab36b219061926046bfc958968e6e1f1"
+      },
+      {
+        "name": "overwrite-late-depth",
+        "group": "new",
+        "oracle_exit_status": 1,
+        "alias_unit_exit_status": null,
+        "executed": 1498,
+        "mismatches": 8,
+        "source_sha256": "557ad9e56eea545dc8edc40f292b921472874c165dac39313680b551daf5cd77"
+      }
+    ]
+  },
+  "profile": {
+    "summary": {
+      "patches": 618,
+      "active_patches": 121,
+      "active_unhandled_patches": 79,
+      "reports": 1,
+      "declared_exe_ranges": 5,
+      "unhandled_overlaps": 0,
+      "handled_overlaps": 0,
+      "undetermined_overlaps": 0,
+      "reports_without_addressed_ranges": []
+    },
+    "unhandled_overlaps": [],
+    "handled_overlaps": [],
+    "undetermined_overlaps": [],
+    "report_ranges": {
+      "object_draw.json": {
+        "exe_ranges": 5,
+        "dll_ranges_skipped": 0,
+        "opaque_range_hashes": [],
+        "unparsed_keys": []
+      }
+    }
+  },
+  "source_checks": {
+    "readability": "0 regressions; touched product files have zero debt",
+    "provenance": "0 errors using read-only root database",
+    "layers": "0 violations",
+    "global_owners": "0 duplicate owners",
+    "clang_format": "new source and new adapters pass; frozen probe/unit deliberately byte-preserved",
+    "symbol_regeneration": "failed: ignored reference/sa-tools absent in worktree; original New.h names and read-only root symbol database used",
+    "full_gate": "not run; root owns integration and full gate",
+    "independent_review": "not run; root explicitly owns fresh review before integration"
+  },
+  "source_hashes": {
+    "src/engine/object_draw.hpp": "0b52ceff09a73147a30d17f3a1b3e02f714a7a49eab74d8b8bde20d7f60eb615",
+    "src/engine/object_draw.cpp": "e79fe1a43e35b5b84566bd7c14b676a6ab23f7081d399e9b6b0d029e09952803",
+    "tests/probes/native_object_draw_probe.cpp": "ff770b7dc8d84d8b9ba4b4a317acf2a3417ded84980b39c5cd91691a9feaecb2",
+    "tests/probes/object_draw_compat.hpp": "b1c8093e27036d945009e5e711637df46bf1ca1e5acf91e0442063f6cbc9aa91",
+    "tests/probes/object_draw_compat.cpp": "92b90444e0e01199057a53a0a8623851a26e4237f1c19dd1ff9c4d83be566446",
+    "tests/unit/object_draw.cpp": "ced626b4bbfe345c0eef36efbe18c22b9974c672f3578bc2bce8e60e43bbcf15",
+    "tests/unit/object_draw_native.cpp": "8d7af2bb06e598dfba0e527dbedc4a46de184a6d622730730363bc2264552cfe",
+    "tools/oracles/verify_original_object_draw.py": "012abf1afad8e6c9c65e47d1990a9cb013ca21843822cdd36220d2e2ed5a85e3",
+    "tools/oracles/check_object_draw_packet.py": "aa027623609537e09e49cce811f6385085c73ffd37a4399f9de4d0886d5f868e",
+    "tests/fixtures/object_draw_original_mutants.json": "60e7225cbcdd2af591bac4a3aaeec4667f3aa53424123a091e8c10d2b837b54b"
+  },
+  "native_library_sha256": "f93efb47b665121f44d0f89169b1fe5a4f613bf88ea75bc43816d263e8f28634",
+  "source_simple_body_hex": "8b44240450e836db370083c40433c0c3",
+  "limits": [
+    "Lower matrix calls are receipts in the original oracle; direct native unit reuses existing push/translate/scale/pop. Rotated matrix results are not qualified.",
+    "Actual model/late rendering, GPU output, runtime ownership bindings, malformed cycles and unmasked exception delivery remain outside component proof.",
+    "18 mutants detected by unchanged oracle; sibling-before-child detected only by unchanged alias unit, exit -6.",
+    "Old transcript claims were navigation only; extractor was not retried.",
+    "No root Makefile, unit manifest, native source list or judge manifest edited. Root must register the packet after review."
+  ],
+  "port_commit": "30f0713da9f3c1c884acb6430f6a88290cde8057",
+  "native_programs": {
+    "object-test": "7bfe7e2d81561526f9b52b18a627750123ddb7ff1488f3f60e192ab2b69eb424",
+    "native-test": "2d0bf881548108c35949f74d0ef92e9527c5483267c56e1909985676a837e081"
+  },
+  "judge_change_reason": "Recover byte-identical original oracle/probe/unit; preserve all 15 original mutation tuples and re-express their tokens against the fresh typed free-seam API. Add four discriminators. Expectations, tolerance, corpus and original comparisons unchanged.",
+  "judge_integration_limit": "New protected files are a packet proposal only. Root must register tests/probe/oracle and refresh its judge manifest after independent review; no full-gate claim."
+}

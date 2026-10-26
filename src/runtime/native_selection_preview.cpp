@@ -197,6 +197,7 @@ void TitleScene::exec_selection_question(TaskScheduler &scheduler, const TaskHan
     const auto &assets = *scene.session_.character_selection_assets_;
     scene.display_.draw_selection_question({primary.rotation, primary.position},
         scene.session_.secondary_loop_count_, {assets.question_object, assets.question_menu_texture},
+        scene.session_.character_objects_,
         [&scene](std::uint32_t texture) {
             scene.select_menu_texture(static_cast<file_select_display::MenuTexture>(texture));
         });

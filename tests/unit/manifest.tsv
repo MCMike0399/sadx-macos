@@ -259,3 +259,10 @@ player-initialization
 player-motion-graph
 selection-question
 texture-selection-core
+
+native-texture-selection-binding
+character-object-state	game/imported/characters/sonic-selection.actions
+object-draw-binding	game/imported/characters/sonic-selection.actions "$(GAME_EXE)"
+object-draw
+object-draw-native
+texture-list-gate

@@ -47,10 +47,13 @@ graphics::Texture texture_level(const NinjaTextureLevel &level, std::uint8_t for
 LogoRenderer::LogoRenderer(std::filesystem::path directory, graphics::Draw &state,
                            graphics::Frame &frame,
                            NinjaDepthProjection &projection, X87Context &fp, SseContext &sse,
-                           SseReciprocalEstimate reciprocal, texture_lifetime::State textures)
+                           SseReciprocalEstimate reciprocal, texture_lifetime::State textures,
+                           texture_selection::State selection,
+                           const texture_lifetime::List *&queued_list, std::uint32_t &queued_index)
     : system_directory_(std::move(directory)), state_(state), projection_(projection),
       arithmetic_(fp), sse_(sse), reciprocal_(std::move(reciprocal)), frame_(frame),
-      texture_state_(textures) {
+      texture_state_(textures), texture_selection_(selection), queued_texture_list_(queued_list),
+      queued_texture_index_(queued_index) {
     // SEGALOGO_E_TEXLIST has eighteen named entries; only attributes/handles start zero.
     constexpr std::array<const char *, 18> names{
         "segalogo0", "segalogo1", "segalogo2", "segalogo3", "segalogo4", "segalogo5",
@@ -153,11 +156,38 @@ void LogoRenderer::select_logo_archive() {
     select_texture_list(texture_list_);
 }
 void LogoRenderer::select_texture_list(const texture_lifetime::List &list) {
-    texture_state_.current_list = &list;
+    texture_selection::select_queued_list(&list, queued_texture_list_, queued_texture_index_,
+                                          texture_selection_, texture_binding());
+}
+void LogoRenderer::select_direct_texture_list(const texture_lifetime::List &list) {
+    texture_selection::select_list(&list, texture_selection_, texture_binding());
+}
+std::uint32_t LogoRenderer::select_texture_index(std::uint32_t index) {
+    return texture_selection::select_index(index, texture_selection_, texture_binding());
+}
+texture_selection::BindSurface LogoRenderer::texture_binding() {
+    return [this](const texture_selection::Surface &surface) {
+        // [platform:texture] The device keeps its own immutable image reference.
+        if (surface && !surface->texture)
+            throw std::runtime_error("native texture surface has no uploaded image");
+        bound_surface_ = surface;
+        state_.texture = surface ? surface->texture : nullptr;
+    };
+}
+void LogoRenderer::snapshot_bound_texture() {
+    // [platform:texture] SetTexture retains an image independently of the manager.
+    // A live handle can receive new pixels; dropping its manager reference does not
+    // revoke the image already held by the device or by submitted draws.
+    if (const auto surface = bound_surface_.lock(); surface && surface->texture)
+        state_.texture = surface->texture;
+}
+void LogoRenderer::unbind_texture() {
+    bound_surface_.reset();
+    state_.texture.reset();
 }
 void LogoRenderer::release_logo_archive() {
     texture_lifetime::Services services{[this] {
-        state_.texture.reset();
+        unbind_texture();
     }};
     texture_lifetime::release_texture_list(&texture_list_, texture_state_, services);
 }
@@ -217,13 +247,11 @@ void LogoRenderer::draw_texture(const std::array<pvr::Vertex, 4> &vertices,
     if (found == texture_state_.pool.end())
         throw std::runtime_error("native texture resource has been released");
     auto *memory = &*found;
-    if (!memory || !memory->surface || !memory->surface->texture)
-        throw std::runtime_error("native logo texture has no resident surface");
-    texture_state_.cached_global_index = memory->global_index;
-    texture_state_.active_memory = memory;
+    texture_selection::cache(memory, texture_selection_, texture_binding());
+    snapshot_bound_texture();
     auto device = immediate_device();
     const auto fog = state_.render_states.find(28);
-    pvr::submit_texture(vertices, memory->surface->texture, alpha,
+    pvr::submit_texture(vertices, state_.texture, alpha,
                         fog != state_.render_states.end() && fog->second != 0, device, arithmetic_);
 }
 void LogoRenderer::draw_polygon(const std::array<pvr::Point, 4> &points, std::uint32_t color,
@@ -235,7 +263,7 @@ void LogoRenderer::draw_colored_polygon(const std::array<pvr::Point, 4> &points,
                                        float priority, std::uint32_t flags) {
     auto device = immediate_device();
     texture_lifetime::Services services{[this] {
-        state_.texture.reset();
+        unbind_texture();
     }};
     pvr::submit_colored_polygon(points, colors, priority, flags, device, arithmetic_, [&] {
         texture_lifetime::unbind_cached_texture(texture_state_, services);

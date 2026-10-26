@@ -1,5 +1,6 @@
 #include "engine/message_sprite_queue.hpp"
 #include "cpu/fidelity_float.hpp"
+#include "engine/texture_list_gate.hpp"
 #include <new>
 namespace sadx::queue {
 AnimationAllocation allocate_animation(Storage &storage, std::uint32_t bytes,
@@ -50,13 +51,7 @@ LateResult draw_late_sprite(const sprite::ScreenSprite *sprite, std::int32_t fra
                             X87Context &fp) {
     if (view.owners.loop_count != 0 || !sprite)
         return {LateRoute::NotDrawn, true};
-    const auto *list = sprite->textures;
-    if (!list || list->entries.empty())
-        return {LateRoute::NotDrawn, true};
-    for (const auto *entry : list->entries)
-        if (!entry)
-            return {LateRoute::NotDrawn, true};
-    if (list->first_filename_invalid)
+    if (texture_selection::list_not_ready(sprite->textures))
         return {LateRoute::NotDrawn, true};
     auto adjusted = priority;
     const auto lower = fidelity::ExactFloat(fp, priority).compare(-2.0f);

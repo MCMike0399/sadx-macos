@@ -486,4 +486,21 @@ MotionResource CharacterPack::motion(ResourceId id) const {
     const auto& bytes = payload(*this, id, ResourceKind::Motion, 16);
     return {integer(bytes, 0), integer(bytes, 4), word(bytes, 8), word(bytes, 10), integer(bytes, 12)};
 }
+ObjectState::ObjectState(const CharacterPack &pack) : objects_(pack.record_count() + 1) {
+    for (std::size_t index = 1; index < objects_.size(); ++index) {
+        const auto id = static_cast<ResourceId>(index);
+        if (pack.record(id).kind == ResourceKind::Object)
+            objects_[index] = pack.object(id);
+    }
+}
+ObjectResource &ObjectState::object(ResourceId id) {
+    if (id == 0 || id >= objects_.size() || !objects_[id])
+        invalid("live object resource " + std::to_string(id) + " is absent or has another kind");
+    return *objects_[id];
+}
+const ObjectResource &ObjectState::object(ResourceId id) const {
+    if (id == 0 || id >= objects_.size() || !objects_[id])
+        invalid("live object resource " + std::to_string(id) + " is absent or has another kind");
+    return *objects_[id];
+}
 } // namespace sadx::character_pack

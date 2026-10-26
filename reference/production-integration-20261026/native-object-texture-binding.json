@@ -1,0 +1,180 @@
+{
+  "scope": "Connected texture selection and object traversal to the real Question caller; no model pixels or completed N3b claim.",
+  "approved_packets": {
+    "texture": "c54386a",
+    "object": [
+      "30f0713",
+      "d00debf"
+    ],
+    "gate": "f600f57"
+  },
+  "independent_reviews": [
+    "a1ec9dd7b9d72eeaf6e832cdc59547f024eda312",
+    "4210037bff6320515d76fb129a768c1825175f33",
+    "997a1dd"
+  ],
+  "source_files_sha256": {
+    "src/runtime/logo_renderer.hpp": "0c5566126a79375b7bab220a227553c94575c9293f2aa88761e703dc9123d4f7",
+    "src/runtime/logo_renderer.cpp": "79305072dacde9be4b43f862ff062c0e5aef7e11c1468cb0ff3f40e982893b5c",
+    "src/runtime/native_display.hpp": "4436956c6d0545ab8ffd9818d8b3690c2e063c7dfd4174995bcea709d15f10c0",
+    "src/runtime/native_display.cpp": "446ff0ef51babba8c02d8e2e1c389bbac4378746884e3a23a900f8d665d286fe",
+    "src/runtime/native_object_draw.cpp": "dc490a92c6f956bb21587f1529e18c210a5cb98432301e99bf629fc0824944cc",
+    "src/runtime/native_object_render_seams.cpp": "442807da1938e3654d7d40bf8a068436cd5accb66f07db9e4fb2e15236ff2f67",
+    "src/runtime/native_selection_question.cpp": "ce329256af0cd916195e917a409834f58cdb2892dbd6ff9da538581474098407",
+    "src/runtime/native_selection_preview.cpp": "74587402a4a2986ce402d386036869c87cef879b44280a6d9493479ad003c21c",
+    "src/runtime/native_session.hpp": "7eaab8cb3fe16e3a62818d1cc2408a2531120185304b05d64fd5a6f7a4f84f85",
+    "src/runtime/native_session.cpp": "c0301e17ff852970240452390c9c999d145a0999d074bd1a72099ba30d04c38d",
+    "src/engine/character_pack.hpp": "0622405eeb2a6c8157a051bcc922a6c653e3878f076a0afbaf0ff94eac6c1065",
+    "src/engine/character_pack.cpp": "b2c5e28e05279a2bd20608aec766d3bfcb471bd11e659f9113dd77e677214a8d",
+    "src/engine/object_draw.hpp": "11f67c21610e2b15d33715e9cd112c245ee07ec6704c6f902347f162d5e74e8f",
+    "src/engine/object_draw.cpp": "e79fe1a43e35b5b84566bd7c14b676a6ab23f7081d399e9b6b0d029e09952803",
+    "src/engine/texture_list_gate.hpp": "5f2bf5f3af170b4225332da314078c066a3fbdb098ec37188540b2a699f59684",
+    "src/engine/texture_list_gate.cpp": "f066052be94a3c951928a194cb217d3816d06831ecb955575a543f780d4ccfe3"
+  },
+  "native_menu_journeys": {
+    "exit_status": 0,
+    "checkpoints": [
+      "native-file-select",
+      "native-main-menu",
+      "native-fresh-save"
+    ],
+    "log": "build/texture-binding-native-journeys.log",
+    "limit": "Completed before the later shared object-state constructor/binding changes; final combined gate remains required."
+  },
+  "source_judges": {
+    "ninja_texture_selection": {
+      "cases": 683,
+      "passed": true
+    },
+    "texture_selection_core": {
+      "dev": 3669,
+      "holdout": 3669,
+      "passed": true
+    },
+    "texture_list_gate": {
+      "dev": 4256,
+      "holdout": 4096,
+      "passed": true
+    },
+    "object_draw": {
+      "dev": 2918,
+      "holdout": 5918,
+      "passed": true,
+      "original_mutants": 15,
+      "extra_mutants": 4,
+      "limit": "18 oracle kills and 1 preserved alias-unit kill"
+    }
+  },
+  "runtime_mutants": [
+    {
+      "name": "swapped_requested_active",
+      "source": "src/runtime/native_display.cpp",
+      "mutated_source_sha256": "1dd6f8edd559a50d02abce0a55b2dffaeebeda10c0d7dee2649b5d984b2f3e0a",
+      "compile_exit_status": 0,
+      "unit_exit_status": -6,
+      "witness": "Assertion failed: (display.requested_texture_memory_ == &first), function alias_and_lifetime, file native_texture_selection_binding.cpp, line 41.",
+      "log": "build/runtime-binding-mutants/swapped_requested_active.log"
+    },
+    {
+      "name": "bypass_bound_image",
+      "source": "src/runtime/logo_renderer.cpp",
+      "mutated_source_sha256": "761c7348c0c0e3fe5267a164b6e24405657afe620f66932ee8ba521c3a6ee145",
+      "compile_exit_status": 0,
+      "unit_exit_status": -6,
+      "witness": "Assertion failed: (std::get<graphics::Draw>(display.frame_.commands[first_draw]).texture == old_image), function alias_and_lifetime, file native_texture_selection_binding.cpp, line 50.",
+      "log": "build/runtime-binding-mutants/bypass_bound_image.log"
+    },
+    {
+      "name": "ignore_in_place_upload",
+      "source": "src/runtime/logo_renderer.cpp",
+      "mutated_source_sha256": "360bf6edbb86d2931286b4da580c0dec29f8b59e98b9401bff864bed8f697d58",
+      "compile_exit_status": 0,
+      "unit_exit_status": -6,
+      "witness": "Assertion failed: (std::get<graphics::Draw>(display.frame_.commands.back()).texture == uploaded), function alias_and_lifetime, file native_texture_selection_binding.cpp, line 54.",
+      "log": "build/runtime-binding-mutants/ignore_in_place_upload.log"
+    },
+    {
+      "name": "wrong_pending_owner",
+      "source": "src/runtime/native_object_draw.cpp",
+      "mutated_source_sha256": "ea0721fd62cb43290cf4f73fc76d228e0bd4ac1078dabb9dab0f4293d10ee84a",
+      "compile_exit_status": 0,
+      "unit_exit_status": -6,
+      "witness": "Assertion failed: (model_calls == std::vector<object_draw::ModelId>{object.model}), function verify, file object_draw_binding.cpp, line 59.",
+      "log": "build/runtime-binding-mutants/wrong_pending_owner.log"
+    }
+  ],
+  "normal_input_frontier": {
+    "command": [
+      "/Users/burbujamc/Developer/sadx-macos/build/sadx-native",
+      "--assets",
+      "/Users/burbujamc/Developer/sadx-macos/game/imported",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1500",
+      "--save-directory",
+      "/Users/burbujamc/Developer/sadx-macos/build/character-object-binding-final-frontier/savedata",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,900:38:down,901:38:up,950:13:down,951:13:up,1350:13:down,1351:13:up",
+      "--capture-directory",
+      "/Users/burbujamc/Developer/sadx-macos/build/character-object-binding-final-frontier/captures",
+      "--capture-at",
+      "1300,1380,1381,1382,1383,1390"
+    ],
+    "exit_status": 1,
+    "frame": 1382,
+    "boundary": "native_basic_model_renderer",
+    "question_yaw": 16384,
+    "texture_slots_in_use": 762,
+    "image_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "state_sha256": "69d9f23db5bc160bae8006e54ee8767295e71a0c0a243bd2b43a53b499a3e255",
+    "visual_inspection": "Source-transparent fade still shows the outgoing title logo; no Question/model/CharacterSelect image proof.",
+    "native_app_sha256": "16477fea1e2f9efeee64bbf2f674eaac39f38455b6b023a960161b4566702109",
+    "output": "build/character-object-binding-final-frontier"
+  },
+  "limits": [
+    "Full combined gate and source-only export remain required.",
+    "Default/alternate object rotation and real late/model rendering remain explicit named seams.",
+    "Direct Sprite texture-number binding still uses the existing closed UI subset; full source78d140 material/sampler behavior is part of the reached model-renderer recovery.",
+    "Downstream sprite/queue/color/FOV oracles retain inherited FP partials, not strict passes.",
+    "No gameplay, physical-controller requalification or63FPS evidence."
+  ],
+  "binding_units": {
+    "texture": "pass; actual queued/direct selection, alias/device ownership, immutable frame retention, in-place uploads and failure prefix",
+    "objects": "pass; same live object, hidden/Break, pending/gate suppression, exact source default byte, real binding with link-time model/late receipts",
+    "object_state": "pass; stable shared resources and import boundary",
+    "limits": "Real model/late bodies and rotation operations remain named production seams."
+  },
+  "downstream_verdicts": {
+    "sprite_immediate": {
+      "verdict": "partial",
+      "cases": 1927,
+      "value_mismatches": 0,
+      "flag_mismatches": 1920
+    },
+    "ninja_sprite_display": {
+      "verdict": "partial",
+      "cases": 536
+    },
+    "ninja_sprite_queue": {
+      "verdict": "partial"
+    },
+    "ninja_queue_color": {
+      "verdict": "partial",
+      "cases": 4000,
+      "fp_flag_mismatches": 1797
+    },
+    "fov": {
+      "verdict": "partial",
+      "cases": 10260,
+      "fp_flag_mismatches": 10160
+    },
+    "late_sprite": {
+      "verdict": "partial",
+      "cases": 1000,
+      "value_mismatches": 0,
+      "flag_mismatches": 1,
+      "scope": "worker before/after factor proof; root final rerun pending"
+    }
+  }
+}

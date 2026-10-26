@@ -1,0 +1,32 @@
+[
+  [
+    "null_list_ready",
+    "    if (!list || list->entries.empty())\n        return true;",
+    "    if (!list)\n        return false;\n    if (list->entries.empty())\n        return true;"
+  ],
+  [
+    "empty_list_ready",
+    "    if (!list || list->entries.empty())\n        return true;",
+    "    if (!list)\n        return true;\n    if (list->entries.empty())\n        return false;"
+  ],
+  [
+    "only_first_binding",
+    "    for (const auto *entry : list->entries)\n        if (!entry)\n            return true;",
+    "    if (!list->entries.front())\n        return true;"
+  ],
+  [
+    "omit_last_binding",
+    "    for (const auto *entry : list->entries)\n        if (!entry)\n            return true;",
+    "    for (std::size_t i = 0; i + 1 < list->entries.size(); ++i)\n        if (!list->entries[i])\n            return true;"
+  ],
+  [
+    "filename_polarity",
+    "    return list->first_filename_invalid;",
+    "    return !list->first_filename_invalid;"
+  ],
+  [
+    "require_live_surface",
+    "        if (!entry)",
+    "        if (!entry || !entry->surface)"
+  ]
+]

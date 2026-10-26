@@ -22,7 +22,6 @@ struct Calls {
     virtual void rotate_y(std::uint16_t angle) = 0;
     virtual void enable_specular() = 0;
     virtual void select_menu_texture(std::uint32_t) = 0;
-    // STUB: SONIC 0x408530 dsDrawObject renderer composition and source guards
     virtual void draw_object(std::uint32_t object) = 0;
     virtual void pop_matrix(std::uint32_t count) = 0;
 };

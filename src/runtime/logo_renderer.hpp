@@ -2,6 +2,7 @@
 #include "engine/ninja_projected_depth.hpp"
 #include "engine/pvr_device.hpp"
 #include "engine/native_texture_lifetime.hpp"
+#include "engine/texture_selection_native.hpp"
 #include "runtime/logo_scene.hpp"
 #include <filesystem>
 
@@ -12,7 +13,8 @@ class LogoRenderer final : public LogoOutput {
     LogoRenderer(std::filesystem::path system_directory, graphics::Draw &device_state,
                  graphics::Frame &frame,
                  NinjaDepthProjection &, X87Context &, SseContext &,
-                 SseReciprocalEstimate, texture_lifetime::State);
+                 SseReciprocalEstimate, texture_lifetime::State, texture_selection::State,
+                 const texture_lifetime::List *&queued_list, std::uint32_t &queued_index);
     void begin_frame();
     const graphics::Frame &frame() const { return frame_; }
     std::size_t loaded_textures() const;
@@ -21,6 +23,11 @@ class LogoRenderer final : public LogoOutput {
     std::vector<texture_lifetime::Memory *> load_pvm_archive(std::string_view);
     std::int32_t load_individual_textures(texture_lifetime::List &);
     void select_texture_list(const texture_lifetime::List &);
+    void select_direct_texture_list(const texture_lifetime::List &);
+    std::uint32_t select_texture_index(std::uint32_t index);
+    // NOTSA: observe source in-place uploads while Draw snapshots retain older images.
+    void snapshot_bound_texture();
+    void unbind_texture();
     using ArchiveLoader = std::function<void(std::string_view, texture_lifetime::List &)>;
     void bind_archive_loader(ArchiveLoader loader) { archive_loader_ = std::move(loader); }
     void select_logo_archive() override;
@@ -51,6 +58,13 @@ class LogoRenderer final : public LogoOutput {
     SseReciprocalEstimate reciprocal_;
     graphics::Frame &frame_;
     texture_lifetime::State texture_state_;
+    texture_selection::State texture_selection_;
+    const texture_lifetime::List *&queued_texture_list_;
+    std::uint32_t &queued_texture_index_;
+    // [platform:texture] Observe the manager handle without retaining its source-byte owner.
+    std::weak_ptr<texture_lifetime::Surface> bound_surface_;
+    // NOTSA: bind the recovered selector to the existing native device image owner.
+    texture_selection::BindSurface texture_binding();
     texture_lifetime::List texture_list_;
     ArchiveLoader archive_loader_;
     std::vector<TextureSlot> textures_;
