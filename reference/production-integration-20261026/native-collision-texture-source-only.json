@@ -1,0 +1,37 @@
+{
+  "commit": "bfceb0a9d3850eebd75825b684b6f3de84cc2259",
+  "source_archive": true,
+  "original_exe_dll_present": false,
+  "prebuilt_game_objects_present": false,
+  "reused_dependency": "Pinned source-built SDL/libusb platform dependency only",
+  "dependency_builder_sha256": "a1709c569d4b4cc255f56e19a0d5717e87cfcb9fab89361f6c871478de65db50",
+  "build_exit_status": 0,
+  "app_exit_status": 1,
+  "frame": 1382,
+  "missing_call": "native_gamma_weld_binding",
+  "command": [
+    "/Users/burbujamc/Developer/sadx-macos/build/source-only-collision-texture-bfceb0a/build/sadx-native",
+    "--assets",
+    "/Users/burbujamc/Developer/sadx-macos/game/imported",
+    "--offscreen",
+    "--paced",
+    "--exit-after",
+    "1500",
+    "--save-directory",
+    "/Users/burbujamc/Developer/sadx-macos/build/source-only-collision-texture-bfceb0a/qualification/savedata",
+    "--key-events",
+    "500:13:down,501:13:up,750:13:down,751:13:up,900:38:down,901:38:up,950:13:down,951:13:up,1350:13:down,1351:13:up",
+    "--capture-directory",
+    "/Users/burbujamc/Developer/sadx-macos/build/source-only-collision-texture-bfceb0a/qualification/captures",
+    "--capture-at",
+    "1300,1380,1381,1382,1383,1390",
+    "--screenshot",
+    "/Users/burbujamc/Developer/sadx-macos/build/source-only-collision-texture-bfceb0a/qualification/frontier.ppm"
+  ],
+  "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+  "screenshot_matches_reviewed_binding": true,
+  "log_sha256": "40c62dffbe1024df277c96af6d299284bbf78814978454ba5af822c2961622fe",
+  "limits": [
+    "Diagnostic explicit stop, not actor/GPU/N3b or gameplay63FPS proof."
+  ]
+}
