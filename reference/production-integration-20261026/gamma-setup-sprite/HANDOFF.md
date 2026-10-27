@@ -1,0 +1,8 @@
+### 2026-10-26 — Portable shared sprite-registration constructor (track S, N3b)
+
+* packet/gamma-setup-sprite recovers RegisterSprite 456c50 from Root's complete 81-byte dossier ev_d230a26a849ab50f52074bcb36135343ad49bb007dc52671f2bb869ac52d3b42. It owns one canonical sprite head/count, borrows the existing arena and opaque definition, and retains extra-data interior identity.
+* Focused actual-arena unit and isolated source-only probe build exit 0. Original constructor has 1136 development and 2048 untouched holdout cases strictly equal, including original read/store order and five native store prefixes; seven mutants are caught. No FP instructions or inherited FP claim changes.
+* CAlloc is intercepted with an explicit lower contract; lower allocator fidelity and host allocation failure remain outside qualification. Wrapped-small allocations preserve untouched fill bytes and interior identity, without claiming safe consumers.
+* Readability adds zero debt, global owners/layers/hygiene pass, and both complete source-context ranges have zero UNHANDLED profile overlaps. Provenance passes conditionally against a private database containing the two proposed neutral names.
+* Gamma loader 4c5420, payload import and result owner 982154 remain unbound. Definition layout and consumers must be proved before importing 9820f8; no filename, dummy sprite or metadata payload was invented. No new normal-input boundary is claimed.
+* Root owns fresh review, symbols, compiler/unit/judge registrations, allocator binding, runtime integration and full gate. Existing judges/source, apps, Root Main, providers and public assets were untouched; no subagents, full gate or push ran here. Root can copy this entry to the shared journal on integration.

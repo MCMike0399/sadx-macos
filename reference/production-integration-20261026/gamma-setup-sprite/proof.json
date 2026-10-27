@@ -1,0 +1,42 @@
+{
+  "base": "cf1c51a730ab7dad7e9c4ef92003d34363e52366",
+  "branch": "packet/gamma-setup-sprite",
+  "worktree": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-452461e0",
+  "verification_exit_status": 0,
+  "command": "reference/production-integration-20261026/gamma-setup-sprite/verify.sh",
+  "development_cases": 1136,
+  "holdout_cases": 2048,
+  "strict_constructor_verdict": "pass",
+  "native_prefix_count_per_success": 5,
+  "mutants_caught": 7,
+  "unit_exit_status": 0,
+  "source_only_probe_build_exit_status": 0,
+  "provenance_with_private_proposed_symbols_exit_status": 0,
+  "readability_regressions": 0,
+  "layer_violations": 0,
+  "duplicate_global_owners": 0,
+  "full_source_context_profile_unhandled_overlaps": 0,
+  "full_gate": "not run; Root owned",
+  "apps": "not run; no new observed boundary",
+  "runtime_binding": "absent",
+  "payload_import": "absent; exact schema unknown",
+  "independent_review": "pending Root",
+  "shared_registrations": "untouched; proposed only",
+  "existing_source_and_judges": "git diff --exit-code cf1c51a -- returned 0 before adding packet; new files only",
+  "source_sha256": {
+    "src/engine/sprite_registry.hpp": "9d1a296cdc0c0a5a8b58bef7fb8a24d04f099e34570506479d57f60ffbab5361",
+    "src/engine/sprite_registry.cpp": "3557d4ed904dcc11cc9d74694c66f6c8cd08f597704805ee7819a712e0963cd2",
+    "tests/unit/sprite_registry.cpp": "b18ed8263cc10935437474b13ff08bae59ea5b5c3c7227caa61c217c950d90d7",
+    "tests/probes/native_sprite_registry_probe.cpp": "1d6c4dcbdb3f551bef8401b702944e153951c5254e9d47a765c92a00312f7d5f",
+    "tools/oracles/verify_original_sprite_registry.py": "bfe19ec3f796b0f7ff70a4164c113953c84c5d09f3c1f04950739cf5000c67cf",
+    "tools/oracles/build_sprite_registry_probe.py": "94ff3fce7af09fd0401962cb558f582406326cd4265beb03297301d0cca1f34c",
+    "tools/oracles/mutate_sprite_registry.py": "dde8d79640b7db2586ca4471c65b56e1a3e1f79405511facbb5305345fa68953"
+  },
+  "notes": [
+    "Source and probe begin with identical 0xff arena fill; an initial new-fixture mismatch was corrected before final verification.",
+    "Test instrumentation initially required exact assignments and could not build count/definition mutants; matcher now follows assignment targets. Final seven mutants all compile and fail by mismatches, not build errors.",
+    "Opaque definition bytes remain unmapped in original instruction tests.",
+    "Zero initial canonical globals verified in PE zero-filled .data virtual tail.",
+    "No change to existing Gamma/startup/geometry/wrapper oracles, probes, mutants, expectations or baselines."
+  ]
+}
