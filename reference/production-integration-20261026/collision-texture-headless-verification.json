@@ -1,0 +1,44 @@
+{
+  "command": "make -j2 journeys native-journeys native-startup-diff",
+  "command_exit_status": 0,
+  "source_commit": "bfceb0a9d3850eebd75825b684b6f3de84cc2259",
+  "full_gate_exit_status": 2,
+  "scope": "Separate headless verification after the actual windowed gate failure; not a green gate.",
+  "reference_journeys": {
+    "report": "build/journeys/report.json",
+    "sha256": "dc82fdb2aee62cfeda38a49cd3a6fd1a8036dd34479b6149ce667049d563880d",
+    "required_results": "R1,R2,R3,R4 pass"
+  },
+  "native_journeys": [
+    {
+      "name": "native-file-select",
+      "exit_status": 0,
+      "frames": 1850,
+      "output": "/Users/burbujamc/Developer/sadx-macos/build/native-file-select-cwsnmb44"
+    },
+    {
+      "name": "native-main-menu",
+      "exit_status": 0,
+      "frames": 1850,
+      "output": "/Users/burbujamc/Developer/sadx-macos/build/native-main-menu-tjps5umm"
+    },
+    {
+      "name": "native-fresh-save",
+      "exit_status": 0,
+      "frames": 6050,
+      "output": "/Users/burbujamc/Developer/sadx-macos/build/native-fresh-save-x6uwcq9c"
+    }
+  ],
+  "startup": {
+    "report": "build/native-startup-journey.ZtyN8t/report.json",
+    "sha256": "47ed3e3dff1ec8a55970f1d6cfe1973483ceb85304d416c8da776aff2703de59",
+    "passed": true,
+    "checkpoints": 16
+  },
+  "log": "build/collision-texture-headless-checks.log",
+  "log_sha256": "a1980bc164a8e147807c96ac65aa894c31da1e653da2ff7a66419663739394bf",
+  "limits": [
+    "Required visible-window smoke still pending active GUI.",
+    "No actor rendering/GPU parity/N3b/story/gameplay63FPS qualification."
+  ]
+}
