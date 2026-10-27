@@ -1,0 +1,238 @@
+{
+  "candidate": "da73181f37ae2b630f2ed659220d2fdb270bddb0",
+  "base": "cf1c51a730ab7dad7e9c4ef92003d34363e52366",
+  "review_branch": "packet/review-gamma-setup-sprite",
+  "method": "Static source, hash and receipt inspection only. No tests, builds, oracles, apps, Ghidra, providers or subagents run.",
+  "verdict": "bounded approval: portable constructor only",
+  "blocking_findings": [],
+  "changes": [
+    "A\treference/production-integration-20261026/gamma-setup-sprite/CONTRACT.md",
+    "A\treference/production-integration-20261026/gamma-setup-sprite/HANDOFF.md",
+    "A\treference/production-integration-20261026/gamma-setup-sprite/development.json",
+    "A\treference/production-integration-20261026/gamma-setup-sprite/holdout.json",
+    "A\treference/production-integration-20261026/gamma-setup-sprite/mutants.json",
+    "A\treference/production-integration-20261026/gamma-setup-sprite/profile-context.json",
+    "A\treference/production-integration-20261026/gamma-setup-sprite/proof.json",
+    "A\treference/production-integration-20261026/gamma-setup-sprite/source-456c50.asm",
+    "A\treference/production-integration-20261026/gamma-setup-sprite/source-4c5420.asm",
+    "A\treference/production-integration-20261026/gamma-setup-sprite/source-evidence.json",
+    "A\treference/production-integration-20261026/gamma-setup-sprite/symbol-proposals.tsv",
+    "A\treference/production-integration-20261026/gamma-setup-sprite/verification.log",
+    "A\treference/production-integration-20261026/gamma-setup-sprite/verify.sh",
+    "A\tsrc/engine/sprite_registry.cpp",
+    "A\tsrc/engine/sprite_registry.hpp",
+    "A\ttests/probes/native_sprite_registry_probe.cpp",
+    "A\ttests/unit/sprite_registry.cpp",
+    "A\ttools/oracles/build_sprite_registry_probe.py",
+    "A\ttools/oracles/mutate_sprite_registry.py",
+    "A\ttools/oracles/verify_original_sprite_registry.py"
+  ],
+  "all_changes_new_paths": true,
+  "proof_hash_checks": [
+    {
+      "path": "src/engine/sprite_registry.hpp",
+      "expected": "9d1a296cdc0c0a5a8b58bef7fb8a24d04f099e34570506479d57f60ffbab5361",
+      "actual": "9d1a296cdc0c0a5a8b58bef7fb8a24d04f099e34570506479d57f60ffbab5361"
+    },
+    {
+      "path": "src/engine/sprite_registry.cpp",
+      "expected": "3557d4ed904dcc11cc9d74694c66f6c8cd08f597704805ee7819a712e0963cd2",
+      "actual": "3557d4ed904dcc11cc9d74694c66f6c8cd08f597704805ee7819a712e0963cd2"
+    },
+    {
+      "path": "tests/unit/sprite_registry.cpp",
+      "expected": "b18ed8263cc10935437474b13ff08bae59ea5b5c3c7227caa61c217c950d90d7",
+      "actual": "b18ed8263cc10935437474b13ff08bae59ea5b5c3c7227caa61c217c950d90d7"
+    },
+    {
+      "path": "tests/probes/native_sprite_registry_probe.cpp",
+      "expected": "1d6c4dcbdb3f551bef8401b702944e153951c5254e9d47a765c92a00312f7d5f",
+      "actual": "1d6c4dcbdb3f551bef8401b702944e153951c5254e9d47a765c92a00312f7d5f"
+    },
+    {
+      "path": "tools/oracles/verify_original_sprite_registry.py",
+      "expected": "bfe19ec3f796b0f7ff70a4164c113953c84c5d09f3c1f04950739cf5000c67cf",
+      "actual": "bfe19ec3f796b0f7ff70a4164c113953c84c5d09f3c1f04950739cf5000c67cf"
+    },
+    {
+      "path": "tools/oracles/build_sprite_registry_probe.py",
+      "expected": "94ff3fce7af09fd0401962cb558f582406326cd4265beb03297301d0cca1f34c",
+      "actual": "94ff3fce7af09fd0401962cb558f582406326cd4265beb03297301d0cca1f34c"
+    },
+    {
+      "path": "tools/oracles/mutate_sprite_registry.py",
+      "expected": "dde8d79640b7db2586ca4471c65b56e1a3e1f79405511facbb5305345fa68953",
+      "actual": "dde8d79640b7db2586ca4471c65b56e1a3e1f79405511facbb5305345fa68953"
+    }
+  ],
+  "proof_hashes_match": true,
+  "dossiers": [
+    {
+      "path": "/Users/burbujamc/Developer/sadx-wt-normal-uv-strip/reference/inventory-raw/gamma-setup-recovery-20261026/gamma-setup-456c50.json",
+      "expected_sha256": "850e4402d47f28dafeef4e00630a17e72d2c1c40e0f28e0e605976a1bd91ad82",
+      "actual_sha256": "850e4402d47f28dafeef4e00630a17e72d2c1c40e0f28e0e605976a1bd91ad82",
+      "assembly_matches_packet": true,
+      "evidence_id": "ev_d230a26a849ab50f52074bcb36135343ad49bb007dc52671f2bb869ac52d3b42"
+    },
+    {
+      "path": "/Users/burbujamc/Developer/sadx-wt-normal-uv-strip/reference/inventory-raw/gamma-setup-recovery-20261026/gamma-setup-4c5420.json",
+      "expected_sha256": "71f1bf3fa01b2ee8472629718e5cc65c7fda02b7cb0a5aab762a8cab9d7a7ef8",
+      "actual_sha256": "71f1bf3fa01b2ee8472629718e5cc65c7fda02b7cb0a5aab762a8cab9d7a7ef8",
+      "assembly_matches_packet": true,
+      "evidence_id": "ev_f185c3c14833b75228a8aab6749c22dda9cc470d323e52090b52af8efafc3db5"
+    }
+  ],
+  "dossier_hashes_match": true,
+  "candidate_path_sha256": {
+    "reference/production-integration-20261026/gamma-setup-sprite/CONTRACT.md": "c6c3ac30a329f8762b17811d839f40fcc343824609b4c05a91cca1d2ef471bd3",
+    "reference/production-integration-20261026/gamma-setup-sprite/HANDOFF.md": "4b8d8936f6e67001660af3988828dca1caf566fb568295a8d3e28a9b6894a4b7",
+    "reference/production-integration-20261026/gamma-setup-sprite/development.json": "e554a38e901ab077855643475678cc08ba25762256ad4b714a98c178c656c3af",
+    "reference/production-integration-20261026/gamma-setup-sprite/holdout.json": "0183818f6219e2fa0e385246689b384ac8c48c68ca8723cdb39b0e609b0cdf98",
+    "reference/production-integration-20261026/gamma-setup-sprite/mutants.json": "512eb92248f3d216fce2b656e7472f411455fd396c6b5d72e7a0511e7bf3724d",
+    "reference/production-integration-20261026/gamma-setup-sprite/profile-context.json": "e4e007c4913704f66ba6c5ab6edfe710d95a268f39d1d7b55962d87c64af580b",
+    "reference/production-integration-20261026/gamma-setup-sprite/proof.json": "beef84b13fdde62cf6ec5570731749f807bf1f2b31fa004fa853426df6affde9",
+    "reference/production-integration-20261026/gamma-setup-sprite/source-456c50.asm": "3accb78f22e64f2dace4757b6b188a6cb9d9627dc811ee4613c32caf62242b16",
+    "reference/production-integration-20261026/gamma-setup-sprite/source-4c5420.asm": "be25735ffec12178f62a0f45e58badd11e20eefd621075ee1365a207c0d0a06b",
+    "reference/production-integration-20261026/gamma-setup-sprite/source-evidence.json": "af9e7c9ae71c775776f6309482f1eb787133525f601d8c9b64b254a9959725bd",
+    "reference/production-integration-20261026/gamma-setup-sprite/symbol-proposals.tsv": "ecf3afa87f0b98434642b1062105ea296dffb9381d40588e75c44d3bf05d3e21",
+    "reference/production-integration-20261026/gamma-setup-sprite/verification.log": "6abd503916255712f0b0d7ba8cfb027b9ba3efdc0c9b77d95f6cb6d8756a72c2",
+    "reference/production-integration-20261026/gamma-setup-sprite/verify.sh": "e28b9ffdb40a55372708c4ae6c3ceaa95c8c29390bd12447a0045a7179226754",
+    "src/engine/sprite_registry.cpp": "3557d4ed904dcc11cc9d74694c66f6c8cd08f597704805ee7819a712e0963cd2",
+    "src/engine/sprite_registry.hpp": "9d1a296cdc0c0a5a8b58bef7fb8a24d04f099e34570506479d57f60ffbab5361",
+    "tests/probes/native_sprite_registry_probe.cpp": "1d6c4dcbdb3f551bef8401b702944e153951c5254e9d47a765c92a00312f7d5f",
+    "tests/unit/sprite_registry.cpp": "b18ed8263cc10935437474b13ff08bae59ea5b5c3c7227caa61c217c950d90d7",
+    "tools/oracles/build_sprite_registry_probe.py": "94ff3fce7af09fd0401962cb558f582406326cd4265beb03297301d0cca1f34c",
+    "tools/oracles/mutate_sprite_registry.py": "dde8d79640b7db2586ca4471c65b56e1a3e1f79405511facbb5305345fa68953",
+    "tools/oracles/verify_original_sprite_registry.py": "bfe19ec3f796b0f7ff70a4164c113953c84c5d09f3c1f04950739cf5000c67cf"
+  },
+  "receipt_observations": {
+    "development": {
+      "slug": "sprite_registry",
+      "cases": 1136,
+      "holdout": false,
+      "seed": 45650,
+      "prefixes_match": true,
+      "passed": true,
+      "values_match": true,
+      "mismatches": [],
+      "mismatch_count": 0,
+      "source_ranges": {
+        "0x456c50-0x456ca1": {
+          "size": 81
+        }
+      },
+      "range_sha256": "0fa30c3ff99ef4a7d0f07319edd21692228239ed62574cfb08cee6a3c936526f",
+      "limits": [
+        "CAlloc intercepted with actual-arena size/failure contract; lower allocator not judged.",
+        "Source instruction read/store order asserted; five native prefixes use a test-only instrumented copy when requested. Before-store uninitialized fields are excluded from prefix snapshots; final bytes remain compared.",
+        "Opaque unmapped definition identity only; no payload, import, Gamma binding or rendering claim.",
+        "Wrapped undersized allocations retain interior identity; consumers/access not qualified.",
+        "No floating-point instructions in constructor; strict constructor values match only."
+      ]
+    },
+    "holdout": {
+      "slug": "sprite_registry",
+      "cases": 2048,
+      "holdout": true,
+      "seed": 982148,
+      "prefixes_match": true,
+      "passed": true,
+      "values_match": true,
+      "mismatches": [],
+      "mismatch_count": 0,
+      "source_ranges": {
+        "0x456c50-0x456ca1": {
+          "size": 81
+        }
+      },
+      "range_sha256": "0fa30c3ff99ef4a7d0f07319edd21692228239ed62574cfb08cee6a3c936526f",
+      "limits": [
+        "CAlloc intercepted with actual-arena size/failure contract; lower allocator not judged.",
+        "Source instruction read/store order asserted; five native prefixes use a test-only instrumented copy when requested. Before-store uninitialized fields are excluded from prefix snapshots; final bytes remain compared.",
+        "Opaque unmapped definition identity only; no payload, import, Gamma binding or rendering claim.",
+        "Wrapped undersized allocations retain interior identity; consumers/access not qualified.",
+        "No floating-point instructions in constructor; strict constructor values match only."
+      ]
+    },
+    "mutants": {
+      "mutants": [
+        {
+          "name": "null_guard",
+          "exit_status": 1,
+          "caught": true,
+          "mismatch_count": 8,
+          "stderr": ""
+        },
+        {
+          "name": "allocation_size",
+          "exit_status": 1,
+          "caught": true,
+          "mismatch_count": 8,
+          "stderr": ""
+        },
+        {
+          "name": "preallocation_capture",
+          "exit_status": 1,
+          "caught": true,
+          "mismatch_count": 8,
+          "stderr": ""
+        },
+        {
+          "name": "count_wrap",
+          "exit_status": 1,
+          "caught": true,
+          "mismatch_count": 8,
+          "stderr": ""
+        },
+        {
+          "name": "publication_order",
+          "exit_status": 1,
+          "caught": true,
+          "mismatch_count": 8,
+          "stderr": ""
+        },
+        {
+          "name": "negative_extra_skipped",
+          "exit_status": 1,
+          "caught": true,
+          "mismatch_count": 8,
+          "stderr": ""
+        },
+        {
+          "name": "lost_definition",
+          "exit_status": 1,
+          "caught": true,
+          "mismatch_count": 8,
+          "stderr": ""
+        }
+      ],
+      "passed": true
+    },
+    "profile-context": {
+      "summary": {
+        "patches": 618,
+        "active_patches": 121,
+        "active_unhandled_patches": 79,
+        "reports": 1,
+        "declared_exe_ranges": 2,
+        "unhandled_overlaps": 0,
+        "handled_overlaps": 0,
+        "undetermined_overlaps": 0,
+        "reports_without_addressed_ranges": []
+      },
+      "unhandled_overlaps": [],
+      "handled_overlaps": [],
+      "undetermined_overlaps": [],
+      "report_ranges": {
+        "gamma_setup_context.json": {
+          "exe_ranges": 2,
+          "dll_ranges_skipped": 0,
+          "opaque_range_hashes": [],
+          "unparsed_keys": []
+        }
+      }
+    }
+  },
+  "tests_rerun": false,
+  "root_gate_certified": false
+}
