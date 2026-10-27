@@ -1,0 +1,228 @@
+[
+  {
+    "name": "gamma-probe-build",
+    "command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-arch",
+      "arm64",
+      "-mmacosx-version-min=14.0",
+      "-Isrc",
+      "-Itests/fixtures",
+      "-dynamiclib",
+      "tests/probes/native_gamma_selection_core_probe.cpp",
+      "src/player/gamma_selection_core.cpp",
+      "build/libsadx-native.a",
+      "-o",
+      "build/gamma-texture-qualification/gamma.dylib"
+    ],
+    "exit_status": 0
+  },
+  {
+    "name": "gamma-core-unit-build",
+    "command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-arch",
+      "arm64",
+      "-mmacosx-version-min=14.0",
+      "-Isrc",
+      "-Itests/fixtures",
+      "tests/unit/gamma_selection_core.cpp",
+      "src/player/gamma_selection_core.cpp",
+      "build/libsadx-native.a",
+      "-o",
+      "build/gamma-texture-qualification/gamma-core-unit"
+    ],
+    "exit_status": 0
+  },
+  {
+    "name": "gamma-core-unit",
+    "command": [
+      "build/gamma-texture-qualification/gamma-core-unit"
+    ],
+    "exit_status": 0
+  },
+  {
+    "name": "gamma-dev",
+    "command": [
+      "/opt/homebrew/bin/python3",
+      "tools/oracles/verify_original_gamma_selection_core.py",
+      "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+      "build/gamma-texture-qualification/gamma.dylib",
+      "--output",
+      "build/gamma-texture-qualification/gamma-dev.json"
+    ],
+    "exit_status": 2
+  },
+  {
+    "name": "gamma-holdout",
+    "command": [
+      "/opt/homebrew/bin/python3",
+      "tools/oracles/verify_original_gamma_selection_core.py",
+      "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+      "build/gamma-texture-qualification/gamma.dylib",
+      "--output",
+      "build/gamma-texture-qualification/gamma-holdout.json",
+      "--holdout"
+    ],
+    "exit_status": 2
+  },
+  {
+    "name": "startup-unit-build",
+    "command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-arch",
+      "arm64",
+      "-mmacosx-version-min=14.0",
+      "-Isrc",
+      "-Itests/fixtures",
+      "tests/unit/player_startup.cpp",
+      "src/guest/player_initialization_reference.cpp",
+      "src/player/player_task.cpp",
+      "build/libsadx-native.a",
+      "-o",
+      "build/gamma-texture-qualification/startup-unit"
+    ],
+    "exit_status": 0
+  },
+  {
+    "name": "startup-unit",
+    "command": [
+      "build/gamma-texture-qualification/startup-unit",
+      "/Users/burbujamc/Developer/sadx-macos/build/assets/player-parameters.bin"
+    ],
+    "exit_status": 0
+  },
+  {
+    "name": "startup-probe-build",
+    "command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-arch",
+      "arm64",
+      "-mmacosx-version-min=14.0",
+      "-Isrc",
+      "-Itests/fixtures",
+      "-dynamiclib",
+      "tests/probes/native_player_startup_probe.cpp",
+      "src/guest/player_initialization_reference.cpp",
+      "src/player/player_task.cpp",
+      "build/libsadx-native.a",
+      "-o",
+      "build/gamma-texture-qualification/startup.dylib"
+    ],
+    "exit_status": 0
+  },
+  {
+    "name": "startup-oracle",
+    "command": [
+      "/opt/homebrew/bin/python3",
+      "tools/oracles/verify_original_player_startup.py",
+      "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+      "build/gamma-texture-qualification/startup.dylib",
+      "--output",
+      "build/gamma-texture-qualification/startup.json"
+    ],
+    "exit_status": 0
+  },
+  {
+    "name": "regular-unit-build",
+    "command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-arch",
+      "arm64",
+      "-mmacosx-version-min=14.0",
+      "-Isrc",
+      "-Itests/fixtures",
+      "tests/unit/regular_textures.cpp",
+      "src/game/regular_textures.cpp",
+      "-o",
+      "build/gamma-texture-qualification/regular-unit"
+    ],
+    "exit_status": 0
+  },
+  {
+    "name": "regular-unit",
+    "command": [
+      "build/gamma-texture-qualification/regular-unit"
+    ],
+    "exit_status": 0
+  },
+  {
+    "name": "regular-probe-build",
+    "command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-arch",
+      "arm64",
+      "-mmacosx-version-min=14.0",
+      "-Isrc",
+      "-Itests/fixtures",
+      "-dynamiclib",
+      "tests/probes/native_regular_textures_probe.cpp",
+      "src/game/regular_textures.cpp",
+      "-o",
+      "build/gamma-texture-qualification/regular.dylib"
+    ],
+    "exit_status": 0
+  },
+  {
+    "name": "regular-original",
+    "command": [
+      "/opt/homebrew/bin/python3",
+      "tools/oracles/verify_original_regular_textures.py",
+      "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+      "build/gamma-texture-qualification/regular.dylib",
+      "--loader-dll",
+      "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/mods/.modloader/SADXModLoader.dll",
+      "--output",
+      "build/gamma-texture-qualification/regular.json"
+    ],
+    "exit_status": 0
+  }
+]

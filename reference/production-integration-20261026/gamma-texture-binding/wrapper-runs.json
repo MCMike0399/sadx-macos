@@ -1,0 +1,90 @@
+[
+  {
+    "name": "wrapper-probe-build",
+    "command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wmissing-field-initializers",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-Isrc",
+      "-dynamiclib",
+      "src/game/character_textures.cpp",
+      "tests/probes/native_character_textures_probe.cpp",
+      "-o",
+      "build/gamma-texture-qualification/character.dylib"
+    ],
+    "exit_status": 0
+  },
+  {
+    "name": "wrapper-unit-build",
+    "command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-Wmissing-field-initializers",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-Isrc",
+      "src/game/character_textures.cpp",
+      "src/game/regular_textures.cpp",
+      "tests/unit/character_textures.cpp",
+      "-o",
+      "build/gamma-texture-qualification/character-unit"
+    ],
+    "exit_status": 0
+  },
+  {
+    "name": "wrapper-unit",
+    "command": [
+      "build/gamma-texture-qualification/character-unit"
+    ],
+    "exit_status": 0
+  },
+  {
+    "name": "wrapper-dev",
+    "command": [
+      "/opt/homebrew/bin/python3",
+      "tools/oracles/verify_original_character_textures.py",
+      "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+      "build/gamma-texture-qualification/character.dylib",
+      "--output",
+      "build/gamma-texture-qualification/wrapper-dev.json"
+    ],
+    "exit_status": 0
+  },
+  {
+    "name": "wrapper-holdout",
+    "command": [
+      "/opt/homebrew/bin/python3",
+      "tools/oracles/verify_original_character_textures.py",
+      "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+      "build/gamma-texture-qualification/character.dylib",
+      "--output",
+      "build/gamma-texture-qualification/wrapper-holdout.json",
+      "--split",
+      "holdout"
+    ],
+    "exit_status": 0
+  },
+  {
+    "name": "wrapper-mutants",
+    "command": [
+      "/opt/homebrew/bin/python3",
+      "tools/oracles/mutate_character_textures.py",
+      "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+      "--output-dir",
+      "build/gamma-texture-qualification/wrapper-mutants"
+    ],
+    "exit_status": 0
+  }
+]

@@ -204,8 +204,11 @@ void update_action_state(Context &, Primary, const Player &) {
     missing("native_gamma_update_action_state");
 }
 // NOTSA: native boundary for LoadCharTextures; source seam declared in the Gamma core.
-void load_character_textures(Context &, std::uint8_t) {
-    missing("native_gamma_load_character_textures");
+void load_character_textures(Context &context, std::uint8_t character) {
+    if (!context.texture_state || !context.texture_services)
+        missing("native_gamma_character_texture_owner");
+    regular_textures::load_character(character, context.character_textures,
+                                    *context.texture_state, *context.texture_services);
 }
 // NOTSA: native boundary for GammaInitializeCursors; source seam declared in the Gamma core.
 void initialize_cursors(Context &, const TaskWorkHandle &) {
@@ -296,3 +299,10 @@ void run_children(Context &, const TaskHandle &) {
     missing("native_gamma_run_children");
 }
 } // namespace sadx::gamma_selection
+
+namespace sadx::regular_textures {
+// NOTSA: native fail-loud binding for the unrecovered Amy-specific source seam.
+void load_egg_robo_textures(State &, Services &) {
+    throw flow::UnrecoveredGameFlowCall("native_LoadEggRoboTextures");
+}
+} // namespace sadx::regular_textures

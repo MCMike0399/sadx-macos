@@ -3,6 +3,7 @@
 #include "player/actor_current.hpp"
 #include "player/gamma_selection_core.hpp"
 #include "game/game_bootstrap.hpp"
+#include "game/character_textures.hpp"
 
 namespace sadx::native {
 class Display;
@@ -35,5 +36,8 @@ struct Context {
     const TaskHandle &task;
     const std::int16_t &stage, &act;
     TaskCallback display, destructor, auxiliary;
+    regular_textures::CharacterCatalog character_textures;
+    regular_textures::State *texture_state;
+    regular_textures::Services *texture_services;
 };
 } // namespace sadx::gamma_selection

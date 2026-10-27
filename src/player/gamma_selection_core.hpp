@@ -116,7 +116,7 @@ void process_action(Context &, const TaskHandle &, const TaskWorkHandle &, const
 void update_action_state(Context &, Primary, const Player &);
 // NOTSA: native binding to canonical collision_component::initialize.
 void initialize_collision(Context &, const TaskHandle &, unsigned records, std::uint8_t id);
-// STUB: SONIC 0x421280 LoadCharTextures
+// NOTSA: native binding to canonical regular_textures::load_character.
 void load_character_textures(Context &, std::uint8_t character);
 // STUB: SONIC 0x40b2d0 CAlloc
 TaskWorkHandle allocate_zero(Context &, unsigned count, unsigned bytes);

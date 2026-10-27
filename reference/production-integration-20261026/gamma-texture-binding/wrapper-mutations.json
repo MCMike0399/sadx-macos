@@ -1,0 +1,77 @@
+{
+  "mutants": [
+    {
+      "name": "negative-is-cold",
+      "killed": true,
+      "exit_status": 1,
+      "first_mismatch_case": 257,
+      "source_sha256": "cedd0e58811319d6a94df5e1a621a1494335f5459a8882ea02c73a0cae1af2ca"
+    },
+    {
+      "name": "null-table-increments",
+      "killed": true,
+      "exit_status": 1,
+      "first_mismatch_case": 2,
+      "source_sha256": "bf66bfd27c78dbe9ccbd7c85fde29770eaf338a004f92b3b84956b2b4019040e"
+    },
+    {
+      "name": "counter-does-not-wrap",
+      "killed": true,
+      "exit_status": 1,
+      "first_mismatch_case": 255,
+      "source_sha256": "94f9fd323c4cc67f4b8b468c8dbc2fe773375665d3ef0fadcf3838b01b599615"
+    },
+    {
+      "name": "cached-counter",
+      "killed": true,
+      "exit_status": 1,
+      "first_mismatch_case": 4613,
+      "source_sha256": "977f1f706a41520536fe081afc463e1b0ddfe6a4a8746bc7c8801ec463f9083a"
+    },
+    {
+      "name": "amy-on-warm",
+      "killed": true,
+      "exit_status": 1,
+      "first_mismatch_case": 2563,
+      "source_sha256": "7342a18e6e8acea9d94ad9dab96c4f71537a574546d046fbc646fd1ee381e112"
+    },
+    {
+      "name": "amy-skips-empty",
+      "killed": true,
+      "exit_status": 1,
+      "first_mismatch_case": 4849,
+      "source_sha256": "10295144ed95955eb5d828737a31a71017b7a2f67ef1b3dd9876463732cd29f9"
+    },
+    {
+      "name": "named-uses-nameless",
+      "killed": true,
+      "exit_status": 1,
+      "first_mismatch_case": 1,
+      "source_sha256": "3fcb170ca0c9ff3af34569bd0829ce2aa6e134b7de328d92bc30932f8281a243"
+    },
+    {
+      "name": "prefetch-next",
+      "killed": true,
+      "exit_status": 1,
+      "first_mismatch_case": 4636,
+      "source_sha256": "85e8000aef40e81c49979d1d471d4bd51f67642dc66c7f7afc1e15153ddc0664"
+    },
+    {
+      "name": "recapture-table",
+      "killed": true,
+      "exit_status": 1,
+      "first_mismatch_case": 4616,
+      "source_sha256": "629d83bb1a8ad279b55205f84479aee1d9fc8b3e77112e2f394a3e0986629f27"
+    },
+    {
+      "name": "ignore-current-null",
+      "killed": true,
+      "exit_status": 1,
+      "first_mismatch_case": 4611,
+      "source_sha256": "6dd0c9e2a13aa7dabdd0051aa29be88545562c1b8ed7a2f10397b48509651f95"
+    }
+  ],
+  "killed": 10,
+  "count": 10,
+  "original_source_sha256": "9444d1d36c37bc339c8773cfd7982df62f8cbca526bf9c64b74db16c33d6af92"
+}

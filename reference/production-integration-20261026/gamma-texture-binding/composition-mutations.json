@@ -1,0 +1,55 @@
+{
+  "mutants": [
+    {
+      "name": "skip_actual_wrapper",
+      "build_exit": 0,
+      "test_exit": 1,
+      "caught": true,
+      "mutated_source_sha256": "755487cca4bf06c0bda7c3153ed3ce780b7f68af6bb30889c13d403e898f3b4c",
+      "failure": "cold Gamma ordinary loader performs actual archive loads before live increment"
+    },
+    {
+      "name": "wrong_character_slot",
+      "build_exit": 0,
+      "test_exit": 1,
+      "caught": true,
+      "mutated_source_sha256": "ff1ad29399238908b05fefd469d0b2f004c787149926203e591d4d7f0ed922ff",
+      "failure": "cold Gamma ordinary loader performs actual archive loads before live increment"
+    },
+    {
+      "name": "shadow_loaded_byte",
+      "build_exit": 0,
+      "test_exit": 1,
+      "caught": true,
+      "mutated_source_sha256": "c81ecacdeaa4d2405a94451823e5444dec44d62a511c542b6595be709d6c4c85",
+      "failure": "ordinary texture catalog borrows exact counters, lists and archive text"
+    },
+    {
+      "name": "empty_becomes_absent",
+      "build_exit": 0,
+      "test_exit": 1,
+      "caught": true,
+      "mutated_source_sha256": "cf30b13fb86e4445f9d000f86c941ceced0a251ae0949eaee5f4130b1ca67596",
+      "failure": "empty table has a stable nonnull descriptor identity"
+    },
+    {
+      "name": "discard_actual_texlist",
+      "build_exit": 0,
+      "test_exit": 1,
+      "caught": true,
+      "mutated_source_sha256": "88ecad07105cba9481b812178be39d52e12d6dd274839f0df0a56ba19023e22a",
+      "failure": "ordinary texture catalog borrows exact counters, lists and archive text"
+    },
+    {
+      "name": "amy_silent_success",
+      "build_exit": 0,
+      "test_exit": 1,
+      "caught": true,
+      "mutated_source_sha256": "1b5a63a0d7ae5bda9848e4d898d02eee4f92452b86888fab1b69249c1aadd00c",
+      "failure": "unrecovered Amy body fails before the source counter store"
+    }
+  ],
+  "caught": 6,
+  "total": 6,
+  "scope": "native wiring/view/explicit-seam composition only; no lower algorithm proof"
+}

@@ -1,0 +1,341 @@
+{
+  "scope": "Actual Gamma ordinary texture caller with canonical borrowed Session catalog/state/services to the next weld binding boundary.",
+  "source_sha256": {
+    "src/runtime/character_texture_assets.hpp": "022fcad5f88cb49c9c5030dd9196be79a9d019cd75da3a8a44c2ff950b4b76d6",
+    "src/runtime/native_gamma_binding.cpp": "78a99a397b273f269e609f0867e92e7a7796de6fa26a8ac4125827dc992bc655",
+    "src/runtime/native_player_system.hpp": "2a820955407ff2d4a2894649f700f771e8777582a229c9ee803bd88a9564b341",
+    "src/runtime/native_selection_preview.cpp": "1cea60074b51c24cb91d5c34ca6aa2f9433110b4731f38033bfe5319159c82b8",
+    "src/runtime/native_session.hpp": "05342b3388d6ed92723bf69adb285758b8dac9b763f932e2835204f5b7c06997",
+    "src/apps/sadx_native.mm": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2",
+    "src/player/gamma_selection_core.hpp": "611a7bcfe67cf5e80a52c8d69c58dd47d4788f0cbf3de22572bf7e59d1073ed4",
+    "tests/unit/native_gamma_binding.mm": "3b2fe1c0646a178d32748409ce477c2af721c24cf84abc2732e91429051d8fc6",
+    "native-sources.txt": "03f23b2fa2dbc068ac47bdacc004840a135a1104cb35ee76b97e13e4a15699dc",
+    "src/game/character_textures.cpp": "9444d1d36c37bc339c8773cfd7982df62f8cbca526bf9c64b74db16c33d6af92",
+    "src/game/character_textures.hpp": "f8bae2e68f5d8570ff3c071db8a5f86a114821dd426505cd834650c8c6ece9f0",
+    "tests/probes/native_character_textures_probe.cpp": "d396610f770f703288ce81ae321aa30a7d97fc31cf0bbf2ded080017d4ed04d9",
+    "tests/unit/character_textures.cpp": "10c626efa503028542062323443b12b08a85ab8b84e4b0382ce4cac4460bb57f",
+    "tools/oracles/verify_original_character_textures.py": "06eee8460d213ca5ff2b36bce871124a9f9a949fcfaca732d81ba8197e932bb7",
+    "tools/oracles/mutate_character_textures.py": "0d1c2ed29a7afebe7eed61cce52eb4f79c5fafc4fce9153277645510be957bf1"
+  },
+  "approved_8052fac_imports_byte_identical": {
+    "src/game/character_textures.cpp": "9444d1d36c37bc339c8773cfd7982df62f8cbca526bf9c64b74db16c33d6af92",
+    "src/game/character_textures.hpp": "f8bae2e68f5d8570ff3c071db8a5f86a114821dd426505cd834650c8c6ece9f0",
+    "tests/probes/native_character_textures_probe.cpp": "d396610f770f703288ce81ae321aa30a7d97fc31cf0bbf2ded080017d4ed04d9",
+    "tests/unit/character_textures.cpp": "10c626efa503028542062323443b12b08a85ab8b84e4b0382ce4cac4460bb57f",
+    "tools/oracles/verify_original_character_textures.py": "06eee8460d213ca5ff2b36bce871124a9f9a949fcfaca732d81ba8197e932bb7",
+    "tools/oracles/mutate_character_textures.py": "0d1c2ed29a7afebe7eed61cce52eb4f79c5fafc4fce9153277645510be957bf1"
+  },
+  "gamma_algorithm_harness_unchanged": {
+    "src/player/gamma_selection_core.cpp": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea",
+    "tests/probes/native_gamma_selection_core_probe.cpp": "f1f5119da472f78651428ac79b4a5435e80acb359bf2a0c2f816b2670195a517",
+    "tests/unit/gamma_selection_core.cpp": "d6aadb3b53e94fed35b696822e1271b7eb2e23d5e908a5e0bf8b8ce4ea144db1",
+    "tools/oracles/verify_original_gamma_selection_core.py": "b62020db7b643a941079b15b2e0b931885ace95b40bb1ec3329a61439604aada",
+    "tools/oracles/mutate_gamma_selection_core.py": "f19c1e581df6b56c2f4c88d3c97881765863d342119490fd9acb77ba03e7b538"
+  },
+  "downstream_regular_sources_harness_unchanged": {
+    "src/game/regular_textures.cpp": "66ffcb849c16911ba7c678245362f706ac47fc46bd8aef8a1e41532b85eb5553",
+    "src/game/regular_textures.hpp": "f0c17f3c50a0a0b1567c87fd474a9d24f6a7956cdc48d3d62f72a86f65f5b532",
+    "tests/unit/regular_textures.cpp": "44eaf0fadf2e1ff4348d2921684b090fcf4ac1d78cb8255eb071d5e15670c9e5",
+    "tests/probes/native_regular_textures_probe.cpp": "795e52a52390b6ecdce58423e6ea25b268122b3b9877b7b8c9a64ec945efc7b5",
+    "tools/oracles/verify_original_regular_textures.py": "101211c7b3224b223bbfafefc5022edab44d28aee0110525caf040197efa6cf0"
+  },
+  "gamma_header_change": "Exactly one421280 STUB comment becomes NOTSA; separate0e99102 and annotation-evidence.json. Earlier collision comment migration preserved.",
+  "preserved_prior_branch": "packet/gamma-collision-binding6e9a1ec",
+  "native_build": {
+    "command": "make -j2 build/native-gamma-binding-test build/sadx-native native-closure",
+    "exit_status": 0,
+    "force_load_passed": true,
+    "closure_report_sha256": "1759087567ed0cc739cdce1bc0e3925d52a467063e9b8d3d50a7f9923e9ca00d"
+  },
+  "native_unit": {
+    "command": "./build/native-gamma-binding-test build/gamma-native-assets",
+    "exit_status": 0,
+    "log_sha256": "37a386d71cf44aefea5207a80208ee61e3035072934da300b69b72453f234ebd",
+    "checks": [
+      "real imported Gamma cold archives delivered to actual Display texture manager",
+      "warm and negative/wrapped counter paths consume the source signed byte",
+      "cached texlist Memory identities survive reload",
+      "borrowed counter/list/archive-text pointer identities",
+      "all9 nonnull empty table pointers with stable descriptors",
+      "explicit Amy failure before counter store",
+      "real TaskScheduler/PInitialize/current/collision ownership retained"
+    ]
+  },
+  "native_app": {
+    "command": [
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-b75da23e/build/sadx-native",
+      "--assets",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-b75da23e/build/gamma-native-assets",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1500",
+      "--save-directory",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-b75da23e/build/gamma-texture-frontier/savedata",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,900:38:down,901:38:up,950:13:down,951:13:up,1350:13:down,1351:13:up",
+      "--capture-directory",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-b75da23e/build/gamma-texture-frontier/captures",
+      "--capture-at",
+      "1300,1380,1381,1382,1383,1390",
+      "--screenshot",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-b75da23e/build/gamma-texture-frontier/frontier.ppm"
+    ],
+    "exit_status": 1,
+    "frame": 1382,
+    "first_missing_call": "native_gamma_weld_binding",
+    "log_sha256": "8b332b13ceda36d2ad330a0611d061e3e745723428b48831ae85700221d0f0eb",
+    "character_texture_loaded_pre_controller": [
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      1,
+      1,
+      0
+    ],
+    "character_texture_loaded_terminal": [
+      1,
+      0,
+      1,
+      1,
+      0,
+      1,
+      2,
+      1,
+      0
+    ],
+    "texture_slots": 762,
+    "canonical_gamma_task": {
+      "retired": false,
+      "mode": 0,
+      "id": 2,
+      "player_index": 5,
+      "character": 6,
+      "status": 0,
+      "position": [
+        400,
+        0,
+        -20
+      ],
+      "rotation": [
+        0,
+        16384,
+        0
+      ],
+      "aim_y": 0
+    },
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "screenshot_inspected": true,
+    "image_identical_to_prior_collision_stop": true,
+    "visible_output": "Outgoing title screen; no actor/N3b rendering claim."
+  },
+  "wrapper_original": {
+    "wrapper-dev": {
+      "cases": 5297,
+      "value_mismatches": 0,
+      "values_match": true,
+      "passed": true,
+      "exit_status": 0,
+      "report_sha256": "c8dcab1a7a4f0af5999dd687b9c2e0a6efbd72b47466357a88da374481f59659"
+    },
+    "wrapper-holdout": {
+      "cases": 4096,
+      "value_mismatches": 0,
+      "values_match": true,
+      "passed": true,
+      "exit_status": 0,
+      "report_sha256": "0faeaa9b394e3139a4fbf6cc51829e41f500356c0f29ceb9a53ef891a4feec24"
+    }
+  },
+  "wrapper_mutations": {
+    "mutants": [
+      {
+        "name": "negative-is-cold",
+        "killed": true,
+        "exit_status": 1,
+        "first_mismatch_case": 257,
+        "source_sha256": "cedd0e58811319d6a94df5e1a621a1494335f5459a8882ea02c73a0cae1af2ca"
+      },
+      {
+        "name": "null-table-increments",
+        "killed": true,
+        "exit_status": 1,
+        "first_mismatch_case": 2,
+        "source_sha256": "bf66bfd27c78dbe9ccbd7c85fde29770eaf338a004f92b3b84956b2b4019040e"
+      },
+      {
+        "name": "counter-does-not-wrap",
+        "killed": true,
+        "exit_status": 1,
+        "first_mismatch_case": 255,
+        "source_sha256": "94f9fd323c4cc67f4b8b468c8dbc2fe773375665d3ef0fadcf3838b01b599615"
+      },
+      {
+        "name": "cached-counter",
+        "killed": true,
+        "exit_status": 1,
+        "first_mismatch_case": 4613,
+        "source_sha256": "977f1f706a41520536fe081afc463e1b0ddfe6a4a8746bc7c8801ec463f9083a"
+      },
+      {
+        "name": "amy-on-warm",
+        "killed": true,
+        "exit_status": 1,
+        "first_mismatch_case": 2563,
+        "source_sha256": "7342a18e6e8acea9d94ad9dab96c4f71537a574546d046fbc646fd1ee381e112"
+      },
+      {
+        "name": "amy-skips-empty",
+        "killed": true,
+        "exit_status": 1,
+        "first_mismatch_case": 4849,
+        "source_sha256": "10295144ed95955eb5d828737a31a71017b7a2f67ef1b3dd9876463732cd29f9"
+      },
+      {
+        "name": "named-uses-nameless",
+        "killed": true,
+        "exit_status": 1,
+        "first_mismatch_case": 1,
+        "source_sha256": "3fcb170ca0c9ff3af34569bd0829ce2aa6e134b7de328d92bc30932f8281a243"
+      },
+      {
+        "name": "prefetch-next",
+        "killed": true,
+        "exit_status": 1,
+        "first_mismatch_case": 4636,
+        "source_sha256": "85e8000aef40e81c49979d1d471d4bd51f67642dc66c7f7afc1e15153ddc0664"
+      },
+      {
+        "name": "recapture-table",
+        "killed": true,
+        "exit_status": 1,
+        "first_mismatch_case": 4616,
+        "source_sha256": "629d83bb1a8ad279b55205f84479aee1d9fc8b3e77112e2f394a3e0986629f27"
+      },
+      {
+        "name": "ignore-current-null",
+        "killed": true,
+        "exit_status": 1,
+        "first_mismatch_case": 4611,
+        "source_sha256": "6dd0c9e2a13aa7dabdd0051aa29be88545562c1b8ed7a2f10397b48509651f95"
+      }
+    ],
+    "killed": 10,
+    "count": 10,
+    "original_source_sha256": "9444d1d36c37bc339c8773cfd7982df62f8cbca526bf9c64b74db16c33d6af92"
+  },
+  "gamma_original": {
+    "gamma-dev": {
+      "case_count": 1422,
+      "value_failures": 0,
+      "fp_flag_partials": 498,
+      "exit_status": 2,
+      "verdict": "partial",
+      "report_sha256": "25907e266403cbc94e7f22054fe5d181052c80c5ef3bfa5bf9652c744a33a830"
+    },
+    "gamma-holdout": {
+      "case_count": 1080,
+      "value_failures": 0,
+      "fp_flag_partials": 690,
+      "exit_status": 2,
+      "verdict": "partial",
+      "report_sha256": "e24c9782adb1b19591f1eb7e09c9261449f7fae02087c1e384eae3c69f2a1f0f"
+    }
+  },
+  "startup_original": {
+    "cases": 2004,
+    "mismatches": 0,
+    "fp_partials": 924,
+    "script_exit_status": 0,
+    "verdict": "partial",
+    "report_sha256": "d398666c782a2dc4b95c1214cf6794341ddcaa168fc9e19ee78009c63044550a"
+  },
+  "downstream_regular_original": {
+    "cases": 609,
+    "mismatches": 0,
+    "exit_status": 0,
+    "report_sha256": "63f18052aa9b17a3404ca679b78499937bda27256c1f7f3b7860d1950e5eaede"
+  },
+  "frozen_units": {
+    "wrapper_actual_regular_loader": 0,
+    "gamma_core": 0,
+    "startup": 0,
+    "regular_textures": 0
+  },
+  "composition_mutations": {
+    "mutants": [
+      {
+        "name": "skip_actual_wrapper",
+        "build_exit": 0,
+        "test_exit": 1,
+        "caught": true,
+        "mutated_source_sha256": "755487cca4bf06c0bda7c3153ed3ce780b7f68af6bb30889c13d403e898f3b4c",
+        "failure": "cold Gamma ordinary loader performs actual archive loads before live increment"
+      },
+      {
+        "name": "wrong_character_slot",
+        "build_exit": 0,
+        "test_exit": 1,
+        "caught": true,
+        "mutated_source_sha256": "ff1ad29399238908b05fefd469d0b2f004c787149926203e591d4d7f0ed922ff",
+        "failure": "cold Gamma ordinary loader performs actual archive loads before live increment"
+      },
+      {
+        "name": "shadow_loaded_byte",
+        "build_exit": 0,
+        "test_exit": 1,
+        "caught": true,
+        "mutated_source_sha256": "c81ecacdeaa4d2405a94451823e5444dec44d62a511c542b6595be709d6c4c85",
+        "failure": "ordinary texture catalog borrows exact counters, lists and archive text"
+      },
+      {
+        "name": "empty_becomes_absent",
+        "build_exit": 0,
+        "test_exit": 1,
+        "caught": true,
+        "mutated_source_sha256": "cf30b13fb86e4445f9d000f86c941ceced0a251ae0949eaee5f4130b1ca67596",
+        "failure": "empty table has a stable nonnull descriptor identity"
+      },
+      {
+        "name": "discard_actual_texlist",
+        "build_exit": 0,
+        "test_exit": 1,
+        "caught": true,
+        "mutated_source_sha256": "88ecad07105cba9481b812178be39d52e12d6dd274839f0df0a56ba19023e22a",
+        "failure": "ordinary texture catalog borrows exact counters, lists and archive text"
+      },
+      {
+        "name": "amy_silent_success",
+        "build_exit": 0,
+        "test_exit": 1,
+        "caught": true,
+        "mutated_source_sha256": "1b5a63a0d7ae5bda9848e4d898d02eee4f92452b86888fab1b69249c1aadd00c",
+        "failure": "unrecovered Amy body fails before the source counter store"
+      }
+    ],
+    "caught": 6,
+    "total": 6,
+    "scope": "native wiring/view/explicit-seam composition only; no lower algorithm proof"
+  },
+  "static_checks": {
+    "readability": "0 regressions",
+    "provenance": "0 errors",
+    "layers": "0 violations",
+    "global_owners": "0 duplicates",
+    "working_diff_whitespace": "clean"
+  },
+  "limits": [
+    "Root approved8052fac via7ad2c4b before any execution/consumption.",
+    "At most2 private compiler processes; no Main/shared archives/provider/full gate/subagents/push.",
+    "No512550 algorithm delegation, manual counter increment, loaded bypass or shadow texture/counter owner.",
+    "CharacterTextureViews owns only short-lived pointer/string_view descriptors, no texlists or counters.",
+    "Amy extra remains an explicit native throw; wrapper receipts do not prove Amy algorithm.",
+    "No weld/effects/material/matrix/other actor or story behavior fabricated.",
+    "Root owns fresh composition review, imported unit/judge registrations, Main integration and full gate.",
+    "No old oracle/probe/fixture/expectation/tolerance/corpus altered; no Main exactpack assertions changed.",
+    "FP partials remain partial; no new lower algorithm claims from wrapper receipts."
+  ]
+}

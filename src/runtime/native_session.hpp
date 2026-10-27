@@ -76,6 +76,11 @@ class Session final : private flow::NativeServices {
     const menu_caption::State &menu_caption_state() const { return menu_caption_; }
     const char *active_save_name() const { return save_name_.value; }
     std::int32_t current_music_song() const { return tracks_.current_song; }
+    // NOTSA: read-only journey evidence from the canonical signed-byte owners.
+    const std::array<std::int8_t, 9> &character_texture_counts() const {
+        return character_textures_loaded_;
+    }
+
     std::uint32_t logic_loop_count() const { return secondary_loop_count_; }
     std::optional<file_select::FileInfo> selected_save_file() const {
         auto node = list_data_;

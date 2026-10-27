@@ -673,6 +673,13 @@ class Application {
                    << ",\"file_select_color\":" << file_work->presentation.color
                    << ",\"file_select_fade\":" << file_work->presentation.fade_progress;
         }
+        output << ",\"character_texture_loaded\":[";
+        const auto &character_counts = session.character_texture_counts();
+        for (std::size_t index = 0; index < character_counts.size(); ++index) {
+            if (index != 0) output << ',';
+            output << static_cast<int>(character_counts[index]);
+        }
+        output << ']';
         output
                   << ",\"logo_frames\":" << session.logo_scene().state().frames
                   << ",\"logo_mode\":" << static_cast<unsigned>(session.logo_scene().state().mode)
