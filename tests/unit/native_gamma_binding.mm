@@ -1,6 +1,7 @@
 #include "apps/native_gamma_actor_assets.hpp"
 #include "runtime/native_player_system.hpp"
 #include "runtime/native_display.hpp"
+#include "runtime/character_texture_assets.hpp"
 #include "game/game_mode.hpp"
 #include <iostream>
 #include <algorithm>
@@ -84,9 +85,38 @@ void check_binding(const std::filesystem::path &directory) {
     bootstrap.event_work[465] = 1;
     frame::ModeState timing;
     native::Display display(directory / "system", timing);
+    auto texture_assets = native::app::load_assets(directory).character_textures;
+    std::array<std::vector<regular_textures::List>, 9> character_lists;
+    for (std::size_t character = 0; character < character_lists.size(); ++character) {
+        auto &lists = character_lists[character];
+        lists.resize(texture_assets[character].size());
+        for (std::size_t index = 0; index < lists.size(); ++index)
+            lists[index].entries.resize(texture_assets[character][index].texture_count);
+    }
+    std::array<std::int8_t, 9> loaded{};
+    native::CharacterTextureViews texture_views(texture_assets, character_lists);
+    const auto catalog = texture_views.catalog(loaded);
+    require(catalog.loaded == loaded.data() && catalog.tables == texture_views.tables.data() &&
+        catalog.tables[6].entries[0].textures == &character_lists[6][0] &&
+        catalog.tables[6].entries[0].archive->data() == texture_assets[6][0].archive.data(),
+        "ordinary texture catalog borrows exact counters, lists and archive text");
+    std::uint8_t resync = 0;
+    const std::int32_t language = 1;
+    regular_textures::List *common = nullptr;
+    std::array<regular_textures::List *, 32> regular{};
+    const regular_textures::Localizations localizations{};
+    regular_textures::State texture_state{resync, language, common, regular, localizations, {}, {}};
+    std::vector<std::string> texture_calls;
+    regular_textures::Services texture_services{
+        [&](std::string_view name) {
+            texture_calls.emplace_back(name);
+            return regular_textures::ArchiveResult{1, display.output().load_pvm_archive(name)};
+        },
+        [&](regular_textures::List &list) { return display.output().load_individual_textures(list); },
+        [](std::string_view message) { throw std::runtime_error(std::string(message)); }};
     const std::int16_t stage = 0, act = 0;
     gamma::Context context{players, scheduler, bootstrap, display, task, stage, act,
-        lower_callback, lower_callback, lower_callback};
+        lower_callback, lower_callback, lower_callback, catalog, &texture_state, &texture_services};
     // Consumer bindings must read bootstrap timer bytes and the actual task handle,
     // independent of similarly named cutscene control/work or game timer fields.
     bootstrap.cutscene_active = 1;
@@ -113,15 +143,15 @@ void check_binding(const std::filesystem::path &directory) {
     bool stopped = false;
     try { gamma::run(context, task); }
     catch (const flow::UnrecoveredGameFlowCall &error) {
-        require(std::string(error.what()) == "native_gamma_load_character_textures", "first real lower boundary");
+        require(std::string(error.what()) == "native_gamma_weld_binding", "first real lower boundary");
         stopped = true;
     }
-    require(stopped, "unrecovered ordinary texture loader must throw");
+    require(stopped, "unrecovered weld binding must throw");
     require(players.gamma.time_zero == 0 && players.gamma.event_enabled == 1,
         "core consumes the actual bootstrap-bound predicates before initialization");
     const auto player = players.registry.players[5];
     require(player && player->stage == player_initialization::Stage::Complete,
-        "real PInitialize completes before ordinary texture boundary");
+        "real PInitialize completes before weld boundary");
     require(players.registry.tasks[5] == task && players.registry.primary[5] == primary_owner &&
         players.registry.motion[5] == motion_owner && task->primary_state == primary_owner &&
         task->motion_state == motion_owner, "registry borrows actual task owners");
@@ -142,6 +172,43 @@ void check_binding(const std::filesystem::path &directory) {
     require(player->auxiliary && player->auxiliary_task &&
         player->auxiliary_task->exec == lower_callback && !task->display && !task->destructor,
         "source auxiliary task exists and later Gamma callback stores have not run");
+    require(loaded[6] == 1 && texture_calls.size() == texture_assets[6].size(),
+        "cold Gamma ordinary loader performs actual archive loads before live increment");
+    for (std::size_t index = 0; index < texture_calls.size(); ++index)
+        require(texture_calls[index] == texture_assets[6][index].archive &&
+            character_lists[6][index].entries.front() != nullptr,
+            "source archive order populates the actual texlist owners");
+    const auto first_memory = character_lists[6][0].entries.front();
+    gamma::load_character_textures(context, 6);
+    require(loaded[6] == 2 && texture_calls.size() == texture_assets[6].size() &&
+        character_lists[6][0].entries.front() == first_memory,
+        "warm Gamma increments actual byte and preserves texlist memory identity");
+    loaded[6] = -1;
+    gamma::load_character_textures(context, 6);
+    require(loaded[6] == 0 && texture_calls.size() == texture_assets[6].size(),
+        "negative warm byte wraps live without a fabricated reload");
+    gamma::load_character_textures(context, 6);
+    require(loaded[6] == 1 && texture_calls.size() == texture_assets[6].size() * 2 &&
+        character_lists[6][0].entries.front() == first_memory,
+        "wrapped zero uses real loader and canonical cached memory again");
+    // A source-nonnull empty table must never become an absent-table bypass.
+    native::CharacterTextureAssets empty_assets{};
+    std::array<std::vector<regular_textures::List>, 9> empty_lists;
+    native::CharacterTextureViews empty_views(empty_assets, empty_lists);
+    std::array<std::int8_t, 9> empty_loaded{};
+    const auto empty_catalog = empty_views.catalog(empty_loaded);
+    require(empty_catalog.tables[6].entries != nullptr && empty_catalog.tables[6].count == 0,
+        "empty table has a stable nonnull descriptor identity");
+    regular_textures::load_character(6, empty_catalog, texture_state, texture_services);
+    require(empty_loaded[6] == 1, "nonnull empty Gamma table increments source byte");
+    bool amy_stopped = false;
+    try { regular_textures::load_character(5, empty_catalog, texture_state, texture_services); }
+    catch (const flow::UnrecoveredGameFlowCall &error) {
+        require(std::string(error.what()) == "native_LoadEggRoboTextures", "actual Amy seam");
+        amy_stopped = true;
+    }
+    require(amy_stopped && empty_loaded[5] == 0,
+        "unrecovered Amy body fails before the source counter store");
     const auto component = collision_component::component(*arena, task->primary_work);
     const auto allocation = arena->reference(task->primary_work, 56).work;
     const auto info_allocation = arena->reference(allocation, 12).work;
@@ -191,7 +258,7 @@ void check_binding(const std::filesystem::path &directory) {
     require(bool(scheduler.destroy_task(task)), "actual scheduler cleanup succeeds");
     require(allocation->released() && info_allocation->released(),
         "scheduler frees the same collision ownership metadata without another registry");
-    std::cout << "PASS: imported Gamma -> canonical collision -> ordinary texture boundary\n";
+    std::cout << "PASS: imported Gamma -> canonical collision/ordinary textures -> weld boundary\n";
 }
 }
 int main(int argc, char **argv) {
