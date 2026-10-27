@@ -1,0 +1,35 @@
+{
+  "head": "66657188797e60dd082bfc54d4a4d219a6597524",
+  "build_exit_status": 0,
+  "native_closure_exit_status": 0,
+  "app_exit_status": 1,
+  "frame": 1382,
+  "missing_call": "native_gamma_load_character_textures",
+  "command": [
+    "/Users/burbujamc/Developer/sadx-macos/build/sadx-native",
+    "--assets",
+    "/Users/burbujamc/Developer/sadx-macos/game/imported",
+    "--offscreen",
+    "--paced",
+    "--exit-after",
+    "1500",
+    "--save-directory",
+    "/Users/burbujamc/Developer/sadx-macos/build/collision-main-frontier-3ddm2kn4/savedata",
+    "--key-events",
+    "500:13:down,501:13:up,750:13:down,751:13:up,900:38:down,901:38:up,950:13:down,951:13:up,1350:13:down,1351:13:up",
+    "--capture-directory",
+    "/Users/burbujamc/Developer/sadx-macos/build/collision-main-frontier-3ddm2kn4/captures",
+    "--capture-at",
+    "1300,1380,1381,1382,1383,1390",
+    "--screenshot",
+    "/Users/burbujamc/Developer/sadx-macos/build/collision-main-frontier-3ddm2kn4/frontier.ppm"
+  ],
+  "log_sha256": "11b8fc4dbabfe9572830503b2b1797c6716e8a241f83c7ed1a7fc4dda972c12a",
+  "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+  "screenshot_matches_reviewed_binding": true,
+  "limits": [
+    "Actual explicit diagnostic stop, not N3b/actor rendering.",
+    "Last full gate is the prior Gamma integration at9fa9966,rc0; collision full gate pending."
+  ],
+  "native_consumer_unit_exit_status": 0
+}
