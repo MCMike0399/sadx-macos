@@ -470,3 +470,9 @@ build/native-selection-player-queries-probe.dylib: tests/probes/native_selection
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) tests/probes/native_selection_player_queries_probe.cpp src/player/selection_player_queries.cpp -o $@
 build/selection-player-queries-test: tests/unit/selection_player_queries.cpp src/player/selection_player_queries.cpp src/player/selection_player_queries.hpp
 	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/selection_player_queries.cpp src/player/selection_player_queries.cpp -o $@
+
+# Ordinary character texture wrapper: isolate the original receipt probe and real lower-loader unit.
+build/character-textures-test: tests/unit/character_textures.cpp src/game/character_textures.cpp src/game/character_textures.hpp src/game/regular_textures.cpp src/game/regular_textures.hpp
+	$(CXX) $(CXXFLAGS) -Isrc tests/unit/character_textures.cpp src/game/character_textures.cpp src/game/regular_textures.cpp -o $@
+build/native-character-textures-probe.dylib: tests/probes/native_character_textures_probe.cpp src/game/character_textures.cpp src/game/character_textures.hpp src/game/regular_textures.hpp
+	$(CXX) $(CXXFLAGS) -dynamiclib -Isrc tests/probes/native_character_textures_probe.cpp src/game/character_textures.cpp -o $@

@@ -1,12 +1,12 @@
 {
   "change": {
-    "base_commit": "bf741b252f74104a757c8a2f659bca93d349a8d0",
-    "evidence": "reference/production-integration-20261026/character-textures-core/integration-judge-setup.json",
-    "evidence_sha256": "a3beaa62601bb885e807f5980406fdc51ca1c2eb4291b9d86eae90e711545069",
-    "reason": "Register unchanged original character-texture wrapper judge, new probe/mutants and native unit; old judges untouched"
+    "base_commit": "d45e52154f4f2eaa317dbef6eca3fddda3ce823a",
+    "evidence": "reference/production-integration-20261026/character-textures-core/compiler-setup.json",
+    "evidence_sha256": "f3138d3af43fc6cfcffa7671ed87763ee33a2b24e747330d4f90947275a7f429",
+    "reason": "Use explicit original-receipt probe and real regular-loader native unit compiler recipes for the new ordinary wrapper"
   },
   "files": {
-    "Makefile": "ed8e228dfcbd1a420488e260e0f9dee316173ce72da2544dc036ad570d0a0e1a",
+    "Makefile": "383c644fdf49b0f799ea3660262be963f50dcc19553043455b64e451debee9c3",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
     "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
     "reference/frame-control-corpus.tsv": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",
