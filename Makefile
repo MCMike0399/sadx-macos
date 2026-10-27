@@ -476,3 +476,11 @@ build/character-textures-test: tests/unit/character_textures.cpp src/game/charac
 	$(CXX) $(CXXFLAGS) -Isrc tests/unit/character_textures.cpp src/game/character_textures.cpp src/game/regular_textures.cpp -o $@
 build/native-character-textures-probe.dylib: tests/probes/native_character_textures_probe.cpp src/game/character_textures.cpp src/game/character_textures.hpp src/game/regular_textures.hpp
 	$(CXX) $(CXXFLAGS) -dynamiclib -Isrc tests/probes/native_character_textures_probe.cpp src/game/character_textures.cpp -o $@
+
+# Exact cursor expansion: native arena and raw-copy slice without runtime/reference adapters.
+build/gamma-cursors-test: tests/unit/gamma_cursors.cpp src/player/gamma_cursors.cpp src/player/gamma_cursors.hpp src/engine/task_work.cpp src/engine/task_work.hpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/gamma_cursors.cpp src/player/gamma_cursors.cpp src/engine/task_work.cpp -o $@
+build/native-gamma-cursors-probe.dylib: tests/probes/native_gamma_cursors_probe.cpp src/player/gamma_cursors.cpp src/player/gamma_cursors.hpp src/engine/task_work.cpp src/engine/task_work.hpp
+	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) tests/probes/native_gamma_cursors_probe.cpp src/player/gamma_cursors.cpp src/engine/task_work.cpp -o $@
+build/native-gamma-weld-cursors-test: tests/unit/native_gamma_weld_cursors.mm src/apps/native_gamma_actor_assets.hpp build/libsadx-native.a
+	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-native.a -framework Foundation -o $@

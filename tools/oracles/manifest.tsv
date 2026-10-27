@@ -35,3 +35,4 @@ palette_initial	build/native-message-image-probe.dylib	tools/oracles/verify_orig
 message_text	build/native-message-text-probe.dylib	tools/oracles/verify_original_message_text.py "$(GAME_EXE)" build/native-message-text-probe.dylib --font-directory "$(GAME_SYSTEM)" --output build/oracles/message_text.json
 native_input_reset	build/native-input-reset-probe.dylib	tools/oracles/verify_original_native_input_reset.py "$(INPUT_DLL)" "$(GAME_EXE)" build/native-input-reset-probe.dylib --output build/oracles/native_input_reset.json
 ui_scale_profile	build/native-ui-scale-profile-probe.dylib	tools/oracles/verify_original_ui_scale_profile.py "$(LOADER_DLL)" build/native-ui-scale-profile-probe.dylib --output build/oracles/ui_scale_profile.json
+gamma_cursors	build/native-gamma-cursors-probe.dylib	tools/oracles/verify_original_gamma_cursors.py --exe "$(GAME_EXE)" --probe build/native-gamma-cursors-probe.dylib --output build/oracles/gamma_cursors.json

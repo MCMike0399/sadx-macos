@@ -52,6 +52,8 @@ void check_binding(const std::filesystem::path &directory) {
     players.gamma_assets = std::make_unique<native::GammaActorAssets>(
         native::app::load_gamma_actor_assets(directory, pack));
     auto &assets = *players.gamma_assets;
+    character_pack::SceneState scene(pack);
+    native::bind_gamma_resources(players, scene, assets);
     require(assets.animation_table->records.size() == 91 &&
         assets.declarations[0].action.identity == assets.stand.identity &&
         assets.declarations[61].status == native::ActorResourceStatus::KnownNull &&
@@ -143,15 +145,15 @@ void check_binding(const std::filesystem::path &directory) {
     bool stopped = false;
     try { gamma::run(context, task); }
     catch (const flow::UnrecoveredGameFlowCall &error) {
-        require(std::string(error.what()) == "native_gamma_weld_binding", "first real lower boundary");
+        require(std::string(error.what()) == "native_gamma_load_setup_resource", "first real lower boundary");
         stopped = true;
     }
-    require(stopped, "unrecovered weld binding must throw");
+    require(stopped, "unrecovered setup resource must throw");
     require(players.gamma.time_zero == 0 && players.gamma.event_enabled == 1,
         "core consumes the actual bootstrap-bound predicates before initialization");
     const auto player = players.registry.players[5];
     require(player && player->stage == player_initialization::Stage::Complete,
-        "real PInitialize completes before weld boundary");
+        "real PInitialize completes before setup boundary");
     require(players.registry.tasks[5] == task && players.registry.primary[5] == primary_owner &&
         players.registry.motion[5] == motion_owner && task->primary_state == primary_owner &&
         task->motion_state == motion_owner, "registry borrows actual task owners");
@@ -160,7 +162,7 @@ void check_binding(const std::filesystem::path &directory) {
         "arena reference joins the actual allocation identity");
     require(players.current.primary == task->primary_work && !players.current.player,
         "captured null player publication remains null after registration");
-    require(pose.id == 2 && pose.character == 6 && pose.mode == 0 && pose.player_index == 5 &&
+    require(pose.id == 2 && pose.character == 6 && pose.mode == 1 && pose.player_index == 5 &&
         pose.position.x == 13 && pose.position.y == 27 && pose.rotation[2] == 333 &&
         motion_owner->target_yaw == 16384, "constructor preserves real preview pose and ID");
     require(player->parameters.height == assets.parameters[6].height &&
@@ -170,8 +172,9 @@ void check_binding(const std::filesystem::path &directory) {
         *player->physics->requested_animation_at_124 == 0,
         "actual animation table and request zero precede CCL_Init");
     require(player->auxiliary && player->auxiliary_task &&
-        player->auxiliary_task->exec == lower_callback && !task->display && !task->destructor,
-        "source auxiliary task exists and later Gamma callback stores have not run");
+        player->auxiliary_task->exec == lower_callback && task->display == lower_callback &&
+        task->destructor == lower_callback,
+        "source auxiliary and Gamma callbacks are installed before setup");
     require(loaded[6] == 1 && texture_calls.size() == texture_assets[6].size(),
         "cold Gamma ordinary loader performs actual archive loads before live increment");
     for (std::size_t index = 0; index < texture_calls.size(); ++index)
@@ -233,8 +236,9 @@ void check_binding(const std::filesystem::path &directory) {
     require(gamma::floor_angle(context, task->primary_work, 0) == 111 &&
         gamma::floor_angle(context, task->primary_work, 2) == 333,
         "collision backlink reads the live canonical task angles");
-    auto extra = gamma::allocate_zero(context, 1, 580);
-    gamma::store_extra_work(context, player, extra);
+    const auto extra = gamma::extra_work(context, player);
+    require(player_initialization::bind_initialized_player(player).join_table == &players.gamma_weld,
+        "the real weld store borrows the canonical shared table");
     require(extra && extra != player->auxiliary && gamma::extra_work(context, player) == extra &&
         extra->requested_size() == 580, "Gamma and island-list allocations stay distinct");
     gamma::extra(context, extra).general_timer = 37;
@@ -255,10 +259,13 @@ void check_binding(const std::filesystem::path &directory) {
     try { (void)native::app::gamma_declaration(row, pack); }
     catch (const std::runtime_error &) { rejected = true; }
     require(rejected, "invalid loaded resource identity rejected");
-    require(bool(scheduler.destroy_task(task)), "actual scheduler cleanup succeeds");
+    // Isolate scheduler allocation cleanup from the still-unrecovered E102 destructor.
+    // Its registered identity was checked above; this is not an actor teardown journey.
+    task->destructor = nullptr;
+    require(bool(scheduler.destroy_task(task)), "isolated scheduler allocation cleanup succeeds");
     require(allocation->released() && info_allocation->released(),
         "scheduler frees the same collision ownership metadata without another registry");
-    std::cout << "PASS: imported Gamma -> canonical collision/ordinary textures -> weld boundary\n";
+    std::cout << "PASS: imported Gamma -> canonical collision/ordinary textures/cursors -> setup boundary\n";
 }
 }
 int main(int argc, char **argv) {
