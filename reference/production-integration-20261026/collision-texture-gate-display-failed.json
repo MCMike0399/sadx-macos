@@ -1,0 +1,28 @@
+{
+  "command": "SADX_CONTENT_CORPUS=/Users/burbujamc/Developer/sadx-macos make -j10 gate",
+  "head": "aa37bd991025e1ab8046bf84dbd299d03579dd1b",
+  "exit_status": 2,
+  "passed": false,
+  "failure": "Required windowed smoke stayed idle while macOS reported display asleep; exact stalled child was terminated after bounded wake/activation failed to resume it.",
+  "smoke_pid": 49563,
+  "smoke_exit_status": 137,
+  "smoke_log_bytes": 0,
+  "native_unit_invocations": 275,
+  "python_tests": 400,
+  "existing_python_skips": 1,
+  "native_closure": "PASS",
+  "gate_journeys": "Not run: gate prerequisites failed at windowed smoke. Independent headless checks remain separate.",
+  "display_observations": [
+    "spdisplays_asleep=yes before wake",
+    "spdisplays_asleep=yes after bounded wake",
+    "NSRunningApplication.activate returned true but smoke stayed idle"
+  ],
+  "sample": "build/collision-texture-smoke-sample.txt",
+  "log": "build/collision-texture-gate-display-failed.log",
+  "log_sha256": "11fe386456708e49ad504243f8125e88ea02725f980a29df4e21692a9bf4bd83",
+  "last_green_gate": "reference/production-integration-20261026/native-gamma-integration-gate.json",
+  "limits": [
+    "No green gate is recorded for this attempt.",
+    "GUI restoration is pending; no checker or expected image was changed."
+  ]
+}
