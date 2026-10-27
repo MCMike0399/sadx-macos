@@ -1,0 +1,648 @@
+{
+  "source_files_sha256": [
+    {
+      "path": "src/apps/native_gamma_actor_assets.hpp",
+      "sha256": "344f7f961f4cc6abc037e0068ae39feb326e6b95a0a5e72a87f391685808bc7b",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true
+    },
+    {
+      "path": "src/engine/character_geometry.cpp",
+      "sha256": "76e62426368779981287aa8b3ebacdf2cbac65b53e9f9ffd55c825132f834642",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true
+    },
+    {
+      "path": "src/engine/character_geometry.hpp",
+      "sha256": "97f27d2d7c49afa2f63aff31e55b7a282b5a1adb4c9638542472fd8fd7dcdda5",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true
+    },
+    {
+      "path": "src/player/gamma_cursors.cpp",
+      "sha256": "cce66f08eb505fd245689ad73c51de49e6cb5489f8a1f8d9e4e59d3861492bf4",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true
+    },
+    {
+      "path": "src/player/gamma_cursors.hpp",
+      "sha256": "f44b3d5733ba89f2c1b139cb5bdb7a5b4d123a59534adfa48d5ab7a862f5889e",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true
+    },
+    {
+      "path": "src/player/player_animation_state.hpp",
+      "sha256": "0000693cfeb05866c65eb36eba47ee0b6c6740f4018eb7074a88396bee9f8c93",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true
+    },
+    {
+      "path": "src/player/player_initialization.hpp",
+      "sha256": "11af804aaf3579b8dc926ff2f90770aa03a90549cf986a1acb143b326b4cb790",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true
+    },
+    {
+      "path": "src/player/player_join_vertices.hpp",
+      "sha256": "2eb1a3fa36657b0e6725d83b11342fa4fb31c6f55f34a4352cff7971a555aa7f",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true
+    },
+    {
+      "path": "src/player/player_startup.cpp",
+      "sha256": "55fda480c5ec832436e19406f8ecc565152d480e7e162114b8a3527267e42b05",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true
+    },
+    {
+      "path": "src/runtime/gamma_actor_assets.hpp",
+      "sha256": "20c9358dc15df05c0dcb4a49a7e2fc5896220141f70f6dacd43a955833f4293d",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true
+    },
+    {
+      "path": "src/runtime/native_gamma_assets_native.cpp",
+      "sha256": "5d7eaca277420cff3904d72b2d1a1fff69f44d995c8410a27415f5572f249787",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true
+    },
+    {
+      "path": "src/runtime/native_gamma_binding.cpp",
+      "sha256": "75d59d1560df2d8f129cc0c76aa1ba99a9a2933b90f5465cd3e63ae07830cecb",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true
+    },
+    {
+      "path": "src/runtime/native_gamma_resources_native.cpp",
+      "sha256": "18e9957a65b180e4ff44ceb2588597c7483de6dab15dbde005926469b86ab739",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true
+    },
+    {
+      "path": "src/runtime/native_player_system.hpp",
+      "sha256": "3031b79d8041ca521b3d5a00decc75d5dae234102988518bdfbfd8a09c474a24",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true
+    },
+    {
+      "path": "tests/probes/native_gamma_cursors_probe.cpp",
+      "sha256": "6e4b461e8b1cbea91c53d7d335515244c09224a6796a8271ae1443fda868e925",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true
+    },
+    {
+      "path": "tests/unit/gamma_cursors.cpp",
+      "sha256": "b314771f7ca2a836c672bfcfb8aeacbcca04d0e12d42bcfed028b3ded16205fa",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true
+    },
+    {
+      "path": "tests/unit/native_gamma_weld_cursors.mm",
+      "sha256": "7b0c49f06344759858c95033a9e503241fa79eda58a3b5f4f00fe7e6cd86352e",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true
+    },
+    {
+      "path": "tools/oracles/mutate_gamma_cursors.py",
+      "sha256": "f7a2b1c3fef053fe19c8909e96e4d684e11aca68724b59b70adff2940a49a1e3",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true
+    },
+    {
+      "path": "tools/oracles/verify_original_gamma_cursors.py",
+      "sha256": "e62fb12206a9f28dfb087abc05543f9946822284da7f3890b353f3a2a150daf0",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true
+    }
+  ],
+  "frozen_inputs_byte_identical_to_base": [
+    {
+      "path": "src/player/gamma_selection_core.hpp",
+      "sha256": "077d8c1876fe68cd5c50c0b1e1a3608b0cd6b802d9ec059bd0348463f0268193",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true,
+      "base_identical": true
+    },
+    {
+      "path": "src/player/gamma_selection_core.cpp",
+      "sha256": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true,
+      "base_identical": true
+    },
+    {
+      "path": "tests/probes/native_gamma_selection_core_probe.cpp",
+      "sha256": "f1f5119da472f78651428ac79b4a5435e80acb359bf2a0c2f816b2670195a517",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true,
+      "base_identical": true
+    },
+    {
+      "path": "tests/unit/gamma_selection_core.cpp",
+      "sha256": "d6aadb3b53e94fed35b696822e1271b7eb2e23d5e908a5e0bf8b8ce4ea144db1",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true,
+      "base_identical": true
+    },
+    {
+      "path": "tools/oracles/verify_original_gamma_selection_core.py",
+      "sha256": "b62020db7b643a941079b15b2e0b931885ace95b40bb1ec3329a61439604aada",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true,
+      "base_identical": true
+    },
+    {
+      "path": "tools/oracles/mutate_gamma_selection_core.py",
+      "sha256": "f19c1e581df6b56c2f4c88d3c97881765863d342119490fd9acb77ba03e7b538",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true,
+      "base_identical": true
+    },
+    {
+      "path": "tests/probes/native_player_startup_probe.cpp",
+      "sha256": "3f19fe2625681280cd69a28a9c91cf1fccd4a33c23894adc34f65f87a8db9261",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true,
+      "base_identical": true
+    },
+    {
+      "path": "tools/oracles/verify_original_player_startup.py",
+      "sha256": "54ad16c1dbb488eef85455ec4e15a9100a0e31ff54f59fd3f7a8ccec2bab9d44",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true,
+      "base_identical": true
+    },
+    {
+      "path": "tests/unit/player_startup.cpp",
+      "sha256": "3c433f9b0e965f581e9982a854c2425b471aac472fe0d787b1d2bf711c0bd218",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true,
+      "base_identical": true
+    },
+    {
+      "path": "reference/readability-baseline.json",
+      "sha256": "ed54af0fc27250eeabe75bb6109dec08ad35030d58294ed4caf9c2926879af3e",
+      "matches_receipt": true,
+      "packet_disk_matches_frozen": true,
+      "base_identical": true
+    }
+  ],
+  "existing_protected_paths_changed": [],
+  "manifest_byte_identical": true,
+  "dossiers": [
+    {
+      "entry": "0x43fa90",
+      "sha256": "2dec8a0c3418bb6944416f2943ec74d369652638834915e7b3676e55f42e4652",
+      "matches_receipt": true,
+      "evidence_id": "ev_ebda3d9ab7749eb17fae5a4747cf23de66cd4600597882eb53209b2b361adecb",
+      "id_matches": true,
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x43fa90",
+            "end": "0x43faec"
+          },
+          {
+            "start": "0x43faf0",
+            "end": "0x43fd69"
+          },
+          {
+            "start": "0x43fd70",
+            "end": "0x43fe46"
+          },
+          {
+            "start": "0x43fe50",
+            "end": "0x43ff0c"
+          },
+          {
+            "start": "0x43ff10",
+            "end": "0x4400ea"
+          },
+          {
+            "start": "0x440198",
+            "end": "0x44021c"
+          },
+          {
+            "start": "0x440220",
+            "end": "0x440342"
+          }
+        ],
+        "total_bytes": 2030,
+        "span_bytes": 2227,
+        "non_contiguous": true,
+        "contains_entry": true
+      },
+      "assembly_lines": 597
+    },
+    {
+      "entry": "0x4c2e10",
+      "sha256": "2a7697e98da8d51309ab67e8fc1301cf1432d4091b518b3c84a6878ae708cea9",
+      "matches_receipt": true,
+      "evidence_id": "ev_6d92e26672ef1c99538c60fd2466b1c32801a4975c46cb4ead2b59254a046022",
+      "id_matches": true,
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x4c2e10",
+            "end": "0x4c2e47"
+          }
+        ],
+        "total_bytes": 56,
+        "span_bytes": 56,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "assembly_lines": 20
+    },
+    {
+      "entry": "0x4c2d40",
+      "sha256": "eba5d07a66f78e7c896730048f07909cb77cf01780ff4cd26acec615484e6f9b",
+      "matches_receipt": true,
+      "evidence_id": "ev_4b46549539a0c717d0b670a25e4318f71355e35521602abb7bc5bb67739f3485",
+      "id_matches": true,
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x4c2d40",
+            "end": "0x4c2de3"
+          }
+        ],
+        "total_bytes": 164,
+        "span_bytes": 164,
+        "non_contiguous": false,
+        "contains_entry": true
+      },
+      "assembly_lines": 58
+    }
+  ],
+  "retained_mutant_reports": [
+    {
+      "name": "unsigned line count",
+      "compile_exit_status_recorded": 0,
+      "oracle_exit_status_recorded": 1,
+      "mismatch_count": 214,
+      "matches_summary": true,
+      "first_differences": [
+        [
+          0,
+          0,
+          3
+        ],
+        [
+          26,
+          4294901760,
+          65536
+        ]
+      ],
+      "sha256": "e747f014aa17b2ddf24b7b52c4f3918d79e9067dd9623631bea7b4f0d3c515fb"
+    },
+    {
+      "name": "unsigned vertex index",
+      "compile_exit_status_recorded": 0,
+      "oracle_exit_status_recorded": 1,
+      "mismatch_count": 311,
+      "matches_summary": true,
+      "first_differences": [
+        [
+          0,
+          3,
+          2
+        ]
+      ],
+      "sha256": "18d5b668d0c340fb8858e2746707543764f21d20184730c37b23f2442d8ccfb2"
+    },
+    {
+      "name": "point allocation stride",
+      "compile_exit_status_recorded": 0,
+      "oracle_exit_status_recorded": 1,
+      "mismatch_count": 303,
+      "matches_summary": true,
+      "first_differences": [
+        [
+          0,
+          3,
+          5
+        ],
+        [
+          23,
+          0,
+          16777120
+        ],
+        [
+          24,
+          16777120,
+          0
+        ],
+        [
+          128,
+          0,
+          2147483648
+        ],
+        [
+          129,
+          0,
+          1065353217
+        ],
+        [
+          130,
+          0,
+          2139095041
+        ],
+        [
+          131,
+          0,
+          4294967295
+        ],
+        [
+          132,
+          0,
+          4294967295
+        ],
+        [
+          133,
+          0,
+          4294967295
+        ],
+        [
+          134,
+          0,
+          4294967295
+        ],
+        [
+          135,
+          0,
+          4294967295
+        ],
+        [
+          136,
+          0,
+          4294967295
+        ],
+        [
+          137,
+          0,
+          4294967295
+        ],
+        [
+          138,
+          0,
+          4294967295
+        ],
+        [
+          139,
+          0,
+          4294967295
+        ],
+        [
+          140,
+          0,
+          4294967295
+        ]
+      ],
+      "sha256": "7b81d6fda6b3e6ef31e777fa397064b21b124da585d85363d1343eeda61e47ee"
+    },
+    {
+      "name": "live point input after allocation",
+      "compile_exit_status_recorded": 0,
+      "oracle_exit_status_recorded": 1,
+      "mismatch_count": 104,
+      "matches_summary": true,
+      "first_differences": [
+        [
+          0,
+          3,
+          2
+        ]
+      ],
+      "sha256": "e375e5ba97f4b7f672297f8696368561f30b83ab9f66f8602e5c0e1585a5234e"
+    },
+    {
+      "name": "unindexed color copy",
+      "compile_exit_status_recorded": 0,
+      "oracle_exit_status_recorded": 1,
+      "mismatch_count": 150,
+      "matches_summary": true,
+      "first_differences": [
+        [
+          0,
+          0,
+          4
+        ],
+        [
+          1,
+          0,
+          3
+        ],
+        [
+          352,
+          4055513024,
+          2585083954
+        ],
+        [
+          353,
+          2605417096,
+          2143363909
+        ],
+        [
+          354,
+          2605417096,
+          3074000363
+        ],
+        [
+          355,
+          2092037569,
+          4294967295
+        ]
+      ],
+      "sha256": "eda70925cbc48bf743d41b65d4bb2dbe691bd9e82231d27c14ba16097f5c1895"
+    },
+    {
+      "name": "early second template copy",
+      "compile_exit_status_recorded": 0,
+      "oracle_exit_status_recorded": 1,
+      "mismatch_count": 232,
+      "matches_summary": true,
+      "first_differences": [
+        [
+          32,
+          0,
+          1
+        ],
+        [
+          33,
+          0,
+          18
+        ],
+        [
+          34,
+          0,
+          2
+        ],
+        [
+          35,
+          0,
+          6
+        ],
+        [
+          36,
+          0,
+          1
+        ],
+        [
+          37,
+          0,
+          16
+        ],
+        [
+          38,
+          0,
+          39862
+        ]
+      ],
+      "sha256": "38f6fdad32edfec049a38fd9df2b3ea98868f87c2d190e35d3406158a6152639"
+    },
+    {
+      "name": "first template substituted for second",
+      "compile_exit_status_recorded": 0,
+      "oracle_exit_status_recorded": 1,
+      "mismatch_count": 192,
+      "matches_summary": true,
+      "first_differences": [
+        [
+          34,
+          2,
+          1
+        ],
+        [
+          37,
+          2,
+          32768
+        ],
+        [
+          38,
+          65363,
+          51562
+        ],
+        [
+          39,
+          16776992,
+          0
+        ],
+        [
+          40,
+          16777088,
+          0
+        ],
+        [
+          42,
+          4,
+          4294901760
+        ],
+        [
+          256,
+          2795444660,
+          0
+        ],
+        [
+          257,
+          3717442958,
+          0
+        ],
+        [
+          258,
+          3078057434,
+          0
+        ],
+        [
+          259,
+          4294967295,
+          0
+        ],
+        [
+          260,
+          2139095041,
+          0
+        ],
+        [
+          261,
+          1187857715,
+          0
+        ],
+        [
+          262,
+          4294967295,
+          0
+        ],
+        [
+          263,
+          2139095041,
+          0
+        ],
+        [
+          264,
+          1187857715,
+          0
+        ],
+        [
+          265,
+          2139095041,
+          0
+        ]
+      ],
+      "sha256": "92485c9d42de61ce7a0532786e0d46ac38039cd95bc91ff907cef5363ab8764a"
+    },
+    {
+      "name": "late first allocation publication",
+      "compile_exit_status_recorded": 0,
+      "oracle_exit_status_recorded": 1,
+      "mismatch_count": 126,
+      "matches_summary": true,
+      "first_differences": [
+        [
+          3,
+          16776736,
+          0
+        ]
+      ],
+      "sha256": "5f06be25f7d504118f25e93e7c9e28db233b45ee38353b02bfe618c1a3e1504f"
+    }
+  ],
+  "retained_reports_equal_committed": {
+    "development.json": true,
+    "holdout.json": true,
+    "mutations.json": true
+  },
+  "app_evidence_hashes": {
+    "app_sha256": {
+      "actual": "7ad1e745f0d5e3003c9d22c96e8f0c310a0fb5ad41d6cd8dfc4b18f52cfcff5d",
+      "matches_receipt": true
+    },
+    "log_sha256": {
+      "actual": "cc48f9af7abfcc79bef7f7021b24a497aa8be6e9de702fdbb9feb8cc3160cc0c",
+      "matches_receipt": true
+    },
+    "frontier_ppm_sha256": {
+      "actual": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+      "matches_receipt": true
+    }
+  },
+  "review": {
+    "base": "bfceb0a9d3850eebd75825b684b6f3de84cc2259",
+    "source": "110db08733b161e9318a0bb005b882ffb530cb82",
+    "frozen": "19e20c88f1cb18f2412cd8c80ac20e6e822980e5",
+    "tests_rerun": false,
+    "method": "Read-only Git blob/hash comparison, saved dossier/assembly and existing report inspection; no build/test/oracle/app/checker execution."
+  }
+}
