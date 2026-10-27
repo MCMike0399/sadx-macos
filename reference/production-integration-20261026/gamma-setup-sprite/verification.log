@@ -1,0 +1,15 @@
+{"cases": 1136, "mismatch_count": 0, "passed": true}
+null_guard caught
+allocation_size caught
+preallocation_capture caught
+count_wrap caught
+publication_order caught
+negative_extra_skipped caught
+lost_definition caught
+{"cases": 2048, "mismatch_count": 0, "passed": true}
+pass     build/oracles/sprite_registry.json: passed
+pass     build/oracles/sprite_registry_holdout.json: passed
+Readability: 492 files, {'hex_literals': 3244, 'address_identifiers': 1454, 'address_calls': 61, 'goto': 0, 'address_labels': 0, 'long_lines': 1183, 'multi_statement_lines': 1818, 'large_decimal_literals': 233, 'emulator_arithmetic': 3297, 'address_comments': 1059}, 0 regressions
+159090 owned bytes, 0 with more than one owner struct
+12 layers, 0 known exceptions, 0 violations
+Provenance: {'GLOBAL': 83, 'FUNCTION': 479, 'STUB': 83, 'PATCH': 2, 'DATA': 2}, 164475 legacy/annotated byte identities, 0 errors

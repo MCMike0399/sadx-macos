@@ -1,0 +1,24 @@
+{
+  "slug": "sprite_registry",
+  "cases": 2048,
+  "holdout": true,
+  "seed": 982148,
+  "prefixes_match": true,
+  "passed": true,
+  "values_match": true,
+  "mismatches": [],
+  "mismatch_count": 0,
+  "source_ranges": {
+    "0x456c50-0x456ca1": {
+      "size": 81
+    }
+  },
+  "range_sha256": "0fa30c3ff99ef4a7d0f07319edd21692228239ed62574cfb08cee6a3c936526f",
+  "limits": [
+    "CAlloc intercepted with actual-arena size/failure contract; lower allocator not judged.",
+    "Source instruction read/store order asserted; five native prefixes use a test-only instrumented copy when requested. Before-store uninitialized fields are excluded from prefix snapshots; final bytes remain compared.",
+    "Opaque unmapped definition identity only; no payload, import, Gamma binding or rendering claim.",
+    "Wrapped undersized allocations retain interior identity; consumers/access not qualified.",
+    "No floating-point instructions in constructor; strict constructor values match only."
+  ]
+}

@@ -1,0 +1,3 @@
+module	address	kind	name	type	signature	size	evidence_id	reason
+SONIC	0x456c50	function	RegisterSprite	native NodeHandle	(State &, TaskWorkArena &, const Definition *, uint32_t)		ev_d230a26a849ab50f52074bcb36135343ad49bb007dc52671f2bb869ac52d3b42	Neutral recovered role: registers borrowed definition in shared sprite list; SDK has no function name
+SONIC	0x3c4858c	global	SpriteRegistryHead	native NodeHandle		4	ev_d230a26a849ab50f52074bcb36135343ad49bb007dc52671f2bb869ac52d3b42	Neutral recovered role: read post-CAlloc, linked at node+0, replaced before count store
