@@ -1,0 +1,297 @@
+{
+  "review_kind": "Independent bounded static STYLE + spec review; first round",
+  "verdict": "bounded approval; no new blockers found",
+  "candidate": "8052fac9fffd2546226dbaa6ef3339f6e3632dbd",
+  "base": "afc3e94fa4caf570607dc3ba8b86081c4b398a83",
+  "review_parent": "66657188797e60dd082bfc54d4a4d219a6597524",
+  "tests_rerun": false,
+  "not_run": [
+    "builds",
+    "tests",
+    "oracles",
+    "mutants",
+    "apps",
+    "gate",
+    "Ghidra",
+    "providers",
+    "subagents"
+  ],
+  "changed_paths": [
+    "docs/HANDOFF.md",
+    "reference/production-integration-20261026/character-textures-core/PACKET.md",
+    "reference/production-integration-20261026/character-textures-core/dev.json",
+    "reference/production-integration-20261026/character-textures-core/holdout.json",
+    "reference/production-integration-20261026/character-textures-core/mutations.json",
+    "reference/production-integration-20261026/character-textures-core/profile.json",
+    "reference/production-integration-20261026/character-textures-core/proof.json",
+    "reference/production-integration-20261026/character-textures-core/source-evidence.json",
+    "src/game/character_textures.cpp",
+    "src/game/character_textures.hpp",
+    "tests/probes/native_character_textures_probe.cpp",
+    "tests/unit/character_textures.cpp",
+    "tools/oracles/mutate_character_textures.py",
+    "tools/oracles/verify_original_character_textures.py"
+  ],
+  "candidate_source_hashes": {
+    "src/game/character_textures.hpp": {
+      "actual": "f8bae2e68f5d8570ff3c071db8a5f86a114821dd426505cd834650c8c6ece9f0",
+      "recorded": "f8bae2e68f5d8570ff3c071db8a5f86a114821dd426505cd834650c8c6ece9f0",
+      "match": true
+    },
+    "src/game/character_textures.cpp": {
+      "actual": "9444d1d36c37bc339c8773cfd7982df62f8cbca526bf9c64b74db16c33d6af92",
+      "recorded": "9444d1d36c37bc339c8773cfd7982df62f8cbca526bf9c64b74db16c33d6af92",
+      "match": true
+    },
+    "tests/unit/character_textures.cpp": {
+      "actual": "10c626efa503028542062323443b12b08a85ab8b84e4b0382ce4cac4460bb57f",
+      "recorded": "10c626efa503028542062323443b12b08a85ab8b84e4b0382ce4cac4460bb57f",
+      "match": true
+    },
+    "tests/probes/native_character_textures_probe.cpp": {
+      "actual": "d396610f770f703288ce81ae321aa30a7d97fc31cf0bbf2ded080017d4ed04d9",
+      "recorded": "d396610f770f703288ce81ae321aa30a7d97fc31cf0bbf2ded080017d4ed04d9",
+      "match": true
+    },
+    "tools/oracles/verify_original_character_textures.py": {
+      "actual": "06eee8460d213ca5ff2b36bce871124a9f9a949fcfaca732d81ba8197e932bb7",
+      "recorded": "06eee8460d213ca5ff2b36bce871124a9f9a949fcfaca732d81ba8197e932bb7",
+      "match": true
+    },
+    "tools/oracles/mutate_character_textures.py": {
+      "actual": "0d1c2ed29a7afebe7eed61cce52eb4f79c5fafc4fce9153277645510be957bf1",
+      "recorded": "0d1c2ed29a7afebe7eed61cce52eb4f79c5fafc4fce9153277645510be957bf1",
+      "match": true
+    }
+  },
+  "packet_receipt_hashes": {
+    "PACKET.md": "527da373cb4dc42db8521e8745716d88ffe36a92ec075f70e5ecd3d227493c2a",
+    "dev.json": "e09d3ce35054074a8c1004383434dd59d5d8cbc086d9f798aba52bc7fc9a2afc",
+    "holdout.json": "59efc144de3e4a56cb37444cc824e47ea90647cc365f0317920c9d75e1437880",
+    "mutations.json": "0dcaea5f02b7daa9c01ae147c8f9ab5c0cf44e32913dedb466f145a48770f377",
+    "profile.json": "e97b8d0e08c29298f7436648b9abc2ef3d4a64ba454fc76e00eed58f0e82133c",
+    "proof.json": "97ea7daa1f260be6c28860737429deef44e7333acd710e2ae59cd6391a5c623c",
+    "source-evidence.json": "e4240886c14ca0dccedeb8cbae7f211080dbafb0387904ec07f72b30a2f255e0"
+  },
+  "original_evidence": {
+    "id": "ev_49279b700b5fec055393ce16c7aa84e0ef6d683b686745a628bcc0a54435447b",
+    "dossier_path": "/Users/burbujamc/Developer/sadx-wt-normal-uv-strip/reference/inventory-raw/character-textures-recovery-20261026/character-textures-421280.json",
+    "sha256": "c46edecc3804afa7b399a24833ba9dbafaeb1e6c00d0637755c83a628014091a",
+    "recorded_sha256": "c46edecc3804afa7b399a24833ba9dbafaeb1e6c00d0637755c83a628014091a",
+    "hash_matches": true,
+    "summary_matches": {
+      "procedure": true,
+      "pseudocode": true,
+      "assembly": true,
+      "callees": true
+    },
+    "completeness_matches": {
+      "truncated": true,
+      "omitted_operations_lower_bound": true,
+      "known_omitted_inputs": true,
+      "known_omitted_edges": true
+    },
+    "body_bytes": 89
+  },
+  "probe_hash": "4cdd1f86ed6ac995a78475813664262b8e669391a19edcb95420e519824babaf",
+  "saved_oracles": {
+    "dev": {
+      "cases": 5297,
+      "value_mismatches": 0,
+      "strict": true,
+      "fp_partial_cases": 0,
+      "corpus_sha256": "e9a859fe75223465e2ca909b38459810185bc20f1c12656f3678482fb9ab592d",
+      "probe_sha256": "4cdd1f86ed6ac995a78475813664262b8e669391a19edcb95420e519824babaf",
+      "original_ranges_sha256": {
+        "0x421280-0x4212d9": "bb5c96d2919e698763093f9a1e23346442b6d131b4324cc0f2418759f9fad216"
+      },
+      "build_report_matches_committed": true,
+      "probe_hash_matches": true
+    },
+    "holdout": {
+      "cases": 4096,
+      "value_mismatches": 0,
+      "strict": true,
+      "fp_partial_cases": 0,
+      "corpus_sha256": "36e0d0ce873e0d095c3c0d55762b736381ba61dda595fd3dffbee736f1e67da2",
+      "probe_sha256": "4cdd1f86ed6ac995a78475813664262b8e669391a19edcb95420e519824babaf",
+      "original_ranges_sha256": {
+        "0x421280-0x4212d9": "bb5c96d2919e698763093f9a1e23346442b6d131b4324cc0f2418759f9fad216"
+      },
+      "build_report_matches_committed": true,
+      "probe_hash_matches": true
+    }
+  },
+  "saved_mutants": [
+    {
+      "name": "negative-is-cold",
+      "source_hash_matches": true,
+      "report_sha256": "912e4992102f62c1438c588b6ad8435afa4c3f3e2ab6c3c199c3444142af1319",
+      "recorded_exit_status": 1,
+      "value_mismatches": 8,
+      "first_mismatch_case": 257,
+      "first_case_matches_summary": true
+    },
+    {
+      "name": "null-table-increments",
+      "source_hash_matches": true,
+      "report_sha256": "91ba909f643a2dbd4fae51abfd29f7fad7c4653305172c229460a8f9ad2c06f6",
+      "recorded_exit_status": 1,
+      "value_mismatches": 8,
+      "first_mismatch_case": 2,
+      "first_case_matches_summary": true
+    },
+    {
+      "name": "counter-does-not-wrap",
+      "source_hash_matches": true,
+      "report_sha256": "aab9d1e375df6339637f9d6bdb67a1ce2cd607e8bb6e5aa448f9aa06450faf87",
+      "recorded_exit_status": 1,
+      "value_mismatches": 8,
+      "first_mismatch_case": 255,
+      "first_case_matches_summary": true
+    },
+    {
+      "name": "cached-counter",
+      "source_hash_matches": true,
+      "report_sha256": "976b35bf5c5257e23d4d22fbef67eff759ca2c3a4392b412eff92eaa336aafb4",
+      "recorded_exit_status": 1,
+      "value_mismatches": 8,
+      "first_mismatch_case": 4613,
+      "first_case_matches_summary": true
+    },
+    {
+      "name": "amy-on-warm",
+      "source_hash_matches": true,
+      "report_sha256": "41b9a62a192abb172a9d62480f089fa24cb1126a21c3f56e6a49c5e09a537609",
+      "recorded_exit_status": 1,
+      "value_mismatches": 8,
+      "first_mismatch_case": 2563,
+      "first_case_matches_summary": true
+    },
+    {
+      "name": "amy-skips-empty",
+      "source_hash_matches": true,
+      "report_sha256": "e60270e206aba8fd3fc7b45ac1488ede78e19a426b408b5b87076557fa8c50ad",
+      "recorded_exit_status": 1,
+      "value_mismatches": 4,
+      "first_mismatch_case": 4849,
+      "first_case_matches_summary": true
+    },
+    {
+      "name": "named-uses-nameless",
+      "source_hash_matches": true,
+      "report_sha256": "8de324416223eeca39059b4f26b5ec67517bf6873f4297a5af56a82d6825980c",
+      "recorded_exit_status": 1,
+      "value_mismatches": 8,
+      "first_mismatch_case": 1,
+      "first_case_matches_summary": true
+    },
+    {
+      "name": "prefetch-next",
+      "source_hash_matches": true,
+      "report_sha256": "2d78cd50f82d7679e96a9c97e27e0878620f81494ba3886a8f3726bb28d4e406",
+      "recorded_exit_status": 1,
+      "value_mismatches": 8,
+      "first_mismatch_case": 4636,
+      "first_case_matches_summary": true
+    },
+    {
+      "name": "recapture-table",
+      "source_hash_matches": true,
+      "report_sha256": "fe1b9ebc394d358a214eebfb4d449ebde2745226ae6e3be2a2b74fd4c045f34d",
+      "recorded_exit_status": 1,
+      "value_mismatches": 8,
+      "first_mismatch_case": 4616,
+      "first_case_matches_summary": true
+    },
+    {
+      "name": "ignore-current-null",
+      "source_hash_matches": true,
+      "report_sha256": "dc5e8f08a96ba06da804418152e28140ad72f5f65d0bbd6a617ff93ced96b4b3",
+      "recorded_exit_status": 1,
+      "value_mismatches": 8,
+      "first_mismatch_case": 4611,
+      "first_case_matches_summary": true
+    }
+  ],
+  "existing_lower_judges": "No pre-existing oracle, probe, mutant, fixture, tolerance, expectation or judge registration file changed in afc3e94...8052fac.",
+  "known_provenance_obligation": {
+    "reported_exit_status": 1,
+    "duplicate": [
+      "src/game/character_textures.hpp:32",
+      "src/player/gamma_selection_core.hpp:119"
+    ],
+    "checker_rerun": false,
+    "resolution": "Root moves obsolete Gamma STUB annotation during integration; checker unchanged."
+  },
+  "new_blockers": [],
+  "limits": [
+    "Wrapper instruction/state/order/receipt proof only; lower loaders, Amy body and GPU not proved here.",
+    "Saved results inspected; execution and holdout chronology not independently reproduced.",
+    "Runtime binding, registration, source-only build and full gate remain Root owned.",
+    "No actor, GPU, N3b, story or gameplay completion claim."
+  ],
+  "capacity_proof": {
+    "path": "/Users/burbujamc/Developer/sadx-macos/game/imported/character-textures.provenance.json",
+    "sha256": "3a3eaa7e2a368777d978e39f6d2d15b9e245e233682002318ac13824d6477d29",
+    "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "directory_round_trip_exact": true,
+    "characters": [
+      {
+        "character_id": 0,
+        "bindings": 2,
+        "source_bytes_including_sentinel": 24,
+        "round_trip_exact": true
+      },
+      {
+        "character_id": 1,
+        "bindings": 1,
+        "source_bytes_including_sentinel": 16,
+        "round_trip_exact": true
+      },
+      {
+        "character_id": 2,
+        "bindings": 1,
+        "source_bytes_including_sentinel": 16,
+        "round_trip_exact": true
+      },
+      {
+        "character_id": 3,
+        "bindings": 2,
+        "source_bytes_including_sentinel": 24,
+        "round_trip_exact": true
+      },
+      {
+        "character_id": 4,
+        "bindings": 1,
+        "source_bytes_including_sentinel": 16,
+        "round_trip_exact": true
+      },
+      {
+        "character_id": 5,
+        "bindings": 2,
+        "source_bytes_including_sentinel": 24,
+        "round_trip_exact": true
+      },
+      {
+        "character_id": 6,
+        "bindings": 5,
+        "source_bytes_including_sentinel": 48,
+        "round_trip_exact": true
+      },
+      {
+        "character_id": 7,
+        "bindings": 3,
+        "source_bytes_including_sentinel": 32,
+        "round_trip_exact": true
+      },
+      {
+        "character_id": 8,
+        "bindings": 1,
+        "source_bytes_including_sentinel": 16,
+        "round_trip_exact": true
+      }
+    ],
+    "contract": "Imported length excludes final NULL TexList descriptor; original source bytes include it. Borrowed capacity must retain termination; extending beyond capacity is outside the API contract."
+  }
+}
