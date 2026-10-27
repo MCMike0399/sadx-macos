@@ -28,7 +28,7 @@ GeometryState::GeometryState(const CharacterPack &pack)
     for (std::size_t index = 1; index <= pack.record_count(); ++index) {
         const auto &record = pack.record(static_cast<ResourceId>(index));
         const auto &bytes = record.payload;
-        if (record.kind == ResourceKind::Vectors) {
+        if (record.kind == ResourceKind::Vectors || record.kind == ResourceKind::Colors) {
             auto &values = vectors_[index];
             for (std::size_t offset = kArrayHeaderBytes; offset < bytes.size();
                  offset += kComponentBytes)
@@ -50,6 +50,14 @@ std::vector<std::uint32_t> &GeometryState::vector_words(ResourceId resource) {
 }
 const std::vector<std::uint32_t> &GeometryState::vector_words(ResourceId resource) const {
     require_kind(pack_, resource, ResourceKind::Vectors);
+    return vectors_.at(resource);
+}
+std::vector<std::uint32_t> &GeometryState::color_words(ResourceId resource) {
+    require_kind(pack_, resource, ResourceKind::Colors);
+    return vectors_.at(resource);
+}
+const std::vector<std::uint32_t> &GeometryState::color_words(ResourceId resource) const {
+    require_kind(pack_, resource, ResourceKind::Colors);
     return vectors_.at(resource);
 }
 const std::vector<std::int16_t> &GeometryState::indices(ResourceId resource) const {

@@ -152,7 +152,11 @@ void bind_animation_table(Context &context, const Player &player) {
     if (!table || table->records.size() != 91) missing("native_gamma_complete_animation_table");
     player_initialization::bind_initialized_player(player).animation_table = table;
 }
-void bind_weld_table(Context &, const Player &) { missing("native_gamma_weld_binding"); }
+void bind_weld_table(Context &context, const Player &player) {
+    if (context.players.gamma_weld.rows.size() != 5)
+        missing("native_gamma_imported_weld_table");
+    player_initialization::bind_initialized_player(player).join_table = &context.players.gamma_weld;
+}
 [[noreturn]] void unrecovered_mode(Context &, std::uint8_t) {
     missing("native_gamma_unrecovered_mode");
 }
@@ -184,7 +188,7 @@ TaskWorkHandle allocate_zero(Context &context, unsigned count, unsigned bytes) {
         missing("native_gamma_CAlloc_zero_fill");
     constexpr unsigned kExtraWorkBytes = 580;
     if (count == 1 && bytes == kExtraWorkBytes)
-        context.players.gamma_work.push_back({allocation.work, 0, 0, 0, 0, 0, 0});
+        context.players.gamma_work.push_back({allocation.work, 0, 0, 0, 0, 0, 0, {}, {}});
     return allocation.work;
 }
 // NOTSA: native boundary for GammaUpdateLaserMode; source seam declared in the Gamma core.
@@ -211,8 +215,16 @@ void load_character_textures(Context &context, std::uint8_t character) {
                                     *context.texture_state, *context.texture_services);
 }
 // NOTSA: native boundary for GammaInitializeCursors; source seam declared in the Gamma core.
-void initialize_cursors(Context &, const TaskWorkHandle &) {
-    missing("native_gamma_initialize_cursors");
+void initialize_cursors(Context &context, const TaskWorkHandle &allocation) {
+    if (!allocation || allocation->released()) missing("native_gamma_null_E102WK_cursors");
+    for (auto &work : context.players.gamma_work) {
+        if (work.allocation == allocation) {
+            gamma_cursors::initialize(work.cursor1, work.cursor2,
+                                      context.players.gamma_cursor_templates, arena(context));
+            return;
+        }
+    }
+    missing("native_gamma_E102WK_cursor_allocation_identity");
 }
 // NOTSA: native boundary for GammaLoadSetupResource; source seam declared in the Gamma core.
 void load_setup_resource(Context &) {

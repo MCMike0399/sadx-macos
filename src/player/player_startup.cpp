@@ -46,11 +46,13 @@ struct PlayerFields {
     std::optional<std::uint16_t> &flags, &requested_animation, &current_animation;
     std::optional<TaskHandle> &held_task;
     std::optional<std::shared_ptr<const PlayerAnimationTable>> &animation_table;
+    std::optional<PlayerJoinTable *> &join_table;
 };
 PlayerFields player_fields(PlayerPhysicsState &player) {
     return {player.timer_at_80, player.source_flags_at_6,
             player.requested_animation_at_124, player.current_animation_at_126,
-            player.held_task_at_68, player.animation_tail.table_at_140};
+            player.held_task_at_68, player.animation_tail.table_at_140,
+            player.animation_tail.join_table};
 }
 // NOTSA: fields established by the successful source player calloc.
 void initialize_physics(PlayerPhysicsState &player) {
@@ -80,6 +82,7 @@ void initialize_physics(PlayerPhysicsState &player) {
     player.animation_tail.frame_at_130 = 0;
     player.animation_tail.start_at_134 = 0;
     fields.animation_table = std::shared_ptr<const PlayerAnimationTable>{};
+    fields.join_table = nullptr;
     player.animation_tail.buffer_at_148 = std::shared_ptr<PlayerAnimationAllocatedAction>{};
     player.moving_task_at_6c = TaskHandle{};
     player.cached_land_object_at_74 = SceneResourceReference{};
@@ -433,7 +436,7 @@ InitializedPlayerView bind_initialized_player(const PlayerHandle &record) {
     return {reinterpret_cast<std::uint16_t &>(timer), required(fields.flags, boundary),
             required(fields.requested_animation, boundary),
             required(fields.current_animation, boundary), required(fields.held_task, boundary),
-            required(fields.animation_table, boundary)};
+            required(fields.animation_table, boundary), required(fields.join_table, boundary)};
 }
 std::shared_ptr<PlayerTaskState> NativeAccess::primary(const TaskHandle &task) {
     return required_primary(task);

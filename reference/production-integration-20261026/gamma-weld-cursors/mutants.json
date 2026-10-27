@@ -1,0 +1,42 @@
+[
+  [
+    "unsigned line count",
+    "const auto lines = static_cast<std::int32_t>(model.line_count);",
+    "const auto lines = static_cast<std::int32_t>(static_cast<std::uint16_t>(model.line_count));"
+  ],
+  [
+    "unsigned vertex index",
+    "static_cast<std::int32_t>((*indices)[static_cast<std::size_t>(vertex)])",
+    "static_cast<std::int32_t>(static_cast<std::uint16_t>((*indices)[static_cast<std::size_t>(vertex)]))"
+  ],
+  [
+    "point allocation stride",
+    "static_cast<std::uint32_t>(count) * kPointBytes).work",
+    "static_cast<std::uint32_t>(count) * kColorBytes).work"
+  ],
+  [
+    "live point input after allocation",
+    "read_word(points, index * 3",
+    "read_word((static_cast<void>(points), model.points), index * 3"
+  ],
+  [
+    "unindexed color copy",
+    "read_word(colors, index, Boundary::ColorRead",
+    "read_word(colors, vertex, Boundary::ColorRead"
+  ],
+  [
+    "early second template copy",
+    "first = templates.first;\n    expand(first, arena);\n    second = templates.second;",
+    "first = templates.first;\n    second = templates.second;\n    expand(first, arena);"
+  ],
+  [
+    "first template substituted for second",
+    "second = templates.second;",
+    "second = templates.first;"
+  ],
+  [
+    "late first allocation publication",
+    "    model.expanded_points = point_buffer;\n    const auto color_buffer = arena.allocate(static_cast<std::uint32_t>(count) * kColorBytes).work;",
+    "    const auto color_buffer = arena.allocate(static_cast<std::uint32_t>(count) * kColorBytes).work;\n    model.expanded_points = point_buffer;"
+  ]
+]

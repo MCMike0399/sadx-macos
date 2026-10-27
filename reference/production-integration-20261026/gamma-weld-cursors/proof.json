@@ -1,0 +1,283 @@
+{
+  "source_commit": "110db08733b161e9318a0bb005b882ffb530cb82",
+  "base_commit": "bfceb0a9d3850eebd75825b684b6f3de84cc2259",
+  "source_files_sha256": {
+    "src/apps/native_gamma_actor_assets.hpp": "344f7f961f4cc6abc037e0068ae39feb326e6b95a0a5e72a87f391685808bc7b",
+    "src/engine/character_geometry.cpp": "76e62426368779981287aa8b3ebacdf2cbac65b53e9f9ffd55c825132f834642",
+    "src/engine/character_geometry.hpp": "97f27d2d7c49afa2f63aff31e55b7a282b5a1adb4c9638542472fd8fd7dcdda5",
+    "src/player/gamma_cursors.cpp": "cce66f08eb505fd245689ad73c51de49e6cb5489f8a1f8d9e4e59d3861492bf4",
+    "src/player/gamma_cursors.hpp": "f44b3d5733ba89f2c1b139cb5bdb7a5b4d123a59534adfa48d5ab7a862f5889e",
+    "src/player/player_animation_state.hpp": "0000693cfeb05866c65eb36eba47ee0b6c6740f4018eb7074a88396bee9f8c93",
+    "src/player/player_initialization.hpp": "11af804aaf3579b8dc926ff2f90770aa03a90549cf986a1acb143b326b4cb790",
+    "src/player/player_join_vertices.hpp": "2eb1a3fa36657b0e6725d83b11342fa4fb31c6f55f34a4352cff7971a555aa7f",
+    "src/player/player_startup.cpp": "55fda480c5ec832436e19406f8ecc565152d480e7e162114b8a3527267e42b05",
+    "src/runtime/gamma_actor_assets.hpp": "20c9358dc15df05c0dcb4a49a7e2fc5896220141f70f6dacd43a955833f4293d",
+    "src/runtime/native_gamma_assets_native.cpp": "5d7eaca277420cff3904d72b2d1a1fff69f44d995c8410a27415f5572f249787",
+    "src/runtime/native_gamma_binding.cpp": "75d59d1560df2d8f129cc0c76aa1ba99a9a2933b90f5465cd3e63ae07830cecb",
+    "src/runtime/native_gamma_resources_native.cpp": "18e9957a65b180e4ff44ceb2588597c7483de6dab15dbde005926469b86ab739",
+    "src/runtime/native_player_system.hpp": "3031b79d8041ca521b3d5a00decc75d5dae234102988518bdfbfd8a09c474a24",
+    "src/runtime/native_session.hpp": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+    "tests/probes/native_gamma_cursors_probe.cpp": "6e4b461e8b1cbea91c53d7d335515244c09224a6796a8271ae1443fda868e925",
+    "tests/unit/gamma_cursors.cpp": "b314771f7ca2a836c672bfcfb8aeacbcca04d0e12d42bcfed028b3ded16205fa",
+    "tests/unit/native_gamma_weld_cursors.mm": "7b0c49f06344759858c95033a9e503241fa79eda58a3b5f4f00fe7e6cd86352e",
+    "tools/oracles/mutate_gamma_cursors.py": "f7a2b1c3fef053fe19c8909e96e4d684e11aca68724b59b70adff2940a49a1e3",
+    "tools/oracles/verify_original_gamma_cursors.py": "e62fb12206a9f28dfb087abc05543f9946822284da7f3890b353f3a2a150daf0"
+  },
+  "frozen_inputs_byte_identical_to_base": {
+    "src/player/gamma_selection_core.hpp": "077d8c1876fe68cd5c50c0b1e1a3608b0cd6b802d9ec059bd0348463f0268193",
+    "src/player/gamma_selection_core.cpp": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea",
+    "tests/probes/native_gamma_selection_core_probe.cpp": "f1f5119da472f78651428ac79b4a5435e80acb359bf2a0c2f816b2670195a517",
+    "tests/unit/gamma_selection_core.cpp": "d6aadb3b53e94fed35b696822e1271b7eb2e23d5e908a5e0bf8b8ce4ea144db1",
+    "tools/oracles/verify_original_gamma_selection_core.py": "b62020db7b643a941079b15b2e0b931885ace95b40bb1ec3329a61439604aada",
+    "tools/oracles/mutate_gamma_selection_core.py": "f19c1e581df6b56c2f4c88d3c97881765863d342119490fd9acb77ba03e7b538",
+    "tests/probes/native_player_startup_probe.cpp": "3f19fe2625681280cd69a28a9c91cf1fccd4a33c23894adc34f65f87a8db9261",
+    "tools/oracles/verify_original_player_startup.py": "54ad16c1dbb488eef85455ec4e15a9100a0e31ff54f59fd3f7a8ccec2bab9d44",
+    "tests/unit/player_startup.cpp": "3c433f9b0e965f581e9982a854c2425b471aac472fe0d787b1d2bf711c0bd218",
+    "reference/readability-baseline.json": "ed54af0fc27250eeabe75bb6109dec08ad35030d58294ed4caf9c2926879af3e"
+  },
+  "phase_release": {
+    "source_only_through": "d9bca28",
+    "root_gate_session": 63511,
+    "actual_terminal_exit_status": 2,
+    "root_explicitly_released_private_j2": true,
+    "limits": "Root gate failed at idle/display-asleep windowed smoke; no green gate was recorded."
+  },
+  "builds": {
+    "portable_cursor_unit": 0,
+    "native_archive_composed_unit": 0,
+    "product_app": 0,
+    "force_load_native_closure": 0,
+    "unchanged_gamma_unit": 0,
+    "unchanged_startup_unit": 0,
+    "unchanged_geometry_unit": 0
+  },
+  "cursor_development": {
+    "slug": "gamma_cursors",
+    "passed": true,
+    "values_match": true,
+    "cases": 768,
+    "holdout": false,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "allocator_receipts": 1920,
+    "failure_prefix_cases": 444,
+    "original_ranges_sha256": {
+      "4c2d40-4c2de4": "c7cdcd215e8080ed2c4b9f26a171645c4a4fd760460750facd6740d31a8b62d8",
+      "4c2e10-4c2e48": "9c6112f335d944bf5e73d5f6c7baa657dcbf08bd880f2ffce4089dbe46181e32"
+    },
+    "limits": [
+      "MAlloc is an ordered allocation receipt, not an independent allocator proof.",
+      "Bounded source arrays and real native arena; no GPU or PJoinVertexes claim.",
+      "Large positive counts only with allocation exhaustion; no unknown array reads."
+    ]
+  },
+  "cursor_holdout": {
+    "slug": "gamma_cursors",
+    "passed": true,
+    "values_match": true,
+    "cases": 768,
+    "holdout": true,
+    "mismatch_count": 0,
+    "mismatches": [],
+    "allocator_receipts": 1962,
+    "failure_prefix_cases": 435,
+    "original_ranges_sha256": {
+      "4c2d40-4c2de4": "c7cdcd215e8080ed2c4b9f26a171645c4a4fd760460750facd6740d31a8b62d8",
+      "4c2e10-4c2e48": "9c6112f335d944bf5e73d5f6c7baa657dcbf08bd880f2ffce4089dbe46181e32"
+    },
+    "limits": [
+      "MAlloc is an ordered allocation receipt, not an independent allocator proof.",
+      "Bounded source arrays and real native arena; no GPU or PJoinVertexes claim.",
+      "Large positive counts only with allocation exhaustion; no unknown array reads."
+    ]
+  },
+  "cursor_mutants": {
+    "source_sha256": "cce66f08eb505fd245689ad73c51de49e6cb5489f8a1f8d9e4e59d3861492bf4",
+    "mutants": [
+      {
+        "name": "unsigned line count",
+        "compile_exit_status": 0,
+        "caught": true,
+        "oracle_exit_status": 1,
+        "mismatch_count": 214
+      },
+      {
+        "name": "unsigned vertex index",
+        "compile_exit_status": 0,
+        "caught": true,
+        "oracle_exit_status": 1,
+        "mismatch_count": 311
+      },
+      {
+        "name": "point allocation stride",
+        "compile_exit_status": 0,
+        "caught": true,
+        "oracle_exit_status": 1,
+        "mismatch_count": 303
+      },
+      {
+        "name": "live point input after allocation",
+        "compile_exit_status": 0,
+        "caught": true,
+        "oracle_exit_status": 1,
+        "mismatch_count": 104
+      },
+      {
+        "name": "unindexed color copy",
+        "compile_exit_status": 0,
+        "caught": true,
+        "oracle_exit_status": 1,
+        "mismatch_count": 150
+      },
+      {
+        "name": "early second template copy",
+        "compile_exit_status": 0,
+        "caught": true,
+        "oracle_exit_status": 1,
+        "mismatch_count": 232
+      },
+      {
+        "name": "first template substituted for second",
+        "compile_exit_status": 0,
+        "caught": true,
+        "oracle_exit_status": 1,
+        "mismatch_count": 192
+      },
+      {
+        "name": "late first allocation publication",
+        "compile_exit_status": 0,
+        "caught": true,
+        "oracle_exit_status": 1,
+        "mismatch_count": 126
+      }
+    ],
+    "caught": 8,
+    "total": 8,
+    "source_modified": false,
+    "limits": [
+      "Only development cases are used; holdout remains untouched.",
+      "A failed compile or crashed harness is not counted as caught."
+    ]
+  },
+  "unchanged_gamma": {
+    "development_cases": 1422,
+    "development_value_failures": 0,
+    "development_fp_flag_partials": 498,
+    "development_exit_status": 2,
+    "holdout_cases": 1080,
+    "holdout_value_failures": 0,
+    "holdout_fp_flag_partials": 690,
+    "holdout_exit_status": 2,
+    "verdict": "partial"
+  },
+  "unchanged_startup": {
+    "cases": 2004,
+    "value_boundary_resource_control_producer_mismatches": 0,
+    "fp_flag_partials": 924,
+    "script_exit_status": 0,
+    "verdict": "partial"
+  },
+  "native_app": {
+    "command": [
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-e09d60cb/build/sadx-native",
+      "--assets",
+      "/Users/burbujamc/Developer/sadx-macos/game/imported",
+      "--offscreen",
+      "--paced",
+      "--exit-after",
+      "1500",
+      "--key-events",
+      "500:13:down,501:13:up,750:13:down,751:13:up,900:38:down,901:38:up,950:13:down,951:13:up,1350:13:down,1351:13:up",
+      "--capture-at",
+      "1300,1380,1381,1382,1383,1390",
+      "--save-directory",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-e09d60cb/build/gamma-weld-cursors/normal-input/savedata",
+      "--capture-directory",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-e09d60cb/build/gamma-weld-cursors/normal-input/captures",
+      "--screenshot",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-e09d60cb/build/gamma-weld-cursors/normal-input/frontier.ppm"
+    ],
+    "exit_status": 1,
+    "frames": 1382,
+    "next_call": "native_gamma_load_setup_resource",
+    "gamma_preview": {
+      "retired": false,
+      "mode": 1,
+      "id": 2,
+      "player_index": 5,
+      "character": 6,
+      "status": 0,
+      "position": [
+        400,
+        0,
+        -20
+      ],
+      "rotation": [
+        0,
+        16384,
+        0
+      ],
+      "aim_y": 0
+    },
+    "loaded_gamma": 2,
+    "texture_slots_in_use": 762,
+    "app_sha256": "7ad1e745f0d5e3003c9d22c96e8f0c310a0fb5ad41d6cd8dfc4b18f52cfcff5d",
+    "log_sha256": "cc48f9af7abfcc79bef7f7021b24a497aa8be6e9de702fdbb9feb8cc3160cc0c",
+    "frontier_ppm_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "last_capture_ppm_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "image_inspected": true,
+    "image_description": "Outgoing Sonic Adventure DX title, unchanged visual frontier; no Gamma actor pixels visible.",
+    "pack_sha256": "c414e173bf4bf9f803f24d61642e233ff9650fe9276d70da2ac3939fee2b5d7f"
+  },
+  "static_checks": {
+    "readability": 0,
+    "layers": 0,
+    "global_owners": 0,
+    "native_closure": 0,
+    "provenance_with_explicit_candidate_symbol_database": 0,
+    "provenance_limit": "Root must register three symbol-additions.tsv entries. Product symbol source and protected manifests are untouched.",
+    "profile": {
+      "patches": 618,
+      "active_patches": 121,
+      "active_unhandled_patches": 79,
+      "reports": 1,
+      "declared_exe_ranges": 2,
+      "unhandled_overlaps": 0,
+      "handled_overlaps": 0,
+      "undetermined_overlaps": 0,
+      "reports_without_addressed_ranges": []
+    },
+    "cpu_baseline": "Unchanged byte for byte; no allowance reduction from aliases or new types."
+  },
+  "initial_qualification_failures": [
+    {
+      "step": "Initial startup probe linkage against native archive only",
+      "exit_status": 2,
+      "resolution": "Linked unchanged reference-only player_initialization_reference.cpp for the unchanged original startup judge; final build and comparison completed."
+    },
+    {
+      "step": "Initial startup script launch without PYTHONPATH",
+      "exit_status": 1,
+      "resolution": "Used existing Make-equivalent PYTHONPATH=tools/lib:tools/oracles; no source or judge changed."
+    },
+    {
+      "step": "Initial profile output placed in scan input directory",
+      "resolution": "Repeated with dedicated one-report input directory and separate output; final two full ranges have zero unhandled or undetermined overlaps."
+    }
+  ],
+  "not_run": [
+    "Full gate (Root owned)",
+    "Ghidra/providers (Root prohibited)",
+    "Fresh independent review (Root owned)",
+    "N3b/actor drawing/GPU/PJoinVertexes/physics/story/gameplay qualification",
+    "Unchanged Gamma core mutation suite (core logic and all existing mutant definitions unchanged; core original dev/holdout rerun)"
+  ],
+  "limits": [
+    "MAlloc is an ordered source receipt, with real native TaskWorkArena allocations; lower allocator has its own prior judge.",
+    "Original cursor CPU template/indexed copies only; large positive corrupt counts exercised with exhaustion before unavailable indices.",
+    "Existing destination buffers are overwritten without invented cleanup; per-word source failure prefixes retained.",
+    "New focused tests/probe/original/mutant scripts need Root-owned registrations; no existing judge/tolerance/expected value changed.",
+    "Private app is a maintained native build and force-load closure; Root owns fresh source-only export and combined gate.",
+    "No push, Main writes, shared build writes, providers or subagents."
+  ]
+}

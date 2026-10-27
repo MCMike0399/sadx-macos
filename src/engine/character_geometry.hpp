@@ -11,6 +11,8 @@ class GeometryState {
     GeometryState &operator=(const GeometryState &) = delete;
     std::vector<std::uint32_t> &vector_words(ResourceId resource);
     const std::vector<std::uint32_t> &vector_words(ResourceId resource) const;
+    std::vector<std::uint32_t> &color_words(ResourceId resource);
+    const std::vector<std::uint32_t> &color_words(ResourceId resource) const;
     const std::vector<std::int16_t> &indices(ResourceId resource) const;
     const std::vector<std::int16_t> &texture_coordinates(ResourceId resource) const;
 

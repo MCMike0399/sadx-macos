@@ -1,0 +1,68 @@
+{
+  "source_sha256": "cce66f08eb505fd245689ad73c51de49e6cb5489f8a1f8d9e4e59d3861492bf4",
+  "mutants": [
+    {
+      "name": "unsigned line count",
+      "compile_exit_status": 0,
+      "caught": true,
+      "oracle_exit_status": 1,
+      "mismatch_count": 214
+    },
+    {
+      "name": "unsigned vertex index",
+      "compile_exit_status": 0,
+      "caught": true,
+      "oracle_exit_status": 1,
+      "mismatch_count": 311
+    },
+    {
+      "name": "point allocation stride",
+      "compile_exit_status": 0,
+      "caught": true,
+      "oracle_exit_status": 1,
+      "mismatch_count": 303
+    },
+    {
+      "name": "live point input after allocation",
+      "compile_exit_status": 0,
+      "caught": true,
+      "oracle_exit_status": 1,
+      "mismatch_count": 104
+    },
+    {
+      "name": "unindexed color copy",
+      "compile_exit_status": 0,
+      "caught": true,
+      "oracle_exit_status": 1,
+      "mismatch_count": 150
+    },
+    {
+      "name": "early second template copy",
+      "compile_exit_status": 0,
+      "caught": true,
+      "oracle_exit_status": 1,
+      "mismatch_count": 232
+    },
+    {
+      "name": "first template substituted for second",
+      "compile_exit_status": 0,
+      "caught": true,
+      "oracle_exit_status": 1,
+      "mismatch_count": 192
+    },
+    {
+      "name": "late first allocation publication",
+      "compile_exit_status": 0,
+      "caught": true,
+      "oracle_exit_status": 1,
+      "mismatch_count": 126
+    }
+  ],
+  "caught": 8,
+  "total": 8,
+  "source_modified": false,
+  "limits": [
+    "Only development cases are used; holdout remains untouched.",
+    "A failed compile or crashed harness is not counted as caught."
+  ]
+}

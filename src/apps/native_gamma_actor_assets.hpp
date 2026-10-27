@@ -83,6 +83,83 @@ inline std::vector<collision_component::Info> gamma_collision_info(
     }
     return result;
 }
+// NOTSA: validate the complete imported weld declaration before binding native pointers.
+inline std::array<GammaJoinDeclaration, 5> gamma_joins(
+    NSDictionary *metadata, const character_pack::CharacterPack &pack) {
+    std::array<GammaJoinDeclaration, 5> result{};
+    const auto objects = array(metadata[@"objects"], 5, "Gamma weld objects");
+    std::array<character_pack::ResourceId, 5> identities{};
+    constexpr std::array<unsigned, 5> kObjectRows = {0, 24, 25, 26, 27};
+    for (std::size_t index = 0; index < identities.size(); ++index) {
+        const auto row = dictionary(objects[index], "Gamma weld object");
+        (void)integer(row[@"index"], kObjectRows[index], kObjectRows[index], "Gamma object row");
+        identities[index] = integer(row[@"object"], 1, pack.record_count(), "Gamma object identity");
+        (void)pack.object(identities[index]);
+    }
+    if (identities[0] != pack.resolve(ActionHandle{static_cast<std::uint64_t>(
+            integer(metadata[@"initial_animation_action"], 1, pack.record_count(),
+                    "Gamma Stand identity"))}).object)
+        throw std::runtime_error("Gamma weld root differs from Stand");
+    const auto rows = array(metadata[@"joins"], 5, "Gamma weld declarations");
+    for (std::size_t index = 0; index < result.size(); ++index) {
+        const auto row = dictionary(rows[index], "Gamma weld declaration");
+        auto &join = result[index];
+        const auto root = index == 4 ? 0 : identities[0];
+        const auto source = index == 4 ? 0 : identities[index + 1];
+        join.object = integer(row[@"object"], root, root, "Gamma weld root");
+        join.source_object = integer(row[@"source_object"], source, source, "Gamma weld source");
+        join.vertex_count = static_cast<std::uint8_t>(integer(row[@"vertex_count"],
+            index < 2 ? 2 : 0, index < 2 ? 2 : 0, "Gamma weld vertex count"));
+        const auto mode = index == 4 ? 0 : index + 4;
+        join.input_mode = static_cast<std::int8_t>(integer(row[@"input_mode"], mode, mode,
+                                                         "Gamma weld mode"));
+        for (NSString *key in @[@"destination_object", @"source_node", @"destination_node",
+                                @"original_vertices", @"vertex_pairs"])
+            (void)integer(row[key], 0, 0, "Gamma weld null declaration");
+    }
+    return result;
+}
+// NOTSA: validate source WIREMODEL declarations without expanding or allocating buffers.
+inline std::array<GammaCursorDeclaration, 2> gamma_cursors(
+    NSDictionary *metadata, const character_pack::CharacterPack &pack) {
+    std::array<GammaCursorDeclaration, 2> result{};
+    const auto rows = array(metadata[@"cursor_templates"], 2, "Gamma cursor templates");
+    for (std::size_t index = 0; index < result.size(); ++index) {
+        const auto row = dictionary(rows[index], "Gamma cursor template");
+        auto &cursor = result[index];
+        cursor.points = integer(row[@"points"], 1, pack.record_count(), "Gamma cursor points");
+        cursor.colors = integer(row[@"colors"], 1, pack.record_count(), "Gamma cursor colors");
+        cursor.indices = integer(row[@"indices"], 1, pack.record_count(), "Gamma cursor indices");
+        if (pack.record(cursor.points).kind != character_pack::ResourceKind::Vectors ||
+            pack.record(cursor.colors).kind != character_pack::ResourceKind::Colors ||
+            pack.record(cursor.indices).kind != character_pack::ResourceKind::Indices)
+            throw std::runtime_error("Gamma cursor resource kind mismatch");
+        cursor.line_count = static_cast<std::int16_t>(integer(row[@"line_count"], 12, 12,
+                                                              "Gamma cursor line count"));
+        const auto &point_bytes = pack.record(cursor.points).payload;
+        const auto &color_bytes = pack.record(cursor.colors).payload;
+        const auto &index_bytes = pack.record(cursor.indices).payload;
+        constexpr std::size_t kArrayHeaderBytes = 4, kPointBytes = 12, kColorBytes = 4;
+        constexpr std::uint16_t kSignedIndexLimit = 1 << 15;
+        if (index_bytes.size() != kArrayHeaderBytes + std::size_t(cursor.line_count) * 4)
+            throw std::runtime_error("Gamma cursor index count mismatch");
+        for (std::size_t offset = kArrayHeaderBytes; offset < index_bytes.size(); offset += 2) {
+            const auto vertex = std::uint16_t(index_bytes[offset]) |
+                (std::uint16_t(index_bytes[offset + 1]) << 8);
+            if (vertex >= kSignedIndexLimit ||
+                std::size_t(vertex) >= (point_bytes.size() - kArrayHeaderBytes) / kPointBytes ||
+                std::size_t(vertex) >= (color_bytes.size() - kArrayHeaderBytes) / kColorBytes)
+                throw std::runtime_error("Gamma cursor index outside imported inputs");
+        }
+        (void)integer(row[@"padding"], 0, 0, "Gamma cursor padding");
+        const auto outputs = dictionary(row[@"initial_point_colors"], "Gamma cursor output fields");
+        for (NSString *key in @[@"points", @"colors", @"texture", @"count"])
+            (void)integer(outputs[key], 0, 0, "Gamma cursor initial output");
+    }
+    if (result[0].points != result[1].points || result[0].indices != result[1].indices)
+        throw std::runtime_error("Gamma cursor shared resource identity mismatch");
+    return result;
+}
 // NOTSA: complete source recipe metadata binds to the SAME validated CharacterPack.
 inline GammaActorAssets load_gamma_actor_assets(const std::filesystem::path &directory,
                                                 const character_pack::CharacterPack &pack) {
@@ -176,6 +253,8 @@ inline GammaActorAssets load_gamma_actor_assets(const std::filesystem::path &dir
         result.line_colors[index] = static_cast<std::uint32_t>(
             integer(colors[index], 0, UINT32_MAX, "Gamma line color"));
     (void)integer(metadata[@"line_point_count"], 2, 2, "Gamma line point count");
+    result.joins = gamma_joins(metadata, pack);
+    result.cursors = gamma_cursors(metadata, pack);
     return result;
 }
 } // namespace sadx::native::app

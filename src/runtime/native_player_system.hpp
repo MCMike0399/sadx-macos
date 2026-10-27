@@ -1,5 +1,6 @@
 #pragma once
 #include "runtime/gamma_actor_assets.hpp"
+#include "engine/character_geometry.hpp"
 #include "player/actor_current.hpp"
 #include "player/gamma_selection_core.hpp"
 #include "game/game_bootstrap.hpp"
@@ -15,15 +16,21 @@ struct GammaExtraWork {
     float ground_y = 0, ground_distance = 0;
     std::uint32_t ground_attributes = 0;
     float walk_distance = 0;
+    gamma_cursors::WireModel cursor1, cursor2;
 };
 // NOTSA: one PLAYER system owner for Sonic and Gamma, not one session field per actor.
 struct PlayerSystem {
     actor_current::State current;
     player_initialization::Registry registry;
     gamma_selection::State gamma;
+    // GLOBAL: SONIC 0x3c54558 GammaWeldInfo size=120
+    PlayerJoinTable gamma_weld;
+    gamma_cursors::Templates gamma_cursor_templates;
     std::deque<GammaExtraWork> gamma_work;
     std::unique_ptr<GammaActorAssets> gamma_assets;
 };
+// NOTSA: existing session asset load binds imported declarations to its shared scene owners.
+void bind_gamma_resources(PlayerSystem &, character_pack::SceneState &, const GammaActorAssets &);
 } // namespace sadx::native
 
 namespace sadx::gamma_selection {
