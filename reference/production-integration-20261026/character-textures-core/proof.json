@@ -1,0 +1,65 @@
+{
+  "base_commit": "afc3e94fa4caf570607dc3ba8b86081c4b398a83",
+  "files": {
+    "src/game/character_textures.hpp": "f8bae2e68f5d8570ff3c071db8a5f86a114821dd426505cd834650c8c6ece9f0",
+    "src/game/character_textures.cpp": "9444d1d36c37bc339c8773cfd7982df62f8cbca526bf9c64b74db16c33d6af92",
+    "tests/unit/character_textures.cpp": "10c626efa503028542062323443b12b08a85ab8b84e4b0382ce4cac4460bb57f",
+    "tests/probes/native_character_textures_probe.cpp": "d396610f770f703288ce81ae321aa30a7d97fc31cf0bbf2ded080017d4ed04d9",
+    "tools/oracles/verify_original_character_textures.py": "06eee8460d213ca5ff2b36bce871124a9f9a949fcfaca732d81ba8197e932bb7",
+    "tools/oracles/mutate_character_textures.py": "0d1c2ed29a7afebe7eed61cce52eb4f79c5fafc4fce9153277645510be957bf1"
+  },
+  "new_game_file_debt": {
+    "src/game/character_textures.hpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    },
+    "src/game/character_textures.cpp": {
+      "hex_literals": 0,
+      "address_identifiers": 0,
+      "address_calls": 0,
+      "goto": 0,
+      "address_labels": 0,
+      "long_lines": 0,
+      "multi_statement_lines": 0,
+      "large_decimal_literals": 0,
+      "emulator_arithmetic": 0,
+      "address_comments": 0
+    }
+  },
+  "checks": {
+    "native_cpp17_unit": {
+      "exit_status": 0,
+      "lower_algorithms": "links maintained regular_textures.cpp",
+      "loaded_values": 256
+    },
+    "readability": {
+      "exit_status": 0,
+      "regressions": 0
+    },
+    "layers": {
+      "exit_status": 0,
+      "violations": 0
+    },
+    "provenance": {
+      "exit_status": 1,
+      "errors": 1,
+      "reason": "Expected frozen Gamma STUB 421280 duplicate; Root resolves its integration annotation. No Gamma/runtime edit here."
+    }
+  },
+  "not_run": [
+    "full gate (Root owned)",
+    "app/runtime binding/journeys",
+    "existing lower algorithm oracles (unchanged source)",
+    "independent review (Root after freeze)"
+  ],
+  "registrations": "Proposed in PACKET.md only; no Makefile, native sources, unit/oracle manifest or judge-manifest edits.",
+  "profile_check_exit_status": 0
+}

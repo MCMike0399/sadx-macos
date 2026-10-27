@@ -1,0 +1,24 @@
+{
+  "name": "character_textures",
+  "split": "dev",
+  "cases": 5297,
+  "value_mismatches": 0,
+  "values_match": true,
+  "passed": true,
+  "strict": true,
+  "fp_partial_cases": 0,
+  "failures": [],
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "original_ranges_sha256": {
+    "0x421280-0x4212d9": "bb5c96d2919e698763093f9a1e23346442b6d131b4324cc0f2418759f9fad216"
+  },
+  "probe_sha256": "4cdd1f86ed6ac995a78475813664262b8e669391a19edcb95420e519824babaf",
+  "corpus_sha256": "e9a859fe75223465e2ca909b38459810185bc20f1c12656f3678482fb9ab592d",
+  "evidence_id": "ev_49279b700b5fec055393ce16c7aa84e0ef6d683b686745a628bcc0a54435447b",
+  "limits": [
+    "Complete wrapper instructions, ordered lower-callee receipts and byte/table state only.",
+    "Lower algorithms and imported resource contents are not re-proved here.",
+    "No floating-point arithmetic; no actor, runtime binding or N3b completion claim.",
+    "Only valid character indices and bounded views; host invalid-index guard is not original behavior."
+  ]
+}

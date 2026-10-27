@@ -1,0 +1,150 @@
+{
+  "evidence_id": "ev_49279b700b5fec055393ce16c7aa84e0ef6d683b686745a628bcc0a54435447b",
+  "raw_dossier_path": "/Users/burbujamc/Developer/sadx-wt-normal-uv-strip/reference/inventory-raw/character-textures-recovery-20261026/character-textures-421280.json",
+  "raw_dossier_sha256": "c46edecc3804afa7b399a24833ba9dbafaeb1e6c00d0637755c83a628014091a",
+  "procedure": {
+    "address": "0x421280",
+    "name": "LoadCharTextures",
+    "classification": {
+      "external": false,
+      "thunk": false,
+      "thunk_target": null,
+      "provenance": "ghidra-function-manager"
+    },
+    "body": {
+      "available": true,
+      "provenance": "ghidra-function-body-address-set",
+      "ranges": [
+        {
+          "start": "0x421280",
+          "end": "0x4212d8"
+        }
+      ],
+      "total_bytes": 89,
+      "span_bytes": 89,
+      "non_contiguous": false,
+      "contains_entry": true
+    },
+    "signature": "undefined LoadCharTextures()",
+    "locals": []
+  },
+  "pseudocode": "\nvoid LoadCharTextures(int param_1)\n\n{\n  int *piVar1;\n  int iVar2;\n  int *piVar3;\n  \n  piVar3 = (int *)(&CharacterPVMEntries)[param_1];\n  if (piVar3 != (int *)0x0) {\n    if ((&LoadedCharTextures)[param_1] == '\\0') {\n      iVar2 = piVar3[1];\n      while (iVar2 != 0) {\n        if (*piVar3 == 0) {\n          LoadNoNamePVM();\n        }\n        else {\n          texLoadTexturePvmFile(*piVar3,iVar2);\n        }\n        piVar1 = piVar3 + 3;\n        piVar3 = piVar3 + 2;\n        iVar2 = *piVar1;\n      }\n      if (param_1 == 5) {\n        LoadEggRoboTextures();\n      }\n    }\n    (&LoadedCharTextures)[param_1] = (&LoadedCharTextures)[param_1] + '\\x01';\n  }\n  return;\n}\n\n",
+  "assembly": [
+    "0x421280: PUSH ESI",
+    "0x421281: PUSH EDI",
+    "0x421282: MOV EDI, dword ptr [ESP + 0xc]",
+    "0x421286: MOV ESI, dword ptr [EDI*0x4 + 0x90ed54]",
+    "0x42128d: TEST ESI, ESI",
+    "0x42128f: JZ 0x004212d6",
+    "0x421291: MOV AL, byte ptr [EDI + 0x3b290c4]",
+    "0x421297: TEST AL, AL",
+    "0x421299: JNZ 0x004212d0",
+    "0x42129b: MOV EAX, dword ptr [ESI + 0x4]",
+    "0x42129e: TEST EAX, EAX",
+    "0x4212a0: JZ 0x004212c6",
+    "0x4212a2: MOV ECX, dword ptr [ESI]",
+    "0x4212a4: TEST ECX, ECX",
+    "0x4212a6: PUSH EAX",
+    "0x4212a7: JNZ 0x004212b3",
+    "0x4212a9: CALL 0x00420d80",
+    "0x4212ae: ADD ESP, 0x4",
+    "0x4212b1: JMP 0x004212bc",
+    "0x4212b3: PUSH ECX",
+    "0x4212b4: CALL 0x00421180",
+    "0x4212b9: ADD ESP, 0x8",
+    "0x4212bc: MOV EAX, dword ptr [ESI + 0xc]",
+    "0x4212bf: ADD ESI, 0x8",
+    "0x4212c2: TEST EAX, EAX",
+    "0x4212c4: JNZ 0x004212a2",
+    "0x4212c6: CMP EDI, 0x5",
+    "0x4212c9: JNZ 0x004212d0",
+    "0x4212cb: CALL 0x004b3da0",
+    "0x4212d0: INC byte ptr [EDI + 0x3b290c4]",
+    "0x4212d6: POP EDI",
+    "0x4212d7: POP ESI",
+    "0x4212d8: RET"
+  ],
+  "callees": [
+    {
+      "address": "0x420d80",
+      "name": "LoadNoNamePVM",
+      "classification": {
+        "external": false,
+        "thunk": false,
+        "thunk_target": null,
+        "provenance": "ghidra-function-manager"
+      },
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x420d80",
+            "end": "0x420e80"
+          }
+        ],
+        "total_bytes": 257,
+        "span_bytes": 257,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    },
+    {
+      "address": "0x421180",
+      "name": "texLoadTexturePvmFile",
+      "classification": {
+        "external": false,
+        "thunk": false,
+        "thunk_target": null,
+        "provenance": "ghidra-function-manager"
+      },
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x421180",
+            "end": "0x42125b"
+          }
+        ],
+        "total_bytes": 220,
+        "span_bytes": 220,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    },
+    {
+      "address": "0x4b3da0",
+      "name": "LoadEggRoboTextures",
+      "classification": {
+        "external": false,
+        "thunk": false,
+        "thunk_target": null,
+        "provenance": "ghidra-function-manager"
+      },
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x4b3da0",
+            "end": "0x4b3deb"
+          }
+        ],
+        "total_bytes": 76,
+        "span_bytes": 76,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    }
+  ],
+  "value_flow_completeness": {
+    "truncated": false,
+    "omitted_operations_lower_bound": 0,
+    "known_omitted_inputs": 0,
+    "known_omitted_edges": 0
+  },
+  "profile": "421280..4212d8 has no active patch overlap. Named 421180 goes to pinned LoadPVM_r via existing regular_textures::load_archive. 4228e0 is not a wrapper callee.",
+  "sdk": "SADXFunctions.h:310 LoadCharTextures(int), :743 LoadEggRoboTextures(); SADXVariables.h:167 nine CharacterPVMEntries; SADXStructs.h:78 PVMEntry; Characters_Amy enum value 5. SDK LoadedCharTextures count 6 is not used to size native storage: Session and imported character catalog have 9 slots; wrapper has no source bounds guard.",
+  "ownership": "CharacterBinding borrows string_view and List*, CharacterCatalog borrows loaded int8 bytes and CharacterTable records. No GLOBAL or source owner added."
+}
