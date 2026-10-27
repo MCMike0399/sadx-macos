@@ -1,0 +1,26 @@
+{
+ "slug": "gamma_cursors",
+ "passed": true,
+ "values_match": true,
+ "cases": 768,
+ "holdout": false,
+ "mismatch_count": 0,
+ "mismatches": [],
+ "allocator_receipts": 1920,
+ "failure_prefix_cases": 444,
+ "original_ranges_sha256": {
+  "4c2d40-4c2de4": "c7cdcd215e8080ed2c4b9f26a171645c4a4fd760460750facd6740d31a8b62d8",
+  "4c2e10-4c2e48": "9c6112f335d944bf5e73d5f6c7baa657dcbf08bd880f2ffce4089dbe46181e32"
+ },
+ "limits": [
+  "MAlloc is an ordered allocation receipt, not an independent allocator proof.",
+  "Bounded source arrays and real native arena; no GPU or PJoinVertexes claim.",
+  "Large positive counts only with allocation exhaustion; no unknown array reads."
+ ],
+ "tracked_summary": {
+  "full_sha256": "fb6075b9b61e704d2ceac13c452dc9ef5befadba2c3b5da9445f7041eb8b91ac",
+  "full_bytes": 695,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}
