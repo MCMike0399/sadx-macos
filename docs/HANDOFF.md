@@ -590,3 +590,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Visible GUI restoration is pending before a fresh required smoke/gate. Last successful full gate remains native-gamma-integration-gate.json, rc 0, at the previous CCL stop.
 * Gamma weld/cursor worker is released for private qualification after the actual terminal. Source-backed draft uses one mutable weld table, per-player reference and the real cursor buffers; focused tests reach native_gamma_load_setup_resource. Final holdout/receipts and fresh review remain pending.
 * Keep the full N3b and native Sonic story route active. No actor/GPU completion or gameplay 63 FPS claim; no further push since the user-requested bfceb0a push.
+
+### 2026-10-26 — User stopped resources and requested publication
+
+* User explicitly requested stopping all resources and pushing current progress to Main. Task-owned processes and child agents are stopped; do not resume builds, providers, recovery or automatic goal work without a new user instruction.
+* Main includes the independently reviewed Gamma weld/cursor integration. Maintained portable cursor unit, 768-case original development comparison and both native consumer units pass. Frozen original holdout has 768 exact cases; eight mutants are caught. Next observed private app stop is native_gamma_load_setup_resource, frame 1382, exit 1; image remains outgoing title.
+* Required visible smoke passed 120 frames after GUI restoration. The subsequent combined gate retry was interrupted before a terminal result; do not report its stale earlier exit file as a new result. Earlier display-failed gate remains rc 2; last complete green gate remains the prior Gamma integration, rc 0.
+* Weld/cursor source-only export and full integration gate remain pending. No actor/GPU/N3b/story completion claim. Portable sprite registration constructor and its review remain on packet/gamma-setup-sprite and packet/review-gamma-setup-sprite; definition/import and actual Gamma binding remain unproved.
+* All packet branches/worktrees and evidence are preserved. Publication follows this entry; no new recovery or tests were started for shutdown.

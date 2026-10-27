@@ -1,0 +1,13 @@
+{
+  "source_commit": "bfceb0a9d3850eebd75825b684b6f3de84cc2259",
+  "command": "SADX_CONTENT_CORPUS=/Users/burbujamc/Developer/sadx-macos make -j10 gate",
+  "status": "interrupted; no terminal exit status captured for this retry",
+  "passed": false,
+  "windowed_smoke": "Fresh visible smoke passed120frames before retry",
+  "log_sha256": "17d8711951d63aee4d10534f52cf6ac5b3ad278f85ad79296bfd27f032e15da0",
+  "log": "build/collision-texture-gate-user-stopped.log",
+  "limits": [
+    "Do not use stale exit file2 from earlier display-failed attempt as this retry status.",
+    "User requested stopping all resources before gate completion; no green gate recorded."
+  ]
+}
