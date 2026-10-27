@@ -1,0 +1,17 @@
+{
+  "implementation": "bf741b2",
+  "new_judge_paths": [
+    "tests/probes/native_character_textures_probe.cpp",
+    "tests/unit/character_textures.cpp",
+    "tools/oracles/mutate_character_textures.py",
+    "tools/oracles/verify_original_character_textures.py"
+  ],
+  "registration": "Append character-textures unit row; automatic probe/oracle discovery.",
+  "existing_judge_algorithms_unchanged": true,
+  "ignored_inputs_restored_exact_hash": 53,
+  "source_qualification": "Frozen8052fac:5297dev/4096holdout strictzero;10mutants; realregularloaderC++17unit0.",
+  "limits": [
+    "Gamma duplicate421280 annotation and runtime bindings remain pending integration.",
+    "Last Main fullgate9fa9966rc0, priorCCLstop; no actor/N3bclaim."
+  ]
+}

@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "c473091627b82bf7a153a27d32c683b3fcd8ed9d",
-    "evidence": "reference/production-integration-20261026/gamma-collision-binding/integration-judge-setup.json",
-    "evidence_sha256": "f9fca7ebf0cc0d8ad0ead71f9addda998c828a19b92ba1868811fc7357370a64",
-    "reason": "Register unchanged reviewed collision component judges/unit and actual native CCL consumer checks after separate source commits"
+    "base_commit": "bf741b252f74104a757c8a2f659bca93d349a8d0",
+    "evidence": "reference/production-integration-20261026/character-textures-core/integration-judge-setup.json",
+    "evidence_sha256": "a3beaa62601bb885e807f5980406fdc51ca1c2eb4291b9d86eae90e711545069",
+    "reason": "Register unchanged original character-texture wrapper judge, new probe/mutants and native unit; old judges untouched"
   },
   "files": {
     "Makefile": "ed8e228dfcbd1a420488e260e0f9dee316173ce72da2544dc036ad570d0a0e1a",
@@ -354,6 +354,7 @@
     "tests/probes/native_character_select_availability_probe.cpp": "4f7273a69f9dd1723d40ef1abd6f68b0b8968b59acc724a7cde7fef9a137d01e",
     "tests/probes/native_character_select_labels_probe.cpp": "edb980c3b7e763b017335a78bb2984af14596424b85f6aab867078cc34bd2bd9",
     "tests/probes/native_character_select_menu_probe.cpp": "b6cc6d2c10878ada770bc313b319a63908b4c698f5d5531f898e398989b3e20c",
+    "tests/probes/native_character_textures_probe.cpp": "d396610f770f703288ce81ae321aa30a7d97fc31cf0bbf2ded080017d4ed04d9",
     "tests/probes/native_collision_component_probe.cpp": "b065feed332d3dfd95b6849d109c33415a8499cc62ce16564a0c2e35d7f281db",
     "tests/probes/native_collision_shapes_probe.cpp": "6ca1cdfde7ee506458e74b84505cabc2541ad3bacc627f5b0264d44669b2366a",
     "tests/probes/native_colored_polygon_probe.cpp": "9dda6a5062edf77d644ec5eadfae4ee21bcd4e809af4f61e87666aeeb696ac1c",
@@ -618,7 +619,7 @@
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",
     "tests/python/test_voice_publication.py": "5c00051d9b3de640f64e224dda4d810cdd7d26acafd91d7b1dc44e9786a734f3",
-    "tests/unit/manifest.tsv": "c59ec31cb0045631540bc96576f413129d7596b292bcb11847dfc46a0037700a",
+    "tests/unit/manifest.tsv": "6e290f5bdd6975a504d64fab7732d439772bc7c6ccd782fcdb7343672a8435ab",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",
@@ -677,6 +678,7 @@
     "tools/oracles/check_polybuff_strip_dependency.py": "a504c8a7789c95b8ec28fdd85c18fb1ab8248b5ab150d4da069e905534174f1e",
     "tools/oracles/freeze_frame_control.py": "d2363d9722a647c00e02805b6b93efdb1b222c165e237d0992034f4969418e88",
     "tools/oracles/manifest.tsv": "0258d43a10068ed58a3d68b93c2a975b9ed2f60f0e3228dcdfb025b5adca9a1c",
+    "tools/oracles/mutate_character_textures.py": "0d1c2ed29a7afebe7eed61cce52eb4f79c5fafc4fce9153277645510be957bf1",
     "tools/oracles/mutate_gamma_selection_core.py": "f19c1e581df6b56c2f4c88d3c97881765863d342119490fd9acb77ba03e7b538",
     "tools/oracles/queue_native_blend.py": "ce5aeb17e65b65693ade2a481d950bf672fd74cb859165d953cc22386c742d18",
     "tools/oracles/queue_native_holdout.py": "6f42b777922097939e13db7e19e2b173754ab1b40207ebd9ed1d66f539489b4b",
@@ -697,6 +699,7 @@
     "tools/oracles/verify_original_character_select_availability.py": "25c9a3e6ddb678805b99d90fe415fc835f20fa4187ef1e99016ceb56e6e06d3c",
     "tools/oracles/verify_original_character_select_labels.py": "e57eddbde0809384dc5f82b37eb4b58f6583a3e54c629f31eeb2e45199bd3cc4",
     "tools/oracles/verify_original_character_select_menu.py": "fb000d6309d53dee9272b5ad9eabee511351fa555f1df21b8e515105bbfcd15a",
+    "tools/oracles/verify_original_character_textures.py": "06eee8460d213ca5ff2b36bce871124a9f9a949fcfaca732d81ba8197e932bb7",
     "tools/oracles/verify_original_collision_component.py": "3105d7e9acaf4a5509b45cfff6753a2daf0678548b831f325fdd883a2b82c90c",
     "tools/oracles/verify_original_collision_shapes.py": "28bde4746eca7d67543247ed9b6907fad509eb559fdee0eca0de1bdd3f6cf99b",
     "tools/oracles/verify_original_colored_polygon.py": "58548d8157a08af241d1f839f6221c87acb56e0adae9942806be753b10d8f8b6",
