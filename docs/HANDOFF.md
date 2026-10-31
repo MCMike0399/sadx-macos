@@ -598,3 +598,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Required visible smoke passed 120 frames after GUI restoration. The subsequent combined gate retry was interrupted before a terminal result; do not report its stale earlier exit file as a new result. Earlier display-failed gate remains rc 2; last complete green gate remains the prior Gamma integration, rc 0.
 * Weld/cursor source-only export and full integration gate remain pending. No actor/GPU/N3b/story completion claim. Portable sprite registration constructor and its review remain on packet/gamma-setup-sprite and packet/review-gamma-setup-sprite; definition/import and actual Gamma binding remain unproved.
 * All packet branches/worktrees and evidence are preserved. Publication follows this entry; no new recovery or tests were started for shutdown.
+
+### 2026-10-31 — Complete refactor goal researched; implementation remains stopped
+
+* User requested a complete readability and modularity refactor before further game development, and asked for the researched starting prompt only.
+* Source audit at 93fa912 and the reusable implementation brief are in RESEARCH-complete-refactor-2026-10-31.md and PROMPT-complete-refactor.md. Invoking the brief records the scheduling change while retaining fidelity and product milestones.
+* Live lexical scope contains 495 files, 1,454 address identifier occurrences and 61 recognized address calls. Sonic dispatch and constexpr instruction tables expose additional checker blind spots; these are indicators, not unique function counts.
+* Scope includes existing recovered behavior outside the native build and inside legacy reference composition. Genuine adapters, provenance and justified numerical helpers remain; unrecovered gameplay is a separate inventory.
+* No source implementation, build, game run, oracle, gate or decompiler provider was started. The last complete green gate and the pending weld/cursor verification limits above remain unchanged. No push.
