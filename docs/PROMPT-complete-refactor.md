@@ -169,6 +169,35 @@ gameplay, completing M5/M6, or proving 63 FPS in stages the native app cannot ru
 Maintainability must leave future hooks possible without building speculative
 enhancements now.
 
+## 5. Consult the research thread
+
+The user authorizes the implementing agent to contact the original research thread
+for architectural advice, evidence interpretation and review coordination:
+[read and research deeply the docs. The goal is the...](t3-thread://v1/05626ae4-5585-4cd9-8b36-84b1d3c65806).
+
+Discover the available T3 tools. Read that thread with `t3_thread_read` before
+asking about its decisions. To ask for advice, use `t3_thread_send` with:
+
+```json
+{
+  "threadId": "05626ae4-5585-4cd9-8b36-84b1d3c65806",
+  "mode": "auto",
+  "message": "Refactor consultation. Reply to <implementing thread ID/link>. Worktree: <path>; branch and commit: <identity>. System: <name>. Question or proposed decision: <specific issue>. Evidence: <paths and results>. Alternatives and tradeoff: <brief>. Requested help: <advice or review coordination>."
+}
+```
+
+Include exact commits, evidence paths, test verdicts and limits so the advisor can
+inspect the same candidate. Ask at substantial ownership/arithmetic decisions,
+unresolved evidence conflicts and system review boundaries; keep independent work
+moving while a response is pending. Delivery is not approval or a completed review.
+If these tools are unavailable, report that and retain the question in the handoff.
+
+Formal independent reviews still use a fresh `delegate_task` with the candidate
+diff, evidence, unchanged judges and STYLE §12 criteria; do not reuse a completed
+review child with `t3_thread_send`. This research thread can advise and coordinate
+that review, and can reply through `t3_thread_send` to the supplied implementing
+thread. Keep implementation ownership with the implementing agent.
+
 Continue across module boundaries, gates and commits until these criteria are met
 or a concrete external blocker prevents progress. Apply the project's three-attempt
 limit to a stuck function, record its evidence, and work on independent migrations;
