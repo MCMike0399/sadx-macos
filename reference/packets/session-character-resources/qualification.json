@@ -1,0 +1,249 @@
+{
+  "source_binding": {
+    "loop_sha256": "bf4f6d2d98a89a8eebef87cd6b0cbc42c037b7ce3a7d11032c81f78c3d989064",
+    "frozen_body_exact": true,
+    "owner_fields_exact": true,
+    "session_and_preview_forwarding_exact": true,
+    "metadata_copy_and_body_initialization_boundaries_preserved": true
+  },
+  "builds": [
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-Isrc",
+        "-Itests/fixtures",
+        "-DCHARACTER_RESOURCES_BASELINE_ONLY",
+        "tests/unit/native_character_resources.cpp",
+        "src/game/game_cleanup.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/baseline"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/baseline"
+      ],
+      "exit": 0,
+      "stdout": "C0:0/archive-0-0/resource-0/1/archive-0-1/resource-0/2 B0;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 B0;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 B0;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 B0;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/10 B0;\ninitialized\nC0:0/archive-0-0/resource-0/1/archive-0-1/resource-0/2 L1:0:00 L2:0:000 B1/0/1;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 L2:0:000 L3:0:0000 B1/0/1;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 L3:0:0000 L4:0:00000 B1/0/1;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 L4:0:00000 L5:0:000000 B1/0/1;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 L5:0:000000 L6:0:0000000 B1/0/1;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 L6:0:0000000 L7:0:00000000 B1/0/1;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 L7:0:00000000 L8:0:000000000 B1/0/1;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 L8:0:000000000 L9:0:0000000000 B1/0/1;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/10 L9:0:0000000000 L10:0:00000000000 B1/0/1;\nC0:-128/archive-0-0/resource-0/1/archive-0-1/resource-0/2 L1:0:00 L2:0:000 B1/0/1;C1:127/archive-1-0/resource-1/2/archive-1-1/resource-1/3 L2:0:000 L3:0:0000 B1/0/1;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 L3:0:0000 L4:0:00000 B1/0/1;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 L4:0:00000 L5:0:000000 B1/0/1;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 L5:0:000000 L6:0:0000000 B1/0/1;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 L6:0:0000000 L7:0:00000000 B1/0/1;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 L7:0:00000000 L8:0:000000000 B1/0/1;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 L8:0:000000000 L9:0:0000000000 B1/0/1;C8:-1/archive-8-0/resource-8/9/archive-8-1/resource-8/10 L9:0:0000000000 L10:0:00000000000 B1/0/1;\nC0:2/archive-0-0/resource-0/1/archive-0-1/resource-0/2 L1:0:01 L2:0:000 B1/0/1;C1:127/archive-1-0/resource-1/2/archive-1-1/resource-1/3 L2:0:000 L3:0:0000 B1/0/1;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 L3:0:0000 L4:0:00000 B1/0/1;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 L4:0:00000 L5:0:000000 B1/0/1;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 L5:0:000000 L6:0:0000000 B1/0/1;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 L6:0:0000000 L7:0:00000000 B1/0/1;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 L7:0:00000000 L8:0:000000000 B1/0/1;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 L8:0:000000000 L9:0:0000000000 B1/0/1;C8:-1/archive-8-0/resource-8/9/archive-8-1/resource-8/10 L9:0:0000000000 L10:0:00000000000 B1/0/1;\nrelease failed\nC0:4/archive-0-0/resource-0/1/archive-0-1/resource-0/2 L1:0:01 L2:0:000 B1/0/1;C1:127/archive-1-0/resource-1/2/archive-1-1/resource-1/3 L2:0:000 L3:0:0000 B1/0/1;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 L3:0:0000 L4:0:00000 B1/0/1;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 L4:0:00000 L5:0:000000 B1/0/1;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 L5:0:000000 L6:0:0000000 B1/0/1;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 L6:0:0000000 L7:0:00000000 B1/0/1;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 L7:0:00000000 L8:0:000000000 B1/0/1;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 L8:0:000000000 L9:0:0000000000 B1/0/1;C8:-1/archive-8-0/resource-8/9/archive-8-1/resource-8/10 L9:0:0000000000 L10:0:00000000000 B1/0/1;\nC0:0 B0;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 B0;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 B0;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 B0;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/10 B0;\nmissing imported character texture declarations\nC0:0 B0;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 B0;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 B0;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 B0;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/10 B0;\nC0:0/archive-0-0/resource-0/1/archive-0-1/resource-0/2 B0;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 B0;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 B0;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 B0;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0 B0;\nmissing imported character texture declarations\nC0:0/archive-0-0/resource-0/1/archive-0-1/resource-0/2 L1:0:00 L2:0:000 B1/0/1;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 L2:0:000 L3:0:0000 B1/0/1;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 L3:0:0000 L4:0:00000 B1/0/1;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 L4:0:00000 L5:0:000000 B1/0/1;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 L5:0:000000 L6:0:0000000 B1/0/1;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 L6:0:0000000 L7:0:00000000 B1/0/1;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 L7:0:00000000 L8:0:000000000 B1/0/1;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 L8:0:000000000 L9:0:0000000000 B1/0/1;C8:0 B0;\nC0:0/archive-0-0/resource-0/0/archive-0-1/resource-0/2 B0;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 B0;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 B0;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 B0;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/10 B0;\nempty imported character texture declaration\nC0:0/archive-0-0/resource-0/0/archive-0-1/resource-0/2 L0:0:0 L0:0:0 B0;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 B0;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 B0;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 B0;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/10 B0;\nC0:0/archive-0-0/resource-0/1/archive-0-1/resource-0/0 B0;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 B0;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 B0;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 B0;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/10 B0;\nempty imported character texture declaration\nC0:0/archive-0-0/resource-0/1/archive-0-1/resource-0/0 L1:0:00 L0:0:0 B0;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 B0;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 B0;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 B0;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/10 B0;\nC0:0/archive-0-0/resource-0/1/archive-0-1/resource-0/2 B0;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 B0;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 B0;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 B0;C4:0/archive-4-0/resource-4/0/archive-4-1/resource-4/6 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/10 B0;\nempty imported character texture declaration\nC0:0/archive-0-0/resource-0/1/archive-0-1/resource-0/2 L1:0:00 L2:0:000 B1/0/1;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 L2:0:000 L3:0:0000 B1/0/1;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 L3:0:0000 L4:0:00000 B1/0/1;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 L4:0:00000 L5:0:000000 B1/0/1;C4:0/archive-4-0/resource-4/0/archive-4-1/resource-4/6 L0:0:0 L0:0:0 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/10 B0;\nC0:0/archive-0-0/resource-0/1/archive-0-1/resource-0/2 B0;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 B0;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 B0;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 B0;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/0 B0;\nempty imported character texture declaration\nC0:0/archive-0-0/resource-0/1/archive-0-1/resource-0/2 L1:0:00 L2:0:000 B1/0/1;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 L2:0:000 L3:0:0000 B1/0/1;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 L3:0:0000 L4:0:00000 B1/0/1;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 L4:0:00000 L5:0:000000 B1/0/1;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 L5:0:000000 L6:0:0000000 B1/0/1;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 L6:0:0000000 L7:0:00000000 B1/0/1;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 L7:0:00000000 L8:0:000000000 B1/0/1;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 L8:0:000000000 L9:0:0000000000 B1/0/1;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/0 L9:0:0000000000 L0:0:0 B0;\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-Isrc",
+        "-Itests/fixtures",
+        "tests/unit/native_character_resources.cpp",
+        "src/game/game_cleanup.cpp",
+        "src/runtime/native_character_resources.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/current"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/current"
+      ],
+      "exit": 0,
+      "stdout": "C0:0/archive-0-0/resource-0/1/archive-0-1/resource-0/2 B0;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 B0;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 B0;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 B0;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/10 B0;\ninitialized\nC0:0/archive-0-0/resource-0/1/archive-0-1/resource-0/2 L1:0:00 L2:0:000 B1/0/1;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 L2:0:000 L3:0:0000 B1/0/1;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 L3:0:0000 L4:0:00000 B1/0/1;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 L4:0:00000 L5:0:000000 B1/0/1;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 L5:0:000000 L6:0:0000000 B1/0/1;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 L6:0:0000000 L7:0:00000000 B1/0/1;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 L7:0:00000000 L8:0:000000000 B1/0/1;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 L8:0:000000000 L9:0:0000000000 B1/0/1;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/10 L9:0:0000000000 L10:0:00000000000 B1/0/1;\nC0:-128/archive-0-0/resource-0/1/archive-0-1/resource-0/2 L1:0:00 L2:0:000 B1/0/1;C1:127/archive-1-0/resource-1/2/archive-1-1/resource-1/3 L2:0:000 L3:0:0000 B1/0/1;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 L3:0:0000 L4:0:00000 B1/0/1;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 L4:0:00000 L5:0:000000 B1/0/1;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 L5:0:000000 L6:0:0000000 B1/0/1;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 L6:0:0000000 L7:0:00000000 B1/0/1;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 L7:0:00000000 L8:0:000000000 B1/0/1;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 L8:0:000000000 L9:0:0000000000 B1/0/1;C8:-1/archive-8-0/resource-8/9/archive-8-1/resource-8/10 L9:0:0000000000 L10:0:00000000000 B1/0/1;\nC0:2/archive-0-0/resource-0/1/archive-0-1/resource-0/2 L1:0:01 L2:0:000 B1/0/1;C1:127/archive-1-0/resource-1/2/archive-1-1/resource-1/3 L2:0:000 L3:0:0000 B1/0/1;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 L3:0:0000 L4:0:00000 B1/0/1;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 L4:0:00000 L5:0:000000 B1/0/1;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 L5:0:000000 L6:0:0000000 B1/0/1;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 L6:0:0000000 L7:0:00000000 B1/0/1;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 L7:0:00000000 L8:0:000000000 B1/0/1;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 L8:0:000000000 L9:0:0000000000 B1/0/1;C8:-1/archive-8-0/resource-8/9/archive-8-1/resource-8/10 L9:0:0000000000 L10:0:00000000000 B1/0/1;\nrelease failed\nC0:4/archive-0-0/resource-0/1/archive-0-1/resource-0/2 L1:0:01 L2:0:000 B1/0/1;C1:127/archive-1-0/resource-1/2/archive-1-1/resource-1/3 L2:0:000 L3:0:0000 B1/0/1;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 L3:0:0000 L4:0:00000 B1/0/1;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 L4:0:00000 L5:0:000000 B1/0/1;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 L5:0:000000 L6:0:0000000 B1/0/1;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 L6:0:0000000 L7:0:00000000 B1/0/1;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 L7:0:00000000 L8:0:000000000 B1/0/1;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 L8:0:000000000 L9:0:0000000000 B1/0/1;C8:-1/archive-8-0/resource-8/9/archive-8-1/resource-8/10 L9:0:0000000000 L10:0:00000000000 B1/0/1;\nC0:0 B0;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 B0;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 B0;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 B0;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/10 B0;\nmissing imported character texture declarations\nC0:0 B0;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 B0;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 B0;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 B0;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/10 B0;\nC0:0/archive-0-0/resource-0/1/archive-0-1/resource-0/2 B0;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 B0;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 B0;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 B0;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0 B0;\nmissing imported character texture declarations\nC0:0/archive-0-0/resource-0/1/archive-0-1/resource-0/2 L1:0:00 L2:0:000 B1/0/1;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 L2:0:000 L3:0:0000 B1/0/1;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 L3:0:0000 L4:0:00000 B1/0/1;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 L4:0:00000 L5:0:000000 B1/0/1;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 L5:0:000000 L6:0:0000000 B1/0/1;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 L6:0:0000000 L7:0:00000000 B1/0/1;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 L7:0:00000000 L8:0:000000000 B1/0/1;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 L8:0:000000000 L9:0:0000000000 B1/0/1;C8:0 B0;\nC0:0/archive-0-0/resource-0/0/archive-0-1/resource-0/2 B0;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 B0;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 B0;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 B0;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/10 B0;\nempty imported character texture declaration\nC0:0/archive-0-0/resource-0/0/archive-0-1/resource-0/2 L0:0:0 L0:0:0 B0;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 B0;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 B0;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 B0;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/10 B0;\nC0:0/archive-0-0/resource-0/1/archive-0-1/resource-0/0 B0;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 B0;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 B0;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 B0;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/10 B0;\nempty imported character texture declaration\nC0:0/archive-0-0/resource-0/1/archive-0-1/resource-0/0 L1:0:00 L0:0:0 B0;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 B0;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 B0;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 B0;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/10 B0;\nC0:0/archive-0-0/resource-0/1/archive-0-1/resource-0/2 B0;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 B0;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 B0;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 B0;C4:0/archive-4-0/resource-4/0/archive-4-1/resource-4/6 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/10 B0;\nempty imported character texture declaration\nC0:0/archive-0-0/resource-0/1/archive-0-1/resource-0/2 L1:0:00 L2:0:000 B1/0/1;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 L2:0:000 L3:0:0000 B1/0/1;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 L3:0:0000 L4:0:00000 B1/0/1;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 L4:0:00000 L5:0:000000 B1/0/1;C4:0/archive-4-0/resource-4/0/archive-4-1/resource-4/6 L0:0:0 L0:0:0 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/10 B0;\nC0:0/archive-0-0/resource-0/1/archive-0-1/resource-0/2 B0;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 B0;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 B0;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 B0;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 B0;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 B0;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 B0;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 B0;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/0 B0;\nempty imported character texture declaration\nC0:0/archive-0-0/resource-0/1/archive-0-1/resource-0/2 L1:0:00 L2:0:000 B1/0/1;C1:0/archive-1-0/resource-1/2/archive-1-1/resource-1/3 L2:0:000 L3:0:0000 B1/0/1;C2:0/archive-2-0/resource-2/3/archive-2-1/resource-2/4 L3:0:0000 L4:0:00000 B1/0/1;C3:0/archive-3-0/resource-3/4/archive-3-1/resource-3/5 L4:0:00000 L5:0:000000 B1/0/1;C4:0/archive-4-0/resource-4/5/archive-4-1/resource-4/6 L5:0:000000 L6:0:0000000 B1/0/1;C5:0/archive-5-0/resource-5/6/archive-5-1/resource-5/7 L6:0:0000000 L7:0:00000000 B1/0/1;C6:0/archive-6-0/resource-6/7/archive-6-1/resource-6/8 L7:0:00000000 L8:0:000000000 B1/0/1;C7:0/archive-7-0/resource-7/8/archive-7-1/resource-7/9 L8:0:000000000 L9:0:0000000000 B1/0/1;C8:0/archive-8-0/resource-8/9/archive-8-1/resource-8/0 L9:0:0000000000 L0:0:0 B0;\n",
+      "stderr": ""
+    }
+  ],
+  "mutants": [
+    {
+      "name": "collapse-character-alias",
+      "build": {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-Isrc",
+          "-Itests/fixtures",
+          "tests/unit/native_character_resources.cpp",
+          "src/game/game_cleanup.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/collapse-character-alias.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/collapse-character-alias"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "run": {
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/collapse-character-alias"
+        ],
+        "exit": -6,
+        "stdout": "",
+        "stderr": "Assertion failed: (binding->lists[list] == &owner.lists()[character][list]), function snapshot, file native_character_resources.cpp, line 35.\n"
+      }
+    },
+    {
+      "name": "allow-zero-declaration",
+      "build": {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-Isrc",
+          "-Itests/fixtures",
+          "tests/unit/native_character_resources.cpp",
+          "src/game/game_cleanup.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/allow-zero-declaration.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/allow-zero-declaration"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "run": {
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/allow-zero-declaration"
+        ],
+        "exit": -6,
+        "stdout": "",
+        "stderr": "Assertion failed: (failure == 0), function exercise, file native_character_resources.cpp, line 61.\n"
+      }
+    },
+    {
+      "name": "publish-before-lists",
+      "build": {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-Isrc",
+          "-Itests/fixtures",
+          "tests/unit/native_character_resources.cpp",
+          "src/game/game_cleanup.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/publish-before-lists.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/publish-before-lists"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "run": {
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/publish-before-lists"
+        ],
+        "exit": -6,
+        "stdout": "",
+        "stderr": "Assertion failed: (binding->lists.size() == owner.lists()[character].size()), function snapshot, file native_character_resources.cpp, line 33.\n"
+      }
+    },
+    {
+      "name": "invent-loaded-byte",
+      "build": {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-Isrc",
+          "-Itests/fixtures",
+          "tests/unit/native_character_resources.cpp",
+          "src/game/game_cleanup.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/invent-loaded-byte.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/invent-loaded-byte"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "run": {
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/invent-loaded-byte"
+        ],
+        "exit": -6,
+        "stdout": "",
+        "stderr": "Assertion failed: (current == baseline), function main, file native_character_resources.cpp, line 116.\n"
+      }
+    },
+    {
+      "name": "omit-final-character",
+      "build": {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-Isrc",
+          "-Itests/fixtures",
+          "tests/unit/native_character_resources.cpp",
+          "src/game/game_cleanup.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/omit-final-character.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/omit-final-character"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "run": {
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/omit-final-character"
+        ],
+        "exit": -6,
+        "stdout": "",
+        "stderr": "libc++abi: terminating due to uncaught exception of type std::runtime_error: native character texture declarations disagree with list owners\n"
+      }
+    }
+  ],
+  "limits": [
+    "Native reduced-host binding baseline; not Windows attachment or actual Session runtime.",
+    "No full native build, original oracle, final holdout or integration gate run by this checker."
+  ]
+}

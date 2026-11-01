@@ -1,9 +1,10 @@
 {
   "change": {
-    "base_commit": "0617cf5d09546365160f145880055306aa6c6cee",
-    "evidence": "reference/packets/session-regular-resources/root-qualification.json",
-    "evidence_sha256": "2586b1c9671f096a6bb42ae387cd17d3fdddb6f394310c8c4b94a7bcb2eecbb4",
-    "reason": "Track Main composite original resource and cleanup comparisons after reviewed RegularResources extraction; four unchanged judges and registered owner unit exit0, no mismatches"
+    "base_commit": "befe06627eaebc93ac0809a247e48d6fcb0a1f09",
+    "evidence": "reference/packets/session-character-resources/baseline-source.json",
+    "evidence_sha256": "fe31de55a0d9dcb5a66e2acd1cf737110163996f1a10dec185218db1cf132fd6",
+    "mode": "additions-only",
+    "reason": "Register frozen native character-resource constructor baseline, owner unit and five compiled mutant receipt; unchanged original judges"
   },
   "files": {
     "Makefile": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
@@ -337,8 +338,10 @@
     "reference/production-integration-20261101/menu-progress-shared/mutants.json": "cab8745d573efa9caa6e281654ef85ce535c0d28b4e593236e921d275faed40d",
     "reference/production-integration-20261101/menu-texture-bindings-mutants.json": "b2af4ad069e8b0f32ccfb12ffb0da20d247ea0aaeefc8c9454a8349d7caa919a",
     "reference/production-integration-20261101/save-completion-mutants.json": "1b4657b0ff662bcc21255779aa675f8acc40cdb8fb55cbfef7a8b974e70e5694",
+    "reference/production-integration-20261101/session-character-resources-mutants.json": "3895212d8447c958db2c9ecb38f47e66a1f4218d511159d02a02e931418661a6",
     "reference/production-integration-20261101/session-regular-resources-mutants.json": "c56fe89a628d98ed2e1fe439c2fc99e8d7c5070978d30c2b2d344aa0a428f4ea",
     "reference/production-integration-20261101/session-save-owner-mutants.json": "b95ec90bb88e7a03c6d3b95e47dbda27880253048f28df6101810123df741fd6",
+    "tests/fixtures/character_resource_baseline.hpp": "ebf3af3eaa54ab6ad1255f0c71dff69f28bb8b6fa4789e7684d20cb107f7a77f",
     "tests/fixtures/input_keyboard_goldens.hpp": "0a9f25e5a0d336a1f4381af39257fdc6f7403f43ca2aef743345284fb1c18fda",
     "tests/fixtures/material_correction_mutants.json": "e34f023704a87b4663d5c56fed1c1beabaa697cd3a3770bbe24962ab28f66f41",
     "tests/fixtures/menu_texture_binding_baseline.hpp": "86a98c1980104b1246cc82ab246e483f91ea3ca7742fda8487dace9d449a5a93",
@@ -641,7 +644,7 @@
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",
     "tests/python/test_voice_publication.py": "5c00051d9b3de640f64e224dda4d810cdd7d26acafd91d7b1dc44e9786a734f3",
-    "tests/unit/manifest.tsv": "56f941595e3606cb04fae06853689a80cc548eb64c1cf1f2be35f3e8789aa7cb",
+    "tests/unit/manifest.tsv": "62f57dece463090098b77dc82d05e814cad423f1a7128a47796a31f88def8f7c",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",
