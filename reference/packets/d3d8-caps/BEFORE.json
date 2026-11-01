@@ -1,0 +1,15 @@
+{
+  "base": "6ed0ebeb2dde6afd9967ec90ec7d72a28502dfb2",
+  "files": {
+    "src/engine/d3d8_caps.hpp": "4b9f2ac788be4b25a01c22bd18aa831d0f3b0f6c0167a9ee638319b77bafd04b",
+    "src/engine/d3d8_caps.cpp": "4e8ad2114c06694841fc7759c08a026df834b22eae60e1e456ef0d7a0717ebb3",
+    "tests/unit/d3d8_caps.cpp": "7448ab85289f27474fd6ae56af98d4177e5392b6d4d74ec5da85acce5f465000",
+    "tests/probes/native_d3d8_caps_probe.cpp": "607c24fe085035dd8a70d9592c3db3618e0e06c2f33181dc8053ac963370cba4",
+    "src/hle/hle_d3d8.cpp": "e46c265671127836783e402b8ccc3e2326a30ee40238632f63ca9120b50f301c",
+    "src/guest/native_game_reference.cpp": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2",
+    "tests/unit/guest_d3d8_caps.cpp": "960b8ea26c094205e82c912c19f44922f642d53d4b3b5c1535e8bb1bac45b4a8"
+  },
+  "purpose": "Complete two-file readability cleanup of explicit shared D3D8 capability assumption. Native product does not use this function; actual maintained consumers are HLE GetDeviceCaps and NativeGame reference import/report. No captured Windows GPU parity claim.",
+  "native_archive_listed": false,
+  "behavior": "212 wire bytes and complete diagnostic string; no source-global state, callback, allocation or arithmetic owner migration."
+}
