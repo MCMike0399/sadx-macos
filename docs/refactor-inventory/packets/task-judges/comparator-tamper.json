@@ -1,0 +1,64 @@
+[
+  {
+    "name": "unchanged",
+    "exit": 0,
+    "details": [
+      {
+        "slug": "task_display",
+        "records": 236,
+        "mismatch_ids": [],
+        "baseline_stream_sha256": "3163aaa3a5f0b7465c7c475b51f732533e37228dbd2131cd27f8063c99cae866",
+        "candidate_stream_sha256": "3163aaa3a5f0b7465c7c475b51f732533e37228dbd2131cd27f8063c99cae866",
+        "exclusions_equal": true
+      }
+    ]
+  },
+  {
+    "name": "padding-byte",
+    "exit": 1,
+    "details": [
+      {
+        "slug": "task_display",
+        "records": 236,
+        "mismatch_ids": [
+          0
+        ],
+        "baseline_stream_sha256": "3163aaa3a5f0b7465c7c475b51f732533e37228dbd2131cd27f8063c99cae866",
+        "candidate_stream_sha256": "61274422997fe5a0ec6a535a6c886afbd613dbc53693e86018a08f632b86ee3f",
+        "exclusions_equal": true
+      }
+    ]
+  },
+  {
+    "name": "missing-record",
+    "exit": 1,
+    "details": [
+      {
+        "slug": "task_display",
+        "records": 236,
+        "mismatch_ids": [
+          235
+        ],
+        "baseline_stream_sha256": "3163aaa3a5f0b7465c7c475b51f732533e37228dbd2131cd27f8063c99cae866",
+        "candidate_stream_sha256": "12c71a71e8a3b06469ff9a953f3f3df47ecac406e9e1e24d54d0de962c6ee938",
+        "exclusions_equal": true
+      }
+    ]
+  },
+  {
+    "name": "scalar-return",
+    "exit": 1,
+    "details": [
+      {
+        "slug": "task_display",
+        "records": 236,
+        "mismatch_ids": [
+          0
+        ],
+        "baseline_stream_sha256": "3163aaa3a5f0b7465c7c475b51f732533e37228dbd2131cd27f8063c99cae866",
+        "candidate_stream_sha256": "0d1fa64c65bea0afb74f4ce42dee550039b10b34132704c1d6c5265dbc5cde67",
+        "exclusions_equal": true
+      }
+    ]
+  }
+]

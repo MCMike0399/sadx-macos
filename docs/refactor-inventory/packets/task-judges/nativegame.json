@@ -1,0 +1,8 @@
+{
+  "command": "make -j2 build/game-runtime-test UNICORN_DIR=<local pinned Unicorn>; build/game-runtime-test <pinned sonic.exe> <pinned Input DLL>",
+  "build_log_sha256": "8922b762c76a26b901f23b9b45d6bcc0e3dc1b47972ee7c143bd7926588f98b0",
+  "run_exit": 0,
+  "stdout": "Game runtime: survey ran startup + 3 frames (5 unported owners); native execution stops at 40cad0>40c090>415000>422680.\n",
+  "binary_sha256": "73fba4fe9b82382c144651437473ea21f511f5e8364ed90b199cd128c98aeb80",
+  "limits": "Actual current NativeGame consumer unit, startup and three survey frames. Its source-backed assertions qualify existing facts and owner routing, not every private scheduler state or game callback."
+}

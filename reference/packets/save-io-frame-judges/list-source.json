@@ -1,0 +1,6 @@
+{
+  "cases": 348,
+  "raw_sha256": "6d97587193c894ee57035b5518ab885a2e96a445bdc1414d061ace28254b4cb9",
+  "raw_bytes": 8476398,
+  "limits": "Separate known source fixture node identities from unknown sentinel payload.\n\nThis supplements, never changes, the unchanged list comparator. Raw sentinel\nbytes are allocator-fixture poison, not a recovered source default. Link identity\nis known independently. No original CRT allocation-failure or reentry guarantee.\n"
+}

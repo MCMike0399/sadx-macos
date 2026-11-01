@@ -1,0 +1,19 @@
+{
+  "old_count": 946,
+  "new_count": 953,
+  "removed": [],
+  "added": [
+    "tests/probes/task_bridge_contract.hpp",
+    "tests/probes/task_scheduler_contract.hpp",
+    "tools/oracles/task_judges/bridge_faults.py",
+    "tools/oracles/task_judges/check_baseline.py",
+    "tools/oracles/task_judges/compare_streams.py",
+    "tools/oracles/task_judges/freeze.py",
+    "tools/oracles/task_judges/mutate.py"
+  ],
+  "changed": [
+    "Makefile",
+    "tests/unit/manifest.tsv"
+  ],
+  "review": "Both changed paths append new task test registrations only. No inherited fixture, tolerance, oracle, source range, mutant, report or raw corpus changed."
+}

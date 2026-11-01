@@ -1,0 +1,3185 @@
+[
+  {
+    "name": "early-walk-reclamation",
+    "scenario": "deferred_walk",
+    "old": "if (--scheduler_.walk_depth_ == 0)",
+    "new": "if (--scheduler_.walk_depth_ <= 1)",
+    "compile_command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-Isrc",
+      "-Itests/fixtures",
+      "tests/unit/task_scheduler_contract.cpp",
+      "build/task-judges/mutants-qualified/early-walk-reclamation/task.cpp",
+      "src/engine/task_work.cpp",
+      "-o",
+      "build/task-judges/mutants-qualified/early-walk-reclamation/test"
+    ],
+    "compiled": true,
+    "compile_exit": 0,
+    "copied_sha256": "6d6dda08ce24db63a58f2d8f2b96fd3b15f1e8b88371ab661eb058b9a4de0a79",
+    "caught": true,
+    "run_command": [
+      "build/task-judges/mutants-qualified/early-walk-reclamation/test",
+      "deferred_walk"
+    ],
+    "run_exit": -6,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": "Assertion failed: (TaskSourceProbe::retained(scheduler, c->target)), function outer_retirement, file task_scheduler_contract.hpp, line 318.\n"
+  },
+  {
+    "name": "unavailable-default-is-null",
+    "scenario": "availability",
+    "old": "else return {TaskFailure::default_field30_unobserved, task, {}, 0x40b918};",
+    "new": "else task->field30.reset();",
+    "compile_command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-Isrc",
+      "-Itests/fixtures",
+      "tests/unit/task_scheduler_contract.cpp",
+      "build/task-judges/mutants-qualified/unavailable-default-is-null/task.cpp",
+      "src/engine/task_work.cpp",
+      "-o",
+      "build/task-judges/mutants-qualified/unavailable-default-is-null/test"
+    ],
+    "compiled": true,
+    "compile_exit": 0,
+    "copied_sha256": "0325673aa5a81e8960f57b7d2382462f54a50f1d71b41096c795b4feda8280f2",
+    "caught": true,
+    "run_command": [
+      "build/task-judges/mutants-qualified/unavailable-default-is-null/test",
+      "availability"
+    ],
+    "run_exit": -6,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": "Assertion failed: (missing.failure == TaskFailure::default_field30_unobserved), function availability, file task_scheduler_contract.hpp, line 65.\n"
+  },
+  {
+    "name": "slot-zero-is-null",
+    "scenario": "saved_next",
+    "old": "if(task->source_slot_){const auto current=source_slots_",
+    "new": "if(task->source_slot_ && *task->source_slot_ != 0){const auto current=source_slots_",
+    "compile_command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-Isrc",
+      "-Itests/fixtures",
+      "tests/unit/task_scheduler_contract.cpp",
+      "build/task-judges/mutants-qualified/slot-zero-is-null/task.cpp",
+      "src/engine/task_work.cpp",
+      "-o",
+      "build/task-judges/mutants-qualified/slot-zero-is-null/test"
+    ],
+    "compiled": true,
+    "compile_exit": 0,
+    "copied_sha256": "ffb3af393b407c2bf009b1ab96ea89f7abb9f848cfe517706ab3f2dd0892a9d0",
+    "caught": true,
+    "run_command": [
+      "build/task-judges/mutants-qualified/slot-zero-is-null/test",
+      "saved_next"
+    ],
+    "run_exit": -6,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": "Assertion failed: (s.run_index(0)), function saved_next, file task_scheduler_contract.hpp, line 112.\n"
+  },
+  {
+    "name": "stale-saved-generation",
+    "scenario": "saved_next",
+    "old": "if(task->source_slot_){const auto current=source_slots_",
+    "new": "if(false && task->source_slot_){const auto current=source_slots_",
+    "compile_command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-Isrc",
+      "-Itests/fixtures",
+      "tests/unit/task_scheduler_contract.cpp",
+      "build/task-judges/mutants-qualified/stale-saved-generation/task.cpp",
+      "src/engine/task_work.cpp",
+      "-o",
+      "build/task-judges/mutants-qualified/stale-saved-generation/test"
+    ],
+    "compiled": true,
+    "compile_exit": 0,
+    "copied_sha256": "ea6e52d70bb2479d2fc53dcf939bff8b30179d065509465e4c5da4e73559eb3b",
+    "caught": true,
+    "run_command": [
+      "build/task-judges/mutants-qualified/stale-saved-generation/test",
+      "saved_next"
+    ],
+    "run_exit": -6,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": "Assertion failed: (s.run_index(0)), function saved_next, file task_scheduler_contract.hpp, line 112.\n"
+  },
+  {
+    "name": "missing-function-context",
+    "scenario": "contexts",
+    "old": "if(!state.children)context_.current_function=callback;",
+    "new": "(void)callback;",
+    "compile_command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-Isrc",
+      "-Itests/fixtures",
+      "tests/unit/task_scheduler_contract.cpp",
+      "build/task-judges/mutants-qualified/missing-function-context/task.cpp",
+      "src/engine/task_work.cpp",
+      "-o",
+      "build/task-judges/mutants-qualified/missing-function-context/test"
+    ],
+    "compiled": true,
+    "compile_exit": 0,
+    "copied_sha256": "b797fc676842d9e9becbe77a8d7a18a266dc391146a1eb13567b32c61062e04f",
+    "caught": true,
+    "run_command": [
+      "build/task-judges/mutants-qualified/missing-function-context/test",
+      "contexts"
+    ],
+    "run_exit": -6,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": "Assertion failed: (scheduler.context().current_function == observed), function observed, file task_scheduler_contract.hpp, line 29.\n"
+  },
+  {
+    "name": "missing-context-clear",
+    "scenario": "contexts",
+    "old": "context_.field30.reset();if(!state.children)",
+    "new": "if(!state.children)",
+    "compile_command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-Isrc",
+      "-Itests/fixtures",
+      "tests/unit/task_scheduler_contract.cpp",
+      "build/task-judges/mutants-qualified/missing-context-clear/task.cpp",
+      "src/engine/task_work.cpp",
+      "-o",
+      "build/task-judges/mutants-qualified/missing-context-clear/test"
+    ],
+    "compiled": true,
+    "compile_exit": 0,
+    "copied_sha256": "a8d78c6c21755a41ec8b9a4ddfdef8e77fb74c45ac66a188eb5bf95b5991e188",
+    "caught": true,
+    "run_command": [
+      "build/task-judges/mutants-qualified/missing-context-clear/test",
+      "contexts"
+    ],
+    "run_exit": -6,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": "Assertion failed: (!first.scheduler.context().field30 && !first.scheduler.context().current_function), function contexts, file task_scheduler_contract.hpp, line 101.\n"
+  },
+  {
+    "name": "skip-unlink-state",
+    "scenario": "read_failures",
+    "old": "task->linked_ = false;\n        task->destruction_stage_ = Stage::collision;",
+    "new": "task->destruction_stage_ = Stage::collision;",
+    "compile_command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-Isrc",
+      "-Itests/fixtures",
+      "tests/unit/task_scheduler_contract.cpp",
+      "build/task-judges/mutants-qualified/skip-unlink-state/task.cpp",
+      "src/engine/task_work.cpp",
+      "-o",
+      "build/task-judges/mutants-qualified/skip-unlink-state/test"
+    ],
+    "compiled": true,
+    "compile_exit": 0,
+    "copied_sha256": "7e1ccb8d47175f5a26910f12b8711f1676dfe0ad9ea2bb13a0b85fa1acf68c77",
+    "caught": true,
+    "run_command": [
+      "build/task-judges/mutants-qualified/skip-unlink-state/test",
+      "read_failures"
+    ],
+    "run_exit": -6,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": "Assertion failed: (!s.source_graph().nodes.front().linked), function read_failures, file task_scheduler_contract.hpp, line 195.\n"
+  },
+  {
+    "name": "skip-native-aux-release",
+    "scenario": "read_failures",
+    "old": "if (field.stage == Stage::auxiliary)\n            task->auxiliary_native_work.reset();",
+    "new": "if (false) task->auxiliary_native_work.reset();",
+    "compile_command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-Isrc",
+      "-Itests/fixtures",
+      "tests/unit/task_scheduler_contract.cpp",
+      "build/task-judges/mutants-qualified/skip-native-aux-release/task.cpp",
+      "src/engine/task_work.cpp",
+      "-o",
+      "build/task-judges/mutants-qualified/skip-native-aux-release/test"
+    ],
+    "compiled": true,
+    "compile_exit": 0,
+    "copied_sha256": "6e8398656e0dbb32edeae2d7261b4d8ccb7706b34109ae4b9a571c6a4399822f",
+    "caught": true,
+    "run_command": [
+      "build/task-judges/mutants-qualified/skip-native-aux-release/test",
+      "read_failures"
+    ],
+    "run_exit": -6,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": "Assertion failed: (task->retired() && released == 1), function read_failures, file task_scheduler_contract.hpp, line 201.\n"
+  },
+  {
+    "name": "discard-callback-failure",
+    "scenario": "callback_failures",
+    "old": "catch(const SourceTaskFailure& failed){return failed.result;}",
+    "new": "catch(const SourceTaskFailure& failed){(void)failed;return {};}",
+    "compile_command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-Isrc",
+      "-Itests/fixtures",
+      "tests/unit/task_scheduler_contract.cpp",
+      "build/task-judges/mutants-qualified/discard-callback-failure/task.cpp",
+      "src/engine/task_work.cpp",
+      "-o",
+      "build/task-judges/mutants-qualified/discard-callback-failure/test"
+    ],
+    "compiled": true,
+    "compile_exit": 0,
+    "copied_sha256": "99b8f39edee5fec08e8b5b3087c9a5badab9f59e49b541eb6d3706ab1a2465e3",
+    "caught": true,
+    "run_command": [
+      "build/task-judges/mutants-qualified/discard-callback-failure/test",
+      "callback_failures"
+    ],
+    "run_exit": -6,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": "Assertion failed: (result.failure == TaskFailure::callback_failed && result.source_boundary == 0x40b10b), function callback_failures, file task_scheduler_contract.hpp, line 141.\n"
+  },
+  {
+    "name": "conflicting-context-owner",
+    "scenario": "contexts",
+    "old": "TaskCallbackContextFailure::conflicting_owner};",
+    "new": "TaskCallbackContextFailure::none};",
+    "compile_command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-Isrc",
+      "-Itests/fixtures",
+      "tests/unit/task_scheduler_contract.cpp",
+      "build/task-judges/mutants-qualified/conflicting-context-owner/task.cpp",
+      "src/engine/task_work.cpp",
+      "-o",
+      "build/task-judges/mutants-qualified/conflicting-context-owner/test"
+    ],
+    "compiled": true,
+    "compile_exit": 0,
+    "copied_sha256": "6e211b22973f84e11bd9a4069121b071c998d53898d67a3c8cb6df5a93af4de7",
+    "caught": true,
+    "run_command": [
+      "build/task-judges/mutants-qualified/conflicting-context-owner/test",
+      "contexts"
+    ],
+    "run_exit": -6,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": "Assertion failed: (first.scheduler.register_callback_context(observed, other).failure == TaskCallbackContextFailure::conflicting_owner), function contexts, file task_scheduler_contract.hpp, line 87.\n"
+  },
+  {
+    "name": "canonical-argument-not-retained",
+    "scenario": "canonical",
+    "old": "const TaskHandle task = requested_task;",
+    "new": "const TaskHandle& task = requested_task;",
+    "compile_command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-Isrc",
+      "-Itests/fixtures",
+      "tests/unit/task_callback_lifetime.cpp",
+      "build/task-judges/mutants-qualified/canonical-argument-not-retained/task.cpp",
+      "src/engine/task_work.cpp",
+      "-o",
+      "build/task-judges/mutants-qualified/canonical-argument-not-retained/test"
+    ],
+    "compiled": true,
+    "compile_exit": 0,
+    "copied_sha256": "89cd3970821bc2b5ca538f43b47852ebb924559e77b4d47fc5d3e5466d71f065",
+    "caught": true,
+    "run_command": [
+      "build/task-judges/mutants-qualified/canonical-argument-not-retained/test"
+    ],
+    "run_exit": -11,
+    "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "stderr": ""
+  },
+  {
+    "name": "historical-skip-destructor",
+    "scenario": "historical",
+    "old": "if(task->destructor)return {{},task,task->destructor,TaskLifetimeCallee::destructor,false};",
+    "new": "if(false && task->destructor)return {{},task,task->destructor,TaskLifetimeCallee::destructor,false};",
+    "compile_command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-Isrc",
+      "-Itests/fixtures",
+      "-dynamiclib",
+      "tests/probes/native_task_lifecycle_probe.cpp",
+      "build/task-judges/mutants-qualified/historical-skip-destructor/task.cpp",
+      "src/engine/task_work.cpp",
+      "-o",
+      "build/task-judges/mutants-qualified/historical-skip-destructor/probe.dylib"
+    ],
+    "compiled": true,
+    "compile_exit": 0,
+    "copied_sha256": "fb1b2f6b0a6f790c96215f375a737fdc7256f964fdced7f2e0cc6c263e4c685c",
+    "caught": true,
+    "run_command": [
+      "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+      "tools/oracles/verify_original_task_lifecycle.py",
+      "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+      "build/task-judges/mutants-qualified/historical-skip-destructor/probe.dylib",
+      "--output",
+      "build/task-judges/mutants-qualified/historical-skip-destructor/report.json"
+    ],
+    "run_exit": 1,
+    "stdout_sha256": "47670437368abb272083212ab7db1f41e9a459e791df9a0f79ecad00d69a01bd",
+    "stderr": "",
+    "sequences": [
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 0,
+        "operations": 3,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "1058e7e51ba9a74af2990f3de59d755a29f7c3950e316d775c6e6641b703b039",
+        "native_arena_sha256": "1058e7e51ba9a74af2990f3de59d755a29f7c3950e316d775c6e6641b703b039"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 1,
+        "operations": 12,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "d57be7a6deea8076939166e9c4cbe0da81b3b2a57ae0813f3e73eb9b7e829541",
+        "native_arena_sha256": "d57be7a6deea8076939166e9c4cbe0da81b3b2a57ae0813f3e73eb9b7e829541"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 1,
+        "sequence": 2,
+        "operations": 9,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "c80a9d12c7b8dd080ddc6222578318950f08c16795bee28f4711bd4b663b1582",
+        "native_arena_sha256": "c80a9d12c7b8dd080ddc6222578318950f08c16795bee28f4711bd4b663b1582"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 3,
+        "operations": 5,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "03306d3ed59e5e29a172bdcfbae6b9eb160159f97b7fff24a304f4bd8016f8d7",
+        "native_arena_sha256": "03306d3ed59e5e29a172bdcfbae6b9eb160159f97b7fff24a304f4bd8016f8d7"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 4,
+        "operations": 5,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "51ce2e705eeb371d89c82afb7c3f469dca6629c738c8c5b075b59ae8994427c4",
+        "native_arena_sha256": "51ce2e705eeb371d89c82afb7c3f469dca6629c738c8c5b075b59ae8994427c4"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 7,
+        "sequence": 5,
+        "operations": 9,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "dc41fa8e76f75914740b41e6932b2c58ed149aea6eb3397859da021d00e01a68",
+        "native_arena_sha256": "dc41fa8e76f75914740b41e6932b2c58ed149aea6eb3397859da021d00e01a68"
+      },
+      {
+        "callback_contexts_match": false,
+        "callback_count": 2,
+        "sequence": 6,
+        "operations": 5,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "00b20a43feede7074262ae34f1b29e7c08e60c1b537b42a69da6fd435e721102",
+        "native_arena_sha256": "00b20a43feede7074262ae34f1b29e7c08e60c1b537b42a69da6fd435e721102"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 7,
+        "operations": 190,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "69c0aae28150c36282fbf47d5f9d4d5ea478a2b7cc5c98eb8d6c254e0747252e",
+        "native_arena_sha256": "69c0aae28150c36282fbf47d5f9d4d5ea478a2b7cc5c98eb8d6c254e0747252e"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 8,
+        "operations": 200,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "ceb07647d72e26e227cbbd6a5246ee5fecc9e4e34887b558d7b82667509a1084",
+        "native_arena_sha256": "ceb07647d72e26e227cbbd6a5246ee5fecc9e4e34887b558d7b82667509a1084"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 9,
+        "operations": 185,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "8d9ae41b4166879f08e1a09e942cc9e7b0269905051320ca0518f4c6e8e9c284",
+        "native_arena_sha256": "8d9ae41b4166879f08e1a09e942cc9e7b0269905051320ca0518f4c6e8e9c284"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 10,
+        "operations": 194,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "4e6ecc6e3463bc5cdc25616bddc6a8eb74484a330db3fbc7a4414e4969cdb522",
+        "native_arena_sha256": "4e6ecc6e3463bc5cdc25616bddc6a8eb74484a330db3fbc7a4414e4969cdb522"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 11,
+        "operations": 200,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "c1878357a6374a23dfd204bc4f7d51db0b08541266599e20f512073cbdb84cd7",
+        "native_arena_sha256": "c1878357a6374a23dfd204bc4f7d51db0b08541266599e20f512073cbdb84cd7"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 12,
+        "operations": 180,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "5e3c13b7d75989f6e50a22ab4276719a1d9011d316480536579d88210cfcbe50",
+        "native_arena_sha256": "5e3c13b7d75989f6e50a22ab4276719a1d9011d316480536579d88210cfcbe50"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 13,
+        "operations": 194,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "1ee947a04a16233f625e877071009d86354546d1e8ceab776c9fe4af7578140d",
+        "native_arena_sha256": "1ee947a04a16233f625e877071009d86354546d1e8ceab776c9fe4af7578140d"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 14,
+        "operations": 193,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "5413b9c5eebd0ff149aea61f8393803f88fc7be60c7d7ec011e80a7f25b7668e",
+        "native_arena_sha256": "5413b9c5eebd0ff149aea61f8393803f88fc7be60c7d7ec011e80a7f25b7668e"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 15,
+        "operations": 178,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "aeb4a6e5e588674b3c3de629b58be06ab68b042ed3225d52f0d2d0374fac6ebb",
+        "native_arena_sha256": "aeb4a6e5e588674b3c3de629b58be06ab68b042ed3225d52f0d2d0374fac6ebb"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 16,
+        "operations": 164,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "eaefd8153837719227ccef56511357cdbe6a272d116efbb0b6cc9ac8881cd67d",
+        "native_arena_sha256": "eaefd8153837719227ccef56511357cdbe6a272d116efbb0b6cc9ac8881cd67d"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 17,
+        "operations": 193,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "d72da7b0c4bfa2818898690e1fc6f7c42543b385d975ebdc1c50f5986eeb5f74",
+        "native_arena_sha256": "d72da7b0c4bfa2818898690e1fc6f7c42543b385d975ebdc1c50f5986eeb5f74"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 18,
+        "operations": 197,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "91a085e6f91171d936bf091f05af16ab05a017172a7f084225326fb110197c26",
+        "native_arena_sha256": "91a085e6f91171d936bf091f05af16ab05a017172a7f084225326fb110197c26"
+      }
+    ],
+    "inactive_destroy_boundary": {
+      "original_stop": "0x401000",
+      "source_arena_unchanged": true,
+      "native_pending_failure": 10,
+      "native_source_boundary": "0x401000",
+      "native_task_retired": false,
+      "native_work_retained": true,
+      "source_arena_sha256": "09bcee7aa82263629188a8a343cbe50cf4c34e6af76c0076f275a76894f00f44",
+      "native_arena_sha256": "09bcee7aa82263629188a8a343cbe50cf4c34e6af76c0076f275a76894f00f44",
+      "state_and_explicit_boundary_match": true,
+      "original_return_observed": false,
+      "limits": [
+        "Real401000/CRT formatting not executed; no source cleanup or diagnostic success claimed"
+      ]
+    }
+  },
+  {
+    "name": "historical-retain-exec",
+    "scenario": "historical",
+    "old": "task->exec=task->display=task->destructor=nullptr;",
+    "new": "task->display=task->destructor=nullptr;",
+    "compile_command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-Isrc",
+      "-Itests/fixtures",
+      "-dynamiclib",
+      "tests/probes/native_task_lifecycle_probe.cpp",
+      "build/task-judges/mutants-qualified/historical-retain-exec/task.cpp",
+      "src/engine/task_work.cpp",
+      "-o",
+      "build/task-judges/mutants-qualified/historical-retain-exec/probe.dylib"
+    ],
+    "compiled": true,
+    "compile_exit": 0,
+    "copied_sha256": "252762e6e5c0d8f256a2c45512e3ef91bc8aef7a391b1c09f390589d4d275819",
+    "caught": true,
+    "run_command": [
+      "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+      "tools/oracles/verify_original_task_lifecycle.py",
+      "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+      "build/task-judges/mutants-qualified/historical-retain-exec/probe.dylib",
+      "--output",
+      "build/task-judges/mutants-qualified/historical-retain-exec/report.json"
+    ],
+    "run_exit": 1,
+    "stdout_sha256": "47670437368abb272083212ab7db1f41e9a459e791df9a0f79ecad00d69a01bd",
+    "stderr": "",
+    "sequences": [
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 0,
+        "operations": 3,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "1058e7e51ba9a74af2990f3de59d755a29f7c3950e316d775c6e6641b703b039",
+        "native_arena_sha256": "1058e7e51ba9a74af2990f3de59d755a29f7c3950e316d775c6e6641b703b039"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 1,
+        "operations": 12,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "d57be7a6deea8076939166e9c4cbe0da81b3b2a57ae0813f3e73eb9b7e829541",
+        "native_arena_sha256": "d57be7a6deea8076939166e9c4cbe0da81b3b2a57ae0813f3e73eb9b7e829541"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 1,
+        "sequence": 2,
+        "operations": 9,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "c80a9d12c7b8dd080ddc6222578318950f08c16795bee28f4711bd4b663b1582",
+        "native_arena_sha256": "c80a9d12c7b8dd080ddc6222578318950f08c16795bee28f4711bd4b663b1582"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 3,
+        "operations": 5,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "03306d3ed59e5e29a172bdcfbae6b9eb160159f97b7fff24a304f4bd8016f8d7",
+        "native_arena_sha256": "03306d3ed59e5e29a172bdcfbae6b9eb160159f97b7fff24a304f4bd8016f8d7"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 4,
+        "operations": 5,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "51ce2e705eeb371d89c82afb7c3f469dca6629c738c8c5b075b59ae8994427c4",
+        "native_arena_sha256": "51ce2e705eeb371d89c82afb7c3f469dca6629c738c8c5b075b59ae8994427c4"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 7,
+        "sequence": 5,
+        "operations": 9,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "dc41fa8e76f75914740b41e6932b2c58ed149aea6eb3397859da021d00e01a68",
+        "native_arena_sha256": "dc41fa8e76f75914740b41e6932b2c58ed149aea6eb3397859da021d00e01a68"
+      },
+      {
+        "callback_contexts_match": false,
+        "callback_count": 2,
+        "sequence": 6,
+        "operations": 5,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "00b20a43feede7074262ae34f1b29e7c08e60c1b537b42a69da6fd435e721102",
+        "native_arena_sha256": "00b20a43feede7074262ae34f1b29e7c08e60c1b537b42a69da6fd435e721102"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 7,
+        "operations": 190,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "69c0aae28150c36282fbf47d5f9d4d5ea478a2b7cc5c98eb8d6c254e0747252e",
+        "native_arena_sha256": "69c0aae28150c36282fbf47d5f9d4d5ea478a2b7cc5c98eb8d6c254e0747252e"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 8,
+        "operations": 200,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "ceb07647d72e26e227cbbd6a5246ee5fecc9e4e34887b558d7b82667509a1084",
+        "native_arena_sha256": "ceb07647d72e26e227cbbd6a5246ee5fecc9e4e34887b558d7b82667509a1084"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 9,
+        "operations": 185,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "8d9ae41b4166879f08e1a09e942cc9e7b0269905051320ca0518f4c6e8e9c284",
+        "native_arena_sha256": "8d9ae41b4166879f08e1a09e942cc9e7b0269905051320ca0518f4c6e8e9c284"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 10,
+        "operations": 194,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "4e6ecc6e3463bc5cdc25616bddc6a8eb74484a330db3fbc7a4414e4969cdb522",
+        "native_arena_sha256": "4e6ecc6e3463bc5cdc25616bddc6a8eb74484a330db3fbc7a4414e4969cdb522"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 11,
+        "operations": 200,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "c1878357a6374a23dfd204bc4f7d51db0b08541266599e20f512073cbdb84cd7",
+        "native_arena_sha256": "c1878357a6374a23dfd204bc4f7d51db0b08541266599e20f512073cbdb84cd7"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 12,
+        "operations": 180,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "5e3c13b7d75989f6e50a22ab4276719a1d9011d316480536579d88210cfcbe50",
+        "native_arena_sha256": "5e3c13b7d75989f6e50a22ab4276719a1d9011d316480536579d88210cfcbe50"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 13,
+        "operations": 194,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "1ee947a04a16233f625e877071009d86354546d1e8ceab776c9fe4af7578140d",
+        "native_arena_sha256": "1ee947a04a16233f625e877071009d86354546d1e8ceab776c9fe4af7578140d"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 14,
+        "operations": 193,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "5413b9c5eebd0ff149aea61f8393803f88fc7be60c7d7ec011e80a7f25b7668e",
+        "native_arena_sha256": "5413b9c5eebd0ff149aea61f8393803f88fc7be60c7d7ec011e80a7f25b7668e"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 15,
+        "operations": 178,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "aeb4a6e5e588674b3c3de629b58be06ab68b042ed3225d52f0d2d0374fac6ebb",
+        "native_arena_sha256": "aeb4a6e5e588674b3c3de629b58be06ab68b042ed3225d52f0d2d0374fac6ebb"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 16,
+        "operations": 164,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "eaefd8153837719227ccef56511357cdbe6a272d116efbb0b6cc9ac8881cd67d",
+        "native_arena_sha256": "eaefd8153837719227ccef56511357cdbe6a272d116efbb0b6cc9ac8881cd67d"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 17,
+        "operations": 193,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "d72da7b0c4bfa2818898690e1fc6f7c42543b385d975ebdc1c50f5986eeb5f74",
+        "native_arena_sha256": "d72da7b0c4bfa2818898690e1fc6f7c42543b385d975ebdc1c50f5986eeb5f74"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 18,
+        "operations": 197,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "91a085e6f91171d936bf091f05af16ab05a017172a7f084225326fb110197c26",
+        "native_arena_sha256": "91a085e6f91171d936bf091f05af16ab05a017172a7f084225326fb110197c26"
+      }
+    ],
+    "inactive_destroy_boundary": {
+      "original_stop": "0x401000",
+      "source_arena_unchanged": true,
+      "native_pending_failure": 10,
+      "native_source_boundary": "0x401000",
+      "native_task_retired": false,
+      "native_work_retained": true,
+      "source_arena_sha256": "09bcee7aa82263629188a8a343cbe50cf4c34e6af76c0076f275a76894f00f44",
+      "native_arena_sha256": "09bcee7aa82263629188a8a343cbe50cf4c34e6af76c0076f275a76894f00f44",
+      "state_and_explicit_boundary_match": true,
+      "original_return_observed": false,
+      "limits": [
+        "Real401000/CRT formatting not executed; no source cleanup or diagnostic success claimed"
+      ]
+    }
+  },
+  {
+    "name": "historical-skip-auxiliary-free",
+    "scenario": "historical",
+    "old": "if (work) {\n            const auto released = arena_",
+    "new": "if (work && field.stage != Stage::auxiliary) {\n            const auto released = arena_",
+    "compile_command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-Isrc",
+      "-Itests/fixtures",
+      "-dynamiclib",
+      "tests/probes/native_task_lifecycle_probe.cpp",
+      "build/task-judges/mutants-qualified/historical-skip-auxiliary-free/task.cpp",
+      "src/engine/task_work.cpp",
+      "-o",
+      "build/task-judges/mutants-qualified/historical-skip-auxiliary-free/probe.dylib"
+    ],
+    "compiled": true,
+    "compile_exit": 0,
+    "copied_sha256": "0bfcf5cb301f90d468110eafddb50879cfb50b565afa3505c122786a9b16a188",
+    "caught": true,
+    "run_command": [
+      "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+      "tools/oracles/verify_original_task_lifecycle.py",
+      "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+      "build/task-judges/mutants-qualified/historical-skip-auxiliary-free/probe.dylib",
+      "--output",
+      "build/task-judges/mutants-qualified/historical-skip-auxiliary-free/report.json"
+    ],
+    "run_exit": 1,
+    "stdout_sha256": "75a40106b548ef78773e57200a0d79c80f8e317173819bff9c28882fd272af47",
+    "stderr": "",
+    "sequences": [
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 0,
+        "operations": 3,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "1058e7e51ba9a74af2990f3de59d755a29f7c3950e316d775c6e6641b703b039",
+        "native_arena_sha256": "1058e7e51ba9a74af2990f3de59d755a29f7c3950e316d775c6e6641b703b039"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 1,
+        "operations": 12,
+        "trace_mismatches": 0,
+        "byte_mismatches": 53,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [
+          {
+            "offset": "0x34020",
+            "original": 0,
+            "native": 128
+          },
+          {
+            "offset": "0x34021",
+            "original": 0,
+            "native": 65
+          },
+          {
+            "offset": "0x34022",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34023",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34028",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x34029",
+            "original": 0,
+            "native": 65
+          },
+          {
+            "offset": "0x3402a",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3402b",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34180",
+            "original": 0,
+            "native": 224
+          },
+          {
+            "offset": "0x34181",
+            "original": 0,
+            "native": 66
+          },
+          {
+            "offset": "0x34182",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34183",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x34184",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x34185",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x34186",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34187",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x34188",
+            "original": 224,
+            "native": 160
+          },
+          {
+            "offset": "0x34189",
+            "original": 65,
+            "native": 66
+          },
+          {
+            "offset": "0x3418c",
+            "original": 32,
+            "native": 64
+          },
+          {
+            "offset": "0x3418d",
+            "original": 64,
+            "native": 65
+          },
+          {
+            "offset": "0x341e0",
+            "original": 0,
+            "native": 224
+          },
+          {
+            "offset": "0x341e1",
+            "original": 0,
+            "native": 66
+          },
+          {
+            "offset": "0x341e2",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x341e3",
+            "original": 33,
+            "native": 32
+          }
+        ],
+        "original_arena_sha256": "d57be7a6deea8076939166e9c4cbe0da81b3b2a57ae0813f3e73eb9b7e829541",
+        "native_arena_sha256": "89d8d81ce4b178b9335e6359c04c348543e0f1e693f30e03636fc317f8db56af"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 1,
+        "sequence": 2,
+        "operations": 9,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "c80a9d12c7b8dd080ddc6222578318950f08c16795bee28f4711bd4b663b1582",
+        "native_arena_sha256": "c80a9d12c7b8dd080ddc6222578318950f08c16795bee28f4711bd4b663b1582"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 3,
+        "operations": 5,
+        "trace_mismatches": 0,
+        "byte_mismatches": 43,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [
+          {
+            "offset": "0x34020",
+            "original": 0,
+            "native": 128
+          },
+          {
+            "offset": "0x34021",
+            "original": 0,
+            "native": 65
+          },
+          {
+            "offset": "0x34022",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34023",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34028",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x34029",
+            "original": 0,
+            "native": 65
+          },
+          {
+            "offset": "0x3402a",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3402b",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34180",
+            "original": 0,
+            "native": 224
+          },
+          {
+            "offset": "0x34181",
+            "original": 0,
+            "native": 66
+          },
+          {
+            "offset": "0x34182",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34183",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34188",
+            "original": 0,
+            "native": 160
+          },
+          {
+            "offset": "0x34189",
+            "original": 0,
+            "native": 66
+          },
+          {
+            "offset": "0x3418a",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3418b",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x3418c",
+            "original": 32,
+            "native": 64
+          },
+          {
+            "offset": "0x3418d",
+            "original": 64,
+            "native": 65
+          },
+          {
+            "offset": "0x342e0",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x342e1",
+            "original": 0,
+            "native": 68
+          },
+          {
+            "offset": "0x342e2",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x342e3",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x342e9",
+            "original": 0,
+            "native": 68
+          },
+          {
+            "offset": "0x342ea",
+            "original": 0,
+            "native": 3
+          }
+        ],
+        "original_arena_sha256": "03306d3ed59e5e29a172bdcfbae6b9eb160159f97b7fff24a304f4bd8016f8d7",
+        "native_arena_sha256": "b72678b4721beef2ff6727c084e28141796cb7709370c1e53e7e2f8136e31034"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 4,
+        "operations": 5,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "51ce2e705eeb371d89c82afb7c3f469dca6629c738c8c5b075b59ae8994427c4",
+        "native_arena_sha256": "51ce2e705eeb371d89c82afb7c3f469dca6629c738c8c5b075b59ae8994427c4"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 7,
+        "sequence": 5,
+        "operations": 9,
+        "trace_mismatches": 0,
+        "byte_mismatches": 0,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [],
+        "original_arena_sha256": "dc41fa8e76f75914740b41e6932b2c58ed149aea6eb3397859da021d00e01a68",
+        "native_arena_sha256": "dc41fa8e76f75914740b41e6932b2c58ed149aea6eb3397859da021d00e01a68"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 2,
+        "sequence": 6,
+        "operations": 5,
+        "trace_mismatches": 0,
+        "byte_mismatches": 24,
+        "expected_boundary_failures": [],
+        "trace_examples": [],
+        "byte_examples": [
+          {
+            "offset": "0x34020",
+            "original": 0,
+            "native": 128
+          },
+          {
+            "offset": "0x34021",
+            "original": 0,
+            "native": 65
+          },
+          {
+            "offset": "0x34022",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34023",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34028",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x34029",
+            "original": 0,
+            "native": 65
+          },
+          {
+            "offset": "0x3402a",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3402b",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34180",
+            "original": 0,
+            "native": 224
+          },
+          {
+            "offset": "0x34181",
+            "original": 0,
+            "native": 66
+          },
+          {
+            "offset": "0x34182",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34183",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34188",
+            "original": 0,
+            "native": 160
+          },
+          {
+            "offset": "0x34189",
+            "original": 0,
+            "native": 66
+          },
+          {
+            "offset": "0x3418a",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3418b",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x3418c",
+            "original": 32,
+            "native": 64
+          },
+          {
+            "offset": "0x3418d",
+            "original": 64,
+            "native": 65
+          },
+          {
+            "offset": "0x342ec",
+            "original": 128,
+            "native": 160
+          },
+          {
+            "offset": "0x342ed",
+            "original": 65,
+            "native": 66
+          },
+          {
+            "offset": "0x1000004",
+            "original": 32,
+            "native": 224
+          },
+          {
+            "offset": "0x1000005",
+            "original": 64,
+            "native": 66
+          },
+          {
+            "offset": "0x100000c",
+            "original": 32,
+            "native": 224
+          },
+          {
+            "offset": "0x100000d",
+            "original": 64,
+            "native": 66
+          }
+        ],
+        "original_arena_sha256": "00b20a43feede7074262ae34f1b29e7c08e60c1b537b42a69da6fd435e721102",
+        "native_arena_sha256": "66a978ffdd1bad44cdb062c34395954a9dfab7dd399cf61607d3ba791d30765b"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 7,
+        "operations": 190,
+        "trace_mismatches": 1,
+        "byte_mismatches": 5069,
+        "expected_boundary_failures": [],
+        "trace_examples": [
+          {
+            "index": 580,
+            "original": "0x20034020",
+            "native": "0x20035da0"
+          }
+        ],
+        "byte_examples": [
+          {
+            "offset": "0x34020",
+            "original": 0,
+            "native": 160
+          },
+          {
+            "offset": "0x34021",
+            "original": 0,
+            "native": 86
+          },
+          {
+            "offset": "0x34022",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34023",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34024",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x34025",
+            "original": 0,
+            "native": 95
+          },
+          {
+            "offset": "0x34026",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34027",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x34028",
+            "original": 0,
+            "native": 128
+          },
+          {
+            "offset": "0x34029",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x3402a",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3402b",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x340c0",
+            "original": 0,
+            "native": 128
+          },
+          {
+            "offset": "0x340c1",
+            "original": 0,
+            "native": 110
+          },
+          {
+            "offset": "0x340c2",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x340c3",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x340c4",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x340c5",
+            "original": 0,
+            "native": 96
+          },
+          {
+            "offset": "0x340c6",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x340c7",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x340cc",
+            "original": 32,
+            "native": 128
+          },
+          {
+            "offset": "0x3412c",
+            "original": 32,
+            "native": 192
+          },
+          {
+            "offset": "0x34160",
+            "original": 0,
+            "native": 96
+          },
+          {
+            "offset": "0x34161",
+            "original": 0,
+            "native": 69
+          }
+        ],
+        "original_arena_sha256": "69c0aae28150c36282fbf47d5f9d4d5ea478a2b7cc5c98eb8d6c254e0747252e",
+        "native_arena_sha256": "818eb984b45e716d892feec4d0a7d19ffbe4275a190b01e10c66ed17d78b93d9"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 8,
+        "operations": 200,
+        "trace_mismatches": 1,
+        "byte_mismatches": 6561,
+        "expected_boundary_failures": [],
+        "trace_examples": [
+          {
+            "index": 610,
+            "original": "0x20034020",
+            "native": "0x20037b80"
+          }
+        ],
+        "byte_examples": [
+          {
+            "offset": "0x34020",
+            "original": 0,
+            "native": 128
+          },
+          {
+            "offset": "0x34021",
+            "original": 0,
+            "native": 98
+          },
+          {
+            "offset": "0x34022",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34023",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34024",
+            "original": 0,
+            "native": 96
+          },
+          {
+            "offset": "0x34025",
+            "original": 0,
+            "native": 82
+          },
+          {
+            "offset": "0x34026",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34027",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x34028",
+            "original": 0,
+            "native": 224
+          },
+          {
+            "offset": "0x34029",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x3402a",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3402b",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34068",
+            "original": 192,
+            "native": 0
+          },
+          {
+            "offset": "0x34069",
+            "original": 64,
+            "native": 0
+          },
+          {
+            "offset": "0x3406a",
+            "original": 3,
+            "native": 0
+          },
+          {
+            "offset": "0x3406b",
+            "original": 32,
+            "native": 0
+          },
+          {
+            "offset": "0x3406c",
+            "original": 32,
+            "native": 0
+          },
+          {
+            "offset": "0x3406d",
+            "original": 64,
+            "native": 0
+          },
+          {
+            "offset": "0x3406e",
+            "original": 3,
+            "native": 0
+          },
+          {
+            "offset": "0x3406f",
+            "original": 32,
+            "native": 0
+          },
+          {
+            "offset": "0x34088",
+            "original": 0,
+            "native": 224
+          },
+          {
+            "offset": "0x34089",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x3408a",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3408b",
+            "original": 0,
+            "native": 32
+          }
+        ],
+        "original_arena_sha256": "ceb07647d72e26e227cbbd6a5246ee5fecc9e4e34887b558d7b82667509a1084",
+        "native_arena_sha256": "f4e33927aeb0e60e43502eacb0103d14fe084056be16573aaa9716db9001ac81"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 9,
+        "operations": 185,
+        "trace_mismatches": 1,
+        "byte_mismatches": 6831,
+        "expected_boundary_failures": [],
+        "trace_examples": [
+          {
+            "index": 565,
+            "original": "0x20034020",
+            "native": "0x200372c0"
+          }
+        ],
+        "byte_examples": [
+          {
+            "offset": "0x34020",
+            "original": 0,
+            "native": 128
+          },
+          {
+            "offset": "0x34021",
+            "original": 0,
+            "native": 96
+          },
+          {
+            "offset": "0x34022",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34023",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34024",
+            "original": 0,
+            "native": 192
+          },
+          {
+            "offset": "0x34025",
+            "original": 0,
+            "native": 73
+          },
+          {
+            "offset": "0x34026",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34027",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x34028",
+            "original": 0,
+            "native": 128
+          },
+          {
+            "offset": "0x34029",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x3402a",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3402b",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34088",
+            "original": 224,
+            "native": 192
+          },
+          {
+            "offset": "0x340c0",
+            "original": 0,
+            "native": 96
+          },
+          {
+            "offset": "0x340c1",
+            "original": 0,
+            "native": 65
+          },
+          {
+            "offset": "0x340c2",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x340c3",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x340c4",
+            "original": 0,
+            "native": 224
+          },
+          {
+            "offset": "0x340c5",
+            "original": 0,
+            "native": 105
+          },
+          {
+            "offset": "0x340c6",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x340c7",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x340c8",
+            "original": 0,
+            "native": 224
+          },
+          {
+            "offset": "0x340c9",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x340ca",
+            "original": 0,
+            "native": 3
+          }
+        ],
+        "original_arena_sha256": "8d9ae41b4166879f08e1a09e942cc9e7b0269905051320ca0518f4c6e8e9c284",
+        "native_arena_sha256": "905157ba910fb8944a567125a719d7667b21bd28118a122d36a7e2ef3b988502"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 10,
+        "operations": 194,
+        "trace_mismatches": 1,
+        "byte_mismatches": 6415,
+        "expected_boundary_failures": [],
+        "trace_examples": [
+          {
+            "index": 592,
+            "original": "0x20034020",
+            "native": "0x20035f20"
+          }
+        ],
+        "byte_examples": [
+          {
+            "offset": "0x34023",
+            "original": 33,
+            "native": 0
+          },
+          {
+            "offset": "0x34028",
+            "original": 0,
+            "native": 96
+          },
+          {
+            "offset": "0x34029",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x3402a",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3402b",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34060",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x34061",
+            "original": 0,
+            "native": 85
+          },
+          {
+            "offset": "0x34062",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34063",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x34065",
+            "original": 0,
+            "native": 98
+          },
+          {
+            "offset": "0x34066",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34067",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x34068",
+            "original": 0,
+            "native": 128
+          },
+          {
+            "offset": "0x34069",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x3406a",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3406b",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x3406c",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x3406d",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x3406e",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3406f",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x3408c",
+            "original": 32,
+            "native": 96
+          },
+          {
+            "offset": "0x340c0",
+            "original": 160,
+            "native": 0
+          },
+          {
+            "offset": "0x340c1",
+            "original": 69,
+            "native": 0
+          },
+          {
+            "offset": "0x340c2",
+            "original": 3,
+            "native": 0
+          }
+        ],
+        "original_arena_sha256": "4e6ecc6e3463bc5cdc25616bddc6a8eb74484a330db3fbc7a4414e4969cdb522",
+        "native_arena_sha256": "b88aa21a001e130ddae3f1d522bd147131a904d681426bb5a4ac68a6c7cfc887"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 11,
+        "operations": 200,
+        "trace_mismatches": 1,
+        "byte_mismatches": 6560,
+        "expected_boundary_failures": [],
+        "trace_examples": [
+          {
+            "index": 610,
+            "original": "0x20034020",
+            "native": "0x20037c60"
+          }
+        ],
+        "byte_examples": [
+          {
+            "offset": "0x34020",
+            "original": 0,
+            "native": 192
+          },
+          {
+            "offset": "0x34021",
+            "original": 0,
+            "native": 71
+          },
+          {
+            "offset": "0x34022",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34023",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34024",
+            "original": 0,
+            "native": 192
+          },
+          {
+            "offset": "0x34025",
+            "original": 0,
+            "native": 73
+          },
+          {
+            "offset": "0x34026",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34027",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x34028",
+            "original": 0,
+            "native": 128
+          },
+          {
+            "offset": "0x34029",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x3402a",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3402b",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34088",
+            "original": 224,
+            "native": 192
+          },
+          {
+            "offset": "0x340b0",
+            "original": 0,
+            "native": 255
+          },
+          {
+            "offset": "0x340b1",
+            "original": 0,
+            "native": 255
+          },
+          {
+            "offset": "0x340b2",
+            "original": 0,
+            "native": 255
+          },
+          {
+            "offset": "0x340b3",
+            "original": 0,
+            "native": 255
+          },
+          {
+            "offset": "0x340b4",
+            "original": 0,
+            "native": 255
+          },
+          {
+            "offset": "0x340b5",
+            "original": 0,
+            "native": 255
+          },
+          {
+            "offset": "0x340b6",
+            "original": 0,
+            "native": 255
+          },
+          {
+            "offset": "0x340b7",
+            "original": 0,
+            "native": 255
+          },
+          {
+            "offset": "0x340b8",
+            "original": 0,
+            "native": 255
+          },
+          {
+            "offset": "0x340b9",
+            "original": 0,
+            "native": 255
+          },
+          {
+            "offset": "0x340ba",
+            "original": 0,
+            "native": 255
+          }
+        ],
+        "original_arena_sha256": "c1878357a6374a23dfd204bc4f7d51db0b08541266599e20f512073cbdb84cd7",
+        "native_arena_sha256": "ac47a1cbe68832221e36b6d015f0db1dcf43b3f14fd2aa26487d93faddc40fd9"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 12,
+        "operations": 180,
+        "trace_mismatches": 1,
+        "byte_mismatches": 5045,
+        "expected_boundary_failures": [],
+        "trace_examples": [
+          {
+            "index": 550,
+            "original": "0x20034020",
+            "native": "0x20036660"
+          }
+        ],
+        "byte_examples": [
+          {
+            "offset": "0x34023",
+            "original": 33,
+            "native": 0
+          },
+          {
+            "offset": "0x34028",
+            "original": 0,
+            "native": 96
+          },
+          {
+            "offset": "0x34029",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x3402a",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3402b",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34063",
+            "original": 0,
+            "native": 33
+          },
+          {
+            "offset": "0x34064",
+            "original": 0,
+            "native": 192
+          },
+          {
+            "offset": "0x34065",
+            "original": 0,
+            "native": 65
+          },
+          {
+            "offset": "0x34066",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34067",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x34068",
+            "original": 192,
+            "native": 224
+          },
+          {
+            "offset": "0x340c0",
+            "original": 32,
+            "native": 128
+          },
+          {
+            "offset": "0x340c1",
+            "original": 64,
+            "native": 103
+          },
+          {
+            "offset": "0x340c4",
+            "original": 0,
+            "native": 192
+          },
+          {
+            "offset": "0x340c5",
+            "original": 0,
+            "native": 65
+          },
+          {
+            "offset": "0x340c6",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x340c7",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x340c8",
+            "original": 32,
+            "native": 224
+          },
+          {
+            "offset": "0x340c9",
+            "original": 66,
+            "native": 64
+          },
+          {
+            "offset": "0x340cc",
+            "original": 32,
+            "native": 96
+          },
+          {
+            "offset": "0x340e8",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x340e9",
+            "original": 0,
+            "native": 65
+          },
+          {
+            "offset": "0x340ea",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x340eb",
+            "original": 0,
+            "native": 32
+          }
+        ],
+        "original_arena_sha256": "5e3c13b7d75989f6e50a22ab4276719a1d9011d316480536579d88210cfcbe50",
+        "native_arena_sha256": "8f6710b1de65ad5d07646b1902cff8d7e7e064d9665a04673302c3addb8a5a87"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 13,
+        "operations": 194,
+        "trace_mismatches": 1,
+        "byte_mismatches": 6488,
+        "expected_boundary_failures": [],
+        "trace_examples": [
+          {
+            "index": 592,
+            "original": "0x20034020",
+            "native": "0x20035940"
+          }
+        ],
+        "byte_examples": [
+          {
+            "offset": "0x34023",
+            "original": 33,
+            "native": 0
+          },
+          {
+            "offset": "0x34028",
+            "original": 0,
+            "native": 96
+          },
+          {
+            "offset": "0x34029",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x3402a",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3402b",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34068",
+            "original": 192,
+            "native": 160
+          },
+          {
+            "offset": "0x340a0",
+            "original": 0,
+            "native": 96
+          },
+          {
+            "offset": "0x340a1",
+            "original": 0,
+            "native": 75
+          },
+          {
+            "offset": "0x340a2",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x340a3",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x340a5",
+            "original": 0,
+            "native": 87
+          },
+          {
+            "offset": "0x340a6",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x340a7",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x340a9",
+            "original": 0,
+            "native": 65
+          },
+          {
+            "offset": "0x340aa",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x340ab",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x340ac",
+            "original": 0,
+            "native": 96
+          },
+          {
+            "offset": "0x340ad",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x340ae",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x340af",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x340c0",
+            "original": 32,
+            "native": 0
+          },
+          {
+            "offset": "0x340c1",
+            "original": 114,
+            "native": 0
+          },
+          {
+            "offset": "0x340c2",
+            "original": 3,
+            "native": 0
+          },
+          {
+            "offset": "0x340c3",
+            "original": 32,
+            "native": 0
+          }
+        ],
+        "original_arena_sha256": "1ee947a04a16233f625e877071009d86354546d1e8ceab776c9fe4af7578140d",
+        "native_arena_sha256": "2899b20c0d679905cef18f1a356694c7bc4f06a10a01ff07770a72bf1bc95f60"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 14,
+        "operations": 193,
+        "trace_mismatches": 1,
+        "byte_mismatches": 4474,
+        "expected_boundary_failures": [],
+        "trace_examples": [
+          {
+            "index": 589,
+            "original": "0x20034020",
+            "native": "0x200351e0"
+          }
+        ],
+        "byte_examples": [
+          {
+            "offset": "0x34020",
+            "original": 0,
+            "native": 224
+          },
+          {
+            "offset": "0x34021",
+            "original": 0,
+            "native": 73
+          },
+          {
+            "offset": "0x34022",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34023",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34024",
+            "original": 0,
+            "native": 192
+          },
+          {
+            "offset": "0x34025",
+            "original": 0,
+            "native": 87
+          },
+          {
+            "offset": "0x34026",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34027",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x34028",
+            "original": 0,
+            "native": 128
+          },
+          {
+            "offset": "0x34029",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x3402a",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3402b",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34088",
+            "original": 224,
+            "native": 192
+          },
+          {
+            "offset": "0x340c0",
+            "original": 0,
+            "native": 128
+          },
+          {
+            "offset": "0x340c1",
+            "original": 0,
+            "native": 71
+          },
+          {
+            "offset": "0x340c2",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x340c3",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x340c4",
+            "original": 0,
+            "native": 224
+          },
+          {
+            "offset": "0x340c5",
+            "original": 0,
+            "native": 75
+          },
+          {
+            "offset": "0x340c6",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x340c7",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x340c8",
+            "original": 0,
+            "native": 224
+          },
+          {
+            "offset": "0x340c9",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x340ca",
+            "original": 0,
+            "native": 3
+          }
+        ],
+        "original_arena_sha256": "5413b9c5eebd0ff149aea61f8393803f88fc7be60c7d7ec011e80a7f25b7668e",
+        "native_arena_sha256": "02fa101e43ffbba01cdf31c5f2751983b4c21c3bd7b28b740e224f09b2ae9a6b"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 15,
+        "operations": 178,
+        "trace_mismatches": 1,
+        "byte_mismatches": 4386,
+        "expected_boundary_failures": [],
+        "trace_examples": [
+          {
+            "index": 544,
+            "original": "0x20034020",
+            "native": "0x200352a0"
+          }
+        ],
+        "byte_examples": [
+          {
+            "offset": "0x34023",
+            "original": 33,
+            "native": 0
+          },
+          {
+            "offset": "0x34028",
+            "original": 0,
+            "native": 96
+          },
+          {
+            "offset": "0x34029",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x3402a",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3402b",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34068",
+            "original": 0,
+            "native": 160
+          },
+          {
+            "offset": "0x34069",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x3406a",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3406b",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x3406c",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x3406d",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x3406e",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3406f",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x34081",
+            "original": 68,
+            "native": 0
+          },
+          {
+            "offset": "0x34082",
+            "original": 3,
+            "native": 0
+          },
+          {
+            "offset": "0x34083",
+            "original": 32,
+            "native": 0
+          },
+          {
+            "offset": "0x34084",
+            "original": 224,
+            "native": 0
+          },
+          {
+            "offset": "0x34085",
+            "original": 76,
+            "native": 0
+          },
+          {
+            "offset": "0x34086",
+            "original": 3,
+            "native": 0
+          },
+          {
+            "offset": "0x34087",
+            "original": 32,
+            "native": 0
+          },
+          {
+            "offset": "0x34088",
+            "original": 192,
+            "native": 0
+          },
+          {
+            "offset": "0x34089",
+            "original": 64,
+            "native": 0
+          },
+          {
+            "offset": "0x3408a",
+            "original": 3,
+            "native": 0
+          },
+          {
+            "offset": "0x3408b",
+            "original": 32,
+            "native": 0
+          }
+        ],
+        "original_arena_sha256": "aeb4a6e5e588674b3c3de629b58be06ab68b042ed3225d52f0d2d0374fac6ebb",
+        "native_arena_sha256": "2b478a62e26e2d37faa9947d93f487a2d001cce9a0f74db32efbe451d1b12550"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 16,
+        "operations": 164,
+        "trace_mismatches": 1,
+        "byte_mismatches": 3399,
+        "expected_boundary_failures": [],
+        "trace_examples": [
+          {
+            "index": 502,
+            "original": "0x20034020",
+            "native": "0x200359c0"
+          }
+        ],
+        "byte_examples": [
+          {
+            "offset": "0x34020",
+            "original": 0,
+            "native": 128
+          },
+          {
+            "offset": "0x34021",
+            "original": 0,
+            "native": 75
+          },
+          {
+            "offset": "0x34022",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34023",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34025",
+            "original": 0,
+            "native": 92
+          },
+          {
+            "offset": "0x34026",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34027",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x34028",
+            "original": 0,
+            "native": 224
+          },
+          {
+            "offset": "0x34029",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x3402a",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3402b",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34120",
+            "original": 32,
+            "native": 160
+          },
+          {
+            "offset": "0x34121",
+            "original": 64,
+            "native": 93
+          },
+          {
+            "offset": "0x34124",
+            "original": 128,
+            "native": 96
+          },
+          {
+            "offset": "0x34125",
+            "original": 68,
+            "native": 72
+          },
+          {
+            "offset": "0x34128",
+            "original": 128,
+            "native": 160
+          },
+          {
+            "offset": "0x34129",
+            "original": 66,
+            "native": 65
+          },
+          {
+            "offset": "0x3412c",
+            "original": 32,
+            "native": 224
+          },
+          {
+            "offset": "0x34180",
+            "original": 0,
+            "native": 160
+          },
+          {
+            "offset": "0x34181",
+            "original": 0,
+            "native": 93
+          },
+          {
+            "offset": "0x34182",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34183",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x34184",
+            "original": 0,
+            "native": 96
+          },
+          {
+            "offset": "0x34185",
+            "original": 0,
+            "native": 72
+          }
+        ],
+        "original_arena_sha256": "eaefd8153837719227ccef56511357cdbe6a272d116efbb0b6cc9ac8881cd67d",
+        "native_arena_sha256": "e7a11e0d3555bef809a2866f67b79701b017b31c84f62c755f5e629173f06185"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 17,
+        "operations": 193,
+        "trace_mismatches": 1,
+        "byte_mismatches": 5227,
+        "expected_boundary_failures": [],
+        "trace_examples": [
+          {
+            "index": 589,
+            "original": "0x20034020",
+            "native": "0x20036da0"
+          }
+        ],
+        "byte_examples": [
+          {
+            "offset": "0x34020",
+            "original": 0,
+            "native": 224
+          },
+          {
+            "offset": "0x34021",
+            "original": 0,
+            "native": 97
+          },
+          {
+            "offset": "0x34022",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34023",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34024",
+            "original": 0,
+            "native": 224
+          },
+          {
+            "offset": "0x34025",
+            "original": 0,
+            "native": 68
+          },
+          {
+            "offset": "0x34026",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34027",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x34028",
+            "original": 0,
+            "native": 224
+          },
+          {
+            "offset": "0x34029",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x3402a",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3402b",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34080",
+            "original": 224,
+            "native": 32
+          },
+          {
+            "offset": "0x34081",
+            "original": 66,
+            "native": 77
+          },
+          {
+            "offset": "0x34088",
+            "original": 96,
+            "native": 224
+          },
+          {
+            "offset": "0x34089",
+            "original": 65,
+            "native": 64
+          },
+          {
+            "offset": "0x340ec",
+            "original": 128,
+            "native": 32
+          },
+          {
+            "offset": "0x3412c",
+            "original": 128,
+            "native": 224
+          },
+          {
+            "offset": "0x34160",
+            "original": 0,
+            "native": 96
+          },
+          {
+            "offset": "0x34161",
+            "original": 0,
+            "native": 71
+          },
+          {
+            "offset": "0x34162",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34163",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x34164",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x34165",
+            "original": 0,
+            "native": 84
+          }
+        ],
+        "original_arena_sha256": "d72da7b0c4bfa2818898690e1fc6f7c42543b385d975ebdc1c50f5986eeb5f74",
+        "native_arena_sha256": "b32a0932dfb4be174393a2a773afc39f25fc18d717c61d2aa0e4256c6c27dfcf"
+      },
+      {
+        "callback_contexts_match": true,
+        "callback_count": 0,
+        "sequence": 18,
+        "operations": 197,
+        "trace_mismatches": 1,
+        "byte_mismatches": 7376,
+        "expected_boundary_failures": [],
+        "trace_examples": [
+          {
+            "index": 601,
+            "original": "0x20034020",
+            "native": "0x20037880"
+          }
+        ],
+        "byte_examples": [
+          {
+            "offset": "0x34023",
+            "original": 33,
+            "native": 0
+          },
+          {
+            "offset": "0x34028",
+            "original": 0,
+            "native": 96
+          },
+          {
+            "offset": "0x34029",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x3402a",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3402b",
+            "original": 33,
+            "native": 32
+          },
+          {
+            "offset": "0x34060",
+            "original": 0,
+            "native": 160
+          },
+          {
+            "offset": "0x34061",
+            "original": 0,
+            "native": 66
+          },
+          {
+            "offset": "0x34062",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34063",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x34064",
+            "original": 0,
+            "native": 192
+          },
+          {
+            "offset": "0x34065",
+            "original": 0,
+            "native": 69
+          },
+          {
+            "offset": "0x34066",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x34067",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x34068",
+            "original": 0,
+            "native": 128
+          },
+          {
+            "offset": "0x34069",
+            "original": 0,
+            "native": 65
+          },
+          {
+            "offset": "0x3406a",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3406b",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x3406c",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x3406d",
+            "original": 0,
+            "native": 64
+          },
+          {
+            "offset": "0x3406e",
+            "original": 0,
+            "native": 3
+          },
+          {
+            "offset": "0x3406f",
+            "original": 0,
+            "native": 32
+          },
+          {
+            "offset": "0x34088",
+            "original": 224,
+            "native": 0
+          },
+          {
+            "offset": "0x34089",
+            "original": 64,
+            "native": 0
+          },
+          {
+            "offset": "0x3408a",
+            "original": 3,
+            "native": 0
+          }
+        ],
+        "original_arena_sha256": "91a085e6f91171d936bf091f05af16ab05a017172a7f084225326fb110197c26",
+        "native_arena_sha256": "0ce3e8186d3909e09841802314ffa64408c4e4e913ff8d1220dc662beda8c95b"
+      }
+    ],
+    "inactive_destroy_boundary": {
+      "original_stop": "0x401000",
+      "source_arena_unchanged": true,
+      "native_pending_failure": 10,
+      "native_source_boundary": "0x401000",
+      "native_task_retired": false,
+      "native_work_retained": true,
+      "source_arena_sha256": "09bcee7aa82263629188a8a343cbe50cf4c34e6af76c0076f275a76894f00f44",
+      "native_arena_sha256": "09bcee7aa82263629188a8a343cbe50cf4c34e6af76c0076f275a76894f00f44",
+      "state_and_explicit_boundary_match": true,
+      "original_return_observed": false,
+      "limits": [
+        "Real401000/CRT formatting not executed; no source cleanup or diagnostic success claimed"
+      ]
+    }
+  }
+]

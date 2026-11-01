@@ -1,0 +1,37 @@
+{
+  "source_commit": "c75cd0977f83acbce40cd1daf88acb3be08d2142",
+  "commands_exit_zero": [
+    "two registered axis programs",
+    "actualMain109056case unchanged axes original/capture",
+    "actualMain1044case unchanged pad original"
+  ],
+  "native_contract": "327681 24903828 9340279443059284959",
+  "source_files": {
+    "src/input/input_mod_axes.cpp": "95e61568ed6357c7c4629361f57adb3fb91687f47320b30dec246bd2d5992ed7",
+    "src/input/input_mod_axes.hpp": "f1ff8f9c36b898d73cd8d7fbe39f7eb02a053dd108d29267ece6e4332fefbc54",
+    "src/input/input_mod_pad.cpp": "236237ddd8fc2d46eb941012ff6bf495524e6026bb764cfbe01135499f7c0525",
+    "src/cpu/sse_math.cpp": "b7ddd9dc425ac2e1ebd49929de1dcdf4bd7671466bf041544a6ba57157ca12b7",
+    "tests/unit/input_mod_axes_contract.cpp": "24aabf429c77e4ba4a5e6be8976f79da4b82300de68c27dd960792133bdb1876"
+  },
+  "original_axes": {
+    "records": 109056,
+    "full_stream_sha256": "392936528012f91d95e0e1ef834695929db9534c46f1f0cbb9bfe5f4eee74461",
+    "value_failure_ids": [],
+    "original_full_state_passed": false,
+    "original_report_sha256": "fb09baa4c4cc806286a652ddae19342ed20d1ae8a6dd322a551018914d369369",
+    "library_sha256": "3d9084fa1b02646dfb8407b1c1c6f8591b7d438ec6ae354d1a8466dfbb8b78c3",
+    "scope": "Run the unchanged Input axes judge and retain every per-case native word.\n\nFP status differences stay partial. This capture adds no source expectations,\ninput cases, tolerances or hardware claims to the inherited instruction judge.\n"
+  },
+  "fp_partial_ids_file": "build/input-axes-main/capture/identity.json",
+  "fp_partial_ids_sha256": "a16b9deb3caebd43f99b6aac71f3da74e911ac7558669bbbf6de5ef75aa89990",
+  "pad": {
+    "cases": 1044,
+    "value_mismatches": 0,
+    "fp_partials": 300
+  },
+  "native_independence_consumer_journey_proof": "reference/production-integration-20261101/input-axes-qualification.json",
+  "limits": [
+    "FP partials remain partial, no hardware/Windows or gameplay63FPS claim.",
+    "ActualMaincoherentgatepending; underlyingpad/SSE/CRTdebt unchanged."
+  ]
+}

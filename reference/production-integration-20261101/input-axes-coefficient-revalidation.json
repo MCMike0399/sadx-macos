@@ -1,0 +1,27 @@
+{
+  "failed_gate_source": "84337e5",
+  "gate_exit": 2,
+  "failed_check": "native-input-mod-constants stale source-data comparison src/input/input_mod_axes.hpp",
+  "gate_log_sha256": "ebd2e0643a469228b93e3f20790fa1fc6dd9786a50df13405bd343aafe0d8608",
+  "gate_qualified": false,
+  "correction": "Rerun unchanged original coefficient/poison/varied/partial fixtures, track actual new header binding, then unchanged isolated nativeproducercheck passes. No constant,expectedword,input,fixture or checker was changed.",
+  "words": 7,
+  "same_word_sha256": "53ff70b58dd383e67c181bb49184039eecff8e9c87b88881705878cec1bd23d4",
+  "source_files": {
+    "src/input/input_mod_constants.hpp": "24fd81fa99a60451cbfe6532c6ac852864737e1f459afd168f54d571ca6cb6ba",
+    "src/input/input_mod_constants.cpp": "dc2f26b82c0d631afe1f42c910cbeb85e39601d24a90e126a194884e8c783e3b",
+    "tests/probes/input_mod_constants_probe.hpp": "729788565862a6fadfb0496b004b516ec195de2ceaef262c9a677669b35e8305",
+    "tests/probes/native_input_mod_constants_probe.cpp": "64b4ed51cff0de4e8047ffc73c286f34c53ef90e548d4e9028e3749df2b74448",
+    "src/input/input_mod_pad.hpp": "2d4a57f647b648b169fbf63211d08a88af26f1f851cc3d19638d87bea65eba21",
+    "src/input/input_mod_axes.hpp": "f1ff8f9c36b898d73cd8d7fbe39f7eb02a053dd108d29267ece6e4332fefbc54",
+    "src/input/input.hpp": "addd67c94712087d50b704722c057185c605cf29c98b895b0212d9ba60be4e4b",
+    "src/engine/game_controller.hpp": "cdb1f924ad72369f2a6e5c1073b857042a3a2317197aed53ef0041cd6f025336",
+    "src/cpu/sse_math.hpp": "b0bed7f83c4b3ceec2070dee8a64de8045f2cc3bde412483690b8d4e6a7ef213",
+    "src/engine/controller_values.hpp": "abbfb8000a4dc77da937481cff321e86a48dd1204507c348d1c39083424106b5",
+    "tools/oracles/verify_original_input_mod_constants.py": "c31824cd82f792f67a49f236b7cae495ea0399fae2f5147eb1f814e8271bda2f"
+  },
+  "native_check_exit": 0,
+  "native_log_sha256": "3fb735ce17911e8b68d0242fb3d0049d33ed3bb83a418494530a604360f6fa5e",
+  "setup_note": "The first isolatedcheck invoked before tracking the new source-data receipt stillfailedtheoldpin; tracking then rerunning succeeds.",
+  "limits": "Failed gate is retained as failure; fresh full integration gate required."
+}

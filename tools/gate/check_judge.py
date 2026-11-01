@@ -12,8 +12,10 @@ ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = 'reference/judge-manifest.json'
 DECLARATION = '.claude/judge-change.json'
 DIRECTORIES = ('tools/oracles', 'tools/gate', 'tools/lib', 'tests/probes', 'tests/fixtures',
-               'tests/python', 'reference/oracle-reports')
-FILES = ('reference/constexpr-table-review.json', 'reference/address-dispatch-baseline-v1.json', 'tools/journey/content_corpus.py', 'tools/journey/capture_content.py', 'tools/journey/compare_native_startup.py', 'tools/journey/check_native_file_select.py', 'tools/journey/check_native_main_menu.py', 'tools/journey/check_native_fresh_save.py', 'Makefile', 'tests/unit/manifest.tsv', 'reference/frame-control-corpus.tsv',
+               'tests/python', 'tests/unit', 'reference/oracle-reports')
+REFERENCE_PACKET_DIRECTORY = 'reference/packets'
+FILES = ('tools/inventory/refactor_inventory.py',
+         'reference/constexpr-table-review.json', 'reference/address-dispatch-baseline-v1.json', 'tools/journey/content_corpus.py', 'tools/journey/capture_content.py', 'tools/journey/compare_native_startup.py', 'tools/journey/check_native_file_select.py', 'tools/journey/check_native_main_menu.py', 'tools/journey/check_native_fresh_save.py', 'Makefile', 'tests/unit/manifest.tsv', 'reference/frame-control-corpus.tsv',
          'reference/frame-control-corpus.json', 'reference/keyboard-sampling-goldens.json',
          'reference/judge-hook-settings.proposed.json',
          'tools/analysis/fp_control_census.cpp', 'tools/analysis/run_fp_census.py',
@@ -28,6 +30,7 @@ def protected(path):
         return False
     return (path in FILES or path == MANIFEST or
             any(path.startswith(directory + '/') for directory in DIRECTORIES) or
+            (path.startswith(REFERENCE_PACKET_DIRECTORY + '/') and Path(path).suffix == '.py') or
             path.startswith('reference/frozen-corpora/') or
             re.fullmatch(r'reference/[^/]*corpus[^/]*', path) is not None or
             (path.startswith('reference/production-integration-') and
@@ -38,12 +41,30 @@ def digest(path):
     return hashlib.sha256(path.read_bytes()).hexdigest()
 
 
+def packet_scripts(root):
+    """Inspect directory aliases before filtering regular Python helpers."""
+    directory = root / REFERENCE_PACKET_DIRECTORY
+    if directory.is_symlink():
+        raise ValueError(f'judge packet tree must not be a symlink: {REFERENCE_PACKET_DIRECTORY}')
+    result = set()
+    for path in directory.rglob('*'):
+        relative = path.relative_to(root)
+        if '__pycache__' in relative.parts:
+            continue
+        if path.is_symlink() and (path.is_dir() or not path.exists()):
+            raise ValueError(f'judge packet directory must not be a symlink: {relative}')
+        if path.suffix == '.py' and (path.is_file() or path.is_symlink()):
+            result.add(path)
+    return result
+
+
 def snapshot(root):
     root = root.resolve()
     paths = set()
     for directory in DIRECTORIES:
         paths.update(p for p in (root / directory).rglob('*') if p.is_file() or p.is_symlink())
     paths.update(root / name for name in FILES)
+    paths.update(packet_scripts(root))
     paths.update(root.glob('reference/production-integration-*/**/*mutant*.json'))
     paths.update(p for p in (root / 'reference/frozen-corpora').rglob('*') if p.is_file() or p.is_symlink())
     paths.update(p for p in (root / 'reference').glob('*corpus*') if p.is_file() or p.is_symlink())

@@ -1,0 +1,64 @@
+{
+  "main_parent": "899f3ad6337e0d315d6fb631911a589ff33c8414",
+  "packet_parent": "a89ebcd8f1a9eaeab590331190d8af5b3b717963",
+  "review": "00e9934dabaf025a664f77e970338cf66ff758e2",
+  "source_changed": false,
+  "main_inputs": 948,
+  "packet_inputs": 953,
+  "expected_union_inputs": 955,
+  "append_only_registration": {
+    "Makefile": {
+      "base_sha256": "ab4cebd5b5dd166096651333a985211354bd5b07633ff55d6c74449e9e923ae1",
+      "main_sha256": "1589ad72e6f32dc1684709122d78fbdc5c691ee571293be016301f90a6480ded",
+      "packet_sha256": "ebe3e52a5bf04e4ca19e7b1af208079718c129cbade7886319b1d8b589f968ac",
+      "combined_sha256": "e4be497c24cedd750e8a9a7d5b3438e7c582a6509969379689276d7b6f3ef905",
+      "appended_bytes": 710
+    },
+    "tests/unit/manifest.tsv": {
+      "base_sha256": "4560892a9c25008da37bce518c4c5f2c20cab59d4e3ead0fc2395418d716e8ff",
+      "main_sha256": "ef212f0b7bdc43ac4c7bf5ba6583f3313f652f68a8e236758ec03b95ec7e491f",
+      "packet_sha256": "8647061aee8bed878523105ed1878e2cbe3f057d56d9d041f1819923af738fd2",
+      "combined_sha256": "36ef201da224e3a7c791109155dc947c9704515e0e8b809f066da95c664c2754",
+      "appended_bytes": 46
+    }
+  },
+  "limits": [
+    "Judge foundation only; no scheduler source rewrite or final holdout. Full integrated gate remains pending.",
+    "All original inputs and expectations remain unchanged; six existing delete exclusions and inactive lifecycle boundary remain explicit."
+  ],
+  "verification": {
+    "exact_manifest_path_union": true,
+    "all_current_hashes_verified": 955,
+    "strict_baseline_cli_exit": 1,
+    "strict_baseline_differences": [
+      {
+        "path": "src/loader/mpeg_timing.cpp",
+        "frozen_sha256": "fafd2daf8e2e44e080b6b761fd536b2e50152bb380c5866d29acef3ce43b3dc7",
+        "current_sha256": "5ceaec254b1a56b42806c348c40aacf6d5715ee4ebd29600d1d224f5cf2d0bde"
+      },
+      {
+        "path": "src/loader/mpeg_timing.hpp",
+        "frozen_sha256": "c6f31e9f97289124fcf9affd35037e367868eece8fdd011efe318fb633f420c9",
+        "current_sha256": "0e2724652177eb0f96ec59bf2e32d61e5ebb5cd3c30109a8c3f310b457fb0643"
+      }
+    ],
+    "difference_qualification": "reference/production-integration-20261101/mpeg-foundations-gate.json",
+    "scheduler_source_anchors_unchanged": true,
+    "limits": "The immutable prerequisite CLI requires all source files to match its pre-MPEG snapshot. Its exit 1 remains recorded, not promoted to a full baseline pass. Both differences are the independently reviewed MPEG module, qualified by the completed Main gate."
+  },
+  "integration_observations": {
+    "scheduler_contract_exit": 0,
+    "callback_lifetime_exit": 0,
+    "setup_correction": "The first callback-lifetime invocation used an underscore in its executable name and exited 127. The registered hyphenated executable subsequently ran with exit 0. This was a command-path error, not a source defect or mutant.",
+    "build_exit": 0,
+    "bridge_contract_exit": 0,
+    "scheduler_observations": 20,
+    "bridge_observations": 7,
+    "log_sha256": {
+      "build.log": "4df538daa4a951800fd06558d5d0957395bf7fe8f90c56b004d40590a1ce34cb",
+      "scheduler-contract.log": "014e0781924dbcd0bbcca90f8ce560b5cd7cdca886d59ed5aacf5a811bb41873",
+      "bridge-contract.log": "b9d3af05c20475fd1515562afe5c4862c032eedde4289720758b2a8ce837d6a7",
+      "callback-lifetime.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  }
+}

@@ -62,6 +62,21 @@ class JudgeTests(unittest.TestCase):
                 self.write(name, original)
         self.assertEqual(check(self.root)[0], [])
 
+    def test_inventory_scope_enforcement_is_protected(self):
+        name = 'tools/inventory/refactor_inventory.py'
+        self.assertTrue(protected(name))
+        self.assertIn(name, snapshot(self.root))
+        original = (self.root / name).read_text()
+        self.write(name, original + '# discard historical debt\n')
+        self.assertTrue(any('changed judge input' in error for error in check(self.root)[0]))
+        (self.root / name).unlink()
+        with self.assertRaises(FileNotFoundError):
+            check(self.root)
+        target = self.write('unprotected-generator.py', original)
+        (self.root / name).symlink_to(target)
+        with self.assertRaisesRegex(ValueError, 'must not be a symlink'):
+            snapshot(self.root)
+
     def test_hash_addition_removal_and_generated_files(self):
         self.assertEqual(check(self.root)[0], [])
         self.write('tools/oracles/check.py', 'mutated\n')
@@ -89,6 +104,63 @@ class JudgeTests(unittest.TestCase):
         self.assertTrue(protected('tests/python/test_judge.py'))
         self.assertTrue(protected('tools/lib/pe_image.py'))
         self.assertTrue(protected(MANIFEST))
+
+    def test_packet_helpers_and_unit_contracts_are_protected(self):
+        for path in ('reference/packets/example/observe.py',
+                     'tests/unit/example.cpp', 'tests/unit/example.mm',
+                     'tests/unit/example.hpp'):
+            with self.subTest(path=path):
+                self.assertTrue(protected(path))
+        self.assertFalse(protected('reference/packets/example/README.md'))
+        self.assertFalse(protected('reference/packets/example/__pycache__/observe.pyc'))
+
+    def test_packet_and_unit_add_change_remove_drift(self):
+        paths = ('reference/packets/example/observe.py', 'tests/unit/example.cpp')
+        for path in paths:
+            self.write(path, 'original contract\n')
+        self.assertTrue(any('unmanifested judge input' in e for e in check(self.root)[0]))
+        manifest = json.loads((self.root / MANIFEST).read_text())
+        manifest['files'] = snapshot(self.root)
+        self.write(MANIFEST, json.dumps(manifest))
+        for path in paths:
+            with self.subTest(path=path):
+                self.write(path, 'changed contract\n')
+                self.assertIn('changed judge input: ' + path, check(self.root)[0])
+                self.write(path, 'original contract\n')
+                (self.root / path).unlink()
+                self.assertIn('missing judge input: ' + path, check(self.root)[0])
+                self.write(path, 'original contract\n')
+        self.assertEqual(check(self.root)[0], [])
+
+    def packet_directory_aliases(self):
+        packet = self.root / 'reference/packets'
+        packet.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory)
+            (target / 'helper.py').write_text('immutable helper\n')
+            for name, destination in (('alias', target), ('dangling', target / 'absent')):
+                alias = packet / name
+                alias.symlink_to(destination, target_is_directory=True)
+                with self.assertRaisesRegex(ValueError, 'symlink'):
+                    snapshot(self.root)
+                alias.unlink()
+            packet.rmdir()
+            packet.symlink_to(target, target_is_directory=True)
+            with self.assertRaisesRegex(ValueError, 'symlink'):
+                snapshot(self.root)
+            packet.unlink()
+            packet.mkdir()
+            cache = packet / '__pycache__'
+            cache.symlink_to(target, target_is_directory=True)
+            self.assertEqual(check(self.root)[0], [])
+            cache.unlink()
+
+    def test_packet_directory_aliases_in_source_archive(self):
+        self.packet_directory_aliases()
+
+    def test_packet_directory_aliases_in_git_checkout(self):
+        self.commit_fixture()
+        self.packet_directory_aliases()
 
     def test_update_requires_evidence_and_separate_game_commit(self):
         self.assertEqual(self.cli('--update').returncode, 1)

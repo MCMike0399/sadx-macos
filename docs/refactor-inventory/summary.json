@@ -1,7 +1,7 @@
 {
   "base_commit": "f6c4e538af463a2eaf4c1fe961f04e8443d51878",
   "baseline_removed_paths": [],
-  "boundary_entries": 2273,
+  "boundary_entries": 2312,
   "checks_not_run": [
     "builds",
     "gate",
@@ -12,30 +12,30 @@
   ],
   "coverage": "exact tracked path equality; no semantic completeness or behavior verdict",
   "dispositions": {
-    "already_conforming": 66,
-    "needs_migration": 22,
-    "open_review": 1566,
+    "already_conforming": 82,
+    "needs_migration": 34,
+    "open_review": 1567,
     "reference_infrastructure": 7
   },
-  "maintained_and_script_entries": 1661,
+  "maintained_and_script_entries": 1690,
   "module_dispositions": {
-    "already_conforming": 39,
-    "needs_migration": 5,
-    "open_review": 1015
+    "already_conforming": 48,
+    "needs_migration": 12,
+    "open_review": 1020
   },
   "module_shards": [
     {
       "path": "modules.jsonl",
-      "records": 936,
-      "sha256": "b17b7bde46686b5294f2d73112536918eb4e2f667b359475b6bfed95842d6d65"
+      "records": 760,
+      "sha256": "c690672870a2b176db283e7a9c6b2096412641f9d078ad0548e2b4fab001e16d"
     },
     {
       "path": "modules-002.jsonl",
-      "records": 123,
-      "sha256": "84f7ef43b85194cdbff29994c4c276ab10949d82567522e66dc357e30976c8e0"
+      "records": 320,
+      "sha256": "ad08e69d45dec6ad651067af51f4023579c99b3601a541a9b6a07169268e3066"
     }
   ],
-  "modules": 1059,
+  "modules": 1080,
   "native_translation_units_listed": 128,
   "native_translation_units_not_listed": 186,
   "other_stub_mentions": 11,
@@ -49,11 +49,11 @@
   },
   "reviewed_stub_bindings": 2,
   "roots": {
-    "reference": 2171,
+    "reference": 2220,
     "src": 650,
-    "tests": 595,
+    "tests": 605,
     "third_party": 155,
-    "tools": 363
+    "tools": 372
   },
   "schema_version": 1,
   "stub_annotations": 84,
@@ -73,7 +73,7 @@
     "sound-movie": 27,
     "task-ownership": 6,
     "texture-lifetime": 23,
-    "tooling-judges": 1011
+    "tooling-judges": 1040
   },
-  "tracked_scope": 3934
+  "tracked_scope": 4002
 }

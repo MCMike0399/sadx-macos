@@ -698,3 +698,45 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Ten compiled faults are caught by the frozen contract; ASan/UBSan passes. Pinned support archives qualify an additional immutable-old/current consumer replay after concurrent Main support rebuilds; this replay is explicitly retrospective.
 * Separate judge commits add two registered tests with direct source dependencies. All 946 protected paths check; all 945 base paths and 53 raw inputs survive exactly. No gate, journeys, delegate, Main write or push.
 * docs/packets/mpeg-timing/PACKET.md records hashes, commands and limits. Root independent review, holdout, inventory reconciliation, integration and combined gate remain pending. No native movie, Windows splitter, whole Loader or campaign closure claim.
+
+### 2026-11-01 — MPEG and foundation integration qualified
+
+* Qualified-corpus make -j10 gate exits 0 at 8c9f540: 290 native programs, 450 Python tests, one inherited filesystem skip, smoke 120, R1–R4, three native menu/save journeys and sixteen startup comparisons. mpeg-foundations-gate.json records the actual result; STATUS regenerated.
+* Complete MPEG timing module retains 30,657 development and 4,096 final full observations, actual HleDshow output, ten compiled faults and sanitizer evidence. Main unit, contract and consumer pass. This is reference timing utility qualification, not Windows splitter parity.
+* Initial values, actor-current and shared frame/mode reviews retain explicit module boundaries. Native mode forwarding/services and broader ownership remain open. Existing FP partials and failures retain their prior identities and verdicts.
+* Animation judge foundation is accepted after narrative correction; the coherent animation source migration runs in its own packet. Scheduler lifecycle judge review 00e9934 accepts its bounded foundation; scheduler source rewrite, final cohorts and integration remain pending. No whole renderer/player/Session/campaign closure, gameplay or new controller claim. No push.
+
+### 2026-11-01 — Accepted scheduler judge foundation integrated
+
+* Review 00e9934 accepts the bounded before-source scheduler foundation. Main carries the four full stream ledgers, historical exclusions, source/dependency bindings, fourteen scheduler and three bridge compiled fault receipts, and two registered contracts. Scheduler source and reserved holdouts remain unchanged.
+* Both new contracts build and run on current Main: twenty scheduler and seven actual bridge observations; the callback-lifetime regression also exits zero. All 955 protected inputs are the exact reviewed parent union with additive registration. Inventory and hygiene checks pass.
+* The strict prerequisite baseline checker exits one on the two independently qualified MPEG files; all scheduler anchors match. task-judges-parent-union.json records that limit, the corrected command-path typo and exact hashes. No full integrated gate or whole Task/player/campaign qualification is claimed here.
+
+### 2026-11-01 — Scheduler foundation integration gate qualified
+
+* Qualified-corpus make -j10 gate exits zero at 353d528: 292 native programs, 450 Python tests, inherited filesystem skip, smoke120, R1–R4, three native menu/save journeys and sixteen startup comparisons. task-foundation-gate.json records the actual result; STATUS regenerated.
+* Both added scheduler/bridge contracts run in the gate. All 955 protected inputs remain exact; original lifecycle inactive boundary and six delete exclusions are retained. This accepts judge integration, not the scheduler source rewrite or final cohorts.
+* Animation source migration remains isolated. Save IO/frame judge foundation and complete input-policy review are complete packets awaiting Root acceptance/integration. Mode forwarding/diagnostic coverage is in a separate judge packet; no gameplay source changed. Existing FP partials and known failures remain bounded.
+* Renewed storage audit is accepted with no SADX transfer: all pinned/current evidence and the unknown-provenance small export stay local. Continue the complete refactor; no campaign closure or new gameplay/controller claim. No push.
+
+### 2026-11-01 — Mode and save judge integration qualified
+
+* Qualified-corpus make -j10 gate exits zero at 7d1cf6c. mode-save-judges-gate.json records actual program/test counts, inherited filesystem skip, smoke120, R1–R4, three native menu/save journeys and sixteen startup comparisons. STATUS regenerated.
+* Both save enforcement review gaps are corrected and independently accepted: packet directory aliases fail before helper filtering; writer captures require all 39 ordered complete scenarios. Valid writer observations and full original rows remain byte-identical. All 1,266 protected inputs verify, including every inherited corpus and newly recognized unit/helper body.
+* Actual Main mode comparison retains 24,000 cases, 252 paths, zero mismatches and every full diagnostic word. Four new mode/save contracts and nineteen focused checks pass. Source conformance of the two native forwarding modules is independently bounded; whole Mode/Session and source save migration remain open.
+* Input-axis source candidate preserves all 109,056 records, 93,104 FP partial identities and 327,680 native fault/alias cases; further qualification is pending. Animation reviews found one reference-constant regression, now corrected in its isolated candidate with 252 exact compatibility observations; default-cohort reruns, review and integration remain pending. No whole campaign or gameplay/controller claim. No push.
+
+### 2026-11-01 — Complete input-axis module qualified
+
+* The two-file axis module now names exact calculations and ordered publications. All five direct consumers retain the API and layout. Output optionals still mean reached stores; no owner, hidden deadzone or arithmetic policy changed.
+* Actual Main preserves 109,056 full records and all 93,104 FP partial identities. The native alias/exception contract retains 327,681 cases; final original holdout has 8,192 value-exact cases and 7,408 FP partials. Pad retains 1,044 records and 300 FP partials. Eight valid faults are caught; the earlier survivor and retrospective old-source augmentation remain explicit.
+* The isolated native app and force-load closure build without reference/game inputs; all three native menu/save journeys pass. Provenance, layer and owner checks pass. All 1,268 protected inputs remain accounted for.
+* Qualified-corpus make -j10 gate exits zero at db2f158. input-axes-gate.json records actual counts, inherited skip, smoke 120, R1–R4, native journeys and sixteen startup comparisons. The earlier stale coefficient receipt failure stays recorded; its unchanged seven-word producer was revalidated before this run. STATUS regenerated.
+* Animation source is reviewed, but consumer final qualification stopped on an original null-player fault. Exact diagnostics now show original/native boundary 49aa50 correspondence; no exception or Source change was made. Observer repair, positive composition, lineage activation and integration remain next. Prepared scheduler/save source migrations follow this checkpoint; whole campaign remains open. No push.
+
+### 2026-11-01 — Reset debt reconciled; animation observer corrected
+
+* Main reconciles the six-file reset/cleanup review: two cleanup files conform within their bounded native purpose; four legacy reset files remain migration debt. Twenty-one inventory tests pass. No behavior changed.
+* The inventory generator now has explicit judge protection. Seventeen focused checker tests pass, including changed/missing/aliased generator refusal. All 1,269 protected inputs verify; 1,266 inherited hashes remain unchanged, with two evidenced checker/test changes and one newly protected generator.
+* Animation's bounded observer review found missing imported dependency pins and unproved return classification. The isolated packet now checks all four frozen content inputs and 372 immutable Python helpers before imports, proves actual STOP or established-stop PC, and passes nine focused tests. No remaining reserved consumer input ran. Real Sonic updater/startup and two-player Gamma composition evidence remains valid; fresh review is next.
+* The last green integration gate remains source db2f158. This later judge correction, animation lineage, product integration and final gate remain pending. Prepared scheduler/save source migrations follow this front; the complete campaign remains active. Storage stays idle. No push.
