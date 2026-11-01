@@ -2,6 +2,8 @@
 
 `make check` verifies `reference/judge-manifest.json`. Its SHA-256 entries cover oracle and
 gate tools, their shared `tools/lib` helpers, probes, fixtures, Python checker tests,
+all maintained `tests/unit` bodies and Python verification helpers under
+`reference/packets`,
 oracle summaries, frozen corpora, mutant
 specifications, the Makefile and unit-test registration. The checker itself is covered.
 Generated Python caches and `.DS_Store` are excluded. Regenerated `build/oracles/*.cases.bin`
