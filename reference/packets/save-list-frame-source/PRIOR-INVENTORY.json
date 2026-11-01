@@ -1,0 +1,1234 @@
+{
+  "files": {
+    "src/game/save_file_list.hpp": {
+      "disposition": "needs_migration",
+      "reason": "Indeterminate malloc-sentinel content is exposed as optional FileInfo in the game API; list allocation, alias and release contracts are not fully separated/qualified. Preserve partial append/read and link semantics while resolving these boundaries.",
+      "semantic_justification": "All Reader overloads/decoding fields and list/search/load/free bodies were read. Decode is inverse little-endian 1392 bytes including explicit padding. First append allocates only a sentinel regardless of supplied name; nonempty append links new node before checking missing name, preserving partial publication. load initializes current/rings only when list exists, traverses selected live count, leaves fallback path uninitialized, publishes partial fread bytes over previous encoded data, ignores complete-item return and then closes. Enumeration creates sentinel before search, preserves provider order/time, opens even rejected slots, publishes every partial read, validates full-item/nonzero slot<100/CRC before append, caps at 99 and closes file before next/search-close. List node/name allocation and retained aliases are not equivalent to unrestricted CRT heap lifetime, and malformed/missing resource boundaries are explicit failures rather than fabricated success.",
+      "resolved_owners": [
+        {
+          "resolution": "Session owns exactly one save::Profiles (current and distinct menu_backup) before LogoScene construction; logo, capture, writer, load, enumeration, display and menu predicates borrow current. GameModeLeafState owns one Profiles in its separate reference world, exposing only options/six life slots with separate knownness. No second live cache is authorized. Session owns selected_save_name_ allocation and save_name_ visible borrowed pointer independently; TitleScene and writer borrow the same pointer. Native null is actual absence; SaveNameReference unknown/nonzero source markers are identities, never strings.",
+          "evidence": [
+            {
+              "path": "src/game/save_profiles.hpp",
+              "line": 1,
+              "sha256": "7fa1443e5382027559c51bc32694ee1fe370548adfe2a784f6e9fe3cbf70fdff",
+              "link": "src/game/save_profiles.hpp#L1"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 1,
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086",
+              "link": "src/runtime/native_session.hpp#L1"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 1,
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c",
+              "link": "src/runtime/native_session.cpp#L1"
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "line": 1,
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a",
+              "link": "src/runtime/native_save.cpp#L1"
+            },
+            {
+              "path": "src/guest/game_mode_leaves_reference.hpp",
+              "line": 1,
+              "sha256": "5e3f17d271ca0d4c941f3bb00af800f455b87f7c6f88c21de4427281df73a25b",
+              "link": "src/guest/game_mode_leaves_reference.hpp#L1"
+            },
+            {
+              "path": "src/guest/save_name_reference.hpp",
+              "line": 1,
+              "sha256": "ac24fe644fd30d6dbae9349915f5118d8a77056e88428d9db445bdb1c19a7bbf",
+              "link": "src/guest/save_name_reference.hpp#L1"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "TitleScene::count_save_files/load_selected_save and cleanup/free_save_list share Session.list_data_ and current; confirmation traverses the same list after transition callbacks, display borrows it. SaveFiles provider owns native DIR/FILE lifetimes, not game records or list nodes. free_save_list explicit unlink order is distinct from shared_ptr destruction when consumers retain aliases.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 1,
+              "sha256": "b2192da9fc1a860b432d09030beaf120a810d5442a2188b0c3b8e44b87d82ad8",
+              "link": "src/runtime/native_title_tasks.cpp#L1"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 1,
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c",
+              "link": "src/runtime/native_session.cpp#L1"
+            },
+            {
+              "path": "src/runtime/native_file_select_display.cpp",
+              "line": 1,
+              "sha256": "7f8c435c0e9f718d1b5bd535c07aa68ef6ddfdd356451e36152579bd285e9fc1",
+              "link": "src/runtime/native_file_select_display.cpp#L1"
+            },
+            {
+              "path": "src/game/menu_dialog_file_select.cpp",
+              "line": 1,
+              "sha256": "d089e6e3aa787cd6b72da914366543c132de9d1680ad589079244b7e3a04d8d7",
+              "link": "src/game/menu_dialog_file_select.cpp#L1"
+            },
+            {
+              "path": "src/game/file_select_display.cpp",
+              "line": 1,
+              "sha256": "0a4952c71f8251f5c49321ab43859e399df3a2750e6e6b667f4850f9907124b7",
+              "link": "src/game/file_select_display.cpp#L1"
+            },
+            {
+              "path": "src/platform/mac/mac_save_files.cpp",
+              "line": 1,
+              "sha256": "0258d17bda7a0881bf0a5d0ec824cb3b127d436cfd579677739d2af62f8d19d1",
+              "link": "src/platform/mac/mac_save_files.cpp#L1"
+            },
+            {
+              "path": "src/platform/mac/mac_save_files.hpp",
+              "line": 1,
+              "sha256": "c562b3fdedfdc00b382c286ee0719466a7ad0cd705f3c5ccd879f96ad18f3940",
+              "link": "src/platform/mac/mac_save_files.hpp#L1"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Historical discovery348, selected-load368 and reverse-free101 observations; every native_sources entry these three reports record matches current bytes. Probes compare live1392 bytes, list/timestamp/resource snapshots and stop prefixes; reverse free compares node destruction order0..100 nodes.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/save_file_list.json",
+              "line": 1,
+              "sha256": "a60ae551cf1015aa60a577b1ac7f9a5ce08c4483d9220574bb6cf9ac6b16dabd",
+              "link": "reference/oracle-reports/save_file_list.json#L1"
+            },
+            {
+              "path": "reference/oracle-reports/load_selected_save.json",
+              "line": 1,
+              "sha256": "706d63cc21f8564cb8e438b252e02cdc8e655cfa001bd7b7b3f7bc6781000561",
+              "link": "reference/oracle-reports/load_selected_save.json#L1"
+            },
+            {
+              "path": "reference/oracle-reports/save_list_free.json",
+              "line": 1,
+              "sha256": "f0022b82d005abd776a64b4989d6ac985349fb0d38ba39274b2b5cced5243889",
+              "link": "reference/oracle-reports/save_list_free.json#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_save_file_list.py",
+              "line": 1,
+              "sha256": "2e6cdf5ad65bc0253c2f8a0a6b630a0345c2e905db65859ab93637c73431fd85",
+              "link": "tools/oracles/verify_original_save_file_list.py#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_load_selected_save.py",
+              "line": 1,
+              "sha256": "16c0999ea4c798c6cbcfccfbedeb7bba922491114b03a1eb3552f825371e807a",
+              "link": "tools/oracles/verify_original_load_selected_save.py#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_save_list_free.py",
+              "line": 1,
+              "sha256": "182108e2bced7e74a369601f77d28fd9fd6fbe24aa46eece3d0c820dfd3d6f84",
+              "link": "tools/oracles/verify_original_save_list_free.py#L1"
+            },
+            {
+              "path": "tests/probes/native_save_file_list_probe.cpp",
+              "line": 1,
+              "sha256": "8d04b72f060080006b9eb380a90d7d7fd3213683534fdaea988997d0dc9c2df0",
+              "link": "tests/probes/native_save_file_list_probe.cpp#L1"
+            },
+            {
+              "path": "tests/probes/native_load_selected_save_probe.cpp",
+              "line": 1,
+              "sha256": "2607e72646bf027353e17045f9201bb8e5ef2d6b4930600c5907d1872e08be2f",
+              "link": "tests/probes/native_load_selected_save_probe.cpp#L1"
+            },
+            {
+              "path": "tests/probes/native_save_list_free_probe.cpp",
+              "line": 1,
+              "sha256": "870ec1a37cf6a9b9246a675245a7ee3f1864a0dcdf9efa01370f104feab8d1f9",
+              "link": "tests/probes/native_save_list_free_probe.cpp#L1"
+            },
+            {
+              "path": "tests/unit/save_file_codec.cpp",
+              "line": 1,
+              "sha256": "2e85cbbaac6ed2b0e7d4b9707eaeb2bf229c272a3cee908f9d045c18d25a578f",
+              "link": "tests/unit/save_file_codec.cpp#L1"
+            },
+            {
+              "path": "tests/unit/mac_save_files.cpp",
+              "line": 1,
+              "sha256": "b5ea0b28349394eaec920d1d42c2ee23accb42b8024bb1635bd600b95baf6a74",
+              "link": "tests/unit/mac_save_files.cpp#L1"
+            }
+          ],
+          "limits": "Fingerprint lists omit transitive save_data codec/header and verifier/shared helper closure. Discovery starts null, allocator never fails, callbacks do not mutate aliases, free holds no retained node/name aliases. Original sentinel name/time are tagged unknown and not compared, not proven zero/null. No full allocation/alias/lifetime equivalence, current dedicated mutants or separate holdout/raw observation streams. Reader conversion/format boundaries are not unrestricted CRT malformed-name/atoi overflow or Windows enumeration parity."
+        }
+      ],
+      "classification_limits": [
+        "Independent static review at frozen e694d4b. No builds, tests, oracles, mutations, providers, network, storage, delegates or gates run. User-reported Main gate 24054 was neither touched nor polled; no terminal verdict inferred.",
+        "Only these eleven exact maintained files and six exact stem modules are dispositioned. Consumers, Profiles and SaveCompletion are context only and retain their existing reviews. No whole save system, Session, Windows parity, full game, gameplay 63 FPS or campaign closure.",
+        "Accepted historical reports retain their original verdicts and limited fingerprint sets. Source semantic conformance is not a fresh fidelity pass. Missing raw observation streams, mutation and holdout bindings must be supplied before a behavior-bearing rewrite; counts alone cannot establish preservation.",
+        "Original addresses in annotations are provenance. The encoded 1392-byte record, dimensions 8/43, offsets, persisted padding, CRC seed 65535/polynomial 33800 and format strings are legitimate data/encoding. Raw source PCs, legacy reference availability and duplicated reference algorithms remain debt where identified.",
+        "Indeterminate malloc-sentinel content is exposed as optional FileInfo in the game API; list allocation, alias and release contracts are not fully separated/qualified. Preserve partial append/read and link semantics while resolving these boundaries."
+      ],
+      "evidence": [
+        {
+          "path": "src/game/save_file_list.hpp",
+          "line": 1,
+          "sha256": "87151c6639404ce7d4ddb25c149495405fe0ed29d791eeb0972966b4f88deeca",
+          "link": "src/game/save_file_list.hpp#L1",
+          "end_line": 70
+        },
+        {
+          "path": "src/game/save_file_list.cpp",
+          "line": 1,
+          "sha256": "6f5a7474fea7b977747f3df8b605224634176eef6c554a0a5c135d25c5cadf54",
+          "link": "src/game/save_file_list.cpp#L1",
+          "end_line": 189
+        },
+        {
+          "path": "docs/STYLE.md",
+          "line": 1,
+          "sha256": "bd44068383b2198cf5165c2869086c6cf7844b1c96be44db7194c768ee62afdd",
+          "link": "docs/STYLE.md#L1"
+        },
+        {
+          "path": "docs/ARCHITECTURE.md",
+          "line": 1,
+          "sha256": "01b08d262279a42140d0cc301322baba861e72e6f5c4f332e4b26da6d88026b7",
+          "link": "docs/ARCHITECTURE.md#L1"
+        },
+        {
+          "path": "docs/refactor-inventory/MODULE-REVIEW.md",
+          "line": 1,
+          "sha256": "aa94a5e19b17ebf362c49c741423b9d87a6852dc50cd448baaa3749487103ca5",
+          "link": "docs/refactor-inventory/MODULE-REVIEW.md#L1"
+        }
+      ],
+      "findings": [
+        "SL1",
+        "SL2"
+      ],
+      "reviewed_source_sha256": "87151c6639404ce7d4ddb25c149495405fe0ed29d791eeb0972966b4f88deeca",
+      "limits": [
+        "Independent static review at frozen e694d4b. No builds, tests, oracles, mutations, providers, network, storage, delegates or gates run. User-reported Main gate 24054 was neither touched nor polled; no terminal verdict inferred.",
+        "Only these eleven exact maintained files and six exact stem modules are dispositioned. Consumers, Profiles and SaveCompletion are context only and retain their existing reviews. No whole save system, Session, Windows parity, full game, gameplay 63 FPS or campaign closure.",
+        "Accepted historical reports retain their original verdicts and limited fingerprint sets. Source semantic conformance is not a fresh fidelity pass. Missing raw observation streams, mutation and holdout bindings must be supplied before a behavior-bearing rewrite; counts alone cannot establish preservation.",
+        "Original addresses in annotations are provenance. The encoded 1392-byte record, dimensions 8/43, offsets, persisted padding, CRC seed 65535/polynomial 33800 and format strings are legitimate data/encoding. Raw source PCs, legacy reference availability and duplicated reference algorithms remain debt where identified.",
+        "Indeterminate malloc-sentinel content is exposed as optional FileInfo in the game API; list allocation, alias and release contracts are not fully separated/qualified. Preserve partial append/read and link semantics while resolving these boundaries."
+      ]
+    },
+    "src/game/save_file_list.cpp": {
+      "disposition": "needs_migration",
+      "reason": "Indeterminate malloc-sentinel content is exposed as optional FileInfo in the game API; list allocation, alias and release contracts are not fully separated/qualified. Preserve partial append/read and link semantics while resolving these boundaries.",
+      "semantic_justification": "All Reader overloads/decoding fields and list/search/load/free bodies were read. Decode is inverse little-endian 1392 bytes including explicit padding. First append allocates only a sentinel regardless of supplied name; nonempty append links new node before checking missing name, preserving partial publication. load initializes current/rings only when list exists, traverses selected live count, leaves fallback path uninitialized, publishes partial fread bytes over previous encoded data, ignores complete-item return and then closes. Enumeration creates sentinel before search, preserves provider order/time, opens even rejected slots, publishes every partial read, validates full-item/nonzero slot<100/CRC before append, caps at 99 and closes file before next/search-close. List node/name allocation and retained aliases are not equivalent to unrestricted CRT heap lifetime, and malformed/missing resource boundaries are explicit failures rather than fabricated success.",
+      "resolved_owners": [
+        {
+          "resolution": "Session owns exactly one save::Profiles (current and distinct menu_backup) before LogoScene construction; logo, capture, writer, load, enumeration, display and menu predicates borrow current. GameModeLeafState owns one Profiles in its separate reference world, exposing only options/six life slots with separate knownness. No second live cache is authorized. Session owns selected_save_name_ allocation and save_name_ visible borrowed pointer independently; TitleScene and writer borrow the same pointer. Native null is actual absence; SaveNameReference unknown/nonzero source markers are identities, never strings.",
+          "evidence": [
+            {
+              "path": "src/game/save_profiles.hpp",
+              "line": 1,
+              "sha256": "7fa1443e5382027559c51bc32694ee1fe370548adfe2a784f6e9fe3cbf70fdff",
+              "link": "src/game/save_profiles.hpp#L1"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 1,
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086",
+              "link": "src/runtime/native_session.hpp#L1"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 1,
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c",
+              "link": "src/runtime/native_session.cpp#L1"
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "line": 1,
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a",
+              "link": "src/runtime/native_save.cpp#L1"
+            },
+            {
+              "path": "src/guest/game_mode_leaves_reference.hpp",
+              "line": 1,
+              "sha256": "5e3f17d271ca0d4c941f3bb00af800f455b87f7c6f88c21de4427281df73a25b",
+              "link": "src/guest/game_mode_leaves_reference.hpp#L1"
+            },
+            {
+              "path": "src/guest/save_name_reference.hpp",
+              "line": 1,
+              "sha256": "ac24fe644fd30d6dbae9349915f5118d8a77056e88428d9db445bdb1c19a7bbf",
+              "link": "src/guest/save_name_reference.hpp#L1"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "TitleScene::count_save_files/load_selected_save and cleanup/free_save_list share Session.list_data_ and current; confirmation traverses the same list after transition callbacks, display borrows it. SaveFiles provider owns native DIR/FILE lifetimes, not game records or list nodes. free_save_list explicit unlink order is distinct from shared_ptr destruction when consumers retain aliases.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 1,
+              "sha256": "b2192da9fc1a860b432d09030beaf120a810d5442a2188b0c3b8e44b87d82ad8",
+              "link": "src/runtime/native_title_tasks.cpp#L1"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 1,
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c",
+              "link": "src/runtime/native_session.cpp#L1"
+            },
+            {
+              "path": "src/runtime/native_file_select_display.cpp",
+              "line": 1,
+              "sha256": "7f8c435c0e9f718d1b5bd535c07aa68ef6ddfdd356451e36152579bd285e9fc1",
+              "link": "src/runtime/native_file_select_display.cpp#L1"
+            },
+            {
+              "path": "src/game/menu_dialog_file_select.cpp",
+              "line": 1,
+              "sha256": "d089e6e3aa787cd6b72da914366543c132de9d1680ad589079244b7e3a04d8d7",
+              "link": "src/game/menu_dialog_file_select.cpp#L1"
+            },
+            {
+              "path": "src/game/file_select_display.cpp",
+              "line": 1,
+              "sha256": "0a4952c71f8251f5c49321ab43859e399df3a2750e6e6b667f4850f9907124b7",
+              "link": "src/game/file_select_display.cpp#L1"
+            },
+            {
+              "path": "src/platform/mac/mac_save_files.cpp",
+              "line": 1,
+              "sha256": "0258d17bda7a0881bf0a5d0ec824cb3b127d436cfd579677739d2af62f8d19d1",
+              "link": "src/platform/mac/mac_save_files.cpp#L1"
+            },
+            {
+              "path": "src/platform/mac/mac_save_files.hpp",
+              "line": 1,
+              "sha256": "c562b3fdedfdc00b382c286ee0719466a7ad0cd705f3c5ccd879f96ad18f3940",
+              "link": "src/platform/mac/mac_save_files.hpp#L1"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Historical discovery348, selected-load368 and reverse-free101 observations; every native_sources entry these three reports record matches current bytes. Probes compare live1392 bytes, list/timestamp/resource snapshots and stop prefixes; reverse free compares node destruction order0..100 nodes.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/save_file_list.json",
+              "line": 1,
+              "sha256": "a60ae551cf1015aa60a577b1ac7f9a5ce08c4483d9220574bb6cf9ac6b16dabd",
+              "link": "reference/oracle-reports/save_file_list.json#L1"
+            },
+            {
+              "path": "reference/oracle-reports/load_selected_save.json",
+              "line": 1,
+              "sha256": "706d63cc21f8564cb8e438b252e02cdc8e655cfa001bd7b7b3f7bc6781000561",
+              "link": "reference/oracle-reports/load_selected_save.json#L1"
+            },
+            {
+              "path": "reference/oracle-reports/save_list_free.json",
+              "line": 1,
+              "sha256": "f0022b82d005abd776a64b4989d6ac985349fb0d38ba39274b2b5cced5243889",
+              "link": "reference/oracle-reports/save_list_free.json#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_save_file_list.py",
+              "line": 1,
+              "sha256": "2e6cdf5ad65bc0253c2f8a0a6b630a0345c2e905db65859ab93637c73431fd85",
+              "link": "tools/oracles/verify_original_save_file_list.py#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_load_selected_save.py",
+              "line": 1,
+              "sha256": "16c0999ea4c798c6cbcfccfbedeb7bba922491114b03a1eb3552f825371e807a",
+              "link": "tools/oracles/verify_original_load_selected_save.py#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_save_list_free.py",
+              "line": 1,
+              "sha256": "182108e2bced7e74a369601f77d28fd9fd6fbe24aa46eece3d0c820dfd3d6f84",
+              "link": "tools/oracles/verify_original_save_list_free.py#L1"
+            },
+            {
+              "path": "tests/probes/native_save_file_list_probe.cpp",
+              "line": 1,
+              "sha256": "8d04b72f060080006b9eb380a90d7d7fd3213683534fdaea988997d0dc9c2df0",
+              "link": "tests/probes/native_save_file_list_probe.cpp#L1"
+            },
+            {
+              "path": "tests/probes/native_load_selected_save_probe.cpp",
+              "line": 1,
+              "sha256": "2607e72646bf027353e17045f9201bb8e5ef2d6b4930600c5907d1872e08be2f",
+              "link": "tests/probes/native_load_selected_save_probe.cpp#L1"
+            },
+            {
+              "path": "tests/probes/native_save_list_free_probe.cpp",
+              "line": 1,
+              "sha256": "870ec1a37cf6a9b9246a675245a7ee3f1864a0dcdf9efa01370f104feab8d1f9",
+              "link": "tests/probes/native_save_list_free_probe.cpp#L1"
+            },
+            {
+              "path": "tests/unit/save_file_codec.cpp",
+              "line": 1,
+              "sha256": "2e85cbbaac6ed2b0e7d4b9707eaeb2bf229c272a3cee908f9d045c18d25a578f",
+              "link": "tests/unit/save_file_codec.cpp#L1"
+            },
+            {
+              "path": "tests/unit/mac_save_files.cpp",
+              "line": 1,
+              "sha256": "b5ea0b28349394eaec920d1d42c2ee23accb42b8024bb1635bd600b95baf6a74",
+              "link": "tests/unit/mac_save_files.cpp#L1"
+            }
+          ],
+          "limits": "Fingerprint lists omit transitive save_data codec/header and verifier/shared helper closure. Discovery starts null, allocator never fails, callbacks do not mutate aliases, free holds no retained node/name aliases. Original sentinel name/time are tagged unknown and not compared, not proven zero/null. No full allocation/alias/lifetime equivalence, current dedicated mutants or separate holdout/raw observation streams. Reader conversion/format boundaries are not unrestricted CRT malformed-name/atoi overflow or Windows enumeration parity."
+        }
+      ],
+      "classification_limits": [
+        "Independent static review at frozen e694d4b. No builds, tests, oracles, mutations, providers, network, storage, delegates or gates run. User-reported Main gate 24054 was neither touched nor polled; no terminal verdict inferred.",
+        "Only these eleven exact maintained files and six exact stem modules are dispositioned. Consumers, Profiles and SaveCompletion are context only and retain their existing reviews. No whole save system, Session, Windows parity, full game, gameplay 63 FPS or campaign closure.",
+        "Accepted historical reports retain their original verdicts and limited fingerprint sets. Source semantic conformance is not a fresh fidelity pass. Missing raw observation streams, mutation and holdout bindings must be supplied before a behavior-bearing rewrite; counts alone cannot establish preservation.",
+        "Original addresses in annotations are provenance. The encoded 1392-byte record, dimensions 8/43, offsets, persisted padding, CRC seed 65535/polynomial 33800 and format strings are legitimate data/encoding. Raw source PCs, legacy reference availability and duplicated reference algorithms remain debt where identified.",
+        "Indeterminate malloc-sentinel content is exposed as optional FileInfo in the game API; list allocation, alias and release contracts are not fully separated/qualified. Preserve partial append/read and link semantics while resolving these boundaries."
+      ],
+      "evidence": [
+        {
+          "path": "src/game/save_file_list.hpp",
+          "line": 1,
+          "sha256": "87151c6639404ce7d4ddb25c149495405fe0ed29d791eeb0972966b4f88deeca",
+          "link": "src/game/save_file_list.hpp#L1",
+          "end_line": 70
+        },
+        {
+          "path": "src/game/save_file_list.cpp",
+          "line": 1,
+          "sha256": "6f5a7474fea7b977747f3df8b605224634176eef6c554a0a5c135d25c5cadf54",
+          "link": "src/game/save_file_list.cpp#L1",
+          "end_line": 189
+        },
+        {
+          "path": "docs/STYLE.md",
+          "line": 1,
+          "sha256": "bd44068383b2198cf5165c2869086c6cf7844b1c96be44db7194c768ee62afdd",
+          "link": "docs/STYLE.md#L1"
+        },
+        {
+          "path": "docs/ARCHITECTURE.md",
+          "line": 1,
+          "sha256": "01b08d262279a42140d0cc301322baba861e72e6f5c4f332e4b26da6d88026b7",
+          "link": "docs/ARCHITECTURE.md#L1"
+        },
+        {
+          "path": "docs/refactor-inventory/MODULE-REVIEW.md",
+          "line": 1,
+          "sha256": "aa94a5e19b17ebf362c49c741423b9d87a6852dc50cd448baaa3749487103ca5",
+          "link": "docs/refactor-inventory/MODULE-REVIEW.md#L1"
+        }
+      ],
+      "findings": [
+        "SL1",
+        "SL2"
+      ],
+      "reviewed_source_sha256": "6f5a7474fea7b977747f3df8b605224634176eef6c554a0a5c135d25c5cadf54",
+      "limits": [
+        "Independent static review at frozen e694d4b. No builds, tests, oracles, mutations, providers, network, storage, delegates or gates run. User-reported Main gate 24054 was neither touched nor polled; no terminal verdict inferred.",
+        "Only these eleven exact maintained files and six exact stem modules are dispositioned. Consumers, Profiles and SaveCompletion are context only and retain their existing reviews. No whole save system, Session, Windows parity, full game, gameplay 63 FPS or campaign closure.",
+        "Accepted historical reports retain their original verdicts and limited fingerprint sets. Source semantic conformance is not a fresh fidelity pass. Missing raw observation streams, mutation and holdout bindings must be supplied before a behavior-bearing rewrite; counts alone cannot establish preservation.",
+        "Original addresses in annotations are provenance. The encoded 1392-byte record, dimensions 8/43, offsets, persisted padding, CRC seed 65535/polynomial 33800 and format strings are legitimate data/encoding. Raw source PCs, legacy reference availability and duplicated reference algorithms remain debt where identified.",
+        "Indeterminate malloc-sentinel content is exposed as optional FileInfo in the game API; list allocation, alias and release contracts are not fully separated/qualified. Preserve partial append/read and link semantics while resolving these boundaries."
+      ]
+    },
+    "src/game/save_frame.hpp": {
+      "disposition": "needs_migration",
+      "reason": "Native slices are readable, but complete module integration remains a migration: guest/game_loop repeats the recovered scheduling algorithm with optional facts and address dispatch. Shared core needs a narrow lazy reference adapter; no moving game decisions into guest.",
+      "semantic_justification": "Both complete scheduling bodies and header were read. Byte counter wraps on ready!=0, then now_saving/exec publish before display. Phase comparison accepts exactly 1/-1 without normalizing other int32 values. Pending clears only after close callback succeeds. After helper clears exec before writer callback, rereads live now_saving, closes only if pending, then reloads pause after callback before exact 2->1 transition. Exceptions retain their earlier stores. FrameStateView borrows actual message identity and fields. Full intervening frame timing/render behavior is an external caller responsibility, not implemented by these slices.",
+      "resolved_owners": [
+        {
+          "resolution": "Session owns exactly one save::Profiles (current and distinct menu_backup) before LogoScene construction; logo, capture, writer, load, enumeration, display and menu predicates borrow current. GameModeLeafState owns one Profiles in its separate reference world, exposing only options/six life slots with separate knownness. No second live cache is authorized. Session owns selected_save_name_ allocation and save_name_ visible borrowed pointer independently; TitleScene and writer borrow the same pointer. Native null is actual absence; SaveNameReference unknown/nonzero source markers are identities, never strings.",
+          "evidence": [
+            {
+              "path": "src/game/save_profiles.hpp",
+              "line": 1,
+              "sha256": "7fa1443e5382027559c51bc32694ee1fe370548adfe2a784f6e9fe3cbf70fdff",
+              "link": "src/game/save_profiles.hpp#L1"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 1,
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086",
+              "link": "src/runtime/native_session.hpp#L1"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 1,
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c",
+              "link": "src/runtime/native_session.cpp#L1"
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "line": 1,
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a",
+              "link": "src/runtime/native_save.cpp#L1"
+            },
+            {
+              "path": "src/guest/game_mode_leaves_reference.hpp",
+              "line": 1,
+              "sha256": "5e3f17d271ca0d4c941f3bb00af800f455b87f7c6f88c21de4427281df73a25b",
+              "link": "src/guest/game_mode_leaves_reference.hpp#L1"
+            },
+            {
+              "path": "src/guest/save_name_reference.hpp",
+              "line": 1,
+              "sha256": "ac24fe644fd30d6dbae9349915f5118d8a77056e88428d9db445bdb1c19a7bbf",
+              "link": "src/guest/save_name_reference.hpp#L1"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Application::advance calls before helper after consume_draw_queue, then message/cursor/texture/render tail, frame counters and present_target, then after helper before Session.complete_frame. MessageServices borrows the same saving_message_, flags, flow and pause state, invokes saving_message::display/menu_caption::close_message and Session::write_live_save. This native composition is actual source, not the oracle timing receipt. Legacy guest/game_loop still repeats the scheduling branches rather than adapting the shared helper.",
+          "evidence": [
+            {
+              "path": "src/apps/sadx_native.mm",
+              "line": 1,
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2",
+              "link": "src/apps/sadx_native.mm#L1"
+            },
+            {
+              "path": "src/runtime/native_message_frame.cpp",
+              "line": 1,
+              "sha256": "e46cd9b32acf4611ceebc3e6477ee0d80fa395a33daa89362651e2c097869fa9",
+              "link": "src/runtime/native_message_frame.cpp#L1"
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "line": 1,
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a",
+              "link": "src/runtime/native_save.cpp#L1"
+            },
+            {
+              "path": "src/game/saving_message.cpp",
+              "line": 1,
+              "sha256": "2f2a7d1920d87449ac5c5ab140d338ca4dcece44ccc60880591bfc9dc55cc8d5",
+              "link": "src/game/saving_message.cpp#L1"
+            },
+            {
+              "path": "src/game/menu_caption.cpp",
+              "line": 1,
+              "sha256": "2304bcdaa3be7bb7ff5f1d0580830f515b93a82d1eecaadd69b9a54c506aa294",
+              "link": "src/game/menu_caption.cpp#L1"
+            },
+            {
+              "path": "src/guest/game_loop.cpp",
+              "line": 1,
+              "sha256": "6589264a723fdd763c296e424636bacfabdf6feec96dd5942844b9b8e3c5f8d1",
+              "link": "src/guest/game_loop.cpp#L1"
+            },
+            {
+              "path": "src/game/game_loop.hpp",
+              "line": 1,
+              "sha256": "2ec062e0c579953d48618d33a4c04eca8f43a117a061b7952ad8b71475120822",
+              "link": "src/game/game_loop.hpp#L1"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Historical2420 instruction-slice observations with live six-field callback replacement, stop prefixes, message identity, wrapping and composed CALL411d00 receipt; current native unit asserts order and thrown message/write/close prefixes. Connected20261021 source pins match both frame files.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/save_frame.json",
+              "line": 1,
+              "sha256": "c472a5a63bfb4ae7fb3f3b91eb894123023bff6ab4fc99fa6193b22d0ba582a6",
+              "link": "reference/oracle-reports/save_frame.json#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_save_frame.py",
+              "line": 1,
+              "sha256": "4bc1998b479827452c1ff178f51ad76948bb04d2936153e906f0db21b4d79e2c",
+              "link": "tools/oracles/verify_original_save_frame.py#L1"
+            },
+            {
+              "path": "tests/probes/native_save_frame_probe.cpp",
+              "line": 1,
+              "sha256": "a7164374ac895f6e04808b3a23083bd16ad161408e172b791ddabf70b617bcbf",
+              "link": "tests/probes/native_save_frame_probe.cpp#L1"
+            },
+            {
+              "path": "tests/unit/save_frame.cpp",
+              "line": 1,
+              "sha256": "20ff9563a4d87b74a0b117d603cb20d56421692a71ca93c9eb7bf2cd7ba4130f",
+              "link": "tests/unit/save_frame.cpp#L1"
+            },
+            {
+              "path": "reference/production-integration-20261021/native-fresh-save-connected.json",
+              "line": 1,
+              "sha256": "fcc8dc337ea497051c86cbe90faf93600b7545c2b3a34815bbd7fe2920d2bdc2",
+              "link": "reference/production-integration-20261021/native-fresh-save-connected.json#L1"
+            }
+          ],
+          "limits": "No fresh execution. Report pins only library, not complete maintained source/tools. Intervening render/message tail excluded; actual411d00 is a trapped receipt, not timing/platform proof. Native body snapshot matches historical source receipt, but reference loop still duplicated. No current dedicated frame mutants, separate holdout or complete raw stream available; not full frame/system conformance."
+        }
+      ],
+      "classification_limits": [
+        "Independent static review at frozen e694d4b. No builds, tests, oracles, mutations, providers, network, storage, delegates or gates run. User-reported Main gate 24054 was neither touched nor polled; no terminal verdict inferred.",
+        "Only these eleven exact maintained files and six exact stem modules are dispositioned. Consumers, Profiles and SaveCompletion are context only and retain their existing reviews. No whole save system, Session, Windows parity, full game, gameplay 63 FPS or campaign closure.",
+        "Accepted historical reports retain their original verdicts and limited fingerprint sets. Source semantic conformance is not a fresh fidelity pass. Missing raw observation streams, mutation and holdout bindings must be supplied before a behavior-bearing rewrite; counts alone cannot establish preservation.",
+        "Original addresses in annotations are provenance. The encoded 1392-byte record, dimensions 8/43, offsets, persisted padding, CRC seed 65535/polynomial 33800 and format strings are legitimate data/encoding. Raw source PCs, legacy reference availability and duplicated reference algorithms remain debt where identified.",
+        "Native slices are readable, but complete module integration remains a migration: guest/game_loop repeats the recovered scheduling algorithm with optional facts and address dispatch. Shared core needs a narrow lazy reference adapter; no moving game decisions into guest."
+      ],
+      "evidence": [
+        {
+          "path": "src/game/save_frame.hpp",
+          "line": 1,
+          "sha256": "e5b973917fc288291b1e2883b233f600ca5f8f5dbe83c725f62ca432dd47492b",
+          "link": "src/game/save_frame.hpp#L1",
+          "end_line": 32
+        },
+        {
+          "path": "src/game/save_frame.cpp",
+          "line": 1,
+          "sha256": "f91b96ece8f519fa9285daaca10b18d57397dc0ac1109159a0f2c17ab70aad76",
+          "link": "src/game/save_frame.cpp#L1",
+          "end_line": 31
+        },
+        {
+          "path": "docs/STYLE.md",
+          "line": 1,
+          "sha256": "bd44068383b2198cf5165c2869086c6cf7844b1c96be44db7194c768ee62afdd",
+          "link": "docs/STYLE.md#L1"
+        },
+        {
+          "path": "docs/ARCHITECTURE.md",
+          "line": 1,
+          "sha256": "01b08d262279a42140d0cc301322baba861e72e6f5c4f332e4b26da6d88026b7",
+          "link": "docs/ARCHITECTURE.md#L1"
+        },
+        {
+          "path": "docs/refactor-inventory/MODULE-REVIEW.md",
+          "line": 1,
+          "sha256": "aa94a5e19b17ebf362c49c741423b9d87a6852dc50cd448baaa3749487103ca5",
+          "link": "docs/refactor-inventory/MODULE-REVIEW.md#L1"
+        }
+      ],
+      "findings": [
+        "SF1",
+        "SC1"
+      ],
+      "reviewed_source_sha256": "e5b973917fc288291b1e2883b233f600ca5f8f5dbe83c725f62ca432dd47492b",
+      "limits": [
+        "Independent static review at frozen e694d4b. No builds, tests, oracles, mutations, providers, network, storage, delegates or gates run. User-reported Main gate 24054 was neither touched nor polled; no terminal verdict inferred.",
+        "Only these eleven exact maintained files and six exact stem modules are dispositioned. Consumers, Profiles and SaveCompletion are context only and retain their existing reviews. No whole save system, Session, Windows parity, full game, gameplay 63 FPS or campaign closure.",
+        "Accepted historical reports retain their original verdicts and limited fingerprint sets. Source semantic conformance is not a fresh fidelity pass. Missing raw observation streams, mutation and holdout bindings must be supplied before a behavior-bearing rewrite; counts alone cannot establish preservation.",
+        "Original addresses in annotations are provenance. The encoded 1392-byte record, dimensions 8/43, offsets, persisted padding, CRC seed 65535/polynomial 33800 and format strings are legitimate data/encoding. Raw source PCs, legacy reference availability and duplicated reference algorithms remain debt where identified.",
+        "Native slices are readable, but complete module integration remains a migration: guest/game_loop repeats the recovered scheduling algorithm with optional facts and address dispatch. Shared core needs a narrow lazy reference adapter; no moving game decisions into guest."
+      ]
+    },
+    "src/game/save_frame.cpp": {
+      "disposition": "needs_migration",
+      "reason": "Native slices are readable, but complete module integration remains a migration: guest/game_loop repeats the recovered scheduling algorithm with optional facts and address dispatch. Shared core needs a narrow lazy reference adapter; no moving game decisions into guest.",
+      "semantic_justification": "Both complete scheduling bodies and header were read. Byte counter wraps on ready!=0, then now_saving/exec publish before display. Phase comparison accepts exactly 1/-1 without normalizing other int32 values. Pending clears only after close callback succeeds. After helper clears exec before writer callback, rereads live now_saving, closes only if pending, then reloads pause after callback before exact 2->1 transition. Exceptions retain their earlier stores. FrameStateView borrows actual message identity and fields. Full intervening frame timing/render behavior is an external caller responsibility, not implemented by these slices.",
+      "resolved_owners": [
+        {
+          "resolution": "Session owns exactly one save::Profiles (current and distinct menu_backup) before LogoScene construction; logo, capture, writer, load, enumeration, display and menu predicates borrow current. GameModeLeafState owns one Profiles in its separate reference world, exposing only options/six life slots with separate knownness. No second live cache is authorized. Session owns selected_save_name_ allocation and save_name_ visible borrowed pointer independently; TitleScene and writer borrow the same pointer. Native null is actual absence; SaveNameReference unknown/nonzero source markers are identities, never strings.",
+          "evidence": [
+            {
+              "path": "src/game/save_profiles.hpp",
+              "line": 1,
+              "sha256": "7fa1443e5382027559c51bc32694ee1fe370548adfe2a784f6e9fe3cbf70fdff",
+              "link": "src/game/save_profiles.hpp#L1"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 1,
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086",
+              "link": "src/runtime/native_session.hpp#L1"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 1,
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c",
+              "link": "src/runtime/native_session.cpp#L1"
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "line": 1,
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a",
+              "link": "src/runtime/native_save.cpp#L1"
+            },
+            {
+              "path": "src/guest/game_mode_leaves_reference.hpp",
+              "line": 1,
+              "sha256": "5e3f17d271ca0d4c941f3bb00af800f455b87f7c6f88c21de4427281df73a25b",
+              "link": "src/guest/game_mode_leaves_reference.hpp#L1"
+            },
+            {
+              "path": "src/guest/save_name_reference.hpp",
+              "line": 1,
+              "sha256": "ac24fe644fd30d6dbae9349915f5118d8a77056e88428d9db445bdb1c19a7bbf",
+              "link": "src/guest/save_name_reference.hpp#L1"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Application::advance calls before helper after consume_draw_queue, then message/cursor/texture/render tail, frame counters and present_target, then after helper before Session.complete_frame. MessageServices borrows the same saving_message_, flags, flow and pause state, invokes saving_message::display/menu_caption::close_message and Session::write_live_save. This native composition is actual source, not the oracle timing receipt. Legacy guest/game_loop still repeats the scheduling branches rather than adapting the shared helper.",
+          "evidence": [
+            {
+              "path": "src/apps/sadx_native.mm",
+              "line": 1,
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2",
+              "link": "src/apps/sadx_native.mm#L1"
+            },
+            {
+              "path": "src/runtime/native_message_frame.cpp",
+              "line": 1,
+              "sha256": "e46cd9b32acf4611ceebc3e6477ee0d80fa395a33daa89362651e2c097869fa9",
+              "link": "src/runtime/native_message_frame.cpp#L1"
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "line": 1,
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a",
+              "link": "src/runtime/native_save.cpp#L1"
+            },
+            {
+              "path": "src/game/saving_message.cpp",
+              "line": 1,
+              "sha256": "2f2a7d1920d87449ac5c5ab140d338ca4dcece44ccc60880591bfc9dc55cc8d5",
+              "link": "src/game/saving_message.cpp#L1"
+            },
+            {
+              "path": "src/game/menu_caption.cpp",
+              "line": 1,
+              "sha256": "2304bcdaa3be7bb7ff5f1d0580830f515b93a82d1eecaadd69b9a54c506aa294",
+              "link": "src/game/menu_caption.cpp#L1"
+            },
+            {
+              "path": "src/guest/game_loop.cpp",
+              "line": 1,
+              "sha256": "6589264a723fdd763c296e424636bacfabdf6feec96dd5942844b9b8e3c5f8d1",
+              "link": "src/guest/game_loop.cpp#L1"
+            },
+            {
+              "path": "src/game/game_loop.hpp",
+              "line": 1,
+              "sha256": "2ec062e0c579953d48618d33a4c04eca8f43a117a061b7952ad8b71475120822",
+              "link": "src/game/game_loop.hpp#L1"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Historical2420 instruction-slice observations with live six-field callback replacement, stop prefixes, message identity, wrapping and composed CALL411d00 receipt; current native unit asserts order and thrown message/write/close prefixes. Connected20261021 source pins match both frame files.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/save_frame.json",
+              "line": 1,
+              "sha256": "c472a5a63bfb4ae7fb3f3b91eb894123023bff6ab4fc99fa6193b22d0ba582a6",
+              "link": "reference/oracle-reports/save_frame.json#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_save_frame.py",
+              "line": 1,
+              "sha256": "4bc1998b479827452c1ff178f51ad76948bb04d2936153e906f0db21b4d79e2c",
+              "link": "tools/oracles/verify_original_save_frame.py#L1"
+            },
+            {
+              "path": "tests/probes/native_save_frame_probe.cpp",
+              "line": 1,
+              "sha256": "a7164374ac895f6e04808b3a23083bd16ad161408e172b791ddabf70b617bcbf",
+              "link": "tests/probes/native_save_frame_probe.cpp#L1"
+            },
+            {
+              "path": "tests/unit/save_frame.cpp",
+              "line": 1,
+              "sha256": "20ff9563a4d87b74a0b117d603cb20d56421692a71ca93c9eb7bf2cd7ba4130f",
+              "link": "tests/unit/save_frame.cpp#L1"
+            },
+            {
+              "path": "reference/production-integration-20261021/native-fresh-save-connected.json",
+              "line": 1,
+              "sha256": "fcc8dc337ea497051c86cbe90faf93600b7545c2b3a34815bbd7fe2920d2bdc2",
+              "link": "reference/production-integration-20261021/native-fresh-save-connected.json#L1"
+            }
+          ],
+          "limits": "No fresh execution. Report pins only library, not complete maintained source/tools. Intervening render/message tail excluded; actual411d00 is a trapped receipt, not timing/platform proof. Native body snapshot matches historical source receipt, but reference loop still duplicated. No current dedicated frame mutants, separate holdout or complete raw stream available; not full frame/system conformance."
+        }
+      ],
+      "classification_limits": [
+        "Independent static review at frozen e694d4b. No builds, tests, oracles, mutations, providers, network, storage, delegates or gates run. User-reported Main gate 24054 was neither touched nor polled; no terminal verdict inferred.",
+        "Only these eleven exact maintained files and six exact stem modules are dispositioned. Consumers, Profiles and SaveCompletion are context only and retain their existing reviews. No whole save system, Session, Windows parity, full game, gameplay 63 FPS or campaign closure.",
+        "Accepted historical reports retain their original verdicts and limited fingerprint sets. Source semantic conformance is not a fresh fidelity pass. Missing raw observation streams, mutation and holdout bindings must be supplied before a behavior-bearing rewrite; counts alone cannot establish preservation.",
+        "Original addresses in annotations are provenance. The encoded 1392-byte record, dimensions 8/43, offsets, persisted padding, CRC seed 65535/polynomial 33800 and format strings are legitimate data/encoding. Raw source PCs, legacy reference availability and duplicated reference algorithms remain debt where identified.",
+        "Native slices are readable, but complete module integration remains a migration: guest/game_loop repeats the recovered scheduling algorithm with optional facts and address dispatch. Shared core needs a narrow lazy reference adapter; no moving game decisions into guest."
+      ],
+      "evidence": [
+        {
+          "path": "src/game/save_frame.hpp",
+          "line": 1,
+          "sha256": "e5b973917fc288291b1e2883b233f600ca5f8f5dbe83c725f62ca432dd47492b",
+          "link": "src/game/save_frame.hpp#L1",
+          "end_line": 32
+        },
+        {
+          "path": "src/game/save_frame.cpp",
+          "line": 1,
+          "sha256": "f91b96ece8f519fa9285daaca10b18d57397dc0ac1109159a0f2c17ab70aad76",
+          "link": "src/game/save_frame.cpp#L1",
+          "end_line": 31
+        },
+        {
+          "path": "docs/STYLE.md",
+          "line": 1,
+          "sha256": "bd44068383b2198cf5165c2869086c6cf7844b1c96be44db7194c768ee62afdd",
+          "link": "docs/STYLE.md#L1"
+        },
+        {
+          "path": "docs/ARCHITECTURE.md",
+          "line": 1,
+          "sha256": "01b08d262279a42140d0cc301322baba861e72e6f5c4f332e4b26da6d88026b7",
+          "link": "docs/ARCHITECTURE.md#L1"
+        },
+        {
+          "path": "docs/refactor-inventory/MODULE-REVIEW.md",
+          "line": 1,
+          "sha256": "aa94a5e19b17ebf362c49c741423b9d87a6852dc50cd448baaa3749487103ca5",
+          "link": "docs/refactor-inventory/MODULE-REVIEW.md#L1"
+        }
+      ],
+      "findings": [
+        "SF1",
+        "SC1"
+      ],
+      "reviewed_source_sha256": "f91b96ece8f519fa9285daaca10b18d57397dc0ac1109159a0f2c17ab70aad76",
+      "limits": [
+        "Independent static review at frozen e694d4b. No builds, tests, oracles, mutations, providers, network, storage, delegates or gates run. User-reported Main gate 24054 was neither touched nor polled; no terminal verdict inferred.",
+        "Only these eleven exact maintained files and six exact stem modules are dispositioned. Consumers, Profiles and SaveCompletion are context only and retain their existing reviews. No whole save system, Session, Windows parity, full game, gameplay 63 FPS or campaign closure.",
+        "Accepted historical reports retain their original verdicts and limited fingerprint sets. Source semantic conformance is not a fresh fidelity pass. Missing raw observation streams, mutation and holdout bindings must be supplied before a behavior-bearing rewrite; counts alone cannot establish preservation.",
+        "Original addresses in annotations are provenance. The encoded 1392-byte record, dimensions 8/43, offsets, persisted padding, CRC seed 65535/polynomial 33800 and format strings are legitimate data/encoding. Raw source PCs, legacy reference availability and duplicated reference algorithms remain debt where identified.",
+        "Native slices are readable, but complete module integration remains a migration: guest/game_loop repeats the recovered scheduling algorithm with optional facts and address dispatch. Shared core needs a narrow lazy reference adapter; no moving game decisions into guest."
+      ]
+    }
+  },
+  "modules": {
+    "src/game/save_file_list": {
+      "disposition": "needs_migration",
+      "reason": "Indeterminate malloc-sentinel content is exposed as optional FileInfo in the game API; list allocation, alias and release contracts are not fully separated/qualified. Preserve partial append/read and link semantics while resolving these boundaries.",
+      "semantic_justification": "All Reader overloads/decoding fields and list/search/load/free bodies were read. Decode is inverse little-endian 1392 bytes including explicit padding. First append allocates only a sentinel regardless of supplied name; nonempty append links new node before checking missing name, preserving partial publication. load initializes current/rings only when list exists, traverses selected live count, leaves fallback path uninitialized, publishes partial fread bytes over previous encoded data, ignores complete-item return and then closes. Enumeration creates sentinel before search, preserves provider order/time, opens even rejected slots, publishes every partial read, validates full-item/nonzero slot<100/CRC before append, caps at 99 and closes file before next/search-close. List node/name allocation and retained aliases are not equivalent to unrestricted CRT heap lifetime, and malformed/missing resource boundaries are explicit failures rather than fabricated success.",
+      "resolved_owners": [
+        {
+          "resolution": "Session owns exactly one save::Profiles (current and distinct menu_backup) before LogoScene construction; logo, capture, writer, load, enumeration, display and menu predicates borrow current. GameModeLeafState owns one Profiles in its separate reference world, exposing only options/six life slots with separate knownness. No second live cache is authorized. Session owns selected_save_name_ allocation and save_name_ visible borrowed pointer independently; TitleScene and writer borrow the same pointer. Native null is actual absence; SaveNameReference unknown/nonzero source markers are identities, never strings.",
+          "evidence": [
+            {
+              "path": "src/game/save_profiles.hpp",
+              "line": 1,
+              "sha256": "7fa1443e5382027559c51bc32694ee1fe370548adfe2a784f6e9fe3cbf70fdff",
+              "link": "src/game/save_profiles.hpp#L1"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 1,
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086",
+              "link": "src/runtime/native_session.hpp#L1"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 1,
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c",
+              "link": "src/runtime/native_session.cpp#L1"
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "line": 1,
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a",
+              "link": "src/runtime/native_save.cpp#L1"
+            },
+            {
+              "path": "src/guest/game_mode_leaves_reference.hpp",
+              "line": 1,
+              "sha256": "5e3f17d271ca0d4c941f3bb00af800f455b87f7c6f88c21de4427281df73a25b",
+              "link": "src/guest/game_mode_leaves_reference.hpp#L1"
+            },
+            {
+              "path": "src/guest/save_name_reference.hpp",
+              "line": 1,
+              "sha256": "ac24fe644fd30d6dbae9349915f5118d8a77056e88428d9db445bdb1c19a7bbf",
+              "link": "src/guest/save_name_reference.hpp#L1"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "TitleScene::count_save_files/load_selected_save and cleanup/free_save_list share Session.list_data_ and current; confirmation traverses the same list after transition callbacks, display borrows it. SaveFiles provider owns native DIR/FILE lifetimes, not game records or list nodes. free_save_list explicit unlink order is distinct from shared_ptr destruction when consumers retain aliases.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 1,
+              "sha256": "b2192da9fc1a860b432d09030beaf120a810d5442a2188b0c3b8e44b87d82ad8",
+              "link": "src/runtime/native_title_tasks.cpp#L1"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 1,
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c",
+              "link": "src/runtime/native_session.cpp#L1"
+            },
+            {
+              "path": "src/runtime/native_file_select_display.cpp",
+              "line": 1,
+              "sha256": "7f8c435c0e9f718d1b5bd535c07aa68ef6ddfdd356451e36152579bd285e9fc1",
+              "link": "src/runtime/native_file_select_display.cpp#L1"
+            },
+            {
+              "path": "src/game/menu_dialog_file_select.cpp",
+              "line": 1,
+              "sha256": "d089e6e3aa787cd6b72da914366543c132de9d1680ad589079244b7e3a04d8d7",
+              "link": "src/game/menu_dialog_file_select.cpp#L1"
+            },
+            {
+              "path": "src/game/file_select_display.cpp",
+              "line": 1,
+              "sha256": "0a4952c71f8251f5c49321ab43859e399df3a2750e6e6b667f4850f9907124b7",
+              "link": "src/game/file_select_display.cpp#L1"
+            },
+            {
+              "path": "src/platform/mac/mac_save_files.cpp",
+              "line": 1,
+              "sha256": "0258d17bda7a0881bf0a5d0ec824cb3b127d436cfd579677739d2af62f8d19d1",
+              "link": "src/platform/mac/mac_save_files.cpp#L1"
+            },
+            {
+              "path": "src/platform/mac/mac_save_files.hpp",
+              "line": 1,
+              "sha256": "c562b3fdedfdc00b382c286ee0719466a7ad0cd705f3c5ccd879f96ad18f3940",
+              "link": "src/platform/mac/mac_save_files.hpp#L1"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Historical discovery348, selected-load368 and reverse-free101 observations; every native_sources entry these three reports record matches current bytes. Probes compare live1392 bytes, list/timestamp/resource snapshots and stop prefixes; reverse free compares node destruction order0..100 nodes.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/save_file_list.json",
+              "line": 1,
+              "sha256": "a60ae551cf1015aa60a577b1ac7f9a5ce08c4483d9220574bb6cf9ac6b16dabd",
+              "link": "reference/oracle-reports/save_file_list.json#L1"
+            },
+            {
+              "path": "reference/oracle-reports/load_selected_save.json",
+              "line": 1,
+              "sha256": "706d63cc21f8564cb8e438b252e02cdc8e655cfa001bd7b7b3f7bc6781000561",
+              "link": "reference/oracle-reports/load_selected_save.json#L1"
+            },
+            {
+              "path": "reference/oracle-reports/save_list_free.json",
+              "line": 1,
+              "sha256": "f0022b82d005abd776a64b4989d6ac985349fb0d38ba39274b2b5cced5243889",
+              "link": "reference/oracle-reports/save_list_free.json#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_save_file_list.py",
+              "line": 1,
+              "sha256": "2e6cdf5ad65bc0253c2f8a0a6b630a0345c2e905db65859ab93637c73431fd85",
+              "link": "tools/oracles/verify_original_save_file_list.py#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_load_selected_save.py",
+              "line": 1,
+              "sha256": "16c0999ea4c798c6cbcfccfbedeb7bba922491114b03a1eb3552f825371e807a",
+              "link": "tools/oracles/verify_original_load_selected_save.py#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_save_list_free.py",
+              "line": 1,
+              "sha256": "182108e2bced7e74a369601f77d28fd9fd6fbe24aa46eece3d0c820dfd3d6f84",
+              "link": "tools/oracles/verify_original_save_list_free.py#L1"
+            },
+            {
+              "path": "tests/probes/native_save_file_list_probe.cpp",
+              "line": 1,
+              "sha256": "8d04b72f060080006b9eb380a90d7d7fd3213683534fdaea988997d0dc9c2df0",
+              "link": "tests/probes/native_save_file_list_probe.cpp#L1"
+            },
+            {
+              "path": "tests/probes/native_load_selected_save_probe.cpp",
+              "line": 1,
+              "sha256": "2607e72646bf027353e17045f9201bb8e5ef2d6b4930600c5907d1872e08be2f",
+              "link": "tests/probes/native_load_selected_save_probe.cpp#L1"
+            },
+            {
+              "path": "tests/probes/native_save_list_free_probe.cpp",
+              "line": 1,
+              "sha256": "870ec1a37cf6a9b9246a675245a7ee3f1864a0dcdf9efa01370f104feab8d1f9",
+              "link": "tests/probes/native_save_list_free_probe.cpp#L1"
+            },
+            {
+              "path": "tests/unit/save_file_codec.cpp",
+              "line": 1,
+              "sha256": "2e85cbbaac6ed2b0e7d4b9707eaeb2bf229c272a3cee908f9d045c18d25a578f",
+              "link": "tests/unit/save_file_codec.cpp#L1"
+            },
+            {
+              "path": "tests/unit/mac_save_files.cpp",
+              "line": 1,
+              "sha256": "b5ea0b28349394eaec920d1d42c2ee23accb42b8024bb1635bd600b95baf6a74",
+              "link": "tests/unit/mac_save_files.cpp#L1"
+            }
+          ],
+          "limits": "Fingerprint lists omit transitive save_data codec/header and verifier/shared helper closure. Discovery starts null, allocator never fails, callbacks do not mutate aliases, free holds no retained node/name aliases. Original sentinel name/time are tagged unknown and not compared, not proven zero/null. No full allocation/alias/lifetime equivalence, current dedicated mutants or separate holdout/raw observation streams. Reader conversion/format boundaries are not unrestricted CRT malformed-name/atoi overflow or Windows enumeration parity."
+        }
+      ],
+      "classification_limits": [
+        "Independent static review at frozen e694d4b. No builds, tests, oracles, mutations, providers, network, storage, delegates or gates run. User-reported Main gate 24054 was neither touched nor polled; no terminal verdict inferred.",
+        "Only these eleven exact maintained files and six exact stem modules are dispositioned. Consumers, Profiles and SaveCompletion are context only and retain their existing reviews. No whole save system, Session, Windows parity, full game, gameplay 63 FPS or campaign closure.",
+        "Accepted historical reports retain their original verdicts and limited fingerprint sets. Source semantic conformance is not a fresh fidelity pass. Missing raw observation streams, mutation and holdout bindings must be supplied before a behavior-bearing rewrite; counts alone cannot establish preservation.",
+        "Original addresses in annotations are provenance. The encoded 1392-byte record, dimensions 8/43, offsets, persisted padding, CRC seed 65535/polynomial 33800 and format strings are legitimate data/encoding. Raw source PCs, legacy reference availability and duplicated reference algorithms remain debt where identified.",
+        "Indeterminate malloc-sentinel content is exposed as optional FileInfo in the game API; list allocation, alias and release contracts are not fully separated/qualified. Preserve partial append/read and link semantics while resolving these boundaries."
+      ],
+      "evidence": [
+        {
+          "path": "src/game/save_file_list.hpp",
+          "line": 1,
+          "sha256": "87151c6639404ce7d4ddb25c149495405fe0ed29d791eeb0972966b4f88deeca",
+          "link": "src/game/save_file_list.hpp#L1",
+          "end_line": 70
+        },
+        {
+          "path": "src/game/save_file_list.cpp",
+          "line": 1,
+          "sha256": "6f5a7474fea7b977747f3df8b605224634176eef6c554a0a5c135d25c5cadf54",
+          "link": "src/game/save_file_list.cpp#L1",
+          "end_line": 189
+        },
+        {
+          "path": "docs/STYLE.md",
+          "line": 1,
+          "sha256": "bd44068383b2198cf5165c2869086c6cf7844b1c96be44db7194c768ee62afdd",
+          "link": "docs/STYLE.md#L1"
+        },
+        {
+          "path": "docs/ARCHITECTURE.md",
+          "line": 1,
+          "sha256": "01b08d262279a42140d0cc301322baba861e72e6f5c4f332e4b26da6d88026b7",
+          "link": "docs/ARCHITECTURE.md#L1"
+        },
+        {
+          "path": "docs/refactor-inventory/MODULE-REVIEW.md",
+          "line": 1,
+          "sha256": "aa94a5e19b17ebf362c49c741423b9d87a6852dc50cd448baaa3749487103ca5",
+          "link": "docs/refactor-inventory/MODULE-REVIEW.md#L1"
+        }
+      ],
+      "findings": [
+        "SL1",
+        "SL2"
+      ],
+      "reviewed_members": {
+        "src/game/save_file_list.hpp": "87151c6639404ce7d4ddb25c149495405fe0ed29d791eeb0972966b4f88deeca",
+        "src/game/save_file_list.cpp": "6f5a7474fea7b977747f3df8b605224634176eef6c554a0a5c135d25c5cadf54"
+      }
+    },
+    "src/game/save_frame": {
+      "disposition": "needs_migration",
+      "reason": "Native slices are readable, but complete module integration remains a migration: guest/game_loop repeats the recovered scheduling algorithm with optional facts and address dispatch. Shared core needs a narrow lazy reference adapter; no moving game decisions into guest.",
+      "semantic_justification": "Both complete scheduling bodies and header were read. Byte counter wraps on ready!=0, then now_saving/exec publish before display. Phase comparison accepts exactly 1/-1 without normalizing other int32 values. Pending clears only after close callback succeeds. After helper clears exec before writer callback, rereads live now_saving, closes only if pending, then reloads pause after callback before exact 2->1 transition. Exceptions retain their earlier stores. FrameStateView borrows actual message identity and fields. Full intervening frame timing/render behavior is an external caller responsibility, not implemented by these slices.",
+      "resolved_owners": [
+        {
+          "resolution": "Session owns exactly one save::Profiles (current and distinct menu_backup) before LogoScene construction; logo, capture, writer, load, enumeration, display and menu predicates borrow current. GameModeLeafState owns one Profiles in its separate reference world, exposing only options/six life slots with separate knownness. No second live cache is authorized. Session owns selected_save_name_ allocation and save_name_ visible borrowed pointer independently; TitleScene and writer borrow the same pointer. Native null is actual absence; SaveNameReference unknown/nonzero source markers are identities, never strings.",
+          "evidence": [
+            {
+              "path": "src/game/save_profiles.hpp",
+              "line": 1,
+              "sha256": "7fa1443e5382027559c51bc32694ee1fe370548adfe2a784f6e9fe3cbf70fdff",
+              "link": "src/game/save_profiles.hpp#L1"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 1,
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086",
+              "link": "src/runtime/native_session.hpp#L1"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 1,
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c",
+              "link": "src/runtime/native_session.cpp#L1"
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "line": 1,
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a",
+              "link": "src/runtime/native_save.cpp#L1"
+            },
+            {
+              "path": "src/guest/game_mode_leaves_reference.hpp",
+              "line": 1,
+              "sha256": "5e3f17d271ca0d4c941f3bb00af800f455b87f7c6f88c21de4427281df73a25b",
+              "link": "src/guest/game_mode_leaves_reference.hpp#L1"
+            },
+            {
+              "path": "src/guest/save_name_reference.hpp",
+              "line": 1,
+              "sha256": "ac24fe644fd30d6dbae9349915f5118d8a77056e88428d9db445bdb1c19a7bbf",
+              "link": "src/guest/save_name_reference.hpp#L1"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Application::advance calls before helper after consume_draw_queue, then message/cursor/texture/render tail, frame counters and present_target, then after helper before Session.complete_frame. MessageServices borrows the same saving_message_, flags, flow and pause state, invokes saving_message::display/menu_caption::close_message and Session::write_live_save. This native composition is actual source, not the oracle timing receipt. Legacy guest/game_loop still repeats the scheduling branches rather than adapting the shared helper.",
+          "evidence": [
+            {
+              "path": "src/apps/sadx_native.mm",
+              "line": 1,
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2",
+              "link": "src/apps/sadx_native.mm#L1"
+            },
+            {
+              "path": "src/runtime/native_message_frame.cpp",
+              "line": 1,
+              "sha256": "e46cd9b32acf4611ceebc3e6477ee0d80fa395a33daa89362651e2c097869fa9",
+              "link": "src/runtime/native_message_frame.cpp#L1"
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "line": 1,
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a",
+              "link": "src/runtime/native_save.cpp#L1"
+            },
+            {
+              "path": "src/game/saving_message.cpp",
+              "line": 1,
+              "sha256": "2f2a7d1920d87449ac5c5ab140d338ca4dcece44ccc60880591bfc9dc55cc8d5",
+              "link": "src/game/saving_message.cpp#L1"
+            },
+            {
+              "path": "src/game/menu_caption.cpp",
+              "line": 1,
+              "sha256": "2304bcdaa3be7bb7ff5f1d0580830f515b93a82d1eecaadd69b9a54c506aa294",
+              "link": "src/game/menu_caption.cpp#L1"
+            },
+            {
+              "path": "src/guest/game_loop.cpp",
+              "line": 1,
+              "sha256": "6589264a723fdd763c296e424636bacfabdf6feec96dd5942844b9b8e3c5f8d1",
+              "link": "src/guest/game_loop.cpp#L1"
+            },
+            {
+              "path": "src/game/game_loop.hpp",
+              "line": 1,
+              "sha256": "2ec062e0c579953d48618d33a4c04eca8f43a117a061b7952ad8b71475120822",
+              "link": "src/game/game_loop.hpp#L1"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Historical2420 instruction-slice observations with live six-field callback replacement, stop prefixes, message identity, wrapping and composed CALL411d00 receipt; current native unit asserts order and thrown message/write/close prefixes. Connected20261021 source pins match both frame files.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/save_frame.json",
+              "line": 1,
+              "sha256": "c472a5a63bfb4ae7fb3f3b91eb894123023bff6ab4fc99fa6193b22d0ba582a6",
+              "link": "reference/oracle-reports/save_frame.json#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_save_frame.py",
+              "line": 1,
+              "sha256": "4bc1998b479827452c1ff178f51ad76948bb04d2936153e906f0db21b4d79e2c",
+              "link": "tools/oracles/verify_original_save_frame.py#L1"
+            },
+            {
+              "path": "tests/probes/native_save_frame_probe.cpp",
+              "line": 1,
+              "sha256": "a7164374ac895f6e04808b3a23083bd16ad161408e172b791ddabf70b617bcbf",
+              "link": "tests/probes/native_save_frame_probe.cpp#L1"
+            },
+            {
+              "path": "tests/unit/save_frame.cpp",
+              "line": 1,
+              "sha256": "20ff9563a4d87b74a0b117d603cb20d56421692a71ca93c9eb7bf2cd7ba4130f",
+              "link": "tests/unit/save_frame.cpp#L1"
+            },
+            {
+              "path": "reference/production-integration-20261021/native-fresh-save-connected.json",
+              "line": 1,
+              "sha256": "fcc8dc337ea497051c86cbe90faf93600b7545c2b3a34815bbd7fe2920d2bdc2",
+              "link": "reference/production-integration-20261021/native-fresh-save-connected.json#L1"
+            }
+          ],
+          "limits": "No fresh execution. Report pins only library, not complete maintained source/tools. Intervening render/message tail excluded; actual411d00 is a trapped receipt, not timing/platform proof. Native body snapshot matches historical source receipt, but reference loop still duplicated. No current dedicated frame mutants, separate holdout or complete raw stream available; not full frame/system conformance."
+        }
+      ],
+      "classification_limits": [
+        "Independent static review at frozen e694d4b. No builds, tests, oracles, mutations, providers, network, storage, delegates or gates run. User-reported Main gate 24054 was neither touched nor polled; no terminal verdict inferred.",
+        "Only these eleven exact maintained files and six exact stem modules are dispositioned. Consumers, Profiles and SaveCompletion are context only and retain their existing reviews. No whole save system, Session, Windows parity, full game, gameplay 63 FPS or campaign closure.",
+        "Accepted historical reports retain their original verdicts and limited fingerprint sets. Source semantic conformance is not a fresh fidelity pass. Missing raw observation streams, mutation and holdout bindings must be supplied before a behavior-bearing rewrite; counts alone cannot establish preservation.",
+        "Original addresses in annotations are provenance. The encoded 1392-byte record, dimensions 8/43, offsets, persisted padding, CRC seed 65535/polynomial 33800 and format strings are legitimate data/encoding. Raw source PCs, legacy reference availability and duplicated reference algorithms remain debt where identified.",
+        "Native slices are readable, but complete module integration remains a migration: guest/game_loop repeats the recovered scheduling algorithm with optional facts and address dispatch. Shared core needs a narrow lazy reference adapter; no moving game decisions into guest."
+      ],
+      "evidence": [
+        {
+          "path": "src/game/save_frame.hpp",
+          "line": 1,
+          "sha256": "e5b973917fc288291b1e2883b233f600ca5f8f5dbe83c725f62ca432dd47492b",
+          "link": "src/game/save_frame.hpp#L1",
+          "end_line": 32
+        },
+        {
+          "path": "src/game/save_frame.cpp",
+          "line": 1,
+          "sha256": "f91b96ece8f519fa9285daaca10b18d57397dc0ac1109159a0f2c17ab70aad76",
+          "link": "src/game/save_frame.cpp#L1",
+          "end_line": 31
+        },
+        {
+          "path": "docs/STYLE.md",
+          "line": 1,
+          "sha256": "bd44068383b2198cf5165c2869086c6cf7844b1c96be44db7194c768ee62afdd",
+          "link": "docs/STYLE.md#L1"
+        },
+        {
+          "path": "docs/ARCHITECTURE.md",
+          "line": 1,
+          "sha256": "01b08d262279a42140d0cc301322baba861e72e6f5c4f332e4b26da6d88026b7",
+          "link": "docs/ARCHITECTURE.md#L1"
+        },
+        {
+          "path": "docs/refactor-inventory/MODULE-REVIEW.md",
+          "line": 1,
+          "sha256": "aa94a5e19b17ebf362c49c741423b9d87a6852dc50cd448baaa3749487103ca5",
+          "link": "docs/refactor-inventory/MODULE-REVIEW.md#L1"
+        }
+      ],
+      "findings": [
+        "SF1",
+        "SC1"
+      ],
+      "reviewed_members": {
+        "src/game/save_frame.hpp": "e5b973917fc288291b1e2883b233f600ca5f8f5dbe83c725f62ca432dd47492b",
+        "src/game/save_frame.cpp": "f91b96ece8f519fa9285daaca10b18d57397dc0ac1109159a0f2c17ab70aad76"
+      }
+    }
+  }
+}
