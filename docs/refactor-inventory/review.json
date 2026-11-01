@@ -3214,6 +3214,2197 @@
       "classification_limits": [
         "Purpose classification only; original judge comparisons remain protected and unchanged. No claim that a historical capture helper proves full lifecycle fidelity or closes module/campaign review."
       ]
+    },
+    "src/math/ninja_length.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Narrow semantic vector-length API with supported njScalor provenance; native exact-value return is deliberate.",
+      "reviewed_source_sha256": "30aa69ad39447239e4a8e88fe4abef9228282f2bfb7a0e23cd917045e06ce584",
+      "semantic_justification": "All eight lines reviewed. Const vector and mutable numerical context are explicit borrows. FUNCTION annotation matches SDK fastcall njScalor at 0x787cc0 and cached assembly ECX input/x87 result. C++ API does not expose ECX or original pointer/stack layout. ExactFloat preserves the unrounded register return for callers choosing the store boundary; no optional fixture availability, executable read, duplicated state or invented service. Header itself needs no rewrite.",
+      "evidence": [
+        {
+          "path": "src/math/ninja_length.hpp",
+          "line": 1,
+          "sha256": "30aa69ad39447239e4a8e88fe4abef9228282f2bfb7a0e23cd917045e06ce584",
+          "link": "src/math/ninja_length.hpp#L1",
+          "end_line": 8
+        },
+        {
+          "path": "/Users/burbujamc/Developer/sadx-macos/reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+          "line": 2766,
+          "sha256": "a2e634caff8d12d20adfe910b5b2db19e2da59cc1c4bb5e913e1df212d55327c",
+          "link": "/Users/burbujamc/Developer/sadx-macos/reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h#L2766"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "No persistent mutable state. vector_length borrows NinjaVector and fidelity::Context, creates local exact values; context mutation is caller-owned FP state. collision::calculate_range passes its Context. No source memory/global identity is transported.",
+          "evidence": [
+            {
+              "path": "src/math/ninja_length.hpp",
+              "line": 6,
+              "sha256": "30aa69ad39447239e4a8e88fe4abef9228282f2bfb7a0e23cd917045e06ce584",
+              "link": "src/math/ninja_length.hpp#L6"
+            },
+            {
+              "path": "src/math/ninja_length.cpp",
+              "line": 4,
+              "sha256": "dc803f7399f49d809d5a467e76203103da8507f08fee5306626282573b7a3c75",
+              "link": "src/math/ninja_length.cpp#L4",
+              "end_line": 12
+            },
+            {
+              "path": "src/engine/collision_component.cpp",
+              "line": 109,
+              "sha256": "e6a9e37e956ebe2f7a54344f5b17e447f182c8e502432ee28aeef115717ee3e5",
+              "link": "src/engine/collision_component.cpp#L109",
+              "end_line": 126
+            }
+          ]
+        },
+        {
+          "resolution": "Canonical recovered implementation closure is unresolved: player::rotation_vector_length reproduces the same 0x787cc0 load/square/z+y+x/spill/signed-root body. This is duplicated recovered behavior, not two legitimate mutable state owners. Its callers are excluded from native-sources.txt but remain campaign targets. Do not remove either or route one to the other without unchanged source judges.",
+          "evidence": [
+            {
+              "path": "src/player/player_rotation.hpp",
+              "line": 46,
+              "sha256": "8bdf5a75ca53c7857db86c6f15778095257d3e58428de71b7f34e4b0b2cbeb32",
+              "link": "src/player/player_rotation.hpp#L46",
+              "end_line": 48
+            },
+            {
+              "path": "src/player/player_rotation.cpp",
+              "line": 124,
+              "sha256": "87e7f62da064257f47af017e596c3c61078a1c65ca05828d8d6c73903c835cbe",
+              "link": "src/player/player_rotation.cpp#L124",
+              "end_line": 130
+            },
+            {
+              "path": "native-sources.txt",
+              "line": 96,
+              "sha256": "13e462b1ddc2df160580f9c6caf8544f444d87ca907b2a89f32ceada33f24eec",
+              "link": "native-sources.txt#L96",
+              "end_line": 126
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "path": "src/engine/collision_component.cpp",
+          "line": 117,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "calculate_range calls vector_length for every center and rounds before extent; collision-component.cpp and ninja_length.cpp are explicitly native listed.",
+          "evidence": [
+            {
+              "path": "src/engine/collision_component.cpp",
+              "line": 117,
+              "sha256": "e6a9e37e956ebe2f7a54344f5b17e447f182c8e502432ee28aeef115717ee3e5",
+              "link": "src/engine/collision_component.cpp#L117"
+            }
+          ]
+        },
+        {
+          "path": "tests/probes/native_collision_component_probe.cpp",
+          "line": 173,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "test_reference",
+          "resolution": "C ABI scalar operation 0 calls vector_length; operation 1 judges signed_square_root separately.",
+          "evidence": [
+            {
+              "path": "tests/probes/native_collision_component_probe.cpp",
+              "line": 173,
+              "sha256": "b065feed332d3dfd95b6849d109c33415a8499cc62ce16564a0c2e35d7f281db",
+              "link": "tests/probes/native_collision_component_probe.cpp#L173"
+            }
+          ]
+        },
+        {
+          "path": "src/player/player_rotation.cpp",
+          "line": 124,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "excluded_native_source",
+          "resolution": "Related duplicate implementation, not a caller of vector_length. Consumed by passive rotation/player collision paths; excluded native implementation, not obsolete.",
+          "evidence": [
+            {
+              "path": "src/player/player_rotation.cpp",
+              "line": 124,
+              "sha256": "87e7f62da064257f47af017e596c3c61078a1c65ca05828d8d6c73903c835cbe",
+              "link": "src/player/player_rotation.cpp#L124"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "judge": "collision_component",
+          "acceptance": "Existing source-bound scalar judge and historical qualification, not a fresh pass. Six CWs, exceptional/random binary32 inputs. Scalar subreport combines njScalor and njSqrt: 888 comparisons, zero value mismatches, 834 FP partials in both dev and holdout; do not attribute all 888 to vector_length alone. Unit receipt exit 0; full dev 7964 cases / 6462 FP partials and holdout 8864 / 6834 FP partials; both exit 2. length_sum_order mutant caught with 45 value mismatches. Current helper source hashes equal proof source_hashes.",
+          "evidence": [
+            {
+              "path": "tools/oracles/verify_original_collision_component.py",
+              "line": 158,
+              "sha256": "3105d7e9acaf4a5509b45cfff6753a2daf0678548b831f325fdd883a2b82c90c",
+              "link": "tools/oracles/verify_original_collision_component.py#L158",
+              "end_line": 181
+            },
+            {
+              "path": "tests/probes/native_collision_component_probe.cpp",
+              "line": 173,
+              "sha256": "b065feed332d3dfd95b6849d109c33415a8499cc62ce16564a0c2e35d7f281db",
+              "link": "tests/probes/native_collision_component_probe.cpp#L173",
+              "end_line": 189
+            },
+            {
+              "path": "reference/production-integration-20261026/collision-component-core/proof.json",
+              "line": 1,
+              "sha256": "716f6e2f2273412617adfe5e9aa4a5457c3caf760e4c5a32eb47933730361852",
+              "link": "reference/production-integration-20261026/collision-component-core/proof.json#L1"
+            },
+            {
+              "path": "reference/production-integration-20261026/collision-component-core/dev.json",
+              "line": 1,
+              "sha256": "8e50b39091784713318d34ca703e1b800cda11ad27cb97bfc7e251db8e1a42e0",
+              "link": "reference/production-integration-20261026/collision-component-core/dev.json#L1"
+            },
+            {
+              "path": "reference/production-integration-20261026/collision-component-core/holdout.json",
+              "line": 1,
+              "sha256": "df3afd5690a3ff281af79b8aa7d759e2bf969f2e36705beeb0d0fa65b93190fd",
+              "link": "reference/production-integration-20261026/collision-component-core/holdout.json#L1"
+            },
+            {
+              "path": "reference/production-integration-20261026/collision-component-core/scalar-allocation.assembly.txt",
+              "line": 1,
+              "sha256": "ba00f9629bb2bece12c425ac28640ec249dbef7c845d793f8f3bcacd80c9b261",
+              "link": "reference/production-integration-20261026/collision-component-core/scalar-allocation.assembly.txt#L1",
+              "end_line": 31
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 282,
+              "sha256": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
+              "link": "tests/unit/manifest.tsv#L282"
+            }
+          ],
+          "limitations": "No dedicated ninja_length unit required by slug convention has been found; accepted coverage is the actual component scalar probe. Unrounded return ext80, full x87 stack/tag/deferred exceptions and all duplicate consumers are not established by binary32 scalar stores."
+        }
+      ],
+      "destination": "src/math; retain shared numerical implementation. Reference ABI, original dispatch-table selection and diagnostic PCs stay in src/guest or tests/probes, never move whole algorithm there.",
+      "findings": [],
+      "classification_limits": [
+        "Read-only semantic review of the exact source SHA-256 at the named base; no fresh source-fidelity pass or current native build/closure result.",
+        "Prior tracked receipts retain their bounded comparison and inherited failure status. Source equality establishes identity only.",
+        "Root must preserve full failing/partial case identities, full outputs, holdouts and mutation inputs before any behavior-bearing rewrite. Hardware Windows FP and real reciprocal-estimate capture are not supplied by these receipts.",
+        "Companion implementation canonical closure with rotation_vector_length remains open; header disposition is not module-wide conformance."
+      ]
+    },
+    "src/math/ninja_length.cpp": {
+      "disposition": "open_review",
+      "reason": "Body is readable and source-backed, but shared recovered-entry closure is unresolved because player_rotation.cpp retains a second njScalor implementation.",
+      "reviewed_source_sha256": "dc803f7399f49d809d5a467e76203103da8507f08fee5306626282573b7a3c75",
+      "semantic_justification": "All operations reviewed: load/square x then y then z; add z+y then x; explicitly spill binary32 before signed square root. ExactFloat is STYLE7 tier3 and is justified by six selected control words, exceptional values and source m64 signaling compare in signed-root callee. Plain sqrt(x*x+y*y+z*z) would erase sum order/spill/sign behavior. No addresses or fixture transport in this body. Do not rewrite the readable body merely to decrease x87 counts; resolve the duplicate and the same judges across both interfaces first.",
+      "evidence": [
+        {
+          "path": "src/math/ninja_length.cpp",
+          "line": 1,
+          "sha256": "dc803f7399f49d809d5a467e76203103da8507f08fee5306626282573b7a3c75",
+          "link": "src/math/ninja_length.cpp#L1",
+          "end_line": 14
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "No persistent mutable state. vector_length borrows NinjaVector and fidelity::Context, creates local exact values; context mutation is caller-owned FP state. collision::calculate_range passes its Context. No source memory/global identity is transported.",
+          "evidence": [
+            {
+              "path": "src/math/ninja_length.hpp",
+              "line": 6,
+              "sha256": "30aa69ad39447239e4a8e88fe4abef9228282f2bfb7a0e23cd917045e06ce584",
+              "link": "src/math/ninja_length.hpp#L6"
+            },
+            {
+              "path": "src/math/ninja_length.cpp",
+              "line": 4,
+              "sha256": "dc803f7399f49d809d5a467e76203103da8507f08fee5306626282573b7a3c75",
+              "link": "src/math/ninja_length.cpp#L4",
+              "end_line": 12
+            },
+            {
+              "path": "src/engine/collision_component.cpp",
+              "line": 109,
+              "sha256": "e6a9e37e956ebe2f7a54344f5b17e447f182c8e502432ee28aeef115717ee3e5",
+              "link": "src/engine/collision_component.cpp#L109",
+              "end_line": 126
+            }
+          ]
+        },
+        {
+          "resolution": "Canonical recovered implementation closure is unresolved: player::rotation_vector_length reproduces the same 0x787cc0 load/square/z+y+x/spill/signed-root body. This is duplicated recovered behavior, not two legitimate mutable state owners. Its callers are excluded from native-sources.txt but remain campaign targets. Do not remove either or route one to the other without unchanged source judges.",
+          "evidence": [
+            {
+              "path": "src/player/player_rotation.hpp",
+              "line": 46,
+              "sha256": "8bdf5a75ca53c7857db86c6f15778095257d3e58428de71b7f34e4b0b2cbeb32",
+              "link": "src/player/player_rotation.hpp#L46",
+              "end_line": 48
+            },
+            {
+              "path": "src/player/player_rotation.cpp",
+              "line": 124,
+              "sha256": "87e7f62da064257f47af017e596c3c61078a1c65ca05828d8d6c73903c835cbe",
+              "link": "src/player/player_rotation.cpp#L124",
+              "end_line": 130
+            },
+            {
+              "path": "native-sources.txt",
+              "line": 96,
+              "sha256": "13e462b1ddc2df160580f9c6caf8544f444d87ca907b2a89f32ceada33f24eec",
+              "link": "native-sources.txt#L96",
+              "end_line": 126
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "path": "src/engine/collision_component.cpp",
+          "line": 117,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "calculate_range calls vector_length for every center and rounds before extent; collision-component.cpp and ninja_length.cpp are explicitly native listed.",
+          "evidence": [
+            {
+              "path": "src/engine/collision_component.cpp",
+              "line": 117,
+              "sha256": "e6a9e37e956ebe2f7a54344f5b17e447f182c8e502432ee28aeef115717ee3e5",
+              "link": "src/engine/collision_component.cpp#L117"
+            }
+          ]
+        },
+        {
+          "path": "tests/probes/native_collision_component_probe.cpp",
+          "line": 173,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "test_reference",
+          "resolution": "C ABI scalar operation 0 calls vector_length; operation 1 judges signed_square_root separately.",
+          "evidence": [
+            {
+              "path": "tests/probes/native_collision_component_probe.cpp",
+              "line": 173,
+              "sha256": "b065feed332d3dfd95b6849d109c33415a8499cc62ce16564a0c2e35d7f281db",
+              "link": "tests/probes/native_collision_component_probe.cpp#L173"
+            }
+          ]
+        },
+        {
+          "path": "src/player/player_rotation.cpp",
+          "line": 124,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "excluded_native_source",
+          "resolution": "Related duplicate implementation, not a caller of vector_length. Consumed by passive rotation/player collision paths; excluded native implementation, not obsolete.",
+          "evidence": [
+            {
+              "path": "src/player/player_rotation.cpp",
+              "line": 124,
+              "sha256": "87e7f62da064257f47af017e596c3c61078a1c65ca05828d8d6c73903c835cbe",
+              "link": "src/player/player_rotation.cpp#L124"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "judge": "collision_component",
+          "acceptance": "Existing source-bound scalar judge and historical qualification, not a fresh pass. Six CWs, exceptional/random binary32 inputs. Scalar subreport combines njScalor and njSqrt: 888 comparisons, zero value mismatches, 834 FP partials in both dev and holdout; do not attribute all 888 to vector_length alone. Unit receipt exit 0; full dev 7964 cases / 6462 FP partials and holdout 8864 / 6834 FP partials; both exit 2. length_sum_order mutant caught with 45 value mismatches. Current helper source hashes equal proof source_hashes.",
+          "evidence": [
+            {
+              "path": "tools/oracles/verify_original_collision_component.py",
+              "line": 158,
+              "sha256": "3105d7e9acaf4a5509b45cfff6753a2daf0678548b831f325fdd883a2b82c90c",
+              "link": "tools/oracles/verify_original_collision_component.py#L158",
+              "end_line": 181
+            },
+            {
+              "path": "tests/probes/native_collision_component_probe.cpp",
+              "line": 173,
+              "sha256": "b065feed332d3dfd95b6849d109c33415a8499cc62ce16564a0c2e35d7f281db",
+              "link": "tests/probes/native_collision_component_probe.cpp#L173",
+              "end_line": 189
+            },
+            {
+              "path": "reference/production-integration-20261026/collision-component-core/proof.json",
+              "line": 1,
+              "sha256": "716f6e2f2273412617adfe5e9aa4a5457c3caf760e4c5a32eb47933730361852",
+              "link": "reference/production-integration-20261026/collision-component-core/proof.json#L1"
+            },
+            {
+              "path": "reference/production-integration-20261026/collision-component-core/dev.json",
+              "line": 1,
+              "sha256": "8e50b39091784713318d34ca703e1b800cda11ad27cb97bfc7e251db8e1a42e0",
+              "link": "reference/production-integration-20261026/collision-component-core/dev.json#L1"
+            },
+            {
+              "path": "reference/production-integration-20261026/collision-component-core/holdout.json",
+              "line": 1,
+              "sha256": "df3afd5690a3ff281af79b8aa7d759e2bf969f2e36705beeb0d0fa65b93190fd",
+              "link": "reference/production-integration-20261026/collision-component-core/holdout.json#L1"
+            },
+            {
+              "path": "reference/production-integration-20261026/collision-component-core/scalar-allocation.assembly.txt",
+              "line": 1,
+              "sha256": "ba00f9629bb2bece12c425ac28640ec249dbef7c845d793f8f3bcacd80c9b261",
+              "link": "reference/production-integration-20261026/collision-component-core/scalar-allocation.assembly.txt#L1",
+              "end_line": 31
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 282,
+              "sha256": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
+              "link": "tests/unit/manifest.tsv#L282"
+            }
+          ],
+          "limitations": "No dedicated ninja_length unit required by slug convention has been found; accepted coverage is the actual component scalar probe. Unrounded return ext80, full x87 stack/tag/deferred exceptions and all duplicate consumers are not established by binary32 scalar stores."
+        }
+      ],
+      "destination": "src/math; retain shared numerical implementation. Reference ABI, original dispatch-table selection and diagnostic PCs stay in src/guest or tests/probes, never move whole algorithm there.",
+      "findings": [
+        {
+          "id": "MATH-LENGTH-CLOSURE",
+          "path": "src/player/player_rotation.cpp",
+          "line": 124,
+          "detail": "Second maintained body implements the same recovered primitive while native component uses vector_length; old receipt alone does not close shared implementation and all callers.",
+          "required_change": "Review whether rotation_vector_length can retain API as a delegating wrapper to this shared helper under both unchanged judges; preserve exact return/store/context behavior. Root resolves outside-file consumers before declaring the system conforming.",
+          "evidence": [
+            {
+              "path": "src/player/player_rotation.cpp",
+              "line": 124,
+              "sha256": "87e7f62da064257f47af017e596c3c61078a1c65ca05828d8d6c73903c835cbe",
+              "link": "src/player/player_rotation.cpp#L124"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Read-only semantic review of the exact source SHA-256 at the named base; no fresh source-fidelity pass or current native build/closure result.",
+        "Prior tracked receipts retain their bounded comparison and inherited failure status. Source equality establishes identity only.",
+        "Root must preserve full failing/partial case identities, full outputs, holdouts and mutation inputs before any behavior-bearing rewrite. Hardware Windows FP and real reciprocal-estimate capture are not supplied by these receipts.",
+        "Open disposition concerns canonical recovered implementation, not untyped arithmetic or missing mutable owner. No standalone source qualification or all-consumer closure was performed."
+      ]
+    },
+    "src/math/ninja_sine_table.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Simple native numerical-data factory; NOTSA and value-copy ownership are explicit.",
+      "reviewed_source_sha256": "21dd2cc9bb5cf9dd36f15f3f0f79bded248962ecc0648309a99caa2259583f5b",
+      "semantic_justification": "All eight lines reviewed. std::array<float,1025> describes quarter-wave numerical coefficients, not guest words/addresses or an instruction recipe. Factory returns an independent native value; no dynamic service, optional fixture data, PE dependency or mutable source global. Existing NOTSA explains the introduced factory. Alias equivalence with NinjaMath::SineTable is ordinary std::array equivalence, not a new owner.",
+      "evidence": [
+        {
+          "path": "src/math/ninja_sine_table.hpp",
+          "line": 1,
+          "sha256": "21dd2cc9bb5cf9dd36f15f3f0f79bded248962ecc0648309a99caa2259583f5b",
+          "link": "src/math/ninja_sine_table.hpp#L1",
+          "end_line": 8
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "One immutable constexpr coefficient template, no mutable C++ global game state; ninja_sine_table returns by value and NinjaMath owns a copy, borrowing only FP context. Native Display owns sine_, arithmetic_ and sse_; native title/selection helpers create local math values borrowing the Display context. Distinct coefficient copies are intentional immutable numeric data, not duplicate raw source-global state.",
+          "evidence": [
+            {
+              "path": "src/math/ninja_sine_table.cpp",
+              "line": 5,
+              "sha256": "5843cdcab33b2ec76edff60437bfb908db6d8afe720374c47b13c25ddc57c454",
+              "link": "src/math/ninja_sine_table.cpp#L5",
+              "end_line": 143
+            },
+            {
+              "path": "src/math/ninja_math.hpp",
+              "line": 29,
+              "sha256": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
+              "link": "src/math/ninja_math.hpp#L29",
+              "end_line": 39
+            },
+            {
+              "path": "src/math/ninja_math.cpp",
+              "line": 11,
+              "sha256": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
+              "link": "src/math/ninja_math.cpp#L11",
+              "end_line": 12
+            },
+            {
+              "path": "src/runtime/native_display.hpp",
+              "line": 112,
+              "sha256": "89cfa670a597de4388cabbfd41412008006031c096b2b63e7772e86ea9122954",
+              "link": "src/runtime/native_display.hpp#L112",
+              "end_line": 132
+            },
+            {
+              "path": "src/runtime/native_display.cpp",
+              "line": 35,
+              "sha256": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717",
+              "link": "src/runtime/native_display.cpp#L35"
+            }
+          ]
+        },
+        {
+          "resolution": "Reference configuration receives the same factory values at native_game_session.cpp:24. Guest FOV override separately reads PE coefficients into shared_ptr<SineTable> with value_or(0); that is reference consumer debt outside these eight files, not factory fallback or permission to put fixture availability into native math.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "line": 24,
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43",
+              "link": "src/guest/native_game_session.cpp#L24"
+            },
+            {
+              "path": "src/guest/override_table.cpp",
+              "line": 49,
+              "sha256": "8f55db3d274697694ef5bb745c3d501492dd323633f627c1de3f47d2d975ed90",
+              "link": "src/guest/override_table.cpp#L49",
+              "end_line": 54
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "path": "src/runtime/native_display.cpp",
+          "line": 35,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "Display constructor stores maintained sine table and constructs native matrix math.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_display.cpp",
+              "line": 35,
+              "sha256": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717",
+              "link": "src/runtime/native_display.cpp#L35"
+            }
+          ]
+        },
+        {
+          "path": "src/runtime/native_title_scene.cpp",
+          "line": 79,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "Title scene builds local NinjaMath from maintained table and live context.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_title_scene.cpp",
+              "line": 79,
+              "sha256": "e8a4cf268c2a88da43393ba552358be9089bad7b6fd3c759b3d36a25b49ea403",
+              "link": "src/runtime/native_title_scene.cpp#L79"
+            }
+          ]
+        },
+        {
+          "path": "src/runtime/native_character_select.cpp",
+          "line": 242,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "Character selection animation math uses maintained factory and display arithmetic.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "line": 242,
+              "sha256": "ae97db3caa701759181c10be4a87552002d8af9695828faf8c5971094add6dae",
+              "link": "src/runtime/native_character_select.cpp#L242"
+            }
+          ]
+        },
+        {
+          "path": "src/runtime/native_title_tasks.cpp",
+          "line": 488,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "Title task math uses maintained coefficient copy.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 488,
+              "sha256": "5bc34cd9456afb6af1f38f7af33708ca322ba1f5240897a49706371dd7a6a71c",
+              "link": "src/runtime/native_title_tasks.cpp#L488"
+            }
+          ]
+        },
+        {
+          "path": "src/guest/native_game_session.cpp",
+          "line": 24,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "reference_only",
+          "resolution": "Default reference config uses maintained data; reference composition remains development only.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "line": 24,
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43",
+              "link": "src/guest/native_game_session.cpp#L24"
+            }
+          ]
+        },
+        {
+          "path": "tests/probes/native_ninja_sine_table_probe.cpp",
+          "line": 30,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "test_reference",
+          "resolution": "Variant 0 serializes factory result; variant 1 exercises constructor transport, not original table validity.",
+          "evidence": [
+            {
+              "path": "tests/probes/native_ninja_sine_table_probe.cpp",
+              "line": 30,
+              "sha256": "ca992c3b12252332d400ff7c4836b75fc71e14cf1c3c65cedd4ef1f0c4ce97d3",
+              "link": "tests/probes/native_ninja_sine_table_probe.cpp#L30"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "judge": "ninja_sine_table",
+          "acceptance": "Tracked source-byte receipt exactly compares all 1025 original binary32 words, expected SHA-256 3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed. Current header/cpp/probe/oracle/emitter hashes match recorded source_files. Factory invalid-output bounds are judged at probe boundary.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/ninja_sine_table.json",
+              "line": 1,
+              "sha256": "c169648d29751fa9cf69675f7baccb07add89c91b4b64b68631f4f11fb70578e",
+              "link": "reference/oracle-reports/ninja_sine_table.json#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_ninja_sine_table.py",
+              "line": 1,
+              "sha256": "6865eb8da01ad3b686945543c6d5cefb84014b57b3030f10fbccf5c083ce56fd",
+              "link": "tools/oracles/verify_original_ninja_sine_table.py#L1"
+            },
+            {
+              "path": "tests/probes/native_ninja_sine_table_probe.cpp",
+              "line": 1,
+              "sha256": "ca992c3b12252332d400ff7c4836b75fc71e14cf1c3c65cedd4ef1f0c4ce97d3",
+              "link": "tests/probes/native_ninja_sine_table_probe.cpp#L1"
+            },
+            {
+              "path": "Makefile",
+              "line": 239,
+              "sha256": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
+              "link": "Makefile#L239",
+              "end_line": 240
+            },
+            {
+              "path": "Makefile",
+              "line": 275,
+              "sha256": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
+              "link": "Makefile#L275",
+              "end_line": 276
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 137,
+              "sha256": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
+              "link": "tests/unit/manifest.tsv#L137"
+            }
+          ],
+          "limitations": "Numerical data identity only; no fresh comparison, trig runtime, full build or hardware fidelity claim."
+        },
+        {
+          "judge": "ninja-sine-table unit and native closure",
+          "acceptance": "Unit body checks signed endpoints, all 65536 wraps/phases, extreme inputs and independent factory/constructor copies. check_ninja_sine_table.py verifies a PE-free isolated source serialization against the recorded fingerprint; gate receipt records its prior execution. Emitter is development only and normal source build uses checked-in literals.",
+          "evidence": [
+            {
+              "path": "tests/unit/ninja_sine_table.cpp",
+              "line": 1,
+              "sha256": "67564b00314c56c9b3dd586f4093d7a91838caca708bd6e8eaff7462fbf09878",
+              "link": "tests/unit/ninja_sine_table.cpp#L1"
+            },
+            {
+              "path": "tools/gate/check_ninja_sine_table.py",
+              "line": 1,
+              "sha256": "3476a71e07de4b1f98db2cc9924052995517ef16da5a61be1d1ff7ea82e16fb5",
+              "link": "tools/gate/check_ninja_sine_table.py#L1"
+            },
+            {
+              "path": "tools/emit/emit_ninja_sine_table.py",
+              "line": 1,
+              "sha256": "2d209fa724e37ad72ec1d265c21fc99fe83cb0585d407da7c33f4d4531ca881f",
+              "link": "tools/emit/emit_ninja_sine_table.py#L1"
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-progress-gate.json",
+              "line": 1,
+              "sha256": "7cef2edb27987d42c5325890db037885cc395096527ea21c61c3b63354c36074",
+              "link": "reference/production-integration-20261101/menu-progress-gate.json#L1"
+            },
+            {
+              "path": "reference/constexpr-table-review.json",
+              "line": 1,
+              "sha256": "1516d09f461dc2515cc9fe06a137b4fc3e928bf1e09e9d3ed6be44b38ecde58a",
+              "link": "reference/constexpr-table-review.json#L1"
+            }
+          ],
+          "limitations": "Checker and unit were read only; no fresh closure/byte test run. Broad Math runtime qualification remains separate."
+        }
+      ],
+      "destination": "src/math; retain shared numerical implementation. Reference ABI, original dispatch-table selection and diagnostic PCs stay in src/guest or tests/probes, never move whole algorithm there.",
+      "findings": [],
+      "classification_limits": [
+        "Read-only semantic review of the exact source SHA-256 at the named base; no fresh source-fidelity pass or current native build/closure result.",
+        "Prior tracked receipts retain their bounded comparison and inherited failure status. Source equality establishes identity only.",
+        "Root must preserve full failing/partial case identities, full outputs, holdouts and mutation inputs before any behavior-bearing rewrite. Hardware Windows FP and real reciprocal-estimate capture are not supplied by these receipts.",
+        "Conformance is the factory API only, not every consumer or trig arithmetic."
+      ]
+    },
+    "src/math/ninja_sine_table.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Reviewed all 1025 literals, table declaration and factory; immutable numerical coefficients are accepted source data, not embedded address or gameplay tables.",
+      "reviewed_source_sha256": "5843cdcab33b2ec76edff60437bfb908db6d8afe720374c47b13c25ddc57c454",
+      "semantic_justification": "Full 143-line body reviewed. Quarter-wave constants include both endpoints and source-rounded decimal values; source receipt checks all 4100 bytes. DATA annotation identifies BAMSTable. constexpr internal linkage template is immutable; return copies it into each native owner. No runtime executable input, guessed analytic sine, branch policy, fixture availability or source-PC marshalling exists here. Preserve exact literal spellings/binary32 encodings and signed-zero behavior of consumers. Numerical table exemption is specific to these coefficients and its byte judge.",
+      "evidence": [
+        {
+          "path": "src/math/ninja_sine_table.cpp",
+          "line": 1,
+          "sha256": "5843cdcab33b2ec76edff60437bfb908db6d8afe720374c47b13c25ddc57c454",
+          "link": "src/math/ninja_sine_table.cpp#L1",
+          "end_line": 143
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "One immutable constexpr coefficient template, no mutable C++ global game state; ninja_sine_table returns by value and NinjaMath owns a copy, borrowing only FP context. Native Display owns sine_, arithmetic_ and sse_; native title/selection helpers create local math values borrowing the Display context. Distinct coefficient copies are intentional immutable numeric data, not duplicate raw source-global state.",
+          "evidence": [
+            {
+              "path": "src/math/ninja_sine_table.cpp",
+              "line": 5,
+              "sha256": "5843cdcab33b2ec76edff60437bfb908db6d8afe720374c47b13c25ddc57c454",
+              "link": "src/math/ninja_sine_table.cpp#L5",
+              "end_line": 143
+            },
+            {
+              "path": "src/math/ninja_math.hpp",
+              "line": 29,
+              "sha256": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
+              "link": "src/math/ninja_math.hpp#L29",
+              "end_line": 39
+            },
+            {
+              "path": "src/math/ninja_math.cpp",
+              "line": 11,
+              "sha256": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
+              "link": "src/math/ninja_math.cpp#L11",
+              "end_line": 12
+            },
+            {
+              "path": "src/runtime/native_display.hpp",
+              "line": 112,
+              "sha256": "89cfa670a597de4388cabbfd41412008006031c096b2b63e7772e86ea9122954",
+              "link": "src/runtime/native_display.hpp#L112",
+              "end_line": 132
+            },
+            {
+              "path": "src/runtime/native_display.cpp",
+              "line": 35,
+              "sha256": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717",
+              "link": "src/runtime/native_display.cpp#L35"
+            }
+          ]
+        },
+        {
+          "resolution": "Reference configuration receives the same factory values at native_game_session.cpp:24. Guest FOV override separately reads PE coefficients into shared_ptr<SineTable> with value_or(0); that is reference consumer debt outside these eight files, not factory fallback or permission to put fixture availability into native math.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "line": 24,
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43",
+              "link": "src/guest/native_game_session.cpp#L24"
+            },
+            {
+              "path": "src/guest/override_table.cpp",
+              "line": 49,
+              "sha256": "8f55db3d274697694ef5bb745c3d501492dd323633f627c1de3f47d2d975ed90",
+              "link": "src/guest/override_table.cpp#L49",
+              "end_line": 54
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "path": "src/runtime/native_display.cpp",
+          "line": 35,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "Display constructor stores maintained sine table and constructs native matrix math.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_display.cpp",
+              "line": 35,
+              "sha256": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717",
+              "link": "src/runtime/native_display.cpp#L35"
+            }
+          ]
+        },
+        {
+          "path": "src/runtime/native_title_scene.cpp",
+          "line": 79,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "Title scene builds local NinjaMath from maintained table and live context.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_title_scene.cpp",
+              "line": 79,
+              "sha256": "e8a4cf268c2a88da43393ba552358be9089bad7b6fd3c759b3d36a25b49ea403",
+              "link": "src/runtime/native_title_scene.cpp#L79"
+            }
+          ]
+        },
+        {
+          "path": "src/runtime/native_character_select.cpp",
+          "line": 242,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "Character selection animation math uses maintained factory and display arithmetic.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "line": 242,
+              "sha256": "ae97db3caa701759181c10be4a87552002d8af9695828faf8c5971094add6dae",
+              "link": "src/runtime/native_character_select.cpp#L242"
+            }
+          ]
+        },
+        {
+          "path": "src/runtime/native_title_tasks.cpp",
+          "line": 488,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "Title task math uses maintained coefficient copy.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 488,
+              "sha256": "5bc34cd9456afb6af1f38f7af33708ca322ba1f5240897a49706371dd7a6a71c",
+              "link": "src/runtime/native_title_tasks.cpp#L488"
+            }
+          ]
+        },
+        {
+          "path": "src/guest/native_game_session.cpp",
+          "line": 24,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "reference_only",
+          "resolution": "Default reference config uses maintained data; reference composition remains development only.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "line": 24,
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43",
+              "link": "src/guest/native_game_session.cpp#L24"
+            }
+          ]
+        },
+        {
+          "path": "tests/probes/native_ninja_sine_table_probe.cpp",
+          "line": 30,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "test_reference",
+          "resolution": "Variant 0 serializes factory result; variant 1 exercises constructor transport, not original table validity.",
+          "evidence": [
+            {
+              "path": "tests/probes/native_ninja_sine_table_probe.cpp",
+              "line": 30,
+              "sha256": "ca992c3b12252332d400ff7c4836b75fc71e14cf1c3c65cedd4ef1f0c4ce97d3",
+              "link": "tests/probes/native_ninja_sine_table_probe.cpp#L30"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "judge": "ninja_sine_table",
+          "acceptance": "Tracked source-byte receipt exactly compares all 1025 original binary32 words, expected SHA-256 3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed. Current header/cpp/probe/oracle/emitter hashes match recorded source_files. Factory invalid-output bounds are judged at probe boundary.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/ninja_sine_table.json",
+              "line": 1,
+              "sha256": "c169648d29751fa9cf69675f7baccb07add89c91b4b64b68631f4f11fb70578e",
+              "link": "reference/oracle-reports/ninja_sine_table.json#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_ninja_sine_table.py",
+              "line": 1,
+              "sha256": "6865eb8da01ad3b686945543c6d5cefb84014b57b3030f10fbccf5c083ce56fd",
+              "link": "tools/oracles/verify_original_ninja_sine_table.py#L1"
+            },
+            {
+              "path": "tests/probes/native_ninja_sine_table_probe.cpp",
+              "line": 1,
+              "sha256": "ca992c3b12252332d400ff7c4836b75fc71e14cf1c3c65cedd4ef1f0c4ce97d3",
+              "link": "tests/probes/native_ninja_sine_table_probe.cpp#L1"
+            },
+            {
+              "path": "Makefile",
+              "line": 239,
+              "sha256": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
+              "link": "Makefile#L239",
+              "end_line": 240
+            },
+            {
+              "path": "Makefile",
+              "line": 275,
+              "sha256": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
+              "link": "Makefile#L275",
+              "end_line": 276
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 137,
+              "sha256": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
+              "link": "tests/unit/manifest.tsv#L137"
+            }
+          ],
+          "limitations": "Numerical data identity only; no fresh comparison, trig runtime, full build or hardware fidelity claim."
+        },
+        {
+          "judge": "ninja-sine-table unit and native closure",
+          "acceptance": "Unit body checks signed endpoints, all 65536 wraps/phases, extreme inputs and independent factory/constructor copies. check_ninja_sine_table.py verifies a PE-free isolated source serialization against the recorded fingerprint; gate receipt records its prior execution. Emitter is development only and normal source build uses checked-in literals.",
+          "evidence": [
+            {
+              "path": "tests/unit/ninja_sine_table.cpp",
+              "line": 1,
+              "sha256": "67564b00314c56c9b3dd586f4093d7a91838caca708bd6e8eaff7462fbf09878",
+              "link": "tests/unit/ninja_sine_table.cpp#L1"
+            },
+            {
+              "path": "tools/gate/check_ninja_sine_table.py",
+              "line": 1,
+              "sha256": "3476a71e07de4b1f98db2cc9924052995517ef16da5a61be1d1ff7ea82e16fb5",
+              "link": "tools/gate/check_ninja_sine_table.py#L1"
+            },
+            {
+              "path": "tools/emit/emit_ninja_sine_table.py",
+              "line": 1,
+              "sha256": "2d209fa724e37ad72ec1d265c21fc99fe83cb0585d407da7c33f4d4531ca881f",
+              "link": "tools/emit/emit_ninja_sine_table.py#L1"
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-progress-gate.json",
+              "line": 1,
+              "sha256": "7cef2edb27987d42c5325890db037885cc395096527ea21c61c3b63354c36074",
+              "link": "reference/production-integration-20261101/menu-progress-gate.json#L1"
+            },
+            {
+              "path": "reference/constexpr-table-review.json",
+              "line": 1,
+              "sha256": "1516d09f461dc2515cc9fe06a137b4fc3e928bf1e09e9d3ed6be44b38ecde58a",
+              "link": "reference/constexpr-table-review.json#L1"
+            }
+          ],
+          "limitations": "Checker and unit were read only; no fresh closure/byte test run. Broad Math runtime qualification remains separate."
+        }
+      ],
+      "destination": "src/math; retain shared numerical implementation. Reference ABI, original dispatch-table selection and diagnostic PCs stay in src/guest or tests/probes, never move whole algorithm there.",
+      "findings": [],
+      "classification_limits": [
+        "Read-only semantic review of the exact source SHA-256 at the named base; no fresh source-fidelity pass or current native build/closure result.",
+        "Prior tracked receipts retain their bounded comparison and inherited failure status. Source equality establishes identity only.",
+        "Root must preserve full failing/partial case identities, full outputs, holdouts and mutation inputs before any behavior-bearing rewrite. Hardware Windows FP and real reciprocal-estimate capture are not supplied by these receipts.",
+        "No fresh data comparison executed. Existing table-level numeric_encoding review is supportive, not a whole module pass."
+      ]
+    },
+    "src/math/ninja_math.hpp": {
+      "disposition": "needs_migration",
+      "reason": "Readable value/borrow API exists, but recovered entries and constant source identities are described in ordinary address/register comments instead of supported provenance contracts.",
+      "reviewed_source_sha256": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
+      "semantic_justification": "Reviewed all declarations, types and owner fields. NinjaVector is native xyz float; CoordinateAxisConstants zero/one are concrete source scalar values, not fixture optionals. Owned coefficient copy/borrowed context remain correct. Distinguish extended return versus explicit float-store wrappers. Existing SDK names resolve most entries; 7889f0 needs explicit evidence-backed semantic naming. Numerical masks/size and X87Value types are legitimate. No reason to move vectors/trig into reference code.",
+      "evidence": [
+        {
+          "path": "src/math/ninja_math.hpp",
+          "line": 1,
+          "sha256": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
+          "link": "src/math/ninja_math.hpp#L1",
+          "end_line": 59
+        },
+        {
+          "path": "/Users/burbujamc/Developer/sadx-macos/reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+          "line": 186,
+          "sha256": "590026179539651768b21cc00d7527fab2d74d0635ea7ee2475b133d9f5c4d37",
+          "link": "/Users/burbujamc/Developer/sadx-macos/reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h#L186"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "NinjaMath owns a 1025-float value copy, borrows a caller-lived X87Context. Vector functions borrow vectors, explicit context and plain zero/one constants; output stores are in supplied NinjaVector. No optional fixture facts or source memory reader exists in these bodies. Native Display/context and matrix/value copies are resolved; no source-global owner migration needed inside this pair.",
+          "evidence": [
+            {
+              "path": "src/math/ninja_math.hpp",
+              "line": 9,
+              "sha256": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
+              "link": "src/math/ninja_math.hpp#L9",
+              "end_line": 57
+            },
+            {
+              "path": "src/math/ninja_math.cpp",
+              "line": 11,
+              "sha256": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
+              "link": "src/math/ninja_math.cpp#L11",
+              "end_line": 12
+            },
+            {
+              "path": "src/runtime/native_display.hpp",
+              "line": 112,
+              "sha256": "89cfa670a597de4388cabbfd41412008006031c096b2b63e7772e86ea9122954",
+              "link": "src/runtime/native_display.hpp#L112",
+              "end_line": 132
+            }
+          ]
+        },
+        {
+          "resolution": "Keep retained cross-product components for subsequent length even after binary32 output stores; normalize zero path stores z,y,x and otherwise divides/stores x,y,z. These are observable numerical/store boundaries, not generic game dispatch. Alias/trap/deferred status for every consumer still needs its judges.",
+          "evidence": [
+            {
+              "path": "src/math/ninja_math.cpp",
+              "line": 98,
+              "sha256": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
+              "link": "src/math/ninja_math.cpp#L98",
+              "end_line": 125
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "path": "src/engine/ninja_matrix.cpp",
+          "line": 100,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "Native matrix rotation builds NinjaMath from owned coefficient values; sin is rounded, cosine remains extended. Matrix pair is native required.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_matrix.cpp",
+              "line": 100,
+              "sha256": "7045d50d871e7853935b7301ac90473bb06536f14c7b010ce7f75562d5b09bc4",
+              "link": "src/engine/ninja_matrix.cpp#L100"
+            }
+          ]
+        },
+        {
+          "path": "src/engine/ninja_matrix.cpp",
+          "line": 157,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "normalize_vector uses inner_product_extended and signed_sqrt_extended; preserve its different scalar sum order.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_matrix.cpp",
+              "line": 157,
+              "sha256": "7045d50d871e7853935b7301ac90473bb06536f14c7b010ce7f75562d5b09bc4",
+              "link": "src/engine/ninja_matrix.cpp#L157"
+            }
+          ]
+        },
+        {
+          "path": "src/player/ground_acceleration.cpp",
+          "line": 266,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "excluded_native_source",
+          "resolution": "Maintained ground acceleration calls cross_product_length_extended; excluded from native-sources.txt, remains campaign scope.",
+          "evidence": [
+            {
+              "path": "src/player/ground_acceleration.cpp",
+              "line": 266,
+              "sha256": "c79890f79d3d092eb5bf45c73223467bc6bc20105199830f32a5fba44b4cecf0",
+              "link": "src/player/ground_acceleration.cpp#L266"
+            }
+          ]
+        },
+        {
+          "path": "src/runtime/native_title_scene.cpp",
+          "line": 79,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "Title math creates NinjaMath with supplied source arithmetic context.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_title_scene.cpp",
+              "line": 79,
+              "sha256": "e8a4cf268c2a88da43393ba552358be9089bad7b6fd3c759b3d36a25b49ea403",
+              "link": "src/runtime/native_title_scene.cpp#L79"
+            }
+          ]
+        },
+        {
+          "path": "src/player/player_projection.cpp",
+          "line": 22,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "excluded_native_source",
+          "resolution": "Projection angle calls cross-product helper; excluded native source, still maintained and judged.",
+          "evidence": [
+            {
+              "path": "src/player/player_projection.cpp",
+              "line": 22,
+              "sha256": "ac94968965936abb23389abf02f367c49e4053aa113712fba41535348ce3e203",
+              "link": "src/player/player_projection.cpp#L22"
+            }
+          ]
+        },
+        {
+          "path": "src/player/player_scene_position.cpp",
+          "line": 13,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "excluded_native_source",
+          "resolution": "ExactFloat adapters retain dot/cross/root return; excluded native source consumer.",
+          "evidence": [
+            {
+              "path": "src/player/player_scene_position.cpp",
+              "line": 13,
+              "sha256": "ae9a432443aa5948c4d45a5bceac03ed748b22ba898029ed6d71c3b1d2d5f698",
+              "link": "src/player/player_scene_position.cpp#L13"
+            }
+          ]
+        },
+        {
+          "path": "src/player/player_reaction.cpp",
+          "line": 45,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "excluded_native_source",
+          "resolution": "Normalize helper is used by collision reaction; excluded source, inherits player_reaction failure.",
+          "evidence": [
+            {
+              "path": "src/player/player_reaction.cpp",
+              "line": 45,
+              "sha256": "3b572f7e4b29ea7def9d16451046dd93b0a32fa561152e69812c9cdae3de7289",
+              "link": "src/player/player_reaction.cpp#L45"
+            }
+          ]
+        },
+        {
+          "path": "src/player/player_rotation.cpp",
+          "line": 141,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "excluded_native_source",
+          "resolution": "Rotation normalization passes source decoded axis constants; consumer availability/address debt must stay out of math API.",
+          "evidence": [
+            {
+              "path": "src/player/player_rotation.cpp",
+              "line": 141,
+              "sha256": "87e7f62da064257f47af017e596c3c61078a1c65ca05828d8d6c73903c835cbe",
+              "link": "src/player/player_rotation.cpp#L141"
+            }
+          ]
+        },
+        {
+          "path": "tests/probes/native_math_probe.cpp",
+          "line": 23,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "test_reference",
+          "resolution": "Direct trig stores and dot/squared/root exports with explicit CWs.",
+          "evidence": [
+            {
+              "path": "tests/probes/native_math_probe.cpp",
+              "line": 23,
+              "sha256": "9314941068f29475fc6dc37c0c52e6162a64fc4e60dd2b0c1220fd3df966bb1a",
+              "link": "tests/probes/native_math_probe.cpp#L23"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "judge": "math",
+          "acceptance": "Historical math.json: 12 experimental CWs, each 131072 trig comparisons, 1009 dot, 1009 squared, 12 signed-root comparisons; zero compared binary32 mismatches. native_math_probe.cpp binds the named functions directly.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/math.json",
+              "line": 1,
+              "sha256": "5382042413acd9577eaa5e3732f7bf3ebdbf025eef95d4d3f03d3eae23793278",
+              "link": "reference/oracle-reports/math.json#L1"
+            },
+            {
+              "path": "tests/probes/native_math_probe.cpp",
+              "line": 1,
+              "sha256": "9314941068f29475fc6dc37c0c52e6162a64fc4e60dd2b0c1220fd3df966bb1a",
+              "link": "tests/probes/native_math_probe.cpp#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_math.py",
+              "line": 1,
+              "sha256": "9a57e94ff5539c9683ccb29c3df3353c161d8e55a9dc415dd1cd565c21692c6a",
+              "link": "tools/oracles/verify_original_math.py#L1"
+            },
+            {
+              "path": "tools/oracles/manifest.tsv",
+              "line": 9,
+              "sha256": "b9f05bd7db1c88320a1ac0f5e9c471d780ce43135c59b91467d15411c8357eb3",
+              "link": "tools/oracles/manifest.tsv#L9"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 2,
+              "sha256": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
+              "link": "tests/unit/manifest.tsv#L2"
+            },
+            {
+              "path": "tests/unit/ninja_math.cpp",
+              "line": 1,
+              "sha256": "7be06bb94cce07437a64f6dd7e5fa22d8fd7f48cc2c4f16be703f44329d891eb",
+              "link": "tests/unit/ninja_math.cpp#L1"
+            }
+          ],
+          "limitations": "Receipt lacks current per-source fingerprints and compares binary32 stores, not all retained ext80 values or flags, runtime/control census, aliases or unmasked exception delivery. It cannot newly qualify present body changes."
+        },
+        {
+          "judge": "projection_angle / cross product",
+          "acceptance": "Tracked 12 x 998 cases for original 438410 and independently executed 7889f0: angle/control plus cross stores and retained length match; flag partial counts 11040 angle and 8136 cross. Keep partial verdict.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/projection_angle.json",
+              "line": 1,
+              "sha256": "355b191c516e27cce6265bd10c6b434162b383930191bea528379670fea95508",
+              "link": "reference/oracle-reports/projection_angle.json#L1"
+            },
+            {
+              "path": "tests/probes/native_projection_angle_probe.cpp",
+              "line": 1,
+              "sha256": "ff2e6414ff9f66bc0051ec0f0ab700b45421ca7f79594cc3785841d6c7b83971",
+              "link": "tests/probes/native_projection_angle_probe.cpp#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_projection_angle.py",
+              "line": 1,
+              "sha256": "6a84c79806366161b119a6246dc96d8a751b99d821b39b4fb1b01d30a88a4113",
+              "link": "tools/oracles/verify_original_projection_angle.py#L1"
+            }
+          ],
+          "limitations": "Selected CRT matherr bypass policy, emulator transcendental and no hardware/startup FP proof; direct normalize helper qualification/appropriate mutant receipt remains unresolved. Broad player consumers do not establish direct core qualification."
+        }
+      ],
+      "destination": "src/math; retain shared numerical implementation. Reference ABI, original dispatch-table selection and diagnostic PCs stay in src/guest or tests/probes, never move whole algorithm there.",
+      "findings": [
+        {
+          "id": "MATH-NINJA-PROVENANCE",
+          "path": "src/math/ninja_math.hpp",
+          "line": 9,
+          "detail": "Source constant addresses, Actual7889f0 ECX/EDX and Actual418ac0 comments are not supported entry/data provenance; recovered trig/dot/squared/root declarations lack FUNCTION annotations.",
+          "required_change": "Add evidence-backed annotations once at the recovered extended declarations and document derived float wrappers as NOTSA where appropriate; retain SDK hypotheses/ABI in evidence/reference adapter, keep semantic roles and immutable literals.",
+          "evidence": [
+            {
+              "path": "src/math/ninja_math.hpp",
+              "line": 9,
+              "sha256": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
+              "link": "src/math/ninja_math.hpp#L9"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Read-only semantic review of the exact source SHA-256 at the named base; no fresh source-fidelity pass or current native build/closure result.",
+        "Prior tracked receipts retain their bounded comparison and inherited failure status. Source equality establishes identity only.",
+        "Root must preserve full failing/partial case identities, full outputs, holdouts and mutation inputs before any behavior-bearing rewrite. Hardware Windows FP and real reciprocal-estimate capture are not supplied by these receipts.",
+        "Migration finding is proven provenance/interface documentation debt. Does not authorize unproved arithmetic simplification or declare every explicit FP operation necessary."
+      ]
+    },
+    "src/math/ninja_math.cpp": {
+      "disposition": "needs_migration",
+      "reason": "Named quadrants/vectors already improve the algorithms; provenance, statement layout and evidence for retained instruction-level arithmetic are incomplete.",
+      "reviewed_source_sha256": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
+      "semantic_justification": "Every body reviewed. Trig wraps unsigned angle to 16 bits, indexes 4096 sixteenth-angle steps into four reflected/negated quadrants; fraction zero avoids interpolation and preserves signed zero. Cos adds a wrapped quarter-turn without signed overflow. Dot adds z+y then x; squared adds x+y then z with cached loads. Signed root performs signaling double-memory compare, reload, negates negative branch and preserves unordered behavior. Cross stores rounded components before squaring retained values; normalize compares equality only and keeps z,y,x zero stores. These meaningful arithmetic contracts must survive. However explicit X87Context sequences and arbitrary a/b/x1 variable names are not a blanket math-directory exemption: cite discriminating judge cases per STYLE7, use ExactFloat/named fidelity helpers where proven, and retain narrow lower-level sequences only with evidence.",
+      "evidence": [
+        {
+          "path": "src/math/ninja_math.cpp",
+          "line": 1,
+          "sha256": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
+          "link": "src/math/ninja_math.cpp#L1",
+          "end_line": 127
+        },
+        {
+          "path": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/sine-initial-sin.pseudocode.txt",
+          "line": 1,
+          "sha256": "2e997183cd2551292cc0870a6ea8e2bbd644dbe7da897b157979a42838a88b21",
+          "link": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/sine-initial-sin.pseudocode.txt#L1"
+        },
+        {
+          "path": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/sine-initial-cos.pseudocode.txt",
+          "line": 1,
+          "sha256": "a2680a6ebe0a43bce6838d059f11e6c9267d60d672ea89b76b328677a576c0f9",
+          "link": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/sine-initial-cos.pseudocode.txt#L1"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "NinjaMath owns a 1025-float value copy, borrows a caller-lived X87Context. Vector functions borrow vectors, explicit context and plain zero/one constants; output stores are in supplied NinjaVector. No optional fixture facts or source memory reader exists in these bodies. Native Display/context and matrix/value copies are resolved; no source-global owner migration needed inside this pair.",
+          "evidence": [
+            {
+              "path": "src/math/ninja_math.hpp",
+              "line": 9,
+              "sha256": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
+              "link": "src/math/ninja_math.hpp#L9",
+              "end_line": 57
+            },
+            {
+              "path": "src/math/ninja_math.cpp",
+              "line": 11,
+              "sha256": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
+              "link": "src/math/ninja_math.cpp#L11",
+              "end_line": 12
+            },
+            {
+              "path": "src/runtime/native_display.hpp",
+              "line": 112,
+              "sha256": "89cfa670a597de4388cabbfd41412008006031c096b2b63e7772e86ea9122954",
+              "link": "src/runtime/native_display.hpp#L112",
+              "end_line": 132
+            }
+          ]
+        },
+        {
+          "resolution": "Keep retained cross-product components for subsequent length even after binary32 output stores; normalize zero path stores z,y,x and otherwise divides/stores x,y,z. These are observable numerical/store boundaries, not generic game dispatch. Alias/trap/deferred status for every consumer still needs its judges.",
+          "evidence": [
+            {
+              "path": "src/math/ninja_math.cpp",
+              "line": 98,
+              "sha256": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
+              "link": "src/math/ninja_math.cpp#L98",
+              "end_line": 125
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "path": "src/engine/ninja_matrix.cpp",
+          "line": 100,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "Native matrix rotation builds NinjaMath from owned coefficient values; sin is rounded, cosine remains extended. Matrix pair is native required.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_matrix.cpp",
+              "line": 100,
+              "sha256": "7045d50d871e7853935b7301ac90473bb06536f14c7b010ce7f75562d5b09bc4",
+              "link": "src/engine/ninja_matrix.cpp#L100"
+            }
+          ]
+        },
+        {
+          "path": "src/engine/ninja_matrix.cpp",
+          "line": 157,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "normalize_vector uses inner_product_extended and signed_sqrt_extended; preserve its different scalar sum order.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_matrix.cpp",
+              "line": 157,
+              "sha256": "7045d50d871e7853935b7301ac90473bb06536f14c7b010ce7f75562d5b09bc4",
+              "link": "src/engine/ninja_matrix.cpp#L157"
+            }
+          ]
+        },
+        {
+          "path": "src/player/ground_acceleration.cpp",
+          "line": 266,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "excluded_native_source",
+          "resolution": "Maintained ground acceleration calls cross_product_length_extended; excluded from native-sources.txt, remains campaign scope.",
+          "evidence": [
+            {
+              "path": "src/player/ground_acceleration.cpp",
+              "line": 266,
+              "sha256": "c79890f79d3d092eb5bf45c73223467bc6bc20105199830f32a5fba44b4cecf0",
+              "link": "src/player/ground_acceleration.cpp#L266"
+            }
+          ]
+        },
+        {
+          "path": "src/runtime/native_title_scene.cpp",
+          "line": 79,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "Title math creates NinjaMath with supplied source arithmetic context.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_title_scene.cpp",
+              "line": 79,
+              "sha256": "e8a4cf268c2a88da43393ba552358be9089bad7b6fd3c759b3d36a25b49ea403",
+              "link": "src/runtime/native_title_scene.cpp#L79"
+            }
+          ]
+        },
+        {
+          "path": "src/player/player_projection.cpp",
+          "line": 22,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "excluded_native_source",
+          "resolution": "Projection angle calls cross-product helper; excluded native source, still maintained and judged.",
+          "evidence": [
+            {
+              "path": "src/player/player_projection.cpp",
+              "line": 22,
+              "sha256": "ac94968965936abb23389abf02f367c49e4053aa113712fba41535348ce3e203",
+              "link": "src/player/player_projection.cpp#L22"
+            }
+          ]
+        },
+        {
+          "path": "src/player/player_scene_position.cpp",
+          "line": 13,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "excluded_native_source",
+          "resolution": "ExactFloat adapters retain dot/cross/root return; excluded native source consumer.",
+          "evidence": [
+            {
+              "path": "src/player/player_scene_position.cpp",
+              "line": 13,
+              "sha256": "ae9a432443aa5948c4d45a5bceac03ed748b22ba898029ed6d71c3b1d2d5f698",
+              "link": "src/player/player_scene_position.cpp#L13"
+            }
+          ]
+        },
+        {
+          "path": "src/player/player_reaction.cpp",
+          "line": 45,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "excluded_native_source",
+          "resolution": "Normalize helper is used by collision reaction; excluded source, inherits player_reaction failure.",
+          "evidence": [
+            {
+              "path": "src/player/player_reaction.cpp",
+              "line": 45,
+              "sha256": "3b572f7e4b29ea7def9d16451046dd93b0a32fa561152e69812c9cdae3de7289",
+              "link": "src/player/player_reaction.cpp#L45"
+            }
+          ]
+        },
+        {
+          "path": "src/player/player_rotation.cpp",
+          "line": 141,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "excluded_native_source",
+          "resolution": "Rotation normalization passes source decoded axis constants; consumer availability/address debt must stay out of math API.",
+          "evidence": [
+            {
+              "path": "src/player/player_rotation.cpp",
+              "line": 141,
+              "sha256": "87e7f62da064257f47af017e596c3c61078a1c65ca05828d8d6c73903c835cbe",
+              "link": "src/player/player_rotation.cpp#L141"
+            }
+          ]
+        },
+        {
+          "path": "tests/probes/native_math_probe.cpp",
+          "line": 23,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "test_reference",
+          "resolution": "Direct trig stores and dot/squared/root exports with explicit CWs.",
+          "evidence": [
+            {
+              "path": "tests/probes/native_math_probe.cpp",
+              "line": 23,
+              "sha256": "9314941068f29475fc6dc37c0c52e6162a64fc4e60dd2b0c1220fd3df966bb1a",
+              "link": "tests/probes/native_math_probe.cpp#L23"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "judge": "math",
+          "acceptance": "Historical math.json: 12 experimental CWs, each 131072 trig comparisons, 1009 dot, 1009 squared, 12 signed-root comparisons; zero compared binary32 mismatches. native_math_probe.cpp binds the named functions directly.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/math.json",
+              "line": 1,
+              "sha256": "5382042413acd9577eaa5e3732f7bf3ebdbf025eef95d4d3f03d3eae23793278",
+              "link": "reference/oracle-reports/math.json#L1"
+            },
+            {
+              "path": "tests/probes/native_math_probe.cpp",
+              "line": 1,
+              "sha256": "9314941068f29475fc6dc37c0c52e6162a64fc4e60dd2b0c1220fd3df966bb1a",
+              "link": "tests/probes/native_math_probe.cpp#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_math.py",
+              "line": 1,
+              "sha256": "9a57e94ff5539c9683ccb29c3df3353c161d8e55a9dc415dd1cd565c21692c6a",
+              "link": "tools/oracles/verify_original_math.py#L1"
+            },
+            {
+              "path": "tools/oracles/manifest.tsv",
+              "line": 9,
+              "sha256": "b9f05bd7db1c88320a1ac0f5e9c471d780ce43135c59b91467d15411c8357eb3",
+              "link": "tools/oracles/manifest.tsv#L9"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 2,
+              "sha256": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
+              "link": "tests/unit/manifest.tsv#L2"
+            },
+            {
+              "path": "tests/unit/ninja_math.cpp",
+              "line": 1,
+              "sha256": "7be06bb94cce07437a64f6dd7e5fa22d8fd7f48cc2c4f16be703f44329d891eb",
+              "link": "tests/unit/ninja_math.cpp#L1"
+            }
+          ],
+          "limitations": "Receipt lacks current per-source fingerprints and compares binary32 stores, not all retained ext80 values or flags, runtime/control census, aliases or unmasked exception delivery. It cannot newly qualify present body changes."
+        },
+        {
+          "judge": "projection_angle / cross product",
+          "acceptance": "Tracked 12 x 998 cases for original 438410 and independently executed 7889f0: angle/control plus cross stores and retained length match; flag partial counts 11040 angle and 8136 cross. Keep partial verdict.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/projection_angle.json",
+              "line": 1,
+              "sha256": "355b191c516e27cce6265bd10c6b434162b383930191bea528379670fea95508",
+              "link": "reference/oracle-reports/projection_angle.json#L1"
+            },
+            {
+              "path": "tests/probes/native_projection_angle_probe.cpp",
+              "line": 1,
+              "sha256": "ff2e6414ff9f66bc0051ec0f0ab700b45421ca7f79594cc3785841d6c7b83971",
+              "link": "tests/probes/native_projection_angle_probe.cpp#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_projection_angle.py",
+              "line": 1,
+              "sha256": "6a84c79806366161b119a6246dc96d8a751b99d821b39b4fb1b01d30a88a4113",
+              "link": "tools/oracles/verify_original_projection_angle.py#L1"
+            }
+          ],
+          "limitations": "Selected CRT matherr bypass policy, emulator transcendental and no hardware/startup FP proof; direct normalize helper qualification/appropriate mutant receipt remains unresolved. Broad player consumers do not establish direct core qualification."
+        }
+      ],
+      "destination": "src/math; retain shared numerical implementation. Reference ABI, original dispatch-table selection and diagnostic PCs stay in src/guest or tests/probes, never move whole algorithm there.",
+      "findings": [
+        {
+          "id": "MATH-NINJA-ANNOTATION",
+          "path": "src/math/ninja_math.cpp",
+          "line": 15,
+          "detail": "Source VAs/register recipe and constant addresses occur in ordinary comments rather than supported provenance; recovered functions lack semantic provenance declarations in companion header.",
+          "required_change": "Resolve annotations at API and replace instruction-PC prose here with meaningful numerical order comments/evidence links.",
+          "evidence": [
+            {
+              "path": "src/math/ninja_math.cpp",
+              "line": 15,
+              "sha256": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
+              "link": "src/math/ninja_math.cpp#L15"
+            }
+          ]
+        },
+        {
+          "id": "MATH-NINJA-ARITHMETIC",
+          "path": "src/math/ninja_math.cpp",
+          "line": 98,
+          "detail": "Cross/normalize bodies compress multiple stores/calculations per line; explicit level4 arithmetic is not accompanied by identified case evidence for every retained sequence. General binary32 math receipt does not qualify cross/normalize.",
+          "required_change": "Keep exact operation/store order. Associate cross/normalization with actual source judges and control-word evidence; migrate to readable exact expressions only under unchanged judges, or narrowly document required instruction-level boundaries. No global plain-float/x87 ban.",
+          "evidence": [
+            {
+              "path": "src/math/ninja_math.cpp",
+              "line": 98,
+              "sha256": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
+              "link": "src/math/ninja_math.cpp#L98"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Read-only semantic review of the exact source SHA-256 at the named base; no fresh source-fidelity pass or current native build/closure result.",
+        "Prior tracked receipts retain their bounded comparison and inherited failure status. Source equality establishes identity only.",
+        "Root must preserve full failing/partial case identities, full outputs, holdouts and mutation inputs before any behavior-bearing rewrite. Hardware Windows FP and real reciprocal-estimate capture are not supplied by these receipts.",
+        "Direct normalization source judge/mutant/holdout coverage has not been resolved to sufficient per-expression evidence; retain that qualification gap. Cross flags are inherited partial."
+      ]
+    },
+    "src/math/d3dx_math.hpp": {
+      "disposition": "needs_migration",
+      "reason": "Five source-address-suffixed APIs and ad hoc source-dispatch/ABI comments need named library contracts; representation and genuine optional arguments should remain.",
+      "reviewed_source_sha256": "3b997c26013a774f6b85e099f774187ffe9af64369316d2e3e769f6ff26ea8f0",
+      "semantic_justification": "Reviewed all types and declarations. uint32 matrices/vectors encode IEEE bits, not addresses; viewport integer fields versus depth float bits are correct. SseReciprocalEstimate makes a real unmeasured CPU-dependent operation explicit, not arbitrary fixture availability. Optional matrices/viewport reflect NULL argument semantics; inverse optional reflects singular/unordered. Alignment bool selects meaningful operand order. Perspective optional is a distinct unsupported numerical path and needs an explicit native failure reason. Do not erase these contracts while fixing names/provenance or silently substitute hardware estimate assumptions.",
+      "evidence": [
+        {
+          "path": "src/math/d3dx_math.hpp",
+          "line": 1,
+          "sha256": "3b997c26013a774f6b85e099f774187ffe9af64369316d2e3e769f6ff26ea8f0",
+          "link": "src/math/d3dx_math.hpp#L1",
+          "end_line": 57
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "D3DX functions own only local matrix/lane values. Caller owns SseContext, X87Context and reciprocal estimate. Matrix arguments are copied values plus source-alignment arithmetic selection. Optional projection/view/world/viewport represent actual NULL API choices, not absent fixtures; inverse matrix/determinant absence is actual singular/unordered result. Perspective nullopt instead denotes an explicitly unmodelled FSINCOS path and should have a distinct semantic failure contract.",
+          "evidence": [
+            {
+              "path": "src/math/d3dx_math.hpp",
+              "line": 18,
+              "sha256": "3b997c26013a774f6b85e099f774187ffe9af64369316d2e3e769f6ff26ea8f0",
+              "link": "src/math/d3dx_math.hpp#L18",
+              "end_line": 56
+            },
+            {
+              "path": "src/math/d3dx_math.cpp",
+              "line": 58,
+              "sha256": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171",
+              "link": "src/math/d3dx_math.cpp#L58",
+              "end_line": 91
+            },
+            {
+              "path": "src/math/d3dx_math.cpp",
+              "line": 145,
+              "sha256": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171",
+              "link": "src/math/d3dx_math.cpp#L145",
+              "end_line": 169
+            }
+          ]
+        },
+        {
+          "resolution": "Native Display owns numerical contexts and view/matrix state; runtime/model_draw borrows Display contexts, Ninja view services borrow matrices/reciprocal. Reference override adapters own guest-memory/register/stack transport and return byte counts 12/20/24. Do not move the recovered matrix/project/viewport algorithms into guest to hide readability debt.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_display.hpp",
+              "line": 112,
+              "sha256": "89cfa670a597de4388cabbfd41412008006031c096b2b63e7772e86ea9122954",
+              "link": "src/runtime/native_display.hpp#L112",
+              "end_line": 132
+            },
+            {
+              "path": "src/runtime/model_draw.cpp",
+              "line": 48,
+              "sha256": "65ce0096a92c729414601d6055767c7fa7aa2669bd2d34674f86736dee56ea81",
+              "link": "src/runtime/model_draw.cpp#L48",
+              "end_line": 56
+            },
+            {
+              "path": "src/engine/ninja_view_native.hpp",
+              "line": 16,
+              "sha256": "b398943d7db560ad944d3eb87afe6fb0e8e6f3b1ef9de8d3d11b782c9fa2d36a",
+              "link": "src/engine/ninja_view_native.hpp#L16",
+              "end_line": 27
+            },
+            {
+              "path": "src/guest/override_table.cpp",
+              "line": 225,
+              "sha256": "8f55db3d274697694ef5bb745c3d501492dd323633f627c1de3f47d2d975ed90",
+              "link": "src/guest/override_table.cpp#L225",
+              "end_line": 274
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "path": "src/runtime/native_display.cpp",
+          "line": 95,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "Native transform multiplication uses shared D3DX matrix product.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_display.cpp",
+              "line": 95,
+              "sha256": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717",
+              "link": "src/runtime/native_display.cpp#L95"
+            }
+          ]
+        },
+        {
+          "path": "src/runtime/model_draw.cpp",
+          "line": 50,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "Native model multiply and inverse consume D3DX using borrowed display SSE context; inverse currently supplies division approximation.",
+          "evidence": [
+            {
+              "path": "src/runtime/model_draw.cpp",
+              "line": 50,
+              "sha256": "65ce0096a92c729414601d6055767c7fa7aa2669bd2d34674f86736dee56ea81",
+              "link": "src/runtime/model_draw.cpp#L50"
+            }
+          ]
+        },
+        {
+          "path": "src/engine/ninja_view_native.cpp",
+          "line": 43,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "Native camera setup uses perspective, product and inverse and an injected reciprocal service.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_view_native.cpp",
+              "line": 43,
+              "sha256": "f84e70db6daf2a58dc8c098c095ddeede0371a18de8db93d83ed4c02843f6985",
+              "link": "src/engine/ninja_view_native.cpp#L43"
+            }
+          ]
+        },
+        {
+          "path": "src/engine/ninja_projected_depth.cpp",
+          "line": 17,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "Native queue depth uses project with explicit viewport/projection and two base transforms.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_projected_depth.cpp",
+              "line": 17,
+              "sha256": "12378c9eaf694af14e338affa098653cac077bfeb08fe53930b993f24a43e646",
+              "link": "src/engine/ninja_projected_depth.cpp#L17"
+            }
+          ]
+        },
+        {
+          "path": "src/engine/ninja_view.cpp",
+          "line": 45,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "excluded_native_source",
+          "resolution": "Legacy view calls perspective/product/inverse; excluded native source remains campaign target.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_view.cpp",
+              "line": 45,
+              "sha256": "aad37d5b8a2ff72bc2f8f3ab43459aef6d119f64a4304eb9880d4c8993d2c232",
+              "link": "src/engine/ninja_view.cpp#L45"
+            }
+          ]
+        },
+        {
+          "path": "src/guest/override_table.cpp",
+          "line": 231,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "reference_only",
+          "resolution": "Five concrete math overrides marshal guest matrices/NULLs, alignment and FP state; registration is real, not inferred include closure.",
+          "evidence": [
+            {
+              "path": "src/guest/override_table.cpp",
+              "line": 231,
+              "sha256": "8f55db3d274697694ef5bb745c3d501492dd323633f627c1de3f47d2d975ed90",
+              "link": "src/guest/override_table.cpp#L231"
+            }
+          ]
+        },
+        {
+          "path": "tests/probes/native_d3dx_project_probe.cpp",
+          "line": 15,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "test_reference",
+          "resolution": "Direct project C ABI judge adapter.",
+          "evidence": [
+            {
+              "path": "tests/probes/native_d3dx_project_probe.cpp",
+              "line": 15,
+              "sha256": "ee3c522d839147e16da30df6410bd74fcb7f20c27b036d9c59eecc8650f6eac3",
+              "link": "tests/probes/native_d3dx_project_probe.cpp#L15"
+            }
+          ]
+        },
+        {
+          "path": "tests/probes/native_d3dx_matrix_inverse_probe.cpp",
+          "line": 10,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "test_reference",
+          "resolution": "Direct inverse C ABI judge adapter.",
+          "evidence": [
+            {
+              "path": "tests/probes/native_d3dx_matrix_inverse_probe.cpp",
+              "line": 10,
+              "sha256": "9fa09aec1a1efdc49f54ee25daab32ef94c44db255165641792b9fa44e8d4422",
+              "link": "tests/probes/native_d3dx_matrix_inverse_probe.cpp#L10"
+            }
+          ]
+        },
+        {
+          "path": "tests/probes/native_d3dx_perspective_probe.cpp",
+          "line": 12,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "test_reference",
+          "resolution": "Direct perspective C ABI judge adapter; extra sincos export seeds suffix judge.",
+          "evidence": [
+            {
+              "path": "tests/probes/native_d3dx_perspective_probe.cpp",
+              "line": 12,
+              "sha256": "a3ee10f5d70ca0d171bf7b90b9be793711a83cd53a1575bb5a7c8510111b31b4",
+              "link": "tests/probes/native_d3dx_perspective_probe.cpp#L12"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "judge": "d3dx_project",
+          "acceptance": "Historical 4000 cases, zero mismatches. All NULL arms, viewport variants, aligned/misaligned matrices; actual source-range hashes for product/transform/project.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/d3dx_project.json",
+              "line": 1,
+              "sha256": "f8459473618deaedf6d022cd4c8549c4508f48da8559f72a7d068f135db010fc",
+              "link": "reference/oracle-reports/d3dx_project.json#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_d3dx_project.py",
+              "line": 1,
+              "sha256": "0c3ccc516047ca5c86a044454734e6985bec3ec07f002fcc72b1dc5a02176c22",
+              "link": "tools/oracles/verify_original_d3dx_project.py#L1"
+            },
+            {
+              "path": "tests/probes/native_d3dx_project_probe.cpp",
+              "line": 1,
+              "sha256": "ee3c522d839147e16da30df6410bd74fcb7f20c27b036d9c59eecc8650f6eac3",
+              "link": "tests/probes/native_d3dx_project_probe.cpp#L1"
+            },
+            {
+              "path": "tests/unit/d3dx_math.cpp",
+              "line": 1,
+              "sha256": "f6a5cf5db8a6ba1ac0068799efc36018c2cfabac2592c0c03580d7e88a0ccc93",
+              "link": "tests/unit/d3dx_math.cpp#L1"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 96,
+              "sha256": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
+              "link": "tests/unit/manifest.tsv#L96"
+            }
+          ],
+          "limitations": "Dispatch initializer not executed; SSE table is seeded. RCPPS is QEMU division, one NaN source, MXCSR exception flags excluded. No physical CPU reciprocal table capture."
+        },
+        {
+          "judge": "d3dx_matrix_inverse",
+          "acceptance": "Historical 8000 cases, zero value mismatches, 7832 flag mismatches, passed false: FP partial, not pass. Singular/unordered return and sentinel/determinant stores checked; source through original thunk/seeded SSE slot.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/d3dx_matrix_inverse.json",
+              "line": 1,
+              "sha256": "e29eeb478d7e6f2ff44b6c5fd6201ba2944585252de26d6eafe3ab9c9c6620b6",
+              "link": "reference/oracle-reports/d3dx_matrix_inverse.json#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_d3dx_matrix_inverse.py",
+              "line": 1,
+              "sha256": "b93195ee68db0456e650352debb733769e193abef17f1bc5005839ed15515c7d",
+              "link": "tools/oracles/verify_original_d3dx_matrix_inverse.py#L1"
+            },
+            {
+              "path": "tests/probes/native_d3dx_matrix_inverse_probe.cpp",
+              "line": 1,
+              "sha256": "9fa09aec1a1efdc49f54ee25daab32ef94c44db255165641792b9fa44e8d4422",
+              "link": "tests/probes/native_d3dx_matrix_inverse_probe.cpp#L1"
+            }
+          ],
+          "limitations": "QEMU reciprocal/NaN limitations and no FZ/DAZ coverage. No current mutant/holdout qualification established."
+        },
+        {
+          "judge": "d3dx_perspective",
+          "acceptance": "FAIL retained. Primary 5976 compared cases / 19 value mismatches, 24 native unknown cases; seeded suffix 5976 compared / zero value mismatches, 24 native unknowns. Each profile 5975 flag mismatches. Seeded suffix does not prove FSINCOS or repair primary failure.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/d3dx_perspective.json",
+              "line": 1,
+              "sha256": "758eb482062225a1293e520b63edfc832bf2332d316927aa4bd802ff172aa685",
+              "link": "reference/oracle-reports/d3dx_perspective.json#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_d3dx_perspective.py",
+              "line": 1,
+              "sha256": "ed99f838527d7c50fd86fb8737ab00fbe7cf64c17e1cb58e502fa6328dd904e0",
+              "link": "tools/oracles/verify_original_d3dx_perspective.py#L1"
+            },
+            {
+              "path": "tests/probes/native_d3dx_perspective_probe.cpp",
+              "line": 1,
+              "sha256": "a3ee10f5d70ca0d171bf7b90b9be793711a83cd53a1575bb5a7c8510111b31b4",
+              "link": "tests/probes/native_d3dx_perspective_probe.cpp#L1"
+            }
+          ],
+          "limitations": "Infinity class differences and |fovy/2| >= 2^63 C2/stack-underflow boundary remain explicit; flags/hardware transcendental unknown. Current source/probe/oracle fingerprints equal report, which is identity only."
+        }
+      ],
+      "destination": "src/math; retain shared numerical implementation. Reference ABI, original dispatch-table selection and diagnostic PCs stay in src/guest or tests/probes, never move whole algorithm there.",
+      "findings": [
+        {
+          "id": "MATH-D3DX-NAMES",
+          "path": "src/math/d3dx_math.hpp",
+          "line": 32,
+          "detail": "Public functions encode source entry suffixes; ordinary comments combine dispatch table identities, ABI and numerical semantics without supported provenance. Symbol DB conflict at774150 is unresolved.",
+          "required_change": "Use semantic D3DX library API names with resolved provenance/overrides. Keep original dispatch and ABI knowledge at reference boundary. Carry actual native and guest/probe consumers together; avoid a header-only cosmetic migration.",
+          "evidence": [
+            {
+              "path": "src/math/d3dx_math.hpp",
+              "line": 32,
+              "sha256": "3b997c26013a774f6b85e099f774187ffe9af64369316d2e3e769f6ff26ea8f0",
+              "link": "src/math/d3dx_math.hpp#L32"
+            }
+          ]
+        },
+        {
+          "id": "MATH-D3DX-UNKNOWN",
+          "path": "src/math/d3dx_math.hpp",
+          "line": 56,
+          "detail": "Perspective nullopt reports unsupported source FSINCOS C2 behavior, while inverse optional denotes a real mathematical outcome.",
+          "required_change": "Expose a distinct semantic unsupported-result/error contract for perspective without fabricating matrix values; reference adapter maps it back to source diagnostic boundary. Preserve existing judge unknown counts; judge ABI changes require separate evidence.",
+          "evidence": [
+            {
+              "path": "src/math/d3dx_math.hpp",
+              "line": 56,
+              "sha256": "3b997c26013a774f6b85e099f774187ffe9af64369316d2e3e769f6ff26ea8f0",
+              "link": "src/math/d3dx_math.hpp#L56"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Read-only semantic review of the exact source SHA-256 at the named base; no fresh source-fidelity pass or current native build/closure result.",
+        "Prior tracked receipts retain their bounded comparison and inherited failure status. Source equality establishes identity only.",
+        "Root must preserve full failing/partial case identities, full outputs, holdouts and mutation inputs before any behavior-bearing rewrite. Hardware Windows FP and real reciprocal-estimate capture are not supplied by these receipts.",
+        "No original hardware reciprocal estimate captured. This prevents a hardware fidelity claim, not naming native consumers unnecessary."
+      ]
+    },
+    "src/math/d3dx_math.cpp": {
+      "disposition": "needs_migration",
+      "reason": "Inverse is a full register/stack-slot transcription inside math; recovered algorithms must be expressed semantically with narrow justified numerical helpers.",
+      "reviewed_source_sha256": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171",
+      "semantic_justification": "Full 172 lines reviewed, including lane helpers and inverse. Matrix product explicitly accumulates row products left-to-right; aligned transform changes operand order; Newton reciprocal refinement and perspective division remain numerical contracts. Project selects real world/view/projection combinations, builds identity when absent, then maps viewport using unsigned conversion and exact x87 arithmetic. None are fixture transport or obsolete reference-only code. Inverse uses Xmm x0..x7, a0..f0/v100..v30 compiler-stack slots, movlps/movhps/shufps instruction recipes and compressed statements instead of named cofactors/determinant. Masks0x6000/0x1f80, IEEE1.0, 2^32 unsigned conversion and shuffle immediates are numerical encodings, not executable addresses. FSINCOS and m64/mixed precision retain narrow fidelity helper justification; arithmetic cannot be simplified from directory or counts alone.",
+      "evidence": [
+        {
+          "path": "src/math/d3dx_math.cpp",
+          "line": 1,
+          "sha256": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171",
+          "link": "src/math/d3dx_math.cpp#L1",
+          "end_line": 172
+        },
+        {
+          "path": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/bridge-d3dx-multiply-wrapper.json",
+          "line": 1,
+          "sha256": "a8b86ec88effaeda9d4423e28b4e95f2ea85f0ccfbacaf23a92153ebf0b27665",
+          "link": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/bridge-d3dx-multiply-wrapper.json#L1"
+        },
+        {
+          "path": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/bridge-d3dx-dispatch-init.pseudocode.txt",
+          "line": 1,
+          "sha256": "73b989127e7cbfaa6536e0ff85cdfc6f12647f0bef0c8d21142bd63c2cb4a9c6",
+          "link": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/bridge-d3dx-dispatch-init.pseudocode.txt#L1"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "D3DX functions own only local matrix/lane values. Caller owns SseContext, X87Context and reciprocal estimate. Matrix arguments are copied values plus source-alignment arithmetic selection. Optional projection/view/world/viewport represent actual NULL API choices, not absent fixtures; inverse matrix/determinant absence is actual singular/unordered result. Perspective nullopt instead denotes an explicitly unmodelled FSINCOS path and should have a distinct semantic failure contract.",
+          "evidence": [
+            {
+              "path": "src/math/d3dx_math.hpp",
+              "line": 18,
+              "sha256": "3b997c26013a774f6b85e099f774187ffe9af64369316d2e3e769f6ff26ea8f0",
+              "link": "src/math/d3dx_math.hpp#L18",
+              "end_line": 56
+            },
+            {
+              "path": "src/math/d3dx_math.cpp",
+              "line": 58,
+              "sha256": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171",
+              "link": "src/math/d3dx_math.cpp#L58",
+              "end_line": 91
+            },
+            {
+              "path": "src/math/d3dx_math.cpp",
+              "line": 145,
+              "sha256": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171",
+              "link": "src/math/d3dx_math.cpp#L145",
+              "end_line": 169
+            }
+          ]
+        },
+        {
+          "resolution": "Native Display owns numerical contexts and view/matrix state; runtime/model_draw borrows Display contexts, Ninja view services borrow matrices/reciprocal. Reference override adapters own guest-memory/register/stack transport and return byte counts 12/20/24. Do not move the recovered matrix/project/viewport algorithms into guest to hide readability debt.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_display.hpp",
+              "line": 112,
+              "sha256": "89cfa670a597de4388cabbfd41412008006031c096b2b63e7772e86ea9122954",
+              "link": "src/runtime/native_display.hpp#L112",
+              "end_line": 132
+            },
+            {
+              "path": "src/runtime/model_draw.cpp",
+              "line": 48,
+              "sha256": "65ce0096a92c729414601d6055767c7fa7aa2669bd2d34674f86736dee56ea81",
+              "link": "src/runtime/model_draw.cpp#L48",
+              "end_line": 56
+            },
+            {
+              "path": "src/engine/ninja_view_native.hpp",
+              "line": 16,
+              "sha256": "b398943d7db560ad944d3eb87afe6fb0e8e6f3b1ef9de8d3d11b782c9fa2d36a",
+              "link": "src/engine/ninja_view_native.hpp#L16",
+              "end_line": 27
+            },
+            {
+              "path": "src/guest/override_table.cpp",
+              "line": 225,
+              "sha256": "8f55db3d274697694ef5bb745c3d501492dd323633f627c1de3f47d2d975ed90",
+              "link": "src/guest/override_table.cpp#L225",
+              "end_line": 274
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "path": "src/runtime/native_display.cpp",
+          "line": 95,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "Native transform multiplication uses shared D3DX matrix product.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_display.cpp",
+              "line": 95,
+              "sha256": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717",
+              "link": "src/runtime/native_display.cpp#L95"
+            }
+          ]
+        },
+        {
+          "path": "src/runtime/model_draw.cpp",
+          "line": 50,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "Native model multiply and inverse consume D3DX using borrowed display SSE context; inverse currently supplies division approximation.",
+          "evidence": [
+            {
+              "path": "src/runtime/model_draw.cpp",
+              "line": 50,
+              "sha256": "65ce0096a92c729414601d6055767c7fa7aa2669bd2d34674f86736dee56ea81",
+              "link": "src/runtime/model_draw.cpp#L50"
+            }
+          ]
+        },
+        {
+          "path": "src/engine/ninja_view_native.cpp",
+          "line": 43,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "Native camera setup uses perspective, product and inverse and an injected reciprocal service.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_view_native.cpp",
+              "line": 43,
+              "sha256": "f84e70db6daf2a58dc8c098c095ddeede0371a18de8db93d83ed4c02843f6985",
+              "link": "src/engine/ninja_view_native.cpp#L43"
+            }
+          ]
+        },
+        {
+          "path": "src/engine/ninja_projected_depth.cpp",
+          "line": 17,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "native_required",
+          "resolution": "Native queue depth uses project with explicit viewport/projection and two base transforms.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_projected_depth.cpp",
+              "line": 17,
+              "sha256": "12378c9eaf694af14e338affa098653cac077bfeb08fe53930b993f24a43e646",
+              "link": "src/engine/ninja_projected_depth.cpp#L17"
+            }
+          ]
+        },
+        {
+          "path": "src/engine/ninja_view.cpp",
+          "line": 45,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "excluded_native_source",
+          "resolution": "Legacy view calls perspective/product/inverse; excluded native source remains campaign target.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_view.cpp",
+              "line": 45,
+              "sha256": "aad37d5b8a2ff72bc2f8f3ab43459aef6d119f64a4304eb9880d4c8993d2c232",
+              "link": "src/engine/ninja_view.cpp#L45"
+            }
+          ]
+        },
+        {
+          "path": "src/guest/override_table.cpp",
+          "line": 231,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "reference_only",
+          "resolution": "Five concrete math overrides marshal guest matrices/NULLs, alignment and FP state; registration is real, not inferred include closure.",
+          "evidence": [
+            {
+              "path": "src/guest/override_table.cpp",
+              "line": 231,
+              "sha256": "8f55db3d274697694ef5bb745c3d501492dd323633f627c1de3f47d2d975ed90",
+              "link": "src/guest/override_table.cpp#L231"
+            }
+          ]
+        },
+        {
+          "path": "tests/probes/native_d3dx_project_probe.cpp",
+          "line": 15,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "test_reference",
+          "resolution": "Direct project C ABI judge adapter.",
+          "evidence": [
+            {
+              "path": "tests/probes/native_d3dx_project_probe.cpp",
+              "line": 15,
+              "sha256": "ee3c522d839147e16da30df6410bd74fcb7f20c27b036d9c59eecc8650f6eac3",
+              "link": "tests/probes/native_d3dx_project_probe.cpp#L15"
+            }
+          ]
+        },
+        {
+          "path": "tests/probes/native_d3dx_matrix_inverse_probe.cpp",
+          "line": 10,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "test_reference",
+          "resolution": "Direct inverse C ABI judge adapter.",
+          "evidence": [
+            {
+              "path": "tests/probes/native_d3dx_matrix_inverse_probe.cpp",
+              "line": 10,
+              "sha256": "9fa09aec1a1efdc49f54ee25daab32ef94c44db255165641792b9fa44e8d4422",
+              "link": "tests/probes/native_d3dx_matrix_inverse_probe.cpp#L10"
+            }
+          ]
+        },
+        {
+          "path": "tests/probes/native_d3dx_perspective_probe.cpp",
+          "line": 12,
+          "kind": "semantic call / value ownership, not include inference",
+          "scope": "test_reference",
+          "resolution": "Direct perspective C ABI judge adapter; extra sincos export seeds suffix judge.",
+          "evidence": [
+            {
+              "path": "tests/probes/native_d3dx_perspective_probe.cpp",
+              "line": 12,
+              "sha256": "a3ee10f5d70ca0d171bf7b90b9be793711a83cd53a1575bb5a7c8510111b31b4",
+              "link": "tests/probes/native_d3dx_perspective_probe.cpp#L12"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "judge": "d3dx_project",
+          "acceptance": "Historical 4000 cases, zero mismatches. All NULL arms, viewport variants, aligned/misaligned matrices; actual source-range hashes for product/transform/project.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/d3dx_project.json",
+              "line": 1,
+              "sha256": "f8459473618deaedf6d022cd4c8549c4508f48da8559f72a7d068f135db010fc",
+              "link": "reference/oracle-reports/d3dx_project.json#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_d3dx_project.py",
+              "line": 1,
+              "sha256": "0c3ccc516047ca5c86a044454734e6985bec3ec07f002fcc72b1dc5a02176c22",
+              "link": "tools/oracles/verify_original_d3dx_project.py#L1"
+            },
+            {
+              "path": "tests/probes/native_d3dx_project_probe.cpp",
+              "line": 1,
+              "sha256": "ee3c522d839147e16da30df6410bd74fcb7f20c27b036d9c59eecc8650f6eac3",
+              "link": "tests/probes/native_d3dx_project_probe.cpp#L1"
+            },
+            {
+              "path": "tests/unit/d3dx_math.cpp",
+              "line": 1,
+              "sha256": "f6a5cf5db8a6ba1ac0068799efc36018c2cfabac2592c0c03580d7e88a0ccc93",
+              "link": "tests/unit/d3dx_math.cpp#L1"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 96,
+              "sha256": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
+              "link": "tests/unit/manifest.tsv#L96"
+            }
+          ],
+          "limitations": "Dispatch initializer not executed; SSE table is seeded. RCPPS is QEMU division, one NaN source, MXCSR exception flags excluded. No physical CPU reciprocal table capture."
+        },
+        {
+          "judge": "d3dx_matrix_inverse",
+          "acceptance": "Historical 8000 cases, zero value mismatches, 7832 flag mismatches, passed false: FP partial, not pass. Singular/unordered return and sentinel/determinant stores checked; source through original thunk/seeded SSE slot.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/d3dx_matrix_inverse.json",
+              "line": 1,
+              "sha256": "e29eeb478d7e6f2ff44b6c5fd6201ba2944585252de26d6eafe3ab9c9c6620b6",
+              "link": "reference/oracle-reports/d3dx_matrix_inverse.json#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_d3dx_matrix_inverse.py",
+              "line": 1,
+              "sha256": "b93195ee68db0456e650352debb733769e193abef17f1bc5005839ed15515c7d",
+              "link": "tools/oracles/verify_original_d3dx_matrix_inverse.py#L1"
+            },
+            {
+              "path": "tests/probes/native_d3dx_matrix_inverse_probe.cpp",
+              "line": 1,
+              "sha256": "9fa09aec1a1efdc49f54ee25daab32ef94c44db255165641792b9fa44e8d4422",
+              "link": "tests/probes/native_d3dx_matrix_inverse_probe.cpp#L1"
+            }
+          ],
+          "limitations": "QEMU reciprocal/NaN limitations and no FZ/DAZ coverage. No current mutant/holdout qualification established."
+        },
+        {
+          "judge": "d3dx_perspective",
+          "acceptance": "FAIL retained. Primary 5976 compared cases / 19 value mismatches, 24 native unknown cases; seeded suffix 5976 compared / zero value mismatches, 24 native unknowns. Each profile 5975 flag mismatches. Seeded suffix does not prove FSINCOS or repair primary failure.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/d3dx_perspective.json",
+              "line": 1,
+              "sha256": "758eb482062225a1293e520b63edfc832bf2332d316927aa4bd802ff172aa685",
+              "link": "reference/oracle-reports/d3dx_perspective.json#L1"
+            },
+            {
+              "path": "tools/oracles/verify_original_d3dx_perspective.py",
+              "line": 1,
+              "sha256": "ed99f838527d7c50fd86fb8737ab00fbe7cf64c17e1cb58e502fa6328dd904e0",
+              "link": "tools/oracles/verify_original_d3dx_perspective.py#L1"
+            },
+            {
+              "path": "tests/probes/native_d3dx_perspective_probe.cpp",
+              "line": 1,
+              "sha256": "a3ee10f5d70ca0d171bf7b90b9be793711a83cd53a1575bb5a7c8510111b31b4",
+              "link": "tests/probes/native_d3dx_perspective_probe.cpp#L1"
+            }
+          ],
+          "limitations": "Infinity class differences and |fovy/2| >= 2^63 C2/stack-underflow boundary remain explicit; flags/hardware transcendental unknown. Current source/probe/oracle fingerprints equal report, which is identity only."
+        }
+      ],
+      "destination": "src/math; retain shared numerical implementation. Reference ABI, original dispatch-table selection and diagnostic PCs stay in src/guest or tests/probes, never move whole algorithm there.",
+      "findings": [
+        {
+          "id": "MATH-D3DX-INVERSE",
+          "path": "src/math/d3dx_math.cpp",
+          "line": 93,
+          "detail": "Xmm/Sse instruction facade and inverse stack/register locals reproduce the compiler program rather than matrix/cofactor meaning. No cited discriminating case establishes every instruction-shaped representation is the narrowest necessary helper.",
+          "required_change": "Rewrite semantic cofactor/determinant phases under unchanged inverse judge, preserve NaN operand/store ordering and reciprocal step. If lane fidelity truly requires a helper, document and isolate that numerical sequence; retain math algorithm in shared native implementation.",
+          "evidence": [
+            {
+              "path": "src/math/d3dx_math.cpp",
+              "line": 93,
+              "sha256": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171",
+              "link": "src/math/d3dx_math.cpp#L93"
+            }
+          ]
+        },
+        {
+          "id": "MATH-D3DX-ARITHMETIC",
+          "path": "src/math/d3dx_math.cpp",
+          "line": 58,
+          "detail": "Project/perspective have correct recognizable algorithms but compressed code, source-PC comments, address suffixes and untranslated reference assumptions remain.",
+          "required_change": "Use named operations/readable layout, preserve eight nullable product arms, unsigned viewport conversion and FSINCOS spill/depth precision. Separate reference dispatch selection/QEMU estimate assumption from shared algorithms; do not replace source reciprocal with ordinary division as a claimed hardware fix.",
+          "evidence": [
+            {
+              "path": "src/math/d3dx_math.cpp",
+              "line": 58,
+              "sha256": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171",
+              "link": "src/math/d3dx_math.cpp#L58"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Read-only semantic review of the exact source SHA-256 at the named base; no fresh source-fidelity pass or current native build/closure result.",
+        "Prior tracked receipts retain their bounded comparison and inherited failure status. Source equality establishes identity only.",
+        "Root must preserve full failing/partial case identities, full outputs, holdouts and mutation inputs before any behavior-bearing rewrite. Hardware Windows FP and real reciprocal-estimate capture are not supplied by these receipts.",
+        "Primary perspective FAIL and inverse FP partial remain inherited; old source identity and seeded suffix cannot upgrade them. No current mutations/holdouts or Windows real-CPU results."
+      ]
     }
   },
   "external_reference_sources": [
