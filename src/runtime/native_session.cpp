@@ -144,8 +144,8 @@ void Session::reset_game() {
         [this](std::uint32_t mode) { display_->set_depth_compare_mode(mode); },
         services_.stop_vibration,
         [this] { display_->set_blank_queue_mode(); },
-        [this] { cleanup::reset_song_state(tracks_); },
-        [this] { cleanup::reset_current_voice(tracks_); },
+        [this] { cleanup::reset_song_state(music_.tracks); },
+        [this] { cleanup::reset_current_voice(music_.tracks); },
         [this, &stop_pcm] {
             cleanup::AudioQueueView queue{sound_.records, sound_tasks_};
             cleanup::stop_all_sounds(queue, stop_pcm);

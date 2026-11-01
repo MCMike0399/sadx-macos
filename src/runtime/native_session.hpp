@@ -77,7 +77,7 @@ class Session final : private flow::NativeServices {
     }
     const menu_caption::State &menu_caption_state() const { return menu_caption_; }
     const char *active_save_name() const { return save_name_.value; }
-    std::int32_t current_music_song() const { return tracks_.current_song; }
+    std::int32_t current_music_song() const { return music_.tracks.current_song; }
     // NOTSA: read-only journey evidence from the canonical signed-byte owners.
     const std::array<std::int8_t, 9> &character_texture_counts() const {
         return character_textures_loaded_;
@@ -297,13 +297,11 @@ class Session final : private flow::NativeServices {
     audio::PcmState pcm_{sound_.stream_initialized};
     audio::MediaState media_;
     std::unique_ptr<music::Catalog> music_catalog_;
-    music::VoiceTiming voice_timing_;
     music::MediaServices music_media_services_;
     voice_playback::Services voice_services_;
     std::function<std::uint32_t()> music_milliseconds_;
     std::array<TaskHandle, 36> sound_tasks_{};
-    cleanup::TrackState tracks_;
-    TaskHandle sound_manager_;
+    music::SchedulingState music_;
     sound_bank::State banks_;
     sound_bank::ChannelBindings bank_channels_;
     const sound_bank::Catalog *bank_catalog_ = nullptr;

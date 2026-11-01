@@ -16,8 +16,6 @@ struct ResetLeafState {
     // 401410 / 403e60 (borrowed)
     std::optional<std::uint32_t>& depth_mode_at_8928c8;
     std::optional<std::uint32_t>& queue_mode_at_3ab98ac;
-    // 4257c0 / 4257e0
-    std::optional<std::uint32_t> word_at_912694,word_at_912698,word_at_91269c,word_at_9126a8,word_at_3b29cf4,word_at_3b29cf8;
     // 421fb0
     std::optional<std::uint32_t> word_at_3b11190,word_at_3c5e8b8;
     std::optional<std::int32_t>& timing_word_at_3b1118c;
