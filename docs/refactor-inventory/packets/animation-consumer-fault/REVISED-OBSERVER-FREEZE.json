@@ -1,12 +1,13 @@
 {
   "definitions": {
-    "tools/oracles/animation_judges/consumer_fault_observer.py": "f61f40cbe4861ad3168572084b02fe69755002cd14b6e0150cb523a297f0c0df",
-    "tools/oracles/animation_judges/consumer_continuation.py": "c9c126b73c254c6354196eda4a41ccd3c724a7bfcd4d85ff54bb474d9e2a3f44",
-    "tests/python/test_animation_consumer_fault.py": "2d9b7228be248cebdfac41d8a627363b1e72c7e882e217c84a7fa56b91cdfe1b",
+    "tools/oracles/animation_judges/consumer_fault_observer.py": "062ee835b95c94c16bde2ad627012ecfec55d09eb0545ad8e4f9c9fe8ac800c6",
+    "tools/oracles/animation_judges/consumer_continuation.py": "86590ce3c0ee9105e567a438c71521dcbf94f84060d6a40e4c88590bbe48d096",
+    "tests/python/test_animation_consumer_fault.py": "25e68c97a641af93631da356aae7527348751c804aa5cbeac7e7b1deeee4bff6",
     "tests/unit/animation_sonic_composition.cpp": "3de3be273e60491c7631d311c5fc89f2bd1c689e75193825ee875cf65c68415a",
     "tests/unit/animation_gamma_shared_binding.mm": "53a13523c8d21f47a241cf00d1fe887c9c01cc4fc68b0e20249b97e31d8e456c",
     "Makefile": "b80bfae30cfb0affb30b79fe67b25832a97a8526b36662b782c726f0c553145a",
-    "tests/unit/manifest.tsv": "9fdbbfabc51d63456e1fb5916a277c070db1563888c15fe07eefc78b4c81da6c"
+    "tests/unit/manifest.tsv": "9fdbbfabc51d63456e1fb5916a277c070db1563888c15fe07eefc78b4c81da6c",
+    "docs/refactor-inventory/packets/animation-consumer-fault/IMPORTED-HELPERS.json": "49f7fed02bf8e944f5bf0decb1d9e3b98e6bab4cbd570bc3d8043a06fa36d37b"
   },
   "execution_authorized": false,
   "remaining_case_ids": [
@@ -1038,5 +1039,6 @@
     0
   ],
   "policy": "Revised-observer continuation only after fresh independent judge review and distinct Root-authored committed authorization. Never regenerate inputs or repeat completed cohorts.",
-  "original_exit": 1
+  "original_exit": 1,
+  "corrected_review": "fe12f2d"
 }

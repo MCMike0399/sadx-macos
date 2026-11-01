@@ -1,0 +1,23 @@
+{
+  "review": "fe12f2d",
+  "changes": [
+    "All frozen executable/imported content hashes are verified before imports.",
+    "Every extracted tools Python helper is checked against the committed immutable snapshot seal before imports.",
+    "Returned means actual EIP equals STOP with zero boundary; established stops require actual matching PC in inherited stop set.",
+    "Other count-exhausted/unclassified stops fail closed."
+  ],
+  "verification": {
+    "pure_tests": 9,
+    "exit": 0,
+    "immutable_helpers": 372,
+    "frozen_content_inputs": 4,
+    "hash_preflight": "pass"
+  },
+  "original_execution": false,
+  "reserved_continuation": false,
+  "source_changes": false,
+  "limits": [
+    "Fresh independent acceptance and distinct Root authorization still required.",
+    "No completed cohort was rerun; original exit1 retained."
+  ]
+}

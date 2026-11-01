@@ -40,6 +40,20 @@ def completed_ids(records):
             and 'error' not in record]
 
 
+def verify_hashes(records):
+    for path, digest in records.items():
+        if sha(Path(path)) != digest:
+            raise ValueError('Changed consumed dependency: ' + path)
+
+
+def verify_imported_helpers(tree, seal):
+    expected = seal['files']
+    actual = {str(path.relative_to(tree)) for path in (tree / 'tools').rglob('*.py')}
+    if actual != set(expected):
+        raise ValueError('Missing or additional imported Python helper')
+    verify_hashes({str(tree / path): digest for path, digest in expected.items()})
+
+
 def execute(authorization):
     auth = json.loads(authorization.read_text())
     # Bind the authorization itself to committed bytes, never pending edits.
@@ -50,12 +64,21 @@ def execute(authorization):
     for path, digest in auth['definitions'].items():
         if sha(ROOT / path) != digest:
             raise ValueError('Changed authorized definition: ' + path)
+    helper_seal_path = PACKET / 'IMPORTED-HELPERS.json'
+    if str(helper_seal_path.relative_to(ROOT)) not in auth['definitions']:
+        raise ValueError('Authorization must seal the imported Python helper closure')
     if auth['case_ids'] != list(range(1, 1024)):
         raise ValueError('Authorization must retain exact remaining frozen IDs')
     frozen = FINAL / 'docs/refactor-inventory/packets/animation-final-cohorts/freeze.json'
     freeze = json.loads(frozen.read_text())
     if sha(frozen) != auth['original_freeze_sha256']:
         raise ValueError('Changed original freeze')
+    # Check content inputs and every extracted Python helper before loading any.
+    verify_hashes(freeze['inputs'])
+    helper_seal = json.loads(helper_seal_path.read_text())
+    if helper_seal['source_commit'] != freeze['source']:
+        raise ValueError('Helper seal belongs to a different immutable source')
+    verify_imported_helpers(FINAL / 'build/animation-final-cohorts/current', helper_seal)
     for group in ('definitions', 'custom_libraries'):
         for path, digest in freeze[group].items():
             if sha(FINAL / path) != digest:

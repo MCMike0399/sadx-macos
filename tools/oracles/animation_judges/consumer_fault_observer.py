@@ -7,6 +7,15 @@ is never a successful original return or a full gameplay pass.
 import struct
 
 
+def original_outcome(pc, boundary, stop, established_stops):
+    """A zero harness boundary alone is not evidence of an original return."""
+    if boundary == 0 and pc == stop:
+        return 'returned'
+    if boundary != 0 and pc == boundary and boundary in established_stops:
+        return 'established_observer_stop'
+    return 'unexpected_error'
+
+
 def established_null_player_fault(fixture, fault):
     """Recognize the diagnosed reached instruction, not every null-player input."""
     return (fixture[0] == 2 and fixture[35] == 0 and fixture[30] != 0 and
@@ -71,7 +80,9 @@ class SonicFaultObserver:
         self.writes.clear()
         try:
             values, boundary = self.original.run(fixture)
-            return dict(original_outcome='established_observer_stop' if boundary else 'returned',
+            pc = self.original.machine.reg_read(self.pc_register)
+            outcome = original_outcome(pc, boundary, self.locations.STOP, self.original.stops)
+            return dict(original_outcome=outcome, stopped_pc=pc,
                         defined_prefix=values, semantic_boundary=boundary, faults=[],
                         writes=list(self.writes), fault_contract=False)
         except self.unicorn.UcError as error:

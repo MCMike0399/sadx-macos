@@ -5,6 +5,7 @@ from pathlib import Path
 import unittest
 import tempfile
 import json
+import hashlib
 
 PATH = Path(__file__).resolve().parents[2] / 'tools/oracles/animation_judges/consumer_fault_observer.py'
 spec = importlib.util.spec_from_file_location('consumer_fault', PATH)
@@ -19,6 +20,31 @@ continuation_spec.loader.exec_module(continuation)
 
 
 class ConsumerAccountingTests(unittest.TestCase):
+    def test_imported_helpers_and_content_fail_closed_on_drift(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            helper = root / 'tools/oracles/original.py'
+            helper.parent.mkdir(parents=True)
+            helper.write_text('frozen helper')
+            seal = dict(files={'tools/oracles/original.py': hashlib.sha256(helper.read_bytes()).hexdigest()})
+            continuation.verify_imported_helpers(root, seal)
+            helper.write_text('changed comparator')
+            with self.assertRaisesRegex(ValueError, 'Changed consumed dependency'):
+                continuation.verify_imported_helpers(root, seal)
+            helper.write_text('frozen helper')
+            extra = helper.with_name('new_helper.py'); extra.write_text('new import')
+            with self.assertRaisesRegex(ValueError, 'additional imported Python helper'):
+                continuation.verify_imported_helpers(root, seal)
+            extra.unlink(); helper.unlink()
+            with self.assertRaisesRegex(ValueError, 'Missing or additional'):
+                continuation.verify_imported_helpers(root, seal)
+            asset = root / 'gamma.json'; asset.write_text('frozen asset')
+            hashes = {str(asset): hashlib.sha256(asset.read_bytes()).hexdigest()}
+            continuation.verify_hashes(hashes)
+            asset.write_text('different table')
+            with self.assertRaisesRegex(ValueError, 'Changed consumed dependency'):
+                continuation.verify_hashes(hashes)
+
     def test_all_frozen_ids_must_be_present_once_in_order(self):
         rows = [dict(case=index) for index in range(1024)]
         with tempfile.TemporaryDirectory() as directory:
@@ -60,6 +86,15 @@ class ConsumerFaultTests(unittest.TestCase):
             values[index] = value
         values[0], values[1] = 2, 0x49aa50
         self.native = dict(return_code=0, output=values)
+
+    def test_original_return_requires_actual_stop_pc(self):
+        stop = 0x1234
+        self.assertEqual(observer.original_outcome(stop, 0, stop, {0x49ab30}), 'returned')
+        self.assertEqual(observer.original_outcome(0x49ab30, 0x49ab30, stop, {0x49ab30}),
+                         'established_observer_stop')
+        for pc, boundary in ((0x49aa20, 0), (stop, 0x49ab30),
+                             (0x49ab30, 0x49ab30), (0x49ab30, 0x49ab31)):
+            self.assertEqual(observer.original_outcome(pc, boundary, stop, set()), 'unexpected_error')
 
     def test_only_established_reached_signature_is_accepted(self):
         self.assertTrue(observer.established_null_player_fault(self.fixture, self.fault))
