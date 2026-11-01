@@ -1,6 +1,6 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "1839c744069d6110d191d609da9252aba5e3ac9228c2823c0c0ce73bdf8afa9a",
+ "native_library_sha256": "1bffc87b9dec3edaefe0485e9de1059a783f1b21c601e35bd7c17929508279ca",
  "profile": "actual Sonic control prefix plus explicitly seeded post-transform43eecc suffix",
  "cases": 28800,
  "by_entry": [
@@ -261,8 +261,8 @@
   "Native full-angle unavailable low16 stops before the high16 source write; known fixtures cover fully captured angles"
  ],
  "native_sources": {
-  "src/player/sonic_player.hpp": "418bf5996866cc2d11dd27c504f0697a72fc298ae90e3db00dfb0c1d7c33b666",
-  "src/player/sonic_player.cpp": "9ea4fa5e53deac6158ebbad76bbc2f9358515d85414b78f0b7fabeb579e9e073",
+  "src/player/sonic_player.hpp": "8ab874d28623af1876eebed149625c447f112a677098c0fa4f6e56da3286b0b4",
+  "src/player/sonic_player.cpp": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483",
   "tests/probes/native_sonic_player_probe.cpp": "ea27199dca1c3f9ea726e9e1be159ed14b4ec35ab594d975fe80d2f9cd25ca60",
   "tools/oracles/verify_original_sonic_player.py": "d5b661520a090a7a4f4e4e6db71221c0e6bee1a24c9c8a01363f67af22f44c0a",
   "src/player/ground_acceleration.hpp": "35bde538be42156764534857ec3458a443932ab20a6f77832f87a649119f288f",
@@ -276,17 +276,17 @@
   "src/guest/player_acceleration_friction.cpp": "c2b099a18a612ab4d8c11670827bea33b9066d262e79d65844f493a2ac7e2ad1",
   "src/player/player_acceleration_ground.hpp": "2b8bc9a2115dffbb8c442c24dfd82ec31d807dae04478e40b5b02d9a47e0e9f6",
   "src/player/player_acceleration_friction.hpp": "fc27f80b502de6f0bcdf4ac8dd840eb9a176f6d04d6a8a57dea609cc8e11c705",
-  "src/cpu/fidelity_float.hpp": "1dd70ee0f8f12813b27abdf1b15936069f42d90bd67249c3a864b9497a721940"
+  "src/cpu/fidelity_float.hpp": "c96aadce5ca6caa699fb3e9a0b44f791e1ac0420b31ceed31b5fca48118afb98"
  },
  "ground_prefix_cases": 4032,
  "ground_prefix_stored_mismatches": 0,
  "ground_prefix_status_mismatches": 1632,
  "case_sha256": "2acd398b460a3c6691a178fcb7b0862219ac1e11818909ad41cb8fb14e6f34fe",
- "seconds": 12.397659625043161,
+ "seconds": 18.304654832929373,
  "stored_state_matches": true,
  "passed": false,
  "tracked_summary": {
-  "full_sha256": "d87810294d280e641642676df5c76fcb2269d65e67c7e0d1ca07f9388ed6f715",
+  "full_sha256": "1264a8c439111c03ca822673d05e839234833819f13cbb3317e32886831ce7b1",
   "full_bytes": 25113,
   "lists_cut_to": 10,
   "cut_lists": {
