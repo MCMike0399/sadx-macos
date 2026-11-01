@@ -1,8 +1,10 @@
 {
-  "scope": "Exactly four complete Python helper/test files, unchanged since the reviewed7924190 snapshot. Explicit purpose-specific conformance only. Tool directory whole-module closure remains OPEN: the two accepted tool files are members of tools/oracles/task_judges, not independent modules.",
+  "scope": "Exactly six complete maintained helper/test files. The replay has explicit effects gated by immutable Root admission; complete-file purpose-specific conformity is separate from any whole tool-directory or Source-module closure. Existing two test-module judgments remain unchanged; no new module closure inferred.",
   "reviews": [
     "docs/refactor-inventory/packets/task-owner/REVIEW-RESERVED-HELPERS.md",
-    "docs/refactor-inventory/packets/task-owner/RECHECK-CAPTURE-BINDING.md"
+    "docs/refactor-inventory/packets/task-owner/RECHECK-CAPTURE-BINDING.md",
+    "docs/refactor-inventory/packets/task-owner/REVIEW-FAILED-DELETE-REPLAY.md",
+    "docs/refactor-inventory/packets/task-owner/RECHECK-FAILED-DELETE-ADMISSION.md"
   ],
   "files": {
     "tools/oracles/task_judges/reserved_inputs.py": {
@@ -77,34 +79,36 @@
     },
     "tools/oracles/task_judges/compare_streams.py": {
       "disposition": "already_conforming",
-      "reason": "Complete file independently read and accepted for its bounded helper/test purpose; current bytes match the reviewed snapshot.",
-      "semantic_justification": "Complete comparison binds successful nonempty capture identities and ordered calls, strict Base64 payload sizes/hashes and exact whole JSON records; preserves scalar/return/padding/exclusion differences without projection.",
+      "reason": "Complete maintained body directly reviewed for bounded Standards and Spec; the sole admission finding is fixed and independently rechecked. Current bytes match accepted review hashes.",
+      "reviewed_source_sha256": "38d882f2fad2711584f37ea9b129e52f4b6ddaee9d14c758aecb6652be4485f1",
+      "read_lines": 109,
+      "semantic_justification": "Normal comparator and validated_records require successful nonempty ordered captures. The separate failed-deletion integrity entry requires exactly five artifact pins and exit1; it shares strict ledger/digest/buffer validation without promoting a failed source oracle. Whole-record comparison retains scalars, returns, all payload/padding and exclusion identities.",
       "resolved_owners": [
-        "Owns only streamed read/validation state. The observer separately binds independent expected cases; frozen workflow owns receipt trust."
+        "Verification callers own immutable inputs and explicit execution admission; helpers own only bounded capture/read/replay state. No game scheduler/arena policy or additional runtime owner is introduced."
       ],
       "resolved_consumers": [
-        "Task packet generation/capture/comparison development and future reviewed Root runner; no game algorithm or runtime owner is relocated."
+        "Task qualification and explicit Root native replay; ordinary comparator CLI retains its successful-capture contract. No product build/runtime consumer is added."
       ],
       "accepted_judges": [
-        "Fifteen regression tests, independent old-helper reproduction and adversarial read-only review preserve complete ledger/equality purpose."
+        "Direct complete-file Standards/Spec review3a7bee1 and admission recheckfea2289; all95 focused tests pass, including21 fake-only replay tests.",
+        "Original-vs-old deletion discrepancy207 is explicitly retained; structural capture integrity and native-old equality never substitute for a source pass."
       ],
       "classification_limits": [
-        "No final runner, source observer outcome, reserved execution, Task or campaign approval follows.",
-        "Receipt/capture integrity relies on protected committed workflow; independently expected case binding remains the observer responsibility."
+        "Accepted complete-file code conformity for this explicit verification purpose only; no inferred tool-directory, Source72 or campaign closure.",
+        "Source deletion comparison remains FAIL at case207. Native preservation and source fidelity are independent dimensions; both original terminal EXIT1 receipts remain failures.",
+        "Execution requires a distinct committed affirmative Root admission and exact helper/interpreter/library/input/receipt pins. Review alone grants no execution."
       ],
       "evidence": [
         {
-          "path": "docs/refactor-inventory/packets/task-owner/REVIEW-RESERVED-HELPERS.md",
-          "sha256": "0dacae60163cdee59465cc4244d152d70b236c6eb26deb8ea87e7bc97b8f5c3f"
+          "path": "docs/refactor-inventory/packets/task-owner/REVIEW-FAILED-DELETE-REPLAY.md",
+          "sha256": "5cc8a22eb529e896aa74e771c7c07534f45531225d8ed750279e2131d32bd422"
         },
         {
-          "path": "docs/refactor-inventory/packets/task-owner/RECHECK-CAPTURE-BINDING.md",
-          "sha256": "c10e38a79750b4d687f5f4dca158b89ffe9cef4467d6bf63462a0459901e4573"
+          "path": "docs/refactor-inventory/packets/task-owner/RECHECK-FAILED-DELETE-ADMISSION.md",
+          "sha256": "c0bfb9d1879324d98f22e27997cc15ea441ee1c71e471c178b20f40aeec4e999"
         }
       ],
       "findings": [],
-      "reviewed_source_sha256": "4b935e04e6abcb1b4cdc675e3ffedcbe0175f6f450a3f5b03be09e1726d08bfe",
-      "read_lines": 86,
       "complete_member_list": [
         "tools/oracles/task_judges/compare_streams.py"
       ],
@@ -144,6 +148,80 @@
         "tests/python/test_task_stream_completeness.py"
       ],
       "destination": "tests/python/test_task_stream_completeness.py"
+    },
+    "reference/packets/task-delete-native-replay/replay.py": {
+      "disposition": "already_conforming",
+      "reason": "Complete maintained body directly reviewed for bounded Standards and Spec; the sole admission finding is fixed and independently rechecked. Current bytes match accepted review hashes.",
+      "reviewed_source_sha256": "27d73c9af213f073ab2de9c5e8193aa57c14e14830991c8461f7ab3c57cd5089",
+      "read_lines": 202,
+      "semantic_justification": "A bounded native-only replay verifies immutable Root admission, exact artifact/library/interpreter/helper hashes, complete source/input/capture mapping, expected projections/exclusions and unchanged original mismatches before exclusive output and native loading. It replays only retained produced calls, compares complete ABI bytes, stops on first native inequality and records sourceFAIL separately. It contains no original execution, generator or build path.",
+      "resolved_owners": [
+        "Verification callers own immutable inputs and explicit execution admission; helpers own only bounded capture/read/replay state. No game scheduler/arena policy or additional runtime owner is introduced."
+      ],
+      "resolved_consumers": [
+        "Task qualification and explicit Root native replay; ordinary comparator CLI retains its successful-capture contract. No product build/runtime consumer is added."
+      ],
+      "accepted_judges": [
+        "Direct complete-file Standards/Spec review3a7bee1 and admission recheckfea2289; all95 focused tests pass, including21 fake-only replay tests.",
+        "Original-vs-old deletion discrepancy207 is explicitly retained; structural capture integrity and native-old equality never substitute for a source pass."
+      ],
+      "classification_limits": [
+        "Accepted complete-file code conformity for this explicit verification purpose only; no inferred tool-directory, Source72 or campaign closure.",
+        "Source deletion comparison remains FAIL at case207. Native preservation and source fidelity are independent dimensions; both original terminal EXIT1 receipts remain failures.",
+        "Execution requires a distinct committed affirmative Root admission and exact helper/interpreter/library/input/receipt pins. Review alone grants no execution."
+      ],
+      "evidence": [
+        {
+          "path": "docs/refactor-inventory/packets/task-owner/REVIEW-FAILED-DELETE-REPLAY.md",
+          "sha256": "5cc8a22eb529e896aa74e771c7c07534f45531225d8ed750279e2131d32bd422"
+        },
+        {
+          "path": "docs/refactor-inventory/packets/task-owner/RECHECK-FAILED-DELETE-ADMISSION.md",
+          "sha256": "c0bfb9d1879324d98f22e27997cc15ea441ee1c71e471c178b20f40aeec4e999"
+        }
+      ],
+      "findings": [],
+      "complete_member_list": [
+        "reference/packets/task-delete-native-replay/replay.py"
+      ],
+      "destination": "reference/packets/task-delete-native-replay/replay.py"
+    },
+    "tests/python/test_task_delete_native_replay.py": {
+      "disposition": "already_conforming",
+      "reason": "Complete maintained body directly reviewed for bounded Standards and Spec; the sole admission finding is fixed and independently rechecked. Current bytes match accepted review hashes.",
+      "reviewed_source_sha256": "6378464aee9f1d2f592c1c0df67d32f2f648332bf15ac420c00d0f3f59478179",
+      "read_lines": 253,
+      "semantic_justification": "Complete fake-only tests reject missing/truncated/reordered/duplicated captures, wrong case mapping, changed input/output padding and source expectations with unchanged mismatch count, altered exclusions, uncommitted proof replacement and non-affirmative proposal execution. Intercepted main-boundary tests prove zero contracts/output/library calls for all seven non-admissions.",
+      "resolved_owners": [
+        "Verification callers own immutable inputs and explicit execution admission; helpers own only bounded capture/read/replay state. No game scheduler/arena policy or additional runtime owner is introduced."
+      ],
+      "resolved_consumers": [
+        "Task qualification and explicit Root native replay; ordinary comparator CLI retains its successful-capture contract. No product build/runtime consumer is added."
+      ],
+      "accepted_judges": [
+        "Direct complete-file Standards/Spec review3a7bee1 and admission recheckfea2289; all95 focused tests pass, including21 fake-only replay tests.",
+        "Original-vs-old deletion discrepancy207 is explicitly retained; structural capture integrity and native-old equality never substitute for a source pass."
+      ],
+      "classification_limits": [
+        "Accepted complete-file code conformity for this explicit verification purpose only; no inferred tool-directory, Source72 or campaign closure.",
+        "Source deletion comparison remains FAIL at case207. Native preservation and source fidelity are independent dimensions; both original terminal EXIT1 receipts remain failures.",
+        "Execution requires a distinct committed affirmative Root admission and exact helper/interpreter/library/input/receipt pins. Review alone grants no execution."
+      ],
+      "evidence": [
+        {
+          "path": "docs/refactor-inventory/packets/task-owner/REVIEW-FAILED-DELETE-REPLAY.md",
+          "sha256": "5cc8a22eb529e896aa74e771c7c07534f45531225d8ed750279e2131d32bd422"
+        },
+        {
+          "path": "docs/refactor-inventory/packets/task-owner/RECHECK-FAILED-DELETE-ADMISSION.md",
+          "sha256": "c0bfb9d1879324d98f22e27997cc15ea441ee1c71e471c178b20f40aeec4e999"
+        }
+      ],
+      "findings": [],
+      "complete_member_list": [
+        "tests/python/test_task_delete_native_replay.py"
+      ],
+      "destination": "tests/python/test_task_delete_native_replay.py"
     }
   },
   "modules": {
