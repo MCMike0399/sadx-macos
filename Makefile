@@ -522,3 +522,7 @@ build/game-mode-forwarding-test: tests/unit/game_mode_forwarding.cpp src/game/ga
 	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/game_mode_forwarding.cpp src/game/game_mode.cpp src/game/game_mode_native.cpp -o $@
 build/game-mode-diagnostics-test: tests/unit/game_mode_diagnostics.cpp src/game/game_mode.cpp src/guest/game_mode_reference.cpp src/guest/game_mode_reference.hpp src/game/game_mode.hpp src/game/game_mode_internal.hpp src/game/game_mode_services.hpp src/game/game_loop.hpp src/engine/game_logic.hpp | build
 	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/game_mode_diagnostics.cpp src/game/game_mode.cpp src/guest/game_mode_reference.cpp -o $@
+
+# Exact native axes: partial stores, aliases and caller-selected SSE controls.
+build/input-mod-axes-contract-test: tests/unit/input_mod_axes_contract.cpp src/input/input_mod_axes.cpp src/input/input_mod_axes.hpp src/cpu/sse_math.cpp src/cpu/sse_math.hpp build/softfloat_sse/softfloat-sse.a build/softfloat/softfloat.a | build
+	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/input_mod_axes_contract.cpp src/input/input_mod_axes.cpp src/cpu/sse_math.cpp build/softfloat_sse/softfloat-sse.a build/softfloat/softfloat.a -o $@

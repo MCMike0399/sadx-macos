@@ -1,0 +1,34 @@
+{
+  "base": "ec06b2dd535d346afc229ae80f3bcd95932457ad",
+  "files": {
+    "src/input/input_mod_axes.hpp": "51cb3a746951707ac7fc624f54a481aa81312af153412b31f5cc14b1ec333e81",
+    "src/input/input_mod_axes.cpp": "1d9aee1c76bb2c09b937bca9b5525d9fbaba9c7af95521364076c8dac1dd3df4",
+    "src/cpu/sse_math.hpp": "b0bed7f83c4b3ceec2070dee8a64de8045f2cc3bde412483690b8d4e6a7ef213",
+    "src/cpu/sse_math.cpp": "b7ddd9dc425ac2e1ebd49929de1dcdf4bd7671466bf041544a6ba57157ca12b7",
+    "src/input/input.cpp": "908777b22b43861ff0c767937a478d7981f0ac31091f63d00d55da36dc8163bf",
+    "src/input/input_mod_pad.cpp": "236237ddd8fc2d46eb941012ff6bf495524e6026bb764cfbe01135499f7c0525",
+    "src/runtime/native_input.cpp": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114",
+    "src/apps/diagnostics/mac_controller_probe.mm": "7bc76539972a0b205ad3afbd86164b37dc4770dfed770daa9e4201aa80c6f2a3",
+    "src/apps/diagnostics/mac_controller_tester.mm": "0238fe3998f84b09c664a01ad9af2aee1893d1779f4ad71dfd3b4b032a666d8c",
+    "src/input/input_mod_constants.cpp": "dc2f26b82c0d631afe1f42c910cbeb85e39601d24a90e126a194884e8c783e3b",
+    "tests/unit/input_mod_axes.cpp": "933fd4791acbdf535671948b24137ec7b358409efdbb1fd56a554f42368d376c",
+    "tests/probes/native_input_mod_axes_probe.cpp": "79f1bdf2811da9f584c850c5c72290a3b771d6bb9a2bf8843047afb4a09aa04f",
+    "tools/oracles/verify_original_input_mod_axes.py": "f20c214141bfa217c423463d90b8ba62d2f387c3c674dad3ed8d459606e9ace2",
+    "reference/input-mod-axes-provenance.md": "a90175b165ccf98807c1cd77b86223dc11d668ccae0b0db7016398ba79eb82ea",
+    "reference/input-mod-controller-normalize.asm": "99d2be46c1a87424740ee27f1a992bfd4cf1459a94644b8820b09c1c90d102df",
+    "reference/input-mod-keyboard-normalize.asm": "8302f8b246a8337a6457285217e1528942913c9544ad436c61ecfde1c1a234ef",
+    "tools/gate/profile_patches.json": "926395f83d0c5d92455ef93df91c950718057ae77b99622fb8e1e19cbf0f0e1e"
+  },
+  "numeric_archives": {
+    "build/input-axes/pinned/softfloat-sse.a": "029cef8aee415206ddf355b592e934dd827e8882707c945a1bf42901d37504f5",
+    "build/input-axes/pinned/softfloat.a": "617840b8b6811c238a97fa493182ba91ab045dd996b07c4392043dbe27a11612"
+  },
+  "build_contract": "Both maintained axes and SseContext translation units are compiled directly. Only the pinned third-party numeric archives are linked; no maintained Main archive is used. Initial base-SoftFloat-only link failed because its float32 members live in the SSE archive; that command is not counted as a baseline pass. Corrected two-archive unit/probe build succeeds.",
+  "scope": "Whole input_mod_axes header/implementation and every unchanged consumer; no pad-owner rewrite or CPU-policy correction.",
+  "limits": [
+    "Output optionals record committed stores, not fixture availability; preserve prior values, aliases and unmasked-exception prefixes.",
+    "Controller direction and keyboard numeric step/store order remain exact; no host-FP replacement without judge evidence.",
+    "Pad staging/publication concern stays explicit separate debt, not fixed or hidden by this module rewrite.",
+    "All inherited SSE value failures and Input FP partial identities remain explicit; no new hardware/Windows input or gameplay63FPS qualification."
+  ]
+}

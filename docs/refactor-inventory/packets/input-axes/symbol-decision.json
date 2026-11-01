@@ -1,0 +1,23 @@
+{
+  "module": "INPUT",
+  "address": "0x10004400",
+  "name": "convert_axes",
+  "name_status": "Local descriptive recovered name, already used in retained provenance; upstream export identity is not claimed.",
+  "evidence_id": "ev_0842dfed02318b34dbad4e9973d4bc6c31e2eb4756a10a7b2e4b23ba4f3168c0",
+  "body_sha256": "0842dfed02318b34dbad4e9973d4bc6c31e2eb4756a10a7b2e4b23ba4f3168c0",
+  "evidence_paths": [
+    "reference/input-mod-controller-normalize.asm",
+    "reference/input-mod-axes-provenance.md",
+    "tools/oracles/verify_original_input_mod_axes.py"
+  ],
+  "compiler_coefficient_provenance": [
+    "0x1000bb6c",
+    "0x1000bbb0",
+    "0x1000bba0",
+    "0x1000bba4",
+    "0x1000bb7c"
+  ],
+  "compiler_coefficient_words": "0000003400feff460000fe42000000430000803f",
+  "keyboard_slice": "Interior range, not a recovered function entry; named NOTSA operation, never invented FUNCTION annotation.",
+  "arithmetic_policy": "Exact caller-selected SSE context is retained because rounding/DAZ/FTZ/masks and partial-store exception order are public contracts; no native float replacement."
+}

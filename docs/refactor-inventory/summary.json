@@ -1,7 +1,7 @@
 {
   "base_commit": "f6c4e538af463a2eaf4c1fe961f04e8443d51878",
   "baseline_removed_paths": [],
-  "boundary_entries": 2306,
+  "boundary_entries": 2308,
   "checks_not_run": [
     "builds",
     "gate",
@@ -12,30 +12,30 @@
   ],
   "coverage": "exact tracked path equality; no semantic completeness or behavior verdict",
   "dispositions": {
-    "already_conforming": 78,
-    "needs_migration": 33,
-    "open_review": 1570,
+    "already_conforming": 80,
+    "needs_migration": 31,
+    "open_review": 1572,
     "reference_infrastructure": 7
   },
-  "maintained_and_script_entries": 1688,
+  "maintained_and_script_entries": 1690,
   "module_dispositions": {
-    "already_conforming": 46,
-    "needs_migration": 11,
-    "open_review": 1022
+    "already_conforming": 47,
+    "needs_migration": 10,
+    "open_review": 1023
   },
   "module_shards": [
     {
       "path": "modules.jsonl",
-      "records": 829,
-      "sha256": "6fbf3713b35ca60eaa13a996831c75bc161c97407137d9e761cf752dc7d6f55f"
+      "records": 830,
+      "sha256": "c9fa5f867ded0cacbf5f6708115b2c97979bdc078d0c9a113a572b8bdcb3959f"
     },
     {
       "path": "modules-002.jsonl",
       "records": 250,
-      "sha256": "00884e370c4548efb4c7ea18fdc78ff44a6fe85fbdff330a0774526a62ae2cf8"
+      "sha256": "cf05f56c6642f006770588a4ebcdeb63aff1333629c48c964a0741e150209eca"
     }
   ],
-  "modules": 1079,
+  "modules": 1080,
   "native_translation_units_listed": 128,
   "native_translation_units_not_listed": 186,
   "other_stub_mentions": 11,
@@ -49,11 +49,11 @@
   },
   "reviewed_stub_bindings": 2,
   "roots": {
-    "reference": 2214,
+    "reference": 2216,
     "src": 650,
-    "tests": 604,
+    "tests": 605,
     "third_party": 155,
-    "tools": 371
+    "tools": 372
   },
   "schema_version": 1,
   "stub_annotations": 84,
@@ -73,7 +73,7 @@
     "sound-movie": 27,
     "task-ownership": 6,
     "texture-lifetime": 23,
-    "tooling-judges": 1038
+    "tooling-judges": 1040
   },
-  "tracked_scope": 3994
+  "tracked_scope": 3998
 }

@@ -1,12 +1,12 @@
 {
   "change": {
-    "base_commit": "34cead9647b81fcc4e6031f7006c626c75abb14e",
-    "evidence": "reference/production-integration-20261101/mode-save-main-checks.json",
-    "evidence_sha256": "00ca3ce4c5cfd5a2b165f519fbe0434c72cdbfe4ca1fa18474aa80f3b8d266cc",
-    "reason": "Bind actual Main mode rebuild and unchanged24000case/fullABI diagnostics plus all4registered contract results; preserve every1266parent input and original expectation"
+    "base_commit": "3ad072258ed1205685b8b6a588fb68dba219b005",
+    "evidence": "reference/production-integration-20261101/input-axes-parent-union.json",
+    "evidence_sha256": "5a63b2b9907df13b792c9dfa980f0fa25205d9b0aec9c1ffb15c5def496ecd3e",
+    "reason": "Seal1268-input approved axis/Main union and exact new contract body under widened protection; preserve allparent paths, originalcases/partials and nativeholdout"
   },
   "files": {
-    "Makefile": "4e1a7e5d5e9508e6cbf599c61a52f356c8348ace61d71745351b210f5ec2ae62",
+    "Makefile": "77a6cc1837d73f1d569b65edc81f429a297ef8a6ca49b0656dee53a945cbfe14",
     "reference/address-dispatch-baseline-v1.json": "db0e83e323df714032ddad3046670d81968efe8e966630d9666ecbbe87d38bd7",
     "reference/constexpr-table-review.json": "dd7bd2551d3226bc0c855632aa9493b2d84d4fe0f3e7a7f19a90f34b45a9dbda",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
@@ -759,6 +759,7 @@
     "tests/unit/input_constants_boot.cpp": "4388b7718bac529ae20fed32789923570bc08dcdc561fc07270a0776e483c27b",
     "tests/unit/input_initial_state.cpp": "aa3b29d46040dfadd11d2111dce6cbad009c0d47787704e10405ba385c4ba333",
     "tests/unit/input_mod_axes.cpp": "933fd4791acbdf535671948b24137ec7b358409efdbb1fd56a554f42368d376c",
+    "tests/unit/input_mod_axes_contract.cpp": "24aabf429c77e4ba4a5e6be8976f79da4b82300de68c27dd960792133bdb1876",
     "tests/unit/input_mod_constants.cpp": "376fea846baaaf54d2ca4ab7c9a10c9cc94e52cb43863c1daef7f14ac1f16ee2",
     "tests/unit/input_mod_pad.cpp": "dd4cb251b84466e4b37d820d83fab4d8f17eebd7c3c2d0d79820480a8a5ee5a6",
     "tests/unit/level_sounds.cpp": "8dc493049fd2b5a0a1e653fb400f6814c0e0da32ded37858590aa13a761a583b",
@@ -786,7 +787,7 @@
     "tests/unit/main_menu_content.cpp": "9ae62d33ab3981c4050da8fd8ede955a08c2ecbcfd91d865de895e5d39c49145",
     "tests/unit/main_menu_eligibility.cpp": "0769bb1cd5d58da859399c2dc7082ca05d3ed8bd3704838e1c528b49ef9896cc",
     "tests/unit/main_menu_profile.cpp": "5c9e473de4a1fecaf1e1cbd9e14072919973cb8719c724de52cc95900ba9dace",
-    "tests/unit/manifest.tsv": "4423cdc597453f720afd3ce550253d484f37ccd2164b57722af21a8a4aa1723e",
+    "tests/unit/manifest.tsv": "7bbf12fcf856078db0a1c4a66f5f91e338d45a5c86495e16fdb6cc4a7c4ecfe4",
     "tests/unit/material_correction.cpp": "e866358fc8165d70c48a71b77ee5479198900842c3cfcd4de4ce65701d1f1a3a",
     "tests/unit/menu_dialog_control.cpp": "dcf53f00372f20ade1fcb0714f1fd184052077a5ac9709afd91840a0ffe6cb1a",
     "tests/unit/menu_draw_primitives.cpp": "e11ef8ad54979d33773aaecb47e1d1bbf115bd8e2b7f5115582a8718ed85543f",
@@ -1012,6 +1013,7 @@
     "tools/lib/extract.py": "d2c2cb1479003401ba1faf0211281a6c6d35949c2bd27e55acc48f7cc7825bd8",
     "tools/lib/import_audio.py": "91f0db9f658c306a4a5637b4180c4e0d6033da72d927f1ba59c18965e5a49e30",
     "tools/lib/pe_image.py": "94694dc5fb38e459d26b35c25a7cdb7e3fad7128e1178363340606bb9db299f2",
+    "tools/oracles/capture_input_axes.py": "c0fb3d515dd156c850660726c43c1163d737b4eeb8e3c4e8724e844a662b4f8e",
     "tools/oracles/check_basic_model_packet.py": "ebed363eb2c7ba7e20097d24237223b82d9c6e20d609940519908acbd57214cc",
     "tools/oracles/check_character_resource_gamma.py": "8cf12856bc1a48af48b7b5161363519846302d0032f2fb976c991359bde80c2c",
     "tools/oracles/check_collision_component.py": "ba5d52eead4e0f9fa747a49d184e633bb293ae952d9d41a4d47a7f1364151e96",

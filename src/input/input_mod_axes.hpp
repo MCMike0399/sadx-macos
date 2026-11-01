@@ -3,30 +3,44 @@
 #include <cstddef>
 #include <cstdint>
 #include <optional>
+
 namespace sadx {
-// Raw signed16 SDL/keyboard ramp values, before any native normalization.
-struct InputModRawAxes { std::int16_t x, y; };
-struct InputModAxesConstants {
-    Sse32 epsilon; // DLL 0x1000bb6c
-    Sse32 maximum; // DLL 0x1000bbb0
-    Sse32 keyboard_scale; // DLL 0x1000bba0
-    Sse32 controller_scale; // DLL 0x1000bba4
-    Sse32 magnitude_cap; // DLL 0x1000bb7c
+struct InputModRawAxes {
+    std::int16_t x;
+    std::int16_t y;
 };
-// Five little-endian f32 words in the declaration order; requires caller bytes.
-std::optional<InputModAxesConstants> decode_input_mod_axes_constants(const std::uint8_t*,std::size_t);
+
+// NOTSA: caller-supplied numeric content; this value owns no DLL memory.
+struct InputModAxesConstants {
+    Sse32 epsilon;
+    Sse32 maximum;
+    Sse32 keyboard_scale;
+    Sse32 controller_scale;
+    Sse32 magnitude_cap;
+};
+
+// NOTSA: five little-endian binary32 words, in declaration order, at the byte boundary.
+std::optional<InputModAxesConstants> decode_input_mod_axes_constants(const std::uint8_t *bytes,
+                                                                  std::size_t size);
+
+// Disengaged fields have not been published. Unmasked failures retain earlier
+// stores and leave later fields untouched, including previously engaged values.
 struct InputModAxesOutput {
-    std::optional<std::int16_t> x, y;
+    std::optional<std::int16_t> x;
+    std::optional<std::int16_t> y;
     std::optional<Sse32> magnitude;
 };
-// Actual convert_axes helper 0x10004400..45df: deadzone is signed16 in ABI.
-// Earlier stores survive an unmasked arithmetic exception. No hidden deadzone.
-void convert_input_mod_261_axes(InputModRawAxes, std::int16_t deadzone, bool radial,
-    const InputModAxesConstants&, SseContext&, InputModAxesOutput&);
-// Pure scalar keyboard normalization in poll routine, for both sticks. This
-// excludes the Windows raw event/ramp owner, cursor, half-press, recenter and
-// controller-priority phases. Earlier source stores survive later failures.
+
+// Deadzone is signed16; singular and negative settings keep their original arithmetic.
+// FUNCTION: INPUT 0x10004400 convert_axes
+void convert_input_mod_261_axes(InputModRawAxes raw, std::int16_t deadzone, bool radial,
+                                const InputModAxesConstants &constants, SseContext &arithmetic,
+                                InputModAxesOutput &output);
+
+// Excludes event/ramp ownership, cursor, half-press, recenter and controller arbitration.
+// NOTSA: the two scalar keyboard normalization slices share one native operation.
 void normalize_input_mod_261_keyboard(InputModRawAxes left, InputModRawAxes right,
-    const InputModAxesConstants&, SseContext&, InputModAxesOutput& left_output,
-    InputModAxesOutput& right_output);
+                                     const InputModAxesConstants &constants, SseContext &arithmetic,
+                                     InputModAxesOutput &left_output,
+                                     InputModAxesOutput &right_output);
 } // namespace sadx
