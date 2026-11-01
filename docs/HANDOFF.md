@@ -781,3 +781,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Seven frozen capacity/null observations preserve all 212 wire bytes, output guards and the complete 214-byte diagnostic. The existing exhaustive unit passes before and after; three valid compiled faults are caught.
 * The actual guest adapter/device COM test passes with the fresh caps object, including original mipmap consumer checks. Layers, owners, readability, constexpr classification and profile checks pass. Task ownership and native shipping sources are untouched.
 * Fresh independent review, one-probe manifest registration, canonical inventory and the coherent Main integration gate remain pending. No full gate or broader renderer/campaign closure. No push.
+
+### 2026-11-01 — Capability and task-judge integration qualified
+
+* The complete capability module names its wire fields and preserves all 212 record bytes and the 214-byte diagnostic. Both reference consumers retain the explicit uncaptured-GPU assumption. The unchanged wire/guest COM tests and three compiled faults pass their bounded checks.
+* The task capture comparator now proves complete ordered ledgers before equality. Fifteen focused regressions and an independent review cover empty, truncated, duplicated, reordered and independently unequal captures. New task generator/observer helpers still require complete adequacy review.
+* Qualified-corpus make -j10 gate exits zero at 1372ef2: 304 native programs, 539 Python tests, one inherited filesystem skip, reference R1–R4, three native menu/save journeys and sixteen startup comparisons. All 1,329 protected inputs verify. STATUS is regenerated.
+* Task source 72d0e83 remains private and has bounded standards approval for four engine files. Its final compilation, complete streams, fourteen scheduler and three bridge faults, fidelity review, reserved checks and integration remain pending. Earlier runtime receipts apply only to 78702db.
+* The Task worker's compute hold is released immediately for that final qualification. No further tiny utility gate will preempt this primary source migration. The next system will follow reset/renderer/queue/Sonic ownership prerequisites. Whole campaign and gameplay frontier remain unchanged. No push.
