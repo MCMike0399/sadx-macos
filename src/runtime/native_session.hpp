@@ -85,10 +85,10 @@ class Session final : private flow::NativeServices {
 
     std::uint32_t logic_loop_count() const { return secondary_loop_count_; }
     std::optional<file_select::FileInfo> selected_save_file() const {
-        auto node = list_data_;
+        auto node = save_file_list_;
         for (unsigned index = 0; node && index < bootstrap_.card_state; ++index)
             node = node->next;
-        return node ? node->file : std::nullopt;
+        return node && node->file() ? std::optional<file_select::FileInfo>(*node->file()) : std::nullopt;
     }
     const LogoScene &logo_scene() const { return logo_; }
     std::uint32_t global_timer() const { return global_timer_; }
@@ -331,7 +331,8 @@ class Session final : private flow::NativeServices {
     std::array<void *, 6> set_files_{}, camera_files_{};
     cleanup::LevelDestructor level_destructor_ = nullptr;
     void *level_destructor_context_ = nullptr;
-    file_select::List list_data_;
+    // Canonical native list; all menu, load, writer and cleanup views borrow it.
+    file_select::List save_file_list_;
     file_select::SaveFileCalls *save_files_ = nullptr;
     std::string debug_message_;
     cleanup::TextureState texture_state();

@@ -7,15 +7,31 @@
 #include <string>
 #include <string_view>
 #include <utility>
+#include <variant>
 namespace sadx::file_select {
 struct FileInfo {
     std::string name;
     std::uint64_t last_write_time = 0;
 };
-struct ListNode {
-    // The first source MAlloc node leaves name/time indeterminate; only next is initialized.
-    std::optional<FileInfo> file;
+// NOTSA: distinguish the source sentinel from a published file node whose
+// filename allocation has not completed (or whose payload has been freed).
+// Neither state supplies guessed filename/time bytes.
+class ListNode {
+  public:
+    enum class Kind { Sentinel, File };
+    explicit ListNode(Kind kind = Kind::Sentinel) {
+        if (kind == Kind::File) contents_ = EmptyFile{};
+    }
+    bool is_sentinel() const { return std::holds_alternative<Sentinel>(contents_); }
+    FileInfo *file() { return std::get_if<FileInfo>(&contents_); }
+    const FileInfo *file() const { return std::get_if<FileInfo>(&contents_); }
+    void set_file(FileInfo file) { contents_ = std::move(file); }
+    void clear_file() { contents_ = EmptyFile{}; }
     std::shared_ptr<ListNode> next;
+  private:
+    struct Sentinel {};
+    struct EmptyFile {};
+    std::variant<Sentinel, EmptyFile, FileInfo> contents_;
 };
 using List = std::shared_ptr<ListNode>;
 class Search {
@@ -45,14 +61,14 @@ struct SaveFileCalls {
     virtual std::optional<FileInfo> find_next(const std::shared_ptr<Search> &) = 0;
     virtual void close_search(const std::shared_ptr<Search> &) = 0;
     virtual std::shared_ptr<File> open_file(std::string_view path) = 0;
-    // Writes even a partial prefix; returns the number of complete1392-byte items.
+    // Writes even a partial prefix; returns the number of complete 1392-byte items.
     virtual std::uint32_t read_save(const std::shared_ptr<File> &, save::EncodedData &) = 0;
     virtual void close_file(const std::shared_ptr<File> &) = 0;
 };
-// NOTSA: inverse of the established1392-byte native save codec, at the file boundary.
+// NOTSA: inverse of the established 1392-byte native save codec, at the file boundary.
 save::Data decode_save(const save::EncodedData &);
 // FUNCTION: SONIC 0x504e50 AddLineList
-void append_save_list(List &, const std::optional<std::string> &name, const FileInfo &);
+void append_save_list(List &, const std::string *name, const FileInfo &);
 // FUNCTION: SONIC 0x504ed0 FUN_00504ed0
 void free_save_list(List &);
 struct LoadState {

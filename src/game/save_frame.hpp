@@ -3,8 +3,7 @@
 #include <cstdint>
 namespace sadx::save {
 // NOTSA: borrowed canonical native-world fields; this view owns no source globals.
-// Legacy reference optional fields remain separate reference validation until a
-// coherent whole-owner migration. No default values or unknown facts live here.
+// No default values or unknown reference facts live here.
 struct FrameStateView {
     std::uint8_t &ready;
     std::uint8_t &count;
@@ -16,17 +15,51 @@ struct FrameStateView {
 };
 struct FrameCalls {
     virtual ~FrameCalls() = default;
-    // Source40be40: actual saving-message owner must allocate/render its resources.
+    // The saving-message owner allocates and renders its real resources.
     virtual void display_saving_message(menu_caption::Context &) = 0;
-    // Source40e2c0: closes the SAME3abdca8 MSGC through its real release queue.
+    // Closes the same message context through its real release queue.
     virtual void close_saving_message(menu_caption::Context &) = 0;
-    // Source421fd0: actual writer, not completion-flag emulation.
+    // Runs the real writer.
     virtual void write_save_file() = 0;
 };
-// NOTSA: readable40cad0 scheduling slices. Caller must preserve the intervening
-// render/tail order and call source411d00 frame completion BETWEEN these helpers.
-// before:40cba4..40cbf1, after queue/fog pass and before40cbf2+message/render tail.
+namespace detail {
+// NOTSA: one scheduling policy for borrowed native fields and lazy reference
+// field adapters. A field is read only by its expression below; writes never
+// require a prior read. Calls retain the caller's actual message identity.
+template<class State, class Calls>
+void before_frame_completion(State state, Calls &calls) {
+    if (state.ready != 0) {
+        state.count = static_cast<std::uint8_t>(state.count + 1U);
+        state.now_saving = 1;
+        state.exec = 1;
+    }
+    const std::int32_t phase = state.now_saving;
+    if (phase == 1 || phase == -1) {
+        calls.display_saving_message(state.message);
+    } else if (state.pending_message != 0) {
+        calls.close_saving_message(state.message);
+        state.pending_message = 0;
+    }
+}
+// NOTSA: the completion/render interval belongs to the caller. In particular,
+// every read here observes any changes made during completion or the writer.
+template<class State, class Calls>
+void after_frame_completion(State state, Calls &calls) {
+    if (state.exec != 0) {
+        state.exec = 0;
+        calls.write_save_file();
+    }
+    if (state.now_saving == 0) {
+        if (state.pending_message != 0) {
+            calls.close_saving_message(state.message);
+            state.pending_message = 0;
+        }
+        if (state.pause_state == 2)
+            state.pause_state = 1;
+    }
+}
+} // namespace detail
+// NOTSA: split scheduling around the caller's rendering and frame completion.
 void before_frame_completion(FrameStateView, FrameCalls &);
-// after:40cc1d..40cc61, AFTER411d00 returns and before presented-frame increment.
 void after_frame_completion(FrameStateView, FrameCalls &);
 } // namespace sadx::save

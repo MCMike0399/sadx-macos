@@ -17,7 +17,7 @@ void Session::write_live_save() {
     save::WriteState state{saving_disabled_, save_retry_, save_ok_, save_count_, flow_.save_phase,
         flow_.save_ready, save_exec_, flow_.alert_flag, file_delete_flag_, new_file_requested_,
         bootstrap_.card_operation, bootstrap_.menu.selected_file, bootstrap_.card_complete,
-        save_name_, list_data_, saves_.current};
+        save_name_, save_file_list_, saves_.current};
     save::SaveNameCalls names{
         [this](const char *pointer) {
             if (pointer != selected_save_name_.get())

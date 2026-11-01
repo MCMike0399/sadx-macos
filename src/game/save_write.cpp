@@ -54,9 +54,9 @@ std::int32_t write_file(WriteState &state, WriteCalls &calls, SaveNameCalls &nam
         auto name = slot_name(slot);
         auto entry = state.list->next;
         while (entry) {
-            if (!entry->file)
+            if (!entry->file())
                 throw std::invalid_argument("new-save list filename is indeterminate");
-            if (same_save_name(name, entry->file->name)) {
+            if (same_save_name(name, entry->file()->name)) {
                 entry = state.list->next;
                 ++slot;
                 if (slot > 99)

@@ -46,7 +46,7 @@ class Reader {
         get(value.destination);
     }
 };
-// NOTSA: names the repeated checks of filename bytes7/8 followed by atoi.
+// NOTSA: names the repeated checks of filename bytes 7/8 followed by atoi.
 std::uint8_t file_slot(std::string_view filename) {
     if (filename.size() < 9)
         throw Error(Boundary::ShortFileName, "save enumeration name has no source slot bytes");
@@ -57,7 +57,7 @@ std::uint8_t file_slot(std::string_view filename) {
         value = value * 10U + static_cast<unsigned>(filename[i] - '0');
     return static_cast<std::uint8_t>(value);
 }
-// NOTSA: preserves the original256-byte formatted path boundary.
+// NOTSA: preserves the original 256-byte formatted path boundary.
 std::string save_path(std::string_view name) {
     auto path = std::string("./SAVEDATA/") + std::string(name);
     if (path.size() >= 256)
@@ -118,23 +118,24 @@ save::Data decode_save(const save::EncodedData &bytes) {
         throw std::logic_error("save decode size");
     return data;
 }
-void append_save_list(List &head, const std::optional<std::string> &name, const FileInfo &info) {
+void append_save_list(List &head, const std::string *name, const FileInfo &info) {
     if (!head) {
         head = std::make_shared<ListNode>();
         return;
     }
     auto tail = head;
     while (tail->next) tail = tail->next;
-    tail->next = std::make_shared<ListNode>();
+    // Publish the node before inspecting or allocating its filename.
+    tail->next = std::make_shared<ListNode>(ListNode::Kind::File);
     if (!name)
         throw Error(Boundary::IndeterminateSentinel, "nonnull list reached a null source filename");
-    tail->next->file = FileInfo{*name, info.last_write_time};
+    tail->next->set_file(FileInfo{*name, info.last_write_time});
 }
 void free_save_list(List &head) {
     while (head && head->next) {
         auto previous = head;
         while (previous->next->next) previous = previous->next;
-        previous->next->file.reset();
+        previous->next->clear_file();
         previous->next.reset();
     }
     head.reset();
@@ -150,9 +151,9 @@ std::int32_t load_selected_save(LoadState &state, SaveFileCalls &calls) {
             if (!selected)
                 throw Error(Boundary::ListIndex, "selected save traversed beyond source list");
         }
-        if (!selected->file)
+        if (!selected->file())
             throw Error(Boundary::IndeterminateSentinel, "selected sentinel has an indeterminate filename");
-        name = selected->file->name;
+        name = selected->file()->name;
     } else {
         if (!state.fallback_name)
             throw Error(Boundary::MissingFile, "save load has no source fallback filename");
@@ -164,7 +165,7 @@ std::int32_t load_selected_save(LoadState &state, SaveFileCalls &calls) {
     return 0;
 }
 std::uint8_t count_save_files(List &list, save::Data &live, SaveFileCalls &calls) {
-    append_save_list(list, std::nullopt, {});
+    append_save_list(list, nullptr, {});
     const auto first = calls.find_first("./SAVEDATA/SonicDX??.snc");
     if (!first) return 0;
     std::uint8_t count = 0;
@@ -176,7 +177,8 @@ std::uint8_t count_save_files(List &list, save::Data &live, SaveFileCalls &calls
         if (read != 0 && slot != 0 && slot < 100 && check_save(save::encode(live))) {
             std::array<char, 32> name{};
             std::snprintf(name.data(), name.size(), "SonicDX%02d.snc", slot);
-            append_save_list(list, std::string(name.data()), *info);
+            const std::string filename(name.data());
+            append_save_list(list, &filename, *info);
             ++count;
         }
         calls.close_file(file);

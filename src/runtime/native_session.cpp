@@ -152,9 +152,9 @@ void Session::reset_game() {
         [this](std::uint32_t mode) { run_level_destructor(mode); },
         [this] {
             // The recovered reset snapshots list presence; the session retains its typed owner.
-            const void *list = list_data_.get();
+            const void *list = save_file_list_.get();
             cleanup::LoopState state{reset_work_, secondary_loop_count_, list};
-            cleanup::reset_loop_state(state, [this] { file_select::free_save_list(list_data_); });
+            cleanup::reset_loop_state(state, [this] { file_select::free_save_list(save_file_list_); });
         },
         [this](void *buffer) { release_buffer(buffer); },
         [this] { display_->enable_fog(); }

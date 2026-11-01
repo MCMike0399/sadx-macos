@@ -156,10 +156,10 @@ class Display {
                                      calls, fp);
                 small.colors.fill(4294967295U);
             } else {
-                if (!node || !node->file)
+                if (!node || !node->file())
                     throw std::runtime_error(
                         "file-select display reached an indeterminate source filename/time");
-                const auto local = calls.local_calendar(node->file->last_write_time);
+                const auto local = calls.local_calendar(node->file()->last_write_time);
                 std::array<char, 128> date{};
                 std::snprintf(date.data(), date.size(), "%02d/%02d/%02d  %02d:%02d:%02d",
                               static_cast<int>(local.year) - 2000, local.month, local.day,
@@ -169,7 +169,7 @@ class Display {
                 const auto text_y = screen_y(value(row_offset) + 170.0f);
                 const auto text_x = (value(view.horizontal_scale) * 320.0f - 255.0f).rounded();
                 menu_draw::draw_text(date.data(), text_x, text_y, text_depth, view.font, calls, fp);
-                auto name = node->file->name.substr(0, 63);
+                auto name = node->file()->name.substr(0, 63);
                 const auto extension = name.find('.');
                 if (extension != std::string::npos)
                     name.resize(extension);
