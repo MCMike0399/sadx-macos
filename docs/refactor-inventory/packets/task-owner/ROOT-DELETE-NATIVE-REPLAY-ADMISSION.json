@@ -1,0 +1,99 @@
+{
+  "status": "Root distinctly admits ONE bounded native-only replay after accepted adequacy/recheck. Not a source pass or original-cohort continuation.",
+  "terminal_commit": "0afa5d4",
+  "candidate_source": "72d0e83ead1255aa658ef6b78220c04b1b737b93",
+  "candidate_library": "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/current/libraries/task_delete.dylib",
+  "capture_folder": "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved-continuation/old/captures/task_delete",
+  "output": "/Users/burbujamc/Developer/sadx-macos/build/task-delete-native-replay",
+  "pins": {
+    "/Users/burbujamc/Developer/sadx-macos/reference/packets/task-delete-native-replay/replay.py": "27d73c9af213f073ab2de9c5e8193aa57c14e14830991c8461f7ab3c57cd5089",
+    "/Users/burbujamc/Developer/sadx-macos/tools/oracles/task_judges/compare_streams.py": "38d882f2fad2711584f37ea9b129e52f4b6ddaee9d14c758aecb6652be4485f1",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/current/libraries/task_delete.dylib": "2915ae1b9b198b30aa06852ecda822df721eabb4e99d8ab286557dfe403fa577",
+    "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/bin/python3.14": "87d4df53fd91304be5bac391fb204643c36b7df2023c04a0953bcbc7d4fdf634",
+    "/Users/burbujamc/Developer/sadx-macos/docs/refactor-inventory/packets/task-owner/RESERVED-CONTINUATION-RESULT.json": "e0fd5fef9201513140e634c8523c1ce36b79ed33dfd73145253f4d7026b1cfc2",
+    "/Users/burbujamc/Developer/sadx-macos/docs/refactor-inventory/packets/task-owner/CASE207-DIAGNOSTIC-RESULT.json": "f6e3cecfafabe64b8e1d21d4b198e7a40964f4d8553574f8268383cbdefd0038",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved-continuation/old/captures/task_delete/inputs.json": "a6382e124fcd80173be78512a22c0747105158c9539ba015c828ba9e4ae8c4b3",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved-continuation/old/captures/task_delete/reserved-observation.json": "1d6eba40515b6844481cbb6c60d82a117cf382954d9ccc5e3d400925bf3954d0",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved-continuation/old/captures/task_delete/task_delete.json": "c96600215087168b908dac703b10be87a7ff741966721c12135b11c26f553120",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved-continuation/old/captures/task_delete/task_delete.identity.json": "7122ab20db6d96f968466e76de639e189727a4330944a34336bc644b0875ed03",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved-continuation/old/captures/task_delete/task_delete.native.jsonl.gz": "64dd8a0e6b113efa6caf31bbe2bf21152c6449a0e49ba517a2e945fd24fdbd06"
+  },
+  "expected": {
+    "source_attempts": 570,
+    "produced_calls": 563,
+    "excluded_ids": [
+      85,
+      222,
+      238,
+      242,
+      361,
+      502,
+      562
+    ],
+    "source_mismatch_ids": [
+      207
+    ]
+  },
+  "acceptance": [
+    "No original invocation, fixture generation, build, completed-cohort rerun, new exclusions or source changes.",
+    "Replay only 563 retained produced calls, preserving original IDs and every return/input/output byte including padding.",
+    "Compare original expected_words separately; all 11 differing original fields of case207 stay FAIL. Exact old/current equality can establish preservation, not source fidelity.",
+    "Source outcomes: 570=314 returned+256 established stops; produced563=313 returned+250 stops; excluded7=1 returned free-list-cycle+6 reentrant stops.",
+    "Committed Root admission and exact helper/artifact/library pins required before exclusive output creation. No retry; stop on first candidate-old inequality."
+  ],
+  "prior_diagnostic": {
+    "admission": "dcf4d63",
+    "result": "b235538",
+    "native_call": 206,
+    "case": 207,
+    "full_old_current_equal": true
+  },
+  "limits": [
+    "Read-only parsing and synthetic tests do not consume native inputs. Actual candidate deletion cohort remains unattempted except the separately admitted case207 diagnostic.",
+    "Original continuation remains terminal EXIT 1. No whole Task/campaign approval or new product behavior."
+  ],
+  "focused_checks": {
+    "command": "reference/python/bin/python -m unittest discover -s tests/python -p 'test_task_*.py' -q",
+    "tests": 95,
+    "exit_status": 0,
+    "log": "build/task-replay-admission-focused.log",
+    "log_sha256": "1c07059dd590b2fbf5c7a266c994f5818dd6eb475451f73d4d53e5ec754b561c",
+    "new_fake_tests": 21,
+    "read_only_real_preflight": {
+      "produced_calls": 563,
+      "excluded_ids": [
+        85,
+        222,
+        238,
+        242,
+        361,
+        502,
+        562
+      ],
+      "source_mismatch_ids": [
+        207
+      ],
+      "native_calls_executed": 0
+    }
+  },
+  "admission_correction": {
+    "review_commit": "3a7bee1",
+    "finding": "P2: committed proposal could reach output creation without affirmative Root admission.",
+    "fix": "admitted requires exact committed admission_kind root_native_delete_replay_v1 and root_admitted is True, before returning to main. This proposal deliberately has neither and remains non-executable.",
+    "execution_authorized": false,
+    "regression_old": {
+      "log": "build/task-replay-admission-regression-old.log",
+      "sha256": "4bda9f99988c5d3c1e8db7cfdc9dd8e73d3eaae4665bd28ce2bda810728a3acb",
+      "outcome": "All seven fake non-admission variants reach intercepted output creation on d48f80e. No real output/library call."
+    },
+    "regression_current": "The same fake main tests reject all seven before contract parsing, output creation or library loading."
+  },
+  "admission_kind": "root_native_delete_replay_v1",
+  "root_admitted": true,
+  "accepted_reviews": [
+    "3a7bee18bdc1e8e01cfb028f64166b26f990def7",
+    "fea2289"
+  ],
+  "proposal_sha256": "26e18c67d26111b6755e34878898fdc5398f87c2387081d31545d0466b69e808",
+  "stop_rule": "Stop on any old/current byte/return/input inequality. Preserve all prior failed receipts, exact source failure207, exclusions and artifacts. No automatic retry or additional execution."
+}
