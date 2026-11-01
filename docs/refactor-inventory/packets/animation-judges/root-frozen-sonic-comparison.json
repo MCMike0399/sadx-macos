@@ -1,0 +1,20 @@
+{
+  "before_private_observer": {
+    "sha256": "2833d480dec1c99bef187812d6718dcd7acb9f4c51db43cbe29be2fe794382d9",
+    "bytes": 24801598
+  },
+  "current_frozen_registered_probe": {
+    "sha256": "2833d480dec1c99bef187812d6718dcd7acb9f4c51db43cbe29be2fe794382d9",
+    "bytes": 24801598
+  },
+  "full_outputs_identical": true,
+  "reason": "Retain frozen Main probe/unit and inject existing reference fixture only in probe TU. Previous direct command omitted that registered setup.",
+  "limits": [
+    "Probe observer equivalence by actual full streams; no reason to alter original unit/probe on Main."
+  ],
+  "setup_failures": [
+    "First seal used incorrect guessedDLLpath; actualtrackedinputpathunder system/ used thereafter.",
+    "First Root redirection root-seal.log was included as an active local artifact; final seal uses documented excluded seal.log, integrity output remains outside sealed artifact directory."
+  ],
+  "final_packet_integrity_exit": 0
+}

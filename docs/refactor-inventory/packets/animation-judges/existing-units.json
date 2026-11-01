@@ -1,0 +1,59 @@
+[
+  {
+    "slug": "player-animation-decode",
+    "command": [
+      "build/animation-judges/player-animation-decode-test",
+      "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/system/CHRMODELS_orig.dll"
+    ],
+    "exit_status": 0
+  },
+  {
+    "slug": "player-animation",
+    "command": [
+      "build/animation-judges/player-animation-test",
+      "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/system/CHRMODELS_orig.dll",
+      "build/animation-judges/baseline/player_animation/report.constants.bin"
+    ],
+    "exit_status": 0
+  },
+  {
+    "slug": "player-initialization",
+    "command": [
+      "build/animation-judges/player-initialization-test"
+    ],
+    "exit_status": 0
+  },
+  {
+    "slug": "player-startup",
+    "command": [
+      "build/animation-judges/player-startup-test",
+      "build/animation-judges/assets/player-parameters.bin"
+    ],
+    "exit_status": 0
+  },
+  {
+    "slug": "sonic-player",
+    "command": [
+      "build/animation-judges/sonic-player-test",
+      "build/animation-judges/assets/sonic-player-constants.bin",
+      "build/animation-judges/assets/sonic-action-dispatch.bin",
+      "build/animation-judges/assets/ninja-trig.f32",
+      "build/animation-judges/assets/ninja-unit.f32"
+    ],
+    "exit_status": 0
+  },
+  {
+    "slug": "sonic-animation-table",
+    "command": [
+      "build/animation-judges/sonic-animation-table-test"
+    ],
+    "exit_status": 0
+  },
+  {
+    "slug": "gamma-selection-core",
+    "command": [
+      "build/animation-judges/gamma-selection-core-test"
+    ],
+    "exit_status": 0
+  }
+]

@@ -1,0 +1,533 @@
+[
+  {
+    "failed_allocation": null,
+    "release": false,
+    "fault": null,
+    "events": [
+      {
+        "kind": "write",
+        "pc": 4499478,
+        "address": 285212936,
+        "size": 2,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499482,
+        "address": 285212942,
+        "size": 2,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499522,
+        "address": 285212940,
+        "size": 2,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499547,
+        "address": 285212934,
+        "size": 2,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499551,
+        "address": 285212928,
+        "size": 2,
+        "bits": 1
+      },
+      {
+        "kind": "write",
+        "pc": 4499554,
+        "address": 285212948,
+        "size": 4,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499557,
+        "address": 285212944,
+        "size": 4,
+        "bits": 0
+      },
+      {
+        "kind": "allocation",
+        "caller": 4499560,
+        "entry": 4239904,
+        "count": 1,
+        "width": 8,
+        "returned": 285224960
+      },
+      {
+        "kind": "write",
+        "pc": 4499571,
+        "address": 285212968,
+        "size": 4,
+        "bits": 285224960
+      },
+      {
+        "kind": "write",
+        "pc": 4499584,
+        "address": 285224960,
+        "size": 4,
+        "bits": 305397760
+      },
+      {
+        "kind": "allocation",
+        "caller": 4499586,
+        "entry": 4239904,
+        "count": 1,
+        "width": 12,
+        "returned": 285225216
+      },
+      {
+        "kind": "write",
+        "pc": 4499594,
+        "address": 285224964,
+        "size": 4,
+        "bits": 285225216
+      },
+      {
+        "kind": "write",
+        "pc": 4499608,
+        "address": 285225220,
+        "size": 4,
+        "bits": 2
+      },
+      {
+        "kind": "write",
+        "pc": 4499617,
+        "address": 285225224,
+        "size": 2,
+        "bits": 3
+      },
+      {
+        "kind": "write",
+        "pc": 4499633,
+        "address": 285225226,
+        "size": 2,
+        "bits": 2
+      },
+      {
+        "kind": "allocation",
+        "caller": 4499637,
+        "entry": 4240080,
+        "count": 111,
+        "width": 24,
+        "returned": 285225472
+      },
+      {
+        "kind": "write",
+        "pc": 4499654,
+        "address": 285225216,
+        "size": 4,
+        "bits": 285225472
+      }
+    ],
+    "state_hex": "010000000000000000000100000000000000000000000000000600110406001100020011000000000030001100000000",
+    "limits": "Allocator return values and A5 fill are explicit receipts; actual caller instruction ordering only"
+  },
+  {
+    "failed_allocation": 0,
+    "release": false,
+    "fault": {
+      "pc": 4499584,
+      "error": "Invalid memory write (UC_ERR_WRITE_UNMAPPED)"
+    },
+    "events": [
+      {
+        "kind": "write",
+        "pc": 4499478,
+        "address": 285212936,
+        "size": 2,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499482,
+        "address": 285212942,
+        "size": 2,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499522,
+        "address": 285212940,
+        "size": 2,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499547,
+        "address": 285212934,
+        "size": 2,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499551,
+        "address": 285212928,
+        "size": 2,
+        "bits": 1
+      },
+      {
+        "kind": "write",
+        "pc": 4499554,
+        "address": 285212948,
+        "size": 4,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499557,
+        "address": 285212944,
+        "size": 4,
+        "bits": 0
+      },
+      {
+        "kind": "allocation",
+        "caller": 4499560,
+        "entry": 4239904,
+        "count": 1,
+        "width": 8,
+        "returned": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499571,
+        "address": 285212968,
+        "size": 4,
+        "bits": 0
+      }
+    ],
+    "state_hex": "010000000000000000000100000000000000000000000000000600110406001100020011000000000000000000000000",
+    "limits": "Allocator return values and A5 fill are explicit receipts; actual caller instruction ordering only"
+  },
+  {
+    "failed_allocation": 1,
+    "release": false,
+    "fault": {
+      "pc": 4499608,
+      "error": "Invalid memory write (UC_ERR_WRITE_UNMAPPED)"
+    },
+    "events": [
+      {
+        "kind": "write",
+        "pc": 4499478,
+        "address": 285212936,
+        "size": 2,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499482,
+        "address": 285212942,
+        "size": 2,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499522,
+        "address": 285212940,
+        "size": 2,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499547,
+        "address": 285212934,
+        "size": 2,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499551,
+        "address": 285212928,
+        "size": 2,
+        "bits": 1
+      },
+      {
+        "kind": "write",
+        "pc": 4499554,
+        "address": 285212948,
+        "size": 4,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499557,
+        "address": 285212944,
+        "size": 4,
+        "bits": 0
+      },
+      {
+        "kind": "allocation",
+        "caller": 4499560,
+        "entry": 4239904,
+        "count": 1,
+        "width": 8,
+        "returned": 285224960
+      },
+      {
+        "kind": "write",
+        "pc": 4499571,
+        "address": 285212968,
+        "size": 4,
+        "bits": 285224960
+      },
+      {
+        "kind": "write",
+        "pc": 4499584,
+        "address": 285224960,
+        "size": 4,
+        "bits": 305397760
+      },
+      {
+        "kind": "allocation",
+        "caller": 4499586,
+        "entry": 4239904,
+        "count": 1,
+        "width": 12,
+        "returned": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499594,
+        "address": 285224964,
+        "size": 4,
+        "bits": 0
+      }
+    ],
+    "state_hex": "010000000000000000000100000000000000000000000000000600110406001100020011000000000030001100000000",
+    "limits": "Allocator return values and A5 fill are explicit receipts; actual caller instruction ordering only"
+  },
+  {
+    "failed_allocation": 2,
+    "release": false,
+    "fault": null,
+    "events": [
+      {
+        "kind": "write",
+        "pc": 4499478,
+        "address": 285212936,
+        "size": 2,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499482,
+        "address": 285212942,
+        "size": 2,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499522,
+        "address": 285212940,
+        "size": 2,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499547,
+        "address": 285212934,
+        "size": 2,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499551,
+        "address": 285212928,
+        "size": 2,
+        "bits": 1
+      },
+      {
+        "kind": "write",
+        "pc": 4499554,
+        "address": 285212948,
+        "size": 4,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499557,
+        "address": 285212944,
+        "size": 4,
+        "bits": 0
+      },
+      {
+        "kind": "allocation",
+        "caller": 4499560,
+        "entry": 4239904,
+        "count": 1,
+        "width": 8,
+        "returned": 285224960
+      },
+      {
+        "kind": "write",
+        "pc": 4499571,
+        "address": 285212968,
+        "size": 4,
+        "bits": 285224960
+      },
+      {
+        "kind": "write",
+        "pc": 4499584,
+        "address": 285224960,
+        "size": 4,
+        "bits": 305397760
+      },
+      {
+        "kind": "allocation",
+        "caller": 4499586,
+        "entry": 4239904,
+        "count": 1,
+        "width": 12,
+        "returned": 285225216
+      },
+      {
+        "kind": "write",
+        "pc": 4499594,
+        "address": 285224964,
+        "size": 4,
+        "bits": 285225216
+      },
+      {
+        "kind": "write",
+        "pc": 4499608,
+        "address": 285225220,
+        "size": 4,
+        "bits": 2
+      },
+      {
+        "kind": "write",
+        "pc": 4499617,
+        "address": 285225224,
+        "size": 2,
+        "bits": 3
+      },
+      {
+        "kind": "write",
+        "pc": 4499633,
+        "address": 285225226,
+        "size": 2,
+        "bits": 2
+      },
+      {
+        "kind": "allocation",
+        "caller": 4499637,
+        "entry": 4240080,
+        "count": 111,
+        "width": 24,
+        "returned": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499654,
+        "address": 285225216,
+        "size": 4,
+        "bits": 0
+      }
+    ],
+    "state_hex": "010000000000000000000100000000000000000000000000000600110406001100020011000000000030001100000000",
+    "limits": "Allocator return values and A5 fill are explicit receipts; actual caller instruction ordering only"
+  },
+  {
+    "failed_allocation": null,
+    "release": true,
+    "fault": null,
+    "events": [
+      {
+        "kind": "write",
+        "pc": 4499478,
+        "address": 285212936,
+        "size": 2,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499482,
+        "address": 285212942,
+        "size": 2,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4499522,
+        "address": 285212940,
+        "size": 2,
+        "bits": 0
+      },
+      {
+        "kind": "free",
+        "caller": 4454939,
+        "pointer": 285224960,
+        "channels": [
+          285224960,
+          0,
+          2,
+          77
+        ]
+      },
+      {
+        "kind": "write",
+        "pc": 4454947,
+        "address": 285229056,
+        "size": 4,
+        "bits": 0
+      },
+      {
+        "kind": "write",
+        "pc": 4454956,
+        "address": 285229064,
+        "size": 4,
+        "bits": 0
+      },
+      {
+        "kind": "free",
+        "caller": 4500999,
+        "pointer": 285229056,
+        "channels": [
+          0,
+          0,
+          0,
+          77
+        ]
+      },
+      {
+        "kind": "free",
+        "caller": 4501026,
+        "pointer": 285213984,
+        "channels": [
+          0,
+          0,
+          0,
+          77
+        ]
+      },
+      {
+        "kind": "free",
+        "caller": 4501044,
+        "pointer": 285213952,
+        "channels": [
+          0,
+          0,
+          0,
+          77
+        ]
+      },
+      {
+        "kind": "write",
+        "pc": 4501052,
+        "address": 285212968,
+        "size": 4,
+        "bits": 0
+      }
+    ],
+    "state_hex": "0e000000000000000000010000000000000000000000003f000600110406001100020011000000000000000000000000",
+    "limits": "Allocator return values and A5 fill are explicit receipts; actual caller instruction ordering only"
+  }
+]

@@ -1,0 +1,48 @@
+{
+  "source_files": 382,
+  "local_artifacts": 395,
+  "existing_units": 7,
+  "interface_cases": 114,
+  "table_cases": 8727,
+  "gamma_rows": 91,
+  "compiled_algorithm_faults_caught": 13,
+  "identities": {
+    "sonic_animation_table": {
+      "fp_partials": 0,
+      "native_boundaries": 0,
+      "native_failures": 0,
+      "value_failures": 0
+    },
+    "player_animation": {
+      "fp_partials": 4140,
+      "native_boundaries": 432,
+      "native_failures": 432,
+      "value_failures": 0
+    },
+    "player_animation_blend": {
+      "fp_partials": 1668,
+      "native_boundaries": 0,
+      "native_failures": 0,
+      "value_failures": 0
+    },
+    "sonic_player": {
+      "fp_partials": 2840,
+      "native_boundaries": 12168,
+      "native_failures": 12168
+    },
+    "player_startup": {
+      "fp_partials": 924,
+      "native_boundaries": 2004,
+      "native_failures": 2004
+    },
+    "gamma_selection_core": {
+      "fp_partials": 498,
+      "native_boundaries": 468,
+      "native_failures": 0
+    }
+  },
+  "maintained_source_identical": true,
+  "repository_gate_run": false,
+  "global_manifest_refreshed": false,
+  "holdouts_run": false
+}
