@@ -1,0 +1,30 @@
+{
+  "status": "Root explicitly admits ONE reviewed continuation of wholly unattempted exact input files. This is not a verdict.",
+  "freeze_commit": "bfd7c903fb95fc237c8e9a36165079def60cdd6b",
+  "freeze_sha256": "bb4b76ae852f7ee9580a24bf90027fdac1d223cdc300fd0f584911d35c867398",
+  "source": "72d0e83ead1255aa658ef6b78220c04b1b737b93",
+  "accepted_continuation_reviews": [
+    "f3d8ff5",
+    "98ff8a4"
+  ],
+  "exact_inputs": {
+    "task_work": "0ce1bae1d601c7e1ae7ef6518df1f80a11e506a08504e9dba4aa91a6d67c84ab",
+    "task_lifecycle": "56431d97e42867604236a09fa9582cb5c36d3db02bbb0ba4c412ace144881a94",
+    "task_display": "593b768b2d693f5f42533d0b0ba10def9f45fcf17908e6e01ede44da69d20fb6",
+    "task_delete": "28fe354ea0a9c872b98301fe6eda54b5bd8eaf54f037a7ee0865c5530f116e27"
+  },
+  "compiled_models": {
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/old/libraries/task_delete.dylib": "03f0818292ab8219ebc250ec94040550d54b9f794d111be1a071a33bf556ccd8",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/old/libraries/task_display.dylib": "58214d9b46297aa1b28dc82e7739216c32e6b5b77e755c7a44479cc3876befa3",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/old/libraries/task_lifecycle.dylib": "0437d32e45573dec2fc78c79bcc912f9537d083d9faf578dc90aff7c498dfc51",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/old/libraries/task_work.dylib": "feceb936f6a46e3e18cce156e54744785d65d77545812497015de10ad48c4e92",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/current/libraries/task_delete.dylib": "2915ae1b9b198b30aa06852ecda822df721eabb4e99d8ab286557dfe403fa577",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/current/libraries/task_display.dylib": "80dfddffff9202e6a9b04dd1ba29a26fb709e18154a0e0f2afee6bed40a48dab",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/current/libraries/task_lifecycle.dylib": "bc47f7f0b44c533a0d30dd020c788579378a854882614f3a3c5dcdcf501b63a2",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/current/libraries/task_work.dylib": "2cd600a87f1333a74969ec71e46ba9c09ef8173848ab1a444508f2b721e336ec"
+  },
+  "original_failed_run": "build/task-final-reserved/RUN.json stays TERMINAL EXIT1, zeroSource/nativeattempts. No marker/log/input mutation or deletion permitted.",
+  "contract": "No regeneration, rebuild, changed vectors, tolerance or new exclusions. New exclusive output and live-parent stage guards. Stop on first real failure and preserve all evidence; no automatic retry.",
+  "command": "reference/python/bin/python -I -S -B tools/oracles/task_judges/reserved_run.py run --continuation --admitted",
+  "output": "build/task-final-reserved-continuation"
+}
