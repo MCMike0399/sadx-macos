@@ -81,5 +81,23 @@
       "full_report_sha256": "f783413006658427d936c770bd137f882e61f664e56f192917f22f1e45ac0046"
     }
   },
-  "native_journeys": "Running under exec93061; no verdict yet. Full integrated gate and independent source review remain pending."
+  "native_journeys": {
+    "exit_status": 0,
+    "checkpoints": [
+      "native-file-select",
+      "native-main-menu",
+      "native-fresh-save"
+    ],
+    "source_note": "Successful paths qualified before P3 failure-literal restoration; the correction changes no successful path. Composite gate remains pending."
+  },
+  "post_review_resource_cohort": {
+    "seed": 20261113,
+    "cases": 701,
+    "mismatch_count": 0
+  },
+  "p3_resolution": {
+    "commit": "7ba8a92",
+    "final_force_load_closure_exit": 0,
+    "all_native_failure_identifiers_preserved": true
+  }
 }
