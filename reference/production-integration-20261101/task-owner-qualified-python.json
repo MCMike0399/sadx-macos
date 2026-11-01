@@ -1,0 +1,12 @@
+{
+  "source_commit": "bf614037185686fcd09bebeb9711ed6adfa966fb",
+  "source_tree": "38af34bf7d608e179c12caabedcdbe933d80542e",
+  "command": "SADX_CONTENT_CORPUS=\"$PWD\" reference/python/bin/python -m unittest discover -s tests/python -p 'test_*.py'",
+  "exit_status": 0,
+  "tests": 607,
+  "skipped": 1,
+  "skip_limit": "Inherited native volume case-alias capability test. All six qualified offline raster tests ran, including 50 original rasters and 200 mutants, using retained corpus hashes.",
+  "log": "build/task-owner-qualified-python.log",
+  "log_sha256": "4d321ef63999b0463775f9860300d0d09ea2cb65aa66b2fb7cf9becf1c18d003",
+  "relationship": "Supplement to the actual full gate at the SAME frozen source and judge revision. The initial full gate remains exit 0 with 607 tests and 7 skips; its log is unchanged. No native program or original cohort was rerun for this coverage supplement."
+}
