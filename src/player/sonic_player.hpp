@@ -135,7 +135,8 @@ struct SonicPlayerRuntime {
     TaskCallback spin_release_effect_callback_4940e0=nullptr;
     TaskCallback spin_release_destructor_494120=nullptr;
     PlayerAnimationRuntime* animation_runtime=nullptr;
-    std::optional<std::shared_ptr<const PlayerAnimationTable>> initialized_animation_table={};
+    animation::Runtime* native_animation_runtime=nullptr;
+    std::optional<std::shared_ptr<const animation::TableStorage>> initialized_animation_table={};
 };
 
 // Actual dispatch table, not Hopper's regrouped pseudocode case indices.

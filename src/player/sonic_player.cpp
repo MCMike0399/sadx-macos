@@ -29,10 +29,13 @@ namespace sadx  {
         }
         SonicPlayerResult call(SonicPlayerRuntime& rt,SonicPlayerFrame& f,X87Context& fp,std::uint32_t a,std::uint32_t b,std::array<std::optional<std::uint32_t>,5> args={},std::optional<std::uint8_t> task_work_argument={})  {
             if(a==0x44a800) {
-                if(!rt.animation_runtime)return fail(SonicPlayerFailure::missing_native_owner,b,a);
+                if(!rt.animation_runtime&&!rt.native_animation_runtime)
+                    return fail(SonicPlayerFailure::missing_native_owner,b,a);
                 auto ready=require_player(f,b);if(!ready)return ready;
                 auto* p=player(f);PlayerAnimationView view{*p->player,p->player->animation_tail,p->player_work};
-                auto animation=update_player_animation(view,*rt.animation_runtime,fp);
+                auto animation=rt.native_animation_runtime
+                    ? update_player_animation(view,*rt.native_animation_runtime,fp)
+                    : update_player_animation(view,*rt.animation_runtime,fp);
                 auto result=animation?done():fail(SonicPlayerFailure::animation_failed,b,a);
                 result.animation=animation;
                 if(!animation)result.nested_source_boundary=animation.source_boundary;

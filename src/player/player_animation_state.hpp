@@ -2,7 +2,7 @@
 #include "engine/task_work.hpp"
 #include "engine/scene_resource_reference.hpp"
 namespace sadx {
-struct PlayerAnimationTable;
+namespace animation { struct TableStorage; }
 struct PlayerJoinTable;
 struct PlayerAnimationAllocatedMotion {
     TaskWorkHandle allocation;
@@ -20,7 +20,7 @@ struct PlayerAnimationAllocatedAction {
 struct PlayerAnimationTail {
     std::optional<std::uint16_t> next_at_12a,timer_at_12c,flags_at_12e;
     std::optional<float> frame_at_130,start_at_134;
-    std::optional<std::shared_ptr<const PlayerAnimationTable>> table_at_140;
+    std::optional<std::shared_ptr<const animation::TableStorage>> table_at_140;
     std::optional<std::shared_ptr<PlayerAnimationAllocatedAction>> buffer_at_148;
     std::optional<PlayerJoinTable *> join_table;
 };

@@ -45,7 +45,7 @@ struct PlayerFields {
     std::optional<std::int16_t> &timer;
     std::optional<std::uint16_t> &flags, &requested_animation, &current_animation;
     std::optional<TaskHandle> &held_task;
-    std::optional<std::shared_ptr<const PlayerAnimationTable>> &animation_table;
+    std::optional<std::shared_ptr<const animation::TableStorage>> &animation_table;
     std::optional<PlayerJoinTable *> &join_table;
 };
 PlayerFields player_fields(PlayerPhysicsState &player) {
@@ -81,7 +81,7 @@ void initialize_physics(PlayerPhysicsState &player) {
     player.animation_tail.flags_at_12e = 0;
     player.animation_tail.frame_at_130 = 0;
     player.animation_tail.start_at_134 = 0;
-    fields.animation_table = std::shared_ptr<const PlayerAnimationTable>{};
+    fields.animation_table = std::shared_ptr<const animation::TableStorage>{};
     fields.join_table = nullptr;
     player.animation_tail.buffer_at_148 = std::shared_ptr<PlayerAnimationAllocatedAction>{};
     player.moving_task_at_6c = TaskHandle{};

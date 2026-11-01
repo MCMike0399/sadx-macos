@@ -99,7 +99,7 @@ using PlayerHandle = std::shared_ptr<Player>;
 struct InitializedPlayerView {
     std::uint16_t &timer, &flags, &requested_animation, &current_animation;
     TaskHandle &held_task;
-    std::shared_ptr<const PlayerAnimationTable> &animation_table;
+    std::shared_ptr<const animation::TableStorage> &animation_table;
     PlayerJoinTable *&join_table;
 };
 InitializedPlayerView bind_initialized_player(const PlayerHandle &);

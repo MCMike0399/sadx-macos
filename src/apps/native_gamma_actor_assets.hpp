@@ -202,7 +202,7 @@ inline GammaActorAssets load_gamma_actor_assets(const std::filesystem::path &dir
     if (motion.part_count != 77 || motion.frame_count != 16 || motion.channels != 3 ||
         motion.interpolation != 2)
         throw std::runtime_error("Gamma Stand motion metadata mismatch");
-    auto table = std::make_shared<PlayerAnimationTable>();
+    auto table = std::make_shared<animation::Table>();
     const auto recipes = array(metadata[@"recipes"], 91, "Gamma recipes");
     for (std::size_t index = 0; index < result.recipes.size(); ++index) {
         const auto row = dictionary(recipes[index], "Gamma recipe");
@@ -226,14 +226,12 @@ inline GammaActorAssets load_gamma_actor_assets(const std::filesystem::path &dir
                 recipe.resource.boundary != resource.boundary)
                 throw std::runtime_error("Gamma recipe declaration mismatch");
         }
-        PlayerAnimationRecord record{};
-        // Legacy table adapter: unavailable payload remains unresolved, never known NULL.
-        if (recipe.resource.status == ActorResourceStatus::Loaded)
-            record.action = AnimationResourceReference{recipe.resource.action.identity};
-        else if (recipe.resource.status == ActorResourceStatus::KnownNull)
-            record.action = AnimationResourceReference{};
+        animation::Record record{};
+        record.action.status = recipe.resource.status;
+        record.action.identity = recipe.resource.action.identity;
+        record.action.unavailable_reason = recipe.resource.boundary;
         record.object_count = recipe.object_count;
-        record.mode = recipe.mode;
+        record.mode = static_cast<animation::Mode>(recipe.mode);
         record.next = recipe.next;
         record.transition_step = recipe.transition;
         record.frame_step = recipe.speed;

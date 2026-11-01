@@ -4,12 +4,12 @@
 #include "player/player_join_vertices.hpp"
 #include "engine/collision_component.hpp"
 #include "player/player_initialization.hpp"
-#include "player/player_animation.hpp"
+#include "player/animation/animation_content.hpp"
 #include <string>
 
 namespace sadx::native {
 // NOTSA: imported content keeps genuine NULL distinct from an unavailable payload.
-enum class ActorResourceStatus { Loaded, KnownNull, Unavailable };
+using ActorResourceStatus = animation::ResourceStatus;
 struct GammaActionDeclaration {
     ActorResourceStatus status = ActorResourceStatus::Unavailable;
     ActionHandle action;
@@ -39,7 +39,7 @@ struct GammaActorAssets {
     player_initialization::ParameterTable parameters{};
     std::array<GammaActionDeclaration, 78> declarations{};
     std::array<GammaAnimationRecipe, 91> recipes{};
-    std::shared_ptr<const PlayerAnimationTable> animation_table;
+    std::shared_ptr<const animation::Table> animation_table;
     ActionHandle stand;
     std::vector<collision_component::Info> collision_info;
     std::array<std::uint32_t, 2> line_colors{};
