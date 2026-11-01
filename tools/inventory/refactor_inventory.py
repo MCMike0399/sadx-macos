@@ -63,6 +63,11 @@ def reviewed_module(review, members):
     if disposition == "already_conforming":
         if not all(review.get(field) for field in required):
             raise ValueError("Module conformity requires semantic, owner, consumer and judge evidence")
+        limits = review.get("classification_limits")
+        if not ((isinstance(limits, str) and limits.strip()) or
+                (isinstance(limits, list) and limits and
+                 all(isinstance(limit, str) and limit.strip() for limit in limits))):
+            raise ValueError("Module conformity requires explicit nonempty classification limits")
         if not members or not all(member["review_status"] == "reviewed_conforming" for member in members):
             raise ValueError("Module conformity requires every member's current semantic review")
     if disposition == "obsolete" and not review.get("obsolescence_proof"):
@@ -76,7 +81,23 @@ def reviewed_module(review, members):
             "reason": review.get("reason", "Whole-module semantic/ownership review remains open."),
             "evidence": review.get("evidence", []),
             **{field: review.get(field, []) for field in required},
-            "limits": review.get("classification_limits", [])}
+            "limits": review.get("classification_limits", []),
+            "obsolescence_proof": review.get("obsolescence_proof", []),
+            "findings": review.get("findings", []),
+            "qualification_gaps": review.get("qualification_gaps", []),
+            "destination": review.get("destination", [])}
+
+
+def validate_module_evidence(value, paths):
+    """Validate every projected evidence link, not only the top-level anchors."""
+    if isinstance(value, dict):
+        if "path" in value and value["path"] not in paths:
+            raise ValueError("Missing module review evidence: " + str(value["path"]))
+        for child in value.values():
+            validate_module_evidence(child, paths)
+    elif isinstance(value, list):
+        for child in value:
+            validate_module_evidence(child, paths)
 
 
 def module(path):
@@ -309,9 +330,7 @@ def render():
     for name in sorted(module_names):
         members = [r for r in records if r["module"] == name]
         semantic = reviewed_module(module_reviews.get(name, {}), members)
-        for evidence in semantic["evidence"]:
-            if evidence["path"] not in path_set:
-                raise ValueError("Missing module review evidence: " + str(evidence))
+        validate_module_evidence(semantic, path_set)
         modules.append({"module": name, "system": sorted({r["system"] for r in members}),
                         "files": [r["path"] for r in members],
                         "dispositions": dict(collections.Counter(r["disposition"] for r in members)),

@@ -18,6 +18,14 @@ This guard stores authored evidence; it does not prove C++ semantics, infer
 closure from token counts or invalidate a stable module whenever an unrelated
 caller is added. New callers remain individually inventoried/reviewed, and a
 review's accepted consumer scope and limitations stay explicit. No module is
-closed by this tooling setup. Seven focused file/module projection tests cover
+closed by this tooling setup. Ten focused file/module projection tests cover
 changed/widened/renamed membership, incomplete semantic/member reviews, missing
 judges and purpose exceptions. All existing ratchets and scope paths remain.
+
+Review af29cdb found missing nested path validation, optional limits and discarded
+obsolescence proof. The correction adds render-level rejection cases for missing
+owner/consumer/judge links, missing/empty/blank limits, and proof round-trip/link
+checks. No algorithm, metric semantics, game source or former allowance changes.
+The separate authored module review df2625c closes nine exact current modules
+(17 members) under its explicit accepted judge and consumer limits. It does not
+infer a system, platform parity or campaign verdict from these dispositions.
