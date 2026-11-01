@@ -486,3 +486,7 @@ build/native-gamma-cursors-probe.dylib: tests/probes/native_gamma_cursors_probe.
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) tests/probes/native_gamma_cursors_probe.cpp src/player/gamma_cursors.cpp src/engine/task_work.cpp -o $@
 build/native-gamma-weld-cursors-test: tests/unit/native_gamma_weld_cursors.mm src/apps/native_gamma_actor_assets.hpp build/libsadx-native.a
 	$(CXX) $(CXXFLAGS) $(MACFLAGS) $(INCLUDES) $< build/libsadx-native.a -framework Foundation -o $@
+
+# Same ninja_render module, independent source leaves and explicit private bridge.
+build/native-ninja-render-depth-probe.dylib: tests/probes/native_ninja_render_depth_probe.cpp tests/probes/ninja_render_depth_probe.cpp src/engine/ninja_render.cpp src/engine/ninja_render.hpp src/engine/ninja_depth_internal.hpp src/engine/ninja_blend_internal.hpp
+	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) tests/probes/native_ninja_render_depth_probe.cpp src/engine/ninja_render.cpp -o $@
