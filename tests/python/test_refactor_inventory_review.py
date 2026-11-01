@@ -133,5 +133,56 @@ class ModuleReviewProjection(unittest.TestCase):
                     inventory.render()
 
 
+class StubBindingReview(unittest.TestCase):
+    def setUp(self):
+        self.paths = set(filter(None, inventory.git('ls-files', '-z').split('\0')))
+        fragment = json.loads((inventory.OUT / 'reviews/save-warning-stub-bindings.json').read_text())
+        self.review = next(iter(fragment['stubs'].values()))
+        self.stub = dict(path='src/game/save_completion.hpp',
+                         kind='annotation_declaration_candidate',
+                         annotation=self.review['annotation'], following_source=self.review['declaration'])
+
+    def test_review_preserves_explicit_failure_fixture_limit_and_open_behavior(self):
+        result = inventory.reviewed_stub_binding(self.stub, self.review, self.paths)
+        self.assertEqual(result['native_binding']['kind'], 'explicit_failure')
+        self.assertEqual(result['reference_binding']['kind'], 'original_machine_call_fixture_only')
+        self.assertEqual(result['behavior_status'], 'unrecovered_open_debt')
+        self.assertEqual(result['limits'], self.review['limits'])
+
+    def test_changed_declaration_and_source_cannot_inherit_binding_review(self):
+        for change in [dict(annotation='different callee'), dict(declaration=['void renamed();']),
+                       dict(source_sha256='0' * 64)]:
+            with self.subTest(change=change), self.assertRaisesRegex(ValueError, 'declaration/source changed'):
+                inventory.reviewed_stub_binding(self.stub, dict(self.review, **change), self.paths)
+
+    def test_changed_or_missing_nested_binding_evidence_is_rejected(self):
+        for sha, path in [('0' * 64, 'src/game/save_completion.hpp'),
+                          ('0' * 64, 'docs/MISSING.md')]:
+            bad = dict(self.review, native_binding=dict(evidence=[dict(path=path, sha256=sha)]))
+            with self.subTest(path=path), self.assertRaisesRegex(ValueError, 'STUB binding evidence'):
+                inventory.reviewed_stub_binding(self.stub, bad, self.paths)
+
+    def test_binding_audit_cannot_retire_behavior_or_omit_limits(self):
+        for change in [dict(behavior_status='implemented'), dict(limits=[]), dict(accepted_coverage=[])]:
+            with self.subTest(change=change), self.assertRaises(ValueError):
+                inventory.reviewed_stub_binding(self.stub, dict(self.review, **change), self.paths)
+
+    def test_real_projection_keeps_every_stub_and_rejects_stale_identity(self):
+        policy_path = inventory.OUT / 'review.json'
+        policy = json.loads(policy_path.read_text())
+        outputs = inventory.render()
+        rows = [json.loads(line) for line in outputs['stubs.jsonl'].splitlines()]
+        self.assertEqual(sum(row['review_status'] == 'bindings_reviewed_behavior_unrecovered' for row in rows), 2)
+        self.assertTrue(all(row['behavior_status'] == 'unrecovered_open_debt' for row in rows))
+        fragment_path = inventory.OUT / policy['stub_binding_review_files'][0].split('docs/refactor-inventory/')[1]
+        fragment = json.loads(fragment_path.read_text())
+        fragment['stubs']['src/game/DOES_NOT_EXIST.hpp:1'] = next(iter(fragment['stubs'].values()))
+        original_read = Path.read_text
+        def read(path, *args, **kwargs):
+            return json.dumps(fragment) if path == fragment_path else original_read(path, *args, **kwargs)
+        with patch.object(Path, 'read_text', read), self.assertRaisesRegex(ValueError, 'Stale STUB binding review'):
+            inventory.render()
+
+
 if __name__ == '__main__':
     unittest.main()

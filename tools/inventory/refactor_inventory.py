@@ -100,6 +100,42 @@ def validate_module_evidence(value, paths):
             validate_module_evidence(child, paths)
 
 
+
+def reviewed_stub_binding(stub, review, paths):
+    """Record reviewed bindings without treating an unrecovered callee as implemented."""
+    if stub["kind"] != "annotation_declaration_candidate":
+        raise ValueError("Binding review requires a STUB annotation")
+    if (review.get("annotation") != stub["annotation"] or
+            review.get("declaration") != stub["following_source"] or
+            review.get("source_sha256") != hashlib.sha256((ROOT / stub["path"]).read_bytes()).hexdigest()):
+        raise ValueError("STUB declaration/source changed; fresh binding review required")
+    required = ("canonical_owner", "native_binding", "reference_binding", "accepted_coverage", "limits")
+    if not all(review.get(field) for field in required):
+        raise ValueError("STUB binding review requires owner, both bindings, coverage and limits")
+    if review.get("behavior_status") != "unrecovered_open_debt":
+        raise ValueError("Binding review cannot retire unrecovered STUB behavior")
+
+    def validate(value):
+        if isinstance(value, dict):
+            if "path" in value:
+                name = value["path"]
+                if name not in paths or not (ROOT / name).is_file():
+                    raise ValueError("Missing STUB binding evidence: " + str(name))
+                if value.get("sha256") != hashlib.sha256((ROOT / name).read_bytes()).hexdigest():
+                    raise ValueError("Changed STUB binding evidence: " + str(name))
+            for child in value.values():
+                validate(child)
+        elif isinstance(value, list):
+            for child in value:
+                validate(child)
+
+    validate(review)
+    return {field: review[field] for field in required} | {
+        "behavior_status": "unrecovered_open_debt",
+        "source_sha256": review["source_sha256"],
+        "status": "bindings_reviewed_behavior_unrecovered"}
+
+
 def module(path):
     p = Path(path)
     if path.startswith("src/"):
@@ -347,8 +383,28 @@ def render():
             for link in r["acceptance"]:
                 if link.split("#")[0] not in path_set:
                     raise ValueError("Missing acceptance link: " + link)
+    binding_reviews = {}
+    for name in policy.get("stub_binding_review_files", []):
+        if name not in path_set:
+            raise ValueError("Missing STUB binding review file: " + str(name))
+        fragment = json.loads(read(name))
+        for identity, review in fragment["stubs"].items():
+            if identity in binding_reviews:
+                raise ValueError("Duplicate STUB binding review: " + identity)
+            binding_reviews[identity] = review
+    unknown = set(binding_reviews) - {stub["id"] for stub in stubs}
+    if unknown:
+        raise ValueError("Stale STUB binding review: " + repr(sorted(unknown)))
     for stub in stubs:
         stub["canonical_owner_status"] = "open_review"
+        stub["behavior_status"] = "unrecovered_open_debt"
+        if stub["id"] in binding_reviews:
+            semantic = reviewed_stub_binding(stub, binding_reviews[stub["id"]], path_set)
+            stub["binding_review"] = semantic
+            stub["review_status"] = semantic["status"]
+            stub["canonical_owner_status"] = "binding_owner_reviewed_behavior_unrecovered"
+            stub["native_binding"] = semantic["native_binding"]
+            stub["reference_binding"] = semantic["reference_binding"]
         stub["judge_candidates"] = by_path[stub["path"]]["judge_candidates"]
         stub["consumers"] = by_path[stub["path"]]["consumers"]
     total = set(maintained) | {b["path"] for b in boundaries}
@@ -371,6 +427,7 @@ def render():
                "production_recipe_membership": dict(sorted(collections.Counter(r["production_recipe_membership"] for r in records if r["path"].startswith("src/")).items())),
                "stub_annotations": sum(s["kind"] == "annotation_declaration_candidate" for s in stubs),
                "other_stub_mentions": sum(s["kind"] == "other_stub_mention" for s in stubs),
+               "reviewed_stub_bindings": len(binding_reviews),
                "coverage": "exact tracked path equality; no semantic completeness or behavior verdict",
                "checks_not_run": ["builds", "gate", "oracles", "mutants", "journeys", "providers"],
                "baseline_removed_paths": removed}

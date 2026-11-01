@@ -145,3 +145,14 @@ The checker does not replace a semantic reviewer or the gate. It deliberately is
 not registered in protected Makefile/checker/test manifests in this packet. Root
 can separately choose enforcement and judge integration. Baseline/gate, ADR, GOAL,
 STATUS, HANDOFF and preserved packet integration remain root-owned.
+
+## Reviewed STUB bindings
+
+`review.json` names explicit binding-review fragments. Each entry binds the exact
+annotation, following declaration and source hash, plus recursively fingerprinted
+owner, native/reference binding and coverage evidence. Unknown, duplicate, moved
+or changed entries fail reconciliation. Binding review records transport and
+explicit failure behavior; it never retires an unrecovered callee. All annotations
+and other mentions remain in the denominator and retain `unrecovered_open_debt`.
+The initial save-warning audit distinguishes explicit native failure from an
+original-machine-call fixture; neither claims the warning helper is recovered.
