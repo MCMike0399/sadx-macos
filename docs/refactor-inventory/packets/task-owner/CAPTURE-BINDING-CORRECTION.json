@@ -1,0 +1,57 @@
+{
+  "base_commit": "d7fef1051a439bac76883ddf6b815486d198d80a",
+  "review": "5967027",
+  "findings_addressed": [
+    "P1 expected execution not bound to recorded native calls",
+    "P2 fake tests did not exercise real observer/recorder acceptance boundary"
+  ],
+  "change": "Derive work N, lifecycle 2N+2, display N and delete N-minus-exclusions ABI contracts independently from supplied cases and source report. Reuse validated_records; require ordered symbols, returns, scalar lengths, every before/after buffer extent and exact input hashes. Preserve lifecycle repeated inactive controls as nonfresh evidence.",
+  "focused_tests": {
+    "before": {
+      "tests": 13,
+      "exit_status": 1,
+      "false_acceptance_regressions": 4,
+      "log_sha256": "ec6b51f415729340c85c656ee69215f9600ed5dff1d94ddd2853a1ab0f2e94a5"
+    },
+    "after": {
+      "tests": 35,
+      "exit_status": 0,
+      "command": "python3 -m unittest discover -s tests/python -p 'test_task_*' -v",
+      "log_sha256": "9293c9f751d34e6913022099102d6ca7e7a56532f05a36e89cf6d628e31ae921"
+    },
+    "fake_integration": "Real freeze.py plus fake ctypes library/original; positive also passes real full-record comparator. No actual library or emulator ran."
+  },
+  "historical_abi_compatibility": [
+    {
+      "slug": "task_work",
+      "expected_calls": 16,
+      "case_symbol_return_buffer_input_contracts_match_historical_ledgers": true
+    },
+    {
+      "slug": "task_lifecycle",
+      "expected_calls": 40,
+      "case_symbol_return_buffer_input_contracts_match_historical_ledgers": true
+    },
+    {
+      "slug": "task_display",
+      "expected_calls": 236,
+      "case_symbol_return_buffer_input_contracts_match_historical_ledgers": true
+    },
+    {
+      "slug": "task_delete",
+      "expected_calls": 244,
+      "case_symbol_return_buffer_input_contracts_match_historical_ledgers": true
+    }
+  ],
+  "compatibility_limits": "Read existing default case blobs/generated default fixtures and historical ledgers only; no original/native probe execution or reserved seed generation. Existing whole-byte decoder/equality validator is reused, not replaced.",
+  "files": {
+    "tools/oracles/task_judges/reserved_observer.py": "f901d6024b2d16a9fe64292ab6611fda8477c46c31d050d57122e2298913b549",
+    "tests/python/test_task_reserved_observer.py": "deb194f9b00559cd19b8079d787c23d5ef72ec4b1519f5dd1e48d30b01f60079"
+  },
+  "remaining": [
+    "Fresh bounded correction recheck",
+    "Actual per-case source attempt/STOP/return/fault/exclusion observations and development characterization",
+    "Final source-specific runner/recipes/committed dependency closure and single-use Root admission",
+    "No reserved inputs consumed; no final Task or campaign qualification"
+  ]
+}

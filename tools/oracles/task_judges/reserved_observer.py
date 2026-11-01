@@ -10,6 +10,7 @@ import importlib
 import importlib.util
 import json
 from pathlib import Path
+import struct
 import sys
 
 from reserved_inputs import arena_sequences, lifecycle_sequences
@@ -73,7 +74,7 @@ def capture_cases(slug, original, recorder, cases, definition, exe, library, out
 
 
 def validate_report(slug, report, cases):
-    """Successful equality requires every generated case, not a shorter capture."""
+    """Require complete report identities; validate_capture binds actual records."""
     if slug in ('task_work', 'task_lifecycle'):
         rows = report['sequences']
         if len(rows) != len(cases):
@@ -100,6 +101,79 @@ def validate_report(slug, report, cases):
         raise ValueError('Unknown task cohort: ' + slug)
 
 
+def expected_calls(slug, cases, report):
+    """Derive the exact unchanged probe ABI sequence independently of its recorder."""
+    arena_bytes = 16 * 1024 * 1024 + 32
+
+    def primary(symbol, words, trace_words=None):
+        command = struct.pack('<' + 'I' * len(words), *words)
+        if trace_words is None:
+            scalars = [None, len(words), None, 2048]
+            buffers = {'0': len(command), '2': 2048 * 4}
+            returned = 1
+        else:
+            scalars = [None, len(words), None, arena_bytes, None, trace_words]
+            buffers = {'0': len(command), '2': arena_bytes, '4': trace_words * 4}
+            returned = 0
+        return dict(symbol=symbol, scalars=scalars, buffers=buffers, result=returned,
+                    input=dict(bytes=len(command), sha256=hashlib.sha256(command).hexdigest()))
+
+    if slug == 'task_work':
+        return [primary('sadx_native_task_work', [v for op in case for v in op], len(case) * 3)
+                for case in cases]
+    if slug == 'task_lifecycle':
+        result = []
+        for case, row in zip(cases, report['sequences']):
+            result.append(primary('sadx_native_task_lifecycle', [v for op in case for v in op],
+                                  len(case) * 3 + 11))
+            callback_words = row['callback_count'] * 4
+            capacity = callback_words + 16
+            result.append(dict(symbol='sadx_native_task_callback_trace',
+                               scalars=[None, capacity], buffers={'0': capacity * 4},
+                               result=callback_words, input=None))
+        # These two calls are the original repeated inactive-membership control,
+        # not fresh generated sequences or a normally returned original destroy.
+        result.append(primary('sadx_native_task_lifecycle', [1, 2, 7, 0, 3, 0, 0, 0], 17))
+        result.append(dict(symbol='sadx_native_task_inactive_boundary', scalars=[None, 4],
+                           buffers={'0': 16}, result=0, input=None))
+        return result
+    if slug == 'task_display':
+        return [primary('sadx_native_task_display', case) for case in cases]
+    if slug == 'task_delete':
+        excluded = {row['case'] for row in report['source_unsupported']}
+        return [primary('sadx_native_task_delete', case)
+                for index, case in enumerate(cases) if index not in excluded]
+    raise ValueError('Unknown task cohort: ' + slug)
+
+
+def validate_capture(slug, cases, report, output):
+    """Bind complete recorded bytes to independent case/symbol/extent expectations."""
+    spec = importlib.util.spec_from_file_location('_task_capture_validator',
+                                                Path(__file__).with_name('compare_streams.py'))
+    validator = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(validator)
+    expected = expected_calls(slug, cases, report)
+    identity = json.loads((output / (slug + '.identity.json')).read_text())
+    count = 0
+    for index, raw in enumerate(validator.validated_records(output, slug)):
+        if index >= len(expected):
+            raise ValueError('Extra native capture call')
+        row, contract = json.loads(raw), expected[index]
+        if (row['symbol'] != contract['symbol'] or type(row['result']) is not int or
+                row['result'] != contract['result'] or row['scalar_arguments'] != contract['scalars']):
+            raise ValueError(f'Native capture call binding differs at {index}')
+        call = identity['calls'][index]
+        for phase in ('before', 'after'):
+            sizes = {key: value['bytes'] for key, value in call[phase].items()}
+            if sizes != contract['buffers']:
+                raise ValueError(f'Native capture buffer extents differ at {index}')
+            if contract['input'] is not None and call[phase]['0'] != contract['input']:
+                raise ValueError(f'Native capture input differs at {index}')
+        count += 1
+    if count != len(expected):
+        raise ValueError(f'Native capture call count {count} differs from expected {len(expected)}')
+
+
 def observe(slug, cases, labels, definition, exe, library, output):
     """Called only after the final runner has sealed/admitted this whole closure."""
     if not cases or len(cases) != len(labels):
@@ -119,7 +193,9 @@ def observe(slug, cases, labels, definition, exe, library, output):
     result = capture_cases(slug, original, recorder, cases, definition, exe, library, output)
     report_path = output / (slug + '.json')
     if result == 0:
-        validate_report(slug, json.loads(report_path.read_text()), cases)
+        report = json.loads(report_path.read_text())
+        validate_report(slug, report, cases)
+        validate_capture(slug, cases, report, output)
     receipt = dict(slug=slug, oracle_exit=result, generated_ids=list(range(len(cases))),
                    fresh_ids=[row['case'] for row in inputs if row['provenance'] == 'fresh'],
                    repeated_fixed_ids=[row['case'] for row in inputs
