@@ -10,6 +10,7 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import venv
 from unittest.mock import patch
 from types import SimpleNamespace
 
@@ -21,6 +22,108 @@ SPEC.loader.exec_module(RUN)
 
 
 class TaskReservedRun(unittest.TestCase):
+    def test_complete_unchanged_symlink_freeze_round_trip_and_selection_refusal(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            for name in ('tools/oracles', 'tools/lib', 'packet', 'sdk', 'resource', 'cxx',
+                         'game/Sonic Adventure DX'):
+                (root / name).mkdir(parents=True)
+            (root / 'packet/ROOT-RESERVED-PROTOCOL.json').write_text('{}')
+            (root / 'game/Sonic Adventure DX/sonic.exe').write_text('PE')
+            prefix = root / 'venv'
+            package = prefix / 'lib' / f'python{sys.version_info.major}.{sys.version_info.minor}' / 'site-packages/unicorn'
+            package.mkdir(parents=True)
+            (package / '__init__.py').write_text('package')
+            compiler = root / 'clang'
+            compiler.write_text('compiler')
+            spelling = root / 'clang++'
+            spelling.symlink_to('clang')
+            linker, lto = root / 'ld', root / 'libLTO'
+            linker.write_text('linker')
+            lto.write_text('support')
+            tools = dict(compiler=str(spelling), linker=str(linker), lto=str(lto),
+                         sdk=str(root/'sdk'), resource=str(root/'resource'), cxx=str(root/'cxx'),
+                         include_search=[str(root/'cxx')])
+            freeze = root / 'freeze.json'
+            with patch.object(RUN, 'ROOT', root), patch.object(RUN, 'PACKET', root/'packet'), \
+                    patch.object(RUN.sys, 'prefix', str(prefix)), patch.object(RUN, 'FREEZE', freeze), \
+                    patch.object(RUN, 'toolchain', return_value=tools):
+                inputs = RUN.root_inputs(tools)
+                self.assertEqual(inputs[str(spelling)], RUN.digest(spelling))
+                self.assertEqual(inputs[str(compiler.resolve())], RUN.digest(compiler))
+                frozen = dict(before=RUN.BEFORE, candidate=RUN.CANDIDATE, inputs=inputs, toolchain=tools)
+                freeze.write_text(json.dumps(frozen))
+                with patch.object(RUN, 'git', side_effect=lambda *args: freeze.read_bytes()):
+                    self.assertEqual(RUN.verify_freeze(), frozen)
+                    for key in ('compiler', 'linker', 'lto', 'sdk', 'resource', 'cxx', 'include_search'):
+                        changed = dict(tools)
+                        changed[key] = ['foreign'] if key == 'include_search' else 'foreign'
+                        freeze.write_text(json.dumps(dict(frozen, toolchain=changed)))
+                        with self.assertRaisesRegex(ValueError, 'Selected toolchain'):
+                            RUN.verify_freeze()
+
+    def test_no_site_startup_ignores_pth_preloaded_original(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            environment = root / 'venv'
+            venv.EnvBuilder(with_pip=False).create(environment)
+            site = next((environment/'lib').glob('python*/site-packages'))
+            (site/'poison.pth').write_text("import sys,types; m=types.ModuleType('verify_original_task_work'); m.VALUE='poison'; m.__file__='/outside.py'; sys.modules[m.__name__]=m\n")
+            archive = root / 'archive'
+            archive.mkdir()
+            (archive/'verify_original_task_work.py').write_text("VALUE='sealed'\n")
+            code = "import sys;sys.path.insert(0,sys.argv[1]);import verify_original_task_work as m;print(m.VALUE)"
+            python = str(environment/'bin/python')
+            before = subprocess.run([python, '-I', '-B', '-c', code, str(archive)], capture_output=True, text=True)
+            after = subprocess.run([python, '-I', '-S', '-B', '-c', code, str(archive)], capture_output=True, text=True)
+            self.assertEqual(before.returncode, 0, before.stderr)
+            self.assertEqual(before.stdout.strip(), 'poison')
+            self.assertEqual(after.returncode, 0, after.stderr)
+            self.assertEqual(after.stdout.strip(), 'sealed')
+
+    def test_preloaded_project_module_with_foreign_origin_is_refused(self):
+        with tempfile.TemporaryDirectory() as directory:
+            tree = Path(directory)
+            folder = tree/'tools/oracles'
+            folder.mkdir(parents=True)
+            (tree/'tools/lib').mkdir()
+            (folder/'verify_original_task_work.py').write_text('sealed')
+            module = SimpleNamespace(__file__='/outside.py')
+            with patch.dict(sys.modules, {'verify_original_task_work': module}):
+                with self.assertRaisesRegex(ValueError, 'Unsealed module origin'):
+                    RUN.verify_origins(tree, tree/'package')
+
+    def test_unicorn_native_loader_refuses_fallback_before_loading(self):
+        with tempfile.TemporaryDirectory() as directory:
+            package = Path(directory)
+            (package/'lib').mkdir()
+            (package/'lib/libunicorn.2.dylib').write_text('fake library')
+            original_loader = RUN.ctypes.cdll.LoadLibrary
+            def import_module(name):
+                RUN.ctypes.cdll.LoadLibrary('/outside/libunicorn.2.dylib')
+            with patch.object(RUN.importlib, 'import_module', side_effect=import_module), \
+                    patch.object(RUN.ctypes.cdll, 'LoadLibrary') as load:
+                with self.assertRaisesRegex(OSError, 'Unsealed Unicorn native loader'):
+                    RUN.pinned_unicorn(package)
+                load.assert_not_called()
+            self.assertEqual(RUN.ctypes.cdll.LoadLibrary, original_loader)
+
+    def test_unicorn_loaded_model_identity_checked(self):
+        with tempfile.TemporaryDirectory() as directory:
+            package = Path(directory)
+            (package/'lib').mkdir()
+            expected = package/'lib/libunicorn.2.dylib'
+            expected.write_text('fake library')
+            def imported(name):
+                if name == 'unicorn':
+                    RUN.ctypes.cdll.LoadLibrary(str(expected))
+                    return SimpleNamespace(__version__='2.1.4')
+                return SimpleNamespace(uclib=SimpleNamespace(_name=str(expected)))
+            with patch.object(RUN.importlib, 'import_module', side_effect=imported), \
+                    patch.object(RUN.ctypes.cdll, 'LoadLibrary') as load:
+                RUN.pinned_unicorn(package)
+                load.assert_called_once_with(str(expected.resolve()))
+
     def test_declared_sdk_cpp_search_preserves_cpp_driver_identity(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -210,10 +313,11 @@ class TaskReservedRun(unittest.TestCase):
             dependency.write_text('changed')
             freeze = root / 'freeze.json'
             frozen = dict(before=RUN.BEFORE, candidate=RUN.CANDIDATE,
-                          inputs={str(dependency): '0' * 64})
+                          inputs={str(dependency): '0' * 64}, toolchain={})
             freeze.write_text(json.dumps(frozen))
             with patch.object(RUN, 'ROOT', root), patch.object(RUN, 'FREEZE', freeze), \
                     patch.object(RUN, 'git', return_value=freeze.read_bytes()), \
+                    patch.object(RUN, 'toolchain', return_value={}), \
                     patch.object(RUN, 'root_inputs') as inspect:
                 with self.assertRaisesRegex(ValueError, 'dependency changed'):
                     RUN.verify_freeze()
@@ -223,9 +327,10 @@ class TaskReservedRun(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             freeze = root / 'freeze.json'
-            freeze.write_text(json.dumps(dict(before=RUN.BEFORE, candidate=RUN.CANDIDATE, inputs={})))
+            freeze.write_text(json.dumps(dict(before=RUN.BEFORE, candidate=RUN.CANDIDATE, inputs={}, toolchain={})))
             with patch.object(RUN, 'ROOT', root), patch.object(RUN, 'FREEZE', freeze), \
                     patch.object(RUN, 'git', return_value=freeze.read_bytes()), \
+                    patch.object(RUN, 'toolchain', return_value={}), \
                     patch.object(RUN, 'root_inputs', return_value={'new': 'digest'}):
                 with self.assertRaisesRegex(ValueError, 'set/interpreter/toolchain'):
                     RUN.verify_freeze()

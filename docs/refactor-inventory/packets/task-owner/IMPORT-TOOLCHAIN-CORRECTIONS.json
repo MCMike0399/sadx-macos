@@ -1,0 +1,36 @@
+{
+  "base_commit": "927021c9b56103b0742bb85ed6933ff5ff3cfc0a",
+  "review": "d26096a",
+  "corrections": {
+    "compiler_symlink_roundtrip": "Record lexical clang++ link identity and resolved binary bytes separately, verify both. Real root_inputs/verify_freeze round-trip test with fake complete environment now passes.",
+    "selected_toolchain": "Discover once during preparation, build pins from that exact selection; verification requires full selected metadata equality before dependency checks. Refusal tests cover every selected executable/search path.",
+    "startup_origins": "Require -I -S -B for entry/children/comparison. No site startup; manually expose only pinned Unicorn package and world/Root roots. Reject preloaded original/transitive project modules with outside origins before source behavior.",
+    "native_loader": "While importing Unicorn, LoadLibrary accepts only the pinned package dylib; inspect actual loaded path and version. Fallback is refused before foreign load."
+  },
+  "tests": {
+    "tests": 67,
+    "exit_status": 0,
+    "command": "python3 -m unittest discover -s tests/python -p 'test_task_*' -v",
+    "log_sha256": "5cdef81ea4b8965203f6d14d85b3ee9a0fce80f38c08eea376ff958f0d276e9c",
+    "scope": "Fake complete freeze, tiny temporary venv/startup subprocesses, mock native loader; no native/original/reserved execution."
+  },
+  "fixture_setup_notes": [
+    "Existing fake freeze fixtures gained required toolchain selection; initial two KeyErrors were fixture setup, not source cases.",
+    "Temporary /var paths canonicalize to /private/var; assertions now compare resolved target identity."
+  ],
+  "files": {
+    "tools/oracles/task_judges/reserved_run.py": "d3c51ca3580fec36ca9e56da195dad3ba8ba6f14238b47cd3506a7e89d5b1877",
+    "tests/python/test_task_reserved_run.py": "1c7ad602d80b57749f0f9dea8672ef29a8709eb12745f03cb6163fd02ffe38d2"
+  },
+  "remaining": [
+    "Fresh correction recheck",
+    "Preparation/actual full pin snapshot after approval",
+    "Distinct Root admission and actual reserved run",
+    "Task Main integration/source-only/journeys/gate"
+  ],
+  "never_run": [
+    "prepare",
+    "reserved generation",
+    "reserved execution"
+  ]
+}

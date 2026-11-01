@@ -4,6 +4,7 @@ No preparation command generates inputs, compiles code or executes original/nati
 behavior. The run marker is never removed, including after failure.
 """
 import argparse
+import ctypes
 import hashlib
 import importlib
 import io
@@ -112,7 +113,7 @@ def toolchain():
                 resource=str(resource), cxx=cxx[0], include_search=includes)
 
 
-def root_inputs():
+def root_inputs(tools=None):
     paths = []
     for directory in (ROOT / 'tools/oracles', ROOT / 'tools/lib'):
         paths.extend(directory.rglob('*.py'))
@@ -124,12 +125,16 @@ def root_inputs():
     # Third-party Python caches are executable model inputs too. Project helpers
     # load verified source directly; the pinned Unicorn package binds both forms.
     paths.extend(p for p in package.rglob('*') if p.is_file())
-    tools = toolchain()
+    tools = toolchain() if tools is None else tools
     paths.extend((Path(tools['compiler']), Path(tools['linker']), Path(tools['lto']),
                   Path(sys.executable).resolve()))
     exe = ROOT / 'game/Sonic Adventure DX/sonic.exe'
     paths.append(exe)
-    result = {str(path.resolve()): digest(path) for path in sorted(set(paths))}
+    result = {}
+    for path in sorted(set(paths)):
+        result[str(path.absolute())] = digest(path)
+        if path.is_symlink():
+            result[str(path.resolve())] = digest(path.resolve())
     for name in ('sdk', 'resource', 'cxx'):
         result.update(tree_inputs(Path(tools[name])))
     for directory in tools['include_search']:
@@ -153,8 +158,9 @@ def prepare():
     protocol = json.loads((PACKET / 'ROOT-RESERVED-PROTOCOL.json').read_text())
     if protocol['immutable_before_source'] != BEFORE:
         raise ValueError('Wrong immutable before-source model')
+    tools = toolchain()
     write_new(FREEZE, dict(before=BEFORE, candidate=CANDIDATE,
-                          protocol=protocol, inputs=root_inputs(), toolchain=toolchain(),
+                          protocol=protocol, inputs=root_inputs(tools), toolchain=tools,
                           source_trees={world: git('rev-parse', commit + ':src').decode().strip()
                                         for world, commit in (('old', BEFORE), ('current', CANDIDATE))},
                           archive_paths=ARCHIVE_PATHS,
@@ -168,10 +174,13 @@ def verify_freeze():
     frozen = json.loads(FREEZE.read_text())
     if frozen['before'] != BEFORE or frozen['candidate'] != CANDIDATE:
         raise ValueError('Frozen model identity differs')
+    selected = toolchain()
+    if frozen['toolchain'] != selected:
+        raise ValueError('Selected toolchain differs from frozen selection')
     for name, expected in frozen['inputs'].items():
         if digest(name) != expected:
             raise ValueError('Frozen dependency changed: ' + name)
-    if root_inputs() != frozen['inputs']:
+    if root_inputs(selected) != frozen['inputs']:
         raise ValueError('Dependency set/interpreter/toolchain changed')
     return frozen
 
@@ -281,6 +290,49 @@ def admit_child(stage, parent_fd, stage_token, monitor=True):
         threading.Thread(target=parent_lifetime, daemon=True).start()
 
 
+def verify_origins(tree, package):
+    """Existing module cache entries must not override the sealed search roots."""
+    originals = {path.stem for folder in ('tools/oracles', 'tools/lib')
+                 for path in (tree / folder).glob('*.py')}
+    roots = (tree / 'tools/oracles', tree / 'tools/lib')
+    for name, module in list(sys.modules.items()):
+        top = name.split('.')[0]
+        if top not in originals and top not in ('unicorn', 'reserved_inputs', 'reserved_observer'):
+            continue
+        location = getattr(module, '__file__', None)
+        if location is None:
+            raise ValueError('Unsealed module origin: ' + name)
+        path = Path(location).resolve()
+        if top == 'unicorn':
+            allowed = path.is_relative_to(package)
+        elif top in ('reserved_inputs', 'reserved_observer'):
+            allowed = path == Path(__file__).with_name(top + '.py').resolve()
+        else:
+            allowed = any(path.is_relative_to(root.resolve()) for root in roots)
+        if not allowed:
+            raise ValueError('Unsealed module origin: ' + name)
+
+
+def pinned_unicorn(package):
+    """Refuse loader fallback before any outside native library can be loaded."""
+    expected = (package / 'lib/libunicorn.2.dylib').resolve()
+    if not expected.is_file():
+        raise ValueError('Pinned Unicorn native library missing')
+    previous = ctypes.cdll.LoadLibrary
+    def load(path):
+        if Path(path).resolve() != expected:
+            raise OSError('Unsealed Unicorn native loader path')
+        return previous(str(expected))
+    try:
+        ctypes.cdll.LoadLibrary = load
+        package_module = importlib.import_module('unicorn')
+        binding = importlib.import_module('unicorn.unicorn_py3.unicorn')
+        if Path(binding.uclib._name).resolve() != expected or package_module.__version__ != '2.1.4':
+            raise ValueError('Loaded Unicorn model differs from pin')
+    finally:
+        ctypes.cdll.LoadLibrary = previous
+
+
 def child(mode, world=None, slug=None, parent_fd=None, stage_token=None):
     name = 'generate' if mode == 'generate' else world + '-' + slug
     admit_child(name, parent_fd, stage_token)
@@ -306,15 +358,22 @@ def child(mode, world=None, slug=None, parent_fd=None, stage_token=None):
     write_new(OUT / (name + '.started.json'), dict(mode=mode, world=world, slug=slug))
     tree = OUT / ('old' if mode == 'generate' else world) / 'tree'
     verify_archive(tree, frozen['before'] if mode == 'generate' or world == 'old' else frozen['candidate'])
+    package = (Path(sys.prefix) / 'lib' / f'python{sys.version_info.major}.{sys.version_info.minor}' /
+               'site-packages/unicorn').resolve()
+    verify_origins(tree, package)
     # All world-specific original scripts and helpers come from that immutable
     # archive. Root's recorder/observer come from the separately frozen Root tree.
-    sys.path[:0] = [str(Path(__file__).parent), str(tree / 'tools/oracles'), str(tree / 'tools/lib')]
+    sys.path[:0] = [str(Path(__file__).parent), str(tree / 'tools/oracles'),
+                   str(tree / 'tools/lib'), str(package.parent)]
+    pinned_unicorn(package)
     source_module('reserved_inputs', Path(__file__).with_name('reserved_inputs.py'))
     observer = source_module('reserved_observer', Path(__file__).with_name('reserved_observer.py'))
+    verify_origins(tree, package)
     if mode == 'generate':
         keys = dict(task_work='arena', task_lifecycle='lifecycle', task_display='display', task_delete='delete')
         for item in SLUGS:
             original = importlib.import_module('verify_original_' + item)
+            verify_origins(tree, package)
             definition = frozen['protocol']['cohorts'][keys[item]]
             cases, labels = observer.generate(item, definition, original)
             write_new(OUT / (item + '-inputs.json'), dict(definition=definition, cases=cases, labels=labels))
@@ -322,9 +381,12 @@ def child(mode, world=None, slug=None, parent_fd=None, stage_token=None):
         return
     inputs = json.loads((OUT / (slug + '-inputs.json')).read_text())
     library = OUT / world / 'libraries' / (slug + '.dylib')
+    importlib.import_module('verify_original_' + slug)
+    verify_origins(tree, package)
     status = observer.observe(slug, inputs['cases'], inputs['labels'], inputs['definition'],
                               ROOT / 'game/Sonic Adventure DX/sonic.exe', library,
                               OUT / world / 'captures' / slug)
+    verify_origins(tree, package)
     if status:
         raise RuntimeError(f'{world}/{slug}: original comparison exit {status}')
 
@@ -343,13 +405,13 @@ def run(admitted):
                   for world in ('old', 'current')
                   for path in sorted((OUT / world / 'libraries').glob('*.dylib'))}))
         script = str(Path(__file__).resolve())
-        command([sys.executable, '-I', '-B', script, '_generate'], ROOT, OUT / 'generate.log', stage='generate')
+        command([sys.executable, '-I', '-S', '-B', script, '_generate'], ROOT, OUT / 'generate.log', stage='generate')
         for slug in SLUGS:
             for world in ('old', 'current'):
-                command([sys.executable, '-I', '-B', script, '_observe', '--world', world, '--slug', slug],
+                command([sys.executable, '-I', '-S', '-B', script, '_observe', '--world', world, '--slug', slug],
                         ROOT, OUT / (world + '-' + slug + '.log'), stage=world + '-' + slug)
             comparison = OUT / (slug + '-comparison.json')
-            command([sys.executable, '-I', str(Path(__file__).with_name('compare_streams.py')),
+            command([sys.executable, '-I', '-S', '-B', str(Path(__file__).with_name('compare_streams.py')),
                      str(OUT / 'old/captures' / slug), str(OUT / 'current/captures' / slug),
                      '--slug', slug, '--output', str(comparison)], ROOT, OUT / (slug + '-compare.log'))
             old = json.loads((OUT / 'old/captures' / slug / 'inputs.json').read_text())
@@ -366,6 +428,8 @@ def run(admitted):
 
 
 def main():
+    if not (sys.flags.isolated and sys.flags.no_site and sys.flags.dont_write_bytecode):
+        raise ValueError('Use pinned Python with -I -S -B; unsealed startup is refused')
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('mode', choices=['prepare', 'run', '_generate', '_observe'])
     parser.add_argument('--admitted', action='store_true')
