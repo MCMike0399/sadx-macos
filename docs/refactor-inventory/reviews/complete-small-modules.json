@@ -1,0 +1,1418 @@
+{
+  "schema_version": 1,
+  "review_base": "628e36e6abdfdf862edfbe7152c13c2913e78e9f",
+  "review_kind": "Independent read-only whole-module semantic closure",
+  "packet_branch": "packet/review-complete-small-modules",
+  "counts": {
+    "modules": 9,
+    "reviewed_members": 17,
+    "already_conforming": 9,
+    "needs_migration": 0,
+    "open_review": 0
+  },
+  "scope": "Exactly the nine requested current maintained module identities and all17 actual tracked same-stem members; Profiles is header-only. ninja_length excluded. No whole renderer/Session/game/campaign disposition.",
+  "criteria_reference": {
+    "commit": "00bbbbc",
+    "path": "docs/refactor-inventory/MODULE-REVIEW.md",
+    "scope": "Read with git show; criteria only, not a current tracked evidence file or an integrated policy change."
+  },
+  "evidence": [
+    {
+      "path": "AGENTS.md",
+      "line": 1,
+      "sha256": "79d97f8cc1d657a75c38d9fb2a8cbb574ee1e8f023e542caef9dc7f31303ffac"
+    },
+    {
+      "path": "docs/PROMPT-complete-refactor.md",
+      "line": 1,
+      "sha256": "2136204b6f9af8232f5573510438af570534eab1bc6d2ddc3a48802dc1feccc7"
+    },
+    {
+      "path": "docs/STYLE.md",
+      "line": 375,
+      "sha256": "bd44068383b2198cf5165c2869086c6cf7844b1c96be44db7194c768ee62afdd"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "line": 1,
+      "sha256": "01b08d262279a42140d0cc301322baba861e72e6f5c4f332e4b26da6d88026b7"
+    },
+    {
+      "path": "docs/refactor-inventory/modules.jsonl",
+      "line": 1,
+      "sha256": "b93e39441fbd15a6e4b85e24dfcef8480d9539db146e3ba7eccd2a9cdfb27969"
+    },
+    {
+      "path": "docs/refactor-inventory/review.json",
+      "line": 1,
+      "sha256": "4710d5a7a7890eef3e331854d7a4d148a82fc4e68b822564513f9c6a46e4eb74"
+    }
+  ],
+  "modules": {
+    "src/game/menu_eligibility": {
+      "disposition": "already_conforming",
+      "reason": "The complete predicate API and implementation form a closed, shared integer decision module with resolved live borrowers and explicit unsupported-roster failure.",
+      "reviewed_members": {
+        "src/game/menu_eligibility.cpp": "fb655e82d982bc0cbc4aea78fd76a191d4847b481d7de411c33616b2c1eb9396",
+        "src/game/menu_eligibility.hpp": "410afefd687a01dffe358aa487ec04ec10ba3d6d0921fe4ceb0b59f636a29f9c"
+      },
+      "semantic_justification": "All three bodies and the complete public view/error/constants were inspected. Emblems count all bits in exactly 17 bytes. Metal override precedes flag/threshold work; the only mutation publishes 1 directly to live flag 89 after the 130-emblem threshold. Character order is Sonic/Tails/Knuckles/Amy/Big/Gamma/extra, deliberately different from raw Gamma/Big IDs. Override precedes unsupported-character validation; slot 6 chooses Metal only for variant 1, otherwise Super. Results normalize nonzero bytes. UnknownCharacter carries only the unsupported semantic index. No hidden source memory, service dispatch, fixture optional, executable dependency or recovered algorithm in another layer is required to implement this API.",
+      "evidence": [
+        {
+          "path": "src/game/menu_eligibility.cpp",
+          "line": 1,
+          "sha256": "fb655e82d982bc0cbc4aea78fd76a191d4847b481d7de411c33616b2c1eb9396"
+        },
+        {
+          "path": "src/game/menu_eligibility.hpp",
+          "line": 1,
+          "sha256": "410afefd687a01dffe358aa487ec04ec10ba3d6d0921fe4ceb0b59f636a29f9c"
+        },
+        {
+          "path": "docs/refactor-inventory/context-menu-progress.md",
+          "line": 1,
+          "sha256": "df8580f1c41a4e905c6824b8e9fd0a8754ca3e74089dd1a5cb74f738592ce45b"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/menu-progress-style-9c01095.md",
+          "line": 1,
+          "sha256": "c17e7f43270edbee313c8cc33c797046f79779beaa27d034c45a985809f0847f"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "Progress is a synchronous borrowed view: Profiles.current supplies persisted emblems/options; bootstrap.sequence_variables supplies the separate live 512 story bytes; bootstrap.menu.flags[0] supplies override and flow.tutorial_variant supplies selection_variant. Completion borrows bootstrap.completed_stages and TitleScene-owned imported StageSelectionData. No duplicate flag/record owner is created. Shared 8 by 43 dimensions preserve the existing 344-byte live and nested persisted types; capture/load remain explicit transfers, not aliasing of snapshots to live flags.",
+          "evidence": [
+            {
+              "path": "src/game/menu_eligibility.hpp",
+              "line": 15,
+              "sha256": "410afefd687a01dffe358aa487ec04ec10ba3d6d0921fe4ceb0b59f636a29f9c"
+            },
+            {
+              "path": "src/game/main_menu_eligibility.hpp",
+              "line": 6,
+              "sha256": "47914ce3968ef0cfa0dd295834b4d1dff31abc8d4261a97b60451a06c5fd5fa4"
+            },
+            {
+              "path": "src/game/save_data.hpp",
+              "line": 8,
+              "sha256": "b78b88eb49fa5623907fb4683b4fd5f349174b217b575ac6a3d55ba802d15080"
+            },
+            {
+              "path": "src/game/game_bootstrap.hpp",
+              "line": 68,
+              "sha256": "61e95071538b4f23602fda8460e10ea7ef251ff42d4b6ae1496c5ac718394f46"
+            },
+            {
+              "path": "src/runtime/native_main_menu.cpp",
+              "line": 21,
+              "sha256": "f8c1fb8172020e8acb92f7b1348476bbaa075540c77362eacdfb34f5bbbf96bf"
+            },
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "line": 23,
+              "sha256": "ddcf2b15144e3c1ea81bac848d70aab812b1398fbd8a55f4277885550792b9df"
+            },
+            {
+              "path": "src/runtime/native_file_select_display.cpp",
+              "line": 150,
+              "sha256": "7f8c435c0e9f718d1b5bd535c07aa68ef6ddfdd356451e36152579bd285e9fc1"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Native CharacterSelect services build Progress from live Session owners on each call; FileSelect display passes its borrowed snapshot/live view to shared emblem/character predicates. character_count and trial availability call the same Metal/character implementation. MainMenu eligibility composes these predicates directly; tests/probes are isolated value owners, not production state.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "line": 23,
+              "sha256": "ddcf2b15144e3c1ea81bac848d70aab812b1398fbd8a55f4277885550792b9df"
+            },
+            {
+              "path": "src/game/file_select_display.cpp",
+              "line": 60,
+              "sha256": "0a4952c71f8251f5c49321ab43859e399df3a2750e6e6b667f4850f9907124b7"
+            },
+            {
+              "path": "src/game/character_select_menu.cpp",
+              "line": 414,
+              "sha256": "e6858a81bfc8570517dab5b9a9d27c29cb4d0c30aa4f45b79f9a2da49d1a0ab5"
+            },
+            {
+              "path": "src/game/main_menu_eligibility.cpp",
+              "line": 19,
+              "sha256": "f76786029850e55a2ed0948bc8038c426b01638c1a72854c87cb680ee3146039"
+            },
+            {
+              "path": "tests/probes/native_menu_eligibility_probe.cpp",
+              "line": 3,
+              "sha256": "95f705f0596801425b789a59ce176bcad1203c322d221a3f77989a333adc0156"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Prior 7388 exact original cases, output story bytes compared as well as return; post-review 4436 exact cases (2048 fresh random plus fixed boundaries). Six compiled semantic mutants across the predicate pair catch Metal store/order/variant/override and stage stride/final-character errors.",
+          "limits": "Original unsupported IDs preserve an incoming undefined register; probe maps the semantic exception to its existing marker. MainMenu judge does not export flags, so mutation coverage depends on this predicate judge.",
+          "evidence": [
+            {
+              "path": "tools/oracles/verify_original_menu_eligibility.py",
+              "line": 1,
+              "sha256": "a6020665dfefa905413b31b2f6396e42f2458e92e8649888f5f1d745a58a5a78"
+            },
+            {
+              "path": "tests/unit/menu_eligibility.cpp",
+              "line": 1,
+              "sha256": "738bc0698034663629fa0f344e18220d66f623c946d10a60fe2908f56d556d95"
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-progress-shared/menu_eligibility.json",
+              "line": 1,
+              "sha256": "a751d82eec123c49127e4ffd17020c36b904c080aa685083b07ee99e8dcc249b"
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-progress-shared/holdout-menu_eligibility.json",
+              "line": 1,
+              "sha256": "a16e735b36050dbec5d51d1d68d9ee7549256ca0208cce13b46ac00d052bc135"
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-progress-shared/mutants.json",
+              "line": 1,
+              "sha256": "cab8745d573efa9caa6e281654ef85ce535c0d28b4e593236e921d275faed40d"
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-progress-shared/summary.json",
+              "line": 1,
+              "sha256": "7af7a51c99e1217913e192c8433764dadcfbaa65b5af3f5372f16324bfe892a7"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Static independent whole-module semantic review at review_base; no builds, units, oracles, mutants, gates, providers, network, storage/helper operations or delegates executed. Prior receipt statuses retain their original scope; source/hash inspection is not a new pass.",
+        "Conformance means readable maintained code preserving existing behavior under accepted bounded judges. It does not close the containing UI/save/math/platform system, Session, renderer, game, campaign, milestones, Windows/hardware parity or gameplay 63 FPS. Unrecovered named seams remain unrecovered.",
+        "Actual source catalogs and valid native views are accepted, not arbitrary malformed-vector or out-of-range Windows memory behavior. Reference invalid-register behavior is confined to the probe/oracle; no guessed return enters the game API.",
+        "Character Select 733 and title 270 inherited FP partial identities and full output digests remain unchanged in the tracked shared predicate qualification. Partial remains partial; title_factory 2268 exact cases is the actual stage-builder consumer judge. Its additional baseline was taken after the private naming edit, not retroactively a pre-edit baseline."
+      ],
+      "findings": [],
+      "qualification_gaps": [],
+      "destination": "Retain src/game/menu_eligibility as the maintained module; no source relocation required by this review.",
+      "per_file_review_support": {
+        "path": "docs/refactor-inventory/review.json",
+        "line": 1,
+        "sha256": "4710d5a7a7890eef3e331854d7a4d148a82fc4e68b822564513f9c6a46e4eb74"
+      }
+    },
+    "src/game/main_menu_eligibility": {
+      "disposition": "already_conforming",
+      "reason": "All ten entry bodies and shared predicate dependencies close as a borrowed integer policy module; malformed imported content remains an explicit boundary.",
+      "reviewed_members": {
+        "src/game/main_menu_eligibility.cpp": "f76786029850e55a2ed0948bc8038c426b01638c1a72854c87cb680ee3146039",
+        "src/game/main_menu_eligibility.hpp": "47914ce3968ef0cfa0dd295834b4d1dff31abc8d4261a97b60451a06c5fd5fa4"
+      },
+      "semantic_justification": "Mission enable tests the six named complete flags; optional entry uses separate 20-emblem/20-mission thresholds and mission bit 7. Voice/text getters preserve packed option fields, signed/unsigned byte return contracts and language fallback. Trial enable reads the second authored trial row after character eligibility. Trial counts retain first-row prerequisite and the source final-row quirk using current_character, while intermediate rows use the requested source character. Minigame completion is evaluated before override; uint8 accumulation deliberately wraps. Catalog lookup order, bounds exceptions and no asynchronous lifetime are preserved. Direct dependency on menu_eligibility is shared behavior, not duplicate policy; title_menu is used for typed imported stage data, not a hidden call into its wider lifecycle.",
+      "evidence": [
+        {
+          "path": "src/game/main_menu_eligibility.cpp",
+          "line": 1,
+          "sha256": "f76786029850e55a2ed0948bc8038c426b01638c1a72854c87cb680ee3146039"
+        },
+        {
+          "path": "src/game/main_menu_eligibility.hpp",
+          "line": 1,
+          "sha256": "47914ce3968ef0cfa0dd295834b4d1dff31abc8d4261a97b60451a06c5fd5fa4"
+        },
+        {
+          "path": "src/game/story_flags.hpp",
+          "line": 1,
+          "sha256": "1612c58a1a2d8019bc9d4d684723988cf136220e724fb72cf07366bd53049590"
+        },
+        {
+          "path": "docs/refactor-inventory/context-menu-progress.md",
+          "line": 1,
+          "sha256": "df8580f1c41a4e905c6824b8e9fd0a8754ca3e74089dd1a5cb74f738592ce45b"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "Progress is a synchronous borrowed view: Profiles.current supplies persisted emblems/options; bootstrap.sequence_variables supplies the separate live 512 story bytes; bootstrap.menu.flags[0] supplies override and flow.tutorial_variant supplies selection_variant. Completion borrows bootstrap.completed_stages and TitleScene-owned imported StageSelectionData. No duplicate flag/record owner is created. Shared 8 by 43 dimensions preserve the existing 344-byte live and nested persisted types; capture/load remain explicit transfers, not aliasing of snapshots to live flags.",
+          "evidence": [
+            {
+              "path": "src/game/menu_eligibility.hpp",
+              "line": 15,
+              "sha256": "410afefd687a01dffe358aa487ec04ec10ba3d6d0921fe4ceb0b59f636a29f9c"
+            },
+            {
+              "path": "src/game/main_menu_eligibility.hpp",
+              "line": 6,
+              "sha256": "47914ce3968ef0cfa0dd295834b4d1dff31abc8d4261a97b60451a06c5fd5fa4"
+            },
+            {
+              "path": "src/game/save_data.hpp",
+              "line": 8,
+              "sha256": "b78b88eb49fa5623907fb4683b4fd5f349174b217b575ac6a3d55ba802d15080"
+            },
+            {
+              "path": "src/game/game_bootstrap.hpp",
+              "line": 68,
+              "sha256": "61e95071538b4f23602fda8460e10ea7ef251ff42d4b6ae1496c5ac718394f46"
+            },
+            {
+              "path": "src/runtime/native_main_menu.cpp",
+              "line": 21,
+              "sha256": "f8c1fb8172020e8acb92f7b1348476bbaa075540c77362eacdfb34f5bbbf96bf"
+            },
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "line": 23,
+              "sha256": "ddcf2b15144e3c1ea81bac848d70aab812b1398fbd8a55f4277885550792b9df"
+            },
+            {
+              "path": "src/runtime/native_file_select_display.cpp",
+              "line": 150,
+              "sha256": "7f8c435c0e9f718d1b5bd535c07aa68ef6ddfdd356451e36152579bd285e9fc1"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "MainMenuServices obtains language, mission/trial/optional enable and totals from the shared API and consumes byte results as booleans or signed menu language. CharacterSelect trial_character_enabled composes minigame_count with its live Availability view and extra-slot handling. Trial catalog stays in scene assets and is not copied into completion state.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_main_menu.cpp",
+              "line": 66,
+              "sha256": "f8c1fb8172020e8acb92f7b1348476bbaa075540c77362eacdfb34f5bbbf96bf"
+            },
+            {
+              "path": "src/game/character_select_menu.cpp",
+              "line": 430,
+              "sha256": "e6858a81bfc8570517dab5b9a9d27c29cb4d0c30aa4f45b79f9a2da49d1a0ab5"
+            },
+            {
+              "path": "src/game/title_menu.hpp",
+              "line": 1,
+              "sha256": "7f96f3de3a1518ff8d12412bb35b04ec48480d2d0085356977ba33f629b1995f"
+            },
+            {
+              "path": "tests/probes/native_main_menu_eligibility_probe.cpp",
+              "line": 3,
+              "sha256": "07694eccb0ccfd9537837fc39e5638743d9bea1016ca456b899eabf0649d621c"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Prior 11488 exact cases, all 256 options and extreme language ints; individual counts reached through totals. Post-review 8536 exact cases (2048 fresh random plus fixed boundaries); stride and current-character mutants discriminated. Six existing units and eight affected consumer judges are separately recorded.",
+          "limits": "Consumed AL is compared signed/unsigned, not scratch upper EAX. Probe does not return mutated flags; menu_eligibility judge supplies that observation. Valid actual source stage vectors, not exhaustive malformed catalogs.",
+          "evidence": [
+            {
+              "path": "tools/oracles/verify_original_main_menu_eligibility.py",
+              "line": 1,
+              "sha256": "ad4841c1b47eaac11d364116c98b1965422e29499153985a9e318221913bed0f"
+            },
+            {
+              "path": "tests/unit/main_menu_eligibility.cpp",
+              "line": 1,
+              "sha256": "0769bb1cd5d58da859399c2dc7082ca05d3ed8bd3704838e1c528b49ef9896cc"
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-progress-shared/main_menu_eligibility.json",
+              "line": 1,
+              "sha256": "86bcb10ddad57b77fb63d4cf97dcddd9036b102455bb465abcbbd562ecff227e"
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-progress-shared/holdout-main_menu_eligibility.json",
+              "line": 1,
+              "sha256": "dc805dde743127b1761afe4d19182b657b00ecfba216c9dca06ef5655d1c313b"
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-progress-shared/summary.json",
+              "line": 1,
+              "sha256": "7af7a51c99e1217913e192c8433764dadcfbaa65b5af3f5372f16324bfe892a7"
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-progress-shared/mutants.json",
+              "line": 1,
+              "sha256": "cab8745d573efa9caa6e281654ef85ce535c0d28b4e593236e921d275faed40d"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Static independent whole-module semantic review at review_base; no builds, units, oracles, mutants, gates, providers, network, storage/helper operations or delegates executed. Prior receipt statuses retain their original scope; source/hash inspection is not a new pass.",
+        "Conformance means readable maintained code preserving existing behavior under accepted bounded judges. It does not close the containing UI/save/math/platform system, Session, renderer, game, campaign, milestones, Windows/hardware parity or gameplay 63 FPS. Unrecovered named seams remain unrecovered.",
+        "Actual source catalogs and valid native views are accepted, not arbitrary malformed-vector or out-of-range Windows memory behavior. Reference invalid-register behavior is confined to the probe/oracle; no guessed return enters the game API.",
+        "Character Select 733 and title 270 inherited FP partial identities and full output digests remain unchanged in the tracked shared predicate qualification. Partial remains partial; title_factory 2268 exact cases is the actual stage-builder consumer judge. Its additional baseline was taken after the private naming edit, not retroactively a pre-edit baseline."
+      ],
+      "findings": [],
+      "qualification_gaps": [],
+      "destination": "Retain src/game/main_menu_eligibility as the maintained module; no source relocation required by this review.",
+      "per_file_review_support": {
+        "path": "docs/refactor-inventory/review.json",
+        "line": 1,
+        "sha256": "4710d5a7a7890eef3e331854d7a4d148a82fc4e68b822564513f9c6a46e4eb74"
+      }
+    },
+    "src/game/menu_navigation": {
+      "disposition": "already_conforming",
+      "reason": "Both operations, task borrowing and music-callback capture semantics close under the unchanged source comparison and registered boundary unit.",
+      "reviewed_members": {
+        "src/game/menu_navigation.cpp": "77b4c4887fa4228844e717b1049eaa1e3a1e87fdc378b4af7262d84ad1f10934",
+        "src/game/menu_navigation.hpp": "78866ebf2734a27a9f8733d1a88a042a6acfe32f6e6accc270e5450a42b21db7"
+      },
+      "semantic_justification": "The setter checks the canonical character task/work then publishes next mode. Preparation executes that setter before validating sequence, captures a strong shared_ptr to sequence work before music shutdown, and writes waiting byte then waiting_mode to the captured work even if the callback replaces either task. Failures leave already-published prefixes intact. State references the actual TaskHandle owners rather than copied handles; the local work capture intentionally extends only its call lifetime. Calls has one existing shutdown operation, not a registry or generic framework. Canonical factory work types are a caller invariant for static casts; no claim of runtime type safety for arbitrary auxiliary work.",
+      "evidence": [
+        {
+          "path": "src/game/menu_navigation.cpp",
+          "line": 1,
+          "sha256": "77b4c4887fa4228844e717b1049eaa1e3a1e87fdc378b4af7262d84ad1f10934"
+        },
+        {
+          "path": "src/game/menu_navigation.hpp",
+          "line": 1,
+          "sha256": "78866ebf2734a27a9f8733d1a88a042a6acfe32f6e6accc270e5450a42b21db7"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "TitleScene.state.factories.character_select_task and state.sequence_task are canonical task handles. Task auxiliary_native_work owns CharacterSelectWork/SequenceWork, with the scene sequence_work alias referring to the same work. Module allocates no task or persistent state; shared capture protects callback replacement.",
+          "evidence": [
+            {
+              "path": "src/game/menu_navigation.hpp",
+              "line": 6,
+              "sha256": "78866ebf2734a27a9f8733d1a88a042a6acfe32f6e6accc270e5450a42b21db7"
+            },
+            {
+              "path": "src/game/menu_navigation.cpp",
+              "line": 3,
+              "sha256": "77b4c4887fa4228844e717b1049eaa1e3a1e87fdc378b4af7262d84ad1f10934"
+            },
+            {
+              "path": "src/game/title_menu.hpp",
+              "line": 311,
+              "sha256": "7f96f3de3a1518ff8d12412bb35b04ec48480d2d0085356977ba33f629b1995f"
+            },
+            {
+              "path": "src/game/title_menu.hpp",
+              "line": 477,
+              "sha256": "7f96f3de3a1518ff8d12412bb35b04ec48480d2d0085356977ba33f629b1995f"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "The only production prepare caller is MainMenuServices, forwarding the actual handles and shutdown to TitleScene.stop_menu_music. This reaches existing shared music stop behavior; it is a receipt only in the oracle. Source setter is also independently exercised by the probe. No teardown correctness is hidden in navigation.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_main_menu.cpp",
+              "line": 128,
+              "sha256": "f8c1fb8172020e8acb92f7b1348476bbaa075540c77362eacdfb34f5bbbf96bf"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 587,
+              "sha256": "b79241bae2dd42684e8c03cdd475cca89f301a9705a57ede031baefa0b9b0c62"
+            },
+            {
+              "path": "src/game/music.cpp",
+              "line": 74,
+              "sha256": "225ebc59537b71a071c54296f82a7ad6b1ed368eb325c14db5b933053cfaf12d"
+            },
+            {
+              "path": "tests/probes/native_menu_navigation_probe.cpp",
+              "line": 6,
+              "sha256": "86e956867c4e3827aa3683f13bdceb48258e4fcb0c29e1f74c5830218b3705a3"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Tracked 1488 exact original setter/routing cases compare pre-callback fields, replacement of both canonical handles and original/replacement destinations. Registered unit checks captured identity, missing sequence after character store and missing character work.",
+          "limits": "Music shutdown itself is a call receipt, not a proof of audio teardown. Null character and missing sequence work branches are read in source but not both directly exercised by this unit. No dedicated tracked navigation mutant or reserved holdout identified; retained readable code is not a newly recovered/reworked system.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/menu_navigation.json",
+              "line": 1,
+              "sha256": "31cfe34975290e14f73963248a28fc21f414aaed6ec1a2ba01c03183767ef8cb"
+            },
+            {
+              "path": "tools/oracles/verify_original_menu_navigation.py",
+              "line": 1,
+              "sha256": "0673c323a27bd5a42a7c0aadcc10eed27edb9ea129329387b2c1c5ac0471059e"
+            },
+            {
+              "path": "tests/probes/native_menu_navigation_probe.cpp",
+              "line": 1,
+              "sha256": "86e956867c4e3827aa3683f13bdceb48258e4fcb0c29e1f74c5830218b3705a3"
+            },
+            {
+              "path": "tests/unit/menu_navigation.cpp",
+              "line": 1,
+              "sha256": "75d4cb516b496c88421a70fdb2a6bc5a17f4d59f5bad4faf9c92c65719e73ae8"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 237,
+              "sha256": "be26bf1a641df0e5b887653a87cc5b9de1d0c55b6d8b8dfa0a79c8439458039b"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Static independent whole-module semantic review at review_base; no builds, units, oracles, mutants, gates, providers, network, storage/helper operations or delegates executed. Prior receipt statuses retain their original scope; source/hash inspection is not a new pass.",
+        "Conformance means readable maintained code preserving existing behavior under accepted bounded judges. It does not close the containing UI/save/math/platform system, Session, renderer, game, campaign, milestones, Windows/hardware parity or gameplay 63 FPS. Unrecovered named seams remain unrecovered.",
+        "No floating arithmetic or source data recovery occurs in this helper. Missing task/work errors are native boundary errors, not equivalence to arbitrary Windows null dereferences."
+      ],
+      "findings": [],
+      "qualification_gaps": [
+        "Dedicated semantic mutant/reserved holdout and full null/work error branch matrix are not tracked for this helper; accepted unchanged-body review does not claim them."
+      ],
+      "destination": "Retain src/game/menu_navigation as the maintained module; no source relocation required by this review.",
+      "per_file_review_support": {
+        "path": "docs/refactor-inventory/review.json",
+        "line": 1,
+        "sha256": "4710d5a7a7890eef3e331854d7a4d148a82fc4e68b822564513f9c6a46e4eb74"
+      }
+    },
+    "src/game/save_completion": {
+      "disposition": "already_conforming",
+      "reason": "Complete stages 12/13 suffix, borrowed state, actual dispatch and loud unrecovered warning bindings close as maintained completion logic, without claiming warning recovery.",
+      "reviewed_members": {
+        "src/game/save_completion.cpp": "3ddcb611f9970fde40cd8d731b6c0c9484033ef043b1b73055ffbac7ca319095",
+        "src/game/save_completion.hpp": "f7ccc8fc53231278f826acdf287d7693cc649e5390df3836b4ab9b635be18d16"
+      },
+      "semantic_justification": "The eleven references are live state, not another completion owner. ControlStage names the existing task stage; int16 delay 5 and signed int8 save_ok tests preserve widths. WaitForNewSave falls through into CompleteNewSave in the same call. Prefix clears occur before dialog/create-warning callbacks; returned task replaces the handle only after success. Success transitions before reading live selected_card_file into uint16 backup; failure reads dialog then closes the live warning handle after clears. Close does not clear the stored handle; retry initializes, continue transitions before disabling/preparing/applying. Throwing callbacks preserve reached stores, no rollback or fabricated save_ok. FileSelect animation prefix remains outside this suffix. Both warning seams are explicitly STUB annotated and native throws remain loud, not recovered behavior erased.",
+      "evidence": [
+        {
+          "path": "src/game/save_completion.cpp",
+          "line": 1,
+          "sha256": "3ddcb611f9970fde40cd8d731b6c0c9484033ef043b1b73055ffbac7ca319095"
+        },
+        {
+          "path": "src/game/save_completion.hpp",
+          "line": 1,
+          "sha256": "f7ccc8fc53231278f826acdf287d7693cc649e5390df3836b4ab9b635be18d16"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "Flow owns blocked/phase/ready/alert, Session owns save_ok/fade/exec/selection backup/disabled/warning task, bootstrap.menu owns selected_file. Task auxiliary FileSelectWork owns wait/stage/presentation. Native write frame publishes success; this suffix consumes it. The warning handle is shared ownership and close receives its current value by value.",
+          "evidence": [
+            {
+              "path": "src/game/save_completion.hpp",
+              "line": 6,
+              "sha256": "f7ccc8fc53231278f826acdf287d7693cc649e5390df3836b4ab9b635be18d16"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 511,
+              "sha256": "b79241bae2dd42684e8c03cdd475cca89f301a9705a57ede031baefa0b9b0c62"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 195,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/game/title_menu.hpp",
+              "line": 220,
+              "sha256": "7f96f3de3a1518ff8d12412bb35b04ec48480d2d0085356977ba33f629b1995f"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Shared FileSelect controls dispatch after their animation prefix. TitleScene constructs the full borrowed view and implements dialog, transition, prepare/apply through actual owners. create_save_warning and close_save_warning throw native_save_warning_message/native_save_warning_close at the reached boundary; no silent skip, no asynchronous task deletion or guessed language descriptor.",
+          "evidence": [
+            {
+              "path": "src/game/file_select_controls.cpp",
+              "line": 29,
+              "sha256": "e3d12bbda98c073fc6dce1133a830f68ecc5f03a6e49a2a376f9cb35e803dd04"
+            },
+            {
+              "path": "src/game/file_select_controls.cpp",
+              "line": 104,
+              "sha256": "e3d12bbda98c073fc6dce1133a830f68ecc5f03a6e49a2a376f9cb35e803dd04"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 499,
+              "sha256": "b79241bae2dd42684e8c03cdd475cca89f301a9705a57ede031baefa0b9b0c62"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 518,
+              "sha256": "b79241bae2dd42684e8c03cdd475cca89f301a9705a57ede031baefa0b9b0c62"
+            },
+            {
+              "path": "src/runtime/native_title_scene.hpp",
+              "line": 214,
+              "sha256": "6bbeb90ebb857292266180d33d2519eadcb8a8ac076cc6b667a9573951382d07"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Tracked default 1000 and post-review seed 20261104 4096 completion cases exact. Five compiled mutants reject unsigned save_ok, delay/fallthrough, early selection read and close-before-clear. Registered callback unit checks throws at all seven call boundaries and live owner mutation.",
+          "limits": "Completion source uses ordered dialog/task/save call receipts; capture1000 is separate evidence, not completion coverage. Controls2438 keeps 938 inherited FP partial identities and exact full outputs; exit1 stays partial. Warning task callee behavior not recovered.",
+          "evidence": [
+            {
+              "path": "reference/packets/save-completion/qualification.json",
+              "line": 1,
+              "sha256": "1b4657b0ff662bcc21255779aa675f8acc40cdb8fb55cbfef7a8b974e70e5694"
+            },
+            {
+              "path": "reference/packets/save-completion/holdout.json",
+              "line": 1,
+              "sha256": "27a971b6436d063aaa4c22f1ba453e59b9b8184ffd7d661701da94a2bb589cdf"
+            },
+            {
+              "path": "tests/unit/save_completion_callbacks.cpp",
+              "line": 1,
+              "sha256": "36e9e79c04918f8e3ece839da84a89663529c6e00f5fe94bc5b344a6df8942ec"
+            },
+            {
+              "path": "tests/probes/native_save_creation_probe.cpp",
+              "line": 1,
+              "sha256": "7b97306fb3d911a3b675906b498b54f40e5319e7bece3c290d010bb525760f92"
+            },
+            {
+              "path": "tools/oracles/verify_original_save_completion.py",
+              "line": 1,
+              "sha256": "ec92ebfbbd9a67c108ea35200bccb0070756f61bc425cf8f70ecef3e696d00ba"
+            },
+            {
+              "path": "reference/oracle-reports/save_completion.json",
+              "line": 1,
+              "sha256": "c4110b83fbafd7a71bf8a561508980e4fe2486d597425dea59bc9fb13279b7fa"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Static independent whole-module semantic review at review_base; no builds, units, oracles, mutants, gates, providers, network, storage/helper operations or delegates executed. Prior receipt statuses retain their original scope; source/hash inspection is not a new pass.",
+        "Conformance means readable maintained code preserving existing behavior under accepted bounded judges. It does not close the containing UI/save/math/platform system, Session, renderer, game, campaign, milestones, Windows/hardware parity or gameplay 63 FPS. Unrecovered named seams remain unrecovered.",
+        "Unrecovered warning creation/close and broader error UI remain open capabilities, not a migration blocker for this readable existing suffix. No warning resource lifetime after the declared seam is inferred."
+      ],
+      "findings": [],
+      "qualification_gaps": [
+        "Warning task allocation/language-specific content/close behavior remains unrecovered; native failure path intentionally stops at those named seams."
+      ],
+      "destination": "Retain src/game/save_completion as the maintained module; no source relocation required by this review.",
+      "per_file_review_support": {
+        "path": "docs/refactor-inventory/review.json",
+        "line": 1,
+        "sha256": "4710d5a7a7890eef3e331854d7a4d148a82fc4e68b822564513f9c6a46e4eb74"
+      }
+    },
+    "src/game/character_completion": {
+      "disposition": "already_conforming",
+      "reason": "Entire typed catalog reduction and imported/live flag boundary close without requiring the unfinished CharacterSelect renderer.",
+      "reviewed_members": {
+        "src/game/character_completion.cpp": "d83e737fa7b2384e4dd135aa3399c4e8f4c6d12599a02ce11e4629f119489098",
+        "src/game/character_completion.hpp": "0b921119a02e6ea9d622e3d8b3de16a53c4d7b3011ed1a857cf71bb3e28e5eac"
+      },
+      "semantic_justification": "Catalog owns seven ordered vectors of signed three-word authored rows. value validates the semantic character, initializes zero and returns the last satisfied row value, including zero/negative values; it does not maximize or popcount. Story nonzero and signed cutscene-byte nonzero are retained, with unknown source kinds skipping without reading an invalid index. Known flag indices fail explicitly outside 512 bytes. No guessed fields, floating arithmetic or event_work substitution occurs. Importer preserves exact signed rows/order and rejects invalid known indices; native loader validates seven source catalogs/counts. Runtime borrows attached immutable catalog and the distinct live story/cutscene owners.",
+      "evidence": [
+        {
+          "path": "src/game/character_completion.cpp",
+          "line": 1,
+          "sha256": "d83e737fa7b2384e4dd135aa3399c4e8f4c6d12599a02ce11e4629f119489098"
+        },
+        {
+          "path": "src/game/character_completion.hpp",
+          "line": 1,
+          "sha256": "0b921119a02e6ea9d622e3d8b3de16a53c4d7b3011ed1a857cf71bb3e28e5eac"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "Session uniquely owns attached Catalog, rejects second attachment and passes const view; bootstrap.sequence_variables and cutscene_flags are separate 512-byte owners, not packed save flags or event_work. Data vectors own values only; no source pointer survives importing.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 136,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 268,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/game/game_bootstrap.hpp",
+              "line": 68,
+              "sha256": "61e95071538b4f23602fda8460e10ea7ef251ff42d4b6ae1496c5ac718394f46"
+            },
+            {
+              "path": "src/game/character_completion.hpp",
+              "line": 8,
+              "sha256": "0b921119a02e6ea9d622e3d8b3de16a53c4d7b3011ed1a857cf71bb3e28e5eac"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "App loader reads validated imported metadata; import script proves inverse source row serialization. Native CharacterSelect draw calls value directly, casts signed result for existing number interface and keeps digit rendering separate. Missing catalog throws before call. Caller row selection indexes catalogs directly, not raw character remapping.",
+          "evidence": [
+            {
+              "path": "src/apps/native_character_completion_assets.hpp",
+              "line": 7,
+              "sha256": "bc4dc41040c9618411b67f4f6f32013026a8032e7b9ebaabefaf2a1275efa664"
+            },
+            {
+              "path": "tools/import/character_completion.py",
+              "line": 12,
+              "sha256": "2db244ad28c4f5c4c0c619f4b5fbfc8b1ec1155017d1c16ed01f59eb59176235"
+            },
+            {
+              "path": "src/apps/sadx_native.mm",
+              "line": 214,
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "line": 219,
+              "sha256": "ddcf2b15144e3c1ea81bac848d70aab812b1398fbd8a55f4277885550792b9df"
+            },
+            {
+              "path": "src/game/character_select_menu.cpp",
+              "line": 387,
+              "sha256": "e6858a81bfc8570517dab5b9a9d27c29cb4d0c30aa4f45b79f9a2da49d1a0ab5"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Current tracked report has 2399 exact original cases with both real unhooked flag helpers; current header/cpp/probe fingerprints are recorded. Each flag helper additionally checks all 256 byte returns. Registered native unit covers last match, zero/negative, unknown kind, six invalid-index boundaries and seven malformed metadata cases; Python tests cover import shape/inverse.",
+          "limits": "Older per-file review correctly lacked raw tracked report then; current reference/oracle-reports/character_completion.json supersedes that absence only. No dedicated algorithm mutant or reserved 5399-case holdout receipt is established. Caller number-argument mutant is not a completion algorithm mutant.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/character_completion.json",
+              "line": 1,
+              "sha256": "b576509a7ddbdce871072a31b2e0a5d99e8cdba60a1b26c33dae16a16f79c10d"
+            },
+            {
+              "path": "tools/oracles/verify_original_character_completion.py",
+              "line": 1,
+              "sha256": "cf2e94624e384a24d53bf2a21744756ac79bf91c2f51c953c2f85927b68d17ac"
+            },
+            {
+              "path": "tests/probes/native_character_completion_probe.cpp",
+              "line": 1,
+              "sha256": "550ec541735a1dcf965808ced1a35f13e5edc3c524d82e22b4b0b4a39444d5cd"
+            },
+            {
+              "path": "tests/unit/character_completion.mm",
+              "line": 1,
+              "sha256": "94e1c5e38c454ff75fa397189f1d025064bf729407319904cdf6b9148655e4cf"
+            },
+            {
+              "path": "tests/python/test_character_completion_import.py",
+              "line": 1,
+              "sha256": "677931420a5bd7881bc7051e2d9528375771362f8223b5c7a433536dfbc73659"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Static independent whole-module semantic review at review_base; no builds, units, oracles, mutants, gates, providers, network, storage/helper operations or delegates executed. Prior receipt statuses retain their original scope; source/hash inspection is not a new pass.",
+        "Conformance means readable maintained code preserving existing behavior under accepted bounded judges. It does not close the containing UI/save/math/platform system, Session, renderer, game, campaign, milestones, Windows/hardware parity or gameplay 63 FPS. Unrecovered named seams remain unrecovered.",
+        "Signed nonpositive source row counts are empty vectors at reference boundary. Native checked errors do not prove Windows out-of-bounds memory parity. CharacterSelect UI has inherited FP partials; catalog reduction is integer-only and does not close drawing/actor resources."
+      ],
+      "findings": [],
+      "qualification_gaps": [
+        "No dedicated completion algorithm mutation or independently reserved 5399-case holdout receipt accepted; no new fidelity run."
+      ],
+      "destination": "Retain src/game/character_completion as the maintained module; no source relocation required by this review.",
+      "per_file_review_support": {
+        "path": "docs/refactor-inventory/review.json",
+        "line": 1,
+        "sha256": "4710d5a7a7890eef3e331854d7a4d148a82fc4e68b822564513f9c6a46e4eb74"
+      }
+    },
+    "src/game/save_profiles": {
+      "disposition": "already_conforming",
+      "reason": "Header-only module closes the two complete record owners and actual current/backup borrowers in both runtime worlds, with availability retained at the reference boundary.",
+      "reviewed_members": {
+        "src/game/save_profiles.hpp": "7fa1443e5382027559c51bc32694ee1fe370548adfe2a784f6e9fe3cbf70fdff"
+      },
+      "semantic_justification": "All actual members consist of the one header. Profiles.current and menu_backup are plain complete Data values, with exact 1392-byte encoded provenance extents rather than host sizeof/padding. Current is the first SDK record; backup is the separate menu address, not another SDK array element. This is one type instantiated independently per runtime world, not one process singleton or duplicate cache. Data owns values only. Native Session constructs Profiles before LogoScene binds current; current loads/assignments preserve object identity. Title preparation copies current before LoadSave; main menu copies after apply callback. Reference state hides unsupplied fields and exposes only the formerly known options and six life bytes with independent knownness, preserving lazy read failures and callback visibility.",
+      "evidence": [
+        {
+          "path": "src/game/save_profiles.hpp",
+          "line": 1,
+          "sha256": "7fa1443e5382027559c51bc32694ee1fe370548adfe2a784f6e9fe3cbf70fdff"
+        },
+        {
+          "path": "docs/refactor-inventory/context-session-save-ownership.json",
+          "line": 1,
+          "sha256": "4902036573155a56500e7f4bc3272e83f777e5d87ed4769cfad9ddb5a0186dd1"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "Profiles owns both complete source extents; no remaining seven-byte options/lives cache competes. Encoded Data uses explicit field widths and codec; live story, stages and missions remain separate runtime owners with explicit capture/load. Backup remains intentionally distinct, not an alias.",
+          "evidence": [
+            {
+              "path": "src/game/save_profiles.hpp",
+              "line": 5,
+              "sha256": "7fa1443e5382027559c51bc32694ee1fe370548adfe2a784f6e9fe3cbf70fdff"
+            },
+            {
+              "path": "src/game/save_data.hpp",
+              "line": 28,
+              "sha256": "b78b88eb49fa5623907fb4683b4fd5f349174b217b575ac6a3d55ba802d15080"
+            },
+            {
+              "path": "reference/symbols/legacy-identifiers.json",
+              "line": 1,
+              "sha256": "80bb63b169b4eba7690f8e54532e707571c8b8e455727be39ed73054e592e84c"
+            },
+            {
+              "path": "reference/symbols/overrides.tsv",
+              "line": 1,
+              "sha256": "81e330ebd0aa5e4939566d6cd6abf65da356b28d70f1f9641a9cbf3016017318"
+            },
+            {
+              "path": "src/guest/game_mode_leaves_reference.hpp",
+              "line": 52,
+              "sha256": "5e3f17d271ca0d4c941f3bb00af800f455b87f7c6f88c21de4427281df73a25b"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Native constructor/logo borrows current; bootstrap start/init, load, capture/write, title count/load/confirmation, FileSelect draw, eligibility and CharacterSelect borrow that same current. TitleState and MainMenu ControlState carry current plus backup and preserve copy/callback order. Reference NativeGame imports actual bytes via availability accessors; leaf reads request facts lazily after model callbacks. Backup is not falsely exposed as known in reference.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 21,
+              "sha256": "6c41e5d01e9014be2ef192218eead11a8fb11cc31e95a7dc7fefc34e7f5c98d4"
+            },
+            {
+              "path": "src/runtime/logo_scene.hpp",
+              "line": 1,
+              "sha256": "df9ab3879b3c6b2f331d09cf5d7673faa1b7f3b43643e0db2b762539088b3cab"
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "line": 4,
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 450,
+              "sha256": "b79241bae2dd42684e8c03cdd475cca89f301a9705a57ede031baefa0b9b0c62"
+            },
+            {
+              "path": "src/runtime/native_file_select_display.cpp",
+              "line": 150,
+              "sha256": "7f8c435c0e9f718d1b5bd535c07aa68ef6ddfdd356451e36152579bd285e9fc1"
+            },
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "line": 23,
+              "sha256": "ddcf2b15144e3c1ea81bac848d70aab812b1398fbd8a55f4277885550792b9df"
+            },
+            {
+              "path": "src/runtime/native_main_menu.cpp",
+              "line": 79,
+              "sha256": "f8c1fb8172020e8acb92f7b1348476bbaa075540c77362eacdfb34f5bbbf96bf"
+            },
+            {
+              "path": "src/game/game_cleanup.cpp",
+              "line": 220,
+              "sha256": "024c23e264893b083234cd4acd187a9f08496a9aae650f21a446740cb8f46b9b"
+            },
+            {
+              "path": "src/game/main_menu.cpp",
+              "line": 25,
+              "sha256": "b5f03cb7a953ea9fba84fe4a9e128ff6be47d1366dbed0031e813bf897681f43"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "line": 125,
+              "sha256": "9ffe1944dad7c6c7d951d23d27e6dccbe98a0b9e5c39a241eced9a05808ecb19"
+            },
+            {
+              "path": "src/guest/game_mode_leaves_reference.cpp",
+              "line": 101,
+              "sha256": "f8d54e2023e3478f53eb0e1737f381209c63e0bff96e55f3bc181365d3b70996"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Tracked frozen replay preserves all2600 native outputs/2526 original comparisons and74 exact explicit native-boundary IDs. Five compiled owner mutants caught; post-review additional cohort2519 original comparisons/81 explicit boundaries. Qualification records native source build/force-load closure and all three menu/save journeys. Current composite gate records exit0,280 native programs,431 Python tests.",
+          "limits": "Original FP flags not independently compared in leaf judge; native FP output words retained. Nested missing owners and loop boundaries are explicit, not2600 original passes. Additional cohort is different input, not a regression. Earlier pending-gate wording is historical; only tracked canonical-save-owner-gate.json establishes completed composite gate.",
+          "evidence": [
+            {
+              "path": "reference/production-integration-20261101/session-save-owner-baseline/summary.json",
+              "line": 1,
+              "sha256": "962dd30a7b607cf5944335af14404b1846b1a297f80ab787d631112a9672db38"
+            },
+            {
+              "path": "reference/production-integration-20261101/session-save-owner-qualification/summary.json",
+              "line": 1,
+              "sha256": "118b0ce42b4fd65899dbbeeed5a8cca6045e701e922b97580edc4c73eabca686"
+            },
+            {
+              "path": "reference/production-integration-20261101/session-save-owner-qualification/holdout-final.json",
+              "line": 1,
+              "sha256": "0744568ec75a304be28b6d006600bfd05809477c86dab25afdf99e1860f4c92e"
+            },
+            {
+              "path": "reference/production-integration-20261101/session-save-owner-mutants.json",
+              "line": 1,
+              "sha256": "b95ec90bb88e7a03c6d3b95e47dbda27880253048f28df6101810123df741fd6"
+            },
+            {
+              "path": "reference/production-integration-20261101/canonical-save-owner-gate.json",
+              "line": 1,
+              "sha256": "aa16e6213e423ec3505ec4e0e64136eed128f4a67b88580aaee4e57476044c35"
+            },
+            {
+              "path": "tests/probes/native_game_mode_leaves_probe.cpp",
+              "line": 1,
+              "sha256": "a5d585ecdbe396ee9222df361184f71ef0249b9494f245c89de591c60520574b"
+            },
+            {
+              "path": "tests/unit/game_mode_leaves.cpp",
+              "line": 1,
+              "sha256": "7559ebb961c88b67f03d62fa4d88fc3727f67163bc82895d04d3da3f0e2a1a7f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Static independent whole-module semantic review at review_base; no builds, units, oracles, mutants, gates, providers, network, storage/helper operations or delegates executed. Prior receipt statuses retain their original scope; source/hash inspection is not a new pass.",
+        "Conformance means readable maintained code preserving existing behavior under accepted bounded judges. It does not close the containing UI/save/math/platform system, Session, renderer, game, campaign, milestones, Windows/hardware parity or gameplay 63 FPS. Unrecovered named seams remain unrecovered.",
+        "Conformance closes current/menu-backup record ownership, not filename/list/menu/audio/resource owners or the whole persistence system. Other SDK SaveData array entries remain unmodeled; no new meanings assigned."
+      ],
+      "findings": [],
+      "qualification_gaps": [],
+      "destination": "Retain src/game/save_profiles as the maintained module; no source relocation required by this review.",
+      "per_file_review_support": {
+        "path": "docs/refactor-inventory/review.json",
+        "line": 1,
+        "sha256": "4710d5a7a7890eef3e331854d7a4d148a82fc4e68b822564513f9c6a46e4eb74"
+      }
+    },
+    "src/math/ninja_sine_table": {
+      "disposition": "already_conforming",
+      "reason": "Complete immutable coefficient factory closes as maintained numerical data with exact source-byte identity and by-value consumers.",
+      "reviewed_members": {
+        "src/math/ninja_sine_table.cpp": "5843cdcab33b2ec76edff60437bfb908db6d8afe720374c47b13c25ddc57c454",
+        "src/math/ninja_sine_table.hpp": "21dd2cc9bb5cf9dd36f15f3f0f79bded248962ecc0648309a99caa2259583f5b"
+      },
+      "semantic_justification": "All 143 implementation lines/1025 literals and full header reviewed. The internal constexpr quarter-wave template includes both endpoints and intentionally source-rounded decimal binary32 values; analytic sin would change bits. Factory returns array<float,1025> by value, with no borrowed storage/context/lifetime or mutable game global. Copies in NinjaMath/Display are intentional numerical values, not duplicate mutable source-global owners. No PE parser, fallback coefficients, address dispatch or instructions-as-data. Dependency is std::array only; NinjaMath receives the value with an externally owned FP context. Its interpolation and broader numerical migration are separate algorithms, not claimed closed here.",
+      "evidence": [
+        {
+          "path": "src/math/ninja_sine_table.cpp",
+          "line": 1,
+          "sha256": "5843cdcab33b2ec76edff60437bfb908db6d8afe720374c47b13c25ddc57c454"
+        },
+        {
+          "path": "src/math/ninja_sine_table.hpp",
+          "line": 1,
+          "sha256": "21dd2cc9bb5cf9dd36f15f3f0f79bded248962ecc0648309a99caa2259583f5b"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "Immutable internal template creates independent factory results. Display owns sine_ and contexts, NinjaMath owns its own array and borrows context; local title/selection helpers use live Display arithmetic. Explicit injected reference tables retain independent lifetime and availability.",
+          "evidence": [
+            {
+              "path": "src/math/ninja_sine_table.cpp",
+              "line": 5,
+              "sha256": "5843cdcab33b2ec76edff60437bfb908db6d8afe720374c47b13c25ddc57c454"
+            },
+            {
+              "path": "src/math/ninja_math.hpp",
+              "line": 29,
+              "sha256": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530"
+            },
+            {
+              "path": "src/math/ninja_math.cpp",
+              "line": 11,
+              "sha256": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef"
+            },
+            {
+              "path": "src/runtime/native_display.hpp",
+              "line": 112,
+              "sha256": "89cfa670a597de4388cabbfd41412008006031c096b2b63e7772e86ea9122954"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Actual factory consumers are native Display constructor, title scene, title task controls, CharacterSelect draw and default reference game session. Probe variant0 serializes factory data; variant1 checks constructor transport, not source validity. Other PE-decoded guest FOV tables (including value_or(0) debt) do not call this factory and remain separately open reference consumer work.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_display.cpp",
+              "line": 35,
+              "sha256": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717"
+            },
+            {
+              "path": "src/runtime/native_title_scene.cpp",
+              "line": 79,
+              "sha256": "e8a4cf268c2a88da43393ba552358be9089bad7b6fd3c759b3d36a25b49ea403"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 488,
+              "sha256": "b79241bae2dd42684e8c03cdd475cca89f301a9705a57ede031baefa0b9b0c62"
+            },
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "line": 242,
+              "sha256": "ddcf2b15144e3c1ea81bac848d70aab812b1398fbd8a55f4277885550792b9df"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "line": 24,
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            },
+            {
+              "path": "src/guest/override_table.cpp",
+              "line": 49,
+              "sha256": "8f55db3d274697694ef5bb745c3d501492dd323633f627c1de3f47d2d975ed90"
+            },
+            {
+              "path": "tests/probes/native_ninja_sine_table_probe.cpp",
+              "line": 30,
+              "sha256": "ca992c3b12252332d400ff7c4836b75fc71e14cf1c3c65cedd4ef1f0c4ce97d3"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Existing source receipt compares all1025 words/4100 bytes, SHA2563acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed; all six current receipt source hashes match. Registered unit checks full65536 wrap/phase, signed zero/endpoints/extreme inputs and independent copies. Source checker builds only table/probe and verifies fingerprint without original binaries; prior gate records invocation.",
+          "limits": "Data identity is not trig/Windows FP qualification or a full numerical module pass. No fresh byte comparison, source build or mutation run. Specific constexpr numeric_encoding review is supportive, not blanket table exemption.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/ninja_sine_table.json",
+              "line": 1,
+              "sha256": "c169648d29751fa9cf69675f7baccb07add89c91b4b64b68631f4f11fb70578e"
+            },
+            {
+              "path": "tools/oracles/verify_original_ninja_sine_table.py",
+              "line": 1,
+              "sha256": "6865eb8da01ad3b686945543c6d5cefb84014b57b3030f10fbccf5c083ce56fd"
+            },
+            {
+              "path": "tests/unit/ninja_sine_table.cpp",
+              "line": 1,
+              "sha256": "67564b00314c56c9b3dd586f4093d7a91838caca708bd6e8eaff7462fbf09878"
+            },
+            {
+              "path": "tools/gate/check_ninja_sine_table.py",
+              "line": 1,
+              "sha256": "3476a71e07de4b1f98db2cc9924052995517ef16da5a61be1d1ff7ea82e16fb5"
+            },
+            {
+              "path": "reference/constexpr-table-review.json",
+              "line": 1,
+              "sha256": "c1aafe1d96741bb8cc1c133db57a76db24cea3f39c6d4edba6b43a495dc41d7e"
+            },
+            {
+              "path": "reference/production-integration-20261101/canonical-save-owner-gate.json",
+              "line": 1,
+              "sha256": "aa16e6213e423ec3505ec4e0e64136eed128f4a67b88580aaee4e57476044c35"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Static independent whole-module semantic review at review_base; no builds, units, oracles, mutants, gates, providers, network, storage/helper operations or delegates executed. Prior receipt statuses retain their original scope; source/hash inspection is not a new pass.",
+        "Conformance means readable maintained code preserving existing behavior under accepted bounded judges. It does not close the containing UI/save/math/platform system, Session, renderer, game, campaign, milestones, Windows/hardware parity or gameplay 63 FPS. Unrecovered named seams remain unrecovered.",
+        "NinjaMath and guest FOV fallback/readability debt remains independently inventoried. No inherited math/consumer FP partial/failure is promoted; ninja_length is explicitly excluded."
+      ],
+      "findings": [],
+      "qualification_gaps": [],
+      "destination": "Retain src/math/ninja_sine_table as the maintained module; no source relocation required by this review.",
+      "per_file_review_support": {
+        "path": "docs/refactor-inventory/review.json",
+        "line": 1,
+        "sha256": "4710d5a7a7890eef3e331854d7a4d148a82fc4e68b822564513f9c6a46e4eb74"
+      }
+    },
+    "src/platform/mac/mac_save_files": {
+      "disposition": "already_conforming",
+      "reason": "Complete provider API, resource identity, native enumeration/read behavior and synchronous callers close under the declared macOS replacement contract.",
+      "reviewed_members": {
+        "src/platform/mac/mac_save_files.cpp": "0258d17bda7a0881bf0a5d0ec824cb3b127d436cfd579677739d2af62f8d19d1",
+        "src/platform/mac/mac_save_files.hpp": "c562b3fdedfdc00b382c286ee0719466a7ad0cd705f3c5ccd879f96ad18f3940"
+      },
+      "semantic_justification": "Full header and implementation inspected. Provider owns directory path and identity; shared resources retain identity plus DIR/FILE and close independently of provider lifetime. Only the source SonicDX??.snc pattern is qualified: ASCII folding, exactly13-byte names with arbitrary two wildcard bytes, unsorted readdir order and actual fstatat mtime converted to100ns FILETIME with representability checks. Logical open accepts a single nontraversing filename, resolves unique actual case and reports ambiguity. fread writes one1392-byte item into caller buffer, retains short EOF prefix/unread tail and returns complete-item count; ferror throws with EIO fallback. Closed/foreign resources reject, explicit close invalidates before reporting failure. Backend owns no game Data, list, slot choice or checksum. stat/fstatat/fopen follow symlinks by existing policy.",
+      "evidence": [
+        {
+          "path": "src/platform/mac/mac_save_files.cpp",
+          "line": 1,
+          "sha256": "0258d17bda7a0881bf0a5d0ec824cb3b127d436cfd579677739d2af62f8d19d1"
+        },
+        {
+          "path": "src/platform/mac/mac_save_files.hpp",
+          "line": 1,
+          "sha256": "c562b3fdedfdc00b382c286ee0719466a7ad0cd705f3c5ccd879f96ad18f3940"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/platform-save-backend.json",
+          "line": 1,
+          "sha256": "1ac01b00828f1acccf71eac946bd9ca2422879df72caddecac9a6b8ec0380a40"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "Application owns SaveFiles before Session declaration, so provider outlives Session; Session stores a borrowed SaveFileCalls pointer. NativeSearch/NativeFile hold strong provider token and native resource, no backpointer. Handles are local synchronous game algorithm values; unwinding invokes RAII. Session owns Profiles.current and list/name allocations separately.",
+          "evidence": [
+            {
+              "path": "src/apps/sadx_native.mm",
+              "line": 125,
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "src/platform/mac/mac_save_files.cpp",
+              "line": 13,
+              "sha256": "0258d17bda7a0881bf0a5d0ec824cb3b127d436cfd579677739d2af62f8d19d1"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 171,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 349,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "configure_saves prepares/attaches the actual native profile root. TitleScene count/load call shared save_file_list using current record. count creates sentinel, processes native order, retains encoded unread tail on partial reads, validates checksum and canonicalizes accepted slots; load initializes before list traversal. Provider only supplies bytes/metadata. Makefile explicitly links platform object and registered concrete unit, so absence from native-sources.txt is not exclusion.",
+          "evidence": [
+            {
+              "path": "src/apps/sadx_native.mm",
+              "line": 289,
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 450,
+              "sha256": "b79241bae2dd42684e8c03cdd475cca89f301a9705a57ede031baefa0b9b0c62"
+            },
+            {
+              "path": "src/game/save_file_list.cpp",
+              "line": 77,
+              "sha256": "6f5a7474fea7b977747f3df8b605224634176eef6c554a0a5c135d25c5cadf54"
+            },
+            {
+              "path": "src/game/save_file_list.cpp",
+              "line": 140,
+              "sha256": "6f5a7474fea7b977747f3df8b605224634176eef6c554a0a5c135d25c5cadf54"
+            },
+            {
+              "path": "Makefile",
+              "line": 40,
+              "sha256": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 215,
+              "sha256": "be26bf1a641df0e5b887653a87cc5b9de1d0c55b6d8b8dfa0a79c8439458039b"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Registered concrete native IO unit exercises empty search/descriptor closure, mixed case/order/mtime, full/79-byte partial/corrupt/oversize reads, missing/path/foreign/closed errors, directory read error and RAII. Prior gate invokes it; tracked game save_file_list348 and load_selected_save368 exact cases separately compare list/load algorithm fixtures. Three recorded native menu/save journeys cover app-level reload/persistence.",
+          "limits": "Default unit registration has no original-save argument, so optional argc2 branch is not claimed; ambiguity check is volume-conditional. Original oracles use fixtures, do not execute POSIX provider or prove OS parity. Timestamp overflow branches and forced close errors not qualified.",
+          "evidence": [
+            {
+              "path": "tests/unit/mac_save_files.cpp",
+              "line": 1,
+              "sha256": "b5ea0b28349394eaec920d1d42c2ee23accb42b8024bb1635bd600b95baf6a74"
+            },
+            {
+              "path": "reference/oracle-reports/save_file_list.json",
+              "line": 1,
+              "sha256": "a60ae551cf1015aa60a577b1ac7f9a5ce08c4483d9220574bb6cf9ac6b16dabd"
+            },
+            {
+              "path": "reference/oracle-reports/load_selected_save.json",
+              "line": 1,
+              "sha256": "706d63cc21f8564cb8e438b252e02cdc8e655cfa001bd7b7b3f7bc6781000561"
+            },
+            {
+              "path": "reference/production-integration-20261101/canonical-save-owner-gate.json",
+              "line": 1,
+              "sha256": "aa16e6213e423ec3505ec4e0e64136eed128f4a67b88580aaee4e57476044c35"
+            },
+            {
+              "path": "reference/production-integration-20261101/session-save-owner-qualification/native-journeys.json",
+              "line": 1,
+              "sha256": "8f59b13bb345852fd20b240ba108b7dfed637fab22a8c2961ceed441939eb5a9"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Static independent whole-module semantic review at review_base; no builds, units, oracles, mutants, gates, providers, network, storage/helper operations or delegates executed. Prior receipt statuses retain their original scope; source/hash inspection is not a new pass.",
+        "Conformance means readable maintained code preserving existing behavior under accepted bounded judges. It does not close the containing UI/save/math/platform system, Session, renderer, game, campaign, milestones, Windows/hardware parity or gameplay 63 FPS. Unrecovered named seams remain unrecovered.",
+        "Platform replacement contract is qualified native synchronous IO, not generic Unicode/NTFS/wildcard/Windows CRT failure parity or a concurrent transaction manager. Read/write game algorithms and selection/checksum policy remain shared in game modules.",
+        "No exhaustive readdir/stat/fdopen/fread/fwrite/fclose failure injection, disk-full, races or crash/power-loss qualification. Destructors ignore cleanup errors; explicit operations throw. No backend-specific dedicated mutant or reserved holdout receipt identified.",
+        "Logical root validation is not a symlink sandbox; root/entry replacement races are not prevented. An ferror may modify temporary encoded bytes but shared decode is not reached after throw."
+      ],
+      "findings": [],
+      "qualification_gaps": [],
+      "destination": "Retain src/platform/mac/mac_save_files as the maintained module; no source relocation required by this review.",
+      "per_file_review_support": {
+        "path": "docs/refactor-inventory/review.json",
+        "line": 1,
+        "sha256": "4710d5a7a7890eef3e331854d7a4d148a82fc4e68b822564513f9c6a46e4eb74"
+      }
+    },
+    "src/platform/mac/mac_save_writer": {
+      "disposition": "already_conforming",
+      "reason": "Complete writer API, temporary-inode publication, reset callback and actual game consumer close under its explicit native resource policy.",
+      "reviewed_members": {
+        "src/platform/mac/mac_save_writer.cpp": "33c870436a055b26e0fff6b60e546a2fe7e7c22eb2e034ec38c45c3dd0a3ada2",
+        "src/platform/mac/mac_save_writer.hpp": "f7afc944e3c4808cd06ccaf117e5cc9ce34dbd3e71e54c9da533b80b1b2961dd"
+      },
+      "semantic_justification": "All output lifecycle code and full interface inspected. Required callback is validated; writer owns root/token/callable. Output owns stream, target/temp paths, complete marker and token only. Path contract is canonical two ASCII digits; unique existing case preserved and nonregular/symlink targets rejected. ensure_directory uses lstat/mkdir0700/lstat; same-root mkstemp/fdopen creates fresh inode. fdopen failure closes fd and RAII removes temp. One complete1392-byte fwrite item is required before complete; close rejects incomplete, invalidates stream before checked fclose, renames only after success and clears temp only after publication. Failure retains reached game prefix and unpublished temp is best-effort cleaned. Hardlinks to original installs are replaced by name rather than modifying original inode. No save policy/record owner or source pointer remains here; atomic visibility is native policy, not asserted original CRT behavior.",
+      "evidence": [
+        {
+          "path": "src/platform/mac/mac_save_writer.cpp",
+          "line": 1,
+          "sha256": "33c870436a055b26e0fff6b60e546a2fe7e7c22eb2e034ec38c45c3dd0a3ada2"
+        },
+        {
+          "path": "src/platform/mac/mac_save_writer.hpp",
+          "line": 1,
+          "sha256": "f7afc944e3c4808cd06ccaf117e5cc9ce34dbd3e71e54c9da533b80b1b2961dd"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/platform-save-backend.json",
+          "line": 1,
+          "sha256": "1ac01b00828f1acccf71eac946bd9ca2422879df72caddecac9a6b8ec0380a40"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "App owns writer and callback capturing App; Session only borrows WriteCalls. Writer is destroyed before Session, but no explicit Session destructor or member teardown calls writer; no async write/callback is retained and Output destructor does not invoke reset. Path/string_view and EncodedData inputs are synchronous borrows copied into owned output paths/native stream.",
+          "evidence": [
+            {
+              "path": "src/apps/sadx_native.mm",
+              "line": 289,
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 57,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 275,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/runtime/native_title_scene.cpp",
+              "line": 10,
+              "sha256": "e8a4cf268c2a88da43393ba552358be9089bad7b6fd3c759b3d36a25b49ea403"
+            },
+            {
+              "path": "src/platform/mac/mac_save_writer.cpp",
+              "line": 12,
+              "sha256": "33c870436a055b26e0fff6b60e546a2fe7e7c22eb2e034ec38c45c3dd0a3ada2"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Session.write_live_save supplies current Profiles record, live flags/list/name and actual allocation services. Shared write_file ensures directory/capture, chooses first free slot, publishes allocation/count/selection before formatting, writes encoded record, clears card/reset/pending state, then close/publish and save_ok=1. Exceptions do not rollback reached fields or synthesize completion. configure_saves reset callback checks live Input then resets it synchronously. Production and concrete test linkage explicitly include backend.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_save.cpp",
+              "line": 14,
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a"
+            },
+            {
+              "path": "src/game/save_write.cpp",
+              "line": 34,
+              "sha256": "1a3ba108abc7800b75f0ea7e074150fb70cca1d4ab2fc529996c921ccb12d80f"
+            },
+            {
+              "path": "src/apps/sadx_native.mm",
+              "line": 303,
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "Makefile",
+              "line": 45,
+              "sha256": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef"
+            },
+            {
+              "path": "Makefile",
+              "line": 422,
+              "sha256": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 241,
+              "sha256": "be26bf1a641df0e5b887653a87cc5b9de1d0c55b6d8b8dfa0a79c8439458039b"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Registered concrete save-write unit covers actual publication/exact bytes/case replacement, original hardlink inode+mtime+bytes, symlink/path rejection, incomplete/closed/foreign output, failed rename cleanup, real first-free selection/input reset and allocation-failure prefix. Prior gate and three native menu/save journeys include persisted restart. Original save_write1000 exact cases separately judge shared game ordering/bytes.",
+          "limits": "Original fixture intentionally ignores write result0/1 and cannot certify native OS calls. No short fwrite/fdopen/fclose or crash durability test; errno on short fwrite may be zero/stale but still throws. Five owner mutants concern record ownership, not backend IO. No repeated-write/copied or moved-provider API qualification inferred.",
+          "evidence": [
+            {
+              "path": "tests/unit/save_write.cpp",
+              "line": 1,
+              "sha256": "416797df92f00bf59601813a619caadea0daf6a3236f235315488ea11663bd09"
+            },
+            {
+              "path": "reference/oracle-reports/save_write.json",
+              "line": 1,
+              "sha256": "e2d3e72f98e6bea2f9043e7581a618f76141a389aebf816c60b774e96b2aa9f7"
+            },
+            {
+              "path": "tools/oracles/verify_original_save_write.py",
+              "line": 1,
+              "sha256": "a99eca14677270d000d0047a7ac0de984ba317c577c8f82933f522863d6509ea"
+            },
+            {
+              "path": "tests/probes/native_save_creation_probe.cpp",
+              "line": 1,
+              "sha256": "7b97306fb3d911a3b675906b498b54f40e5319e7bece3c290d010bb525760f92"
+            },
+            {
+              "path": "reference/production-integration-20261101/canonical-save-owner-gate.json",
+              "line": 1,
+              "sha256": "aa16e6213e423ec3505ec4e0e64136eed128f4a67b88580aaee4e57476044c35"
+            },
+            {
+              "path": "reference/production-integration-20261101/session-save-owner-qualification/native-journeys.json",
+              "line": 1,
+              "sha256": "8f59b13bb345852fd20b240ba108b7dfed637fab22a8c2961ceed441939eb5a9"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Static independent whole-module semantic review at review_base; no builds, units, oracles, mutants, gates, providers, network, storage/helper operations or delegates executed. Prior receipt statuses retain their original scope; source/hash inspection is not a new pass.",
+        "Conformance means readable maintained code preserving existing behavior under accepted bounded judges. It does not close the containing UI/save/math/platform system, Session, renderer, game, campaign, milestones, Windows/hardware parity or gameplay 63 FPS. Unrecovered named seams remain unrecovered.",
+        "Platform replacement contract is qualified native synchronous IO, not generic Unicode/NTFS/wildcard/Windows CRT failure parity or a concurrent transaction manager. Read/write game algorithms and selection/checksum policy remain shared in game modules.",
+        "No exhaustive readdir/stat/fdopen/fread/fwrite/fclose failure injection, disk-full, races or crash/power-loss qualification. Destructors ignore cleanup errors; explicit operations throw. No backend-specific dedicated mutant or reserved holdout receipt identified.",
+        "No fsync/durability guarantee; directory descriptors are not pinned against concurrent root/path replacement. Atomic rename visibility is not power-loss durability. Output destructor close/unlink failures are best effort; explicit close invalidates even on failure."
+      ],
+      "findings": [],
+      "qualification_gaps": [],
+      "destination": "Retain src/platform/mac/mac_save_writer as the maintained module; no source relocation required by this review.",
+      "per_file_review_support": {
+        "path": "docs/refactor-inventory/review.json",
+        "line": 1,
+        "sha256": "4710d5a7a7890eef3e331854d7a4d148a82fc4e68b822564513f9c6a46e4eb74"
+      }
+    }
+  },
+  "external_boundary_details": [
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk/usr/include/dirent.h",
+      "line": 109,
+      "sha256": "46d55897015dc859be0181397444b74b22315db8f4ffcdd01c1c3c2a147f196d",
+      "scope": "Local external SDK declarations only; not a tracked parent-repository file, original Windows behavior proof, build SDK selection receipt or runtime qualification.",
+      "acceptance": "External declaration detail retained from the tracked platform-save-backend review; not rehashed or treated as parent-repository tracked source in this review."
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk/usr/include/sys/stat.h",
+      "line": 120,
+      "sha256": "31c8f252b05785343ca577c007657c0fbab45a182b60fc5b73994c621dc318d4",
+      "scope": "Local external SDK declarations only; not a tracked parent-repository file, original Windows behavior proof, build SDK selection receipt or runtime qualification.",
+      "acceptance": "External declaration detail retained from the tracked platform-save-backend review; not rehashed or treated as parent-repository tracked source in this review."
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk/usr/include/_stdio.h",
+      "line": 233,
+      "sha256": "8417242466f6df6890587974393e97bb0aeac8caeb80cdf82a4e03a97e6d4660",
+      "scope": "Local external SDK declarations only; not a tracked parent-repository file, original Windows behavior proof, build SDK selection receipt or runtime qualification.",
+      "acceptance": "External declaration detail retained from the tracked platform-save-backend review; not rehashed or treated as parent-repository tracked source in this review."
+    },
+    {
+      "path": "/Library/Developer/CommandLineTools/SDKs/MacOSX26.5.sdk/usr/include/_stdlib.h",
+      "line": 239,
+      "sha256": "2ba48edd8a9a0445a2a642b4c2cb73cc14f2fb32208ea43ef29c496f7b01d0ba",
+      "scope": "Local external SDK declarations only; not a tracked parent-repository file, original Windows behavior proof, build SDK selection receipt or runtime qualification.",
+      "acceptance": "External declaration detail retained from the tracked platform-save-backend review; not rehashed or treated as parent-repository tracked source in this review."
+    },
+    {
+      "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXVariablesNew.h",
+      "line": 72,
+      "sha256": "3839c800169f23c8d03d495c388143b631abdeeeea8d5d9f89104b6695c9eebf",
+      "scope": "External submodule descendant; SaveData SDK array contract only. Parent tracked gitlink is reference/sadx-mod-loader; no assignment of roles to other array records.",
+      "parent_gitlink": {
+        "path": "reference/sadx-mod-loader",
+        "git_object": "eb4cdcca9637d611a98b910fcfed6ce18580451c",
+        "kind": "parent tracked gitlink; descendant SDK header hashes are external evidence only"
+      },
+      "acceptance": "External declaration detail retained from the tracked platform-save-backend review; not rehashed or treated as parent-repository tracked source in this review."
+    }
+  ],
+  "prioritized_remaining_limits": [
+    {
+      "priority": "P1 capability boundary, not maintained-source migration",
+      "scope": "save_completion",
+      "reason": "Warning creation/close remain loud unrecovered native seams. Do not claim complete failure UI or full save lifecycle."
+    },
+    {
+      "priority": "P2 qualification boundary",
+      "scope": "menu_navigation and character_completion",
+      "reason": "Dedicated semantic mutants/reserved holdouts not tracked; source/receipt review closes unchanged maintained modules only."
+    },
+    {
+      "priority": "P2 platform boundary",
+      "scope": "mac_save_files and mac_save_writer",
+      "reason": "Exhaustive Windows/OS failures, symlink races/concurrency and crash durability remain outside accepted contracts."
+    },
+    {
+      "priority": "P2 inherited fidelity boundary",
+      "scope": "transitive menu/math/reference consumers",
+      "reason": "Character Select733/title270/controls938 FP partial identities remain partial. Original leaf FP flags unobserved; native words preserved. Existing unrelated numerical failures/guest fallback debt remain open."
+    }
+  ],
+  "integration_note": "Authored fragment only. Root must reconcile against exact current membership and its independent module guard. No edits to global review, generated inventory, policy/generator, HANDOFF, STATUS, source or tests. Earlier pending receipt text is historical; current tracked canonical-save-owner gate is accepted only as its recorded exit0, not a new run.",
+  "receipt_identity_inspection": {
+    "kind": "Read-only metadata/hash comparison, not a test run",
+    "result": "All17 current members match their already_conforming per-file evidence hashes. Both navigation and character-completion current header/cpp/probe hashes match tracked original reports; all six sine-table source receipt hashes match current files. Predicate holdout receipts record4436/8536 cases,0 mismatches and seeds20261102/20261103.",
+    "limits": "No new runtime verdict; third-party nested external details retain the earlier authored review identity and were not rehashed here."
+  },
+  "global_classification_limits": [
+    "The accepted current composite gate is the tracked canonical-save-owner-gate.json: exit0/280 native programs/431 Python tests, with inherited filesystem skip, smoke120,R1-R4,three menu/save native journeys and16 startup comparisons. This review reads it only; no gate was run or recorded.",
+    "All existing out-of-scope numerical failures, partials and missing reports remain unchanged/unadjudicated, including Windows/physical FP limits. No current-controller qualification, GPU/actor rendering completion, native N3b/story/gameplay63FPS or new platform capability is inferred. Native frame1382 resource frontier remains the previously reported frontier, not newly exercised.",
+    "No durable personal memory was written: the only authorized write is this authored repository fragment. Root owns all global inventory integration and policy/generator updates."
+  ]
+}
