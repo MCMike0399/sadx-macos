@@ -3224,15 +3224,12 @@
         {
           "path": "src/math/ninja_length.hpp",
           "line": 1,
-          "sha256": "30aa69ad39447239e4a8e88fe4abef9228282f2bfb7a0e23cd917045e06ce584",
-          "link": "src/math/ninja_length.hpp#L1",
-          "end_line": 8
+          "sha256": "30aa69ad39447239e4a8e88fe4abef9228282f2bfb7a0e23cd917045e06ce584"
         },
         {
-          "path": "/Users/burbujamc/Developer/sadx-macos/reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
-          "line": 2766,
-          "sha256": "a2e634caff8d12d20adfe910b5b2db19e2da59cc1c4bb5e913e1df212d55327c",
-          "link": "/Users/burbujamc/Developer/sadx-macos/reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h#L2766"
+          "path": "docs/refactor-inventory/reviews/math-foundations.json",
+          "line": 1,
+          "sha256": "475be3901096f64781de629818b89e4cd493ee33338de115ee0ed5bb867e7b00"
         }
       ],
       "resolved_owners": [
@@ -3396,7 +3393,23 @@
         "Prior tracked receipts retain their bounded comparison and inherited failure status. Source equality establishes identity only.",
         "Root must preserve full failing/partial case identities, full outputs, holdouts and mutation inputs before any behavior-bearing rewrite. Hardware Windows FP and real reciprocal-estimate capture are not supplied by these receipts.",
         "Companion implementation canonical closure with rotation_vector_length remains open; header disposition is not module-wide conformance."
-      ]
+      ],
+      "authored_evidence": [
+        {
+          "path": "src/math/ninja_length.hpp",
+          "line": 1,
+          "sha256": "30aa69ad39447239e4a8e88fe4abef9228282f2bfb7a0e23cd917045e06ce584",
+          "link": "src/math/ninja_length.hpp#L1",
+          "end_line": 8
+        },
+        {
+          "path": "/Users/burbujamc/Developer/sadx-macos/reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+          "line": 2766,
+          "sha256": "a2e634caff8d12d20adfe910b5b2db19e2da59cc1c4bb5e913e1df212d55327c",
+          "link": "/Users/burbujamc/Developer/sadx-macos/reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h#L2766"
+        }
+      ],
+      "evidence_binding_note": "Tracked source and immutable authored fragment anchor this review; detailed external SDK/cache paths remain in authored_evidence and the fragment, rather than pretending submodule contents are tracked parent files."
     },
     "src/math/ninja_length.cpp": {
       "disposition": "open_review",
@@ -3407,9 +3420,12 @@
         {
           "path": "src/math/ninja_length.cpp",
           "line": 1,
-          "sha256": "dc803f7399f49d809d5a467e76203103da8507f08fee5306626282573b7a3c75",
-          "link": "src/math/ninja_length.cpp#L1",
-          "end_line": 14
+          "sha256": "dc803f7399f49d809d5a467e76203103da8507f08fee5306626282573b7a3c75"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/math-foundations.json",
+          "line": 1,
+          "sha256": "475be3901096f64781de629818b89e4cd493ee33338de115ee0ed5bb867e7b00"
         }
       ],
       "resolved_owners": [
@@ -3589,7 +3605,17 @@
         "Prior tracked receipts retain their bounded comparison and inherited failure status. Source equality establishes identity only.",
         "Root must preserve full failing/partial case identities, full outputs, holdouts and mutation inputs before any behavior-bearing rewrite. Hardware Windows FP and real reciprocal-estimate capture are not supplied by these receipts.",
         "Open disposition concerns canonical recovered implementation, not untyped arithmetic or missing mutable owner. No standalone source qualification or all-consumer closure was performed."
-      ]
+      ],
+      "authored_evidence": [
+        {
+          "path": "src/math/ninja_length.cpp",
+          "line": 1,
+          "sha256": "dc803f7399f49d809d5a467e76203103da8507f08fee5306626282573b7a3c75",
+          "link": "src/math/ninja_length.cpp#L1",
+          "end_line": 14
+        }
+      ],
+      "evidence_binding_note": "Tracked source and immutable authored fragment anchor this review; detailed external SDK/cache paths remain in authored_evidence and the fragment, rather than pretending submodule contents are tracked parent files."
     },
     "src/math/ninja_sine_table.hpp": {
       "disposition": "already_conforming",
@@ -3600,9 +3626,12 @@
         {
           "path": "src/math/ninja_sine_table.hpp",
           "line": 1,
-          "sha256": "21dd2cc9bb5cf9dd36f15f3f0f79bded248962ecc0648309a99caa2259583f5b",
-          "link": "src/math/ninja_sine_table.hpp#L1",
-          "end_line": 8
+          "sha256": "21dd2cc9bb5cf9dd36f15f3f0f79bded248962ecc0648309a99caa2259583f5b"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/math-foundations.json",
+          "line": 1,
+          "sha256": "475be3901096f64781de629818b89e4cd493ee33338de115ee0ed5bb867e7b00"
         }
       ],
       "resolved_owners": [
@@ -3847,7 +3876,17 @@
         "Prior tracked receipts retain their bounded comparison and inherited failure status. Source equality establishes identity only.",
         "Root must preserve full failing/partial case identities, full outputs, holdouts and mutation inputs before any behavior-bearing rewrite. Hardware Windows FP and real reciprocal-estimate capture are not supplied by these receipts.",
         "Conformance is the factory API only, not every consumer or trig arithmetic."
-      ]
+      ],
+      "authored_evidence": [
+        {
+          "path": "src/math/ninja_sine_table.hpp",
+          "line": 1,
+          "sha256": "21dd2cc9bb5cf9dd36f15f3f0f79bded248962ecc0648309a99caa2259583f5b",
+          "link": "src/math/ninja_sine_table.hpp#L1",
+          "end_line": 8
+        }
+      ],
+      "evidence_binding_note": "Tracked source and immutable authored fragment anchor this review; detailed external SDK/cache paths remain in authored_evidence and the fragment, rather than pretending submodule contents are tracked parent files."
     },
     "src/math/ninja_sine_table.cpp": {
       "disposition": "already_conforming",
@@ -3858,9 +3897,12 @@
         {
           "path": "src/math/ninja_sine_table.cpp",
           "line": 1,
-          "sha256": "5843cdcab33b2ec76edff60437bfb908db6d8afe720374c47b13c25ddc57c454",
-          "link": "src/math/ninja_sine_table.cpp#L1",
-          "end_line": 143
+          "sha256": "5843cdcab33b2ec76edff60437bfb908db6d8afe720374c47b13c25ddc57c454"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/math-foundations.json",
+          "line": 1,
+          "sha256": "475be3901096f64781de629818b89e4cd493ee33338de115ee0ed5bb867e7b00"
         }
       ],
       "resolved_owners": [
@@ -4105,7 +4147,17 @@
         "Prior tracked receipts retain their bounded comparison and inherited failure status. Source equality establishes identity only.",
         "Root must preserve full failing/partial case identities, full outputs, holdouts and mutation inputs before any behavior-bearing rewrite. Hardware Windows FP and real reciprocal-estimate capture are not supplied by these receipts.",
         "No fresh data comparison executed. Existing table-level numeric_encoding review is supportive, not a whole module pass."
-      ]
+      ],
+      "authored_evidence": [
+        {
+          "path": "src/math/ninja_sine_table.cpp",
+          "line": 1,
+          "sha256": "5843cdcab33b2ec76edff60437bfb908db6d8afe720374c47b13c25ddc57c454",
+          "link": "src/math/ninja_sine_table.cpp#L1",
+          "end_line": 143
+        }
+      ],
+      "evidence_binding_note": "Tracked source and immutable authored fragment anchor this review; detailed external SDK/cache paths remain in authored_evidence and the fragment, rather than pretending submodule contents are tracked parent files."
     },
     "src/math/ninja_math.hpp": {
       "disposition": "needs_migration",
@@ -4116,15 +4168,12 @@
         {
           "path": "src/math/ninja_math.hpp",
           "line": 1,
-          "sha256": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
-          "link": "src/math/ninja_math.hpp#L1",
-          "end_line": 59
+          "sha256": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530"
         },
         {
-          "path": "/Users/burbujamc/Developer/sadx-macos/reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
-          "line": 186,
-          "sha256": "590026179539651768b21cc00d7527fab2d74d0635ea7ee2475b133d9f5c4d37",
-          "link": "/Users/burbujamc/Developer/sadx-macos/reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h#L186"
+          "path": "docs/refactor-inventory/reviews/math-foundations.json",
+          "line": 1,
+          "sha256": "475be3901096f64781de629818b89e4cd493ee33338de115ee0ed5bb867e7b00"
         }
       ],
       "resolved_owners": [
@@ -4397,7 +4446,23 @@
         "Prior tracked receipts retain their bounded comparison and inherited failure status. Source equality establishes identity only.",
         "Root must preserve full failing/partial case identities, full outputs, holdouts and mutation inputs before any behavior-bearing rewrite. Hardware Windows FP and real reciprocal-estimate capture are not supplied by these receipts.",
         "Migration finding is proven provenance/interface documentation debt. Does not authorize unproved arithmetic simplification or declare every explicit FP operation necessary."
-      ]
+      ],
+      "authored_evidence": [
+        {
+          "path": "src/math/ninja_math.hpp",
+          "line": 1,
+          "sha256": "44c9ff7f9ca56df1e95f523ec9b3c1fd8f0dea316d3df19585bc52f620e25530",
+          "link": "src/math/ninja_math.hpp#L1",
+          "end_line": 59
+        },
+        {
+          "path": "/Users/burbujamc/Developer/sadx-macos/reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+          "line": 186,
+          "sha256": "590026179539651768b21cc00d7527fab2d74d0635ea7ee2475b133d9f5c4d37",
+          "link": "/Users/burbujamc/Developer/sadx-macos/reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h#L186"
+        }
+      ],
+      "evidence_binding_note": "Tracked source and immutable authored fragment anchor this review; detailed external SDK/cache paths remain in authored_evidence and the fragment, rather than pretending submodule contents are tracked parent files."
     },
     "src/math/ninja_math.cpp": {
       "disposition": "needs_migration",
@@ -4408,21 +4473,12 @@
         {
           "path": "src/math/ninja_math.cpp",
           "line": 1,
-          "sha256": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
-          "link": "src/math/ninja_math.cpp#L1",
-          "end_line": 127
+          "sha256": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef"
         },
         {
-          "path": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/sine-initial-sin.pseudocode.txt",
+          "path": "docs/refactor-inventory/reviews/math-foundations.json",
           "line": 1,
-          "sha256": "2e997183cd2551292cc0870a6ea8e2bbd644dbe7da897b157979a42838a88b21",
-          "link": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/sine-initial-sin.pseudocode.txt#L1"
-        },
-        {
-          "path": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/sine-initial-cos.pseudocode.txt",
-          "line": 1,
-          "sha256": "a2680a6ebe0a43bce6838d059f11e6c9267d60d672ea89b76b328677a576c0f9",
-          "link": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/sine-initial-cos.pseudocode.txt#L1"
+          "sha256": "475be3901096f64781de629818b89e4cd493ee33338de115ee0ed5bb867e7b00"
         }
       ],
       "resolved_owners": [
@@ -4710,7 +4766,29 @@
         "Prior tracked receipts retain their bounded comparison and inherited failure status. Source equality establishes identity only.",
         "Root must preserve full failing/partial case identities, full outputs, holdouts and mutation inputs before any behavior-bearing rewrite. Hardware Windows FP and real reciprocal-estimate capture are not supplied by these receipts.",
         "Direct normalization source judge/mutant/holdout coverage has not been resolved to sufficient per-expression evidence; retain that qualification gap. Cross flags are inherited partial."
-      ]
+      ],
+      "authored_evidence": [
+        {
+          "path": "src/math/ninja_math.cpp",
+          "line": 1,
+          "sha256": "7fa00ac492f3a4d040cd43f6110f4a30c6ccda37aa6a18f0e4ee95494a4b78ef",
+          "link": "src/math/ninja_math.cpp#L1",
+          "end_line": 127
+        },
+        {
+          "path": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/sine-initial-sin.pseudocode.txt",
+          "line": 1,
+          "sha256": "2e997183cd2551292cc0870a6ea8e2bbd644dbe7da897b157979a42838a88b21",
+          "link": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/sine-initial-sin.pseudocode.txt#L1"
+        },
+        {
+          "path": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/sine-initial-cos.pseudocode.txt",
+          "line": 1,
+          "sha256": "a2680a6ebe0a43bce6838d059f11e6c9267d60d672ea89b76b328677a576c0f9",
+          "link": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/sine-initial-cos.pseudocode.txt#L1"
+        }
+      ],
+      "evidence_binding_note": "Tracked source and immutable authored fragment anchor this review; detailed external SDK/cache paths remain in authored_evidence and the fragment, rather than pretending submodule contents are tracked parent files."
     },
     "src/math/d3dx_math.hpp": {
       "disposition": "needs_migration",
@@ -4721,9 +4799,12 @@
         {
           "path": "src/math/d3dx_math.hpp",
           "line": 1,
-          "sha256": "3b997c26013a774f6b85e099f774187ffe9af64369316d2e3e769f6ff26ea8f0",
-          "link": "src/math/d3dx_math.hpp#L1",
-          "end_line": 57
+          "sha256": "3b997c26013a774f6b85e099f774187ffe9af64369316d2e3e769f6ff26ea8f0"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/math-foundations.json",
+          "line": 1,
+          "sha256": "475be3901096f64781de629818b89e4cd493ee33338de115ee0ed5bb867e7b00"
         }
       ],
       "resolved_owners": [
@@ -5051,7 +5132,17 @@
         "Prior tracked receipts retain their bounded comparison and inherited failure status. Source equality establishes identity only.",
         "Root must preserve full failing/partial case identities, full outputs, holdouts and mutation inputs before any behavior-bearing rewrite. Hardware Windows FP and real reciprocal-estimate capture are not supplied by these receipts.",
         "No original hardware reciprocal estimate captured. This prevents a hardware fidelity claim, not naming native consumers unnecessary."
-      ]
+      ],
+      "authored_evidence": [
+        {
+          "path": "src/math/d3dx_math.hpp",
+          "line": 1,
+          "sha256": "3b997c26013a774f6b85e099f774187ffe9af64369316d2e3e769f6ff26ea8f0",
+          "link": "src/math/d3dx_math.hpp#L1",
+          "end_line": 57
+        }
+      ],
+      "evidence_binding_note": "Tracked source and immutable authored fragment anchor this review; detailed external SDK/cache paths remain in authored_evidence and the fragment, rather than pretending submodule contents are tracked parent files."
     },
     "src/math/d3dx_math.cpp": {
       "disposition": "needs_migration",
@@ -5062,21 +5153,12 @@
         {
           "path": "src/math/d3dx_math.cpp",
           "line": 1,
-          "sha256": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171",
-          "link": "src/math/d3dx_math.cpp#L1",
-          "end_line": 172
+          "sha256": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171"
         },
         {
-          "path": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/bridge-d3dx-multiply-wrapper.json",
+          "path": "docs/refactor-inventory/reviews/math-foundations.json",
           "line": 1,
-          "sha256": "a8b86ec88effaeda9d4423e28b4e95f2ea85f0ccfbacaf23a92153ebf0b27665",
-          "link": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/bridge-d3dx-multiply-wrapper.json#L1"
-        },
-        {
-          "path": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/bridge-d3dx-dispatch-init.pseudocode.txt",
-          "line": 1,
-          "sha256": "73b989127e7cbfaa6536e0ff85cdfc6f12647f0bef0c8d21142bd63c2cb4a9c6",
-          "link": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/bridge-d3dx-dispatch-init.pseudocode.txt#L1"
+          "sha256": "475be3901096f64781de629818b89e4cd493ee33338de115ee0ed5bb867e7b00"
         }
       ],
       "resolved_owners": [
@@ -5404,7 +5486,29 @@
         "Prior tracked receipts retain their bounded comparison and inherited failure status. Source equality establishes identity only.",
         "Root must preserve full failing/partial case identities, full outputs, holdouts and mutation inputs before any behavior-bearing rewrite. Hardware Windows FP and real reciprocal-estimate capture are not supplied by these receipts.",
         "Primary perspective FAIL and inverse FP partial remain inherited; old source identity and seeded suffix cannot upgrade them. No current mutations/holdouts or Windows real-CPU results."
-      ]
+      ],
+      "authored_evidence": [
+        {
+          "path": "src/math/d3dx_math.cpp",
+          "line": 1,
+          "sha256": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171",
+          "link": "src/math/d3dx_math.cpp#L1",
+          "end_line": 172
+        },
+        {
+          "path": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/bridge-d3dx-multiply-wrapper.json",
+          "line": 1,
+          "sha256": "a8b86ec88effaeda9d4423e28b4e95f2ea85f0ccfbacaf23a92153ebf0b27665",
+          "link": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/bridge-d3dx-multiply-wrapper.json#L1"
+        },
+        {
+          "path": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/bridge-d3dx-dispatch-init.pseudocode.txt",
+          "line": 1,
+          "sha256": "73b989127e7cbfaa6536e0ff85cdfc6f12647f0bef0c8d21142bd63c2cb4a9c6",
+          "link": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/bridge-d3dx-dispatch-init.pseudocode.txt#L1"
+        }
+      ],
+      "evidence_binding_note": "Tracked source and immutable authored fragment anchor this review; detailed external SDK/cache paths remain in authored_evidence and the fragment, rather than pretending submodule contents are tracked parent files."
     }
   },
   "external_reference_sources": [
