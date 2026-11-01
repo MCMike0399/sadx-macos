@@ -107,6 +107,17 @@ call(rt, f, fp, /* target */ kAlias, 0xffffffff);
             self.assertEqual(row['dispatch_sites'], 1)
             self.assertEqual(sites[0]['target_expression'], 'target')
 
+    def test_ref_qualified_virtual_specifiers_cannot_replace_a_proven_call(self):
+        definition = 'bool call(unsigned site, unsigned target) { return transport(site, target); }'
+        contract = spec(definition, 'call', 2, 2, 2)
+        ordinary = definition + '\nbool ok = call(site,target) && ready;'
+        self.assertEqual(census(ordinary, PATH, [contract])[0]['dispatch_sites'], 1)
+        for suffix in ('& final', '& override', '&& noexcept final', '&& noexcept override'):
+            extra = ('struct Painter { virtual bool call(unsigned color, unsigned mask) ' +
+                     suffix + ' { return color == mask; } };')
+            with self.subTest(suffix=suffix), self.assertRaisesRegex(ValueError, 'overload definition'):
+                census(definition + '\n' + extra, PATH, [contract])
+
     def test_template_commas_fail_closed_or_preserve_parenthesized_target(self):
         contract = spec(maximum=7)
         for expression in ('call(rt,f,fp,choose<int,int>(a,b),site);',
