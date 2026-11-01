@@ -1,0 +1,112 @@
+{
+  "commit": "f6c4e538af463a2eaf4c1fe961f04e8443d51878",
+  "checker_sha256": "4be4b86842b84692df425fbd8456c2964c69e79bf8c3222b701e0ec1c7fd7d51",
+  "fixtures": {
+    "first_argument": {
+      "source": "call(0x49a9b0, state);",
+      "metrics": {
+        "hex_literals": 1,
+        "address_identifiers": 0,
+        "address_calls": 1,
+        "goto": 0,
+        "address_labels": 0,
+        "long_lines": 0,
+        "multi_statement_lines": 0,
+        "large_decimal_literals": 0,
+        "emulator_arithmetic": 0,
+        "address_comments": 0
+      }
+    },
+    "sonic_argument_order": {
+      "source": "call(rt, f, fp, 0x49a9b0, 0x49aa00);",
+      "metrics": {
+        "hex_literals": 2,
+        "address_identifiers": 0,
+        "address_calls": 0,
+        "goto": 0,
+        "address_labels": 0,
+        "long_lines": 0,
+        "multi_statement_lines": 0,
+        "large_decimal_literals": 0,
+        "emulator_arithmetic": 0,
+        "address_comments": 0
+      }
+    },
+    "constexpr_instruction_table": {
+      "source": "constexpr Operation operations[] = {{0x49a9b0, 0x123456, 4}};",
+      "metrics": {
+        "hex_literals": 0,
+        "address_identifiers": 0,
+        "address_calls": 0,
+        "goto": 0,
+        "address_labels": 0,
+        "long_lines": 0,
+        "multi_statement_lines": 0,
+        "large_decimal_literals": 0,
+        "emulator_arithmetic": 0,
+        "address_comments": 0
+      }
+    },
+    "legitimate_color": {
+      "source": "constexpr unsigned kOpaqueWhite = 0xFFFFFFFFu;",
+      "metrics": {
+        "hex_literals": 0,
+        "address_identifiers": 0,
+        "address_calls": 0,
+        "goto": 0,
+        "address_labels": 0,
+        "long_lines": 0,
+        "multi_statement_lines": 0,
+        "large_decimal_literals": 0,
+        "emulator_arithmetic": 0,
+        "address_comments": 0
+      }
+    },
+    "legitimate_mask": {
+      "source": "flags &= 0xFFFFu;",
+      "metrics": {
+        "hex_literals": 1,
+        "address_identifiers": 0,
+        "address_calls": 0,
+        "goto": 0,
+        "address_labels": 0,
+        "long_lines": 0,
+        "multi_statement_lines": 0,
+        "large_decimal_literals": 0,
+        "emulator_arithmetic": 0,
+        "address_comments": 0
+      }
+    },
+    "provenance": {
+      "source": "// FUNCTION: SONIC 0x49a9b0 Sonic\nvoid sonic();",
+      "metrics": {
+        "hex_literals": 0,
+        "address_identifiers": 0,
+        "address_calls": 0,
+        "goto": 0,
+        "address_labels": 0,
+        "long_lines": 0,
+        "multi_statement_lines": 0,
+        "large_decimal_literals": 0,
+        "emulator_arithmetic": 0,
+        "address_comments": 0
+      }
+    }
+  },
+  "actual_sonic_metrics": {
+    "hex_literals": 547,
+    "address_identifiers": 171,
+    "address_calls": 0,
+    "goto": 0,
+    "address_labels": 0,
+    "long_lines": 65,
+    "multi_statement_lines": 2,
+    "large_decimal_literals": 0,
+    "emulator_arithmetic": 86,
+    "address_comments": 0
+  },
+  "limits": [
+    "Lexical indicators only; fixture PCs intentionally demonstrate missed argument positions and constexpr exemption.",
+    "Legitimate colors and masks must not be classified as executable addresses solely by numeric magnitude."
+  ]
+}

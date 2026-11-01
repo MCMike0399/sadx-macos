@@ -607,3 +607,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Scope includes existing recovered behavior outside the native build and inside legacy reference composition. Genuine adapters, provenance and justified numerical helpers remain; unrecovered gameplay is a separate inventory.
 * User also requested an advice/review contact path. The brief identifies this research thread and verified T3 read/send tools; fresh independent reviews retain the delegate-task workflow.
 * No source implementation, build, game run, oracle, gate or decompiler provider was started. The last complete green gate and the pending weld/cursor verification limits above remain unchanged. No push.
+
+### 2026-11-01 — Complete refactor campaign activated; baseline in progress
+
+* User invoked PROMPT-complete-refactor.md. ADR-0009 and GOAL now prioritize the complete maintained-code refactor before further game development; milestones and fidelity remain unchanged.
+* Initial versioned inventory accounts for 3,648 tracked paths, including 1,615 maintained/script entries and 83 explicit STUB annotations. There are 1,601 open semantic reviews; this is source accounting, not campaign completion.
+* Fresh unchanged render oracle has 8,209 cases and zero mismatches. Both queue lifecycle paths have 600 cases, zero value mismatches and 402 FP partials. Complete per-case outputs and mismatch identities are frozen in production-integration-20261101.
+* The full make -j10 gate is running in build/refactor-baseline-20261101. Windowed smoke and force-load native closure pass; no fresh green gate is recorded yet. Clean source export is prepared; native frontier/source build and remaining journey checks are pending.
+* Read-only advice selects the shared render-state, packed-blend and device-write boundary as the first proposed system. Signature-aware dispatch checks and reviewed instruction-table classifications precede behavior edits. No source behavior or inherited judge changed; no push.

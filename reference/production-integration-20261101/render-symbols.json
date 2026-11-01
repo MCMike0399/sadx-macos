@@ -1,0 +1,315 @@
+[
+  {
+    "module": "SONIC",
+    "address": "0x4030d0",
+    "symbol": {
+      "address": "0x4030d0",
+      "alternative_names": [
+        "FUN_004030d0"
+      ],
+      "alternatives": [
+        {
+          "address": "0x4030d0",
+          "declaration": "FunctionPointer(void, njColorBlendingMode, (NJD_COLOR_TARGET target, NJD_COLOR_BLENDING mode), 0x4030D0)",
+          "kind": "function",
+          "line": 49,
+          "macro": "FunctionPointer",
+          "module": "SONIC",
+          "name": "njColorBlendingMode",
+          "priority": 20,
+          "signature": "(NJD_COLOR_TARGET target, NJD_COLOR_BLENDING mode)",
+          "size": null,
+          "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+          "type": "void"
+        },
+        {
+          "address": "0x4030d0",
+          "kind": "function",
+          "module": "SONIC",
+          "name": "FUN_004030d0",
+          "priority": 40,
+          "signature": null,
+          "size": null,
+          "source": "reference/inventory/functions.json",
+          "type": null
+        }
+      ],
+      "declaration": "FunctionPointer(void, njColorBlendingMode, (NJD_COLOR_TARGET target, NJD_COLOR_BLENDING mode), 0x4030D0)",
+      "kind": "function",
+      "line": 49,
+      "macro": "FunctionPointer",
+      "module": "SONIC",
+      "name": "njColorBlendingMode",
+      "signature": "(NJD_COLOR_TARGET target, NJD_COLOR_BLENDING mode)",
+      "size": null,
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+      "type": "void"
+    },
+    "source_evidence": [
+      {
+        "kind": "function_annotation",
+        "path": "src/engine/ninja_queue_native.hpp",
+        "line": 111,
+        "symbol": "njColorBlendingMode",
+        "reason": null
+      },
+      {
+        "kind": "loop_override",
+        "path": "src/hle/hle_device_bridge.cpp",
+        "line": 667
+      }
+    ],
+    "inventory_name": null,
+    "native_status": "function_annotation"
+  },
+  {
+    "module": "SONIC",
+    "address": "0x77ec60",
+    "symbol": {
+      "address": "0x77ec60",
+      "alternative_names": [
+        "FUN_0077ec60"
+      ],
+      "alternatives": [
+        {
+          "address": "0x77ec60",
+          "declaration": "FunctionPointer(void, njColorBlendingMode_, (NJD_COLOR_TARGET target, NJD_COLOR_BLENDING mode), 0x77EC60)",
+          "kind": "function",
+          "line": 2624,
+          "macro": "FunctionPointer",
+          "module": "SONIC",
+          "name": "njColorBlendingMode_",
+          "priority": 20,
+          "signature": "(NJD_COLOR_TARGET target, NJD_COLOR_BLENDING mode)",
+          "size": null,
+          "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+          "type": "void"
+        },
+        {
+          "address": "0x77ec60",
+          "kind": "function",
+          "module": "SONIC",
+          "name": "FUN_0077ec60",
+          "priority": 40,
+          "signature": null,
+          "size": null,
+          "source": "reference/inventory/functions.json",
+          "type": null
+        }
+      ],
+      "declaration": "FunctionPointer(void, njColorBlendingMode_, (NJD_COLOR_TARGET target, NJD_COLOR_BLENDING mode), 0x77EC60)",
+      "kind": "function",
+      "line": 2624,
+      "macro": "FunctionPointer",
+      "module": "SONIC",
+      "name": "njColorBlendingMode_",
+      "signature": "(NJD_COLOR_TARGET target, NJD_COLOR_BLENDING mode)",
+      "size": null,
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+      "type": "void"
+    },
+    "source_evidence": [
+      {
+        "kind": "function_annotation",
+        "path": "src/engine/ninja_queue_native.hpp",
+        "line": 105,
+        "symbol": "njColorBlendingMode_",
+        "reason": null
+      },
+      {
+        "kind": "legacy_declaration_candidate",
+        "path": "src/engine/ninja_render.cpp",
+        "line": 43,
+        "identifier": "ninja_set_blend_77ec60"
+      },
+      {
+        "kind": "legacy_declaration_candidate",
+        "path": "src/engine/ninja_render.hpp",
+        "line": 67,
+        "identifier": "ninja_set_blend_77ec60"
+      },
+      {
+        "kind": "loop_override",
+        "path": "src/hle/hle_device_bridge.cpp",
+        "line": 667
+      }
+    ],
+    "inventory_name": null,
+    "native_status": "function_annotation"
+  },
+  {
+    "module": "SONIC",
+    "address": "0x77ed00",
+    "symbol": {
+      "address": "0x77ed00",
+      "alternative_names": [
+        "Direct3D_SetZFunc",
+        "FUN_0077ed00"
+      ],
+      "alternatives": [
+        {
+          "address": "0x77ed00",
+          "declaration": "FunctionPointer(void, njSetZCompare, (unsigned __int8 mode), 0x077ED00)",
+          "kind": "function",
+          "line": 190,
+          "macro": "FunctionPointer",
+          "module": "SONIC",
+          "name": "njSetZCompare",
+          "priority": 10,
+          "signature": "(unsigned __int8 mode)",
+          "size": null,
+          "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+          "type": "void"
+        },
+        {
+          "address": "0x77ed00",
+          "declaration": "FunctionPointer(void, Direct3D_SetZFunc, (Uint8 index), 0x77ED00)",
+          "kind": "function",
+          "line": 2626,
+          "macro": "FunctionPointer",
+          "module": "SONIC",
+          "name": "Direct3D_SetZFunc",
+          "priority": 20,
+          "signature": "(Uint8 index)",
+          "size": null,
+          "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+          "type": "void"
+        },
+        {
+          "address": "0x77ed00",
+          "kind": "function",
+          "module": "SONIC",
+          "name": "FUN_0077ed00",
+          "priority": 40,
+          "signature": null,
+          "size": null,
+          "source": "reference/inventory/functions.json",
+          "type": null
+        }
+      ],
+      "declaration": "FunctionPointer(void, njSetZCompare, (unsigned __int8 mode), 0x077ED00)",
+      "kind": "function",
+      "line": 190,
+      "macro": "FunctionPointer",
+      "module": "SONIC",
+      "name": "njSetZCompare",
+      "signature": "(unsigned __int8 mode)",
+      "size": null,
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+      "type": "void"
+    },
+    "source_evidence": [],
+    "inventory_name": null,
+    "native_status": "not_established"
+  },
+  {
+    "module": "SONIC",
+    "address": "0x77ed20",
+    "symbol": {
+      "address": "0x77ed20",
+      "alternative_names": [
+        "Direct3D_EnableZWrite",
+        "FUN_0077ed20"
+      ],
+      "alternatives": [
+        {
+          "address": "0x77ed20",
+          "declaration": "FunctionPointer(void, njSetZUpdateMode, (int enable), 0x77ED20)",
+          "kind": "function",
+          "line": 191,
+          "macro": "FunctionPointer",
+          "module": "SONIC",
+          "name": "njSetZUpdateMode",
+          "priority": 10,
+          "signature": "(int enable)",
+          "size": null,
+          "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+          "type": "void"
+        },
+        {
+          "address": "0x77ed20",
+          "declaration": "FunctionPointer(void, Direct3D_EnableZWrite, (DWORD enable), 0x77ED20)",
+          "kind": "function",
+          "line": 2627,
+          "macro": "FunctionPointer",
+          "module": "SONIC",
+          "name": "Direct3D_EnableZWrite",
+          "priority": 20,
+          "signature": "(DWORD enable)",
+          "size": null,
+          "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+          "type": "void"
+        },
+        {
+          "address": "0x77ed20",
+          "kind": "function",
+          "module": "SONIC",
+          "name": "FUN_0077ed20",
+          "priority": 40,
+          "signature": null,
+          "size": null,
+          "source": "reference/inventory/functions.json",
+          "type": null
+        }
+      ],
+      "declaration": "FunctionPointer(void, njSetZUpdateMode, (int enable), 0x77ED20)",
+      "kind": "function",
+      "line": 191,
+      "macro": "FunctionPointer",
+      "module": "SONIC",
+      "name": "njSetZUpdateMode",
+      "signature": "(int enable)",
+      "size": null,
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+      "type": "void"
+    },
+    "source_evidence": [],
+    "inventory_name": null,
+    "native_status": "not_established"
+  },
+  {
+    "module": "SONIC",
+    "address": "0x3ab9890",
+    "symbol": {
+      "address": "0x3ab9890",
+      "alternative_names": [],
+      "alternatives": [
+        {
+          "address": "0x3ab9890",
+          "declaration": "DataPointer(char, AlphaBlendRelatedThing, 0x3AB9890)",
+          "kind": "global",
+          "line": 2047,
+          "macro": "DataPointer",
+          "module": "SONIC",
+          "name": "AlphaBlendRelatedThing",
+          "priority": 20,
+          "signature": null,
+          "size": 1,
+          "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXVariables.h",
+          "type": "char"
+        }
+      ],
+      "declaration": "DataPointer(char, AlphaBlendRelatedThing, 0x3AB9890)",
+      "kind": "global",
+      "line": 2047,
+      "macro": "DataPointer",
+      "module": "SONIC",
+      "name": "AlphaBlendRelatedThing",
+      "signature": null,
+      "size": 1,
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXVariables.h",
+      "type": "char"
+    },
+    "source_evidence": [],
+    "inventory_name": null,
+    "native_status": "not_established"
+  },
+  {
+    "module": "SONIC",
+    "address": "0x3d128b0",
+    "symbol": null,
+    "source_evidence": [],
+    "inventory_name": null,
+    "native_status": "not_established"
+  }
+]
