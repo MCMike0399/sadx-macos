@@ -1,0 +1,26 @@
+{
+  "kind": "Instruction provenance moved from ordinary game enum comments into evidence only; executable preprocessor output is byte-identical.",
+  "source": "src/game/character_completion.hpp",
+  "source_sha256": "0b921119a02e6ea9d622e3d8b3de16a53c4d7b3011ed1a857cf71bb3e28e5eac",
+  "preprocessed_sha256": "c214c8e6fa825055c197bee27b2f4598436d5fecf88fd64a7d0f9db593ce9ddb",
+  "instruction_boundaries": {
+    "Character": {
+      "site": "0x512ca5",
+      "meaning": "catalog count read"
+    },
+    "StoryFlag": {
+      "site": "0x412d24",
+      "meaning": "SeqCheckFlag byte read"
+    },
+    "CutsceneFlag": {
+      "site": "0x42fb14",
+      "meaning": "signed cutscene byte read"
+    }
+  },
+  "original_judge": "tools/oracles/verify_original_character_completion.py",
+  "original_judge_sha256": "cf2e94624e384a24d53bf2a21744756ac79bf91c2f51c953c2f85927b68d17ac",
+  "limits": [
+    "No algorithm, type, enum value, interface, arithmetic, owner, fixture or judge changed.",
+    "Existing per-file semantic review already accepted the body; its missing raw source-backed receipt is now retained. No actual caller/pixel/runtime or new holdout/mutation verdict inferred."
+  ]
+}

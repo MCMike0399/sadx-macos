@@ -18,9 +18,9 @@ struct Flags {
     const std::array<std::uint8_t, 512> &story, &cutscene;
 };
 enum class Boundary {
-    Character, // SONIC 0x512ca5 catalog count read
-    StoryFlag, // SONIC 0x412d24 SeqCheckFlag byte read
-    CutsceneFlag // SONIC 0x42fb14 signed cutscene byte read
+    Character,
+    StoryFlag,
+    CutsceneFlag
 };
 class Error : public std::runtime_error {
   public:
