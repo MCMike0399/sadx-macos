@@ -1,0 +1,27 @@
+{
+  "defect": {
+    "base": "6e1afe6",
+    "path": "tools/inventory/refactor_inventory.py",
+    "protected_before": false,
+    "present_in_manifest": false,
+    "actual_source_sha256": "24e3577db533d84e95217851a0cd9c0777171cbed5f12c1a99f7e38e483502db",
+    "defect": "Inventory enforces migration scope/debt but its implementation is outside judge tamper evidence."
+  },
+  "correction": "Protect the exact maintained refactor inventory generator as an explicit judge file; leave unrelated inventory emitters outside this bounded change.",
+  "verification": {
+    "focused_test_command": "python3 -m unittest discover -s tests/python -p test_judge.py -q",
+    "tests": 17,
+    "exit": 0,
+    "regressions": [
+      "generator byte mutation rejected",
+      "missing generator fails closed",
+      "generator symlink rejected"
+    ]
+  },
+  "source_changed": false,
+  "limits": [
+    "No Source-lineage policy activation or semantic disposition change.",
+    "Full integration gate remains pending; prior green gate does not certify this correction."
+  ],
+  "development_failure": "Initial test expected a missing-input message; the explicit-file scanner correctly raises FileNotFoundError. Regression now checks that fail-closed behavior."
+}

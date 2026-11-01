@@ -6,6 +6,8 @@ all maintained `tests/unit` bodies and Python verification helpers under
 `reference/packets`,
 oracle summaries, frozen corpora, mutant
 specifications, the Makefile and unit-test registration. The checker itself is covered.
+The refactor inventory generator is covered because it enforces maintained scope,
+reviewed dispositions and retained debt.
 Generated Python caches and `.DS_Store` are excluded. Regenerated `build/oracles/*.cases.bin`
 files are development outputs, not frozen corpora. New frozen corpora belong under
 `reference/frozen-corpora/`; top-level `reference/*corpus*` files are also covered.

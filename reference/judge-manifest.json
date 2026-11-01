@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "84337e542c150a7f8c1f96c20df631050764f404",
-    "evidence": "reference/production-integration-20261101/input-axes-coefficient-revalidation.json",
-    "evidence_sha256": "748d2f04c4a01db41229f6068ae222dd3d46291f178e8dccb448e072f9ef7572",
-    "reason": "Revalidate unchanged7word input coefficient producer after reviewed axis header rewrite; record actual stale-pin gatefailure, preserveexpectedwordhash/fixtures and rerun isolatednativeproducer"
+    "base_commit": "6e1afe691c8058ba9c001693ebf2dd81cd7e25b1",
+    "evidence": "reference/production-integration-20261101/inventory-generator-protection.json",
+    "evidence_sha256": "f929548eba2e81e7fc40090a6bf8056d6b61814fcf1ac0d348ea5bf565baafcc",
+    "reason": "Close missing tamper protection for refactor inventory scope/debt enforcement"
   },
   "files": {
     "Makefile": "77a6cc1837d73f1d569b65edc81f429a297ef8a6ca49b0656dee53a945cbfe14",
@@ -631,7 +631,7 @@
     "tests/python/test_input_config.py": "fa5d1d7f518d68e17618617cd3863b1f9553a505446af646d21b7e1cd771f0ef",
     "tests/python/test_journey_driver.py": "5d9bb8325b4585e4c66206f092b708951c76b61adba756c8736239a2b414470a",
     "tests/python/test_journeys.py": "a0c7e04914c078b417932f156463f311c617df314d94737b3caf9ce34822ac19",
-    "tests/python/test_judge.py": "e1b200761d48664351af80d60231f913380d2cf31bfb0c3d7cf6e2759e7d3e2e",
+    "tests/python/test_judge.py": "9aae337f924c6eae2b932c743ef64f839f5991b747ee4b8c79fa408b35745f84",
     "tests/python/test_main_menu_dialog_import.py": "979f6ce93a2bfb58219af180700172b450b52aa17f988938e98776f67878e3d3",
     "tests/python/test_menu_dialog_import.py": "d92712d15cc8ebb657813d22fccbc21a821f7d589ea0ff09f67c4b8ea63d37a9",
     "tests/python/test_menu_textures.py": "3e5cff9e92ffa2e1a522943cd42ce0457d5fd0334630b84dc1f5a35c6e09b22a",
@@ -976,7 +976,7 @@
     "tools/gate/check_global_owners.py": "764714cd1fbdeab7b77f3b50d9efb64f12992f791758e3f07602a938b32ef504",
     "tools/gate/check_input_initial_state.py": "2a9de3ce38d6a1c8bef12e6c87fd8181a0888c15e5033b5c8b8b6a873f2352e1",
     "tools/gate/check_input_mod_constants.py": "be8443495170b4ecbc7388c3e60f387242847ae7318e3e310b6a53c74300614b",
-    "tools/gate/check_judge.py": "5f24e84de744602aed1e824b1369cf4e8eee23387379868c144910c7b634fa6b",
+    "tools/gate/check_judge.py": "6dd85f4933371d319633df5ada46e04f19439987bfecc141a226abd3296cea24",
     "tools/gate/check_layers.py": "2b72408ccd936baa5da22b36eefbf90ce2af4ebf1ab01dc63a5f45f5fa9615c1",
     "tools/gate/check_library_initial_state.py": "6d5d21de9176f715328496408b5e87e5d80f72793cdfe13a4e7dc09931201080",
     "tools/gate/check_native_closure.py": "405656d6154dc89aec53cdc49c854ae6ec9287b7bb58dc894daa6ee07d8bc2d2",
@@ -1004,6 +1004,7 @@
     "tools/gate/run_journeys.py": "19a272185be875d47ded2bbf45ea71db7a918b9b800cb4d4970074cb8b70c555",
     "tools/gate/run_native_journeys.py": "f46c96f7fad6a1cd9a812d2f35a3b8a01cda38749eace3f12f451e3b915c4358",
     "tools/gate/track_reports.py": "f936d454c3d07a0614dc27e6370396c41428763cc05c473b9b34773b7f96abc9",
+    "tools/inventory/refactor_inventory.py": "24e3577db533d84e95217851a0cd9c0777171cbed5f12c1a99f7e38e483502db",
     "tools/journey/capture_content.py": "44269e120494dd3935739e36e1e30117f486eddc54afaea98b0d3f29e8a0149b",
     "tools/journey/check_native_file_select.py": "a7f1a4e09bfb2aeb38ee8941ec207c5f76b8bee28e8b0f930fae249ca1582896",
     "tools/journey/check_native_fresh_save.py": "76ecc58997331de9b8123bfd3b20347331bccf8736214eb6cec946763218ff05",

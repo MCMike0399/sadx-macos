@@ -62,6 +62,21 @@ class JudgeTests(unittest.TestCase):
                 self.write(name, original)
         self.assertEqual(check(self.root)[0], [])
 
+    def test_inventory_scope_enforcement_is_protected(self):
+        name = 'tools/inventory/refactor_inventory.py'
+        self.assertTrue(protected(name))
+        self.assertIn(name, snapshot(self.root))
+        original = (self.root / name).read_text()
+        self.write(name, original + '# discard historical debt\n')
+        self.assertTrue(any('changed judge input' in error for error in check(self.root)[0]))
+        (self.root / name).unlink()
+        with self.assertRaises(FileNotFoundError):
+            check(self.root)
+        target = self.write('unprotected-generator.py', original)
+        (self.root / name).symlink_to(target)
+        with self.assertRaisesRegex(ValueError, 'must not be a symlink'):
+            snapshot(self.root)
+
     def test_hash_addition_removal_and_generated_files(self):
         self.assertEqual(check(self.root)[0], [])
         self.write('tools/oracles/check.py', 'mutated\n')
