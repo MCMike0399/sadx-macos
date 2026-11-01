@@ -88,3 +88,98 @@ actual source-only product closure, journeys and coherent full gate. No whole CP
 Input, consumer, campaign, hardware, Windows or gameplay closure is claimed.
 Reserved UNRUN final seeds: scalar0x53534591 and native0x535345d7; Root may instead
 select private fresh seeds. They are never used during this packet's development.
+
+## Completed source and qualification
+
+Source commit `696739d` rewrites the entire implementation into named raw-word
+classification, signed DAZ replacement, scoped SoftFloat state, comparison,
+width-specific finishing, explicit arithmetic/commit/return steps and named
+operation selection. All added internal structure is NOTSA. Header bytes and
+public API/layout are identical todb2f158. The exact masks are numeric encodings;
+no host arithmetic replacement, owner migration, inferred behavior or fix was made.
+
+`development-comparison.json` records full decompressed byte equality for all five
+streams (SSE16,229,824; axes30,497,802; pad609,696; nativeSSE199,068,120;
+nativeAxes24,903,828 bytes). `compare.py` checks every byte plus every retained
+value/FP/class identity, not aggregate counts. SSE retains5076 classified value
+failures and232720 status disagreements, including all incoming controls and
+returns. Axes retains93104 partial identities, pad300. NativeSSE1244160 edge
+observations plus state/thread/constructor cases keep FNV4458530012893139995;
+NativeAxes327681 including preciseY-CVTT keeps FNV9340279443059284959. Baseline
+and current raw libraries/streams are pinned in this worktree, never overwritten.
+
+Eighteen copied semantic faults are caught by the unchanged pre-source native
+contract. `faults-initial.json` retains all18 attempts:16 valid/caught,2 invalid
+compiles,0 survivors. The invalid rounding/denormal-priority edits made their
+parameters/locals unused underWerror. `faults-corrected.json` retains two valid,
+caught replacements that keep those syntactic uses. No invalid compile counts.
+Faults cover selected rounding, NaN order, DAZ sign, FTZ, exact tiny unmasked
+underflow, overflow PE priority, binary64 FTZ sign, denormal priority/stop,
+incoming sticky trapping, sticky merging, CVTT precision, UCOMISD quietNaN,
+MINSS source bytes, equal signed zero, TLS restoration and thread rejection.
+No dedicated historical SSE mutations were found; the existing unit assertions
+and unchanged judges remain intact. No new oracle expectations mask these faults.
+
+`consumer-builds.json` records all8 actual direct maintained consumer TUs compiled
+successfully with dependency files. `consumer-source-closure.json` pins48 actual
+source/header inclusions and checks baseline/current equality. No consumer source
+changed. `current-build.json`, `extra-units.json`, `current-contracts.json` record
+optimized SSE, axes, pad, D3DX and native contracts exiting0; the same SSE contract
+also passes UBSan. Only pinned thirdparty numeric archives are linked. The first
+D3DX unit link omitted its real x87 transcendental dependency and failed; the
+successful build compiles x87_transcendental.cpp directly and links the locally
+rebuilt pinned Bochs math archive. This is a unit check, not whole renderer closure.
+
+Readability, layer and unique-owner checks exit0. No whole gate was requested or
+run. The constexpr checker exits1 with exactly2 expected stale modes/source pins;
+`rounding-table-review.json` supplies original/current fingerprints and unchanged
+four-entry semantics for Root reconciliation. Global inventories, manifests,
+readability allowances, HANDOFF and STATUS remain untouched. All inherited
+path entries remain in the committed judge manifest. Available protected bytes
+are unchanged except appended Makefile/test registrations;53 ignored inputs are
+absent locally and no missing corpus was synthesized/restored.
+
+Author STYLE12 review: complete module has structured control flow, named masks,
+one statement per line, direct narrow SoftFloat calls and no address transport.
+Arithmetic/control/store order matches the frozen model, with every commit before
+return. Per-expression arithmetic deliberately stays at the existing numeric
+boundary; ordinary hostfloat cannot express these caller controls/statuses. New
+helpers only name existing raw classification, comparison, finishing and scope.
+No guessed source facts, new services or ownership change. Independent review is
+explicitly NOT performed by this implementation worker.
+
+## Reproduction and Root handoff
+
+After the source commit, run the same capture commands with baseline replaced by
+current and pad-final replaced by pad. Then:
+
+```
+python3 reference/packets/sse-readability/build.py build/sse-readability/current
+python3 reference/packets/sse-readability/compare.py
+python3 reference/packets/sse-readability/mutate.py
+python3 reference/packets/sse-readability/mutate.py build/sse-readability/faults-corrected rounding-selection denormal-priority
+python3 reference/packets/sse-readability/consumers.py
+sh third_party/bochs_fpatan/build.sh build/sse-readability/pinned/bochs
+python3 reference/packets/sse-readability/check_units.py
+python3 tools/gate/check_readability.py
+python3 tools/gate/check_layers.py
+python3 tools/gate/check_global_owners.py
+```
+
+These capture/build/fault scripts refuse existing output directories to preserve
+proof. Initial faults are pinned as executed, while the maintained mutation driver
+uses corrected compile-valid spellings. Use new paths or a new isolated checkout
+for a new run. Baseline files were captured before Source, except the later D3DX
+unit dependency closure, which is clearly current-only. The pre-source SSE native
+contract was packed/recompiled before capture, then its measured digest assertion
+was added and verified before Source; characterization.json pins that final test.
+
+Root next: independent complete-module STYLE12/evidence review; fresh final
+cohorts against retained old/current libraries without using default failures as
+pass; reconcile the modes table evidence and lower readability allowance; union
+all inherited protected paths and new contract/packet helpers into the judge
+manifest without dropping any53 ignored corpora; run actual source-only closure,
+affected runtime/consumer judges and journeys, then the coherent gate. Those are
+not worker qualification claims. Header/body together constitute this complete
+module readability result; whole CPU/Input/consumer/campaign closure remains open.
+No push, no Main mutation, no new hardware/Windows/gameplay qualification.
