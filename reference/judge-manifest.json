@@ -1,14 +1,14 @@
 {
   "change": {
-    "base_commit": "72f2822acc27889db0ac96813801bf7b6a988da8",
-    "evidence": "reference/production-integration-20261101/depth-state-shared/registration.json",
-    "evidence_sha256": "50307323e2fce15cd607aafc8c194ea0407081b6cdee90fe6d2254609ea76539",
-    "reason": "Register independent depth sub-judge and native Display composition test after frozen source baseline; preserve inherited blend judges"
+    "base_commit": "98ffa2660b4e82068d37901e3c5e000741b27396",
+    "evidence": "reference/production-integration-20261101/menu-progress-shared/table-review-revalidation.json",
+    "evidence_sha256": "6b63511ac693ea2b03a4a558278b0769469b7bdef9d03aa2d4eede1092ca6adc",
+    "reason": "Revalidate eleven menu-progress table consumer reviews against committed source98ffa26 and retain six valid mutation receipts"
   },
   "files": {
     "Makefile": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
     "reference/address-dispatch-baseline-v1.json": "db0e83e323df714032ddad3046670d81968efe8e966630d9666ecbbe87d38bd7",
-    "reference/constexpr-table-review.json": "1a9068800cb6de718c80fdefcf73b3359e0e5c264bcdbae7366b0f9a11babf68",
+    "reference/constexpr-table-review.json": "1516d09f461dc2515cc9fe06a137b4fc3e928bf1e09e9d3ed6be44b38ecde58a",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
     "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
     "reference/frame-control-corpus.tsv": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",
@@ -330,6 +330,7 @@
     "reference/production-integration-20261026/gamma-weld-cursors/mutants.json": "f5d1c223aaff445cd661e58b1aad3c40cb37aee7cd958c1bf0cdc9b9a945de85",
     "reference/production-integration-20261026/native-model-binding-mutants.json": "8d936da60183fd5f8ffec99fe7c9f07f5e88c1e76829d9cabc42d2c4ca6ff6a2",
     "reference/production-integration-20261026/selection-player-queries/mutants.json": "5ef23236ac47efe1e21f0c13b0394f055c3a7f9f3d45ba60a1b9fffe2d3094ca",
+    "reference/production-integration-20261101/menu-progress-shared/mutants.json": "cab8745d573efa9caa6e281654ef85ce535c0d28b4e593236e921d275faed40d",
     "tests/fixtures/input_keyboard_goldens.hpp": "0a9f25e5a0d336a1f4381af39257fdc6f7403f43ca2aef743345284fb1c18fda",
     "tests/fixtures/material_correction_mutants.json": "e34f023704a87b4663d5c56fed1c1beabaa697cd3a3770bbe24962ab28f66f41",
     "tests/fixtures/ninja_sprite_test_fixture.hpp": "1b4fa2a0ac6270d896f9e54c297829bdf3d43c378d195cbe34d0d6e87fd2b24e",

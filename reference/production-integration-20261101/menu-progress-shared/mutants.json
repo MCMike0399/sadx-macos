@@ -1,0 +1,74 @@
+[
+  {
+    "mutation": "metal-store",
+    "source": "src/game/menu_eligibility.cpp",
+    "before": "progress.story_flags[story_flags::kMetalSonicPlayable] = 1;",
+    "after": "progress.story_flags[story_flags::kMetalSonicPlayable] = 0;",
+    "source_sha256": "fb655e82d982bc0cbc4aea78fd76a191d4847b481d7de411c33616b2c1eb9396",
+    "compile_exit": 0,
+    "stderr": "",
+    "judge_exit": 1,
+    "mismatches": 116,
+    "cases": 7388
+  },
+  {
+    "mutation": "big-gamma-order",
+    "source": "src/game/menu_eligibility.cpp",
+    "before": "story_flags::kBigPlayable, story_flags::kGammaPlayable,",
+    "after": "story_flags::kGammaPlayable, story_flags::kBigPlayable,",
+    "source_sha256": "fb655e82d982bc0cbc4aea78fd76a191d4847b481d7de411c33616b2c1eb9396",
+    "compile_exit": 0,
+    "stderr": "",
+    "judge_exit": 1,
+    "mismatches": 27,
+    "cases": 7388
+  },
+  {
+    "mutation": "metal-variant",
+    "source": "src/game/menu_eligibility.cpp",
+    "before": "progress.selection_variant == kMetalSelectionVariant",
+    "after": "progress.selection_variant == kRegularCharactersOnlyVariant",
+    "source_sha256": "fb655e82d982bc0cbc4aea78fd76a191d4847b481d7de411c33616b2c1eb9396",
+    "compile_exit": 0,
+    "stderr": "",
+    "judge_exit": 1,
+    "mismatches": 8,
+    "cases": 7388
+  },
+  {
+    "mutation": "override-precedence",
+    "source": "src/game/menu_eligibility.cpp",
+    "before": "std::int32_t character_enabled(std::uint32_t character, Progress progress) {",
+    "after": "std::int32_t character_enabled(std::uint32_t character, Progress progress) {\n    if (character >= 7) throw UnknownCharacter(character);",
+    "source_sha256": "fb655e82d982bc0cbc4aea78fd76a191d4847b481d7de411c33616b2c1eb9396",
+    "compile_exit": 0,
+    "stderr": "",
+    "judge_exit": 1,
+    "mismatches": 10,
+    "cases": 7388
+  },
+  {
+    "mutation": "completion-stride",
+    "source": "src/game/main_menu_eligibility.cpp",
+    "before": "row * save::kStagesPerCharacter + stage",
+    "after": "row * (save::kStagesPerCharacter - 1) + stage",
+    "source_sha256": "f76786029850e55a2ed0948bc8038c426b01638c1a72854c87cb680ee3146039",
+    "compile_exit": 0,
+    "stderr": "",
+    "judge_exit": 1,
+    "mismatches": 37,
+    "cases": 11488
+  },
+  {
+    "mutation": "current-character-final-stage",
+    "source": "src/game/main_menu_eligibility.cpp",
+    "before": "completion.catalog.character_ids.at(current_character)",
+    "after": "completion.catalog.character_ids.at(character) + (current_character & 0U)",
+    "source_sha256": "f76786029850e55a2ed0948bc8038c426b01638c1a72854c87cb680ee3146039",
+    "compile_exit": 0,
+    "stderr": "",
+    "judge_exit": 1,
+    "mismatches": 43,
+    "cases": 11488
+  }
+]
