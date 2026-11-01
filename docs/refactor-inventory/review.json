@@ -17697,6 +17697,1600 @@
           "sha256": "aa94a5e19b17ebf362c49c741423b9d87a6852dc50cd448baaa3749487103ca5"
         }
       ]
+    },
+    "src/engine/game_frame_control.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Plain timing/input/clock API has meaningful value absence and borrowed owners; no fixture transport.",
+      "reviewed_source_sha256": "676b9b2915b4e826737130231825fbb333b59a15346c5cb09444d37113d074f3",
+      "semantic_justification": "All56lines reviewed: three zero-initialized timing values, renderer BSS and file-backed1/3 defaults, borrowed edge/save fields, typed callback, real OS-query optionals and distinct limiter completion/fault result. No public address layout or duplicate GLOBAL owner.",
+      "resolved_owners": [
+        {
+          "resolution": "Native ModeState/RendererState are values in one world: Application::frame_mode outlives borrowing Display and Session; Session owns renderer_. LogoScene/MovieScene and frame_loop borrow those same objects. Native input tests own InputState reset flags/mask and borrow edge/save storage. No second persistent mapped owner is introduced by the core or native backend. Native application Input mod reset uses its own explicit input producer; installing input_callback alone does not prove production invocation of run_frame_input.",
+          "evidence": [
+            {
+              "path": "src/apps/sadx_native.mm",
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/runtime/logo_scene.hpp",
+              "sha256": "df9ab3879b3c6b2f331d09cf5d7673faa1b7f3b43643e0db2b762539088b3cab"
+            },
+            {
+              "path": "src/runtime/movie_scene.hpp",
+              "sha256": "932d595085a552f67520e0888fb02f254374b6b0164e69f7c9405860095c676f"
+            },
+            {
+              "path": "src/engine/frame_loop_native.hpp",
+              "sha256": "af759d873cd01e3bc2a7e6e4101067ef62eb4e6c1e13234ff7583a92e7e45aeb"
+            },
+            {
+              "path": "src/runtime/native_input.hpp",
+              "sha256": "dee226a84a5375d0582b4c2689d612efac793a17d55b2bd3e1f2fa3099aa4b75"
+            }
+          ]
+        },
+        {
+          "resolution": "In the separate reference world, FrameRateModeState owns frame multiplier/logic increment/pending ticks; GameFrameRendererState owns frequency/interval/multiplier/settings/previous counter/callback; GameFrameInputState owns soft flags/mask and borrows strided edge59 and GameLoop save phase. NativeGame owns these once. Invocation-local views mirror immediate stores but getters always consult authoritative reference owners. BindScope restores the prior thread-local binding on success, ReferenceStop and arbitrary exception unwinding. Borrowed owners must outlive a synchronous invocation.",
+          "evidence": [
+            {
+              "path": "src/guest/frame_control_reference.hpp",
+              "sha256": "51be52abf4d5d3d16ac63043af56f1ac46630cc7a4e16117aee1862b73d2f20b"
+            },
+            {
+              "path": "src/guest/frame_control_reference.cpp",
+              "sha256": "107e8aa6984959d7652f1660e2a9d208a6867c73f393504279d1853a1170f618"
+            },
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "sha256": "f9709b794475f8f85db465f923d52de12297afc8eb8f9697cb8c198bd79266e0"
+            },
+            {
+              "path": "src/engine/game_logic_support.hpp",
+              "sha256": "92e1c2f02a8636859e778bbb9e0053dd74a3951a505ae293b721e7dc8659f958"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Actual native consumers: Session constructor and mode/vsync overrides, LogoScene, MovieScene, Display frame mode, frame_loop counter/tick calculation; Application::pace calls the shared limiter at cadence63 with MacPerformanceCounter. Native unit host directly invokes the installed typed input callback; reference consumers include NativeGame startup/mode/frame composition and override_table frame-input/global-memory bindings. Register flags/incidental EAX belong only to override_table.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/logo_scene.cpp",
+              "sha256": "bc4c2ecdb1432a3bb7d3290d8a9a58b14988aeea2583b3889ec8b6be70cb8dbb"
+            },
+            {
+              "path": "src/runtime/movie_scene.cpp",
+              "sha256": "c076a0805e7bee29c04a84fd7de71638492817b2647da79d872ff253255726a8"
+            },
+            {
+              "path": "src/engine/frame_loop_native.cpp",
+              "sha256": "195c4a6c30602b9d7669b3deb66f8ea8571fdfbdd6993528b9558199a3cd36b6"
+            },
+            {
+              "path": "src/apps/sadx_native.mm",
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "src/platform/mac/mac_clock.cpp",
+              "sha256": "644ef561034ee133844dfb50c01d35a3bb9705a160533866c10ca5c1fb814994"
+            },
+            {
+              "path": "src/guest/override_table.cpp",
+              "sha256": "8f55db3d274697694ef5bb745c3d501492dd323633f627c1de3f47d2d975ed90"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "tests/unit/native_frame_control.cpp",
+              "sha256": "057f4f018318cb471f51bba9fa85b1938dd37f1b11819c1475a938277923875d"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Accepted historical exact frame oracle:2672 cases, callback identity/availability/store values and outer+nested boundaries, no mismatches; all listed current source dependencies match. Frozen2672-row TSV and metadata hash match the original isolated receipt, including both native and reference compiler-dependency lists. All four current scoped files and speedrun helper/native unit match the isolated receipt. This is qualified unchanged-source evidence, not execution by this reviewer.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/game_frame_control.json",
+              "sha256": "e61478b10947019cd16360095cf4ee6542c1406a252434e422469821d852d26e"
+            },
+            {
+              "path": "reference/frame-control-corpus.json",
+              "sha256": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952"
+            },
+            {
+              "path": "reference/frame-control-corpus.tsv",
+              "sha256": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-isolated.json",
+              "sha256": "66d3ae74afc2c27104150d40a2f55857f41c8f2736fefc9c5311ef20142a69b9"
+            }
+          ]
+        },
+        {
+          "resolution": "Limiter original DLL comparison1799 cases/0 mismatches, one capped fixture excluded; source divide-failure cases remain failures at the intended boundary. Frame2048-case seeded before/after holdout has identical case hash and0 mismatches. Historical three semantic faults caught120/472/182 mismatches; three native-host faults caught deadline accumulation/wrong cadence/skipped callback. Retained evidence predates this review; no mutants or holdouts rerun.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/speedrun_limiter.json",
+              "sha256": "91200066a179a91a8a69dcf9e0277f7640fe8dbc196ae38cce56e63235478cbe"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-holdout.json",
+              "sha256": "697231140bbc19da285fabddd84f27b1294b66695e3a7c1dfc7be57a71460ddc"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-before-holdout.json",
+              "sha256": "0f5227374e8bb0afc637658474842dbdf79bd791a7955edebc7ab10e71c90a9a"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-core-mutants.txt",
+              "sha256": "4306670fb5bd0209f313d68628b3d6601920fafe8a92e3b90ec255fd06918903"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-host-mutants.json",
+              "sha256": "b1c37965339e193c522e8542063f32bc87c63a163d4dd803300690b4d302b730"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-mutants.json",
+              "sha256": "da638fb0455c0d20c57453ce53145cf38a13b9f0b5fb5f46df9c0470bcac405b"
+            },
+            {
+              "path": "reference/production-integration-20261015/native-frame-control-mutants.json",
+              "sha256": "add313cbae1597cf4931fbc2947da72800ce7a7ac81bf83788e91988b2d6e9bd"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Only these exact file/module bodies are code-conforming; not whole frame-loop/input/engine/runtime or campaign closure.",
+        "No wall-clock pacing, physical keys/controller, stage63FPS, Windows scheduling or unbounded-spin proof. Limiter wait_hint is an optional native scheduling aid; negative/overflowing synthetic waits and excluded capped fixtures are not certified by ordinary completed fixtures.",
+        "Clock optionals represent OS query failure; LimiterResult.interval is genuinely absent on initialization/fault. Split-word fixture availability and numeric source diagnostics stay in the reference adapter. Unused input-callback EAX and FP exception flags are outside the frozen frame oracle.",
+        "Historical holdouts/mutant logs are bounded receipts, not fresh complete output captures tied to every transitive current dependency. This review fingerprints dependencies but does not manufacture historical transitive fingerprints.",
+        "Native source manifest/isolated build demonstrate a source-level closure; historical library inspection is not an OS access sandbox. Actual native/reference journeys and frozen Main99bdaf4 gate97018 are Root evidence; no new execution or gate qualification here."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/game_frame_control.hpp",
+          "sha256": "676b9b2915b4e826737130231825fbb333b59a15346c5cb09444d37113d074f3",
+          "line": 1,
+          "link": "src/engine/game_frame_control.hpp#L1"
+        }
+      ]
+    },
+    "src/engine/game_frame_control.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Shared semantic frame ratios, reset decisions and limiter preserve observable read/store/callback order.",
+      "reviewed_source_sha256": "930a94809ee8f84acc82b3da960766a14d73905455f6ff831b4541b1d90b1746",
+      "semantic_justification": "All94lines reviewed. Frequency getter precedes multiplier store; unsigned low64 multiplication is bit-reinterpreted before signed /60. Mode publishes render ratio, logic ratio and pending=0 before selected interval work, then installs callback. Render2 demands configured==1. Reset uses nonzero/save short circuit and mask68. Limiter stores QPF before reading callback-mutated mode, reads previous after each QPC, commits sampled now without accumulated deadline, and keeps QPF-failed single-QPC initialization. No source-address dispatch or fixture branch.",
+      "resolved_owners": [
+        {
+          "resolution": "Native ModeState/RendererState are values in one world: Application::frame_mode outlives borrowing Display and Session; Session owns renderer_. LogoScene/MovieScene and frame_loop borrow those same objects. Native input tests own InputState reset flags/mask and borrow edge/save storage. No second persistent mapped owner is introduced by the core or native backend. Native application Input mod reset uses its own explicit input producer; installing input_callback alone does not prove production invocation of run_frame_input.",
+          "evidence": [
+            {
+              "path": "src/apps/sadx_native.mm",
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/runtime/logo_scene.hpp",
+              "sha256": "df9ab3879b3c6b2f331d09cf5d7673faa1b7f3b43643e0db2b762539088b3cab"
+            },
+            {
+              "path": "src/runtime/movie_scene.hpp",
+              "sha256": "932d595085a552f67520e0888fb02f254374b6b0164e69f7c9405860095c676f"
+            },
+            {
+              "path": "src/engine/frame_loop_native.hpp",
+              "sha256": "af759d873cd01e3bc2a7e6e4101067ef62eb4e6c1e13234ff7583a92e7e45aeb"
+            },
+            {
+              "path": "src/runtime/native_input.hpp",
+              "sha256": "dee226a84a5375d0582b4c2689d612efac793a17d55b2bd3e1f2fa3099aa4b75"
+            }
+          ]
+        },
+        {
+          "resolution": "In the separate reference world, FrameRateModeState owns frame multiplier/logic increment/pending ticks; GameFrameRendererState owns frequency/interval/multiplier/settings/previous counter/callback; GameFrameInputState owns soft flags/mask and borrows strided edge59 and GameLoop save phase. NativeGame owns these once. Invocation-local views mirror immediate stores but getters always consult authoritative reference owners. BindScope restores the prior thread-local binding on success, ReferenceStop and arbitrary exception unwinding. Borrowed owners must outlive a synchronous invocation.",
+          "evidence": [
+            {
+              "path": "src/guest/frame_control_reference.hpp",
+              "sha256": "51be52abf4d5d3d16ac63043af56f1ac46630cc7a4e16117aee1862b73d2f20b"
+            },
+            {
+              "path": "src/guest/frame_control_reference.cpp",
+              "sha256": "107e8aa6984959d7652f1660e2a9d208a6867c73f393504279d1853a1170f618"
+            },
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "sha256": "f9709b794475f8f85db465f923d52de12297afc8eb8f9697cb8c198bd79266e0"
+            },
+            {
+              "path": "src/engine/game_logic_support.hpp",
+              "sha256": "92e1c2f02a8636859e778bbb9e0053dd74a3951a505ae293b721e7dc8659f958"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Actual native consumers: Session constructor and mode/vsync overrides, LogoScene, MovieScene, Display frame mode, frame_loop counter/tick calculation; Application::pace calls the shared limiter at cadence63 with MacPerformanceCounter. Native unit host directly invokes the installed typed input callback; reference consumers include NativeGame startup/mode/frame composition and override_table frame-input/global-memory bindings. Register flags/incidental EAX belong only to override_table.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/logo_scene.cpp",
+              "sha256": "bc4c2ecdb1432a3bb7d3290d8a9a58b14988aeea2583b3889ec8b6be70cb8dbb"
+            },
+            {
+              "path": "src/runtime/movie_scene.cpp",
+              "sha256": "c076a0805e7bee29c04a84fd7de71638492817b2647da79d872ff253255726a8"
+            },
+            {
+              "path": "src/engine/frame_loop_native.cpp",
+              "sha256": "195c4a6c30602b9d7669b3deb66f8ea8571fdfbdd6993528b9558199a3cd36b6"
+            },
+            {
+              "path": "src/apps/sadx_native.mm",
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "src/platform/mac/mac_clock.cpp",
+              "sha256": "644ef561034ee133844dfb50c01d35a3bb9705a160533866c10ca5c1fb814994"
+            },
+            {
+              "path": "src/guest/override_table.cpp",
+              "sha256": "8f55db3d274697694ef5bb745c3d501492dd323633f627c1de3f47d2d975ed90"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "tests/unit/native_frame_control.cpp",
+              "sha256": "057f4f018318cb471f51bba9fa85b1938dd37f1b11819c1475a938277923875d"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Accepted historical exact frame oracle:2672 cases, callback identity/availability/store values and outer+nested boundaries, no mismatches; all listed current source dependencies match. Frozen2672-row TSV and metadata hash match the original isolated receipt, including both native and reference compiler-dependency lists. All four current scoped files and speedrun helper/native unit match the isolated receipt. This is qualified unchanged-source evidence, not execution by this reviewer.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/game_frame_control.json",
+              "sha256": "e61478b10947019cd16360095cf4ee6542c1406a252434e422469821d852d26e"
+            },
+            {
+              "path": "reference/frame-control-corpus.json",
+              "sha256": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952"
+            },
+            {
+              "path": "reference/frame-control-corpus.tsv",
+              "sha256": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-isolated.json",
+              "sha256": "66d3ae74afc2c27104150d40a2f55857f41c8f2736fefc9c5311ef20142a69b9"
+            }
+          ]
+        },
+        {
+          "resolution": "Limiter original DLL comparison1799 cases/0 mismatches, one capped fixture excluded; source divide-failure cases remain failures at the intended boundary. Frame2048-case seeded before/after holdout has identical case hash and0 mismatches. Historical three semantic faults caught120/472/182 mismatches; three native-host faults caught deadline accumulation/wrong cadence/skipped callback. Retained evidence predates this review; no mutants or holdouts rerun.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/speedrun_limiter.json",
+              "sha256": "91200066a179a91a8a69dcf9e0277f7640fe8dbc196ae38cce56e63235478cbe"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-holdout.json",
+              "sha256": "697231140bbc19da285fabddd84f27b1294b66695e3a7c1dfc7be57a71460ddc"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-before-holdout.json",
+              "sha256": "0f5227374e8bb0afc637658474842dbdf79bd791a7955edebc7ab10e71c90a9a"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-core-mutants.txt",
+              "sha256": "4306670fb5bd0209f313d68628b3d6601920fafe8a92e3b90ec255fd06918903"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-host-mutants.json",
+              "sha256": "b1c37965339e193c522e8542063f32bc87c63a163d4dd803300690b4d302b730"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-mutants.json",
+              "sha256": "da638fb0455c0d20c57453ce53145cf38a13b9f0b5fb5f46df9c0470bcac405b"
+            },
+            {
+              "path": "reference/production-integration-20261015/native-frame-control-mutants.json",
+              "sha256": "add313cbae1597cf4931fbc2947da72800ce7a7ac81bf83788e91988b2d6e9bd"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Only these exact file/module bodies are code-conforming; not whole frame-loop/input/engine/runtime or campaign closure.",
+        "No wall-clock pacing, physical keys/controller, stage63FPS, Windows scheduling or unbounded-spin proof. Limiter wait_hint is an optional native scheduling aid; negative/overflowing synthetic waits and excluded capped fixtures are not certified by ordinary completed fixtures.",
+        "Clock optionals represent OS query failure; LimiterResult.interval is genuinely absent on initialization/fault. Split-word fixture availability and numeric source diagnostics stay in the reference adapter. Unused input-callback EAX and FP exception flags are outside the frozen frame oracle.",
+        "Historical holdouts/mutant logs are bounded receipts, not fresh complete output captures tied to every transitive current dependency. This review fingerprints dependencies but does not manufacture historical transitive fingerprints.",
+        "Native source manifest/isolated build demonstrate a source-level closure; historical library inspection is not an OS access sandbox. Actual native/reference journeys and frozen Main99bdaf4 gate97018 are Root evidence; no new execution or gate qualification here."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/game_frame_control.cpp",
+          "sha256": "930a94809ee8f84acc82b3da960766a14d73905455f6ff831b4541b1d90b1746",
+          "line": 1,
+          "link": "src/engine/game_frame_control.cpp#L1"
+        }
+      ]
+    },
+    "src/engine/game_frame_control_internal.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Private typed state access localizes adapter diagnostics without hiding decisions.",
+      "reviewed_source_sha256": "4fa87f0fac7eba31863204a9dd6247541111e8810cfd347a859d4803400f7f74",
+      "semantic_justification": "All27lines reviewed: ModeInterval distinguishes logical call sites without instruction values; one finite getter/store surface is bound at link time to native fields or reference facts. report_limiter_progress is a NOTSA diagnostic observer, with no gameplay branch. This is not a generic Services registry or fixture-missingness object.",
+      "resolved_owners": [
+        {
+          "resolution": "Native ModeState/RendererState are values in one world: Application::frame_mode outlives borrowing Display and Session; Session owns renderer_. LogoScene/MovieScene and frame_loop borrow those same objects. Native input tests own InputState reset flags/mask and borrow edge/save storage. No second persistent mapped owner is introduced by the core or native backend. Native application Input mod reset uses its own explicit input producer; installing input_callback alone does not prove production invocation of run_frame_input.",
+          "evidence": [
+            {
+              "path": "src/apps/sadx_native.mm",
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/runtime/logo_scene.hpp",
+              "sha256": "df9ab3879b3c6b2f331d09cf5d7673faa1b7f3b43643e0db2b762539088b3cab"
+            },
+            {
+              "path": "src/runtime/movie_scene.hpp",
+              "sha256": "932d595085a552f67520e0888fb02f254374b6b0164e69f7c9405860095c676f"
+            },
+            {
+              "path": "src/engine/frame_loop_native.hpp",
+              "sha256": "af759d873cd01e3bc2a7e6e4101067ef62eb4e6c1e13234ff7583a92e7e45aeb"
+            },
+            {
+              "path": "src/runtime/native_input.hpp",
+              "sha256": "dee226a84a5375d0582b4c2689d612efac793a17d55b2bd3e1f2fa3099aa4b75"
+            }
+          ]
+        },
+        {
+          "resolution": "In the separate reference world, FrameRateModeState owns frame multiplier/logic increment/pending ticks; GameFrameRendererState owns frequency/interval/multiplier/settings/previous counter/callback; GameFrameInputState owns soft flags/mask and borrows strided edge59 and GameLoop save phase. NativeGame owns these once. Invocation-local views mirror immediate stores but getters always consult authoritative reference owners. BindScope restores the prior thread-local binding on success, ReferenceStop and arbitrary exception unwinding. Borrowed owners must outlive a synchronous invocation.",
+          "evidence": [
+            {
+              "path": "src/guest/frame_control_reference.hpp",
+              "sha256": "51be52abf4d5d3d16ac63043af56f1ac46630cc7a4e16117aee1862b73d2f20b"
+            },
+            {
+              "path": "src/guest/frame_control_reference.cpp",
+              "sha256": "107e8aa6984959d7652f1660e2a9d208a6867c73f393504279d1853a1170f618"
+            },
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "sha256": "f9709b794475f8f85db465f923d52de12297afc8eb8f9697cb8c198bd79266e0"
+            },
+            {
+              "path": "src/engine/game_logic_support.hpp",
+              "sha256": "92e1c2f02a8636859e778bbb9e0053dd74a3951a505ae293b721e7dc8659f958"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Actual native consumers: Session constructor and mode/vsync overrides, LogoScene, MovieScene, Display frame mode, frame_loop counter/tick calculation; Application::pace calls the shared limiter at cadence63 with MacPerformanceCounter. Native unit host directly invokes the installed typed input callback; reference consumers include NativeGame startup/mode/frame composition and override_table frame-input/global-memory bindings. Register flags/incidental EAX belong only to override_table.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/logo_scene.cpp",
+              "sha256": "bc4c2ecdb1432a3bb7d3290d8a9a58b14988aeea2583b3889ec8b6be70cb8dbb"
+            },
+            {
+              "path": "src/runtime/movie_scene.cpp",
+              "sha256": "c076a0805e7bee29c04a84fd7de71638492817b2647da79d872ff253255726a8"
+            },
+            {
+              "path": "src/engine/frame_loop_native.cpp",
+              "sha256": "195c4a6c30602b9d7669b3deb66f8ea8571fdfbdd6993528b9558199a3cd36b6"
+            },
+            {
+              "path": "src/apps/sadx_native.mm",
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "src/platform/mac/mac_clock.cpp",
+              "sha256": "644ef561034ee133844dfb50c01d35a3bb9705a160533866c10ca5c1fb814994"
+            },
+            {
+              "path": "src/guest/override_table.cpp",
+              "sha256": "8f55db3d274697694ef5bb745c3d501492dd323633f627c1de3f47d2d975ed90"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "tests/unit/native_frame_control.cpp",
+              "sha256": "057f4f018318cb471f51bba9fa85b1938dd37f1b11819c1475a938277923875d"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Accepted historical exact frame oracle:2672 cases, callback identity/availability/store values and outer+nested boundaries, no mismatches; all listed current source dependencies match. Frozen2672-row TSV and metadata hash match the original isolated receipt, including both native and reference compiler-dependency lists. All four current scoped files and speedrun helper/native unit match the isolated receipt. This is qualified unchanged-source evidence, not execution by this reviewer.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/game_frame_control.json",
+              "sha256": "e61478b10947019cd16360095cf4ee6542c1406a252434e422469821d852d26e"
+            },
+            {
+              "path": "reference/frame-control-corpus.json",
+              "sha256": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952"
+            },
+            {
+              "path": "reference/frame-control-corpus.tsv",
+              "sha256": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-isolated.json",
+              "sha256": "66d3ae74afc2c27104150d40a2f55857f41c8f2736fefc9c5311ef20142a69b9"
+            }
+          ]
+        },
+        {
+          "resolution": "Limiter original DLL comparison1799 cases/0 mismatches, one capped fixture excluded; source divide-failure cases remain failures at the intended boundary. Frame2048-case seeded before/after holdout has identical case hash and0 mismatches. Historical three semantic faults caught120/472/182 mismatches; three native-host faults caught deadline accumulation/wrong cadence/skipped callback. Retained evidence predates this review; no mutants or holdouts rerun.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/speedrun_limiter.json",
+              "sha256": "91200066a179a91a8a69dcf9e0277f7640fe8dbc196ae38cce56e63235478cbe"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-holdout.json",
+              "sha256": "697231140bbc19da285fabddd84f27b1294b66695e3a7c1dfc7be57a71460ddc"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-before-holdout.json",
+              "sha256": "0f5227374e8bb0afc637658474842dbdf79bd791a7955edebc7ab10e71c90a9a"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-core-mutants.txt",
+              "sha256": "4306670fb5bd0209f313d68628b3d6601920fafe8a92e3b90ec255fd06918903"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-host-mutants.json",
+              "sha256": "b1c37965339e193c522e8542063f32bc87c63a163d4dd803300690b4d302b730"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-mutants.json",
+              "sha256": "da638fb0455c0d20c57453ce53145cf38a13b9f0b5fb5f46df9c0470bcac405b"
+            },
+            {
+              "path": "reference/production-integration-20261015/native-frame-control-mutants.json",
+              "sha256": "add313cbae1597cf4931fbc2947da72800ce7a7ac81bf83788e91988b2d6e9bd"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Only these exact file/module bodies are code-conforming; not whole frame-loop/input/engine/runtime or campaign closure.",
+        "No wall-clock pacing, physical keys/controller, stage63FPS, Windows scheduling or unbounded-spin proof. Limiter wait_hint is an optional native scheduling aid; negative/overflowing synthetic waits and excluded capped fixtures are not certified by ordinary completed fixtures.",
+        "Clock optionals represent OS query failure; LimiterResult.interval is genuinely absent on initialization/fault. Split-word fixture availability and numeric source diagnostics stay in the reference adapter. Unused input-callback EAX and FP exception flags are outside the frozen frame oracle.",
+        "Historical holdouts/mutant logs are bounded receipts, not fresh complete output captures tied to every transitive current dependency. This review fingerprints dependencies but does not manufacture historical transitive fingerprints.",
+        "Native source manifest/isolated build demonstrate a source-level closure; historical library inspection is not an OS access sandbox. Actual native/reference journeys and frozen Main99bdaf4 gate97018 are Root evidence; no new execution or gate qualification here."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/game_frame_control_internal.hpp",
+          "sha256": "4fa87f0fac7eba31863204a9dd6247541111e8810cfd347a859d4803400f7f74",
+          "line": 1,
+          "link": "src/engine/game_frame_control_internal.hpp#L1"
+        }
+      ]
+    },
+    "src/engine/game_frame_control_native.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Native backend implements the exact private surface through immediate plain-field reads/stores.",
+      "reviewed_source_sha256": "551c58594cf51f4686aa65b35f4a686fd58dc36b661110e285a1774c8dcd347a",
+      "semantic_justification": "All28lines reviewed. No cache, singleton or alternate algorithm. apply_mode_interval delegates to the shared set_frame_interval_multiplier; native state getters use their actual argument; callback identity is a typed function pointer; diagnostic progress is intentionally inert. No persistent state or optional fixture facts.",
+      "resolved_owners": [
+        {
+          "resolution": "Native ModeState/RendererState are values in one world: Application::frame_mode outlives borrowing Display and Session; Session owns renderer_. LogoScene/MovieScene and frame_loop borrow those same objects. Native input tests own InputState reset flags/mask and borrow edge/save storage. No second persistent mapped owner is introduced by the core or native backend. Native application Input mod reset uses its own explicit input producer; installing input_callback alone does not prove production invocation of run_frame_input.",
+          "evidence": [
+            {
+              "path": "src/apps/sadx_native.mm",
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/runtime/logo_scene.hpp",
+              "sha256": "df9ab3879b3c6b2f331d09cf5d7673faa1b7f3b43643e0db2b762539088b3cab"
+            },
+            {
+              "path": "src/runtime/movie_scene.hpp",
+              "sha256": "932d595085a552f67520e0888fb02f254374b6b0164e69f7c9405860095c676f"
+            },
+            {
+              "path": "src/engine/frame_loop_native.hpp",
+              "sha256": "af759d873cd01e3bc2a7e6e4101067ef62eb4e6c1e13234ff7583a92e7e45aeb"
+            },
+            {
+              "path": "src/runtime/native_input.hpp",
+              "sha256": "dee226a84a5375d0582b4c2689d612efac793a17d55b2bd3e1f2fa3099aa4b75"
+            }
+          ]
+        },
+        {
+          "resolution": "In the separate reference world, FrameRateModeState owns frame multiplier/logic increment/pending ticks; GameFrameRendererState owns frequency/interval/multiplier/settings/previous counter/callback; GameFrameInputState owns soft flags/mask and borrows strided edge59 and GameLoop save phase. NativeGame owns these once. Invocation-local views mirror immediate stores but getters always consult authoritative reference owners. BindScope restores the prior thread-local binding on success, ReferenceStop and arbitrary exception unwinding. Borrowed owners must outlive a synchronous invocation.",
+          "evidence": [
+            {
+              "path": "src/guest/frame_control_reference.hpp",
+              "sha256": "51be52abf4d5d3d16ac63043af56f1ac46630cc7a4e16117aee1862b73d2f20b"
+            },
+            {
+              "path": "src/guest/frame_control_reference.cpp",
+              "sha256": "107e8aa6984959d7652f1660e2a9d208a6867c73f393504279d1853a1170f618"
+            },
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "sha256": "f9709b794475f8f85db465f923d52de12297afc8eb8f9697cb8c198bd79266e0"
+            },
+            {
+              "path": "src/engine/game_logic_support.hpp",
+              "sha256": "92e1c2f02a8636859e778bbb9e0053dd74a3951a505ae293b721e7dc8659f958"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Actual native consumers: Session constructor and mode/vsync overrides, LogoScene, MovieScene, Display frame mode, frame_loop counter/tick calculation; Application::pace calls the shared limiter at cadence63 with MacPerformanceCounter. Native unit host directly invokes the installed typed input callback; reference consumers include NativeGame startup/mode/frame composition and override_table frame-input/global-memory bindings. Register flags/incidental EAX belong only to override_table.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/logo_scene.cpp",
+              "sha256": "bc4c2ecdb1432a3bb7d3290d8a9a58b14988aeea2583b3889ec8b6be70cb8dbb"
+            },
+            {
+              "path": "src/runtime/movie_scene.cpp",
+              "sha256": "c076a0805e7bee29c04a84fd7de71638492817b2647da79d872ff253255726a8"
+            },
+            {
+              "path": "src/engine/frame_loop_native.cpp",
+              "sha256": "195c4a6c30602b9d7669b3deb66f8ea8571fdfbdd6993528b9558199a3cd36b6"
+            },
+            {
+              "path": "src/apps/sadx_native.mm",
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "src/platform/mac/mac_clock.cpp",
+              "sha256": "644ef561034ee133844dfb50c01d35a3bb9705a160533866c10ca5c1fb814994"
+            },
+            {
+              "path": "src/guest/override_table.cpp",
+              "sha256": "8f55db3d274697694ef5bb745c3d501492dd323633f627c1de3f47d2d975ed90"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "tests/unit/native_frame_control.cpp",
+              "sha256": "057f4f018318cb471f51bba9fa85b1938dd37f1b11819c1475a938277923875d"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Accepted historical exact frame oracle:2672 cases, callback identity/availability/store values and outer+nested boundaries, no mismatches; all listed current source dependencies match. Frozen2672-row TSV and metadata hash match the original isolated receipt, including both native and reference compiler-dependency lists. All four current scoped files and speedrun helper/native unit match the isolated receipt. This is qualified unchanged-source evidence, not execution by this reviewer.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/game_frame_control.json",
+              "sha256": "e61478b10947019cd16360095cf4ee6542c1406a252434e422469821d852d26e"
+            },
+            {
+              "path": "reference/frame-control-corpus.json",
+              "sha256": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952"
+            },
+            {
+              "path": "reference/frame-control-corpus.tsv",
+              "sha256": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-isolated.json",
+              "sha256": "66d3ae74afc2c27104150d40a2f55857f41c8f2736fefc9c5311ef20142a69b9"
+            }
+          ]
+        },
+        {
+          "resolution": "Limiter original DLL comparison1799 cases/0 mismatches, one capped fixture excluded; source divide-failure cases remain failures at the intended boundary. Frame2048-case seeded before/after holdout has identical case hash and0 mismatches. Historical three semantic faults caught120/472/182 mismatches; three native-host faults caught deadline accumulation/wrong cadence/skipped callback. Retained evidence predates this review; no mutants or holdouts rerun.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/speedrun_limiter.json",
+              "sha256": "91200066a179a91a8a69dcf9e0277f7640fe8dbc196ae38cce56e63235478cbe"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-holdout.json",
+              "sha256": "697231140bbc19da285fabddd84f27b1294b66695e3a7c1dfc7be57a71460ddc"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-before-holdout.json",
+              "sha256": "0f5227374e8bb0afc637658474842dbdf79bd791a7955edebc7ab10e71c90a9a"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-core-mutants.txt",
+              "sha256": "4306670fb5bd0209f313d68628b3d6601920fafe8a92e3b90ec255fd06918903"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-host-mutants.json",
+              "sha256": "b1c37965339e193c522e8542063f32bc87c63a163d4dd803300690b4d302b730"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-mutants.json",
+              "sha256": "da638fb0455c0d20c57453ce53145cf38a13b9f0b5fb5f46df9c0470bcac405b"
+            },
+            {
+              "path": "reference/production-integration-20261015/native-frame-control-mutants.json",
+              "sha256": "add313cbae1597cf4931fbc2947da72800ce7a7ac81bf83788e91988b2d6e9bd"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Only these exact file/module bodies are code-conforming; not whole frame-loop/input/engine/runtime or campaign closure.",
+        "No wall-clock pacing, physical keys/controller, stage63FPS, Windows scheduling or unbounded-spin proof. Limiter wait_hint is an optional native scheduling aid; negative/overflowing synthetic waits and excluded capped fixtures are not certified by ordinary completed fixtures.",
+        "Clock optionals represent OS query failure; LimiterResult.interval is genuinely absent on initialization/fault. Split-word fixture availability and numeric source diagnostics stay in the reference adapter. Unused input-callback EAX and FP exception flags are outside the frozen frame oracle.",
+        "Historical holdouts/mutant logs are bounded receipts, not fresh complete output captures tied to every transitive current dependency. This review fingerprints dependencies but does not manufacture historical transitive fingerprints.",
+        "Native source manifest/isolated build demonstrate a source-level closure; historical library inspection is not an OS access sandbox. Actual native/reference journeys and frozen Main99bdaf4 gate97018 are Root evidence; no new execution or gate qualification here."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/game_frame_control_native.cpp",
+          "sha256": "551c58594cf51f4686aa65b35f4a686fd58dc36b661110e285a1774c8dcd347a",
+          "line": 1,
+          "link": "src/engine/game_frame_control_native.cpp#L1"
+        }
+      ]
+    },
+    "src/game/game_mode.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Typed mode/value API and explicit unrecovered-call boundary are readable without guest semantics.",
+      "reviewed_source_sha256": "44230c85f069ad96fc7360b6b16536e1da4001b6cf9d35574f3af772bbaf4075",
+      "semantic_justification": "All72lines reviewed. MD_GameMode values map to SDK; Backdrop26 is explicitly NOTSA source case, other values run common tail. GameFlowState has plain values, optional game sequence is a native pointer, MenuResource only passes an opaque token to a still-uncomposed release. Exception names an uncomposed seam; it does not carry a fake success or fixture tuple.",
+      "resolved_owners": [
+        {
+          "resolution": "Session::flow_ is the native canonical flow value owner. Session bootstrap borrows flow_.movie_number; save/message/title/character-selection/input consumers access the same flow fields through Session/TitleScene views. FlowContext borrows GameFlowState and NativeServices synchronously, owns only a logical phase; the services pointer has no captured callable lifetime or deferred publication. SequenceSelection is a borrowed nullable game sequence, not fixture availability. MenuResource is an opaque zero/nonzero release token here; native free_message_resource remains an explicit failure, so this does not establish a native allocation/asset identity.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a"
+            },
+            {
+              "path": "src/runtime/native_message_frame.cpp",
+              "sha256": "e46cd9b32acf4611ceebc3e6477ee0d80fa395a33daa89362651e2c097869fa9"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "sha256": "b2192da9fc1a860b432d09030beaf120a810d5442a2188b0c3b8e44b87d82ad8"
+            },
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "sha256": "ddcf2b15144e3c1ea81bac848d70aab812b1398fbd8a55f4277885550792b9df"
+            },
+            {
+              "path": "src/game/game_mode.hpp",
+              "sha256": "44230c85f069ad96fc7360b6b16536e1da4001b6cf9d35574f3af772bbaf4075"
+            },
+            {
+              "path": "src/game/game_mode_internal.hpp",
+              "sha256": "9a86c138e051465311d23780210976ce19a23c9f2f4d1abf96c784ce22774d7d"
+            }
+          ]
+        },
+        {
+          "resolution": "Reference GameModeRuntime borrows NativeGame::mode_at_3abdc7c_, loop_ pause/save/request/message fields and mode_state_ remaining bytes/movie/menu flag/sequence-level fact. Reference views are invocation-local, not second persistent owners. Accessors revalidate reached facts and publish actual stores immediately. Call-site phase metadata, required returns, args, pending calls, cancellation/owner/nested failures remain in guest/game_mode_reference; it calls the same structured core with no fallback interpreter. BindScope restores nested binding; nested call counters are adapter-local.",
+          "evidence": [
+            {
+              "path": "src/guest/game_mode_reference.hpp",
+              "sha256": "a5e0f644ad592b50ce6d32eddc2d100997fe137e4145c379de0866adb14280f9"
+            },
+            {
+              "path": "src/guest/game_mode_reference.cpp",
+              "sha256": "db11678fd7fbdb2d0046a543c0954f1d6f45d98202e5f6a84710e43040d90029"
+            },
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "sha256": "f9709b794475f8f85db465f923d52de12297afc8eb8f9697cb8c198bd79266e0"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "advance_game_mode(state) is consumed by the reference adapter and native explicit-stop unit. advance_game_mode(state,services) is consumed by Session::advance; one shared advance/finish_frame owns all mode decisions. Native backend calls a finite typed NativeServices operation set; Session privately implements it and owns/binds real resources. No generic callee IDs/registers/optional fixture facts cross that interface. Reference NativeGame composes timing/reset/leaves or reports unported owners; it is not native gameplay. Test resource baselines also derive from NativeServices and are fixtures, not additional production owners.",
+          "evidence": [
+            {
+              "path": "src/game/game_mode.cpp",
+              "sha256": "8f830dabd7b2f3e594333799b47af001a6afebb7548ec2e95119b45c9dae5a43"
+            },
+            {
+              "path": "src/game/game_mode_native.cpp",
+              "sha256": "cdf3a649e194591c4ed3ec324cb6ae3ecac6c25c3ea83ec7c5a3e69a37e44dd5"
+            },
+            {
+              "path": "src/game/game_mode_services.hpp",
+              "sha256": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "tests/unit/native_game_mode.cpp",
+              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+            },
+            {
+              "path": "tests/fixtures/menu_texture_binding_baseline.hpp",
+              "sha256": "86a98c1980104b1246cc82ab246e483f91ea3ca7742fda8487dace9d449a5a93"
+            },
+            {
+              "path": "tests/fixtures/regular_resource_baseline.hpp",
+              "sha256": "c12360fe40fe210dd3c3ce0ecd75cb9b0641a873879fdc29c275bbba28d29886"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Accepted scoped core/reference judge: current game_mode.hpp/.cpp, reference.hpp/.cpp, probe and verifier hashes match the tracked24000-case report;252 call-site paths,0 mismatches. Complete48-word input/256-word output ABI compares source call order/sites/args, final observable globals and failure/completion. Scripted owner mutations exercise rereads; owner fixtures are not real subsystems. The internal header changed annotations since the report; its function declarations remain link-compatible, and this review independently reads the complete current declaration surface. Native services/backend stale hashes are explicitly not accepted as current behavioral qualification.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/game_mode.json",
+              "sha256": "8c487a818339dbdc067e6aeba59afef5bd536153244eae5810041a5c9033fca0"
+            },
+            {
+              "path": "tests/probes/native_game_mode_probe.cpp",
+              "sha256": "d1e1c146a4cc6b46819cac257b2dcba737cec41915f26e84887bc1252f0bb587"
+            },
+            {
+              "path": "tools/oracles/verify_original_game_mode.py",
+              "sha256": "a8df08e0f9d0b995213f45f94652de08077bf56b3e056adc7001faaef0b4fd69"
+            },
+            {
+              "path": "tests/unit/game_mode.cpp",
+              "sha256": "af0e3bda405195d9d9b8a2b3244facbcb91fea89605469f60d5b0d14e089859c"
+            }
+          ]
+        },
+        {
+          "resolution": "Historical semantic migration evidence: three valid faults caught1629/54/10 mismatches; fixed2048-case before/after holdout0 mismatches and identical395e8e... case identity. Initial semantic report core/native/internal hashes are outdated and do not independently certify current composition. Native unit only checks four explicit-stop/prefix paths with no NativeServices installation. These judges support unchanged structured decisions and declared stop semantics, not every current native forwarder.",
+          "evidence": [
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-evidence.json",
+              "sha256": "5df58948d6d92c38bd66842632225fab658b1edaca99bfeb6117261b2301a36d"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-mutants.txt",
+              "sha256": "ce25c121600efd7f3f4773332fa7883a8bde5c4aa244267de8dbee4f37cc6fb4"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-mutants.json",
+              "sha256": "38b1c88a1327d24ce2299bf08010ccbd1923f66689f8f4016957b7c94e3f4143"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-reference-mutants.json",
+              "sha256": "f2e2a4a2ed410d50a0f31c8ff89498fe39015b8534a3c102f8b6d8bfb13140e1"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-holdout.json",
+              "sha256": "e9bfc6ad64bd6ca92ca2d62e42b9c1dd0bec9e1201d976a10efd7b8818322e37"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-before-holdout.json",
+              "sha256": "fd2fd0009c84a4def4133b95f5882db53cf5800eec463baf182c75593738fe3a"
+            },
+            {
+              "path": "tests/unit/native_game_mode.cpp",
+              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Conformance here covers only the current structured core/value API or private declarations explicitly dispositioned; native binding/services qualification remains open and does not inherit the reference oracle.",
+        "No recovered Action/Adventure/Mission/summary/tutorial/staff-roll implementation or native story/CharacterSelect milestone is inferred. Named link-time throws are legitimate STUB seams; do not invent callbacks to turn them into successful execution.",
+        "Reference scripted owner failures/null sequence/missing return are intentional source-boundary comparisons, not successfully implemented subsystems. The256-word probe does not serialize nested_source_boundary or pending_call; unit checks pending-call presence but does not fully freeze the complete result tuple on all paths.",
+        "Mode receipts lack full historical transitive dependency identities and held-out output streams. Current direct dependencies are pinned below; stale header/native/service hashes remain stale. No FP equivalence claim: mode core is integer dispatch; downstream title/cleanup FP partials and inherited failures remain partial/failing.",
+        "Actual native source product/force-load and native/reference comparison journeys remain Root evidence, not executed here. Last tracked gate is1300815; the user reports full gate97018 active at frozen99bdaf4. No whole Session/runtime/campaign closure or changed product acceptance."
+      ],
+      "evidence": [
+        {
+          "path": "src/game/game_mode.hpp",
+          "sha256": "44230c85f069ad96fc7360b6b16536e1da4001b6cf9d35574f3af772bbaf4075",
+          "line": 1,
+          "link": "src/game/game_mode.hpp#L1"
+        }
+      ]
+    },
+    "src/game/game_mode.cpp": {
+      "disposition": "already_conforming",
+      "reason": "One structured mode dispatcher retains source decisions, same-frame fallthroughs and callback-sensitive stores.",
+      "reviewed_source_sha256": "8f830dabd7b2f3e594333799b47af001a6afebb7548ec2e95119b45c9dae5a43",
+      "semantic_justification": "All554lines reviewed, including every named helper and both entrypoints. Unsigned next-mode wrap and title guard preserve source bounds; callee short returns narrow at seams. Cleanup variants retain distinct store ordering, title destructor order4/0/5/7/6/8/9, message token cleared only after free, title-load rereads after callbacks, callback-mutated mode increments, sequence dereference at use, repeated player queries, same-frame logo/summary/tutorial/staff transitions and common alert/fade/counter tail. Phase changes are diagnostic observations, not alternate game logic.",
+      "resolved_owners": [
+        {
+          "resolution": "Session::flow_ is the native canonical flow value owner. Session bootstrap borrows flow_.movie_number; save/message/title/character-selection/input consumers access the same flow fields through Session/TitleScene views. FlowContext borrows GameFlowState and NativeServices synchronously, owns only a logical phase; the services pointer has no captured callable lifetime or deferred publication. SequenceSelection is a borrowed nullable game sequence, not fixture availability. MenuResource is an opaque zero/nonzero release token here; native free_message_resource remains an explicit failure, so this does not establish a native allocation/asset identity.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a"
+            },
+            {
+              "path": "src/runtime/native_message_frame.cpp",
+              "sha256": "e46cd9b32acf4611ceebc3e6477ee0d80fa395a33daa89362651e2c097869fa9"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "sha256": "b2192da9fc1a860b432d09030beaf120a810d5442a2188b0c3b8e44b87d82ad8"
+            },
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "sha256": "ddcf2b15144e3c1ea81bac848d70aab812b1398fbd8a55f4277885550792b9df"
+            },
+            {
+              "path": "src/game/game_mode.hpp",
+              "sha256": "44230c85f069ad96fc7360b6b16536e1da4001b6cf9d35574f3af772bbaf4075"
+            },
+            {
+              "path": "src/game/game_mode_internal.hpp",
+              "sha256": "9a86c138e051465311d23780210976ce19a23c9f2f4d1abf96c784ce22774d7d"
+            }
+          ]
+        },
+        {
+          "resolution": "Reference GameModeRuntime borrows NativeGame::mode_at_3abdc7c_, loop_ pause/save/request/message fields and mode_state_ remaining bytes/movie/menu flag/sequence-level fact. Reference views are invocation-local, not second persistent owners. Accessors revalidate reached facts and publish actual stores immediately. Call-site phase metadata, required returns, args, pending calls, cancellation/owner/nested failures remain in guest/game_mode_reference; it calls the same structured core with no fallback interpreter. BindScope restores nested binding; nested call counters are adapter-local.",
+          "evidence": [
+            {
+              "path": "src/guest/game_mode_reference.hpp",
+              "sha256": "a5e0f644ad592b50ce6d32eddc2d100997fe137e4145c379de0866adb14280f9"
+            },
+            {
+              "path": "src/guest/game_mode_reference.cpp",
+              "sha256": "db11678fd7fbdb2d0046a543c0954f1d6f45d98202e5f6a84710e43040d90029"
+            },
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "sha256": "f9709b794475f8f85db465f923d52de12297afc8eb8f9697cb8c198bd79266e0"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "advance_game_mode(state) is consumed by the reference adapter and native explicit-stop unit. advance_game_mode(state,services) is consumed by Session::advance; one shared advance/finish_frame owns all mode decisions. Native backend calls a finite typed NativeServices operation set; Session privately implements it and owns/binds real resources. No generic callee IDs/registers/optional fixture facts cross that interface. Reference NativeGame composes timing/reset/leaves or reports unported owners; it is not native gameplay. Test resource baselines also derive from NativeServices and are fixtures, not additional production owners.",
+          "evidence": [
+            {
+              "path": "src/game/game_mode.cpp",
+              "sha256": "8f830dabd7b2f3e594333799b47af001a6afebb7548ec2e95119b45c9dae5a43"
+            },
+            {
+              "path": "src/game/game_mode_native.cpp",
+              "sha256": "cdf3a649e194591c4ed3ec324cb6ae3ecac6c25c3ea83ec7c5a3e69a37e44dd5"
+            },
+            {
+              "path": "src/game/game_mode_services.hpp",
+              "sha256": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "tests/unit/native_game_mode.cpp",
+              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+            },
+            {
+              "path": "tests/fixtures/menu_texture_binding_baseline.hpp",
+              "sha256": "86a98c1980104b1246cc82ab246e483f91ea3ca7742fda8487dace9d449a5a93"
+            },
+            {
+              "path": "tests/fixtures/regular_resource_baseline.hpp",
+              "sha256": "c12360fe40fe210dd3c3ce0ecd75cb9b0641a873879fdc29c275bbba28d29886"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Accepted scoped core/reference judge: current game_mode.hpp/.cpp, reference.hpp/.cpp, probe and verifier hashes match the tracked24000-case report;252 call-site paths,0 mismatches. Complete48-word input/256-word output ABI compares source call order/sites/args, final observable globals and failure/completion. Scripted owner mutations exercise rereads; owner fixtures are not real subsystems. The internal header changed annotations since the report; its function declarations remain link-compatible, and this review independently reads the complete current declaration surface. Native services/backend stale hashes are explicitly not accepted as current behavioral qualification.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/game_mode.json",
+              "sha256": "8c487a818339dbdc067e6aeba59afef5bd536153244eae5810041a5c9033fca0"
+            },
+            {
+              "path": "tests/probes/native_game_mode_probe.cpp",
+              "sha256": "d1e1c146a4cc6b46819cac257b2dcba737cec41915f26e84887bc1252f0bb587"
+            },
+            {
+              "path": "tools/oracles/verify_original_game_mode.py",
+              "sha256": "a8df08e0f9d0b995213f45f94652de08077bf56b3e056adc7001faaef0b4fd69"
+            },
+            {
+              "path": "tests/unit/game_mode.cpp",
+              "sha256": "af0e3bda405195d9d9b8a2b3244facbcb91fea89605469f60d5b0d14e089859c"
+            }
+          ]
+        },
+        {
+          "resolution": "Historical semantic migration evidence: three valid faults caught1629/54/10 mismatches; fixed2048-case before/after holdout0 mismatches and identical395e8e... case identity. Initial semantic report core/native/internal hashes are outdated and do not independently certify current composition. Native unit only checks four explicit-stop/prefix paths with no NativeServices installation. These judges support unchanged structured decisions and declared stop semantics, not every current native forwarder.",
+          "evidence": [
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-evidence.json",
+              "sha256": "5df58948d6d92c38bd66842632225fab658b1edaca99bfeb6117261b2301a36d"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-mutants.txt",
+              "sha256": "ce25c121600efd7f3f4773332fa7883a8bde5c4aa244267de8dbee4f37cc6fb4"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-mutants.json",
+              "sha256": "38b1c88a1327d24ce2299bf08010ccbd1923f66689f8f4016957b7c94e3f4143"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-reference-mutants.json",
+              "sha256": "f2e2a4a2ed410d50a0f31c8ff89498fe39015b8534a3c102f8b6d8bfb13140e1"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-holdout.json",
+              "sha256": "e9bfc6ad64bd6ca92ca2d62e42b9c1dd0bec9e1201d976a10efd7b8818322e37"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-before-holdout.json",
+              "sha256": "fd2fd0009c84a4def4133b95f5882db53cf5800eec463baf182c75593738fe3a"
+            },
+            {
+              "path": "tests/unit/native_game_mode.cpp",
+              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Conformance here covers only the current structured core/value API or private declarations explicitly dispositioned; native binding/services qualification remains open and does not inherit the reference oracle.",
+        "No recovered Action/Adventure/Mission/summary/tutorial/staff-roll implementation or native story/CharacterSelect milestone is inferred. Named link-time throws are legitimate STUB seams; do not invent callbacks to turn them into successful execution.",
+        "Reference scripted owner failures/null sequence/missing return are intentional source-boundary comparisons, not successfully implemented subsystems. The256-word probe does not serialize nested_source_boundary or pending_call; unit checks pending-call presence but does not fully freeze the complete result tuple on all paths.",
+        "Mode receipts lack full historical transitive dependency identities and held-out output streams. Current direct dependencies are pinned below; stale header/native/service hashes remain stale. No FP equivalence claim: mode core is integer dispatch; downstream title/cleanup FP partials and inherited failures remain partial/failing.",
+        "Actual native source product/force-load and native/reference comparison journeys remain Root evidence, not executed here. Last tracked gate is1300815; the user reports full gate97018 active at frozen99bdaf4. No whole Session/runtime/campaign closure or changed product acceptance."
+      ],
+      "evidence": [
+        {
+          "path": "src/game/game_mode.cpp",
+          "sha256": "8f830dabd7b2f3e594333799b47af001a6afebb7548ec2e95119b45c9dae5a43",
+          "line": 1,
+          "link": "src/game/game_mode.cpp#L1"
+        }
+      ]
+    },
+    "src/game/game_mode_internal.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Private state/callee declarations use logical phases and named link-time seams, not address dispatch.",
+      "reviewed_source_sha256": "9a86c138e051465311d23780210976ce19a23c9f2f4d1abf96c784ce22774d7d",
+      "semantic_justification": "All252lines reviewed. FlowPhase/FlowModule/Rgba encode semantic operations; FlowContext borrows one state/native interface per invocation. Accessors support actual immediate writes and lazy adapter reads without availability flags. STUB declarations identify unrecovered source entries; composition comments name existing recovered owners and preserve a single FUNCTION declaration. Current post-oracle changes are annotation reclassifications, not new game decisions. Several composition names still throw in native binding; declarations alone never certify that wiring.",
+      "resolved_owners": [
+        {
+          "resolution": "Session::flow_ is the native canonical flow value owner. Session bootstrap borrows flow_.movie_number; save/message/title/character-selection/input consumers access the same flow fields through Session/TitleScene views. FlowContext borrows GameFlowState and NativeServices synchronously, owns only a logical phase; the services pointer has no captured callable lifetime or deferred publication. SequenceSelection is a borrowed nullable game sequence, not fixture availability. MenuResource is an opaque zero/nonzero release token here; native free_message_resource remains an explicit failure, so this does not establish a native allocation/asset identity.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a"
+            },
+            {
+              "path": "src/runtime/native_message_frame.cpp",
+              "sha256": "e46cd9b32acf4611ceebc3e6477ee0d80fa395a33daa89362651e2c097869fa9"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "sha256": "b2192da9fc1a860b432d09030beaf120a810d5442a2188b0c3b8e44b87d82ad8"
+            },
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "sha256": "ddcf2b15144e3c1ea81bac848d70aab812b1398fbd8a55f4277885550792b9df"
+            },
+            {
+              "path": "src/game/game_mode.hpp",
+              "sha256": "44230c85f069ad96fc7360b6b16536e1da4001b6cf9d35574f3af772bbaf4075"
+            },
+            {
+              "path": "src/game/game_mode_internal.hpp",
+              "sha256": "9a86c138e051465311d23780210976ce19a23c9f2f4d1abf96c784ce22774d7d"
+            }
+          ]
+        },
+        {
+          "resolution": "Reference GameModeRuntime borrows NativeGame::mode_at_3abdc7c_, loop_ pause/save/request/message fields and mode_state_ remaining bytes/movie/menu flag/sequence-level fact. Reference views are invocation-local, not second persistent owners. Accessors revalidate reached facts and publish actual stores immediately. Call-site phase metadata, required returns, args, pending calls, cancellation/owner/nested failures remain in guest/game_mode_reference; it calls the same structured core with no fallback interpreter. BindScope restores nested binding; nested call counters are adapter-local.",
+          "evidence": [
+            {
+              "path": "src/guest/game_mode_reference.hpp",
+              "sha256": "a5e0f644ad592b50ce6d32eddc2d100997fe137e4145c379de0866adb14280f9"
+            },
+            {
+              "path": "src/guest/game_mode_reference.cpp",
+              "sha256": "db11678fd7fbdb2d0046a543c0954f1d6f45d98202e5f6a84710e43040d90029"
+            },
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "sha256": "f9709b794475f8f85db465f923d52de12297afc8eb8f9697cb8c198bd79266e0"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "advance_game_mode(state) is consumed by the reference adapter and native explicit-stop unit. advance_game_mode(state,services) is consumed by Session::advance; one shared advance/finish_frame owns all mode decisions. Native backend calls a finite typed NativeServices operation set; Session privately implements it and owns/binds real resources. No generic callee IDs/registers/optional fixture facts cross that interface. Reference NativeGame composes timing/reset/leaves or reports unported owners; it is not native gameplay. Test resource baselines also derive from NativeServices and are fixtures, not additional production owners.",
+          "evidence": [
+            {
+              "path": "src/game/game_mode.cpp",
+              "sha256": "8f830dabd7b2f3e594333799b47af001a6afebb7548ec2e95119b45c9dae5a43"
+            },
+            {
+              "path": "src/game/game_mode_native.cpp",
+              "sha256": "cdf3a649e194591c4ed3ec324cb6ae3ecac6c25c3ea83ec7c5a3e69a37e44dd5"
+            },
+            {
+              "path": "src/game/game_mode_services.hpp",
+              "sha256": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "tests/unit/native_game_mode.cpp",
+              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+            },
+            {
+              "path": "tests/fixtures/menu_texture_binding_baseline.hpp",
+              "sha256": "86a98c1980104b1246cc82ab246e483f91ea3ca7742fda8487dace9d449a5a93"
+            },
+            {
+              "path": "tests/fixtures/regular_resource_baseline.hpp",
+              "sha256": "c12360fe40fe210dd3c3ce0ecd75cb9b0641a873879fdc29c275bbba28d29886"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Accepted scoped core/reference judge: current game_mode.hpp/.cpp, reference.hpp/.cpp, probe and verifier hashes match the tracked24000-case report;252 call-site paths,0 mismatches. Complete48-word input/256-word output ABI compares source call order/sites/args, final observable globals and failure/completion. Scripted owner mutations exercise rereads; owner fixtures are not real subsystems. The internal header changed annotations since the report; its function declarations remain link-compatible, and this review independently reads the complete current declaration surface. Native services/backend stale hashes are explicitly not accepted as current behavioral qualification.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/game_mode.json",
+              "sha256": "8c487a818339dbdc067e6aeba59afef5bd536153244eae5810041a5c9033fca0"
+            },
+            {
+              "path": "tests/probes/native_game_mode_probe.cpp",
+              "sha256": "d1e1c146a4cc6b46819cac257b2dcba737cec41915f26e84887bc1252f0bb587"
+            },
+            {
+              "path": "tools/oracles/verify_original_game_mode.py",
+              "sha256": "a8df08e0f9d0b995213f45f94652de08077bf56b3e056adc7001faaef0b4fd69"
+            },
+            {
+              "path": "tests/unit/game_mode.cpp",
+              "sha256": "af0e3bda405195d9d9b8a2b3244facbcb91fea89605469f60d5b0d14e089859c"
+            }
+          ]
+        },
+        {
+          "resolution": "Historical semantic migration evidence: three valid faults caught1629/54/10 mismatches; fixed2048-case before/after holdout0 mismatches and identical395e8e... case identity. Initial semantic report core/native/internal hashes are outdated and do not independently certify current composition. Native unit only checks four explicit-stop/prefix paths with no NativeServices installation. These judges support unchanged structured decisions and declared stop semantics, not every current native forwarder.",
+          "evidence": [
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-evidence.json",
+              "sha256": "5df58948d6d92c38bd66842632225fab658b1edaca99bfeb6117261b2301a36d"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-mutants.txt",
+              "sha256": "ce25c121600efd7f3f4773332fa7883a8bde5c4aa244267de8dbee4f37cc6fb4"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-mutants.json",
+              "sha256": "38b1c88a1327d24ce2299bf08010ccbd1923f66689f8f4016957b7c94e3f4143"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-reference-mutants.json",
+              "sha256": "f2e2a4a2ed410d50a0f31c8ff89498fe39015b8534a3c102f8b6d8bfb13140e1"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-holdout.json",
+              "sha256": "e9bfc6ad64bd6ca92ca2d62e42b9c1dd0bec9e1201d976a10efd7b8818322e37"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-before-holdout.json",
+              "sha256": "fd2fd0009c84a4def4133b95f5882db53cf5800eec463baf182c75593738fe3a"
+            },
+            {
+              "path": "tests/unit/native_game_mode.cpp",
+              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Conformance here covers only the current structured core/value API or private declarations explicitly dispositioned; native binding/services qualification remains open and does not inherit the reference oracle.",
+        "No recovered Action/Adventure/Mission/summary/tutorial/staff-roll implementation or native story/CharacterSelect milestone is inferred. Named link-time throws are legitimate STUB seams; do not invent callbacks to turn them into successful execution.",
+        "Reference scripted owner failures/null sequence/missing return are intentional source-boundary comparisons, not successfully implemented subsystems. The256-word probe does not serialize nested_source_boundary or pending_call; unit checks pending-call presence but does not fully freeze the complete result tuple on all paths.",
+        "Mode receipts lack full historical transitive dependency identities and held-out output streams. Current direct dependencies are pinned below; stale header/native/service hashes remain stale. No FP equivalence claim: mode core is integer dispatch; downstream title/cleanup FP partials and inherited failures remain partial/failing.",
+        "Actual native source product/force-load and native/reference comparison journeys remain Root evidence, not executed here. Last tracked gate is1300815; the user reports full gate97018 active at frozen99bdaf4. No whole Session/runtime/campaign closure or changed product acceptance."
+      ],
+      "evidence": [
+        {
+          "path": "src/game/game_mode_internal.hpp",
+          "sha256": "9a86c138e051465311d23780210976ce19a23c9f2f4d1abf96c784ce22774d7d",
+          "line": 1,
+          "link": "src/game/game_mode_internal.hpp#L1"
+        }
+      ]
+    },
+    "src/game/game_mode_native.cpp": {
+      "disposition": "open_review",
+      "reason": "Readable native field access and finite forwarding are established, but complete current binding qualification is unresolved.",
+      "reviewed_source_sha256": "cdf3a649e194591c4ed3ec324cb6ae3ecac6c25c3ea83ec7c5a3e69a37e44dd5",
+      "semantic_justification": "All275lines reviewed. State writes are immediate, null sequence throws at actual use,27 forwarders require nonnull flow.native, remaining uncomposed named functions throw. request_file_module alone is a claimed recovered diagnostic no-op. The legacy leaf judge supports source no-op behavior, but neither mode oracle nor old native unit executes this current body. Stale native receipt hashes, no direct current all-forwarder/prefix result receipt, and incomplete diagnostic no-op raw anchors keep whole-module qualification open; no speculative rewrite is requested.",
+      "resolved_owners": [
+        {
+          "resolution": "Session::flow_ is the native canonical flow value owner. Session bootstrap borrows flow_.movie_number; save/message/title/character-selection/input consumers access the same flow fields through Session/TitleScene views. FlowContext borrows GameFlowState and NativeServices synchronously, owns only a logical phase; the services pointer has no captured callable lifetime or deferred publication. SequenceSelection is a borrowed nullable game sequence, not fixture availability. MenuResource is an opaque zero/nonzero release token here; native free_message_resource remains an explicit failure, so this does not establish a native allocation/asset identity.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a"
+            },
+            {
+              "path": "src/runtime/native_message_frame.cpp",
+              "sha256": "e46cd9b32acf4611ceebc3e6477ee0d80fa395a33daa89362651e2c097869fa9"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "sha256": "b2192da9fc1a860b432d09030beaf120a810d5442a2188b0c3b8e44b87d82ad8"
+            },
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "sha256": "ddcf2b15144e3c1ea81bac848d70aab812b1398fbd8a55f4277885550792b9df"
+            },
+            {
+              "path": "src/game/game_mode.hpp",
+              "sha256": "44230c85f069ad96fc7360b6b16536e1da4001b6cf9d35574f3af772bbaf4075"
+            },
+            {
+              "path": "src/game/game_mode_internal.hpp",
+              "sha256": "9a86c138e051465311d23780210976ce19a23c9f2f4d1abf96c784ce22774d7d"
+            }
+          ]
+        },
+        {
+          "resolution": "Reference GameModeRuntime borrows NativeGame::mode_at_3abdc7c_, loop_ pause/save/request/message fields and mode_state_ remaining bytes/movie/menu flag/sequence-level fact. Reference views are invocation-local, not second persistent owners. Accessors revalidate reached facts and publish actual stores immediately. Call-site phase metadata, required returns, args, pending calls, cancellation/owner/nested failures remain in guest/game_mode_reference; it calls the same structured core with no fallback interpreter. BindScope restores nested binding; nested call counters are adapter-local.",
+          "evidence": [
+            {
+              "path": "src/guest/game_mode_reference.hpp",
+              "sha256": "a5e0f644ad592b50ce6d32eddc2d100997fe137e4145c379de0866adb14280f9"
+            },
+            {
+              "path": "src/guest/game_mode_reference.cpp",
+              "sha256": "db11678fd7fbdb2d0046a543c0954f1d6f45d98202e5f6a84710e43040d90029"
+            },
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "sha256": "f9709b794475f8f85db465f923d52de12297afc8eb8f9697cb8c198bd79266e0"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "advance_game_mode(state) is consumed by the reference adapter and native explicit-stop unit. advance_game_mode(state,services) is consumed by Session::advance; one shared advance/finish_frame owns all mode decisions. Native backend calls a finite typed NativeServices operation set; Session privately implements it and owns/binds real resources. No generic callee IDs/registers/optional fixture facts cross that interface. Reference NativeGame composes timing/reset/leaves or reports unported owners; it is not native gameplay. Test resource baselines also derive from NativeServices and are fixtures, not additional production owners.",
+          "evidence": [
+            {
+              "path": "src/game/game_mode.cpp",
+              "sha256": "8f830dabd7b2f3e594333799b47af001a6afebb7548ec2e95119b45c9dae5a43"
+            },
+            {
+              "path": "src/game/game_mode_native.cpp",
+              "sha256": "cdf3a649e194591c4ed3ec324cb6ae3ecac6c25c3ea83ec7c5a3e69a37e44dd5"
+            },
+            {
+              "path": "src/game/game_mode_services.hpp",
+              "sha256": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "tests/unit/native_game_mode.cpp",
+              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+            },
+            {
+              "path": "tests/fixtures/menu_texture_binding_baseline.hpp",
+              "sha256": "86a98c1980104b1246cc82ab246e483f91ea3ca7742fda8487dace9d449a5a93"
+            },
+            {
+              "path": "tests/fixtures/regular_resource_baseline.hpp",
+              "sha256": "c12360fe40fe210dd3c3ce0ecd75cb9b0641a873879fdc29c275bbba28d29886"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Accepted scoped core/reference judge: current game_mode.hpp/.cpp, reference.hpp/.cpp, probe and verifier hashes match the tracked24000-case report;252 call-site paths,0 mismatches. Complete48-word input/256-word output ABI compares source call order/sites/args, final observable globals and failure/completion. Scripted owner mutations exercise rereads; owner fixtures are not real subsystems. The internal header changed annotations since the report; its function declarations remain link-compatible, and this review independently reads the complete current declaration surface. Native services/backend stale hashes are explicitly not accepted as current behavioral qualification.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/game_mode.json",
+              "sha256": "8c487a818339dbdc067e6aeba59afef5bd536153244eae5810041a5c9033fca0"
+            },
+            {
+              "path": "tests/probes/native_game_mode_probe.cpp",
+              "sha256": "d1e1c146a4cc6b46819cac257b2dcba737cec41915f26e84887bc1252f0bb587"
+            },
+            {
+              "path": "tools/oracles/verify_original_game_mode.py",
+              "sha256": "a8df08e0f9d0b995213f45f94652de08077bf56b3e056adc7001faaef0b4fd69"
+            },
+            {
+              "path": "tests/unit/game_mode.cpp",
+              "sha256": "af0e3bda405195d9d9b8a2b3244facbcb91fea89605469f60d5b0d14e089859c"
+            }
+          ]
+        },
+        {
+          "resolution": "Historical semantic migration evidence: three valid faults caught1629/54/10 mismatches; fixed2048-case before/after holdout0 mismatches and identical395e8e... case identity. Initial semantic report core/native/internal hashes are outdated and do not independently certify current composition. Native unit only checks four explicit-stop/prefix paths with no NativeServices installation. These judges support unchanged structured decisions and declared stop semantics, not every current native forwarder.",
+          "evidence": [
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-evidence.json",
+              "sha256": "5df58948d6d92c38bd66842632225fab658b1edaca99bfeb6117261b2301a36d"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-mutants.txt",
+              "sha256": "ce25c121600efd7f3f4773332fa7883a8bde5c4aa244267de8dbee4f37cc6fb4"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-mutants.json",
+              "sha256": "38b1c88a1327d24ce2299bf08010ccbd1923f66689f8f4016957b7c94e3f4143"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-reference-mutants.json",
+              "sha256": "f2e2a4a2ed410d50a0f31c8ff89498fe39015b8534a3c102f8b6d8bfb13140e1"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-holdout.json",
+              "sha256": "e9bfc6ad64bd6ca92ca2d62e42b9c1dd0bec9e1201d976a10efd7b8818322e37"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-before-holdout.json",
+              "sha256": "fd2fd0009c84a4def4133b95f5882db53cf5800eec463baf182c75593738fe3a"
+            },
+            {
+              "path": "tests/unit/native_game_mode.cpp",
+              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Conformance here covers only the current structured core/value API or private declarations explicitly dispositioned; native binding/services qualification remains open and does not inherit the reference oracle.",
+        "No recovered Action/Adventure/Mission/summary/tutorial/staff-roll implementation or native story/CharacterSelect milestone is inferred. Named link-time throws are legitimate STUB seams; do not invent callbacks to turn them into successful execution.",
+        "Reference scripted owner failures/null sequence/missing return are intentional source-boundary comparisons, not successfully implemented subsystems. The256-word probe does not serialize nested_source_boundary or pending_call; unit checks pending-call presence but does not fully freeze the complete result tuple on all paths.",
+        "Mode receipts lack full historical transitive dependency identities and held-out output streams. Current direct dependencies are pinned below; stale header/native/service hashes remain stale. No FP equivalence claim: mode core is integer dispatch; downstream title/cleanup FP partials and inherited failures remain partial/failing.",
+        "Actual native source product/force-load and native/reference comparison journeys remain Root evidence, not executed here. Last tracked gate is1300815; the user reports full gate97018 active at frozen99bdaf4. No whole Session/runtime/campaign closure or changed product acceptance."
+      ],
+      "evidence": [
+        {
+          "path": "src/game/game_mode_native.cpp",
+          "sha256": "cdf3a649e194591c4ed3ec324cb6ae3ecac6c25c3ea83ec7c5a3e69a37e44dd5",
+          "line": 1,
+          "link": "src/game/game_mode_native.cpp#L1"
+        }
+      ],
+      "qualification_gaps": [
+        "Do not rewrite the typed composition or promote its old oracle metadata. Root should attach current backend/service/Session dependency identities to existing actual native closure/journey evidence and characterize forwarder/prefix failure behavior where not covered. Preserve original missing owner/return/nested/cancellation tuples separately from successful callees."
+      ]
+    },
+    "src/game/game_mode_services.hpp": {
+      "disposition": "open_review",
+      "reason": "Finite typed composition interface has a real Session consumer; current whole-interface acceptance remains open.",
+      "reviewed_source_sha256": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36",
+      "semantic_justification": "All40lines reviewed.27 pure virtual game operations plus virtual destructor and an overload, no state owner, address key, generic invoke, std::function registry or fixture-availability value. Session privately implements all operations; context borrows it only during advance. Its cross-system breadth alone is not demonstrated nonconformance. Twelve added cleanup/title operations postdate the tracked mode report; current source build/journey evidence must be tied to current transitive binding dependencies before whole-interface approval.",
+      "resolved_owners": [
+        {
+          "resolution": "Session::flow_ is the native canonical flow value owner. Session bootstrap borrows flow_.movie_number; save/message/title/character-selection/input consumers access the same flow fields through Session/TitleScene views. FlowContext borrows GameFlowState and NativeServices synchronously, owns only a logical phase; the services pointer has no captured callable lifetime or deferred publication. SequenceSelection is a borrowed nullable game sequence, not fixture availability. MenuResource is an opaque zero/nonzero release token here; native free_message_resource remains an explicit failure, so this does not establish a native allocation/asset identity.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a"
+            },
+            {
+              "path": "src/runtime/native_message_frame.cpp",
+              "sha256": "e46cd9b32acf4611ceebc3e6477ee0d80fa395a33daa89362651e2c097869fa9"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "sha256": "b2192da9fc1a860b432d09030beaf120a810d5442a2188b0c3b8e44b87d82ad8"
+            },
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "sha256": "ddcf2b15144e3c1ea81bac848d70aab812b1398fbd8a55f4277885550792b9df"
+            },
+            {
+              "path": "src/game/game_mode.hpp",
+              "sha256": "44230c85f069ad96fc7360b6b16536e1da4001b6cf9d35574f3af772bbaf4075"
+            },
+            {
+              "path": "src/game/game_mode_internal.hpp",
+              "sha256": "9a86c138e051465311d23780210976ce19a23c9f2f4d1abf96c784ce22774d7d"
+            }
+          ]
+        },
+        {
+          "resolution": "Reference GameModeRuntime borrows NativeGame::mode_at_3abdc7c_, loop_ pause/save/request/message fields and mode_state_ remaining bytes/movie/menu flag/sequence-level fact. Reference views are invocation-local, not second persistent owners. Accessors revalidate reached facts and publish actual stores immediately. Call-site phase metadata, required returns, args, pending calls, cancellation/owner/nested failures remain in guest/game_mode_reference; it calls the same structured core with no fallback interpreter. BindScope restores nested binding; nested call counters are adapter-local.",
+          "evidence": [
+            {
+              "path": "src/guest/game_mode_reference.hpp",
+              "sha256": "a5e0f644ad592b50ce6d32eddc2d100997fe137e4145c379de0866adb14280f9"
+            },
+            {
+              "path": "src/guest/game_mode_reference.cpp",
+              "sha256": "db11678fd7fbdb2d0046a543c0954f1d6f45d98202e5f6a84710e43040d90029"
+            },
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "sha256": "f9709b794475f8f85db465f923d52de12297afc8eb8f9697cb8c198bd79266e0"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "advance_game_mode(state) is consumed by the reference adapter and native explicit-stop unit. advance_game_mode(state,services) is consumed by Session::advance; one shared advance/finish_frame owns all mode decisions. Native backend calls a finite typed NativeServices operation set; Session privately implements it and owns/binds real resources. No generic callee IDs/registers/optional fixture facts cross that interface. Reference NativeGame composes timing/reset/leaves or reports unported owners; it is not native gameplay. Test resource baselines also derive from NativeServices and are fixtures, not additional production owners.",
+          "evidence": [
+            {
+              "path": "src/game/game_mode.cpp",
+              "sha256": "8f830dabd7b2f3e594333799b47af001a6afebb7548ec2e95119b45c9dae5a43"
+            },
+            {
+              "path": "src/game/game_mode_native.cpp",
+              "sha256": "cdf3a649e194591c4ed3ec324cb6ae3ecac6c25c3ea83ec7c5a3e69a37e44dd5"
+            },
+            {
+              "path": "src/game/game_mode_services.hpp",
+              "sha256": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "tests/unit/native_game_mode.cpp",
+              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+            },
+            {
+              "path": "tests/fixtures/menu_texture_binding_baseline.hpp",
+              "sha256": "86a98c1980104b1246cc82ab246e483f91ea3ca7742fda8487dace9d449a5a93"
+            },
+            {
+              "path": "tests/fixtures/regular_resource_baseline.hpp",
+              "sha256": "c12360fe40fe210dd3c3ce0ecd75cb9b0641a873879fdc29c275bbba28d29886"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Accepted scoped core/reference judge: current game_mode.hpp/.cpp, reference.hpp/.cpp, probe and verifier hashes match the tracked24000-case report;252 call-site paths,0 mismatches. Complete48-word input/256-word output ABI compares source call order/sites/args, final observable globals and failure/completion. Scripted owner mutations exercise rereads; owner fixtures are not real subsystems. The internal header changed annotations since the report; its function declarations remain link-compatible, and this review independently reads the complete current declaration surface. Native services/backend stale hashes are explicitly not accepted as current behavioral qualification.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/game_mode.json",
+              "sha256": "8c487a818339dbdc067e6aeba59afef5bd536153244eae5810041a5c9033fca0"
+            },
+            {
+              "path": "tests/probes/native_game_mode_probe.cpp",
+              "sha256": "d1e1c146a4cc6b46819cac257b2dcba737cec41915f26e84887bc1252f0bb587"
+            },
+            {
+              "path": "tools/oracles/verify_original_game_mode.py",
+              "sha256": "a8df08e0f9d0b995213f45f94652de08077bf56b3e056adc7001faaef0b4fd69"
+            },
+            {
+              "path": "tests/unit/game_mode.cpp",
+              "sha256": "af0e3bda405195d9d9b8a2b3244facbcb91fea89605469f60d5b0d14e089859c"
+            }
+          ]
+        },
+        {
+          "resolution": "Historical semantic migration evidence: three valid faults caught1629/54/10 mismatches; fixed2048-case before/after holdout0 mismatches and identical395e8e... case identity. Initial semantic report core/native/internal hashes are outdated and do not independently certify current composition. Native unit only checks four explicit-stop/prefix paths with no NativeServices installation. These judges support unchanged structured decisions and declared stop semantics, not every current native forwarder.",
+          "evidence": [
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-evidence.json",
+              "sha256": "5df58948d6d92c38bd66842632225fab658b1edaca99bfeb6117261b2301a36d"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-mutants.txt",
+              "sha256": "ce25c121600efd7f3f4773332fa7883a8bde5c4aa244267de8dbee4f37cc6fb4"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-mutants.json",
+              "sha256": "38b1c88a1327d24ce2299bf08010ccbd1923f66689f8f4016957b7c94e3f4143"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-reference-mutants.json",
+              "sha256": "f2e2a4a2ed410d50a0f31c8ff89498fe39015b8534a3c102f8b6d8bfb13140e1"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-holdout.json",
+              "sha256": "e9bfc6ad64bd6ca92ca2d62e42b9c1dd0bec9e1201d976a10efd7b8818322e37"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-before-holdout.json",
+              "sha256": "fd2fd0009c84a4def4133b95f5882db53cf5800eec463baf182c75593738fe3a"
+            },
+            {
+              "path": "tests/unit/native_game_mode.cpp",
+              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Conformance here covers only the current structured core/value API or private declarations explicitly dispositioned; native binding/services qualification remains open and does not inherit the reference oracle.",
+        "No recovered Action/Adventure/Mission/summary/tutorial/staff-roll implementation or native story/CharacterSelect milestone is inferred. Named link-time throws are legitimate STUB seams; do not invent callbacks to turn them into successful execution.",
+        "Reference scripted owner failures/null sequence/missing return are intentional source-boundary comparisons, not successfully implemented subsystems. The256-word probe does not serialize nested_source_boundary or pending_call; unit checks pending-call presence but does not fully freeze the complete result tuple on all paths.",
+        "Mode receipts lack full historical transitive dependency identities and held-out output streams. Current direct dependencies are pinned below; stale header/native/service hashes remain stale. No FP equivalence claim: mode core is integer dispatch; downstream title/cleanup FP partials and inherited failures remain partial/failing.",
+        "Actual native source product/force-load and native/reference comparison journeys remain Root evidence, not executed here. Last tracked gate is1300815; the user reports full gate97018 active at frozen99bdaf4. No whole Session/runtime/campaign closure or changed product acceptance."
+      ],
+      "evidence": [
+        {
+          "path": "src/game/game_mode_services.hpp",
+          "sha256": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36",
+          "line": 1,
+          "link": "src/game/game_mode_services.hpp#L1"
+        }
+      ],
+      "qualification_gaps": [
+        "Do not rewrite the typed composition or promote its old oracle metadata. Root should attach current backend/service/Session dependency identities to existing actual native closure/journey evidence and characterize forwarder/prefix failure behavior where not covered. Preserve original missing owner/return/nested/cancellation tuples separately from successful callees."
+      ]
     }
   },
   "external_reference_sources": [
@@ -24600,6 +26194,1276 @@
           "line": 1,
           "sha256": "aa94a5e19b17ebf362c49c741423b9d87a6852dc50cd448baaa3749487103ca5"
         }
+      ]
+    },
+    "src/engine/game_frame_control": {
+      "disposition": "already_conforming",
+      "reason": "Shared semantic frame ratios, reset decisions and limiter preserve observable read/store/callback order.",
+      "semantic_justification": "All94lines reviewed. Frequency getter precedes multiplier store; unsigned low64 multiplication is bit-reinterpreted before signed /60. Mode publishes render ratio, logic ratio and pending=0 before selected interval work, then installs callback. Render2 demands configured==1. Reset uses nonzero/save short circuit and mask68. Limiter stores QPF before reading callback-mutated mode, reads previous after each QPC, commits sampled now without accumulated deadline, and keeps QPF-failed single-QPC initialization. No source-address dispatch or fixture branch.",
+      "resolved_owners": [
+        {
+          "resolution": "Native ModeState/RendererState are values in one world: Application::frame_mode outlives borrowing Display and Session; Session owns renderer_. LogoScene/MovieScene and frame_loop borrow those same objects. Native input tests own InputState reset flags/mask and borrow edge/save storage. No second persistent mapped owner is introduced by the core or native backend. Native application Input mod reset uses its own explicit input producer; installing input_callback alone does not prove production invocation of run_frame_input.",
+          "evidence": [
+            {
+              "path": "src/apps/sadx_native.mm",
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/runtime/logo_scene.hpp",
+              "sha256": "df9ab3879b3c6b2f331d09cf5d7673faa1b7f3b43643e0db2b762539088b3cab"
+            },
+            {
+              "path": "src/runtime/movie_scene.hpp",
+              "sha256": "932d595085a552f67520e0888fb02f254374b6b0164e69f7c9405860095c676f"
+            },
+            {
+              "path": "src/engine/frame_loop_native.hpp",
+              "sha256": "af759d873cd01e3bc2a7e6e4101067ef62eb4e6c1e13234ff7583a92e7e45aeb"
+            },
+            {
+              "path": "src/runtime/native_input.hpp",
+              "sha256": "dee226a84a5375d0582b4c2689d612efac793a17d55b2bd3e1f2fa3099aa4b75"
+            }
+          ]
+        },
+        {
+          "resolution": "In the separate reference world, FrameRateModeState owns frame multiplier/logic increment/pending ticks; GameFrameRendererState owns frequency/interval/multiplier/settings/previous counter/callback; GameFrameInputState owns soft flags/mask and borrows strided edge59 and GameLoop save phase. NativeGame owns these once. Invocation-local views mirror immediate stores but getters always consult authoritative reference owners. BindScope restores the prior thread-local binding on success, ReferenceStop and arbitrary exception unwinding. Borrowed owners must outlive a synchronous invocation.",
+          "evidence": [
+            {
+              "path": "src/guest/frame_control_reference.hpp",
+              "sha256": "51be52abf4d5d3d16ac63043af56f1ac46630cc7a4e16117aee1862b73d2f20b"
+            },
+            {
+              "path": "src/guest/frame_control_reference.cpp",
+              "sha256": "107e8aa6984959d7652f1660e2a9d208a6867c73f393504279d1853a1170f618"
+            },
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "sha256": "f9709b794475f8f85db465f923d52de12297afc8eb8f9697cb8c198bd79266e0"
+            },
+            {
+              "path": "src/engine/game_logic_support.hpp",
+              "sha256": "92e1c2f02a8636859e778bbb9e0053dd74a3951a505ae293b721e7dc8659f958"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Actual native consumers: Session constructor and mode/vsync overrides, LogoScene, MovieScene, Display frame mode, frame_loop counter/tick calculation; Application::pace calls the shared limiter at cadence63 with MacPerformanceCounter. Native unit host directly invokes the installed typed input callback; reference consumers include NativeGame startup/mode/frame composition and override_table frame-input/global-memory bindings. Register flags/incidental EAX belong only to override_table.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/logo_scene.cpp",
+              "sha256": "bc4c2ecdb1432a3bb7d3290d8a9a58b14988aeea2583b3889ec8b6be70cb8dbb"
+            },
+            {
+              "path": "src/runtime/movie_scene.cpp",
+              "sha256": "c076a0805e7bee29c04a84fd7de71638492817b2647da79d872ff253255726a8"
+            },
+            {
+              "path": "src/engine/frame_loop_native.cpp",
+              "sha256": "195c4a6c30602b9d7669b3deb66f8ea8571fdfbdd6993528b9558199a3cd36b6"
+            },
+            {
+              "path": "src/apps/sadx_native.mm",
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "src/platform/mac/mac_clock.cpp",
+              "sha256": "644ef561034ee133844dfb50c01d35a3bb9705a160533866c10ca5c1fb814994"
+            },
+            {
+              "path": "src/guest/override_table.cpp",
+              "sha256": "8f55db3d274697694ef5bb745c3d501492dd323633f627c1de3f47d2d975ed90"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "tests/unit/native_frame_control.cpp",
+              "sha256": "057f4f018318cb471f51bba9fa85b1938dd37f1b11819c1475a938277923875d"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Accepted historical exact frame oracle:2672 cases, callback identity/availability/store values and outer+nested boundaries, no mismatches; all listed current source dependencies match. Frozen2672-row TSV and metadata hash match the original isolated receipt, including both native and reference compiler-dependency lists. All four current scoped files and speedrun helper/native unit match the isolated receipt. This is qualified unchanged-source evidence, not execution by this reviewer.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/game_frame_control.json",
+              "sha256": "e61478b10947019cd16360095cf4ee6542c1406a252434e422469821d852d26e"
+            },
+            {
+              "path": "reference/frame-control-corpus.json",
+              "sha256": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952"
+            },
+            {
+              "path": "reference/frame-control-corpus.tsv",
+              "sha256": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-isolated.json",
+              "sha256": "66d3ae74afc2c27104150d40a2f55857f41c8f2736fefc9c5311ef20142a69b9"
+            }
+          ]
+        },
+        {
+          "resolution": "Limiter original DLL comparison1799 cases/0 mismatches, one capped fixture excluded; source divide-failure cases remain failures at the intended boundary. Frame2048-case seeded before/after holdout has identical case hash and0 mismatches. Historical three semantic faults caught120/472/182 mismatches; three native-host faults caught deadline accumulation/wrong cadence/skipped callback. Retained evidence predates this review; no mutants or holdouts rerun.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/speedrun_limiter.json",
+              "sha256": "91200066a179a91a8a69dcf9e0277f7640fe8dbc196ae38cce56e63235478cbe"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-holdout.json",
+              "sha256": "697231140bbc19da285fabddd84f27b1294b66695e3a7c1dfc7be57a71460ddc"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-before-holdout.json",
+              "sha256": "0f5227374e8bb0afc637658474842dbdf79bd791a7955edebc7ab10e71c90a9a"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-core-mutants.txt",
+              "sha256": "4306670fb5bd0209f313d68628b3d6601920fafe8a92e3b90ec255fd06918903"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-host-mutants.json",
+              "sha256": "b1c37965339e193c522e8542063f32bc87c63a163d4dd803300690b4d302b730"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-mutants.json",
+              "sha256": "da638fb0455c0d20c57453ce53145cf38a13b9f0b5fb5f46df9c0470bcac405b"
+            },
+            {
+              "path": "reference/production-integration-20261015/native-frame-control-mutants.json",
+              "sha256": "add313cbae1597cf4931fbc2947da72800ce7a7ac81bf83788e91988b2d6e9bd"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Only these exact file/module bodies are code-conforming; not whole frame-loop/input/engine/runtime or campaign closure.",
+        "No wall-clock pacing, physical keys/controller, stage63FPS, Windows scheduling or unbounded-spin proof. Limiter wait_hint is an optional native scheduling aid; negative/overflowing synthetic waits and excluded capped fixtures are not certified by ordinary completed fixtures.",
+        "Clock optionals represent OS query failure; LimiterResult.interval is genuinely absent on initialization/fault. Split-word fixture availability and numeric source diagnostics stay in the reference adapter. Unused input-callback EAX and FP exception flags are outside the frozen frame oracle.",
+        "Historical holdouts/mutant logs are bounded receipts, not fresh complete output captures tied to every transitive current dependency. This review fingerprints dependencies but does not manufacture historical transitive fingerprints.",
+        "Native source manifest/isolated build demonstrate a source-level closure; historical library inspection is not an OS access sandbox. Actual native/reference journeys and frozen Main99bdaf4 gate97018 are Root evidence; no new execution or gate qualification here."
+      ],
+      "reviewed_members": {
+        "src/engine/game_frame_control.cpp": "930a94809ee8f84acc82b3da960766a14d73905455f6ff831b4541b1d90b1746",
+        "src/engine/game_frame_control.hpp": "676b9b2915b4e826737130231825fbb333b59a15346c5cb09444d37113d074f3"
+      },
+      "evidence": [
+        {
+          "path": "src/engine/game_frame_control.cpp",
+          "sha256": "930a94809ee8f84acc82b3da960766a14d73905455f6ff831b4541b1d90b1746",
+          "line": 1,
+          "link": "src/engine/game_frame_control.cpp#L1"
+        },
+        {
+          "path": "src/engine/game_frame_control.hpp",
+          "sha256": "676b9b2915b4e826737130231825fbb333b59a15346c5cb09444d37113d074f3",
+          "line": 1,
+          "link": "src/engine/game_frame_control.hpp#L1"
+        }
+      ]
+    },
+    "src/engine/game_frame_control_internal": {
+      "disposition": "already_conforming",
+      "reason": "Private typed state access localizes adapter diagnostics without hiding decisions.",
+      "semantic_justification": "All27lines reviewed: ModeInterval distinguishes logical call sites without instruction values; one finite getter/store surface is bound at link time to native fields or reference facts. report_limiter_progress is a NOTSA diagnostic observer, with no gameplay branch. This is not a generic Services registry or fixture-missingness object.",
+      "resolved_owners": [
+        {
+          "resolution": "Native ModeState/RendererState are values in one world: Application::frame_mode outlives borrowing Display and Session; Session owns renderer_. LogoScene/MovieScene and frame_loop borrow those same objects. Native input tests own InputState reset flags/mask and borrow edge/save storage. No second persistent mapped owner is introduced by the core or native backend. Native application Input mod reset uses its own explicit input producer; installing input_callback alone does not prove production invocation of run_frame_input.",
+          "evidence": [
+            {
+              "path": "src/apps/sadx_native.mm",
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/runtime/logo_scene.hpp",
+              "sha256": "df9ab3879b3c6b2f331d09cf5d7673faa1b7f3b43643e0db2b762539088b3cab"
+            },
+            {
+              "path": "src/runtime/movie_scene.hpp",
+              "sha256": "932d595085a552f67520e0888fb02f254374b6b0164e69f7c9405860095c676f"
+            },
+            {
+              "path": "src/engine/frame_loop_native.hpp",
+              "sha256": "af759d873cd01e3bc2a7e6e4101067ef62eb4e6c1e13234ff7583a92e7e45aeb"
+            },
+            {
+              "path": "src/runtime/native_input.hpp",
+              "sha256": "dee226a84a5375d0582b4c2689d612efac793a17d55b2bd3e1f2fa3099aa4b75"
+            }
+          ]
+        },
+        {
+          "resolution": "In the separate reference world, FrameRateModeState owns frame multiplier/logic increment/pending ticks; GameFrameRendererState owns frequency/interval/multiplier/settings/previous counter/callback; GameFrameInputState owns soft flags/mask and borrows strided edge59 and GameLoop save phase. NativeGame owns these once. Invocation-local views mirror immediate stores but getters always consult authoritative reference owners. BindScope restores the prior thread-local binding on success, ReferenceStop and arbitrary exception unwinding. Borrowed owners must outlive a synchronous invocation.",
+          "evidence": [
+            {
+              "path": "src/guest/frame_control_reference.hpp",
+              "sha256": "51be52abf4d5d3d16ac63043af56f1ac46630cc7a4e16117aee1862b73d2f20b"
+            },
+            {
+              "path": "src/guest/frame_control_reference.cpp",
+              "sha256": "107e8aa6984959d7652f1660e2a9d208a6867c73f393504279d1853a1170f618"
+            },
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "sha256": "f9709b794475f8f85db465f923d52de12297afc8eb8f9697cb8c198bd79266e0"
+            },
+            {
+              "path": "src/engine/game_logic_support.hpp",
+              "sha256": "92e1c2f02a8636859e778bbb9e0053dd74a3951a505ae293b721e7dc8659f958"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Actual native consumers: Session constructor and mode/vsync overrides, LogoScene, MovieScene, Display frame mode, frame_loop counter/tick calculation; Application::pace calls the shared limiter at cadence63 with MacPerformanceCounter. Native unit host directly invokes the installed typed input callback; reference consumers include NativeGame startup/mode/frame composition and override_table frame-input/global-memory bindings. Register flags/incidental EAX belong only to override_table.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/logo_scene.cpp",
+              "sha256": "bc4c2ecdb1432a3bb7d3290d8a9a58b14988aeea2583b3889ec8b6be70cb8dbb"
+            },
+            {
+              "path": "src/runtime/movie_scene.cpp",
+              "sha256": "c076a0805e7bee29c04a84fd7de71638492817b2647da79d872ff253255726a8"
+            },
+            {
+              "path": "src/engine/frame_loop_native.cpp",
+              "sha256": "195c4a6c30602b9d7669b3deb66f8ea8571fdfbdd6993528b9558199a3cd36b6"
+            },
+            {
+              "path": "src/apps/sadx_native.mm",
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "src/platform/mac/mac_clock.cpp",
+              "sha256": "644ef561034ee133844dfb50c01d35a3bb9705a160533866c10ca5c1fb814994"
+            },
+            {
+              "path": "src/guest/override_table.cpp",
+              "sha256": "8f55db3d274697694ef5bb745c3d501492dd323633f627c1de3f47d2d975ed90"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "tests/unit/native_frame_control.cpp",
+              "sha256": "057f4f018318cb471f51bba9fa85b1938dd37f1b11819c1475a938277923875d"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Accepted historical exact frame oracle:2672 cases, callback identity/availability/store values and outer+nested boundaries, no mismatches; all listed current source dependencies match. Frozen2672-row TSV and metadata hash match the original isolated receipt, including both native and reference compiler-dependency lists. All four current scoped files and speedrun helper/native unit match the isolated receipt. This is qualified unchanged-source evidence, not execution by this reviewer.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/game_frame_control.json",
+              "sha256": "e61478b10947019cd16360095cf4ee6542c1406a252434e422469821d852d26e"
+            },
+            {
+              "path": "reference/frame-control-corpus.json",
+              "sha256": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952"
+            },
+            {
+              "path": "reference/frame-control-corpus.tsv",
+              "sha256": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-isolated.json",
+              "sha256": "66d3ae74afc2c27104150d40a2f55857f41c8f2736fefc9c5311ef20142a69b9"
+            }
+          ]
+        },
+        {
+          "resolution": "Limiter original DLL comparison1799 cases/0 mismatches, one capped fixture excluded; source divide-failure cases remain failures at the intended boundary. Frame2048-case seeded before/after holdout has identical case hash and0 mismatches. Historical three semantic faults caught120/472/182 mismatches; three native-host faults caught deadline accumulation/wrong cadence/skipped callback. Retained evidence predates this review; no mutants or holdouts rerun.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/speedrun_limiter.json",
+              "sha256": "91200066a179a91a8a69dcf9e0277f7640fe8dbc196ae38cce56e63235478cbe"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-holdout.json",
+              "sha256": "697231140bbc19da285fabddd84f27b1294b66695e3a7c1dfc7be57a71460ddc"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-before-holdout.json",
+              "sha256": "0f5227374e8bb0afc637658474842dbdf79bd791a7955edebc7ab10e71c90a9a"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-core-mutants.txt",
+              "sha256": "4306670fb5bd0209f313d68628b3d6601920fafe8a92e3b90ec255fd06918903"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-host-mutants.json",
+              "sha256": "b1c37965339e193c522e8542063f32bc87c63a163d4dd803300690b4d302b730"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-mutants.json",
+              "sha256": "da638fb0455c0d20c57453ce53145cf38a13b9f0b5fb5f46df9c0470bcac405b"
+            },
+            {
+              "path": "reference/production-integration-20261015/native-frame-control-mutants.json",
+              "sha256": "add313cbae1597cf4931fbc2947da72800ce7a7ac81bf83788e91988b2d6e9bd"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Only these exact file/module bodies are code-conforming; not whole frame-loop/input/engine/runtime or campaign closure.",
+        "No wall-clock pacing, physical keys/controller, stage63FPS, Windows scheduling or unbounded-spin proof. Limiter wait_hint is an optional native scheduling aid; negative/overflowing synthetic waits and excluded capped fixtures are not certified by ordinary completed fixtures.",
+        "Clock optionals represent OS query failure; LimiterResult.interval is genuinely absent on initialization/fault. Split-word fixture availability and numeric source diagnostics stay in the reference adapter. Unused input-callback EAX and FP exception flags are outside the frozen frame oracle.",
+        "Historical holdouts/mutant logs are bounded receipts, not fresh complete output captures tied to every transitive current dependency. This review fingerprints dependencies but does not manufacture historical transitive fingerprints.",
+        "Native source manifest/isolated build demonstrate a source-level closure; historical library inspection is not an OS access sandbox. Actual native/reference journeys and frozen Main99bdaf4 gate97018 are Root evidence; no new execution or gate qualification here."
+      ],
+      "reviewed_members": {
+        "src/engine/game_frame_control_internal.hpp": "4fa87f0fac7eba31863204a9dd6247541111e8810cfd347a859d4803400f7f74"
+      },
+      "evidence": [
+        {
+          "path": "src/engine/game_frame_control_internal.hpp",
+          "sha256": "4fa87f0fac7eba31863204a9dd6247541111e8810cfd347a859d4803400f7f74",
+          "line": 1,
+          "link": "src/engine/game_frame_control_internal.hpp#L1"
+        }
+      ]
+    },
+    "src/engine/game_frame_control_native": {
+      "disposition": "already_conforming",
+      "reason": "Native backend implements the exact private surface through immediate plain-field reads/stores.",
+      "semantic_justification": "All28lines reviewed. No cache, singleton or alternate algorithm. apply_mode_interval delegates to the shared set_frame_interval_multiplier; native state getters use their actual argument; callback identity is a typed function pointer; diagnostic progress is intentionally inert. No persistent state or optional fixture facts.",
+      "resolved_owners": [
+        {
+          "resolution": "Native ModeState/RendererState are values in one world: Application::frame_mode outlives borrowing Display and Session; Session owns renderer_. LogoScene/MovieScene and frame_loop borrow those same objects. Native input tests own InputState reset flags/mask and borrow edge/save storage. No second persistent mapped owner is introduced by the core or native backend. Native application Input mod reset uses its own explicit input producer; installing input_callback alone does not prove production invocation of run_frame_input.",
+          "evidence": [
+            {
+              "path": "src/apps/sadx_native.mm",
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/runtime/logo_scene.hpp",
+              "sha256": "df9ab3879b3c6b2f331d09cf5d7673faa1b7f3b43643e0db2b762539088b3cab"
+            },
+            {
+              "path": "src/runtime/movie_scene.hpp",
+              "sha256": "932d595085a552f67520e0888fb02f254374b6b0164e69f7c9405860095c676f"
+            },
+            {
+              "path": "src/engine/frame_loop_native.hpp",
+              "sha256": "af759d873cd01e3bc2a7e6e4101067ef62eb4e6c1e13234ff7583a92e7e45aeb"
+            },
+            {
+              "path": "src/runtime/native_input.hpp",
+              "sha256": "dee226a84a5375d0582b4c2689d612efac793a17d55b2bd3e1f2fa3099aa4b75"
+            }
+          ]
+        },
+        {
+          "resolution": "In the separate reference world, FrameRateModeState owns frame multiplier/logic increment/pending ticks; GameFrameRendererState owns frequency/interval/multiplier/settings/previous counter/callback; GameFrameInputState owns soft flags/mask and borrows strided edge59 and GameLoop save phase. NativeGame owns these once. Invocation-local views mirror immediate stores but getters always consult authoritative reference owners. BindScope restores the prior thread-local binding on success, ReferenceStop and arbitrary exception unwinding. Borrowed owners must outlive a synchronous invocation.",
+          "evidence": [
+            {
+              "path": "src/guest/frame_control_reference.hpp",
+              "sha256": "51be52abf4d5d3d16ac63043af56f1ac46630cc7a4e16117aee1862b73d2f20b"
+            },
+            {
+              "path": "src/guest/frame_control_reference.cpp",
+              "sha256": "107e8aa6984959d7652f1660e2a9d208a6867c73f393504279d1853a1170f618"
+            },
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "sha256": "f9709b794475f8f85db465f923d52de12297afc8eb8f9697cb8c198bd79266e0"
+            },
+            {
+              "path": "src/engine/game_logic_support.hpp",
+              "sha256": "92e1c2f02a8636859e778bbb9e0053dd74a3951a505ae293b721e7dc8659f958"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Actual native consumers: Session constructor and mode/vsync overrides, LogoScene, MovieScene, Display frame mode, frame_loop counter/tick calculation; Application::pace calls the shared limiter at cadence63 with MacPerformanceCounter. Native unit host directly invokes the installed typed input callback; reference consumers include NativeGame startup/mode/frame composition and override_table frame-input/global-memory bindings. Register flags/incidental EAX belong only to override_table.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/logo_scene.cpp",
+              "sha256": "bc4c2ecdb1432a3bb7d3290d8a9a58b14988aeea2583b3889ec8b6be70cb8dbb"
+            },
+            {
+              "path": "src/runtime/movie_scene.cpp",
+              "sha256": "c076a0805e7bee29c04a84fd7de71638492817b2647da79d872ff253255726a8"
+            },
+            {
+              "path": "src/engine/frame_loop_native.cpp",
+              "sha256": "195c4a6c30602b9d7669b3deb66f8ea8571fdfbdd6993528b9558199a3cd36b6"
+            },
+            {
+              "path": "src/apps/sadx_native.mm",
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "src/platform/mac/mac_clock.cpp",
+              "sha256": "644ef561034ee133844dfb50c01d35a3bb9705a160533866c10ca5c1fb814994"
+            },
+            {
+              "path": "src/guest/override_table.cpp",
+              "sha256": "8f55db3d274697694ef5bb745c3d501492dd323633f627c1de3f47d2d975ed90"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "tests/unit/native_frame_control.cpp",
+              "sha256": "057f4f018318cb471f51bba9fa85b1938dd37f1b11819c1475a938277923875d"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Accepted historical exact frame oracle:2672 cases, callback identity/availability/store values and outer+nested boundaries, no mismatches; all listed current source dependencies match. Frozen2672-row TSV and metadata hash match the original isolated receipt, including both native and reference compiler-dependency lists. All four current scoped files and speedrun helper/native unit match the isolated receipt. This is qualified unchanged-source evidence, not execution by this reviewer.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/game_frame_control.json",
+              "sha256": "e61478b10947019cd16360095cf4ee6542c1406a252434e422469821d852d26e"
+            },
+            {
+              "path": "reference/frame-control-corpus.json",
+              "sha256": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952"
+            },
+            {
+              "path": "reference/frame-control-corpus.tsv",
+              "sha256": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-isolated.json",
+              "sha256": "66d3ae74afc2c27104150d40a2f55857f41c8f2736fefc9c5311ef20142a69b9"
+            }
+          ]
+        },
+        {
+          "resolution": "Limiter original DLL comparison1799 cases/0 mismatches, one capped fixture excluded; source divide-failure cases remain failures at the intended boundary. Frame2048-case seeded before/after holdout has identical case hash and0 mismatches. Historical three semantic faults caught120/472/182 mismatches; three native-host faults caught deadline accumulation/wrong cadence/skipped callback. Retained evidence predates this review; no mutants or holdouts rerun.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/speedrun_limiter.json",
+              "sha256": "91200066a179a91a8a69dcf9e0277f7640fe8dbc196ae38cce56e63235478cbe"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-holdout.json",
+              "sha256": "697231140bbc19da285fabddd84f27b1294b66695e3a7c1dfc7be57a71460ddc"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-before-holdout.json",
+              "sha256": "0f5227374e8bb0afc637658474842dbdf79bd791a7955edebc7ab10e71c90a9a"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-150-core-mutants.txt",
+              "sha256": "4306670fb5bd0209f313d68628b3d6601920fafe8a92e3b90ec255fd06918903"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-host-mutants.json",
+              "sha256": "b1c37965339e193c522e8542063f32bc87c63a163d4dd803300690b4d302b730"
+            },
+            {
+              "path": "reference/production-integration-20261016/frame-semantic-mutants.json",
+              "sha256": "da638fb0455c0d20c57453ce53145cf38a13b9f0b5fb5f46df9c0470bcac405b"
+            },
+            {
+              "path": "reference/production-integration-20261015/native-frame-control-mutants.json",
+              "sha256": "add313cbae1597cf4931fbc2947da72800ce7a7ac81bf83788e91988b2d6e9bd"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Only these exact file/module bodies are code-conforming; not whole frame-loop/input/engine/runtime or campaign closure.",
+        "No wall-clock pacing, physical keys/controller, stage63FPS, Windows scheduling or unbounded-spin proof. Limiter wait_hint is an optional native scheduling aid; negative/overflowing synthetic waits and excluded capped fixtures are not certified by ordinary completed fixtures.",
+        "Clock optionals represent OS query failure; LimiterResult.interval is genuinely absent on initialization/fault. Split-word fixture availability and numeric source diagnostics stay in the reference adapter. Unused input-callback EAX and FP exception flags are outside the frozen frame oracle.",
+        "Historical holdouts/mutant logs are bounded receipts, not fresh complete output captures tied to every transitive current dependency. This review fingerprints dependencies but does not manufacture historical transitive fingerprints.",
+        "Native source manifest/isolated build demonstrate a source-level closure; historical library inspection is not an OS access sandbox. Actual native/reference journeys and frozen Main99bdaf4 gate97018 are Root evidence; no new execution or gate qualification here."
+      ],
+      "reviewed_members": {
+        "src/engine/game_frame_control_native.cpp": "551c58594cf51f4686aa65b35f4a686fd58dc36b661110e285a1774c8dcd347a"
+      },
+      "evidence": [
+        {
+          "path": "src/engine/game_frame_control_native.cpp",
+          "sha256": "551c58594cf51f4686aa65b35f4a686fd58dc36b661110e285a1774c8dcd347a",
+          "line": 1,
+          "link": "src/engine/game_frame_control_native.cpp#L1"
+        }
+      ]
+    },
+    "src/game/game_mode": {
+      "disposition": "already_conforming",
+      "reason": "One structured mode dispatcher retains source decisions, same-frame fallthroughs and callback-sensitive stores.",
+      "semantic_justification": "All554lines reviewed, including every named helper and both entrypoints. Unsigned next-mode wrap and title guard preserve source bounds; callee short returns narrow at seams. Cleanup variants retain distinct store ordering, title destructor order4/0/5/7/6/8/9, message token cleared only after free, title-load rereads after callbacks, callback-mutated mode increments, sequence dereference at use, repeated player queries, same-frame logo/summary/tutorial/staff transitions and common alert/fade/counter tail. Phase changes are diagnostic observations, not alternate game logic.",
+      "resolved_owners": [
+        {
+          "resolution": "Session::flow_ is the native canonical flow value owner. Session bootstrap borrows flow_.movie_number; save/message/title/character-selection/input consumers access the same flow fields through Session/TitleScene views. FlowContext borrows GameFlowState and NativeServices synchronously, owns only a logical phase; the services pointer has no captured callable lifetime or deferred publication. SequenceSelection is a borrowed nullable game sequence, not fixture availability. MenuResource is an opaque zero/nonzero release token here; native free_message_resource remains an explicit failure, so this does not establish a native allocation/asset identity.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a"
+            },
+            {
+              "path": "src/runtime/native_message_frame.cpp",
+              "sha256": "e46cd9b32acf4611ceebc3e6477ee0d80fa395a33daa89362651e2c097869fa9"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "sha256": "b2192da9fc1a860b432d09030beaf120a810d5442a2188b0c3b8e44b87d82ad8"
+            },
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "sha256": "ddcf2b15144e3c1ea81bac848d70aab812b1398fbd8a55f4277885550792b9df"
+            },
+            {
+              "path": "src/game/game_mode.hpp",
+              "sha256": "44230c85f069ad96fc7360b6b16536e1da4001b6cf9d35574f3af772bbaf4075"
+            },
+            {
+              "path": "src/game/game_mode_internal.hpp",
+              "sha256": "9a86c138e051465311d23780210976ce19a23c9f2f4d1abf96c784ce22774d7d"
+            }
+          ]
+        },
+        {
+          "resolution": "Reference GameModeRuntime borrows NativeGame::mode_at_3abdc7c_, loop_ pause/save/request/message fields and mode_state_ remaining bytes/movie/menu flag/sequence-level fact. Reference views are invocation-local, not second persistent owners. Accessors revalidate reached facts and publish actual stores immediately. Call-site phase metadata, required returns, args, pending calls, cancellation/owner/nested failures remain in guest/game_mode_reference; it calls the same structured core with no fallback interpreter. BindScope restores nested binding; nested call counters are adapter-local.",
+          "evidence": [
+            {
+              "path": "src/guest/game_mode_reference.hpp",
+              "sha256": "a5e0f644ad592b50ce6d32eddc2d100997fe137e4145c379de0866adb14280f9"
+            },
+            {
+              "path": "src/guest/game_mode_reference.cpp",
+              "sha256": "db11678fd7fbdb2d0046a543c0954f1d6f45d98202e5f6a84710e43040d90029"
+            },
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "sha256": "f9709b794475f8f85db465f923d52de12297afc8eb8f9697cb8c198bd79266e0"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "advance_game_mode(state) is consumed by the reference adapter and native explicit-stop unit. advance_game_mode(state,services) is consumed by Session::advance; one shared advance/finish_frame owns all mode decisions. Native backend calls a finite typed NativeServices operation set; Session privately implements it and owns/binds real resources. No generic callee IDs/registers/optional fixture facts cross that interface. Reference NativeGame composes timing/reset/leaves or reports unported owners; it is not native gameplay. Test resource baselines also derive from NativeServices and are fixtures, not additional production owners.",
+          "evidence": [
+            {
+              "path": "src/game/game_mode.cpp",
+              "sha256": "8f830dabd7b2f3e594333799b47af001a6afebb7548ec2e95119b45c9dae5a43"
+            },
+            {
+              "path": "src/game/game_mode_native.cpp",
+              "sha256": "cdf3a649e194591c4ed3ec324cb6ae3ecac6c25c3ea83ec7c5a3e69a37e44dd5"
+            },
+            {
+              "path": "src/game/game_mode_services.hpp",
+              "sha256": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "tests/unit/native_game_mode.cpp",
+              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+            },
+            {
+              "path": "tests/fixtures/menu_texture_binding_baseline.hpp",
+              "sha256": "86a98c1980104b1246cc82ab246e483f91ea3ca7742fda8487dace9d449a5a93"
+            },
+            {
+              "path": "tests/fixtures/regular_resource_baseline.hpp",
+              "sha256": "c12360fe40fe210dd3c3ce0ecd75cb9b0641a873879fdc29c275bbba28d29886"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Accepted scoped core/reference judge: current game_mode.hpp/.cpp, reference.hpp/.cpp, probe and verifier hashes match the tracked24000-case report;252 call-site paths,0 mismatches. Complete48-word input/256-word output ABI compares source call order/sites/args, final observable globals and failure/completion. Scripted owner mutations exercise rereads; owner fixtures are not real subsystems. The internal header changed annotations since the report; its function declarations remain link-compatible, and this review independently reads the complete current declaration surface. Native services/backend stale hashes are explicitly not accepted as current behavioral qualification.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/game_mode.json",
+              "sha256": "8c487a818339dbdc067e6aeba59afef5bd536153244eae5810041a5c9033fca0"
+            },
+            {
+              "path": "tests/probes/native_game_mode_probe.cpp",
+              "sha256": "d1e1c146a4cc6b46819cac257b2dcba737cec41915f26e84887bc1252f0bb587"
+            },
+            {
+              "path": "tools/oracles/verify_original_game_mode.py",
+              "sha256": "a8df08e0f9d0b995213f45f94652de08077bf56b3e056adc7001faaef0b4fd69"
+            },
+            {
+              "path": "tests/unit/game_mode.cpp",
+              "sha256": "af0e3bda405195d9d9b8a2b3244facbcb91fea89605469f60d5b0d14e089859c"
+            }
+          ]
+        },
+        {
+          "resolution": "Historical semantic migration evidence: three valid faults caught1629/54/10 mismatches; fixed2048-case before/after holdout0 mismatches and identical395e8e... case identity. Initial semantic report core/native/internal hashes are outdated and do not independently certify current composition. Native unit only checks four explicit-stop/prefix paths with no NativeServices installation. These judges support unchanged structured decisions and declared stop semantics, not every current native forwarder.",
+          "evidence": [
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-evidence.json",
+              "sha256": "5df58948d6d92c38bd66842632225fab658b1edaca99bfeb6117261b2301a36d"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-mutants.txt",
+              "sha256": "ce25c121600efd7f3f4773332fa7883a8bde5c4aa244267de8dbee4f37cc6fb4"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-mutants.json",
+              "sha256": "38b1c88a1327d24ce2299bf08010ccbd1923f66689f8f4016957b7c94e3f4143"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-reference-mutants.json",
+              "sha256": "f2e2a4a2ed410d50a0f31c8ff89498fe39015b8534a3c102f8b6d8bfb13140e1"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-holdout.json",
+              "sha256": "e9bfc6ad64bd6ca92ca2d62e42b9c1dd0bec9e1201d976a10efd7b8818322e37"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-before-holdout.json",
+              "sha256": "fd2fd0009c84a4def4133b95f5882db53cf5800eec463baf182c75593738fe3a"
+            },
+            {
+              "path": "tests/unit/native_game_mode.cpp",
+              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Conformance here covers only the current structured core/value API or private declarations explicitly dispositioned; native binding/services qualification remains open and does not inherit the reference oracle.",
+        "No recovered Action/Adventure/Mission/summary/tutorial/staff-roll implementation or native story/CharacterSelect milestone is inferred. Named link-time throws are legitimate STUB seams; do not invent callbacks to turn them into successful execution.",
+        "Reference scripted owner failures/null sequence/missing return are intentional source-boundary comparisons, not successfully implemented subsystems. The256-word probe does not serialize nested_source_boundary or pending_call; unit checks pending-call presence but does not fully freeze the complete result tuple on all paths.",
+        "Mode receipts lack full historical transitive dependency identities and held-out output streams. Current direct dependencies are pinned below; stale header/native/service hashes remain stale. No FP equivalence claim: mode core is integer dispatch; downstream title/cleanup FP partials and inherited failures remain partial/failing.",
+        "Actual native source product/force-load and native/reference comparison journeys remain Root evidence, not executed here. Last tracked gate is1300815; the user reports full gate97018 active at frozen99bdaf4. No whole Session/runtime/campaign closure or changed product acceptance."
+      ],
+      "reviewed_members": {
+        "src/game/game_mode.cpp": "8f830dabd7b2f3e594333799b47af001a6afebb7548ec2e95119b45c9dae5a43",
+        "src/game/game_mode.hpp": "44230c85f069ad96fc7360b6b16536e1da4001b6cf9d35574f3af772bbaf4075"
+      },
+      "evidence": [
+        {
+          "path": "src/game/game_mode.cpp",
+          "sha256": "8f830dabd7b2f3e594333799b47af001a6afebb7548ec2e95119b45c9dae5a43",
+          "line": 1,
+          "link": "src/game/game_mode.cpp#L1"
+        },
+        {
+          "path": "src/game/game_mode.hpp",
+          "sha256": "44230c85f069ad96fc7360b6b16536e1da4001b6cf9d35574f3af772bbaf4075",
+          "line": 1,
+          "link": "src/game/game_mode.hpp#L1"
+        }
+      ]
+    },
+    "src/game/game_mode_internal": {
+      "disposition": "already_conforming",
+      "reason": "Private state/callee declarations use logical phases and named link-time seams, not address dispatch.",
+      "semantic_justification": "All252lines reviewed. FlowPhase/FlowModule/Rgba encode semantic operations; FlowContext borrows one state/native interface per invocation. Accessors support actual immediate writes and lazy adapter reads without availability flags. STUB declarations identify unrecovered source entries; composition comments name existing recovered owners and preserve a single FUNCTION declaration. Current post-oracle changes are annotation reclassifications, not new game decisions. Several composition names still throw in native binding; declarations alone never certify that wiring.",
+      "resolved_owners": [
+        {
+          "resolution": "Session::flow_ is the native canonical flow value owner. Session bootstrap borrows flow_.movie_number; save/message/title/character-selection/input consumers access the same flow fields through Session/TitleScene views. FlowContext borrows GameFlowState and NativeServices synchronously, owns only a logical phase; the services pointer has no captured callable lifetime or deferred publication. SequenceSelection is a borrowed nullable game sequence, not fixture availability. MenuResource is an opaque zero/nonzero release token here; native free_message_resource remains an explicit failure, so this does not establish a native allocation/asset identity.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a"
+            },
+            {
+              "path": "src/runtime/native_message_frame.cpp",
+              "sha256": "e46cd9b32acf4611ceebc3e6477ee0d80fa395a33daa89362651e2c097869fa9"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "sha256": "b2192da9fc1a860b432d09030beaf120a810d5442a2188b0c3b8e44b87d82ad8"
+            },
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "sha256": "ddcf2b15144e3c1ea81bac848d70aab812b1398fbd8a55f4277885550792b9df"
+            },
+            {
+              "path": "src/game/game_mode.hpp",
+              "sha256": "44230c85f069ad96fc7360b6b16536e1da4001b6cf9d35574f3af772bbaf4075"
+            },
+            {
+              "path": "src/game/game_mode_internal.hpp",
+              "sha256": "9a86c138e051465311d23780210976ce19a23c9f2f4d1abf96c784ce22774d7d"
+            }
+          ]
+        },
+        {
+          "resolution": "Reference GameModeRuntime borrows NativeGame::mode_at_3abdc7c_, loop_ pause/save/request/message fields and mode_state_ remaining bytes/movie/menu flag/sequence-level fact. Reference views are invocation-local, not second persistent owners. Accessors revalidate reached facts and publish actual stores immediately. Call-site phase metadata, required returns, args, pending calls, cancellation/owner/nested failures remain in guest/game_mode_reference; it calls the same structured core with no fallback interpreter. BindScope restores nested binding; nested call counters are adapter-local.",
+          "evidence": [
+            {
+              "path": "src/guest/game_mode_reference.hpp",
+              "sha256": "a5e0f644ad592b50ce6d32eddc2d100997fe137e4145c379de0866adb14280f9"
+            },
+            {
+              "path": "src/guest/game_mode_reference.cpp",
+              "sha256": "db11678fd7fbdb2d0046a543c0954f1d6f45d98202e5f6a84710e43040d90029"
+            },
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "sha256": "f9709b794475f8f85db465f923d52de12297afc8eb8f9697cb8c198bd79266e0"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "advance_game_mode(state) is consumed by the reference adapter and native explicit-stop unit. advance_game_mode(state,services) is consumed by Session::advance; one shared advance/finish_frame owns all mode decisions. Native backend calls a finite typed NativeServices operation set; Session privately implements it and owns/binds real resources. No generic callee IDs/registers/optional fixture facts cross that interface. Reference NativeGame composes timing/reset/leaves or reports unported owners; it is not native gameplay. Test resource baselines also derive from NativeServices and are fixtures, not additional production owners.",
+          "evidence": [
+            {
+              "path": "src/game/game_mode.cpp",
+              "sha256": "8f830dabd7b2f3e594333799b47af001a6afebb7548ec2e95119b45c9dae5a43"
+            },
+            {
+              "path": "src/game/game_mode_native.cpp",
+              "sha256": "cdf3a649e194591c4ed3ec324cb6ae3ecac6c25c3ea83ec7c5a3e69a37e44dd5"
+            },
+            {
+              "path": "src/game/game_mode_services.hpp",
+              "sha256": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "tests/unit/native_game_mode.cpp",
+              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+            },
+            {
+              "path": "tests/fixtures/menu_texture_binding_baseline.hpp",
+              "sha256": "86a98c1980104b1246cc82ab246e483f91ea3ca7742fda8487dace9d449a5a93"
+            },
+            {
+              "path": "tests/fixtures/regular_resource_baseline.hpp",
+              "sha256": "c12360fe40fe210dd3c3ce0ecd75cb9b0641a873879fdc29c275bbba28d29886"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Accepted scoped core/reference judge: current game_mode.hpp/.cpp, reference.hpp/.cpp, probe and verifier hashes match the tracked24000-case report;252 call-site paths,0 mismatches. Complete48-word input/256-word output ABI compares source call order/sites/args, final observable globals and failure/completion. Scripted owner mutations exercise rereads; owner fixtures are not real subsystems. The internal header changed annotations since the report; its function declarations remain link-compatible, and this review independently reads the complete current declaration surface. Native services/backend stale hashes are explicitly not accepted as current behavioral qualification.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/game_mode.json",
+              "sha256": "8c487a818339dbdc067e6aeba59afef5bd536153244eae5810041a5c9033fca0"
+            },
+            {
+              "path": "tests/probes/native_game_mode_probe.cpp",
+              "sha256": "d1e1c146a4cc6b46819cac257b2dcba737cec41915f26e84887bc1252f0bb587"
+            },
+            {
+              "path": "tools/oracles/verify_original_game_mode.py",
+              "sha256": "a8df08e0f9d0b995213f45f94652de08077bf56b3e056adc7001faaef0b4fd69"
+            },
+            {
+              "path": "tests/unit/game_mode.cpp",
+              "sha256": "af0e3bda405195d9d9b8a2b3244facbcb91fea89605469f60d5b0d14e089859c"
+            }
+          ]
+        },
+        {
+          "resolution": "Historical semantic migration evidence: three valid faults caught1629/54/10 mismatches; fixed2048-case before/after holdout0 mismatches and identical395e8e... case identity. Initial semantic report core/native/internal hashes are outdated and do not independently certify current composition. Native unit only checks four explicit-stop/prefix paths with no NativeServices installation. These judges support unchanged structured decisions and declared stop semantics, not every current native forwarder.",
+          "evidence": [
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-evidence.json",
+              "sha256": "5df58948d6d92c38bd66842632225fab658b1edaca99bfeb6117261b2301a36d"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-mutants.txt",
+              "sha256": "ce25c121600efd7f3f4773332fa7883a8bde5c4aa244267de8dbee4f37cc6fb4"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-mutants.json",
+              "sha256": "38b1c88a1327d24ce2299bf08010ccbd1923f66689f8f4016957b7c94e3f4143"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-reference-mutants.json",
+              "sha256": "f2e2a4a2ed410d50a0f31c8ff89498fe39015b8534a3c102f8b6d8bfb13140e1"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-holdout.json",
+              "sha256": "e9bfc6ad64bd6ca92ca2d62e42b9c1dd0bec9e1201d976a10efd7b8818322e37"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-before-holdout.json",
+              "sha256": "fd2fd0009c84a4def4133b95f5882db53cf5800eec463baf182c75593738fe3a"
+            },
+            {
+              "path": "tests/unit/native_game_mode.cpp",
+              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Conformance here covers only the current structured core/value API or private declarations explicitly dispositioned; native binding/services qualification remains open and does not inherit the reference oracle.",
+        "No recovered Action/Adventure/Mission/summary/tutorial/staff-roll implementation or native story/CharacterSelect milestone is inferred. Named link-time throws are legitimate STUB seams; do not invent callbacks to turn them into successful execution.",
+        "Reference scripted owner failures/null sequence/missing return are intentional source-boundary comparisons, not successfully implemented subsystems. The256-word probe does not serialize nested_source_boundary or pending_call; unit checks pending-call presence but does not fully freeze the complete result tuple on all paths.",
+        "Mode receipts lack full historical transitive dependency identities and held-out output streams. Current direct dependencies are pinned below; stale header/native/service hashes remain stale. No FP equivalence claim: mode core is integer dispatch; downstream title/cleanup FP partials and inherited failures remain partial/failing.",
+        "Actual native source product/force-load and native/reference comparison journeys remain Root evidence, not executed here. Last tracked gate is1300815; the user reports full gate97018 active at frozen99bdaf4. No whole Session/runtime/campaign closure or changed product acceptance."
+      ],
+      "reviewed_members": {
+        "src/game/game_mode_internal.hpp": "9a86c138e051465311d23780210976ce19a23c9f2f4d1abf96c784ce22774d7d"
+      },
+      "evidence": [
+        {
+          "path": "src/game/game_mode_internal.hpp",
+          "sha256": "9a86c138e051465311d23780210976ce19a23c9f2f4d1abf96c784ce22774d7d",
+          "line": 1,
+          "link": "src/game/game_mode_internal.hpp#L1"
+        }
+      ]
+    },
+    "src/game/game_mode_native": {
+      "disposition": "open_review",
+      "reason": "Readable native field access and finite forwarding are established, but complete current binding qualification is unresolved.",
+      "semantic_justification": "All275lines reviewed. State writes are immediate, null sequence throws at actual use,27 forwarders require nonnull flow.native, remaining uncomposed named functions throw. request_file_module alone is a claimed recovered diagnostic no-op. The legacy leaf judge supports source no-op behavior, but neither mode oracle nor old native unit executes this current body. Stale native receipt hashes, no direct current all-forwarder/prefix result receipt, and incomplete diagnostic no-op raw anchors keep whole-module qualification open; no speculative rewrite is requested.",
+      "resolved_owners": [
+        {
+          "resolution": "Session::flow_ is the native canonical flow value owner. Session bootstrap borrows flow_.movie_number; save/message/title/character-selection/input consumers access the same flow fields through Session/TitleScene views. FlowContext borrows GameFlowState and NativeServices synchronously, owns only a logical phase; the services pointer has no captured callable lifetime or deferred publication. SequenceSelection is a borrowed nullable game sequence, not fixture availability. MenuResource is an opaque zero/nonzero release token here; native free_message_resource remains an explicit failure, so this does not establish a native allocation/asset identity.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a"
+            },
+            {
+              "path": "src/runtime/native_message_frame.cpp",
+              "sha256": "e46cd9b32acf4611ceebc3e6477ee0d80fa395a33daa89362651e2c097869fa9"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "sha256": "b2192da9fc1a860b432d09030beaf120a810d5442a2188b0c3b8e44b87d82ad8"
+            },
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "sha256": "ddcf2b15144e3c1ea81bac848d70aab812b1398fbd8a55f4277885550792b9df"
+            },
+            {
+              "path": "src/game/game_mode.hpp",
+              "sha256": "44230c85f069ad96fc7360b6b16536e1da4001b6cf9d35574f3af772bbaf4075"
+            },
+            {
+              "path": "src/game/game_mode_internal.hpp",
+              "sha256": "9a86c138e051465311d23780210976ce19a23c9f2f4d1abf96c784ce22774d7d"
+            }
+          ]
+        },
+        {
+          "resolution": "Reference GameModeRuntime borrows NativeGame::mode_at_3abdc7c_, loop_ pause/save/request/message fields and mode_state_ remaining bytes/movie/menu flag/sequence-level fact. Reference views are invocation-local, not second persistent owners. Accessors revalidate reached facts and publish actual stores immediately. Call-site phase metadata, required returns, args, pending calls, cancellation/owner/nested failures remain in guest/game_mode_reference; it calls the same structured core with no fallback interpreter. BindScope restores nested binding; nested call counters are adapter-local.",
+          "evidence": [
+            {
+              "path": "src/guest/game_mode_reference.hpp",
+              "sha256": "a5e0f644ad592b50ce6d32eddc2d100997fe137e4145c379de0866adb14280f9"
+            },
+            {
+              "path": "src/guest/game_mode_reference.cpp",
+              "sha256": "db11678fd7fbdb2d0046a543c0954f1d6f45d98202e5f6a84710e43040d90029"
+            },
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "sha256": "f9709b794475f8f85db465f923d52de12297afc8eb8f9697cb8c198bd79266e0"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "advance_game_mode(state) is consumed by the reference adapter and native explicit-stop unit. advance_game_mode(state,services) is consumed by Session::advance; one shared advance/finish_frame owns all mode decisions. Native backend calls a finite typed NativeServices operation set; Session privately implements it and owns/binds real resources. No generic callee IDs/registers/optional fixture facts cross that interface. Reference NativeGame composes timing/reset/leaves or reports unported owners; it is not native gameplay. Test resource baselines also derive from NativeServices and are fixtures, not additional production owners.",
+          "evidence": [
+            {
+              "path": "src/game/game_mode.cpp",
+              "sha256": "8f830dabd7b2f3e594333799b47af001a6afebb7548ec2e95119b45c9dae5a43"
+            },
+            {
+              "path": "src/game/game_mode_native.cpp",
+              "sha256": "cdf3a649e194591c4ed3ec324cb6ae3ecac6c25c3ea83ec7c5a3e69a37e44dd5"
+            },
+            {
+              "path": "src/game/game_mode_services.hpp",
+              "sha256": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "tests/unit/native_game_mode.cpp",
+              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+            },
+            {
+              "path": "tests/fixtures/menu_texture_binding_baseline.hpp",
+              "sha256": "86a98c1980104b1246cc82ab246e483f91ea3ca7742fda8487dace9d449a5a93"
+            },
+            {
+              "path": "tests/fixtures/regular_resource_baseline.hpp",
+              "sha256": "c12360fe40fe210dd3c3ce0ecd75cb9b0641a873879fdc29c275bbba28d29886"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Accepted scoped core/reference judge: current game_mode.hpp/.cpp, reference.hpp/.cpp, probe and verifier hashes match the tracked24000-case report;252 call-site paths,0 mismatches. Complete48-word input/256-word output ABI compares source call order/sites/args, final observable globals and failure/completion. Scripted owner mutations exercise rereads; owner fixtures are not real subsystems. The internal header changed annotations since the report; its function declarations remain link-compatible, and this review independently reads the complete current declaration surface. Native services/backend stale hashes are explicitly not accepted as current behavioral qualification.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/game_mode.json",
+              "sha256": "8c487a818339dbdc067e6aeba59afef5bd536153244eae5810041a5c9033fca0"
+            },
+            {
+              "path": "tests/probes/native_game_mode_probe.cpp",
+              "sha256": "d1e1c146a4cc6b46819cac257b2dcba737cec41915f26e84887bc1252f0bb587"
+            },
+            {
+              "path": "tools/oracles/verify_original_game_mode.py",
+              "sha256": "a8df08e0f9d0b995213f45f94652de08077bf56b3e056adc7001faaef0b4fd69"
+            },
+            {
+              "path": "tests/unit/game_mode.cpp",
+              "sha256": "af0e3bda405195d9d9b8a2b3244facbcb91fea89605469f60d5b0d14e089859c"
+            }
+          ]
+        },
+        {
+          "resolution": "Historical semantic migration evidence: three valid faults caught1629/54/10 mismatches; fixed2048-case before/after holdout0 mismatches and identical395e8e... case identity. Initial semantic report core/native/internal hashes are outdated and do not independently certify current composition. Native unit only checks four explicit-stop/prefix paths with no NativeServices installation. These judges support unchanged structured decisions and declared stop semantics, not every current native forwarder.",
+          "evidence": [
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-evidence.json",
+              "sha256": "5df58948d6d92c38bd66842632225fab658b1edaca99bfeb6117261b2301a36d"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-mutants.txt",
+              "sha256": "ce25c121600efd7f3f4773332fa7883a8bde5c4aa244267de8dbee4f37cc6fb4"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-mutants.json",
+              "sha256": "38b1c88a1327d24ce2299bf08010ccbd1923f66689f8f4016957b7c94e3f4143"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-reference-mutants.json",
+              "sha256": "f2e2a4a2ed410d50a0f31c8ff89498fe39015b8534a3c102f8b6d8bfb13140e1"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-holdout.json",
+              "sha256": "e9bfc6ad64bd6ca92ca2d62e42b9c1dd0bec9e1201d976a10efd7b8818322e37"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-before-holdout.json",
+              "sha256": "fd2fd0009c84a4def4133b95f5882db53cf5800eec463baf182c75593738fe3a"
+            },
+            {
+              "path": "tests/unit/native_game_mode.cpp",
+              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Conformance here covers only the current structured core/value API or private declarations explicitly dispositioned; native binding/services qualification remains open and does not inherit the reference oracle.",
+        "No recovered Action/Adventure/Mission/summary/tutorial/staff-roll implementation or native story/CharacterSelect milestone is inferred. Named link-time throws are legitimate STUB seams; do not invent callbacks to turn them into successful execution.",
+        "Reference scripted owner failures/null sequence/missing return are intentional source-boundary comparisons, not successfully implemented subsystems. The256-word probe does not serialize nested_source_boundary or pending_call; unit checks pending-call presence but does not fully freeze the complete result tuple on all paths.",
+        "Mode receipts lack full historical transitive dependency identities and held-out output streams. Current direct dependencies are pinned below; stale header/native/service hashes remain stale. No FP equivalence claim: mode core is integer dispatch; downstream title/cleanup FP partials and inherited failures remain partial/failing.",
+        "Actual native source product/force-load and native/reference comparison journeys remain Root evidence, not executed here. Last tracked gate is1300815; the user reports full gate97018 active at frozen99bdaf4. No whole Session/runtime/campaign closure or changed product acceptance."
+      ],
+      "reviewed_members": {
+        "src/game/game_mode_native.cpp": "cdf3a649e194591c4ed3ec324cb6ae3ecac6c25c3ea83ec7c5a3e69a37e44dd5"
+      },
+      "evidence": [
+        {
+          "path": "src/game/game_mode_native.cpp",
+          "sha256": "cdf3a649e194591c4ed3ec324cb6ae3ecac6c25c3ea83ec7c5a3e69a37e44dd5",
+          "line": 1,
+          "link": "src/game/game_mode_native.cpp#L1"
+        }
+      ],
+      "qualification_gaps": [
+        "Do not rewrite the typed composition or promote its old oracle metadata. Root should attach current backend/service/Session dependency identities to existing actual native closure/journey evidence and characterize forwarder/prefix failure behavior where not covered. Preserve original missing owner/return/nested/cancellation tuples separately from successful callees."
+      ]
+    },
+    "src/game/game_mode_services": {
+      "disposition": "open_review",
+      "reason": "Finite typed composition interface has a real Session consumer; current whole-interface acceptance remains open.",
+      "semantic_justification": "All40lines reviewed.27 pure virtual game operations plus virtual destructor and an overload, no state owner, address key, generic invoke, std::function registry or fixture-availability value. Session privately implements all operations; context borrows it only during advance. Its cross-system breadth alone is not demonstrated nonconformance. Twelve added cleanup/title operations postdate the tracked mode report; current source build/journey evidence must be tied to current transitive binding dependencies before whole-interface approval.",
+      "resolved_owners": [
+        {
+          "resolution": "Session::flow_ is the native canonical flow value owner. Session bootstrap borrows flow_.movie_number; save/message/title/character-selection/input consumers access the same flow fields through Session/TitleScene views. FlowContext borrows GameFlowState and NativeServices synchronously, owns only a logical phase; the services pointer has no captured callable lifetime or deferred publication. SequenceSelection is a borrowed nullable game sequence, not fixture availability. MenuResource is an opaque zero/nonzero release token here; native free_message_resource remains an explicit failure, so this does not establish a native allocation/asset identity.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a"
+            },
+            {
+              "path": "src/runtime/native_message_frame.cpp",
+              "sha256": "e46cd9b32acf4611ceebc3e6477ee0d80fa395a33daa89362651e2c097869fa9"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "sha256": "b2192da9fc1a860b432d09030beaf120a810d5442a2188b0c3b8e44b87d82ad8"
+            },
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "sha256": "ddcf2b15144e3c1ea81bac848d70aab812b1398fbd8a55f4277885550792b9df"
+            },
+            {
+              "path": "src/game/game_mode.hpp",
+              "sha256": "44230c85f069ad96fc7360b6b16536e1da4001b6cf9d35574f3af772bbaf4075"
+            },
+            {
+              "path": "src/game/game_mode_internal.hpp",
+              "sha256": "9a86c138e051465311d23780210976ce19a23c9f2f4d1abf96c784ce22774d7d"
+            }
+          ]
+        },
+        {
+          "resolution": "Reference GameModeRuntime borrows NativeGame::mode_at_3abdc7c_, loop_ pause/save/request/message fields and mode_state_ remaining bytes/movie/menu flag/sequence-level fact. Reference views are invocation-local, not second persistent owners. Accessors revalidate reached facts and publish actual stores immediately. Call-site phase metadata, required returns, args, pending calls, cancellation/owner/nested failures remain in guest/game_mode_reference; it calls the same structured core with no fallback interpreter. BindScope restores nested binding; nested call counters are adapter-local.",
+          "evidence": [
+            {
+              "path": "src/guest/game_mode_reference.hpp",
+              "sha256": "a5e0f644ad592b50ce6d32eddc2d100997fe137e4145c379de0866adb14280f9"
+            },
+            {
+              "path": "src/guest/game_mode_reference.cpp",
+              "sha256": "db11678fd7fbdb2d0046a543c0954f1d6f45d98202e5f6a84710e43040d90029"
+            },
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "sha256": "f9709b794475f8f85db465f923d52de12297afc8eb8f9697cb8c198bd79266e0"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "advance_game_mode(state) is consumed by the reference adapter and native explicit-stop unit. advance_game_mode(state,services) is consumed by Session::advance; one shared advance/finish_frame owns all mode decisions. Native backend calls a finite typed NativeServices operation set; Session privately implements it and owns/binds real resources. No generic callee IDs/registers/optional fixture facts cross that interface. Reference NativeGame composes timing/reset/leaves or reports unported owners; it is not native gameplay. Test resource baselines also derive from NativeServices and are fixtures, not additional production owners.",
+          "evidence": [
+            {
+              "path": "src/game/game_mode.cpp",
+              "sha256": "8f830dabd7b2f3e594333799b47af001a6afebb7548ec2e95119b45c9dae5a43"
+            },
+            {
+              "path": "src/game/game_mode_native.cpp",
+              "sha256": "cdf3a649e194591c4ed3ec324cb6ae3ecac6c25c3ea83ec7c5a3e69a37e44dd5"
+            },
+            {
+              "path": "src/game/game_mode_services.hpp",
+              "sha256": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "tests/unit/native_game_mode.cpp",
+              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+            },
+            {
+              "path": "tests/fixtures/menu_texture_binding_baseline.hpp",
+              "sha256": "86a98c1980104b1246cc82ab246e483f91ea3ca7742fda8487dace9d449a5a93"
+            },
+            {
+              "path": "tests/fixtures/regular_resource_baseline.hpp",
+              "sha256": "c12360fe40fe210dd3c3ce0ecd75cb9b0641a873879fdc29c275bbba28d29886"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Accepted scoped core/reference judge: current game_mode.hpp/.cpp, reference.hpp/.cpp, probe and verifier hashes match the tracked24000-case report;252 call-site paths,0 mismatches. Complete48-word input/256-word output ABI compares source call order/sites/args, final observable globals and failure/completion. Scripted owner mutations exercise rereads; owner fixtures are not real subsystems. The internal header changed annotations since the report; its function declarations remain link-compatible, and this review independently reads the complete current declaration surface. Native services/backend stale hashes are explicitly not accepted as current behavioral qualification.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/game_mode.json",
+              "sha256": "8c487a818339dbdc067e6aeba59afef5bd536153244eae5810041a5c9033fca0"
+            },
+            {
+              "path": "tests/probes/native_game_mode_probe.cpp",
+              "sha256": "d1e1c146a4cc6b46819cac257b2dcba737cec41915f26e84887bc1252f0bb587"
+            },
+            {
+              "path": "tools/oracles/verify_original_game_mode.py",
+              "sha256": "a8df08e0f9d0b995213f45f94652de08077bf56b3e056adc7001faaef0b4fd69"
+            },
+            {
+              "path": "tests/unit/game_mode.cpp",
+              "sha256": "af0e3bda405195d9d9b8a2b3244facbcb91fea89605469f60d5b0d14e089859c"
+            }
+          ]
+        },
+        {
+          "resolution": "Historical semantic migration evidence: three valid faults caught1629/54/10 mismatches; fixed2048-case before/after holdout0 mismatches and identical395e8e... case identity. Initial semantic report core/native/internal hashes are outdated and do not independently certify current composition. Native unit only checks four explicit-stop/prefix paths with no NativeServices installation. These judges support unchanged structured decisions and declared stop semantics, not every current native forwarder.",
+          "evidence": [
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-evidence.json",
+              "sha256": "5df58948d6d92c38bd66842632225fab658b1edaca99bfeb6117261b2301a36d"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-mutants.txt",
+              "sha256": "ce25c121600efd7f3f4773332fa7883a8bde5c4aa244267de8dbee4f37cc6fb4"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-mutants.json",
+              "sha256": "38b1c88a1327d24ce2299bf08010ccbd1923f66689f8f4016957b7c94e3f4143"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-reference-mutants.json",
+              "sha256": "f2e2a4a2ed410d50a0f31c8ff89498fe39015b8534a3c102f8b6d8bfb13140e1"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-holdout.json",
+              "sha256": "e9bfc6ad64bd6ca92ca2d62e42b9c1dd0bec9e1201d976a10efd7b8818322e37"
+            },
+            {
+              "path": "reference/production-integration-20261016/game-mode-semantic-147-before-holdout.json",
+              "sha256": "fd2fd0009c84a4def4133b95f5882db53cf5800eec463baf182c75593738fe3a"
+            },
+            {
+              "path": "tests/unit/native_game_mode.cpp",
+              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Conformance here covers only the current structured core/value API or private declarations explicitly dispositioned; native binding/services qualification remains open and does not inherit the reference oracle.",
+        "No recovered Action/Adventure/Mission/summary/tutorial/staff-roll implementation or native story/CharacterSelect milestone is inferred. Named link-time throws are legitimate STUB seams; do not invent callbacks to turn them into successful execution.",
+        "Reference scripted owner failures/null sequence/missing return are intentional source-boundary comparisons, not successfully implemented subsystems. The256-word probe does not serialize nested_source_boundary or pending_call; unit checks pending-call presence but does not fully freeze the complete result tuple on all paths.",
+        "Mode receipts lack full historical transitive dependency identities and held-out output streams. Current direct dependencies are pinned below; stale header/native/service hashes remain stale. No FP equivalence claim: mode core is integer dispatch; downstream title/cleanup FP partials and inherited failures remain partial/failing.",
+        "Actual native source product/force-load and native/reference comparison journeys remain Root evidence, not executed here. Last tracked gate is1300815; the user reports full gate97018 active at frozen99bdaf4. No whole Session/runtime/campaign closure or changed product acceptance."
+      ],
+      "reviewed_members": {
+        "src/game/game_mode_services.hpp": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36"
+      },
+      "evidence": [
+        {
+          "path": "src/game/game_mode_services.hpp",
+          "sha256": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36",
+          "line": 1,
+          "link": "src/game/game_mode_services.hpp#L1"
+        }
+      ],
+      "qualification_gaps": [
+        "Do not rewrite the typed composition or promote its old oracle metadata. Root should attach current backend/service/Session dependency identities to existing actual native closure/journey evidence and characterize forwarder/prefix failure behavior where not covered. Preserve original missing owner/return/nested/cancellation tuples separately from successful callees."
       ]
     }
   },
