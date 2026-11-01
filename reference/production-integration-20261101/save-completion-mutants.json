@@ -1,0 +1,229 @@
+{
+  "base": "a9ed5bb404d0674115eb4b6762434a23552c5883",
+  "source_hashes": {
+    "src/game/save_completion.hpp": {
+      "base": "3cfe72feb94599f4c11adc2dfe0b1c54c189cb240bdfa2e11bee64e286ec1a0a",
+      "candidate": "f7ccc8fc53231278f826acdf287d7693cc649e5390df3836b4ab9b635be18d16"
+    },
+    "src/game/save_completion.cpp": {
+      "base": "6eec2190a13705682a1e46d0f3c467b58bac159df6fbd3ee9c5b2071ed6520aa",
+      "candidate": "3ddcb611f9970fde40cd8d731b6c0c9484033ef043b1b73055ffbac7ca319095"
+    },
+    "src/game/file_select.hpp": {
+      "base": "4e9a28bf8c3e3f061f8fe363b0418def386df6c9ed1a149a70d2f1b90754c8e6",
+      "candidate": "c29d9d01a1506957864e54d567ddd6a5911d1149bf883f676b3f0850cd0b5cb7"
+    },
+    "src/game/file_select_controls.cpp": {
+      "base": "e3d12bbda98c073fc6dce1133a830f68ecc5f03a6e49a2a376f9cb35e803dd04",
+      "candidate": "e3d12bbda98c073fc6dce1133a830f68ecc5f03a6e49a2a376f9cb35e803dd04"
+    },
+    "src/runtime/native_title_scene.hpp": {
+      "base": "6bbeb90ebb857292266180d33d2519eadcb8a8ac076cc6b667a9573951382d07",
+      "candidate": "6bbeb90ebb857292266180d33d2519eadcb8a8ac076cc6b667a9573951382d07"
+    },
+    "src/runtime/native_title_tasks.cpp": {
+      "base": "5bc34cd9456afb6af1f38f7af33708ca322ba1f5240897a49706371dd7a6a71c",
+      "candidate": "5bc34cd9456afb6af1f38f7af33708ca322ba1f5240897a49706371dd7a6a71c"
+    },
+    "tests/probes/native_save_creation_probe.cpp": {
+      "base": "7b97306fb3d911a3b675906b498b54f40e5319e7bece3c290d010bb525760f92",
+      "candidate": "7b97306fb3d911a3b675906b498b54f40e5319e7bece3c290d010bb525760f92"
+    },
+    "tests/probes/native_file_select_controls_probe.cpp": {
+      "base": "5d2b362a18f0fc9d14cac524ceb3e84a4cd41cef5f94c4a4a717f7fdac7f03b1",
+      "candidate": "5d2b362a18f0fc9d14cac524ceb3e84a4cd41cef5f94c4a4a717f7fdac7f03b1"
+    },
+    "tools/oracles/verify_original_save_completion.py": {
+      "base": "ec92ebfbbd9a67c108ea35200bccb0070756f61bc425cf8f70ecef3e696d00ba",
+      "candidate": "ec92ebfbbd9a67c108ea35200bccb0070756f61bc425cf8f70ecef3e696d00ba"
+    },
+    "tools/oracles/verify_original_save_creation.py": {
+      "base": "52b7c4f6ea2b2b05992f2583363fec85428bfdf3c2a1bb3d1339d214aa496431",
+      "candidate": "52b7c4f6ea2b2b05992f2583363fec85428bfdf3c2a1bb3d1339d214aa496431"
+    },
+    "tools/oracles/verify_original_file_select_controls.py": {
+      "base": "fb888fe3e2897a7203c6ba2dc65e553c63e727f24e670ca65981b64a94b37a20",
+      "candidate": "fb888fe3e2897a7203c6ba2dc65e553c63e727f24e670ca65981b64a94b37a20"
+    },
+    "tests/unit/save_creation.cpp": {
+      "base": "11312f59661c8b0b83304379f8187cf38a17ab90e982a8f7ad7bb4c43554cbcd",
+      "candidate": "11312f59661c8b0b83304379f8187cf38a17ab90e982a8f7ad7bb4c43554cbcd"
+    },
+    "tests/unit/file_select_controls.cpp": {
+      "base": "0953587a0d3743258253bd153366e8fc0b6c0567ffde281064f40eff8f845c45",
+      "candidate": "0953587a0d3743258253bd153366e8fc0b6c0567ffde281064f40eff8f845c45"
+    }
+  },
+  "archive": {
+    "source": "/Users/burbujamc/Developer/sadx-macos/build/libsadx-core.a",
+    "source_commit": "a9ed5bb",
+    "copy": "/Users/burbujamc/Developer/sadx-wt-menu-progress-predicates/build/menu-progress-current/stable-root-core.a",
+    "sha256": "bfcaf022672ca30c74fac35b7649a2f837bba5f533a740886de2fab13e216c29",
+    "bytes": 4400328,
+    "purpose": "Immutable local core dependency for independent save-completion packet during Main gate; retain while child active. No source replacement or archive transfer."
+  },
+  "judges": {
+    "completion": {
+      "baseline": {
+        "terminal_status": 0,
+        "output_cases": 1000,
+        "full_outputs_sha256": "2e365dc050d24ad7afff6de6c8f3d388c0c6a9a043aceb85c26019bc0cb52e97",
+        "judge_sha256": "ec92ebfbbd9a67c108ea35200bccb0070756f61bc425cf8f70ecef3e696d00ba",
+        "probe_library_sha256": "ae2706d3b3b923344a21e9c30a85db88002144a59a0d809ec3fd0c6345cc71e7",
+        "partial_count": 0
+      },
+      "current": {
+        "terminal_status": 0,
+        "output_cases": 1000,
+        "full_outputs_sha256": "2e365dc050d24ad7afff6de6c8f3d388c0c6a9a043aceb85c26019bc0cb52e97",
+        "judge_sha256": "ec92ebfbbd9a67c108ea35200bccb0070756f61bc425cf8f70ecef3e696d00ba",
+        "probe_library_sha256": "6c9e98f67cd5a40ad740b110117693254609c9cede955b3ea584982238d9f799",
+        "partial_count": 0
+      }
+    },
+    "controls": {
+      "baseline": {
+        "terminal_status": 1,
+        "output_cases": 2438,
+        "full_outputs_sha256": "05a22c097c7c23ac5660c7d7f603274fde98d980305e2bec7501e0afa1e4e3b5",
+        "judge_sha256": "fb888fe3e2897a7203c6ba2dc65e553c63e727f24e670ca65981b64a94b37a20",
+        "probe_library_sha256": "bb9df60915287324c1fdea2217b3e75b086421f49dcac44c43d6bea34ba06662",
+        "partial_count": 938
+      },
+      "current": {
+        "terminal_status": 1,
+        "output_cases": 2438,
+        "full_outputs_sha256": "05a22c097c7c23ac5660c7d7f603274fde98d980305e2bec7501e0afa1e4e3b5",
+        "judge_sha256": "fb888fe3e2897a7203c6ba2dc65e553c63e727f24e670ca65981b64a94b37a20",
+        "probe_library_sha256": "d80f9cf46d03cbb19ccce1c1dab29abd35f7f5f11879ddec454818934812d710",
+        "partial_count": 938
+      }
+    },
+    "capture-baseline": {
+      "cases": 1000,
+      "mismatch_count": 0,
+      "values_match": true,
+      "passed": true,
+      "mismatches": [],
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "limits": "Actual StoreSaveData42d630 and its packed story helpers, through complete1392-byte publication.\n\nThe original game instructions execute except the compiler stack-cookie receipt.\nSource runtime sequence byte1 is skipped, preserving persisted padding. Flags pack\nonly byte value1. All source save snapshots and live lives are compared.\n",
+      "source_ranges": {
+        "0x42d630": "0x42d76c",
+        "0x42d0d0": "0x42d125",
+        "0x42d130": "0x42d185",
+        "0x42d190": "0x42d1f1",
+        "0x42d200": "0x42d24a",
+        "0x425b00": "0x425b26"
+      },
+      "seed": 20261021,
+      "terminal_status": 0
+    },
+    "capture-current": {
+      "cases": 1000,
+      "mismatch_count": 0,
+      "values_match": true,
+      "passed": true,
+      "mismatches": [],
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "limits": "Actual StoreSaveData42d630 and its packed story helpers, through complete1392-byte publication.\n\nThe original game instructions execute except the compiler stack-cookie receipt.\nSource runtime sequence byte1 is skipped, preserving persisted padding. Flags pack\nonly byte value1. All source save snapshots and live lives are compared.\n",
+      "source_ranges": {
+        "0x42d630": "0x42d76c",
+        "0x42d0d0": "0x42d125",
+        "0x42d130": "0x42d185",
+        "0x42d190": "0x42d1f1",
+        "0x42d200": "0x42d24a",
+        "0x425b00": "0x425b26"
+      },
+      "seed": 20261021,
+      "terminal_status": 0
+    }
+  },
+  "local_raw_output_directory": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/save-completion-packet",
+  "late_consumer_baseline": "Control baseline compiled from git-show base header after the naming edit; controls cpp/probe unchanged. Its protected native_sources hashes read current checkout, so use this companion for actual baseline header identity.",
+  "mutants": [
+    {
+      "name": "unsigned-save-ok",
+      "judge": "oracle",
+      "compile_status": 0,
+      "terminal_status": 1,
+      "stdout": "{\"cases\": 1000, \"mismatches\": 125}\n",
+      "stderr": ""
+    },
+    {
+      "name": "short-delay",
+      "judge": "oracle",
+      "compile_status": 0,
+      "terminal_status": 1,
+      "stdout": "{\"cases\": 1000, \"mismatches\": 125}\n",
+      "stderr": ""
+    },
+    {
+      "name": "defer-fallthrough",
+      "judge": "oracle",
+      "compile_status": 0,
+      "terminal_status": 1,
+      "stdout": "{\"cases\": 1000, \"mismatches\": 211}\n",
+      "stderr": ""
+    },
+    {
+      "name": "early-selection-read",
+      "judge": "unit",
+      "compile_status": 0,
+      "terminal_status": -6,
+      "stdout": "",
+      "stderr": "Assertion failed: (f.backup == 211 && f.fade == 0 && f.ok == 0), function main, file save_completion_callbacks.cpp, line 73.\n"
+    },
+    {
+      "name": "close-before-clear",
+      "judge": "unit",
+      "compile_status": 0,
+      "terminal_status": -6,
+      "stdout": "",
+      "stderr": "Assertion failed: (phase == 0 && ready == 0 && exec == 0 && alert == 0), function cleared, file save_completion_callbacks.cpp, line 39.\n"
+    }
+  ],
+  "checks": {
+    "units": {
+      "save-creation": 0,
+      "file-select-controls": 0,
+      "save-completion-callbacks": 0,
+      "save-completion-callbacks-base": 0
+    },
+    "native_title_tasks_compile": 0,
+    "provenance": "Provenance: {'GLOBAL': 84, 'FUNCTION': 479, 'STUB': 84, 'PATCH': 2, 'DATA': 2}, 164651 legacy/annotated byte identities, 0 errors",
+    "readability": "Readability: 498 files, {'hex_literals': 3235, 'address_identifiers': 1452, 'address_calls': 61, 'goto': 0, 'address_labels': 0, 'long_lines': 1165, 'multi_statement_lines': 1800, 'large_decimal_literals': 233, 'emulator_arithmetic': 3297, 'address_comments': 1059}, 0 regressions",
+    "profile": {
+      "patches": 618,
+      "active_patches": 121,
+      "active_unhandled_patches": 79,
+      "reports": 19,
+      "declared_exe_ranges": 34,
+      "unhandled_overlaps": 0,
+      "handled_overlaps": 0,
+      "undetermined_overlaps": 0,
+      "reports_without_addressed_ranges": [
+        "baseline-completion.outputs.json",
+        "baseline-completion.qualification.json",
+        "baseline-controls.outputs.json",
+        "baseline-controls.qualification.json",
+        "current-completion.outputs.json",
+        "current-completion.qualification.json",
+        "current-controls.outputs.json",
+        "current-controls.qualification.json",
+        "mutants.json",
+        "profile.json"
+      ]
+    }
+  },
+  "source_context": {
+    "cached_dossier": "/Users/burbujamc/Developer/sadx-macos/reference/inventory-raw/native-file-select-minimal-503600.json",
+    "evidence_id": "ev_239a8b751587ea915e904f464857f5f846c6e0499ed69c43fde7018f5a9650d6",
+    "dossier_sha256": "e8eb264c17eb5b10fc6022eb03fbf3d82b738aeb1cd895a0e0448d4a4b76b497",
+    "exact_byte_disassembly_sha256": "8a4c21f1b3fe6f88f4be359da79f3b40f8ec12ffb0e49010a16456e66920855f"
+  },
+  "qualification_source_hashes": {
+    "tests/unit/save_completion_callbacks.cpp": "36e9e79c04918f8e3ece839da84a89663529c6e00f5fe94bc5b344a6df8942ec",
+    "reference/packets/save-completion/qualify.py": "c46fac4b1445c455013186a9ddf1ff06722d6fce4548be7e3560468ca641425c",
+    "reference/packets/save-completion/mutants.py": "74d50b40a4705eb7ec5d1ce1dd172e3e297714ca29a77cbe175378c5365d3b51"
+  }
+}

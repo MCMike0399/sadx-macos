@@ -1,9 +1,10 @@
 {
   "change": {
-    "base_commit": "8900a57f59f02133f0f29438b6903d5dfa4d092f",
-    "evidence": "reference/production-integration-20261101/menu-render-manifest-union.json",
-    "evidence_sha256": "8996f6fe5fad11a43847539211d781b0e17b8b31a79d101192f3df3c7e2c7cd4",
-    "reason": "Reconcile reviewed menu-table/mutation evidence and canonical render reports without dropping either protected input set"
+    "base_commit": "ee5a1c5ae956e4f899936bcb098539b6761f1813",
+    "evidence": "reference/production-integration-20261101/save-completion-registration.json",
+    "evidence_sha256": "7b519b4fb2ea411d57692b8256e5fead3bf1ede353da0ee5813b8b174b0057ba",
+    "mode": "additions-only",
+    "reason": "Register new save completion callback unit and freeze its five valid mutation results after separate source commit"
   },
   "files": {
     "Makefile": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
@@ -332,6 +333,7 @@
     "reference/production-integration-20261026/native-model-binding-mutants.json": "8d936da60183fd5f8ffec99fe7c9f07f5e88c1e76829d9cabc42d2c4ca6ff6a2",
     "reference/production-integration-20261026/selection-player-queries/mutants.json": "5ef23236ac47efe1e21f0c13b0394f055c3a7f9f3d45ba60a1b9fffe2d3094ca",
     "reference/production-integration-20261101/menu-progress-shared/mutants.json": "cab8745d573efa9caa6e281654ef85ce535c0d28b4e593236e921d275faed40d",
+    "reference/production-integration-20261101/save-completion-mutants.json": "1b4657b0ff662bcc21255779aa675f8acc40cdb8fb55cbfef7a8b974e70e5694",
     "tests/fixtures/input_keyboard_goldens.hpp": "0a9f25e5a0d336a1f4381af39257fdc6f7403f43ca2aef743345284fb1c18fda",
     "tests/fixtures/material_correction_mutants.json": "e34f023704a87b4663d5c56fed1c1beabaa697cd3a3770bbe24962ab28f66f41",
     "tests/fixtures/ninja_sprite_test_fixture.hpp": "1b4fa2a0ac6270d896f9e54c297829bdf3d43c378d195cbe34d0d6e87fd2b24e",
@@ -632,7 +634,7 @@
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",
     "tests/python/test_voice_publication.py": "5c00051d9b3de640f64e224dda4d810cdd7d26acafd91d7b1dc44e9786a734f3",
-    "tests/unit/manifest.tsv": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
+    "tests/unit/manifest.tsv": "be26bf1a641df0e5b887653a87cc5b9de1d0c55b6d8b8dfa0a79c8439458039b",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",
