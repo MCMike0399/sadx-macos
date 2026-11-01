@@ -1,0 +1,55 @@
+{
+  "base": "8e15bbe214910730b97aad1bd1a7f1bbb8e0ddfe",
+  "scope": "Before-source baseline for existing reset ownership debt; not implementation or approval.",
+  "files": {
+    "src/game/game_reset.hpp": "f5e13a2638df8a0f5bf8a437c1b5bbf40ea4e38338cb1fcb89ee19877496a733",
+    "src/game/game_reset.cpp": "2ff4f746fb3ef4b2cc0272af108f98e54caef38db2a40232f9955b5b4c9b384f",
+    "src/game/game_reset_leaves.hpp": "884755a504c07af311f0989754829d7ce6fad2e7bb2c77c1c47e25a417f12038",
+    "src/game/game_reset_leaves.cpp": "298701e955489b8b8ada5aede75c143453471a1928f5e72b2a0f3dc74f971521",
+    "src/game/game_cleanup.hpp": "eabdca730d54ae33912d5696bac88673df02e1d894c2b572dd6762cd309dcd5d",
+    "src/game/game_cleanup.cpp": "024c23e264893b083234cd4acd187a9f08496a9aae650f21a446740cb8f46b9b",
+    "src/runtime/native_session.cpp": "b35346aac89c4e0fe0c30181149717f9a0af3c9c50dddaac4fe1e685b93f3b13",
+    "src/runtime/native_session.hpp": "1c5a4dba5a5bffe1c476ed60feadb3802f838a9c1af73a512cae922b4fb91071",
+    "src/guest/native_game_reference.cpp": "f755957f6cf60e0b30a8af255292089f393f8a19c8efd522b7dda34e2e24934d",
+    "src/guest/native_game_reference.hpp": "f9709b794475f8f85db465f923d52de12297afc8eb8f9697cb8c198bd79266e0",
+    "src/player/sonic_player.cpp": "4b170e197fe8a048e875cd83757dc93558129280156afa87f3137b550af9200f",
+    "src/player/sonic_player.hpp": "cd6c2556f5944cee132e040e80ae878ada8b0f388f7faa6e914a96df73842f87",
+    "tests/probes/native_game_reset_probe.cpp": "cb20c0754951e28fa02abb8edf701a61365f061059319751d8be87d17976008d",
+    "tests/probes/native_game_reset_composed_probe.cpp": "b0180cc04fbc39b6191c7c6cfd7c111125a6e13cfdbeb06afcb29618e7967a1f",
+    "tools/oracles/verify_original_game_reset.py": "a6f0868a6f23274feb404bbbc2f463e2a2e1e6d24b253363a713373e629c2c7e",
+    "tools/oracles/verify_original_game_reset_composed.py": "65b2f8676ed56673896446fec9358528b3d68fd6888d5b47726e963584231939"
+  },
+  "process_exit_status": 0,
+  "reports": {
+    "game_reset": {
+      "full_report": "build/reset-owner-baseline-8e15bbe/game_reset.json",
+      "report_sha256": "275bbd0b73ead0b003a1e52e2298dccc4a7cd35fb3bd1a3674070eea9f0899ee",
+      "native_model": "build/reset-owner-baseline-8e15bbe/native-game-reset-probe.dylib",
+      "model_sha256": "b6b99004f2c820ce0a9a8d109e0c16d6f59d01e93ac290de185cee538a527c12",
+      "cases": 300,
+      "mismatches": [],
+      "original_outcomes": null,
+      "limits": "Game-state reset 40bf40 against original instructions.\n\nEvery callee except the 51f680 RET and srand 6443b5 is an owner fixture that\nrecords (callee, site, first argument) and may fail at call N. Compared: call\norder/sites/arguments, 3abdf80, word 3b29d08, the conditional free-and-zero of\n3b290d0 and 3b0e330, and the CRT seed 2bcbdf8.\n"
+    },
+    "game_reset_composed": {
+      "full_report": "build/reset-owner-baseline-8e15bbe/game_reset_composed.json",
+      "report_sha256": "0616dcb4f33be49e1a16a96455781e0e47d797633d264dbcb76104d3f9094136",
+      "native_model": "build/reset-owner-baseline-8e15bbe/native-game-reset-composed-probe.dylib",
+      "model_sha256": "6d2f32b6af6f01cb6d93b535abed39b8f366261a7765c22c9cbbed514634371b",
+      "cases": 300,
+      "mismatches": [],
+      "original_outcomes": null,
+      "limits": "40bf40 with its ported leaves running as real source code, over fourteen randomized pages.\n\nReal source: 40bf40, 422440, 4224b0 (PrintDebug 401000 skipped after checking\nits constant format), 40cd10, 401410, 785330, 403e60, 4257c0, 4257e0, 424460,\n410100 (audio-uninitialized return), 40cff0, 40d490(0), 4228f0, 421fb0, the\n51f680 RETs and srand. Fixtures (recorded callee, site, argument or ECX; may\nfail at call N): 4208e0, 40b1a0, 40b460, 411af0, 780fb0, the\n3b291b4 callback (its `call *%eax` at 42291e is skipped and recorded), 504ed0, 411760, 411720. When the audio system is initialized\nthe source stops at 41010d, which native reports as its boundary. Pages are\ncompared byte for byte (stray source writes count as mismatches).\n"
+    }
+  },
+  "reused_current_cleanup_baseline": {
+    "report": "build/oracles/game_cleanup.json",
+    "sha256": "487a286bd17a50e1d590ce55721e07cf8cd21891093e99b1756d29358d2f8c24",
+    "scope": "Already rerun during Task Main integration, same source; 2604 cases including nested300reset. Not rerun here."
+  },
+  "limits": [
+    "Baseline only. No source, fixture, oracle or expectation change, new provider or gameplay recovery.",
+    "Composed reset maps all14pages and substitutes heap/task initialization; it cannot prove absent-fact behavior, actual arena replacement/reuse lifetime, or full native/reference composition.",
+    "Known original/native lifecycle discrepancy207 and broader pending source-owned buffers remain explicit."
+  ]
+}
