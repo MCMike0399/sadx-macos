@@ -1,0 +1,122 @@
+{
+  "source_commit": "b5b544757e4fa744123cdffa4e3eef0e631e62e0",
+  "old_site": "src/math/ninja_length.cpp",
+  "old_site_count": 0,
+  "new_site": "src/cpu/fidelity_float.hpp",
+  "new_site_count": 1,
+  "before": "((zz + yy) + xx).rounded()",
+  "after": "((xx + yy) + zz).rounded()",
+  "old_fault": {
+    "cases": 7818,
+    "value_mismatches": 45,
+    "fp_partials": 6342,
+    "exit": 1
+  },
+  "unchanged_evaluator_sha256": "3105d7e9acaf4a5509b45cfff6753a2daf0678548b831f325fdd883a2b82c90c",
+  "scope": "Carry the exact existing mutation to the canonical inline body using a private header include; no evaluator, fixture, input, tolerance, case count or holdout change.",
+  "relocated_fault": {
+    "exit": 1,
+    "cases": 7818,
+    "value_mismatches": 45,
+    "fp_partials": 6342
+  },
+  "old_new_fault_comparison": [
+    {
+      "slug": "collision_component",
+      "full_outputs_identical": true,
+      "full_output_identity": {
+        "sha256": "37660af4a769ed6e394f86504c57a917a77db34920e24d34a5cbaa3cd581755b",
+        "bytes": 22772870,
+        "records": 8706
+      },
+      "reports_equal_without_build_metadata": true
+    }
+  ],
+  "additional_faults": [
+    {
+      "name": "no_squared_store",
+      "before": "        const float squared = ((zz + yy) + xx).rounded();\n        return signed_square_root(context, squared).value_;",
+      "after": "        const auto squared = (zz + yy) + xx;\n        (void)context.compare_double_memory(squared.value_, 0.0);\n        return context.sqrt(squared.value_);",
+      "contract": {
+        "changed_records": 446239,
+        "missing_records": 0,
+        "extra_records": 22717,
+        "finite_raw_return_counterexample": {
+          "cw": 127,
+          "vector": [
+            0,
+            0,
+            1
+          ],
+          "original_output": [
+            0,
+            0,
+            0,
+            50,
+            50,
+            127,
+            0,
+            0
+          ],
+          "mutated_output": [
+            16234,
+            0,
+            2147483648,
+            2,
+            2,
+            127,
+            0,
+            0
+          ]
+        }
+      },
+      "caught": true,
+      "original_judge": {
+        "exit": 1,
+        "cases": 7818,
+        "value_mismatches": 365,
+        "fp_partials": 6342
+      }
+    },
+    {
+      "name": "rounded_return",
+      "before": "return signed_square_root(context, squared).value_;",
+      "after": "return context.from_float(signed_square_root(context, squared).rounded());",
+      "contract": {
+        "changed_records": 153400,
+        "missing_records": 0,
+        "extra_records": 0,
+        "finite_raw_return_counterexample": {
+          "cw": 639,
+          "vector": [
+            0,
+            0,
+            1065353217
+          ],
+          "original_output": [
+            16383,
+            4294901760,
+            2147483903,
+            32,
+            32,
+            639,
+            0,
+            0
+          ],
+          "mutated_output": [
+            16383,
+            0,
+            2147483904,
+            32,
+            32,
+            639,
+            0,
+            0
+          ]
+        }
+      },
+      "caught": true
+    }
+  ],
+  "holdout": "unrun; reserved for Root after independent review"
+}

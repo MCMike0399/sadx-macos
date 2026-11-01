@@ -24,7 +24,8 @@ MUTANTS = [
     ('cylinder_ignores_c', CPP[0],
      'info.form == Form::Cylinder || info.form == Form::CylinderAlternate', 'false'),
     ('range_fallback', CPP[0], 'compare(0.1f)', 'compare(25.0f)'),
-    ('length_sum_order', CPP[1], '((zz + yy) + xx).rounded()', '((xx + yy) + zz).rounded()'),
+    ('length_sum_order', 'src/cpu/fidelity_float.hpp',
+     '((zz + yy) + xx).rounded()', '((xx + yy) + zz).rounded()'),
     ('clear_primary_status', CPP[0], 'status_flags &= kRetainedPrimaryFlags;',
      'status_flags |= kRetainedPrimaryFlags;'),
     ('allocation_orphan', CPP[0], 'free_collision(arena, task);',
@@ -59,8 +60,12 @@ def main():
     command(['sh', 'third_party/softfloat/build.sh', archive.parent], out / 'softfloat.log')
 
     def library(destination, replacements=None):
-        sources = [(replacements or {}).get(p, p) for p in CPP]
-        command([compiler, *FLAGS, '-fPIC', '-dynamiclib',
+        replacements = replacements or {}
+        sources = [replacements.get(p, p) for p in CPP]
+        # The canonical length body is inline in its numerical compatibility header.
+        length_header = replacements.get('src/cpu/fidelity_float.hpp')
+        includes = ['-I' + str(Path(length_header).parent.parent)] if length_header else []
+        command([compiler, *includes, *FLAGS, '-fPIC', '-dynamiclib',
                  'tests/probes/native_collision_component_probe.cpp', *sources, archive,
                  '-o', destination], destination.with_suffix('.build.log'))
 
@@ -95,7 +100,9 @@ def main():
                 raise RuntimeError(f'mutant {name}: expected one exact site')
             folder = out / 'mutants' / name
             folder.mkdir(parents=True, exist_ok=True)
-            candidate = folder / Path(source).name
+            candidate = folder / ('include/cpu/fidelity_float.hpp'
+                                  if source == 'src/cpu/fidelity_float.hpp' else Path(source).name)
+            candidate.parent.mkdir(parents=True, exist_ok=True)
             candidate.write_text(text.replace(before, after))
             lib = folder / 'probe.dylib'
             library(lib, {source: candidate})
