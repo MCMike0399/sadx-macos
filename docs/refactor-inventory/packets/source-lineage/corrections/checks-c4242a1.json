@@ -1,0 +1,76 @@
+[
+  {
+    "command": [
+      "python3",
+      "tools/inventory/refactor_inventory.py",
+      "--check"
+    ],
+    "exit_status": 1,
+    "stdout": "",
+    "stderr": "Inventory drift: modules.jsonl, modules-002.jsonl, boundaries.jsonl, summary.json, files/src-apps.jsonl, files/tests-python.jsonl, files/tools-inventory.jsonl\n"
+  },
+  {
+    "command": [
+      "python3",
+      "tools/gate/check_judge.py"
+    ],
+    "exit_status": 0,
+    "stdout": "Judge manifest: 1269 files, 0 violations\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "python3",
+      "docs/refactor-inventory/reviews/source-lineage-review-reproduce.py"
+    ],
+    "exit_status": 0,
+    "results": [
+      {
+        "accepted": true,
+        "after": {
+          "accounted_open_entries": 2,
+          "accounted_scope": 2,
+          "current_tracked_denominator": 1,
+          "historical_open_debt": 1,
+          "historical_retained_scope": 1
+        },
+        "before": {
+          "accounted_open_entries": 3,
+          "accounted_scope": 3,
+          "current_tracked_denominator": 1,
+          "historical_open_debt": 2,
+          "historical_retained_scope": 2
+        },
+        "case": "committed_receipt_squashes_retained_history",
+        "dropped_path": "src/player/initializer.hpp",
+        "specific_debt_present": false
+      },
+      {
+        "accepted": true,
+        "case": "unmerged_replacement_snapshot",
+        "historical_open_debt": 1,
+        "replacement_is_head_ancestor": false,
+        "snapshot_matches_current": false
+      },
+      {
+        "accepted": true,
+        "case": "historical_disposition_and_counts_rewritten",
+        "member": {
+          "module": "src/player/operations",
+          "observed_counts": {},
+          "prior_disposition": "already_conforming",
+          "remaining_debt": [
+            "Unrelated generic limit."
+          ]
+        }
+      },
+      {
+        "accepted": true,
+        "case": "working_tree_acceptance_with_committed_pending_review",
+        "committed_review_verdict": "pending",
+        "working_tree_review_verdict": "accept"
+      }
+    ],
+    "stderr": ""
+  }
+]

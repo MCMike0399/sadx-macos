@@ -1,0 +1,93 @@
+"""Read candidate tooling; exercise metadata only in temporary fixture repositories."""
+import copy
+import importlib.util
+import json
+from pathlib import Path
+import subprocess
+
+CANDIDATE = Path('/Users/burbujamc/.t3/worktrees/sadx-macos/t3-b4c42380')
+spec = importlib.util.spec_from_file_location('fixture', CANDIDATE / 'tests/python/test_refactor_inventory_lineage.py')
+fixture = importlib.util.module_from_spec(spec)
+spec.loader.exec_module(fixture)
+
+
+def run(label, action):
+    case = fixture.LineageFixture()
+    case.setUp()
+    try:
+        print(json.dumps({'case': label, **action(case)}, sort_keys=True))
+    finally:
+        case.doCleanups()
+
+
+def summary(case):
+    return json.loads(case.render()['summary.json'])
+
+
+def squash(case):
+    later = 'src/player/later.hpp'
+    case.run_git('mv', case.new, later)
+    moved = case.commit()
+    case.put('docs/later.txt', case.new_bytes.decode())
+    second = copy.deepcopy(case.edge)
+    second['before'] = case.edge['replacements'][0]
+    second['member']['module'] = fixture.inv.module(case.new)
+    second['member']['remaining_debt'] = ['Preserve this specific intermediate consumer obligation.']
+    second['replacements'] = [case.snapshot(later, case.new_bytes, moved, 'docs/later.txt')]
+    case.seal([case.edge, second])
+    before = summary(case)
+    direct = copy.deepcopy(case.edge)
+    direct['replacements'] = second['replacements']
+    case.seal([direct])
+    after = summary(case)
+    keys = ['current_tracked_denominator', 'historical_retained_scope', 'historical_open_debt', 'accounted_scope', 'accounted_open_entries']
+    return {'accepted': True, 'before': {k: before[k] for k in keys},
+            'after': {k: after[k] for k in keys}, 'dropped_path': case.new,
+            'specific_debt_present': 'specific intermediate' in case.render()['lineage-001.jsonl']}
+
+
+def side_branch(case):
+    main = case.run_git('rev-parse', 'HEAD')
+    case.run_git('checkout', '-qb', 'unmerged-snapshot', case.base)
+    candidate_bytes = 'struct AllegedlyReviewedButNeverIntegrated {};\n'
+    case.put(case.new, candidate_bytes)
+    unmerged = case.commit()
+    case.run_git('checkout', '-q', '--detach', main)
+    case.put('docs/unmerged.txt', candidate_bytes)
+    case.edge['replacements'] = [case.snapshot(case.new, candidate_bytes.encode(), unmerged, 'docs/unmerged.txt')]
+    case.seal([case.edge])
+    result = summary(case)
+    ancestor = subprocess.run(['git', '-C', str(case.root), 'merge-base', '--is-ancestor', unmerged, 'HEAD']).returncode
+    return {'accepted': True, 'replacement_is_head_ancestor': ancestor == 0,
+            'snapshot_matches_current': (case.root / case.new).read_text() == candidate_bytes,
+            'historical_open_debt': result['historical_open_debt']}
+
+
+def rewrite_debt(case):
+    case.edge['member'].update(prior_disposition='already_conforming', observed_counts={},
+                               remaining_debt=['Unrelated generic limit.'])
+    case.seal([case.edge])
+    return {'accepted': True, 'member': json.loads(case.render()['lineage-001.jsonl'])['member']}
+
+
+def uncommitted_review(case):
+    accepted = (case.root / 'docs/review-0.json').read_bytes()
+    pending = json.loads(accepted)
+    pending['verdict'] = 'pending'
+    case.put_json('docs/review-0.json', pending)
+    # Freeze a ledger which names accepted bytes, while Git holds a pending review.
+    freeze = case.commit()
+    case.receipt['freeze_commit'] = freeze
+    case.put_json('docs/refactor-inventory/receipt.json', case.receipt)
+    case.commit()
+    (case.root / 'docs/review-0.json').write_bytes(accepted)
+    summary(case)
+    committed = json.loads(case.run_git('show', 'HEAD:docs/review-0.json'))
+    return {'accepted': True, 'committed_review_verdict': committed['verdict'],
+            'working_tree_review_verdict': json.loads(accepted)['verdict']}
+
+
+run('committed_receipt_squashes_retained_history', squash)
+run('unmerged_replacement_snapshot', side_branch)
+run('historical_disposition_and_counts_rewritten', rewrite_debt)
+run('working_tree_acceptance_with_committed_pending_review', uncommitted_review)
