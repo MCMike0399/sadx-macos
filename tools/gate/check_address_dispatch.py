@@ -108,7 +108,8 @@ def census(source, path, signatures):
         if suffix.startswith('{') or re.match(
                 r'(?:const\b|volatile\b|noexcept\b|override\b|final\b|requires\b|'
                 r'__attribute__\b|__declspec\b|throw\s*\(|\[\[|->)', suffix) or re.match(
-                r'&&?\s*(?:noexcept(?:\s*\([^;{}]*\))?\s*)?(?:->[^;{}]+)?\{', suffix):
+                r'&&?\s*(?:(?:(?:override|final)\b|noexcept(?:\s*\([^;{}]*\))?)\s*)*'
+                r'(?:->[^;{}]+)?\{', suffix):
             raise ValueError(f'{path}: unregistered overload definition: {helper}')
         if not spec['min_args'] <= len(spans) <= spec['max_args']:
             raise ValueError(f'{path}:{source.count(chr(10), 0, match.start()) + 1}: '

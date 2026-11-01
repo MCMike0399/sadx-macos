@@ -94,6 +94,8 @@ call(rt, f, fp, /* target */ kAlias, 0xffffffff);
                          'struct Painter { void call(int a,int b,int c,int d,int e) const {} };',
                          'auto call(int a,int b,int c,int d,int e) -> int { return d; }',
                          'int call(int a,int b,int c,int d,int e) && noexcept { return d; }',
+                         'struct Painter { void call(int a,int b,int c,int d,int e) & final {} };',
+                         'struct Painter { void call(int a,int b,int c,int d,int e) & override {} };',
                          'auto call = [&](int a,int b,int c,int d,int e) { paint(d); };'):
             with self.subTest(addition=addition), self.assertRaises(ValueError):
                 census(LATER + '\n' + addition, PATH, [spec()])
