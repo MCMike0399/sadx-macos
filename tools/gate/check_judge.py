@@ -12,7 +12,8 @@ ROOT = Path(__file__).resolve().parents[2]
 MANIFEST = 'reference/judge-manifest.json'
 DECLARATION = '.claude/judge-change.json'
 DIRECTORIES = ('tools/oracles', 'tools/gate', 'tools/lib', 'tests/probes', 'tests/fixtures',
-               'tests/python', 'reference/oracle-reports')
+               'tests/python', 'tests/unit', 'reference/oracle-reports')
+REFERENCE_PACKET_SCRIPTS = 'reference/packets/**/*.py'
 FILES = ('reference/constexpr-table-review.json', 'reference/address-dispatch-baseline-v1.json', 'tools/journey/content_corpus.py', 'tools/journey/capture_content.py', 'tools/journey/compare_native_startup.py', 'tools/journey/check_native_file_select.py', 'tools/journey/check_native_main_menu.py', 'tools/journey/check_native_fresh_save.py', 'Makefile', 'tests/unit/manifest.tsv', 'reference/frame-control-corpus.tsv',
          'reference/frame-control-corpus.json', 'reference/keyboard-sampling-goldens.json',
          'reference/judge-hook-settings.proposed.json',
@@ -28,6 +29,7 @@ def protected(path):
         return False
     return (path in FILES or path == MANIFEST or
             any(path.startswith(directory + '/') for directory in DIRECTORIES) or
+            (path.startswith('reference/packets/') and Path(path).suffix == '.py') or
             path.startswith('reference/frozen-corpora/') or
             re.fullmatch(r'reference/[^/]*corpus[^/]*', path) is not None or
             (path.startswith('reference/production-integration-') and
@@ -44,6 +46,7 @@ def snapshot(root):
     for directory in DIRECTORIES:
         paths.update(p for p in (root / directory).rglob('*') if p.is_file() or p.is_symlink())
     paths.update(root / name for name in FILES)
+    paths.update(p for p in root.glob(REFERENCE_PACKET_SCRIPTS) if p.is_file() or p.is_symlink())
     paths.update(root.glob('reference/production-integration-*/**/*mutant*.json'))
     paths.update(p for p in (root / 'reference/frozen-corpora').rglob('*') if p.is_file() or p.is_symlink())
     paths.update(p for p in (root / 'reference').glob('*corpus*') if p.is_file() or p.is_symlink())

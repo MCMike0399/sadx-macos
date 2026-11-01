@@ -90,6 +90,33 @@ class JudgeTests(unittest.TestCase):
         self.assertTrue(protected('tools/lib/pe_image.py'))
         self.assertTrue(protected(MANIFEST))
 
+    def test_packet_helpers_and_unit_contracts_are_protected(self):
+        for path in ('reference/packets/example/observe.py',
+                     'tests/unit/example.cpp', 'tests/unit/example.mm',
+                     'tests/unit/example.hpp'):
+            with self.subTest(path=path):
+                self.assertTrue(protected(path))
+        self.assertFalse(protected('reference/packets/example/README.md'))
+        self.assertFalse(protected('reference/packets/example/__pycache__/observe.pyc'))
+
+    def test_packet_and_unit_add_change_remove_drift(self):
+        paths = ('reference/packets/example/observe.py', 'tests/unit/example.cpp')
+        for path in paths:
+            self.write(path, 'original contract\n')
+        self.assertTrue(any('unmanifested judge input' in e for e in check(self.root)[0]))
+        manifest = json.loads((self.root / MANIFEST).read_text())
+        manifest['files'] = snapshot(self.root)
+        self.write(MANIFEST, json.dumps(manifest))
+        for path in paths:
+            with self.subTest(path=path):
+                self.write(path, 'changed contract\n')
+                self.assertIn('changed judge input: ' + path, check(self.root)[0])
+                self.write(path, 'original contract\n')
+                (self.root / path).unlink()
+                self.assertIn('missing judge input: ' + path, check(self.root)[0])
+                self.write(path, 'original contract\n')
+        self.assertEqual(check(self.root)[0], [])
+
     def test_update_requires_evidence_and_separate_game_commit(self):
         self.assertEqual(self.cli('--update').returncode, 1)
         self.commit_fixture()
