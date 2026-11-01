@@ -29,3 +29,6 @@ sentinel from a published incomplete/freed file node, retains full-width time,
 and drives nested before/after scheduling on the same state and message Context.
 Writer/close exceptions assert reached stores and pending values. This adds
 specific identity/reentry coverage beyond the immutable systematic streams.
+The added boundary target lists its complete compiler-discovered local dependency
+closure (`clang++ -MM` over all five translation units), preserving header-triggered
+rebuilds. Existing targets and forced reference fixtures remain unchanged.
