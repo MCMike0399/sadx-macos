@@ -1,0 +1,430 @@
+{
+  "base": "1300815eae321d5de8e992958b2841f96ca47039",
+  "source_commit": "fc4be98",
+  "inputs": {
+    "src/loader/executable_image.cpp": "3f376bb5c78c6a4a1d67162175ab459b144fe1e27849f9fae6acabdad7ac3f99",
+    "src/loader/executable_image.hpp": "a445f239d4b4303c54ab321697eeb0bb06ff7c96352576298cfdf8f7a54315b6",
+    "tests/unit/executable_image.cpp": "7e6f11fd6d6e9a86c6ac9b53d1d625a9baefd3be179783870453abc2a964141b",
+    "tests/unit/executable_image_edges.cpp": "ca9ccd9a379736ee6347907a56493573911d7782279df79c13677eb557574c1c",
+    "tests/unit/manifest.tsv": "efb6c50d3e035429ecd18460e5c814e928d9336387b839de4eb408871b280ea0",
+    "Makefile": "637a6ca44490eb49e44500837fa6a6c9add6d1863950e902a1135445d2db2dad",
+    "docs/packets/executable-image/qualify.py": "550992b43b90598d0280224671477d2494797dba749f81218b1cfa6d24a8cfe0"
+  },
+  "records": [
+    {
+      "command": [
+        "git",
+        "show",
+        "1300815eae321d5de8e992958b2841f96ca47039:src/loader/executable_image.hpp"
+      ],
+      "exit": 0,
+      "stdout": "sha256 112d26830c0e807ee7b3c4bd5bb9b1600a86c9ee0e08a17ad733e99a7e6b22cd",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "git",
+        "show",
+        "1300815eae321d5de8e992958b2841f96ca47039:src/loader/executable_image.cpp"
+      ],
+      "exit": 0,
+      "stdout": "sha256 0f21f60ae1034911a271afe3de215683f6c4d5410965bdbfe6e67e4882d17c9b",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/baseline",
+        "-Isrc",
+        "tests/unit/executable_image.cpp",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/baseline.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/contract-baseline"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/contract-baseline",
+        "--valid"
+      ],
+      "exit": 0,
+      "stdout": "valid checks 65630\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/contract-baseline",
+        "--p2"
+      ],
+      "exit": 1,
+      "stdout": "",
+      "stderr": "LB-1: final eight-byte header declaring ten-byte block must fail explicitly\n"
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc",
+        "tests/unit/executable_image.cpp",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/src/loader/executable_image.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/contract-current"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/contract-current"
+      ],
+      "exit": 0,
+      "stdout": "valid checks 65630\nLB-1 explicit malformed-image failure\nmalformed checks 65674\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/contract-current",
+        "--invalid-option"
+      ],
+      "exit": 1,
+      "stdout": "",
+      "stderr": "usage: executable-image-test [--valid|--malformed|--p2|--all]\n"
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O1",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-g",
+        "-fsanitize=address,undefined",
+        "-fno-omit-frame-pointer",
+        "-Isrc",
+        "tests/unit/executable_image.cpp",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/src/loader/executable_image.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/contract-sanitized"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/contract-sanitized"
+      ],
+      "exit": 0,
+      "stdout": "valid checks 65630\nLB-1 explicit malformed-image failure\nmalformed checks 65674\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/baseline",
+        "-Isrc",
+        "tests/unit/executable_image_edges.cpp",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/baseline.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/edges-baseline"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/edges-baseline",
+        "--valid"
+      ],
+      "exit": 0,
+      "stdout": "valid edge checks 11\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc",
+        "tests/unit/executable_image_edges.cpp",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/src/loader/executable_image.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/edges-current"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/edges-current"
+      ],
+      "exit": 0,
+      "stdout": "valid edge checks 11\nmalformed edge checks 8221\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/edges-current",
+        "--invalid-option"
+      ],
+      "exit": 1,
+      "stdout": "",
+      "stderr": "usage: executable-image-edges-test [--valid|--malformed|--all]\n"
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O1",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-g",
+        "-fsanitize=address,undefined",
+        "-fno-omit-frame-pointer",
+        "-Isrc",
+        "tests/unit/executable_image_edges.cpp",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/src/loader/executable_image.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/edges-sanitized"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/edges-sanitized"
+      ],
+      "exit": 0,
+      "stdout": "valid edge checks 11\nmalformed edge checks 8221\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc",
+        "tests/unit/executable_image.cpp",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/ignored-directory.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/ignored-directory"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/ignored-directory",
+        "--p2"
+      ],
+      "exit": 1,
+      "stdout": "",
+      "stderr": "LB-1: final eight-byte header declaring ten-byte block must fail explicitly\n"
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc",
+        "tests/unit/executable_image.cpp",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/missing-delta.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/missing-delta"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/missing-delta",
+        "--valid"
+      ],
+      "exit": 1,
+      "stdout": "",
+      "stderr": "rebased byte\n"
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc",
+        "tests/unit/executable_image.cpp",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/wrong-export.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/wrong-export"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/wrong-export",
+        "--valid"
+      ],
+      "exit": 1,
+      "stdout": "",
+      "stderr": "direct export\n"
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc",
+        "tests/unit/executable_image.cpp",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/wrong-fallback.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/wrong-fallback"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/wrong-fallback",
+        "--valid"
+      ],
+      "exit": 1,
+      "stdout": "",
+      "stderr": "DLL\n"
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc",
+        "tests/unit/executable_image.cpp",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/wrong-zero-tail.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/wrong-zero-tail"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/wrong-zero-tail",
+        "--valid"
+      ],
+      "exit": 1,
+      "stdout": "",
+      "stderr": "zero tail and word boundary\n"
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc",
+        "tests/unit/executable_image.cpp",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/wrapping-target.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/wrapping-target"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/wrapping-target",
+        "--malformed"
+      ],
+      "exit": 1,
+      "stdout": "LB-1 explicit malformed-image failure\n",
+      "stderr": "target wraps\n"
+    },
+    {
+      "command": [
+        "make",
+        "-j1",
+        "build/executable-image-test",
+        "build/executable-image-edges-test"
+      ],
+      "exit": 0,
+      "stdout": "python3 tools/gate/gen_make.py\n284 unit tests, 231 oracle targets\npython3 tools/gate/gen_make.py\n284 unit tests, 231 oracle targets\nxcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc -Itests/fixtures tests/unit/executable_image.cpp src/loader/executable_image.cpp -o build/executable-image-test\nxcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc -Itests/fixtures tests/unit/executable_image_edges.cpp src/loader/executable_image.cpp -o build/executable-image-edges-test\n",
+      "stderr": "Makefile:253: build/tests.mk: No such file or directory\nMakefile:254: build/oracles.mk: No such file or directory\n"
+    },
+    {
+      "command": [
+        "./build/executable-image-test"
+      ],
+      "exit": 0,
+      "stdout": "valid checks 65630\nLB-1 explicit malformed-image failure\nmalformed checks 65674\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "./build/executable-image-edges-test"
+      ],
+      "exit": 0,
+      "stdout": "valid edge checks 11\nmalformed edge checks 8221\n",
+      "stderr": ""
+    }
+  ],
+  "limits": "Narrow local checks only; no gate, provider, download, manifest refresh, Windows parity, fresh independent review or campaign closure."
+}

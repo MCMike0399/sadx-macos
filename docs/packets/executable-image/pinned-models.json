@@ -1,0 +1,90 @@
+{
+  "scope": "Unchanged model_dlls unit, read-only assets, exact base header and source vs current; 85 bindings and HIGHLOW mapping. Not a full guest import/DLL execution test.",
+  "assets": {
+    "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/system/CHRMODELS_orig.dll": {
+      "sha256": "76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5",
+      "bytes": 7647232
+    },
+    "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/system/ADV00MODELS.DLL": {
+      "sha256": "3291ca5d006289612dfed3bc48b79b95f704875243a54e64224d4bb73617e343",
+      "bytes": 2486272
+    },
+    "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/system/ADV01MODELS.DLL": {
+      "sha256": "0290e4846b7a25790b2b472ccf4fd827a3ea3cc26da4df98bb1b922d9f57d2bb",
+      "bytes": 2699264
+    },
+    "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/system/ADV01CMODELS.DLL": {
+      "sha256": "a849572ce357f3333dfe214b63676c80ff22b4c4a765b06902d461b6a055ac34",
+      "bytes": 1306624
+    },
+    "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/system/ADV02MODELS.DLL": {
+      "sha256": "ca844228717003b1964b0e10873b16c100291dd219b9fcf2235b7e6c3f8c94ea",
+      "bytes": 2744320
+    },
+    "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/system/ADV03MODELS.DLL": {
+      "sha256": "76cecf13b97833906769df5dc118948eeb8117edb1e5675e92fa12e819223545",
+      "bytes": 1511424
+    }
+  },
+  "records": [
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/baseline",
+        "-Isrc",
+        "tests/unit/model_dlls.cpp",
+        "src/game/model_dlls.cpp",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/baseline.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/model-baseline-test"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/model-baseline-test",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/system"
+      ],
+      "exit": 0,
+      "stdout": "Model DLLs: exact exports, relocated ascending mapping, 85 bindings, missing slot and in-image action pointers passed.\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc",
+        "tests/unit/model_dlls.cpp",
+        "src/game/model_dlls.cpp",
+        "src/loader/executable_image.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/model-current-test"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-6e5fa2fc/build/executable-image-packet/model-current-test",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/system"
+      ],
+      "exit": 0,
+      "stdout": "Model DLLs: exact exports, relocated ascending mapping, 85 bindings, missing slot and in-image action pointers passed.\n",
+      "stderr": ""
+    }
+  ]
+}
