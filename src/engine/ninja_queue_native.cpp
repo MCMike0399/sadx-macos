@@ -1,5 +1,6 @@
 #include "engine/ninja_queue_native.hpp"
 #include "engine/graphics_frame.hpp"
+#include "engine/ninja_blend_internal.hpp"
 #include "engine/ninja_sprite_queue.hpp"
 #include <utility>
 
@@ -16,15 +17,9 @@ struct Storage::Impl {
 };
 Storage::Storage() : impl_(std::make_unique<Impl>()) {}
 Storage::~Storage() = default;
-NinjaSpriteQueue &Storage::records() {
-    return impl_->queue;
-}
-const NinjaSpriteQueue &Storage::records() const {
-    return impl_->queue;
-}
-const Buffer &Storage::buffer() const {
-    return impl_->buffer;
-}
+NinjaSpriteQueue &Storage::records() { return impl_->queue; }
+const NinjaSpriteQueue &Storage::records() const { return impl_->queue; }
+const Buffer &Storage::buffer() const { return impl_->buffer; }
 void Storage::release_buffer() {
     impl_->queue.rebind_arena(nullptr);
     impl_->buffer = {};
@@ -112,11 +107,7 @@ void initialize(Owners &owners, const Services &services, X87Context &fp,
 }
 void set_blend(std::uint32_t selector, std::uint32_t value, State &state,
                const Services &services) {
-    auto &packed = state.values.packed_blend;
-    if (selector == 0)
-        packed = static_cast<std::uint8_t>((packed & 240) | (value & 15));
-    else if (selector == 1)
-        packed = static_cast<std::uint8_t>((packed & 15) | ((value & 15) << 4));
+    render_detail::store_packed_blend(selector, value, state.values.packed_blend);
     if (!services.set_blend || !services.set_blend(selector, value))
         throw Unavailable(Boundary::Blend);
 }
@@ -137,22 +128,26 @@ void issue(const RenderStateWriter &writer, std::uint32_t setting, std::uint32_t
 } // namespace
 void set_device_blend(std::uint32_t selector, std::uint32_t mode, const BlendTables &tables,
                       const DeviceAccess &access) {
-    if (mode < 2) {
-        auto writer = acquire_device(access);
-        issue(writer, 19, mode == 0 ? 6 : 5);
-        writer = acquire_device(access);
-        issue(writer, 20, mode == 0 ? 5 : 6);
-        return;
-    }
-    if (mode >= tables.modes.size() + tables.following_depth_modes.size())
-        throw Unavailable(Boundary::BlendValue);
-    const auto mapped = mode < tables.modes.size()
-                            ? tables.modes[mode]
-                            : tables.following_depth_modes[mode - tables.modes.size()];
-    auto writer = acquire_device(access);
-    if (selector >= tables.targets.size())
-        throw Unavailable(Boundary::BlendSelector);
-    issue(writer, tables.targets[selector], mapped);
+    render_detail::apply_device_blend(
+        selector, mode,
+        [&](std::uint32_t value) {
+            if (value >= tables.modes.size() + tables.following_depth_modes.size())
+                throw Unavailable(Boundary::BlendValue);
+            return value < tables.modes.size()
+                       ? tables.modes[value]
+                       : tables.following_depth_modes[value - tables.modes.size()];
+        },
+        [&](std::uint32_t target) {
+            if (target >= tables.targets.size())
+                throw Unavailable(Boundary::BlendSelector);
+            return tables.targets[target];
+        },
+        [&](render_detail::BlendWrite) { return acquire_device(access); },
+        [&](const RenderStateWriter &writer, std::uint32_t setting, std::uint32_t value,
+            render_detail::BlendWrite) {
+            issue(writer, setting, value);
+            return true;
+        });
 }
 void set_device_blend(std::uint32_t selector, std::uint32_t mode, const BlendTables &tables,
                       graphics::Draw &draw) {

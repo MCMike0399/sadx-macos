@@ -1,0 +1,192 @@
+{
+  "baseline": {
+    "reference": {
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "cases": 8209,
+      "mismatches": 0,
+      "report_sha256": "55205a1295a8152e70eff9300261059beb9867f265caabc91d273bdae19014ee"
+    },
+    "native": {
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "cases": 8209,
+      "mismatches": 0,
+      "report_sha256": "1eb937f3a0b885cdbbb01bc153cf06a0236eab22254e0fc6de5bee208a7236f8"
+    }
+  },
+  "mutants": [
+    {
+      "name": "retain_old_device",
+      "file": "src/engine/ninja_blend_internal.hpp",
+      "old": "device = acquire_device(BlendWrite::Destination);",
+      "new": "/* deliberate mutation: keep the previous device */",
+      "caught": true,
+      "judges": {
+        "reference": {
+          "build_exit_status": 0,
+          "oracle_exit_status": 1,
+          "cases": 8209,
+          "mismatches": 4,
+          "report_sha256": "c1e5add973c50564a79e97164302b33c0e6b04e0e73f9d3e214b3ff92691225b"
+        },
+        "native": {
+          "build_exit_status": 0,
+          "oracle_exit_status": 1,
+          "cases": 8209,
+          "mismatches": 4,
+          "report_sha256": "61bd43ce05984ba86cb1afbe7761f9e96c7d4d93e1d14a7d212d43dfc93f638c"
+        }
+      }
+    },
+    {
+      "name": "swap_special_source_blend",
+      "file": "src/engine/ninja_blend_internal.hpp",
+      "old": "mode == 0 ? 6U : 5U",
+      "new": "mode == 0 ? 5U : 6U",
+      "caught": true,
+      "judges": {
+        "reference": {
+          "build_exit_status": 0,
+          "oracle_exit_status": 1,
+          "cases": 8209,
+          "mismatches": 1030,
+          "report_sha256": "34b9e872a7b5b110cec7d871e52db251e8d8d1f172cbe04a961abc2c0d263333"
+        },
+        "native": {
+          "build_exit_status": 0,
+          "oracle_exit_status": 1,
+          "cases": 8209,
+          "mismatches": 1030,
+          "report_sha256": "26b84fce5a1a028ebc4fa06497ce6a76b84dbf3c10651562c6555bcc1c6aa721"
+        }
+      }
+    },
+    {
+      "name": "clobber_destination_nibble",
+      "file": "src/engine/ninja_blend_internal.hpp",
+      "old": "kDestinationMask = 0xF0;",
+      "new": "kDestinationMask = 0x0F;",
+      "caught": true,
+      "judges": {
+        "reference": {
+          "build_exit_status": 0,
+          "oracle_exit_status": 1,
+          "cases": 8209,
+          "mismatches": 4026,
+          "report_sha256": "c81b55d5179f57211ccf8d2e459c59df0bf7c8c4afc29798419c8e4125e9b613"
+        },
+        "native": {
+          "build_exit_status": 0,
+          "oracle_exit_status": 1,
+          "cases": 8209,
+          "mismatches": 4026,
+          "report_sha256": "7cbe67b7c7531eb42428b4a5de5ce2341a37932c0d906a461d4ba37789de93bb"
+        }
+      }
+    },
+    {
+      "name": "store_packed_after_device",
+      "file": "src/engine/ninja_queue_native.cpp",
+      "old": "    render_detail::store_packed_blend(selector, value, state.values.packed_blend);\n    if (!services.set_blend || !services.set_blend(selector, value))\n        throw Unavailable(Boundary::Blend);",
+      "new": "    if (!services.set_blend || !services.set_blend(selector, value))\n        throw Unavailable(Boundary::Blend);\n    render_detail::store_packed_blend(selector, value, state.values.packed_blend);",
+      "caught": true,
+      "judges": {
+        "reference": {
+          "build_exit_status": 0,
+          "oracle_exit_status": 0,
+          "cases": 8209,
+          "mismatches": 0,
+          "report_sha256": "9bd090436a42ee3aab354f41956a0e635b4cbbc5aa42d035c1a3d2128ae0bbf8"
+        },
+        "native": {
+          "build_exit_status": 0,
+          "oracle_exit_status": 1,
+          "cases": 8209,
+          "mismatches": 10,
+          "report_sha256": "4818583b1b70f20c46642e62bc74e6b487da8d872d523fe4574b07198a259152"
+        }
+      }
+    },
+    {
+      "name": "wrong_contiguous_modes",
+      "file": "src/engine/ninja_queue_native.cpp",
+      "old": ": tables.following_depth_modes[value - tables.modes.size()];",
+      "new": ": tables.modes[value - tables.modes.size()];",
+      "caught": true,
+      "judges": {
+        "reference": {
+          "build_exit_status": 0,
+          "oracle_exit_status": 0,
+          "cases": 8209,
+          "mismatches": 0,
+          "report_sha256": "4742604c18f3928786510fab61a7b4f61bfe4e8e176cad662b353eadae40ef4e"
+        },
+        "native": {
+          "build_exit_status": 0,
+          "oracle_exit_status": 1,
+          "cases": 8209,
+          "mismatches": 1536,
+          "report_sha256": "e070bd1f89e1d1c5f1c4fd082801183c432293ac137be7c9f7e43b8c98d7c80a"
+        }
+      }
+    }
+  ],
+  "restored": {
+    "reference": {
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "cases": 8209,
+      "mismatches": 0,
+      "report_sha256": "c063fbdbc8b2c58b4f5f30960f37e81a22d94c5a93265cee4696937253b28cc0"
+    },
+    "native": {
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "cases": 8209,
+      "mismatches": 0,
+      "report_sha256": "c2ca8e51f96e08444e55117ac98e3c57f2381dbddd3761712e3ace9516c58b81"
+    }
+  },
+  "limits": [
+    "Private probes compile changed sources explicitly and borrow unchanged Root portable dependencies.",
+    "Original probes/oracle scripts/cases/tolerances unchanged. No GPU/native app/full gate or physical-device claim."
+  ],
+  "base_commit": "e6c5a49",
+  "kind": "First shared blend algorithm draft, not completed render-state migration",
+  "source_files_sha256": {
+    "src/engine/ninja_blend_internal.hpp": "ed8a1d68ce986f5e9b6b9dd40239aeecbbe272ef10feefbfd76aa36ce0d3c9a0",
+    "src/engine/ninja_render.cpp": "ea34d323f7c3dfb6ceedef356ce6d9165d4037f962a96942fe22677fe5fd0df6",
+    "src/engine/ninja_queue_native.cpp": "d5db5d92861b3ce52aa6d06cc9d2c9461cbe55c94b094ac7cbf658ada94dd1a5"
+  },
+  "existing_unit_results": {
+    "ninja_render": 0,
+    "ninja_queue_native": 0
+  },
+  "source_checks": {
+    "readability_regressions": 0,
+    "provenance_errors": 0,
+    "layer_violations": 0
+  },
+  "initial_invalid_mutant": {
+    "name": "clobber_destination_nibble",
+    "build_exit_status": 1,
+    "reason": "Replacing the sole constant use made that constant unused under Werror; invalid, not counted caught. Corrected mutation changes the constant value and compiles."
+  },
+  "unverified": [
+    "Full render-state owner/consumer migration",
+    "Depth/stage independent coverage and rewrite",
+    "Clean updated native source archive/build/runtime",
+    "Updated native force-load closure and journeys",
+    "Fresh independent STYLE review and coherent integration gate",
+    "No separate inherited blend holdout or historical blend mutant specification located; this does not claim they were rerun."
+  ],
+  "inherited_judges_unchanged": {
+    "tests/probes/native_ninja_render_probe.cpp": "be53c871952e012daa1ad2fba3947ae91e1f23ea6fa0add55e0756386d9d79a3",
+    "tests/probes/native_ninja_queue_render_probe.cpp": "1f0aee3243dc94e7a879ee959053a39ae50b3f60123c2067ee093f8f0f1fc5ea",
+    "tests/unit/ninja_render.cpp": "ca84acd51662fe6ff8c5bd3cfc3f1941ce78792335f98cc47411f87dfb25991f",
+    "tests/unit/ninja_queue_native.cpp": "e9e132daa59bfa29b469aa66e132837b39550ff1c5fffbedea0ea38beb7fa7ae",
+    "tools/oracles/verify_original_ninja_render.py": "cc89b135e5e76c197a7ee6b57d2b4cd36aafff39a9a1ae978d42c0f0b17610c7",
+    "tools/oracles/verify_original_ninja_queue_render.py": "133107eecefd8c62d048cb4d43493bc62cbe12a1204788bf5c136ab3a2f7ff56"
+  }
+}
