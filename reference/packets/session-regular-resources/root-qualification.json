@@ -1,0 +1,35 @@
+{
+  "candidate": "53e66f9",
+  "review_commit": "9c7a693",
+  "native_build": {
+    "exit": 0,
+    "command": "make -j2 -o build/native-controller-deps/include/SDL3/SDL.h build/libsadx-native.a native-closure build/sadx-native",
+    "log_sha256": "17e412a3842dd64733b6bc681327c878f813b3aa68b6e93b9c73c07e8b82e7ec",
+    "reused": "Installed pinned controller dependencies only; all game, numerical and platform objects built in this packet.",
+    "force_load_closure": "PASS"
+  },
+  "native_fixture": {
+    "observations": 55,
+    "mutants_caught": 6,
+    "qualification": "root-native-qualification.json"
+  },
+  "post_review_cohorts": {
+    "regular": {
+      "seed": 20261116,
+      "cases": 1209,
+      "mismatches": 0,
+      "report": "root-regular-holdout.json"
+    },
+    "menu": {
+      "seed": 20261117,
+      "cases": 1801,
+      "mismatches": 0,
+      "report": "root-menu-holdout.json"
+    }
+  },
+  "remaining": [
+    "Actual native menu/save journeys",
+    "Composite Main integration, canonical reports and real full gate",
+    "Whole Session/resource/campaign migration remains open"
+  ]
+}
