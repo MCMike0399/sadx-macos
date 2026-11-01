@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "26c486b3b2612fc4c0a850dfcdea5b6fc19db7b5",
-    "evidence": "docs/refactor-inventory/reviews/stub-binding-review-resolution.json",
-    "evidence_sha256": "6b3753c2998bd6019df5919340ee32ddce6e720f2c7c3c76c0e9528d009f8406",
-    "reason": "Require explicit STUB owner and binding descriptions alongside fingerprinted evidence;18 focused regressions pass"
+    "base_commit": "0617cf5d09546365160f145880055306aa6c6cee",
+    "evidence": "reference/packets/session-regular-resources/root-qualification.json",
+    "evidence_sha256": "2586b1c9671f096a6bb42ae387cd17d3fdddb6f394310c8c4b94a7bcb2eecbb4",
+    "reason": "Track Main composite original resource and cleanup comparisons after reviewed RegularResources extraction; four unchanged judges and registered owner unit exit0, no mismatches"
   },
   "files": {
     "Makefile": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
