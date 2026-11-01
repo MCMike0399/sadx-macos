@@ -19,8 +19,6 @@ ResetLeafResult run_reset_leaf(std::uint32_t callee,std::optional<std::uint32_t>
         case 0x40cd10:s.word_at_3abdfac=need(s.word_at_3abdf90,0x40cd10);break;
         case 0x401410:s.depth_mode_at_8928c8=arg(0x401410);break;
         case 0x403e60:s.queue_mode_at_3ab98ac=2;break;
-        case 0x4257c0:s.word_at_912698=0xffffffffU;s.word_at_3b29cf8=0;s.word_at_91269c=0xffffffffU;s.word_at_9126a8=0xffffffffU;break;
-        case 0x4257e0:s.word_at_912694=0xffffffffU;s.word_at_3b29cf4=0;break;
         case 0x421fb0:{const auto fx=need(s.word_at_3c5e8b8,0x421fb0);s.word_at_3b11190=0;s.timing_word_at_3b1118c=0;if(fx!=0)call(0x421fc6,0x504ed0);break;}
         case 0x4228f0:{const auto n=arg(0x4228f0);
             if(n==0)for(const std::uint32_t inner:{0x422440U,0x4224b0U}){

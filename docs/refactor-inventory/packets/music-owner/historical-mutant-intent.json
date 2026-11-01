@@ -1,0 +1,145 @@
+[
+  {
+    "family": "music",
+    "transcript": "rollout-2026-10-20T07-49-57-01a15993-72d1-7ab1-8846-f8fe1e819fe5-8245.txt",
+    "transcript_input_sha256": "aed7c783bf5a5afdf9b4cf34583b17f46f88a573ceb3b35a139be552764e4766",
+    "faults": [
+      [
+        "request_mapping",
+        "request_song(catalog.menu_requests[static_cast<std::size_t>(index)], menu, tracks, services);",
+        "request_song(index, menu, tracks, services);"
+      ],
+      [
+        "delay_gate",
+        "if (elapsed > 0 && ready != 0)",
+        "if (elapsed >= 0 && ready != 0)"
+      ],
+      [
+        "factory_track_reset",
+        "tracks.real_previous_song = -1;",
+        "tracks.real_previous_song = 0;"
+      ],
+      [
+        "live_song_reload",
+        "tracks.real_previous_song = tracks.current_song;",
+        "tracks.real_previous_song = tracks.previous_song;"
+      ],
+      [
+        "cd_fallback",
+        "if (services.play_music(path, loop) == 0)",
+        "if (services.play_music(path, loop) != 0)"
+      ],
+      [
+        "voice_language",
+        "const bool japanese = state.voice_language == 0;",
+        "const bool japanese = false;"
+      ],
+      [
+        "voice_clock_boundary",
+        "now - state.voice_timing.started < state.voice_timing.duration",
+        "now - state.voice_timing.started <= state.voice_timing.duration"
+      ],
+      [
+        "publish_open_early",
+        "services.start_music(attenuation);",
+        "media.music_open = 1; services.start_music(attenuation);"
+      ],
+      [
+        "loop_decision",
+        "if (media.music_looping == 0)",
+        "if (media.music_looping != 0)"
+      ],
+      [
+        "failed_open",
+        "if (services.open_music(path) < 0)",
+        "if (services.open_music(path) > 0)"
+      ],
+      [
+        "request_enabled",
+        "if (enabled != 0)",
+        "if (enabled == 0)"
+      ]
+    ]
+  },
+  {
+    "family": "cleanup",
+    "transcript": "rollout-2026-10-20T07-49-57-01a15993-72d1-7ab1-8846-f8fe1e819fe5-5078.txt",
+    "transcript_input_sha256": "60f9bb20cabcd079fdcf3a9d1dee5ff6def73dcd8e67c69ca02e7d12a7596243",
+    "faults": {
+      "life_slot": [
+        "life_slots{0, 0, 1, 2, 0, 3, 4, 5}",
+        "life_slots{0, 1, 1, 2, 0, 3, 4, 5}"
+      ],
+      "emerald_padding": [
+        "sequence.time = stored.time;",
+        "sequence.time = stored.time; sequence.emerald = stored.padding;"
+      ],
+      "signed_loaded": [
+        "if (state.loaded[character] > 0) {",
+        "if (static_cast<std::uint8_t>(state.loaded[character]) > 0) {"
+      ],
+      "unload_count": [
+        "if (state.loaded[character] == 1) {",
+        "if (state.loaded[character] > 0) {"
+      ],
+      "level_zero": [
+        "if (mode == 0) {",
+        "if (mode == 1) {"
+      ]
+    },
+    "qualification_note": "Original runner tried mission_guard; historical follow-up at rollout line 5102 replaces it with level_zero within recovered caller domain. Preserve final five fault intents."
+  },
+  {
+    "family": "title",
+    "transcript": "rollout-2026-10-20T12-54-20-01a15aaa-1cee-74a1-a50f-19dd9ce6cc8f-237.txt",
+    "transcript_input_sha256": "a20db3cc719bb584e60d9e772c0223a4d3a71c28a625fd3a6eaa1f3f81fcfc4e",
+    "faults": [
+      [
+        "big_cast_binding",
+        "bindings.big_cast_repeat = actions.big_cast;",
+        "bindings.big_cast_repeat = actions.big_prepare;"
+      ],
+      [
+        "font_guard",
+        "if (shared.font_loaded == 0)",
+        "if (shared.font_loaded != 0)"
+      ],
+      [
+        "release_order",
+        "    calls.free_character_textures();\n    calls.release_all_textures();",
+        "    calls.release_all_textures();\n    calls.free_character_textures();"
+      ],
+      [
+        "sequence_fade",
+        "work->fade_out = 1;",
+        "work->fade_out = 0;"
+      ],
+      [
+        "entry_selection",
+        "entry = 2;",
+        "entry = 1;"
+      ]
+    ]
+  },
+  {
+    "family": "title_adx",
+    "transcript": "rollout-2026-10-20T12-54-20-01a15aaa-1cee-74a1-a50f-19dd9ce6cc8f-816.txt",
+    "faults": [
+      [
+        "adx_null_guard",
+        "if (manager) {",
+        "if (true) {"
+      ],
+      [
+        "adx_close_order",
+        "    calls.close_media(0);\n    calls.close_media(1);",
+        "    calls.close_media(1);\n    calls.close_media(0);"
+      ],
+      [
+        "adx_previous_song",
+        "    tracks.previous_song = -1;",
+        "    tracks.previous_song = -1;\n    tracks.real_previous_song = -1;"
+      ]
+    ]
+  }
+]

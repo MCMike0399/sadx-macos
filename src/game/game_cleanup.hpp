@@ -1,5 +1,6 @@
 #pragma once
 #include "game/save_data.hpp"
+#include "game/music_state.hpp"
 #include "game/game_bootstrap.hpp"
 #include "game/sound_initial_state.hpp"
 #include "engine/task.hpp"
@@ -131,11 +132,7 @@ struct AuxiliaryWork {
     std::array<std::uint32_t, 9> values{};
     std::uint32_t limit = 50;
 };
-struct TrackState {
-    std::int32_t current_song = -1, previous_song = -1, real_previous_song = -1;
-    std::int32_t current_voice = -1;
-    std::uint32_t song_queue_state = 0, voice_queue_state = 0;
-};
+
 struct StageState {
     std::int16_t &stage;
     std::int16_t &act;

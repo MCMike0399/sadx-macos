@@ -1,0 +1,22 @@
+{
+  "review": "58b408e",
+  "privacy_fix": "49dfcfd",
+  "cohorts": {
+    "music": {
+      "cases": 2501,
+      "seed": 20261125,
+      "fully_executed_cases": 2500,
+      "bounded_prefix_cases": 1
+    },
+    "voice": {
+      "cases": 5888,
+      "seed": 20261126
+    }
+  },
+  "limits": [
+    "Music2501 observations include2500 full executions and1 honest duration boundary prefix.",
+    "Fresh seed differs from default1299full+2prefix cohort; boundary-count change is not a source regression.",
+    "Existing qualified libraries contain unchanged production implementations; private header API removal affects no library code/layout.",
+    "Root product closure/journeys/composite gate and final Source reconciliation remain pending."
+  ]
+}

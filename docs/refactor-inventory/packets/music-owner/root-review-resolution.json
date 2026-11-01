@@ -1,0 +1,17 @@
+{
+  "review": "58b408e",
+  "finding": "P2 public raw track access bypasses fact availability",
+  "resolution": "Remove both public accessors; characterization uses private friend test bridge. No production consumer uses the bridge.",
+  "source_header_sha256": "bc18ea5207f88ac2c3c3c1e1b51aca97a84a9272dd1779e1936c428d8d003b68",
+  "reference_unit": {
+    "compile_exit": 0,
+    "run_exit": 0,
+    "scope": "64masks/resetfamilies/highbits/reimport/liveexport/failureprefixes unchanged"
+  },
+  "public_access_negative_compile_exit": 1,
+  "initial_command_failure": "First narrow link omitted crt_rand.cpp (exit1); corrected source-only link succeeds. No source behavior changed to address that command dependency.",
+  "limits": [
+    "Expected compiler refusal is privacy regression evidence, not a caught behavioral mutant.",
+    "Source behavior/inputs/expected values and native owner unchanged; historical qualification hashes remain attributed to prior snapshot."
+  ]
+}

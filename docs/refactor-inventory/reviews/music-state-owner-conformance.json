@@ -1,0 +1,181 @@
+{
+  "schema_version": 1,
+  "files": {
+    "src/game/music_state.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Independent complete new typed owner header review with reference-boundary privacy correction separately evidenced.",
+      "reviewed_source_sha256": "cdad5447039cb43db11ca771d2f25f7c5e59c2c8d155cabc1d03c513f882ffe2",
+      "semantic_justification": "Complete dependency-light canonical TrackState, VoiceTiming and native SchedulingState declarations reviewed. Six original typed track owners and timing/manager mappings occur once. Native consumers borrow subobjects; reference adapter owns only TrackState and separate knowledge bits. No fixture missingness, executable reads, source-address dispatch or second cache lives in the game owner.",
+      "resolved_owners": [
+        {
+          "resolution": "Native Session owns SchedulingState at original manager position; typed track state reused by guest reference adapter in its separate runtime world. Timing/manager not invented in reference world. PCM still borrows original sound initialization field.",
+          "evidence": [
+            {
+              "path": "src/game/music_state.hpp",
+              "sha256": "cdad5447039cb43db11ca771d2f25f7c5e59c2c8d155cabc1d03c513f882ffe2"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Session cleanup/telemetry, TitleScene music/menu voice/manager callbacks and NativeGame reference reset import/routing/export carried atomically. Manager deletion preserves real_previous_song; callback handles and allocation/publication retain order.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "sha256": "b2192da9fc1a860b432d09030beaf120a810d5442a2188b0c3b8e44b87d82ad8"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/guest/music_state_reference.cpp",
+              "sha256": "0de839f40d83fabfc2eefe90c5f07e18a4adcfe6d72aabdb8657441f1087e9fd"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent music_state complete-module approval58b408e; seven full streams/300reset identities/270 title FP partial IDs preserved,24 historical+12 new faults caught. Availability unit covers all64masks and highbit/reimport; public raw access removed49dfcfd. Post-review music2501=2500full+1prefix andvoice5888 exact; private product closure0, actual journeys pending.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/music-owner-integration-review.md",
+              "sha256": "6b3aaa0cf892f292fc5938f386cff04fb30d060c32a5ca1a4f26ca142579a786"
+            },
+            {
+              "path": "docs/refactor-inventory/packets/music-owner/root-review-resolution.json",
+              "sha256": "57c53e86be7a227c70c0ec3df7ee1cbc270b5ead51bf4dfaebbd794ce1f4cc12"
+            },
+            {
+              "path": "docs/refactor-inventory/packets/music-owner/root-post-review-cohorts.json",
+              "sha256": "15b676a195636ff1d8a542392dd68817c3508f73fe8e3deb460a7a5d68adabde"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Reference media/player/server reset cases remain unchanged debt; no whole audio or Session closure.",
+        "Title270 FP partial identities remain partial; music duration[-1] source boundaries remain bounded prefixes.",
+        "Current source product closure passes; native journeys/composite Main qualification remain pending."
+      ],
+      "evidence": [
+        {
+          "path": "src/game/music_state.hpp",
+          "sha256": "cdad5447039cb43db11ca771d2f25f7c5e59c2c8d155cabc1d03c513f882ffe2"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/music-owner-integration-review.md",
+          "sha256": "6b3aaa0cf892f292fc5938f386cff04fb30d060c32a5ca1a4f26ca142579a786"
+        },
+        {
+          "path": "docs/refactor-inventory/packets/music-owner/root-review-resolution.json",
+          "sha256": "57c53e86be7a227c70c0ec3df7ee1cbc270b5ead51bf4dfaebbd794ce1f4cc12"
+        },
+        {
+          "path": "docs/refactor-inventory/packets/music-owner/root-post-review-cohorts.json",
+          "sha256": "15b676a195636ff1d8a542392dd68817c3508f73fe8e3deb460a7a5d68adabde"
+        }
+      ]
+    }
+  },
+  "modules": {
+    "src/game/music_state": {
+      "disposition": "already_conforming",
+      "reason": "Independent complete new typed owner header review with reference-boundary privacy correction separately evidenced.",
+      "reviewed_members": {
+        "src/game/music_state.hpp": "cdad5447039cb43db11ca771d2f25f7c5e59c2c8d155cabc1d03c513f882ffe2"
+      },
+      "semantic_justification": "Complete dependency-light canonical TrackState, VoiceTiming and native SchedulingState declarations reviewed. Six original typed track owners and timing/manager mappings occur once. Native consumers borrow subobjects; reference adapter owns only TrackState and separate knowledge bits. No fixture missingness, executable reads, source-address dispatch or second cache lives in the game owner.",
+      "resolved_owners": [
+        {
+          "resolution": "Native Session owns SchedulingState at original manager position; typed track state reused by guest reference adapter in its separate runtime world. Timing/manager not invented in reference world. PCM still borrows original sound initialization field.",
+          "evidence": [
+            {
+              "path": "src/game/music_state.hpp",
+              "sha256": "cdad5447039cb43db11ca771d2f25f7c5e59c2c8d155cabc1d03c513f882ffe2"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Session cleanup/telemetry, TitleScene music/menu voice/manager callbacks and NativeGame reference reset import/routing/export carried atomically. Manager deletion preserves real_previous_song; callback handles and allocation/publication retain order.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "sha256": "b2192da9fc1a860b432d09030beaf120a810d5442a2188b0c3b8e44b87d82ad8"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/guest/music_state_reference.cpp",
+              "sha256": "0de839f40d83fabfc2eefe90c5f07e18a4adcfe6d72aabdb8657441f1087e9fd"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent music_state complete-module approval58b408e; seven full streams/300reset identities/270 title FP partial IDs preserved,24 historical+12 new faults caught. Availability unit covers all64masks and highbit/reimport; public raw access removed49dfcfd. Post-review music2501=2500full+1prefix andvoice5888 exact; private product closure0, actual journeys pending.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/music-owner-integration-review.md",
+              "sha256": "6b3aaa0cf892f292fc5938f386cff04fb30d060c32a5ca1a4f26ca142579a786"
+            },
+            {
+              "path": "docs/refactor-inventory/packets/music-owner/root-review-resolution.json",
+              "sha256": "57c53e86be7a227c70c0ec3df7ee1cbc270b5ead51bf4dfaebbd794ce1f4cc12"
+            },
+            {
+              "path": "docs/refactor-inventory/packets/music-owner/root-post-review-cohorts.json",
+              "sha256": "15b676a195636ff1d8a542392dd68817c3508f73fe8e3deb460a7a5d68adabde"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Reference media/player/server reset cases remain unchanged debt; no whole audio or Session closure.",
+        "Title270 FP partial identities remain partial; music duration[-1] source boundaries remain bounded prefixes.",
+        "Current source product closure passes; native journeys/composite Main qualification remain pending."
+      ],
+      "evidence": [
+        {
+          "path": "src/game/music_state.hpp",
+          "sha256": "cdad5447039cb43db11ca771d2f25f7c5e59c2c8d155cabc1d03c513f882ffe2"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/music-owner-integration-review.md",
+          "sha256": "6b3aaa0cf892f292fc5938f386cff04fb30d060c32a5ca1a4f26ca142579a786"
+        },
+        {
+          "path": "docs/refactor-inventory/packets/music-owner/root-review-resolution.json",
+          "sha256": "57c53e86be7a227c70c0ec3df7ee1cbc270b5ead51bf4dfaebbd794ce1f4cc12"
+        },
+        {
+          "path": "docs/refactor-inventory/packets/music-owner/root-post-review-cohorts.json",
+          "sha256": "15b676a195636ff1d8a542392dd68817c3508f73fe8e3deb460a7a5d68adabde"
+        }
+      ]
+    }
+  }
+}

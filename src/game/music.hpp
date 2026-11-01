@@ -27,11 +27,6 @@ struct RequestWork {
     std::int32_t song = 0;
     std::int32_t elapsed = 0;
 };
-// NOTSA: these source BSS words track the synthetic voice-duration fallback clock.
-struct VoiceTiming {
-    std::uint32_t duration = 0;
-    std::uint32_t started = 0;
-};
 struct TaskServices {
     std::function<void(const TaskHandle &)> destroy;
     // Source flags0/list1, initially executing SoundManager_Load.

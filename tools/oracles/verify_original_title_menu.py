@@ -320,7 +320,7 @@ def main():
     report['source_ranges'] = {start+'-'+end: hashlib.sha256(image.read(int(start,16),int(end,16)-int(start,16))).hexdigest()
                                for start,end in ranges}
     root = Path(__file__).resolve().parents[2]
-    paths = ['src/game/title_menu.hpp','src/game/title_menu.cpp',
+    paths = ['src/game/music_state.hpp','src/game/title_menu.hpp','src/game/title_menu.cpp',
              'tests/probes/native_title_menu_probe.cpp','src/engine/task.hpp',
              'src/engine/character_resources.hpp','src/game/game_cleanup.hpp','src/engine/game_frame_control.hpp','src/engine/frame_loop_native.hpp','src/engine/frame_loop_native.cpp','src/cpu/fidelity_float.hpp','src/cpu/x87_math.hpp','src/cpu/x87_math.cpp']
     report['native_sources'] = {path: hashlib.sha256(((root/path) if (root/path).exists() else Path.cwd()/path).read_bytes()).hexdigest()

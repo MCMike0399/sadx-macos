@@ -1,0 +1,179 @@
+{
+  "base_commit": "73be9a5c4217157a05c11fdd4f875d98877e16d4",
+  "context_commit": "21db0f1",
+  "baseline_commit": "7088654",
+  "source_commit": "8a37d10",
+  "judge_commit": "622a525",
+  "worktree": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-d8ad865d",
+  "branch": "packet/music-state-reset-routing",
+  "source_hashes": {
+    "src/game/game_cleanup.hpp": "eabdca730d54ae33912d5696bac88673df02e1d894c2b572dd6762cd309dcd5d",
+    "src/game/game_reset_leaves.cpp": "298701e955489b8b8ada5aede75c143453471a1928f5e72b2a0f3dc74f971521",
+    "src/game/game_reset_leaves.hpp": "884755a504c07af311f0989754829d7ce6fad2e7bb2c77c1c47e25a417f12038",
+    "src/game/music.hpp": "f9c41cacbcda0d64343fa29bf14a3ac3151504b478486ef169f870511b51c361",
+    "src/game/music_state.hpp": "cdad5447039cb43db11ca771d2f25f7c5e59c2c8d155cabc1d03c513f882ffe2",
+    "src/guest/music_state_reference.cpp": "0de839f40d83fabfc2eefe90c5f07e18a4adcfe6d72aabdb8657441f1087e9fd",
+    "src/guest/music_state_reference.hpp": "223d52daa337573ccae65ae4f7aa59a4f72d5c82527aa78db3b2a5c79cbee6e8",
+    "src/guest/native_game_reference.cpp": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2",
+    "src/guest/native_game_reference.hpp": "f9709b794475f8f85db465f923d52de12297afc8eb8f9697cb8c198bd79266e0",
+    "src/runtime/native_session.cpp": "ee4dc8b579e0e926db87bb9d3770d0d8e758c3382a9a1e193f66de7d3af64f78",
+    "src/runtime/native_session.hpp": "5ffd572391f8a293d9df0cfdf1ce646074d287f144cab5611d46f82fb5f58711",
+    "src/runtime/native_title_scene.cpp": "cbf4b20341e359a6f945e453834a6d9ef599685bef3c5b50115dc505d741e21e",
+    "src/runtime/native_title_tasks.cpp": "b2192da9fc1a860b432d09030beaf120a810d5442a2188b0c3b8e44b87d82ad8"
+  },
+  "original_judges": {
+    "music": {
+      "exit": 0,
+      "stream_sha256": "6e05147299059f29ab8fc0e7ef22af933aa0155d7783f6c37e0d5bad2d956557",
+      "bytes": 43301742,
+      "cases": 1301,
+      "full_native_stream_equal": true,
+      "report_sha256": "da11f3c50a881c9f393ee83344795173837705db380c74e3ebbe69b8510a65b8"
+    },
+    "menu_voice": {
+      "exit": 0,
+      "stream_sha256": "f26482222570ceac451b6f33699a601c6630ca58453300d95a8772228b5819c5",
+      "bytes": 3250520,
+      "cases": 4888,
+      "full_native_stream_equal": true,
+      "report_sha256": "1c0be151a0a3732521040c66cfa8a321f7cef872560dea11188864bfc49a1f76"
+    },
+    "game_cleanup": {
+      "exit": 0,
+      "stream_sha256": "3c405306fa02274dff78fdf07819917ae109fa54dc0c43b28c1b8b61eb5e118c",
+      "bytes": 22347776,
+      "cases": 2604,
+      "full_native_stream_equal": true,
+      "report_sha256": "bf1c05600bf2bd264e132900878b0497a32776a6053f43a994c4f1b7f5a1c013"
+    },
+    "game_reset": {
+      "exit": 0,
+      "stream_sha256": "2d457cb1c31ce5c0276add9841b2dc8584e6fed65be29b66829bbb597dfd49b7",
+      "bytes": 341700,
+      "cases": 300,
+      "full_native_stream_equal": true,
+      "report_sha256": "20fb3b0b7bfc1b2fc766b232cf45de5677c2517ae52a723656d1dd1b10c0e6e8"
+    },
+    "game_reset_composed": {
+      "exit": 0,
+      "stream_sha256": "222e39c5c2936f0b2952b5d17ab892577a556ba76cab9aa98a29c57efb439eed",
+      "bytes": 69320400,
+      "cases": 300,
+      "full_native_stream_equal": true,
+      "report_sha256": "a589db84cb1d2e91f9020e5b3293b093a049ff5dee0c99e9a1eaf715cf7a1530"
+    },
+    "stream_players": {
+      "exit": 0,
+      "stream_sha256": "afa68e5540fa945fcee69790df75a4c156f6c17c39da12c90afb11710cff2cf5",
+      "bytes": 133800,
+      "cases": 600,
+      "full_native_stream_equal": true,
+      "report_sha256": "6f30f751c3e06c579725e19a7eedb1e03f59fe935d6d1633fc94f3210e72fa41"
+    },
+    "title_menu": {
+      "exit": 1,
+      "stream_sha256": "28ffb591c3eb409595610971404206d62df091724958a212437ca351c17cc685",
+      "bytes": 89394776,
+      "partial_count": 270,
+      "cases": 20872,
+      "full_native_stream_equal": true,
+      "report_sha256": "adf7957b643cb8804064a2bb3f048d4fa405c25a654fb1e0df3495f6952eb4a1"
+    }
+  },
+  "music_limit": {
+    "fully_executed": 1299,
+    "bounded_duration_negative_one_prefixes": 2,
+    "prefix_inputs_and_boundaries": "BASELINE.json"
+  },
+  "title_partial_identities_equal": 270,
+  "composed_reset_identities_equal": 300,
+  "unit_programs": [
+    {
+      "name": "music_state_reference",
+      "compile": 0,
+      "exit": 0
+    },
+    {
+      "name": "music_scheduling_state",
+      "compile": 0,
+      "exit": 0
+    },
+    {
+      "name": "music",
+      "compile": 0,
+      "exit": 0
+    },
+    {
+      "name": "menu_voice",
+      "compile": 0,
+      "exit": 0
+    },
+    {
+      "name": "game_cleanup",
+      "compile": 0,
+      "exit": 0
+    },
+    {
+      "name": "task_callback_lifetime",
+      "compile": 0,
+      "exit": 0
+    }
+  ],
+  "native_scheduling_slice": {
+    "compile_exit": 0,
+    "run_exit": 0,
+    "sources": [
+      "tests/unit/music_scheduling_state.cpp",
+      "src/game/music.cpp",
+      "src/game/title_menu.cpp",
+      "src/game/game_cleanup.cpp",
+      "src/cpu/x87_math.cpp",
+      "src/cpu/crt_integer.cpp"
+    ],
+    "dependency": "Only read-only third-party SoftFloat library; no maintained game archives, guest adapter or EXE linked. This is a bounded slice, not product closure."
+  },
+  "mutations": {
+    "historical_caught": 24,
+    "historical_baseline_and_current_receipts_identical": true,
+    "ownership_and_order_caught": 12,
+    "compile_failures_counted_as_caught": false
+  },
+  "static_checks": {
+    "layers_exit": 0,
+    "global_owners_exit": 0,
+    "provenance_exit": 0,
+    "readability_regressions": 0,
+    "profile_patches_unhandled": 0,
+    "profile_current_declared_ranges": 75,
+    "constexpr_tables_exit": 1,
+    "constexpr_limit": "Two inherited player_rotation.cpp whole-file fingerprints from separate length work; only native_title_tasks diagnostic evidence revalidated under exact inverse subobject substitution."
+  },
+  "source_compile": {
+    "NativeGame_and_three_runtime_consumers": "clang++ -fsyntax-only exit0; full syntax log retained"
+  },
+  "skipped": [
+    "Full gate",
+    "Root independent review",
+    "Reserved final holdout",
+    "Product native archive/app/force-load closure",
+    "Native/reference journeys",
+    "Global inventory/shards/STATUS/HANDOFF updates",
+    "Protected manifest refresh",
+    "Two new unit execution registrations"
+  ],
+  "root_actions": [
+    "Independently review the exact packet and original source evidence.",
+    "Merge Session character fields additively; preserve music owner at former manager placement and exact PCM borrow.",
+    "Add music-state-reference and music-scheduling-state to tests/unit/manifest.tsv; supplied Makefile already links reference test/probe through guest archive.",
+    "Union protected judge changes without dropping any of all 938 inherited paths or 53 ignored corpora; include new tool/tests and source mapping evidence as needed.",
+    "Run reserved holdout using frozen original vectors/tolerances; preserve all partial/boundary identities.",
+    "Run product native source build/force-load closure and actual menu/save journeys, then composite gate and inventory/STATUS/HANDOFF closure."
+  ],
+  "limits": [
+    "Remaining legacy audio/reset/media/player/server behavior remains debt in place.",
+    "No maintained reference voice-timing or manager-task producer exists; adapter owns only tracks and six known bits.",
+    "Initializer retains its original six-store body; no reset-pair reuse attempted. Manager destructor still resets five and preserves real_previous_song.",
+    "No Windows/device/codec/thread/race/performance or whole-audio/Session/campaign conformance claim.",
+    "Private baseline link/setup failures and symbol-generator missing local dependency are retained, not reported as registered build defects. Read-only sa-tools link removed after private generation."
+  ]
+}
