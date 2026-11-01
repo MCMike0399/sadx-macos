@@ -5860,6 +5860,1330 @@
         "Original FP flags are not independently compared by the inherited leaf judge; all native FP result words are retained.",
         "Final composite integrated gate/reference journeys still pending; source callback and math packets merged additively."
       ]
+    },
+    "src/platform/mac/mac_save_files.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Readable, narrowly scoped native filesystem replacement with resolved current consumers; no source migration required for this file. Acceptance is bounded to its declared platform contract, not Windows API emulation or whole save-system closure.",
+      "reviewed_source_sha256": "c562b3fdedfdc00b382c286ee0719466a7ad0cd705f3c5ccd879f96ad18f3940",
+      "semantic_justification": "Complete header reviewed (1-25). SaveFiles exposes six narrowly named SaveFileCalls operations over typed Search/File shared resources and EncodedData, an owned native directory and provider identity token. find_first/find_next optional means actual empty/end-of-search, not absent fixture data. No game state/guest transport/EXE access. Platform marker and NOTSA explicitly identify replacement and scope it to SonicDX??.snc/native directory order. Ordinary ownership/byte transport belongs here; no recovered algorithm needs extraction.",
+      "evidence": [
+        {
+          "path": "src/platform/mac/mac_save_files.hpp",
+          "line": 1,
+          "sha256": "c562b3fdedfdc00b382c286ee0719466a7ad0cd705f3c5ccd879f96ad18f3940",
+          "end_line": 25
+        },
+        {
+          "path": "docs/STYLE.md",
+          "line": 375,
+          "sha256": "bd44068383b2198cf5165c2869086c6cf7844b1c96be44db7194c768ee62afdd",
+          "end_line": 393
+        },
+        {
+          "path": "docs/ARCHITECTURE.md",
+          "line": 204,
+          "sha256": "01b08d262279a42140d0cc301322baba861e72e6f5c4f332e4b26da6d88026b7",
+          "end_line": 211
+        },
+        {
+          "path": "src/game/save_file_list.hpp",
+          "line": 39,
+          "sha256": "87151c6639404ce7d4ddb25c149495405fe0ed29d791eeb0972966b4f88deeca",
+          "end_line": 49
+        },
+        {
+          "path": "src/game/save_data.hpp",
+          "line": 28,
+          "sha256": "b78b88eb49fa5623907fb4683b4fd5f349174b217b575ac6a3d55ba802d15080",
+          "end_line": 64
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "Session owns save::Profiles saves_: current persisted record and distinct menu_backup; logo, capture/write and TitleScene list/load borrow current. Backends own no save::Data, checksum policy, game flags or backup. Reference GameModeLeafState owns the same Profiles type in its separate runtime world; options/lives availability stays solely in that reference adapter. The old context-session-save-ownership prerequisite is historical at a9ed5bb, superseded by current bodies; do not reintroduce its seven-byte duplicate owner.",
+          "evidence": [
+            {
+              "path": "src/game/save_profiles.hpp",
+              "line": 5,
+              "sha256": "7fa1443e5382027559c51bc32694ee1fe370548adfe2a784f6e9fe3cbf70fdff",
+              "end_line": 13
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 228,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 21,
+              "sha256": "6c41e5d01e9014be2ef192218eead11a8fb11cc31e95a7dc7fefc34e7f5c98d4",
+              "end_line": 29
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "line": 4,
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a",
+              "end_line": 36
+            },
+            {
+              "path": "src/guest/game_mode_leaves_reference.hpp",
+              "line": 52,
+              "sha256": "5e3f17d271ca0d4c941f3bb00af800f455b87f7c6f88c21de4427281df73a25b",
+              "end_line": 85
+            }
+          ]
+        },
+        {
+          "resolution": "Session owns selected_save_name_ allocation, separately published through SaveNameState::value; both confirmation and write callbacks validate/release/allocate that actual allocation. list_data_ owns sentinel/linked nodes and copied FileInfo strings/timestamps. Backend path/string_view inputs are synchronous borrows: reader resolves/copies actual filename; writer copies target into Output. Neither keeps the SaveName pointer, creates a replacement game filename owner, nor changes list identity.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 290,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0",
+              "end_line": 291
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 349,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0",
+              "end_line": 350
+            },
+            {
+              "path": "src/game/save_file_name.hpp",
+              "line": 3,
+              "sha256": "a044035fcee43ea0892454611e4ca1d858eb9639a2567b546b888417948513a6",
+              "end_line": 11
+            },
+            {
+              "path": "src/runtime/native_file_select_display.cpp",
+              "line": 28,
+              "sha256": "7f8c435c0e9f718d1b5bd535c07aa68ef6ddfdd356451e36152579bd285e9fc1",
+              "end_line": 43
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "line": 22,
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a",
+              "end_line": 36
+            },
+            {
+              "path": "src/game/save_file_list.hpp",
+              "line": 11,
+              "sha256": "87151c6639404ce7d4ddb25c149495405fe0ed29d791eeb0972966b4f88deeca",
+              "end_line": 23
+            },
+            {
+              "path": "src/game/save_write.cpp",
+              "line": 65,
+              "sha256": "1a3ba108abc7800b75f0ea7e074150fb70cca1d4ab2fc529996c921ccb12d80f",
+              "end_line": 101
+            }
+          ]
+        },
+        {
+          "resolution": "Native provider owns only directory/token; shared NativeSearch/NativeFile owns actual native handles and identity token, so handle teardown does not dereference provider.",
+          "evidence": [
+            {
+              "path": "src/platform/mac/mac_save_files.hpp",
+              "line": 20,
+              "sha256": "c562b3fdedfdc00b382c286ee0719466a7ad0cd705f3c5ccd879f96ad18f3940",
+              "end_line": 24
+            },
+            {
+              "path": "src/platform/mac/mac_save_files.cpp",
+              "line": 13,
+              "sha256": "0258d17bda7a0881bf0a5d0ec824cb3b127d436cfd579677739d2af62f8d19d1",
+              "end_line": 33
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Actual app constructs SaveFiles at configuration.save_directory after prepare_save_directory, then attaches a borrowed SaveFileCalls pointer. App owns provider before Session in declaration order, so provider outlives Session destruction. No read handles persist in Session: count/load hold shared Search/File locally; exception unwinding closes via RAII.",
+          "evidence": [
+            {
+              "path": "src/apps/sadx_native.mm",
+              "line": 125,
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2",
+              "end_line": 145
+            },
+            {
+              "path": "src/apps/sadx_native.mm",
+              "line": 289,
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2",
+              "end_line": 307
+            },
+            {
+              "path": "src/apps/native_save_directory.hpp",
+              "line": 12,
+              "sha256": "8531d76506b8a1e4b02db1be28e4693db9a17bfdc4751b50fca30a40e4eb9b9b",
+              "end_line": 80
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 171,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 350,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            }
+          ]
+        },
+        {
+          "resolution": "TitleScene::count_save_files and load_selected_save check provider presence and invoke shared game algorithms on list_data_ and saves_.current. count_save_files creates sentinel before find_first, derives slot/checksum and canonical list names itself, closes each file and search, and stops after count >98. load initializes before selected-list traversal, uses fallback otherwise, reads and closes. read_live_save encodes existing live bytes first, reads into that buffer and decodes even a short EOF read, preserving unread tail. Backend never sorts, selects slots, validates checksums, initializes game saves or applies progress.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 450,
+              "sha256": "b79241bae2dd42684e8c03cdd475cca89f301a9705a57ede031baefa0b9b0c62",
+              "end_line": 460
+            },
+            {
+              "path": "src/game/save_file_list.cpp",
+              "line": 77,
+              "sha256": "6f5a7474fea7b977747f3df8b605224634176eef6c554a0a5c135d25c5cadf54",
+              "end_line": 85
+            },
+            {
+              "path": "src/game/save_file_list.cpp",
+              "line": 140,
+              "sha256": "6f5a7474fea7b977747f3df8b605224634176eef6c554a0a5c135d25c5cadf54",
+              "end_line": 189
+            }
+          ]
+        },
+        {
+          "resolution": "Production uses explicit native platform object membership, despite absence from native-sources.txt; registered mac-save-files unit instantiates this concrete provider and exercises actual filesystem calls. No guest/Windows handle is accepted as a resource.",
+          "evidence": [
+            {
+              "path": "Makefile",
+              "line": 40,
+              "sha256": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
+              "end_line": 45
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 215,
+              "sha256": "be26bf1a641df0e5b887653a87cc5b9de1d0c55b6d8b8dfa0a79c8439458039b"
+            },
+            {
+              "path": "tests/unit/mac_save_files.cpp",
+              "line": 47,
+              "sha256": "b5ea0b28349394eaec920d1d42c2ee23accb42b8024bb1635bd600b95baf6a74",
+              "end_line": 168
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "kind": "registered concrete platform unit; prior receipt only",
+          "evidence": [
+            {
+              "path": "tests/unit/mac_save_files.cpp",
+              "line": 47,
+              "sha256": "b5ea0b28349394eaec920d1d42c2ee23accb42b8024bb1635bd600b95baf6a74",
+              "end_line": 168
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 215,
+              "sha256": "be26bf1a641df0e5b887653a87cc5b9de1d0c55b6d8b8dfa0a79c8439458039b"
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-progress-gate.json",
+              "line": 221,
+              "sha256": "7cef2edb27987d42c5325890db037885cc395096527ea21c61c3b63354c36074"
+            }
+          ],
+          "accepted_scope": "Empty enumeration/descriptor closure; mixed-case exact pattern; native unsorted enumeration; real mtime -> FILETIME; full/79-byte partial/bad checksum/oversize reads; missing and invalid paths; foreign/closed handles; directory read error; RAII; conditional ambiguity rejection. Unit optional argc==2 copies original save bytes, but default manifest has no argument: that branch is not claimed executed by gate. Case-alias check is volume conditional.",
+          "limits": "No forced readdir/stat/close failure matrix, timestamp overflow branch execution, Unicode/NTFS wildcard parity, concurrent directory mutation or hardware qualification. No new test run."
+        },
+        {
+          "kind": "unchanged original game algorithm receipts; not platform equivalence",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/save_file_list.json",
+              "line": 1,
+              "sha256": "a60ae551cf1015aa60a577b1ac7f9a5ce08c4483d9220574bb6cf9ac6b16dabd"
+            },
+            {
+              "path": "reference/oracle-reports/load_selected_save.json",
+              "line": 1,
+              "sha256": "706d63cc21f8564cb8e438b252e02cdc8e655cfa001bd7b7b3f7bc6781000561"
+            },
+            {
+              "path": "tools/oracles/verify_original_save_file_list.py",
+              "line": 1,
+              "sha256": "2e6cdf5ad65bc0253c2f8a0a6b630a0345c2e905db65859ab93637c73431fd85",
+              "end_line": 20
+            },
+            {
+              "path": "tools/oracles/verify_original_load_selected_save.py",
+              "line": 1,
+              "sha256": "16c0999ea4c798c6cbcfccfbedeb7bba922491114b03a1eb3552f825371e807a",
+              "end_line": 15
+            },
+            {
+              "path": "tests/probes/native_save_file_list_probe.cpp",
+              "line": 10,
+              "sha256": "8d04b72f060080006b9eb380a90d7d7fd3213683534fdaea988997d0dc9c2df0",
+              "end_line": 66
+            }
+          ],
+          "accepted_scope": "Tracked save_file_list: passed true,348 cases,0 mismatches,seed505050. load_selected_save: passed true,368 cases,0 mismatches,seed42180. Count/list/checksum and selected-load byte/store ordering, timestamps and partial-read prefixes at fixture boundaries.",
+          "limits": "Enumeration/read APIs and allocations are fixtures. No claim these reports execute SaveFiles or establish Windows IO behavior. No new verdict, dedicated platform mutant or holdout qualification."
+        },
+        {
+          "kind": "tracked native app composition receipts; accepted with original scope",
+          "evidence": [
+            {
+              "path": "tools/gate/run_native_journeys.py",
+              "line": 16,
+              "sha256": "f46c96f7fad6a1cd9a812d2f35a3b8a01cda38749eace3f12f451e3b915c4358",
+              "end_line": 59
+            },
+            {
+              "path": "tools/journey/check_native_file_select.py",
+              "line": 1,
+              "sha256": "a7f1a4e09bfb2aeb38ee8941ec207c5f76b8bee28e8b0f930fae249ca1582896"
+            },
+            {
+              "path": "tools/journey/check_native_main_menu.py",
+              "line": 1,
+              "sha256": "e3628e8a039c7ef623f48b38d6bd63d6f43bc419ed8f916b93ffbd67f7f8e8f1"
+            },
+            {
+              "path": "tools/journey/check_native_fresh_save.py",
+              "line": 1,
+              "sha256": "76ecc58997331de9b8123bfd3b20347331bccf8736214eb6cec946763218ff05"
+            },
+            {
+              "path": "reference/production-integration-20261101/session-save-owner-qualification/native-journeys.json",
+              "line": 1,
+              "sha256": "8f59b13bb345852fd20b240ba108b7dfed637fab22a8c2961ceed441939eb5a9"
+            },
+            {
+              "path": "reference/production-integration-20261101/session-save-owner-qualification/summary.json",
+              "line": 1,
+              "sha256": "118b0ce42b4fd65899dbbeeed5a8cca6045e701e922b97580edc4c73eabca686"
+            }
+          ],
+          "accepted_scope": "Recorded exit0 native FileSelect1850/MainMenu1850/FreshSave6050 frames. Inspect checkers: ordinary-key navigation reloads distinct saves, dialogs/cancel/title reentry retain correct name/data and imported/profile hashes; fresh creation adds03 preserving01/02, checks1392 bytes/checksum and source save-message ordering; restart reloads actual written03, empty-profile creates/reloads01. Current owner packet receipt is composition evidence, not a new reviewer run.",
+          "limits": "No story/gameplay/63FPS/new controller/device qualification or whole save lifecycle proof. Summary names pending integrated gate; active Main build/canonical-save-owner-integration-20261101/session50794 is user-supplied in-progress context, never treated as passed."
+        }
+      ],
+      "destination": "Retain src/platform/mac/mac_save_files.hpp as production macOS filesystem backend; shared game save algorithms remain in game/save modules.",
+      "findings": [],
+      "classification_limits": [
+        "Per-file maintained-source semantic inventory disposition at exact reviewed bytes, not a new runtime/fidelity verdict. Whole save lifecycle, save IO/app composition system, Session decomposition and complete-refactor campaign remain open. Keep platform replacement policy separate from original game algorithms. No blanket directory exception. No builds/tests/oracles/gates/mutations/runtime IO/network/storage/delegates performed. Error/destructor/concurrency/OS limits below are bounds on evidence, not newly qualified behavior.",
+        "Reader follows native root/entry symlinks through stat/fstatat/fopen; logical-root validation is not a symlink sandbox. Writer rejects root/target symlinks at checks, but does not pin directory descriptors against concurrent root/path replacement. Atomic rename visibility is not power-loss durability. Neither provider is a claimed generic Unicode/NTFS implementation or concurrent multiwriter transaction manager.",
+        "Cleanup destructors deliberately ignore close/unlink errors; explicit methods report errors. Short read with EOF preserves partial bytes; read error may have modified temporary EncodedData but decode is not reached after throw. Short write may alter unpublished temp; existing target stays untouched until rename. Runtime receipts do not cover every injected OS failure.",
+        "No dedicated backend semantic mutant/holdout receipt identified in reviewed tracked paths. This is proportionate retained-source platform review; source-backed game comparison and registered real-I/O tests are separate evidence layers.",
+        "Writer system_error captures errno without synthesizing EIO on short fwrite; even a zero/stale errno still throws, and is not accepted as precise error-code qualification. Reader explicitly synthesizes EIO only when ferror is set and errno is zero. Explicit close invalidates the handle even if native close fails; destructor cleanup is best effort."
+      ]
+    },
+    "src/platform/mac/mac_save_files.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Readable, narrowly scoped native filesystem replacement with resolved current consumers; no source migration required for this file. Acceptance is bounded to its declared platform contract, not Windows API emulation or whole save-system closure.",
+      "reviewed_source_sha256": "0258d17bda7a0881bf0a5d0ec824cb3b127d436cfd579677739d2af62f8d19d1",
+      "semantic_justification": "Complete implementation reviewed (1-195). NativeSearch/NativeFile RAII retain provider token independently of provider lifetime; dynamic type/token and closed-state checks prevent foreign/reused resources in actual noncopied provider use. Constructor validates directory. ASCII case-folding is locale independent; search accepts only logical source pattern, matches thirteen-byte SonicDX??.snc (the two wildcard bytes are deliberately not restricted to digits), yields native readdir order without sorting and uses fstatat-followed metadata. mtime converts checked seconds/nanoseconds to unsigned100ns FILETIME ticks since1601, truncating sub100ns. open_file restricts logical root to one filename, rejects traversal/NUL/separators, scans for case alias ambiguity, returns null only for absent match/ENOENT, otherwise opens rb or throws. fread uses size1392,count1: EOF short read returns0 while preserving supplied buffer tail; ferror throws rather than inventing zero data. Explicit closes null handles before checked close; RAII best-effort closes on unwind. All decisions concern platform API translation/resources, not slots/checksums/list policy. Structured direct native calls/plain checked integer arithmetic; no instruction-shaped data or hidden game algorithm.",
+      "evidence": [
+        {
+          "path": "src/platform/mac/mac_save_files.cpp",
+          "line": 1,
+          "sha256": "0258d17bda7a0881bf0a5d0ec824cb3b127d436cfd579677739d2af62f8d19d1",
+          "end_line": 195
+        },
+        {
+          "path": "docs/STYLE.md",
+          "line": 375,
+          "sha256": "bd44068383b2198cf5165c2869086c6cf7844b1c96be44db7194c768ee62afdd",
+          "end_line": 393
+        },
+        {
+          "path": "docs/ARCHITECTURE.md",
+          "line": 204,
+          "sha256": "01b08d262279a42140d0cc301322baba861e72e6f5c4f332e4b26da6d88026b7",
+          "end_line": 211
+        },
+        {
+          "path": "src/game/save_file_list.hpp",
+          "line": 39,
+          "sha256": "87151c6639404ce7d4ddb25c149495405fe0ed29d791eeb0972966b4f88deeca",
+          "end_line": 49
+        },
+        {
+          "path": "src/game/save_data.hpp",
+          "line": 28,
+          "sha256": "b78b88eb49fa5623907fb4683b4fd5f349174b217b575ac6a3d55ba802d15080",
+          "end_line": 64
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "Session owns save::Profiles saves_: current persisted record and distinct menu_backup; logo, capture/write and TitleScene list/load borrow current. Backends own no save::Data, checksum policy, game flags or backup. Reference GameModeLeafState owns the same Profiles type in its separate runtime world; options/lives availability stays solely in that reference adapter. The old context-session-save-ownership prerequisite is historical at a9ed5bb, superseded by current bodies; do not reintroduce its seven-byte duplicate owner.",
+          "evidence": [
+            {
+              "path": "src/game/save_profiles.hpp",
+              "line": 5,
+              "sha256": "7fa1443e5382027559c51bc32694ee1fe370548adfe2a784f6e9fe3cbf70fdff",
+              "end_line": 13
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 228,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 21,
+              "sha256": "6c41e5d01e9014be2ef192218eead11a8fb11cc31e95a7dc7fefc34e7f5c98d4",
+              "end_line": 29
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "line": 4,
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a",
+              "end_line": 36
+            },
+            {
+              "path": "src/guest/game_mode_leaves_reference.hpp",
+              "line": 52,
+              "sha256": "5e3f17d271ca0d4c941f3bb00af800f455b87f7c6f88c21de4427281df73a25b",
+              "end_line": 85
+            }
+          ]
+        },
+        {
+          "resolution": "Session owns selected_save_name_ allocation, separately published through SaveNameState::value; both confirmation and write callbacks validate/release/allocate that actual allocation. list_data_ owns sentinel/linked nodes and copied FileInfo strings/timestamps. Backend path/string_view inputs are synchronous borrows: reader resolves/copies actual filename; writer copies target into Output. Neither keeps the SaveName pointer, creates a replacement game filename owner, nor changes list identity.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 290,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0",
+              "end_line": 291
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 349,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0",
+              "end_line": 350
+            },
+            {
+              "path": "src/game/save_file_name.hpp",
+              "line": 3,
+              "sha256": "a044035fcee43ea0892454611e4ca1d858eb9639a2567b546b888417948513a6",
+              "end_line": 11
+            },
+            {
+              "path": "src/runtime/native_file_select_display.cpp",
+              "line": 28,
+              "sha256": "7f8c435c0e9f718d1b5bd535c07aa68ef6ddfdd356451e36152579bd285e9fc1",
+              "end_line": 43
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "line": 22,
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a",
+              "end_line": 36
+            },
+            {
+              "path": "src/game/save_file_list.hpp",
+              "line": 11,
+              "sha256": "87151c6639404ce7d4ddb25c149495405fe0ed29d791eeb0972966b4f88deeca",
+              "end_line": 23
+            },
+            {
+              "path": "src/game/save_write.cpp",
+              "line": 65,
+              "sha256": "1a3ba108abc7800b75f0ea7e074150fb70cca1d4ab2fc529996c921ccb12d80f",
+              "end_line": 101
+            }
+          ]
+        },
+        {
+          "resolution": "Native provider owns only directory/token; shared NativeSearch/NativeFile owns actual native handles and identity token, so handle teardown does not dereference provider.",
+          "evidence": [
+            {
+              "path": "src/platform/mac/mac_save_files.hpp",
+              "line": 20,
+              "sha256": "c562b3fdedfdc00b382c286ee0719466a7ad0cd705f3c5ccd879f96ad18f3940",
+              "end_line": 24
+            },
+            {
+              "path": "src/platform/mac/mac_save_files.cpp",
+              "line": 13,
+              "sha256": "0258d17bda7a0881bf0a5d0ec824cb3b127d436cfd579677739d2af62f8d19d1",
+              "end_line": 33
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Actual app constructs SaveFiles at configuration.save_directory after prepare_save_directory, then attaches a borrowed SaveFileCalls pointer. App owns provider before Session in declaration order, so provider outlives Session destruction. No read handles persist in Session: count/load hold shared Search/File locally; exception unwinding closes via RAII.",
+          "evidence": [
+            {
+              "path": "src/apps/sadx_native.mm",
+              "line": 125,
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2",
+              "end_line": 145
+            },
+            {
+              "path": "src/apps/sadx_native.mm",
+              "line": 289,
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2",
+              "end_line": 307
+            },
+            {
+              "path": "src/apps/native_save_directory.hpp",
+              "line": 12,
+              "sha256": "8531d76506b8a1e4b02db1be28e4693db9a17bfdc4751b50fca30a40e4eb9b9b",
+              "end_line": 80
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 171,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 350,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            }
+          ]
+        },
+        {
+          "resolution": "TitleScene::count_save_files and load_selected_save check provider presence and invoke shared game algorithms on list_data_ and saves_.current. count_save_files creates sentinel before find_first, derives slot/checksum and canonical list names itself, closes each file and search, and stops after count >98. load initializes before selected-list traversal, uses fallback otherwise, reads and closes. read_live_save encodes existing live bytes first, reads into that buffer and decodes even a short EOF read, preserving unread tail. Backend never sorts, selects slots, validates checksums, initializes game saves or applies progress.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 450,
+              "sha256": "b79241bae2dd42684e8c03cdd475cca89f301a9705a57ede031baefa0b9b0c62",
+              "end_line": 460
+            },
+            {
+              "path": "src/game/save_file_list.cpp",
+              "line": 77,
+              "sha256": "6f5a7474fea7b977747f3df8b605224634176eef6c554a0a5c135d25c5cadf54",
+              "end_line": 85
+            },
+            {
+              "path": "src/game/save_file_list.cpp",
+              "line": 140,
+              "sha256": "6f5a7474fea7b977747f3df8b605224634176eef6c554a0a5c135d25c5cadf54",
+              "end_line": 189
+            }
+          ]
+        },
+        {
+          "resolution": "Production uses explicit native platform object membership, despite absence from native-sources.txt; registered mac-save-files unit instantiates this concrete provider and exercises actual filesystem calls. No guest/Windows handle is accepted as a resource.",
+          "evidence": [
+            {
+              "path": "Makefile",
+              "line": 40,
+              "sha256": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
+              "end_line": 45
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 215,
+              "sha256": "be26bf1a641df0e5b887653a87cc5b9de1d0c55b6d8b8dfa0a79c8439458039b"
+            },
+            {
+              "path": "tests/unit/mac_save_files.cpp",
+              "line": 47,
+              "sha256": "b5ea0b28349394eaec920d1d42c2ee23accb42b8024bb1635bd600b95baf6a74",
+              "end_line": 168
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "kind": "registered concrete platform unit; prior receipt only",
+          "evidence": [
+            {
+              "path": "tests/unit/mac_save_files.cpp",
+              "line": 47,
+              "sha256": "b5ea0b28349394eaec920d1d42c2ee23accb42b8024bb1635bd600b95baf6a74",
+              "end_line": 168
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 215,
+              "sha256": "be26bf1a641df0e5b887653a87cc5b9de1d0c55b6d8b8dfa0a79c8439458039b"
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-progress-gate.json",
+              "line": 221,
+              "sha256": "7cef2edb27987d42c5325890db037885cc395096527ea21c61c3b63354c36074"
+            }
+          ],
+          "accepted_scope": "Empty enumeration/descriptor closure; mixed-case exact pattern; native unsorted enumeration; real mtime -> FILETIME; full/79-byte partial/bad checksum/oversize reads; missing and invalid paths; foreign/closed handles; directory read error; RAII; conditional ambiguity rejection. Unit optional argc==2 copies original save bytes, but default manifest has no argument: that branch is not claimed executed by gate. Case-alias check is volume conditional.",
+          "limits": "No forced readdir/stat/close failure matrix, timestamp overflow branch execution, Unicode/NTFS wildcard parity, concurrent directory mutation or hardware qualification. No new test run."
+        },
+        {
+          "kind": "unchanged original game algorithm receipts; not platform equivalence",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/save_file_list.json",
+              "line": 1,
+              "sha256": "a60ae551cf1015aa60a577b1ac7f9a5ce08c4483d9220574bb6cf9ac6b16dabd"
+            },
+            {
+              "path": "reference/oracle-reports/load_selected_save.json",
+              "line": 1,
+              "sha256": "706d63cc21f8564cb8e438b252e02cdc8e655cfa001bd7b7b3f7bc6781000561"
+            },
+            {
+              "path": "tools/oracles/verify_original_save_file_list.py",
+              "line": 1,
+              "sha256": "2e6cdf5ad65bc0253c2f8a0a6b630a0345c2e905db65859ab93637c73431fd85",
+              "end_line": 20
+            },
+            {
+              "path": "tools/oracles/verify_original_load_selected_save.py",
+              "line": 1,
+              "sha256": "16c0999ea4c798c6cbcfccfbedeb7bba922491114b03a1eb3552f825371e807a",
+              "end_line": 15
+            },
+            {
+              "path": "tests/probes/native_save_file_list_probe.cpp",
+              "line": 10,
+              "sha256": "8d04b72f060080006b9eb380a90d7d7fd3213683534fdaea988997d0dc9c2df0",
+              "end_line": 66
+            }
+          ],
+          "accepted_scope": "Tracked save_file_list: passed true,348 cases,0 mismatches,seed505050. load_selected_save: passed true,368 cases,0 mismatches,seed42180. Count/list/checksum and selected-load byte/store ordering, timestamps and partial-read prefixes at fixture boundaries.",
+          "limits": "Enumeration/read APIs and allocations are fixtures. No claim these reports execute SaveFiles or establish Windows IO behavior. No new verdict, dedicated platform mutant or holdout qualification."
+        },
+        {
+          "kind": "tracked native app composition receipts; accepted with original scope",
+          "evidence": [
+            {
+              "path": "tools/gate/run_native_journeys.py",
+              "line": 16,
+              "sha256": "f46c96f7fad6a1cd9a812d2f35a3b8a01cda38749eace3f12f451e3b915c4358",
+              "end_line": 59
+            },
+            {
+              "path": "tools/journey/check_native_file_select.py",
+              "line": 1,
+              "sha256": "a7f1a4e09bfb2aeb38ee8941ec207c5f76b8bee28e8b0f930fae249ca1582896"
+            },
+            {
+              "path": "tools/journey/check_native_main_menu.py",
+              "line": 1,
+              "sha256": "e3628e8a039c7ef623f48b38d6bd63d6f43bc419ed8f916b93ffbd67f7f8e8f1"
+            },
+            {
+              "path": "tools/journey/check_native_fresh_save.py",
+              "line": 1,
+              "sha256": "76ecc58997331de9b8123bfd3b20347331bccf8736214eb6cec946763218ff05"
+            },
+            {
+              "path": "reference/production-integration-20261101/session-save-owner-qualification/native-journeys.json",
+              "line": 1,
+              "sha256": "8f59b13bb345852fd20b240ba108b7dfed637fab22a8c2961ceed441939eb5a9"
+            },
+            {
+              "path": "reference/production-integration-20261101/session-save-owner-qualification/summary.json",
+              "line": 1,
+              "sha256": "118b0ce42b4fd65899dbbeeed5a8cca6045e701e922b97580edc4c73eabca686"
+            }
+          ],
+          "accepted_scope": "Recorded exit0 native FileSelect1850/MainMenu1850/FreshSave6050 frames. Inspect checkers: ordinary-key navigation reloads distinct saves, dialogs/cancel/title reentry retain correct name/data and imported/profile hashes; fresh creation adds03 preserving01/02, checks1392 bytes/checksum and source save-message ordering; restart reloads actual written03, empty-profile creates/reloads01. Current owner packet receipt is composition evidence, not a new reviewer run.",
+          "limits": "No story/gameplay/63FPS/new controller/device qualification or whole save lifecycle proof. Summary names pending integrated gate; active Main build/canonical-save-owner-integration-20261101/session50794 is user-supplied in-progress context, never treated as passed."
+        }
+      ],
+      "destination": "Retain src/platform/mac/mac_save_files.cpp as production macOS filesystem backend; shared game save algorithms remain in game/save modules.",
+      "findings": [],
+      "classification_limits": [
+        "Per-file maintained-source semantic inventory disposition at exact reviewed bytes, not a new runtime/fidelity verdict. Whole save lifecycle, save IO/app composition system, Session decomposition and complete-refactor campaign remain open. Keep platform replacement policy separate from original game algorithms. No blanket directory exception. No builds/tests/oracles/gates/mutations/runtime IO/network/storage/delegates performed. Error/destructor/concurrency/OS limits below are bounds on evidence, not newly qualified behavior.",
+        "Reader follows native root/entry symlinks through stat/fstatat/fopen; logical-root validation is not a symlink sandbox. Writer rejects root/target symlinks at checks, but does not pin directory descriptors against concurrent root/path replacement. Atomic rename visibility is not power-loss durability. Neither provider is a claimed generic Unicode/NTFS implementation or concurrent multiwriter transaction manager.",
+        "Cleanup destructors deliberately ignore close/unlink errors; explicit methods report errors. Short read with EOF preserves partial bytes; read error may have modified temporary EncodedData but decode is not reached after throw. Short write may alter unpublished temp; existing target stays untouched until rename. Runtime receipts do not cover every injected OS failure.",
+        "No dedicated backend semantic mutant/holdout receipt identified in reviewed tracked paths. This is proportionate retained-source platform review; source-backed game comparison and registered real-I/O tests are separate evidence layers.",
+        "Writer system_error captures errno without synthesizing EIO on short fwrite; even a zero/stale errno still throws, and is not accepted as precise error-code qualification. Reader explicitly synthesizes EIO only when ferror is set and errno is zero. Explicit close invalidates the handle even if native close fails; destructor cleanup is best effort."
+      ]
+    },
+    "src/platform/mac/mac_save_writer.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Readable, narrowly scoped native filesystem replacement with resolved current consumers; no source migration required for this file. Acceptance is bounded to its declared platform contract, not Windows API emulation or whole save-system closure.",
+      "reviewed_source_sha256": "f7afc944e3c4808cd06ccaf117e5cc9ce34dbd3e71e54c9da533b80b1b2961dd",
+      "semantic_justification": "Complete header reviewed (1-25). SaveWriter implements the narrow WriteCalls contract using owned native root, provider identity and required actual reset callback. EncodedData is a borrowed explicit1392-byte byte record, not host Data memory. Header marks filesystem replacement/NOTSA and expressly describes fresh-inode atomic visibility as native protection policy, not recovered Windows behavior. No persistent save/name/list or reference availability ownership leaks into this API.",
+      "evidence": [
+        {
+          "path": "src/platform/mac/mac_save_writer.hpp",
+          "line": 1,
+          "sha256": "f7afc944e3c4808cd06ccaf117e5cc9ce34dbd3e71e54c9da533b80b1b2961dd",
+          "end_line": 25
+        },
+        {
+          "path": "docs/STYLE.md",
+          "line": 375,
+          "sha256": "bd44068383b2198cf5165c2869086c6cf7844b1c96be44db7194c768ee62afdd",
+          "end_line": 393
+        },
+        {
+          "path": "docs/ARCHITECTURE.md",
+          "line": 204,
+          "sha256": "01b08d262279a42140d0cc301322baba861e72e6f5c4f332e4b26da6d88026b7",
+          "end_line": 211
+        },
+        {
+          "path": "src/game/save_write.hpp",
+          "line": 9,
+          "sha256": "1d3b587f50d9ed3e9d31f97a7e775084b8b75242e4b97a49aa3da0b3c24d3a1d",
+          "end_line": 21
+        },
+        {
+          "path": "src/game/save_data.hpp",
+          "line": 28,
+          "sha256": "b78b88eb49fa5623907fb4683b4fd5f349174b217b575ac6a3d55ba802d15080",
+          "end_line": 64
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "Session owns save::Profiles saves_: current persisted record and distinct menu_backup; logo, capture/write and TitleScene list/load borrow current. Backends own no save::Data, checksum policy, game flags or backup. Reference GameModeLeafState owns the same Profiles type in its separate runtime world; options/lives availability stays solely in that reference adapter. The old context-session-save-ownership prerequisite is historical at a9ed5bb, superseded by current bodies; do not reintroduce its seven-byte duplicate owner.",
+          "evidence": [
+            {
+              "path": "src/game/save_profiles.hpp",
+              "line": 5,
+              "sha256": "7fa1443e5382027559c51bc32694ee1fe370548adfe2a784f6e9fe3cbf70fdff",
+              "end_line": 13
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 228,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 21,
+              "sha256": "6c41e5d01e9014be2ef192218eead11a8fb11cc31e95a7dc7fefc34e7f5c98d4",
+              "end_line": 29
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "line": 4,
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a",
+              "end_line": 36
+            },
+            {
+              "path": "src/guest/game_mode_leaves_reference.hpp",
+              "line": 52,
+              "sha256": "5e3f17d271ca0d4c941f3bb00af800f455b87f7c6f88c21de4427281df73a25b",
+              "end_line": 85
+            }
+          ]
+        },
+        {
+          "resolution": "Session owns selected_save_name_ allocation, separately published through SaveNameState::value; both confirmation and write callbacks validate/release/allocate that actual allocation. list_data_ owns sentinel/linked nodes and copied FileInfo strings/timestamps. Backend path/string_view inputs are synchronous borrows: reader resolves/copies actual filename; writer copies target into Output. Neither keeps the SaveName pointer, creates a replacement game filename owner, nor changes list identity.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 290,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0",
+              "end_line": 291
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 349,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0",
+              "end_line": 350
+            },
+            {
+              "path": "src/game/save_file_name.hpp",
+              "line": 3,
+              "sha256": "a044035fcee43ea0892454611e4ca1d858eb9639a2567b546b888417948513a6",
+              "end_line": 11
+            },
+            {
+              "path": "src/runtime/native_file_select_display.cpp",
+              "line": 28,
+              "sha256": "7f8c435c0e9f718d1b5bd535c07aa68ef6ddfdd356451e36152579bd285e9fc1",
+              "end_line": 43
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "line": 22,
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a",
+              "end_line": 36
+            },
+            {
+              "path": "src/game/save_file_list.hpp",
+              "line": 11,
+              "sha256": "87151c6639404ce7d4ddb25c149495405fe0ed29d791eeb0972966b4f88deeca",
+              "end_line": 23
+            },
+            {
+              "path": "src/game/save_write.cpp",
+              "line": 65,
+              "sha256": "1a3ba108abc7800b75f0ea7e074150fb70cca1d4ab2fc529996c921ccb12d80f",
+              "end_line": 101
+            }
+          ]
+        },
+        {
+          "resolution": "Writer owns root/token/reset callable; Output retains token/path/stream and never captures Writer or App. Current app issues one write per opened output; repeated writes, provider copies and moved-from provider operations are outside actual consumer closure.",
+          "evidence": [
+            {
+              "path": "src/platform/mac/mac_save_writer.hpp",
+              "line": 20,
+              "sha256": "f7afc944e3c4808cd06ccaf117e5cc9ce34dbd3e71e54c9da533b80b1b2961dd",
+              "end_line": 24
+            },
+            {
+              "path": "src/platform/mac/mac_save_writer.cpp",
+              "line": 12,
+              "sha256": "33c870436a055b26e0fff6b60e546a2fe7e7c22eb2e034ec38c45c3dd0a3ada2",
+              "end_line": 22
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "App owns SaveWriter and its stored reset callback capturing App. configure_saves attaches a borrowed WriteCalls pointer; callback checks input owner and invokes Input::reset_source synchronously. Writer is declared after Session and destroyed earlier; no Session destructor invokes the writer, no pending backend operation/callback is retained by Session, and Output destructor never calls reset. This closes actual current synchronous use, not future asynchronous lifetimes or whole Session teardown.",
+          "evidence": [
+            {
+              "path": "src/apps/sadx_native.mm",
+              "line": 138,
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2",
+              "end_line": 145
+            },
+            {
+              "path": "src/apps/sadx_native.mm",
+              "line": 289,
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2",
+              "end_line": 307
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 57,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 275,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/runtime/native_title_scene.cpp",
+              "line": 10,
+              "sha256": "e8a4cf268c2a88da43393ba552358be9089bad7b6fd3c759b3d36a25b49ea403",
+              "end_line": 14
+            },
+            {
+              "path": "src/platform/mac/mac_save_writer.cpp",
+              "line": 12,
+              "sha256": "33c870436a055b26e0fff6b60e546a2fe7e7c22eb2e034ec38c45c3dd0a3ada2",
+              "end_line": 22
+            }
+          ]
+        },
+        {
+          "resolution": "Session::write_live_save supplies current Profiles record, borrowed save flags/list/name and actual allocation services to save::write_file. That algorithm clears retry/ok, handles disabled/count/full-list branches, ensures directory before capture, picks first free slot, releases old name, publishes allocation/count/selection before formatting, then opens and writes encode(data). Only after write returns does it clear card_complete, reset real input and clear pending flags; close/publication precedes save_ok=1. Exceptions retain the reached prefix; backend does not roll back game stores or synthesize success.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_save.cpp",
+              "line": 14,
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a",
+              "end_line": 36
+            },
+            {
+              "path": "src/game/save_write.hpp",
+              "line": 9,
+              "sha256": "1d3b587f50d9ed3e9d31f97a7e775084b8b75242e4b97a49aa3da0b3c24d3a1d",
+              "end_line": 21
+            },
+            {
+              "path": "src/game/save_write.cpp",
+              "line": 34,
+              "sha256": "1a3ba108abc7800b75f0ea7e074150fb70cca1d4ab2fc529996c921ccb12d80f",
+              "end_line": 101
+            }
+          ]
+        },
+        {
+          "resolution": "Production explicitly includes writer platform object. save-write unit is manifest registered and explicitly links this maintained backend rather than a fixture; ordinary original-code write oracle instead uses WriteFixture in native_save_creation_probe, and cannot certify real POSIX calls.",
+          "evidence": [
+            {
+              "path": "Makefile",
+              "line": 45,
+              "sha256": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef"
+            },
+            {
+              "path": "Makefile",
+              "line": 422,
+              "sha256": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
+              "end_line": 424
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 241,
+              "sha256": "be26bf1a641df0e5b887653a87cc5b9de1d0c55b6d8b8dfa0a79c8439458039b"
+            },
+            {
+              "path": "tests/unit/save_write.cpp",
+              "line": 33,
+              "sha256": "416797df92f00bf59601813a619caadea0daf6a3236f235315488ea11663bd09",
+              "end_line": 173
+            },
+            {
+              "path": "tests/probes/native_save_creation_probe.cpp",
+              "line": 48,
+              "sha256": "7b97306fb3d911a3b675906b498b54f40e5319e7bece3c290d010bb525760f92",
+              "end_line": 136
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "kind": "registered concrete platform unit; prior receipt only",
+          "evidence": [
+            {
+              "path": "tests/unit/save_write.cpp",
+              "line": 33,
+              "sha256": "416797df92f00bf59601813a619caadea0daf6a3236f235315488ea11663bd09",
+              "end_line": 173
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 241,
+              "sha256": "be26bf1a641df0e5b887653a87cc5b9de1d0c55b6d8b8dfa0a79c8439458039b"
+            },
+            {
+              "path": "Makefile",
+              "line": 422,
+              "sha256": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
+              "end_line": 424
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-progress-gate.json",
+              "line": 245,
+              "sha256": "7cef2edb27987d42c5325890db037885cc395096527ea21c61c3b63354c36074"
+            }
+          ],
+          "accepted_scope": "Actual fresh publication and 1392 exact bytes; case-preserving replacement; hardlink original inode/mtime/bytes preserved; symlink target/root and traversal rejected; incomplete/closed/foreign resources rejected; failed rename leaves no published success and removes temp on handle destruction; real game first-free selection/reset and allocation/null-allocation prefix checks.",
+          "limits": "No injected short fwrite, fdopen/fclose failure, disk-full or crash/power-loss test; no fsync/durability guarantee. Aggregate gate receipt records executable invocation, not a separate per-assertion report. No new test run."
+        },
+        {
+          "kind": "unchanged original write algorithm receipt; not platform equivalence",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/save_write.json",
+              "line": 1,
+              "sha256": "e2d3e72f98e6bea2f9043e7581a618f76141a389aebf816c60b774e96b2aa9f7"
+            },
+            {
+              "path": "tools/oracles/verify_original_save_write.py",
+              "line": 1,
+              "sha256": "a99eca14677270d000d0047a7ac0de984ba317c577c8f82933f522863d6509ea",
+              "end_line": 12
+            },
+            {
+              "path": "tests/probes/native_save_creation_probe.cpp",
+              "line": 48,
+              "sha256": "7b97306fb3d911a3b675906b498b54f40e5319e7bece3c290d010bb525760f92",
+              "end_line": 136
+            }
+          ],
+          "accepted_scope": "Tracked passed true,1000 cases,0 mismatches,seed20261021 for original WriteSaveFile ordering,first-free canonical ASCII slot choice,filename allocation and emitted bytes. Original ignored write return0/1 is retained in fixture.",
+          "limits": "CRT allocation/formatting/CompareStringA and filesystem calls are receipts. Does not prove SaveWriter atomic publication equivalent to Windows CRT failure behavior. No newly executed mutants or holdouts; owner packet five mutants concern owner migration, not writer IO."
+        },
+        {
+          "kind": "tracked native app composition receipts; accepted with original scope",
+          "evidence": [
+            {
+              "path": "tools/gate/run_native_journeys.py",
+              "line": 16,
+              "sha256": "f46c96f7fad6a1cd9a812d2f35a3b8a01cda38749eace3f12f451e3b915c4358",
+              "end_line": 59
+            },
+            {
+              "path": "tools/journey/check_native_file_select.py",
+              "line": 1,
+              "sha256": "a7f1a4e09bfb2aeb38ee8941ec207c5f76b8bee28e8b0f930fae249ca1582896"
+            },
+            {
+              "path": "tools/journey/check_native_main_menu.py",
+              "line": 1,
+              "sha256": "e3628e8a039c7ef623f48b38d6bd63d6f43bc419ed8f916b93ffbd67f7f8e8f1"
+            },
+            {
+              "path": "tools/journey/check_native_fresh_save.py",
+              "line": 1,
+              "sha256": "76ecc58997331de9b8123bfd3b20347331bccf8736214eb6cec946763218ff05"
+            },
+            {
+              "path": "reference/production-integration-20261101/session-save-owner-qualification/native-journeys.json",
+              "line": 1,
+              "sha256": "8f59b13bb345852fd20b240ba108b7dfed637fab22a8c2961ceed441939eb5a9"
+            },
+            {
+              "path": "reference/production-integration-20261101/session-save-owner-qualification/summary.json",
+              "line": 1,
+              "sha256": "118b0ce42b4fd65899dbbeeed5a8cca6045e701e922b97580edc4c73eabca686"
+            }
+          ],
+          "accepted_scope": "Recorded exit0 native FileSelect1850/MainMenu1850/FreshSave6050 frames. Inspect checkers: ordinary-key navigation reloads distinct saves, dialogs/cancel/title reentry retain correct name/data and imported/profile hashes; fresh creation adds03 preserving01/02, checks1392 bytes/checksum and source save-message ordering; restart reloads actual written03, empty-profile creates/reloads01. Current owner packet receipt is composition evidence, not a new reviewer run.",
+          "limits": "No story/gameplay/63FPS/new controller/device qualification or whole save lifecycle proof. Summary names pending integrated gate; active Main build/canonical-save-owner-integration-20261101/session50794 is user-supplied in-progress context, never treated as passed."
+        }
+      ],
+      "destination": "Retain src/platform/mac/mac_save_writer.hpp as production macOS filesystem backend; shared game save algorithms remain in game/save modules.",
+      "findings": [],
+      "classification_limits": [
+        "Per-file maintained-source semantic inventory disposition at exact reviewed bytes, not a new runtime/fidelity verdict. Whole save lifecycle, save IO/app composition system, Session decomposition and complete-refactor campaign remain open. Keep platform replacement policy separate from original game algorithms. No blanket directory exception. No builds/tests/oracles/gates/mutations/runtime IO/network/storage/delegates performed. Error/destructor/concurrency/OS limits below are bounds on evidence, not newly qualified behavior.",
+        "Reader follows native root/entry symlinks through stat/fstatat/fopen; logical-root validation is not a symlink sandbox. Writer rejects root/target symlinks at checks, but does not pin directory descriptors against concurrent root/path replacement. Atomic rename visibility is not power-loss durability. Neither provider is a claimed generic Unicode/NTFS implementation or concurrent multiwriter transaction manager.",
+        "Cleanup destructors deliberately ignore close/unlink errors; explicit methods report errors. Short read with EOF preserves partial bytes; read error may have modified temporary EncodedData but decode is not reached after throw. Short write may alter unpublished temp; existing target stays untouched until rename. Runtime receipts do not cover every injected OS failure.",
+        "No dedicated backend semantic mutant/holdout receipt identified in reviewed tracked paths. This is proportionate retained-source platform review; source-backed game comparison and registered real-I/O tests are separate evidence layers.",
+        "Writer system_error captures errno without synthesizing EIO on short fwrite; even a zero/stale errno still throws, and is not accepted as precise error-code qualification. Reader explicitly synthesizes EIO only when ferror is set and errno is zero. Explicit close invalidates the handle even if native close fails; destructor cleanup is best effort."
+      ]
+    },
+    "src/platform/mac/mac_save_writer.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Readable, narrowly scoped native filesystem replacement with resolved current consumers; no source migration required for this file. Acceptance is bounded to its declared platform contract, not Windows API emulation or whole save-system closure.",
+      "reviewed_source_sha256": "33c870436a055b26e0fff6b60e546a2fe7e7c22eb2e034ec38c45c3dd0a3ada2",
+      "semantic_justification": "Complete implementation reviewed (1-131). Output owns FILE*,temporary/target paths,provider identity and complete-record flag. Filename validator accepts only logical ./SAVEDATA/SonicDX plus exactly two ASCII digits and .snc, case-insensitively; slot validity/choice remains game policy. ensure_directory uses lstat/mkdir0700/lstat and rejects symlink/non-directory roots. open_write preserves unique existing actual case, rejects ambiguity/nonregular target (including symlink), creates same-root fresh mkstemp inode and fdopen wb; fdopen failure closes descriptor and RAII unlinks temp. Hardlink target is replaced by name without modifying original inode. write_save performs one1392-byte item and throws on short write before marking complete. close rejects incomplete, nulls stream before checked fclose, renames only after successful close, clears temporary path only on publish; failures unwind with best-effort temp unlink. No fsync or source Windows failure equivalence is claimed. reset invokes the required live callback. No source globals/guest dispatch/compiler instruction recipe or game policy is hidden in this readable native adapter.",
+      "evidence": [
+        {
+          "path": "src/platform/mac/mac_save_writer.cpp",
+          "line": 1,
+          "sha256": "33c870436a055b26e0fff6b60e546a2fe7e7c22eb2e034ec38c45c3dd0a3ada2",
+          "end_line": 131
+        },
+        {
+          "path": "docs/STYLE.md",
+          "line": 375,
+          "sha256": "bd44068383b2198cf5165c2869086c6cf7844b1c96be44db7194c768ee62afdd",
+          "end_line": 393
+        },
+        {
+          "path": "docs/ARCHITECTURE.md",
+          "line": 204,
+          "sha256": "01b08d262279a42140d0cc301322baba861e72e6f5c4f332e4b26da6d88026b7",
+          "end_line": 211
+        },
+        {
+          "path": "src/game/save_write.hpp",
+          "line": 9,
+          "sha256": "1d3b587f50d9ed3e9d31f97a7e775084b8b75242e4b97a49aa3da0b3c24d3a1d",
+          "end_line": 21
+        },
+        {
+          "path": "src/game/save_data.hpp",
+          "line": 28,
+          "sha256": "b78b88eb49fa5623907fb4683b4fd5f349174b217b575ac6a3d55ba802d15080",
+          "end_line": 64
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "Session owns save::Profiles saves_: current persisted record and distinct menu_backup; logo, capture/write and TitleScene list/load borrow current. Backends own no save::Data, checksum policy, game flags or backup. Reference GameModeLeafState owns the same Profiles type in its separate runtime world; options/lives availability stays solely in that reference adapter. The old context-session-save-ownership prerequisite is historical at a9ed5bb, superseded by current bodies; do not reintroduce its seven-byte duplicate owner.",
+          "evidence": [
+            {
+              "path": "src/game/save_profiles.hpp",
+              "line": 5,
+              "sha256": "7fa1443e5382027559c51bc32694ee1fe370548adfe2a784f6e9fe3cbf70fdff",
+              "end_line": 13
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 228,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 21,
+              "sha256": "6c41e5d01e9014be2ef192218eead11a8fb11cc31e95a7dc7fefc34e7f5c98d4",
+              "end_line": 29
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "line": 4,
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a",
+              "end_line": 36
+            },
+            {
+              "path": "src/guest/game_mode_leaves_reference.hpp",
+              "line": 52,
+              "sha256": "5e3f17d271ca0d4c941f3bb00af800f455b87f7c6f88c21de4427281df73a25b",
+              "end_line": 85
+            }
+          ]
+        },
+        {
+          "resolution": "Session owns selected_save_name_ allocation, separately published through SaveNameState::value; both confirmation and write callbacks validate/release/allocate that actual allocation. list_data_ owns sentinel/linked nodes and copied FileInfo strings/timestamps. Backend path/string_view inputs are synchronous borrows: reader resolves/copies actual filename; writer copies target into Output. Neither keeps the SaveName pointer, creates a replacement game filename owner, nor changes list identity.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 290,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0",
+              "end_line": 291
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 349,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0",
+              "end_line": 350
+            },
+            {
+              "path": "src/game/save_file_name.hpp",
+              "line": 3,
+              "sha256": "a044035fcee43ea0892454611e4ca1d858eb9639a2567b546b888417948513a6",
+              "end_line": 11
+            },
+            {
+              "path": "src/runtime/native_file_select_display.cpp",
+              "line": 28,
+              "sha256": "7f8c435c0e9f718d1b5bd535c07aa68ef6ddfdd356451e36152579bd285e9fc1",
+              "end_line": 43
+            },
+            {
+              "path": "src/runtime/native_save.cpp",
+              "line": 22,
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a",
+              "end_line": 36
+            },
+            {
+              "path": "src/game/save_file_list.hpp",
+              "line": 11,
+              "sha256": "87151c6639404ce7d4ddb25c149495405fe0ed29d791eeb0972966b4f88deeca",
+              "end_line": 23
+            },
+            {
+              "path": "src/game/save_write.cpp",
+              "line": 65,
+              "sha256": "1a3ba108abc7800b75f0ea7e074150fb70cca1d4ab2fc529996c921ccb12d80f",
+              "end_line": 101
+            }
+          ]
+        },
+        {
+          "resolution": "Writer owns root/token/reset callable; Output retains token/path/stream and never captures Writer or App. Current app issues one write per opened output; repeated writes, provider copies and moved-from provider operations are outside actual consumer closure.",
+          "evidence": [
+            {
+              "path": "src/platform/mac/mac_save_writer.hpp",
+              "line": 20,
+              "sha256": "f7afc944e3c4808cd06ccaf117e5cc9ce34dbd3e71e54c9da533b80b1b2961dd",
+              "end_line": 24
+            },
+            {
+              "path": "src/platform/mac/mac_save_writer.cpp",
+              "line": 12,
+              "sha256": "33c870436a055b26e0fff6b60e546a2fe7e7c22eb2e034ec38c45c3dd0a3ada2",
+              "end_line": 22
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "App owns SaveWriter and its stored reset callback capturing App. configure_saves attaches a borrowed WriteCalls pointer; callback checks input owner and invokes Input::reset_source synchronously. Writer is declared after Session and destroyed earlier; no Session destructor invokes the writer, no pending backend operation/callback is retained by Session, and Output destructor never calls reset. This closes actual current synchronous use, not future asynchronous lifetimes or whole Session teardown.",
+          "evidence": [
+            {
+              "path": "src/apps/sadx_native.mm",
+              "line": 138,
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2",
+              "end_line": 145
+            },
+            {
+              "path": "src/apps/sadx_native.mm",
+              "line": 289,
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2",
+              "end_line": 307
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 57,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 275,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/runtime/native_title_scene.cpp",
+              "line": 10,
+              "sha256": "e8a4cf268c2a88da43393ba552358be9089bad7b6fd3c759b3d36a25b49ea403",
+              "end_line": 14
+            },
+            {
+              "path": "src/platform/mac/mac_save_writer.cpp",
+              "line": 12,
+              "sha256": "33c870436a055b26e0fff6b60e546a2fe7e7c22eb2e034ec38c45c3dd0a3ada2",
+              "end_line": 22
+            }
+          ]
+        },
+        {
+          "resolution": "Session::write_live_save supplies current Profiles record, borrowed save flags/list/name and actual allocation services to save::write_file. That algorithm clears retry/ok, handles disabled/count/full-list branches, ensures directory before capture, picks first free slot, releases old name, publishes allocation/count/selection before formatting, then opens and writes encode(data). Only after write returns does it clear card_complete, reset real input and clear pending flags; close/publication precedes save_ok=1. Exceptions retain the reached prefix; backend does not roll back game stores or synthesize success.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_save.cpp",
+              "line": 14,
+              "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a",
+              "end_line": 36
+            },
+            {
+              "path": "src/game/save_write.hpp",
+              "line": 9,
+              "sha256": "1d3b587f50d9ed3e9d31f97a7e775084b8b75242e4b97a49aa3da0b3c24d3a1d",
+              "end_line": 21
+            },
+            {
+              "path": "src/game/save_write.cpp",
+              "line": 34,
+              "sha256": "1a3ba108abc7800b75f0ea7e074150fb70cca1d4ab2fc529996c921ccb12d80f",
+              "end_line": 101
+            }
+          ]
+        },
+        {
+          "resolution": "Production explicitly includes writer platform object. save-write unit is manifest registered and explicitly links this maintained backend rather than a fixture; ordinary original-code write oracle instead uses WriteFixture in native_save_creation_probe, and cannot certify real POSIX calls.",
+          "evidence": [
+            {
+              "path": "Makefile",
+              "line": 45,
+              "sha256": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef"
+            },
+            {
+              "path": "Makefile",
+              "line": 422,
+              "sha256": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
+              "end_line": 424
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 241,
+              "sha256": "be26bf1a641df0e5b887653a87cc5b9de1d0c55b6d8b8dfa0a79c8439458039b"
+            },
+            {
+              "path": "tests/unit/save_write.cpp",
+              "line": 33,
+              "sha256": "416797df92f00bf59601813a619caadea0daf6a3236f235315488ea11663bd09",
+              "end_line": 173
+            },
+            {
+              "path": "tests/probes/native_save_creation_probe.cpp",
+              "line": 48,
+              "sha256": "7b97306fb3d911a3b675906b498b54f40e5319e7bece3c290d010bb525760f92",
+              "end_line": 136
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "kind": "registered concrete platform unit; prior receipt only",
+          "evidence": [
+            {
+              "path": "tests/unit/save_write.cpp",
+              "line": 33,
+              "sha256": "416797df92f00bf59601813a619caadea0daf6a3236f235315488ea11663bd09",
+              "end_line": 173
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 241,
+              "sha256": "be26bf1a641df0e5b887653a87cc5b9de1d0c55b6d8b8dfa0a79c8439458039b"
+            },
+            {
+              "path": "Makefile",
+              "line": 422,
+              "sha256": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
+              "end_line": 424
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-progress-gate.json",
+              "line": 245,
+              "sha256": "7cef2edb27987d42c5325890db037885cc395096527ea21c61c3b63354c36074"
+            }
+          ],
+          "accepted_scope": "Actual fresh publication and 1392 exact bytes; case-preserving replacement; hardlink original inode/mtime/bytes preserved; symlink target/root and traversal rejected; incomplete/closed/foreign resources rejected; failed rename leaves no published success and removes temp on handle destruction; real game first-free selection/reset and allocation/null-allocation prefix checks.",
+          "limits": "No injected short fwrite, fdopen/fclose failure, disk-full or crash/power-loss test; no fsync/durability guarantee. Aggregate gate receipt records executable invocation, not a separate per-assertion report. No new test run."
+        },
+        {
+          "kind": "unchanged original write algorithm receipt; not platform equivalence",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/save_write.json",
+              "line": 1,
+              "sha256": "e2d3e72f98e6bea2f9043e7581a618f76141a389aebf816c60b774e96b2aa9f7"
+            },
+            {
+              "path": "tools/oracles/verify_original_save_write.py",
+              "line": 1,
+              "sha256": "a99eca14677270d000d0047a7ac0de984ba317c577c8f82933f522863d6509ea",
+              "end_line": 12
+            },
+            {
+              "path": "tests/probes/native_save_creation_probe.cpp",
+              "line": 48,
+              "sha256": "7b97306fb3d911a3b675906b498b54f40e5319e7bece3c290d010bb525760f92",
+              "end_line": 136
+            }
+          ],
+          "accepted_scope": "Tracked passed true,1000 cases,0 mismatches,seed20261021 for original WriteSaveFile ordering,first-free canonical ASCII slot choice,filename allocation and emitted bytes. Original ignored write return0/1 is retained in fixture.",
+          "limits": "CRT allocation/formatting/CompareStringA and filesystem calls are receipts. Does not prove SaveWriter atomic publication equivalent to Windows CRT failure behavior. No newly executed mutants or holdouts; owner packet five mutants concern owner migration, not writer IO."
+        },
+        {
+          "kind": "tracked native app composition receipts; accepted with original scope",
+          "evidence": [
+            {
+              "path": "tools/gate/run_native_journeys.py",
+              "line": 16,
+              "sha256": "f46c96f7fad6a1cd9a812d2f35a3b8a01cda38749eace3f12f451e3b915c4358",
+              "end_line": 59
+            },
+            {
+              "path": "tools/journey/check_native_file_select.py",
+              "line": 1,
+              "sha256": "a7f1a4e09bfb2aeb38ee8941ec207c5f76b8bee28e8b0f930fae249ca1582896"
+            },
+            {
+              "path": "tools/journey/check_native_main_menu.py",
+              "line": 1,
+              "sha256": "e3628e8a039c7ef623f48b38d6bd63d6f43bc419ed8f916b93ffbd67f7f8e8f1"
+            },
+            {
+              "path": "tools/journey/check_native_fresh_save.py",
+              "line": 1,
+              "sha256": "76ecc58997331de9b8123bfd3b20347331bccf8736214eb6cec946763218ff05"
+            },
+            {
+              "path": "reference/production-integration-20261101/session-save-owner-qualification/native-journeys.json",
+              "line": 1,
+              "sha256": "8f59b13bb345852fd20b240ba108b7dfed637fab22a8c2961ceed441939eb5a9"
+            },
+            {
+              "path": "reference/production-integration-20261101/session-save-owner-qualification/summary.json",
+              "line": 1,
+              "sha256": "118b0ce42b4fd65899dbbeeed5a8cca6045e701e922b97580edc4c73eabca686"
+            }
+          ],
+          "accepted_scope": "Recorded exit0 native FileSelect1850/MainMenu1850/FreshSave6050 frames. Inspect checkers: ordinary-key navigation reloads distinct saves, dialogs/cancel/title reentry retain correct name/data and imported/profile hashes; fresh creation adds03 preserving01/02, checks1392 bytes/checksum and source save-message ordering; restart reloads actual written03, empty-profile creates/reloads01. Current owner packet receipt is composition evidence, not a new reviewer run.",
+          "limits": "No story/gameplay/63FPS/new controller/device qualification or whole save lifecycle proof. Summary names pending integrated gate; active Main build/canonical-save-owner-integration-20261101/session50794 is user-supplied in-progress context, never treated as passed."
+        }
+      ],
+      "destination": "Retain src/platform/mac/mac_save_writer.cpp as production macOS filesystem backend; shared game save algorithms remain in game/save modules.",
+      "findings": [],
+      "classification_limits": [
+        "Per-file maintained-source semantic inventory disposition at exact reviewed bytes, not a new runtime/fidelity verdict. Whole save lifecycle, save IO/app composition system, Session decomposition and complete-refactor campaign remain open. Keep platform replacement policy separate from original game algorithms. No blanket directory exception. No builds/tests/oracles/gates/mutations/runtime IO/network/storage/delegates performed. Error/destructor/concurrency/OS limits below are bounds on evidence, not newly qualified behavior.",
+        "Reader follows native root/entry symlinks through stat/fstatat/fopen; logical-root validation is not a symlink sandbox. Writer rejects root/target symlinks at checks, but does not pin directory descriptors against concurrent root/path replacement. Atomic rename visibility is not power-loss durability. Neither provider is a claimed generic Unicode/NTFS implementation or concurrent multiwriter transaction manager.",
+        "Cleanup destructors deliberately ignore close/unlink errors; explicit methods report errors. Short read with EOF preserves partial bytes; read error may have modified temporary EncodedData but decode is not reached after throw. Short write may alter unpublished temp; existing target stays untouched until rename. Runtime receipts do not cover every injected OS failure.",
+        "No dedicated backend semantic mutant/holdout receipt identified in reviewed tracked paths. This is proportionate retained-source platform review; source-backed game comparison and registered real-I/O tests are separate evidence layers.",
+        "Writer system_error captures errno without synthesizing EIO on short fwrite; even a zero/stale errno still throws, and is not accepted as precise error-code qualification. Reader explicitly synthesizes EIO only when ferror is set and errno is zero. Explicit close invalidates the handle even if native close fails; destructor cleanup is best effort."
+      ]
     }
   },
   "external_reference_sources": [
