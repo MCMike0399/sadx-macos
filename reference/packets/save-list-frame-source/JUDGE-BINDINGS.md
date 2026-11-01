@@ -22,3 +22,10 @@ exec captures the same optional before completion and substitutes it only for th
 exec load. Every variant must compile and fail the unchanged characterization;
 setup/compile failures cannot count as kills. Five completion faults use the
 unchanged historical runner/specification directly.
+
+Additional `save-policy-boundaries` registration appends one standalone native
+contract, without changing existing cases or frozen outputs. It distinguishes the
+sentinel from a published incomplete/freed file node, retains full-width time,
+and drives nested before/after scheduling on the same state and message Context.
+Writer/close exceptions assert reached stores and pending values. This adds
+specific identity/reentry coverage beyond the immutable systematic streams.

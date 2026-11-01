@@ -538,3 +538,7 @@ build/game-mode-diagnostics-test: tests/unit/game_mode_diagnostics.cpp src/game/
 # Exact native axes: partial stores, aliases and caller-selected SSE controls.
 build/input-mod-axes-contract-test: tests/unit/input_mod_axes_contract.cpp src/input/input_mod_axes.cpp src/input/input_mod_axes.hpp src/cpu/sse_math.cpp src/cpu/sse_math.hpp build/softfloat_sse/softfloat-sse.a build/softfloat/softfloat.a | build
 	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/input_mod_axes_contract.cpp src/input/input_mod_axes.cpp src/cpu/sse_math.cpp build/softfloat_sse/softfloat-sse.a build/softfloat/softfloat.a -o $@
+
+# Explicit sentinel identity and reentrant save scheduling; no guest linkage.
+build/save-policy-boundaries-test: tests/unit/save_policy_boundaries.cpp src/game/save_file_list.hpp src/game/save_file_list.cpp src/game/save_frame.hpp src/game/save_frame.cpp src/game/save_data.hpp src/game/save_data.cpp src/game/file_select.cpp src/game/file_select.hpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -Wl,-dead_strip tests/unit/save_policy_boundaries.cpp src/game/save_file_list.cpp src/game/save_frame.cpp src/game/save_data.cpp src/game/file_select.cpp -o $@
