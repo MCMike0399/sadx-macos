@@ -1,0 +1,28 @@
+{
+  "base": "73759bddeeabbbab839e99352b39140201639297",
+  "pins": {
+    "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/bin/python3.14": {
+      "sha256": "87d4df53fd91304be5bac391fb204643c36b7df2023c04a0953bcbc7d4fdf634",
+      "bytes": 34640
+    },
+    "/Users/burbujamc/Developer/sadx-macos/build/softfloat/softfloat.a": {
+      "sha256": "617840b8b6811c238a97fa493182ba91ab045dd996b07c4392043dbe27a11612",
+      "bytes": 50920
+    },
+    "/Users/burbujamc/Developer/sadx-macos/build/softfloat_sse/softfloat-sse.a": {
+      "sha256": "029cef8aee415206ddf355b592e934dd827e8882707c945a1bf42901d37504f5",
+      "bytes": 19272
+    },
+    "/Users/burbujamc/Developer/sadx-macos/build/bochs_fpatan/libbochs_fpatan.a": {
+      "sha256": "511aa4f0dd3be1f58570af357c989b2ff451e3bafeed57e289bbcbb2972a013d",
+      "bytes": 105680
+    },
+    "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe": {
+      "sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "bytes": 55549952
+    }
+  },
+  "compiler": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+  "recipe": "Use registered Makefile recipes, including tests/reference/actor_current_fixture.hpp forced include for Sonic. Private builds at -j2; no dependency fetch. Only numerical archives may be reused with these hashes; never Main maintained core/guest/native archives.",
+  "baseline": "build/reset-owner-baseline-8e15bbe contains pinned current reset/composed models and full reports. Source freeze BASELINE.json; all current Source is committed."
+}
