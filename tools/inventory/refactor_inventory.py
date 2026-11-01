@@ -34,6 +34,25 @@ def location(path, line):
     return {"path": path, "line": line}
 
 
+
+def partition_jsonl(rows, byte_limit):
+    """Keep every complete record in order while bounding UTF-8 artifact bytes."""
+    if byte_limit <= 0:
+        raise ValueError("Inventory shard byte limit must be positive")
+    chunks, lines, size = [], [], 0
+    for row in rows:
+        line = json.dumps(row, sort_keys=True, ensure_ascii=False) + "\n"
+        length = len(line.encode())
+        if length > byte_limit:
+            raise ValueError("One inventory record exceeds the shard byte limit")
+        if lines and size + length > byte_limit:
+            chunks.append("".join(lines)); lines, size = [], 0
+        lines.append(line); size += length
+    if lines or not chunks:
+        chunks.append("".join(lines))
+    return chunks
+
+
 def reviewed_scope(review, source_sha256):
     """Project authored semantic closure, never infer conformity from static counts."""
     conforming = review.get("disposition") == "already_conforming"
@@ -474,7 +493,13 @@ def render():
     def jsonl(rows):
         return "".join(json.dumps(r, sort_keys=True, ensure_ascii=False) + "\n" for r in rows)
 
-    outputs = {"modules.jsonl": jsonl(modules), "boundaries.jsonl": jsonl(boundaries),
+    module_chunks = partition_jsonl(modules, 2 * 1024 * 1024)
+    module_outputs = {("modules.jsonl" if index == 0 else f"modules-{index + 1:03d}.jsonl"): content
+                      for index, content in enumerate(module_chunks)}
+    summary["module_shards"] = [{"path": name, "records": content.count("\n"),
+                                  "sha256": hashlib.sha256(content.encode()).hexdigest()}
+                                 for name, content in module_outputs.items()]
+    outputs = {**module_outputs, "boundaries.jsonl": jsonl(boundaries),
                "stubs.jsonl": jsonl(stubs),
                "summary.json": json.dumps(summary, indent=2, sort_keys=True) + "\n"}
     shards = collections.defaultdict(list)
@@ -496,7 +521,9 @@ def main():
     args = parser.parse_args()
     outputs = render()
     existing_shards = {p.relative_to(OUT).as_posix() for p in (OUT / "files").glob("*.jsonl")}
-    expected_shards = {name for name in outputs if name.startswith("files/")}
+    existing_shards.update(p.relative_to(OUT).as_posix() for p in OUT.glob("modules*.jsonl"))
+    expected_shards = {name for name in outputs if name.startswith("files/") or
+                       re.fullmatch(r"modules(?:-\d{3,})?\.jsonl", name)}
     if existing_shards - expected_shards:
         raise ValueError("Unexpected inventory shards require explicit reconciliation: " +
                          repr(sorted(existing_shards - expected_shards)))
