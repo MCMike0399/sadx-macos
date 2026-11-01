@@ -766,3 +766,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Serial registered builds compile all 11 affected consumer objects. Guest-free module contracts link and run; layers, owners, readability and hygiene pass. No full product link, journeys or gate is claimed.
 * The packet records all 660 Source hashes and an unsealed nine-change/three-addition protected-input delta. Fifty-three ignored corpora were copied hash-exact from local Main. No global inventory or manifest refresh, Main write or push.
 * Reserved final cohorts remain UNRUN. Root owns independent review, final qualification, current parent protection union, actual product/reference closure, provenance/table/inventory reconciliation, journeys and full gate. Unrelated legacy interpreter and Windows parity limits stay open.
+
+### 2026-11-01 — Save list and shared frame integration qualified
+
+* One Session list now has explicit payload identity; native and reference frame scheduling share the same live policy. Both complete modules have independent standards and fidelity approval. Broader Session and the legacy GameLoop interpreter remain open.
+* Main retains all 9,314 default save cases, 688 loop records, 39 ordered writer captures and both complete native streams. Fresh reserved cohorts preserve defined outputs; all 938 inherited default Controls FP partial identities remain partial.
+* The source-only native app and force-load closure build; three actual menu/save journeys pass. All 1,323 protected inputs and 66 inventory tests verify. Warning task contracts remain explicitly unrecovered.
+* Qualified-corpus make -j10 gate exits zero at dc1771c: 304 native programs, 512 Python tests, the inherited filesystem skip, reference R1–R4, three native journeys and sixteen startup comparisons. STATUS is regenerated from save-list-frame-gate.json.
+* Next is the prepared Task/TaskWork source migration, carrying scheduler, arena and actual native/reference consumers under the accepted lifecycle judges. No new gameplay, Windows parity or whole-campaign completion is claimed. Storage stays idle. No push.
