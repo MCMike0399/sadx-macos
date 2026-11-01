@@ -339,7 +339,7 @@ void Session::load_menu_texture(std::uint32_t index) {
 }
 void Session::load_japanese_title_textures() {
     if (!menu_textures_.attached() || !menu_textures_.japanese().archive)
-        throw flow::UnrecoveredGameFlowCall("native_menu_textures_.japanese()declaration");
+        throw flow::UnrecoveredGameFlowCall("native_japanese_title_texture_declaration");
     auto services = regular_texture_services();
     regular_textures::load_archive(*menu_textures_.japanese().archive, menu_textures_.japanese().textures,
                                    *regular_texture_state_, services);
