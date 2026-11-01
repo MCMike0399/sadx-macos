@@ -1,0 +1,15 @@
+{
+  "base": "92dbd07",
+  "recorded_green_baseline": "e5cf19d / menu-texture-owner-gate.json",
+  "character_initialization_body_identical": true,
+  "loop_sha256": "bf4f6d2d98a89a8eebef87cd6b0cbc42c037b7ce3a7d11032c81f78c3d989064",
+  "fixture": "tests/fixtures/character_resource_baseline.hpp",
+  "scope": "Native imported constructor storage and binding only; no Windows constructor or GPU/actor claim.",
+  "native_observations": 25,
+  "native_baseline_sha256": "8a4121dd078facce6417e504be9bf5667eeb7f9a89e130937598e8b88aa260e0",
+  "baseline_compile_exit": 0,
+  "baseline_run_exit": 0,
+  "initial_command_failures": [
+    "First compile omitted native:: qualification on CharacterTextureViews (exit1); following missing binary command exited127. Namespace corrected before baseline freeze; no product source edited."
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "reason": "New semantic module evidence exceeded existing2MiB cap in one modules.jsonl artifact; deterministic bounded full-record shards retain the cap and complete ordered denominator.",
+  "module_count_before": 1049,
+  "module_count_after": 1049,
+  "exact_ordered_module_identities_preserved": true,
+  "focused_tests": 21,
+  "layout": "summary.module_shards lists every path,count,SHA256; modules.jsonl is first shard; no record fields dropped.",
+  "limits": [
+    "No source behavior or disposition changed by packaging.",
+    "Unexpected stale shards still require explicit reconciliation; single oversized records fail."
+  ]
+}
