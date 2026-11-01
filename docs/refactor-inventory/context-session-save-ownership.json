@@ -1,0 +1,757 @@
+{
+  "scope": "Source/ownership context only; no new source or fidelity verdict.",
+  "source_commit": "a9ed5bb",
+  "encoded_record_bytes": 1392,
+  "current_save_source": "0x3b2b3a8",
+  "title_backup_source": "0x3b29d70",
+  "sdk_limit": "SDK SaveData array has three entries at current base; the menu backup is a separate source allocation. Do not invent roles/owners for the two other array entries.",
+  "source_sha256": {
+    "src/runtime/native_session.hpp": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+    "src/runtime/native_session.cpp": "dd4926c099d5640f08e9e288b9152a87a045af2d39d9cbaf52ff65a3f3ed8901",
+    "src/runtime/native_save.cpp": "e1a7d974635dac65d6c7cf2e77e85b59176a936517eb62145f639858ba917248",
+    "src/runtime/native_main_menu.cpp": "5b7308f05665632d1b74c8407b11552ce997b2995068039bd8c644b6f20e01ff",
+    "src/runtime/native_character_select.cpp": "ae97db3caa701759181c10be4a87552002d8af9695828faf8c5971094add6dae",
+    "src/runtime/native_file_select_display.cpp": "e64ba02eb87996e6593f5ccb747ac8ba2a0c59eb60fb5fd4a0a8f4df343aa9a7",
+    "src/runtime/native_title_tasks.cpp": "5bc34cd9456afb6af1f38f7af33708ca322ba1f5240897a49706371dd7a6a71c",
+    "src/runtime/logo_scene.hpp": "df9ab3879b3c6b2f331d09cf5d7673faa1b7f3b43643e0db2b762539088b3cab",
+    "src/runtime/logo_scene.cpp": "bc4c2ecdb1432a3bb7d3290d8a9a58b14988aeea2583b3889ec8b6be70cb8dbb",
+    "src/game/save_data.hpp": "b78b88eb49fa5623907fb4683b4fd5f349174b217b575ac6a3d55ba802d15080",
+    "src/game/main_menu.cpp": "b5f03cb7a953ea9fba84fe4a9e128ff6be47d1366dbed0031e813bf897681f43",
+    "src/game/game_cleanup.cpp": "024c23e264893b083234cd4acd187a9f08496a9aae650f21a446740cb8f46b9b",
+    "src/guest/game_mode_leaves_reference.hpp": "f876cdebb9ad3ef6753a83e285890b511bb72d11ed882cdb713d896312d1c83b",
+    "src/guest/game_mode_leaves_reference.cpp": "7311e7661efdf0968b569fe3047b0c917b6ec9f516cd05a9dab610ec5cca232b",
+    "src/guest/native_game_reference.cpp": "fd993665165d4fc238ac7f818202d44c084c4d778528967ef7a9617de5cc8683",
+    "src/cpu/source_bytes.hpp": "37e617f88f363232a8e844dcac2c3328e28aa6db0ccbd9d7367c114c3b76c379",
+    "tests/probes/native_game_mode_leaves_probe.cpp": "caeec50d03527b16dc871faea6342095ab1e340b4c606df0de6af0bfca3e1976",
+    "tests/unit/game_mode_leaves.cpp": "907653e3004465a118543971e5335142e502eb71137401d3c08a6a605e15d309",
+    "tools/oracles/verify_original_game_cleanup.py": "c9b17c3bce08a3ea5ab6b4514329b7d03a606b2a7784f860e5bde70e1c29f174",
+    "tools/oracles/verify_original_main_menu.py": "e63136e06a59960f543aa721c37752a403a6de6a946bd201f6bb2229c4eb059c"
+  },
+  "native_consumers": [
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 22,
+      "text": "#include \"game/save_file_list.hpp\""
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 25,
+      "text": "#include \"game/save_file_name.hpp\""
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 34,
+      "text": "#include \"game/save_creation.hpp\""
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 35,
+      "text": "#include \"game/save_write.hpp\""
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 36,
+      "text": "#include \"game/save_frame.hpp\""
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 54,
+      "text": "void before_save_frame_completion();"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 55,
+      "text": "void after_save_frame_completion();"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 56,
+      "text": "void attach_save_writer(save::WriteCalls &calls) { save_writer_ = &calls; }"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 66,
+      "text": "const save::Data &save_data() const { return save_; }"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 72,
+      "text": "SaveProgress save_progress() const {"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 73,
+      "text": "return {flow_.save_phase, flow_.save_ready, save_count_, save_exec_, save_ok_,"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 77,
+      "text": "const char *active_save_name() const { return save_name_.value; }"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 85,
+      "text": "std::optional<file_select::FileInfo> selected_save_file() const {"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 170,
+      "text": "void attach_save_files(file_select::SaveFileCalls &files) { save_files_ = &files; }"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 200,
+      "text": "std::uint32_t save_word_before_selection_ = 0;"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 202,
+      "text": "std::uint32_t save_word_after_selection_ = 0;"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 211,
+      "text": "std::uint8_t selected_card_index_ = 0, displayed_save_index_ = 0;"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 223,
+      "text": "TaskHandle save_warning_message_;"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 227,
+      "text": "save::Data save_;"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 228,
+      "text": "save::Data save_backup_;"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 275,
+      "text": "save::WriteCalls *save_writer_ = nullptr;"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 277,
+      "text": "std::uint8_t save_count_ = 0, save_exec_ = 0, saving_message_pending_ = 0;"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 278,
+      "text": "std::uint8_t save_ok_ = 0, save_retry_ = 0, file_delete_flag_ = 0;"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 290,
+      "text": "std::unique_ptr<char[]> selected_save_name_;"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 291,
+      "text": "save::SaveNameState save_name_;"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "line": 350,
+      "text": "file_select::SaveFileCalls *save_files_ = nullptr;"
+    },
+    {
+      "path": "src/runtime/native_session.cpp",
+      "line": 30,
+      "text": "logo_(output, timing_, renderer_, save_, rings_, frame, fp), texture_assets_(textures) {"
+    },
+    {
+      "path": "src/runtime/native_session.cpp",
+      "line": 61,
+      "text": "bootstrap::start(bootstrap_, save_, actions_, stage_, services_);"
+    },
+    {
+      "path": "src/runtime/native_session.cpp",
+      "line": 87,
+      "text": "return bootstrap::initialize_game(bootstrap_, save_, stage_, services_);"
+    },
+    {
+      "path": "src/runtime/native_session.cpp",
+      "line": 91,
+      "text": "save_, actions_, services_);"
+    },
+    {
+      "path": "src/runtime/native_session.cpp",
+      "line": 170,
+      "text": "cleanup::reset_loop_state(state, [this] { file_select::free_save_list(list_data_); });"
+    },
+    {
+      "path": "src/runtime/native_session.cpp",
+      "line": 182,
+      "text": "cleanup::load_save(save_, state);"
+    },
+    {
+      "path": "src/runtime/native_session.cpp",
+      "line": 193,
+      "text": "bootstrap_.story_event_mode, save_, save_backup_};"
+    },
+    {
+      "path": "src/runtime/native_save.cpp",
+      "line": 12,
+      "text": "save::capture_live_data(save_, state);"
+    },
+    {
+      "path": "src/runtime/native_save.cpp",
+      "line": 15,
+      "text": "if (!save_writer_)"
+    },
+    {
+      "path": "src/runtime/native_save.cpp",
+      "line": 16,
+      "text": "throw flow::UnrecoveredGameFlowCall(\"native_save_writer_services\");"
+    },
+    {
+      "path": "src/runtime/native_save.cpp",
+      "line": 17,
+      "text": "save::WriteState state{saving_disabled_, save_retry_, save_ok_, save_count_, flow_.save_phase,"
+    },
+    {
+      "path": "src/runtime/native_save.cpp",
+      "line": 18,
+      "text": "flow_.save_ready, save_exec_, flow_.alert_flag, file_delete_flag_, new_file_requested_,"
+    },
+    {
+      "path": "src/runtime/native_save.cpp",
+      "line": 20,
+      "text": "save_name_, list_data_, save_};"
+    },
+    {
+      "path": "src/runtime/native_save.cpp",
+      "line": 23,
+      "text": "if (pointer != selected_save_name_.get())"
+    },
+    {
+      "path": "src/runtime/native_save.cpp",
+      "line": 25,
+      "text": "selected_save_name_.reset();"
+    },
+    {
+      "path": "src/runtime/native_save.cpp",
+      "line": 28,
+      "text": "selected_save_name_.reset(new (std::nothrow) char[bytes]);"
+    },
+    {
+      "path": "src/runtime/native_save.cpp",
+      "line": 29,
+      "text": "return selected_save_name_.get();"
+    },
+    {
+      "path": "src/runtime/native_save.cpp",
+      "line": 36,
+      "text": "(void)save::write_file(state, *save_writer_, names, [this] { capture_live_save(); });"
+    },
+    {
+      "path": "src/runtime/native_save.cpp",
+      "line": 38,
+      "text": "void Session::before_save_frame_completion() {"
+    },
+    {
+      "path": "src/runtime/native_save.cpp",
+      "line": 39,
+      "text": "if (!title_) throw flow::UnrecoveredGameFlowCall(\"native_save_message_services\");"
+    },
+    {
+      "path": "src/runtime/native_save.cpp",
+      "line": 40,
+      "text": "title_->before_save_frame_completion();"
+    },
+    {
+      "path": "src/runtime/native_save.cpp",
+      "line": 42,
+      "text": "void Session::after_save_frame_completion() {"
+    },
+    {
+      "path": "src/runtime/native_save.cpp",
+      "line": 43,
+      "text": "if (!title_) throw flow::UnrecoveredGameFlowCall(\"native_save_message_services\");"
+    },
+    {
+      "path": "src/runtime/native_save.cpp",
+      "line": 44,
+      "text": "title_->after_save_frame_completion();"
+    },
+    {
+      "path": "src/runtime/native_main_menu.cpp",
+      "line": 23,
+      "text": "return {state.save_, state.bootstrap_.sequence_variables, state.bootstrap_.menu.flags[0],"
+    },
+    {
+      "path": "src/runtime/native_main_menu.cpp",
+      "line": 67,
+      "text": "return menu_eligibility::text_language(session().save_, session().text_language_);"
+    },
+    {
+      "path": "src/runtime/native_main_menu.cpp",
+      "line": 71,
+      "text": "menu_eligibility::voice_language(session().save_, session().text_language_));"
+    },
+    {
+      "path": "src/runtime/native_main_menu.cpp",
+      "line": 85,
+      "text": "state.save_,"
+    },
+    {
+      "path": "src/runtime/native_main_menu.cpp",
+      "line": 86,
+      "text": "state.save_backup_,"
+    },
+    {
+      "path": "src/runtime/native_character_select.cpp",
+      "line": 24,
+      "text": "return {session().save_, session().bootstrap_.sequence_variables,"
+    },
+    {
+      "path": "src/runtime/native_file_select_display.cpp",
+      "line": 28,
+      "text": "void TitleScene::free_save_name(const char *name) {"
+    },
+    {
+      "path": "src/runtime/native_file_select_display.cpp",
+      "line": 29,
+      "text": "if (name != session_.selected_save_name_.get())"
+    },
+    {
+      "path": "src/runtime/native_file_select_display.cpp",
+      "line": 31,
+      "text": "session_.selected_save_name_.reset();"
+    },
+    {
+      "path": "src/runtime/native_file_select_display.cpp",
+      "line": 33,
+      "text": "char *TitleScene::allocate_save_name(std::size_t size) {"
+    },
+    {
+      "path": "src/runtime/native_file_select_display.cpp",
+      "line": 34,
+      "text": "session_.selected_save_name_.reset(new (std::nothrow) char[size]);"
+    },
+    {
+      "path": "src/runtime/native_file_select_display.cpp",
+      "line": 35,
+      "text": "return session_.selected_save_name_.get();"
+    },
+    {
+      "path": "src/runtime/native_file_select_display.cpp",
+      "line": 37,
+      "text": "void TitleScene::copy_save_name(char *destination, std::string_view name) {"
+    },
+    {
+      "path": "src/runtime/native_file_select_display.cpp",
+      "line": 39,
+      "text": "throw flow::UnrecoveredGameFlowCall(\"native_selected_save_name_allocation\");"
+    },
+    {
+      "path": "src/runtime/native_file_select_display.cpp",
+      "line": 157,
+      "text": "viewport.width, viewport.height, session_.save_, session_.bootstrap_.sequence_variables,"
+    },
+    {
+      "path": "src/runtime/native_file_select_display.cpp",
+      "line": 159,
+      "text": "session_.displayed_save_index_, session_.first_visible_file_,"
+    },
+    {
+      "path": "src/runtime/native_file_select_display.cpp",
+      "line": 163,
+      "text": "session_.flow_.alert_blocked, session_.file_message_, session_.save_warning_message_};"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 355,
+      "text": "menu_dialog::restore_saved_character_cursor(session_.save_.last_character,"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 375,
+      "text": "session_.saving_disabled_, session_.save_word_after_selection_,"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 376,
+      "text": "session_.save_word_before_selection_, session_.quit_, textures_.ready,"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 445,
+      "text": "session_.bootstrap_.card_operation, session_.save_word_before_selection_,"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 447,
+      "text": "session_.displayed_save_index_};"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 450,
+      "text": "std::uint8_t TitleScene::count_save_files() {"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 451,
+      "text": "if (!session_.save_files_)"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 452,
+      "text": "throw flow::UnrecoveredGameFlowCall(\"native_save_file_provider\");"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 453,
+      "text": "return file_select::count_save_files(session_.list_data_, session_.save_, *session_.save_files_);"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 456,
+      "text": "if (!session_.save_files_)"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 457,
+      "text": "throw flow::UnrecoveredGameFlowCall(\"native_save_file_provider\");"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 459,
+      "text": "session_.bootstrap_.save_name, session_.list_data_, session_.save_, session_.rings_};"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 460,
+      "text": "file_select::load_selected_save(state, *session_.save_files_);"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 478,
+      "text": "void TitleScene::free_save_list() { file_select::free_save_list(session_.list_data_); }"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 482,
+      "text": "session_.displayed_save_index_, session_.bootstrap_.card_state,"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 494,
+      "text": "session_.file_select_fade_in_marker_, session_.save_.last_character,"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 495,
+      "text": "session_.bootstrap_.menu.flags[2], session_.list_data_, session_.save_name_.value};"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 505,
+      "text": "save::prepare_new(session_.bootstrap_, session_.save_, session_.rings_);"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 508,
+      "text": "save::request_write(session_.saving_disabled_, session_.flow_.save_ready,"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 511,
+      "text": "void TitleScene::update_save_completion(title_menu::FileSelectWork &work, file_select::ControlState &) {"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 512,
+      "text": "file_select::SaveCompletionState state{session_.flow_.alert_blocked, session_.save_ok_,"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 513,
+      "text": "session_.file_select_fade_in_marker_, session_.flow_.save_phase, session_.flow_.save_ready,"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 514,
+      "text": "session_.save_exec_, session_.flow_.alert_flag, session_.bootstrap_.menu.selected_file,"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 515,
+      "text": "session_.file_selection_backup_, session_.saving_disabled_, session_.save_warning_message_};"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 516,
+      "text": "(void)file_select::update_save_completion(work, state, *this);"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 518,
+      "text": "TaskHandle TitleScene::create_save_warning() {"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 519,
+      "text": "throw flow::UnrecoveredGameFlowCall(\"native_save_warning_message\");"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 522,
+      "text": "void TitleScene::close_save_warning(TaskHandle) {"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "line": 523,
+      "text": "throw flow::UnrecoveredGameFlowCall(\"native_save_warning_close\");"
+    },
+    {
+      "path": "src/runtime/logo_scene.hpp",
+      "line": 7,
+      "text": "#include \"game/save_data.hpp\""
+    },
+    {
+      "path": "src/runtime/logo_scene.hpp",
+      "line": 71,
+      "text": "save::Data &save_;"
+    },
+    {
+      "path": "src/runtime/logo_scene.hpp",
+      "line": 93,
+      "text": "void initialize_save_data() override;"
+    },
+    {
+      "path": "src/runtime/logo_scene.cpp",
+      "line": 8,
+      "text": ": output_(output), frame_mode_(mode), renderer_(renderer), save_(save), rings_(rings),"
+    },
+    {
+      "path": "src/runtime/logo_scene.cpp",
+      "line": 48,
+      "text": "void LogoScene::initialize_save_data() { save::initialize(save_, rings_); }"
+    },
+    {
+      "path": "src/game/main_menu.cpp",
+      "line": 28,
+      "text": "state.backup = state.save;"
+    },
+    {
+      "path": "src/game/game_cleanup.cpp",
+      "line": 220,
+      "text": "state.backup = state.save;"
+    },
+    {
+      "path": "src/guest/game_mode_leaves_reference.hpp",
+      "line": 3,
+      "text": "#include \"guest/save_name_reference.hpp\""
+    },
+    {
+      "path": "src/guest/game_mode_leaves_reference.hpp",
+      "line": 22,
+      "text": ":mode(m),timing(t),demo_cutscene_at_3b2a2e8(cutscene),event_task_at_3b2c578(event),rng(r),game_mode_at_3b22de4(game_mode),stage_at_3b22dcc(stage){save_name_reference.import_value(save_name,std::nullopt);}"
+    },
+    {
+      "path": "src/guest/game_mode_leaves_reference.hpp",
+      "line": 35,
+      "text": "std::optional<std::uint8_t> byte_at_3b290d8,byte_at_3b290e0,byte_at_3b290e8;save::SaveNameState save_name;"
+    },
+    {
+      "path": "src/guest/game_mode_leaves_reference.hpp",
+      "line": 36,
+      "text": "SaveNameReference save_name_reference;"
+    },
+    {
+      "path": "src/guest/game_mode_leaves_reference.hpp",
+      "line": 51,
+      "text": "SourceBytes<0x3b2b5f9,7> block_at_3b2b5f9;       // 413c00 flag byte, then 414470's per-character bytes"
+    },
+    {
+      "path": "src/guest/game_mode_leaves_reference.cpp",
+      "line": 48,
+      "text": "void leaf_421f90(){s.byte_at_3b290d8=1;s.byte_at_3b290e0=0;s.mode.word_at_3b290e4=0;s.byte_at_3b290e8=0;s.save_name.value=nullptr;}"
+    },
+    {
+      "path": "src/guest/game_mode_leaves_reference.cpp",
+      "line": 101,
+      "text": "const auto flags=static_cast<std::uint8_t>(need(s.block_at_3b2b5f9,0x3b2b5f9,1,0x413c1e));"
+    },
+    {
+      "path": "src/guest/game_mode_leaves_reference.cpp",
+      "line": 113,
+      "text": "s.byte_at_3b0ef34=static_cast<std::uint8_t>(need(s.block_at_3b2b5f9,0x3b2b5fa+index,1,0x4144a7));"
+    },
+    {
+      "path": "src/guest/native_game_reference.cpp",
+      "line": 12,
+      "text": "NativeGame::NativeGame(NativeGameConfig config):config_(std::move(config)),speedrun_mod_(speedrun_mod_after_init(config_.speedrun_quick_save_enabled)){"
+    },
+    {
+      "path": "src/guest/native_game_reference.cpp",
+      "line": 115,
+      "text": "m.save_name_reference.import_value(m.save_name,u32(0x3b290dc));"
+    },
+    {
+      "path": "src/guest/native_game_reference.cpp",
+      "line": 124,
+      "text": "load(m.block_at_3b18250);load(m.block_at_3b0ef9c);load(m.block_at_3c4ae08);load(m.block_at_3b290c4);load(m.block_at_90ed54);load(m.block_at_3b2b5f9);m.color_at_3b29d5c=u32(0x3b29d5c);m.fp=&fp_;"
+    },
+    {
+      "path": "src/guest/native_game_reference.cpp",
+      "line": 890,
+      "text": "word(loop_.save_phase_at_3b291a4),"
+    },
+    {
+      "path": "src/guest/native_game_reference.cpp",
+      "line": 951,
+      "text": "loop_.save_phase_at_3b291a4 = values.flow.save_phase;"
+    },
+    {
+      "path": "src/guest/native_game_reference.cpp",
+      "line": 952,
+      "text": "loop_.request_at_3b291ad = values.flow.save_ready;"
+    },
+    {
+      "path": "src/guest/native_game_reference.cpp",
+      "line": 987,
+      "text": "loop_.counter_at_3b291b2 = values.loop.save_count;"
+    },
+    {
+      "path": "src/guest/native_game_reference.cpp",
+      "line": 988,
+      "text": "loop_.pending_at_3abdf76 = values.loop.save_pending;"
+    },
+    {
+      "path": "src/guest/native_game_reference.cpp",
+      "line": 1014,
+      "text": "loop_.save_phase_at_3b291a4=s32(0x3b291a4);"
+    },
+    {
+      "path": "tests/probes/native_game_mode_leaves_probe.cpp",
+      "line": 57,
+      "text": "std::optional<std::uint32_t> save_name_word; // reference transport slot, not another global owner"
+    },
+    {
+      "path": "tests/probes/native_game_mode_leaves_probe.cpp",
+      "line": 58,
+      "text": "std::optional<std::uint32_t>* scalars32[]={&s.word_at_3b0f13c,&s.word_at_3b0f108,&s.word_at_3b0ef44,&save_name_word,&s.word_at_3b2a2f0,&s.word_at_3b2a2f4,&s.word_at_3b2a2fc,&s.word_at_3b2b358,&s.word_at_3b2c47c,&s.word_at_3b2919c,"
+    },
+    {
+      "path": "tests/probes/native_game_mode_leaves_probe.cpp",
+      "line": 76,
+      "text": "s.save_name_reference.import_value(s.save_name,save_name_word);"
+    },
+    {
+      "path": "tests/probes/native_game_mode_leaves_probe.cpp",
+      "line": 77,
+      "text": "auto blocks=[&](auto&& f){std::size_t o=kScalarBytes;f(s.block_at_3b18250,o);o+=0xb64;f(s.block_at_3b0ef9c,o);o+=0x3c;f(s.block_at_3c4ae08,o);o+=0x3638;f(s.block_at_3b290c4,o);o+=8;f(s.block_at_90ed54,o);o+=0x20;f(s.block_at_3b2b5f9,o);o+=7;f(s.block_at_3b2c5e8,o);};"
+    },
+    {
+      "path": "tests/probes/native_game_mode_leaves_probe.cpp",
+      "line": 82,
+      "text": "save_name_word=s.save_name_reference.export_value(s.save_name);"
+    },
+    {
+      "path": "tests/unit/game_mode_leaves.cpp",
+      "line": 13,
+      "text": "Fixture(){s.character_at_3b22dc0=0;s.byte_at_3b0ef34=1;for(auto& b:s.block_at_3b2b5f9.bytes)b=2;for(auto& b:s.block_at_90ed54.bytes)b=0;for(auto& b:s.block_at_3b290c4.bytes)b=1;"
+    },
+    {
+      "path": "tools/oracles/verify_original_game_cleanup.py",
+      "line": 322,
+      "text": "'tests/probes/native_game_cleanup_probe.cpp', 'src/game/save_data.cpp',"
+    },
+    {
+      "path": "tools/oracles/verify_original_game_cleanup.py",
+      "line": 323,
+      "text": "'src/game/save_data.hpp', 'src/game/game_bootstrap.hpp',"
+    }
+  ],
+  "overlapping_legacy_ownership": [
+    {
+      "address": "0x3b2b5f9",
+      "owners": [
+        "src/guest/game_mode_leaves_reference.hpp:GameModeLeafState.block_at_3b2b5f9"
+      ]
+    },
+    {
+      "address": "0x3b2b5fa",
+      "owners": [
+        "src/guest/game_mode_leaves_reference.hpp:GameModeLeafState.block_at_3b2b5f9"
+      ]
+    },
+    {
+      "address": "0x3b2b5fb",
+      "owners": [
+        "src/guest/game_mode_leaves_reference.hpp:GameModeLeafState.block_at_3b2b5f9"
+      ]
+    },
+    {
+      "address": "0x3b2b5fc",
+      "owners": [
+        "src/guest/game_mode_leaves_reference.hpp:GameModeLeafState.block_at_3b2b5f9"
+      ]
+    },
+    {
+      "address": "0x3b2b5fd",
+      "owners": [
+        "src/guest/game_mode_leaves_reference.hpp:GameModeLeafState.block_at_3b2b5f9"
+      ]
+    },
+    {
+      "address": "0x3b2b5fe",
+      "owners": [
+        "src/guest/game_mode_leaves_reference.hpp:GameModeLeafState.block_at_3b2b5f9"
+      ]
+    },
+    {
+      "address": "0x3b2b5ff",
+      "owners": [
+        "src/guest/game_mode_leaves_reference.hpp:GameModeLeafState.block_at_3b2b5f9"
+      ]
+    }
+  ],
+  "original_copy": {
+    "entry": "0x42ca10",
+    "range": [
+      "0x42ca10",
+      "0x42ca99"
+    ],
+    "sha256": "780932f7185c6cbe14d6d6ad3dbecda9feb97f4a9f53c5a831550e56b93e8559",
+    "instructions": [
+      {
+        "site": "0x42ca54",
+        "operation": "ECX=0x15c dwords"
+      },
+      {
+        "site": "0x42ca59",
+        "operation": "ESI=current save0x3b2b3a8"
+      },
+      {
+        "site": "0x42ca5e",
+        "operation": "EDI=backup0x3b29d70"
+      },
+      {
+        "site": "0x42ca69",
+        "operation": "REP MOVSD copies1392 bytes"
+      },
+      {
+        "site": "0x42ca6b",
+        "operation": "LoadSave after copy"
+      }
+    ]
+  },
+  "prerequisites": [
+    "Fresh baseline/frozen partial outputs for game_mode_leaves and native game composition, besides actual main_menu, cleanup, save, bootstrap and logo judges.",
+    "One shared canonical profile owner type reused in each runtime world; reference adapters carry fact availability separately and borrow actual options/lives values.",
+    "Explicit probe/fixture binding rework in separate evidenced judge commits; public ABI, input bytes, cases and original expectations unchanged.",
+    "Resolve backup symbol naming with exact source evidence before GLOBAL annotation. Do not add a new current-save GLOBAL over the seven existing bytes or weaken owner checks."
+  ],
+  "unverified": [
+    "No owner moved; proposed interface not implemented or independently approved.",
+    "No fresh baseline/build/oracle/provider, native lifetime or teardown test run for this context.",
+    "Raw/typed source consumers outside the maintained closure and unused SDK array entries remain open."
+  ]
+}
