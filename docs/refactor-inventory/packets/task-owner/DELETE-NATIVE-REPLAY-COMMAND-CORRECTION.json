@@ -1,0 +1,12 @@
+{
+  "status": "Root records failed pre-admission launch and explicitly corrects command only. No input/source/helper change or library call occurred.",
+  "failed_command_commit_argument": "92bdda1cc19a0e19eea150b5a94c2875e6a12f3d",
+  "verified_admission_commit": "92bdda125f395f2dc13a860bda44bc00f8899da9",
+  "failed_launch_exit": 1,
+  "failed_log": "build/task-delete-native-replay.log",
+  "failed_log_sha256": "b301a5da04cbe28100f9fe2f80cbe139eb88e51986e9d5aee86fc2c3c713ee88",
+  "failure_boundary": "git show in admitted(), before pins/contracts/output/ctypes.CDLL. Output absent; zero native attempts.",
+  "corrected_command": "reference/python/bin/python -I -S -B reference/packets/task-delete-native-replay/replay.py docs/refactor-inventory/packets/task-owner/ROOT-DELETE-NATIVE-REPLAY-ADMISSION.json --admission-commit 92bdda125f395f2dc13a860bda44bc00f8899da9",
+  "authorization": "Root reaffirms the existing one-shot admitted native replay using the verified admission commit. Keep failed launch separate; no source or original rerun.",
+  "remaining_scope": "Same563 produced deletion records and seven exclusions; original source fidelity remains FAIL at207."
+}
