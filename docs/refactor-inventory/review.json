@@ -15291,242 +15291,176 @@
       "destination": "Retain bounded imported contract; future system layout may place assets with their UI/texture/audio/player system without mechanical relocation counting as migration."
     },
     "src/loader/mpeg_timing.hpp": {
-      "disposition": "reference_infrastructure",
-      "reason": "Reference DirectShow metadata timing helper, with uncaptured splitter policy explicitly assumed by its sole runtime caller; excluded from actual native movie/import paths.",
-      "semantic_justification": "Complete header and implementation reviewed: local timing accumulator, 33-bit timestamp extraction, MPEG-1 pack/system/packet walk, E0 video filtering, stuffing/STD skips, PTS/PTS+DTS payload offsets, min/max timestamp aggregation, first in-packet sequence header size/rate decode and truncated integer conversion to 100 ns plus one frame. Format start codes, stream IDs, masks and rate fractions are numeric encodings, not addresses. Optional result means unsupported/malformed/missing stream metadata. There are no fixture-availability state members or recovered game branches. The duration formula is the reference HLE duration assumption, not recovered DirectShow splitter behavior. Actual use is AddSourceFilter in hle_dshow; it is neither native movie playback nor the importer despite the loader directory and generated asset-boundary label. Dense implementation still needs readability cleanup.",
-      "evidence": [
-        {
-          "path": "src/loader/mpeg_timing.cpp",
-          "line": 1,
-          "sha256": "fafd2daf8e2e44e080b6b761fd536b2e50152bb380c5866d29acef3ce43b3dc7"
-        },
-        {
-          "path": "src/loader/mpeg_timing.hpp",
-          "line": 1,
-          "sha256": "c6f31e9f97289124fcf9affd35037e367868eece8fdd011efe318fb633f420c9"
-        }
-      ],
+      "disposition": "already_conforming",
+      "reason": "Explicit complete readable reference utility approval with source-bound byte and COM contracts.",
+      "reviewed_source_sha256": "0e2724652177eb0f96ec59bf2e32d61e5ebb5cd3c30109a8c3f310b457fb0643",
+      "semantic_justification": "Complete structured reference MPEG1 metadata parser and public result/API reviewed. Named pack/packet/timestamp/sequence boundaries preserve existing permissive marker decoding, first-header/rate selection, min/max PTS without unwrap, qualifyingE0packet count, exact integer duration truncation and diagnostics/error order. Format tags/masks/rates are numeric encodings, not game dispatch or resource addresses.",
       "resolved_owners": [
         {
-          "resolution": "MpegTiming is a result value and the parser has local state only plus immutable rate data. HleDshow Graph owns optional duration, run-start/position and completion queue. Its unknown duration before AddSourceFilter is graph lifecycle absence. Native MoviePlayer separately owns AVFoundation samples/timeline and audio presentation state.",
+          "resolution": "Parser borrows immutable byte vector and returns an owned numeric result; caller owns error string. No game state, reference fixture presence, decoded pictures, clocks or native player ownership is introduced.",
           "evidence": [
             {
               "path": "src/loader/mpeg_timing.hpp",
-              "line": 1,
-              "sha256": "c6f31e9f97289124fcf9affd35037e367868eece8fdd011efe318fb633f420c9"
+              "sha256": "0e2724652177eb0f96ec59bf2e32d61e5ebb5cd3c30109a8c3f310b457fb0643"
             },
             {
               "path": "src/loader/mpeg_timing.cpp",
-              "line": 1,
-              "sha256": "fafd2daf8e2e44e080b6b761fd536b2e50152bb380c5866d29acef3ce43b3dc7"
-            },
-            {
-              "path": "src/hle/hle_dshow.cpp",
-              "line": 1,
-              "sha256": "f339d310b33b553dbc5aa3cef0192527096c0f11cebbbc7f15bb6e2bdf6940aa"
-            },
-            {
-              "path": "src/platform/mac/mac_movie.mm",
-              "line": 1,
-              "sha256": "8996fa785c3ce2bf2da292e48785c2b9789c54549e243b608d0319bc26c10014"
+              "sha256": "5ceaec254b1a56b42806c348c40aacf6d5715ee4ebd29600d1d224f5cf2d0bde"
             }
           ]
         }
       ],
       "resolved_consumers": [
         {
-          "resolution": "Only maintained non-test direct parser caller is HLE AddSourceFilter: reads mapped host movie, stops on parser failure, stores duration and reports the uncaptured splitter assumption. stream_time/deliver_due/get_Duration consume that value, including EC_COMPLETE. Native app opens MoviePlayer on imported paths; completion uses decoder EOS, audio presentation frames and AVFoundation track end. Importer copies/hashes movie bytes and extracts clip/playlist declarations with separate Python PEImage; it never calls this C++ parser.",
+          "resolution": "HleDshow metadata assumption only; nativeAVFoundation uses its separate presentation/track endpoints. Actual COM test directly compiles current parser+HleDshow, with independent support objects.",
           "evidence": [
             {
-              "path": "src/hle/hle_dshow.cpp",
-              "line": 1,
-              "sha256": "f339d310b33b553dbc5aa3cef0192527096c0f11cebbbc7f15bb6e2bdf6940aa"
+              "path": "tests/unit/mpeg_timing_hle.cpp",
+              "sha256": "ac90293a4ba850c4a5b7c5437de69866afbbd69cf1715200b853c3f63754329d"
             },
             {
-              "path": "src/apps/sadx_native.mm",
-              "line": 1,
-              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
-            },
-            {
-              "path": "src/platform/mac/mac_movie.mm",
-              "line": 1,
-              "sha256": "8996fa785c3ce2bf2da292e48785c2b9789c54549e243b608d0319bc26c10014"
-            },
-            {
-              "path": "tools/import/movie_assets.py",
-              "line": 1,
-              "sha256": "795fd3fcecbfdb2a4523d77996c43b8060aafd34f325604ee08d9eeaef547c5e"
-            },
-            {
-              "path": "tools/import/native_assets.py",
-              "line": 1,
-              "sha256": "77a45eb581c9e7936ea5747e2bef60693fd69c06dddb7c56b653ac9b6727cf5e"
+              "path": "docs/refactor-inventory/reviews/loader-boundaries.md",
+              "sha256": "1e3df5ebc81d00587613f418a3f443190d46113ce4273103f9996a07aa278955"
             }
           ]
         }
       ],
       "accepted_judges": [
         {
-          "accepted_scope": "mpeg_timing unit builds a synthetic 640x480/code-4 stream with stuffing, STD, audio, PTS and PTS+DTS, verifies two video timestamps and 10 s plus one truncated frame; rejects MPEG-2 pack, broken length and absent PTS. Registered gate invocation additionally reads local RE-US.MPG.",
-          "limits": "Historical accepted path only, not rerun. This does not independently recover DirectShow duration/EC_COMPLETE policy or validate decoder/audio/hardware behavior. Marker validity, PTS wrap, split sequence headers, other rate codes and malformed tails are not established by this unit. ISO table comment is source attribution, not a spec verification performed here.",
+          "resolution": "Independent complete module review5ebdd38 approves;30657 full synthetic observations byte-identical, actual COM transcript identical, original RE-US unit unchanged,10valid compiled faults caught and sanitizers pass. Post-review4096 additional streams exactly match immutable a0aa342 parser.",
           "evidence": [
             {
-              "path": "tests/unit/mpeg_timing.cpp",
-              "line": 1,
-              "sha256": "391d36d5f1666c58e8eb00bacc56dced24642134eedd4a7bb45ebb41c3e727f2"
+              "path": "docs/REVIEW-mpeg-timing-0995a54.md",
+              "sha256": "75df734c3bbd71d165250d9548f39eacdf888952ea23883b98687aca08e7692b"
             },
             {
-              "path": "tests/unit/manifest.tsv",
-              "line": 1,
-              "sha256": "56f941595e3606cb04fae06853689a80cc548eb64c1cf1f2be35f3e8789aa7cb"
+              "path": "docs/packets/mpeg-timing/current.json",
+              "sha256": "b6a430d497e3f0f08085cde6bf3ec97df0c992cc70e9cfa4ac2351f726c9b21d"
             },
             {
-              "path": "src/hle/hle_dshow.cpp",
-              "line": 1,
-              "sha256": "f339d310b33b553dbc5aa3cef0192527096c0f11cebbbc7f15bb6e2bdf6940aa"
+              "path": "docs/packets/mpeg-timing/root-post-review-cohort.json",
+              "sha256": "5b056cd5351f6da9effa58af6d7643a54a3131e699bb5f693b29813118cd070c"
             },
             {
-              "path": "reference/production-integration-20261101/menu-texture-owner-gate.json",
-              "line": 1,
-              "sha256": "39ce5405246459938178d699f6edef793f8411a9f2d72f1a553b85aa1217857d"
+              "path": "docs/packets/mpeg-timing/qualification-faults.json",
+              "sha256": "bca998f6f5c7454768373a6833fc948e9962f14d0a734f89bcaa02d0315d86d2"
             }
           ]
         }
       ],
       "classification_limits": [
-        "Independent complete-body static review at Main 73be9a5 only. No builds, tests, oracles, mutations, codecs, spec lookups, providers, network, storage operations, delegates or gates were run. No source edits.",
-        "reference_infrastructure is a purpose disposition, not already_conforming, native runtime proof, a whole-system verdict or campaign closure. Dense declarations/control flow still need maintained-source readability cleanup; the PE safety finding remains open.",
-        "Historical receipts retain their recorded command, inputs and limitations. Current source fingerprints matching a historical receipt do not establish current execution, complete parser coverage, Windows behavior or hardware qualification.",
-        "Only the six loader members are dispositioned. Mentioned game/engine callers, importer, HLE graph, platform decoder and native closure checker are boundary evidence, not newly conforming modules."
+        "Reference metadata subset/uncaptured Windows splitter assumption only; no native clock/codec/Windows parity.",
+        "Pinned support archives cover unchanged dependencies; private build is not clean whole-guest qualification.",
+        "Main Source integration/canonical consumers/full gate remain pending."
       ],
-      "code_conformity": "Not already_conforming: purpose reviewed; dense maintained formatting/declarations/control flow need cleanup under existing checks. No automatic conformity exemption.",
-      "findings": [],
-      "qualification_gaps": [
-        "Historical accepted path only, not rerun. This does not independently recover DirectShow duration/EC_COMPLETE policy or validate decoder/audio/hardware behavior. Marker validity, PTS wrap, split sequence headers, other rate codes and malformed tails are not established by this unit. ISO table comment is source attribution, not a spec verification performed here."
-      ],
-      "destination": "Retain this bounded reference-purpose responsibility; any future relocation is organizational work, not recovered game logic progress.",
-      "reviewed_source_sha256": "c6f31e9f97289124fcf9affd35037e367868eece8fdd011efe318fb633f420c9",
-      "complete_body_lines": 20,
-      "file_specific_review": "Entire MpegTiming value and parser signature/comments reviewed; time units and optional parser failure are explicit. Reference purpose classification does not require rewriting legitimate rate/time numeric data."
+      "evidence": [
+        {
+          "path": "src/loader/mpeg_timing.hpp",
+          "sha256": "0e2724652177eb0f96ec59bf2e32d61e5ebb5cd3c30109a8c3f310b457fb0643"
+        },
+        {
+          "path": "src/loader/mpeg_timing.cpp",
+          "sha256": "5ceaec254b1a56b42806c348c40aacf6d5715ee4ebd29600d1d224f5cf2d0bde"
+        },
+        {
+          "path": "docs/REVIEW-mpeg-timing-0995a54.md",
+          "sha256": "75df734c3bbd71d165250d9548f39eacdf888952ea23883b98687aca08e7692b"
+        },
+        {
+          "path": "docs/packets/mpeg-timing/current.json",
+          "sha256": "b6a430d497e3f0f08085cde6bf3ec97df0c992cc70e9cfa4ac2351f726c9b21d"
+        },
+        {
+          "path": "docs/packets/mpeg-timing/root-post-review-cohort.json",
+          "sha256": "5b056cd5351f6da9effa58af6d7643a54a3131e699bb5f693b29813118cd070c"
+        }
+      ]
     },
     "src/loader/mpeg_timing.cpp": {
-      "disposition": "reference_infrastructure",
-      "reason": "Reference DirectShow metadata timing helper, with uncaptured splitter policy explicitly assumed by its sole runtime caller; excluded from actual native movie/import paths.",
-      "semantic_justification": "Complete header and implementation reviewed: local timing accumulator, 33-bit timestamp extraction, MPEG-1 pack/system/packet walk, E0 video filtering, stuffing/STD skips, PTS/PTS+DTS payload offsets, min/max timestamp aggregation, first in-packet sequence header size/rate decode and truncated integer conversion to 100 ns plus one frame. Format start codes, stream IDs, masks and rate fractions are numeric encodings, not addresses. Optional result means unsupported/malformed/missing stream metadata. There are no fixture-availability state members or recovered game branches. The duration formula is the reference HLE duration assumption, not recovered DirectShow splitter behavior. Actual use is AddSourceFilter in hle_dshow; it is neither native movie playback nor the importer despite the loader directory and generated asset-boundary label. Dense implementation still needs readability cleanup.",
-      "evidence": [
-        {
-          "path": "src/loader/mpeg_timing.cpp",
-          "line": 1,
-          "sha256": "fafd2daf8e2e44e080b6b761fd536b2e50152bb380c5866d29acef3ce43b3dc7"
-        },
-        {
-          "path": "src/loader/mpeg_timing.hpp",
-          "line": 1,
-          "sha256": "c6f31e9f97289124fcf9affd35037e367868eece8fdd011efe318fb633f420c9"
-        }
-      ],
+      "disposition": "already_conforming",
+      "reason": "Explicit complete readable reference utility approval with source-bound byte and COM contracts.",
+      "reviewed_source_sha256": "5ceaec254b1a56b42806c348c40aacf6d5715ee4ebd29600d1d224f5cf2d0bde",
+      "semantic_justification": "Complete structured reference MPEG1 metadata parser and public result/API reviewed. Named pack/packet/timestamp/sequence boundaries preserve existing permissive marker decoding, first-header/rate selection, min/max PTS without unwrap, qualifyingE0packet count, exact integer duration truncation and diagnostics/error order. Format tags/masks/rates are numeric encodings, not game dispatch or resource addresses.",
       "resolved_owners": [
         {
-          "resolution": "MpegTiming is a result value and the parser has local state only plus immutable rate data. HleDshow Graph owns optional duration, run-start/position and completion queue. Its unknown duration before AddSourceFilter is graph lifecycle absence. Native MoviePlayer separately owns AVFoundation samples/timeline and audio presentation state.",
+          "resolution": "Parser borrows immutable byte vector and returns an owned numeric result; caller owns error string. No game state, reference fixture presence, decoded pictures, clocks or native player ownership is introduced.",
           "evidence": [
             {
               "path": "src/loader/mpeg_timing.hpp",
-              "line": 1,
-              "sha256": "c6f31e9f97289124fcf9affd35037e367868eece8fdd011efe318fb633f420c9"
+              "sha256": "0e2724652177eb0f96ec59bf2e32d61e5ebb5cd3c30109a8c3f310b457fb0643"
             },
             {
               "path": "src/loader/mpeg_timing.cpp",
-              "line": 1,
-              "sha256": "fafd2daf8e2e44e080b6b761fd536b2e50152bb380c5866d29acef3ce43b3dc7"
-            },
-            {
-              "path": "src/hle/hle_dshow.cpp",
-              "line": 1,
-              "sha256": "f339d310b33b553dbc5aa3cef0192527096c0f11cebbbc7f15bb6e2bdf6940aa"
-            },
-            {
-              "path": "src/platform/mac/mac_movie.mm",
-              "line": 1,
-              "sha256": "8996fa785c3ce2bf2da292e48785c2b9789c54549e243b608d0319bc26c10014"
+              "sha256": "5ceaec254b1a56b42806c348c40aacf6d5715ee4ebd29600d1d224f5cf2d0bde"
             }
           ]
         }
       ],
       "resolved_consumers": [
         {
-          "resolution": "Only maintained non-test direct parser caller is HLE AddSourceFilter: reads mapped host movie, stops on parser failure, stores duration and reports the uncaptured splitter assumption. stream_time/deliver_due/get_Duration consume that value, including EC_COMPLETE. Native app opens MoviePlayer on imported paths; completion uses decoder EOS, audio presentation frames and AVFoundation track end. Importer copies/hashes movie bytes and extracts clip/playlist declarations with separate Python PEImage; it never calls this C++ parser.",
+          "resolution": "HleDshow metadata assumption only; nativeAVFoundation uses its separate presentation/track endpoints. Actual COM test directly compiles current parser+HleDshow, with independent support objects.",
           "evidence": [
             {
-              "path": "src/hle/hle_dshow.cpp",
-              "line": 1,
-              "sha256": "f339d310b33b553dbc5aa3cef0192527096c0f11cebbbc7f15bb6e2bdf6940aa"
+              "path": "tests/unit/mpeg_timing_hle.cpp",
+              "sha256": "ac90293a4ba850c4a5b7c5437de69866afbbd69cf1715200b853c3f63754329d"
             },
             {
-              "path": "src/apps/sadx_native.mm",
-              "line": 1,
-              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
-            },
-            {
-              "path": "src/platform/mac/mac_movie.mm",
-              "line": 1,
-              "sha256": "8996fa785c3ce2bf2da292e48785c2b9789c54549e243b608d0319bc26c10014"
-            },
-            {
-              "path": "tools/import/movie_assets.py",
-              "line": 1,
-              "sha256": "795fd3fcecbfdb2a4523d77996c43b8060aafd34f325604ee08d9eeaef547c5e"
-            },
-            {
-              "path": "tools/import/native_assets.py",
-              "line": 1,
-              "sha256": "77a45eb581c9e7936ea5747e2bef60693fd69c06dddb7c56b653ac9b6727cf5e"
+              "path": "docs/refactor-inventory/reviews/loader-boundaries.md",
+              "sha256": "1e3df5ebc81d00587613f418a3f443190d46113ce4273103f9996a07aa278955"
             }
           ]
         }
       ],
       "accepted_judges": [
         {
-          "accepted_scope": "mpeg_timing unit builds a synthetic 640x480/code-4 stream with stuffing, STD, audio, PTS and PTS+DTS, verifies two video timestamps and 10 s plus one truncated frame; rejects MPEG-2 pack, broken length and absent PTS. Registered gate invocation additionally reads local RE-US.MPG.",
-          "limits": "Historical accepted path only, not rerun. This does not independently recover DirectShow duration/EC_COMPLETE policy or validate decoder/audio/hardware behavior. Marker validity, PTS wrap, split sequence headers, other rate codes and malformed tails are not established by this unit. ISO table comment is source attribution, not a spec verification performed here.",
+          "resolution": "Independent complete module review5ebdd38 approves;30657 full synthetic observations byte-identical, actual COM transcript identical, original RE-US unit unchanged,10valid compiled faults caught and sanitizers pass. Post-review4096 additional streams exactly match immutable a0aa342 parser.",
           "evidence": [
             {
-              "path": "tests/unit/mpeg_timing.cpp",
-              "line": 1,
-              "sha256": "391d36d5f1666c58e8eb00bacc56dced24642134eedd4a7bb45ebb41c3e727f2"
+              "path": "docs/REVIEW-mpeg-timing-0995a54.md",
+              "sha256": "75df734c3bbd71d165250d9548f39eacdf888952ea23883b98687aca08e7692b"
             },
             {
-              "path": "tests/unit/manifest.tsv",
-              "line": 1,
-              "sha256": "56f941595e3606cb04fae06853689a80cc548eb64c1cf1f2be35f3e8789aa7cb"
+              "path": "docs/packets/mpeg-timing/current.json",
+              "sha256": "b6a430d497e3f0f08085cde6bf3ec97df0c992cc70e9cfa4ac2351f726c9b21d"
             },
             {
-              "path": "src/hle/hle_dshow.cpp",
-              "line": 1,
-              "sha256": "f339d310b33b553dbc5aa3cef0192527096c0f11cebbbc7f15bb6e2bdf6940aa"
+              "path": "docs/packets/mpeg-timing/root-post-review-cohort.json",
+              "sha256": "5b056cd5351f6da9effa58af6d7643a54a3131e699bb5f693b29813118cd070c"
             },
             {
-              "path": "reference/production-integration-20261101/menu-texture-owner-gate.json",
-              "line": 1,
-              "sha256": "39ce5405246459938178d699f6edef793f8411a9f2d72f1a553b85aa1217857d"
+              "path": "docs/packets/mpeg-timing/qualification-faults.json",
+              "sha256": "bca998f6f5c7454768373a6833fc948e9962f14d0a734f89bcaa02d0315d86d2"
             }
           ]
         }
       ],
       "classification_limits": [
-        "Independent complete-body static review at Main 73be9a5 only. No builds, tests, oracles, mutations, codecs, spec lookups, providers, network, storage operations, delegates or gates were run. No source edits.",
-        "reference_infrastructure is a purpose disposition, not already_conforming, native runtime proof, a whole-system verdict or campaign closure. Dense declarations/control flow still need maintained-source readability cleanup; the PE safety finding remains open.",
-        "Historical receipts retain their recorded command, inputs and limitations. Current source fingerprints matching a historical receipt do not establish current execution, complete parser coverage, Windows behavior or hardware qualification.",
-        "Only the six loader members are dispositioned. Mentioned game/engine callers, importer, HLE graph, platform decoder and native closure checker are boundary evidence, not newly conforming modules."
+        "Reference metadata subset/uncaptured Windows splitter assumption only; no native clock/codec/Windows parity.",
+        "Pinned support archives cover unchanged dependencies; private build is not clean whole-guest qualification.",
+        "Main Source integration/canonical consumers/full gate remain pending."
       ],
-      "code_conformity": "Not already_conforming: purpose reviewed; dense maintained formatting/declarations/control flow need cleanup under existing checks. No automatic conformity exemption.",
-      "findings": [],
-      "qualification_gaps": [
-        "Historical accepted path only, not rerun. This does not independently recover DirectShow duration/EC_COMPLETE policy or validate decoder/audio/hardware behavior. Marker validity, PTS wrap, split sequence headers, other rate codes and malformed tails are not established by this unit. ISO table comment is source attribution, not a spec verification performed here."
-      ],
-      "destination": "Retain this bounded reference-purpose responsibility; any future relocation is organizational work, not recovered game logic progress.",
-      "reviewed_source_sha256": "fafd2daf8e2e44e080b6b761fd536b2e50152bb380c5866d29acef3ce43b3dc7",
-      "complete_body_lines": 47,
-      "file_specific_review": "Entire timestamp/fail helpers, rate table, packet walk, sequence scan, failures and duration expression reviewed; compact nested control flow remains debt."
+      "evidence": [
+        {
+          "path": "src/loader/mpeg_timing.hpp",
+          "sha256": "0e2724652177eb0f96ec59bf2e32d61e5ebb5cd3c30109a8c3f310b457fb0643"
+        },
+        {
+          "path": "src/loader/mpeg_timing.cpp",
+          "sha256": "5ceaec254b1a56b42806c348c40aacf6d5715ee4ebd29600d1d224f5cf2d0bde"
+        },
+        {
+          "path": "docs/REVIEW-mpeg-timing-0995a54.md",
+          "sha256": "75df734c3bbd71d165250d9548f39eacdf888952ea23883b98687aca08e7692b"
+        },
+        {
+          "path": "docs/packets/mpeg-timing/current.json",
+          "sha256": "b6a430d497e3f0f08085cde6bf3ec97df0c992cc70e9cfa4ac2351f726c9b21d"
+        },
+        {
+          "path": "docs/packets/mpeg-timing/root-post-review-cohort.json",
+          "sha256": "5b056cd5351f6da9effa58af6d7643a54a3131e699bb5f693b29813118cd070c"
+        }
+      ]
     },
     "src/loader/executable_image.hpp": {
       "disposition": "already_conforming",
@@ -21425,124 +21359,93 @@
       }
     },
     "src/loader/mpeg_timing": {
-      "disposition": "reference_infrastructure",
-      "reason": "Reference DirectShow metadata timing helper, with uncaptured splitter policy explicitly assumed by its sole runtime caller; excluded from actual native movie/import paths.",
-      "semantic_justification": "Complete header and implementation reviewed: local timing accumulator, 33-bit timestamp extraction, MPEG-1 pack/system/packet walk, E0 video filtering, stuffing/STD skips, PTS/PTS+DTS payload offsets, min/max timestamp aggregation, first in-packet sequence header size/rate decode and truncated integer conversion to 100 ns plus one frame. Format start codes, stream IDs, masks and rate fractions are numeric encodings, not addresses. Optional result means unsupported/malformed/missing stream metadata. There are no fixture-availability state members or recovered game branches. The duration formula is the reference HLE duration assumption, not recovered DirectShow splitter behavior. Actual use is AddSourceFilter in hle_dshow; it is neither native movie playback nor the importer despite the loader directory and generated asset-boundary label. Dense implementation still needs readability cleanup.",
-      "evidence": [
-        {
-          "path": "src/loader/mpeg_timing.cpp",
-          "line": 1,
-          "sha256": "fafd2daf8e2e44e080b6b761fd536b2e50152bb380c5866d29acef3ce43b3dc7"
-        },
-        {
-          "path": "src/loader/mpeg_timing.hpp",
-          "line": 1,
-          "sha256": "c6f31e9f97289124fcf9affd35037e367868eece8fdd011efe318fb633f420c9"
-        }
-      ],
+      "disposition": "already_conforming",
+      "reason": "Complete two-file utility review, not blanket loader purpose exemption.",
+      "reviewed_members": {
+        "src/loader/mpeg_timing.hpp": "0e2724652177eb0f96ec59bf2e32d61e5ebb5cd3c30109a8c3f310b457fb0643",
+        "src/loader/mpeg_timing.cpp": "5ceaec254b1a56b42806c348c40aacf6d5715ee4ebd29600d1d224f5cf2d0bde"
+      },
+      "semantic_justification": "Complete structured reference MPEG1 metadata parser and public result/API reviewed. Named pack/packet/timestamp/sequence boundaries preserve existing permissive marker decoding, first-header/rate selection, min/max PTS without unwrap, qualifyingE0packet count, exact integer duration truncation and diagnostics/error order. Format tags/masks/rates are numeric encodings, not game dispatch or resource addresses.",
       "resolved_owners": [
         {
-          "resolution": "MpegTiming is a result value and the parser has local state only plus immutable rate data. HleDshow Graph owns optional duration, run-start/position and completion queue. Its unknown duration before AddSourceFilter is graph lifecycle absence. Native MoviePlayer separately owns AVFoundation samples/timeline and audio presentation state.",
+          "resolution": "Parser borrows immutable byte vector and returns an owned numeric result; caller owns error string. No game state, reference fixture presence, decoded pictures, clocks or native player ownership is introduced.",
           "evidence": [
             {
               "path": "src/loader/mpeg_timing.hpp",
-              "line": 1,
-              "sha256": "c6f31e9f97289124fcf9affd35037e367868eece8fdd011efe318fb633f420c9"
+              "sha256": "0e2724652177eb0f96ec59bf2e32d61e5ebb5cd3c30109a8c3f310b457fb0643"
             },
             {
               "path": "src/loader/mpeg_timing.cpp",
-              "line": 1,
-              "sha256": "fafd2daf8e2e44e080b6b761fd536b2e50152bb380c5866d29acef3ce43b3dc7"
-            },
-            {
-              "path": "src/hle/hle_dshow.cpp",
-              "line": 1,
-              "sha256": "f339d310b33b553dbc5aa3cef0192527096c0f11cebbbc7f15bb6e2bdf6940aa"
-            },
-            {
-              "path": "src/platform/mac/mac_movie.mm",
-              "line": 1,
-              "sha256": "8996fa785c3ce2bf2da292e48785c2b9789c54549e243b608d0319bc26c10014"
+              "sha256": "5ceaec254b1a56b42806c348c40aacf6d5715ee4ebd29600d1d224f5cf2d0bde"
             }
           ]
         }
       ],
       "resolved_consumers": [
         {
-          "resolution": "Only maintained non-test direct parser caller is HLE AddSourceFilter: reads mapped host movie, stops on parser failure, stores duration and reports the uncaptured splitter assumption. stream_time/deliver_due/get_Duration consume that value, including EC_COMPLETE. Native app opens MoviePlayer on imported paths; completion uses decoder EOS, audio presentation frames and AVFoundation track end. Importer copies/hashes movie bytes and extracts clip/playlist declarations with separate Python PEImage; it never calls this C++ parser.",
+          "resolution": "HleDshow metadata assumption only; nativeAVFoundation uses its separate presentation/track endpoints. Actual COM test directly compiles current parser+HleDshow, with independent support objects.",
           "evidence": [
             {
-              "path": "src/hle/hle_dshow.cpp",
-              "line": 1,
-              "sha256": "f339d310b33b553dbc5aa3cef0192527096c0f11cebbbc7f15bb6e2bdf6940aa"
+              "path": "tests/unit/mpeg_timing_hle.cpp",
+              "sha256": "ac90293a4ba850c4a5b7c5437de69866afbbd69cf1715200b853c3f63754329d"
             },
             {
-              "path": "src/apps/sadx_native.mm",
-              "line": 1,
-              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
-            },
-            {
-              "path": "src/platform/mac/mac_movie.mm",
-              "line": 1,
-              "sha256": "8996fa785c3ce2bf2da292e48785c2b9789c54549e243b608d0319bc26c10014"
-            },
-            {
-              "path": "tools/import/movie_assets.py",
-              "line": 1,
-              "sha256": "795fd3fcecbfdb2a4523d77996c43b8060aafd34f325604ee08d9eeaef547c5e"
-            },
-            {
-              "path": "tools/import/native_assets.py",
-              "line": 1,
-              "sha256": "77a45eb581c9e7936ea5747e2bef60693fd69c06dddb7c56b653ac9b6727cf5e"
+              "path": "docs/refactor-inventory/reviews/loader-boundaries.md",
+              "sha256": "1e3df5ebc81d00587613f418a3f443190d46113ce4273103f9996a07aa278955"
             }
           ]
         }
       ],
       "accepted_judges": [
         {
-          "accepted_scope": "mpeg_timing unit builds a synthetic 640x480/code-4 stream with stuffing, STD, audio, PTS and PTS+DTS, verifies two video timestamps and 10 s plus one truncated frame; rejects MPEG-2 pack, broken length and absent PTS. Registered gate invocation additionally reads local RE-US.MPG.",
-          "limits": "Historical accepted path only, not rerun. This does not independently recover DirectShow duration/EC_COMPLETE policy or validate decoder/audio/hardware behavior. Marker validity, PTS wrap, split sequence headers, other rate codes and malformed tails are not established by this unit. ISO table comment is source attribution, not a spec verification performed here.",
+          "resolution": "Independent complete module review5ebdd38 approves;30657 full synthetic observations byte-identical, actual COM transcript identical, original RE-US unit unchanged,10valid compiled faults caught and sanitizers pass. Post-review4096 additional streams exactly match immutable a0aa342 parser.",
           "evidence": [
             {
-              "path": "tests/unit/mpeg_timing.cpp",
-              "line": 1,
-              "sha256": "391d36d5f1666c58e8eb00bacc56dced24642134eedd4a7bb45ebb41c3e727f2"
+              "path": "docs/REVIEW-mpeg-timing-0995a54.md",
+              "sha256": "75df734c3bbd71d165250d9548f39eacdf888952ea23883b98687aca08e7692b"
             },
             {
-              "path": "tests/unit/manifest.tsv",
-              "line": 1,
-              "sha256": "56f941595e3606cb04fae06853689a80cc548eb64c1cf1f2be35f3e8789aa7cb"
+              "path": "docs/packets/mpeg-timing/current.json",
+              "sha256": "b6a430d497e3f0f08085cde6bf3ec97df0c992cc70e9cfa4ac2351f726c9b21d"
             },
             {
-              "path": "src/hle/hle_dshow.cpp",
-              "line": 1,
-              "sha256": "f339d310b33b553dbc5aa3cef0192527096c0f11cebbbc7f15bb6e2bdf6940aa"
+              "path": "docs/packets/mpeg-timing/root-post-review-cohort.json",
+              "sha256": "5b056cd5351f6da9effa58af6d7643a54a3131e699bb5f693b29813118cd070c"
             },
             {
-              "path": "reference/production-integration-20261101/menu-texture-owner-gate.json",
-              "line": 1,
-              "sha256": "39ce5405246459938178d699f6edef793f8411a9f2d72f1a553b85aa1217857d"
+              "path": "docs/packets/mpeg-timing/qualification-faults.json",
+              "sha256": "bca998f6f5c7454768373a6833fc948e9962f14d0a734f89bcaa02d0315d86d2"
             }
           ]
         }
       ],
       "classification_limits": [
-        "Independent complete-body static review at Main 73be9a5 only. No builds, tests, oracles, mutations, codecs, spec lookups, providers, network, storage operations, delegates or gates were run. No source edits.",
-        "reference_infrastructure is a purpose disposition, not already_conforming, native runtime proof, a whole-system verdict or campaign closure. Dense declarations/control flow still need maintained-source readability cleanup; the PE safety finding remains open.",
-        "Historical receipts retain their recorded command, inputs and limitations. Current source fingerprints matching a historical receipt do not establish current execution, complete parser coverage, Windows behavior or hardware qualification.",
-        "Only the six loader members are dispositioned. Mentioned game/engine callers, importer, HLE graph, platform decoder and native closure checker are boundary evidence, not newly conforming modules."
+        "Reference metadata subset/uncaptured Windows splitter assumption only; no native clock/codec/Windows parity.",
+        "Pinned support archives cover unchanged dependencies; private build is not clean whole-guest qualification.",
+        "Main Source integration/canonical consumers/full gate remain pending."
       ],
-      "code_conformity": "Not already_conforming: purpose reviewed; dense maintained formatting/declarations/control flow need cleanup under existing checks. No automatic conformity exemption.",
-      "findings": [],
-      "qualification_gaps": [
-        "Historical accepted path only, not rerun. This does not independently recover DirectShow duration/EC_COMPLETE policy or validate decoder/audio/hardware behavior. Marker validity, PTS wrap, split sequence headers, other rate codes and malformed tails are not established by this unit. ISO table comment is source attribution, not a spec verification performed here."
-      ],
-      "destination": "Retain this bounded reference-purpose responsibility; any future relocation is organizational work, not recovered game logic progress.",
-      "reviewed_members": {
-        "src/loader/mpeg_timing.cpp": "fafd2daf8e2e44e080b6b761fd536b2e50152bb380c5866d29acef3ce43b3dc7",
-        "src/loader/mpeg_timing.hpp": "c6f31e9f97289124fcf9affd35037e367868eece8fdd011efe318fb633f420c9"
-      }
+      "evidence": [
+        {
+          "path": "src/loader/mpeg_timing.hpp",
+          "sha256": "0e2724652177eb0f96ec59bf2e32d61e5ebb5cd3c30109a8c3f310b457fb0643"
+        },
+        {
+          "path": "src/loader/mpeg_timing.cpp",
+          "sha256": "5ceaec254b1a56b42806c348c40aacf6d5715ee4ebd29600d1d224f5cf2d0bde"
+        },
+        {
+          "path": "docs/REVIEW-mpeg-timing-0995a54.md",
+          "sha256": "75df734c3bbd71d165250d9548f39eacdf888952ea23883b98687aca08e7692b"
+        },
+        {
+          "path": "docs/packets/mpeg-timing/current.json",
+          "sha256": "b6a430d497e3f0f08085cde6bf3ec97df0c992cc70e9cfa4ac2351f726c9b21d"
+        },
+        {
+          "path": "docs/packets/mpeg-timing/root-post-review-cohort.json",
+          "sha256": "5b056cd5351f6da9effa58af6d7643a54a3131e699bb5f693b29813118cd070c"
+        }
+      ]
     },
     "src/loader/executable_image": {
       "disposition": "already_conforming",

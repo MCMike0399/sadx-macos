@@ -1,0 +1,268 @@
+{
+  "schema_version": 1,
+  "files": {
+    "src/loader/mpeg_timing.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Explicit complete readable reference utility approval with source-bound byte and COM contracts.",
+      "reviewed_source_sha256": "0e2724652177eb0f96ec59bf2e32d61e5ebb5cd3c30109a8c3f310b457fb0643",
+      "semantic_justification": "Complete structured reference MPEG1 metadata parser and public result/API reviewed. Named pack/packet/timestamp/sequence boundaries preserve existing permissive marker decoding, first-header/rate selection, min/max PTS without unwrap, qualifyingE0packet count, exact integer duration truncation and diagnostics/error order. Format tags/masks/rates are numeric encodings, not game dispatch or resource addresses.",
+      "resolved_owners": [
+        {
+          "resolution": "Parser borrows immutable byte vector and returns an owned numeric result; caller owns error string. No game state, reference fixture presence, decoded pictures, clocks or native player ownership is introduced.",
+          "evidence": [
+            {
+              "path": "src/loader/mpeg_timing.hpp",
+              "sha256": "0e2724652177eb0f96ec59bf2e32d61e5ebb5cd3c30109a8c3f310b457fb0643"
+            },
+            {
+              "path": "src/loader/mpeg_timing.cpp",
+              "sha256": "5ceaec254b1a56b42806c348c40aacf6d5715ee4ebd29600d1d224f5cf2d0bde"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "HleDshow metadata assumption only; nativeAVFoundation uses its separate presentation/track endpoints. Actual COM test directly compiles current parser+HleDshow, with independent support objects.",
+          "evidence": [
+            {
+              "path": "tests/unit/mpeg_timing_hle.cpp",
+              "sha256": "ac90293a4ba850c4a5b7c5437de69866afbbd69cf1715200b853c3f63754329d"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/loader-boundaries.md",
+              "sha256": "1e3df5ebc81d00587613f418a3f443190d46113ce4273103f9996a07aa278955"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent complete module review5ebdd38 approves;30657 full synthetic observations byte-identical, actual COM transcript identical, original RE-US unit unchanged,10valid compiled faults caught and sanitizers pass. Post-review4096 additional streams exactly match immutable a0aa342 parser.",
+          "evidence": [
+            {
+              "path": "docs/REVIEW-mpeg-timing-0995a54.md",
+              "sha256": "75df734c3bbd71d165250d9548f39eacdf888952ea23883b98687aca08e7692b"
+            },
+            {
+              "path": "docs/packets/mpeg-timing/current.json",
+              "sha256": "b6a430d497e3f0f08085cde6bf3ec97df0c992cc70e9cfa4ac2351f726c9b21d"
+            },
+            {
+              "path": "docs/packets/mpeg-timing/root-post-review-cohort.json",
+              "sha256": "5b056cd5351f6da9effa58af6d7643a54a3131e699bb5f693b29813118cd070c"
+            },
+            {
+              "path": "docs/packets/mpeg-timing/qualification-faults.json",
+              "sha256": "bca998f6f5c7454768373a6833fc948e9962f14d0a734f89bcaa02d0315d86d2"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Reference metadata subset/uncaptured Windows splitter assumption only; no native clock/codec/Windows parity.",
+        "Pinned support archives cover unchanged dependencies; private build is not clean whole-guest qualification.",
+        "Main Source integration/canonical consumers/full gate remain pending."
+      ],
+      "evidence": [
+        {
+          "path": "src/loader/mpeg_timing.hpp",
+          "sha256": "0e2724652177eb0f96ec59bf2e32d61e5ebb5cd3c30109a8c3f310b457fb0643"
+        },
+        {
+          "path": "src/loader/mpeg_timing.cpp",
+          "sha256": "5ceaec254b1a56b42806c348c40aacf6d5715ee4ebd29600d1d224f5cf2d0bde"
+        },
+        {
+          "path": "docs/REVIEW-mpeg-timing-0995a54.md",
+          "sha256": "75df734c3bbd71d165250d9548f39eacdf888952ea23883b98687aca08e7692b"
+        },
+        {
+          "path": "docs/packets/mpeg-timing/current.json",
+          "sha256": "b6a430d497e3f0f08085cde6bf3ec97df0c992cc70e9cfa4ac2351f726c9b21d"
+        },
+        {
+          "path": "docs/packets/mpeg-timing/root-post-review-cohort.json",
+          "sha256": "5b056cd5351f6da9effa58af6d7643a54a3131e699bb5f693b29813118cd070c"
+        }
+      ]
+    },
+    "src/loader/mpeg_timing.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Explicit complete readable reference utility approval with source-bound byte and COM contracts.",
+      "reviewed_source_sha256": "5ceaec254b1a56b42806c348c40aacf6d5715ee4ebd29600d1d224f5cf2d0bde",
+      "semantic_justification": "Complete structured reference MPEG1 metadata parser and public result/API reviewed. Named pack/packet/timestamp/sequence boundaries preserve existing permissive marker decoding, first-header/rate selection, min/max PTS without unwrap, qualifyingE0packet count, exact integer duration truncation and diagnostics/error order. Format tags/masks/rates are numeric encodings, not game dispatch or resource addresses.",
+      "resolved_owners": [
+        {
+          "resolution": "Parser borrows immutable byte vector and returns an owned numeric result; caller owns error string. No game state, reference fixture presence, decoded pictures, clocks or native player ownership is introduced.",
+          "evidence": [
+            {
+              "path": "src/loader/mpeg_timing.hpp",
+              "sha256": "0e2724652177eb0f96ec59bf2e32d61e5ebb5cd3c30109a8c3f310b457fb0643"
+            },
+            {
+              "path": "src/loader/mpeg_timing.cpp",
+              "sha256": "5ceaec254b1a56b42806c348c40aacf6d5715ee4ebd29600d1d224f5cf2d0bde"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "HleDshow metadata assumption only; nativeAVFoundation uses its separate presentation/track endpoints. Actual COM test directly compiles current parser+HleDshow, with independent support objects.",
+          "evidence": [
+            {
+              "path": "tests/unit/mpeg_timing_hle.cpp",
+              "sha256": "ac90293a4ba850c4a5b7c5437de69866afbbd69cf1715200b853c3f63754329d"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/loader-boundaries.md",
+              "sha256": "1e3df5ebc81d00587613f418a3f443190d46113ce4273103f9996a07aa278955"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent complete module review5ebdd38 approves;30657 full synthetic observations byte-identical, actual COM transcript identical, original RE-US unit unchanged,10valid compiled faults caught and sanitizers pass. Post-review4096 additional streams exactly match immutable a0aa342 parser.",
+          "evidence": [
+            {
+              "path": "docs/REVIEW-mpeg-timing-0995a54.md",
+              "sha256": "75df734c3bbd71d165250d9548f39eacdf888952ea23883b98687aca08e7692b"
+            },
+            {
+              "path": "docs/packets/mpeg-timing/current.json",
+              "sha256": "b6a430d497e3f0f08085cde6bf3ec97df0c992cc70e9cfa4ac2351f726c9b21d"
+            },
+            {
+              "path": "docs/packets/mpeg-timing/root-post-review-cohort.json",
+              "sha256": "5b056cd5351f6da9effa58af6d7643a54a3131e699bb5f693b29813118cd070c"
+            },
+            {
+              "path": "docs/packets/mpeg-timing/qualification-faults.json",
+              "sha256": "bca998f6f5c7454768373a6833fc948e9962f14d0a734f89bcaa02d0315d86d2"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Reference metadata subset/uncaptured Windows splitter assumption only; no native clock/codec/Windows parity.",
+        "Pinned support archives cover unchanged dependencies; private build is not clean whole-guest qualification.",
+        "Main Source integration/canonical consumers/full gate remain pending."
+      ],
+      "evidence": [
+        {
+          "path": "src/loader/mpeg_timing.hpp",
+          "sha256": "0e2724652177eb0f96ec59bf2e32d61e5ebb5cd3c30109a8c3f310b457fb0643"
+        },
+        {
+          "path": "src/loader/mpeg_timing.cpp",
+          "sha256": "5ceaec254b1a56b42806c348c40aacf6d5715ee4ebd29600d1d224f5cf2d0bde"
+        },
+        {
+          "path": "docs/REVIEW-mpeg-timing-0995a54.md",
+          "sha256": "75df734c3bbd71d165250d9548f39eacdf888952ea23883b98687aca08e7692b"
+        },
+        {
+          "path": "docs/packets/mpeg-timing/current.json",
+          "sha256": "b6a430d497e3f0f08085cde6bf3ec97df0c992cc70e9cfa4ac2351f726c9b21d"
+        },
+        {
+          "path": "docs/packets/mpeg-timing/root-post-review-cohort.json",
+          "sha256": "5b056cd5351f6da9effa58af6d7643a54a3131e699bb5f693b29813118cd070c"
+        }
+      ]
+    }
+  },
+  "modules": {
+    "src/loader/mpeg_timing": {
+      "disposition": "already_conforming",
+      "reason": "Complete two-file utility review, not blanket loader purpose exemption.",
+      "reviewed_members": {
+        "src/loader/mpeg_timing.hpp": "0e2724652177eb0f96ec59bf2e32d61e5ebb5cd3c30109a8c3f310b457fb0643",
+        "src/loader/mpeg_timing.cpp": "5ceaec254b1a56b42806c348c40aacf6d5715ee4ebd29600d1d224f5cf2d0bde"
+      },
+      "semantic_justification": "Complete structured reference MPEG1 metadata parser and public result/API reviewed. Named pack/packet/timestamp/sequence boundaries preserve existing permissive marker decoding, first-header/rate selection, min/max PTS without unwrap, qualifyingE0packet count, exact integer duration truncation and diagnostics/error order. Format tags/masks/rates are numeric encodings, not game dispatch or resource addresses.",
+      "resolved_owners": [
+        {
+          "resolution": "Parser borrows immutable byte vector and returns an owned numeric result; caller owns error string. No game state, reference fixture presence, decoded pictures, clocks or native player ownership is introduced.",
+          "evidence": [
+            {
+              "path": "src/loader/mpeg_timing.hpp",
+              "sha256": "0e2724652177eb0f96ec59bf2e32d61e5ebb5cd3c30109a8c3f310b457fb0643"
+            },
+            {
+              "path": "src/loader/mpeg_timing.cpp",
+              "sha256": "5ceaec254b1a56b42806c348c40aacf6d5715ee4ebd29600d1d224f5cf2d0bde"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "HleDshow metadata assumption only; nativeAVFoundation uses its separate presentation/track endpoints. Actual COM test directly compiles current parser+HleDshow, with independent support objects.",
+          "evidence": [
+            {
+              "path": "tests/unit/mpeg_timing_hle.cpp",
+              "sha256": "ac90293a4ba850c4a5b7c5437de69866afbbd69cf1715200b853c3f63754329d"
+            },
+            {
+              "path": "docs/refactor-inventory/reviews/loader-boundaries.md",
+              "sha256": "1e3df5ebc81d00587613f418a3f443190d46113ce4273103f9996a07aa278955"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent complete module review5ebdd38 approves;30657 full synthetic observations byte-identical, actual COM transcript identical, original RE-US unit unchanged,10valid compiled faults caught and sanitizers pass. Post-review4096 additional streams exactly match immutable a0aa342 parser.",
+          "evidence": [
+            {
+              "path": "docs/REVIEW-mpeg-timing-0995a54.md",
+              "sha256": "75df734c3bbd71d165250d9548f39eacdf888952ea23883b98687aca08e7692b"
+            },
+            {
+              "path": "docs/packets/mpeg-timing/current.json",
+              "sha256": "b6a430d497e3f0f08085cde6bf3ec97df0c992cc70e9cfa4ac2351f726c9b21d"
+            },
+            {
+              "path": "docs/packets/mpeg-timing/root-post-review-cohort.json",
+              "sha256": "5b056cd5351f6da9effa58af6d7643a54a3131e699bb5f693b29813118cd070c"
+            },
+            {
+              "path": "docs/packets/mpeg-timing/qualification-faults.json",
+              "sha256": "bca998f6f5c7454768373a6833fc948e9962f14d0a734f89bcaa02d0315d86d2"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Reference metadata subset/uncaptured Windows splitter assumption only; no native clock/codec/Windows parity.",
+        "Pinned support archives cover unchanged dependencies; private build is not clean whole-guest qualification.",
+        "Main Source integration/canonical consumers/full gate remain pending."
+      ],
+      "evidence": [
+        {
+          "path": "src/loader/mpeg_timing.hpp",
+          "sha256": "0e2724652177eb0f96ec59bf2e32d61e5ebb5cd3c30109a8c3f310b457fb0643"
+        },
+        {
+          "path": "src/loader/mpeg_timing.cpp",
+          "sha256": "5ceaec254b1a56b42806c348c40aacf6d5715ee4ebd29600d1d224f5cf2d0bde"
+        },
+        {
+          "path": "docs/REVIEW-mpeg-timing-0995a54.md",
+          "sha256": "75df734c3bbd71d165250d9548f39eacdf888952ea23883b98687aca08e7692b"
+        },
+        {
+          "path": "docs/packets/mpeg-timing/current.json",
+          "sha256": "b6a430d497e3f0f08085cde6bf3ec97df0c992cc70e9cfa4ac2351f726c9b21d"
+        },
+        {
+          "path": "docs/packets/mpeg-timing/root-post-review-cohort.json",
+          "sha256": "5b056cd5351f6da9effa58af6d7643a54a3131e699bb5f693b29813118cd070c"
+        }
+      ]
+    }
+  }
+}
