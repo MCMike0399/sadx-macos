@@ -3415,405 +3415,185 @@
     },
     "src/math/ninja_length.hpp": {
       "disposition": "already_conforming",
-      "reason": "Narrow semantic vector-length API with supported njScalor provenance; native exact-value return is deliberate.",
-      "reviewed_source_sha256": "30aa69ad39447239e4a8e88fe4abef9228282f2bfb7a0e23cd917045e06ce584",
-      "semantic_justification": "All eight lines reviewed. Const vector and mutable numerical context are explicit borrows. FUNCTION annotation matches SDK fastcall njScalor at 0x787cc0 and cached assembly ECX input/x87 result. C++ API does not expose ECX or original pointer/stack layout. ExactFloat preserves the unrounded register return for callers choosing the store boundary; no optional fixture availability, executable read, duplicated state or invented service. Header itself needs no rewrite.",
-      "evidence": [
-        {
-          "path": "src/math/ninja_length.hpp",
-          "line": 1,
-          "sha256": "30aa69ad39447239e4a8e88fe4abef9228282f2bfb7a0e23cd917045e06ce584"
-        },
-        {
-          "path": "docs/refactor-inventory/reviews/math-foundations.json",
-          "line": 1,
-          "sha256": "475be3901096f64781de629818b89e4cd493ee33338de115ee0ed5bb867e7b00"
-        }
-      ],
+      "reason": "Complete semantic math module independently reviewed against exact arithmetic contracts.",
+      "reviewed_source_sha256": "f9ee69d04565f8ed924809fedfcf3d6507976170a467ca4cf63745ed6d77a117",
+      "semantic_justification": "Complete typed vector-length API and implementation are reviewed. A single named CPU fidelity operation now serves both the ExactFloat math wrapper and retained raw legacy rotation wrapper. It preserves interleaved x/y/z loads/squares, (zz+yy)+xx, binary32 squared spill, signed-root operations and unrounded ext80 return. The math module owns no persistent state, fixture availability, guest transport, executable access or dispatch.",
       "resolved_owners": [
         {
-          "resolution": "No persistent mutable state. vector_length borrows NinjaVector and fidelity::Context, creates local exact values; context mutation is caller-owned FP state. collision::calculate_range passes its Context. No source memory/global identity is transported.",
+          "resolution": "Caller owns its live numeric context and vector. The shared pure CPU compatibility primitive owns no state and exposes only this specific retained result, not a generic raw getter. Legacy player wrapper remains debt outside this closed math module.",
           "evidence": [
             {
               "path": "src/math/ninja_length.hpp",
-              "line": 6,
-              "sha256": "30aa69ad39447239e4a8e88fe4abef9228282f2bfb7a0e23cd917045e06ce584",
-              "link": "src/math/ninja_length.hpp#L6"
+              "sha256": "f9ee69d04565f8ed924809fedfcf3d6507976170a467ca4cf63745ed6d77a117"
             },
             {
               "path": "src/math/ninja_length.cpp",
-              "line": 4,
-              "sha256": "dc803f7399f49d809d5a467e76203103da8507f08fee5306626282573b7a3c75",
-              "link": "src/math/ninja_length.cpp#L4",
-              "end_line": 12
+              "sha256": "ae490c726ca806cb2852abe60531c16686b11b16929f8b619bc98ff9d89bd132"
             },
             {
-              "path": "src/engine/collision_component.cpp",
-              "line": 109,
-              "sha256": "e6a9e37e956ebe2f7a54344f5b17e447f182c8e502432ee28aeef115717ee3e5",
-              "link": "src/engine/collision_component.cpp#L109",
-              "end_line": 126
-            }
-          ]
-        },
-        {
-          "resolution": "Canonical recovered implementation closure is unresolved: player::rotation_vector_length reproduces the same 0x787cc0 load/square/z+y+x/spill/signed-root body. This is duplicated recovered behavior, not two legitimate mutable state owners. Its callers are excluded from native-sources.txt but remain campaign targets. Do not remove either or route one to the other without unchanged source judges.",
-          "evidence": [
-            {
-              "path": "src/player/player_rotation.hpp",
-              "line": 46,
-              "sha256": "8bdf5a75ca53c7857db86c6f15778095257d3e58428de71b7f34e4b0b2cbeb32",
-              "link": "src/player/player_rotation.hpp#L46",
-              "end_line": 48
+              "path": "src/cpu/fidelity_float.hpp",
+              "sha256": "c96aadce5ca6caa699fb3e9a0b44f791e1ac0420b31ceed31b5fca48118afb98"
             },
             {
               "path": "src/player/player_rotation.cpp",
-              "line": 124,
-              "sha256": "87e7f62da064257f47af017e596c3c61078a1c65ca05828d8d6c73903c835cbe",
-              "link": "src/player/player_rotation.cpp#L124",
-              "end_line": 130
-            },
-            {
-              "path": "native-sources.txt",
-              "line": 96,
-              "sha256": "13e462b1ddc2df160580f9c6caf8544f444d87ca907b2a89f32ceada33f24eec",
-              "link": "native-sources.txt#L96",
-              "end_line": 126
+              "sha256": "fd2660121807b6fbda597a3d5e852087e35cdf5a76ad36724af13393984aa133"
             }
           ]
         }
       ],
       "resolved_consumers": [
         {
-          "path": "src/engine/collision_component.cpp",
-          "line": 117,
-          "kind": "semantic call / value ownership, not include inference",
-          "scope": "native_required",
-          "resolution": "calculate_range calls vector_length for every center and rounds before extent; collision-component.cpp and ninja_length.cpp are explicitly native listed.",
+          "resolution": "Actual rotation, position/contact, acceleration variants, direction/reset/reaction, mesh/scene/broadphase and Sonic/Gamma source closures inspected under seventeen configurations. Source/link reach is distinguished from actual entry hits. Both public return contracts are unchanged.",
           "evidence": [
             {
-              "path": "src/engine/collision_component.cpp",
-              "line": 117,
-              "sha256": "e6a9e37e956ebe2f7a54344f5b17e447f182c8e502432ee28aeef115717ee3e5",
-              "link": "src/engine/collision_component.cpp#L117"
-            }
-          ]
-        },
-        {
-          "path": "tests/probes/native_collision_component_probe.cpp",
-          "line": 173,
-          "kind": "semantic call / value ownership, not include inference",
-          "scope": "test_reference",
-          "resolution": "C ABI scalar operation 0 calls vector_length; operation 1 judges signed_square_root separately.",
-          "evidence": [
+              "path": "reference/packets/math-length/CONTEXT.md",
+              "sha256": "31c087577f34d54078cdb9bbd28fd105b3686596f6eae866ee29cfd2319d0af8"
+            },
             {
-              "path": "tests/probes/native_collision_component_probe.cpp",
-              "line": 173,
-              "sha256": "b065feed332d3dfd95b6849d109c33415a8499cc62ce16564a0c2e35d7f281db",
-              "link": "tests/probes/native_collision_component_probe.cpp#L173"
-            }
-          ]
-        },
-        {
-          "path": "src/player/player_rotation.cpp",
-          "line": 124,
-          "kind": "semantic call / value ownership, not include inference",
-          "scope": "excluded_native_source",
-          "resolution": "Related duplicate implementation, not a caller of vector_length. Consumed by passive rotation/player collision paths; excluded native implementation, not obsolete.",
-          "evidence": [
-            {
-              "path": "src/player/player_rotation.cpp",
-              "line": 124,
-              "sha256": "87e7f62da064257f47af017e596c3c61078a1c65ca05828d8d6c73903c835cbe",
-              "link": "src/player/player_rotation.cpp#L124"
+              "path": "reference/packets/math-length/baseline-identities.json",
+              "sha256": "eae276cbd03c487676e3267207eee0d8f5195bf45bba1a8ac9bf96001b75db6b"
             }
           ]
         }
       ],
       "accepted_judges": [
         {
-          "judge": "collision_component",
-          "acceptance": "Existing source-bound scalar judge and historical qualification, not a fresh pass. Six CWs, exceptional/random binary32 inputs. Scalar subreport combines njScalor and njSqrt: 888 comparisons, zero value mismatches, 834 FP partials in both dev and holdout; do not attribute all 888 to vector_length alone. Unit receipt exit 0; full dev 7964 cases / 6462 FP partials and holdout 8864 / 6834 FP partials; both exit 2. length_sum_order mutant caught with 45 value mismatches. Current helper source hashes equal proof source_hashes.",
+          "resolution": "Independent complete-module review a9e07eb approves arithmetic/design. All seventeen full output streams and partial/failure identities preserved;1,112,371 native development contract records exact. Three valid faults caught, including same historical45-mismatch order fault. Post-review original holdout8,864 cases has zero value mismatches and6,834 unchanged FP partial identities; both scripts exit2 and full streams match.",
           "evidence": [
             {
-              "path": "tools/oracles/verify_original_collision_component.py",
-              "line": 158,
-              "sha256": "3105d7e9acaf4a5509b45cfff6753a2daf0678548b831f325fdd883a2b82c90c",
-              "link": "tools/oracles/verify_original_collision_component.py#L158",
-              "end_line": 181
+              "path": "reference/packets/math-length-review/REVIEW.md",
+              "sha256": "871eb3ab666e86f600d09d3fc4f9afc457b77400626def267ee77d63fc34e1ac"
             },
             {
-              "path": "tests/probes/native_collision_component_probe.cpp",
-              "line": 173,
-              "sha256": "b065feed332d3dfd95b6849d109c33415a8499cc62ce16564a0c2e35d7f281db",
-              "link": "tests/probes/native_collision_component_probe.cpp#L173",
-              "end_line": 189
-            },
-            {
-              "path": "reference/production-integration-20261026/collision-component-core/proof.json",
-              "line": 1,
-              "sha256": "716f6e2f2273412617adfe5e9aa4a5457c3caf760e4c5a32eb47933730361852",
-              "link": "reference/production-integration-20261026/collision-component-core/proof.json#L1"
-            },
-            {
-              "path": "reference/production-integration-20261026/collision-component-core/dev.json",
-              "line": 1,
-              "sha256": "8e50b39091784713318d34ca703e1b800cda11ad27cb97bfc7e251db8e1a42e0",
-              "link": "reference/production-integration-20261026/collision-component-core/dev.json#L1"
-            },
-            {
-              "path": "reference/production-integration-20261026/collision-component-core/holdout.json",
-              "line": 1,
-              "sha256": "df3afd5690a3ff281af79b8aa7d759e2bf969f2e36705beeb0d0fa65b93190fd",
-              "link": "reference/production-integration-20261026/collision-component-core/holdout.json#L1"
-            },
-            {
-              "path": "reference/production-integration-20261026/collision-component-core/scalar-allocation.assembly.txt",
-              "line": 1,
-              "sha256": "ba00f9629bb2bece12c425ac28640ec249dbef7c845d793f8f3bcacd80c9b261",
-              "link": "reference/production-integration-20261026/collision-component-core/scalar-allocation.assembly.txt#L1",
-              "end_line": 31
-            },
-            {
-              "path": "tests/unit/manifest.tsv",
-              "line": 282,
-              "sha256": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
-              "link": "tests/unit/manifest.tsv#L282"
+              "path": "reference/packets/math-length/root-holdout.json",
+              "sha256": "51ca94b8b1d90daa0b1dce752aa371ab5300fdaa02cf20160aa782bebd5daf6b"
             }
-          ],
-          "limitations": "No dedicated ninja_length unit required by slug convention has been found; accepted coverage is the actual component scalar probe. Unrounded return ext80, full x87 stack/tag/deferred exceptions and all duplicate consumers are not established by binary32 scalar stores."
+          ]
         }
       ],
-      "destination": "src/math; retain shared numerical implementation. Reference ABI, original dispatch-table selection and diagnostic PCs stay in src/guest or tests/probes, never move whole algorithm there.",
-      "findings": [],
       "classification_limits": [
-        "Read-only semantic review of the exact source SHA-256 at the named base; no fresh source-fidelity pass or current native build/closure result.",
-        "Prior tracked receipts retain their bounded comparison and inherited failure status. Source equality establishes identity only.",
-        "Root must preserve full failing/partial case identities, full outputs, holdouts and mutation inputs before any behavior-bearing rewrite. Hardware Windows FP and real reciprocal-estimate capture are not supplied by these receipts.",
-        "Companion implementation canonical closure with rotation_vector_length remains open; header disposition is not module-wide conformance."
+        "FP partials remain partial; alternate eventground/eventair and player_reaction value/control failures remain unchanged.",
+        "Scalar888 combines444 length and444 signed-root comparisons; no888-length-only claim.",
+        "Full hardware stack/tag/deferred delivery and all mask/sticky combinations remain unverified.",
+        "Root Main frozen Sonic replay, integration gate/native closure/journeys remain pending. Private observer compiler omission is corrected as setup, not a project defect. Whole CPU/player/math-foundations/campaign remain open."
       ],
-      "authored_evidence": [
+      "evidence": [
         {
           "path": "src/math/ninja_length.hpp",
-          "line": 1,
-          "sha256": "30aa69ad39447239e4a8e88fe4abef9228282f2bfb7a0e23cd917045e06ce584",
-          "link": "src/math/ninja_length.hpp#L1",
-          "end_line": 8
+          "sha256": "f9ee69d04565f8ed924809fedfcf3d6507976170a467ca4cf63745ed6d77a117"
         },
         {
-          "path": "/Users/burbujamc/Developer/sadx-macos/reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
-          "line": 2766,
-          "sha256": "a2e634caff8d12d20adfe910b5b2db19e2da59cc1c4bb5e913e1df212d55327c",
-          "link": "/Users/burbujamc/Developer/sadx-macos/reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h#L2766"
+          "path": "src/math/ninja_length.cpp",
+          "sha256": "ae490c726ca806cb2852abe60531c16686b11b16929f8b619bc98ff9d89bd132"
+        },
+        {
+          "path": "src/cpu/fidelity_float.hpp",
+          "sha256": "c96aadce5ca6caa699fb3e9a0b44f791e1ac0420b31ceed31b5fca48118afb98"
+        },
+        {
+          "path": "src/player/player_rotation.cpp",
+          "sha256": "fd2660121807b6fbda597a3d5e852087e35cdf5a76ad36724af13393984aa133"
+        },
+        {
+          "path": "reference/packets/math-length-review/REVIEW.md",
+          "sha256": "871eb3ab666e86f600d09d3fc4f9afc457b77400626def267ee77d63fc34e1ac"
+        },
+        {
+          "path": "reference/packets/math-length/root-holdout.json",
+          "sha256": "51ca94b8b1d90daa0b1dce752aa371ab5300fdaa02cf20160aa782bebd5daf6b"
         }
-      ],
-      "evidence_binding_note": "Tracked source and immutable authored fragment anchor this review; detailed external SDK/cache paths remain in authored_evidence and the fragment, rather than pretending submodule contents are tracked parent files."
+      ]
     },
     "src/math/ninja_length.cpp": {
-      "disposition": "open_review",
-      "reason": "Body is readable and source-backed, but shared recovered-entry closure is unresolved because player_rotation.cpp retains a second njScalor implementation.",
-      "reviewed_source_sha256": "dc803f7399f49d809d5a467e76203103da8507f08fee5306626282573b7a3c75",
-      "semantic_justification": "All operations reviewed: load/square x then y then z; add z+y then x; explicitly spill binary32 before signed square root. ExactFloat is STYLE7 tier3 and is justified by six selected control words, exceptional values and source m64 signaling compare in signed-root callee. Plain sqrt(x*x+y*y+z*z) would erase sum order/spill/sign behavior. No addresses or fixture transport in this body. Do not rewrite the readable body merely to decrease x87 counts; resolve the duplicate and the same judges across both interfaces first.",
-      "evidence": [
-        {
-          "path": "src/math/ninja_length.cpp",
-          "line": 1,
-          "sha256": "dc803f7399f49d809d5a467e76203103da8507f08fee5306626282573b7a3c75"
-        },
-        {
-          "path": "docs/refactor-inventory/reviews/math-foundations.json",
-          "line": 1,
-          "sha256": "475be3901096f64781de629818b89e4cd493ee33338de115ee0ed5bb867e7b00"
-        }
-      ],
+      "disposition": "already_conforming",
+      "reason": "Complete semantic math module independently reviewed against exact arithmetic contracts.",
+      "reviewed_source_sha256": "ae490c726ca806cb2852abe60531c16686b11b16929f8b619bc98ff9d89bd132",
+      "semantic_justification": "Complete typed vector-length API and implementation are reviewed. A single named CPU fidelity operation now serves both the ExactFloat math wrapper and retained raw legacy rotation wrapper. It preserves interleaved x/y/z loads/squares, (zz+yy)+xx, binary32 squared spill, signed-root operations and unrounded ext80 return. The math module owns no persistent state, fixture availability, guest transport, executable access or dispatch.",
       "resolved_owners": [
         {
-          "resolution": "No persistent mutable state. vector_length borrows NinjaVector and fidelity::Context, creates local exact values; context mutation is caller-owned FP state. collision::calculate_range passes its Context. No source memory/global identity is transported.",
+          "resolution": "Caller owns its live numeric context and vector. The shared pure CPU compatibility primitive owns no state and exposes only this specific retained result, not a generic raw getter. Legacy player wrapper remains debt outside this closed math module.",
           "evidence": [
             {
               "path": "src/math/ninja_length.hpp",
-              "line": 6,
-              "sha256": "30aa69ad39447239e4a8e88fe4abef9228282f2bfb7a0e23cd917045e06ce584",
-              "link": "src/math/ninja_length.hpp#L6"
+              "sha256": "f9ee69d04565f8ed924809fedfcf3d6507976170a467ca4cf63745ed6d77a117"
             },
             {
               "path": "src/math/ninja_length.cpp",
-              "line": 4,
-              "sha256": "dc803f7399f49d809d5a467e76203103da8507f08fee5306626282573b7a3c75",
-              "link": "src/math/ninja_length.cpp#L4",
-              "end_line": 12
+              "sha256": "ae490c726ca806cb2852abe60531c16686b11b16929f8b619bc98ff9d89bd132"
             },
             {
-              "path": "src/engine/collision_component.cpp",
-              "line": 109,
-              "sha256": "e6a9e37e956ebe2f7a54344f5b17e447f182c8e502432ee28aeef115717ee3e5",
-              "link": "src/engine/collision_component.cpp#L109",
-              "end_line": 126
-            }
-          ]
-        },
-        {
-          "resolution": "Canonical recovered implementation closure is unresolved: player::rotation_vector_length reproduces the same 0x787cc0 load/square/z+y+x/spill/signed-root body. This is duplicated recovered behavior, not two legitimate mutable state owners. Its callers are excluded from native-sources.txt but remain campaign targets. Do not remove either or route one to the other without unchanged source judges.",
-          "evidence": [
-            {
-              "path": "src/player/player_rotation.hpp",
-              "line": 46,
-              "sha256": "8bdf5a75ca53c7857db86c6f15778095257d3e58428de71b7f34e4b0b2cbeb32",
-              "link": "src/player/player_rotation.hpp#L46",
-              "end_line": 48
+              "path": "src/cpu/fidelity_float.hpp",
+              "sha256": "c96aadce5ca6caa699fb3e9a0b44f791e1ac0420b31ceed31b5fca48118afb98"
             },
             {
               "path": "src/player/player_rotation.cpp",
-              "line": 124,
-              "sha256": "87e7f62da064257f47af017e596c3c61078a1c65ca05828d8d6c73903c835cbe",
-              "link": "src/player/player_rotation.cpp#L124",
-              "end_line": 130
-            },
-            {
-              "path": "native-sources.txt",
-              "line": 96,
-              "sha256": "13e462b1ddc2df160580f9c6caf8544f444d87ca907b2a89f32ceada33f24eec",
-              "link": "native-sources.txt#L96",
-              "end_line": 126
+              "sha256": "fd2660121807b6fbda597a3d5e852087e35cdf5a76ad36724af13393984aa133"
             }
           ]
         }
       ],
       "resolved_consumers": [
         {
-          "path": "src/engine/collision_component.cpp",
-          "line": 117,
-          "kind": "semantic call / value ownership, not include inference",
-          "scope": "native_required",
-          "resolution": "calculate_range calls vector_length for every center and rounds before extent; collision-component.cpp and ninja_length.cpp are explicitly native listed.",
+          "resolution": "Actual rotation, position/contact, acceleration variants, direction/reset/reaction, mesh/scene/broadphase and Sonic/Gamma source closures inspected under seventeen configurations. Source/link reach is distinguished from actual entry hits. Both public return contracts are unchanged.",
           "evidence": [
             {
-              "path": "src/engine/collision_component.cpp",
-              "line": 117,
-              "sha256": "e6a9e37e956ebe2f7a54344f5b17e447f182c8e502432ee28aeef115717ee3e5",
-              "link": "src/engine/collision_component.cpp#L117"
-            }
-          ]
-        },
-        {
-          "path": "tests/probes/native_collision_component_probe.cpp",
-          "line": 173,
-          "kind": "semantic call / value ownership, not include inference",
-          "scope": "test_reference",
-          "resolution": "C ABI scalar operation 0 calls vector_length; operation 1 judges signed_square_root separately.",
-          "evidence": [
+              "path": "reference/packets/math-length/CONTEXT.md",
+              "sha256": "31c087577f34d54078cdb9bbd28fd105b3686596f6eae866ee29cfd2319d0af8"
+            },
             {
-              "path": "tests/probes/native_collision_component_probe.cpp",
-              "line": 173,
-              "sha256": "b065feed332d3dfd95b6849d109c33415a8499cc62ce16564a0c2e35d7f281db",
-              "link": "tests/probes/native_collision_component_probe.cpp#L173"
-            }
-          ]
-        },
-        {
-          "path": "src/player/player_rotation.cpp",
-          "line": 124,
-          "kind": "semantic call / value ownership, not include inference",
-          "scope": "excluded_native_source",
-          "resolution": "Related duplicate implementation, not a caller of vector_length. Consumed by passive rotation/player collision paths; excluded native implementation, not obsolete.",
-          "evidence": [
-            {
-              "path": "src/player/player_rotation.cpp",
-              "line": 124,
-              "sha256": "87e7f62da064257f47af017e596c3c61078a1c65ca05828d8d6c73903c835cbe",
-              "link": "src/player/player_rotation.cpp#L124"
+              "path": "reference/packets/math-length/baseline-identities.json",
+              "sha256": "eae276cbd03c487676e3267207eee0d8f5195bf45bba1a8ac9bf96001b75db6b"
             }
           ]
         }
       ],
       "accepted_judges": [
         {
-          "judge": "collision_component",
-          "acceptance": "Existing source-bound scalar judge and historical qualification, not a fresh pass. Six CWs, exceptional/random binary32 inputs. Scalar subreport combines njScalor and njSqrt: 888 comparisons, zero value mismatches, 834 FP partials in both dev and holdout; do not attribute all 888 to vector_length alone. Unit receipt exit 0; full dev 7964 cases / 6462 FP partials and holdout 8864 / 6834 FP partials; both exit 2. length_sum_order mutant caught with 45 value mismatches. Current helper source hashes equal proof source_hashes.",
+          "resolution": "Independent complete-module review a9e07eb approves arithmetic/design. All seventeen full output streams and partial/failure identities preserved;1,112,371 native development contract records exact. Three valid faults caught, including same historical45-mismatch order fault. Post-review original holdout8,864 cases has zero value mismatches and6,834 unchanged FP partial identities; both scripts exit2 and full streams match.",
           "evidence": [
             {
-              "path": "tools/oracles/verify_original_collision_component.py",
-              "line": 158,
-              "sha256": "3105d7e9acaf4a5509b45cfff6753a2daf0678548b831f325fdd883a2b82c90c",
-              "link": "tools/oracles/verify_original_collision_component.py#L158",
-              "end_line": 181
+              "path": "reference/packets/math-length-review/REVIEW.md",
+              "sha256": "871eb3ab666e86f600d09d3fc4f9afc457b77400626def267ee77d63fc34e1ac"
             },
             {
-              "path": "tests/probes/native_collision_component_probe.cpp",
-              "line": 173,
-              "sha256": "b065feed332d3dfd95b6849d109c33415a8499cc62ce16564a0c2e35d7f281db",
-              "link": "tests/probes/native_collision_component_probe.cpp#L173",
-              "end_line": 189
-            },
-            {
-              "path": "reference/production-integration-20261026/collision-component-core/proof.json",
-              "line": 1,
-              "sha256": "716f6e2f2273412617adfe5e9aa4a5457c3caf760e4c5a32eb47933730361852",
-              "link": "reference/production-integration-20261026/collision-component-core/proof.json#L1"
-            },
-            {
-              "path": "reference/production-integration-20261026/collision-component-core/dev.json",
-              "line": 1,
-              "sha256": "8e50b39091784713318d34ca703e1b800cda11ad27cb97bfc7e251db8e1a42e0",
-              "link": "reference/production-integration-20261026/collision-component-core/dev.json#L1"
-            },
-            {
-              "path": "reference/production-integration-20261026/collision-component-core/holdout.json",
-              "line": 1,
-              "sha256": "df3afd5690a3ff281af79b8aa7d759e2bf969f2e36705beeb0d0fa65b93190fd",
-              "link": "reference/production-integration-20261026/collision-component-core/holdout.json#L1"
-            },
-            {
-              "path": "reference/production-integration-20261026/collision-component-core/scalar-allocation.assembly.txt",
-              "line": 1,
-              "sha256": "ba00f9629bb2bece12c425ac28640ec249dbef7c845d793f8f3bcacd80c9b261",
-              "link": "reference/production-integration-20261026/collision-component-core/scalar-allocation.assembly.txt#L1",
-              "end_line": 31
-            },
-            {
-              "path": "tests/unit/manifest.tsv",
-              "line": 282,
-              "sha256": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
-              "link": "tests/unit/manifest.tsv#L282"
-            }
-          ],
-          "limitations": "No dedicated ninja_length unit required by slug convention has been found; accepted coverage is the actual component scalar probe. Unrounded return ext80, full x87 stack/tag/deferred exceptions and all duplicate consumers are not established by binary32 scalar stores."
-        }
-      ],
-      "destination": "src/math; retain shared numerical implementation. Reference ABI, original dispatch-table selection and diagnostic PCs stay in src/guest or tests/probes, never move whole algorithm there.",
-      "findings": [
-        {
-          "id": "MATH-LENGTH-CLOSURE",
-          "path": "src/player/player_rotation.cpp",
-          "line": 124,
-          "detail": "Second maintained body implements the same recovered primitive while native component uses vector_length; old receipt alone does not close shared implementation and all callers.",
-          "required_change": "Review whether rotation_vector_length can retain API as a delegating wrapper to this shared helper under both unchanged judges; preserve exact return/store/context behavior. Root resolves outside-file consumers before declaring the system conforming.",
-          "evidence": [
-            {
-              "path": "src/player/player_rotation.cpp",
-              "line": 124,
-              "sha256": "87e7f62da064257f47af017e596c3c61078a1c65ca05828d8d6c73903c835cbe",
-              "link": "src/player/player_rotation.cpp#L124"
+              "path": "reference/packets/math-length/root-holdout.json",
+              "sha256": "51ca94b8b1d90daa0b1dce752aa371ab5300fdaa02cf20160aa782bebd5daf6b"
             }
           ]
         }
       ],
       "classification_limits": [
-        "Read-only semantic review of the exact source SHA-256 at the named base; no fresh source-fidelity pass or current native build/closure result.",
-        "Prior tracked receipts retain their bounded comparison and inherited failure status. Source equality establishes identity only.",
-        "Root must preserve full failing/partial case identities, full outputs, holdouts and mutation inputs before any behavior-bearing rewrite. Hardware Windows FP and real reciprocal-estimate capture are not supplied by these receipts.",
-        "Open disposition concerns canonical recovered implementation, not untyped arithmetic or missing mutable owner. No standalone source qualification or all-consumer closure was performed."
+        "FP partials remain partial; alternate eventground/eventair and player_reaction value/control failures remain unchanged.",
+        "Scalar888 combines444 length and444 signed-root comparisons; no888-length-only claim.",
+        "Full hardware stack/tag/deferred delivery and all mask/sticky combinations remain unverified.",
+        "Root Main frozen Sonic replay, integration gate/native closure/journeys remain pending. Private observer compiler omission is corrected as setup, not a project defect. Whole CPU/player/math-foundations/campaign remain open."
       ],
-      "authored_evidence": [
+      "evidence": [
+        {
+          "path": "src/math/ninja_length.hpp",
+          "sha256": "f9ee69d04565f8ed924809fedfcf3d6507976170a467ca4cf63745ed6d77a117"
+        },
         {
           "path": "src/math/ninja_length.cpp",
-          "line": 1,
-          "sha256": "dc803f7399f49d809d5a467e76203103da8507f08fee5306626282573b7a3c75",
-          "link": "src/math/ninja_length.cpp#L1",
-          "end_line": 14
+          "sha256": "ae490c726ca806cb2852abe60531c16686b11b16929f8b619bc98ff9d89bd132"
+        },
+        {
+          "path": "src/cpu/fidelity_float.hpp",
+          "sha256": "c96aadce5ca6caa699fb3e9a0b44f791e1ac0420b31ceed31b5fca48118afb98"
+        },
+        {
+          "path": "src/player/player_rotation.cpp",
+          "sha256": "fd2660121807b6fbda597a3d5e852087e35cdf5a76ad36724af13393984aa133"
+        },
+        {
+          "path": "reference/packets/math-length-review/REVIEW.md",
+          "sha256": "871eb3ab666e86f600d09d3fc4f9afc457b77400626def267ee77d63fc34e1ac"
+        },
+        {
+          "path": "reference/packets/math-length/root-holdout.json",
+          "sha256": "51ca94b8b1d90daa0b1dce752aa371ab5300fdaa02cf20160aa782bebd5daf6b"
         }
-      ],
-      "evidence_binding_note": "Tracked source and immutable authored fragment anchor this review; detailed external SDK/cache paths remain in authored_evidence and the fragment, rather than pretending submodule contents are tracked parent files."
+      ]
     },
     "src/math/ninja_sine_table.hpp": {
       "disposition": "already_conforming",
@@ -11050,6 +10830,100 @@
         {
           "path": "reference/packets/session-regular-resources/root-qualification.json",
           "sha256": "2586b1c9671f096a6bb42ae387cd17d3fdddb6f394310c8c4b94a7bcb2eecbb4"
+        }
+      ]
+    },
+    "src/math/ninja_length": {
+      "disposition": "already_conforming",
+      "reason": "Explicit complete two-member module approval a9e07eb and post-review holdout; broader numerical/legacy wrapper debt retained.",
+      "reviewed_members": {
+        "src/math/ninja_length.hpp": "f9ee69d04565f8ed924809fedfcf3d6507976170a467ca4cf63745ed6d77a117",
+        "src/math/ninja_length.cpp": "ae490c726ca806cb2852abe60531c16686b11b16929f8b619bc98ff9d89bd132"
+      },
+      "semantic_justification": "Complete typed vector-length API and implementation are reviewed. A single named CPU fidelity operation now serves both the ExactFloat math wrapper and retained raw legacy rotation wrapper. It preserves interleaved x/y/z loads/squares, (zz+yy)+xx, binary32 squared spill, signed-root operations and unrounded ext80 return. The math module owns no persistent state, fixture availability, guest transport, executable access or dispatch.",
+      "resolved_owners": [
+        {
+          "resolution": "Caller owns its live numeric context and vector. The shared pure CPU compatibility primitive owns no state and exposes only this specific retained result, not a generic raw getter. Legacy player wrapper remains debt outside this closed math module.",
+          "evidence": [
+            {
+              "path": "src/math/ninja_length.hpp",
+              "sha256": "f9ee69d04565f8ed924809fedfcf3d6507976170a467ca4cf63745ed6d77a117"
+            },
+            {
+              "path": "src/math/ninja_length.cpp",
+              "sha256": "ae490c726ca806cb2852abe60531c16686b11b16929f8b619bc98ff9d89bd132"
+            },
+            {
+              "path": "src/cpu/fidelity_float.hpp",
+              "sha256": "c96aadce5ca6caa699fb3e9a0b44f791e1ac0420b31ceed31b5fca48118afb98"
+            },
+            {
+              "path": "src/player/player_rotation.cpp",
+              "sha256": "fd2660121807b6fbda597a3d5e852087e35cdf5a76ad36724af13393984aa133"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Actual rotation, position/contact, acceleration variants, direction/reset/reaction, mesh/scene/broadphase and Sonic/Gamma source closures inspected under seventeen configurations. Source/link reach is distinguished from actual entry hits. Both public return contracts are unchanged.",
+          "evidence": [
+            {
+              "path": "reference/packets/math-length/CONTEXT.md",
+              "sha256": "31c087577f34d54078cdb9bbd28fd105b3686596f6eae866ee29cfd2319d0af8"
+            },
+            {
+              "path": "reference/packets/math-length/baseline-identities.json",
+              "sha256": "eae276cbd03c487676e3267207eee0d8f5195bf45bba1a8ac9bf96001b75db6b"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent complete-module review a9e07eb approves arithmetic/design. All seventeen full output streams and partial/failure identities preserved;1,112,371 native development contract records exact. Three valid faults caught, including same historical45-mismatch order fault. Post-review original holdout8,864 cases has zero value mismatches and6,834 unchanged FP partial identities; both scripts exit2 and full streams match.",
+          "evidence": [
+            {
+              "path": "reference/packets/math-length-review/REVIEW.md",
+              "sha256": "871eb3ab666e86f600d09d3fc4f9afc457b77400626def267ee77d63fc34e1ac"
+            },
+            {
+              "path": "reference/packets/math-length/root-holdout.json",
+              "sha256": "51ca94b8b1d90daa0b1dce752aa371ab5300fdaa02cf20160aa782bebd5daf6b"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "FP partials remain partial; alternate eventground/eventair and player_reaction value/control failures remain unchanged.",
+        "Scalar888 combines444 length and444 signed-root comparisons; no888-length-only claim.",
+        "Full hardware stack/tag/deferred delivery and all mask/sticky combinations remain unverified.",
+        "Root Main frozen Sonic replay, integration gate/native closure/journeys remain pending. Private observer compiler omission is corrected as setup, not a project defect. Whole CPU/player/math-foundations/campaign remain open."
+      ],
+      "evidence": [
+        {
+          "path": "src/math/ninja_length.hpp",
+          "sha256": "f9ee69d04565f8ed924809fedfcf3d6507976170a467ca4cf63745ed6d77a117"
+        },
+        {
+          "path": "src/math/ninja_length.cpp",
+          "sha256": "ae490c726ca806cb2852abe60531c16686b11b16929f8b619bc98ff9d89bd132"
+        },
+        {
+          "path": "src/cpu/fidelity_float.hpp",
+          "sha256": "c96aadce5ca6caa699fb3e9a0b44f791e1ac0420b31ceed31b5fca48118afb98"
+        },
+        {
+          "path": "src/player/player_rotation.cpp",
+          "sha256": "fd2660121807b6fbda597a3d5e852087e35cdf5a76ad36724af13393984aa133"
+        },
+        {
+          "path": "reference/packets/math-length-review/REVIEW.md",
+          "sha256": "871eb3ab666e86f600d09d3fc4f9afc457b77400626def267ee77d63fc34e1ac"
+        },
+        {
+          "path": "reference/packets/math-length/root-holdout.json",
+          "sha256": "51ca94b8b1d90daa0b1dce752aa371ab5300fdaa02cf20160aa782bebd5daf6b"
         }
       ]
     }
