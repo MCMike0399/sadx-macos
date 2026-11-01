@@ -67,5 +67,6 @@ struct TableImportResult {
     std::uint16_t required_export = 0;
 };
 
+Table initial_sonic_table();
 TableImportResult initialize_sonic_table(Table &, const SonicExports &);
 } // namespace sadx::animation

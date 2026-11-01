@@ -32,6 +32,14 @@ struct ContentSink {
 };
 } // namespace
 
+// NOTSA: the executable's Sonic table is BSS, independently of arbitrary reference fixtures.
+Table initial_sonic_table() {
+    Table table;
+    for (std::uint16_t row = 0; row < animation::kSonicRecipes.size(); ++row)
+        table.records.emplace(row, Record{});
+    return table;
+}
+
 // FUNCTION: SONIC 0x7cec90 InitializeSonicAnimationTable
 TableImportResult initialize_sonic_table(Table &table, const SonicExports &exports) {
     ContentSink sink{table, exports, {}};
