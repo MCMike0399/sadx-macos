@@ -24855,6 +24855,78 @@
     {"path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md", "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"},
     {"path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md", "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"}
    ]
+  },
+  "src/engine/d3d8_caps.hpp": {
+   "disposition": "already_conforming",
+   "reason": "Both complete files independently approved after behavior-preserving wire-record readability rewrite.",
+   "semantic_justification": "One stateless producer names D3DCAPS8 offsets and masks, zeroes the complete record, then writes the same three little-endian words. Every wire and diagnostic byte equals the immutable before-source producer. This preserves the explicit existing GPU assumption, not recovered hardware capabilities.",
+   "resolved_owners": [
+    "No persistent or source-global owner is introduced. Each call returns its value record; the actual HLE guest memory and NativeGame reference device owners retain their own copies."
+   ],
+   "resolved_consumers": [
+    "HLE adapter/device GetDeviceCaps and NativeGame reference device construction/reporting retain unchanged API and value bytes. The shipping native archive excludes this module and its resource owners are unchanged."
+   ],
+   "accepted_judges": [
+    "Unchanged exhaustive capability wire unit before/after; seven full probe records including output bounds and complete diagnostic; actual guest COM/output-guard/assumption-once and original mipmap consumer test; three valid compiled semantic faults caught by unchanged unit."
+   ],
+   "classification_limits": [
+    "Windows GPU capabilities remain uncaptured; equality preserves the stated assumption only.",
+    "Actual Main game-runtime composition and coherent integration gate remain pending; no whole renderer, product, hardware, gameplay or campaign approval."
+   ],
+   "evidence": [
+    {"path": "reference/packets/d3d8-caps/REVIEW.md", "sha256": "5e5e13505fbb70c3e5cb254c59c6063f46e6c3a87d31d41d57d1ba813ed4204e"},
+    {"path": "reference/packets/d3d8-caps/QUALIFICATION.json", "sha256": "51833c071823b201e301c0be935238fbf7f1324c7eca4c92a3528920d975537a"},
+    {"path": "reference/packets/d3d8-caps/BEFORE-OUTPUT.json", "sha256": "4903dc8e763d45a2f0b22778a49585b26cdd2e93c4a0d8c2b99b32f41c78aa95"},
+    {"path": "reference/packets/d3d8-caps/AFTER-OUTPUT.json", "sha256": "5c64218ba1aab3e163c1acefe7db49d15945d86e11aaab9690f49f8120cc8160"},
+    {"path": "reference/packets/d3d8-caps/MUTATIONS.json", "sha256": "cd114af5a1197e90fbac6f7ec54e48f08c08fb3c41ada6fb0d93405f8240dd27"}
+   ],
+   "findings": [],
+   "destination": [
+    "src/engine/d3d8_caps.hpp",
+    "src/engine/d3d8_caps.cpp"
+   ],
+   "reviewed_members": {
+    "src/engine/d3d8_caps.hpp": "34e279c58edce66d09dd9afe051632be72fb0b1ffc331cb0fa08dd0cb1df754a",
+    "src/engine/d3d8_caps.cpp": "ad7c3a3ca7e7d9ce45d3c6a400fd88cbe90545607d79ae4f9c09a808ec684b5a"
+   },
+   "complete_bounded_judgment": true,
+   "sha256": "34e279c58edce66d09dd9afe051632be72fb0b1ffc331cb0fa08dd0cb1df754a"
+  },
+  "src/engine/d3d8_caps.cpp": {
+   "disposition": "already_conforming",
+   "reason": "Both complete files independently approved after behavior-preserving wire-record readability rewrite.",
+   "semantic_justification": "One stateless producer names D3DCAPS8 offsets and masks, zeroes the complete record, then writes the same three little-endian words. Every wire and diagnostic byte equals the immutable before-source producer. This preserves the explicit existing GPU assumption, not recovered hardware capabilities.",
+   "resolved_owners": [
+    "No persistent or source-global owner is introduced. Each call returns its value record; the actual HLE guest memory and NativeGame reference device owners retain their own copies."
+   ],
+   "resolved_consumers": [
+    "HLE adapter/device GetDeviceCaps and NativeGame reference device construction/reporting retain unchanged API and value bytes. The shipping native archive excludes this module and its resource owners are unchanged."
+   ],
+   "accepted_judges": [
+    "Unchanged exhaustive capability wire unit before/after; seven full probe records including output bounds and complete diagnostic; actual guest COM/output-guard/assumption-once and original mipmap consumer test; three valid compiled semantic faults caught by unchanged unit."
+   ],
+   "classification_limits": [
+    "Windows GPU capabilities remain uncaptured; equality preserves the stated assumption only.",
+    "Actual Main game-runtime composition and coherent integration gate remain pending; no whole renderer, product, hardware, gameplay or campaign approval."
+   ],
+   "evidence": [
+    {"path": "reference/packets/d3d8-caps/REVIEW.md", "sha256": "5e5e13505fbb70c3e5cb254c59c6063f46e6c3a87d31d41d57d1ba813ed4204e"},
+    {"path": "reference/packets/d3d8-caps/QUALIFICATION.json", "sha256": "51833c071823b201e301c0be935238fbf7f1324c7eca4c92a3528920d975537a"},
+    {"path": "reference/packets/d3d8-caps/BEFORE-OUTPUT.json", "sha256": "4903dc8e763d45a2f0b22778a49585b26cdd2e93c4a0d8c2b99b32f41c78aa95"},
+    {"path": "reference/packets/d3d8-caps/AFTER-OUTPUT.json", "sha256": "5c64218ba1aab3e163c1acefe7db49d15945d86e11aaab9690f49f8120cc8160"},
+    {"path": "reference/packets/d3d8-caps/MUTATIONS.json", "sha256": "cd114af5a1197e90fbac6f7ec54e48f08c08fb3c41ada6fb0d93405f8240dd27"}
+   ],
+   "findings": [],
+   "destination": [
+    "src/engine/d3d8_caps.hpp",
+    "src/engine/d3d8_caps.cpp"
+   ],
+   "reviewed_members": {
+    "src/engine/d3d8_caps.hpp": "34e279c58edce66d09dd9afe051632be72fb0b1ffc331cb0fa08dd0cb1df754a",
+    "src/engine/d3d8_caps.cpp": "ad7c3a3ca7e7d9ce45d3c6a400fd88cbe90545607d79ae4f9c09a808ec684b5a"
+   },
+   "complete_bounded_judgment": true,
+   "sha256": "ad7c3a3ca7e7d9ce45d3c6a400fd88cbe90545607d79ae4f9c09a808ec684b5a"
   }
  },
  "external_reference_sources": [
@@ -35501,6 +35573,41 @@
    "reviewed_members": {
     "src/player/animation/animation_state_binding.hpp": "302ef0630fbbe17cbf62c3bfed4a17cddfc8bd921b66eccbd126784f5a2814c7"
    }
+  },
+  "src/engine/d3d8_caps": {
+   "disposition": "already_conforming",
+   "reason": "Both complete files independently approved after behavior-preserving wire-record readability rewrite.",
+   "semantic_justification": "One stateless producer names D3DCAPS8 offsets and masks, zeroes the complete record, then writes the same three little-endian words. Every wire and diagnostic byte equals the immutable before-source producer. This preserves the explicit existing GPU assumption, not recovered hardware capabilities.",
+   "resolved_owners": [
+    "No persistent or source-global owner is introduced. Each call returns its value record; the actual HLE guest memory and NativeGame reference device owners retain their own copies."
+   ],
+   "resolved_consumers": [
+    "HLE adapter/device GetDeviceCaps and NativeGame reference device construction/reporting retain unchanged API and value bytes. The shipping native archive excludes this module and its resource owners are unchanged."
+   ],
+   "accepted_judges": [
+    "Unchanged exhaustive capability wire unit before/after; seven full probe records including output bounds and complete diagnostic; actual guest COM/output-guard/assumption-once and original mipmap consumer test; three valid compiled semantic faults caught by unchanged unit."
+   ],
+   "classification_limits": [
+    "Windows GPU capabilities remain uncaptured; equality preserves the stated assumption only.",
+    "Actual Main game-runtime composition and coherent integration gate remain pending; no whole renderer, product, hardware, gameplay or campaign approval."
+   ],
+   "evidence": [
+    {"path": "reference/packets/d3d8-caps/REVIEW.md", "sha256": "5e5e13505fbb70c3e5cb254c59c6063f46e6c3a87d31d41d57d1ba813ed4204e"},
+    {"path": "reference/packets/d3d8-caps/QUALIFICATION.json", "sha256": "51833c071823b201e301c0be935238fbf7f1324c7eca4c92a3528920d975537a"},
+    {"path": "reference/packets/d3d8-caps/BEFORE-OUTPUT.json", "sha256": "4903dc8e763d45a2f0b22778a49585b26cdd2e93c4a0d8c2b99b32f41c78aa95"},
+    {"path": "reference/packets/d3d8-caps/AFTER-OUTPUT.json", "sha256": "5c64218ba1aab3e163c1acefe7db49d15945d86e11aaab9690f49f8120cc8160"},
+    {"path": "reference/packets/d3d8-caps/MUTATIONS.json", "sha256": "cd114af5a1197e90fbac6f7ec54e48f08c08fb3c41ada6fb0d93405f8240dd27"}
+   ],
+   "findings": [],
+   "destination": [
+    "src/engine/d3d8_caps.hpp",
+    "src/engine/d3d8_caps.cpp"
+   ],
+   "reviewed_members": {
+    "src/engine/d3d8_caps.hpp": "34e279c58edce66d09dd9afe051632be72fb0b1ffc331cb0fa08dd0cb1df754a",
+    "src/engine/d3d8_caps.cpp": "ad7c3a3ca7e7d9ce45d3c6a400fd88cbe90545607d79ae4f9c09a808ec684b5a"
+   },
+   "complete_bounded_judgment": true
   }
  },
  "stub_binding_review_files": [
