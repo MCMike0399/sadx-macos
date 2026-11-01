@@ -2,5 +2,6 @@
   "failed_preflight": "tools/inventory/refactor_inventory.py --write rejected missing reviewed_source_sha256 at e900801; before emitting regenerated inventory.",
   "correction": "Use the existing reviewed_source_sha256 per-file contract, with exact source hashes, read line counts and explicit complete member list. No Source/review/evaluator changes.",
   "source_changed": false,
-  "review_findings_changed": false
+  "review_findings_changed": false,
+  "second_preflight": "The next render rejected a list-valued per-file destination; corrected each file destination to its single string path. Module destination remains the exact two-file set. No checker/Source changes."
 }
