@@ -1,0 +1,56 @@
+{
+  "source_commit": "4d223fa",
+  "baseline_commit": "c078948",
+  "registered_commit": "567dd28",
+  "native_observations": 25,
+  "valid_mutants_caught": 6,
+  "native_build": {
+    "initial_exit": 2,
+    "corrected_exit": 0,
+    "closure": "PASS",
+    "command": "make -j2 -o build/native-controller-deps/include/SDL3/SDL.h build/libsadx-native.a native-closure build/sadx-native",
+    "initial_failure": "Overlapping field-name substitution corrupted two loaded-count accesses; corrected at4d223fa. Source comparator now uses identifier boundaries and records all five source hashes.",
+    "reused": "Existing same-worktree source objects for unchanged modules and pinned controller dependency installation; affected source/header consumers rebuilt."
+  },
+  "original_judges": {
+    "character_textures": {
+      "cases": 5297,
+      "value_mismatches": 0,
+      "exit": 0
+    },
+    "selection_preview": {
+      "cases": 1608,
+      "value_mismatches": 0,
+      "fp_partials": 0,
+      "exit": 0
+    },
+    "gamma_selection_core": {
+      "cases": 1422,
+      "value_mismatches": 0,
+      "fp_partial_cases": 498,
+      "exit": 2
+    },
+    "game_cleanup": {
+      "cases": 2604,
+      "mismatch_count": 0,
+      "exit": 0
+    }
+  },
+  "aggregate_oracle_make_exit": 2,
+  "gamma_additional_observer": {
+    "cases": 1422,
+    "full_outputs_identical": true,
+    "fp_partial_identities_preserved": 498,
+    "before_library": "Pinned copy of Main92dbd07 source probe compiled in completed gate attempt before character-source integration; Main source unchanged throughc2d2355.",
+    "scope": "Additional comparison exits0 while unchanged original Gamma verdict remains partial."
+  },
+  "remaining": [
+    "Actual private native journeys currently running",
+    "Fresh independent STYLE12 review",
+    "Root final cohort and composite integration/gate"
+  ],
+  "limits": [
+    "Native reduced-host attachment/initialization baseline, not Windows constructor parity.",
+    "Actor/rendering/source lower-callee receipts remain bounded; no native CharacterSelect completion, gameplay or whole Session/campaign claim."
+  ]
+}

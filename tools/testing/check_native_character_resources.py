@@ -3,6 +3,7 @@
 import argparse
 import hashlib
 import json
+import re
 from pathlib import Path
 import subprocess
 
@@ -57,12 +58,18 @@ def source_binding():
     expected = old('src/runtime/native_selection_preview.cpp')
     for name, member in [('texture_assets_', 'assets()'), ('character_textures_', 'lists()'),
                          ('character_textures_loaded_', 'loaded()')]:
-        expected = expected.replace('scene.session_.' + name, 'scene.session_.character_resources_.' + member)
+        expected = re.sub(r'\bscene\.session_\.' + re.escape(name) + r'\b',
+                          'scene.session_.character_resources_.' + member, expected)
     assert expected == (ROOT / 'src/runtime/native_selection_preview.cpp').read_text()
     return {'loop_sha256': hashlib.sha256(loop.encode()).hexdigest(),
             'frozen_body_exact': True, 'owner_fields_exact': True,
             'session_and_preview_forwarding_exact': True,
-            'metadata_copy_and_body_initialization_boundaries_preserved': True}
+            'metadata_copy_and_body_initialization_boundaries_preserved': True,
+            'identifier_boundaries_checked': True,
+            'source_sha256': {path: hashlib.sha256((ROOT / path).read_bytes()).hexdigest() for path in
+                             [SOURCE, 'src/runtime/native_character_resources.hpp',
+                              'src/runtime/native_session.hpp', 'src/runtime/native_session.cpp',
+                              'src/runtime/native_selection_preview.cpp']}}
 
 
 def run(command):
@@ -83,19 +90,30 @@ def main():
         built = run(command); report['builds'].append(built); assert built['exit'] == 0, built
         result = run([binary]); report['builds'].append(result); assert result['exit'] == 0, result
         assert result['stdout'] == (ROOT / 'reference/packets/session-character-resources/native-baseline.txt').read_text()
-    original = (ROOT / SOURCE).read_text()
-    for name, before, after in MUTANTS:
+    targets = [(name, SOURCE, before, after) for name, before, after in MUTANTS]
+    targets.append(('eager-constructor-binding', 'src/runtime/native_character_resources.hpp',
+                    'texture_assets_(assets) {}', 'texture_assets_(assets) { initialize(); }'))
+    for name, path, before, after in targets:
+        original = (ROOT / path).read_text()
         assert original.count(before) == 1, name
-        source = folder / (name + '.cpp'); source.write_text(original.replace(before, after))
-        binary = folder / name
-        built = run(FLAGS + [TEST, 'src/game/game_cleanup.cpp', source, '-o', binary])
+        includes = []
+        if path.endswith('.hpp'):
+            include = folder / name / 'include'
+            candidate = include / 'runtime/native_character_resources.hpp'
+            candidate.parent.mkdir(parents=True, exist_ok=True)
+            source = SOURCE; includes = ['-I' + str(include)]
+        else:
+            candidate = folder / (name + '.cpp'); source = candidate
+        candidate.write_text(original.replace(before, after))
+        binary = folder / (name + '-test')
+        built = run(FLAGS[:2] + includes + FLAGS[2:] + [TEST, 'src/game/game_cleanup.cpp', source, '-o', binary])
         record = {'name': name, 'build': built}; assert built['exit'] == 0, record
         record['run'] = run([binary]); assert record['run']['exit'] != 0, record
         report['mutants'].append(record)
     report['limits'] = ['Native reduced-host binding baseline; not Windows attachment or actual Session runtime.',
                         'No full native build, original oracle, final holdout or integration gate run by this checker.']
     (folder / 'qualification.json').write_text(json.dumps(report, indent=2) + '\n')
-    print('25 observations match; exact binding/forwarding source preserved; five compiled mutants caught.')
+    print('25 observations match; exact binding/forwarding source preserved; six compiled mutants caught.')
 
 
 if __name__ == '__main__':

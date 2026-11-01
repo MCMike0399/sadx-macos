@@ -4,7 +4,15 @@
     "frozen_body_exact": true,
     "owner_fields_exact": true,
     "session_and_preview_forwarding_exact": true,
-    "metadata_copy_and_body_initialization_boundaries_preserved": true
+    "metadata_copy_and_body_initialization_boundaries_preserved": true,
+    "identifier_boundaries_checked": true,
+    "source_sha256": {
+      "src/runtime/native_character_resources.cpp": "63cd4b447cbd29773eed17a6e74db7d4b5eed4df29538fb21fae51548283b070",
+      "src/runtime/native_character_resources.hpp": "f5f2436b8419b15b39d029babbb9a2e54095e01db23f1ff8ae6071b374fe1bac",
+      "src/runtime/native_session.hpp": "847a6c56ebe9ad8e549e43a2d5a62e931210b6c841172bda90fb3b70f388afe2",
+      "src/runtime/native_session.cpp": "0276e3c085a35526c97f243131389e1d549c2e546a01560bc27b0f2f68c01d49",
+      "src/runtime/native_selection_preview.cpp": "7e87d4ce716df319922ff55b59a0710acd9334cd910fdbad990e1dcea46cbe52"
+    }
   },
   "builds": [
     {
@@ -90,7 +98,7 @@
           "src/game/game_cleanup.cpp",
           "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/collapse-character-alias.cpp",
           "-o",
-          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/collapse-character-alias"
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/collapse-character-alias-test"
         ],
         "exit": 0,
         "stdout": "",
@@ -98,7 +106,7 @@
       },
       "run": {
         "command": [
-          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/collapse-character-alias"
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/collapse-character-alias-test"
         ],
         "exit": -6,
         "stdout": "",
@@ -124,7 +132,7 @@
           "src/game/game_cleanup.cpp",
           "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/allow-zero-declaration.cpp",
           "-o",
-          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/allow-zero-declaration"
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/allow-zero-declaration-test"
         ],
         "exit": 0,
         "stdout": "",
@@ -132,7 +140,7 @@
       },
       "run": {
         "command": [
-          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/allow-zero-declaration"
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/allow-zero-declaration-test"
         ],
         "exit": -6,
         "stdout": "",
@@ -158,7 +166,7 @@
           "src/game/game_cleanup.cpp",
           "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/publish-before-lists.cpp",
           "-o",
-          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/publish-before-lists"
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/publish-before-lists-test"
         ],
         "exit": 0,
         "stdout": "",
@@ -166,7 +174,7 @@
       },
       "run": {
         "command": [
-          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/publish-before-lists"
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/publish-before-lists-test"
         ],
         "exit": -6,
         "stdout": "",
@@ -192,7 +200,7 @@
           "src/game/game_cleanup.cpp",
           "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/invent-loaded-byte.cpp",
           "-o",
-          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/invent-loaded-byte"
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/invent-loaded-byte-test"
         ],
         "exit": 0,
         "stdout": "",
@@ -200,7 +208,7 @@
       },
       "run": {
         "command": [
-          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/invent-loaded-byte"
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/invent-loaded-byte-test"
         ],
         "exit": -6,
         "stdout": "",
@@ -226,7 +234,7 @@
           "src/game/game_cleanup.cpp",
           "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/omit-final-character.cpp",
           "-o",
-          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/omit-final-character"
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/omit-final-character-test"
         ],
         "exit": 0,
         "stdout": "",
@@ -234,11 +242,46 @@
       },
       "run": {
         "command": [
-          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/omit-final-character"
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/omit-final-character-test"
         ],
         "exit": -6,
         "stdout": "",
         "stderr": "libc++abi: terminating due to uncaught exception of type std::runtime_error: native character texture declarations disagree with list owners\n"
+      }
+    },
+    {
+      "name": "eager-constructor-binding",
+      "build": {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-I/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/eager-constructor-binding/include",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-Isrc",
+          "-Itests/fixtures",
+          "tests/unit/native_character_resources.cpp",
+          "src/game/game_cleanup.cpp",
+          "src/runtime/native_character_resources.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/eager-constructor-binding-test"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "run": {
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-11689037/build/character-resources/check/eager-constructor-binding-test"
+        ],
+        "exit": -6,
+        "stdout": "",
+        "stderr": "Assertion failed: (!binding), function exercise, file native_character_resources.cpp, line 55.\n"
       }
     }
   ],
