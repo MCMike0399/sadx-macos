@@ -59,8 +59,8 @@ void check_binding(const std::filesystem::path &directory) {
         assets.declarations[61].status == native::ActorResourceStatus::KnownNull &&
         assets.declarations[1].status == native::ActorResourceStatus::Unavailable &&
         !assets.declarations[1].boundary.empty(), "complete imported table preserves resource states");
-    require(!assets.animation_table->records.at(1).action &&
-        assets.animation_table->records.at(0).action->id == assets.stand.identity,
+    require(assets.animation_table->records.at(1).action.status == animation::ResourceStatus::Unavailable &&
+        assets.animation_table->records.at(0).action.identity == assets.stand.identity,
         "unavailable animation must not become a known-null or stand substitute");
     TaskScheduler scheduler;
     auto arena = std::make_shared<TaskWorkArena>();

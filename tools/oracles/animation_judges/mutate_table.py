@@ -1,4 +1,4 @@
-"""Compile table faults against old actual algorithm and run the full new judge."""
+"""Compile table faults against the shared initializer and run the full new judge."""
 import argparse
 import json
 import pathlib

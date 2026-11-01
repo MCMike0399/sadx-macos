@@ -26,30 +26,30 @@ int main(int argc, char** argv) {
                     "78 declarations with source null export 61");
             require(assets.declarations[0].status == native::ActorResourceStatus::Loaded &&
                     assets.declarations[0].action.identity == assets.stand.identity &&
-                    assets.animation_table->records.at(0).action->id == assets.stand.identity,
+                    assets.animation_table->records.at(0).action.identity == assets.stand.identity,
                     "request zero is the imported Stand identity");
             require(assets.recipes[72].resource.status == native::ActorResourceStatus::Unavailable &&
                     !assets.recipes[72].resource.boundary.empty() &&
-                    !assets.animation_table->records.at(72).action,
+                    assets.animation_table->records.at(72).action.status == animation::ResourceStatus::Unavailable,
                     "constructed row 72 stays explicitly unavailable");
             for (unsigned index = 0; index < 91; ++index) {
                 const auto& recipe = assets.recipes[index];
                 const auto& row = assets.animation_table->records.at(index);
                 const auto status = recipe.resource.status;
-                require(row.object_count == recipe.object_count && row.mode == recipe.mode && row.next == recipe.next &&
-                        row.transition_step && bits(*row.transition_step) == bits(recipe.transition) &&
-                        row.frame_step && bits(*row.frame_step) == bits(recipe.speed), "all scalar metadata survives unavailable payloads");
+                require(row.object_count == recipe.object_count && static_cast<std::int8_t>(row.mode) == recipe.mode && row.next == recipe.next &&
+                        bits(row.transition_step) == bits(recipe.transition) &&
+                        bits(row.frame_step) == bits(recipe.speed), "all scalar metadata survives unavailable payloads");
                 if (status == native::ActorResourceStatus::Loaded)
-                    require(row.action && row.action->id == recipe.resource.action.identity, "loaded action identity");
+                    require(row.action.status == animation::ResourceStatus::Loaded && row.action.identity == recipe.resource.action.identity, "loaded action identity");
                 else if (status == native::ActorResourceStatus::KnownNull)
-                    require(row.action && !row.action->id, "known null remains known");
+                    require(row.action.status == animation::ResourceStatus::KnownNull, "known null remains known");
                 else
-                    require(!row.action && !recipe.resource.boundary.empty(), "unavailable is not known null");
+                    require(row.action.status == animation::ResourceStatus::Unavailable && row.action.unavailable_reason == recipe.resource.boundary && !recipe.resource.boundary.empty(), "unavailable is not known null");
                 std::cout << index << ' ' << static_cast<unsigned>(status) << ' '
-                          << (row.action ? (row.action->id ? 2 : 1) : 0) << ' '
-                          << (row.action && row.action->id ? *row.action->id : 0) << ' '
-                          << static_cast<unsigned>(*row.object_count) << ' ' << static_cast<int>(*row.mode) << ' '
-                          << *row.next << ' ' << bits(*row.transition_step) << ' ' << bits(*row.frame_step) << ' '
+                          << (row.action.status == animation::ResourceStatus::Loaded ? 2 : row.action.status == animation::ResourceStatus::KnownNull ? 1 : 0) << ' '
+                          << (row.action.status == animation::ResourceStatus::Loaded ? row.action.identity : 0) << ' '
+                          << static_cast<unsigned>(row.object_count) << ' ' << static_cast<int>(row.mode) << ' '
+                          << row.next << ' ' << bits(row.transition_step) << ' ' << bits(row.frame_step) << ' '
                           << recipe.resource.boundary << '\n';
             }
             std::cerr << "91 Gamma imported metadata/status rows characterized; PSetMotion remains unrecovered\n";

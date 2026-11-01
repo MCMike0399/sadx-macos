@@ -1,0 +1,529 @@
+[
+  {
+    "slug": "player_animation_decode",
+    "commands": [
+      {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Ithird_party/bochs_fpatan",
+          "-Ithird_party/bochs_fpatan/source",
+          "-Ithird_party/bochs_fpatan/source/softfloat3e/include",
+          "tests/unit/player_animation_decode.cpp",
+          "src/guest/player_animation_decode_reference.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-contract/units-canonical/player_animation_decode"
+        ],
+        "exit_status": 0,
+        "output": ""
+      },
+      {
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-contract/units-canonical/player_animation_decode",
+          "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/system/CHRMODELS_orig.dll"
+        ],
+        "exit_status": 0,
+        "output": "Animation PE export/graph/key ranges and explicit artifact namespaces passed\n"
+      }
+    ],
+    "executable_sha256": "d51a497baeddf2efb0431188598164ba5d88376847b93b4edd105a1898603bea",
+    "input_hashes": {
+      "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/system/CHRMODELS_orig.dll": "76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5"
+    },
+    "unit_source_sha256": "14578230b077cd945f685772c0fb2f01c7b0bbe823ab19317a70a8e416fab2d1",
+    "exit_status": 0
+  },
+  {
+    "slug": "player_animation",
+    "commands": [
+      {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Ithird_party/bochs_fpatan",
+          "-Ithird_party/bochs_fpatan/source",
+          "-Ithird_party/bochs_fpatan/source/softfloat3e/include",
+          "tests/unit/player_animation.cpp",
+          "src/player/player_animation.cpp",
+          "src/player/player_animation_blend.cpp",
+          "src/engine/task_work.cpp",
+          "src/cpu/x87_math.cpp",
+          "src/cpu/crt_integer.cpp",
+          "src/guest/player_animation_reference.cpp",
+          "src/guest/player_animation_decode_reference.cpp",
+          "src/player/sonic_animation_table.cpp",
+          "src/guest/sonic_animation_table_reference.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-judges/softfloat/softfloat.a",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-contract/units-canonical/player_animation"
+        ],
+        "exit_status": 0,
+        "output": ""
+      },
+      {
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-contract/units-canonical/player_animation",
+          "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/system/CHRMODELS_orig.dll",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7dfc86b6/reference/oracle-reports/player_animation.constants.bin"
+        ],
+        "exit_status": 0,
+        "output": "Animation real DLL147-record table,73-node transition/key release and12 FP profiles passed; 146 actions, 139 motions, 223 objects, 3650 key arrays decoded\n"
+      }
+    ],
+    "executable_sha256": "437c30dd03076cb2dc1db87799272c63ab07705b75b5a1c0e298704c900a08ff",
+    "input_hashes": {
+      "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/system/CHRMODELS_orig.dll": "76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7dfc86b6/reference/oracle-reports/player_animation.constants.bin": "d9ca6d900b4ec0c2256d5aaeca6d9fe83a0bdc9d6f3c49d301a3402162311473"
+    },
+    "unit_source_sha256": "9b77b459bb0212787aa9b0e4ba9ba5fabb0b2d02fca4ab2ec25b9fb5080977d1",
+    "exit_status": 0
+  },
+  {
+    "slug": "player_initialization",
+    "commands": [
+      {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Ithird_party/bochs_fpatan",
+          "-Ithird_party/bochs_fpatan/source",
+          "-Ithird_party/bochs_fpatan/source/softfloat3e/include",
+          "tests/unit/player_initialization.cpp",
+          "src/player/player_startup.cpp",
+          "src/player/player_state.cpp",
+          "src/player/player_task.cpp",
+          "src/guest/player_initialization_reference.cpp",
+          "src/engine/task.cpp",
+          "src/engine/task_work.cpp",
+          "src/cpu/x87_math.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-judges/softfloat/softfloat.a",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-contract/units-canonical/player_initialization"
+        ],
+        "exit_status": 0,
+        "output": ""
+      },
+      {
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-contract/units-canonical/player_initialization"
+        ],
+        "exit_status": 0,
+        "output": "Actual flags6/7 primary binding, canonical pose aliases, typed startup and explicit auxiliary boundary pass\n"
+      }
+    ],
+    "executable_sha256": "58aca5d98dc88afdd6ec92519b683aaff22fab7474c8788940e20541759e8d70",
+    "input_hashes": {},
+    "unit_source_sha256": "c05c93b7c6f4ae625b8ad290799ab6a15953573051afb8ab9cd3beacc1074368",
+    "exit_status": 0
+  },
+  {
+    "slug": "player_startup",
+    "commands": [
+      {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Ithird_party/bochs_fpatan",
+          "-Ithird_party/bochs_fpatan/source",
+          "-Ithird_party/bochs_fpatan/source/softfloat3e/include",
+          "tests/unit/player_startup.cpp",
+          "src/player/player_startup.cpp",
+          "src/player/player_state.cpp",
+          "src/player/player_task.cpp",
+          "src/guest/player_initialization_reference.cpp",
+          "src/engine/task.cpp",
+          "src/engine/task_work.cpp",
+          "src/cpu/x87_math.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-judges/softfloat/softfloat.a",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-contract/units-canonical/player_startup"
+        ],
+        "exit_status": 0,
+        "output": ""
+      },
+      {
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-contract/units-canonical/player_startup",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7dfc86b6/build/animation-judges/assets/player-parameters.bin"
+        ],
+        "exit_status": 0,
+        "output": "Player startup: real allocation/registration prefix, live aliases, source events and retained boundaries passed.\n"
+      }
+    ],
+    "executable_sha256": "bf0d1254e833e3d5e1a5467e340303f97981a70806f2a1cd0d685fd6af3036f8",
+    "input_hashes": {
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7dfc86b6/build/animation-judges/assets/player-parameters.bin": "3f69076118fcc6a77c55e600eb337944eb6562e5b0979104b58058ad64ba5107"
+    },
+    "unit_source_sha256": "3c433f9b0e965f581e9982a854c2425b471aac472fe0d787b1d2bf711c0bd218",
+    "exit_status": 0
+  },
+  {
+    "slug": "sonic_player",
+    "commands": [
+      {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Ithird_party/bochs_fpatan",
+          "-Ithird_party/bochs_fpatan/source",
+          "-Ithird_party/bochs_fpatan/source/softfloat3e/include",
+          "-include",
+          "tests/reference/actor_current_fixture.hpp",
+          "-c",
+          "tests/unit/sonic_player.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-contract/units-canonical/sonic_player-frozen-unit.o"
+        ],
+        "exit_status": 0,
+        "output": ""
+      },
+      {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Ithird_party/bochs_fpatan",
+          "-Ithird_party/bochs_fpatan/source",
+          "-Ithird_party/bochs_fpatan/source/softfloat3e/include",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-contract/units-canonical/sonic_player-frozen-unit.o",
+          "src/player/player_animation.cpp",
+          "src/player/player_animation_blend.cpp",
+          "src/engine/task_work.cpp",
+          "src/cpu/x87_math.cpp",
+          "src/cpu/crt_integer.cpp",
+          "src/guest/player_animation_reference.cpp",
+          "src/player/player_startup.cpp",
+          "src/player/player_state.cpp",
+          "src/player/player_task.cpp",
+          "src/guest/player_initialization_reference.cpp",
+          "src/engine/task.cpp",
+          "src/player/sonic_player.cpp",
+          "src/player/actor_current.cpp",
+          "src/player/player_hold.cpp",
+          "src/player/player_motion.cpp",
+          "src/player/player_input.cpp",
+          "src/player/player_coordinates.cpp",
+          "src/player/player_movement.cpp",
+          "src/player/player_position.cpp",
+          "src/player/player_rotation.cpp",
+          "src/player/player_projection.cpp",
+          "src/player/player_acceleration_air.cpp",
+          "src/guest/player_acceleration_ground.cpp",
+          "src/guest/player_acceleration_friction.cpp",
+          "src/player/ground_acceleration.cpp",
+          "src/player/ground_friction.cpp",
+          "src/player/floor_angles.cpp",
+          "src/engine/ninja_matrix.cpp",
+          "src/math/ninja_math.cpp",
+          "src/cpu/x87_transcendental.cpp",
+          "src/cpu/crt_asin.cpp",
+          "src/engine/game_controller.cpp",
+          "src/player/player_heading.cpp",
+          "src/player/player_speed.cpp",
+          "src/cpu/crt_argument.cpp",
+          "src/cpu/crt_acos.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-judges/softfloat/softfloat.a",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-judges/bochs/libbochs_fpatan.a",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-contract/units-canonical/sonic_player"
+        ],
+        "exit_status": 0,
+        "output": ""
+      },
+      {
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-contract/units-canonical/sonic_player",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7dfc86b6/build/animation-judges/assets/sonic-player-constants.bin",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7dfc86b6/build/animation-judges/assets/sonic-action-dispatch.bin",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7dfc86b6/build/animation-judges/assets/ninja-trig.f32",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7dfc86b6/build/animation-judges/assets/ninja-unit.f32"
+        ],
+        "exit_status": 0,
+        "output": "Sonic control dispatch and source availability tests passed across 12 explicit CW profiles\n"
+      }
+    ],
+    "executable_sha256": "0ff6d0e1e122211c5ae9f2db49a22659808aeef55f4a9ae9424c7c5506e7cd7d",
+    "input_hashes": {
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7dfc86b6/build/animation-judges/assets/sonic-player-constants.bin": "cac3a43b8a00509706505b79771f4f9c2ec6b500a925b2cb4820b611fffe34b7",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7dfc86b6/build/animation-judges/assets/sonic-action-dispatch.bin": "e78b7fb8a08356eca526539587e821b2ac2a642a623411ad374f1cfee846ab77",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7dfc86b6/build/animation-judges/assets/ninja-trig.f32": "3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7dfc86b6/build/animation-judges/assets/ninja-unit.f32": "5998e9d1dd9bf48af6af87a1ef8c7783b818ac8329637ada08cc5fb329042376"
+    },
+    "unit_source_sha256": "c8696302d5c10c310aaf98058625bdb903841cec436661d9114a96961a817457",
+    "exit_status": 0
+  },
+  {
+    "slug": "sonic_animation_table",
+    "commands": [
+      {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Ithird_party/bochs_fpatan",
+          "-Ithird_party/bochs_fpatan/source",
+          "-Ithird_party/bochs_fpatan/source/softfloat3e/include",
+          "tests/unit/sonic_animation_table.cpp",
+          "src/player/sonic_animation_table.cpp",
+          "src/guest/sonic_animation_table_reference.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-contract/units-canonical/sonic_animation_table"
+        ],
+        "exit_status": 0,
+        "output": ""
+      },
+      {
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-contract/units-canonical/sonic_animation_table"
+        ],
+        "exit_status": 0,
+        "output": "Sonic animation initializer preserved actual instruction write order, late unknowns, observed nulls and147 records\n"
+      }
+    ],
+    "executable_sha256": "ccb31173a67fab0faa62b84cf72ec5f76a91b24d457d786fa5748e6f2748674a",
+    "input_hashes": {},
+    "unit_source_sha256": "eb232f14205aa862b3e831ff338204f3d64acef62bf6a92be6c7a90268db1ee0",
+    "exit_status": 0
+  },
+  {
+    "slug": "gamma_selection_core",
+    "commands": [
+      {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Ithird_party/bochs_fpatan",
+          "-Ithird_party/bochs_fpatan/source",
+          "-Ithird_party/bochs_fpatan/source/softfloat3e/include",
+          "tests/unit/gamma_selection_core.cpp",
+          "src/player/player_startup.cpp",
+          "src/player/player_state.cpp",
+          "src/player/player_task.cpp",
+          "src/guest/player_initialization_reference.cpp",
+          "src/engine/task.cpp",
+          "src/engine/task_work.cpp",
+          "src/cpu/x87_math.cpp",
+          "src/player/gamma_selection_core.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-judges/softfloat/softfloat.a",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-contract/units-canonical/gamma_selection_core"
+        ],
+        "exit_status": 0,
+        "output": ""
+      },
+      {
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-contract/units-canonical/gamma_selection_core"
+        ],
+        "exit_status": 0,
+        "output": "PASS: real Gamma mode 0, ID 2, task/motion/PInitialize ownership and common tail\n"
+      }
+    ],
+    "executable_sha256": "150d6970438000322f278045fe410007c44ea70ff052dadf9d91cf182c35f770",
+    "input_hashes": {},
+    "unit_source_sha256": "d6aadb3b53e94fed35b696822e1271b7eb2e23d5e908a5e0bf8b8ce4ea144db1",
+    "exit_status": 0
+  },
+  {
+    "slug": "sonic_player_native",
+    "commands": [
+      {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Ithird_party/bochs_fpatan",
+          "-Ithird_party/bochs_fpatan/source",
+          "-Ithird_party/bochs_fpatan/source/softfloat3e/include",
+          "-include",
+          "tests/reference/actor_current_fixture.hpp",
+          "-c",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-contract/units-canonical/frozen-sonic-native-contract.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-contract/units-canonical/sonic_player_native-frozen-unit.o"
+        ],
+        "exit_status": 0,
+        "output": ""
+      },
+      {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-arch",
+          "arm64",
+          "-mmacosx-version-min=14.0",
+          "-Isrc",
+          "-Ithird_party/bochs_fpatan",
+          "-Ithird_party/bochs_fpatan/source",
+          "-Ithird_party/bochs_fpatan/source/softfloat3e/include",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-contract/units-canonical/sonic_player_native-frozen-unit.o",
+          "src/player/player_animation.cpp",
+          "src/player/player_animation_blend.cpp",
+          "src/engine/task_work.cpp",
+          "src/cpu/x87_math.cpp",
+          "src/cpu/crt_integer.cpp",
+          "src/guest/player_animation_reference.cpp",
+          "src/player/player_startup.cpp",
+          "src/player/player_state.cpp",
+          "src/player/player_task.cpp",
+          "src/guest/player_initialization_reference.cpp",
+          "src/engine/task.cpp",
+          "src/player/sonic_player.cpp",
+          "src/player/actor_current.cpp",
+          "src/player/player_hold.cpp",
+          "src/player/player_motion.cpp",
+          "src/player/player_input.cpp",
+          "src/player/player_coordinates.cpp",
+          "src/player/player_movement.cpp",
+          "src/player/player_position.cpp",
+          "src/player/player_rotation.cpp",
+          "src/player/player_projection.cpp",
+          "src/player/player_acceleration_air.cpp",
+          "src/guest/player_acceleration_ground.cpp",
+          "src/guest/player_acceleration_friction.cpp",
+          "src/player/ground_acceleration.cpp",
+          "src/player/ground_friction.cpp",
+          "src/player/floor_angles.cpp",
+          "src/engine/ninja_matrix.cpp",
+          "src/math/ninja_math.cpp",
+          "src/cpu/x87_transcendental.cpp",
+          "src/cpu/crt_asin.cpp",
+          "src/engine/game_controller.cpp",
+          "src/player/player_heading.cpp",
+          "src/player/player_speed.cpp",
+          "src/cpu/crt_argument.cpp",
+          "src/cpu/crt_acos.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-judges/softfloat/softfloat.a",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-judges/bochs/libbochs_fpatan.a",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-contract/units-canonical/sonic_player_native"
+        ],
+        "exit_status": 0,
+        "output": ""
+      },
+      {
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/animation-contract/units-canonical/sonic_player_native",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7dfc86b6/build/animation-judges/assets/sonic-player-constants.bin",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7dfc86b6/build/animation-judges/assets/sonic-action-dispatch.bin",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7dfc86b6/build/animation-judges/assets/ninja-trig.f32",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7dfc86b6/build/animation-judges/assets/ninja-unit.f32"
+        ],
+        "exit_status": 0,
+        "output": "Sonic control dispatch and source availability tests passed across 12 explicit CW profiles\n"
+      }
+    ],
+    "executable_sha256": "df3c00d7c0a14357939c140c957b8c1b313e4f905605b12709ecd17907b1237a",
+    "input_hashes": {
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7dfc86b6/build/animation-judges/assets/sonic-player-constants.bin": "cac3a43b8a00509706505b79771f4f9c2ec6b500a925b2cb4820b611fffe34b7",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7dfc86b6/build/animation-judges/assets/sonic-action-dispatch.bin": "e78b7fb8a08356eca526539587e821b2ac2a642a623411ad374f1cfee846ab77",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7dfc86b6/build/animation-judges/assets/ninja-trig.f32": "3acbb71a623df2d12dc44e34a48caf049d0e50560593ed003ca15d827947feed",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-7dfc86b6/build/animation-judges/assets/ninja-unit.f32": "5998e9d1dd9bf48af6af87a1ef8c7783b818ac8329637ada08cc5fb329042376"
+    },
+    "unit_source_sha256": "c8696302d5c10c310aaf98058625bdb903841cec436661d9114a96961a817457",
+    "exit_status": 0
+  }
+]

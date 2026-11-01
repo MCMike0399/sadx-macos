@@ -1,0 +1,257 @@
+{
+  "source_commit": "c635f2df85211a3dd62089ca979bc322498fd57f",
+  "source_files": 660,
+  "stock_full_streams": [
+    {
+      "slug": "sonic_animation_table",
+      "full_stream_equal": true,
+      "before_sha256": "ae0574e772acd558f2c5eb0a77103e3b1637742a978d71ec8d6486cca4ac1d3a",
+      "current_sha256": "ae0574e772acd558f2c5eb0a77103e3b1637742a978d71ec8d6486cca4ac1d3a",
+      "before_cases": 103,
+      "current_cases": 103,
+      "inherited_verdict": "pass"
+    },
+    {
+      "slug": "player_animation",
+      "full_stream_equal": true,
+      "before_sha256": "fe15dd75132baa0d1a2243120568075528119799fc0a2dda34393a22487a3bfd",
+      "current_sha256": "fe15dd75132baa0d1a2243120568075528119799fc0a2dda34393a22487a3bfd",
+      "before_cases": 16440,
+      "current_cases": 16440,
+      "inherited_verdict": "partial"
+    },
+    {
+      "slug": "player_animation_blend",
+      "full_stream_equal": true,
+      "before_sha256": "aefe5a579bfb9590b67fb41b421457ff0bbe2d9b5135c3f09d0c54e8a849a34a",
+      "current_sha256": "aefe5a579bfb9590b67fb41b421457ff0bbe2d9b5135c3f09d0c54e8a849a34a",
+      "before_cases": 7944,
+      "current_cases": 7944,
+      "inherited_verdict": "partial"
+    },
+    {
+      "slug": "sonic_player",
+      "full_stream_equal": true,
+      "before_sha256": "2833d480dec1c99bef187812d6718dcd7acb9f4c51db43cbe29be2fe794382d9",
+      "current_sha256": "2833d480dec1c99bef187812d6718dcd7acb9f4c51db43cbe29be2fe794382d9",
+      "before_cases": 28800,
+      "current_cases": 28800,
+      "inherited_verdict": "partial"
+    },
+    {
+      "slug": "player_startup",
+      "full_stream_equal": true,
+      "before_sha256": "7902cb98bf4e684cddbc62812f3a1e2520366608ea8ca9511b06d7b50d73ca29",
+      "current_sha256": "7902cb98bf4e684cddbc62812f3a1e2520366608ea8ca9511b06d7b50d73ca29",
+      "before_cases": 2004,
+      "current_cases": 2004,
+      "inherited_verdict": "partial"
+    },
+    {
+      "slug": "gamma_selection_core",
+      "full_stream_equal": true,
+      "before_sha256": "8029496d9d22bcd24b1d10f537b77d67642c7bea951625f1f3873cc1b9bdc564",
+      "current_sha256": "8029496d9d22bcd24b1d10f537b77d67642c7bea951625f1f3873cc1b9bdc564",
+      "before_cases": 1422,
+      "current_cases": 1422,
+      "inherited_verdict": "partial"
+    }
+  ],
+  "plain_native_streams": {
+    "sonic_animation_table": {
+      "cases": 103,
+      "mismatch_count": 0,
+      "differences": [],
+      "frozen_stream_sha256": "ae0574e772acd558f2c5eb0a77103e3b1637742a978d71ec8d6486cca4ac1d3a",
+      "current_stream_sha256": "ae0574e772acd558f2c5eb0a77103e3b1637742a978d71ec8d6486cca4ac1d3a",
+      "library_sha256": "7cf66bb554a91980cc9c0def82877e8cb0dc6b3d3a712ca34da6a6da3b63880d",
+      "preserved_identity_indexes": {
+        "fp_partials": {
+          "count": 0,
+          "parts": []
+        },
+        "native_boundaries": {
+          "count": 0,
+          "parts": []
+        },
+        "native_failures": {
+          "count": 0,
+          "parts": []
+        },
+        "value_failures": {
+          "count": 0,
+          "parts": []
+        }
+      },
+      "inherited_verdict": "pass",
+      "original_code_rerun": false,
+      "holdouts_run": false
+    },
+    "player_animation": {
+      "cases": 16440,
+      "mismatch_count": 0,
+      "differences": [],
+      "frozen_stream_sha256": "fe15dd75132baa0d1a2243120568075528119799fc0a2dda34393a22487a3bfd",
+      "current_stream_sha256": "fe15dd75132baa0d1a2243120568075528119799fc0a2dda34393a22487a3bfd",
+      "library_sha256": "f51fa5e7ee98692c7302c4e93b9370c166de7d5ca459707d05376d084810dae2",
+      "preserved_identity_indexes": {
+        "fp_partials": {
+          "count": 4140,
+          "parts": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-judges/identities/player_animation-fp_partials-000.json",
+              "sha256": "8faf1cfc115be375cdfefe856e23f6ba274827ec9fd89f3b2f79ac67a4fe669c",
+              "records": 500
+            },
+            {
+              "path": "docs/refactor-inventory/packets/animation-judges/identities/player_animation-fp_partials-001.json",
+              "sha256": "744134860eea1585cceae76db31d83151a9e38995438bfeb630b4c475bdb20af",
+              "records": 500
+            },
+            {
+              "path": "docs/refactor-inventory/packets/animation-judges/identities/player_animation-fp_partials-002.json",
+              "sha256": "064aaf21e01b13525abc270ffc496d6b142f9f18058e7f0836504c1562635d50",
+              "records": 500
+            },
+            {
+              "path": "docs/refactor-inventory/packets/animation-judges/identities/player_animation-fp_partials-003.json",
+              "sha256": "1696b7ae60cef18fec5751f25c4a3560c0768a698af7852b4cd2cc002f2f95ab",
+              "records": 500
+            },
+            {
+              "path": "docs/refactor-inventory/packets/animation-judges/identities/player_animation-fp_partials-004.json",
+              "sha256": "bbd3a5b5e3e398640b882db649a82cd81f9df5c3698e6b56e45c7fb8538616e8",
+              "records": 500
+            },
+            {
+              "path": "docs/refactor-inventory/packets/animation-judges/identities/player_animation-fp_partials-005.json",
+              "sha256": "3cb746f38a6012291eb0b5e28f959472591e8137703a840894bc79af68711313",
+              "records": 500
+            },
+            {
+              "path": "docs/refactor-inventory/packets/animation-judges/identities/player_animation-fp_partials-006.json",
+              "sha256": "fe2f04dfe16ae8e0935ce9526a19a003182576ed209ba04ad96b4b637149c7e9",
+              "records": 500
+            },
+            {
+              "path": "docs/refactor-inventory/packets/animation-judges/identities/player_animation-fp_partials-007.json",
+              "sha256": "a958ec4d7c6d97dabe2bc98055717d8fda8f7163c7827f709167c3c9c86f558e",
+              "records": 500
+            },
+            {
+              "path": "docs/refactor-inventory/packets/animation-judges/identities/player_animation-fp_partials-008.json",
+              "sha256": "aafc6b3574dc38871c91120e9731bd551f35a5848cd68935cd11712f0048a772",
+              "records": 140
+            }
+          ]
+        },
+        "native_boundaries": {
+          "count": 432,
+          "parts": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-judges/identities/player_animation-native_boundaries-000.json",
+              "sha256": "37af3539d3aef54550940f3a67c6b235f93a1f808e924d843aac8fbb1341c916",
+              "records": 432
+            }
+          ]
+        },
+        "native_failures": {
+          "count": 432,
+          "parts": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-judges/identities/player_animation-native_failures-000.json",
+              "sha256": "37af3539d3aef54550940f3a67c6b235f93a1f808e924d843aac8fbb1341c916",
+              "records": 432
+            }
+          ]
+        },
+        "value_failures": {
+          "count": 0,
+          "parts": []
+        }
+      },
+      "inherited_verdict": "partial",
+      "original_code_rerun": false,
+      "holdouts_run": false
+    },
+    "player_animation_blend": {
+      "cases": 7944,
+      "mismatch_count": 0,
+      "differences": [],
+      "frozen_stream_sha256": "aefe5a579bfb9590b67fb41b421457ff0bbe2d9b5135c3f09d0c54e8a849a34a",
+      "current_stream_sha256": "aefe5a579bfb9590b67fb41b421457ff0bbe2d9b5135c3f09d0c54e8a849a34a",
+      "library_sha256": "8584988ee3efde8c8daa726a26dddfbf36c16d4f38d805f9f0f2bf3e4adacb6d",
+      "preserved_identity_indexes": {
+        "fp_partials": {
+          "count": 1668,
+          "parts": [
+            {
+              "path": "docs/refactor-inventory/packets/animation-judges/identities/player_animation_blend-fp_partials-000.json",
+              "sha256": "b86353a910c848cfaeea4fee10ce09144c766114bb27d12ea6636a9d4b6347f5",
+              "records": 500
+            },
+            {
+              "path": "docs/refactor-inventory/packets/animation-judges/identities/player_animation_blend-fp_partials-001.json",
+              "sha256": "aee33e86a3aa02b8ec56c0e053c9d1376a67c953e25ad02753e3b26e87c07639",
+              "records": 500
+            },
+            {
+              "path": "docs/refactor-inventory/packets/animation-judges/identities/player_animation_blend-fp_partials-002.json",
+              "sha256": "731339cf9cecfc94d61290a88d18d7a3711993d696a4ba081dd5cd83b847e36b",
+              "records": 500
+            },
+            {
+              "path": "docs/refactor-inventory/packets/animation-judges/identities/player_animation_blend-fp_partials-003.json",
+              "sha256": "e4e6da2ca4aeddd14826f2b7814627d0e9210c9b8ed022599cc93a77c0b3b09d",
+              "records": 168
+            }
+          ]
+        },
+        "native_boundaries": {
+          "count": 0,
+          "parts": []
+        },
+        "native_failures": {
+          "count": 0,
+          "parts": []
+        },
+        "value_failures": {
+          "count": 0,
+          "parts": []
+        }
+      },
+      "inherited_verdict": "partial",
+      "original_code_rerun": false,
+      "holdouts_run": false
+    }
+  },
+  "table_characterization": {
+    "cases": 8727,
+    "mismatches": [],
+    "passed": true,
+    "source_reads": 145,
+    "distinct_ordinals": 127,
+    "stores": 882,
+    "rows": 147,
+    "incomplete_new_rows_at_read": 0,
+    "stream_sha256": "5fcc1fac64f6b6b7f7ecaead864b004b2e57913e1113923e4f99dd17b5735971",
+    "limits": [
+      "Unknown availability is projected onto observed source write prefixes; absent fixture memory is never executed as original memory",
+      "Seed masks represent arbitrary fixtures, not native BSS initialization",
+      "No final holdout used"
+    ]
+  },
+  "interface_cases": 114,
+  "gamma_rows": 91,
+  "inherited_faults_caught": 13,
+  "additional_publication_fault_caught": true,
+  "affected_units": 8,
+  "inherited_manifest_paths_present": 948,
+  "raw_inputs_exact": 53,
+  "global_manifest_refreshed": false,
+  "full_gate_run": false,
+  "journeys_run": false,
+  "holdouts_run": false,
+  "independent_source_review_run": false,
+  "actual_product_closure_run": false
+}

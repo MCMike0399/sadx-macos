@@ -22,9 +22,10 @@ def main():
             header = output / "include/apps/native_gamma_actor_assets.hpp"
             header.parent.mkdir(parents=True, exist_ok=True)
             body = (ROOT / "src/apps/native_gamma_actor_assets.hpp").read_text()
-            old = "else if (recipe.resource.status == ActorResourceStatus::KnownNull)\n            record.action = AnimationResourceReference{};"
+            old = "record.action.status = recipe.resource.status;"
+            new = "record.action.status = recipe.resource.status == ActorResourceStatus::Unavailable ? ActorResourceStatus::KnownNull : recipe.resource.status;"
             assert body.count(old) == 1
-            header.write_text(body.replace(old, "else\n            record.action = AnimationResourceReference{};"))
+            header.write_text(body.replace(old, new))
             includes.insert(0, "-I" + str(output / "include"))
         sources = ["tests/unit/animation_gamma_assets.mm", "src/engine/character_pack.cpp",
                    "src/player/player_state.cpp", "src/cpu/x87_math.cpp"]
