@@ -30,6 +30,13 @@ class TaskReservedObserver(unittest.TestCase):
                 return 1
             def hook_del(self, hook):
                 self.callback = None
+            def emu_start(self, entry, stop, *args, **kwargs):
+                self.ip = entry
+                if getattr(self, 'fault_entry', None) == entry:
+                    assert self.callback is not None
+                    assert self.callback(self, 19, 6, 2, 0, None) is False
+                    raise RuntimeError('synthetic direct lifecycle fault')
+                self.ip = stop
 
         class Source:
             def __init__(self):
@@ -46,6 +53,7 @@ class TaskReservedObserver(unittest.TestCase):
 
         original = SimpleNamespace(Source=Source, STOP=0x1234, CODE=0x23000000,
                                    unicorn=SimpleNamespace(UC_HOOK_MEM_INVALID=1))
+        original.Original = lambda: SimpleNamespace(machine=Machine())
         return original, Machine
 
     def test_actual_stop_required_for_return(self):
@@ -116,10 +124,11 @@ class TaskReservedObserver(unittest.TestCase):
         with OBSERVER.audit_helpers('task_lifecycle', original, [[(1, 2, 0, 0)]],
                                     events, lambda m: m.ip):
             for _ in range(2):
-                machine = machine_type()
+                machine = original.Original().machine
                 original.call(machine, 0x40b1ce, [])
+                machine.emu_start(0x40b466, original.STOP)
                 original.call(machine, 0x40b860, [2, 0, 0])
-            machine.ip = 0x401000
+            machine.emu_start(0x40b570, 0x401000)
         self.assertEqual(events[0]['original_outcome'], 'helpers_returned')
         self.assertEqual(events[1]['kind'], 'repeated_inactive_control')
         self.assertIsNone(events[1]['case'])
@@ -131,7 +140,42 @@ class TaskReservedObserver(unittest.TestCase):
         original.call = lambda machine, entry, arguments: 0
         with self.assertRaisesRegex(ValueError, 'did not reach STOP'):
             with OBSERVER.audit_helpers('task_work', original, [[(0, 1)]], [], lambda m: m.ip):
-                original.call(machine_type(), 0x40b1ce, [])
+                original.call(original.Original().machine, 0x40b1ce, [])
+
+    def test_direct_lifecycle_faults_retain_exact_failure_evidence(self):
+        for phase in ('pool', 'inactive'):
+            original, _ = self.source_fixture()
+            def call(machine, entry, arguments):
+                machine.ip = original.STOP
+                return 0
+            original.call = call
+            prior_constructor = original.Original
+            events = []
+            with self.assertRaisesRegex(RuntimeError, 'direct lifecycle fault'):
+                with OBSERVER.audit_helpers('task_lifecycle', original, [[(1, 2, 0, 0)]],
+                                            events, lambda m: m.ip):
+                    machine = original.Original().machine
+                    original.call(machine, 0x40b1ce, [])
+                    if phase == 'pool':
+                        machine.fault_entry = 0x40b466
+                    machine.emu_start(0x40b466, original.STOP)
+                    original.call(machine, 0x40b860, [2, 0, 0])
+                    machine = original.Original().machine
+                    original.call(machine, 0x40b1ce, [])
+                    machine.emu_start(0x40b466, original.STOP)
+                    original.call(machine, 0x40b860, [2, 0, 0])
+                    machine.fault_entry = 0x40b570
+                    machine.emu_start(0x40b570, 0x401000)
+            event = events[-1]
+            self.assertEqual(event['original_outcome'], 'unexpected_error')
+            self.assertEqual(event['direct'][-1]['outcome'], 'unexpected_error')
+            expected_pc = 0x40b466 if phase == 'pool' else 0x40b570
+            self.assertEqual(event['memory_faults'],
+                             [dict(pc=expected_pc, access=19, address=6, size=2, value=0)])
+            self.assertEqual(event['direct'][-1]['pc'], expected_pc)
+            self.assertIsNone(machine.callback)
+            self.assertIs(original.call, call)
+            self.assertIs(original.Original, prior_constructor)
 
     def observe_fake_display(self, mode, captured_errors=None):
         """Use the real recorder; a Python callable stands in for the native ABI."""

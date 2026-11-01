@@ -5,7 +5,7 @@ committed dependency freeze and create its single-use admission marker BEFORE
 generating cases or calling observe(). Importing this module generates nothing.
 """
 import copy
-from contextlib import contextmanager
+from contextlib import ExitStack, contextmanager
 import hashlib
 import importlib
 import importlib.util
@@ -98,22 +98,60 @@ def audit_traversal(slug, original, cases, events, read_ip):
 @contextmanager
 def audit_helpers(slug, original, cases, events, read_ip):
     previous = original.call
+    previous_original = original.Original
     active = None
     machine = None
+    in_helper = False
+    hooks = ExitStack()
+
+    def create_original(*args, **kwargs):
+        nonlocal active, machine
+        hooks.close()
+        index = len(events)
+        control = slug == 'task_lifecycle' and index == len(cases)
+        if index >= len(cases) and not control:
+            raise ValueError('Unexpected original helper sequence')
+        instance = previous_original(*args, **kwargs)
+        machine = instance.machine
+        active = dict(case=None if control else index, calls=[], direct=[], memory_faults=[],
+                      kind='repeated_inactive_control' if control else 'generated_sequence')
+        events.append(active)
+        current_event = active
+        current = machine
+        previous_emu = current.emu_start
+        hooks.enter_context(record_faults(original, current, active['memory_faults'], read_ip))
+        hooks.callback(setattr, current, 'emu_start', previous_emu)
+
+        def emu_start(entry, stop, *emu_args, **emu_kwargs):
+            if in_helper:
+                return previous_emu(entry, stop, *emu_args, **emu_kwargs)
+            row = dict(entry=entry, stop=stop, outcome='attempted')
+            current_event['direct'].append(row)
+            begin = len(current_event['memory_faults'])
+            try:
+                result = previous_emu(entry, stop, *emu_args, **emu_kwargs)
+            except Exception as error:
+                row.update(outcome='unexpected_error', pc=read_ip(current),
+                           error_type=type(error).__name__, error=str(error),
+                           memory_faults=current_event['memory_faults'][begin:])
+                raise
+            pc = read_ip(current)
+            expected = original.STOP if entry == 0x40b466 else 0x401000
+            row.update(pc=pc, outcome='returned' if entry == 0x40b466 else 'established_observer_stop',
+                       memory_faults=current_event['memory_faults'][begin:])
+            if (entry not in (0x40b466, 0x40b570) or stop != expected or pc != expected or
+                    row['memory_faults']):
+                row['outcome'] = 'unexpected_stop'
+                raise ValueError('Unestablished direct lifecycle execution')
+            return result
+
+        current.emu_start = emu_start
+        return instance
 
     def call(current, entry, arguments):
-        nonlocal active, machine
-        if entry == 0x40b1ce:
-            index = len(events)
-            control = slug == 'task_lifecycle' and index == len(cases)
-            if index >= len(cases) and not control:
-                raise ValueError('Unexpected original helper sequence')
-            active = dict(case=None if control else index, calls=[],
-                          kind='repeated_inactive_control' if control else 'generated_sequence')
-            events.append(active)
-        if active is None:
+        nonlocal in_helper
+        if active is None or current is not machine:
             raise ValueError('Original helper before sequence initialization')
-        machine = current
         # The lifecycle pool initializer uses emu_start directly between these
         # Python helpers. Observe its actual end PC before the first operation.
         if slug == 'task_lifecycle' and len(active['calls']) == 1:
@@ -122,13 +160,17 @@ def audit_helpers(slug, original, cases, events, read_ip):
                 raise ValueError('Original pool initializer did not reach STOP')
         row = dict(entry=entry, arguments=list(arguments), outcome='attempted', memory_faults=[])
         active['calls'].append(row)
+        begin = len(active['memory_faults'])
         try:
-            with record_faults(original, current, row['memory_faults'], read_ip):
-                result = previous(current, entry, arguments)
+            in_helper = True
+            result = previous(current, entry, arguments)
         except Exception as error:
             row.update(outcome='unexpected_error', error_type=type(error).__name__, error=str(error),
                        pc=read_ip(current))
             raise
+        finally:
+            in_helper = False
+            row['memory_faults'] = active['memory_faults'][begin:]
         pc = read_ip(current)
         if row['memory_faults']:
             raise ValueError('Original helper memory fault was suppressed')
@@ -139,6 +181,7 @@ def audit_helpers(slug, original, cases, events, read_ip):
 
     try:
         original.call = call
+        original.Original = create_original
         yield
         expected_count = len(cases) + (slug == 'task_lifecycle')
         if len(events) != expected_count:
@@ -156,15 +199,27 @@ def audit_helpers(slug, original, cases, events, read_ip):
                     entries.append(op_entries[op[0]])
             if [row['entry'] for row in event['calls']] != entries:
                 raise ValueError('Original helper operation sequence changed')
+            expected_direct = [0x40b466] if slug == 'task_lifecycle' else []
+            if [row['entry'] for row in event['direct']] != expected_direct or event['memory_faults']:
+                raise ValueError('Original direct execution sequence changed')
             event.update(input_sha256=input_digest(case), original_outcome='helpers_returned')
         if slug == 'task_lifecycle':
             control = events[-1]
             pc = read_ip(machine)
-            if pc != 0x401000 or [row['entry'] for row in control['calls']] != [0x40b1ce, 0x40b860]:
+            if (pc != 0x401000 or control['memory_faults'] or
+                    [row['entry'] for row in control['calls']] != [0x40b1ce, 0x40b860] or
+                    [row['entry'] for row in control['direct']] != [0x40b466, 0x40b570]):
                 raise ValueError('Inactive control did not reach established diagnostic stop')
             control.update(original_outcome='established_observer_stop', pc=pc)
+    except BaseException as error:
+        if active is not None:
+            active.update(original_outcome='unexpected_error', pc=read_ip(machine),
+                          error_type=type(error).__name__, error=str(error))
+        raise
     finally:
         original.call = previous
+        original.Original = previous_original
+        hooks.close()
 
 
 def generate(slug, definition, original):

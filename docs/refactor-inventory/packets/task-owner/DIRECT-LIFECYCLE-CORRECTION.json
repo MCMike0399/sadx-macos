@@ -1,0 +1,37 @@
+{
+  "base_commit": "ed0e4ba96c05cadd832e088b07a9650832b2230f",
+  "review": "f5d8bbc",
+  "finding": "Direct lifecycle pool initialization and inactive destruction had no invalid-memory observer.",
+  "correction": "Attach one hook and direct emu_start observer for each Original machine lifetime; retain direct entry/stop/end/error and exact fault signature; restore constructor/call/emu_start/hooks on all exits. No original comparison changed.",
+  "tests": {
+    "command": "python3 -m unittest discover -s tests/python -p 'test_task_*' -v",
+    "tests": 52,
+    "exit_status": 0,
+    "includes": "Both direct-phase fake failures, seven final-run refusal guards, all prior capture/outcome tests",
+    "log_sha256": "a039f9b5d3634dc9576a4f05941d84e5013e6cab6ea6230b29ce39a41f938522"
+  },
+  "actual_development": {
+    "normal": "Replayed exact previously generated lifecycle development input with immutable before library; all source/ABI checks pass. No reserved input generated.",
+    "normal_observation_sha256": "fdb8ef2250588f29db32ab9fa58dffa690e753129b5d574160698149992c2b17",
+    "synthetic_direct_faults_sha256": "7316a3a90df78353d1ee61b023c9ca8a470a510babc18b2f09417712bb62cd7e",
+    "synthetic_fault_scope": "Actual Unicorn synthetic invalid reads at both direct entries retain PC/access/address6/width2; page zero remains unmapped, errors propagate, hooks restore. Not original game behavior."
+  },
+  "new_runner": {
+    "path": "tools/oracles/task_judges/reserved_run.py",
+    "status": "Unexecuted draft for fresh review; preparation, freeze and run have NOT occurred.",
+    "contracts": [
+      "immutable separate old/current source archives and direct builds",
+      "committed closure/interpreter/compiler/SDK/PE/Unicorn pin before imports",
+      "exclusive output and permanent single-use marker",
+      "verified archive contents and exact compiled/input cohort sets",
+      "isolated one-time generation and per-world observation",
+      "existing complete native ABI comparison; preserve failed attempts"
+    ]
+  },
+  "remaining": [
+    "Fresh full observer/direct-path and runner/test review",
+    "Committed frozen execution closure after review",
+    "Distinct Root admission; all reserved inputs still ungenerated",
+    "Task Main integration/source-only/journeys/gate"
+  ]
+}
