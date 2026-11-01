@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "e6fb2f8255a6083fdaec62541344a08b3c05d47c",
-    "evidence": "docs/refactor-inventory/packets/animation-contract/ROOT-SEAL.json",
-    "evidence_sha256": "ac9a6469acc06aa9abf28c6312ee1fd13fdbb9c3e0b4b7b514f494cfe10d2439",
-    "reason": "Root970-input seal of committed animation foundation and binding qualification; retain all948parent paths and53raw inputs, exact24proposed changed/added hashes; no original expectations or source altered"
+    "base_commit": "20d3f677a406133cd69171ebdc0fab8db3816ec0",
+    "evidence": "docs/refactor-inventory/packets/animation-contract/ROOT-REQUALIFIED.json",
+    "evidence_sha256": "9b3f2c1d38362de83ee7b4d7f1c547de662a5b8a0900efba99e40c3527c4e782",
+    "reason": "Seal corrected animation reference constant contract and explicit252case regression comparator; preserve970parent inputs/alloldexpectations and current requalification"
   },
   "files": {
     "Makefile": "92eddb86c50b796a5675c9890374d485a110df17e90c5b03e34c9f4d569b40e0",
@@ -717,6 +717,7 @@
     "tools/oracles/animation_judges/migration_faults.py": "9101f01d5349f229b2665394254e225608ed104796af0ff546a3b186d53472df",
     "tools/oracles/animation_judges/mutate_motion.py": "03703dd149033aaa027d1714149d6369be18863b8d997bf5a1f602e433318746",
     "tools/oracles/animation_judges/mutate_table.py": "b8d019b149c2df43e806c358876ba80b5e8485dbb2e0e59a6e0ad74cab7e1680",
+    "tools/oracles/animation_judges/reference_constants.py": "803236ab80895ad7441707b81e3800b6fa94eed81854904db8836af73e427c81",
     "tools/oracles/animation_judges/replay_frozen.py": "e3edd13c88890103d03a22d4b530690d934e1b2e98b26327479a271070377874",
     "tools/oracles/animation_judges/run_units.py": "faf0dacc436e3c4339533d650c38df8aa6dd9da7ca202d09d5c32aee2a5171fd",
     "tools/oracles/animation_judges/seal.py": "fbd1e31001e1f4003cc96102ae02ea091c499a7afb596f00ccb125ac72772142",
