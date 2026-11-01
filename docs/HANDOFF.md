@@ -774,3 +774,10 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * The source-only native app and force-load closure build; three actual menu/save journeys pass. All 1,323 protected inputs and 66 inventory tests verify. Warning task contracts remain explicitly unrecovered.
 * Qualified-corpus make -j10 gate exits zero at dc1771c: 304 native programs, 512 Python tests, the inherited filesystem skip, reference R1–R4, three native journeys and sixteen startup comparisons. STATUS is regenerated from save-list-frame-gate.json.
 * Next is the prepared Task/TaskWork source migration, carrying scheduler, arena and actual native/reference consumers under the accepted lifecycle judges. No new gameplay, Windows parity or whole-campaign completion is claimed. Storage stays idle. No push.
+
+### 2026-11-01 — Shared D3D8 capability record readability packet
+
+* Both complete capability files name the wire fields, masks and little-endian writes. The unchanged record remains an explicit reference-GPU assumption; no Windows capability capture or new device policy is claimed.
+* Seven frozen capacity/null observations preserve all 212 wire bytes, output guards and the complete 214-byte diagnostic. The existing exhaustive unit passes before and after; three valid compiled faults are caught.
+* The actual guest adapter/device COM test passes with the fresh caps object, including original mipmap consumer checks. Layers, owners, readability, constexpr classification and profile checks pass. Task ownership and native shipping sources are untouched.
+* Fresh independent review, one-probe manifest registration, canonical inventory and the coherent Main integration gate remain pending. No full gate or broader renderer/campaign closure. No push.
