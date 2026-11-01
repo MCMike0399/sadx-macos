@@ -377,5 +377,19 @@
   "limits": [
     "This census locates current dependency obligations, not a behavior verdict or evidence revalidation.",
     "All old reports, inherited failures/FP partials, raw artifacts and historical scope remain preserved."
-  ]
+  ],
+  "merge_simulation": {
+    "main": "225880834fa36ac03f7617e84d2967cb22144a9a",
+    "candidate": "f8ab5e408427bb799aa244e46274648862b0ec05",
+    "git_exit": 1,
+    "only_conflict": "docs/HANDOFF.md append; preserve both journal entries",
+    "source_union": {
+      "files": 661,
+      "task_changed_files": 25,
+      "every_source_blob_matches_reviewed_task_or_current_main": true,
+      "actual_merge_performed": false
+    },
+    "raw_sha256": "3128c7449931db62c8c18520a5686af45b515549238403a05938a521ae24baf2",
+    "scope": "Git object-store simulation; working Source/index unchanged, no integration or behavior verdict."
+  }
 }
