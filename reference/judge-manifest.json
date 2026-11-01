@@ -1,14 +1,14 @@
 {
   "change": {
-    "base_commit": "0617cf5d09546365160f145880055306aa6c6cee",
-    "evidence": "reference/packets/session-regular-resources/root-qualification.json",
-    "evidence_sha256": "2586b1c9671f096a6bb42ae387cd17d3fdddb6f394310c8c4b94a7bcb2eecbb4",
-    "reason": "Track Main composite original resource and cleanup comparisons after reviewed RegularResources extraction; four unchanged judges and registered owner unit exit0, no mismatches"
+    "base_commit": "92dbd0710ed1bda85807dfea2b55ff63c53311d2",
+    "evidence": "reference/production-integration-20261101/regular-owner-diagnostic-table-revalidation.json",
+    "evidence_sha256": "ad81c4b0441f94cf30ad0205007ceeedd79b03c404b0e9766fdb1aa9ff186243",
+    "reason": "Revalidate unchanged diagnostic names declaration/consumer against immutable e5cf19d after regular resource access migration; retain failed gate attempt and all other table classifications"
   },
   "files": {
     "Makefile": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
     "reference/address-dispatch-baseline-v1.json": "db0e83e323df714032ddad3046670d81968efe8e966630d9666ecbbe87d38bd7",
-    "reference/constexpr-table-review.json": "ce285add1b0597e69cd4c777b32eb043072d2615766615c677ba5546ad33c18a",
+    "reference/constexpr-table-review.json": "41ef098c70a312166a57e9c1bab2c5ad6185e58e64edf68b0bd098df6c7b5a75",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
     "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
     "reference/frame-control-corpus.tsv": "01eb9909e91fc405588010c17253888caa9cf66541fb5e76862acc9b570960ae",
