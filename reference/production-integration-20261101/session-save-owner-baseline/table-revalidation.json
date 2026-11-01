@@ -1,0 +1,14 @@
+{
+  "source_commit": "a490d56",
+  "declaration": "src/runtime/native_title_tasks.cpp::names",
+  "declaration_sha256_unchanged": "01135e293e8f46eb2f275fdc3f96e8686c4477dd0c88240fe396724db14e4451",
+  "classification_unchanged": "typed_content",
+  "evidence_updates": [
+    {
+      "before": "5bc34cd9456afb6af1f38f7af33708ca322ba1f5240897a49706371dd7a6a71c",
+      "after": "b79241bae2dd42684e8c03cdd475cca89f301a9705a57ede031baefa0b9b0c62"
+    }
+  ],
+  "rationale": "The native callback file changes only current save member access to the canonical typed owner. The names table declaration, its selectors, filenames and loading behavior are unchanged. No table debt retired.",
+  "limits": "Table consumer revalidation only; full owner review/gate/journeys remain pending."
+}
