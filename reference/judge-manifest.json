@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "3e4bdcb1dc8fff9ca992691d0cdc1149386b2989",
-    "evidence": "reference/packets/save-list-frame-source/MAIN-STREAMS.json",
-    "evidence_sha256": "9a3e917a06533ea14b7ea14cef4549207e46bda339643e29c1db6929f710390b",
-    "reason": "Bind actual Main save/consumer reports after complete default defined-ABI equality."
+    "base_commit": "ac8ea27e61d475b4a44404994d810d7c0ee6eeb3",
+    "evidence": "docs/refactor-inventory/packets/task-owner/STREAM-COMPLETENESS-FIX.json",
+    "evidence_sha256": "797e529f862167a9c0493030396d25bff418db020a0a139f6488f9b4bfa74f76",
+    "reason": "Reject vacuous or incomplete task ABI captures using existing immutable call ledgers"
   },
   "files": {
     "Makefile": "f145daba48afc9b3e7609df89506e4ce95b8693af2bc826358904427af53bfb6",
@@ -681,6 +681,7 @@
     "tests/python/test_status_generation.py": "2c2ab103c933e1309850c72a511fc1e43dd40f56663c3c6155d2336e6be7ed0a",
     "tests/python/test_symbol_context.py": "e276e801136d0821369682beb43c42c0f460ff137123683d8c1150487eec2690",
     "tests/python/test_symbols.py": "9e9a03a6389d6cd58aa49c63272049754f55ccddb19eeb894b8b92ccce362e0f",
+    "tests/python/test_task_stream_completeness.py": "4919740791d1ad67a9337bc23992ebb68e8773eaf2e251010d04367fa41e70af",
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",
     "tests/python/test_voice_publication.py": "5c00051d9b3de640f64e224dda4d810cdd7d26acafd91d7b1dc44e9786a734f3",
@@ -1094,7 +1095,7 @@
     "tools/oracles/sound_bank_original_reference.py": "0a2278e763870cd3c9d664499f6cbe156849d514755884179f789c9c415750ec",
     "tools/oracles/task_judges/bridge_faults.py": "871892551973e0a3883fb19d79d80d2eb0cd142aa6d7f9ed88ac254eb06d0337",
     "tools/oracles/task_judges/check_baseline.py": "14b66c673e4b6914d48ff2a96fd53e64fba4243eb44305f458889d39036e03be",
-    "tools/oracles/task_judges/compare_streams.py": "5a22afab3aa3c1a4bbe6850774a29384ca20424f415f2a3d25b32a70c7851d62",
+    "tools/oracles/task_judges/compare_streams.py": "4b935e04e6abcb1b4cdc675e3ffedcbe0175f6f450a3f5b03be09e1726d08bfe",
     "tools/oracles/task_judges/freeze.py": "d8f60a37ad0970b6e19d3744fc1df891eff7a348f2edd299c3029e9c1b850d38",
     "tools/oracles/task_judges/mutate.py": "da598d7d20fd5a5e8d0de553b84aa13bb3ee5ea60eaa54c4ed75b48f229ed11e",
     "tools/oracles/verdict.py": "333ac997dd1211ab70ed04d8fe7a7a424f418d00f13cd913a355f39773e1a63a",

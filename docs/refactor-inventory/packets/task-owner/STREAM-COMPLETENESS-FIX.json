@@ -1,0 +1,73 @@
+{
+  "base_commit": "ac8ea27e61d475b4a44404994d810d7c0ee6eeb3",
+  "defect": "Two equal empty, truncated, duplicated or reordered task captures passed without checking whether the recorded calls were captured.",
+  "before_script_sha256": "5a22afab3aa3c1a4bbe6850774a29384ca20424f415f2a3d25b32a70c7851d62",
+  "after_script_sha256": "4b935e04e6abcb1b4cdc675e3ffedcbe0175f6f450a3f5b03be09e1726d08bfe",
+  "before": {
+    "command": "python3 -m unittest discover -s tests/python -p test_task_stream_completeness.py -v",
+    "exit_status": 1,
+    "tests": 9,
+    "failed_defect_reproducers": 8,
+    "complete_positive_passed": true,
+    "log_sha256": "936be0b7324474e63c9d45214e7c0d8df539add094796be00189f5d6376cbdc5"
+  },
+  "after": {
+    "command": "python3 -m unittest discover -s tests/python -p test_task_stream_completeness.py -v",
+    "exit_status": 0,
+    "tests": 9,
+    "log_sha256": "4e0621627816ca711bab65f635745d10db93bfa8ac35a20491fc04e3c606bf94"
+  },
+  "historical_capture_validation": {
+    "exit_status": 0,
+    "comparisons": [
+      {
+        "slug": "task_work",
+        "records": 16,
+        "mismatch_ids": [],
+        "baseline_stream_sha256": "6eb5f0340bb3a5f96f3134a3f353b707701564dfe05428dbc6161ce33c578ee8",
+        "candidate_stream_sha256": "6eb5f0340bb3a5f96f3134a3f353b707701564dfe05428dbc6161ce33c578ee8",
+        "exclusions_equal": true
+      },
+      {
+        "slug": "task_lifecycle",
+        "records": 40,
+        "mismatch_ids": [],
+        "baseline_stream_sha256": "a30bfcd7091c9e68189377b5d6434962c57a6cac9753aeaed0cbf4ce3b3038a4",
+        "candidate_stream_sha256": "a30bfcd7091c9e68189377b5d6434962c57a6cac9753aeaed0cbf4ce3b3038a4",
+        "exclusions_equal": true
+      },
+      {
+        "slug": "task_display",
+        "records": 236,
+        "mismatch_ids": [],
+        "baseline_stream_sha256": "3163aaa3a5f0b7465c7c475b51f732533e37228dbd2131cd27f8063c99cae866",
+        "candidate_stream_sha256": "3163aaa3a5f0b7465c7c475b51f732533e37228dbd2131cd27f8063c99cae866",
+        "exclusions_equal": true
+      },
+      {
+        "slug": "task_delete",
+        "records": 244,
+        "mismatch_ids": [],
+        "baseline_stream_sha256": "747cf832140f08e8c7986537bcd26ad63e3d3fa80bb4ed216a52624a55d34ff2",
+        "candidate_stream_sha256": "747cf832140f08e8c7986537bcd26ad63e3d3fa80bb4ed216a52624a55d34ff2",
+        "exclusions_equal": true
+      }
+    ],
+    "purpose": "All four unchanged existing historical streams validated against their original call ledgers and compared to themselves. No new source/original execution or source fidelity pass claimed."
+  },
+  "change": "Require a successful nonempty freeze ledger, exact compressed capture hash, complete contiguous call order/count, matching return/symbol and exact before/after buffer sizes and SHA256. Preserve the full old/current JSON equality and exclusion comparison.",
+  "protected_delta": {
+    "changed": [
+      "tools/oracles/task_judges/compare_streams.py"
+    ],
+    "added": [
+      "tests/python/test_task_stream_completeness.py"
+    ],
+    "removed": []
+  },
+  "limits": [
+    "No source behavior, original comparator, expected value, input, tolerance or exclusion changed.",
+    "Task source candidate review, reserved inputs and combined full integration gate remain pending.",
+    "Capture/receipt identity is tamper evidence under the existing committed source/manifest workflow, not a cryptographic security boundary against rewriting both."
+  ]
+}
