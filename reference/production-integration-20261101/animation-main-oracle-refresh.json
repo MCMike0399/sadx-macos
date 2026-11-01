@@ -1,0 +1,298 @@
+{
+  "source_commit": "a799c518a2dc4ae9fceb3aeb05f7a41f270abb93",
+  "source_tree": "ab5067ec5160c0d153fde5c896ff9a7713a80992",
+  "main_default_commands": [
+    {
+      "slug": "sonic_animation_table",
+      "command": [
+        "make",
+        "oracle-sonic-animation-table"
+      ],
+      "exit": 0
+    },
+    {
+      "slug": "player_animation",
+      "command": [
+        "make",
+        "oracle-player-animation"
+      ],
+      "exit": 0
+    },
+    {
+      "slug": "player_animation_blend",
+      "command": [
+        "make",
+        "oracle-player-animation-blend"
+      ],
+      "exit": 0
+    },
+    {
+      "slug": "sonic_player",
+      "command": [
+        "make",
+        "oracle-sonic-player"
+      ],
+      "exit": 0
+    },
+    {
+      "slug": "player_startup",
+      "command": [
+        "make",
+        "oracle-player-startup"
+      ],
+      "exit": 0
+    },
+    {
+      "slug": "gamma_selection_core",
+      "command": [
+        "make",
+        "oracle-gamma-selection-core"
+      ],
+      "exit": 2
+    }
+  ],
+  "main_capture_commands": [
+    {
+      "slug": "sonic_animation_table",
+      "command": [
+        "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+        "tools/oracles/animation_judges/replay_frozen.py",
+        "sonic_animation_table",
+        "build/native-sonic-animation-table-probe.dylib",
+        "/Users/burbujamc/Developer/sadx-macos/build/animation-main-canonical/full-captures/sonic_animation_table"
+      ],
+      "exit": 0
+    },
+    {
+      "slug": "player_animation",
+      "command": [
+        "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+        "tools/oracles/animation_judges/replay_frozen.py",
+        "player_animation",
+        "build/native-player-animation-probe.dylib",
+        "/Users/burbujamc/Developer/sadx-macos/build/animation-main-canonical/full-captures/player_animation",
+        "--constants",
+        "build/oracles/player_animation.constants.bin"
+      ],
+      "exit": 0
+    },
+    {
+      "slug": "player_animation_blend",
+      "command": [
+        "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+        "tools/oracles/animation_judges/replay_frozen.py",
+        "player_animation_blend",
+        "build/native-player-animation-blend-probe.dylib",
+        "/Users/burbujamc/Developer/sadx-macos/build/animation-main-canonical/full-captures/player_animation_blend",
+        "--constants",
+        "build/oracles/player_animation.constants.bin"
+      ],
+      "exit": 0
+    },
+    {
+      "slug": "sonic_player",
+      "command": [
+        "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+        "tools/oracles/animation_judges/capture_consumers.py",
+        "sonic_player",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+        "build/native-sonic-player-probe.dylib",
+        "/Users/burbujamc/Developer/sadx-macos/build/animation-main-canonical/full-captures/sonic_player"
+      ],
+      "exit": 0
+    },
+    {
+      "slug": "player_startup",
+      "command": [
+        "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+        "tools/oracles/animation_judges/capture_consumers.py",
+        "player_startup",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+        "build/native-player-startup-probe.dylib",
+        "/Users/burbujamc/Developer/sadx-macos/build/animation-main-canonical/full-captures/player_startup"
+      ],
+      "exit": 0
+    },
+    {
+      "slug": "gamma_selection_core",
+      "command": [
+        "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+        "tools/oracles/animation_judges/capture_consumers.py",
+        "gamma_selection_core",
+        "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+        "build/native-gamma-selection-core-probe.dylib",
+        "/Users/burbujamc/Developer/sadx-macos/build/animation-main-canonical/full-captures/gamma_selection_core"
+      ],
+      "exit": 2
+    }
+  ],
+  "complete_stream_comparisons": [
+    {
+      "slug": "sonic_animation_table",
+      "full_stream_equal": true,
+      "before_sha256": "ae0574e772acd558f2c5eb0a77103e3b1637742a978d71ec8d6486cca4ac1d3a",
+      "current_sha256": "ae0574e772acd558f2c5eb0a77103e3b1637742a978d71ec8d6486cca4ac1d3a",
+      "before_cases": 103,
+      "current_cases": 103,
+      "inherited_verdict": "pass"
+    },
+    {
+      "slug": "player_animation",
+      "full_stream_equal": true,
+      "before_sha256": "fe15dd75132baa0d1a2243120568075528119799fc0a2dda34393a22487a3bfd",
+      "current_sha256": "fe15dd75132baa0d1a2243120568075528119799fc0a2dda34393a22487a3bfd",
+      "before_cases": 16440,
+      "current_cases": 16440,
+      "inherited_verdict": "partial"
+    },
+    {
+      "slug": "player_animation_blend",
+      "full_stream_equal": true,
+      "before_sha256": "aefe5a579bfb9590b67fb41b421457ff0bbe2d9b5135c3f09d0c54e8a849a34a",
+      "current_sha256": "aefe5a579bfb9590b67fb41b421457ff0bbe2d9b5135c3f09d0c54e8a849a34a",
+      "before_cases": 7944,
+      "current_cases": 7944,
+      "inherited_verdict": "partial"
+    },
+    {
+      "slug": "sonic_player",
+      "full_stream_equal": true,
+      "before_sha256": "2833d480dec1c99bef187812d6718dcd7acb9f4c51db43cbe29be2fe794382d9",
+      "current_sha256": "2833d480dec1c99bef187812d6718dcd7acb9f4c51db43cbe29be2fe794382d9",
+      "before_cases": 28800,
+      "current_cases": 28800,
+      "inherited_verdict": "partial"
+    },
+    {
+      "slug": "player_startup",
+      "full_stream_equal": true,
+      "before_sha256": "7902cb98bf4e684cddbc62812f3a1e2520366608ea8ca9511b06d7b50d73ca29",
+      "current_sha256": "7902cb98bf4e684cddbc62812f3a1e2520366608ea8ca9511b06d7b50d73ca29",
+      "before_cases": 2004,
+      "current_cases": 2004,
+      "inherited_verdict": "partial"
+    },
+    {
+      "slug": "gamma_selection_core",
+      "full_stream_equal": true,
+      "before_sha256": "8029496d9d22bcd24b1d10f537b77d67642c7bea951625f1f3873cc1b9bdc564",
+      "current_sha256": "8029496d9d22bcd24b1d10f537b77d67642c7bea951625f1f3873cc1b9bdc564",
+      "before_cases": 1422,
+      "current_cases": 1422,
+      "inherited_verdict": "partial"
+    }
+  ],
+  "artifacts": {
+    "build/animation-main-canonical/full-captures/player_animation_blend.log": {
+      "sha256": "d9b0e3b4e38322a7f56d59475b47b5a28a87db1844af6ea44bb3a487340c2f25",
+      "bytes": 393
+    },
+    "build/animation-main-canonical/full-captures/sonic_player.log": {
+      "sha256": "eb638ee354b4c5d03b63752ca60c200cd54a5d39bfcc1f1d4794d94187b834d5",
+      "bytes": 441
+    },
+    "build/animation-main-canonical/full-captures/player_animation.log": {
+      "sha256": "c384de6acc6b1086e1875816ce0de300398b0e7c38dd574d7428cd1f5600aeba",
+      "bytes": 394
+    },
+    "build/animation-main-canonical/full-captures/player_startup.log": {
+      "sha256": "939b945203b2728094a9ce226b541ca02693f00c66b98cf03bd2c29b20c42421",
+      "bytes": 2500
+    },
+    "build/animation-main-canonical/full-captures/comparison.json": {
+      "sha256": "459bdb738762d9653b843e105ccd98eb61a0467536268cd932494ba84aa30414",
+      "bytes": 2045
+    },
+    "build/animation-main-canonical/full-captures/commands.json": {
+      "sha256": "83a6221a0f327ce6b46f3e9d725359704fcc91c3833d8062f0f37a1955cf3a29",
+      "bytes": 2820
+    },
+    "build/animation-main-canonical/full-captures/sonic_animation_table.log": {
+      "sha256": "b32964cf2f6d205cdeeb67f5b7260924a5ffe0a17cdcfcd0ffc6f9af4c2df164",
+      "bytes": 389
+    },
+    "build/animation-main-canonical/full-captures/gamma_selection_core.log": {
+      "sha256": "fa7b2bb1570c17b7a76f1ebe544c61317800a351360c5125956048a364bd807c",
+      "bytes": 384
+    },
+    "build/animation-main-canonical/full-captures/gamma_selection_core/cases.jsonl.gz": {
+      "sha256": "f1a0b7bf2a76d9706c3fef2cbffb0eb2c2ef1d58ff35c9bf5261ae8bb5a2e440",
+      "bytes": 458601
+    },
+    "build/animation-main-canonical/full-captures/gamma_selection_core/report.json": {
+      "sha256": "45659df7945443c16bb0b087767d24c46c55cc790da24bad5e716eb9a3abfa64",
+      "bytes": 1127
+    },
+    "build/animation-main-canonical/full-captures/gamma_selection_core/capture.json": {
+      "sha256": "23a15d2a3dd2ddc760bc036310e333366bb9ab39bda4022503a7eb406ca048f3",
+      "bytes": 315
+    },
+    "build/animation-main-canonical/full-captures/player_startup/cases.jsonl.gz": {
+      "sha256": "d79c40e76a7ad0a70b539c969d60c85b6acf37f402d594590260ecc351194904",
+      "bytes": 758009
+    },
+    "build/animation-main-canonical/full-captures/player_startup/report.json": {
+      "sha256": "4ceb0e3f234efbe8fa7dde8a762a8ca46e5d5f241be6c4e174fb6ad0569d8607",
+      "bytes": 12615
+    },
+    "build/animation-main-canonical/full-captures/player_startup/report.cases.bin": {
+      "sha256": "7eb3128a4cc3e14b1f29944121e2de4e7972b25625a5a187b9fc46b1c0236bf4",
+      "bytes": 107548
+    },
+    "build/animation-main-canonical/full-captures/player_startup/capture.json": {
+      "sha256": "69644c1a7ceb630c24b582458097c17ac41ed6ec762640810c381ad112914cb9",
+      "bytes": 309
+    },
+    "build/animation-main-canonical/full-captures/player_animation/cases.jsonl": {
+      "sha256": "fe15dd75132baa0d1a2243120568075528119799fc0a2dda34393a22487a3bfd",
+      "bytes": 5862354
+    },
+    "build/animation-main-canonical/full-captures/player_animation/replay.json": {
+      "sha256": "2d753bc3c4577791c984f72e938ce57badf4552057d3be6a0bf6d0aa3b5e763d",
+      "bytes": 3558
+    },
+    "build/animation-main-canonical/full-captures/sonic_animation_table/cases.jsonl": {
+      "sha256": "ae0574e772acd558f2c5eb0a77103e3b1637742a978d71ec8d6486cca4ac1d3a",
+      "bytes": 1549048
+    },
+    "build/animation-main-canonical/full-captures/sonic_animation_table/replay.json": {
+      "sha256": "ea3db7974fb4d6f87a1b8cb567b6557779e9119d67fe877fad0479c92cb39750",
+      "bytes": 735
+    },
+    "build/animation-main-canonical/full-captures/player_animation_blend/cases.jsonl": {
+      "sha256": "aefe5a579bfb9590b67fb41b421457ff0bbe2d9b5135c3f09d0c54e8a849a34a",
+      "bytes": 7063200
+    },
+    "build/animation-main-canonical/full-captures/player_animation_blend/replay.json": {
+      "sha256": "fbff7a7c0b8113ef5994ff2811fd61a0b8d63498906d393e8eca768454103c43",
+      "bytes": 1784
+    },
+    "build/animation-main-canonical/full-captures/sonic_player/report.constants.bin": {
+      "sha256": "cac3a43b8a00509706505b79771f4f9c2ec6b500a925b2cb4820b611fffe34b7",
+      "bytes": 52
+    },
+    "build/animation-main-canonical/full-captures/sonic_player/cases.jsonl.gz": {
+      "sha256": "867c68b9c1d34fd0762aa1898e72843db6adcd45adb97f97336f942a82f007bc",
+      "bytes": 499090
+    },
+    "build/animation-main-canonical/full-captures/sonic_player/report.json": {
+      "sha256": "61ee4e79ec1ef61129bb9c4fae092ffcc08402059cf860bdbf200a58c285916e",
+      "bytes": 25113
+    },
+    "build/animation-main-canonical/full-captures/sonic_player/capture.json": {
+      "sha256": "5ef40d8b105d9f5103ca6c33a14894565f9e60fc67565d24b492588c0fb47187",
+      "bytes": 308
+    },
+    "build/animation-main-canonical/full-captures/sonic_player/report.dispatch.bin": {
+      "sha256": "e78b7fb8a08356eca526539587e821b2ac2a642a623411ad374f1cfee846ab77",
+      "bytes": 352
+    }
+  },
+  "scope": "Actual rebuilt Main probes: all complete default input/native/source records equal the immutable before-Source stream. Three numeric/table streams replay original frozen observations without original execution; three consumer streams observe unchanged default original judges. No final reserved cohort was regenerated or rerun.",
+  "limits": [
+    "Every inherited FP partial and failure/prefix identity is retained. Gamma make exit2 is1422cases/0valuefailures/498FPpartials.",
+    "Canonical summaries retain their existing bounded form and full-report hashes.",
+    "This report refresh follows the genuine bcf4846 gate and requires its own final metadata qualification.",
+    "PSetMotion, actor playback, teardown, N3b, new physical controller and gameplay63FPS remain unqualified."
+  ]
+}

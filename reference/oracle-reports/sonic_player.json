@@ -1,6 +1,6 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "1bffc87b9dec3edaefe0485e9de1059a783f1b21c601e35bd7c17929508279ca",
+ "native_library_sha256": "54b07e354ca97e4066df17670db00d2e572f8cb9adda39892c9b21bdfb3a7247",
  "profile": "actual Sonic control prefix plus explicitly seeded post-transform43eecc suffix",
  "cases": 28800,
  "by_entry": [
@@ -261,8 +261,8 @@
   "Native full-angle unavailable low16 stops before the high16 source write; known fixtures cover fully captured angles"
  ],
  "native_sources": {
-  "src/player/sonic_player.hpp": "8ab874d28623af1876eebed149625c447f112a677098c0fa4f6e56da3286b0b4",
-  "src/player/sonic_player.cpp": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483",
+  "src/player/sonic_player.hpp": "cd6c2556f5944cee132e040e80ae878ada8b0f388f7faa6e914a96df73842f87",
+  "src/player/sonic_player.cpp": "57d7e0ad5eeca0a427809d538e22094e87a17acb6e0dfb70eb9d27da12d7397f",
   "tests/probes/native_sonic_player_probe.cpp": "ea27199dca1c3f9ea726e9e1be159ed14b4ec35ab594d975fe80d2f9cd25ca60",
   "tools/oracles/verify_original_sonic_player.py": "d5b661520a090a7a4f4e4e6db71221c0e6bee1a24c9c8a01363f67af22f44c0a",
   "src/player/ground_acceleration.hpp": "35bde538be42156764534857ec3458a443932ab20a6f77832f87a649119f288f",
@@ -282,12 +282,12 @@
  "ground_prefix_stored_mismatches": 0,
  "ground_prefix_status_mismatches": 1632,
  "case_sha256": "2acd398b460a3c6691a178fcb7b0862219ac1e11818909ad41cb8fb14e6f34fe",
- "seconds": 18.304654832929373,
+ "seconds": 18.4623139584437,
  "stored_state_matches": true,
  "passed": false,
  "tracked_summary": {
-  "full_sha256": "1264a8c439111c03ca822673d05e839234833819f13cbb3317e32886831ce7b1",
-  "full_bytes": 25113,
+  "full_sha256": "54b810534e921bd32d4a08f4405bc0e98ff2ed8cec60b6601034d1fa4a93ff50",
+  "full_bytes": 25111,
   "lists_cut_to": 10,
   "cut_lists": {
    "examples": 30,
