@@ -1,0 +1,218 @@
+{
+  "source_commit": "537691b0023ee769c76a5cd882ccdb29d0d86dd2",
+  "source_sha256": "5ceaec254b1a56b42806c348c40aacf6d5715ee4ebd29600d1d224f5cf2d0bde",
+  "baseline_sha256": "922d4562bb7b952b72778050d651dec4c1b00c7a6095ff243972191ace51ad00",
+  "faults": [
+    {
+      "name": "pts-low-bit",
+      "purpose": "timestamp extraction",
+      "replace": {
+        "before": "(bytes[4] >> 1);",
+        "after": "(bytes[4] >> 2);"
+      },
+      "mutated_source_sha256": "a387df96d6140d4b212af916ae1ab60d8f4fcd852b2318d60c2333e491e36ec4",
+      "compile_exit": 0,
+      "capture_exit": 0,
+      "contract_exit": 1,
+      "contract_stderr": "30657 cases, 7774013 bytes, FNV 8261618675245699564\nfull MPEG timing identity changed\n",
+      "cases": 30657,
+      "differing_full_rows": 16967,
+      "full_output_sha256": "d65b249d79fe57abbfef69952ca71fa11216befa60f08d798ddf5ece34d94163",
+      "first_difference": {
+        "index": 52,
+        "baseline": "000001ba21000100018043ff000001bb00068043ff04e1ff000001e00016ffff402031000322fb1100030b85000001b32801e014|1|unchanged sentinel|37245,37245,30000,1001,640,480,333666,1|37245,37245,30000,1001,640,480,333666,1",
+        "fault": "000001ba21000100018043ff000001bb00068043ff04e1ff000001e00016ffff402031000322fb1100030b85000001b32801e014|1|unchanged sentinel|37182,37182,30000,1001,640,480,333666,1|37182,37182,30000,1001,640,480,333666,1"
+      }
+    },
+    {
+      "name": "rate-fraction",
+      "purpose": "frame rate denominator",
+      "replace": {
+        "before": "{30000, 1001}",
+        "after": "{30000, 1000}"
+      },
+      "mutated_source_sha256": "20fcb04f14541530cc659233a257b62ce7c56ede6ac85ac2e37c78319f5aad00",
+      "compile_exit": 0,
+      "capture_exit": 0,
+      "contract_exit": 1,
+      "contract_stderr": "30657 cases, 7774713 bytes, FNV 17187868918501892880\nfull MPEG timing identity changed\n",
+      "cases": 30657,
+      "differing_full_rows": 15273,
+      "full_output_sha256": "53028e106747c4826477013f7e6d2b844bae3f6e3003dff747dc926d729e96ee",
+      "first_difference": {
+        "index": 52,
+        "baseline": "000001ba21000100018043ff000001bb00068043ff04e1ff000001e00016ffff402031000322fb1100030b85000001b32801e014|1|unchanged sentinel|37245,37245,30000,1001,640,480,333666,1|37245,37245,30000,1001,640,480,333666,1",
+        "fault": "000001ba21000100018043ff000001bb00068043ff04e1ff000001e00016ffff402031000322fb1100030b85000001b32801e014|1|unchanged sentinel|37245,37245,30000,1000,640,480,333333,1|37245,37245,30000,1000,640,480,333333,1"
+      }
+    },
+    {
+      "name": "pts-count",
+      "purpose": "packet count",
+      "replace": {
+        "before": "timing.video_packets_with_pts++ == 0",
+        "after": "(timing.video_packets_with_pts += 2) == 2"
+      },
+      "mutated_source_sha256": "5f3ee2253ae71d7bbfa040e28c8e0eb88b75fa659cc2f91d42cb7b853dbfd36b",
+      "compile_exit": 0,
+      "capture_exit": 0,
+      "contract_exit": 1,
+      "contract_stderr": "30657 cases, 7774713 bytes, FNV 16658645825930402732\nfull MPEG timing identity changed\n",
+      "cases": 30657,
+      "differing_full_rows": 17007,
+      "full_output_sha256": "ce4dbeac59af52cb49579d299853bb511583650f4c2e43b5a1299d559d785265",
+      "first_difference": {
+        "index": 52,
+        "baseline": "000001ba21000100018043ff000001bb00068043ff04e1ff000001e00016ffff402031000322fb1100030b85000001b32801e014|1|unchanged sentinel|37245,37245,30000,1001,640,480,333666,1|37245,37245,30000,1001,640,480,333666,1",
+        "fault": "000001ba21000100018043ff000001bb00068043ff04e1ff000001e00016ffff402031000322fb1100030b85000001b32801e014|1|unchanged sentinel|37245,37245,30000,1001,640,480,333666,2|37245,37245,30000,1001,640,480,333666,2"
+      }
+    },
+    {
+      "name": "last-pts-min",
+      "purpose": "PTS range aggregation",
+      "replace": {
+        "before": "std::max(timing.last_pts, pts)",
+        "after": "std::min(timing.last_pts, pts)"
+      },
+      "mutated_source_sha256": "8454946964307b12e73baec8557ee0467edcb2d2c9b8f21b4ee2b8b86e64d320",
+      "compile_exit": 0,
+      "capture_exit": 0,
+      "contract_exit": 1,
+      "contract_stderr": "30657 cases, 7642883 bytes, FNV 13447686254457171580\nfull MPEG timing identity changed\n",
+      "cases": 30657,
+      "differing_full_rows": 15594,
+      "full_output_sha256": "b7f029165356d9ce03f9049e08507690a20f3b1a44f3c094e9dc9c443c7a8b32",
+      "first_difference": {
+        "index": 90,
+        "baseline": "000001ba21000100018043ff000001bb00068043ff04e1ff000001e00016ffff402031000322fb1100030b85000001b32801e014000001c0000d21000323c3000001b32801e018000001e0000d2100399a3b000001b300100218|1|unchanged sentinel|37245,937245,30000,1001,640,480,100333666,2|37245,937245,30000,1001,640,480,100333666,2",
+        "fault": "000001ba21000100018043ff000001bb00068043ff04e1ff000001e00016ffff402031000322fb1100030b85000001b32801e014000001c0000d21000323c3000001b32801e018000001e0000d2100399a3b000001b300100218|1|unchanged sentinel|37245,37245,30000,1001,640,480,333666,2|37245,37245,30000,1001,640,480,333666,2"
+      }
+    },
+    {
+      "name": "invalid-header-continue",
+      "purpose": "first invalid sequence search stops packet",
+      "replace": {
+        "before": "if (rate_code < 1 || rate_code > 8)\n            break;",
+        "after": "if (rate_code < 1 || rate_code > 8)\n            continue;"
+      },
+      "mutated_source_sha256": "270a35515b474cee3c671f95c8fc78fa8051c79968913391e1dc2a0e17e2abfb",
+      "compile_exit": 0,
+      "capture_exit": 0,
+      "contract_exit": 1,
+      "contract_stderr": "30657 cases, 7774801 bytes, FNV 9474153341862666564\nfull MPEG timing identity changed\n",
+      "cases": 30657,
+      "differing_full_rows": 16,
+      "full_output_sha256": "7792c1503ad430e22127e2bb8a1a67ee734d31d9d90792ecdff6057757d9fe42",
+      "first_difference": {
+        "index": 30087,
+        "baseline": "000001e000152100010019000001b32801e010000001b3fff00013|0|no video sequence header in the packet payloads",
+        "fault": "000001e000152100010019000001b32801e010000001b3fff00013|1|unchanged sentinel|12,12,25,1,4095,0,400000,1|12,12,25,1,4095,0,400000,1"
+      }
+    },
+    {
+      "name": "all-video-streams",
+      "purpose": "E0-only filtering",
+      "replace": {
+        "before": "if (code == kVideoStreamId)",
+        "after": "if (code >= kVideoStreamId)"
+      },
+      "mutated_source_sha256": "1a470ad68f34b6d3b98ebb87bd5b2eb789cb36f4c9e7bb0925ab383056767acf",
+      "compile_exit": 0,
+      "capture_exit": 0,
+      "contract_exit": 1,
+      "contract_stderr": "30657 cases, 7778464 bytes, FNV 15647173394587269893\nfull MPEG timing identity changed\n",
+      "cases": 30657,
+      "differing_full_rows": 124,
+      "full_output_sha256": "001c3721bfceef0f887d773d44e09800d03eb5cd65ee5a3ede53c9fd2738a966",
+      "first_difference": {
+        "index": 7240,
+        "baseline": "000001ba21000100018043ff000001bb00068043ff04e1ff000001e10016ffff402031000322fb1100030b85000001b32801e014000001c0000d21000323c3000001b32801e018000001e0000d2100399a3b000001b300100218000001e000020f00000001b9|1|unchanged sentinel|937245,937245,60,1,1,2,166666,1|937245,937245,60,1,1,2,166666,1",
+        "fault": "000001ba21000100018043ff000001bb00068043ff04e1ff000001e10016ffff402031000322fb1100030b85000001b32801e014000001c0000d21000323c3000001b32801e018000001e0000d2100399a3b000001b300100218000001e000020f00000001b9|1|unchanged sentinel|37245,937245,30000,1001,640,480,100333666,2|37245,937245,30000,1001,640,480,100333666,2"
+      }
+    },
+    {
+      "name": "pack-marker",
+      "purpose": "pack rejection control",
+      "replace": {
+        "before": "(stream[at + 4] & kHighNibbleMask) != kMpeg1PackMarker",
+        "after": "(stream[at + 4] & kHighNibbleMask) == kMpeg1PackMarker"
+      },
+      "mutated_source_sha256": "709365a621b1a5ef6fc725e890741c306bad2803ec66f6a0ff046b3a00b192b1",
+      "compile_exit": 0,
+      "capture_exit": 0,
+      "contract_exit": 1,
+      "contract_stderr": "30657 cases, 6695055 bytes, FNV 9330024108904686318\nfull MPEG timing identity changed\n",
+      "cases": 30657,
+      "differing_full_rows": 25409,
+      "full_output_sha256": "e65c7b7b0ade4354d210a0f9dccaf910eb6380a30fc99f1199e20ac1450a96b9",
+      "first_difference": {
+        "index": 12,
+        "baseline": "000001ba21000100018043ff|0|no video packet carries a PTS",
+        "fault": "000001ba21000100018043ff|0|not an MPEG-1 pack header at byte 0"
+      }
+    },
+    {
+      "name": "omit-frame-period",
+      "purpose": "one frame even without pictures",
+      "replace": {
+        "before": "kHundredNanosecondsPerSecond * timing.frame_rate_denominator / timing.frame_rate_numerator",
+        "after": "0 * kHundredNanosecondsPerSecond * timing.frame_rate_denominator / timing.frame_rate_numerator"
+      },
+      "mutated_source_sha256": "6614e34ebb016159d96b5180833ef59139e6de14b84b30438f486ce263358d3e",
+      "compile_exit": 0,
+      "capture_exit": 0,
+      "contract_exit": 1,
+      "contract_stderr": "30657 cases, 7760015 bytes, FNV 5451660905982577574\nfull MPEG timing identity changed\n",
+      "cases": 30657,
+      "differing_full_rows": 17007,
+      "full_output_sha256": "23c4fa0a0d07bccb471bebdd4ceef216242ad745a370526083561c9679facfa6",
+      "first_difference": {
+        "index": 52,
+        "baseline": "000001ba21000100018043ff000001bb00068043ff04e1ff000001e00016ffff402031000322fb1100030b85000001b32801e014|1|unchanged sentinel|37245,37245,30000,1001,640,480,333666,1|37245,37245,30000,1001,640,480,333666,1",
+        "fault": "000001ba21000100018043ff000001bb00068043ff04e1ff000001e00016ffff402031000322fb1100030b85000001b32801e014|1|unchanged sentinel|37245,37245,30000,1001,640,480,0,1|37245,37245,30000,1001,640,480,0,1"
+      }
+    },
+    {
+      "name": "sequence-width",
+      "purpose": "parsed dimensions",
+      "replace": {
+        "before": "(std::uint32_t(stream[at + 4]) << 4)",
+        "after": "(std::uint32_t(stream[at + 4]) << 3)"
+      },
+      "mutated_source_sha256": "cef558eb3a7181e65dacb7c9fd4406d4a2f5b4e5a57463a2ffe9446911b8fe3c",
+      "compile_exit": 0,
+      "capture_exit": 0,
+      "contract_exit": 1,
+      "contract_stderr": "30657 cases, 7774575 bytes, FNV 12074850862202520028\nfull MPEG timing identity changed\n",
+      "cases": 30657,
+      "differing_full_rows": 15644,
+      "full_output_sha256": "78a0b08965d4543cea809320aaff1e24ee8322949c17f7fb77525ba1ee19e856",
+      "first_difference": {
+        "index": 52,
+        "baseline": "000001ba21000100018043ff000001bb00068043ff04e1ff000001e00016ffff402031000322fb1100030b85000001b32801e014|1|unchanged sentinel|37245,37245,30000,1001,640,480,333666,1|37245,37245,30000,1001,640,480,333666,1",
+        "fault": "000001ba21000100018043ff000001bb00068043ff04e1ff000001e00016ffff402031000322fb1100030b85000001b32801e014|1|unchanged sentinel|37245,37245,30000,1001,320,480,333666,1|37245,37245,30000,1001,320,480,333666,1"
+      }
+    },
+    {
+      "name": "failure-precedence",
+      "purpose": "no PTS before no sequence error",
+      "replace": {
+        "before": "if (timing.video_packets_with_pts == 0)",
+        "after": "if (timing.video_packets_with_pts == 0 && have_rate)"
+      },
+      "mutated_source_sha256": "5b243e1b35825e91f4b2e9d6ed7576ae6a686e3b7f5eb1c00f3cb813f45d267a",
+      "compile_exit": 0,
+      "capture_exit": 0,
+      "contract_exit": 1,
+      "contract_stderr": "30657 cases, 7793883 bytes, FNV 8250357561895393280\nfull MPEG timing identity changed\n",
+      "cases": 30657,
+      "differing_full_rows": 1065,
+      "full_output_sha256": "cf34e6e63a3f4edbed6800143dacc6757042c16fc3c5fa7b90d928c165c294e0",
+      "first_difference": {
+        "index": 0,
+        "baseline": "|0|no video packet carries a PTS",
+        "fault": "|0|no video sequence header in the packet payloads"
+      }
+    }
+  ],
+  "limits": "Every mutant compiled and completed full capture. Each failed the unchanged frozen contract; compile failures are not counted. No Windows or decoder equivalence."
+}

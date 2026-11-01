@@ -1,0 +1,105 @@
+{
+  "source_commit": "537691b0023ee769c76a5cd882ccdb29d0d86dd2",
+  "source_sha256": {
+    "src/loader/mpeg_timing.cpp": "5ceaec254b1a56b42806c348c40aacf6d5715ee4ebd29600d1d224f5cf2d0bde",
+    "src/loader/mpeg_timing.hpp": "0e2724652177eb0f96ec59bf2e32d61e5ebb5cd3c30109a8c3f310b457fb0643",
+    "src/hle/hle_dshow.cpp": "f339d310b33b553dbc5aa3cef0192527096c0f11cebbbc7f15bb6e2bdf6940aa"
+  },
+  "commands": [
+    {
+      "argv": [
+        "build/mpeg-timing/current/unit",
+        "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/system/RE-US.MPG"
+      ],
+      "exit": 0,
+      "stdout_sha256": "7d2798eb9986c0b9304915d4aa3244432003b6ce47eab2b24c781b81e0a425b2",
+      "stdout_bytes": 192,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "build/mpeg-timing-contract-test"
+      ],
+      "exit": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr": "30657 cases, 7774713 bytes, FNV 5361094107316205512\n"
+    },
+    {
+      "argv": [
+        "build/mpeg-timing-hle-test"
+      ],
+      "exit": 0,
+      "stdout_sha256": "da050b4379703ec05c9db6720936290d8de07855a90e1d5da8a6b66a0d535543",
+      "stdout_bytes": 10873,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "build/mpeg-timing/current/contract-sanitized"
+      ],
+      "exit": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr": "30657 cases, 7774713 bytes, FNV 5361094107316205512\n"
+    }
+  ],
+  "full_comparisons": [
+    {
+      "before": "build/mpeg-timing/before/corpus.txt",
+      "current": "build/mpeg-timing/current-corpus.txt",
+      "bytes": 7774713,
+      "sha256": "922d4562bb7b952b72778050d651dec4c1b00c7a6095ff243972191ace51ad00",
+      "byte_identical": true
+    },
+    {
+      "before": "build/mpeg-timing/before/hle.txt",
+      "current": "build/mpeg-timing/current/hle.txt",
+      "bytes": 10873,
+      "sha256": "da050b4379703ec05c9db6720936290d8de07855a90e1d5da8a6b66a0d535543",
+      "byte_identical": true
+    },
+    {
+      "before": "build/mpeg-timing/before/hle-pinned.txt",
+      "current": "build/mpeg-timing/current/hle-pinned.txt",
+      "bytes": 10873,
+      "sha256": "da050b4379703ec05c9db6720936290d8de07855a90e1d5da8a6b66a0d535543",
+      "byte_identical": true
+    },
+    {
+      "before": "build/mpeg-timing/before/hle.txt",
+      "current": "build/mpeg-timing/current/registered-hle.txt",
+      "bytes": 10873,
+      "sha256": "da050b4379703ec05c9db6720936290d8de07855a90e1d5da8a6b66a0d535543",
+      "byte_identical": true
+    }
+  ],
+  "support_note": "Initial receipt hashes describe Main archives at receipt time. Main subsequently rebuilt them. Pinned private copies then relinked immutable old and candidate owner plus actual HleDshow source, with full output equal to initial pre-source baseline. The pinned old-source replay occurred after source rewrite.",
+  "pinned_support_sha256": {
+    "build/mpeg-timing/support/libsadx-guest.a": "de70e460b490b7e8f80589c0cf128504bf2f24732a9dab7e22ab90c76fb7793c",
+    "build/mpeg-timing/support/libsadx-core.a": "52a3473c8ca46c67163eef52a185bd3fdaec6b2baad777149462dc228ed92081"
+  },
+  "protected_union": {
+    "base_paths": 945,
+    "current_paths": 946,
+    "removed": [],
+    "changed_existing": [
+      "Makefile",
+      "tests/unit/manifest.tsv"
+    ],
+    "registration_prefix_preserved": true,
+    "restored_raw_count": 53
+  },
+  "new_judge_sha256": {
+    "tests/unit/mpeg_timing_contract.cpp": "503b922e9a0ef298d26f0a67128946f3ea2e7521d20cd2250072bd9af1dae207",
+    "tests/unit/mpeg_timing_hle.cpp": "ac90293a4ba850c4a5b7c5437de69866afbbd69cf1715200b853c3f63754329d",
+    "tests/fixtures/mpeg_timing_stream.hpp": "6568d75efb32abea85f0ada82c542940dd853488f43e1d12bf4dda016129f6df"
+  },
+  "limits": [
+    "No full gate or journeys run.",
+    "Actual HleDshow source compiled fresh with current parser; support archives reused, not full clean guest build.",
+    "Existing MPEG unit real-asset run read-only. All new fixtures synthetic.",
+    "Root independent review, reserved holdout, inventory reconciliation, integration and combined gate remain pending.",
+    "No native AVFoundation clock/decoder, whole Loader or Windows splitter parity claim."
+  ]
+}

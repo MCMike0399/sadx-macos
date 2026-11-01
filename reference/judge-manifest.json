@@ -1,12 +1,12 @@
 {
   "change": {
-    "base_commit": "6561f55f9eabdecfd21cceb4498da0ba4e4a2427",
-    "evidence": "reference/production-integration-20261101/music-owner-main-replay.json",
-    "evidence_sha256": "8f96e52757a2699446137c391f0a03a599eab9b1a25594c8031f1ff7dd4f5040",
-    "reason": "Track actual Main canonical music/reset consumer reports after seven exact full streams,300reset contracts and270title FP identities; expectations unchanged"
+    "base_commit": "7f51e76b6a0c636c2cee48cdbdd22bbfac994656",
+    "evidence": "docs/packets/mpeg-timing/root-parent-union.json",
+    "evidence_sha256": "cee346aaa98ea24d277824934b7b9139df6e4ec4ed336b8e88053110eb1b1533",
+    "reason": "Seal948-input reviewed MPEG/music/reference parent union with additive rules and exact appended tests; all existing expectations retained"
   },
   "files": {
-    "Makefile": "ab4cebd5b5dd166096651333a985211354bd5b07633ff55d6c74449e9e923ae1",
+    "Makefile": "1589ad72e6f32dc1684709122d78fbdc5c691ee571293be016301f90a6480ded",
     "reference/address-dispatch-baseline-v1.json": "db0e83e323df714032ddad3046670d81968efe8e966630d9666ecbbe87d38bd7",
     "reference/constexpr-table-review.json": "dd7bd2551d3226bc0c855632aa9493b2d84d4fe0f3e7a7f19a90f34b45a9dbda",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
@@ -340,6 +340,7 @@
     "reference/production-integration-20261101/guest-heap-mutants.json": "3327c044643e6e381c1a7aea13553f7c8abafb614df20caf241c1960f2f435d5",
     "reference/production-integration-20261101/menu-progress-shared/mutants.json": "cab8745d573efa9caa6e281654ef85ce535c0d28b4e593236e921d275faed40d",
     "reference/production-integration-20261101/menu-texture-bindings-mutants.json": "b2af4ad069e8b0f32ccfb12ffb0da20d247ea0aaeefc8c9454a8349d7caa919a",
+    "reference/production-integration-20261101/mpeg-timing-mutants.json": "bca998f6f5c7454768373a6833fc948e9962f14d0a734f89bcaa02d0315d86d2",
     "reference/production-integration-20261101/music-owner-mutants.json": "6ba2edf7cee1674a25f18fbf6c1be73029febc35095e90a606564e3b73c496d9",
     "reference/production-integration-20261101/save-completion-mutants.json": "1b4657b0ff662bcc21255779aa675f8acc40cdb8fb55cbfef7a8b974e70e5694",
     "reference/production-integration-20261101/session-character-resources-mutants.json": "bdb70359726436c7cfefe5729e02e75f35aa1a4b98dc1934c3df0293fb8c8693",
@@ -349,6 +350,7 @@
     "tests/fixtures/input_keyboard_goldens.hpp": "0a9f25e5a0d336a1f4381af39257fdc6f7403f43ca2aef743345284fb1c18fda",
     "tests/fixtures/material_correction_mutants.json": "e34f023704a87b4663d5c56fed1c1beabaa697cd3a3770bbe24962ab28f66f41",
     "tests/fixtures/menu_texture_binding_baseline.hpp": "86a98c1980104b1246cc82ab246e483f91ea3ca7742fda8487dace9d449a5a93",
+    "tests/fixtures/mpeg_timing_stream.hpp": "6568d75efb32abea85f0ada82c542940dd853488f43e1d12bf4dda016129f6df",
     "tests/fixtures/ninja_sprite_test_fixture.hpp": "1b4fa2a0ac6270d896f9e54c297829bdf3d43c378d195cbe34d0d6e87fd2b24e",
     "tests/fixtures/object_draw_original_mutants.json": "60e7225cbcdd2af591bac4a3aaeec4667f3aa53424123a091e8c10d2b837b54b",
     "tests/fixtures/path_probe_data.hpp": "3f8803b9afa695f6f1ca411fb7b58ae66e60609b2af2df3dd74463c3b9dadda0",
@@ -648,7 +650,7 @@
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",
     "tests/python/test_voice_publication.py": "5c00051d9b3de640f64e224dda4d810cdd7d26acafd91d7b1dc44e9786a734f3",
-    "tests/unit/manifest.tsv": "4560892a9c25008da37bce518c4c5f2c20cab59d4e3ead0fc2395418d716e8ff",
+    "tests/unit/manifest.tsv": "ef212f0b7bdc43ac4c7bf5ba6583f3313f652f68a8e236758ec03b95ec7e491f",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",
