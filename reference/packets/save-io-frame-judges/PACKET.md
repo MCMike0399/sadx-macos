@@ -46,7 +46,7 @@ unrecovered boundaries. No STUB annotation or implementation changed.
 
 Ten unchanged full default save judges pass: list discovery 348, reverse free 101,
 selected load 368, write 1,000, frame 2,420, capture 1,000, Data 1,029,
-prepare 768, request 1,280, completion 1,000 (**10,314 total**).
+prepare 768, request 1,280, completion 1,000 (**9,314 total**).
 Recompiled local probes replay all cases again. `full-abi-comparison.json` compares
 complete records, not aggregate verdicts: all declared native ABI values and source
 comparison observations are identical. Seven raw streams are also identical;
