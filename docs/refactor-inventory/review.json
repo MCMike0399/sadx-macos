@@ -15839,6 +15839,1864 @@
           "sha256": "15b676a195636ff1d8a542392dd68817c3508f73fe8e3deb460a7a5d68adabde"
         }
       ]
+    },
+    "src/input/input_initial_state.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete readable numeric template/factory inspected with current exact-byte receipt and actual borrower boundaries.",
+      "reviewed_source_sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b",
+      "semantic_justification": "Typed pre-startup input edge buffers and controller numeric records; raw lanes retain distinct values, resource pointers/discovery separate, not_held zero is load-time data not post-poll complement.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/input/input_initial_state.hpp",
+              "sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b"
+            },
+            {
+              "path": "src/input/input_initial_state.cpp",
+              "sha256": "0eda2b014281062e72921c54192c164b1bff83e0215081089be538aa00097c3a"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeInput::Impl constructs pads/engine/mod records from explicit values; NativeGame reference bridge copies supplied template or decodes omitted image facts lazily.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_input.cpp",
+              "sha256": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114"
+            },
+            {
+              "path": "src/guest/native_input_initialization.cpp",
+              "sha256": "f736f85ee538c803fecb468d588547b2410c328adbdd366618c0868ffa5af950"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 1869 bytes with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/input_initial_state.cpp",
+              "sha256": "aa3b29d46040dfadd11d2111dce6cbad009c0d47787704e10405ba385c4ba333"
+            },
+            {
+              "path": "reference/oracle-reports/input_initial_state.json",
+              "sha256": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/input/input_initial_state.hpp",
+          "sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b"
+        },
+        {
+          "path": "src/input/input_initial_state.cpp",
+          "sha256": "0eda2b014281062e72921c54192c164b1bff83e0215081089be538aa00097c3a"
+        },
+        {
+          "path": "tests/unit/input_initial_state.cpp",
+          "sha256": "aa3b29d46040dfadd11d2111dce6cbad009c0d47787704e10405ba385c4ba333"
+        },
+        {
+          "path": "reference/oracle-reports/input_initial_state.json",
+          "sha256": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c"
+        }
+      ]
+    },
+    "src/input/input_initial_state.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete readable numeric template/factory inspected with current exact-byte receipt and actual borrower boundaries.",
+      "reviewed_source_sha256": "0eda2b014281062e72921c54192c164b1bff83e0215081089be538aa00097c3a",
+      "semantic_justification": "Typed pre-startup input edge buffers and controller numeric records; raw lanes retain distinct values, resource pointers/discovery separate, not_held zero is load-time data not post-poll complement.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/input/input_initial_state.hpp",
+              "sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b"
+            },
+            {
+              "path": "src/input/input_initial_state.cpp",
+              "sha256": "0eda2b014281062e72921c54192c164b1bff83e0215081089be538aa00097c3a"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeInput::Impl constructs pads/engine/mod records from explicit values; NativeGame reference bridge copies supplied template or decodes omitted image facts lazily.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_input.cpp",
+              "sha256": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114"
+            },
+            {
+              "path": "src/guest/native_input_initialization.cpp",
+              "sha256": "f736f85ee538c803fecb468d588547b2410c328adbdd366618c0868ffa5af950"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 1869 bytes with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/input_initial_state.cpp",
+              "sha256": "aa3b29d46040dfadd11d2111dce6cbad009c0d47787704e10405ba385c4ba333"
+            },
+            {
+              "path": "reference/oracle-reports/input_initial_state.json",
+              "sha256": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/input/input_initial_state.hpp",
+          "sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b"
+        },
+        {
+          "path": "src/input/input_initial_state.cpp",
+          "sha256": "0eda2b014281062e72921c54192c164b1bff83e0215081089be538aa00097c3a"
+        },
+        {
+          "path": "tests/unit/input_initial_state.cpp",
+          "sha256": "aa3b29d46040dfadd11d2111dce6cbad009c0d47787704e10405ba385c4ba333"
+        },
+        {
+          "path": "reference/oracle-reports/input_initial_state.json",
+          "sha256": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c"
+        }
+      ]
+    },
+    "src/engine/ninja_fog_initial_state.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete readable numeric template/factory inspected with current exact-byte receipt and actual borrower boundaries.",
+      "reviewed_source_sha256": "a475f1114f191c22a683db3ff3b56198780c639c5f51a51129c9fb32878a8587",
+      "semantic_justification": "Typed fog initialization only: 128entry tables, scalar modes/flags, device numeric lookup caches and level range/color; positive65535 caches distinct from runtime disable sentinel, density remains explicit encoding.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_fog_initial_state.hpp",
+              "sha256": "a475f1114f191c22a683db3ff3b56198780c639c5f51a51129c9fb32878a8587"
+            },
+            {
+              "path": "src/engine/ninja_fog_initial_state.cpp",
+              "sha256": "629e2271c1cd4ffbfce91522c43868e36b8f61c46c51c43c9488e14f62624794"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeGame reference bridge copies explicit scalars/tables into existing owners; native fog runtime uses declared initializer type. Capabilities/resources/frame flags and device generation retain separate ownership.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            },
+            {
+              "path": "src/engine/ninja_fog.hpp",
+              "sha256": "a54cca523c3686e32853cc11280ff88474a28611787aaa7a688c063a54ca1849"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 398 words with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/ninja_fog_initial_state.cpp",
+              "sha256": "2ec59169148c431c86ab924a6ac768b774441abe4abc05bca933ca8a5dbcda36"
+            },
+            {
+              "path": "reference/oracle-reports/ninja_fog_initial_state.json",
+              "sha256": "a2f834571228f44e456ea967a10c4916432ea68b71a98d8a87c4b5ed2728573c"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/ninja_fog_initial_state.hpp",
+          "sha256": "a475f1114f191c22a683db3ff3b56198780c639c5f51a51129c9fb32878a8587"
+        },
+        {
+          "path": "src/engine/ninja_fog_initial_state.cpp",
+          "sha256": "629e2271c1cd4ffbfce91522c43868e36b8f61c46c51c43c9488e14f62624794"
+        },
+        {
+          "path": "tests/unit/ninja_fog_initial_state.cpp",
+          "sha256": "2ec59169148c431c86ab924a6ac768b774441abe4abc05bca933ca8a5dbcda36"
+        },
+        {
+          "path": "reference/oracle-reports/ninja_fog_initial_state.json",
+          "sha256": "a2f834571228f44e456ea967a10c4916432ea68b71a98d8a87c4b5ed2728573c"
+        }
+      ]
+    },
+    "src/engine/ninja_fog_initial_state.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete readable numeric template/factory inspected with current exact-byte receipt and actual borrower boundaries.",
+      "reviewed_source_sha256": "629e2271c1cd4ffbfce91522c43868e36b8f61c46c51c43c9488e14f62624794",
+      "semantic_justification": "Typed fog initialization only: 128entry tables, scalar modes/flags, device numeric lookup caches and level range/color; positive65535 caches distinct from runtime disable sentinel, density remains explicit encoding.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_fog_initial_state.hpp",
+              "sha256": "a475f1114f191c22a683db3ff3b56198780c639c5f51a51129c9fb32878a8587"
+            },
+            {
+              "path": "src/engine/ninja_fog_initial_state.cpp",
+              "sha256": "629e2271c1cd4ffbfce91522c43868e36b8f61c46c51c43c9488e14f62624794"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeGame reference bridge copies explicit scalars/tables into existing owners; native fog runtime uses declared initializer type. Capabilities/resources/frame flags and device generation retain separate ownership.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            },
+            {
+              "path": "src/engine/ninja_fog.hpp",
+              "sha256": "a54cca523c3686e32853cc11280ff88474a28611787aaa7a688c063a54ca1849"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 398 words with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/ninja_fog_initial_state.cpp",
+              "sha256": "2ec59169148c431c86ab924a6ac768b774441abe4abc05bca933ca8a5dbcda36"
+            },
+            {
+              "path": "reference/oracle-reports/ninja_fog_initial_state.json",
+              "sha256": "a2f834571228f44e456ea967a10c4916432ea68b71a98d8a87c4b5ed2728573c"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/ninja_fog_initial_state.hpp",
+          "sha256": "a475f1114f191c22a683db3ff3b56198780c639c5f51a51129c9fb32878a8587"
+        },
+        {
+          "path": "src/engine/ninja_fog_initial_state.cpp",
+          "sha256": "629e2271c1cd4ffbfce91522c43868e36b8f61c46c51c43c9488e14f62624794"
+        },
+        {
+          "path": "tests/unit/ninja_fog_initial_state.cpp",
+          "sha256": "2ec59169148c431c86ab924a6ac768b774441abe4abc05bca933ca8a5dbcda36"
+        },
+        {
+          "path": "reference/oracle-reports/ninja_fog_initial_state.json",
+          "sha256": "a2f834571228f44e456ea967a10c4916432ea68b71a98d8a87c4b5ed2728573c"
+        }
+      ]
+    },
+    "src/engine/ninja_queue_initial_state.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete readable numeric template/factory inspected with current exact-byte receipt and actual borrower boundaries.",
+      "reviewed_source_sha256": "beab3e83d252738f6771c12cbb7d81c6920d36b1738d533e9238a915bed8ffcb",
+      "semantic_justification": "Typed numeric queue comparison index, execution/lighting/packed blend/counts and three-component reset/allocation defaults; no resource ownership or source address keys.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_queue_initial_state.hpp",
+              "sha256": "beab3e83d252738f6771c12cbb7d81c6920d36b1738d533e9238a915bed8ffcb"
+            },
+            {
+              "path": "src/engine/ninja_queue_initial_state.cpp",
+              "sha256": "aced0a247c731cf72dcea9a0dcc7474f6d98ef047d4d85ebf9a4695f3c4b897a"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeGame reference bridge publishes each scalar/bit-exact float group to existing runtime owners. Pure template factory does not own the live packed blend cache or queue allocation.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 21 words with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/ninja_queue_initial_state.cpp",
+              "sha256": "516cc116e9515c0995753deb0eaccf33c8f71ef7301ba42d3641605869dfa7d4"
+            },
+            {
+              "path": "reference/oracle-reports/ninja_queue_initial_state.json",
+              "sha256": "64357ffa1f2f76c858fcd6be64ddce0c28d5a594b571ef2421bfd2c6818eaa74"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/ninja_queue_initial_state.hpp",
+          "sha256": "beab3e83d252738f6771c12cbb7d81c6920d36b1738d533e9238a915bed8ffcb"
+        },
+        {
+          "path": "src/engine/ninja_queue_initial_state.cpp",
+          "sha256": "aced0a247c731cf72dcea9a0dcc7474f6d98ef047d4d85ebf9a4695f3c4b897a"
+        },
+        {
+          "path": "tests/unit/ninja_queue_initial_state.cpp",
+          "sha256": "516cc116e9515c0995753deb0eaccf33c8f71ef7301ba42d3641605869dfa7d4"
+        },
+        {
+          "path": "reference/oracle-reports/ninja_queue_initial_state.json",
+          "sha256": "64357ffa1f2f76c858fcd6be64ddce0c28d5a594b571ef2421bfd2c6818eaa74"
+        }
+      ]
+    },
+    "src/engine/ninja_queue_initial_state.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete readable numeric template/factory inspected with current exact-byte receipt and actual borrower boundaries.",
+      "reviewed_source_sha256": "aced0a247c731cf72dcea9a0dcc7474f6d98ef047d4d85ebf9a4695f3c4b897a",
+      "semantic_justification": "Typed numeric queue comparison index, execution/lighting/packed blend/counts and three-component reset/allocation defaults; no resource ownership or source address keys.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_queue_initial_state.hpp",
+              "sha256": "beab3e83d252738f6771c12cbb7d81c6920d36b1738d533e9238a915bed8ffcb"
+            },
+            {
+              "path": "src/engine/ninja_queue_initial_state.cpp",
+              "sha256": "aced0a247c731cf72dcea9a0dcc7474f6d98ef047d4d85ebf9a4695f3c4b897a"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeGame reference bridge publishes each scalar/bit-exact float group to existing runtime owners. Pure template factory does not own the live packed blend cache or queue allocation.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 21 words with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/ninja_queue_initial_state.cpp",
+              "sha256": "516cc116e9515c0995753deb0eaccf33c8f71ef7301ba42d3641605869dfa7d4"
+            },
+            {
+              "path": "reference/oracle-reports/ninja_queue_initial_state.json",
+              "sha256": "64357ffa1f2f76c858fcd6be64ddce0c28d5a594b571ef2421bfd2c6818eaa74"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/ninja_queue_initial_state.hpp",
+          "sha256": "beab3e83d252738f6771c12cbb7d81c6920d36b1738d533e9238a915bed8ffcb"
+        },
+        {
+          "path": "src/engine/ninja_queue_initial_state.cpp",
+          "sha256": "aced0a247c731cf72dcea9a0dcc7474f6d98ef047d4d85ebf9a4695f3c4b897a"
+        },
+        {
+          "path": "tests/unit/ninja_queue_initial_state.cpp",
+          "sha256": "516cc116e9515c0995753deb0eaccf33c8f71ef7301ba42d3641605869dfa7d4"
+        },
+        {
+          "path": "reference/oracle-reports/ninja_queue_initial_state.json",
+          "sha256": "64357ffa1f2f76c858fcd6be64ddce0c28d5a594b571ef2421bfd2c6818eaa74"
+        }
+      ]
+    },
+    "src/engine/ninja_screen_initial_state.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete readable numeric template/factory inspected with current exact-byte receipt and actual borrower boundaries.",
+      "reviewed_source_sha256": "adfa26612d9aee42c94deb4c524583338df4c49ab627e97c5c3ddd1a297c1153",
+      "semantic_justification": "Typed clip/distances/viewport/rectangles/points/matrices and scalar setup defaults. Base transform identity differs from zero projection/work matrices; unknown broader scalar meanings remain explicit without guessing.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_screen_initial_state.hpp",
+              "sha256": "adfa26612d9aee42c94deb4c524583338df4c49ab627e97c5c3ddd1a297c1153"
+            },
+            {
+              "path": "src/engine/ninja_screen_initial_state.cpp",
+              "sha256": "361e0775bd725ccab88e069c1c01c91af27ca431b893edbaf77210e353bc1a05"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeGame reference bridge imports explicit numeric facts into existing screen/projection owners; resource/capability/display configuration remains outside initializer.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 90 words with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/ninja_screen_initial_state.cpp",
+              "sha256": "87eb7d20ee84a856e2fd5a6d0288d8844f7185150d132e6ee818014d119e25d1"
+            },
+            {
+              "path": "reference/oracle-reports/ninja_screen_initial_state.json",
+              "sha256": "716ea9c06c162030579eb2eb164be2a33b347e6c44711e12c28f84ef815f1792"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/ninja_screen_initial_state.hpp",
+          "sha256": "adfa26612d9aee42c94deb4c524583338df4c49ab627e97c5c3ddd1a297c1153"
+        },
+        {
+          "path": "src/engine/ninja_screen_initial_state.cpp",
+          "sha256": "361e0775bd725ccab88e069c1c01c91af27ca431b893edbaf77210e353bc1a05"
+        },
+        {
+          "path": "tests/unit/ninja_screen_initial_state.cpp",
+          "sha256": "87eb7d20ee84a856e2fd5a6d0288d8844f7185150d132e6ee818014d119e25d1"
+        },
+        {
+          "path": "reference/oracle-reports/ninja_screen_initial_state.json",
+          "sha256": "716ea9c06c162030579eb2eb164be2a33b347e6c44711e12c28f84ef815f1792"
+        }
+      ]
+    },
+    "src/engine/ninja_screen_initial_state.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete readable numeric template/factory inspected with current exact-byte receipt and actual borrower boundaries.",
+      "reviewed_source_sha256": "361e0775bd725ccab88e069c1c01c91af27ca431b893edbaf77210e353bc1a05",
+      "semantic_justification": "Typed clip/distances/viewport/rectangles/points/matrices and scalar setup defaults. Base transform identity differs from zero projection/work matrices; unknown broader scalar meanings remain explicit without guessing.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_screen_initial_state.hpp",
+              "sha256": "adfa26612d9aee42c94deb4c524583338df4c49ab627e97c5c3ddd1a297c1153"
+            },
+            {
+              "path": "src/engine/ninja_screen_initial_state.cpp",
+              "sha256": "361e0775bd725ccab88e069c1c01c91af27ca431b893edbaf77210e353bc1a05"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeGame reference bridge imports explicit numeric facts into existing screen/projection owners; resource/capability/display configuration remains outside initializer.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 90 words with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/ninja_screen_initial_state.cpp",
+              "sha256": "87eb7d20ee84a856e2fd5a6d0288d8844f7185150d132e6ee818014d119e25d1"
+            },
+            {
+              "path": "reference/oracle-reports/ninja_screen_initial_state.json",
+              "sha256": "716ea9c06c162030579eb2eb164be2a33b347e6c44711e12c28f84ef815f1792"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/ninja_screen_initial_state.hpp",
+          "sha256": "adfa26612d9aee42c94deb4c524583338df4c49ab627e97c5c3ddd1a297c1153"
+        },
+        {
+          "path": "src/engine/ninja_screen_initial_state.cpp",
+          "sha256": "361e0775bd725ccab88e069c1c01c91af27ca431b893edbaf77210e353bc1a05"
+        },
+        {
+          "path": "tests/unit/ninja_screen_initial_state.cpp",
+          "sha256": "87eb7d20ee84a856e2fd5a6d0288d8844f7185150d132e6ee818014d119e25d1"
+        },
+        {
+          "path": "reference/oracle-reports/ninja_screen_initial_state.json",
+          "sha256": "716ea9c06c162030579eb2eb164be2a33b347e6c44711e12c28f84ef815f1792"
+        }
+      ]
+    },
+    "src/engine/controller_values.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete numeric record reviewed with exact shared type/consumer and source binding.",
+      "reviewed_source_sha256": "abbfb8000a4dc77da937481cff321e86a48dd1204507c348d1c39083424106b5",
+      "semantic_justification": "Complete dependency-light PDS_PERIPHERAL numeric value record: named32bit masks/edges,16bit triggers/axes and previous-held. Real name/extension/info resources omitted deliberately. One semantic type is reused by engine, input alias and native initialization; no game algorithm, fixture optional or address identity.",
+      "resolved_owners": [
+        {
+          "resolution": "Plain per-runtime values; alias creates no extra owned state. Actual raw records and device resources remain their existing owners.",
+          "evidence": [
+            {
+              "path": "src/engine/controller_values.hpp",
+              "sha256": "abbfb8000a4dc77da937481cff321e86a48dd1204507c348d1c39083424106b5"
+            },
+            {
+              "path": "src/input/input_initial_state.hpp",
+              "sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Input initial values and GameLogicController/native input bridge share this declared type.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_input.cpp",
+              "sha256": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114"
+            },
+            {
+              "path": "src/engine/controller_values.hpp",
+              "sha256": "abbfb8000a4dc77da937481cff321e86a48dd1204507c348d1c39083424106b5"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Current input initial-state receipt binds this exact header and1869 compared bytes; broader controller behavior excluded.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/input_initial_state.json",
+              "sha256": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Numeric value shape only; not controller discovery/HID/runtime polling qualification.",
+        "No rewrite or new test verdict."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/controller_values.hpp",
+          "sha256": "abbfb8000a4dc77da937481cff321e86a48dd1204507c348d1c39083424106b5"
+        },
+        {
+          "path": "src/input/input_initial_state.hpp",
+          "sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b"
+        },
+        {
+          "path": "reference/oracle-reports/input_initial_state.json",
+          "sha256": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c"
+        }
+      ]
+    },
+    "src/engine/task.hpp": {
+      "disposition": "needs_migration",
+      "reason": "Complete API mixes semantic task ownership with source-slot graph interchange, fixture-default availability and instruction-boundary diagnostics; keep actual scheduler behavior in engine while extracting reference facts.",
+      "reviewed_source_sha256": "9162b6011520e0d6e6a98e8a4a989793c48bb7ca3e19e0d732f1d59b9ac4c9e8",
+      "semantic_justification": "Task handles own resources; private links are nonowning and slot generations are explicit. optional slot/link/default values distinguish host tasks, null pointers and missing fixture observations. Declared lifecycle stages retain partial cleanup, not an imagined transaction rollback.",
+      "resolved_owners": [
+        {
+          "resolution": "TaskScheduler owns storage_, source_slots_, free_slots_, heads_, TaskContext, one shared arena/pool reservation and an explicit callback-context table. Task links are nonowning pointers into retained storage. WalkGuard defers scheduler reclamation through outermost native traversal; caller/cursor/graph handles can retain retired storage. Task owns allocation handles and canonical primary_state/motion_state/auxiliary_native_work; typed payloads are not byte-vector pose replicas. TaskResult/continuation handles retain partial cleanup state. ObjectControl linkage may hold a task until cleanup clears it; no second scheduler or GLOBAL is added.",
+          "evidence": [
+            {
+              "path": "src/engine/task.hpp",
+              "line": 1,
+              "sha256": "9162b6011520e0d6e6a98e8a4a989793c48bb7ca3e19e0d732f1d59b9ac4c9e8"
+            },
+            {
+              "path": "src/engine/task.cpp",
+              "line": 1,
+              "sha256": "69a568d3577c8a0b7050d2de9774441082f4304931c0b9580f249fb1cb601774"
+            },
+            {
+              "path": "src/player/player_task.cpp",
+              "line": 1,
+              "sha256": "2e76cd51fb6d4e58e95fffb2245a76f686243035074cf331890e240e61e8bf71"
+            },
+            {
+              "path": "src/player/player_startup.cpp",
+              "line": 1,
+              "sha256": "55fda480c5ec832436e19406f8ecc565152d480e7e162114b8a3527267e42b05"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Actual native LogoScene constructs/replaces the arena and scheduler; TitleScene registers explicit scene contexts, creates tasks, executes/displays/deletes them, and menu/preview callbacks borrow task work. Music manager destruction can clear the canonical handle used as destroy_task argument. NativeGame reference reset constructs the same scheduler and installs player child copying. HLE TaskBridge separately owns guest transport, imports/exports pool graphs and resumes guest callbacks. Unit/probe consumers exercise host append, source allocation, graph mutation, continuation and cleanup; none makes arbitrary native actor callbacks complete.",
+          "evidence": [
+            {
+              "path": "src/runtime/logo_scene.cpp",
+              "line": 1,
+              "sha256": "bc4c2ecdb1432a3bb7d3290d8a9a58b14988aeea2583b3889ec8b6be70cb8dbb"
+            },
+            {
+              "path": "src/runtime/native_title_scene.cpp",
+              "line": 1,
+              "sha256": "cbf4b20341e359a6f945e453834a6d9ef599685bef3c5b50115dc505d741e21e"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 1,
+              "sha256": "b2192da9fc1a860b432d09030beaf120a810d5442a2188b0c3b8e44b87d82ad8"
+            },
+            {
+              "path": "src/runtime/native_selection_preview.cpp",
+              "line": 1,
+              "sha256": "7e87d4ce716df319922ff55b59a0710acd9334cd910fdbad990e1dcea46cbe52"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "line": 1,
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/hle/hle_task_bridge.cpp",
+              "line": 1,
+              "sha256": "10818587a4542bc7794138c8589fb17b2ff89afaa4b766e6fc8219f3160922a4"
+            },
+            {
+              "path": "tests/unit/task_callback_lifetime.cpp",
+              "line": 1,
+              "sha256": "ab8df56ea70a5b9d4969fe613f3c07b860f10621a9807b0002d2576f033d7d17"
+            },
+            {
+              "path": "tests/unit/player_motion_graph.cpp",
+              "line": 1,
+              "sha256": "6645aec71ac57285b7f0eaf38d154ad7f278280e7c8dd7251a9d47f1ddd41889"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Current-source native regression specifications: allocation/child/raw/live copy, pool exhaustion, saved-next mutation/reuse, explicit default-null versus unknown, partial cleanup/resume, auxiliary release ordering, canonical-owner destructor reset/replacement and graph motion identity. The historical gate pins current task/task_work files; Main music replay separately records task_callback_lifetime exit 0.",
+          "limits": "Accepted as bounded existing regression evidence, not a fresh execution or full original/hardware lifecycle proof.",
+          "evidence": [
+            {
+              "path": "tests/unit/task.cpp",
+              "line": 1,
+              "sha256": "6ddada476bd7dc1cc63debafaf7c843dd352eb23fa39f4c7b3770e86a62a3fc7"
+            },
+            {
+              "path": "tests/unit/task_lifecycle.cpp",
+              "line": 1,
+              "sha256": "d9f6109498923447d548721a475234b7e8dc23d79e4d534e551bce19576992a1"
+            },
+            {
+              "path": "tests/unit/task_display.cpp",
+              "line": 1,
+              "sha256": "3277c74a7e7a474f2ec257cd1b99f5472b9f523440314a05e43a042d81ac40e6"
+            },
+            {
+              "path": "tests/unit/task_callback_lifetime.cpp",
+              "line": 1,
+              "sha256": "ab8df56ea70a5b9d4969fe613f3c07b860f10621a9807b0002d2576f033d7d17"
+            },
+            {
+              "path": "tests/unit/player_motion_graph.cpp",
+              "line": 1,
+              "sha256": "6645aec71ac57285b7f0eaf38d154ad7f278280e7c8dd7251a9d47f1ddd41889"
+            },
+            {
+              "path": "reference/production-integration-20261101/character-math-gate.json",
+              "line": 1,
+              "sha256": "71be8a684b67446991faa59436b6365d06692e8beba2ea3434a5f317d254b38c"
+            },
+            {
+              "path": "reference/production-integration-20261101/music-owner-main-replay.json",
+              "line": 1,
+              "sha256": "8f96e52757a2699446137c391f0a03a599eab9b1a25594c8031f1ff7dd4f5040"
+            }
+          ]
+        },
+        {
+          "accepted_scope": "Original task display reports 236 comparisons with zero mismatches; delete reports 244 compared of 250 attempted and six explicit source reentrancy/cycle exclusions. Allocator/lifecycle summaries retain exact trace/link/arena comparisons and inactive 401000 failure boundary.",
+          "limits": "Display/delete task header and implementation hashes are stale. Lifecycle lacks current transitive source pinning. Summaries are historical, truncated where recorded; no fresh full-case identity, mutant or holdout acceptance.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/task_display.json",
+              "line": 1,
+              "sha256": "e746d1db0c7257a50b77a15549c13b31c5e0f24616e70225353f76e6c4d15e89"
+            },
+            {
+              "path": "reference/oracle-reports/task_delete.json",
+              "line": 1,
+              "sha256": "9d61ba4df655038f8a7c7913afc98f140c1b3c978a34517041a9ab7475194e22"
+            },
+            {
+              "path": "reference/oracle-reports/task_lifecycle.json",
+              "line": 1,
+              "sha256": "f9fb5745b13198245428d41b63346cbff0b2a495a8062d4c8be644368fc4dd40"
+            },
+            {
+              "path": "tools/oracles/verify_original_task_display.py",
+              "line": 1,
+              "sha256": "d247cf8cd0f65ddb68f74597c66b809158cee314d21de8ad2e54220c26386f99"
+            },
+            {
+              "path": "tools/oracles/verify_original_task_delete.py",
+              "line": 1,
+              "sha256": "bed80ab1cdbc3d1b126c72f04bb4522cabf15af0e11b1d58a579138cf5c00241"
+            },
+            {
+              "path": "tools/oracles/verify_original_task_lifecycle.py",
+              "line": 1,
+              "sha256": "010c3770e264bd05a26b34fa2d20381e79aa51c492c062ff01755ee3cf20bf93"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Independent static inventory at Main 99bdaf4a9e06006aed7f9fcf2c963a6e68cf61d3; only this authored fragment is changed. All seven complete bodies (1,575 physical lines) were read. No source, fixture, judge, global policy/shard/manifest, HANDOFF or STATUS edits.",
+        "No builds, tests, oracles, mutations, providers, network, storage operations, delegates or full gates executed. Root gate 97018 is outside this review; no terminal result inferred. Historical receipts retain their original limits and outcomes.",
+        "Disposition applies only to the exact named files/module members. No whole Task engine, player, Session, actor playback, GPU, N3b, story, gameplay 63 FPS, physical controller or campaign approval. Reference-purpose classification alone never means code conformance.",
+        "This file remains open for the concrete migration/qualification work stated here; historical success is not whole-module conformance."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/task.hpp",
+          "line": 1,
+          "sha256": "9162b6011520e0d6e6a98e8a4a989793c48bb7ca3e19e0d732f1d59b9ac4c9e8"
+        },
+        {
+          "path": "docs/STYLE.md",
+          "line": 1,
+          "sha256": "bd44068383b2198cf5165c2869086c6cf7844b1c96be44db7194c768ee62afdd"
+        },
+        {
+          "path": "docs/refactor-inventory/MODULE-REVIEW.md",
+          "line": 1,
+          "sha256": "aa94a5e19b17ebf362c49c741423b9d87a6852dc50cd448baaa3749487103ca5"
+        }
+      ]
+    },
+    "src/engine/task.cpp": {
+      "disposition": "needs_migration",
+      "reason": "Complete scheduler contains compressed multi-statement control flow and address-shaped failure/field tables intertwined with recovered lifecycle. This is actual native game behavior, not a reference-only exemption.",
+      "reviewed_source_sha256": "69a568d3577c8a0b7050d2de9774441082f4304931c0b9580f249fb1cb601774",
+      "semantic_justification": "Host append appends while source allocation prepends; index8 aliases7 and level7 stays detached. Dispatch captures next/exec before calls; display reloads children after callback. Child null exec faults; top null exec skips. FreeTask schedules destruction. Destructor arguments retain value identity despite canonical handle reset. Cleanup continuation and pool reuse retain source order and explicit unsupported cases.",
+      "resolved_owners": [
+        {
+          "resolution": "TaskScheduler owns storage_, source_slots_, free_slots_, heads_, TaskContext, one shared arena/pool reservation and an explicit callback-context table. Task links are nonowning pointers into retained storage. WalkGuard defers scheduler reclamation through outermost native traversal; caller/cursor/graph handles can retain retired storage. Task owns allocation handles and canonical primary_state/motion_state/auxiliary_native_work; typed payloads are not byte-vector pose replicas. TaskResult/continuation handles retain partial cleanup state. ObjectControl linkage may hold a task until cleanup clears it; no second scheduler or GLOBAL is added.",
+          "evidence": [
+            {
+              "path": "src/engine/task.hpp",
+              "line": 1,
+              "sha256": "9162b6011520e0d6e6a98e8a4a989793c48bb7ca3e19e0d732f1d59b9ac4c9e8"
+            },
+            {
+              "path": "src/engine/task.cpp",
+              "line": 1,
+              "sha256": "69a568d3577c8a0b7050d2de9774441082f4304931c0b9580f249fb1cb601774"
+            },
+            {
+              "path": "src/player/player_task.cpp",
+              "line": 1,
+              "sha256": "2e76cd51fb6d4e58e95fffb2245a76f686243035074cf331890e240e61e8bf71"
+            },
+            {
+              "path": "src/player/player_startup.cpp",
+              "line": 1,
+              "sha256": "55fda480c5ec832436e19406f8ecc565152d480e7e162114b8a3527267e42b05"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Actual native LogoScene constructs/replaces the arena and scheduler; TitleScene registers explicit scene contexts, creates tasks, executes/displays/deletes them, and menu/preview callbacks borrow task work. Music manager destruction can clear the canonical handle used as destroy_task argument. NativeGame reference reset constructs the same scheduler and installs player child copying. HLE TaskBridge separately owns guest transport, imports/exports pool graphs and resumes guest callbacks. Unit/probe consumers exercise host append, source allocation, graph mutation, continuation and cleanup; none makes arbitrary native actor callbacks complete.",
+          "evidence": [
+            {
+              "path": "src/runtime/logo_scene.cpp",
+              "line": 1,
+              "sha256": "bc4c2ecdb1432a3bb7d3290d8a9a58b14988aeea2583b3889ec8b6be70cb8dbb"
+            },
+            {
+              "path": "src/runtime/native_title_scene.cpp",
+              "line": 1,
+              "sha256": "cbf4b20341e359a6f945e453834a6d9ef599685bef3c5b50115dc505d741e21e"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 1,
+              "sha256": "b2192da9fc1a860b432d09030beaf120a810d5442a2188b0c3b8e44b87d82ad8"
+            },
+            {
+              "path": "src/runtime/native_selection_preview.cpp",
+              "line": 1,
+              "sha256": "7e87d4ce716df319922ff55b59a0710acd9334cd910fdbad990e1dcea46cbe52"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "line": 1,
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/hle/hle_task_bridge.cpp",
+              "line": 1,
+              "sha256": "10818587a4542bc7794138c8589fb17b2ff89afaa4b766e6fc8219f3160922a4"
+            },
+            {
+              "path": "tests/unit/task_callback_lifetime.cpp",
+              "line": 1,
+              "sha256": "ab8df56ea70a5b9d4969fe613f3c07b860f10621a9807b0002d2576f033d7d17"
+            },
+            {
+              "path": "tests/unit/player_motion_graph.cpp",
+              "line": 1,
+              "sha256": "6645aec71ac57285b7f0eaf38d154ad7f278280e7c8dd7251a9d47f1ddd41889"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Current-source native regression specifications: allocation/child/raw/live copy, pool exhaustion, saved-next mutation/reuse, explicit default-null versus unknown, partial cleanup/resume, auxiliary release ordering, canonical-owner destructor reset/replacement and graph motion identity. The historical gate pins current task/task_work files; Main music replay separately records task_callback_lifetime exit 0.",
+          "limits": "Accepted as bounded existing regression evidence, not a fresh execution or full original/hardware lifecycle proof.",
+          "evidence": [
+            {
+              "path": "tests/unit/task.cpp",
+              "line": 1,
+              "sha256": "6ddada476bd7dc1cc63debafaf7c843dd352eb23fa39f4c7b3770e86a62a3fc7"
+            },
+            {
+              "path": "tests/unit/task_lifecycle.cpp",
+              "line": 1,
+              "sha256": "d9f6109498923447d548721a475234b7e8dc23d79e4d534e551bce19576992a1"
+            },
+            {
+              "path": "tests/unit/task_display.cpp",
+              "line": 1,
+              "sha256": "3277c74a7e7a474f2ec257cd1b99f5472b9f523440314a05e43a042d81ac40e6"
+            },
+            {
+              "path": "tests/unit/task_callback_lifetime.cpp",
+              "line": 1,
+              "sha256": "ab8df56ea70a5b9d4969fe613f3c07b860f10621a9807b0002d2576f033d7d17"
+            },
+            {
+              "path": "tests/unit/player_motion_graph.cpp",
+              "line": 1,
+              "sha256": "6645aec71ac57285b7f0eaf38d154ad7f278280e7c8dd7251a9d47f1ddd41889"
+            },
+            {
+              "path": "reference/production-integration-20261101/character-math-gate.json",
+              "line": 1,
+              "sha256": "71be8a684b67446991faa59436b6365d06692e8beba2ea3434a5f317d254b38c"
+            },
+            {
+              "path": "reference/production-integration-20261101/music-owner-main-replay.json",
+              "line": 1,
+              "sha256": "8f96e52757a2699446137c391f0a03a599eab9b1a25594c8031f1ff7dd4f5040"
+            }
+          ]
+        },
+        {
+          "accepted_scope": "Original task display reports 236 comparisons with zero mismatches; delete reports 244 compared of 250 attempted and six explicit source reentrancy/cycle exclusions. Allocator/lifecycle summaries retain exact trace/link/arena comparisons and inactive 401000 failure boundary.",
+          "limits": "Display/delete task header and implementation hashes are stale. Lifecycle lacks current transitive source pinning. Summaries are historical, truncated where recorded; no fresh full-case identity, mutant or holdout acceptance.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/task_display.json",
+              "line": 1,
+              "sha256": "e746d1db0c7257a50b77a15549c13b31c5e0f24616e70225353f76e6c4d15e89"
+            },
+            {
+              "path": "reference/oracle-reports/task_delete.json",
+              "line": 1,
+              "sha256": "9d61ba4df655038f8a7c7913afc98f140c1b3c978a34517041a9ab7475194e22"
+            },
+            {
+              "path": "reference/oracle-reports/task_lifecycle.json",
+              "line": 1,
+              "sha256": "f9fb5745b13198245428d41b63346cbff0b2a495a8062d4c8be644368fc4dd40"
+            },
+            {
+              "path": "tools/oracles/verify_original_task_display.py",
+              "line": 1,
+              "sha256": "d247cf8cd0f65ddb68f74597c66b809158cee314d21de8ad2e54220c26386f99"
+            },
+            {
+              "path": "tools/oracles/verify_original_task_delete.py",
+              "line": 1,
+              "sha256": "bed80ab1cdbc3d1b126c72f04bb4522cabf15af0e11b1d58a579138cf5c00241"
+            },
+            {
+              "path": "tools/oracles/verify_original_task_lifecycle.py",
+              "line": 1,
+              "sha256": "010c3770e264bd05a26b34fa2d20381e79aa51c492c062ff01755ee3cf20bf93"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Independent static inventory at Main 99bdaf4a9e06006aed7f9fcf2c963a6e68cf61d3; only this authored fragment is changed. All seven complete bodies (1,575 physical lines) were read. No source, fixture, judge, global policy/shard/manifest, HANDOFF or STATUS edits.",
+        "No builds, tests, oracles, mutations, providers, network, storage operations, delegates or full gates executed. Root gate 97018 is outside this review; no terminal result inferred. Historical receipts retain their original limits and outcomes.",
+        "Disposition applies only to the exact named files/module members. No whole Task engine, player, Session, actor playback, GPU, N3b, story, gameplay 63 FPS, physical controller or campaign approval. Reference-purpose classification alone never means code conformance.",
+        "This file remains open for the concrete migration/qualification work stated here; historical success is not whole-module conformance."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/task.cpp",
+          "line": 1,
+          "sha256": "69a568d3577c8a0b7050d2de9774441082f4304931c0b9580f249fb1cb601774"
+        },
+        {
+          "path": "docs/STYLE.md",
+          "line": 1,
+          "sha256": "bd44068383b2198cf5165c2869086c6cf7844b1c96be44db7194c768ee62afdd"
+        },
+        {
+          "path": "docs/refactor-inventory/MODULE-REVIEW.md",
+          "line": 1,
+          "sha256": "aa94a5e19b17ebf362c49c741423b9d87a6852dc50cd448baaa3749487103ca5"
+        }
+      ]
+    },
+    "src/engine/task_work.hpp": {
+      "disposition": "needs_migration",
+      "reason": "Functional allocator/reference ownership is combined with reference_base, serialized-byte knownness and transport callbacks in the public engine contract. Separate these responsibilities without relocating recovered allocator behavior.",
+      "reviewed_source_sha256": "d0df9e59dec1dfcbeff7d9100ac0044b5a6e3e4683f691d85d60534416109f9d",
+      "semantic_justification": "Free/physical links are optional offsets (offset0 is real), not host/guest pointers. TaskWork handles identify allocation generations. Interior reference results carry target allocation, byte offset and allocation-data provenance; whole-allocation access explicitly rejects interiors. Weak references prevent self-retention.",
+      "resolved_owners": [
+        {
+          "resolution": "TaskWorkArena owns backing bytes/knownness, physical/free block topology, live allocation handles and weak reference bindings. TaskWork carries raw owner identity/header/request/released state plus an optional typed collision payload. A handle is distinct from its reused numerical data offset. References record target allocation plus interior byte offset and original allocation_data_offset; weak targets do not retain themselves. Explicit release invalidates a retained handle independently of shared_ptr lifetime. No TaskWork method dereferences its raw owner after arena destruction; clients must keep the arena alive for operations.",
+          "evidence": [
+            {
+              "path": "src/engine/task_work.hpp",
+              "line": 1,
+              "sha256": "d0df9e59dec1dfcbeff7d9100ac0044b5a6e3e4683f691d85d60534416109f9d"
+            },
+            {
+              "path": "src/engine/task_work.cpp",
+              "line": 1,
+              "sha256": "08e679e66ab28ceda7a942033489cbd1f49356875766babe9e66236870c84691"
+            },
+            {
+              "path": "tests/unit/task_work.cpp",
+              "line": 1,
+              "sha256": "d6304f3614174330c0b8c11ed234a6d6ad7dcec68eedf23dbeb9c967b49be725"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Native scheduler creation/destruction, player initialization, collision cleanup, Gamma cursor generation and animation buffers consume the allocator. Startup publishes player+312 -> same allocation+56 and player+316 -> same allocation+0. Animation scalar consumption checks reference_view live and reads canonical physics speed/charge, never a copied byte scalar. Legacy Sonic motion binding resolves exact allocation identity through PlayerStartupRegistry; Native Gamma uses Registry.allocations. HLE alone installs base-address serialization and payload/resolver callbacks; its resolver currently resolves exact allocation bases, not arbitrary interiors.",
+          "evidence": [
+            {
+              "path": "src/engine/task.cpp",
+              "line": 1,
+              "sha256": "69a568d3577c8a0b7050d2de9774441082f4304931c0b9580f249fb1cb601774"
+            },
+            {
+              "path": "src/player/player_startup.cpp",
+              "line": 1,
+              "sha256": "55fda480c5ec832436e19406f8ecc565152d480e7e162114b8a3527267e42b05"
+            },
+            {
+              "path": "src/player/player_animation.cpp",
+              "line": 1,
+              "sha256": "f1fea844550691d84e9be39bb2f8bd78c3b75bcc16c950c79a67df1b1a71ade0"
+            },
+            {
+              "path": "src/player/player_animation_blend.cpp",
+              "line": 1,
+              "sha256": "d1ad8f801908b368f3d6cffdc9459c85a1f142d0db484a72f13dc0069256888c"
+            },
+            {
+              "path": "src/player/sonic_player.cpp",
+              "line": 1,
+              "sha256": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483"
+            },
+            {
+              "path": "src/runtime/native_gamma_binding.cpp",
+              "line": 1,
+              "sha256": "75d59d1560df2d8f129cc0c76aa1ba99a9a2933b90f5465cd3e63ae07830cecb"
+            },
+            {
+              "path": "src/player/gamma_cursors.cpp",
+              "line": 1,
+              "sha256": "cce66f08eb505fd245689ad73c51de49e6cb5489f8a1f8d9e4e59d3861492bf4"
+            },
+            {
+              "path": "src/engine/collision_component.cpp",
+              "line": 1,
+              "sha256": "e6a9e37e956ebe2f7a54344f5b17e447f182c8e502432ee28aeef115717ee3e5"
+            },
+            {
+              "path": "src/guest/player_initialization_reference.cpp",
+              "line": 1,
+              "sha256": "17503815791d0c7dd7ff901dde802ab2627c2a099a7202bbc4e92487cfe88159"
+            },
+            {
+              "path": "src/hle/hle_task_bridge.cpp",
+              "line": 1,
+              "sha256": "10818587a4542bc7794138c8589fb17b2ff89afaa4b766e6fc8219f3160922a4"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Current unit specifies first fit, rounded padding, preserved stale payload/header bytes, coalescing, exact fit/sentinel, wrap/exhaustion, released/foreign work, typed null/self/interior references, weak target lifetime, unknown pointer provenance and live payload callbacks. Current historical gate fingerprints both source files and runs task-work.",
+          "limits": "No new run. Unit contracts distinguish functional null links and unavailable serialized bytes; do not establish hardware heap acquisition or every failure/reentrant callback path.",
+          "evidence": [
+            {
+              "path": "tests/unit/task_work.cpp",
+              "line": 1,
+              "sha256": "d6304f3614174330c0b8c11ed234a6d6ad7dcec68eedf23dbeb9c967b49be725"
+            },
+            {
+              "path": "tests/unit/player_startup.cpp",
+              "line": 1,
+              "sha256": "3c433f9b0e965f581e9982a854c2425b471aac472fe0d787b1d2bf711c0bd218"
+            },
+            {
+              "path": "reference/production-integration-20261101/character-math-gate.json",
+              "line": 1,
+              "sha256": "71be8a684b67446991faa59436b6365d06692e8beba2ea3434a5f317d254b38c"
+            }
+          ]
+        },
+        {
+          "accepted_scope": "Historical allocator comparison reports exact return/head/full-arena bytes; current tracked summary cuts sequences to 10 of 16. Earlier work evidence reports 4,890 operations and 3 core plus 2 bridge mutants. Later lifetime evidence reports 19 sequences/2,316 operations, 3 core lifetime plus 2 bridge faults and 10 existing bridge faults.",
+          "limits": "Historical mutation receipts fingerprint older task/bridge/header sources; current task_work.cpp alone matches later lifetime evidence. No current complete mutation/holdout receipt or locally available frozen raw cases. Do not sum truncated lists into full corpus totals.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/task_work.json",
+              "line": 1,
+              "sha256": "d6207dbe834866bd25b2191bdd4c82ed30685370226b65d2a2f1fa61fe071897"
+            },
+            {
+              "path": "reference/production-integration-20261013/task-work-evidence.json",
+              "line": 1,
+              "sha256": "5e0733d0211387db526b1002757a82f2709cb9e488bd303a50b7b53189e14dbb"
+            },
+            {
+              "path": "reference/production-integration-20261013/task-lifetime-evidence.json",
+              "line": 1,
+              "sha256": "84b84077c5055b90efd9d760720450f8a5e14a80055d14077ca5d99a68079847"
+            },
+            {
+              "path": "tools/oracles/verify_original_task_work.py",
+              "line": 1,
+              "sha256": "b1057b2ff375b54bb21848f5a557f5c1ff447a70fef6bfde04ae292435c36329"
+            },
+            {
+              "path": "tests/probes/native_task_work_probe.cpp",
+              "line": 1,
+              "sha256": "3adf1caeaba1197e8ec84c920abcf1a59d8056db0bc45321d04ae619ba11c18b"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Independent static inventory at Main 99bdaf4a9e06006aed7f9fcf2c963a6e68cf61d3; only this authored fragment is changed. All seven complete bodies (1,575 physical lines) were read. No source, fixture, judge, global policy/shard/manifest, HANDOFF or STATUS edits.",
+        "No builds, tests, oracles, mutations, providers, network, storage operations, delegates or full gates executed. Root gate 97018 is outside this review; no terminal result inferred. Historical receipts retain their original limits and outcomes.",
+        "Disposition applies only to the exact named files/module members. No whole Task engine, player, Session, actor playback, GPU, N3b, story, gameplay 63 FPS, physical controller or campaign approval. Reference-purpose classification alone never means code conformance.",
+        "This file remains open for the concrete migration/qualification work stated here; historical success is not whole-module conformance."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/task_work.hpp",
+          "line": 1,
+          "sha256": "d0df9e59dec1dfcbeff7d9100ac0044b5a6e3e4683f691d85d60534416109f9d"
+        },
+        {
+          "path": "docs/STYLE.md",
+          "line": 1,
+          "sha256": "bd44068383b2198cf5165c2869086c6cf7844b1c96be44db7194c768ee62afdd"
+        },
+        {
+          "path": "docs/refactor-inventory/MODULE-REVIEW.md",
+          "line": 1,
+          "sha256": "aa94a5e19b17ebf362c49c741423b9d87a6852dc50cd448baaa3749487103ca5"
+        }
+      ]
+    },
+    "src/engine/task_work.cpp": {
+      "disposition": "needs_migration",
+      "reason": "Recovered first-fit/coalescing behavior is readable in parts, but compressed transport/knownness/reference branches mix fixture availability into core arena operations and need an evidenced seam.",
+      "reviewed_source_sha256": "08e679e66ab28ceda7a942033489cbd1f49356875766babe9e66236870c84691",
+      "semantic_justification": "Allocation rounds (bytes+63)&~31, reserves32-byte headers and preserves payload/padding. Validation uses rounded capacity, not requested size. release coalesces in source order including stale removed-header writes; invalid/double/foreign work fails. Raw writes erase overlapping pointer bindings. Pointer serialization without base is unknown, not a known null; functional bound references still work. External payload failure is explicit.",
+      "resolved_owners": [
+        {
+          "resolution": "TaskWorkArena owns backing bytes/knownness, physical/free block topology, live allocation handles and weak reference bindings. TaskWork carries raw owner identity/header/request/released state plus an optional typed collision payload. A handle is distinct from its reused numerical data offset. References record target allocation plus interior byte offset and original allocation_data_offset; weak targets do not retain themselves. Explicit release invalidates a retained handle independently of shared_ptr lifetime. No TaskWork method dereferences its raw owner after arena destruction; clients must keep the arena alive for operations.",
+          "evidence": [
+            {
+              "path": "src/engine/task_work.hpp",
+              "line": 1,
+              "sha256": "d0df9e59dec1dfcbeff7d9100ac0044b5a6e3e4683f691d85d60534416109f9d"
+            },
+            {
+              "path": "src/engine/task_work.cpp",
+              "line": 1,
+              "sha256": "08e679e66ab28ceda7a942033489cbd1f49356875766babe9e66236870c84691"
+            },
+            {
+              "path": "tests/unit/task_work.cpp",
+              "line": 1,
+              "sha256": "d6304f3614174330c0b8c11ed234a6d6ad7dcec68eedf23dbeb9c967b49be725"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Native scheduler creation/destruction, player initialization, collision cleanup, Gamma cursor generation and animation buffers consume the allocator. Startup publishes player+312 -> same allocation+56 and player+316 -> same allocation+0. Animation scalar consumption checks reference_view live and reads canonical physics speed/charge, never a copied byte scalar. Legacy Sonic motion binding resolves exact allocation identity through PlayerStartupRegistry; Native Gamma uses Registry.allocations. HLE alone installs base-address serialization and payload/resolver callbacks; its resolver currently resolves exact allocation bases, not arbitrary interiors.",
+          "evidence": [
+            {
+              "path": "src/engine/task.cpp",
+              "line": 1,
+              "sha256": "69a568d3577c8a0b7050d2de9774441082f4304931c0b9580f249fb1cb601774"
+            },
+            {
+              "path": "src/player/player_startup.cpp",
+              "line": 1,
+              "sha256": "55fda480c5ec832436e19406f8ecc565152d480e7e162114b8a3527267e42b05"
+            },
+            {
+              "path": "src/player/player_animation.cpp",
+              "line": 1,
+              "sha256": "f1fea844550691d84e9be39bb2f8bd78c3b75bcc16c950c79a67df1b1a71ade0"
+            },
+            {
+              "path": "src/player/player_animation_blend.cpp",
+              "line": 1,
+              "sha256": "d1ad8f801908b368f3d6cffdc9459c85a1f142d0db484a72f13dc0069256888c"
+            },
+            {
+              "path": "src/player/sonic_player.cpp",
+              "line": 1,
+              "sha256": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483"
+            },
+            {
+              "path": "src/runtime/native_gamma_binding.cpp",
+              "line": 1,
+              "sha256": "75d59d1560df2d8f129cc0c76aa1ba99a9a2933b90f5465cd3e63ae07830cecb"
+            },
+            {
+              "path": "src/player/gamma_cursors.cpp",
+              "line": 1,
+              "sha256": "cce66f08eb505fd245689ad73c51de49e6cb5489f8a1f8d9e4e59d3861492bf4"
+            },
+            {
+              "path": "src/engine/collision_component.cpp",
+              "line": 1,
+              "sha256": "e6a9e37e956ebe2f7a54344f5b17e447f182c8e502432ee28aeef115717ee3e5"
+            },
+            {
+              "path": "src/guest/player_initialization_reference.cpp",
+              "line": 1,
+              "sha256": "17503815791d0c7dd7ff901dde802ab2627c2a099a7202bbc4e92487cfe88159"
+            },
+            {
+              "path": "src/hle/hle_task_bridge.cpp",
+              "line": 1,
+              "sha256": "10818587a4542bc7794138c8589fb17b2ff89afaa4b766e6fc8219f3160922a4"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Current unit specifies first fit, rounded padding, preserved stale payload/header bytes, coalescing, exact fit/sentinel, wrap/exhaustion, released/foreign work, typed null/self/interior references, weak target lifetime, unknown pointer provenance and live payload callbacks. Current historical gate fingerprints both source files and runs task-work.",
+          "limits": "No new run. Unit contracts distinguish functional null links and unavailable serialized bytes; do not establish hardware heap acquisition or every failure/reentrant callback path.",
+          "evidence": [
+            {
+              "path": "tests/unit/task_work.cpp",
+              "line": 1,
+              "sha256": "d6304f3614174330c0b8c11ed234a6d6ad7dcec68eedf23dbeb9c967b49be725"
+            },
+            {
+              "path": "tests/unit/player_startup.cpp",
+              "line": 1,
+              "sha256": "3c433f9b0e965f581e9982a854c2425b471aac472fe0d787b1d2bf711c0bd218"
+            },
+            {
+              "path": "reference/production-integration-20261101/character-math-gate.json",
+              "line": 1,
+              "sha256": "71be8a684b67446991faa59436b6365d06692e8beba2ea3434a5f317d254b38c"
+            }
+          ]
+        },
+        {
+          "accepted_scope": "Historical allocator comparison reports exact return/head/full-arena bytes; current tracked summary cuts sequences to 10 of 16. Earlier work evidence reports 4,890 operations and 3 core plus 2 bridge mutants. Later lifetime evidence reports 19 sequences/2,316 operations, 3 core lifetime plus 2 bridge faults and 10 existing bridge faults.",
+          "limits": "Historical mutation receipts fingerprint older task/bridge/header sources; current task_work.cpp alone matches later lifetime evidence. No current complete mutation/holdout receipt or locally available frozen raw cases. Do not sum truncated lists into full corpus totals.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/task_work.json",
+              "line": 1,
+              "sha256": "d6207dbe834866bd25b2191bdd4c82ed30685370226b65d2a2f1fa61fe071897"
+            },
+            {
+              "path": "reference/production-integration-20261013/task-work-evidence.json",
+              "line": 1,
+              "sha256": "5e0733d0211387db526b1002757a82f2709cb9e488bd303a50b7b53189e14dbb"
+            },
+            {
+              "path": "reference/production-integration-20261013/task-lifetime-evidence.json",
+              "line": 1,
+              "sha256": "84b84077c5055b90efd9d760720450f8a5e14a80055d14077ca5d99a68079847"
+            },
+            {
+              "path": "tools/oracles/verify_original_task_work.py",
+              "line": 1,
+              "sha256": "b1057b2ff375b54bb21848f5a557f5c1ff447a70fef6bfde04ae292435c36329"
+            },
+            {
+              "path": "tests/probes/native_task_work_probe.cpp",
+              "line": 1,
+              "sha256": "3adf1caeaba1197e8ec84c920abcf1a59d8056db0bc45321d04ae619ba11c18b"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Independent static inventory at Main 99bdaf4a9e06006aed7f9fcf2c963a6e68cf61d3; only this authored fragment is changed. All seven complete bodies (1,575 physical lines) were read. No source, fixture, judge, global policy/shard/manifest, HANDOFF or STATUS edits.",
+        "No builds, tests, oracles, mutations, providers, network, storage operations, delegates or full gates executed. Root gate 97018 is outside this review; no terminal result inferred. Historical receipts retain their original limits and outcomes.",
+        "Disposition applies only to the exact named files/module members. No whole Task engine, player, Session, actor playback, GPU, N3b, story, gameplay 63 FPS, physical controller or campaign approval. Reference-purpose classification alone never means code conformance.",
+        "This file remains open for the concrete migration/qualification work stated here; historical success is not whole-module conformance."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/task_work.cpp",
+          "line": 1,
+          "sha256": "08e679e66ab28ceda7a942033489cbd1f49356875766babe9e66236870c84691"
+        },
+        {
+          "path": "docs/STYLE.md",
+          "line": 1,
+          "sha256": "bd44068383b2198cf5165c2869086c6cf7844b1c96be44db7194c768ee62afdd"
+        },
+        {
+          "path": "docs/refactor-inventory/MODULE-REVIEW.md",
+          "line": 1,
+          "sha256": "aa94a5e19b17ebf362c49c741423b9d87a6852dc50cd448baaa3749487103ca5"
+        }
+      ]
+    },
+    "src/player/actor_current.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Entire publication contract has semantic owners and optional post-store instrumentation; current exact-source registered unit/gate evidence supports this bounded module.",
+      "reviewed_source_sha256": "2a4b95915be5bf2c9fb2f7f1b37f99e4eb3323435e0fa3c2f9d21ff4ddb95b41",
+      "semantic_justification": "Three annotated fields have one declaration owner. State null/zero initialization is actual game state. Observation functions and nullable Observation pointer describe instrumentation availability only. Accessors borrow authoritative slots; registry state does not refresh them.",
+      "resolved_owners": [
+        {
+          "resolution": "actor_current::State is the sole declaration owner of gpCharTwp, gpCharPwp and SuperSonicFlag. Native PlayerSystem embeds one state; legacy SonicPlayerGlobals embeds one in its separate execution world. Registry task/player arrays are different source globals, not current slots. Observation is caller-supplied synchronous instrumentation after each store; null instrumentation and empty functions mean no receipt, never absent game state. No static observer or callback registry is introduced here.",
+          "evidence": [
+            {
+              "path": "src/player/actor_current.hpp",
+              "line": 1,
+              "sha256": "2a4b95915be5bf2c9fb2f7f1b37f99e4eb3323435e0fa3c2f9d21ff4ddb95b41"
+            },
+            {
+              "path": "src/player/actor_current.cpp",
+              "line": 1,
+              "sha256": "94d0b802a2267a808b3baf9ce675408a339d99da4eaf5a35ac7951f7220f7fd6"
+            },
+            {
+              "path": "src/runtime/native_player_system.hpp",
+              "line": 1,
+              "sha256": "3031b79d8041ca521b3d5a00decc75d5dae234102988518bdfbfd8a09c474a24"
+            },
+            {
+              "path": "src/player/sonic_player.hpp",
+              "line": 1,
+              "sha256": "8ab874d28623af1876eebed149625c447f112a677098c0fa4f6e56da3286b0b4"
+            },
+            {
+              "path": "src/player/player_initialization.hpp",
+              "line": 1,
+              "sha256": "11af804aaf3579b8dc926ff2f90770aa03a90549cf986a1acb143b326b4cb790"
+            },
+            {
+              "path": "tests/reference/actor_current_fixture.hpp",
+              "line": 1,
+              "sha256": "0eb3cfe9854f6fd9cee067ad84bdf52325dbb47a0c555eb32f74da2fc1a83131"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Legacy run_sonic_player publishes primary then nullable player before later reads and publishes SuperSonicFlag at its reached action site. Frozen fixture receipts borrow canonical fields and track whether a store occurred; they never infer publication from handle/byte truth. Native Gamma current() returns references into PlayerSystem.current and the core writes them directly in entry order, so initialization cannot retroactively refresh the entry null player from the registry. Read accessors return canonical handle references and an unnormalized byte. A later registry replacement/reuse is not a current publication.",
+          "evidence": [
+            {
+              "path": "src/player/sonic_player.cpp",
+              "line": 1,
+              "sha256": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483"
+            },
+            {
+              "path": "tests/probes/native_sonic_player_probe.cpp",
+              "line": 1,
+              "sha256": "ea27199dca1c3f9ea726e9e1be159ed14b4ec35ab594d975fe80d2f9cd25ca60"
+            },
+            {
+              "path": "tests/reference/actor_current_fixture.hpp",
+              "line": 1,
+              "sha256": "0eb3cfe9854f6fd9cee067ad84bdf52325dbb47a0c555eb32f74da2fc1a83131"
+            },
+            {
+              "path": "src/runtime/native_gamma_binding.cpp",
+              "line": 1,
+              "sha256": "75d59d1560df2d8f129cc0c76aa1ba99a9a2933b90f5465cd3e63ae07830cecb"
+            },
+            {
+              "path": "src/player/gamma_selection_core.cpp",
+              "line": 1,
+              "sha256": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea"
+            },
+            {
+              "path": "tests/unit/actor_current.cpp",
+              "line": 1,
+              "sha256": "02d5706cc1783a0e05a91f2e8890fdbde421ba6341f2ee1541a99db9677a25c7"
+            },
+            {
+              "path": "tests/unit/native_gamma_binding.mm",
+              "line": 1,
+              "sha256": "0a2690737ec88d7e3d7402fd2d363e8f5eb18bfb7851d65a7341f87c35a5832d"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Complete actor-current unit checks borrowed slot identity, last publication, explicit null clear, repeated stores, post-store observer order, observer exception after committed store, raw byte 173 and 257 separate worlds. Gate receipt pins the exact current header/implementation/unit/frozen adapter hashes and records actor-current among executed programs. Independent math review also validates frozen Sonic publication semantics; retained original Sonic summary has 28,800 cases, zero stored mismatches and 2,840 FP status differences.",
+          "limits": "Bounded acceptance of the complete small publication module only. 257 worlds are the unit loop, not a new independent executed holdout. Sonic FP partials remain partials. No new actor lifecycle or game-controller correctness claim.",
+          "evidence": [
+            {
+              "path": "tests/unit/actor_current.cpp",
+              "line": 1,
+              "sha256": "02d5706cc1783a0e05a91f2e8890fdbde421ba6341f2ee1541a99db9677a25c7"
+            },
+            {
+              "path": "tests/reference/actor_current_fixture.hpp",
+              "line": 1,
+              "sha256": "0eb3cfe9854f6fd9cee067ad84bdf52325dbb47a0c555eb32f74da2fc1a83131"
+            },
+            {
+              "path": "reference/production-integration-20261101/character-math-gate.json",
+              "line": 1,
+              "sha256": "71be8a684b67446991faa59436b6365d06692e8beba2ea3434a5f317d254b38c"
+            },
+            {
+              "path": "reference/packets/math-length-review/REVIEW.md",
+              "line": 1,
+              "sha256": "871eb3ab666e86f600d09d3fc4f9afc457b77400626def267ee77d63fc34e1ac"
+            },
+            {
+              "path": "reference/oracle-reports/sonic_player.json",
+              "line": 1,
+              "sha256": "0bc45e772077fffbfdde9a80db67a78aab5fb14a8c75fde6fd96bf15bc6a152f"
+            }
+          ]
+        },
+        {
+          "accepted_scope": "Prior math packet records an observer fault detected by the unchanged Sonic evaluator. Root length holdout records 8,864 numeric cases; neither is a dedicated complete current actor ownership mutation/holdout campaign.",
+          "limits": "Historical receipts only; raw packet artifacts absent locally. The actor module closure relies on explicit full-body review and exact current-source registered-unit gate evidence, not on repurposing numeric holdout counts.",
+          "evidence": [
+            {
+              "path": "reference/packets/math-length/qualification.json",
+              "line": 1,
+              "sha256": "303487800b86e4e9389d60d1ccf1e2d1e12d124b39f4195d6036963a210ae599"
+            },
+            {
+              "path": "reference/packets/math-length/root-holdout.json",
+              "line": 1,
+              "sha256": "51ca94b8b1d90daa0b1dce752aa371ab5300fdaa02cf20160aa782bebd5daf6b"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Independent static inventory at Main 99bdaf4a9e06006aed7f9fcf2c963a6e68cf61d3; only this authored fragment is changed. All seven complete bodies (1,575 physical lines) were read. No source, fixture, judge, global policy/shard/manifest, HANDOFF or STATUS edits.",
+        "No builds, tests, oracles, mutations, providers, network, storage operations, delegates or full gates executed. Root gate 97018 is outside this review; no terminal result inferred. Historical receipts retain their original limits and outcomes.",
+        "Disposition applies only to the exact named files/module members. No whole Task engine, player, Session, actor playback, GPU, N3b, story, gameplay 63 FPS, physical controller or campaign approval. Reference-purpose classification alone never means code conformance.",
+        "All members and current evidence for the narrow publication API are reviewed. This does not approve its legacy/native caller implementations."
+      ],
+      "evidence": [
+        {
+          "path": "src/player/actor_current.hpp",
+          "line": 1,
+          "sha256": "2a4b95915be5bf2c9fb2f7f1b37f99e4eb3323435e0fa3c2f9d21ff4ddb95b41"
+        },
+        {
+          "path": "docs/STYLE.md",
+          "line": 1,
+          "sha256": "bd44068383b2198cf5165c2869086c6cf7844b1c96be44db7194c768ee62afdd"
+        },
+        {
+          "path": "docs/refactor-inventory/MODULE-REVIEW.md",
+          "line": 1,
+          "sha256": "aa94a5e19b17ebf362c49c741423b9d87a6852dc50cd448baaa3749487103ca5"
+        }
+      ]
+    },
+    "src/player/actor_current.cpp": {
+      "disposition": "already_conforming",
+      "reason": "All six complete functions implement the stated store/read contract without address dispatch, cached scalar state, hidden callbacks or additional GLOBAL owners.",
+      "reviewed_source_sha256": "94d0b802a2267a808b3baf9ce675408a339d99da4eaf5a35ac7951f7220f7fd6",
+      "semantic_justification": "Each setter commits first and calls only the explicitly supplied matching observer, even for null/same-value stores. Throwing receipt leaves the store committed. Read handle references preserve allocation identity; byte read has no boolean normalization. Borrow validity is state lifetime, and reentrant observation can alter state rather than being silently cached.",
+      "resolved_owners": [
+        {
+          "resolution": "actor_current::State is the sole declaration owner of gpCharTwp, gpCharPwp and SuperSonicFlag. Native PlayerSystem embeds one state; legacy SonicPlayerGlobals embeds one in its separate execution world. Registry task/player arrays are different source globals, not current slots. Observation is caller-supplied synchronous instrumentation after each store; null instrumentation and empty functions mean no receipt, never absent game state. No static observer or callback registry is introduced here.",
+          "evidence": [
+            {
+              "path": "src/player/actor_current.hpp",
+              "line": 1,
+              "sha256": "2a4b95915be5bf2c9fb2f7f1b37f99e4eb3323435e0fa3c2f9d21ff4ddb95b41"
+            },
+            {
+              "path": "src/player/actor_current.cpp",
+              "line": 1,
+              "sha256": "94d0b802a2267a808b3baf9ce675408a339d99da4eaf5a35ac7951f7220f7fd6"
+            },
+            {
+              "path": "src/runtime/native_player_system.hpp",
+              "line": 1,
+              "sha256": "3031b79d8041ca521b3d5a00decc75d5dae234102988518bdfbfd8a09c474a24"
+            },
+            {
+              "path": "src/player/sonic_player.hpp",
+              "line": 1,
+              "sha256": "8ab874d28623af1876eebed149625c447f112a677098c0fa4f6e56da3286b0b4"
+            },
+            {
+              "path": "src/player/player_initialization.hpp",
+              "line": 1,
+              "sha256": "11af804aaf3579b8dc926ff2f90770aa03a90549cf986a1acb143b326b4cb790"
+            },
+            {
+              "path": "tests/reference/actor_current_fixture.hpp",
+              "line": 1,
+              "sha256": "0eb3cfe9854f6fd9cee067ad84bdf52325dbb47a0c555eb32f74da2fc1a83131"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Legacy run_sonic_player publishes primary then nullable player before later reads and publishes SuperSonicFlag at its reached action site. Frozen fixture receipts borrow canonical fields and track whether a store occurred; they never infer publication from handle/byte truth. Native Gamma current() returns references into PlayerSystem.current and the core writes them directly in entry order, so initialization cannot retroactively refresh the entry null player from the registry. Read accessors return canonical handle references and an unnormalized byte. A later registry replacement/reuse is not a current publication.",
+          "evidence": [
+            {
+              "path": "src/player/sonic_player.cpp",
+              "line": 1,
+              "sha256": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483"
+            },
+            {
+              "path": "tests/probes/native_sonic_player_probe.cpp",
+              "line": 1,
+              "sha256": "ea27199dca1c3f9ea726e9e1be159ed14b4ec35ab594d975fe80d2f9cd25ca60"
+            },
+            {
+              "path": "tests/reference/actor_current_fixture.hpp",
+              "line": 1,
+              "sha256": "0eb3cfe9854f6fd9cee067ad84bdf52325dbb47a0c555eb32f74da2fc1a83131"
+            },
+            {
+              "path": "src/runtime/native_gamma_binding.cpp",
+              "line": 1,
+              "sha256": "75d59d1560df2d8f129cc0c76aa1ba99a9a2933b90f5465cd3e63ae07830cecb"
+            },
+            {
+              "path": "src/player/gamma_selection_core.cpp",
+              "line": 1,
+              "sha256": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea"
+            },
+            {
+              "path": "tests/unit/actor_current.cpp",
+              "line": 1,
+              "sha256": "02d5706cc1783a0e05a91f2e8890fdbde421ba6341f2ee1541a99db9677a25c7"
+            },
+            {
+              "path": "tests/unit/native_gamma_binding.mm",
+              "line": 1,
+              "sha256": "0a2690737ec88d7e3d7402fd2d363e8f5eb18bfb7851d65a7341f87c35a5832d"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Complete actor-current unit checks borrowed slot identity, last publication, explicit null clear, repeated stores, post-store observer order, observer exception after committed store, raw byte 173 and 257 separate worlds. Gate receipt pins the exact current header/implementation/unit/frozen adapter hashes and records actor-current among executed programs. Independent math review also validates frozen Sonic publication semantics; retained original Sonic summary has 28,800 cases, zero stored mismatches and 2,840 FP status differences.",
+          "limits": "Bounded acceptance of the complete small publication module only. 257 worlds are the unit loop, not a new independent executed holdout. Sonic FP partials remain partials. No new actor lifecycle or game-controller correctness claim.",
+          "evidence": [
+            {
+              "path": "tests/unit/actor_current.cpp",
+              "line": 1,
+              "sha256": "02d5706cc1783a0e05a91f2e8890fdbde421ba6341f2ee1541a99db9677a25c7"
+            },
+            {
+              "path": "tests/reference/actor_current_fixture.hpp",
+              "line": 1,
+              "sha256": "0eb3cfe9854f6fd9cee067ad84bdf52325dbb47a0c555eb32f74da2fc1a83131"
+            },
+            {
+              "path": "reference/production-integration-20261101/character-math-gate.json",
+              "line": 1,
+              "sha256": "71be8a684b67446991faa59436b6365d06692e8beba2ea3434a5f317d254b38c"
+            },
+            {
+              "path": "reference/packets/math-length-review/REVIEW.md",
+              "line": 1,
+              "sha256": "871eb3ab666e86f600d09d3fc4f9afc457b77400626def267ee77d63fc34e1ac"
+            },
+            {
+              "path": "reference/oracle-reports/sonic_player.json",
+              "line": 1,
+              "sha256": "0bc45e772077fffbfdde9a80db67a78aab5fb14a8c75fde6fd96bf15bc6a152f"
+            }
+          ]
+        },
+        {
+          "accepted_scope": "Prior math packet records an observer fault detected by the unchanged Sonic evaluator. Root length holdout records 8,864 numeric cases; neither is a dedicated complete current actor ownership mutation/holdout campaign.",
+          "limits": "Historical receipts only; raw packet artifacts absent locally. The actor module closure relies on explicit full-body review and exact current-source registered-unit gate evidence, not on repurposing numeric holdout counts.",
+          "evidence": [
+            {
+              "path": "reference/packets/math-length/qualification.json",
+              "line": 1,
+              "sha256": "303487800b86e4e9389d60d1ccf1e2d1e12d124b39f4195d6036963a210ae599"
+            },
+            {
+              "path": "reference/packets/math-length/root-holdout.json",
+              "line": 1,
+              "sha256": "51ca94b8b1d90daa0b1dce752aa371ab5300fdaa02cf20160aa782bebd5daf6b"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Independent static inventory at Main 99bdaf4a9e06006aed7f9fcf2c963a6e68cf61d3; only this authored fragment is changed. All seven complete bodies (1,575 physical lines) were read. No source, fixture, judge, global policy/shard/manifest, HANDOFF or STATUS edits.",
+        "No builds, tests, oracles, mutations, providers, network, storage operations, delegates or full gates executed. Root gate 97018 is outside this review; no terminal result inferred. Historical receipts retain their original limits and outcomes.",
+        "Disposition applies only to the exact named files/module members. No whole Task engine, player, Session, actor playback, GPU, N3b, story, gameplay 63 FPS, physical controller or campaign approval. Reference-purpose classification alone never means code conformance.",
+        "All members and current evidence for the narrow publication API are reviewed. This does not approve its legacy/native caller implementations."
+      ],
+      "evidence": [
+        {
+          "path": "src/player/actor_current.cpp",
+          "line": 1,
+          "sha256": "94d0b802a2267a808b3baf9ce675408a339d99da4eaf5a35ac7951f7220f7fd6"
+        },
+        {
+          "path": "docs/STYLE.md",
+          "line": 1,
+          "sha256": "bd44068383b2198cf5165c2869086c6cf7844b1c96be44db7194c768ee62afdd"
+        },
+        {
+          "path": "docs/refactor-inventory/MODULE-REVIEW.md",
+          "line": 1,
+          "sha256": "aa94a5e19b17ebf362c49c741423b9d87a6852dc50cd448baaa3749487103ca5"
+        }
+      ]
+    },
+    "src/runtime/native_player_system.hpp": {
+      "disposition": "open_review",
+      "reason": "Canonical owner composition is coherent for current native initialization consumers, but complete extra-work/registry/borrow destruction and actor reentry are unrecovered; do not close this module from initialization evidence.",
+      "reviewed_source_sha256": "3031b79d8041ca521b3d5a00decc75d5dae234102988518bdfbfd8a09c474a24",
+      "semantic_justification": "Entire50-line header reviewed, including GammaExtraWork, PlayerSystem, resource binder declaration and Gamma Context. Context references remain invocation-local. Stage/act and callback values are supplied by actual callers; texture service pointers borrow local synchronous objects. deque preserves element references on current push_back use; it does not prove later erase/destructor behavior. Imported Gamma table still exposes legacy animation fixture-knownness through a separate contract already marked migration.",
+      "resolved_owners": [
+        {
+          "resolution": "Session embeds PlayerSystem before LogoScene and after CharacterPack/SceneState. It groups current publications, native registration/allocation records, Gamma source globals, one mutable GammaWeldInfo table, shared scene-backed cursor templates, deque elements tied to actual 580-byte E102WK allocations, and uniquely owned imported Gamma assets. Initialized player physics lives in Registry.allocations records and aliases task primary/motion owners; GammaExtraWork is separate from the 480-byte player auxiliary allocation. Join-table/geometry/template pointers are live borrows, not per-actor copies.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_player_system.hpp",
+              "line": 1,
+              "sha256": "3031b79d8041ca521b3d5a00decc75d5dae234102988518bdfbfd8a09c474a24"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 1,
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 1,
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_gamma_resources_native.cpp",
+              "line": 1,
+              "sha256": "18e9957a65b180e4ff44ceb2588597c7483de6dab15dbde005926469b86ab739"
+            },
+            {
+              "path": "src/runtime/native_gamma_assets_native.cpp",
+              "line": 1,
+              "sha256": "5d7eaca277420cff3904d72b2d1a1fff69f44d995c8410a27415f5572f249787"
+            },
+            {
+              "path": "src/player/player_initialization.hpp",
+              "line": 1,
+              "sha256": "11af804aaf3579b8dc926ff2f90770aa03a90549cf986a1acb143b326b4cb790"
+            },
+            {
+              "path": "src/player/player_startup.cpp",
+              "line": 1,
+              "sha256": "55fda480c5ec832436e19406f8ecc565152d480e7e162114b8a3527267e42b05"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Native PreviewServices creates actual actor tasks and zero-backed typed primary/motion owners; Gamma callback forms invocation-local Context borrowing PlayerSystem/scheduler/bootstrap/rendering/task/stage/act plus callbacks and texture services. Gamma binding resolves the motion-held player allocation, then extra-work references and exact allocation records. Source initializes/overwrites registration arrays in order but retains prior allocation records. Actual native Sonic/Miles/Knuckles/Amy/Big exec callbacks throw, Gamma display/destructor and many lower seams throw, and preview action update throws. Legacy Sonic uses PlayerStartupRegistry in reference code; it is not silently bound to native PlayerSystem.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_selection_preview.cpp",
+              "line": 1,
+              "sha256": "7e87d4ce716df319922ff55b59a0710acd9334cd910fdbad990e1dcea46cbe52"
+            },
+            {
+              "path": "src/runtime/native_gamma_binding.cpp",
+              "line": 1,
+              "sha256": "75d59d1560df2d8f129cc0c76aa1ba99a9a2933b90f5465cd3e63ae07830cecb"
+            },
+            {
+              "path": "src/player/gamma_selection_core.cpp",
+              "line": 1,
+              "sha256": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea"
+            },
+            {
+              "path": "src/guest/player_initialization_reference.cpp",
+              "line": 1,
+              "sha256": "17503815791d0c7dd7ff901dde802ab2627c2a099a7202bbc4e92487cfe88159"
+            },
+            {
+              "path": "src/player/sonic_player.cpp",
+              "line": 1,
+              "sha256": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483"
+            },
+            {
+              "path": "tests/unit/native_gamma_binding.mm",
+              "line": 1,
+              "sha256": "0a2690737ec88d7e3d7402fd2d363e8f5eb18bfb7851d65a7341f87c35a5832d"
+            },
+            {
+              "path": "tests/unit/native_gamma_weld_cursors.mm",
+              "line": 1,
+              "sha256": "7b0c49f06344759858c95033a9e503241fa79eda58a3b5f4f00fe7e6cd86352e"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Native Gamma units assert actual primary/motion identity, allocation registry lookup, entry current-player null surviving initialization, shared mutable weld pointer, distinct E102WK/cursor allocations and first explicit setup stop. Gate fingerprints the current PlayerSystem header. Gamma original receipt has 1,422 value-exact cases and 498 FP partials; startup receipt is an original prefix stopping before 44297b, not a returned whole callback.",
+          "limits": "Consumer contracts only: no native actor playback, destructor cleanup, reentry or full registration/extra-work retirement qualification. Gamma concrete lower receipts are not recovered implementations. Resource-loader/preview holdouts do not close PlayerSystem.",
+          "evidence": [
+            {
+              "path": "tests/unit/native_gamma_binding.mm",
+              "line": 1,
+              "sha256": "0a2690737ec88d7e3d7402fd2d363e8f5eb18bfb7851d65a7341f87c35a5832d"
+            },
+            {
+              "path": "tests/unit/native_gamma_weld_cursors.mm",
+              "line": 1,
+              "sha256": "7b0c49f06344759858c95033a9e503241fa79eda58a3b5f4f00fe7e6cd86352e"
+            },
+            {
+              "path": "reference/production-integration-20261101/character-math-gate.json",
+              "line": 1,
+              "sha256": "71be8a684b67446991faa59436b6365d06692e8beba2ea3434a5f317d254b38c"
+            },
+            {
+              "path": "reference/oracle-reports/gamma_selection_core.json",
+              "line": 1,
+              "sha256": "c4620bcdfb07b32d66a657cd070fc2ae54914d7632e593d5cc788c79bcdc4eea"
+            },
+            {
+              "path": "reference/oracle-reports/player_startup.json",
+              "line": 1,
+              "sha256": "64fa58cb36abe377bbf51417d1770a98d5dfba284021b7837b2711ff9e90e67c"
+            },
+            {
+              "path": "reference/packets/session-character-resources/gamma-consumer-identities.json",
+              "line": 1,
+              "sha256": "b3e2158946c76237cbcef7918fb4e540653f7920919b347f5ee77792bb122268"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Independent static inventory at Main 99bdaf4a9e06006aed7f9fcf2c963a6e68cf61d3; only this authored fragment is changed. All seven complete bodies (1,575 physical lines) were read. No source, fixture, judge, global policy/shard/manifest, HANDOFF or STATUS edits.",
+        "No builds, tests, oracles, mutations, providers, network, storage operations, delegates or full gates executed. Root gate 97018 is outside this review; no terminal result inferred. Historical receipts retain their original limits and outcomes.",
+        "Disposition applies only to the exact named files/module members. No whole Task engine, player, Session, actor playback, GPU, N3b, story, gameplay 63 FPS, physical controller or campaign approval. Reference-purpose classification alone never means code conformance.",
+        "This file remains open for the concrete migration/qualification work stated here; historical success is not whole-module conformance."
+      ],
+      "evidence": [
+        {
+          "path": "src/runtime/native_player_system.hpp",
+          "line": 1,
+          "sha256": "3031b79d8041ca521b3d5a00decc75d5dae234102988518bdfbfd8a09c474a24"
+        },
+        {
+          "path": "docs/STYLE.md",
+          "line": 1,
+          "sha256": "bd44068383b2198cf5165c2869086c6cf7844b1c96be44db7194c768ee62afdd"
+        },
+        {
+          "path": "docs/refactor-inventory/MODULE-REVIEW.md",
+          "line": 1,
+          "sha256": "aa94a5e19b17ebf362c49c741423b9d87a6852dc50cd448baaa3749487103ca5"
+        }
+      ]
     }
   },
   "external_reference_sources": [
@@ -21684,6 +23542,1063 @@
         {
           "path": "docs/refactor-inventory/packets/music-owner/root-post-review-cohorts.json",
           "sha256": "15b676a195636ff1d8a542392dd68817c3508f73fe8e3deb460a7a5d68adabde"
+        }
+      ]
+    },
+    "src/input/input_initial_state": {
+      "disposition": "already_conforming",
+      "reason": "Explicit complete two-member numeric initialization module review; no automatic closure of callers.",
+      "reviewed_members": {
+        "src/input/input_initial_state.hpp": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b",
+        "src/input/input_initial_state.cpp": "0eda2b014281062e72921c54192c164b1bff83e0215081089be538aa00097c3a"
+      },
+      "semantic_justification": "Typed pre-startup input edge buffers and controller numeric records; raw lanes retain distinct values, resource pointers/discovery separate, not_held zero is load-time data not post-poll complement.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/input/input_initial_state.hpp",
+              "sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b"
+            },
+            {
+              "path": "src/input/input_initial_state.cpp",
+              "sha256": "0eda2b014281062e72921c54192c164b1bff83e0215081089be538aa00097c3a"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeInput::Impl constructs pads/engine/mod records from explicit values; NativeGame reference bridge copies supplied template or decodes omitted image facts lazily.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_input.cpp",
+              "sha256": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114"
+            },
+            {
+              "path": "src/guest/native_input_initialization.cpp",
+              "sha256": "f736f85ee538c803fecb468d588547b2410c328adbdd366618c0868ffa5af950"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 1869 bytes with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/input_initial_state.cpp",
+              "sha256": "aa3b29d46040dfadd11d2111dce6cbad009c0d47787704e10405ba385c4ba333"
+            },
+            {
+              "path": "reference/oracle-reports/input_initial_state.json",
+              "sha256": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/input/input_initial_state.hpp",
+          "sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b"
+        },
+        {
+          "path": "src/input/input_initial_state.cpp",
+          "sha256": "0eda2b014281062e72921c54192c164b1bff83e0215081089be538aa00097c3a"
+        },
+        {
+          "path": "tests/unit/input_initial_state.cpp",
+          "sha256": "aa3b29d46040dfadd11d2111dce6cbad009c0d47787704e10405ba385c4ba333"
+        },
+        {
+          "path": "reference/oracle-reports/input_initial_state.json",
+          "sha256": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c"
+        }
+      ]
+    },
+    "src/engine/ninja_fog_initial_state": {
+      "disposition": "already_conforming",
+      "reason": "Explicit complete two-member numeric initialization module review; no automatic closure of callers.",
+      "reviewed_members": {
+        "src/engine/ninja_fog_initial_state.hpp": "a475f1114f191c22a683db3ff3b56198780c639c5f51a51129c9fb32878a8587",
+        "src/engine/ninja_fog_initial_state.cpp": "629e2271c1cd4ffbfce91522c43868e36b8f61c46c51c43c9488e14f62624794"
+      },
+      "semantic_justification": "Typed fog initialization only: 128entry tables, scalar modes/flags, device numeric lookup caches and level range/color; positive65535 caches distinct from runtime disable sentinel, density remains explicit encoding.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_fog_initial_state.hpp",
+              "sha256": "a475f1114f191c22a683db3ff3b56198780c639c5f51a51129c9fb32878a8587"
+            },
+            {
+              "path": "src/engine/ninja_fog_initial_state.cpp",
+              "sha256": "629e2271c1cd4ffbfce91522c43868e36b8f61c46c51c43c9488e14f62624794"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeGame reference bridge copies explicit scalars/tables into existing owners; native fog runtime uses declared initializer type. Capabilities/resources/frame flags and device generation retain separate ownership.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            },
+            {
+              "path": "src/engine/ninja_fog.hpp",
+              "sha256": "a54cca523c3686e32853cc11280ff88474a28611787aaa7a688c063a54ca1849"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 398 words with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/ninja_fog_initial_state.cpp",
+              "sha256": "2ec59169148c431c86ab924a6ac768b774441abe4abc05bca933ca8a5dbcda36"
+            },
+            {
+              "path": "reference/oracle-reports/ninja_fog_initial_state.json",
+              "sha256": "a2f834571228f44e456ea967a10c4916432ea68b71a98d8a87c4b5ed2728573c"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/ninja_fog_initial_state.hpp",
+          "sha256": "a475f1114f191c22a683db3ff3b56198780c639c5f51a51129c9fb32878a8587"
+        },
+        {
+          "path": "src/engine/ninja_fog_initial_state.cpp",
+          "sha256": "629e2271c1cd4ffbfce91522c43868e36b8f61c46c51c43c9488e14f62624794"
+        },
+        {
+          "path": "tests/unit/ninja_fog_initial_state.cpp",
+          "sha256": "2ec59169148c431c86ab924a6ac768b774441abe4abc05bca933ca8a5dbcda36"
+        },
+        {
+          "path": "reference/oracle-reports/ninja_fog_initial_state.json",
+          "sha256": "a2f834571228f44e456ea967a10c4916432ea68b71a98d8a87c4b5ed2728573c"
+        }
+      ]
+    },
+    "src/engine/ninja_queue_initial_state": {
+      "disposition": "already_conforming",
+      "reason": "Explicit complete two-member numeric initialization module review; no automatic closure of callers.",
+      "reviewed_members": {
+        "src/engine/ninja_queue_initial_state.hpp": "beab3e83d252738f6771c12cbb7d81c6920d36b1738d533e9238a915bed8ffcb",
+        "src/engine/ninja_queue_initial_state.cpp": "aced0a247c731cf72dcea9a0dcc7474f6d98ef047d4d85ebf9a4695f3c4b897a"
+      },
+      "semantic_justification": "Typed numeric queue comparison index, execution/lighting/packed blend/counts and three-component reset/allocation defaults; no resource ownership or source address keys.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_queue_initial_state.hpp",
+              "sha256": "beab3e83d252738f6771c12cbb7d81c6920d36b1738d533e9238a915bed8ffcb"
+            },
+            {
+              "path": "src/engine/ninja_queue_initial_state.cpp",
+              "sha256": "aced0a247c731cf72dcea9a0dcc7474f6d98ef047d4d85ebf9a4695f3c4b897a"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeGame reference bridge publishes each scalar/bit-exact float group to existing runtime owners. Pure template factory does not own the live packed blend cache or queue allocation.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 21 words with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/ninja_queue_initial_state.cpp",
+              "sha256": "516cc116e9515c0995753deb0eaccf33c8f71ef7301ba42d3641605869dfa7d4"
+            },
+            {
+              "path": "reference/oracle-reports/ninja_queue_initial_state.json",
+              "sha256": "64357ffa1f2f76c858fcd6be64ddce0c28d5a594b571ef2421bfd2c6818eaa74"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/ninja_queue_initial_state.hpp",
+          "sha256": "beab3e83d252738f6771c12cbb7d81c6920d36b1738d533e9238a915bed8ffcb"
+        },
+        {
+          "path": "src/engine/ninja_queue_initial_state.cpp",
+          "sha256": "aced0a247c731cf72dcea9a0dcc7474f6d98ef047d4d85ebf9a4695f3c4b897a"
+        },
+        {
+          "path": "tests/unit/ninja_queue_initial_state.cpp",
+          "sha256": "516cc116e9515c0995753deb0eaccf33c8f71ef7301ba42d3641605869dfa7d4"
+        },
+        {
+          "path": "reference/oracle-reports/ninja_queue_initial_state.json",
+          "sha256": "64357ffa1f2f76c858fcd6be64ddce0c28d5a594b571ef2421bfd2c6818eaa74"
+        }
+      ]
+    },
+    "src/engine/ninja_screen_initial_state": {
+      "disposition": "already_conforming",
+      "reason": "Explicit complete two-member numeric initialization module review; no automatic closure of callers.",
+      "reviewed_members": {
+        "src/engine/ninja_screen_initial_state.hpp": "adfa26612d9aee42c94deb4c524583338df4c49ab627e97c5c3ddd1a297c1153",
+        "src/engine/ninja_screen_initial_state.cpp": "361e0775bd725ccab88e069c1c01c91af27ca431b893edbaf77210e353bc1a05"
+      },
+      "semantic_justification": "Typed clip/distances/viewport/rectangles/points/matrices and scalar setup defaults. Base transform identity differs from zero projection/work matrices; unknown broader scalar meanings remain explicit without guessing.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_screen_initial_state.hpp",
+              "sha256": "adfa26612d9aee42c94deb4c524583338df4c49ab627e97c5c3ddd1a297c1153"
+            },
+            {
+              "path": "src/engine/ninja_screen_initial_state.cpp",
+              "sha256": "361e0775bd725ccab88e069c1c01c91af27ca431b893edbaf77210e353bc1a05"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeGame reference bridge imports explicit numeric facts into existing screen/projection owners; resource/capability/display configuration remains outside initializer.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 90 words with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/ninja_screen_initial_state.cpp",
+              "sha256": "87eb7d20ee84a856e2fd5a6d0288d8844f7185150d132e6ee818014d119e25d1"
+            },
+            {
+              "path": "reference/oracle-reports/ninja_screen_initial_state.json",
+              "sha256": "716ea9c06c162030579eb2eb164be2a33b347e6c44711e12c28f84ef815f1792"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/ninja_screen_initial_state.hpp",
+          "sha256": "adfa26612d9aee42c94deb4c524583338df4c49ab627e97c5c3ddd1a297c1153"
+        },
+        {
+          "path": "src/engine/ninja_screen_initial_state.cpp",
+          "sha256": "361e0775bd725ccab88e069c1c01c91af27ca431b893edbaf77210e353bc1a05"
+        },
+        {
+          "path": "tests/unit/ninja_screen_initial_state.cpp",
+          "sha256": "87eb7d20ee84a856e2fd5a6d0288d8844f7185150d132e6ee818014d119e25d1"
+        },
+        {
+          "path": "reference/oracle-reports/ninja_screen_initial_state.json",
+          "sha256": "716ea9c06c162030579eb2eb164be2a33b347e6c44711e12c28f84ef815f1792"
+        }
+      ]
+    },
+    "src/engine/controller_values": {
+      "disposition": "already_conforming",
+      "reason": "Explicit complete header-only shared numeric record review.",
+      "reviewed_members": {
+        "src/engine/controller_values.hpp": "abbfb8000a4dc77da937481cff321e86a48dd1204507c348d1c39083424106b5"
+      },
+      "semantic_justification": "Complete dependency-light PDS_PERIPHERAL numeric value record: named32bit masks/edges,16bit triggers/axes and previous-held. Real name/extension/info resources omitted deliberately. One semantic type is reused by engine, input alias and native initialization; no game algorithm, fixture optional or address identity.",
+      "resolved_owners": [
+        {
+          "resolution": "Plain per-runtime values; alias creates no extra owned state. Actual raw records and device resources remain their existing owners.",
+          "evidence": [
+            {
+              "path": "src/engine/controller_values.hpp",
+              "sha256": "abbfb8000a4dc77da937481cff321e86a48dd1204507c348d1c39083424106b5"
+            },
+            {
+              "path": "src/input/input_initial_state.hpp",
+              "sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Input initial values and GameLogicController/native input bridge share this declared type.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_input.cpp",
+              "sha256": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114"
+            },
+            {
+              "path": "src/engine/controller_values.hpp",
+              "sha256": "abbfb8000a4dc77da937481cff321e86a48dd1204507c348d1c39083424106b5"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Current input initial-state receipt binds this exact header and1869 compared bytes; broader controller behavior excluded.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/input_initial_state.json",
+              "sha256": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Numeric value shape only; not controller discovery/HID/runtime polling qualification.",
+        "No rewrite or new test verdict."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/controller_values.hpp",
+          "sha256": "abbfb8000a4dc77da937481cff321e86a48dd1204507c348d1c39083424106b5"
+        },
+        {
+          "path": "src/input/input_initial_state.hpp",
+          "sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b"
+        },
+        {
+          "path": "reference/oracle-reports/input_initial_state.json",
+          "sha256": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c"
+        }
+      ]
+    },
+    "src/engine/task": {
+      "disposition": "needs_migration",
+      "reason": "Explicit whole-module review of all current members. Complete API mixes semantic task ownership with source-slot graph interchange, fixture-default availability and instruction-boundary diagnostics; keep actual scheduler behavior in engine while extracting reference facts.",
+      "semantic_justification": "Task handles own resources; private links are nonowning and slot generations are explicit. optional slot/link/default values distinguish host tasks, null pointers and missing fixture observations. Declared lifecycle stages retain partial cleanup, not an imagined transaction rollback.",
+      "resolved_owners": [
+        {
+          "resolution": "TaskScheduler owns storage_, source_slots_, free_slots_, heads_, TaskContext, one shared arena/pool reservation and an explicit callback-context table. Task links are nonowning pointers into retained storage. WalkGuard defers scheduler reclamation through outermost native traversal; caller/cursor/graph handles can retain retired storage. Task owns allocation handles and canonical primary_state/motion_state/auxiliary_native_work; typed payloads are not byte-vector pose replicas. TaskResult/continuation handles retain partial cleanup state. ObjectControl linkage may hold a task until cleanup clears it; no second scheduler or GLOBAL is added.",
+          "evidence": [
+            {
+              "path": "src/engine/task.hpp",
+              "line": 1,
+              "sha256": "9162b6011520e0d6e6a98e8a4a989793c48bb7ca3e19e0d732f1d59b9ac4c9e8"
+            },
+            {
+              "path": "src/engine/task.cpp",
+              "line": 1,
+              "sha256": "69a568d3577c8a0b7050d2de9774441082f4304931c0b9580f249fb1cb601774"
+            },
+            {
+              "path": "src/player/player_task.cpp",
+              "line": 1,
+              "sha256": "2e76cd51fb6d4e58e95fffb2245a76f686243035074cf331890e240e61e8bf71"
+            },
+            {
+              "path": "src/player/player_startup.cpp",
+              "line": 1,
+              "sha256": "55fda480c5ec832436e19406f8ecc565152d480e7e162114b8a3527267e42b05"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Actual native LogoScene constructs/replaces the arena and scheduler; TitleScene registers explicit scene contexts, creates tasks, executes/displays/deletes them, and menu/preview callbacks borrow task work. Music manager destruction can clear the canonical handle used as destroy_task argument. NativeGame reference reset constructs the same scheduler and installs player child copying. HLE TaskBridge separately owns guest transport, imports/exports pool graphs and resumes guest callbacks. Unit/probe consumers exercise host append, source allocation, graph mutation, continuation and cleanup; none makes arbitrary native actor callbacks complete.",
+          "evidence": [
+            {
+              "path": "src/runtime/logo_scene.cpp",
+              "line": 1,
+              "sha256": "bc4c2ecdb1432a3bb7d3290d8a9a58b14988aeea2583b3889ec8b6be70cb8dbb"
+            },
+            {
+              "path": "src/runtime/native_title_scene.cpp",
+              "line": 1,
+              "sha256": "cbf4b20341e359a6f945e453834a6d9ef599685bef3c5b50115dc505d741e21e"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 1,
+              "sha256": "b2192da9fc1a860b432d09030beaf120a810d5442a2188b0c3b8e44b87d82ad8"
+            },
+            {
+              "path": "src/runtime/native_selection_preview.cpp",
+              "line": 1,
+              "sha256": "7e87d4ce716df319922ff55b59a0710acd9334cd910fdbad990e1dcea46cbe52"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "line": 1,
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/hle/hle_task_bridge.cpp",
+              "line": 1,
+              "sha256": "10818587a4542bc7794138c8589fb17b2ff89afaa4b766e6fc8219f3160922a4"
+            },
+            {
+              "path": "tests/unit/task_callback_lifetime.cpp",
+              "line": 1,
+              "sha256": "ab8df56ea70a5b9d4969fe613f3c07b860f10621a9807b0002d2576f033d7d17"
+            },
+            {
+              "path": "tests/unit/player_motion_graph.cpp",
+              "line": 1,
+              "sha256": "6645aec71ac57285b7f0eaf38d154ad7f278280e7c8dd7251a9d47f1ddd41889"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Current-source native regression specifications: allocation/child/raw/live copy, pool exhaustion, saved-next mutation/reuse, explicit default-null versus unknown, partial cleanup/resume, auxiliary release ordering, canonical-owner destructor reset/replacement and graph motion identity. The historical gate pins current task/task_work files; Main music replay separately records task_callback_lifetime exit 0.",
+          "limits": "Accepted as bounded existing regression evidence, not a fresh execution or full original/hardware lifecycle proof.",
+          "evidence": [
+            {
+              "path": "tests/unit/task.cpp",
+              "line": 1,
+              "sha256": "6ddada476bd7dc1cc63debafaf7c843dd352eb23fa39f4c7b3770e86a62a3fc7"
+            },
+            {
+              "path": "tests/unit/task_lifecycle.cpp",
+              "line": 1,
+              "sha256": "d9f6109498923447d548721a475234b7e8dc23d79e4d534e551bce19576992a1"
+            },
+            {
+              "path": "tests/unit/task_display.cpp",
+              "line": 1,
+              "sha256": "3277c74a7e7a474f2ec257cd1b99f5472b9f523440314a05e43a042d81ac40e6"
+            },
+            {
+              "path": "tests/unit/task_callback_lifetime.cpp",
+              "line": 1,
+              "sha256": "ab8df56ea70a5b9d4969fe613f3c07b860f10621a9807b0002d2576f033d7d17"
+            },
+            {
+              "path": "tests/unit/player_motion_graph.cpp",
+              "line": 1,
+              "sha256": "6645aec71ac57285b7f0eaf38d154ad7f278280e7c8dd7251a9d47f1ddd41889"
+            },
+            {
+              "path": "reference/production-integration-20261101/character-math-gate.json",
+              "line": 1,
+              "sha256": "71be8a684b67446991faa59436b6365d06692e8beba2ea3434a5f317d254b38c"
+            },
+            {
+              "path": "reference/production-integration-20261101/music-owner-main-replay.json",
+              "line": 1,
+              "sha256": "8f96e52757a2699446137c391f0a03a599eab9b1a25594c8031f1ff7dd4f5040"
+            }
+          ]
+        },
+        {
+          "accepted_scope": "Original task display reports 236 comparisons with zero mismatches; delete reports 244 compared of 250 attempted and six explicit source reentrancy/cycle exclusions. Allocator/lifecycle summaries retain exact trace/link/arena comparisons and inactive 401000 failure boundary.",
+          "limits": "Display/delete task header and implementation hashes are stale. Lifecycle lacks current transitive source pinning. Summaries are historical, truncated where recorded; no fresh full-case identity, mutant or holdout acceptance.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/task_display.json",
+              "line": 1,
+              "sha256": "e746d1db0c7257a50b77a15549c13b31c5e0f24616e70225353f76e6c4d15e89"
+            },
+            {
+              "path": "reference/oracle-reports/task_delete.json",
+              "line": 1,
+              "sha256": "9d61ba4df655038f8a7c7913afc98f140c1b3c978a34517041a9ab7475194e22"
+            },
+            {
+              "path": "reference/oracle-reports/task_lifecycle.json",
+              "line": 1,
+              "sha256": "f9fb5745b13198245428d41b63346cbff0b2a495a8062d4c8be644368fc4dd40"
+            },
+            {
+              "path": "tools/oracles/verify_original_task_display.py",
+              "line": 1,
+              "sha256": "d247cf8cd0f65ddb68f74597c66b809158cee314d21de8ad2e54220c26386f99"
+            },
+            {
+              "path": "tools/oracles/verify_original_task_delete.py",
+              "line": 1,
+              "sha256": "bed80ab1cdbc3d1b126c72f04bb4522cabf15af0e11b1d58a579138cf5c00241"
+            },
+            {
+              "path": "tools/oracles/verify_original_task_lifecycle.py",
+              "line": 1,
+              "sha256": "010c3770e264bd05a26b34fa2d20381e79aa51c492c062ff01755ee3cf20bf93"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Independent static inventory at Main 99bdaf4a9e06006aed7f9fcf2c963a6e68cf61d3; only this authored fragment is changed. All seven complete bodies (1,575 physical lines) were read. No source, fixture, judge, global policy/shard/manifest, HANDOFF or STATUS edits.",
+        "No builds, tests, oracles, mutations, providers, network, storage operations, delegates or full gates executed. Root gate 97018 is outside this review; no terminal result inferred. Historical receipts retain their original limits and outcomes.",
+        "Disposition applies only to the exact named files/module members. No whole Task engine, player, Session, actor playback, GPU, N3b, story, gameplay 63 FPS, physical controller or campaign approval. Reference-purpose classification alone never means code conformance.",
+        "This file remains open for the concrete migration/qualification work stated here; historical success is not whole-module conformance."
+      ],
+      "reviewed_members": {
+        "src/engine/task.hpp": "9162b6011520e0d6e6a98e8a4a989793c48bb7ca3e19e0d732f1d59b9ac4c9e8",
+        "src/engine/task.cpp": "69a568d3577c8a0b7050d2de9774441082f4304931c0b9580f249fb1cb601774"
+      },
+      "evidence": [
+        {
+          "path": "src/engine/task.hpp",
+          "line": 1,
+          "sha256": "9162b6011520e0d6e6a98e8a4a989793c48bb7ca3e19e0d732f1d59b9ac4c9e8"
+        },
+        {
+          "path": "src/engine/task.cpp",
+          "line": 1,
+          "sha256": "69a568d3577c8a0b7050d2de9774441082f4304931c0b9580f249fb1cb601774"
+        },
+        {
+          "path": "docs/refactor-inventory/MODULE-REVIEW.md",
+          "line": 1,
+          "sha256": "aa94a5e19b17ebf362c49c741423b9d87a6852dc50cd448baaa3749487103ca5"
+        }
+      ]
+    },
+    "src/engine/task_work": {
+      "disposition": "needs_migration",
+      "reason": "Explicit whole-module review of all current members. Functional allocator/reference ownership is combined with reference_base, serialized-byte knownness and transport callbacks in the public engine contract. Separate these responsibilities without relocating recovered allocator behavior.",
+      "semantic_justification": "Free/physical links are optional offsets (offset0 is real), not host/guest pointers. TaskWork handles identify allocation generations. Interior reference results carry target allocation, byte offset and allocation-data provenance; whole-allocation access explicitly rejects interiors. Weak references prevent self-retention.",
+      "resolved_owners": [
+        {
+          "resolution": "TaskWorkArena owns backing bytes/knownness, physical/free block topology, live allocation handles and weak reference bindings. TaskWork carries raw owner identity/header/request/released state plus an optional typed collision payload. A handle is distinct from its reused numerical data offset. References record target allocation plus interior byte offset and original allocation_data_offset; weak targets do not retain themselves. Explicit release invalidates a retained handle independently of shared_ptr lifetime. No TaskWork method dereferences its raw owner after arena destruction; clients must keep the arena alive for operations.",
+          "evidence": [
+            {
+              "path": "src/engine/task_work.hpp",
+              "line": 1,
+              "sha256": "d0df9e59dec1dfcbeff7d9100ac0044b5a6e3e4683f691d85d60534416109f9d"
+            },
+            {
+              "path": "src/engine/task_work.cpp",
+              "line": 1,
+              "sha256": "08e679e66ab28ceda7a942033489cbd1f49356875766babe9e66236870c84691"
+            },
+            {
+              "path": "tests/unit/task_work.cpp",
+              "line": 1,
+              "sha256": "d6304f3614174330c0b8c11ed234a6d6ad7dcec68eedf23dbeb9c967b49be725"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Native scheduler creation/destruction, player initialization, collision cleanup, Gamma cursor generation and animation buffers consume the allocator. Startup publishes player+312 -> same allocation+56 and player+316 -> same allocation+0. Animation scalar consumption checks reference_view live and reads canonical physics speed/charge, never a copied byte scalar. Legacy Sonic motion binding resolves exact allocation identity through PlayerStartupRegistry; Native Gamma uses Registry.allocations. HLE alone installs base-address serialization and payload/resolver callbacks; its resolver currently resolves exact allocation bases, not arbitrary interiors.",
+          "evidence": [
+            {
+              "path": "src/engine/task.cpp",
+              "line": 1,
+              "sha256": "69a568d3577c8a0b7050d2de9774441082f4304931c0b9580f249fb1cb601774"
+            },
+            {
+              "path": "src/player/player_startup.cpp",
+              "line": 1,
+              "sha256": "55fda480c5ec832436e19406f8ecc565152d480e7e162114b8a3527267e42b05"
+            },
+            {
+              "path": "src/player/player_animation.cpp",
+              "line": 1,
+              "sha256": "f1fea844550691d84e9be39bb2f8bd78c3b75bcc16c950c79a67df1b1a71ade0"
+            },
+            {
+              "path": "src/player/player_animation_blend.cpp",
+              "line": 1,
+              "sha256": "d1ad8f801908b368f3d6cffdc9459c85a1f142d0db484a72f13dc0069256888c"
+            },
+            {
+              "path": "src/player/sonic_player.cpp",
+              "line": 1,
+              "sha256": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483"
+            },
+            {
+              "path": "src/runtime/native_gamma_binding.cpp",
+              "line": 1,
+              "sha256": "75d59d1560df2d8f129cc0c76aa1ba99a9a2933b90f5465cd3e63ae07830cecb"
+            },
+            {
+              "path": "src/player/gamma_cursors.cpp",
+              "line": 1,
+              "sha256": "cce66f08eb505fd245689ad73c51de49e6cb5489f8a1f8d9e4e59d3861492bf4"
+            },
+            {
+              "path": "src/engine/collision_component.cpp",
+              "line": 1,
+              "sha256": "e6a9e37e956ebe2f7a54344f5b17e447f182c8e502432ee28aeef115717ee3e5"
+            },
+            {
+              "path": "src/guest/player_initialization_reference.cpp",
+              "line": 1,
+              "sha256": "17503815791d0c7dd7ff901dde802ab2627c2a099a7202bbc4e92487cfe88159"
+            },
+            {
+              "path": "src/hle/hle_task_bridge.cpp",
+              "line": 1,
+              "sha256": "10818587a4542bc7794138c8589fb17b2ff89afaa4b766e6fc8219f3160922a4"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Current unit specifies first fit, rounded padding, preserved stale payload/header bytes, coalescing, exact fit/sentinel, wrap/exhaustion, released/foreign work, typed null/self/interior references, weak target lifetime, unknown pointer provenance and live payload callbacks. Current historical gate fingerprints both source files and runs task-work.",
+          "limits": "No new run. Unit contracts distinguish functional null links and unavailable serialized bytes; do not establish hardware heap acquisition or every failure/reentrant callback path.",
+          "evidence": [
+            {
+              "path": "tests/unit/task_work.cpp",
+              "line": 1,
+              "sha256": "d6304f3614174330c0b8c11ed234a6d6ad7dcec68eedf23dbeb9c967b49be725"
+            },
+            {
+              "path": "tests/unit/player_startup.cpp",
+              "line": 1,
+              "sha256": "3c433f9b0e965f581e9982a854c2425b471aac472fe0d787b1d2bf711c0bd218"
+            },
+            {
+              "path": "reference/production-integration-20261101/character-math-gate.json",
+              "line": 1,
+              "sha256": "71be8a684b67446991faa59436b6365d06692e8beba2ea3434a5f317d254b38c"
+            }
+          ]
+        },
+        {
+          "accepted_scope": "Historical allocator comparison reports exact return/head/full-arena bytes; current tracked summary cuts sequences to 10 of 16. Earlier work evidence reports 4,890 operations and 3 core plus 2 bridge mutants. Later lifetime evidence reports 19 sequences/2,316 operations, 3 core lifetime plus 2 bridge faults and 10 existing bridge faults.",
+          "limits": "Historical mutation receipts fingerprint older task/bridge/header sources; current task_work.cpp alone matches later lifetime evidence. No current complete mutation/holdout receipt or locally available frozen raw cases. Do not sum truncated lists into full corpus totals.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/task_work.json",
+              "line": 1,
+              "sha256": "d6207dbe834866bd25b2191bdd4c82ed30685370226b65d2a2f1fa61fe071897"
+            },
+            {
+              "path": "reference/production-integration-20261013/task-work-evidence.json",
+              "line": 1,
+              "sha256": "5e0733d0211387db526b1002757a82f2709cb9e488bd303a50b7b53189e14dbb"
+            },
+            {
+              "path": "reference/production-integration-20261013/task-lifetime-evidence.json",
+              "line": 1,
+              "sha256": "84b84077c5055b90efd9d760720450f8a5e14a80055d14077ca5d99a68079847"
+            },
+            {
+              "path": "tools/oracles/verify_original_task_work.py",
+              "line": 1,
+              "sha256": "b1057b2ff375b54bb21848f5a557f5c1ff447a70fef6bfde04ae292435c36329"
+            },
+            {
+              "path": "tests/probes/native_task_work_probe.cpp",
+              "line": 1,
+              "sha256": "3adf1caeaba1197e8ec84c920abcf1a59d8056db0bc45321d04ae619ba11c18b"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Independent static inventory at Main 99bdaf4a9e06006aed7f9fcf2c963a6e68cf61d3; only this authored fragment is changed. All seven complete bodies (1,575 physical lines) were read. No source, fixture, judge, global policy/shard/manifest, HANDOFF or STATUS edits.",
+        "No builds, tests, oracles, mutations, providers, network, storage operations, delegates or full gates executed. Root gate 97018 is outside this review; no terminal result inferred. Historical receipts retain their original limits and outcomes.",
+        "Disposition applies only to the exact named files/module members. No whole Task engine, player, Session, actor playback, GPU, N3b, story, gameplay 63 FPS, physical controller or campaign approval. Reference-purpose classification alone never means code conformance.",
+        "This file remains open for the concrete migration/qualification work stated here; historical success is not whole-module conformance."
+      ],
+      "reviewed_members": {
+        "src/engine/task_work.hpp": "d0df9e59dec1dfcbeff7d9100ac0044b5a6e3e4683f691d85d60534416109f9d",
+        "src/engine/task_work.cpp": "08e679e66ab28ceda7a942033489cbd1f49356875766babe9e66236870c84691"
+      },
+      "evidence": [
+        {
+          "path": "src/engine/task_work.hpp",
+          "line": 1,
+          "sha256": "d0df9e59dec1dfcbeff7d9100ac0044b5a6e3e4683f691d85d60534416109f9d"
+        },
+        {
+          "path": "src/engine/task_work.cpp",
+          "line": 1,
+          "sha256": "08e679e66ab28ceda7a942033489cbd1f49356875766babe9e66236870c84691"
+        },
+        {
+          "path": "docs/refactor-inventory/MODULE-REVIEW.md",
+          "line": 1,
+          "sha256": "aa94a5e19b17ebf362c49c741423b9d87a6852dc50cd448baaa3749487103ca5"
+        }
+      ]
+    },
+    "src/player/actor_current": {
+      "disposition": "already_conforming",
+      "reason": "Explicit whole-module review of all current members. Entire publication contract has semantic owners and optional post-store instrumentation; current exact-source registered unit/gate evidence supports this bounded module.",
+      "semantic_justification": "Three annotated fields have one declaration owner. State null/zero initialization is actual game state. Observation functions and nullable Observation pointer describe instrumentation availability only. Accessors borrow authoritative slots; registry state does not refresh them.",
+      "resolved_owners": [
+        {
+          "resolution": "actor_current::State is the sole declaration owner of gpCharTwp, gpCharPwp and SuperSonicFlag. Native PlayerSystem embeds one state; legacy SonicPlayerGlobals embeds one in its separate execution world. Registry task/player arrays are different source globals, not current slots. Observation is caller-supplied synchronous instrumentation after each store; null instrumentation and empty functions mean no receipt, never absent game state. No static observer or callback registry is introduced here.",
+          "evidence": [
+            {
+              "path": "src/player/actor_current.hpp",
+              "line": 1,
+              "sha256": "2a4b95915be5bf2c9fb2f7f1b37f99e4eb3323435e0fa3c2f9d21ff4ddb95b41"
+            },
+            {
+              "path": "src/player/actor_current.cpp",
+              "line": 1,
+              "sha256": "94d0b802a2267a808b3baf9ce675408a339d99da4eaf5a35ac7951f7220f7fd6"
+            },
+            {
+              "path": "src/runtime/native_player_system.hpp",
+              "line": 1,
+              "sha256": "3031b79d8041ca521b3d5a00decc75d5dae234102988518bdfbfd8a09c474a24"
+            },
+            {
+              "path": "src/player/sonic_player.hpp",
+              "line": 1,
+              "sha256": "8ab874d28623af1876eebed149625c447f112a677098c0fa4f6e56da3286b0b4"
+            },
+            {
+              "path": "src/player/player_initialization.hpp",
+              "line": 1,
+              "sha256": "11af804aaf3579b8dc926ff2f90770aa03a90549cf986a1acb143b326b4cb790"
+            },
+            {
+              "path": "tests/reference/actor_current_fixture.hpp",
+              "line": 1,
+              "sha256": "0eb3cfe9854f6fd9cee067ad84bdf52325dbb47a0c555eb32f74da2fc1a83131"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Legacy run_sonic_player publishes primary then nullable player before later reads and publishes SuperSonicFlag at its reached action site. Frozen fixture receipts borrow canonical fields and track whether a store occurred; they never infer publication from handle/byte truth. Native Gamma current() returns references into PlayerSystem.current and the core writes them directly in entry order, so initialization cannot retroactively refresh the entry null player from the registry. Read accessors return canonical handle references and an unnormalized byte. A later registry replacement/reuse is not a current publication.",
+          "evidence": [
+            {
+              "path": "src/player/sonic_player.cpp",
+              "line": 1,
+              "sha256": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483"
+            },
+            {
+              "path": "tests/probes/native_sonic_player_probe.cpp",
+              "line": 1,
+              "sha256": "ea27199dca1c3f9ea726e9e1be159ed14b4ec35ab594d975fe80d2f9cd25ca60"
+            },
+            {
+              "path": "tests/reference/actor_current_fixture.hpp",
+              "line": 1,
+              "sha256": "0eb3cfe9854f6fd9cee067ad84bdf52325dbb47a0c555eb32f74da2fc1a83131"
+            },
+            {
+              "path": "src/runtime/native_gamma_binding.cpp",
+              "line": 1,
+              "sha256": "75d59d1560df2d8f129cc0c76aa1ba99a9a2933b90f5465cd3e63ae07830cecb"
+            },
+            {
+              "path": "src/player/gamma_selection_core.cpp",
+              "line": 1,
+              "sha256": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea"
+            },
+            {
+              "path": "tests/unit/actor_current.cpp",
+              "line": 1,
+              "sha256": "02d5706cc1783a0e05a91f2e8890fdbde421ba6341f2ee1541a99db9677a25c7"
+            },
+            {
+              "path": "tests/unit/native_gamma_binding.mm",
+              "line": 1,
+              "sha256": "0a2690737ec88d7e3d7402fd2d363e8f5eb18bfb7851d65a7341f87c35a5832d"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Complete actor-current unit checks borrowed slot identity, last publication, explicit null clear, repeated stores, post-store observer order, observer exception after committed store, raw byte 173 and 257 separate worlds. Gate receipt pins the exact current header/implementation/unit/frozen adapter hashes and records actor-current among executed programs. Independent math review also validates frozen Sonic publication semantics; retained original Sonic summary has 28,800 cases, zero stored mismatches and 2,840 FP status differences.",
+          "limits": "Bounded acceptance of the complete small publication module only. 257 worlds are the unit loop, not a new independent executed holdout. Sonic FP partials remain partials. No new actor lifecycle or game-controller correctness claim.",
+          "evidence": [
+            {
+              "path": "tests/unit/actor_current.cpp",
+              "line": 1,
+              "sha256": "02d5706cc1783a0e05a91f2e8890fdbde421ba6341f2ee1541a99db9677a25c7"
+            },
+            {
+              "path": "tests/reference/actor_current_fixture.hpp",
+              "line": 1,
+              "sha256": "0eb3cfe9854f6fd9cee067ad84bdf52325dbb47a0c555eb32f74da2fc1a83131"
+            },
+            {
+              "path": "reference/production-integration-20261101/character-math-gate.json",
+              "line": 1,
+              "sha256": "71be8a684b67446991faa59436b6365d06692e8beba2ea3434a5f317d254b38c"
+            },
+            {
+              "path": "reference/packets/math-length-review/REVIEW.md",
+              "line": 1,
+              "sha256": "871eb3ab666e86f600d09d3fc4f9afc457b77400626def267ee77d63fc34e1ac"
+            },
+            {
+              "path": "reference/oracle-reports/sonic_player.json",
+              "line": 1,
+              "sha256": "0bc45e772077fffbfdde9a80db67a78aab5fb14a8c75fde6fd96bf15bc6a152f"
+            }
+          ]
+        },
+        {
+          "accepted_scope": "Prior math packet records an observer fault detected by the unchanged Sonic evaluator. Root length holdout records 8,864 numeric cases; neither is a dedicated complete current actor ownership mutation/holdout campaign.",
+          "limits": "Historical receipts only; raw packet artifacts absent locally. The actor module closure relies on explicit full-body review and exact current-source registered-unit gate evidence, not on repurposing numeric holdout counts.",
+          "evidence": [
+            {
+              "path": "reference/packets/math-length/qualification.json",
+              "line": 1,
+              "sha256": "303487800b86e4e9389d60d1ccf1e2d1e12d124b39f4195d6036963a210ae599"
+            },
+            {
+              "path": "reference/packets/math-length/root-holdout.json",
+              "line": 1,
+              "sha256": "51ca94b8b1d90daa0b1dce752aa371ab5300fdaa02cf20160aa782bebd5daf6b"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Independent static inventory at Main 99bdaf4a9e06006aed7f9fcf2c963a6e68cf61d3; only this authored fragment is changed. All seven complete bodies (1,575 physical lines) were read. No source, fixture, judge, global policy/shard/manifest, HANDOFF or STATUS edits.",
+        "No builds, tests, oracles, mutations, providers, network, storage operations, delegates or full gates executed. Root gate 97018 is outside this review; no terminal result inferred. Historical receipts retain their original limits and outcomes.",
+        "Disposition applies only to the exact named files/module members. No whole Task engine, player, Session, actor playback, GPU, N3b, story, gameplay 63 FPS, physical controller or campaign approval. Reference-purpose classification alone never means code conformance.",
+        "All members and current evidence for the narrow publication API are reviewed. This does not approve its legacy/native caller implementations."
+      ],
+      "reviewed_members": {
+        "src/player/actor_current.hpp": "2a4b95915be5bf2c9fb2f7f1b37f99e4eb3323435e0fa3c2f9d21ff4ddb95b41",
+        "src/player/actor_current.cpp": "94d0b802a2267a808b3baf9ce675408a339d99da4eaf5a35ac7951f7220f7fd6"
+      },
+      "evidence": [
+        {
+          "path": "src/player/actor_current.hpp",
+          "line": 1,
+          "sha256": "2a4b95915be5bf2c9fb2f7f1b37f99e4eb3323435e0fa3c2f9d21ff4ddb95b41"
+        },
+        {
+          "path": "src/player/actor_current.cpp",
+          "line": 1,
+          "sha256": "94d0b802a2267a808b3baf9ce675408a339d99da4eaf5a35ac7951f7220f7fd6"
+        },
+        {
+          "path": "docs/refactor-inventory/MODULE-REVIEW.md",
+          "line": 1,
+          "sha256": "aa94a5e19b17ebf362c49c741423b9d87a6852dc50cd448baaa3749487103ca5"
+        }
+      ]
+    },
+    "src/runtime/native_player_system": {
+      "disposition": "open_review",
+      "reason": "Explicit whole-module review of all current members. Canonical owner composition is coherent for current native initialization consumers, but complete extra-work/registry/borrow destruction and actor reentry are unrecovered; do not close this module from initialization evidence.",
+      "semantic_justification": "Entire50-line header reviewed, including GammaExtraWork, PlayerSystem, resource binder declaration and Gamma Context. Context references remain invocation-local. Stage/act and callback values are supplied by actual callers; texture service pointers borrow local synchronous objects. deque preserves element references on current push_back use; it does not prove later erase/destructor behavior. Imported Gamma table still exposes legacy animation fixture-knownness through a separate contract already marked migration.",
+      "resolved_owners": [
+        {
+          "resolution": "Session embeds PlayerSystem before LogoScene and after CharacterPack/SceneState. It groups current publications, native registration/allocation records, Gamma source globals, one mutable GammaWeldInfo table, shared scene-backed cursor templates, deque elements tied to actual 580-byte E102WK allocations, and uniquely owned imported Gamma assets. Initialized player physics lives in Registry.allocations records and aliases task primary/motion owners; GammaExtraWork is separate from the 480-byte player auxiliary allocation. Join-table/geometry/template pointers are live borrows, not per-actor copies.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_player_system.hpp",
+              "line": 1,
+              "sha256": "3031b79d8041ca521b3d5a00decc75d5dae234102988518bdfbfd8a09c474a24"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 1,
+              "sha256": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 1,
+              "sha256": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c"
+            },
+            {
+              "path": "src/runtime/native_gamma_resources_native.cpp",
+              "line": 1,
+              "sha256": "18e9957a65b180e4ff44ceb2588597c7483de6dab15dbde005926469b86ab739"
+            },
+            {
+              "path": "src/runtime/native_gamma_assets_native.cpp",
+              "line": 1,
+              "sha256": "5d7eaca277420cff3904d72b2d1a1fff69f44d995c8410a27415f5572f249787"
+            },
+            {
+              "path": "src/player/player_initialization.hpp",
+              "line": 1,
+              "sha256": "11af804aaf3579b8dc926ff2f90770aa03a90549cf986a1acb143b326b4cb790"
+            },
+            {
+              "path": "src/player/player_startup.cpp",
+              "line": 1,
+              "sha256": "55fda480c5ec832436e19406f8ecc565152d480e7e162114b8a3527267e42b05"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Native PreviewServices creates actual actor tasks and zero-backed typed primary/motion owners; Gamma callback forms invocation-local Context borrowing PlayerSystem/scheduler/bootstrap/rendering/task/stage/act plus callbacks and texture services. Gamma binding resolves the motion-held player allocation, then extra-work references and exact allocation records. Source initializes/overwrites registration arrays in order but retains prior allocation records. Actual native Sonic/Miles/Knuckles/Amy/Big exec callbacks throw, Gamma display/destructor and many lower seams throw, and preview action update throws. Legacy Sonic uses PlayerStartupRegistry in reference code; it is not silently bound to native PlayerSystem.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_selection_preview.cpp",
+              "line": 1,
+              "sha256": "7e87d4ce716df319922ff55b59a0710acd9334cd910fdbad990e1dcea46cbe52"
+            },
+            {
+              "path": "src/runtime/native_gamma_binding.cpp",
+              "line": 1,
+              "sha256": "75d59d1560df2d8f129cc0c76aa1ba99a9a2933b90f5465cd3e63ae07830cecb"
+            },
+            {
+              "path": "src/player/gamma_selection_core.cpp",
+              "line": 1,
+              "sha256": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea"
+            },
+            {
+              "path": "src/guest/player_initialization_reference.cpp",
+              "line": 1,
+              "sha256": "17503815791d0c7dd7ff901dde802ab2627c2a099a7202bbc4e92487cfe88159"
+            },
+            {
+              "path": "src/player/sonic_player.cpp",
+              "line": 1,
+              "sha256": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483"
+            },
+            {
+              "path": "tests/unit/native_gamma_binding.mm",
+              "line": 1,
+              "sha256": "0a2690737ec88d7e3d7402fd2d363e8f5eb18bfb7851d65a7341f87c35a5832d"
+            },
+            {
+              "path": "tests/unit/native_gamma_weld_cursors.mm",
+              "line": 1,
+              "sha256": "7b0c49f06344759858c95033a9e503241fa79eda58a3b5f4f00fe7e6cd86352e"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Native Gamma units assert actual primary/motion identity, allocation registry lookup, entry current-player null surviving initialization, shared mutable weld pointer, distinct E102WK/cursor allocations and first explicit setup stop. Gate fingerprints the current PlayerSystem header. Gamma original receipt has 1,422 value-exact cases and 498 FP partials; startup receipt is an original prefix stopping before 44297b, not a returned whole callback.",
+          "limits": "Consumer contracts only: no native actor playback, destructor cleanup, reentry or full registration/extra-work retirement qualification. Gamma concrete lower receipts are not recovered implementations. Resource-loader/preview holdouts do not close PlayerSystem.",
+          "evidence": [
+            {
+              "path": "tests/unit/native_gamma_binding.mm",
+              "line": 1,
+              "sha256": "0a2690737ec88d7e3d7402fd2d363e8f5eb18bfb7851d65a7341f87c35a5832d"
+            },
+            {
+              "path": "tests/unit/native_gamma_weld_cursors.mm",
+              "line": 1,
+              "sha256": "7b0c49f06344759858c95033a9e503241fa79eda58a3b5f4f00fe7e6cd86352e"
+            },
+            {
+              "path": "reference/production-integration-20261101/character-math-gate.json",
+              "line": 1,
+              "sha256": "71be8a684b67446991faa59436b6365d06692e8beba2ea3434a5f317d254b38c"
+            },
+            {
+              "path": "reference/oracle-reports/gamma_selection_core.json",
+              "line": 1,
+              "sha256": "c4620bcdfb07b32d66a657cd070fc2ae54914d7632e593d5cc788c79bcdc4eea"
+            },
+            {
+              "path": "reference/oracle-reports/player_startup.json",
+              "line": 1,
+              "sha256": "64fa58cb36abe377bbf51417d1770a98d5dfba284021b7837b2711ff9e90e67c"
+            },
+            {
+              "path": "reference/packets/session-character-resources/gamma-consumer-identities.json",
+              "line": 1,
+              "sha256": "b3e2158946c76237cbcef7918fb4e540653f7920919b347f5ee77792bb122268"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Independent static inventory at Main 99bdaf4a9e06006aed7f9fcf2c963a6e68cf61d3; only this authored fragment is changed. All seven complete bodies (1,575 physical lines) were read. No source, fixture, judge, global policy/shard/manifest, HANDOFF or STATUS edits.",
+        "No builds, tests, oracles, mutations, providers, network, storage operations, delegates or full gates executed. Root gate 97018 is outside this review; no terminal result inferred. Historical receipts retain their original limits and outcomes.",
+        "Disposition applies only to the exact named files/module members. No whole Task engine, player, Session, actor playback, GPU, N3b, story, gameplay 63 FPS, physical controller or campaign approval. Reference-purpose classification alone never means code conformance.",
+        "This file remains open for the concrete migration/qualification work stated here; historical success is not whole-module conformance."
+      ],
+      "reviewed_members": {
+        "src/runtime/native_player_system.hpp": "3031b79d8041ca521b3d5a00decc75d5dae234102988518bdfbfd8a09c474a24"
+      },
+      "evidence": [
+        {
+          "path": "src/runtime/native_player_system.hpp",
+          "line": 1,
+          "sha256": "3031b79d8041ca521b3d5a00decc75d5dae234102988518bdfbfd8a09c474a24"
+        },
+        {
+          "path": "docs/refactor-inventory/MODULE-REVIEW.md",
+          "line": 1,
+          "sha256": "aa94a5e19b17ebf362c49c741423b9d87a6852dc50cd448baaa3749487103ca5"
         }
       ]
     }
