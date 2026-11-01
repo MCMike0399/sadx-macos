@@ -1,0 +1,107 @@
+{
+  "schema": "inactive-lineage-edge-proposal",
+  "edge_without_review": {
+    "before": {
+      "path": "src/player/sonic_animation_operations.hpp",
+      "sha256": "8af69713c6bf0807f92460079f675d0f05c123bb873090155f4244bf5ee775ea",
+      "commit": "f6c4e538af463a2eaf4c1fe961f04e8443d51878",
+      "proof": {
+        "path": "docs/refactor-inventory/packets/animation-lineage/proofs/original-operations.hpp.txt",
+        "sha256": "8af69713c6bf0807f92460079f675d0f05c123bb873090155f4244bf5ee775ea"
+      }
+    },
+    "replacements": [
+      {
+        "path": "src/player/animation/sonic_animation_content.hpp",
+        "sha256": "4a19944124840a61fa4a97aae8c6bfa6bfb39c76db76f958e8148ba48946da4a",
+        "commit": "17bea2c2c7b6f2d43618b611e358b19b9720d4c3",
+        "proof": {
+          "path": "docs/refactor-inventory/packets/animation-lineage/proofs/sonic_animation_content.hpp.txt",
+          "sha256": "4a19944124840a61fa4a97aae8c6bfa6bfb39c76db76f958e8148ba48946da4a"
+        }
+      },
+      {
+        "path": "src/player/animation/sonic_animation_initialize.hpp",
+        "sha256": "25c0d5cb6471832b66e9335feb22ebb5c0d2675545a50f77b60d39e1fd841ab9",
+        "commit": "17bea2c2c7b6f2d43618b611e358b19b9720d4c3",
+        "proof": {
+          "path": "docs/refactor-inventory/packets/animation-lineage/proofs/sonic_animation_initialize.hpp.txt",
+          "sha256": "25c0d5cb6471832b66e9335feb22ebb5c0d2675545a50f77b60d39e1fd841ab9"
+        }
+      }
+    ],
+    "member": {
+      "module": "src/player/sonic_animation_operations",
+      "prior_disposition": "needs_migration",
+      "remaining_debt": [
+        "SonicAnimationOperation stores instruction PCs and numeric field offsets in 1027 constexpr recipes; exemption from a lexical counter does not establish typed game initialization.",
+        "Generated immutable recipe table is code/diagnostic structure, not independent runtime state. Interpreter is sonic_animation_table.cpp; resource/content ownership remains in the imported animation owner."
+      ],
+      "observed_counts": {
+        "operations": 1027,
+        "read_operations": 145,
+        "store_operations": 882,
+        "raw_hex_tokens": 6162
+      }
+    },
+    "disposition": "reviewed_migration",
+    "rationale": "Replace instruction-shaped read/store recipes with typed animation content and a named shared initializer, preserving the original operation order and reference partial-field availability at the reference boundary. The removed file remains in historical scope with its exact prior finding and observations. PCs are trace/diagnostic identities, while slots, fields, record indices and bits are data encodings, not uniformly executable addresses.",
+    "consumer_evidence": [
+      {
+        "path": "docs/refactor-inventory/packets/animation-lineage/original-review-entry.json",
+        "sha256": "e2a472a242e85b06fdf90d900e9cc774c5b8f11deaf5abd5dba6ef9de32c17d5"
+      },
+      {
+        "path": "docs/refactor-inventory/packets/animation-lineage/proofs/sonic_animation_table.cpp.txt",
+        "sha256": "b1b9de5049667fbb38faf1033db6cdc631e07721e9cfa87da1a186c798279d3c"
+      },
+      {
+        "path": "docs/refactor-inventory/packets/animation-contract/SONIC-TABLE-LINEAGE.json",
+        "sha256": "fb0689dfc2eb467112cf3d3d80e68040c114703c4f9181e4193355c8d0ccd238"
+      }
+    ],
+    "behavior_evidence": [
+      {
+        "path": "docs/refactor-inventory/packets/animation-contract/ROOT-REQUALIFIED.json",
+        "sha256": "9b3f2c1d38362de83ee7b4d7f1c547de662a5b8a0900efba99e40c3527c4e782"
+      },
+      {
+        "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+        "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+      },
+      {
+        "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+        "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+      },
+      {
+        "path": "docs/refactor-inventory/packets/animation-consumer-fault/CONTINUATION-RESULT.json",
+        "sha256": "6746acb3e621961736eddd78f90f701216f6ce8fa4c163bca4d2de74da5dd06b"
+      },
+      {
+        "path": "docs/refactor-inventory/packets/animation-consumer-fault/POSITIVE-COMPOSITION.json",
+        "sha256": "67c7b9b94ccd040a80e523dfb8a3d706bda51692adb65cb319219a54cc6cb25c"
+      },
+      {
+        "path": "docs/refactor-inventory/packets/animation-consumer-fault/REGISTERED-BUILD.json",
+        "sha256": "b7e4d8684cd443ee49a4b4ca5a584a46d24761022d8977f4e0f5232f79a7296e"
+      }
+    ],
+    "prior_member": {
+      "path": "docs/refactor-inventory/packets/animation-lineage/prior-member.json",
+      "sha256": "705f164823dfc7debb0b0fa7f280dfed880e714b9898b5da6300c8cec20ef8c7",
+      "commit": "17bea2c2c7b6f2d43618b611e358b19b9720d4c3",
+      "proof": {
+        "path": "docs/refactor-inventory/packets/animation-lineage/prior-member.json",
+        "sha256": "705f164823dfc7debb0b0fa7f280dfed880e714b9898b5da6300c8cec20ef8c7"
+      }
+    }
+  },
+  "edge_sha256": "c7605737d44b42a6c60f4b385644df48ceb56d3c43049621e99ba235d8ee7ac3",
+  "policy_activated": false,
+  "independent_review_required": true,
+  "limits": [
+    "No new conformance or historical debt closure is granted.",
+    "Unrelated Sonic address-dispatch tables and unrecovered behaviors remain open.",
+    "Current Main-compatible Source has only the already-qualified axis changes beyond the animation source freeze. Integrated product/consumer receipts and gate remain pending."
+  ]
+}
