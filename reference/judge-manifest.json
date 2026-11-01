@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "537691b0023ee769c76a5cd882ccdb29d0d86dd2",
-    "evidence": "docs/packets/mpeg-timing/judge-dependencies.md",
-    "evidence_sha256": "161cfaaa5ce6ebb856ccac3cf530d771a089efe32e17ea0b6bda2e8d328d5a47",
-    "reason": "Compile MPEG owner and actual HleDshow consumer directly in the added test, with explicit source dependencies and pinned support replay"
+    "base_commit": "4f003a9496fca78523ab63001aebc2e2694afd4f",
+    "evidence": "docs/packets/mpeg-timing/judge-registration.md",
+    "evidence_sha256": "b5f7372e3f319527c63b977864a99d7ac0aa43ed000b0c08595ab3a0862829f9",
+    "reason": "Remove empty trailing fields from only the two added MPEG registrations; preserve target names and no-argument behavior"
   },
   "files": {
     "Makefile": "5528e9c8e356383cc05104ee16eeccc939e27968b6f6be876d01dd24ed063d8d",
@@ -648,7 +648,7 @@
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",
     "tests/python/test_voice_publication.py": "5c00051d9b3de640f64e224dda4d810cdd7d26acafd91d7b1dc44e9786a734f3",
-    "tests/unit/manifest.tsv": "df9af81701e5c0397499031ba448b4265f993ab7bced4f79c6d879208a6a94d2",
+    "tests/unit/manifest.tsv": "56b20f59445fa6448507f5b47700ccd25c37763623577904b4ac77a5fb7cef4b",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",
