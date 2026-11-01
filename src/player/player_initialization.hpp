@@ -61,7 +61,7 @@ enum class Boundary {
 };
 class Error : public std::runtime_error {
   public:
-    explicit Error(Boundary boundary, TaskWorkFailure work = TaskWorkFailure::none)
+    explicit Error(Boundary boundary, TaskWorkFailure work = TaskWorkFailure::None)
         : std::runtime_error("player initialization dependency is unavailable"), boundary(boundary),
           work_failure(work) {}
     Boundary boundary;

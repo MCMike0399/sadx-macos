@@ -33,7 +33,7 @@ enum class Boundary { IndexRead, PointRead, PointWrite, ColorRead, ColorWrite };
 class Error : public std::runtime_error {
   public:
     Error(Boundary boundary, std::int32_t vertex, unsigned component,
-          TaskWorkFailure failure = TaskWorkFailure::none)
+          TaskWorkFailure failure = TaskWorkFailure::None)
         : std::runtime_error("Gamma cursor memory boundary"), boundary(boundary),
           vertex(vertex), component(component), work_failure(failure) {}
     Boundary boundary;

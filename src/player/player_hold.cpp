@@ -2,8 +2,8 @@
 namespace sadx {
 namespace {
 PlayerHoldResult failure(PlayerHoldFailure why,std::uint32_t at,
-                         TaskWorkFailure work=TaskWorkFailure::none){return {why,at,work,{}};}
-PlayerHoldResult returned(std::uint32_t flags){return {PlayerHoldFailure::none,0,TaskWorkFailure::none,flags};}
+                         TaskWorkFailure work=TaskWorkFailure::None){return {why,at,work,{}};}
+PlayerHoldResult returned(std::uint32_t flags){return {PlayerHoldFailure::none,0,TaskWorkFailure::None,flags};}
 PlayerHoldResult actor_flags(std::uint8_t character,std::uint8_t actor){
     // Exact character map bytes at43bb10/43bb24. Branches1,4 and >7 return
     // the initial EAX=0, regardless of actor category.

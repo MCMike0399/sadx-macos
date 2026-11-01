@@ -1,0 +1,634 @@
+{
+  "before": "bceff1bbc10f26636dac592e5a2aac735d746c1a",
+  "review": "c622afedee68ee29fa6d457a4e5651b22222c3d7",
+  "enum_names_by_ordinal": {
+    "DestructionStage": [
+      {
+        "ordinal": 0,
+        "before": "live",
+        "after": "Live"
+      },
+      {
+        "ordinal": 1,
+        "before": "children",
+        "after": "Children"
+      },
+      {
+        "ordinal": 2,
+        "before": "collision",
+        "after": "Collision"
+      },
+      {
+        "ordinal": 3,
+        "before": "object",
+        "after": "Object"
+      },
+      {
+        "ordinal": 4,
+        "before": "object_first_chain",
+        "after": "ObjectFirstChain"
+      },
+      {
+        "ordinal": 5,
+        "before": "object_extra",
+        "after": "ObjectExtra"
+      },
+      {
+        "ordinal": 6,
+        "before": "object_first_counter",
+        "after": "ObjectFirstCounter"
+      },
+      {
+        "ordinal": 7,
+        "before": "object_second_chain",
+        "after": "ObjectSecondChain"
+      },
+      {
+        "ordinal": 8,
+        "before": "object_second_counter",
+        "after": "ObjectSecondCounter"
+      },
+      {
+        "ordinal": 9,
+        "before": "object_release",
+        "after": "ObjectRelease"
+      },
+      {
+        "ordinal": 10,
+        "before": "primary",
+        "after": "Primary"
+      },
+      {
+        "ordinal": 11,
+        "before": "force",
+        "after": "Force"
+      },
+      {
+        "ordinal": 12,
+        "before": "motion",
+        "after": "Motion"
+      },
+      {
+        "ordinal": 13,
+        "before": "auxiliary",
+        "after": "Auxiliary"
+      },
+      {
+        "ordinal": 14,
+        "before": "control",
+        "after": "Control"
+      },
+      {
+        "ordinal": 15,
+        "before": "recycle",
+        "after": "Recycle"
+      }
+    ],
+    "TaskFailure": [
+      {
+        "ordinal": 0,
+        "before": "none",
+        "after": "None"
+      },
+      {
+        "ordinal": 1,
+        "before": "invalid_list_index",
+        "after": "InvalidListIndex"
+      },
+      {
+        "ordinal": 2,
+        "before": "foreign_task",
+        "after": "ForeignTask"
+      },
+      {
+        "ordinal": 3,
+        "before": "retired_task",
+        "after": "RetiredTask"
+      },
+      {
+        "ordinal": 4,
+        "before": "null_child_callback",
+        "after": "NullChildCallback"
+      },
+      {
+        "ordinal": 5,
+        "before": "deleted_snapshot_next",
+        "after": "DeletedSnapshotNext"
+      },
+      {
+        "ordinal": 6,
+        "before": "source_pool_uninitialized",
+        "after": "SourcePoolUninitialized"
+      },
+      {
+        "ordinal": 7,
+        "before": "source_pool_exhausted",
+        "after": "SourcePoolExhausted"
+      },
+      {
+        "ordinal": 8,
+        "before": "source_pool_already_initialized",
+        "after": "SourcePoolAlreadyInitialized"
+      },
+      {
+        "ordinal": 9,
+        "before": "source_pool_requires_empty_scheduler",
+        "after": "SourcePoolRequiresEmptyScheduler"
+      },
+      {
+        "ordinal": 10,
+        "before": "inactive_task",
+        "after": "InactiveTask"
+      },
+      {
+        "ordinal": 11,
+        "before": "work_failure",
+        "after": "WorkFailure"
+      },
+      {
+        "ordinal": 12,
+        "before": "default_resource_unavailable",
+        "after": "DefaultResourceUnavailable"
+      },
+      {
+        "ordinal": 13,
+        "before": "child_state_factory_missing",
+        "after": "ChildStateFactoryMissing"
+      },
+      {
+        "ordinal": 14,
+        "before": "detached_creation_rollback_rejected",
+        "after": "DetachedCreationRollbackRejected"
+      },
+      {
+        "ordinal": 15,
+        "before": "inactive_children_corruption",
+        "after": "InactiveChildrenCorruption"
+      },
+      {
+        "ordinal": 16,
+        "before": "callback_mutation_invalidated_destructor",
+        "after": "CallbackMutationInvalidatedDestructor"
+      },
+      {
+        "ordinal": 17,
+        "before": "source_task_requires_destructor",
+        "after": "SourceTaskRequiresDestructor"
+      },
+      {
+        "ordinal": 18,
+        "before": "detached_snapshot_next",
+        "after": "DetachedSnapshotNext"
+      },
+      {
+        "ordinal": 19,
+        "before": "callback_failed",
+        "after": "CallbackFailed"
+      },
+      {
+        "ordinal": 20,
+        "before": "invalid_source_graph",
+        "after": "InvalidSourceGraph"
+      }
+    ],
+    "TaskStep": [
+      {
+        "ordinal": 0,
+        "before": "none",
+        "after": "None"
+      },
+      {
+        "ordinal": 1,
+        "before": "pool_already_initialized",
+        "after": "PoolAlreadyInitialized"
+      },
+      {
+        "ordinal": 2,
+        "before": "pool_requires_empty_scheduler",
+        "after": "PoolRequiresEmptyScheduler"
+      },
+      {
+        "ordinal": 3,
+        "before": "pool_allocation",
+        "after": "PoolAllocation"
+      },
+      {
+        "ordinal": 4,
+        "before": "pool_clear",
+        "after": "PoolClear"
+      },
+      {
+        "ordinal": 5,
+        "before": "allocation_level",
+        "after": "AllocationLevel"
+      },
+      {
+        "ordinal": 6,
+        "before": "pool_required",
+        "after": "PoolRequired"
+      },
+      {
+        "ordinal": 7,
+        "before": "pool_exhaustion",
+        "after": "PoolExhaustion"
+      },
+      {
+        "ordinal": 8,
+        "before": "primary_initialization",
+        "after": "PrimaryInitialization"
+      },
+      {
+        "ordinal": 9,
+        "before": "force_initialization",
+        "after": "ForceInitialization"
+      },
+      {
+        "ordinal": 10,
+        "before": "motion_initialization",
+        "after": "MotionInitialization"
+      },
+      {
+        "ordinal": 11,
+        "before": "auxiliary_initialization",
+        "after": "AuxiliaryInitialization"
+      },
+      {
+        "ordinal": 12,
+        "before": "creation_rollback",
+        "after": "CreationRollback"
+      },
+      {
+        "ordinal": 13,
+        "before": "default_resource",
+        "after": "DefaultResource"
+      },
+      {
+        "ordinal": 14,
+        "before": "child_transform_read",
+        "after": "ChildTransformRead"
+      },
+      {
+        "ordinal": 15,
+        "before": "child_transform_write",
+        "after": "ChildTransformWrite"
+      },
+      {
+        "ordinal": 16,
+        "before": "membership",
+        "after": "Membership"
+      },
+      {
+        "ordinal": 17,
+        "before": "destruction_entry",
+        "after": "DestructionEntry"
+      },
+      {
+        "ordinal": 18,
+        "before": "destruction_generation",
+        "after": "DestructionGeneration"
+      },
+      {
+        "ordinal": 19,
+        "before": "inactive_child_sibling",
+        "after": "InactiveChildSibling"
+      },
+      {
+        "ordinal": 20,
+        "before": "inactive_child_parent",
+        "after": "InactiveChildParent"
+      },
+      {
+        "ordinal": 21,
+        "before": "children_destroyed",
+        "after": "ChildrenDestroyed"
+      },
+      {
+        "ordinal": 22,
+        "before": "cleanup_resume",
+        "after": "CleanupResume"
+      },
+      {
+        "ordinal": 23,
+        "before": "collision_reference",
+        "after": "CollisionReference"
+      },
+      {
+        "ordinal": 24,
+        "before": "collision_flags",
+        "after": "CollisionFlags"
+      },
+      {
+        "ordinal": 25,
+        "before": "collision_extra_reference",
+        "after": "CollisionExtraReference"
+      },
+      {
+        "ordinal": 26,
+        "before": "collision_extra_release",
+        "after": "CollisionExtraRelease"
+      },
+      {
+        "ordinal": 27,
+        "before": "collision_extra_clear",
+        "after": "CollisionExtraClear"
+      },
+      {
+        "ordinal": 28,
+        "before": "collision_release",
+        "after": "CollisionRelease"
+      },
+      {
+        "ordinal": 29,
+        "before": "collision_clear",
+        "after": "CollisionClear"
+      },
+      {
+        "ordinal": 30,
+        "before": "object_reference",
+        "after": "ObjectReference"
+      },
+      {
+        "ordinal": 31,
+        "before": "object_first_chain",
+        "after": "ObjectFirstChain"
+      },
+      {
+        "ordinal": 32,
+        "before": "object_first_next",
+        "after": "ObjectFirstNext"
+      },
+      {
+        "ordinal": 33,
+        "before": "object_first_release",
+        "after": "ObjectFirstRelease"
+      },
+      {
+        "ordinal": 34,
+        "before": "object_first_clear",
+        "after": "ObjectFirstClear"
+      },
+      {
+        "ordinal": 35,
+        "before": "object_extra_reference",
+        "after": "ObjectExtraReference"
+      },
+      {
+        "ordinal": 36,
+        "before": "object_extra_release",
+        "after": "ObjectExtraRelease"
+      },
+      {
+        "ordinal": 37,
+        "before": "object_extra_clear",
+        "after": "ObjectExtraClear"
+      },
+      {
+        "ordinal": 38,
+        "before": "object_counter_clear",
+        "after": "ObjectCounterClear"
+      },
+      {
+        "ordinal": 39,
+        "before": "object_second_chain",
+        "after": "ObjectSecondChain"
+      },
+      {
+        "ordinal": 40,
+        "before": "object_second_next",
+        "after": "ObjectSecondNext"
+      },
+      {
+        "ordinal": 41,
+        "before": "object_second_release",
+        "after": "ObjectSecondRelease"
+      },
+      {
+        "ordinal": 42,
+        "before": "object_second_clear",
+        "after": "ObjectSecondClear"
+      },
+      {
+        "ordinal": 43,
+        "before": "object_second_counter_clear",
+        "after": "ObjectSecondCounterClear"
+      },
+      {
+        "ordinal": 44,
+        "before": "object_release",
+        "after": "ObjectRelease"
+      },
+      {
+        "ordinal": 45,
+        "before": "object_clear",
+        "after": "ObjectClear"
+      },
+      {
+        "ordinal": 46,
+        "before": "primary_release",
+        "after": "PrimaryRelease"
+      },
+      {
+        "ordinal": 47,
+        "before": "force_release",
+        "after": "ForceRelease"
+      },
+      {
+        "ordinal": 48,
+        "before": "motion_release",
+        "after": "MotionRelease"
+      },
+      {
+        "ordinal": 49,
+        "before": "auxiliary_release",
+        "after": "AuxiliaryRelease"
+      },
+      {
+        "ordinal": 50,
+        "before": "child_dispatch_next",
+        "after": "ChildDispatchNext"
+      },
+      {
+        "ordinal": 51,
+        "before": "indexed_dispatch_next",
+        "after": "IndexedDispatchNext"
+      },
+      {
+        "ordinal": 52,
+        "before": "execution_callback",
+        "after": "ExecutionCallback"
+      },
+      {
+        "ordinal": 53,
+        "before": "callback_dependency",
+        "after": "CallbackDependency"
+      }
+    ],
+    "TaskLifetimeCallee": [
+      {
+        "ordinal": 0,
+        "before": "none",
+        "after": "None"
+      },
+      {
+        "ordinal": 1,
+        "before": "destructor",
+        "after": "Destructor"
+      },
+      {
+        "ordinal": 2,
+        "before": "free_children",
+        "after": "FreeChildren"
+      },
+      {
+        "ordinal": 3,
+        "before": "destroy_child",
+        "after": "DestroyChild"
+      },
+      {
+        "ordinal": 4,
+        "before": "run_children",
+        "after": "RunChildren"
+      }
+    ],
+    "TaskLifetimePhase": [
+      {
+        "ordinal": 0,
+        "before": "begin",
+        "after": "Begin"
+      },
+      {
+        "ordinal": 1,
+        "before": "callback_complete",
+        "after": "CallbackComplete"
+      },
+      {
+        "ordinal": 2,
+        "before": "children_complete",
+        "after": "ChildrenComplete"
+      },
+      {
+        "ordinal": 3,
+        "before": "complete",
+        "after": "Complete"
+      }
+    ],
+    "TaskCallbackContextFailure": [
+      {
+        "ordinal": 0,
+        "before": "none",
+        "after": "None"
+      },
+      {
+        "ordinal": 1,
+        "before": "null_callback",
+        "after": "NullCallback"
+      },
+      {
+        "ordinal": 2,
+        "before": "null_context",
+        "after": "NullContext"
+      },
+      {
+        "ordinal": 3,
+        "before": "conflicting_owner",
+        "after": "ConflictingOwner"
+      }
+    ],
+    "TaskWorkFailure": [
+      {
+        "ordinal": 0,
+        "before": "none",
+        "after": "None"
+      },
+      {
+        "ordinal": 1,
+        "before": "exhausted",
+        "after": "Exhausted"
+      },
+      {
+        "ordinal": 2,
+        "before": "size_wrap",
+        "after": "SizeWrap"
+      },
+      {
+        "ordinal": 3,
+        "before": "foreign_work",
+        "after": "ForeignWork"
+      },
+      {
+        "ordinal": 4,
+        "before": "released_work",
+        "after": "ReleasedWork"
+      },
+      {
+        "ordinal": 5,
+        "before": "out_of_bounds",
+        "after": "OutOfBounds"
+      },
+      {
+        "ordinal": 6,
+        "before": "unobserved_pointer_bytes",
+        "after": "UnobservedPointerBytes"
+      },
+      {
+        "ordinal": 7,
+        "before": "unbound_reference",
+        "after": "UnboundReference"
+      },
+      {
+        "ordinal": 8,
+        "before": "invalid_buffer",
+        "after": "InvalidBuffer"
+      },
+      {
+        "ordinal": 9,
+        "before": "unobserved_live_field",
+        "after": "UnobservedLiveField"
+      },
+      {
+        "ordinal": 10,
+        "before": "interior_reference_requires_view",
+        "after": "InteriorReferenceRequiresView"
+      },
+      {
+        "ordinal": 11,
+        "before": "conflicting_live_view",
+        "after": "ConflictingLiveView"
+      }
+    ]
+  },
+  "changed_source_files": [
+    "src/engine/collision_component.cpp",
+    "src/engine/collision_component.hpp",
+    "src/engine/task.cpp",
+    "src/engine/task.hpp",
+    "src/engine/task_work.cpp",
+    "src/engine/task_work.hpp",
+    "src/guest/player_initialization_reference.cpp",
+    "src/guest/task_reference.hpp",
+    "src/hle/hle_task_bridge.cpp",
+    "src/player/animation/animation_engine.hpp",
+    "src/player/gamma_cursors.hpp",
+    "src/player/player_auxiliary_effect.cpp",
+    "src/player/player_auxiliary_effect.hpp",
+    "src/player/player_hold.cpp",
+    "src/player/player_hold.hpp",
+    "src/player/player_initialization.hpp",
+    "src/player/player_startup.hpp",
+    "src/player/player_task.cpp",
+    "src/player/sonic_player.cpp",
+    "src/runtime/native_title_scene.cpp"
+  ],
+  "corrections": [
+    "CamelCase enumerators and exact qualified references, including local DestructionStage aliases",
+    "Explicit NOTSA on advance_child_lifetime declaration"
+  ],
+  "checks": [
+    "No source differed from HEAD before Root edit",
+    "All7enum declaration sequences preserve exact ordinal order",
+    "Only Source files touched/staged; worker dirty probe/test/Make/tool changes untouched"
+  ],
+  "limits": [
+    "No compile/runtime/oracle or mutation ran while Main gate owns compute. Final candidate qualification still pending."
+  ]
+}

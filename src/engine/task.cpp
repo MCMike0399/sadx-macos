@@ -54,13 +54,13 @@ TaskCallbackContextResult
 TaskScheduler::register_callback_context(TaskCallback callback,
                                          std::shared_ptr<TaskCallbackContext> owner) {
     if (!callback)
-        return {TaskCallbackContextFailure::null_callback};
+        return {TaskCallbackContextFailure::NullCallback};
     if (!owner)
-        return {TaskCallbackContextFailure::null_context};
+        return {TaskCallbackContextFailure::NullContext};
     const auto found = callback_contexts_.find(callback);
     if (found != callback_contexts_.end())
-        return {found->second == owner ? TaskCallbackContextFailure::none
-                                       : TaskCallbackContextFailure::conflicting_owner};
+        return {found->second == owner ? TaskCallbackContextFailure::None
+                                       : TaskCallbackContextFailure::ConflictingOwner};
     callback_contexts_.emplace(callback, std::move(owner));
     return {};
 }
@@ -77,13 +77,13 @@ std::shared_ptr<TaskCallbackContext> TaskScheduler::callback_context(TaskCallbac
 
 TaskResult TaskScheduler::validate(const TaskHandle &task) const {
     if (!task || task->owner_ != this) {
-        return {TaskFailure::foreign_task, task};
+        return {TaskFailure::ForeignTask, task};
     }
     if (task->retired_) {
-        return {TaskFailure::retired_task, task};
+        return {TaskFailure::RetiredTask, task};
     }
     if (storage_.find(task.get()) == storage_.end()) {
-        return {TaskFailure::foreign_task, task};
+        return {TaskFailure::ForeignTask, task};
     }
     return {};
 }
@@ -113,7 +113,7 @@ TaskResult TaskScheduler::append_task(int list_index, TaskCallback callback,
                                       std::shared_ptr<void> cooperative_thread) {
     const int index = canonical_index(list_index);
     if (index < 0) {
-        return {TaskFailure::invalid_list_index, {}};
+        return {TaskFailure::InvalidListIndex, {}};
     }
     TaskHandle task(new Task);
     task->owner_ = this;
@@ -123,7 +123,7 @@ TaskResult TaskScheduler::append_task(int list_index, TaskCallback callback,
     task->linked_ = true;
     storage_.emplace(task.get(), task);
     append_link(heads_[task->list_], task);
-    return {TaskFailure::none, task};
+    return {TaskFailure::None, task};
 }
 
 TaskResult TaskScheduler::append_child(const TaskHandle &parent, TaskCallback callback,
@@ -140,14 +140,14 @@ TaskResult TaskScheduler::append_child(const TaskHandle &parent, TaskCallback ca
     task->linked_ = true;
     storage_.emplace(task.get(), task);
     append_link(parent->first_child_, task);
-    return {TaskFailure::none, task};
+    return {TaskFailure::None, task};
 }
 
 TaskDispatchState TaskScheduler::begin_index_dispatch(int list_index) {
     TaskDispatchState state;
     const auto index = canonical_index(list_index);
     if (index < 0)
-        state.failure = {TaskFailure::invalid_list_index, {}};
+        state.failure = {TaskFailure::InvalidListIndex, {}};
     else
         state.next = retain(heads_[static_cast<std::size_t>(index)]);
     return state;
@@ -178,23 +178,23 @@ TaskDispatchCall TaskScheduler::advance_dispatch(TaskDispatchState &state) {
             if (current)
                 task = current;
             else
-                return {{TaskFailure::deleted_snapshot_next,
+                return {{TaskFailure::DeletedSnapshotNext,
                          task,
                          {},
-                         state.children ? TaskStep::child_dispatch_next
-                                        : TaskStep::indexed_dispatch_next},
+                         state.children ? TaskStep::ChildDispatchNext
+                                        : TaskStep::IndexedDispatchNext},
                         task,
                         nullptr,
                         false};
         }
         if (task->retired_)
-            return {{TaskFailure::deleted_snapshot_next, task}, task, nullptr, false};
+            return {{TaskFailure::DeletedSnapshotNext, task}, task, nullptr, false};
         if (task->source_slot_ && !task->linked_)
             return {
-                {TaskFailure::detached_snapshot_next,
+                {TaskFailure::DetachedSnapshotNext,
                  task,
                  {},
-                 state.children ? TaskStep::child_dispatch_next : TaskStep::indexed_dispatch_next},
+                 state.children ? TaskStep::ChildDispatchNext : TaskStep::IndexedDispatchNext},
                 task,
                 nullptr,
                 false};
@@ -206,7 +206,7 @@ TaskDispatchCall TaskScheduler::advance_dispatch(TaskDispatchState &state) {
             context_.cooperative_thread = task->cooperative_thread;
         if (!callback) {
             if (state.children)
-                return {{TaskFailure::null_child_callback, task}, task, nullptr, false};
+                return {{TaskFailure::NullChildCallback, task}, task, nullptr, false};
             context_.current_function = nullptr;
             continue;
         }
@@ -276,9 +276,9 @@ TaskResult TaskScheduler::display_chain(TaskHandle next) {
     while (next) {
         auto task = resolve_snapshot(next);
         if (!task || task->retired_)
-            return {TaskFailure::deleted_snapshot_next, next};
+            return {TaskFailure::DeletedSnapshotNext, next};
         if (task->source_slot_ && !task->linked_)
-            return {TaskFailure::detached_snapshot_next, task};
+            return {TaskFailure::DetachedSnapshotNext, task};
         const auto callback = task->display;
         next = retain(task->next_);
         if (callback != nullptr) {
@@ -303,7 +303,7 @@ TaskResult TaskScheduler::display_chain(TaskHandle next) {
 TaskResult TaskScheduler::display_index(int list_index) {
     const auto index = canonical_index(list_index);
     if (index < 0)
-        return {TaskFailure::invalid_list_index, {}};
+        return {TaskFailure::InvalidListIndex, {}};
     WalkGuard guard(*this);
     return display_chain(retain(heads_[static_cast<std::size_t>(index)]));
 }
@@ -340,9 +340,9 @@ TaskResult TaskScheduler::delete_all_tasks() {
         while (next) {
             auto task = resolve_snapshot(next);
             if (!task || task->retired_)
-                return {TaskFailure::deleted_snapshot_next, next};
+                return {TaskFailure::DeletedSnapshotNext, next};
             if (task->source_slot_ && !task->linked_)
-                return {TaskFailure::detached_snapshot_next, task};
+                return {TaskFailure::DetachedSnapshotNext, task};
             next = retain(task->next_);
             // The source leaves exec-null top-level tasks and their descendants alive.
             if (task->exec != nullptr) {
@@ -365,7 +365,7 @@ TaskResult TaskScheduler::free_task(const TaskHandle &task) {
         return accepted;
     }
     if (!active_member(task))
-        return {TaskFailure::inactive_task, task, {}, TaskStep::membership};
+        return {TaskFailure::InactiveTask, task, {}, TaskStep::Membership};
     task->exec = &destroy_callback;
     return {};
 }
@@ -439,26 +439,26 @@ bool TaskScheduler::active_member(const TaskHandle &sought) const {
 
 TaskResult TaskScheduler::source_work_failure(const TaskHandle &task, const TaskWorkResult &failure,
                                               TaskStep step) const {
-    return {TaskFailure::work_failure, task, failure.failure, step};
+    return {TaskFailure::WorkFailure, task, failure.failure, step};
 }
 
 TaskResult TaskScheduler::initialize_source_pool(std::shared_ptr<TaskWorkArena> arena,
                                                  std::shared_ptr<void> default_cooperative_thread) {
     if (arena_)
-        return {TaskFailure::source_pool_already_initialized,
+        return {TaskFailure::SourcePoolAlreadyInitialized,
                 {},
                 {},
-                TaskStep::pool_already_initialized};
+                TaskStep::PoolAlreadyInitialized};
     if (!storage_.empty())
-        return {TaskFailure::source_pool_requires_empty_scheduler,
+        return {TaskFailure::SourcePoolRequiresEmptyScheduler,
                 {},
                 {},
-                TaskStep::pool_requires_empty_scheduler};
+                TaskStep::PoolRequiresEmptyScheduler};
     if (!arena)
-        return {TaskFailure::source_pool_uninitialized, {}, {}, TaskStep::pool_allocation};
+        return {TaskFailure::SourcePoolUninitialized, {}, {}, TaskStep::PoolAllocation};
     const auto reserved = arena->allocate(kTaskPoolBytes);
     if (!reserved)
-        return source_work_failure({}, reserved, TaskStep::pool_allocation);
+        return source_work_failure({}, reserved, TaskStep::PoolAllocation);
     arena_ = std::move(arena);
     source_pool_work_ = reserved.work;
     default_cooperative_thread_ = std::move(default_cooperative_thread);
@@ -467,7 +467,7 @@ TaskResult TaskScheduler::initialize_source_pool(std::shared_ptr<TaskWorkArena> 
     // nonzero. Those opaque links are represented by native slot indices.
     const auto zeroed = arena_->fill(source_pool_work_, 0, 0, kTaskPoolBytes);
     if (!zeroed)
-        return source_work_failure({}, zeroed, TaskStep::pool_clear);
+        return source_work_failure({}, zeroed, TaskStep::PoolClear);
     for (std::size_t i = 4096; i != 0; --i)
         free_slots_.push_back(static_cast<std::uint16_t>(i - 1));
     return {};
@@ -483,11 +483,11 @@ TaskGraphState TaskScheduler::source_graph() const {
     out.free_slots = free_slots_;
     out.context = context_;
     if (!arena_)
-        out.failure = TaskFailure::source_pool_uninitialized;
+        out.failure = TaskFailure::SourcePoolUninitialized;
     for (const auto &[p, t] : storage_) {
         (void)p;
         if (!t->source_slot_)
-            out.failure = TaskFailure::invalid_source_graph;
+            out.failure = TaskFailure::InvalidSourceGraph;
     }
     const auto slot = [](Task *t) -> std::optional<std::uint16_t> {
         return t ? t->source_slot_ : std::nullopt;
@@ -530,7 +530,7 @@ struct TaskScheduler::GraphRestorePlan {
 
 TaskResult TaskScheduler::validate_graph_allocations(const TaskGraphState &state,
                                                      GraphRestorePlan &plan) const {
-    const auto bad = [] { return TaskResult{TaskFailure::invalid_source_graph, {}}; };
+    const auto bad = [] { return TaskResult{TaskFailure::InvalidSourceGraph, {}}; };
     auto &free = plan.free;
     auto &used = plan.used;
     // NOTSA: index the validated snapshot once; list traversal must not scan
@@ -575,7 +575,7 @@ TaskResult TaskScheduler::validate_graph_allocations(const TaskGraphState &state
 
 TaskResult TaskScheduler::validate_graph_links(const TaskGraphState &state,
                                                GraphRestorePlan &plan) const {
-    const auto bad = [] { return TaskResult{TaskFailure::invalid_source_graph, {}}; };
+    const auto bad = [] { return TaskResult{TaskFailure::InvalidSourceGraph, {}}; };
     const auto &free = plan.free;
     const auto &used = plan.used;
     const auto &nodes_by_slot = plan.nodes_by_slot;
@@ -683,14 +683,14 @@ void TaskScheduler::publish_graph(const TaskGraphState &state, const GraphRestor
 
 TaskResult TaskScheduler::restore_source_graph(const TaskGraphState &state) {
     const auto bad = []() {
-        return TaskResult{TaskFailure::invalid_source_graph, {}, {}, TaskStep::none};
+        return TaskResult{TaskFailure::InvalidSourceGraph, {}, {}, TaskStep::None};
     };
-    if (!arena_ || walk_depth_ || state.failure != TaskFailure::none)
+    if (!arena_ || walk_depth_ || state.failure != TaskFailure::None)
         return bad();
     for (const auto &[p, t] : storage_) {
         (void)p;
         if (!t->retired_ &&
-            (t->destructor_active_ || t->destruction_stage_ != Task::DestructionStage::live))
+            (t->destructor_active_ || t->destruction_stage_ != Task::DestructionStage::Live))
             return bad();
     }
     GraphRestorePlan plan;
@@ -704,11 +704,11 @@ TaskResult TaskScheduler::restore_source_graph(const TaskGraphState &state) {
 
 TaskResult TaskScheduler::allocate_task(int level, TaskCallback callback) {
     if (level < 0 || level >= 9)
-        return {TaskFailure::invalid_list_index, {}, {}, TaskStep::allocation_level};
+        return {TaskFailure::InvalidListIndex, {}, {}, TaskStep::AllocationLevel};
     if (!arena_)
-        return {TaskFailure::source_pool_uninitialized, {}, {}, TaskStep::pool_required};
+        return {TaskFailure::SourcePoolUninitialized, {}, {}, TaskStep::PoolRequired};
     if (free_slots_.empty())
-        return {TaskFailure::source_pool_exhausted, {}, {}, TaskStep::pool_exhaustion};
+        return {TaskFailure::SourcePoolExhausted, {}, {}, TaskStep::PoolExhaustion};
     const auto slot = free_slots_.back();
     free_slots_.pop_back();
     TaskHandle task(new Task);
@@ -727,7 +727,7 @@ TaskResult TaskScheduler::allocate_task(int level, TaskCallback callback) {
         heads_[task->list_] = task.get();
         task->linked_ = true;
     }
-    return {TaskFailure::none, task};
+    return {TaskFailure::None, task};
 }
 
 TaskResult TaskScheduler::create_element(std::uint32_t flags, int level, TaskCallback callback) {
@@ -741,10 +741,10 @@ TaskResult TaskScheduler::create_element(std::uint32_t flags, int level, TaskCal
         TaskWorkHandle Task::*member;
         TaskStep step;
     };
-    const Field fields[] = {{2, 64, &Task::primary_work, TaskStep::primary_initialization},
-                            {4, 56, &Task::force_work, TaskStep::force_initialization},
-                            {1, 64, &Task::motion_work, TaskStep::motion_initialization},
-                            {8, 16, &Task::auxiliary_work, TaskStep::auxiliary_initialization}};
+    const Field fields[] = {{2, 64, &Task::primary_work, TaskStep::PrimaryInitialization},
+                            {4, 56, &Task::force_work, TaskStep::ForceInitialization},
+                            {1, 64, &Task::motion_work, TaskStep::MotionInitialization},
+                            {8, 16, &Task::auxiliary_work, TaskStep::AuxiliaryInitialization}};
     for (const auto &field : fields) {
         if (!(static_cast<std::uint8_t>(flags) & field.flag))
             continue;
@@ -752,8 +752,8 @@ TaskResult TaskScheduler::create_element(std::uint32_t flags, int level, TaskCal
         if (!allocated) {
             const auto rollback = destroy_task(task);
             if (!rollback)
-                return {TaskFailure::detached_creation_rollback_rejected, task, allocated.failure,
-                        TaskStep::creation_rollback};
+                return {TaskFailure::DetachedCreationRollbackRejected, task, allocated.failure,
+                        TaskStep::CreationRollback};
             return source_work_failure(task, allocated, field.step);
         }
         task.get()->*(field.member) = allocated.work;
@@ -769,7 +769,7 @@ TaskResult TaskScheduler::create_element(std::uint32_t flags, int level, TaskCal
                 default_resource_reader_ ? default_resource_reader_() : default_cooperative_thread_;
         } catch (const TaskResourceUnavailable &) {
             return {
-                TaskFailure::default_resource_unavailable, task, {}, TaskStep::default_resource};
+                TaskFailure::DefaultResourceUnavailable, task, {}, TaskStep::DefaultResource};
         }
     }
     return created;
@@ -793,12 +793,12 @@ TaskResult TaskScheduler::create_child(std::uint32_t flags, TaskCallback callbac
     if (task->primary_work && parent->primary_work) {
         if (parent->primary_state) {
             if (!child_state_factory_)
-                return {TaskFailure::child_state_factory_missing,
+                return {TaskFailure::ChildStateFactoryMissing,
                         task,
                         {},
-                        TaskStep::child_transform_read};
-            if (const auto step = child_state_factory_(*parent, *task); step != TaskStep::none)
-                return {TaskFailure::work_failure, task, TaskWorkFailure::unobserved_live_field,
+                        TaskStep::ChildTransformRead};
+            if (const auto step = child_state_factory_(*parent, *task); step != TaskStep::None)
+                return {TaskFailure::WorkFailure, task, TaskWorkFailure::UnobservedLiveField,
                         step};
         } else {
             // Source loads/stores each raw word, preserving NaN payloads and angle
@@ -807,10 +807,10 @@ TaskResult TaskScheduler::create_child(std::uint32_t flags, TaskCallback callbac
                 std::uint32_t word = 0;
                 auto result = arena_->read(parent->primary_work, at, &word, 4);
                 if (!result)
-                    return source_work_failure(task, result, TaskStep::child_transform_read);
+                    return source_work_failure(task, result, TaskStep::ChildTransformRead);
                 result = arena_->write(task->primary_work, at, &word, 4);
                 if (!result)
-                    return source_work_failure(task, result, TaskStep::child_transform_write);
+                    return source_work_failure(task, result, TaskStep::ChildTransformWrite);
             }
         }
     }
@@ -834,13 +834,13 @@ TaskLifetimeState TaskScheduler::begin_destruction(const TaskHandle &task) {
     state.task = task;
     state.failure = validate(task);
     if (state.failure && !active_member(task))
-        state.failure = {TaskFailure::inactive_task, task, {}, TaskStep::membership};
+        state.failure = {TaskFailure::InactiveTask, task, {}, TaskStep::Membership};
     if (state.failure &&
-        (task->destructor_active_ || task->destruction_stage_ != Task::DestructionStage::live))
-        state.failure = {TaskFailure::callback_mutation_invalidated_destructor,
+        (task->destructor_active_ || task->destruction_stage_ != Task::DestructionStage::Live))
+        state.failure = {TaskFailure::CallbackMutationInvalidatedDestructor,
                          task,
                          {},
-                         TaskStep::destruction_entry};
+                         TaskStep::DestructionEntry};
     return state;
 }
 TaskLifetimeState TaskScheduler::begin_free_children(const TaskHandle &task) {
@@ -852,47 +852,47 @@ TaskLifetimeState TaskScheduler::begin_free_children(const TaskHandle &task) {
 }
 TaskLifetimeCall TaskScheduler::advance_child_lifetime(TaskLifetimeState &state,
                                                        const TaskHandle &task) {
-    if (state.phase == TaskLifetimePhase::begin && task->exec == &free_children_callback) {
-        state.phase = TaskLifetimePhase::callback_complete;
-        return {{}, task, nullptr, TaskLifetimeCallee::run_children, false};
+    if (state.phase == TaskLifetimePhase::Begin && task->exec == &free_children_callback) {
+        state.phase = TaskLifetimePhase::CallbackComplete;
+        return {{}, task, nullptr, TaskLifetimeCallee::RunChildren, false};
     }
-    if (state.phase == TaskLifetimePhase::callback_complete) {
+    if (state.phase == TaskLifetimePhase::CallbackComplete) {
         if (!task->first_child_)
             task->exec = &destroy_callback;
-        return {{}, task, nullptr, TaskLifetimeCallee::none, true};
+        return {{}, task, nullptr, TaskLifetimeCallee::None, true};
     }
     if (!task->first_child_)
-        return {{}, task, nullptr, TaskLifetimeCallee::none, true};
+        return {{}, task, nullptr, TaskLifetimeCallee::None, true};
     if (!active_member(task)) {
         if (task->first_child_->next_)
-            return {{TaskFailure::inactive_children_corruption,
+            return {{TaskFailure::InactiveChildrenCorruption,
                      task,
                      {},
-                     TaskStep::inactive_child_sibling},
+                     TaskStep::InactiveChildSibling},
                     task,
                     nullptr,
-                    TaskLifetimeCallee::none,
+                    TaskLifetimeCallee::None,
                     false};
         const auto child = retain(task->first_child_);
         if (!child || child->parent_ != task.get())
-            return {{TaskFailure::inactive_children_corruption,
+            return {{TaskFailure::InactiveChildrenCorruption,
                      task,
                      {},
-                     TaskStep::inactive_child_parent},
+                     TaskStep::InactiveChildParent},
                     task,
                     nullptr,
-                    TaskLifetimeCallee::none,
+                    TaskLifetimeCallee::None,
                     false};
         task->first_child_ = nullptr;
         child->linked_ = false;
-        return {{}, task, nullptr, TaskLifetimeCallee::none, true};
+        return {{}, task, nullptr, TaskLifetimeCallee::None, true};
     }
-    return {{}, retain(task->first_child_), nullptr, TaskLifetimeCallee::destroy_child, false};
+    return {{}, retain(task->first_child_), nullptr, TaskLifetimeCallee::DestroyChild, false};
 }
 
 TaskLifetimeCall TaskScheduler::advance_lifetime(TaskLifetimeState &state) {
     if (!state.failure)
-        return {state.failure, state.task, nullptr, TaskLifetimeCallee::none, false};
+        return {state.failure, state.task, nullptr, TaskLifetimeCallee::None, false};
     const auto resolve = [&](const TaskHandle &value) {
         if (value && value->source_slot_) {
             const auto current = source_slots_[*value->source_slot_];
@@ -902,58 +902,58 @@ TaskLifetimeCall TaskScheduler::advance_lifetime(TaskLifetimeState &state) {
     };
     const auto task = resolve(state.task);
     if (!task || task->retired_)
-        return {{TaskFailure::callback_mutation_invalidated_destructor,
+        return {{TaskFailure::CallbackMutationInvalidatedDestructor,
                  state.task,
                  {},
-                 TaskStep::destruction_generation},
+                 TaskStep::DestructionGeneration},
                 state.task,
                 nullptr,
-                TaskLifetimeCallee::none,
+                TaskLifetimeCallee::None,
                 false};
     state.task = task;
     if (state.children)
         return advance_child_lifetime(state, task);
 
-    if (state.phase == TaskLifetimePhase::begin) {
-        state.phase = TaskLifetimePhase::callback_complete;
+    if (state.phase == TaskLifetimePhase::Begin) {
+        state.phase = TaskLifetimePhase::CallbackComplete;
         if (task->destructor)
-            return {{}, task, task->destructor, TaskLifetimeCallee::destructor, false};
+            return {{}, task, task->destructor, TaskLifetimeCallee::Destructor, false};
     }
-    if (state.phase == TaskLifetimePhase::callback_complete) {
+    if (state.phase == TaskLifetimePhase::CallbackComplete) {
         state.previous = retain(task->previous_);
         state.next = retain(task->next_);
         task->exec = task->display = task->destructor = nullptr;
-        state.phase = TaskLifetimePhase::children_complete;
-        return {{}, task, nullptr, TaskLifetimeCallee::free_children, false};
+        state.phase = TaskLifetimePhase::ChildrenComplete;
+        return {{}, task, nullptr, TaskLifetimeCallee::FreeChildren, false};
     }
-    if (state.phase == TaskLifetimePhase::children_complete) {
+    if (state.phase == TaskLifetimePhase::ChildrenComplete) {
         if (task->first_child_)
-            return {{TaskFailure::callback_mutation_invalidated_destructor,
+            return {{TaskFailure::CallbackMutationInvalidatedDestructor,
                      task,
                      {},
-                     TaskStep::children_destroyed},
+                     TaskStep::ChildrenDestroyed},
                     task,
                     nullptr,
-                    TaskLifetimeCallee::none,
+                    TaskLifetimeCallee::None,
                     false};
         const auto previous = resolve(state.previous), next = resolve(state.next);
         if ((state.previous && !previous) || (state.next && !next))
-            return {{TaskFailure::callback_mutation_invalidated_destructor,
+            return {{TaskFailure::CallbackMutationInvalidatedDestructor,
                      task,
                      {},
-                     TaskStep::children_destroyed},
+                     TaskStep::ChildrenDestroyed},
                     task,
                     nullptr,
-                    TaskLifetimeCallee::none,
+                    TaskLifetimeCallee::None,
                     false};
         task->destruction_previous_ = previous;
         task->destruction_next_ = next;
-        task->destruction_stage_ = Task::DestructionStage::children;
-        state.phase = TaskLifetimePhase::complete;
+        task->destruction_stage_ = Task::DestructionStage::Children;
+        state.phase = TaskLifetimePhase::Complete;
         const auto result = finish_destruction(task);
-        return {result, task, nullptr, TaskLifetimeCallee::none, bool(result)};
+        return {result, task, nullptr, TaskLifetimeCallee::None, bool(result)};
     }
-    return {{}, task, nullptr, TaskLifetimeCallee::none, true};
+    return {{}, task, nullptr, TaskLifetimeCallee::None, true};
 }
 TaskResult TaskScheduler::free_children(const TaskHandle &parent) {
     auto state = begin_free_children(parent);
@@ -963,7 +963,7 @@ TaskResult TaskScheduler::free_children(const TaskHandle &parent) {
             return call.result;
         if (call.completed)
             return {};
-        const auto result = call.callee == TaskLifetimeCallee::run_children
+        const auto result = call.callee == TaskLifetimeCallee::RunChildren
                                 ? run_children(call.task)
                                 : destroy_task(call.task);
         if (!result)
@@ -981,7 +981,7 @@ TaskResult TaskScheduler::destroy_task(const TaskHandle &requested_task) {
             return call.result;
         if (call.completed)
             return {};
-        if (call.callee == TaskLifetimeCallee::destructor) {
+        if (call.callee == TaskLifetimeCallee::Destructor) {
             task->destructor_active_ = true;
             try {
                 call.callback(*this, call.task);
@@ -1002,24 +1002,24 @@ TaskResult TaskScheduler::resume_destruction(const TaskHandle &task) {
     const auto accepted = validate(task);
     if (!accepted)
         return accepted;
-    if (task->destruction_stage_ == Task::DestructionStage::live)
-        return {TaskFailure::inactive_task, task, {}, TaskStep::cleanup_resume};
+    if (task->destruction_stage_ == Task::DestructionStage::Live)
+        return {TaskFailure::InactiveTask, task, {}, TaskStep::CleanupResume};
     return finish_destruction(task);
 }
 
 TaskResult TaskScheduler::unlink_destroyed_task(const TaskHandle &task) {
     using Stage = Task::DestructionStage;
-    if (task->destruction_stage_ == Stage::children) {
+    if (task->destruction_stage_ == Stage::Children) {
         const auto children = free_children(task);
         if (!children)
             return children;
         const auto previous = task->destruction_previous_;
         const auto next = task->destruction_next_;
         if ((previous && previous->retired_) || (next && next->retired_))
-            return {TaskFailure::callback_mutation_invalidated_destructor,
+            return {TaskFailure::CallbackMutationInvalidatedDestructor,
                     task,
                     {},
-                    TaskStep::children_destroyed};
+                    TaskStep::ChildrenDestroyed};
         if (previous)
             previous->next_ = next.get();
         else if (task->parent_)
@@ -1034,143 +1034,143 @@ TaskResult TaskScheduler::unlink_destroyed_task(const TaskHandle &task) {
         if (next)
             next->previous_ = previous.get();
         task->linked_ = false;
-        task->destruction_stage_ = Stage::collision;
+        task->destruction_stage_ = Stage::Collision;
     }
     return {};
 }
 
 TaskResult TaskScheduler::release_collision_work(const TaskHandle &task) {
     using Stage = Task::DestructionStage;
-    if (task->destruction_stage_ == Stage::collision) {
+    if (task->destruction_stage_ == Stage::Collision) {
         if (task->primary_work) {
             const auto collision = arena_
                                        ? arena_->reference(task->primary_work, kCollisionReference)
-                                       : TaskWorkResult{TaskWorkFailure::foreign_work, {}};
+                                       : TaskWorkResult{TaskWorkFailure::ForeignWork, {}};
             if (!collision)
-                return source_work_failure(task, collision, TaskStep::collision_reference);
+                return source_work_failure(task, collision, TaskStep::CollisionReference);
             if (collision.work) {
                 std::uint8_t flags = 0;
                 auto result = arena_->read(collision.work, 5, &flags, 1);
                 if (!result)
-                    return source_work_failure(task, result, TaskStep::collision_flags);
+                    return source_work_failure(task, result, TaskStep::CollisionFlags);
                 if (flags & kCollisionOwnsExtra) {
                     const auto nested = arena_->reference(collision.work, 12);
                     if (!nested)
                         return source_work_failure(task, nested,
-                                                   TaskStep::collision_extra_reference);
+                                                   TaskStep::CollisionExtraReference);
                     result = arena_->release(nested.work);
                     if (!result)
-                        return source_work_failure(task, result, TaskStep::collision_extra_release);
+                        return source_work_failure(task, result, TaskStep::CollisionExtraRelease);
                     result = arena_->set_reference(collision.work, 12, {});
                     if (!result)
-                        return source_work_failure(task, result, TaskStep::collision_extra_clear);
+                        return source_work_failure(task, result, TaskStep::CollisionExtraClear);
                 }
                 result = arena_->release(collision.work);
                 if (!result)
-                    return source_work_failure(task, result, TaskStep::collision_release);
+                    return source_work_failure(task, result, TaskStep::CollisionRelease);
                 result = arena_->set_reference(task->primary_work, kCollisionReference, {});
                 if (!result)
-                    return source_work_failure(task, result, TaskStep::collision_clear);
+                    return source_work_failure(task, result, TaskStep::CollisionClear);
             }
         }
-        task->destruction_stage_ = Stage::object;
+        task->destruction_stage_ = Stage::Object;
     }
     return {};
 }
 
 TaskResult TaskScheduler::release_first_object_resources(const TaskHandle &task) {
     using Stage = Task::DestructionStage;
-    if (task->destruction_stage_ == Stage::object) {
+    if (task->destruction_stage_ == Stage::Object) {
         if (task->primary_work) {
             const auto object = arena_->reference(task->primary_work, kObjectReference);
             if (!object)
-                return source_work_failure(task, object, TaskStep::object_reference);
+                return source_work_failure(task, object, TaskStep::ObjectReference);
             if (object.work) {
                 task->cleanup_object_ = object.work;
                 const auto cursor = arena_->reference(object.work, kObjectFirstChain);
                 if (!cursor)
-                    return source_work_failure(task, cursor, TaskStep::object_first_chain);
+                    return source_work_failure(task, cursor, TaskStep::ObjectFirstChain);
                 task->cleanup_cursor_ = cursor.work;
-                task->destruction_stage_ = Stage::object_first_chain;
+                task->destruction_stage_ = Stage::ObjectFirstChain;
             }
         }
-        if (task->destruction_stage_ == Stage::object)
-            task->destruction_stage_ = Stage::primary;
+        if (task->destruction_stage_ == Stage::Object)
+            task->destruction_stage_ = Stage::Primary;
     }
-    if (task->destruction_stage_ == Stage::object_first_chain) {
+    if (task->destruction_stage_ == Stage::ObjectFirstChain) {
         while (task->cleanup_cursor_) {
             const auto next = arena_->reference(task->cleanup_cursor_, kFirstChainNext);
             if (!next)
-                return source_work_failure(task, next, TaskStep::object_first_next);
+                return source_work_failure(task, next, TaskStep::ObjectFirstNext);
             const auto released = arena_->release(task->cleanup_cursor_);
             if (!released)
-                return source_work_failure(task, released, TaskStep::object_first_release);
+                return source_work_failure(task, released, TaskStep::ObjectFirstRelease);
             task->cleanup_cursor_ = next.work; // source snapshot before free
         }
         const auto cleared = arena_->set_reference(task->cleanup_object_, kObjectFirstChain, {});
         if (!cleared)
-            return source_work_failure(task, cleared, TaskStep::object_first_clear);
-        task->destruction_stage_ = Stage::object_extra;
+            return source_work_failure(task, cleared, TaskStep::ObjectFirstClear);
+        task->destruction_stage_ = Stage::ObjectExtra;
     }
-    if (task->destruction_stage_ == Stage::object_extra) {
+    if (task->destruction_stage_ == Stage::ObjectExtra) {
         const auto extra = arena_->reference(task->cleanup_object_, kObjectExtra);
         if (!extra)
-            return source_work_failure(task, extra, TaskStep::object_extra_reference);
+            return source_work_failure(task, extra, TaskStep::ObjectExtraReference);
         const auto released = arena_->release(extra.work);
         if (!released)
-            return source_work_failure(task, released, TaskStep::object_extra_release);
+            return source_work_failure(task, released, TaskStep::ObjectExtraRelease);
         if (extra.work) {
             const auto cleared = arena_->set_reference(task->cleanup_object_, kObjectExtra, {});
             if (!cleared)
-                return source_work_failure(task, cleared, TaskStep::object_extra_clear);
+                return source_work_failure(task, cleared, TaskStep::ObjectExtraClear);
         }
-        task->destruction_stage_ = Stage::object_first_counter;
+        task->destruction_stage_ = Stage::ObjectFirstCounter;
     }
     return {};
 }
 
 TaskResult TaskScheduler::release_second_object_resources(const TaskHandle &task) {
     using Stage = Task::DestructionStage;
-    if (task->destruction_stage_ == Stage::object_first_counter) {
+    if (task->destruction_stage_ == Stage::ObjectFirstCounter) {
         const auto cleared = arena_->fill(task->cleanup_object_, kObjectFirstCounter, 0, 4);
         if (!cleared)
-            return source_work_failure(task, cleared, TaskStep::object_counter_clear);
+            return source_work_failure(task, cleared, TaskStep::ObjectCounterClear);
         const auto cursor = arena_->reference(task->cleanup_object_, kObjectSecondChain);
         if (!cursor)
-            return source_work_failure(task, cursor, TaskStep::object_second_chain);
+            return source_work_failure(task, cursor, TaskStep::ObjectSecondChain);
         task->cleanup_cursor_ = cursor.work;
-        task->destruction_stage_ = Stage::object_second_chain;
+        task->destruction_stage_ = Stage::ObjectSecondChain;
     }
-    if (task->destruction_stage_ == Stage::object_second_chain) {
+    if (task->destruction_stage_ == Stage::ObjectSecondChain) {
         while (task->cleanup_cursor_) {
             const auto next = arena_->reference(task->cleanup_cursor_, kSecondChainNext);
             if (!next)
-                return source_work_failure(task, next, TaskStep::object_second_next);
+                return source_work_failure(task, next, TaskStep::ObjectSecondNext);
             const auto released = arena_->release(task->cleanup_cursor_);
             if (!released)
-                return source_work_failure(task, released, TaskStep::object_second_release);
+                return source_work_failure(task, released, TaskStep::ObjectSecondRelease);
             task->cleanup_cursor_ = next.work;
         }
         const auto cleared = arena_->set_reference(task->cleanup_object_, kObjectSecondChain, {});
         if (!cleared)
-            return source_work_failure(task, cleared, TaskStep::object_second_clear);
-        task->destruction_stage_ = Stage::object_second_counter;
+            return source_work_failure(task, cleared, TaskStep::ObjectSecondClear);
+        task->destruction_stage_ = Stage::ObjectSecondCounter;
     }
-    if (task->destruction_stage_ == Stage::object_second_counter) {
+    if (task->destruction_stage_ == Stage::ObjectSecondCounter) {
         const auto cleared = arena_->fill(task->cleanup_object_, kObjectSecondCounter, 0, 4);
         if (!cleared)
-            return source_work_failure(task, cleared, TaskStep::object_second_counter_clear);
-        task->destruction_stage_ = Stage::object_release;
+            return source_work_failure(task, cleared, TaskStep::ObjectSecondCounterClear);
+        task->destruction_stage_ = Stage::ObjectRelease;
     }
-    if (task->destruction_stage_ == Stage::object_release) {
+    if (task->destruction_stage_ == Stage::ObjectRelease) {
         const auto released = arena_->release(task->cleanup_object_);
         if (!released)
-            return source_work_failure(task, released, TaskStep::object_release);
+            return source_work_failure(task, released, TaskStep::ObjectRelease);
         const auto cleared = arena_->set_reference(task->primary_work, kObjectReference, {});
         if (!cleared)
-            return source_work_failure(task, cleared, TaskStep::object_clear);
+            return source_work_failure(task, cleared, TaskStep::ObjectClear);
         task->cleanup_object_.reset();
-        task->destruction_stage_ = Stage::primary;
+        task->destruction_stage_ = Stage::Primary;
     }
     return {};
 }
@@ -1184,22 +1184,22 @@ TaskResult TaskScheduler::release_owned_task_work(const TaskHandle &task) {
         TaskStep step;
     };
     const Field fields[] = {
-        {Stage::primary, Stage::force, &Task::primary_work, TaskStep::primary_release},
-        {Stage::force, Stage::motion, &Task::force_work, TaskStep::force_release},
-        {Stage::motion, Stage::auxiliary, &Task::motion_work, TaskStep::motion_release},
-        {Stage::auxiliary, Stage::control, &Task::auxiliary_work, TaskStep::auxiliary_release}};
+        {Stage::Primary, Stage::Force, &Task::primary_work, TaskStep::PrimaryRelease},
+        {Stage::Force, Stage::Motion, &Task::force_work, TaskStep::ForceRelease},
+        {Stage::Motion, Stage::Auxiliary, &Task::motion_work, TaskStep::MotionRelease},
+        {Stage::Auxiliary, Stage::Control, &Task::auxiliary_work, TaskStep::AuxiliaryRelease}};
     for (const auto &field : fields) {
         if (task->destruction_stage_ != field.stage)
             continue;
         auto &work = task.get()->*(field.member);
         if (work) {
             const auto released = arena_ ? arena_->release(work)
-                                         : TaskWorkResult{TaskWorkFailure::foreign_work, work};
+                                         : TaskWorkResult{TaskWorkFailure::ForeignWork, work};
             if (!released)
                 return source_work_failure(task, released, field.step);
             work.reset();
         }
-        if (field.stage == Stage::auxiliary)
+        if (field.stage == Stage::Auxiliary)
             task->auxiliary_native_work.reset();
         task->destruction_stage_ = field.next;
     }
@@ -1208,7 +1208,7 @@ TaskResult TaskScheduler::release_owned_task_work(const TaskHandle &task) {
         task->object_control->status_flags &= kClearControlLinked;
         task->object_control.reset();
     }
-    task->destruction_stage_ = Stage::recycle;
+    task->destruction_stage_ = Stage::Recycle;
     task->retired_ = true;
     task->next_ = task->previous_ = task->parent_ = task->first_child_ = nullptr;
     task->destruction_previous_.reset();
@@ -1246,7 +1246,7 @@ TaskResult TaskScheduler::retire(const TaskHandle &task) {
         auto *current = pending.back();
         pending.pop_back();
         if (current->source_slot_)
-            return {TaskFailure::source_task_requires_destructor, retain(current)};
+            return {TaskFailure::SourceTaskRequiresDestructor, retain(current)};
         for (auto *child = current->first_child_; child; child = child->next_)
             pending.push_back(child);
     }

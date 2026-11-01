@@ -73,9 +73,9 @@ void TaskWorkArena::replace_free(std::uint32_t old_offset, std::uint32_t new_off
 
 TaskWorkResult TaskWorkArena::allocate(std::uint32_t bytes) {
     if (!bytes)
-        return {TaskWorkFailure::exhausted, {}};
+        return {TaskWorkFailure::Exhausted, {}};
     if (bytes > std::numeric_limits<std::uint32_t>::max() - 63)
-        return {TaskWorkFailure::size_wrap, {}};
+        return {TaskWorkFailure::SizeWrap, {}};
     const std::uint32_t total = (bytes + 63) & ~std::uint32_t{31};
     auto candidate = free_head_;
     while (candidate) {
@@ -104,28 +104,28 @@ TaskWorkResult TaskWorkArena::allocate(std::uint32_t bytes) {
             work->header_ = block.offset;
             work->requested_ = bytes;
             live_.emplace(block.offset, work);
-            return {TaskWorkFailure::none, work};
+            return {TaskWorkFailure::None, work};
         }
         candidate = block.free_next;
     }
-    return {TaskWorkFailure::exhausted, {}};
+    return {TaskWorkFailure::Exhausted, {}};
 }
 
 TaskWorkResult TaskWorkArena::validate(const TaskWorkHandle &work, std::uint32_t at,
                                        std::uint32_t bytes) const {
     if (!work || work->owner_ != this)
-        return {TaskWorkFailure::foreign_work, work};
+        return {TaskWorkFailure::ForeignWork, work};
     if (work->released_)
-        return {TaskWorkFailure::released_work, work};
+        return {TaskWorkFailure::ReleasedWork, work};
     const auto found = live_.find(work->header_);
     if (found == live_.end() || found->second != work)
-        return {TaskWorkFailure::foreign_work, work};
+        return {TaskWorkFailure::ForeignWork, work};
     // Rounded payload padding is observable in original storage; callers may
     // inspect it, but never cross the next physical header.
     const auto capacity = *blocks_.at(work->header_).physical_next - work->data_offset();
     if (at > capacity || bytes > capacity - at)
-        return {TaskWorkFailure::out_of_bounds, work};
-    return {TaskWorkFailure::none, work};
+        return {TaskWorkFailure::OutOfBounds, work};
+    return {TaskWorkFailure::None, work};
 }
 
 void TaskWorkArena::forget_references(std::uint32_t at, std::uint32_t bytes) {
@@ -143,16 +143,16 @@ TaskWorkResult TaskWorkArena::read(const TaskWorkHandle &work, std::uint32_t at,
     if (!accepted)
         return accepted;
     if (bytes && !output)
-        return {TaskWorkFailure::invalid_buffer, work};
+        return {TaskWorkFailure::InvalidBuffer, work};
     const auto start = work->data_offset() + at;
     if (bytes && payload_reader_) {
         if (!payload_reader_(start, output, bytes))
-            return {TaskWorkFailure::unobserved_live_field, work};
+            return {TaskWorkFailure::UnobservedLiveField, work};
         return accepted;
     }
     for (std::uint32_t i = 0; i != bytes; ++i)
         if (!known_[start + i])
-            return {TaskWorkFailure::unobserved_pointer_bytes, work};
+            return {TaskWorkFailure::UnobservedPointerBytes, work};
     if (bytes)
         std::memcpy(output, bytes_.data() + start, bytes);
     return accepted;
@@ -164,10 +164,10 @@ TaskWorkResult TaskWorkArena::write(const TaskWorkHandle &work, std::uint32_t at
     if (!accepted)
         return accepted;
     if (bytes && !input)
-        return {TaskWorkFailure::invalid_buffer, work};
+        return {TaskWorkFailure::InvalidBuffer, work};
     const auto start = work->data_offset() + at;
     if (bytes && payload_writer_ && !payload_writer_(start, input, bytes))
-        return {TaskWorkFailure::unobserved_live_field, work};
+        return {TaskWorkFailure::UnobservedLiveField, work};
     forget_references(start, bytes);
     if (bytes)
         std::memcpy(bytes_.data() + start, input, bytes);
@@ -184,7 +184,7 @@ TaskWorkResult TaskWorkArena::fill(const TaskWorkHandle &work, std::uint32_t at,
     if (bytes && payload_writer_) {
         const std::vector<std::uint8_t> filled(bytes, value);
         if (!payload_writer_(start, filled.data(), bytes))
-            return {TaskWorkFailure::unobserved_live_field, work};
+            return {TaskWorkFailure::UnobservedLiveField, work};
     }
     forget_references(start, bytes);
     std::fill(bytes_.begin() + start, bytes_.begin() + start + bytes, value);
@@ -208,7 +208,7 @@ TaskWorkResult TaskWorkArena::set_reference_view(const TaskWorkHandle &work, std
         if (!checked)
             return checked;
     } else if (byte_offset)
-        return {TaskWorkFailure::out_of_bounds, work};
+        return {TaskWorkFailure::OutOfBounds, work};
     const auto offset = work->data_offset() + at;
     forget_references(offset, 4);
     if (value)
@@ -223,8 +223,8 @@ TaskWorkResult TaskWorkArena::reference(const TaskWorkHandle &work, std::uint32_
     if (!result)
         return {result.failure, result.work};
     if (result.byte_offset)
-        return {TaskWorkFailure::interior_reference_requires_view, result.work};
-    return {TaskWorkFailure::none, result.work};
+        return {TaskWorkFailure::InteriorReferenceRequiresView, result.work};
+    return {TaskWorkFailure::None, result.work};
 }
 
 TaskWorkReferenceResult TaskWorkArena::reference_view(const TaskWorkHandle &work,
@@ -239,14 +239,14 @@ TaskWorkReferenceResult TaskWorkArena::reference_view(const TaskWorkHandle &work
         if (!current)
             return {current.failure, work, 0, {}};
         if (!observed)
-            return {TaskWorkFailure::none, {}, 0, {}};
+            return {TaskWorkFailure::None, {}, 0, {}};
         const auto expected =
             found != references_.end() && encode_pointer_
                 ? encode_pointer_(found->second.allocation_data_offset + found->second.byte_offset)
                 : std::nullopt;
         if (!expected || observed != *expected) {
             if (!reference_resolver_)
-                return {TaskWorkFailure::unbound_reference, {}, 0, {}};
+                return {TaskWorkFailure::UnboundReference, {}, 0, {}};
             auto resolved = reference_resolver_(observed);
             if (!resolved)
                 return resolved;
@@ -259,15 +259,15 @@ TaskWorkReferenceResult TaskWorkArena::reference_view(const TaskWorkHandle &work
     }
     if (found != references_.end()) {
         const auto target = found->second.work.lock();
-        return {(!target || target->released_) ? TaskWorkFailure::released_work
-                                               : TaskWorkFailure::none,
+        return {(!target || target->released_) ? TaskWorkFailure::ReleasedWork
+                                               : TaskWorkFailure::None,
                 target, found->second.byte_offset, found->second.allocation_data_offset};
     }
     std::uint32_t raw = 0;
     const auto read_result = read(work, at, &raw, 4);
     if (!read_result)
         return {read_result.failure, work, 0, {}};
-    return {raw ? TaskWorkFailure::unbound_reference : TaskWorkFailure::none, {}, 0, {}};
+    return {raw ? TaskWorkFailure::UnboundReference : TaskWorkFailure::None, {}, 0, {}};
 }
 
 TaskWorkResult TaskWorkArena::release(const TaskWorkHandle &work) {

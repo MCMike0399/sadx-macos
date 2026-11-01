@@ -70,24 +70,24 @@ class Task {
     std::optional<std::uint16_t> source_slot_;
     std::optional<std::uint16_t> detached_free_next_slot_;
     enum class DestructionStage {
-        live,
-        children,
-        collision,
-        object,
-        object_first_chain,
-        object_extra,
-        object_first_counter,
-        object_second_chain,
-        object_second_counter,
-        object_release,
-        primary,
-        force,
-        motion,
-        auxiliary,
-        control,
-        recycle
+        Live,
+        Children,
+        Collision,
+        Object,
+        ObjectFirstChain,
+        ObjectExtra,
+        ObjectFirstCounter,
+        ObjectSecondChain,
+        ObjectSecondCounter,
+        ObjectRelease,
+        Primary,
+        Force,
+        Motion,
+        Auxiliary,
+        Control,
+        Recycle
     };
-    DestructionStage destruction_stage_ = DestructionStage::live;
+    DestructionStage destruction_stage_ = DestructionStage::Live;
     TaskHandle destruction_previous_, destruction_next_;
     TaskWorkHandle cleanup_object_, cleanup_cursor_;
     bool destructor_active_ = false;
@@ -99,95 +99,95 @@ class Task {
 };
 
 enum class TaskFailure {
-    none,
-    invalid_list_index,
-    foreign_task,
-    retired_task,
-    null_child_callback,
-    deleted_snapshot_next,
-    source_pool_uninitialized,
-    source_pool_exhausted,
-    source_pool_already_initialized,
-    source_pool_requires_empty_scheduler,
-    inactive_task,
-    work_failure,
-    default_resource_unavailable,
-    child_state_factory_missing, // a live parent primary_state with no player-layer factory
+    None,
+    InvalidListIndex,
+    ForeignTask,
+    RetiredTask,
+    NullChildCallback,
+    DeletedSnapshotNext,
+    SourcePoolUninitialized,
+    SourcePoolExhausted,
+    SourcePoolAlreadyInitialized,
+    SourcePoolRequiresEmptyScheduler,
+    InactiveTask,
+    WorkFailure,
+    DefaultResourceUnavailable,
+    ChildStateFactoryMissing, // a live parent primary_state with no player-layer factory
                                  // installed
-    detached_creation_rollback_rejected,
-    inactive_children_corruption,
-    callback_mutation_invalidated_destructor,
-    source_task_requires_destructor,
-    detached_snapshot_next,
-    callback_failed,
-    invalid_source_graph,
+    DetachedCreationRollbackRejected,
+    InactiveChildrenCorruption,
+    CallbackMutationInvalidatedDestructor,
+    SourceTaskRequiresDestructor,
+    DetachedSnapshotNext,
+    CallbackFailed,
+    InvalidSourceGraph,
 };
 
 // NOTSA: semantic operation at an interrupted boundary; reference adapters map it to a PC.
 enum class TaskStep {
-    none,
-    pool_already_initialized,
-    pool_requires_empty_scheduler,
-    pool_allocation,
-    pool_clear,
-    allocation_level,
-    pool_required,
-    pool_exhaustion,
-    primary_initialization,
-    force_initialization,
-    motion_initialization,
-    auxiliary_initialization,
-    creation_rollback,
-    default_resource,
-    child_transform_read,
-    child_transform_write,
-    membership,
-    destruction_entry,
-    destruction_generation,
-    inactive_child_sibling,
-    inactive_child_parent,
-    children_destroyed,
-    cleanup_resume,
-    collision_reference,
-    collision_flags,
-    collision_extra_reference,
-    collision_extra_release,
-    collision_extra_clear,
-    collision_release,
-    collision_clear,
-    object_reference,
-    object_first_chain,
-    object_first_next,
-    object_first_release,
-    object_first_clear,
-    object_extra_reference,
-    object_extra_release,
-    object_extra_clear,
-    object_counter_clear,
-    object_second_chain,
-    object_second_next,
-    object_second_release,
-    object_second_clear,
-    object_second_counter_clear,
-    object_release,
-    object_clear,
-    primary_release,
-    force_release,
-    motion_release,
-    auxiliary_release,
-    child_dispatch_next,
-    indexed_dispatch_next,
-    execution_callback,
-    callback_dependency,
+    None,
+    PoolAlreadyInitialized,
+    PoolRequiresEmptyScheduler,
+    PoolAllocation,
+    PoolClear,
+    AllocationLevel,
+    PoolRequired,
+    PoolExhaustion,
+    PrimaryInitialization,
+    ForceInitialization,
+    MotionInitialization,
+    AuxiliaryInitialization,
+    CreationRollback,
+    DefaultResource,
+    ChildTransformRead,
+    ChildTransformWrite,
+    Membership,
+    DestructionEntry,
+    DestructionGeneration,
+    InactiveChildSibling,
+    InactiveChildParent,
+    ChildrenDestroyed,
+    CleanupResume,
+    CollisionReference,
+    CollisionFlags,
+    CollisionExtraReference,
+    CollisionExtraRelease,
+    CollisionExtraClear,
+    CollisionRelease,
+    CollisionClear,
+    ObjectReference,
+    ObjectFirstChain,
+    ObjectFirstNext,
+    ObjectFirstRelease,
+    ObjectFirstClear,
+    ObjectExtraReference,
+    ObjectExtraRelease,
+    ObjectExtraClear,
+    ObjectCounterClear,
+    ObjectSecondChain,
+    ObjectSecondNext,
+    ObjectSecondRelease,
+    ObjectSecondClear,
+    ObjectSecondCounterClear,
+    ObjectRelease,
+    ObjectClear,
+    PrimaryRelease,
+    ForceRelease,
+    MotionRelease,
+    AuxiliaryRelease,
+    ChildDispatchNext,
+    IndexedDispatchNext,
+    ExecutionCallback,
+    CallbackDependency,
 };
 
 struct TaskResult {
-    TaskFailure failure = TaskFailure::none;
+    TaskFailure failure = TaskFailure::None;
     TaskHandle task;
-    TaskWorkFailure work_failure = TaskWorkFailure::none;
-    TaskStep step = TaskStep::none;
+    TaskWorkFailure work_failure = TaskWorkFailure::None;
+    TaskStep step = TaskStep::None;
     std::shared_ptr<const TaskCallbackDiagnostic> callback_diagnostic = {};
-    explicit operator bool() const noexcept { return failure == TaskFailure::none; }
+    explicit operator bool() const noexcept { return failure == TaskFailure::None; }
 };
 
 struct TaskContext {
@@ -212,7 +212,7 @@ struct TaskGraphNode {
     std::shared_ptr<Task::ObjectControl> control;
 };
 struct TaskGraphState {
-    TaskFailure failure = TaskFailure::none;
+    TaskFailure failure = TaskFailure::None;
     std::vector<TaskGraphNode> nodes;
     std::vector<std::uint16_t> free_slots; // allocation pops the last entry
     std::array<std::optional<std::uint16_t>, 8> heads{};
@@ -229,26 +229,26 @@ struct TaskDispatchCall {
     TaskCallback callback = nullptr;
     bool completed = false;
 };
-enum class TaskLifetimeCallee { none, destructor, free_children, destroy_child, run_children };
-enum class TaskLifetimePhase { begin, callback_complete, children_complete, complete };
+enum class TaskLifetimeCallee { None, Destructor, FreeChildren, DestroyChild, RunChildren };
+enum class TaskLifetimePhase { Begin, CallbackComplete, ChildrenComplete, Complete };
 struct TaskLifetimeState {
     TaskHandle task, previous, next;
     TaskResult failure;
-    TaskLifetimePhase phase = TaskLifetimePhase::begin;
+    TaskLifetimePhase phase = TaskLifetimePhase::Begin;
     bool children = false;
 };
 struct TaskLifetimeCall {
     TaskResult result;
     TaskHandle task;
     TaskCallback callback = nullptr;
-    TaskLifetimeCallee callee = TaskLifetimeCallee::none;
+    TaskLifetimeCallee callee = TaskLifetimeCallee::None;
     bool completed = false;
 };
 
-enum class TaskCallbackContextFailure { none, null_callback, null_context, conflicting_owner };
+enum class TaskCallbackContextFailure { None, NullCallback, NullContext, ConflictingOwner };
 struct TaskCallbackContextResult {
-    TaskCallbackContextFailure failure = TaskCallbackContextFailure::none;
-    explicit operator bool() const noexcept { return failure == TaskCallbackContextFailure::none; }
+    TaskCallbackContextFailure failure = TaskCallbackContextFailure::None;
+    explicit operator bool() const noexcept { return failure == TaskCallbackContextFailure::None; }
 };
 
 // Recovered dispatch prerequisite, not a complete task/game engine.
@@ -400,6 +400,7 @@ class TaskScheduler {
     TaskResult release_first_object_resources(const TaskHandle &task);
     TaskResult release_second_object_resources(const TaskHandle &task);
     TaskResult release_owned_task_work(const TaskHandle &task);
+    // NOTSA: extracted child-lifetime transition shared by native continuation paths.
     TaskLifetimeCall advance_child_lifetime(TaskLifetimeState &, const TaskHandle &);
     TaskResult source_work_failure(const TaskHandle &, const TaskWorkResult &, TaskStep step) const;
     TaskHandle resolve_snapshot(const TaskHandle &) const;

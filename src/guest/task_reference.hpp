@@ -18,119 +18,119 @@ inline void unavailable_default(TaskScheduler &scheduler) {
 
 inline std::uint32_t source_boundary(TaskStep step) {
     switch (step) {
-    case TaskStep::pool_already_initialized:
+    case TaskStep::PoolAlreadyInitialized:
         return 0x40b460;
-    case TaskStep::pool_requires_empty_scheduler:
+    case TaskStep::PoolRequiresEmptyScheduler:
         return 0x40b466;
-    case TaskStep::pool_allocation:
+    case TaskStep::PoolAllocation:
         return 0x40b46b;
-    case TaskStep::pool_clear:
+    case TaskStep::PoolClear:
         return 0x40b4bd;
-    case TaskStep::allocation_level:
+    case TaskStep::AllocationLevel:
         return 0x40b03e;
-    case TaskStep::pool_required:
+    case TaskStep::PoolRequired:
         return 0x40b030;
-    case TaskStep::pool_exhaustion:
+    case TaskStep::PoolExhaustion:
         return 0x40b037;
-    case TaskStep::primary_initialization:
+    case TaskStep::PrimaryInitialization:
         return 0x40b884;
-    case TaskStep::force_initialization:
+    case TaskStep::ForceInitialization:
         return 0x40b8ab;
-    case TaskStep::motion_initialization:
+    case TaskStep::MotionInitialization:
         return 0x40b8ce;
-    case TaskStep::auxiliary_initialization:
+    case TaskStep::AuxiliaryInitialization:
         return 0x40b8f1;
-    case TaskStep::creation_rollback:
+    case TaskStep::CreationRollback:
         return 0x40b927;
-    case TaskStep::default_resource:
+    case TaskStep::DefaultResource:
         return 0x40b918;
-    case TaskStep::child_transform_read:
+    case TaskStep::ChildTransformRead:
         return 0x40b98d;
-    case TaskStep::child_transform_write:
+    case TaskStep::ChildTransformWrite:
         return 0x40b992;
-    case TaskStep::membership:
+    case TaskStep::Membership:
         return 0x401000;
-    case TaskStep::destruction_entry:
+    case TaskStep::DestructionEntry:
         return 0x40b586;
-    case TaskStep::destruction_generation:
+    case TaskStep::DestructionGeneration:
         return 0x40b596;
-    case TaskStep::inactive_child_sibling:
+    case TaskStep::InactiveChildSibling:
         return 0x40b834;
-    case TaskStep::inactive_child_parent:
+    case TaskStep::InactiveChildParent:
         return 0x40b83e;
-    case TaskStep::children_destroyed:
+    case TaskStep::ChildrenDestroyed:
         return 0x40b5b4;
-    case TaskStep::cleanup_resume:
+    case TaskStep::CleanupResume:
         return 0x40b608;
-    case TaskStep::collision_reference:
+    case TaskStep::CollisionReference:
         return 0x40b617;
-    case TaskStep::collision_flags:
+    case TaskStep::CollisionFlags:
         return 0x41c4f1;
-    case TaskStep::collision_extra_reference:
+    case TaskStep::CollisionExtraReference:
         return 0x41c4f7;
-    case TaskStep::collision_extra_release:
+    case TaskStep::CollisionExtraRelease:
         return 0x41c4ff;
-    case TaskStep::collision_extra_clear:
+    case TaskStep::CollisionExtraClear:
         return 0x41c507;
-    case TaskStep::collision_release:
+    case TaskStep::CollisionRelease:
         return 0x41c50f;
-    case TaskStep::collision_clear:
+    case TaskStep::CollisionClear:
         return 0x41c517;
-    case TaskStep::object_reference:
+    case TaskStep::ObjectReference:
         return 0x40b628;
-    case TaskStep::object_first_chain:
+    case TaskStep::ObjectFirstChain:
         return 0x417ea9;
-    case TaskStep::object_first_next:
+    case TaskStep::ObjectFirstNext:
         return 0x417eb3;
-    case TaskStep::object_first_release:
+    case TaskStep::ObjectFirstRelease:
         return 0x417eb7;
-    case TaskStep::object_first_clear:
+    case TaskStep::ObjectFirstClear:
         return 0x417ecb;
-    case TaskStep::object_extra_reference:
+    case TaskStep::ObjectExtraReference:
         return 0x417ec6;
-    case TaskStep::object_extra_release:
+    case TaskStep::ObjectExtraRelease:
         return 0x417ed1;
-    case TaskStep::object_extra_clear:
+    case TaskStep::ObjectExtraClear:
         return 0x417ed9;
-    case TaskStep::object_counter_clear:
+    case TaskStep::ObjectCounterClear:
         return 0x417edc;
-    case TaskStep::object_second_chain:
+    case TaskStep::ObjectSecondChain:
         return 0x418338;
-    case TaskStep::object_second_next:
+    case TaskStep::ObjectSecondNext:
         return 0x418340;
-    case TaskStep::object_second_release:
+    case TaskStep::ObjectSecondRelease:
         return 0x418344;
-    case TaskStep::object_second_clear:
+    case TaskStep::ObjectSecondClear:
         return 0x418356;
-    case TaskStep::object_second_counter_clear:
+    case TaskStep::ObjectSecondCounterClear:
         return 0x418360;
-    case TaskStep::object_release:
+    case TaskStep::ObjectRelease:
         return 0x4187bc;
-    case TaskStep::object_clear:
+    case TaskStep::ObjectClear:
         return 0x4187c4;
-    case TaskStep::primary_release:
+    case TaskStep::PrimaryRelease:
         return 0x40b634;
-    case TaskStep::force_release:
+    case TaskStep::ForceRelease:
         return 0x40b647;
-    case TaskStep::motion_release:
+    case TaskStep::MotionRelease:
         return 0x40b65a;
-    case TaskStep::auxiliary_release:
+    case TaskStep::AuxiliaryRelease:
         return 0x40b66d;
-    case TaskStep::child_dispatch_next:
+    case TaskStep::ChildDispatchNext:
         return 0x40b433;
-    case TaskStep::indexed_dispatch_next:
+    case TaskStep::IndexedDispatchNext:
         return 0x40b0e0;
-    case TaskStep::execution_callback:
+    case TaskStep::ExecutionCallback:
         return 0x40b10b;
-    case TaskStep::none:
-    case TaskStep::callback_dependency:
+    case TaskStep::None:
+    case TaskStep::CallbackDependency:
         return 0;
     }
     return 0;
 }
 
 inline std::uint32_t source_boundary(const TaskResult &result) {
-    if (result.step == TaskStep::callback_dependency) {
+    if (result.step == TaskStep::CallbackDependency) {
         if (const auto diagnostic =
                 std::dynamic_pointer_cast<const PlayerAuxiliaryEffectDiagnostic>(
                     result.callback_diagnostic))

@@ -16,7 +16,7 @@ TaskStep copy_player_child_state(const Task &parent, Task &task) {
     // event_move denotes decoded facts, not a pointer-nullness fact.
     // There is no decoded event owner in newly zeroed task work.
     if (!parent.primary_state->position)
-        return TaskStep::child_transform_read;
+        return TaskStep::ChildTransformRead;
     child.position->x = parent.primary_state->position->x;
     child.position->y = parent.primary_state->position->y;
     child.position->z = parent.primary_state->position->z;
@@ -25,7 +25,7 @@ TaskStep copy_player_child_state(const Task &parent, Task &task) {
     child.orientation.angles[2] = parent.primary_state->orientation.angles[2];
     // These live fields are authoritative. Arena pose bytes are not
     // read or rewritten into a second mutable task-state snapshot.
-    return TaskStep::none;
+    return TaskStep::None;
 }
 
 void install_player_child_state(TaskScheduler &scheduler) {

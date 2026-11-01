@@ -20,7 +20,7 @@ PlayerAuxiliaryEffectResult bind_auxiliary_effect_work(TaskScheduler& s,const Ta
 std::shared_ptr<PlayerAuxiliaryEffectRuntime> context(TaskScheduler& s){return std::dynamic_pointer_cast<PlayerAuxiliaryEffectRuntime>(s.callback_context(&player_auxiliary_effect_initialize_callback));}
 void propagate(const TaskHandle& task,PlayerAuxiliaryEffectResult result){
     if(result)return;
-    TaskResult failure{TaskFailure::callback_failed,task,result.work_failure,TaskStep::callback_dependency,std::make_shared<PlayerAuxiliaryEffectDiagnostic>(std::move(result))};
+    TaskResult failure{TaskFailure::CallbackFailed,task,result.work_failure,TaskStep::CallbackDependency,std::make_shared<PlayerAuxiliaryEffectDiagnostic>(std::move(result))};
     TaskScheduler::raise_callback_failure(std::move(failure));
 }
 PlayerAuxiliaryEffectResult character(PlayerAuxiliaryEffectRuntime& runtime){
@@ -44,9 +44,9 @@ std::shared_ptr<const PlayerAuxiliaryEffectAssetTable> decode_player_auxiliary_e
     auto table=std::make_shared<PlayerAuxiliaryEffectAssetTable>();std::memcpy(table->bytes.data(),data,size);return table;
 }
 TaskCallbackContextResult install_player_auxiliary_effect_context(TaskScheduler& s,const std::shared_ptr<PlayerAuxiliaryEffectRuntime>& runtime){
-    if(!runtime)return {TaskCallbackContextFailure::null_context};
+    if(!runtime)return {TaskCallbackContextFailure::NullContext};
     const TaskCallback callbacks[]={&player_auxiliary_effect_initialize_callback,&player_auxiliary_effect_update_callback,&player_auxiliary_effect_display_callback,&player_auxiliary_effect_destroy_callback};
-    for(auto callback:callbacks){const auto old=s.callback_context(callback);if(old && old!=runtime)return {TaskCallbackContextFailure::conflicting_owner};}
+    for(auto callback:callbacks){const auto old=s.callback_context(callback);if(old && old!=runtime)return {TaskCallbackContextFailure::ConflictingOwner};}
     for(auto callback:callbacks){const auto installed=s.register_callback_context(callback,runtime);if(!installed)return installed;}
     return {};
 }

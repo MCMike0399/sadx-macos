@@ -19,23 +19,23 @@ class TaskWork;
 using TaskWorkHandle = std::shared_ptr<TaskWork>;
 
 enum class TaskWorkFailure {
-    none,
-    exhausted,
-    size_wrap,
-    foreign_work,
-    released_work,
-    out_of_bounds,
-    unobserved_pointer_bytes,
-    unbound_reference,
-    invalid_buffer,
-    unobserved_live_field,
-    interior_reference_requires_view,
-    conflicting_live_view,
+    None,
+    Exhausted,
+    SizeWrap,
+    ForeignWork,
+    ReleasedWork,
+    OutOfBounds,
+    UnobservedPointerBytes,
+    UnboundReference,
+    InvalidBuffer,
+    UnobservedLiveField,
+    InteriorReferenceRequiresView,
+    ConflictingLiveView,
 };
 struct TaskWorkResult {
-    TaskWorkFailure failure = TaskWorkFailure::none;
+    TaskWorkFailure failure = TaskWorkFailure::None;
     TaskWorkHandle work;
-    explicit operator bool() const noexcept { return failure == TaskWorkFailure::none; }
+    explicit operator bool() const noexcept { return failure == TaskWorkFailure::None; }
 };
 
 class TaskWork {
@@ -61,11 +61,11 @@ struct TaskWorkBlock {
 };
 
 struct TaskWorkReferenceResult {
-    TaskWorkFailure failure = TaskWorkFailure::none;
+    TaskWorkFailure failure = TaskWorkFailure::None;
     TaskWorkHandle work;
     std::uint32_t byte_offset = 0;
     std::optional<std::uint32_t> allocation_data_offset;
-    explicit operator bool() const noexcept { return failure == TaskWorkFailure::none; }
+    explicit operator bool() const noexcept { return failure == TaskWorkFailure::None; }
 };
 
 // Offsets identify actual arena storage. References retain allocation identity and

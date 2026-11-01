@@ -188,7 +188,7 @@ namespace sadx  {
         }
         if(reference.byte_offset) {
             binding.result=fail(SonicPlayerFailure::work_binding_failed,0x49a9c0);
-            binding.result.work_failure=TaskWorkFailure::interior_reference_requires_view;
+            binding.result.work_failure=TaskWorkFailure::InteriorReferenceRequiresView;
             return binding;
         }
         std::shared_ptr<PlayerStartupPlayer> player;
@@ -587,7 +587,7 @@ namespace sadx  {
                 const auto site=base+(walk?0x1d:0x21);
                 if(!rt.spin_effect_callback_495a50)return fail(SonicPlayerFailure::missing_native_owner,site,0x495a50);
                 auto result=rt.scheduler.create_element(2,3,rt.spin_effect_callback_495a50);
-                if(!result&&result.failure!=TaskFailure::source_pool_exhausted) {
+                if(!result&&result.failure!=TaskFailure::SourcePoolExhausted) {
                     auto r=fail(SonicPlayerFailure::native_owner_failed,site,0x40b860);
                     r.task_creation=result;
                     return r;
@@ -992,7 +992,7 @@ namespace sadx  {
                 if(!rt.spin_release_effect_callback_4940e0)return fail(SonicPlayerFailure::missing_native_owner,0x4950b6,0x4940e0);
                 if(!rt.spin_release_destructor_494120)return fail(SonicPlayerFailure::missing_native_owner,0x4950b6,0x494120);
                 auto effect=rt.scheduler.create_element(8,0,rt.spin_release_effect_callback_4940e0);
-                if(!effect&&effect.failure!=TaskFailure::source_pool_exhausted) {
+                if(!effect&&effect.failure!=TaskFailure::SourcePoolExhausted) {
                     auto error=fail(SonicPlayerFailure::native_owner_failed,0x4950b6,0x40b860);
                     error.task_creation=effect;
                     return error;

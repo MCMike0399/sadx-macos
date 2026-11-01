@@ -53,7 +53,7 @@ enum class Boundary {
 };
 class Error : public std::runtime_error {
   public:
-    explicit Error(Boundary boundary, TaskWorkFailure failure = TaskWorkFailure::none)
+    explicit Error(Boundary boundary, TaskWorkFailure failure = TaskWorkFailure::None)
         : std::runtime_error("collision component dependency is unavailable"), boundary(boundary),
           work_failure(failure) {}
     Boundary boundary;
