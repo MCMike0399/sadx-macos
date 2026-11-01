@@ -500,5 +500,5 @@ build/executable-image-edges-test: tests/unit/executable_image_edges.cpp src/loa
 # Asset-free MPEG metadata contract and actual HleDshow consumer.
 build/mpeg-timing-contract-test: tests/unit/mpeg_timing_contract.cpp tests/fixtures/mpeg_timing_stream.hpp src/loader/mpeg_timing.cpp src/loader/mpeg_timing.hpp | build
 	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/mpeg_timing_contract.cpp src/loader/mpeg_timing.cpp -o $@
-build/mpeg-timing-hle-test: tests/unit/mpeg_timing_hle.cpp tests/fixtures/mpeg_timing_stream.hpp src/loader/mpeg_timing.hpp build/libsadx-guest.a build/libsadx-core.a | build
-	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/mpeg_timing_hle.cpp $(GUEST_LINK) build/libsadx-core.a -o $@
+build/mpeg-timing-hle-test: tests/unit/mpeg_timing_hle.cpp tests/fixtures/mpeg_timing_stream.hpp src/loader/mpeg_timing.hpp src/loader/mpeg_timing.cpp src/hle/hle_dshow.cpp build/libsadx-guest.a build/libsadx-core.a | build
+	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/mpeg_timing_hle.cpp src/hle/hle_dshow.cpp src/loader/mpeg_timing.cpp $(GUEST_LINK) build/libsadx-core.a -o $@
