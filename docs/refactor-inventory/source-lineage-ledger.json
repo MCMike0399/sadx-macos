@@ -100,6 +100,83 @@
         "path": "docs/refactor-inventory/packets/animation-lineage/INDEPENDENT-EDGE-REVIEW.json",
         "sha256": "44930b6ac33eb17334a0639c626ae9f032b8ca03f478e3880a9e05e918b7f55e"
       }
+    },
+    {
+      "before": {
+        "path": "src/player/player_animation_decode.cpp",
+        "sha256": "27e1a4cc025b9291bbf4d40beb0f2ab960629017619a57c3961af3e3d04ff9f6",
+        "commit": "f6c4e538af463a2eaf4c1fe961f04e8443d51878",
+        "proof": {
+          "path": "docs/refactor-inventory/packets/animation-lineage/proofs/original-animation-decoder.cpp.txt",
+          "sha256": "27e1a4cc025b9291bbf4d40beb0f2ab960629017619a57c3961af3e3d04ff9f6"
+        }
+      },
+      "replacements": [
+        {
+          "path": "src/guest/player_animation_decode_reference.cpp",
+          "sha256": "be4e9a28cb03706885564af525ca44764e427d3f24a6241e8ffd2cdf2bf34426",
+          "commit": "1dc5a22b672336a93a22c1a0cb078b5c7bcde0aa",
+          "proof": {
+            "path": "docs/refactor-inventory/packets/animation-lineage/proofs/reference-animation-decoder.cpp.txt",
+            "sha256": "be4e9a28cb03706885564af525ca44764e427d3f24a6241e8ffd2cdf2bf34426"
+          }
+        }
+      ],
+      "member": {
+        "module": "src/player/player_animation_decode",
+        "prior_disposition": "open_review",
+        "remaining_debt": [
+          "Not semantically reviewed; path, include and declaration indexing only.",
+          "PE-reference decoder readability, shared header placement and full importer contract review remain open. This reference-only path move is not a rewritten game algorithm or conformance closure."
+        ],
+        "observed_counts": {
+          "source_lines": 45,
+          "raw_hex_tokens": 6
+        }
+      },
+      "disposition": "reviewed_migration",
+      "rationale": "Reference-infrastructure path migration only, not a game algorithm rewrite: this decoder reads a caller-supplied PE32 byte image and named DLL exports to build test/development animation resources. It never executes the artifact, schedules gameplay or implements animation policy. The body is retained with only its content include and recipe identifier rebound to the independently reviewed equivalent typed table. Preserve its prior open review, compressed parser/readability debt and public-header placement debt; grant no conformance credit.",
+      "consumer_evidence": [
+        {
+          "path": "docs/refactor-inventory/packets/animation-lineage/decoder-original-inventory-record.json",
+          "sha256": "4a3b05aadaf1a25aae99b53fbccca1f2d4d860b690ac0d9dcd4e90661aebdb2c"
+        },
+        {
+          "path": "docs/refactor-inventory/packets/animation-lineage/proofs/animation-decoder-api.hpp.txt",
+          "sha256": "21da70395a880c7df112093b7f5d9eb93d142f3a15f42e772257624d6e0544e8"
+        },
+        {
+          "path": "docs/refactor-inventory/packets/animation-lineage/proofs/reference-animation-decoder.cpp.txt",
+          "sha256": "be4e9a28cb03706885564af525ca44764e427d3f24a6241e8ffd2cdf2bf34426"
+        }
+      ],
+      "behavior_evidence": [
+        {
+          "path": "docs/refactor-inventory/packets/animation-contract/ROOT-REQUALIFIED.json",
+          "sha256": "9b3f2c1d38362de83ee7b4d7f1c547de662a5b8a0900efba99e40c3527c4e782"
+        },
+        {
+          "path": "docs/refactor-inventory/packets/animation-lineage/INDEPENDENT-EDGE-REVIEW.md",
+          "sha256": "d6133aad618fadf2254325cb271f7aa7be65df27e62d5840614e3aabecd86cd9"
+        },
+        {
+          "path": "docs/refactor-inventory/packets/animation-contract/ROOT-PRODUCT-CLOSURE.json",
+          "sha256": "5a564c964c9e50a4dbc4b9742e1c5a11a2dff9a392acafb200beaf2b33033694"
+        }
+      ],
+      "prior_member": {
+        "path": "docs/refactor-inventory/packets/animation-lineage/decoder-prior-member.json",
+        "sha256": "01423f21399d3657e752ba5136122c827fea922de15ae5143c77efca93af0bde",
+        "commit": "1dc5a22b672336a93a22c1a0cb078b5c7bcde0aa",
+        "proof": {
+          "path": "docs/refactor-inventory/packets/animation-lineage/decoder-prior-member.json",
+          "sha256": "01423f21399d3657e752ba5136122c827fea922de15ae5143c77efca93af0bde"
+        }
+      },
+      "review": {
+        "path": "docs/refactor-inventory/packets/animation-lineage/INDEPENDENT-DECODER-EDGE-REVIEW.json",
+        "sha256": "d06dd79b4f33c030119f9f9aa6f1e64273c065b4c6707877be42eff074a7e6a6"
+      }
     }
   ],
   "previous": null
