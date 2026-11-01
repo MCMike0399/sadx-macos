@@ -1,0 +1,473 @@
+[
+  {
+    "name": "TaskScheduler",
+    "fields": [
+      {
+        "name": "heads_",
+        "type": {
+          "desugaredQualType": "std::array<sadx::Task *, 8>",
+          "qualType": "std::array<Task *, 8>"
+        }
+      },
+      {
+        "name": "storage_",
+        "type": {
+          "desugaredQualType": "std::unordered_map<sadx::Task *, std::shared_ptr<sadx::Task>>",
+          "qualType": "std::unordered_map<Task *, TaskHandle>"
+        }
+      },
+      {
+        "name": "context_",
+        "type": {
+          "desugaredQualType": "sadx::TaskContext",
+          "qualType": "TaskContext"
+        }
+      },
+      {
+        "name": "callback_contexts_",
+        "type": {
+          "desugaredQualType": "std::unordered_map<void (*)(sadx::TaskScheduler &, const std::shared_ptr<sadx::Task> &), std::shared_ptr<sadx::TaskCallbackContext>>",
+          "qualType": "std::unordered_map<TaskCallback, std::shared_ptr<TaskCallbackContext>>"
+        }
+      },
+      {
+        "name": "walk_depth_",
+        "type": {
+          "desugaredQualType": "unsigned long",
+          "qualType": "std::size_t",
+          "typeAliasDeclId": "0xad3230da0"
+        }
+      },
+      {
+        "name": "arena_",
+        "type": {
+          "desugaredQualType": "std::shared_ptr<sadx::TaskWorkArena>",
+          "qualType": "std::shared_ptr<TaskWorkArena>"
+        }
+      },
+      {
+        "name": "source_pool_work_",
+        "type": {
+          "desugaredQualType": "std::shared_ptr<sadx::TaskWork>",
+          "qualType": "TaskWorkHandle",
+          "typeAliasDeclId": "0xad5e739a0"
+        }
+      },
+      {
+        "name": "source_slots_",
+        "type": {
+          "desugaredQualType": "std::array<std::shared_ptr<sadx::Task>, 4096>",
+          "qualType": "std::array<TaskHandle, 4096>"
+        }
+      },
+      {
+        "name": "free_slots_",
+        "type": {
+          "desugaredQualType": "std::vector<unsigned short>",
+          "qualType": "std::vector<std::uint16_t>"
+        }
+      },
+      {
+        "name": "default_field30_",
+        "type": {
+          "qualType": "std::optional<std::shared_ptr<void>>"
+        }
+      },
+      {
+        "name": "child_state_factory_",
+        "type": {
+          "desugaredQualType": "std::function<std::optional<unsigned int> (const sadx::Task &, sadx::Task &)>",
+          "qualType": "ChildStateFactory",
+          "typeAliasDeclId": "0xad6487b10"
+        }
+      }
+    ],
+    "methods": [
+      {
+        "name": "TaskScheduler",
+        "type": {
+          "qualType": "void ()"
+        }
+      },
+      {
+        "name": "TaskScheduler",
+        "type": {
+          "qualType": "void (const TaskScheduler &)"
+        }
+      },
+      {
+        "name": "operator=",
+        "type": {
+          "qualType": "TaskScheduler &(const TaskScheduler &)"
+        }
+      },
+      {
+        "name": "TaskScheduler",
+        "type": {
+          "qualType": "void (TaskScheduler &&)"
+        }
+      },
+      {
+        "name": "operator=",
+        "type": {
+          "qualType": "TaskScheduler &(TaskScheduler &&)"
+        }
+      },
+      {
+        "name": "append_task",
+        "type": {
+          "qualType": "TaskResult (int, TaskCallback, std::shared_ptr<void>)"
+        }
+      },
+      {
+        "name": "append_child",
+        "type": {
+          "qualType": "TaskResult (const TaskHandle &, TaskCallback, std::shared_ptr<void>)"
+        }
+      },
+      {
+        "name": "initialize_source_pool",
+        "type": {
+          "qualType": "TaskResult (std::shared_ptr<TaskWorkArena>, std::optional<std::shared_ptr<void>>)"
+        }
+      },
+      {
+        "name": "set_default_field30",
+        "type": {
+          "qualType": "void (std::optional<std::shared_ptr<void>>)"
+        }
+      },
+      {
+        "name": "set_child_state_factory",
+        "type": {
+          "qualType": "void (ChildStateFactory)"
+        }
+      },
+      {
+        "name": "allocate_task",
+        "type": {
+          "qualType": "TaskResult (int, TaskCallback)"
+        }
+      },
+      {
+        "name": "create_element",
+        "type": {
+          "qualType": "TaskResult (std::uint32_t, int, TaskCallback)"
+        }
+      },
+      {
+        "name": "create_child",
+        "type": {
+          "qualType": "TaskResult (std::uint32_t, TaskCallback, const TaskHandle &)"
+        }
+      },
+      {
+        "name": "destroy_task",
+        "type": {
+          "qualType": "TaskResult (const TaskHandle &)"
+        }
+      },
+      {
+        "name": "begin_destruction",
+        "type": {
+          "qualType": "TaskLifetimeState (const TaskHandle &)"
+        }
+      },
+      {
+        "name": "begin_free_children",
+        "type": {
+          "qualType": "TaskLifetimeState (const TaskHandle &)"
+        }
+      },
+      {
+        "name": "advance_lifetime",
+        "type": {
+          "qualType": "TaskLifetimeCall (TaskLifetimeState &)"
+        }
+      },
+      {
+        "name": "resume_destruction",
+        "type": {
+          "qualType": "TaskResult (const TaskHandle &)"
+        }
+      },
+      {
+        "name": "free_children",
+        "type": {
+          "qualType": "TaskResult (const TaskHandle &)"
+        }
+      },
+      {
+        "name": "source_no_op",
+        "type": {
+          "qualType": "void (TaskScheduler &, const TaskHandle &)"
+        }
+      },
+      {
+        "name": "destroy_callback",
+        "type": {
+          "qualType": "void (TaskScheduler &, const TaskHandle &)"
+        }
+      },
+      {
+        "name": "free_children_callback",
+        "type": {
+          "qualType": "void (TaskScheduler &, const TaskHandle &)"
+        }
+      },
+      {
+        "name": "work_arena",
+        "type": {
+          "qualType": "const std::shared_ptr<TaskWorkArena> &() const noexcept"
+        }
+      },
+      {
+        "name": "source_free_slots",
+        "type": {
+          "qualType": "std::size_t () const noexcept"
+        }
+      },
+      {
+        "name": "list_head",
+        "type": {
+          "qualType": "TaskHandle (int) const"
+        }
+      },
+      {
+        "name": "first_child",
+        "type": {
+          "qualType": "TaskHandle (const TaskHandle &) const"
+        }
+      },
+      {
+        "name": "next_task",
+        "type": {
+          "qualType": "TaskHandle (const TaskHandle &) const"
+        }
+      },
+      {
+        "name": "source_task",
+        "type": {
+          "qualType": "TaskHandle (std::uint16_t) const"
+        }
+      },
+      {
+        "name": "source_pool_work",
+        "type": {
+          "qualType": "const TaskWorkHandle &() const noexcept"
+        }
+      },
+      {
+        "name": "source_graph",
+        "type": {
+          "qualType": "TaskGraphState () const"
+        }
+      },
+      {
+        "name": "restore_source_graph",
+        "type": {
+          "qualType": "TaskResult (const TaskGraphState &)"
+        }
+      },
+      {
+        "name": "active_member",
+        "type": {
+          "qualType": "bool (const TaskHandle &) const"
+        }
+      },
+      {
+        "name": "run_index",
+        "type": {
+          "qualType": "TaskResult (int)"
+        }
+      },
+      {
+        "name": "begin_index_dispatch",
+        "type": {
+          "qualType": "TaskDispatchState (int)"
+        }
+      },
+      {
+        "name": "begin_child_dispatch",
+        "type": {
+          "qualType": "TaskDispatchState (const TaskHandle &)"
+        }
+      },
+      {
+        "name": "advance_dispatch",
+        "type": {
+          "qualType": "TaskDispatchCall (TaskDispatchState &)"
+        }
+      },
+      {
+        "name": "run_game_tasks",
+        "type": {
+          "qualType": "TaskResult ()"
+        }
+      },
+      {
+        "name": "run_children",
+        "type": {
+          "qualType": "TaskResult (const TaskHandle &)"
+        }
+      },
+      {
+        "name": "display_index",
+        "type": {
+          "qualType": "TaskResult (int)"
+        }
+      },
+      {
+        "name": "display_children",
+        "type": {
+          "qualType": "TaskResult (const TaskHandle &)"
+        }
+      },
+      {
+        "name": "display_game_tasks",
+        "type": {
+          "qualType": "TaskResult (const std::function<void ()> &)"
+        }
+      },
+      {
+        "name": "delete_all_tasks",
+        "type": {
+          "qualType": "TaskResult ()"
+        }
+      },
+      {
+        "name": "free_task",
+        "type": {
+          "qualType": "TaskResult (const TaskHandle &)"
+        }
+      },
+      {
+        "name": "retire",
+        "type": {
+          "qualType": "TaskResult (const TaskHandle &)"
+        }
+      },
+      {
+        "name": "context",
+        "type": {
+          "qualType": "const TaskContext &() const noexcept"
+        }
+      },
+      {
+        "name": "register_callback_context",
+        "type": {
+          "qualType": "TaskCallbackContextResult (TaskCallback, std::shared_ptr<TaskCallbackContext>)"
+        }
+      },
+      {
+        "name": "callback_context",
+        "type": {
+          "qualType": "std::shared_ptr<TaskCallbackContext> (TaskCallback) const"
+        }
+      },
+      {
+        "name": "raise_callback_failure",
+        "type": {
+          "qualType": "void (TaskResult)"
+        }
+      },
+      {
+        "name": "canonical_index",
+        "type": {
+          "qualType": "int (int) noexcept"
+        }
+      },
+      {
+        "name": "validate",
+        "type": {
+          "qualType": "TaskResult (const TaskHandle &) const"
+        }
+      },
+      {
+        "name": "retain",
+        "type": {
+          "qualType": "TaskHandle (Task *) const"
+        }
+      },
+      {
+        "name": "append_link",
+        "type": {
+          "qualType": "void (Task *&, const TaskHandle &)"
+        }
+      },
+      {
+        "name": "retire_subtree",
+        "type": {
+          "qualType": "void (const TaskHandle &)"
+        }
+      },
+      {
+        "name": "reclaim_retired",
+        "type": {
+          "qualType": "void ()"
+        }
+      },
+      {
+        "name": "finish_destruction",
+        "type": {
+          "qualType": "TaskResult (const TaskHandle &)"
+        }
+      },
+      {
+        "name": "source_work_failure",
+        "type": {
+          "qualType": "TaskResult (const TaskHandle &, const TaskWorkResult &, std::uint32_t) const"
+        }
+      },
+      {
+        "name": "resolve_snapshot",
+        "type": {
+          "qualType": "TaskHandle (const TaskHandle &) const"
+        }
+      },
+      {
+        "name": "display_chain",
+        "type": {
+          "qualType": "TaskResult (TaskHandle)"
+        }
+      },
+      {
+        "name": "~TaskScheduler",
+        "type": {
+          "qualType": "void ()"
+        }
+      }
+    ]
+  },
+  {
+    "name": "WalkGuard",
+    "fields": [
+      {
+        "name": "scheduler_",
+        "type": {
+          "qualType": "TaskScheduler &"
+        }
+      }
+    ],
+    "methods": [
+      {
+        "name": "WalkGuard",
+        "type": {
+          "qualType": "void (TaskScheduler &)"
+        }
+      },
+      {
+        "name": "~WalkGuard",
+        "type": {
+          "qualType": "void () noexcept"
+        }
+      },
+      {
+        "name": "WalkGuard",
+        "type": {
+          "qualType": "void (const WalkGuard &)"
+        }
+      }
+    ]
+  }
+]

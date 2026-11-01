@@ -502,3 +502,9 @@ build/mpeg-timing-contract-test: tests/unit/mpeg_timing_contract.cpp tests/fixtu
 	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/mpeg_timing_contract.cpp src/loader/mpeg_timing.cpp -o $@
 build/mpeg-timing-hle-test: tests/unit/mpeg_timing_hle.cpp tests/fixtures/mpeg_timing_stream.hpp src/loader/mpeg_timing.hpp src/loader/mpeg_timing.cpp src/hle/hle_dshow.cpp build/libsadx-guest.a build/libsadx-core.a | build
 	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/mpeg_timing_hle.cpp src/hle/hle_dshow.cpp src/loader/mpeg_timing.cpp $(GUEST_LINK) build/libsadx-core.a -o $@
+
+# Task scheduler characterization uses unchanged maintained source and real reference transport.
+build/task-scheduler-contract-test: tests/unit/task_scheduler_contract.cpp tests/probes/task_scheduler_contract.hpp src/engine/task.cpp src/engine/task.hpp src/engine/task_work.cpp src/engine/task_work.hpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/task_scheduler_contract.cpp src/engine/task.cpp src/engine/task_work.cpp -o $@
+build/task-bridge-contract-test: tests/unit/task_bridge_contract.cpp tests/probes/task_bridge_contract.hpp build/libsadx-guest.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -I$(UNICORN_DIR)/include tests/unit/task_bridge_contract.cpp $(GUEST_LINK) build/libsadx-core.a -o $@

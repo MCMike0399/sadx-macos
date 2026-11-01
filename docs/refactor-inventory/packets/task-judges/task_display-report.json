@@ -1,0 +1,26 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "native_library_sha256": "fd051ad9788c982262cb7aa05d2d7c6ff96a96b1e7bdf4efe3d991821be04295",
+  "cases": 236,
+  "mismatch_count": 0,
+  "mismatches": [],
+  "callback_order_graph_and_context_match": true,
+  "source_outcomes": {
+    "1": 55,
+    "0": 179,
+    "2": 2
+  },
+  "native_sources": {
+    "src/engine/task.hpp": "9162b6011520e0d6e6a98e8a4a989793c48bb7ca3e19e0d732f1d59b9ac4c9e8",
+    "src/engine/task.cpp": "69a568d3577c8a0b7050d2de9774441082f4304931c0b9580f249fb1cb601774",
+    "src/engine/task_work.hpp": "d0df9e59dec1dfcbeff7d9100ac0044b5a6e3e4683f691d85d60534416109f9d",
+    "src/engine/task_work.cpp": "08e679e66ab28ceda7a942033489cbd1f49356875766babe9e66236870c84691",
+    "tests/probes/native_task_display_probe.cpp": "e5d3b41f8cd950c5363e43ba9df7a8a42129e9f95119926572dc6ec9040ed74c"
+  },
+  "source_ranges": {
+    "0x40b130-0x40b168": "7a8d3daf3c1606dd1153ec8d30dd3a64a6dbc7a781d8445373d83f3612f45689",
+    "0x40b4f0-0x40b538": "8000310374c3c472a307f00e3fe802b8000428da0defba4cb6e093291cf8d5d2",
+    "0x40b540-0x40b563": "2b2557e24d9cce55431a906936848ef62351f3f675a1c24db92065b0b05ab118"
+  },
+  "limits": "Task display traversal against original 40b130/40b4f0/40b540 instructions.\n\nResetMaterial is an explicit owner receipt. Task graphs and callback mutations\nare fixture inputs. Creation/destruction actions execute original task helpers;\nold task lifecycle judges remain unchanged. Compare callback order, active graph,\nfree-slot count/head, and unchanged execution-context globals. A saved pointer to\nan unreused freed slot stops at the original display-load boundary and is tagged\nunsupported rather than treated as a successful walk through the free list.\nNo image/material output or unknown game callback implementation is claimed.\n"
+}

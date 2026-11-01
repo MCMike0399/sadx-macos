@@ -1,0 +1,41 @@
+{
+  "base": "99bdaf4a9e06006aed7f9fcf2c963a6e68cf61d3",
+  "maintained_source_changes": [],
+  "inherited_protected": 946,
+  "missing_inherited_inputs": 0,
+  "ignored_raw_corpora": 53,
+  "original_oracle_exits": {
+    "task_work": 0,
+    "task_lifecycle": 0,
+    "task_display": 0,
+    "task_delete": 0
+  },
+  "native_characterization_observations": 20,
+  "registered_new_units_exits": [
+    0,
+    0
+  ],
+  "task_mutants": {
+    "compiled": 14,
+    "caught": 14
+  },
+  "bridge_mutants": {
+    "compiled": 3,
+    "caught": 3
+  },
+  "holdout": "UNRUN",
+  "full_gate": "NOT RUN (explicit task restriction)",
+  "new_judge_bindings": {
+    "tests/probes/task_bridge_contract.hpp": "2665b56cfc967a1f5036818b18b2eda6d89c1d8d0e473447371a600623bead17",
+    "tests/probes/task_scheduler_contract.hpp": "eb80d029a1b39b088954bfad0d94ed061f257d5e0327374258fb9e5801847ade",
+    "tests/unit/task_bridge_contract.cpp": "b79056992065bd8bcfaa9eb0191a37f818baa05fbc2f510bab94778581aaafb3",
+    "tests/unit/task_scheduler_contract.cpp": "19ae0cf5c2ced5b47f22ae4023cd661806d91235c6c582c246c9c64a091f1dea",
+    "tools/oracles/task_judges/bridge_faults.py": "871892551973e0a3883fb19d79d80d2eb0cd142aa6d7f9ed88ac254eb06d0337",
+    "tools/oracles/task_judges/check_baseline.py": "14b66c673e4b6914d48ff2a96fd53e64fba4243eb44305f458889d39036e03be",
+    "tools/oracles/task_judges/compare_streams.py": "5a22afab3aa3c1a4bbe6850774a29384ca20424f415f2a3d25b32a70c7851d62",
+    "tools/oracles/task_judges/freeze.py": "d8f60a37ad0970b6e19d3744fc1df891eff7a348f2edd299c3029e9c1b850d38",
+    "tools/oracles/task_judges/mutate.py": "da598d7d20fd5a5e8d0de553b84aa13bb3ee5ea60eaa54c4ed75b48f229ed11e"
+  },
+  "review_required": true,
+  "source_acceptance": "UNCHECKED; see PACKET.md"
+}

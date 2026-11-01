@@ -1,12 +1,12 @@
 {
   "change": {
-    "base_commit": "68112a0967b60070cc62706b6d6345e3c64ec586",
-    "evidence": "reference/production-integration-20261101/mpeg-main-parent-union.json",
-    "evidence_sha256": "aa6b36cac05fedc7b45499b2a113e2833c071d9ac5720d0b4823df0241b22283",
-    "reason": "Seal948-input reviewed MPEG parent union and retained whole-module dispositions, without changing old expectations"
+    "base_commit": "899f3ad6337e0d315d6fb631911a589ff33c8414",
+    "evidence": "reference/production-integration-20261101/task-judges-parent-union.json",
+    "evidence_sha256": "f457ea847ef2072c7a25ef613d0b897c4bf129b6fc58f6f065e479d10dd07241",
+    "reason": "Seal accepted scheduler and bridge judge foundations, exact955-input parent union and Main contract results; preserve original expectations and source"
   },
   "files": {
-    "Makefile": "1589ad72e6f32dc1684709122d78fbdc5c691ee571293be016301f90a6480ded",
+    "Makefile": "e4be497c24cedd750e8a9a7d5b3438e7c582a6509969379689276d7b6f3ef905",
     "reference/address-dispatch-baseline-v1.json": "db0e83e323df714032ddad3046670d81968efe8e966630d9666ecbbe87d38bd7",
     "reference/constexpr-table-review.json": "dd7bd2551d3226bc0c855632aa9493b2d84d4fe0f3e7a7f19a90f34b45a9dbda",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
@@ -595,6 +595,8 @@
     "tests/probes/session_control_probe.hpp": "126aa05cc9d9139b576ca6ca7f90ee14fa92bc9c7da772f5bc788add5f215fd3",
     "tests/probes/sound_initial_state_probe.hpp": "2c0daf5906038beb4a150d6827454fc204c983a3adc6b55d1217a2f5284f04e9",
     "tests/probes/startup_initial_state_probe.hpp": "d516c7fd80ec55032b9abca542054530b6a930b469cdf48d292ecc73571b30cd",
+    "tests/probes/task_bridge_contract.hpp": "2665b56cfc967a1f5036818b18b2eda6d89c1d8d0e473447371a600623bead17",
+    "tests/probes/task_scheduler_contract.hpp": "eb80d029a1b39b088954bfad0d94ed061f257d5e0327374258fb9e5801847ade",
     "tests/python/test_address_dispatch.py": "7f117eb06a86364421a5967f5ec74cabcc66ae006b1d88a206a8e5c35d81a291",
     "tests/python/test_audio_settings.py": "53705ea6df640980d77f9906325db988541c5e83f072b54e432be0b57fb9524e",
     "tests/python/test_capture_content.py": "0339284190f6baeaa986241db8c0a0569b23cd35c0dcfc51e21f3e75ac326c93",
@@ -650,7 +652,7 @@
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",
     "tests/python/test_voice_publication.py": "5c00051d9b3de640f64e224dda4d810cdd7d26acafd91d7b1dc44e9786a734f3",
-    "tests/unit/manifest.tsv": "ef212f0b7bdc43ac4c7bf5ba6583f3313f652f68a8e236758ec03b95ec7e491f",
+    "tests/unit/manifest.tsv": "36ef201da224e3a7c791109155dc947c9704515e0e8b809f066da95c664c2754",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",
@@ -722,6 +724,11 @@
     "tools/oracles/queue_native_holdout.py": "6f42b777922097939e13db7e19e2b173754ab1b40207ebd9ed1d66f539489b4b",
     "tools/oracles/sound_bank_loader_names.py": "f2e9ed85dc6a3693837ebd6712106ba7f1b4e508ef5abb6ba4087394b12b54f8",
     "tools/oracles/sound_bank_original_reference.py": "0a2278e763870cd3c9d664499f6cbe156849d514755884179f789c9c415750ec",
+    "tools/oracles/task_judges/bridge_faults.py": "871892551973e0a3883fb19d79d80d2eb0cd142aa6d7f9ed88ac254eb06d0337",
+    "tools/oracles/task_judges/check_baseline.py": "14b66c673e4b6914d48ff2a96fd53e64fba4243eb44305f458889d39036e03be",
+    "tools/oracles/task_judges/compare_streams.py": "5a22afab3aa3c1a4bbe6850774a29384ca20424f415f2a3d25b32a70c7851d62",
+    "tools/oracles/task_judges/freeze.py": "d8f60a37ad0970b6e19d3744fc1df891eff7a348f2edd299c3029e9c1b850d38",
+    "tools/oracles/task_judges/mutate.py": "da598d7d20fd5a5e8d0de553b84aa13bb3ee5ea60eaa54c4ed75b48f229ed11e",
     "tools/oracles/verdict.py": "333ac997dd1211ab70ed04d8fe7a7a424f418d00f13cd913a355f39773e1a63a",
     "tools/oracles/verify_original_air_acceleration.py": "a1f2fdeb24e84173f73538f9d1c02c4758d801b17568c58a679554f77c0b00c8",
     "tools/oracles/verify_original_alternate_acceleration.py": "0d6be36372b0e584a17d8d1b3fe1e4a1a25b35a5aca64aea7abfcf40a53f22a0",

@@ -1,0 +1,254 @@
+{
+  "reference/production-integration-20261013/task-work-evidence.json": {
+    "entries_added": [
+      "40b1a0",
+      "40b220",
+      "40b310"
+    ],
+    "process_entries": 28,
+    "ghidra_evidence_ids": [
+      "ev_26b01929064e1047693512c535f7f656dee57f31b45592edd4febf059d27a3f6",
+      "ev_33de9ca780010e8101d4b68465f4772cf23c9e3cbbf1fb67f0bbf4395a08eb66",
+      "ev_cbd7c97fb1db4865e81d45a96a95ba4ba4068735fd44466e16ab4ab42c1a465d"
+    ],
+    "corpus": {
+      "sequences": 16,
+      "operations": 4890,
+      "full_bytes_compared": 16777248,
+      "guest_payload_mutations": true,
+      "reinitialized_sentinel_padding_preserved": true,
+      "core_mutants_caught": 3,
+      "bridge_mutants_caught": 2
+    },
+    "source_contract": {
+      "CRT_prerequisite": "original 64fc70; redirect reserve 4",
+      "HeapCreate": [
+        0,
+        0,
+        0
+      ],
+      "HeapAlloc": [
+        "handle",
+        8,
+        16777248
+      ],
+      "initialization_writes": "first 16 MiB plus first 16 sentinel bytes; remaining padding retained",
+      "release_EAX": "void, not compared"
+    },
+    "oracles": {
+      "task_work": "pass: 16 sequences, 4890 operations",
+      "task_lifecycle": "pass: 17 sequences, 2302 operations"
+    },
+    "runtime": {
+      "boot_identical": true,
+      "first_600_override_digests_match": true,
+      "controller_900_frames_match": true,
+      "app_script_exit_status": 0,
+      "gate_host_FPS": 32.9,
+      "screenshot_sha256": "bc1cfbaa30f34f240c7094a5059ffec35138d91e9efd1233c762d048f7d5949e",
+      "standalone_host_FPS": 84.4,
+      "standalone_frames_exit_status": 0,
+      "standalone_frames_log_sha256": "d8dc120325313d582983f81a8dccb8d3c931a094fe7684d98cb3208665e03150"
+    },
+    "source_sha256": {
+      "src/engine/task_work.cpp": "d7885b1e4c806bc4fdc06617d99298eda2bc2da10a781983b5abe93ee12afda0",
+      "src/engine/task_work.hpp": "86b8a2429b74d8f2c5971fcdc424a670f960be0a837122602b7e9925170d39ee",
+      "src/hle/hle_task_bridge.cpp": "e7c903e26cbff19ae464fb8d7fe40005d5809d61244a3256d95cac2b05ffbfa4",
+      "src/hle/hle_task_bridge.hpp": "a6be0d683dc6ce7da8c24a04ba9ae9c6b6785c7574c5b6e76efdad251b7f6528",
+      "tests/unit/hle_task_bridge.cpp": "c4eac69914d64a6dbcb134df07f09a2aad537da5beecaf7f65299afe97f34468",
+      "src/hle/hle_heap_bridge.cpp": "291ecf163b346a139f7f16613301e7386ef09e47af4528931d2a295f566fecec"
+    },
+    "limits": [
+      "Source size-wrap/corrupt metadata and unowned free are explicit stopped boundaries, not claimed source returns.",
+      "Guest gameplay payload is not mirrored into the native allocator byte vector; graph binding must import live fields.",
+      "Original hardware heap identity/content facts remain existing HLE assumptions.",
+      "Other oracles not rerun; partial/fail inventory remains explicit.",
+      "Task graph/queue and other owners plus reviewed goldens remain unfinished."
+    ]
+  },
+  "reference/production-integration-20261013/task-graph-evidence.json": {
+    "entries_added": [
+      "40b460",
+      "40b030",
+      "40b860",
+      "40b940",
+      "40b6c0"
+    ],
+    "process_entries": 33,
+    "ghidra_evidence_ids": [
+      "ev_0fae7e09b7ea2dc7a41dd06106d9cb9e2f0036548d8cfa6fb4764be51bfb466d",
+      "ev_5468b81cfb8f3f0fd98abd6aa68e9e7c0eda989643a97507e2525ce99a104d52",
+      "ev_f6fa592d0d325eb4114b9eaa958bfbf120da0278d18e8ccddd90e076de1cec1b",
+      "ev_fa19fecaa76f1397c6a41d9604e089143b967c744666ab262580246d4e85e1d8",
+      "ev_b98f7a69d67b95f215b872dcb5f500e0dd259b8d397cd635b4e76ec8a3cee611"
+    ],
+    "corpus": {
+      "work_sequences": 16,
+      "work_operations": 4890,
+      "graph_sequences": 17,
+      "graph_operations": 2302,
+      "work_bridge_mutants": 2,
+      "graph_bridge_mutants": 5,
+      "scheduler_core_mutants": 3,
+      "graph_restore_exercised_in_core_oracle_before_each_step": true,
+      "51a740_unit_fixture": "RET; real dependency exercised in boot/frame tests"
+    },
+    "source_contract": {
+      "pool_prerequisite": "original 51a740, redirect reserve 8",
+      "graph_identity": "native slot indices and callback/resource tokens; no guest pointer casts",
+      "payload": "live guest read/write transport; cached references checked against observed pointer word",
+      "null_parent": "creation prefix retained, then explicit 40b95c boundary",
+      "exhaustion": "pool and active element rollback return zero as source"
+    },
+    "source_sha256": {
+      "src/engine/task.cpp": "1070c51e087f4b3897c289120dbaf8013163bb3fbe7741948b6003f4769056b3",
+      "src/engine/task.hpp": "b25ada46a6ea28d169f46df26da28a98c97102c7078f251792d7b793369239e4",
+      "src/engine/task_work.cpp": "13c8616cd1f98990b3ccb2859ce76b3feace8ba6112823b9b6989bb8451b6f60",
+      "src/engine/task_work.hpp": "f3b0f309225ad6f7ff63bfbc90927bcbbd9c5a70e65854d284c623cc0780360e",
+      "src/hle/hle_task_bridge.cpp": "a973e40fd1f1ccca89cdb418eae51096cc81136536ee54a8df7e7dda5f93343c",
+      "tests/probes/native_task_lifecycle_probe.cpp": "ce2270566ca374fcfbfbe01d15679abe6edadc60c838b00e2fbbf0f3894a1377",
+      "tests/unit/hle_task_bridge.cpp": "15fc22b1c42d408f18592fca8851c687aa81c70a0e5d3536307ee45b44894190"
+    },
+    "limits": [
+      "Callback token bank serializes identity; native execution of an unknown callback is a named 40b590 boundary.",
+      "Guest dispatch/destruction remain original and their mutations are reconciled before native creation/free.",
+      "Foreign task identity and unsupported/corrupt graph cases stop explicitly.",
+      "Original hardware facts remain existing HLE assumptions.",
+      "Reviewed goldens and other unbound owners unfinished."
+    ],
+    "runtime": {
+      "boot_identical": true,
+      "first_600_override_digests_match": true,
+      "controller_900_frames_match": true,
+      "app_script_exit_status": 0,
+      "host_FPS": 76.6,
+      "screenshot_sha256": "bc1cfbaa30f34f240c7094a5059ffec35138d91e9efd1233c762d048f7d5949e"
+    }
+  },
+  "reference/production-integration-20261013/task-dispatch-evidence.json": {
+    "entries_added": [
+      "40b0c0",
+      "40b170",
+      "40b420"
+    ],
+    "process_entries": 36,
+    "ghidra_evidence_ids": [
+      "ev_0eaaaa2e6e7d3fff355851df5812dde22f2134ab47962c03e199a2dcb23e9993",
+      "ev_91e5820fb211f5d6d3e545ba24a3f9fb126a52012e9cfab2720568a82864b570",
+      "ev_3b9ee31f82ebd8aba1eb9578a13486cc62ce40c54b75a28dbb38730fe34db229"
+    ],
+    "corpus": {
+      "lifecycle_sequences": 18,
+      "lifecycle_operations": 2311,
+      "work_sequences": 16,
+      "work_operations": 4890,
+      "dispatch_scenarios": 18,
+      "core_mutants_caught": 3,
+      "dispatch_bridge_mutants_caught": 3,
+      "existing_bridge_mutants": 7
+    },
+    "source_contract": {
+      "order": "8(alias7), then 0..6",
+      "callback_return_addresses": [
+        "40b10b",
+        "40b43f"
+      ],
+      "callback_stack_reserves": {
+        "index": 20,
+        "all": 32,
+        "children": 8
+      },
+      "next_snapshot": "before callback; resolve current pool-slot generation after reconciliation",
+      "context": "top sets/clears current_function; children leave it; field30 clears after callback",
+      "saved_register_slots": "written as source frame; owner registers restored"
+    },
+    "source_sha256": {
+      "src/engine/task.cpp": "ef7ef251c7c7ead2b1a0ae0127790a67ed627de499972401211f09652267486d",
+      "src/engine/task.hpp": "7d9d4aeeed534fb8f984f053e35522674a4791a350d374d900349ac484aa95a3",
+      "src/guest/x86_guest.cpp": "41e71fd4c35bfbd4cfc5fa6ceb98e54d089dda72cbecf201104d859e383559fa",
+      "src/guest/x86_guest.hpp": "77f4204095b6a68fc1324b9f79dc28d02a2585eef6e385952e5a40bbcd3bc115",
+      "src/hle/hle_task_bridge.cpp": "585b4c69bff7c5b2d16214700607390d2fae5482815cd85d550d9ab4dc544033",
+      "tests/unit/hle_task_bridge.cpp": "4b560d33f9a09bfbcb73e38b2f9a8a59dffa99bea4c29df4ce32ecee7d043531",
+      "tests/probes/native_task_lifecycle_probe.cpp": "ab7544a397961ea8a9b460663c152736214e086b1eee2b6933993563b977b50c",
+      "tools/oracles/verify_original_task_lifecycle.py": "88194efd167a20c45344a0e08cefdd5aae871c71403813ebaddb2e2e92b4fe10"
+    },
+    "limits": [
+      "Source saved-next freed-list traversal and changed pool provenance remain explicit native boundaries.",
+      "Callback ABI is the source cdecl Task callback; source-return frames are matched by ESP.",
+      "Native synchronous creation rollback unknown callbacks remain explicit 40b590 boundary.",
+      "Native destruction/free-children and render queue plus other owners, reviewed goldens unfinished."
+    ],
+    "runtime": {
+      "boot_identical": true,
+      "override_600_digests_match": true,
+      "controller_900_digests_match": true,
+      "host_FPS": 80.0,
+      "app_script_exit_status": 0,
+      "screenshot_sha256": "bc1cfbaa30f34f240c7094a5059ffec35138d91e9efd1233c762d048f7d5949e"
+    }
+  },
+  "reference/production-integration-20261013/task-lifetime-evidence.json": {
+    "entries_added": [
+      "40b570",
+      "40b7e0"
+    ],
+    "process_entries": 38,
+    "ghidra_evidence_ids": [
+      "ev_5fd900765a8b77026e3938ea87f6559907c206575530481e80ebfd81794e9f53",
+      "ev_4b0ffe3d15b05ef90221a798fd56016cef630a5461fd807ab74bf1f025c4ecdd"
+    ],
+    "corpus": {
+      "lifecycle_sequences": 19,
+      "lifecycle_operations": 2316,
+      "work_sequences": 16,
+      "work_operations": 4890,
+      "dispatch_scenarios": 18,
+      "lifetime_scenarios": 6,
+      "core_lifetime_mutants_caught": 3,
+      "lifetime_bridge_mutants_caught": 2,
+      "existing_bridge_mutants": 10
+    },
+    "source_contract": {
+      "callback_return_addresses": [
+        "40b593",
+        "40b5b1",
+        "40b7f4",
+        "40b826"
+      ],
+      "callback_stack_reserves": {
+        "destructor": 12,
+        "destroy_children": 20,
+        "child_driver": 8
+      },
+      "order": "destructor; sibling snapshot/callback clear; children; unlink; collision/object/work/control cleanup; recycle",
+      "retired_rows": "retain field30; clear fields 2..11",
+      "references": "resolve live guest words to validated tracked native allocations"
+    },
+    "source_sha256": {
+      "src/engine/task.cpp": "2d3f784b14e8f1dabac45c1bc4cb798a5765f81c5f1bc536f21f00f3ce066b44",
+      "src/engine/task.hpp": "32d4bbecbbcf7087486cbd913f3455fa86f66e6675dd176910711290670f6707",
+      "src/engine/task_work.cpp": "08e679e66ab28ceda7a942033489cbd1f49356875766babe9e66236870c84691",
+      "src/engine/task_work.hpp": "f2a5c6b93f7a6bded90fb267d88ace2d0bcb45e34524750f3314bde7c9a4660c",
+      "src/hle/hle_task_bridge.cpp": "bee248577084715fc6a7f1370f36146330c61e4a3efa29f37648210ce890d364",
+      "tests/unit/hle_task_bridge.cpp": "742390afbce6f7722dc6b24501e4a807d46afe2c60f90fbfeb5d374c1c72e825",
+      "tests/probes/native_task_lifecycle_probe.cpp": "0c115f0336fdc78c83daaf786bc56b83ced651eafeedf17cc0de31b1f1f831b9",
+      "tools/oracles/verify_original_task_lifecycle.py": "010c3770e264bd05a26b34fa2d20381e79aa51c492c062ff01755ee3cf20bf93"
+    },
+    "limits": [
+      "Unknown synchronous creation rollback callbacks stop at 40b590.",
+      "Changed pool provenance and unsupported graph mutations remain explicit boundaries.",
+      "Arbitrary destructive reentrancy unverified beyond the recorded scenarios.",
+      "Other oracles not rerun; existing partial/fail inventory retained.",
+      "Render queue, remaining owners and reviewed goldens unfinished."
+    ],
+    "runtime": {
+      "app_script_exit_status": 0,
+      "screenshot_sha256": "bc1cfbaa30f34f240c7094a5059ffec35138d91e9efd1233c762d048f7d5949e",
+      "boot_identical": true,
+      "override_600_digests_match": true,
+      "controller_900_digests_match": true,
+      "host_FPS": 78.7,
+      "gate_exit_status": 0
+    }
+  }
+}

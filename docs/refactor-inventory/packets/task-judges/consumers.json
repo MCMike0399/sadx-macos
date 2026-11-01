@@ -1,0 +1,30 @@
+[
+  {
+    "command": [
+      "build/hle-task-bridge-test",
+      "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+      "reference/oracle-reports/task_work.cases.bin",
+      "reference/oracle-reports/task_lifecycle.cases.bin"
+    ],
+    "exit": 0,
+    "stdout": "Task bridge: 16 complete oracle sequences, 4890 operations; 17 graph sequences/2302 operations; 18 dispatch scenarios; 6 lifetime callback scenarios; actual CRT/heap acquisition and repeated initialization; EAX allocation/global/exact HLE traces and full 16 MiB+32 arena bytes match with guest payload writes and sentinel padding; 2 work, 5 graph and 3 dispatch and 2 lifetime input mutants caught; corrupt metadata, wrap and unowned free stop explicitly\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/guest-task-graph-sync-test"
+    ],
+    "exit": 0,
+    "stdout": "Task synchronization: 128 callbacks, 2708 API reads, 54966380 bytes\nTask synchronization: 128 callbacks, 2708 API reads, 54966380 bytes\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/hle-task-inactive-lifetime-test",
+      "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe"
+    ],
+    "exit": 0,
+    "stdout": "Task lifetime: never-allocated, destroyed parent, recursively destroyed child and detached task reject destruction without stores; original/native full arena bytes and task globals match; null accepted and foreign identity rejected\n",
+    "stderr": ""
+  }
+]

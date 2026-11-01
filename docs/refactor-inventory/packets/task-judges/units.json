@@ -1,0 +1,65 @@
+[
+  {
+    "command": [
+      "build/task-judges/old/task-test"
+    ],
+    "exit": 0,
+    "stdout": "Task dispatch: eight lists, alias, mutation, deferred free, child traversal, nested context and native ownership passed.\nTask lifecycle has separate source tests; full game integration remains unfinished.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/task-judges/old/task_work-test"
+    ],
+    "exit": 0,
+    "stdout": "Task work arena: source limits, first-fit/reuse, coalescing, exact fit, payload and native references passed.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "xcrun",
+      "clang++",
+      "-std=c++17",
+      "-O2",
+      "-Wall",
+      "-Wextra",
+      "-Werror",
+      "-ffp-contract=off",
+      "-fno-fast-math",
+      "-Isrc",
+      "-Itests/fixtures",
+      "tests/unit/task_lifecycle.cpp",
+      "src/engine/task.cpp",
+      "src/engine/task_work.cpp",
+      "src/player/player_task.cpp",
+      "-Wl,-map,build/task-judges/old/task_lifecycle-test.map",
+      "-o",
+      "build/task-judges/old/task_lifecycle-test"
+    ],
+    "exit": 0
+  },
+  {
+    "command": [
+      "build/task-judges/old/task_lifecycle-test"
+    ],
+    "exit": 0,
+    "stdout": "Source task creation, slots, work cleanup, partial failures and callback mutations passed.\n",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/task-judges/old/task_display-test"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "command": [
+      "build/task-judges/old/task_callback_lifetime-test"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": ""
+  }
+]

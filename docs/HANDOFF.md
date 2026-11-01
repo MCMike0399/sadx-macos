@@ -705,3 +705,9 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Complete MPEG timing module retains 30,657 development and 4,096 final full observations, actual HleDshow output, ten compiled faults and sanitizer evidence. Main unit, contract and consumer pass. This is reference timing utility qualification, not Windows splitter parity.
 * Initial values, actor-current and shared frame/mode reviews retain explicit module boundaries. Native mode forwarding/services and broader ownership remain open. Existing FP partials and failures retain their prior identities and verdicts.
 * Animation judge foundation is accepted after narrative correction; the coherent animation source migration runs in its own packet. Scheduler lifecycle judge review 00e9934 accepts its bounded foundation; scheduler source rewrite, final cohorts and integration remain pending. No whole renderer/player/Session/campaign closure, gameplay or new controller claim. No push.
+
+### 2026-11-01 — Accepted scheduler judge foundation integrated
+
+* Review 00e9934 accepts the bounded before-source scheduler foundation. Main carries the four full stream ledgers, historical exclusions, source/dependency bindings, fourteen scheduler and three bridge compiled fault receipts, and two registered contracts. Scheduler source and reserved holdouts remain unchanged.
+* Both new contracts build and run on current Main: twenty scheduler and seven actual bridge observations; the callback-lifetime regression also exits zero. All 955 protected inputs are the exact reviewed parent union with additive registration. Inventory and hygiene checks pass.
+* The strict prerequisite baseline checker exits one on the two independently qualified MPEG files; all scheduler anchors match. task-judges-parent-union.json records that limit, the corrected command-path typo and exact hashes. No full integrated gate or whole Task/player/campaign qualification is claimed here.
