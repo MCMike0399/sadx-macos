@@ -1,0 +1,218 @@
+{
+  "source_commit": "34cead9647b81fcc4e6031f7006c626c75abb14e",
+  "source_diff_from_before_source_base": "",
+  "commands_exit_zero": [
+    "make -j2 four registered mode/save contract targets",
+    "four registered mode/save programs",
+    "16 judge and3 parser Python tests",
+    "make -j2 build/native-game-mode-probe.dylib",
+    "unchanged verify_original_game_mode24000cases",
+    "full legacy/companion diagnostic capture24000records"
+  ],
+  "logs_sha256": {
+    "build.log": "d49279023cec48d5ed2b4c713e4edcfc69605f238fd02cd4b90caca473ba7065",
+    "mode-probe-build.log": "5d52190a80d4ee439adfc27a6a5d084057d613b6865e5fae6f0bbf45fac02dfb",
+    "mode-original.log": "ce83f4c291b94c2e27199e67748c187f009779633b0b87ee2ecb4cd164944005",
+    "mode-capture.log": "4c8b1739d4623dda5265819e8a19914aaabe0c704b9864b72a5b8d326a0e12fd",
+    "mode-forwarding.log": "7b25b8d820110ff34c2750edacabbf3e0c89ef438e18f87db6fbcfc80c50734b",
+    "mode-diagnostics.log": "7dee0a7aacc7010da6aa13802ca4b6be80d099998c733047e6cefa72a9b69006",
+    "save-io.log": "76635c00aa2782cb3f50f3296c31d22a6c634a83c54b7a3d2765e14f3d73c36b",
+    "save-frame.log": "ede264f088b1b4b1090901cad7cfa2415c589f6e44b16714a41583a545bb4d00",
+    "judge-tests.log": "5191994607b517227f9f99f25e46c840e30adb81730bf4748e1b37bab98f2771",
+    "parser-tests.log": "87930d4a682f0b64222f96987b02cc3fd5273c42947613b6e986a1d2dd013fcd"
+  },
+  "mode_original": {
+    "cases": 24000,
+    "paths": 252,
+    "mismatches": 0,
+    "case_sha256": "05c8ac3db56f68dcd6c7cb7334699f164bf2803b602a6694ec4dd7077f6d2ea0"
+  },
+  "mode_full_capture": {
+    "records": 24000,
+    "original_abi_equal": true,
+    "all_diagnostic_payloads_match_existing_fixture_contract": true,
+    "input_sha256": "05c8ac3db56f68dcd6c7cb7334699f164bf2803b602a6694ec4dd7077f6d2ea0",
+    "old_stream_sha256": "7c28206234975f1c75e75e7737c5b6313e2796619b74a75bb4549feb15cb4f71",
+    "diagnostic_stream_sha256": "cc63938b3f1f9c3aa1afdb6dc7e0ec058553d30a3171de16dcaf5a5cfa370b69",
+    "diagnostic_stream_record_bytes": 1248,
+    "library_sha256": "c992570d69abbcb7b116a3b4b1b0bc4502180f4bb52cec65e066cf6ee8ec1a6f",
+    "limits": [
+      "Pending availability/payload and nested receipt boundary are adapter contracts.",
+      "Only the unchanged original oracle establishes original instruction equivalence.",
+      "Missing owner/return and other missing facts are separately covered by the direct diagnostic unit."
+    ]
+  },
+  "save_native_streams": {
+    "io": {
+      "stream": "build/save-io-judges/io-qualified.txt",
+      "bytes": 3521423,
+      "sha256": "18fb52e150f649067203d0e60f041967c1cac6fa91e5bfd76363d19149b1f6ba",
+      "summary": "3521423 16575667018217874169",
+      "baseline_stream_equal": true
+    },
+    "frame": {
+      "stream": "build/save-io-judges/frame-qualified.txt",
+      "bytes": 948217,
+      "sha256": "52cdd7a6e8e7a66778dd22a0388dcc61c27c144e6de8275b6eee0fc204338046",
+      "summary": "1920 948217 8729241527267754014",
+      "baseline_stream_equal": true,
+      "missing_fact_prefixes": [
+        {
+          "id": "1,0",
+          "prefix": "prefix:1,4246436,0",
+          "optional_state": "?,255,1,1,1,2,"
+        },
+        {
+          "id": "1,1",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "?,0,1,0,1,2,"
+        },
+        {
+          "id": "1,2",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "1,0,1,0,1,2,"
+        },
+        {
+          "id": "1,3",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "?,0,1,0,1,2,"
+        },
+        {
+          "id": "1,4",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "?,0,1,0,1,2,"
+        },
+        {
+          "id": "2,0",
+          "prefix": "prefix:1,4246444,0",
+          "optional_state": "1,?,1,1,1,2,"
+        },
+        {
+          "id": "2,1",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "1,?,1,0,1,2,"
+        },
+        {
+          "id": "2,2",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "1,0,1,0,1,2,"
+        },
+        {
+          "id": "2,3",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "1,?,1,0,1,2,"
+        },
+        {
+          "id": "2,4",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "1,?,1,0,1,2,"
+        },
+        {
+          "id": "3,0",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "1,0,1,0,1,2,"
+        },
+        {
+          "id": "3,1",
+          "prefix": "prefix:1,4246576,0",
+          "optional_state": "1,0,?,0,1,2,"
+        },
+        {
+          "id": "3,2",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "1,0,1,0,1,2,"
+        },
+        {
+          "id": "3,3",
+          "prefix": "prefix:1,4246576,0",
+          "optional_state": "1,0,?,0,1,2,"
+        },
+        {
+          "id": "3,4",
+          "prefix": "prefix:1,4246576,0",
+          "optional_state": "1,0,?,0,1,2,"
+        },
+        {
+          "id": "4,0",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "1,0,1,0,1,2,"
+        },
+        {
+          "id": "4,1",
+          "prefix": "prefix:1,4246557,0",
+          "optional_state": "1,0,1,?,1,2,"
+        },
+        {
+          "id": "4,2",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "1,0,1,0,1,2,"
+        },
+        {
+          "id": "4,3",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "1,0,1,?,1,2,"
+        },
+        {
+          "id": "4,4",
+          "prefix": "prefix:1,4246557,0",
+          "optional_state": "1,0,1,?,1,2,"
+        },
+        {
+          "id": "5,0",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "1,0,1,0,?,2,"
+        },
+        {
+          "id": "5,1",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "1,0,1,0,?,2,"
+        },
+        {
+          "id": "5,2",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "1,0,1,0,1,2,"
+        },
+        {
+          "id": "5,3",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "1,0,1,0,?,2,"
+        },
+        {
+          "id": "5,4",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "1,0,1,0,?,2,"
+        },
+        {
+          "id": "6,0",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "1,0,1,0,1,?,"
+        },
+        {
+          "id": "6,1",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "1,0,1,0,1,?,"
+        },
+        {
+          "id": "6,2",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "1,0,1,0,1,2,"
+        },
+        {
+          "id": "6,3",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "1,0,1,0,1,?,"
+        },
+        {
+          "id": "6,4",
+          "prefix": "prefix:0,0,0",
+          "optional_state": "1,0,1,0,1,?,"
+        }
+      ]
+    }
+  },
+  "limits": [
+    "Actual Main integration checks, not a full gate or source rewrite.",
+    "Existing Controls938FP partials, source boundaries and excluded/unknown results retain prior verdicts.",
+    "No downstream Session algorithm, product closure, fresh holdout or campaign acceptance."
+  ]
+}

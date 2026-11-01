@@ -8,7 +8,9 @@ namespace {
 constexpr std::array<std::uint32_t,19> kReturning{{0x421f70,0x421f80,0x42e890,0x413c00,0x42f240,0x416610,0x4173b0,0x415af0,0x42f020,0x42caa0,
     0x5033b0,0x4144e0,0x412d20,0x642640,0x6428d0,0x413bc0,0x641c60,0x640f20,0x590650}};
 }
-extern "C" int sadx_native_game_mode(const std::uint32_t* in,std::size_t count,std::uint32_t* out,std::size_t capacity){
+namespace {
+int run_fixture(const std::uint32_t* in,std::size_t count,std::uint32_t* out,std::size_t capacity,
+                sadx::GameModeResult *diagnostics){
     if(!in||count!=48||!out||capacity<256)return 0;
     sadx::GameLoopState loop;loop.mode_at_3b28114=in[1];loop.save_phase_at_3b291a4=static_cast<std::int32_t>(in[2]);loop.request_at_3b291ad=static_cast<std::uint8_t>(in[3]);loop.word_at_3abdcf8=in[4];
     std::optional<std::int32_t> mode=static_cast<std::int32_t>(in[0]);
@@ -26,11 +28,39 @@ extern "C" int sadx_native_game_mode(const std::uint32_t* in,std::size_t count,s
         for(std::size_t i=0;i<kReturning.size();++i)if(kReturning[i]==c.callee)return {{sadx::GameLogicOwnerState::completed,0},in[16+i]};
         return {{sadx::GameLogicOwnerState::completed,0},0x5a5a5a5aU};
     };
-    const auto r=sadx::run_game_mode_40c090(rt);std::fill(out,out+capacity,0);
+    const auto r=sadx::run_game_mode_40c090(rt);
+    if(diagnostics)*diagnostics=r;
+    std::fill(out,out+capacity,0);
     out[0]=static_cast<std::uint32_t>(r.failure);out[1]=r.source_boundary;out[2]=r.completed;
     const std::uint32_t g[]={static_cast<std::uint32_t>(*mode),*loop.mode_at_3b28114,static_cast<std::uint32_t>(*loop.save_phase_at_3b291a4),*loop.request_at_3b291ad,*loop.word_at_3abdcf8,
         *st.byte_at_3abdf74,*st.byte_at_3abdcfc,*st.byte_at_3abdcfd,*st.byte_at_3b18db4,*st.word_at_3b2c45c};
     std::copy(std::begin(g),std::end(g),out+3);out[13]=static_cast<std::uint32_t>(std::min<std::size_t>(trace.size(),48));
     for(std::size_t i=0;i<trace.size()&&i<48;++i)std::copy(trace[i].begin(),trace[i].end(),out+14+5*i);
+    return 1;
+}
+}
+// Retain the original ABI and every original output word unchanged.
+extern "C" int sadx_native_game_mode(const std::uint32_t* in,std::size_t count,
+                                    std::uint32_t* out,std::size_t capacity){
+    return run_fixture(in,count,out,capacity,nullptr);
+}
+// Companion observer: the same fixture additionally exposes the complete tagged
+// result, including argument availability. These words are adapter diagnostics;
+// the original instruction judge continues to compare only its existing contract.
+extern "C" int sadx_native_game_mode_diagnostics(const std::uint32_t* in,std::size_t count,
+                                                std::uint32_t* out,std::size_t capacity){
+    if(!in||count!=48||!out||capacity<264)return 0;
+    sadx::GameModeResult result;
+    if(!run_fixture(in,count,out,capacity,&result))return 0;
+    out[256]=result.nested_source_boundary;
+    out[257]=result.pending_call.has_value();
+    if(result.pending_call){
+        out[258]=result.pending_call->source_call;
+        out[259]=result.pending_call->callee;
+        for(std::size_t i=0;i<3;++i){
+            if(result.pending_call->arguments[i])out[260]|=1U<<i;
+            out[261+i]=result.pending_call->arguments[i].value_or(0);
+        }
+    }
     return 1;
 }

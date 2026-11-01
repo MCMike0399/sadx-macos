@@ -1,0 +1,34 @@
+{
+  "main_parent": "ac8897e",
+  "axis_parent": "3ad072258ed1205685b8b6a588fb68dba219b005",
+  "parent_counts": {
+    "main": 1266,
+    "axis": 956
+  },
+  "combined_inputs": 1268,
+  "removed_paths": [],
+  "all_parent_paths_retained": true,
+  "all_values_equal_explicit_reviewed_parent_selection": true,
+  "append_only_registration": {
+    "Makefile": {
+      "main_sha256": "4e1a7e5d5e9508e6cbf599c61a52f356c8348ace61d71745351b210f5ec2ae62",
+      "axis_sha256": "b8409cacdeb9e8a34bf64dfad27389d25af7f0ebbfb1d321e09a96b1b8e32e09",
+      "combined_sha256": "77a6cc1837d73f1d569b65edc81f429a297ef8a6ca49b0656dee53a945cbfe14",
+      "axis_appended_bytes": 518
+    },
+    "tests/unit/manifest.tsv": {
+      "main_sha256": "4423cdc597453f720afd3ce550253d484f37ccd2164b57722af21a8a4aa1723e",
+      "axis_sha256": "50fbbe69f4567be9b99438e6545a51ab1132dfbe099b81e9106f6bcfe98c64e8",
+      "combined_sha256": "7bbf12fcf856078db0a1c4a66f5f91e338d45a5c86495e16fdb6cc4a7c4ecfe4",
+      "axis_appended_bytes": 24
+    }
+  },
+  "new_contract_body": {
+    "path": "tests/unit/input_mod_axes_contract.cpp",
+    "sha256": "24aabf429c77e4ba4a5e6be8976f79da4b82300de68c27dd960792133bdb1876"
+  },
+  "limits": [
+    "Closes new-contract protection requirement only. Main source integration/product/consumer/gate remain pending.",
+    "Native source/root APIs and baseline inputs remain unchanged; only the reviewed two-file readability rewrite is introduced."
+  ]
+}

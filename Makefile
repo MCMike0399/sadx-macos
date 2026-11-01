@@ -509,6 +509,20 @@ build/task-scheduler-contract-test: tests/unit/task_scheduler_contract.cpp tests
 build/task-bridge-contract-test: tests/unit/task_bridge_contract.cpp tests/probes/task_bridge_contract.hpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -I$(UNICORN_DIR)/include tests/unit/task_bridge_contract.cpp $(GUEST_LINK) build/libsadx-core.a -o $@
 
+# Before-source save owner characterization; explicit transitive headers.
+build/save-io-characterization-test: src/cpu/crt_integer.hpp src/cpu/fidelity_float.hpp src/cpu/x87_math.hpp src/cpu/x87_transcendental.hpp src/engine/character_resources.hpp src/engine/graphics_frame.hpp src/engine/native_texture_lifetime.hpp src/engine/ninja_texture.hpp src/engine/sprite_immediate.hpp src/engine/task.hpp src/engine/task_work.hpp src/game/file_select.cpp src/game/file_select.hpp src/game/game_bootstrap.hpp src/game/game_cleanup.hpp src/game/music_state.hpp src/game/save_data.cpp src/game/save_data.hpp src/game/save_file_list.cpp src/game/save_file_list.hpp src/game/save_file_name.hpp src/game/save_write.cpp src/game/save_write.hpp src/game/sound_initial_state.hpp src/game/title_menu.hpp src/math/ninja_math.hpp tests/unit/save_io_characterization.cpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -Wl,-dead_strip tests/unit/save_io_characterization.cpp src/game/save_write.cpp src/game/save_file_list.cpp src/game/save_data.cpp src/game/file_select.cpp -o $@
+
+# Before-source save owner characterization; explicit transitive headers.
+build/save-frame-characterization-test: src/cpu/x87_math.hpp src/engine/character_resources.hpp src/engine/controller_values.hpp src/engine/frame_control_fwd.hpp src/engine/game_controller.hpp src/engine/game_frame_control.hpp src/engine/game_logic.hpp src/engine/game_logic_support.hpp src/engine/graphics_frame.hpp src/engine/native_texture_lifetime.hpp src/engine/ninja_texture.hpp src/engine/speedrun.hpp src/engine/sprite_immediate.hpp src/engine/task.hpp src/engine/task_work.hpp src/game/game_bootstrap.hpp src/game/game_cleanup.hpp src/game/game_loop.hpp src/game/menu_caption.hpp src/game/music_state.hpp src/game/save_data.hpp src/game/save_frame.cpp src/game/save_frame.hpp src/game/sound_initial_state.hpp src/guest/frame_control_reference.hpp src/guest/game_loop.cpp tests/unit/save_frame_characterization.cpp
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -Wl,-dead_strip tests/unit/save_frame_characterization.cpp src/game/save_frame.cpp src/guest/game_loop.cpp -o $@
+
+# Finite native mode forwarding and complete tagged reference diagnostics.
+build/game-mode-forwarding-test: tests/unit/game_mode_forwarding.cpp src/game/game_mode.cpp src/game/game_mode_native.cpp src/game/game_mode.hpp src/game/game_mode_internal.hpp src/game/game_mode_services.hpp | build
+	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/game_mode_forwarding.cpp src/game/game_mode.cpp src/game/game_mode_native.cpp -o $@
+build/game-mode-diagnostics-test: tests/unit/game_mode_diagnostics.cpp src/game/game_mode.cpp src/guest/game_mode_reference.cpp src/guest/game_mode_reference.hpp src/game/game_mode.hpp src/game/game_mode_internal.hpp src/game/game_mode_services.hpp src/game/game_loop.hpp src/engine/game_logic.hpp | build
+	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/game_mode_diagnostics.cpp src/game/game_mode.cpp src/guest/game_mode_reference.cpp -o $@
+
 # Exact native axes: partial stores, aliases and caller-selected SSE controls.
 build/input-mod-axes-contract-test: tests/unit/input_mod_axes_contract.cpp src/input/input_mod_axes.cpp src/input/input_mod_axes.hpp src/cpu/sse_math.cpp src/cpu/sse_math.hpp build/softfloat_sse/softfloat-sse.a build/softfloat/softfloat.a | build
 	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/input_mod_axes_contract.cpp src/input/input_mod_axes.cpp src/cpu/sse_math.cpp build/softfloat_sse/softfloat-sse.a build/softfloat/softfloat.a -o $@

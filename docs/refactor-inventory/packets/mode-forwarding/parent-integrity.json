@@ -1,0 +1,21 @@
+{
+  "base": "353d528",
+  "inherited_inputs": 955,
+  "current_inputs": 958,
+  "removed": [],
+  "changed_inherited": [
+    "Makefile",
+    "reference/oracle-reports/game_mode.json",
+    "tests/probes/native_game_mode_probe.cpp",
+    "tests/unit/manifest.tsv"
+  ],
+  "added": [
+    "tools/oracles/check_game_mode_diagnostics.py",
+    "tools/oracles/check_game_mode_module_request.py",
+    "tools/oracles/mutate_game_mode_contracts.py"
+  ],
+  "all_current_hashes_exact": true,
+  "all_other_inherited_hashes_unchanged": true,
+  "source_diff": "",
+  "limits": "Specific reviewed observer/report/registration updates only; unchanged source, old case bank, full ABI and comparisons are independently verified by packet."
+}
