@@ -174,7 +174,7 @@ extern "C" int sadx_native_file_select_display(const U *input, const std::uint8_
         tail = tail->next;
         char name[32];
         std::snprintf(name, sizeof(name), "SonicDX%02u.snc", i);
-        tail->file = file_select::FileInfo{name, 132000000000000000ULL + i * 10000000ULL};
+        tail->set_file(file_select::FileInfo{name, 132000000000000000ULL + i * 10000000ULL});
     }
     texture_lifetime::List font_list;
     std::array<std::uint8_t, 128> widths{};

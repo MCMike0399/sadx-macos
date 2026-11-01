@@ -47,7 +47,7 @@ extern "C" void sadx_native_save_file_list_probe(const std::uint32_t *i,std::uin
     try{o[0]=files::count_save_files(list,live,calls);}catch(const Stop&){o[1]=1;}
     o[2]=calls.count;o[3]=calls.nodes();bytes=sadx::save::encode(live);std::memcpy(o+16,bytes.data(),1392);
     unsigned n=0;for(auto p=list;p;p=p->next) {
-        auto *r=o+512+n++*8;if(!p->file)continue;r[0]=1;std::memcpy(r+1,p->file->name.data(),std::min<std::size_t>(p->file->name.size(),20));r[6]=static_cast<std::uint32_t>(p->file->last_write_time);r[7]=static_cast<std::uint32_t>(p->file->last_write_time>>32);
+        auto *r=o+512+n++*8;if(!p->file())continue;r[0]=1;std::memcpy(r+1,p->file()->name.data(),std::min<std::size_t>(p->file()->name.size(),20));r[6]=static_cast<std::uint32_t>(p->file()->last_write_time);r[7]=static_cast<std::uint32_t>(p->file()->last_write_time>>32);
     }
 }
 
@@ -55,12 +55,12 @@ extern "C" void sadx_native_load_selected_save_probe(const std::uint32_t *i,std:
     std::fill(o,o+160000,0);sadx::save::EncodedData bytes;std::memcpy(bytes.data(),i+2,1392);auto live=files::decode_save(bytes);files::List list;Calls calls(i,o,list,live);
     const auto *extra=i+350+i[0]*359;
     if(extra[2]) {
-        files::append_save_list(list,std::nullopt,{});
-        for(std::size_t n=0;n<i[0];++n){const auto info=calls.info(n);files::append_save_list(list,info.name,info);}
+        files::append_save_list(list,nullptr,{});
+        for(std::size_t n=0;n<i[0];++n){const auto info=calls.info(n);files::append_save_list(list,&info.name,info);}
     }
     auto disabled=static_cast<std::int32_t>(extra[0]);auto selected=static_cast<std::uint8_t>(extra[1]);auto rings=static_cast<std::int16_t>(extra[4]);
     const auto fallback=calls.info(extra[3]).name;files::LoadState state{disabled,selected,fallback.c_str(),list,live,rings};
     try{o[0]=static_cast<std::uint32_t>(files::load_selected_save(state,calls));}catch(const Stop&){o[1]=1;}
     o[2]=calls.count;o[3]=calls.nodes();o[4]=static_cast<std::uint16_t>(rings);bytes=sadx::save::encode(live);std::memcpy(o+16,bytes.data(),1392);
-    unsigned n=0;for(auto p=list;p;p=p->next){auto *r=o+512+n++*8;if(!p->file)continue;r[0]=1;std::memcpy(r+1,p->file->name.data(),std::min<std::size_t>(p->file->name.size(),20));r[6]=static_cast<std::uint32_t>(p->file->last_write_time);r[7]=static_cast<std::uint32_t>(p->file->last_write_time>>32);}
+    unsigned n=0;for(auto p=list;p;p=p->next){auto *r=o+512+n++*8;if(!p->file())continue;r[0]=1;std::memcpy(r+1,p->file()->name.data(),std::min<std::size_t>(p->file()->name.size(),20));r[6]=static_cast<std::uint32_t>(p->file()->last_write_time);r[7]=static_cast<std::uint32_t>(p->file()->last_write_time>>32);}
 }
