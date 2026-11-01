@@ -1,13 +1,13 @@
 {
   "change": {
-    "base_commit": "57b7366dbf3d9c689bb4106b31f2d079351f5885",
-    "evidence": "docs/refactor-inventory/packets/animation-contract/INTEGRATION-JUDGE-UNION.json",
-    "evidence_sha256": "fb417d3f275a453249962aeda4bed720f25cafb298bc42b828a91a49dd3499cd",
-    "reason": "Integrate reviewed animation and lineage judges while preserving the complete widened parent manifest."
+    "base_commit": "5957be45a2229ce8b07e3d7812738445c94cf018",
+    "evidence": "docs/refactor-inventory/packets/animation-contract/DISPATCH-EVIDENCE-REVALIDATION.json",
+    "evidence_sha256": "2f181c6682a73cdc93dcdae3f3472d06528ba208255a4d917cef84a678f95ed3",
+    "reason": "Revalidate unchanged fourth-argument address-dispatch classification after the independently reviewed native animation runtime branch was added to Sonic call."
   },
   "files": {
     "Makefile": "20b793d5201033b79fe8a2a7a88306b7376ada39791db0b802d5c93730168c26",
-    "reference/address-dispatch-baseline-v1.json": "db0e83e323df714032ddad3046670d81968efe8e966630d9666ecbbe87d38bd7",
+    "reference/address-dispatch-baseline-v1.json": "0f5026789caa3bf09320a20eb24bfeb0e4e963ddb62f76cf29c67228e338129e",
     "reference/constexpr-table-review.json": "4a030f62923645c922978aea378fd0c88e8ac74f8ecb12a03d40100aba34a3ef",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
     "reference/frame-control-corpus.json": "407e2960c4f77d04ae4f56fe8fddbd8f3de9f29d514ae5ec297f24775046c952",
@@ -980,7 +980,7 @@
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",
     "tools/analysis/verify_game_mode_holdout.py": "7112df7b102e3c33d6270b07f51540bbc82050d6f5fbdc80753e7cf6977fcce2",
     "tools/analysis/verify_ground_holdout.py": "7b420e25abe9155e009c72f60ee874c9638ab6b553290b03d26ec393ff2b7981",
-    "tools/gate/address_dispatch_signatures_v1.json": "79028a724e559f165f45eaa80cb06f04ea59a5e9bc6f9f335120aae9969b1078",
+    "tools/gate/address_dispatch_signatures_v1.json": "12d8670466924d5a849492a4121964e8247dc59b5bbf50ab24b64a9bc1bd954a",
     "tools/gate/check_address_dispatch.py": "78a839c95eef4b7bc0548426e21662bdd0a72f11aeb7d8f6244a5fb31f2ddc50",
     "tools/gate/check_app_smoke.py": "5c709c9594a047ceb2c807cdeb855b9a213510a4b0589c9092b6c7361570f529",
     "tools/gate/check_constexpr_tables.py": "af0d7d6a9f763f99ba0b86a85338b0dc96b5f322c5dc8ea1c1a3df6012208c24",

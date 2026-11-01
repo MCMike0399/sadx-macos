@@ -1,7 +1,7 @@
 {
   "schema": 1,
   "measurement": "signature-dispatch-v1",
-  "evidence_base": "c55762db5a42ad77b56fbaa8617ccfead4dbf0e1",
+  "evidence_base": "5957be45a2229ce8b07e3d7812738445c94cf018",
   "signatures": [
     {
       "path": "src/player/sonic_player.cpp",
@@ -9,7 +9,7 @@
       "target_argument": 4,
       "min_args": 5,
       "max_args": 7,
-      "definition": "        SonicPlayerResult call(SonicPlayerRuntime& rt,SonicPlayerFrame& f,X87Context& fp,std::uint32_t a,std::uint32_t b,std::array<std::optional<std::uint32_t>,5> args={},std::optional<std::uint8_t> task_work_argument={})  {\n            if(a==0x44a800) {\n                if(!rt.animation_runtime)return fail(SonicPlayerFailure::missing_native_owner,b,a);\n                auto ready=require_player(f,b);if(!ready)return ready;\n                auto* p=player(f);PlayerAnimationView view{*p->player,p->player->animation_tail,p->player_work};\n                auto animation=update_player_animation(view,*rt.animation_runtime,fp);\n                auto result=animation?done():fail(SonicPlayerFailure::animation_failed,b,a);\n                result.animation=animation;\n                if(!animation)result.nested_source_boundary=animation.source_boundary;\n                return result;\n            }\n            if(!rt.external)return fail(SonicPlayerFailure::missing_native_owner,b,a);\n            auto r=rt.external({a,b,args,task_work_argument},f,fp);\n            if(!r)  {\n                r.nested_source_boundary=r.source_boundary;\n                r.source_boundary=b;\n                r.callee_address=a;\n                if(r.failure==SonicPlayerFailure::none)r.failure=SonicPlayerFailure::native_owner_failed;\n            }\n            return r;\n        }",
+      "definition": "        SonicPlayerResult call(SonicPlayerRuntime& rt,SonicPlayerFrame& f,X87Context& fp,std::uint32_t a,std::uint32_t b,std::array<std::optional<std::uint32_t>,5> args={},std::optional<std::uint8_t> task_work_argument={})  {\n            if(a==0x44a800) {\n                if(!rt.animation_runtime&&!rt.native_animation_runtime)\n                    return fail(SonicPlayerFailure::missing_native_owner,b,a);\n                auto ready=require_player(f,b);if(!ready)return ready;\n                auto* p=player(f);PlayerAnimationView view{*p->player,p->player->animation_tail,p->player_work};\n                auto animation=rt.native_animation_runtime\n                    ? update_player_animation(view,*rt.native_animation_runtime,fp)\n                    : update_player_animation(view,*rt.animation_runtime,fp);\n                auto result=animation?done():fail(SonicPlayerFailure::animation_failed,b,a);\n                result.animation=animation;\n                if(!animation)result.nested_source_boundary=animation.source_boundary;\n                return result;\n            }\n            if(!rt.external)return fail(SonicPlayerFailure::missing_native_owner,b,a);\n            auto r=rt.external({a,b,args,task_work_argument},f,fp);\n            if(!r)  {\n                r.nested_source_boundary=r.source_boundary;\n                r.source_boundary=b;\n                r.callee_address=a;\n                if(r.failure==SonicPlayerFailure::none)r.failure=SonicPlayerFailure::native_owner_failed;\n            }\n            return r;\n        }",
       "definition_name_offset": 26,
       "evidence": "a is passed as SonicPlayerCall.address (header line 79), rt.external({a,b,args,task_work_argument},f,fp); b is source boundary.",
       "receivers": [

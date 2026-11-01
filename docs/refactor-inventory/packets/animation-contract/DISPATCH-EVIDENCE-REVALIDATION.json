@@ -1,0 +1,22 @@
+{
+  "base_commit": "5957be45a2229ce8b07e3d7812738445c94cf018",
+  "reason": "Revalidate unchanged fourth-argument address-dispatch classification after the independently reviewed native animation runtime branch was added to Sonic call.",
+  "old_registry_sha256": "79028a724e559f165f45eaa80cb06f04ea59a5e9bc6f9f335120aae9969b1078",
+  "new_registry_sha256": "12d8670466924d5a849492a4121964e8247dc59b5bbf50ab24b64a9bc1bd954a",
+  "helper": {
+    "path": "src/player/sonic_player.cpp",
+    "name": "call",
+    "target_argument": 4,
+    "minimum_arguments": 5,
+    "maximum_arguments": 7,
+    "old_definition_sha256": "7e535813cde3dd544ff6b1a9f3b903be429152a61622bc8755ef9a6e15478668",
+    "new_definition_sha256": "e9e80bfdd5e5d8f99aa44485d30a34fb5efc0019acf01a85767db9917f850ad1"
+  },
+  "measurement": "signature-dispatch-v1 unchanged",
+  "baseline_file_rows_unchanged": true,
+  "other_ten_signatures_unchanged": true,
+  "proven_sites": 113,
+  "proven_increases": [],
+  "scope": "Evidence fingerprint rebind only; no metric, Source, target position, receiver set, per-file allowance, candidate policy or legacy readability ratchet changed.",
+  "source_review": "docs/refactor-inventory/packets/animation-consumer-fault/INDEPENDENT-RECHECK.md"
+}
