@@ -21709,519 +21709,72 @@
   },
   "src/cpu/sse_math.hpp": {
    "disposition": "already_conforming",
-   "reason": "Narrow typed scalar compatibility API and owned MXCSR/thread binding are legitimate CPU semantics; compact private declarations/legacy enum spelling are nonblocking style cleanup.",
-   "semantic_justification": "All 180 lines read, including every helper and public method. Scalar arithmetic rounds via integer SoftFloat 8086-SSE entry points, using caller-selected MXCSR. DAZ replaces denormal operands with signed zero before work. NaN priority comes from the SSE specialization, not the x87 propagation owner. ordered() equates both zero signs and reverses negative ordering. COMISS and low-lane signaling less_than flag any NaN; UCOMISD flags signaling NaNs only; MINSS flags NaNs and returns its second operand unchanged, including equal signed zeros and signaling payload. CVTT truncates independently of RC, returns the specialization integer indefinite for invalid inputs, and adds no denormal-operand flag. Binary work gives invalid/divide-by-zero precedence over denormals and traps unmasked denormals before committing later underflow/precision. finish32 and the analogous subtract_double tail implement underflow masking/FTZ signed-zero/status and overflow precision suppression. sqrt_single/sqrt produce non-tiny roots for valid nonzero inputs and do not need a result FTZ pass. commit ORs sticky status first, tests only this operation flags against masks, and throws before destination return; prior unmasked sticky flags alone do not retrap. This is a scalar model: packed instruction lane atomicity is a caller question. No game state, PE read, address dispatch or fixture-availability state is present.",
+   "reason": "Both complete files independently reviewed after the whole implementation rewrite; header/API/layout retained and exact maintained-model numeric sequencing preserved.",
+   "semantic_justification": "Named raw-word classification and structured operation/commit/return steps retain exception priority, caller rounding, signed DAZ/FTZ, NaN payload order, thread rejection, TLS restoration and retained destinations. Numeric masks/IEEE encodings remain legitimate data; no host arithmetic or invented defaults replace the model.",
    "resolved_owners": [
-    {
-     "resolution": "Sse32/Sse64 own binary words by value; they are scalar representations, not guest addresses or register files. Each noncopyable SseContext owns mxcsr_ and its construction thread id. Every public access/operation checks thread identity directly or through binary(); no transferable ambient SSE owner exists. Caller must keep the borrowed context alive on that thread. Operation snapshots shared SoftFloat TLS rounding, tininess and flags, installs selected RC/after-rounding/zero flags, then restores all three at normal return and SseError unwinding. It neither reads nor writes extF80_roundingPrecision, so no restoration of that untouched TLS is required. X87Context::Operation separately saves/restores all four TLS values. Shared softfloat_state.c is the sole SoftFloat TLS definition; softfloat_sse adds no state object. Distinct Display, NativeGame, probe and invocation contexts are separate execution worlds, not duplicate source-global ownership. Thread checking is a misuse guard, not synchronization for simultaneous races.",
-     "evidence": [
-      {
-       "path": "src/cpu/sse_math.hpp",
-       "line": 1,
-       "sha256": "b0bed7f83c4b3ceec2070dee8a64de8045f2cc3bde412483690b8d4e6a7ef213"
-      },
-      {
-       "path": "src/cpu/sse_math.cpp",
-       "line": 1,
-       "sha256": "b7ddd9dc425ac2e1ebd49929de1dcdf4bd7671466bf041544a6ba57157ca12b7"
-      },
-      {
-       "path": "src/cpu/x87_math.cpp",
-       "line": 1,
-       "sha256": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8"
-      },
-      {
-       "path": "third_party/softfloat/platform.h",
-       "line": 1,
-       "sha256": "7fcc04683b267d44e15fcf7826c7f2478897bdd29e20f444369ccaad02a0e462"
-      },
-      {
-       "path": "third_party/softfloat/source/softfloat_state.c",
-       "line": 1,
-       "sha256": "5f7a70c4c5823cdde0518db77a74a6549dba62b21d910f6dadb9115b1d478301"
-      },
-      {
-       "path": "third_party/softfloat_sse/README.md",
-       "line": 1,
-       "sha256": "1b0b1a4ac6661e791f340b1a6c0be3c3a3040d505a3b785e2a1c14256bb30301"
-      },
-      {
-       "path": "third_party/softfloat_sse/build.sh",
-       "line": 1,
-       "sha256": "6558b170e6269ee569a4658a66ae319cb581ae6c4cfb559eaaa4328eb3a234d7"
-      },
-      {
-       "path": "third_party/softfloat_sse/sources.txt",
-       "line": 1,
-       "sha256": "4b64bde29d70aa2521ee86acc8c190ac92eb14b11f5ce55feaadfc0afce5549f"
-      },
-      {
-       "path": "third_party/softfloat_sse/upstream.json",
-       "line": 1,
-       "sha256": "8a9d83d1d7b06915e678b8c7e8cfe95665d21aad58a07f894fc0d0b31aa46f3e"
-      },
-      {
-       "path": "Makefile",
-       "line": 1,
-       "sha256": "e4be497c24cedd750e8a9a7d5b3438e7c582a6509969379689276d7b6f3ef905"
-      }
-     ]
-    }
+    "One thread-bound SseContext owns caller control/sticky status. Scoped SoftFloat state borrows and restores shared TLS; host fenv and ext80 precision remain independent."
    ],
    "resolved_consumers": [
-    {
-     "resolution": "Production Display owns sse_{8064}; Application creates native::Input borrowing display.sse(), with display lifetime covering Input. Native Input::Impl uses the borrowed context in input_mod_on_input -> pad trigger/axes/keyboard conversion. InputState::sample_tick is a separate diagnostic native snapshot policy and also borrows a context. Display/render projection calls flow through ninja_projected_depth and D3DX; native view uses shared D3DX primitives. D3DX implements lane loops and explicit approximate-reciprocal policy (scratch SseContext), so scalar API approval does not approve packed exception/store atomicity or hardware RCP/RSQRT accuracy. Reference NativeGame owns its own persistent context shared across input and projection; override_table and HLE bridge create invocation-local contexts from guest MXCSR. The inspected D3DX overrides publish values but do not write local SSE sticky flags back to guest MXCSR. That adapter status gap is outside these four files and is not fixed or qualified here. crt_floor uses subtract_double/less_than only in its explicit SSE fast path and remains maintained outside the native source list.",
-     "evidence": [
-      {
-       "path": "src/runtime/native_display.hpp",
-       "line": 1,
-       "sha256": "89cfa670a597de4388cabbfd41412008006031c096b2b63e7772e86ea9122954"
-      },
-      {
-       "path": "src/runtime/native_input.cpp",
-       "line": 1,
-       "sha256": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114"
-      },
-      {
-       "path": "src/apps/sadx_native.mm",
-       "line": 1,
-       "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
-      },
-      {
-       "path": "src/input/input.cpp",
-       "line": 1,
-       "sha256": "908777b22b43861ff0c767937a478d7981f0ac31091f63d00d55da36dc8163bf"
-      },
-      {
-       "path": "src/input/input_mod_axes.cpp",
-       "line": 1,
-       "sha256": "1d9aee1c76bb2c09b937bca9b5525d9fbaba9c7af95521364076c8dac1dd3df4"
-      },
-      {
-       "path": "src/input/input_mod_pad.cpp",
-       "line": 1,
-       "sha256": "236237ddd8fc2d46eb941012ff6bf495524e6026bb764cfbe01135499f7c0525"
-      },
-      {
-       "path": "src/math/d3dx_math.cpp",
-       "line": 1,
-       "sha256": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171"
-      },
-      {
-       "path": "src/engine/ninja_projected_depth.cpp",
-       "line": 1,
-       "sha256": "12378c9eaf694af14e338affa098653cac077bfeb08fe53930b993f24a43e646"
-      },
-      {
-       "path": "src/engine/ninja_view.cpp",
-       "line": 1,
-       "sha256": "aad37d5b8a2ff72bc2f8f3ab43459aef6d119f64a4304eb9880d4c8993d2c232"
-      },
-      {
-       "path": "src/engine/ninja_view_native.cpp",
-       "line": 1,
-       "sha256": "f84e70db6daf2a58dc8c098c095ddeede0371a18de8db93d83ed4c02843f6985"
-      },
-      {
-       "path": "src/guest/native_game_reference.hpp",
-       "line": 1,
-       "sha256": "f9709b794475f8f85db465f923d52de12297afc8eb8f9697cb8c198bd79266e0"
-      },
-      {
-       "path": "src/guest/native_game_reference.cpp",
-       "line": 1,
-       "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
-      },
-      {
-       "path": "src/guest/override_table.cpp",
-       "line": 1,
-       "sha256": "8f55db3d274697694ef5bb745c3d501492dd323633f627c1de3f47d2d975ed90"
-      },
-      {
-       "path": "src/hle/hle_device_bridge.cpp",
-       "line": 1,
-       "sha256": "6169c3f9b5ddcfc62832a5eccfb1743eada2b535bdca5783369ffd274465d11b"
-      },
-      {
-       "path": "src/cpu/crt_floor.cpp",
-       "line": 1,
-       "sha256": "242dd91ce0dfd0927b0d5d279d7cc56f8548afd2c95d65b2510d226e6e596010"
-      },
-      {
-       "path": "native-sources.txt",
-       "line": 1,
-       "sha256": "13e462b1ddc2df160580f9c6caf8544f444d87ca907b2a89f32ceada33f24eec"
-      }
-     ]
-    }
+    "Input axes/pad/sample delivery, D3DX, Ninja projected depth/native view, native input and reference/HLE callers retain the same API and observable arithmetic."
    ],
    "accepted_judges": [
-    {
-     "accepted_scope": "Registered sse-math unit checks rounding, NaN priority, MINSS second operand/zero sign, DAZ, FTZ/exact tiny/unmasked precedence, sticky flags, conversion, scalar double operations, reserved bits, cross-thread failure and SSE/x87 isolation. Historical task-foundation gate at 353d528 records this program and pins all four reviewed source files exactly.",
-     "limits": "Assertions are implemented coverage, not execution by this reviewer. No direct TLS snapshot restoration-on-SseError assertion found; cross-thread test is serialized by thread join. Historical gate is not a fresh SSE oracle.",
-     "evidence": [
-      {
-       "path": "tests/unit/sse_math.cpp",
-       "line": 1,
-       "sha256": "3b87af92bb14424e462a8bc5cf2e318d0a3d29661b5fd61cf13e897ef93d75b2"
-      },
-      {
-       "path": "tests/unit/manifest.tsv",
-       "line": 1,
-       "sha256": "36ef201da224e3a7c791109155dc947c9704515e0e8b809f066da95c664c2754"
-      },
-      {
-       "path": "reference/production-integration-20261101/task-foundation-gate.json",
-       "line": 1,
-       "sha256": "c9332f7f1578d9ec3c44913bb34ad21b6e1892e430f17fdde5cb4c5d37766a74"
-      }
-     ]
-    },
-    {
-     "accepted_scope": "Historical nine-opcode Unicorn comparison: 312112 evaluations; 5076 value mismatches, 232720 MXCSR differences, passed=false, zero unclassified value differences under retained script classes. Report classes attribute differences to NaN priority, ignored FTZ and MINSS DAZ behavior; these are historical emulator/SDM interpretations, not new Intel confirmation.",
-     "limits": "Remains FAIL. Masked scalar opcodes only; no integer-to-single, SQRTSS, SUBSD, comparisons or unmasked-destination coverage in this oracle. Script/probe/report provide no C++/transitive source pins. Probe binary hash alone does not qualify current source. No dedicated scoped SSE mutant/holdout receipt located.",
-     "evidence": [
-      {
-       "path": "tests/probes/native_sse_math_probe.cpp",
-       "line": 1,
-       "sha256": "5a56a5fae0ae44e4e88364439f89957b36062e12a1a311f756a074318ce5fc3a"
-      },
-      {
-       "path": "tools/oracles/verify_original_sse_math.py",
-       "line": 1,
-       "sha256": "66354fe6cb8a69a63b4ac861a7b3ad269a5483348d749ede8cc4b63619d8cf90"
-      },
-      {
-       "path": "reference/oracle-reports/sse_math.json",
-       "line": 1,
-       "sha256": "d3d3b9ab2567c08532b0a0c9536b3e27e45f97791da038132a5fd54cbd5f9aaf"
-      },
-      {
-       "path": "reference/sse-math-comparison.json",
-       "line": 1,
-       "sha256": "cc42e2d733f58c4f1750306effdbfcf3cca509edf0fc550bc6d215873196de54"
-      }
-     ]
-    },
-    {
-     "accepted_scope": "Historical input axes report: 109056 value comparisons, zero value mismatches, 93104 MXCSR differences. player_input_producer report: 121200 records, zero value mismatches and 108240 exception mismatches. Existing input-policy review explains pad publication and stale native-input/pad report pins.",
-     "limits": "These remain FP PARTIALS. Producer seeds prepared pad/keyboard states and explicitly does not qualify upstream SSE producer. Axes report lacks source pins; no physical raw-controller/hardware claim. These do not fill all scalar API coverage gaps.",
-     "evidence": [
-      {
-       "path": "reference/oracle-reports/input_mod_axes.json",
-       "line": 1,
-       "sha256": "28f962437406442410b9f54189ec93e90c72a575ee8615116206e718eac81e7f"
-      },
-      {
-       "path": "reference/oracle-reports/player_input_producer.json",
-       "line": 1,
-       "sha256": "6020624e3ced3afea4333ccd4ce9d808b40313c6c821a854e86a6f06c88959e5"
-      },
-      {
-       "path": "docs/refactor-inventory/reviews/input-policy.json",
-       "line": 1,
-       "sha256": "98584291a07a8905d116e82e63d17826bae8cf3f54c8a973067d0e22217812d2"
-      },
-      {
-       "path": "docs/refactor-inventory/reviews/input-policy.md",
-       "line": 1,
-       "sha256": "8bb535d51691417d6778a9ded2560bad529972bc690a8c9b2181576efa6d6cfc"
-      }
-     ]
-    }
+    "Five full default streams preserve every byte and inherited failure/partial identity. Fresh scalar312112/native1244160 cohorts preserve complete immutable old/current outputs;18valid semantic faults caught."
    ],
    "classification_limits": [
-    "Static complete-body semantic inventory at bda836f, not a diff review or fresh runtime verdict. No build, test, oracle, mutant, holdout, provider, network, host or storage action executed.",
-    "Exactly four source files, 220 lines and two complete exact-stem modules are dispositioned. Dependency inspection does not close other CPU, CRT, Input, math, engine, player, native/reference composition or campaign modules.",
-    "Historical receipts retain their original results. Current hashes establish byte identity only where the receipt actually records them; they do not create missing historical transitive build fingerprints or turn counts into source approval.",
-    "No physical Intel/MXCSR, Windows runtime control/policy, full x87 stack/tag/deferred delivery, stage 63 FPS or physical input capture was inspected. Emulator and native software contracts have narrower purposes.",
-    "Raw executable/DLL assets, historical probe dylibs and ignored complete runtime streams were not opened or rerun. Tracked reports/dossiers are available evidence; external paths and raw capture identities inside them are historical references, not verified local artifacts.",
-    "Header acceptance concerns this CPU numeric contract; it neither approves the compressed companion implementation nor proves SSE hardware perfection."
+    "Code conformance is bounded to this maintained numeric model. Original development5076value/232720status disagreements and allconsumer FPpartials remain failures/partials.",
+    "Fresh scalar5098value/232280status disagreements remain classified inherited-model limits, not Intel/Windows proof.",
+    "Current Main product/consumer/journey/gate qualification remains pending."
    ],
-   "destination": "Retain narrow src/cpu numeric implementation; see CPU-SSE-1.",
-   "reviewed_source_sha256": "b0bed7f83c4b3ceec2070dee8a64de8045f2cc3bde412483690b8d4e6a7ef213",
-   "read_lines": [
-    1,
-    51
-   ],
-   "complete_member_list": [
-    "Sse32",
-    "Sse64",
-    "SseComparison",
-    "SseFailure",
-    "SseError constructor/failure/exceptions",
-    "SseContext full declaration; public scalar/context methods; private check_thread/commit/binary and owned fields"
+   "destination": [
+    "src/cpu/sse_math.hpp",
+    "src/cpu/sse_math.cpp"
    ],
    "evidence": [
-    {
-     "path": "src/cpu/sse_math.hpp",
-     "line": 1,
-     "sha256": "b0bed7f83c4b3ceec2070dee8a64de8045f2cc3bde412483690b8d4e6a7ef213"
-    }
+    {"path": "reference/packets/sse-readability/STANDARDS-REVIEW.md", "sha256": "5d69aec1fe34a0fc3aaa446ab9820d8ed486a22d6cb1491420e5b5f9d46a09b3"},
+    {"path": "reference/packets/sse-readability/SPEC-REVIEW.md", "sha256": "7a9428a8318a00753bbf62ca5ef5afcac6041f299aca89633fec381e3d4ebe7f"},
+    {"path": "reference/packets/sse-readability/RESERVED-RESULT.json", "sha256": "76b3b715cdf9b5d99eed74f52caf33faf22b7ac07e12fe4828db15cce8b0e279"}
    ],
-   "findings": []
+   "findings": [],
+   "reviewed_source_sha256": "b0bed7f83c4b3ceec2070dee8a64de8045f2cc3bde412483690b8d4e6a7ef213",
+   "read_lines": 51,
+   "complete_member_list": [
+    "src/cpu/sse_math.hpp",
+    "src/cpu/sse_math.cpp"
+   ]
   },
   "src/cpu/sse_math.cpp": {
-   "disposition": "needs_migration",
-   "reason": "Compressed multi-statement arithmetic/status flow obscures an otherwise justified narrow scalar library.",
-   "semantic_justification": "All 180 lines read, including every helper and public method. Scalar arithmetic rounds via integer SoftFloat 8086-SSE entry points, using caller-selected MXCSR. DAZ replaces denormal operands with signed zero before work. NaN priority comes from the SSE specialization, not the x87 propagation owner. ordered() equates both zero signs and reverses negative ordering. COMISS and low-lane signaling less_than flag any NaN; UCOMISD flags signaling NaNs only; MINSS flags NaNs and returns its second operand unchanged, including equal signed zeros and signaling payload. CVTT truncates independently of RC, returns the specialization integer indefinite for invalid inputs, and adds no denormal-operand flag. Binary work gives invalid/divide-by-zero precedence over denormals and traps unmasked denormals before committing later underflow/precision. finish32 and the analogous subtract_double tail implement underflow masking/FTZ signed-zero/status and overflow precision suppression. sqrt_single/sqrt produce non-tiny roots for valid nonzero inputs and do not need a result FTZ pass. commit ORs sticky status first, tests only this operation flags against masks, and throws before destination return; prior unmasked sticky flags alone do not retrap. This is a scalar model: packed instruction lane atomicity is a caller question. No game state, PE read, address dispatch or fixture-availability state is present.",
+   "disposition": "already_conforming",
+   "reason": "Both complete files independently reviewed after the whole implementation rewrite; header/API/layout retained and exact maintained-model numeric sequencing preserved.",
+   "semantic_justification": "Named raw-word classification and structured operation/commit/return steps retain exception priority, caller rounding, signed DAZ/FTZ, NaN payload order, thread rejection, TLS restoration and retained destinations. Numeric masks/IEEE encodings remain legitimate data; no host arithmetic or invented defaults replace the model.",
    "resolved_owners": [
-    {
-     "resolution": "Sse32/Sse64 own binary words by value; they are scalar representations, not guest addresses or register files. Each noncopyable SseContext owns mxcsr_ and its construction thread id. Every public access/operation checks thread identity directly or through binary(); no transferable ambient SSE owner exists. Caller must keep the borrowed context alive on that thread. Operation snapshots shared SoftFloat TLS rounding, tininess and flags, installs selected RC/after-rounding/zero flags, then restores all three at normal return and SseError unwinding. It neither reads nor writes extF80_roundingPrecision, so no restoration of that untouched TLS is required. X87Context::Operation separately saves/restores all four TLS values. Shared softfloat_state.c is the sole SoftFloat TLS definition; softfloat_sse adds no state object. Distinct Display, NativeGame, probe and invocation contexts are separate execution worlds, not duplicate source-global ownership. Thread checking is a misuse guard, not synchronization for simultaneous races.",
-     "evidence": [
-      {
-       "path": "src/cpu/sse_math.hpp",
-       "line": 1,
-       "sha256": "b0bed7f83c4b3ceec2070dee8a64de8045f2cc3bde412483690b8d4e6a7ef213"
-      },
-      {
-       "path": "src/cpu/sse_math.cpp",
-       "line": 1,
-       "sha256": "b7ddd9dc425ac2e1ebd49929de1dcdf4bd7671466bf041544a6ba57157ca12b7"
-      },
-      {
-       "path": "src/cpu/x87_math.cpp",
-       "line": 1,
-       "sha256": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8"
-      },
-      {
-       "path": "third_party/softfloat/platform.h",
-       "line": 1,
-       "sha256": "7fcc04683b267d44e15fcf7826c7f2478897bdd29e20f444369ccaad02a0e462"
-      },
-      {
-       "path": "third_party/softfloat/source/softfloat_state.c",
-       "line": 1,
-       "sha256": "5f7a70c4c5823cdde0518db77a74a6549dba62b21d910f6dadb9115b1d478301"
-      },
-      {
-       "path": "third_party/softfloat_sse/README.md",
-       "line": 1,
-       "sha256": "1b0b1a4ac6661e791f340b1a6c0be3c3a3040d505a3b785e2a1c14256bb30301"
-      },
-      {
-       "path": "third_party/softfloat_sse/build.sh",
-       "line": 1,
-       "sha256": "6558b170e6269ee569a4658a66ae319cb581ae6c4cfb559eaaa4328eb3a234d7"
-      },
-      {
-       "path": "third_party/softfloat_sse/sources.txt",
-       "line": 1,
-       "sha256": "4b64bde29d70aa2521ee86acc8c190ac92eb14b11f5ce55feaadfc0afce5549f"
-      },
-      {
-       "path": "third_party/softfloat_sse/upstream.json",
-       "line": 1,
-       "sha256": "8a9d83d1d7b06915e678b8c7e8cfe95665d21aad58a07f894fc0d0b31aa46f3e"
-      },
-      {
-       "path": "Makefile",
-       "line": 1,
-       "sha256": "e4be497c24cedd750e8a9a7d5b3438e7c582a6509969379689276d7b6f3ef905"
-      }
-     ]
-    }
+    "One thread-bound SseContext owns caller control/sticky status. Scoped SoftFloat state borrows and restores shared TLS; host fenv and ext80 precision remain independent."
    ],
    "resolved_consumers": [
-    {
-     "resolution": "Production Display owns sse_{8064}; Application creates native::Input borrowing display.sse(), with display lifetime covering Input. Native Input::Impl uses the borrowed context in input_mod_on_input -> pad trigger/axes/keyboard conversion. InputState::sample_tick is a separate diagnostic native snapshot policy and also borrows a context. Display/render projection calls flow through ninja_projected_depth and D3DX; native view uses shared D3DX primitives. D3DX implements lane loops and explicit approximate-reciprocal policy (scratch SseContext), so scalar API approval does not approve packed exception/store atomicity or hardware RCP/RSQRT accuracy. Reference NativeGame owns its own persistent context shared across input and projection; override_table and HLE bridge create invocation-local contexts from guest MXCSR. The inspected D3DX overrides publish values but do not write local SSE sticky flags back to guest MXCSR. That adapter status gap is outside these four files and is not fixed or qualified here. crt_floor uses subtract_double/less_than only in its explicit SSE fast path and remains maintained outside the native source list.",
-     "evidence": [
-      {
-       "path": "src/runtime/native_display.hpp",
-       "line": 1,
-       "sha256": "89cfa670a597de4388cabbfd41412008006031c096b2b63e7772e86ea9122954"
-      },
-      {
-       "path": "src/runtime/native_input.cpp",
-       "line": 1,
-       "sha256": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114"
-      },
-      {
-       "path": "src/apps/sadx_native.mm",
-       "line": 1,
-       "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
-      },
-      {
-       "path": "src/input/input.cpp",
-       "line": 1,
-       "sha256": "908777b22b43861ff0c767937a478d7981f0ac31091f63d00d55da36dc8163bf"
-      },
-      {
-       "path": "src/input/input_mod_axes.cpp",
-       "line": 1,
-       "sha256": "1d9aee1c76bb2c09b937bca9b5525d9fbaba9c7af95521364076c8dac1dd3df4"
-      },
-      {
-       "path": "src/input/input_mod_pad.cpp",
-       "line": 1,
-       "sha256": "236237ddd8fc2d46eb941012ff6bf495524e6026bb764cfbe01135499f7c0525"
-      },
-      {
-       "path": "src/math/d3dx_math.cpp",
-       "line": 1,
-       "sha256": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171"
-      },
-      {
-       "path": "src/engine/ninja_projected_depth.cpp",
-       "line": 1,
-       "sha256": "12378c9eaf694af14e338affa098653cac077bfeb08fe53930b993f24a43e646"
-      },
-      {
-       "path": "src/engine/ninja_view.cpp",
-       "line": 1,
-       "sha256": "aad37d5b8a2ff72bc2f8f3ab43459aef6d119f64a4304eb9880d4c8993d2c232"
-      },
-      {
-       "path": "src/engine/ninja_view_native.cpp",
-       "line": 1,
-       "sha256": "f84e70db6daf2a58dc8c098c095ddeede0371a18de8db93d83ed4c02843f6985"
-      },
-      {
-       "path": "src/guest/native_game_reference.hpp",
-       "line": 1,
-       "sha256": "f9709b794475f8f85db465f923d52de12297afc8eb8f9697cb8c198bd79266e0"
-      },
-      {
-       "path": "src/guest/native_game_reference.cpp",
-       "line": 1,
-       "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
-      },
-      {
-       "path": "src/guest/override_table.cpp",
-       "line": 1,
-       "sha256": "8f55db3d274697694ef5bb745c3d501492dd323633f627c1de3f47d2d975ed90"
-      },
-      {
-       "path": "src/hle/hle_device_bridge.cpp",
-       "line": 1,
-       "sha256": "6169c3f9b5ddcfc62832a5eccfb1743eada2b535bdca5783369ffd274465d11b"
-      },
-      {
-       "path": "src/cpu/crt_floor.cpp",
-       "line": 1,
-       "sha256": "242dd91ce0dfd0927b0d5d279d7cc56f8548afd2c95d65b2510d226e6e596010"
-      },
-      {
-       "path": "native-sources.txt",
-       "line": 1,
-       "sha256": "13e462b1ddc2df160580f9c6caf8544f444d87ca907b2a89f32ceada33f24eec"
-      }
-     ]
-    }
+    "Input axes/pad/sample delivery, D3DX, Ninja projected depth/native view, native input and reference/HLE callers retain the same API and observable arithmetic."
    ],
    "accepted_judges": [
-    {
-     "accepted_scope": "Registered sse-math unit checks rounding, NaN priority, MINSS second operand/zero sign, DAZ, FTZ/exact tiny/unmasked precedence, sticky flags, conversion, scalar double operations, reserved bits, cross-thread failure and SSE/x87 isolation. Historical task-foundation gate at 353d528 records this program and pins all four reviewed source files exactly.",
-     "limits": "Assertions are implemented coverage, not execution by this reviewer. No direct TLS snapshot restoration-on-SseError assertion found; cross-thread test is serialized by thread join. Historical gate is not a fresh SSE oracle.",
-     "evidence": [
-      {
-       "path": "tests/unit/sse_math.cpp",
-       "line": 1,
-       "sha256": "3b87af92bb14424e462a8bc5cf2e318d0a3d29661b5fd61cf13e897ef93d75b2"
-      },
-      {
-       "path": "tests/unit/manifest.tsv",
-       "line": 1,
-       "sha256": "36ef201da224e3a7c791109155dc947c9704515e0e8b809f066da95c664c2754"
-      },
-      {
-       "path": "reference/production-integration-20261101/task-foundation-gate.json",
-       "line": 1,
-       "sha256": "c9332f7f1578d9ec3c44913bb34ad21b6e1892e430f17fdde5cb4c5d37766a74"
-      }
-     ]
-    },
-    {
-     "accepted_scope": "Historical nine-opcode Unicorn comparison: 312112 evaluations; 5076 value mismatches, 232720 MXCSR differences, passed=false, zero unclassified value differences under retained script classes. Report classes attribute differences to NaN priority, ignored FTZ and MINSS DAZ behavior; these are historical emulator/SDM interpretations, not new Intel confirmation.",
-     "limits": "Remains FAIL. Masked scalar opcodes only; no integer-to-single, SQRTSS, SUBSD, comparisons or unmasked-destination coverage in this oracle. Script/probe/report provide no C++/transitive source pins. Probe binary hash alone does not qualify current source. No dedicated scoped SSE mutant/holdout receipt located.",
-     "evidence": [
-      {
-       "path": "tests/probes/native_sse_math_probe.cpp",
-       "line": 1,
-       "sha256": "5a56a5fae0ae44e4e88364439f89957b36062e12a1a311f756a074318ce5fc3a"
-      },
-      {
-       "path": "tools/oracles/verify_original_sse_math.py",
-       "line": 1,
-       "sha256": "66354fe6cb8a69a63b4ac861a7b3ad269a5483348d749ede8cc4b63619d8cf90"
-      },
-      {
-       "path": "reference/oracle-reports/sse_math.json",
-       "line": 1,
-       "sha256": "d3d3b9ab2567c08532b0a0c9536b3e27e45f97791da038132a5fd54cbd5f9aaf"
-      },
-      {
-       "path": "reference/sse-math-comparison.json",
-       "line": 1,
-       "sha256": "cc42e2d733f58c4f1750306effdbfcf3cca509edf0fc550bc6d215873196de54"
-      }
-     ]
-    },
-    {
-     "accepted_scope": "Historical input axes report: 109056 value comparisons, zero value mismatches, 93104 MXCSR differences. player_input_producer report: 121200 records, zero value mismatches and 108240 exception mismatches. Existing input-policy review explains pad publication and stale native-input/pad report pins.",
-     "limits": "These remain FP PARTIALS. Producer seeds prepared pad/keyboard states and explicitly does not qualify upstream SSE producer. Axes report lacks source pins; no physical raw-controller/hardware claim. These do not fill all scalar API coverage gaps.",
-     "evidence": [
-      {
-       "path": "reference/oracle-reports/input_mod_axes.json",
-       "line": 1,
-       "sha256": "28f962437406442410b9f54189ec93e90c72a575ee8615116206e718eac81e7f"
-      },
-      {
-       "path": "reference/oracle-reports/player_input_producer.json",
-       "line": 1,
-       "sha256": "6020624e3ced3afea4333ccd4ce9d808b40313c6c821a854e86a6f06c88959e5"
-      },
-      {
-       "path": "docs/refactor-inventory/reviews/input-policy.json",
-       "line": 1,
-       "sha256": "98584291a07a8905d116e82e63d17826bae8cf3f54c8a973067d0e22217812d2"
-      },
-      {
-       "path": "docs/refactor-inventory/reviews/input-policy.md",
-       "line": 1,
-       "sha256": "8bb535d51691417d6778a9ded2560bad529972bc690a8c9b2181576efa6d6cfc"
-      }
-     ]
-    }
+    "Five full default streams preserve every byte and inherited failure/partial identity. Fresh scalar312112/native1244160 cohorts preserve complete immutable old/current outputs;18valid semantic faults caught."
    ],
    "classification_limits": [
-    "Static complete-body semantic inventory at bda836f, not a diff review or fresh runtime verdict. No build, test, oracle, mutant, holdout, provider, network, host or storage action executed.",
-    "Exactly four source files, 220 lines and two complete exact-stem modules are dispositioned. Dependency inspection does not close other CPU, CRT, Input, math, engine, player, native/reference composition or campaign modules.",
-    "Historical receipts retain their original results. Current hashes establish byte identity only where the receipt actually records them; they do not create missing historical transitive build fingerprints or turn counts into source approval.",
-    "No physical Intel/MXCSR, Windows runtime control/policy, full x87 stack/tag/deferred delivery, stage 63 FPS or physical input capture was inspected. Emulator and native software contracts have narrower purposes.",
-    "Raw executable/DLL assets, historical probe dylibs and ignored complete runtime streams were not opened or rerun. Tracked reports/dossiers are available evidence; external paths and raw capture identities inside them are historical references, not verified local artifacts."
+    "Code conformance is bounded to this maintained numeric model. Original development5076value/232720status disagreements and allconsumer FPpartials remain failures/partials.",
+    "Fresh scalar5098value/232280status disagreements remain classified inherited-model limits, not Intel/Windows proof.",
+    "Current Main product/consumer/journey/gate qualification remains pending."
    ],
-   "destination": "Retain narrow src/cpu numeric implementation; see CPU-SSE-1.",
-   "reviewed_source_sha256": "b7ddd9dc425ac2e1ebd49929de1dcdf4bd7671466bf041544a6ba57157ca12b7",
-   "read_lines": [
-    1,
-    129
-   ],
-   "complete_member_list": [
-    "nan32",
-    "nan64",
-    "snan64",
-    "den32",
-    "den64",
-    "daz32",
-    "daz64",
-    "Operation fields/constructor/destructor/exceptions",
-    "ordered",
-    "finish32",
-    "SseContext constructor/check_thread/mxcsr/set_mxcsr/clear_exceptions/commit",
-    "from_int32/binary/add/subtract/multiply/divide",
-    "to_double/to_single/sqrt/sqrt_single/subtract_double",
-    "less_than/truncate_int32/comiss/ucomisd/minimum"
+   "destination": [
+    "src/cpu/sse_math.hpp",
+    "src/cpu/sse_math.cpp"
    ],
    "evidence": [
-    {
-     "path": "src/cpu/sse_math.cpp",
-     "line": 1,
-     "sha256": "b7ddd9dc425ac2e1ebd49929de1dcdf4bd7671466bf041544a6ba57157ca12b7"
-    }
+    {"path": "reference/packets/sse-readability/STANDARDS-REVIEW.md", "sha256": "5d69aec1fe34a0fc3aaa446ab9820d8ed486a22d6cb1491420e5b5f9d46a09b3"},
+    {"path": "reference/packets/sse-readability/SPEC-REVIEW.md", "sha256": "7a9428a8318a00753bbf62ca5ef5afcac6041f299aca89633fec381e3d4ebe7f"},
+    {"path": "reference/packets/sse-readability/RESERVED-RESULT.json", "sha256": "76b3b715cdf9b5d99eed74f52caf33faf22b7ac07e12fe4828db15cce8b0e279"}
    ],
-   "findings": [
-    "CPU-SSE-1"
+   "findings": [],
+   "reviewed_source_sha256": "70e342f254628faa44a8aaf151eaa75a6ca7148aaeea178c590ed0dc3cf5911b",
+   "read_lines": 411,
+   "complete_member_list": [
+    "src/cpu/sse_math.hpp",
+    "src/cpu/sse_math.cpp"
    ]
   },
   "src/cpu/crt_sqrt.hpp": {
@@ -34716,256 +34269,38 @@
    "destination": "Retain src/input/input_mod_constants unchanged; review of dependency input_mod_pad does not turn this literal factory into pad-system closure."
   },
   "src/cpu/sse_math": {
-   "disposition": "needs_migration",
-   "reason": "Complete module remains migration work for the specific observed body/contract debt; narrow numeric representation is accepted in principle, not blanket CPU closure.",
-   "semantic_justification": "All 180 lines read, including every helper and public method. Scalar arithmetic rounds via integer SoftFloat 8086-SSE entry points, using caller-selected MXCSR. DAZ replaces denormal operands with signed zero before work. NaN priority comes from the SSE specialization, not the x87 propagation owner. ordered() equates both zero signs and reverses negative ordering. COMISS and low-lane signaling less_than flag any NaN; UCOMISD flags signaling NaNs only; MINSS flags NaNs and returns its second operand unchanged, including equal signed zeros and signaling payload. CVTT truncates independently of RC, returns the specialization integer indefinite for invalid inputs, and adds no denormal-operand flag. Binary work gives invalid/divide-by-zero precedence over denormals and traps unmasked denormals before committing later underflow/precision. finish32 and the analogous subtract_double tail implement underflow masking/FTZ signed-zero/status and overflow precision suppression. sqrt_single/sqrt produce non-tiny roots for valid nonzero inputs and do not need a result FTZ pass. commit ORs sticky status first, tests only this operation flags against masks, and throws before destination return; prior unmasked sticky flags alone do not retrap. This is a scalar model: packed instruction lane atomicity is a caller question. No game state, PE read, address dispatch or fixture-availability state is present.",
+   "disposition": "already_conforming",
+   "reason": "Both complete files independently reviewed after the whole implementation rewrite; header/API/layout retained and exact maintained-model numeric sequencing preserved.",
+   "semantic_justification": "Named raw-word classification and structured operation/commit/return steps retain exception priority, caller rounding, signed DAZ/FTZ, NaN payload order, thread rejection, TLS restoration and retained destinations. Numeric masks/IEEE encodings remain legitimate data; no host arithmetic or invented defaults replace the model.",
    "resolved_owners": [
-    {
-     "resolution": "Sse32/Sse64 own binary words by value; they are scalar representations, not guest addresses or register files. Each noncopyable SseContext owns mxcsr_ and its construction thread id. Every public access/operation checks thread identity directly or through binary(); no transferable ambient SSE owner exists. Caller must keep the borrowed context alive on that thread. Operation snapshots shared SoftFloat TLS rounding, tininess and flags, installs selected RC/after-rounding/zero flags, then restores all three at normal return and SseError unwinding. It neither reads nor writes extF80_roundingPrecision, so no restoration of that untouched TLS is required. X87Context::Operation separately saves/restores all four TLS values. Shared softfloat_state.c is the sole SoftFloat TLS definition; softfloat_sse adds no state object. Distinct Display, NativeGame, probe and invocation contexts are separate execution worlds, not duplicate source-global ownership. Thread checking is a misuse guard, not synchronization for simultaneous races.",
-     "evidence": [
-      {
-       "path": "src/cpu/sse_math.hpp",
-       "line": 1,
-       "sha256": "b0bed7f83c4b3ceec2070dee8a64de8045f2cc3bde412483690b8d4e6a7ef213"
-      },
-      {
-       "path": "src/cpu/sse_math.cpp",
-       "line": 1,
-       "sha256": "b7ddd9dc425ac2e1ebd49929de1dcdf4bd7671466bf041544a6ba57157ca12b7"
-      },
-      {
-       "path": "src/cpu/x87_math.cpp",
-       "line": 1,
-       "sha256": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8"
-      },
-      {
-       "path": "third_party/softfloat/platform.h",
-       "line": 1,
-       "sha256": "7fcc04683b267d44e15fcf7826c7f2478897bdd29e20f444369ccaad02a0e462"
-      },
-      {
-       "path": "third_party/softfloat/source/softfloat_state.c",
-       "line": 1,
-       "sha256": "5f7a70c4c5823cdde0518db77a74a6549dba62b21d910f6dadb9115b1d478301"
-      },
-      {
-       "path": "third_party/softfloat_sse/README.md",
-       "line": 1,
-       "sha256": "1b0b1a4ac6661e791f340b1a6c0be3c3a3040d505a3b785e2a1c14256bb30301"
-      },
-      {
-       "path": "third_party/softfloat_sse/build.sh",
-       "line": 1,
-       "sha256": "6558b170e6269ee569a4658a66ae319cb581ae6c4cfb559eaaa4328eb3a234d7"
-      },
-      {
-       "path": "third_party/softfloat_sse/sources.txt",
-       "line": 1,
-       "sha256": "4b64bde29d70aa2521ee86acc8c190ac92eb14b11f5ce55feaadfc0afce5549f"
-      },
-      {
-       "path": "third_party/softfloat_sse/upstream.json",
-       "line": 1,
-       "sha256": "8a9d83d1d7b06915e678b8c7e8cfe95665d21aad58a07f894fc0d0b31aa46f3e"
-      },
-      {
-       "path": "Makefile",
-       "line": 1,
-       "sha256": "e4be497c24cedd750e8a9a7d5b3438e7c582a6509969379689276d7b6f3ef905"
-      }
-     ]
-    }
+    "One thread-bound SseContext owns caller control/sticky status. Scoped SoftFloat state borrows and restores shared TLS; host fenv and ext80 precision remain independent."
    ],
    "resolved_consumers": [
-    {
-     "resolution": "Production Display owns sse_{8064}; Application creates native::Input borrowing display.sse(), with display lifetime covering Input. Native Input::Impl uses the borrowed context in input_mod_on_input -> pad trigger/axes/keyboard conversion. InputState::sample_tick is a separate diagnostic native snapshot policy and also borrows a context. Display/render projection calls flow through ninja_projected_depth and D3DX; native view uses shared D3DX primitives. D3DX implements lane loops and explicit approximate-reciprocal policy (scratch SseContext), so scalar API approval does not approve packed exception/store atomicity or hardware RCP/RSQRT accuracy. Reference NativeGame owns its own persistent context shared across input and projection; override_table and HLE bridge create invocation-local contexts from guest MXCSR. The inspected D3DX overrides publish values but do not write local SSE sticky flags back to guest MXCSR. That adapter status gap is outside these four files and is not fixed or qualified here. crt_floor uses subtract_double/less_than only in its explicit SSE fast path and remains maintained outside the native source list.",
-     "evidence": [
-      {
-       "path": "src/runtime/native_display.hpp",
-       "line": 1,
-       "sha256": "89cfa670a597de4388cabbfd41412008006031c096b2b63e7772e86ea9122954"
-      },
-      {
-       "path": "src/runtime/native_input.cpp",
-       "line": 1,
-       "sha256": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114"
-      },
-      {
-       "path": "src/apps/sadx_native.mm",
-       "line": 1,
-       "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
-      },
-      {
-       "path": "src/input/input.cpp",
-       "line": 1,
-       "sha256": "908777b22b43861ff0c767937a478d7981f0ac31091f63d00d55da36dc8163bf"
-      },
-      {
-       "path": "src/input/input_mod_axes.cpp",
-       "line": 1,
-       "sha256": "1d9aee1c76bb2c09b937bca9b5525d9fbaba9c7af95521364076c8dac1dd3df4"
-      },
-      {
-       "path": "src/input/input_mod_pad.cpp",
-       "line": 1,
-       "sha256": "236237ddd8fc2d46eb941012ff6bf495524e6026bb764cfbe01135499f7c0525"
-      },
-      {
-       "path": "src/math/d3dx_math.cpp",
-       "line": 1,
-       "sha256": "196a02b3bd61cfe5542fe713e8084b60af6fa6870fcbe8983dd88d332b45c171"
-      },
-      {
-       "path": "src/engine/ninja_projected_depth.cpp",
-       "line": 1,
-       "sha256": "12378c9eaf694af14e338affa098653cac077bfeb08fe53930b993f24a43e646"
-      },
-      {
-       "path": "src/engine/ninja_view.cpp",
-       "line": 1,
-       "sha256": "aad37d5b8a2ff72bc2f8f3ab43459aef6d119f64a4304eb9880d4c8993d2c232"
-      },
-      {
-       "path": "src/engine/ninja_view_native.cpp",
-       "line": 1,
-       "sha256": "f84e70db6daf2a58dc8c098c095ddeede0371a18de8db93d83ed4c02843f6985"
-      },
-      {
-       "path": "src/guest/native_game_reference.hpp",
-       "line": 1,
-       "sha256": "f9709b794475f8f85db465f923d52de12297afc8eb8f9697cb8c198bd79266e0"
-      },
-      {
-       "path": "src/guest/native_game_reference.cpp",
-       "line": 1,
-       "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
-      },
-      {
-       "path": "src/guest/override_table.cpp",
-       "line": 1,
-       "sha256": "8f55db3d274697694ef5bb745c3d501492dd323633f627c1de3f47d2d975ed90"
-      },
-      {
-       "path": "src/hle/hle_device_bridge.cpp",
-       "line": 1,
-       "sha256": "6169c3f9b5ddcfc62832a5eccfb1743eada2b535bdca5783369ffd274465d11b"
-      },
-      {
-       "path": "src/cpu/crt_floor.cpp",
-       "line": 1,
-       "sha256": "242dd91ce0dfd0927b0d5d279d7cc56f8548afd2c95d65b2510d226e6e596010"
-      },
-      {
-       "path": "native-sources.txt",
-       "line": 1,
-       "sha256": "13e462b1ddc2df160580f9c6caf8544f444d87ca907b2a89f32ceada33f24eec"
-      }
-     ]
-    }
+    "Input axes/pad/sample delivery, D3DX, Ninja projected depth/native view, native input and reference/HLE callers retain the same API and observable arithmetic."
    ],
    "accepted_judges": [
-    {
-     "accepted_scope": "Registered sse-math unit checks rounding, NaN priority, MINSS second operand/zero sign, DAZ, FTZ/exact tiny/unmasked precedence, sticky flags, conversion, scalar double operations, reserved bits, cross-thread failure and SSE/x87 isolation. Historical task-foundation gate at 353d528 records this program and pins all four reviewed source files exactly.",
-     "limits": "Assertions are implemented coverage, not execution by this reviewer. No direct TLS snapshot restoration-on-SseError assertion found; cross-thread test is serialized by thread join. Historical gate is not a fresh SSE oracle.",
-     "evidence": [
-      {
-       "path": "tests/unit/sse_math.cpp",
-       "line": 1,
-       "sha256": "3b87af92bb14424e462a8bc5cf2e318d0a3d29661b5fd61cf13e897ef93d75b2"
-      },
-      {
-       "path": "tests/unit/manifest.tsv",
-       "line": 1,
-       "sha256": "36ef201da224e3a7c791109155dc947c9704515e0e8b809f066da95c664c2754"
-      },
-      {
-       "path": "reference/production-integration-20261101/task-foundation-gate.json",
-       "line": 1,
-       "sha256": "c9332f7f1578d9ec3c44913bb34ad21b6e1892e430f17fdde5cb4c5d37766a74"
-      }
-     ]
-    },
-    {
-     "accepted_scope": "Historical nine-opcode Unicorn comparison: 312112 evaluations; 5076 value mismatches, 232720 MXCSR differences, passed=false, zero unclassified value differences under retained script classes. Report classes attribute differences to NaN priority, ignored FTZ and MINSS DAZ behavior; these are historical emulator/SDM interpretations, not new Intel confirmation.",
-     "limits": "Remains FAIL. Masked scalar opcodes only; no integer-to-single, SQRTSS, SUBSD, comparisons or unmasked-destination coverage in this oracle. Script/probe/report provide no C++/transitive source pins. Probe binary hash alone does not qualify current source. No dedicated scoped SSE mutant/holdout receipt located.",
-     "evidence": [
-      {
-       "path": "tests/probes/native_sse_math_probe.cpp",
-       "line": 1,
-       "sha256": "5a56a5fae0ae44e4e88364439f89957b36062e12a1a311f756a074318ce5fc3a"
-      },
-      {
-       "path": "tools/oracles/verify_original_sse_math.py",
-       "line": 1,
-       "sha256": "66354fe6cb8a69a63b4ac861a7b3ad269a5483348d749ede8cc4b63619d8cf90"
-      },
-      {
-       "path": "reference/oracle-reports/sse_math.json",
-       "line": 1,
-       "sha256": "d3d3b9ab2567c08532b0a0c9536b3e27e45f97791da038132a5fd54cbd5f9aaf"
-      },
-      {
-       "path": "reference/sse-math-comparison.json",
-       "line": 1,
-       "sha256": "cc42e2d733f58c4f1750306effdbfcf3cca509edf0fc550bc6d215873196de54"
-      }
-     ]
-    },
-    {
-     "accepted_scope": "Historical input axes report: 109056 value comparisons, zero value mismatches, 93104 MXCSR differences. player_input_producer report: 121200 records, zero value mismatches and 108240 exception mismatches. Existing input-policy review explains pad publication and stale native-input/pad report pins.",
-     "limits": "These remain FP PARTIALS. Producer seeds prepared pad/keyboard states and explicitly does not qualify upstream SSE producer. Axes report lacks source pins; no physical raw-controller/hardware claim. These do not fill all scalar API coverage gaps.",
-     "evidence": [
-      {
-       "path": "reference/oracle-reports/input_mod_axes.json",
-       "line": 1,
-       "sha256": "28f962437406442410b9f54189ec93e90c72a575ee8615116206e718eac81e7f"
-      },
-      {
-       "path": "reference/oracle-reports/player_input_producer.json",
-       "line": 1,
-       "sha256": "6020624e3ced3afea4333ccd4ce9d808b40313c6c821a854e86a6f06c88959e5"
-      },
-      {
-       "path": "docs/refactor-inventory/reviews/input-policy.json",
-       "line": 1,
-       "sha256": "98584291a07a8905d116e82e63d17826bae8cf3f54c8a973067d0e22217812d2"
-      },
-      {
-       "path": "docs/refactor-inventory/reviews/input-policy.md",
-       "line": 1,
-       "sha256": "8bb535d51691417d6778a9ded2560bad529972bc690a8c9b2181576efa6d6cfc"
-      }
-     ]
-    }
+    "Five full default streams preserve every byte and inherited failure/partial identity. Fresh scalar312112/native1244160 cohorts preserve complete immutable old/current outputs;18valid semantic faults caught."
    ],
    "classification_limits": [
-    "Static complete-body semantic inventory at bda836f, not a diff review or fresh runtime verdict. No build, test, oracle, mutant, holdout, provider, network, host or storage action executed.",
-    "Exactly four source files, 220 lines and two complete exact-stem modules are dispositioned. Dependency inspection does not close other CPU, CRT, Input, math, engine, player, native/reference composition or campaign modules.",
-    "Historical receipts retain their original results. Current hashes establish byte identity only where the receipt actually records them; they do not create missing historical transitive build fingerprints or turn counts into source approval.",
-    "No physical Intel/MXCSR, Windows runtime control/policy, full x87 stack/tag/deferred delivery, stage 63 FPS or physical input capture was inspected. Emulator and native software contracts have narrower purposes.",
-    "Raw executable/DLL assets, historical probe dylibs and ignored complete runtime streams were not opened or rerun. Tracked reports/dossiers are available evidence; external paths and raw capture identities inside them are historical references, not verified local artifacts."
+    "Code conformance is bounded to this maintained numeric model. Original development5076value/232720status disagreements and allconsumer FPpartials remain failures/partials.",
+    "Fresh scalar5098value/232280status disagreements remain classified inherited-model limits, not Intel/Windows proof.",
+    "Current Main product/consumer/journey/gate qualification remains pending."
    ],
-   "destination": "Retain narrow src/cpu numeric implementation; see CPU-SSE-1.",
+   "destination": [
+    "src/cpu/sse_math.hpp",
+    "src/cpu/sse_math.cpp"
+   ],
    "evidence": [
-    {
-     "path": "src/cpu/sse_math.hpp",
-     "line": 1,
-     "sha256": "b0bed7f83c4b3ceec2070dee8a64de8045f2cc3bde412483690b8d4e6a7ef213"
-    },
-    {
-     "path": "src/cpu/sse_math.cpp",
-     "line": 1,
-     "sha256": "b7ddd9dc425ac2e1ebd49929de1dcdf4bd7671466bf041544a6ba57157ca12b7"
-    }
+    {"path": "reference/packets/sse-readability/STANDARDS-REVIEW.md", "sha256": "5d69aec1fe34a0fc3aaa446ab9820d8ed486a22d6cb1491420e5b5f9d46a09b3"},
+    {"path": "reference/packets/sse-readability/SPEC-REVIEW.md", "sha256": "7a9428a8318a00753bbf62ca5ef5afcac6041f299aca89633fec381e3d4ebe7f"},
+    {"path": "reference/packets/sse-readability/RESERVED-RESULT.json", "sha256": "76b3b715cdf9b5d99eed74f52caf33faf22b7ac07e12fe4828db15cce8b0e279"}
    ],
-   "findings": [
-    "CPU-SSE-1"
-   ],
+   "findings": [],
    "reviewed_members": {
     "src/cpu/sse_math.hpp": "b0bed7f83c4b3ceec2070dee8a64de8045f2cc3bde412483690b8d4e6a7ef213",
-    "src/cpu/sse_math.cpp": "b7ddd9dc425ac2e1ebd49929de1dcdf4bd7671466bf041544a6ba57157ca12b7"
+    "src/cpu/sse_math.cpp": "70e342f254628faa44a8aaf151eaa75a6ca7148aaeea178c590ed0dc3cf5911b"
    },
-   "complete_bounded_judgment": "All declarations and definitions in both exact members reviewed. No bodies omitted. Needs migration does not assert a newly measured arithmetic failure; accepted historical judges and explicit qualification gaps remain separate."
+   "complete_bounded_judgment": true
   },
   "src/cpu/crt_sqrt": {
    "disposition": "needs_migration",
