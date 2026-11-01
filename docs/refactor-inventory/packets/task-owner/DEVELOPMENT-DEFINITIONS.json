@@ -42,5 +42,19 @@
   },
   "purpose": "Observer development against immutable before-source libraries only; not final candidate qualification. Actual scripts/source reflect the same unchanged Task before implementation. Delete rows reuse prior documented exclusions; all are labeled repeated. Synthetic Unicorn invalid read separately validates hook signature and no page-zero mapping.",
   "inputs_generated": false,
-  "reserved_inputs_generated": false
+  "reserved_inputs_generated": false,
+  "driver": {
+    "path": "build/task-observer-development.py",
+    "sha256": "f073f792538cda2f9514a7e076f1131bf8cb0b39cd6b15dd4bb380847256dca2"
+  },
+  "helper_sha256": {
+    "tools/oracles/task_judges/compare_streams.py": "4b935e04e6abcb1b4cdc675e3ffedcbe0175f6f450a3f5b03be09e1726d08bfe",
+    "tools/oracles/task_judges/bridge_faults.py": "871892551973e0a3883fb19d79d80d2eb0cd142aa6d7f9ed88ac254eb06d0337",
+    "tools/oracles/task_judges/mutate.py": "da598d7d20fd5a5e8d0de553b84aa13bb3ee5ea60eaa54c4ed75b48f229ed11e",
+    "tools/oracles/task_judges/freeze.py": "d8f60a37ad0970b6e19d3744fc1df891eff7a348f2edd299c3029e9c1b850d38",
+    "tools/oracles/task_judges/check_baseline.py": "14b66c673e4b6914d48ff2a96fd53e64fba4243eb44305f458889d39036e03be",
+    "tools/oracles/task_judges/reserved_inputs.py": "2e15c69e6c872035005af4bffd50fae0c9e3d8717dcf61dbf04e1d081d0a8492",
+    "tools/oracles/task_judges/reserved_observer.py": "935139aac5ddc7dd701c355d134643dce194ccd82128c41741c121d3dd4a4bb1"
+  },
+  "definition_note": "Snapshot BEFORE generation; later run/result receipts establish actual attempts. Driver retained as ignored raw reproduction evidence, not a reserved entry point."
 }
