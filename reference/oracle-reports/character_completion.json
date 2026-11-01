@@ -1,0 +1,91 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "flag_helper_proof": {
+  "cutscene_signed_byte_cases": 256,
+  "story_nonzero_cases": 256,
+  "samples": [
+   {
+    "entry": "0x42fb10",
+    "byte": 0,
+    "eax": 0
+   },
+   {
+    "entry": "0x412d20",
+    "byte": 0,
+    "eax": 0
+   },
+   {
+    "entry": "0x42fb10",
+    "byte": 1,
+    "eax": 1
+   },
+   {
+    "entry": "0x412d20",
+    "byte": 1,
+    "eax": 1
+   },
+   {
+    "entry": "0x42fb10",
+    "byte": 127,
+    "eax": 127
+   },
+   {
+    "entry": "0x412d20",
+    "byte": 127,
+    "eax": 1
+   },
+   {
+    "entry": "0x42fb10",
+    "byte": 128,
+    "eax": 4294967168
+   },
+   {
+    "entry": "0x412d20",
+    "byte": 128,
+    "eax": 1
+   },
+   {
+    "entry": "0x42fb10",
+    "byte": 255,
+    "eax": 4294967295
+   },
+   {
+    "entry": "0x412d20",
+    "byte": 255,
+    "eax": 1
+   }
+  ]
+ },
+ "source_ranges": {
+  "0x512ca0-0x512d2d": "cc2763a6098f296c6492430af4ca10c35a986421fb5689fa1b15c2448a25d277",
+  "0x42fb10-0x42fb1c": "855b00469ccfcfefc312cfd9b65c9b8d9cd527fc908adf70fdf3d0b7f042b4ef",
+  "0x412d20-0x412d32": "0289486442c83cea9b2bceca14c6674d85c905a86f185d1809cfb6741fc58002",
+  "0x7f0850-0x7f0bdc": "55c8bc1c71fbd745f6751ec2c4ef67a847674d4ae8341c919dcc62d7222bcdea",
+  "0x7f0bdc-0x7f0c14": "0ce1cce7654795a93e0211b97ef28e91c7144ad05733c8aac168409a4e999dbd"
+ },
+ "passed": true,
+ "values_match": true,
+ "cases": 2399,
+ "executed": 2399,
+ "mismatches": 0,
+ "first_mismatches": [],
+ "native_library_sha256": "760ee5cb87234a590da0bbb83aa04d19a8f9de678034eec66f8d2799b7706e6b",
+ "native_sources": {
+  "src/game/character_completion.hpp": "c6749736b454ac340aa7b6c3efdf8e484c94014243fea533b4090140faff71ad",
+  "src/game/character_completion.cpp": "d83e737fa7b2384e4dd135aa3399c4e8f4c6d12599a02ce11e4629f119489098",
+  "tests/probes/native_character_completion_probe.cpp": "550ec541735a1dcf965808ced1a35f13e5edc3c524d82e22b4b0b4a39444d5cd"
+ },
+ "limits": [
+  "Actual512ca0 entry and both real unhooked flag callees execute; no child is replaced with a receipt or false return. Source descriptors/rows stay actual in canonical cases and change independently in authored-data stress cases.",
+  "Seven source selection indices map directly to catalogs; no SDK-character remapping, variant or unlock assumption is introduced. Negative signed cutscene returns still satisfy the source nonzero test.",
+  "Signed nonpositive source counts map to an empty native authored row sequence in the probe adapter; the source returns0 before dereferencing rows in each case.",
+  "Unknown source row kinds skip without reading their flag; known flag indices outside the imported512-byte owners and character indices outside0..6 fail explicitly in native boundary units, not fabricated data.",
+  "Six independently poisoned future-caller stack words remain unchanged; no drawing/507410 argument context exists in this helper ABI. Actual caller/runtime binding and pixels remain separate."
+ ],
+ "tracked_summary": {
+  "full_sha256": "3bf3212b6f4b3d4932668dd53d795a177f699e0e54a75789b8276e015e3e7e4b",
+  "full_bytes": 3187,
+  "lists_cut_to": 10,
+  "cut_lists": {}
+ }
+}
