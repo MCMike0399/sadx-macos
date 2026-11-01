@@ -22,6 +22,7 @@ from types import ModuleType
 ROOT = Path(__file__).resolve().parents[3]
 PACKET = ROOT / 'docs/refactor-inventory/packets/task-owner'
 FREEZE = PACKET / 'RESERVED-FREEZE.json'
+PIN_DATA = ROOT / 'build/task-final-closure-pins.json'
 OUT = ROOT / 'build/task-final-reserved'
 BEFORE = 'bd22ee423ea015f00152a97fa8fc2e1b4034b411'
 CANDIDATE = 'f8ab5e408427bb799aa244e46274648862b0ec05'
@@ -142,6 +143,23 @@ def root_inputs(tools=None):
     return result
 
 
+def write_pin_manifest(inputs):
+    """Keep large raw pins intact; the committed freeze binds their exact bytes."""
+    write_new(PIN_DATA, inputs)
+    return dict(path=str(PIN_DATA.relative_to(ROOT)), entries=len(inputs), sha256=digest(PIN_DATA))
+
+
+def frozen_inputs(frozen):
+    manifest = frozen['input_manifest']
+    path = ROOT / manifest['path']
+    if path != PIN_DATA or path.is_symlink() or digest(path) != manifest['sha256']:
+        raise ValueError('Frozen raw pin manifest differs')
+    inputs = json.loads(path.read_text())
+    if not isinstance(inputs, dict) or len(inputs) != manifest['entries']:
+        raise ValueError('Frozen raw pin manifest cardinality differs')
+    return inputs
+
+
 def prepare():
     if OUT.exists():
         raise ValueError('Existing execution directory; preserve and inspect it')
@@ -159,8 +177,9 @@ def prepare():
     if protocol['immutable_before_source'] != BEFORE:
         raise ValueError('Wrong immutable before-source model')
     tools = toolchain()
+    manifest = write_pin_manifest(root_inputs(tools))
     write_new(FREEZE, dict(before=BEFORE, candidate=CANDIDATE,
-                          protocol=protocol, inputs=root_inputs(tools), toolchain=tools,
+                          protocol=protocol, input_manifest=manifest, toolchain=tools,
                           source_trees={world: git('rev-parse', commit + ':src').decode().strip()
                                         for world, commit in (('old', BEFORE), ('current', CANDIDATE))},
                           archive_paths=ARCHIVE_PATHS,
@@ -177,10 +196,11 @@ def verify_freeze():
     selected = toolchain()
     if frozen['toolchain'] != selected:
         raise ValueError('Selected toolchain differs from frozen selection')
-    for name, expected in frozen['inputs'].items():
+    inputs = frozen_inputs(frozen)
+    for name, expected in inputs.items():
         if digest(name) != expected:
             raise ValueError('Frozen dependency changed: ' + name)
-    if root_inputs(selected) != frozen['inputs']:
+    if root_inputs(selected) != inputs:
         raise ValueError('Dependency set/interpreter/toolchain changed')
     return frozen
 

@@ -1,0 +1,33 @@
+{
+  "status": "Read-only actual dependency hashing preflight; not prepare/freeze/admission.",
+  "entries": 42329,
+  "elapsed_seconds": 19.79,
+  "selected_toolchain": {
+    "compiler": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+    "linker": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld",
+    "lto": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib",
+    "sdk": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+    "resource": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21",
+    "cxx": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+    "include_search": [
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/SubFrameworks"
+    ]
+  },
+  "pin_map_sha256": "59d00cab55bea759a74d5be2706c8a2b356fd031e86e3fefb799f2cf59c9d607",
+  "all_unchanged_pins_reproduced": true,
+  "reserved_output_exists": false,
+  "freeze_exists": false,
+  "logically_complete_raw_map_bound_by_sha256_and_count": true,
+  "storage_change": "Full raw pin document remains local ignored proof, immutable committed freeze stores exact path/count/SHA256. No entry is dropped or classification relaxed.",
+  "tests": {
+    "tests": 68,
+    "exit_status": 0,
+    "log_sha256": "64d2749b7a91d387ccee4047322c9adbec3b5429cf8f2857a033f4b1230c2bcc"
+  },
+  "remaining": "Fresh bounded storage-format review; actual prepare/freeze/admission has NOT occurred."
+}

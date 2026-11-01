@@ -47,11 +47,13 @@ class TaskReservedRun(unittest.TestCase):
             freeze = root / 'freeze.json'
             with patch.object(RUN, 'ROOT', root), patch.object(RUN, 'PACKET', root/'packet'), \
                     patch.object(RUN.sys, 'prefix', str(prefix)), patch.object(RUN, 'FREEZE', freeze), \
+                    patch.object(RUN, 'PIN_DATA', root/'raw-pins.json'), \
                     patch.object(RUN, 'toolchain', return_value=tools):
                 inputs = RUN.root_inputs(tools)
                 self.assertEqual(inputs[str(spelling)], RUN.digest(spelling))
                 self.assertEqual(inputs[str(compiler.resolve())], RUN.digest(compiler))
-                frozen = dict(before=RUN.BEFORE, candidate=RUN.CANDIDATE, inputs=inputs, toolchain=tools)
+                frozen = dict(before=RUN.BEFORE, candidate=RUN.CANDIDATE,
+                              input_manifest=RUN.write_pin_manifest(inputs), toolchain=tools)
                 freeze.write_text(json.dumps(frozen))
                 with patch.object(RUN, 'git', side_effect=lambda *args: freeze.read_bytes()):
                     self.assertEqual(RUN.verify_freeze(), frozen)
@@ -318,6 +320,7 @@ class TaskReservedRun(unittest.TestCase):
             with patch.object(RUN, 'ROOT', root), patch.object(RUN, 'FREEZE', freeze), \
                     patch.object(RUN, 'git', return_value=freeze.read_bytes()), \
                     patch.object(RUN, 'toolchain', return_value={}), \
+                    patch.object(RUN, 'frozen_inputs', return_value=frozen['inputs']), \
                     patch.object(RUN, 'root_inputs') as inspect:
                 with self.assertRaisesRegex(ValueError, 'dependency changed'):
                     RUN.verify_freeze()
@@ -331,9 +334,31 @@ class TaskReservedRun(unittest.TestCase):
             with patch.object(RUN, 'ROOT', root), patch.object(RUN, 'FREEZE', freeze), \
                     patch.object(RUN, 'git', return_value=freeze.read_bytes()), \
                     patch.object(RUN, 'toolchain', return_value={}), \
+                    patch.object(RUN, 'frozen_inputs', return_value={}), \
                     patch.object(RUN, 'root_inputs', return_value={'new': 'digest'}):
                 with self.assertRaisesRegex(ValueError, 'set/interpreter/toolchain'):
                     RUN.verify_freeze()
+
+    def test_raw_pin_map_hash_count_and_exclusive_creation(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            data = root/'raw-pins.json'
+            with patch.object(RUN, 'ROOT', root), patch.object(RUN, 'PIN_DATA', data):
+                manifest = RUN.write_pin_manifest({'source': 'hash'})
+                frozen = {'input_manifest': manifest}
+                self.assertEqual(RUN.frozen_inputs(frozen), {'source': 'hash'})
+                with self.assertRaises(FileExistsError):
+                    RUN.write_pin_manifest({'other': 'hash'})
+                with self.assertRaisesRegex(ValueError, 'cardinality'):
+                    RUN.frozen_inputs({'input_manifest': dict(manifest, entries=2)})
+                original = data.read_bytes()
+                data.write_text('{}')
+                with self.assertRaisesRegex(ValueError, 'raw pin manifest differs'):
+                    RUN.frozen_inputs(frozen)
+                data.write_bytes(original)
+                data.unlink()
+                with self.assertRaises(FileNotFoundError):
+                    RUN.frozen_inputs(frozen)
 
     def test_archive_checks_complete_content_and_extra_files(self):
         with tempfile.TemporaryDirectory() as directory:
