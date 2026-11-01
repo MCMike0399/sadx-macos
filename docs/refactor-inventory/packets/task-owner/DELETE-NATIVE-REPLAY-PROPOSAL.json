@@ -1,0 +1,79 @@
+{
+  "status": "PROPOSED native-only replay; no execution admission yet. Independent adequacy review required.",
+  "terminal_commit": "0afa5d4",
+  "candidate_source": "72d0e83ead1255aa658ef6b78220c04b1b737b93",
+  "candidate_library": "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/current/libraries/task_delete.dylib",
+  "capture_folder": "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved-continuation/old/captures/task_delete",
+  "output": "/Users/burbujamc/Developer/sadx-macos/build/task-delete-native-replay",
+  "pins": {
+    "/Users/burbujamc/Developer/sadx-macos/reference/packets/task-delete-native-replay/replay.py": "e6ebe63b92281600ab4d633cfd5445d03fb9b11e4ed0ead823418ba177cc76dc",
+    "/Users/burbujamc/Developer/sadx-macos/tools/oracles/task_judges/compare_streams.py": "38d882f2fad2711584f37ea9b129e52f4b6ddaee9d14c758aecb6652be4485f1",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/current/libraries/task_delete.dylib": "2915ae1b9b198b30aa06852ecda822df721eabb4e99d8ab286557dfe403fa577",
+    "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/bin/python3.14": "87d4df53fd91304be5bac391fb204643c36b7df2023c04a0953bcbc7d4fdf634",
+    "/Users/burbujamc/Developer/sadx-macos/docs/refactor-inventory/packets/task-owner/RESERVED-CONTINUATION-RESULT.json": "e0fd5fef9201513140e634c8523c1ce36b79ed33dfd73145253f4d7026b1cfc2",
+    "/Users/burbujamc/Developer/sadx-macos/docs/refactor-inventory/packets/task-owner/CASE207-DIAGNOSTIC-RESULT.json": "f6e3cecfafabe64b8e1d21d4b198e7a40964f4d8553574f8268383cbdefd0038",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved-continuation/old/captures/task_delete/inputs.json": "a6382e124fcd80173be78512a22c0747105158c9539ba015c828ba9e4ae8c4b3",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved-continuation/old/captures/task_delete/reserved-observation.json": "1d6eba40515b6844481cbb6c60d82a117cf382954d9ccc5e3d400925bf3954d0",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved-continuation/old/captures/task_delete/task_delete.json": "c96600215087168b908dac703b10be87a7ff741966721c12135b11c26f553120",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved-continuation/old/captures/task_delete/task_delete.identity.json": "7122ab20db6d96f968466e76de639e189727a4330944a34336bc644b0875ed03",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved-continuation/old/captures/task_delete/task_delete.native.jsonl.gz": "64dd8a0e6b113efa6caf31bbe2bf21152c6449a0e49ba517a2e945fd24fdbd06"
+  },
+  "expected": {
+    "source_attempts": 570,
+    "produced_calls": 563,
+    "excluded_ids": [
+      85,
+      222,
+      238,
+      242,
+      361,
+      502,
+      562
+    ],
+    "source_mismatch_ids": [
+      207
+    ]
+  },
+  "acceptance": [
+    "No original invocation, fixture generation, build, completed-cohort rerun, new exclusions or source changes.",
+    "Replay only 563 retained produced calls, preserving original IDs and every return/input/output byte including padding.",
+    "Compare original expected_words separately; all 11 differing original fields of case207 stay FAIL. Exact old/current equality can establish preservation, not source fidelity.",
+    "Source outcomes: 570=314 returned+256 established stops; produced563=313 returned+250 stops; excluded7=1 returned free-list-cycle+6 reentrant stops.",
+    "Committed Root admission and exact helper/artifact/library pins required before exclusive output creation. No retry; stop on first candidate-old inequality."
+  ],
+  "prior_diagnostic": {
+    "admission": "dcf4d63",
+    "result": "b235538",
+    "native_call": 206,
+    "case": 207,
+    "full_old_current_equal": true
+  },
+  "limits": [
+    "Read-only parsing and synthetic tests do not consume native inputs. Actual candidate deletion cohort remains unattempted except the separately admitted case207 diagnostic.",
+    "Original continuation remains terminal EXIT 1. No whole Task/campaign approval or new product behavior."
+  ],
+  "focused_checks": {
+    "command": "reference/python/bin/python -m unittest discover -s tests/python -p 'test_task_*.py' -q",
+    "tests": 94,
+    "exit_status": 0,
+    "log": "build/task-native-replay-focused.log",
+    "log_sha256": "6391ca841fdce0b6c18eb352e2257ebdcc036198e795fe088a11af87637d7681",
+    "new_fake_tests": 20,
+    "read_only_real_preflight": {
+      "produced_calls": 563,
+      "excluded_ids": [
+        85,
+        222,
+        238,
+        242,
+        361,
+        502,
+        562
+      ],
+      "source_mismatch_ids": [
+        207
+      ],
+      "native_calls_executed": 0
+    }
+  }
+}

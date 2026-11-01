@@ -10,13 +10,13 @@ from pathlib import Path
 import sys
 
 
-def validated_records(folder, slug):
-    """Bind each capture to its complete, ordered freeze ledger before comparing."""
+def _validated_records(folder, slug, expected_oracle_exit):
+    """Shared structural validation; public entry points fix their own exit contract."""
     path = folder / (slug + '.native.jsonl.gz')
     identity = json.loads((folder / (slug + '.identity.json')).read_text())
     calls = identity['calls']
-    if identity['slug'] != slug or identity['oracle_exit'] != 0 or not calls:
-        raise ValueError(f'{folder}: missing successful nonempty {slug} capture')
+    if identity['slug'] != slug or identity['oracle_exit'] != expected_oracle_exit or not calls:
+        raise ValueError(f'{folder}: missing nonempty {slug} capture with expected exit {expected_oracle_exit}')
     with path.open('rb') as stream:
         digest = hashlib.file_digest(stream, 'sha256').hexdigest()
     if digest != identity['compressed_sha256']:
@@ -44,6 +44,29 @@ def validated_records(folder, slug):
             yield raw
     if count != len(calls):
         raise ValueError(f'{path}: truncated capture ({count}/{len(calls)} records)')
+
+
+def validated_records(folder, slug):
+    """Bind a successful capture to its complete, ordered freeze ledger."""
+    yield from _validated_records(folder, slug, 0)
+
+
+def validated_failed_delete_records(folder, pins):
+    """Integrity-read one explicitly pinned failed deletion baseline, never a pass.
+
+    This entry has no CLI bypass. The replay caller separately proves source case
+    identities, projections and exclusions against these immutable observations.
+    """
+    names = {'inputs.json', 'reserved-observation.json', 'task_delete.json',
+             'task_delete.identity.json', 'task_delete.native.jsonl.gz'}
+    if set(pins) != names:
+        raise ValueError('Exact failed deletion artifact pin set required')
+    for name in names:
+        with (folder / name).open('rb') as stream:
+            actual = hashlib.file_digest(stream, 'sha256').hexdigest()
+        if actual != pins[name]:
+            raise ValueError('Failed deletion artifact pin differs: ' + name)
+    yield from _validated_records(folder, 'task_delete', 1)
 
 
 def main():
