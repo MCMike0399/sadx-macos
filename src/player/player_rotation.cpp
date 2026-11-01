@@ -1,5 +1,6 @@
 #include "player/player_rotation.hpp"
 #include "cpu/crt_integer.hpp"
+#include "cpu/fidelity_float.hpp"
 #include "cpu/x87_transcendental.hpp"
 #include <cstring>
 #include <stdexcept>
@@ -121,13 +122,8 @@ PlayerRotationResult rotate_player_blended(PlayerTaskState& task,PlayerPhysicsSt
     player.motion.speed.z=fp.to_float(fp.add(old_z,new_z));return {};
 }
 
-X87Value rotation_vector_length(const NinjaVector& v,X87Context& fp) {
-    const auto x=fp.from_float(v.x);const auto xx=fp.multiply(x,x);
-    const auto y=fp.from_float(v.y);const auto yy=fp.multiply(y,y);
-    const auto z=fp.from_float(v.z);const auto zz=fp.multiply(z,z);
-    const auto zy=fp.add(zz,yy);
-    const float squared=fp.to_float(fp.add(zy,xx));
-    return signed_sqrt_extended(squared,fp);
+X87Value rotation_vector_length(const NinjaVector &vector, X87Context &context) {
+    return fidelity::ExactFloat::vector_length_return(context, vector.x, vector.y, vector.z);
 }
 
 PlayerRotationResult rotate_player_passive(PlayerTaskState& task,PlayerMotionState& world,
