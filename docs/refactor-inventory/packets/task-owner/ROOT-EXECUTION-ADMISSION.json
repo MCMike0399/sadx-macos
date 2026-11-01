@@ -1,0 +1,21 @@
+{
+  "status": "Root authorizes ONE reserved execution against the committed reviewed closure; not a result.",
+  "source": "72d0e83ead1255aa658ef6b78220c04b1b737b93",
+  "before": "bd22ee423ea015f00152a97fa8fc2e1b4034b411",
+  "candidate": "f8ab5e408427bb799aa244e46274648862b0ec05",
+  "freeze_commit": "a5e14afffbe0e711946512de9be81e92ce994ccc",
+  "freeze_sha256": "1bd71c6c786e2eed14a04cebe15de9d27f5883d76c473889ca76e53e55a8aa56",
+  "accepted_reviews": {
+    "RECHECK-PIN-MAP.md": "21fbc30912a1f7a9d81e86f9206d484bff1e424d7c4ea51a40d1f0a511586364",
+    "RECHECK-ORIGIN-SEAL.md": "0a393a1e884cd9cdb2c5d05153ebd24e845d5e3f3c2df8aacd3e787596ce1eca",
+    "RECHECK-CAPTURE-BINDING.md": "c10e38a79750b4d687f5f4dca158b89ffe9cef4467d6bf63462a0459901e4573"
+  },
+  "source_reviews": [
+    "e7c2062",
+    "0e92356"
+  ],
+  "runtime_development_packet": "54d27d6",
+  "admission": "No concurrent heavy writer or Source change. Direct serial builds from immutable trees; no Main archive, fetch or mutable working-tree baseline. Permanent exclusive output marker; no automatic retry, input adjustment, tolerated mismatch, new exclusion or partial-to-pass promotion.",
+  "output": "build/task-final-reserved",
+  "command": "reference/python/bin/python -I -S -B tools/oracles/task_judges/reserved_run.py run --admitted"
+}
