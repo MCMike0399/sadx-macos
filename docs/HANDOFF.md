@@ -624,3 +624,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Main and exported app reach native_gamma_load_setup_resource at frame 1382, diagnostic exit 1. Selected state fields and screenshot hash match; inspected image is outgoing title. No actor/GPU/N3b/story/gameplay63FPS claim.
 * Dispatch-signature and constexpr-table judge candidates are committed in packet/constexpr-table-review and under fresh independent review; not integrated. Main behavior and inherited judges remain unchanged. Render consumer baseline oracles continue in the dedicated build directory.
 * Storage coordination received a read-only inventory of 1.47 GiB of historical generated candidates. No moves, service changes or writer interruptions; await the shared archive tool contract. No push.
+
+### 2026-11-01 — Enforcement checkpoint gate green; shared render work continues
+
+* Full SADX_CONTENT_CORPUS enabled make -j10 gate exits 0: 278 native programs, 429 Python tests with the existing filesystem skip, smoke120, R1–R4, all three native menu/save journeys and sixteen startup comparisons. Receipt: refactor-enforcement-gate.json; STATUS regenerated.
+* Signature-based dispatch and fingerprinted constexpr review now run in the gate.113 proved sites and49 table declarations are measured;14 table migrations and1 table review remain open. Unresolved callable tokens are report-only, not alleged dispatch.
+* All914 inherited protected inputs are preserved;921 paths verify. The isolated refresh initially omitted53 local-only frozen corpora, caught before Main integration, then restored byte-identically. Review findings and Root's tested final qualifier correction are retained.
+* Shared blend cluster7fe9f36 has fresh bounded STYLE review942ae30, exact paired8209-case judges and five valid mutants caught. Nine consumer scripts retain five FP partials; lifecycle600-case full-word/flag identities match baseline. Clean updated source build is running privately; no whole render-system completion claim.
+* New depth sub-judge baseline1998 cases is exact. Review3cbf412 found missing callback/pending observations; separate correctionb40093c observes both and catches six valid faults. Final holdout remains reserved; target/manifest integration and fresh qualification remain open.
+* Storage ancillary duties completed privately: real canary/original-path restoration passed, four historical dirs offloaded, manual queue enabled/empty, qualified pin29e0e801 updated without new transport. Original complete-refactor goal continues automatically; no push.
