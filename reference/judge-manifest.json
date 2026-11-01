@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "43352263d2a011bb372055a7eb0ef133e0825327",
+    "base_commit": "5e6b3869acae32a6a4972e163b3ef687ddb5b8b2",
     "evidence": "reference/production-integration-20261101/canonical-save-owner-manifest-union.json",
     "evidence_sha256": "1b65b9d1c4d30059d4e6680a694dd5996522b6e60bc4cc4bbf8242fb928f2cff",
-    "reason": "Preserve both reviewed parent input sets on additive source integration; final separate seal follows merge commit"
+    "reason": "Seal composite save owner/completion source after explicit unchanged-parent protected input union"
   },
   "files": {
     "Makefile": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
