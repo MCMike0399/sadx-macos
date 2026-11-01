@@ -48,6 +48,58 @@ def reviewed_scope(review, source_sha256):
             "limits": review.get("classification_limits", [])}
 
 
+def reviewed_module(review, members):
+    """Require explicit whole-module review; file approval alone never closes it."""
+    disposition = review.get("disposition", "open_review")
+    if disposition not in DISPOSITIONS:
+        raise ValueError("Invalid module disposition")
+    actual = {member["path"]: member["sha256"] for member in members}
+    if disposition != "open_review":
+        if review.get("reviewed_members") != actual:
+            raise ValueError("Module members changed; fresh whole-module review required")
+        if not review.get("reason") or not review.get("evidence"):
+            raise ValueError("Module disposition requires rationale and evidence")
+    required = ("semantic_justification", "resolved_owners", "resolved_consumers", "accepted_judges")
+    if disposition == "already_conforming":
+        if not all(review.get(field) for field in required):
+            raise ValueError("Module conformity requires semantic, owner, consumer and judge evidence")
+        limits = review.get("classification_limits")
+        if not ((isinstance(limits, str) and limits.strip()) or
+                (isinstance(limits, list) and limits and
+                 all(isinstance(limit, str) and limit.strip() for limit in limits))):
+            raise ValueError("Module conformity requires explicit nonempty classification limits")
+        if not members or not all(member["review_status"] == "reviewed_conforming" for member in members):
+            raise ValueError("Module conformity requires every member's current semantic review")
+    if disposition == "obsolete" and not review.get("obsolescence_proof"):
+        raise ValueError("Module obsolescence requires maintained-consumer and behavior evidence")
+    if disposition in {"reference_infrastructure", "obsolete"} and not all(
+            member["disposition"] == disposition for member in members):
+        raise ValueError("Module purpose/removal classification requires every member disposition")
+    return {"disposition": disposition,
+            "status": "reviewed_conforming" if disposition == "already_conforming" else "module_closure_open",
+            "reviewed_members": review.get("reviewed_members", {}),
+            "reason": review.get("reason", "Whole-module semantic/ownership review remains open."),
+            "evidence": review.get("evidence", []),
+            **{field: review.get(field, []) for field in required},
+            "limits": review.get("classification_limits", []),
+            "obsolescence_proof": review.get("obsolescence_proof", []),
+            "findings": review.get("findings", []),
+            "qualification_gaps": review.get("qualification_gaps", []),
+            "destination": review.get("destination", [])}
+
+
+def validate_module_evidence(value, paths):
+    """Validate every projected evidence link, not only the top-level anchors."""
+    if isinstance(value, dict):
+        if "path" in value and value["path"] not in paths:
+            raise ValueError("Missing module review evidence: " + str(value["path"]))
+        for child in value.values():
+            validate_module_evidence(child, paths)
+    elif isinstance(value, list):
+        for child in value:
+            validate_module_evidence(child, paths)
+
+
 def module(path):
     p = Path(path)
     if path.startswith("src/"):
@@ -271,12 +323,21 @@ def render():
         boundaries.append({"path": p, **index[p], "boundary": kind, "reason": reason,
                            "review_status": "boundary_only_no_obsolescence_claim"})
     modules = []
-    for name in sorted({r["module"] for r in records}):
+    module_names = {r["module"] for r in records}
+    module_reviews = policy.get("modules", {})
+    if not isinstance(module_reviews, dict) or set(module_reviews) - module_names:
+        raise ValueError("Unknown/stale module review identity")
+    for name in sorted(module_names):
         members = [r for r in records if r["module"] == name]
+        semantic = reviewed_module(module_reviews.get(name, {}), members)
+        validate_module_evidence(semantic, path_set)
         modules.append({"module": name, "system": sorted({r["system"] for r in members}),
                         "files": [r["path"] for r in members],
                         "dispositions": dict(collections.Counter(r["disposition"] for r in members)),
-                        "canonical_owners_status": "open_review_see_per_file_candidates",
+                        "disposition": semantic["disposition"],
+                        "semantic_review": semantic,
+                        "canonical_owners_status": ("reviewed_with_recorded_limits" if semantic["status"] == "reviewed_conforming"
+                                                    else "open_review_see_per_file_candidates"),
                         "judge_candidates": sorted({j for r in members for j in r["judge_candidates"]}),
                         "acceptance": sorted({a for r in members for a in r["acceptance"]}),
                         "destination": sorted({r["destination"] for r in members})})
@@ -301,6 +362,7 @@ def render():
     summary = {"schema_version": 1, "base_commit": base,
                "tracked_scope": len(total), "maintained_and_script_entries": len(records),
                "modules": len(modules), "boundary_entries": len(boundaries),
+               "module_dispositions": dict(sorted(collections.Counter(m["disposition"] for m in modules).items())),
                "roots": dict(collections.Counter(p.split('/')[0] for p in sorted(total))),
                "dispositions": dict(sorted(collections.Counter(r["disposition"] for r in records).items())),
                "systems": dict(sorted(collections.Counter(r["system"] for r in records).items())),
