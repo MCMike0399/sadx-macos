@@ -1,0 +1,821 @@
+{
+  "base_commit": "fdb1595",
+  "scope": "read-only source context; no new execution verdict",
+  "main": "/Users/burbujamc/Developer/sadx-macos",
+  "symbols_sha256": "e5fa09792dc395834f406f8325d705910334bbc3cdc6a70a8d84e02fe94f715b",
+  "loader_commit": "eb4cdcca9637d611a98b910fcfed6ce18580451c",
+  "symbols": [
+    {
+      "address": "0x40bf40",
+      "name": "Reset",
+      "type": "void",
+      "signature": "()",
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+      "line": 42,
+      "declaration": "VoidFunc(Reset, 0x0040BF40)",
+      "alternative_names": [
+        "FUN_0040bf40",
+        "InitVarious"
+      ]
+    },
+    {
+      "address": "0x40cd10",
+      "name": "voicevolresume",
+      "type": "void",
+      "signature": "()",
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+      "line": 864,
+      "declaration": "VoidFunc(voicevolresume, 0x40CD10)",
+      "alternative_names": [
+        "FUN_0040cd10"
+      ]
+    },
+    {
+      "address": "0x401410",
+      "name": "Set_D3DCMPFUNC_Mode",
+      "type": "void",
+      "signature": "(int a1)",
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+      "line": 33,
+      "declaration": "FunctionPointer(void, Set_D3DCMPFUNC_Mode, (int a1), 0x401410)",
+      "alternative_names": [
+        "FUN_00401410"
+      ]
+    },
+    {
+      "address": "0x785330",
+      "name": "pdVibMxStop",
+      "type": "Sint32",
+      "signature": "(Uint32 port)",
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+      "line": 2738,
+      "declaration": "FunctionPointer(Sint32, pdVibMxStop, (Uint32 port), 0x785330)",
+      "alternative_names": [
+        "FUN_00785330"
+      ]
+    },
+    {
+      "address": "0x403e60",
+      "name": "SetQueueDrawingState_BlankScreen",
+      "type": "void",
+      "signature": "()",
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+      "line": 63,
+      "declaration": "VoidFunc(SetQueueDrawingState_BlankScreen, 0x403E60)",
+      "alternative_names": [
+        "FUN_00403e60"
+      ]
+    },
+    {
+      "address": "0x4257c0",
+      "name": "FUN_004257c0",
+      "type": null,
+      "signature": null,
+      "source": "reference/inventory/functions.json",
+      "alternative_names": []
+    },
+    {
+      "address": "0x4257e0",
+      "name": "ResetCurrentVoice",
+      "type": "void",
+      "signature": "()",
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+      "line": 351,
+      "declaration": "VoidFunc(ResetCurrentVoice, 0x4257E0)",
+      "alternative_names": [
+        "FUN_004257e0"
+      ]
+    },
+    {
+      "address": "0x424460",
+      "name": "dsStop_all",
+      "type": "void",
+      "signature": "()",
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+      "line": 858,
+      "declaration": "VoidFunc(dsStop_all, 0x424460)",
+      "alternative_names": [
+        "FUN_00424460"
+      ]
+    },
+    {
+      "address": "0x410100",
+      "name": "StopPCM",
+      "type": "void",
+      "signature": "(int ch)",
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+      "line": 871,
+      "declaration": "FunctionPointer(void, StopPCM, (int ch), 0x410100)",
+      "alternative_names": [
+        "FUN_00410100"
+      ]
+    },
+    {
+      "address": "0x40cff0",
+      "name": "WMPClose",
+      "type": "void",
+      "signature": "(int a1)",
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+      "line": 160,
+      "declaration": "FunctionPointer(void, WMPClose, (int a1), 0x40CFF0)",
+      "alternative_names": [
+        "FUN_0040cff0"
+      ]
+    },
+    {
+      "address": "0x4208e0",
+      "name": "SetupSomeScreenStuff",
+      "type": "void",
+      "signature": "()",
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+      "line": 293,
+      "declaration": "VoidFunc(SetupSomeScreenStuff, 0x4208E0)",
+      "alternative_names": [
+        "FUN_004208e0"
+      ]
+    },
+    {
+      "address": "0x40d490",
+      "name": "MSG_Disp",
+      "type": "void",
+      "signature": "(MSGC* msgc)",
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+      "line": 1245,
+      "declaration": "FunctionPointer(void, MSG_Disp, (MSGC* msgc), 0x40D490)",
+      "alternative_names": [
+        "FUN_0040d490"
+      ]
+    },
+    {
+      "address": "0x40b1a0",
+      "name": "InitHeap",
+      "type": "int",
+      "signature": "()",
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+      "line": 134,
+      "declaration": "FunctionPointer(int, InitHeap, (), 0x40B1A0)",
+      "alternative_names": [
+        "FUN_0040b1a0"
+      ]
+    },
+    {
+      "address": "0x40b460",
+      "name": "InitMasterObjectArray",
+      "type": "void",
+      "signature": "()",
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+      "line": 139,
+      "declaration": "VoidFunc(InitMasterObjectArray, 0x40B460)",
+      "alternative_names": [
+        "FUN_0040b460"
+      ]
+    },
+    {
+      "address": "0x4228f0",
+      "name": "RunLevelDestructor",
+      "type": "void",
+      "signature": "(int a1)",
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+      "line": 326,
+      "declaration": "FunctionPointer(void, RunLevelDestructor, (int a1), 0x4228F0)",
+      "alternative_names": [
+        "FUN_004228f0"
+      ]
+    },
+    {
+      "address": "0x421fb0",
+      "name": "FUN_00421fb0",
+      "type": null,
+      "signature": null,
+      "source": "reference/inventory/functions.json",
+      "alternative_names": []
+    },
+    {
+      "address": "0x780fb0",
+      "name": "syFree",
+      "type": "void",
+      "signature": "(void* mem)",
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+      "line": 38,
+      "declaration": "FunctionPointer(void, syFree, (void* mem), 0x780FB0)",
+      "alternative_names": [
+        "FUN_00780fb0",
+        "_HeapFree"
+      ]
+    },
+    {
+      "address": "0x51f680",
+      "name": "nullsub",
+      "type": "int",
+      "signature": "()",
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctions.h",
+      "line": 1195,
+      "declaration": "FunctionPointer(int, nullsub, (), 0x51F680)",
+      "alternative_names": [
+        "switchD_00712853::caseD_0"
+      ]
+    },
+    {
+      "address": "0x411af0",
+      "name": "___njFogEnable",
+      "type": "void",
+      "signature": "()",
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+      "line": 198,
+      "declaration": "VoidFunc(___njFogEnable, 0x411AF0)",
+      "alternative_names": [
+        "FUN_00411af0",
+        "ToggleStageFog"
+      ]
+    },
+    {
+      "address": "0x6443b5",
+      "name": "FUN_006443b5",
+      "type": null,
+      "signature": null,
+      "source": "reference/inventory/functions.json",
+      "alternative_names": []
+    },
+    {
+      "address": "0x3b29d08",
+      "name": "ssEditorStatus",
+      "type": "Bool",
+      "signature": null,
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXVariablesNew.h",
+      "line": 87,
+      "declaration": "DataPointer(Bool, ssEditorStatus, 0x3B29D08)",
+      "alternative_names": [
+        "DebugMode"
+      ]
+    },
+    {
+      "address": "0x2bcbdf8",
+      "name": "seed",
+      "type": "int",
+      "signature": null,
+      "source": "reference/sadx-mod-loader/SADXModLoader/include/SADXVariables.h",
+      "line": 1533,
+      "declaration": "DataPointer(int, seed, 0x2BCBDF8)",
+      "alternative_names": []
+    }
+  ],
+  "cached_evidence": [
+    {
+      "path": "reference/inventory-raw/inv-callees-40bf40.json",
+      "sha256": "0e38a06734aa0a678d53958a1230a847bf095ad6d3132d08673bb99386fdd06b",
+      "evidence_id": "ev_cafad112c0b115d2f9d88c04903beeaabfc7d646672bed5ee982d20f0dffd6c7",
+      "procedure": null,
+      "body": null
+    },
+    {
+      "path": "reference/inventory-raw/native-cleanup-dependency-40cd10.json",
+      "sha256": "baa07491cdf392dd8b44e2c8c81c5e05b3bbf19696fdae24f44c900f06155cee",
+      "evidence_id": "ev_12caf2bf0e9ad1c3518d1af2f963a1f07087dee17ebf2d6a93b5f0448eb5e710",
+      "procedure": "0x40cd10",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x40cd10",
+            "end": "0x40cd1a"
+          }
+        ],
+        "total_bytes": 11,
+        "span_bytes": 11,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    },
+    {
+      "path": "reference/inventory-raw/native-cleanup-dependency-401410.json",
+      "sha256": "4dacb2de88331dbb26f6a051fadcd0713a8409d4b3a1af0ad4f3ce51c8f315ac",
+      "evidence_id": "ev_5d7e438972a0e6bb9df05c3e79d243d6d259aa15ec5ca83bf7407e391944f941",
+      "procedure": "0x401410",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x401410",
+            "end": "0x401419"
+          }
+        ],
+        "total_bytes": 10,
+        "span_bytes": 10,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    },
+    {
+      "path": "reference/inventory-raw/native-cleanup-dependency-403e60.json",
+      "sha256": "3a808852c807a985e2a32ae4522a8e1df1aa6ffa2afd947e7fcd36b8bc052e8b",
+      "evidence_id": "ev_786b70645973db6a2496b6c5b642247e65068451fd59f5ea4849c4bf6a07cf07",
+      "procedure": "0x403e60",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x403e60",
+            "end": "0x403e6a"
+          }
+        ],
+        "total_bytes": 11,
+        "span_bytes": 11,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    },
+    {
+      "path": "reference/inventory-raw/native-cleanup-reset-song.json",
+      "sha256": "139dd143f8ba3b0a70485da56a82f2190d3b28e2dcedd10eea882bae9f041b08",
+      "evidence_id": "ev_b1205254a3a05589cdbc4bdd4aa9cb35014801986f84b4f093b68b28d34b264d",
+      "procedure": "0x4257c0",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x4257c0",
+            "end": "0x4257dc"
+          }
+        ],
+        "total_bytes": 29,
+        "span_bytes": 29,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    },
+    {
+      "path": "reference/inventory-raw/native-cleanup-dependency-4257e0.json",
+      "sha256": "c0ab78ab486ed6cf422e2d6bb4835fc7ed118dd0f717ff2f9dcb0dfe610d52ee",
+      "evidence_id": "ev_9c705dfef7c455582041794314268be170eff42b96f5f9c77e0ce71674bb7445",
+      "procedure": "0x4257e0",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x4257e0",
+            "end": "0x4257f4"
+          }
+        ],
+        "total_bytes": 21,
+        "span_bytes": 21,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    },
+    {
+      "path": "reference/inventory-raw/native-cleanup-dependency-424460.json",
+      "sha256": "77accbb413f928e057c8e0d7bb826d37da3a982a6bdd6f495734a7ab42108cf6",
+      "evidence_id": "ev_d2641e292b2da6daa12b14cee4da4f9950ed095215a52cf379a23a0a05128209",
+      "procedure": "0x424460",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x424460",
+            "end": "0x42449b"
+          }
+        ],
+        "total_bytes": 60,
+        "span_bytes": 60,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    },
+    {
+      "path": "reference/inventory-raw/native-cleanup-dependency-410100.json",
+      "sha256": "ad9689aad5e4ca730e7a30ba8c2d05090b27238242d3c0ee001dc495b306a4a7",
+      "evidence_id": "ev_044337be674706360e0c9bd68686be807f5a8a603c5d2e2bf741f7ccc096dc93",
+      "procedure": "0x410100",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x410100",
+            "end": "0x410139"
+          },
+          {
+            "start": "0x410140",
+            "end": "0x41019a"
+          }
+        ],
+        "total_bytes": 149,
+        "span_bytes": 155,
+        "non_contiguous": true,
+        "contains_entry": true
+      }
+    },
+    {
+      "path": "reference/inventory-raw/native-cleanup-dependency-40cff0.json",
+      "sha256": "ea8e95a0513618de44631cbdd282ce5dc87fb72301cceae0687324fb47800f70",
+      "evidence_id": "ev_14d133cdf27f00ab92fdf52ab406d654dbea80d38ae1961778db7a815c58254f",
+      "procedure": "0x40cff0",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x40cff0",
+            "end": "0x40d051"
+          }
+        ],
+        "total_bytes": 98,
+        "span_bytes": 98,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    },
+    {
+      "path": "reference/inventory-raw/native-cleanup-dependency-4208e0.json",
+      "sha256": "4590b69a72efb95dc1dd060ed19eec8de4af0e9293b59756cca06de38edc1c53",
+      "evidence_id": "ev_e97be686b0ef14613026d55d276c75786765180a261efd1937c846958697a97f",
+      "procedure": "0x4208e0",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x4208e0",
+            "end": "0x4209f3"
+          }
+        ],
+        "total_bytes": 276,
+        "span_bytes": 276,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    },
+    {
+      "path": "reference/inventory-raw/native-cleanup-dependency-40d490.json",
+      "sha256": "d32b388d15fd8fae776d4b2ada8d5af020383da8e760165df8c32080f1013337",
+      "evidence_id": "ev_77a4b98bb1af21435a41621f5e8b717310acef9fc76de04ee9cf159c46095560",
+      "procedure": "0x40d490",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x40d490",
+            "end": "0x40d4cf"
+          }
+        ],
+        "total_bytes": 64,
+        "span_bytes": 64,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    },
+    {
+      "path": "reference/inventory-raw/native-cleanup-dependency-40b1a0.json",
+      "sha256": "783ceef467a5b7190b5e237083d21a292b09b14a9dbd0d005462ae0c697db811",
+      "evidence_id": "ev_e154d6cf723a85b5972d6089743486dccb9fbbff824b4a86f5e055097479eadc",
+      "procedure": "0x40b1a0",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x40b1a0",
+            "end": "0x40b210"
+          }
+        ],
+        "total_bytes": 113,
+        "span_bytes": 113,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    },
+    {
+      "path": "reference/inventory-raw/native-cleanup-dependency-40b460.json",
+      "sha256": "5660915e2749dbce758fcf23c457add85f6469d10d9c3ed3db1b1ab382bf24ed",
+      "evidence_id": "ev_78f4a3bf1f680d349810ef50be06f99e6b44de7716e04243ca726c6b29b57b39",
+      "procedure": "0x40b460",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x40b460",
+            "end": "0x40b4e6"
+          }
+        ],
+        "total_bytes": 135,
+        "span_bytes": 135,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    },
+    {
+      "path": "reference/inventory-raw/native-cleanup-dependency-4228f0.json",
+      "sha256": "b14e752d39512b4b8fc6e866e2df2da4e7f7815202b8ac5bc379dd35c2eadda2",
+      "evidence_id": "ev_3b846e577add1b690c9e33951850193a5e44ad8f83d29a24152013e81b6cfeb5",
+      "procedure": "0x4228f0",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x4228f0",
+            "end": "0x42292a"
+          }
+        ],
+        "total_bytes": 59,
+        "span_bytes": 59,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    },
+    {
+      "path": "reference/inventory-raw/native-cleanup-reset-loop.json",
+      "sha256": "0f5756079c7cb206c9df67eeae5e712ccffd98bf975efbf7ac9dfc3e559b83da",
+      "evidence_id": "ev_13c43ed26f3f3ae0b26f196acdc3fa7cd164b31d1068e65f3b7894dd182d0265",
+      "procedure": "0x421fb0",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x421fb0",
+            "end": "0x421fcb"
+          }
+        ],
+        "total_bytes": 28,
+        "span_bytes": 28,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    },
+    {
+      "path": "reference/inventory-raw/native-cleanup-dependency-411af0.json",
+      "sha256": "caedd0305d47279908da3d073925b59825dd34e0d78ea1fd3415584d3b60bbcf",
+      "evidence_id": "ev_28c6f332d5096222b0f4a8944acf083eb6d762a224c8728e41bebadedd6b9b6d",
+      "procedure": "0x411af0",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x411af0",
+            "end": "0x411b37"
+          }
+        ],
+        "total_bytes": 72,
+        "span_bytes": 72,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    },
+    {
+      "path": "reference/inventory-raw/bridge-heap-780fb0.json",
+      "sha256": "8646da8c6c816861e8306c04e092fb38157e4244933b029b6ebe1f90cb6f5c3c",
+      "evidence_id": "ev_16e48373e09a4c9217db660c25286aaf2345b5523cefce2059a3652ae1f9ce27",
+      "procedure": "0x780fb0",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x780fb0",
+            "end": "0x780fc7"
+          }
+        ],
+        "total_bytes": 24,
+        "span_bytes": 24,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    },
+    {
+      "path": "reference/inventory-raw/runtime-control-loop.json",
+      "sha256": "103b0f1ed381b459921fbc56fd6db32dda2ad6d697f8b437b35ccca8b8d6f5f8",
+      "evidence_id": "ev_ede1352aa4109df0939fcf26b9e3e10ee2d7623463125f97bfce9a2427906454",
+      "procedure": "0x40cad0",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x40cad0",
+            "end": "0x40cce9"
+          }
+        ],
+        "total_bytes": 538,
+        "span_bytes": 538,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    },
+    {
+      "path": "reference/inventory-raw/runtime-control-menu-gate-owner.json",
+      "sha256": "6f0dd95028a974cb46511c2625780664dff1079c54fdabf2b53e9c5754fbce45",
+      "evidence_id": "ev_d4bcf5f3cea7ec4ef321632a1f211d2822318ffead07a82889f5335a6a365e9d",
+      "procedure": "0x414df0",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x414df0",
+            "end": "0x414e2b"
+          },
+          {
+            "start": "0x414fb9",
+            "end": "0x414fbd"
+          }
+        ],
+        "total_bytes": 65,
+        "span_bytes": 462,
+        "non_contiguous": true,
+        "contains_entry": true
+      }
+    },
+    {
+      "path": "reference/inventory-raw/native-file-select-draw-421920.json",
+      "sha256": "9f99afb32c8a04c4425e858faf06c23e0df72611dfcedcd1d4a9b61e4c9c48b9",
+      "evidence_id": "ev_8b84b548bc7346cb6f593f29c3e05688fa9ef5d3410883f2505f2e5abe1c3d02",
+      "procedure": "0x421920",
+      "body": {
+        "available": true,
+        "provenance": "ghidra-function-body-address-set",
+        "ranges": [
+          {
+            "start": "0x421920",
+            "end": "0x421a6c"
+          }
+        ],
+        "total_bytes": 333,
+        "span_bytes": 333,
+        "non_contiguous": false,
+        "contains_entry": true
+      }
+    }
+  ],
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "reset_range_sha256": "b7a107484cc7753a0f24258c28e55e24a52238497585f6adde4d229c82181dfe",
+  "globals": [
+    {
+      "address": "0x3abdf80",
+      "reset_width": 4,
+      "initial": 0,
+      "initial_evidence": "virtual zero tail (section bounds checked)",
+      "raw_text_operand_offsets_not_decoded_xrefs": [
+        "0x40bf58",
+        "0x40cbf4",
+        "0x414e08",
+        "0x414e31",
+        "0x414f01",
+        "0x414f1b",
+        "0x414f89",
+        "0x459566",
+        "0x459872"
+      ]
+    },
+    {
+      "address": "0x3b29d08",
+      "reset_width": 2,
+      "initial": 0,
+      "initial_evidence": "virtual zero tail (section bounds checked)",
+      "raw_text_operand_offsets_not_decoded_xrefs": [
+        "0x40bf5f",
+        "0x4258fa",
+        "0x4dbcc3",
+        "0x4dbcf3",
+        "0x4dc073",
+        "0x4dc1d5",
+        "0x4dc338",
+        "0x4dc4ec",
+        "0x4f3933",
+        "0x536510",
+        "0x543b44",
+        "0x5a3523",
+        "0x5a4b4c",
+        "0x5afe2e",
+        "0x5b03d8",
+        "0x5b07a3",
+        "0x5b3cd2",
+        "0x5b3eb5",
+        "0x5b43d3",
+        "0x5b4483",
+        "0x5b974d",
+        "0x5e266e",
+        "0x5eef94",
+        "0x5f2092",
+        "0x5f41a2",
+        "0x5f425e",
+        "0x5f43e6",
+        "0x5f4856",
+        "0x5f4d96",
+        "0x5f5352",
+        "0x5f5552",
+        "0x5f5702",
+        "0x5f5c92",
+        "0x5f614e",
+        "0x5f61ae",
+        "0x5f620e",
+        "0x5f626e",
+        "0x5f62ce",
+        "0x5f632e",
+        "0x5f638e",
+        "0x5f63ee",
+        "0x6349f1",
+        "0x7293ee",
+        "0x72bdd6",
+        "0x72e4ee",
+        "0x72e881",
+        "0x72f489",
+        "0x72f4b6",
+        "0x72f4ee",
+        "0x72f51b",
+        "0x72f62b",
+        "0x72f6db",
+        "0x72fd17",
+        "0x72fff5",
+        "0x7301a3",
+        "0x7347fb",
+        "0x74e137",
+        "0x74eb16",
+        "0x74f3a9",
+        "0x79de84",
+        "0x7a1bb5",
+        "0x7a9c66"
+      ]
+    },
+    {
+      "address": "0x3b290d0",
+      "reset_width": 4,
+      "initial": 0,
+      "initial_evidence": "virtual zero tail (section bounds checked)",
+      "raw_text_operand_offsets_not_decoded_xrefs": [
+        "0x40bfba",
+        "0x40bfcd",
+        "0x421952",
+        "0x421968",
+        "0x421a88",
+        "0x421a9e",
+        "0x421aff",
+        "0x421b2f",
+        "0x421bf0",
+        "0x421c06"
+      ]
+    },
+    {
+      "address": "0x3b0e330",
+      "reset_width": 4,
+      "initial": 0,
+      "initial_evidence": "virtual zero tail (section bounds checked)",
+      "raw_text_operand_offsets_not_decoded_xrefs": [
+        "0x40bfd2",
+        "0x40bfe5",
+        "0x40d474",
+        "0x40e4e6"
+      ]
+    },
+    {
+      "address": "0x2bcbdf8",
+      "reset_width": 4,
+      "initial": 1,
+      "initial_evidence": "file-backed",
+      "raw_text_operand_offsets_not_decoded_xrefs": [
+        "0x6443ba",
+        "0x6443c0",
+        "0x6443d0"
+      ]
+    }
+  ],
+  "tracked_file_sha256": {
+    "src/game/game_reset.hpp": "f5e13a2638df8a0f5bf8a437c1b5bbf40ea4e38338cb1fcb89ee19877496a733",
+    "src/game/game_reset.cpp": "2ff4f746fb3ef4b2cc0272af108f98e54caef38db2a40232f9955b5b4c9b384f",
+    "src/game/game_reset_leaves.hpp": "906267952b1946b11cbfe19933d0658056fe7856d6932d04014a37718d08e3a9",
+    "src/game/game_reset_leaves.cpp": "66ed2101b6e0b1d67e84a571060c02f0dec59f5f8ca1ff90e9337629c1694fad",
+    "src/game/game_cleanup.hpp": "4270bb3d55e7f3ab79ddfedf187c7a0c07672360f1ef43e49ac68ab3c9fa5270",
+    "src/game/game_cleanup.cpp": "b03a1bb62b391f331f929a4f544ae2846f70b1c34af1018956ba9396d8a54649",
+    "src/game/game_loop.hpp": "2ec062e0c579953d48618d33a4c04eca8f43a117a061b7952ad8b71475120822",
+    "src/guest/game_loop.cpp": "6589264a723fdd763c296e424636bacfabdf6feec96dd5942844b9b8e3c5f8d1",
+    "src/guest/native_game_reference.hpp": "bf1f2d8040355e4f6e627894f5c74e52b9f0146ec3c16ac0dff03ce8dfed0e15",
+    "src/guest/native_game_reference.cpp": "fd993665165d4fc238ac7f818202d44c084c4d778528967ef7a9617de5cc8683",
+    "src/player/sonic_player.hpp": "8ab874d28623af1876eebed149625c447f112a677098c0fa4f6e56da3286b0b4",
+    "src/player/sonic_player.cpp": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483",
+    "src/runtime/native_session.hpp": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+    "src/runtime/native_session.cpp": "dd4926c099d5640f08e9e288b9152a87a045af2d39d9cbaf52ff65a3f3ed8901",
+    "src/runtime/native_file_select_display.cpp": "e64ba02eb87996e6593f5ccb747ac8ba2a0c59eb60fb5fd4a0a8f4df343aa9a7",
+    "src/game/audio_playback.cpp": "4e4782343b1641fa54240227479eabd752184d9cab98f7ba88b6fe2fb54efef2",
+    "tests/unit/game_reset.cpp": "952fff15e4e32d0e806ad35c4c1bc4f56b36a82bf4160e2b4163fab8e7552a67",
+    "tests/unit/game_cleanup.cpp": "e72e60b9be18c7b802b2bb3dee943cc5d8d38dcc664dacbd2a9368f22c156179",
+    "tests/probes/native_game_reset_probe.cpp": "cb20c0754951e28fa02abb8edf701a61365f061059319751d8be87d17976008d",
+    "tests/probes/native_game_reset_composed_probe.cpp": "3829fe4f8feec2eb65dab64a1a4ffee7efdb612a8f889f57ddb65d77c3db29ba",
+    "tests/probes/native_game_cleanup_probe.cpp": "231926e3f042e41645b5e7e4cbeaadc278e70901b2c46a6b350c04000d020315",
+    "tools/oracles/verify_original_game_reset.py": "a6f0868a6f23274feb404bbbc2f463e2a2e1e6d24b253363a713373e629c2c7e",
+    "tools/oracles/verify_original_game_reset_composed.py": "7a7bf16eec64fc7899f5925f855a26612e7efe8bfef7de1ecc4bd6b10f6da86b",
+    "tools/oracles/verify_original_game_cleanup.py": "c9b17c3bce08a3ea5ab6b4514329b7d03a606b2a7784f860e5bde70e1c29f174",
+    "reference/oracle-reports/game_reset.json": "724ee9d45293cca5900677074e9fbaea3cbad177d08ab326e51776dd43503c47",
+    "reference/oracle-reports/game_reset_composed.json": "2bc1515e9e7e776199d338e91bc61a996bddbb80eb90f50309884a60322fa9ca",
+    "reference/oracle-reports/game_cleanup.json": "f44007d5b688e4d8ef23f102050bbe6b896b81c3bacf6f81eff1555266a8ac1a",
+    "tools/gate/profile_patches.json": "926395f83d0c5d92455ef93df91c950718057ae77b99622fb8e1e19cbf0f0e1e"
+  }
+}

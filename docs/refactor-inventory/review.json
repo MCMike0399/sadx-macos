@@ -4,7 +4,7 @@
   "classification_contract": {
     "open_review": "No semantic disposition yet; never counted as conforming.",
     "needs_migration": "Specific body/owner problem observed; migration and complete review still open.",
-    "already_conforming": "Requires explicit whole-module semantic justification, owner/consumer resolution and judge acceptance; no initial entries.",
+    "already_conforming": "Requires explicit semantic justification, source fingerprint, owner/consumer resolution and judge acceptance for the named file. Per-file closure does not establish complete module/system acceptance.",
     "reference_infrastructure": "Reviewed reference purpose, not a game-behavior exemption or proof the full body conforms.",
     "obsolete": "Requires evidence of no maintained consumers and preserved behavior/coverage; no initial entries."
   },
@@ -647,6 +647,1677 @@
           "line": 1
         }
       ]
+    },
+    "src/game/menu_eligibility.hpp": {
+      "disposition": "needs_migration",
+      "reason": "Public UnknownCharacter exposes an incoming caller-register unknown in game-tier API (lines 15-24).",
+      "semantic_justification": "Progress correctly borrows live state and introduces no optional/copy. FUNCTION names map GetEmblemCount via overrides.tsv:69, Metal via SDK Functions.h:1126 and GetEachCharEnable via FunctionsNew.h:1616. Preserve explicit invalid-character behavior, but report register/ABI uncertainty at reference boundary; do not guess a value.",
+      "evidence": [
+        {
+          "path": "src/game/menu_eligibility.hpp",
+          "line": 1,
+          "sha256": "5d6a4dabe9c734ac43e80ff70e961f298535d00e4ee3c66cf903ae7e3dd0a72d",
+          "link": "src/game/menu_eligibility.hpp#L1",
+          "end_line": 32
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "These modules own no persistent progress bytes. Progress borrows save::Data const, mutable story bytes, and const live override/tutorial bytes. Native Session owns save_; bootstrap_ owns sequence_variables, menu.flags[0]; flow_ owns tutorial_variant. save_ is a packed persistence snapshot, not a second live story owner. Metal enable is the sole predicate store: story_flags[89]=1 after override and existing-flag checks, only at >=130 emblems.",
+          "evidence": [
+            {
+              "path": "src/game/menu_eligibility.hpp",
+              "line": 8,
+              "sha256": "5d6a4dabe9c734ac43e80ff70e961f298535d00e4ee3c66cf903ae7e3dd0a72d",
+              "link": "src/game/menu_eligibility.hpp#L8",
+              "end_line": 14
+            },
+            {
+              "path": "src/game/game_bootstrap.hpp",
+              "line": 34,
+              "sha256": "df46f4e508378f30f3c6699fec50f38efe90bc5fe0dbeacf0bbbf672484925b4",
+              "link": "src/game/game_bootstrap.hpp#L34",
+              "end_line": 69
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 185,
+              "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+              "link": "src/runtime/native_session.hpp#L185",
+              "end_line": 228
+            },
+            {
+              "path": "src/runtime/native_main_menu.cpp",
+              "line": 21,
+              "sha256": "5b7308f05665632d1b74c8407b11552ce997b2995068039bd8c644b6f20e01ff",
+              "link": "src/runtime/native_main_menu.cpp#L21",
+              "end_line": 28
+            },
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "line": 23,
+              "sha256": "ae97db3caa701759181c10be4a87552002d8af9695828faf8c5971094add6dae",
+              "link": "src/runtime/native_character_select.cpp#L23",
+              "end_line": 29
+            },
+            {
+              "path": "src/runtime/native_file_select_display.cpp",
+              "line": 150,
+              "sha256": "e64ba02eb87996e6593f5ccb747ac8ba2a0c59eb60fb5fd4a0a8f4df343aa9a7",
+              "link": "src/runtime/native_file_select_display.cpp#L150",
+              "end_line": 163
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "path": "src/game/file_select_display.cpp",
+          "line": 60,
+          "sha256": "0a4952c71f8251f5c49321ab43859e399df3a2750e6e6b667f4850f9907124b7",
+          "link": "src/game/file_select_display.cpp#L60",
+          "end_line": 65,
+          "note": "file display emblem count and character eligibility use shared predicates"
+        },
+        {
+          "path": "src/game/character_select_menu.cpp",
+          "line": 412,
+          "sha256": "0f5f20783f0ce8ad777299b70125d06e06c0bb68805229dfaf2edc73fb20a043",
+          "link": "src/game/character_select_menu.cpp#L412",
+          "end_line": 438,
+          "note": "count and trial availability"
+        },
+        {
+          "path": "src/runtime/native_character_select.cpp",
+          "line": 23,
+          "sha256": "ae97db3caa701759181c10be4a87552002d8af9695828faf8c5971094add6dae",
+          "link": "src/runtime/native_character_select.cpp#L23",
+          "end_line": 49
+        },
+        {
+          "path": "src/runtime/native_main_menu.cpp",
+          "line": 91,
+          "sha256": "5b7308f05665632d1b74c8407b11552ce997b2995068039bd8c644b6f20e01ff",
+          "link": "src/runtime/native_main_menu.cpp#L91",
+          "end_line": 105
+        },
+        {
+          "path": "src/game/main_menu_eligibility.cpp",
+          "line": 3,
+          "sha256": "5ca7c0e54a3e2d9bd6459188daa2b49af3a3a1089a0a4e6a3bc3ba4da5faee76",
+          "link": "src/game/main_menu_eligibility.cpp#L3",
+          "end_line": 25
+        }
+      ],
+      "accepted_judges": [
+        {
+          "unit": {
+            "path": "tests/unit/menu_eligibility.cpp",
+            "line": 1,
+            "sha256": "738bc0698034663629fa0f344e18220d66f623c946d10a60fe2908f56d556d95",
+            "link": "tests/unit/menu_eligibility.cpp#L1"
+          },
+          "unit_registration": {
+            "path": "tests/unit/manifest.tsv",
+            "line": 233,
+            "sha256": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
+            "link": "tests/unit/manifest.tsv#L233"
+          },
+          "probe": {
+            "path": "tests/probes/native_menu_eligibility_probe.cpp",
+            "line": 1,
+            "sha256": "95f705f0596801425b789a59ce176bcad1203c322d221a3f77989a333adc0156",
+            "link": "tests/probes/native_menu_eligibility_probe.cpp#L1"
+          },
+          "oracle": {
+            "path": "tools/oracles/verify_original_menu_eligibility.py",
+            "line": 1,
+            "sha256": "a6020665dfefa905413b31b2f6396e42f2458e92e8649888f5f1d745a58a5a78",
+            "link": "tools/oracles/verify_original_menu_eligibility.py#L1"
+          },
+          "prior_receipt": {
+            "path": "reference/oracle-reports/menu_eligibility.json",
+            "line": 1,
+            "sha256": "d94ec10916ada8a4ec50809c9ab8a9b69c1459224a441921d022f66a44f293cb",
+            "link": "reference/oracle-reports/menu_eligibility.json#L1"
+          },
+          "scope_and_limits": "7388 historical cases, seed 20261021, 5000 randomized; zero recorded mismatch/FP partial; five invalid-character register-preservation observations. Full original bodies/unhooked helpers; compares all 512 story bytes, threshold cases 127..136, seven character IDs and override/tutorial paths. Invalid >6 is explicit native error, not an invented result.",
+          "mutants": {
+            "identity": null,
+            "status": "No dedicated tracked mutant specification or result identified for this helper in tracked mutant/holdout paths or its integration receipts. Not run; absence is a qualification gap, not proof of no historical private run."
+          },
+          "holdout": {
+            "identity": null,
+            "status": "No dedicated tracked reserved holdout identity located. Default randomized cases are development corpus, not a reserved holdout."
+          },
+          "acceptance": "Accept existing judge for the bounded behavior above only; prior receipt is not fresh qualification or full-module runtime completion."
+        }
+      ],
+      "destination": "src/game/ui; existing semantic module retained until Root chooses system layout",
+      "findings": [
+        {
+          "location": "src/game/menu_eligibility.hpp:15",
+          "minimum_scope": [
+            "src/game/menu_eligibility.hpp",
+            "src/game/menu_eligibility.cpp",
+            "tests/probes/native_menu_eligibility_probe.cpp",
+            "tests/unit/menu_eligibility.cpp"
+          ],
+          "required_change": "Separate semantic unsupported-character validation from incoming-register diagnostic at probe/reference boundary; retain override-before-invalid-ID precedence. Judge changes, if needed, are separate from behavior work."
+        }
+      ],
+      "classification_limits": "Per-file existing maintained-source disposition. Companion dependencies and judge gaps remain explicit; no source change, test execution, gate or complete-system/runtime claim.",
+      "reviewed_source_sha256": "5d6a4dabe9c734ac43e80ff70e961f298535d00e4ee3c66cf903ae7e3dd0a72d"
+    },
+    "src/game/menu_eligibility.cpp": {
+      "disposition": "needs_migration",
+      "reason": "Known story flags, seventh menu character and tutorial variant remain raw numeric policy at lines 18-35.",
+      "semantic_justification": "emblem_count copies each uint8 before shifting and accumulates at most 136 into int32. metal_sonic_enabled preserves override short circuit, persistent unlock store and exactly 0/1 returns. character_enabled preserves override before range check and seventh-selection variant handling. Structured/direct, integer-only; no content/EXE reads or unrecovered callees. SDK names exist for all playable flags (65..71) and Metal flag89. These are code policy constants, not asset content; name them without changing order or treating menu index6 as SDK character ID6.",
+      "evidence": [
+        {
+          "path": "src/game/menu_eligibility.cpp",
+          "line": 1,
+          "sha256": "cf76022d0d362fcefed25327173331282b6fe705d035f1eeff14eafc1e2a9e14",
+          "link": "src/game/menu_eligibility.cpp#L1",
+          "end_line": 37
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "These modules own no persistent progress bytes. Progress borrows save::Data const, mutable story bytes, and const live override/tutorial bytes. Native Session owns save_; bootstrap_ owns sequence_variables, menu.flags[0]; flow_ owns tutorial_variant. save_ is a packed persistence snapshot, not a second live story owner. Metal enable is the sole predicate store: story_flags[89]=1 after override and existing-flag checks, only at >=130 emblems.",
+          "evidence": [
+            {
+              "path": "src/game/menu_eligibility.hpp",
+              "line": 8,
+              "sha256": "5d6a4dabe9c734ac43e80ff70e961f298535d00e4ee3c66cf903ae7e3dd0a72d",
+              "link": "src/game/menu_eligibility.hpp#L8",
+              "end_line": 14
+            },
+            {
+              "path": "src/game/game_bootstrap.hpp",
+              "line": 34,
+              "sha256": "df46f4e508378f30f3c6699fec50f38efe90bc5fe0dbeacf0bbbf672484925b4",
+              "link": "src/game/game_bootstrap.hpp#L34",
+              "end_line": 69
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 185,
+              "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+              "link": "src/runtime/native_session.hpp#L185",
+              "end_line": 228
+            },
+            {
+              "path": "src/runtime/native_main_menu.cpp",
+              "line": 21,
+              "sha256": "5b7308f05665632d1b74c8407b11552ce997b2995068039bd8c644b6f20e01ff",
+              "link": "src/runtime/native_main_menu.cpp#L21",
+              "end_line": 28
+            },
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "line": 23,
+              "sha256": "ae97db3caa701759181c10be4a87552002d8af9695828faf8c5971094add6dae",
+              "link": "src/runtime/native_character_select.cpp#L23",
+              "end_line": 29
+            },
+            {
+              "path": "src/runtime/native_file_select_display.cpp",
+              "line": 150,
+              "sha256": "e64ba02eb87996e6593f5ccb747ac8ba2a0c59eb60fb5fd4a0a8f4df343aa9a7",
+              "link": "src/runtime/native_file_select_display.cpp#L150",
+              "end_line": 163
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "path": "src/game/file_select_display.cpp",
+          "line": 60,
+          "sha256": "0a4952c71f8251f5c49321ab43859e399df3a2750e6e6b667f4850f9907124b7",
+          "link": "src/game/file_select_display.cpp#L60",
+          "end_line": 65,
+          "note": "file display emblem count and character eligibility use shared predicates"
+        },
+        {
+          "path": "src/game/character_select_menu.cpp",
+          "line": 412,
+          "sha256": "0f5f20783f0ce8ad777299b70125d06e06c0bb68805229dfaf2edc73fb20a043",
+          "link": "src/game/character_select_menu.cpp#L412",
+          "end_line": 438,
+          "note": "count and trial availability"
+        },
+        {
+          "path": "src/runtime/native_character_select.cpp",
+          "line": 23,
+          "sha256": "ae97db3caa701759181c10be4a87552002d8af9695828faf8c5971094add6dae",
+          "link": "src/runtime/native_character_select.cpp#L23",
+          "end_line": 49
+        },
+        {
+          "path": "src/runtime/native_main_menu.cpp",
+          "line": 91,
+          "sha256": "5b7308f05665632d1b74c8407b11552ce997b2995068039bd8c644b6f20e01ff",
+          "link": "src/runtime/native_main_menu.cpp#L91",
+          "end_line": 105
+        },
+        {
+          "path": "src/game/main_menu_eligibility.cpp",
+          "line": 3,
+          "sha256": "5ca7c0e54a3e2d9bd6459188daa2b49af3a3a1089a0a4e6a3bc3ba4da5faee76",
+          "link": "src/game/main_menu_eligibility.cpp#L3",
+          "end_line": 25
+        }
+      ],
+      "accepted_judges": [
+        {
+          "unit": {
+            "path": "tests/unit/menu_eligibility.cpp",
+            "line": 1,
+            "sha256": "738bc0698034663629fa0f344e18220d66f623c946d10a60fe2908f56d556d95",
+            "link": "tests/unit/menu_eligibility.cpp#L1"
+          },
+          "unit_registration": {
+            "path": "tests/unit/manifest.tsv",
+            "line": 233,
+            "sha256": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
+            "link": "tests/unit/manifest.tsv#L233"
+          },
+          "probe": {
+            "path": "tests/probes/native_menu_eligibility_probe.cpp",
+            "line": 1,
+            "sha256": "95f705f0596801425b789a59ce176bcad1203c322d221a3f77989a333adc0156",
+            "link": "tests/probes/native_menu_eligibility_probe.cpp#L1"
+          },
+          "oracle": {
+            "path": "tools/oracles/verify_original_menu_eligibility.py",
+            "line": 1,
+            "sha256": "a6020665dfefa905413b31b2f6396e42f2458e92e8649888f5f1d745a58a5a78",
+            "link": "tools/oracles/verify_original_menu_eligibility.py#L1"
+          },
+          "prior_receipt": {
+            "path": "reference/oracle-reports/menu_eligibility.json",
+            "line": 1,
+            "sha256": "d94ec10916ada8a4ec50809c9ab8a9b69c1459224a441921d022f66a44f293cb",
+            "link": "reference/oracle-reports/menu_eligibility.json#L1"
+          },
+          "scope_and_limits": "7388 historical cases, seed 20261021, 5000 randomized; zero recorded mismatch/FP partial; five invalid-character register-preservation observations. Full original bodies/unhooked helpers; compares all 512 story bytes, threshold cases 127..136, seven character IDs and override/tutorial paths. Invalid >6 is explicit native error, not an invented result.",
+          "mutants": {
+            "identity": null,
+            "status": "No dedicated tracked mutant specification or result identified for this helper in tracked mutant/holdout paths or its integration receipts. Not run; absence is a qualification gap, not proof of no historical private run."
+          },
+          "holdout": {
+            "identity": null,
+            "status": "No dedicated tracked reserved holdout identity located. Default randomized cases are development corpus, not a reserved holdout."
+          },
+          "acceptance": "Accept existing judge for the bounded behavior above only; prior receipt is not fresh qualification or full-module runtime completion."
+        }
+      ],
+      "destination": "src/game/ui; existing semantic module retained until Root chooses system layout",
+      "findings": [
+        {
+          "location": "src/game/menu_eligibility.cpp:18",
+          "minimum_scope": [
+            "src/game/menu_eligibility.hpp",
+            "src/game/menu_eligibility.cpp",
+            "src/game/main_menu_eligibility.cpp",
+            "src/game/character_select_menu.cpp"
+          ],
+          "required_change": "Use shared SDK-backed story flag names and semantic menu-selection/tutorial variant names. Keep persistent flag89 write visible to all borrowers; no new state owner."
+        }
+      ],
+      "classification_limits": "Per-file existing maintained-source disposition. Companion dependencies and judge gaps remain explicit; no source change, test execution, gate or complete-system/runtime claim.",
+      "reviewed_source_sha256": "cf76022d0d362fcefed25327173331282b6fe705d035f1eeff14eafc1e2a9e14"
+    },
+    "src/game/main_menu_eligibility.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Narrow borrowed completion view and semantic typed function declarations; no owned state or unresolved behavior in this header.",
+      "semantic_justification": "Reviewed all declarations: two const references carry live completion/catalog data; functions use int32 decisions, consumed signed/unsigned byte language results and byte counts. Existing FUNCTION annotations trace to SDK FunctionsNew.h:1613-1618 and overrides.tsv:132-141. No fixture optional, emulator ABI, runtime address, content embedding or service hierarchy. Unnamed free-function parameters are not an untyped transport. This file disposition does not close companion cpp numeric-policy debt or menu_eligibility.hpp diagnostics.",
+      "evidence": [
+        {
+          "path": "src/game/main_menu_eligibility.hpp",
+          "line": 1,
+          "sha256": "bf32a383a2ec665138c6cd6e508770e050d72133031eb7798d33ea9c6689ebcc",
+          "link": "src/game/main_menu_eligibility.hpp#L1",
+          "end_line": 33
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "These modules own no persistent progress bytes. Progress borrows save::Data const, mutable story bytes, and const live override/tutorial bytes. Native Session owns save_; bootstrap_ owns sequence_variables, menu.flags[0]; flow_ owns tutorial_variant. save_ is a packed persistence snapshot, not a second live story owner. Metal enable is the sole predicate store: story_flags[89]=1 after override and existing-flag checks, only at >=130 emblems.",
+          "evidence": [
+            {
+              "path": "src/game/menu_eligibility.hpp",
+              "line": 8,
+              "sha256": "5d6a4dabe9c734ac43e80ff70e961f298535d00e4ee3c66cf903ae7e3dd0a72d",
+              "link": "src/game/menu_eligibility.hpp#L8",
+              "end_line": 14
+            },
+            {
+              "path": "src/game/game_bootstrap.hpp",
+              "line": 34,
+              "sha256": "df46f4e508378f30f3c6699fec50f38efe90bc5fe0dbeacf0bbbf672484925b4",
+              "link": "src/game/game_bootstrap.hpp#L34",
+              "end_line": 69
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 185,
+              "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+              "link": "src/runtime/native_session.hpp#L185",
+              "end_line": 228
+            },
+            {
+              "path": "src/runtime/native_main_menu.cpp",
+              "line": 21,
+              "sha256": "5b7308f05665632d1b74c8407b11552ce997b2995068039bd8c644b6f20e01ff",
+              "link": "src/runtime/native_main_menu.cpp#L21",
+              "end_line": 28
+            },
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "line": 23,
+              "sha256": "ae97db3caa701759181c10be4a87552002d8af9695828faf8c5971094add6dae",
+              "link": "src/runtime/native_character_select.cpp#L23",
+              "end_line": 29
+            },
+            {
+              "path": "src/runtime/native_file_select_display.cpp",
+              "line": 150,
+              "sha256": "e64ba02eb87996e6593f5ccb747ac8ba2a0c59eb60fb5fd4a0a8f4df343aa9a7",
+              "link": "src/runtime/native_file_select_display.cpp#L150",
+              "end_line": 163
+            }
+          ]
+        },
+        {
+          "resolution": "Completion borrows bootstrap_.completed_stages (344 bytes = 8 rows x 43) and TitleScene assets_.selection. Session missions_ is the 60-byte mission owner. StageSelectionData owns imported vectors and seven uint16 character IDs; no catalog copy is made by the predicates. Returned uint8 counts intentionally narrow/wrap; the last trial stage uses current_character, not the iterated character.",
+          "evidence": [
+            {
+              "path": "src/game/main_menu_eligibility.hpp",
+              "line": 5,
+              "sha256": "bf32a383a2ec665138c6cd6e508770e050d72133031eb7798d33ea9c6689ebcc",
+              "link": "src/game/main_menu_eligibility.hpp#L5",
+              "end_line": 10
+            },
+            {
+              "path": "src/game/title_menu.hpp",
+              "line": 243,
+              "sha256": "a79d43f9485408f0aa21de76cd16527b98e4b128ec2af1d8694fe7fb17827a45",
+              "link": "src/game/title_menu.hpp#L243",
+              "end_line": 251
+            },
+            {
+              "path": "src/game/game_bootstrap.hpp",
+              "line": 68,
+              "sha256": "df46f4e508378f30f3c6699fec50f38efe90bc5fe0dbeacf0bbbf672484925b4",
+              "link": "src/game/game_bootstrap.hpp#L68",
+              "end_line": 69
+            },
+            {
+              "path": "src/runtime/native_main_menu.cpp",
+              "line": 21,
+              "sha256": "5b7308f05665632d1b74c8407b11552ce997b2995068039bd8c644b6f20e01ff",
+              "link": "src/runtime/native_main_menu.cpp#L21",
+              "end_line": 28
+            },
+            {
+              "path": "src/runtime/native_main_menu.cpp",
+              "line": 91,
+              "sha256": "5b7308f05665632d1b74c8407b11552ce997b2995068039bd8c644b6f20e01ff",
+              "link": "src/runtime/native_main_menu.cpp#L91",
+              "end_line": 105
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 340,
+              "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+              "link": "src/runtime/native_session.hpp#L340"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "path": "src/runtime/native_main_menu.cpp",
+          "line": 66,
+          "sha256": "5b7308f05665632d1b74c8407b11552ce997b2995068039bd8c644b6f20e01ff",
+          "link": "src/runtime/native_main_menu.cpp#L66",
+          "end_line": 105
+        },
+        {
+          "path": "src/game/character_select_menu.cpp",
+          "line": 426,
+          "sha256": "0f5f20783f0ce8ad777299b70125d06e06c0bb68805229dfaf2edc73fb20a043",
+          "link": "src/game/character_select_menu.cpp#L426",
+          "end_line": 440
+        }
+      ],
+      "accepted_judges": [
+        {
+          "unit": {
+            "path": "tests/unit/main_menu_eligibility.cpp",
+            "line": 1,
+            "sha256": "0769bb1cd5d58da859399c2dc7082ca05d3ed8bd3704838e1c528b49ef9896cc",
+            "link": "tests/unit/main_menu_eligibility.cpp#L1"
+          },
+          "unit_registration": {
+            "path": "tests/unit/manifest.tsv",
+            "line": 234,
+            "sha256": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
+            "link": "tests/unit/manifest.tsv#L234"
+          },
+          "probe": {
+            "path": "tests/probes/native_main_menu_eligibility_probe.cpp",
+            "line": 1,
+            "sha256": "07694eccb0ccfd9537837fc39e5638743d9bea1016ca456b899eabf0649d621c",
+            "link": "tests/probes/native_main_menu_eligibility_probe.cpp#L1"
+          },
+          "oracle": {
+            "path": "tools/oracles/verify_original_main_menu_eligibility.py",
+            "line": 1,
+            "sha256": "ad4841c1b47eaac11d364116c98b1965422e29499153985a9e318221913bed0f",
+            "link": "tools/oracles/verify_original_main_menu_eligibility.py#L1"
+          },
+          "prior_receipt": {
+            "path": "reference/oracle-reports/main_menu_eligibility.json",
+            "line": 1,
+            "sha256": "2a33db188507e482028c2040e1ce477774aa9e21462dc8c4c54a8aabfa6f01b2",
+            "link": "reference/oracle-reports/main_menu_eligibility.json#L1"
+          },
+          "scope_and_limits": "11488 historical cases, seed 20261021, 5000 randomized; zero recorded mismatch/FP partial. All 256 option bytes and extreme language ints; actual source stage/character tables; wrappers compare consumed AL as signed/unsigned, not scratch upper EAX. Individual trial/minigame counts reached through totals, not a separate direct ABI test. Probe does NOT return modified flags; mutable helper side effects depend on menu_eligibility judge.",
+          "mutants": {
+            "identity": null,
+            "status": "No dedicated tracked mutant specification or result identified for this helper in tracked mutant/holdout paths or its integration receipts. Not run; absence is a qualification gap, not proof of no historical private run."
+          },
+          "holdout": {
+            "identity": null,
+            "status": "No dedicated tracked reserved holdout identity located. Default randomized cases are development corpus, not a reserved holdout."
+          },
+          "acceptance": "Accept existing judge for the bounded behavior above only; prior receipt is not fresh qualification or full-module runtime completion."
+        }
+      ],
+      "destination": "src/game/ui; existing semantic module retained until Root chooses system layout",
+      "findings": [],
+      "classification_limits": "Per-file existing maintained-source disposition. Companion dependencies and judge gaps remain explicit; no source change, test execution, gate or complete-system/runtime claim.",
+      "reviewed_source_sha256": "bf32a383a2ec665138c6cd6e508770e050d72133031eb7798d33ea9c6689ebcc"
+    },
+    "src/game/main_menu_eligibility.cpp": {
+      "disposition": "needs_migration",
+      "reason": "Known completion flags and mission-complete bit remain unnamed numeric policy (lines 6 and 38); completion row stride43 is repeated.",
+      "semantic_justification": "All ten bodies reviewed. Pure borrowed reads except transitive availability helpers (here characters0..5). Plain integer arithmetic, int8 text narrowing, uint8 counts and wrapped total accumulation are explicit. Order: override before mission/trial loops; trial availability before imported stage read; trial-count catalog access before override, final current-character quirk retained; minigame reads stage byte before override. No fixture optionals, PE reads or invented missing callee. Literal masks/shifts are encodings, not disguised addresses, but 128 mission bit and known clear flags deserve names. Stage vectors/IDs are imported content, not compiler-literal candidates.",
+      "evidence": [
+        {
+          "path": "src/game/main_menu_eligibility.cpp",
+          "line": 1,
+          "sha256": "5ca7c0e54a3e2d9bd6459188daa2b49af3a3a1089a0a4e6a3bc3ba4da5faee76",
+          "link": "src/game/main_menu_eligibility.cpp#L1",
+          "end_line": 90
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "These modules own no persistent progress bytes. Progress borrows save::Data const, mutable story bytes, and const live override/tutorial bytes. Native Session owns save_; bootstrap_ owns sequence_variables, menu.flags[0]; flow_ owns tutorial_variant. save_ is a packed persistence snapshot, not a second live story owner. Metal enable is the sole predicate store: story_flags[89]=1 after override and existing-flag checks, only at >=130 emblems.",
+          "evidence": [
+            {
+              "path": "src/game/menu_eligibility.hpp",
+              "line": 8,
+              "sha256": "5d6a4dabe9c734ac43e80ff70e961f298535d00e4ee3c66cf903ae7e3dd0a72d",
+              "link": "src/game/menu_eligibility.hpp#L8",
+              "end_line": 14
+            },
+            {
+              "path": "src/game/game_bootstrap.hpp",
+              "line": 34,
+              "sha256": "df46f4e508378f30f3c6699fec50f38efe90bc5fe0dbeacf0bbbf672484925b4",
+              "link": "src/game/game_bootstrap.hpp#L34",
+              "end_line": 69
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 185,
+              "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+              "link": "src/runtime/native_session.hpp#L185",
+              "end_line": 228
+            },
+            {
+              "path": "src/runtime/native_main_menu.cpp",
+              "line": 21,
+              "sha256": "5b7308f05665632d1b74c8407b11552ce997b2995068039bd8c644b6f20e01ff",
+              "link": "src/runtime/native_main_menu.cpp#L21",
+              "end_line": 28
+            },
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "line": 23,
+              "sha256": "ae97db3caa701759181c10be4a87552002d8af9695828faf8c5971094add6dae",
+              "link": "src/runtime/native_character_select.cpp#L23",
+              "end_line": 29
+            },
+            {
+              "path": "src/runtime/native_file_select_display.cpp",
+              "line": 150,
+              "sha256": "e64ba02eb87996e6593f5ccb747ac8ba2a0c59eb60fb5fd4a0a8f4df343aa9a7",
+              "link": "src/runtime/native_file_select_display.cpp#L150",
+              "end_line": 163
+            }
+          ]
+        },
+        {
+          "resolution": "Completion borrows bootstrap_.completed_stages (344 bytes = 8 rows x 43) and TitleScene assets_.selection. Session missions_ is the 60-byte mission owner. StageSelectionData owns imported vectors and seven uint16 character IDs; no catalog copy is made by the predicates. Returned uint8 counts intentionally narrow/wrap; the last trial stage uses current_character, not the iterated character.",
+          "evidence": [
+            {
+              "path": "src/game/main_menu_eligibility.hpp",
+              "line": 5,
+              "sha256": "bf32a383a2ec665138c6cd6e508770e050d72133031eb7798d33ea9c6689ebcc",
+              "link": "src/game/main_menu_eligibility.hpp#L5",
+              "end_line": 10
+            },
+            {
+              "path": "src/game/title_menu.hpp",
+              "line": 243,
+              "sha256": "a79d43f9485408f0aa21de76cd16527b98e4b128ec2af1d8694fe7fb17827a45",
+              "link": "src/game/title_menu.hpp#L243",
+              "end_line": 251
+            },
+            {
+              "path": "src/game/game_bootstrap.hpp",
+              "line": 68,
+              "sha256": "df46f4e508378f30f3c6699fec50f38efe90bc5fe0dbeacf0bbbf672484925b4",
+              "link": "src/game/game_bootstrap.hpp#L68",
+              "end_line": 69
+            },
+            {
+              "path": "src/runtime/native_main_menu.cpp",
+              "line": 21,
+              "sha256": "5b7308f05665632d1b74c8407b11552ce997b2995068039bd8c644b6f20e01ff",
+              "link": "src/runtime/native_main_menu.cpp#L21",
+              "end_line": 28
+            },
+            {
+              "path": "src/runtime/native_main_menu.cpp",
+              "line": 91,
+              "sha256": "5b7308f05665632d1b74c8407b11552ce997b2995068039bd8c644b6f20e01ff",
+              "link": "src/runtime/native_main_menu.cpp#L91",
+              "end_line": 105
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 340,
+              "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+              "link": "src/runtime/native_session.hpp#L340"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "path": "src/runtime/native_main_menu.cpp",
+          "line": 66,
+          "sha256": "5b7308f05665632d1b74c8407b11552ce997b2995068039bd8c644b6f20e01ff",
+          "link": "src/runtime/native_main_menu.cpp#L66",
+          "end_line": 105
+        },
+        {
+          "path": "src/game/character_select_menu.cpp",
+          "line": 426,
+          "sha256": "0f5f20783f0ce8ad777299b70125d06e06c0bb68805229dfaf2edc73fb20a043",
+          "link": "src/game/character_select_menu.cpp#L426",
+          "end_line": 440
+        }
+      ],
+      "accepted_judges": [
+        {
+          "unit": {
+            "path": "tests/unit/main_menu_eligibility.cpp",
+            "line": 1,
+            "sha256": "0769bb1cd5d58da859399c2dc7082ca05d3ed8bd3704838e1c528b49ef9896cc",
+            "link": "tests/unit/main_menu_eligibility.cpp#L1"
+          },
+          "unit_registration": {
+            "path": "tests/unit/manifest.tsv",
+            "line": 234,
+            "sha256": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
+            "link": "tests/unit/manifest.tsv#L234"
+          },
+          "probe": {
+            "path": "tests/probes/native_main_menu_eligibility_probe.cpp",
+            "line": 1,
+            "sha256": "07694eccb0ccfd9537837fc39e5638743d9bea1016ca456b899eabf0649d621c",
+            "link": "tests/probes/native_main_menu_eligibility_probe.cpp#L1"
+          },
+          "oracle": {
+            "path": "tools/oracles/verify_original_main_menu_eligibility.py",
+            "line": 1,
+            "sha256": "ad4841c1b47eaac11d364116c98b1965422e29499153985a9e318221913bed0f",
+            "link": "tools/oracles/verify_original_main_menu_eligibility.py#L1"
+          },
+          "prior_receipt": {
+            "path": "reference/oracle-reports/main_menu_eligibility.json",
+            "line": 1,
+            "sha256": "2a33db188507e482028c2040e1ce477774aa9e21462dc8c4c54a8aabfa6f01b2",
+            "link": "reference/oracle-reports/main_menu_eligibility.json#L1"
+          },
+          "scope_and_limits": "11488 historical cases, seed 20261021, 5000 randomized; zero recorded mismatch/FP partial. All 256 option bytes and extreme language ints; actual source stage/character tables; wrappers compare consumed AL as signed/unsigned, not scratch upper EAX. Individual trial/minigame counts reached through totals, not a separate direct ABI test. Probe does NOT return modified flags; mutable helper side effects depend on menu_eligibility judge.",
+          "mutants": {
+            "identity": null,
+            "status": "No dedicated tracked mutant specification or result identified for this helper in tracked mutant/holdout paths or its integration receipts. Not run; absence is a qualification gap, not proof of no historical private run."
+          },
+          "holdout": {
+            "identity": null,
+            "status": "No dedicated tracked reserved holdout identity located. Default randomized cases are development corpus, not a reserved holdout."
+          },
+          "acceptance": "Accept existing judge for the bounded behavior above only; prior receipt is not fresh qualification or full-module runtime completion."
+        }
+      ],
+      "destination": "src/game/ui; existing semantic module retained until Root chooses system layout",
+      "findings": [
+        {
+          "location": "src/game/main_menu_eligibility.cpp:6",
+          "minimum_scope": [
+            "src/game/main_menu_eligibility.cpp",
+            "src/game/menu_eligibility.cpp",
+            "src/game/character_select_menu.cpp",
+            "src/game/game_bootstrap.hpp",
+            "src/game/title_menu.hpp"
+          ],
+          "required_change": "Share named SDK story flags and stage-table dimension with owner/consumers; name completed-mission mask. Preserve raw row ordering, uint8 wrapping and current-character final-stage test; no broad algorithm rewrite."
+        }
+      ],
+      "classification_limits": "Per-file existing maintained-source disposition. Companion dependencies and judge gaps remain explicit; no source change, test execution, gate or complete-system/runtime claim.",
+      "reviewed_source_sha256": "5ca7c0e54a3e2d9bd6459188daa2b49af3a3a1089a0a4e6a3bc3ba4da5faee76"
+    },
+    "src/game/menu_navigation.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Reference-borrowing task API, named errors and one justified already-implemented shutdown seam.",
+      "semantic_justification": "Reviewed State, Boundary/Error and Calls. Missing task/work is genuine native task absence, not fixture availability. Logical errors contain no PCs/registers. MenuMode comes from source AdvaModeEnum (title_menu.hpp:37). Entry names traced through overrides.tsv:130-131 and SDK FunctionsNew.h:1610. Calls is a narrow one-operation composition seam (NOTSA), not a speculative manager. stop_menu_music is already implemented by music.cpp:74 with its own FUNCTION at music.hpp:93; falsely annotating it unrecovered or adding a new service would be unnecessary. No unimplemented callee is silently skipped.",
+      "evidence": [
+        {
+          "path": "src/game/menu_navigation.hpp",
+          "line": 1,
+          "sha256": "78866ebf2734a27a9f8733d1a88a042a6acfe32f6e6accc270e5450a42b21db7",
+          "link": "src/game/menu_navigation.hpp#L1",
+          "end_line": 35
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "State borrows const references to canonical TaskHandles: TitleScene state_.factories.character_select_task and state_.sequence_task. auxiliary_native_work shared_ptrs own CharacterSelectWork / SequenceWork. state_.sequence_work aliases the sequence auxiliary work, not another value owner. set_character_next resolves and stores character work first. prepare_character_select captures a strong sequence work reference before shutdown, so callback replacement of either task cannot redirect the two subsequent stores. No state is allocated by this module.",
+          "evidence": [
+            {
+              "path": "src/game/menu_navigation.hpp",
+              "line": 6,
+              "sha256": "78866ebf2734a27a9f8733d1a88a042a6acfe32f6e6accc270e5450a42b21db7",
+              "link": "src/game/menu_navigation.hpp#L6",
+              "end_line": 10
+            },
+            {
+              "path": "src/game/menu_navigation.cpp",
+              "line": 3,
+              "sha256": "77b4c4887fa4228844e717b1049eaa1e3a1e87fdc378b4af7262d84ad1f10934",
+              "link": "src/game/menu_navigation.cpp#L3",
+              "end_line": 24
+            },
+            {
+              "path": "src/game/title_menu.hpp",
+              "line": 311,
+              "sha256": "a79d43f9485408f0aa21de76cd16527b98e4b128ec2af1d8694fe7fb17827a45",
+              "link": "src/game/title_menu.hpp#L311",
+              "end_line": 314
+            },
+            {
+              "path": "src/game/title_menu.hpp",
+              "line": 477,
+              "sha256": "a79d43f9485408f0aa21de76cd16527b98e4b128ec2af1d8694fe7fb17827a45",
+              "link": "src/game/title_menu.hpp#L477",
+              "end_line": 482
+            },
+            {
+              "path": "src/runtime/native_main_menu.cpp",
+              "line": 128,
+              "sha256": "5b7308f05665632d1b74c8407b11552ce997b2995068039bd8c644b6f20e01ff",
+              "link": "src/runtime/native_main_menu.cpp#L128",
+              "end_line": 133
+            },
+            {
+              "path": "tests/probes/native_menu_navigation_probe.cpp",
+              "line": 6,
+              "sha256": "86e956867c4e3827aa3683f13bdceb48258e4fcb0c29e1f74c5830218b3705a3",
+              "link": "tests/probes/native_menu_navigation_probe.cpp#L6",
+              "end_line": 62
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "path": "src/runtime/native_main_menu.cpp",
+          "line": 128,
+          "sha256": "5b7308f05665632d1b74c8407b11552ce997b2995068039bd8c644b6f20e01ff",
+          "link": "src/runtime/native_main_menu.cpp#L128",
+          "end_line": 133
+        },
+        {
+          "path": "src/runtime/native_title_tasks.cpp",
+          "line": 587,
+          "sha256": "5bc34cd9456afb6af1f38f7af33708ca322ba1f5240897a49706371dd7a6a71c",
+          "link": "src/runtime/native_title_tasks.cpp#L587",
+          "end_line": 590,
+          "note": "actual native shutdown reaches shared music implementation"
+        },
+        {
+          "path": "src/game/music.hpp",
+          "line": 93,
+          "sha256": "e17acc4d593dc83c84ad5e16a0741286cdd2f4ef7626fe2cdae64ffc82e1d781",
+          "link": "src/game/music.hpp#L93",
+          "end_line": 94,
+          "note": "source callee already recovered; no new STUB or service expansion needed"
+        },
+        {
+          "path": "src/game/music.cpp",
+          "line": 74,
+          "sha256": "225ebc59537b71a071c54296f82a7ad6b1ed368eb325c14db5b933053cfaf12d",
+          "link": "src/game/music.cpp#L74",
+          "end_line": 85
+        },
+        {
+          "path": "src/game/music.hpp",
+          "line": 93,
+          "sha256": "e17acc4d593dc83c84ad5e16a0741286cdd2f4ef7626fe2cdae64ffc82e1d781",
+          "link": "src/game/music.hpp#L93",
+          "note": "Existing FUNCTION provenance for recovered shutdown callee, NOTSA wrapper is justified composition."
+        }
+      ],
+      "accepted_judges": [
+        {
+          "unit": {
+            "path": "tests/unit/menu_navigation.cpp",
+            "line": 1,
+            "sha256": "75d4cb516b496c88421a70fdb2a6bc5a17f4d59f5bad4faf9c92c65719e73ae8",
+            "link": "tests/unit/menu_navigation.cpp#L1"
+          },
+          "unit_registration": {
+            "path": "tests/unit/manifest.tsv",
+            "line": 237,
+            "sha256": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
+            "link": "tests/unit/manifest.tsv#L237"
+          },
+          "probe": {
+            "path": "tests/probes/native_menu_navigation_probe.cpp",
+            "line": 1,
+            "sha256": "86e956867c4e3827aa3683f13bdceb48258e4fcb0c29e1f74c5830218b3705a3",
+            "link": "tests/probes/native_menu_navigation_probe.cpp#L1"
+          },
+          "oracle": {
+            "path": "tools/oracles/verify_original_menu_navigation.py",
+            "line": 1,
+            "sha256": "0673c323a27bd5a42a7c0aadcc10eed27edb9ea129329387b2c1c5ac0471059e",
+            "link": "tools/oracles/verify_original_menu_navigation.py#L1"
+          },
+          "prior_receipt": {
+            "path": "reference/oracle-reports/menu_navigation.json",
+            "line": 1,
+            "sha256": "31cfe34975290e14f73963248a28fc21f414aaed6ec1a2ba01c03183767ef8cb",
+            "link": "reference/oracle-reports/menu_navigation.json#L1"
+          },
+          "scope_and_limits": "1488 historical cases, default seed 505660, 1200 randomized; source setter and routing bodies. Only actual music shutdown replaced by receipt: checks pre-call fields, both canonical task replacements, captured destination and store order. Unit covers missing sequence and character work. Null character and missing sequence work checks are present in body but not both explicitly exercised by this unit. No music teardown correctness claim from receipt.",
+          "mutants": {
+            "identity": null,
+            "status": "No dedicated tracked mutant specification or result identified for this helper in tracked mutant/holdout paths or its integration receipts. Not run; absence is a qualification gap, not proof of no historical private run."
+          },
+          "holdout": {
+            "identity": null,
+            "status": "No dedicated tracked reserved holdout identity located. Default randomized cases are development corpus, not a reserved holdout."
+          },
+          "acceptance": "Accept existing judge for the bounded behavior above only; prior receipt is not fresh qualification or full-module runtime completion."
+        }
+      ],
+      "destination": "src/game/ui; existing semantic module retained until Root chooses system layout",
+      "findings": [],
+      "classification_limits": "Per-file existing maintained-source disposition. Companion dependencies and judge gaps remain explicit; no source change, test execution, gate or complete-system/runtime claim.",
+      "reviewed_source_sha256": "78866ebf2734a27a9f8733d1a88a042a6acfe32f6e6accc270e5450a42b21db7"
+    },
+    "src/game/menu_navigation.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Structured two-operation navigation body preserves captured work identity and callback/store order.",
+      "semantic_justification": "Both bodies reviewed. Character task/work checked, next mode stored; sequence resolved and retained by shared_ptr; music callback runs; waiting byte then waiting_mode are stored into captured sequence even if callback replaces task owners. All writes use semantic types; no floating arithmetic, imported content, fixture optional, executable read or generic dispatch. Missing sequence throws after character store, preserving partial publication. Static cast assumes canonical work type supplied by factories; no runtime dynamic-type validation is claimed.",
+      "evidence": [
+        {
+          "path": "src/game/menu_navigation.cpp",
+          "line": 1,
+          "sha256": "77b4c4887fa4228844e717b1049eaa1e3a1e87fdc378b4af7262d84ad1f10934",
+          "link": "src/game/menu_navigation.cpp#L1",
+          "end_line": 25
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "State borrows const references to canonical TaskHandles: TitleScene state_.factories.character_select_task and state_.sequence_task. auxiliary_native_work shared_ptrs own CharacterSelectWork / SequenceWork. state_.sequence_work aliases the sequence auxiliary work, not another value owner. set_character_next resolves and stores character work first. prepare_character_select captures a strong sequence work reference before shutdown, so callback replacement of either task cannot redirect the two subsequent stores. No state is allocated by this module.",
+          "evidence": [
+            {
+              "path": "src/game/menu_navigation.hpp",
+              "line": 6,
+              "sha256": "78866ebf2734a27a9f8733d1a88a042a6acfe32f6e6accc270e5450a42b21db7",
+              "link": "src/game/menu_navigation.hpp#L6",
+              "end_line": 10
+            },
+            {
+              "path": "src/game/menu_navigation.cpp",
+              "line": 3,
+              "sha256": "77b4c4887fa4228844e717b1049eaa1e3a1e87fdc378b4af7262d84ad1f10934",
+              "link": "src/game/menu_navigation.cpp#L3",
+              "end_line": 24
+            },
+            {
+              "path": "src/game/title_menu.hpp",
+              "line": 311,
+              "sha256": "a79d43f9485408f0aa21de76cd16527b98e4b128ec2af1d8694fe7fb17827a45",
+              "link": "src/game/title_menu.hpp#L311",
+              "end_line": 314
+            },
+            {
+              "path": "src/game/title_menu.hpp",
+              "line": 477,
+              "sha256": "a79d43f9485408f0aa21de76cd16527b98e4b128ec2af1d8694fe7fb17827a45",
+              "link": "src/game/title_menu.hpp#L477",
+              "end_line": 482
+            },
+            {
+              "path": "src/runtime/native_main_menu.cpp",
+              "line": 128,
+              "sha256": "5b7308f05665632d1b74c8407b11552ce997b2995068039bd8c644b6f20e01ff",
+              "link": "src/runtime/native_main_menu.cpp#L128",
+              "end_line": 133
+            },
+            {
+              "path": "tests/probes/native_menu_navigation_probe.cpp",
+              "line": 6,
+              "sha256": "86e956867c4e3827aa3683f13bdceb48258e4fcb0c29e1f74c5830218b3705a3",
+              "link": "tests/probes/native_menu_navigation_probe.cpp#L6",
+              "end_line": 62
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "path": "src/runtime/native_main_menu.cpp",
+          "line": 128,
+          "sha256": "5b7308f05665632d1b74c8407b11552ce997b2995068039bd8c644b6f20e01ff",
+          "link": "src/runtime/native_main_menu.cpp#L128",
+          "end_line": 133
+        },
+        {
+          "path": "src/runtime/native_title_tasks.cpp",
+          "line": 587,
+          "sha256": "5bc34cd9456afb6af1f38f7af33708ca322ba1f5240897a49706371dd7a6a71c",
+          "link": "src/runtime/native_title_tasks.cpp#L587",
+          "end_line": 590,
+          "note": "actual native shutdown reaches shared music implementation"
+        },
+        {
+          "path": "src/game/music.hpp",
+          "line": 93,
+          "sha256": "e17acc4d593dc83c84ad5e16a0741286cdd2f4ef7626fe2cdae64ffc82e1d781",
+          "link": "src/game/music.hpp#L93",
+          "end_line": 94,
+          "note": "source callee already recovered; no new STUB or service expansion needed"
+        },
+        {
+          "path": "src/game/music.cpp",
+          "line": 74,
+          "sha256": "225ebc59537b71a071c54296f82a7ad6b1ed368eb325c14db5b933053cfaf12d",
+          "link": "src/game/music.cpp#L74",
+          "end_line": 85
+        }
+      ],
+      "accepted_judges": [
+        {
+          "unit": {
+            "path": "tests/unit/menu_navigation.cpp",
+            "line": 1,
+            "sha256": "75d4cb516b496c88421a70fdb2a6bc5a17f4d59f5bad4faf9c92c65719e73ae8",
+            "link": "tests/unit/menu_navigation.cpp#L1"
+          },
+          "unit_registration": {
+            "path": "tests/unit/manifest.tsv",
+            "line": 237,
+            "sha256": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
+            "link": "tests/unit/manifest.tsv#L237"
+          },
+          "probe": {
+            "path": "tests/probes/native_menu_navigation_probe.cpp",
+            "line": 1,
+            "sha256": "86e956867c4e3827aa3683f13bdceb48258e4fcb0c29e1f74c5830218b3705a3",
+            "link": "tests/probes/native_menu_navigation_probe.cpp#L1"
+          },
+          "oracle": {
+            "path": "tools/oracles/verify_original_menu_navigation.py",
+            "line": 1,
+            "sha256": "0673c323a27bd5a42a7c0aadcc10eed27edb9ea129329387b2c1c5ac0471059e",
+            "link": "tools/oracles/verify_original_menu_navigation.py#L1"
+          },
+          "prior_receipt": {
+            "path": "reference/oracle-reports/menu_navigation.json",
+            "line": 1,
+            "sha256": "31cfe34975290e14f73963248a28fc21f414aaed6ec1a2ba01c03183767ef8cb",
+            "link": "reference/oracle-reports/menu_navigation.json#L1"
+          },
+          "scope_and_limits": "1488 historical cases, default seed 505660, 1200 randomized; source setter and routing bodies. Only actual music shutdown replaced by receipt: checks pre-call fields, both canonical task replacements, captured destination and store order. Unit covers missing sequence and character work. Null character and missing sequence work checks are present in body but not both explicitly exercised by this unit. No music teardown correctness claim from receipt.",
+          "mutants": {
+            "identity": null,
+            "status": "No dedicated tracked mutant specification or result identified for this helper in tracked mutant/holdout paths or its integration receipts. Not run; absence is a qualification gap, not proof of no historical private run."
+          },
+          "holdout": {
+            "identity": null,
+            "status": "No dedicated tracked reserved holdout identity located. Default randomized cases are development corpus, not a reserved holdout."
+          },
+          "acceptance": "Accept existing judge for the bounded behavior above only; prior receipt is not fresh qualification or full-module runtime completion."
+        }
+      ],
+      "destination": "src/game/ui; existing semantic module retained until Root chooses system layout",
+      "findings": [],
+      "classification_limits": "Per-file existing maintained-source disposition. Companion dependencies and judge gaps remain explicit; no source change, test execution, gate or complete-system/runtime claim.",
+      "reviewed_source_sha256": "77b4c4887fa4228844e717b1049eaa1e3a1e87fdc378b4af7262d84ad1f10934"
+    },
+    "src/game/character_completion.hpp": {
+      "disposition": "needs_migration",
+      "reason": "Three boundary instruction addresses occur as ordinary enumerator comments (lines 21-23), outside provenance annotations.",
+      "semantic_justification": "Row/Catalog/Flags API itself is semantic and should be retained: signed authored value/kind/index, seven native vectors, const borrowed distinct flag owners. Catalog indexes and flag bounds describe genuine imported-data validity, not missing fixture words; FUNCTION and override trace CharacterCompletion. Small provenance-format cleanup only; do not turn these plain types into a reference transport or rewrite readable algorithm.",
+      "evidence": [
+        {
+          "path": "src/game/character_completion.hpp",
+          "line": 1,
+          "sha256": "c6749736b454ac340aa7b6c3efdf8e484c94014243fea533b4090140faff71ad",
+          "link": "src/game/character_completion.hpp#L1",
+          "end_line": 38
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "Flags contains const references to bootstrap_.sequence_variables and bootstrap_.cutscene_flags; event_work is a distinct owner and must not be substituted. Session owns one unique_ptr<Catalog>, attached once and moved in; value borrows it const. Catalog vectors contain imported signed value/source/index triples, no guest pointer/fixture optional. Helpers read bytes only and never change either flag owner.",
+          "evidence": [
+            {
+              "path": "src/game/character_completion.hpp",
+              "line": 8,
+              "sha256": "c6749736b454ac340aa7b6c3efdf8e484c94014243fea533b4090140faff71ad",
+              "link": "src/game/character_completion.hpp#L8",
+              "end_line": 19
+            },
+            {
+              "path": "src/game/game_bootstrap.hpp",
+              "line": 68,
+              "sha256": "df46f4e508378f30f3c6699fec50f38efe90bc5fe0dbeacf0bbbf672484925b4",
+              "link": "src/game/game_bootstrap.hpp#L68",
+              "end_line": 69
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 135,
+              "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+              "link": "src/runtime/native_session.hpp#L135",
+              "end_line": 139
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 268,
+              "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+              "link": "src/runtime/native_session.hpp#L268"
+            },
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "line": 219,
+              "sha256": "ae97db3caa701759181c10be4a87552002d8af9695828faf8c5971094add6dae",
+              "link": "src/runtime/native_character_select.cpp#L219",
+              "end_line": 224
+            },
+            {
+              "path": "src/apps/native_character_completion_assets.hpp",
+              "line": 6,
+              "sha256": "bc4dc41040c9618411b67f4f6f32013026a8032e7b9ebaabefaf2a1275efa664",
+              "link": "src/apps/native_character_completion_assets.hpp#L6",
+              "end_line": 30
+            },
+            {
+              "path": "tools/import/character_completion.py",
+              "line": 12,
+              "sha256": "2db244ad28c4f5c4c0c619f4b5fbfc8b1ec1155017d1c16ed01f59eb59176235",
+              "link": "tools/import/character_completion.py#L12",
+              "end_line": 33
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "path": "src/runtime/native_character_select.cpp",
+          "line": 219,
+          "sha256": "ae97db3caa701759181c10be4a87552002d8af9695828faf8c5971094add6dae",
+          "link": "src/runtime/native_character_select.cpp#L219",
+          "end_line": 224
+        },
+        {
+          "path": "src/game/character_select_menu.cpp",
+          "line": 387,
+          "sha256": "0f5f20783f0ce8ad777299b70125d06e06c0bb68805229dfaf2edc73fb20a043",
+          "link": "src/game/character_select_menu.cpp#L387",
+          "end_line": 388
+        },
+        {
+          "path": "src/apps/native_character_completion_assets.hpp",
+          "line": 6,
+          "sha256": "bc4dc41040c9618411b67f4f6f32013026a8032e7b9ebaabefaf2a1275efa664",
+          "link": "src/apps/native_character_completion_assets.hpp#L6",
+          "end_line": 30
+        },
+        {
+          "path": "src/apps/sadx_native.mm",
+          "line": 214,
+          "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2",
+          "link": "src/apps/sadx_native.mm#L214"
+        },
+        {
+          "path": "src/runtime/native_session.hpp",
+          "line": 135,
+          "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+          "link": "src/runtime/native_session.hpp#L135",
+          "end_line": 139
+        }
+      ],
+      "accepted_judges": [
+        {
+          "unit": {
+            "path": "tests/unit/character_completion.mm",
+            "line": 5,
+            "sha256": "94e1c5e38c454ff75fa397189f1d025064bf729407319904cdf6b9148655e4cf",
+            "link": "tests/unit/character_completion.mm#L5",
+            "end_line": 82
+          },
+          "unit_registration": {
+            "path": "tests/unit/manifest.tsv",
+            "line": 257,
+            "sha256": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
+            "link": "tests/unit/manifest.tsv#L257"
+          },
+          "probe": {
+            "path": "tests/probes/native_character_completion_probe.cpp",
+            "line": 1,
+            "sha256": "550ec541735a1dcf965808ced1a35f13e5edc3c524d82e22b4b0b4a39444d5cd",
+            "link": "tests/probes/native_character_completion_probe.cpp#L1"
+          },
+          "oracle": {
+            "path": "tools/oracles/verify_original_character_completion.py",
+            "line": 1,
+            "sha256": "cf2e94624e384a24d53bf2a21744756ac79bf91c2f51c953c2f85927b68d17ac",
+            "link": "tools/oracles/verify_original_character_completion.py#L1"
+          },
+          "import_tests": {
+            "path": "tests/python/test_character_completion_import.py",
+            "line": 1,
+            "sha256": "677931420a5bd7881bc7051e2d9528375771362f8223b5c7a433536dfbc73659",
+            "link": "tests/python/test_character_completion_import.py#L1"
+          },
+          "prior_receipt": {
+            "path": "reference/production-integration-20261021/native-character-select-caller-frontier.json",
+            "line": 151,
+            "sha256": "af5c6416043b60bdf2860a5adfd48cabf054858a57eedd0ba851e3e5d4417ab7",
+            "link": "reference/production-integration-20261021/native-character-select-caller-frontier.json#L151",
+            "end_line": 155
+          },
+          "prior_receipt_identity": {
+            "cases": 2399,
+            "verdict": "pass (historical only)",
+            "raw_report_sha256": "b73d897914b3c19b3c773ef32673fff694a2284ce0af65600149138ee64d3ada"
+          },
+          "scope_and_limits": "Full 512ca0 entry and actual flag helpers; 256 byte helper proofs per flag kind. Canonical imported rows plus independently authored stress rows, zero/negative values, unknown kinds and signed nonpositive counts represented as empty native vectors at adapter boundary. Unit explicitly checks six indexed-read boundary cases and seven malformed metadata cases, distinct story/cutscene ownership and last-match rather than maximum/popcount. Raw 2399-case report is not tracked here; receipt has its hash. No new execution or full CharacterSelect drawing claim.",
+          "mutants": {
+            "identity": null,
+            "status": "No dedicated completion algorithm mutation receipt located. Registration records x492->493 Number ABI mutant, eight mismatches, but that judges the caller/UI number arguments, not this completion algorithm. Do not count it as this module mutant qualification.",
+            "related_nonqualifying_receipt": {
+              "path": "reference/production-integration-20261021/native-character-select-registration-judge.json",
+              "line": 8,
+              "sha256": "a74180c06254e555b5a649891edc3e3c3d59406c7b73eab1d7d96c9366bbf672",
+              "link": "reference/production-integration-20261021/native-character-select-registration-judge.json#L8"
+            }
+          },
+          "holdout": {
+            "identity": null,
+            "status": "Symbol override mentions 2399/5399 strict cases, but no tracked 5399-case report, seed, or reserved holdout receipt found; do not promote that wording to qualification."
+          },
+          "acceptance": "Sufficient for static semantic body disposition and unchanged bounded judge identity; fresh rewrite qualification remains Root-owned."
+        }
+      ],
+      "destination": "src/game/save; existing semantic module retained until Root chooses system layout",
+      "findings": [
+        {
+          "location": "src/game/character_completion.hpp:21",
+          "minimum_scope": [
+            "src/game/character_completion.hpp"
+          ],
+          "required_change": "Keep logical Boundary names; move per-instruction provenance to supported annotation/evidence or reference diagnostic mapping. No algorithm or owner migration is justified by this finding."
+        }
+      ],
+      "classification_limits": "Per-file existing maintained-source disposition. Companion dependencies and judge gaps remain explicit; no source change, test execution, gate or complete-system/runtime claim.",
+      "reviewed_source_sha256": "c6749736b454ac340aa7b6c3efdf8e484c94014243fea533b4090140faff71ad"
+    },
+    "src/game/character_completion.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Typed last-satisfied-row reduction, distinct flag semantics and checked native data bounds are already readable.",
+      "semantic_justification": "Reviewed both private NOTSA helpers and full value body. Story bytes use nonzero; cutscene byte signed return is explicitly derived with int32(byte)-256 for >=128 and still tested nonzero. Unknown kinds skip without reading flag. Iteration preserves authored order and last passing row (including zero/negative), not maximum or count. Checked character/index rejects invalid imported views; no fixture optional/unknown word is threaded through logic. No arithmetic overflow, floating state, executable reads, pointer offsets or unrecovered calls. Literal128/256 express byte sign conversion, not unnamed gameplay decisions; rows are imported content and remain data.",
+      "evidence": [
+        {
+          "path": "src/game/character_completion.cpp",
+          "line": 1,
+          "sha256": "d83e737fa7b2384e4dd135aa3399c4e8f4c6d12599a02ce11e4629f119489098",
+          "link": "src/game/character_completion.cpp#L1",
+          "end_line": 38
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "Flags contains const references to bootstrap_.sequence_variables and bootstrap_.cutscene_flags; event_work is a distinct owner and must not be substituted. Session owns one unique_ptr<Catalog>, attached once and moved in; value borrows it const. Catalog vectors contain imported signed value/source/index triples, no guest pointer/fixture optional. Helpers read bytes only and never change either flag owner.",
+          "evidence": [
+            {
+              "path": "src/game/character_completion.hpp",
+              "line": 8,
+              "sha256": "c6749736b454ac340aa7b6c3efdf8e484c94014243fea533b4090140faff71ad",
+              "link": "src/game/character_completion.hpp#L8",
+              "end_line": 19
+            },
+            {
+              "path": "src/game/game_bootstrap.hpp",
+              "line": 68,
+              "sha256": "df46f4e508378f30f3c6699fec50f38efe90bc5fe0dbeacf0bbbf672484925b4",
+              "link": "src/game/game_bootstrap.hpp#L68",
+              "end_line": 69
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 135,
+              "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+              "link": "src/runtime/native_session.hpp#L135",
+              "end_line": 139
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 268,
+              "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+              "link": "src/runtime/native_session.hpp#L268"
+            },
+            {
+              "path": "src/runtime/native_character_select.cpp",
+              "line": 219,
+              "sha256": "ae97db3caa701759181c10be4a87552002d8af9695828faf8c5971094add6dae",
+              "link": "src/runtime/native_character_select.cpp#L219",
+              "end_line": 224
+            },
+            {
+              "path": "src/apps/native_character_completion_assets.hpp",
+              "line": 6,
+              "sha256": "bc4dc41040c9618411b67f4f6f32013026a8032e7b9ebaabefaf2a1275efa664",
+              "link": "src/apps/native_character_completion_assets.hpp#L6",
+              "end_line": 30
+            },
+            {
+              "path": "tools/import/character_completion.py",
+              "line": 12,
+              "sha256": "2db244ad28c4f5c4c0c619f4b5fbfc8b1ec1155017d1c16ed01f59eb59176235",
+              "link": "tools/import/character_completion.py#L12",
+              "end_line": 33
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "path": "src/runtime/native_character_select.cpp",
+          "line": 219,
+          "sha256": "ae97db3caa701759181c10be4a87552002d8af9695828faf8c5971094add6dae",
+          "link": "src/runtime/native_character_select.cpp#L219",
+          "end_line": 224
+        },
+        {
+          "path": "src/game/character_select_menu.cpp",
+          "line": 387,
+          "sha256": "0f5f20783f0ce8ad777299b70125d06e06c0bb68805229dfaf2edc73fb20a043",
+          "link": "src/game/character_select_menu.cpp#L387",
+          "end_line": 388
+        },
+        {
+          "path": "src/apps/native_character_completion_assets.hpp",
+          "line": 6,
+          "sha256": "bc4dc41040c9618411b67f4f6f32013026a8032e7b9ebaabefaf2a1275efa664",
+          "link": "src/apps/native_character_completion_assets.hpp#L6",
+          "end_line": 30
+        },
+        {
+          "path": "src/apps/sadx_native.mm",
+          "line": 214,
+          "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2",
+          "link": "src/apps/sadx_native.mm#L214"
+        },
+        {
+          "path": "src/runtime/native_session.hpp",
+          "line": 135,
+          "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+          "link": "src/runtime/native_session.hpp#L135",
+          "end_line": 139
+        }
+      ],
+      "accepted_judges": [
+        {
+          "unit": {
+            "path": "tests/unit/character_completion.mm",
+            "line": 5,
+            "sha256": "94e1c5e38c454ff75fa397189f1d025064bf729407319904cdf6b9148655e4cf",
+            "link": "tests/unit/character_completion.mm#L5",
+            "end_line": 82
+          },
+          "unit_registration": {
+            "path": "tests/unit/manifest.tsv",
+            "line": 257,
+            "sha256": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
+            "link": "tests/unit/manifest.tsv#L257"
+          },
+          "probe": {
+            "path": "tests/probes/native_character_completion_probe.cpp",
+            "line": 1,
+            "sha256": "550ec541735a1dcf965808ced1a35f13e5edc3c524d82e22b4b0b4a39444d5cd",
+            "link": "tests/probes/native_character_completion_probe.cpp#L1"
+          },
+          "oracle": {
+            "path": "tools/oracles/verify_original_character_completion.py",
+            "line": 1,
+            "sha256": "cf2e94624e384a24d53bf2a21744756ac79bf91c2f51c953c2f85927b68d17ac",
+            "link": "tools/oracles/verify_original_character_completion.py#L1"
+          },
+          "import_tests": {
+            "path": "tests/python/test_character_completion_import.py",
+            "line": 1,
+            "sha256": "677931420a5bd7881bc7051e2d9528375771362f8223b5c7a433536dfbc73659",
+            "link": "tests/python/test_character_completion_import.py#L1"
+          },
+          "prior_receipt": {
+            "path": "reference/production-integration-20261021/native-character-select-caller-frontier.json",
+            "line": 151,
+            "sha256": "af5c6416043b60bdf2860a5adfd48cabf054858a57eedd0ba851e3e5d4417ab7",
+            "link": "reference/production-integration-20261021/native-character-select-caller-frontier.json#L151",
+            "end_line": 155
+          },
+          "prior_receipt_identity": {
+            "cases": 2399,
+            "verdict": "pass (historical only)",
+            "raw_report_sha256": "b73d897914b3c19b3c773ef32673fff694a2284ce0af65600149138ee64d3ada"
+          },
+          "scope_and_limits": "Full 512ca0 entry and actual flag helpers; 256 byte helper proofs per flag kind. Canonical imported rows plus independently authored stress rows, zero/negative values, unknown kinds and signed nonpositive counts represented as empty native vectors at adapter boundary. Unit explicitly checks six indexed-read boundary cases and seven malformed metadata cases, distinct story/cutscene ownership and last-match rather than maximum/popcount. Raw 2399-case report is not tracked here; receipt has its hash. No new execution or full CharacterSelect drawing claim.",
+          "mutants": {
+            "identity": null,
+            "status": "No dedicated completion algorithm mutation receipt located. Registration records x492->493 Number ABI mutant, eight mismatches, but that judges the caller/UI number arguments, not this completion algorithm. Do not count it as this module mutant qualification.",
+            "related_nonqualifying_receipt": {
+              "path": "reference/production-integration-20261021/native-character-select-registration-judge.json",
+              "line": 8,
+              "sha256": "a74180c06254e555b5a649891edc3e3c3d59406c7b73eab1d7d96c9366bbf672",
+              "link": "reference/production-integration-20261021/native-character-select-registration-judge.json#L8"
+            }
+          },
+          "holdout": {
+            "identity": null,
+            "status": "Symbol override mentions 2399/5399 strict cases, but no tracked 5399-case report, seed, or reserved holdout receipt found; do not promote that wording to qualification."
+          },
+          "acceptance": "Sufficient for static semantic body disposition and unchanged bounded judge identity; fresh rewrite qualification remains Root-owned."
+        }
+      ],
+      "destination": "src/game/save; existing semantic module retained until Root chooses system layout",
+      "findings": [],
+      "classification_limits": "Per-file existing maintained-source disposition. Companion dependencies and judge gaps remain explicit; no source change, test execution, gate or complete-system/runtime claim.",
+      "reviewed_source_sha256": "d83e737fa7b2384e4dd135aa3399c4e8f4c6d12599a02ce11e4629f119489098"
+    },
+    "src/game/save_completion.hpp": {
+      "disposition": "needs_migration",
+      "reason": "Unrecovered warning create/close calls lack individual source-named STUB annotations; interface hides source contract (lines 20-28).",
+      "semantic_justification": "All fields are references with correct byte/int32/uint16/native-handle shape; no duplicate state or fixture optional. update helper is explicitly NOTSA suffix of FileSelect_Controls, not falsely annotated a whole recovered entry. Source421ab0 appears only as ad hoc comment instead of supported provenance. Runtime create_save_warning and close_save_warning already throw; preserve those unrecovered seams and do not implement new behavior for campaign completion. Seven-method interface is bounded to completion but parameters should name roles and existing recovered callees should resolve to their shared named implementations.",
+      "evidence": [
+        {
+          "path": "src/game/save_completion.hpp",
+          "line": 1,
+          "sha256": "3cfe72feb94599f4c11adc2dfe0b1c54c189cb240bdfa2e11bee64e286ec1a0a",
+          "link": "src/game/save_completion.hpp#L1",
+          "end_line": 35
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "SaveCompletionState owns no bytes; all eleven fields borrow live native owners. alert_blocked/save_phase/save_ready/alert_flag belong to flow_; save_ok_, fade marker, save_exec_, selection backup, saving_disabled_ and warning TaskHandle belong to Session; selected_card_file borrows bootstrap_.menu.selected_file. FileSelectWork belongs to its task auxiliary work. The write frame owns success publication; this helper only consumes/clears it. Session.save_progress() and display compose the same fields; do not add an independent completion state.",
+          "field_mapping": {
+            "alert_blocked": "session_.flow_.alert_blocked",
+            "save_ok": "session_.save_ok_",
+            "fade_in_marker": "session_.file_select_fade_in_marker_",
+            "now_saving": "session_.flow_.save_phase",
+            "save_ready": "session_.flow_.save_ready",
+            "save_exec_flag": "session_.save_exec_",
+            "alert_flag": "session_.flow_.alert_flag",
+            "selected_card_file": "session_.bootstrap_.menu.selected_file",
+            "selected_file_backup": "session_.file_selection_backup_",
+            "saving_disabled": "session_.saving_disabled_",
+            "warning_task": "session_.save_warning_message_"
+          },
+          "evidence": [
+            {
+              "path": "src/game/save_completion.hpp",
+              "line": 6,
+              "sha256": "3cfe72feb94599f4c11adc2dfe0b1c54c189cb240bdfa2e11bee64e286ec1a0a",
+              "link": "src/game/save_completion.hpp#L6",
+              "end_line": 18
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 511,
+              "sha256": "5bc34cd9456afb6af1f38f7af33708ca322ba1f5240897a49706371dd7a6a71c",
+              "link": "src/runtime/native_title_tasks.cpp#L511",
+              "end_line": 525
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 69,
+              "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+              "link": "src/runtime/native_session.hpp#L69",
+              "end_line": 75
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 195,
+              "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+              "link": "src/runtime/native_session.hpp#L195",
+              "end_line": 228
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 275,
+              "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+              "link": "src/runtime/native_session.hpp#L275",
+              "end_line": 278
+            },
+            {
+              "path": "src/game/title_menu.hpp",
+              "line": 220,
+              "sha256": "a79d43f9485408f0aa21de76cd16527b98e4b128ec2af1d8694fe7fb17827a45",
+              "link": "src/game/title_menu.hpp#L220",
+              "end_line": 227
+            },
+            {
+              "path": "src/runtime/native_file_select_display.cpp",
+              "line": 150,
+              "sha256": "e64ba02eb87996e6593f5ccb747ac8ba2a0c59eb60fb5fd4a0a8f4df343aa9a7",
+              "link": "src/runtime/native_file_select_display.cpp#L150",
+              "end_line": 163
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "path": "src/game/file_select_controls.cpp",
+          "line": 29,
+          "sha256": "e3d12bbda98c073fc6dce1133a830f68ecc5f03a6e49a2a376f9cb35e803dd04",
+          "link": "src/game/file_select_controls.cpp#L29",
+          "end_line": 39,
+          "note": "shared animation runs before completion suffix dispatch"
+        },
+        {
+          "path": "src/game/file_select_controls.cpp",
+          "line": 104,
+          "sha256": "e3d12bbda98c073fc6dce1133a830f68ecc5f03a6e49a2a376f9cb35e803dd04",
+          "link": "src/game/file_select_controls.cpp#L104",
+          "end_line": 108
+        },
+        {
+          "path": "src/runtime/native_title_tasks.cpp",
+          "line": 511,
+          "sha256": "5bc34cd9456afb6af1f38f7af33708ca322ba1f5240897a49706371dd7a6a71c",
+          "link": "src/runtime/native_title_tasks.cpp#L511",
+          "end_line": 525
+        },
+        {
+          "path": "src/runtime/native_title_scene.hpp",
+          "line": 214,
+          "sha256": "6bbeb90ebb857292266180d33d2519eadcb8a8ac076cc6b667a9573951382d07",
+          "link": "src/runtime/native_title_scene.hpp#L214"
+        }
+      ],
+      "accepted_judges": [
+        {
+          "unit": {
+            "path": "tests/unit/save_creation.cpp",
+            "line": 1,
+            "sha256": "11312f59661c8b0b83304379f8187cf38a17ab90e982a8f7ad7bb4c43554cbcd",
+            "link": "tests/unit/save_creation.cpp#L1"
+          },
+          "unit_registration": {
+            "path": "tests/unit/manifest.tsv",
+            "line": 240,
+            "sha256": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
+            "link": "tests/unit/manifest.tsv#L240"
+          },
+          "probe": {
+            "path": "tests/probes/native_save_creation_probe.cpp",
+            "line": 136,
+            "sha256": "7b97306fb3d911a3b675906b498b54f40e5319e7bece3c290d010bb525760f92",
+            "link": "tests/probes/native_save_creation_probe.cpp#L136"
+          },
+          "oracle": {
+            "path": "tools/oracles/verify_original_save_completion.py",
+            "line": 1,
+            "sha256": "ec92ebfbbd9a67c108ea35200bccb0070756f61bc425cf8f70ecef3e696d00ba",
+            "link": "tools/oracles/verify_original_save_completion.py#L1"
+          },
+          "prior_receipt": {
+            "path": "reference/oracle-reports/save_completion.json",
+            "line": 1,
+            "sha256": "c4110b83fbafd7a71bf8a561508980e4fe2486d597425dea59bc9fb13279b7fa",
+            "link": "reference/oracle-reports/save_completion.json#L1"
+          },
+          "scope_and_limits": "1000 historical cases seed 20261021. Source suffix after animation only (0x5038fa or 0x503976 through shared exit); signed wait values and signed SaveOK/dialog bytes, ordered call IDs and final state. Seven callees are receipts, not implementations. Probe ignores transition argument and warning-task close argument; source side asserts these only against fixture values. No callback mutation/partial-store snapshots or genuine save-warning implementation proof.",
+          "mutants": {
+            "identity": null,
+            "status": "No dedicated tracked mutant specification or result identified for this helper in tracked mutant/holdout paths or its integration receipts. Not run; absence is a qualification gap, not proof of no historical private run."
+          },
+          "holdout": {
+            "identity": null,
+            "status": "No dedicated tracked reserved holdout identity located. Default randomized cases are development corpus, not a reserved holdout."
+          },
+          "acceptance": "Accept existing judge for the bounded behavior above only; prior receipt is not fresh qualification or full-module runtime completion."
+        }
+      ],
+      "destination": "src/game/save; existing semantic module retained until Root chooses system layout",
+      "findings": [
+        {
+          "location": "src/game/save_completion.hpp:20",
+          "minimum_scope": [
+            "src/game/save_completion.hpp",
+            "src/runtime/native_title_scene.hpp",
+            "src/runtime/native_title_tasks.cpp",
+            "src/game/message_text.hpp",
+            "src/game/menu_dialog.hpp"
+          ],
+          "required_change": "Trace the seven original callees from existing save oracle; expose warning creation/closure as individually named STUBs with native loud failure and correct source contract. Preserve recovered dialog/save/transition calls; do not duplicate them or add speculative service architecture."
+        }
+      ],
+      "classification_limits": "Per-file existing maintained-source disposition. Companion dependencies and judge gaps remain explicit; no source change, test execution, gate or complete-system/runtime claim.",
+      "reviewed_source_sha256": "3cfe72feb94599f4c11adc2dfe0b1c54c189cb240bdfa2e11bee64e286ec1a0a"
+    },
+    "src/game/save_completion.cpp": {
+      "disposition": "needs_migration",
+      "reason": "Numeric submodes12/13/10/0 and dialog17 obscure an existing named control state machine (lines 14-54).",
+      "semantic_justification": "Entire suffix and clear_pending reviewed. Signed int16 wait_frames comparison/increment, signed int8 SaveOK/dialog selection, stage12-to13 same-call fallthrough, resets and call/store order are explicit plain integer code. clear_pending stores phase/ready/exec/alert in order. Success transitions before backing up selected file, then clears fade/mode/SaveOK; cancel/continue stores remain before warning close; continue transition precedes saving_disabled/prepare/apply. No successful-save result manufactured. Retain helper and behavior; migrate numeric stages to existing ControlStage and name source dialog17/wait threshold roles without changing signedness or stores.",
+      "evidence": [
+        {
+          "path": "src/game/save_completion.cpp",
+          "line": 1,
+          "sha256": "6eec2190a13705682a1e46d0f3c467b58bac159df6fbd3ee9c5b2071ed6520aa",
+          "link": "src/game/save_completion.cpp#L1",
+          "end_line": 67
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "SaveCompletionState owns no bytes; all eleven fields borrow live native owners. alert_blocked/save_phase/save_ready/alert_flag belong to flow_; save_ok_, fade marker, save_exec_, selection backup, saving_disabled_ and warning TaskHandle belong to Session; selected_card_file borrows bootstrap_.menu.selected_file. FileSelectWork belongs to its task auxiliary work. The write frame owns success publication; this helper only consumes/clears it. Session.save_progress() and display compose the same fields; do not add an independent completion state.",
+          "field_mapping": {
+            "alert_blocked": "session_.flow_.alert_blocked",
+            "save_ok": "session_.save_ok_",
+            "fade_in_marker": "session_.file_select_fade_in_marker_",
+            "now_saving": "session_.flow_.save_phase",
+            "save_ready": "session_.flow_.save_ready",
+            "save_exec_flag": "session_.save_exec_",
+            "alert_flag": "session_.flow_.alert_flag",
+            "selected_card_file": "session_.bootstrap_.menu.selected_file",
+            "selected_file_backup": "session_.file_selection_backup_",
+            "saving_disabled": "session_.saving_disabled_",
+            "warning_task": "session_.save_warning_message_"
+          },
+          "evidence": [
+            {
+              "path": "src/game/save_completion.hpp",
+              "line": 6,
+              "sha256": "3cfe72feb94599f4c11adc2dfe0b1c54c189cb240bdfa2e11bee64e286ec1a0a",
+              "link": "src/game/save_completion.hpp#L6",
+              "end_line": 18
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 511,
+              "sha256": "5bc34cd9456afb6af1f38f7af33708ca322ba1f5240897a49706371dd7a6a71c",
+              "link": "src/runtime/native_title_tasks.cpp#L511",
+              "end_line": 525
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 69,
+              "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+              "link": "src/runtime/native_session.hpp#L69",
+              "end_line": 75
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 195,
+              "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+              "link": "src/runtime/native_session.hpp#L195",
+              "end_line": 228
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 275,
+              "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+              "link": "src/runtime/native_session.hpp#L275",
+              "end_line": 278
+            },
+            {
+              "path": "src/game/title_menu.hpp",
+              "line": 220,
+              "sha256": "a79d43f9485408f0aa21de76cd16527b98e4b128ec2af1d8694fe7fb17827a45",
+              "link": "src/game/title_menu.hpp#L220",
+              "end_line": 227
+            },
+            {
+              "path": "src/runtime/native_file_select_display.cpp",
+              "line": 150,
+              "sha256": "e64ba02eb87996e6593f5ccb747ac8ba2a0c59eb60fb5fd4a0a8f4df343aa9a7",
+              "link": "src/runtime/native_file_select_display.cpp#L150",
+              "end_line": 163
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "path": "src/game/file_select_controls.cpp",
+          "line": 29,
+          "sha256": "e3d12bbda98c073fc6dce1133a830f68ecc5f03a6e49a2a376f9cb35e803dd04",
+          "link": "src/game/file_select_controls.cpp#L29",
+          "end_line": 39,
+          "note": "shared animation runs before completion suffix dispatch"
+        },
+        {
+          "path": "src/game/file_select_controls.cpp",
+          "line": 104,
+          "sha256": "e3d12bbda98c073fc6dce1133a830f68ecc5f03a6e49a2a376f9cb35e803dd04",
+          "link": "src/game/file_select_controls.cpp#L104",
+          "end_line": 108
+        },
+        {
+          "path": "src/runtime/native_title_tasks.cpp",
+          "line": 511,
+          "sha256": "5bc34cd9456afb6af1f38f7af33708ca322ba1f5240897a49706371dd7a6a71c",
+          "link": "src/runtime/native_title_tasks.cpp#L511",
+          "end_line": 525
+        },
+        {
+          "path": "src/runtime/native_title_scene.hpp",
+          "line": 214,
+          "sha256": "6bbeb90ebb857292266180d33d2519eadcb8a8ac076cc6b667a9573951382d07",
+          "link": "src/runtime/native_title_scene.hpp#L214"
+        }
+      ],
+      "accepted_judges": [
+        {
+          "unit": {
+            "path": "tests/unit/save_creation.cpp",
+            "line": 1,
+            "sha256": "11312f59661c8b0b83304379f8187cf38a17ab90e982a8f7ad7bb4c43554cbcd",
+            "link": "tests/unit/save_creation.cpp#L1"
+          },
+          "unit_registration": {
+            "path": "tests/unit/manifest.tsv",
+            "line": 240,
+            "sha256": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
+            "link": "tests/unit/manifest.tsv#L240"
+          },
+          "probe": {
+            "path": "tests/probes/native_save_creation_probe.cpp",
+            "line": 136,
+            "sha256": "7b97306fb3d911a3b675906b498b54f40e5319e7bece3c290d010bb525760f92",
+            "link": "tests/probes/native_save_creation_probe.cpp#L136"
+          },
+          "oracle": {
+            "path": "tools/oracles/verify_original_save_completion.py",
+            "line": 1,
+            "sha256": "ec92ebfbbd9a67c108ea35200bccb0070756f61bc425cf8f70ecef3e696d00ba",
+            "link": "tools/oracles/verify_original_save_completion.py#L1"
+          },
+          "prior_receipt": {
+            "path": "reference/oracle-reports/save_completion.json",
+            "line": 1,
+            "sha256": "c4110b83fbafd7a71bf8a561508980e4fe2486d597425dea59bc9fb13279b7fa",
+            "link": "reference/oracle-reports/save_completion.json#L1"
+          },
+          "scope_and_limits": "1000 historical cases seed 20261021. Source suffix after animation only (0x5038fa or 0x503976 through shared exit); signed wait values and signed SaveOK/dialog bytes, ordered call IDs and final state. Seven callees are receipts, not implementations. Probe ignores transition argument and warning-task close argument; source side asserts these only against fixture values. No callback mutation/partial-store snapshots or genuine save-warning implementation proof.",
+          "mutants": {
+            "identity": null,
+            "status": "No dedicated tracked mutant specification or result identified for this helper in tracked mutant/holdout paths or its integration receipts. Not run; absence is a qualification gap, not proof of no historical private run."
+          },
+          "holdout": {
+            "identity": null,
+            "status": "No dedicated tracked reserved holdout identity located. Default randomized cases are development corpus, not a reserved holdout."
+          },
+          "acceptance": "Accept existing judge for the bounded behavior above only; prior receipt is not fresh qualification or full-module runtime completion."
+        }
+      ],
+      "destination": "src/game/save; existing semantic module retained until Root chooses system layout",
+      "findings": [
+        {
+          "location": "src/game/save_completion.cpp:14",
+          "minimum_scope": [
+            "src/game/save_completion.cpp",
+            "src/game/save_completion.hpp",
+            "src/game/file_select.hpp",
+            "src/game/file_select_controls.cpp",
+            "src/runtime/native_title_tasks.cpp"
+          ],
+          "required_change": "Reuse ControlStage::WaitForNewSave/CompleteNewSave/Leaving/Initialize already defined in file_select.hpp:68-76; name warning dialog and wait delay from evidence. Preserve suffix-after-animation composition, partial stores and callback-sensitive reads."
+        }
+      ],
+      "classification_limits": "Per-file existing maintained-source disposition. Companion dependencies and judge gaps remain explicit; no source change, test execution, gate or complete-system/runtime claim.",
+      "reviewed_source_sha256": "6eec2190a13705682a1e46d0f3c467b58bac159df6fbd3ee9c5b2071ed6520aa"
     }
   },
   "external_reference_sources": [

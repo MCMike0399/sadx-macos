@@ -1,0 +1,54 @@
+{
+  "source_commit": "fdb1595",
+  "integration_gate": "reference/production-integration-20261101/shared-render-core-gate.json",
+  "canonical_oracle_command": "make -j4 oracle-ninja-render oracle-ninja-render-depth oracle-ninja-queue-native oracle-ninja-queue-lifecycle oracle-ninja-sprite-queue oracle-ninja-queue-consumer oracle-ninja-frame-calls oracle-ninja-texture-selection oracle-ninja-view oracle-game-view oracle-game-frame-owners",
+  "exit_status": 0,
+  "log_sha256": "a4aef463dc13cfe17371e18174b9e966e9deef143baf23a3cc709c63ae71da2d",
+  "reports": {
+    "ninja_render": "8f1317f28be3b5328aa6ec224005550b49acdad5fc3ad77c74a6ce4bfd18f17a",
+    "ninja_render_depth": "7fda635292ca5b94c2bd40adcfed2ce32ed66b6ef8c1cc9b9ee85a9a55e5d381",
+    "ninja_queue_native": "aab9d86e4546e94a01c5978b28d0601ed4bfe02ad61a4beb14a4e8d13c5347a7",
+    "ninja_queue_lifecycle": "91571d7783a0006c2168b09cb9a1ee09a3ffc1bc495b41b6d0775f213a3a9c8e",
+    "ninja_sprite_queue": "7f84065812f68e862ce4d0ca61f8b3812976f419dc5c67aa83fe2d80ce031391",
+    "ninja_queue_consumer": "7b01e44ad05d6f690a508e12dce8da3d4e1651a466c8077d61a8e7c705ec6278",
+    "ninja_frame_calls": "976033b863d66ff2acb3d7da1f0e9e17dcaf8f20da1b8aa0bc1ae50edb67a5a7",
+    "ninja_texture_selection": "43e88258a81aa5247c8fc3b60526f06cc6b06c492a2d0123cf9ddbf605c1b76d",
+    "ninja_view": "6b7b987ab1c199f76cdde6b6027de6053410095921fc8b196d5ca3c02ab07b83",
+    "game_view": "92f651b9714ee7670d2bbf2ab32f6ae2d8ad7627f59745d0e935fd4d082bd0d2",
+    "game_frame_owners": "79f8d34091db38cadc3df63a1cd03a6808d919790e16e99890dafa60efde3bad"
+  },
+  "readability_tightening": [
+    {
+      "path": "src/engine/ninja_render.cpp",
+      "before": {
+        "hex_literals": 36,
+        "address_identifiers": 15,
+        "address_calls": 0,
+        "goto": 0,
+        "address_labels": 0,
+        "long_lines": 24,
+        "multi_statement_lines": 25,
+        "large_decimal_literals": 0,
+        "emulator_arithmetic": 0,
+        "address_comments": 0
+      },
+      "after": {
+        "hex_literals": 27,
+        "address_identifiers": 13,
+        "address_calls": 0,
+        "goto": 0,
+        "address_labels": 0,
+        "long_lines": 6,
+        "multi_statement_lines": 7,
+        "large_decimal_literals": 0,
+        "emulator_arithmetic": 0,
+        "address_comments": 0
+      }
+    }
+  ],
+  "limits": [
+    "Six pass and five inherited FP partial verdicts; no claim that partials pass.",
+    "Tracks full canonical reports after the source integration gate; reports and baseline refresh need the next coherent integration gate.",
+    "Existing source owners/reference compatibility and exhaustive module campaign remain open. No judge algorithm, fixture, tolerance or expected value changed."
+  ]
+}
