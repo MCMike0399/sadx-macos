@@ -1,0 +1,36 @@
+{
+  "cases": 1998,
+  "holdout": false,
+  "values_match": true,
+  "passed": true,
+  "mismatch_count": 0,
+  "mismatches": [],
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "source_files": {
+    "src/engine/ninja_render.cpp": "d18ca70f7a617ea3a0b26f31e461ad18d36994279982e968ea0634dc4b7d3db9",
+    "src/engine/ninja_render.hpp": "efc8add7a4a2fd1669497d235f1ae9f4f9e4ccf3ee20c2800428d1e6aa288ce1",
+    "tests/probes/ninja_render_depth_probe.cpp": "72e442a3b3acbf4582241d16d5d5614dc0d44b0d22e538b280b946cbbd9fd706",
+    "tools/oracles/check_ninja_render_depth.py": "6d0cc5ba2d2dd251cbf6f20679288ca9f96d10f56775ad1c0c578abce5a1a1fc"
+  },
+  "native_library_sha256": "1fe9a3e434078e83b545c48bf527b1756839f036570d324f4390064f881d4f99",
+  "source_ranges": {
+    "0x77ed00": {
+      "bytes": 32,
+      "sha256": "8e1c8130d7d2328437aa796297ed8b15d68a01be238861bed40b68b7d25f25d9"
+    },
+    "0x77ed20": {
+      "bytes": 22,
+      "sha256": "fd7aacc0c9c4c2400bdec7e314d9a4f0d12097149523b6ee1817caec56fffd90"
+    }
+  },
+  "case_outputs_sha256": "c3e898e6cdf7b6bf5cd2f25e13fcf30dc1077d7a8698ecaddbf56483895a6272",
+  "case_outputs": "build/ninja_render_depth_observed.cases.jsonl",
+  "limits": [
+    "Independent 77ed00/77ed20 depth-state comparison before their readability rewrite.\n\nThe only external execution fixture is COM SetRenderState. Missing reference\nfacts stop before their source read; unavailable backends stop at the attempted\ncall with its actual stack arguments. No game callee or expected value is replaced.\nThis setup checker has an explicit private probe rather than changing the inherited\nblend oracle/probe ABI used by both native and legacy blend judges.\n",
+    "No floating-point arithmetic in these two source leaves.",
+    "Incomplete external backend is entered once without completion; its logical boundary is the actual caller CALL site. Missing backend is stopped before entry.",
+    "Callback count/payload and pending payload are compared independently from the implementation ledger.",
+    "Native failure enum names are adapter diagnostics; compared facts are control, source boundary, attempts, receipts and full command values.",
+    "GPU/Windows device behavior and texture-stage methods remain separate qualification."
+  ]
+}

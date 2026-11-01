@@ -1,0 +1,32 @@
+{
+  "mutants": [
+    {
+      "name": "wrong_depth_mask",
+      "old": "value&7",
+      "new": "value&3",
+      "build_exit_status": 0,
+      "judge_exit_status": 1,
+      "caught": true,
+      "mismatch_count": 447
+    },
+    {
+      "name": "normalize_depth_write",
+      "old": "result,runtime,0xe,value,",
+      "new": "result,runtime,0xe,value!=0,",
+      "build_exit_status": 0,
+      "judge_exit_status": 1,
+      "caught": true,
+      "mismatch_count": 897
+    },
+    {
+      "name": "eager_table_check",
+      "old": "NinjaRenderResult ninja_set_depth_comparison(std::uint32_t value,const std::array<std::uint32_t,8>* table,NinjaRenderState& runtime){\n    NinjaRenderResult result;\n    if(!runtime.device_at_3d128b0){result.failure=NinjaRenderFailure::unknown_device;result.source_boundary=0x77ed04;return result;}\n    if(!*runtime.device_at_3d128b0){result.failure=NinjaRenderFailure::null_device;result.source_boundary=0x77ed09;return result;}\n    if(!table){result.failure=NinjaRenderFailure::missing_tables;result.source_boundary=0x77ed0e;return result;}\n    ninja_issue_render_state(result,runtime,0x17,(*table)[value&7],{0x77ed04,0x77ed09,0x77ed19});return result;\n}\n",
+      "new": "NinjaRenderResult ninja_set_depth_comparison(std::uint32_t value,const std::array<std::uint32_t,8>* table,NinjaRenderState& runtime){\n    NinjaRenderResult result;\n    if(!table){result.failure=NinjaRenderFailure::missing_tables;result.source_boundary=0x77ed0e;return result;}\n    if(!runtime.device_at_3d128b0){result.failure=NinjaRenderFailure::unknown_device;result.source_boundary=0x77ed04;return result;}\n    if(!*runtime.device_at_3d128b0){result.failure=NinjaRenderFailure::null_device;result.source_boundary=0x77ed09;return result;}\n    ninja_issue_render_state(result,runtime,0x17,(*table)[value&7],{0x77ed04,0x77ed09,0x77ed19});return result;\n}\n",
+      "build_exit_status": 0,
+      "judge_exit_status": 1,
+      "caught": true,
+      "mismatch_count": 42
+    }
+  ],
+  "source_restored": true
+}

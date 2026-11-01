@@ -1,0 +1,27 @@
+{
+  "base_commit": "1a903ce0d8f2f6fa4090658b2813291e4c81c1b6",
+  "source_behavior_unchanged": true,
+  "scope": "Explicit private setup comparison of njSetZCompare77ed00 and njSetZUpdateMode77ed20; inherited blend judges/probes/ABI remain unchanged.",
+  "development_cases": 1998,
+  "mismatches": 0,
+  "valid_semantic_mutants_caught": 3,
+  "holdout": "1024 final cases still reserved and unrun",
+  "build_command": "xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -dynamiclib -Isrc tests/probes/ninja_render_depth_probe.cpp src/engine/ninja_render.cpp -o build/ninja-render-depth-probe.dylib",
+  "judge_command": "PYTHONPATH=tools/lib:tools/oracles reference/python/bin/python tools/oracles/check_ninja_render_depth.py GAME_EXE build/ninja-render-depth-probe.dylib --output REPORT",
+  "limits": [
+    "No game behavior or existing judge edited; setup files not gate/manifest integrated yet.",
+    "Original COM is an explicit external backend fixture, not GPU/Windows device qualification.",
+    "Missing facts stop before their original read; unavailable backend stops at actual call instruction with real stack arguments.",
+    "No texture-stage method or complete render ownership qualification.",
+    "Probe/checker are a named sub-judge of existing ninja_render, kept explicit to preserve both inherited blend probe ABIs."
+  ],
+  "blocking_review": "3cbf412",
+  "observation_corrections": {
+    "backend": "Independent callback count and full device/state/value/call-site payload, separate from returned ledger.",
+    "pending": "Full independent pending payload, not presence only.",
+    "incomplete_fixture": "Original CALL enters the external method fixture once but no completed result is supplied; logical failure maps to the verified actual caller call site."
+  },
+  "full_observation_cases": 1998,
+  "full_observation_mismatches": 0,
+  "full_observation_valid_mutants_caught": 6
+}

@@ -1,0 +1,34 @@
+{
+  "cases": 1998,
+  "holdout": false,
+  "values_match": true,
+  "passed": true,
+  "mismatch_count": 0,
+  "mismatches": [],
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "source_files": {
+    "src/engine/ninja_render.cpp": "d18ca70f7a617ea3a0b26f31e461ad18d36994279982e968ea0634dc4b7d3db9",
+    "src/engine/ninja_render.hpp": "efc8add7a4a2fd1669497d235f1ae9f4f9e4ccf3ee20c2800428d1e6aa288ce1",
+    "tests/probes/ninja_render_depth_probe.cpp": "5e24b05f8b8bc5ebc5d2325a0761b417c64c651cfd31954a45d0a74161b96b4c",
+    "tools/oracles/check_ninja_render_depth.py": "505765148b8f11d009b0dc0d8a73383eedf13802f5d637dfca4cd52bee4e2362"
+  },
+  "native_library_sha256": "f903d4538b4f2dc8251566134e4e9698645e2d0849af68a6380c169fea72174c",
+  "source_ranges": {
+    "0x77ed00": {
+      "bytes": 32,
+      "sha256": "8e1c8130d7d2328437aa796297ed8b15d68a01be238861bed40b68b7d25f25d9"
+    },
+    "0x77ed20": {
+      "bytes": 22,
+      "sha256": "fd7aacc0c9c4c2400bdec7e314d9a4f0d12097149523b6ee1817caec56fffd90"
+    }
+  },
+  "case_outputs_sha256": "051d61b0ebe139bb8f7c140d970ee252c4f35eb89d9195f365af3599f50e4b27",
+  "case_outputs": "build/ninja_render_depth.cases.jsonl",
+  "limits": [
+    "Independent 77ed00/77ed20 depth-state comparison before their readability rewrite.\n\nThe only external execution fixture is COM SetRenderState. Missing reference\nfacts stop before their source read; unavailable backends stop at the attempted\ncall with its actual stack arguments. No game callee or expected value is replaced.\nThis setup checker has an explicit private probe rather than changing the inherited\nblend oracle/probe ABI used by both native and legacy blend judges.\n",
+    "No floating-point arithmetic in these two source leaves.",
+    "Native failure enum names are adapter diagnostics; compared facts are control, source boundary, attempts, receipts and full command values.",
+    "GPU/Windows device behavior and texture-stage methods remain separate qualification."
+  ]
+}
