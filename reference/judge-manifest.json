@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "6c2fba24ad6f7572066ebf939f9cd8fb8998024f",
-    "evidence": "reference/production-integration-20261101/menu-module-review-manifest-union.json",
-    "evidence_sha256": "391eababdd46bf5abd826fec463f35e61cf658a8e6e438efb69c3a07b8c6862e",
-    "reason": "Seal parent-preserving menu binding and corrected module semantic review regression input union"
+    "base_commit": "66b17f64f36aefcd75e593aa7f43ba03c270b640",
+    "evidence": "reference/production-integration-20261101/menu-texture-composite-replay.json",
+    "evidence_sha256": "9597d7b5238f5acf471ef842a689188f1ca90fac0aaf8b24c0f61e27a46424ea",
+    "reason": "Track rebuilt Main resource/loader comparisons after separately committed menu binding owner and module guard"
   },
   "files": {
     "Makefile": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
@@ -122,7 +122,7 @@
     "reference/oracle-reports/menu_draw_primitives.json": "1a4017800131f63fbcebcf800e2719d1397d0ea00475dca710cd93a0039a87d4",
     "reference/oracle-reports/menu_eligibility.json": "627ca706b924ee06bcc79ed8f3e73623b89a62faa78d53554d4711791042c747",
     "reference/oracle-reports/menu_navigation.json": "31cfe34975290e14f73963248a28fc21f414aaed6ec1a2ba01c03183767ef8cb",
-    "reference/oracle-reports/menu_resource_lifetime.json": "1416e831ce6f3a8cd52a33d81ea8e0aad70d6430d5282a34a43fbb18bcd77bb8",
+    "reference/oracle-reports/menu_resource_lifetime.json": "eac9efa88466315aab6aa48e7674cdca4cb9d6d9660542c197f5876c43c255a5",
     "reference/oracle-reports/menu_voice.json": "8a6c918c9eb912c168f11b1da7ce435a6820aabcdbd76f504dca750e67ebe6f4",
     "reference/oracle-reports/message_frame.json": "e277bd45208e02273e15662e53c6eb65a90c76302b7e8b19f145f1fffda883c3",
     "reference/oracle-reports/message_image.json": "cabb8df3f8a6b09cef56ac164d7852a40ee389f5ec50fc7207200a45664a325a",
