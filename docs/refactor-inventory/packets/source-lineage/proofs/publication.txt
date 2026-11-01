@@ -1,0 +1,53 @@
+{
+  "runs": [
+    {
+      "fault": false,
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc",
+        "tests/unit/animation_table_publication.cpp",
+        "src/player/sonic_animation_table.cpp",
+        "-o",
+        "build/animation-contract/publication-fault-final/baseline"
+      ],
+      "build_exit_status": 0,
+      "judge_exit_status": 0,
+      "stdout": "150 native prefixes; 147 rows; 145 ordered export reads and 882 ordered field publications\n",
+      "stderr": "",
+      "executable_sha256": "3c0051aedf5ec243f991a2b8c30493eab44babbb75281fb5ef81fe7a6763878e",
+      "unit_sha256": "a454e810e58af4b5f4ef68b6162e7e2bed7301ef52226a18cdb45705c81e35d8"
+    },
+    {
+      "fault": true,
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Ibuild/animation-contract/publication-fault-final/include",
+        "-Isrc",
+        "tests/unit/animation_table_publication.cpp",
+        "src/player/sonic_animation_table.cpp",
+        "-o",
+        "build/animation-contract/publication-fault-final/fault"
+      ],
+      "build_exit_status": 0,
+      "judge_exit_status": 1,
+      "stdout": "",
+      "stderr": "original publication order differs at event 3\n",
+      "executable_sha256": "51f6cc3288822b22edeff18a4e7b4aca890a2f36e4ad06d86239982db24fb989",
+      "unit_sha256": "a454e810e58af4b5f4ef68b6162e7e2bed7301ef52226a18cdb45705c81e35d8"
+    }
+  ],
+  "private_header_sha256": "d25ccfe3c4cd8f5fdcb47904bdd5289d4b4f36d5fc424816ef7400957e671652",
+  "separate_from_thirteen_inherited_faults": true
+}

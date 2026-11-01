@@ -206,20 +206,323 @@ def module(path):
     return str(p.with_suffix(""))
 
 
+SCOPE_ROOTS = ("src/", "tools/", "tests/", "reference/", "third_party/")
+
+
+def sha256(data):
+    return hashlib.sha256(data).hexdigest()
+
+
+def canonical_hash(value):
+    return sha256(json.dumps(value, sort_keys=True, separators=(",", ":")).encode())
+
+
+def strict_keys(value, keys, label):
+    if not isinstance(value, dict) or set(value) != set(keys):
+        raise ValueError("Invalid " + label + " fields")
+
+
+def nonblank(value):
+    return isinstance(value, str) and bool(value.strip())
+
+
+def safe_path(name):
+    if (not isinstance(name, str) or not name or Path(name).is_absolute() or
+            Path(name).as_posix() != name or any(x in {"..", ".git"} for x in Path(name).parts)):
+        raise ValueError("Invalid lineage path")
+    return name
+
+
+def fingerprinted_file(anchor, paths):
+    strict_keys(anchor, ("path", "sha256"), "lineage anchor")
+    name = safe_path(anchor["path"])
+    target = ROOT / name
+    if (name not in paths or not target.is_file() or
+            any(p.is_symlink() for p in [target, *target.parents] if p.is_relative_to(ROOT))):
+        raise ValueError("Missing/untracked lineage evidence: " + name)
+    if target.stat().st_size > 2 * 1024 * 1024:
+        raise ValueError("Lineage evidence exceeds 2 MiB")
+    data = target.read_bytes()
+    if anchor["sha256"] != sha256(data):
+        raise ValueError("Stale lineage evidence: " + name)
+    return data
+
+
+def git_blob_hashes(objects):
+    """One bounded Git metadata stream rather than a subprocess per scope member."""
+    process = subprocess.run(["git", "-C", str(ROOT), "cat-file", "--batch"],
+                             input=("\n".join(objects.values()) + "\n").encode(),
+                             stdout=subprocess.PIPE, check=True)
+    data, offset, result = process.stdout, 0, {}
+    for name in objects:
+        end = data.index(b"\n", offset)
+        header = data[offset:end].split()
+        if len(header) != 3 or header[1] != b"blob":
+            raise ValueError("Missing immutable source object: " + name)
+        size = int(header[2])
+        start = end + 1
+        result[name] = sha256(data[start:start + size])
+        offset = start + size + 1
+    return result
+
+
+def baseline_fingerprints(commit):
+    objects, actual = {}, {}
+    for row in git("ls-tree", "-r", "-z", commit).split("\0"):
+        if not row:
+            continue
+        meta, name = row.split("\t", 1)
+        mode, kind, oid = meta.split()
+        if name.startswith(SCOPE_ROOTS):
+            if mode == "160000":
+                actual[name] = "gitlink:" + oid
+            else:
+                objects[name] = oid
+    actual.update(git_blob_hashes(objects))
+    return actual
+
+
+def prepare_lineage_receipt(name, ledger_name):
+    """Seal only committed inputs. Activation requires committing this receipt too."""
+    safe_path(name)
+    safe_path(ledger_name)
+    if not git_available():
+        raise ValueError("Receipt preparation requires Git; archives only verify supplied proofs")
+    if git("status", "--porcelain", "--untracked-files=all", "--", "src/").strip():
+        raise ValueError("Receipt preparation requires source identical to immutable HEAD")
+    policy_name = (OUT / "review.json").relative_to(ROOT).as_posix()
+    for path in (policy_name, ledger_name):
+        if git("show", "HEAD:" + path).encode() != (ROOT / path).read_bytes():
+            raise ValueError("Receipt preparation requires committed policy: " + path)
+    policy = unique_review_json(read(policy_name))
+    if policy.get("source_lineage_receipt") != name:
+        raise ValueError("Receipt path must be explicitly authored in review policy")
+    paths = set(filter(None, git("ls-files", "-z").split("\0")))
+    source = {p: "HEAD:" + p for p in sorted(paths) if p.startswith("src/")}
+    receipt = dict(schema_version=2, base_commit=policy["base_commit"],
+                   freeze_commit=git("rev-parse", "HEAD").strip(),
+                   policy={"path": ledger_name, "sha256": sha256((ROOT / ledger_name).read_bytes())},
+                   baseline_members=baseline_fingerprints(policy["base_commit"]),
+                   archive_paths=sorted(paths | {name}), source_freeze=git_blob_hashes(source))
+    target = ROOT / name
+    if (any(p.is_symlink() for p in [target, *target.parents] if p.is_relative_to(ROOT)) or
+            not name.startswith("docs/refactor-inventory/")):
+        raise ValueError("Receipt output must be a regular inventory document")
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_text(json.dumps(receipt, sort_keys=True, indent=2) + "\n")
+    return receipt
+
+
+def git_available():
+    # A source archive nested inside another repository is still an archive.
+    return (ROOT / ".git").exists()
+
+
+def lineage_snapshot(snapshot, paths, has_git):
+    strict_keys(snapshot, ("path", "sha256", "commit", "proof"), "lineage snapshot")
+    safe_path(snapshot["path"])
+    if not re.fullmatch(r"[0-9a-f]{40}", snapshot["commit"]):
+        raise ValueError("Snapshot requires immutable commit")
+    data = fingerprinted_file(snapshot["proof"], paths)
+    if sha256(data) != snapshot["sha256"]:
+        raise ValueError("Wrong source snapshot fingerprint")
+    if has_git:
+        original = subprocess.check_output(["git", "-C", str(ROOT), "show",
+                                            snapshot["commit"] + ":" + snapshot["path"]],
+                                           stderr=subprocess.PIPE)
+        if original != data:
+            raise ValueError("Snapshot does not match immutable Git source")
+    return snapshot["path"]
+
+
+def reconcile_lineage(policy, base_paths, paths):
+    """Whole-file historical accounting only; never grants a live source exception."""
+    removed = {p for p in base_paths - paths if p.startswith(SCOPE_ROOTS)}
+    receipt_name = policy.get("source_lineage_receipt")
+    if not receipt_name:
+        if removed:
+            raise ValueError("Baseline paths removed; add an explicit reviewed lineage policy first: " + repr(sorted(removed)))
+        return [], None
+    receipt_name = safe_path(receipt_name)
+    if receipt_name not in paths:
+        raise ValueError("Untracked lineage migration receipt")
+    receipt = unique_review_json(read(receipt_name))
+    strict_keys(receipt, ("schema_version", "base_commit", "freeze_commit", "policy",
+                          "baseline_members", "archive_paths", "source_freeze"), "lineage receipt")
+    if receipt["schema_version"] != 2 or receipt["base_commit"] != policy["base_commit"]:
+        raise ValueError("Unknown lineage metric version/baseline")
+    archive_paths = receipt["archive_paths"]
+    if (not isinstance(archive_paths, list) or len(set(archive_paths)) != len(archive_paths) or
+            any(safe_path(p) != p for p in archive_paths)):
+        raise ValueError("Duplicate/invalid archive membership")
+    if (not isinstance(receipt["source_freeze"], dict) or
+            not all(p.startswith("src/") and safe_path(p) == p and
+                    isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value)
+                    for p, value in receipt["source_freeze"].items())):
+        raise ValueError("Invalid source freeze fingerprints")
+    has_git = git_available()
+    frozen = receipt["freeze_commit"]
+    if not isinstance(frozen, str) or not re.fullmatch(r"[0-9a-f]{40}", frozen):
+        raise ValueError("Receipt requires immutable freeze commit")
+    proof_paths = paths if has_git else paths & set(archive_paths)
+    document = fingerprinted_file(receipt["policy"], proof_paths)
+    members = receipt["baseline_members"]
+    if not isinstance(members, dict) or set(members) != {p for p in base_paths if p.startswith(SCOPE_ROOTS)}:
+        raise ValueError("Lineage baseline membership mismatch")
+    if not all(safe_path(p) == p and isinstance(value, str) and
+               re.fullmatch(r"(?:[0-9a-f]{64}|gitlink:[0-9a-f]{40})", value)
+               for p, value in members.items()):
+        raise ValueError("Invalid baseline fingerprints")
+    if has_git:
+        if git("show", "HEAD:" + receipt_name).encode() != (ROOT / receipt_name).read_bytes():
+            raise ValueError("Migration receipt must be versioned in immutable HEAD")
+        subprocess.check_call(["git", "-C", str(ROOT), "merge-base", "--is-ancestor", frozen, "HEAD"])
+        if git("show", frozen + ":" + receipt["policy"]["path"]).encode() != document:
+            raise ValueError("Lineage policy is not the frozen Git policy")
+        # Compare the entire original denominator, not just the retired member.
+        actual = baseline_fingerprints(policy["base_commit"])
+        if members != actual:
+            raise ValueError("Wrong immutable baseline fingerprints")
+        frozen_paths = git("ls-tree", "-r", "--name-only", "-z", frozen).split("\0")
+        source_objects = {p: frozen + ":" + p for p in frozen_paths if p.startswith("src/")}
+        source_freeze = git_blob_hashes(source_objects)
+        if source_freeze != receipt["source_freeze"]:
+            raise ValueError("Wrong immutable source freeze")
+    else:
+        scoped = lambda values: {p for p in values if p.startswith(SCOPE_ROOTS)}
+        if scoped(receipt["archive_paths"]) != scoped(paths):
+            raise ValueError("Archive membership differs from supplied lineage receipt")
+    ledger = unique_review_json(document.decode())
+    strict_keys(ledger, ("schema_version", "edges"), "lineage ledger")
+    if ledger["schema_version"] != 1 or not isinstance(ledger["edges"], list):
+        raise ValueError("Unknown lineage ledger schema")
+    edges, targets = {}, set()
+    for edge in ledger["edges"]:
+        strict_keys(edge, ("before", "replacements", "member", "disposition", "rationale",
+                           "consumer_evidence", "behavior_evidence", "review"), "lineage edge")
+        old = lineage_snapshot(edge["before"], proof_paths, has_git)
+        if old in edges or old in paths or not old.startswith(SCOPE_ROOTS):
+            raise ValueError("Duplicate/stale lineage source")
+        if edge["disposition"] not in {"reviewed_migration", "reviewed_retirement"} or not nonblank(edge["rationale"]):
+            raise ValueError("Lineage requires explicit semantic disposition/rationale")
+        member = edge["member"]
+        member_keys = {"module", "prior_disposition", "remaining_debt", "observed_counts"}
+        strict_keys(member, member_keys | ({"baseline_snapshot"} if "baseline_snapshot" in member else set()),
+                    "historical member")
+        if "baseline_snapshot" in member:
+            if lineage_snapshot(member["baseline_snapshot"], proof_paths, has_git) != old or old not in removed:
+                raise ValueError("Unknown historical baseline snapshot")
+        if (member["module"] != module(old) or member["prior_disposition"] not in DISPOSITIONS or
+                not isinstance(member["remaining_debt"], list) or not member["remaining_debt"] or
+                not all(nonblank(x) for x in member["remaining_debt"]) or
+                not isinstance(member["observed_counts"], dict) or
+                not all(isinstance(n, int) and not isinstance(n, bool) and n >= 0
+                        for n in member["observed_counts"].values())):
+            raise ValueError("Historical member must retain identity, disposition and open debt")
+        for field in ("consumer_evidence", "behavior_evidence"):
+            if not isinstance(edge[field], list) or not edge[field]:
+                raise ValueError("Missing lineage consumer/behavior preservation evidence")
+            for anchor in edge[field]:
+                if not fingerprinted_file(anchor, proof_paths).strip():
+                    raise ValueError("Empty lineage consumer/behavior evidence")
+        review = unique_review_json(fingerprinted_file(edge["review"], proof_paths).decode())
+        strict_keys(review, ("edge_sha256", "reviewer", "independent", "verdict", "limits"), "independent lineage review")
+        if (review["edge_sha256"] != canonical_hash({k: v for k, v in edge.items() if k != "review"}) or
+                not nonblank(review["reviewer"]) or review["independent"] is not True or
+                review["verdict"] != "accept" or not nonblank(review["limits"])):
+            raise ValueError("Missing/stale independent lineage review")
+        successors = edge["replacements"]
+        if not isinstance(successors, list) or not successors:
+            raise ValueError("Lineage requires real replacement paths")
+        for successor in successors:
+            name = lineage_snapshot(successor, proof_paths, has_git)
+            if name in targets or not name.startswith(SCOPE_ROOTS):
+                raise ValueError("Duplicate/overlapping lineage replacement")
+            if has_git:
+                subprocess.check_call(["git", "-C", str(ROOT), "merge-base", "--is-ancestor",
+                                       edge["before"]["commit"], successor["commit"]])
+            targets.add(name)
+        edges[old] = edge
+    visited, active = set(), set()
+
+    def visit(name):
+        if name in active:
+            raise ValueError("Cyclic lineage")
+        if name in visited:
+            return
+        if name not in edges:
+            target = ROOT / name
+            if (name not in paths or not target.is_file() or
+                    any(p.is_symlink() for p in [target, *target.parents] if p.is_relative_to(ROOT))):
+                raise ValueError("Missing/untracked lineage successor: " + name)
+            return
+        active.add(name)
+        for successor in edges[name]["replacements"]:
+            child = successor["path"]
+            if has_git and child in edges:
+                subprocess.check_call(["git", "-C", str(ROOT), "merge-base", "--is-ancestor",
+                                       successor["commit"], edges[child]["before"]["commit"]])
+            visit(child)
+        active.remove(name)
+        visited.add(name)
+
+    for name in removed:
+        if name not in edges:
+            raise ValueError("Unexplained baseline omission: " + name)
+        baseline = edges[name]["member"].get("baseline_snapshot", edges[name]["before"])
+        if baseline["commit"] != policy["base_commit"] or baseline["sha256"] != members[name]:
+            raise ValueError("Unexplained baseline omission/fingerprint: " + name)
+        visit(name)
+    if set(edges) != visited:
+        raise ValueError("Unknown/unreachable lineage records")
+    return [{"historical_path": name, "baseline_member": name in removed,
+             "source_sha256": edge["member"].get("baseline_snapshot", edge["before"])["sha256"],
+             "source_lines": len(fingerprinted_file(
+                 edge["member"].get("baseline_snapshot", edge["before"])["proof"], proof_paths).splitlines()), **edge,
+             "status": "historical_scope_retained_debt_open"}
+            for name, edge in sorted(edges.items())], receipt
+
+
 def render():
-    policy = json.loads((OUT / "review.json").read_text())
-    paths = sorted(filter(None, git("ls-files", "-z").split("\0")))
-    path_set = set(paths)
+    policy = unique_review_json((OUT / "review.json").read_text())
     base = policy["base_commit"]
-    base_paths = set(filter(None, git("ls-tree", "-r", "--name-only", "-z", base).split("\0")))
-    index = {}
-    for row in git("ls-files", "--stage", "-z").split("\0"):
-        if row:
-            meta, path = row.split("\t", 1)
-            mode, blob, stage = meta.split()
-            if stage != "0":
-                raise ValueError("Unmerged tracked path: " + path)
-            index[path] = {"git_mode": mode, "index_blob": blob}
+    if git_available():
+        paths = sorted(filter(None, git("ls-files", "-z").split("\0")))
+        path_set = set(paths)
+        base_paths = set(filter(None, git("ls-tree", "-r", "--name-only", "-z", base).split("\0")))
+        index = {}
+        for row in git("ls-files", "--stage", "-z").split("\0"):
+            if row:
+                meta, path = row.split("\t", 1)
+                mode, blob, stage = meta.split()
+                if stage != "0":
+                    raise ValueError("Unmerged tracked path: " + path)
+                index[path] = {"git_mode": mode, "index_blob": blob}
+    else:
+        # git archive supplies regular tracked files; caches/build products are not scope.
+        paths = sorted(p.relative_to(ROOT).as_posix() for p in ROOT.rglob("*")
+                       if p.is_file() and not any(x in {".git", "build", "__pycache__"}
+                                                 for x in p.relative_to(ROOT).parts))
+        path_set = set(paths)
+        boundary_file = OUT / "boundaries.jsonl"
+        index = {r["path"]: {k: r[k] for k in ("git_mode", "index_blob")}
+                 for r in map(json.loads, boundary_file.read_text().splitlines())}
+        gitlinks = {p for p, metadata in index.items() if metadata["git_mode"] == "160000"}
+        paths = sorted(({p for p in paths if not any(p.startswith(link + "/") for link in gitlinks)} |
+                        gitlinks))
+        path_set = set(paths)
+        if policy.get("source_lineage_receipt"):
+            receipt = unique_review_json(read(policy["source_lineage_receipt"]))
+            base_paths = set(receipt["baseline_members"])
+        else:
+            base_paths = set(index)
+            for shard in (OUT / "files").glob("*.jsonl"):
+                base_paths.update(r["path"] for r in map(json.loads, shard.read_text().splitlines())
+                                  if r["present_at_base"])
+        if any(p not in index for p in paths if p.startswith(("reference/", "third_party/"))
+               and not (p.startswith("reference/") and Path(p).suffix in SOURCE_SUFFIXES
+                        and p not in policy["external_reference_sources"])):
+            raise ValueError("Archive boundary membership requires supplied inventory metadata")
     primary = [p for p in paths if p.startswith(("src/", "tools/", "tests/"))]
     ref_code = [p for p in paths if p.startswith("reference/")
                 and Path(p).suffix in SOURCE_SUFFIXES]
@@ -471,8 +774,7 @@ def render():
         raise ValueError("Coverage mismatch: " + repr(sorted(total ^ expected)))
     removed = sorted(p for p in base_paths - path_set
                      if p.startswith(("src/", "tools/", "tests/", "reference/", "third_party/")))
-    if removed:
-        raise ValueError("Baseline paths removed; add an explicit reviewed lineage policy first: " + repr(removed))
+    history, receipt = reconcile_lineage(policy, base_paths, path_set)
     summary = {"schema_version": 1, "base_commit": base,
                "tracked_scope": len(total), "maintained_and_script_entries": len(records),
                "modules": len(modules), "boundary_entries": len(boundaries),
@@ -490,6 +792,18 @@ def render():
                "checks_not_run": ["builds", "gate", "oracles", "mutants", "journeys", "providers"],
                "baseline_removed_paths": removed}
 
+    if receipt:
+        summary.update(schema_version=2, current_tracked_denominator=len(total),
+                       historical_retained_scope=len(history),
+                       historical_baseline_members=sum(r["baseline_member"] for r in history),
+                       accounted_scope=len(total) + len(history),
+                       historical_open_debt=len(history),
+                       current_open_entries=sum(r["disposition"] != "already_conforming" for r in records),
+                       accounted_open_entries=sum(r["disposition"] != "already_conforming" for r in records) + len(history),
+                       lineage_receipt={"path": policy["source_lineage_receipt"],
+                                        "sha256": sha256((ROOT / policy["source_lineage_receipt"]).read_bytes()),
+                                        "freeze_commit": receipt["freeze_commit"], "policy": receipt["policy"]})
+
     def jsonl(rows):
         return "".join(json.dumps(r, sort_keys=True, ensure_ascii=False) + "\n" for r in rows)
 
@@ -502,6 +816,13 @@ def render():
     outputs = {**module_outputs, "boundaries.jsonl": jsonl(boundaries),
                "stubs.jsonl": jsonl(stubs),
                "summary.json": json.dumps(summary, indent=2, sort_keys=True) + "\n"}
+    if receipt:
+        for n, content in enumerate(partition_jsonl(history, 2 * 1024 * 1024), 1):
+            outputs[f"lineage-{n:03d}.jsonl"] = content
+        summary["lineage_shards"] = [{"path": name, "records": content.count("\n"),
+                                      "sha256": sha256(content.encode())}
+                                     for name, content in outputs.items() if name.startswith("lineage-")]
+        outputs["summary.json"] = json.dumps(summary, indent=2, sort_keys=True) + "\n"
     shards = collections.defaultdict(list)
     for record in records:
         parts = record["path"].split("/")
@@ -518,12 +839,23 @@ def main():
     mode = parser.add_mutually_exclusive_group(required=True)
     mode.add_argument("--write", action="store_true", help="regenerate inventory artifacts only")
     mode.add_argument("--check", action="store_true", help="compare artifacts with tracked local scope")
+    mode.add_argument("--prepare-lineage-receipt", metavar="PATH", help="write an unactivated receipt from immutable HEAD")
+    parser.add_argument("--lineage-policy", metavar="PATH", help="committed reviewed lineage ledger to seal")
     args = parser.parse_args()
+    if args.prepare_lineage_receipt:
+        if not args.lineage_policy:
+            parser.error("--prepare-lineage-receipt requires --lineage-policy")
+        prepare_lineage_receipt(args.prepare_lineage_receipt, args.lineage_policy)
+        print("Receipt prepared; commit and independently review before inventory activation.")
+        return 0
+    if args.lineage_policy:
+        parser.error("--lineage-policy requires --prepare-lineage-receipt")
     outputs = render()
     existing_shards = {p.relative_to(OUT).as_posix() for p in (OUT / "files").glob("*.jsonl")}
     existing_shards.update(p.relative_to(OUT).as_posix() for p in OUT.glob("modules*.jsonl"))
+    existing_shards.update(p.relative_to(OUT).as_posix() for p in OUT.glob("lineage-*.jsonl"))
     expected_shards = {name for name in outputs if name.startswith("files/") or
-                       re.fullmatch(r"modules(?:-\d{3,})?\.jsonl", name)}
+                       re.fullmatch(r"(?:modules(?:-\d{3,})?|lineage-\d{3,})\.jsonl", name)}
     if existing_shards - expected_shards:
         raise ValueError("Unexpected inventory shards require explicit reconciliation: " +
                          repr(sorted(existing_shards - expected_shards)))
