@@ -806,3 +806,10 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Full make -j10 gate exits zero at bf61403: 306 native programs, 607 Python tests, reference R1–R4, three native menu/save journeys and sixteen startup comparisons. Its seven Python skips are retained honestly; the qualified complete Python supplement on the same revision passes with only the inherited volume-alias skip. STATUS is regenerated from task-owner-gate.json.
 * All 1,333 parent protected paths remain; 51 reviewed changes and two tests produce 1,335 verified inputs, with no frozen binary changes. Table classifications retain all 13 open instruction-table migrations. Setup mistakes and rejected launches remain separate receipts, not passes.
 * Next is a complete legacy reset/queue/Sonic ownership system chosen from its actual prerequisites, beginning with the prepared reset/cleanup context. Unrecovered behavior, broader player/renderer/Session work and the exhaustive campaign remain open. No new gameplay, Windows parity, gameplay 63 FPS or push.
+
+### 2026-11-01 — Complete refactor paused at the user's request
+
+* Implementation is paused, not complete. Task ownership is integrated; the last full green gate is bf61403, recorded by task-owner-gate.json: 306 native programs and 607 Python tests. The same-source qualified Python supplement leaves one inherited skip. Source fidelity case 207 and other inherited failures/partials remain open.
+* Reset source work is not merged. Its baseline and complete scope/setup are committed through 6255cc6. The reset delegate was cancelled and is terminal interrupted with no active run; its clean packet/reset-owner-source worktree remains at 6255cc6 in t3-6a2279e4. No Source WIP needed committing.
+* All task-owned builds, oracles and gates are already terminal; no provider job was running. Existing artifacts and packet branches are retained. No new tests, recovery, cleanup or Source lane is authorized during this pause.
+* Resume only on the user's explicit instruction, beginning with the pending complete reset/cleanup leaf and frame/editor owner scope. The advisor owns pushing Main; this agent does not push.
