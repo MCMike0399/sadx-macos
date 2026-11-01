@@ -22,6 +22,13 @@ This file does not change a milestone definition, the fidelity policy or the lic
 
 ## 0. The prompt (what `/goal` injects)
 
+**Active priority (2026-11-01):** complete
+[`PROMPT-complete-refactor.md`](PROMPT-complete-refactor.md) before further game
+development, as authorized by [ADR-0009](decisions/ADR-0009-complete-refactor-prerequisite.md).
+Its inventory and ownership order supersede the route-first scheduling below until
+its full completion criteria are verified. Existing native/reference journeys remain
+regression checks. The product and milestone definitions below remain in force.
+
 ```
 You are continuing sadx-macos: a native Apple Silicon port of Sonic Adventure DX (2004 PC,
 sonic.exe 6b0937ca…24cd74) under the pinned "updated speedrun" mod profile (SADX Mod Loader
@@ -32,6 +39,13 @@ no original DLL and no x86 runtime (ADR-0005). The code reads like a game codeba
 disassembly (ADR-0006/0007, docs/STYLE.md). The hybrid guest is the development judge, not
 the product.
 
+The active prerequisite is the COMPLETE maintained-code readability and modularity
+refactor in docs/PROMPT-complete-refactor.md (ADR-0009). Read that brief and follow
+its inventory, baseline, dependency order and completion criteria before advancing
+gameplay or adding features. Include recovered behavior outside the native source
+list and in reference composition. Preserve existing journeys as regression checks.
+The route below resumes after the complete refactor is verified.
+
 The acceptance target is one connected, normal-input NATIVE Sonic story route (GOAL §1.2):
 start → create or load a save → character select → Chaos 0 defeated → Emerald Coast
 cleared → train to Mystic Ruins → Egg Hornet defeated → Wind Stone placed → Windy Valley
@@ -41,8 +55,10 @@ screen and proved by an automated check.
 
 Read AGENTS.md, docs/GOAL.md, docs/STYLE.md, the top of docs/STATUS.md and the last
 docs/HANDOFF.md entry. Then take the first open item in GOAL §6 (or the item the user
-named), and work through the GOAL §7 loop. Integrate before you recover: the next
-checkpoint's first missing call decides the work. Game code must stay readable. No address
+named), and work through the GOAL §7 loop. During ADR-0009's campaign, the refactor
+inventory and shared ownership dependencies decide the work. After it completes,
+integrate before you recover: the next checkpoint's first missing call decides the work.
+Game code must stay readable. No address
 calls, `*_at_<hex>` names, emulator-style x87 calls or constants fetched from the EXE in
 the game tier. If the route needs a legacy module, migrate it under its unchanged oracle;
 never link it through a guest adapter.
