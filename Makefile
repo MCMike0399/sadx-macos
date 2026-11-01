@@ -199,6 +199,10 @@ build/metal-%-test: tests/unit/metal_$$(subst -,_,$$*).cpp build/libsadx-macos.a
 # Legacy startup fixtures use their reference adapter; the product uses the new native interface.
 build/player-startup-test: tests/unit/player_startup.cpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/libsadx-guest.a build/libsadx-core.a -o $@
+# Legacy animation fixtures and PE import use their registered reference adapters.
+REFERENCE_ANIMATION_UNITS := build/player-animation-decode-test build/player-animation-test build/sonic-animation-table-test build/animation-characterization-test
+$(REFERENCE_ANIMATION_UNITS): build/%-test: tests/unit/$$(subst -,_,$$*).cpp build/libsadx-guest.a build/libsadx-core.a
+	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/libsadx-guest.a build/libsadx-core.a -o $@
 build/%-test: tests/unit/$$(subst -,_,$$*).cpp build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) $< build/libsadx-core.a -o $@
 build/%-test: tests/unit/$$(subst -,_,$$*).mm build/libsadx-macos.a build/libsadx-core.a
