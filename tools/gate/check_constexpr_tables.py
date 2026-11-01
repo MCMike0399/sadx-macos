@@ -35,14 +35,29 @@ def declarations(source: str) -> list[dict]:
     for match in CONSTEXPR.finditer(code):
         if not re.search(r"[A-Za-z_]\w*", match[1]):
             continue
-        if match[3] == "(" and not re.match(
-                r"\s*(?:\(\s*)*(?:\{|[\w:]+(?:\s*<[^(){};]*>)?\s*\{)", code[match.end():]):
-            if not re.search(r"\b(?:array|to_array)\b", match[1]):
-                continue
-            arguments = code[match.end():].split(")", 1)[0].strip()
-            if not arguments or re.match(r"[\w:]+\s+(?:[&*]\s*)?[A-Za-z_]\w*\s*(?:[,=]|$)", arguments):
-                continue  # Supported function declaration, not an object initializer.
-            raise ValueError(f"ambiguous parenthesized array declaration requires review: {match[2]}")
+        if match[3] == "(":
+            nesting = 1
+            closing = None
+            for index in range(match.end(), len(code)):
+                if code[index] == "(":
+                    nesting += 1
+                elif code[index] == ")":
+                    nesting -= 1
+                    if nesting == 0:
+                        closing = index
+                        break
+            if closing is None:
+                raise ValueError(f"unterminated parenthesized declaration: {match[2]}")
+            parameters = code[match.end():closing].strip()
+            suffix = code[closing + 1:].lstrip()
+            if (not parameters or suffix.startswith("{") or
+                    re.match(r"(?:const|volatile|noexcept)\b|->", suffix) or
+                    re.match(r"[\w:]+\s+(?:[&*]\s*)?[A-Za-z_]\w*\s*(?:[,=]|$)", parameters)):
+                continue  # Supported function declaration/definition, not an object.
+            if "{" not in parameters:
+                if not re.search(r"\b(?:array|to_array)\b", match[1]):
+                    continue
+                raise ValueError(f"ambiguous parenthesized array declaration requires review: {match[2]}")
         depth = 0
         end = None
         for index in range(match.end() - 1, len(code)):
