@@ -1,0 +1,36 @@
+{
+  "base_commit": "0f15b17895b0cea654fae4ab155175a39f24d749",
+  "review": "e6d057f",
+  "corrections": {
+    "stale_bytecode": "Project helpers and recorder/comparator load directly from verified source; dependency package pins include executable caches. A timestamp-valid stale-cache regression executes fresh source.",
+    "toolchain": "Snapshot complete SDK/resource/C++ trees including symlink identities and targets, compiler and linker. Explicit pinned tool paths/sysroot/resource/includes/linker, disabled default configs/modules, minimal sanitized environment.",
+    "terminated_parent": "Internal children require live direct parent identity, exact stage/token/inherited pipe, and no terminal RUN receipt. Pipe EOF kills an admitted child even inside long execution. Real tiny child process test exits125 on EOF. No reserved case was run.",
+    "constructor_attribution": "Record new setup event before construction, explicitly absent PC if no machine exists; failed construction/hook install stays separate from previous case and is not counted as attempted source instructions."
+  },
+  "tests": {
+    "tests": 60,
+    "exit_status": 0,
+    "command": "python3 -m unittest discover -s tests/python -p 'test_task_*' -v",
+    "log_sha256": "ddafd59a932137cae44d9e631bc91a22c59a1c583d9e60f46e83d758c0d701ed"
+  },
+  "files": {
+    "tools/oracles/task_judges/reserved_observer.py": "4360f0320b16fa87aa4fab6abc1c0053d16ab1122d620197387766fab133aa34",
+    "tools/oracles/task_judges/reserved_run.py": "1da95821dc20e0ff27d12d1982c7912d21771b8058a07278b6f0cec8c6d1530c",
+    "tests/python/test_task_reserved_observer.py": "3a9866351a743f339e5203c76b7dc9c071697ecf1a356f97cd03aefb4e16b741",
+    "tests/python/test_task_reserved_run.py": "936e439f5fd80cc5110f71a973e9f17f4b98d56f9b94d03fff1891509bd0e177"
+  },
+  "not_executed": [
+    "prepare",
+    "reserved freeze",
+    "reserved generation",
+    "reserved run",
+    "source/child native/original replay"
+  ],
+  "remaining": [
+    "Fresh complete correction review",
+    "Toolchain/compile prerequisite preflight with no inputs",
+    "Committed final closure after review",
+    "Distinct Root admission and actual reserved qualification",
+    "Task Main integration/source-only/journeys/gate"
+  ]
+}

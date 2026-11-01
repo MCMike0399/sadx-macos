@@ -177,6 +177,59 @@ class TaskReservedObserver(unittest.TestCase):
             self.assertIs(original.call, call)
             self.assertIs(original.Original, prior_constructor)
 
+    def test_constructor_failure_belongs_to_its_own_setup_attempt(self):
+        for successful in (0, 1):
+            original, _ = self.source_fixture()
+            factory = original.Original
+            created = 0
+            def constructor():
+                nonlocal created
+                if created == successful:
+                    raise RuntimeError('synthetic constructor setup failure')
+                created += 1
+                return factory()
+            original.Original = constructor
+            def call(machine, entry, arguments):
+                machine.ip = original.STOP
+                return 0
+            original.call = call
+            events = []
+            with self.assertRaisesRegex(RuntimeError, 'constructor setup failure'):
+                with OBSERVER.audit_helpers('task_work', original, [[(0, 1)], [(0, 1)]],
+                                            events, lambda m: m.ip):
+                    for _ in range(successful + 1):
+                        machine = original.Original().machine
+                        original.call(machine, 0x40b1ce, [])
+                        original.call(machine, 0x40b220, [1])
+            self.assertEqual(len(events), successful + 1)
+            self.assertEqual(events[-1]['case'], successful)
+            self.assertIsNone(events[-1]['pc'])
+            self.assertFalse(events[-1]['source_attempted'])
+            if successful:
+                self.assertNotIn('error', events[0])
+                self.assertTrue(all(row['outcome'] == 'returned' for row in events[0]['calls']))
+            self.assertIs(original.Original, constructor)
+
+    def test_hook_installation_failure_is_a_setup_error(self):
+        original, _ = self.source_fixture()
+        factory = original.Original
+        def constructor():
+            instance = factory()
+            def fail(*args):
+                raise RuntimeError('synthetic hook install failure')
+            instance.machine.hook_add = fail
+            return instance
+        original.Original = constructor
+        original.call = lambda *args: 0
+        events = []
+        with self.assertRaisesRegex(RuntimeError, 'hook install failure'):
+            with OBSERVER.audit_helpers('task_work', original, [[(0, 1)]], events, lambda m: m.ip):
+                original.Original()
+        self.assertEqual(events[0]['setup'], 'constructed')
+        self.assertFalse(events[0]['source_attempted'])
+        self.assertEqual(events[0]['calls'], [])
+        self.assertIs(original.Original, constructor)
+
     def observe_fake_display(self, mode, captured_errors=None):
         """Use the real recorder; a Python callable stands in for the native ABI."""
         class Function:

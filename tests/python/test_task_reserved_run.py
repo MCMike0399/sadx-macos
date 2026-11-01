@@ -2,10 +2,16 @@
 import hashlib
 import importlib.util
 import json
+import os
 from pathlib import Path
+import py_compile
+import select
+import subprocess
+import sys
 import tempfile
 import unittest
 from unittest.mock import patch
+from types import SimpleNamespace
 
 
 FILE = Path(__file__).resolve().parents[2] / 'tools/oracles/task_judges/reserved_run.py'
@@ -15,6 +21,113 @@ SPEC.loader.exec_module(RUN)
 
 
 class TaskReservedRun(unittest.TestCase):
+    def test_timestamp_valid_stale_cache_cannot_replace_checked_source(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'helper.py'
+            path.write_text("VALUE = 'stale'\n")
+            timestamp = path.stat()
+            py_compile.compile(str(path), doraise=True)
+            path.write_text("VALUE = 'fresh'\n")
+            os.utime(path, ns=(timestamp.st_atime_ns, timestamp.st_mtime_ns))
+            module = RUN.source_module('task_stale_cache_test', path)
+            self.assertEqual(module.VALUE, 'fresh')
+            self.assertEqual(module.__file__, str(path.resolve()))
+
+    def test_toolchain_header_library_and_link_changes_are_pinned(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            header, library = root / 'header.h', root / 'library.tbd'
+            header.write_text('old header')
+            library.write_text('old library')
+            link = root / 'current.h'
+            link.symlink_to('header.h')
+            before = RUN.tree_inputs(root)
+            self.assertTrue(all(RUN.digest(name) == value for name, value in before.items()))
+            header.write_text('new header')
+            self.assertNotEqual(RUN.tree_inputs(root), before)
+            header.write_text('old header')
+            library.write_text('new library')
+            self.assertNotEqual(RUN.tree_inputs(root), before)
+            library.write_text('old library')
+            link.unlink()
+            link.symlink_to('library.tbd')
+            self.assertNotEqual(RUN.tree_inputs(root), before)
+
+    def test_build_environment_cannot_inherit_search_overrides(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            with patch.dict(os.environ, {'CPATH': 'foreign', 'SDKROOT': 'foreign',
+                                         'LIBRARY_PATH': 'foreign', 'CPLUS_INCLUDE_PATH': 'foreign'}), \
+                    patch.object(RUN.subprocess, 'run', return_value=SimpleNamespace(returncode=0)) as run:
+                RUN.command(['compiler'], root, root / 'log')
+            environment = run.call_args.kwargs['env']
+            for name in ('CPATH', 'SDKROOT', 'LIBRARY_PATH', 'CPLUS_INCLUDE_PATH'):
+                self.assertNotIn(name, environment)
+
+    def test_terminal_and_missing_parent_admission_refused(self):
+        with tempfile.TemporaryDirectory() as directory:
+            out = Path(directory)
+            with patch.object(RUN, 'OUT', out):
+                with self.assertRaisesRegex(ValueError, 'live admitted parent'):
+                    RUN.admit_child('generate', None, None)
+                (out / 'RUN.json').write_text('{}')
+                with self.assertRaisesRegex(ValueError, 'terminal'):
+                    RUN.admit_child('generate', None, None)
+
+    def test_child_is_bound_to_parent_stage_and_inherited_pipe(self):
+        with tempfile.TemporaryDirectory() as directory:
+            out = Path(directory)
+            read_fd, write_fd = os.pipe()
+            try:
+                descriptor = os.fstat(read_fd)
+                active = dict(parent_pid=os.getppid(), stage='old-task_work', token='exact',
+                              pipe_device=descriptor.st_dev, pipe_inode=descriptor.st_ino)
+                (out / 'ACTIVE.json').write_text(json.dumps(active))
+                with patch.object(RUN, 'OUT', out):
+                    RUN.admit_child('old-task_work', read_fd, 'exact', monitor=False)
+                    for stage, token in [('current-task_work', 'exact'), ('old-task_work', 'wrong')]:
+                        with self.assertRaisesRegex(ValueError, 'identity differs'):
+                            RUN.admit_child(stage, read_fd, token, monitor=False)
+                    active['parent_pid'] += 1
+                    (out / 'ACTIVE.json').write_text(json.dumps(active))
+                    with self.assertRaisesRegex(ValueError, 'identity differs'):
+                        RUN.admit_child('old-task_work', read_fd, 'exact', monitor=False)
+            finally:
+                os.close(read_fd)
+                os.close(write_fd)
+
+    def test_parent_channel_eof_stops_admitted_child(self):
+        with tempfile.TemporaryDirectory() as directory:
+            out = Path(directory)
+            read_fd, write_fd = os.pipe()
+            descriptor = os.fstat(read_fd)
+            (out / 'ACTIVE.json').write_text(json.dumps(dict(
+                parent_pid=os.getpid(), stage='generate', token='exact',
+                pipe_device=descriptor.st_dev, pipe_inode=descriptor.st_ino)))
+            script = ("import importlib.util,sys,time; from pathlib import Path; "
+                      "s=importlib.util.spec_from_file_location('runner',sys.argv[1]); "
+                      "m=importlib.util.module_from_spec(s);s.loader.exec_module(m); "
+                      "m.OUT=Path(sys.argv[2]);m.admit_child('generate',int(sys.argv[3]),'exact'); "
+                      "print('ready',flush=True);time.sleep(30)")
+            child = subprocess.Popen([sys.executable, '-I', '-c', script, str(FILE),
+                                      str(out), str(read_fd)], pass_fds=(read_fd,),
+                                     stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+            try:
+                self.assertTrue(select.select([child.stdout], [], [], 3)[0])
+                self.assertEqual(child.stdout.readline().strip(), 'ready')
+                os.close(write_fd)
+                write_fd = None
+                self.assertEqual(child.wait(timeout=3), 125)
+            finally:
+                os.close(read_fd)
+                if write_fd is not None:
+                    os.close(write_fd)
+                if child.poll() is None:
+                    child.terminate()
+                    child.wait(timeout=3)
+                child.stdout.close()
+                child.stderr.close()
+
     def test_no_admission_does_not_verify_generate_or_create(self):
         with tempfile.TemporaryDirectory() as directory:
             out = Path(directory) / 'out'

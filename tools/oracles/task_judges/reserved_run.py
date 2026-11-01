@@ -10,9 +10,13 @@ import io
 import json
 import os
 from pathlib import Path
+import secrets
+import stat
 import subprocess
 import sys
 import tarfile
+import threading
+from types import ModuleType
 
 ROOT = Path(__file__).resolve().parents[3]
 PACKET = ROOT / 'docs/refactor-inventory/packets/task-owner'
@@ -25,7 +29,10 @@ ARCHIVE_PATHS = ('src', 'tests/probes', 'tests/fixtures', 'tools/oracles', 'tool
 
 
 def digest(path):
-    with Path(path).open('rb') as stream:
+    path = Path(path)
+    if path.is_symlink():
+        return hashlib.sha256(('link:' + os.readlink(path)).encode()).hexdigest()
+    with path.open('rb') as stream:
         return hashlib.file_digest(stream, 'sha256').hexdigest()
 
 
@@ -39,6 +46,50 @@ def write_new(path, value):
         stream.write('\n')
 
 
+def source_module(name, path):
+    """Bind executed code to checked source, ignoring timestamp-valid .pyc files."""
+    module = ModuleType(name)
+    module.__file__ = str(path.resolve())
+    sys.modules[name] = module
+    try:
+        exec(compile(path.read_bytes(), module.__file__, 'exec'), module.__dict__)
+    except BaseException:
+        sys.modules.pop(name, None)
+        raise
+    return module
+
+
+def tree_inputs(directory, seen=None):
+    seen = set() if seen is None else seen
+    canonical = directory.resolve()
+    if canonical in seen:
+        return {}
+    seen.add(canonical)
+    result = {}
+    for path in directory.rglob('*'):
+        if path.is_symlink():
+            result[str(path)] = hashlib.sha256(('link:' + os.readlink(path)).encode()).hexdigest()
+            if path.resolve().is_file():
+                result[str(path.resolve())] = digest(path.resolve())
+            elif path.resolve().is_dir():
+                result.update(tree_inputs(path.resolve(), seen))
+        elif path.is_file():
+            result[str(path)] = digest(path)
+    return result
+
+
+def toolchain():
+    compiler = Path(subprocess.check_output(['xcrun', '--find', 'clang++'], text=True).strip()).resolve()
+    linker = Path(subprocess.check_output(['xcrun', '--find', 'ld'], text=True).strip()).resolve()
+    sdk = Path(subprocess.check_output(['xcrun', '--sdk', 'macosx', '--show-sdk-path'], text=True).strip()).resolve()
+    resource = Path(subprocess.check_output([str(compiler), '-print-resource-dir'], text=True).strip()).resolve()
+    cxx = compiler.parent.parent / 'include/c++/v1'
+    if not cxx.is_dir():
+        raise ValueError('Explicit compiler C++ include tree unavailable')
+    return dict(compiler=str(compiler), linker=str(linker), sdk=str(sdk),
+                resource=str(resource), cxx=str(cxx))
+
+
 def root_inputs():
     paths = []
     for directory in (ROOT / 'tools/oracles', ROOT / 'tools/lib'):
@@ -48,13 +99,17 @@ def root_inputs():
     package /= 'site-packages/unicorn'
     if not package.is_dir():
         raise ValueError('Use the pinned reference Python with Unicorn installed')
-    paths.extend(p for p in package.rglob('*') if p.is_file() and '__pycache__' not in p.parts)
-    compiler = Path(subprocess.check_output(['xcrun', '--find', 'clang++'], text=True).strip())
-    sdk = Path(subprocess.check_output(['xcrun', '--sdk', 'macosx', '--show-sdk-path'], text=True).strip())
-    paths.extend((compiler, sdk / 'SDKSettings.json', Path(sys.executable).resolve()))
+    # Third-party Python caches are executable model inputs too. Project helpers
+    # load verified source directly; the pinned Unicorn package binds both forms.
+    paths.extend(p for p in package.rglob('*') if p.is_file())
+    tools = toolchain()
+    paths.extend((Path(tools['compiler']), Path(tools['linker']), Path(sys.executable).resolve()))
     exe = ROOT / 'game/Sonic Adventure DX/sonic.exe'
     paths.append(exe)
-    return {str(path.resolve()): digest(path) for path in sorted(set(paths))}
+    result = {str(path.resolve()): digest(path) for path in sorted(set(paths))}
+    for name in ('sdk', 'resource', 'cxx'):
+        result.update(tree_inputs(Path(tools[name])))
+    return result
 
 
 def prepare():
@@ -74,7 +129,7 @@ def prepare():
     if protocol['immutable_before_source'] != BEFORE:
         raise ValueError('Wrong immutable before-source model')
     write_new(FREEZE, dict(before=BEFORE, candidate=CANDIDATE,
-                          protocol=protocol, inputs=root_inputs(),
+                          protocol=protocol, inputs=root_inputs(), toolchain=toolchain(),
                           source_trees={world: git('rev-parse', commit + ':src').decode().strip()
                                         for world, commit in (('old', BEFORE), ('current', CANDIDATE))},
                           archive_paths=ARCHIVE_PATHS,
@@ -96,11 +151,31 @@ def verify_freeze():
     return frozen
 
 
-def command(argv, cwd, log):
-    environment = dict(os.environ)
-    environment.pop('PYTHONPATH', None)
-    with log.open('x') as stream:
-        result = subprocess.run(argv, cwd=cwd, env=environment, stdout=stream, stderr=subprocess.STDOUT)
+def command(argv, cwd, log, stage=None):
+    # Compiler/header/library/plugin search must not inherit operator settings.
+    environment = {name: os.environ[name] for name in ('HOME', 'TMPDIR', 'USER', 'LOGNAME')
+                   if name in os.environ}
+    environment.update(PATH='/usr/bin:/bin:/usr/sbin:/sbin', LANG='C', LC_ALL='C')
+    read_fd = write_fd = None
+    if stage is not None:
+        read_fd, write_fd = os.pipe()
+        pipe = os.fstat(read_fd)
+        token = secrets.token_hex(24)
+        active = OUT / 'ACTIVE.json'
+        temporary = OUT / 'ACTIVE.new.json'
+        temporary.write_text(json.dumps(dict(parent_pid=os.getpid(), stage=stage, token=token,
+                                            pipe_device=pipe.st_dev, pipe_inode=pipe.st_ino)))
+        temporary.replace(active)
+        argv = [*argv, '--parent-fd', str(read_fd), '--stage-token', token]
+    try:
+        with log.open('x') as stream:
+            result = subprocess.run(argv, cwd=cwd, env=environment, stdout=stream,
+                                    stderr=subprocess.STDOUT,
+                                    pass_fds=() if read_fd is None else (read_fd,))
+    finally:
+        if read_fd is not None:
+            os.close(read_fd)
+            os.close(write_fd)
     if result.returncode:
         raise RuntimeError(f'Exit {result.returncode}: {argv}; log {log}')
 
@@ -139,13 +214,17 @@ def verify_archive(tree, commit):
         raise ValueError('Archived dependency set changed')
 
 
-def build(world, tree):
+def build(world, tree, tools):
     folder = OUT / world / 'libraries'
     folder.mkdir()
     for slug in SLUGS:
-        argv = ['xcrun', 'clang++', '-std=c++17', '-O2', '-Wall', '-Wextra', '-Werror',
+        argv = [tools['compiler'], '-std=c++17', '-O2', '-Wall', '-Wextra', '-Werror',
                 '-ffp-contract=off', '-fno-fast-math', '-arch', 'arm64',
-                '-mmacosx-version-min=14.0', '-Isrc', '-Itests/fixtures', '-dynamiclib',
+                '-mmacosx-version-min=14.0', '-isysroot', tools['sdk'],
+                '-resource-dir', tools['resource'], '-isystem', tools['cxx'],
+                '-fuse-ld=' + tools['linker'], '-fno-modules', '-fno-implicit-modules',
+                '--no-default-config',
+                '-Isrc', '-Itests/fixtures', '-dynamiclib',
                 'tests/probes/native_' + slug + '_probe.cpp',
                 'src/engine/task.cpp', 'src/engine/task_work.cpp',
                 '-MMD', '-MF', str(folder / (slug + '.d')),
@@ -154,7 +233,32 @@ def build(world, tree):
         command(argv, tree, folder / (slug + '-build.log'))
 
 
-def child(mode, world=None, slug=None):
+def admit_child(stage, parent_fd, stage_token, monitor=True):
+    if (OUT / 'RUN.json').exists():
+        raise ValueError('Execution is already terminal')
+    if parent_fd is None or stage_token is None:
+        raise ValueError('Internal entry requires the live admitted parent')
+    active = json.loads((OUT / 'ACTIVE.json').read_text())
+    pipe = os.fstat(parent_fd)
+    if (os.getppid() != active['parent_pid'] or active['stage'] != stage or
+            active['token'] != stage_token or not stat.S_ISFIFO(pipe.st_mode) or
+            pipe.st_dev != active['pipe_device'] or pipe.st_ino != active['pipe_inode']):
+        raise ValueError('Child parent/stage/pipe identity differs')
+    if monitor:
+        # A pipe writer exists only in the parent. EOF on abrupt parent death
+        # kills the observer even inside a native call; it cannot consume later
+        # cases as an orphan. This is execution safety, not progress polling.
+        def parent_lifetime():
+            try:
+                os.read(parent_fd, 1)
+            finally:
+                os._exit(125)
+        threading.Thread(target=parent_lifetime, daemon=True).start()
+
+
+def child(mode, world=None, slug=None, parent_fd=None, stage_token=None):
+    name = 'generate' if mode == 'generate' else world + '-' + slug
+    admit_child(name, parent_fd, stage_token)
     frozen = verify_freeze()
     marker = json.loads((OUT / 'EXECUTED_ONCE.json').read_text())
     if marker['freeze_sha256'] != digest(FREEZE):
@@ -174,14 +278,14 @@ def child(mode, world=None, slug=None):
         for item, expected in inputs_manifest.items():
             if digest(OUT / (item + '-inputs.json')) != expected:
                 raise ValueError('Generated inputs changed: ' + item)
-    name = 'generate' if mode == 'generate' else world + '-' + slug
     write_new(OUT / (name + '.started.json'), dict(mode=mode, world=world, slug=slug))
     tree = OUT / ('old' if mode == 'generate' else world) / 'tree'
     verify_archive(tree, frozen['before'] if mode == 'generate' or world == 'old' else frozen['candidate'])
     # All world-specific original scripts and helpers come from that immutable
     # archive. Root's recorder/observer come from the separately frozen Root tree.
     sys.path[:0] = [str(Path(__file__).parent), str(tree / 'tools/oracles'), str(tree / 'tools/lib')]
-    observer = importlib.import_module('reserved_observer')
+    source_module('reserved_inputs', Path(__file__).with_name('reserved_inputs.py'))
+    observer = source_module('reserved_observer', Path(__file__).with_name('reserved_observer.py'))
     if mode == 'generate':
         keys = dict(task_work='arena', task_lifecycle='lifecycle', task_display='display', task_delete='delete')
         for item in SLUGS:
@@ -209,16 +313,16 @@ def run(admitted):
     completed, failure = [], None
     try:
         for world, commit in (('old', frozen['before']), ('current', frozen['candidate'])):
-            build(world, archive(world, commit))
+            build(world, archive(world, commit), frozen['toolchain'])
         write_new(OUT / 'BUILD.json', dict(libraries={str(path): digest(path)
                   for world in ('old', 'current')
                   for path in sorted((OUT / world / 'libraries').glob('*.dylib'))}))
         script = str(Path(__file__).resolve())
-        command([sys.executable, '-I', '-B', script, '_generate'], ROOT, OUT / 'generate.log')
+        command([sys.executable, '-I', '-B', script, '_generate'], ROOT, OUT / 'generate.log', stage='generate')
         for slug in SLUGS:
             for world in ('old', 'current'):
                 command([sys.executable, '-I', '-B', script, '_observe', '--world', world, '--slug', slug],
-                        ROOT, OUT / (world + '-' + slug + '.log'))
+                        ROOT, OUT / (world + '-' + slug + '.log'), stage=world + '-' + slug)
             comparison = OUT / (slug + '-comparison.json')
             command([sys.executable, '-I', str(Path(__file__).with_name('compare_streams.py')),
                      str(OUT / 'old/captures' / slug), str(OUT / 'current/captures' / slug),
@@ -242,6 +346,8 @@ def main():
     parser.add_argument('--admitted', action='store_true')
     parser.add_argument('--world', choices=['old', 'current'])
     parser.add_argument('--slug', choices=SLUGS)
+    parser.add_argument('--parent-fd', type=int)
+    parser.add_argument('--stage-token')
     args = parser.parse_args()
     if args.mode == 'prepare':
         prepare()
@@ -250,7 +356,8 @@ def main():
     else:
         if args.mode == '_observe' and (args.world is None or args.slug is None):
             parser.error('Observation requires exact world and slug')
-        child('generate' if args.mode == '_generate' else 'observe', args.world, args.slug)
+        child('generate' if args.mode == '_generate' else 'observe', args.world, args.slug,
+              args.parent_fd, args.stage_token)
 
 
 if __name__ == '__main__':

@@ -13,8 +13,18 @@ import json
 from pathlib import Path
 import struct
 import sys
+from types import ModuleType
 
 from reserved_inputs import arena_sequences, lifecycle_sequences
+
+
+def source_sibling(name):
+    """Execute the verified source bytes directly; timestamp caches are not proof."""
+    path = Path(__file__).with_name(name + '.py')
+    module = ModuleType('_task_' + name)
+    module.__file__ = str(path)
+    exec(compile(path.read_bytes(), str(path), 'exec'), module.__dict__)
+    return module
 
 
 def input_digest(value):
@@ -111,11 +121,14 @@ def audit_helpers(slug, original, cases, events, read_ip):
         control = slug == 'task_lifecycle' and index == len(cases)
         if index >= len(cases) and not control:
             raise ValueError('Unexpected original helper sequence')
+        active = dict(case=None if control else index, calls=[], direct=[], memory_faults=[],
+                      source_attempted=False, setup='constructing',
+                      kind='repeated_inactive_control' if control else 'generated_sequence')
+        machine = None
+        events.append(active)
         instance = previous_original(*args, **kwargs)
         machine = instance.machine
-        active = dict(case=None if control else index, calls=[], direct=[], memory_faults=[],
-                      kind='repeated_inactive_control' if control else 'generated_sequence')
-        events.append(active)
+        active['setup'] = 'constructed'
         current_event = active
         current = machine
         previous_emu = current.emu_start
@@ -126,6 +139,7 @@ def audit_helpers(slug, original, cases, events, read_ip):
             if in_helper:
                 return previous_emu(entry, stop, *emu_args, **emu_kwargs)
             row = dict(entry=entry, stop=stop, outcome='attempted')
+            current_event['source_attempted'] = True
             current_event['direct'].append(row)
             begin = len(current_event['memory_faults'])
             try:
@@ -159,6 +173,7 @@ def audit_helpers(slug, original, cases, events, read_ip):
             if read_ip(current) != original.STOP:
                 raise ValueError('Original pool initializer did not reach STOP')
         row = dict(entry=entry, arguments=list(arguments), outcome='attempted', memory_faults=[])
+        active['source_attempted'] = True
         active['calls'].append(row)
         begin = len(active['memory_faults'])
         try:
@@ -213,7 +228,7 @@ def audit_helpers(slug, original, cases, events, read_ip):
             control.update(original_outcome='established_observer_stop', pc=pc)
     except BaseException as error:
         if active is not None:
-            active.update(original_outcome='unexpected_error', pc=read_ip(machine),
+            active.update(original_outcome='unexpected_error', pc=read_ip(machine) if machine is not None else None,
                           error_type=type(error).__name__, error=str(error))
         raise
     finally:
@@ -354,10 +369,7 @@ def expected_calls(slug, cases, report):
 
 def validate_capture(slug, cases, report, output):
     """Bind complete recorded bytes to independent case/symbol/extent expectations."""
-    spec = importlib.util.spec_from_file_location('_task_capture_validator',
-                                                Path(__file__).with_name('compare_streams.py'))
-    validator = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(validator)
+    validator = source_sibling('compare_streams')
     expected = expected_calls(slug, cases, report)
     identity = json.loads((output / (slug + '.identity.json')).read_text())
     count = 0
@@ -417,10 +429,7 @@ def observe(slug, cases, labels, definition, exe, library, output):
     try:
         original = importlib.import_module('verify_original_' + slug)
         # Bind the recorder by file, not an unrelated cached "freeze" module.
-        spec = importlib.util.spec_from_file_location('_task_reserved_recorder',
-                                                    Path(__file__).with_name('freeze.py'))
-        recorder = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(recorder)
+        recorder = source_sibling('freeze')
         register = getattr(original, 'UC_X86_REG_EIP', None)
         if register is None:
             from unicorn.x86_const import UC_X86_REG_EIP
@@ -439,7 +448,8 @@ def observe(slug, cases, labels, definition, exe, library, output):
         error = dict(type=type(failure).__name__, message=str(failure))
         raise
     finally:
-        attempted = [event['case'] for event in events if event['case'] is not None]
+        attempted = [event['case'] for event in events
+                     if event['case'] is not None and event.get('source_attempted', True)]
         receipt = dict(slug=slug, oracle_exit=result, error=error, validated=validated,
                        generated_ids=list(range(len(cases))), attempted_source_ids=attempted,
                        unattempted_source_ids=sorted(set(range(len(cases))) - set(attempted)),
