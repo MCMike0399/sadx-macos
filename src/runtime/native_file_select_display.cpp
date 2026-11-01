@@ -158,7 +158,7 @@ void TitleScene::draw_file_select(title_menu::FileSelectWork &work) {
         session_.bootstrap_.menu.flags[0], session_.flow_.tutorial_variant,
         session_.displayed_save_index_, session_.first_visible_file_,
         session_.bootstrap_.card_operation, session_.selected_card_index_,
-        session_.bootstrap_.card_state, session_.list_data_, session_.font_state_,
+        session_.bootstrap_.card_state, session_.save_file_list_, session_.font_state_,
         session_.file_select_display_assets_->tables, session_.file_message_visible_,
         session_.flow_.alert_blocked, session_.file_message_, session_.save_warning_message_};
     file_select_display::draw_profiled(work, view, session_.logo_.drawing_state(), *this,

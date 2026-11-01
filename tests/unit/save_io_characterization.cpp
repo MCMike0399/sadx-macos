@@ -49,7 +49,7 @@ struct Writer final : save::WriteCalls {
     Writer() {
         if (cohort) { data.total_time=next(); data.checksum=next(); selected=next(); count=next(); complete=next(); }
         list->next = std::make_shared<files::ListNode>();
-        list->next->file = files::FileInfo{"sonicdx01.snc", 0x123456789ULL};
+        list->next->set_file(files::FileInfo{"sonicdx01.snc", 0x123456789ULL});
     }
     save::WriteState state() {
         return {disabled,retry,ok,count,phase,ready,exec,alert,deleting,first,
@@ -152,29 +152,29 @@ struct Reader final : files::SaveFileCalls {
 void list_snapshot(const files::List &list) {
     int n = 0;
     for (auto p = list; p; p = p->next,++n) {
-        output << "node:" << n << ',' << bool(p->file) << ',' << bool(p->next) << '\n';
-        if (p->file) output << p->file->name << ':' << p->file->last_write_time << '\n';
+        output << "node:" << n << ',' << bool(p->file()) << ',' << bool(p->next) << '\n';
+        if (p->file()) output << p->file()->name << ':' << p->file()->last_write_time << '\n';
     }
 }
 void lists() {
     files::List list;
-    files::append_save_list(list,std::nullopt,{});
+    files::append_save_list(list,nullptr,{});
     auto sentinel = list;
-    assert(!sentinel->file && !sentinel->next);
-    try { files::append_save_list(list,std::nullopt,{}); assert(false); }
+    assert(!sentinel->file() && !sentinel->next);
+    try { files::append_save_list(list,nullptr,{}); assert(false); }
     catch (const files::Error &e) { assert(e.boundary() == files::Boundary::IndeterminateSentinel); }
-    assert(list == sentinel && sentinel->next && !sentinel->next->file);
+    assert(list == sentinel && sentinel->next && !sentinel->next->file());
     output << "partial-append\n"; list_snapshot(list);
     files::free_save_list(list);
-    assert(!list && !sentinel->next && !sentinel->file);
+    assert(!list && !sentinel->next && !sentinel->file());
     for (int budget : {0,1}) {
         for (bool existing : {false,true}) {
             files::List head;
-            if (existing) files::append_save_list(head,std::nullopt,{});
-            const std::optional<std::string> name{std::string(128,'x')};
+            if (existing) files::append_save_list(head,nullptr,{});
+            const std::string name(128,'x');
             output << "allocation:" << budget << ',' << existing << '\n';
             allocation_budget = budget;
-            try { files::append_save_list(head,name,{"",7}); allocation_budget = -1; output << "ok\n"; }
+            try { files::append_save_list(head,&name,{"",7}); allocation_budget = -1; output << "ok\n"; }
             catch (const std::bad_alloc &) { allocation_budget = -1; output << "bad_alloc\n"; }
             list_snapshot(head);
         }
@@ -184,15 +184,15 @@ void lists() {
     for (int i = 0; i < 4; ++i) {
         files::List node(new files::ListNode{},[&,i](files::ListNode *p) {
             // Observe reset fields at actual final shared_ptr destruction.
-            destruction.push_back(i); output << "destroy:" << i << ',' << bool(p->file) << ',' << bool(p->next) << '\n'; delete p;
+            destruction.push_back(i); output << "destroy:" << i << ',' << bool(p->file()) << ',' << bool(p->next) << '\n'; delete p;
         });
-        if (i) node->file = files::FileInfo{"SonicDX01.snc",static_cast<std::uint64_t>(i)};
+        if (i) node->set_file(files::FileInfo{"SonicDX01.snc",static_cast<std::uint64_t>(i)});
         if (!list) list = node; else retained.back()->next = node;
         retained.push_back(node);
     }
     files::free_save_list(list);
     assert(!list && destruction.empty());
-    for (const auto &p : retained) { assert(!p->next && !p->file); }
+    for (const auto &p : retained) { assert(!p->next && !p->file()); }
     for (int i : {2,0,3,1}) retained[i].reset();
     assert((destruction == std::vector<int>{2,0,3,1}));
     int id = 0;
@@ -263,7 +263,8 @@ int main(int argc,char **argv) {
             auto tail = w.list;
             for (int slot=2;slot<=99;++slot) {
                 char name[14]; std::snprintf(name,sizeof(name),"SonicDX%02d.snc",slot);
-                files::append_save_list(w.list,std::string(name),{name,0});
+                const std::string filename(name);
+                files::append_save_list(w.list,&filename,{name,0});
             }
         }
         w.run(id++);

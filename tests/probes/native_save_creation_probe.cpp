@@ -109,7 +109,7 @@ extern "C" int sadx_native_save_write(const std::uint32_t *input, const char *na
     for (std::uint32_t i = 0; i < input[14]; ++i) {
         tail->next = std::make_shared<sadx::file_select::ListNode>();
         tail = tail->next;
-        tail->file = sadx::file_select::FileInfo{list_names + i * 16, 0};
+        tail->set_file(sadx::file_select::FileInfo{list_names + i * 16, 0});
     }
     sadx::save::EncodedData initial;
     std::copy_n(bytes, 1392, initial.begin());

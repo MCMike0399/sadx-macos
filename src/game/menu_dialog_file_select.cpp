@@ -44,10 +44,10 @@ void publish_selected_name(ConfirmationState &state, ConfirmationCalls &calls) {
         calls.free_save_name(state.save_name);
         state.save_name = nullptr;
     }
-    if (!node->file)
+    if (!node->file())
         throw file_select::Error(file_select::Boundary::IndeterminateSentinel,
                                  "selected save filename is indeterminate");
-    const auto &name = node->file->name;
+    const auto &name = node->file()->name;
     auto *copy = calls.allocate_save_name(name.size() + 1);
     state.save_name = copy;
     calls.copy_save_name(copy, name);

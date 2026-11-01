@@ -1,5 +1,6 @@
 #include "guest/frame_control_reference.hpp"
 #include "game/game_loop.hpp"
+#include "game/save_frame.hpp"
 #include "engine/speedrun.hpp"
 
 namespace sadx {
@@ -24,6 +25,43 @@ struct Body {
         result.pending_call.reset();result.nested_source_boundary=0;result.diagnostic.reset();
         return receipt.return_value;
     }
+    // Reference-only field transport: conversion is the original lazy load;
+    // assignment publishes directly, including into a previously unknown field.
+    template<class T> struct SaveField {
+        Body &body;
+        std::optional<T> &owner;
+        std::uint32_t read_site;
+        operator T() const { return body.need(owner, read_site); }
+        SaveField &operator=(T value) { owner = value; return *this; }
+    };
+    struct SaveFrameState {
+        SaveField<std::uint8_t> ready, count;
+        SaveField<std::int32_t> now_saving;
+        SaveField<std::uint8_t> exec, pending_message;
+        SaveField<std::uint32_t> pause_state;
+        std::uint32_t message;
+    };
+    SaveFrameState save_frame_state(bool after_completion) {
+        auto &state = s();
+        return {{*this, state.request_at_3b291ad, 0x40cba4},
+                {*this, state.counter_at_3b291b2, 0x40cbac},
+                {*this, state.save_phase_at_3b291a4, after_completion ? 0x40cc30U : 0x40cbbfU},
+                {*this, state.pending_at_3abdf76, 0x40cc1d},
+                {*this, state.pending_at_3abdf79, after_completion ? 0x40cc38U : 0x40cbd0U},
+                {*this, state.mode_at_3b28114, 0x40cc53}, 0x3abdca8};
+    }
+    void display_saving_message(std::uint32_t) {
+        call(GameLoopOperation::save_40be40, 0x40cbed, 0x40be40);
+    }
+    void close_saving_message(std::uint32_t message) {
+        // The pre/post-completion call sites are distinct diagnostics.
+        const auto site = save_after_completion ? 0x40cc45U : 0x40cbddU;
+        call(GameLoopOperation::pending_40e2c0, site, 0x40e2c0, message);
+    }
+    void write_save_file() {
+        call(GameLoopOperation::work_421fd0, 0x40cc2b, 0x421fd0);
+    }
+    bool save_after_completion = false;
     bool fog_pass(std::uint32_t flags_at,std::uint32_t fog_at){
         const auto borrowed=[](const std::optional<std::uint8_t>* owner){return owner?*owner:std::optional<std::uint8_t>{};};
         const auto flags=need(borrowed(s().special_flags_at_909eb4),flags_at);
@@ -54,24 +92,15 @@ struct Body {
             const auto far=need(st.fog_range_at_3abdc74,0x40cb8f);const auto near=need(st.fog_range_at_3abdc70,0x40cb95);
             call(GameLoopOperation::fog_range_403180,0x40cb9c,0x403180,near,far);
         }
-        if(need(st.request_at_3b291ad,0x40cba4)!=0){
-            st.counter_at_3b291b2=static_cast<std::uint8_t>(need(st.counter_at_3b291b2,0x40cbac)+1U);
-            st.save_phase_at_3b291a4=1;st.pending_at_3abdf76=1;
-        }
-        const auto phase=need(st.save_phase_at_3b291a4,0x40cbbf);
-        if(phase==1||phase==-1)call(GameLoopOperation::save_40be40,0x40cbed,0x40be40);
-        else if(need(st.pending_at_3abdf79,0x40cbd0)!=0){
-            call(GameLoopOperation::pending_40e2c0,0x40cbdd,0x40e2c0,0x3abdca8);st.pending_at_3abdf79=0;
-        }
+        auto save_before = save_frame_state(false);
+        save::detail::before_frame_completion(save_before, *this);
         if(need(st.word_at_3abdf80,0x40cbf2)!=0)call(GameLoopOperation::work_4326f0,0x40cbfa,0x4326f0);
         call(GameLoopOperation::work_40d4d0,0x40cbff,0x40d4d0);call(GameLoopOperation::work_40eab0,0x40cc04,0x40eab0);
         call(GameLoopOperation::work_42f990,0x40cc09,0x42f990);call(GameLoopOperation::work_40d3c0,0x40cc0e,0x40d3c0);
         call(GameLoopOperation::work_420840,0x40cc13,0x420840);call(GameLoopOperation::frame_411d00,0x40cc18,0x411d00);
-        if(need(st.pending_at_3abdf76,0x40cc1d)!=0){st.pending_at_3abdf76=0;call(GameLoopOperation::work_421fd0,0x40cc2b,0x421fd0);}
-        if(need(st.save_phase_at_3b291a4,0x40cc30)==0){
-            if(need(st.pending_at_3abdf79,0x40cc38)!=0){call(GameLoopOperation::pending_40e2c0,0x40cc45,0x40e2c0,0x3abdca8);st.pending_at_3abdf79=0;}
-            if(need(st.mode_at_3b28114,0x40cc53)==2)st.mode_at_3b28114=1;
-        }
+        save_after_completion = true;
+        auto save_after = save_frame_state(true);
+        save::detail::after_frame_completion(save_after, *this);
         // The counter is loaded and incremented before the game-mode compare,
         // but stored after it; an unknown mode leaves the counter unchanged.
         const auto frames=need(st.frames_at_3abdf58,0x40cc62)+1U;

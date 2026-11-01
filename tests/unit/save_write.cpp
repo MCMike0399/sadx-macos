@@ -97,7 +97,7 @@ int main() {
     // provider list.
     auto list = std::make_shared<sadx::file_select::ListNode>();
     list->next = std::make_shared<sadx::file_select::ListNode>();
-    list->next->file = sadx::file_select::FileInfo{"SonicDX01.snc", 0};
+    list->next->set_file(sadx::file_select::FileInfo{"SonicDX01.snc", 0});
     std::int32_t disabled = 0, phase = 1;
     std::uint8_t retry = 9, ok = 0, count = 1, ready = 1, exec = 1, alert = 1;
     std::uint8_t deleting = 0, first = 1, file_count = 1, selected = 0, complete = 1;
