@@ -1,0 +1,131 @@
+{
+  "candidate": "0806b909bc9be7d84367ca3c3c89191aadcf47cd",
+  "base": "353d528bbb1a50e8cb0e4cdeaf7657dc9ad8607d",
+  "qualification_files": 9,
+  "frozen_baseline_entries": 12,
+  "inherited_inputs": 955,
+  "candidate_inputs": 958,
+  "raw_corpora": 53,
+  "changed_inherited": [
+    "Makefile",
+    "reference/oracle-reports/game_mode.json",
+    "tests/probes/native_game_mode_probe.cpp",
+    "tests/unit/manifest.tsv"
+  ],
+  "added_inputs": [
+    "tools/oracles/check_game_mode_diagnostics.py",
+    "tools/oracles/check_game_mode_module_request.py",
+    "tools/oracles/mutate_game_mode_contracts.py"
+  ],
+  "streams": {
+    "records": 24000,
+    "old_record_bytes": 1220,
+    "companion_record_bytes": 1248,
+    "old_sha256": "7c28206234975f1c75e75e7737c5b6313e2796619b74a75bb4549feb15cb4f71",
+    "companion_sha256": "cc63938b3f1f9c3aa1afdb6dc7e0ec058553d30a3171de16dcaf5a5cfa370b69",
+    "input_sha256": "05c8ac3db56f68dcd6c7cb7334699f164bf2803b602a6694ec4dd7077f6d2ea0",
+    "paths": 252,
+    "native_failure_counts": {
+      "3": 242,
+      "1": 14
+    },
+    "all_old_words_exact": true,
+    "all_companion_tuples_exact": true
+  },
+  "final_faults": [
+    {
+      "fault": "swapped-frame-operands",
+      "compile_exit": 0,
+      "run_exit": 1,
+      "diagnostic": "native invocation identity, arguments or callback snapshot changed"
+    },
+    {
+      "fault": "lost-movie-identity",
+      "compile_exit": 0,
+      "run_exit": 1,
+      "diagnostic": "native invocation identity, arguments or callback snapshot changed"
+    },
+    {
+      "fault": "wrong-cleanup-owner",
+      "compile_exit": 0,
+      "run_exit": 1,
+      "diagnostic": "native invocation identity, arguments or callback snapshot changed"
+    },
+    {
+      "fault": "lost-destructor-kind",
+      "compile_exit": 0,
+      "run_exit": 1,
+      "diagnostic": "native invocation identity, arguments or callback snapshot changed"
+    },
+    {
+      "fault": "swallowed-callback-failure",
+      "compile_exit": 0,
+      "run_exit": 1,
+      "diagnostic": "native callback exception must propagate without later stores or retry"
+    },
+    {
+      "fault": "reordered-destructors",
+      "compile_exit": 0,
+      "run_exit": 1,
+      "diagnostic": "native-forwarders 27\ntitle destructor order changed"
+    },
+    {
+      "fault": "early-super-sonic-store",
+      "compile_exit": 0,
+      "run_exit": 1,
+      "diagnostic": "native-forwarders 27\nSuperSonic store must follow vsync callback and precede sound load"
+    },
+    {
+      "fault": "cached-mode-before-callback",
+      "compile_exit": 0,
+      "run_exit": 1,
+      "diagnostic": "native-forwarders 27\ntitle callback reads, wrapping increment and store order"
+    },
+    {
+      "fault": "lost-nested-boundary",
+      "compile_exit": 0,
+      "run_exit": 1,
+      "diagnostic": "complete 0 0 0 1 0\ncomplete pending diagnostic tuple changed"
+    },
+    {
+      "fault": "lost-pending-payload",
+      "compile_exit": 0,
+      "run_exit": 1,
+      "diagnostic": "complete 0 0 0 1 0\nowner-prefix 3 4244207 49388 0 1 4244207 4386848 0 0 0 0 0 0\nowner-prefix 5 4244207 49388 0 1 4244207 4386848 0 0 0 0 0 0\nowner-prefix 2 4244207 49388 0 1 4244207 4386848 0 0 0 0 0 0\nowner-prefix 3 4244398 49389 0 1 4244398 4243248 0 0 0 0 0 0\nowner-prefix 5 4244398 49389 0 1 4244398 4243248 0 0 0 0 0 0\nowner-prefix 2 4244398 49389 0 1 4244398 4243248 0 0 0 0 0 0\nowner-prefix 3 4244403 49390 0 1 4244403 4243264 0 0 0 0 0 0\nowner-prefix 5 4244403 49390 0 1 4244403 4243264 0 0 0 0 0 0\nowner-prefix 2 4244403 49390 0 1 4244403 4243264 0 0 0 0 0 0\nowner-prefix 3 4244412 49391 0 1 4244412 4377104 0 0 0 0 0 0\nowner-prefix 5 4244412 49391 0 1 4244412 4377104 0 0 0 0 0 0\nowner-prefix 2 4244412 49391 0 1 4244412 4377104 0 0 0 0 0 0\nowner-prefix 3 4245932 49392 0 1 4245932 4375792 0 0 0 0 0 0\nowner-prefix 5 4245932 49392 0 1 4245932 4375792 0 0 0 0 0 0\nowner-prefix 2 4245932 49392 0 1 4245932 4375792 0 0 0 0 0 0\nowner-prefix 3 4245937 49393 0 1 4245937 4350032 0 0 0 0 0 0\nowner-prefix 5 4245937 49393 0 1 4245937 4350032 0 0 0 0 0 0\nowner-prefix 2 4245937 49393 0 1 4245937 4350032 0 0 0 0 0 0\nmissing owner must retain argument presence and high word bits"
+    }
+  ],
+  "source_hashes": {
+    "src/game/game_mode.hpp": "44230c85f069ad96fc7360b6b16536e1da4001b6cf9d35574f3af772bbaf4075",
+    "src/game/game_mode_services.hpp": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36",
+    "src/game/game_mode.cpp": "8f830dabd7b2f3e594333799b47af001a6afebb7548ec2e95119b45c9dae5a43",
+    "src/game/game_mode_internal.hpp": "9a86c138e051465311d23780210976ce19a23c9f2f4d1abf96c784ce22774d7d",
+    "src/game/game_mode_native.cpp": "cdf3a649e194591c4ed3ec324cb6ae3ecac6c25c3ea83ec7c5a3e69a37e44dd5",
+    "src/guest/game_mode_reference.hpp": "a5e0f644ad592b50ce6d32eddc2d100997fe137e4145c379de0866adb14280f9",
+    "src/guest/game_mode_reference.cpp": "db11678fd7fbdb2d0046a543c0954f1d6f45d98202e5f6a84710e43040d90029",
+    "src/runtime/native_session.cpp": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c",
+    "src/runtime/native_session.hpp": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+  },
+  "qualification_sha256": "7b17411a550275bf9f4d0523c6f8e1d669d39a1089796d22f1033c3a2003480c",
+  "review_execution": "Read-only Git/hash/retained-stream checks; no builds, library execution, original runs, mutations, gates or holdouts.",
+  "direct_byte_receipt": {
+    "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "body_hex": "8b4424045068c0de7d00e891d40f0083c40833c0c3",
+    "body_sha256": "f9c3a61ebc7bc8f77c7804fec4fdf357b2f58602c3138e49dda0c67d58186fa4",
+    "printer_hex": "c3",
+    "profile_sha256": "926395f83d0c5d92455ef93df91c950718057ae77b99622fb8e1e19cbf0f0e1e",
+    "overlaps": [],
+    "limit": "Retained byte/disassembly/25-execution receipt inspected. No source executable in review checkout; no fresh PE read or original execution."
+  },
+  "disposition_fragment": {
+    "complete_files": 2,
+    "complete_stem_modules": 2,
+    "source_conformance": "already_conforming within native forwarding, state-access and explicit-stop purpose",
+    "members": {
+      "src/game/game_mode_services.hpp": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36",
+      "src/game/game_mode_native.cpp": "cdf3a649e194591c4ed3ec324cb6ae3ecac6c25c3ea83ec7c5a3e69a37e44dd5"
+    },
+    "judge_contract_adequacy": "accepted within stated retained-fixture and adapter-contract limits",
+    "integration_acceptance": "pending Root; future manifest union, integrated contracts, canonical bindings and gate not performed",
+    "excluded": "Downstream service algorithms, whole Mode/Session, product/journeys and campaign completion"
+  }
+}
