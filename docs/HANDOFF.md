@@ -666,3 +666,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Independent review 06c7a02 approves with one corrected literal. Frozen native observations, five caught mutants, original menu 1,401/regular 609 cases and fresh menu 701 cases are exact; rebuilt native closure and private native journeys pass.
 * Explicit module policy retains exact member/source review, nested evidence and limits; nine bounded modules reviewed. Inventory remains exhaustive and overwhelmingly open.
 * RegularResources is independently approved privately with native closure, 55 observations, six mutants and 3,010 fresh original comparisons; actual journeys/integration remain pending. Whole renderer/resources/Session and complete refactor remain open. No gameplay or new controller claim; no push.
+
+### 2026-11-01 — Shared math and character resource ownership qualified
+
+* Qualified-corpus make -j10 gate exits 0. character-math-gate.json records actual program/test counts, one inherited filesystem skip, smoke 120, R1–R4, three native menu/save journeys and sixteen startup comparisons. STATUS regenerated.
+* CharacterResources owns all five character texture fields with fixed identity and live borrowers. Metadata copy and later constructor-body binding stay in order; 25 observations, six compiled faults, original consumers and final 4,096 loader / 2,208 preview cases qualify the bounded owner. Gamma retains all 498 FP partial identities.
+* Shared Ninja length preserves both typed and raw retained returns, load/sum/store order and flags. All 17 Main consumer streams/reports and full boundary/partial identities match; original Sonic fixture stays unchanged. Post-review 8,864 cases have zero value mismatches and 6,834 FP partials; event/reaction failures remain inherited.
+* All 943 protected inputs pass. Module evidence splits at the existing 2 MiB cap, preserving every ordered record; independent review 7371ece approves. Asset-contract review closes 11 header modules, leaves Gamma migration and selection playback review open.
+* Earlier gate attempt exited 2 on stale table evidence; immutable source/declaration/consumer revalidation fixes that evidence without exemptions. Music ownership, PE image and guest heap packets are separately reviewed privately; integration remains pending.
+* Whole renderer, player, audio, resources, Session and complete campaign remain open. No actor/GPU/N3b/story/gameplay 63 FPS or new controller qualification; no push.
