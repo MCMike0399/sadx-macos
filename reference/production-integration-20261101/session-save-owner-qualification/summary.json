@@ -1,0 +1,61 @@
+{
+  "source_commit": "a490d56",
+  "probe_rebinding_commit": "768c0a0",
+  "provenance_baseline_commit": "fa063aa",
+  "source_sha256": {
+    "src/game/save_profiles.hpp": "7fa1443e5382027559c51bc32694ee1fe370548adfe2a784f6e9fe3cbf70fdff",
+    "src/guest/game_mode_leaves_reference.hpp": "5e3f17d271ca0d4c941f3bb00af800f455b87f7c6f88c21de4427281df73a25b",
+    "src/guest/game_mode_leaves_reference.cpp": "f8d54e2023e3478f53eb0e1737f381209c63e0bff96e55f3bc181365d3b70996",
+    "src/guest/native_game_reference.cpp": "9ffe1944dad7c6c7d951d23d27e6dccbe98a0b9e5c39a241eced9a05808ecb19",
+    "src/runtime/native_session.hpp": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0",
+    "src/runtime/native_session.cpp": "6c41e5d01e9014be2ef192218eead11a8fb11cc31e95a7dc7fefc34e7f5c98d4",
+    "src/runtime/native_save.cpp": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a",
+    "src/runtime/native_main_menu.cpp": "f8c1fb8172020e8acb92f7b1348476bbaa075540c77362eacdfb34f5bbbf96bf",
+    "src/runtime/native_character_select.cpp": "ddcf2b15144e3c1ea81bac848d70aab812b1398fbd8a55f4277885550792b9df",
+    "src/runtime/native_file_select_display.cpp": "7f8c435c0e9f718d1b5bd535c07aa68ef6ddfdd356451e36152579bd285e9fc1",
+    "src/runtime/native_title_tasks.cpp": "b79241bae2dd42684e8c03cdd475cca89f301a9705a57ede031baefa0b9b0c62",
+    "tests/unit/game_mode_leaves.cpp": "7559ebb961c88b67f03d62fa4d88fc3727f67163bc82895d04d3da3f0e2a1a7f",
+    "tests/probes/native_game_mode_leaves_probe.cpp": "a5d585ecdbe396ee9222df361184f71ef0249b9494f245c89de591c60520574b",
+    "reference/symbols/overrides.tsv": "81e330ebd0aa5e4939566d6cd6abf65da356b28d70f1f9641a9cbf3016017318",
+    "reference/symbols/legacy-identifiers.json": "80bb63b169b4eba7690f8e54532e707571c8b8e455727be39ed73054e592e84c"
+  },
+  "original_compared_cases": 2526,
+  "all_native_frozen_outputs": 2600,
+  "same_explicit_native_boundaries": 74,
+  "value_mismatches": 0,
+  "native_unit_old_and_new_bodies": "passed",
+  "native_build": {
+    "exit_status": 0,
+    "archive_sha256": "fa23a241366082dd870ee63266f1ad9536e56b3fb59bd60aafe65f5e19b50bd2",
+    "force_load_executable_sha256": "23a4e95fbd35fb352232e9bc2143864113dc2de08950664e8e4158b928864a79",
+    "log_sha256": "30ddff9f7b915ee6d15a80f14d657de318c81ef67d8e80db1578ae3f97edda89",
+    "first_attempt": {
+      "exit_status": 2,
+      "reason": "Incorrect nonexistent closure target name; actual repository native-closure target used successfully on second attempt."
+    },
+    "reused_dependency": {
+      "reused_only": "Pinned installed third-party SDL/libusb dependency, unchanged bytes. All game/native/numerical objects built from this worktree source.",
+      "dependency_sha256": {
+        "lib/libSDL3.0.dylib": "98d32eb9ac4c8784c418f70fa33f7f58c1360417b749800bc599d84857b76d6a"
+      },
+      "command": "make -j6 -o build/native-controller-deps/include/SDL3/SDL.h build/libsadx-native.a build/native-app-closure-test",
+      "limits": "-o applies only to installed third-party header producer; no maintained source/game artifact is marked old or reused. No game EXE/DLL available to this private checkout build."
+    }
+  },
+  "native_journeys": {
+    "exit_status": 0,
+    "checkpoints": [
+      "native-file-select",
+      "native-main-menu",
+      "native-fresh-save"
+    ]
+  },
+  "valid_semantic_mutants_caught": 5,
+  "provenance": "86 GLOBAL declarations;167428 legacy/annotated byte identities; zero errors. Historical seven-byte owner coverage retained plus both complete1392-byte extents.",
+  "limits": [
+    "Private source checkout rebuild of all native/game/numerical code; pinned installed third-party SDL/libusb only reused. Not a release-export claim.",
+    "Original FP flags are not compared by inherited leaf judge; all native output/result words including FP status remain exact.",
+    "Full owner STYLE review, final integrated gate/reference journeys and fresh reserved qualification remain pending.",
+    "Save IO/menu/audio/resource/Session whole-system decomposition and complete campaign remain open. No actor/GPU/story/gameplay63FPS claim."
+  ]
+}

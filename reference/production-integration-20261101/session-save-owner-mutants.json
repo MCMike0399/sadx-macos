@@ -1,0 +1,42 @@
+[
+  {
+    "mutation": "unknown-options-known",
+    "compile_exit": 0,
+    "compile_stderr": "",
+    "terminal_exit": 1,
+    "stderr": "missing save options retain the exact reference read boundary\n",
+    "stdout": ""
+  },
+  {
+    "mutation": "zero-options-unknown",
+    "compile_exit": 0,
+    "compile_stderr": "",
+    "terminal_exit": 1,
+    "stderr": "known zero save options remain distinct from unknown\n",
+    "stdout": ""
+  },
+  {
+    "mutation": "wrong-record",
+    "compile_exit": 0,
+    "compile_stderr": "",
+    "terminal_exit": 1,
+    "stderr": "415000 through 413c00 (785330 nested) to srand\n",
+    "stdout": ""
+  },
+  {
+    "mutation": "wrong-life-slot",
+    "compile_exit": 0,
+    "compile_stderr": "",
+    "terminal_exit": 1,
+    "stderr": "saved lives are reread after the model callback, not copied before it\n",
+    "stdout": ""
+  },
+  {
+    "mutation": "eager-life-read",
+    "compile_exit": 0,
+    "compile_stderr": "",
+    "terminal_exit": 1,
+    "stderr": "saved lives are reread after the model callback, not copied before it\n",
+    "stdout": ""
+  }
+]

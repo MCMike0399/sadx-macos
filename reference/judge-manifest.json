@@ -1,9 +1,10 @@
 {
   "change": {
-    "base_commit": "fa063aa04af9b8eb1d1651ab27417a45bb176d8f",
-    "evidence": "reference/production-integration-20261101/session-save-owner-baseline/table-revalidation.json",
-    "evidence_sha256": "39864e62ccc6366004d9d8a0b2331873d78f89581c53a4f846456bf8d3e77282",
-    "reason": "Revalidate unchanged native title names table consumer against separately committed canonical save owner"
+    "base_commit": "994263053adf3543e59733b7af808ff9da456439",
+    "evidence": "reference/production-integration-20261101/session-save-owner-qualification/summary.json",
+    "evidence_sha256": "118b0ce42b4fd65899dbbeeed5a8cca6045e701e922b97580edc4c73eabca686",
+    "mode": "additions-only",
+    "reason": "Freeze five valid canonical save-owner semantic mutation receipts after separate source and probe commits"
   },
   "files": {
     "Makefile": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
@@ -332,6 +333,7 @@
     "reference/production-integration-20261026/native-model-binding-mutants.json": "8d936da60183fd5f8ffec99fe7c9f07f5e88c1e76829d9cabc42d2c4ca6ff6a2",
     "reference/production-integration-20261026/selection-player-queries/mutants.json": "5ef23236ac47efe1e21f0c13b0394f055c3a7f9f3d45ba60a1b9fffe2d3094ca",
     "reference/production-integration-20261101/menu-progress-shared/mutants.json": "cab8745d573efa9caa6e281654ef85ce535c0d28b4e593236e921d275faed40d",
+    "reference/production-integration-20261101/session-save-owner-mutants.json": "b95ec90bb88e7a03c6d3b95e47dbda27880253048f28df6101810123df741fd6",
     "tests/fixtures/input_keyboard_goldens.hpp": "0a9f25e5a0d336a1f4381af39257fdc6f7403f43ca2aef743345284fb1c18fda",
     "tests/fixtures/material_correction_mutants.json": "e34f023704a87b4663d5c56fed1c1beabaa697cd3a3770bbe24962ab28f66f41",
     "tests/fixtures/ninja_sprite_test_fixture.hpp": "1b4fa2a0ac6270d896f9e54c297829bdf3d43c378d195cbe34d0d6e87fd2b24e",
