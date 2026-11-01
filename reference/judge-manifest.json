@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "c75cd0977f83acbce40cd1daf88acb3be08d2142",
-    "evidence": "reference/production-integration-20261101/input-axes-main-checks.json",
-    "evidence_sha256": "ce1c5bd14316fbb1b48141fc8bbcdb902eb85bd87e1092c5c6157f493b3f5ee3",
-    "reason": "Bind actualMain axis/pad consumers with109056exactrecords/93104FPidentities and1044pad/300partials; preserve1268input parent protection and unchanged expectations"
+    "base_commit": "84337e542c150a7f8c1f96c20df631050764f404",
+    "evidence": "reference/production-integration-20261101/input-axes-coefficient-revalidation.json",
+    "evidence_sha256": "748d2f04c4a01db41229f6068ae222dd3d46291f178e8dccb448e072f9ef7572",
+    "reason": "Revalidate unchanged7word input coefficient producer after reviewed axis header rewrite; record actual stale-pin gatefailure, preserveexpectedwordhash/fixtures and rerun isolatednativeproducer"
   },
   "files": {
     "Makefile": "77a6cc1837d73f1d569b65edc81f429a297ef8a6ca49b0656dee53a945cbfe14",
@@ -98,7 +98,7 @@
     "reference/oracle-reports/input_devices.json": "743599afddc46ccd5f05dbc905915c4977e507239befb406eb16199df8c3257e",
     "reference/oracle-reports/input_initial_state.json": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c",
     "reference/oracle-reports/input_mod_axes.json": "77370efbb78668b9c7d2b11d5783c6b496e596503249000ff9a5cb15e112a4c2",
-    "reference/oracle-reports/input_mod_constants.json": "c12e0a543c86b8cf539fa48a0b06185c321a62d7a429d81b09edb5020c15169d",
+    "reference/oracle-reports/input_mod_constants.json": "099791edfb29be91de4b4dc37e3d6d6b1bab9e59ea6c85a1fc40b3997be8966f",
     "reference/oracle-reports/input_mod_pad.json": "1246340cb98f97e14eb6a16ba64ce4aaf6a0a7e6f28931b9f2455a8f00804799",
     "reference/oracle-reports/keyboard.json": "ac045e8cfbb4a2cd0229b2d030999950f2e53eed66b64ddb042a581d72c34d29",
     "reference/oracle-reports/late_sprite.json": "db304a84373d6e84b94bce8eb4dac9cb991bd87673834aa15ca445bb8230ae17",
