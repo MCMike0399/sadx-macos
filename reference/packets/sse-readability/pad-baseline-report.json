@@ -1,0 +1,18 @@
+{
+ "input_dll_sha256": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+ "native_library_sha256": "155f3194fe96b094873a3d92fd2568aef92687a64dbc8f8e5eb16e521f73ab3f",
+ "source_files": {
+  "src/input/input_mod_pad.hpp": "2d4a57f647b648b169fbf63211d08a88af26f1f851cc3d19638d87bea65eba21",
+  "src/input/input_mod_pad.cpp": "236237ddd8fc2d46eb941012ff6bf495524e6026bb764cfbe01135499f7c0525",
+  "tests/probes/native_input_mod_pad_probe.cpp": "e23a23597a8ca357c3da2d225e31a85fb77c502b14cc89c61952e2be68966542",
+  "tools/oracles/verify_original_input_mod_pad.py": "39dd6b79e99bbf76d5cc86d9ab85007c725d36b9ff6f28c31bde9bf2b1063158"
+ },
+ "poll_bytes_sha256": "a6176440cc238f3e77fd739fa699b6e9648b28dd087b26501074d6999301972b",
+ "convert_bytes_sha256": "0842dfed02318b34dbad4e9973d4bc6c31e2eb4756a10a7b2e4b23ba4f3168c0",
+ "poll_cases": 1044,
+ "poll_value_mismatches": 0,
+ "poll_mxcsr_mismatches": 300,
+ "mismatches": [],
+ "values_match": true,
+ "limits": "Input 2.6.1 DreamPad::poll (+0x4080, incl. its convert_axes calls) against the pinned DLL's instructions.\n\nconvert_axes alone is covered by verify_original_input_mod_axes.py.\n\nThe pinned sadx-input-mod.dll (SHA c5ccdcc7...) runs at its preferred base. Only\nthe dynamically resolved SDL entry points are fixtures: the GetAxis pointer at\n+0x1000e354 and GetButton pointer at +0x1000e358 return scripted values. The\nkeyboard Dreamcast pad globals (1000e8e8..1000e90e, 1000e744) and the demo byte\n1000e708 are set per case. MXCSR is part of each case. This compares stored\nrecord bytes, persistent E-held/half-press bytes, normalized magnitudes and\nMXCSR; it is not physical controller or SDL backend equivalence. MXCSR differences\nare expected: Unicorn 2.1.4 does not raise the SSE precision flag (0x20) on\ninexact results, which hardware and the native SseContext do.\n"
+}
