@@ -365,9 +365,9 @@ def child(mode, world=None, slug=None, parent_fd=None, stage_token=None):
                 for name in ('old', 'current') for item in SLUGS}
     if set(manifest['libraries']) != required:
         raise ValueError('Compiled model set differs')
-    for name, expected in manifest['libraries'].items():
-        if digest(name) != expected:
-            raise ValueError('Compiled model changed: ' + name)
+    for library_name, expected in manifest['libraries'].items():
+        if digest(library_name) != expected:
+            raise ValueError('Compiled model changed: ' + library_name)
     if mode == 'observe':
         inputs_manifest = json.loads((OUT / 'INPUTS.json').read_text())
         if set(inputs_manifest) != set(SLUGS):

@@ -22,6 +22,47 @@ SPEC.loader.exec_module(RUN)
 
 
 class TaskReservedRun(unittest.TestCase):
+    def test_real_child_dispatch_keeps_stage_name_after_library_validation(self):
+        class ReachedObserver(Exception):
+            pass
+        with tempfile.TemporaryDirectory() as directory:
+            out = Path(directory)
+            freeze = out/'freeze.json'
+            freeze.write_text('{}')
+            (out/'EXECUTED_ONCE.json').write_text(json.dumps({'freeze_sha256': RUN.digest(freeze)}))
+            libraries = {}
+            for world in ('old', 'current'):
+                folder = out/world/'libraries'
+                folder.mkdir(parents=True)
+                for slug in RUN.SLUGS:
+                    path = folder/(slug+'.dylib')
+                    path.write_text('fake model')
+                    libraries[str(path)] = RUN.digest(path)
+            (out/'BUILD.json').write_text(json.dumps({'libraries': libraries}))
+            inputs = {}
+            for slug in RUN.SLUGS:
+                path = out/(slug+'-inputs.json')
+                path.write_text(json.dumps(dict(cases=[[1]], labels=['fresh'], definition={})))
+                inputs[slug] = RUN.digest(path)
+            (out/'INPUTS.json').write_text(json.dumps(inputs))
+            def observe(*args):
+                raise ReachedObserver()
+            prior_path = list(sys.path)
+            try:
+                with patch.object(RUN, 'OUT', out), patch.object(RUN, 'FREEZE', freeze), \
+                        patch.object(RUN, 'admit_child'), \
+                        patch.object(RUN, 'verify_freeze', return_value={'before': RUN.BEFORE, 'candidate': RUN.CANDIDATE}), \
+                        patch.object(RUN, 'verify_archive'), patch.object(RUN, 'verify_origins'), \
+                        patch.object(RUN, 'pinned_unicorn'), \
+                        patch.object(RUN, 'source_module', return_value=SimpleNamespace(observe=observe)), \
+                        patch.object(RUN.importlib, 'import_module'):
+                    with self.assertRaises(ReachedObserver):
+                        RUN.child('observe', 'old', 'task_work', 99, 'fake')
+                self.assertTrue((out/'old-task_work.started.json').is_file())
+                self.assertFalse(list((out/'current/libraries').glob('*.started.json')))
+            finally:
+                sys.path[:] = prior_path
+
     def test_complete_unchanged_symlink_freeze_round_trip_and_selection_refusal(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)

@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "5bb1e08bcf04ec1a50ea217d5c702c96fcd7d060",
-    "evidence": "docs/refactor-inventory/packets/task-owner/PIN-MANIFEST-STORAGE.json",
-    "evidence_sha256": "23a4f4b55dc9c9405ff57330ef62b7b3f35a7c8dc01145164bf9e1e088576cf3",
-    "reason": "Bind full local task pin map without exceeding committed receipt size limit"
+    "base_commit": "54879372bffe596c12e011bcf2c25db510cb293d",
+    "evidence": "docs/refactor-inventory/packets/task-owner/RESERVED-ATTEMPT-1-FAILURE.json",
+    "evidence_sha256": "e2ae070cd6eeb5e19e7b898358180563ad8931503bf2aef066a2f250ea4d0044",
+    "reason": "Correct reserved child stage shadowing after pre-observation failure; preserve failed run and exact inputs"
   },
   "files": {
     "Makefile": "f145daba48afc9b3e7609df89506e4ce95b8693af2bc826358904427af53bfb6",
@@ -684,7 +684,7 @@
     "tests/python/test_symbols.py": "9e9a03a6389d6cd58aa49c63272049754f55ccddb19eeb894b8b92ccce362e0f",
     "tests/python/test_task_reserved_inputs.py": "ce771feeee0e8dac64450381a8e15ea6d1216aeb3235008a804aea1ada3482b4",
     "tests/python/test_task_reserved_observer.py": "3a9866351a743f339e5203c76b7dc9c071697ecf1a356f97cd03aefb4e16b741",
-    "tests/python/test_task_reserved_run.py": "e09d7e3737da98bb1a8158dd36c39b532dd8b822dab3cfe7834973b8ab1e477f",
+    "tests/python/test_task_reserved_run.py": "bdbcc1c2e37e0765303c4b7bfc368dff40ea0cec506342ca155eb4e13db5c095",
     "tests/python/test_task_stream_completeness.py": "b99019420543e49346ea3e8e870ce1e2e5bb28ccd68cdbc3bc3baba26bd80612",
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",
@@ -1104,7 +1104,7 @@
     "tools/oracles/task_judges/mutate.py": "da598d7d20fd5a5e8d0de553b84aa13bb3ee5ea60eaa54c4ed75b48f229ed11e",
     "tools/oracles/task_judges/reserved_inputs.py": "2e15c69e6c872035005af4bffd50fae0c9e3d8717dcf61dbf04e1d081d0a8492",
     "tools/oracles/task_judges/reserved_observer.py": "4360f0320b16fa87aa4fab6abc1c0053d16ab1122d620197387766fab133aa34",
-    "tools/oracles/task_judges/reserved_run.py": "9d991d6567f5e668a73322c00dd97c83b6910f92f266fb7d2f4b19f9b755c29f",
+    "tools/oracles/task_judges/reserved_run.py": "bea66aef52509d38bb0cd26c807e411565d7b7db589a98b8d39670675933e008",
     "tools/oracles/verdict.py": "333ac997dd1211ab70ed04d8fe7a7a424f418d00f13cd913a355f39773e1a63a",
     "tools/oracles/verify_original_air_acceleration.py": "a1f2fdeb24e84173f73538f9d1c02c4758d801b17568c58a679554f77c0b00c8",
     "tools/oracles/verify_original_alternate_acceleration.py": "0d6be36372b0e584a17d8d1b3fe1e4a1a25b35a5aca64aea7abfcf40a53f22a0",

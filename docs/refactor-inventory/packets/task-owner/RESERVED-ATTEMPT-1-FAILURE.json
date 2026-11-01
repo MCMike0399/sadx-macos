@@ -1,0 +1,57 @@
+{
+  "status": "Original admitted run TERMINAL exit1; no retry/continuation authorized yet.",
+  "run_exit": 1,
+  "cause": "Local library-loop variable name shadowed the exact stage label. Generation wrote a marker using the final absolute library path; first old-task_work stage then failed FileExistsError before observe().",
+  "source_changed": false,
+  "expected_values_or_inputs_changed": false,
+  "counts": [
+    {
+      "slug": "task_work",
+      "generated": 8,
+      "input_file_sha256": "0ce1bae1d601c7e1ae7ef6518df1f80a11e506a08504e9dba4aa91a6d67c84ab",
+      "source_attempts": 0,
+      "native_calls": 0
+    },
+    {
+      "slug": "task_lifecycle",
+      "generated": 8,
+      "input_file_sha256": "56431d97e42867604236a09fa9582cb5c36d3db02bbb0ba4c412ace144881a94",
+      "source_attempts": 0,
+      "native_calls": 0
+    },
+    {
+      "slug": "task_display",
+      "generated": 556,
+      "input_file_sha256": "593b768b2d693f5f42533d0b0ba10def9f45fcf17908e6e01ede44da69d20fb6",
+      "source_attempts": 0,
+      "native_calls": 0
+    },
+    {
+      "slug": "task_delete",
+      "generated": 570,
+      "input_file_sha256": "28fe354ea0a9c872b98301fe6eda54b5bd8eaf54f037a7ee0865c5530f116e27",
+      "source_attempts": 0,
+      "native_calls": 0
+    }
+  ],
+  "total_generated": 1142,
+  "source_attempted": 0,
+  "native_cases_called": 0,
+  "frozen_marker_sha256": "0a4193e19ae7a27d2ad7fb6583a9c5f10d66084d6f6e841f484bcf68b66d597f",
+  "terminal_receipt_sha256": "fbda7d474e3f90a543aa8d74479d3a38672fefc17778b8c1ee207f58220ac742",
+  "first_child_log_sha256": "584eb89156668ab404e743f734a13255fea1fc5204247f89c32e91cfc7f50d3d",
+  "wrong_marker": "build/task-final-reserved/current/libraries/task_work.dylib.started.json",
+  "wrong_marker_sha256": "36ab914b256adef99c31e246c732a5734b25769cf2de2efb432d2476d8d5db5a",
+  "preserved": [
+    "AllgeneratedinputfilesandINPUTS.json",
+    "Everycompiledmodel/archive/buildlog",
+    "Permanentoriginalmarker,failedRUN,wrongstartedmarkerandalllogs"
+  ],
+  "next": "Rename shadowed loop variable, add real child-dispatch regression, fresh review. Only an explicit separately frozen Root continuation may execute currently unattempted exact inputs; never regenerate or erase the failed run.",
+  "fix": "Use library_name in the library validation loop; preserve original stage label for exclusive marker. Real child dispatch fake reaches observer with correct old-task_work marker and rejects wrong library-suffixed marker.",
+  "tests": {
+    "tests": 69,
+    "exit_status": 0,
+    "log_sha256": "ec83db8647bdc1a4cfda5f0b27e86a39b683c708e2e1632808390a4b0a21b7a5"
+  }
+}
