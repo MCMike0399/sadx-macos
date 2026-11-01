@@ -1,9 +1,10 @@
 {
   "change": {
-    "base_commit": "72f2822acc27889db0ac96813801bf7b6a988da8",
-    "evidence": "reference/production-integration-20261101/depth-state-shared/registration.json",
-    "evidence_sha256": "50307323e2fce15cd607aafc8c194ea0407081b6cdee90fe6d2254609ea76539",
-    "reason": "Register independent depth sub-judge and native Display composition test after frozen source baseline; preserve inherited blend judges"
+    "base_commit": "f7c27b7f7912d4738abf428bf86c014f2ef8217d",
+    "evidence": "docs/refactor-inventory/reviews/menu-save-reconciliation.md",
+    "evidence_sha256": "d5096d443cff2e8a3b6c6e98f55de0e570f0076874ba3ba4659c7e79a99bd18a",
+    "mode": "additions-only",
+    "reason": "Register semantic inventory projection regression checks; retain all inherited judge inputs"
   },
   "files": {
     "Makefile": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
@@ -614,6 +615,7 @@
     "tests/python/test_native_settings.py": "6496b84d39012c5ea69aacd06ad1d41475f580016da9c22ab4a5f2b44dea58d6",
     "tests/python/test_provenance.py": "ce62fc0efc2ef9a92b2493adaf994fcbc38af4427c16c28eabe6aea72287fcc2",
     "tests/python/test_readability.py": "5593d449e6b7f507e233903a14aaae0a6c3621db888b31ae2169a3ca5229db94",
+    "tests/python/test_refactor_inventory_review.py": "0e4d730cd27e01a29c6887fae1844087b8d22896cfefec383bcec5d82ae88dc4",
     "tests/python/test_regular_textures.py": "b5ae871253c6c2e2fcaf69ce3f8c967b906e295c2c80cf49882f539b26dd268f",
     "tests/python/test_rollout_salvage.py": "6823ff25fa979fb7299e99f50aeb2ba1828b85ea3c9b5a65e635d093ef9c2a37",
     "tests/python/test_save_files.py": "de514de19a12ca015a891d61d1c49b930262ddeff9bfbad383c48df1ac1ca108",

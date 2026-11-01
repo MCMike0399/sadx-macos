@@ -34,6 +34,20 @@ def location(path, line):
     return {"path": path, "line": line}
 
 
+def reviewed_scope(review, source_sha256):
+    """Project authored semantic closure, never infer conformity from static counts."""
+    conforming = review.get("disposition") == "already_conforming"
+    required = ("semantic_justification", "resolved_owners", "resolved_consumers", "accepted_judges")
+    if conforming and not all(review.get(field) for field in required):
+        raise ValueError("Conformity requires semantic, owner, consumer and judge evidence")
+    if conforming and review.get("reviewed_source_sha256") != source_sha256:
+        raise ValueError("Conforming source changed; fresh semantic review required")
+    return {"status": "reviewed_conforming" if conforming else "closure_open",
+            "source_sha256": review.get("reviewed_source_sha256"),
+            **{field: review.get(field, []) for field in required},
+            "limits": review.get("classification_limits", [])}
+
+
 def module(path):
     p = Path(path)
     if path.startswith("src/"):
@@ -77,6 +91,7 @@ def render():
                 review.get(key) for key in ("semantic_justification", "resolved_owners",
                                             "resolved_consumers", "accepted_judges")):
             raise ValueError("Conformity requires semantic/owner/consumer/judge justification: " + path)
+        reviewed_scope(review, hashlib.sha256((ROOT / path).read_bytes()).hexdigest())
         if review["disposition"] == "obsolete" and not review.get("obsolescence_proof"):
             raise ValueError("Obsolescence requires maintained-consumer and behavior evidence: " + path)
         for evidence in review.get("evidence", []):
@@ -205,12 +220,16 @@ def render():
             role = ("historical_script_preserve_pending_usage_review" if "/production-integration-" in p
                     else "repository_owned_reference_script")
         system = system_for(p)
+        semantic = reviewed_scope(review, hashlib.sha256((ROOT / p).read_bytes()).hexdigest())
         records.append({"path": p, "module": module(p), "system": system,
                         "sha256": hashlib.sha256((ROOT / p).read_bytes()).hexdigest(),
                         "present_at_base": p in base_paths,
                         "source_kind": "source" if Path(p).suffix in SOURCE_SUFFIXES else "support_or_data",
                         "role": role, "disposition": disposition,
-                        "review_status": "open_review" if disposition == "open_review" else "finding_recorded_closure_open",
+                        "review_status": ("open_review" if disposition == "open_review" else
+                                          semantic["status"] if disposition == "already_conforming" else
+                                          "finding_recorded_closure_open"),
+                        "semantic_review": semantic,
                         "reason": review.get("reason", "Not semantically reviewed; path, include and declaration indexing only."),
                         "evidence": review.get("evidence", []),
                         "native_build": ("listed_translation_unit" if p in native else
@@ -224,15 +243,18 @@ def render():
                             "not_in_observed_production_recipes" if p.startswith("src/") and Path(p).suffix in {".cpp", ".mm", ".c"} else
                             "not_a_production_translation_unit"),
                         "native_build_evidence": ["native-sources.txt", "Makefile:40", "Makefile:42", "Makefile:112"],
-                        "canonical_ownership": {"status": "open_review", "declaration_candidates": owner_candidates,
+                        "canonical_ownership": {"status": "reviewed" if disposition == "already_conforming" else "open_review", "declaration_candidates": owner_candidates,
+                                                "resolved": semantic["resolved_owners"],
                                                 "reviewed_notes": review.get("ownership_notes", []),
                                                 "annotated_globals": [d for d in declarations if d["kind"] == "GLOBAL"]},
                         "consumers": [{"path": path, "line": line, "kind": kind} for path, line, kind in
                                       sorted({(v["path"], v["line"], v["kind"]) for v in uses[p]})],
-                        "consumer_status": "static_candidates_only_dynamic_and_link_consumers_open",
+                        "consumer_status": "reviewed_with_recorded_limits" if disposition == "already_conforming" else "static_candidates_only_dynamic_and_link_consumers_open",
+                        "resolved_consumers": semantic["resolved_consumers"],
                         "destination": review.get("destination", systems[system]["destination"]),
                         "judge_candidates": judge_candidates(p),
-                        "judge_status": "candidate_links_only_coverage_and_case_verdict_review_open",
+                        "judge_status": "reviewed_with_recorded_limits" if disposition == "already_conforming" else "candidate_links_only_coverage_and_case_verdict_review_open",
+                        "accepted_judges": semantic["accepted_judges"],
                         "acceptance": systems[system]["acceptance"],
                         "provenance": declarations})
     # All other tracked reference paths and third-party trees get explicit rows.
