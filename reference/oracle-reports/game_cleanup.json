@@ -2,8 +2,9 @@
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
  "native_library_sha256": "fbc1216d71a2c20cbd54a445b79013c424797270c6a72ee375400471276f081d",
  "native_sources": {
+  "src/game/music_state.hpp": "cdad5447039cb43db11ca771d2f25f7c5e59c2c8d155cabc1d03c513f882ffe2",
   "src/game/game_cleanup.cpp": "024c23e264893b083234cd4acd187a9f08496a9aae650f21a446740cb8f46b9b",
-  "src/game/game_cleanup.hpp": "5e75754bfcdb7823872c06189ad556c440f95788e11a6fa2382b1db2a715cff7",
+  "src/game/game_cleanup.hpp": "eabdca730d54ae33912d5696bac88673df02e1d894c2b572dd6762cd309dcd5d",
   "tests/probes/native_game_cleanup_probe.cpp": "231926e3f042e41645b5e7e4cbeaadc278e70901b2c46a6b350c04000d020315",
   "src/game/save_data.cpp": "d0175338a858b42d58bda6155d4886a86a590d874d19c46e945c4b3d235f9eb4",
   "src/game/save_data.hpp": "b78b88eb49fa5623907fb4683b4fd5f349174b217b575ac6a3d55ba802d15080",
@@ -71,8 +72,8 @@
  "values_and_call_order_match": true,
  "limits": "Native Clear/Reset/title preparation and save restoration against pinned x86.\n\nReset uses the unchanged existing judge, including service-failure prefixes.\nOther source callees are executed except explicit external-owner receipts for\nheap/tasks, fade/stage services, texture release and list clearing. Invalid\nnegative MSG_Disp indices are outside the four-slot native view and excluded;\nall nonnegative counts, signed character flags and full regular tables remain.\n",
  "tracked_summary": {
-  "full_sha256": "6eb1d3ef6555f5af4ee321b3a3cccb292e86b62149dcb13b6267933ee7922328",
-  "full_bytes": 5279,
+  "full_sha256": "6628a96a75550c00c991949f7f0700d6c42b3a0be2e312111d55134e71be8e80",
+  "full_bytes": 5379,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

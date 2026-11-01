@@ -81,7 +81,7 @@ def main():
         key=f"completed{eo[0]}:fixtures{eo[2]}";outcomes[key]=outcomes.get(key,0)+1
         diff=[i for i in range(len(pages)) if op[i]!=ep[i]]
         if diff or list(oo)!=eo:bad.append(dict(case=n,fail=fail,bytes=[hex(PAGES[i//4096]+i%4096) for i in diff[:12]],fields=[i for i,(x,y) in enumerate(zip(oo,eo)) if x!=y][:8],source=eo[:8],native=list(oo)[:8]))
-    names=['src/game/game_reset.cpp','src/game/game_reset_leaves.hpp','src/game/game_reset_leaves.cpp','tests/probes/native_game_reset_composed_probe.cpp','tools/oracles/verify_original_game_reset_composed.py']
+    names=['src/game/game_cleanup.hpp','src/game/game_cleanup.cpp','src/game/music_state.hpp','src/guest/music_state_reference.hpp','src/guest/music_state_reference.cpp','src/game/game_reset.cpp','src/game/game_reset_leaves.hpp','src/game/game_reset_leaves.cpp','tests/probes/native_game_reset_composed_probe.cpp','tools/oracles/verify_original_game_reset_composed.py']
     report=dict(source_sha256=image.sha256,native_library_sha256=sha(a.native_library.read_bytes()),source_files={k:sha((pathlib.Path(__file__).resolve().parents[2]/k).read_bytes()) for k in names},
         cases=300,source_outcomes=outcomes,mismatch_count=len(bad),mismatches=bad[:20],pages_trace_boundaries_match=not bad,limits=__doc__)
     a.output.write_text(json.dumps(report,indent=1)+'\n');print(json.dumps(dict(cases=300,mismatches=len(bad),outcomes=outcomes)));return int(bool(bad))

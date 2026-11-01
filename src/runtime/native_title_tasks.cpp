@@ -389,7 +389,7 @@ std::int32_t TitleScene::audio_ready() {
     return static_cast<std::int32_t>(session_.sound_.stream_initialized);
 }
 std::uint32_t TitleScene::music_state() {
-    return music::query_music_state(session_.tracks_);
+    return music::query_music_state(session_.music_.tracks);
 }
 music::TaskServices TitleScene::music_task_services() {
     return {
@@ -415,7 +415,7 @@ void TitleScene::request_menu_music(std::int32_t index) {
     if (!session_.music_catalog_)
         throw flow::UnrecoveredGameFlowCall("native_menu_music_catalog");
     auto services = music_task_services();
-    music::request_menu_music(index, *session_.music_catalog_, sound_, session_.tracks_, services);
+    music::request_menu_music(index, *session_.music_catalog_, sound_, session_.music_.tracks, services);
 }
 menu_voice::TaskServices TitleScene::voice_task_services() {
     return {
@@ -436,7 +436,7 @@ void TitleScene::request_menu_voice(std::int32_t index) {
 void TitleScene::update_voice_request(TaskScheduler &scheduler, const TaskHandle &task) {
     auto &scene = callback_scene(scheduler, update_voice_request);
     auto services = scene.voice_task_services();
-    menu_voice::update_request(task, scene.sound_.volume_task, scene.session_.tracks_,
+    menu_voice::update_request(task, scene.sound_.volume_task, scene.session_.music_.tracks,
         scene.session_.voice_requested_enabled_, scene.textures_.ready, services);
 }
 void TitleScene::initialize_file_select(title_menu::FileSelectWork &work) {
@@ -536,16 +536,16 @@ void TitleScene::play_cancel_sound() {
 void TitleScene::load_music_manager(TaskScheduler &scheduler, const TaskHandle &task) {
     auto &scene = callback_scene(scheduler, load_music_manager);
     auto services = scene.music_task_services();
-    music::initialize_manager_task(task, scene.session_.sound_manager_, services);
+    music::initialize_manager_task(task, scene.session_.music_.manager, services);
 }
 void TitleScene::delete_music_manager(TaskScheduler &scheduler, const TaskHandle &) {
     auto &scene = callback_scene(scheduler, delete_music_manager);
-    title_menu::delete_sound_manager(scene.session_.sound_manager_, scene.session_.tracks_, scene);
+    title_menu::delete_sound_manager(scene.session_.music_.manager, scene.session_.music_.tracks, scene);
 }
 void TitleScene::update_music_request(TaskScheduler &scheduler, const TaskHandle &task) {
     auto &scene = callback_scene(scheduler, update_music_request);
     auto services = scene.music_task_services();
-    music::update_request(task, scene.sound_, scene.session_.tracks_,
+    music::update_request(task, scene.sound_, scene.session_.music_.tracks,
         scene.session_.music_requested_enabled_, scene.textures_.ready, services);
 }
 void TitleScene::update_music_manager(TaskScheduler &scheduler, const TaskHandle &task) {
@@ -554,7 +554,7 @@ void TitleScene::update_music_manager(TaskScheduler &scheduler, const TaskHandle
     if (!session.music_catalog_ || !session.audio_configuration_)
         throw flow::UnrecoveredGameFlowCall("native_menu_music_catalog_configuration");
     auto &configuration = *session.audio_configuration_;
-    music::ManagerState state{session.tracks_, session.voice_timing_, configuration.music_enabled,
+    music::ManagerState state{session.music_.tracks, session.music_.voice_timing, configuration.music_enabled,
         configuration.voice_enabled, session.voice_language_};
     music::ManagerServices services{
         [&session] { return session.pcm_.initialized; },

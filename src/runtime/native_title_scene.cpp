@@ -101,7 +101,7 @@ void TitleScene::initialize() {
     title_menu::initialize_title_menu(state_, owners, {flags[0], flags[1]}, *this);
 }
 void TitleScene::stop_music() {
-    title_menu::close_sound_manager(session_.sound_manager_, *this);
+    title_menu::close_sound_manager(session_.music_.manager, *this);
 }
 void TitleScene::initialize_menu_sound() { title_menu::initialize_menu_sound(sound_, *this); }
 void TitleScene::select_sound_bank(std::int32_t index) { session_.select_sound_bank(index); }

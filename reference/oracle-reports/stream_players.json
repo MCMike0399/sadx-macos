@@ -1,10 +1,10 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "f7604503da1089d7ffed671e74736fa0efe2eccb4d0cbd0ea0fe512442cb82b1",
+ "native_library_sha256": "2f0beb070206ffbffde25389297616820a35e9d929340c4a1e1139463321709c",
  "source_files": {
-  "src/game/game_reset_leaves.hpp": "906267952b1946b11cbfe19933d0658056fe7856d6932d04014a37718d08e3a9",
-  "src/game/game_reset_leaves.cpp": "66ed2101b6e0b1d67e84a571060c02f0dec59f5f8ca1ff90e9337629c1694fad",
-  "tests/probes/native_stream_players_probe.cpp": "f1b5f118ae4f0969712013805f82beb66f19597e2d7bbe2a5e9213b3c142c8e2",
+  "src/game/game_reset_leaves.hpp": "884755a504c07af311f0989754829d7ce6fad2e7bb2c77c1c47e25a417f12038",
+  "src/game/game_reset_leaves.cpp": "298701e955489b8b8ada5aede75c143453471a1928f5e72b2a0f3dc74f971521",
+  "tests/probes/native_stream_players_probe.cpp": "9ff03e8481020444dfd54b07acad8a679453d1ea11f3b36e2017a76b4792136d",
   "tools/oracles/verify_original_stream_players.py": "f055a1b6c310fc04624ee79fad177c98c9416c07f721a309a6b5f2ee1e34341a"
  },
  "original_range_sha256": "92ea3f06d67e20c60e4ee8362246a5bb4b4046859275418adba8746770d9e62c",
@@ -19,7 +19,7 @@
  "stores_match": true,
  "limits": "Audio stream-player setup 40d0d0 (reached from 40c030 through the 4253c0\nthunk, with 40ff10) against original instructions. Operator new 6443e7 is a\nfixture that stops the source (the native port reports it as its unported\nnested owner); compared: completion, the stopping call site and the player and\nflag words 3abdf94/9c/a0/a4/98/a8.\n",
  "tracked_summary": {
-  "full_sha256": "6a54ef732a479bc80b7e6a0f28b34bc125d13725c1d608f78a20d4fbc569a6d8",
+  "full_sha256": "e82712533643c2a9aed5bce5ce585e6bc63edc117d2adfe4ee62f25fc95a87f5",
   "full_bytes": 1303,
   "lists_cut_to": 10,
   "cut_lists": {}

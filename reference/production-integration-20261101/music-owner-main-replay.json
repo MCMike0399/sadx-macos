@@ -1,0 +1,66 @@
+{
+  "source_commit": "a151d85",
+  "full_streams": [
+    {
+      "name": "music",
+      "bytes": 43301742,
+      "sha256": "6e05147299059f29ab8fc0e7ef22af933aa0155d7783f6c37e0d5bad2d956557",
+      "full_output_identical": true,
+      "script_exit": 0
+    },
+    {
+      "name": "menu_voice",
+      "bytes": 3250520,
+      "sha256": "f26482222570ceac451b6f33699a601c6630ca58453300d95a8772228b5819c5",
+      "full_output_identical": true,
+      "script_exit": 0
+    },
+    {
+      "name": "game_cleanup",
+      "bytes": 22347776,
+      "sha256": "3c405306fa02274dff78fdf07819917ae109fa54dc0c43b28c1b8b61eb5e118c",
+      "full_output_identical": true,
+      "script_exit": 0
+    },
+    {
+      "name": "game_reset",
+      "bytes": 341700,
+      "sha256": "2d457cb1c31ce5c0276add9841b2dc8584e6fed65be29b66829bbb597dfd49b7",
+      "full_output_identical": true,
+      "script_exit": 0
+    },
+    {
+      "name": "game_reset_composed",
+      "bytes": 69320400,
+      "sha256": "222e39c5c2936f0b2952b5d17ab892577a556ba76cab9aa98a29c57efb439eed",
+      "full_output_identical": true,
+      "script_exit": 0
+    },
+    {
+      "name": "stream_players",
+      "bytes": 133800,
+      "sha256": "afa68e5540fa945fcee69790df75a4c156f6c17c39da12c90afb11710cff2cf5",
+      "full_output_identical": true,
+      "script_exit": 0
+    },
+    {
+      "name": "title_menu",
+      "bytes": 89394776,
+      "sha256": "28ffb591c3eb409595610971404206d62df091724958a212437ca351c17cc685",
+      "full_output_identical": true,
+      "script_exit": 1
+    }
+  ],
+  "title_fp_partial_identities_preserved": 270,
+  "composed_reset_contract": "Same entire300-case byte/page/trace output stream, not just count.",
+  "units": {
+    "music_state_reference": 0,
+    "music_scheduling_state": 0,
+    "task_callback_lifetime": 0
+  },
+  "limits": [
+    "Title exit1 remains partial, all270 FP identities preserved.",
+    "Music1301 observations include1299 full executions and2 bounded duration[-1] prefixes.",
+    "New Source/native/reference consumer gate remains pending."
+  ]
+}

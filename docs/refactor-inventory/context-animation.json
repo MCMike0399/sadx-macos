@@ -1,0 +1,1010 @@
+{
+  "schema_version": 1,
+  "kind": "read_only_source_context_not_formal_review",
+  "base_commit": "a0aa3426e4dc2781a4917cd15b0322fee175bdd3",
+  "date": "2026-11-01",
+  "branch": "packet/context-animation",
+  "worktree": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-243a9cf5",
+  "scope": "Next complete animation contract migration; no gameplay recovery or implementation",
+  "writes_authorized": [
+    "docs/refactor-inventory/context-animation.md",
+    "docs/refactor-inventory/context-animation.json"
+  ],
+  "executed": {
+    "source_reads_and_hashes": true,
+    "builds": false,
+    "tests": false,
+    "oracles": false,
+    "mutations": false,
+    "runtime": false,
+    "live_providers": false,
+    "network": false,
+    "storage_transfers": false,
+    "delegates": false
+  },
+  "currentSourceHashes": {
+    "native-sources.txt": "13e462b1ddc2df160580f9c6caf8544f444d87ca907b2a89f32ceada33f24eec",
+    "src/apps/native_character_selection_assets.hpp": "0ebab824c093c2bdca9bca0dd1bfa7dbcac017075461ab4f5e01a4a7e106db09",
+    "src/apps/native_gamma_actor_assets.hpp": "344f7f961f4cc6abc037e0068ae39feb326e6b95a0a5e72a87f391685808bc7b",
+    "src/engine/character_pack.cpp": "b2c5e28e05279a2bd20608aec766d3bfcb471bd11e659f9113dd77e677214a8d",
+    "src/engine/character_pack.hpp": "0622405eeb2a6c8157a051bcc922a6c653e3878f076a0afbaf0ff94eac6c1065",
+    "src/engine/scene_resource_reference.hpp": "2fc286670d1429050ecf4fe416dc3497528e40350e310bf4a18a1a70db95e796",
+    "src/engine/task_work.cpp": "08e679e66ab28ceda7a942033489cbd1f49356875766babe9e66236870c84691",
+    "src/engine/task_work.hpp": "d0df9e59dec1dfcbeff7d9100ac0044b5a6e3e4683f691d85d60534416109f9d",
+    "src/player/gamma_selection_core.cpp": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea",
+    "src/player/player_animation.cpp": "f1fea844550691d84e9be39bb2f8bd78c3b75bcc16c950c79a67df1b1a71ade0",
+    "src/player/player_animation.hpp": "29aecbe442f5151044a6c9678fa93b678b1d4a04a52958e95cfd16c0aa2b11bf",
+    "src/player/player_animation_blend.cpp": "d1ad8f801908b368f3d6cffdc9459c85a1f142d0db484a72f13dc0069256888c",
+    "src/player/player_animation_decode.cpp": "27e1a4cc025b9291bbf4d40beb0f2ab960629017619a57c3961af3e3d04ff9f6",
+    "src/player/player_animation_decode.hpp": "21da70395a880c7df112093b7f5d9eb93d142f3a15f42e772257624d6e0544e8",
+    "src/player/player_animation_state.hpp": "0000693cfeb05866c65eb36eba47ee0b6c6740f4018eb7074a88396bee9f8c93",
+    "src/player/player_initialization.hpp": "11af804aaf3579b8dc926ff2f90770aa03a90549cf986a1acb143b326b4cb790",
+    "src/player/player_physics.hpp": "08bf9f1949cdb7fd1605429c9b9663265e61d62352b9f5d018e7244a74738530",
+    "src/player/player_startup.cpp": "55fda480c5ec832436e19406f8ecc565152d480e7e162114b8a3527267e42b05",
+    "src/player/player_startup.hpp": "caf9869ca53aa415652f368ed0228b7d712be8ead731fa467a51adfd2e7c3c32",
+    "src/player/sonic_animation_operations.hpp": "8af69713c6bf0807f92460079f675d0f05c123bb873090155f4244bf5ee775ea",
+    "src/player/sonic_animation_table.cpp": "c4ad3db54a8eaa4032a692653a2eb2b99232544fd00f8c5f3aa44f2981dcdafb",
+    "src/player/sonic_animation_table.hpp": "30e86aaf6b9311f9863dfd98907e44fcd163a8d09cea9f0f69a5a22a13a25e11",
+    "src/player/sonic_animation_table_data.hpp": "d8c8aa041e018a67edfe0e01fcabeb752a80362f8ee1f0b680414bfc8e119f03",
+    "src/player/sonic_player.cpp": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483",
+    "src/player/sonic_player.hpp": "8ab874d28623af1876eebed149625c447f112a677098c0fa4f6e56da3286b0b4",
+    "src/runtime/gamma_actor_assets.hpp": "20c9358dc15df05c0dcb4a49a7e2fc5896220141f70f6dacd43a955833f4293d",
+    "src/runtime/native_gamma_assets_native.cpp": "5d7eaca277420cff3904d72b2d1a1fff69f44d995c8410a27415f5572f249787",
+    "src/runtime/native_gamma_binding.cpp": "75d59d1560df2d8f129cc0c76aa1ba99a9a2933b90f5465cd3e63ae07830cecb",
+    "src/runtime/native_gamma_resources_native.cpp": "18e9957a65b180e4ff44ceb2588597c7483de6dab15dbde005926469b86ab739",
+    "src/runtime/native_player_system.hpp": "3031b79d8041ca521b3d5a00decc75d5dae234102988518bdfbfd8a09c474a24",
+    "src/runtime/native_selection_preview.cpp": "7e87d4ce716df319922ff55b59a0710acd9334cd910fdbad990e1dcea46cbe52",
+    "src/runtime/native_session.hpp": "847a6c56ebe9ad8e549e43a2d5a62e931210b6c841172bda90fb3b70f388afe2",
+    "tests/probes/native_gamma_selection_core_probe.cpp": "f1f5119da472f78651428ac79b4a5435e80acb359bf2a0c2f816b2670195a517",
+    "tests/probes/native_player_animation_blend_probe.cpp": "da87dbc6f10d89a6ded7a6ec942896a70fa40abead3fdef8c9e24003188a108a",
+    "tests/probes/native_player_animation_probe.cpp": "9dd13ebcf928a54f9fd4736b1e62ce710573caba4795032a9b2b968a5d89ccdc",
+    "tests/probes/native_sonic_animation_table_probe.cpp": "6cd92c22f9e11c0112c3aecd9643c14baff8cae4ea8547fb093e9e1442fdc675",
+    "tests/probes/native_sonic_player_probe.cpp": "ea27199dca1c3f9ea726e9e1be159ed14b4ec35ab594d975fe80d2f9cd25ca60",
+    "tests/unit/gamma_selection_core.cpp": "d6aadb3b53e94fed35b696822e1271b7eb2e23d5e908a5e0bf8b8ce4ea144db1",
+    "tests/unit/manifest.tsv": "601bc55c9b9ae2a3af0b0207edac4c44ccaf377edd1d21f5cbcb957c69b10fc7",
+    "tests/unit/native_gamma_binding.mm": "0a2690737ec88d7e3d7402fd2d363e8f5eb18bfb7851d65a7341f87c35a5832d",
+    "tests/unit/native_gamma_weld_cursors.mm": "7b0c49f06344759858c95033a9e503241fa79eda58a3b5f4f00fe7e6cd86352e",
+    "tests/unit/player_animation.cpp": "9b77b459bb0212787aa9b0e4ba9ba5fabb0b2d02fca4ab2ec25b9fb5080977d1",
+    "tests/unit/player_animation_decode.cpp": "14578230b077cd945f685772c0fb2f01c7b0bbe823ab19317a70a8e416fab2d1",
+    "tests/unit/player_initialization.cpp": "c05c93b7c6f4ae625b8ad290799ab6a15953573051afb8ab9cd3beacc1074368",
+    "tests/unit/player_startup.cpp": "3c433f9b0e965f581e9982a854c2425b471aac472fe0d787b1d2bf711c0bd218",
+    "tests/unit/sonic_animation_table.cpp": "eb232f14205aa862b3e831ff338204f3d64acef62bf6a92be6c7a90268db1ee0",
+    "tests/unit/sonic_player.cpp": "c8696302d5c10c310aaf98058625bdb903841cec436661d9114a96961a817457",
+    "tools/analysis/prove_gamma_selection_sources.py": "f80890f5f53fae56b4ec3d33bff682172673235c26093f09f8a9131d2109e2e0",
+    "tools/emit/emit_sonic_animation_operations.py": "30d2aa8e8ae4c692ff67d23998c668ffe3f024745a277ef612dad61048eb9295",
+    "tools/emit/emit_sonic_animation_table.py": "2d25afa69c752e2af74edee52502dde3a5fb83ba7498175980501d1b5770e024",
+    "tools/gate/mutate.py": "9028799e852ca72ae2e49229647171ec68ecbc26eeb234db3fd510a4eeb33719",
+    "tools/gate/profile_patches.json": "926395f83d0c5d92455ef93df91c950718057ae77b99622fb8e1e19cbf0f0e1e",
+    "tools/import/gamma_actor_resources.py": "1c5145a449fece7b0793828d51c1d582a9473d92a34b73792232ce7cf0ab423d",
+    "tools/import/gamma_declarations.py": "b6795f8fb13af2151f0b0b6c02b75ff1f3122b257bf3c3c0f52251ff400aef27",
+    "tools/import/selection_actions.py": "31bd08b96d5cc7477c3452b86ace990073571225657c1dfd0df55eb1ab90275b",
+    "tools/import/sonic_actor_resources.py": "657c0509f0ea47d31b8b520a85bc44b7298d4e5def9c45b956bf604546f6274f",
+    "tools/oracles/mutate_gamma_selection_core.py": "f19c1e581df6b56c2f4c88d3c97881765863d342119490fd9acb77ba03e7b538",
+    "tools/oracles/verify_original_gamma_selection_core.py": "b62020db7b643a941079b15b2e0b931885ace95b40bb1ec3329a61439604aada",
+    "tools/oracles/verify_original_player_animation.py": "3501d8cd23af6671f3b70ebd13c762d4723a22091b0627d701821c52809331cf",
+    "tools/oracles/verify_original_player_animation_blend.py": "1cb4fdd24fe6ad64083b05ed5f85123f6b6fae794fc1f22a88a3b62c9b4e5dc9",
+    "tools/oracles/verify_original_sonic_animation_table.py": "84f040bb0d77253e85602b5a79fb2fab205c09a42ce34b56b0fa0c3b749d1090"
+  },
+  "tracked_evidence_hashes": {
+    "docs/refactor-inventory/reviews/runtime-asset-contracts.json": "07040324284838d581db550176e3227e2ee46f8497d7e780d13c42f75eb39f1e",
+    "docs/refactor-inventory/reviews/runtime-asset-contracts.md": "de2fc65c816589d6ee303c4540b45f0ec22a142e6d33e7066650ee0f819f0b8a",
+    "reference/animation-44a800.asm": "aadb6f158cf657e6da7e23bbdfd359768845144adeb250c156757d069e350d95",
+    "reference/animation-blend-43f2a0.asm": "965543a1b1437af3299aeb00bae8245d573ee1bb4f8ead201b6a75080cbada9c",
+    "reference/animation-mdata3-quirk-records.json": "170c6e43076d91b0bd95b4d25bda4d12392c89eedb5e2c1f38c84b4273329692",
+    "reference/animation-table-7cec90.asm": "61bcba48201d257a02d0a0f56fd6ea2b4fcabd45122fd332a315cbe5bd032994",
+    "reference/constexpr-table-review.json": "388f02fcaa3c464ee7938e73b7fe607f490e6a1bd7196801fbba2b8ffdf5daf0",
+    "reference/ghidra-action-fp-recovery/animation-43f230.json": "8b90f0251da09509d9d4f8e31209e0ae7accd7e71a2b57ecea5bd0fa724a0002",
+    "reference/ghidra-action-fp-recovery/animation-43f230.pseudocode.txt": "967a22e034c283960f92a66455684d6cac9e48aecd75acfad51e75a679a4550c",
+    "reference/ghidra-action-fp-recovery/animation-43f2a0.pseudocode.txt": "9196f370aef80b690393b19dfebfe2a742032b3204a0e5f9321bb83534368762",
+    "reference/ghidra-action-fp-recovery/animation-43f9f0.json": "a932f417cac95d72e959f42ee7ce0b9aab8d008e44a970c763715f8f613d930b",
+    "reference/ghidra-action-fp-recovery/animation-43f9f0.pseudocode.txt": "d17cfaa0b3fa4a368c9219ba3498f46977e499cc8a4d04139885c16c6b095042",
+    "reference/ghidra-action-fp-recovery/animation-446910.json": "8ac3098b3766c91af2ce2b8578cb7729688b6f3bb6ef34efff5f9bb302ba609a",
+    "reference/ghidra-action-fp-recovery/animation-446910.pseudocode.txt": "000e8d6d8578027b41a8084f71787ce06397ae6057efe088f60c3e260921f211",
+    "reference/ghidra-action-fp-recovery/animation-446950.json": "602dde129a55cd5009ffdacbc52f0f5c0722869b0ba07bce3e91385d68bca501",
+    "reference/ghidra-action-fp-recovery/animation-446950.pseudocode.txt": "4e9b701e02ccd43957cab5188934112bd2b34a0081e97d02244dc3f790201dc4",
+    "reference/ghidra-action-fp-recovery/animation-44a800.pseudocode.txt": "611655d9cdee198b5a77f733edeb467b7737ba8470b3903f0cf0a8359d718388",
+    "reference/ghidra-action-fp-recovery/animation-producer-4383a0.json": "3d3e8a8371f5f3c4a9451e3e9b057a8287c4e02ccc47f93ce30ae66a18f6f6da",
+    "reference/ghidra-action-fp-recovery/animation-producer-4383a0.pseudocode.txt": "9a05facec06000a71fecb47b76289b5194e06171f4e8fcb1a5d35ef3f97a3023",
+    "reference/ghidra-action-fp-recovery/animation-producer-4383d0.json": "65c5fe2a9dc7db625accbb59d1854ae0c56265881a030ce05e53f7515ec3eef8",
+    "reference/ghidra-action-fp-recovery/animation-producer-4383d0.pseudocode.txt": "21f1f977eaccbae781c79179541ca7291cbdfc3b7f45f4af488f6e5c842033b4",
+    "reference/ghidra-action-fp-recovery/animation-producer-439400.json": "7b2aab95d233fd04b8acf632815780afa7d0c69d4faeade3b14276456a5935e0",
+    "reference/ghidra-action-fp-recovery/animation-producer-439400.pseudocode.txt": "577041d77df0fc09d21a5a1d2599fb513ef606adb2ca007ff25ee3d81b5421d0",
+    "reference/ghidra-action-fp-recovery/animation-producer-439fc0.json": "50aa7368037b99273994cc7c3c064b6bb5e4446a05212b213ca448664cba02f4",
+    "reference/ghidra-action-fp-recovery/animation-producer-439fc0.pseudocode.txt": "3103bd9cd625ccb591eae461767fa2f7a7b5f8c64684a6f127c8cc39f1dc6f33",
+    "reference/ghidra-action-fp-recovery/animation-producer-7cec90.json": "45f72e668e047a62749af19484dfa5f6e75b89f63b7f3f89666cbc61d90af5e4",
+    "reference/ghidra-action-fp-recovery/animation-xrefs-38f6e7c.json": "fb257db5f21bbb9277f8f320e6d62ee294d56938305c4ccba5fe8d45151c9859",
+    "reference/ghidra-action-fp-recovery/animation-xrefs-3c56210.json": "cb7180444cc05da1580f97fd3c568e411769d4f67cafe9b2df9a45d605dfd671",
+    "reference/ghidra-action-fp-recovery/complete-action-fp-animation-texture-queue.json": "b5bb90c876532229b35201115a3e23d779bf7a6154b7848ef2c15edab839382c",
+    "reference/oracle-reports/player_animation.json": "0e496d266b97217eacdaf54a042e6c894edb74e8f2d97a0cd12aeb7a36240727",
+    "reference/oracle-reports/player_animation_blend.json": "d4b6ddec5f5861fc95b7ee681f71998857b95d1c0aecca57e6607e6181c56487",
+    "reference/oracle-reports/sonic_animation_table.json": "e6727e130b843c5fb7f1f651ad9c5337abbf4ece2b20cfad5b6a7d5c17b600c0",
+    "reference/original-player-animation-blend-comparison.json": "7ea67c867703f5d23a6739b34cc1660e2c5124f5c4cdcef8b24cca799ea652bd",
+    "reference/original-player-animation-blend-repaired-comparison.json": "14c010c935f0eee1ba0e36c1ab943c2bafe6fdf90b114c3b60df576e3e940b14",
+    "reference/original-player-animation-blend-repaired-v2-comparison.json": "c864de4b2d409cdfc02d3308b42380e5548aaa543f7cdb03abb50f68f04a7bf4",
+    "reference/original-player-animation-comparison.json": "5341846965e6409911b02c7c5891da3ff01a4ae63da58c20873efb6524000321",
+    "reference/original-sonic-animation-table-comparison.json": "88761a11fd19fe85e0da6f1d7b0c92b532395fa3dc8d928940d9dc957254b606",
+    "reference/packets/session-character-resources/gamma_selection_core-current.json": "45659df7945443c16bb0b087767d24c46c55cc790da24bad5e716eb9a3abfa64",
+    "reference/player-animation-ledger.json": "5d0992856666535d62ed81d969cf18e61987331918ddb18c491a189144649c50",
+    "reference/player-animation-provenance.md": "32f3fbceb6f0a46b4d9c814346cf9a495421f3a5489d25d805eda1c52d44a2ff",
+    "reference/production-integration-20261026/gamma-selection-core/asset-requirements.json": "2cfe770bd624e2963711300ac1126581d05e4dd9c5541a797e143ad460b83d6a",
+    "reference/production-integration-20261026/gamma-selection-core/proof.json": "7d6db922d354a8a1d0f89ab5ff0c32da22e0a4b61c54ba56d194cbd4373430a9",
+    "reference/production-integration-20261026/gamma-selection-core/source-evidence.json": "759c2e07f83c7c6bf3d8484f1db61fcb1917d177cf753989e4f33a2c241ea6db",
+    "reference/sonic-animation-operations.json": "d919c90ca7c0a08a25e8a8b566994da12d6d71703f5de6e9eaaeab051187fb91",
+    "reference/sonic-animation-table-recipes.json": "7e9b74f6088254dd14b67c3a9023b29baab22c49f1c6012e2816e4ebec1f1614"
+  },
+  "anchors": {
+    "table_types": {
+      "path": "src/player/player_animation.hpp",
+      "line": 28,
+      "sha256": "29aecbe442f5151044a6c9678fa93b678b1d4a04a52958e95cfd16c0aa2b11bf"
+    },
+    "resource_maps": {
+      "path": "src/player/player_animation.hpp",
+      "line": 38,
+      "sha256": "29aecbe442f5151044a6c9678fa93b678b1d4a04a52958e95cfd16c0aa2b11bf"
+    },
+    "tail_owner": {
+      "path": "src/player/player_animation_state.hpp",
+      "line": 20,
+      "sha256": "0000693cfeb05866c65eb36eba47ee0b6c6740f4018eb7074a88396bee9f8c93"
+    },
+    "physics_owner": {
+      "path": "src/player/player_physics.hpp",
+      "line": 15,
+      "sha256": "08bf9f1949cdb7fd1605429c9b9663265e61d62352b9f5d018e7244a74738530"
+    },
+    "initializer": {
+      "path": "src/player/sonic_animation_table.cpp",
+      "line": 6,
+      "sha256": "c4ad3db54a8eaa4032a692653a2eb2b99232544fd00f8c5f3aa44f2981dcdafb"
+    },
+    "operations": {
+      "path": "src/player/sonic_animation_operations.hpp",
+      "line": 5,
+      "sha256": "8af69713c6bf0807f92460079f675d0f05c123bb873090155f4244bf5ee775ea"
+    },
+    "content_recipes": {
+      "path": "src/player/sonic_animation_table_data.hpp",
+      "line": 5,
+      "sha256": "d8c8aa041e018a67edfe0e01fcabeb752a80362f8ee1f0b680414bfc8e119f03"
+    },
+    "decoder": {
+      "path": "src/player/player_animation_decode.cpp",
+      "line": 32,
+      "sha256": "27e1a4cc025b9291bbf4d40beb0f2ab960629017619a57c3961af3e3d04ff9f6"
+    },
+    "decoded_owner": {
+      "path": "src/player/player_animation_decode.hpp",
+      "line": 6,
+      "sha256": "21da70395a880c7df112093b7f5d9eb93d142f3a15f42e772257624d6e0544e8"
+    },
+    "updater": {
+      "path": "src/player/player_animation.cpp",
+      "line": 64,
+      "sha256": "f1fea844550691d84e9be39bb2f8bd78c3b75bcc16c950c79a67df1b1a71ade0"
+    },
+    "transition": {
+      "path": "src/player/player_animation_blend.cpp",
+      "line": 50,
+      "sha256": "d1ad8f801908b368f3d6cffdc9459c85a1f142d0db484a72f13dc0069256888c"
+    },
+    "raw_count_quirk": {
+      "path": "src/player/player_animation_blend.cpp",
+      "line": 37,
+      "sha256": "d1ad8f801908b368f3d6cffdc9459c85a1f142d0db484a72f13dc0069256888c"
+    },
+    "source_zero": {
+      "path": "src/player/player_startup.cpp",
+      "line": 58,
+      "sha256": "55fda480c5ec832436e19406f8ecc565152d480e7e162114b8a3527267e42b05"
+    },
+    "native_borrow": {
+      "path": "src/player/player_startup.cpp",
+      "line": 430,
+      "sha256": "55fda480c5ec832436e19406f8ecc565152d480e7e162114b8a3527267e42b05"
+    },
+    "sonic_route": {
+      "path": "src/player/sonic_player.cpp",
+      "line": 31,
+      "sha256": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483"
+    },
+    "sonic_publish": {
+      "path": "src/player/sonic_player.cpp",
+      "line": 1441,
+      "sha256": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483"
+    },
+    "sonic_runtime": {
+      "path": "src/player/sonic_player.hpp",
+      "line": 137,
+      "sha256": "8ab874d28623af1876eebed149625c447f112a677098c0fa4f6e56da3286b0b4"
+    },
+    "gamma_contract": {
+      "path": "src/runtime/gamma_actor_assets.hpp",
+      "line": 38,
+      "sha256": "20c9358dc15df05c0dcb4a49a7e2fc5896220141f70f6dacd43a955833f4293d"
+    },
+    "gamma_import": {
+      "path": "tools/import/gamma_actor_resources.py",
+      "line": 157,
+      "sha256": "1c5145a449fece7b0793828d51c1d582a9473d92a34b73792232ce7cf0ab423d"
+    },
+    "gamma_fold": {
+      "path": "tools/import/gamma_declarations.py",
+      "line": 22,
+      "sha256": "b6795f8fb13af2151f0b0b6c02b75ff1f3122b257bf3c3c0f52251ff400aef27"
+    },
+    "gamma_load": {
+      "path": "src/apps/native_gamma_actor_assets.hpp",
+      "line": 205,
+      "sha256": "344f7f961f4cc6abc037e0068ae39feb326e6b95a0a5e72a87f391685808bc7b"
+    },
+    "gamma_bind": {
+      "path": "src/runtime/native_gamma_binding.cpp",
+      "line": 150,
+      "sha256": "75d59d1560df2d8f129cc0c76aa1ba99a9a2933b90f5465cd3e63ae07830cecb"
+    },
+    "gamma_stub": {
+      "path": "src/runtime/native_gamma_binding.cpp",
+      "line": 242,
+      "sha256": "75d59d1560df2d8f129cc0c76aa1ba99a9a2933b90f5465cd3e63ae07830cecb"
+    },
+    "gamma_order": {
+      "path": "src/player/gamma_selection_core.cpp",
+      "line": 98,
+      "sha256": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea"
+    },
+    "gamma_attach": {
+      "path": "src/runtime/native_gamma_assets_native.cpp",
+      "line": 4,
+      "sha256": "5d7eaca277420cff3904d72b2d1a1fff69f44d995c8410a27415f5572f249787"
+    },
+    "gamma_receipts": {
+      "path": "tests/probes/native_gamma_selection_core_probe.cpp",
+      "line": 236,
+      "sha256": "f1f5119da472f78651428ac79b4a5435e80acb359bf2a0c2f816b2670195a517"
+    },
+    "table_partial_unit": {
+      "path": "tests/unit/sonic_animation_table.cpp",
+      "line": 5,
+      "sha256": "eb232f14205aa862b3e831ff338204f3d64acef62bf6a92be6c7a90268db1ee0"
+    },
+    "source_keys": {
+      "path": "src/apps/native_character_selection_assets.hpp",
+      "line": 41,
+      "sha256": "0ebab824c093c2bdca9bca0dd1bfa7dbcac017075461ab4f5e01a4a7e106db09"
+    }
+  },
+  "owners_and_consumers": [
+    {
+      "owner": "PlayerPhysicsState + PlayerAnimationTail",
+      "fields": "mode/join mode/request/current/previous plus next/timer/flags/frame/start/table/join/buffer",
+      "producer_paths": [
+        "src/player/player_startup.cpp"
+      ],
+      "consumer_paths": [
+        "src/player/player_animation.cpp",
+        "src/player/player_animation_blend.cpp",
+        "src/player/sonic_player.cpp",
+        "src/player/player_initialization.hpp",
+        "src/runtime/native_gamma_binding.cpp"
+      ],
+      "contract": "One canonical native owner; existing fixture views can borrow separate tail. Never copy early physics words into a competing tail."
+    },
+    {
+      "owner": "PlayerAnimationTable",
+      "producer_paths": [
+        "src/player/sonic_animation_table.cpp",
+        "src/apps/native_gamma_actor_assets.hpp"
+      ],
+      "consumer_paths": [
+        "src/player/player_animation.cpp",
+        "src/player/player_animation_blend.cpp",
+        "src/player/sonic_player.cpp",
+        "src/player/player_startup.cpp",
+        "src/runtime/native_gamma_binding.cpp"
+      ],
+      "contract": "Six field facts per row, shared identity and retained later rows on retry; native Gamma91, Sonic147, fixture maps sparse."
+    },
+    {
+      "owner": "PlayerAnimationResources / DecodedPlayerAnimations",
+      "producer_paths": [
+        "src/player/player_animation_decode.cpp",
+        "tests/probes/native_player_animation_probe.cpp",
+        "tests/probes/native_player_animation_blend_probe.cpp"
+      ],
+      "consumer_paths": [
+        "src/player/player_animation.cpp",
+        "src/player/player_animation_blend.cpp",
+        "tests/unit/player_animation.cpp",
+        "tests/unit/player_animation_decode.cpp"
+      ],
+      "contract": "Per-kind identity aliases, stable borrowed object map, shared immutable observed byte backing; model payload unresolved."
+    },
+    {
+      "owner": "GammaActorAssets owned by PlayerSystem",
+      "producer_paths": [
+        "tools/import/gamma_declarations.py",
+        "tools/import/gamma_actor_resources.py",
+        "src/apps/native_gamma_actor_assets.hpp",
+        "src/runtime/native_gamma_assets_native.cpp"
+      ],
+      "consumer_paths": [
+        "src/runtime/native_gamma_binding.cpp",
+        "src/runtime/native_gamma_resources_native.cpp",
+        "src/player/gamma_selection_core.cpp"
+      ],
+      "contract": "91 rows,78 declarations,61 null,72 constructed unavailable,request0 Stand. Same pack and one shared table; Session rejects repeated attachment."
+    },
+    {
+      "owner": "AllocatedAction / AllocatedMotion / TaskWorkArena",
+      "producer_paths": [
+        "src/player/player_animation.cpp",
+        "src/player/player_animation_blend.cpp"
+      ],
+      "consumer_paths": [
+        "src/player/player_animation.cpp",
+        "src/player/player_animation_blend.cpp"
+      ],
+      "contract": "Typed header facts and real allocation handles; arena MDATA/keys. Allocation and free prefixes persist; no raw-header duplicate. live138/13c aliases resolve at read."
+    },
+    {
+      "owner": "SonicPlayerRuntime borrowed table/runtime",
+      "producer_paths": [
+        "tests/unit/sonic_player.cpp",
+        "tests/probes/native_sonic_player_probe.cpp"
+      ],
+      "consumer_paths": [
+        "src/player/sonic_player.cpp"
+      ],
+      "contract": "No product composition claimed. Table unpublished/null separate; route44a800 to implemented owner, never generic bypass."
+    }
+  ],
+  "legacy_name_resolution": {
+    "PlayerAnimationState": "No declaration found; use actual PlayerPhysicsState + PlayerAnimationTail owners.",
+    "PlayerAnimationKey": "Declared but no located consumer; raw PlayerAnimationKeyBytes remains used, so no dead-payload conclusion."
+  },
+  "operation_semantics": {
+    "address": "Instruction PC, diagnostic provenance",
+    "read": "export-read versus field-store kind",
+    "slot": "Loaded value slot;65535 is literal store sentinel",
+    "index": "Export ordinal",
+    "record": "PL_ACTION row",
+    "field": "Byte offset0/4/5/6/8/12",
+    "bits": "Integer scalar, mode byte, next word, binary32 encoding, or literal null",
+    "counts": {
+      "operations": 1027,
+      "export_reads": 145,
+      "distinct_export_ordinals": 127,
+      "maximum_export_ordinal": 148,
+      "field_stores": 882,
+      "rows": 147,
+      "literal_null_action_rows": [
+        75,
+        76
+      ]
+    },
+    "partial_masks": "Local completeness accounting, not game state. No export read occurs with a newly touched incomplete row in current tracked sequence.",
+    "static_reads_with_partial_rows": [],
+    "qualification": "Static metadata calculation only, not original-code execution or an independent new judge."
+  },
+  "missingness_contract": {
+    "outer_optional": "Unavailable fixture/source fact, preserve first consuming boundary",
+    "inner_resource_id": "Known null or normalized content identity; use is path-specific",
+    "Gamma": "Loaded/KnownNull/Unavailable with reason, all91metadata rows retained;onlyexport61null,request0Stand,constructed72unavailable",
+    "source_calloc": "Zero/null facts established only after successful512-byte player calloc",
+    "source_malloc": "Partially initialized8/12-byte header, source-defined stores establish fields; no fabricated A5default",
+    "MDATA2_third_channel": "Known absent layout channel, not inferred uninitialized data",
+    "MDATA3_quirk": "Raw outgoing scale-pointer bits consumed as position count; outgoing position count consumed as angle count, not resource-ID magnitude",
+    "backing": "Observed contiguous bytes may exceed declared keys; preserve prior writes before reached failure",
+    "source_keys": "Selection triplets and pack ResourceIds are content identities; no magnitude-based address classification"
+  },
+  "historical_receipts": [
+    {
+      "path": "reference/oracle-reports/sonic_animation_table.json",
+      "sha256": "e6727e130b843c5fb7f1f651ad9c5337abbf4ece2b20cfad5b6a7d5c17b600c0",
+      "historical_report_only": true,
+      "counts": {
+        "cases": 103,
+        "records": 147,
+        "export_slots": 149,
+        "byte_mismatches": 0,
+        "fp_mismatches": 0,
+        "passed": true,
+        "case_sha256": "1bc18a9f2b701b7c8485a872bf5965722dc69498c37a181b95745cd1ffd14cfe"
+      },
+      "source_ranges": {
+        "address": "0x7cec90",
+        "bytes": 7674,
+        "sha256": "4fb64e48d45e6008328627f24c9065e89240ec2b5458cedfb73a6ce26d183944"
+      },
+      "constants": null,
+      "limits": [
+        "Export identities are experimental native/source fixture tokens; no DLL or game startup is executed",
+        "Actual export loader401ac0 resolves___SONIC_ACTIONS; its runtime success is a separate prerequisite",
+        "147 output records follow actual source stores; SDK count146 is not the authority"
+      ],
+      "declared_input_comparison": [
+        {
+          "path": "src/player/sonic_animation_table.hpp",
+          "recorded_sha256": "30e86aaf6b9311f9863dfd98907e44fcd163a8d09cea9f0f69a5a22a13a25e11",
+          "current_sha256": "30e86aaf6b9311f9863dfd98907e44fcd163a8d09cea9f0f69a5a22a13a25e11",
+          "matches": true
+        },
+        {
+          "path": "src/player/sonic_animation_table.cpp",
+          "recorded_sha256": "c4ad3db54a8eaa4032a692653a2eb2b99232544fd00f8c5f3aa44f2981dcdafb",
+          "current_sha256": "c4ad3db54a8eaa4032a692653a2eb2b99232544fd00f8c5f3aa44f2981dcdafb",
+          "matches": true
+        },
+        {
+          "path": "src/player/sonic_animation_table_data.hpp",
+          "recorded_sha256": "d8c8aa041e018a67edfe0e01fcabeb752a80362f8ee1f0b680414bfc8e119f03",
+          "current_sha256": "d8c8aa041e018a67edfe0e01fcabeb752a80362f8ee1f0b680414bfc8e119f03",
+          "matches": true
+        },
+        {
+          "path": "tools/emit/emit_sonic_animation_table.py",
+          "recorded_sha256": "2d25afa69c752e2af74edee52502dde3a5fb83ba7498175980501d1b5770e024",
+          "current_sha256": "2d25afa69c752e2af74edee52502dde3a5fb83ba7498175980501d1b5770e024",
+          "matches": true
+        },
+        {
+          "path": "tests/probes/native_sonic_animation_table_probe.cpp",
+          "recorded_sha256": "6cd92c22f9e11c0112c3aecd9643c14baff8cae4ea8547fb093e9e1442fdc675",
+          "current_sha256": "6cd92c22f9e11c0112c3aecd9643c14baff8cae4ea8547fb093e9e1442fdc675",
+          "matches": true
+        },
+        {
+          "path": "tools/oracles/verify_original_sonic_animation_table.py",
+          "recorded_sha256": "84f040bb0d77253e85602b5a79fb2fab205c09a42ce34b56b0fa0c3b749d1090",
+          "current_sha256": "84f040bb0d77253e85602b5a79fb2fab205c09a42ce34b56b0fa0c3b749d1090",
+          "matches": true
+        }
+      ],
+      "transitive_binding_limit": "Only listed native_sources are compared; no claim that all tail/physics/CPU/arena/operation inputs or binary closure are pinned.",
+      "tracked_summary": {
+        "full_sha256": "ab974fd3195a111470b13bf4561dc807bc9a9d2c89055041cb5c80288d484d75",
+        "full_bytes": 1621,
+        "lists_cut_to": 10,
+        "cut_lists": {}
+      },
+      "new_execution": false
+    },
+    {
+      "path": "reference/oracle-reports/player_animation.json",
+      "sha256": "0e496d266b97217eacdaf54a042e6c894edb74e8f2d97a0cd12aeb7a36240727",
+      "historical_report_only": true,
+      "counts": {
+        "cases": 16440,
+        "stored_mismatches": 0,
+        "status_mismatches": 4140,
+        "boundary_mismatches": 0,
+        "passed": false,
+        "stored_state_matches": true,
+        "case_sha256": "3b9c7db48a75222e99582d5f9cbccedc00f76f89ce23dab23d5fade43a61de43"
+      },
+      "source_ranges": {
+        "0x44a800": {
+          "bytes": 1601,
+          "sha256": "fd780fe989ab1a2162b99383dee2fb6765f1a7223cbccad1c1bb2d98905a79dc"
+        },
+        "0x43f230": {
+          "bytes": 107,
+          "sha256": "586724af64c216e89bcfe485b052ad7bdbefdd4437d9647f8876992f45e55644"
+        },
+        "0x446910": {
+          "bytes": 64,
+          "sha256": "c5d47ad32054bad817ba67867440f18f37971c2c6c1d7d1d1da16f1e7223bc7c"
+        },
+        "0x446950": {
+          "bytes": 87,
+          "sha256": "1c2020014b22835480dbdb268e356de7b5ea3bc662565ce19507858402bcebea"
+        },
+        "0x43f9f0": {
+          "bytes": 154,
+          "sha256": "561f48c196b2f3ba75495bf7fb62195c070675ad05014df45fb2977095942981"
+        }
+      },
+      "constants": {
+        "addresses": [
+          "0x7dcb2c",
+          "0x7dcb10",
+          "0x7dcb7c"
+        ],
+        "sha256": "d9ca6d900b4ec0c2256d5aaeca6d9fe83a0bdc9d6f3c49d301a3402162311473"
+      },
+      "limits": [
+        "Typed four-record action/motion fixture is not the real initialized147-record Sonic table",
+        "Source numeric paths execute real43f9f0 with object_count0; nonzero key buffers/allocation lifecycle are not proved by this experiment",
+        "Original43f2a0 blend CALL stops before execution; the separate producer verifier covers its body and the native path retains synthetic resource unavailability",
+        "An emulator is the instruction oracle, not physical Windows hardware or game/mod execution",
+        "Flag difference (status_mismatches): the native x87 status exception bits (IE 0x01 in the examples, comparisons with NaN operands) are set where Unicorn 2.1.4 does not raise them (source 0). All compared values match; the hardware flags need the Intel capture (M4)."
+      ],
+      "declared_input_comparison": [
+        {
+          "path": "src/player/player_animation.hpp",
+          "recorded_sha256": "29aecbe442f5151044a6c9678fa93b678b1d4a04a52958e95cfd16c0aa2b11bf",
+          "current_sha256": "29aecbe442f5151044a6c9678fa93b678b1d4a04a52958e95cfd16c0aa2b11bf",
+          "matches": true
+        },
+        {
+          "path": "src/player/player_animation.cpp",
+          "recorded_sha256": "f1fea844550691d84e9be39bb2f8bd78c3b75bcc16c950c79a67df1b1a71ade0",
+          "current_sha256": "f1fea844550691d84e9be39bb2f8bd78c3b75bcc16c950c79a67df1b1a71ade0",
+          "matches": true
+        },
+        {
+          "path": "tests/probes/native_player_animation_probe.cpp",
+          "recorded_sha256": "9dd13ebcf928a54f9fd4736b1e62ce710573caba4795032a9b2b968a5d89ccdc",
+          "current_sha256": "9dd13ebcf928a54f9fd4736b1e62ce710573caba4795032a9b2b968a5d89ccdc",
+          "matches": true
+        },
+        {
+          "path": "tools/oracles/verify_original_player_animation.py",
+          "recorded_sha256": "3501d8cd23af6671f3b70ebd13c762d4723a22091b0627d701821c52809331cf",
+          "current_sha256": "3501d8cd23af6671f3b70ebd13c762d4723a22091b0627d701821c52809331cf",
+          "matches": true
+        }
+      ],
+      "transitive_binding_limit": "Only listed native_sources are compared; no claim that all tail/physics/CPU/arena/operation inputs or binary closure are pinned.",
+      "tracked_summary": {
+        "full_sha256": "0d81ec543233beaa972977caa4cde69c7c0c546240ec06b1f6cd487677a53c87",
+        "full_bytes": 22777,
+        "lists_cut_to": 10,
+        "cut_lists": {
+          "status_examples": 30,
+          "status_examples[0].input": 37,
+          "status_examples[1].input": 37,
+          "status_examples[2].input": 37,
+          "status_examples[3].input": 37,
+          "status_examples[4].input": 37,
+          "status_examples[5].input": 37,
+          "status_examples[6].input": 37,
+          "status_examples[7].input": 37,
+          "status_examples[8].input": 37,
+          "status_examples[9].input": 37
+        }
+      },
+      "new_execution": false
+    },
+    {
+      "path": "reference/oracle-reports/player_animation_blend.json",
+      "sha256": "d4b6ddec5f5861fc95b7ee681f71998857b95d1c0aecca57e6607e6181c56487",
+      "historical_report_only": true,
+      "counts": {
+        "cases": 7944,
+        "stored_mismatches": 0,
+        "status_mismatches": 1668,
+        "passed": false,
+        "stored_state_matches": true,
+        "case_sha256": "26f317d919a50438214dae0a9f1790b942ced6cb6d1862e2ebccc4f4c146c2b7"
+      },
+      "source_ranges": {
+        "address": "0x43f2a0",
+        "bytes": 1872,
+        "sha256": "3f838787e21b95594cb3ad0647c4d48f1b7edbecb900f2989eb3b4cbbbadc8c9"
+      },
+      "constants": null,
+      "limits": [
+        "Synthetic single-object graph and two MDATA2/3 motion descriptors; not actual model DLL resource execution",
+        "Fixture allocator supplies32-byte buffers at40b220; original allocator policy is not compared here",
+        "Integer/float stored keys and metadata compared; full x87 status/stack/tags are outside native context",
+        "Unicorn2.1.4 is an instruction oracle, not physical Windows execution"
+      ],
+      "declared_input_comparison": [
+        {
+          "path": "src/player/player_animation.hpp",
+          "recorded_sha256": "29aecbe442f5151044a6c9678fa93b678b1d4a04a52958e95cfd16c0aa2b11bf",
+          "current_sha256": "29aecbe442f5151044a6c9678fa93b678b1d4a04a52958e95cfd16c0aa2b11bf",
+          "matches": true
+        },
+        {
+          "path": "src/player/player_animation_blend.cpp",
+          "recorded_sha256": "d1ad8f801908b368f3d6cffdc9459c85a1f142d0db484a72f13dc0069256888c",
+          "current_sha256": "d1ad8f801908b368f3d6cffdc9459c85a1f142d0db484a72f13dc0069256888c",
+          "matches": true
+        },
+        {
+          "path": "tests/probes/native_player_animation_blend_probe.cpp",
+          "recorded_sha256": "da87dbc6f10d89a6ded7a6ec942896a70fa40abead3fdef8c9e24003188a108a",
+          "current_sha256": "da87dbc6f10d89a6ded7a6ec942896a70fa40abead3fdef8c9e24003188a108a",
+          "matches": true
+        },
+        {
+          "path": "tools/oracles/verify_original_player_animation_blend.py",
+          "recorded_sha256": "1cb4fdd24fe6ad64083b05ed5f85123f6b6fae794fc1f22a88a3b62c9b4e5dc9",
+          "current_sha256": "1cb4fdd24fe6ad64083b05ed5f85123f6b6fae794fc1f22a88a3b62c9b4e5dc9",
+          "matches": true
+        }
+      ],
+      "transitive_binding_limit": "Only listed native_sources are compared; no claim that all tail/physics/CPU/arena/operation inputs or binary closure are pinned.",
+      "tracked_summary": {
+        "full_sha256": "30d27ed9d68a3245640a040a558661145fcc5aedf5cdc2abff6b1dff966b9afe",
+        "full_bytes": 35332,
+        "lists_cut_to": 10,
+        "cut_lists": {
+          "status_examples": 30,
+          "status_examples[0].input": 62,
+          "status_examples[1].input": 62,
+          "status_examples[2].input": 62,
+          "status_examples[3].input": 62,
+          "status_examples[4].input": 62,
+          "status_examples[5].input": 62,
+          "status_examples[6].input": 62,
+          "status_examples[7].input": 62,
+          "status_examples[8].input": 62,
+          "status_examples[9].input": 62
+        }
+      },
+      "new_execution": false
+    }
+  ],
+  "gamma_historical_receipt": {
+    "path": "reference/production-integration-20261026/gamma-selection-core/proof.json",
+    "sha256": "7d6db922d354a8a1d0f89ab5ff0c32da22e0a4b61c54ba56d194cbd4373430a9",
+    "historical_report_only": true,
+    "development": {
+      "cases": 1422,
+      "value_failures": 0,
+      "fp_flag_partials": 498,
+      "oracle_exit_status": 2,
+      "verdict": "partial"
+    },
+    "holdout": {
+      "cases": 1080,
+      "value_failures": 0,
+      "fp_flag_partials": 690,
+      "oracle_exit_status": 2,
+      "verdict": "partial",
+      "executed_once_after_final_source_and_mutants": true
+    },
+    "mutants": {
+      "mutants": [
+        {
+          "name": "skip_id2",
+          "build_exit_status": 0,
+          "judge_exit_status": 1,
+          "value_failures": 1044,
+          "caught": true,
+          "library_sha256": "8ae8fd5988a907368f858a461689f4f9093a970462ceaa1f06c2fecff8791beb"
+        },
+        {
+          "name": "republish_player",
+          "build_exit_status": 0,
+          "judge_exit_status": 1,
+          "value_failures": 1140,
+          "caught": true,
+          "library_sha256": "6b9210d48ebdf9255502e26128592caf2b847d22c15069f34d2758c8c6b2d1db"
+        },
+        {
+          "name": "wrong_texture_character",
+          "build_exit_status": 0,
+          "judge_exit_status": 1,
+          "value_failures": 1134,
+          "caught": true,
+          "library_sha256": "0bf262929fae0a40d50079939352971b9036d4fc6b42adb160be0508dec89ba0"
+        },
+        {
+          "name": "wrong_material_mask",
+          "build_exit_status": 0,
+          "judge_exit_status": 1,
+          "value_failures": 858,
+          "caught": true,
+          "library_sha256": "232f50941009c8f9192231e97e3aec87914931ccac2926427bffdf1e787026d3"
+        },
+        {
+          "name": "stale_extra_after_display",
+          "build_exit_status": 0,
+          "judge_exit_status": 1,
+          "value_failures": 114,
+          "caught": true,
+          "library_sha256": "6b194ef6d04eefe252103052cfa6c24f3c8ae8fa9111f509d1c4ab797b8ec2ab"
+        },
+        {
+          "name": "omit_join",
+          "build_exit_status": 0,
+          "judge_exit_status": 1,
+          "value_failures": 1062,
+          "caught": true,
+          "library_sha256": "645c0d226cb1b7d689a93a11317877687ff8064d5fde4ba95926944ddd8d54d9"
+        },
+        {
+          "name": "spill_shadow_return",
+          "build_exit_status": 0,
+          "judge_exit_status": 1,
+          "value_failures": 71,
+          "caught": true,
+          "library_sha256": "7bff1bf89c192337805a92b90d793877a73414883ed519611f61063ea92778ff"
+        }
+      ],
+      "caught": 7,
+      "total": 7,
+      "source_sha256": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea"
+    },
+    "declared_input_comparison": [
+      {
+        "path": "src/player/gamma_selection_core.cpp",
+        "recorded_sha256": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea",
+        "current_sha256": "552b07ff58ebdfd0d874c6d2831af6c5892a56637184b1ffec909f79dabda2ea",
+        "matches": true
+      },
+      {
+        "path": "src/player/gamma_selection_core.hpp",
+        "recorded_sha256": "4d4259960f8cd59e610300683812bc5081a809d5938b0441ecc3a8ae1db3ce7d",
+        "current_sha256": "077d8c1876fe68cd5c50c0b1e1a3608b0cd6b802d9ec059bd0348463f0268193",
+        "matches": false
+      },
+      {
+        "path": "tests/probes/native_gamma_selection_core_probe.cpp",
+        "recorded_sha256": "f1f5119da472f78651428ac79b4a5435e80acb359bf2a0c2f816b2670195a517",
+        "current_sha256": "f1f5119da472f78651428ac79b4a5435e80acb359bf2a0c2f816b2670195a517",
+        "matches": true
+      },
+      {
+        "path": "tests/unit/gamma_selection_core.cpp",
+        "recorded_sha256": "d6aadb3b53e94fed35b696822e1271b7eb2e23d5e908a5e0bf8b8ce4ea144db1",
+        "current_sha256": "d6aadb3b53e94fed35b696822e1271b7eb2e23d5e908a5e0bf8b8ce4ea144db1",
+        "matches": true
+      },
+      {
+        "path": "tools/oracles/verify_original_gamma_selection_core.py",
+        "recorded_sha256": "b62020db7b643a941079b15b2e0b931885ace95b40bb1ec3329a61439604aada",
+        "current_sha256": "b62020db7b643a941079b15b2e0b931885ace95b40bb1ec3329a61439604aada",
+        "matches": true
+      },
+      {
+        "path": "tools/oracles/mutate_gamma_selection_core.py",
+        "recorded_sha256": "f19c1e581df6b56c2f4c88d3c97881765863d342119490fd9acb77ba03e7b538",
+        "current_sha256": "f19c1e581df6b56c2f4c88d3c97881765863d342119490fd9acb77ba03e7b538",
+        "matches": true
+      },
+      {
+        "path": "tools/analysis/prove_gamma_selection_sources.py",
+        "recorded_sha256": "f80890f5f53fae56b4ec3d33bff682172673235c26093f09f8a9131d2109e2e0",
+        "current_sha256": "f80890f5f53fae56b4ec3d33bff682172673235c26093f09f8a9131d2109e2e0",
+        "matches": true
+      }
+    ],
+    "limits": [
+      "No apps, full gate, rendering, GPU, N3b, story or full-controller claim.",
+      "Other modes and all declared lower callees remain explicit boundaries.",
+      "Fresh independent STYLE review and Root binding are pending.",
+      "The first mask mutant was equivalent because a final OR forces that bit; the final bit-26 mask mutant is meaningful and caught.",
+      "No existing oracle/probe/expected value/tolerance changed.",
+      "Root owns the separately reviewed shared current-state migration and product consumption."
+    ],
+    "new_execution": false
+  },
+  "evidence_gaps": [
+    "No animation-specific tracked mutant receipt/runner or reserved animation holdout located; Gamma7/1080 qualifies a different constructor/common-tail slice.",
+    "Canonical summaries contain truncated examples, not complete per-case mismatch identities or native/source streams.",
+    "Sonic table report omits operation header/emitter from declared native_sources.",
+    "Animation reports do not bind full transitive tail/physics/arena/CPU closure.",
+    "Gamma historical proof header hash drift; no new verdict inferred.",
+    "Full44a800/43f2a0 cached dossier files absent;7cec90 cached dossier is error.",
+    "No composed native Gamma CharacterPack-to-PlayerAnimationResources playback bridge found; PSetMotion binding still throws.",
+    "No source-uninitialized field declared dead without consumption evidence.",
+    "No Windows hardware/mod/renderer/actor/story/gameplay63FPS acceptance."
+  ],
+  "external_or_absent_evidence": [
+    {
+      "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXStructsNew.h",
+      "tracked": false,
+      "exists_at_research": true,
+      "observed_sha256": "462bd43e3378a9a3606206c3bdd82f679b621de8f080e896ae3344f6bb1f9199",
+      "meaning": "External local SDK checkout; symbol/layout hypothesis, not a tracked packet anchor. PL_ACTION line793, mtnjvwk line1547 in StructsNew; sonic_action count146 in VariablesNew; PSetMotion44A800 in FunctionsNew."
+    },
+    {
+      "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXVariablesNew.h",
+      "tracked": false,
+      "exists_at_research": true,
+      "observed_sha256": "3839c800169f23c8d03d495c388143b631abdeeeea8d5d9f89104b6695c9eebf",
+      "meaning": "External local SDK checkout; symbol/layout hypothesis, not a tracked packet anchor. PL_ACTION line793, mtnjvwk line1547 in StructsNew; sonic_action count146 in VariablesNew; PSetMotion44A800 in FunctionsNew."
+    },
+    {
+      "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+      "tracked": false,
+      "exists_at_research": true,
+      "observed_sha256": "590026179539651768b21cc00d7527fab2d74d0635ea7ee2475b133d9f5c4d37",
+      "meaning": "External local SDK checkout; symbol/layout hypothesis, not a tracked packet anchor. PL_ACTION line793, mtnjvwk line1547 in StructsNew; sonic_action count146 in VariablesNew; PSetMotion44A800 in FunctionsNew."
+    },
+    {
+      "path": "build/symbols/symbols.json",
+      "exists_at_research": false,
+      "meaning": "No symbol database was rebuilt."
+    },
+    {
+      "path": "reference/ghidra-action-fp-recovery/animation-44a800.json",
+      "exists_at_research": false,
+      "meaning": "Full dossier cited by old provenance missing locally; tracked pseudocode/assembly available."
+    },
+    {
+      "path": "reference/ghidra-action-fp-recovery/animation-43f2a0.json",
+      "exists_at_research": false,
+      "meaning": "Full dossier missing; tracked pseudocode/assembly available."
+    },
+    {
+      "path": "reference/oracle-reports/player_animation.constants.bin",
+      "exists_at_research": false,
+      "meaning": "Ignored pinned constants receipt absent; not restored."
+    },
+    {
+      "path": "/Users/burbujamc/Developer/sadx-wt-normal-uv-strip/reference/inventory-raw/gamma-selection-recovery-20261026/gamma-7ca300.json",
+      "tracked": false,
+      "status": "External raw reference quoted from tracked source-evidence.json; not opened or asserted available",
+      "evidence_id": "ev_48c91ddbd718aeef7d8605970baff626730692a394a3effd5994f94bc35225d7",
+      "reported_sha256": "ab8a7d27173a3fe08cf2b03b33e76d88d5293ddb69b1b27f3fad7141d4cb8317"
+    },
+    {
+      "path": "/Users/burbujamc/Developer/sadx-wt-normal-uv-strip/reference/inventory-raw/gamma-selection-recovery-20261026/gamma-7cb560.json",
+      "tracked": false,
+      "status": "External raw reference quoted from tracked source-evidence.json; not opened or asserted available",
+      "evidence_id": "ev_b751851b71f596dfdec323060d6882cf8e96b7bd5e5dbb8664bef6d68beadd86",
+      "reported_sha256": "09e53bdbe170b7dfacacdccd2714a0e9d899d550ea4d9708535b7adbde887565"
+    },
+    {
+      "path": "/Users/burbujamc/Developer/sadx-wt-normal-uv-strip/reference/inventory-raw/gamma-selection-recovery-20261026/gamma-483430.json",
+      "tracked": false,
+      "status": "External raw reference quoted from tracked source-evidence.json; not opened or asserted available",
+      "evidence_id": "ev_2f86a86b5e458c4a46ed9ceba4c3356e895691686cb9a4cd3c3e96ec964bf27f",
+      "reported_sha256": "f5b3fb01a7d4b50e5f8912a4a674d4af37bc0542fe158002ea1b6a31c0c431a6"
+    }
+  ],
+  "profile_context": {
+    "path": "tools/gate/profile_patches.json",
+    "static_observation": "NodeLimit jump at43f2a0 inactive under pinned profile; no new overlap checker execution. Gamma historical proof reports0unhandled overlaps for its declared ranges, not all animation ranges.",
+    "required_before_implementation": "Retain actual range/profile checks for all touched producers and callers."
+  },
+  "recommended_review_unit": {
+    "name": "Shared animation table/resource access and motion-state consumer boundary",
+    "source_modules": [
+      "src/player/player_animation.hpp",
+      "src/player/player_animation_state.hpp",
+      "src/player/player_animation.cpp",
+      "src/player/player_animation_blend.cpp",
+      "src/player/sonic_animation_table.hpp",
+      "src/player/sonic_animation_table.cpp",
+      "src/player/sonic_animation_operations.hpp",
+      "src/player/sonic_animation_table_data.hpp",
+      "src/player/player_animation_decode.hpp",
+      "src/player/player_animation_decode.cpp"
+    ],
+    "atomic_consumer_changes": [
+      "src/player/player_startup.cpp",
+      "src/player/player_initialization.hpp",
+      "src/player/player_physics.hpp",
+      "src/player/sonic_player.hpp",
+      "src/player/sonic_player.cpp",
+      "src/runtime/gamma_actor_assets.hpp",
+      "src/apps/native_gamma_actor_assets.hpp",
+      "src/runtime/native_gamma_binding.cpp"
+    ],
+    "preserve_separate_owners": [
+      "TaskWorkArena",
+      "scene object/geometry graph",
+      "Gamma weld/cursors",
+      "PlayerSystem registry",
+      "CPU numerical compatibility"
+    ],
+    "first_prerequisite": "Separate baseline/judge missingness characterization before source edits; freeze complete individual partial/boundary outputs, not aggregate counts.",
+    "prerequisite_cohorts": [
+      "Every reached table/export/row/field/resource missingness and null distinction",
+      "Seeded retry retention and operation/load/store ordering",
+      "Partial allocation/publication/free and uninitialized bytes",
+      "Live interior/self aliases, hierarchy repeats/capacity and adjacent key backing",
+      "MDATA3 raw counts, low-byte next and FP spill/control cases"
+    ],
+    "proposed_faults_not_executed": [
+      "eager validation",
+      "unavailable becomes null",
+      "146rows",
+      "next high-byte",
+      "cached aliases",
+      "reordered publication/free",
+      "declared count clamp",
+      "normalized raw count",
+      "spilled vector fraction"
+    ],
+    "prohibited_shortcuts": [
+      "native-only shell",
+      "table token reinterpretation",
+      "game algorithms moved into guest",
+      "implemented animation replaced by callback",
+      "invented native callback/rendering behavior"
+    ],
+    "completion_limits": "This packet recommends a coherent boundary; no source extraction or qualification performed. Broader Sonic/game/render systems remain complete-campaign scope."
+  },
+  "path_collection_missing": [],
+  "existing_judge_entry_points": {
+    "oracles": [
+      {
+        "slug": "sonic_animation_table",
+        "probe": "tests/probes/native_sonic_animation_table_probe.cpp",
+        "verifier": "tools/oracles/verify_original_sonic_animation_table.py",
+        "target": "oracle-sonic-animation-table",
+        "coverage_limit": "Full149-slot input and final2352bytes only; no missing reads or retry trace."
+      },
+      {
+        "slug": "player_animation",
+        "probe": "tests/probes/native_player_animation_probe.cpp",
+        "verifier": "tools/oracles/verify_original_player_animation.py",
+        "target": "oracle-player-animation",
+        "coverage_limit": "Four synthetic rows; zero object release; stops original before transition producer."
+      },
+      {
+        "slug": "player_animation_blend",
+        "probe": "tests/probes/native_player_animation_blend_probe.cpp",
+        "verifier": "tools/oracles/verify_original_player_animation_blend.py",
+        "target": "oracle-player-animation-blend",
+        "coverage_limit": "Single-object source allocation receipts and raw adjacent bytes; no full graph allocator policy."
+      }
+    ],
+    "registered_units": [
+      {
+        "slug": "sonic-animation-table",
+        "path": "tests/unit/sonic_animation_table.cpp",
+        "manifest": "tests/unit/manifest.tsv",
+        "role": "Missing export/table-null/known-null/retry retention,147rows"
+      },
+      {
+        "slug": "player-animation",
+        "path": "tests/unit/player_animation.cpp",
+        "manifest": "tests/unit/manifest.tsv",
+        "role": "RealDLL147rows,73node transition/free,12PC/RCprofiles,MDATA3raw-count cases"
+      },
+      {
+        "slug": "player-animation-decode",
+        "path": "tests/unit/player_animation_decode.cpp",
+        "manifest": "tests/unit/manifest.tsv",
+        "role": "PE ranges, namespaces, object graph, keys"
+      },
+      {
+        "slug": "sonic-player",
+        "path": "tests/unit/sonic_player.cpp",
+        "manifest": "tests/unit/manifest.tsv",
+        "role": "Mandatory native44a800routing and lower error propagation"
+      },
+      {
+        "slug": "player-startup",
+        "path": "tests/unit/player_startup.cpp",
+        "manifest": "tests/unit/manifest.tsv",
+        "role": "Source initialization/lifetime boundaries"
+      },
+      {
+        "slug": "player-initialization",
+        "path": "tests/unit/player_initialization.cpp",
+        "manifest": "tests/unit/manifest.tsv",
+        "role": "Canonical native references and sourcecalloc"
+      },
+      {
+        "slug": "native-gamma-binding",
+        "path": "tests/unit/native_gamma_binding.mm",
+        "manifest": "tests/unit/manifest.tsv",
+        "role": "Imported status/null/request0 and shared table pointer"
+      },
+      {
+        "slug": "native-gamma-weld-cursors",
+        "path": "tests/unit/native_gamma_weld_cursors.mm",
+        "manifest": "tests/unit/manifest.tsv",
+        "role": "Imported table and real scene/weld/cursor composition"
+      },
+      {
+        "slug": "gamma-selection-core",
+        "path": "tests/unit/gamma_selection_core.cpp",
+        "manifest": "tests/unit/manifest.tsv",
+        "role": "Source mode0 and receipt-bound common tail"
+      }
+    ],
+    "mutants": {
+      "animation_specific": "No tracked dedicated runner/receipt located; not claimed as absent from all historical machines or worktrees.",
+      "gamma_runner": "tools/oracles/mutate_gamma_selection_core.py",
+      "gamma_receipt": "reference/production-integration-20261026/gamma-selection-core/proof.json",
+      "gamma_limit": "Seven constructor/common-tail mutants,not shared animation implementation."
+    },
+    "holdouts": {
+      "animation_specific": "No tracked reserved cohort/receipt located. Deterministic dev random fixtures are not a reserved holdout.",
+      "gamma": "Historical1080cases,690FPpartials; separate constructor/common-tail slice."
+    },
+    "execution": "All entries are static source/receipt descriptions; no command was run."
+  }
+}

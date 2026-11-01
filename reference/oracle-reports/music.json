@@ -1,6 +1,6 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "probe_sha256": "7650ac8e1161e7406a25dde1e13e265ab6b50ea7caeac4e6d43ea0ae22c569e6",
+ "probe_sha256": "215e43c4e9a9fb4559a62ae8be5abcaba3c07bf1312d67e1f7dfae2eda321b0c",
  "seed": 20261108,
  "cases": 1301,
  "group_cases": {
@@ -71,7 +71,9 @@
   }
  ],
  "native_sources": {
-  "src/game/music.hpp": "e17acc4d593dc83c84ad5e16a0741286cdd2f4ef7626fe2cdae64ffc82e1d781",
+  "src/game/music_state.hpp": "cdad5447039cb43db11ca771d2f25f7c5e59c2c8d155cabc1d03c513f882ffe2",
+  "src/game/game_cleanup.hpp": "eabdca730d54ae33912d5696bac88673df02e1d894c2b572dd6762cd309dcd5d",
+  "src/game/music.hpp": "f9c41cacbcda0d64343fa29bf14a3ac3151504b478486ef169f870511b51c361",
   "src/game/music.cpp": "225ebc59537b71a071c54296f82a7ad6b1ed368eb325c14db5b933053cfaf12d",
   "tests/probes/native_music_probe.cpp": "6c4c1e7ff56790c74d87ca6ad8ff54fcdaaafa36a4822fec3c0082af265dba5d"
  },
@@ -95,8 +97,8 @@
   "0x411490-0x4116a0": "2e0d085d430a20c23aefbcbeabc8f1eb5c6bb7fe52f75e3b4fd9ae757aea9635"
  },
  "tracked_summary": {
-  "full_sha256": "bf5d44df8d810216f3839f60692644d7a20e27ba34014d94812ba6a93895bc79",
-  "full_bytes": 4829,
+  "full_sha256": "5463c694094df7afbd52aadde2972349d65b22561b5cfa3dba3090e8b59b46f4",
+  "full_bytes": 5030,
   "lists_cut_to": 10,
   "cut_lists": {
    "unsupported_data_boundaries[0].input": 30,

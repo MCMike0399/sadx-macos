@@ -1,5 +1,6 @@
 #include "game/game_reset.hpp"
 #include "game/game_reset_leaves.hpp"
+#include "guest/music_state_reference.hpp"
 #include <algorithm>
 #include <cstring>
 #include <vector>
@@ -16,7 +17,9 @@ extern "C" int sadx_native_game_reset_composed(const std::uint8_t* pages,std::si
     std::optional<std::uint32_t> w80=m.w(0x3abdf80),depth=m.w(0x8928c8),qmode=m.w(0x3ab98ac),init=m.w(0x3b0ef2c);std::optional<std::int32_t> t18c=static_cast<std::int32_t>(m.w(0x3b1118c));
     std::array<std::optional<std::uint32_t>,36> rec;for(unsigned i=0;i<36;++i)rec[i]=m.w(0x3b292fc+0x38*i);
     sadx::CrtRandState rng{m.w(0x2bcbdf8)};sadx::GameResetState s{w80,m.h(0x3b29d08),m.w(0x3b290d0),m.w(0x3b0e330),rng};
-    sadx::ResetLeafState L{m.w(0x3abdf90),m.w(0x3abdfac),depth,qmode,m.w(0x912694),m.w(0x912698),m.w(0x91269c),m.w(0x9126a8),m.w(0x3b29cf4),m.w(0x3b29cf8),
+    sadx::reference::MusicTracks tracks;
+    tracks.import_source([&](std::uint32_t at) { return std::optional<std::uint32_t>{m.w(at)}; });
+    sadx::ResetLeafState L{m.w(0x3abdf90),m.w(0x3abdfac),depth,qmode,
         m.w(0x3b11190),m.w(0x3c5e8b8),t18c,m.w(0x3b291b4),rec,{},{},init,m.w(0x3abdf94),m.w(0x3abdf9c),m.w(0x3abdfa0),m.w(0x3abdf98),m.w(0x3abdfa8),m.w(0x3abdfa4),m.w(0x3a7cf3c),m.w(0x38f6ec0),m.w(0x3b0e338),{},m.w(0x389d608),{},{},{},{},{}};
     for(unsigned i=0;i<36;++i){L.sound_record_flags_at_3b29304[i]=m.w(0x3b29304+0x38*i);L.words_at_3b29b90[i]=m.w(0x3b29b90+4*i);}
     for(unsigned i=0;i<4;++i)L.entry_words_at_3d08428[i]=m.w(0x3d08428+24*i);
@@ -27,15 +30,16 @@ extern "C" int sadx_native_game_reset_composed(const std::uint8_t* pages,std::si
     const sadx::ResetLeafNested nested=[&](const sadx::ResetLeafCall& c){return fixture(c.callee,c.source_call,c.this_object.value_or(c.argument.value_or(0)));};
     std::uint32_t leaf_stop=0;
     sadx::GameResetRuntime rt{s,[&](const sadx::GameResetCall& c){
-        const auto leaf=sadx::run_reset_leaf(c.callee,c.argument,L,nested);
+        const auto leaf=tracks.dispatch(c.callee,c.argument,L,nested);
         if(leaf.outcome==sadx::ResetLeafOutcome::completed)return sadx::GameLogicOwnerResult{sadx::GameLogicOwnerState::completed,0,{}};
         if(leaf.outcome==sadx::ResetLeafOutcome::not_a_leaf)return fixture(c.callee,c.source_call,c.argument.value_or(0));
         leaf_stop=leaf.source_boundary;return sadx::GameLogicOwnerResult{sadx::GameLogicOwnerState::failed,leaf.source_boundary,{}};}};
     const auto r=sadx::run_game_reset_40bf40(rt);
     m.put(0x3abdf80,w80);m.put(0x8928c8,depth);m.put(0x3ab98ac,qmode);m.put(0x3b0ef2c,init);m.put(0x3b1118c,t18c);m.put(0x2bcbdf8,rng.seed_at_2bcbdf8);
     m.put(0x3b29d08,s.word_at_3b29d08);m.put(0x3b290d0,s.heap_at_3b290d0);m.put(0x3b0e330,s.heap_at_3b0e330);
-    m.put(0x3abdf90,L.word_at_3abdf90);m.put(0x3abdfac,L.word_at_3abdfac);m.put(0x912694,L.word_at_912694);m.put(0x912698,L.word_at_912698);m.put(0x91269c,L.word_at_91269c);m.put(0x9126a8,L.word_at_9126a8);
-    m.put(0x3b29cf4,L.word_at_3b29cf4);m.put(0x3b29cf8,L.word_at_3b29cf8);m.put(0x3b11190,L.word_at_3b11190);m.put(0x3b291b4,L.callback_at_3b291b4);
+    m.put(0x3abdf90,L.word_at_3abdf90);m.put(0x3abdfac,L.word_at_3abdfac);
+    tracks.export_source([&](std::uint32_t at, std::optional<std::uint32_t> word) { m.put(at, word); });
+    m.put(0x3b11190,L.word_at_3b11190);m.put(0x3b291b4,L.callback_at_3b291b4);
     m.put(0x3abdfa0,L.word_at_3abdfa0);m.put(0x3abdf98,L.word_at_3abdf98);m.put(0x3abdfa8,L.word_at_3abdfa8);m.put(0x3b0e338,L.word_at_3b0e338);
     for(unsigned i=0;i<36;++i){m.put(0x3b292fc+0x38*i,rec[i]);m.put(0x3b29304+0x38*i,L.sound_record_flags_at_3b29304[i]);m.put(0x3b29b90+4*i,L.words_at_3b29b90[i]);}
     for(unsigned i=0;i<4;++i)m.put(0x3d08428+24*i,L.entry_words_at_3d08428[i]);

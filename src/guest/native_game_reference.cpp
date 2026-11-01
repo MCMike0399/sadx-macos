@@ -54,7 +54,8 @@ void NativeGame::initialize_source_facts(){
         report_.assumptions.push_back("D3D8 transform "+std::to_string(state)+" read before any SetTransform: using the D3D8 device-creation default (identity); pre-40cad0 device setup is unported");
         NinjaMatrix identity{};identity[0]=identity[5]=identity[10]=identity[15]=1.0F;return identity;};
     transform_owner_.set=[this](std::uint32_t state,const NinjaMatrix& m){d3d8_.transforms[state]=m;return true;};
-    leaves_.emplace(ResetLeafState{{},{},depth_mode_at_8928c8_,queue_runtime_.mode_at_3ab98ac,u32(0x912694),u32(0x912698),u32(0x91269c),u32(0x9126a8),u32(0x3b29cf4),u32(0x3b29cf8),
+    music_tracks_.import_source(u32);
+    leaves_.emplace(ResetLeafState{{},{},depth_mode_at_8928c8_,queue_runtime_.mode_at_3ab98ac,
         u32(0x3b11190),u32(0x3c5e8b8),timing_.word_at_3b1118c,u32(0x3b291b4),audio_.record_words_at_3b292fc,{},{},audio_stream_.initialized_at_3b0ef2c,
         u32(0x3abdf94),u32(0x3abdf9c),u32(0x3abdfa0),u32(0x3abdf98),u32(0x3abdfa8),u32(0x3abdfa4),{},{},u32(0x3b0e338),{},u32(0x389d608),u32(0x3c4e458),u32(0x3c4e45c),{},{},{}});
     for(unsigned i=0;i<6;++i){leaves_->set_files_at_3abdf40[i]=u32(0x3abdf40+4*i);leaves_->cam_files_at_3abdf28[i]=u32(0x3abdf28+4*i);}
@@ -1226,7 +1227,7 @@ NativeGameReport NativeGame::run(){
                 const auto f=ninja_fog_411af0_411b40(c.callee==0x411af0,owners,fp_);
                 if(f.failure==NinjaFogFailure::unlifted_callee)return unported(f.callee_boundary,f.source_boundary,path+">40bf40>"+hex(c.callee));
                 return status(bool(f),f.source_boundary);}
-            const auto leaf=run_reset_leaf(c.callee,c.argument,*leaves_,nested);
+            const auto leaf=music_tracks_.dispatch(c.callee,c.argument,*leaves_,nested);
             if(leaf.outcome==ResetLeafOutcome::completed)return done(GameLogicOwnerState::completed);
             if(leaf.outcome==ResetLeafOutcome::not_a_leaf)return unported(c.callee,c.source_call,path+">40bf40");
             if(leaf.outcome==ResetLeafOutcome::nested_failed&&leaf.nested.state==GameLogicOwnerState::unavailable&&leaf.nested.source_boundary==leaf.source_boundary)
@@ -1254,7 +1255,7 @@ NativeGameReport NativeGame::run(){
             if(r.alignment_assumed)report_.assumptions.push_back("408630: Windows HeapAlloc address unknown; render-queue cursor assumes a 32-byte-aligned base");
             return status(bool(r),r.source_boundary);}
         default:{
-            const auto leaf=run_reset_leaf(c.callee,{},*leaves_,[&](const ResetLeafCall& n){return unported(n.callee,n.source_call,"40cad0>40c030>"+hex(c.callee));});
+            const auto leaf=music_tracks_.dispatch(c.callee,{},*leaves_,[&](const ResetLeafCall& n){return unported(n.callee,n.source_call,"40cad0>40c030>"+hex(c.callee));});
             if(leaf.outcome==ResetLeafOutcome::not_a_leaf)return unported(c.callee,c.source_call,"40cad0>40c030");
             if(leaf.outcome==ResetLeafOutcome::completed)return done(GameLogicOwnerState::completed);
             return {leaf.outcome==ResetLeafOutcome::nested_failed?leaf.nested.state:GameLogicOwnerState::failed,leaf.source_boundary,{}};}

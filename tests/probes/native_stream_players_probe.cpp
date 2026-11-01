@@ -5,7 +5,7 @@
 extern "C" int sadx_native_stream_players(const std::uint32_t* in,std::size_t count,std::uint32_t* out,std::size_t capacity){
     if(!in||count!=9||!out||capacity<10)return 0;
     std::optional<std::uint32_t> depth,qmode,init=in[0];std::optional<std::int32_t> t18c;std::array<std::optional<std::uint32_t>,36> rec{};
-    sadx::ResetLeafState L{{},{},depth,qmode,{},{},{},{},{},{},{},{},t18c,{},rec,{},{},init,in[3],in[4],in[5],in[7],in[8],in[6],in[1],in[2],{},{},{},{},{},{},{},{}};
+    sadx::ResetLeafState L{{},{},depth,qmode,{},{},t18c,{},rec,{},{},init,in[3],in[4],in[5],in[7],in[8],in[6],in[1],in[2],{},{},{},{},{},{},{},{}};
     std::uint32_t site=0;
     const auto r=sadx::run_reset_leaf(0x4253c0,{},L,[&](const sadx::ResetLeafCall& c){site=c.source_call;return sadx::GameLogicOwnerResult{sadx::GameLogicOwnerState::unavailable,c.callee,{}};});
     std::fill(out,out+capacity,0);
