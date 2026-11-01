@@ -448,50 +448,6 @@
       ],
       "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
     },
-    "src/player/sonic_animation_operations.hpp::sonic_animation_operations": {
-      "sha256": "4275f9c40a8ac8a88166e7e5659a7861f37e546cbbc5a041aaa14363903ad6dc",
-      "classification": "open_migration",
-      "purpose": "1027 read/store operations carry PCs, slots, field offsets and bit patterns; consumer interprets instruction recipes and partial field masks.",
-      "evidence": [
-        {
-          "path": "src/player/sonic_animation_operations.hpp",
-          "line": 6,
-          "sha256": "8af69713c6bf0807f92460079f675d0f05c123bb873090155f4244bf5ee775ea"
-        },
-        {
-          "path": "src/player/sonic_animation_table.cpp",
-          "line": 1,
-          "sha256": "c4ad3db54a8eaa4032a692653a2eb2b99232544fd00f8c5f3aa44f2981dcdafb"
-        }
-      ],
-      "verification": [
-        "tests/unit/sonic_animation_table.cpp",
-        "tools/oracles/verify_original_sonic_animation_table.py"
-      ],
-      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
-    },
-    "src/player/sonic_animation_table_data.hpp::sonic_animation_recipes": {
-      "sha256": "0b91a0cb4b1a287b309e6ed881051860ccfe0e8932d192ee3d6bd8ece2df8935",
-      "classification": "open_review",
-      "purpose": "Typed action-export indices, object counts, animation mode/next fields and binary32 encodings inform resource graph counts in player_animation_decode; content/import boundary remains unresolved. Hex entries are not all PCs.",
-      "evidence": [
-        {
-          "path": "src/player/sonic_animation_table_data.hpp",
-          "line": 7,
-          "sha256": "d8c8aa041e018a67edfe0e01fcabeb752a80362f8ee1f0b680414bfc8e119f03"
-        },
-        {
-          "path": "src/player/player_animation_decode.cpp",
-          "line": 1,
-          "sha256": "27e1a4cc025b9291bbf4d40beb0f2ab960629017619a57c3961af3e3d04ff9f6"
-        }
-      ],
-      "verification": [
-        "src/player/player_animation_decode.cpp",
-        "tests/unit/sonic_animation_table.cpp"
-      ],
-      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
-    },
     "src/player/sonic_player.cpp::table": {
       "sha256": "8c10f93faf97038a8dae94424046caf2cd7dcb3600ae6eedb73d0da00d8f4b08",
       "classification": "open_migration",
@@ -500,14 +456,14 @@
         {
           "path": "src/player/sonic_player.cpp",
           "line": 219,
-          "sha256": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483"
+          "sha256": "57d7e0ad5eeca0a427809d538e22094e87a17acb6e0dfb70eb9d27da12d7397f"
         }
       ],
       "verification": [
         "tests/unit/sonic_player.cpp",
         "tools/oracles/verify_original_sonic_player.py"
       ],
-      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+      "verification_limit": "Evidence revalidated after animation binding changes. Dispatch meaning and OPEN_MIGRATION remain unchanged; no Sonic control-flow migration claimed."
     },
     "src/player/sonic_player.hpp::addresses": {
       "sha256": "a6a48f24e8e57254e7d94a66e99a962f8a805fc00b9058293169860c028b31b1",
@@ -517,19 +473,19 @@
         {
           "path": "src/player/sonic_player.hpp",
           "line": 70,
-          "sha256": "8ab874d28623af1876eebed149625c447f112a677098c0fa4f6e56da3286b0b4"
+          "sha256": "cd6c2556f5944cee132e040e80ae878ada8b0f388f7faa6e914a96df73842f87"
         },
         {
           "path": "src/player/sonic_player.cpp",
           "line": 1,
-          "sha256": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483"
+          "sha256": "57d7e0ad5eeca0a427809d538e22094e87a17acb6e0dfb70eb9d27da12d7397f"
         }
       ],
       "verification": [
         "tests/unit/sonic_player.cpp",
         "tools/oracles/verify_original_sonic_player.py"
       ],
-      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+      "verification_limit": "Evidence revalidated after animation binding changes. Dispatch meaning and OPEN_MIGRATION remain unchanged; no Sonic control-flow migration claimed."
     },
     "src/game/game_cleanup.cpp::life_slots": {
       "sha256": "fe2b8ba060a7297790c0665720eb4412a7c19c39dd3bad86592fe69462142d20",
@@ -877,7 +833,139 @@
         "tools/journey/check_native_main_menu.py"
       ],
       "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/player/animation/sonic_animation_content.hpp::kSonicRecipes": {
+      "sha256": "2db1a3a3a4823e926317627d26bbe507fd99ec36fa9735d9099a12ad978e94e8",
+      "classification": "typed_content",
+      "purpose": "Typed Sonic animation content: export identities/indices, object counts, named modes/next and exact transition/frame coefficients. Shared semantic initializer publishes fields directly; decoder uses counts. No instruction recipe or address-dispatch meaning.",
+      "evidence": [
+        {
+          "path": "src/player/animation/sonic_animation_content.hpp",
+          "line": 8,
+          "sha256": "4a19944124840a61fa4a97aae8c6bfa6bfb39c76db76f958e8148ba48946da4a"
+        },
+        {
+          "path": "src/player/animation/animation_content.hpp",
+          "line": 1,
+          "sha256": "e23ff8d5b43fd3e046f94223dc530d20b99575477db372b3f2007972941ea4a7"
+        },
+        {
+          "path": "src/player/animation/sonic_animation_initialize.hpp",
+          "line": 1,
+          "sha256": "25c0d5cb6471832b66e9335feb22ebb5c0d2675545a50f77b60d39e1fd841ab9"
+        },
+        {
+          "path": "src/player/sonic_animation_table.cpp",
+          "line": 1,
+          "sha256": "b1b9de5049667fbb38faf1033db6cdc631e07721e9cfa87da1a186c798279d3c"
+        },
+        {
+          "path": "src/guest/sonic_animation_table_reference.cpp",
+          "line": 1,
+          "sha256": "4a2c2d2c66261c02aa0facd0c53e5f9c742d38f31f969018a293a565eb895779"
+        },
+        {
+          "path": "src/guest/player_animation_decode_reference.cpp",
+          "line": 1,
+          "sha256": "be4e9a28cb03706885564af525ca44764e427d3f24a6241e8ffd2cdf2bf34426"
+        }
+      ],
+      "verification": [
+        "tools/oracles/animation_judges/table.py",
+        "tests/unit/animation_table_publication.cpp",
+        "tests/probes/native_plain_sonic_animation_table_probe.cpp"
+      ],
+      "verification_limit": "Independent Source reviews and exact original table/publication/defaultreplays support contentmeaning, not automatic wholemodule/player conformity."
     }
   },
-  "retired": {}
+  "retired": {
+    "src/player/sonic_animation_operations.hpp::sonic_animation_operations": {
+      "review": {
+        "sha256": "4275f9c40a8ac8a88166e7e5659a7861f37e546cbbc5a041aaa14363903ad6dc",
+        "classification": "open_migration",
+        "purpose": "1027 read/store operations carry PCs, slots, field offsets and bit patterns; consumer interprets instruction recipes and partial field masks.",
+        "evidence": [
+          {
+            "path": "src/player/sonic_animation_operations.hpp",
+            "line": 6,
+            "sha256": "8af69713c6bf0807f92460079f675d0f05c123bb873090155f4244bf5ee775ea"
+          },
+          {
+            "path": "src/player/sonic_animation_table.cpp",
+            "line": 1,
+            "sha256": "c4ad3db54a8eaa4032a692653a2eb2b99232544fd00f8c5f3aa44f2981dcdafb"
+          }
+        ],
+        "verification": [
+          "tests/unit/sonic_animation_table.cpp",
+          "tools/oracles/verify_original_sonic_animation_table.py"
+        ],
+        "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+      },
+      "outcome": "migrated",
+      "reason": "One canonical typed content declaration plus shared semantic initializer replace the old instruction/legacy arrays. Prior reviews and debt classifications remain in immutable lineage; no exemption granted.",
+      "evidence": [
+        {
+          "path": "docs/refactor-inventory/packets/animation-contract/SONIC-TABLE-LINEAGE.json",
+          "line": 1,
+          "sha256": "fb0689dfc2eb467112cf3d3d80e68040c114703c4f9181e4193355c8d0ccd238"
+        }
+      ],
+      "verification": [
+        "tools/oracles/animation_judges/table.py",
+        "tests/unit/animation_table_publication.cpp",
+        "docs/refactor-inventory/packets/animation-contract/SONIC-TABLE-LINEAGE.json"
+      ],
+      "successor": {
+        "path": "src/player/animation/sonic_animation_content.hpp",
+        "symbol": "kSonicRecipes",
+        "sha256": "4a19944124840a61fa4a97aae8c6bfa6bfb39c76db76f958e8148ba48946da4a"
+      },
+      "history": []
+    },
+    "src/player/sonic_animation_table_data.hpp::sonic_animation_recipes": {
+      "review": {
+        "sha256": "0b91a0cb4b1a287b309e6ed881051860ccfe0e8932d192ee3d6bd8ece2df8935",
+        "classification": "open_review",
+        "purpose": "Typed action-export indices, object counts, animation mode/next fields and binary32 encodings inform resource graph counts in player_animation_decode; content/import boundary remains unresolved. Hex entries are not all PCs.",
+        "evidence": [
+          {
+            "path": "src/player/sonic_animation_table_data.hpp",
+            "line": 7,
+            "sha256": "d8c8aa041e018a67edfe0e01fcabeb752a80362f8ee1f0b680414bfc8e119f03"
+          },
+          {
+            "path": "src/player/player_animation_decode.cpp",
+            "line": 1,
+            "sha256": "27e1a4cc025b9291bbf4d40beb0f2ab960629017619a57c3961af3e3d04ff9f6"
+          }
+        ],
+        "verification": [
+          "src/player/player_animation_decode.cpp",
+          "tests/unit/sonic_animation_table.cpp"
+        ],
+        "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+      },
+      "outcome": "migrated",
+      "reason": "One canonical typed content declaration plus shared semantic initializer replace the old instruction/legacy arrays. Prior reviews and debt classifications remain in immutable lineage; no exemption granted.",
+      "evidence": [
+        {
+          "path": "docs/refactor-inventory/packets/animation-contract/SONIC-TABLE-LINEAGE.json",
+          "line": 1,
+          "sha256": "fb0689dfc2eb467112cf3d3d80e68040c114703c4f9181e4193355c8d0ccd238"
+        }
+      ],
+      "verification": [
+        "tools/oracles/animation_judges/table.py",
+        "tests/unit/animation_table_publication.cpp",
+        "docs/refactor-inventory/packets/animation-contract/SONIC-TABLE-LINEAGE.json"
+      ],
+      "successor": {
+        "path": "src/player/animation/sonic_animation_content.hpp",
+        "symbol": "kSonicRecipes",
+        "sha256": "4a19944124840a61fa4a97aae8c6bfa6bfb39c76db76f958e8148ba48946da4a"
+      },
+      "history": []
+    }
+  }
 }

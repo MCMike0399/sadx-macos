@@ -1,0 +1,73 @@
+{
+  "before_source": "53da4de",
+  "reviewed_source": "a833f75",
+  "retired_declarations": {
+    "src/player/sonic_animation_operations.hpp::sonic_animation_operations": {
+      "sha256": "4275f9c40a8ac8a88166e7e5659a7861f37e546cbbc5a041aaa14363903ad6dc",
+      "classification": "open_migration",
+      "purpose": "1027 read/store operations carry PCs, slots, field offsets and bit patterns; consumer interprets instruction recipes and partial field masks.",
+      "evidence": [
+        {
+          "path": "src/player/sonic_animation_operations.hpp",
+          "line": 6,
+          "sha256": "8af69713c6bf0807f92460079f675d0f05c123bb873090155f4244bf5ee775ea"
+        },
+        {
+          "path": "src/player/sonic_animation_table.cpp",
+          "line": 1,
+          "sha256": "c4ad3db54a8eaa4032a692653a2eb2b99232544fd00f8c5f3aa44f2981dcdafb"
+        }
+      ],
+      "verification": [
+        "tests/unit/sonic_animation_table.cpp",
+        "tools/oracles/verify_original_sonic_animation_table.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/player/sonic_animation_table_data.hpp::sonic_animation_recipes": {
+      "sha256": "0b91a0cb4b1a287b309e6ed881051860ccfe0e8932d192ee3d6bd8ece2df8935",
+      "classification": "open_review",
+      "purpose": "Typed action-export indices, object counts, animation mode/next fields and binary32 encodings inform resource graph counts in player_animation_decode; content/import boundary remains unresolved. Hex entries are not all PCs.",
+      "evidence": [
+        {
+          "path": "src/player/sonic_animation_table_data.hpp",
+          "line": 7,
+          "sha256": "d8c8aa041e018a67edfe0e01fcabeb752a80362f8ee1f0b680414bfc8e119f03"
+        },
+        {
+          "path": "src/player/player_animation_decode.cpp",
+          "line": 1,
+          "sha256": "27e1a4cc025b9291bbf4d40beb0f2ab960629017619a57c3961af3e3d04ff9f6"
+        }
+      ],
+      "verification": [
+        "src/player/player_animation_decode.cpp",
+        "tests/unit/sonic_animation_table.cpp"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    }
+  },
+  "replacement_declaration": "src/player/animation/sonic_animation_content.hpp::kSonicRecipes",
+  "replacement_source_hashes": {
+    "src/player/animation/sonic_animation_content.hpp": "4a19944124840a61fa4a97aae8c6bfa6bfb39c76db76f958e8148ba48946da4a",
+    "src/player/animation/animation_content.hpp": "e23ff8d5b43fd3e046f94223dc530d20b99575477db372b3f2007972941ea4a7",
+    "src/player/animation/sonic_animation_initialize.hpp": "25c0d5cb6471832b66e9335feb22ebb5c0d2675545a50f77b60d39e1fd841ab9",
+    "src/player/sonic_animation_table.cpp": "b1b9de5049667fbb38faf1033db6cdc631e07721e9cfa87da1a186c798279d3c",
+    "src/guest/sonic_animation_table_reference.cpp": "4a2c2d2c66261c02aa0facd0c53e5f9c742d38f31f969018a293a565eb895779",
+    "src/guest/player_animation_decode_reference.cpp": "be4e9a28cb03706885564af525ca44764e427d3f24a6241e8ffd2cdf2bf34426"
+  },
+  "consumer_semantics": "Fields: exported-action flag/index, objectcount, named signedMode, next, transition/frame coefficients. Sharedinitializer resolves exports and publishes fields immediately in originalorders; importer/decoder usesobjectcount. No opcode/PC dispatch or executable-address identity.",
+  "behavior_evidence": [
+    "docs/refactor-inventory/packets/animation-contract/ROOT-REQUALIFIED.json",
+    "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+    "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md"
+  ],
+  "preserved_cases": {
+    "rows": 147,
+    "reads": 145,
+    "stores": 882,
+    "exports": 149,
+    "hook_cases": 8727
+  },
+  "limits": "Declarationclassification only; Sourcebaselinepath lineage, Mainunion/holdouts/product/journeys/gate pending. BroaderSonicdispatch remainsOPEN_MIGRATION."
+}
