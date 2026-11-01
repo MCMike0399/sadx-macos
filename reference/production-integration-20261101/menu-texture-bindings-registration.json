@@ -1,0 +1,15 @@
+{
+  "new_test": "native-menu-texture-bindings",
+  "source_commit": "separate preceding source commit",
+  "prior_fixture": "tests/fixtures/menu_texture_binding_baseline.hpp",
+  "table": "src/runtime/native_title_tasks.cpp::names",
+  "table_declaration_unchanged": "01135e293e8f46eb2f275fdc3f96e8686c4477dd0c88240fe396724db14e4451",
+  "evidence_updates": [
+    {
+      "before": "b79241bae2dd42684e8c03cdd475cca89f301a9705a57ede031baefa0b9b0c62",
+      "after": "e41744c5417fbc793679a62b72eeeed3d17ca9c6aed037889fd0496b03dc8f44"
+    }
+  ],
+  "classification_unchanged": "typed_content",
+  "rationale": "Actual consumers move their existing catalog/Japanese views to the stable owner. Native asset-name table declaration/selectors unchanged; no table debt retired. Unit and frozen prior fixture reproduce native attachment behavior and five valid mutants."
+}

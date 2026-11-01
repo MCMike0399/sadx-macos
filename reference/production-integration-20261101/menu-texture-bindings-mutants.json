@@ -1,0 +1,66 @@
+{
+  "base": "ddac8f7",
+  "source_sha256": {
+    "src/runtime/native_menu_texture_bindings.hpp": "bcbfec8567525059e041642e52df4f86c9db3d05cafdb1270bb801acc30bc30c",
+    "src/runtime/native_menu_texture_bindings.cpp": "42ee4369cb8f0e55854d7e82d880709b54f0d5a0dc463d71bf1847386a7094b0",
+    "src/runtime/native_session.hpp": "3326f3e882138f59b3791ecfa8bec3cf8b07e7c6daf087fefbbe37b322ebe23c",
+    "src/runtime/native_session.cpp": "026caa2b210b0e1ff3a6e9147736f9aa1211372be08165c1cab1070cd45c2502",
+    "src/runtime/native_title_tasks.cpp": "e41744c5417fbc793679a62b72eeeed3d17ca9c6aed037889fd0496b03dc8f44",
+    "tests/unit/native_menu_texture_bindings.cpp": "19be89feab68b901304862190dee889fcc67dbeff2cf13bd0b42e3f6f4da241c",
+    "tests/fixtures/menu_texture_binding_baseline.hpp": "86a98c1980104b1246cc82ab246e483f91ea3ca7742fda8487dace9d449a5a93"
+  },
+  "prior_fixture": "Bodies copied verbatim; baseline regular readiness is satisfied. Synthetic input content only.",
+  "differential_unit_exit": 0,
+  "strict_native_consumer_compiles": {
+    "native_session": 0,
+    "native_title_tasks": 0,
+    "sadx_native_app": 0
+  },
+  "valid_mutants": [
+    {
+      "name": "copy-regular-alias",
+      "compile_exit": 0,
+      "compile_stderr": "",
+      "terminal_exit": -6,
+      "stdout": "",
+      "stderr": "Assertion failed: (owner.binding(0, 2).textures == &regular[0]), function exercise, file native_menu_texture_bindings.cpp, line 79.\n"
+    },
+    {
+      "name": "early-ready",
+      "compile_exit": 0,
+      "compile_stderr": "",
+      "terminal_exit": -6,
+      "stdout": "",
+      "stderr": "Assertion failed: (!partial.attached()), function exercise, file native_menu_texture_bindings.cpp, line 102.\n"
+    },
+    {
+      "name": "wrong-language",
+      "compile_exit": 0,
+      "compile_stderr": "",
+      "terminal_exit": -6,
+      "stdout": "",
+      "stderr": "Assertion failed: (&owner.binding(static_cast<std::int32_t>(language), static_cast<std::uint32_t>(slot)) == &owner.catalog()[language][slot]), function exercise, file native_menu_texture_bindings.cpp, line 78.\n"
+    },
+    {
+      "name": "validate-ignored-alias",
+      "compile_exit": 0,
+      "compile_stderr": "",
+      "terminal_exit": -6,
+      "stdout": "",
+      "stderr": "libc++abi: terminating due to uncaught exception of type std::runtime_error: texture declaration members have different counts\n"
+    },
+    {
+      "name": "eager-catalog-validation",
+      "compile_exit": 0,
+      "compile_stderr": "",
+      "terminal_exit": -6,
+      "stdout": "",
+      "stderr": "Assertion failed: (expected == actual), function main, file native_menu_texture_bindings.cpp, line 119.\n"
+    }
+  ],
+  "limits": [
+    "No original Windows equivalence or GPU lifetime assertion by this native binding baseline.",
+    "Native rebuild/actual resource journeys and independent STYLE review pending.",
+    "Other Session/UI/regular/GPU/task owners remain unchanged."
+  ]
+}
