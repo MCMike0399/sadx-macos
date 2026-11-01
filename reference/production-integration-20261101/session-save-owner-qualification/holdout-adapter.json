@@ -1,0 +1,12 @@
+{
+  "stock_evaluator": "tools/oracles/verify_original_game_mode_leaves.py",
+  "stock_sha256": "b410da25b2db2ea70ca4bc7b3b213a57422c2729ae5c9811b6ed0f8f9eed2c1c",
+  "adapter": "tools/oracles/check_game_mode_leaves_holdout.py",
+  "default_equivalence_seed": 4243600,
+  "default_report_exactly_equal": true,
+  "default_compared_cases": 2526,
+  "default_explicit_boundaries": 74,
+  "reserved_final_seed": 20261105,
+  "reserved_final_run": "not run; awaits independent source review",
+  "rationale": "Original evaluator has a fixed seed. Separate qualification adapter changes only RNG seed for an additional cohort; original script, vectors under its default, expectations and comparison code are unchanged."
+}

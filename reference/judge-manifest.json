@@ -1,10 +1,10 @@
 {
   "change": {
-    "base_commit": "994263053adf3543e59733b7af808ff9da456439",
-    "evidence": "reference/production-integration-20261101/session-save-owner-qualification/summary.json",
-    "evidence_sha256": "118b0ce42b4fd65899dbbeeed5a8cca6045e701e922b97580edc4c73eabca686",
+    "base_commit": "16972d8b21db5fa8ff5aac3c67d505b8c7051a48",
+    "evidence": "reference/production-integration-20261101/session-save-owner-qualification/holdout-adapter.json",
+    "evidence_sha256": "f609c4dc0f683e1a03780f8535929cb462ddd39507e4301ec54fd920c0bb5a29",
     "mode": "additions-only",
-    "reason": "Freeze five valid canonical save-owner semantic mutation receipts after separate source and probe commits"
+    "reason": "Add separate fresh-cohort adapter around unchanged fixed-seed leaf judge; default report equivalence proved and final seed remains reserved"
   },
   "files": {
     "Makefile": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
@@ -688,6 +688,7 @@
     "tools/lib/pe_image.py": "94694dc5fb38e459d26b35c25a7cdb7e3fad7128e1178363340606bb9db299f2",
     "tools/oracles/check_basic_model_packet.py": "ebed363eb2c7ba7e20097d24237223b82d9c6e20d609940519908acbd57214cc",
     "tools/oracles/check_collision_component.py": "b94e339cc003d7f954dcb71775c61ba221c859c51881157e60bbe653bbd3d567",
+    "tools/oracles/check_game_mode_leaves_holdout.py": "a77928c22b587efa91e1f3e12c2f6e2a09d904a569f262b930cabf8c7947c62e",
     "tools/oracles/check_ninja_render_depth.py": "6d0cc5ba2d2dd251cbf6f20679288ca9f96d10f56775ad1c0c578abce5a1a1fc",
     "tools/oracles/check_normal_uv_strip_packet.py": "367792beba15da9ef0b9a28ac10b64e7507a2bcf6876a732d65f43260a99d66c",
     "tools/oracles/check_object_draw_packet.py": "aa027623609537e09e49cce811f6385085c73ffd37a4399f9de4d0886d5f868e",
