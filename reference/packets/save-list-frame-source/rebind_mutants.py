@@ -8,12 +8,17 @@ import hashlib
 import json
 from pathlib import Path
 import subprocess
+import sys
 
 spec = Path('reference/packets/save-io-frame-judges/mutate.py')
 tree = ast.parse(spec.read_text())
 mutants = next(ast.literal_eval(n.value) for n in tree.body if isinstance(n, ast.Assign)
                and any(isinstance(t, ast.Name) and t.id == 'mutants' for t in n.targets))
-root = Path('build/save-source/mutants')
+selected = sys.argv[2] if len(sys.argv) == 3 and sys.argv[1] == '--only' else None
+if selected:
+    mutants = [row for row in mutants if row[0] == selected]
+    assert len(mutants) == 1
+root = Path('build/save-source/mutants-retry' if selected else 'build/save-source/mutants')
 root.mkdir(parents=True, exist_ok=True)
 flags = ['xcrun', 'clang++', '-std=c++17', '-O2', '-Wall', '-Wextra', '-Werror',
          '-ffp-contract=off', '-fno-fast-math', '-Isrc', '-Itests/fixtures', '-Wl,-dead_strip']
@@ -29,7 +34,7 @@ for name, original_path, *edits in mutants:
         edits = [x.replace('const auto phase = state.now_saving;', 'const std::int32_t phase = state.now_saving;') for x in edits]
     if name == 'reference-eager-exec':
         edits = ['    bool save_after_completion = false;',
-                 '    bool save_after_completion = false;\n    std::optional<std::uint8_t> eager_exec;',
+                 '    bool save_after_completion = false;\n    std::optional<std::uint8_t> eager_exec{};',
                  '        call(GameLoopOperation::work_420840,0x40cc13,0x420840);',
                  '        eager_exec = st.pending_at_3abdf76;\n        call(GameLoopOperation::work_420840,0x40cc13,0x420840);',
                  'operator T() const { return body.need(owner, read_site); }',
@@ -64,4 +69,4 @@ for name, original_path, *edits in mutants:
     rows.append(row)
     (root / 'results.json').write_text(json.dumps(rows, indent=2) + '\n')
     print(name, row['compile_exit'], row['run_exit'], flush=True)
-assert len(rows) == 14 and all(r['compile_exit'] == 0 and r['detected'] for r in rows)
+assert len(rows) == (1 if selected else 14) and all(r['compile_exit'] == 0 and r['detected'] for r in rows)

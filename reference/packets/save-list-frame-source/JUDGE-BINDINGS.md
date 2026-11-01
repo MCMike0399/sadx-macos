@@ -45,3 +45,8 @@ This is retained in consumer-probes-initial, never counted as a partial or pass.
 The explicit dependency was added; receipt existence and native case count now
 must validate before full-record comparison. `--resume-controls` resumes that
 failed scope without rerunning the two already completed development loop cohorts.
+Initial migrated mutants: thirteen compiled and were detected. Reference eager
+exec initially failed compilation because its added optional lacked the required
+default member initializer under -Wmissing-field-initializers. That is NOT a kill.
+The unchanged capture intent now uses eager_exec{}; `--only reference-eager-exec`
+records a separate retry, preserving the original thirteen results and setup error.
