@@ -25,8 +25,15 @@ template <class Access> class Engine {
     using AnimationResourceReference = typename Access::AnimationResourceReference;
 
   public:
+    // NOTSA: bind one runtime world for the shared recovered algorithms.
     explicit Engine(Access &binding) : access(binding) {}
 
+    // NOTSA: compare named byte modes without narrowing the signed source state.
+    static constexpr std::int16_t mode_value(Mode value) noexcept {
+        return static_cast<std::int16_t>(value);
+    }
+
+    // NOTSA: construct a semantic failure at the reached logical boundary.
     [[noreturn]] void stop(Failure failure, Phase at, Phase callee = Phase::None) {
         Outcome r;
         r.failure = failure;
@@ -34,17 +41,21 @@ template <class Access> class Engine {
         (void)callee;
         throw Stop{r};
     }
+    // NOTSA: construct success without adding source state stores.
     Outcome complete() {
         Outcome r;
         r.completed = true;
         return r;
     }
+    // NOTSA: delegate lazy value/fact reads to the selected runtime binding.
     template <class T> decltype(auto) read_value(const T &value, Phase phase) {
         return access.read(value, phase);
     }
+    // NOTSA: resolve the borrowed canonical table only when reached.
     const auto &table(const PlayerAnimationView &view, Phase phase) {
         return access.table(view, phase);
     }
+    // NOTSA: select a reached row without validating later entries.
     const PlayerAnimationRecord &record(const PlayerAnimationView &v, std::uint16_t index,
                                         Phase at) {
         const auto &t = table(v, at);
@@ -53,6 +64,7 @@ template <class Access> class Engine {
             stop(Failure::UnresolvedResource, at);
         return r->second;
     }
+    // NOTSA: resolve the selected action declaration at use.
     const PlayerAnimationAction &action(const PlayerAnimationRecord &r,
                                         const PlayerAnimationRuntime &rt, Phase at) {
         const auto &ref = read_value(r.action, at);
@@ -63,6 +75,7 @@ template <class Access> class Engine {
             stop(Failure::UnresolvedResource, at);
         return a->second;
     }
+    // NOTSA: resolve motion identity at the reached use.
     const PlayerAnimationMotion &motion(const PlayerAnimationRecord &r,
                                         const PlayerAnimationRuntime &rt, Phase at) {
         const auto &a = action(r, rt, at);
@@ -74,6 +87,7 @@ template <class Access> class Engine {
             stop(Failure::UnresolvedResource, at);
         return m->second;
     }
+    // NOTSA: preserve signed load and unsigned32 correction order.
     ExactFloat unsigned_frame(const PlayerAnimationRecord &r, const PlayerAnimationRuntime &rt,
                               Phase at, fidelity::Context &fp) {
         auto raw = read_value(motion(r, rt, at).frame_count, at);
@@ -81,17 +95,20 @@ template <class Access> class Engine {
         std::memcpy(&signed_value, &raw, 4);
         auto value = ExactFloat::integer(fp, signed_value);
         if (signed_value < 0)
-            value = (value + 4294967296.0f);
+            value = (value + access.unsigned_correction(rt));
         return value;
     }
+    // NOTSA: inspect stored float bits without host arithmetic.
     std::uint32_t bits(float v) {
         std::uint32_t b;
         std::memcpy(&b, &v, 4);
         return b;
     }
+    // NOTSA: name the source unordered-inclusive comparison branch.
     bool greater_or_unordered(X87Comparison c) {
         return c == X87Comparison::greater || c == X87Comparison::unordered;
     }
+    // NOTSA: translate the reached arena failure without retry or copy-back.
     void arena_result(const TaskWorkResult &result, Phase at) {
         if (!result) {
             Outcome r;
@@ -101,12 +118,14 @@ template <class Access> class Engine {
             throw Stop{r};
         }
     }
+    // NOTSA: borrow the currently published generated action.
     PlayerAnimationAllocatedAction &buffer(PlayerAnimationView &v, Phase at) {
         const auto &ref = read_value(access.state(v).buffer, at);
         if (!ref)
             stop(Failure::NullResource, at);
         return *ref;
     }
+    // NOTSA: borrow the motion through the live generated action.
     PlayerAnimationAllocatedMotion &allocated_motion(PlayerAnimationView &v, Phase at) {
         auto &a = buffer(v, at);
         const auto &m = read_value(a.motion, at);
@@ -114,13 +133,15 @@ template <class Access> class Engine {
             stop(Failure::NullResource, at);
         return *m;
     }
+    // NOTSA: validate the arena only at the reached allocation or release.
     void require_arena(const PlayerAnimationRuntime &rt, Phase at) {
         if (!rt.arena)
             stop(Failure::MissingArena, at);
     }
+    // NOTSA: retain allocation, partial-header and publication order.
     void allocate_initial(PlayerAnimationView &v, PlayerAnimationRuntime &rt, std::uint16_t req) {
         access.state(v).current = req;
-        access.state(v).mode = 1;
+        access.state(v).mode = mode_value(Mode::Select);
         access.state(v).start = 0;
         access.state(v).frame = 0;
         require_arena(rt, Phase::AllocateAction);
@@ -161,6 +182,7 @@ template <class Access> class Engine {
             arena_result(rt.arena->fill(data.work, 0, 0, 111 * 24), Phase::AllocateNodeData);
         m->data = data.work;
     }
+    // NOTSA: share ordered wrapping while rereading the live period.
     void wrap_frame(PlayerAnimationView &v, const PlayerAnimationRuntime &rt,
                     const PlayerAnimationRecord &selected, Phase boundary, fidelity::Context &fp,
                     Outcome &result) {
@@ -175,14 +197,14 @@ template <class Access> class Engine {
                 !greater_or_unordered((period).compare(*access.state(v).frame)))
                 stop(Failure::LoopNoProgress, boundary);
         }
-        while ((ExactFloat(fp, 0.0f)).compare(read_value(access.state(v).frame, boundary)) ==
+        while ((ExactFloat(fp, access.zero(rt))).compare(read_value(access.state(v).frame, boundary)) ==
                X87Comparison::greater) {
             auto before = *access.state(v).frame;
             auto p = unsigned_frame(selected, rt, boundary, fp);
             access.state(v).frame = ((p + before)).rounded();
             ++result.wrap_iterations;
             if (bits(before) == bits(*access.state(v).frame) &&
-                (ExactFloat(fp, 0.0f)).compare(*access.state(v).frame) == X87Comparison::greater)
+                (ExactFloat(fp, access.zero(rt))).compare(*access.state(v).frame) == X87Comparison::greater)
                 stop(Failure::LoopNoProgress, boundary);
         }
     }
@@ -192,12 +214,15 @@ template <class Access> class Engine {
                                          fidelity::Context &fp) {
         try {
             const auto mode = read_value(access.state(v).mode, Phase::ResetMode);
-            if (mode == 6 || mode == 7) {
+            if (mode == mode_value(Mode::ReverseNext) || mode == mode_value(Mode::ReverseHold)) {
                 const auto current = read_value(access.state(v).current, Phase::ResetCurrent);
                 auto frame =
                     unsigned_frame(record(v, current, Phase::ResetRow), rt, Phase::ResetLength, fp);
-                access.state(v).frame = ((frame - 1.0f)).rounded();
-            } else if (mode == 3 || mode == 9 || mode == 10 || mode == 12) {
+                access.state(v).frame = ((frame - access.one(rt))).rounded();
+            } else if (mode == mode_value(Mode::Loop) ||
+                mode == mode_value(Mode::SpeedLoop) ||
+                mode == mode_value(Mode::ChargeLoop) ||
+                mode == mode_value(Mode::Wrap)) {
                 access.state(v).frame = read_value(access.state(v).start, Phase::ResetStart);
                 access.state(v).start = 0;
             } else
@@ -330,13 +355,14 @@ template <class Access> class Engine {
         }
         return complete();
     }
+    // NOTSA: share transition publication before the completion check.
     Outcome advance_transition(PlayerAnimationView &v, PlayerAnimationRuntime &rt,
                                const PlayerAnimationRecord &selected, Phase at,
                                fidelity::Context &fp) {
         auto step = read_value(selected.transition_step, at);
         auto frame = (ExactFloat(fp, step) + read_value(access.state(v).frame, at));
         access.state(v).frame = (frame).rounded();
-        auto c = (frame).compare(1.0f);
+        auto c = (frame).compare(access.one(rt));
         if (c == X87Comparison::less || c == X87Comparison::unordered)
             return complete();
         access.state(v).mode = read_value(selected.mode, Phase::TransitionMode);
@@ -345,6 +371,7 @@ template <class Access> class Engine {
             return released;
         return reset_player_animation_frame(v, rt, fp);
     }
+    // NOTSA: retain requested-row selection and same-frame continuation.
     Outcome select_requested(PlayerAnimationView &v, PlayerAnimationRuntime &rt,
                              std::uint16_t current, std::uint16_t requested,
                              fidelity::Context &fp) {
@@ -367,20 +394,21 @@ template <class Access> class Engine {
         } else
             access.state(v).frame = 1;
         access.state(v).current = requested;
-        access.state(v).mode = 2;
+        access.state(v).mode = mode_value(Mode::Transition);
         access.state(v).next =
             static_cast<std::uint8_t>(read_value(selected.next, Phase::SelectNext));
         return advance_transition(v, rt, selected, Phase::AdvanceTransition, fp);
     }
+    // NOTSA: name ordinary, speed and charge playback progression.
     Outcome advance_loop(PlayerAnimationView &v, PlayerAnimationRuntime &rt,
                          const PlayerAnimationRecord &selected, std::int16_t mode,
                          fidelity::Context &fp, Outcome &result) {
         auto step = read_value(selected.frame_step, Phase::PlaybackStep);
         auto increment = ExactFloat(fp, step);
-        if (mode == 9)
+        if (mode == mode_value(Mode::SpeedLoop))
             increment =
                 (ExactFloat(fp, access.speed_multiplier(v, rt, Phase::SpeedMultiplier)) * step);
-        if (mode == 10)
+        if (mode == mode_value(Mode::ChargeLoop))
             increment =
                 (ExactFloat(fp, access.charge_multiplier(v, rt, Phase::ChargeMultiplier)) * step);
         access.state(v).frame =
@@ -389,6 +417,7 @@ template <class Access> class Engine {
         result.completed = true;
         return result;
     }
+    // NOTSA: retain saved-successor selection and release order.
     Outcome select_saved_next(PlayerAnimationView &v, PlayerAnimationRuntime &rt,
                               const PlayerAnimationRecord &selected, std::uint16_t requested,
                               fidelity::Context &fp) {
@@ -419,48 +448,49 @@ template <class Access> class Engine {
         access.state(v).current = selected_index;
         access.state(v).next =
             static_cast<std::uint8_t>(read_value(now.next, Phase::SavedFollowing));
-        access.state(v).mode = 2;
+        access.state(v).mode = mode_value(Mode::Transition);
         return advance_transition(v, rt, now, Phase::AdvanceSavedTransition, fp);
     }
+    // NOTSA: name reverse, hold and next playback boundaries.
     Outcome advance_bounded(PlayerAnimationView &v, PlayerAnimationRuntime &rt,
                             const PlayerAnimationRecord &selected, std::uint16_t requested,
                             std::int16_t mode, fidelity::Context &fp) {
         ExactFloat advanced =
             ExactFloat(fp, read_value(access.state(v).frame, Phase::PlaybackFrame));
-        if (mode == 6 || mode == 7)
+        if (mode == mode_value(Mode::ReverseNext) || mode == mode_value(Mode::ReverseHold))
             advanced = (advanced - read_value(selected.frame_step, Phase::ReverseStep));
-        else if (mode == 11)
+        else if (mode == mode_value(Mode::ChargeNext))
             advanced = (ExactFloat(fp, access.charge_multiplier(v, rt, Phase::ChargeIncrement)) +
                         *access.state(v).frame);
         else
             advanced = (ExactFloat(fp, read_value(selected.frame_step, Phase::PlaybackStep)) +
                         *access.state(v).frame);
         access.state(v).frame = (advanced).rounded();
-        if (mode == 6 || mode == 7) {
-            auto c = (ExactFloat(fp, 0.0f)).compare(advanced);
+        if (mode == mode_value(Mode::ReverseNext) || mode == mode_value(Mode::ReverseHold)) {
+            auto c = (ExactFloat(fp, access.zero(rt))).compare(advanced);
             if (c != X87Comparison::greater)
                 return complete();
-            if (mode == 6)
+            if (mode == mode_value(Mode::ReverseNext))
                 return next_player_animation(v, rt, requested, fp);
             access.state(v).frame = 0;
             access.state(v).flags = 1;
             return complete();
         }
-        auto end = (unsigned_frame(selected, rt, Phase::PlaybackEnd, fp) - 1.0f);
+        auto end = (unsigned_frame(selected, rt, Phase::PlaybackEnd, fp) - access.one(rt));
         std::optional<float> stored_end;
-        if (mode == 5)
+        if (mode == mode_value(Mode::Hold))
             stored_end = (end).rounded();
         auto comparison = (end).compare(advanced);
         if (greater_or_unordered(comparison))
             return complete();
-        if (mode == 4 || mode == 11)
+        if (mode == mode_value(Mode::Next) || mode == mode_value(Mode::ChargeNext))
             return next_player_animation(v, rt, requested, fp);
-        if (mode == 5) {
+        if (mode == mode_value(Mode::Hold)) {
             access.state(v).frame = *stored_end;
             access.state(v).flags = 1;
             return complete();
         }
-        if (mode == 8)
+        if (mode == mode_value(Mode::SavedNext))
             return select_saved_next(v, rt, selected, requested, fp);
         return complete();
     }
@@ -473,9 +503,12 @@ template <class Access> class Engine {
             access.state(v).previous = current;
             access.state(v).flags = 0;
             auto mode = read_value(access.state(v).mode, Phase::UpdateMode);
-            if (current != requested && mode != 2 && mode != 0 && mode != 14) {
-                mode = 1;
-                access.state(v).mode = 1;
+            if (current != requested &&
+                mode != mode_value(Mode::Transition) &&
+                mode != mode_value(Mode::Initialize) &&
+                mode != 14) {
+                mode = mode_value(Mode::Select);
+                access.state(v).mode = mode_value(Mode::Select);
                 access.state(v).timer = 0;
             } else {
                 const auto timer = read_value(access.state(v).timer, Phase::UpdateTimer);
@@ -516,26 +549,31 @@ template <class Access> class Engine {
             return result_at_failure;
         }
     }
+    // NOTSA: interpret a source word without implementation-defined narrowing.
     std::int32_t signed_word(std::uint32_t x) {
         std::int32_t v;
         std::memcpy(&v, &x, 4);
         return v;
     }
+    // NOTSA: preserve the raw source representation of a scalar.
     std::uint32_t word(std::int32_t x) {
         std::uint32_t v;
         std::memcpy(&v, &x, 4);
         return v;
     }
+    // NOTSA: decode a float word without arithmetic.
     float real(std::uint32_t x) {
         float v;
         std::memcpy(&v, &x, 4);
         return v;
     }
+    // NOTSA: preserve the raw source representation of a scalar.
     std::uint32_t word(float x) {
         std::uint32_t v;
         std::memcpy(&v, &x, 4);
         return v;
     }
+    // NOTSA: resolve motion identity at the reached use.
     const PlayerAnimationMotion &motion(const PlayerAnimationAction &a,
                                         const PlayerAnimationRuntime &rt, Phase at) {
         const auto &ref = read_value(a.motion, at);
@@ -546,29 +584,23 @@ template <class Access> class Engine {
             stop(Failure::UnresolvedResource, at);
         return i->second;
     }
-    void checked(const TaskWorkResult &v, Phase at) {
-        if (!v) {
-            Outcome r;
-            r.failure = Failure::WorkFailed;
-            r.phase = at;
-            r.work_failure = v.failure;
-            throw Stop{r};
-        }
-    }
+    // NOTSA: publish one reached arena word in little-endian order.
     void write(TaskWorkArena &arena, const TaskWorkHandle &h, std::uint32_t at, std::uint32_t value,
                Phase boundary) {
         std::uint8_t bytes[4] = {
             static_cast<std::uint8_t>(value), static_cast<std::uint8_t>(value >> 8),
             static_cast<std::uint8_t>(value >> 16), static_cast<std::uint8_t>(value >> 24)};
-        checked(arena.write(h, at, bytes, 4), boundary);
+        arena_result(arena.write(h, at, bytes, 4), boundary);
     }
+    // NOTSA: read one reached arena word without prevalidating later data.
     std::uint32_t read(TaskWorkArena &arena, const TaskWorkHandle &h, std::uint32_t at,
                        Phase boundary) {
         std::uint8_t bytes[4];
-        checked(arena.read(h, at, bytes, 4), boundary);
+        arena_result(arena.read(h, at, bytes, 4), boundary);
         return std::uint32_t(bytes[0]) | (std::uint32_t(bytes[1]) << 8) |
                (std::uint32_t(bytes[2]) << 16) | (std::uint32_t(bytes[3]) << 24);
     }
+    // NOTSA: resolve the existing scene object identity.
     const SceneGeometryObject &object(const SceneResourceReference &ref,
                                       const PlayerAnimationRuntime &rt, Phase at) {
         if (!ref.id)
@@ -583,6 +615,7 @@ template <class Access> class Engine {
     // Original pre-order traversal writes a fixed 111-object stack.
     // Repeated identities are visited repeatedly; a cycle reaches that actual
     // capacity boundary rather than being silently de-duplicated.
+    // NOTSA: retain the source hierarchy walk and bounded stack behavior.
     void hierarchy(const SceneResourceReference &ref, const PlayerAnimationRuntime &rt,
                    std::vector<SceneResourceReference> &output, bool root) {
         if (output.size() == 111)
@@ -596,6 +629,7 @@ template <class Access> class Engine {
         if (sibling.id)
             hierarchy(sibling, rt, output, false);
     }
+    // NOTSA: resolve motion node backing at use.
     const std::vector<PlayerAnimationNode> &nodes(const PlayerAnimationMotion &m,
                                                   const PlayerAnimationRuntime &rt, Phase at) {
         const auto ref = read_value(m.data, at);
@@ -606,6 +640,7 @@ template <class Access> class Engine {
             stop(Failure::UnresolvedResource, at);
         return i->second;
     }
+    // NOTSA: resolve key backing without clamping its declared count.
     const PlayerAnimationKeyBytes *keys(const AnimationResourceReference &ref,
                                         const PlayerAnimationRuntime &rt, Phase at) {
         if (!ref.id)
@@ -615,6 +650,7 @@ template <class Access> class Engine {
             stop(Failure::UnresolvedResource, at);
         return &i->second;
     }
+    // NOTSA: read the reached node rather than copying the whole resource.
     const PlayerAnimationNode &node(const PlayerAnimationMotion &m,
                                     const PlayerAnimationRuntime &rt, unsigned n, Phase at) {
         const auto &array = nodes(m, rt, at);
@@ -622,6 +658,7 @@ template <class Access> class Engine {
             stop(Failure::UnresolvedResource, at);
         return array[n];
     }
+    // NOTSA: read one key component within captured backing.
     std::uint32_t key_word(const PlayerAnimationKeyBytes &keys, std::uint32_t n, unsigned component,
                            Phase at) {
         const auto offset = std::uint64_t(n) * 16 + component * 4;
@@ -632,17 +669,19 @@ template <class Access> class Engine {
         return std::uint32_t(p[0]) | (std::uint32_t(p[1]) << 8) | (std::uint32_t(p[2]) << 16) |
                (std::uint32_t(p[3]) << 24);
     }
-    ExactFloat frame_value(std::uint32_t frame, const PlayerAnimationRuntime &,
+    // NOTSA: retain unsigned key-frame conversion using the runtime arithmetic binding.
+    ExactFloat frame_value(std::uint32_t frame, const PlayerAnimationRuntime &rt,
                            fidelity::Context &fp) {
         const auto s = signed_word(frame);
         auto v = ExactFloat::integer(fp, s);
         if (s < 0)
-            v = (v + 4294967296.0f);
+            v = (v + access.unsigned_correction(rt));
         return v;
     }
     struct Interval {
         std::uint32_t first = 0, second = 0;
     };
+    // NOTSA: select the source key interval with its original bounds and comparisons.
     Interval interval(const PlayerAnimationKeyBytes &keys, std::uint32_t count, float frame,
                       const PlayerAnimationRuntime &rt, fidelity::Context &fp, Phase at,
                       unsigned channel) {
@@ -666,6 +705,7 @@ template <class Access> class Engine {
         }
         return i;
     }
+    // NOTSA: preserve retained interpolation fraction arithmetic.
     ExactFloat fraction(const PlayerAnimationKeyBytes &keys, Interval i, std::uint32_t period,
                         float frame, const PlayerAnimationRuntime &rt, fidelity::Context &fp,
                         Phase at) {
@@ -677,6 +717,7 @@ template <class Access> class Engine {
         auto denominator = frame_value(difference, rt, fp);
         return (numerator / denominator);
     }
+    // NOTSA: extract one semantic channel from the borrowed scene object.
     std::array<std::uint32_t, 3> pose(const SceneGeometryObject &o, unsigned channel, Phase at) {
         if (channel == 1) {
             auto a = read_value(o.angles, at);
@@ -687,6 +728,7 @@ template <class Access> class Engine {
     }
     // Source writes each component before loading/interpolating the next. The
     // angle coefficient alone spills tobinary32 before its three FILD/FMUL/ftol.
+    // NOTSA: retain sampled-channel arithmetic and per-axis publication.
     void sampled(TaskWorkArena &arena, const TaskWorkHandle &output,
                  const PlayerAnimationKeyBytes *input, const PlayerAnimationNode &n,
                  unsigned channel, const SceneGeometryObject &object,
@@ -738,6 +780,7 @@ template <class Access> class Engine {
                 write(arena, output, 4 + axis * 4, word((sum).rounded()), at);
             }
     }
+    // NOTSA: publish the first key or borrowed pose in source order.
     void first(TaskWorkArena &arena, const TaskWorkHandle &output,
                const PlayerAnimationKeyBytes *input, const SceneGeometryObject &o, unsigned channel,
                Phase at) {
@@ -832,10 +875,10 @@ template <class Access> class Engine {
         if (old_ref.id || new_ref.id) {
             auto allocation = arena.allocate(32);
             if (!allocation && allocation.failure != TaskWorkFailure::exhausted)
-                checked(allocation, malloc_site);
+                arena_result(allocation, malloc_site);
             output = allocation.work;
         }
-        checked(arena.set_reference(data, output_slot, output), write_site);
+        arena_result(arena.set_reference(data, output_slot, output), write_site);
         if (!output) {
             write(arena, data, count_slot, 0,
                   channel == 0   ? Phase::ClearAbsentPositionCount

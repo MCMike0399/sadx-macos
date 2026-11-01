@@ -19,6 +19,13 @@ struct NativeAccess {
     using PlayerAnimationAllocatedMotion = sadx::PlayerAnimationAllocatedMotion;
     using AnimationResourceReference = ResourceReference;
 
+    // NOTSA: native arithmetic uses the pinned compiler literals; no constant-pool state.
+    float zero(const Runtime &) const { return 0.0f; }
+    // NOTSA: the reference binding separately preserves its supplied-value contract.
+    float one(const Runtime &) const { return 1.0f; }
+    // NOTSA: unsigned32 conversion correction for the original signed-load sequence.
+    float unsigned_correction(const Runtime &) const { return 4294967296.0f; }
+
     struct StateFields {
         std::optional<std::uint16_t> &current, &requested, &previous;
         std::optional<std::int16_t> &mode;

@@ -16,6 +16,14 @@ struct ReferenceAccess {
     using PlayerAnimationAllocatedAction = sadx::PlayerAnimationAllocatedAction;
     using PlayerAnimationAllocatedMotion = sadx::PlayerAnimationAllocatedMotion;
     using AnimationResourceReference = sadx::AnimationResourceReference;
+    // NOTSA: preserve supplied legacy reference values at each reached arithmetic use.
+    float zero(const PlayerAnimationRuntime &runtime) const { return runtime.constants.zero; }
+    // NOTSA: this reference contract may substitute values without adding native pool state.
+    float one(const PlayerAnimationRuntime &runtime) const { return runtime.constants.one; }
+    // NOTSA: retain the legacy unsigned-conversion correction, including substitutions.
+    float unsigned_correction(const PlayerAnimationRuntime &runtime) const {
+        return runtime.constants.unsigned_correction;
+    }
     auto state(const PlayerAnimationView &v) {
         struct Fields {
             decltype((v.player.current_animation_at_126)) current;
