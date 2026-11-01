@@ -1,0 +1,23 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "library_sha256": "91d687048e40a0f081fe5c2c604e29d49fce8fbafccbb6c5d552e3df56615aca",
+  "compiler": "Clang 21.0.0 (clang-2100.3.34.2); ARM64 C++17 O2 original texture list/index/cache and render triplet",
+  "cases": 683,
+  "case_sha256": "6692319c20a036952dbebb8e1ab0bc19cd733361d4022a513aec3339ae250ce0",
+  "mismatches": [],
+  "passed": true,
+  "source_files_sha256": {
+    "src/engine/ninja_texture_selection.hpp": "15c689ee134df1e30584f005ab5aa84e2141f6c7f0d6e049f7442fe877b2a124",
+    "src/engine/ninja_texture_selection.cpp": "52e20dc525e709bdbd46b2096036f0399a5b7ef910e11d703e2ffb760065f1f3",
+    "src/engine/ninja_sprite_queue.hpp": "798851861c1465203f360793ce1b6ac31d4c9fb242a6fe7b3ca9047dc7c2520f",
+    "tests/probes/native_ninja_texture_selection_probe.cpp": "d70a25c1b74b7b87ff96c73290a6ecaedcef6b8f2d1a9f02419da9ea26f28905",
+    "tools/oracles/verify_original_ninja_texture_selection.py": "cb1e6bcdefa674c6cca37bc3e47d7e64e03b877570cb631266b226752aa6a04c"
+  },
+  "limits": [
+    "Actual77f3d0/77f440/78cf20/78cdc0/78b840 instructions, source bytes unmodified",
+    "Explicit synthetic renderer HRESULT receipts or stops, not physical D3D/NVIDIA binding",
+    "Dirty palette paths stop at surface lock while comparing preceding version stores",
+    "Missing facts and unowned array fields stop before source read; no recovered Win32 pointer casts",
+    "Metal typed resource validation is a separate actual consumer owner"
+  ]
+}

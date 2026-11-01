@@ -1,0 +1,15 @@
+patch inventory: 618 entries, 121 active, 79 active with handled_by=null
+reports: 26, declared sonic.exe ranges: 64
+reports declaring no addressed sonic.exe range (not checked): checker-gaps-before.json, constexpr-candidates.json, content-offline-receipt.json, game_view.json, inherited-oracle-identities.json, inventory-check.json, inventory-current.json, inventory-reconciled.json, native-source-only-frontier.json, ninja_texture_selection.json, queue-case-outputs-summary.json, render-consumer-oracle-exits.json, render-consumer-verdicts.json, render-symbols.json, storage-inventory.json
+
+UNHANDLED overlaps with active patches: 0
+
+handled overlaps (native models the patch): 5
+report                                        range                  patch                  owner     kind        source_ref / handled_by
+game_frame_owners.json                        0x402ed0-0x402f10      0x402ed0-0x402ed5      loader    trampoline  equivalent: the loader FixFOV trampoline calls the original at 4:3 (640x480) and only updates loader-internal state  [njSetPerspective_r]
+ninja_frame_calls.json                        0x78b960-0x78ba23      0x78b960-0x78b965      loader    trampoline  ninja_frame_calls: trampolines run the original  [Direct3D_EndScene_r]
+ninja_frame_calls.json                        0x78ba30-0x78ba50      0x78ba30-0x78ba35      loader    jump        ninja_frame_calls mod_loader Present  [Direct3D_Present_r]
+ninja_frame_calls.json                        0x78b880-0x78b958      0x78b880-0x78b885      loader    trampoline  ninja_frame_calls: trampolines run the original  [Direct3D_BeginScene_r]
+ninja_frame_calls.json                        0x78b880-0x78b958      0x78b922-0x78b927      loader    call        equivalent: uiscale rewrites the call to an unhooked copy of the original 77dfc0  [njDrawCircle2D_t->Target()]
+
+overlaps with undetermined patches (informational): 0

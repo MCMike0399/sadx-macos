@@ -1,0 +1,128 @@
+{
+ "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+ "native_library_sha256": "a18f03d7bb78b52b156994fe0c7de2b09129afbb6055a7c4c8fc1d4cb0339613",
+ "source_files": {
+  "src/engine/ninja_fog_internal.hpp": "dc67eb0d2952d71ce1ccbc85226d5469e4988ab5520912b3326b3813ba4626a7",
+  "src/engine/ninja_fog_native.cpp": "e1bd70d538ac794fb70d14380c390d5e664b47f1e7f1d9c46d909b03048b1986",
+  "src/engine/ninja_fog_initial_state.hpp": "a475f1114f191c22a683db3ff3b56198780c639c5f51a51129c9fb32878a8587",
+  "src/engine/ninja_fog_initial_state.cpp": "629e2271c1cd4ffbfce91522c43868e36b8f61c46c51c43c9488e14f62624794",
+  "src/cpu/fidelity_float.hpp": "b0e0e9ae131404916d9e9e9d544ea67868ae037164a7b2379c206ec621fb1d85",
+  "src/cpu/crt_integer.hpp": "f88d5d9b73239055150a35d0fe6363f773c7e62f5b2c1ce62eff5eaabe8333a6",
+  "src/cpu/crt_integer.cpp": "18d16777cc02344275575955f7773043ea9c6b48cf0197b725e838d1c5294a92",
+  "src/cpu/x87_math.hpp": "51a50a217504b0ef2344521b38f670ba4d738965de1660ed677dd9f13ceb2412",
+  "src/cpu/x87_math.cpp": "3410910eb394584bc091ed4ba138349024d00c58490905f8bb39e5fb02b32ee8",
+  "src/cpu/x87_transcendental.hpp": "d165b4c0aec64391b80f3fa68e2427ba2f2840fbc45562b87dac2145cad33a72",
+  "src/cpu/x87_transcendental.cpp": "5241f89cff162deec68fa95d19f26e908974be9c78a1bdc18044f2c893abd5ea",
+  "src/engine/ninja_fog.hpp": "a54cca523c3686e32853cc11280ff88474a28611787aaa7a688c063a54ca1849",
+  "src/engine/ninja_fog.cpp": "cb64705542c8d6b430d09d064a939a0815f97108e2dfab7c5d6cadb067069a9c",
+  "src/guest/ninja_fog_reference.hpp": "f98c4aee3be0ad3aa038014cdbbd0dcdb37561fc4de1888acfe4f9894136f8aa",
+  "src/guest/ninja_fog_reference.cpp": "27a12d7abc6e9b31b431a40ec41695b8ee9c86b60d9c4d3e4683feba22363f6f",
+  "src/engine/ninja_queue_consumer.hpp": "077454a832be85748d3e9d3891a10d97b00912328f37b1c2b0a41fca6348b006",
+  "src/engine/ninja_queue_consumer.cpp": "b5a6cb784a570507e9844cee6607d785a3522ce486b0a3a0ce23cb7d52d7d43a",
+  "src/engine/ninja_sprite_display.cpp": "2d7f69d9a5b56101aadbb91508a2355f1151ce992fa4bbfda30749f1abe5a0a3",
+  "src/engine/ninja_sprite_queue.cpp": "ba62f7f2250e0ff7ec8183431be7f102f5a9e984e1e5656f1c6d4342717787ed",
+  "src/engine/ninja_sprite.cpp": "ac67ce87fd086d4d7ad3de41f8a43cb89b3835e8f8030799e14717debeba65c7",
+  "src/engine/ninja_render.cpp": "d18ca70f7a617ea3a0b26f31e461ad18d36994279982e968ea0634dc4b7d3db9",
+  "src/engine/ninja_texture_selection.cpp": "52e20dc525e709bdbd46b2096036f0399a5b7ef910e11d703e2ffb760065f1f3",
+  "tests/probes/native_ninja_queue_consumer_probe.cpp": "2bbfbdeef98284a4b58d2f86ee731487067962f1924b69b6c2ab6911bc74f711",
+  "tools/oracles/verify_original_ninja_queue_consumer.py": "cee462bbdc3f4ae38ae14855d99ca55dffe450f639f2deafdef43fc144911b99"
+ },
+ "assets_sha256": "16ceb6aaaa80e666bfab2722ce6679a4737b445aa946b7efd5e18fde3d50f819",
+ "original_ranges_sha256": {
+  "404760": "3280956979ff40a35cf1d7a6daae656ebc122a82267ba5dc2e8df7910c1e6574",
+  "4086f0": "930e6cf40423428bc03a490b9ce62660c61a2edeb5cd67fb58a67c46e286c048"
+ },
+ "cases": 187,
+ "case_sha256": "b40744798d722757febbf3ba75f4e392b7a2b663443fe9bb3b1498d581a5f97b",
+ "profiles": [
+  {
+   "cw": "0x7f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0x47f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0x87f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0xc7f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0x27f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0x67f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0xa7f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0xe7f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0x37f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0x77f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0xb7f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  },
+  {
+   "cw": "0xf7f",
+   "cases": 187,
+   "state_mismatches": 0,
+   "flag_mismatches": 180
+  }
+ ],
+ "source_outcomes_all_profiles": {
+  "0:0x0:0x0:draws1": 852,
+  "0:0x0:0x0:draws0": 60,
+  "0:0x0:0x0:draws2": 780,
+  "0:0x0:0x0:draws3": 252,
+  "6:0x4119d8:0x787240:draws1": 144,
+  "6:0x411b02:0x411a20:draws1": 96,
+  "6:0x40901c:0x4071c0:draws0": 24,
+  "5:0x408b1f:0x77e390:draws0": 36
+ },
+ "mismatch_examples": [],
+ "state_calls_vertices_boundaries_match": true,
+ "strict_flags_match": false,
+ "limits": [
+  "404760 sprite submissions followed by 4086f0 queue consumption, against original instructions.\n\nSource runs the actual 404760 queued route (403250/403f60/784bc0/403e80) and the\nwhole 4086f0 body with every local callee unchanged (402f40, 412400, 411f30,\n77ed00/77ed20, 784d00, 411af0/411b40, 794950/794980, type-3 77e390 ...). Only\nthese are fixtures or stops: the D3D8 device is a recording COM fixture; D3DX\n78dbe0 is a seeded `fld [seed]; ret 4` or a required stop; world-sprite 791a50\nstops as the native display boundary; the unlifted\n4071c0/787240 callees, the 411a20 body after its bit0 early return (411a30), and non-type-3 dispatch bodies stop exactly where\nthe native consumer reports its required boundary. Submission happens with\nqueue mode 0 and display switch 0; the case values are applied before 4086f0.\nRecords are type-3 sprites only, header texlist word 0, palette banks off.\n",
+  "Flag difference (strict_flags_match): the native x87 status exception bits after the vertex arithmetic are set where Unicorn 2.1.4 does not raise them. All compared values match; the hardware flags need the Intel capture (M4)."
+ ]
+}
