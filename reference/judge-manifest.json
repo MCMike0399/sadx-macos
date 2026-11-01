@@ -1,9 +1,10 @@
 {
   "change": {
-    "base_commit": "66b17f64f36aefcd75e593aa7f43ba03c270b640",
-    "evidence": "reference/production-integration-20261101/menu-texture-composite-replay.json",
-    "evidence_sha256": "9597d7b5238f5acf471ef842a689188f1ca90fac0aaf8b24c0f61e27a46424ea",
-    "reason": "Track rebuilt Main resource/loader comparisons after separately committed menu binding owner and module guard"
+    "base_commit": "3ffb91507adfbe51405f035bffe0fc64a4c58fe6",
+    "evidence": "reference/packets/session-regular-resources/PACKET.md",
+    "evidence_sha256": "ac782f08835c6379b9132e825c2e0a62fd751f1a8585e83c7e8413c1b9dd9fee",
+    "mode": "additions-only",
+    "reason": "Register source-bound regular resource baseline, native owner unit and frozen six-mutant receipt; unchanged original judges and parent hashes retained"
   },
   "files": {
     "Makefile": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
@@ -337,6 +338,7 @@
     "reference/production-integration-20261101/menu-progress-shared/mutants.json": "cab8745d573efa9caa6e281654ef85ce535c0d28b4e593236e921d275faed40d",
     "reference/production-integration-20261101/menu-texture-bindings-mutants.json": "b2af4ad069e8b0f32ccfb12ffb0da20d247ea0aaeefc8c9454a8349d7caa919a",
     "reference/production-integration-20261101/save-completion-mutants.json": "1b4657b0ff662bcc21255779aa675f8acc40cdb8fb55cbfef7a8b974e70e5694",
+    "reference/production-integration-20261101/session-regular-resources-mutants.json": "c56fe89a628d98ed2e1fe439c2fc99e8d7c5070978d30c2b2d344aa0a428f4ea",
     "reference/production-integration-20261101/session-save-owner-mutants.json": "b95ec90bb88e7a03c6d3b95e47dbda27880253048f28df6101810123df741fd6",
     "tests/fixtures/input_keyboard_goldens.hpp": "0a9f25e5a0d336a1f4381af39257fdc6f7403f43ca2aef743345284fb1c18fda",
     "tests/fixtures/material_correction_mutants.json": "e34f023704a87b4663d5c56fed1c1beabaa697cd3a3770bbe24962ab28f66f41",
@@ -345,6 +347,7 @@
     "tests/fixtures/object_draw_original_mutants.json": "60e7225cbcdd2af591bac4a3aaeec4667f3aa53424123a091e8c10d2b837b54b",
     "tests/fixtures/path_probe_data.hpp": "3f8803b9afa695f6f1ca411fb7b58ae66e60609b2af2df3dd74463c3b9dadda0",
     "tests/fixtures/polybuff_owner_regression_mutants.json": "04ed045223c5785401dd6c7f74f5fdd9393dbd363458fed751beccba937e7898",
+    "tests/fixtures/regular_resource_baseline.hpp": "c12360fe40fe210dd3c3ce0ecd75cb9b0641a873879fdc29c275bbba28d29886",
     "tests/fixtures/texture_list_gate_mutants.json": "78419c35b7356656fc78b29fc4a0ceaee8e74201738f26c10b91b9735100da9e",
     "tests/fixtures/texture_selection_core_mutants.json": "eeb6efa3485c4c91e3852d511ec0522293f923710b4ca0e106af9389f6f6def7",
     "tests/probes/audio_stop_latency.mm": "eac622fb816614f8cbb13686abd4917f818fd6ad015913555806877fa4fdc47f",
@@ -639,7 +642,7 @@
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",
     "tests/python/test_voice_publication.py": "5c00051d9b3de640f64e224dda4d810cdd7d26acafd91d7b1dc44e9786a734f3",
-    "tests/unit/manifest.tsv": "d19948fdc32bb9537643ff7f4c4f3f71510f2b4a2d35e96c1b4c4ce85a21f70e",
+    "tests/unit/manifest.tsv": "56f941595e3606cb04fae06853689a80cc548eb64c1cf1f2be35f3e8789aa7cb",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",
