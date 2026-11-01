@@ -32,3 +32,10 @@ specific identity/reentry coverage beyond the immutable systematic streams.
 The added boundary target lists its complete compiler-discovered local dependency
 closure (`clang++ -MM` over all five translation units), preserving header-triggered
 rebuilds. Existing targets and forced reference fixtures remain unchanged.
+
+`qualify_consumers.py` builds a narrow local Controls support archive using the
+registered per-object/SoftFloat recipes. It compiles the original pinned Main
+loop body and current loop with the unchanged probe, then runs unchanged default
+688-case loop and 2,438-case Controls observers. All defined full records compare
+to the hash-verified historical streams; Controls must remain exit 1 and retain
+its exact FP differences. No stale archive or reserved input is used.

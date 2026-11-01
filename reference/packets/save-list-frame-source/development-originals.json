@@ -1,0 +1,346 @@
+[
+  {
+    "stream": "build/save-source/development-replay/verify_original_load_selected_save.abi.pkl.gz",
+    "baseline": "build/save-source/baseline-replay/verify_original_load_selected_save.abi.pkl.gz",
+    "first_defined_difference": null,
+    "sha256": "bb6bb97670fe08e11cd8561ca371fd3322ca7399274fac6fd6d60ad691551d9c",
+    "receipt": {
+      "exit": 0,
+      "native_calls": 368,
+      "source_returns": 368,
+      "stream": "build/save-source/development-replay/verify_original_load_selected_save.abi.pkl.gz",
+      "stream_sha256": "bb6bb97670fe08e11cd8561ca371fd3322ca7399274fac6fd6d60ad691551d9c",
+      "stream_bytes": 9455442,
+      "library_sha256": "fa6063ad3ee9a26e3565e4c781a5944f659788328b90e4d25bde5e71ccf6cd18",
+      "evaluator_sha256": "16c0999ea4c798c6cbcfccfbedeb7bba922491114b03a1eb3552f825371e807a",
+      "report": {
+        "passed": true,
+        "cases": 368,
+        "mismatches": 0,
+        "first_mismatches": [],
+        "seed": 42180,
+        "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+        "input_sha256": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+        "native_sources": {
+          "src/game/save_file_list.cpp": "67cb8c62c95d8ecbad6b69f67c46ae07ef6ed6e55329a964ca973b27006d6de1",
+          "src/game/save_file_list.hpp": "bb6f0d5401185a4e91d5ec014d7d11235cd1cc6c0f189577e386d382069aa025",
+          "tests/probes/native_save_file_list_probe.cpp": "bddadd747368acbfd39c00b0089fb3f9b956aa35b864fa865782a42c53f7e6d7"
+        },
+        "source_functions": {
+          "0x421de0-0x421e87": "442ea3e5f89c5e477fe27ca9545e166e8e181e159024a4f0fe3a2595f05400f0",
+          "0x42d3b0-0x42d5cb": "8cb51fd6f6c1588e1363460d1927088c3b08a655913f8adabd49198304b64604"
+        },
+        "native_library_sha256": "fa6063ad3ee9a26e3565e4c781a5944f659788328b90e4d25bde5e71ccf6cd18",
+        "limits": [
+          "Actual selected-save loader, save initializer and pinned Input default-rumble replacement execute; filesystem I/O is exact partial-write resource fixture. Selected unknown sentinel, invalid list traversal and missing FILE are explicit native boundaries, not successful source loads."
+        ]
+      }
+    }
+  },
+  {
+    "stream": "build/save-source/development-replay/verify_original_save_completion.abi.pkl.gz",
+    "baseline": "build/save-source/baseline-replay/verify_original_save_completion.abi.pkl.gz",
+    "first_defined_difference": null,
+    "sha256": "48d7ecce6a909eb3e3b23557360f5752b5e00d54e322529fe9531c56917e6895",
+    "receipt": {
+      "exit": 0,
+      "native_calls": 1000,
+      "source_returns": 1000,
+      "stream": "build/save-source/development-replay/verify_original_save_completion.abi.pkl.gz",
+      "stream_sha256": "48d7ecce6a909eb3e3b23557360f5752b5e00d54e322529fe9531c56917e6895",
+      "stream_bytes": 83944,
+      "library_sha256": "fa6063ad3ee9a26e3565e4c781a5944f659788328b90e4d25bde5e71ccf6cd18",
+      "evaluator_sha256": "ec92ebfbbd9a67c108ea35200bccb0070756f61bc425cf8f70ecef3e696d00ba",
+      "report": {
+        "cases": 1000,
+        "mismatch_count": 0,
+        "values_match": true,
+        "passed": true,
+        "mismatches": [],
+        "limits": "Original503600 stages12/13 completion suffix, after unchanged shared animation.\n\nActual wait/sign/store/transition instructions execute. Existing dialog/task/save\nowners are ordered call receipts; their independent source judges remain required.\nNo successful-save flag is manufactured by this judge or the native helper.\n",
+        "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+        "source_ranges": {
+          "0x5038fa": "0x503a2a",
+          "0x503d45": "0x503d81"
+        },
+        "seed": 20261021
+      }
+    }
+  },
+  {
+    "stream": "build/save-source/development-replay/verify_original_save_creation.abi.pkl.gz",
+    "baseline": "build/save-source/baseline-replay/verify_original_save_creation.abi.pkl.gz",
+    "first_defined_difference": null,
+    "sha256": "5cc354983d01b68d55858c3e948f999f32c895d0a58ad42e7c84bb8a5622ad3c",
+    "receipt": {
+      "exit": 0,
+      "native_calls": 1000,
+      "source_returns": 1000,
+      "stream": "build/save-source/development-replay/verify_original_save_creation.abi.pkl.gz",
+      "stream_sha256": "5cc354983d01b68d55858c3e948f999f32c895d0a58ad42e7c84bb8a5622ad3c",
+      "stream_bytes": 27900932,
+      "library_sha256": "fa6063ad3ee9a26e3565e4c781a5944f659788328b90e4d25bde5e71ccf6cd18",
+      "evaluator_sha256": "52b7c4f6ea2b2b05992f2583363fec85428bfdf3c2a1bb3d1339d214aa496431",
+      "report": {
+        "cases": 1000,
+        "mismatch_count": 0,
+        "values_match": true,
+        "passed": true,
+        "mismatches": [],
+        "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+        "limits": "Actual StoreSaveData42d630 and its packed story helpers, through complete1392-byte publication.\n\nThe original game instructions execute except the compiler stack-cookie receipt.\nSource runtime sequence byte1 is skipped, preserving persisted padding. Flags pack\nonly byte value1. All source save snapshots and live lives are compared.\n",
+        "source_ranges": {
+          "0x42d630": "0x42d76c",
+          "0x42d0d0": "0x42d125",
+          "0x42d130": "0x42d185",
+          "0x42d190": "0x42d1f1",
+          "0x42d200": "0x42d24a",
+          "0x425b00": "0x425b26"
+        },
+        "seed": 20261021
+      }
+    }
+  },
+  {
+    "stream": "build/save-source/development-replay/verify_original_save_data.abi.pkl.gz",
+    "baseline": "build/save-source/baseline-replay/verify_original_save_data.abi.pkl.gz",
+    "first_defined_difference": null,
+    "sha256": "e0a1cc494aa02c67a102212b81857ab1b94c0fa55d56215436016f566c19527e",
+    "receipt": {
+      "exit": 0,
+      "native_calls": 1029,
+      "source_returns": 24,
+      "stream": "build/save-source/development-replay/verify_original_save_data.abi.pkl.gz",
+      "stream_sha256": "e0a1cc494aa02c67a102212b81857ab1b94c0fa55d56215436016f566c19527e",
+      "stream_bytes": 1453480,
+      "library_sha256": "fa6063ad3ee9a26e3565e4c781a5944f659788328b90e4d25bde5e71ccf6cd18",
+      "evaluator_sha256": "240c35ef6087972cb428ba80b351e9960323cf03e9b311cfb74b394b3ac19dd8",
+      "report": {
+        "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+        "input_mod_sha256": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+        "profile_patch": {
+          "site": "0x42d52d",
+          "target": "0x10009240",
+          "replacement_bytes": "c684246a02000001ff25dcb30010"
+        },
+        "source_ranges": {
+          "0x42d3b0-0x42d622": "9ed9c9124a6a40b3f8c83c1c267a0b1b5652b2f02b7e15b16d3c08b3173f75d0"
+        },
+        "native_sources": {
+          "src/game/save_data.hpp": "b78b88eb49fa5623907fb4683b4fd5f349174b217b575ac6a3d55ba802d15080",
+          "src/game/save_data.cpp": "d0175338a858b42d58bda6155d4886a86a590d874d19c46e945c4b3d235f9eb4",
+          "tests/probes/native_save_data_probe.cpp": "8f12f8624c250cb5f9355d63651351b61ee5920b0812b194fd3849297aea78d0"
+        },
+        "native_library_sha256": "fa6063ad3ee9a26e3565e4c781a5944f659788328b90e4d25bde5e71ccf6cd18",
+        "seed": 20261020,
+        "cases": 1029,
+        "initialization_cases": 24,
+        "checksum_cases": 1005,
+        "initial_save_sha256": "e3789a332281fc97514f1de73443495871df6ac2237f249259220ae0277dc5ec",
+        "mismatches": 0,
+        "first_mismatches": [],
+        "passed": true,
+        "limits": [
+          "Tests initial save record and CRC; persistence and story progression need journeys.",
+          "Compiler security-cookie epilogue is bypassed; all save callees execute.",
+          "Pinned Input default-rumble replacement executes from the actual DLL."
+        ]
+      }
+    }
+  },
+  {
+    "stream": "build/save-source/development-replay/verify_original_save_file_list.abi.pkl.gz",
+    "baseline": "build/save-source/baseline-replay/verify_original_save_file_list.abi.pkl.gz",
+    "first_defined_difference": null,
+    "sha256": "3cf54f1ac1f613a30120f55d6c23a1ce16174b6b154b9232a725af0130bff3d0",
+    "receipt": {
+      "exit": 0,
+      "native_calls": 348,
+      "source_returns": 348,
+      "stream": "build/save-source/development-replay/verify_original_save_file_list.abi.pkl.gz",
+      "stream_sha256": "3cf54f1ac1f613a30120f55d6c23a1ce16174b6b154b9232a725af0130bff3d0",
+      "stream_bytes": 14919194,
+      "library_sha256": "fa6063ad3ee9a26e3565e4c781a5944f659788328b90e4d25bde5e71ccf6cd18",
+      "evaluator_sha256": "2e6cdf5ad65bc0253c2f8a0a6b630a0345c2e905db65859ab93637c73431fd85",
+      "report": {
+        "passed": true,
+        "cases": 348,
+        "mismatches": 0,
+        "first_mismatches": [],
+        "seed": 505050,
+        "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+        "native_sources": {
+          "src/game/save_file_list.cpp": "67cb8c62c95d8ecbad6b69f67c46ae07ef6ed6e55329a964ca973b27006d6de1",
+          "src/game/save_file_list.hpp": "bb6f0d5401185a4e91d5ec014d7d11235cd1cc6c0f189577e386d382069aa025",
+          "src/game/file_select.cpp": "1e33dada07ca40679992137b0b0e18c6bea5ee53c320684927c500ecd3d27c46",
+          "tests/probes/native_save_file_list_probe.cpp": "bddadd747368acbfd39c00b0089fb3f9b956aa35b864fa865782a42c53f7e6d7"
+        },
+        "source_functions": {
+          "0x505050-0x5051da": "48d583e0f5436dfece7f77d790f06579cf7b36400b687a7fd31f64a4cb213a49",
+          "0x504e50-0x504ec2": "988851f475cf02a966d17e3922ede9c71d04c8479339308c53322f0cf09a6d08",
+          "0x42d0b0-0x42d0d6": "78c1c7a4ca58a789862ad0b288e0115faa772154acc34633e3b1d861c27ed2d2"
+        },
+        "native_library_sha256": "fa6063ad3ee9a26e3565e4c781a5944f659788328b90e4d25bde5e71ccf6cd18",
+        "limits": [
+          "FindFirst/Next/File I/O and allocator are resource fixtures; real FindSaveFiles/AddLineList/CheckSaveFile/CRC instructions execute. First malloc sentinel name/time remain an unknown tag, not compared values. Normal matched ASCII save filenames; missing FILE and malformed provider names are explicit native boundaries."
+        ]
+      }
+    }
+  },
+  {
+    "stream": "build/save-source/development-replay/verify_original_save_frame.abi.pkl.gz",
+    "baseline": "build/save-source/baseline-replay/verify_original_save_frame.abi.pkl.gz",
+    "first_defined_difference": null,
+    "sha256": "8f352b28998ab1c0ec1c31444a4aaf72d3b4154884d06c734d4fbdd6101738a4",
+    "receipt": {
+      "exit": 0,
+      "native_calls": 2420,
+      "source_returns": 2420,
+      "stream": "build/save-source/development-replay/verify_original_save_frame.abi.pkl.gz",
+      "stream_sha256": "8f352b28998ab1c0ec1c31444a4aaf72d3b4154884d06c734d4fbdd6101738a4",
+      "stream_bytes": 116796,
+      "library_sha256": "fa6063ad3ee9a26e3565e4c781a5944f659788328b90e4d25bde5e71ccf6cd18",
+      "evaluator_sha256": "4bc1998b479827452c1ff178f51ad76948bb04d2936153e906f0db21b4d79e2c",
+      "report": {
+        "cases": 2420,
+        "mismatch_count": 0,
+        "values_match": true,
+        "passed": true,
+        "mismatches": [],
+        "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+        "source_ranges": {
+          "0x40cba4": "0x40cbf2",
+          "0x40cc18": "0x40cc62"
+        },
+        "seed": 20261022,
+        "limits": "Actual GameLoop saving slices before/after411d00; resource callees are receipts.\n\n40cba4..40cbf1 and40cc1d..40cc61 execute unmodified. The composed case executes\nthe actual CALL411d00 at40cc18 between them, trapping its separate timing owner.\nIntervening40cbf2..40cc17 render/message owners are outside this bounded proof.\nCaller EBX=0/ESI=1 are source40cad0 prologue facts, preserved by callee ABI.\nCallbacks can replace all live fields or stop, testing exact stores/reloads/failure\nprefixes. Actual MSGC identity is preserved; neither message rendering nor disk I/O\nis faked as a production implementation by these oracle receipts.\n",
+        "native_library_sha256": "fa6063ad3ee9a26e3565e4c781a5944f659788328b90e4d25bde5e71ccf6cd18"
+      }
+    }
+  },
+  {
+    "stream": "build/save-source/development-replay/verify_original_save_list_free.abi.pkl.gz",
+    "baseline": "build/save-source/baseline-replay/verify_original_save_list_free.abi.pkl.gz",
+    "first_defined_difference": null,
+    "sha256": "fe05212f78387258795b2e2c78c4360d7e75b7352eccc7fa68953451fcd469e3",
+    "receipt": {
+      "exit": 0,
+      "native_calls": 101,
+      "source_returns": 101,
+      "stream": "build/save-source/development-replay/verify_original_save_list_free.abi.pkl.gz",
+      "stream_sha256": "fe05212f78387258795b2e2c78c4360d7e75b7352eccc7fa68953451fcd469e3",
+      "stream_bytes": 3478,
+      "library_sha256": "fa6063ad3ee9a26e3565e4c781a5944f659788328b90e4d25bde5e71ccf6cd18",
+      "evaluator_sha256": "182108e2bced7e74a369601f77d28fd9fd6fbe24aa46eece3d0c820dfd3d6f84",
+      "report": {
+        "passed": true,
+        "cases": 101,
+        "mismatches": 0,
+        "first_mismatches": [],
+        "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+        "native_sources": {
+          "src/game/save_file_list.cpp": "67cb8c62c95d8ecbad6b69f67c46ae07ef6ed6e55329a964ca973b27006d6de1",
+          "src/game/save_file_list.hpp": "bb6f0d5401185a4e91d5ec014d7d11235cd1cc6c0f189577e386d382069aa025",
+          "tests/probes/native_save_list_free_probe.cpp": "55e65d1773c980628b773f056ab5bd1618736aa6b437b9710a7db0a00083b9bc"
+        },
+        "source_functions": {
+          "0x504ed0-0x504f37": "fea94b691ec2405ff4c6cc5c2f5d7712e450518e0d44324d442c62a9b473f97d"
+        },
+        "native_library_sha256": "fa6063ad3ee9a26e3565e4c781a5944f659788328b90e4d25bde5e71ccf6cd18",
+        "source_range_sha256": "fea94b691ec2405ff4c6cc5c2f5d7712e450518e0d44324d442c62a9b473f97d",
+        "limits": [
+          "Original CRT free is a resource receipt. Every filename is freed before its node; sentinel indeterminate filename is never freed. Native node destructor order and final canonical list null are compared; CRT allocator reentry is not a game callback. Ghidra analyze timed out; actual original instructions execute."
+        ]
+      }
+    }
+  },
+  {
+    "stream": "build/save-source/development-replay/verify_original_save_prepare.abi.pkl.gz",
+    "baseline": "build/save-source/baseline-replay/verify_original_save_prepare.abi.pkl.gz",
+    "first_defined_difference": null,
+    "sha256": "55a686ab24f8be6a41c6d15b2a7730e8dcec5b5d3f4c6278a830dd382faf62d5",
+    "receipt": {
+      "exit": 0,
+      "native_calls": 768,
+      "source_returns": 0,
+      "stream": "build/save-source/development-replay/verify_original_save_prepare.abi.pkl.gz",
+      "stream_sha256": "55a686ab24f8be6a41c6d15b2a7730e8dcec5b5d3f4c6278a830dd382faf62d5",
+      "stream_bytes": 43131,
+      "library_sha256": "fa6063ad3ee9a26e3565e4c781a5944f659788328b90e4d25bde5e71ccf6cd18",
+      "evaluator_sha256": "fee10382a67c5246bfab92578a0e6582931703d9c6fd2385d3518c1980318e11",
+      "report": {
+        "cases": 768,
+        "mismatch_count": 0,
+        "values_match": true,
+        "passed": true,
+        "mismatches": [],
+        "limits": "Full5065d0 actual initializer composition, including pinned Input DLL rumble hook.\n\nBoth source callees execute; all1392save bytes plus1976story/sequence/completion\nbytes and rings are compared. Wider cutscene state is independently covered by\nthe unchanged bootstrap oracle. No source profile behavior is replaced by receipt.\n",
+        "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+        "input_mod_sha256": "c5ccdcc7929da1f3d0c03b24da33c350d388bda41d3d1651797758205180b7f5",
+        "source_ranges": {
+          "0x5065d0": "0x5065da",
+          "0x413300": "0x41337a",
+          "0x42d3b0": "0x42d62e",
+          "0x10009240": "0x1000924e"
+        }
+      }
+    }
+  },
+  {
+    "stream": "build/save-source/development-replay/verify_original_save_request.abi.pkl.gz",
+    "baseline": "build/save-source/baseline-replay/verify_original_save_request.abi.pkl.gz",
+    "first_defined_difference": null,
+    "sha256": "88fc8f10df041c4cbb5505cf8a1a12ef5d1d1da653bed88f40a36d3d9b7fb5ff",
+    "receipt": {
+      "exit": 0,
+      "native_calls": 1280,
+      "source_returns": 0,
+      "stream": "build/save-source/development-replay/verify_original_save_request.abi.pkl.gz",
+      "stream_sha256": "88fc8f10df041c4cbb5505cf8a1a12ef5d1d1da653bed88f40a36d3d9b7fb5ff",
+      "stream_bytes": 11905,
+      "library_sha256": "fa6063ad3ee9a26e3565e4c781a5944f659788328b90e4d25bde5e71ccf6cd18",
+      "evaluator_sha256": "cd8d35807ff03eb2f1bbec64188c654552139013a350e2df33d36417a634adaf",
+      "report": {
+        "cases": 1280,
+        "mismatch_count": 0,
+        "values_match": true,
+        "passed": true,
+        "mismatches": [],
+        "limits": "Original5065e0 request guard/store and delegated CreateSaveData call receipt.",
+        "source_ranges": {
+          "0x5065e0": "0x5065fb"
+        },
+        "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+      }
+    }
+  },
+  {
+    "stream": "build/save-source/development-replay/verify_original_save_write.abi.pkl.gz",
+    "baseline": "build/save-source/baseline-replay/verify_original_save_write.abi.pkl.gz",
+    "first_defined_difference": null,
+    "sha256": "cc2879b630b14968cb91934ae7ad2108687ee3c2fac5708e7292e4ebb764ee0a",
+    "receipt": {
+      "exit": 0,
+      "native_calls": 1000,
+      "source_returns": 1000,
+      "stream": "build/save-source/development-replay/verify_original_save_write.abi.pkl.gz",
+      "stream_sha256": "cc2879b630b14968cb91934ae7ad2108687ee3c2fac5708e7292e4ebb764ee0a",
+      "stream_bytes": 1763287,
+      "library_sha256": "fa6063ad3ee9a26e3565e4c781a5944f659788328b90e4d25bde5e71ccf6cd18",
+      "evaluator_sha256": "a99eca14677270d000d0047a7ac0de984ba317c577c8f82933f522863d6509ea",
+      "report": {
+        "cases": 1000,
+        "mismatch_count": 0,
+        "values_match": true,
+        "passed": true,
+        "mismatches": [],
+        "limits": "Original421fd0 write ordering, filename allocation and first-free slot selection.\n\nCRT/filesystem allocation,formatting,CompareStringA and I/O are receipts, never\nproduction implementations. Source canonical ASCII filenames bound comparison;\nwrite return0/1 is retained (the original ignores it). Native real-I/O failure\nmust instead report a platform boundary, not fabricate source success.\n",
+        "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+        "source_ranges": {
+          "0x421fd0": "0x4221cc"
+        },
+        "seed": 20261021
+      }
+    }
+  }
+]
