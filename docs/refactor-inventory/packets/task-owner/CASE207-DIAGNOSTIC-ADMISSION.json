@@ -1,0 +1,22 @@
+{
+  "status": "Root admits ONE native-only diagnostic of frozen deletion case 207. No original execution or cohort continuation.",
+  "terminal_commit": "0afa5d4",
+  "source": "72d0e83ead1255aa658ef6b78220c04b1b737b93",
+  "candidate_library": "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/current/libraries/task_delete.dylib",
+  "python_sha256": "87d4df53fd91304be5bac391fb204643c36b7df2023c04a0953bcbc7d4fdf634",
+  "pins": {
+    "/Users/burbujamc/Developer/sadx-macos/build/task-delete-case207-diagnostic.py": "d5e6798821c581bde51c0d100e7ddae438b279d8cf5097bdb301964bc123a329",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/current/libraries/task_delete.dylib": "2915ae1b9b198b30aa06852ecda822df721eabb4e99d8ab286557dfe403fa577",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved-continuation/old/captures/task_delete/inputs.json": "a6382e124fcd80173be78512a22c0747105158c9539ba015c828ba9e4ae8c4b3",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved-continuation/old/captures/task_delete/task_delete.native.jsonl.gz": "64dd8a0e6b113efa6caf31bbe2bf21152c6449a0e49ba517a2e945fd24fdbd06",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved-continuation/old/captures/task_delete/reserved-observation.json": "1d6eba40515b6844481cbb6c60d82a117cf382954d9ccc5e3d400925bf3954d0",
+    "/Users/burbujamc/Developer/sadx-macos/docs/refactor-inventory/packets/task-owner/RESERVED-CONTINUATION-FREEZE.json": "bb4b76ae852f7ee9580a24bf90027fdac1d223cdc300fd0f584911d35c867398",
+    "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved-continuation/RUN.json": "50934d282cc7364cd5114e070447dd9d7e01cf8259e70ade0034374a466f4da4"
+  },
+  "command": "reference/python/bin/python -I -S -B build/task-delete-case207-diagnostic.py",
+  "limits": [
+    "Original continuation remains EXIT 1. No new source exclusion or tolerance.",
+    "Compare full return, input and 8192 output bytes against retained immutable-old call; report source mismatch separately.",
+    "Exclusive output directory; no retries. This is a diagnostic, not whole-cohort acceptance."
+  ]
+}
