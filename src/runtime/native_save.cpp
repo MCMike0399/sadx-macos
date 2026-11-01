@@ -9,7 +9,7 @@ void Session::capture_live_save() {
         bootstrap_.sequence_variables, bootstrap_.cutscene_flags,
         bootstrap_.section_work.data() + 12, bootstrap_.sequences, bootstrap_.completed_stages,
         missions_, rumble_enabled_, market_rings_};
-    save::capture_live_data(save_, state);
+    save::capture_live_data(saves_.current, state);
 }
 void Session::write_live_save() {
     if (!save_writer_)
@@ -17,7 +17,7 @@ void Session::write_live_save() {
     save::WriteState state{saving_disabled_, save_retry_, save_ok_, save_count_, flow_.save_phase,
         flow_.save_ready, save_exec_, flow_.alert_flag, file_delete_flag_, new_file_requested_,
         bootstrap_.card_operation, bootstrap_.menu.selected_file, bootstrap_.card_complete,
-        save_name_, list_data_, save_};
+        save_name_, list_data_, saves_.current};
     save::SaveNameCalls names{
         [this](const char *pointer) {
             if (pointer != selected_save_name_.get())

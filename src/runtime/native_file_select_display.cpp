@@ -154,7 +154,7 @@ void TitleScene::draw_file_select(title_menu::FileSelectWork &work) {
     const auto &viewport = display_.viewport();
     file_select_display::View view{
         frame.horizontal_scale, frame.vertical_scale, frame.display_disabled,
-        viewport.width, viewport.height, session_.save_, session_.bootstrap_.sequence_variables,
+        viewport.width, viewport.height, session_.saves_.current, session_.bootstrap_.sequence_variables,
         session_.bootstrap_.menu.flags[0], session_.flow_.tutorial_variant,
         session_.displayed_save_index_, session_.first_visible_file_,
         session_.bootstrap_.card_operation, session_.selected_card_index_,

@@ -352,7 +352,7 @@ void TitleScene::load_mode_textures(title_menu::MenuMode mode) {
 }
 void TitleScene::load_japanese_title_textures() { session_.load_japanese_title_textures(); }
 void TitleScene::prepare_menu_voice() {
-    menu_dialog::restore_saved_character_cursor(session_.save_.last_character,
+    menu_dialog::restore_saved_character_cursor(session_.saves_.current.last_character,
                                                 session_.bootstrap_.menu.flags[2]);
 }
 void TitleScene::set_title_menu_previous() {
@@ -450,13 +450,13 @@ void TitleScene::initialize_file_select(title_menu::FileSelectWork &work) {
 std::uint8_t TitleScene::count_save_files() {
     if (!session_.save_files_)
         throw flow::UnrecoveredGameFlowCall("native_save_file_provider");
-    return file_select::count_save_files(session_.list_data_, session_.save_, *session_.save_files_);
+    return file_select::count_save_files(session_.list_data_, session_.saves_.current, *session_.save_files_);
 }
 void TitleScene::load_selected_save() {
     if (!session_.save_files_)
         throw flow::UnrecoveredGameFlowCall("native_save_file_provider");
     file_select::LoadState state{session_.saving_disabled_, session_.bootstrap_.card_state,
-        session_.bootstrap_.save_name, session_.list_data_, session_.save_, session_.rings_};
+        session_.bootstrap_.save_name, session_.list_data_, session_.saves_.current, session_.rings_};
     file_select::load_selected_save(state, *session_.save_files_);
 }
 void TitleScene::load_texture(texture_lifetime::List &list) {
@@ -491,7 +491,7 @@ void TitleScene::update_controls(title_menu::FileSelectWork &work) {
 void TitleScene::update_confirmation(title_menu::FileSelectWork &work,
                                       file_select::ControlState &state) {
     menu_dialog::ConfirmationState confirmation{state, session_.file_selection_backup_,
-        session_.file_select_fade_in_marker_, session_.save_.last_character,
+        session_.file_select_fade_in_marker_, session_.saves_.current.last_character,
         session_.bootstrap_.menu.flags[2], session_.list_data_, session_.save_name_.value};
     menu_dialog::confirm_selection(work, confirmation, *this);
 }
@@ -502,7 +502,7 @@ void TitleScene::request_dialog(std::int32_t index) {
                           {state_.dialog_task}, *this);
 }
 void TitleScene::prepare_new_save() {
-    save::prepare_new(session_.bootstrap_, session_.save_, session_.rings_);
+    save::prepare_new(session_.bootstrap_, session_.saves_.current, session_.rings_);
 }
 void TitleScene::request_save() {
     save::request_write(session_.saving_disabled_, session_.flow_.save_ready,

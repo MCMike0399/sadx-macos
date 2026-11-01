@@ -32,6 +32,7 @@
 #include "game/character_completion.hpp"
 #include "runtime/message_font_assets.hpp"
 #include "game/save_creation.hpp"
+#include "game/save_profiles.hpp"
 #include "game/save_write.hpp"
 #include "game/save_frame.hpp"
 #include "game/sound_effects.hpp"
@@ -63,7 +64,7 @@ class Session final : private flow::NativeServices {
     }
     const flow::GameFlowState &flow_state() const { return flow_; }
     const bootstrap::State &game_state() const { return bootstrap_; }
-    const save::Data &save_data() const { return save_; }
+    const save::Data &save_data() const { return saves_.current; }
     // NOTSA: read-only journey evidence from the canonical scheduler/writer fields.
     struct SaveProgress {
         std::int32_t phase;
@@ -224,8 +225,7 @@ class Session final : private flow::NativeServices {
     std::int16_t rings_ = 0, stage_ = 0;
     std::uint16_t game_mode_ = 0;
     bootstrap::State bootstrap_;
-    save::Data save_;
-    save::Data save_backup_;
+    save::Profiles saves_;
     std::shared_ptr<const character_pack::CharacterPack> character_pack_;
     bootstrap::SonicActions actions_;
     character_pack::SceneState character_scene_;

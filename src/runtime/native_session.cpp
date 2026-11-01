@@ -27,7 +27,7 @@ Session::Session(LogoOutput &output, std::shared_ptr<const character_pack::Chara
       character_scene_(*character_pack_),
     services_{[this](std::uint16_t character) { unload_character_textures(character); },
                 std::move(stop)}, timing_(mode),
-      logo_(output, timing_, renderer_, save_, rings_, frame, fp), texture_assets_(textures) {
+      logo_(output, timing_, renderer_, saves_.current, rings_, frame, fp), texture_assets_(textures) {
     for (std::size_t character = 0; character < texture_assets_.size(); ++character) {
         const auto &declarations = texture_assets_[character];
         if (declarations.empty())
@@ -58,7 +58,7 @@ void Session::update_sounds() {
     sound_effects::update_sound_server(state, *sound_server_calls_);
 }
 void Session::initialize_game() {
-    bootstrap::start(bootstrap_, save_, actions_, stage_, services_);
+    bootstrap::start(bootstrap_, saves_.current, actions_, stage_, services_);
 }
 void Session::initialize_demo_state() {
     bootstrap::initialize_advertise(bootstrap_.menu, flow_.tutorial_variant);
@@ -84,11 +84,11 @@ void Session::increment_frame_counter() {
     global_timer_ += static_cast<std::uint32_t>(timing_.logic_increment);
 }
 std::uint32_t Session::initialize_level_game() {
-    return bootstrap::initialize_game(bootstrap_, save_, stage_, services_);
+    return bootstrap::initialize_game(bootstrap_, saves_.current, stage_, services_);
 }
 void Session::setup_character(std::uint32_t character) {
     bootstrap::setup_character(static_cast<std::uint16_t>(character), bootstrap_,
-                                save_, actions_, services_);
+                                saves_.current, actions_, services_);
 }
 void Session::reset_player_work() { bootstrap::reset_rings(bootstrap_); }
 std::int32_t Session::run_movie(std::uint32_t movie_id) {
@@ -179,7 +179,7 @@ void Session::load_save() {
         global_timer_, bootstrap_.character, bootstrap_.lives, soft_reset_.metal_sonic, saved_stage_,
         bootstrap_.sequence_variables, bootstrap_.cutscene_flags, bootstrap_.section_work.data() + 12,
         bootstrap_.sequences, bootstrap_.completed_stages, missions_, rumble_enabled_, market_rings_};
-    cleanup::load_save(save_, state);
+    cleanup::load_save(saves_.current, state);
 }
 void Session::set_stage_number(std::uint8_t stage, std::uint8_t act) {
     cleanup::StageState state{stage_, act_, previous_stage_, previous_act_};
@@ -190,7 +190,7 @@ void Session::prepare_title_initialization() {
     cleanup::TitleState state{
         logo_state.demo_mode, logo_state.demo_event, logo_state.demo_reset, demo_enabled_,
         demo_paused_, auxiliary_, sequence_running_, hide_hud_, flow_.pause_state,
-        bootstrap_.story_event_mode, save_, save_backup_};
+        bootstrap_.story_event_mode, saves_.current, saves_.menu_backup};
     cleanup::TitleServices services{
         [this] { logo_.initialize_heap(); },
         [this] { logo_.initialize_tasks(); },

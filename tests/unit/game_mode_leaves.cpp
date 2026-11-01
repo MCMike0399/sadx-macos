@@ -10,7 +10,7 @@ void require(bool ok,const char* why){if(!ok)throw std::runtime_error(why);}
 struct Fixture {
     GameModeState mode;GameLogicTimingState timing;std::optional<std::int32_t> cutscene=5;std::optional<TaskHandle> event;CrtRandState rng;std::optional<std::uint16_t> game_mode,stage=0;
     GameModeLeafState s{mode,timing,cutscene,event,rng,game_mode,stage};
-    Fixture(){s.character_at_3b22dc0=0;s.byte_at_3b0ef34=1;for(auto& b:s.block_at_3b2b5f9.bytes)b=2;for(auto& b:s.block_at_90ed54.bytes)b=0;for(auto& b:s.block_at_3b290c4.bytes)b=1;
+    Fixture(){s.character_at_3b22dc0=0;s.byte_at_3b0ef34=1;s.import_save_options(2);for(std::size_t slot=0;slot<6;++slot)s.import_saved_life_count(slot,2);for(auto& b:s.block_at_90ed54.bytes)b=0;for(auto& b:s.block_at_3b290c4.bytes)b=1;
         for(auto& b:s.block_at_3b18250.bytes)b=0x11;for(auto& b:s.block_at_3c4ae08.bytes)b=0x22;}
 };
 GameLogicOwnerResult ok(const GameModeLeafCall&){return {GameLogicOwnerState::completed,0,{}};}

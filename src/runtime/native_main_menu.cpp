@@ -20,7 +20,7 @@ struct TitleScene::MainMenuServices final : main_menu::UpdateCalls,
     Session &session() { return scene.session_; }
     menu_eligibility::Progress progress() {
         auto &state = session();
-        return {state.save_, state.bootstrap_.sequence_variables, state.bootstrap_.menu.flags[0],
+        return {state.saves_.current, state.bootstrap_.sequence_variables, state.bootstrap_.menu.flags[0],
                 state.flow_.tutorial_variant};
     }
     menu_eligibility::Completion completion() {
@@ -64,11 +64,11 @@ struct TitleScene::MainMenuServices final : main_menu::UpdateCalls,
         return work;
     }
     std::int8_t text_language() override {
-        return menu_eligibility::text_language(session().save_, session().text_language_);
+        return menu_eligibility::text_language(session().saves_.current, session().text_language_);
     }
     std::int8_t voice_language() override {
         return static_cast<std::int8_t>(
-            menu_eligibility::voice_language(session().save_, session().text_language_));
+            menu_eligibility::voice_language(session().saves_.current, session().text_language_));
     }
     void load_mode_textures(main_menu::Mode mode) override { scene.load_mode_textures(mode); }
     void request_menu_music(std::int32_t cue) override { scene.request_menu_music(cue); }
@@ -82,8 +82,8 @@ struct TitleScene::MainMenuServices final : main_menu::UpdateCalls,
                                         state.flow_.tutorial_variant,
                                         state.bootstrap_.menu.flags[1],
                                         state.quit_,
-                                        state.save_,
-                                        state.save_backup_,
+                                        state.saves_.current,
+                                        state.saves_.menu_backup,
                                         *current_sequence,
                                         assets().variant_mapping};
         main_menu::update_controls(work, control, *this);

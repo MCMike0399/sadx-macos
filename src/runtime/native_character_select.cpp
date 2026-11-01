@@ -21,7 +21,7 @@ struct TitleScene::CharacterMenuServices final : character_select_menu::Calls {
         return *session().character_selection_assets_;
     }
     menu_eligibility::Progress progress() {
-        return {session().save_, session().bootstrap_.sequence_variables,
+        return {session().saves_.current, session().bootstrap_.sequence_variables,
                 session().bootstrap_.menu.flags[0], session().flow_.tutorial_variant};
     }
     character_select_menu::Availability availability() {

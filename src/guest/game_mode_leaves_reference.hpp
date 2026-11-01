@@ -5,6 +5,7 @@
 #include "engine/game_logic.hpp"
 #include "guest/game_mode_reference.hpp"
 #include "game/model_dlls.hpp"
+#include "game/save_profiles.hpp"
 #include "cpu/x87_math.hpp"
 #include "cpu/source_bytes.hpp"
 #include "engine/task.hpp"
@@ -49,24 +50,36 @@ struct GameModeLeafState {
     SourceBytes<0x3c4ae08,0x3638> block_at_3c4ae08;  // 46b230 (414470's tail)
     SourceBytes<0x3b290c4,8> block_at_3b290c4;       // 420e90 per-character counts
     SourceBytes<0x90ed54,0x20> block_at_90ed54;      // 420e90 per-character release lists
-    SourceBytes<0x3b2b5f9,7> block_at_3b2b5f9;       // 413c00 flag byte, then 414470's per-character bytes
-    // NOTSA: reference import/export seam for options and the six source life slots.
-    // Availability remains a reference fact. The raw owner stays until probe rebinding.
+  private:
+    // Reference fact availability is separate from the shared typed value owner.
+    // Only the seven formerly supplied source bytes are exposed by this adapter.
+    save::Profiles save_profiles_;
+    bool save_options_known_ = false;
+    std::array<bool, 6> saved_lives_known_{};
+
+  public:
+    // NOTSA: reference import/export of live typed options and the six supplied life slots.
     std::optional<std::uint8_t> save_options() const {
-        return block_at_3b2b5f9.bytes[0];
+        if (!save_options_known_)
+            return std::nullopt;
+        return save_profiles_.current.options;
     }
     void import_save_options(std::optional<std::uint8_t> value) {
-        block_at_3b2b5f9.bytes[0] = value;
+        save_options_known_ = value.has_value();
+        if (value)
+            save_profiles_.current.options = *value;
     }
     std::optional<std::uint8_t> saved_life_count(std::size_t slot) const {
-        if (slot >= 6)
+        if (slot >= saved_lives_known_.size() || !saved_lives_known_[slot])
             return std::nullopt;
-        return block_at_3b2b5f9.bytes[slot + 1];
+        return save_profiles_.current.lives[slot];
     }
     void import_saved_life_count(std::size_t slot, std::optional<std::uint8_t> value) {
-        if (slot >= 6)
+        if (slot >= saved_lives_known_.size())
             throw std::out_of_range("reference save life slot");
-        block_at_3b2b5f9.bytes[slot + 1] = value;
+        saved_lives_known_[slot] = value.has_value();
+        if (value)
+            save_profiles_.current.lives[slot] = *value;
     }
     // 413c00 / 783260
     std::optional<std::uint16_t> half_at_3b22e1c,half_at_3b18db8;std::optional<std::uint32_t> word_at_3b22e20,callback_at_3d08420;
