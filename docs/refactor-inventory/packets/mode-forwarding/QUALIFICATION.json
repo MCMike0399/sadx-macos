@@ -1,0 +1,58 @@
+{
+  "base": "353d528bbb1a50e8cb0e4cdeaf7657dc9ad8607d",
+  "source_behavior_changed": false,
+  "baseline_commit": "d860512",
+  "files": {
+    "Makefile": "a637caab9ab98722bf913cb025f6acaf2ec8ce51ada2c1af25ee4f6672e41044",
+    "tests/unit/manifest.tsv": "c979a36a318c71f030686ad805dc8649fa5414e7e85c66ce1125356b4de61772",
+    "tests/unit/game_mode_forwarding.cpp": "e97aea5ea68cfb5bc29b0b4cc81c416b5123eab547770b015638ea1a99e233b5",
+    "tests/unit/game_mode_diagnostics.cpp": "603922c6bc3e688960f0cdce648ecbeed8cda82aee98252d3356207a807a00d4",
+    "tests/probes/native_game_mode_probe.cpp": "1d1f8a6e22aefb24f5eb657cc167cd17b6de4897b0f49ff6f232433d89caa4df",
+    "tools/oracles/check_game_mode_diagnostics.py": "c950fb11341e324c1003fff04f460c9e6bf7a63c80dab71ba4afa6aac2f2a3ed",
+    "tools/oracles/check_game_mode_module_request.py": "d770223638b44f162de33a09156fcdf7309dac42d8e27def7a7699cf5c5afbea",
+    "tools/oracles/mutate_game_mode_contracts.py": "c896d9bd88a6a349cf0d3589efacb16558e4fd0c9e58183836f93e6685b0a8ce",
+    "reference/oracle-reports/game_mode.json": "36f8a70f6d0ecef3a5bd2382df8ca641bc2b8c33ba3a291ac6273a172e954bae"
+  },
+  "native_forwarders": 27,
+  "native_scenarios": 9,
+  "callback_failure_prefixes": 57,
+  "reference_diagnostic_scenarios": 26,
+  "compiled_faults_caught": 10,
+  "old_full_abi_records_exact": 24000,
+  "original_paths": 252,
+  "original_mismatches": 0,
+  "current_diagnostic_stream": {
+    "records": 24000,
+    "original_abi_equal": true,
+    "all_diagnostic_payloads_match_existing_fixture_contract": true,
+    "input_sha256": "05c8ac3db56f68dcd6c7cb7334699f164bf2803b602a6694ec4dd7077f6d2ea0",
+    "old_stream_sha256": "7c28206234975f1c75e75e7737c5b6313e2796619b74a75bb4549feb15cb4f71",
+    "diagnostic_stream_sha256": "cc63938b3f1f9c3aa1afdb6dc7e0ec058553d30a3171de16dcaf5a5cfa370b69",
+    "diagnostic_stream_record_bytes": 1248,
+    "library_sha256": "7b7dc32bb53950f7c9a5ceb4391efc872f796bbb14634a727dd93827db4e9862",
+    "limits": [
+      "Pending availability/payload and nested receipt boundary are adapter contracts.",
+      "Only the unchanged original oracle establishes original instruction equivalence.",
+      "Missing owner/return and other missing facts are separately covered by the direct diagnostic unit."
+    ]
+  },
+  "source_module_request_cases": 25,
+  "logs": {
+    "registered-build.log": "85b0856467d0478a694c36de6fdf44177fc2a9f77a8cbe36cfc22fd1971d373d",
+    "registered-native.log": "7b25b8d820110ff34c2750edacabbf3e0c89ef438e18f87db6fbcfc80c50734b",
+    "registered-reference.log": "7dee0a7aacc7010da6aa13802ca4b6be80d099998c733047e6cefa72a9b69006",
+    "current-original.log": "ce83f4c291b94c2e27199e67748c187f009779633b0b87ee2ecb4cd164944005",
+    "current-capture.log": "4c8b1739d4623dda5265819e8a19914aaabe0c704b9864b72a5b8d326a0e12fd"
+  },
+  "development_failures": [
+    "Initial diagnostic unit used nonexistent enum unported; inspection corrected it to actual unavailable before successful compile/run. No source or old judge expectation changed.",
+    "Initial lost-movie fault left movie unused and failed Werror; it is not a valid semantic mutant. Corrected fault uses movie &0U and is caught.",
+    "First bounded byte extraction requested19 bytes, stopping before XOR/RET; corrected complete21-byte body is explicitly checked. No output receipt was produced by the rejected attempt.",
+    "Final mutation tool snapshots unit bytes once and compiles its copies, so later test edits cannot mix qualification identities. Initial and corrected attempts remain retained."
+  ],
+  "limits": [
+    "Finite native service forwarding and full reference tagged diagnostics only; no downstream menu/audio/texture/gameplay implementations certified by test services.",
+    "Old original ABI, inputs and comparisons remain unchanged. Appended companion words are independently characterized adapter receipts, not new original-machine outputs.",
+    "No Source rewrite, fresh holdout, full gate or whole game-mode/Session/campaign qualification. Root independent review, canonical integration, manifest union and product/journey binding remain pending."
+  ]
+}

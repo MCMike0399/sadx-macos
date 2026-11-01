@@ -1,0 +1,263 @@
+{
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "entry": "0x4221e0",
+  "body_hex": "8b4424045068c0de7d00e891d40f0083c40833c0c3",
+  "body_sha256": "f9c3a61ebc7bc8f77c7804fec4fdf357b2f58602c3138e49dda0c67d58186fa4",
+  "instructions": [
+    {
+      "address": 4334048,
+      "bytes": "8b442404",
+      "mnemonic": "mov",
+      "operands": "eax, dword ptr [esp + 4]"
+    },
+    {
+      "address": 4334052,
+      "bytes": "50",
+      "mnemonic": "push",
+      "operands": "eax"
+    },
+    {
+      "address": 4334053,
+      "bytes": "68c0de7d00",
+      "mnemonic": "push",
+      "operands": "0x7ddec0"
+    },
+    {
+      "address": 4334058,
+      "bytes": "e891d40f00",
+      "mnemonic": "call",
+      "operands": "0x51f680"
+    },
+    {
+      "address": 4334063,
+      "bytes": "83c408",
+      "mnemonic": "add",
+      "operands": "esp, 8"
+    },
+    {
+      "address": 4334066,
+      "bytes": "33c0",
+      "mnemonic": "xor",
+      "operands": "eax, eax"
+    },
+    {
+      "address": 4334068,
+      "bytes": "c3",
+      "mnemonic": "ret",
+      "operands": ""
+    }
+  ],
+  "printer": {
+    "entry": "0x51f680",
+    "body_hex": "c3",
+    "instruction": "ret"
+  },
+  "cases": [
+    {
+      "arguments": [
+        0,
+        0
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        0,
+        1
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        0,
+        2
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        0,
+        2147483648
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        0,
+        4294967295
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        1,
+        0
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        1,
+        1
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        1,
+        2
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        1,
+        2147483648
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        1,
+        4294967295
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        2,
+        0
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        2,
+        1
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        2,
+        2
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        2,
+        2147483648
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        2,
+        4294967295
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        2147483648,
+        0
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        2147483648,
+        1
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        2147483648,
+        2
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        2147483648,
+        2147483648
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        2147483648,
+        4294967295
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        4294967295,
+        0
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        4294967295,
+        1
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        4294967295,
+        2
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        4294967295,
+        2147483648
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    },
+    {
+      "arguments": [
+        4294967295,
+        4294967295
+      ],
+      "eax": 0,
+      "stack_delta": 4
+    }
+  ],
+  "limits": [
+    "Direct original instruction evidence. The printer returns before dereferencing its arguments.",
+    "No resource/module load occurs on this complete bounded path; the game-mode caller ignores EAX.",
+    "This is not filesystem, general diagnostics, downstream service or new gameplay qualification.",
+    "Pinned profile patch census is separately bound by the packet; no live mod execution here."
+  ]
+}

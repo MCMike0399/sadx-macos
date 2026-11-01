@@ -1,0 +1,50 @@
+{
+  "main_parent": "a1daf89",
+  "save_parent": "159f73c4ed4fbd667412cc15fe509ea69c781950",
+  "mode_parent": "0806b909bc9be7d84367ca3c3c89191aadcf47cd",
+  "base": "353d528",
+  "parent_inputs": {
+    "main": 955,
+    "save": 1261,
+    "mode": 958
+  },
+  "combined_inputs": 1266,
+  "exact_parent_path_union_plus_qualified_mode_unit_bodies": true,
+  "removed_parent_paths": [],
+  "changed_parent_hashes": [
+    "Makefile",
+    "reference/oracle-reports/game_mode.json",
+    "tests/probes/native_game_mode_probe.cpp",
+    "tests/python/test_judge.py",
+    "tests/unit/manifest.tsv",
+    "tools/gate/check_judge.py"
+  ],
+  "append_only_registration": {
+    "Makefile": {
+      "main_save_sha256": "6d512f01eda5e0adb970d1e7421d38d6fa295e08a24b553dd4641b4a6f377e50",
+      "mode_sha256": "a637caab9ab98722bf913cb025f6acaf2ec8ce51ada2c1af25ee4f6672e41044",
+      "combined_sha256": "4e1a7e5d5e9508e6cbf599c61a52f356c8348ace61d71745351b210f5ec2ae62",
+      "mode_appended_bytes": 858
+    },
+    "tests/unit/manifest.tsv": {
+      "main_save_sha256": "20ce0e6f558b4abf8dd452464b069036633a142a9ba47e7dbd651a655c887e9d",
+      "mode_sha256": "c979a36a318c71f030686ad805dc8649fa5414e7e85c66ce1125356b4de61772",
+      "combined_sha256": "4423cdc597453f720afd3ce550253d484f37ccd2164b57722af21a8a4aa1723e",
+      "mode_appended_bytes": 43
+    }
+  },
+  "qualified_new_unit_bodies": {
+    "tests/unit/game_mode_forwarding.cpp": "e97aea5ea68cfb5bc29b0b4cc81c416b5123eab547770b015638ea1a99e233b5",
+    "tests/unit/game_mode_diagnostics.cpp": "603922c6bc3e688960f0cdce648ecbeed8cda82aee98252d3356207a807a00d4"
+  },
+  "source_diff": "",
+  "all_current_hashes_match_explicit_reviewed_selection": true,
+  "acceptance_reviews": [
+    "f9c5f09df1dfe46ef537c089d348c434534d581f",
+    "905b912"
+  ],
+  "limits": [
+    "Exact additive judge integration only; no source migration, final holdout, product closure or full integration gate claimed.",
+    "Global recognition expansion is the independently accepted immutable-HEAD v2 migration, not source regression. Every inherited ratchet/corpus and original expectation remains intact."
+  ]
+}
