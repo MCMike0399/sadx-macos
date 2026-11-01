@@ -54,5 +54,10 @@
     "Synthetic reference allocation, not Windows allocator/address parity; no host OOM/thread qualification.",
     "Default registered test checks complete frozen output digest; --capture emits raw observations.",
     "Original pre-edit baseline and later augmented immutable-source baseline are distinguished."
-  ]
+  ],
+  "unchanged_ninja_memory_consumer": {
+    "compile_exit": 0,
+    "run_exit": 0,
+    "scope": "Actual Ninja heap wrapper plus no-CD scan, source-only narrow link."
+  }
 }
