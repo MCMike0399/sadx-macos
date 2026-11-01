@@ -1,0 +1,13 @@
+{
+  "attempted_freeze": "642c7cd",
+  "exit": 1,
+  "receipt_written": false,
+  "cause": "The initial deletion-only git diff filtered out a rename. Strict baseline enumeration correctly refused omitted src/player/player_animation_decode.cpp before receipt write.",
+  "actual_removed_paths": [
+    "src/player/player_animation_decode.cpp",
+    "src/player/sonic_animation_operations.hpp"
+  ],
+  "log_sha256": "7614bcceb02238c651f3e4a16f4baff22bbedd8316348d67f7716c4d86194b99",
+  "prior_operation_edge_acceptance": "11dc121 remains valid for its exact edge body; it did not prove complete baseline-path coverage.",
+  "next": "Add a separate independently reviewed reference-infrastructure relocation edge, retain its prior open review/debt, then retry strict preparation. No Source or baseline exception."
+}

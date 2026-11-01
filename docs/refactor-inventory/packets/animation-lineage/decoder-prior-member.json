@@ -1,0 +1,16 @@
+{
+  "historical_path": "src/player/player_animation_decode.cpp",
+  "source_sha256": "27e1a4cc025b9291bbf4d40beb0f2ab960629017619a57c3961af3e3d04ff9f6",
+  "member": {
+    "module": "src/player/player_animation_decode",
+    "prior_disposition": "open_review",
+    "remaining_debt": [
+      "Not semantically reviewed; path, include and declaration indexing only.",
+      "PE-reference decoder readability, shared header placement and full importer contract review remain open. This reference-only path move is not a rewritten game algorithm or conformance closure."
+    ],
+    "observed_counts": {
+      "source_lines": 45,
+      "raw_hex_tokens": 6
+    }
+  }
+}
