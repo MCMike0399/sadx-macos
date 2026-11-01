@@ -1,0 +1,10 @@
+{
+  "status": "UNRUN; Root only after independent source review",
+  "default_cases": "developmental, never holdout",
+  "native_io": {"arguments": ["--root-cohort", "20261221"], "comparison": "complete immutable old-source and migrated-source capture byte equality"},
+  "native_frame": {"arguments": ["--root-cohort", "20261222"], "comparison": "complete old/current capture and actual reference routing assertions"},
+  "original_extra_seed": 20261223,
+  "original_extra_cases": 1600,
+  "original_slugs_supporting_seed": ["save_file_list", "load_selected_save", "save_write", "save_frame", "save_creation", "save_data", "save_completion", "file_select_controls"],
+  "limits": "Run unchanged full defaults separately first. save_list_free/save_prepare/save_request/game_loop have fixed cohorts; do not relabel their default replay as holdout. Full original seed cohorts preserve all systematic cases, tolerances and exclusions. Fresh native cohort inputs must be evaluated against the immutable base source as well as migrated code. No final cohort executed in this packet."
+}

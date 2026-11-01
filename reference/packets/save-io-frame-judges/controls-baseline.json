@@ -1,0 +1,159 @@
+{
+  "cases": 2438,
+  "partials": 938,
+  "identity_equal_to": "reference/packets/save-completion/inherited-control-partials.json",
+  "inherited_identity_sha256": "ac5e4139413fb38777f4e1f0997164f0dec5c1a711c26f7fcd250cb1dfd906ca",
+  "receipt": {
+    "exit": 1,
+    "native_calls": 2438,
+    "source_returns": 2438,
+    "stream": "build/save-io-judges/controls-original/verify_original_file_select_controls.abi.pkl.gz",
+    "stream_sha256": "435a7fb69480d972df0d112bd07464d86ee052ff1f303b74c2b4a41c9a344cc1",
+    "stream_bytes": 283710,
+    "library_sha256": "1497631e226e78444eb15c1c847b7bffe9d2d041b415f1d6e6a79acddbb6ec39",
+    "evaluator_sha256": "fb888fe3e2897a7203c6ba2dc65e553c63e727f24e670ca65981b64a94b37a20",
+    "report": {
+      "passed": false,
+      "values_match": true,
+      "cases": 2438,
+      "mismatches": 0,
+      "fp_flag_partials": 938,
+      "first_mismatches": [],
+      "first_fp_partials": [
+        {
+          "case": 150,
+          "input": [
+            1,
+            1065353216,
+            0,
+            0,
+            0,
+            0,
+            0,
+            123,
+            0,
+            0,
+            1,
+            0,
+            0,
+            1,
+            7,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            3
+          ],
+          "diff": [
+            [
+              25,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 151,
+          "input": [
+            1,
+            1065353216,
+            0,
+            0,
+            0,
+            0,
+            0,
+            123,
+            0,
+            0,
+            1,
+            0,
+            1,
+            1,
+            7,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            3
+          ],
+          "diff": [
+            [
+              25,
+              0,
+              32
+            ]
+          ]
+        },
+        {
+          "case": 152,
+          "input": [
+            1,
+            1065353216,
+            0,
+            0,
+            0,
+            0,
+            0,
+            123,
+            0,
+            0,
+            1,
+            0,
+            2,
+            1,
+            7,
+            0,
+            0,
+            0,
+            0,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            3
+          ],
+          "diff": [
+            [
+              25,
+              0,
+              32
+            ]
+          ]
+        }
+      ],
+      "seed": 503600,
+      "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+      "native_library_sha256": "1497631e226e78444eb15c1c847b7bffe9d2d041b415f1d6e6a79acddbb6ec39",
+      "native_sources": {
+        "src/game/file_select_controls.cpp": "e3d12bbda98c073fc6dce1133a830f68ecc5f03a6e49a2a376f9cb35e803dd04",
+        "src/game/file_select.hpp": "c29d9d01a1506957864e54d567ddd6a5911d1149bf883f676b3f0850cd0b5cb7",
+        "tests/probes/native_file_select_controls_probe.cpp": "5d2b362a18f0fc9d14cac524ceb3e84a4cd41cef5f94c4a4a717f7fdac7f03b1"
+      },
+      "source_ranges": {
+        "0x5035d0-0x503e48": "7a5304dca8f6bac32df8a8190f38da44b9b336aee69474ba05b4809ea909eeca",
+        "0x5067e0-0x5067e9": "64619e99382ee6b47f038089042aea68e4af0a048409078323b783bb43cd0748",
+        "0x5067f0-0x5067fb": "0705a8d5780a46bf6772571e9ce609b9415f165421699fdfc8fae1fcd73933f0",
+        "0x431960-0x4319c5": "ee4a49bc1dbffae81e1fb3ecba94bdd4a9c4d548339351f8ede6f9c6563a9fdd",
+        "0x4319d0-0x431ac7": "dfc7e3cdedc9c9006e931d104b4dc4bfb1ef756c062b090ffc03d2addfeae8fc",
+        "0x7883c0-0x7884f0": "02b231bcc0ff17942c2bd0b84671eb27b289297a8744802aae9d9dbcbdbefd64"
+      },
+      "limits": [
+        "Full startup0/select1/cancel9/wait10 bodies and invalid-stage guard; remaining dialog stages explicitly stop at their original switch entry after common animation. Original animation/cosine/interpolation/mask helpers execute; save/dialog/audio calls are ordered resource receipts. All float words are compared; software FPflag differences are reported separately."
+      ]
+    }
+  }
+}

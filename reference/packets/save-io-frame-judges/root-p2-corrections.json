@@ -1,0 +1,53 @@
+{
+  "review": "42946bc3856e51a5344e3bd8978eeb3463fc152c",
+  "candidate_before_fix": "defb94e0d7d19eff7dbbe0564ea7315a9c7a7054",
+  "source_changed": false,
+  "changes": [
+    "Reject packet-root, nested-directory and dangling directory symlinks before the regular Python filter; generated cache exclusion retained.",
+    "Require exactly39ordered writer IDs0..38 and complete return/failure+terminal99/scalar/save/allocation-shape payloads. Empty/truncated/duplicate/reordered/extra cohorts fail before original comparison.",
+    "Extract the pure capture parser so regression fixtures do not import or execute Unicorn/source observers.",
+    "Narrow read-prefix coverage language to eight sampled byte lengths."
+  ],
+  "writer_entry_rebind": {
+    "path": "reference/packets/save-io-frame-judges/writer_source_contract.py",
+    "old_sha256": "d7f1476270ea606f8c1e19a66d4847da1e1971c6c2a48986e4e390a6bc316f18",
+    "current_sha256": "4ccf545e32c0afbfa0572515c8415d8baaaeef3fdce4377d46407d2bfc629308",
+    "original_proposal_preserved": "reference/packets/save-io-frame-judges/proposed-manifest-delta-worker.json"
+  },
+  "new_regular_code": {
+    "reference/packets/save-io-frame-judges/writer_capture.py": "c02a5144ad79f82eeefa0260ea8dc579ff82dbe42996226d900ae41f7009eba9",
+    "tests/python/test_save_writer_capture.py": "76162ee4e60f7aaf2a7853a61c4d551568af065d4136457269814fcaf859cdab"
+  },
+  "tests": {
+    "old_guard_exit": 1,
+    "old_guard_failures": 2,
+    "new_guard_exit": 0,
+    "guard_tests": 16,
+    "old_parser_exit": 1,
+    "old_parser_failures": 14,
+    "new_parser_exit": 0,
+    "parser_tests": 3
+  },
+  "logs_sha256": {
+    "save-io-p2-guard-red.log": "2020f03c998221089069fb94c4edba37d53f03c60be44fa4671f1e5d359d304d",
+    "save-io-p2-guard-green.log": "9d82a248c063f2e1899f05d880e461eff8c4ca668e7ad37e2fea34511cb071b6",
+    "save-io-p2-writer-red.log": "93d2f2e8715f1b7cb6fde917140dc8915e05d82a933874de5bdbfb225a8a532c",
+    "save-io-p2-writer-green.log": "8933c9754840a7559b7a4f07d7593156f2d1de8c06d66f83845249427ff0b618"
+  },
+  "valid_projection_bytes_unchanged": 900956,
+  "valid_projection_sha256": "ff3d36db5d3cea2edb12de266530c1105e65bc284aad768a71d9cccfd7f06231",
+  "original_writer_replay": {
+    "cases": 39,
+    "mismatch_cases": [],
+    "full_outputs_sha256": "1e971376af060277d2c275f4058c73e0f0c08f578a8c3923956360b485566a3e",
+    "full_outputs_bytes": 1805891,
+    "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+    "limits": "Additional instruction-backed writer callback characterization, not an old judge edit.\n\nOriginal CRT functions remain receipts. Known scalar/data values and published\npointer identities are compared at service entry, after callback mutation, and\nat exit/stop. Allocator bytes before formatting remain UNKNOWN and excluded.\nNative exceptions correspond to stopping at that reached service, not a claim\nthat Windows CRT throws. Original filename allocation and pointer are distinct.\n"
+  },
+  "old_complete_source_rows_sha256": "1e971376af060277d2c275f4058c73e0f0c08f578a8c3923956360b485566a3e",
+  "known_and_unknown_policy": "No expected snapshot/value changed. Every valid snapshot and written byte remains compared. Retained allocation marker shape is required; unformatted allocation contents remain unknown to the original observer and are not newly compared.",
+  "limits": [
+    "Original worker receipts/void-return policy/9314definedABIrecords/938ControlsFPidentities/316artifacthashes unchanged.",
+    "No source migration, holdout, builds, mutation rerun or full integration gate in this correction. Fresh independent recheck remains required."
+  ]
+}

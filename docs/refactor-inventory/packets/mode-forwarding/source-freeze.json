@@ -1,0 +1,24 @@
+{
+  "base": "353d528bbb1a50e8cb0e4cdeaf7657dc9ad8607d",
+  "files": {
+    "src/game/game_mode.hpp": "44230c85f069ad96fc7360b6b16536e1da4001b6cf9d35574f3af772bbaf4075",
+    "src/game/game_mode_services.hpp": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36",
+    "src/game/game_mode.cpp": "8f830dabd7b2f3e594333799b47af001a6afebb7548ec2e95119b45c9dae5a43",
+    "src/game/game_mode_internal.hpp": "9a86c138e051465311d23780210976ce19a23c9f2f4d1abf96c784ce22774d7d",
+    "src/game/game_mode_native.cpp": "cdf3a649e194591c4ed3ec324cb6ae3ecac6c25c3ea83ec7c5a3e69a37e44dd5",
+    "src/guest/game_mode_reference.hpp": "a5e0f644ad592b50ce6d32eddc2d100997fe137e4145c379de0866adb14280f9",
+    "src/guest/game_mode_reference.cpp": "db11678fd7fbdb2d0046a543c0954f1d6f45d98202e5f6a84710e43040d90029",
+    "tests/unit/native_game_mode.cpp": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be",
+    "tests/probes/native_game_mode_probe.cpp": "d1e1c146a4cc6b46819cac257b2dcba737cec41915f26e84887bc1252f0bb587",
+    "tools/oracles/verify_original_game_mode.py": "a8df08e0f9d0b995213f45f94652de08077bf56b3e056adc7001faaef0b4fd69",
+    "src/runtime/native_session.cpp": "5ac96e0bfdb8d8ec18d91f546e513286d722018066b601643fc0bb3f63920d4c",
+    "src/runtime/native_session.hpp": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086"
+  },
+  "scope": "Finite native service forwarding and callback/failure prefixes; full reference diagnostic tuple characterization. Source behavior remains unchanged.",
+  "limits": [
+    "No new game callees, actual native route or mode transition is recovered.",
+    "Original 48-input/256-output probe and 24000-case comparisons must remain exact.",
+    "Direct 4221e0 disabled-printer evidence remains unresolved until inspected; forwarding tests cannot prove it.",
+    "Private Session composition depends on current bounded closure/journey receipts; test services do not prove its downstream algorithms."
+  ]
+}

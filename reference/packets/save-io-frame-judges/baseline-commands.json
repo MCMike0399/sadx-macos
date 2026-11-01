@@ -1,0 +1,128 @@
+[
+  {
+    "slug": "save_file_list",
+    "cmd": [
+      "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+      "reference/packets/save-io-frame-judges/observe.py",
+      "tools/oracles/verify_original_save_file_list.py",
+      "build/save-io-judges/pinned/sonic.exe",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5acabf9a/build/save-io-judges/baseline.dylib",
+      "build/save-io-judges/original"
+    ],
+    "exit": 0
+  },
+  {
+    "slug": "save_list_free",
+    "cmd": [
+      "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+      "reference/packets/save-io-frame-judges/observe.py",
+      "tools/oracles/verify_original_save_list_free.py",
+      "build/save-io-judges/pinned/sonic.exe",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5acabf9a/build/save-io-judges/baseline.dylib",
+      "build/save-io-judges/original"
+    ],
+    "exit": 0
+  },
+  {
+    "slug": "load_selected_save",
+    "cmd": [
+      "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+      "reference/packets/save-io-frame-judges/observe.py",
+      "tools/oracles/verify_original_load_selected_save.py",
+      "build/save-io-judges/pinned/sonic.exe",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5acabf9a/build/save-io-judges/baseline.dylib",
+      "build/save-io-judges/original",
+      "--input-dll",
+      "build/save-io-judges/pinned/sadx-input-mod.dll"
+    ],
+    "exit": 0
+  },
+  {
+    "slug": "save_write",
+    "cmd": [
+      "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+      "reference/packets/save-io-frame-judges/observe.py",
+      "tools/oracles/verify_original_save_write.py",
+      "build/save-io-judges/pinned/sonic.exe",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5acabf9a/build/save-io-judges/baseline.dylib",
+      "build/save-io-judges/original"
+    ],
+    "exit": 0
+  },
+  {
+    "slug": "save_frame",
+    "cmd": [
+      "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+      "reference/packets/save-io-frame-judges/observe.py",
+      "tools/oracles/verify_original_save_frame.py",
+      "build/save-io-judges/pinned/sonic.exe",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5acabf9a/build/save-io-judges/baseline.dylib",
+      "build/save-io-judges/original"
+    ],
+    "exit": 0
+  },
+  {
+    "slug": "save_creation",
+    "cmd": [
+      "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+      "reference/packets/save-io-frame-judges/observe.py",
+      "tools/oracles/verify_original_save_creation.py",
+      "build/save-io-judges/pinned/sonic.exe",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5acabf9a/build/save-io-judges/baseline.dylib",
+      "build/save-io-judges/original"
+    ],
+    "exit": 0
+  },
+  {
+    "slug": "save_data",
+    "cmd": [
+      "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+      "reference/packets/save-io-frame-judges/observe.py",
+      "tools/oracles/verify_original_save_data.py",
+      "build/save-io-judges/pinned/sonic.exe",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5acabf9a/build/save-io-judges/baseline.dylib",
+      "build/save-io-judges/original",
+      "--input-dll",
+      "build/save-io-judges/pinned/sadx-input-mod.dll"
+    ],
+    "exit": 0
+  },
+  {
+    "slug": "save_prepare",
+    "cmd": [
+      "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+      "reference/packets/save-io-frame-judges/observe.py",
+      "tools/oracles/verify_original_save_prepare.py",
+      "build/save-io-judges/pinned/sonic.exe",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5acabf9a/build/save-io-judges/baseline.dylib",
+      "build/save-io-judges/original",
+      "--input-dll",
+      "build/save-io-judges/pinned/sadx-input-mod.dll"
+    ],
+    "exit": 0
+  },
+  {
+    "slug": "save_request",
+    "cmd": [
+      "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+      "reference/packets/save-io-frame-judges/observe.py",
+      "tools/oracles/verify_original_save_request.py",
+      "build/save-io-judges/pinned/sonic.exe",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5acabf9a/build/save-io-judges/baseline.dylib",
+      "build/save-io-judges/original"
+    ],
+    "exit": 0
+  },
+  {
+    "slug": "save_completion",
+    "cmd": [
+      "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+      "reference/packets/save-io-frame-judges/observe.py",
+      "tools/oracles/verify_original_save_completion.py",
+      "build/save-io-judges/pinned/sonic.exe",
+      "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5acabf9a/build/save-io-judges/baseline.dylib",
+      "build/save-io-judges/original"
+    ],
+    "exit": 0
+  }
+]
