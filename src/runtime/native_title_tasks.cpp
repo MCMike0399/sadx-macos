@@ -460,10 +460,10 @@ void TitleScene::load_selected_save() {
     file_select::load_selected_save(state, *session_.save_files_);
 }
 void TitleScene::load_texture(texture_lifetime::List &list) {
-    if (!session_.regular_texture_state_)
+    if (!session_.regular_resources_.state())
         throw flow::UnrecoveredGameFlowCall("native_font_texture_loader");
     auto services = session_.regular_texture_services();
-    regular_textures::load_individual(list, *session_.regular_texture_state_, services);
+    regular_textures::load_individual(list, *session_.regular_resources_.state(), services);
 }
 void TitleScene::load_font() {
     if (!session_.font_assets_)

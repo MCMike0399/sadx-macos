@@ -97,7 +97,7 @@ std::int32_t Session::run_movie(std::uint32_t movie_id) {
     return movie_->play(movie_id);
 }
 cleanup::TextureState Session::texture_state() {
-    return {common_textures_, regular_textures_, character_texture_bindings_,
+    return {regular_resources_.common(), regular_resources_.regular(), character_texture_bindings_,
             character_textures_loaded_};
 }
 cleanup::LevelState Session::level_state() {
@@ -257,39 +257,12 @@ void Session::load_level_sounds() {
     level_sounds::load(state, services);
 }
 void Session::attach_regular_textures(RegularTextureAssets assets) {
-    if (regular_texture_state_)
-        throw std::runtime_error("native regular texture owners already initialized");
-    regular_assets_ = std::move(assets);
-    regular_resource_lists_.resize(regular_assets_.lists.size());
-    for (std::size_t index = 0; index < regular_assets_.lists.size(); ++index)
-        regular_resource_lists_[index] = bind_texture_list(regular_assets_.lists[index]);
-    regular_groups_.resize(regular_assets_.groups.size());
-    const auto bind = [this](const RegularTextureBindingAsset &source) {
-        return regular_textures::Binding{
-            source.archive,
-            source.texture_list ? &regular_resource_lists_.at(*source.texture_list) : nullptr};
-    };
-    for (std::size_t index = 0; index < regular_groups_.size(); ++index) {
-        const auto &source = regular_assets_.groups[index];
-        if (source.empty())
-            throw std::runtime_error("regular texture group lacks its common descriptor");
-        auto &group = regular_groups_[index];
-        group.common = bind(source.front());
-        for (std::size_t entry = 1; entry < source.size(); ++entry)
-            group.regular.push_back(bind(source[entry]));
-    }
-    for (std::size_t index = 0; index < regular_catalog_.size(); ++index) {
-        const auto group = regular_assets_.entries[index];
-        regular_catalog_[index] = group ? &regular_groups_.at(*group) : nullptr;
-    }
-    regular_texture_state_ = std::make_unique<regular_textures::State>(
-        regular_textures::State{loop_.resync, text_language_, common_textures_, regular_textures_,
-                                regular_assets_.localizations, {}, {}});
+    regular_resources_.attach(std::move(assets), loop_.resync, text_language_);
     if (!display_)
         throw flow::UnrecoveredGameFlowCall("native_regular_texture_display");
     display_->output().bind_archive_loader([this](std::string_view name, sprite::TextureList &list) {
         auto services = regular_texture_services();
-        regular_textures::load_archive(name, &list, *regular_texture_state_, services);
+        regular_textures::load_archive(name, &list, *regular_resources_.state(), services);
     });
 }
 void Session::attach_font(FontAssets assets) {
@@ -317,15 +290,16 @@ regular_textures::Services Session::regular_texture_services() {
     };
 }
 void Session::load_regular_object_textures(std::uint32_t index) {
-    if (!regular_texture_state_)
+    if (!regular_resources_.state())
         throw flow::UnrecoveredGameFlowCall("native_regular_texture_declarations");
     auto services = regular_texture_services();
-    regular_textures::load_regular(index, regular_catalog_, *regular_texture_state_, services);
+    regular_textures::load_regular(index, regular_resources_.catalog(),
+                                   *regular_resources_.state(), services);
 }
 void Session::attach_menu_textures(const MenuTextureAssets &assets) {
-    if (menu_textures_.attached() || !regular_texture_state_)
+    if (menu_textures_.attached() || !regular_resources_.state())
         throw std::runtime_error("native menu textures require initialized regular resource owners");
-    menu_textures_.attach(assets, regular_resource_lists_);
+    menu_textures_.attach(assets, regular_resources_.lists());
 }
 const regular_textures::Binding &Session::menu_texture_binding(std::uint32_t index) const {
     return menu_textures_.binding(text_language_, index);
@@ -335,14 +309,14 @@ void Session::load_menu_texture(std::uint32_t index) {
     if (!binding.archive)
         throw flow::UnrecoveredGameFlowCall("native_menu_texture_archive_name");
     auto services = regular_texture_services();
-    regular_textures::load_archive(*binding.archive, binding.textures, *regular_texture_state_, services);
+    regular_textures::load_archive(*binding.archive, binding.textures, *regular_resources_.state(), services);
 }
 void Session::load_japanese_title_textures() {
     if (!menu_textures_.attached() || !menu_textures_.japanese().archive)
         throw flow::UnrecoveredGameFlowCall("native_japanese_title_texture_declaration");
     auto services = regular_texture_services();
     regular_textures::load_archive(*menu_textures_.japanese().archive, menu_textures_.japanese().textures,
-                                   *regular_texture_state_, services);
+                                   *regular_resources_.state(), services);
 }
 void Session::select_title_texture(title_menu::TitleTextureList selected) {
     const sprite::TextureList *list = nullptr;

@@ -1,0 +1,303 @@
+{
+  "source_binding": {
+    "frozen_body_exact": true,
+    "extracted_owner_body_exact": true,
+    "session_transport_suffix_exact": true,
+    "baseline_body_sha256": "1ab7837c40e2055f96a30f271738f213d5affc4b1eac2e8b31742a7e3badfa61"
+  },
+  "builds": [
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wmissing-field-initializers",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-Isrc",
+        "-Itests/fixtures",
+        "-DBASELINE_ONLY",
+        "tests/unit/native_regular_resources.cpp",
+        "src/game/regular_textures.cpp",
+        "src/game/game_cleanup.cpp",
+        "src/runtime/native_menu_texture_bindings.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/prior-test"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/prior-test"
+      ],
+      "exit": 0,
+      "stdout": "0:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, null null null\nnative_regular_texture_display\n1:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, L2/10/11/first/other L1/12/second G0/CON_REGULAR=1/ALIAS=0/<absent>=-1 G0/CON_REGULAR=1/ALIAS=0/<absent>=-1 G-1 S0/0/0/0\nnative regular texture owners already initialized\n0:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, null null null\ntexture declaration members have different counts\n0:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, L2/10/11/first/other L0 null null null\ncompleted\n1:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, L2/10/11/first/other L1/12/second G0/CON_REGULAR=1/ALIAS=0/<absent>=-1 G0/CON_REGULAR=1/ALIAS=0/<absent>=-1 G-1 S0/0/0/0\n0:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, null null null\nregular texture group lacks its common descriptor\n0:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, L2/10/11/first/other L1/12/second null null null\ncompleted\n1:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, L2/10/11/first/other L1/12/second G0/CON_REGULAR=1/ALIAS=0/<absent>=-1/CON_REGULAR=1/ALIAS=0/<absent>=-1 G0/CON_REGULAR=1/ALIAS=0/<absent>=-1/CON_REGULAR=1/ALIAS=0/<absent>=-1 G-1 S0/0/0/0\n0:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, null null null\nvector\n0:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, L2/10/11/first/other L1/12/second null null null\ncompleted\n1:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, L2/10/11/first/other L1/12/second G0/CON_REGULAR=1/CON_REGULAR=1/ALIAS=0/<absent>=-1 G0/CON_REGULAR=1/CON_REGULAR=1/ALIAS=0/<absent>=-1 G-1 S0/0/0/0\n0:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, null null null\nvector\n0:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, L2/10/11/first/other L1/12/second G0/CON_REGULAR=1/ALIAS=0/<absent>=-1 null null\ncompleted\n1:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, L2/10/11/first/other L1/12/second G0/CON_REGULAR=1/ALIAS=0/<absent>=-1/CON_REGULAR=1/ALIAS=0/<absent>=-1 G0/CON_REGULAR=1/ALIAS=0/<absent>=-1/CON_REGULAR=1/ALIAS=0/<absent>=-1 G-1 S0/0/0/0\n0:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, null null null\nbinding failed\n1:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, L2/10/11/first/other L1/12/second G0/CON_REGULAR=1/ALIAS=0/<absent>=-1 G0/CON_REGULAR=1/ALIAS=0/<absent>=-1 G-1 S0/0/0/0\nnative regular texture owners already initialized\n0:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, null null null\nvector\n0:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, L2/10/11/first/other L1/12/second null null null\ncompleted\n1:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, L2/10/11/first/other L1/12/second G0/CON_REGULAR=1/ALIAS=0/<absent>=-1 G0/CON_REGULAR=1/ALIAS=0/<absent>=-1 G-1 S0/0/0/0\n0:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, null null null\n1:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, L2/10/11/first/other L1/12/second G0/CON_REGULAR=1/ALIAS=0/<absent>=-1 G0/CON_REGULAR=1/ALIAS=0/<absent>=-1 G-1 S7/4/123/0\ncompleted\n1:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, L2/10/11/first/other L1/12/second G0/CON_REGULAR=1/ALIAS=0/<absent>=-1 G0/CON_REGULAR=1/ALIAS=0/<absent>=-1 G-1 S7/4/123/0\nnative regular texture owners already initialized\ncallback:1\nindividual-localized\nCOMMON:1\nCON_REGULAR_E:1\nALIAS:1\n1:0:1,0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, L2/123/123/first/other L1/123/second G0/CON_REGULAR=1/ALIAS=0/<absent>=-1 G0/CON_REGULAR=1/ALIAS=0/<absent>=-1 G-1 S1/1/123/0\n0:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, null null null\n1:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, L2/10/11/first/other L1/12/second G0/CON_REGULAR=1/ALIAS=0/<absent>=-1 G0/CON_REGULAR=1/ALIAS=0/<absent>=-1 G-1 S7/4/123/0\ncompleted\n1:-1:-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, L2/10/11/first/other L1/12/second G0/CON_REGULAR=1/ALIAS=0/<absent>=-1 G0/CON_REGULAR=1/ALIAS=0/<absent>=-1 G-1 S7/4/123/0\nnative regular texture owners already initialized\ncallback:1\nindividual-localized\nCOMMON:1\nCON_REGULAR_E:1\nALIAS:1\n1:0:1,0,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1, L2/123/123/first/other L1/123/second G0/CON_REGULAR=1/ALIAS=0/<absent>=-1 G0/CON_REGULAR=1/ALIAS=0/<absent>=-1 G-1 S1/1/123/0\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Wmissing-field-initializers",
+        "-ffp-contract=off",
+        "-fno-fast-math",
+        "-Isrc",
+        "-Itests/fixtures",
+        "tests/unit/native_regular_resources.cpp",
+        "src/runtime/native_regular_resources.cpp",
+        "src/game/regular_textures.cpp",
+        "src/game/game_cleanup.cpp",
+        "src/runtime/native_menu_texture_bindings.cpp",
+        "-o",
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/current-test"
+      ],
+      "exit": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/current-test"
+      ],
+      "exit": 0,
+      "stdout": "55 native baseline observations match; live aliases, callback and partial ordering pass.\n",
+      "stderr": ""
+    }
+  ],
+  "mutants": [
+    {
+      "name": "retry-clears-partial-groups",
+      "build": {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Wmissing-field-initializers",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-Isrc",
+          "-Itests/fixtures",
+          "tests/unit/native_regular_resources.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/retry-clears-partial-groups.cpp",
+          "src/game/regular_textures.cpp",
+          "src/game/game_cleanup.cpp",
+          "src/runtime/native_menu_texture_bindings.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/retry-clears-partial-groups"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "result": {
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/retry-clears-partial-groups"
+        ],
+        "exit": -6,
+        "stdout": "",
+        "stderr": "Assertion failed: (expected == exercise<CurrentRegularResources>()), function main, file native_regular_resources.cpp, line 235.\n"
+      }
+    },
+    {
+      "name": "drop-common-binding",
+      "build": {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Wmissing-field-initializers",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-Isrc",
+          "-Itests/fixtures",
+          "tests/unit/native_regular_resources.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/drop-common-binding.cpp",
+          "src/game/regular_textures.cpp",
+          "src/game/game_cleanup.cpp",
+          "src/runtime/native_menu_texture_bindings.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/drop-common-binding"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "result": {
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/drop-common-binding"
+        ],
+        "exit": -6,
+        "stdout": "",
+        "stderr": "Assertion failed: (binding_calls == (failure >= 7 ? 1 : 0)), function exercise, file native_regular_resources.cpp, line 113.\n"
+      }
+    },
+    {
+      "name": "lose-regular-alias",
+      "build": {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Wmissing-field-initializers",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-Isrc",
+          "-Itests/fixtures",
+          "tests/unit/native_regular_resources.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/lose-regular-alias.cpp",
+          "src/game/regular_textures.cpp",
+          "src/game/game_cleanup.cpp",
+          "src/runtime/native_menu_texture_bindings.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/lose-regular-alias"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "result": {
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/lose-regular-alias"
+        ],
+        "exit": -6,
+        "stdout": "",
+        "stderr": "Assertion failed: (binding_calls == (failure >= 7 ? 1 : 0)), function exercise, file native_regular_resources.cpp, line 113.\n"
+      }
+    },
+    {
+      "name": "skip-duplicate-guard",
+      "build": {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Wmissing-field-initializers",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-Isrc",
+          "-Itests/fixtures",
+          "tests/unit/native_regular_resources.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/skip-duplicate-guard.cpp",
+          "src/game/regular_textures.cpp",
+          "src/game/game_cleanup.cpp",
+          "src/runtime/native_menu_texture_bindings.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/skip-duplicate-guard"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "result": {
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/skip-duplicate-guard"
+        ],
+        "exit": -6,
+        "stdout": "",
+        "stderr": "Assertion failed: (host.state() == published && &host.lists()[0] == list), function exercise, file native_regular_resources.cpp, line 118.\n"
+      }
+    },
+    {
+      "name": "eager-group-validation",
+      "build": {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Wmissing-field-initializers",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-Isrc",
+          "-Itests/fixtures",
+          "tests/unit/native_regular_resources.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/eager-group-validation.cpp",
+          "src/game/regular_textures.cpp",
+          "src/game/game_cleanup.cpp",
+          "src/runtime/native_menu_texture_bindings.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/eager-group-validation"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "result": {
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/eager-group-validation"
+        ],
+        "exit": -6,
+        "stdout": "",
+        "stderr": "Assertion failed: (expected == exercise<CurrentRegularResources>()), function main, file native_regular_resources.cpp, line 235.\n"
+      }
+    },
+    {
+      "name": "nonzero-scratch-default",
+      "build": {
+        "command": [
+          "xcrun",
+          "clang++",
+          "-std=c++17",
+          "-O2",
+          "-Wall",
+          "-Wextra",
+          "-Werror",
+          "-Wmissing-field-initializers",
+          "-ffp-contract=off",
+          "-fno-fast-math",
+          "-Isrc",
+          "-Itests/fixtures",
+          "tests/unit/native_regular_resources.cpp",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/nonzero-scratch-default.cpp",
+          "src/game/regular_textures.cpp",
+          "src/game/game_cleanup.cpp",
+          "src/runtime/native_menu_texture_bindings.cpp",
+          "-o",
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/nonzero-scratch-default"
+        ],
+        "exit": 0,
+        "stdout": "",
+        "stderr": ""
+      },
+      "result": {
+        "command": [
+          "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-552ecc97/build/session-regular-resources/nonzero-scratch-default"
+        ],
+        "exit": -6,
+        "stdout": "",
+        "stderr": "Assertion failed: (expected == exercise<CurrentRegularResources>()), function main, file native_regular_resources.cpp, line 235.\n"
+      }
+    }
+  ],
+  "scope": "Native source-bound reduced transport host; original Windows judges separate. No heldout/final qualification, GPU or actual full Session runtime claim."
+}

@@ -1,0 +1,62 @@
+{
+  "base": "e5cf19d7daa984ff9df566a6dcd7d6c9ed39a132",
+  "source_commit": "8090d81",
+  "source_sha256": {
+    "src/runtime/native_regular_resources.hpp": "d259119cda99b1c5ef871db134cae6b9efd7b7260c95a6179d7d76ae50068bea",
+    "src/runtime/native_regular_resources.cpp": "17fe7972611dff0346e88a2c22d677f68c721e651b601e5a00579af942dd529d",
+    "src/runtime/native_session.hpp": "adf4a698b7cae66aea0b774b0be25ae87e03a8d1e4bf9463122be7d7317934bd",
+    "src/runtime/native_session.cpp": "e4779eec8361d9dee5b3e2b7c62c834c18516ca059813dccb2c0902610cf8a3f",
+    "src/runtime/native_title_tasks.cpp": "4a6e34468bc7d163d4de136493aca32c73cba16be465c358159df6619c36476f",
+    "src/runtime/native_selection_preview.cpp": "b69b072b615a5c9a7c3b5c8979c6b49ba2b50fdfebfd19d047a7939314f31ded",
+    "tests/unit/native_regular_resources.cpp": "e33012a41ae27418c14ddaa23d13f587b6603e06104e1d84a28ff5bbaa4e8ecc",
+    "tests/fixtures/regular_resource_baseline.hpp": "c12360fe40fe210dd3c3ce0ecd75cb9b0641a873879fdc29c275bbba28d29886",
+    "tools/testing/check_native_regular_resources.py": "2ae5f73941b0a26e4c9c25f14c62ca6a35c0dbd7627a70430f8da66bad9c2835"
+  },
+  "native_baseline_rows": 55,
+  "native_baseline_sha256": "fb1ae8390de958804054284141843935fd5ab380db5f33d8a2691da5df1115fd",
+  "error_identifier_multiset_preserved": true,
+  "consumer_translation_units": 12,
+  "serial_compilation": true,
+  "borrowed_archives": false,
+  "full_gate_run": false,
+  "journeys_run": false,
+  "heldout_final_cohort_run": false,
+  "unchanged_original_judges": {
+    "regular_textures": {
+      "cases": 609,
+      "mismatch_count": 0
+    },
+    "menu_resource_lifetime": {
+      "cases": 1401,
+      "mismatch_count": 0
+    },
+    "native_texture_lifetime": {
+      "cases": 1416,
+      "mismatch_count": 0
+    },
+    "game_cleanup": {
+      "cases": 2604,
+      "mismatch_count": 0
+    }
+  },
+  "static_checks": {
+    "layers": 0,
+    "readability": 0,
+    "global_owners": 0,
+    "provenance": 0,
+    "profile_patches": 0,
+    "diff_check": 0,
+    "repo_hygiene": 0
+  },
+  "initial_failed_commands": [
+    "Native fixture initially used a null localized filename; valid input corrected before baseline freeze, with no source changes.",
+    "Additional game_cleanup probe initial link omitted save_data.cpp (exit 1); subsequent attempted oracle could not load the absent library (exit 1). Corrected source-only link and unchanged oracle exited 0."
+  ],
+  "limits": [
+    "Native fixture replaces Display/LogoRenderer transport only; no actual Session runtime/journey proof.",
+    "game_cleanup is an additional post-edit original consumer judge; its source/probe remain unchanged from base, and no new pre-edit cleanup receipt is claimed.",
+    "No inherited failures or FP partials in these resource judges.",
+    "No original judge edits, tolerance/vector changes or probe rebindings.",
+    "Root owns registration/manifest/inventory, fresh independent review, final reserved cohort, integrated closure/journeys/full gate."
+  ]
+}
