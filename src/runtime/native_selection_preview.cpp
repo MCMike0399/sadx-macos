@@ -34,7 +34,7 @@ struct TitleScene::PreviewServices final : selection_preview::Calls {
                 scene.session_.bootstrap_.menu.player_character, scene.display_.saved_fov()};
     }
     selection_preview::TextureView textures() {
-        return {list_views, scene.session_.character_resources_.lists()loaded_};
+        return {list_views, scene.session_.character_resources_.loaded()};
     }
     TaskScheduler &scheduler() { return scene.session_.logo_.task_scheduler(); }
     TaskHandle create_preview_task(std::uint32_t flags, std::int32_t level) override {
@@ -198,7 +198,7 @@ void TitleScene::exec_selection_gamma(TaskScheduler &scheduler, const TaskHandle
         scene.session_.bootstrap_, scene.display_, task,
         scene.session_.stage_, scene.session_.act_,
         display_selection_gamma, destroy_selection_gamma, initialize_player_auxiliary,
-        texture_views.catalog(scene.session_.character_resources_.lists()loaded_),
+        texture_views.catalog(scene.session_.character_resources_.loaded()),
         scene.session_.regular_resources_.state(), &texture_services};
     gamma_selection::run(context, task);
 }
