@@ -5,14 +5,14 @@
       "oracle_exit_status": 0,
       "cases": 8209,
       "mismatches": 0,
-      "report_sha256": "55205a1295a8152e70eff9300261059beb9867f265caabc91d273bdae19014ee"
+      "report_sha256": "8ed2c0bc4c6986cdfd13c2eb1cef264ee7dfc5aae29e5829d86ce0d4429e999f"
     },
     "native": {
       "build_exit_status": 0,
       "oracle_exit_status": 0,
       "cases": 8209,
       "mismatches": 0,
-      "report_sha256": "1eb937f3a0b885cdbbb01bc153cf06a0236eab22254e0fc6de5bee208a7236f8"
+      "report_sha256": "5d3dd3870a5af50d108cb2c195f4734e45ceab39b9b087666c261f00e1c2deed"
     }
   },
   "mutants": [
@@ -28,22 +28,22 @@
           "oracle_exit_status": 1,
           "cases": 8209,
           "mismatches": 4,
-          "report_sha256": "c1e5add973c50564a79e97164302b33c0e6b04e0e73f9d3e214b3ff92691225b"
+          "report_sha256": "581ae90198b17b7ad017fd95a73ac29c604f87c6b148599e5d2d2c27e5576ad0"
         },
         "native": {
           "build_exit_status": 0,
           "oracle_exit_status": 1,
           "cases": 8209,
           "mismatches": 4,
-          "report_sha256": "61bd43ce05984ba86cb1afbe7761f9e96c7d4d93e1d14a7d212d43dfc93f638c"
+          "report_sha256": "d85563e35c1e4dddcd9547416657aff335a1da71fce83a173cc4afbd54a044fc"
         }
       }
     },
     {
       "name": "swap_special_source_blend",
       "file": "src/engine/ninja_blend_internal.hpp",
-      "old": "mode == 0 ? 6U : 5U",
-      "new": "mode == 0 ? 5U : 6U",
+      "old": "inverse_source ? kInverseSourceAlpha : kSourceAlpha",
+      "new": "inverse_source ? kSourceAlpha : kInverseSourceAlpha",
       "caught": true,
       "judges": {
         "reference": {
@@ -51,14 +51,14 @@
           "oracle_exit_status": 1,
           "cases": 8209,
           "mismatches": 1030,
-          "report_sha256": "34b9e872a7b5b110cec7d871e52db251e8d8d1f172cbe04a961abc2c0d263333"
+          "report_sha256": "695383bb09f4614d0f664bbe491ae4433c23cc957ebc94b313d456bd2bab6abc"
         },
         "native": {
           "build_exit_status": 0,
           "oracle_exit_status": 1,
           "cases": 8209,
           "mismatches": 1030,
-          "report_sha256": "26b84fce5a1a028ebc4fa06497ce6a76b84dbf3c10651562c6555bcc1c6aa721"
+          "report_sha256": "7f0642d4d632a14d031f49b91c9247c7f790f4d69540932dbc0a1a548c9ec610"
         }
       }
     },
@@ -74,14 +74,14 @@
           "oracle_exit_status": 1,
           "cases": 8209,
           "mismatches": 4026,
-          "report_sha256": "c81b55d5179f57211ccf8d2e459c59df0bf7c8c4afc29798419c8e4125e9b613"
+          "report_sha256": "346dc08c057fbc1d9de6076ba116e6123dc0d7093160cd8f1ca90e966bb53e50"
         },
         "native": {
           "build_exit_status": 0,
           "oracle_exit_status": 1,
           "cases": 8209,
           "mismatches": 4026,
-          "report_sha256": "7cbe67b7c7531eb42428b4a5de5ce2341a37932c0d906a461d4ba37789de93bb"
+          "report_sha256": "ee0227336e48b07f9844845fe122b80c6b33bd402c971c072f1df3437af83fe8"
         }
       }
     },
@@ -97,14 +97,14 @@
           "oracle_exit_status": 0,
           "cases": 8209,
           "mismatches": 0,
-          "report_sha256": "9bd090436a42ee3aab354f41956a0e635b4cbbc5aa42d035c1a3d2128ae0bbf8"
+          "report_sha256": "f3f79e51b37e1d97cc664b0929cdcb77d41af1dcf1f0e567129cef24a63764b6"
         },
         "native": {
           "build_exit_status": 0,
           "oracle_exit_status": 1,
           "cases": 8209,
           "mismatches": 10,
-          "report_sha256": "4818583b1b70f20c46642e62bc74e6b487da8d872d523fe4574b07198a259152"
+          "report_sha256": "d7b99ca649919e2d888d6d920562c16a1a6bb29d3010abaf5d53d1dc8c4d8037"
         }
       }
     },
@@ -120,14 +120,14 @@
           "oracle_exit_status": 0,
           "cases": 8209,
           "mismatches": 0,
-          "report_sha256": "4742604c18f3928786510fab61a7b4f61bfe4e8e176cad662b353eadae40ef4e"
+          "report_sha256": "03b7f4d46f15af46465455d1788d43e6910e4c55676fa84f8174c90fad4b2abe"
         },
         "native": {
           "build_exit_status": 0,
           "oracle_exit_status": 1,
           "cases": 8209,
           "mismatches": 1536,
-          "report_sha256": "e070bd1f89e1d1c5f1c4fd082801183c432293ac137be7c9f7e43b8c98d7c80a"
+          "report_sha256": "ab7e259d8ba9ca5b52b99542817aa785b58ec9ff8d0136a187f57d5864e21a78"
         }
       }
     }
@@ -138,14 +138,14 @@
       "oracle_exit_status": 0,
       "cases": 8209,
       "mismatches": 0,
-      "report_sha256": "c063fbdbc8b2c58b4f5f30960f37e81a22d94c5a93265cee4696937253b28cc0"
+      "report_sha256": "e992daad80ae7d6a5138bb4dd4e8751ef31d1cf1e07005e938f57376403999ed"
     },
     "native": {
       "build_exit_status": 0,
       "oracle_exit_status": 0,
       "cases": 8209,
       "mismatches": 0,
-      "report_sha256": "c2ca8e51f96e08444e55117ac98e3c57f2381dbddd3761712e3ace9516c58b81"
+      "report_sha256": "aee20d36a63bf34936635792d2d57cc4d90acab995931cf3b96d12a06ecc04ea"
     }
   },
   "limits": [
@@ -155,7 +155,7 @@
   "base_commit": "e6c5a49",
   "kind": "First shared blend algorithm draft, not completed render-state migration",
   "source_files_sha256": {
-    "src/engine/ninja_blend_internal.hpp": "ed8a1d68ce986f5e9b6b9dd40239aeecbbe272ef10feefbfd76aa36ce0d3c9a0",
+    "src/engine/ninja_blend_internal.hpp": "c4705d2499528822ecf6e270b0a610a82c691798e924f9c1b0efd07e1be2c7b2",
     "src/engine/ninja_render.cpp": "ea34d323f7c3dfb6ceedef356ce6d9165d4037f962a96942fe22677fe5fd0df6",
     "src/engine/ninja_queue_native.cpp": "d5db5d92861b3ce52aa6d06cc9d2c9461cbe55c94b094ac7cbf658ada94dd1a5"
   },
@@ -188,5 +188,10 @@
     "tests/unit/ninja_queue_native.cpp": "e9e132daa59bfa29b469aa66e132837b39550ff1c5fffbedea0ea38beb7fa7ae",
     "tools/oracles/verify_original_ninja_render.py": "cc89b135e5e76c197a7ee6b57d2b4cd36aafff39a9a1ae978d42c0f0b17610c7",
     "tools/oracles/verify_original_ninja_queue_render.py": "133107eecefd8c62d048cb4d43493bc62cbe12a1204788bf5c136ab3a2f7ff56"
-  }
+  },
+  "named_mode_evidence": [
+    "reference/sadx-mod-loader/SADXModLoader/include/ninja.h:356-357 NJD paired-alpha modes",
+    "reference/sadx-mod-loader/SADXModLoader/include/d3d8types.h:213-214 D3DBLEND source-alpha factors"
+  ],
+  "named_mode_limits": "The nine consumer/overlay/native receipts under consumers/ certify source618b0dd before the equivalent semantic constant names. Current paired blend judges and all five mutants were rebuilt and rerun."
 }
