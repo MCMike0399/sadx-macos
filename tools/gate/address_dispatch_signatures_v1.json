@@ -1,0 +1,152 @@
+{
+  "schema": 1,
+  "measurement": "signature-dispatch-v1",
+  "evidence_base": "c55762db5a42ad77b56fbaa8617ccfead4dbf0e1",
+  "signatures": [
+    {
+      "path": "src/player/sonic_player.cpp",
+      "helper": "call",
+      "target_argument": 4,
+      "min_args": 5,
+      "max_args": 7,
+      "definition": "        SonicPlayerResult call(SonicPlayerRuntime& rt,SonicPlayerFrame& f,X87Context& fp,std::uint32_t a,std::uint32_t b,std::array<std::optional<std::uint32_t>,5> args={},std::optional<std::uint8_t> task_work_argument={})  {\n            if(a==0x44a800) {\n                if(!rt.animation_runtime)return fail(SonicPlayerFailure::missing_native_owner,b,a);\n                auto ready=require_player(f,b);if(!ready)return ready;\n                auto* p=player(f);PlayerAnimationView view{*p->player,p->player->animation_tail,p->player_work};\n                auto animation=update_player_animation(view,*rt.animation_runtime,fp);\n                auto result=animation?done():fail(SonicPlayerFailure::animation_failed,b,a);\n                result.animation=animation;\n                if(!animation)result.nested_source_boundary=animation.source_boundary;\n                return result;\n            }\n            if(!rt.external)return fail(SonicPlayerFailure::missing_native_owner,b,a);\n            auto r=rt.external({a,b,args,task_work_argument},f,fp);\n            if(!r)  {\n                r.nested_source_boundary=r.source_boundary;\n                r.source_boundary=b;\n                r.callee_address=a;\n                if(r.failure==SonicPlayerFailure::none)r.failure=SonicPlayerFailure::native_owner_failed;\n            }\n            return r;\n        }",
+      "definition_name_offset": 26,
+      "evidence": "a is passed as SonicPlayerCall.address (header line 79), rt.external({a,b,args,task_work_argument},f,fp); b is source boundary.",
+      "receivers": [
+        ""
+      ]
+    },
+    {
+      "path": "src/game/game_reset.cpp",
+      "helper": "call",
+      "target_argument": 2,
+      "min_args": 2,
+      "max_args": 3,
+      "definition": "    const auto call=[&](std::uint32_t site,std::uint32_t callee,std::optional<std::uint32_t> argument={}){\n        r.pending_call=GameResetCall{site,callee,argument};\n        if(!rt.invoke)fail(GameResetFailure::missing_owner,site);\n        const auto receipt=rt.invoke(*r.pending_call);r.nested_source_boundary=receipt.source_boundary;\n        if(receipt.state!=GameLogicOwnerState::completed)fail(receipt.state==GameLogicOwnerState::cancelled?GameResetFailure::cancelled:\n            receipt.state==GameLogicOwnerState::failed?GameResetFailure::owner_failed:GameResetFailure::missing_owner,site);\n        r.pending_call.reset();r.nested_source_boundary=0;\n    }",
+      "definition_name_offset": 15,
+      "evidence": "GameResetCall{site,callee,argument} is sent to rt.invoke.",
+      "receivers": [
+        ""
+      ]
+    },
+    {
+      "path": "src/game/game_reset_leaves.cpp",
+      "helper": "call",
+      "target_argument": 2,
+      "min_args": 2,
+      "max_args": 4,
+      "definition": "    const auto call=[&](std::uint32_t site,std::uint32_t target,std::optional<std::uint32_t> object={},std::optional<std::uint32_t> arg={}){\n        const auto receipt=nested?nested({site,target,object,arg}):GameLogicOwnerResult{GameLogicOwnerState::unavailable,target,{}};\n        if(receipt.state!=GameLogicOwnerState::completed)throw Stop{ResetLeafOutcome::nested_failed,site,receipt};}",
+      "definition_name_offset": 15,
+      "evidence": "nested({site,target,object,arg}) invokes ResetLeafNested with target.",
+      "receivers": [
+        ""
+      ]
+    },
+    {
+      "path": "src/game/game_frame_owners.cpp",
+      "helper": "call",
+      "target_argument": 2,
+      "min_args": 2,
+      "max_args": 3,
+      "definition": "    void call(std::uint32_t site,std::uint32_t callee,std::array<std::optional<std::uint32_t>,2> arguments={}){\n        r.pending_call=GameFrameOwnerCall{site,callee,arguments};\n        if(!rt.invoke)fail(GameFrameOwnerFailure::missing_owner,site);\n        const auto receipt=rt.invoke(*r.pending_call);\n        if(receipt.state!=GameLogicOwnerState::completed)fail(receipt.state==GameLogicOwnerState::failed?GameFrameOwnerFailure::owner_failed:GameFrameOwnerFailure::missing_owner,site);\n        r.pending_call.reset();}",
+      "definition_name_offset": 9,
+      "evidence": "GameFrameOwnerCall{site,callee,arguments} is sent to rt.invoke.",
+      "receivers": [
+        "",
+        "op."
+      ]
+    },
+    {
+      "path": "src/game/game_winmain.cpp",
+      "helper": "call",
+      "target_argument": 2,
+      "min_args": 2,
+      "max_args": 3,
+      "definition": "    std::optional<std::uint32_t> call(std::uint32_t site,std::uint32_t callee,std::array<std::optional<std::uint32_t>,4> arguments={}){\n        r.pending_call=WinMainCall{site,callee,arguments};\n        if(!rt.invoke)fail(GameWinMainFailure::missing_owner,site);\n        const auto receipt=rt.invoke(*r.pending_call);\n        if(receipt.owner.state!=GameLogicOwnerState::completed)fail(receipt.owner.state==GameLogicOwnerState::cancelled?GameWinMainFailure::cancelled:\n            receipt.owner.state==GameLogicOwnerState::failed?GameWinMainFailure::owner_failed:GameWinMainFailure::missing_owner,site);\n        r.pending_call.reset();return receipt.eax;}",
+      "definition_name_offset": 33,
+      "evidence": "WinMainCall{site,callee,arguments} is sent to rt.invoke.",
+      "receivers": [
+        ""
+      ]
+    },
+    {
+      "path": "src/game/game_scene_logic.cpp",
+      "helper": "call",
+      "target_argument": 3,
+      "min_args": 3,
+      "max_args": 4,
+      "definition": "    const auto call=[&](GameSceneOperation operation,std::uint32_t boundary,std::uint32_t callee,bool needs_return=false){\n        result.pending_call=GameSceneCall{operation,boundary,callee};\n        if(!runtime.invoke)return fail(GameSceneLogicFailure::missing_owner,boundary);\n        const auto receipt=runtime.invoke(*result.pending_call,runtime.arithmetic);\n        result.diagnostic=receipt.owner.diagnostic;result.nested_source_boundary=receipt.owner.source_boundary;\n        if(receipt.owner.state!=GameLogicOwnerState::completed)\n            return fail(receipt.owner.state==GameLogicOwnerState::cancelled?GameSceneLogicFailure::cancelled:\n                receipt.owner.state==GameLogicOwnerState::failed?GameSceneLogicFailure::owner_failed:GameSceneLogicFailure::missing_owner,boundary);\n        if(needs_return){if(!receipt.return_value)return fail(GameSceneLogicFailure::missing_return,0x413d71);query=receipt.return_value;}\n        result.pending_call.reset();result.diagnostic.reset();result.nested_source_boundary=0;return true;\n    }",
+      "definition_name_offset": 15,
+      "evidence": "GameSceneCall{operation,boundary,callee} is sent to runtime.invoke.",
+      "receivers": [
+        ""
+      ]
+    },
+    {
+      "path": "src/game/sound_manager.cpp",
+      "helper": "call",
+      "target_argument": 2,
+      "min_args": 3,
+      "max_args": 4,
+      "definition": "    std::optional<std::uint32_t> call(std::uint32_t site,std::uint32_t callee,std::array<std::optional<std::uint32_t>,2> arguments,bool returns=false){\n        r.pending_call=SoundManagerCall{site,callee,arguments};\n        if(!rt.invoke)fail(SoundManagerFailure::missing_owner,site);\n        const auto receipt=rt.invoke(*r.pending_call);r.nested_source_boundary=receipt.owner.source_boundary;\n        if(receipt.owner.state!=GameLogicOwnerState::completed)fail(receipt.owner.state==GameLogicOwnerState::failed?SoundManagerFailure::owner_failed:SoundManagerFailure::missing_owner,site);\n        r.pending_call.reset();r.nested_source_boundary=0;\n        if(returns&&!receipt.eax)throw SkipRecord{};\n        return receipt.eax;}",
+      "definition_name_offset": 33,
+      "evidence": "SoundManagerCall{site,callee,arguments} is sent to rt.invoke.",
+      "receivers": [
+        "",
+        "op."
+      ]
+    },
+    {
+      "path": "src/game/game_view.cpp",
+      "helper": "call",
+      "target_argument": 2,
+      "min_args": 2,
+      "max_args": 3,
+      "definition": "    const auto call=[&](std::uint32_t at,std::uint32_t callee,std::array<std::optional<std::uint32_t>,6> args={}){\n        r.pending_call=GameViewCall{at,callee,args};if(!rt.invoke)fail(GameViewFailure::missing_owner,at);\n        const auto receipt=rt.invoke(*r.pending_call);if(receipt.state!=GameLogicOwnerState::completed)fail(receipt.state==GameLogicOwnerState::failed?GameViewFailure::owner_failed:GameViewFailure::missing_owner,at);\n        r.pending_call.reset();}",
+      "definition_name_offset": 15,
+      "evidence": "GameViewCall{at,callee,args} is sent to rt.invoke.",
+      "receivers": [
+        ""
+      ]
+    },
+    {
+      "path": "src/game/mod_loader_frame.cpp",
+      "helper": "call",
+      "target_argument": 2,
+      "min_args": 2,
+      "max_args": 2,
+      "definition": "    const auto call=[&](std::uint32_t site,std::uint32_t callee){\n        r.pending_callee=callee;\n        if(!rt.invoke){stop(ModFrameFailure::missing_owner,site);return false;}\n        const auto receipt=rt.invoke(site,callee);\n        if(receipt.state!=GameLogicOwnerState::completed){stop(receipt.state==GameLogicOwnerState::cancelled?ModFrameFailure::cancelled:\n            receipt.state==GameLogicOwnerState::failed?ModFrameFailure::owner_failed:ModFrameFailure::missing_owner,site);return false;}\n        r.pending_callee.reset();return true;}",
+      "definition_name_offset": 15,
+      "evidence": "rt.invoke(site,callee); pending_callee=callee.",
+      "receivers": [
+        ""
+      ]
+    },
+    {
+      "path": "src/engine/ninja_system_init.cpp",
+      "helper": "call",
+      "target_argument": 2,
+      "min_args": 2,
+      "max_args": 5,
+      "definition": "    std::optional<std::uint32_t> call(std::uint32_t site,std::uint32_t callee,std::optional<std::uint32_t> ecx={},std::optional<std::uint32_t> edx={},std::array<std::optional<std::uint32_t>,4> arguments={}){\n        r.pending_call=NinjaSystemCall{site,callee,ecx,edx,arguments};\n        if(!rt.invoke)fail(NinjaSystemInitFailure::missing_owner,site);\n        const auto receipt=rt.invoke(*r.pending_call);\n        if(receipt.owner.state!=GameLogicOwnerState::completed)fail(receipt.owner.state==GameLogicOwnerState::cancelled?NinjaSystemInitFailure::cancelled:\n            receipt.owner.state==GameLogicOwnerState::failed?NinjaSystemInitFailure::owner_failed:NinjaSystemInitFailure::missing_owner,site);\n        r.pending_call.reset();return receipt.eax;}",
+      "definition_name_offset": 33,
+      "evidence": "NinjaSystemCall{site,callee,ecx,edx,arguments} is sent to rt.invoke.",
+      "receivers": [
+        ""
+      ]
+    },
+    {
+      "path": "src/engine/ninja_vibration.cpp",
+      "helper": "call",
+      "target_argument": 2,
+      "min_args": 3,
+      "max_args": 4,
+      "definition": "    const auto call=[&](std::uint32_t site,std::uint32_t callee,std::array<std::optional<std::uint32_t>,2> args,std::optional<std::uint32_t>* eax=nullptr){\n        if(!rt.invoke)return stop(NinjaVibrationFailure::missing_owner,site);\n        const auto [owner,value]=rt.invoke({site,callee,args});\n        if(owner.state!=GameLogicOwnerState::completed)return stop(owner.state==GameLogicOwnerState::failed?NinjaVibrationFailure::owner_failed:NinjaVibrationFailure::missing_owner,site);\n        if(eax)*eax=value;return true;}",
+      "definition_name_offset": 15,
+      "evidence": "rt.invoke({site,callee,args}) supplies the address target.",
+      "receivers": [
+        ""
+      ]
+    }
+  ]
+}
