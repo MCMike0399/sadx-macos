@@ -11,6 +11,7 @@ import io
 import json
 import os
 from pathlib import Path
+import re
 import secrets
 import stat
 import subprocess
@@ -180,6 +181,16 @@ def validate_mode(frozen):
         required = {'terminal_sha256', 'freeze_sha256', 'inputs', 'libraries', 'original_output'}
         if not isinstance(proof, dict) or set(proof) != required or not proof:
             raise ValueError('Continuation requires complete reuse proof')
+        hashes = lambda values: all(isinstance(value, str) and re.fullmatch('[a-f0-9]{64}', value)
+                                    for value in values)
+        model_paths = {str(ORIGINAL_OUT / world / 'libraries' / (slug + '.dylib'))
+                       for world in ('old', 'current') for slug in SLUGS}
+        if (proof['original_output'] != str(ORIGINAL_OUT) or
+                not isinstance(proof['inputs'], dict) or set(proof['inputs']) != set(SLUGS) or
+                not isinstance(proof['libraries'], dict) or set(proof['libraries']) != model_paths or
+                not hashes([proof['terminal_sha256'], proof['freeze_sha256'],
+                            *proof['inputs'].values(), *proof['libraries'].values()])):
+            raise ValueError('Continuation proof contents are invalid')
     elif proof is not None:
         raise ValueError('Original mode cannot select a continuation proof')
 
@@ -464,6 +475,8 @@ def child(mode, world=None, slug=None, parent_fd=None, stage_token=None):
     if marker['freeze_sha256'] != digest(FREEZE):
         raise ValueError('Execution marker does not bind this freeze')
     manifest = json.loads((OUT / 'BUILD.json').read_text())
+    if reused and manifest['libraries'] != reused['libraries']:
+        raise ValueError('Continuation model manifest differs from frozen proof')
     required = {str(models_root / name / 'libraries' / (item + '.dylib'))
                 for name in ('old', 'current') for item in SLUGS}
     if set(manifest['libraries']) != required:
@@ -473,6 +486,8 @@ def child(mode, world=None, slug=None, parent_fd=None, stage_token=None):
             raise ValueError('Compiled model changed: ' + library_name)
     if mode == 'observe':
         inputs_manifest = json.loads((OUT / 'INPUTS.json').read_text())
+        if reused and inputs_manifest != reused['inputs']:
+            raise ValueError('Continuation copied inputs differ from frozen proof')
         if set(inputs_manifest) != set(SLUGS):
             raise ValueError('Input cohort set differs')
         for item, expected in inputs_manifest.items():
@@ -519,6 +534,8 @@ def run(admitted):
         raise ValueError('Root must explicitly admit execution after independent review')
     frozen = verify_freeze()
     validate_mode(frozen)
+    if frozen.get('continuation') and unattempted_previous_run() != frozen['continuation']:
+        raise ValueError('Previous unattempted proof changed before output creation')
     OUT.mkdir(exist_ok=False)
     write_new(OUT / 'EXECUTED_ONCE.json', dict(freeze_sha256=digest(FREEZE)))
     completed, failure = [], None

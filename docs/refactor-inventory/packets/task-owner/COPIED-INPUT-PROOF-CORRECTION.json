@@ -1,0 +1,34 @@
+{
+  "base_commit": "cadb15b63e805a0416462e90b75af853deea3cbf",
+  "review": "3e52fd7",
+  "corrections": {
+    "P1": "Copied continuation INPUTS and BUILD maps must equal frozen continuation proof before stage markers/imports/observation; every copied file then hashes to that exact proof.",
+    "P2": "Validate exact typed original path, full4input/8model keysets and64hex hashes; compare actual committed previous proof BEFORE creating OUT or permanent marker. Invalid null or valid-but-unequal proof has no output side effect."
+  },
+  "tests": {
+    "tests": 74,
+    "exit_status": 0,
+    "command": "python3 -m unittest discover -s tests/python -p 'test_task_*' -v",
+    "log_sha256": "f25093fd46c7a023af904fd4050706be0fc0fe9a717494ec07d24f1f76032760",
+    "regressions": [
+      "Real fake child route with coherently altered copied input+INPUTS cannot reach observer/started marker",
+      "Complete-key null proof refuses before output/build/generation",
+      "Well-shaped unequal proof refuses before output/build/generation"
+    ]
+  },
+  "files": {
+    "tools/oracles/task_judges/reserved_run.py": "06595d35a4814bcce7d14ca31ae89a51a2c6220701f754f408835933f7110a14",
+    "tests/python/test_task_reserved_run.py": "25e987d1a0a398f91955898950ac6863920cba1c65a7a013b453d185b74d005f"
+  },
+  "not_executed": [
+    "continuation preparation/freeze",
+    "continuation admission/run",
+    "any Source/native reserved case"
+  ],
+  "original_failure": "TERMINAL EXIT1 preserved,1142generated/zeroattempts, no values/inputs/expectations/exclusions changed",
+  "remaining": [
+    "Fresh bounded recheck",
+    "New committed closure and distinct Root admission only after acceptance",
+    "Actual qualification/integration/source-only/journeys/gate"
+  ]
+}

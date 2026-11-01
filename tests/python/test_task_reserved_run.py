@@ -22,6 +22,30 @@ SPEC.loader.exec_module(RUN)
 
 
 class TaskReservedRun(unittest.TestCase):
+    def continuation_proof(self):
+        return dict(terminal_sha256='1'*64, freeze_sha256='2'*64,
+                    inputs={slug: '3'*64 for slug in RUN.SLUGS},
+                    libraries={str(RUN.ORIGINAL_OUT/world/'libraries'/(slug+'.dylib')): '4'*64
+                               for world in ('old', 'current') for slug in RUN.SLUGS},
+                    original_output=str(RUN.ORIGINAL_OUT))
+
+    def test_invalid_complete_proof_and_unequal_valid_proof_refuse_before_output(self):
+        for proof in (dict.fromkeys(self.continuation_proof()), self.continuation_proof()):
+            with tempfile.TemporaryDirectory() as directory:
+                out = Path(directory)/'out'
+                frozen = dict(execution_mode='continuation', continuation=proof)
+                with patch.object(RUN, 'EXECUTION_MODE', 'continuation'), patch.object(RUN, 'OUT', out), \
+                        patch.object(RUN, 'verify_freeze', return_value=frozen), \
+                        patch.object(RUN, 'unattempted_previous_run', return_value={'different': True}), \
+                        patch.object(RUN, 'archive') as archive, patch.object(RUN, 'build') as build, \
+                        patch.object(RUN, 'command') as command:
+                    with self.assertRaisesRegex(ValueError, 'proof contents|proof changed'):
+                        RUN.run(True)
+                    self.assertFalse(out.exists())
+                    archive.assert_not_called()
+                    build.assert_not_called()
+                    command.assert_not_called()
+
     def test_selected_continuation_never_falls_back_to_build_or_generation(self):
         for proof in (None, {}, ''):
             with tempfile.TemporaryDirectory() as directory:
@@ -126,7 +150,7 @@ class TaskReservedRun(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'not the uncompleted failed'):
                     RUN.unattempted_previous_run()
 
-    def test_real_child_dispatch_keeps_stage_name_after_library_validation(self):
+    def child_dispatch(self, changed_continuation_inputs=False):
         class ReachedObserver(Exception):
             pass
         with tempfile.TemporaryDirectory() as directory:
@@ -135,8 +159,9 @@ class TaskReservedRun(unittest.TestCase):
             freeze.write_text('{}')
             (out/'EXECUTED_ONCE.json').write_text(json.dumps({'freeze_sha256': RUN.digest(freeze)}))
             libraries = {}
+            models_root = out/'original-models' if changed_continuation_inputs else out
             for world in ('old', 'current'):
-                folder = out/world/'libraries'
+                folder = models_root/world/'libraries'
                 folder.mkdir(parents=True)
                 for slug in RUN.SLUGS:
                     path = folder/(slug+'.dylib')
@@ -149,23 +174,39 @@ class TaskReservedRun(unittest.TestCase):
                 path.write_text(json.dumps(dict(cases=[[1]], labels=['fresh'], definition={})))
                 inputs[slug] = RUN.digest(path)
             (out/'INPUTS.json').write_text(json.dumps(inputs))
+            proof = dict(terminal_sha256='1'*64, freeze_sha256='2'*64, inputs=dict(inputs),
+                         libraries=libraries, original_output=str(models_root))
+            if changed_continuation_inputs:
+                (out/'task_work-inputs.json').write_text(json.dumps(dict(cases=[[999]], labels=['fresh'], definition={})))
+                inputs['task_work'] = RUN.digest(out/'task_work-inputs.json')
+                (out/'INPUTS.json').write_text(json.dumps(inputs))
+            mode = 'continuation' if changed_continuation_inputs else 'original'
             def observe(*args):
                 raise ReachedObserver()
             prior_path = list(sys.path)
             try:
                 with patch.object(RUN, 'OUT', out), patch.object(RUN, 'FREEZE', freeze), \
+                        patch.object(RUN, 'ORIGINAL_OUT', models_root), patch.object(RUN, 'EXECUTION_MODE', mode), \
                         patch.object(RUN, 'admit_child'), \
-                        patch.object(RUN, 'verify_freeze', return_value={'before': RUN.BEFORE, 'candidate': RUN.CANDIDATE, 'execution_mode': 'original', 'continuation': None}), \
+                        patch.object(RUN, 'verify_freeze', return_value={'before': RUN.BEFORE, 'candidate': RUN.CANDIDATE, 'execution_mode': mode, 'continuation': proof if changed_continuation_inputs else None}), \
+                        patch.object(RUN, 'unattempted_previous_run', return_value=proof), \
                         patch.object(RUN, 'verify_archive'), patch.object(RUN, 'verify_origins'), \
                         patch.object(RUN, 'pinned_unicorn'), \
                         patch.object(RUN, 'source_module', return_value=SimpleNamespace(observe=observe)), \
                         patch.object(RUN.importlib, 'import_module'):
-                    with self.assertRaises(ReachedObserver):
+                    expected = ValueError if changed_continuation_inputs else ReachedObserver
+                    with self.assertRaises(expected):
                         RUN.child('observe', 'old', 'task_work', 99, 'fake')
-                self.assertTrue((out/'old-task_work.started.json').is_file())
+                self.assertEqual((out/'old-task_work.started.json').is_file(), not changed_continuation_inputs)
                 self.assertFalse(list((out/'current/libraries').glob('*.started.json')))
             finally:
                 sys.path[:] = prior_path
+
+    def test_real_child_dispatch_keeps_stage_name_after_library_validation(self):
+        self.child_dispatch()
+
+    def test_coherent_copied_input_replacement_refused_before_child_observation(self):
+        self.child_dispatch(changed_continuation_inputs=True)
 
     def test_complete_unchanged_symlink_freeze_round_trip_and_selection_refusal(self):
         with tempfile.TemporaryDirectory() as directory:
