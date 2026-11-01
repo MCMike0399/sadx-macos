@@ -1,7 +1,7 @@
 {
   "base_commit": "f6c4e538af463a2eaf4c1fe961f04e8443d51878",
   "baseline_removed_paths": [],
-  "boundary_entries": 2275,
+  "boundary_entries": 2276,
   "checks_not_run": [
     "builds",
     "gate",
@@ -12,27 +12,27 @@
   ],
   "coverage": "exact tracked path equality; no semantic completeness or behavior verdict",
   "dispositions": {
-    "already_conforming": 71,
-    "needs_migration": 26,
-    "open_review": 1566,
+    "already_conforming": 78,
+    "needs_migration": 33,
+    "open_review": 1552,
     "reference_infrastructure": 7
   },
   "maintained_and_script_entries": 1670,
   "module_dispositions": {
-    "already_conforming": 42,
-    "needs_migration": 7,
-    "open_review": 1015
+    "already_conforming": 46,
+    "needs_migration": 11,
+    "open_review": 1007
   },
   "module_shards": [
     {
       "path": "modules.jsonl",
-      "records": 882,
-      "sha256": "9a2740b81c9c2c6635ff326f5c7a0217365cc84414483ffae61899e5e86ca0f3"
+      "records": 831,
+      "sha256": "f0048150e3dde1f9471a017600b27f0ec6e8d31561e902303d2c7b2195e070fc"
     },
     {
       "path": "modules-002.jsonl",
-      "records": 182,
-      "sha256": "38bf33b60a4c83501819f2bf0663c78ff9b72f0f0f5566c50af638d0b2aaad74"
+      "records": 233,
+      "sha256": "90aaf61b67009d6a6d9bbdbb54cc4c7431d550abe78684d44751091ba5f8c591"
     }
   ],
   "modules": 1064,
@@ -49,7 +49,7 @@
   },
   "reviewed_stub_bindings": 2,
   "roots": {
-    "reference": 2173,
+    "reference": 2174,
     "src": 650,
     "tests": 599,
     "third_party": 155,
@@ -75,5 +75,5 @@
     "texture-lifetime": 23,
     "tooling-judges": 1020
   },
-  "tracked_scope": 3945
+  "tracked_scope": 3946
 }
