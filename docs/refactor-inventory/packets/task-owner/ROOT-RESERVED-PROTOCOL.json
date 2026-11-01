@@ -1,0 +1,57 @@
+{
+  "schema_version": 1,
+  "status": "definitions_only_inputs_not_generated_execution_not_authorized",
+  "immutable_before_source": "bd22ee423ea015f00152a97fa8fc2e1b4034b411",
+  "scope": [
+    "complete Task scheduler",
+    "complete TaskWork arena",
+    "actual native/reference bindings and consumers"
+  ],
+  "cohorts": {
+    "arena": {
+      "seed": 20261231,
+      "sequences": 8,
+      "operations_before_final_release": 256,
+      "domain": "Owned allocation/free sequences using the unchanged original allocator operations. Retain the existing safe size choices and live-allocation bookkeeping; free remaining live allocations at the end. Actual resulting operation counts must be recorded, not inferred from this bound."
+    },
+    "lifecycle": {
+      "seed": 20270101,
+      "sequences": 8,
+      "operations_before_final_release": 128,
+      "domain": "Existing creation/child/destruction operation envelope. Random direct destruction selects only tracked top-level owners; child lifetime follows its parent. Preserve actual allocation indices including children. Existing fixed inactive logger-stop experiment remains a default contract, not a fresh source-returning holdout."
+    },
+    "display": {
+      "seed": 20270102,
+      "random_cases": 512,
+      "generator": "verify_original_task_display.fixtures(seed, repetitions=512)",
+      "notes": "The existing generator additionally emits 44 fixed callback rows. Label these repeated development rows separately from the fresh random cohort; retain all rows and order."
+    },
+    "delete": {
+      "seed": 20270103,
+      "random_cases": 512,
+      "generator": "verify_original_task_delete.fixtures(seed, count=512)",
+      "notes": "The existing generator additionally emits 58 fixed rows. Label repeated rows separately; retain all attempted IDs. Source reentrant destructor/free-list-cycle outcomes retain their exact original policy and are not source-returning comparisons."
+    }
+  },
+  "acceptance": [
+    "Freeze and commit the exact runner, generators, compiled recipes, full source/helper/probe/fixture closure and interpreter/PE identities only after independent source and judge acceptance, before any reserved generation.",
+    "Build immutable old and reviewed candidate source separately; no mutable Main archive baseline. Keep lower numerical dependencies pinned where relevant.",
+    "Execute only after explicit Root admission with a single-use output marker. Preserve setup failures and original process exits; no automatic retries, input adjustment or silent continuation after an unexpected error.",
+    "Account for every generated/attempted/completed/source-returning/established-stop/excluded/unattempted ID. Each source-defined observation must compare, and every complete old/current native ABI output, diagnostic, padding, callback trace and arena byte must compare.",
+    "Native equality alone cannot qualify a source-defined mismatch. Unspecified source return registers retain the established void-return policy; raw native returns remain preserved and compared old/current.",
+    "No new source-fault exemption. Preserve the six exact default delete exclusion IDs85,87,91,121,143,201 in the default development cohort; fresh generated exclusions have their own exact IDs, inputs and actual established reasons.",
+    "Do not relabel fixed default cohorts, deterministic boundary tests or previously consumed inputs as fresh holdouts. Do not rerun unchanged completed historical cohorts merely to change metadata."
+  ],
+  "root_remaining": [
+    "exact additive generator/observer implementation and adequacy review",
+    "candidate source reviews",
+    "committed execution closure freeze",
+    "distinct Root admission",
+    "actual reserved execution and per-case results",
+    "native product/reference closure, journeys, manifest/inventory reconciliation and coherent full gate"
+  ],
+  "limits": [
+    "Definitions do not qualify any source algorithm or generated case. No input generation, original/native execution, source edit or judge comparator change was performed.",
+    "Arbitrary callbacks, malformed graphs, Windows heap/hardware parity, gameplay and full campaign remain outside any bounded packet claim."
+  ]
+}
