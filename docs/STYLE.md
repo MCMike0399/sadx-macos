@@ -239,6 +239,14 @@ measure.
   `python3 tools/gate/check_readability.py --write-baseline` to lower the tracked allowances.
   The checker refuses to refresh over an increase. Source archives enforce the supplied
   baseline; comparing baseline edits against history requires a Git checkout.
+* Named constexpr aggregates also receive an explicit declaration review in
+  `reference/constexpr-table-review.json`. `check_constexpr_tables.py` fingerprints
+  declarations so new, changed or renamed tables require review; retired declarations
+  preserve their lineage. Classifications distinguish numeric encodings, typed content,
+  named structure, reference metadata and open work. Known instruction tables remain
+  `open_migration`, even when the literal ratchet exempts their tokens. Scalar masks and
+  colors retain their existing treatment. This bounded census does not classify numbers
+  as addresses or prove whole-module conformity; the campaign inventory carries that review.
 * One public header per system. Keep internal helpers in the `.cpp` or in a `detail`
   namespace. Slug rules are in `docs/ARCHITECTURE.md`.
 * Comments explain why, the original's quirks, and fidelity-relevant ordering. They do not
