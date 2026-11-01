@@ -61,3 +61,15 @@ Source modification and judge additions are separate commits. Baselines, current
 libraries, full streams and fault copies remain under ignored build/input-axes.
 Do not remove pinned proof. Fresh independent STYLE12/spec review and final cohort
 remain pending; no gameplay, physical controller,63FPS or campaign claim.
+
+## Root provenance follow-through
+
+After independent review, the official symbol generator was run with existing
+pinned local SDK inputs through a read-only file overlay under build/input-axes.
+Its actual Git revision and committed-header equality checks remained enabled.
+The repository-relative ls-tree query ran in the real repository, not the overlay;
+its output was never substituted. No project source directory was replaced, SDK
+modified, database fabricated or network access used. check_provenance reports
+zero errors, with the recovered INPUT entry named by the committed override.
+Layer and global-owner checks also pass. Full product/consumer/holdout/integration
+qualification and automatic protection of the new test body remain pending.
