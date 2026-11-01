@@ -74,10 +74,6 @@
         "sequence.time = stored.time;",
         "sequence.time = stored.time; sequence.emerald = stored.padding;"
       ],
-      "mission_guard": [
-        "mode == 5 && state.destructor == mission_level_destructor",
-        "mode == 6 && state.destructor == mission_level_destructor"
-      ],
       "signed_loaded": [
         "if (state.loaded[character] > 0) {",
         "if (static_cast<std::uint8_t>(state.loaded[character]) > 0) {"
@@ -85,8 +81,13 @@
       "unload_count": [
         "if (state.loaded[character] == 1) {",
         "if (state.loaded[character] > 0) {"
+      ],
+      "level_zero": [
+        "if (mode == 0) {",
+        "if (mode == 1) {"
       ]
-    }
+    },
+    "qualification_note": "Original runner tried mission_guard; historical follow-up at rollout line 5102 replaces it with level_zero within recovered caller domain. Preserve final five fault intents."
   },
   {
     "family": "title",
@@ -117,6 +118,27 @@
         "entry_selection",
         "entry = 2;",
         "entry = 1;"
+      ]
+    ]
+  },
+  {
+    "family": "title_adx",
+    "transcript": "rollout-2026-10-20T12-54-20-01a15aaa-1cee-74a1-a50f-19dd9ce6cc8f-816.txt",
+    "faults": [
+      [
+        "adx_null_guard",
+        "if (manager) {",
+        "if (true) {"
+      ],
+      [
+        "adx_close_order",
+        "    calls.close_media(0);\n    calls.close_media(1);",
+        "    calls.close_media(1);\n    calls.close_media(0);"
+      ],
+      [
+        "adx_previous_song",
+        "    tracks.previous_song = -1;",
+        "    tracks.previous_song = -1;\n    tracks.real_previous_song = -1;"
       ]
     ]
   }

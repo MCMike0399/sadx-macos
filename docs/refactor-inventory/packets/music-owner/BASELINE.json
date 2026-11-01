@@ -1,0 +1,400 @@
+{
+  "source_commit": "73be9a5c4217157a05c11fdd4f875d98877e16d4",
+  "streams": {
+    "music": {
+      "exit": 0,
+      "stream_sha256": "6e05147299059f29ab8fc0e7ef22af933aa0155d7783f6c37e0d5bad2d956557",
+      "bytes": 43301742,
+      "cases": 1301,
+      "report_sha256": "e54dbf2a77c2732926fa6ea3b690f38caec7edd0bbd0598161548b1be0e6e5bf",
+      "fully_executed_cases": 1299,
+      "unsupported_data_boundaries": [
+        {
+          "group": "manager",
+          "case": 158,
+          "input": [
+            124,
+            3921515906,
+            4294967295,
+            1,
+            74243319,
+            4229885288,
+            49292,
+            2714398579,
+            1,
+            1,
+            0,
+            7,
+            1,
+            0,
+            0,
+            0,
+            0,
+            5,
+            1989653671,
+            67,
+            2,
+            0,
+            6,
+            124,
+            4294967295,
+            0,
+            0,
+            1,
+            21120,
+            3362418410
+          ],
+          "instruction": "0x42552b",
+          "voice": -1,
+          "fact": "voice duration outside imported2049-entry table"
+        },
+        {
+          "group": "manager",
+          "case": 386,
+          "input": [
+            4294967295,
+            362897657,
+            4294967295,
+            1,
+            3794262117,
+            3251973734,
+            19413,
+            4230842425,
+            1,
+            1,
+            1,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            5,
+            1618386176,
+            74,
+            2,
+            9,
+            4,
+            102,
+            4294967295,
+            1,
+            0,
+            1,
+            53537,
+            760825006
+          ],
+          "instruction": "0x42559e",
+          "voice": -1,
+          "fact": "voice duration outside imported2049-entry table"
+        }
+      ]
+    },
+    "menu_voice": {
+      "exit": 0,
+      "stream_sha256": "f26482222570ceac451b6f33699a601c6630ca58453300d95a8772228b5819c5",
+      "bytes": 3250520,
+      "cases": 4888,
+      "report_sha256": "40214e21dc00ece9d6413e719c4abccdc7eff6906bca165c72de23c418a29952"
+    },
+    "game_cleanup": {
+      "exit": 0,
+      "stream_sha256": "3c405306fa02274dff78fdf07819917ae109fa54dc0c43b28c1b8b61eb5e118c",
+      "bytes": 22347776,
+      "cases": 2604,
+      "report_sha256": "d341765c325ed3cc6970b2eaa20c0bb5084dc24a0dfa5e90f6884551ebb9a365"
+    },
+    "game_reset_composed": {
+      "exit": 0,
+      "stream_sha256": "222e39c5c2936f0b2952b5d17ab892577a556ba76cab9aa98a29c57efb439eed",
+      "bytes": 69320400,
+      "cases": 300,
+      "report_sha256": "b6040da51f34634dcdbc07faccf6e0284d68e22adc04c0eb2fa4514bf16bde7a"
+    },
+    "stream_players": {
+      "exit": 0,
+      "stream_sha256": "afa68e5540fa945fcee69790df75a4c156f6c17c39da12c90afb11710cff2cf5",
+      "bytes": 133800,
+      "cases": 600,
+      "report_sha256": "d5547b4e394796aed7c684a415319c6f2d089f3a60fcb53b173a394c07efeef3"
+    },
+    "title_menu": {
+      "exit": 1,
+      "stream_sha256": "28ffb591c3eb409595610971404206d62df091724958a212437ca351c17cc685",
+      "bytes": 89394776,
+      "partial_count": 270,
+      "cases": 20872,
+      "report_sha256": "263d8d2cf2138c4f55e1b0c67fd62e4d20cbe6e78ec8f337f94bcee69c0636a9"
+    }
+  },
+  "historical_mutants": [
+    {
+      "name": "request_mapping",
+      "family": "music",
+      "exit": 1,
+      "mismatches": 5,
+      "caught": true,
+      "source": "src/game/music.cpp",
+      "old": "request_song(catalog.menu_requests[static_cast<std::size_t>(index)], menu, tracks, services);",
+      "new": "request_song(index, menu, tracks, services);",
+      "mutant_sha256": "e17d8a1d60c08ce1e8fc1492856031609d0523bd09085050fbd4ad39a8374e3b"
+    },
+    {
+      "name": "delay_gate",
+      "family": "music",
+      "exit": 1,
+      "mismatches": 4,
+      "caught": true,
+      "source": "src/game/music.cpp",
+      "old": "if (elapsed > 0 && ready != 0)",
+      "new": "if (elapsed >= 0 && ready != 0)",
+      "mutant_sha256": "73656b407afeaebeffa7a895520fc676d4d7bf60f7ec5510a31b4f0c553a32e9"
+    },
+    {
+      "name": "factory_track_reset",
+      "family": "music",
+      "exit": 1,
+      "mismatches": 57,
+      "caught": true,
+      "source": "src/game/music.cpp",
+      "old": "tracks.real_previous_song = -1;",
+      "new": "tracks.real_previous_song = 0;",
+      "mutant_sha256": "a431092d0319ffd9c1ed27aada0cae447b11343fc3ab7aad1d4b574355f35bc2"
+    },
+    {
+      "name": "live_song_reload",
+      "family": "music",
+      "exit": 1,
+      "mismatches": 42,
+      "caught": true,
+      "source": "src/game/music.cpp",
+      "old": "tracks.real_previous_song = tracks.current_song;",
+      "new": "tracks.real_previous_song = tracks.previous_song;",
+      "mutant_sha256": "382dde1d9f722aeb0631f1a55dfe0000d247910af97fd2e11a4738b5f038abf6"
+    },
+    {
+      "name": "cd_fallback",
+      "family": "music",
+      "exit": 1,
+      "mismatches": 23,
+      "caught": true,
+      "source": "src/game/music.cpp",
+      "old": "if (services.play_music(path, loop) == 0)",
+      "new": "if (services.play_music(path, loop) != 0)",
+      "mutant_sha256": "7b20f7c4aed4a554b8f8d064d2093948332820f93dc848c36ee85c2e5d968eff"
+    },
+    {
+      "name": "voice_language",
+      "family": "music",
+      "exit": 1,
+      "mismatches": 29,
+      "caught": true,
+      "source": "src/game/music.cpp",
+      "old": "const bool japanese = state.voice_language == 0;",
+      "new": "const bool japanese = false;",
+      "mutant_sha256": "c9c6d79f5619d92f306284cdf81d79d584b9faf640d592cb7836a6d5caaff462"
+    },
+    {
+      "name": "voice_clock_boundary",
+      "family": "music",
+      "exit": 1,
+      "mismatches": 2,
+      "caught": true,
+      "source": "src/game/music.cpp",
+      "old": "now - state.voice_timing.started < state.voice_timing.duration",
+      "new": "now - state.voice_timing.started <= state.voice_timing.duration",
+      "mutant_sha256": "a9e5e21948a4f9f3654b5460f176ef5cd1a368a6bbfce9ac2c4cd162dff6db3f"
+    },
+    {
+      "name": "publish_open_early",
+      "family": "music",
+      "exit": 1,
+      "mismatches": 7,
+      "caught": true,
+      "source": "src/game/music.cpp",
+      "old": "services.start_music(attenuation);",
+      "new": "media.music_open = 1; services.start_music(attenuation);",
+      "mutant_sha256": "2a71f0b9cfafff1712e7b1c0d70f8867ebb1227e8ecf4cca46975500331a3c42"
+    },
+    {
+      "name": "loop_decision",
+      "family": "music",
+      "exit": 1,
+      "mismatches": 7,
+      "caught": true,
+      "source": "src/game/music.cpp",
+      "old": "if (media.music_looping == 0)",
+      "new": "if (media.music_looping != 0)",
+      "mutant_sha256": "4a12e84755a310bc615fffd8892fa986db6e54ca3b05b1c53c3f392bf5712faa"
+    },
+    {
+      "name": "failed_open",
+      "family": "music",
+      "exit": 1,
+      "mismatches": 9,
+      "caught": true,
+      "source": "src/game/music.cpp",
+      "old": "if (services.open_music(path) < 0)",
+      "new": "if (services.open_music(path) > 0)",
+      "mutant_sha256": "59a0c898ad5b9c6fd3c61ed586fd8b8ae01ba7d3a1045f83fb3cf915a3359701"
+    },
+    {
+      "name": "request_enabled",
+      "family": "music",
+      "exit": 1,
+      "mismatches": 32,
+      "caught": true,
+      "source": "src/game/music.cpp",
+      "old": "if (enabled != 0)",
+      "new": "if (enabled == 0)",
+      "mutant_sha256": "b2047c14bba7b92b359ef68f61eabfa3d1186c590e9265b53813b9a70983c13c"
+    },
+    {
+      "name": "life_slot",
+      "family": "cleanup",
+      "exit": 1,
+      "mismatches": 1,
+      "caught": true,
+      "source": "src/game/game_cleanup.cpp",
+      "old": "life_slots{0, 0, 1, 2, 0, 3, 4, 5}",
+      "new": "life_slots{0, 1, 1, 2, 0, 3, 4, 5}",
+      "mutant_sha256": "c4fa64b4085e024acf7a30fa54433a4873441617190ce8d95fe5ce9bee94b174"
+    },
+    {
+      "name": "emerald_padding",
+      "family": "cleanup",
+      "exit": 1,
+      "mismatches": 1024,
+      "caught": true,
+      "source": "src/game/game_cleanup.cpp",
+      "old": "sequence.time = stored.time;",
+      "new": "sequence.time = stored.time; sequence.emerald = stored.padding;",
+      "mutant_sha256": "775ebc7bcfeda5947d15c1da3958e9bd64d3c65941e607b24a4f8c28b13865ac"
+    },
+    {
+      "name": "signed_loaded",
+      "family": "cleanup",
+      "exit": 1,
+      "mismatches": 106,
+      "caught": true,
+      "source": "src/game/game_cleanup.cpp",
+      "old": "if (state.loaded[character] > 0) {",
+      "new": "if (static_cast<std::uint8_t>(state.loaded[character]) > 0) {",
+      "mutant_sha256": "5fcf19b1edfd8a5619e77884c74ca34d1f4994d2e94da58bc494118935524a94"
+    },
+    {
+      "name": "unload_count",
+      "family": "cleanup",
+      "exit": 1,
+      "mismatches": 28,
+      "caught": true,
+      "source": "src/game/game_cleanup.cpp",
+      "old": "if (state.loaded[character] == 1) {",
+      "new": "if (state.loaded[character] > 0) {",
+      "mutant_sha256": "dcac0cf020ca8ba08c4298b6bb45ad9c3c12528b457f88fa557e46c4fb8d243a"
+    },
+    {
+      "name": "level_zero",
+      "family": "cleanup",
+      "exit": 1,
+      "mismatches": 26,
+      "caught": true,
+      "source": "src/game/game_cleanup.cpp",
+      "old": "if (mode == 0) {",
+      "new": "if (mode == 1) {",
+      "mutant_sha256": "2b25d1090b0bdd33db3ddf78be5000f7d273b286770882a250bc56d6b580cd31"
+    },
+    {
+      "name": "big_cast_binding",
+      "family": "title",
+      "exit": 1,
+      "mismatches": 8,
+      "caught": true,
+      "source": "src/game/title_menu.cpp",
+      "old": "bindings.big_cast_repeat = actions.big_cast;",
+      "new": "bindings.big_cast_repeat = actions.big_prepare;",
+      "mutant_sha256": "73efdcb344d13416c8773e74a01f473599356331ddb495761a910aa507c30a13"
+    },
+    {
+      "name": "font_guard",
+      "family": "title",
+      "exit": 1,
+      "mismatches": 8,
+      "caught": true,
+      "source": "src/game/title_menu.cpp",
+      "old": "if (shared.font_loaded == 0)",
+      "new": "if (shared.font_loaded != 0)",
+      "mutant_sha256": "8a256783f497ed9e816d58e43e3b85f741d35729a57d86ee3412053567812783"
+    },
+    {
+      "name": "release_order",
+      "family": "title",
+      "exit": 1,
+      "mismatches": 8,
+      "caught": true,
+      "source": "src/game/title_menu.cpp",
+      "old": "    calls.free_character_textures();\n    calls.release_all_textures();",
+      "new": "    calls.release_all_textures();\n    calls.free_character_textures();",
+      "mutant_sha256": "1a79cf52b53ea4eb6edabf35390620ac79533775af3ff83b85eaab2c553ff4b6"
+    },
+    {
+      "name": "sequence_fade",
+      "family": "title",
+      "exit": 1,
+      "mismatches": 8,
+      "caught": true,
+      "source": "src/game/title_menu.cpp",
+      "old": "work->fade_out = 1;",
+      "new": "work->fade_out = 0;",
+      "mutant_sha256": "5857a91f3bd93d9fb2661e0f0017784f202fca1932cec113f3467e8214238726"
+    },
+    {
+      "name": "entry_selection",
+      "family": "title",
+      "exit": 1,
+      "mismatches": 8,
+      "caught": true,
+      "source": "src/game/title_menu.cpp",
+      "old": "entry = 2;",
+      "new": "entry = 1;",
+      "mutant_sha256": "cd9688198c7ddb964132176643fd0b4826a21a6d934b09e411edfe08b8e5c4a3"
+    },
+    {
+      "name": "adx_null_guard",
+      "family": "title_adx",
+      "exit": 1,
+      "mismatches": 8,
+      "caught": true,
+      "source": "src/game/title_menu.cpp",
+      "old": "if (manager) {",
+      "new": "if (true) {",
+      "mutant_sha256": "b57e9431a24a00beb428d9a36b5700a52b7b1d5f560825b3aff4e19e0708c131"
+    },
+    {
+      "name": "adx_close_order",
+      "family": "title_adx",
+      "exit": 1,
+      "mismatches": 8,
+      "caught": true,
+      "source": "src/game/title_menu.cpp",
+      "old": "    calls.close_media(0);\n    calls.close_media(1);",
+      "new": "    calls.close_media(1);\n    calls.close_media(0);",
+      "mutant_sha256": "d4ab0dbc2375f6a483efa4d12265c011b5f5b115be41e11ae872ac1fe986080a"
+    },
+    {
+      "name": "adx_previous_song",
+      "family": "title_adx",
+      "exit": 1,
+      "mismatches": 8,
+      "caught": true,
+      "source": "src/game/title_menu.cpp",
+      "old": "    tracks.previous_song = -1;",
+      "new": "    tracks.previous_song = -1;\n    tracks.real_previous_song = -1;",
+      "mutant_sha256": "07192eaecb39652f5c32b73a679bd204fa6154504bc1928aa22798613307b492"
+    }
+  ],
+  "limits": [
+    "No gate, holdout, journeys, product build or Root independent review",
+    "Native output capture normalizes return only for actual void C exports; ignores no output words",
+    "Private setup logs retained: crt_integer dependency, duplicated reset export, title frame-loop/speedrun dependencies; no maintained build defect claimed"
+  ]
+}
