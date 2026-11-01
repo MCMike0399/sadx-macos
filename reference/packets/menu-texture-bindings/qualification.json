@@ -62,5 +62,24 @@
     "No original Windows equivalence or GPU lifetime assertion by this native binding baseline.",
     "Native rebuild/actual resource journeys and independent STYLE review pending.",
     "Other Session/UI/regular/GPU/task owners remain unchanged."
-  ]
+  ],
+  "native_source_build": {
+    "exit_status": 0,
+    "force_load_closure": "pass",
+    "log_sha256": "8058519dbc3b69b8a71387d7901e5c896f5814d249e3b8cee0d8d70f8c0a983c",
+    "reused_dependency": "Only copied pinned installed SDL/libusb; maintained/native/game/numerical code rebuilt in this checkout."
+  },
+  "unchanged_consumer_judges": {
+    "menu_resource_lifetime": {
+      "cases": 1401,
+      "mismatch_count": 0,
+      "full_report_sha256": "a7f3c9a30b24730a3d59765876809f867505498bb2bf0c16ffe4aef681b76b80"
+    },
+    "regular_textures": {
+      "cases": 609,
+      "mismatch_count": 0,
+      "full_report_sha256": "f783413006658427d936c770bd137f882e61f664e56f192917f22f1e45ac0046"
+    }
+  },
+  "native_journeys": "Running under exec93061; no verdict yet. Full integrated gate and independent source review remain pending."
 }
