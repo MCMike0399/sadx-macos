@@ -24,8 +24,10 @@ Only probe-side diagnostic normalization includes the reference phase mapping.
 Complete outputs, including every FP flag and failure prefix, equal the frozen
 103 / 16,440 / 7,944-case streams. The compatibility constant argument remains in
 the frozen C ABI; shared arithmetic now uses the three verified source literals.
-Arbitrarily substituted compiler constants are outside the pinned original-source
-contract. The native API has no constant-pool transport.
+The native API has no constant-pool transport. Its arithmetic uses pinned literals;
+the retained reference binding separately honors all three supplied values at
+each reached use through the same shared algorithm. Root correction d82d0ac
+closes the review counterexample without duplicating playback policy.
 
 The new publication unit compares every read and field publication against the
 original instruction-hook stream, independently of the content recipe. It checks
