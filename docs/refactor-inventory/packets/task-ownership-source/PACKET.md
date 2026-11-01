@@ -83,3 +83,62 @@ header mtime, downloaded pinned sources and used its default six jobs. That viol
 requested setup. Its own process tree was stopped (exit 143), the hash-exact local third-party
 copy restored, header freshness fixed, and the corrected private build stayed at -j2.
 No maintained Main archive was borrowed, no Main file was written and no push occurred.
+
+## Final Source72 qualification
+
+`FINAL-QUALIFICATION.json` is the current execution receipt. Source remains exactly
+`72d0e83ead1255aa658ef6b78220c04b1b737b93`; the independent standards recheck remains
+accepted. The 23 focused/borrower units and five actual reference consumer programs all exit
+zero. Sonic uses its registered forced include. The app, force-load product and native closure
+check pass with private fresh core/guest/native archives. All 20 changed Source files occur in
+actual compiler MMD closure; all 18 direct probe bindings have compiler-derived header hashes.
+
+All four unchanged task original judges exit zero with the exact sequence/operation/outcome
+counts listed above. `FINAL-STREAMS.json` validates 16 / 40 / 236 / 244 complete ABI records
+against the fresh immutable-before streams with Root's exact 9a6707e helper and both identity
+ledgers. Every byte, including padding and all diagnostic/context/arena buffers, is identical.
+The same six delete exclusions remain; inactive 401000 remains a stop without a source return.
+`game_scene_logic` retains all 800 original case/range identities and complete outcomes.
+
+All 14 historical scheduler semantic fault intents compile and are caught on current Source,
+with three separately compiled unmodified drivers passing first. All three actual TaskBridge
+fault intents compile and are caught with fresh private dependencies and retained link maps.
+`FINAL-FAULTS.json` pins full local receipts. The historical initial skip-unlink survivor and
+invalid compile/setup attempts remain separate nonkills; none was overwritten or relabeled.
+
+The complete old/current startup, auxiliary-effect and collision original observation reports
+also match, after excluding only library/source identities and the case-blob output path.
+Startup retains unobserved original return / full-emulator false; auxiliary retains strict
+emulator false. Collision retains strict exit 2, zero value mismatches and all 6,462 FP partial
+identities, including every numeric/lifecycle/failure row. These limits are not passes.
+`EXTRA-ORIGINALS.json` and `EXTRA-OBSERVATIONS.json` preserve the exact recipes and reports.
+
+The additive native width contract and prepared scheduler observations equal immutable old
+Source output. The added scene task-failure/context/prefix case also passes immutable old
+Source through a driver adapted only to its old interface. The complete new transport/native
+tests, new reference helper and maintained mutation helpers are explicit full-body review
+scope in `REVIEW-SCOPE.json`; this packet does not approve Root's generator/observer helpers.
+
+Exact compilation and original runs are in `FINAL-COMPILE-PLAN.json`,
+`FINAL-PROBE-COMPILE.json` and `FINAL-ORIGINAL-RUNS.json`. Final fault commands were:
+
+```sh
+PYTHONPATH=tools/lib:tools/oracles /Users/burbujamc/Developer/sadx-macos/reference/python/bin/python tools/oracles/task_judges/mutate.py --candidate --base 72d0e83ead1255aa658ef6b78220c04b1b737b93 --exe '/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe' --python /Users/burbujamc/Developer/sadx-macos/reference/python/bin/python --out build/task-source/final-mutants
+/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python tools/oracles/task_judges/bridge_faults.py --base 72d0e83ead1255aa658ef6b78220c04b1b737b93 --unicorn /Users/burbujamc/Developer/sadx-macos/reference/python/lib/python3.14/site-packages/unicorn --out build/task-source/final-bridge-faults
+python3 build/task-source/compare_streams-9a6707e.py build/task-source/baseline build/task-source/final --output docs/refactor-inventory/packets/task-ownership-source/FINAL-STREAMS.json
+```
+
+The final full streams, identity ledgers, raw reports and task dylibs remain under
+`build/task-source/{baseline,final,old,final-libs}`. Raw fault/control outputs are under
+`build/task-source/{final-mutants,final-bridge-faults}`. Current product, archive, compiler,
+source/borrower/probe-dependency and static-check hashes are in `FINAL-ARTIFACTS.json`.
+Do not overwrite those directories when repeating an experiment. Interpreter and PE hashes
+remain the exact pinned assignment. This worker ran no final reserved inputs or full gate.
+
+Root still owns fresh independent fidelity review including the complete new helper/test
+bodies, final reserved runner/adequacy/admission/execution, finite parent protection union,
+authored inventory closure, clean isolated source-only product/journeys and the integrated
+full gate. Global manifest/inventory/STATUS were not refreshed. Broader PlayerSystem,
+arbitrary callbacks, corrupt-source/hardware/Windows parity and gameplay remain open.
+After this Task packet, the user-directed next Source system is the full legacy reset/queue/
+Sonic owner closure, not a separate utility gate. No new Source lane was started here.

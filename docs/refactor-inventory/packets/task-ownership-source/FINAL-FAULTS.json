@@ -1,0 +1,179 @@
+{
+  "source": "72d0e83",
+  "controls": [
+    {
+      "kind": "contract",
+      "compile_exit": 0,
+      "run_exit": 0
+    },
+    {
+      "kind": "canonical",
+      "compile_exit": 0,
+      "run_exit": 0
+    },
+    {
+      "kind": "historical",
+      "compile_exit": 0,
+      "run_exit": 0
+    }
+  ],
+  "scheduler_faults": [
+    {
+      "name": "early-walk-reclamation",
+      "scenario": "deferred_walk",
+      "compile_exit": 0,
+      "run_exit": -6,
+      "caught": true,
+      "copied_sha256": "f837f1b0527e5ac65da12694071bde5154dca8eeaee7988ba6b66c21cd70a724",
+      "receipt_directory": "build/task-source/final-mutants/early-walk-reclamation"
+    },
+    {
+      "name": "unavailable-default-is-null",
+      "scenario": "availability",
+      "compile_exit": 0,
+      "run_exit": -6,
+      "caught": true,
+      "copied_sha256": "6e29e8788fd39058307092c9df18389cbb6dffa51235d568016b74f0480ed9e3",
+      "receipt_directory": "build/task-source/final-mutants/unavailable-default-is-null"
+    },
+    {
+      "name": "slot-zero-is-null",
+      "scenario": "saved_next",
+      "compile_exit": 0,
+      "run_exit": -6,
+      "caught": true,
+      "copied_sha256": "b7f336a35d6bb622e68db7b827ea6953e83d5430af6da66553682457297f6f75",
+      "receipt_directory": "build/task-source/final-mutants/slot-zero-is-null"
+    },
+    {
+      "name": "stale-saved-generation",
+      "scenario": "saved_next",
+      "compile_exit": 0,
+      "run_exit": -6,
+      "caught": true,
+      "copied_sha256": "724ca53ef5ace9bbfe32ec00c30587eb150eb142e5be6d6b721eb657292a5aa0",
+      "receipt_directory": "build/task-source/final-mutants/stale-saved-generation"
+    },
+    {
+      "name": "missing-function-context",
+      "scenario": "contexts",
+      "compile_exit": 0,
+      "run_exit": -6,
+      "caught": true,
+      "copied_sha256": "bed0af69d323502383b2ac8308e0758835ecea9c3e89f3c554ec4ff698555689",
+      "receipt_directory": "build/task-source/final-mutants/missing-function-context"
+    },
+    {
+      "name": "missing-context-clear",
+      "scenario": "contexts",
+      "compile_exit": 0,
+      "run_exit": -6,
+      "caught": true,
+      "copied_sha256": "e6c1a3398be28ceae7e73a760e8b2d4de074f34128c1496841ded9f175779ffc",
+      "receipt_directory": "build/task-source/final-mutants/missing-context-clear"
+    },
+    {
+      "name": "skip-unlink-state",
+      "scenario": "read_failures",
+      "compile_exit": 0,
+      "run_exit": -6,
+      "caught": true,
+      "copied_sha256": "937c187427e6f0a7fdf9c6bab1ab8811c25a7a103cd0b821d020091fa774ec0a",
+      "receipt_directory": "build/task-source/final-mutants/skip-unlink-state"
+    },
+    {
+      "name": "skip-native-aux-release",
+      "scenario": "read_failures",
+      "compile_exit": 0,
+      "run_exit": -6,
+      "caught": true,
+      "copied_sha256": "1ed0d9404be3be6b32f5e00710e23d52fecee5fcf4196c6e08e29f2d9fcc06bf",
+      "receipt_directory": "build/task-source/final-mutants/skip-native-aux-release"
+    },
+    {
+      "name": "discard-callback-failure",
+      "scenario": "callback_failures",
+      "compile_exit": 0,
+      "run_exit": -6,
+      "caught": true,
+      "copied_sha256": "71a710a22e57072e0349851347e0f7e666bf8e299ad3e4262f0b5a15edb66cd8",
+      "receipt_directory": "build/task-source/final-mutants/discard-callback-failure"
+    },
+    {
+      "name": "conflicting-context-owner",
+      "scenario": "contexts",
+      "compile_exit": 0,
+      "run_exit": -6,
+      "caught": true,
+      "copied_sha256": "08eaa9d025e57c6bca71048117e16dcbb2e8ed1c948a872c94cd2ee2e2323f45",
+      "receipt_directory": "build/task-source/final-mutants/conflicting-context-owner"
+    },
+    {
+      "name": "canonical-argument-not-retained",
+      "scenario": "canonical",
+      "compile_exit": 0,
+      "run_exit": -11,
+      "caught": true,
+      "copied_sha256": "99268a89d1b6b6e8f6858a4dd89cec39abdc5190797a68f66d1f4931eaa7d91c",
+      "receipt_directory": "build/task-source/final-mutants/canonical-argument-not-retained"
+    },
+    {
+      "name": "historical-skip-destructor",
+      "scenario": "historical",
+      "compile_exit": 0,
+      "run_exit": 1,
+      "caught": true,
+      "copied_sha256": "4bd326a87578cbe70417081d146f48baae748ff4e7b38b04740f493bada7e7fe",
+      "receipt_directory": "build/task-source/final-mutants/historical-skip-destructor"
+    },
+    {
+      "name": "historical-retain-exec",
+      "scenario": "historical",
+      "compile_exit": 0,
+      "run_exit": 1,
+      "caught": true,
+      "copied_sha256": "9d7913414939ac2461674eca9932ef17de49e21f96bcd114d40a99659c4e22f9",
+      "receipt_directory": "build/task-source/final-mutants/historical-retain-exec"
+    },
+    {
+      "name": "historical-skip-auxiliary-free",
+      "scenario": "historical",
+      "compile_exit": 0,
+      "run_exit": 1,
+      "caught": true,
+      "copied_sha256": "774aaedee51d12c175df8c0a27f75b391a2365d27a7c389d0bce303f4d80e171",
+      "receipt_directory": "build/task-source/final-mutants/historical-skip-auxiliary-free"
+    }
+  ],
+  "full_receipts": "build/task-source/final-mutants/receipts.json",
+  "full_receipts_sha256": "8c88627fa06e011572db05bb3c6f660c6bcde7183128f2ac5445c76694b31eb6",
+  "limits": "Historical initial skip-unlink survivor and invalid setup/compile receipts remain separate and are not counted as kills; current fourteen semantic intents each compiled and were caught by their retained contracts/original lifecycle judge",
+  "bridge_faults": [
+    {
+      "name": "eager-ready-before-shortcut",
+      "compile_exit": 0,
+      "run_exit": -6,
+      "caught": true,
+      "copied_sha256": "e26c0478b43cd2328d5334103191f817f5bc4fd48b9aeae4baf22099eff201dc",
+      "link_map": "build/task-source/final-bridge-faults/eager-ready-before-shortcut.map"
+    },
+    {
+      "name": "missing-arena-is-success",
+      "compile_exit": 0,
+      "run_exit": -6,
+      "caught": true,
+      "copied_sha256": "921401543c65ba8b29cb8efb2d4c18eafa7784e59eff807a905147c34a797479",
+      "link_map": "build/task-source/final-bridge-faults/missing-arena-is-success.map"
+    },
+    {
+      "name": "stale-graph-after-callback",
+      "compile_exit": 0,
+      "run_exit": 1,
+      "caught": true,
+      "copied_sha256": "7149bb6bb0f32e29eed28ccb4dbdecab60370fd4c77c7e4330524d75afc99902",
+      "link_map": "build/task-source/final-bridge-faults/stale-graph-after-callback.map"
+    }
+  ],
+  "bridge_full_receipts": "build/task-source/final-bridge-faults/receipts.json",
+  "bridge_full_receipts_sha256": "638547b4c17ac99dbd5097cc1c4ca51242178b9792f4dc3cdd27de751b437650"
+}

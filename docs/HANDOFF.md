@@ -774,3 +774,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * The source-only native app and force-load closure build; three actual menu/save journeys pass. All 1,323 protected inputs and 66 inventory tests verify. Warning task contracts remain explicitly unrecovered.
 * Qualified-corpus make -j10 gate exits zero at dc1771c: 304 native programs, 512 Python tests, the inherited filesystem skip, reference R1–R4, three native journeys and sixteen startup comparisons. STATUS is regenerated from save-list-frame-gate.json.
 * Next is the prepared Task/TaskWork source migration, carrying scheduler, arena and actual native/reference consumers under the accepted lifecycle judges. No new gameplay, Windows parity or whole-campaign completion is claimed. Storage stays idle. No push.
+
+### 2026-11-01 — Task scheduler and arena Source packet qualified
+
+* Both complete engine modules now have semantic operations, canonical scheduler and allocation ownership, explicit native thread defaults and narrow reference encoding/diagnostics. Root standards recheck accepts Source 72d0e83; broader player modules remain open.
+* Four complete default ABI streams match immutable bd22ee4 byte for byte. Original work retains 16 sequences / 4,890 operations; lifecycle 19 / 2,316; display 236 comparisons; delete 244 / 250 with the same six exclusions. Inactive 401000 is a stop, not a return.
+* All 23 focused/borrower units and five real reference consumers pass. Native app, force-load and closure pass; all 20 changed Source borrowers and 18 direct probes have compiler dependency evidence. Fourteen scheduler and three actual bridge faults compile and are caught.
+* Original scene logic retains all 800 outcomes. Old/current startup, auxiliary and collision observation reports match fully; collision keeps strict exit 2 and all 6,462 FP partials with zero value mismatches. Startup/auxiliary strict/full limits remain explicit.
+* Full helper/test review scope and exact local recipes/artifacts live in docs/refactor-inventory/packets/task-ownership-source/PACKET.md. Initial setup failures, including an unwanted controller dependency rebuild, remain documented; corrected final execution stayed at -j2.
+* No reserved inputs, full gate, Main write, push or global manifest/inventory refresh. Root owns fidelity review, reserved qualification and integrated closure/journeys/gate. The next requested source system is full legacy reset/queue/Sonic ownership.

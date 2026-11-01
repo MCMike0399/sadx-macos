@@ -1,0 +1,41 @@
+[
+  {
+    "slug": "player_startup",
+    "complete_observations_equal": true,
+    "identity_only_exclusions": [
+      "native_library_sha256",
+      "native_sources",
+      "case_blob.path"
+    ],
+    "old_full_report": "build/task-source/extra/old-player_startup.json",
+    "current_full_report": "build/task-source/extra/current-player_startup.json",
+    "observation_sha256": "899fcf736f531ee5ff9baa8e37dcaeb0052b429306b78f1679fe92ad8cb9e7a3",
+    "preserved_limit": "Supported prefix match, original return unobserved; full_emulator_match remains false."
+  },
+  {
+    "slug": "player_auxiliary_effect",
+    "complete_observations_equal": true,
+    "identity_only_exclusions": [
+      "native_library_sha256",
+      "native_sources",
+      "case_blob.path"
+    ],
+    "old_full_report": "build/task-source/extra/old-player_auxiliary_effect.json",
+    "current_full_report": "build/task-source/extra/current-player_auxiliary_effect.json",
+    "observation_sha256": "8217c32fd7df7b7b61a444947a758d414f3c9fa3e9ff6d57897540f41311f3b7",
+    "preserved_limit": "Supported state/boundary match; strict_emulator_match remains false."
+  },
+  {
+    "slug": "collision_component",
+    "complete_observations_equal": true,
+    "identity_only_exclusions": [
+      "native_library_sha256",
+      "native_sources",
+      "case_blob.path"
+    ],
+    "old_full_report": "build/task-source/extra/old-collision_component.json",
+    "current_full_report": "build/task-source/extra/current-collision_component.json",
+    "observation_sha256": "134b5b95240bc4e9360e143580a61490d4bbbce07e5801f7ee0ebb6bec4c9c73",
+    "preserved_limit": "Strict exit 2: 6462 FP partials, 0 value mismatches; 6930 numeric / 146 lifecycle, total 7964 as original report counts (scalar rows included separately). Not a pass."
+  }
+]
