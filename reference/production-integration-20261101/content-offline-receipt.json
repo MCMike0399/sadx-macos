@@ -1,0 +1,11 @@
+{
+  "command": "SADX_CONTENT_CORPUS=\"$PWD\" PYTHONPATH=tools/lib:tools/oracles reference/python/bin/python -m unittest discover -s tests/python -p test_capture_content_offline.py -v",
+  "exit_status": 0,
+  "tests": 6,
+  "log_sha256": "34bae3624779ae7969a14f6526b1650ee3ad8765130b5438611141771e89900a",
+  "evidence": "Preserved reference/content-corpus/sha256 archive, validated by unchanged qualified artifact resolver.",
+  "limits": [
+    "Separate replay of six tests skipped in the unmodified full gate because its corpus environment was unset.",
+    "No gate skip count changed retroactively; synthetic process delivery is not a fresh app run."
+  ]
+}

@@ -1,0 +1,50 @@
+[
+  {
+    "slug": "ninja_sprite_queue",
+    "exit_status": 0,
+    "verdict": "partial",
+    "reason": "values match; strict_emulator_match=false (see limits)"
+  },
+  {
+    "slug": "ninja_queue_consumer",
+    "exit_status": 0,
+    "verdict": "partial",
+    "reason": "values match; strict_flags_match=false (see limits)"
+  },
+  {
+    "slug": "ninja_queue_render",
+    "exit_status": 0,
+    "verdict": "pass",
+    "reason": "packed_commands_boundaries_match"
+  },
+  {
+    "slug": "ninja_frame_calls",
+    "exit_status": 0,
+    "verdict": "pass",
+    "reason": "mismatch_count=0"
+  },
+  {
+    "slug": "ninja_texture_selection",
+    "exit_status": 0,
+    "verdict": "pass",
+    "reason": "passed"
+  },
+  {
+    "slug": "ninja_view",
+    "exit_status": 0,
+    "verdict": "pass",
+    "reason": "seeded_values_match, primary_values_with_unicorn_transcendentals_match"
+  },
+  {
+    "slug": "game_view",
+    "exit_status": 0,
+    "verdict": "partial",
+    "reason": "values match; fp_flag_mismatches=291 (see limits)"
+  },
+  {
+    "slug": "game_frame_owners",
+    "exit_status": 0,
+    "verdict": "pass",
+    "reason": "mismatch_count=0"
+  }
+]

@@ -615,3 +615,12 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Fresh unchanged render oracle has 8,209 cases and zero mismatches. Both queue lifecycle paths have 600 cases, zero value mismatches and 402 FP partials. Complete per-case outputs and mismatch identities are frozen in production-integration-20261101.
 * The full make -j10 gate is running in build/refactor-baseline-20261101. Windowed smoke and force-load native closure pass; no fresh green gate is recorded yet. Clean source export is prepared; native frontier/source build and remaining journey checks are pending.
 * Read-only advice selects the shared render-state, packed-blend and device-write boundary as the first proposed system. Signature-aware dispatch checks and reviewed instruction-table classifications precede behavior edits. No source behavior or inherited judge changed; no push.
+
+### 2026-11-01 — Fresh refactor baseline gate and native source export verified
+
+* Full make -j10 gate exits 0: 278 native programs, 400 Python tests, windowed smoke120, native force-load closure, R1–R4, all three native menu/save journeys and sixteen startup comparisons. Receipt: refactor-baseline-gate.json; STATUS regenerated.
+* Gate retains seven skips: six optional qualified-corpus tests and the existing filesystem case-alias skip. Separate unchanged corpus replay passes all six tests, including original rasters and suppression mutants; receipt: content-offline-receipt.json.
+* Clean source archive builds native app and force-load closure with exit 0, no EXE/DLL or prebuilt game objects. Only pinned SDL/libusb dependency installation reused; maintained code and numerical libraries rebuilt.
+* Main and exported app reach native_gamma_load_setup_resource at frame 1382, diagnostic exit 1. Selected state fields and screenshot hash match; inspected image is outgoing title. No actor/GPU/N3b/story/gameplay63FPS claim.
+* Dispatch-signature and constexpr-table judge candidates are committed in packet/constexpr-table-review and under fresh independent review; not integrated. Main behavior and inherited judges remain unchanged. Render consumer baseline oracles continue in the dedicated build directory.
+* Storage coordination received a read-only inventory of 1.47 GiB of historical generated candidates. No moves, service changes or writer interruptions; await the shared archive tool contract. No push.

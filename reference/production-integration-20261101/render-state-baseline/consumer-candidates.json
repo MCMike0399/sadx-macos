@@ -1,0 +1,702 @@
+{
+  "limits": "Textual interface uses; resolve actual ownership/call/lifetime closure before edits.",
+  "files": [
+    {
+      "path": "src/engine/ninja_device_init.hpp",
+      "sha256": "babf555f359b71b5c3bcb4538e689bf165895436f1b39e469e4a9a8cc6c926a0",
+      "references": [
+        {
+          "line": 51,
+          "symbols": [
+            "NinjaRenderState"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/engine/ninja_frame_calls.hpp",
+      "sha256": "914dd83a429d326e7a41a949146faa3cc95c5fd170ea7562b533a92e4bfb8828",
+      "references": [
+        {
+          "line": 69,
+          "symbols": [
+            "NinjaRenderState"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/engine/ninja_queue_consumer.cpp",
+      "sha256": "b5a6cb784a570507e9844cee6607d785a3522ce486b0a3a0ce23cb7d52d7d43a",
+      "references": [
+        {
+          "line": 12,
+          "symbols": [
+            "NinjaRenderState"
+          ]
+        },
+        {
+          "line": 15,
+          "symbols": [
+            "NinjaRenderSourceSites",
+            "ninja_issue_render_state"
+          ]
+        },
+        {
+          "line": 39,
+          "symbols": [
+            "ninja_set_depth_comparison"
+          ]
+        },
+        {
+          "line": 66,
+          "symbols": [
+            "ninja_set_depth_comparison",
+            "ninja_set_depth_write"
+          ]
+        },
+        {
+          "line": 68,
+          "symbols": [
+            "ninja_set_blend"
+          ]
+        },
+        {
+          "line": 93,
+          "symbols": [
+            "ninja_set_depth_comparison",
+            "ninja_set_depth_write"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/engine/ninja_render.cpp",
+      "sha256": "d18ca70f7a617ea3a0b26f31e461ad18d36994279982e968ea0634dc4b7d3db9",
+      "references": [
+        {
+          "line": 6,
+          "symbols": [
+            "NinjaRenderSourceSites",
+            "NinjaRenderState",
+            "ninja_issue_render_state"
+          ]
+        },
+        {
+          "line": 10,
+          "symbols": [
+            "NinjaRenderStateCommand"
+          ]
+        },
+        {
+          "line": 17,
+          "symbols": [
+            "NinjaRenderSourceSites",
+            "NinjaRenderState",
+            "ninja_issue_texture_stage_state"
+          ]
+        },
+        {
+          "line": 21,
+          "symbols": [
+            "NinjaRenderStageCommand"
+          ]
+        },
+        {
+          "line": 33,
+          "symbols": [
+            "NinjaRenderState",
+            "ninja_set_blend"
+          ]
+        },
+        {
+          "line": 41,
+          "symbols": [
+            "ninja_set_blend_77ec60"
+          ]
+        },
+        {
+          "line": 43,
+          "symbols": [
+            "NinjaRenderState",
+            "ninja_set_blend_77ec60"
+          ]
+        },
+        {
+          "line": 46,
+          "symbols": [
+            "ninja_issue_render_state"
+          ]
+        },
+        {
+          "line": 47,
+          "symbols": [
+            "ninja_issue_render_state"
+          ]
+        },
+        {
+          "line": 57,
+          "symbols": [
+            "ninja_issue_render_state"
+          ]
+        },
+        {
+          "line": 59,
+          "symbols": [
+            "NinjaRenderState",
+            "ninja_set_depth_comparison"
+          ]
+        },
+        {
+          "line": 64,
+          "symbols": [
+            "ninja_issue_render_state"
+          ]
+        },
+        {
+          "line": 66,
+          "symbols": [
+            "NinjaRenderState",
+            "ninja_set_depth_write"
+          ]
+        },
+        {
+          "line": 67,
+          "symbols": [
+            "ninja_issue_render_state"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/engine/ninja_render.hpp",
+      "sha256": "efc8add7a4a2fd1669497d235f1ae9f4f9e4ccf3ee20c2800428d1e6aa288ce1",
+      "references": [
+        {
+          "line": 24,
+          "symbols": [
+            "NinjaRenderStateCommand"
+          ]
+        },
+        {
+          "line": 28,
+          "symbols": [
+            "NinjaRenderStageCommand"
+          ]
+        },
+        {
+          "line": 37,
+          "symbols": [
+            "NinjaRenderStateCommand"
+          ]
+        },
+        {
+          "line": 40,
+          "symbols": [
+            "NinjaRenderStateCommand"
+          ]
+        },
+        {
+          "line": 46,
+          "symbols": [
+            "NinjaRenderStageCommand"
+          ]
+        },
+        {
+          "line": 48,
+          "symbols": [
+            "NinjaRenderStageCommand"
+          ]
+        },
+        {
+          "line": 51,
+          "symbols": [
+            "NinjaRenderSourceSites"
+          ]
+        },
+        {
+          "line": 52,
+          "symbols": [
+            "NinjaRenderState"
+          ]
+        },
+        {
+          "line": 59,
+          "symbols": [
+            "NinjaRenderStateCommand"
+          ]
+        },
+        {
+          "line": 60,
+          "symbols": [
+            "NinjaRenderStageCommand"
+          ]
+        },
+        {
+          "line": 64,
+          "symbols": [
+            "NinjaRenderSourceSites",
+            "NinjaRenderState",
+            "ninja_issue_render_state"
+          ]
+        },
+        {
+          "line": 65,
+          "symbols": [
+            "NinjaRenderSourceSites",
+            "NinjaRenderState",
+            "ninja_issue_texture_stage_state"
+          ]
+        },
+        {
+          "line": 66,
+          "symbols": [
+            "NinjaRenderState",
+            "ninja_set_blend"
+          ]
+        },
+        {
+          "line": 67,
+          "symbols": [
+            "NinjaRenderState",
+            "ninja_set_blend_77ec60"
+          ]
+        },
+        {
+          "line": 68,
+          "symbols": [
+            "NinjaRenderState",
+            "ninja_set_depth_comparison"
+          ]
+        },
+        {
+          "line": 69,
+          "symbols": [
+            "NinjaRenderState",
+            "ninja_set_depth_write"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/engine/ninja_screen.hpp",
+      "sha256": "554dec07c880ea81960217110019c79770513ba25e7c7d9410e91286aa9567d5",
+      "references": [
+        {
+          "line": 59,
+          "symbols": [
+            "NinjaRenderState"
+          ]
+        },
+        {
+          "line": 88,
+          "symbols": [
+            "NinjaRenderState"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/engine/ninja_sprite_display.cpp",
+      "sha256": "2d7f69d9a5b56101aadbb91508a2355f1151ce992fa4bbfda30749f1abe5a0a3",
+      "references": [
+        {
+          "line": 26,
+          "symbols": [
+            "ninja_issue_texture_stage_state"
+          ]
+        },
+        {
+          "line": 27,
+          "symbols": [
+            "ninja_issue_texture_stage_state"
+          ]
+        },
+        {
+          "line": 32,
+          "symbols": [
+            "ninja_issue_render_state"
+          ]
+        },
+        {
+          "line": 33,
+          "symbols": [
+            "ninja_issue_texture_stage_state"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/engine/ninja_sprite_queue.cpp",
+      "sha256": "ba62f7f2250e0ff7ec8183431be7f102f5a9e984e1e5656f1c6d4342717787ed",
+      "references": [
+        {
+          "line": 215,
+          "symbols": [
+            "ninja_set_depth_comparison",
+            "ninja_set_depth_write"
+          ]
+        },
+        {
+          "line": 216,
+          "symbols": [
+            "ninja_set_depth_comparison",
+            "ninja_set_depth_write"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/engine/ninja_sprite_queue.hpp",
+      "sha256": "798851861c1465203f360793ce1b6ac31d4c9fb242a6fe7b3ca9047dc7c2520f",
+      "references": [
+        {
+          "line": 118,
+          "symbols": [
+            "NinjaRenderState"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/engine/ninja_texture_selection.hpp",
+      "sha256": "15c689ee134df1e30584f005ab5aa84e2141f6c7f0d6e049f7442fe877b2a124",
+      "references": [
+        {
+          "line": 23,
+          "symbols": [
+            "NinjaRenderState"
+          ]
+        },
+        {
+          "line": 48,
+          "symbols": [
+            "NinjaRenderState"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/engine/ninja_view.hpp",
+      "sha256": "c5e41ad558ca1629c00001a772021546bdfa6fe3e03f9a9af2f5e5193af04c96",
+      "references": [
+        {
+          "line": 46,
+          "symbols": [
+            "NinjaRenderState"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/game/game_frame_owners.cpp",
+      "sha256": "3b3901f9cbfcbed9ecc034d4d854f4f54d8a95c191578c5d407ddefe0c6a0e0f",
+      "references": [
+        {
+          "line": 16,
+          "symbols": [
+            "ninja_set_depth_comparison",
+            "ninja_set_depth_write"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/game/game_frame_owners.hpp",
+      "sha256": "fd6feae1b9fe5d312297952665065c4126d5baa128b3f7039374f28df6344e7c",
+      "references": [
+        {
+          "line": 34,
+          "symbols": [
+            "NinjaRenderState"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/game/game_view.cpp",
+      "sha256": "4dcc813a9793e4154794df5c90b99272babc6b89359c50862ebd86efd62b1a85",
+      "references": [
+        {
+          "line": 17,
+          "symbols": [
+            "NinjaRenderState"
+          ]
+        },
+        {
+          "line": 29,
+          "symbols": [
+            "ninja_set_blend"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/guest/native_game_reference.cpp",
+      "sha256": "fd993665165d4fc238ac7f818202d44c084c4d778528967ef7a9617de5cc8683",
+      "references": [
+        {
+          "line": 48,
+          "symbols": [
+            "NinjaRenderStateCommand"
+          ]
+        },
+        {
+          "line": 49,
+          "symbols": [
+            "NinjaRenderStageCommand"
+          ]
+        },
+        {
+          "line": 1276,
+          "symbols": [
+            "ninja_set_blend"
+          ]
+        },
+        {
+          "line": 1398,
+          "symbols": [
+            "ninja_set_depth_comparison"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/guest/native_game_reference.hpp",
+      "sha256": "bf1f2d8040355e4f6e627894f5c74e52b9f0146ec3c16ac0dff03ce8dfed0e15",
+      "references": [
+        {
+          "line": 175,
+          "symbols": [
+            "NinjaRenderState"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/guest/ninja_fog_reference.cpp",
+      "sha256": "27a12d7abc6e9b31b431a40ec41695b8ee9c86b60d9c4d3e4683feba22363f6f",
+      "references": [
+        {
+          "line": 251,
+          "symbols": [
+            "ninja_issue_render_state"
+          ]
+        },
+        {
+          "line": 381,
+          "symbols": [
+            "NinjaRenderState"
+          ]
+        },
+        {
+          "line": 406,
+          "symbols": [
+            "NinjaRenderSourceSites"
+          ]
+        },
+        {
+          "line": 412,
+          "symbols": [
+            "NinjaRenderSourceSites"
+          ]
+        },
+        {
+          "line": 421,
+          "symbols": [
+            "NinjaRenderSourceSites"
+          ]
+        },
+        {
+          "line": 422,
+          "symbols": [
+            "NinjaRenderSourceSites"
+          ]
+        },
+        {
+          "line": 443,
+          "symbols": [
+            "NinjaRenderSourceSites"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/guest/ninja_fog_reference.hpp",
+      "sha256": "f98c4aee3be0ad3aa038014cdbbd0dcdb37561fc4de1888acfe4f9894136f8aa",
+      "references": [
+        {
+          "line": 23,
+          "symbols": [
+            "NinjaRenderState"
+          ]
+        },
+        {
+          "line": 69,
+          "symbols": [
+            "NinjaRenderState"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/guest/ninja_frame_calls.cpp",
+      "sha256": "236c527fd28c955e5f8d4e195af5092693f0c41efbdf34d0bfdcc0122f624055",
+      "references": [
+        {
+          "line": 32,
+          "symbols": [
+            "ninja_issue_render_state"
+          ]
+        },
+        {
+          "line": 35,
+          "symbols": [
+            "ninja_set_blend_77ec60"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/guest/ninja_queue_lifecycle.cpp",
+      "sha256": "3a3d47aacd4150227f5b8ac7fdfc4759393f1dfddd5a39f1740f0dc05b2a8496",
+      "references": [
+        {
+          "line": 25,
+          "symbols": [
+            "ninja_set_depth_comparison"
+          ]
+        },
+        {
+          "line": 26,
+          "symbols": [
+            "ninja_set_depth_write"
+          ]
+        },
+        {
+          "line": 27,
+          "symbols": [
+            "ninja_issue_render_state"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/guest/ninja_screen.cpp",
+      "sha256": "c4e4dffbfbbe8ea1c8427b19ca12b985a1d7757f5b0a58a5c0054ea472f3511a",
+      "references": [
+        {
+          "line": 21,
+          "symbols": [
+            "NinjaRenderState"
+          ]
+        },
+        {
+          "line": 28,
+          "symbols": [
+            "NinjaRenderSourceSites",
+            "NinjaRenderState"
+          ]
+        },
+        {
+          "line": 29,
+          "symbols": [
+            "ninja_issue_render_state"
+          ]
+        },
+        {
+          "line": 30,
+          "symbols": [
+            "NinjaRenderSourceSites",
+            "NinjaRenderState"
+          ]
+        },
+        {
+          "line": 31,
+          "symbols": [
+            "ninja_issue_texture_stage_state"
+          ]
+        },
+        {
+          "line": 61,
+          "symbols": [
+            "ninja_set_blend_77ec60"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/guest/texture_selection_reference.cpp",
+      "sha256": "3cd999e216ba0244bc1febdb456a896d7489e0c49ac0d2072166d1522286fa5d",
+      "references": [
+        {
+          "line": 199,
+          "symbols": [
+            "NinjaRenderState"
+          ]
+        },
+        {
+          "line": 216,
+          "symbols": [
+            "NinjaRenderStateCommand"
+          ]
+        }
+      ]
+    },
+    {
+      "path": "src/hle/hle_device_bridge.cpp",
+      "sha256": "6169c3f9b5ddcfc62832a5eccfb1743eada2b535bdca5783369ffd274465d11b",
+      "references": [
+        {
+          "line": 22,
+          "symbols": [
+            "NinjaRenderState"
+          ]
+        },
+        {
+          "line": 27,
+          "symbols": [
+            "NinjaRenderStateCommand"
+          ]
+        },
+        {
+          "line": 115,
+          "symbols": [
+            "NinjaRenderStateCommand"
+          ]
+        },
+        {
+          "line": 382,
+          "symbols": [
+            "NinjaRenderStateCommand"
+          ]
+        },
+        {
+          "line": 383,
+          "symbols": [
+            "NinjaRenderStageCommand"
+          ]
+        },
+        {
+          "line": 558,
+          "symbols": [
+            "NinjaRenderStateCommand"
+          ]
+        },
+        {
+          "line": 668,
+          "symbols": [
+            "ninja_set_blend"
+          ]
+        },
+        {
+          "line": 680,
+          "symbols": [
+            "ninja_set_blend",
+            "ninja_set_blend_77ec60"
+          ]
+        }
+      ]
+    }
+  ]
+}

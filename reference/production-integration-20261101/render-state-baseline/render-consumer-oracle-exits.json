@@ -1,0 +1,108 @@
+[
+  {
+    "slug": "ninja_sprite_queue",
+    "command": [
+      "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+      "/Users/burbujamc/Developer/sadx-macos/tools/oracles/verify_original_ninja_sprite_queue.py",
+      "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+      "/Users/burbujamc/Developer/sadx-macos/build/native-ninja-sprite-queue-probe.dylib",
+      "--output",
+      "/Users/burbujamc/Developer/sadx-macos/build/refactor-baseline-20261101/ninja_sprite_queue.json"
+    ],
+    "exit_status": 0,
+    "probe_sha256": "36aa0ec369effea38f7070e368fdd970740195aa2efe3a9bb2e3d44c7bf4f699"
+  },
+  {
+    "slug": "ninja_queue_consumer",
+    "command": [
+      "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+      "/Users/burbujamc/Developer/sadx-macos/tools/oracles/verify_original_ninja_queue_consumer.py",
+      "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+      "/Users/burbujamc/Developer/sadx-macos/build/native-ninja-queue-consumer-probe.dylib",
+      "--output",
+      "/Users/burbujamc/Developer/sadx-macos/build/refactor-baseline-20261101/ninja_queue_consumer.json"
+    ],
+    "exit_status": 0,
+    "probe_sha256": "a18f03d7bb78b52b156994fe0c7de2b09129afbb6055a7c4c8fc1d4cb0339613"
+  },
+  {
+    "slug": "ninja_queue_render",
+    "command": [
+      "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+      "/Users/burbujamc/Developer/sadx-macos/tools/oracles/verify_original_ninja_queue_render.py",
+      "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+      "/Users/burbujamc/Developer/sadx-macos/build/native-ninja-queue-render-probe.dylib",
+      "--output",
+      "/Users/burbujamc/Developer/sadx-macos/build/refactor-baseline-20261101/ninja_queue_render.json"
+    ],
+    "exit_status": 0,
+    "probe_sha256": "83fa07881da0e732bb70bead05615d8c1f77d919a9e545695875ec26815cad68"
+  },
+  {
+    "slug": "ninja_frame_calls",
+    "command": [
+      "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+      "/Users/burbujamc/Developer/sadx-macos/tools/oracles/verify_original_ninja_frame_calls.py",
+      "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+      "/Users/burbujamc/Developer/sadx-macos/build/native-ninja-frame-calls-probe.dylib",
+      "--output",
+      "/Users/burbujamc/Developer/sadx-macos/build/refactor-baseline-20261101/ninja_frame_calls.json",
+      "--loader",
+      "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/mods/.modloader/SADXModLoader.dll"
+    ],
+    "exit_status": 0,
+    "probe_sha256": "8d7cec72dbe5a48d6f720b001c92d0b046ac714ad0b32f4a94be6871c2af77fb"
+  },
+  {
+    "slug": "ninja_texture_selection",
+    "command": [
+      "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+      "/Users/burbujamc/Developer/sadx-macos/tools/oracles/verify_original_ninja_texture_selection.py",
+      "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+      "/Users/burbujamc/Developer/sadx-macos/build/native-ninja-texture-selection-probe.dylib",
+      "--output",
+      "/Users/burbujamc/Developer/sadx-macos/build/refactor-baseline-20261101/ninja_texture_selection.json"
+    ],
+    "exit_status": 0,
+    "probe_sha256": "91d687048e40a0f081fe5c2c604e29d49fce8fbafccbb6c5d552e3df56615aca"
+  },
+  {
+    "slug": "ninja_view",
+    "command": [
+      "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+      "/Users/burbujamc/Developer/sadx-macos/tools/oracles/verify_original_ninja_view.py",
+      "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+      "/Users/burbujamc/Developer/sadx-macos/build/native-ninja-view-probe.dylib",
+      "--output",
+      "/Users/burbujamc/Developer/sadx-macos/build/refactor-baseline-20261101/ninja_view.json"
+    ],
+    "exit_status": 0,
+    "probe_sha256": "d6070eeaabaf1650de3f69d66b6319919e017087144a59ed5fe8a04ce679b666"
+  },
+  {
+    "slug": "game_view",
+    "command": [
+      "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+      "/Users/burbujamc/Developer/sadx-macos/tools/oracles/verify_original_game_view.py",
+      "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+      "/Users/burbujamc/Developer/sadx-macos/build/native-game-view-probe.dylib",
+      "--output",
+      "/Users/burbujamc/Developer/sadx-macos/build/refactor-baseline-20261101/game_view.json"
+    ],
+    "exit_status": 0,
+    "probe_sha256": "629b23759a647838081e2786ec18f70ac6636317e10a805379821670c4f9129e"
+  },
+  {
+    "slug": "game_frame_owners",
+    "command": [
+      "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python",
+      "/Users/burbujamc/Developer/sadx-macos/tools/oracles/verify_original_game_frame_owners.py",
+      "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+      "/Users/burbujamc/Developer/sadx-macos/build/native-game-frame-owners-probe.dylib",
+      "--output",
+      "/Users/burbujamc/Developer/sadx-macos/build/refactor-baseline-20261101/game_frame_owners.json"
+    ],
+    "exit_status": 0,
+    "probe_sha256": "ee15e9d756a8ee582c6cac1ca16d9e1fd3d80a7b46c6399d9afadd74eecc8ae6"
+  }
+]
