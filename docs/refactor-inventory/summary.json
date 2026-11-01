@@ -1,12 +1,12 @@
 {
   "accounted_open_entries": 1664,
-  "accounted_scope": 4102,
+  "accounted_scope": 4129,
   "base_commit": "f6c4e538af463a2eaf4c1fe961f04e8443d51878",
   "baseline_removed_paths": [
     "src/player/player_animation_decode.cpp",
     "src/player/sonic_animation_operations.hpp"
   ],
-  "boundary_entries": 2350,
+  "boundary_entries": 2373,
   "checks_not_run": [
     "builds",
     "gate",
@@ -17,11 +17,11 @@
   ],
   "coverage": "exact tracked path equality; no semantic completeness or behavior verdict",
   "current_open_entries": 1662,
-  "current_tracked_denominator": 4100,
+  "current_tracked_denominator": 4127,
   "dispositions": {
-    "already_conforming": 88,
-    "needs_migration": 30,
-    "open_review": 1625,
+    "already_conforming": 92,
+    "needs_migration": 26,
+    "open_review": 1629,
     "reference_infrastructure": 7
   },
   "historical_baseline_members": 2,
@@ -43,25 +43,25 @@
       "sha256": "7b0d95acd547b356a3f7e0becc7aa0d39400c6eb0dd4083c8d6d4bc6646572ef"
     }
   ],
-  "maintained_and_script_entries": 1750,
+  "maintained_and_script_entries": 1754,
   "module_dispositions": {
-    "already_conforming": 53,
-    "needs_migration": 10,
-    "open_review": 1052
+    "already_conforming": 55,
+    "needs_migration": 8,
+    "open_review": 1056
   },
   "module_shards": [
     {
       "path": "modules.jsonl",
-      "records": 746,
-      "sha256": "5062359ff07be5f797bbc4071c717af2b44911bc357f3369758ec20ec6650cc4"
+      "records": 759,
+      "sha256": "c2c1a89785703b2bbe342f528875f0e8ba1b036b2984e9c0bbef0c41174bbd4c"
     },
     {
       "path": "modules-002.jsonl",
-      "records": 369,
-      "sha256": "15743f191db3db8050677e52612febc70cc09dbbbbc51af18134029cf3272949"
+      "records": 360,
+      "sha256": "8cb5c1fac1c2e086f2ce05d865ef0bfe762ba05c8ea5a4a598721fdc1835a89a"
     }
   ],
-  "modules": 1115,
+  "modules": 1119,
   "native_translation_units_listed": 131,
   "native_translation_units_not_listed": 185,
   "other_stub_mentions": 11,
@@ -75,9 +75,9 @@
   },
   "reviewed_stub_bindings": 2,
   "roots": {
-    "reference": 2266,
+    "reference": 2292,
     "src": 660,
-    "tests": 619,
+    "tests": 620,
     "third_party": 155,
     "tools": 400
   },
@@ -99,7 +99,7 @@
     "sound-movie": 27,
     "task-ownership": 6,
     "texture-lifetime": 23,
-    "tooling-judges": 1090
+    "tooling-judges": 1094
   },
-  "tracked_scope": 4100
+  "tracked_scope": 4127
 }
