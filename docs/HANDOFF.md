@@ -698,3 +698,10 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Ten compiled faults are caught by the frozen contract; ASan/UBSan passes. Pinned support archives qualify an additional immutable-old/current consumer replay after concurrent Main support rebuilds; this replay is explicitly retrospective.
 * Separate judge commits add two registered tests with direct source dependencies. All 946 protected paths check; all 945 base paths and 53 raw inputs survive exactly. No gate, journeys, delegate, Main write or push.
 * docs/packets/mpeg-timing/PACKET.md records hashes, commands and limits. Root independent review, holdout, inventory reconciliation, integration and combined gate remain pending. No native movie, Windows splitter, whole Loader or campaign closure claim.
+
+### 2026-11-01 — MPEG and foundation integration qualified
+
+* Qualified-corpus make -j10 gate exits 0 at 8c9f540: 290 native programs, 450 Python tests, one inherited filesystem skip, smoke 120, R1–R4, three native menu/save journeys and sixteen startup comparisons. mpeg-foundations-gate.json records the actual result; STATUS regenerated.
+* Complete MPEG timing module retains 30,657 development and 4,096 final full observations, actual HleDshow output, ten compiled faults and sanitizer evidence. Main unit, contract and consumer pass. This is reference timing utility qualification, not Windows splitter parity.
+* Initial values, actor-current and shared frame/mode reviews retain explicit module boundaries. Native mode forwarding/services and broader ownership remain open. Existing FP partials and failures retain their prior identities and verdicts.
+* Animation judge foundation is accepted after narrative correction; the coherent animation source migration runs in its own packet. Scheduler lifecycle judge review 00e9934 accepts its bounded foundation; scheduler source rewrite, final cohorts and integration remain pending. No whole renderer/player/Session/campaign closure, gameplay or new controller claim. No push.
