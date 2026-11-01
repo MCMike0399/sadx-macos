@@ -87,6 +87,15 @@ class TaskReservedObserver(unittest.TestCase):
                     with OBSERVER.audit_traversal('task_delete', original, [[5]], events, lambda m: m.ip):
                         original.Source().run([5])
 
+    def test_source_return_with_excluded_projection_stays_excluded(self):
+        original, _ = self.source_fixture(reason='source free list cycle')
+        events = []
+        with OBSERVER.audit_traversal('task_delete', original, [[5]], events, lambda m: m.ip):
+            with self.assertRaisesRegex(RuntimeError, 'free list cycle'):
+                original.Source().run([5])
+        self.assertEqual(events[0]['original_outcome'], 'returned')
+        self.assertEqual(events[0]['projection'], 'excluded')
+
     def test_unexpected_memory_fault_signature_retained(self):
         original, _ = self.source_fixture(pc=0x49aa50, fault=True)
         events = []

@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "16a163c6d2a0c4b47f1680d67847076db20b45f7",
-    "evidence": "docs/refactor-inventory/packets/task-owner/SOURCE-OUTCOME-IMPLEMENTATION.json",
-    "evidence_sha256": "6efd0c7a07120e39b1f5e740dc481b5ab69609cb58ae562328b5945110196eab",
-    "reason": "Observe actual task source returns/stops/faults and retain failed-attempt ledgers"
+    "base_commit": "6b15cec94ef58ea93b82b6be8024b20e74b62426",
+    "evidence": "docs/refactor-inventory/packets/task-owner/SOURCE-OUTCOME-DEVELOPMENT.json",
+    "evidence_sha256": "18b86f3199f37a522d569b5ac0a3a705dbed707f41dec0b576e27ff7ba0238a0",
+    "reason": "Retain source-return versus excluded-projection regression and actual observer development evidence"
   },
   "files": {
     "Makefile": "f145daba48afc9b3e7609df89506e4ce95b8693af2bc826358904427af53bfb6",
@@ -683,7 +683,7 @@
     "tests/python/test_symbol_context.py": "e276e801136d0821369682beb43c42c0f460ff137123683d8c1150487eec2690",
     "tests/python/test_symbols.py": "9e9a03a6389d6cd58aa49c63272049754f55ccddb19eeb894b8b92ccce362e0f",
     "tests/python/test_task_reserved_inputs.py": "ce771feeee0e8dac64450381a8e15ea6d1216aeb3235008a804aea1ada3482b4",
-    "tests/python/test_task_reserved_observer.py": "ff1063003a4f1077b0f9a29ab320430b8fcdf1f53bee0ba9d82ade7ed6e5a131",
+    "tests/python/test_task_reserved_observer.py": "ab9fd6c3287d0cf8b8b521dd4bd27a93a5e8588fddccf931e2ebd347074b6ae8",
     "tests/python/test_task_stream_completeness.py": "b99019420543e49346ea3e8e870ce1e2e5bb28ccd68cdbc3bc3baba26bd80612",
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",

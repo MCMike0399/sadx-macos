@@ -1,0 +1,148 @@
+{
+  "development_definition": "6b15cec",
+  "source_model": "Immutable before-source libraries only; Task before bd22ee4. No candidate qualification or reserved input consumed.",
+  "exit_status": 0,
+  "observations": [
+    {
+      "slug": "task_delete",
+      "generated": 8,
+      "attempted_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "unattempted_ids": [],
+      "outcomes": {
+        "returned": 2,
+        "established_observer_stop": 6
+      },
+      "excluded_projection_ids": [
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "observation_sha256": "0bb3456886a5a84c0c6f039824344daad573a86155e1a3a9a0791be8c476fd1f"
+    },
+    {
+      "slug": "task_display",
+      "generated": 48,
+      "attempted_ids": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "unattempted_ids": [],
+      "outcomes": {
+        "established_observer_stop": 6,
+        "returned": 42
+      },
+      "excluded_projection_ids": [],
+      "observation_sha256": "10664c01b6f077952051ab1419d6c452071c9080530474b97cea5841a2b69b76"
+    },
+    {
+      "slug": "task_lifecycle",
+      "generated": 1,
+      "attempted_ids": [
+        0
+      ],
+      "unattempted_ids": [],
+      "outcomes": {
+        "helpers_returned": 1,
+        "established_observer_stop": 1
+      },
+      "excluded_projection_ids": [],
+      "observation_sha256": "453afc62ba4162d972ab4b34885d9cf5ff3c56b66b6b0bc45854c34ae6d4645c"
+    },
+    {
+      "slug": "task_work",
+      "generated": 1,
+      "attempted_ids": [
+        0
+      ],
+      "unattempted_ids": [],
+      "outcomes": {
+        "helpers_returned": 1
+      },
+      "excluded_projection_ids": [],
+      "observation_sha256": "b0c722ac1f6efa7e19a0773116ba10bdb53628271a70a90d2c51e59817000369"
+    }
+  ],
+  "synthetic_fault": [
+    {
+      "pc": 4096,
+      "access": 19,
+      "address": 6,
+      "size": 2,
+      "value": 0
+    }
+  ],
+  "synthetic_fault_scope": "Actual Unicorn synthetic MOVZX at4096 reading unmapped address6 width2, hookreturnedFalse, no page-zero mapping/resume. This is mechanism characterization, not original game behavior.",
+  "driver_sha256": "f073f792538cda2f9514a7e076f1131bf8cb0b39cd6b15dd4bb380847256dca2",
+  "run_sha256": "4ad268b257c3ed3f3bb001d1f2729498cfe4b944fc8e2583ccefacfc5dd389ab",
+  "log_sha256": "83a9996685ffda1cb06c99ee64e8a9d73001a37c3feee57986b2fbe54b78b895",
+  "limits": [
+    "Source outcomes and excluded projections are separate. Traversal returned with unsupported serialization is not a compared source return.",
+    "Raw inputs, full expected source words, individual helper PCs, captured native ABI bytes and failures remain under build/task-observer-development.",
+    "Fresh observer/runner adequacy review, final frozen closure, Source-specific recipes, and single-use Root admission remain pending."
+  ],
+  "focused_tests": {
+    "tests": 44,
+    "exit_status": 0,
+    "log_sha256": "763cc42482fd0e367042bdd77d1980e163324eb538310bb63d833b165454a406",
+    "test_sha256": "ab9fd6c3287d0cf8b8b521dd4bd27a93a5e8588fddccf931e2ebd347074b6ae8",
+    "additional_case": "A source return with a free-list-cycle serialization exclusion stays excluded, not a complete comparison."
+  }
+}
