@@ -31,19 +31,14 @@ float read_live_multiplier(const View &view, TaskWorkArena *arena, Multiplier ki
     access.fail(Failure::UnresolvedResource, phase);
 }
 NativeAccess::StateFields NativeAccess::state(const View &v) {
-    return StateFields{v.player.current_animation_at_126,
-                       v.player.requested_animation_at_124,
-                       v.player.previous_animation_at_128,
-                       v.player.animation_mode_at_120,
-                       v.tail.start_at_134,
-                       v.tail.frame_at_130,
-                       v.tail.buffer_at_148,
-                       v.tail.flags_at_12e,
-                       v.tail.timer_at_12c,
-                       v.tail.next_at_12a};
+    return StateFields{v.player.current_animation_at_126,     v.player.requested_animation_at_124,
+                       v.player.previous_animation_at_128,    v.player.animation_mode_at_120,
+                       v.player.animation_tail.start_at_134,  v.player.animation_tail.frame_at_130,
+                       v.player.animation_tail.buffer_at_148, v.player.animation_tail.flags_at_12e,
+                       v.player.animation_tail.timer_at_12c,  v.player.animation_tail.next_at_12a};
 }
 const Table &NativeAccess::table(const View &view, Phase phase) {
-    const auto &pointer = read(view.tail.table_at_140, phase);
+    const auto &pointer = read(view.player.animation_tail.table_at_140, phase);
     if (!pointer)
         fail(Failure::NullResource, phase);
     const auto *content = dynamic_cast<const Table *>(pointer.get());

@@ -44,7 +44,6 @@ struct Resources {
 // NOTSA: borrow the existing physics/tail owner without a copied animation snapshot.
 struct View {
     PlayerPhysicsState &player;
-    PlayerAnimationTail &tail;
     TaskWorkHandle player_allocation;
 };
 struct Runtime {

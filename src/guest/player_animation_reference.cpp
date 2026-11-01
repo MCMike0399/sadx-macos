@@ -51,14 +51,13 @@ struct ReferenceAccess {
     }
     float speed_multiplier(PlayerAnimationView &v, const PlayerAnimationRuntime &rt,
                            animation::Phase phase) {
-        return animation::detail::read_live_multiplier({v.player, v.tail, v.player_allocation},
-                                                       rt.arena,
+        return animation::detail::read_live_multiplier({v.player, v.player_allocation}, rt.arena,
                                                        animation::detail::Multiplier::Speed, phase);
     }
     float charge_multiplier(PlayerAnimationView &v, const PlayerAnimationRuntime &rt,
                             animation::Phase phase) {
         return animation::detail::read_live_multiplier(
-            {v.player, v.tail, v.player_allocation}, rt.arena,
+            {v.player, v.player_allocation}, rt.arena,
             animation::detail::Multiplier::Charge, phase);
     }
     std::uint32_t raw_position_count(const PlayerAnimationNode &node, animation::Phase phase) {
@@ -102,7 +101,13 @@ PlayerAnimationResult update_player_animation(PlayerAnimationView &v, PlayerAnim
 }
 PlayerAnimationResult update_player_animation(PlayerAnimationView &view,
                                               animation::Runtime &runtime, X87Context &fp) {
-    animation::View native_view{view.player, view.tail, view.player_allocation};
+    if (&view.tail != &view.player.animation_tail) {
+        PlayerAnimationResult failure;
+        failure.failure = PlayerAnimationFailure::unresolved_resource;
+        failure.source_boundary = 0x44a800;
+        return failure;
+    }
+    animation::View native_view{view.player, view.player_allocation};
     return diagnostics(animation::update(native_view, runtime, fp));
 }
 PlayerAnimationResult reset_player_animation_frame(PlayerAnimationView &v,
