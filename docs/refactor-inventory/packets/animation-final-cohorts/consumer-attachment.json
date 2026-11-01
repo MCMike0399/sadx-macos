@@ -1,0 +1,39 @@
+{
+  "name": "consumer-attachment",
+  "seed": 2026121704,
+  "requested": 1024,
+  "generated": 1024,
+  "executed": 2,
+  "mismatches": [
+    {
+      "case": 1,
+      "output_record": 1,
+      "reason": "See complete retained output record; no Source, fixture or tolerance edits made."
+    }
+  ],
+  "fp_partial_ids": [
+    {
+      "case": 0,
+      "observations": [
+        "startup"
+      ],
+      "input_sha256": "4344628b90127f5d5fb4df02075577c71b644e9448312d6d51b9f59f5f41eab1"
+    }
+  ],
+  "input": {
+    "seed": 2026121704,
+    "cases": 1024,
+    "path": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-0f8beb2a/build/animation-final-cohorts/consumer-attachment.inputs.jsonl",
+    "sha256": "c1082c9d9b9fb6d53877c96d8090721f49d210b7bb35c72d401e366b2a847e39"
+  },
+  "source_contract": "original instructions where recorded; lazy availability/aliases/allocation identity contrasted old/current separately",
+  "native_contract": "plain current numeric probe for motion/blend; actual initialized-view canonical identity for consumers",
+  "gaps": [
+    "Gamma binding uses the actual imported table and the same initialized-view assignment as native_gamma_binding; the complete runtime Context function is not linked. PSetMotion remains UNRECOVERED. Sonic initialized action-0 table injection is not executed by this attachment probe; actual updater routing and startup are executed separately."
+  ],
+  "stopped_at_first_mismatch": true,
+  "output_sha256": "bebcffcf9f559fa10487b79a02e0b512a7ea7f2c5bf41ab005552c36ab3d8d25",
+  "original_exit_status": 1,
+  "verdict": "MISMATCH_STOPPED",
+  "coverage_verdict": "INCOMPLETE_RESERVED_DESCRIPTION"
+}

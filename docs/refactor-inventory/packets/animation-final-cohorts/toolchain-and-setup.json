@@ -1,0 +1,53 @@
+{
+  "measured_after_definition_freeze": true,
+  "toolchain": [
+    {
+      "path": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang",
+      "bytes": 124676976,
+      "sha256": "ee029330bf58ab6e481385f4237cc54602eaa8b81526242e5c5ab5b76e8c5a7e"
+    },
+    {
+      "path": "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/bin/python3.14",
+      "bytes": 34640,
+      "sha256": "87d4df53fd91304be5bac391fb204643c36b7df2023c04a0953bcbc7d4fdf634"
+    },
+    {
+      "path": "/Users/burbujamc/Developer/sadx-macos/reference/python/lib/python3.14/site-packages/unicorn/__init__.py",
+      "bytes": 301,
+      "sha256": "9ad32123bca674cf205c308fd4d0d2a4db877c9dc2afac4feab7c84c8cf7043b"
+    },
+    {
+      "path": "/Users/burbujamc/Developer/sadx-macos/reference/python/lib/python3.14/site-packages/unicorn/lib/libunicorn.2.dylib",
+      "bytes": 16232448,
+      "sha256": "7207c8e3d7a63118fb0bca73e01816797fd51b1d8a39a4cbc7abfd562ee59c85"
+    }
+  ],
+  "compiler_version": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin25.6.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin\n",
+  "sdk": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+  "python_invocation": "/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python3",
+  "unicorn_version": "2.1.4",
+  "dll_provenance": {
+    "path": "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/system/CHRMODELS_orig.dll",
+    "bytes": 7647232,
+    "sha256": "76bbaa1b6aa23872648e6f1f39642e4262403e372b4c4b32f20f0ec89780c2a5"
+  },
+  "dll_used_in_final_cohorts": false,
+  "setup_failures_before_final_input_generation": [
+    {
+      "phase": "interface preparation",
+      "exit": 1,
+      "reason": "Probe attempted assignment to nonassignable X87Context; corrected to set_control_word before freeze.",
+      "log": "build/animation-final-cohorts/initial-interface-build-failure.log"
+    },
+    {
+      "phase": "consumer and Gamma preparation",
+      "exit": 1,
+      "reason": "Current snapshot numerical archive had not yet been copied by concurrent preparation. Builders now copy the pinned dependency before compiling; corrected before freeze.",
+      "logs": [
+        "build/animation-final-cohorts/consumer-initial-failure.log",
+        "build/animation-final-cohorts/gamma-initial-failure.log"
+      ]
+    }
+  ],
+  "final_source_or_fixture_changes_after_execution_began": false
+}

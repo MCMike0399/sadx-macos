@@ -1,0 +1,143 @@
+{
+  "cases": 4096,
+  "all_interface_pairs_equal": true,
+  "numeric_fp_partial_ids_match_full_stream": true,
+  "numeric_fp_partial_count": 466,
+  "controls": {
+    "127": 342,
+    "1151": 342,
+    "2175": 342,
+    "3199": 342,
+    "639": 341,
+    "1663": 341,
+    "2687": 341,
+    "3711": 341,
+    "895": 341,
+    "1919": 341,
+    "2943": 341,
+    "3967": 341
+  },
+  "fault_selectors": {
+    "0": 118,
+    "1": 117,
+    "2": 117,
+    "3": 117,
+    "4": 117,
+    "5": 117,
+    "6": 117,
+    "7": 117,
+    "8": 117,
+    "9": 117,
+    "10": 117,
+    "11": 117,
+    "12": 117,
+    "13": 117,
+    "14": 117,
+    "15": 117,
+    "16": 117,
+    "17": 117,
+    "18": 117,
+    "19": 117,
+    "20": 117,
+    "21": 117,
+    "22": 117,
+    "23": 117,
+    "24": 117,
+    "25": 117,
+    "26": 117,
+    "27": 117,
+    "28": 117,
+    "29": 117,
+    "30": 117,
+    "31": 117,
+    "32": 117,
+    "33": 117,
+    "34": 117
+  },
+  "reached_boundaries": {
+    "0x0": 6236,
+    "0x44a8d9": 128,
+    "0x43f27a": 36,
+    "0x446996": 876,
+    "0x44a8eb": 90,
+    "0x43fa00": 132,
+    "0x43fa14": 13,
+    "0x44a87c": 58,
+    "0x44a8b5": 117,
+    "0x44a898": 39,
+    "0x44a948": 80,
+    "0x44a975": 32,
+    "0x44a880": 39,
+    "0x44a8e8": 30,
+    "0x44a919": 18,
+    "0x44ab52": 10,
+    "0x43f9fa": 69,
+    "0x44ab6c": 14,
+    "0x44aaa5": 12,
+    "0x43f270": 40,
+    "0x44a8e5": 32,
+    "0x43fa08": 37,
+    "0x44ac59": 10,
+    "0x44a8ed": 12,
+    "0x43f280": 20,
+    "0x44aa00": 8,
+    "0x44ad78": 4
+  },
+  "allocation_prefixes": [
+    {
+      "invocation": 0,
+      "available": 0,
+      "boundary": "0x44a880",
+      "observations": 39
+    },
+    {
+      "invocation": 0,
+      "available": 64,
+      "boundary": "0x44a898",
+      "observations": 39
+    },
+    {
+      "invocation": 0,
+      "available": 128,
+      "boundary": "0x0",
+      "observations": 39
+    },
+    {
+      "invocation": 1,
+      "available": 0,
+      "boundary": "0x43f9fa",
+      "observations": 11
+    },
+    {
+      "invocation": 1,
+      "available": 0,
+      "boundary": "0x446996",
+      "observations": 28
+    },
+    {
+      "invocation": 1,
+      "available": 64,
+      "boundary": "0x43f9fa",
+      "observations": 14
+    },
+    {
+      "invocation": 1,
+      "available": 64,
+      "boundary": "0x446996",
+      "observations": 25
+    },
+    {
+      "invocation": 1,
+      "available": 128,
+      "boundary": "0x43fa14",
+      "observations": 13
+    },
+    {
+      "invocation": 1,
+      "available": 128,
+      "boundary": "0x446996",
+      "observations": 26
+    }
+  ],
+  "no_fixtures_or_expectations_changed": true
+}

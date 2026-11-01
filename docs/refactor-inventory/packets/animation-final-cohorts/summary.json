@@ -1,0 +1,31 @@
+{
+  "definition_commit": "0026c8a",
+  "source": "38e1c69ecae029e38bf1d51c404e6a6358a75025",
+  "before": "53da4de17a1c1f21745d8403cd5bf6068afeb9f5",
+  "executed_once": true,
+  "process_exit_status": 1,
+  "generated_cases": 9216,
+  "attempted_cases": 8194,
+  "completed_cases": 8193,
+  "source_value_mismatch_count": 0,
+  "original_fixture_execution_faults": [
+    {
+      "cohort": "consumer-attachment",
+      "case": 1,
+      "inferred_boundary": "0x49aa50",
+      "actual_runtime_boundary_recorded": false
+    }
+  ],
+  "fp_partial_counts": {
+    "table-retry": 0,
+    "motion-state": 466,
+    "blend-backing": 744,
+    "consumer-attachment": 1
+  },
+  "authorization_consumed": true,
+  "qualification_complete": false,
+  "reason": "Consumer cohort stopped at original fixture-domain fault before native execution for case 1; its predeclared representation gaps also remain. No Source regression is established by that fault.",
+  "all_frozen_definitions_still_exact": true,
+  "local_artifacts": 60,
+  "root_integration_required": true
+}
