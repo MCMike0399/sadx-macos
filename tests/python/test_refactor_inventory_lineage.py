@@ -69,6 +69,8 @@ class LineageFixture(unittest.TestCase):
         path.write_text(text)
 
     def put_json(self, name, value):
+        if name == 'docs/refactor-inventory/receipt.json' and value.get('schema_version') == 3:
+            value['proofs'] = inv.lineage_anchors(json.loads((self.root / 'docs/lineage.json').read_text()))
         self.put(name, json.dumps(value, sort_keys=True, indent=2) + '\n')
 
     def commit(self):
@@ -83,25 +85,61 @@ class LineageFixture(unittest.TestCase):
         return dict(path=name, sha256=inv.sha256(data), commit=commit,
                     proof=dict(path=proof, sha256=inv.sha256(data)))
 
-    def seal(self, edges):
+    def seal(self, edges, write_receipt=True):
+        # Fixture authoring can intentionally commit invalid payloads for rejection tests.
+        # Production preparation validates before it writes anything.
+        name = 'docs/refactor-inventory/receipt.json'
+        prior = subprocess.run(['git', '-C', str(self.root), 'show', 'HEAD:' + name],
+                               stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        self.previous = None
+        if prior.returncode == 0:
+            old_receipt = json.loads(prior.stdout)
+            old_ledger = subprocess.check_output(['git', '-C', str(self.root), 'show',
+                           old_receipt['freeze_commit'] + ':' + old_receipt['policy']['path']])
+            prefix = 'docs/history/' + inv.sha256(prior.stdout)
+            self.put(prefix + '-receipt.json', prior.stdout.decode())
+            self.put(prefix + '-ledger.json', old_ledger.decode())
+            self.previous = dict(receipt=self.anchor(prefix + '-receipt.json'),
+                                 ledger=self.anchor(prefix + '-ledger.json'),
+                                 commit=self.run_git('rev-parse', 'HEAD'), path=name)
+        origins = getattr(self, 'origins', {})
+        for edge in edges:
+            old = edge['before']['path']
+            origin = origins.get(old)
+            if origin and subprocess.run(['git', '-C', str(self.root), 'merge-base', '--is-ancestor',
+                                          origin['commit'], 'HEAD'], capture_output=True).returncode:
+                origin = None
+            if origin is None:
+                path = 'docs/members/' + inv.sha256(old.encode()) + '.json'
+                self.put_json(path, dict(historical_path=old, source_sha256=
+                    edge['member'].get('baseline_snapshot', edge['before'])['sha256'], member=edge['member']))
+                data = (self.root / path).read_bytes()
+                origin = self.snapshot(path, data, self.commit(), path)
+                origins[old] = origin
+            edge['prior_member'] = origin
+        self.origins = origins
         for n, edge in enumerate(edges):
             review_path = f'docs/review-{n}.json'
             self.put_json(review_path, dict(edge_sha256=inv.canonical_hash({k: v for k, v in edge.items() if k != 'review'}),
                                            reviewer='Independent fixture reviewer', independent=True,
                                            verdict='accept', limits='File lineage only; no module closure.'))
             edge['review'] = self.anchor(review_path)
-        self.put_json('docs/lineage.json', dict(schema_version=1, edges=edges))
+        ledger = dict(schema_version=2, edges=edges, previous=self.previous)
+        self.put_json('docs/lineage.json', ledger)
         self.put_json('docs/refactor-inventory/review.json', self.policy)
         freeze = self.commit()
+        if not write_receipt:
+            return
         base_paths = self.run_git('ls-tree', '-r', '--name-only', self.base).splitlines()
         baseline = {p: inv.sha256(subprocess.check_output(['git', '-C', str(self.root), 'show', self.base + ':' + p]))
                     for p in base_paths if p.startswith(inv.SCOPE_ROOTS)}
         paths = self.run_git('ls-files').splitlines()
-        self.receipt = dict(schema_version=2, base_commit=self.base, freeze_commit=freeze,
+        self.receipt = dict(schema_version=3, base_commit=self.base, freeze_commit=freeze,
                             policy=self.anchor('docs/lineage.json'), baseline_members=baseline,
-                            archive_paths=sorted(set(paths) | {'docs/refactor-inventory/receipt.json'}),
+                            archive_paths=sorted(set(paths) | {name}), previous=self.previous,
+                            proofs=inv.lineage_anchors(ledger),
                             source_freeze={p: inv.sha256((self.root / p).read_bytes()) for p in paths if p.startswith('src/')})
-        self.put_json('docs/refactor-inventory/receipt.json', self.receipt)
+        self.put_json(name, self.receipt)
         self.commit()
 
     def render(self):
@@ -185,7 +223,7 @@ class LineageFixture(unittest.TestCase):
                 review[field] = value
                 self.put_json('docs/review-0.json', review)
                 self.edge['review'] = self.anchor('docs/review-0.json')
-                self.put_json('docs/lineage.json', dict(schema_version=1, edges=[self.edge]))
+                self.put_json('docs/lineage.json', dict(schema_version=2, edges=[self.edge], previous=self.previous))
                 freeze = self.commit()
                 self.receipt.update(freeze_commit=freeze, policy=self.anchor('docs/lineage.json'))
                 self.put_json('docs/refactor-inventory/receipt.json', self.receipt)
@@ -207,6 +245,7 @@ class LineageFixture(unittest.TestCase):
             inv.prepare_lineage_receipt('docs/refactor-inventory/receipt.json', 'docs/lineage.json')
 
     def test_prepared_receipt_requires_own_commit_before_use(self):
+        self.seal([self.edge], write_receipt=False)
         inv.prepare_lineage_receipt('docs/refactor-inventory/receipt.json', 'docs/lineage.json')
         with self.assertRaisesRegex(ValueError, 'immutable HEAD'):
             self.render()
@@ -311,6 +350,7 @@ class LineageFixture(unittest.TestCase):
         outputs = self.render()
         # Archive carries the existing boundary metadata (empty for this fixture).
         self.put('docs/refactor-inventory/boundaries.jsonl', '')
+        self.put('docs/refactor-inventory/summary.json', outputs['summary.json'])
         shutil.rmtree(self.root / '.git')
         self.assertEqual(self.render(), outputs)
         self.put('docs/new.txt', 'Corrupt snapshot')
@@ -324,6 +364,7 @@ class LineageFixture(unittest.TestCase):
         outputs = self.render()
         for name, content in outputs.items():
             self.put('docs/refactor-inventory/' + name, content)
+        self.put('docs/refactor-inventory/summary.json', outputs['summary.json'])
         shutil.rmtree(self.root / '.git')
         self.assertEqual(self.render(), outputs)
 
@@ -335,7 +376,7 @@ class LineageFixture(unittest.TestCase):
             {k: v for k, v in self.edge.items() if k != 'review'}), reviewer='Fixture',
             independent=True, verdict='accept', limits='Lineage only'))
         self.edge['review'] = self.anchor('docs/review-0.json')
-        self.put_json('docs/lineage.json', dict(schema_version=1, edges=[self.edge]))
+        self.put_json('docs/lineage.json', dict(schema_version=2, edges=[self.edge], previous=self.previous))
         self.receipt['policy'] = self.anchor('docs/lineage.json')
         self.put_json('docs/refactor-inventory/receipt.json', self.receipt)
         shutil.rmtree(self.root / '.git')
@@ -346,10 +387,12 @@ class LineageFixture(unittest.TestCase):
         (self.root / 'third_party/upstream').mkdir(parents=True)
         self.run_git('update-index', '--add', '--cacheinfo', '160000', self.base, 'third_party/upstream')
         self.commit()
+        self.seal([self.edge], write_receipt=False)
         inv.prepare_lineage_receipt('docs/refactor-inventory/receipt.json', 'docs/lineage.json')
         self.commit()
         outputs = self.render()
         self.put('docs/refactor-inventory/boundaries.jsonl', outputs['boundaries.jsonl'])
+        self.put('docs/refactor-inventory/summary.json', outputs['summary.json'])
         shutil.rmtree(self.root / '.git')
         self.assertEqual(self.render(), outputs)
         summary = json.loads(outputs['summary.json'])

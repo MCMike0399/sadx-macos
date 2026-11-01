@@ -1,0 +1,79 @@
+{
+  "baseline_candidate": "96ebadd443b033be06fa3e09cb67582839019351",
+  "before_correction_commit": "9a3b443b74b493d91504c638882ddc1626e580db",
+  "helpers": {
+    "tests/python/test_refactor_inventory_lineage.py": "0f990c507ca3f786a4cccd7db0db487cdc4134ebbff4f7b7e35c4d3e68469738",
+    "tests/python/test_refactor_inventory_lineage_regressions.py": "03156b9aa09907c43db2a1fc62a4032e18db19ae95360a2e1c2470fd0a1223b6",
+    "tools/inventory/refactor_inventory.py": "5f5ffa5c310f7eb9426b7914acff73b7a756de0192c4b158c9bf159c5fece172"
+  },
+  "inventory_check": {
+    "exit_status": 1,
+    "expected_generated_drift": true,
+    "global_artifacts_written": false,
+    "log_sha256": "0a894b7e78750113b57fa130c6b2e5f693fbe8eeb98c6f4e619dfc2ec7e05815"
+  },
+  "judge_check": {
+    "exit_status": 0,
+    "files": 1270,
+    "log_sha256": "9100dd1d3b1a411dc4562d7d7e60ea49a53da13fa65c0122b7e3a43865869be4",
+    "method": "Immutable HEAD manifest union with exactly one known schema-fixture rebind and one new regression file; all original 1268 paths/hashes unchanged.",
+    "violations": 0
+  },
+  "not_run": [
+    "Source/game edits",
+    "policy activation",
+    "global inventory reconciliation",
+    "builds",
+    "oracles",
+    "mutations",
+    "gates",
+    "providers",
+    "network",
+    "host/storage work",
+    "push",
+    "delegates",
+    "additional project checkouts"
+  ],
+  "original_packet_artifacts": {
+    "changed": 0,
+    "retained": 20
+  },
+  "pending": [
+    "Root-owned fresh independent recheck with a new reviewer",
+    "Root generator/policy/artifact protection decision and separate judge fix",
+    "Root actual animation mapping, activation, reconciliation and integration gate"
+  ],
+  "policy": {
+    "active": false,
+    "ledger_schema": 2,
+    "prior_edges": "Exact append-only retention; no debt closure",
+    "receipt_schema": 3,
+    "source_integration": "First-parent snapshot or byte-equal explicit integration snapshot; no permanent live-source equality"
+  },
+  "protected_manifest": {
+    "explicit_added_path": "tests/python/test_refactor_inventory_lineage_regressions.py",
+    "explicit_changed_path": "tests/python/test_refactor_inventory_lineage.py",
+    "generator_protected": false,
+    "missing": 0,
+    "original_hash_changes": 0,
+    "original_paths": 1268,
+    "restored_corpora": 53
+  },
+  "review_commit": "c4242a152483f634754b61420aecbcfe1e00a12a",
+  "schema_version": 1,
+  "source": {
+    "changed": 0,
+    "entries": 650,
+    "map_sha256": "25e001213cfb11f89890c4be1d75e085eb3f02d5d451b2f7aa6ad31e98a21c91",
+    "source_freeze_commit": "409ca4e5b5866a3e609f953ad3882de02579325d"
+  },
+  "tests": {
+    "command": "python3 -m unittest discover -s tests/python -p 'test_refactor_inventory*.py' -v",
+    "exit_status": 0,
+    "fixture_migration": "Original 47 test IDs retained. Fixture construction migrates inactive ledger/receipt schemas and supplies the archive export fingerprint; preparation positives author committed predecessor policy first.",
+    "log_sha256": "3418d0835a0b50711e4694f086b2769d9363d2497eaff41dbcb4efbeae1ff16c",
+    "new_regressions": 17,
+    "original_ids_retained": 47,
+    "total": 64
+  }
+}

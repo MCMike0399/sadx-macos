@@ -282,6 +282,89 @@ def baseline_fingerprints(commit):
     return actual
 
 
+def lineage_anchors(value):
+    """Only explicit fingerprint anchors; source snapshot paths are not live proofs."""
+    result = {}
+    def visit(item):
+        if isinstance(item, dict):
+            if set(item) == {"path", "sha256"}:
+                name = safe_path(item["path"])
+                if name in result and result[name] != item["sha256"]:
+                    raise ValueError("Conflicting lineage proof fingerprints")
+                result[name] = item["sha256"]
+            for child in item.values():
+                visit(child)
+        elif isinstance(item, list):
+            for child in item:
+                visit(child)
+    visit(value)
+    return result
+
+
+def frozen_lineage_proofs(ledger, receipt, paths, has_git):
+    expected = lineage_anchors(ledger)
+    if receipt["proofs"] != expected:
+        raise ValueError("Incomplete/changed committed lineage proof set")
+    for name, digest in expected.items():
+        fingerprinted_file({"path": name, "sha256": digest}, paths)
+    if has_git:
+        modes = {}
+        for row in git("ls-tree", "-r", "-z", receipt["freeze_commit"]).split("\0"):
+            if row:
+                metadata, name = row.split("\t", 1)
+                modes[name] = metadata.split()[0]
+        if any(modes.get(name) not in {"100644", "100755"} for name in expected):
+            raise ValueError("Lineage proof must be regular in committed freeze snapshot")
+        if git_blob_hashes({p: receipt["freeze_commit"] + ":" + p for p in expected}) != expected:
+            raise ValueError("Lineage proof differs from committed freeze snapshot")
+
+
+def previous_receipt_at(name, commit):
+    """Find the last committed version even if a receipt was subsequently deleted."""
+    changes = git("log", "--first-parent", "--format=%H", commit, "--", name).splitlines()
+    if len(changes) > 64:
+        raise ValueError("Lineage receipt history exceeds 64 versions")
+    for changed in changes:
+        result = subprocess.run(["git", "-C", str(ROOT), "show", changed + ":" + name],
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        if result.returncode == 0:
+            return result.stdout, changed
+    return None
+
+
+def immutable_receipt_identity(name, commit):
+    policy_path = (OUT / "review.json").relative_to(ROOT).as_posix()
+    versions = git("log", "--first-parent", "--format=%H", commit, "--", policy_path).splitlines()
+    if len(versions) > 64:
+        raise ValueError("Lineage policy history exceeds 64 versions")
+    checked = set()
+    for version in versions:
+        old = subprocess.run(["git", "-C", str(ROOT), "show", version + ":" + policy_path],
+                             stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        if old.returncode:
+            continue
+        old_name = unique_review_json(old.stdout.decode()).get("source_lineage_receipt")
+        if old_name and old_name != name and old_name not in checked:
+            safe_path(old_name)
+            checked.add(old_name)
+            if previous_receipt_at(old_name, commit):
+                raise ValueError("Accepted lineage receipt path cannot be replaced")
+
+
+def integrated_replacement(snapshot, frozen, paths, has_git):
+    """Bind a historical snapshot to the integrated tree, never to today's bytes."""
+    effective = snapshot.get("integrated", snapshot)
+    if "integrated" in effective:
+        raise ValueError("Nested source integration anchors are unsupported")
+    if (effective["path"] != snapshot["path"] or effective["sha256"] != snapshot["sha256"]):
+        raise ValueError("Source integration import is not content-equivalent")
+    lineage_snapshot(effective, paths, has_git)
+    if has_git:
+        if effective["commit"] not in set(git("rev-list", "--first-parent", frozen).splitlines()):
+            raise ValueError("Replacement source snapshot was never integrated on the first-parent source history")
+    return effective["commit"]
+
+
 def prepare_lineage_receipt(name, ledger_name):
     """Seal only committed inputs. Activation requires committing this receipt too."""
     safe_path(name)
@@ -299,11 +382,17 @@ def prepare_lineage_receipt(name, ledger_name):
         raise ValueError("Receipt path must be explicitly authored in review policy")
     paths = set(filter(None, git("ls-files", "-z").split("\0")))
     source = {p: "HEAD:" + p for p in sorted(paths) if p.startswith("src/")}
-    receipt = dict(schema_version=2, base_commit=policy["base_commit"],
+    ledger = unique_review_json(read(ledger_name))
+    receipt = dict(schema_version=3, base_commit=policy["base_commit"],
                    freeze_commit=git("rev-parse", "HEAD").strip(),
                    policy={"path": ledger_name, "sha256": sha256((ROOT / ledger_name).read_bytes())},
                    baseline_members=baseline_fingerprints(policy["base_commit"]),
-                   archive_paths=sorted(paths | {name}), source_freeze=git_blob_hashes(source))
+                   archive_paths=sorted(paths | {name}), source_freeze=git_blob_hashes(source),
+                   proofs=lineage_anchors(ledger), previous=ledger["previous"])
+    reconcile_lineage(policy, set(receipt["baseline_members"]), paths | {name},
+                      _receipt=receipt, _preparing=True)
+    if len(json.dumps(receipt, sort_keys=True, indent=2).encode()) > 2 * 1024 * 1024:
+        raise ValueError("Lineage receipt exceeds 2 MiB")
     target = ROOT / name
     if (any(p.is_symlink() for p in [target, *target.parents] if p.is_relative_to(ROOT)) or
             not name.startswith("docs/refactor-inventory/")):
@@ -318,8 +407,9 @@ def git_available():
     return (ROOT / ".git").exists()
 
 
-def lineage_snapshot(snapshot, paths, has_git):
-    strict_keys(snapshot, ("path", "sha256", "commit", "proof"), "lineage snapshot")
+def lineage_snapshot(snapshot, paths, has_git, *, allow_integration=False):
+    strict_keys(snapshot, {"path", "sha256", "commit", "proof"} |
+                ({"integrated"} if allow_integration and "integrated" in snapshot else set()), "lineage snapshot")
     safe_path(snapshot["path"])
     if not re.fullmatch(r"[0-9a-f]{40}", snapshot["commit"]):
         raise ValueError("Snapshot requires immutable commit")
@@ -335,8 +425,11 @@ def lineage_snapshot(snapshot, paths, has_git):
     return snapshot["path"]
 
 
-def reconcile_lineage(policy, base_paths, paths):
+def reconcile_lineage(policy, base_paths, paths, *, _receipt=None, _ledger=None, _historical=False,
+                      _preparing=False, _depth=0):
     """Whole-file historical accounting only; never grants a live source exception."""
+    if _depth > 64:
+        raise ValueError("Lineage proof history exceeds 64 receipts")
     removed = {p for p in base_paths - paths if p.startswith(SCOPE_ROOTS)}
     receipt_name = policy.get("source_lineage_receipt")
     if not receipt_name:
@@ -346,10 +439,14 @@ def reconcile_lineage(policy, base_paths, paths):
     receipt_name = safe_path(receipt_name)
     if receipt_name not in paths:
         raise ValueError("Untracked lineage migration receipt")
-    receipt = unique_review_json(read(receipt_name))
+    if _receipt is None and (ROOT / receipt_name).stat().st_size > 2 * 1024 * 1024:
+        raise ValueError("Lineage receipt exceeds 2 MiB")
+    receipt = _receipt if _receipt is not None else unique_review_json(read(receipt_name))
+    if len(json.dumps(receipt, sort_keys=True, indent=2).encode()) > 2 * 1024 * 1024:
+        raise ValueError("Lineage receipt exceeds 2 MiB")
     strict_keys(receipt, ("schema_version", "base_commit", "freeze_commit", "policy",
-                          "baseline_members", "archive_paths", "source_freeze"), "lineage receipt")
-    if receipt["schema_version"] != 2 or receipt["base_commit"] != policy["base_commit"]:
+                          "baseline_members", "archive_paths", "source_freeze", "proofs", "previous"), "lineage receipt")
+    if receipt["schema_version"] != 3 or receipt["base_commit"] != policy["base_commit"]:
         raise ValueError("Unknown lineage metric version/baseline")
     archive_paths = receipt["archive_paths"]
     if (not isinstance(archive_paths, list) or len(set(archive_paths)) != len(archive_paths) or
@@ -365,7 +462,11 @@ def reconcile_lineage(policy, base_paths, paths):
     if not isinstance(frozen, str) or not re.fullmatch(r"[0-9a-f]{40}", frozen):
         raise ValueError("Receipt requires immutable freeze commit")
     proof_paths = paths if has_git else paths & set(archive_paths)
-    document = fingerprinted_file(receipt["policy"], proof_paths)
+    document = _ledger if _ledger is not None else fingerprinted_file(receipt["policy"], proof_paths)
+    if sha256(document) != receipt["policy"]["sha256"]:
+        raise ValueError("Changed historical lineage ledger proof")
+    membership = set(archive_paths) if _historical else paths
+    removed = {p for p in base_paths - membership if p.startswith(SCOPE_ROOTS)}
     members = receipt["baseline_members"]
     if not isinstance(members, dict) or set(members) != {p for p in base_paths if p.startswith(SCOPE_ROOTS)}:
         raise ValueError("Lineage baseline membership mismatch")
@@ -374,7 +475,7 @@ def reconcile_lineage(policy, base_paths, paths):
                for p, value in members.items()):
         raise ValueError("Invalid baseline fingerprints")
     if has_git:
-        if git("show", "HEAD:" + receipt_name).encode() != (ROOT / receipt_name).read_bytes():
+        if not (_historical or _preparing) and git("show", "HEAD:" + receipt_name).encode() != (ROOT / receipt_name).read_bytes():
             raise ValueError("Migration receipt must be versioned in immutable HEAD")
         subprocess.check_call(["git", "-C", str(ROOT), "merge-base", "--is-ancestor", frozen, "HEAD"])
         if git("show", frozen + ":" + receipt["policy"]["path"]).encode() != document:
@@ -388,20 +489,23 @@ def reconcile_lineage(policy, base_paths, paths):
         source_freeze = git_blob_hashes(source_objects)
         if source_freeze != receipt["source_freeze"]:
             raise ValueError("Wrong immutable source freeze")
-    else:
+    elif not _historical:
         scoped = lambda values: {p for p in values if p.startswith(SCOPE_ROOTS)}
         if scoped(receipt["archive_paths"]) != scoped(paths):
             raise ValueError("Archive membership differs from supplied lineage receipt")
     ledger = unique_review_json(document.decode())
-    strict_keys(ledger, ("schema_version", "edges"), "lineage ledger")
-    if ledger["schema_version"] != 1 or not isinstance(ledger["edges"], list):
+    strict_keys(ledger, ("schema_version", "edges", "previous"), "lineage ledger")
+    if ledger["schema_version"] != 2 or not isinstance(ledger["edges"], list):
         raise ValueError("Unknown lineage ledger schema")
+    if ledger["previous"] != receipt["previous"]:
+        raise ValueError("Receipt/ledger predecessor mismatch")
+    frozen_lineage_proofs(ledger, receipt, proof_paths, has_git)
     edges, targets = {}, set()
     for edge in ledger["edges"]:
         strict_keys(edge, ("before", "replacements", "member", "disposition", "rationale",
-                           "consumer_evidence", "behavior_evidence", "review"), "lineage edge")
+                           "consumer_evidence", "behavior_evidence", "review", "prior_member"), "lineage edge")
         old = lineage_snapshot(edge["before"], proof_paths, has_git)
-        if old in edges or old in paths or not old.startswith(SCOPE_ROOTS):
+        if old in edges or old in membership or not old.startswith(SCOPE_ROOTS):
             raise ValueError("Duplicate/stale lineage source")
         if edge["disposition"] not in {"reviewed_migration", "reviewed_retirement"} or not nonblank(edge["rationale"]):
             raise ValueError("Lineage requires explicit semantic disposition/rationale")
@@ -435,12 +539,13 @@ def reconcile_lineage(policy, base_paths, paths):
         if not isinstance(successors, list) or not successors:
             raise ValueError("Lineage requires real replacement paths")
         for successor in successors:
-            name = lineage_snapshot(successor, proof_paths, has_git)
+            name = lineage_snapshot(successor, proof_paths, has_git, allow_integration=True)
             if name in targets or not name.startswith(SCOPE_ROOTS):
                 raise ValueError("Duplicate/overlapping lineage replacement")
+            integrated = integrated_replacement(successor, frozen, proof_paths, has_git)
             if has_git:
                 subprocess.check_call(["git", "-C", str(ROOT), "merge-base", "--is-ancestor",
-                                       edge["before"]["commit"], successor["commit"]])
+                                       edge["before"]["commit"], integrated])
             targets.add(name)
         edges[old] = edge
     visited, active = set(), set()
@@ -452,8 +557,8 @@ def reconcile_lineage(policy, base_paths, paths):
             return
         if name not in edges:
             target = ROOT / name
-            if (name not in paths or not target.is_file() or
-                    any(p.is_symlink() for p in [target, *target.parents] if p.is_relative_to(ROOT))):
+            if (name not in membership or (not _historical and (not target.is_file() or
+                    any(p.is_symlink() for p in [target, *target.parents] if p.is_relative_to(ROOT))))):
                 raise ValueError("Missing/untracked lineage successor: " + name)
             return
         active.add(name)
@@ -461,7 +566,7 @@ def reconcile_lineage(policy, base_paths, paths):
             child = successor["path"]
             if has_git and child in edges:
                 subprocess.check_call(["git", "-C", str(ROOT), "merge-base", "--is-ancestor",
-                                       successor["commit"], edges[child]["before"]["commit"]])
+                                       successor.get("integrated", successor)["commit"], edges[child]["before"]["commit"]])
             visit(child)
         active.remove(name)
         visited.add(name)
@@ -475,6 +580,47 @@ def reconcile_lineage(policy, base_paths, paths):
         visit(name)
     if set(edges) != visited:
         raise ValueError("Unknown/unreachable lineage records")
+    for name, edge in edges.items():
+        origin = edge["prior_member"]
+        lineage_snapshot(origin, proof_paths, has_git)
+        prior = unique_review_json(fingerprinted_file(origin["proof"], proof_paths).decode())
+        expected = {"historical_path": name, "source_sha256":
+                    edge["member"].get("baseline_snapshot", edge["before"])["sha256"], "member": edge["member"]}
+        if prior != expected:
+            raise ValueError("Historical member differs from anchored prior review metadata")
+        if has_git:
+            if origin["commit"] == frozen:
+                raise ValueError("Prior review metadata must precede the ledger freeze")
+            subprocess.check_call(["git", "-C", str(ROOT), "merge-base", "--is-ancestor", origin["commit"], frozen])
+    previous = receipt["previous"]
+    if has_git:
+        immutable_receipt_identity(receipt_name, frozen)
+        expected_previous = previous_receipt_at(receipt_name, frozen)
+        if bool(previous) != bool(expected_previous):
+            raise ValueError("Missing prior accepted lineage receipt")
+    if previous is not None:
+        strict_keys(previous, ("receipt", "ledger", "commit", "path"), "lineage predecessor")
+        if previous["path"] != receipt_name or not re.fullmatch(r"[0-9a-f]{40}", previous["commit"]):
+            raise ValueError("Changed predecessor receipt identity")
+        old_bytes = fingerprinted_file(previous["receipt"], proof_paths)
+        old_ledger = fingerprinted_file(previous["ledger"], proof_paths)
+        old_receipt = unique_review_json(old_bytes.decode())
+        if has_git:
+            if old_bytes != expected_previous[0] or git("show", previous["commit"] + ":" + receipt_name).encode() != old_bytes:
+                raise ValueError("Predecessor is not the prior committed accepted receipt")
+            subprocess.check_call(["git", "-C", str(ROOT), "merge-base", "--is-ancestor", previous["commit"], frozen])
+        if sha256(old_ledger) != old_receipt["policy"]["sha256"]:
+            raise ValueError("Changed historical lineage ledger proof")
+        old_edges = unique_review_json(old_ledger.decode())["edges"]
+        for old in old_edges:
+            if edges.get(old["before"]["path"]) != old:
+                raise ValueError("Prior accepted historical identity/debt cannot be removed or rewritten")
+        reconcile_lineage(policy, base_paths, paths, _receipt=old_receipt, _ledger=old_ledger,
+                          _historical=True, _depth=_depth + 1)
+    if not has_git and not (_historical or _preparing):
+        export = unique_review_json((OUT / "summary.json").read_text())
+        if export.get("lineage_receipt", {}).get("sha256") != sha256((ROOT / receipt_name).read_bytes()):
+            raise ValueError("Archive receipt differs from supplied export fingerprint")
     return [{"historical_path": name, "baseline_member": name in removed,
              "source_sha256": edge["member"].get("baseline_snapshot", edge["before"])["sha256"],
              "source_lines": len(fingerprinted_file(
@@ -512,7 +658,10 @@ def render():
                         gitlinks))
         path_set = set(paths)
         if policy.get("source_lineage_receipt"):
-            receipt = unique_review_json(read(policy["source_lineage_receipt"]))
+            receipt_path = safe_path(policy["source_lineage_receipt"])
+            if (ROOT / receipt_path).stat().st_size > 2 * 1024 * 1024:
+                raise ValueError("Lineage receipt exceeds 2 MiB")
+            receipt = unique_review_json(read(receipt_path))
             base_paths = set(receipt["baseline_members"])
         else:
             base_paths = set(index)
@@ -793,7 +942,7 @@ def render():
                "baseline_removed_paths": removed}
 
     if receipt:
-        summary.update(schema_version=2, current_tracked_denominator=len(total),
+        summary.update(schema_version=3, current_tracked_denominator=len(total),
                        historical_retained_scope=len(history),
                        historical_baseline_members=sum(r["baseline_member"] for r in history),
                        accounted_scope=len(total) + len(history),

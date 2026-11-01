@@ -141,7 +141,7 @@ stale, including the generator itself. Authored findings in `review.json` surviv
 regeneration. Removed base paths fail without an explicitly activated, independently reviewed
 lineage ledger and immutable migration receipt. The opt-in schema preserves
 historical scope/debt separately from exact current tracked membership; see the
-[source-lineage schema and runbook](packets/source-lineage/RUNBOOK.md). This tool
+[corrected inactive source-lineage schema and runbook](packets/source-lineage/corrections/RUNBOOK-V3.md). This tool
 packet does not activate a retirement or reconcile global generated artifacts.
 
 The checker does not replace a semantic reviewer or the gate. It deliberately is
@@ -168,3 +168,8 @@ first shard; additional files are `modules-002.jsonl` onward. Complete JSON reco
 retain their order and evidence, with UTF-8 bytes capped at the existing 2 MiB limit.
 Oversized single records and unexpected stale shards fail; nothing is truncated or
 automatically deleted. This layout changes packaging, not module classification.
+
+The unactivated source-lineage proposal at `96ebadd` received request-changes in
+review `c4242a1`. Its original failure history remains preserved. The corrected
+ledger 2 / receipt 3 proposal requires append-only history, committed proof sets
+and integrated source snapshots; Root review and activation remain pending.
