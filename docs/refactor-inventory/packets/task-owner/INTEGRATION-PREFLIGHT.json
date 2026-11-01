@@ -379,7 +379,7 @@
     "All old reports, inherited failures/FP partials, raw artifacts and historical scope remain preserved."
   ],
   "merge_simulation": {
-    "main": "225880834fa36ac03f7617e84d2967cb22144a9a",
+    "main": "d48f80e6062cc78b23a5c77400e1676ebb811d2e",
     "candidate": "f8ab5e408427bb799aa244e46274648862b0ec05",
     "git_exit": 1,
     "only_conflict": "docs/HANDOFF.md append; preserve both journal entries",
@@ -389,7 +389,45 @@
       "every_source_blob_matches_reviewed_task_or_current_main": true,
       "actual_merge_performed": false
     },
-    "raw_sha256": "3128c7449931db62c8c18520a5686af45b515549238403a05938a521ae24baf2",
-    "scope": "Git object-store simulation; working Source/index unchanged, no integration or behavior verdict."
+    "raw_path": "build/task-integration-merge-preflight-current.txt",
+    "raw_sha256": "41210280a7d7798e82d0745d9d0732a43fd8906303e359986bab93ce8d81ba76",
+    "scope": "Object-store simulation only. No working Source/index changed, compilation or integration qualification."
+  },
+  "table_consumer_preflight": {
+    "src/player/player_hold.cpp": {
+      "before_sha256": "a05c67631eb355dc6999806e8269788df92863399afcd36be2214458307d902d",
+      "candidate_sha256": "909cd849ff2c29fa5cd33eb8a454a69b4244e0b170ab018d0ef11a59b13d5504",
+      "only_reviewed_ordinal_preserving_enum_tokens_changed": true,
+      "identical_declarations": [
+        {
+          "declaration": "classes",
+          "line": 10,
+          "sha256": "e00a6b5a40501f48285c45d821c24abb4714d2cc416e5c39e1e720fa8dd9f00c",
+          "raw_hex_tokens": 0
+        }
+      ],
+      "classification_credit": false
+    },
+    "src/player/sonic_player.cpp": {
+      "before_sha256": "57d7e0ad5eeca0a427809d538e22094e87a17acb6e0dfb70eb9d27da12d7397f",
+      "candidate_sha256": "4b170e197fe8a048e875cd83757dc93558129280156afa87f3137b550af9200f",
+      "only_reviewed_ordinal_preserving_enum_tokens_changed": true,
+      "identical_declarations": [
+        {
+          "declaration": "table",
+          "line": 222,
+          "sha256": "8c10f93faf97038a8dae94424046caf2cd7dcb3600ae6eedb73d0da00d8f4b08",
+          "raw_hex_tokens": 88
+        }
+      ],
+      "classification_credit": false
+    }
+  },
+  "reserved_checkpoint": {
+    "terminal": "0afa5d4",
+    "source_comparison": "FAIL: inherited case207 remains defined and produced; no exclusion added",
+    "candidate_case207_diagnostic": "b235538: all bytes equal immutable old; one diagnostic, not extra unique case",
+    "native_only_replay_proposal": "d48f80e: 563 produced calls; independent adequacy review pending; no admission",
+    "integration_ready": false
   }
 }
