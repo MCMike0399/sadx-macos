@@ -1,0 +1,30 @@
+{
+  "review": "4ed48c2",
+  "findings": [
+    {
+      "priority": "P2",
+      "finding": "Missing owner/native/reference evidence or unlinked coverage earns reviewed status",
+      "resolution": "Require nonempty lists of path/SHA records for every owner/binding and coverage; recursive live fingerprint checks retained. Blank limits rejected."
+    },
+    {
+      "priority": "P2",
+      "finding": "Duplicate IDs inside one fragment silently overwrite",
+      "resolution": "Duplicate-aware JSON parser rejects all duplicate fragment object keys before projection. Cross-fragment duplicate check retained."
+    }
+  ],
+  "validation": {
+    "focused_tests": 17,
+    "result": "pass",
+    "new_regressions": [
+      "missing and empty owner/native/reference evidence",
+      "unlinked and missing-hash coverage",
+      "blank limits",
+      "within-fragment conflicting IDs",
+      "cross-fragment duplicate IDs"
+    ]
+  },
+  "limits": [
+    "Root fixes after independent requested changes; no fresh independent approval implied.",
+    "No source behavior, existing judge expectations or STUB debt retired."
+  ]
+}

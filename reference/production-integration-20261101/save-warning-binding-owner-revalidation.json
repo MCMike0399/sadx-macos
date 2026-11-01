@@ -1,0 +1,43 @@
+{
+  "base": "e5cf19d",
+  "current_source": "d160717",
+  "comparisons": [
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "signature": "void TitleScene::update_save_completion(",
+      "body_sha256": "f2e1586767a4bfc70e9f15631e01b512d73c7eb5f287609b3d0d962d7a457a04",
+      "identical": true
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "signature": "TaskHandle TitleScene::create_save_warning(",
+      "body_sha256": "694d42a415803d0992a497ddff8733fc79d72cfe6a5ac6df851bcf6d79b2f97c",
+      "identical": true
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "signature": "void TitleScene::close_save_warning(",
+      "body_sha256": "c54896ba1c9bae591079977d60b176ef0f03ce9d662c208762519e07b38084ab",
+      "identical": true
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "member": "    // GLOBAL: SONIC 0x3c5e8a8 SaveWarningTask size=4\n    TaskHandle save_warning_message_;",
+      "identical": true,
+      "reason": "The contiguous regular-resource field block alone was extracted; save-warning storage and ordering relative to its actual borrowers remain unchanged."
+    },
+    {
+      "path": "src/game/save_completion.hpp",
+      "sha256": "f7ccc8fc53231278f826acdf287d7693cc649e5390df3836b4ab9b635be18d16",
+      "identical": true
+    },
+    {
+      "path": "src/game/save_completion.cpp",
+      "sha256": "3ddcb611f9970fde40cd8d731b6c0c9484033ef043b1b73055ffbac7ca319095",
+      "identical": true
+    }
+  ],
+  "limits": [
+    "Source binding revalidation only; warning helper behaviors remain unrecovered and native failures remain explicit."
+  ]
+}

@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "review_base": "e5cf19d",
+  "scope": "Two save-warning STUB annotation bindings; all other STUBs remain unreviewed.",
+  "stubs": {
+    "src/game/save_completion.hpp:24": {
+      "annotation": "SONIC 0x421ab0 FUN_00421ab0 awaiting warning message recovery",
+      "declaration": [
+        "virtual TaskHandle create_save_warning() = 0;"
+      ],
+      "source_sha256": "f7ccc8fc53231278f826acdf287d7693cc649e5390df3836b4ab9b635be18d16",
+      "behavior_status": "unrecovered_open_debt",
+      "canonical_owner": {
+        "resolution": "SaveCompletionState borrows Session.save_warning_message_ (source SaveWarningTask); it never owns a second task. Task publication occurs only after creation callback returns. Close receives the live stored task and does not clear it.",
+        "evidence": [
+          {
+            "path": "src/game/save_completion.hpp",
+            "line": 1,
+            "sha256": "f7ccc8fc53231278f826acdf287d7693cc649e5390df3836b4ab9b635be18d16"
+          },
+          {
+            "path": "src/game/save_completion.cpp",
+            "line": 1,
+            "sha256": "3ddcb611f9970fde40cd8d731b6c0c9484033ef043b1b73055ffbac7ca319095"
+          },
+          {
+            "path": "src/runtime/native_session.hpp",
+            "line": 1,
+            "sha256": "adf4a698b7cae66aea0b774b0be25ae87e03a8d1e4bf9463122be7d7317934bd"
+          }
+        ]
+      },
+      "native_binding": {
+        "kind": "explicit_failure",
+        "method": "TitleScene::create_save_warning",
+        "failure": "native_save_warning_message",
+        "evidence": [
+          {
+            "path": "src/runtime/native_title_scene.hpp",
+            "line": 1,
+            "sha256": "6bbeb90ebb857292266180d33d2519eadcb8a8ac076cc6b667a9573951382d07"
+          },
+          {
+            "path": "src/runtime/native_title_tasks.cpp",
+            "line": 518,
+            "sha256": "4a6e34468bc7d163d4de136493aca32c73cba16be465c358159df6619c36476f"
+          }
+        ]
+      },
+      "reference_binding": {
+        "kind": "original_machine_call_fixture_only",
+        "resolution": "Original save-completion suffix uses a Unicorn code hook. Creation verifies level7 and returns opaque0x2222; closure verifies retained task identity. This is an ordered fixture, not a recovered native or live guest implementation.",
+        "evidence": [
+          {
+            "path": "tools/oracles/verify_original_save_completion.py",
+            "line": 25,
+            "sha256": "ec92ebfbbd9a67c108ea35200bccb0070756f61bc425cf8f70ecef3e696d00ba"
+          },
+          {
+            "path": "tests/probes/native_save_creation_probe.cpp",
+            "line": 148,
+            "sha256": "7b97306fb3d911a3b675906b498b54f40e5319e7bece3c290d010bb525760f92"
+          }
+        ]
+      },
+      "accepted_coverage": [
+        {
+          "path": "reference/packets/save-completion/qualification.json",
+          "line": 1,
+          "sha256": "1b4657b0ff662bcc21255779aa675f8acc40cdb8fb55cbfef7a8b974e70e5694"
+        },
+        {
+          "path": "reference/packets/save-completion/holdout.json",
+          "line": 1,
+          "sha256": "27a971b6436d063aaa4c22f1ba453e59b9b8184ffd7d661701da94a2bb589cdf"
+        },
+        {
+          "path": "tests/unit/save_completion_callbacks.cpp",
+          "line": 1,
+          "sha256": "36e9e79c04918f8e3ece839da84a89663529c6e00f5fe94bc5b344a6df8942ec"
+        }
+      ],
+      "limits": [
+        "Current binding audit only; unrecovered warning behavior remains open and separate from Source-file/module conformance.",
+        "Actual language descriptor task allocation/close resource behavior not recovered or qualified; native failures stay loud.",
+        "No live guest adapter binding or original warning helper body claimed by suffix fixture receipts."
+      ]
+    },
+    "src/game/save_completion.hpp:29": {
+      "annotation": "SONIC 0x421bd0 FUN_00421bd0 awaiting warning close recovery",
+      "declaration": [
+        "virtual void close_save_warning(TaskHandle warning_task) = 0;"
+      ],
+      "source_sha256": "f7ccc8fc53231278f826acdf287d7693cc649e5390df3836b4ab9b635be18d16",
+      "behavior_status": "unrecovered_open_debt",
+      "canonical_owner": {
+        "resolution": "SaveCompletionState borrows Session.save_warning_message_ (source SaveWarningTask); it never owns a second task. Task publication occurs only after creation callback returns. Close receives the live stored task and does not clear it.",
+        "evidence": [
+          {
+            "path": "src/game/save_completion.hpp",
+            "line": 1,
+            "sha256": "f7ccc8fc53231278f826acdf287d7693cc649e5390df3836b4ab9b635be18d16"
+          },
+          {
+            "path": "src/game/save_completion.cpp",
+            "line": 1,
+            "sha256": "3ddcb611f9970fde40cd8d731b6c0c9484033ef043b1b73055ffbac7ca319095"
+          },
+          {
+            "path": "src/runtime/native_session.hpp",
+            "line": 1,
+            "sha256": "adf4a698b7cae66aea0b774b0be25ae87e03a8d1e4bf9463122be7d7317934bd"
+          }
+        ]
+      },
+      "native_binding": {
+        "kind": "explicit_failure",
+        "method": "TitleScene::close_save_warning",
+        "failure": "native_save_warning_close",
+        "evidence": [
+          {
+            "path": "src/runtime/native_title_scene.hpp",
+            "line": 1,
+            "sha256": "6bbeb90ebb857292266180d33d2519eadcb8a8ac076cc6b667a9573951382d07"
+          },
+          {
+            "path": "src/runtime/native_title_tasks.cpp",
+            "line": 522,
+            "sha256": "4a6e34468bc7d163d4de136493aca32c73cba16be465c358159df6619c36476f"
+          }
+        ]
+      },
+      "reference_binding": {
+        "kind": "original_machine_call_fixture_only",
+        "resolution": "Original save-completion suffix uses a Unicorn code hook. Creation verifies level7 and returns opaque0x2222; closure verifies retained task identity. This is an ordered fixture, not a recovered native or live guest implementation.",
+        "evidence": [
+          {
+            "path": "tools/oracles/verify_original_save_completion.py",
+            "line": 27,
+            "sha256": "ec92ebfbbd9a67c108ea35200bccb0070756f61bc425cf8f70ecef3e696d00ba"
+          },
+          {
+            "path": "tests/probes/native_save_creation_probe.cpp",
+            "line": 156,
+            "sha256": "7b97306fb3d911a3b675906b498b54f40e5319e7bece3c290d010bb525760f92"
+          }
+        ]
+      },
+      "accepted_coverage": [
+        {
+          "path": "reference/packets/save-completion/qualification.json",
+          "line": 1,
+          "sha256": "1b4657b0ff662bcc21255779aa675f8acc40cdb8fb55cbfef7a8b974e70e5694"
+        },
+        {
+          "path": "reference/packets/save-completion/holdout.json",
+          "line": 1,
+          "sha256": "27a971b6436d063aaa4c22f1ba453e59b9b8184ffd7d661701da94a2bb589cdf"
+        },
+        {
+          "path": "tests/unit/save_completion_callbacks.cpp",
+          "line": 1,
+          "sha256": "36e9e79c04918f8e3ece839da84a89663529c6e00f5fe94bc5b344a6df8942ec"
+        }
+      ],
+      "limits": [
+        "Current binding audit only; unrecovered warning behavior remains open and separate from Source-file/module conformance.",
+        "Actual language descriptor task allocation/close resource behavior not recovered or qualified; native failures stay loud.",
+        "No live guest adapter binding or original warning helper body claimed by suffix fixture receipts."
+      ]
+    }
+  },
+  "limits": "Source-only advisory binding disposition; no new build, test, provider or runtime verdict. Does not retire STUB debt.",
+  "binding_revalidation": {
+    "path": "reference/production-integration-20261101/save-warning-binding-owner-revalidation.json",
+    "sha256": "9061e1e83e6a1fd9300ac2702ab63de1292c5b074e42f92957d1fec03bca80c9"
+  }
+}
