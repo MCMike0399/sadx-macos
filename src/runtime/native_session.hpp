@@ -15,7 +15,7 @@
 #include "game/sound_bank.hpp"
 #include "game/stage_lighting.hpp"
 #include "engine/frame_loop_native.hpp"
-#include "runtime/regular_texture_assets.hpp"
+#include "runtime/native_regular_resources.hpp"
 #include "runtime/menu_texture_assets.hpp"
 #include "runtime/native_menu_texture_bindings.hpp"
 #include "game/music.hpp"
@@ -243,13 +243,7 @@ class Session final : private flow::NativeServices {
     std::array<cleanup::CharacterTextureLists, 9> character_texture_lists_;
     std::array<const cleanup::CharacterTextureLists *, 9> character_texture_bindings_{};
     std::array<std::int8_t, 9> character_textures_loaded_{};
-    sprite::TextureList *common_textures_ = nullptr;
-    std::array<sprite::TextureList *, 32> regular_textures_{};
-    RegularTextureAssets regular_assets_{};
-    std::vector<sprite::TextureList> regular_resource_lists_;
-    std::vector<regular_textures::Group> regular_groups_;
-    regular_textures::Catalog regular_catalog_{};
-    std::unique_ptr<regular_textures::State> regular_texture_state_;
+    RegularResources regular_resources_;
     regular_textures::Services regular_texture_services();
     void load_regular_object_textures(std::uint32_t);
     MenuTextureBindings menu_textures_;

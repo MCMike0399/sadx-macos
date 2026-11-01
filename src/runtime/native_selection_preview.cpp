@@ -119,10 +119,10 @@ struct TitleScene::PreviewServices final : selection_preview::Calls {
         selection_preview::load_textures(character, textures(), *this);
     }
     void load_named_texture(std::string_view name, regular_textures::List &list) override {
-        if (!scene.session_.regular_texture_state_)
+        if (!scene.session_.regular_resources_.state())
             throw flow::UnrecoveredGameFlowCall("native_regular_texture_declarations");
         auto services = scene.session_.regular_texture_services();
-        regular_textures::load_archive(name, &list, *scene.session_.regular_texture_state_, services);
+        regular_textures::load_archive(name, &list, *scene.session_.regular_resources_.state(), services);
     }
     void load_individual_texture(regular_textures::List &list) override { scene.load_texture(list); }
     void release_texture(regular_textures::List &list) override { scene.display_.release_texture_list(list); }
@@ -199,7 +199,7 @@ void TitleScene::exec_selection_gamma(TaskScheduler &scheduler, const TaskHandle
         scene.session_.stage_, scene.session_.act_,
         display_selection_gamma, destroy_selection_gamma, initialize_player_auxiliary,
         texture_views.catalog(scene.session_.character_textures_loaded_),
-        scene.session_.regular_texture_state_.get(), &texture_services};
+        scene.session_.regular_resources_.state(), &texture_services};
     gamma_selection::run(context, task);
 }
 // NOTSA: native boundary for E102Display; source seam declared in the Gamma core.
