@@ -24,7 +24,7 @@ def run(name, command, expected=0):
     (root / 'commands.json').write_text(json.dumps(rows, indent=2) + '\n')
     assert result.returncode == expected, (name, result.returncode)
 
-objects = ['game/file_select_controls', 'game/title_menu', 'math/ninja_math', 'math/ninja_sine_table', 'cpu/x87_math']
+objects = ['game/file_select_controls', 'game/title_menu', 'math/ninja_math', 'math/ninja_sine_table', 'cpu/x87_math', 'cpu/crt_integer']
 run('objects', ['make', '-j1', *['build/obj/' + p + '.o' for p in objects], 'build/softfloat/softfloat.a'])
 run('archive', ['xcrun', 'libtool', '-static', '-o', str(root / 'controls-support.a'), *['build/obj/' + p + '.o' for p in objects]])
 flags = ['xcrun', 'clang++', '-std=c++17', '-O2', '-Wall', '-Wextra', '-Werror', '-ffp-contract=off', '-fno-fast-math', '-arch', 'arm64', '-mmacosx-version-min=14.0', '-Isrc', '-Itests/fixtures', '-dynamiclib', '-undefined', 'dynamic_lookup', '-Wl,-dead_strip']
@@ -41,12 +41,18 @@ for name, slug, sources in [
     ('loop-new', 'game_loop', ['tests/probes/native_game_loop_probe.cpp', 'src/guest/game_loop.cpp']),
     ('controls', 'file_select_controls', ['tests/probes/native_file_select_controls_probe.cpp', str(root / 'controls-support.a'), 'build/softfloat/softfloat.a']),
 ]:
+    if sys.argv[1:] == ['--resume-controls'] and name != 'controls':
+        continue
     export = root / (name + '.exports')
     export.write_text('_sadx_native_' + ('game_loop' if slug == 'game_loop' else 'file_select_controls_probe') + '\n')
     library = root / (name + '.dylib')
     run(name + '-build', flags + ['-Wl,-exported_symbols_list,' + str(export), *sources, '-o', str(library)])
     directory = root / name
     run(name + '-original', [sys.executable, 'reference/packets/save-io-frame-judges/observe.py', 'tools/oracles/verify_original_' + slug + '.py', exe, str(library.resolve()), str(directory)], 1 if slug == 'file_select_controls' else 0)
+    receipt_path = directory / ('verify_original_' + slug + '.receipt.json')
+    assert receipt_path.is_file(), (name, 'setup failure is not an inherited partial')
+    receipt = json.loads(receipt_path.read_text())
+    assert receipt['native_calls'] == (2438 if slug == 'file_select_controls' else 688)
     stream = directory / ('verify_original_' + slug + '.abi.pkl.gz')
     historical = Path('/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5acabf9a/build/save-io-judges') / ('loop-original' if slug == 'game_loop' else 'controls-original') / stream.name
     difference = compare.compare(compare.records(historical), compare.records(stream))

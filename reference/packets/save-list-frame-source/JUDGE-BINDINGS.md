@@ -39,3 +39,9 @@ loop body and current loop with the unchanged probe, then runs unchanged default
 688-case loop and 2,438-case Controls observers. All defined full records compare
 to the hash-verified historical streams; Controls must remain exit 1 and retain
 its exact FP differences. No stale archive or reserved input is used.
+The initial Controls build omitted cpu/crt_integer from its narrow support archive;
+it compiled but dlopen failed on crt_ftol, leaving an empty stream and no receipt.
+This is retained in consumer-probes-initial, never counted as a partial or pass.
+The explicit dependency was added; receipt existence and native case count now
+must validate before full-record comparison. `--resume-controls` resumes that
+failed scope without rerunning the two already completed development loop cohorts.
