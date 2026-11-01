@@ -24921,6 +24921,122 @@
     "src/engine/d3d8_caps.hpp",
     "src/engine/d3d8_caps.cpp"
    ]
+  },
+  "tools/oracles/task_judges/reserved_inputs.py": {
+   "disposition": "already_conforming",
+   "reason": "Complete file independently read and accepted for its bounded helper/test purpose; current bytes match the reviewed snapshot.",
+   "semantic_justification": "Pure deterministic generation owns only local RNG and temporary operation lists. Allocation indices count children, direct destruction selects only live top-level owners, and final releases preserve ownership bookkeeping. Import generates nothing.",
+   "resolved_owners": [
+    "Caller supplies explicit seed/bounds; final Root runner owns admission and provenance labels."
+   ],
+   "resolved_consumers": [
+    "Task packet generation/capture/comparison development and future reviewed Root runner; no game algorithm or runtime owner is relocated."
+   ],
+   "accepted_judges": [
+    "Domain/reproducibility tests and direct complete-file review; no execution or source outcome inferred."
+   ],
+   "classification_limits": [
+    "No final runner, source observer outcome, reserved execution, Task or campaign approval follows.",
+    "Receipt/capture integrity relies on protected committed workflow; independently expected case binding remains the observer responsibility."
+   ],
+   "evidence": [
+    {"path": "docs/refactor-inventory/packets/task-owner/REVIEW-RESERVED-HELPERS.md", "sha256": "0dacae60163cdee59465cc4244d152d70b236c6eb26deb8ea87e7bc97b8f5c3f"},
+    {"path": "docs/refactor-inventory/packets/task-owner/RECHECK-CAPTURE-BINDING.md", "sha256": "c10e38a79750b4d687f5f4dca158b89ffe9cef4467d6bf63462a0459901e4573"}
+   ],
+   "findings": [],
+   "reviewed_source_sha256": "2e15c69e6c872035005af4bffd50fae0c9e3d8717dcf61dbf04e1d081d0a8492",
+   "read_lines": 63,
+   "complete_member_list": [
+    "tools/oracles/task_judges/reserved_inputs.py"
+   ],
+   "destination": "tools/oracles/task_judges/reserved_inputs.py"
+  },
+  "tests/python/test_task_reserved_inputs.py": {
+   "disposition": "already_conforming",
+   "reason": "Complete file independently read and accepted for its bounded helper/test purpose; current bytes match the reviewed snapshot.",
+   "semantic_justification": "Complete tests verify live/free domain, child index accounting, reproducibility, distinct seeded results and invalid bounds. Only synthetic nonreserved seeds are used.",
+   "resolved_owners": [
+    "Tests own temporary lists; generator is imported without executing reserved definitions."
+   ],
+   "resolved_consumers": [
+    "Task packet generation/capture/comparison development and future reviewed Root runner; no game algorithm or runtime owner is relocated."
+   ],
+   "accepted_judges": [
+    "All four domain tests pass; independent review accepts bounded contract testing, not source qualification."
+   ],
+   "classification_limits": [
+    "No final runner, source observer outcome, reserved execution, Task or campaign approval follows.",
+    "Receipt/capture integrity relies on protected committed workflow; independently expected case binding remains the observer responsibility."
+   ],
+   "evidence": [
+    {"path": "docs/refactor-inventory/packets/task-owner/REVIEW-RESERVED-HELPERS.md", "sha256": "0dacae60163cdee59465cc4244d152d70b236c6eb26deb8ea87e7bc97b8f5c3f"},
+    {"path": "docs/refactor-inventory/packets/task-owner/RECHECK-CAPTURE-BINDING.md", "sha256": "c10e38a79750b4d687f5f4dca158b89ffe9cef4467d6bf63462a0459901e4573"}
+   ],
+   "findings": [],
+   "reviewed_source_sha256": "ce771feeee0e8dac64450381a8e15ea6d1216aeb3235008a804aea1ada3482b4",
+   "read_lines": 65,
+   "complete_member_list": [
+    "tests/python/test_task_reserved_inputs.py"
+   ],
+   "destination": "tests/python/test_task_reserved_inputs.py"
+  },
+  "tools/oracles/task_judges/compare_streams.py": {
+   "disposition": "already_conforming",
+   "reason": "Complete file independently read and accepted for its bounded helper/test purpose; current bytes match the reviewed snapshot.",
+   "semantic_justification": "Complete comparison binds successful nonempty capture identities and ordered calls, strict Base64 payload sizes/hashes and exact whole JSON records; preserves scalar/return/padding/exclusion differences without projection.",
+   "resolved_owners": [
+    "Owns only streamed read/validation state. The observer separately binds independent expected cases; frozen workflow owns receipt trust."
+   ],
+   "resolved_consumers": [
+    "Task packet generation/capture/comparison development and future reviewed Root runner; no game algorithm or runtime owner is relocated."
+   ],
+   "accepted_judges": [
+    "Fifteen regression tests, independent old-helper reproduction and adversarial read-only review preserve complete ledger/equality purpose."
+   ],
+   "classification_limits": [
+    "No final runner, source observer outcome, reserved execution, Task or campaign approval follows.",
+    "Receipt/capture integrity relies on protected committed workflow; independently expected case binding remains the observer responsibility."
+   ],
+   "evidence": [
+    {"path": "docs/refactor-inventory/packets/task-owner/REVIEW-RESERVED-HELPERS.md", "sha256": "0dacae60163cdee59465cc4244d152d70b236c6eb26deb8ea87e7bc97b8f5c3f"},
+    {"path": "docs/refactor-inventory/packets/task-owner/RECHECK-CAPTURE-BINDING.md", "sha256": "c10e38a79750b4d687f5f4dca158b89ffe9cef4467d6bf63462a0459901e4573"}
+   ],
+   "findings": [],
+   "reviewed_source_sha256": "4b935e04e6abcb1b4cdc675e3ffedcbe0175f6f450a3f5b03be09e1726d08bfe",
+   "read_lines": 86,
+   "complete_member_list": [
+    "tools/oracles/task_judges/compare_streams.py"
+   ],
+   "destination": "tools/oracles/task_judges/compare_streams.py"
+  },
+  "tests/python/test_task_stream_completeness.py": {
+   "disposition": "already_conforming",
+   "reason": "Complete file independently read and accepted for its bounded helper/test purpose; current bytes match the reviewed snapshot.",
+   "semantic_justification": "Complete regression module covers equal complete captures and failure of empty/truncated/duplicate/reordered/missing identities, changed payload/return/digests, one-sided failures, independently valid unequal records and exclusion cohorts.",
+   "resolved_owners": [
+    "Each test owns and removes only its TemporaryDirectory; invokes the actual comparator subprocess with exact paths."
+   ],
+   "resolved_consumers": [
+    "Task packet generation/capture/comparison development and future reviewed Root runner; no game algorithm or runtime owner is relocated."
+   ],
+   "accepted_judges": [
+    "All fifteen tests pass; complete-body acceptance in both independent helper reviews."
+   ],
+   "classification_limits": [
+    "No final runner, source observer outcome, reserved execution, Task or campaign approval follows.",
+    "Receipt/capture integrity relies on protected committed workflow; independently expected case binding remains the observer responsibility."
+   ],
+   "evidence": [
+    {"path": "docs/refactor-inventory/packets/task-owner/REVIEW-RESERVED-HELPERS.md", "sha256": "0dacae60163cdee59465cc4244d152d70b236c6eb26deb8ea87e7bc97b8f5c3f"},
+    {"path": "docs/refactor-inventory/packets/task-owner/RECHECK-CAPTURE-BINDING.md", "sha256": "c10e38a79750b4d687f5f4dca158b89ffe9cef4467d6bf63462a0459901e4573"}
+   ],
+   "findings": [],
+   "reviewed_source_sha256": "b99019420543e49346ea3e8e870ce1e2e5bb28ccd68cdbc3bc3baba26bd80612",
+   "read_lines": 125,
+   "complete_member_list": [
+    "tests/python/test_task_stream_completeness.py"
+   ],
+   "destination": "tests/python/test_task_stream_completeness.py"
   }
  },
  "external_reference_sources": [
@@ -35601,6 +35717,66 @@
     "src/engine/d3d8_caps.hpp": "34e279c58edce66d09dd9afe051632be72fb0b1ffc331cb0fa08dd0cb1df754a",
     "src/engine/d3d8_caps.cpp": "ad7c3a3ca7e7d9ce45d3c6a400fd88cbe90545607d79ae4f9c09a808ec684b5a"
    },
+   "complete_bounded_judgment": true
+  },
+  "tests/python/test_task_reserved_inputs": {
+   "disposition": "already_conforming",
+   "reason": "Complete file independently read and accepted for its bounded helper/test purpose; current bytes match the reviewed snapshot.",
+   "semantic_justification": "Complete tests verify live/free domain, child index accounting, reproducibility, distinct seeded results and invalid bounds. Only synthetic nonreserved seeds are used.",
+   "resolved_owners": [
+    "Tests own temporary lists; generator is imported without executing reserved definitions."
+   ],
+   "resolved_consumers": [
+    "Task packet generation/capture/comparison development and future reviewed Root runner; no game algorithm or runtime owner is relocated."
+   ],
+   "accepted_judges": [
+    "All four domain tests pass; independent review accepts bounded contract testing, not source qualification."
+   ],
+   "classification_limits": [
+    "No final runner, source observer outcome, reserved execution, Task or campaign approval follows.",
+    "Receipt/capture integrity relies on protected committed workflow; independently expected case binding remains the observer responsibility."
+   ],
+   "evidence": [
+    {"path": "docs/refactor-inventory/packets/task-owner/REVIEW-RESERVED-HELPERS.md", "sha256": "0dacae60163cdee59465cc4244d152d70b236c6eb26deb8ea87e7bc97b8f5c3f"},
+    {"path": "docs/refactor-inventory/packets/task-owner/RECHECK-CAPTURE-BINDING.md", "sha256": "c10e38a79750b4d687f5f4dca158b89ffe9cef4467d6bf63462a0459901e4573"}
+   ],
+   "findings": [],
+   "reviewed_members": {
+    "tests/python/test_task_reserved_inputs.py": "ce771feeee0e8dac64450381a8e15ea6d1216aeb3235008a804aea1ada3482b4"
+   },
+   "destination": [
+    "tests/python/test_task_reserved_inputs.py"
+   ],
+   "complete_bounded_judgment": true
+  },
+  "tests/python/test_task_stream_completeness": {
+   "disposition": "already_conforming",
+   "reason": "Complete file independently read and accepted for its bounded helper/test purpose; current bytes match the reviewed snapshot.",
+   "semantic_justification": "Complete regression module covers equal complete captures and failure of empty/truncated/duplicate/reordered/missing identities, changed payload/return/digests, one-sided failures, independently valid unequal records and exclusion cohorts.",
+   "resolved_owners": [
+    "Each test owns and removes only its TemporaryDirectory; invokes the actual comparator subprocess with exact paths."
+   ],
+   "resolved_consumers": [
+    "Task packet generation/capture/comparison development and future reviewed Root runner; no game algorithm or runtime owner is relocated."
+   ],
+   "accepted_judges": [
+    "All fifteen tests pass; complete-body acceptance in both independent helper reviews."
+   ],
+   "classification_limits": [
+    "No final runner, source observer outcome, reserved execution, Task or campaign approval follows.",
+    "Receipt/capture integrity relies on protected committed workflow; independently expected case binding remains the observer responsibility."
+   ],
+   "evidence": [
+    {"path": "docs/refactor-inventory/packets/task-owner/REVIEW-RESERVED-HELPERS.md", "sha256": "0dacae60163cdee59465cc4244d152d70b236c6eb26deb8ea87e7bc97b8f5c3f"},
+    {"path": "docs/refactor-inventory/packets/task-owner/RECHECK-CAPTURE-BINDING.md", "sha256": "c10e38a79750b4d687f5f4dca158b89ffe9cef4467d6bf63462a0459901e4573"}
+   ],
+   "findings": [],
+   "reviewed_members": {
+    "tests/python/test_task_stream_completeness.py": "b99019420543e49346ea3e8e870ce1e2e5bb28ccd68cdbc3bc3baba26bd80612"
+   },
+   "destination": [
+    "tests/python/test_task_stream_completeness.py"
+   ],
    "complete_bounded_judgment": true
   }
  },
