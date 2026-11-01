@@ -1,0 +1,70 @@
+{
+  "mutants": [
+    {
+      "mutation": "wrong_wfog",
+      "source_sha256": "bdfbd5d343a0a9c568224684992104597c81c5153605d17ab745d04b00069467",
+      "compile_exit": 0,
+      "unit_exit": 1,
+      "diagnostic": "HAL, WFOG and texture capability fields",
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc",
+        "tests/unit/d3d8_caps.cpp",
+        "build/d3d8-caps/mutants/wrong_wfog/caps.cpp",
+        "-o",
+        "build/d3d8-caps/mutants/wrong_wfog/unit"
+      ]
+    },
+    {
+      "mutation": "nonzero_unspecified",
+      "source_sha256": "a927f126b8d64b6d937e6eb4ed61550571772f3ed60d0cbdd92da99f7dbc4f9d",
+      "compile_exit": 0,
+      "unit_exit": 1,
+      "diagnostic": "other fields use the reported zero-cap assumption",
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc",
+        "tests/unit/d3d8_caps.cpp",
+        "build/d3d8-caps/mutants/nonzero_unspecified/caps.cpp",
+        "-o",
+        "build/d3d8-caps/mutants/nonzero_unspecified/unit"
+      ]
+    },
+    {
+      "mutation": "hidden_assumption",
+      "source_sha256": "84cc6d89fd2caec8d2a86e5bab7729946d4d9aed28eac918d3367973de883974",
+      "compile_exit": 0,
+      "unit_exit": 1,
+      "diagnostic": "reference GPU remains unknown",
+      "command": [
+        "xcrun",
+        "clang++",
+        "-std=c++17",
+        "-O2",
+        "-Wall",
+        "-Wextra",
+        "-Werror",
+        "-Isrc",
+        "tests/unit/d3d8_caps.cpp",
+        "build/d3d8-caps/mutants/hidden_assumption/caps.cpp",
+        "-o",
+        "build/d3d8-caps/mutants/hidden_assumption/unit"
+      ]
+    }
+  ],
+  "valid_compiled_faults_caught": 3,
+  "source_edited": false,
+  "test_unchanged": true
+}

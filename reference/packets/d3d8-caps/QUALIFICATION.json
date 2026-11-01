@@ -1,0 +1,71 @@
+{
+  "source_commit": "d1a7b426c846c2a4dbf0fa95bc4b7a68b3c1c1de",
+  "source_files": {
+    "src/engine/d3d8_caps.hpp": "34e279c58edce66d09dd9afe051632be72fb0b1ffc331cb0fa08dd0cb1df754a",
+    "src/engine/d3d8_caps.cpp": "ad7c3a3ca7e7d9ce45d3c6a400fd88cbe90545607d79ae4f9c09a808ec684b5a"
+  },
+  "commands": [
+    "xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -Isrc tests/unit/d3d8_caps.cpp src/engine/d3d8_caps.cpp -o build/d3d8-caps/{before,after}/unit",
+    "xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -Isrc -dynamiclib tests/probes/native_d3d8_caps_probe.cpp src/engine/d3d8_caps.cpp -o build/d3d8-caps/{before,after}/caps.dylib",
+    "xcrun clang++ -std=c++17 -O2 -Wall -Wextra -Werror -ffp-contract=off -fno-fast-math -arch arm64 -mmacosx-version-min=14.0 -Isrc -Itests/fixtures -I/Users/burbujamc/Developer/sadx-macos/reference/python/lib/python3.14/site-packages/unicorn/include tests/unit/guest_d3d8_caps.cpp src/engine/d3d8_caps.cpp /Users/burbujamc/Developer/sadx-macos/build/libsadx-guest.a /Users/burbujamc/Developer/sadx-macos/reference/python/lib/python3.14/site-packages/unicorn/lib/libunicorn.a -lpthread /Users/burbujamc/Developer/sadx-macos/build/libsadx-core.a -Wl,-map,build/d3d8-caps/guest.map -o build/d3d8-caps/guest-test",
+    "./build/d3d8-caps/guest-test '/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe'"
+  ],
+  "unit_before_exit": 0,
+  "unit_after_exit": 0,
+  "probe_comparison_records": 7,
+  "wire_bytes": 212,
+  "diagnostic_bytes": 214,
+  "complete_old_current_equal": true,
+  "guest_consumer": {
+    "exit_status": 0,
+    "log_sha256": "9f58ea6e85fe7ec1defcad78f5b0851049ab5cce985fd39be1121872989dba2c",
+    "link_map_sha256": "9261029a144c837a7d4deab0e77ff2ed9034bec0b313c15e680fb85eda552384",
+    "fresh_caps_object_owns_both_definitions": true,
+    "checks": [
+      "both actual HLE COM interfaces",
+      "output guards",
+      "assumption reported exactly once",
+      "original mipmap consumer positive and negative paths"
+    ]
+  },
+  "mutants": {
+    "valid_compiled": 3,
+    "caught_by_unchanged_unit": 3
+  },
+  "static_checks": {
+    "layers": 0,
+    "owners": 0,
+    "readability": 0,
+    "constexpr_tables": 0,
+    "profile_patches": 0
+  },
+  "standalone": {
+    "source_inputs": [
+      "src/engine/d3d8_caps.cpp",
+      "src/engine/d3d8_caps.hpp",
+      "tests/probes/native_d3d8_caps_probe.cpp"
+    ],
+    "dependencies": [
+      "libc++.1.dylib",
+      "libSystem.B.dylib"
+    ],
+    "project_undefined_symbols": []
+  },
+  "development_failure": {
+    "kind": "metadata inspection only",
+    "detail": "Initial qualification writer attempted UTF-8 text decode of a linker map containing non-UTF-8 symbol bytes. Re-read for inspection with replacement decoding; raw bytes/hash and all completed executions unchanged. No compile or case rerun."
+  },
+  "remaining": [
+    "independent complete-module standards/fidelity review",
+    "parent manifest addition for new probe",
+    "canonical inventory disposition",
+    "actual Main full gate including game-runtime reference composition"
+  ],
+  "limits": [
+    "The original GPU capability record is still uncaptured. Equality preserves the existing explicit assumption; it does not prove Windows hardware parity.",
+    "Native shipping source list does not contain this module. It is maintained because HLE and NativeGame reference composition consume it. Native product and Task ownership are unchanged.",
+    "Pinned archives support actual HLE consumer qualification only. Old/current byte comparison libraries were freshly built directly from their respective source.",
+    "No random holdout is applicable to a zero-argument constant producer: every returned byte and diagnostic byte was frozen and compared.",
+    "No full gate, journey, gameplay or whole campaign closure is claimed."
+  ]
+}
