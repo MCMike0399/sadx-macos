@@ -9480,6 +9480,186 @@
           "sha256": "6905cced6019a3ff38701a79c63349f33cad62fad654b5a58a5c99557e88a4eb"
         }
       ]
+    },
+    "src/runtime/native_regular_resources.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete bounded native resource owner inspected and independently approved; no unresolved source migration in this named file.",
+      "reviewed_source_sha256": "d259119cda99b1c5ef871db134cae6b9efd7b7260c95a6179d7d76ae50068bea",
+      "semantic_justification": "Complete fixed-identity native regular resource owner and imported declaration binding inspected. Owns exactly the seven former contiguous Session fields; State references retained localization storage and live resync/language. Ordered partial initialization/retries, aliases, scratch/cache defaults and duplicate guards are unchanged. This owner composes existing shared regular-texture algorithms and contains no fixture availability, PE access or guest transport.",
+      "resolved_owners": [
+        {
+          "resolution": "RegularResources owns common and32 regular list slots, imported asset storage, stable list/group/catalog bindings and the lazily allocated load State. It is not movable/copyable. Menu bindings die before these borrowers; State dies before localization assets. GPU memory, character resources, tasks and display services retain separate owners.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_regular_resources.hpp",
+              "sha256": "d259119cda99b1c5ef871db134cae6b9efd7b7260c95a6179d7d76ae50068bea"
+            },
+            {
+              "path": "src/runtime/native_regular_resources.cpp",
+              "sha256": "17fe7972611dff0346e88a2c22d677f68c721e651b601e5a00579af942dd529d"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Session cleanup borrows actual common/regular slots; regular/menu/Japanese load paths borrow State/catalog; MenuTextureBindings borrows actual list vector. TitleScene individual loads, selection-preview named loads and Gamma nullable context carry this same State. Archive callback captures Session and reacquires live services and State. State publication remains before Display validation/callback binding.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "e4779eec8361d9dee5b3e2b7c62c834c18516ca059813dccb2c0902610cf8a3f"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "adf4a698b7cae66aea0b774b0be25ae87e03a8d1e4bf9463122be7d7317934bd"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "sha256": "4a6e34468bc7d163d4de136493aca32c73cba16be465c358159df6619c36476f"
+            },
+            {
+              "path": "src/runtime/native_selection_preview.cpp",
+              "sha256": "b69b072b615a5c9a7c3b5c8979c6b49ba2b50fdfebfd19d047a7939314f31ded"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent bounded STYLE12 review approves. Source-bound native fixture55 full observations and six compiled mutants pass in worker and Root replays. Original default regular609/menu1401/texture1416/cleanup2604 exact. Post-review regular1209/menu1801 exact; fresh native/game/numeric/platform archive and force-load closure pass.",
+          "evidence": [
+            {
+              "path": "reference/packets/session-regular-resources/REVIEW-independent.md",
+              "sha256": "9a47ab1ab196207d9893d937ac823fa2140a4ee97787c8c67d69623c7b21795b"
+            },
+            {
+              "path": "reference/packets/session-regular-resources/CONTEXT.md",
+              "sha256": "1c6c78779a26c1b8eb7b44d2a6395f6908323a56a3ac734d4cbefcbbb9c8857b"
+            },
+            {
+              "path": "reference/packets/session-regular-resources/root-qualification.json",
+              "sha256": "2586b1c9671f096a6bb42ae387cd17d3fdddb6f394310c8c4b94a7bcb2eecbb4"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Native import attachment baseline is source-bound reduced native host, not Windows attachment or complete actual Session runtime proof.",
+        "Actual new-owner native journeys and composite Main gate are pending at this authored source review; existing unit and original judge receipts retain lower backend limits.",
+        "Full regular texture algorithms, shared native/reference pool initialization, GPU lifetime, whole Session and exhaustive campaign remain open."
+      ],
+      "evidence": [
+        {
+          "path": "src/runtime/native_regular_resources.hpp",
+          "sha256": "d259119cda99b1c5ef871db134cae6b9efd7b7260c95a6179d7d76ae50068bea"
+        },
+        {
+          "path": "src/runtime/native_regular_resources.cpp",
+          "sha256": "17fe7972611dff0346e88a2c22d677f68c721e651b601e5a00579af942dd529d"
+        },
+        {
+          "path": "reference/packets/session-regular-resources/REVIEW-independent.md",
+          "sha256": "9a47ab1ab196207d9893d937ac823fa2140a4ee97787c8c67d69623c7b21795b"
+        },
+        {
+          "path": "reference/packets/session-regular-resources/CONTEXT.md",
+          "sha256": "1c6c78779a26c1b8eb7b44d2a6395f6908323a56a3ac734d4cbefcbbb9c8857b"
+        },
+        {
+          "path": "reference/packets/session-regular-resources/root-qualification.json",
+          "sha256": "2586b1c9671f096a6bb42ae387cd17d3fdddb6f394310c8c4b94a7bcb2eecbb4"
+        }
+      ]
+    },
+    "src/runtime/native_regular_resources.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete bounded native resource owner inspected and independently approved; no unresolved source migration in this named file.",
+      "reviewed_source_sha256": "17fe7972611dff0346e88a2c22d677f68c721e651b601e5a00579af942dd529d",
+      "semantic_justification": "Complete fixed-identity native regular resource owner and imported declaration binding inspected. Owns exactly the seven former contiguous Session fields; State references retained localization storage and live resync/language. Ordered partial initialization/retries, aliases, scratch/cache defaults and duplicate guards are unchanged. This owner composes existing shared regular-texture algorithms and contains no fixture availability, PE access or guest transport.",
+      "resolved_owners": [
+        {
+          "resolution": "RegularResources owns common and32 regular list slots, imported asset storage, stable list/group/catalog bindings and the lazily allocated load State. It is not movable/copyable. Menu bindings die before these borrowers; State dies before localization assets. GPU memory, character resources, tasks and display services retain separate owners.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_regular_resources.hpp",
+              "sha256": "d259119cda99b1c5ef871db134cae6b9efd7b7260c95a6179d7d76ae50068bea"
+            },
+            {
+              "path": "src/runtime/native_regular_resources.cpp",
+              "sha256": "17fe7972611dff0346e88a2c22d677f68c721e651b601e5a00579af942dd529d"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Session cleanup borrows actual common/regular slots; regular/menu/Japanese load paths borrow State/catalog; MenuTextureBindings borrows actual list vector. TitleScene individual loads, selection-preview named loads and Gamma nullable context carry this same State. Archive callback captures Session and reacquires live services and State. State publication remains before Display validation/callback binding.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "e4779eec8361d9dee5b3e2b7c62c834c18516ca059813dccb2c0902610cf8a3f"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "adf4a698b7cae66aea0b774b0be25ae87e03a8d1e4bf9463122be7d7317934bd"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "sha256": "4a6e34468bc7d163d4de136493aca32c73cba16be465c358159df6619c36476f"
+            },
+            {
+              "path": "src/runtime/native_selection_preview.cpp",
+              "sha256": "b69b072b615a5c9a7c3b5c8979c6b49ba2b50fdfebfd19d047a7939314f31ded"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent bounded STYLE12 review approves. Source-bound native fixture55 full observations and six compiled mutants pass in worker and Root replays. Original default regular609/menu1401/texture1416/cleanup2604 exact. Post-review regular1209/menu1801 exact; fresh native/game/numeric/platform archive and force-load closure pass.",
+          "evidence": [
+            {
+              "path": "reference/packets/session-regular-resources/REVIEW-independent.md",
+              "sha256": "9a47ab1ab196207d9893d937ac823fa2140a4ee97787c8c67d69623c7b21795b"
+            },
+            {
+              "path": "reference/packets/session-regular-resources/CONTEXT.md",
+              "sha256": "1c6c78779a26c1b8eb7b44d2a6395f6908323a56a3ac734d4cbefcbbb9c8857b"
+            },
+            {
+              "path": "reference/packets/session-regular-resources/root-qualification.json",
+              "sha256": "2586b1c9671f096a6bb42ae387cd17d3fdddb6f394310c8c4b94a7bcb2eecbb4"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Native import attachment baseline is source-bound reduced native host, not Windows attachment or complete actual Session runtime proof.",
+        "Actual new-owner native journeys and composite Main gate are pending at this authored source review; existing unit and original judge receipts retain lower backend limits.",
+        "Full regular texture algorithms, shared native/reference pool initialization, GPU lifetime, whole Session and exhaustive campaign remain open."
+      ],
+      "evidence": [
+        {
+          "path": "src/runtime/native_regular_resources.hpp",
+          "sha256": "d259119cda99b1c5ef871db134cae6b9efd7b7260c95a6179d7d76ae50068bea"
+        },
+        {
+          "path": "src/runtime/native_regular_resources.cpp",
+          "sha256": "17fe7972611dff0346e88a2c22d677f68c721e651b601e5a00579af942dd529d"
+        },
+        {
+          "path": "reference/packets/session-regular-resources/REVIEW-independent.md",
+          "sha256": "9a47ab1ab196207d9893d937ac823fa2140a4ee97787c8c67d69623c7b21795b"
+        },
+        {
+          "path": "reference/packets/session-regular-resources/CONTEXT.md",
+          "sha256": "1c6c78779a26c1b8eb7b44d2a6395f6908323a56a3ac734d4cbefcbbb9c8857b"
+        },
+        {
+          "path": "reference/packets/session-regular-resources/root-qualification.json",
+          "sha256": "2586b1c9671f096a6bb42ae387cd17d3fdddb6f394310c8c4b94a7bcb2eecbb4"
+        }
+      ]
     }
   },
   "external_reference_sources": [
@@ -10779,6 +10959,99 @@
         "line": 1,
         "sha256": "4710d5a7a7890eef3e331854d7a4d148a82fc4e68b822564513f9c6a46e4eb74"
       }
+    },
+    "src/runtime/native_regular_resources": {
+      "disposition": "already_conforming",
+      "reason": "Explicit review of the complete two-member native regular resource owner module, with separate unqualified subsystem boundaries.",
+      "reviewed_members": {
+        "src/runtime/native_regular_resources.hpp": "d259119cda99b1c5ef871db134cae6b9efd7b7260c95a6179d7d76ae50068bea",
+        "src/runtime/native_regular_resources.cpp": "17fe7972611dff0346e88a2c22d677f68c721e651b601e5a00579af942dd529d"
+      },
+      "semantic_justification": "Complete fixed-identity native regular resource owner and imported declaration binding inspected. Owns exactly the seven former contiguous Session fields; State references retained localization storage and live resync/language. Ordered partial initialization/retries, aliases, scratch/cache defaults and duplicate guards are unchanged. This owner composes existing shared regular-texture algorithms and contains no fixture availability, PE access or guest transport.",
+      "resolved_owners": [
+        {
+          "resolution": "RegularResources owns common and32 regular list slots, imported asset storage, stable list/group/catalog bindings and the lazily allocated load State. It is not movable/copyable. Menu bindings die before these borrowers; State dies before localization assets. GPU memory, character resources, tasks and display services retain separate owners.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_regular_resources.hpp",
+              "sha256": "d259119cda99b1c5ef871db134cae6b9efd7b7260c95a6179d7d76ae50068bea"
+            },
+            {
+              "path": "src/runtime/native_regular_resources.cpp",
+              "sha256": "17fe7972611dff0346e88a2c22d677f68c721e651b601e5a00579af942dd529d"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Session cleanup borrows actual common/regular slots; regular/menu/Japanese load paths borrow State/catalog; MenuTextureBindings borrows actual list vector. TitleScene individual loads, selection-preview named loads and Gamma nullable context carry this same State. Archive callback captures Session and reacquires live services and State. State publication remains before Display validation/callback binding.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "e4779eec8361d9dee5b3e2b7c62c834c18516ca059813dccb2c0902610cf8a3f"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "adf4a698b7cae66aea0b774b0be25ae87e03a8d1e4bf9463122be7d7317934bd"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "sha256": "4a6e34468bc7d163d4de136493aca32c73cba16be465c358159df6619c36476f"
+            },
+            {
+              "path": "src/runtime/native_selection_preview.cpp",
+              "sha256": "b69b072b615a5c9a7c3b5c8979c6b49ba2b50fdfebfd19d047a7939314f31ded"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent bounded STYLE12 review approves. Source-bound native fixture55 full observations and six compiled mutants pass in worker and Root replays. Original default regular609/menu1401/texture1416/cleanup2604 exact. Post-review regular1209/menu1801 exact; fresh native/game/numeric/platform archive and force-load closure pass.",
+          "evidence": [
+            {
+              "path": "reference/packets/session-regular-resources/REVIEW-independent.md",
+              "sha256": "9a47ab1ab196207d9893d937ac823fa2140a4ee97787c8c67d69623c7b21795b"
+            },
+            {
+              "path": "reference/packets/session-regular-resources/CONTEXT.md",
+              "sha256": "1c6c78779a26c1b8eb7b44d2a6395f6908323a56a3ac734d4cbefcbbb9c8857b"
+            },
+            {
+              "path": "reference/packets/session-regular-resources/root-qualification.json",
+              "sha256": "2586b1c9671f096a6bb42ae387cd17d3fdddb6f394310c8c4b94a7bcb2eecbb4"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Native import attachment baseline is source-bound reduced native host, not Windows attachment or complete actual Session runtime proof.",
+        "Actual new-owner native journeys and composite Main gate are pending at this authored source review; existing unit and original judge receipts retain lower backend limits.",
+        "Full regular texture algorithms, shared native/reference pool initialization, GPU lifetime, whole Session and exhaustive campaign remain open."
+      ],
+      "evidence": [
+        {
+          "path": "src/runtime/native_regular_resources.hpp",
+          "sha256": "d259119cda99b1c5ef871db134cae6b9efd7b7260c95a6179d7d76ae50068bea"
+        },
+        {
+          "path": "src/runtime/native_regular_resources.cpp",
+          "sha256": "17fe7972611dff0346e88a2c22d677f68c721e651b601e5a00579af942dd529d"
+        },
+        {
+          "path": "reference/packets/session-regular-resources/REVIEW-independent.md",
+          "sha256": "9a47ab1ab196207d9893d937ac823fa2140a4ee97787c8c67d69623c7b21795b"
+        },
+        {
+          "path": "reference/packets/session-regular-resources/CONTEXT.md",
+          "sha256": "1c6c78779a26c1b8eb7b44d2a6395f6908323a56a3ac734d4cbefcbbb9c8857b"
+        },
+        {
+          "path": "reference/packets/session-regular-resources/root-qualification.json",
+          "sha256": "2586b1c9671f096a6bb42ae387cd17d3fdddb6f394310c8c4b94a7bcb2eecbb4"
+        }
+      ]
     }
   }
 }
