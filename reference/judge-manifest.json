@@ -1,9 +1,10 @@
 {
   "change": {
-    "base_commit": "4f003a9496fca78523ab63001aebc2e2694afd4f",
-    "evidence": "docs/packets/mpeg-timing/judge-registration.md",
-    "evidence_sha256": "b5f7372e3f319527c63b977864a99d7ac0aa43ed000b0c08595ab3a0862829f9",
-    "reason": "Remove empty trailing fields from only the two added MPEG registrations; preserve target names and no-argument behavior"
+    "base_commit": "ee1449bbab25f2f6320bb3eed19e75671a18adc3",
+    "evidence": "docs/packets/mpeg-timing/PACKET.md",
+    "evidence_sha256": "33c70787eb1546600aedb8b8c9d46e3cebb2c348bac97ec978cf62ff90669cfa",
+    "mode": "additions-only",
+    "reason": "Freeze ten compiled MPEG timing faults alongside complete synthetic/COM contracts, retaining every inherited protected input"
   },
   "files": {
     "Makefile": "5528e9c8e356383cc05104ee16eeccc939e27968b6f6be876d01dd24ed063d8d",
@@ -340,6 +341,7 @@
     "reference/production-integration-20261101/guest-heap-mutants.json": "3327c044643e6e381c1a7aea13553f7c8abafb614df20caf241c1960f2f435d5",
     "reference/production-integration-20261101/menu-progress-shared/mutants.json": "cab8745d573efa9caa6e281654ef85ce535c0d28b4e593236e921d275faed40d",
     "reference/production-integration-20261101/menu-texture-bindings-mutants.json": "b2af4ad069e8b0f32ccfb12ffb0da20d247ea0aaeefc8c9454a8349d7caa919a",
+    "reference/production-integration-20261101/mpeg-timing-mutants.json": "bca998f6f5c7454768373a6833fc948e9962f14d0a734f89bcaa02d0315d86d2",
     "reference/production-integration-20261101/save-completion-mutants.json": "1b4657b0ff662bcc21255779aa675f8acc40cdb8fb55cbfef7a8b974e70e5694",
     "reference/production-integration-20261101/session-character-resources-mutants.json": "bdb70359726436c7cfefe5729e02e75f35aa1a4b98dc1934c3df0293fb8c8693",
     "reference/production-integration-20261101/session-regular-resources-mutants.json": "c56fe89a628d98ed2e1fe439c2fc99e8d7c5070978d30c2b2d344aa0a428f4ea",
