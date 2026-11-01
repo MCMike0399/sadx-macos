@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
 """Bounded signature census. Existing readability metrics are deliberately untouched.
 
-All unregistered callable names are review candidates, never semantic proof. Their
-per-file/name counts also ratchet, so adding/renaming a helper cannot silently fall
-out of the census. This intentionally asks for review of ordinary semantic calls.
+Unregistered callable names are reported review candidates, never semantic proof
+or a blocking allowance. Only evidenced dispatch sites participate in the ratchet.
 """
 from __future__ import annotations
 
@@ -32,16 +31,19 @@ def masked(source):
 
 
 def arguments(code, opening):
-    """Balance (), [] and {}; angle brackets are intentionally not parsed.
+    """Balance (), [] and {}; reject ambiguous top-level angle expressions.
 
-    Template commas at top argument depth are unsupported. Registered call sites
-    using those must wrap the expression in parentheses. Fail closed on bounds.
+    Parenthesizing a template/comparison expression preserves its complete span
+    without needing C++ template parsing. Shift and comparison operators are not
+    guessed to be template delimiters.
     """
     stack = ['(']
     start = opening + 1
     spans = []
     for pos in range(start, min(len(code), opening + MAX_SPAN)):
         char = code[pos]
+        if char == '<' and len(stack) == 1:
+            raise ValueError('ambiguous angle expression; parenthesize the registered argument')
         if char in '([{':
             stack.append(char)
             if len(stack) > MAX_DEPTH:
@@ -102,7 +104,10 @@ def census(source, path, signatures):
             continue
         spec = helpers[helper]
         spans, end = arguments(code, match.end() - 1)
-        if code[end:].lstrip().startswith('{'):
+        suffix = code[end:].lstrip()
+        if suffix.startswith('{') or re.match(
+                r'(?:const\b|volatile\b|noexcept\b|override\b|final\b|requires\b|'
+                r'__attribute__\b|__declspec\b|throw\s*\(|\[\[|->|&)', suffix):
             raise ValueError(f'{path}: unregistered overload definition: {helper}')
         if not spec['min_args'] <= len(spans) <= spec['max_args']:
             raise ValueError(f'{path}:{source.count(chr(10), 0, match.start()) + 1}: '
@@ -171,10 +176,6 @@ def increases(current, prior, label):
         if row['dispatch_sites'] > before.get('dispatch_sites', 0):
             errors.append(f'{path}: dispatch_sites {row["dispatch_sites"]} > '
                           f'{before.get("dispatch_sites", 0)} ({label})')
-        for name, count in row['candidate_names'].items():
-            limit = before.get('candidate_names', {}).get(name, 0)
-            if count > limit:
-                errors.append(f'{path}: candidate review required: {name} {count} > {limit} ({label})')
     return errors
 
 
@@ -194,9 +195,17 @@ def main():
             raise ValueError('unsupported signature registry')
         current, sites = scan(sources(root), registry)
         target = root / BASELINE
-        committed = subprocess.run(['git', 'show', f'HEAD:{BASELINE}'], cwd=root,
-                                   capture_output=True, text=True)
-        if committed.returncode == 0:
+        repository = subprocess.run(['git', 'rev-parse', '--show-toplevel'], cwd=root,
+                                    capture_output=True, text=True)
+        checkout = repository.returncode == 0 and Path(repository.stdout.strip()).resolve() == root
+        if not checkout and (args.write_baseline or args.migrate_signature_v1):
+            raise ValueError('Git checkout required for baseline writing or migration')
+        committed = (subprocess.run(['git', 'show', f'HEAD:{BASELINE}'], cwd=root,
+                                    capture_output=True, text=True) if checkout else None)
+        if not checkout:
+            prior = validate(json.loads(target.read_text()), registry_hash)
+            migration = False
+        elif committed.returncode == 0:
             prior = validate(json.loads(committed.stdout), registry_hash)
             migration = False
         else:
@@ -209,7 +218,8 @@ def main():
             migration = True
             print('MEASUREMENT CHANGE: signature-dispatch-v1 seeded only from immutable HEAD; '
                   'legacy readability metrics/allowances unchanged')
-        errors = increases(current, prior, 'immutable HEAD migration' if migration else 'HEAD baseline')
+        label = 'immutable HEAD migration' if migration else ('HEAD baseline' if checkout else 'archive baseline')
+        errors = increases(current, prior, label)
         if target.exists():
             working = validate(json.loads(target.read_text()), registry_hash)
             errors += increases(working, prior, 'baseline increase against HEAD')
@@ -230,7 +240,7 @@ def main():
                                           'registry_sha256': registry_hash, 'files': rows}, indent=2) + '\n')
         print(f'Signature dispatch: {len(sites)} proven sites; '
               f'{sum(sum(r["candidate_names"].values()) for r in current.values())} '
-              'unresolved candidate tokens; 0 increases')
+              'unresolved candidate tokens (report only); 0 proven-dispatch increases')
         return 0
     except (ValueError, OSError, KeyError, TypeError) as error:
         print('ADDRESS DISPATCH: ' + str(error))

@@ -9,7 +9,8 @@
       "evidence": [
         {
           "path": "src/cpu/crt_atan2.cpp",
-          "line": 52
+          "line": 52,
+          "sha256": "1fbb0c6f470930b6a087655233d14dd02b93ecf5d105bb723a4894c740fb9555"
         }
       ],
       "verification": [
@@ -25,7 +26,8 @@
       "evidence": [
         {
           "path": "src/cpu/sse_math.cpp",
-          "line": 18
+          "line": 18,
+          "sha256": "b7ddd9dc425ac2e1ebd49929de1dcdf4bd7671466bf041544a6ba57157ca12b7"
         }
       ],
       "verification": [
@@ -41,7 +43,8 @@
       "evidence": [
         {
           "path": "src/math/ninja_sine_table.cpp",
-          "line": 7
+          "line": 7,
+          "sha256": "5843cdcab33b2ec76edff60437bfb908db6d8afe720374c47b13c25ddc57c454"
         }
       ],
       "verification": [
@@ -57,7 +60,8 @@
       "evidence": [
         {
           "path": "src/engine/basic_model.cpp",
-          "line": 40
+          "line": 40,
+          "sha256": "92c102056e70380186cdb295e121916837ed9caead67996c6d99fda5c8ad0815"
         }
       ],
       "verification": [
@@ -73,7 +77,8 @@
       "evidence": [
         {
           "path": "src/engine/basic_model.cpp",
-          "line": 41
+          "line": 41,
+          "sha256": "92c102056e70380186cdb295e121916837ed9caead67996c6d99fda5c8ad0815"
         }
       ],
       "verification": [
@@ -89,7 +94,8 @@
       "evidence": [
         {
           "path": "src/engine/basic_model.cpp",
-          "line": 43
+          "line": 43,
+          "sha256": "92c102056e70380186cdb295e121916837ed9caead67996c6d99fda5c8ad0815"
         }
       ],
       "verification": [
@@ -105,7 +111,8 @@
       "evidence": [
         {
           "path": "src/engine/basic_model.cpp",
-          "line": 45
+          "line": 45,
+          "sha256": "92c102056e70380186cdb295e121916837ed9caead67996c6d99fda5c8ad0815"
         }
       ],
       "verification": [
@@ -121,7 +128,8 @@
       "evidence": [
         {
           "path": "src/engine/character_pack.cpp",
-          "line": 12
+          "line": 12,
+          "sha256": "b2c5e28e05279a2bd20608aec766d3bfcb471bd11e659f9113dd77e677214a8d"
         }
       ],
       "verification": [
@@ -136,7 +144,8 @@
       "evidence": [
         {
           "path": "src/engine/character_pack.cpp",
-          "line": 15
+          "line": 15,
+          "sha256": "b2c5e28e05279a2bd20608aec766d3bfcb471bd11e659f9113dd77e677214a8d"
         }
       ],
       "verification": [
@@ -151,7 +160,13 @@
       "evidence": [
         {
           "path": "src/engine/graphics_frame.hpp",
-          "line": 13
+          "line": 13,
+          "sha256": "001ebff8c298d0dd252433bfe9e5110a19b50ada0204185330db12a48ab22b09"
+        },
+        {
+          "path": "src/engine/graphics_frame.cpp",
+          "line": 1,
+          "sha256": "738509ac0a918990e8ea8a285beabba60acc677ab1631d8c6cb0d19ac32fde8a"
         }
       ],
       "verification": [
@@ -166,7 +181,8 @@
       "evidence": [
         {
           "path": "src/engine/menu_draw_primitives.cpp",
-          "line": 236
+          "line": 236,
+          "sha256": "163b20359b1d1b0ae1f4342fc38797bafedc3aa70be96a2423fd9a9ef61bdad2"
         }
       ],
       "verification": [
@@ -182,7 +198,8 @@
       "evidence": [
         {
           "path": "src/engine/ninja_queue_consumer.cpp",
-          "line": 82
+          "line": 82,
+          "sha256": "b5a6cb784a570507e9844cee6607d785a3522ce486b0a3a0ce23cb7d52d7d43a"
         }
       ],
       "verification": [
@@ -198,7 +215,8 @@
       "evidence": [
         {
           "path": "src/engine/texture_selection_native.cpp",
-          "line": 60
+          "line": 60,
+          "sha256": "1d17d34f1bf3110360686ffad4bc4a66a3fdb9f282d7415bc687b72dd39e04cd"
         }
       ],
       "verification": [
@@ -213,7 +231,8 @@
       "evidence": [
         {
           "path": "src/input/input_mod_pad.cpp",
-          "line": 36
+          "line": 36,
+          "sha256": "236237ddd8fc2d46eb941012ff6bf495524e6026bb764cfbe01135499f7c0525"
         }
       ],
       "verification": [
@@ -229,7 +248,13 @@
       "evidence": [
         {
           "path": "src/player/ground_acceleration_native.cpp",
-          "line": 6
+          "line": 6,
+          "sha256": "f1729d583f165daf41bf49296fb839b3b9d0badbc73c5b13977060c0670eece9"
+        },
+        {
+          "path": "src/player/ground_acceleration_internal.hpp",
+          "line": 1,
+          "sha256": "c9938bc44091750a8faeca2c6915b298295ff1e5dc2774718bef183657824595"
         }
       ],
       "verification": [
@@ -245,7 +270,8 @@
       "evidence": [
         {
           "path": "src/player/player_contact_attributes.cpp",
-          "line": 43
+          "line": 43,
+          "sha256": "03a7022aef4b70648fa2b60fbe8c318ca769c4620b3de0cdca754746d9d8b877"
         }
       ],
       "verification": [
@@ -261,7 +287,13 @@
       "evidence": [
         {
           "path": "src/player/player_contact_initializer.hpp",
-          "line": 9
+          "line": 9,
+          "sha256": "5b664af75665144851a85118f6414c82c9f95f7c11757c5f103ec1dd70a248b8"
+        },
+        {
+          "path": "src/player/player_contact_initializer.cpp",
+          "line": 1,
+          "sha256": "10489fda406e458b4406eb5ae5751042c820d4b9d291f0cfc69520e6e9e4625a"
         }
       ],
       "verification": [
@@ -277,7 +309,8 @@
       "evidence": [
         {
           "path": "src/player/player_contact_response.cpp",
-          "line": 15
+          "line": 15,
+          "sha256": "e263fba0e09a776eb89c4b4023a3e5359f3e598808fdb499f81603a339f24c63"
         }
       ],
       "verification": [
@@ -293,7 +326,8 @@
       "evidence": [
         {
           "path": "src/player/player_hold.cpp",
-          "line": 10
+          "line": 10,
+          "sha256": "a05c67631eb355dc6999806e8269788df92863399afcd36be2214458307d902d"
         }
       ],
       "verification": [
@@ -309,7 +343,8 @@
       "evidence": [
         {
           "path": "src/player/player_mesh_registry.cpp",
-          "line": 151
+          "line": 151,
+          "sha256": "3df8f5a39895ef6ecf4ff51c0ffad27e2da043cd74641a89de5dbf5eab0beb63"
         }
       ],
       "verification": [
@@ -325,7 +360,8 @@
       "evidence": [
         {
           "path": "src/player/player_mesh_registry.cpp",
-          "line": 215
+          "line": 215,
+          "sha256": "3df8f5a39895ef6ecf4ff51c0ffad27e2da043cd74641a89de5dbf5eab0beb63"
         }
       ],
       "verification": [
@@ -341,7 +377,13 @@
       "evidence": [
         {
           "path": "src/player/player_rotation.hpp",
-          "line": 10
+          "line": 10,
+          "sha256": "8bdf5a75ca53c7857db86c6f15778095257d3e58428de71b7f34e4b0b2cbeb32"
+        },
+        {
+          "path": "src/player/player_rotation.cpp",
+          "line": 1,
+          "sha256": "87e7f62da064257f47af017e596c3c61078a1c65ca05828d8d6c73903c835cbe"
         }
       ],
       "verification": [
@@ -357,7 +399,13 @@
       "evidence": [
         {
           "path": "src/player/player_rotation.hpp",
-          "line": 14
+          "line": 14,
+          "sha256": "8bdf5a75ca53c7857db86c6f15778095257d3e58428de71b7f34e4b0b2cbeb32"
+        },
+        {
+          "path": "src/player/player_rotation.cpp",
+          "line": 1,
+          "sha256": "87e7f62da064257f47af017e596c3c61078a1c65ca05828d8d6c73903c835cbe"
         }
       ],
       "verification": [
@@ -373,7 +421,8 @@
       "evidence": [
         {
           "path": "src/player/player_scene_registration.cpp",
-          "line": 77
+          "line": 77,
+          "sha256": "d11f264669d75203e764fb926610d6f5f861a8fce163f76e6c8a3311d54ed3dd"
         }
       ],
       "verification": [
@@ -389,7 +438,8 @@
       "evidence": [
         {
           "path": "src/player/scene_input_producer.cpp",
-          "line": 62
+          "line": 62,
+          "sha256": "a995ae53cdcb46727994b0febaf61644c8f2a0b5d02aa38123d608625989e8e3"
         }
       ],
       "verification": [
@@ -405,7 +455,13 @@
       "evidence": [
         {
           "path": "src/player/sonic_animation_operations.hpp",
-          "line": 6
+          "line": 6,
+          "sha256": "8af69713c6bf0807f92460079f675d0f05c123bb873090155f4244bf5ee775ea"
+        },
+        {
+          "path": "src/player/sonic_animation_table.cpp",
+          "line": 1,
+          "sha256": "c4ad3db54a8eaa4032a692653a2eb2b99232544fd00f8c5f3aa44f2981dcdafb"
         }
       ],
       "verification": [
@@ -421,7 +477,13 @@
       "evidence": [
         {
           "path": "src/player/sonic_animation_table_data.hpp",
-          "line": 7
+          "line": 7,
+          "sha256": "d8c8aa041e018a67edfe0e01fcabeb752a80362f8ee1f0b680414bfc8e119f03"
+        },
+        {
+          "path": "src/player/player_animation_decode.cpp",
+          "line": 1,
+          "sha256": "27e1a4cc025b9291bbf4d40beb0f2ab960629017619a57c3961af3e3d04ff9f6"
         }
       ],
       "verification": [
@@ -437,7 +499,8 @@
       "evidence": [
         {
           "path": "src/player/sonic_player.cpp",
-          "line": 219
+          "line": 219,
+          "sha256": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483"
         }
       ],
       "verification": [
@@ -453,7 +516,13 @@
       "evidence": [
         {
           "path": "src/player/sonic_player.hpp",
-          "line": 70
+          "line": 70,
+          "sha256": "8ab874d28623af1876eebed149625c447f112a677098c0fa4f6e56da3286b0b4"
+        },
+        {
+          "path": "src/player/sonic_player.cpp",
+          "line": 1,
+          "sha256": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483"
         }
       ],
       "verification": [
@@ -469,7 +538,8 @@
       "evidence": [
         {
           "path": "src/game/game_cleanup.cpp",
-          "line": 55
+          "line": 55,
+          "sha256": "b03a1bb62b391f331f929a4f544ae2846f70b1c34af1018956ba9396d8a54649"
         }
       ],
       "verification": [
@@ -485,7 +555,8 @@
       "evidence": [
         {
           "path": "src/game/level_sounds.cpp",
-          "line": 9
+          "line": 9,
+          "sha256": "11ca277befbbab24562fbab6bbf52ba8d43058efae351b5e42d56167c7d45cdf"
         }
       ],
       "verification": [
@@ -501,7 +572,8 @@
       "evidence": [
         {
           "path": "src/game/main_menu.cpp",
-          "line": 220
+          "line": 220,
+          "sha256": "b5f03cb7a953ea9fba84fe4a9e128ff6be47d1366dbed0031e813bf897681f43"
         }
       ],
       "verification": [
@@ -516,7 +588,8 @@
       "evidence": [
         {
           "path": "src/game/main_menu.cpp",
-          "line": 221
+          "line": 221,
+          "sha256": "b5f03cb7a953ea9fba84fe4a9e128ff6be47d1366dbed0031e813bf897681f43"
         }
       ],
       "verification": [
@@ -531,7 +604,8 @@
       "evidence": [
         {
           "path": "src/game/main_menu_eligibility.cpp",
-          "line": 6
+          "line": 6,
+          "sha256": "5ca7c0e54a3e2d9bd6459188daa2b49af3a3a1089a0a4e6a3bc3ba4da5faee76"
         }
       ],
       "verification": [
@@ -547,7 +621,8 @@
       "evidence": [
         {
           "path": "src/game/menu_eligibility.cpp",
-          "line": 28
+          "line": 28,
+          "sha256": "cf76022d0d362fcefed25327173331282b6fe705d035f1eeff14eafc1e2a9e14"
         }
       ],
       "verification": [
@@ -563,7 +638,13 @@
       "evidence": [
         {
           "path": "src/game/model_dlls.hpp",
-          "line": 42
+          "line": 42,
+          "sha256": "ad30ce9d7074911a4fbff81d270083202930959dfd034c4f3ac1b1937189a81c"
+        },
+        {
+          "path": "src/game/model_dlls.cpp",
+          "line": 1,
+          "sha256": "9640ce6cecf32a944922b68926e0d1987f0784334b8d02f406558ff35f23cfaa"
         }
       ],
       "verification": [
@@ -579,7 +660,13 @@
       "evidence": [
         {
           "path": "src/game/model_dlls.hpp",
-          "line": 43
+          "line": 43,
+          "sha256": "ad30ce9d7074911a4fbff81d270083202930959dfd034c4f3ac1b1937189a81c"
+        },
+        {
+          "path": "src/game/model_dlls.cpp",
+          "line": 1,
+          "sha256": "9640ce6cecf32a944922b68926e0d1987f0784334b8d02f406558ff35f23cfaa"
         }
       ],
       "verification": [
@@ -595,7 +682,8 @@
       "evidence": [
         {
           "path": "src/game/save_creation.cpp",
-          "line": 9
+          "line": 9,
+          "sha256": "f226be20c3de073d112cae2b31b20105843accc668388398afaabf07f65c1c1d"
         }
       ],
       "verification": [
@@ -611,7 +699,8 @@
       "evidence": [
         {
           "path": "src/game/title_menu.cpp",
-          "line": 11
+          "line": 11,
+          "sha256": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d"
         }
       ],
       "verification": [
@@ -627,7 +716,8 @@
       "evidence": [
         {
           "path": "src/game/title_menu.cpp",
-          "line": 802
+          "line": 802,
+          "sha256": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d"
         }
       ],
       "verification": [
@@ -643,7 +733,8 @@
       "evidence": [
         {
           "path": "src/game/title_menu.cpp",
-          "line": 815
+          "line": 815,
+          "sha256": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d"
         }
       ],
       "verification": [
@@ -659,7 +750,8 @@
       "evidence": [
         {
           "path": "src/game/title_menu.cpp",
-          "line": 816
+          "line": 816,
+          "sha256": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d"
         }
       ],
       "verification": [
@@ -675,7 +767,8 @@
       "evidence": [
         {
           "path": "src/game/title_menu.cpp",
-          "line": 817
+          "line": 817,
+          "sha256": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d"
         }
       ],
       "verification": [
@@ -691,7 +784,8 @@
       "evidence": [
         {
           "path": "src/game/title_menu.cpp",
-          "line": 818
+          "line": 818,
+          "sha256": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d"
         }
       ],
       "verification": [
@@ -707,7 +801,8 @@
       "evidence": [
         {
           "path": "src/game/title_menu.cpp",
-          "line": 959
+          "line": 959,
+          "sha256": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d"
         }
       ],
       "verification": [
@@ -723,7 +818,8 @@
       "evidence": [
         {
           "path": "src/runtime/logo_renderer.cpp",
-          "line": 58
+          "line": 58,
+          "sha256": "901b8773c7a913b4f0fcc74893eb3cf89c9fb23de03a6f8541ba8c764f755798"
         }
       ],
       "verification": [
@@ -738,7 +834,8 @@
       "evidence": [
         {
           "path": "src/runtime/native_input.cpp",
-          "line": 230
+          "line": 230,
+          "sha256": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114"
         }
       ],
       "verification": [
@@ -754,7 +851,8 @@
       "evidence": [
         {
           "path": "src/runtime/native_input.cpp",
-          "line": 238
+          "line": 238,
+          "sha256": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114"
         }
       ],
       "verification": [
@@ -770,7 +868,8 @@
       "evidence": [
         {
           "path": "src/runtime/native_title_tasks.cpp",
-          "line": 13
+          "line": 13,
+          "sha256": "5bc34cd9456afb6af1f38f7af33708ca322ba1f5240897a49706371dd7a6a71c"
         }
       ],
       "verification": [

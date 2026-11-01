@@ -90,9 +90,21 @@ call(rt, f, fp, /* target */ kAlias, 0xffffffff);
 
     def test_new_same_name_overloads_and_lambdas_require_review(self):
         for addition in ('void call(int a,int b,int c,int d,int e) {}',
+                         'void call(int a,int b,int c,int d,int e) noexcept {}',
+                         'struct Painter { void call(int a,int b,int c,int d,int e) const {} };',
+                         'auto call(int a,int b,int c,int d,int e) -> int { return d; }',
                          'auto call = [&](int a,int b,int c,int d,int e) { paint(d); };'):
             with self.subTest(addition=addition), self.assertRaises(ValueError):
                 census(LATER + '\n' + addition, PATH, [spec()])
+
+    def test_template_commas_fail_closed_or_preserve_parenthesized_target(self):
+        contract = spec(maximum=7)
+        for expression in ('call(rt,f,fp,choose<int,int>(a,b),site);',
+                           'call(choose<int,int>(a,b),f,fp,target,site);'):
+            with self.subTest(expression=expression), self.assertRaisesRegex(ValueError, 'ambiguous angle'):
+                census(LATER + '\n' + expression, PATH, [contract])
+        _, sites = census(LATER + '\ncall(rt,f,fp,(choose<int,int>(a,b)),site);', PATH, [contract])
+        self.assertEqual(sites[0]['target_expression'], '(choose<int,int>(a,b))')
 
     def test_arity_bounds_and_nesting_fail_closed(self):
         for expression in ('call(rt,f,fp,x);', 'call(rt,f,fp,x,0,extra);',
@@ -141,9 +153,9 @@ class CliTests(unittest.TestCase):
         self.assertEqual(self.legacy.read_bytes(), self.legacy_bytes)
         self.commit()
 
-    def test_dirty_migration_cannot_seed_dispatch_or_candidate_debt(self):
+    def test_dirty_migration_cannot_seed_dispatch_debt(self):
         self.assertEqual(self.check().returncode, 1)
-        for addition in ('call(rt,f,fp,4900000,site);\n', 'renamed(variable);\n'):
+        for addition in ('call(rt,f,fp,4900000,site);\n',):
             self.source.write_text(self.original + addition)
             result = self.check('--migrate-signature-v1', '--write-baseline')
             self.assertEqual(result.returncode, 1, result.stdout)
@@ -151,8 +163,8 @@ class CliTests(unittest.TestCase):
             self.assertFalse((self.root / BASELINE).exists())
         self.source.write_text(self.original)
         extra = self.source.with_name('new.cpp')
-        extra.write_text('dispatch(variable);')
-        self.assertEqual(self.check('--migrate-signature-v1').returncode, 1)
+        extra.write_text('void update_player() { advance_animation(); }')
+        self.assertEqual(self.check('--migrate-signature-v1').returncode, 0)
         extra.unlink()
         # A dirty reduction cannot lower the migration's original HEAD allowances.
         self.source.write_text(LATER)
@@ -198,8 +210,8 @@ class CliTests(unittest.TestCase):
         self.source.write_text(self.original)
         self.assertEqual(self.check('--write-baseline').returncode, 1)
         self.git('restore', BASELINE)
-        self.source.with_name('new.cpp').write_text('dispatch(variable);')
-        self.assertEqual(self.check('--write-baseline').returncode, 1)
+        self.source.with_name('new.cpp').write_text('void update_player() { advance_animation(); }')
+        self.assertEqual(self.check().returncode, 0)
 
     def test_rename_move_new_helper_and_registry_changes_require_review(self):
         self.migrate()
@@ -210,7 +222,8 @@ class CliTests(unittest.TestCase):
         self.assertIn('removed/moved', self.check().stdout)
         self.source.with_name('moved.cpp').rename(self.source)
         self.source.write_text(self.original + '\nvoid new_helper(unsigned pc) { owner(pc); }\nnew_helper(alias);')
-        self.assertIn('candidate review required: new_helper', self.check().stdout)
+        self.assertEqual(self.check().returncode, 0)
+        self.assertIn('report only', self.check().stdout)
         self.source.write_text(self.original)
         registry = self.root / REGISTRY
         data = json.loads(registry.read_text())
@@ -234,6 +247,32 @@ class CliTests(unittest.TestCase):
         self.assertEqual(result.returncode, 1)
         self.assertIn('hex_literals 1 > 0', result.stdout)
         self.assertEqual(self.legacy.read_bytes(), self.legacy_bytes)
+
+    def test_source_archive_enforces_supplied_baseline_without_writing_it(self):
+        self.migrate()
+        self.root.joinpath('.git').rename(self.root / 'saved-git')
+        baseline = self.root / BASELINE
+        original = baseline.read_bytes()
+        self.assertEqual(self.check().returncode, 0)
+        for options in (('--write-baseline',), ('--migrate-signature-v1',)):
+            self.assertEqual(self.check(*options).returncode, 1)
+            self.assertEqual(baseline.read_bytes(), original)
+        self.source.write_text(self.original + 'call(rt,f,fp,alias,site);')
+        result = self.check()
+        self.assertEqual(result.returncode, 1)
+        self.assertIn('archive baseline', result.stdout)
+
+    def test_new_semantic_module_is_reported_while_known_dispatch_still_blocks(self):
+        self.migrate()
+        self.source.with_name('player.cpp').write_text(
+            'void update_player() { advance_animation(); }')
+        report = self.root / 'report.json'
+        result = self.check('--report', str(report))
+        self.assertEqual(result.returncode, 0, result.stdout)
+        rows = json.loads(report.read_text())['files']['src/engine/player.cpp']['candidate_names']
+        self.assertEqual(rows, {'update_player': 1, 'advance_animation': 1})
+        self.source.write_text(self.original + 'call(rt,f,fp,alias,site);')
+        self.assertEqual(self.check().returncode, 1)
 
 
 if __name__ == '__main__':

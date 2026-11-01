@@ -1,3 +1,7 @@
+> Historical candidate description for 41e3fc3/c306a21, blocked by independent review 9c9fb0f.
+> Corrected behavior and tests are recorded in review-fixes.json. In particular, unresolved
+> callable tokens are now report-only and source archive validation is supported.
+
 # Signature dispatch v1 judge candidate
 
 Base: c55762db5a42ad77b56fbaa8617ccfead4dbf0e1. This packet changes no

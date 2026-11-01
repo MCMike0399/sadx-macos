@@ -1,5 +1,7 @@
 """Fingerprint and scope regressions for constexpr aggregate review accounting."""
 import json
+import hashlib
+import copy
 from pathlib import Path
 import subprocess
 import sys
@@ -15,7 +17,8 @@ def registry(current):
     return {"schema": 1, "tables": {
         key: {"sha256": row["sha256"], "classification": "open_review",
               "purpose": "Fixture awaiting semantic review",
-              "evidence": [{"path": key.split("::")[0], "line": row["line"]}],
+              "evidence": [{"path": key.split("::")[0], "line": row["line"],
+                            "sha256": row["sha256"]}],
               "verification": [key.split("::")[0]]}
         for key, row in current.items()}, "retired": {}}
 
@@ -55,6 +58,16 @@ constexpr int real[] = {1, 2};
         moved = declarations('\n\nconstexpr const char* names[] = {"Sonic"};')[0]
         self.assertEqual(before["sha256"], moved["sha256"])
 
+    def test_parenthesized_braced_arrays_and_custom_values_are_reviewed(self):
+        rows = declarations('constexpr std::array<const char*,2> names({"Sonic","Gamma"});\n'
+                            'constexpr Matrix identity(Matrix{{1.0f,0.0f}});')
+        self.assertEqual([row['declaration'] for row in rows], ['names', 'identity'])
+        changed = declarations('constexpr std::array<const char*,2> names({"Sonic","Amy"});')[0]
+        self.assertNotEqual(rows[0]['sha256'], changed['sha256'])
+        self.assertEqual(declarations('constexpr std::array<int,2> function(Type value);'), [])
+        with self.assertRaises(ValueError):
+            declarations('constexpr std::array<int,2> unknown(other);')
+
     def test_unreviewed_changed_renamed_and_deleted_are_visible(self):
         row = declarations("constexpr int modes[] = {1, 2};")[0]
         key = "src/engine/blend.cpp::modes"
@@ -85,9 +98,10 @@ constexpr int real[] = {1, 2};
         new = registry({})
         self.assertIn("removed review requires preserved lineage",
                       review_problems({}, new, old)[0])
-        new["retired"][key] = {"sha256": old["tables"][key]["sha256"],
+        new["retired"][key] = {"review": copy.deepcopy(old['tables'][key]),
                                "reason": "Replaced by named functions", "evidence": ["diff"],
-                               "successor": "src/engine/new.cpp::functions"}
+                               "verification": ['tests/unit/render.cpp'], "outcome": 'migrated',
+                               "successor": {'path': 'src/engine/new.cpp', 'symbol': 'functions'}}
         self.assertEqual(review_problems({}, new, old), [])
         self.assertIn("retired review history changed", review_problems({}, registry({}), new)[0])
 
@@ -99,7 +113,9 @@ constexpr int real[] = {1, 2};
             source.write_text("constexpr unsigned colors[] = {0xFFFFFFFF};\n")
             path = root / "reference/constexpr-table-review.json"
             path.parent.mkdir()
-            path.write_text(json.dumps(registry(census(root))))
+            data = registry(census(root))
+            data['tables'][next(iter(data['tables']))]['evidence'][0]['sha256'] = hashlib.sha256(source.read_bytes()).hexdigest()
+            path.write_text(json.dumps(data))
             command = [sys.executable, str(GATE / "check_constexpr_tables.py"),
                        "--root", str(root)]
             self.assertEqual(subprocess.run(command, capture_output=True).returncode, 0)
@@ -118,10 +134,51 @@ constexpr int real[] = {1, 2};
             self.assertEqual(len(reference_problems(root, data)), 2)
             source = root / "src/engine/modes.hpp"
             source.parent.mkdir(parents=True)
-            source.write_text("constexpr int modes[] = {1};\n")
+            source.write_text("constexpr int modes[] = {1};")
             self.assertEqual(reference_problems(root, data), [])
             data["tables"][next(iter(current))]["evidence"][0]["line"] = 100
             self.assertIn("invalid source evidence line", reference_problems(root, data)[0])
+
+    def test_changed_in_range_consumer_invalidates_review(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            path = root / 'src/engine/modes.cpp'
+            path.parent.mkdir(parents=True)
+            path.write_text('constexpr int modes[] = {1};\nconsume_as_data(modes);')
+            current = {'src/engine/modes.cpp::modes': declarations(path.read_text())[0]}
+            data = registry(current)
+            evidence = data['tables'][next(iter(current))]['evidence'][0]
+            evidence.update(line=2, sha256=hashlib.sha256(path.read_bytes()).hexdigest())
+            self.assertEqual(reference_problems(root, data), [])
+            path.write_text('constexpr int modes[] = {1};\ndispatch_recipe(modes);')
+            self.assertEqual(review_problems(current, data), [])
+            self.assertIn('changed source/consumer evidence', reference_problems(root, data)[0])
+
+    def test_retirement_requires_real_evidence_successor_and_prior_disposition(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            key = 'src/engine/modes.cpp::modes'
+            old = registry({key: declarations('constexpr int modes[] = {1};')[0]})
+            old['tables'][key]['classification'] = 'open_migration'
+            new = registry({})
+            new['retired'][key] = {
+                'review': copy.deepcopy(old['tables'][key]), 'outcome': 'migrated',
+                'reason': 'Replaced by a named behavior',
+                'evidence': [{'path': 'review.md', 'line': 1, 'sha256': '0' * 64}],
+                'verification': ['review.md'],
+                'successor': {'path': 'src/engine/new.cpp', 'symbol': 'blend', 'sha256': '0' * 64}}
+            self.assertEqual(review_problems({}, new, old), [])
+            self.assertTrue(reference_problems(root, new))
+            (root / 'review.md').write_text('Reviewed migration and preserved judge coverage.')
+            successor = root / 'src/engine/new.cpp'
+            successor.parent.mkdir(parents=True)
+            successor.write_text('void blend() {}')
+            entry = new['retired'][key]
+            entry['evidence'][0]['sha256'] = hashlib.sha256((root / 'review.md').read_bytes()).hexdigest()
+            entry['successor']['sha256'] = hashlib.sha256(successor.read_bytes()).hexdigest()
+            self.assertEqual(reference_problems(root, new), [])
+            entry['review']['classification'] = 'numeric_encoding'
+            self.assertIn('removed review requires preserved lineage', review_problems({}, new, old)[0])
 
 
 if __name__ == "__main__":
