@@ -1,0 +1,24 @@
+{
+  "key": "src/cpu/sse_math.cpp::modes",
+  "old": [
+    {
+      "declaration": "modes",
+      "line": 18,
+      "sha256": "fb05ad698d8593ca10ef4593102c3b87c3392ede242bb3439c22de90e1b27384",
+      "raw_hex_tokens": 0
+    }
+  ],
+  "current": [
+    {
+      "declaration": "modes",
+      "line": 75,
+      "sha256": "fbb1cc34ae8199414759208b19caabcf6fc2f75ed16b10d4e1896e1b4eba9a05",
+      "raw_hex_tokens": 0
+    }
+  ],
+  "classification": "numeric_encoding",
+  "purpose": "MXCSR RC bits13..14 map to the exact four pinned SoftFloat rounding enumerators, in unchanged order. Formatting moved with scoped TLS operation; no table values or index policy changed.",
+  "old_source_sha256": "b7ddd9dc425ac2e1ebd49929de1dcdf4bd7671466bf041544a6ba57157ca12b7",
+  "current_source_sha256": "70e342f254628faa44a8aaf151eaa75a6ca7148aaeea178c590ed0dc3cf5911b",
+  "root_action": "Reconcile just this declaration and source evidence into current Root table registry; preserve all other active/retired records."
+}

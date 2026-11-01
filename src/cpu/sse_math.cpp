@@ -1,129 +1,411 @@
 #include "cpu/sse_math.hpp"
+
 extern "C" {
 #include "../../third_party/softfloat/platform.h"
 #include "../../third_party/softfloat/source/include/softfloat.h"
 }
+
 namespace sadx {
 namespace {
-bool nan32(std::uint32_t a) { return (a & 0x7fffffffU) > 0x7f800000U; }
-bool nan64(std::uint64_t a) { return (a & 0x7fffffffffffffffULL) > 0x7ff0000000000000ULL; }
-bool snan64(std::uint64_t a) { return nan64(a) && !(a & 0x8000000000000ULL); }
-bool den32(std::uint32_t a) { return !(a & 0x7f800000U) && (a & 0x7fffffU); }
-bool den64(std::uint64_t a) { return !(a & 0x7ff0000000000000ULL) && (a & 0xfffffffffffffULL); }
-std::uint32_t daz32(std::uint32_t a, std::uint32_t m) { return (m & 64) && den32(a) ? a & 0x80000000U : a; }
-std::uint64_t daz64(std::uint64_t a, std::uint32_t m) { return (m & 64) && den64(a) ? a & 0x8000000000000000ULL : a; }
-struct Operation {
-    std::uint_fast8_t rounding=softfloat_roundingMode, tiny=softfloat_detectTininess, flags=softfloat_exceptionFlags;
-    explicit Operation(std::uint32_t m) {
-        constexpr std::uint_fast8_t modes[] = {softfloat_round_near_even, softfloat_round_min, softfloat_round_max, softfloat_round_minMag};
-        softfloat_roundingMode=modes[(m>>13)&3];
-        softfloat_detectTininess=softfloat_tininess_afterRounding;
-        softfloat_exceptionFlags=0;
+
+constexpr std::uint8_t kInvalid = 1;
+constexpr std::uint8_t kDenormalOperand = 2;
+constexpr std::uint8_t kDivideByZero = 4;
+constexpr std::uint8_t kOverflow = 8;
+constexpr std::uint8_t kUnderflow = 16;
+constexpr std::uint8_t kPrecision = 32;
+constexpr std::uint32_t kExceptionFlags = 63;
+constexpr std::uint32_t kDenormalsAreZero = 0x40;
+constexpr std::uint32_t kDenormalMask = 0x100;
+constexpr std::uint32_t kOverflowMask = 0x400;
+constexpr std::uint32_t kUnderflowMask = 0x800;
+constexpr std::uint32_t kFlushToZero = 0x8000;
+
+enum class BinaryOperation : unsigned { Add, Subtract, Multiply, Divide };
+
+// NOTSA: classify raw encodings without host floating-point state or NaN changes.
+bool is_nan32(std::uint32_t bits) {
+    return (bits & 0x7fffffffU) > 0x7f800000U;
+}
+
+// NOTSA: binary64 counterpart of the raw binary32 classification.
+bool is_nan64(std::uint64_t bits) {
+    return (bits & 0x7fffffffffffffffULL) > 0x7ff0000000000000ULL;
+}
+
+// NOTSA: UCOMISD distinguishes signaling NaNs from quiet NaNs.
+bool is_signaling_nan64(std::uint64_t bits) {
+    return is_nan64(bits) && !(bits & 0x8000000000000ULL);
+}
+
+// NOTSA: a zero exponent with nonzero fraction is a denormal operand/result.
+bool is_denormal32(std::uint32_t bits) {
+    return !(bits & 0x7f800000U) && (bits & 0x7fffffU);
+}
+
+// NOTSA: binary64 counterpart of the raw binary32 classification.
+bool is_denormal64(std::uint64_t bits) {
+    return !(bits & 0x7ff0000000000000ULL) && (bits & 0xfffffffffffffULL);
+}
+
+// NOTSA: DAZ replaces each input with its signed zero before any classification.
+std::uint32_t apply_daz32(std::uint32_t bits, std::uint32_t mxcsr) {
+    if ((mxcsr & kDenormalsAreZero) && is_denormal32(bits)) {
+        return bits & 0x80000000U;
     }
-    ~Operation() { softfloat_roundingMode=rounding; softfloat_detectTininess=tiny; softfloat_exceptionFlags=flags; }
+    return bits;
+}
+
+// NOTSA: preserve the binary64 input sign when DAZ replaces a denormal.
+std::uint64_t apply_daz64(std::uint64_t bits, std::uint32_t mxcsr) {
+    if ((mxcsr & kDenormalsAreZero) && is_denormal64(bits)) {
+        return bits & 0x8000000000000000ULL;
+    }
+    return bits;
+}
+
+// NOTSA: scope the shared SoftFloat TLS for one scalar SSE operation, including
+// unwind after an immediate trap. x87 precision and host fenv are never changed.
+struct SoftFloatOperation {
+    std::uint_fast8_t saved_rounding = softfloat_roundingMode;
+    std::uint_fast8_t saved_tininess = softfloat_detectTininess;
+    std::uint_fast8_t saved_flags = softfloat_exceptionFlags;
+
+    explicit SoftFloatOperation(std::uint32_t mxcsr) {
+        constexpr std::uint_fast8_t modes[] = {
+            softfloat_round_near_even, softfloat_round_min,
+            softfloat_round_max, softfloat_round_minMag};
+        softfloat_roundingMode = modes[(mxcsr >> 13) & 3];
+        softfloat_detectTininess = softfloat_tininess_afterRounding;
+        softfloat_exceptionFlags = 0;
+    }
+
+    ~SoftFloatOperation() {
+        softfloat_roundingMode = saved_rounding;
+        softfloat_detectTininess = saved_tininess;
+        softfloat_exceptionFlags = saved_flags;
+    }
+
     std::uint8_t exceptions() const {
-        auto f=softfloat_exceptionFlags;
-        return ((f & softfloat_flag_invalid)?1:0) | ((f & softfloat_flag_infinite)?4:0)
-          | ((f & softfloat_flag_overflow)?8:0) | ((f & softfloat_flag_underflow)?16:0) | ((f & softfloat_flag_inexact)?32:0);
+        const auto flags = softfloat_exceptionFlags;
+        std::uint8_t result = 0;
+        if (flags & softfloat_flag_invalid) {
+            result |= kInvalid;
+        }
+        if (flags & softfloat_flag_infinite) {
+            result |= kDivideByZero;
+        }
+        if (flags & softfloat_flag_overflow) {
+            result |= kOverflow;
+        }
+        if (flags & softfloat_flag_underflow) {
+            result |= kUnderflow;
+        }
+        if (flags & softfloat_flag_inexact) {
+            result |= kPrecision;
+        }
+        return result;
     }
 };
-template<typename U> SseComparison ordered(U a, U b, U sign) {
-    if (a==b || !((a|b)&~sign)) return SseComparison::equal;
-    bool less=(a&sign)!=(b&sign) ? bool(a&sign) : ((a&sign) ? a>b : a<b);
+
+// NOTSA: order finite/infinite encodings after callers handle NaNs and DAZ.
+// Both signed zeros compare equal; negative encodings reverse magnitude order.
+template<typename Word>
+SseComparison ordered_comparison(Word destination, Word source, Word sign_bit) {
+    if (destination == source || !((destination | source) & ~sign_bit)) {
+        return SseComparison::equal;
+    }
+    bool less;
+    if ((destination & sign_bit) != (source & sign_bit)) {
+        less = bool(destination & sign_bit);
+    } else if (destination & sign_bit) {
+        less = destination > source;
+    } else {
+        less = destination < source;
+    }
     return less ? SseComparison::less : SseComparison::greater;
 }
-// Intel's unmasked underflow detects even exact tiny working results. FTZ
-// applies when UM is masked and flushes tiny results, including exact ones.
-std::uint32_t finish32(std::uint32_t z, std::uint8_t& f, std::uint32_t m) {
-    bool tiny=den32(z) || (f&16);
-    if (tiny && !(m & 0x800)) f=static_cast<std::uint8_t>((f|16)&~32U);
-    else if (tiny && (m & 0x8000)) { z &= 0x80000000U; f|=48; }
-    if ((f&8) && !(m&0x400)) f&=static_cast<std::uint8_t>(~32U);
-    return z;
-}
-}
-SseContext::SseContext(std::uint32_t m) : mxcsr_(0), owner_(std::this_thread::get_id()) { set_mxcsr(m); }
-void SseContext::check_thread() const { if(owner_!=std::this_thread::get_id()) throw SseError(SseFailure::cross_thread_context,0,"SSE context belongs to another thread"); }
-std::uint32_t SseContext::mxcsr() const { check_thread(); return mxcsr_; }
-void SseContext::set_mxcsr(std::uint32_t m) { check_thread(); if(m&0xffff0000U) throw SseError(SseFailure::reserved_mxcsr,0,"reserved MXCSR bits"); mxcsr_=m; }
-void SseContext::clear_exceptions() { check_thread(); mxcsr_&=~63U; }
-void SseContext::commit(std::uint8_t f) {
-    mxcsr_|=f;
-    auto unmasked=static_cast<std::uint8_t>(f & ~(mxcsr_>>7) & 63);
-    if(unmasked) throw SseError(SseFailure::unmasked_exception,unmasked,"unmasked scalar SSE exception");
-}
-Sse32 SseContext::from_int32(std::int32_t v) { check_thread(); Operation op(mxcsr_); auto z=i32_to_f32(v); commit(op.exceptions()); return {z.v}; }
-Sse32 SseContext::binary(Sse32 a,Sse32 b,unsigned kind) {
-    check_thread(); a.bits=daz32(a.bits,mxcsr_); b.bits=daz32(b.bits,mxcsr_);
-    Operation op(mxcsr_); float32_t x{a.bits},y{b.bits},z{};
-    switch(kind) { case 0:z=f32_add(x,y);break;case 1:z=f32_sub(x,y);break;case 2:z=f32_mul(x,y);break;default:z=f32_div(x,y); }
-    auto f=op.exceptions();
-    // NaN, other invalid and divide-by-zero precede denormal operand faults.
-    if(!(nan32(a.bits)||nan32(b.bits)||(f&5)) && (den32(a.bits)||den32(b.bits))) {
-        if(!(mxcsr_&0x100)) { commit(2); } f|=2;
+
+// NOTSA: retain the existing scalar finishing policy after SoftFloat rounding.
+// Unmasked underflow detects even exact tiny working results and suppresses PE.
+// Masked underflow allows FTZ, including exact tiny results, with signed zero.
+std::uint32_t finish_single(std::uint32_t result, std::uint8_t &flags, std::uint32_t mxcsr) {
+    const bool tiny = is_denormal32(result) || (flags & kUnderflow);
+    if (tiny && !(mxcsr & kUnderflowMask)) {
+        flags = static_cast<std::uint8_t>((flags | kUnderflow) & ~std::uint32_t{kPrecision});
+    } else if (tiny && (mxcsr & kFlushToZero)) {
+        result &= 0x80000000U;
+        flags |= kUnderflow | kPrecision;
     }
-    z.v=finish32(z.v,f,mxcsr_); commit(f); return {z.v};
-}
-Sse32 SseContext::add(Sse32 a,Sse32 b) { return binary(a,b,0); }
-Sse32 SseContext::subtract(Sse32 a,Sse32 b) { return binary(a,b,1); }
-Sse32 SseContext::multiply(Sse32 a,Sse32 b) { return binary(a,b,2); }
-Sse32 SseContext::divide(Sse32 a,Sse32 b) { return binary(a,b,3); }
-Sse64 SseContext::to_double(Sse32 a) {
-    check_thread(); a.bits=daz32(a.bits,mxcsr_); if(den32(a.bits)) commit(2);
-    Operation op(mxcsr_); auto z=f32_to_f64(float32_t{a.bits}); commit(op.exceptions()); return {z.v};
-}
-Sse32 SseContext::to_single(Sse64 a) {
-    check_thread(); a.bits=daz64(a.bits,mxcsr_); if(den64(a.bits)) commit(2);
-    Operation op(mxcsr_); auto z=f64_to_f32(float64_t{a.bits}); auto f=op.exceptions(); z.v=finish32(z.v,f,mxcsr_); commit(f); return {z.v};
-}
-Sse64 SseContext::sqrt(Sse64 a) {
-    check_thread(); a.bits=daz64(a.bits,mxcsr_); Operation op(mxcsr_); auto z=f64_sqrt(float64_t{a.bits}); auto f=op.exceptions();
-    if(!(f&1) && !nan64(a.bits) && den64(a.bits)) { if(!(mxcsr_&0x100)) commit(2); f|=2; }
-    commit(f); return {z.v};
-}
-Sse32 SseContext::sqrt_single(Sse32 a) {
-    check_thread(); a.bits=daz32(a.bits,mxcsr_); Operation op(mxcsr_); auto z=f32_sqrt(float32_t{a.bits}); auto f=op.exceptions();
-    if(!(f&1) && !nan32(a.bits) && den32(a.bits)) { if(!(mxcsr_&0x100)) commit(2); f|=2; }
-    commit(f); return {z.v};
-}
-Sse64 SseContext::subtract_double(Sse64 a,Sse64 b) {
-    check_thread(); a.bits=daz64(a.bits,mxcsr_); b.bits=daz64(b.bits,mxcsr_);
-    Operation op(mxcsr_); auto z=f64_sub(float64_t{a.bits},float64_t{b.bits}); auto f=op.exceptions();
-    if(!(nan64(a.bits)||nan64(b.bits)||(f&5)) && (den64(a.bits)||den64(b.bits))) {
-        if(!(mxcsr_&0x100)) commit(2);
-        f|=2;
+    if ((flags & kOverflow) && !(mxcsr & kOverflowMask)) {
+        flags &= static_cast<std::uint8_t>(~std::uint32_t{kPrecision});
     }
-    const bool tiny=den64(z.v)||(f&16);
-    if(tiny && !(mxcsr_&0x800)) f=static_cast<std::uint8_t>((f|16)&~32U);
-    else if(tiny && (mxcsr_&0x8000)) { z.v&=0x8000000000000000ULL; f|=48; }
-    if((f&8) && !(mxcsr_&0x400)) f&=static_cast<std::uint8_t>(~32U);
-    commit(f); return {z.v};
+    return result;
 }
-bool SseContext::less_than(Sse64 a,Sse64 b) {
-    check_thread(); a.bits=daz64(a.bits,mxcsr_); b.bits=daz64(b.bits,mxcsr_);
-    if(nan64(a.bits)||nan64(b.bits)) { commit(1); return false; }
-    if(den64(a.bits)||den64(b.bits)) commit(2);
-    return ordered(a.bits,b.bits,std::uint64_t{0x8000000000000000ULL})==SseComparison::less;
+
+// NOTSA: the existing SUBSD tail uses the same policy with binary64 result bits.
+std::uint64_t finish_double_subtraction(std::uint64_t result, std::uint8_t &flags,
+                                      std::uint32_t mxcsr) {
+    const bool tiny = is_denormal64(result) || (flags & kUnderflow);
+    if (tiny && !(mxcsr & kUnderflowMask)) {
+        flags = static_cast<std::uint8_t>((flags | kUnderflow) & ~std::uint32_t{kPrecision});
+    } else if (tiny && (mxcsr & kFlushToZero)) {
+        result &= 0x8000000000000000ULL;
+        flags |= kUnderflow | kPrecision;
+    }
+    if ((flags & kOverflow) && !(mxcsr & kOverflowMask)) {
+        flags &= static_cast<std::uint8_t>(~std::uint32_t{kPrecision});
+    }
+    return result;
 }
-std::int32_t SseContext::truncate_int32(Sse32 a) {
-    check_thread(); a.bits=daz32(a.bits,mxcsr_); Operation op(mxcsr_); auto z=f32_to_i32_r_minMag(float32_t{a.bits},true); commit(op.exceptions()); return static_cast<std::int32_t>(z);
+
+} // namespace
+
+SseContext::SseContext(std::uint32_t mxcsr)
+    : mxcsr_(0), owner_(std::this_thread::get_id()) {
+    set_mxcsr(mxcsr);
 }
-SseComparison SseContext::comiss(Sse32 a,Sse32 b) {
-    check_thread(); a.bits=daz32(a.bits,mxcsr_); b.bits=daz32(b.bits,mxcsr_);
-    if(nan32(a.bits)||nan32(b.bits)) { commit(1); return SseComparison::unordered; }
-    if(den32(a.bits)||den32(b.bits)) commit(2);
-    return ordered(a.bits,b.bits,0x80000000U);
+
+void SseContext::check_thread() const {
+    if (owner_ != std::this_thread::get_id()) {
+        throw SseError(SseFailure::cross_thread_context, 0, "SSE context belongs to another thread");
+    }
 }
-SseComparison SseContext::ucomisd(Sse64 a,Sse64 b) {
-    check_thread(); a.bits=daz64(a.bits,mxcsr_); b.bits=daz64(b.bits,mxcsr_);
-    if(nan64(a.bits)||nan64(b.bits)) { if(snan64(a.bits)||snan64(b.bits)) commit(1); return SseComparison::unordered; }
-    if(den64(a.bits)||den64(b.bits)) commit(2);
-    return ordered(a.bits,b.bits,std::uint64_t{0x8000000000000000ULL});
+
+std::uint32_t SseContext::mxcsr() const {
+    check_thread();
+    return mxcsr_;
 }
-Sse32 SseContext::minimum(Sse32 a,Sse32 b) {
-    check_thread(); a.bits=daz32(a.bits,mxcsr_); b.bits=daz32(b.bits,mxcsr_);
-    if(nan32(a.bits)||nan32(b.bits)) { commit(1); return b; }
-    if(den32(a.bits)||den32(b.bits)) commit(2);
-    return ordered(a.bits,b.bits,0x80000000U)==SseComparison::less ? a : b;
+
+void SseContext::set_mxcsr(std::uint32_t mxcsr) {
+    check_thread();
+    if (mxcsr & 0xffff0000U) {
+        throw SseError(SseFailure::reserved_mxcsr, 0, "reserved MXCSR bits");
+    }
+    mxcsr_ = mxcsr;
 }
+
+void SseContext::clear_exceptions() {
+    check_thread();
+    mxcsr_ &= ~kExceptionFlags;
+}
+
+void SseContext::commit(std::uint8_t flags) {
+    mxcsr_ |= flags;
+    // Only new flags can trap. Incoming unmasked sticky flags are retained.
+    const auto unmasked = static_cast<std::uint8_t>(flags & ~(mxcsr_ >> 7) & kExceptionFlags);
+    if (unmasked) {
+        throw SseError(SseFailure::unmasked_exception, unmasked, "unmasked scalar SSE exception");
+    }
+}
+
+Sse32 SseContext::from_int32(std::int32_t value) {
+    check_thread();
+    SoftFloatOperation operation(mxcsr_);
+    const auto result = i32_to_f32(value);
+    commit(operation.exceptions());
+    return {result.v};
+}
+
+Sse32 SseContext::binary(Sse32 destination, Sse32 source, unsigned kind) {
+    check_thread();
+    destination.bits = apply_daz32(destination.bits, mxcsr_);
+    source.bits = apply_daz32(source.bits, mxcsr_);
+    SoftFloatOperation operation(mxcsr_);
+    const float32_t left{destination.bits};
+    const float32_t right{source.bits};
+    float32_t result{};
+    switch (static_cast<BinaryOperation>(kind)) {
+    case BinaryOperation::Add:
+        result = f32_add(left, right);
+        break;
+    case BinaryOperation::Subtract:
+        result = f32_sub(left, right);
+        break;
+    case BinaryOperation::Multiply:
+        result = f32_mul(left, right);
+        break;
+    default:
+        result = f32_div(left, right);
+        break;
+    }
+    auto flags = operation.exceptions();
+    // NaNs, other invalid operations and zero division precede denormal faults.
+    const bool prior_exception = is_nan32(destination.bits) || is_nan32(source.bits) ||
+                                 (flags & (kInvalid | kDivideByZero));
+    if (!prior_exception && (is_denormal32(destination.bits) || is_denormal32(source.bits))) {
+        if (!(mxcsr_ & kDenormalMask)) {
+            commit(kDenormalOperand);
+        }
+        flags |= kDenormalOperand;
+    }
+    result.v = finish_single(result.v, flags, mxcsr_);
+    commit(flags);
+    return {result.v};
+}
+
+Sse32 SseContext::add(Sse32 destination, Sse32 source) {
+    return binary(destination, source, static_cast<unsigned>(BinaryOperation::Add));
+}
+
+Sse32 SseContext::subtract(Sse32 destination, Sse32 source) {
+    return binary(destination, source, static_cast<unsigned>(BinaryOperation::Subtract));
+}
+
+Sse32 SseContext::multiply(Sse32 destination, Sse32 source) {
+    return binary(destination, source, static_cast<unsigned>(BinaryOperation::Multiply));
+}
+
+Sse32 SseContext::divide(Sse32 destination, Sse32 source) {
+    return binary(destination, source, static_cast<unsigned>(BinaryOperation::Divide));
+}
+
+Sse64 SseContext::to_double(Sse32 source) {
+    check_thread();
+    source.bits = apply_daz32(source.bits, mxcsr_);
+    if (is_denormal32(source.bits)) {
+        commit(kDenormalOperand);
+    }
+    SoftFloatOperation operation(mxcsr_);
+    const auto result = f32_to_f64(float32_t{source.bits});
+    commit(operation.exceptions());
+    return {result.v};
+}
+
+Sse32 SseContext::to_single(Sse64 source) {
+    check_thread();
+    source.bits = apply_daz64(source.bits, mxcsr_);
+    if (is_denormal64(source.bits)) {
+        commit(kDenormalOperand);
+    }
+    SoftFloatOperation operation(mxcsr_);
+    auto result = f64_to_f32(float64_t{source.bits});
+    auto flags = operation.exceptions();
+    result.v = finish_single(result.v, flags, mxcsr_);
+    commit(flags);
+    return {result.v};
+}
+
+Sse64 SseContext::sqrt(Sse64 source) {
+    check_thread();
+    source.bits = apply_daz64(source.bits, mxcsr_);
+    SoftFloatOperation operation(mxcsr_);
+    const auto result = f64_sqrt(float64_t{source.bits});
+    auto flags = operation.exceptions();
+    if (!(flags & kInvalid) && !is_nan64(source.bits) && is_denormal64(source.bits)) {
+        if (!(mxcsr_ & kDenormalMask)) {
+            commit(kDenormalOperand);
+        }
+        flags |= kDenormalOperand;
+    }
+    commit(flags);
+    return {result.v};
+}
+
+Sse32 SseContext::sqrt_single(Sse32 source) {
+    check_thread();
+    source.bits = apply_daz32(source.bits, mxcsr_);
+    SoftFloatOperation operation(mxcsr_);
+    const auto result = f32_sqrt(float32_t{source.bits});
+    auto flags = operation.exceptions();
+    if (!(flags & kInvalid) && !is_nan32(source.bits) && is_denormal32(source.bits)) {
+        if (!(mxcsr_ & kDenormalMask)) {
+            commit(kDenormalOperand);
+        }
+        flags |= kDenormalOperand;
+    }
+    commit(flags);
+    return {result.v};
+}
+
+Sse64 SseContext::subtract_double(Sse64 destination, Sse64 source) {
+    check_thread();
+    destination.bits = apply_daz64(destination.bits, mxcsr_);
+    source.bits = apply_daz64(source.bits, mxcsr_);
+    SoftFloatOperation operation(mxcsr_);
+    auto result = f64_sub(float64_t{destination.bits}, float64_t{source.bits});
+    auto flags = operation.exceptions();
+    const bool prior_exception = is_nan64(destination.bits) || is_nan64(source.bits) ||
+                                 (flags & (kInvalid | kDivideByZero));
+    if (!prior_exception && (is_denormal64(destination.bits) || is_denormal64(source.bits))) {
+        if (!(mxcsr_ & kDenormalMask)) {
+            commit(kDenormalOperand);
+        }
+        flags |= kDenormalOperand;
+    }
+    result.v = finish_double_subtraction(result.v, flags, mxcsr_);
+    commit(flags);
+    return {result.v};
+}
+
+bool SseContext::less_than(Sse64 destination, Sse64 source) {
+    check_thread();
+    destination.bits = apply_daz64(destination.bits, mxcsr_);
+    source.bits = apply_daz64(source.bits, mxcsr_);
+    if (is_nan64(destination.bits) || is_nan64(source.bits)) {
+        commit(kInvalid);
+        return false;
+    }
+    if (is_denormal64(destination.bits) || is_denormal64(source.bits)) {
+        commit(kDenormalOperand);
+    }
+    return ordered_comparison(destination.bits, source.bits, std::uint64_t{0x8000000000000000ULL}) ==
+           SseComparison::less;
+}
+
+std::int32_t SseContext::truncate_int32(Sse32 source) {
+    check_thread();
+    source.bits = apply_daz32(source.bits, mxcsr_);
+    SoftFloatOperation operation(mxcsr_);
+    // CVTT ignores RC and does not raise a denormal operand exception.
+    const auto result = f32_to_i32_r_minMag(float32_t{source.bits}, true);
+    commit(operation.exceptions());
+    return static_cast<std::int32_t>(result);
+}
+
+SseComparison SseContext::comiss(Sse32 destination, Sse32 source) {
+    check_thread();
+    destination.bits = apply_daz32(destination.bits, mxcsr_);
+    source.bits = apply_daz32(source.bits, mxcsr_);
+    if (is_nan32(destination.bits) || is_nan32(source.bits)) {
+        commit(kInvalid);
+        return SseComparison::unordered;
+    }
+    if (is_denormal32(destination.bits) || is_denormal32(source.bits)) {
+        commit(kDenormalOperand);
+    }
+    return ordered_comparison(destination.bits, source.bits, 0x80000000U);
+}
+
+SseComparison SseContext::ucomisd(Sse64 destination, Sse64 source) {
+    check_thread();
+    destination.bits = apply_daz64(destination.bits, mxcsr_);
+    source.bits = apply_daz64(source.bits, mxcsr_);
+    if (is_nan64(destination.bits) || is_nan64(source.bits)) {
+        if (is_signaling_nan64(destination.bits) || is_signaling_nan64(source.bits)) {
+            commit(kInvalid);
+        }
+        return SseComparison::unordered;
+    }
+    if (is_denormal64(destination.bits) || is_denormal64(source.bits)) {
+        commit(kDenormalOperand);
+    }
+    return ordered_comparison(destination.bits, source.bits, std::uint64_t{0x8000000000000000ULL});
+}
+
+Sse32 SseContext::minimum(Sse32 destination, Sse32 source) {
+    check_thread();
+    destination.bits = apply_daz32(destination.bits, mxcsr_);
+    source.bits = apply_daz32(source.bits, mxcsr_);
+    if (is_nan32(destination.bits) || is_nan32(source.bits)) {
+        commit(kInvalid);
+        return source; // Legacy MINSS returns source bytes, including an SNaN.
+    }
+    if (is_denormal32(destination.bits) || is_denormal32(source.bits)) {
+        commit(kDenormalOperand);
+    }
+    const auto comparison = ordered_comparison(destination.bits, source.bits, 0x80000000U);
+    return comparison == SseComparison::less ? destination : source;
+}
+
 } // namespace sadx
