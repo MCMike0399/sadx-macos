@@ -27,7 +27,7 @@ copies eight words from it and can return null if task allocation fails. 421bd0 
 a task pointer, returns integer 0/1, and requests close through its work; completion ignores
 that return and retains its warning handle. These remain genuine unrecovered STUBs.
 Native TitleScene still throws native_save_warning_message/native_save_warning_close.
-Seven recovered dialog/transition/save callbacks remain intact. No warning text or assets added.
+Five recovered dialog/transition/save callbacks and both warning seams retain their contracts. No warning text or assets added.
 
 Success still transitions before reading the selected-file owner. Failure still clears
 phase, ready, exec and alert before close. Callback tests establish publication/failure
@@ -74,3 +74,11 @@ step; no existing harness, expectations, inputs, summary or manifest was changed
 No constexpr table registration is needed for the two scalar constants. Root owns any
 inventory reconciliation, integrated full gate, clean native closure, journeys, STATUS and
 HANDOFF. Do not classify the full save lifecycle, UI system or complete campaign as closed.
+
+Root registration checkpoint: d9640a5 appends save-completion-callbacks to the
+existing unit manifest; the generated gate recipe invokes the test. The original
+928 protected inputs are retained; the new frozen mutation receipt makes 929.
+The manifest registration and frozen receipt are protected; unit C++ bodies remain
+under the repository's existing source-review policy. No existing judge input,
+expectation or algorithm changed. Bounded callback replay passes. Source review,
+reserved holdout and final coherent integration qualification remain pending.
