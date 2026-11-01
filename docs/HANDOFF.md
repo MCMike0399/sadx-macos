@@ -711,3 +711,10 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Review 00e9934 accepts the bounded before-source scheduler foundation. Main carries the four full stream ledgers, historical exclusions, source/dependency bindings, fourteen scheduler and three bridge compiled fault receipts, and two registered contracts. Scheduler source and reserved holdouts remain unchanged.
 * Both new contracts build and run on current Main: twenty scheduler and seven actual bridge observations; the callback-lifetime regression also exits zero. All 955 protected inputs are the exact reviewed parent union with additive registration. Inventory and hygiene checks pass.
 * The strict prerequisite baseline checker exits one on the two independently qualified MPEG files; all scheduler anchors match. task-judges-parent-union.json records that limit, the corrected command-path typo and exact hashes. No full integrated gate or whole Task/player/campaign qualification is claimed here.
+
+### 2026-11-01 — Scheduler foundation integration gate qualified
+
+* Qualified-corpus make -j10 gate exits zero at 353d528: 292 native programs, 450 Python tests, inherited filesystem skip, smoke120, R1–R4, three native menu/save journeys and sixteen startup comparisons. task-foundation-gate.json records the actual result; STATUS regenerated.
+* Both added scheduler/bridge contracts run in the gate. All 955 protected inputs remain exact; original lifecycle inactive boundary and six delete exclusions are retained. This accepts judge integration, not the scheduler source rewrite or final cohorts.
+* Animation source migration remains isolated. Save IO/frame judge foundation and complete input-policy review are complete packets awaiting Root acceptance/integration. Mode forwarding/diagnostic coverage is in a separate judge packet; no gameplay source changed. Existing FP partials and known failures remain bounded.
+* Renewed storage audit is accepted with no SADX transfer: all pinned/current evidence and the unknown-provenance small export stay local. Continue the complete refactor; no campaign closure or new gameplay/controller claim. No push.
