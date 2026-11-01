@@ -1,0 +1,59 @@
+{
+  "base_main": "e6c5a49",
+  "candidate": "0cbfb9acab5183d45ffa4b8bea18b2c42f7c003b",
+  "scope": "Judge-only signature dispatch and constexpr declaration review; no source behavior, existing oracle/probe/fixture/mutant/tolerance or old readability allowance changed.",
+  "review_history": [
+    {
+      "commit": "9c9fb0f",
+      "outcome": "blocked; findings preserved and corrected in subsequent commits"
+    },
+    {
+      "commit": "da6377a",
+      "outcome": "blocked; findings preserved and corrected in subsequent commits"
+    },
+    {
+      "commit": "bddd47e",
+      "outcome": "blocked; findings preserved and corrected in subsequent commits"
+    }
+  ],
+  "last_small_finding": {
+    "id": "G1/R3",
+    "finding": "Ref-qualified final/override definitions were published as dispatch proof.",
+    "root_fix_commits": [
+      "4671cb4",
+      "56a1cd3"
+    ],
+    "validation": "All four exact suffix combinations rejected; existing ordinary logical/bitwise AND control accepted. Root fixed the small finding directly; no claim of another independent approval."
+  },
+  "focused_checks": {
+    "dispatch": {
+      "tests": 17,
+      "exit": 0
+    },
+    "constexpr": {
+      "tests": 12,
+      "exit": 0
+    },
+    "old_readability": {
+      "tests": 17,
+      "exit": 0
+    },
+    "judge": {
+      "tests": 12,
+      "exit": 0
+    }
+  },
+  "measurement": {
+    "known_signature_dispatch_sites": 113,
+    "original_heuristic_calls": 61,
+    "unresolved_callable_tokens_report_only": 23463,
+    "constexpr_declarations": 49,
+    "open_table_migrations": 14,
+    "open_table_reviews": 1
+  },
+  "limits": [
+    "Bounded lexical census and authored semantic evidence; not general C++ analysis or whole-codebase conformity.",
+    "Source archives enforce supplied baselines; Git-only comparisons/migration remain distinct.",
+    "Full integrated gate not yet run for this candidate."
+  ]
+}
