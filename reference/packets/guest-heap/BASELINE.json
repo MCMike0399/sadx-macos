@@ -1,0 +1,25 @@
+{
+  "base": "1300815",
+  "source_sha256": {
+    "src/loader/guest_heap.hpp": "1cb4f0451bc1e5fa8e86b43dc3c0b80a2560cbfa5db2a154faf582684b838c37",
+    "src/loader/guest_heap.cpp": "4597e674c4c5fa69c4fef0451c8a2182eb25224e3c81e26306145593cb83d7ed",
+    "tests/unit/guest_heap.cpp": "c09dbf036a1cfa7f3fbb00c520caeaf1e1fc206d1aa5d4e3eef681e93ea8cf0a"
+  },
+  "contract_source": "tests/unit/guest_heap_contract.cpp",
+  "contract_sha256": "eb12e47f0782896962c02418f852f18f9108184f9df118c85004608e7bffc4ef",
+  "full_output_sha256": "23f273ed1262368a36aa2643c9f9538b33a2617e1f518202777f27b3b97fa855",
+  "rows": 32660,
+  "before_contract_exit": 0,
+  "before_existing_unit_exit": 0,
+  "semantics": [
+    "Single synthetic handle; create repeat and allocate before create",
+    "Zero-byte request backs one indeterminate byte; written zero differs from unknown",
+    "Caller-supplied zero/unaligned bases retained; tokens are not captured Windows addresses",
+    "Foreign handle, gap/bounds/free/read/write and32bit exhaustion trace behavior",
+    "Five configurations,4096 mixed operations each, complete outputs and heap traces retained"
+  ],
+  "limits": [
+    "Reference synthetic heap, not Windows allocator/address parity.",
+    "Host allocation failures/OOM/thread races not characterized; rewrite preserves allocation/store ordering."
+  ]
+}

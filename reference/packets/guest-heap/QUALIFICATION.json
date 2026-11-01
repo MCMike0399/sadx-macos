@@ -1,0 +1,63 @@
+{
+  "source_commit": "4632671",
+  "full_output_sha256": "5d5aa54629207f97ceb10e9d7f409eaadd2157ff1fe7b3e810b1ab0c61b12685",
+  "rows": 32665,
+  "immutable_augmented_baseline": "1300815 original header/cpp, explicit foreign-free characterization added after rewrite and replayed against that immutable source",
+  "before_current_full_outputs_equal": true,
+  "original_unit_exit": 0,
+  "final_default_unit_exit": 0,
+  "contract_source_sha256": "fc426bb356704d722e47663e8d52bde3c78e6f48b4e7957bf74ba0a86738be2d",
+  "source_sha256": {
+    "src/loader/guest_heap.hpp": "75c7bceaf03236483300d7adf067039ee04e416f5319fb4e258a1ff4604b6f42",
+    "src/loader/guest_heap.cpp": "04b27bd29ddeb5710929d7d3bf92e2ef597701ab64f3d1f0100fae20eafa70f9"
+  },
+  "mutants": [
+    {
+      "name": "created-handle",
+      "compile_exit": 0,
+      "run_exit": -6,
+      "full_output_differs": true
+    },
+    {
+      "name": "no-gap",
+      "compile_exit": 0,
+      "run_exit": -6,
+      "full_output_differs": true
+    },
+    {
+      "name": "zero-filled",
+      "compile_exit": 0,
+      "run_exit": -6,
+      "full_output_differs": true
+    },
+    {
+      "name": "foreign-free",
+      "compile_exit": 0,
+      "run_exit": -6,
+      "full_output_differs": true
+    },
+    {
+      "name": "last-address",
+      "compile_exit": 0,
+      "run_exit": -6,
+      "full_output_differs": true
+    },
+    {
+      "name": "free-receipt",
+      "compile_exit": 0,
+      "run_exit": -6,
+      "full_output_differs": true
+    }
+  ],
+  "initial_mutant_setup_failure": "First foreign-free mutant omitted handle use and failed -Werror compile; not counted. Revised valid guard-removal fault explicitly discards the parameter.",
+  "limits": [
+    "Synthetic reference allocation, not Windows allocator/address parity; no host OOM/thread qualification.",
+    "Default registered test checks complete frozen output digest; --capture emits raw observations.",
+    "Original pre-edit baseline and later augmented immutable-source baseline are distinguished."
+  ],
+  "unchanged_ninja_memory_consumer": {
+    "compile_exit": 0,
+    "run_exit": 0,
+    "scope": "Actual Ninja heap wrapper plus no-CD scan, source-only narrow link."
+  }
+}
