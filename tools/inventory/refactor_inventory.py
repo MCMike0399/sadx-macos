@@ -112,6 +112,21 @@ def reviewed_stub_binding(stub, review, paths):
     required = ("canonical_owner", "native_binding", "reference_binding", "accepted_coverage", "limits")
     if not all(review.get(field) for field in required):
         raise ValueError("STUB binding review requires owner, both bindings, coverage and limits")
+    for field in ("canonical_owner", "native_binding", "reference_binding"):
+        section = review[field]
+        if not isinstance(section, dict) or not section.get("evidence"):
+            raise ValueError("STUB binding section requires fingerprinted evidence: " + field)
+        evidence = section["evidence"]
+        if not isinstance(evidence, list) or not all(
+                isinstance(item, dict) and item.get("path") and item.get("sha256") for item in evidence):
+            raise ValueError("STUB binding section requires fingerprinted evidence: " + field)
+    coverage = review["accepted_coverage"]
+    if not isinstance(coverage, list) or not all(
+            isinstance(item, dict) and item.get("path") and item.get("sha256") for item in coverage):
+        raise ValueError("STUB coverage requires fingerprinted records")
+    limits = review["limits"]
+    if not isinstance(limits, list) or not all(isinstance(item, str) and item.strip() for item in limits):
+        raise ValueError("STUB binding requires explicit nonblank limits")
     if review.get("behavior_status") != "unrecovered_open_debt":
         raise ValueError("Binding review cannot retire unrecovered STUB behavior")
 
@@ -134,6 +149,19 @@ def reviewed_stub_binding(stub, review, paths):
         "behavior_status": "unrecovered_open_debt",
         "source_sha256": review["source_sha256"],
         "status": "bindings_reviewed_behavior_unrecovered"}
+
+
+
+def unique_review_json(text):
+    """Reject conflicting review identities before JSON can discard their first value."""
+    def object_from_pairs(pairs):
+        result = {}
+        for key, value in pairs:
+            if key in result:
+                raise ValueError("Duplicate STUB review JSON key: " + key)
+            result[key] = value
+        return result
+    return json.loads(text, object_pairs_hook=object_from_pairs)
 
 
 def module(path):
@@ -387,7 +415,7 @@ def render():
     for name in policy.get("stub_binding_review_files", []):
         if name not in path_set:
             raise ValueError("Missing STUB binding review file: " + str(name))
-        fragment = json.loads(read(name))
+        fragment = unique_review_json(read(name))
         for identity, review in fragment["stubs"].items():
             if identity in binding_reviews:
                 raise ValueError("Duplicate STUB binding review: " + identity)

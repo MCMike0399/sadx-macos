@@ -4,6 +4,7 @@ from pathlib import Path
 import unittest
 from unittest.mock import patch
 import json
+import copy
 
 SCRIPT = Path(__file__).resolve().parents[2] / 'tools/inventory/refactor_inventory.py'
 SPEC = importlib.util.spec_from_file_location('refactor_inventory', SCRIPT)
@@ -166,6 +167,41 @@ class StubBindingReview(unittest.TestCase):
         for change in [dict(behavior_status='implemented'), dict(limits=[]), dict(accepted_coverage=[])]:
             with self.subTest(change=change), self.assertRaises(ValueError):
                 inventory.reviewed_stub_binding(self.stub, dict(self.review, **change), self.paths)
+
+    def test_omitted_section_evidence_and_unlinked_coverage_are_rejected(self):
+        for field in ['canonical_owner', 'native_binding', 'reference_binding']:
+            for value in [None, []]:
+                bad = copy.deepcopy(self.review)
+                if value is None:
+                    del bad[field]['evidence']
+                else:
+                    bad[field]['evidence'] = value
+                with self.subTest(field=field, value=value), self.assertRaisesRegex(ValueError, 'fingerprinted evidence'):
+                    inventory.reviewed_stub_binding(self.stub, bad, self.paths)
+        for coverage in [['unlinked coverage'], [dict(path='src/game/save_completion.hpp')]]:
+            with self.subTest(coverage=coverage), self.assertRaisesRegex(ValueError, 'fingerprinted records'):
+                inventory.reviewed_stub_binding(self.stub, dict(self.review, accepted_coverage=coverage), self.paths)
+        with self.assertRaisesRegex(ValueError, 'nonblank limits'):
+            inventory.reviewed_stub_binding(self.stub, dict(self.review, limits=['  ']), self.paths)
+
+    def test_duplicate_ids_inside_and_across_fragments_are_rejected(self):
+        name = 'docs/refactor-inventory/reviews/save-warning-stub-bindings.json'
+        fragment = inventory.read(name)
+        identity = next(iter(json.loads(fragment)['stubs']))
+        duplicate = fragment.replace('"stubs": {', '"stubs": {' + json.dumps(identity) +
+                                     ':{"behavior_status":"implemented"},', 1)
+        original_read = inventory.read
+        with patch.object(inventory, 'read', lambda path: duplicate if path == name else original_read(path)):
+            with self.assertRaisesRegex(ValueError, 'Duplicate STUB review JSON key'):
+                inventory.render()
+        policy_path = inventory.OUT / 'review.json'
+        policy = json.loads(policy_path.read_text())
+        policy['stub_binding_review_files'] = [name, name]
+        original_path_read = Path.read_text
+        def read(path, *args, **kwargs):
+            return json.dumps(policy) if path == policy_path else original_path_read(path, *args, **kwargs)
+        with patch.object(Path, 'read_text', read), self.assertRaisesRegex(ValueError, 'Duplicate STUB binding review'):
+            inventory.render()
 
     def test_real_projection_keeps_every_stub_and_rejects_stale_identity(self):
         policy_path = inventory.OUT / 'review.json'
