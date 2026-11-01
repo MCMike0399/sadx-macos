@@ -124,6 +124,13 @@
       "partial_count": 270,
       "cases": 20872,
       "report_sha256": "263d8d2cf2138c4f55e1b0c67fd62e4d20cbe6e78ec8f337f94bcee69c0636a9"
+    },
+    "game_reset": {
+      "exit": 0,
+      "stream_sha256": "2d457cb1c31ce5c0276add9841b2dc8584e6fed65be29b66829bbb597dfd49b7",
+      "bytes": 341700,
+      "cases": 300,
+      "report_sha256": "ce6aa576589fc6bdc1b7eb31ebae0b574c08b46071e4332401c99303b289f62e"
     }
   },
   "historical_mutants": [
@@ -395,6 +402,7 @@
   "limits": [
     "No gate, holdout, journeys, product build or Root independent review",
     "Native output capture normalizes return only for actual void C exports; ignores no output words",
-    "Private setup logs retained: crt_integer dependency, duplicated reset export, title frame-loop/speedrun dependencies; no maintained build defect claimed"
+    "Private setup logs retained: crt_integer dependency, duplicated reset export, title frame-loop/speedrun dependencies; no maintained build defect claimed",
+    "Standalone original reset300 stream subsequently captured from the immutable baseline library; this supplements the nested cleanup judge receipt without rebuilding baseline source."
   ]
 }

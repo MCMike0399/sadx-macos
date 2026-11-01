@@ -1,0 +1,110 @@
+[
+  {
+    "name": "defaults_known",
+    "exit": -6,
+    "caught": true,
+    "source": "src/guest/music_state_reference.cpp",
+    "old": "known_[i] = words[i].has_value();",
+    "new": "known_[i] = true;",
+    "source_sha256": "0dc1c5370a90294fbb6759a27706b010c0cce2ee5e4b97d545e7fcea5a87e44f"
+  },
+  {
+    "name": "clear_missing_value",
+    "exit": -6,
+    "caught": true,
+    "source": "src/guest/music_state_reference.cpp",
+    "old": "if (word)\n        std::memcpy(&value, &*word, sizeof value);",
+    "new": "value = word ? static_cast<std::int32_t>(*word) : -1;",
+    "source_sha256": "d77d659db4728049f2e69ac286db69521c734414f1eb7304161480502e4384da"
+  },
+  {
+    "name": "lose_signed_high_bit",
+    "exit": -6,
+    "caught": true,
+    "source": "src/guest/music_state_reference.cpp",
+    "old": "std::memcpy(&value, &*word, sizeof value);",
+    "new": "value = static_cast<std::int32_t>(*word & 0x7fffffffU);",
+    "source_sha256": "48dc61412947b4ba22dc2c92c5c32735a5a7e1d030ff2b9e976130b9c5174f74"
+  },
+  {
+    "name": "export_stale_song",
+    "exit": -6,
+    "caught": true,
+    "source": "src/guest/music_state_reference.cpp",
+    "old": "static_cast<std::uint32_t>(tracks_.current_song)",
+    "new": "0xffffffffU",
+    "source_sha256": "e8ae25c83ed3b5bbeb2074babfcfb81c922c3c50e65d8661309d06d7941003c6"
+  },
+  {
+    "name": "song_knows_voice",
+    "exit": -6,
+    "caught": true,
+    "source": "src/guest/music_state_reference.cpp",
+    "old": "known_[0] = known_[1] = known_[2] = known_[4] = true;",
+    "new": "known_.fill(true);",
+    "source_sha256": "29caf0d30b2b480b9447fab1f6c15da3ab68f64d4704a401e5b47b7d08d7ae47"
+  },
+  {
+    "name": "prevalidate_song",
+    "exit": -6,
+    "caught": true,
+    "source": "src/guest/music_state_reference.cpp",
+    "old": "cleanup::reset_song_state(tracks_);",
+    "new": "if (!known_[0]) return {ResetLeafOutcome::unknown_state, 0x4257c0, {}, {}};\n        cleanup::reset_song_state(tracks_);",
+    "source_sha256": "d7fdce91a981cb97d79229f7710e8a954f9c246eff1b7bba2b42ad714e78c5e4"
+  },
+  {
+    "name": "song_resets_voice",
+    "exit": -6,
+    "caught": true,
+    "source": "src/guest/music_state_reference.cpp",
+    "old": "cleanup::reset_song_state(tracks_);",
+    "new": "cleanup::reset_song_state(tracks_); cleanup::reset_current_voice(tracks_);",
+    "source_sha256": "a0629041d860c1127d40480f1e012896ac16fef5a7bd58de83207e84ca2e16b2"
+  },
+  {
+    "name": "swallow_legacy_dispatch",
+    "exit": -6,
+    "caught": true,
+    "source": "src/guest/music_state_reference.cpp",
+    "old": "return run_reset_leaf(callee, argument, leaves, nested);",
+    "new": "(void)argument; (void)leaves; (void)nested; return {ResetLeafOutcome::completed, 0, {}, {}};",
+    "source_sha256": "d3f8666513ab53308cb939c3346323e8e4632f4d696c52879430809a47bcbb9b"
+  },
+  {
+    "name": "manager_clear_before_close",
+    "exit": -6,
+    "caught": true,
+    "source": "src/game/title_menu.cpp",
+    "old": "    calls.close_media(0);\n    calls.close_media(1);",
+    "new": "    manager.reset();\n    calls.close_media(0);\n    calls.close_media(1);",
+    "source_sha256": "f0fae13706dae86addb9edf7aedc695b9d91e9fddb79973168e368762aff51c5"
+  },
+  {
+    "name": "manager_create_before_reset",
+    "exit": -6,
+    "caught": true,
+    "source": "src/game/music.cpp",
+    "old": "void initialize_manager(cleanup::TrackState &tracks, TaskServices &services) {",
+    "new": "void initialize_manager(cleanup::TrackState &tracks, TaskServices &services) { services.create_manager();",
+    "source_sha256": "f74822ee2f885295ad65e745ca42fbb822136ad481311a30503308b8bb88d744"
+  },
+  {
+    "name": "allocate_before_publish",
+    "exit": -6,
+    "caught": true,
+    "source": "src/game/music.cpp",
+    "old": "        menu.music_task = task;\n        if (task) {\n            auto work = services.allocate_request(task);",
+    "new": "        if (task) {\n            auto work = services.allocate_request(task);\n            menu.music_task = task;",
+    "source_sha256": "a8c0167d52b0fc0b601007e23357ee5435ae846af1f8b8f7bcd63fcd8a1c1919"
+  },
+  {
+    "name": "install_before_manager_publish",
+    "exit": -6,
+    "caught": true,
+    "source": "src/game/music.cpp",
+    "old": "        manager = task;\n        services.install_manager_callbacks(task);",
+    "new": "        services.install_manager_callbacks(task);\n        manager = task;",
+    "source_sha256": "6d6055e1d2c1e04dd305429b7b3b787d3bab12d43a160e68e3d51f0df1a6ac20"
+  }
+]
