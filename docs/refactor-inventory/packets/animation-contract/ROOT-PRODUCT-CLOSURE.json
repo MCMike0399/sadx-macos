@@ -1,0 +1,33 @@
+{
+  "source_candidate": "38e1c69",
+  "source_snapshot": "ac30cf2",
+  "source_only_product": {
+    "command": "make -j1 build/sadx-native native-closure",
+    "exit_status": 0,
+    "stage": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-9b97f112/build/source-only-animation-ac30cf2",
+    "reference_directory_absent": true,
+    "game_directory_absent": true,
+    "native_binary_sha256": "480d8826d5f8e150e857e6c350db3e760ee3c1d0827e2ca85c0b90dee61c86df",
+    "native_archive_sha256": "97cd70aab424769889188341d7cc444e2834a4e82db4f6e43f0b68964518d9e8",
+    "log_sha256": "749e2e957b44d3aae112fac86b1077731dcdc3c79b6b34b3ac14e9442f183119"
+  },
+  "actual_consumer_programs": {
+    "native-gamma-binding.log": {
+      "exit_status": 0,
+      "log_sha256": "f9413bdf1bcd3665c28999dc27fc4ed3c7de0f5fe60f1deabdc47a7fbd3d3a6a"
+    },
+    "native-gamma-weld-cursors.log": {
+      "exit_status": 0,
+      "log_sha256": "4fe6becceff59330ff6916439710b99f4b46d5797318f5afa73ee53db78ad001"
+    },
+    "gamma-cursors.log": {
+      "exit_status": 0,
+      "log_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "limits": [
+    "Actual Gamma binding/weld/cursor contracts reach their existing setup boundary; they do not implement PSetMotion or qualify actor playback/rendering.",
+    "Native journeys remain an active separate process and are not yet included as passing evidence.",
+    "Reserved final cohorts, scope-lineage policy, global inventory/protected union and coherent Main gate remain pending."
+  ]
+}
