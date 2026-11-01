@@ -1,0 +1,156 @@
+{
+ "summary": {
+  "patches": 618,
+  "active_patches": 121,
+  "active_unhandled_patches": 79,
+  "reports": 12,
+  "declared_exe_ranges": 107,
+  "unhandled_overlaps": 0,
+  "handled_overlaps": 4,
+  "undetermined_overlaps": 0,
+  "reports_without_addressed_ranges": [
+   "consumer-compiles.json",
+   "judge-baseline-exits.json",
+   "judge-current-exits.json",
+   "profile-patches.json",
+   "qualification.json"
+  ]
+ },
+ "unhandled_overlaps": [],
+ "handled_overlaps": [
+  {
+   "report": "regular_textures-after.json",
+   "range": "0x421180-0x421185",
+   "range_key": "/source_ranges/0x421180-0x421185",
+   "patch_va": "0x421180",
+   "patch_end": "0x421185",
+   "size": 5,
+   "owner": "loader",
+   "kind": "jump",
+   "target": "LoadPVM_r",
+   "active": true,
+   "handled_by": "src/game/regular_textures.cpp load_archive; verify_original_regular_textures.py executes pinned loader LoadPVM_r",
+   "source_ref": "TextureReplacement.cpp:71"
+  },
+  {
+   "report": "regular_textures-after.json",
+   "range": "0x4228e0-0x4228e5",
+   "range_key": "/source_ranges/0x4228e0-0x4228e5",
+   "patch_va": "0x4228e0",
+   "patch_end": "0x4228e5",
+   "size": 5,
+   "owner": "loader",
+   "kind": "jump",
+   "target": "njLoadTexture_Wrapper_r",
+   "active": true,
+   "handled_by": "src/game/regular_textures.cpp load_individual; verify_original_regular_textures.py executes pinned loader njLoadTexture_Wrapper_r",
+   "source_ref": "TextureReplacement.cpp:70"
+  },
+  {
+   "report": "regular_textures-before.json",
+   "range": "0x421180-0x421185",
+   "range_key": "/source_ranges/0x421180-0x421185",
+   "patch_va": "0x421180",
+   "patch_end": "0x421185",
+   "size": 5,
+   "owner": "loader",
+   "kind": "jump",
+   "target": "LoadPVM_r",
+   "active": true,
+   "handled_by": "src/game/regular_textures.cpp load_archive; verify_original_regular_textures.py executes pinned loader LoadPVM_r",
+   "source_ref": "TextureReplacement.cpp:71"
+  },
+  {
+   "report": "regular_textures-before.json",
+   "range": "0x4228e0-0x4228e5",
+   "range_key": "/source_ranges/0x4228e0-0x4228e5",
+   "patch_va": "0x4228e0",
+   "patch_end": "0x4228e5",
+   "size": 5,
+   "owner": "loader",
+   "kind": "jump",
+   "target": "njLoadTexture_Wrapper_r",
+   "active": true,
+   "handled_by": "src/game/regular_textures.cpp load_individual; verify_original_regular_textures.py executes pinned loader njLoadTexture_Wrapper_r",
+   "source_ref": "TextureReplacement.cpp:70"
+  }
+ ],
+ "undetermined_overlaps": [],
+ "report_ranges": {
+  "consumer-compiles.json": {
+   "exe_ranges": 0,
+   "dll_ranges_skipped": 0,
+   "opaque_range_hashes": [],
+   "unparsed_keys": []
+  },
+  "game_cleanup-after.json": {
+   "exe_ranges": 25,
+   "dll_ranges_skipped": 0,
+   "opaque_range_hashes": [
+    "/unchanged_reset_judge/original_range_sha256"
+   ],
+   "unparsed_keys": []
+  },
+  "judge-baseline-exits.json": {
+   "exe_ranges": 0,
+   "dll_ranges_skipped": 0,
+   "opaque_range_hashes": [],
+   "unparsed_keys": []
+  },
+  "judge-current-exits.json": {
+   "exe_ranges": 0,
+   "dll_ranges_skipped": 0,
+   "opaque_range_hashes": [],
+   "unparsed_keys": []
+  },
+  "menu_resource_lifetime-after.json": {
+   "exe_ranges": 19,
+   "dll_ranges_skipped": 0,
+   "opaque_range_hashes": [],
+   "unparsed_keys": []
+  },
+  "menu_resource_lifetime-before.json": {
+   "exe_ranges": 19,
+   "dll_ranges_skipped": 0,
+   "opaque_range_hashes": [],
+   "unparsed_keys": []
+  },
+  "native_texture_lifetime-after.json": {
+   "exe_ranges": 15,
+   "dll_ranges_skipped": 0,
+   "opaque_range_hashes": [],
+   "unparsed_keys": []
+  },
+  "native_texture_lifetime-before.json": {
+   "exe_ranges": 15,
+   "dll_ranges_skipped": 0,
+   "opaque_range_hashes": [],
+   "unparsed_keys": []
+  },
+  "profile-patches.json": {
+   "exe_ranges": 0,
+   "dll_ranges_skipped": 0,
+   "opaque_range_hashes": [],
+   "unparsed_keys": [],
+   "error": "Expecting value: line 1 column 1 (char 0)"
+  },
+  "qualification.json": {
+   "exe_ranges": 0,
+   "dll_ranges_skipped": 0,
+   "opaque_range_hashes": [],
+   "unparsed_keys": []
+  },
+  "regular_textures-after.json": {
+   "exe_ranges": 7,
+   "dll_ranges_skipped": 6,
+   "opaque_range_hashes": [],
+   "unparsed_keys": []
+  },
+  "regular_textures-before.json": {
+   "exe_ranges": 7,
+   "dll_ranges_skipped": 6,
+   "opaque_range_hashes": [],
+   "unparsed_keys": []
+  }
+ }
+}

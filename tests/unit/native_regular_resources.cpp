@@ -2,6 +2,7 @@
 #ifndef BASELINE_ONLY
 #include "runtime/native_regular_resources.hpp"
 #endif
+#include "game/game_cleanup.hpp"
 #include <algorithm>
 #include <cassert>
 #include <iostream>
@@ -168,14 +169,70 @@ template<class Host> std::vector<std::string> exercise() {
     }
     return rows;
 }
+template<class Host> void lifetime_and_cleanup() {
+    std::weak_ptr<const std::string> replacement;
+    std::weak_ptr<int> cached;
+    {
+        Host host;
+        test::ArchiveOutput output;
+        host.display_ = &output;
+        auto input = assets();
+        replacement = input.localizations[0].replacement;
+        host.attach_regular_textures(std::move(input));
+        assert(!replacement.expired());
+        assert(host.state()->localizations[0].replacement == replacement.lock());
+        auto cache = std::make_shared<int>(1);
+        cached = cache;
+        host.state()->cache.directories.push_back(cache);
+        cache.reset();
+        assert(!cached.expired());
+        host.common() = &host.lists()[0];
+        host.regular()[0] = &host.lists()[1];
+        host.regular()[1] = &host.lists()[0];
+        std::array<const cleanup::CharacterTextureLists *, 9> characters{};
+        std::array<std::int8_t, 9> loaded{};
+        cleanup::TextureState cleanup_state{host.common(), host.regular(), characters, loaded};
+        unsigned calls = 0;
+        const auto release = [&](auto &list) {
+            if (calls == 0) {
+                assert(host.common() == &list);
+                assert(host.state()->common == &list);
+            } else {
+                assert(!host.state()->common);
+                assert(host.state()->regular[calls - 1] == &list);
+            }
+            ++calls;
+        };
+        cleanup::release_regular_object_textures(cleanup_state, release);
+        assert(calls == 3);
+        assert(!host.common() && !host.regular()[0] && !host.regular()[1]);
+        // Failed release publishes only earlier successful clears.
+        host.common() = &host.lists()[0];
+        host.regular()[0] = &host.lists()[1];
+        assert(error([&] {
+            cleanup::release_regular_object_textures(cleanup_state, [&](auto &) {
+                if (!host.common()) throw std::runtime_error("release failed");
+            });
+        }) == "release failed");
+        assert(!host.state()->common);
+        assert(host.state()->regular[0] == &host.lists()[1]);
+        // End the spy callback here. Production must not invoke its retained callback
+        // after Session destruction.
+        output.loader = {};
+    }
+    assert(replacement.expired());
+    assert(cached.expired());
+}
 } // namespace
 int main() {
+    lifetime_and_cleanup<sadx::test::PriorRegularResources>();
     const auto expected = exercise<sadx::test::PriorRegularResources>();
 #ifdef BASELINE_ONLY
     for (const auto &row : expected) std::cout << row << '\n';
 #else
     static_assert(!std::is_move_constructible_v<sadx::native::RegularResources>);
     static_assert(!std::is_copy_constructible_v<sadx::native::RegularResources>);
+    lifetime_and_cleanup<CurrentRegularResources>();
     assert(expected == exercise<CurrentRegularResources>());
     std::cout << expected.size() << " native baseline observations match; live aliases, callback and partial ordering pass.\n";
 #endif
