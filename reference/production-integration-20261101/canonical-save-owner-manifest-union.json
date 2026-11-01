@@ -1,0 +1,87 @@
+{
+  "source_owner_parent": "43352263d2a011bb372055a7eb0ef133e0825327",
+  "newer_main_parent": "53f7c5d503023d5d3863b1667d8763b73bf442df",
+  "owner_inputs": 930,
+  "newer_main_inputs": 932,
+  "union_inputs": 934,
+  "all_parent_paths_retained": true,
+  "all_actual_hashes_equal_a_reviewed_parent": true,
+  "conflicting_hashes": {
+    "reference/constexpr-table-review.json": {
+      "owner": "c1aafe1d96741bb8cc1c133db57a76db24cea3f39c6d4edba6b43a495dc41d7e",
+      "main": "1516d09f461dc2515cc9fe06a137b4fc3e928bf1e09e9d3ed6be44b38ecde58a",
+      "retained": "c1aafe1d96741bb8cc1c133db57a76db24cea3f39c6d4edba6b43a495dc41d7e"
+    },
+    "reference/oracle-reports/character_completion.json": {
+      "owner": null,
+      "main": "8fedbe22276644958152639d0316ea7a7cada953bcd6884836241bf181752a07",
+      "retained": "8fedbe22276644958152639d0316ea7a7cada953bcd6884836241bf181752a07"
+    },
+    "reference/oracle-reports/character_select_availability.json": {
+      "owner": null,
+      "main": "7292f592c7b50cf175dee48f0d2d829782e571b497596125a472039dd35a8feb",
+      "retained": "7292f592c7b50cf175dee48f0d2d829782e571b497596125a472039dd35a8feb"
+    },
+    "reference/oracle-reports/character_select_menu.json": {
+      "owner": null,
+      "main": "0be5b4fb4f89b82b6db6ebb552e04c45c6666ba0af95762795b03d6fdfaec278",
+      "retained": "0be5b4fb4f89b82b6db6ebb552e04c45c6666ba0af95762795b03d6fdfaec278"
+    },
+    "reference/oracle-reports/file_select_controls.json": {
+      "owner": "1811d6e8efa42793b444fc17efa95ceb4544bb36230a3d2683695dc32dcb0a06",
+      "main": "d576fdd5896bf3afb7249999514cff620ed4e233546dc894199718e27af78f7c",
+      "retained": "d576fdd5896bf3afb7249999514cff620ed4e233546dc894199718e27af78f7c"
+    },
+    "reference/oracle-reports/game_cleanup.json": {
+      "owner": "f44007d5b688e4d8ef23f102050bbe6b896b81c3bacf6f81eff1555266a8ac1a",
+      "main": "864a9647a4ccbcc98e85ada6e5809cea032507ea317e405102e4190301de6f3f",
+      "retained": "864a9647a4ccbcc98e85ada6e5809cea032507ea317e405102e4190301de6f3f"
+    },
+    "reference/oracle-reports/main_menu_eligibility.json": {
+      "owner": "2a33db188507e482028c2040e1ce477774aa9e21462dc8c4c54a8aabfa6f01b2",
+      "main": "be21f1f6c53cd5dd852476c07c29bd9ae98e4de0fb978ec9b1e0b59cb41ffa86",
+      "retained": "be21f1f6c53cd5dd852476c07c29bd9ae98e4de0fb978ec9b1e0b59cb41ffa86"
+    },
+    "reference/oracle-reports/menu_eligibility.json": {
+      "owner": "d94ec10916ada8a4ec50809c9ab8a9b69c1459224a441921d022f66a44f293cb",
+      "main": "627ca706b924ee06bcc79ed8f3e73623b89a62faa78d53554d4711791042c747",
+      "retained": "627ca706b924ee06bcc79ed8f3e73623b89a62faa78d53554d4711791042c747"
+    },
+    "reference/oracle-reports/title_factory.json": {
+      "owner": "8c44e4bb43b19b6c83e7dbe882d428ab45ad55a8766ed95e0c97a6a34c7986f8",
+      "main": "5037e8a131e8ec07b5f30b872caaed7cb07ce56836d89d35de144e455ef5e606",
+      "retained": "5037e8a131e8ec07b5f30b872caaed7cb07ce56836d89d35de144e455ef5e606"
+    },
+    "reference/oracle-reports/title_menu.json": {
+      "owner": "936a42b4b49e648e1251cea7e692e92175482943bc0e9dd6ac90b15348c3f71f",
+      "main": "387769f7042590677e665f9b8d0be6fb13513141e293d26f5c649a5e9a938364",
+      "retained": "387769f7042590677e665f9b8d0be6fb13513141e293d26f5c649a5e9a938364"
+    },
+    "reference/production-integration-20261101/save-completion-mutants.json": {
+      "owner": null,
+      "main": "1b4657b0ff662bcc21255779aa675f8acc40cdb8fb55cbfef7a8b974e70e5694",
+      "retained": "1b4657b0ff662bcc21255779aa675f8acc40cdb8fb55cbfef7a8b974e70e5694"
+    },
+    "reference/production-integration-20261101/session-save-owner-mutants.json": {
+      "owner": "b95ec90bb88e7a03c6d3b95e47dbda27880253048f28df6101810123df741fd6",
+      "main": null,
+      "retained": "b95ec90bb88e7a03c6d3b95e47dbda27880253048f28df6101810123df741fd6"
+    },
+    "tests/probes/native_game_mode_leaves_probe.cpp": {
+      "owner": "a5d585ecdbe396ee9222df361184f71ef0249b9494f245c89de591c60520574b",
+      "main": "caeec50d03527b16dc871faea6342095ab1e340b4c606df0de6af0bfca3e1976",
+      "retained": "a5d585ecdbe396ee9222df361184f71ef0249b9494f245c89de591c60520574b"
+    },
+    "tests/unit/manifest.tsv": {
+      "owner": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
+      "main": "be26bf1a641df0e5b887653a87cc5b9de1d0c55b6d8b8dfa0a79c8439458039b",
+      "retained": "be26bf1a641df0e5b887653a87cc5b9de1d0c55b6d8b8dfa0a79c8439458039b"
+    },
+    "tools/oracles/check_game_mode_leaves_holdout.py": {
+      "owner": "a77928c22b587efa91e1f3e12c2f6e2a09d904a569f262b930cabf8c7947c62e",
+      "main": null,
+      "retained": "a77928c22b587efa91e1f3e12c2f6e2a09d904a569f262b930cabf8c7947c62e"
+    }
+  },
+  "limits": "Merge preserves independently committed source and judge packets. Source files have no conflicts; generated inventory is regenerated. Separate post-merge manifest sealing and full coherent gate follow."
+}

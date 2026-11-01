@@ -1,0 +1,12 @@
+{
+  "source_commit": "ed643ae0cf3bd25d17f3bb65597526a9c09b1953",
+  "qualification_commit": "ee5a1c5ae956e4f899936bcb098539b6761f1813",
+  "new_unit": "tests/unit/save_completion_callbacks.cpp",
+  "unit_sha256": "36e9e79c04918f8e3ece839da84a89663529c6e00f5fe94bc5b344a6df8942ec",
+  "registration": "save-completion-callbacks",
+  "frozen_mutation_evidence": "reference/production-integration-20261101/save-completion-mutants.json",
+  "limits": [
+    "Only the existing manifest prefix plus one new test registration changes. Original judge scripts/probes/vectors/expected values and all inherited protected hashes remain unchanged.",
+    "New unit verifies callback and partial-store semantics; inherited controls938 FP partials remain partial. Final source review, holdout and integrated gate remain pending."
+  ]
+}

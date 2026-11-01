@@ -1,6 +1,9 @@
 #include "game/save_completion.hpp"
+#include "game/file_select.hpp"
 namespace sadx::file_select {
 namespace {
+constexpr std::int16_t kSaveCompletionDelay = 5;
+constexpr std::int32_t kSaveFailureDialog = 17;
 // NOTSA: shared source stores before closing the failed-save warning.
 void clear_pending(SaveCompletionState &state) {
     state.now_saving = 0;
@@ -11,10 +14,11 @@ void clear_pending(SaveCompletionState &state) {
 } // namespace
 bool update_save_completion(title_menu::FileSelectWork &work, SaveCompletionState &state,
                             SaveCompletionCalls &calls) {
-    if (work.submode != 12 && work.submode != 13)
+    if (control_stage(work) != ControlStage::WaitForNewSave &&
+        control_stage(work) != ControlStage::CompleteNewSave)
         return false;
-    if (work.submode == 12) {
-        if (work.wait_frames < 5) {
+    if (control_stage(work) == ControlStage::WaitForNewSave) {
+        if (work.wait_frames < kSaveCompletionDelay) {
             state.alert_flag = 0;
             ++work.wait_frames;
             return true;
@@ -25,22 +29,24 @@ bool update_save_completion(title_menu::FileSelectWork &work, SaveCompletionStat
             if (static_cast<std::int8_t>(state.save_ok) < 1) {
                 state.alert_blocked = 1;
                 clear_pending(state);
-                calls.request_dialog(17);
+                calls.request_dialog(kSaveFailureDialog);
                 state.warning_task = calls.create_save_warning();
             }
         }
-        work.submode = 13;
+        set_control_stage(work, ControlStage::CompleteNewSave);
+        // Source falls through and consumes the first completion wait frame now.
     }
-    if (work.wait_frames < 5) {
+    if (work.wait_frames < kSaveCompletionDelay) {
         ++work.wait_frames;
         return true;
     }
     if (static_cast<std::int8_t>(state.save_ok) > 0) {
         state.alert_blocked = 0;
+        // Transition callbacks can change the selected file; read its owner afterwards.
         calls.transition_menu(work.presentation.next);
         state.selected_file_backup = state.selected_card_file;
         state.fade_in_marker = 0;
-        work.submode = 10;
+        set_control_stage(work, ControlStage::Leaving);
         state.save_ok = 0;
         return true;
     }
@@ -52,10 +58,10 @@ bool update_save_completion(title_menu::FileSelectWork &work, SaveCompletionStat
         state.alert_blocked = 0;
         calls.close_save_warning(state.warning_task);
         if (selection == 0)
-            work.submode = 0;
+            set_control_stage(work, ControlStage::Initialize);
         else {
             calls.transition_menu(work.presentation.next);
-            work.submode = 10;
+            set_control_stage(work, ControlStage::Leaving);
             state.fade_in_marker = 0;
             state.saving_disabled = 1;
             calls.prepare_new_save();

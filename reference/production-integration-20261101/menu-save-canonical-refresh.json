@@ -1,0 +1,170 @@
+{
+  "canonical_source_commit": "3efc9b7",
+  "actual_command_statuses": [
+    {
+      "slug": "menu_eligibility",
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_menu_eligibility.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-menu-eligibility-probe.dylib",
+        "--output",
+        "build/oracles/menu_eligibility.json"
+      ],
+      "exit_status": 0,
+      "verdict": "pass",
+      "reason": "passed"
+    },
+    {
+      "slug": "main_menu_eligibility",
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_main_menu_eligibility.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-main-menu-eligibility-probe.dylib",
+        "--output",
+        "build/oracles/main_menu_eligibility.json"
+      ],
+      "exit_status": 0,
+      "verdict": "pass",
+      "reason": "passed"
+    },
+    {
+      "slug": "character_select_menu",
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_character_select_menu.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-character-select-menu-probe.dylib",
+        "--output",
+        "build/oracles/character_select_menu.json"
+      ],
+      "exit_status": 1,
+      "verdict": "partial",
+      "reason": "values match; flag_mismatches=733 (see limits)"
+    },
+    {
+      "slug": "character_select_availability",
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_character_select_availability.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-character-select-availability-probe.dylib",
+        "--output",
+        "build/oracles/character_select_availability.json"
+      ],
+      "exit_status": 0,
+      "verdict": "pass",
+      "reason": "passed"
+    },
+    {
+      "slug": "title_menu",
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_title_menu.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-title-menu-probe.dylib",
+        "--output",
+        "build/oracles/title_menu.json"
+      ],
+      "exit_status": 1,
+      "verdict": "partial",
+      "reason": "values match; fp_flag_mismatches=270, first_fp_flag_mismatches=3 (see limits)"
+    },
+    {
+      "slug": "title_factory",
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_title_factory.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-title-factory-probe.dylib",
+        "--output",
+        "build/oracles/title_factory.json"
+      ],
+      "exit_status": 0,
+      "verdict": "pass",
+      "reason": "passed"
+    },
+    {
+      "slug": "game_cleanup",
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_game_cleanup.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-game-cleanup-probe.dylib",
+        "--output",
+        "build/oracles/game_cleanup.json"
+      ],
+      "exit_status": 0,
+      "verdict": "pass",
+      "reason": "mismatch_count=0"
+    },
+    {
+      "slug": "save_creation",
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_save_creation.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-save-creation-probe.dylib",
+        "--output",
+        "build/oracles/save_creation.json"
+      ],
+      "exit_status": 0,
+      "verdict": "pass",
+      "reason": "passed"
+    },
+    {
+      "slug": "save_completion",
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_save_completion.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-save-creation-probe.dylib",
+        "--output",
+        "build/oracles/save_completion.json"
+      ],
+      "exit_status": 0,
+      "verdict": "pass",
+      "reason": "passed"
+    },
+    {
+      "slug": "file_select_controls",
+      "command": [
+        "reference/python/bin/python",
+        "tools/oracles/verify_original_file_select_controls.py",
+        "game/Sonic Adventure DX/sonic.exe",
+        "build/native-file-select-controls-probe.dylib",
+        "--output",
+        "build/oracles/file_select_controls.json"
+      ],
+      "exit_status": 1,
+      "verdict": "partial",
+      "reason": "values match; passed=false (strict claim; see limits)"
+    }
+  ],
+  "character_completion": {
+    "cases": 2399,
+    "passed": true,
+    "header_preprocessor_identical": true,
+    "proof": "reference/production-integration-20261101/character-completion-provenance/proof.json"
+  },
+  "raw_report_sha256": {
+    "save_creation.json": "f396d4cf37c73a984931442be82c465be83e825e11944013868da74730799680",
+    "game_cleanup.json": "6eb1d3ef6555f5af4ee321b3a3cccb292e86b62149dcb13b6267933ee7922328",
+    "main_menu_eligibility.json": "120849016a2a285e91fc4da55758147dfe805f38ed42268b8a28ac81c6729271",
+    "character_select_availability.json": "25f7a8f1760cb6fad656ba54ab5f25b9d4594aaa6dd1f9d36d9ad9b9896540a8",
+    "save_completion.json": "b5d8f165568ade63d988d5a98a83c625f053fb65f60b83d29a98860caa29d524",
+    "title_menu.json": "abbc8fdb1a5d9847a0a970f9947d720a82e5321561df5070ebed456e59665857",
+    "character_completion.json": "3bf3212b6f4b3d4932668dd53d795a177f699e0e54a75789b8276e015e3e7e4b",
+    "menu_eligibility.json": "7eb97d30f304a9e6cedadf60d7f4cc4f36407f56a3925250e03e3b01bb4605cf",
+    "file_select_controls.json": "8d55b4a1f4423a579d23b4568100c95a26779442329312322e5912bec4b49740",
+    "title_factory.json": "ed19a2a9b460f63de75f28189760c631f491e37a946b68410ceb0b5f7c874c4d",
+    "character_select_menu.json": "54bba4a7052ee9faeeaa49c76b54a1b0e14804a0a97ea3c35234a50249b23bc7"
+  },
+  "limits": [
+    "Seven canonical passes and three inherited FP partials: CharacterSelect733, title270, controls938. Actual exit1 retained for those scripts.",
+    "This summary refresh follows separate source commits. No oracle, vector, expected value or tolerance changed.",
+    "Character header edit changes comments only; full preprocessed header identical. Reference instruction sites retained as evidence.",
+    "Full coherent integration gate remains pending for these source/report/metadata additions."
+  ]
+}

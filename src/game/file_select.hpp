@@ -91,7 +91,8 @@ struct ControlCalls {
     virtual void apply_save() = 0;
     // NOTSA: delegates the recovered native service through its canonical owner.
     virtual void request_save() = 0;
-    // STUB: SONIC 0x421bd0 FUN_00421bd0
+    // NOTSA: owner-bound form of SaveCompletionCalls::close_save_warning; retains
+    // the source integer result for the navigation retry path.
     virtual std::int32_t close_warning() = 0;
     virtual void load_selected_save() = 0;
     virtual void transition_menu(title_menu::MenuMode) = 0;
