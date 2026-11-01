@@ -5,20 +5,20 @@
  "first_mismatches": [],
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
  "native_sources": {
-  "src/game/save_file_list.cpp": "6f5a7474fea7b977747f3df8b605224634176eef6c554a0a5c135d25c5cadf54",
-  "src/game/save_file_list.hpp": "87151c6639404ce7d4ddb25c149495405fe0ed29d791eeb0972966b4f88deeca",
-  "tests/probes/native_save_list_free_probe.cpp": "870ec1a37cf6a9b9246a675245a7ee3f1864a0dcdf9efa01370f104feab8d1f9"
+  "src/game/save_file_list.cpp": "67cb8c62c95d8ecbad6b69f67c46ae07ef6ed6e55329a964ca973b27006d6de1",
+  "src/game/save_file_list.hpp": "bb6f0d5401185a4e91d5ec014d7d11235cd1cc6c0f189577e386d382069aa025",
+  "tests/probes/native_save_list_free_probe.cpp": "55e65d1773c980628b773f056ab5bd1618736aa6b437b9710a7db0a00083b9bc"
  },
  "source_functions": {
   "0x504ed0-0x504f37": "fea94b691ec2405ff4c6cc5c2f5d7712e450518e0d44324d442c62a9b473f97d"
  },
- "native_library_sha256": "0a273dc1c7d955ffced2e195e0bf61f019ab2012f6e23ea36276ff2f51f9b10b",
+ "native_library_sha256": "6a3b02d033295ab485bb3db88e923b6ce26f27199faf922d47c1fb849a17e1b9",
  "source_range_sha256": "fea94b691ec2405ff4c6cc5c2f5d7712e450518e0d44324d442c62a9b473f97d",
  "limits": [
   "Original CRT free is a resource receipt. Every filename is freed before its node; sentinel indeterminate filename is never freed. Native node destructor order and final canonical list null are compared; CRT allocator reentry is not a game callback. Ghidra analyze timed out; actual original instructions execute."
  ],
  "tracked_summary": {
-  "full_sha256": "923ff146004631203ef06f76325b7e93856a398de2cfb19ae82c261d47d4e9e0",
+  "full_sha256": "418b0f1c29c5e3609a1be4577575049349992dc94d26b7c319f19554040c0d8d",
   "full_bytes": 1168,
   "lists_cut_to": 10,
   "cut_lists": {}
