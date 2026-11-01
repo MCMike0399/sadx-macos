@@ -1,0 +1,2223 @@
+{
+  "schema_version": 1,
+  "review_kind": "Independent read-only semantic per-file inventory fragment",
+  "source_review_base": "628e36e6abdfdf862edfbe7152c13c2913e78e9f",
+  "review_base": "628e36e6abdfdf862edfbe7152c13c2913e78e9f",
+  "branch": "packet/review-native-texture-modules",
+  "scope": "Exactly six native_texture_lifetime/native_texture_palette/native_message_texture engine files. Only this authored fragment is written. No Main/global review/generated shards/HANDOFF/STATUS edits or push.",
+  "counts": {
+    "files": 6,
+    "modules": 3,
+    "already_conforming": 3,
+    "needs_migration": 0,
+    "reference_infrastructure": 0,
+    "obsolete": 0,
+    "open_review": 3
+  },
+  "classification_contract": "Per-file retained-body conformance requires full body,owners,actual calls and accepted bounded judges;it is not whole-module runtime qualification. open_review is not already_conforming or proven needs_migration. Engine/native filenames confer no exemption.",
+  "review_criteria": [
+    {
+      "path": "docs/PROMPT-complete-refactor.md",
+      "line": 1,
+      "sha256": "2136204b6f9af8232f5573510438af570534eab1bc6d2ddc3a48802dc1feccc7"
+    },
+    {
+      "path": "docs/STYLE.md",
+      "line": 375,
+      "sha256": "bd44068383b2198cf5165c2869086c6cf7844b1c96be44db7194c768ee62afdd"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "line": 1,
+      "sha256": "01b08d262279a42140d0cc301322baba861e72e6f5c4f332e4b26da6d88026b7"
+    },
+    {
+      "path": "docs/refactor-inventory/README.md",
+      "line": 42,
+      "sha256": "23d33751e26955ea7ea4e37d6519f03e0612ce74f2d7967584d87cb2fc44d70b"
+    },
+    {
+      "path": "tools/inventory/refactor_inventory.py",
+      "line": 37,
+      "sha256": "f4ca7a8d112b629b631fd4f2cc730b9bafc7bc13e45593d8ead3f4d5d1dc0077"
+    }
+  ],
+  "resolved_reference_boundary": {
+    "resolution": "No direct guest/HLE release or MSG adapter calling these three namespaces was resolved in tracked source. Reference lifetime/image/palette comparisons invoke native probes and original source instructions through Python; COM/free/upload calls are receipts,not duplicated game release behavior. Separate reference selection uses shared detail implementation via guest/texture_selection_reference.cpp. Its legacy DTO/pool SourceBytes live under engine and remain surrounding migration work; genuine reference infrastructure is not inferred for assigned files. hle_device_bridge/native_game_reference use legacy selection state,not Display pool; no cross-world alias guarantee is claimed. A separate recovered pool initialization implementation remains in ninja_texture_pool.cpp,so initialization is not shared end to end;see explicit duplicate-initialization finding.",
+    "evidence": [
+      {
+        "path": "src/guest/texture_selection_reference.cpp",
+        "line": 1,
+        "sha256": "3cd999e216ba0244bc1febdb456a896d7489e0c49ac0d2072166d1522286fa5d"
+      },
+      {
+        "path": "src/engine/texture_selection_internal.hpp",
+        "line": 1,
+        "sha256": "9417bbd4372efdae2958b8a060c77074625aaf18fab3caacfc7a9ee238857389"
+      },
+      {
+        "path": "src/engine/ninja_texture_pool.hpp",
+        "line": 1,
+        "sha256": "848a03a5fc9c9e19643af926d740117a01ce57e3a043bd4ef1826af57b8a8653"
+      },
+      {
+        "path": "src/engine/ninja_texture_selection.hpp",
+        "line": 1,
+        "sha256": "15c689ee134df1e30584f005ab5aa84e2141f6c7f0d6e049f7442fe877b2a124"
+      },
+      {
+        "path": "src/guest/native_game_reference.cpp",
+        "line": 101,
+        "sha256": "9ffe1944dad7c6c7d951d23d27e6dccbe98a0b9e5c39a241eced9a05808ecb19"
+      },
+      {
+        "path": "src/hle/hle_device_bridge.cpp",
+        "line": 352,
+        "sha256": "6169c3f9b5ddcfc62832a5eccfb1743eada2b535bdca5783369ffd274465d11b"
+      },
+      {
+        "path": "tools/oracles/verify_original_native_texture_lifetime.py",
+        "line": 1,
+        "sha256": "27796356c1545391e564e69eeaaea305c53c59a0a90f6ae123acc15516ad0ac9"
+      },
+      {
+        "path": "src/engine/ninja_texture_pool.cpp",
+        "line": 3,
+        "sha256": "e42829b715d9a0f0ec5dbe4fe8749a79e3e6895e5619fd8ae350925b3bbdb6eb"
+      }
+    ]
+  },
+  "unresolved_evidence": [
+    {
+      "id": "palette-identity-contract-unresolved",
+      "severity": "classification_blocker",
+      "finding": "Entry.bank/select_bank(int32)/upload_banks and Memory.bank use untyped32-bit keys. Pinned loader supplies NJS_TEXPALETTE* to original selector, and SDK describes buffer as palette-descriptor pointers. Current production state is initialized empty; no native populated registration assigns or interprets the key. Existing equality tests also pass for raw pointer words. Therefore semantic resource-identity conformity of these owner/interface files is not established. This is evidence uncertainty,not a proven runtime regression or a number-magnitude address allegation.",
+      "evidence": [
+        {
+          "path": ".gitmodules",
+          "line": 1,
+          "sha256": "492a7488d49b91e247598f85c2204de38dd8255d010423de2aaf22b7f5719429",
+          "note": "Tracked parent boundary for inspected pinned SDK/loader source. Descendants below are external, not inventory denominator paths.",
+          "external_details": {
+            "kind": "git_submodule",
+            "parent_path": "reference/sadx-mod-loader",
+            "pinned_gitlink": "eb4cdcca9637d611a98b910fcfed6ce18580451c",
+            "files": [
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/include/ninja.h",
+                "line": 1035,
+                "sha256": "9d8a5bea4427cfd7fbbb2c5a0eeaac66ae1977bf385d3f5db474f4ab833a8a49"
+              },
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+                "line": 136,
+                "sha256": "590026179539651768b21cc00d7527fab2d74d0635ea7ee2475b133d9f5c4d37"
+              },
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXVariables.h",
+                "line": 2589,
+                "sha256": "a18ab56e9273928765428b9a99ac672266ba59e5f175b9ee43ca9c81723b0c81"
+              },
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/TextureReplacement.cpp",
+                "line": 1167,
+                "sha256": "8339e6e9de157596706aac86b5823bfb02be1e68a72ff32ba9279e637c0f7db0"
+              }
+            ],
+            "interpretation": "SDK NJS_TEXMEMLIST has opaque bank Uint32, while stSetPaletteBank argument and upload buffer are NJS_TEXPALETTE*. Actual pinned loader calls stSetPaletteBank(texpalette_buffer[i]). Native int32 bank/keys may preserve descriptor pointer identity, but no native populated palette registration/mapping is found. Numeric-only oracle key equality cannot distinguish that from logical numeric bank. Do not infer addresses from magnitude. SDK GlobalPalettes array512 is not authoritative layout: existing instruction judge supports128 stride16 entries."
+          }
+        },
+        {
+          "path": "tools/oracles/verify_original_palette.py",
+          "line": 24,
+          "sha256": "81402d0eaf28e737c859dbaa10535af1d501e158ce307585fcf3df78005584a2"
+        },
+        {
+          "path": "src/engine/texture_selection_native.cpp",
+          "line": 24,
+          "sha256": "1d17d34f1bf3110360686ffad4bc4a66a3fdb9f282d7415bc687b72dd39e04cd"
+        },
+        {
+          "path": "src/engine/native_texture_palette.hpp",
+          "line": 7,
+          "sha256": "7bb4a4d1081a3a4e8c0c77e3283ff613e40384e97f6c4c72aed774894cd7f6b8"
+        }
+      ],
+      "required_resolution": "Recover/inspect existing source palette registration and its identity relation to memory.bank; either justify a documented native logical ID mapping or migrate to a typed stable palette resource identity with sentinel semantics. Keep raw descriptor pointer words in reference adapters. Carry all owners,select_bank,MSG and selector consumers together under unchanged existing judges; no speculative palette implementation needed."
+    },
+    {
+      "finding": "Source original lifetime cached raw dossiers referenced by canonical memory are absent in this worktree(reference/inventory-raw). Did not launch provider,restore assets or consult network. Accepted original byte execution evidence remains tracked oracle harness+summary with source hashes/ranges;full raw callback trace/old lifetime holdout/mutant evidence not independently resolved.",
+      "evidence": [
+        {
+          "path": "reference/oracle-reports/native_texture_lifetime.json",
+          "line": 1,
+          "sha256": "fb8f904f08562677434361d3f2eac90e8f89c5f0b9ee63ee89f5a47109b9bbc7"
+        }
+      ]
+    },
+    {
+      "finding": "Related recovered initializer exists in two representations: nj_init_texture_77f610 writes per-field source defaults through SourceBytes and clears legacy selection/scratch; native Display constructs2048 Memory records with header defaults and its own selected/scratch defaults. These are separate native/reference world instances,but recovered initialization behavior has not been unified into one typed shared initializer. Do not classify that original initialization loop as pure marshalling or claim whole owner/system sharing from the release-module conformance. Assigned lifetime header remains open; surrounding engine/ninja_texture_pool and runtime composition require separate migration review.",
+      "evidence": [
+        {
+          "path": "src/engine/ninja_texture_pool.cpp",
+          "line": 3,
+          "sha256": "e42829b715d9a0f0ec5dbe4fe8749a79e3e6895e5619fd8ae350925b3bbdb6eb"
+        },
+        {
+          "path": "src/engine/ninja_texture_pool.hpp",
+          "line": 12,
+          "sha256": "848a03a5fc9c9e19643af926d740117a01ce57e3a043bd4ef1826af57b8a8653"
+        },
+        {
+          "path": "src/engine/native_texture_lifetime.hpp",
+          "line": 24,
+          "sha256": "0e6883f0c6ca2457060a61a16daeec4e84a3f7e6e6206e5a0b3d894f0e7485c3"
+        },
+        {
+          "path": "src/runtime/native_display.hpp",
+          "line": 145,
+          "sha256": "89cfa670a597de4388cabbfd41412008006031c096b2b63e7772e86ea9122954"
+        },
+        {
+          "path": "src/guest/native_game_reference.cpp",
+          "line": 1476,
+          "sha256": "9ffe1944dad7c6c7d951d23d27e6dccbe98a0b9e5c39a241eced9a05808ecb19"
+        }
+      ],
+      "required_resolution": "Review shared semantic initialization plus reference ordered-store adapter under unchanged pool/system/lifetime judges before certifying complete system;preserve bounds and partial stores. No source relocation alone."
+    }
+  ],
+  "files": {
+    "src/engine/native_texture_lifetime.hpp": {
+      "disposition": "open_review",
+      "reason": "Native ownership interface is largely semantic; palette bank identity prevents complete owner/API conformity.",
+      "reviewed_source_sha256": "0e6883f0c6ca2457060a61a16daeec4e84a3f7e6e6206e5a0b3d894f0e7485c3",
+      "semantic_justification": "Complete90-line header reviewed. Surface separates immutable graphics image and retained source bytes; Memory owns allocation and plain descriptor metadata, List borrows fixed slots and owns optional imported filename strings/attributes. State is references into Display,Services is one narrow native unbind callback. No source-address calls/register transport/PE reads. GBIX and format fields have semantic purposes. Three optional fields preserve actual source undefinedness,not fixture availability. Memory.bank still inherits the unresolved palette-key identity contract; this file remains open rather than declaring all integer resource fields valid.",
+      "evidence": [
+        {
+          "path": "src/engine/native_texture_lifetime.hpp",
+          "line": 1,
+          "sha256": "0e6883f0c6ca2457060a61a16daeec4e84a3f7e6e6206e5a0b3d894f0e7485c3",
+          "note": "Complete body read through line 90"
+        },
+        {
+          "path": ".gitmodules",
+          "line": 1,
+          "sha256": "492a7488d49b91e247598f85c2204de38dd8255d010423de2aaf22b7f5719429",
+          "note": "Tracked parent boundary for inspected pinned SDK/loader source. Descendants below are external, not inventory denominator paths.",
+          "external_details": {
+            "kind": "git_submodule",
+            "parent_path": "reference/sadx-mod-loader",
+            "pinned_gitlink": "eb4cdcca9637d611a98b910fcfed6ce18580451c",
+            "files": [
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/include/ninja.h",
+                "line": 1035,
+                "sha256": "9d8a5bea4427cfd7fbbb2c5a0eeaac66ae1977bf385d3f5db474f4ab833a8a49"
+              },
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+                "line": 136,
+                "sha256": "590026179539651768b21cc00d7527fab2d74d0635ea7ee2475b133d9f5c4d37"
+              },
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXVariables.h",
+                "line": 2589,
+                "sha256": "a18ab56e9273928765428b9a99ac672266ba59e5f175b9ee43ca9c81723b0c81"
+              },
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/TextureReplacement.cpp",
+                "line": 1167,
+                "sha256": "8339e6e9de157596706aac86b5823bfb02be1e68a72ff32ba9279e637c0f7db0"
+              }
+            ],
+            "interpretation": "SDK NJS_TEXMEMLIST has opaque bank Uint32, while stSetPaletteBank argument and upload buffer are NJS_TEXPALETTE*. Actual pinned loader calls stSetPaletteBank(texpalette_buffer[i]). Native int32 bank/keys may preserve descriptor pointer identity, but no native populated palette registration/mapping is found. Numeric-only oracle key equality cannot distinguish that from logical numeric bank. Do not infer addresses from magnitude. SDK GlobalPalettes array512 is not authoritative layout: existing instruction judge supports128 stride16 entries."
+          }
+        },
+        {
+          "path": "reference/production-integration-20261026/texture-selection-core/source-evidence.json",
+          "line": 1,
+          "sha256": "6905cced6019a3ff38701a79c63349f33cad62fad654b5a58a5c99557e88a4eb"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "Display owns one fixed 2048-slot native pool, cache GBIX, active/requested Memory borrows, selected list and eight scratch words. texture_state()/texture_selection_state() borrow these exact fields; no copy or second native pool. Pool is never resized by inspected operations. Pointer stability depends on retaining that fixed extent. Native/ref worlds are separate instances, not duplicate owners of one live world.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_display.hpp",
+              "line": 138,
+              "sha256": "89cfa670a597de4388cabbfd41412008006031c096b2b63e7772e86ea9122954"
+            },
+            {
+              "path": "src/runtime/native_display.cpp",
+              "line": 318,
+              "sha256": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717"
+            },
+            {
+              "path": "src/runtime/native_display.cpp",
+              "line": 322,
+              "sha256": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717"
+            }
+          ]
+        },
+        {
+          "resolution": "Session owns regular/menu/character/font List objects and forwards release to Display. List entries borrow Memory slots; release retains entry pointers even after slot reset. MovieScene owns its own List and calls the low list release via Display. LogoRenderer borrows Display pool/state and owns its logo list plus non-owning resident-slot associations. List filename shared_ptrs are real imported metadata absence; first_filename_invalid is an explicit source filename sentinel observation, not an executable address identity.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 241,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 248,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 254,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 107,
+              "sha256": "6c41e5d01e9014be2ef192218eead11a8fb11cc31e95a7dc7fefc34e7f5c98d4"
+            },
+            {
+              "path": "src/runtime/movie_scene.cpp",
+              "line": 98,
+              "sha256": "c076a0805e7bee29c04a84fd7de71638492817b2647da79d872ff253255726a8"
+            },
+            {
+              "path": "src/runtime/logo_renderer.hpp",
+              "line": 61,
+              "sha256": "60b271dc536b86489edeaaf4b2ceee422f44d68fdd267d6a3114c01cdcad21d0"
+            }
+          ]
+        },
+        {
+          "resolution": "Memory owns Surface/source backing and physical allocation; Draw owns immutable graphics::Texture separately. LogoRenderer observes Surface weakly and holds current device image strongly; snapshot_bound_texture observes a replacement before a draw. Release drops manager image/backing without revoking submitted images. No GPU resource address is used as native identity.",
+          "evidence": [
+            {
+              "path": "src/engine/native_texture_lifetime.hpp",
+              "line": 13,
+              "sha256": "0e6883f0c6ca2457060a61a16daeec4e84a3f7e6e6206e5a0b3d894f0e7485c3"
+            },
+            {
+              "path": "src/runtime/logo_renderer.cpp",
+              "line": 171,
+              "sha256": "901b8773c7a913b4f0fcc74893eb3cf89c9fb23de03a6f8541ba8c764f755798"
+            },
+            {
+              "path": "src/runtime/logo_renderer.cpp",
+              "line": 180,
+              "sha256": "901b8773c7a913b4f0fcc74893eb3cf89c9fb23de03a6f8541ba8c764f755798"
+            },
+            {
+              "path": "tests/unit/native_texture_lifetime.cpp",
+              "line": 16,
+              "sha256": "60ceba0e4a35599f14f31080a9cc87f824fb3541c1e269b4980f6ae82628d91b"
+            },
+            {
+              "path": "tests/unit/native_texture_selection_binding.cpp",
+              "line": 1,
+              "sha256": "660fe970483d67b215a63250f52f2a144c53b92c8ba6cd186fdf5415b2dda575"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "LogoRenderer loads actual imported PVM/PVR records, searches/acquires from borrowed pool, skips decode on cached acquisitions, selects through shared texture-selection algorithm, releases logo list, and unbinds for colored polygon submission.",
+          "evidence": [
+            {
+              "path": "src/runtime/logo_renderer.cpp",
+              "line": 91,
+              "sha256": "901b8773c7a913b4f0fcc74893eb3cf89c9fb23de03a6f8541ba8c764f755798"
+            },
+            {
+              "path": "src/runtime/logo_renderer.cpp",
+              "line": 191,
+              "sha256": "901b8773c7a913b4f0fcc74893eb3cf89c9fb23de03a6f8541ba8c764f755798"
+            }
+          ]
+        },
+        {
+          "resolution": "Display performs scene release, scratch clear, guarded and movie list release, and owned ARGB movie acquisition; MovieScene updates the same Memory surface after decoded movie uploads.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_display.cpp",
+              "line": 150,
+              "sha256": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717"
+            },
+            {
+              "path": "src/runtime/native_display.cpp",
+              "line": 313,
+              "sha256": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717"
+            },
+            {
+              "path": "src/runtime/native_display.cpp",
+              "line": 332,
+              "sha256": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717"
+            },
+            {
+              "path": "src/runtime/movie_scene.cpp",
+              "line": 80,
+              "sha256": "c076a0805e7bee29c04a84fd7de71638492817b2647da79d872ff253255726a8"
+            }
+          ]
+        },
+        {
+          "resolution": "Session release wrapper and TitleScene font/menu release callbacks reach Display rather than a separate texture manager.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 107,
+              "sha256": "6c41e5d01e9014be2ef192218eead11a8fb11cc31e95a7dc7fefc34e7f5c98d4"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 476,
+              "sha256": "b79241bae2dd42684e8c03cdd475cca89f301a9705a57ede031baefa0b9b0c62"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 621,
+              "sha256": "b79241bae2dd42684e8c03cdd475cca89f301a9705a57ede031baefa0b9b0c62"
+            }
+          ]
+        },
+        {
+          "resolution": "NativeTextures reads Memory/Entry palette fields and stores revision before unsupported palette upload; uses shared detail algorithm. It borrows current/requested/cache/active owners, does not own another pool.",
+          "evidence": [
+            {
+              "path": "src/engine/texture_selection_native.cpp",
+              "line": 9,
+              "sha256": "1d17d34f1bf3110360686ffad4bc4a66a3fdb9f282d7415bc687b72dd39e04cd"
+            },
+            {
+              "path": "src/engine/texture_selection_internal.hpp",
+              "line": 18,
+              "sha256": "9417bbd4372efdae2958b8a060c77074625aaf18fab3caacfc7a9ee238857389"
+            }
+          ]
+        },
+        {
+          "resolution": "Concrete List consumers beyond direct manager calls: regular_textures mutates imported entries/attributes and temporarily swaps localized filenames, restoring only after successful loader return; menu release clears loaded bit before live language/catalog lookup and release callback. game_cleanup tests first entry binding,not live Surface,for character unload. font forwards borrowed List through load/release callbacks. texture_list_gate checks all bindings plus explicit invalid-filename sentinel. These algorithms remain outside assigned modules and are not certified by this review.",
+          "evidence": [
+            {
+              "path": "src/game/regular_textures.cpp",
+              "line": 14,
+              "sha256": "66ffcb849c16911ba7c678245362f706ac47fc46bd8aef8a1e41532b85eb5553"
+            },
+            {
+              "path": "src/game/regular_textures.cpp",
+              "line": 57,
+              "sha256": "66ffcb849c16911ba7c678245362f706ac47fc46bd8aef8a1e41532b85eb5553"
+            },
+            {
+              "path": "src/game/menu_resource_lifetime.cpp",
+              "line": 5,
+              "sha256": "69716592678f272194c0e5cf4e1bd66587729672b0a5e6937a10d79185d99465"
+            },
+            {
+              "path": "src/game/game_cleanup.cpp",
+              "line": 145,
+              "sha256": "024c23e264893b083234cd4acd187a9f08496a9aae650f21a446740cb8f46b9b"
+            },
+            {
+              "path": "src/engine/font_native.cpp",
+              "line": 4,
+              "sha256": "9c2193ea572134acb88b237133b1180359024f7e4b4da147186349b5b33de55d"
+            },
+            {
+              "path": "src/engine/texture_list_gate.cpp",
+              "line": 5,
+              "sha256": "f066052be94a3c951928a194cb217d3816d06831ecb955575a543f780d4ccfe3"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 40,
+              "sha256": "6c41e5d01e9014be2ef192218eead11a8fb11cc31e95a7dc7fefc34e7f5c98d4"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "judge": "Original texture pool/list lifetime, preparation and empty-record comparison",
+          "evidence": [
+            {
+              "path": "tools/oracles/verify_original_native_texture_lifetime.py",
+              "line": 1,
+              "sha256": "27796356c1545391e564e69eeaaea305c53c59a0a90f6ae123acc15516ad0ac9"
+            },
+            {
+              "path": "tests/probes/native_native_texture_lifetime_probe.cpp",
+              "line": 1,
+              "sha256": "86d48734ec7cf1f6b5ee4d12d3eed1f9aee1b1eb0a12c2085a652a19c5350e99"
+            },
+            {
+              "path": "tests/unit/native_texture_lifetime.cpp",
+              "line": 1,
+              "sha256": "60ceba0e4a35599f14f31080a9cc87f824fb3541c1e269b4980f6ae82628d91b"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 194,
+              "sha256": "be26bf1a641df0e5b887653a87cc5b9de1d0c55b6d8b8dfa0a79c8439458039b"
+            },
+            {
+              "path": "reference/oracle-reports/native_texture_lifetime.json",
+              "line": 1,
+              "sha256": "fb8f904f08562677434361d3f2eac90e8f89c5f0b9ee63ee89f5a47109b9bbc7"
+            }
+          ],
+          "accepted_scope": "Historical tracked report:1416 cases,mismatch_count0, values/order/failure-prefix match. Source hashes for both lifetime files and probe match reviewed bytes. Seven release/search operations, prepared records and eight empty records. Original D3D SetTexture/COM Release/free are receipts; unbind failure stops before external completion. No original image bytes,HRESULT fidelity,physical GPU or wrapped-zero orphan recovery. Unit checks source-backing lifetime, cached ignored inputs, wrapping, immutable submitted frame and failure prefix. No fresh execution. Memory note mentions2816 holdout/six mutants but unavailable old raw capture is not accepted as a tracked current receipt."
+        },
+        {
+          "judge": "Adjacent shared texture-selection evidence, bounded consumer contract",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/texture_selection_core.json",
+              "line": 1,
+              "sha256": "986ac81b426427a23201fac53c8efb1b9d1c153e24f1291a51c18360ea98e81d"
+            },
+            {
+              "path": "reference/production-integration-20261026/texture-selection-core/verification.json",
+              "line": 1,
+              "sha256": "4826b2bcdda8f9bac1d6aeb662b18c287b766901638d664fc0cb8db1b6d94d64"
+            },
+            {
+              "path": "reference/production-integration-20261026/texture-selection-independent-review.md",
+              "line": 1,
+              "sha256": "87af9e99535f5f0cb6cb9e6041ef69dc6e9e7faf36528a7b49376b4bcafda93b"
+            },
+            {
+              "path": "reference/production-integration-20261026/texture-selection-core/source-evidence.json",
+              "line": 1,
+              "sha256": "6905cced6019a3ff38701a79c63349f33cad62fad654b5a58a5c99557e88a4eb"
+            },
+            {
+              "path": "src/guest/texture_selection_reference.cpp",
+              "line": 1,
+              "sha256": "3cd999e216ba0244bc1febdb456a896d7489e0c49ac0d2072166d1522286fa5d"
+            },
+            {
+              "path": "src/engine/texture_selection_internal.hpp",
+              "line": 1,
+              "sha256": "9417bbd4372efdae2958b8a060c77074625aaf18fab3caacfc7a9ee238857389"
+            }
+          ],
+          "accepted_scope": "Historical3669 native prefix cases report0 mismatches; earlier verification records3669 holdout and20 caught compiled mutants across legacy/shared/native selector paths. Callback binding occurs before GBIX then active-memory stores; dirty revision published before explicit palette-lock stop. These are selection receipts, not lifetime/MSG mutants. Reference and native adapters use one shared algorithm, not two recovered cache implementations. Legacy engine DTOs still contain reference availability/address-shaped storage; that surrounding migration remains open."
+        },
+        {
+          "judge": "Existing Main save-owner integration receipt and connected journeys",
+          "evidence": [
+            {
+              "path": "reference/production-integration-20261101/canonical-save-owner-gate.json",
+              "line": 1,
+              "sha256": "aa16e6213e423ec3505ec4e0e64136eed128f4a67b88580aaee4e57476044c35"
+            },
+            {
+              "path": "docs/STATUS.md",
+              "line": 7,
+              "sha256": "01145050f63b55a779bb3a40e0b9b34635ecb43351c0fbda0bc08d63da94b47c"
+            },
+            {
+              "path": "tools/journey/check_native_file_select.py",
+              "line": 1,
+              "sha256": "a7f1a4e09bfb2aeb38ee8941ec207c5f76b8bee28e8b0f930fae249ca1582896"
+            },
+            {
+              "path": "tools/journey/check_native_main_menu.py",
+              "line": 1,
+              "sha256": "e3628e8a039c7ef623f48b38d6bd63d6f43bc419ed8f916b93ffbd67f7f8e8f1"
+            },
+            {
+              "path": "tools/journey/check_native_fresh_save.py",
+              "line": 1,
+              "sha256": "76ecc58997331de9b8123bfd3b20347331bccf8736214eb6cec946763218ff05"
+            }
+          ],
+          "accepted_scope": "Real recorded exit0:280 native programs,431 Python tests,inherited filesystem skip,smoke120,R1-R4,three native menu/save journeys(1850/1850/6050 frames) and16 startup comparisons. Those exercise current menu texture composition; no full palette-registration, arbitrary resource reacquisition or complete texture-system proof. STATUS retains80 partial,10 fail,13 missing oracle inventory; unrelated inherited failures and FP channels are not upgraded by this gate."
+        }
+      ],
+      "destination": "src/engine/ninja/texture:retain readable native bodies;palette identity context/migration carried across lifetime,palette,MSG and selection owners/adapters before whole-system closure",
+      "findings": [
+        {
+          "id": "palette-identity-contract-unresolved",
+          "severity": "classification_blocker",
+          "finding": "Entry.bank/select_bank(int32)/upload_banks and Memory.bank use untyped32-bit keys. Pinned loader supplies NJS_TEXPALETTE* to original selector, and SDK describes buffer as palette-descriptor pointers. Current production state is initialized empty; no native populated registration assigns or interprets the key. Existing equality tests also pass for raw pointer words. Therefore semantic resource-identity conformity of these owner/interface files is not established. This is evidence uncertainty,not a proven runtime regression or a number-magnitude address allegation.",
+          "evidence": [
+            {
+              "path": ".gitmodules",
+              "line": 1,
+              "sha256": "492a7488d49b91e247598f85c2204de38dd8255d010423de2aaf22b7f5719429",
+              "note": "Tracked parent boundary for inspected pinned SDK/loader source. Descendants below are external, not inventory denominator paths.",
+              "external_details": {
+                "kind": "git_submodule",
+                "parent_path": "reference/sadx-mod-loader",
+                "pinned_gitlink": "eb4cdcca9637d611a98b910fcfed6ce18580451c",
+                "files": [
+                  {
+                    "path": "reference/sadx-mod-loader/SADXModLoader/include/ninja.h",
+                    "line": 1035,
+                    "sha256": "9d8a5bea4427cfd7fbbb2c5a0eeaac66ae1977bf385d3f5db474f4ab833a8a49"
+                  },
+                  {
+                    "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+                    "line": 136,
+                    "sha256": "590026179539651768b21cc00d7527fab2d74d0635ea7ee2475b133d9f5c4d37"
+                  },
+                  {
+                    "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXVariables.h",
+                    "line": 2589,
+                    "sha256": "a18ab56e9273928765428b9a99ac672266ba59e5f175b9ee43ca9c81723b0c81"
+                  },
+                  {
+                    "path": "reference/sadx-mod-loader/SADXModLoader/TextureReplacement.cpp",
+                    "line": 1167,
+                    "sha256": "8339e6e9de157596706aac86b5823bfb02be1e68a72ff32ba9279e637c0f7db0"
+                  }
+                ],
+                "interpretation": "SDK NJS_TEXMEMLIST has opaque bank Uint32, while stSetPaletteBank argument and upload buffer are NJS_TEXPALETTE*. Actual pinned loader calls stSetPaletteBank(texpalette_buffer[i]). Native int32 bank/keys may preserve descriptor pointer identity, but no native populated palette registration/mapping is found. Numeric-only oracle key equality cannot distinguish that from logical numeric bank. Do not infer addresses from magnitude. SDK GlobalPalettes array512 is not authoritative layout: existing instruction judge supports128 stride16 entries."
+              }
+            },
+            {
+              "path": "tools/oracles/verify_original_palette.py",
+              "line": 24,
+              "sha256": "81402d0eaf28e737c859dbaa10535af1d501e158ce307585fcf3df78005584a2"
+            },
+            {
+              "path": "src/engine/texture_selection_native.cpp",
+              "line": 24,
+              "sha256": "1d17d34f1bf3110360686ffad4bc4a66a3fdb9f282d7415bc687b72dd39e04cd"
+            },
+            {
+              "path": "src/engine/native_texture_palette.hpp",
+              "line": 7,
+              "sha256": "7bb4a4d1081a3a4e8c0c77e3283ff613e40384e97f6c4c72aed774894cd7f6b8"
+            }
+          ],
+          "required_resolution": "Recover/inspect existing source palette registration and its identity relation to memory.bank; either justify a documented native logical ID mapping or migrate to a typed stable palette resource identity with sentinel semantics. Keep raw descriptor pointer words in reference adapters. Carry all owners,select_bank,MSG and selector consumers together under unchanged existing judges; no speculative palette implementation needed."
+        },
+        {
+          "finding": "Related recovered initializer exists in two representations: nj_init_texture_77f610 writes per-field source defaults through SourceBytes and clears legacy selection/scratch; native Display constructs2048 Memory records with header defaults and its own selected/scratch defaults. These are separate native/reference world instances,but recovered initialization behavior has not been unified into one typed shared initializer. Do not classify that original initialization loop as pure marshalling or claim whole owner/system sharing from the release-module conformance. Assigned lifetime header remains open; surrounding engine/ninja_texture_pool and runtime composition require separate migration review.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_texture_pool.cpp",
+              "line": 3,
+              "sha256": "e42829b715d9a0f0ec5dbe4fe8749a79e3e6895e5619fd8ae350925b3bbdb6eb"
+            },
+            {
+              "path": "src/engine/ninja_texture_pool.hpp",
+              "line": 12,
+              "sha256": "848a03a5fc9c9e19643af926d740117a01ce57e3a043bd4ef1826af57b8a8653"
+            },
+            {
+              "path": "src/engine/native_texture_lifetime.hpp",
+              "line": 24,
+              "sha256": "0e6883f0c6ca2457060a61a16daeec4e84a3f7e6e6206e5a0b3d894f0e7485c3"
+            },
+            {
+              "path": "src/runtime/native_display.hpp",
+              "line": 145,
+              "sha256": "89cfa670a597de4388cabbfd41412008006031c096b2b63e7772e86ea9122954"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "line": 1476,
+              "sha256": "9ffe1944dad7c6c7d951d23d27e6dccbe98a0b9e5c39a241eced9a05808ecb19"
+            }
+          ],
+          "required_resolution": "Review shared semantic initialization plus reference ordered-store adapter under unchanged pool/system/lifetime judges before certifying complete system;preserve bounds and partial stores. No source relocation alone."
+        }
+      ],
+      "classification_limits": [
+        "Named-file semantic inventory only at reviewed bytes. Full renderer,Session,game/resource lifecycle and complete-refactor campaign remain open. Nothing executed except read-only local inspection and authored-fragment/branch/commit operations. No source/tool/judge edits,builds,tests,oracles,gates,mutations,providers,network,storage/campaign operations or delegates.",
+        "Optional TSP/texture parameters/palette_version reflect three genuinely uninitialized original stack fields, as explicitly documented in original Source.prepare and compared by definedness. They do not mean fixture missing input. Null Surface/physical allocation/current colors and absent filenames are real resource/game absence. No zero value invented for undefined source bits. Indexed read of undefined revision fails explicitly in NativeTextures, so arbitrary indexed palette support is not certified.",
+        "Existing lifetime report pins current lifetime bytes; other small reports generally omit implementation fingerprints. Read-only review creates no fresh verdict. No tracked current lifetime holdout/mutant receipt resolved; memory claims and absent reference/inventory-raw directory are navigation only, not accepted current evidence.",
+        "Pool/list borrows require stable pool and list storage. Current Display fixes2048 slots. Arbitrary callback reentry that resizes vectors, destroys owners or reacquires a zero-count slot during release is not qualified. Release callback failure leaves decremented reference/published prefix; no rollback is invented. zero-count orphan allocation after uint16 wrap explicitly throws; it is not recovered source behavior.",
+        "Integer GBIX is content global ID,not VA. Type151126016/151388160,pixel format268435456/939524096,masks/shifts,stride16 and color nibble expansion are layout/format encodings,not dispatch addresses. Source pointers in probes stay at reference boundary; no EXE read or register transport occurs in assigned implementation bodies.",
+        "No original pixel/GPU upload comparison,HRESULT failure equivalence,concurrent upload safety,all PVR/GVR formats or full palette mutation/registration is claimed. Existing Metal unit is narrow native readback evidence; no new hardware qualification. Global prior FP partial/fail identities remain unchanged and unexecuted here."
+      ]
+    },
+    "src/engine/native_texture_lifetime.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Readable shared native pool acquisition/release bodies; no file-local migration required within the explicitly bounded native closure.",
+      "reviewed_source_sha256": "a3b34ab7ea588b2a470b24c9dd6d73b5a27515204c36445681209e5788aa7fdc",
+      "semantic_justification": "Complete174-line body reviewed. prepare_pvr accepts only recovered16-bit formats/data formats; descriptors retain source integer width and unsigned width*height*2/4 order. Search matches GBIX before first zero-count slot,including cached zero records; acquisition increments uint16 modulo65536 and preserves existing metadata/backing on cached hits. Zero-count live orphan and missing uploaded image fail explicitly. update_surface replaces immutable image without Memory identity change. release_low unbind callback precedes cache=-1/active=null,then releases surface,then physical data. release_reference decrements first and resets fields only after successful low release. release_list clears current-list before possible callback,then releases borrowed slots; wrapper preflights null entries/filename sentinel before release. release_all decrements once,does not force destruction. Scratch clear follows release,scene queue mode2 precedes registered-count0. Callback exceptions preserve these partial stores. No game executable transport,guess,emulator arithmetic or duplicated recovered release implementation was found in inspected call chains. Palette bank reset=-1 does not resolve the owner-header identity question.",
+      "evidence": [
+        {
+          "path": "src/engine/native_texture_lifetime.cpp",
+          "line": 1,
+          "sha256": "a3b34ab7ea588b2a470b24c9dd6d73b5a27515204c36445681209e5788aa7fdc",
+          "note": "Complete body read through line 174"
+        },
+        {
+          "path": ".gitmodules",
+          "line": 1,
+          "sha256": "492a7488d49b91e247598f85c2204de38dd8255d010423de2aaf22b7f5719429",
+          "note": "Tracked parent boundary for inspected pinned SDK/loader source. Descendants below are external, not inventory denominator paths.",
+          "external_details": {
+            "kind": "git_submodule",
+            "parent_path": "reference/sadx-mod-loader",
+            "pinned_gitlink": "eb4cdcca9637d611a98b910fcfed6ce18580451c",
+            "files": [
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/include/ninja.h",
+                "line": 1035,
+                "sha256": "9d8a5bea4427cfd7fbbb2c5a0eeaac66ae1977bf385d3f5db474f4ab833a8a49"
+              },
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+                "line": 136,
+                "sha256": "590026179539651768b21cc00d7527fab2d74d0635ea7ee2475b133d9f5c4d37"
+              },
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXVariables.h",
+                "line": 2589,
+                "sha256": "a18ab56e9273928765428b9a99ac672266ba59e5f175b9ee43ca9c81723b0c81"
+              },
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/TextureReplacement.cpp",
+                "line": 1167,
+                "sha256": "8339e6e9de157596706aac86b5823bfb02be1e68a72ff32ba9279e637c0f7db0"
+              }
+            ],
+            "interpretation": "SDK NJS_TEXMEMLIST has opaque bank Uint32, while stSetPaletteBank argument and upload buffer are NJS_TEXPALETTE*. Actual pinned loader calls stSetPaletteBank(texpalette_buffer[i]). Native int32 bank/keys may preserve descriptor pointer identity, but no native populated palette registration/mapping is found. Numeric-only oracle key equality cannot distinguish that from logical numeric bank. Do not infer addresses from magnitude. SDK GlobalPalettes array512 is not authoritative layout: existing instruction judge supports128 stride16 entries."
+          }
+        },
+        {
+          "path": "reference/production-integration-20261026/texture-selection-core/source-evidence.json",
+          "line": 1,
+          "sha256": "6905cced6019a3ff38701a79c63349f33cad62fad654b5a58a5c99557e88a4eb"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "Display owns one fixed 2048-slot native pool, cache GBIX, active/requested Memory borrows, selected list and eight scratch words. texture_state()/texture_selection_state() borrow these exact fields; no copy or second native pool. Pool is never resized by inspected operations. Pointer stability depends on retaining that fixed extent. Native/ref worlds are separate instances, not duplicate owners of one live world.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_display.hpp",
+              "line": 138,
+              "sha256": "89cfa670a597de4388cabbfd41412008006031c096b2b63e7772e86ea9122954"
+            },
+            {
+              "path": "src/runtime/native_display.cpp",
+              "line": 318,
+              "sha256": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717"
+            },
+            {
+              "path": "src/runtime/native_display.cpp",
+              "line": 322,
+              "sha256": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717"
+            }
+          ]
+        },
+        {
+          "resolution": "Session owns regular/menu/character/font List objects and forwards release to Display. List entries borrow Memory slots; release retains entry pointers even after slot reset. MovieScene owns its own List and calls the low list release via Display. LogoRenderer borrows Display pool/state and owns its logo list plus non-owning resident-slot associations. List filename shared_ptrs are real imported metadata absence; first_filename_invalid is an explicit source filename sentinel observation, not an executable address identity.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 241,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 248,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/runtime/native_session.hpp",
+              "line": 254,
+              "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 107,
+              "sha256": "6c41e5d01e9014be2ef192218eead11a8fb11cc31e95a7dc7fefc34e7f5c98d4"
+            },
+            {
+              "path": "src/runtime/movie_scene.cpp",
+              "line": 98,
+              "sha256": "c076a0805e7bee29c04a84fd7de71638492817b2647da79d872ff253255726a8"
+            },
+            {
+              "path": "src/runtime/logo_renderer.hpp",
+              "line": 61,
+              "sha256": "60b271dc536b86489edeaaf4b2ceee422f44d68fdd267d6a3114c01cdcad21d0"
+            }
+          ]
+        },
+        {
+          "resolution": "Memory owns Surface/source backing and physical allocation; Draw owns immutable graphics::Texture separately. LogoRenderer observes Surface weakly and holds current device image strongly; snapshot_bound_texture observes a replacement before a draw. Release drops manager image/backing without revoking submitted images. No GPU resource address is used as native identity.",
+          "evidence": [
+            {
+              "path": "src/engine/native_texture_lifetime.hpp",
+              "line": 13,
+              "sha256": "0e6883f0c6ca2457060a61a16daeec4e84a3f7e6e6206e5a0b3d894f0e7485c3"
+            },
+            {
+              "path": "src/runtime/logo_renderer.cpp",
+              "line": 171,
+              "sha256": "901b8773c7a913b4f0fcc74893eb3cf89c9fb23de03a6f8541ba8c764f755798"
+            },
+            {
+              "path": "src/runtime/logo_renderer.cpp",
+              "line": 180,
+              "sha256": "901b8773c7a913b4f0fcc74893eb3cf89c9fb23de03a6f8541ba8c764f755798"
+            },
+            {
+              "path": "tests/unit/native_texture_lifetime.cpp",
+              "line": 16,
+              "sha256": "60ceba0e4a35599f14f31080a9cc87f824fb3541c1e269b4980f6ae82628d91b"
+            },
+            {
+              "path": "tests/unit/native_texture_selection_binding.cpp",
+              "line": 1,
+              "sha256": "660fe970483d67b215a63250f52f2a144c53b92c8ba6cd186fdf5415b2dda575"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "LogoRenderer loads actual imported PVM/PVR records, searches/acquires from borrowed pool, skips decode on cached acquisitions, selects through shared texture-selection algorithm, releases logo list, and unbinds for colored polygon submission.",
+          "evidence": [
+            {
+              "path": "src/runtime/logo_renderer.cpp",
+              "line": 91,
+              "sha256": "901b8773c7a913b4f0fcc74893eb3cf89c9fb23de03a6f8541ba8c764f755798"
+            },
+            {
+              "path": "src/runtime/logo_renderer.cpp",
+              "line": 191,
+              "sha256": "901b8773c7a913b4f0fcc74893eb3cf89c9fb23de03a6f8541ba8c764f755798"
+            }
+          ]
+        },
+        {
+          "resolution": "Display performs scene release, scratch clear, guarded and movie list release, and owned ARGB movie acquisition; MovieScene updates the same Memory surface after decoded movie uploads.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_display.cpp",
+              "line": 150,
+              "sha256": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717"
+            },
+            {
+              "path": "src/runtime/native_display.cpp",
+              "line": 313,
+              "sha256": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717"
+            },
+            {
+              "path": "src/runtime/native_display.cpp",
+              "line": 332,
+              "sha256": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717"
+            },
+            {
+              "path": "src/runtime/movie_scene.cpp",
+              "line": 80,
+              "sha256": "c076a0805e7bee29c04a84fd7de71638492817b2647da79d872ff253255726a8"
+            }
+          ]
+        },
+        {
+          "resolution": "Session release wrapper and TitleScene font/menu release callbacks reach Display rather than a separate texture manager.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 107,
+              "sha256": "6c41e5d01e9014be2ef192218eead11a8fb11cc31e95a7dc7fefc34e7f5c98d4"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 476,
+              "sha256": "b79241bae2dd42684e8c03cdd475cca89f301a9705a57ede031baefa0b9b0c62"
+            },
+            {
+              "path": "src/runtime/native_title_tasks.cpp",
+              "line": 621,
+              "sha256": "b79241bae2dd42684e8c03cdd475cca89f301a9705a57ede031baefa0b9b0c62"
+            }
+          ]
+        },
+        {
+          "resolution": "NativeTextures reads Memory/Entry palette fields and stores revision before unsupported palette upload; uses shared detail algorithm. It borrows current/requested/cache/active owners, does not own another pool.",
+          "evidence": [
+            {
+              "path": "src/engine/texture_selection_native.cpp",
+              "line": 9,
+              "sha256": "1d17d34f1bf3110360686ffad4bc4a66a3fdb9f282d7415bc687b72dd39e04cd"
+            },
+            {
+              "path": "src/engine/texture_selection_internal.hpp",
+              "line": 18,
+              "sha256": "9417bbd4372efdae2958b8a060c77074625aaf18fab3caacfc7a9ee238857389"
+            }
+          ]
+        },
+        {
+          "resolution": "Concrete List consumers beyond direct manager calls: regular_textures mutates imported entries/attributes and temporarily swaps localized filenames, restoring only after successful loader return; menu release clears loaded bit before live language/catalog lookup and release callback. game_cleanup tests first entry binding,not live Surface,for character unload. font forwards borrowed List through load/release callbacks. texture_list_gate checks all bindings plus explicit invalid-filename sentinel. These algorithms remain outside assigned modules and are not certified by this review.",
+          "evidence": [
+            {
+              "path": "src/game/regular_textures.cpp",
+              "line": 14,
+              "sha256": "66ffcb849c16911ba7c678245362f706ac47fc46bd8aef8a1e41532b85eb5553"
+            },
+            {
+              "path": "src/game/regular_textures.cpp",
+              "line": 57,
+              "sha256": "66ffcb849c16911ba7c678245362f706ac47fc46bd8aef8a1e41532b85eb5553"
+            },
+            {
+              "path": "src/game/menu_resource_lifetime.cpp",
+              "line": 5,
+              "sha256": "69716592678f272194c0e5cf4e1bd66587729672b0a5e6937a10d79185d99465"
+            },
+            {
+              "path": "src/game/game_cleanup.cpp",
+              "line": 145,
+              "sha256": "024c23e264893b083234cd4acd187a9f08496a9aae650f21a446740cb8f46b9b"
+            },
+            {
+              "path": "src/engine/font_native.cpp",
+              "line": 4,
+              "sha256": "9c2193ea572134acb88b237133b1180359024f7e4b4da147186349b5b33de55d"
+            },
+            {
+              "path": "src/engine/texture_list_gate.cpp",
+              "line": 5,
+              "sha256": "f066052be94a3c951928a194cb217d3816d06831ecb955575a543f780d4ccfe3"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "line": 40,
+              "sha256": "6c41e5d01e9014be2ef192218eead11a8fb11cc31e95a7dc7fefc34e7f5c98d4"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "judge": "Original texture pool/list lifetime, preparation and empty-record comparison",
+          "evidence": [
+            {
+              "path": "tools/oracles/verify_original_native_texture_lifetime.py",
+              "line": 1,
+              "sha256": "27796356c1545391e564e69eeaaea305c53c59a0a90f6ae123acc15516ad0ac9"
+            },
+            {
+              "path": "tests/probes/native_native_texture_lifetime_probe.cpp",
+              "line": 1,
+              "sha256": "86d48734ec7cf1f6b5ee4d12d3eed1f9aee1b1eb0a12c2085a652a19c5350e99"
+            },
+            {
+              "path": "tests/unit/native_texture_lifetime.cpp",
+              "line": 1,
+              "sha256": "60ceba0e4a35599f14f31080a9cc87f824fb3541c1e269b4980f6ae82628d91b"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 194,
+              "sha256": "be26bf1a641df0e5b887653a87cc5b9de1d0c55b6d8b8dfa0a79c8439458039b"
+            },
+            {
+              "path": "reference/oracle-reports/native_texture_lifetime.json",
+              "line": 1,
+              "sha256": "fb8f904f08562677434361d3f2eac90e8f89c5f0b9ee63ee89f5a47109b9bbc7"
+            }
+          ],
+          "accepted_scope": "Historical tracked report:1416 cases,mismatch_count0, values/order/failure-prefix match. Source hashes for both lifetime files and probe match reviewed bytes. Seven release/search operations, prepared records and eight empty records. Original D3D SetTexture/COM Release/free are receipts; unbind failure stops before external completion. No original image bytes,HRESULT fidelity,physical GPU or wrapped-zero orphan recovery. Unit checks source-backing lifetime, cached ignored inputs, wrapping, immutable submitted frame and failure prefix. No fresh execution. Memory note mentions2816 holdout/six mutants but unavailable old raw capture is not accepted as a tracked current receipt."
+        },
+        {
+          "judge": "Adjacent shared texture-selection evidence, bounded consumer contract",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/texture_selection_core.json",
+              "line": 1,
+              "sha256": "986ac81b426427a23201fac53c8efb1b9d1c153e24f1291a51c18360ea98e81d"
+            },
+            {
+              "path": "reference/production-integration-20261026/texture-selection-core/verification.json",
+              "line": 1,
+              "sha256": "4826b2bcdda8f9bac1d6aeb662b18c287b766901638d664fc0cb8db1b6d94d64"
+            },
+            {
+              "path": "reference/production-integration-20261026/texture-selection-independent-review.md",
+              "line": 1,
+              "sha256": "87af9e99535f5f0cb6cb9e6041ef69dc6e9e7faf36528a7b49376b4bcafda93b"
+            },
+            {
+              "path": "reference/production-integration-20261026/texture-selection-core/source-evidence.json",
+              "line": 1,
+              "sha256": "6905cced6019a3ff38701a79c63349f33cad62fad654b5a58a5c99557e88a4eb"
+            },
+            {
+              "path": "src/guest/texture_selection_reference.cpp",
+              "line": 1,
+              "sha256": "3cd999e216ba0244bc1febdb456a896d7489e0c49ac0d2072166d1522286fa5d"
+            },
+            {
+              "path": "src/engine/texture_selection_internal.hpp",
+              "line": 1,
+              "sha256": "9417bbd4372efdae2958b8a060c77074625aaf18fab3caacfc7a9ee238857389"
+            }
+          ],
+          "accepted_scope": "Historical3669 native prefix cases report0 mismatches; earlier verification records3669 holdout and20 caught compiled mutants across legacy/shared/native selector paths. Callback binding occurs before GBIX then active-memory stores; dirty revision published before explicit palette-lock stop. These are selection receipts, not lifetime/MSG mutants. Reference and native adapters use one shared algorithm, not two recovered cache implementations. Legacy engine DTOs still contain reference availability/address-shaped storage; that surrounding migration remains open."
+        },
+        {
+          "judge": "Existing Main save-owner integration receipt and connected journeys",
+          "evidence": [
+            {
+              "path": "reference/production-integration-20261101/canonical-save-owner-gate.json",
+              "line": 1,
+              "sha256": "aa16e6213e423ec3505ec4e0e64136eed128f4a67b88580aaee4e57476044c35"
+            },
+            {
+              "path": "docs/STATUS.md",
+              "line": 7,
+              "sha256": "01145050f63b55a779bb3a40e0b9b34635ecb43351c0fbda0bc08d63da94b47c"
+            },
+            {
+              "path": "tools/journey/check_native_file_select.py",
+              "line": 1,
+              "sha256": "a7f1a4e09bfb2aeb38ee8941ec207c5f76b8bee28e8b0f930fae249ca1582896"
+            },
+            {
+              "path": "tools/journey/check_native_main_menu.py",
+              "line": 1,
+              "sha256": "e3628e8a039c7ef623f48b38d6bd63d6f43bc419ed8f916b93ffbd67f7f8e8f1"
+            },
+            {
+              "path": "tools/journey/check_native_fresh_save.py",
+              "line": 1,
+              "sha256": "76ecc58997331de9b8123bfd3b20347331bccf8736214eb6cec946763218ff05"
+            }
+          ],
+          "accepted_scope": "Real recorded exit0:280 native programs,431 Python tests,inherited filesystem skip,smoke120,R1-R4,three native menu/save journeys(1850/1850/6050 frames) and16 startup comparisons. Those exercise current menu texture composition; no full palette-registration, arbitrary resource reacquisition or complete texture-system proof. STATUS retains80 partial,10 fail,13 missing oracle inventory; unrelated inherited failures and FP channels are not upgraded by this gate."
+        }
+      ],
+      "destination": "src/engine/ninja/texture:retain readable native bodies;palette identity context/migration carried across lifetime,palette,MSG and selection owners/adapters before whole-system closure",
+      "findings": [],
+      "classification_limits": [
+        "Named-file semantic inventory only at reviewed bytes. Full renderer,Session,game/resource lifecycle and complete-refactor campaign remain open. Nothing executed except read-only local inspection and authored-fragment/branch/commit operations. No source/tool/judge edits,builds,tests,oracles,gates,mutations,providers,network,storage/campaign operations or delegates.",
+        "Optional TSP/texture parameters/palette_version reflect three genuinely uninitialized original stack fields, as explicitly documented in original Source.prepare and compared by definedness. They do not mean fixture missing input. Null Surface/physical allocation/current colors and absent filenames are real resource/game absence. No zero value invented for undefined source bits. Indexed read of undefined revision fails explicitly in NativeTextures, so arbitrary indexed palette support is not certified.",
+        "Existing lifetime report pins current lifetime bytes; other small reports generally omit implementation fingerprints. Read-only review creates no fresh verdict. No tracked current lifetime holdout/mutant receipt resolved; memory claims and absent reference/inventory-raw directory are navigation only, not accepted current evidence.",
+        "Pool/list borrows require stable pool and list storage. Current Display fixes2048 slots. Arbitrary callback reentry that resizes vectors, destroys owners or reacquires a zero-count slot during release is not qualified. Release callback failure leaves decremented reference/published prefix; no rollback is invented. zero-count orphan allocation after uint16 wrap explicitly throws; it is not recovered source behavior.",
+        "Integer GBIX is content global ID,not VA. Type151126016/151388160,pixel format268435456/939524096,masks/shifts,stride16 and color nibble expansion are layout/format encodings,not dispatch addresses. Source pointers in probes stay at reference boundary; no EXE read or register transport occurs in assigned implementation bodies.",
+        "No original pixel/GPU upload comparison,HRESULT failure equivalence,concurrent upload safety,all PVR/GVR formats or full palette mutation/registration is claimed. Existing Metal unit is narrow native readback evidence; no new hardware qualification. Global prior FP partial/fail identities remain unchanged and unexecuted here."
+      ]
+    },
+    "src/engine/native_texture_palette.hpp": {
+      "disposition": "open_review",
+      "reason": "Canonical palette ownership is resolved,but nonempty palette key identity is not.",
+      "reviewed_source_sha256": "7bb4a4d1081a3a4e8c0c77e3283ff613e40384e97f6c4c72aed774894cd7f6b8",
+      "semantic_justification": "Complete26-line header reviewed. State is one table128,upload entries255,current immutable color owner; version16-bit and slot ordinal are distinct from descriptor key. Source annotations describe exact byte extents. Missing colors are genuine absence,not unavailable fixture facts. API names bank with signed32 key while external source contract passes palette descriptor identity; cannot certify that key as a logical native resource ID from empty initialization and synthetic first-match judges alone.",
+      "evidence": [
+        {
+          "path": "src/engine/native_texture_palette.hpp",
+          "line": 1,
+          "sha256": "7bb4a4d1081a3a4e8c0c77e3283ff613e40384e97f6c4c72aed774894cd7f6b8",
+          "note": "Complete body read through line 26"
+        },
+        {
+          "path": ".gitmodules",
+          "line": 1,
+          "sha256": "492a7488d49b91e247598f85c2204de38dd8255d010423de2aaf22b7f5719429",
+          "note": "Tracked parent boundary for inspected pinned SDK/loader source. Descendants below are external, not inventory denominator paths.",
+          "external_details": {
+            "kind": "git_submodule",
+            "parent_path": "reference/sadx-mod-loader",
+            "pinned_gitlink": "eb4cdcca9637d611a98b910fcfed6ce18580451c",
+            "files": [
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/include/ninja.h",
+                "line": 1035,
+                "sha256": "9d8a5bea4427cfd7fbbb2c5a0eeaac66ae1977bf385d3f5db474f4ab833a8a49"
+              },
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+                "line": 136,
+                "sha256": "590026179539651768b21cc00d7527fab2d74d0635ea7ee2475b133d9f5c4d37"
+              },
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXVariables.h",
+                "line": 2589,
+                "sha256": "a18ab56e9273928765428b9a99ac672266ba59e5f175b9ee43ca9c81723b0c81"
+              },
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/TextureReplacement.cpp",
+                "line": 1167,
+                "sha256": "8339e6e9de157596706aac86b5823bfb02be1e68a72ff32ba9279e637c0f7db0"
+              }
+            ],
+            "interpretation": "SDK NJS_TEXMEMLIST has opaque bank Uint32, while stSetPaletteBank argument and upload buffer are NJS_TEXPALETTE*. Actual pinned loader calls stSetPaletteBank(texpalette_buffer[i]). Native int32 bank/keys may preserve descriptor pointer identity, but no native populated palette registration/mapping is found. Numeric-only oracle key equality cannot distinguish that from logical numeric bank. Do not infer addresses from magnitude. SDK GlobalPalettes array512 is not authoritative layout: existing instruction judge supports128 stride16 entries."
+          }
+        },
+        {
+          "path": "reference/production-integration-20261026/texture-selection-core/source-evidence.json",
+          "line": 1,
+          "sha256": "6905cced6019a3ff38701a79c63349f33cad62fad654b5a58a5c99557e88a4eb"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "Display has one native texture_palette::State. Its 128 Entry records own immutable 256-color arrays; current_colors retains a selected array, not another table. Message load/reload and native texture selection borrow that same State. Native production code inspected only initializes bank=-1/slot=index/null colors, zero upload keys and versions; it does not populate registered indexed palettes. The corresponding nonempty identity mapping is unresolved, not invented as supported.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_display.hpp",
+              "line": 170,
+              "sha256": "89cfa670a597de4388cabbfd41412008006031c096b2b63e7772e86ea9122954"
+            },
+            {
+              "path": "src/engine/native_texture_palette.hpp",
+              "line": 7,
+              "sha256": "7bb4a4d1081a3a4e8c0c77e3283ff613e40384e97f6c4c72aed774894cd7f6b8"
+            },
+            {
+              "path": "src/engine/native_texture_palette.cpp",
+              "line": 3,
+              "sha256": "a2d5b34ece4c2602f42fae873830fb32fbf06dd1ea27526a84a156f0ab47a8f2"
+            },
+            {
+              "path": "src/runtime/native_message_display.cpp",
+              "line": 7,
+              "sha256": "316df90f42c68b08fe7f85ffdded40d751dd90530df607deba1fdf18d4943acc"
+            },
+            {
+              "path": "src/engine/texture_selection_native.cpp",
+              "line": 24,
+              "sha256": "1d17d34f1bf3110360686ffad4bc4a66a3fdb9f282d7415bc687b72dd39e04cd"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "message_image::load selects upload_banks[0] before cache/acquisition; reload selects matching Memory.bank before descriptor validation/conversion. This preserves selection side effects on later failure and leaves current_colors unchanged on no matching Memory.",
+          "evidence": [
+            {
+              "path": "src/engine/native_message_texture.cpp",
+              "line": 49,
+              "sha256": "774f7a41d2040dd62a1db97245c00e7308855c4783622b0b6b92873e48e9279a"
+            },
+            {
+              "path": "src/engine/native_message_texture.cpp",
+              "line": 68,
+              "sha256": "774f7a41d2040dd62a1db97245c00e7308855c4783622b0b6b92873e48e9279a"
+            }
+          ]
+        },
+        {
+          "resolution": "NativeTextures compares Entry.bank/version/colors in shared palette prefix. Current/native callers share Display state; native selector publishes revision before reporting unrecovered lock/upload.",
+          "evidence": [
+            {
+              "path": "src/engine/texture_selection_native.cpp",
+              "line": 24,
+              "sha256": "1d17d34f1bf3110360686ffad4bc4a66a3fdb9f282d7415bc687b72dd39e04cd"
+            },
+            {
+              "path": "src/engine/texture_selection_internal.hpp",
+              "line": 18,
+              "sha256": "9417bbd4372efdae2958b8a060c77074625aaf18fab3caacfc7a9ee238857389"
+            }
+          ]
+        },
+        {
+          "resolution": "sadx_palette_probe and sadx_palette_initial_probe are actual executable exports in the message-image probe. Standalone palette judges are explicitly registered in tools/oracles/manifest.tsv, not inferred from include reachability.",
+          "evidence": [
+            {
+              "path": "tests/probes/native_message_image_probe.cpp",
+              "line": 69,
+              "sha256": "990726b2db49d3fe9d712127dc01158bc91d0a382bbf21c9db60895882dfc04e"
+            },
+            {
+              "path": "tests/probes/native_message_image_probe.cpp",
+              "line": 82,
+              "sha256": "990726b2db49d3fe9d712127dc01158bc91d0a382bbf21c9db60895882dfc04e"
+            },
+            {
+              "path": "tools/oracles/manifest.tsv",
+              "line": 33,
+              "sha256": "b9f05bd7db1c88320a1ac0f5e9c471d780ce43135c59b91467d15411c8357eb3"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "judge": "Palette first-match selection and source device initialization",
+          "evidence": [
+            {
+              "path": "tools/oracles/verify_original_palette.py",
+              "line": 1,
+              "sha256": "81402d0eaf28e737c859dbaa10535af1d501e158ce307585fcf3df78005584a2"
+            },
+            {
+              "path": "tools/oracles/verify_original_palette_initial.py",
+              "line": 1,
+              "sha256": "2a9a4775cc6f4f8342b3260b7937b5a8b3bf56775010236d9f0056fdee119afe"
+            },
+            {
+              "path": "tests/probes/native_message_image_probe.cpp",
+              "line": 69,
+              "sha256": "990726b2db49d3fe9d712127dc01158bc91d0a382bbf21c9db60895882dfc04e"
+            },
+            {
+              "path": "tools/oracles/manifest.tsv",
+              "line": 33,
+              "sha256": "b9f05bd7db1c88320a1ac0f5e9c471d780ce43135c59b91467d15411c8357eb3"
+            },
+            {
+              "path": "reference/oracle-reports/palette.json",
+              "line": 1,
+              "sha256": "c501ce759374b7e31c5cab999df96bc09aa743220f1bb4bcd90292d26051caaa"
+            },
+            {
+              "path": "reference/oracle-reports/palette_initial.json",
+              "line": 1,
+              "sha256": "3b84a13c1a9699aa2d53160c24c35ece0805d728d2facb4e23487af034bf6be6"
+            }
+          ],
+          "accepted_scope": "Historical800 first-match/miss/sentinel cases with empty mismatch list; one device-init case compares768 words, no mismatches. Selector initializes128 source records at stride16 and passes candidate key in ECX; initializer executes original78d0d0. This overrides SDK inaccurate512 pointer-array display but does not resolve whether nonempty native bank values are descriptor identities or actual numeric bank fields. No registered palette mutation/upload, native resource identity mapping, GPU color parity or fresh verdict."
+        },
+        {
+          "judge": "Adjacent shared texture-selection evidence, bounded consumer contract",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/texture_selection_core.json",
+              "line": 1,
+              "sha256": "986ac81b426427a23201fac53c8efb1b9d1c153e24f1291a51c18360ea98e81d"
+            },
+            {
+              "path": "reference/production-integration-20261026/texture-selection-core/verification.json",
+              "line": 1,
+              "sha256": "4826b2bcdda8f9bac1d6aeb662b18c287b766901638d664fc0cb8db1b6d94d64"
+            },
+            {
+              "path": "reference/production-integration-20261026/texture-selection-independent-review.md",
+              "line": 1,
+              "sha256": "87af9e99535f5f0cb6cb9e6041ef69dc6e9e7faf36528a7b49376b4bcafda93b"
+            },
+            {
+              "path": "reference/production-integration-20261026/texture-selection-core/source-evidence.json",
+              "line": 1,
+              "sha256": "6905cced6019a3ff38701a79c63349f33cad62fad654b5a58a5c99557e88a4eb"
+            },
+            {
+              "path": "src/guest/texture_selection_reference.cpp",
+              "line": 1,
+              "sha256": "3cd999e216ba0244bc1febdb456a896d7489e0c49ac0d2072166d1522286fa5d"
+            },
+            {
+              "path": "src/engine/texture_selection_internal.hpp",
+              "line": 1,
+              "sha256": "9417bbd4372efdae2958b8a060c77074625aaf18fab3caacfc7a9ee238857389"
+            }
+          ],
+          "accepted_scope": "Historical3669 native prefix cases report0 mismatches; earlier verification records3669 holdout and20 caught compiled mutants across legacy/shared/native selector paths. Callback binding occurs before GBIX then active-memory stores; dirty revision published before explicit palette-lock stop. These are selection receipts, not lifetime/MSG mutants. Reference and native adapters use one shared algorithm, not two recovered cache implementations. Legacy engine DTOs still contain reference availability/address-shaped storage; that surrounding migration remains open."
+        },
+        {
+          "judge": "Existing Main save-owner integration receipt and connected journeys",
+          "evidence": [
+            {
+              "path": "reference/production-integration-20261101/canonical-save-owner-gate.json",
+              "line": 1,
+              "sha256": "aa16e6213e423ec3505ec4e0e64136eed128f4a67b88580aaee4e57476044c35"
+            },
+            {
+              "path": "docs/STATUS.md",
+              "line": 7,
+              "sha256": "01145050f63b55a779bb3a40e0b9b34635ecb43351c0fbda0bc08d63da94b47c"
+            },
+            {
+              "path": "tools/journey/check_native_file_select.py",
+              "line": 1,
+              "sha256": "a7f1a4e09bfb2aeb38ee8941ec207c5f76b8bee28e8b0f930fae249ca1582896"
+            },
+            {
+              "path": "tools/journey/check_native_main_menu.py",
+              "line": 1,
+              "sha256": "e3628e8a039c7ef623f48b38d6bd63d6f43bc419ed8f916b93ffbd67f7f8e8f1"
+            },
+            {
+              "path": "tools/journey/check_native_fresh_save.py",
+              "line": 1,
+              "sha256": "76ecc58997331de9b8123bfd3b20347331bccf8736214eb6cec946763218ff05"
+            }
+          ],
+          "accepted_scope": "Real recorded exit0:280 native programs,431 Python tests,inherited filesystem skip,smoke120,R1-R4,three native menu/save journeys(1850/1850/6050 frames) and16 startup comparisons. Those exercise current menu texture composition; no full palette-registration, arbitrary resource reacquisition or complete texture-system proof. STATUS retains80 partial,10 fail,13 missing oracle inventory; unrelated inherited failures and FP channels are not upgraded by this gate."
+        }
+      ],
+      "destination": "src/engine/ninja/texture:retain readable native bodies;palette identity context/migration carried across lifetime,palette,MSG and selection owners/adapters before whole-system closure",
+      "findings": [
+        {
+          "id": "palette-identity-contract-unresolved",
+          "severity": "classification_blocker",
+          "finding": "Entry.bank/select_bank(int32)/upload_banks and Memory.bank use untyped32-bit keys. Pinned loader supplies NJS_TEXPALETTE* to original selector, and SDK describes buffer as palette-descriptor pointers. Current production state is initialized empty; no native populated registration assigns or interprets the key. Existing equality tests also pass for raw pointer words. Therefore semantic resource-identity conformity of these owner/interface files is not established. This is evidence uncertainty,not a proven runtime regression or a number-magnitude address allegation.",
+          "evidence": [
+            {
+              "path": ".gitmodules",
+              "line": 1,
+              "sha256": "492a7488d49b91e247598f85c2204de38dd8255d010423de2aaf22b7f5719429",
+              "note": "Tracked parent boundary for inspected pinned SDK/loader source. Descendants below are external, not inventory denominator paths.",
+              "external_details": {
+                "kind": "git_submodule",
+                "parent_path": "reference/sadx-mod-loader",
+                "pinned_gitlink": "eb4cdcca9637d611a98b910fcfed6ce18580451c",
+                "files": [
+                  {
+                    "path": "reference/sadx-mod-loader/SADXModLoader/include/ninja.h",
+                    "line": 1035,
+                    "sha256": "9d8a5bea4427cfd7fbbb2c5a0eeaac66ae1977bf385d3f5db474f4ab833a8a49"
+                  },
+                  {
+                    "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+                    "line": 136,
+                    "sha256": "590026179539651768b21cc00d7527fab2d74d0635ea7ee2475b133d9f5c4d37"
+                  },
+                  {
+                    "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXVariables.h",
+                    "line": 2589,
+                    "sha256": "a18ab56e9273928765428b9a99ac672266ba59e5f175b9ee43ca9c81723b0c81"
+                  },
+                  {
+                    "path": "reference/sadx-mod-loader/SADXModLoader/TextureReplacement.cpp",
+                    "line": 1167,
+                    "sha256": "8339e6e9de157596706aac86b5823bfb02be1e68a72ff32ba9279e637c0f7db0"
+                  }
+                ],
+                "interpretation": "SDK NJS_TEXMEMLIST has opaque bank Uint32, while stSetPaletteBank argument and upload buffer are NJS_TEXPALETTE*. Actual pinned loader calls stSetPaletteBank(texpalette_buffer[i]). Native int32 bank/keys may preserve descriptor pointer identity, but no native populated palette registration/mapping is found. Numeric-only oracle key equality cannot distinguish that from logical numeric bank. Do not infer addresses from magnitude. SDK GlobalPalettes array512 is not authoritative layout: existing instruction judge supports128 stride16 entries."
+              }
+            },
+            {
+              "path": "tools/oracles/verify_original_palette.py",
+              "line": 24,
+              "sha256": "81402d0eaf28e737c859dbaa10535af1d501e158ce307585fcf3df78005584a2"
+            },
+            {
+              "path": "src/engine/texture_selection_native.cpp",
+              "line": 24,
+              "sha256": "1d17d34f1bf3110360686ffad4bc4a66a3fdb9f282d7415bc687b72dd39e04cd"
+            },
+            {
+              "path": "src/engine/native_texture_palette.hpp",
+              "line": 7,
+              "sha256": "7bb4a4d1081a3a4e8c0c77e3283ff613e40384e97f6c4c72aed774894cd7f6b8"
+            }
+          ],
+          "required_resolution": "Recover/inspect existing source palette registration and its identity relation to memory.bank; either justify a documented native logical ID mapping or migrate to a typed stable palette resource identity with sentinel semantics. Keep raw descriptor pointer words in reference adapters. Carry all owners,select_bank,MSG and selector consumers together under unchanged existing judges; no speculative palette implementation needed."
+        }
+      ],
+      "classification_limits": [
+        "Named-file semantic inventory only at reviewed bytes. Full renderer,Session,game/resource lifecycle and complete-refactor campaign remain open. Nothing executed except read-only local inspection and authored-fragment/branch/commit operations. No source/tool/judge edits,builds,tests,oracles,gates,mutations,providers,network,storage/campaign operations or delegates.",
+        "Optional TSP/texture parameters/palette_version reflect three genuinely uninitialized original stack fields, as explicitly documented in original Source.prepare and compared by definedness. They do not mean fixture missing input. Null Surface/physical allocation/current colors and absent filenames are real resource/game absence. No zero value invented for undefined source bits. Indexed read of undefined revision fails explicitly in NativeTextures, so arbitrary indexed palette support is not certified.",
+        "Existing lifetime report pins current lifetime bytes; other small reports generally omit implementation fingerprints. Read-only review creates no fresh verdict. No tracked current lifetime holdout/mutant receipt resolved; memory claims and absent reference/inventory-raw directory are navigation only, not accepted current evidence.",
+        "Pool/list borrows require stable pool and list storage. Current Display fixes2048 slots. Arbitrary callback reentry that resizes vectors, destroys owners or reacquires a zero-count slot during release is not qualified. Release callback failure leaves decremented reference/published prefix; no rollback is invented. zero-count orphan allocation after uint16 wrap explicitly throws; it is not recovered source behavior.",
+        "Integer GBIX is content global ID,not VA. Type151126016/151388160,pixel format268435456/939524096,masks/shifts,stride16 and color nibble expansion are layout/format encodings,not dispatch addresses. Source pointers in probes stay at reference boundary; no EXE read or register transport occurs in assigned implementation bodies.",
+        "No original pixel/GPU upload comparison,HRESULT failure equivalence,concurrent upload safety,all PVR/GVR formats or full palette mutation/registration is claimed. Existing Metal unit is narrow native readback evidence; no new hardware qualification. Global prior FP partial/fail identities remain unchanged and unexecuted here."
+      ]
+    },
+    "src/engine/native_texture_palette.cpp": {
+      "disposition": "open_review",
+      "reason": "Structured initialization/first-match scan is readable and judged,but selector argument identity lacks a resolved native contract.",
+      "reviewed_source_sha256": "a2d5b34ece4c2602f42fae873830fb32fbf06dd1ea27526a84a156f0ab47a8f2",
+      "semantic_justification": "Complete15-line implementation reviewed. Constructor stores only slot ordinal over128 records; field initializers supply bank=-1,null colors,version0,zero upload keys and null current colors. select_bank scans in order,first equal key assigns current_colors and returns; miss preserves previous selection. It copies an immutable shared color owner,does not upload or invent colors. Source device-init judge corroborates128 records at16-byte source stride,overriding loose SDK array declaration. Nonempty selector bank meaning remains unresolved; do not silently treat a pointer-shaped source resource contract as a numeric bank enum.",
+      "evidence": [
+        {
+          "path": "src/engine/native_texture_palette.cpp",
+          "line": 1,
+          "sha256": "a2d5b34ece4c2602f42fae873830fb32fbf06dd1ea27526a84a156f0ab47a8f2",
+          "note": "Complete body read through line 15"
+        },
+        {
+          "path": ".gitmodules",
+          "line": 1,
+          "sha256": "492a7488d49b91e247598f85c2204de38dd8255d010423de2aaf22b7f5719429",
+          "note": "Tracked parent boundary for inspected pinned SDK/loader source. Descendants below are external, not inventory denominator paths.",
+          "external_details": {
+            "kind": "git_submodule",
+            "parent_path": "reference/sadx-mod-loader",
+            "pinned_gitlink": "eb4cdcca9637d611a98b910fcfed6ce18580451c",
+            "files": [
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/include/ninja.h",
+                "line": 1035,
+                "sha256": "9d8a5bea4427cfd7fbbb2c5a0eeaac66ae1977bf385d3f5db474f4ab833a8a49"
+              },
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+                "line": 136,
+                "sha256": "590026179539651768b21cc00d7527fab2d74d0635ea7ee2475b133d9f5c4d37"
+              },
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXVariables.h",
+                "line": 2589,
+                "sha256": "a18ab56e9273928765428b9a99ac672266ba59e5f175b9ee43ca9c81723b0c81"
+              },
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/TextureReplacement.cpp",
+                "line": 1167,
+                "sha256": "8339e6e9de157596706aac86b5823bfb02be1e68a72ff32ba9279e637c0f7db0"
+              }
+            ],
+            "interpretation": "SDK NJS_TEXMEMLIST has opaque bank Uint32, while stSetPaletteBank argument and upload buffer are NJS_TEXPALETTE*. Actual pinned loader calls stSetPaletteBank(texpalette_buffer[i]). Native int32 bank/keys may preserve descriptor pointer identity, but no native populated palette registration/mapping is found. Numeric-only oracle key equality cannot distinguish that from logical numeric bank. Do not infer addresses from magnitude. SDK GlobalPalettes array512 is not authoritative layout: existing instruction judge supports128 stride16 entries."
+          }
+        },
+        {
+          "path": "reference/production-integration-20261026/texture-selection-core/source-evidence.json",
+          "line": 1,
+          "sha256": "6905cced6019a3ff38701a79c63349f33cad62fad654b5a58a5c99557e88a4eb"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "Display has one native texture_palette::State. Its 128 Entry records own immutable 256-color arrays; current_colors retains a selected array, not another table. Message load/reload and native texture selection borrow that same State. Native production code inspected only initializes bank=-1/slot=index/null colors, zero upload keys and versions; it does not populate registered indexed palettes. The corresponding nonempty identity mapping is unresolved, not invented as supported.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_display.hpp",
+              "line": 170,
+              "sha256": "89cfa670a597de4388cabbfd41412008006031c096b2b63e7772e86ea9122954"
+            },
+            {
+              "path": "src/engine/native_texture_palette.hpp",
+              "line": 7,
+              "sha256": "7bb4a4d1081a3a4e8c0c77e3283ff613e40384e97f6c4c72aed774894cd7f6b8"
+            },
+            {
+              "path": "src/engine/native_texture_palette.cpp",
+              "line": 3,
+              "sha256": "a2d5b34ece4c2602f42fae873830fb32fbf06dd1ea27526a84a156f0ab47a8f2"
+            },
+            {
+              "path": "src/runtime/native_message_display.cpp",
+              "line": 7,
+              "sha256": "316df90f42c68b08fe7f85ffdded40d751dd90530df607deba1fdf18d4943acc"
+            },
+            {
+              "path": "src/engine/texture_selection_native.cpp",
+              "line": 24,
+              "sha256": "1d17d34f1bf3110360686ffad4bc4a66a3fdb9f282d7415bc687b72dd39e04cd"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "message_image::load selects upload_banks[0] before cache/acquisition; reload selects matching Memory.bank before descriptor validation/conversion. This preserves selection side effects on later failure and leaves current_colors unchanged on no matching Memory.",
+          "evidence": [
+            {
+              "path": "src/engine/native_message_texture.cpp",
+              "line": 49,
+              "sha256": "774f7a41d2040dd62a1db97245c00e7308855c4783622b0b6b92873e48e9279a"
+            },
+            {
+              "path": "src/engine/native_message_texture.cpp",
+              "line": 68,
+              "sha256": "774f7a41d2040dd62a1db97245c00e7308855c4783622b0b6b92873e48e9279a"
+            }
+          ]
+        },
+        {
+          "resolution": "NativeTextures compares Entry.bank/version/colors in shared palette prefix. Current/native callers share Display state; native selector publishes revision before reporting unrecovered lock/upload.",
+          "evidence": [
+            {
+              "path": "src/engine/texture_selection_native.cpp",
+              "line": 24,
+              "sha256": "1d17d34f1bf3110360686ffad4bc4a66a3fdb9f282d7415bc687b72dd39e04cd"
+            },
+            {
+              "path": "src/engine/texture_selection_internal.hpp",
+              "line": 18,
+              "sha256": "9417bbd4372efdae2958b8a060c77074625aaf18fab3caacfc7a9ee238857389"
+            }
+          ]
+        },
+        {
+          "resolution": "sadx_palette_probe and sadx_palette_initial_probe are actual executable exports in the message-image probe. Standalone palette judges are explicitly registered in tools/oracles/manifest.tsv, not inferred from include reachability.",
+          "evidence": [
+            {
+              "path": "tests/probes/native_message_image_probe.cpp",
+              "line": 69,
+              "sha256": "990726b2db49d3fe9d712127dc01158bc91d0a382bbf21c9db60895882dfc04e"
+            },
+            {
+              "path": "tests/probes/native_message_image_probe.cpp",
+              "line": 82,
+              "sha256": "990726b2db49d3fe9d712127dc01158bc91d0a382bbf21c9db60895882dfc04e"
+            },
+            {
+              "path": "tools/oracles/manifest.tsv",
+              "line": 33,
+              "sha256": "b9f05bd7db1c88320a1ac0f5e9c471d780ce43135c59b91467d15411c8357eb3"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "judge": "Palette first-match selection and source device initialization",
+          "evidence": [
+            {
+              "path": "tools/oracles/verify_original_palette.py",
+              "line": 1,
+              "sha256": "81402d0eaf28e737c859dbaa10535af1d501e158ce307585fcf3df78005584a2"
+            },
+            {
+              "path": "tools/oracles/verify_original_palette_initial.py",
+              "line": 1,
+              "sha256": "2a9a4775cc6f4f8342b3260b7937b5a8b3bf56775010236d9f0056fdee119afe"
+            },
+            {
+              "path": "tests/probes/native_message_image_probe.cpp",
+              "line": 69,
+              "sha256": "990726b2db49d3fe9d712127dc01158bc91d0a382bbf21c9db60895882dfc04e"
+            },
+            {
+              "path": "tools/oracles/manifest.tsv",
+              "line": 33,
+              "sha256": "b9f05bd7db1c88320a1ac0f5e9c471d780ce43135c59b91467d15411c8357eb3"
+            },
+            {
+              "path": "reference/oracle-reports/palette.json",
+              "line": 1,
+              "sha256": "c501ce759374b7e31c5cab999df96bc09aa743220f1bb4bcd90292d26051caaa"
+            },
+            {
+              "path": "reference/oracle-reports/palette_initial.json",
+              "line": 1,
+              "sha256": "3b84a13c1a9699aa2d53160c24c35ece0805d728d2facb4e23487af034bf6be6"
+            }
+          ],
+          "accepted_scope": "Historical800 first-match/miss/sentinel cases with empty mismatch list; one device-init case compares768 words, no mismatches. Selector initializes128 source records at stride16 and passes candidate key in ECX; initializer executes original78d0d0. This overrides SDK inaccurate512 pointer-array display but does not resolve whether nonempty native bank values are descriptor identities or actual numeric bank fields. No registered palette mutation/upload, native resource identity mapping, GPU color parity or fresh verdict."
+        },
+        {
+          "judge": "Adjacent shared texture-selection evidence, bounded consumer contract",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/texture_selection_core.json",
+              "line": 1,
+              "sha256": "986ac81b426427a23201fac53c8efb1b9d1c153e24f1291a51c18360ea98e81d"
+            },
+            {
+              "path": "reference/production-integration-20261026/texture-selection-core/verification.json",
+              "line": 1,
+              "sha256": "4826b2bcdda8f9bac1d6aeb662b18c287b766901638d664fc0cb8db1b6d94d64"
+            },
+            {
+              "path": "reference/production-integration-20261026/texture-selection-independent-review.md",
+              "line": 1,
+              "sha256": "87af9e99535f5f0cb6cb9e6041ef69dc6e9e7faf36528a7b49376b4bcafda93b"
+            },
+            {
+              "path": "reference/production-integration-20261026/texture-selection-core/source-evidence.json",
+              "line": 1,
+              "sha256": "6905cced6019a3ff38701a79c63349f33cad62fad654b5a58a5c99557e88a4eb"
+            },
+            {
+              "path": "src/guest/texture_selection_reference.cpp",
+              "line": 1,
+              "sha256": "3cd999e216ba0244bc1febdb456a896d7489e0c49ac0d2072166d1522286fa5d"
+            },
+            {
+              "path": "src/engine/texture_selection_internal.hpp",
+              "line": 1,
+              "sha256": "9417bbd4372efdae2958b8a060c77074625aaf18fab3caacfc7a9ee238857389"
+            }
+          ],
+          "accepted_scope": "Historical3669 native prefix cases report0 mismatches; earlier verification records3669 holdout and20 caught compiled mutants across legacy/shared/native selector paths. Callback binding occurs before GBIX then active-memory stores; dirty revision published before explicit palette-lock stop. These are selection receipts, not lifetime/MSG mutants. Reference and native adapters use one shared algorithm, not two recovered cache implementations. Legacy engine DTOs still contain reference availability/address-shaped storage; that surrounding migration remains open."
+        },
+        {
+          "judge": "Existing Main save-owner integration receipt and connected journeys",
+          "evidence": [
+            {
+              "path": "reference/production-integration-20261101/canonical-save-owner-gate.json",
+              "line": 1,
+              "sha256": "aa16e6213e423ec3505ec4e0e64136eed128f4a67b88580aaee4e57476044c35"
+            },
+            {
+              "path": "docs/STATUS.md",
+              "line": 7,
+              "sha256": "01145050f63b55a779bb3a40e0b9b34635ecb43351c0fbda0bc08d63da94b47c"
+            },
+            {
+              "path": "tools/journey/check_native_file_select.py",
+              "line": 1,
+              "sha256": "a7f1a4e09bfb2aeb38ee8941ec207c5f76b8bee28e8b0f930fae249ca1582896"
+            },
+            {
+              "path": "tools/journey/check_native_main_menu.py",
+              "line": 1,
+              "sha256": "e3628e8a039c7ef623f48b38d6bd63d6f43bc419ed8f916b93ffbd67f7f8e8f1"
+            },
+            {
+              "path": "tools/journey/check_native_fresh_save.py",
+              "line": 1,
+              "sha256": "76ecc58997331de9b8123bfd3b20347331bccf8736214eb6cec946763218ff05"
+            }
+          ],
+          "accepted_scope": "Real recorded exit0:280 native programs,431 Python tests,inherited filesystem skip,smoke120,R1-R4,three native menu/save journeys(1850/1850/6050 frames) and16 startup comparisons. Those exercise current menu texture composition; no full palette-registration, arbitrary resource reacquisition or complete texture-system proof. STATUS retains80 partial,10 fail,13 missing oracle inventory; unrelated inherited failures and FP channels are not upgraded by this gate."
+        }
+      ],
+      "destination": "src/engine/ninja/texture:retain readable native bodies;palette identity context/migration carried across lifetime,palette,MSG and selection owners/adapters before whole-system closure",
+      "findings": [
+        {
+          "id": "palette-identity-contract-unresolved",
+          "severity": "classification_blocker",
+          "finding": "Entry.bank/select_bank(int32)/upload_banks and Memory.bank use untyped32-bit keys. Pinned loader supplies NJS_TEXPALETTE* to original selector, and SDK describes buffer as palette-descriptor pointers. Current production state is initialized empty; no native populated registration assigns or interprets the key. Existing equality tests also pass for raw pointer words. Therefore semantic resource-identity conformity of these owner/interface files is not established. This is evidence uncertainty,not a proven runtime regression or a number-magnitude address allegation.",
+          "evidence": [
+            {
+              "path": ".gitmodules",
+              "line": 1,
+              "sha256": "492a7488d49b91e247598f85c2204de38dd8255d010423de2aaf22b7f5719429",
+              "note": "Tracked parent boundary for inspected pinned SDK/loader source. Descendants below are external, not inventory denominator paths.",
+              "external_details": {
+                "kind": "git_submodule",
+                "parent_path": "reference/sadx-mod-loader",
+                "pinned_gitlink": "eb4cdcca9637d611a98b910fcfed6ce18580451c",
+                "files": [
+                  {
+                    "path": "reference/sadx-mod-loader/SADXModLoader/include/ninja.h",
+                    "line": 1035,
+                    "sha256": "9d8a5bea4427cfd7fbbb2c5a0eeaac66ae1977bf385d3f5db474f4ab833a8a49"
+                  },
+                  {
+                    "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+                    "line": 136,
+                    "sha256": "590026179539651768b21cc00d7527fab2d74d0635ea7ee2475b133d9f5c4d37"
+                  },
+                  {
+                    "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXVariables.h",
+                    "line": 2589,
+                    "sha256": "a18ab56e9273928765428b9a99ac672266ba59e5f175b9ee43ca9c81723b0c81"
+                  },
+                  {
+                    "path": "reference/sadx-mod-loader/SADXModLoader/TextureReplacement.cpp",
+                    "line": 1167,
+                    "sha256": "8339e6e9de157596706aac86b5823bfb02be1e68a72ff32ba9279e637c0f7db0"
+                  }
+                ],
+                "interpretation": "SDK NJS_TEXMEMLIST has opaque bank Uint32, while stSetPaletteBank argument and upload buffer are NJS_TEXPALETTE*. Actual pinned loader calls stSetPaletteBank(texpalette_buffer[i]). Native int32 bank/keys may preserve descriptor pointer identity, but no native populated palette registration/mapping is found. Numeric-only oracle key equality cannot distinguish that from logical numeric bank. Do not infer addresses from magnitude. SDK GlobalPalettes array512 is not authoritative layout: existing instruction judge supports128 stride16 entries."
+              }
+            },
+            {
+              "path": "tools/oracles/verify_original_palette.py",
+              "line": 24,
+              "sha256": "81402d0eaf28e737c859dbaa10535af1d501e158ce307585fcf3df78005584a2"
+            },
+            {
+              "path": "src/engine/texture_selection_native.cpp",
+              "line": 24,
+              "sha256": "1d17d34f1bf3110360686ffad4bc4a66a3fdb9f282d7415bc687b72dd39e04cd"
+            },
+            {
+              "path": "src/engine/native_texture_palette.hpp",
+              "line": 7,
+              "sha256": "7bb4a4d1081a3a4e8c0c77e3283ff613e40384e97f6c4c72aed774894cd7f6b8"
+            }
+          ],
+          "required_resolution": "Recover/inspect existing source palette registration and its identity relation to memory.bank; either justify a documented native logical ID mapping or migrate to a typed stable palette resource identity with sentinel semantics. Keep raw descriptor pointer words in reference adapters. Carry all owners,select_bank,MSG and selector consumers together under unchanged existing judges; no speculative palette implementation needed."
+        }
+      ],
+      "classification_limits": [
+        "Named-file semantic inventory only at reviewed bytes. Full renderer,Session,game/resource lifecycle and complete-refactor campaign remain open. Nothing executed except read-only local inspection and authored-fragment/branch/commit operations. No source/tool/judge edits,builds,tests,oracles,gates,mutations,providers,network,storage/campaign operations or delegates.",
+        "Optional TSP/texture parameters/palette_version reflect three genuinely uninitialized original stack fields, as explicitly documented in original Source.prepare and compared by definedness. They do not mean fixture missing input. Null Surface/physical allocation/current colors and absent filenames are real resource/game absence. No zero value invented for undefined source bits. Indexed read of undefined revision fails explicitly in NativeTextures, so arbitrary indexed palette support is not certified.",
+        "Existing lifetime report pins current lifetime bytes; other small reports generally omit implementation fingerprints. Read-only review creates no fresh verdict. No tracked current lifetime holdout/mutant receipt resolved; memory claims and absent reference/inventory-raw directory are navigation only, not accepted current evidence.",
+        "Pool/list borrows require stable pool and list storage. Current Display fixes2048 slots. Arbitrary callback reentry that resizes vectors, destroys owners or reacquires a zero-count slot during release is not qualified. Release callback failure leaves decremented reference/published prefix; no rollback is invented. zero-count orphan allocation after uint16 wrap explicitly throws; it is not recovered source behavior.",
+        "Integer GBIX is content global ID,not VA. Type151126016/151388160,pixel format268435456/939524096,masks/shifts,stride16 and color nibble expansion are layout/format encodings,not dispatch addresses. Source pointers in probes stay at reference boundary; no EXE read or register transport occurs in assigned implementation bodies.",
+        "No original pixel/GPU upload comparison,HRESULT failure equivalence,concurrent upload safety,all PVR/GVR formats or full palette mutation/registration is claimed. Existing Metal unit is narrow native readback evidence; no new hardware qualification. Global prior FP partial/fail identities remain unchanged and unexecuted here."
+      ]
+    },
+    "src/engine/native_message_texture.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Narrow native MSG load/reload interface with actual callers and no owned source transport.",
+      "reviewed_source_sha256": "e1c537251e6f54f092787c1fc5fc0a8b0ce49ed488f3771deb799727a9e1c5d3",
+      "semantic_justification": "Complete14-line header reviewed. Explicit List,pixel buffer,dimensions,content GBIX,borrowed lifetime and palette State parameters; no persistent storage,no optional fixture inputs,no generic guest service/dispatcher. reload provenance maps SDK njReLoadTextureNumG; load is correctly NOTSA bounded native bridge. It advertises ARGB4444 scope,not complete original loader. Palette identity question belongs to the referenced owner/API and is not resolved by this declaration.",
+      "evidence": [
+        {
+          "path": "src/engine/native_message_texture.hpp",
+          "line": 1,
+          "sha256": "e1c537251e6f54f092787c1fc5fc0a8b0ce49ed488f3771deb799727a9e1c5d3",
+          "note": "Complete body read through line 14"
+        },
+        {
+          "path": ".gitmodules",
+          "line": 1,
+          "sha256": "492a7488d49b91e247598f85c2204de38dd8255d010423de2aaf22b7f5719429",
+          "note": "Tracked parent boundary for inspected pinned SDK/loader source. Descendants below are external, not inventory denominator paths.",
+          "external_details": {
+            "kind": "git_submodule",
+            "parent_path": "reference/sadx-mod-loader",
+            "pinned_gitlink": "eb4cdcca9637d611a98b910fcfed6ce18580451c",
+            "files": [
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/include/ninja.h",
+                "line": 1035,
+                "sha256": "9d8a5bea4427cfd7fbbb2c5a0eeaac66ae1977bf385d3f5db474f4ab833a8a49"
+              },
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+                "line": 136,
+                "sha256": "590026179539651768b21cc00d7527fab2d74d0635ea7ee2475b133d9f5c4d37"
+              },
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXVariables.h",
+                "line": 2589,
+                "sha256": "a18ab56e9273928765428b9a99ac672266ba59e5f175b9ee43ca9c81723b0c81"
+              },
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/TextureReplacement.cpp",
+                "line": 1167,
+                "sha256": "8339e6e9de157596706aac86b5823bfb02be1e68a72ff32ba9279e637c0f7db0"
+              }
+            ],
+            "interpretation": "SDK NJS_TEXMEMLIST has opaque bank Uint32, while stSetPaletteBank argument and upload buffer are NJS_TEXPALETTE*. Actual pinned loader calls stSetPaletteBank(texpalette_buffer[i]). Native int32 bank/keys may preserve descriptor pointer identity, but no native populated palette registration/mapping is found. Numeric-only oracle key equality cannot distinguish that from logical numeric bank. Do not infer addresses from magnitude. SDK GlobalPalettes array512 is not authoritative layout: existing instruction judge supports128 stride16 entries."
+          }
+        },
+        {
+          "path": "reference/production-integration-20261026/texture-selection-core/source-evidence.json",
+          "line": 1,
+          "sha256": "6905cced6019a3ff38701a79c63349f33cad62fad654b5a58a5c99557e88a4eb"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "Display owns one fixed 2048-slot native pool, cache GBIX, active/requested Memory borrows, selected list and eight scratch words. texture_state()/texture_selection_state() borrow these exact fields; no copy or second native pool. Pool is never resized by inspected operations. Pointer stability depends on retaining that fixed extent. Native/ref worlds are separate instances, not duplicate owners of one live world.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_display.hpp",
+              "line": 138,
+              "sha256": "89cfa670a597de4388cabbfd41412008006031c096b2b63e7772e86ea9122954"
+            },
+            {
+              "path": "src/runtime/native_display.cpp",
+              "line": 318,
+              "sha256": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717"
+            },
+            {
+              "path": "src/runtime/native_display.cpp",
+              "line": 322,
+              "sha256": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717"
+            }
+          ]
+        },
+        {
+          "resolution": "Display has one native texture_palette::State. Its 128 Entry records own immutable 256-color arrays; current_colors retains a selected array, not another table. Message load/reload and native texture selection borrow that same State. Native production code inspected only initializes bank=-1/slot=index/null colors, zero upload keys and versions; it does not populate registered indexed palettes. The corresponding nonempty identity mapping is unresolved, not invented as supported.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_display.hpp",
+              "line": 170,
+              "sha256": "89cfa670a597de4388cabbfd41412008006031c096b2b63e7772e86ea9122954"
+            },
+            {
+              "path": "src/engine/native_texture_palette.hpp",
+              "line": 7,
+              "sha256": "7bb4a4d1081a3a4e8c0c77e3283ff613e40384e97f6c4c72aed774894cd7f6b8"
+            },
+            {
+              "path": "src/engine/native_texture_palette.cpp",
+              "line": 3,
+              "sha256": "a2d5b34ece4c2602f42fae873830fb32fbf06dd1ea27526a84a156f0ab47a8f2"
+            },
+            {
+              "path": "src/runtime/native_message_display.cpp",
+              "line": 7,
+              "sha256": "316df90f42c68b08fe7f85ffdded40d751dd90530df607deba1fdf18d4943acc"
+            },
+            {
+              "path": "src/engine/texture_selection_native.cpp",
+              "line": 24,
+              "sha256": "1d17d34f1bf3110360686ffad4bc4a66a3fdb9f282d7415bc687b72dd39e04cd"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "TitleScene MessageCalls::load_image/reload_image forwards actual message_image requests through Display; Display validates MSG type2306/attributes1082130432 on load then calls message_image::load/reload with canonical pool/palettes. Reload intentionally discards two caller parameters; equivalence beyond current MSG contract is not established.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_message_frame.cpp",
+              "line": 75,
+              "sha256": "e46cd9b32acf4611ceebc3e6477ee0d80fa395a33daa89362651e2c097869fa9"
+            },
+            {
+              "path": "src/runtime/native_message_display.cpp",
+              "line": 7,
+              "sha256": "316df90f42c68b08fe7f85ffdded40d751dd90530df607deba1fdf18d4943acc"
+            }
+          ]
+        },
+        {
+          "resolution": "Resource and Metal unit programs call the real module, not only include it. native_message_image_probe calls load/reload and select_bank/State construction for four separate judges.",
+          "evidence": [
+            {
+              "path": "tests/unit/native_message_texture.cpp",
+              "line": 18,
+              "sha256": "28510de7728ab76ac0dc55dec4ed9d5c404d66e63ae754ca853120d2f64388f6"
+            },
+            {
+              "path": "tests/unit/native_message_texture_metal.mm",
+              "line": 84,
+              "sha256": "00334b08d39071cd65b447de189a0a05d4014160f57a0332071f9473059f50f2"
+            },
+            {
+              "path": "tests/probes/native_message_image_probe.cpp",
+              "line": 20,
+              "sha256": "990726b2db49d3fe9d712127dc01158bc91d0a382bbf21c9db60895882dfc04e"
+            },
+            {
+              "path": "tests/probes/native_message_image_probe.cpp",
+              "line": 59,
+              "sha256": "990726b2db49d3fe9d712127dc01158bc91d0a382bbf21c9db60895882dfc04e"
+            },
+            {
+              "path": "tests/probes/native_message_image_probe.cpp",
+              "line": 69,
+              "sha256": "990726b2db49d3fe9d712127dc01158bc91d0a382bbf21c9db60895882dfc04e"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "judge": "MSG acquisition/reload descriptors and native conversion/lifetime",
+          "evidence": [
+            {
+              "path": "tools/oracles/verify_original_message_image.py",
+              "line": 1,
+              "sha256": "167887fc45984b15e80591c0e1fc088fb45b3e18709510f3c3942350e1cdfe07"
+            },
+            {
+              "path": "tools/oracles/verify_original_message_reload.py",
+              "line": 1,
+              "sha256": "dd99b58a8ca33d58fed6c097ec5a11c58d4a5a2aedc6d0cafdd09140a4ae559b"
+            },
+            {
+              "path": "tests/probes/native_message_image_probe.cpp",
+              "line": 1,
+              "sha256": "990726b2db49d3fe9d712127dc01158bc91d0a382bbf21c9db60895882dfc04e"
+            },
+            {
+              "path": "reference/oracle-reports/message_image.json",
+              "line": 1,
+              "sha256": "cabb8df3f8a6b09cef56ac164d7852a40ee389f5ec50fc7207200a45664a325a"
+            },
+            {
+              "path": "reference/oracle-reports/message_reload.json",
+              "line": 1,
+              "sha256": "85676f82677fab429f389653f125a07978f389cd585449cda1c68cb98411abd2"
+            },
+            {
+              "path": "tests/unit/native_message_texture.cpp",
+              "line": 1,
+              "sha256": "28510de7728ab76ac0dc55dec4ed9d5c404d66e63ae754ca853120d2f64388f6"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 243,
+              "sha256": "be26bf1a641df0e5b887653a87cc5b9de1d0c55b6d8b8dfa0a79c8439458039b"
+            }
+          ],
+          "accepted_scope": "Existing reports:600 acquisition and700 reload cases, empty mismatch lists. Acquisition compares descriptor/search/cache/count/definedness; reload compares exact GBIX lookup and unchanged descriptor/count. Source upload is intercepted as receipt. Reports omit reviewed-source fingerprints: they are historical coverage evidence, not current per-byte qualification. Native unit covers exact little-endian4444->BGRA expansion, ignored cached bitmap/extent, reload identity, palette side effect on failure, missing reload, pool exhaustion success/null publication and old Draw retention. No new pass claimed."
+        },
+        {
+          "judge": "Registered actual Metal snapshot readback unit",
+          "evidence": [
+            {
+              "path": "tests/unit/native_message_texture_metal.mm",
+              "line": 1,
+              "sha256": "00334b08d39071cd65b447de189a0a05d4014160f57a0332071f9473059f50f2"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 244,
+              "sha256": "be26bf1a641df0e5b887653a87cc5b9de1d0c55b6d8b8dfa0a79c8439458039b"
+            },
+            {
+              "path": "reference/production-integration-20261101/canonical-save-owner-gate.json",
+              "line": 247,
+              "sha256": "aa16e6213e423ec3505ec4e0e64136eed128f4a67b88580aaee4e57476044c35"
+            }
+          ],
+          "accepted_scope": "Recorded gate lists this executable among280 programs. Source test requires a Metal device and command completion; three exact64x64 target readbacks sample original4444 pixel,reloaded pixel after manager release,and retained original snapshot. This is bounded native backend evidence, not Windows/D3D GPU parity, all texture formats, pool concurrency, renderer closure or a new hardware run."
+        },
+        {
+          "judge": "Existing Main save-owner integration receipt and connected journeys",
+          "evidence": [
+            {
+              "path": "reference/production-integration-20261101/canonical-save-owner-gate.json",
+              "line": 1,
+              "sha256": "aa16e6213e423ec3505ec4e0e64136eed128f4a67b88580aaee4e57476044c35"
+            },
+            {
+              "path": "docs/STATUS.md",
+              "line": 7,
+              "sha256": "01145050f63b55a779bb3a40e0b9b34635ecb43351c0fbda0bc08d63da94b47c"
+            },
+            {
+              "path": "tools/journey/check_native_file_select.py",
+              "line": 1,
+              "sha256": "a7f1a4e09bfb2aeb38ee8941ec207c5f76b8bee28e8b0f930fae249ca1582896"
+            },
+            {
+              "path": "tools/journey/check_native_main_menu.py",
+              "line": 1,
+              "sha256": "e3628e8a039c7ef623f48b38d6bd63d6f43bc419ed8f916b93ffbd67f7f8e8f1"
+            },
+            {
+              "path": "tools/journey/check_native_fresh_save.py",
+              "line": 1,
+              "sha256": "76ecc58997331de9b8123bfd3b20347331bccf8736214eb6cec946763218ff05"
+            }
+          ],
+          "accepted_scope": "Real recorded exit0:280 native programs,431 Python tests,inherited filesystem skip,smoke120,R1-R4,three native menu/save journeys(1850/1850/6050 frames) and16 startup comparisons. Those exercise current menu texture composition; no full palette-registration, arbitrary resource reacquisition or complete texture-system proof. STATUS retains80 partial,10 fail,13 missing oracle inventory; unrelated inherited failures and FP channels are not upgraded by this gate."
+        }
+      ],
+      "destination": "src/engine/ninja/texture:retain readable native bodies;palette identity context/migration carried across lifetime,palette,MSG and selection owners/adapters before whole-system closure",
+      "findings": [],
+      "classification_limits": [
+        "Named-file semantic inventory only at reviewed bytes. Full renderer,Session,game/resource lifecycle and complete-refactor campaign remain open. Nothing executed except read-only local inspection and authored-fragment/branch/commit operations. No source/tool/judge edits,builds,tests,oracles,gates,mutations,providers,network,storage/campaign operations or delegates.",
+        "Optional TSP/texture parameters/palette_version reflect three genuinely uninitialized original stack fields, as explicitly documented in original Source.prepare and compared by definedness. They do not mean fixture missing input. Null Surface/physical allocation/current colors and absent filenames are real resource/game absence. No zero value invented for undefined source bits. Indexed read of undefined revision fails explicitly in NativeTextures, so arbitrary indexed palette support is not certified.",
+        "Existing lifetime report pins current lifetime bytes; other small reports generally omit implementation fingerprints. Read-only review creates no fresh verdict. No tracked current lifetime holdout/mutant receipt resolved; memory claims and absent reference/inventory-raw directory are navigation only, not accepted current evidence.",
+        "Pool/list borrows require stable pool and list storage. Current Display fixes2048 slots. Arbitrary callback reentry that resizes vectors, destroys owners or reacquires a zero-count slot during release is not qualified. Release callback failure leaves decremented reference/published prefix; no rollback is invented. zero-count orphan allocation after uint16 wrap explicitly throws; it is not recovered source behavior.",
+        "Integer GBIX is content global ID,not VA. Type151126016/151388160,pixel format268435456/939524096,masks/shifts,stride16 and color nibble expansion are layout/format encodings,not dispatch addresses. Source pointers in probes stay at reference boundary; no EXE read or register transport occurs in assigned implementation bodies.",
+        "No original pixel/GPU upload comparison,HRESULT failure equivalence,concurrent upload safety,all PVR/GVR formats or full palette mutation/registration is claimed. Existing Metal unit is narrow native readback evidence; no new hardware qualification. Global prior FP partial/fail identities remain unchanged and unexecuted here."
+      ]
+    },
+    "src/engine/native_message_texture.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Readable bounded ARGB4444 native device bridge preserving cache/acquire/reload and failure publication ordering.",
+      "reviewed_source_sha256": "774f7a41d2040dd62a1db97245c00e7308855c4783622b0b6b92873e48e9279a",
+      "semantic_justification": "Complete84-line implementation reviewed. convert checks nonnull/nonzero extent and64-bit product<=UINT32_MAX/4 before allocation; copies source16-bit words into retained bytes,decodes explicitly little endian and expands each4-bit BGRA channel by17. This is native format replacement,not claimed original pixel conversion. prepare records type2306<<16,pixel format2<<27,width*height*2 and three source-undefined fields. load selects palette first; cache hit neither dereferences new pixels nor uploads,increments existing ref; free slot converts then acquires retaining source bytes. Pool exhaustion publishes a single null entry and returns1. reload scans first exact GBIX without ref-count guard,selects matching bank,requires recovered descriptor,converts,and replaces image snapshot without changing descriptor image_data/refcount; miss returns-1 before palette mutation. Conversion failure leaves prior image and earlier palette side effect. No source-address dispatch,fixture-derived optional,content EXE reads or duplicate palette/release game implementation. Palette nonempty identity interpretation remains with State owner,not silently qualified by this bridge.",
+      "evidence": [
+        {
+          "path": "src/engine/native_message_texture.cpp",
+          "line": 1,
+          "sha256": "774f7a41d2040dd62a1db97245c00e7308855c4783622b0b6b92873e48e9279a",
+          "note": "Complete body read through line 84"
+        },
+        {
+          "path": ".gitmodules",
+          "line": 1,
+          "sha256": "492a7488d49b91e247598f85c2204de38dd8255d010423de2aaf22b7f5719429",
+          "note": "Tracked parent boundary for inspected pinned SDK/loader source. Descendants below are external, not inventory denominator paths.",
+          "external_details": {
+            "kind": "git_submodule",
+            "parent_path": "reference/sadx-mod-loader",
+            "pinned_gitlink": "eb4cdcca9637d611a98b910fcfed6ce18580451c",
+            "files": [
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/include/ninja.h",
+                "line": 1035,
+                "sha256": "9d8a5bea4427cfd7fbbb2c5a0eeaac66ae1977bf385d3f5db474f4ab833a8a49"
+              },
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXFunctionsNew.h",
+                "line": 136,
+                "sha256": "590026179539651768b21cc00d7527fab2d74d0635ea7ee2475b133d9f5c4d37"
+              },
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/include/SADXVariables.h",
+                "line": 2589,
+                "sha256": "a18ab56e9273928765428b9a99ac672266ba59e5f175b9ee43ca9c81723b0c81"
+              },
+              {
+                "path": "reference/sadx-mod-loader/SADXModLoader/TextureReplacement.cpp",
+                "line": 1167,
+                "sha256": "8339e6e9de157596706aac86b5823bfb02be1e68a72ff32ba9279e637c0f7db0"
+              }
+            ],
+            "interpretation": "SDK NJS_TEXMEMLIST has opaque bank Uint32, while stSetPaletteBank argument and upload buffer are NJS_TEXPALETTE*. Actual pinned loader calls stSetPaletteBank(texpalette_buffer[i]). Native int32 bank/keys may preserve descriptor pointer identity, but no native populated palette registration/mapping is found. Numeric-only oracle key equality cannot distinguish that from logical numeric bank. Do not infer addresses from magnitude. SDK GlobalPalettes array512 is not authoritative layout: existing instruction judge supports128 stride16 entries."
+          }
+        },
+        {
+          "path": "reference/production-integration-20261026/texture-selection-core/source-evidence.json",
+          "line": 1,
+          "sha256": "6905cced6019a3ff38701a79c63349f33cad62fad654b5a58a5c99557e88a4eb"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "Display owns one fixed 2048-slot native pool, cache GBIX, active/requested Memory borrows, selected list and eight scratch words. texture_state()/texture_selection_state() borrow these exact fields; no copy or second native pool. Pool is never resized by inspected operations. Pointer stability depends on retaining that fixed extent. Native/ref worlds are separate instances, not duplicate owners of one live world.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_display.hpp",
+              "line": 138,
+              "sha256": "89cfa670a597de4388cabbfd41412008006031c096b2b63e7772e86ea9122954"
+            },
+            {
+              "path": "src/runtime/native_display.cpp",
+              "line": 318,
+              "sha256": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717"
+            },
+            {
+              "path": "src/runtime/native_display.cpp",
+              "line": 322,
+              "sha256": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717"
+            }
+          ]
+        },
+        {
+          "resolution": "Display has one native texture_palette::State. Its 128 Entry records own immutable 256-color arrays; current_colors retains a selected array, not another table. Message load/reload and native texture selection borrow that same State. Native production code inspected only initializes bank=-1/slot=index/null colors, zero upload keys and versions; it does not populate registered indexed palettes. The corresponding nonempty identity mapping is unresolved, not invented as supported.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_display.hpp",
+              "line": 170,
+              "sha256": "89cfa670a597de4388cabbfd41412008006031c096b2b63e7772e86ea9122954"
+            },
+            {
+              "path": "src/engine/native_texture_palette.hpp",
+              "line": 7,
+              "sha256": "7bb4a4d1081a3a4e8c0c77e3283ff613e40384e97f6c4c72aed774894cd7f6b8"
+            },
+            {
+              "path": "src/engine/native_texture_palette.cpp",
+              "line": 3,
+              "sha256": "a2d5b34ece4c2602f42fae873830fb32fbf06dd1ea27526a84a156f0ab47a8f2"
+            },
+            {
+              "path": "src/runtime/native_message_display.cpp",
+              "line": 7,
+              "sha256": "316df90f42c68b08fe7f85ffdded40d751dd90530df607deba1fdf18d4943acc"
+            },
+            {
+              "path": "src/engine/texture_selection_native.cpp",
+              "line": 24,
+              "sha256": "1d17d34f1bf3110360686ffad4bc4a66a3fdb9f282d7415bc687b72dd39e04cd"
+            }
+          ]
+        },
+        {
+          "resolution": "Memory owns Surface/source backing and physical allocation; Draw owns immutable graphics::Texture separately. LogoRenderer observes Surface weakly and holds current device image strongly; snapshot_bound_texture observes a replacement before a draw. Release drops manager image/backing without revoking submitted images. No GPU resource address is used as native identity.",
+          "evidence": [
+            {
+              "path": "src/engine/native_texture_lifetime.hpp",
+              "line": 13,
+              "sha256": "0e6883f0c6ca2457060a61a16daeec4e84a3f7e6e6206e5a0b3d894f0e7485c3"
+            },
+            {
+              "path": "src/runtime/logo_renderer.cpp",
+              "line": 171,
+              "sha256": "901b8773c7a913b4f0fcc74893eb3cf89c9fb23de03a6f8541ba8c764f755798"
+            },
+            {
+              "path": "src/runtime/logo_renderer.cpp",
+              "line": 180,
+              "sha256": "901b8773c7a913b4f0fcc74893eb3cf89c9fb23de03a6f8541ba8c764f755798"
+            },
+            {
+              "path": "tests/unit/native_texture_lifetime.cpp",
+              "line": 16,
+              "sha256": "60ceba0e4a35599f14f31080a9cc87f824fb3541c1e269b4980f6ae82628d91b"
+            },
+            {
+              "path": "tests/unit/native_texture_selection_binding.cpp",
+              "line": 1,
+              "sha256": "660fe970483d67b215a63250f52f2a144c53b92c8ba6cd186fdf5415b2dda575"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "TitleScene MessageCalls::load_image/reload_image forwards actual message_image requests through Display; Display validates MSG type2306/attributes1082130432 on load then calls message_image::load/reload with canonical pool/palettes. Reload intentionally discards two caller parameters; equivalence beyond current MSG contract is not established.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_message_frame.cpp",
+              "line": 75,
+              "sha256": "e46cd9b32acf4611ceebc3e6477ee0d80fa395a33daa89362651e2c097869fa9"
+            },
+            {
+              "path": "src/runtime/native_message_display.cpp",
+              "line": 7,
+              "sha256": "316df90f42c68b08fe7f85ffdded40d751dd90530df607deba1fdf18d4943acc"
+            }
+          ]
+        },
+        {
+          "resolution": "Resource and Metal unit programs call the real module, not only include it. native_message_image_probe calls load/reload and select_bank/State construction for four separate judges.",
+          "evidence": [
+            {
+              "path": "tests/unit/native_message_texture.cpp",
+              "line": 18,
+              "sha256": "28510de7728ab76ac0dc55dec4ed9d5c404d66e63ae754ca853120d2f64388f6"
+            },
+            {
+              "path": "tests/unit/native_message_texture_metal.mm",
+              "line": 84,
+              "sha256": "00334b08d39071cd65b447de189a0a05d4014160f57a0332071f9473059f50f2"
+            },
+            {
+              "path": "tests/probes/native_message_image_probe.cpp",
+              "line": 20,
+              "sha256": "990726b2db49d3fe9d712127dc01158bc91d0a382bbf21c9db60895882dfc04e"
+            },
+            {
+              "path": "tests/probes/native_message_image_probe.cpp",
+              "line": 59,
+              "sha256": "990726b2db49d3fe9d712127dc01158bc91d0a382bbf21c9db60895882dfc04e"
+            },
+            {
+              "path": "tests/probes/native_message_image_probe.cpp",
+              "line": 69,
+              "sha256": "990726b2db49d3fe9d712127dc01158bc91d0a382bbf21c9db60895882dfc04e"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "judge": "MSG acquisition/reload descriptors and native conversion/lifetime",
+          "evidence": [
+            {
+              "path": "tools/oracles/verify_original_message_image.py",
+              "line": 1,
+              "sha256": "167887fc45984b15e80591c0e1fc088fb45b3e18709510f3c3942350e1cdfe07"
+            },
+            {
+              "path": "tools/oracles/verify_original_message_reload.py",
+              "line": 1,
+              "sha256": "dd99b58a8ca33d58fed6c097ec5a11c58d4a5a2aedc6d0cafdd09140a4ae559b"
+            },
+            {
+              "path": "tests/probes/native_message_image_probe.cpp",
+              "line": 1,
+              "sha256": "990726b2db49d3fe9d712127dc01158bc91d0a382bbf21c9db60895882dfc04e"
+            },
+            {
+              "path": "reference/oracle-reports/message_image.json",
+              "line": 1,
+              "sha256": "cabb8df3f8a6b09cef56ac164d7852a40ee389f5ec50fc7207200a45664a325a"
+            },
+            {
+              "path": "reference/oracle-reports/message_reload.json",
+              "line": 1,
+              "sha256": "85676f82677fab429f389653f125a07978f389cd585449cda1c68cb98411abd2"
+            },
+            {
+              "path": "tests/unit/native_message_texture.cpp",
+              "line": 1,
+              "sha256": "28510de7728ab76ac0dc55dec4ed9d5c404d66e63ae754ca853120d2f64388f6"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 243,
+              "sha256": "be26bf1a641df0e5b887653a87cc5b9de1d0c55b6d8b8dfa0a79c8439458039b"
+            }
+          ],
+          "accepted_scope": "Existing reports:600 acquisition and700 reload cases, empty mismatch lists. Acquisition compares descriptor/search/cache/count/definedness; reload compares exact GBIX lookup and unchanged descriptor/count. Source upload is intercepted as receipt. Reports omit reviewed-source fingerprints: they are historical coverage evidence, not current per-byte qualification. Native unit covers exact little-endian4444->BGRA expansion, ignored cached bitmap/extent, reload identity, palette side effect on failure, missing reload, pool exhaustion success/null publication and old Draw retention. No new pass claimed."
+        },
+        {
+          "judge": "Palette first-match selection and source device initialization",
+          "evidence": [
+            {
+              "path": "tools/oracles/verify_original_palette.py",
+              "line": 1,
+              "sha256": "81402d0eaf28e737c859dbaa10535af1d501e158ce307585fcf3df78005584a2"
+            },
+            {
+              "path": "tools/oracles/verify_original_palette_initial.py",
+              "line": 1,
+              "sha256": "2a9a4775cc6f4f8342b3260b7937b5a8b3bf56775010236d9f0056fdee119afe"
+            },
+            {
+              "path": "tests/probes/native_message_image_probe.cpp",
+              "line": 69,
+              "sha256": "990726b2db49d3fe9d712127dc01158bc91d0a382bbf21c9db60895882dfc04e"
+            },
+            {
+              "path": "tools/oracles/manifest.tsv",
+              "line": 33,
+              "sha256": "b9f05bd7db1c88320a1ac0f5e9c471d780ce43135c59b91467d15411c8357eb3"
+            },
+            {
+              "path": "reference/oracle-reports/palette.json",
+              "line": 1,
+              "sha256": "c501ce759374b7e31c5cab999df96bc09aa743220f1bb4bcd90292d26051caaa"
+            },
+            {
+              "path": "reference/oracle-reports/palette_initial.json",
+              "line": 1,
+              "sha256": "3b84a13c1a9699aa2d53160c24c35ece0805d728d2facb4e23487af034bf6be6"
+            }
+          ],
+          "accepted_scope": "Historical800 first-match/miss/sentinel cases with empty mismatch list; one device-init case compares768 words, no mismatches. Selector initializes128 source records at stride16 and passes candidate key in ECX; initializer executes original78d0d0. This overrides SDK inaccurate512 pointer-array display but does not resolve whether nonempty native bank values are descriptor identities or actual numeric bank fields. No registered palette mutation/upload, native resource identity mapping, GPU color parity or fresh verdict."
+        },
+        {
+          "judge": "Registered actual Metal snapshot readback unit",
+          "evidence": [
+            {
+              "path": "tests/unit/native_message_texture_metal.mm",
+              "line": 1,
+              "sha256": "00334b08d39071cd65b447de189a0a05d4014160f57a0332071f9473059f50f2"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 244,
+              "sha256": "be26bf1a641df0e5b887653a87cc5b9de1d0c55b6d8b8dfa0a79c8439458039b"
+            },
+            {
+              "path": "reference/production-integration-20261101/canonical-save-owner-gate.json",
+              "line": 247,
+              "sha256": "aa16e6213e423ec3505ec4e0e64136eed128f4a67b88580aaee4e57476044c35"
+            }
+          ],
+          "accepted_scope": "Recorded gate lists this executable among280 programs. Source test requires a Metal device and command completion; three exact64x64 target readbacks sample original4444 pixel,reloaded pixel after manager release,and retained original snapshot. This is bounded native backend evidence, not Windows/D3D GPU parity, all texture formats, pool concurrency, renderer closure or a new hardware run."
+        },
+        {
+          "judge": "Existing Main save-owner integration receipt and connected journeys",
+          "evidence": [
+            {
+              "path": "reference/production-integration-20261101/canonical-save-owner-gate.json",
+              "line": 1,
+              "sha256": "aa16e6213e423ec3505ec4e0e64136eed128f4a67b88580aaee4e57476044c35"
+            },
+            {
+              "path": "docs/STATUS.md",
+              "line": 7,
+              "sha256": "01145050f63b55a779bb3a40e0b9b34635ecb43351c0fbda0bc08d63da94b47c"
+            },
+            {
+              "path": "tools/journey/check_native_file_select.py",
+              "line": 1,
+              "sha256": "a7f1a4e09bfb2aeb38ee8941ec207c5f76b8bee28e8b0f930fae249ca1582896"
+            },
+            {
+              "path": "tools/journey/check_native_main_menu.py",
+              "line": 1,
+              "sha256": "e3628e8a039c7ef623f48b38d6bd63d6f43bc419ed8f916b93ffbd67f7f8e8f1"
+            },
+            {
+              "path": "tools/journey/check_native_fresh_save.py",
+              "line": 1,
+              "sha256": "76ecc58997331de9b8123bfd3b20347331bccf8736214eb6cec946763218ff05"
+            }
+          ],
+          "accepted_scope": "Real recorded exit0:280 native programs,431 Python tests,inherited filesystem skip,smoke120,R1-R4,three native menu/save journeys(1850/1850/6050 frames) and16 startup comparisons. Those exercise current menu texture composition; no full palette-registration, arbitrary resource reacquisition or complete texture-system proof. STATUS retains80 partial,10 fail,13 missing oracle inventory; unrelated inherited failures and FP channels are not upgraded by this gate."
+        }
+      ],
+      "destination": "src/engine/ninja/texture:retain readable native bodies;palette identity context/migration carried across lifetime,palette,MSG and selection owners/adapters before whole-system closure",
+      "findings": [],
+      "classification_limits": [
+        "Named-file semantic inventory only at reviewed bytes. Full renderer,Session,game/resource lifecycle and complete-refactor campaign remain open. Nothing executed except read-only local inspection and authored-fragment/branch/commit operations. No source/tool/judge edits,builds,tests,oracles,gates,mutations,providers,network,storage/campaign operations or delegates.",
+        "Optional TSP/texture parameters/palette_version reflect three genuinely uninitialized original stack fields, as explicitly documented in original Source.prepare and compared by definedness. They do not mean fixture missing input. Null Surface/physical allocation/current colors and absent filenames are real resource/game absence. No zero value invented for undefined source bits. Indexed read of undefined revision fails explicitly in NativeTextures, so arbitrary indexed palette support is not certified.",
+        "Existing lifetime report pins current lifetime bytes; other small reports generally omit implementation fingerprints. Read-only review creates no fresh verdict. No tracked current lifetime holdout/mutant receipt resolved; memory claims and absent reference/inventory-raw directory are navigation only, not accepted current evidence.",
+        "Pool/list borrows require stable pool and list storage. Current Display fixes2048 slots. Arbitrary callback reentry that resizes vectors, destroys owners or reacquires a zero-count slot during release is not qualified. Release callback failure leaves decremented reference/published prefix; no rollback is invented. zero-count orphan allocation after uint16 wrap explicitly throws; it is not recovered source behavior.",
+        "Integer GBIX is content global ID,not VA. Type151126016/151388160,pixel format268435456/939524096,masks/shifts,stride16 and color nibble expansion are layout/format encodings,not dispatch addresses. Source pointers in probes stay at reference boundary; no EXE read or register transport occurs in assigned implementation bodies.",
+        "No original pixel/GPU upload comparison,HRESULT failure equivalence,concurrent upload safety,all PVR/GVR formats or full palette mutation/registration is claimed. Existing Metal unit is narrow native readback evidence; no new hardware qualification. Global prior FP partial/fail identities remain unchanged and unexecuted here."
+      ]
+    }
+  },
+  "classification_limits": [
+    "Named-file semantic inventory only at reviewed bytes. Full renderer,Session,game/resource lifecycle and complete-refactor campaign remain open. Nothing executed except read-only local inspection and authored-fragment/branch/commit operations. No source/tool/judge edits,builds,tests,oracles,gates,mutations,providers,network,storage/campaign operations or delegates.",
+    "Optional TSP/texture parameters/palette_version reflect three genuinely uninitialized original stack fields, as explicitly documented in original Source.prepare and compared by definedness. They do not mean fixture missing input. Null Surface/physical allocation/current colors and absent filenames are real resource/game absence. No zero value invented for undefined source bits. Indexed read of undefined revision fails explicitly in NativeTextures, so arbitrary indexed palette support is not certified.",
+    "Existing lifetime report pins current lifetime bytes; other small reports generally omit implementation fingerprints. Read-only review creates no fresh verdict. No tracked current lifetime holdout/mutant receipt resolved; memory claims and absent reference/inventory-raw directory are navigation only, not accepted current evidence.",
+    "Pool/list borrows require stable pool and list storage. Current Display fixes2048 slots. Arbitrary callback reentry that resizes vectors, destroys owners or reacquires a zero-count slot during release is not qualified. Release callback failure leaves decremented reference/published prefix; no rollback is invented. zero-count orphan allocation after uint16 wrap explicitly throws; it is not recovered source behavior.",
+    "Integer GBIX is content global ID,not VA. Type151126016/151388160,pixel format268435456/939524096,masks/shifts,stride16 and color nibble expansion are layout/format encodings,not dispatch addresses. Source pointers in probes stay at reference boundary; no EXE read or register transport occurs in assigned implementation bodies.",
+    "No original pixel/GPU upload comparison,HRESULT failure equivalence,concurrent upload safety,all PVR/GVR formats or full palette mutation/registration is claimed. Existing Metal unit is narrow native readback evidence; no new hardware qualification. Global prior FP partial/fail identities remain unchanged and unexecuted here."
+  ]
+}
