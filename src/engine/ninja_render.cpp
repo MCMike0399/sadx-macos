@@ -1,5 +1,6 @@
 #include "engine/ninja_render.hpp"
 #include "engine/ninja_blend_internal.hpp"
+#include "engine/ninja_depth_internal.hpp"
 namespace sadx {
 namespace {
 std::uint32_t word(const std::uint8_t* p){return std::uint32_t(p[0])|(std::uint32_t(p[1])<<8)|(std::uint32_t(p[2])<<16)|(std::uint32_t(p[3])<<24);}
@@ -127,15 +128,47 @@ NinjaRenderResult ninja_set_blend_77ec60(std::uint32_t selector, std::uint32_t v
     return result;
 }
 NinjaRenderResult ninja_set_depth_comparison(std::uint32_t value,
-                                             const std::array<std::uint32_t, 8> *table,
-                                             NinjaRenderState &runtime) {
+                                               const std::array<std::uint32_t, 8> *table,
+                                               NinjaRenderState &runtime) {
     NinjaRenderResult result;
-    if(!runtime.device_at_3d128b0){result.failure=NinjaRenderFailure::unknown_device;result.source_boundary=0x77ed04;return result;}
-    if(!*runtime.device_at_3d128b0){result.failure=NinjaRenderFailure::null_device;result.source_boundary=0x77ed09;return result;}
-    if(!table){result.failure=NinjaRenderFailure::missing_tables;result.source_boundary=0x77ed0e;return result;}
-    ninja_issue_render_state(result,runtime,0x17,(*table)[value&7],{0x77ed04,0x77ed09,0x77ed19});return result;
+    // NOTSA: availability diagnostics stay in the legacy reference interface.
+    struct ReadStopped {};
+    const auto stop = [&](NinjaRenderFailure failure, std::uint32_t boundary) {
+        result.failure = failure;
+        result.source_boundary = boundary;
+        throw ReadStopped{};
+    };
+    try {
+        render_detail::apply_depth_comparison(
+            value,
+            [&] {
+                const auto &current_device = runtime.device_at_3d128b0;
+                if (!current_device)
+                    stop(NinjaRenderFailure::unknown_device, 0x77ed04);
+                if (!*current_device)
+                    stop(NinjaRenderFailure::null_device, 0x77ed09);
+                return *current_device;
+            },
+            [&](std::uint32_t index) {
+                if (!table)
+                    stop(NinjaRenderFailure::missing_tables, 0x77ed0e);
+                return (*table)[index];
+            },
+            [&](const NinjaRenderDeviceHandle &device, std::uint32_t setting,
+                std::uint32_t comparison) {
+                return issue_on_device(result, runtime, device, setting, comparison, 0x77ed19);
+            });
+    } catch (const ReadStopped &) {
+        // Preserve the exact source read boundary; no command has been attempted.
+    }
+    return result;
 }
-NinjaRenderResult ninja_set_depth_write(std::uint32_t value,NinjaRenderState& runtime){
-    NinjaRenderResult result;ninja_issue_render_state(result,runtime,0xe,value,{0x77ed24,0x77ed29,0x77ed2f});return result;
+NinjaRenderResult ninja_set_depth_write(std::uint32_t value, NinjaRenderState &runtime) {
+    NinjaRenderResult result;
+    render_detail::apply_depth_write(value, [&](std::uint32_t setting, std::uint32_t enabled) {
+        return ninja_issue_render_state(result, runtime, setting, enabled,
+                                        {0x77ed24, 0x77ed29, 0x77ed2f});
+    });
+    return result;
 }
 } // namespace sadx

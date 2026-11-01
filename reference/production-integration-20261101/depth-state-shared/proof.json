@@ -1,0 +1,24 @@
+{
+  "base_blend_candidate": "7fe9f36",
+  "scope": "Shared source depth comparison/write decisions across the legacy fact adapter and actual native Display methods. No canonical state owner moved or duplicated.",
+  "sources_sha256": {
+    "src/engine/ninja_depth_internal.hpp": "465cd0bc7cee919e75f15430c28af77f8cb1d4dbd5c3e62387cda400b8f08027",
+    "src/engine/ninja_render.cpp": "6ad59a71c5ccd646b2bf85fcc8d11ff176fb9da7fd4cc13301bf388c7e69fb35",
+    "src/runtime/native_display.cpp": "43d91e1e96e64612b20fb2e822704e05459995b6d6b6f862fabafe3960b84717",
+    "tests/unit/native_render_state.cpp": "7f3eb96f273484b45d49d8c9c39a725a88faf8343c279d77ccca9d16fd8c4d64"
+  },
+  "source_baseline_setup": "c6fc8f4 with independent observation correction b40093c; exact source1998 cases before this rewrite",
+  "current_development_cases": 1998,
+  "mismatch_count": 0,
+  "valid_mutants_caught": 6,
+  "native_public_composition_test_exit_status": 0,
+  "native_public_composition_test": "Public Display methods plus LogoRenderer.draw_polygon/frame snapshots,8 masked source comparison values, large modes, bool write0/1 and retained older snapshots. No new friend/testing-only production accessor.",
+  "arithmetic": "Integer mask and full-width state writes; no floating-point algorithm changed.",
+  "holdout": "1024 reserved final cases remain unrun before review.",
+  "limits": [
+    "Pending independent source/judge correction review, final holdout and integrated gate.",
+    "Legacy fixture/diagnostic types and address metadata remain explicit migration debt.",
+    "Texture-stage policy and complete render owner/consumer migration remain open.",
+    "Native composition test borrows unchanged Root portable dependencies, not a clean updated source build."
+  ]
+}

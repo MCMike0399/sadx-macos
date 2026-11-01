@@ -1,0 +1,65 @@
+{
+  "mutants": [
+    {
+      "name": "wrong_mask",
+      "source": "src/engine/ninja_depth_internal.hpp",
+      "old": "mode & 7U",
+      "new": "mode & 3U",
+      "build_exit_status": 0,
+      "judge_exit_status": 1,
+      "mismatch_count": 447,
+      "caught": true
+    },
+    {
+      "name": "normalize_full_write",
+      "source": "src/engine/ninja_depth_internal.hpp",
+      "old": "issue(kDepthWrite, enabled)",
+      "new": "issue(kDepthWrite, enabled != 0)",
+      "build_exit_status": 0,
+      "judge_exit_status": 1,
+      "mismatch_count": 897,
+      "caught": true
+    },
+    {
+      "name": "eager_table",
+      "source": "src/engine/ninja_depth_internal.hpp",
+      "old": "    auto device = acquire_device();\n    const auto comparison = read_comparison(mode & 7U);",
+      "new": "    const auto comparison = read_comparison(mode & 7U);\n    auto device = acquire_device();",
+      "build_exit_status": 0,
+      "judge_exit_status": 1,
+      "mismatch_count": 42,
+      "caught": true
+    },
+    {
+      "name": "wrong_callback_value",
+      "source": "src/engine/ninja_render.cpp",
+      "old": "const auto receipt = runtime.set_render_state(command);",
+      "new": "auto wrong=command;wrong.value=0;const auto receipt = runtime.set_render_state(wrong);",
+      "build_exit_status": 0,
+      "judge_exit_status": 1,
+      "mismatch_count": 1781,
+      "caught": true
+    },
+    {
+      "name": "duplicate_callback",
+      "source": "src/engine/ninja_render.cpp",
+      "old": "const auto receipt = runtime.set_render_state(command);",
+      "new": "runtime.set_render_state(command);const auto receipt = runtime.set_render_state(command);",
+      "build_exit_status": 0,
+      "judge_exit_status": 1,
+      "mismatch_count": 1788,
+      "caught": true
+    },
+    {
+      "name": "corrupt_pending",
+      "source": "src/engine/ninja_render.cpp",
+      "old": "result.pending_command = command;",
+      "new": "result.pending_command = command;result.pending_command->value=0;",
+      "build_exit_status": 0,
+      "judge_exit_status": 1,
+      "mismatch_count": 38,
+      "caught": true
+    }
+  ],
+  "sources_restored": true
+}

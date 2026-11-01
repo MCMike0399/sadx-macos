@@ -1,3 +1,4 @@
+#include "engine/ninja_depth_internal.hpp"
 #include "runtime/native_display.hpp"
 #include "math/ninja_sine_table.hpp"
 #include "runtime/engine_code_tables.hpp"
@@ -129,10 +130,22 @@ void Display::set_clip_range(float near_distance, float far_distance) {
     view::set_clip_range(near_distance, far_distance, view_, services, arithmetic_);
 }
 void Display::set_depth_comparison(std::uint32_t mode) {
-    const auto table = runtime::engine_code_tables().depth_comparisons;
-    device_state_.render_states[23] = static_cast<std::uint32_t>(table[mode & 7]);
+    render_detail::apply_depth_comparison(
+        mode, [this] { return &device_state_; },
+        [](std::uint32_t index) {
+            return static_cast<std::uint32_t>(runtime::engine_code_tables().depth_comparisons[index]);
+        },
+        [](auto *device, std::uint32_t setting, std::uint32_t value) {
+            device->render_states[setting] = value;
+            return true;
+        });
 }
-void Display::set_depth_write(bool enabled) { device_state_.render_states[14] = enabled; }
+void Display::set_depth_write(bool enabled) {
+    render_detail::apply_depth_write(enabled, [this](std::uint32_t setting, std::uint32_t value) {
+        device_state_.render_states[setting] = value;
+        return true;
+    });
+}
 void Display::restore_depth_comparison() { set_depth_comparison(default_depth_comparison_); }
 void Display::release_all_textures() {
     auto state = texture_state();
