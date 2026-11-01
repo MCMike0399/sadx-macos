@@ -1,0 +1,91 @@
+{
+  "source_commit": "618b0dd",
+  "consumer_results": [
+    {
+      "slug": "ninja_sprite_queue",
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "probe_sha256": "88f69ed85b0f73b5b25772c8f5ac04ef22b69e09fde5ff33176c06604d478b0c",
+      "verdict": "partial",
+      "reason": "values match; strict_emulator_match=false (see limits)"
+    },
+    {
+      "slug": "ninja_queue_consumer",
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "probe_sha256": "93d40f5d6174667bc543ad4176fbb84f1b9aa1257feda915232a6ab3cc8aa643",
+      "verdict": "partial",
+      "reason": "values match; strict_flags_match=false (see limits)"
+    },
+    {
+      "slug": "ninja_frame_calls",
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "probe_sha256": "50398a516222e2729f2d3139829495bfeea5167cc45498fe9450dbc7fc2b5052",
+      "verdict": "pass",
+      "reason": "mismatch_count=0"
+    },
+    {
+      "slug": "ninja_texture_selection",
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "probe_sha256": "83e8554fa3aeab615d561f44b400900b15be59df70d06a72d6c4b806fae5fd71",
+      "verdict": "pass",
+      "reason": "passed"
+    },
+    {
+      "slug": "ninja_view",
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "probe_sha256": "a612d1af92fb45473360d4c254839e48b286a81d04b672baf45cc2481fc0b075",
+      "verdict": "pass",
+      "reason": "seeded_values_match, primary_values_with_unicorn_transcendentals_match"
+    },
+    {
+      "slug": "game_view",
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "probe_sha256": "f88c4fa1a7825611b40fa62a9807c87507e6723215dc199aa43047ca48cbe5e9",
+      "verdict": "partial",
+      "reason": "values match; fp_flag_mismatches=291 (see limits)"
+    },
+    {
+      "slug": "game_frame_owners",
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "probe_sha256": "3348b096cb16fb1d6857d2b4e81bd6a372048645603f34d3581bfe18a431e2c1",
+      "verdict": "pass",
+      "reason": "mismatch_count=0"
+    },
+    {
+      "slug": "ninja_queue_lifecycle",
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "probe_sha256": "854f96b1f1eb8922e923fc04703250ecaac6459be4734318a69fa98cc73932af",
+      "verdict": "partial",
+      "reason": "values match; fp_flag_mismatches=402 (see limits)"
+    },
+    {
+      "slug": "ninja_queue_native",
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "probe_sha256": "ea0751b0f8ca0122bf6dbaa515def273c843668559572e662c87a97209a0eb0e",
+      "verdict": "partial",
+      "reason": "values match; fp_flag_mismatches=402 (see limits)"
+    }
+  ],
+  "closure_passed": true,
+  "native_archive_method": "Replace exactly the two changed members of the unchanged Root native archive, then force-load link every member. Not a clean source archive build.",
+  "app_exit_status": 1,
+  "frames": 1382,
+  "next_call": "native_gamma_load_setup_resource",
+  "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+  "same_baseline_screenshot": true,
+  "log_sha256": "279d2e286621d89713b2d7bfd4e7903948825569f1f1d1feaba16608c0542fe7",
+  "limits": [
+    "Five consumer verdicts remain inherited FP partials, not passes.",
+    "Lifecycle full 80-word outputs match the frozen baseline in all 600 cases per backend, including all 402 FP mismatch case identities.",
+    "No actor/GPU/N3b/story/gameplay63FPS or new controller qualification.",
+    "Whole render ownership/depth/stage migration, fresh review and integrated gate remain open."
+  ]
+}
