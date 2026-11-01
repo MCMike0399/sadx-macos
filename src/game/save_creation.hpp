@@ -20,7 +20,7 @@ struct CaptureState {
     const std::array<std::uint8_t, 512> &cutscene_flags;
     const std::uint8_t *playable_scene_flags;
     const std::array<bootstrap::StorySequence, 8> &sequences;
-    const std::array<std::uint8_t, 344> &completed_stages;
+    const save::StageCompletions &completed_stages;
     const std::array<std::uint8_t, 60> &missions;
     const std::uint8_t &rumble_enabled;
     const std::uint32_t &market_rings;

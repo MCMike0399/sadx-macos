@@ -5,7 +5,7 @@ namespace sadx::menu_eligibility {
 // NOTSA: borrows canonical persistent completion and source-backed stage
 // catalogs.
 struct Completion {
-    const std::array<std::uint8_t, 344> &completed_stages;
+    const save::StageCompletions &completed_stages;
     const title_menu::StageSelectionData &catalog;
 };
 // FUNCTION: SONIC 0x506410 AvaGetMissionEnable

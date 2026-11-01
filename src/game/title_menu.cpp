@@ -218,7 +218,7 @@ void build_trial_stage_list(StageSelectWork &work, const StageSelectionInputs &i
         for (const auto &stage : stages) work.available_stages[count++] = stage;
     } else {
         const auto character = static_cast<std::uint8_t>(input.data.character_ids[input.character]);
-        const auto *cleared = input.completed_stages.data() + character * 43;
+        const auto *cleared = input.completed_stages.data() + character * save::kStagesPerCharacter;
         if (cleared[stages.front().stage] != 0) {
             for (std::size_t index = 1; index < stages.size(); ++index) {
                 if (cleared[stages[index].stage] != 0) {
@@ -239,7 +239,7 @@ void build_subgame_stage_list(StageSelectWork &work, const StageSelectionInputs 
     const auto &stages = input.data.subgame_stages[input.character];
     std::uint8_t count = 0;
     const auto *cleared = input.completed_stages.data() +
-        input.data.character_ids[input.character] * 43;
+        input.data.character_ids[input.character] * save::kStagesPerCharacter;
     for (const auto &stage : stages) {
         // The source reads the save flag before the include-all flag.
         if (cleared[stage.stage] != 0 || input.include_all != 0) {

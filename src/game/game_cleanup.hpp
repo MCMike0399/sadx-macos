@@ -57,7 +57,7 @@ struct LoadSaveState {
     std::array<std::uint8_t, 512> &cutscene_flags;
     std::uint8_t *playable_scene_flags; // borrowed native slice, exactly eight elements
     std::array<bootstrap::StorySequence, 8> &sequences;
-    std::array<std::uint8_t, 344> &completed_stages;
+    save::StageCompletions &completed_stages;
     std::array<std::uint8_t, 60> &missions;
     std::uint8_t &rumble_enabled;
     std::uint32_t &market_rings;

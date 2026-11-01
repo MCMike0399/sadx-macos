@@ -50,7 +50,8 @@ void change_character(Work &work, State state, Calls &calls, bool previous) {
     work.selected_character = numerator % divisor;
     state.selected_character = static_cast<std::uint8_t>(work.selected_character);
     state.player_character = 0;
-    if (work.selected_character == 5 || work.selected_character == 6)
+    if (work.selected_character == 5 ||
+        work.selected_character == menu_eligibility::kExtraCharacterSlot)
         state.player_character = 6;
     rest(work);
 }
@@ -60,7 +61,7 @@ void confirm(Work &work, State state, Calls &calls) {
         return;
     work.frames = 0;
     if (state.variant == 0) {
-        if (work.selected_character == 6) {
+        if (work.selected_character == menu_eligibility::kExtraCharacterSlot) {
             const bool cleared = calls.character_cleared(6);
             calls.open_dialog(cleared ? 10 : 9);
             work.submode = cleared ? 7 : 6;
@@ -72,7 +73,8 @@ void confirm(Work &work, State state, Calls &calls) {
             return;
         }
     } else if (state.variant == 1) {
-        calls.character_voice(work.selected_character + (work.selected_character == 6 ? 1 : 0));
+        calls.character_voice(work.selected_character +
+                              (work.selected_character == menu_eligibility::kExtraCharacterSlot ? 1 : 0));
         calls.select_preview(1);
         work.submode = 3;
         return;
@@ -410,13 +412,15 @@ void draw(const Work &work, State state, DrawState view, Calls &services,
 
 namespace sadx::character_select_menu {
 std::int32_t character_count(menu_eligibility::Progress progress) {
-    if (progress.tutorial_variant == 2)
-        return 6;
+    if (progress.selection_variant == menu_eligibility::kRegularCharactersOnlyVariant)
+        return menu_eligibility::kRegularCharacterCount;
     if (progress.unlock_override != 0)
-        return 7;
-    if (progress.tutorial_variant == 1)
-        return 6 + (menu_eligibility::metal_sonic_enabled(progress) != 0);
-    return 6 + (progress.story_flags[71] != 0);
+        return menu_eligibility::kRegularCharacterCount + 1;
+    if (progress.selection_variant == menu_eligibility::kMetalSelectionVariant)
+        return menu_eligibility::kRegularCharacterCount +
+               (menu_eligibility::metal_sonic_enabled(progress) != 0);
+    return menu_eligibility::kRegularCharacterCount +
+           (progress.story_flags[story_flags::kSuperSonicPlayable] != 0);
 }
 bool character_cleared(std::uint32_t character, Availability availability) {
     if (availability.progress.unlock_override != 0)
@@ -428,13 +432,14 @@ bool trial_character_enabled(std::uint32_t character, Availability availability)
         return true;
     if (menu_eligibility::character_enabled(character, availability.progress) == 0)
         return false;
-    if (character == 6)
+    if (character == menu_eligibility::kExtraCharacterSlot)
         return true;
     if (availability.trial_subgame != 0)
         return menu_eligibility::minigame_count(character, availability.progress,
                                                availability.completion) != 0;
     const auto source_character = availability.completion.catalog.character_ids.at(character);
     const auto stage = availability.completion.catalog.trial_stages.at(character).at(1).stage;
-    return availability.completion.completed_stages.at(source_character * 43 + stage) != 0;
+    return availability.completion.completed_stages.at(
+               source_character * save::kStagesPerCharacter + stage) != 0;
 }
 } // namespace sadx::character_select_menu

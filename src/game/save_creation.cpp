@@ -85,7 +85,8 @@ void capture_live_data(Data &data, CaptureState &state) {
     store_playable_scenes(captured, state.playable_scene_flags);
     store_story_sequences(captured, state.sequences);
     for (std::size_t index = 0; index < captured.completed_stages.size(); ++index)
-        std::copy_n(state.completed_stages.begin() + index * 43, 43,
+        std::copy_n(state.completed_stages.begin() + index * save::kStagesPerCharacter,
+                    save::kStagesPerCharacter,
                     captured.completed_stages[index].begin());
     captured.missions = state.missions;
     captured.total_rings = state.market_rings;

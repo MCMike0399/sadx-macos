@@ -66,7 +66,7 @@ struct State {
     std::uint32_t ring_adjustment = 0;
     std::array<StorySequence, 8> sequences{};
     std::array<std::uint8_t, 512> sequence_variables{}, event_work{}, cutscene_flags{};
-    std::array<std::uint8_t, 344> completed_stages{};
+    save::StageCompletions completed_stages{};
     // The three cleared section-work ranges overlap by20 bytes in the original.
     std::array<std::uint8_t, 932> section_work{};
     StorySequence *current_sequence = nullptr;

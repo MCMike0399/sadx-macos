@@ -1,9 +1,18 @@
 #include "game/main_menu_eligibility.hpp"
 namespace sadx::menu_eligibility {
+namespace {
+// SDK MissionFlagBits_Complete is bit 7 of each saved mission byte.
+constexpr std::uint8_t kMissionComplete = 128;
+constexpr std::int32_t kOptionalEntryEmblems = 20;
+constexpr std::uint8_t kOptionalEntryMissions = 20;
+}
 std::int32_t mission_enabled(Progress progress) {
     if (progress.unlock_override != 0)
         return 1;
-    constexpr std::array<unsigned, 6> clear_flags{72, 73, 74, 75, 77, 76};
+    constexpr std::array<std::size_t, kRegularCharacterCount> clear_flags{
+        story_flags::kSonicComplete, story_flags::kTailsComplete,
+        story_flags::kKnucklesComplete, story_flags::kAmyComplete,
+        story_flags::kBigComplete, story_flags::kGammaComplete};
     for (auto flag : clear_flags)
         if (progress.story_flags[flag] != 0)
             return 1;
@@ -12,12 +21,12 @@ std::int32_t mission_enabled(Progress progress) {
 std::int32_t trial_enabled(Progress progress, Completion completion) {
     if (progress.unlock_override != 0)
         return 1;
-    for (unsigned character = 0; character < 6; ++character) {
+    for (unsigned character = 0; character < kRegularCharacterCount; ++character) {
         if (character_enabled(character, progress) == 0)
             continue;
         const auto stage = completion.catalog.trial_stages[character].at(1).stage;
         const auto source_character = completion.catalog.character_ids[character];
-        if (completion.completed_stages.at(source_character * 43 + stage) != 0)
+        if (completion.completed_stages.at(source_character * save::kStagesPerCharacter + stage) != 0)
             return 1;
     }
     return 0;
@@ -34,14 +43,14 @@ std::int8_t text_language(const save::Data &save, std::int32_t language) {
 std::uint8_t completed_mission_count(const std::array<std::uint8_t, 60> &missions) {
     std::uint8_t count = 0;
     for (auto mission : missions)
-        if ((mission & 128) != 0)
+        if ((mission & kMissionComplete) != 0)
             ++count;
     return count;
 }
 std::int32_t optional_entry_enabled(Progress progress,
                                     const std::array<std::uint8_t, 60> &missions) {
-    return progress.unlock_override != 0 || emblem_count(progress.save) >= 20 ||
-           completed_mission_count(missions) >= 20;
+    return progress.unlock_override != 0 || emblem_count(progress.save) >= kOptionalEntryEmblems ||
+           completed_mission_count(missions) >= kOptionalEntryMissions;
 }
 std::uint8_t trial_stage_count(unsigned character, Progress progress, Completion completion,
                                std::uint8_t current_character) {
@@ -51,7 +60,7 @@ std::uint8_t trial_stage_count(unsigned character, Progress progress, Completion
     const auto source_character = completion.catalog.character_ids.at(character);
     // NOTSA: names repeated reads from the canonical stage completion table.
     const auto cleared = [&](unsigned row, std::uint8_t stage) {
-        return completion.completed_stages.at(row * 43 + stage) != 0;
+        return completion.completed_stages.at(row * save::kStagesPerCharacter + stage) != 0;
     };
     if (!cleared(source_character, stages.at(0).stage))
         return 0;
@@ -69,7 +78,7 @@ std::uint8_t minigame_count(unsigned character, Progress progress, Completion co
     const auto source_character = completion.catalog.character_ids.at(character);
     std::uint8_t count = 0;
     for (const auto &stage : stages)
-        if (completion.completed_stages.at(source_character * 43 + stage.stage) != 0 ||
+        if (completion.completed_stages.at(source_character * save::kStagesPerCharacter + stage.stage) != 0 ||
             progress.unlock_override != 0)
             ++count;
     return count;
@@ -77,13 +86,13 @@ std::uint8_t minigame_count(unsigned character, Progress progress, Completion co
 std::uint8_t total_trial_stage_count(Progress progress, Completion completion,
                                      std::uint8_t current_character) {
     std::uint8_t count = 0;
-    for (unsigned character = 0; character < 6; ++character)
+    for (unsigned character = 0; character < kRegularCharacterCount; ++character)
         count += trial_stage_count(character, progress, completion, current_character);
     return count;
 }
 std::uint8_t total_minigame_count(Progress progress, Completion completion) {
     std::uint8_t count = 0;
-    for (unsigned character = 0; character < 6; ++character)
+    for (unsigned character = 0; character < kRegularCharacterCount; ++character)
         count += minigame_count(character, progress, completion);
     return count;
 }

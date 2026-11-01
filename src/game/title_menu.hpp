@@ -335,7 +335,7 @@ struct MenuFactoryInputs {
 struct StageSelectionInputs {
     const std::uint8_t &character;
     const std::uint8_t &include_all;
-    const std::array<std::uint8_t, 344> &completed_stages;
+    const save::StageCompletions &completed_stages;
     const StageSelectionData &data;
 };
 struct MenuFactoryCalls {

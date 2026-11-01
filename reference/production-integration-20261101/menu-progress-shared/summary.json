@@ -1,0 +1,53 @@
+{
+  "baseline_commit": "34bc3fc",
+  "source_sha256": {
+    "src/game/character_select_menu.cpp": "e6858a81bfc8570517dab5b9a9d27c29cb4d0c30aa4f45b79f9a2da49d1a0ab5",
+    "src/game/game_bootstrap.hpp": "61e95071538b4f23602fda8460e10ea7ef251ff42d4b6ae1496c5ac718394f46",
+    "src/game/game_cleanup.cpp": "024c23e264893b083234cd4acd187a9f08496a9aae650f21a446740cb8f46b9b",
+    "src/game/game_cleanup.hpp": "5e75754bfcdb7823872c06189ad556c440f95788e11a6fa2382b1db2a715cff7",
+    "src/game/main_menu_eligibility.cpp": "f76786029850e55a2ed0948bc8038c426b01638c1a72854c87cb680ee3146039",
+    "src/game/main_menu_eligibility.hpp": "47914ce3968ef0cfa0dd295834b4d1dff31abc8d4261a97b60451a06c5fd5fa4",
+    "src/game/menu_eligibility.cpp": "fb655e82d982bc0cbc4aea78fd76a191d4847b481d7de411c33616b2c1eb9396",
+    "src/game/menu_eligibility.hpp": "410afefd687a01dffe358aa487ec04ec10ba3d6d0921fe4ceb0b59f636a29f9c",
+    "src/game/save_creation.cpp": "9a66942a201d7a3daff243173e9ed83adb96d1d8a4cbafbc9c26800d5c299945",
+    "src/game/save_creation.hpp": "57d5baff2c974fd47d91a28b3314cf35d1e8ff2820a4dcf95716c4fbff7693a0",
+    "src/game/save_data.hpp": "b78b88eb49fa5623907fb4683b4fd5f349174b217b575ac6a3d55ba802d15080",
+    "src/game/title_menu.cpp": "6b61dedd857004f9e2b27ba1c378c2160055010b0c37474b93a15dcaeedb9fcb",
+    "src/game/title_menu.hpp": "7f96f3de3a1518ff8d12412bb35b04ec48480d2d0085356977ba33f629b1995f",
+    "src/game/story_flags.hpp": "1612c58a1a2d8019bc9d4d684723988cf136220e724fb72cf07366bd53049590"
+  },
+  "predicate_cases": [
+    7388,
+    11488,
+    2920
+  ],
+  "consumer_cases": {
+    "character_select_menu": 3326,
+    "title_menu": 20872,
+    "game_cleanup": 2604,
+    "save_creation": 1000
+  },
+  "full_output_and_partial_identity_replays_equal": true,
+  "six_valid_semantic_mutants_caught": [
+    "metal-store",
+    "big-gamma-order",
+    "metal-variant",
+    "override-precedence",
+    "completion-stride",
+    "current-character-final-stage"
+  ],
+  "units_passed": [
+    "menu_eligibility",
+    "main_menu_eligibility",
+    "save_file_codec",
+    "save_creation",
+    "game_cleanup",
+    "title_menu"
+  ],
+  "limits": [
+    "Existing Character Select 733 and title270 FP partial identities retained; not strict passes.",
+    "Eight game objects rebuilt for seven unchanged probes; unchanged Root core dependencies borrowed. No clean native closure or full gate for this private packet yet.",
+    "No protected judge input changed with the source. Fingerprinted table review requires separate evidenced update after this source commit.",
+    "Initial test build used nonexistent save_data.cpp unit filename; corrected to actual save_file_codec.cpp and all six existing programs passed."
+  ]
+}

@@ -4,6 +4,11 @@
 #include <cstdint>
 
 namespace sadx::save {
+// NOTSA: SAVE_DATA::flgCompletedActionStage dimensions from SADXStructsNew.h.
+inline constexpr std::size_t kStageCompletionCharacters = 8;
+inline constexpr std::size_t kStagesPerCharacter = 43;
+using StageCompletions =
+    std::array<std::uint8_t, kStageCompletionCharacters * kStagesPerCharacter>;
 struct ClearTime {
     std::uint8_t minutes{}, seconds{}, frames{};
 };
@@ -40,7 +45,8 @@ struct Data {
     std::array<std::uint8_t, 64> sequence_variables{}, event_flags{};
     std::array<std::uint8_t, 8> playable_scene_flags{};
     std::array<Sequence, 8> sequences{};
-    std::array<std::array<std::uint8_t, 43>, 8> completed_stages{};
+    std::array<std::array<std::uint8_t, kStagesPerCharacter>,
+               kStageCompletionCharacters> completed_stages{};
     std::array<std::uint8_t, 60> missions{};
     std::uint32_t total_rings{};
     std::array<std::int32_t, 10> metal_scores{};

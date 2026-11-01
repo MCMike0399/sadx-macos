@@ -63,7 +63,8 @@ void load_save(const save::Data &save, LoadSaveState &state) {
     load_story_sequences(stored, state.sequences);
     for (std::size_t character = 0; character < stored.completed_stages.size(); ++character) {
         const auto &stages = stored.completed_stages[character];
-        std::copy(stages.begin(), stages.end(), state.completed_stages.begin() + character * 43);
+        std::copy(stages.begin(), stages.end(),
+                  state.completed_stages.begin() + character * save::kStagesPerCharacter);
     }
     state.missions = stored.missions;
     state.rumble_enabled = stored.vibration;
