@@ -24,6 +24,9 @@ PACKET = ROOT / 'docs/refactor-inventory/packets/task-owner'
 FREEZE = PACKET / 'RESERVED-FREEZE.json'
 PIN_DATA = ROOT / 'build/task-final-closure-pins.json'
 OUT = ROOT / 'build/task-final-reserved'
+ORIGINAL_OUT = OUT
+ORIGINAL_FREEZE = FREEZE
+ORIGINAL_PINS = PIN_DATA
 BEFORE = 'bd22ee423ea015f00152a97fa8fc2e1b4034b411'
 CANDIDATE = 'f8ab5e408427bb799aa244e46274648862b0ec05'
 SLUGS = ('task_work', 'task_lifecycle', 'task_display', 'task_delete')
@@ -160,7 +163,53 @@ def frozen_inputs(frozen):
     return inputs
 
 
-def prepare():
+def select_continuation():
+    global FREEZE, PIN_DATA, OUT
+    FREEZE = PACKET / 'RESERVED-CONTINUATION-FREEZE.json'
+    PIN_DATA = ROOT / 'build/task-final-continuation-pins.json'
+    OUT = ROOT / 'build/task-final-reserved-continuation'
+
+
+def unattempted_previous_run():
+    """Only the exact terminal pre-observation failure can supply reused inputs."""
+    terminal = json.loads((ORIGINAL_OUT / 'RUN.json').read_text())
+    if not terminal['error'] or terminal['completed']:
+        raise ValueError('Previous run is not the uncompleted failed attempt')
+    if list(ORIGINAL_OUT.glob('*/captures')):
+        raise ValueError('Previous run already attempted observations')
+    previous = json.loads(ORIGINAL_FREEZE.read_text())
+    marker = json.loads((ORIGINAL_OUT / 'EXECUTED_ONCE.json').read_text())
+    if marker['freeze_sha256'] != digest(ORIGINAL_FREEZE):
+        raise ValueError('Previous execution freeze differs')
+    raw = previous['input_manifest']
+    if (ROOT / raw['path'] != ORIGINAL_PINS or digest(ORIGINAL_PINS) != raw['sha256']):
+        raise ValueError('Previous pin proof differs')
+    old_pins = json.loads(ORIGINAL_PINS.read_text())
+    selected = toolchain()
+    current_pins = root_inputs(selected)
+    if selected != previous['toolchain'] or set(current_pins) != set(old_pins):
+        raise ValueError('Continuation changed model dependency selection')
+    changed = {name for name in old_pins if old_pins[name] != current_pins[name]}
+    if changed != {str(Path(__file__).absolute())}:
+        raise ValueError('Only the reviewed Root orchestration correction may differ')
+    inputs = json.loads((ORIGINAL_OUT / 'INPUTS.json').read_text())
+    if set(inputs) != set(SLUGS):
+        raise ValueError('Previous cohort set differs')
+    for slug, expected in inputs.items():
+        if digest(ORIGINAL_OUT / (slug + '-inputs.json')) != expected:
+            raise ValueError('Previous generated inputs changed')
+    models = json.loads((ORIGINAL_OUT / 'BUILD.json').read_text())['libraries']
+    required = {str(ORIGINAL_OUT / world / 'libraries' / (slug + '.dylib'))
+                for world in ('old', 'current') for slug in SLUGS}
+    if set(models) != required or any(digest(path) != value for path, value in models.items()):
+        raise ValueError('Previous compiled models changed')
+    proof = dict(terminal_sha256=digest(ORIGINAL_OUT / 'RUN.json'),
+                 freeze_sha256=digest(ORIGINAL_FREEZE), inputs=inputs, libraries=models,
+                 original_output=str(ORIGINAL_OUT))
+    return proof
+
+
+def prepare(continuation=False):
     if OUT.exists():
         raise ValueError('Existing execution directory; preserve and inspect it')
     if git('diff', '--name-only', 'HEAD', '--', 'src', 'tools/oracles', 'tools/lib').strip():
@@ -178,11 +227,13 @@ def prepare():
         raise ValueError('Wrong immutable before-source model')
     tools = toolchain()
     manifest = write_pin_manifest(root_inputs(tools))
+    reuse = unattempted_previous_run() if continuation else None
     write_new(FREEZE, dict(before=BEFORE, candidate=CANDIDATE,
                           protocol=protocol, input_manifest=manifest, toolchain=tools,
                           source_trees={world: git('rev-parse', commit + ':src').decode().strip()
                                         for world, commit in (('old', BEFORE), ('current', CANDIDATE))},
                           archive_paths=ARCHIVE_PATHS,
+                          continuation=reuse,
                           policy='One admitted run, immutable source archives, no retries or overwritten output.'))
 
 
@@ -205,7 +256,7 @@ def verify_freeze():
     return frozen
 
 
-def command(argv, cwd, log, stage=None):
+def command(argv, cwd, log, stage=None, continuation=False):
     # Compiler/header/library/plugin search must not inherit operator settings.
     environment = {name: os.environ[name] for name in ('HOME', 'TMPDIR', 'USER', 'LOGNAME')
                    if name in os.environ}
@@ -221,6 +272,8 @@ def command(argv, cwd, log, stage=None):
                                             pipe_device=pipe.st_dev, pipe_inode=pipe.st_ino)))
         temporary.replace(active)
         argv = [*argv, '--parent-fd', str(read_fd), '--stage-token', token]
+        if continuation:
+            argv.append('--continuation')
     try:
         with log.open('x') as stream:
             result = subprocess.run(argv, cwd=cwd, env=environment, stdout=stream,
@@ -357,11 +410,15 @@ def child(mode, world=None, slug=None, parent_fd=None, stage_token=None):
     name = 'generate' if mode == 'generate' else world + '-' + slug
     admit_child(name, parent_fd, stage_token)
     frozen = verify_freeze()
+    reused = frozen.get('continuation')
+    if reused and (mode == 'generate' or unattempted_previous_run() != reused):
+        raise ValueError('Continuation cannot regenerate or alter previous proof')
+    models_root = ORIGINAL_OUT if reused else OUT
     marker = json.loads((OUT / 'EXECUTED_ONCE.json').read_text())
     if marker['freeze_sha256'] != digest(FREEZE):
         raise ValueError('Execution marker does not bind this freeze')
     manifest = json.loads((OUT / 'BUILD.json').read_text())
-    required = {str(OUT / name / 'libraries' / (item + '.dylib'))
+    required = {str(models_root / name / 'libraries' / (item + '.dylib'))
                 for name in ('old', 'current') for item in SLUGS}
     if set(manifest['libraries']) != required:
         raise ValueError('Compiled model set differs')
@@ -376,7 +433,7 @@ def child(mode, world=None, slug=None, parent_fd=None, stage_token=None):
             if digest(OUT / (item + '-inputs.json')) != expected:
                 raise ValueError('Generated inputs changed: ' + item)
     write_new(OUT / (name + '.started.json'), dict(mode=mode, world=world, slug=slug))
-    tree = OUT / ('old' if mode == 'generate' else world) / 'tree'
+    tree = models_root / ('old' if mode == 'generate' else world) / 'tree'
     verify_archive(tree, frozen['before'] if mode == 'generate' or world == 'old' else frozen['candidate'])
     package = (Path(sys.prefix) / 'lib' / f'python{sys.version_info.major}.{sys.version_info.minor}' /
                'site-packages/unicorn').resolve()
@@ -400,7 +457,7 @@ def child(mode, world=None, slug=None, parent_fd=None, stage_token=None):
         write_new(OUT / 'INPUTS.json', {item: digest(OUT / (item + '-inputs.json')) for item in SLUGS})
         return
     inputs = json.loads((OUT / (slug + '-inputs.json')).read_text())
-    library = OUT / world / 'libraries' / (slug + '.dylib')
+    library = models_root / world / 'libraries' / (slug + '.dylib')
     importlib.import_module('verify_original_' + slug)
     verify_origins(tree, package)
     status = observer.observe(slug, inputs['cases'], inputs['labels'], inputs['definition'],
@@ -419,17 +476,32 @@ def run(admitted):
     write_new(OUT / 'EXECUTED_ONCE.json', dict(freeze_sha256=digest(FREEZE)))
     completed, failure = [], None
     try:
-        for world, commit in (('old', frozen['before']), ('current', frozen['candidate'])):
-            build(world, archive(world, commit), frozen['toolchain'])
-        write_new(OUT / 'BUILD.json', dict(libraries={str(path): digest(path)
-                  for world in ('old', 'current')
-                  for path in sorted((OUT / world / 'libraries').glob('*.dylib'))}))
         script = str(Path(__file__).resolve())
-        command([sys.executable, '-I', '-S', '-B', script, '_generate'], ROOT, OUT / 'generate.log', stage='generate')
+        reused = frozen.get('continuation')
+        if reused:
+            if unattempted_previous_run() != reused:
+                raise ValueError('Previous unattempted proof changed')
+            write_new(OUT / 'BUILD.json', dict(libraries=reused['libraries']))
+            for slug, expected in reused['inputs'].items():
+                data = (ORIGINAL_OUT / (slug + '-inputs.json')).read_bytes()
+                path = OUT / (slug + '-inputs.json')
+                with path.open('xb') as stream:
+                    stream.write(data)
+                if digest(path) != expected:
+                    raise ValueError('Copied frozen inputs differ')
+            write_new(OUT / 'INPUTS.json', reused['inputs'])
+        else:
+            for world, commit in (('old', frozen['before']), ('current', frozen['candidate'])):
+                build(world, archive(world, commit), frozen['toolchain'])
+            write_new(OUT / 'BUILD.json', dict(libraries={str(path): digest(path)
+                      for world in ('old', 'current')
+                      for path in sorted((OUT / world / 'libraries').glob('*.dylib'))}))
+            command([sys.executable, '-I', '-S', '-B', script, '_generate'], ROOT, OUT / 'generate.log', stage='generate')
         for slug in SLUGS:
             for world in ('old', 'current'):
                 command([sys.executable, '-I', '-S', '-B', script, '_observe', '--world', world, '--slug', slug],
-                        ROOT, OUT / (world + '-' + slug + '.log'), stage=world + '-' + slug)
+                        ROOT, OUT / (world + '-' + slug + '.log'), stage=world + '-' + slug,
+                        continuation=bool(reused))
             comparison = OUT / (slug + '-comparison.json')
             command([sys.executable, '-I', '-S', '-B', str(Path(__file__).with_name('compare_streams.py')),
                      str(OUT / 'old/captures' / slug), str(OUT / 'current/captures' / slug),
@@ -457,9 +529,13 @@ def main():
     parser.add_argument('--slug', choices=SLUGS)
     parser.add_argument('--parent-fd', type=int)
     parser.add_argument('--stage-token')
+    parser.add_argument('--continuation', action='store_true',
+                        help='Use only the separately frozen exact unattempted cohort from the failed run')
     args = parser.parse_args()
+    if args.continuation:
+        select_continuation()
     if args.mode == 'prepare':
-        prepare()
+        prepare(args.continuation)
     elif args.mode == 'run':
         run(args.admitted)
     else:

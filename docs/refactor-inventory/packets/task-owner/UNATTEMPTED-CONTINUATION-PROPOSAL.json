@@ -1,0 +1,35 @@
+{
+  "base_commit": "95f92a665311b1a67ca03f7c00b50be20172dc02",
+  "purpose": "Bounded separately frozen continuation of exactly unattempted generated inputs; no retry/erasure of failed run.",
+  "original_terminal": "build/task-final-reserved/RUN.json remains exit1; originalSource/nativeattempts0; all1142inputs and models preserved.",
+  "checks": [
+    "Prior RUN must be failed with no completed cohort and no captures directory.",
+    "Original freeze/marker/rawpin proof and exact model/input sets/hashes must match.",
+    "Current dependency map/toolchain must equal original except the reviewed orchestration file.",
+    "Distinct continuation FREEZE/rawpins/output/marker/admission; no overwrite of original artifact.",
+    "Continuation cannot generate inputs; copies exact input bytes and reuses verified compiled models/archives.",
+    "All current parent/stage/pipe/origin/archive/model/input guards remain in force."
+  ],
+  "not_executed": [
+    "continuation preparation",
+    "continuation freeze",
+    "continuation admission",
+    "any source/native reserved case"
+  ],
+  "tests": {
+    "tests": 70,
+    "exit_status": 0,
+    "command": "python3 -m unittest discover -s tests/python -p 'test_task_*' -v",
+    "log_sha256": "6e2711bbb395f13ec5c451fb2e299e685f3e36763905de0feb51668b0e2eee7a"
+  },
+  "files": {
+    "tools/oracles/task_judges/reserved_run.py": "00dee7739480197ca668ccd24b9a14d07096b80698e157b9ee0c934ed16d5e58",
+    "tests/python/test_task_reserved_run.py": "a32efcc82b851e5789f79b26c4ecb3f9640660cf1f45b224f642f16bf13a5550"
+  },
+  "remaining": [
+    "Independent complete continuation/fix review",
+    "New immutable continuation closure and explicit Root admission",
+    "Actual observations and comparisons; original failed receipt never becomes pass",
+    "Task Main integration/source-only/journeys/gate"
+  ]
+}

@@ -22,6 +22,52 @@ SPEC.loader.exec_module(RUN)
 
 
 class TaskReservedRun(unittest.TestCase):
+    def test_continuation_requires_exact_inputs_models_and_zero_prior_attempts(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            old = root/'original'
+            old.mkdir()
+            freeze, pins = root/'old-freeze.json', root/'old-pins.json'
+            pins.write_text(json.dumps({str(FILE.absolute()): 'old runner'}))
+            freeze.write_text(json.dumps(dict(toolchain={}, input_manifest={
+                'path': 'old-pins.json', 'sha256': RUN.digest(pins)})))
+            (old/'EXECUTED_ONCE.json').write_text(json.dumps({'freeze_sha256': RUN.digest(freeze)}))
+            terminal = dict(error={'message': 'pre-observation failure'}, completed=[])
+            (old/'RUN.json').write_text(json.dumps(terminal))
+            inputs, models = {}, {}
+            for slug in RUN.SLUGS:
+                path = old/(slug+'-inputs.json')
+                path.write_text(json.dumps({'cases': [[1]]}))
+                inputs[slug] = RUN.digest(path)
+                for world in ('old', 'current'):
+                    library = old/world/'libraries'/(slug+'.dylib')
+                    library.parent.mkdir(parents=True, exist_ok=True)
+                    library.write_text('model')
+                    models[str(library)] = RUN.digest(library)
+            (old/'INPUTS.json').write_text(json.dumps(inputs))
+            (old/'BUILD.json').write_text(json.dumps({'libraries': models}))
+            with patch.object(RUN, 'ROOT', root), patch.object(RUN, 'ORIGINAL_OUT', old), \
+                    patch.object(RUN, 'ORIGINAL_FREEZE', freeze), patch.object(RUN, 'ORIGINAL_PINS', pins), \
+                    patch.object(RUN, 'toolchain', return_value={}), \
+                    patch.object(RUN, 'root_inputs', return_value={str(FILE.absolute()): 'corrected runner'}):
+                proof = RUN.unattempted_previous_run()
+                self.assertEqual(proof['inputs'], inputs)
+                self.assertEqual(proof['libraries'], models)
+                path = old/'task_work-inputs.json'
+                original = path.read_bytes()
+                path.write_text('changed')
+                with self.assertRaisesRegex(ValueError, 'inputs changed'):
+                    RUN.unattempted_previous_run()
+                path.write_bytes(original)
+                captures = old/'old/captures'
+                captures.mkdir()
+                with self.assertRaisesRegex(ValueError, 'already attempted'):
+                    RUN.unattempted_previous_run()
+                captures.rmdir()
+                (old/'RUN.json').write_text(json.dumps(dict(terminal, completed=['task_work'])))
+                with self.assertRaisesRegex(ValueError, 'not the uncompleted failed'):
+                    RUN.unattempted_previous_run()
+
     def test_real_child_dispatch_keeps_stage_name_after_library_validation(self):
         class ReachedObserver(Exception):
             pass
