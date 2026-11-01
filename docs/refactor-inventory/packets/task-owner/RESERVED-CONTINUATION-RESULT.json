@@ -1,0 +1,163 @@
+{
+  "status": "TERMINAL EXIT 1. Qualification incomplete; do not retry or relabel as pass.",
+  "main": "20dad6fb3ba2ad09902fb65deaafbe64d46c6172",
+  "freeze_commit": "bfd7c903fb95fc237c8e9a36165079def60cdd6b",
+  "admission_commit": "20dad6fb3ba2ad09902fb65deaafbe64d46c6172",
+  "run": {
+    "completed": [
+      "task_work",
+      "task_lifecycle",
+      "task_display"
+    ],
+    "error": {
+      "type": "RuntimeError",
+      "message": "Exit 1: ['/Users/burbujamc/Developer/sadx-macos/reference/python/bin/python', '-I', '-S', '-B', '/Users/burbujamc/Developer/sadx-macos/tools/oracles/task_judges/reserved_run.py', '_observe', '--world', 'old', '--slug', 'task_delete', '--parent-fd', '3', '--stage-token', 'caeb6c25717009941bdbb2f28466ba478e77d70bbdf1c317', '--continuation']; log /Users/burbujamc/Developer/sadx-macos/build/task-final-reserved-continuation/old-task_delete.log"
+    },
+    "uncompleted": [
+      "task_delete"
+    ]
+  },
+  "exit_status": 1,
+  "accounting": {
+    "old": {
+      "task_work": {
+        "oracle_exit": 0,
+        "validated": true,
+        "generated": 8,
+        "attempted_source": 8,
+        "unattempted_source_ids": [],
+        "fresh_count": 8,
+        "repeated_fixed_count": 0,
+        "outcomes": {
+          "helpers_returned": 8
+        },
+        "projection_counts": {
+          "null": 8
+        },
+        "receipt": "build/task-final-reserved-continuation/old/captures/task_work/reserved-observation.json",
+        "sha256": "1379febe12d78a4b4f0c2dfa747a38ea27b3064ff102ff39e0907ddb2ee8ee2e"
+      },
+      "task_lifecycle": {
+        "oracle_exit": 0,
+        "validated": true,
+        "generated": 8,
+        "attempted_source": 8,
+        "unattempted_source_ids": [],
+        "fresh_count": 8,
+        "repeated_fixed_count": 0,
+        "outcomes": {
+          "helpers_returned": 8,
+          "established_observer_stop": 1
+        },
+        "projection_counts": {
+          "null": 9
+        },
+        "receipt": "build/task-final-reserved-continuation/old/captures/task_lifecycle/reserved-observation.json",
+        "sha256": "2e70a0ba2218605df20ee11e544175ea57cbd62b83da63dcad8d23118cee25ab"
+      },
+      "task_display": {
+        "oracle_exit": 0,
+        "validated": true,
+        "generated": 556,
+        "attempted_source": 556,
+        "unattempted_source_ids": [],
+        "fresh_count": 512,
+        "repeated_fixed_count": 44,
+        "outcomes": {
+          "established_observer_stop": 140,
+          "returned": 416
+        },
+        "projection_counts": {
+          "produced": 556
+        },
+        "receipt": "build/task-final-reserved-continuation/old/captures/task_display/reserved-observation.json",
+        "sha256": "2f107e825743e33d410f66c19155a9c25d6136c4e616ae6b78927856cf4fb1c9"
+      },
+      "task_delete": {
+        "oracle_exit": 1,
+        "validated": false,
+        "generated": 570,
+        "attempted_source": 570,
+        "unattempted_source_ids": [],
+        "fresh_count": 512,
+        "repeated_fixed_count": 58,
+        "outcomes": {
+          "returned": 314,
+          "established_observer_stop": 256
+        },
+        "projection_counts": {
+          "produced": 563,
+          "excluded": 7
+        },
+        "receipt": "build/task-final-reserved-continuation/old/captures/task_delete/reserved-observation.json",
+        "sha256": "1d6eba40515b6844481cbb6c60d82a117cf382954d9ccc5e3d400925bf3954d0"
+      }
+    },
+    "current": {
+      "task_work": {
+        "oracle_exit": 0,
+        "validated": true,
+        "generated": 8,
+        "attempted_source": 8,
+        "unattempted_source_ids": [],
+        "fresh_count": 8,
+        "repeated_fixed_count": 0,
+        "outcomes": {
+          "helpers_returned": 8
+        },
+        "projection_counts": {
+          "null": 8
+        },
+        "receipt": "build/task-final-reserved-continuation/current/captures/task_work/reserved-observation.json",
+        "sha256": "4441efc7eb53ec6a1d55b1bdb2f3a7afb941e90c70af5b186abd18ee0dcf9754"
+      },
+      "task_lifecycle": {
+        "oracle_exit": 0,
+        "validated": true,
+        "generated": 8,
+        "attempted_source": 8,
+        "unattempted_source_ids": [],
+        "fresh_count": 8,
+        "repeated_fixed_count": 0,
+        "outcomes": {
+          "helpers_returned": 8,
+          "established_observer_stop": 1
+        },
+        "projection_counts": {
+          "null": 9
+        },
+        "receipt": "build/task-final-reserved-continuation/current/captures/task_lifecycle/reserved-observation.json",
+        "sha256": "ec60ea2933ec7a9cfc141208d69be8d5d73389c1ec6cb225525de198ca9b9c3c"
+      },
+      "task_display": {
+        "oracle_exit": 0,
+        "validated": true,
+        "generated": 556,
+        "attempted_source": 556,
+        "unattempted_source_ids": [],
+        "fresh_count": 512,
+        "repeated_fixed_count": 44,
+        "outcomes": {
+          "established_observer_stop": 140,
+          "returned": 416
+        },
+        "projection_counts": {
+          "produced": 556
+        },
+        "receipt": "build/task-final-reserved-continuation/current/captures/task_display/reserved-observation.json",
+        "sha256": "97aab88b700dfb36718e614caecbf8954cb90fe554cc0ca012e5000439ccaed9"
+      },
+      "task_delete": {
+        "attempted": false
+      }
+    }
+  },
+  "artifact_manifest": {
+    "path": "build/task-final-continuation-terminal-artifacts.json",
+    "sha256": "8e896dd06f76b5780907db83b4901682bdf68460f12aef99967a8f29b3f6c9cb",
+    "files": 68
+  },
+  "original_attempt": "build/task-final-reserved remains terminal EXIT 1 with zero source/native attempts. Neither attempt is promoted.",
+  "failure": "Immutable-old task_delete case 207 has original-defined output mismatch; 570 original rows attempted, seven established exclusions, 563 compared native captures. Candidate deletion was not started.",
+  "next": "Diagnose saved case 207, without widening exclusions or rerunning completed cohorts. Any diagnostic execution requires a separately frozen limited Root admission. Source integration remains pending."
+}
