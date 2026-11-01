@@ -49,7 +49,7 @@ with stream.open('wb') as raw, gzip.GzipFile(fileobj=raw, mode='wb', mtime=0) as
             return Function(getattr(self.lib, key))
     def profile(frame, event, arg):
         if (event == 'return' and frame.f_code.co_name in ('run', 'initialize', 'checksum')
-                and Path(frame.f_code.co_filename).name.startswith(('verify_original_save', 'verify_original_load_selected_save'))):
+                and Path(frame.f_code.co_filename).name.startswith(('verify_original_save', 'verify_original_load_selected_save', 'verify_original_file_select_controls', 'verify_original_game_loop'))):
             if isinstance(arg, (list, tuple, bytes)):
                 emit(('source-return', frame.f_code.co_filename, arg))
                 counts['source_returns'] += 1
