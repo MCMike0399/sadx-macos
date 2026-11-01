@@ -93,9 +93,17 @@ call(rt, f, fp, /* target */ kAlias, 0xffffffff);
                          'void call(int a,int b,int c,int d,int e) noexcept {}',
                          'struct Painter { void call(int a,int b,int c,int d,int e) const {} };',
                          'auto call(int a,int b,int c,int d,int e) -> int { return d; }',
+                         'int call(int a,int b,int c,int d,int e) && noexcept { return d; }',
                          'auto call = [&](int a,int b,int c,int d,int e) { paint(d); };'):
             with self.subTest(addition=addition), self.assertRaises(ValueError):
                 census(LATER + '\n' + addition, PATH, [spec()])
+
+    def test_logical_and_and_bitwise_and_are_call_expressions(self):
+        for expression in ('bool ok = call(rt,f,fp,target,site) && ready;',
+                           'auto bits = call(rt,f,fp,target,site) & mask;'):
+            row, sites = census(LATER + '\n' + expression, PATH, [spec()])
+            self.assertEqual(row['dispatch_sites'], 1)
+            self.assertEqual(sites[0]['target_expression'], 'target')
 
     def test_template_commas_fail_closed_or_preserve_parenthesized_target(self):
         contract = spec(maximum=7)

@@ -36,7 +36,7 @@ def declarations(source: str) -> list[dict]:
         if not re.search(r"[A-Za-z_]\w*", match[1]):
             continue
         if match[3] == "(" and not re.match(
-                r"\s*(?:\{|[\w:]+(?:\s*<[^(){};]*>)?\s*\{)", code[match.end():]):
+                r"\s*(?:\(\s*)*(?:\{|[\w:]+(?:\s*<[^(){};]*>)?\s*\{)", code[match.end():]):
             if not re.search(r"\b(?:array|to_array)\b", match[1]):
                 continue
             arguments = code[match.end():].split(")", 1)[0].strip()
@@ -161,6 +161,10 @@ def review_problems(current: dict, data: dict, previous: dict | None = None) -> 
             problems.append(f"invalid retired aggregate lineage: {key}")
             continue
         validate_registry({"schema": 1, "tables": {key: item["review"]}})
+        if not isinstance(item.get("history", []), list) or any(
+                not isinstance(proof, dict) or proof.get("review") != item["review"]
+                for proof in item.get("history", [])):
+            problems.append(f"invalid retirement proof history: {key}")
         if item["outcome"] == "migrated" and not isinstance(item.get("successor"), dict):
             problems.append(f"missing retired aggregate successor: {key}")
         if item["outcome"] == "justified_removal" and (
@@ -169,12 +173,21 @@ def review_problems(current: dict, data: dict, previous: dict | None = None) -> 
             problems.append(f"missing justified removal proof: {key}")
     if previous is not None:
         old = validate_registry(previous)
+        for key in retired.keys() - previous.get("retired", {}).keys():
+            if key not in old or retired[key].get("history"):
+                problems.append(f"retirement requires a prior active review without invented history: {key}")
         for key in old.keys() - tables.keys():
             item = retired.get(key, {})
             if item.get("review") != old[key]:
                 problems.append(f"removed review requires preserved lineage: {key}")
         for key, item in previous.get("retired", {}).items():
-            if retired.get(key) != item:
+            updated = retired.get(key)
+            if updated == item:
+                continue
+            prior_proof = {field: value for field, value in item.items() if field != "history"}
+            history = [*item.get("history", []), prior_proof]
+            if (not isinstance(updated, dict) or updated.get("review") != item.get("review") or
+                    updated.get("history") != history):
                 problems.append(f"retired review history changed: {key}")
     return problems
 

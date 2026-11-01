@@ -64,6 +64,10 @@ constexpr int real[] = {1, 2};
         self.assertEqual([row['declaration'] for row in rows], ['names', 'identity'])
         changed = declarations('constexpr std::array<const char*,2> names({"Sonic","Amy"});')[0]
         self.assertNotEqual(rows[0]['sha256'], changed['sha256'])
+        nested = declarations('constexpr Matrix identity(((Matrix{{1.0f,0.0f}})));')
+        self.assertEqual([row['declaration'] for row in nested], ['identity'])
+        altered = declarations('constexpr Matrix identity(((Matrix{{2.0f,0.0f}})));')
+        self.assertNotEqual(nested[0]['sha256'], altered[0]['sha256'])
         self.assertEqual(declarations('constexpr std::array<int,2> function(Type value);'), [])
         with self.assertRaises(ValueError):
             declarations('constexpr std::array<int,2> unknown(other);')
@@ -177,8 +181,40 @@ constexpr int real[] = {1, 2};
             entry['evidence'][0]['sha256'] = hashlib.sha256((root / 'review.md').read_bytes()).hexdigest()
             entry['successor']['sha256'] = hashlib.sha256(successor.read_bytes()).hexdigest()
             self.assertEqual(reference_problems(root, new), [])
+            frozen = copy.deepcopy(new)
+            successor.write_text('void blend() { /* reviewed later maintenance */ }')
+            self.assertTrue(reference_problems(root, new))
+            entry['successor']['sha256'] = hashlib.sha256(successor.read_bytes()).hexdigest()
+            self.assertTrue(review_problems({}, new, frozen))
+            entry['history'] = [copy.deepcopy(frozen['retired'][key])]
+            self.assertEqual(review_problems({}, new, frozen), [])
+            self.assertEqual(reference_problems(root, new), [])
             entry['review']['classification'] = 'numeric_encoding'
-            self.assertIn('removed review requires preserved lineage', review_problems({}, new, old)[0])
+            self.assertTrue(review_problems({}, new, frozen))
+
+    def test_retired_successor_revalidation_appends_proof_without_erasing_history(self):
+        key = 'src/engine/old.cpp::recipe'
+        prior = registry({key: declarations('constexpr int recipe[] = {1};')[0]})
+        retired = registry({})
+        retired['retired'][key] = {'review': copy.deepcopy(prior['tables'][key]),
+                                 'outcome': 'migrated', 'reason': 'Shared named implementation',
+                                 'evidence': [{'path': 'review.md', 'line': 1, 'sha256': 'a'*64}],
+                                 'verification': ['test.cpp'],
+                                 'successor': {'path': 'new.cpp', 'symbol': 'blend', 'sha256': 'b'*64}}
+        updated = copy.deepcopy(retired)
+        item = updated['retired'][key]
+        item['successor']['sha256'] = 'c'*64
+        self.assertTrue(review_problems({}, updated, retired))
+        item['history'] = [copy.deepcopy(retired['retired'][key])]
+        self.assertEqual(review_problems({}, updated, retired), [])
+        next_revision = copy.deepcopy(updated)
+        item = next_revision['retired'][key]
+        item['successor']['sha256'] = 'd'*64
+        item['history'].append({k:copy.deepcopy(v) for k,v in updated['retired'][key].items()
+                                if k != 'history'})
+        self.assertEqual(review_problems({}, next_revision, updated), [])
+        item['history'][0]['reason'] = 'Invented replacement history'
+        self.assertTrue(review_problems({}, next_revision, updated))
 
 
 if __name__ == "__main__":
