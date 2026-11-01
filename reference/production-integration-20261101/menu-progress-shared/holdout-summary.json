@@ -1,0 +1,24 @@
+{
+  "review_commit": "ae1c097",
+  "source_commit": "98ffa26",
+  "holdout_runs": [
+    {
+      "slug": "menu_eligibility",
+      "seed": 20261102,
+      "fresh_random_cases": 2048,
+      "total_cases": 4436,
+      "mismatch_count": 0
+    },
+    {
+      "slug": "main_menu_eligibility",
+      "seed": 20261103,
+      "fresh_random_cases": 2048,
+      "total_cases": 8536,
+      "mismatch_count": 0
+    }
+  ],
+  "limits": [
+    "Run only after independent source approval. Fixed boundary cases repeat;2048 fresh-seed random cases per script are the held-out addition. No FP arithmetic or discrepancy in these predicate comparisons.",
+    "Not a whole UI/save/Session/campaign verdict."
+  ]
+}
