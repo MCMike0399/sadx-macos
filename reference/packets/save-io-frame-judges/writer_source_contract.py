@@ -79,18 +79,7 @@ class Source(Base):
         self.snapshot(99)
         return {'snapshots':self.snapshots,'written':self.entry_written,'stopped_at':self.stopped,'path':self.path}
 
-def native_cases(text):
-    result=[]
-    for group in text.split('writer:')[1:40]:
-        lines=group.splitlines();snapshots=[];written=None
-        for i,line in enumerate(lines):
-            prefix,sep,rest=line.partition(':')
-            if sep and prefix.isdigit() and ',' in rest:
-                values=[int(x)&0xffffffff for x in rest.split(',')]
-                snapshots.append((int(prefix),values,lines[i+1]))
-            if prefix=='written':written=rest
-        result.append({'snapshots':snapshots,'written':written})
-    return result
+from writer_capture import native_cases
 
 if __name__=='__main__':
     exe,native,folder=sys.argv[1:];folder=Path(folder);folder.mkdir(parents=True,exist_ok=True)

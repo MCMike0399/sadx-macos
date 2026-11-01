@@ -71,8 +71,9 @@ Two appended manifest registrations have explicit transitive Make dependencies:
   prefixes in `writer-source.json` within its stated comparison scope.
 * The same IO contract covers sentinel identity versus unknown name/time,
   partially linked missing-name append, native node/string allocation failures,
-  retained aliases and delayed destruction, all partial byte-read lengths including
-  zero complete items, slot wrap, malformed/short/path boundaries, file/search
+  retained aliases and delayed destruction, sampled read prefixes of 0, 1, 2, 3,
+  4, 100, 1391 and 1392 bytes (including zero complete items), slot wrap,
+  malformed/short/path boundaries, file/search
   ordering and exceptions, 99-count break, fallback load and missing FILE boundary.
   The unchanged original reverse-free judge separately preserves no-alias CRT
   resource receipts. `list-source.json` records fixture sentinel/next identities

@@ -117,6 +117,36 @@ class JudgeTests(unittest.TestCase):
                 self.write(path, 'original contract\n')
         self.assertEqual(check(self.root)[0], [])
 
+    def packet_directory_aliases(self):
+        packet = self.root / 'reference/packets'
+        packet.mkdir(parents=True, exist_ok=True)
+        with tempfile.TemporaryDirectory() as directory:
+            target = Path(directory)
+            (target / 'helper.py').write_text('immutable helper\n')
+            for name, destination in (('alias', target), ('dangling', target / 'absent')):
+                alias = packet / name
+                alias.symlink_to(destination, target_is_directory=True)
+                with self.assertRaisesRegex(ValueError, 'symlink'):
+                    snapshot(self.root)
+                alias.unlink()
+            packet.rmdir()
+            packet.symlink_to(target, target_is_directory=True)
+            with self.assertRaisesRegex(ValueError, 'symlink'):
+                snapshot(self.root)
+            packet.unlink()
+            packet.mkdir()
+            cache = packet / '__pycache__'
+            cache.symlink_to(target, target_is_directory=True)
+            self.assertEqual(check(self.root)[0], [])
+            cache.unlink()
+
+    def test_packet_directory_aliases_in_source_archive(self):
+        self.packet_directory_aliases()
+
+    def test_packet_directory_aliases_in_git_checkout(self):
+        self.commit_fixture()
+        self.packet_directory_aliases()
+
     def test_update_requires_evidence_and_separate_game_commit(self):
         self.assertEqual(self.cli('--update').returncode, 1)
         self.commit_fixture()

@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "821861ff2b6b9d87e1c96e32d9ff1ae56b756911",
-    "evidence": "reference/packets/save-io-frame-judges/root-judge-protection-migration-v2.json",
-    "evidence_sha256": "76272f1ad334bfb1f456b3357cc606b1d44addc1667e0a404c47360b8db55baf",
-    "reason": "Version2 immutable-HEAD recognition adds maintained unit bodies and packet verification scripts; preserve all955 inherited paths and ratchets, record recognition expansion separately from source regressions"
+    "base_commit": "8fccefd405b76207d34a3c0c97e2cfa56c10a8a4",
+    "evidence": "reference/packets/save-io-frame-judges/root-p2-corrections.json",
+    "evidence_sha256": "55db125c8cf70071bb5bb31cf4f1733438a61ff0c3b132553c70e8b39e394d46",
+    "reason": "Fix reviewed directory-alias escape and missing writer cohort acceptance; preserve all1259parent inputs, valid39source rows and original values/unknowns; add pure parser and targeted regression fixtures"
   },
   "files": {
     "Makefile": "6d512f01eda5e0adb970d1e7421d38d6fa295e08a24b553dd4641b4a6f377e50",
@@ -304,7 +304,8 @@
     "reference/packets/save-io-frame-judges/observe.py": "70008edde46995b8fc28b860c9f9361ab8d43813c59cdf23b91ee606a01e1070",
     "reference/packets/save-io-frame-judges/replay.py": "5b5c1c3ba79a9ca604a3f3637de460757d1803746ceae3ab89e229af055920eb",
     "reference/packets/save-io-frame-judges/verify.py": "198abd5df1b2866a113994bde19ef85c4a2bfee506d3906591989b8c9d5017bc",
-    "reference/packets/save-io-frame-judges/writer_source_contract.py": "d7f1476270ea606f8c1e19a66d4847da1e1971c6c2a48986e4e390a6bc316f18",
+    "reference/packets/save-io-frame-judges/writer_capture.py": "c02a5144ad79f82eeefa0260ea8dc579ff82dbe42996226d900ae41f7009eba9",
+    "reference/packets/save-io-frame-judges/writer_source_contract.py": "4ccf545e32c0afbfa0572515c8415d8baaaeef3fdce4377d46407d2bfc629308",
     "reference/production-integration-20261015/native-frame-control-mutants.json": "add313cbae1597cf4931fbc2947da72800ce7a7ac81bf83788e91988b2d6e9bd",
     "reference/production-integration-20261015/native-frame-host-mutants.json": "1f540bdf30ef59d919853e1a7b2c6d61d527ac26441490812c77d920a493f5ad",
     "reference/production-integration-20261015/provenance-checker-mutants.json": "8d8a2006f54748ab5df4262862a89f38bf982387763f7345d78bd4436a799068",
@@ -630,7 +631,7 @@
     "tests/python/test_input_config.py": "fa5d1d7f518d68e17618617cd3863b1f9553a505446af646d21b7e1cd771f0ef",
     "tests/python/test_journey_driver.py": "5d9bb8325b4585e4c66206f092b708951c76b61adba756c8736239a2b414470a",
     "tests/python/test_journeys.py": "a0c7e04914c078b417932f156463f311c617df314d94737b3caf9ce34822ac19",
-    "tests/python/test_judge.py": "2d9b23954b10ceb1332a31a8e1c5b5115304e582b6ed13d233fc687bb0c621e8",
+    "tests/python/test_judge.py": "e1b200761d48664351af80d60231f913380d2cf31bfb0c3d7cf6e2759e7d3e2e",
     "tests/python/test_main_menu_dialog_import.py": "979f6ce93a2bfb58219af180700172b450b52aa17f988938e98776f67878e3d3",
     "tests/python/test_menu_dialog_import.py": "d92712d15cc8ebb657813d22fccbc21a821f7d589ea0ff09f67c4b8ea63d37a9",
     "tests/python/test_menu_textures.py": "3e5cff9e92ffa2e1a522943cd42ce0457d5fd0334630b84dc1f5a35c6e09b22a",
@@ -651,6 +652,7 @@
     "tests/python/test_regular_textures.py": "b5ae871253c6c2e2fcaf69ce3f8c967b906e295c2c80cf49882f539b26dd268f",
     "tests/python/test_rollout_salvage.py": "6823ff25fa979fb7299e99f50aeb2ba1828b85ea3c9b5a65e635d093ef9c2a37",
     "tests/python/test_save_files.py": "de514de19a12ca015a891d61d1c49b930262ddeff9bfbad383c48df1ac1ca108",
+    "tests/python/test_save_writer_capture.py": "76162ee4e60f7aaf2a7853a61c4d551568af065d4136457269814fcaf859cdab",
     "tests/python/test_selection_actions_import.py": "3a0b037498a983bfd65dd4835b469d1f36b79024bc48b0573ba986d7fe3b2a21",
     "tests/python/test_sonic_actor_resources.py": "18f77c63337f3c3cc19e7285eff9429209b487d20283541f279615468fe44c51",
     "tests/python/test_sound_banks.py": "4ac4c51ac9cf5d98acf471a0d22aaae9a7b210b97b37fadb8a5b124c073e5eec",
@@ -971,7 +973,7 @@
     "tools/gate/check_global_owners.py": "764714cd1fbdeab7b77f3b50d9efb64f12992f791758e3f07602a938b32ef504",
     "tools/gate/check_input_initial_state.py": "2a9de3ce38d6a1c8bef12e6c87fd8181a0888c15e5033b5c8b8b6a873f2352e1",
     "tools/gate/check_input_mod_constants.py": "be8443495170b4ecbc7388c3e60f387242847ae7318e3e310b6a53c74300614b",
-    "tools/gate/check_judge.py": "3296adb807df860def4bf74558cf5ff13cf2d762df288398a8d2a8a55489edbd",
+    "tools/gate/check_judge.py": "5f24e84de744602aed1e824b1369cf4e8eee23387379868c144910c7b634fa6b",
     "tools/gate/check_layers.py": "2b72408ccd936baa5da22b36eefbf90ce2af4ebf1ab01dc63a5f45f5fa9615c1",
     "tools/gate/check_library_initial_state.py": "6d5d21de9176f715328496408b5e87e5d80f72793cdfe13a4e7dc09931201080",
     "tools/gate/check_native_closure.py": "405656d6154dc89aec53cdc49c854ae6ec9287b7bb58dc894daa6ee07d8bc2d2",
