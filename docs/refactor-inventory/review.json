@@ -2142,16 +2142,24 @@
       "reviewed_source_sha256": "77b4c4887fa4228844e717b1049eaa1e3a1e87fdc378b4af7262d84ad1f10934"
     },
     "src/game/character_completion.hpp": {
-      "disposition": "needs_migration",
-      "reason": "Three boundary instruction addresses occur as ordinary enumerator comments (lines 21-23), outside provenance annotations.",
-      "semantic_justification": "Row/Catalog/Flags API itself is semantic and should be retained: signed authored value/kind/index, seven native vectors, const borrowed distinct flag owners. Catalog indexes and flag bounds describe genuine imported-data validity, not missing fixture words; FUNCTION and override trace CharacterCompletion. Small provenance-format cleanup only; do not turn these plain types into a reference transport or rewrite readable algorithm.",
+      "disposition": "already_conforming",
+      "reason": "Sole prior provenance finding resolved; instruction sites retained in evidence and complete preprocessed public header is identical.",
+      "semantic_justification": "Row/Catalog/Flags API itself is semantic and should be retained: signed authored value/kind/index, seven native vectors, const borrowed distinct flag owners. Catalog indexes and flag bounds describe genuine imported-data validity, not missing fixture words; FUNCTION and override trace CharacterCompletion. Small provenance-format cleanup only; do not turn these plain types into a reference transport or rewrite readable algorithm. Instruction-site comments are now retained in explicit evidence, with exactly identical preprocessed C++ tokens; no executable behavior or interface changed.",
       "evidence": [
         {
           "path": "src/game/character_completion.hpp",
           "line": 1,
-          "sha256": "c6749736b454ac340aa7b6c3efdf8e484c94014243fea533b4090140faff71ad",
-          "link": "src/game/character_completion.hpp#L1",
-          "end_line": 38
+          "sha256": "0b921119a02e6ea9d622e3d8b3de16a53c4d7b3011ed1a857cf71bb3e28e5eac"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/menu-save-predicates.json",
+          "line": 1,
+          "sha256": "5179a0eda1760d462c72c5ce42e221d5e4245a5ddeac7ea5b7305334e3a51964"
+        },
+        {
+          "path": "reference/production-integration-20261101/character-completion-provenance/proof.json",
+          "line": 1,
+          "sha256": "3258f76e89732826baaee92bf0f340cef48a31831b488d5958fead2822721811"
         }
       ],
       "resolved_owners": [
@@ -2306,20 +2314,208 @@
             "status": "Symbol override mentions 2399/5399 strict cases, but no tracked 5399-case report, seed, or reserved holdout receipt found; do not promote that wording to qualification."
           },
           "acceptance": "Sufficient for static semantic body disposition and unchanged bounded judge identity; fresh rewrite qualification remains Root-owned."
+        },
+        {
+          "fresh_original_receipt": {
+            "path": "reference/production-integration-20261101/character-completion-provenance/original.json",
+            "line": 1,
+            "sha256": "3bf3212b6f4b3d4932668dd53d795a177f699e0e54a75789b8276e015e3e7e4b"
+          },
+          "preprocessor_equivalence": {
+            "path": "reference/production-integration-20261101/character-completion-provenance/proof.json",
+            "line": 1,
+            "sha256": "3258f76e89732826baaee92bf0f340cef48a31831b488d5958fead2822721811"
+          },
+          "acceptance": "Unchanged unhooked original helper2399 cases exact; all256 story and256 signed cutscene byte helper checks retained. Pure comment provenance edit adds no new runtime/consumer/mutation/holdout verdict."
         }
       ],
       "destination": "src/game/save; existing semantic module retained until Root chooses system layout",
-      "findings": [
-        {
-          "location": "src/game/character_completion.hpp:21",
-          "minimum_scope": [
-            "src/game/character_completion.hpp"
-          ],
-          "required_change": "Keep logical Boundary names; move per-instruction provenance to supported annotation/evidence or reference diagnostic mapping. No algorithm or owner migration is justified by this finding."
-        }
+      "findings": [],
+      "classification_limits": [
+        "Named-file semantic disposition only. Existing consumer/resource ownership stays as previously reviewed; complete caller runtime and campaign remain open.",
+        "Header preprocessing is identical; no game behavior, owner, type or interface was rewritten."
       ],
-      "classification_limits": "Per-file existing maintained-source disposition. Companion dependencies and judge gaps remain explicit; no source change, test execution, gate or complete-system/runtime claim.",
-      "reviewed_source_sha256": "c6749736b454ac340aa7b6c3efdf8e484c94014243fea533b4090140faff71ad"
+      "reviewed_source_sha256": "0b921119a02e6ea9d622e3d8b3de16a53c4d7b3011ed1a857cf71bb3e28e5eac",
+      "prior_review": {
+        "disposition": "needs_migration",
+        "reason": "Three boundary instruction addresses occur as ordinary enumerator comments (lines 21-23), outside provenance annotations.",
+        "semantic_justification": "Row/Catalog/Flags API itself is semantic and should be retained: signed authored value/kind/index, seven native vectors, const borrowed distinct flag owners. Catalog indexes and flag bounds describe genuine imported-data validity, not missing fixture words; FUNCTION and override trace CharacterCompletion. Small provenance-format cleanup only; do not turn these plain types into a reference transport or rewrite readable algorithm.",
+        "evidence": [
+          {
+            "path": "src/game/character_completion.hpp",
+            "line": 1,
+            "sha256": "c6749736b454ac340aa7b6c3efdf8e484c94014243fea533b4090140faff71ad",
+            "link": "src/game/character_completion.hpp#L1",
+            "end_line": 38
+          }
+        ],
+        "resolved_owners": [
+          {
+            "resolution": "Flags contains const references to bootstrap_.sequence_variables and bootstrap_.cutscene_flags; event_work is a distinct owner and must not be substituted. Session owns one unique_ptr<Catalog>, attached once and moved in; value borrows it const. Catalog vectors contain imported signed value/source/index triples, no guest pointer/fixture optional. Helpers read bytes only and never change either flag owner.",
+            "evidence": [
+              {
+                "path": "src/game/character_completion.hpp",
+                "line": 8,
+                "sha256": "c6749736b454ac340aa7b6c3efdf8e484c94014243fea533b4090140faff71ad",
+                "link": "src/game/character_completion.hpp#L8",
+                "end_line": 19
+              },
+              {
+                "path": "src/game/game_bootstrap.hpp",
+                "line": 68,
+                "sha256": "df46f4e508378f30f3c6699fec50f38efe90bc5fe0dbeacf0bbbf672484925b4",
+                "link": "src/game/game_bootstrap.hpp#L68",
+                "end_line": 69
+              },
+              {
+                "path": "src/runtime/native_session.hpp",
+                "line": 135,
+                "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+                "link": "src/runtime/native_session.hpp#L135",
+                "end_line": 139
+              },
+              {
+                "path": "src/runtime/native_session.hpp",
+                "line": 268,
+                "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+                "link": "src/runtime/native_session.hpp#L268"
+              },
+              {
+                "path": "src/runtime/native_character_select.cpp",
+                "line": 219,
+                "sha256": "ae97db3caa701759181c10be4a87552002d8af9695828faf8c5971094add6dae",
+                "link": "src/runtime/native_character_select.cpp#L219",
+                "end_line": 224
+              },
+              {
+                "path": "src/apps/native_character_completion_assets.hpp",
+                "line": 6,
+                "sha256": "bc4dc41040c9618411b67f4f6f32013026a8032e7b9ebaabefaf2a1275efa664",
+                "link": "src/apps/native_character_completion_assets.hpp#L6",
+                "end_line": 30
+              },
+              {
+                "path": "tools/import/character_completion.py",
+                "line": 12,
+                "sha256": "2db244ad28c4f5c4c0c619f4b5fbfc8b1ec1155017d1c16ed01f59eb59176235",
+                "link": "tools/import/character_completion.py#L12",
+                "end_line": 33
+              }
+            ]
+          }
+        ],
+        "resolved_consumers": [
+          {
+            "path": "src/runtime/native_character_select.cpp",
+            "line": 219,
+            "sha256": "ae97db3caa701759181c10be4a87552002d8af9695828faf8c5971094add6dae",
+            "link": "src/runtime/native_character_select.cpp#L219",
+            "end_line": 224
+          },
+          {
+            "path": "src/game/character_select_menu.cpp",
+            "line": 387,
+            "sha256": "0f5f20783f0ce8ad777299b70125d06e06c0bb68805229dfaf2edc73fb20a043",
+            "link": "src/game/character_select_menu.cpp#L387",
+            "end_line": 388
+          },
+          {
+            "path": "src/apps/native_character_completion_assets.hpp",
+            "line": 6,
+            "sha256": "bc4dc41040c9618411b67f4f6f32013026a8032e7b9ebaabefaf2a1275efa664",
+            "link": "src/apps/native_character_completion_assets.hpp#L6",
+            "end_line": 30
+          },
+          {
+            "path": "src/apps/sadx_native.mm",
+            "line": 214,
+            "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2",
+            "link": "src/apps/sadx_native.mm#L214"
+          },
+          {
+            "path": "src/runtime/native_session.hpp",
+            "line": 135,
+            "sha256": "78cac1464c729fb440f4c7bc0e5afc61447740bde465d4876c278bc4f5efaff9",
+            "link": "src/runtime/native_session.hpp#L135",
+            "end_line": 139
+          }
+        ],
+        "accepted_judges": [
+          {
+            "unit": {
+              "path": "tests/unit/character_completion.mm",
+              "line": 5,
+              "sha256": "94e1c5e38c454ff75fa397189f1d025064bf729407319904cdf6b9148655e4cf",
+              "link": "tests/unit/character_completion.mm#L5",
+              "end_line": 82
+            },
+            "unit_registration": {
+              "path": "tests/unit/manifest.tsv",
+              "line": 257,
+              "sha256": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
+              "link": "tests/unit/manifest.tsv#L257"
+            },
+            "probe": {
+              "path": "tests/probes/native_character_completion_probe.cpp",
+              "line": 1,
+              "sha256": "550ec541735a1dcf965808ced1a35f13e5edc3c524d82e22b4b0b4a39444d5cd",
+              "link": "tests/probes/native_character_completion_probe.cpp#L1"
+            },
+            "oracle": {
+              "path": "tools/oracles/verify_original_character_completion.py",
+              "line": 1,
+              "sha256": "cf2e94624e384a24d53bf2a21744756ac79bf91c2f51c953c2f85927b68d17ac",
+              "link": "tools/oracles/verify_original_character_completion.py#L1"
+            },
+            "import_tests": {
+              "path": "tests/python/test_character_completion_import.py",
+              "line": 1,
+              "sha256": "677931420a5bd7881bc7051e2d9528375771362f8223b5c7a433536dfbc73659",
+              "link": "tests/python/test_character_completion_import.py#L1"
+            },
+            "prior_receipt": {
+              "path": "reference/production-integration-20261021/native-character-select-caller-frontier.json",
+              "line": 151,
+              "sha256": "af5c6416043b60bdf2860a5adfd48cabf054858a57eedd0ba851e3e5d4417ab7",
+              "link": "reference/production-integration-20261021/native-character-select-caller-frontier.json#L151",
+              "end_line": 155
+            },
+            "prior_receipt_identity": {
+              "cases": 2399,
+              "verdict": "pass (historical only)",
+              "raw_report_sha256": "b73d897914b3c19b3c773ef32673fff694a2284ce0af65600149138ee64d3ada"
+            },
+            "scope_and_limits": "Full 512ca0 entry and actual flag helpers; 256 byte helper proofs per flag kind. Canonical imported rows plus independently authored stress rows, zero/negative values, unknown kinds and signed nonpositive counts represented as empty native vectors at adapter boundary. Unit explicitly checks six indexed-read boundary cases and seven malformed metadata cases, distinct story/cutscene ownership and last-match rather than maximum/popcount. Raw 2399-case report is not tracked here; receipt has its hash. No new execution or full CharacterSelect drawing claim.",
+            "mutants": {
+              "identity": null,
+              "status": "No dedicated completion algorithm mutation receipt located. Registration records x492->493 Number ABI mutant, eight mismatches, but that judges the caller/UI number arguments, not this completion algorithm. Do not count it as this module mutant qualification.",
+              "related_nonqualifying_receipt": {
+                "path": "reference/production-integration-20261021/native-character-select-registration-judge.json",
+                "line": 8,
+                "sha256": "a74180c06254e555b5a649891edc3e3c3d59406c7b73eab1d7d96c9366bbf672",
+                "link": "reference/production-integration-20261021/native-character-select-registration-judge.json#L8"
+              }
+            },
+            "holdout": {
+              "identity": null,
+              "status": "Symbol override mentions 2399/5399 strict cases, but no tracked 5399-case report, seed, or reserved holdout receipt found; do not promote that wording to qualification."
+            },
+            "acceptance": "Sufficient for static semantic body disposition and unchanged bounded judge identity; fresh rewrite qualification remains Root-owned."
+          }
+        ],
+        "destination": "src/game/save; existing semantic module retained until Root chooses system layout",
+        "findings": [
+          {
+            "location": "src/game/character_completion.hpp:21",
+            "minimum_scope": [
+              "src/game/character_completion.hpp"
+            ],
+            "required_change": "Keep logical Boundary names; move per-instruction provenance to supported annotation/evidence or reference diagnostic mapping. No algorithm or owner migration is justified by this finding."
+          }
+        ],
+        "classification_limits": "Per-file existing maintained-source disposition. Companion dependencies and judge gaps remain explicit; no source change, test execution, gate or complete-system/runtime claim.",
+        "reviewed_source_sha256": "c6749736b454ac340aa7b6c3efdf8e484c94014243fea533b4090140faff71ad"
+      }
     },
     "src/game/character_completion.cpp": {
       "disposition": "already_conforming",
