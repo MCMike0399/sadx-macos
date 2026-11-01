@@ -1,0 +1,40 @@
+{
+  "base_commit": "a29ebec0e1fa0559deeaabee7ad65273e3e37363",
+  "purpose": "Additive generator implementation for the previously frozen final task cohort definitions.",
+  "source_domain": "Same safe owned allocator and tracked-top-level lifecycle operation envelopes as existing verify_original_task_work.fixtures and verify_original_task_lifecycle.fixtures. Existing generators and original comparators remain unchanged.",
+  "files": {
+    "tools/oracles/task_judges/reserved_inputs.py": "2e15c69e6c872035005af4bffd50fae0c9e3d8717dcf61dbf04e1d081d0a8492",
+    "tests/python/test_task_reserved_inputs.py": "ce771feeee0e8dac64450381a8e15ea6d1216aeb3235008a804aea1ada3482b4"
+  },
+  "focused_tests": {
+    "command": "python3 -m unittest discover -s tests/python -p test_task_reserved_inputs.py -v",
+    "exit_status": 0,
+    "tests": 4,
+    "development_seeds_only": [
+      3,
+      4,
+      5,
+      7,
+      11
+    ],
+    "properties": [
+      "each arena allocation freed at most once and no owned allocation omitted at end",
+      "child allocation indices consume creation indices without becoming direct destruction candidates",
+      "only supported flag and list domains emitted",
+      "reproducible distinct seeded inputs and invalid bounds rejected"
+    ]
+  },
+  "reserved_inputs_generated": false,
+  "original_or_native_execution_performed": false,
+  "remaining": [
+    "exact observer/runner with current old/candidate source closure freeze",
+    "independent generator/observer adequacy review",
+    "reviewed source candidate",
+    "Root execution admission and actual per-case final evidence",
+    "combined integration gate"
+  ],
+  "limits": [
+    "Generator-domain tests do not prove Source behavior, native equality or a completed reserved holdout.",
+    "No Source API or behavior was changed. Shared CRT policy migration remains separate coherent future work; no CRT source was edited."
+  ]
+}
