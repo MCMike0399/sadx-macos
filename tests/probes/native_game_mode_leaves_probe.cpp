@@ -27,6 +27,7 @@ constexpr Field kScalars[]={
  {0x3b2c420,4},{0x3b29d6c,4},{0x3b29d68,4},{0x3ce7174,4},{0x3ce7178,4},{0x3ce717c,4},{0x3ce7180,4}};
 constexpr std::size_t kScalarBytes=[]{std::size_t n=0;for(const auto& f:kScalars)n+=f.width;return n;}();
 constexpr std::size_t kBytes=kScalarBytes+0xb64+0x3c+0x3638+8+0x20+7+0x78;
+constexpr std::size_t kSaveBytesOffset = kScalarBytes + 0xb64 + 0x3c + 0x3638 + 8 + 0x20;
 template<class T>void put(T& o,const std::uint8_t* p,std::size_t w){std::uint64_t v=0;std::memcpy(&v,p,w);o=static_cast<typename T::value_type>(v);}
 template<class T>void get(const T& o,std::uint8_t* p,std::size_t w){const std::uint64_t v=o?static_cast<std::uint64_t>(*o):0xdeadbeefdeadbeefULL;std::memcpy(p,&v,w);}
 }
@@ -74,8 +75,12 @@ extern "C" int sadx_native_game_mode_leaves(const std::uint32_t* in,const std::u
             case 25:s.word_at_3b2c420=v;break;case 26:s.state_at_3b29d6c=v;break;case 27:s.word_at_3b29d68=v;break;case 28:case 29:case 30:case 31:clear[i-28]=v;break;
             default:if(i<11)table_slot(tables[i-8])=v;else *motions[i-13]=v;break;}});
     s.save_name_reference.import_value(s.save_name,save_name_word);
-    auto blocks=[&](auto&& f){std::size_t o=kScalarBytes;f(s.block_at_3b18250,o);o+=0xb64;f(s.block_at_3b0ef9c,o);o+=0x3c;f(s.block_at_3c4ae08,o);o+=0x3638;f(s.block_at_3b290c4,o);o+=8;f(s.block_at_90ed54,o);o+=0x20;f(s.block_at_3b2b5f9,o);o+=7;f(s.block_at_3b2c5e8,o);};
+    auto blocks=[&](auto&& f){std::size_t o=kScalarBytes;f(s.block_at_3b18250,o);o+=0xb64;f(s.block_at_3b0ef9c,o);o+=0x3c;f(s.block_at_3c4ae08,o);o+=0x3638;f(s.block_at_3b290c4,o);o+=8;f(s.block_at_90ed54,o);o+=0x20;o+=7;f(s.block_at_3b2c5e8,o);};
     blocks([&](auto& b,std::size_t o){for(std::size_t i=0;i<b.size;++i)b.bytes[i]=bytes[o+i];});
+    // Bind the same seven input bytes through the reference-only semantic seam.
+    s.import_save_options(bytes[kSaveBytesOffset]);
+    for (std::size_t slot = 0; slot < 6; ++slot)
+        s.import_saved_life_count(slot, bytes[kSaveBytesOffset + 1 + slot]);
     if(in[3]&&g_loaded){s.model_bindings=&bindings;s.model_dlls=&g_models;}
     std::uint32_t calls=0;bool release_walk=false;
     const auto r=run_game_mode_leaf(in[0],in[1],s,[&](const GameModeLeafCall& c){++calls;release_walk|=c.callee==0x403290;if(c.callee==0x4073b0)for(int k=0;k<7;++k)rect[k]=c.arguments[k].value_or(0xdeadbeef);return GameLogicOwnerResult{in[2]&&calls==in[2]?GameLogicOwnerState::unavailable:GameLogicOwnerState::completed,c.callee,{}};});
@@ -92,6 +97,9 @@ extern "C" int sadx_native_game_mode_leaves(const std::uint32_t* in,const std::u
             default:v=i<11?table_slot(tables[i-8]).value_or(0xdeadbeef):motions[i-13]->value_or(0xdeadbeef);break;}
             std::memcpy(out+o,&v,kScalars[39+i].width);});
     blocks([&](auto& b,std::size_t o){for(std::size_t i=0;i<b.size;++i)out[o+i]=b.bytes[i].value_or(0xef);});
+    out[kSaveBytesOffset] = s.save_options().value_or(0xef);
+    for (std::size_t slot = 0; slot < 6; ++slot)
+        out[kSaveBytesOffset + 1 + slot] = s.saved_life_count(slot).value_or(0xef);
     result[0]=r.outcome==GameModeLeafOutcome::completed;result[1]=calls;result[2]=r.eax.value_or(0xdeadbeef);result[3]=r.eax.has_value();result[4]=r.source_boundary;
     for(int k=0;k<7;++k)result[8+k]=rect[k];result[15]=fp.exception_flags()&0x3f;
     result[5]=release_walk||r.outcome==GameModeLeafOutcome::nonterminating; // one native owner for the source's 403290 loop; a source loop that never exits

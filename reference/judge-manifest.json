@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "8900a57f59f02133f0f29438b6903d5dfa4d092f",
-    "evidence": "reference/production-integration-20261101/menu-render-manifest-union.json",
-    "evidence_sha256": "8996f6fe5fad11a43847539211d781b0e17b8b31a79d101192f3df3c7e2c7cd4",
-    "reason": "Reconcile reviewed menu-table/mutation evidence and canonical render reports without dropping either protected input set"
+    "base_commit": "f766acedc10e8d7379fa6e9f252b34cd2fe0c8b4",
+    "evidence": "reference/production-integration-20261101/session-save-owner-baseline/probe-rebinding.json",
+    "evidence_sha256": "cf2423e9cad9744d6d3a0ce88d4f119916f596897afd540ae45f6fce14e61f72",
+    "reason": "Rebind protected save option/life byte fixture transport to stable semantic accessors with identical ABI and all frozen outputs"
   },
   "files": {
     "Makefile": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
@@ -399,7 +399,7 @@
     "tests/probes/native_game_logic_probe.cpp": "b653470127127cd112d33350e2d04973aae3e2d603901c9ddb1172dcd3d37318",
     "tests/probes/native_game_logic_support_probe.cpp": "e11c5c8846c49a4338ed8797113b55657424ef3bedd6626331704d8b9bfa3279",
     "tests/probes/native_game_loop_probe.cpp": "2ecf50dc4f72e6660023bf7b413e5c8b532348db2f32f2fc896059507e99ca1d",
-    "tests/probes/native_game_mode_leaves_probe.cpp": "caeec50d03527b16dc871faea6342095ab1e340b4c606df0de6af0bfca3e1976",
+    "tests/probes/native_game_mode_leaves_probe.cpp": "a5d585ecdbe396ee9222df361184f71ef0249b9494f245c89de591c60520574b",
     "tests/probes/native_game_mode_probe.cpp": "d1e1c146a4cc6b46819cac257b2dcba737cec41915f26e84887bc1252f0bb587",
     "tests/probes/native_game_reset_composed_probe.cpp": "3829fe4f8feec2eb65dab64a1a4ffee7efdb612a8f889f57ddb65d77c3db29ba",
     "tests/probes/native_game_reset_probe.cpp": "cb20c0754951e28fa02abb8edf701a61365f061059319751d8be87d17976008d",
