@@ -4,7 +4,7 @@
     {
       "priority": "P2",
       "finding": "Missing owner/native/reference evidence or unlinked coverage earns reviewed status",
-      "resolution": "Require nonempty lists of path/SHA records for every owner/binding and coverage; recursive live fingerprint checks retained. Blank limits rejected."
+      "resolution": "Require nonempty lists of path/SHA records for every owner/binding and coverage; recursive live fingerprint checks retained. Blank limits rejected. Each owner/reference resolution and native binding kind/method must be nonblank; explicit failures must name their failure identifier."
     },
     {
       "priority": "P2",
@@ -13,14 +13,15 @@
     }
   ],
   "validation": {
-    "focused_tests": 17,
+    "focused_tests": 18,
     "result": "pass",
     "new_regressions": [
       "missing and empty owner/native/reference evidence",
       "unlinked and missing-hash coverage",
       "blank limits",
       "within-fragment conflicting IDs",
-      "cross-fragment duplicate IDs"
+      "cross-fragment duplicate IDs",
+      "fingerprinted records without explicit semantic owner/binding descriptions"
     ]
   },
   "limits": [

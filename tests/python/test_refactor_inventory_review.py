@@ -159,7 +159,7 @@ class StubBindingReview(unittest.TestCase):
     def test_changed_or_missing_nested_binding_evidence_is_rejected(self):
         for sha, path in [('0' * 64, 'src/game/save_completion.hpp'),
                           ('0' * 64, 'docs/MISSING.md')]:
-            bad = dict(self.review, native_binding=dict(evidence=[dict(path=path, sha256=sha)]))
+            bad = dict(self.review, native_binding=dict(self.review['native_binding'], evidence=[dict(path=path, sha256=sha)]))
             with self.subTest(path=path), self.assertRaisesRegex(ValueError, 'STUB binding evidence'):
                 inventory.reviewed_stub_binding(self.stub, bad, self.paths)
 
@@ -183,6 +183,16 @@ class StubBindingReview(unittest.TestCase):
                 inventory.reviewed_stub_binding(self.stub, dict(self.review, accepted_coverage=coverage), self.paths)
         with self.assertRaisesRegex(ValueError, 'nonblank limits'):
             inventory.reviewed_stub_binding(self.stub, dict(self.review, limits=['  ']), self.paths)
+
+    def test_fingerprints_without_owner_or_binding_description_are_insufficient(self):
+        for section, fields in [('canonical_owner', ['resolution']),
+                               ('native_binding', ['kind', 'method', 'failure']),
+                               ('reference_binding', ['kind', 'resolution'])]:
+            for field in fields:
+                bad = copy.deepcopy(self.review)
+                del bad[section][field]
+                with self.subTest(section=section, field=field), self.assertRaises(ValueError):
+                    inventory.reviewed_stub_binding(self.stub, bad, self.paths)
 
     def test_duplicate_ids_inside_and_across_fragments_are_rejected(self):
         name = 'docs/refactor-inventory/reviews/save-warning-stub-bindings.json'

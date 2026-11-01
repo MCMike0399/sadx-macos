@@ -120,6 +120,17 @@ def reviewed_stub_binding(stub, review, paths):
         if not isinstance(evidence, list) or not all(
                 isinstance(item, dict) and item.get("path") and item.get("sha256") for item in evidence):
             raise ValueError("STUB binding section requires fingerprinted evidence: " + field)
+    for section, fields in (("canonical_owner", ("resolution",)),
+                            ("native_binding", ("kind", "method")),
+                            ("reference_binding", ("kind", "resolution"))):
+        for field in fields:
+            value = review[section].get(field)
+            if not isinstance(value, str) or not value.strip():
+                raise ValueError("STUB binding requires explicit semantic description: " + section + "." + field)
+    if review["native_binding"]["kind"] == "explicit_failure":
+        failure = review["native_binding"].get("failure")
+        if not isinstance(failure, str) or not failure.strip():
+            raise ValueError("STUB explicit failure requires its failure identifier")
     coverage = review["accepted_coverage"]
     if not isinstance(coverage, list) or not all(
             isinstance(item, dict) and item.get("path") and item.get("sha256") for item in coverage):
