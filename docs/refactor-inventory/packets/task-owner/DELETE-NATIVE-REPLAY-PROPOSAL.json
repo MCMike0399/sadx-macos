@@ -6,7 +6,7 @@
   "capture_folder": "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved-continuation/old/captures/task_delete",
   "output": "/Users/burbujamc/Developer/sadx-macos/build/task-delete-native-replay",
   "pins": {
-    "/Users/burbujamc/Developer/sadx-macos/reference/packets/task-delete-native-replay/replay.py": "e6ebe63b92281600ab4d633cfd5445d03fb9b11e4ed0ead823418ba177cc76dc",
+    "/Users/burbujamc/Developer/sadx-macos/reference/packets/task-delete-native-replay/replay.py": "27d73c9af213f073ab2de9c5e8193aa57c14e14830991c8461f7ab3c57cd5089",
     "/Users/burbujamc/Developer/sadx-macos/tools/oracles/task_judges/compare_streams.py": "38d882f2fad2711584f37ea9b129e52f4b6ddaee9d14c758aecb6652be4485f1",
     "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/current/libraries/task_delete.dylib": "2915ae1b9b198b30aa06852ecda822df721eabb4e99d8ab286557dfe403fa577",
     "/opt/homebrew/Cellar/python@3.14/3.14.7/Frameworks/Python.framework/Versions/3.14/bin/python3.14": "87d4df53fd91304be5bac391fb204643c36b7df2023c04a0953bcbc7d4fdf634",
@@ -54,11 +54,11 @@
   ],
   "focused_checks": {
     "command": "reference/python/bin/python -m unittest discover -s tests/python -p 'test_task_*.py' -q",
-    "tests": 94,
+    "tests": 95,
     "exit_status": 0,
-    "log": "build/task-native-replay-focused.log",
-    "log_sha256": "6391ca841fdce0b6c18eb352e2257ebdcc036198e795fe088a11af87637d7681",
-    "new_fake_tests": 20,
+    "log": "build/task-replay-admission-focused.log",
+    "log_sha256": "1c07059dd590b2fbf5c7a266c994f5818dd6eb475451f73d4d53e5ec754b561c",
+    "new_fake_tests": 21,
     "read_only_real_preflight": {
       "produced_calls": 563,
       "excluded_ids": [
@@ -75,5 +75,17 @@
       ],
       "native_calls_executed": 0
     }
+  },
+  "admission_correction": {
+    "review_commit": "3a7bee1",
+    "finding": "P2: committed proposal could reach output creation without affirmative Root admission.",
+    "fix": "admitted requires exact committed admission_kind root_native_delete_replay_v1 and root_admitted is True, before returning to main. This proposal deliberately has neither and remains non-executable.",
+    "execution_authorized": false,
+    "regression_old": {
+      "log": "build/task-replay-admission-regression-old.log",
+      "sha256": "4bda9f99988c5d3c1e8db7cfdc9dd8e73d3eaae4665bd28ce2bda810728a3acb",
+      "outcome": "All seven fake non-admission variants reach intercepted output creation on d48f80e. No real output/library call."
+    },
+    "regression_current": "The same fake main tests reject all seven before contract parsing, output creation or library loading."
   }
 }

@@ -30,7 +30,11 @@ def admitted(path, commit, root):
                             check=True, capture_output=True).stdout
     if path.read_bytes() != frozen:
         raise ValueError('Admission differs from committed Root proof')
-    return json.loads(frozen)
+    value = json.loads(frozen)
+    if (value.get('admission_kind') != 'root_native_delete_replay_v1' or
+            value.get('root_admitted') is not True):
+        raise ValueError('Separate affirmative Root native replay admission required')
+    return value
 
 
 def contracts(folder, pins):

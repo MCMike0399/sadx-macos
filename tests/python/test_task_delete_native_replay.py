@@ -8,7 +8,9 @@ from pathlib import Path
 import struct
 import subprocess
 import tempfile
+from types import SimpleNamespace
 import unittest
+from unittest import mock
 
 
 SCRIPT = Path(__file__).resolve().parents[2] / 'reference/packets/task-delete-native-replay/replay.py'
@@ -190,12 +192,14 @@ class DeleteNativeReplay(unittest.TestCase):
         root = self.folder
         subprocess.run(['git', 'init', '-q', str(root)], check=True)
         admission = root / 'admission.json'
-        admission.write_text('{"pins":{"original":"abc"}}\n')
+        value = {'admission_kind': 'root_native_delete_replay_v1',
+                 'root_admitted': True, 'pins': {'original': 'abc'}}
+        admission.write_text(json.dumps(value) + '\n')
         subprocess.run(['git', '-C', str(root), 'add', 'admission.json'], check=True)
         subprocess.run(['git', '-C', str(root), '-c', 'user.name=Test', '-c',
                         'user.email=test@example.invalid', 'commit', '-qm', 'Freeze fake admission'], check=True)
         commit = subprocess.check_output(['git', '-C', str(root), 'rev-parse', 'HEAD'], text=True).strip()
-        self.assertEqual(MODULE.admitted(admission, commit, root), {'pins': {'original': 'abc'}})
+        self.assertEqual(MODULE.admitted(admission, commit, root), value)
         admission.write_text('{"pins":{"replacement":"def"}}\n')
         with self.assertRaisesRegex(ValueError, 'committed Root proof'):
             MODULE.admitted(admission, commit, root)
@@ -204,6 +208,45 @@ class DeleteNativeReplay(unittest.TestCase):
         for commit in ('', 'HEAD', 'a' * 39, 'z' * 40):
             with self.assertRaisesRegex(ValueError, 'Exact admission'):
                 MODULE.admitted(self.folder / 'absent.json', commit, self.folder)
+
+    def test_main_refuses_proposals_before_output_or_library_load(self):
+        path = SCRIPT.parents[3] / 'fake-admission.json'
+        root = SCRIPT.parents[3]
+        folder = root / 'build/fake-capture'
+        library = root / 'build/fake-library.dylib'
+        required = [SCRIPT, root / 'tools/oracles/task_judges/compare_streams.py',
+                    library, Path(MODULE.sys.executable).resolve()]
+        required.extend(folder / name for name in ('inputs.json', 'reserved-observation.json',
+                        'task_delete.json', 'task_delete.identity.json', 'task_delete.native.jsonl.gz'))
+        proposal = {'status': 'PROPOSED; no execution admission yet',
+                    'capture_folder': str(folder), 'candidate_library': str(library),
+                    'pins': {str(p): 'fake-sha' for p in required}, 'output': str(root / 'build/fake-output'),
+                    'expected': {'produced_calls': 1, 'excluded_ids': [], 'source_mismatch_ids': []}}
+        variants = [proposal, {**proposal, 'root_admitted': True},
+                    {**proposal, 'admission_kind': 'root_native_delete_replay_v1'}]
+        for affirmative in (False, None, 1, 'true'):
+            variants.append({**proposal, 'admission_kind': 'root_native_delete_replay_v1',
+                             'root_admitted': affirmative})
+        for value in variants:
+            with self.subTest(value=value):
+                frozen = json.dumps(value).encode()
+                flags = {name: getattr(MODULE.sys.flags, name) for name in dir(MODULE.sys.flags)
+                         if not name.startswith('_')}
+                flags.update(isolated=True, no_site=True, dont_write_bytecode=True)
+                with mock.patch.object(MODULE.sys, 'argv', [str(SCRIPT), str(path),
+                       '--admission-commit', 'a' * 40]), \
+                     mock.patch.object(MODULE.sys, 'flags', SimpleNamespace(**flags)), \
+                     mock.patch.object(MODULE.subprocess, 'run', return_value=SimpleNamespace(stdout=frozen)), \
+                     mock.patch.object(Path, 'read_bytes', return_value=frozen), \
+                     mock.patch.object(MODULE, 'sha', return_value='fake-sha'), \
+                     mock.patch.object(MODULE, 'contracts', return_value=([None], [], [])) as contracts, \
+                     mock.patch.object(Path, 'mkdir', side_effect=AssertionError('Output creation reached')) as mkdir, \
+                     mock.patch.object(MODULE.ctypes, 'CDLL', side_effect=AssertionError('Library load reached')) as load:
+                    with self.assertRaisesRegex(ValueError, 'affirmative Root'):
+                        MODULE.main()
+                    mkdir.assert_not_called()
+                    load.assert_not_called()
+                    contracts.assert_not_called()
 
 
 if __name__ == '__main__':
