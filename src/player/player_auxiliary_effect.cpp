@@ -157,7 +157,7 @@ PlayerAuxiliaryEffectResult update_player_auxiliary_effect(TaskScheduler& s,cons
             retire=true;
         }
     }
-    if(retire){const auto scheduled=s.free_task(task);if(!scheduled){auto r=fail(PlayerAuxiliaryEffectFailure::work_failed,0x4a29f0);r.task_failure=scheduled;r.work_failure=scheduled.work_failure;return r;}return {};}
+    if(retire){const auto scheduled=s.free_task(task);if(!scheduled){auto r=fail(PlayerAuxiliaryEffectFailure::work_failed,0x4a29f0);r.task_step=scheduled.step;r.work_failure=scheduled.work_failure;return r;}return {};}
     const auto& player=**registered;
     if(!player.secondary_mode_at_1)return fail(PlayerAuxiliaryEffectFailure::missing_secondary_mode,0x4a25d9);
     std::uint8_t secondary;read=s.work_arena()->read(task->primary_work,1,&secondary,1);if(!read)return work_fail(read,0x4a25df);
