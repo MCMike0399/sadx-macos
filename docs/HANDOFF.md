@@ -658,3 +658,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Reviewed save-completion source and registered callback test are included. Default 1,000 and fresh 4,096 cases are exact; control replay retains all 938 FP partial identities. Character-completion header preprocessing is identical after moving three instruction comments to evidence; 2,399 original cases exact.
 * All 934 protected inputs verify after explicit parent-preserving union; no judge expectations changed. Private menu texture-binding extraction has frozen native behavior, five caught mutants and rebuilt closure; review/journeys remain pending. Platform save adapter review closes four named files separately; no new OS failure-parity claim.
 * Whole save IO/UI/audio/resource ownership, remaining Session/renderer migration and the exhaustive campaign stay open. No actor/GPU/N3b/story/gameplay 63 FPS or new physical controller qualification. No push.
+
+### 2026-11-01 — Menu texture binding owner integrated and qualified
+
+* Qualified-corpus make -j10 gate exits 0; menu-texture-owner-gate.json records the actual counts, one inherited filesystem skip, smoke 120, R1–R4, three native menu/save journeys and sixteen startup comparisons. STATUS regenerated.
+* MenuTextureBindings owns stable imported lists, regular aliases, catalog/Japanese bindings and readiness. Actual Session/TitleScene callers forward; regular storage and GPU ownership remain separate. Ordered failures and original error literals are preserved.
+* Independent review 06c7a02 approves with one corrected literal. Frozen native observations, five caught mutants, original menu 1,401/regular 609 cases and fresh menu 701 cases are exact; rebuilt native closure and private native journeys pass.
+* Explicit module policy retains exact member/source review, nested evidence and limits; nine bounded modules reviewed. Inventory remains exhaustive and overwhelmingly open.
+* RegularResources is independently approved privately with native closure, 55 observations, six mutants and 3,010 fresh original comparisons; actual journeys/integration remain pending. Whole renderer/resources/Session and complete refactor remain open. No gameplay or new controller claim; no push.
