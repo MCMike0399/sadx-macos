@@ -1,0 +1,24 @@
+{
+  "defect": "Inherited ctypes evaluators do not set restype=None for void probes; raw captures include an unspecified host return register. Original evaluators ignore it.",
+  "void_exports": {
+    "sadx_native_file_select_controls_probe": "tests/probes/native_file_select_controls_probe.cpp",
+    "sadx_native_load_selected_save_probe": "tests/probes/native_save_file_list_probe.cpp",
+    "sadx_native_save_file_list_probe": "tests/probes/native_save_file_list_probe.cpp",
+    "sadx_native_save_list_free_probe": "tests/probes/native_save_list_free_probe.cpp"
+  },
+  "policy": "Keep raw records/hash-exact. Compare a tagged unknown for only these declared void return registers; every argument byte/output byte/defined return remains exact. No old evaluator, input, expectation or exclusion edited.",
+  "initial_raw_register_drifts": {
+    "save_file_list": [
+      0,
+      13189120
+    ],
+    "save_list_free": [
+      1803797952,
+      1794835856
+    ],
+    "load_selected_save": [
+      -1781235648,
+      863305792
+    ]
+  }
+}
