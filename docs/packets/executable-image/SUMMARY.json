@@ -1,0 +1,50 @@
+{
+  "base": "1300815eae321d5de8e992958b2841f96ca47039",
+  "branch": "packet/executable-image",
+  "commits": {
+    "context": "f1de322",
+    "fresh_baseline": "85def98",
+    "source": "fc4be98",
+    "judge_registration": "06e42d8"
+  },
+  "members": {
+    "src/loader/executable_image.hpp": "a445f239d4b4303c54ab321697eeb0bb06ff7c96352576298cfdf8f7a54315b6",
+    "src/loader/executable_image.cpp": "3f376bb5c78c6a4a1d67162175ab459b144fe1e27849f9fae6acabdad7ac3f99"
+  },
+  "review_source": {
+    "commit": "cbdf7a3",
+    "files": {
+      "loader-boundaries.md": "1e3df5ebc81d00587613f418a3f443190d46113ce4273103f9996a07aa278955",
+      "loader-boundaries.json": "024a3833b979683fa1036520bb936baa52ceb28345f6472658268d45ac2a99e1"
+    }
+  },
+  "results": {
+    "fresh_pre_rewrite_valid_checks": 65630,
+    "pre_rewrite_p2_exit": 1,
+    "candidate_p2_exit": 0,
+    "candidate_contract_printed_checks": 65674,
+    "candidate_edges_printed_checks": 8221,
+    "additional_exact_base_valid_edge_checks": 11,
+    "caught_compiled_mutants": 6,
+    "asan_ubsan_exit": 0,
+    "registered_targets_build_and_cli_exit": 0,
+    "unchanged_pinned_model_test_base_and_candidate_exit": 0
+  },
+  "qualification_timing": "Initial baseline before rewrite. Additional edge and pinned-model comparisons use exact base header/body, reconstructed and executed after rewrite; not retroactive pre-rewrite claims.",
+  "scope": "Complete two-file ExecutableImage module only; no purpose-based exemption or whole-loader/campaign conformance claim.",
+  "pending": [
+    "Root fresh independent review",
+    "Root guest-imports and guest-dlls integration tests",
+    "Root full gate with actual receipt",
+    "Root review policy/module inventory reconciliation",
+    "Restore all 53 inherited ignored raw corpora and seal explicit parent-preserving manifest union; retain all 943 parent entries, add two unit files, update only reviewed append registrations."
+  ],
+  "not_run": [
+    "Full gate",
+    "Full X86Guest/HLE guest-imports and guest-dlls units",
+    "Journeys",
+    "Windows loader parity",
+    "Independent delegate review"
+  ],
+  "api": "Public method signatures, nested records and return types retained; private boundary helpers added. Malformed inputs now fail explicitly; valid tested mappings, zero tails, exports/imports, modular HIGHLOW values and legacy flat-snapshot behavior preserved."
+}

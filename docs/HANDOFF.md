@@ -666,3 +666,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Independent review 06c7a02 approves with one corrected literal. Frozen native observations, five caught mutants, original menu 1,401/regular 609 cases and fresh menu 701 cases are exact; rebuilt native closure and private native journeys pass.
 * Explicit module policy retains exact member/source review, nested evidence and limits; nine bounded modules reviewed. Inventory remains exhaustive and overwhelmingly open.
 * RegularResources is independently approved privately with native closure, 55 observations, six mutants and 3,010 fresh original comparisons; actual journeys/integration remain pending. Whole renderer/resources/Session and complete refactor remain open. No gameplay or new controller claim; no push.
+
+### 2026-11-01 — Bounded ExecutableImage packet, Root integration pending
+
+* Complete executable_image header and implementation are structured C++; final mapped relocation headers cannot consume absent entries. File, section, RVA, string, target and IAT bounds reject malformed or wrapping inputs explicitly.
+* Fresh unchanged source passed 65,630 valid checks before rewriting; the synthetic LB-1 case failed as expected because the old implementation accepted it. Candidate contract and edge suites pass, including every raw-file truncation, ASan/UBSan and six caught compiled faults.
+* Additional exact-base edge checks and the unchanged real model-DLL unit pass against base and candidate. Two registered asset-free Make targets build and run. Evidence and complete hashes are in docs/packets/executable-image/PACKET.md and SUMMARY.json.
+* Source is fc4be98; registration is a separate judge commit. The inherited 943-entry manifest remains untouched; all 53 raw corpora are absent locally and must be restored before Root seals a parent-preserving union.
+* No full gate, guest/HLE integration, journeys, delegate, Main write or push. Root fresh review, inventory reconciliation, integration and composite qualification remain pending. Other loader modules and whole campaign conformance stay open.
