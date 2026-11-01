@@ -1,0 +1,16 @@
+{
+  "global_review_written": false,
+  "new": {
+    "src/player/animation/sonic_animation_content.hpp::kSonicRecipes": {
+      "classification": "typed content",
+      "meaning": "147 original animation rows: export selector/ordinal, node count, signed mode, next and exact binary32 rates; no instruction PCs or executable dispatch",
+      "sha256": "4a19944124840a61fa4a97aae8c6bfa6bfb39c76db76f958e8148ba48946da4a",
+      "qualification": "All original 145 reads/882 stores and both native/reference complete outputs; exact typed emitter regeneration"
+    }
+  },
+  "retired": [
+    "src/player/sonic_animation_operations.hpp::sonic_animation_operations",
+    "src/player/sonic_animation_table_data.hpp::sonic_animation_recipes"
+  ],
+  "limits": "Root must review and reconcile actual declaration lineage/fingerprints and the complete inventory; this is a proposal, not conformance approval."
+}
