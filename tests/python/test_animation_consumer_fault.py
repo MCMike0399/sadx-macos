@@ -3,11 +3,46 @@ import copy
 import importlib.util
 from pathlib import Path
 import unittest
+import tempfile
+import json
 
 PATH = Path(__file__).resolve().parents[2] / 'tools/oracles/animation_judges/consumer_fault_observer.py'
 spec = importlib.util.spec_from_file_location('consumer_fault', PATH)
 observer = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(observer)
+
+
+continuation_spec = importlib.util.spec_from_file_location('consumer_continuation',
+    PATH.with_name('consumer_continuation.py'))
+continuation = importlib.util.module_from_spec(continuation_spec)
+continuation_spec.loader.exec_module(continuation)
+
+
+class ConsumerAccountingTests(unittest.TestCase):
+    def test_all_frozen_ids_must_be_present_once_in_order(self):
+        rows = [dict(case=index) for index in range(1024)]
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'inputs.jsonl'
+            for values, valid in ((rows, True), ([], False), (rows[:-1], False),
+                                  ([rows[1], rows[0]] + rows[2:], False),
+                                  (rows + [rows[-1]], False)):
+                path.write_text(''.join(json.dumps(row) + '\n' for row in values))
+                if valid:
+                    self.assertEqual(continuation.ordered_inputs(path), rows)
+                else:
+                    with self.assertRaises(ValueError):
+                        continuation.ordered_inputs(path)
+
+    def test_full_observation_requires_each_independent_component(self):
+        record = dict(case=1, sonic={}, startup={}, consumer={}, gamma={})
+        self.assertEqual(continuation.completed_ids([record]), [1])
+        for key in ('sonic', 'startup', 'consumer', 'gamma'):
+            changed = dict(record); del changed[key]
+            self.assertEqual(continuation.completed_ids([changed]), [])
+        self.assertEqual(continuation.completed_ids([dict(record, error='stopped')]), [])
+        for records in ([dict(record, case=2)], [record, record]):
+            with self.assertRaises(ValueError):
+                continuation.completed_ids(records)
 
 
 class ConsumerFaultTests(unittest.TestCase):
@@ -17,6 +52,7 @@ class ConsumerFaultTests(unittest.TestCase):
         self.fault = dict(kind='read_unmapped', pc=0x49aa50, address=6, size=2, ebp=0)
         self.source = dict(original_outcome='observed_memory_fault', fault_contract=True,
                            semantic_boundary=0x49aa50, original_fp_flags=0,
+                           writes=[dict(address=0x3abdf64, size=4, value=0)],
                            defined_prefix={2: 32768, 3: 87, 5: 0, 18: 1151, 19: 1, 20: 1,
                                            21: 1, 22: 87, 23: 31, 24: 123456})
         values = [0] * 40
@@ -58,6 +94,14 @@ class ConsumerFaultTests(unittest.TestCase):
         with self.assertRaises(ValueError):
             observer.compare_fault_contract(self.source, self.native,
                                             dict(return_code=0, output=self.native['output'][:39]))
+
+    def test_written_null_requires_the_actual_publication_event(self):
+        for writes in ([], [dict(address=0x3abdf60, size=4, value=0)],
+                       [dict(address=0x3abdf64, size=2, value=0)],
+                       [dict(address=0x3abdf64, size=4, value=1)]):
+            result = observer.compare_fault_contract(dict(self.source, writes=writes),
+                                                     self.native, self.native)
+            self.assertFalse(result['qualified_bounded_fault_contract'])
 
     def test_fp_difference_remains_a_separate_partial(self):
         changed = copy.deepcopy(self.native)

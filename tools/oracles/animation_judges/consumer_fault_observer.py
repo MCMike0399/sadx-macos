@@ -108,10 +108,13 @@ def compare_fault_contract(observed, old, current):
                    if index != 17 and outputs[index] != expected]
     boundary_equal = (old['return_code'] == current['return_code'] == 0 and
                       outputs[0] == 2 and outputs[1] == observed['semantic_boundary'])
+    publication_observed = any(write['address'] == 0x3abdf64 and write['size'] == 4 and
+                               write['value'] == 0 for write in observed.get('writes', []))
     equality = old == current
     partial = outputs[17] != observed['original_fp_flags']
     return dict(original_outcome='observed_memory_fault', defined_prefix_differences=differences,
                 native_boundary_correspondence=boundary_equal, complete_native_equality=equality,
+                written_null_publication_observed=publication_observed,
                 source_native_fp_partial=partial,
-                qualified_bounded_fault_contract=not differences and boundary_equal and equality,
+                qualified_bounded_fault_contract=not differences and boundary_equal and equality and publication_observed,
                 original_returned=False)
