@@ -1,0 +1,121 @@
+{
+  "freeze_commit": "3fe9944",
+  "exit": 0,
+  "scalar": {
+    "records": 312112,
+    "full_stream_equal": true,
+    "value_disagreements": 5098,
+    "status_disagreements": 232280,
+    "class_counts": {
+      "emulator_x87_NaN_priority": 320,
+      "emulator_FTZ_wrong_status_owner": 4298,
+      "emulator_MINSS_returns_unconverted_operand": 480
+    },
+    "unclassified": 0,
+    "all_native_returns_validated_by_original_observer": true
+  },
+  "native": {
+    "observations": 1244160,
+    "bytes": 199068120,
+    "sha256": "ad041fb7ec01f210f9fc622b996ebe55da7124f8025810821116d548dc59734e",
+    "complete_old_current_bytes_equal": true,
+    "semantic_assertions_retained": true
+  },
+  "artifact_hashes": {
+    "build/sse-reserved/native-inputs.json": {
+      "bytes": 779,
+      "sha256": "da34ee6d5c7fb11b8ded9e8d38c64a64dac9384d02497f2e1ca2dbcce7104b90"
+    },
+    "build/sse-reserved/current-native.bin.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "build/sse-reserved/scalar_observer.py": {
+      "bytes": 1822,
+      "sha256": "912dd07b8586d76161aecc7a8b596d3e809a7a2ab5b7cc55e2057d3ab236610b"
+    },
+    "build/sse-reserved/baseline-native.bin.stderr": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "build/sse-reserved/result.json": {
+      "bytes": 7573987,
+      "sha256": "4711a309eb0993b002dd0caf964ab8372c86fd30a563a52f68d41658e74833c9"
+    },
+    "build/sse-reserved/current-native": {
+      "bytes": 104160,
+      "sha256": "f748668502c4440d9b480708a73a7383fce366196ee0919b459b36c77a558f71"
+    },
+    "build/sse-reserved/baseline-native.bin.gz": {
+      "bytes": 5651253,
+      "sha256": "32597ba7daeed6f05b7b23b22744e925ff15e5774ceb52eefba20e367bca030e"
+    },
+    "build/sse-reserved/native_contract.cpp": {
+      "bytes": 6869,
+      "sha256": "77131ff981588a9cf9f0d921ae77b0d1456e09c59f24b015df2799d319b665ef"
+    },
+    "build/sse-reserved/old_sse.cpp": {
+      "bytes": 7660,
+      "sha256": "b7ddd9dc425ac2e1ebd49929de1dcdf4bd7671466bf041544a6ba57157ca12b7"
+    },
+    "build/sse-reserved/current-scalar.log": {
+      "bytes": 14429,
+      "sha256": "eeccd891956df6def80ac930c1c72053a959280895582df184b1db758c8d0628"
+    },
+    "build/sse-reserved/EXECUTED_ONCE": {
+      "bytes": 58,
+      "sha256": "b711fbc702b35227ce09d591bc5af41462417d15c4ecc32ffb08e26fa832f995"
+    },
+    "build/sse-reserved/baseline-native-build.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "build/sse-reserved/current-native-build.log": {
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "build/sse-reserved/baseline-scalar.log": {
+      "bytes": 14429,
+      "sha256": "eeccd891956df6def80ac930c1c72053a959280895582df184b1db758c8d0628"
+    },
+    "build/sse-reserved/baseline-native": {
+      "bytes": 104160,
+      "sha256": "bc5c6e93eb8d59505e7a15d3118545c640e76ae8feea843685e68fa8605ac1e4"
+    },
+    "build/sse-reserved/current-native.bin.gz": {
+      "bytes": 5651252,
+      "sha256": "f0aac19cb835a937c58e97df5624a0d80bd9b19c345784de910cf35f6c598e12"
+    },
+    "build/sse-reserved/current/scalar/report.json": {
+      "bytes": 24619,
+      "sha256": "98a5e1cb5767b4587002c6b57cbbd6ae2dc2583d50511ac69d0b05c8265f2a5f"
+    },
+    "build/sse-reserved/current/scalar/full.bin.gz": {
+      "bytes": 5094996,
+      "sha256": "b063fb01ac9be7371bf090a4741e955928a046bec4659b61500cc32927f75f8f"
+    },
+    "build/sse-reserved/current/scalar/identities.json": {
+      "bytes": 1593925,
+      "sha256": "9246db722126bd5fa96eb41e2f6458c570ba38a54a813a4ae3ebc6aab5c09a93"
+    },
+    "build/sse-reserved/baseline/scalar/report.json": {
+      "bytes": 24620,
+      "sha256": "1221221dd323c81b263f6138ef1203dc0b140e474afbeb29d25b707cbee6c112"
+    },
+    "build/sse-reserved/baseline/scalar/full.bin.gz": {
+      "bytes": 5094996,
+      "sha256": "75a20f5d82202d663320b8bd5e984de039d21d541fee0791733649bb0d810ceb"
+    },
+    "build/sse-reserved/baseline/scalar/identities.json": {
+      "bytes": 1593925,
+      "sha256": "9246db722126bd5fa96eb41e2f6458c570ba38a54a813a4ae3ebc6aab5c09a93"
+    }
+  },
+  "compiler": "Apple clang version 21.0.0 (clang-2100.3.34.2)\nTarget: arm64-apple-darwin25.6.0\nThread model: posix\nInstalledDir: /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin\n",
+  "identity_ranges_sha256": "8175bcda713e8f0676c5fbc4ff7ef111e01fc26fd8a64205d8d813c58c4a3b5f",
+  "limits": [
+    "Fresh cohorts preserve the immutable maintained model; original emulator disagreements remain FAIL, not hardware/Windows evidence.",
+    "Original development5076value/232720status identities remain unchanged in prior receipts; fresh5098/232280 counts describe distinct inputs.",
+    "No Source or frozen original contract was edited. Product/consumer integration, parent protection union, table review and coherent gate remain pending."
+  ]
+}
