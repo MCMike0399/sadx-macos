@@ -1,0 +1,28 @@
+{
+  "source_commit": "c77091c",
+  "files": {
+    "src/input/input_mod_axes.hpp": "f1ff8f9c36b898d73cd8d7fbe39f7eb02a053dd108d29267ece6e4332fefbc54",
+    "src/input/input_mod_axes.cpp": "95e61568ed6357c7c4629361f57adb3fb91687f47320b30dec246bd2d5992ed7",
+    "tests/unit/input_mod_axes_contract.cpp": "24aabf429c77e4ba4a5e6be8976f79da4b82300de68c27dd960792133bdb1876",
+    "reference/symbols/overrides.tsv": "2b39256d8f07f92c137b59b63d48ae2ef4b5efbcb29ca7f60396314b7d36cea9",
+    "Makefile": "b8409cacdeb9e8a34bf64dfad27389d25af7f0ebbfb1d321e09a96b1b8e32e09",
+    "tests/unit/manifest.tsv": "50fbbe69f4567be9b99438e6545a51ab1132dfbe099b81e9106f6bcfe98c64e8"
+  },
+  "masked_cases": 109056,
+  "value_failures": 0,
+  "fp_partial_identities": 93104,
+  "unmasked_alias_cases": 327681,
+  "unmasked_alias_bytes": 24903828,
+  "native_digest": 9340279443059284959,
+  "valid_faults_caught": 8,
+  "direct_consumers_compiled": 5,
+  "provenance_status": "Full generation blocked locally by absent ignored pinned sa-tools checkout; no fabricated DB or download.",
+  "holdout_run": false,
+  "independent_review_run": false,
+  "full_gate_run": false,
+  "limits": [
+    "Partial FP verdict preserved; no Windows/hardware parity.",
+    "All original327680case/native thread records remain preserved; one post-rewrite augmentation is checked against immutable oldsource.",
+    "Pad owner/publication and underlying CPU policy remain separate open debt."
+  ]
+}

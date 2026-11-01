@@ -508,3 +508,7 @@ build/task-scheduler-contract-test: tests/unit/task_scheduler_contract.cpp tests
 	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/task_scheduler_contract.cpp src/engine/task.cpp src/engine/task_work.cpp -o $@
 build/task-bridge-contract-test: tests/unit/task_bridge_contract.cpp tests/probes/task_bridge_contract.hpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -I$(UNICORN_DIR)/include tests/unit/task_bridge_contract.cpp $(GUEST_LINK) build/libsadx-core.a -o $@
+
+# Exact native axes: partial stores, aliases and caller-selected SSE controls.
+build/input-mod-axes-contract-test: tests/unit/input_mod_axes_contract.cpp src/input/input_mod_axes.cpp src/input/input_mod_axes.hpp src/cpu/sse_math.cpp src/cpu/sse_math.hpp build/softfloat_sse/softfloat-sse.a build/softfloat/softfloat.a | build
+	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/input_mod_axes_contract.cpp src/input/input_mod_axes.cpp src/cpu/sse_math.cpp build/softfloat_sse/softfloat-sse.a build/softfloat/softfloat.a -o $@

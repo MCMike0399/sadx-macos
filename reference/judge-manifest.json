@@ -1,13 +1,12 @@
 {
   "change": {
-    "base_commit": "cf690f77e664847196b7938c9101a0c5075feb92",
-    "evidence": "docs/refactor-inventory/packets/input-axes/source-freeze.json",
-    "evidence_sha256": "aecaa0b9ce747ccf298baa3133a1340e27fb9014fbbcdbd7e3035990b8e3eefe",
-    "mode": "additions-only",
-    "reason": "Add complete unchanged input-axis per-case capture; freeze109056native/source records and93104inheritedFPpartial IDs before readability rewrite, with no old judge change"
+    "base_commit": "c77091c5c9b397e59e2421f59d8e7b2b2a1eefa4",
+    "evidence": "docs/refactor-inventory/packets/input-axes/QUALIFICATION.json",
+    "evidence_sha256": "d42c28676b6f6240427278a28bb0f43541ad381fba4649e0fd2d895011979ec2",
+    "reason": "Register native axis contract and discriminating right-Y precision prefix; preserve full109056original records/93104partials and immutable-old327681native contract, all8validfaults; no old expectation weakened"
   },
   "files": {
-    "Makefile": "e4be497c24cedd750e8a9a7d5b3438e7c582a6509969379689276d7b6f3ef905",
+    "Makefile": "b8409cacdeb9e8a34bf64dfad27389d25af7f0ebbfb1d321e09a96b1b8e32e09",
     "reference/address-dispatch-baseline-v1.json": "db0e83e323df714032ddad3046670d81968efe8e966630d9666ecbbe87d38bd7",
     "reference/constexpr-table-review.json": "dd7bd2551d3226bc0c855632aa9493b2d84d4fe0f3e7a7f19a90f34b45a9dbda",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
@@ -653,7 +652,7 @@
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",
     "tests/python/test_voice_publication.py": "5c00051d9b3de640f64e224dda4d810cdd7d26acafd91d7b1dc44e9786a734f3",
-    "tests/unit/manifest.tsv": "36ef201da224e3a7c791109155dc947c9704515e0e8b809f066da95c664c2754",
+    "tests/unit/manifest.tsv": "50fbbe69f4567be9b99438e6545a51ab1132dfbe099b81e9106f6bcfe98c64e8",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",

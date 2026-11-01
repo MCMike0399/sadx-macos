@@ -110,8 +110,13 @@ int main(int argc, char **argv) {
                                          constants, control, (sample & 2) != 0);
                     }
     }
+    // Exact power-of-two direction and range reach CVTT Y without an earlier
+    // precision fault: X converts successfully, Y=0.5 traps before either store.
+    const InputModAxesConstants fractional{{0x34000000}, {0x3f800000}, {0x3f000000},
+                                          {0x43000000}, {0x3f800000}};
+    run_case(id++, 2, {0, 0}, {0, 8192}, 0, fractional, 0x0f80, true);
     cross_thread();
-    if (bytes != 24903752 || digest != 17167205880272457936ULL) {
+    if (!capture && (bytes != 24903828 || digest != 9340279443059284959ULL)) {
         std::cerr << "Native axis partial-store/alias contract changed\n";
         return 1;
     }
