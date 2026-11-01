@@ -1,0 +1,37 @@
+{
+  "base_commit": "6a7134621987dbe2d01b2fd9501bfd20076f8934",
+  "files": {
+    "tools/oracles/task_judges/reserved_observer.py": "1e59ebc1d2ba9992eb00d9bae490e198b095e0a232c3bda6caed0f227dfb2473",
+    "tests/python/test_task_reserved_observer.py": "3d86eb6337dbcc79e65c1da5fecf4d4fcb3fe870f575137670644e3e3d4b0a40"
+  },
+  "purpose": "Additive task input adapter delegates to unchanged task oracle mains and the existing full-byte freeze recorder. It has no CLI execution entry point.",
+  "checks": {
+    "command": "python3 -m unittest discover -s tests/python -p 'test_task_*' -v",
+    "tests": 27,
+    "exit_status": 0,
+    "new_fake_module_tests": 8,
+    "log_sha256": "3784467ae4d84fa78001f85f70306eae16a6829be0627e10aeee434bc70e60a7"
+  },
+  "properties": [
+    "Original fixture/main/sys.argv identities restored even after exceptions",
+    "Delete uses actual supported seed/count CLI metadata",
+    "Exact fixture bundle supplied once through the unchanged recorder",
+    "Display44 and delete58 repeated fixed rows labeled separately",
+    "Successful sequence count/order/operation lengths and complete exclusion identities required"
+  ],
+  "no_reserved_inputs_generated": true,
+  "no_original_or_native_execution": true,
+  "remaining": [
+    "Final source-specific Root runner and exact build recipes",
+    "Full committed source/helper/interpreter/content closure verified before imports/generation",
+    "Independent observer and source acceptance",
+    "Distinct Root admission and single-use execution marker",
+    "Per-case source outcome/attempt accounting and full old/current comparisons",
+    "Coherent integration gate"
+  ],
+  "limits": [
+    "These synthetic plumbing checks do not qualify source behavior or a final holdout.",
+    "The low-level observe function relies on the future Root runner for freeze/admission. Do not invoke directly on reserved definitions.",
+    "No maintained original fixture/comparator, tolerance, expected field or Source code changed."
+  ]
+}
