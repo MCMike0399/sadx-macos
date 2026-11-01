@@ -1,12 +1,12 @@
 {
   "change": {
-    "base_commit": "d377eba1d025eeff2945f09d99a7204461d95184",
-    "evidence": "reference/production-integration-20261101/enforcement-integration/evidence.json",
-    "evidence_sha256": "9591f7d76907d452486e3ca58c06ecf8921ec60493d67947e573b85da273674e",
-    "reason": "Preserve every inherited frozen corpus omitted from the isolated checkout while sealing additive enforcement"
+    "base_commit": "72f2822acc27889db0ac96813801bf7b6a988da8",
+    "evidence": "reference/production-integration-20261101/depth-state-shared/registration.json",
+    "evidence_sha256": "50307323e2fce15cd607aafc8c194ea0407081b6cdee90fe6d2254609ea76539",
+    "reason": "Register independent depth sub-judge and native Display composition test after frozen source baseline; preserve inherited blend judges"
   },
   "files": {
-    "Makefile": "aae5b66b8d3b936e327ac67bb53e633e7b15a26e74fc91f53670771235e5a811",
+    "Makefile": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
     "reference/address-dispatch-baseline-v1.json": "db0e83e323df714032ddad3046670d81968efe8e966630d9666ecbbe87d38bd7",
     "reference/constexpr-table-review.json": "1a9068800cb6de718c80fdefcf73b3359e0e5c264bcdbae7366b0f9a11babf68",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
@@ -463,6 +463,7 @@
     "tests/probes/native_ninja_queue_lifecycle_probe.cpp": "44cce018570de8f731e2d085037a672fe982322f249e37c1f217d8c887fc0e6f",
     "tests/probes/native_ninja_queue_native_probe.cpp": "df69f4b983b4c93915565870911fe947ec096733af04916eb9b132db1f39a202",
     "tests/probes/native_ninja_queue_render_probe.cpp": "1f0aee3243dc94e7a879ee959053a39ae50b3f60123c2067ee093f8f0f1fc5ea",
+    "tests/probes/native_ninja_render_depth_probe.cpp": "1ed41dfd9674297be6e66f3c550ed9aa16e770a99b0295b87e2e15e216ce9806",
     "tests/probes/native_ninja_render_probe.cpp": "be53c871952e012daa1ad2fba3947ae91e1f23ea6fa0add55e0756386d9d79a3",
     "tests/probes/native_ninja_screen_initial_state_probe.cpp": "e02132c0d56c9934c51858b21c6e12cf2d4481c06a02b944151f775e0ce15a97",
     "tests/probes/native_ninja_sine_table_probe.cpp": "ca992c3b12252332d400ff7c4836b75fc71e14cf1c3c65cedd4ef1f0c4ce97d3",
@@ -562,6 +563,7 @@
     "tests/probes/native_x87_transcendental_probe.cpp": "895529f003f97f2d3a4d93ae2a7c8722e6a13a1e6a194d5d076e9d6d77790117",
     "tests/probes/ninja_fog_initial_state_probe.hpp": "647f92a7f7f91f9db37aa8725512758d61ecacfa5b2f1464ffaaebc5393ea2e0",
     "tests/probes/ninja_queue_initial_state_probe.hpp": "4927eb9a8bae57ca2a4831884bcd03c10fbc29d68765ca7b75437ebb7638e4f1",
+    "tests/probes/ninja_render_depth_probe.cpp": "72e442a3b3acbf4582241d16d5d5614dc0d44b0d22e538b280b946cbbd9fd706",
     "tests/probes/ninja_screen_initial_state_probe.hpp": "3b42341840cdae6add20d437f2d3ed3ef038f474e2339b1d7c4e95cfe07731af",
     "tests/probes/ninja_sine_table_probe.hpp": "f183b6e0dc5fc2ffc00690b9b60d8ef6776cdb07be3644cbded4ad77b4622003",
     "tests/probes/normal_uv_strip_probe.hpp": "e92b2c39e3bef3e3b1fbbb657a4c91a03eea31012a902d849ea41c890adef9d8",
@@ -627,7 +629,7 @@
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",
     "tests/python/test_voice_publication.py": "5c00051d9b3de640f64e224dda4d810cdd7d26acafd91d7b1dc44e9786a734f3",
-    "tests/unit/manifest.tsv": "6e333f613eac2659112845600f4899bfe37404c4b7ce88cc984afbd626f3dd78",
+    "tests/unit/manifest.tsv": "b2353aa6b66df60abf695b6a47716e3f4b66a1213742009d5b353c2eb3501806",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",
@@ -681,6 +683,7 @@
     "tools/lib/pe_image.py": "94694dc5fb38e459d26b35c25a7cdb7e3fad7128e1178363340606bb9db299f2",
     "tools/oracles/check_basic_model_packet.py": "ebed363eb2c7ba7e20097d24237223b82d9c6e20d609940519908acbd57214cc",
     "tools/oracles/check_collision_component.py": "b94e339cc003d7f954dcb71775c61ba221c859c51881157e60bbe653bbd3d567",
+    "tools/oracles/check_ninja_render_depth.py": "6d0cc5ba2d2dd251cbf6f20679288ca9f96d10f56775ad1c0c578abce5a1a1fc",
     "tools/oracles/check_normal_uv_strip_packet.py": "367792beba15da9ef0b9a28ac10b64e7507a2bcf6876a732d65f43260a99d66c",
     "tools/oracles/check_object_draw_packet.py": "aa027623609537e09e49cce811f6385085c73ffd37a4399f9de4d0886d5f868e",
     "tools/oracles/check_polybuff_context_coexistence.py": "b8646a8b12e04e885044b3d37c770e56ccd8be8c002e318e170b2ff714e2d6a3",
@@ -822,6 +825,7 @@
     "tools/oracles/verify_original_ninja_queue_native.py": "2a9d59eae3987025b5a5313b170af59441df2515104f12c8ed8ba897e9980c10",
     "tools/oracles/verify_original_ninja_queue_render.py": "133107eecefd8c62d048cb4d43493bc62cbe12a1204788bf5c136ab3a2f7ff56",
     "tools/oracles/verify_original_ninja_render.py": "cc89b135e5e76c197a7ee6b57d2b4cd36aafff39a9a1ae978d42c0f0b17610c7",
+    "tools/oracles/verify_original_ninja_render_depth.py": "0f1f4e8976bf06385bef8a00d845b04e70218e227dbea0fc8c3e5e092e7bf825",
     "tools/oracles/verify_original_ninja_screen_initial_state.py": "52057f880bd3578262c93694aa488ba1bfca9797254085b773ce9daf927ee1f4",
     "tools/oracles/verify_original_ninja_sine_table.py": "6865eb8da01ad3b686945543c6d5cefb84014b57b3030f10fbccf5c083ce56fd",
     "tools/oracles/verify_original_ninja_sprite_display.py": "67d237a94faed100d3658260e34307109daab3342c0f6524923f9d552b5bac44",

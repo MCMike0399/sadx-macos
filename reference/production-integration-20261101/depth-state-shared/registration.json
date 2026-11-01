@@ -1,0 +1,19 @@
+{
+  "source_commit": "72f2822",
+  "original_judge_setup": "c6fc8f4",
+  "independent_review": "3cbf412",
+  "separate_observation_correction": "b40093c",
+  "source_baseline_cases": 1998,
+  "source_baseline_mismatches": 0,
+  "current_cases": 1998,
+  "current_mismatches": 0,
+  "semantic_mutants_caught": 6,
+  "canonical_target": "oracle-ninja-render-depth",
+  "new_unit": "native-render-state",
+  "original_blend_abi_and_judges_unchanged": true,
+  "limits": [
+    "925 protected input paths include all inherited921 paths. Only Makefile/compiler registration and unit manifest append differ among prior protected inputs.",
+    "Full render-state ownership and legacy diagnostic migration remain open.",
+    "Fresh independent combined depth/observer review and final holdout/integration gate pending."
+  ]
+}
