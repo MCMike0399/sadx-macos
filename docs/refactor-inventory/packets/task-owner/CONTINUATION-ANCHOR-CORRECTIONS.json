@@ -1,0 +1,38 @@
+{
+  "base_commit": "d70feb7a296848afb3c7519559952b6c5b26877a",
+  "review": "5a8572a",
+  "corrections": {
+    "P1": "Explicit selected EXECUTION_MODE bound to frozen execution_mode. Continuation requires exact proof schema, original rejects proof; parent/child both validate even if verifier mocked. Child generation unconditionally refused in continuation; mismatched prepare mode rejected before writing.",
+    "P2": "Original freeze bound to committed5487937 admission; original RUN/marker and exact4inputhashes/counts bound to committeda8e3b0f failure; modelBUILD and exact8models bound to committed ATTEMPT-1-MODEL-ANCHOR.json. Local coherent substitution cannot replace committed identities."
+  },
+  "tests": {
+    "tests": 72,
+    "exit_status": 0,
+    "command": "python3 -m unittest discover -s tests/python -p 'test_task_*' -v",
+    "log_sha256": "50f7c21f6212e8807835e180687fad79a79874b4a3bba4db801438041a30356f",
+    "negative_cases": [
+      "null/empty/missing proof cannot call archive/build/generation or create output",
+      "wrong selected mode and child generation refusal",
+      "coherently replaced input+manifest",
+      "different failed receipt",
+      "wrong original freeze",
+      "prior captures/completedsubset/changedinput"
+    ]
+  },
+  "setup_note": "Old fake freezes required the newly mandatory mode/proof/anchor fields; first fixture failures preserved separately, not source execution.",
+  "files": {
+    "tools/oracles/task_judges/reserved_run.py": "c5eff1924ef5253d5b4e172f47a5d9c4cc1df884aaf1741ec9a48717b0277c7a",
+    "tests/python/test_task_reserved_run.py": "b66bd138ac83045855560fb7acc613360387761122f52533631687b875d1b93d"
+  },
+  "not_executed": [
+    "continuation preparation",
+    "new frozen closure",
+    "Root continuation admission",
+    "source/native case execution"
+  ],
+  "remaining": [
+    "Fresh bounded P1/P2 recheck",
+    "Only after acceptance: new immutable continuation closure and distinct Root admission",
+    "Actual exact-input observations and integration; original exit1 remains failed"
+  ]
+}

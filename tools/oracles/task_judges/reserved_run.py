@@ -27,6 +27,7 @@ OUT = ROOT / 'build/task-final-reserved'
 ORIGINAL_OUT = OUT
 ORIGINAL_FREEZE = FREEZE
 ORIGINAL_PINS = PIN_DATA
+EXECUTION_MODE = 'original'
 BEFORE = 'bd22ee423ea015f00152a97fa8fc2e1b4034b411'
 CANDIDATE = 'f8ab5e408427bb799aa244e46274648862b0ec05'
 SLUGS = ('task_work', 'task_lifecycle', 'task_display', 'task_delete')
@@ -164,10 +165,27 @@ def frozen_inputs(frozen):
 
 
 def select_continuation():
-    global FREEZE, PIN_DATA, OUT
+    global FREEZE, PIN_DATA, OUT, EXECUTION_MODE
+    EXECUTION_MODE = 'continuation'
     FREEZE = PACKET / 'RESERVED-CONTINUATION-FREEZE.json'
     PIN_DATA = ROOT / 'build/task-final-continuation-pins.json'
     OUT = ROOT / 'build/task-final-reserved-continuation'
+
+
+def validate_mode(frozen):
+    if frozen.get('execution_mode') != EXECUTION_MODE:
+        raise ValueError('Selected execution mode differs from frozen identity')
+    proof = frozen.get('continuation')
+    if EXECUTION_MODE == 'continuation':
+        required = {'terminal_sha256', 'freeze_sha256', 'inputs', 'libraries', 'original_output'}
+        if not isinstance(proof, dict) or set(proof) != required or not proof:
+            raise ValueError('Continuation requires complete reuse proof')
+    elif proof is not None:
+        raise ValueError('Original mode cannot select a continuation proof')
+
+
+def committed_evidence(commit, name):
+    return json.loads(git('show', commit + ':docs/refactor-inventory/packets/task-owner/' + name))
 
 
 def unattempted_previous_run():
@@ -178,6 +196,16 @@ def unattempted_previous_run():
     if list(ORIGINAL_OUT.glob('*/captures')):
         raise ValueError('Previous run already attempted observations')
     previous = json.loads(ORIGINAL_FREEZE.read_text())
+    admission = committed_evidence('5487937', 'ROOT-EXECUTION-ADMISSION.json')
+    failure = committed_evidence('a8e3b0f', 'RESERVED-ATTEMPT-1-FAILURE.json')
+    if digest(ORIGINAL_FREEZE) != admission['freeze_sha256']:
+        raise ValueError('Original freeze differs from committed admission')
+    if (previous['before'] != BEFORE or previous['candidate'] != CANDIDATE or
+            previous['protocol']['immutable_before_source'] != BEFORE):
+        raise ValueError('Original model identity differs')
+    if (digest(ORIGINAL_OUT / 'RUN.json') != failure['terminal_receipt_sha256'] or
+            digest(ORIGINAL_OUT / 'EXECUTED_ONCE.json') != failure['frozen_marker_sha256']):
+        raise ValueError('Original terminal/marker differs from committed failure')
     marker = json.loads((ORIGINAL_OUT / 'EXECUTED_ONCE.json').read_text())
     if marker['freeze_sha256'] != digest(ORIGINAL_FREEZE):
         raise ValueError('Previous execution freeze differs')
@@ -195,10 +223,21 @@ def unattempted_previous_run():
     inputs = json.loads((ORIGINAL_OUT / 'INPUTS.json').read_text())
     if set(inputs) != set(SLUGS):
         raise ValueError('Previous cohort set differs')
+    anchored_inputs = {row['slug']: row['input_file_sha256'] for row in failure['counts']}
+    if inputs != anchored_inputs:
+        raise ValueError('Previous input selection differs from committed failure')
     for slug, expected in inputs.items():
-        if digest(ORIGINAL_OUT / (slug + '-inputs.json')) != expected:
+        path = ORIGINAL_OUT / (slug + '-inputs.json')
+        if digest(path) != expected:
             raise ValueError('Previous generated inputs changed')
+        expected_count = next(row['generated'] for row in failure['counts'] if row['slug'] == slug)
+        if len(json.loads(path.read_text())['cases']) != expected_count:
+            raise ValueError('Previous input cardinality differs')
     models = json.loads((ORIGINAL_OUT / 'BUILD.json').read_text())['libraries']
+    model_anchor = committed_evidence('HEAD', 'ATTEMPT-1-MODEL-ANCHOR.json')
+    if (digest(ORIGINAL_OUT / 'BUILD.json') != model_anchor['original_build_sha256'] or
+            models != model_anchor['models']):
+        raise ValueError('Previous models differ from committed attempt-1 selection')
     required = {str(ORIGINAL_OUT / world / 'libraries' / (slug + '.dylib'))
                 for world in ('old', 'current') for slug in SLUGS}
     if set(models) != required or any(digest(path) != value for path, value in models.items()):
@@ -210,6 +249,8 @@ def unattempted_previous_run():
 
 
 def prepare(continuation=False):
+    if continuation != (EXECUTION_MODE == 'continuation'):
+        raise ValueError('Preparation mode differs from selected paths')
     if OUT.exists():
         raise ValueError('Existing execution directory; preserve and inspect it')
     if git('diff', '--name-only', 'HEAD', '--', 'src', 'tools/oracles', 'tools/lib').strip():
@@ -229,6 +270,7 @@ def prepare(continuation=False):
     manifest = write_pin_manifest(root_inputs(tools))
     reuse = unattempted_previous_run() if continuation else None
     write_new(FREEZE, dict(before=BEFORE, candidate=CANDIDATE,
+                          execution_mode=EXECUTION_MODE,
                           protocol=protocol, input_manifest=manifest, toolchain=tools,
                           source_trees={world: git('rev-parse', commit + ':src').decode().strip()
                                         for world, commit in (('old', BEFORE), ('current', CANDIDATE))},
@@ -242,6 +284,7 @@ def verify_freeze():
     if git('show', 'HEAD:' + relative) != FREEZE.read_bytes():
         raise ValueError('Execution freeze must be committed unchanged')
     frozen = json.loads(FREEZE.read_text())
+    validate_mode(frozen)
     if frozen['before'] != BEFORE or frozen['candidate'] != CANDIDATE:
         raise ValueError('Frozen model identity differs')
     selected = toolchain()
@@ -407,9 +450,12 @@ def pinned_unicorn(package):
 
 
 def child(mode, world=None, slug=None, parent_fd=None, stage_token=None):
+    if EXECUTION_MODE == 'continuation' and mode == 'generate':
+        raise ValueError('Selected continuation cannot generate')
     name = 'generate' if mode == 'generate' else world + '-' + slug
     admit_child(name, parent_fd, stage_token)
     frozen = verify_freeze()
+    validate_mode(frozen)
     reused = frozen.get('continuation')
     if reused and (mode == 'generate' or unattempted_previous_run() != reused):
         raise ValueError('Continuation cannot regenerate or alter previous proof')
@@ -472,6 +518,7 @@ def run(admitted):
     if not admitted:
         raise ValueError('Root must explicitly admit execution after independent review')
     frozen = verify_freeze()
+    validate_mode(frozen)
     OUT.mkdir(exist_ok=False)
     write_new(OUT / 'EXECUTED_ONCE.json', dict(freeze_sha256=digest(FREEZE)))
     completed, failure = [], None

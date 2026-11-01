@@ -22,6 +22,35 @@ SPEC.loader.exec_module(RUN)
 
 
 class TaskReservedRun(unittest.TestCase):
+    def test_selected_continuation_never_falls_back_to_build_or_generation(self):
+        for proof in (None, {}, ''):
+            with tempfile.TemporaryDirectory() as directory:
+                out = Path(directory)/'out'
+                frozen = dict(execution_mode='continuation', continuation=proof)
+                with patch.object(RUN, 'EXECUTION_MODE', 'continuation'), patch.object(RUN, 'OUT', out), \
+                        patch.object(RUN, 'verify_freeze', return_value=frozen), \
+                        patch.object(RUN, 'archive') as archive, patch.object(RUN, 'build') as build, \
+                        patch.object(RUN, 'command') as command:
+                    with self.assertRaisesRegex(ValueError, 'complete reuse proof'):
+                        RUN.run(True)
+                    archive.assert_not_called()
+                    build.assert_not_called()
+                    command.assert_not_called()
+                    self.assertFalse(out.exists())
+
+    def test_selected_mode_and_freeze_identity_must_agree(self):
+        with patch.object(RUN, 'EXECUTION_MODE', 'continuation'):
+            for frozen in ({}, {'execution_mode': 'original', 'continuation': None}):
+                with self.assertRaisesRegex(ValueError, 'mode differs'):
+                    RUN.validate_mode(frozen)
+            with patch.object(RUN, 'admit_child') as admit:
+                with self.assertRaisesRegex(ValueError, 'cannot generate'):
+                    RUN.child('generate')
+                admit.assert_not_called()
+        with patch.object(RUN, 'EXECUTION_MODE', 'original'):
+            with self.assertRaisesRegex(ValueError, 'cannot select'):
+                RUN.validate_mode({'execution_mode': 'original', 'continuation': {'proof': True}})
+
     def test_continuation_requires_exact_inputs_models_and_zero_prior_attempts(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -29,7 +58,8 @@ class TaskReservedRun(unittest.TestCase):
             old.mkdir()
             freeze, pins = root/'old-freeze.json', root/'old-pins.json'
             pins.write_text(json.dumps({str(FILE.absolute()): 'old runner'}))
-            freeze.write_text(json.dumps(dict(toolchain={}, input_manifest={
+            freeze.write_text(json.dumps(dict(before=RUN.BEFORE, candidate=RUN.CANDIDATE,
+                protocol={'immutable_before_source': RUN.BEFORE}, toolchain={}, input_manifest={
                 'path': 'old-pins.json', 'sha256': RUN.digest(pins)})))
             (old/'EXECUTED_ONCE.json').write_text(json.dumps({'freeze_sha256': RUN.digest(freeze)}))
             terminal = dict(error={'message': 'pre-observation failure'}, completed=[])
@@ -46,9 +76,18 @@ class TaskReservedRun(unittest.TestCase):
                     models[str(library)] = RUN.digest(library)
             (old/'INPUTS.json').write_text(json.dumps(inputs))
             (old/'BUILD.json').write_text(json.dumps({'libraries': models}))
+            failure = dict(terminal_receipt_sha256=RUN.digest(old/'RUN.json'),
+                           frozen_marker_sha256=RUN.digest(old/'EXECUTED_ONCE.json'),
+                           counts=[dict(slug=slug, input_file_sha256=value, generated=1)
+                                   for slug, value in inputs.items()])
+            anchors = {'ROOT-EXECUTION-ADMISSION.json': {'freeze_sha256': RUN.digest(freeze)},
+                       'RESERVED-ATTEMPT-1-FAILURE.json': failure,
+                       'ATTEMPT-1-MODEL-ANCHOR.json': {'original_build_sha256': RUN.digest(old/'BUILD.json'),
+                                                     'models': models}}
             with patch.object(RUN, 'ROOT', root), patch.object(RUN, 'ORIGINAL_OUT', old), \
                     patch.object(RUN, 'ORIGINAL_FREEZE', freeze), patch.object(RUN, 'ORIGINAL_PINS', pins), \
                     patch.object(RUN, 'toolchain', return_value={}), \
+                    patch.object(RUN, 'committed_evidence', side_effect=lambda commit, name: anchors[name]), \
                     patch.object(RUN, 'root_inputs', return_value={str(FILE.absolute()): 'corrected runner'}):
                 proof = RUN.unattempted_previous_run()
                 self.assertEqual(proof['inputs'], inputs)
@@ -59,6 +98,25 @@ class TaskReservedRun(unittest.TestCase):
                 with self.assertRaisesRegex(ValueError, 'inputs changed'):
                     RUN.unattempted_previous_run()
                 path.write_bytes(original)
+                # A coherent replacement of input bytes AND its mutable manifest
+                # must still fail against the independently committed selection.
+                path.write_text(json.dumps({'cases': [[999]]}))
+                substituted = dict(inputs, task_work=RUN.digest(path))
+                (old/'INPUTS.json').write_text(json.dumps(substituted))
+                with self.assertRaisesRegex(ValueError, 'committed failure'):
+                    RUN.unattempted_previous_run()
+                path.write_bytes(original)
+                (old/'INPUTS.json').write_text(json.dumps(inputs))
+                original_terminal = (old/'RUN.json').read_bytes()
+                (old/'RUN.json').write_text(json.dumps(dict(terminal, error={'message': 'different failure'})))
+                with self.assertRaisesRegex(ValueError, 'committed failure'):
+                    RUN.unattempted_previous_run()
+                (old/'RUN.json').write_bytes(original_terminal)
+                original_freeze = freeze.read_bytes()
+                freeze.write_text(json.dumps({'other': 'freeze'}))
+                with self.assertRaisesRegex(ValueError, 'committed admission'):
+                    RUN.unattempted_previous_run()
+                freeze.write_bytes(original_freeze)
                 captures = old/'old/captures'
                 captures.mkdir()
                 with self.assertRaisesRegex(ValueError, 'already attempted'):
@@ -97,7 +155,7 @@ class TaskReservedRun(unittest.TestCase):
             try:
                 with patch.object(RUN, 'OUT', out), patch.object(RUN, 'FREEZE', freeze), \
                         patch.object(RUN, 'admit_child'), \
-                        patch.object(RUN, 'verify_freeze', return_value={'before': RUN.BEFORE, 'candidate': RUN.CANDIDATE}), \
+                        patch.object(RUN, 'verify_freeze', return_value={'before': RUN.BEFORE, 'candidate': RUN.CANDIDATE, 'execution_mode': 'original', 'continuation': None}), \
                         patch.object(RUN, 'verify_archive'), patch.object(RUN, 'verify_origins'), \
                         patch.object(RUN, 'pinned_unicorn'), \
                         patch.object(RUN, 'source_module', return_value=SimpleNamespace(observe=observe)), \
@@ -139,7 +197,7 @@ class TaskReservedRun(unittest.TestCase):
                 inputs = RUN.root_inputs(tools)
                 self.assertEqual(inputs[str(spelling)], RUN.digest(spelling))
                 self.assertEqual(inputs[str(compiler.resolve())], RUN.digest(compiler))
-                frozen = dict(before=RUN.BEFORE, candidate=RUN.CANDIDATE,
+                frozen = dict(before=RUN.BEFORE, candidate=RUN.CANDIDATE, execution_mode='original', continuation=None,
                               input_manifest=RUN.write_pin_manifest(inputs), toolchain=tools)
                 freeze.write_text(json.dumps(frozen))
                 with patch.object(RUN, 'git', side_effect=lambda *args: freeze.read_bytes()):
@@ -380,7 +438,7 @@ class TaskReservedRun(unittest.TestCase):
             out.mkdir()
             marker = out / 'EXECUTED_ONCE.json'
             marker.write_text('preserve')
-            with patch.object(RUN, 'OUT', out), patch.object(RUN, 'verify_freeze', return_value={}):
+            with patch.object(RUN, 'OUT', out), patch.object(RUN, 'verify_freeze', return_value={'execution_mode': 'original', 'continuation': None}):
                 with self.assertRaises(FileExistsError):
                     RUN.run(True)
             self.assertEqual(marker.read_text(), 'preserve')
@@ -401,7 +459,7 @@ class TaskReservedRun(unittest.TestCase):
             dependency = root / 'helper.py'
             dependency.write_text('changed')
             freeze = root / 'freeze.json'
-            frozen = dict(before=RUN.BEFORE, candidate=RUN.CANDIDATE,
+            frozen = dict(before=RUN.BEFORE, candidate=RUN.CANDIDATE, execution_mode='original', continuation=None,
                           inputs={str(dependency): '0' * 64}, toolchain={})
             freeze.write_text(json.dumps(frozen))
             with patch.object(RUN, 'ROOT', root), patch.object(RUN, 'FREEZE', freeze), \
@@ -417,7 +475,7 @@ class TaskReservedRun(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             freeze = root / 'freeze.json'
-            freeze.write_text(json.dumps(dict(before=RUN.BEFORE, candidate=RUN.CANDIDATE, inputs={}, toolchain={})))
+            freeze.write_text(json.dumps(dict(before=RUN.BEFORE, candidate=RUN.CANDIDATE, inputs={}, toolchain={}, execution_mode='original', continuation=None)))
             with patch.object(RUN, 'ROOT', root), patch.object(RUN, 'FREEZE', freeze), \
                     patch.object(RUN, 'git', return_value=freeze.read_bytes()), \
                     patch.object(RUN, 'toolchain', return_value={}), \
