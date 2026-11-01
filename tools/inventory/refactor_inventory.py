@@ -332,6 +332,31 @@ def previous_receipt_at(name, commit):
     return None
 
 
+def committed_receipt_continuity(name, receipt, paths):
+    """A restored old tip cannot hide a later committed receipt generation."""
+    chain = set()
+    current = receipt
+    for _ in range(65):
+        chain.add(canonical_hash(current))
+        previous = current["previous"]
+        if previous is None:
+            break
+        current = unique_review_json(fingerprinted_file(previous["receipt"], paths).decode())
+    else:
+        raise ValueError("Lineage proof history exceeds 64 receipts")
+    versions = git("log", "--first-parent", "--format=%H", "HEAD", "--", name).splitlines()
+    if len(versions) > 64:
+        raise ValueError("Lineage receipt history exceeds 64 versions")
+    for commit in versions:
+        result = subprocess.run(["git", "-C", str(ROOT), "show", commit + ":" + name],
+                                stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        if result.returncode:  # A deletion does not erase the prior generation.
+            continue
+        historical = unique_review_json(result.stdout.decode())
+        if canonical_hash(historical) not in chain:
+            raise ValueError("Committed lineage receipt history cannot be rolled back or skipped")
+
+
 def immutable_receipt_identity(name, commit):
     policy_path = (OUT / "review.json").relative_to(ROOT).as_posix()
     versions = git("log", "--first-parent", "--format=%H", commit, "--", policy_path).splitlines()
@@ -617,6 +642,8 @@ def reconcile_lineage(policy, base_paths, paths, *, _receipt=None, _ledger=None,
                 raise ValueError("Prior accepted historical identity/debt cannot be removed or rewritten")
         reconcile_lineage(policy, base_paths, paths, _receipt=old_receipt, _ledger=old_ledger,
                           _historical=True, _depth=_depth + 1)
+    if has_git and not _historical:
+        committed_receipt_continuity(receipt_name, receipt, proof_paths)
     if not has_git and not (_historical or _preparing):
         export = unique_review_json((OUT / "summary.json").read_text())
         if export.get("lineage_receipt", {}).get("sha256") != sha256((ROOT / receipt_name).read_bytes()):

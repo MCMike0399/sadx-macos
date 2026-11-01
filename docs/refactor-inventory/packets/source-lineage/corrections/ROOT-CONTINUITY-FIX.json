@@ -1,0 +1,22 @@
+{
+  "review": "fb089a4",
+  "correction": "Verify the active or proposed receipt chain covers every committed first-parent receipt generation, including versions after its declared freeze. A restored old tip or a fresh successor of that rollback cannot skip an intervening committed generation.",
+  "verification": {
+    "command": "python3 -m unittest discover -s tests/python -p 'test_refactor_inventory*.py' -q",
+    "tests": 66,
+    "exit": 0,
+    "prior_64_retained": true,
+    "new_regressions": [
+      "Committed old receipt/ledger rollback fails consumption.",
+      "Production preparation rejects rollback as predecessor before overwriting the existing receipt."
+    ],
+    "log_sha256": "a7e41fe8ffe242c408cdc97d406d085bba5b44123740fd6b194ac8e986582472"
+  },
+  "source_diff": [],
+  "limits": [
+    "Pure metadata synthetic repositories only; no Source executions.",
+    "Git-free exports cannot reconstruct omitted Git history; monotonic tip admission occurs before preparation/export. Existing archive chain/fingerprint checks remain unchanged.",
+    "Fresh independent recheck, actual policy activation and full integration gate remain pending.",
+    "Root Main48df570 separately protects generator; worker manifest still uses its older protection boundary until integration union."
+  ]
+}

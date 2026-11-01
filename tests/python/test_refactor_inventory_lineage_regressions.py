@@ -41,6 +41,31 @@ class CommittedLineageReproductions(unittest.TestCase):
         self.assertEqual(json.loads(c.render()['summary.json'])['historical_retained_scope'], 2)
         return second
 
+    def rollback_committed_tip(self):
+        c = self.case
+        name = c.policy['source_lineage_receipt']
+        genesis = (c.root / name).read_bytes()
+        ledger = (c.root / 'docs/lineage.json').read_bytes()
+        self.chain()
+        c.run_git('mv', 'src/player/later.hpp', c.new)
+        (c.root / name).write_bytes(genesis)
+        (c.root / 'docs/lineage.json').write_bytes(ledger)
+        c.commit()
+        return name, genesis
+
+    def test_r1_committed_old_receipt_cannot_rewind_consumed_history(self):
+        self.rollback_committed_tip()
+        with self.assertRaisesRegex(ValueError, 'history cannot be rolled back or skipped'):
+            self.case.render()
+
+    def test_r1_prepare_cannot_treat_committed_rollback_as_new_predecessor(self):
+        name, genesis = self.rollback_committed_tip()
+        c = self.case
+        c.seal([c.edge], write_receipt=False)
+        with self.assertRaisesRegex(ValueError, 'history cannot be rolled back or skipped'):
+            inv.prepare_lineage_receipt(name, 'docs/lineage.json')
+        self.assertEqual((c.root / name).read_bytes(), genesis)
+
     def test_r1_committed_reseal_cannot_squash_history(self):
         second = self.chain()
         c = self.case

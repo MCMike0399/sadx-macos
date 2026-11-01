@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "9a3b443b74b493d91504c638882ddc1626e580db",
-    "evidence": "docs/refactor-inventory/packets/source-lineage/corrections/verification-v3.json",
-    "evidence_sha256": "6b0305ef4815e8d7e7aa7b191305fb601de07317def78a3152a016519cae727e",
-    "reason": "Correct independently reproduced R1 history loss, R2 uncommitted proof substitution and R3 unintegrated source snapshots. Preserve all original 1,268 protected hashes; explicitly migrate the inactive-schema fixture and add 17 adversarial regression tests. No blanket refresh or generator-protection claim."
+    "base_commit": "2430750a11117f4fbe8c99cc8800b3f260639c80",
+    "evidence": "docs/refactor-inventory/packets/source-lineage/corrections/ROOT-CONTINUITY-FIX.json",
+    "evidence_sha256": "98daff9bfc2b95a65cd2fa688a3c2dacf97e073b4203122e041801c407bbca5f",
+    "reason": "Add two committed-receipt rollback regressions; retain all inherited hashes."
   },
   "files": {
     "Makefile": "77a6cc1837d73f1d569b65edc81f429a297ef8a6ca49b0656dee53a945cbfe14",
@@ -649,7 +649,7 @@
     "tests/python/test_provenance.py": "ce62fc0efc2ef9a92b2493adaf994fcbc38af4427c16c28eabe6aea72287fcc2",
     "tests/python/test_readability.py": "5593d449e6b7f507e233903a14aaae0a6c3621db888b31ae2169a3ca5229db94",
     "tests/python/test_refactor_inventory_lineage.py": "0f990c507ca3f786a4cccd7db0db487cdc4134ebbff4f7b7e35c4d3e68469738",
-    "tests/python/test_refactor_inventory_lineage_regressions.py": "03156b9aa09907c43db2a1fc62a4032e18db19ae95360a2e1c2470fd0a1223b6",
+    "tests/python/test_refactor_inventory_lineage_regressions.py": "e29e69074d2992c1c0671fe21706389c58c7d921e9b41c76028f23456540c5a0",
     "tests/python/test_refactor_inventory_review.py": "6c25305f026f89846e5b23d57624318719a09098b1558a69014120eadd90b0a7",
     "tests/python/test_regular_textures.py": "b5ae871253c6c2e2fcaf69ce3f8c967b906e295c2c80cf49882f539b26dd268f",
     "tests/python/test_rollout_salvage.py": "6823ff25fa979fb7299e99f50aeb2ba1828b85ea3c9b5a65e635d093ef9c2a37",
