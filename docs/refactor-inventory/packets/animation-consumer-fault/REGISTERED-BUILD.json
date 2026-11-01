@@ -1,0 +1,31 @@
+{
+  "source": "0622b64",
+  "source_files_verified": 660,
+  "command": "make -j2 UNICORN_DIR=/Users/burbujamc/Developer/sadx-macos/reference/python/lib/python3.14/site-packages/unicorn build/animation-sonic-composition-test build/animation-gamma-shared-binding-test",
+  "build_exit": 0,
+  "sonic_exit": 0,
+  "gamma_exit": 0,
+  "sonic_arguments": [
+    "build/animation-contract/root-requalified/sonic_player/report.constants.bin",
+    "build/animation-consumer-fault/parameters.bin"
+  ],
+  "gamma_arguments": [
+    "/Users/burbujamc/Developer/sadx-macos/game/imported"
+  ],
+  "registered_outputs_match_focused_outputs": true,
+  "artifacts": {
+    "build/animation-consumer-fault/registered-build.log": "17a5950af289cbf4fb25dbcd856a3f851484c0733b8bf0d26bcb7d4b1bf8e3bb",
+    "build/animation-consumer-fault/registered-sonic.log": "a39b8b711840126e2bddadbd6f28fbb35633b4f03d1658b365ad45651819b71e",
+    "build/animation-consumer-fault/registered-gamma.log": "2f802277b14e4bc672d89bc988fb1b44291f76bc52d91945a0c1d25b808de946",
+    "build/animation-sonic-composition-test": "b6365e873d6b1bc148abb18312a8b535694c58627596f31113ea424f3ed076b2",
+    "build/animation-gamma-shared-binding-test": "4a84ad37bac58e7f73faa7ccd232ed771e4b7317b71d0d8e301296cb2ef73b3c",
+    "build/libsadx-core.a": "b756862c7f76ef8b0f490e872ea03ffca09785ef9aed5105d4de91fc93f59a65",
+    "build/libsadx-guest.a": "9d96a036c6114ea776bb7413fbd3b43443b86ac8554921f6b7089e81b4890a6a",
+    "build/libsadx-native.a": "728c456b4009b9b246b6240a5b9367d21bbfb4edca065ca89713191eb5349e87"
+  },
+  "limits": [
+    "Actual registered recipes and freshly built full dependency archives; this is the isolated reviewed Source, not merged Main qualification.",
+    "No EXE/DLL is linked into the native archive. Earlier isolated force-load/product closure remains separately recorded.",
+    "Full integrated gate and journeys remain pending."
+  ]
+}
