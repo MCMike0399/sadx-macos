@@ -1,0 +1,52 @@
+{
+  "base": "a0aa342",
+  "source_sha256": {
+    "src/loader/mpeg_timing.cpp": "fafd2daf8e2e44e080b6b761fd536b2e50152bb380c5866d29acef3ce43b3dc7",
+    "src/loader/mpeg_timing.hpp": "c6f31e9f97289124fcf9affd35037e367868eece8fdd011efe318fb633f420c9",
+    "src/hle/hle_dshow.cpp": "f339d310b33b553dbc5aa3cef0192527096c0f11cebbbc7f15bb6e2bdf6940aa"
+  },
+  "scope": "Fresh pre-source baseline. Current owner source compiled directly. HLE consumer source compiled directly; unchanged support archives read-only from Main build, not a clean entire guest build.",
+  "commands": [
+    {
+      "argv": [
+        "build/mpeg-timing/before/unit",
+        "/Users/burbujamc/Developer/sadx-macos/reference/updated-pc-reference/game/system/RE-US.MPG"
+      ],
+      "exit": 0,
+      "stdout_sha256": "7d2798eb9986c0b9304915d4aa3244432003b6ce47eab2b24c781b81e0a425b2",
+      "stdout_bytes": 192,
+      "stderr": ""
+    },
+    {
+      "argv": [
+        "build/mpeg-timing/before/contract"
+      ],
+      "exit": 0,
+      "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout_bytes": 0,
+      "stderr": "30657 cases, 7774713 bytes, FNV 5361094107316205512\n"
+    },
+    {
+      "argv": [
+        "build/mpeg-timing/before/hle"
+      ],
+      "exit": 0,
+      "stdout_sha256": "da050b4379703ec05c9db6720936290d8de07855a90e1d5da8a6b66a0d535543",
+      "stdout_bytes": 10873,
+      "stderr": ""
+    }
+  ],
+  "corpus": {
+    "cases": 30657,
+    "bytes": 7774713,
+    "fnv1a64": 5361094107316205512,
+    "full_stream_path": "build/mpeg-timing/before/corpus.txt",
+    "sha256": "922d4562bb7b952b72778050d651dec4c1b00c7a6095ff243972191ace51ad00",
+    "comparison": "Every synthetic input byte, optional presence, both error-pointer modes, every result field, unchanged error sentinel. Full streams compared, not only aggregate verdict."
+  },
+  "support_sha256": {
+    "/Users/burbujamc/Developer/sadx-macos/build/libsadx-guest.a": "e6f11bb76cd82756a1b53bc63295fc54128e6898191125ea779d523f1b24d5c2",
+    "/Users/burbujamc/Developer/sadx-macos/build/libsadx-core.a": "f489577e3dc4b0b19472ba06eda4c8788da90f4e2a433331228146df36eb5464",
+    "/Users/burbujamc/Developer/sadx-macos/reference/python/lib/python3.14/site-packages/unicorn/lib/libunicorn.a": "37de931fc7acaee2bed4d1cf27a3f1660351cf04ee362a9f3b8eff50ac9c6faf"
+  }
+}
