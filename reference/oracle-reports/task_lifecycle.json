@@ -1,6 +1,6 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "c7f096a02930b2b3359db2091b39ed7112b9ff3d95da313b825442c5c659a6a5",
+ "native_library_sha256": "591403e3d2fd845db00136af4817435822474d5221a0ca46407f2d558248ae77",
  "case_blob_sha256": "ff71a066fc2cbdf80f349af3fc08c6b4089248074cafeb420bc5eeec0b3baf41",
  "source_ranges": {
   "0x40b030": {
@@ -199,10 +199,19 @@
    "Real401000/CRT formatting not executed; no source cleanup or diagnostic success claimed"
   ]
  },
+ "native_sources": {
+  "src/engine/task.hpp": "3aa7e066178e5bc901d01bab6cc52881f3610fbb98a58558497dc442520aa726",
+  "src/engine/task.cpp": "d7360e20a0f310242af513852b819ae210621b748ffade06ad7b075f2a527675",
+  "src/engine/task_work.hpp": "f7d78c9979f63095bd47ad7c9ca1e56443b2b3863bb4d9bbf81157e3d72ee90d",
+  "src/engine/task_work.cpp": "7513b41eec91d55f24c6058c0904fc620be61c254cb493f938ad380e0be4a56c",
+  "src/guest/task_reference.hpp": "74bb1b232a071c54411aa7f9c805c47447c87f29de825a7448a92c947783abc5",
+  "src/player/player_auxiliary_effect.hpp": "929b9a190b5c44bc963b578359f210e0316913d155f5563824ebb7b056271bd5",
+  "tests/probes/native_task_lifecycle_probe.cpp": "23c22f1b301fa2f72243d229923859a94d51757e21f7c2212c6033a03dbd520d"
+ },
  "values_links_and_bytes_match": true,
  "tracked_summary": {
-  "full_sha256": "2b43d505e4b0c9a0d8a854cebbe58ea171d091080b41e5fa6c2c87fa8f7622c5",
-  "full_bytes": 11886,
+  "full_sha256": "40b6034c361f567630706257af906c3d5f115cc43b3153b9da5443bcf93ba2b8",
+  "full_bytes": 12640,
   "lists_cut_to": 10,
   "cut_lists": {
    "sequences": 19

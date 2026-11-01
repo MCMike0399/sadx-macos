@@ -110,18 +110,22 @@
   "0x40b730-0x40b771": "2788a0ebbd3b4607372938ba8aab450386e368e71f43a22f5b2628eee60a83af"
  },
  "native_sources": {
-  "src/engine/task.hpp": "4b375e2d3d5250e43ba1999715644510d678675d826c0719ed18926f05f47cfc",
-  "src/engine/task.cpp": "568212ddb83426f5742625aa9cd8fa8bad081a96d80864d85777199567533bd6",
-  "tests/probes/native_task_delete_probe.cpp": "6a6878c3824c6fe9424157f66807eba6b2f489d190eae41bd26459f5b0502d2c"
+  "src/engine/task.hpp": "3aa7e066178e5bc901d01bab6cc52881f3610fbb98a58558497dc442520aa726",
+  "src/engine/task.cpp": "d7360e20a0f310242af513852b819ae210621b748ffade06ad7b075f2a527675",
+  "src/engine/task_work.cpp": "7513b41eec91d55f24c6058c0904fc620be61c254cb493f938ad380e0be4a56c",
+  "src/guest/task_reference.hpp": "74bb1b232a071c54411aa7f9c805c47447c87f29de825a7448a92c947783abc5",
+  "src/engine/task_work.hpp": "f7d78c9979f63095bd47ad7c9ca1e56443b2b3863bb4d9bbf81157e3d72ee90d",
+  "src/player/player_auxiliary_effect.hpp": "929b9a190b5c44bc963b578359f210e0316913d155f5563824ebb7b056271bd5",
+  "tests/probes/native_task_delete_probe.cpp": "001ba11c2fdbcec5d577ce9bb6a5d85adf4c9ebfdc880b6a4eed39e26ebdadf3"
  },
  "limits": [
   "Source destructors that recursively destroy their own already-unlinked task are outside the lifecycle API contract; those individually listed reentrant boundaries/free-list cycles are not compared or claimed.",
   "Freed saved-next source pointers without slot reuse stop at the source exec-load boundary and report unsupported; no success is claimed through source free-list memory."
  ],
- "native_library_sha256": "6e65c82a50535aa72d83ded5695e518fd1411ecf5addb3ece1afeba548aaa8a2",
+ "native_library_sha256": "5d73d12627dd001b3c6951e77bee438a7172ae637ef44624c3c019038272ec99",
  "tracked_summary": {
-  "full_sha256": "457f15fa2ecad82c7c5abc7d11c9cee5064bcbb1896e6d775efb132d15f0fb36",
-  "full_bytes": 3501,
+  "full_sha256": "cd3c5ed8c4403cedf3d11b3ea116f80667addc5af03fd84749cb0c1acab4ae1f",
+  "full_bytes": 3919,
   "lists_cut_to": 10,
   "cut_lists": {
    "source_unsupported[0].input": 26,

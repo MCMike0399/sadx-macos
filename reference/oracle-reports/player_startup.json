@@ -1,6 +1,6 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "48daebe7435b155d87d2d7b4c23a62467afd08edeacd3af3c1ba27a1aff2d619",
+ "native_library_sha256": "dd16932085364ae93b64807393a5cd90caa8dc77d1768536623a2ad7cd4fd04a",
  "parameter_table_sha256": "3f69076118fcc6a77c55e600eb337944eb6562e5b0979104b58058ad64ba5107",
  "case_blob": {
   "path": "build/oracles/player_startup.cases.bin",
@@ -28,14 +28,19 @@
  },
  "native_sources": {
   "src/player/player_startup.cpp": "7e8ef54f8546227cafb7b70bc19f87a813771c9a4da2c78d35c1bb226c2d5ea4",
-  "src/player/player_startup.hpp": "caf9869ca53aa415652f368ed0228b7d712be8ead731fa467a51adfd2e7c3c32",
+  "src/player/player_startup.hpp": "2ca2671df869540b51680445e9b199e67ef4018b1f18d5062dce465e5e55020b",
   "src/player/player_state.cpp": "50c12dc9f34152a746062a3933611965cc02bb6487bf063d0b42e47611ee205c",
-  "src/engine/task.cpp": "69a568d3577c8a0b7050d2de9774441082f4304931c0b9580f249fb1cb601774",
-  "src/player/player_task.hpp": "ca3b911db75e90e2ddabc2a4bef3e4fae6578c0405f864001c2e68162e07650d",
-  "src/player/player_task.cpp": "2e76cd51fb6d4e58e95fffb2245a76f686243035074cf331890e240e61e8bf71",
-  "src/engine/task_work.cpp": "08e679e66ab28ceda7a942033489cbd1f49356875766babe9e66236870c84691",
-  "tests/probes/native_player_startup_probe.cpp": "3f19fe2625681280cd69a28a9c91cf1fccd4a33c23894adc34f65f87a8db9261",
-  "tools/oracles/verify_original_player_startup.py": "54ad16c1dbb488eef85455ec4e15a9100a0e31ff54f59fd3f7a8ccec2bab9d44"
+  "src/engine/task.cpp": "d7360e20a0f310242af513852b819ae210621b748ffade06ad7b075f2a527675",
+  "src/guest/player_initialization_reference.cpp": "8f4c65ff73d154d9dd997afd76f3e9094022fa8ecc0c8bc9d141743c9a7da9a3",
+  "src/guest/task_reference.hpp": "74bb1b232a071c54411aa7f9c805c47447c87f29de825a7448a92c947783abc5",
+  "src/engine/task_work.hpp": "f7d78c9979f63095bd47ad7c9ca1e56443b2b3863bb4d9bbf81157e3d72ee90d",
+  "src/player/player_auxiliary_effect.hpp": "929b9a190b5c44bc963b578359f210e0316913d155f5563824ebb7b056271bd5",
+  "src/engine/task.hpp": "3aa7e066178e5bc901d01bab6cc52881f3610fbb98a58558497dc442520aa726",
+  "src/player/player_task.hpp": "00c04da45b7641f1d1421eab366e173e742449ae828b883d2617f422c01d7ebd",
+  "src/player/player_task.cpp": "f702fad3c4b8f605ac1cdb490d719718a9550faea94d1ac86c3929a321d30bd3",
+  "src/engine/task_work.cpp": "7513b41eec91d55f24c6058c0904fc620be61c254cb493f938ad380e0be4a56c",
+  "tests/probes/native_player_startup_probe.cpp": "db49d03f8f04eb88e0297381090ae651e3fb1df0afc777c73755aa029dfa3a4c",
+  "tools/oracles/verify_original_player_startup.py": "98469a727d62911f3af111f739babe739d169c92a213c28ba299c512c8733ed9"
  },
  "profiles": [
   {
@@ -433,8 +438,8 @@
  "original_return_observed": false,
  "full_emulator_match": false,
  "tracked_summary": {
-  "full_sha256": "20aebadd9cb9fdb540e0edb40eac831a67c2d0521754b3e66f35fb44d0bddd12",
-  "full_bytes": 12539,
+  "full_sha256": "e20181a27a2b9ed5b18246bcb52de10b243a6d7e83c76fd267c958a2377aad88",
+  "full_bytes": 13073,
   "lists_cut_to": 10,
   "cut_lists": {
    "profiles": 12

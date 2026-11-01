@@ -1,15 +1,19 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "353940865a42c5506d7177413f0ffd6c0d0e38090ec60d0c06f8502e0af20d6c",
+ "native_library_sha256": "2b4eeef4e4476698c53e43b1cbffc9a37fe624b13e5f3a090f03ec0056a0aadc",
  "source_files": {
-  "src/game/game_scene_logic.hpp": "dcea2a56d92bea0d04b0a9e3fbd1558a532e51f973fc1ca9e16eb54183de1b9a",
-  "src/game/game_scene_logic.cpp": "383545f836fe8a1525ab292a476d799734e87272d9fb690d9effbc655213fd50",
-  "src/engine/task.hpp": "56860f5aaf534b6309cd01bc6b7846078305c64d9a6c32504301254344e115b6",
-  "src/engine/task.cpp": "b7e931c0acf62b9e8ca1f78fe0b26605f6e8be21aa5e27888080291d8e449e3b",
-  "src/player/player_task.hpp": "ca3b911db75e90e2ddabc2a4bef3e4fae6578c0405f864001c2e68162e07650d",
-  "src/player/player_task.cpp": "2e76cd51fb6d4e58e95fffb2245a76f686243035074cf331890e240e61e8bf71",
-  "tests/probes/native_game_scene_logic_probe.cpp": "475b8447ea9870e03791f841c8890dea5ed90f91bc5fcacfa596422a09a3c054",
-  "tools/oracles/verify_original_game_scene_logic.py": "9f012fa552229fad5aaa7dcce12327d6c9b63f5064cb83c40d74b0f1628d6553"
+  "src/game/game_scene_logic.hpp": "5f1145f586f22189ade23c7648ba7e1bb878d52ff6425fb6347f43add79e011e",
+  "src/game/game_scene_logic.cpp": "6fc75054bd4753e9667b18bbc947c13be444c252596641a2b41d954c644b96b0",
+  "src/engine/task.hpp": "3aa7e066178e5bc901d01bab6cc52881f3610fbb98a58558497dc442520aa726",
+  "src/engine/task.cpp": "d7360e20a0f310242af513852b819ae210621b748ffade06ad7b075f2a527675",
+  "src/engine/task_work.cpp": "7513b41eec91d55f24c6058c0904fc620be61c254cb493f938ad380e0be4a56c",
+  "src/guest/task_reference.hpp": "74bb1b232a071c54411aa7f9c805c47447c87f29de825a7448a92c947783abc5",
+  "src/engine/task_work.hpp": "f7d78c9979f63095bd47ad7c9ca1e56443b2b3863bb4d9bbf81157e3d72ee90d",
+  "src/player/player_auxiliary_effect.hpp": "929b9a190b5c44bc963b578359f210e0316913d155f5563824ebb7b056271bd5",
+  "src/player/player_task.hpp": "00c04da45b7641f1d1421eab366e173e742449ae828b883d2617f422c01d7ebd",
+  "src/player/player_task.cpp": "f702fad3c4b8f605ac1cdb490d719718a9550faea94d1ac86c3929a321d30bd3",
+  "tests/probes/native_game_scene_logic_probe.cpp": "fa079439549ca29227b189f68b0a66935361af918e0be21ba9824f655c777f2a",
+  "tools/oracles/verify_original_game_scene_logic.py": "34f6fa1aa9d0fd4f1a8d54adead23b5735320fd2584074f5715c8108549f0816"
  },
  "original_range_sha256": "a03661b949d7c729c3a0569cdeae270b424ecb92d69c7d586ec34e8478fb9c45",
  "cases": 800,
@@ -18,8 +22,8 @@
  "ordering_stores_and_stopped_boundaries_match": true,
  "limits": "413d40 scene orchestration against original instructions.\n\nInput/context/collision/registry/query callees are explicit owner fixtures. The\nsource40b170 task body executes with an explicitly empty eight-list fixture;\nnative task-order/mutation checks cover nonempty lists separately. This does\nnot establish full scene execution, physical input or hardware FP equivalence.\n",
  "tracked_summary": {
-  "full_sha256": "6f5489bd4d1567adc4ea11e0629cb0552bbac4bb155d358b3e57752a358ad44b",
-  "full_bytes": 1726,
+  "full_sha256": "33d768d8aad4e41e66ffd63c46fb9d3fac8462619b97c18b1dd40cc68aeb569d",
+  "full_bytes": 2144,
   "lists_cut_to": 10,
   "cut_lists": {}
  }

@@ -11,7 +11,7 @@
   "src/game/game_bootstrap.hpp": "61e95071538b4f23602fda8460e10ea7ef251ff42d4b6ae1496c5ac718394f46",
   "src/game/game_bootstrap.cpp": "3461ee0394189845c5d7d54b39179b2870fd35508c355c80129b7e755f3d7670",
   "src/game/sound_initial_state.hpp": "0a0ca4936202a736a73ddbda24c625d679c909346ba3aa37004e116fc483d3da",
-  "src/engine/task.hpp": "9162b6011520e0d6e6a98e8a4a989793c48bb7ca3e19e0d732f1d59b9ac4c9e8",
+  "src/engine/task.hpp": "3aa7e066178e5bc901d01bab6cc52881f3610fbb98a58558497dc442520aa726",
   "src/engine/sprite_immediate.hpp": "9bca52fdf2e3c10c170641a4658a4d9ff3d84b16b2809c37ac95a7eb9f5e11d5"
  },
  "source_ranges": {
@@ -72,7 +72,7 @@
  "values_and_call_order_match": true,
  "limits": "Native Clear/Reset/title preparation and save restoration against pinned x86.\n\nReset uses the unchanged existing judge, including service-failure prefixes.\nOther source callees are executed except explicit external-owner receipts for\nheap/tasks, fade/stage services, texture release and list clearing. Invalid\nnegative MSG_Disp indices are outside the four-slot native view and excluded;\nall nonnegative counts, signed character flags and full regular tables remain.\n",
  "tracked_summary": {
-  "full_sha256": "6628a96a75550c00c991949f7f0700d6c42b3a0be2e312111d55134e71be8e80",
+  "full_sha256": "487a286bd17a50e1d590ce55721e07cf8cd21891093e99b1756d29358d2f8c24",
   "full_bytes": 5379,
   "lists_cut_to": 10,
   "cut_lists": {}

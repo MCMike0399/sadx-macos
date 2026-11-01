@@ -1,0 +1,374 @@
+{
+  "source_commit": "c94ef72f512fe15fd84309c25d55330fac3e00d9",
+  "source_tree": "38af34bf7d608e179c12caabedcdbe933d80542e",
+  "status": "Main integration qualification in progress; no full gate or whole-system fidelity claim.",
+  "main_build": {
+    "exit": 0,
+    "log_sha256": "a69f09909f267ff14a05556a8dcf1df6139cf1b6e7aaf3b9d8a687a92f994729",
+    "native_force_load_closure": "PASS"
+  },
+  "units_actual_consumers": {
+    "programs": 29,
+    "all_exit_zero": true,
+    "receipt": "build/task-main-units-consumers.json",
+    "sha256": "e152d9ed0a2a3e1282d973d5e461c466f5474f5e4fd6efe5289fe36389951a09"
+  },
+  "oracles": {
+    "actual_registered_oracles_executed": 16,
+    "combined_make_exit": 2,
+    "combined_exit_causes": [
+      "Inherited FP partial oracles return nonzero.",
+      "An extra nonregistered singular oracle-sonic-action target was requested and refused. Plural oracle-sonic-actions executed; no completed cohort was rerun for command repair."
+    ],
+    "historical_singular_report": "reference/oracle-reports/sonic_action.json stays unchanged, stale and unqualified; excluded from fresh evidence and no output/hash blessing.",
+    "extra_2_target_make_exit": 0,
+    "reports": [
+      {
+        "slug": "task_work",
+        "report": "build/oracles/task_work.json",
+        "sha256": "6e60f28844dacc951c6e1bd9c49cfd173db81952d43de1d107ade0755ed99dea",
+        "bytes": 7783,
+        "complete_json_observations_equal": {
+          "baseline": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-c8fa9287/build/task-source/final/task_work.json",
+          "sha256": "ad2aa508132caffbf826015035815586fc174b2c3cda1b9d4389d5e7378c6cf8",
+          "excluded_identity_keys": [
+            "elapsed_seconds",
+            "native_library_sha256",
+            "native_sources",
+            "seconds",
+            "case_blob.path"
+          ]
+        },
+        "numeric_summary": {}
+      },
+      {
+        "slug": "task_lifecycle",
+        "report": "build/oracles/task_lifecycle.json",
+        "sha256": "40b6034c361f567630706257af906c3d5f115cc43b3153b9da5443bcf93ba2b8",
+        "bytes": 12640,
+        "complete_json_observations_equal": {
+          "baseline": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-c8fa9287/build/task-source/final/task_lifecycle.json",
+          "sha256": "dafaf3f7a9b796212252bb86f2b63428a61229109b8676d63dc47bc2ef36114c",
+          "excluded_identity_keys": [
+            "elapsed_seconds",
+            "native_library_sha256",
+            "native_sources",
+            "seconds",
+            "case_blob.path"
+          ]
+        },
+        "numeric_summary": {}
+      },
+      {
+        "slug": "task_display",
+        "report": "build/oracles/task_display.json",
+        "sha256": "d1e4686e8034e47d312ff0afd31efcde89fc3d2600b94f528fa3fb859676e49d",
+        "bytes": 2074,
+        "complete_json_observations_equal": {
+          "baseline": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-c8fa9287/build/task-source/final/task_display.json",
+          "sha256": "240f7407ecaa8a0922e845ae20930308877832909ba998c5b59d7b94941e077a",
+          "excluded_identity_keys": [
+            "elapsed_seconds",
+            "native_library_sha256",
+            "native_sources",
+            "seconds",
+            "case_blob.path"
+          ]
+        },
+        "numeric_summary": {
+          "cases": 236,
+          "mismatch_count": 0
+        }
+      },
+      {
+        "slug": "task_delete",
+        "report": "build/oracles/task_delete.json",
+        "sha256": "cd3c5ed8c4403cedf3d11b3ea116f80667addc5af03fd84749cb0c1acab4ae1f",
+        "bytes": 3919,
+        "complete_json_observations_equal": {
+          "baseline": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-c8fa9287/build/task-source/final/task_delete.json",
+          "sha256": "983afc2b8d24f089f39a90a9117255e675bfc53f0ca3ed72bd90e7f10d113f15",
+          "excluded_identity_keys": [
+            "elapsed_seconds",
+            "native_library_sha256",
+            "native_sources",
+            "seconds",
+            "case_blob.path"
+          ]
+        },
+        "numeric_summary": {
+          "passed": true,
+          "values_match": true,
+          "cases": 244,
+          "mismatches": 0
+        }
+      },
+      {
+        "slug": "game_scene_logic",
+        "report": "build/oracles/game_scene_logic.json",
+        "sha256": "33d768d8aad4e41e66ffd63c46fb9d3fac8462619b97c18b1dd40cc68aeb569d",
+        "bytes": 2144,
+        "complete_json_observations_equal": {
+          "baseline": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-c8fa9287/build/task-source/final/game_scene_logic.json",
+          "sha256": "33d768d8aad4e41e66ffd63c46fb9d3fac8462619b97c18b1dd40cc68aeb569d",
+          "excluded_identity_keys": [
+            "elapsed_seconds",
+            "native_library_sha256",
+            "native_sources",
+            "seconds",
+            "case_blob.path"
+          ]
+        },
+        "numeric_summary": {
+          "cases": 800
+        }
+      },
+      {
+        "slug": "player_auxiliary_effect",
+        "report": "build/oracles/player_auxiliary_effect.json",
+        "sha256": "e7d607364cf9ffb9586d8d4d2172326ae1ebcd92678eac768ba5d2706b0f6c22",
+        "bytes": 47559,
+        "complete_json_observations_equal": {
+          "baseline": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-c8fa9287/build/task-source/extra/current-player_auxiliary_effect.json",
+          "sha256": "2777b97d713d7bc339be3913bad1c46ab2f80150ad707889c70af19f6ce67cb9",
+          "excluded_identity_keys": [
+            "elapsed_seconds",
+            "native_library_sha256",
+            "native_sources",
+            "seconds",
+            "case_blob.path"
+          ]
+        },
+        "numeric_summary": {}
+      },
+      {
+        "slug": "player_startup",
+        "report": "build/oracles/player_startup.json",
+        "sha256": "e20181a27a2b9ed5b18246bcb52de10b243a6d7e83c76fd267c958a2377aad88",
+        "bytes": 13073,
+        "complete_json_observations_equal": {
+          "baseline": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-c8fa9287/build/task-source/extra/current-player_startup.json",
+          "sha256": "5abc2c5a41fb34de2690c09c29597a3f9400187d3c25236b23e670319150b155",
+          "excluded_identity_keys": [
+            "elapsed_seconds",
+            "native_library_sha256",
+            "native_sources",
+            "seconds",
+            "case_blob.path"
+          ]
+        },
+        "numeric_summary": {}
+      },
+      {
+        "slug": "collision_component",
+        "report": "build/oracles/collision_component.json",
+        "sha256": "2540ee6f23636548fb2b7838fd40adbf2379ba1b00b4394880b505de9e2c9640",
+        "bytes": 69659,
+        "complete_json_observations_equal": {
+          "baseline": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-c8fa9287/build/task-source/extra/current-collision_component.json",
+          "sha256": "2540ee6f23636548fb2b7838fd40adbf2379ba1b00b4394880b505de9e2c9640",
+          "excluded_identity_keys": [
+            "elapsed_seconds",
+            "native_library_sha256",
+            "native_sources",
+            "seconds",
+            "case_blob.path"
+          ]
+        },
+        "numeric_summary": {
+          "cases": 7964,
+          "flag_mismatches": 6462,
+          "passed": false,
+          "values_match": true
+        }
+      },
+      {
+        "slug": "player_hold",
+        "report": "build/oracles/player_hold.json",
+        "sha256": "d715c61cc35e17ba708acb1487b45d2ede684fa5c01b98613960db6a0796360f",
+        "bytes": 2417,
+        "comparison_limit": "Fresh canonical source comparison; no second retained full JSON baseline selected here. Existing packet/original receipts remain separate.",
+        "numeric_summary": {
+          "cases": 133410,
+          "passed": true
+        }
+      },
+      {
+        "slug": "sonic_player",
+        "report": "build/oracles/sonic_player.json",
+        "sha256": "7d5bf608217b8909329f92281a5351fe73d1aae12d187c4714c152bbb70e13f8",
+        "bytes": 25113,
+        "complete_json_observations_equal": {
+          "baseline": "build/task-main-before-oracles/sonic_player.json",
+          "sha256": "54b810534e921bd32d4a08f4405bc0e98ff2ed8cec60b6601034d1fa4a93ff50",
+          "excluded_identity_keys": [
+            "elapsed_seconds",
+            "native_library_sha256",
+            "native_sources",
+            "seconds",
+            "case_blob.path"
+          ]
+        },
+        "numeric_summary": {
+          "cases": 28800,
+          "stored_mismatches": 0,
+          "status_mismatches": 2840,
+          "passed": false
+        }
+      },
+      {
+        "slug": "sonic_actions",
+        "report": "build/oracles/sonic_actions.json",
+        "sha256": "b55b23018edf9c4d3da2e4d1b1d024d594760a7e2cfa8c0fd61c9f351c3ecd29",
+        "bytes": 37487,
+        "comparison_limit": "Fresh canonical source comparison; no second retained full JSON baseline selected here. Existing packet/original receipts remain separate.",
+        "numeric_summary": {
+          "cases": 30192,
+          "stored_mismatches": 0,
+          "boundary_mismatches": 0,
+          "status_mismatches": 2172,
+          "passed": false
+        }
+      },
+      {
+        "slug": "game_cleanup",
+        "report": "build/oracles/game_cleanup.json",
+        "sha256": "487a286bd17a50e1d590ce55721e07cf8cd21891093e99b1756d29358d2f8c24",
+        "bytes": 5379,
+        "complete_json_observations_equal": {
+          "baseline": "build/task-main-before-oracles/game_cleanup.json",
+          "sha256": "6628a96a75550c00c991949f7f0700d6c42b3a0be2e312111d55134e71be8e80",
+          "excluded_identity_keys": [
+            "elapsed_seconds",
+            "native_library_sha256",
+            "native_sources",
+            "seconds",
+            "case_blob.path"
+          ]
+        },
+        "numeric_summary": {
+          "cases": 2604,
+          "mismatch_count": 0
+        }
+      },
+      {
+        "slug": "title_background",
+        "report": "build/oracles/title_background.json",
+        "sha256": "571bef74f585e6fd2a6b6c3f9c6dcf34d5fcdf404f3302152f215b532cceebee",
+        "bytes": 1732,
+        "comparison_limit": "Fresh canonical source comparison; no second retained full JSON baseline selected here. Existing packet/original receipts remain separate.",
+        "numeric_summary": {
+          "passed": false,
+          "values_match": true,
+          "cases": 2125,
+          "mismatches": 0,
+          "fp_flag_mismatches": 1112
+        }
+      },
+      {
+        "slug": "title_menu",
+        "report": "build/oracles/title_menu.json",
+        "sha256": "195e711c73a9d85baa3fae885a238a88ab9ba8786e475bd9378235ad742c3f39",
+        "bytes": 5146,
+        "complete_json_observations_equal": {
+          "baseline": "build/task-main-before-oracles/title_menu.json",
+          "sha256": "81472ee1aa0aa1a1c2a5b71e08e2df02ccac02784bcc4952721ffaf5c8a804f6",
+          "excluded_identity_keys": [
+            "elapsed_seconds",
+            "native_library_sha256",
+            "native_sources",
+            "seconds",
+            "case_blob.path"
+          ]
+        },
+        "numeric_summary": {
+          "passed": false,
+          "values_match": true,
+          "fp_flag_mismatches": 270,
+          "cases": 20872,
+          "mismatches": 0
+        }
+      },
+      {
+        "slug": "save_completion",
+        "report": "build/oracles/save_completion.json",
+        "sha256": "b5d8f165568ade63d988d5a98a83c625f053fb65f60b83d29a98860caa29d524",
+        "bytes": 636,
+        "comparison_limit": "Fresh canonical source comparison; no second retained full JSON baseline selected here. Existing packet/original receipts remain separate.",
+        "numeric_summary": {
+          "cases": 1000,
+          "mismatch_count": 0,
+          "values_match": true,
+          "passed": true
+        }
+      },
+      {
+        "slug": "sound_server",
+        "report": "build/oracles/sound_server.json",
+        "sha256": "09c0c27ebcabcf71d7fd509948f12d9da2a45edcddfd1629d249fc88563ab9fc",
+        "bytes": 1481,
+        "comparison_limit": "Fresh canonical source comparison; no second retained full JSON baseline selected here. Existing packet/original receipts remain separate.",
+        "numeric_summary": {
+          "passed": true,
+          "cases": 1956,
+          "mismatches": 0
+        }
+      }
+    ],
+    "limits": "Complete JSON equality includes every available observation and case_blob hash. Truncated legacy flag lists retain their observation limit; aggregate parity is not independent full FP/hardware qualification."
+  },
+  "clean_source_only_product": {
+    "setup": {
+      "source_commit": "c94ef72f512fe15fd84309c25d55330fac3e00d9",
+      "source_tree": "38af34bf7d608e179c12caabedcdbe933d80542e",
+      "snapshot": "/Users/burbujamc/Developer/sadx-macos/build/source-only-task-c94ef72",
+      "game_absent": true,
+      "reference_absent": true,
+      "windows_binaries": [],
+      "initial_maintained_archives": [],
+      "reused_dependency": "Pinned third-party SDL3/libusb installation only; all maintained objects and numerical libraries rebuild from source.",
+      "SDL_header_sha256": "1ea454a7efcaa54668e77e4b435f1919e815586397ff599cda0a30b19e7882cd",
+      "plan_sha256": "dfc2d47e8b650cd60770fdb4b0561b00d7e67c43ec4fe87b5fa3ad8f12e3ce3a"
+    },
+    "exit": 0,
+    "log_sha256": "49bfc7bcd778fc3a50193055577a6fa5653faf82d350da375472ee19c44fabc6",
+    "binary_sha256": "12ad5aafc8368633a947e9f2be7ac7be4a0d00eaaadea4d21a3c6efa12b5f1d2",
+    "archive_sha256": "e09461bca78d863580dcc322d726101a0230f77e7bf8fc438bdbffb4e3cbbbb8",
+    "force_load_sha256": "148b71f7f3a40d6a2d48f20dc71d24c9f7ba368a0f030deb128458d1ca2c8cb8",
+    "native_closure": "PASS"
+  },
+  "reserved_limits": "All563 produced deletion ABI records preserve old exactly; sourceFAIL207 retains11differences. Both original exit1 attempts and seven exclusions retained. FINAL-PRESERVATION-REVIEW.md is the independent acceptance.",
+  "remaining": [
+    "Finite current parent protection union and committed inventory reconciliation",
+    "Coherent full gate and generated STATUS/HANDOFF qualification"
+  ],
+  "native_journeys": {
+    "exit": 0,
+    "app": "build/source-only-task-c94ef72/build/sadx-native",
+    "report": "build/task-native-journeys/native-journeys.json",
+    "sha256": "f064ad39e6726710b9c530f25ad5a1810d98327af2032faf3326b5f196da327a",
+    "checkpoints": [
+      {
+        "journey": "native-file-select",
+        "exit_status": 0,
+        "frames": 1850,
+        "output": "/Users/burbujamc/Developer/sadx-macos/build/task-native-journeys/native-file-select-daofbkcr",
+        "result_sha256": "43760d69fbca5e42059f9228ac583d03d9c333a296213127733256e473991292"
+      },
+      {
+        "journey": "native-main-menu",
+        "exit_status": 0,
+        "frames": 1850,
+        "output": "/Users/burbujamc/Developer/sadx-macos/build/task-native-journeys/native-main-menu-lqc2prxz",
+        "result_sha256": "d6e113f373f67c3aede6c7e8d0487f546f4e6d77e2f5d47728e1a0973bd35ef3"
+      },
+      {
+        "journey": "native-fresh-save",
+        "exit_status": 0,
+        "frames": 6050,
+        "output": "/Users/burbujamc/Developer/sadx-macos/build/task-native-journeys/native-fresh-save-tf7pjjhw",
+        "result_sha256": "26f4d954f0797a47a5f9171d0c68c622fa5b012a58befe8abb2f5883701bbd62"
+      }
+    ]
+  }
+}

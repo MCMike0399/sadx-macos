@@ -1,0 +1,44 @@
+{
+  "source_commit": "c94ef72",
+  "immutable_before": "bd22ee423ea015f00152a97fa8fc2e1b4034b411",
+  "scope": "Static consumer/declaration revalidation for two table files and two save-warning fixture API bindings. No original warning behavior recovered.",
+  "proofs": {
+    "src/player/player_hold.cpp": {
+      "before_sha256": "a05c67631eb355dc6999806e8269788df92863399afcd36be2214458307d902d",
+      "current_sha256": "909cd849ff2c29fa5cd33eb8a454a69b4244e0b170ab018d0ef11a59b13d5504",
+      "whole_file_reverse_binding_tokens_byte_exact": true,
+      "allowed_binding_changes": "Reviewed ordinal-preserving enum spelling; save fixture setter rename preserves explicitly supplied known-null shared_ptr. No vectors, comparisons, expected values, callbacks or source warnings changed."
+    },
+    "src/player/sonic_player.cpp": {
+      "before_sha256": "57d7e0ad5eeca0a427809d538e22094e87a17acb6e0dfb70eb9d27da12d7397f",
+      "current_sha256": "4b170e197fe8a048e875cd83757dc93558129280156afa87f3137b550af9200f",
+      "whole_file_reverse_binding_tokens_byte_exact": true,
+      "allowed_binding_changes": "Reviewed ordinal-preserving enum spelling; save fixture setter rename preserves explicitly supplied known-null shared_ptr. No vectors, comparisons, expected values, callbacks or source warnings changed."
+    },
+    "tests/probes/native_save_creation_probe.cpp": {
+      "before_sha256": "d53eeb293bfcfe19265099f48cc08bf3e629c8716f300e52968b578e1181cf6e",
+      "current_sha256": "aaf870cf694ca974632370ea3ca96fd25a06c8cb95939543b6cd318d50f1e122",
+      "whole_file_reverse_binding_tokens_byte_exact": true,
+      "allowed_binding_changes": "Reviewed ordinal-preserving enum spelling; save fixture setter rename preserves explicitly supplied known-null shared_ptr. No vectors, comparisons, expected values, callbacks or source warnings changed."
+    },
+    "tests/unit/save_completion_callbacks.cpp": {
+      "before_sha256": "36e9e79c04918f8e3ece839da84a89663529c6e00f5fe94bc5b344a6df8942ec",
+      "current_sha256": "e7a01dd7379146d0e20d873d76b515c5674bacdbe826e370ffbdec12e7ce276f",
+      "whole_file_reverse_binding_tokens_byte_exact": true,
+      "allowed_binding_changes": "Reviewed ordinal-preserving enum spelling; save fixture setter rename preserves explicitly supplied known-null shared_ptr. No vectors, comparisons, expected values, callbacks or source warnings changed."
+    }
+  },
+  "semantic_evidence": [
+    "Source72 independent Spec review preserves late default resource reads and native known-null versus reference unavailable semantics. Explicit fixture nullptr remains a supplied native value, not missingness.",
+    "Both table consumer bodies reverse exactly under the reviewed enum map; aggregate declarations and consumer algorithms are unchanged. Sonic instruction/address tables remain open migration debt.",
+    "Save warning create/close declarations, owners, native explicit failures and original hook fixture policy are unchanged. Existing Source72 actual unit qualification and newly merged app/closure build do not recover those STUB bodies."
+  ],
+  "accepted_reviews": [
+    "docs/refactor-inventory/packets/task-ownership-source/SPEC-FIDELITY-REVIEW.md",
+    "docs/refactor-inventory/packets/task-owner/FINAL-PRESERVATION-REVIEW.md"
+  ],
+  "limits": [
+    "This is an evidenced binding migration, not a fresh oracle verdict or full warning/native gameplay qualification.",
+    "Main affected canonical oracles and units are being qualified separately; inherited deletion sourceFAIL207 and FP partials remain."
+  ]
+}

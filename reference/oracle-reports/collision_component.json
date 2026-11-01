@@ -1,6 +1,17 @@
 {
+ "native_sources": {
+  "src/engine/collision_component.hpp": "43c8c27b7ed6f6ff83a8f83a414b2e73bbb2a34e25c5e8230126118fc0fe8f0c",
+  "src/engine/collision_component.cpp": "dcc98cffb8e52f289f9bbe14a6340ffb972516eb55223b5256ee5a12d98d7b18",
+  "src/engine/task.hpp": "3aa7e066178e5bc901d01bab6cc52881f3610fbb98a58558497dc442520aa726",
+  "src/engine/task.cpp": "d7360e20a0f310242af513852b819ae210621b748ffade06ad7b075f2a527675",
+  "src/engine/task_work.hpp": "f7d78c9979f63095bd47ad7c9ca1e56443b2b3863bb4d9bbf81157e3d72ee90d",
+  "src/engine/task_work.cpp": "7513b41eec91d55f24c6058c0904fc620be61c254cb493f938ad380e0be4a56c",
+  "src/guest/task_reference.hpp": "74bb1b232a071c54411aa7f9c805c47447c87f29de825a7448a92c947783abc5",
+  "src/player/player_auxiliary_effect.hpp": "929b9a190b5c44bc963b578359f210e0316913d155f5563824ebb7b056271bd5",
+  "tests/probes/native_collision_component_probe.cpp": "3438d25fd5fd10e78e13945248c23c7e1be62e0b3974a5ff98470036e2286b8a"
+ },
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "c5ee9cfb51d4c04f7fbfc6173691e60ca76d6c9b671788b9d62c16d0d40d49e7",
+ "native_library_sha256": "f4d69be48be134a4229c1ca84fd35ac03549d69236af6ce05a3b3f8e21f46071",
  "case_blob_sha256": "a900e5913a4861360c084a728249a5ec4e5e547f9af03774eaf9f917c3942018",
  "holdout": false,
  "source_ranges": {
@@ -348,8 +359,8 @@
   "Unsupported partial info layouts and allocator wrap/corruption stop at tagged native boundaries"
  ],
  "tracked_summary": {
-  "full_sha256": "80e8bf20dda89eb8fca19037c9cef5ec9c8ece80038fff1daa321d1bf6f7b661",
-  "full_bytes": 68680,
+  "full_sha256": "2540ee6f23636548fb2b7838fd40adbf2379ba1b00b4394880b505de9e2c9640",
+  "full_bytes": 69659,
   "lists_cut_to": 10,
   "cut_lists": {
    "lifecycle": 146

@@ -63,7 +63,7 @@
           {
             "path": "tests/probes/native_save_creation_probe.cpp",
             "line": 148,
-            "sha256": "d53eeb293bfcfe19265099f48cc08bf3e629c8716f300e52968b578e1181cf6e"
+            "sha256": "aaf870cf694ca974632370ea3ca96fd25a06c8cb95939543b6cd318d50f1e122"
           }
         ]
       },
@@ -81,13 +81,18 @@
         {
           "path": "tests/unit/save_completion_callbacks.cpp",
           "line": 1,
-          "sha256": "36e9e79c04918f8e3ece839da84a89663529c6e00f5fe94bc5b344a6df8942ec"
+          "sha256": "e7a01dd7379146d0e20d873d76b515c5674bacdbe826e370ffbdec12e7ce276f"
+        },
+        {
+          "path": "reference/production-integration-20261101/task-owner-binding-revalidation.json",
+          "sha256": "1032d27baf68e5a2054729b6a07622b227561d7b6e1eb5d1474712715735aded"
         }
       ],
       "limits": [
         "Current binding audit only; unrecovered warning behavior remains open and separate from Source-file/module conformance.",
         "Actual language descriptor task allocation/close resource behavior not recovered or qualified; native failures stay loud.",
-        "No live guest adapter binding or original warning helper body claimed by suffix fixture receipts."
+        "No live guest adapter binding or original warning helper body claimed by suffix fixture receipts.",
+        "Task-owner fixture setter binding revalidated byte-exact; native known-null behavior is preserved, and the warning helper remains unrecovered."
       ]
     },
     "src/game/save_completion.hpp:29": {
@@ -150,7 +155,7 @@
           {
             "path": "tests/probes/native_save_creation_probe.cpp",
             "line": 156,
-            "sha256": "d53eeb293bfcfe19265099f48cc08bf3e629c8716f300e52968b578e1181cf6e"
+            "sha256": "aaf870cf694ca974632370ea3ca96fd25a06c8cb95939543b6cd318d50f1e122"
           }
         ]
       },
@@ -168,13 +173,18 @@
         {
           "path": "tests/unit/save_completion_callbacks.cpp",
           "line": 1,
-          "sha256": "36e9e79c04918f8e3ece839da84a89663529c6e00f5fe94bc5b344a6df8942ec"
+          "sha256": "e7a01dd7379146d0e20d873d76b515c5674bacdbe826e370ffbdec12e7ce276f"
+        },
+        {
+          "path": "reference/production-integration-20261101/task-owner-binding-revalidation.json",
+          "sha256": "1032d27baf68e5a2054729b6a07622b227561d7b6e1eb5d1474712715735aded"
         }
       ],
       "limits": [
         "Current binding audit only; unrecovered warning behavior remains open and separate from Source-file/module conformance.",
         "Actual language descriptor task allocation/close resource behavior not recovered or qualified; native failures stay loud.",
-        "No live guest adapter binding or original warning helper body claimed by suffix fixture receipts."
+        "No live guest adapter binding or original warning helper body claimed by suffix fixture receipts.",
+        "Task-owner fixture setter binding revalidated byte-exact; native known-null behavior is preserved, and the warning helper remains unrecovered."
       ]
     }
   },
