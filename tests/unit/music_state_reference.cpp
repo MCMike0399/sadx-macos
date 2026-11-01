@@ -3,6 +3,12 @@
 #include <cassert>
 #include <cstring>
 
+namespace sadx::reference {
+struct MusicTracksTestAccess {
+    static music::TrackState &storage(MusicTracks &owner) { return owner.tracks_; }
+};
+} // namespace sadx::reference
+
 namespace {
 using namespace sadx;
 using reference::TrackWords;
@@ -52,19 +58,19 @@ void availability_masks() {
             }
             assert(calls == 0);
             // Reimport absence removes knowledge, without overwriting the live native owner.
-            const auto live = owner.tracks();
+            const auto live = reference::MusicTracksTestAccess::storage(owner);
             owner.import_words({});
             assert(owner.export_words() == TrackWords{});
-            assert(owner.tracks().current_song == live.current_song);
-            assert(owner.tracks().current_voice == live.current_voice);
-            assert(owner.tracks().real_previous_song == live.real_previous_song);
-            assert(owner.tracks().previous_song == live.previous_song);
-            assert(owner.tracks().song_queue_state == live.song_queue_state);
-            assert(owner.tracks().voice_queue_state == live.voice_queue_state);
+            assert(reference::MusicTracksTestAccess::storage(owner).current_song == live.current_song);
+            assert(reference::MusicTracksTestAccess::storage(owner).current_voice == live.current_voice);
+            assert(reference::MusicTracksTestAccess::storage(owner).real_previous_song == live.real_previous_song);
+            assert(reference::MusicTracksTestAccess::storage(owner).previous_song == live.previous_song);
+            assert(reference::MusicTracksTestAccess::storage(owner).song_queue_state == live.song_queue_state);
+            assert(reference::MusicTracksTestAccess::storage(owner).voice_queue_state == live.voice_queue_state);
             owner.import_words(values);
             assert(owner.export_words() == values);
-            owner.tracks().current_song = 42;
-            owner.tracks().voice_queue_state = 99;
+            reference::MusicTracksTestAccess::storage(owner).current_song = 42;
+            reference::MusicTracksTestAccess::storage(owner).voice_queue_state = 99;
             auto changed = values;
             changed[0] = 42;
             changed[5] = 99;

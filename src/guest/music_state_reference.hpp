@@ -11,8 +11,6 @@ namespace sadx::reference {
 using TrackWords = std::array<std::optional<std::uint32_t>, 6>;
 class MusicTracks {
   public:
-    music::TrackState &tracks() { return tracks_; }
-    const music::TrackState &tracks() const { return tracks_; }
     void import_words(const TrackWords &);
     TrackWords export_words() const;
     void import_source(const std::function<std::optional<std::uint32_t>(std::uint32_t)> &read);
@@ -22,6 +20,8 @@ class MusicTracks {
                              ResetLeafState &, const ResetLeafNested &);
 
   private:
+    // Test-only storage inspection; production clients use fact-filtered import/export.
+    friend struct MusicTracksTestAccess;
     music::TrackState tracks_;
     std::array<bool, 6> known_{};
 };
