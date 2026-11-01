@@ -323,37 +323,12 @@ void Session::load_regular_object_textures(std::uint32_t index) {
     regular_textures::load_regular(index, regular_catalog_, *regular_texture_state_, services);
 }
 void Session::attach_menu_textures(const MenuTextureAssets &assets) {
-    if (menu_textures_attached_ || !regular_texture_state_)
+    if (menu_textures_.attached() || !regular_texture_state_)
         throw std::runtime_error("native menu textures require initialized regular resource owners");
-    menu_resource_lists_.resize(assets.lists.size());
-    menu_list_bindings_.resize(assets.lists.size());
-    for (std::size_t index = 0; index < assets.lists.size(); ++index) {
-        const auto &source = assets.lists[index];
-        if (source.regular_texture_list) {
-            auto &list = regular_resource_lists_.at(*source.regular_texture_list);
-            if (list.entries.size() != source.declaration.texture_count)
-                throw std::runtime_error("aliased menu texture declaration count differs");
-            menu_list_bindings_[index] = &list;
-        } else {
-            menu_resource_lists_[index] = bind_texture_list(source.declaration);
-            menu_list_bindings_[index] = &menu_resource_lists_[index];
-        }
-    }
-    const auto bind = [this](const RegularTextureBindingAsset &source) {
-        return regular_textures::Binding{
-            source.archive, source.texture_list ? menu_list_bindings_.at(*source.texture_list) : nullptr};
-    };
-    for (std::size_t language = 0; language < menu_texture_catalog_.size(); ++language)
-        for (std::size_t index = 0; index < menu_texture_catalog_[language].size(); ++index)
-            menu_texture_catalog_[language][index] = bind(assets.languages[language][index]);
-    japanese_title_texture_ = bind(assets.japanese_title);
-    menu_textures_attached_ = true;
+    menu_textures_.attach(assets, regular_resource_lists_);
 }
 const regular_textures::Binding &Session::menu_texture_binding(std::uint32_t index) const {
-    if (!menu_textures_attached_ || text_language_ < 0 ||
-        static_cast<std::size_t>(text_language_) >= menu_texture_catalog_.size())
-        throw flow::UnrecoveredGameFlowCall("native_menu_texture_language");
-    return menu_texture_catalog_.at(static_cast<std::size_t>(text_language_)).at(index);
+    return menu_textures_.binding(text_language_, index);
 }
 void Session::load_menu_texture(std::uint32_t index) {
     const auto &binding = menu_texture_binding(index);
@@ -363,10 +338,10 @@ void Session::load_menu_texture(std::uint32_t index) {
     regular_textures::load_archive(*binding.archive, binding.textures, *regular_texture_state_, services);
 }
 void Session::load_japanese_title_textures() {
-    if (!menu_textures_attached_ || !japanese_title_texture_.archive)
-        throw flow::UnrecoveredGameFlowCall("native_japanese_title_texture_declaration");
+    if (!menu_textures_.attached() || !menu_textures_.japanese().archive)
+        throw flow::UnrecoveredGameFlowCall("native_menu_textures_.japanese()declaration");
     auto services = regular_texture_services();
-    regular_textures::load_archive(*japanese_title_texture_.archive, japanese_title_texture_.textures,
+    regular_textures::load_archive(*menu_textures_.japanese().archive, menu_textures_.japanese().textures,
                                    *regular_texture_state_, services);
 }
 void Session::select_title_texture(title_menu::TitleTextureList selected) {
@@ -382,7 +357,7 @@ void Session::select_title_texture(title_menu::TitleTextureList selected) {
         list = menu_texture_binding(17).textures;
         break;
     case title_menu::TitleTextureList::JapaneseTitle:
-        list = japanese_title_texture_.textures;
+        list = menu_textures_.japanese().textures;
         break;
     }
     if (!display_ || !list)

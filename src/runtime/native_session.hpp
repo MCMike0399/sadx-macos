@@ -17,6 +17,7 @@
 #include "engine/frame_loop_native.hpp"
 #include "runtime/regular_texture_assets.hpp"
 #include "runtime/menu_texture_assets.hpp"
+#include "runtime/native_menu_texture_bindings.hpp"
 #include "game/music.hpp"
 #include "game/voice_playback.hpp"
 #include "game/save_file_list.hpp"
@@ -251,11 +252,7 @@ class Session final : private flow::NativeServices {
     std::unique_ptr<regular_textures::State> regular_texture_state_;
     regular_textures::Services regular_texture_services();
     void load_regular_object_textures(std::uint32_t);
-    std::vector<sprite::TextureList> menu_resource_lists_;
-    std::vector<sprite::TextureList *> menu_list_bindings_;
-    MenuTextureCatalog menu_texture_catalog_{};
-    regular_textures::Binding japanese_title_texture_{};
-    bool menu_textures_attached_ = false;
+    MenuTextureBindings menu_textures_;
     menu_voice::Catalog menu_voices_;
     std::unique_ptr<FontAssets> font_assets_;
     sprite::TextureList font_textures_;

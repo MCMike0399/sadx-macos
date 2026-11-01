@@ -607,14 +607,14 @@ void TitleScene::release_mode_textures(title_menu::MenuMode) {
     menu_resource_lifetime::release_mode_textures(*sequence, textures, services);
 }
 void TitleScene::release_japanese_title_textures() {
-    auto *list = session_.japanese_title_texture_.textures;
+    auto *list = session_.menu_textures_.japanese().textures;
     if (!list)
         throw std::runtime_error("native Japanese title texture owner is unavailable");
     auto services = texture_release_services();
     menu_resource_lifetime::release_japanese_title(*list, services);
 }
 menu_resource_lifetime::State TitleScene::texture_release_state() {
-    return {textures_, session_.text_language_, session_.menu_texture_catalog_, assets_.mode_textures};
+    return {textures_, session_.text_language_, session_.menu_textures_.catalog(), assets_.mode_textures};
 }
 menu_resource_lifetime::Services TitleScene::texture_release_services() {
     return {
