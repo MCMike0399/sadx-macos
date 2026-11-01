@@ -1,0 +1,1143 @@
+{
+  "schema_version": 1,
+  "review_base": "99bdaf4",
+  "review_kind": "Root read-only complete initialization/value modules semantic review",
+  "files": {
+    "src/input/input_initial_state.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete readable numeric template/factory inspected with current exact-byte receipt and actual borrower boundaries.",
+      "reviewed_source_sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b",
+      "semantic_justification": "Typed pre-startup input edge buffers and controller numeric records; raw lanes retain distinct values, resource pointers/discovery separate, not_held zero is load-time data not post-poll complement.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/input/input_initial_state.hpp",
+              "sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b"
+            },
+            {
+              "path": "src/input/input_initial_state.cpp",
+              "sha256": "0eda2b014281062e72921c54192c164b1bff83e0215081089be538aa00097c3a"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeInput::Impl constructs pads/engine/mod records from explicit values; NativeGame reference bridge copies supplied template or decodes omitted image facts lazily.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_input.cpp",
+              "sha256": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114"
+            },
+            {
+              "path": "src/guest/native_input_initialization.cpp",
+              "sha256": "f736f85ee538c803fecb468d588547b2410c328adbdd366618c0868ffa5af950"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 1869 bytes with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/input_initial_state.cpp",
+              "sha256": "aa3b29d46040dfadd11d2111dce6cbad009c0d47787704e10405ba385c4ba333"
+            },
+            {
+              "path": "reference/oracle-reports/input_initial_state.json",
+              "sha256": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/input/input_initial_state.hpp",
+          "sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b"
+        },
+        {
+          "path": "src/input/input_initial_state.cpp",
+          "sha256": "0eda2b014281062e72921c54192c164b1bff83e0215081089be538aa00097c3a"
+        },
+        {
+          "path": "tests/unit/input_initial_state.cpp",
+          "sha256": "aa3b29d46040dfadd11d2111dce6cbad009c0d47787704e10405ba385c4ba333"
+        },
+        {
+          "path": "reference/oracle-reports/input_initial_state.json",
+          "sha256": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c"
+        }
+      ]
+    },
+    "src/input/input_initial_state.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete readable numeric template/factory inspected with current exact-byte receipt and actual borrower boundaries.",
+      "reviewed_source_sha256": "0eda2b014281062e72921c54192c164b1bff83e0215081089be538aa00097c3a",
+      "semantic_justification": "Typed pre-startup input edge buffers and controller numeric records; raw lanes retain distinct values, resource pointers/discovery separate, not_held zero is load-time data not post-poll complement.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/input/input_initial_state.hpp",
+              "sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b"
+            },
+            {
+              "path": "src/input/input_initial_state.cpp",
+              "sha256": "0eda2b014281062e72921c54192c164b1bff83e0215081089be538aa00097c3a"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeInput::Impl constructs pads/engine/mod records from explicit values; NativeGame reference bridge copies supplied template or decodes omitted image facts lazily.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_input.cpp",
+              "sha256": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114"
+            },
+            {
+              "path": "src/guest/native_input_initialization.cpp",
+              "sha256": "f736f85ee538c803fecb468d588547b2410c328adbdd366618c0868ffa5af950"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 1869 bytes with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/input_initial_state.cpp",
+              "sha256": "aa3b29d46040dfadd11d2111dce6cbad009c0d47787704e10405ba385c4ba333"
+            },
+            {
+              "path": "reference/oracle-reports/input_initial_state.json",
+              "sha256": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/input/input_initial_state.hpp",
+          "sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b"
+        },
+        {
+          "path": "src/input/input_initial_state.cpp",
+          "sha256": "0eda2b014281062e72921c54192c164b1bff83e0215081089be538aa00097c3a"
+        },
+        {
+          "path": "tests/unit/input_initial_state.cpp",
+          "sha256": "aa3b29d46040dfadd11d2111dce6cbad009c0d47787704e10405ba385c4ba333"
+        },
+        {
+          "path": "reference/oracle-reports/input_initial_state.json",
+          "sha256": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c"
+        }
+      ]
+    },
+    "src/engine/ninja_fog_initial_state.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete readable numeric template/factory inspected with current exact-byte receipt and actual borrower boundaries.",
+      "reviewed_source_sha256": "a475f1114f191c22a683db3ff3b56198780c639c5f51a51129c9fb32878a8587",
+      "semantic_justification": "Typed fog initialization only: 128entry tables, scalar modes/flags, device numeric lookup caches and level range/color; positive65535 caches distinct from runtime disable sentinel, density remains explicit encoding.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_fog_initial_state.hpp",
+              "sha256": "a475f1114f191c22a683db3ff3b56198780c639c5f51a51129c9fb32878a8587"
+            },
+            {
+              "path": "src/engine/ninja_fog_initial_state.cpp",
+              "sha256": "629e2271c1cd4ffbfce91522c43868e36b8f61c46c51c43c9488e14f62624794"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeGame reference bridge copies explicit scalars/tables into existing owners; native fog runtime uses declared initializer type. Capabilities/resources/frame flags and device generation retain separate ownership.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            },
+            {
+              "path": "src/engine/ninja_fog.hpp",
+              "sha256": "a54cca523c3686e32853cc11280ff88474a28611787aaa7a688c063a54ca1849"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 398 words with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/ninja_fog_initial_state.cpp",
+              "sha256": "2ec59169148c431c86ab924a6ac768b774441abe4abc05bca933ca8a5dbcda36"
+            },
+            {
+              "path": "reference/oracle-reports/ninja_fog_initial_state.json",
+              "sha256": "a2f834571228f44e456ea967a10c4916432ea68b71a98d8a87c4b5ed2728573c"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/ninja_fog_initial_state.hpp",
+          "sha256": "a475f1114f191c22a683db3ff3b56198780c639c5f51a51129c9fb32878a8587"
+        },
+        {
+          "path": "src/engine/ninja_fog_initial_state.cpp",
+          "sha256": "629e2271c1cd4ffbfce91522c43868e36b8f61c46c51c43c9488e14f62624794"
+        },
+        {
+          "path": "tests/unit/ninja_fog_initial_state.cpp",
+          "sha256": "2ec59169148c431c86ab924a6ac768b774441abe4abc05bca933ca8a5dbcda36"
+        },
+        {
+          "path": "reference/oracle-reports/ninja_fog_initial_state.json",
+          "sha256": "a2f834571228f44e456ea967a10c4916432ea68b71a98d8a87c4b5ed2728573c"
+        }
+      ]
+    },
+    "src/engine/ninja_fog_initial_state.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete readable numeric template/factory inspected with current exact-byte receipt and actual borrower boundaries.",
+      "reviewed_source_sha256": "629e2271c1cd4ffbfce91522c43868e36b8f61c46c51c43c9488e14f62624794",
+      "semantic_justification": "Typed fog initialization only: 128entry tables, scalar modes/flags, device numeric lookup caches and level range/color; positive65535 caches distinct from runtime disable sentinel, density remains explicit encoding.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_fog_initial_state.hpp",
+              "sha256": "a475f1114f191c22a683db3ff3b56198780c639c5f51a51129c9fb32878a8587"
+            },
+            {
+              "path": "src/engine/ninja_fog_initial_state.cpp",
+              "sha256": "629e2271c1cd4ffbfce91522c43868e36b8f61c46c51c43c9488e14f62624794"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeGame reference bridge copies explicit scalars/tables into existing owners; native fog runtime uses declared initializer type. Capabilities/resources/frame flags and device generation retain separate ownership.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            },
+            {
+              "path": "src/engine/ninja_fog.hpp",
+              "sha256": "a54cca523c3686e32853cc11280ff88474a28611787aaa7a688c063a54ca1849"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 398 words with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/ninja_fog_initial_state.cpp",
+              "sha256": "2ec59169148c431c86ab924a6ac768b774441abe4abc05bca933ca8a5dbcda36"
+            },
+            {
+              "path": "reference/oracle-reports/ninja_fog_initial_state.json",
+              "sha256": "a2f834571228f44e456ea967a10c4916432ea68b71a98d8a87c4b5ed2728573c"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/ninja_fog_initial_state.hpp",
+          "sha256": "a475f1114f191c22a683db3ff3b56198780c639c5f51a51129c9fb32878a8587"
+        },
+        {
+          "path": "src/engine/ninja_fog_initial_state.cpp",
+          "sha256": "629e2271c1cd4ffbfce91522c43868e36b8f61c46c51c43c9488e14f62624794"
+        },
+        {
+          "path": "tests/unit/ninja_fog_initial_state.cpp",
+          "sha256": "2ec59169148c431c86ab924a6ac768b774441abe4abc05bca933ca8a5dbcda36"
+        },
+        {
+          "path": "reference/oracle-reports/ninja_fog_initial_state.json",
+          "sha256": "a2f834571228f44e456ea967a10c4916432ea68b71a98d8a87c4b5ed2728573c"
+        }
+      ]
+    },
+    "src/engine/ninja_queue_initial_state.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete readable numeric template/factory inspected with current exact-byte receipt and actual borrower boundaries.",
+      "reviewed_source_sha256": "beab3e83d252738f6771c12cbb7d81c6920d36b1738d533e9238a915bed8ffcb",
+      "semantic_justification": "Typed numeric queue comparison index, execution/lighting/packed blend/counts and three-component reset/allocation defaults; no resource ownership or source address keys.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_queue_initial_state.hpp",
+              "sha256": "beab3e83d252738f6771c12cbb7d81c6920d36b1738d533e9238a915bed8ffcb"
+            },
+            {
+              "path": "src/engine/ninja_queue_initial_state.cpp",
+              "sha256": "aced0a247c731cf72dcea9a0dcc7474f6d98ef047d4d85ebf9a4695f3c4b897a"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeGame reference bridge publishes each scalar/bit-exact float group to existing runtime owners. Pure template factory does not own the live packed blend cache or queue allocation.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 21 words with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/ninja_queue_initial_state.cpp",
+              "sha256": "516cc116e9515c0995753deb0eaccf33c8f71ef7301ba42d3641605869dfa7d4"
+            },
+            {
+              "path": "reference/oracle-reports/ninja_queue_initial_state.json",
+              "sha256": "64357ffa1f2f76c858fcd6be64ddce0c28d5a594b571ef2421bfd2c6818eaa74"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/ninja_queue_initial_state.hpp",
+          "sha256": "beab3e83d252738f6771c12cbb7d81c6920d36b1738d533e9238a915bed8ffcb"
+        },
+        {
+          "path": "src/engine/ninja_queue_initial_state.cpp",
+          "sha256": "aced0a247c731cf72dcea9a0dcc7474f6d98ef047d4d85ebf9a4695f3c4b897a"
+        },
+        {
+          "path": "tests/unit/ninja_queue_initial_state.cpp",
+          "sha256": "516cc116e9515c0995753deb0eaccf33c8f71ef7301ba42d3641605869dfa7d4"
+        },
+        {
+          "path": "reference/oracle-reports/ninja_queue_initial_state.json",
+          "sha256": "64357ffa1f2f76c858fcd6be64ddce0c28d5a594b571ef2421bfd2c6818eaa74"
+        }
+      ]
+    },
+    "src/engine/ninja_queue_initial_state.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete readable numeric template/factory inspected with current exact-byte receipt and actual borrower boundaries.",
+      "reviewed_source_sha256": "aced0a247c731cf72dcea9a0dcc7474f6d98ef047d4d85ebf9a4695f3c4b897a",
+      "semantic_justification": "Typed numeric queue comparison index, execution/lighting/packed blend/counts and three-component reset/allocation defaults; no resource ownership or source address keys.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_queue_initial_state.hpp",
+              "sha256": "beab3e83d252738f6771c12cbb7d81c6920d36b1738d533e9238a915bed8ffcb"
+            },
+            {
+              "path": "src/engine/ninja_queue_initial_state.cpp",
+              "sha256": "aced0a247c731cf72dcea9a0dcc7474f6d98ef047d4d85ebf9a4695f3c4b897a"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeGame reference bridge publishes each scalar/bit-exact float group to existing runtime owners. Pure template factory does not own the live packed blend cache or queue allocation.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 21 words with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/ninja_queue_initial_state.cpp",
+              "sha256": "516cc116e9515c0995753deb0eaccf33c8f71ef7301ba42d3641605869dfa7d4"
+            },
+            {
+              "path": "reference/oracle-reports/ninja_queue_initial_state.json",
+              "sha256": "64357ffa1f2f76c858fcd6be64ddce0c28d5a594b571ef2421bfd2c6818eaa74"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/ninja_queue_initial_state.hpp",
+          "sha256": "beab3e83d252738f6771c12cbb7d81c6920d36b1738d533e9238a915bed8ffcb"
+        },
+        {
+          "path": "src/engine/ninja_queue_initial_state.cpp",
+          "sha256": "aced0a247c731cf72dcea9a0dcc7474f6d98ef047d4d85ebf9a4695f3c4b897a"
+        },
+        {
+          "path": "tests/unit/ninja_queue_initial_state.cpp",
+          "sha256": "516cc116e9515c0995753deb0eaccf33c8f71ef7301ba42d3641605869dfa7d4"
+        },
+        {
+          "path": "reference/oracle-reports/ninja_queue_initial_state.json",
+          "sha256": "64357ffa1f2f76c858fcd6be64ddce0c28d5a594b571ef2421bfd2c6818eaa74"
+        }
+      ]
+    },
+    "src/engine/ninja_screen_initial_state.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete readable numeric template/factory inspected with current exact-byte receipt and actual borrower boundaries.",
+      "reviewed_source_sha256": "adfa26612d9aee42c94deb4c524583338df4c49ab627e97c5c3ddd1a297c1153",
+      "semantic_justification": "Typed clip/distances/viewport/rectangles/points/matrices and scalar setup defaults. Base transform identity differs from zero projection/work matrices; unknown broader scalar meanings remain explicit without guessing.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_screen_initial_state.hpp",
+              "sha256": "adfa26612d9aee42c94deb4c524583338df4c49ab627e97c5c3ddd1a297c1153"
+            },
+            {
+              "path": "src/engine/ninja_screen_initial_state.cpp",
+              "sha256": "361e0775bd725ccab88e069c1c01c91af27ca431b893edbaf77210e353bc1a05"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeGame reference bridge imports explicit numeric facts into existing screen/projection owners; resource/capability/display configuration remains outside initializer.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 90 words with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/ninja_screen_initial_state.cpp",
+              "sha256": "87eb7d20ee84a856e2fd5a6d0288d8844f7185150d132e6ee818014d119e25d1"
+            },
+            {
+              "path": "reference/oracle-reports/ninja_screen_initial_state.json",
+              "sha256": "716ea9c06c162030579eb2eb164be2a33b347e6c44711e12c28f84ef815f1792"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/ninja_screen_initial_state.hpp",
+          "sha256": "adfa26612d9aee42c94deb4c524583338df4c49ab627e97c5c3ddd1a297c1153"
+        },
+        {
+          "path": "src/engine/ninja_screen_initial_state.cpp",
+          "sha256": "361e0775bd725ccab88e069c1c01c91af27ca431b893edbaf77210e353bc1a05"
+        },
+        {
+          "path": "tests/unit/ninja_screen_initial_state.cpp",
+          "sha256": "87eb7d20ee84a856e2fd5a6d0288d8844f7185150d132e6ee818014d119e25d1"
+        },
+        {
+          "path": "reference/oracle-reports/ninja_screen_initial_state.json",
+          "sha256": "716ea9c06c162030579eb2eb164be2a33b347e6c44711e12c28f84ef815f1792"
+        }
+      ]
+    },
+    "src/engine/ninja_screen_initial_state.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete readable numeric template/factory inspected with current exact-byte receipt and actual borrower boundaries.",
+      "reviewed_source_sha256": "361e0775bd725ccab88e069c1c01c91af27ca431b893edbaf77210e353bc1a05",
+      "semantic_justification": "Typed clip/distances/viewport/rectangles/points/matrices and scalar setup defaults. Base transform identity differs from zero projection/work matrices; unknown broader scalar meanings remain explicit without guessing.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_screen_initial_state.hpp",
+              "sha256": "adfa26612d9aee42c94deb4c524583338df4c49ab627e97c5c3ddd1a297c1153"
+            },
+            {
+              "path": "src/engine/ninja_screen_initial_state.cpp",
+              "sha256": "361e0775bd725ccab88e069c1c01c91af27ca431b893edbaf77210e353bc1a05"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeGame reference bridge imports explicit numeric facts into existing screen/projection owners; resource/capability/display configuration remains outside initializer.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 90 words with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/ninja_screen_initial_state.cpp",
+              "sha256": "87eb7d20ee84a856e2fd5a6d0288d8844f7185150d132e6ee818014d119e25d1"
+            },
+            {
+              "path": "reference/oracle-reports/ninja_screen_initial_state.json",
+              "sha256": "716ea9c06c162030579eb2eb164be2a33b347e6c44711e12c28f84ef815f1792"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/ninja_screen_initial_state.hpp",
+          "sha256": "adfa26612d9aee42c94deb4c524583338df4c49ab627e97c5c3ddd1a297c1153"
+        },
+        {
+          "path": "src/engine/ninja_screen_initial_state.cpp",
+          "sha256": "361e0775bd725ccab88e069c1c01c91af27ca431b893edbaf77210e353bc1a05"
+        },
+        {
+          "path": "tests/unit/ninja_screen_initial_state.cpp",
+          "sha256": "87eb7d20ee84a856e2fd5a6d0288d8844f7185150d132e6ee818014d119e25d1"
+        },
+        {
+          "path": "reference/oracle-reports/ninja_screen_initial_state.json",
+          "sha256": "716ea9c06c162030579eb2eb164be2a33b347e6c44711e12c28f84ef815f1792"
+        }
+      ]
+    },
+    "src/engine/controller_values.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete numeric record reviewed with exact shared type/consumer and source binding.",
+      "reviewed_source_sha256": "abbfb8000a4dc77da937481cff321e86a48dd1204507c348d1c39083424106b5",
+      "semantic_justification": "Complete dependency-light PDS_PERIPHERAL numeric value record: named32bit masks/edges,16bit triggers/axes and previous-held. Real name/extension/info resources omitted deliberately. One semantic type is reused by engine, input alias and native initialization; no game algorithm, fixture optional or address identity.",
+      "resolved_owners": [
+        {
+          "resolution": "Plain per-runtime values; alias creates no extra owned state. Actual raw records and device resources remain their existing owners.",
+          "evidence": [
+            {
+              "path": "src/engine/controller_values.hpp",
+              "sha256": "abbfb8000a4dc77da937481cff321e86a48dd1204507c348d1c39083424106b5"
+            },
+            {
+              "path": "src/input/input_initial_state.hpp",
+              "sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Input initial values and GameLogicController/native input bridge share this declared type.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_input.cpp",
+              "sha256": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114"
+            },
+            {
+              "path": "src/engine/controller_values.hpp",
+              "sha256": "abbfb8000a4dc77da937481cff321e86a48dd1204507c348d1c39083424106b5"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Current input initial-state receipt binds this exact header and1869 compared bytes; broader controller behavior excluded.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/input_initial_state.json",
+              "sha256": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Numeric value shape only; not controller discovery/HID/runtime polling qualification.",
+        "No rewrite or new test verdict."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/controller_values.hpp",
+          "sha256": "abbfb8000a4dc77da937481cff321e86a48dd1204507c348d1c39083424106b5"
+        },
+        {
+          "path": "src/input/input_initial_state.hpp",
+          "sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b"
+        },
+        {
+          "path": "reference/oracle-reports/input_initial_state.json",
+          "sha256": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c"
+        }
+      ]
+    }
+  },
+  "modules": {
+    "src/input/input_initial_state": {
+      "disposition": "already_conforming",
+      "reason": "Explicit complete two-member numeric initialization module review; no automatic closure of callers.",
+      "reviewed_members": {
+        "src/input/input_initial_state.hpp": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b",
+        "src/input/input_initial_state.cpp": "0eda2b014281062e72921c54192c164b1bff83e0215081089be538aa00097c3a"
+      },
+      "semantic_justification": "Typed pre-startup input edge buffers and controller numeric records; raw lanes retain distinct values, resource pointers/discovery separate, not_held zero is load-time data not post-poll complement.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/input/input_initial_state.hpp",
+              "sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b"
+            },
+            {
+              "path": "src/input/input_initial_state.cpp",
+              "sha256": "0eda2b014281062e72921c54192c164b1bff83e0215081089be538aa00097c3a"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeInput::Impl constructs pads/engine/mod records from explicit values; NativeGame reference bridge copies supplied template or decodes omitted image facts lazily.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_input.cpp",
+              "sha256": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114"
+            },
+            {
+              "path": "src/guest/native_input_initialization.cpp",
+              "sha256": "f736f85ee538c803fecb468d588547b2410c328adbdd366618c0868ffa5af950"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 1869 bytes with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/input_initial_state.cpp",
+              "sha256": "aa3b29d46040dfadd11d2111dce6cbad009c0d47787704e10405ba385c4ba333"
+            },
+            {
+              "path": "reference/oracle-reports/input_initial_state.json",
+              "sha256": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/input/input_initial_state.hpp",
+          "sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b"
+        },
+        {
+          "path": "src/input/input_initial_state.cpp",
+          "sha256": "0eda2b014281062e72921c54192c164b1bff83e0215081089be538aa00097c3a"
+        },
+        {
+          "path": "tests/unit/input_initial_state.cpp",
+          "sha256": "aa3b29d46040dfadd11d2111dce6cbad009c0d47787704e10405ba385c4ba333"
+        },
+        {
+          "path": "reference/oracle-reports/input_initial_state.json",
+          "sha256": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c"
+        }
+      ]
+    },
+    "src/engine/ninja_fog_initial_state": {
+      "disposition": "already_conforming",
+      "reason": "Explicit complete two-member numeric initialization module review; no automatic closure of callers.",
+      "reviewed_members": {
+        "src/engine/ninja_fog_initial_state.hpp": "a475f1114f191c22a683db3ff3b56198780c639c5f51a51129c9fb32878a8587",
+        "src/engine/ninja_fog_initial_state.cpp": "629e2271c1cd4ffbfce91522c43868e36b8f61c46c51c43c9488e14f62624794"
+      },
+      "semantic_justification": "Typed fog initialization only: 128entry tables, scalar modes/flags, device numeric lookup caches and level range/color; positive65535 caches distinct from runtime disable sentinel, density remains explicit encoding.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_fog_initial_state.hpp",
+              "sha256": "a475f1114f191c22a683db3ff3b56198780c639c5f51a51129c9fb32878a8587"
+            },
+            {
+              "path": "src/engine/ninja_fog_initial_state.cpp",
+              "sha256": "629e2271c1cd4ffbfce91522c43868e36b8f61c46c51c43c9488e14f62624794"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeGame reference bridge copies explicit scalars/tables into existing owners; native fog runtime uses declared initializer type. Capabilities/resources/frame flags and device generation retain separate ownership.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            },
+            {
+              "path": "src/engine/ninja_fog.hpp",
+              "sha256": "a54cca523c3686e32853cc11280ff88474a28611787aaa7a688c063a54ca1849"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 398 words with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/ninja_fog_initial_state.cpp",
+              "sha256": "2ec59169148c431c86ab924a6ac768b774441abe4abc05bca933ca8a5dbcda36"
+            },
+            {
+              "path": "reference/oracle-reports/ninja_fog_initial_state.json",
+              "sha256": "a2f834571228f44e456ea967a10c4916432ea68b71a98d8a87c4b5ed2728573c"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/ninja_fog_initial_state.hpp",
+          "sha256": "a475f1114f191c22a683db3ff3b56198780c639c5f51a51129c9fb32878a8587"
+        },
+        {
+          "path": "src/engine/ninja_fog_initial_state.cpp",
+          "sha256": "629e2271c1cd4ffbfce91522c43868e36b8f61c46c51c43c9488e14f62624794"
+        },
+        {
+          "path": "tests/unit/ninja_fog_initial_state.cpp",
+          "sha256": "2ec59169148c431c86ab924a6ac768b774441abe4abc05bca933ca8a5dbcda36"
+        },
+        {
+          "path": "reference/oracle-reports/ninja_fog_initial_state.json",
+          "sha256": "a2f834571228f44e456ea967a10c4916432ea68b71a98d8a87c4b5ed2728573c"
+        }
+      ]
+    },
+    "src/engine/ninja_queue_initial_state": {
+      "disposition": "already_conforming",
+      "reason": "Explicit complete two-member numeric initialization module review; no automatic closure of callers.",
+      "reviewed_members": {
+        "src/engine/ninja_queue_initial_state.hpp": "beab3e83d252738f6771c12cbb7d81c6920d36b1738d533e9238a915bed8ffcb",
+        "src/engine/ninja_queue_initial_state.cpp": "aced0a247c731cf72dcea9a0dcc7474f6d98ef047d4d85ebf9a4695f3c4b897a"
+      },
+      "semantic_justification": "Typed numeric queue comparison index, execution/lighting/packed blend/counts and three-component reset/allocation defaults; no resource ownership or source address keys.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_queue_initial_state.hpp",
+              "sha256": "beab3e83d252738f6771c12cbb7d81c6920d36b1738d533e9238a915bed8ffcb"
+            },
+            {
+              "path": "src/engine/ninja_queue_initial_state.cpp",
+              "sha256": "aced0a247c731cf72dcea9a0dcc7474f6d98ef047d4d85ebf9a4695f3c4b897a"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeGame reference bridge publishes each scalar/bit-exact float group to existing runtime owners. Pure template factory does not own the live packed blend cache or queue allocation.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 21 words with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/ninja_queue_initial_state.cpp",
+              "sha256": "516cc116e9515c0995753deb0eaccf33c8f71ef7301ba42d3641605869dfa7d4"
+            },
+            {
+              "path": "reference/oracle-reports/ninja_queue_initial_state.json",
+              "sha256": "64357ffa1f2f76c858fcd6be64ddce0c28d5a594b571ef2421bfd2c6818eaa74"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/ninja_queue_initial_state.hpp",
+          "sha256": "beab3e83d252738f6771c12cbb7d81c6920d36b1738d533e9238a915bed8ffcb"
+        },
+        {
+          "path": "src/engine/ninja_queue_initial_state.cpp",
+          "sha256": "aced0a247c731cf72dcea9a0dcc7474f6d98ef047d4d85ebf9a4695f3c4b897a"
+        },
+        {
+          "path": "tests/unit/ninja_queue_initial_state.cpp",
+          "sha256": "516cc116e9515c0995753deb0eaccf33c8f71ef7301ba42d3641605869dfa7d4"
+        },
+        {
+          "path": "reference/oracle-reports/ninja_queue_initial_state.json",
+          "sha256": "64357ffa1f2f76c858fcd6be64ddce0c28d5a594b571ef2421bfd2c6818eaa74"
+        }
+      ]
+    },
+    "src/engine/ninja_screen_initial_state": {
+      "disposition": "already_conforming",
+      "reason": "Explicit complete two-member numeric initialization module review; no automatic closure of callers.",
+      "reviewed_members": {
+        "src/engine/ninja_screen_initial_state.hpp": "adfa26612d9aee42c94deb4c524583338df4c49ab627e97c5c3ddd1a297c1153",
+        "src/engine/ninja_screen_initial_state.cpp": "361e0775bd725ccab88e069c1c01c91af27ca431b893edbaf77210e353bc1a05"
+      },
+      "semantic_justification": "Typed clip/distances/viewport/rectangles/points/matrices and scalar setup defaults. Base transform identity differs from zero projection/work matrices; unknown broader scalar meanings remain explicit without guessing.",
+      "resolved_owners": [
+        {
+          "resolution": "Factory returns independent plain numeric values by value; these are initialization templates, not duplicate live source-global owners. Callers borrow/copy into their actual per-world owners; no optional fixture availability, PE lookup, guest transport or mutable cache is stored here.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_screen_initial_state.hpp",
+              "sha256": "adfa26612d9aee42c94deb4c524583338df4c49ab627e97c5c3ddd1a297c1153"
+            },
+            {
+              "path": "src/engine/ninja_screen_initial_state.cpp",
+              "sha256": "361e0775bd725ccab88e069c1c01c91af27ca431b893edbaf77210e353bc1a05"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "NativeGame reference bridge imports explicit numeric facts into existing screen/projection owners; resource/capability/display configuration remains outside initializer.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "sha256": "7eeabc0ea0d3d46eafdcd27ab8b3bdb85a85a487623bb16c8f700c09a63335f2"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Historical complete load-image comparison covers 90 words with zero mismatches; every declared source/probe/verifier hash matches current. Existing independent-value mutation/unit checks and varied bridge fixtures are retained. This review reruns no tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/ninja_screen_initial_state.cpp",
+              "sha256": "87eb7d20ee84a856e2fd5a6d0288d8844f7185150d132e6ee818014d119e25d1"
+            },
+            {
+              "path": "reference/oracle-reports/ninja_screen_initial_state.json",
+              "sha256": "716ea9c06c162030579eb2eb164be2a33b347e6c44711e12c28f84ef815f1792"
+            },
+            {
+              "path": "tests/unit/game_runtime.cpp",
+              "sha256": "4517e02d88fdaa3ff363685b1565044eefbd1091880f5284d8c4b51e8da1863f"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Exact named numeric defaults only, not complete device/input/queue/screen/fog behavior or native/reference Session independence.",
+        "Capabilities/resource identities/discovery and remaining game/refactor systems remain open.",
+        "Historical receipt current source hashes are verified read-only; no new oracle/mutant/runtime verdict claimed."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/ninja_screen_initial_state.hpp",
+          "sha256": "adfa26612d9aee42c94deb4c524583338df4c49ab627e97c5c3ddd1a297c1153"
+        },
+        {
+          "path": "src/engine/ninja_screen_initial_state.cpp",
+          "sha256": "361e0775bd725ccab88e069c1c01c91af27ca431b893edbaf77210e353bc1a05"
+        },
+        {
+          "path": "tests/unit/ninja_screen_initial_state.cpp",
+          "sha256": "87eb7d20ee84a856e2fd5a6d0288d8844f7185150d132e6ee818014d119e25d1"
+        },
+        {
+          "path": "reference/oracle-reports/ninja_screen_initial_state.json",
+          "sha256": "716ea9c06c162030579eb2eb164be2a33b347e6c44711e12c28f84ef815f1792"
+        }
+      ]
+    },
+    "src/engine/controller_values": {
+      "disposition": "already_conforming",
+      "reason": "Explicit complete header-only shared numeric record review.",
+      "reviewed_members": {
+        "src/engine/controller_values.hpp": "abbfb8000a4dc77da937481cff321e86a48dd1204507c348d1c39083424106b5"
+      },
+      "semantic_justification": "Complete dependency-light PDS_PERIPHERAL numeric value record: named32bit masks/edges,16bit triggers/axes and previous-held. Real name/extension/info resources omitted deliberately. One semantic type is reused by engine, input alias and native initialization; no game algorithm, fixture optional or address identity.",
+      "resolved_owners": [
+        {
+          "resolution": "Plain per-runtime values; alias creates no extra owned state. Actual raw records and device resources remain their existing owners.",
+          "evidence": [
+            {
+              "path": "src/engine/controller_values.hpp",
+              "sha256": "abbfb8000a4dc77da937481cff321e86a48dd1204507c348d1c39083424106b5"
+            },
+            {
+              "path": "src/input/input_initial_state.hpp",
+              "sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Input initial values and GameLogicController/native input bridge share this declared type.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_input.cpp",
+              "sha256": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114"
+            },
+            {
+              "path": "src/engine/controller_values.hpp",
+              "sha256": "abbfb8000a4dc77da937481cff321e86a48dd1204507c348d1c39083424106b5"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Current input initial-state receipt binds this exact header and1869 compared bytes; broader controller behavior excluded.",
+          "evidence": [
+            {
+              "path": "reference/oracle-reports/input_initial_state.json",
+              "sha256": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Numeric value shape only; not controller discovery/HID/runtime polling qualification.",
+        "No rewrite or new test verdict."
+      ],
+      "evidence": [
+        {
+          "path": "src/engine/controller_values.hpp",
+          "sha256": "abbfb8000a4dc77da937481cff321e86a48dd1204507c348d1c39083424106b5"
+        },
+        {
+          "path": "src/input/input_initial_state.hpp",
+          "sha256": "e7fc102cf3aec9012739e5cc553c73283ffa041142583523e48f3803a52cd88b"
+        },
+        {
+          "path": "reference/oracle-reports/input_initial_state.json",
+          "sha256": "d7d86445f287357c641cae7d86cb6f8e3b34e2c3773b4383395599f32770841c"
+        }
+      ]
+    }
+  },
+  "source_binding_checks": [
+    {
+      "module": "src/input/input_initial_state",
+      "extent": 1869,
+      "unit": "tests/unit/input_initial_state.cpp",
+      "all_declared_input_hashes_current": true
+    },
+    {
+      "module": "src/engine/ninja_fog_initial_state",
+      "extent": 398,
+      "unit": "tests/unit/ninja_fog_initial_state.cpp",
+      "all_declared_input_hashes_current": true
+    },
+    {
+      "module": "src/engine/ninja_queue_initial_state",
+      "extent": 21,
+      "unit": "tests/unit/ninja_queue_initial_state.cpp",
+      "all_declared_input_hashes_current": true
+    },
+    {
+      "module": "src/engine/ninja_screen_initial_state",
+      "extent": 90,
+      "unit": "tests/unit/ninja_screen_initial_state.cpp",
+      "all_declared_input_hashes_current": true
+    }
+  ],
+  "limits": [
+    "No maintained source changed; no builds/oracles/mutants/runtime/providers executed for this review.",
+    "No whole subsystem, native frontier or campaign closure."
+  ]
+}
