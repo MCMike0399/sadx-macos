@@ -1,0 +1,104 @@
+{
+  "source_candidate": "72f2822",
+  "source_reviews": [
+    "942ae30",
+    "aef49b4"
+  ],
+  "consumer_results": [
+    {
+      "slug": "ninja_sprite_queue",
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "probe_sha256": "0af84a0db7788aa9f9e9267779c3e4e71c5a18e5dc798accdcf526e3082c3f1f",
+      "verdict": "partial",
+      "reason": "values match; strict_emulator_match=false (see limits)"
+    },
+    {
+      "slug": "ninja_queue_consumer",
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "probe_sha256": "802e17178791872faa0e61bf0f54a86054106f7b9c04445cf3cefe7cfc77d85e",
+      "verdict": "partial",
+      "reason": "values match; strict_flags_match=false (see limits)"
+    },
+    {
+      "slug": "ninja_frame_calls",
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "probe_sha256": "077dab8e7a834a5de61eb82d2ccd1a14f8f58352e1ede3f601236722c768a20d",
+      "verdict": "pass",
+      "reason": "mismatch_count=0"
+    },
+    {
+      "slug": "ninja_texture_selection",
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "probe_sha256": "634b39a15d1fed4810b58eb229b14ec284378db17c77e435b7f514d653c6d528",
+      "verdict": "pass",
+      "reason": "passed"
+    },
+    {
+      "slug": "ninja_view",
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "probe_sha256": "487ecb9135cbcbc468a81b07baa935db4e7e8910cbd322ec2f2997ee00bbff76",
+      "verdict": "pass",
+      "reason": "seeded_values_match, primary_values_with_unicorn_transcendentals_match"
+    },
+    {
+      "slug": "game_view",
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "probe_sha256": "422cbf2b1330101ee6ce434ffe0495de12aca8e9bb11b25edb0fe4cfa47e94a1",
+      "verdict": "partial",
+      "reason": "values match; fp_flag_mismatches=291 (see limits)"
+    },
+    {
+      "slug": "game_frame_owners",
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "probe_sha256": "b5d81e332b07588f012a8bebde5a2757ead3d433dcada5601eb8148d9000c290",
+      "verdict": "pass",
+      "reason": "mismatch_count=0"
+    },
+    {
+      "slug": "ninja_queue_lifecycle",
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "probe_sha256": "15d314436e2346f78572d17463cedbb0adce1d4e8b543223ceaaec390a5ec9de",
+      "verdict": "partial",
+      "reason": "values match; fp_flag_mismatches=402 (see limits)"
+    },
+    {
+      "slug": "ninja_queue_native",
+      "build_exit_status": 0,
+      "oracle_exit_status": 0,
+      "probe_sha256": "fe10a199c8196c20c8e903fc378759750c6605614de626abc25124bdf8eb6430",
+      "verdict": "partial",
+      "reason": "values match; fp_flag_mismatches=402 (see limits)"
+    }
+  ],
+  "depth_holdout": {
+    "cases": 1024,
+    "mismatch_count": 0,
+    "exit_status": 0
+  },
+  "source_only": {
+    "export_has_windows_binaries": false,
+    "initial_prebuilt_game_objects": false,
+    "reused_dependency": "Pinned SDL/libusb installation only; all maintained game and numerical code rebuilt from source.",
+    "build_exit_status": 0,
+    "build_log_sha256": "55a5f6497a5f414887c1a69a98ed22a70a35c68c3fba2f39db18b7e5afae64e8",
+    "app_exit_status": 1,
+    "frames": 1382,
+    "next_call": "native_gamma_load_setup_resource",
+    "screenshot_sha256": "c7d02f642ae8e5493f19051e7cf13a06a2d1d103351e72b0576a108b52aba427",
+    "baseline_image_equal": true
+  },
+  "limits": [
+    "Full integrated gate not yet rerun for source core.",
+    "Legacy fixture/diagnostic types and complete owner/consumer migration remain open; this is a shared decision core.",
+    "Five consumer oracles retain inherited FP partials, not passes.",
+    "No actor/GPU/N3b/story/gameplay63FPS or new physical-controller qualification."
+  ]
+}
