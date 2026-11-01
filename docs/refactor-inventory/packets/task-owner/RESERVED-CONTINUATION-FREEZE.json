@@ -1,0 +1,116 @@
+{
+  "before": "bd22ee423ea015f00152a97fa8fc2e1b4034b411",
+  "candidate": "f8ab5e408427bb799aa244e46274648862b0ec05",
+  "execution_mode": "continuation",
+  "protocol": {
+    "schema_version": 1,
+    "status": "definitions_only_inputs_not_generated_execution_not_authorized",
+    "immutable_before_source": "bd22ee423ea015f00152a97fa8fc2e1b4034b411",
+    "scope": [
+      "complete Task scheduler",
+      "complete TaskWork arena",
+      "actual native/reference bindings and consumers"
+    ],
+    "cohorts": {
+      "arena": {
+        "seed": 20261231,
+        "sequences": 8,
+        "operations_before_final_release": 256,
+        "domain": "Owned allocation/free sequences using the unchanged original allocator operations. Retain the existing safe size choices and live-allocation bookkeeping; free remaining live allocations at the end. Actual resulting operation counts must be recorded, not inferred from this bound."
+      },
+      "lifecycle": {
+        "seed": 20270101,
+        "sequences": 8,
+        "operations_before_final_release": 128,
+        "domain": "Existing creation/child/destruction operation envelope. Random direct destruction selects only tracked top-level owners; child lifetime follows its parent. Preserve actual allocation indices including children. Existing fixed inactive logger-stop experiment remains a default contract, not a fresh source-returning holdout."
+      },
+      "display": {
+        "seed": 20270102,
+        "random_cases": 512,
+        "generator": "verify_original_task_display.fixtures(seed, repetitions=512)",
+        "notes": "The existing generator additionally emits 44 fixed callback rows. Label these repeated development rows separately from the fresh random cohort; retain all rows and order."
+      },
+      "delete": {
+        "seed": 20270103,
+        "random_cases": 512,
+        "generator": "verify_original_task_delete.fixtures(seed, count=512)",
+        "notes": "The existing generator additionally emits 58 fixed rows. Label repeated rows separately; retain all attempted IDs. Source reentrant destructor/free-list-cycle outcomes retain their exact original policy and are not source-returning comparisons."
+      }
+    },
+    "acceptance": [
+      "Freeze and commit the exact runner, generators, compiled recipes, full source/helper/probe/fixture closure and interpreter/PE identities only after independent source and judge acceptance, before any reserved generation.",
+      "Build immutable old and reviewed candidate source separately; no mutable Main archive baseline. Keep lower numerical dependencies pinned where relevant.",
+      "Execute only after explicit Root admission with a single-use output marker. Preserve setup failures and original process exits; no automatic retries, input adjustment or silent continuation after an unexpected error.",
+      "Account for every generated/attempted/completed/source-returning/established-stop/excluded/unattempted ID. Each source-defined observation must compare, and every complete old/current native ABI output, diagnostic, padding, callback trace and arena byte must compare.",
+      "Native equality alone cannot qualify a source-defined mismatch. Unspecified source return registers retain the established void-return policy; raw native returns remain preserved and compared old/current.",
+      "No new source-fault exemption. Preserve the six exact default delete exclusion IDs85,87,91,121,143,201 in the default development cohort; fresh generated exclusions have their own exact IDs, inputs and actual established reasons.",
+      "Do not relabel fixed default cohorts, deterministic boundary tests or previously consumed inputs as fresh holdouts. Do not rerun unchanged completed historical cohorts merely to change metadata."
+    ],
+    "root_remaining": [
+      "exact additive generator/observer implementation and adequacy review",
+      "candidate source reviews",
+      "committed execution closure freeze",
+      "distinct Root admission",
+      "actual reserved execution and per-case results",
+      "native product/reference closure, journeys, manifest/inventory reconciliation and coherent full gate"
+    ],
+    "limits": [
+      "Definitions do not qualify any source algorithm or generated case. No input generation, original/native execution, source edit or judge comparator change was performed.",
+      "Arbitrary callbacks, malformed graphs, Windows heap/hardware parity, gameplay and full campaign remain outside any bounded packet claim."
+    ]
+  },
+  "input_manifest": {
+    "path": "build/task-final-continuation-pins.json",
+    "entries": 42329,
+    "sha256": "31bf37797e697c1ad2ae5a5d96609850b859fb5ea422aec34defc7c95dc557c5"
+  },
+  "toolchain": {
+    "compiler": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+    "linker": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld",
+    "lto": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib",
+    "sdk": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+    "resource": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21",
+    "cxx": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+    "include_search": [
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/SubFrameworks"
+    ]
+  },
+  "source_trees": {
+    "old": "5a7164c6d52097790d2eebcb4baeaa03803ef220",
+    "current": "7c698994711119a7169d15585635511ddaf5b922"
+  },
+  "archive_paths": [
+    "src",
+    "tests/probes",
+    "tests/fixtures",
+    "tools/oracles",
+    "tools/lib"
+  ],
+  "continuation": {
+    "terminal_sha256": "fbda7d474e3f90a543aa8d74479d3a38672fefc17778b8c1ee207f58220ac742",
+    "freeze_sha256": "1bd71c6c786e2eed14a04cebe15de9d27f5883d76c473889ca76e53e55a8aa56",
+    "inputs": {
+      "task_work": "0ce1bae1d601c7e1ae7ef6518df1f80a11e506a08504e9dba4aa91a6d67c84ab",
+      "task_lifecycle": "56431d97e42867604236a09fa9582cb5c36d3db02bbb0ba4c412ace144881a94",
+      "task_display": "593b768b2d693f5f42533d0b0ba10def9f45fcf17908e6e01ede44da69d20fb6",
+      "task_delete": "28fe354ea0a9c872b98301fe6eda54b5bd8eaf54f037a7ee0865c5530f116e27"
+    },
+    "libraries": {
+      "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/old/libraries/task_delete.dylib": "03f0818292ab8219ebc250ec94040550d54b9f794d111be1a071a33bf556ccd8",
+      "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/old/libraries/task_display.dylib": "58214d9b46297aa1b28dc82e7739216c32e6b5b77e755c7a44479cc3876befa3",
+      "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/old/libraries/task_lifecycle.dylib": "0437d32e45573dec2fc78c79bcc912f9537d083d9faf578dc90aff7c498dfc51",
+      "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/old/libraries/task_work.dylib": "feceb936f6a46e3e18cce156e54744785d65d77545812497015de10ad48c4e92",
+      "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/current/libraries/task_delete.dylib": "2915ae1b9b198b30aa06852ecda822df721eabb4e99d8ab286557dfe403fa577",
+      "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/current/libraries/task_display.dylib": "80dfddffff9202e6a9b04dd1ba29a26fb709e18154a0e0f2afee6bed40a48dab",
+      "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/current/libraries/task_lifecycle.dylib": "bc47f7f0b44c533a0d30dd020c788579378a854882614f3a3c5dcdcf501b63a2",
+      "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved/current/libraries/task_work.dylib": "2cd600a87f1333a74969ec71e46ba9c09ef8173848ab1a444508f2b721e336ec"
+    },
+    "original_output": "/Users/burbujamc/Developer/sadx-macos/build/task-final-reserved"
+  },
+  "policy": "One admitted run, immutable source archives, no retries or overwritten output."
+}
