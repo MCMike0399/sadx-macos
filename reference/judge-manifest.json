@@ -1,10 +1,10 @@
 {
   "change": {
-    "base_commit": "6a7134621987dbe2d01b2fd9501bfd20076f8934",
-    "evidence": "docs/refactor-inventory/packets/task-owner/RESERVED-OBSERVER-DEVELOPMENT.json",
-    "evidence_sha256": "3087dab24fb1a09fe92e4d7ca07203a0b420d794cdb95741885c582c40d7035c",
+    "base_commit": "2c587fd1ee2be26f4d73270f9b44e02f59dd3a1c",
+    "evidence": "reference/packets/d3d8-caps/QUALIFICATION.json",
+    "evidence_sha256": "51833c071823b201e301c0be935238fbf7f1324c7eca4c92a3528920d975537a",
     "mode": "additions-only",
-    "reason": "Register task reserved adapter tested only through synthetic module plumbing"
+    "reason": "Register full-byte observer for reviewed complete D3D8 capability module"
   },
   "files": {
     "Makefile": "f145daba48afc9b3e7609df89506e4ce95b8693af2bc826358904427af53bfb6",
@@ -418,6 +418,7 @@
     "tests/probes/native_crt_integer_probe.cpp": "6f32149e24e7ec685e8fdbf461d25f4b504febea9ba5254a4dcd9a4175b21a67",
     "tests/probes/native_crt_rand_probe.cpp": "e0f78e20651ad815b1620269aef0bf69517eb9c0e4e23b0a5ff0c405670397d1",
     "tests/probes/native_crt_sqrt_probe.cpp": "6701d33e012867aa00dcd8e033c70d81db29dc13af9763e36237579721875f7b",
+    "tests/probes/native_d3d8_caps_probe.cpp": "607c24fe085035dd8a70d9592c3db3618e0e06c2f33181dc8053ac963370cba4",
     "tests/probes/native_d3dx_matrix_inverse_probe.cpp": "9fa09aec1a1efdc49f54ee25daab32ef94c44db255165641792b9fa44e8d4422",
     "tests/probes/native_d3dx_perspective_probe.cpp": "a3ee10f5d70ca0d171bf7b90b9be793711a83cd53a1575bb5a7c8510111b31b4",
     "tests/probes/native_d3dx_project_probe.cpp": "ee3c522d839147e16da30df6410bd74fcb7f20c27b036d9c59eecc8650f6eac3",
