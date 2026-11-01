@@ -34,21 +34,21 @@ pending. This prerequisite seal supplies no source or campaign approval.
 
 ## Independent review corrections
 
-Review42946bc supports the frozen baseline and void-return distinction, but found
+Review `42946bc` supports the frozen baseline and void-return distinction, but found
 two P2 gaps. a95a4ce rejects packet-root/nested/dangling directory symlinks before
 the Python suffix filter, while retaining generated-cache exclusions. It also
-extracts a pure writer parser requiring exactly ordered IDs0..38 and complete
-return/failure plus terminal99 snapshots. Missing, duplicate, reordered, extra or
+extracts a pure writer parser requiring exactly ordered IDs 0 through 38 and complete
+return/failure plus terminal 99 snapshots. Missing, duplicate, reordered, extra or
 truncated writer cohorts are refused before original comparison. Allocation
 marker shape is checked; unknown pre-format contents remain unknown.
 
 Both regressions fail against the old code: two guard tests and fourteen writer
-subchecks. All16 guard and three parser tests pass after correction. The entire
-valid39-case native projection is byte-identical, and replaying the original
-writer still yields39cases/zero mismatches with exactly the same1,805,891-byte
+subchecks. All 16 guard and three parser tests pass after correction. The entire
+projection of all 39 valid native cases is byte-identical, and replaying the original
+writer still yields 39 cases and zero mismatches with exactly the same 1,805,891-byte
 full-output digest. root-p2-corrections.json records old/new bindings and logs.
 The worker's proposal remains in proposed-manifest-delta-worker.json and Git;
 the active proposal binds only the explicit stricter parser correction/additions.
-All316 retained artifacts and650src files still verify. The current manifest
-contains1,261 inputs/zero violations. Fresh independent recheck, source migration,
+All 316 retained artifacts and 650 source files still verify. The current manifest
+contains 1,261 inputs/zero violations. Fresh independent recheck, source migration,
 Root integration and gate remain pending.
