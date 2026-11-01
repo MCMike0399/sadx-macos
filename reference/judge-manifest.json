@@ -1,9 +1,10 @@
 {
   "change": {
-    "base_commit": "899f3ad6337e0d315d6fb631911a589ff33c8414",
-    "evidence": "reference/production-integration-20261101/task-judges-parent-union.json",
-    "evidence_sha256": "f457ea847ef2072c7a25ef613d0b897c4bf129b6fc58f6f065e479d10dd07241",
-    "reason": "Seal accepted scheduler and bridge judge foundations, exact955-input parent union and Main contract results; preserve original expectations and source"
+    "base_commit": "cf690f77e664847196b7938c9101a0c5075feb92",
+    "evidence": "docs/refactor-inventory/packets/input-axes/source-freeze.json",
+    "evidence_sha256": "aecaa0b9ce747ccf298baa3133a1340e27fb9014fbbcdbd7e3035990b8e3eefe",
+    "mode": "additions-only",
+    "reason": "Add complete unchanged input-axis per-case capture; freeze109056native/source records and93104inheritedFPpartial IDs before readability rewrite, with no old judge change"
   },
   "files": {
     "Makefile": "e4be497c24cedd750e8a9a7d5b3438e7c582a6509969379689276d7b6f3ef905",
@@ -704,6 +705,7 @@
     "tools/lib/extract.py": "d2c2cb1479003401ba1faf0211281a6c6d35949c2bd27e55acc48f7cc7825bd8",
     "tools/lib/import_audio.py": "91f0db9f658c306a4a5637b4180c4e0d6033da72d927f1ba59c18965e5a49e30",
     "tools/lib/pe_image.py": "94694dc5fb38e459d26b35c25a7cdb7e3fad7128e1178363340606bb9db299f2",
+    "tools/oracles/capture_input_axes.py": "c0fb3d515dd156c850660726c43c1163d737b4eeb8e3c4e8724e844a662b4f8e",
     "tools/oracles/check_basic_model_packet.py": "ebed363eb2c7ba7e20097d24237223b82d9c6e20d609940519908acbd57214cc",
     "tools/oracles/check_character_resource_gamma.py": "8cf12856bc1a48af48b7b5161363519846302d0032f2fb976c991359bde80c2c",
     "tools/oracles/check_collision_component.py": "ba5d52eead4e0f9fa747a49d184e633bb293ae952d9d41a4d47a7f1364151e96",
