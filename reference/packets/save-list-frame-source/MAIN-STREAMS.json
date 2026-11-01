@@ -1,0 +1,332 @@
+{
+  "originals": [
+    {
+      "slug": "verify_original_load_selected_save.abi.pkl.gz",
+      "native_calls": 368,
+      "source_returns": 368,
+      "first_defined_difference": null,
+      "full_stream_sha256": "0cd5b0f01e2476171b64a10d03630310097c6b32951f72af716b29a2622755b9"
+    },
+    {
+      "slug": "verify_original_save_completion.abi.pkl.gz",
+      "native_calls": 1000,
+      "source_returns": 1000,
+      "first_defined_difference": null,
+      "full_stream_sha256": "48d7ecce6a909eb3e3b23557360f5752b5e00d54e322529fe9531c56917e6895"
+    },
+    {
+      "slug": "verify_original_save_creation.abi.pkl.gz",
+      "native_calls": 1000,
+      "source_returns": 1000,
+      "first_defined_difference": null,
+      "full_stream_sha256": "5cc354983d01b68d55858c3e948f999f32c895d0a58ad42e7c84bb8a5622ad3c"
+    },
+    {
+      "slug": "verify_original_save_data.abi.pkl.gz",
+      "native_calls": 1029,
+      "source_returns": 24,
+      "first_defined_difference": null,
+      "full_stream_sha256": "e0a1cc494aa02c67a102212b81857ab1b94c0fa55d56215436016f566c19527e"
+    },
+    {
+      "slug": "verify_original_save_file_list.abi.pkl.gz",
+      "native_calls": 348,
+      "source_returns": 348,
+      "first_defined_difference": null,
+      "full_stream_sha256": "dcd26d4e7049cf681ed08ee379dcc3c9179c2c90ddc93e56091b55b0fb1279cd"
+    },
+    {
+      "slug": "verify_original_save_frame.abi.pkl.gz",
+      "native_calls": 2420,
+      "source_returns": 2420,
+      "first_defined_difference": null,
+      "full_stream_sha256": "8f352b28998ab1c0ec1c31444a4aaf72d3b4154884d06c734d4fbdd6101738a4"
+    },
+    {
+      "slug": "verify_original_save_list_free.abi.pkl.gz",
+      "native_calls": 101,
+      "source_returns": 101,
+      "first_defined_difference": null,
+      "full_stream_sha256": "e6af47309f38594a097c14566b9820177d65d84fd37f60c2ba760691a9d64248"
+    },
+    {
+      "slug": "verify_original_save_prepare.abi.pkl.gz",
+      "native_calls": 768,
+      "source_returns": 0,
+      "first_defined_difference": null,
+      "full_stream_sha256": "55a686ab24f8be6a41c6d15b2a7730e8dcec5b5d3f4c6278a830dd382faf62d5"
+    },
+    {
+      "slug": "verify_original_save_request.abi.pkl.gz",
+      "native_calls": 1280,
+      "source_returns": 0,
+      "first_defined_difference": null,
+      "full_stream_sha256": "88fc8f10df041c4cbb5505cf8a1a12ef5d1d1da653bed88f40a36d3d9b7fb5ff"
+    },
+    {
+      "slug": "verify_original_save_write.abi.pkl.gz",
+      "native_calls": 1000,
+      "source_returns": 1000,
+      "first_defined_difference": null,
+      "full_stream_sha256": "cc2879b630b14968cb91934ae7ad2108687ee3c2fac5708e7292e4ebb764ee0a"
+    }
+  ],
+  "consumers": [
+    {
+      "name": "loop-old",
+      "first_defined_difference": null,
+      "receipt": {
+        "exit": 0,
+        "native_calls": 688,
+        "source_returns": 688,
+        "stream": "build/save-source/consumer-probes/loop-old/verify_original_game_loop.abi.pkl.gz",
+        "stream_sha256": "16447e92387808ae6113c2a82773e493e841fff2fc001410fe6e2e8c86e7df99",
+        "stream_bytes": 82328,
+        "library_sha256": "4accde5c9910039eaf9a16deaf537ca6e4329b15c30bb97e64beea432378523f",
+        "evaluator_sha256": "50dbb4081cc1ce1adf15c5e1f20166447c6bc93a1a840793d7ea3275c15899e6",
+        "report": {
+          "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+          "native_library_sha256": "4accde5c9910039eaf9a16deaf537ca6e4329b15c30bb97e64beea432378523f",
+          "source_files": {
+            "src/game/game_loop.hpp": "2ec062e0c579953d48618d33a4c04eca8f43a117a061b7952ad8b71475120822",
+            "src/guest/game_loop.cpp": "145217abac9fda66eab16e6ef57d595508b051446e7daed534a3119ac65677fe",
+            "tests/probes/native_game_loop_probe.cpp": "2ecf50dc4f72e6660023bf7b413e5c8b532348db2f32f2fc896059507e99ca1d",
+            "tools/oracles/verify_original_game_loop.py": "50dbb4081cc1ce1adf15c5e1f20166447c6bc93a1a840793d7ea3275c15899e6"
+          },
+          "original_range_sha256": "40f3c25b40083ceb898d440ddd687b6765d91641cb402c4d17ae3ea9aeb67318",
+          "cases": 688,
+          "case_sha256": "c597b97df125df96488c1017d37f7eeb6af4f09127c3dcb9989f389deeacc9bf",
+          "source_outcomes": {
+            "failure0:iterations4:finished1": 387,
+            "failure0:iterations0:finished1": 3,
+            "failure0:iterations1:finished1": 219,
+            "failure0:iterations2:finished1": 14,
+            "failure0:iterations3:finished1": 12,
+            "failure3:iterations0:finished0": 4,
+            "failure3:iterations1:finished0": 13,
+            "failure3:iterations2:finished0": 11,
+            "failure3:iterations3:finished0": 10,
+            "failure3:iterations4:finished0": 15
+          },
+          "mismatch_count": 0,
+          "mismatches": [],
+          "order_arguments_stores_boundaries_match": true,
+          "limits": "GameLoop 40cad0 local orchestration against original instructions.\n\nEvery callee (40c030, 51f680, 401410, 77f090, 40f460, 781010/781060, 420830,\n407ab0, 77ed00, 40c090, 4250d0, 411b60, 403180, 4086f0, 40be40, 40e2c0, 4326f0,\n40d4d0, 40eab0, 42f990, 40d3c0, 420840, 411d00, 421fd0, 40ef30, 40ef20, 7853c0,\n6fbf10, 410630, 420f40, 420ef0 and the 77fc50 tail) is an explicit owner fixture:\nthe 77f090 fixture writes scripted per-frame globals standing in for the real\nproducers, 4250d0 may set the exit flag, 411b60 may replace the near fog range,\n40ef30/40ef20 return scripted values. From the 4th frame the fixture forces focus and\nan exit key so every case terminates. This compares the local call order, call\narguments, global loads/stores and failure boundaries only; it does not show that\nany owner subsystem, Windows message pump or frame pacing is implemented.\n"
+        }
+      },
+      "historical": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5acabf9a/build/save-io-judges/loop-original/verify_original_game_loop.abi.pkl.gz",
+      "historical_sha256": "16447e92387808ae6113c2a82773e493e841fff2fc001410fe6e2e8c86e7df99"
+    },
+    {
+      "name": "loop-new",
+      "first_defined_difference": null,
+      "receipt": {
+        "exit": 0,
+        "native_calls": 688,
+        "source_returns": 688,
+        "stream": "build/save-source/consumer-probes/loop-new/verify_original_game_loop.abi.pkl.gz",
+        "stream_sha256": "16447e92387808ae6113c2a82773e493e841fff2fc001410fe6e2e8c86e7df99",
+        "stream_bytes": 82328,
+        "library_sha256": "8c66016a17a01c9c6644392c5d28cbb38068a4268a7729b8a16e0b0d18c94271",
+        "evaluator_sha256": "50dbb4081cc1ce1adf15c5e1f20166447c6bc93a1a840793d7ea3275c15899e6",
+        "report": {
+          "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+          "native_library_sha256": "8c66016a17a01c9c6644392c5d28cbb38068a4268a7729b8a16e0b0d18c94271",
+          "source_files": {
+            "src/game/game_loop.hpp": "2ec062e0c579953d48618d33a4c04eca8f43a117a061b7952ad8b71475120822",
+            "src/guest/game_loop.cpp": "145217abac9fda66eab16e6ef57d595508b051446e7daed534a3119ac65677fe",
+            "tests/probes/native_game_loop_probe.cpp": "2ecf50dc4f72e6660023bf7b413e5c8b532348db2f32f2fc896059507e99ca1d",
+            "tools/oracles/verify_original_game_loop.py": "50dbb4081cc1ce1adf15c5e1f20166447c6bc93a1a840793d7ea3275c15899e6"
+          },
+          "original_range_sha256": "40f3c25b40083ceb898d440ddd687b6765d91641cb402c4d17ae3ea9aeb67318",
+          "cases": 688,
+          "case_sha256": "c597b97df125df96488c1017d37f7eeb6af4f09127c3dcb9989f389deeacc9bf",
+          "source_outcomes": {
+            "failure0:iterations4:finished1": 387,
+            "failure0:iterations0:finished1": 3,
+            "failure0:iterations1:finished1": 219,
+            "failure0:iterations2:finished1": 14,
+            "failure0:iterations3:finished1": 12,
+            "failure3:iterations0:finished0": 4,
+            "failure3:iterations1:finished0": 13,
+            "failure3:iterations2:finished0": 11,
+            "failure3:iterations3:finished0": 10,
+            "failure3:iterations4:finished0": 15
+          },
+          "mismatch_count": 0,
+          "mismatches": [],
+          "order_arguments_stores_boundaries_match": true,
+          "limits": "GameLoop 40cad0 local orchestration against original instructions.\n\nEvery callee (40c030, 51f680, 401410, 77f090, 40f460, 781010/781060, 420830,\n407ab0, 77ed00, 40c090, 4250d0, 411b60, 403180, 4086f0, 40be40, 40e2c0, 4326f0,\n40d4d0, 40eab0, 42f990, 40d3c0, 420840, 411d00, 421fd0, 40ef30, 40ef20, 7853c0,\n6fbf10, 410630, 420f40, 420ef0 and the 77fc50 tail) is an explicit owner fixture:\nthe 77f090 fixture writes scripted per-frame globals standing in for the real\nproducers, 4250d0 may set the exit flag, 411b60 may replace the near fog range,\n40ef30/40ef20 return scripted values. From the 4th frame the fixture forces focus and\nan exit key so every case terminates. This compares the local call order, call\narguments, global loads/stores and failure boundaries only; it does not show that\nany owner subsystem, Windows message pump or frame pacing is implemented.\n"
+        }
+      },
+      "historical": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5acabf9a/build/save-io-judges/loop-original/verify_original_game_loop.abi.pkl.gz",
+      "historical_sha256": "16447e92387808ae6113c2a82773e493e841fff2fc001410fe6e2e8c86e7df99"
+    },
+    {
+      "name": "controls",
+      "first_defined_difference": null,
+      "receipt": {
+        "exit": 1,
+        "native_calls": 2438,
+        "source_returns": 2438,
+        "stream": "build/save-source/consumer-probes/controls/verify_original_file_select_controls.abi.pkl.gz",
+        "stream_sha256": "435a7fb69480d972df0d112bd07464d86ee052ff1f303b74c2b4a41c9a344cc1",
+        "stream_bytes": 283710,
+        "library_sha256": "b102d8d6706cc0cd70dd011f9eaf4a64e254b6856da2a2ae91cc4eab695718cb",
+        "evaluator_sha256": "fb888fe3e2897a7203c6ba2dc65e553c63e727f24e670ca65981b64a94b37a20",
+        "report": {
+          "passed": false,
+          "values_match": true,
+          "cases": 2438,
+          "mismatches": 0,
+          "fp_flag_partials": 938,
+          "first_mismatches": [],
+          "first_fp_partials": [
+            {
+              "case": 150,
+              "input": [
+                1,
+                1065353216,
+                0,
+                0,
+                0,
+                0,
+                0,
+                123,
+                0,
+                0,
+                1,
+                0,
+                0,
+                1,
+                7,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                3
+              ],
+              "diff": [
+                [
+                  25,
+                  0,
+                  32
+                ]
+              ]
+            },
+            {
+              "case": 151,
+              "input": [
+                1,
+                1065353216,
+                0,
+                0,
+                0,
+                0,
+                0,
+                123,
+                0,
+                0,
+                1,
+                0,
+                1,
+                1,
+                7,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                3
+              ],
+              "diff": [
+                [
+                  25,
+                  0,
+                  32
+                ]
+              ]
+            },
+            {
+              "case": 152,
+              "input": [
+                1,
+                1065353216,
+                0,
+                0,
+                0,
+                0,
+                0,
+                123,
+                0,
+                0,
+                1,
+                0,
+                2,
+                1,
+                7,
+                0,
+                0,
+                0,
+                0,
+                0,
+                1,
+                0,
+                0,
+                0,
+                0,
+                3
+              ],
+              "diff": [
+                [
+                  25,
+                  0,
+                  32
+                ]
+              ]
+            }
+          ],
+          "seed": 503600,
+          "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+          "native_library_sha256": "b102d8d6706cc0cd70dd011f9eaf4a64e254b6856da2a2ae91cc4eab695718cb",
+          "native_sources": {
+            "src/game/file_select_controls.cpp": "e3d12bbda98c073fc6dce1133a830f68ecc5f03a6e49a2a376f9cb35e803dd04",
+            "src/game/file_select.hpp": "c29d9d01a1506957864e54d567ddd6a5911d1149bf883f676b3f0850cd0b5cb7",
+            "tests/probes/native_file_select_controls_probe.cpp": "5d2b362a18f0fc9d14cac524ceb3e84a4cd41cef5f94c4a4a717f7fdac7f03b1"
+          },
+          "source_ranges": {
+            "0x5035d0-0x503e48": "7a5304dca8f6bac32df8a8190f38da44b9b336aee69474ba05b4809ea909eeca",
+            "0x5067e0-0x5067e9": "64619e99382ee6b47f038089042aea68e4af0a048409078323b783bb43cd0748",
+            "0x5067f0-0x5067fb": "0705a8d5780a46bf6772571e9ce609b9415f165421699fdfc8fae1fcd73933f0",
+            "0x431960-0x4319c5": "ee4a49bc1dbffae81e1fb3ecba94bdd4a9c4d548339351f8ede6f9c6563a9fdd",
+            "0x4319d0-0x431ac7": "dfc7e3cdedc9c9006e931d104b4dc4bfb1ef756c062b090ffc03d2addfeae8fc",
+            "0x7883c0-0x7884f0": "02b231bcc0ff17942c2bd0b84671eb27b289297a8744802aae9d9dbcbdbefd64"
+          },
+          "limits": [
+            "Full startup0/select1/cancel9/wait10 bodies and invalid-stage guard; remaining dialog stages explicitly stop at their original switch entry after common animation. Original animation/cosine/interpolation/mask helpers execute; save/dialog/audio calls are ordered resource receipts. All float words are compared; software FPflag differences are reported separately."
+          ]
+        }
+      },
+      "historical": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-5acabf9a/build/save-io-judges/controls-original/verify_original_file_select_controls.abi.pkl.gz",
+      "historical_sha256": "435a7fb69480d972df0d112bd07464d86ee052ff1f303b74c2b4a41c9a344cc1"
+    }
+  ],
+  "io_contract_sha256": "18fb52e150f649067203d0e60f041967c1cac6fa91e5bfd76363d19149b1f6ba",
+  "frame_contract_sha256": "52cdd7a6e8e7a66778dd22a0388dcc61c27c144e6de8275b6eee0fc204338046",
+  "boundary_exit": 0,
+  "scope": "Actual Main source/probe closure; complete defined ABI records equal immutable before Source. Undefined declared void registers retain their accepted unknown tag. No reserved inputs rerun.",
+  "limits": [
+    "Controls938FPpartials/strict1staypartial. Native Session/product/journey/gate closure remains pending."
+  ]
+}
