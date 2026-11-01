@@ -575,7 +575,8 @@
         }
       ],
       "ownership_notes": [
-        "Session owns flow_, soft_reset_, save fields, task handles, sound_, sound_effects_, PCM/media and resource lifetimes. Borrowers include native session/UI callbacks; static include links are candidates only. Resolve each source-global owner and all attachment/callback users before splitting."
+        "Session owns flow_, soft_reset_, save fields, task handles, sound_, sound_effects_, PCM/media and resource lifetimes. Borrowers include native session/UI callbacks; static include links are candidates only. Resolve each source-global owner and all attachment/callback users before splitting.",
+        "Current/menu-backup records now belong to shared save::Profiles with all actual consumers carried, approved d784be8. Remaining menu/task/IO/audio/resource/flow owners and their lifetimes still require connected migration; this does not close Session."
       ]
     },
     "reference/ghidra-live.mjs": {
@@ -5705,6 +5706,160 @@
         }
       ],
       "evidence_binding_note": "Tracked source and immutable authored fragment anchor this review; detailed external SDK/cache paths remain in authored_evidence and the fragment, rather than pretending submodule contents are tracked parent files."
+    },
+    "src/game/save_profiles.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Independent bounded ownership/binding review d784be8 approves the shared typed current/menu-backup owner and actual native/reference consumers.",
+      "reviewed_source_sha256": "7fa1443e5382027559c51bc32694ee1fe370548adfe2a784f6e9fe3cbf70fdff",
+      "semantic_justification": "Two plain Data records with source-backed Global names and exact encoded extents are one canonical owner type instantiated in independent runtime worlds. No source-PC transport, fixture optional, hidden byte cache, algorithm duplication or universal service interface is introduced. Data owns no external resource lifetime; source copy ordering is retained by unchanged shared helpers.",
+      "evidence": [
+        {
+          "path": "src/game/save_profiles.hpp",
+          "line": 1,
+          "sha256": "7fa1443e5382027559c51bc32694ee1fe370548adfe2a784f6e9fe3cbf70fdff"
+        },
+        {
+          "path": "reference/packets/canonical-save-owner/REVIEW-STYLE12.md",
+          "line": 1,
+          "sha256": "e5485adaebc2ddbea5538b71fb1bdcae94789428e8d708e70d2ef21c679868c3"
+        },
+        {
+          "path": "reference/packets/canonical-save-owner/PACKET.md",
+          "line": 1,
+          "sha256": "2deb9b8024460d60b8b228ba1b377a1d3ce8b86310f13617f23193688c991c2f"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "owner": "save::Profiles.current",
+          "source_extent": [
+            "0x3b2b3a8",
+            1392
+          ],
+          "resolution": "First maintained SDK SaveData record, retained at Session lifetime before LogoScene construction; reference state owns the same type and exposes only fact-checked fields. Seven old raw byte owners removed.",
+          "evidence": [
+            {
+              "path": "reference/symbols/overrides.tsv",
+              "line": 1,
+              "sha256": "81e330ebd0aa5e4939566d6cd6abf65da356b28d70f1f9641a9cbf3016017318"
+            },
+            {
+              "path": "reference/symbols/legacy-identifiers.json",
+              "line": 1,
+              "sha256": "80bb63b169b4eba7690f8e54532e707571c8b8e455727be39ed73054e592e84c"
+            }
+          ]
+        },
+        {
+          "owner": "save::Profiles.menu_backup",
+          "source_extent": [
+            "0x3b29d70",
+            1392
+          ],
+          "resolution": "Separate source backup, not either other SDK array entry. Title copy precedes LoadSave; main-menu copy follows apply callback. Complete extent loss/overlap coverage retained.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/context-session-save-ownership.json",
+              "line": 1,
+              "sha256": "4902036573155a56500e7f4bc3272e83f777e5d87ed4769cfad9ddb5a0186dd1"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "path": "src/runtime/native_session.hpp",
+          "line": 1,
+          "sha256": "3a9573e2d5fb9d77e12383c7f99513dc2ad6579c565d1472b18d157bb2f549b0"
+        },
+        {
+          "path": "src/runtime/native_session.cpp",
+          "line": 1,
+          "sha256": "6c41e5d01e9014be2ef192218eead11a8fb11cc31e95a7dc7fefc34e7f5c98d4"
+        },
+        {
+          "path": "src/runtime/native_save.cpp",
+          "line": 1,
+          "sha256": "80a06d2024a29ce667d370a63980cd95408b2f95a0a46b37a59ef07fdf0fdf7a"
+        },
+        {
+          "path": "src/runtime/native_main_menu.cpp",
+          "line": 1,
+          "sha256": "f8c1fb8172020e8acb92f7b1348476bbaa075540c77362eacdfb34f5bbbf96bf"
+        },
+        {
+          "path": "src/runtime/native_character_select.cpp",
+          "line": 1,
+          "sha256": "ddcf2b15144e3c1ea81bac848d70aab812b1398fbd8a55f4277885550792b9df"
+        },
+        {
+          "path": "src/runtime/native_file_select_display.cpp",
+          "line": 1,
+          "sha256": "7f8c435c0e9f718d1b5bd535c07aa68ef6ddfdd356451e36152579bd285e9fc1"
+        },
+        {
+          "path": "src/runtime/native_title_tasks.cpp",
+          "line": 1,
+          "sha256": "b79241bae2dd42684e8c03cdd475cca89f301a9705a57ede031baefa0b9b0c62"
+        },
+        {
+          "path": "src/runtime/logo_scene.hpp",
+          "line": 1,
+          "sha256": "df9ab3879b3c6b2f331d09cf5d7673faa1b7f3b43643e0db2b762539088b3cab"
+        },
+        {
+          "path": "src/guest/game_mode_leaves_reference.hpp",
+          "line": 1,
+          "sha256": "5e3f17d271ca0d4c941f3bb00af800f455b87f7c6f88c21de4427281df73a25b"
+        },
+        {
+          "path": "src/guest/native_game_reference.cpp",
+          "line": 1,
+          "sha256": "9ffe1944dad7c6c7d951d23d27e6dccbe98a0b9e5c39a241eced9a05808ecb19"
+        }
+      ],
+      "accepted_judges": [
+        {
+          "leaf_evaluator": {
+            "path": "tools/oracles/verify_original_game_mode_leaves.py",
+            "line": 1,
+            "sha256": "b410da25b2db2ea70ca4bc7b3b213a57422c2729ae5c9811b6ed0f8f9eed2c1c"
+          },
+          "probe": {
+            "path": "tests/probes/native_game_mode_leaves_probe.cpp",
+            "line": 1,
+            "sha256": "a5d585ecdbe396ee9222df361184f71ef0249b9494f245c89de591c60520574b"
+          },
+          "baseline": {
+            "path": "reference/production-integration-20261101/session-save-owner-baseline/summary.json",
+            "line": 1,
+            "sha256": "962dd30a7b607cf5944335af14404b1846b1a297f80ab787d631112a9672db38"
+          },
+          "qualification": {
+            "path": "reference/production-integration-20261101/session-save-owner-qualification/summary.json",
+            "line": 1,
+            "sha256": "118b0ce42b4fd65899dbbeeed5a8cca6045e701e922b97580edc4c73eabca686"
+          },
+          "mutations": {
+            "path": "reference/production-integration-20261101/session-save-owner-mutants.json",
+            "line": 1,
+            "sha256": "b95ec90bb88e7a03c6d3b95e47dbda27880253048f28df6101810123df741fd6"
+          },
+          "post_review_additional_cohort": {
+            "path": "reference/production-integration-20261101/session-save-owner-qualification/holdout-final.json",
+            "line": 1,
+            "sha256": "0744568ec75a304be28b6d006600bfd05809477c86dab25afdf99e1860f4c92e"
+          },
+          "acceptance": "All2600 frozen native outputs,2526 original comparisons and74 native boundary IDs match. Five valid mutants caught, original/new unit bodies pass, native source/force-load closure and three actual native journeys pass. Additional seed20261105 has2519 exact original comparisons and81 explicit native boundaries; different input cohort, not a source regression or all2600 pass claim."
+        }
+      ],
+      "destination": "src/game/save_profiles.hpp shared typed owner; source availability/byte transport only in reference adapters",
+      "findings": [],
+      "classification_limits": [
+        "Named owner/type and connected current/backup record migration only; full save IO/UI/audio/resources/Session/campaign remain open.",
+        "Original FP flags are not independently compared by the inherited leaf judge; all native FP result words are retained.",
+        "Final composite integrated gate/reference journeys still pending; source callback and math packets merged additively."
+      ]
     }
   },
   "external_reference_sources": [
