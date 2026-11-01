@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "cadb15b63e805a0416462e90b75af853deea3cbf",
-    "evidence": "docs/refactor-inventory/packets/task-owner/COPIED-INPUT-PROOF-CORRECTION.json",
-    "evidence_sha256": "d3a422c80b0db6b19843af5f4f2b5f640d6d8fbe39fe24b70ede8cfd7fcfc2a7",
-    "reason": "Bind copied Task continuation cohorts to frozen proof before side effects"
+    "base_commit": "0f58ca30bf5ec1499b4eee71a8c7559746184cd8",
+    "evidence": "docs/refactor-inventory/packets/task-owner/DELETE-NATIVE-REPLAY-RESULT.json",
+    "evidence_sha256": "00f33cac9a77b1d965289b4f7a3b00c86d98c86497d0b61762e88b708ddce6ad",
+    "reason": "Seal independently reviewed pinned failed-deletion native replay and fake admission regressions; ordinary successful capture comparison still requires exit zero and inherited source failure remains FAIL."
   },
   "files": {
     "Makefile": "f145daba48afc9b3e7609df89506e4ce95b8693af2bc826358904427af53bfb6",
@@ -317,6 +317,7 @@
     "reference/packets/sse-readability/consumers.py": "dd795d090f9a824f57b3076d2f153b323b965e6ee21d3e35a9710561d07c6c2d",
     "reference/packets/sse-readability/mutate.py": "65814d564bc243f2408ddcc464c17ae0e78b80ff4804da59937b407fd7ec0c3e",
     "reference/packets/sse-readability/reserved.py": "b91d10e3827903a66367b6ca6de987d5d601ab431e593fd1ec23d0fb917beba7",
+    "reference/packets/task-delete-native-replay/replay.py": "27d73c9af213f073ab2de9c5e8193aa57c14e14830991c8461f7ab3c57cd5089",
     "reference/production-integration-20261015/native-frame-control-mutants.json": "add313cbae1597cf4931fbc2947da72800ce7a7ac81bf83788e91988b2d6e9bd",
     "reference/production-integration-20261015/native-frame-host-mutants.json": "1f540bdf30ef59d919853e1a7b2c6d61d527ac26441490812c77d920a493f5ad",
     "reference/production-integration-20261015/provenance-checker-mutants.json": "8d8a2006f54748ab5df4262862a89f38bf982387763f7345d78bd4436a799068",
@@ -682,6 +683,7 @@
     "tests/python/test_status_generation.py": "2c2ab103c933e1309850c72a511fc1e43dd40f56663c3c6155d2336e6be7ed0a",
     "tests/python/test_symbol_context.py": "e276e801136d0821369682beb43c42c0f460ff137123683d8c1150487eec2690",
     "tests/python/test_symbols.py": "9e9a03a6389d6cd58aa49c63272049754f55ccddb19eeb894b8b92ccce362e0f",
+    "tests/python/test_task_delete_native_replay.py": "6378464aee9f1d2f592c1c0df67d32f2f648332bf15ac420c00d0f3f59478179",
     "tests/python/test_task_reserved_inputs.py": "ce771feeee0e8dac64450381a8e15ea6d1216aeb3235008a804aea1ada3482b4",
     "tests/python/test_task_reserved_observer.py": "3a9866351a743f339e5203c76b7dc9c071697ecf1a356f97cd03aefb4e16b741",
     "tests/python/test_task_reserved_run.py": "25e987d1a0a398f91955898950ac6863920cba1c65a7a013b453d185b74d005f",
@@ -1099,7 +1101,7 @@
     "tools/oracles/sound_bank_original_reference.py": "0a2278e763870cd3c9d664499f6cbe156849d514755884179f789c9c415750ec",
     "tools/oracles/task_judges/bridge_faults.py": "871892551973e0a3883fb19d79d80d2eb0cd142aa6d7f9ed88ac254eb06d0337",
     "tools/oracles/task_judges/check_baseline.py": "14b66c673e4b6914d48ff2a96fd53e64fba4243eb44305f458889d39036e03be",
-    "tools/oracles/task_judges/compare_streams.py": "4b935e04e6abcb1b4cdc675e3ffedcbe0175f6f450a3f5b03be09e1726d08bfe",
+    "tools/oracles/task_judges/compare_streams.py": "38d882f2fad2711584f37ea9b129e52f4b6ddaee9d14c758aecb6652be4485f1",
     "tools/oracles/task_judges/freeze.py": "d8f60a37ad0970b6e19d3744fc1df891eff7a348f2edd299c3029e9c1b850d38",
     "tools/oracles/task_judges/mutate.py": "da598d7d20fd5a5e8d0de553b84aa13bb3ee5ea60eaa54c4ed75b48f229ed11e",
     "tools/oracles/task_judges/reserved_inputs.py": "2e15c69e6c872035005af4bffd50fae0c9e3d8717dcf61dbf04e1d081d0a8492",
