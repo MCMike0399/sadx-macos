@@ -12,6 +12,7 @@
 #include <cstdint>
 #include <functional>
 #include <optional>
+#include <stdexcept>
 namespace sadx {
 // Owners reached from the 40c090 game-mode machine, each a direct translation
 // of exact instructions. Words without another native owner live here; shared
@@ -49,6 +50,24 @@ struct GameModeLeafState {
     SourceBytes<0x3b290c4,8> block_at_3b290c4;       // 420e90 per-character counts
     SourceBytes<0x90ed54,0x20> block_at_90ed54;      // 420e90 per-character release lists
     SourceBytes<0x3b2b5f9,7> block_at_3b2b5f9;       // 413c00 flag byte, then 414470's per-character bytes
+    // NOTSA: reference import/export seam for options and the six source life slots.
+    // Availability remains a reference fact. The raw owner stays until probe rebinding.
+    std::optional<std::uint8_t> save_options() const {
+        return block_at_3b2b5f9.bytes[0];
+    }
+    void import_save_options(std::optional<std::uint8_t> value) {
+        block_at_3b2b5f9.bytes[0] = value;
+    }
+    std::optional<std::uint8_t> saved_life_count(std::size_t slot) const {
+        if (slot >= 6)
+            return std::nullopt;
+        return block_at_3b2b5f9.bytes[slot + 1];
+    }
+    void import_saved_life_count(std::size_t slot, std::optional<std::uint8_t> value) {
+        if (slot >= 6)
+            throw std::out_of_range("reference save life slot");
+        block_at_3b2b5f9.bytes[slot + 1] = value;
+    }
     // 413c00 / 783260
     std::optional<std::uint16_t> half_at_3b22e1c,half_at_3b18db8;std::optional<std::uint32_t> word_at_3b22e20,callback_at_3d08420;
     // 422680 per-character motion words copied out of the bound character data

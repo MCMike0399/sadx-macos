@@ -1,0 +1,23 @@
+{
+  "purpose": "Reference-only access seam before immutable probe rebinding and the complete current/backup owner migration. No owner moved and no second data cache introduced.",
+  "source_sha256": {
+    "src/guest/game_mode_leaves_reference.hpp": "134649294282ffcaa699b8b1039ff8ff394e26f79d7554bb0de08fc8f0bac375",
+    "src/guest/game_mode_leaves_reference.cpp": "f8d54e2023e3478f53eb0e1737f381209c63e0bff96e55f3bc181365d3b70996",
+    "src/guest/native_game_reference.cpp": "9ffe1944dad7c6c7d951d23d27e6dccbe98a0b9e5c39a241eced9a05808ecb19",
+    "tests/unit/game_mode_leaves.cpp": "4ac04c915931731554bf4940baa7870735326c71fe36178d3012e8e072f5e624"
+  },
+  "native_full_outputs_equal": true,
+  "original_full_outputs_equal": true,
+  "cases": 2600,
+  "compared": 2526,
+  "native_boundaries": 74,
+  "new_units": "Missing options stop after prior stores at413c1e; known zero differs from unknown; life values reread after model callback. New tests pass with both previous and current leaf bodies.",
+  "native_game_consumer_compile": 0,
+  "layers": 0,
+  "provenance_pending": "Only two stale C++ identifier allowances need removal in a separate evidenced baseline step. Existing raw header owner and all owner ranges remain unchanged.",
+  "limits": [
+    "Reference C++ compatibility seam only, not complete owner/module/campaign migration.",
+    "Original flags remain unobserved by the inherited judge; native result FP words are retained exactly.",
+    "Probe/fixtures still use the original raw seven-byte layout; explicit separate rebind follows before replacing that owner."
+  ]
+}

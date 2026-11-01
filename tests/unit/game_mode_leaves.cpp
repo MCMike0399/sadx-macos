@@ -16,6 +16,34 @@ struct Fixture {
 GameLogicOwnerResult ok(const GameModeLeafCall&){return {GameLogicOwnerState::completed,0,{}};}
 }
 int main(){try{
+    {Fixture f;
+        f.s.import_save_options(std::nullopt);
+        const auto r = run_game_mode_leaf(0x413c00, {}, f.s, ok);
+        require(r.outcome == GameModeLeafOutcome::unknown_state &&
+                    r.source_boundary == 0x413c1e && r.required_fact == 0x3b2b5f9u,
+                "missing save options retain the exact reference read boundary");
+        require(f.game_mode == 0x15 && f.s.half_at_3b22e1c == 0 &&
+                    f.mode.word_at_3b2c45c == 0 && !f.s.half_at_3b18db8,
+                "missing save options preserve the preceding stores and stop before later stores");
+        f.s.import_save_options(0);
+        require(f.s.save_options().has_value() && *f.s.save_options() == 0,
+                "known zero save options remain distinct from unknown");
+    }
+    {Fixture f;
+        f.s.import_saved_life_count(0, std::nullopt);
+        bool model_called = false;
+        const auto r = run_game_mode_leaf(0x414470, 0, f.s, [&](const GameModeLeafCall &call) {
+            if (call.callee == 0x422680) {
+                model_called = true;
+                require(f.s.character_at_3b22dc0 == 0, "character is published before model callback");
+                f.s.import_saved_life_count(0, 9);
+            }
+            return ok(call);
+        });
+        require(model_called && r.outcome == GameModeLeafOutcome::completed &&
+                    f.s.byte_at_3b0ef34 == 9,
+                "saved lives are reread after the model callback, not copied before it");
+    }
     {Fixture f;f.s.character_at_3b22dc0.reset();const auto r=run_game_mode_leaf(0x4144e0,{},f.s,ok);require(r.outcome==GameModeLeafOutcome::unknown_state&&r.required_fact==0x3b22dc0u,"unknown character");}
     {Fixture f;f.mode.byte_at_3b2a2fa=7;require(run_game_mode_leaf(0x42cea0,{},f.s,ok).outcome==GameModeLeafOutcome::completed&&f.mode.byte_at_3b2a2fa==0,"42cea0 writes the borrowed 3b2a2fa byte");}
     {Fixture f;f.s.character_at_3b22dc0=9;const auto r=run_game_mode_leaf(0x420e90,9,f.s,ok);require(r.outcome==GameModeLeafOutcome::unknown_state&&r.required_fact==0x90ed54u+36,"table index past the 8 characters");}

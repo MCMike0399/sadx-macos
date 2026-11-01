@@ -121,7 +121,11 @@ void NativeGame::initialize_source_facts(){
             {&m.word_at_3b0f100,0x3b0f100u},{&m.word_at_3b0f10c,0x3b0f10cu},{&m.word_at_3b0f0f4,0x3b0f0f4u},{&m.word_at_3b2c560,0x3b2c560u},{&m.word_at_914788,0x914788u},{&m.word_at_3b18244,0x3b18244u}})*o=u32(a);
         m.half_at_3b0f0e4=u16(0x3b0f0e4);m.half_at_3b2a300=u16(0x3b2a300);
         const auto load=[&](auto& block){for(std::size_t i=0;i<block.size;++i)block.bytes[i]=u8(static_cast<std::uint32_t>(block.base+i));};
-        load(m.block_at_3b18250);load(m.block_at_3b0ef9c);load(m.block_at_3c4ae08);load(m.block_at_3b290c4);load(m.block_at_90ed54);load(m.block_at_3b2b5f9);m.color_at_3b29d5c=u32(0x3b29d5c);m.fp=&fp_;
+        load(m.block_at_3b18250);load(m.block_at_3b0ef9c);load(m.block_at_3c4ae08);load(m.block_at_3b290c4);load(m.block_at_90ed54);
+        m.import_save_options(u8(0x3b2b5f9));
+        for (std::size_t slot = 0; slot < 6; ++slot)
+            m.import_saved_life_count(slot, u8(0x3b2b5fa + static_cast<std::uint32_t>(slot)));
+        m.color_at_3b29d5c=u32(0x3b29d5c);m.fp=&fp_;
         m.half_at_3b22e1c=u16(0x3b22e1c);m.half_at_3b18db8=u16(0x3b18db8);m.word_at_3b22e20=u32(0x3b22e20);m.callback_at_3d08420=u32(0x3d08420);
     }
     initialize_sound_defaults();

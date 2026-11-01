@@ -98,7 +98,7 @@ struct Operation {
     // Actual 413c00: returns 2 or 1 by the signed stage word.
     std::uint32_t leaf_413c00(){
         s.game_mode_at_3b22de4=0x15;s.half_at_3b22e1c=0;s.mode.word_at_3b2c45c=0;leaf_43b490();
-        const auto flags=static_cast<std::uint8_t>(need(s.block_at_3b2b5f9,0x3b2b5f9,1,0x413c1e));
+        const auto flags=static_cast<std::uint8_t>(need(s.save_options(),0x413c1e,0x3b2b5f9));
         s.half_at_3b18db8=0;s.word_at_3b22e20=0;s.byte_at_3abe134=static_cast<std::uint8_t>(~(flags>>1)&1);
         if(sign_byte_3b0ef34(0x413c3b)<4)s.byte_at_3b0ef34=4; // 425af0
         call(0x413c4c,0x785330,{0u});
@@ -110,7 +110,7 @@ struct Operation {
         const auto next=static_cast<std::uint16_t>(argument);s.character_at_3b22dc0=next;
         leaf_422680(next,0x41448c);
         auto index=character(0x414491);if(index>4)--index;if(index>1)--index;
-        s.byte_at_3b0ef34=static_cast<std::uint8_t>(need(s.block_at_3b2b5f9,0x3b2b5fa+index,1,0x4144a7));
+        s.byte_at_3b0ef34=static_cast<std::uint8_t>(need(s.saved_life_count(index),0x4144a7,0x3b2b5fa+index));
         if(sign_byte_3b0ef34(0x4144b3)<4)s.byte_at_3b0ef34=4; // 425af0
         tail_46b230();}
 };
