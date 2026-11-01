@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "base_commit": "f6c4e538af463a2eaf4c1fe961f04e8443d51878",
+  "date": "2026-11-01",
+  "checks": {
+    "deterministic_regeneration_and_check": "pass, exit 0",
+    "independent_tracked_path_equality": {
+      "pass": true,
+      "paths": 3648,
+      "duplicate_paths": 0
+    },
+    "independent_raw_source_sha256": "pass for all 1615 maintained/script records",
+    "independent_stub_annotation_sites": {
+      "pass": true,
+      "annotation_sites": 83
+    },
+    "artifact_size_limit": "all files below 2 MiB",
+    "negative_checks": [
+      "Corrupt summary rejected with exit 1",
+      "Dropped production app row rejected with exit 1",
+      "Unsupported conformity disposition rejected with exit 1",
+      "Unexpected stale shard rejected with exit 1"
+    ]
+  },
+  "not_run": [
+    "build",
+    "gate",
+    "oracle",
+    "mutant",
+    "journey",
+    "game",
+    "provider",
+    "delegate"
+  ],
+  "limits": "Source accounting and drift checks only; no semantic, fidelity, native closure or current baseline verdict."
+}

@@ -1,0 +1,60 @@
+{
+  "base_commit": "f6c4e538af463a2eaf4c1fe961f04e8443d51878",
+  "baseline_removed_paths": [],
+  "boundary_entries": 2033,
+  "checks_not_run": [
+    "builds",
+    "gate",
+    "oracles",
+    "mutants",
+    "journeys",
+    "providers"
+  ],
+  "coverage": "exact tracked path equality; no semantic completeness or behavior verdict",
+  "dispositions": {
+    "needs_migration": 9,
+    "open_review": 1601,
+    "reference_infrastructure": 5
+  },
+  "maintained_and_script_entries": 1615,
+  "modules": 1026,
+  "native_translation_units_listed": 128,
+  "native_translation_units_not_listed": 182,
+  "other_stub_mentions": 11,
+  "production_recipe_membership": {
+    "native_platform_object": 10,
+    "native_source_list": 128,
+    "native_source_wildcard": 22,
+    "not_a_production_translation_unit": 327,
+    "not_in_observed_production_recipes": 149,
+    "production_entrypoint": 1
+  },
+  "roots": {
+    "reference": 1929,
+    "src": 637,
+    "tests": 574,
+    "third_party": 155,
+    "tools": 353
+  },
+  "schema_version": 1,
+  "stub_annotations": 83,
+  "systems": {
+    "asset-boundaries": 17,
+    "game-flow-ui": 106,
+    "input-frame-profile": 35,
+    "native-composition": 29,
+    "numeric-foundations": 35,
+    "platform-app": 60,
+    "player-animation-actors": 22,
+    "player-common": 102,
+    "reference-runtime": 51,
+    "render-math-device": 61,
+    "render-queue-draw": 39,
+    "save-profile": 25,
+    "sound-movie": 26,
+    "task-ownership": 6,
+    "texture-lifetime": 23,
+    "tooling-judges": 978
+  },
+  "tracked_scope": 3648
+}

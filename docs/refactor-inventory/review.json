@@ -1,0 +1,659 @@
+{
+  "schema_version": 1,
+  "base_commit": "f6c4e538af463a2eaf4c1fe961f04e8443d51878",
+  "classification_contract": {
+    "open_review": "No semantic disposition yet; never counted as conforming.",
+    "needs_migration": "Specific body/owner problem observed; migration and complete review still open.",
+    "already_conforming": "Requires explicit whole-module semantic justification, owner/consumer resolution and judge acceptance; no initial entries.",
+    "reference_infrastructure": "Reviewed reference purpose, not a game-behavior exemption or proof the full body conforms.",
+    "obsolete": "Requires evidence of no maintained consumers and preserved behavior/coverage; no initial entries."
+  },
+  "systems": {
+    "numeric-foundations": {
+      "destination": "src/cpu + src/math: narrow documented fidelity helpers; source-fact containers to reference only",
+      "depends_on": [],
+      "acceptance": [
+        "docs/PROMPT-complete-refactor.md#4-completion-criteria",
+        "docs/STYLE.md#12-review-checklist-author-and-independent-reviewer",
+        "docs/GOAL.md#7-the-loop-for-one-step",
+        "docs/TESTING.md",
+        "tools/gate/check_provenance.py",
+        "tools/gate/check_global_owners.py",
+        "tools/gate/check_layers.py",
+        "tools/gate/check_native_closure.py"
+      ]
+    },
+    "asset-boundaries": {
+      "destination": "src/assets typed imported resources + tools/import; PE/VA decoding in tools/import or reference",
+      "depends_on": [
+        "numeric-foundations"
+      ],
+      "acceptance": [
+        "docs/PROMPT-complete-refactor.md#4-completion-criteria",
+        "docs/STYLE.md#12-review-checklist-author-and-independent-reviewer",
+        "docs/GOAL.md#7-the-loop-for-one-step",
+        "docs/TESTING.md",
+        "tools/gate/check_provenance.py",
+        "tools/gate/check_global_owners.py",
+        "tools/gate/check_layers.py",
+        "tools/gate/check_native_closure.py"
+      ]
+    },
+    "task-ownership": {
+      "destination": "src/engine/task; canonical task/work/lifetime owners borrowed by native and reference",
+      "depends_on": [
+        "numeric-foundations"
+      ],
+      "acceptance": [
+        "docs/PROMPT-complete-refactor.md#4-completion-criteria",
+        "docs/STYLE.md#12-review-checklist-author-and-independent-reviewer",
+        "docs/GOAL.md#7-the-loop-for-one-step",
+        "docs/TESTING.md",
+        "tools/gate/check_provenance.py",
+        "tools/gate/check_global_owners.py",
+        "tools/gate/check_layers.py",
+        "tools/gate/check_native_closure.py"
+      ]
+    },
+    "render-math-device": {
+      "destination": "src/engine/ninja + src/engine/device; shared math, matrices, view and device records",
+      "depends_on": [
+        "numeric-foundations",
+        "asset-boundaries"
+      ],
+      "acceptance": [
+        "docs/PROMPT-complete-refactor.md#4-completion-criteria",
+        "docs/STYLE.md#12-review-checklist-author-and-independent-reviewer",
+        "docs/GOAL.md#7-the-loop-for-one-step",
+        "docs/TESTING.md",
+        "tools/gate/check_provenance.py",
+        "tools/gate/check_global_owners.py",
+        "tools/gate/check_layers.py",
+        "tools/gate/check_native_closure.py"
+      ]
+    },
+    "texture-lifetime": {
+      "destination": "src/engine/ninja texture/palette/resource owners; borrowed native resource identities",
+      "depends_on": [
+        "asset-boundaries",
+        "render-math-device"
+      ],
+      "acceptance": [
+        "docs/PROMPT-complete-refactor.md#4-completion-criteria",
+        "docs/STYLE.md#12-review-checklist-author-and-independent-reviewer",
+        "docs/GOAL.md#7-the-loop-for-one-step",
+        "docs/TESTING.md",
+        "tools/gate/check_provenance.py",
+        "tools/gate/check_global_owners.py",
+        "tools/gate/check_layers.py",
+        "tools/gate/check_native_closure.py"
+      ]
+    },
+    "render-queue-draw": {
+      "destination": "src/engine/ninja queue/sprite/object submission; address adapters in reference",
+      "depends_on": [
+        "task-ownership",
+        "render-math-device",
+        "texture-lifetime"
+      ],
+      "acceptance": [
+        "docs/PROMPT-complete-refactor.md#4-completion-criteria",
+        "docs/STYLE.md#12-review-checklist-author-and-independent-reviewer",
+        "docs/GOAL.md#7-the-loop-for-one-step",
+        "docs/TESTING.md",
+        "tools/gate/check_provenance.py",
+        "tools/gate/check_global_owners.py",
+        "tools/gate/check_layers.py",
+        "tools/gate/check_native_closure.py"
+      ]
+    },
+    "input-frame-profile": {
+      "destination": "src/input + src/engine frame control + src/game/profile; platform clocks/pads as narrow interfaces",
+      "depends_on": [
+        "numeric-foundations",
+        "task-ownership"
+      ],
+      "acceptance": [
+        "docs/PROMPT-complete-refactor.md#4-completion-criteria",
+        "docs/STYLE.md#12-review-checklist-author-and-independent-reviewer",
+        "docs/GOAL.md#7-the-loop-for-one-step",
+        "docs/TESTING.md",
+        "tools/gate/check_provenance.py",
+        "tools/gate/check_global_owners.py",
+        "tools/gate/check_layers.py",
+        "tools/gate/check_native_closure.py"
+      ]
+    },
+    "player-common": {
+      "destination": "src/player common geometry/contact/physics/input; reference marshals existing judges",
+      "depends_on": [
+        "numeric-foundations",
+        "task-ownership",
+        "input-frame-profile",
+        "asset-boundaries"
+      ],
+      "acceptance": [
+        "docs/PROMPT-complete-refactor.md#4-completion-criteria",
+        "docs/STYLE.md#12-review-checklist-author-and-independent-reviewer",
+        "docs/GOAL.md#7-the-loop-for-one-step",
+        "docs/TESTING.md",
+        "tools/gate/check_provenance.py",
+        "tools/gate/check_global_owners.py",
+        "tools/gate/check_layers.py",
+        "tools/gate/check_native_closure.py"
+      ]
+    },
+    "player-animation-actors": {
+      "destination": "src/player common animation + per-character modules; imported content and named initialization",
+      "depends_on": [
+        "player-common",
+        "texture-lifetime",
+        "render-queue-draw"
+      ],
+      "acceptance": [
+        "docs/PROMPT-complete-refactor.md#4-completion-criteria",
+        "docs/STYLE.md#12-review-checklist-author-and-independent-reviewer",
+        "docs/GOAL.md#7-the-loop-for-one-step",
+        "docs/TESTING.md",
+        "tools/gate/check_provenance.py",
+        "tools/gate/check_global_owners.py",
+        "tools/gate/check_layers.py",
+        "tools/gate/check_native_closure.py"
+      ]
+    },
+    "save-profile": {
+      "destination": "src/game/save + src/game/profile; canonical save/config owners, platform persistence",
+      "depends_on": [
+        "asset-boundaries",
+        "input-frame-profile"
+      ],
+      "acceptance": [
+        "docs/PROMPT-complete-refactor.md#4-completion-criteria",
+        "docs/STYLE.md#12-review-checklist-author-and-independent-reviewer",
+        "docs/GOAL.md#7-the-loop-for-one-step",
+        "docs/TESTING.md",
+        "tools/gate/check_provenance.py",
+        "tools/gate/check_global_owners.py",
+        "tools/gate/check_layers.py",
+        "tools/gate/check_native_closure.py"
+      ]
+    },
+    "sound-movie": {
+      "destination": "src/game/sound; native PCM/BGM/voice/movie owners; platform playback backends",
+      "depends_on": [
+        "asset-boundaries",
+        "task-ownership"
+      ],
+      "acceptance": [
+        "docs/PROMPT-complete-refactor.md#4-completion-criteria",
+        "docs/STYLE.md#12-review-checklist-author-and-independent-reviewer",
+        "docs/GOAL.md#7-the-loop-for-one-step",
+        "docs/TESTING.md",
+        "tools/gate/check_provenance.py",
+        "tools/gate/check_global_owners.py",
+        "tools/gate/check_layers.py",
+        "tools/gate/check_native_closure.py"
+      ]
+    },
+    "game-flow-ui": {
+      "destination": "src/game/flow + src/game/ui; shared flow, startup, menu and cleanup; reference diagnostic bindings",
+      "depends_on": [
+        "task-ownership",
+        "render-queue-draw",
+        "input-frame-profile",
+        "save-profile",
+        "sound-movie"
+      ],
+      "acceptance": [
+        "docs/PROMPT-complete-refactor.md#4-completion-criteria",
+        "docs/STYLE.md#12-review-checklist-author-and-independent-reviewer",
+        "docs/GOAL.md#7-the-loop-for-one-step",
+        "docs/TESTING.md",
+        "tools/gate/check_provenance.py",
+        "tools/gate/check_global_owners.py",
+        "tools/gate/check_layers.py",
+        "tools/gate/check_native_closure.py"
+      ]
+    },
+    "native-composition": {
+      "destination": "src/session composition borrows cohesive system state; no recovered game decisions hidden in session",
+      "depends_on": [
+        "player-animation-actors",
+        "game-flow-ui"
+      ],
+      "acceptance": [
+        "docs/PROMPT-complete-refactor.md#4-completion-criteria",
+        "docs/STYLE.md#12-review-checklist-author-and-independent-reviewer",
+        "docs/GOAL.md#7-the-loop-for-one-step",
+        "docs/TESTING.md",
+        "tools/gate/check_provenance.py",
+        "tools/gate/check_global_owners.py",
+        "tools/gate/check_layers.py",
+        "tools/gate/check_native_closure.py"
+      ]
+    },
+    "platform-app": {
+      "destination": "src/platform/mac + apps production/reference entrypoints; engine interfaces and separate build closures",
+      "depends_on": [
+        "render-math-device",
+        "input-frame-profile",
+        "sound-movie",
+        "native-composition"
+      ],
+      "acceptance": [
+        "docs/PROMPT-complete-refactor.md#4-completion-criteria",
+        "docs/STYLE.md#12-review-checklist-author-and-independent-reviewer",
+        "docs/GOAL.md#7-the-loop-for-one-step",
+        "docs/TESTING.md",
+        "tools/gate/check_provenance.py",
+        "tools/gate/check_global_owners.py",
+        "tools/gate/check_layers.py",
+        "tools/gate/check_native_closure.py"
+      ]
+    },
+    "reference-runtime": {
+      "destination": "reference (today src/guest + src/hle + src/loader): execution/ABI/HLE only; extract recovered policies to owning systems",
+      "depends_on": [],
+      "acceptance": [
+        "docs/PROMPT-complete-refactor.md#4-completion-criteria",
+        "docs/STYLE.md#12-review-checklist-author-and-independent-reviewer",
+        "docs/GOAL.md#7-the-loop-for-one-step",
+        "docs/JUDGE.md",
+        "docs/TESTING.md",
+        "tools/gate/check_provenance.py",
+        "tools/gate/check_global_owners.py",
+        "tools/gate/check_layers.py"
+      ]
+    },
+    "tooling-judges": {
+      "destination": "tools + tests: maintain original coverage; judge changes separately under docs/JUDGE.md",
+      "depends_on": [],
+      "acceptance": [
+        "docs/PROMPT-complete-refactor.md#4-completion-criteria",
+        "docs/STYLE.md#12-review-checklist-author-and-independent-reviewer",
+        "docs/GOAL.md#7-the-loop-for-one-step",
+        "docs/JUDGE.md",
+        "docs/TESTING.md",
+        "tools/gate/check_provenance.py",
+        "tools/gate/check_global_owners.py",
+        "tools/gate/check_layers.py"
+      ]
+    },
+    "open-system-review": {
+      "destination": "Provisional grouping only; assign semantic destination after body/owner review",
+      "depends_on": [],
+      "acceptance": [
+        "docs/PROMPT-complete-refactor.md#4-completion-criteria",
+        "docs/STYLE.md#12-review-checklist-author-and-independent-reviewer",
+        "docs/GOAL.md#7-the-loop-for-one-step",
+        "docs/TESTING.md",
+        "tools/gate/check_provenance.py",
+        "tools/gate/check_global_owners.py",
+        "tools/gate/check_layers.py",
+        "tools/gate/check_native_closure.py"
+      ]
+    }
+  },
+  "system_rules": [
+    {
+      "pattern": "^(tools|tests|reference)/",
+      "system": "tooling-judges"
+    },
+    {
+      "pattern": "^src/(cpu|math)/",
+      "system": "numeric-foundations"
+    },
+    {
+      "pattern": "^src/(apps|platform)/",
+      "system": "platform-app"
+    },
+    {
+      "pattern": "^src/loader/guest_heap",
+      "system": "reference-runtime"
+    },
+    {
+      "pattern": "^src/loader/",
+      "system": "asset-boundaries"
+    },
+    {
+      "pattern": "^src/guest/(game_logic|frame_control_reference|game_logic_support|game_frame_calls)",
+      "system": "input-frame-profile"
+    },
+    {
+      "pattern": "^src/guest/ninja_(queue|sprite|screen|device)",
+      "system": "render-queue-draw"
+    },
+    {
+      "pattern": "^src/guest/player_",
+      "system": "player-common"
+    },
+    {
+      "pattern": "^src/guest/(game_|native_game)",
+      "system": "game-flow-ui"
+    },
+    {
+      "pattern": "^src/guest/ninja_fog",
+      "system": "render-math-device"
+    },
+    {
+      "pattern": "^src/(guest|hle)/",
+      "system": "reference-runtime"
+    },
+    {
+      "pattern": "^src/runtime/native_session",
+      "system": "native-composition"
+    },
+    {
+      "pattern": "^src/runtime/(native_player|native_gamma|native_sonic)",
+      "system": "player-animation-actors"
+    },
+    {
+      "pattern": "^src/runtime/.*(sound|audio|music|movie|voice)",
+      "system": "sound-movie"
+    },
+    {
+      "pattern": "^src/runtime/.*(input|control)",
+      "system": "input-frame-profile"
+    },
+    {
+      "pattern": "^src/runtime/.*(object_draw|poly|weld)",
+      "system": "render-queue-draw"
+    },
+    {
+      "pattern": "^src/runtime/.*(texture|assets|character_pack)",
+      "system": "asset-boundaries"
+    },
+    {
+      "pattern": "^src/runtime/engine_code_tables",
+      "system": "render-math-device"
+    },
+    {
+      "pattern": "^src/runtime/",
+      "system": "native-composition"
+    },
+    {
+      "pattern": "^src/input/",
+      "system": "input-frame-profile"
+    },
+    {
+      "pattern": "^src/player/player_scene_decode",
+      "system": "asset-boundaries"
+    },
+    {
+      "pattern": "^src/player/.*(animation|sonic|gamma|character|actor_)",
+      "system": "player-animation-actors"
+    },
+    {
+      "pattern": "^src/player/",
+      "system": "player-common"
+    },
+    {
+      "pattern": "^src/engine/.*(task|memory)",
+      "system": "task-ownership"
+    },
+    {
+      "pattern": "^src/engine/.*(controller|keyboard|vibration|game_frame|game_logic|speedrun|input)",
+      "system": "input-frame-profile"
+    },
+    {
+      "pattern": "^src/engine/.*(texture|pvr|character_pack)",
+      "system": "texture-lifetime"
+    },
+    {
+      "pattern": "^src/engine/.*(queue|sprite|object_draw|polybuff|menu_)",
+      "system": "render-queue-draw"
+    },
+    {
+      "pattern": "^src/engine/",
+      "system": "render-math-device"
+    },
+    {
+      "pattern": "^src/game/.*(save|file_select|win32_profile|character_completion)",
+      "system": "save-profile"
+    },
+    {
+      "pattern": "^src/game/.*(sound|audio|music|voice|movie)",
+      "system": "sound-movie"
+    },
+    {
+      "pattern": "^src/game/",
+      "system": "game-flow-ui"
+    },
+    {
+      "pattern": ".*",
+      "system": "open-system-review"
+    }
+  ],
+  "files": {
+    "src/player/sonic_player.cpp": {
+      "disposition": "needs_migration",
+      "reason": "Body dispatches through address-bearing external calls and reaches guest-defined ground acceleration. Requires semantic Sonic actions plus shared player owners; preserve partial failures and ordering.",
+      "evidence": [
+        {
+          "path": "src/player/sonic_player.cpp",
+          "line": 30
+        },
+        {
+          "path": "docs/RESEARCH-complete-refactor-2026-10-31.md",
+          "line": 1
+        }
+      ],
+      "ownership_notes": [
+        "SonicPlayerGlobals owns forced/stage/model/sound/task values; forced_at_3b29d08 explicitly borrows GameResetState. actor_current::State is composed rather than a second actor owner. Review full alias graph before migration."
+      ]
+    },
+    "src/player/sonic_animation_operations.hpp": {
+      "disposition": "needs_migration",
+      "reason": "SonicAnimationOperation stores instruction PCs and numeric field offsets in 1027 constexpr recipes; exemption from a lexical counter does not establish typed game initialization.",
+      "evidence": [
+        {
+          "path": "src/player/sonic_animation_operations.hpp",
+          "line": 5
+        },
+        {
+          "path": "docs/RESEARCH-complete-refactor-2026-10-31.md",
+          "line": 1
+        }
+      ],
+      "ownership_notes": [
+        "Generated immutable recipe table is code/diagnostic structure, not independent runtime state. Interpreter is sonic_animation_table.cpp; resource/content ownership remains in the imported animation owner."
+      ]
+    },
+    "src/player/sonic_animation_table.cpp": {
+      "disposition": "needs_migration",
+      "reason": "Initializer interprets instruction recipes, fixture-availability optionals and source PC failures. Preserve interleaved reads/stores through reference diagnostics; native initialization must express named data.",
+      "evidence": [
+        {
+          "path": "src/player/sonic_animation_table.cpp",
+          "line": 6
+        },
+        {
+          "path": "docs/RESEARCH-complete-refactor-2026-10-31.md",
+          "line": 1
+        }
+      ],
+      "ownership_notes": [
+        "PlayerAnimationTable records are mutated in source operation order; SonicAnimationExport resource references are borrowed from source. Adapter must preserve partial publication and per-reached-read missingness."
+      ]
+    },
+    "src/player/player_scene_decode.cpp": {
+      "disposition": "needs_migration",
+      "reason": "Image parses MZ/PE32 and maps executable virtual addresses in player code. Decoding belongs at importer/reference boundary, with typed collision resources consumed by player.",
+      "evidence": [
+        {
+          "path": "src/player/player_scene_decode.cpp",
+          "line": 8
+        },
+        {
+          "path": "docs/RESEARCH-complete-refactor-2026-10-31.md",
+          "line": 1
+        }
+      ],
+      "ownership_notes": [
+        "Private Image maps borrowed executable bytes; DecodedSceneLandTable publishes resource/location maps. Move parser boundary with its callers and retain resource alias identity."
+      ]
+    },
+    "src/game/game_reset.cpp": {
+      "disposition": "needs_migration",
+      "reason": "Reset policy dispatches by numeric source/callee address and mutates address-named owner fields. Rewrite shared reset behavior, retaining order and partial state.",
+      "evidence": [
+        {
+          "path": "src/game/game_reset.cpp",
+          "line": 5
+        },
+        {
+          "path": "docs/RESEARCH-complete-refactor-2026-10-31.md",
+          "line": 1
+        }
+      ],
+      "ownership_notes": [
+        "GameResetState owns word_at_3b29d08 and two heap identities; word_at_3abdf80 borrows GameLoopState and RNG is CrtRandState&. SonicPlayerGlobals borrows the forced-reset word; migrate both consumers together."
+      ]
+    },
+    "src/guest/game_logic.cpp": {
+      "disposition": "needs_migration",
+      "reason": "Recovered press accumulation, pending tick loop and frame policy coexist with missing-fixture facts and dispatch. These algorithms must be shared engine/input behavior, not exempt reference plumbing.",
+      "evidence": [
+        {
+          "path": "src/guest/game_logic.cpp",
+          "line": 40
+        },
+        {
+          "path": "docs/RESEARCH-complete-refactor-2026-10-31.md",
+          "line": 1
+        }
+      ],
+      "ownership_notes": [
+        "GameLogicRuntime borrows GameLogicState and four controller owners; timing is shared with frame control. Controller pointers and pressed bits are read lazily and after callbacks. Do not snapshot into a new independent owner."
+      ]
+    },
+    "src/guest/ninja_queue_lifecycle.cpp": {
+      "disposition": "needs_migration",
+      "reason": "Recovered queue reset/allocation, color/depth/render state and owner stores live under guest. Split shared queue lifecycle from original buffer identity and diagnostic marshalling.",
+      "evidence": [
+        {
+          "path": "src/guest/ninja_queue_lifecycle.cpp",
+          "line": 8
+        },
+        {
+          "path": "docs/RESEARCH-complete-refactor-2026-10-31.md",
+          "line": 1
+        }
+      ],
+      "ownership_notes": [
+        "NinjaQueueLifecycleOwners borrows arena/queue runtime, consumer, projection, timing and table words (see engine/ninja_queue_lifecycle.hpp). Arena rebind invalidates record identity; preserve before initialization stores."
+      ]
+    },
+    "src/engine/ninja_queue_consumer.cpp": {
+      "disposition": "needs_migration",
+      "reason": "Consumer mixes render policy, record offsets, fixture facts and failure PCs. Preserve live NEXT reads after callbacks, lazy validation and explicit unrecovered draws.",
+      "evidence": [
+        {
+          "path": "src/engine/ninja_queue_consumer.cpp",
+          "line": 7
+        },
+        {
+          "path": "docs/RESEARCH-complete-refactor-2026-10-31.md",
+          "line": 1
+        }
+      ],
+      "ownership_notes": [
+        "NinjaQueueConsumerRuntime borrows queue/runtime/sprite/projection and consumer counters. Consumer must see callback mutation and NEXT after callbacks. Full canonical map remains open."
+      ]
+    },
+    "src/runtime/native_session.hpp": {
+      "disposition": "needs_migration",
+      "reason": "Session owns save, menu/resource, sound/listener and flow fields together with attachment API. Some source owners use comments rather than GLOBAL annotations; whole-owner and alias audit remains open, no duplicate-owner verdict.",
+      "evidence": [
+        {
+          "path": "src/runtime/native_session.hpp",
+          "line": 185
+        },
+        {
+          "path": "docs/RESEARCH-complete-refactor-2026-10-31.md",
+          "line": 1
+        }
+      ],
+      "ownership_notes": [
+        "Session owns flow_, soft_reset_, save fields, task handles, sound_, sound_effects_, PCM/media and resource lifetimes. Borrowers include native session/UI callbacks; static include links are candidates only. Resolve each source-global owner and all attachment/callback users before splitting."
+      ]
+    },
+    "reference/ghidra-live.mjs": {
+      "disposition": "reference_infrastructure",
+      "reason": "Purpose reviewed as owned analysis/profile/capture infrastructure. Executable identities, provider lifecycle or Windows observation are appropriate reference concerns. Portability, full body semantics and safety of execution remain open; nothing executed.",
+      "evidence": [
+        {
+          "path": "reference/ghidra-live.mjs",
+          "line": 1
+        },
+        {
+          "path": "docs/RESEARCH-complete-refactor-2026-10-31.md",
+          "line": 1
+        }
+      ]
+    },
+    "reference/ghidra-session.mjs": {
+      "disposition": "reference_infrastructure",
+      "reason": "Purpose reviewed as owned analysis/profile/capture infrastructure. Executable identities, provider lifecycle or Windows observation are appropriate reference concerns. Portability, full body semantics and safety of execution remain open; nothing executed.",
+      "evidence": [
+        {
+          "path": "reference/ghidra-session.mjs",
+          "line": 1
+        },
+        {
+          "path": "docs/RESEARCH-complete-refactor-2026-10-31.md",
+          "line": 1
+        }
+      ]
+    },
+    "reference/updated-pc-reference/prepare_profile.py": {
+      "disposition": "reference_infrastructure",
+      "reason": "Purpose reviewed as owned analysis/profile/capture infrastructure. Executable identities, provider lifecycle or Windows observation are appropriate reference concerns. Portability, full body semantics and safety of execution remain open; nothing executed.",
+      "evidence": [
+        {
+          "path": "reference/updated-pc-reference/prepare_profile.py",
+          "line": 1
+        },
+        {
+          "path": "docs/RESEARCH-complete-refactor-2026-10-31.md",
+          "line": 1
+        }
+      ]
+    },
+    "reference/updated-pc-reference/verify_profile.py": {
+      "disposition": "reference_infrastructure",
+      "reason": "Purpose reviewed as owned analysis/profile/capture infrastructure. Executable identities, provider lifecycle or Windows observation are appropriate reference concerns. Portability, full body semantics and safety of execution remain open; nothing executed.",
+      "evidence": [
+        {
+          "path": "reference/updated-pc-reference/verify_profile.py",
+          "line": 1
+        },
+        {
+          "path": "docs/RESEARCH-complete-refactor-2026-10-31.md",
+          "line": 1
+        }
+      ]
+    },
+    "reference/updated-pc-reference/capture-runtime.ps1": {
+      "disposition": "reference_infrastructure",
+      "reason": "Purpose reviewed as owned analysis/profile/capture infrastructure. Executable identities, provider lifecycle or Windows observation are appropriate reference concerns. Portability, full body semantics and safety of execution remain open; nothing executed.",
+      "evidence": [
+        {
+          "path": "reference/updated-pc-reference/capture-runtime.ps1",
+          "line": 1
+        },
+        {
+          "path": "docs/RESEARCH-complete-refactor-2026-10-31.md",
+          "line": 1
+        }
+      ]
+    }
+  },
+  "external_reference_sources": [
+    "reference/input-mod-unicorn-ops-sse.h",
+    "reference/input-mod-unicorn-softfloat-specialize.inc.c",
+    "reference/input-mod-unicorn-softfloat.c",
+    "reference/player-input-unicorn-fpu-helper.c",
+    "reference/sdl-switch2-controller-driver.c"
+  ]
+}
