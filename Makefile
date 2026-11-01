@@ -353,6 +353,7 @@ check: native-library-initial-state native-startup-initial-state native-input-mo
 	python3 tools/gate/check_provenance.py
 	python3 tools/gate/check_readability.py
 	python3 tools/gate/check_constexpr_tables.py
+	python3 tools/gate/check_address_dispatch.py
 	python3 tools/gate/check_judge.py
 	python3 tools/gate/check_profile_patches.py
 	python3 tools/gate/check_repo_hygiene.py
