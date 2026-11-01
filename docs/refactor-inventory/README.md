@@ -156,3 +156,12 @@ explicit failure behavior; it never retires an unrecovered callee. All annotatio
 and other mentions remain in the denominator and retain `unrecovered_open_debt`.
 The initial save-warning audit distinguishes explicit native failure from an
 original-machine-call fixture; neither claims the warning helper is recovered.
+
+## Bounded module records
+
+`summary.json` lists every ordered `module_shards` path, record count and SHA-256.
+Read all listed shards to reconcile the module denominator. `modules.jsonl` is the
+first shard; additional files are `modules-002.jsonl` onward. Complete JSON records
+retain their order and evidence, with UTF-8 bytes capped at the existing 2 MiB limit.
+Oversized single records and unexpected stale shards fail; nothing is truncated or
+automatically deleted. This layout changes packaging, not module classification.

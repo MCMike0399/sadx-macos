@@ -8,7 +8,7 @@
 #include "runtime/logo_scene.hpp"
 #include "game/movie.hpp"
 #include "runtime/native_input.hpp"
-#include "runtime/character_texture_assets.hpp"
+#include "runtime/native_character_resources.hpp"
 #include "game/game_cleanup.hpp"
 #include "game/audio_playback.hpp"
 #include "game/title_menu.hpp"
@@ -80,7 +80,7 @@ class Session final : private flow::NativeServices {
     std::int32_t current_music_song() const { return music_.tracks.current_song; }
     // NOTSA: read-only journey evidence from the canonical signed-byte owners.
     const std::array<std::int8_t, 9> &character_texture_counts() const {
-        return character_textures_loaded_;
+        return character_resources_.loaded();
     }
 
     std::uint32_t logic_loop_count() const { return secondary_loop_count_; }
@@ -238,11 +238,7 @@ class Session final : private flow::NativeServices {
     frame_loop::State loop_;
     frame::RendererState renderer_;
     LogoScene logo_;
-    CharacterTextureAssets texture_assets_;
-    std::array<std::vector<sprite::TextureList>, 9> character_textures_;
-    std::array<cleanup::CharacterTextureLists, 9> character_texture_lists_;
-    std::array<const cleanup::CharacterTextureLists *, 9> character_texture_bindings_{};
-    std::array<std::int8_t, 9> character_textures_loaded_{};
+    CharacterResources character_resources_;
     RegularResources regular_resources_;
     regular_textures::Services regular_texture_services();
     void load_regular_object_textures(std::uint32_t);

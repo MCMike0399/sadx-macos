@@ -230,5 +230,41 @@ class StubBindingReview(unittest.TestCase):
             inventory.render()
 
 
+class BoundedModuleShards(unittest.TestCase):
+    def test_complete_records_order_and_unicode_bytes_survive_partition(self):
+        rows = [dict(module='é' * 12, index=n) for n in range(7)]
+        one = json.dumps(rows[0], sort_keys=True, ensure_ascii=False) + '\n'
+        limit = 2 * len(one.encode()) - 1
+        chunks = inventory.partition_jsonl(rows, limit)
+        self.assertGreater(len(chunks), 1)
+        self.assertTrue(all(len(chunk.encode()) <= limit for chunk in chunks))
+        actual = [json.loads(line) for chunk in chunks for line in chunk.splitlines()]
+        self.assertEqual(actual, rows)
+        self.assertEqual(chunks, inventory.partition_jsonl(rows, limit))
+
+    def test_oversized_individual_record_and_invalid_budget_fail_loudly(self):
+        with self.assertRaisesRegex(ValueError, 'One inventory record'):
+            inventory.partition_jsonl([dict(module='large' * 20)], 20)
+        with self.assertRaisesRegex(ValueError, 'positive'):
+            inventory.partition_jsonl([], 0)
+        self.assertEqual(inventory.partition_jsonl([], 10), [''])
+
+    def test_real_module_manifest_covers_each_record_once_with_verified_bytes(self):
+        import hashlib
+        outputs = inventory.render()
+        summary = json.loads(outputs['summary.json'])
+        modules = []
+        for shard in summary['module_shards']:
+            content = outputs[shard['path']]
+            self.assertLessEqual(len(content.encode()), 2 * 1024 * 1024)
+            self.assertEqual(hashlib.sha256(content.encode()).hexdigest(), shard['sha256'])
+            rows = [json.loads(line) for line in content.splitlines()]
+            self.assertEqual(len(rows), shard['records'])
+            modules.extend(row['module'] for row in rows)
+        self.assertEqual(len(modules), summary['modules'])
+        self.assertEqual(len(modules), len(set(modules)))
+        self.assertEqual(modules, sorted(modules))
+
+
 if __name__ == '__main__':
     unittest.main()

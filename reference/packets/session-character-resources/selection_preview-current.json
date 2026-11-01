@@ -1,0 +1,29 @@
+{
+  "passed": true,
+  "values_match": true,
+  "cases": 1608,
+  "tested": 1608,
+  "mismatches": 0,
+  "fp_flag_mismatches": 0,
+  "first_mismatches": [],
+  "seed": 512840,
+  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
+  "source_ranges": {
+    "0x512550-0x51259c": "1b39be715c58b893ccb53e0ff927531c6a4785740c4e3af74207a5b1d9118412",
+    "0x512640-0x512910": "0bfb09ea166cfb12c5bac461c44e66481c7858ba925dd313c62893100ca65fd0",
+    "0x512a70-0x512c3d": "b746432f1fd0a01c056cd9d00eb9abd2772a00c2b1e718c4072bbb1a7898452a"
+  },
+  "native_sources": {
+    "src/game/selection_preview.hpp": "ad4d73085da51679bde74aa6206145165f5584b8d454feeb8d5efe2aabbc6c0b",
+    "src/game/selection_preview.cpp": "9d74427c8233549dc9aeedd2bb29f24922d88ca916b241ffb4827bf612d81960",
+    "src/game/selection_preview_textures.cpp": "4e19679f3a49301c4796787eafc611d98036370902459fd312faf9932336ce7f",
+    "tests/probes/native_selection_preview_probe.cpp": "ef6c6e2f505058720b4571acdc572a0e6ea7c4696edba9c3e6580c320f8ece22"
+  },
+  "native_library_sha256": "03dbe4b2d6a28efc977ac8a881a99f446e5b3c912e9bbe5808314a35c97226d9",
+  "limits": [
+    "Factory/task allocation, palette2, actual camera/player callbacks, PVM loaders, FOV calculation and event animation are ordered lower service receipts; no player rendering or native CharacterSelect completion claim.",
+    "Full original upper entries execute, including inline512550 texture-count behavior and512a70 release-count behavior. Every native actor/camera must bind its actual callback or fail explicitly; fixture tasks are only oracle-owned objects.",
+    "All seven actor pose stores, old/new task fields, canonical task publication, signed warmup byte, source texture counter wrap, actor/camera absence and allocation-failure prefixes are compared.",
+    "FP status-only differences stay partial; no flags masked from report. Producer-selected indices0..6 are compared; a native out-of-range selected index is a tagged boundary."
+  ]
+}

@@ -9,8 +9,8 @@ namespace sadx::native {
 struct TitleScene::PreviewServices final : selection_preview::Calls {
     explicit PreviewServices(TitleScene &owner) : scene(owner) {
         for (std::size_t character = 0; character < lists.size(); ++character) {
-            const auto &archives = scene.session_.texture_assets_[character];
-            auto &textures = scene.session_.character_textures_[character];
+            const auto &archives = scene.session_.character_resources_.assets()[character];
+            auto &textures = scene.session_.character_resources_.lists()[character];
             if (archives.size() != textures.size())
                 throw flow::UnrecoveredGameFlowCall("native_character_texture_declarations");
             for (std::size_t index = 0; index < archives.size(); ++index)
@@ -34,7 +34,7 @@ struct TitleScene::PreviewServices final : selection_preview::Calls {
                 scene.session_.bootstrap_.menu.player_character, scene.display_.saved_fov()};
     }
     selection_preview::TextureView textures() {
-        return {list_views, scene.session_.character_textures_loaded_};
+        return {list_views, scene.session_.character_resources_.loaded()};
     }
     TaskScheduler &scheduler() { return scene.session_.logo_.task_scheduler(); }
     TaskHandle create_preview_task(std::uint32_t flags, std::int32_t level) override {
@@ -191,14 +191,14 @@ void TitleScene::exec_selection_gamma(TaskScheduler &scheduler, const TaskHandle
     scene.register_callback(display_selection_gamma);
     scene.register_callback(destroy_selection_gamma);
     scene.register_callback(initialize_player_auxiliary);
-    CharacterTextureViews texture_views(scene.session_.texture_assets_,
-                                         scene.session_.character_textures_);
+    CharacterTextureViews texture_views(scene.session_.character_resources_.assets(),
+                                         scene.session_.character_resources_.lists());
     auto texture_services = scene.session_.regular_texture_services();
     gamma_selection::Context context{scene.session_.players_, scheduler,
         scene.session_.bootstrap_, scene.display_, task,
         scene.session_.stage_, scene.session_.act_,
         display_selection_gamma, destroy_selection_gamma, initialize_player_auxiliary,
-        texture_views.catalog(scene.session_.character_textures_loaded_),
+        texture_views.catalog(scene.session_.character_resources_.loaded()),
         scene.session_.regular_resources_.state(), &texture_services};
     gamma_selection::run(context, task);
 }

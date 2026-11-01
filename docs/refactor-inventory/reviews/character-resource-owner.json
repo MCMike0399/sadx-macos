@@ -1,0 +1,309 @@
+{
+  "schema_version": 1,
+  "review_base": "3de2a1d",
+  "review": "22ffde5",
+  "files": {
+    "src/runtime/native_character_resources.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Explicit complete native owner module review with current source/consumer/qualification evidence.",
+      "reviewed_source_sha256": "f5f2436b8419b15b39d029babbb9a2e54095e01db23f1ff8ae6071b374fe1bac",
+      "semantic_justification": "Complete native character declaration/list/count owner and exact binding body reviewed. Metadata copy remains at original member initialization; list allocation/binding remains at original Session body point after later members exist, before profile writes. Internal alias storage has fixed identity; methods borrow actual source metadata/lists and9 signed loaded bytes. No fixture availability, executable access, register transport, dispatch or new readiness cache.",
+      "resolved_owners": [
+        {
+          "resolution": "Exactly five former contiguous Session fields: copied metadata, nine actual list vectors, cleanup pointer vectors and their published bindings, signed loaded values. No GPU/actor/player/regular/menu ownership included. Copy/move disabled; lists/strings outlive temporary descriptors under existing Session lifetime contract.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_character_resources.hpp",
+              "sha256": "f5f2436b8419b15b39d029babbb9a2e54095e01db23f1ff8ae6071b374fe1bac"
+            },
+            {
+              "path": "src/runtime/native_character_resources.cpp",
+              "sha256": "63cd4b447cbd29773eed17a6e74db7d4b5eed4df29538fb21fae51548283b070"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Actual Session constructor, telemetry and cleanup borrowers, PreviewServices lists/loaded view and Gamma invocation-local CharacterTextureViews carry this owner. Temporary views stay local; no copied list/count owner or cached descriptor pointers. Callback-mutated cleanup counts remain live.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "847a6c56ebe9ad8e549e43a2d5a62e931210b6c841172bda90fb3b70f388afe2"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "0276e3c085a35526c97f243131389e1d549c2e546a01560bc27b0f2f68c01d49"
+            },
+            {
+              "path": "src/runtime/native_selection_preview.cpp",
+              "sha256": "7e87d4ce716df319922ff55b59a0710acd9334cd910fdbad990e1dcea46cbe52"
+            },
+            {
+              "path": "src/runtime/character_texture_assets.hpp",
+              "sha256": "022fcad5f88cb49c9c5030dd9196be79a9d019cd75da3a8a44c2ff950b4b76d6"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent complete new-owner review22ffde5 approves.25 source-bound observations,6 compiled faults inclconstructor timing, corrected native archive/force-load closure and3actual native menu/save journeys pass. Fresh lower character5297/preview1608/cleanup2604 exact; Gamma1422 has498 FP partials, all individual partial IDs/full before-current outputs preserved. Post-review4096 character holdout and fresh preview cohort exact.",
+          "evidence": [
+            {
+              "path": "reference/packets/session-character-resources/REVIEW-style12-3de2a1d.md",
+              "sha256": "630b56932e87227db59c6d7e3fd49b6ab15c9e9bcbdc315600e1fb6dbf055af3"
+            },
+            {
+              "path": "reference/packets/session-character-resources/SUMMARY.json",
+              "sha256": "91f95914204987bf4ab0a764077c55ffaba5b80a18194d3ba373d0ad29704f2f"
+            },
+            {
+              "path": "reference/packets/session-character-resources/post-review-cohorts.json",
+              "sha256": "33f3a0807547bbf0e19b1cab6be876d6dfd127ca7a659fc7d39009d3bb525334"
+            },
+            {
+              "path": "reference/packets/session-character-resources/gamma-consumer-identities.json",
+              "sha256": "b3e2158946c76237cbcef7918fb4e540653f7920919b347f5ee77792bb122268"
+            },
+            {
+              "path": "reference/packets/session-character-resources/native-journeys.json",
+              "sha256": "b0c0e6b7097bd1e29a6f51f9aa0c561faf23508a397503a50cf38938f5c6827c"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Source-bound native constructor baseline is not Windows constructor equivalence.",
+        "Initial full consumer compile failed on overlapping identifier substitution; corrected before qualification. Native baseline/checker/shared substitution initially missed it; identifier boundaries and source hashes now checked.",
+        "Gamma498 FP cases remain partial; no actor/rendering/N3b/gameplay or hardware FP qualification.",
+        "Root composite integration/current gate remains pending; whole character/regular/GPU/Session/campaign migration stays open."
+      ],
+      "evidence": [
+        {
+          "path": "src/runtime/native_character_resources.hpp",
+          "sha256": "f5f2436b8419b15b39d029babbb9a2e54095e01db23f1ff8ae6071b374fe1bac"
+        },
+        {
+          "path": "src/runtime/native_character_resources.cpp",
+          "sha256": "63cd4b447cbd29773eed17a6e74db7d4b5eed4df29538fb21fae51548283b070"
+        },
+        {
+          "path": "reference/packets/session-character-resources/REVIEW-style12-3de2a1d.md",
+          "sha256": "630b56932e87227db59c6d7e3fd49b6ab15c9e9bcbdc315600e1fb6dbf055af3"
+        },
+        {
+          "path": "reference/packets/session-character-resources/SUMMARY.json",
+          "sha256": "91f95914204987bf4ab0a764077c55ffaba5b80a18194d3ba373d0ad29704f2f"
+        },
+        {
+          "path": "reference/packets/session-character-resources/post-review-cohorts.json",
+          "sha256": "33f3a0807547bbf0e19b1cab6be876d6dfd127ca7a659fc7d39009d3bb525334"
+        }
+      ]
+    },
+    "src/runtime/native_character_resources.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Explicit complete native owner module review with current source/consumer/qualification evidence.",
+      "reviewed_source_sha256": "63cd4b447cbd29773eed17a6e74db7d4b5eed4df29538fb21fae51548283b070",
+      "semantic_justification": "Complete native character declaration/list/count owner and exact binding body reviewed. Metadata copy remains at original member initialization; list allocation/binding remains at original Session body point after later members exist, before profile writes. Internal alias storage has fixed identity; methods borrow actual source metadata/lists and9 signed loaded bytes. No fixture availability, executable access, register transport, dispatch or new readiness cache.",
+      "resolved_owners": [
+        {
+          "resolution": "Exactly five former contiguous Session fields: copied metadata, nine actual list vectors, cleanup pointer vectors and their published bindings, signed loaded values. No GPU/actor/player/regular/menu ownership included. Copy/move disabled; lists/strings outlive temporary descriptors under existing Session lifetime contract.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_character_resources.hpp",
+              "sha256": "f5f2436b8419b15b39d029babbb9a2e54095e01db23f1ff8ae6071b374fe1bac"
+            },
+            {
+              "path": "src/runtime/native_character_resources.cpp",
+              "sha256": "63cd4b447cbd29773eed17a6e74db7d4b5eed4df29538fb21fae51548283b070"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Actual Session constructor, telemetry and cleanup borrowers, PreviewServices lists/loaded view and Gamma invocation-local CharacterTextureViews carry this owner. Temporary views stay local; no copied list/count owner or cached descriptor pointers. Callback-mutated cleanup counts remain live.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "847a6c56ebe9ad8e549e43a2d5a62e931210b6c841172bda90fb3b70f388afe2"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "0276e3c085a35526c97f243131389e1d549c2e546a01560bc27b0f2f68c01d49"
+            },
+            {
+              "path": "src/runtime/native_selection_preview.cpp",
+              "sha256": "7e87d4ce716df319922ff55b59a0710acd9334cd910fdbad990e1dcea46cbe52"
+            },
+            {
+              "path": "src/runtime/character_texture_assets.hpp",
+              "sha256": "022fcad5f88cb49c9c5030dd9196be79a9d019cd75da3a8a44c2ff950b4b76d6"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent complete new-owner review22ffde5 approves.25 source-bound observations,6 compiled faults inclconstructor timing, corrected native archive/force-load closure and3actual native menu/save journeys pass. Fresh lower character5297/preview1608/cleanup2604 exact; Gamma1422 has498 FP partials, all individual partial IDs/full before-current outputs preserved. Post-review4096 character holdout and fresh preview cohort exact.",
+          "evidence": [
+            {
+              "path": "reference/packets/session-character-resources/REVIEW-style12-3de2a1d.md",
+              "sha256": "630b56932e87227db59c6d7e3fd49b6ab15c9e9bcbdc315600e1fb6dbf055af3"
+            },
+            {
+              "path": "reference/packets/session-character-resources/SUMMARY.json",
+              "sha256": "91f95914204987bf4ab0a764077c55ffaba5b80a18194d3ba373d0ad29704f2f"
+            },
+            {
+              "path": "reference/packets/session-character-resources/post-review-cohorts.json",
+              "sha256": "33f3a0807547bbf0e19b1cab6be876d6dfd127ca7a659fc7d39009d3bb525334"
+            },
+            {
+              "path": "reference/packets/session-character-resources/gamma-consumer-identities.json",
+              "sha256": "b3e2158946c76237cbcef7918fb4e540653f7920919b347f5ee77792bb122268"
+            },
+            {
+              "path": "reference/packets/session-character-resources/native-journeys.json",
+              "sha256": "b0c0e6b7097bd1e29a6f51f9aa0c561faf23508a397503a50cf38938f5c6827c"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Source-bound native constructor baseline is not Windows constructor equivalence.",
+        "Initial full consumer compile failed on overlapping identifier substitution; corrected before qualification. Native baseline/checker/shared substitution initially missed it; identifier boundaries and source hashes now checked.",
+        "Gamma498 FP cases remain partial; no actor/rendering/N3b/gameplay or hardware FP qualification.",
+        "Root composite integration/current gate remains pending; whole character/regular/GPU/Session/campaign migration stays open."
+      ],
+      "evidence": [
+        {
+          "path": "src/runtime/native_character_resources.hpp",
+          "sha256": "f5f2436b8419b15b39d029babbb9a2e54095e01db23f1ff8ae6071b374fe1bac"
+        },
+        {
+          "path": "src/runtime/native_character_resources.cpp",
+          "sha256": "63cd4b447cbd29773eed17a6e74db7d4b5eed4df29538fb21fae51548283b070"
+        },
+        {
+          "path": "reference/packets/session-character-resources/REVIEW-style12-3de2a1d.md",
+          "sha256": "630b56932e87227db59c6d7e3fd49b6ab15c9e9bcbdc315600e1fb6dbf055af3"
+        },
+        {
+          "path": "reference/packets/session-character-resources/SUMMARY.json",
+          "sha256": "91f95914204987bf4ab0a764077c55ffaba5b80a18194d3ba373d0ad29704f2f"
+        },
+        {
+          "path": "reference/packets/session-character-resources/post-review-cohorts.json",
+          "sha256": "33f3a0807547bbf0e19b1cab6be876d6dfd127ca7a659fc7d39009d3bb525334"
+        }
+      ]
+    }
+  },
+  "modules": {
+    "src/runtime/native_character_resources": {
+      "disposition": "already_conforming",
+      "reason": "Complete two-file new CharacterResources owner independently approved within bounded native storage/binding scope.",
+      "reviewed_members": {
+        "src/runtime/native_character_resources.hpp": "f5f2436b8419b15b39d029babbb9a2e54095e01db23f1ff8ae6071b374fe1bac",
+        "src/runtime/native_character_resources.cpp": "63cd4b447cbd29773eed17a6e74db7d4b5eed4df29538fb21fae51548283b070"
+      },
+      "semantic_justification": "Complete native character declaration/list/count owner and exact binding body reviewed. Metadata copy remains at original member initialization; list allocation/binding remains at original Session body point after later members exist, before profile writes. Internal alias storage has fixed identity; methods borrow actual source metadata/lists and9 signed loaded bytes. No fixture availability, executable access, register transport, dispatch or new readiness cache.",
+      "resolved_owners": [
+        {
+          "resolution": "Exactly five former contiguous Session fields: copied metadata, nine actual list vectors, cleanup pointer vectors and their published bindings, signed loaded values. No GPU/actor/player/regular/menu ownership included. Copy/move disabled; lists/strings outlive temporary descriptors under existing Session lifetime contract.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_character_resources.hpp",
+              "sha256": "f5f2436b8419b15b39d029babbb9a2e54095e01db23f1ff8ae6071b374fe1bac"
+            },
+            {
+              "path": "src/runtime/native_character_resources.cpp",
+              "sha256": "63cd4b447cbd29773eed17a6e74db7d4b5eed4df29538fb21fae51548283b070"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Actual Session constructor, telemetry and cleanup borrowers, PreviewServices lists/loaded view and Gamma invocation-local CharacterTextureViews carry this owner. Temporary views stay local; no copied list/count owner or cached descriptor pointers. Callback-mutated cleanup counts remain live.",
+          "evidence": [
+            {
+              "path": "src/runtime/native_session.hpp",
+              "sha256": "847a6c56ebe9ad8e549e43a2d5a62e931210b6c841172bda90fb3b70f388afe2"
+            },
+            {
+              "path": "src/runtime/native_session.cpp",
+              "sha256": "0276e3c085a35526c97f243131389e1d549c2e546a01560bc27b0f2f68c01d49"
+            },
+            {
+              "path": "src/runtime/native_selection_preview.cpp",
+              "sha256": "7e87d4ce716df319922ff55b59a0710acd9334cd910fdbad990e1dcea46cbe52"
+            },
+            {
+              "path": "src/runtime/character_texture_assets.hpp",
+              "sha256": "022fcad5f88cb49c9c5030dd9196be79a9d019cd75da3a8a44c2ff950b4b76d6"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent complete new-owner review22ffde5 approves.25 source-bound observations,6 compiled faults inclconstructor timing, corrected native archive/force-load closure and3actual native menu/save journeys pass. Fresh lower character5297/preview1608/cleanup2604 exact; Gamma1422 has498 FP partials, all individual partial IDs/full before-current outputs preserved. Post-review4096 character holdout and fresh preview cohort exact.",
+          "evidence": [
+            {
+              "path": "reference/packets/session-character-resources/REVIEW-style12-3de2a1d.md",
+              "sha256": "630b56932e87227db59c6d7e3fd49b6ab15c9e9bcbdc315600e1fb6dbf055af3"
+            },
+            {
+              "path": "reference/packets/session-character-resources/SUMMARY.json",
+              "sha256": "91f95914204987bf4ab0a764077c55ffaba5b80a18194d3ba373d0ad29704f2f"
+            },
+            {
+              "path": "reference/packets/session-character-resources/post-review-cohorts.json",
+              "sha256": "33f3a0807547bbf0e19b1cab6be876d6dfd127ca7a659fc7d39009d3bb525334"
+            },
+            {
+              "path": "reference/packets/session-character-resources/gamma-consumer-identities.json",
+              "sha256": "b3e2158946c76237cbcef7918fb4e540653f7920919b347f5ee77792bb122268"
+            },
+            {
+              "path": "reference/packets/session-character-resources/native-journeys.json",
+              "sha256": "b0c0e6b7097bd1e29a6f51f9aa0c561faf23508a397503a50cf38938f5c6827c"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Source-bound native constructor baseline is not Windows constructor equivalence.",
+        "Initial full consumer compile failed on overlapping identifier substitution; corrected before qualification. Native baseline/checker/shared substitution initially missed it; identifier boundaries and source hashes now checked.",
+        "Gamma498 FP cases remain partial; no actor/rendering/N3b/gameplay or hardware FP qualification.",
+        "Root composite integration/current gate remains pending; whole character/regular/GPU/Session/campaign migration stays open."
+      ],
+      "evidence": [
+        {
+          "path": "src/runtime/native_character_resources.hpp",
+          "sha256": "f5f2436b8419b15b39d029babbb9a2e54095e01db23f1ff8ae6071b374fe1bac"
+        },
+        {
+          "path": "src/runtime/native_character_resources.cpp",
+          "sha256": "63cd4b447cbd29773eed17a6e74db7d4b5eed4df29538fb21fae51548283b070"
+        },
+        {
+          "path": "reference/packets/session-character-resources/REVIEW-style12-3de2a1d.md",
+          "sha256": "630b56932e87227db59c6d7e3fd49b6ab15c9e9bcbdc315600e1fb6dbf055af3"
+        },
+        {
+          "path": "reference/packets/session-character-resources/SUMMARY.json",
+          "sha256": "91f95914204987bf4ab0a764077c55ffaba5b80a18194d3ba373d0ad29704f2f"
+        },
+        {
+          "path": "reference/packets/session-character-resources/post-review-cohorts.json",
+          "sha256": "33f3a0807547bbf0e19b1cab6be876d6dfd127ca7a659fc7d39009d3bb525334"
+        }
+      ]
+    }
+  }
+}

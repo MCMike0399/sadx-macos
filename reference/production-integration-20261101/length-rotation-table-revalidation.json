@@ -1,0 +1,20 @@
+{
+  "immutable_predecessor": "3efc9b7",
+  "source_commit": "b5b5447",
+  "declarations": [
+    "src/player/player_rotation.hpp::float_addresses",
+    "src/player/player_rotation.hpp::double_addresses"
+  ],
+  "constant_accessors_identical": {
+    "float PlayerRotationConstants::single(": "e099f1e698e33caf2389233f8cff21f96c99d945c9523c21d5fc4ab500f059a2",
+    "double PlayerRotationConstants::wide(": "d4b454cab013278fe8163ead6f95e2622f4e6df8117b8ebb8e54d58a9303f266"
+  },
+  "before_cpp_sha256": "87e7f62da064257f47af017e596c3c61078a1c65ca05828d8d6c73903c835cbe",
+  "after_cpp_sha256": "fd2660121807b6fbda597a3d5e852087e35cdf5a76ad36724af13393984aa133",
+  "classification": "open_migration",
+  "reason": "Only shared length delegation/include changed elsewhere; exact binary32/binary64 address-key accessors and table declarations remain unchanged. Address-key coefficient API remains migration debt.",
+  "limits": [
+    "No exemption/debt retirement or whole player module approval.",
+    "Final combined source/gate qualification remains pending."
+  ]
+}

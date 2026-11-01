@@ -1,7 +1,7 @@
 {
   "base_commit": "f6c4e538af463a2eaf4c1fe961f04e8443d51878",
   "baseline_removed_paths": [],
-  "boundary_entries": 2229,
+  "boundary_entries": 2256,
   "checks_not_run": [
     "builds",
     "gate",
@@ -12,36 +12,48 @@
   ],
   "coverage": "exact tracked path equality; no semantic completeness or behavior verdict",
   "dispositions": {
-    "already_conforming": 28,
-    "needs_migration": 17,
-    "open_review": 1591,
+    "already_conforming": 41,
+    "needs_migration": 18,
+    "open_review": 1589,
     "reference_infrastructure": 7
   },
-  "maintained_and_script_entries": 1643,
+  "maintained_and_script_entries": 1655,
   "module_dispositions": {
-    "already_conforming": 12,
-    "needs_migration": 2,
-    "open_review": 1032
+    "already_conforming": 24,
+    "needs_migration": 3,
+    "open_review": 1026
   },
-  "modules": 1046,
+  "module_shards": [
+    {
+      "path": "modules.jsonl",
+      "records": 1043,
+      "sha256": "7e194c36c994247368373d8b9c56dba25ed292fd372ac409b5e097077c9d1573"
+    },
+    {
+      "path": "modules-002.jsonl",
+      "records": 10,
+      "sha256": "80fc6ca8e793940a0f1877469cbe82670329b65a56bf60880bb47e76fac86383"
+    }
+  ],
+  "modules": 1053,
   "native_translation_units_listed": 128,
-  "native_translation_units_not_listed": 184,
+  "native_translation_units_not_listed": 186,
   "other_stub_mentions": 11,
   "production_recipe_membership": {
     "native_platform_object": 10,
     "native_source_list": 128,
-    "native_source_wildcard": 24,
-    "not_a_production_translation_unit": 333,
-    "not_in_observed_production_recipes": 149,
+    "native_source_wildcard": 25,
+    "not_a_production_translation_unit": 336,
+    "not_in_observed_production_recipes": 150,
     "production_entrypoint": 1
   },
   "reviewed_stub_bindings": 2,
   "roots": {
-    "reference": 2127,
-    "src": 645,
-    "tests": 585,
+    "reference": 2154,
+    "src": 650,
+    "tests": 589,
     "third_party": 155,
-    "tools": 360
+    "tools": 363
   },
   "schema_version": 1,
   "stub_annotations": 84,
@@ -49,19 +61,19 @@
     "asset-boundaries": 19,
     "game-flow-ui": 107,
     "input-frame-profile": 35,
-    "native-composition": 31,
+    "native-composition": 33,
     "numeric-foundations": 35,
     "platform-app": 60,
     "player-animation-actors": 22,
     "player-common": 102,
-    "reference-runtime": 51,
+    "reference-runtime": 53,
     "render-math-device": 63,
     "render-queue-draw": 39,
     "save-profile": 26,
-    "sound-movie": 26,
+    "sound-movie": 27,
     "task-ownership": 6,
     "texture-lifetime": 23,
-    "tooling-judges": 998
+    "tooling-judges": 1005
   },
-  "tracked_scope": 3872
+  "tracked_scope": 3911
 }

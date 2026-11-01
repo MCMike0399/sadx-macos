@@ -1,0 +1,44 @@
+{
+  "base": "92dbd07",
+  "scope": "Five contiguous native character resource fields only; planning context before source edits.",
+  "members": [
+    "texture_assets_",
+    "character_textures_",
+    "character_texture_lists_",
+    "character_texture_bindings_",
+    "character_textures_loaded_"
+  ],
+  "evidence": [
+    {
+      "path": "src/runtime/native_session.hpp",
+      "sha256": "adf4a698b7cae66aea0b774b0be25ae87e03a8d1e4bf9463122be7d7317934bd"
+    },
+    {
+      "path": "src/runtime/native_session.cpp",
+      "sha256": "e4779eec8361d9dee5b3e2b7c62c834c18516ca059813dccb2c0902610cf8a3f"
+    },
+    {
+      "path": "src/runtime/native_selection_preview.cpp",
+      "sha256": "b69b072b615a5c9a7c3b5c8979c6b49ba2b50fdfebfd19d047a7939314f31ded"
+    },
+    {
+      "path": "src/runtime/character_texture_assets.hpp",
+      "sha256": "022fcad5f88cb49c9c5030dd9196be79a9d019cd75da3a8a44c2ff950b4b76d6"
+    },
+    {
+      "path": "src/game/character_textures.hpp",
+      "sha256": "f8bae2e68f5d8570ff3c071db8a5f86a114821dd426505cd834650c8c6ece9f0"
+    },
+    {
+      "path": "src/game/game_cleanup.cpp",
+      "sha256": "024c23e264893b083234cd4acd187a9f08496a9aae650f21a446740cb8f46b9b"
+    }
+  ],
+  "source_edits": false,
+  "tests_run": false,
+  "critical_boundary": "Copy metadata at original member-initialization point; bind texture lists at original Session constructor-body point, after later Session members exist and before frame-rate setting.",
+  "limits": [
+    "No new conformance, source migration or behavior verdict.",
+    "No replacement of temporary preview/Gamma descriptor views with cached pointers."
+  ]
+}
