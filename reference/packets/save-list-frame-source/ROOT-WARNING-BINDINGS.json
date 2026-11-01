@@ -1,0 +1,43 @@
+{
+  "updates": [
+    {
+      "path": "src/runtime/native_session.hpp",
+      "before": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086",
+      "after": "1c5a4dba5a5bffe1c476ed60feadb3802f838a9c1af73a512cae922b4fb91071"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "before": "b2192da9fc1a860b432d09030beaf120a810d5442a2188b0c3b8e44b87d82ad8",
+      "after": "851c57d3644c27e659c64561bed508d76a0e47a6c059719a62aa64335e28e81c"
+    },
+    {
+      "path": "tests/probes/native_save_creation_probe.cpp",
+      "before": "7b97306fb3d911a3b675906b498b54f40e5319e7bece3c290d010bb525760f92",
+      "after": "d53eeb293bfcfe19265099f48cc08bf3e629c8716f300e52968b578e1181cf6e"
+    },
+    {
+      "path": "src/runtime/native_session.hpp",
+      "before": "af66e13f67449ebb3bf824ba2d58415b52d0e3ff0219aeaf8eba043d3612b086",
+      "after": "1c5a4dba5a5bffe1c476ed60feadb3802f838a9c1af73a512cae922b4fb91071"
+    },
+    {
+      "path": "src/runtime/native_title_tasks.cpp",
+      "before": "b2192da9fc1a860b432d09030beaf120a810d5442a2188b0c3b8e44b87d82ad8",
+      "after": "851c57d3644c27e659c64561bed508d76a0e47a6c059719a62aa64335e28e81c"
+    },
+    {
+      "path": "tests/probes/native_save_creation_probe.cpp",
+      "before": "7b97306fb3d911a3b675906b498b54f40e5319e7bece3c290d010bb525760f92",
+      "after": "d53eeb293bfcfe19265099f48cc08bf3e629c8716f300e52968b578e1181cf6e"
+    }
+  ],
+  "warning_owner_declaration_unchanged": true,
+  "create_close_explicit_failure_bodies_unchanged": true,
+  "probe_only_list_api_rebind": true,
+  "behavior_status_unchanged": "unrecovered_open_debt",
+  "scope": "Revalidate exact binding fingerprints after save-list representation/borrower changes; no recovered warning behavior, fixture authority or conformance added.",
+  "evidence": [
+    "reference/packets/save-list-frame-source/REVIEW-SPEC.md",
+    "reference/packets/save-list-frame-source/RESERVED-RESULT.json"
+  ]
+}
