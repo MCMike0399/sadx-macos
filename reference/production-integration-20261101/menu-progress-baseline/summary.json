@@ -1,0 +1,88 @@
+{
+  "baseline_commit": "fdb1595a30027c8253b9af28a097ce2112dc1fdf",
+  "source_sha256": {
+    "src/game/menu_eligibility.hpp": "5d6a4dabe9c734ac43e80ff70e961f298535d00e4ee3c66cf903ae7e3dd0a72d",
+    "src/game/menu_eligibility.cpp": "cf76022d0d362fcefed25327173331282b6fe705d035f1eeff14eafc1e2a9e14",
+    "src/game/main_menu_eligibility.hpp": "bf32a383a2ec665138c6cd6e508770e050d72133031eb7798d33ea9c6689ebcc",
+    "src/game/main_menu_eligibility.cpp": "5ca7c0e54a3e2d9bd6459188daa2b49af3a3a1089a0a4e6a3bc3ba4da5faee76",
+    "src/game/character_select_menu.cpp": "0f5f20783f0ce8ad777299b70125d06e06c0bb68805229dfaf2edc73fb20a043",
+    "src/game/save_data.hpp": "6eb46f3df135b1ec73fb9979ba7e3a8188524994c67ea66b59345c23326cd61e",
+    "src/game/game_bootstrap.hpp": "df46f4e508378f30f3c6699fec50f38efe90bc5fe0dbeacf0bbbf672484925b4",
+    "src/game/title_menu.hpp": "a79d43f9485408f0aa21de76cd16527b98e4b128ec2af1d8694fe7fb17827a45",
+    "src/game/title_menu.cpp": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d",
+    "src/game/game_cleanup.hpp": "4270bb3d55e7f3ab79ddfedf187c7a0c07672360f1ef43e49ac68ab3c9fa5270",
+    "src/game/game_cleanup.cpp": "b03a1bb62b391f331f929a4f544ae2846f70b1c34af1018956ba9396d8a54649",
+    "src/game/save_creation.hpp": "ff1e36e1fd7a5e98feb980b22a0268ed342ef22a12c2ed56e0fc04be9641b0b1",
+    "src/game/save_creation.cpp": "f226be20c3de073d112cae2b31b20105843accc668388398afaabf07f65c1c1d"
+  },
+  "unchanged_judges": {
+    "tools/oracles/verify_original_menu_eligibility.py": "a6020665dfefa905413b31b2f6396e42f2458e92e8649888f5f1d745a58a5a78",
+    "tools/oracles/verify_original_main_menu_eligibility.py": "ad4841c1b47eaac11d364116c98b1965422e29499153985a9e318221913bed0f",
+    "tools/oracles/verify_original_character_select_menu.py": "fb000d6309d53dee9272b5ad9eabee511351fa555f1df21b8e515105bbfcd15a",
+    "tools/oracles/verify_original_character_select_availability.py": "25c9a3e6ddb678805b99d90fe415fc835f20fa4187ef1e99016ceb56e6e06d3c",
+    "tools/oracles/verify_original_title_menu.py": "ca169101fd8dfc137d82b31258abfc0bd30a412540da9e3dc19852b45e8cd1a0",
+    "tools/oracles/verify_original_game_cleanup.py": "c9b17c3bce08a3ea5ab6b4514329b7d03a606b2a7784f860e5bde70e1c29f174",
+    "tools/oracles/verify_original_save_creation.py": "52b7c4f6ea2b2b05992f2583363fec85428bfdf3c2a1bb3d1339d214aa496431"
+  },
+  "reports": {
+    "save_creation.json": {
+      "sha256": "f396d4cf37c73a984931442be82c465be83e825e11944013868da74730799680",
+      "cases": 1000,
+      "passed": true,
+      "values_match": true
+    },
+    "game_cleanup.json": {
+      "sha256": "ae853b34cf6e6c3342fce6f609b38a561f815be49b1d50b53608c90bbac08dd1",
+      "cases": 2604,
+      "passed": null,
+      "values_match": null
+    },
+    "main_menu_eligibility.json": {
+      "sha256": "d00a18c75bdc60a89aa2eee7453c4196f98a772677833ec24d221293ba1e93e8",
+      "cases": 11488,
+      "passed": true,
+      "values_match": true
+    },
+    "character_select_availability.json": {
+      "sha256": "25f7a8f1760cb6fad656ba54ab5f25b9d4594aaa6dd1f9d36d9ad9b9896540a8",
+      "cases": 2920,
+      "passed": true,
+      "values_match": true
+    },
+    "title_menu.json": {
+      "sha256": "5687258fc9bac8e75f4be73f9f374fde6b08d91efaa6bfe12605c1a384b4f2b2",
+      "cases": 20872,
+      "passed": false,
+      "values_match": true
+    },
+    "menu_eligibility.json": {
+      "sha256": "889d958549690886828b5cbe6320f2fad61cba78bdaf36fd23b13472fd5b05f7",
+      "cases": 7388,
+      "passed": true,
+      "values_match": true
+    },
+    "character_select_identity.json": {
+      "sha256": "e8bc093ba1924491bd470bbe76de77b0ac120ab19951d8e0cdbdfca0f1a189d6",
+      "cases": 3326,
+      "passed": null,
+      "values_match": null
+    },
+    "title_identity.json": {
+      "sha256": "0c7b760b6df69445c1fcb1e587d0c32cbbb63401b818218fa4eebc29ef63e221",
+      "cases": 20872,
+      "passed": null,
+      "values_match": null
+    },
+    "character_select_menu.json": {
+      "sha256": "2e00384234e2775eb9aa81e3a7544080d48ed9da969e51c8e8223f52cc51048f",
+      "cases": 3326,
+      "passed": false,
+      "values_match": true
+    }
+  },
+  "limits": [
+    "Predicate probes rebuilt directly from unchanged packet source with normal C++17 flags. Other baseline probes borrowed existing Main builds; their library/source identities are recorded by the reports.",
+    "Character Select and title retain 733 and 270 FP partials, respectively. Full outputs and exact flag-case identities frozen before source changes. Aggregate partial verdicts are not passes.",
+    "No behavior edit, mutant, holdout, full gate, provider or storage operation in this preparation."
+  ]
+}
