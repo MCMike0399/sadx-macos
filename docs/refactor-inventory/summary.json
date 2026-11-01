@@ -1,6 +1,11 @@
 {
+  "accounted_open_entries": 1656,
+  "accounted_scope": 4055,
   "base_commit": "f6c4e538af463a2eaf4c1fe961f04e8443d51878",
-  "baseline_removed_paths": [],
+  "baseline_removed_paths": [
+    "src/player/player_animation_decode.cpp",
+    "src/player/sonic_animation_operations.hpp"
+  ],
   "boundary_entries": 2312,
   "checks_not_run": [
     "builds",
@@ -11,51 +16,72 @@
     "providers"
   ],
   "coverage": "exact tracked path equality; no semantic completeness or behavior verdict",
+  "current_open_entries": 1654,
+  "current_tracked_denominator": 4053,
   "dispositions": {
-    "already_conforming": 82,
-    "needs_migration": 34,
-    "open_review": 1567,
+    "already_conforming": 87,
+    "needs_migration": 31,
+    "open_review": 1616,
     "reference_infrastructure": 7
   },
-  "maintained_and_script_entries": 1690,
+  "historical_baseline_members": 2,
+  "historical_open_debt": 2,
+  "historical_retained_scope": 2,
+  "lineage_receipt": {
+    "freeze_commit": "38b531e556ed9191e23aecf193a75e0a049bfb9b",
+    "path": "docs/refactor-inventory/source-lineage-receipt.json",
+    "policy": {
+      "path": "docs/refactor-inventory/source-lineage-ledger.json",
+      "sha256": "7e3fdf30c953ef21356c71c279e2fad0311883f287db888ece1475fb735f176f"
+    },
+    "sha256": "f936f8d2f107023cc4db47cdc97c9a434cdb8a1fbf31053415c62974c4de6663"
+  },
+  "lineage_shards": [
+    {
+      "path": "lineage-001.jsonl",
+      "records": 2,
+      "sha256": "7b0d95acd547b356a3f7e0becc7aa0d39400c6eb0dd4083c8d6d4bc6646572ef"
+    }
+  ],
+  "maintained_and_script_entries": 1741,
   "module_dispositions": {
-    "already_conforming": 48,
-    "needs_migration": 12,
-    "open_review": 1020
+    "already_conforming": 52,
+    "needs_migration": 11,
+    "open_review": 1043
   },
   "module_shards": [
     {
       "path": "modules.jsonl",
-      "records": 760,
-      "sha256": "c690672870a2b176db283e7a9c6b2096412641f9d078ad0548e2b4fab001e16d"
+      "records": 737,
+      "sha256": "e3b96fa88df0bb409f0fed253a7ee064e50472150383aa0ccd1147d2345be878"
     },
     {
       "path": "modules-002.jsonl",
-      "records": 320,
-      "sha256": "ad08e69d45dec6ad651067af51f4023579c99b3601a541a9b6a07169268e3066"
+      "records": 369,
+      "sha256": "85e98ef06b8468f0a99cedf3177fe178f5346050c1008df88c148a4f91dbeec0"
     }
   ],
-  "modules": 1080,
-  "native_translation_units_listed": 128,
-  "native_translation_units_not_listed": 186,
+  "modules": 1106,
+  "native_translation_units_listed": 131,
+  "native_translation_units_not_listed": 185,
   "other_stub_mentions": 11,
   "production_recipe_membership": {
     "native_platform_object": 10,
-    "native_source_list": 128,
+    "native_source_list": 131,
     "native_source_wildcard": 25,
-    "not_a_production_translation_unit": 336,
-    "not_in_observed_production_recipes": 150,
+    "not_a_production_translation_unit": 344,
+    "not_in_observed_production_recipes": 149,
     "production_entrypoint": 1
   },
   "reviewed_stub_bindings": 2,
   "roots": {
     "reference": 2220,
-    "src": 650,
-    "tests": 605,
+    "src": 660,
+    "tests": 618,
     "third_party": 155,
-    "tools": 372
+    "tools": 400
   },
-  "schema_version": 1,
+  "schema_version": 3,
   "stub_annotations": 84,
   "systems": {
     "asset-boundaries": 19,
@@ -64,16 +90,16 @@
     "native-composition": 33,
     "numeric-foundations": 35,
     "platform-app": 60,
-    "player-animation-actors": 22,
-    "player-common": 102,
-    "reference-runtime": 53,
+    "player-animation-actors": 28,
+    "player-common": 104,
+    "reference-runtime": 55,
     "render-math-device": 63,
     "render-queue-draw": 39,
     "save-profile": 26,
     "sound-movie": 27,
     "task-ownership": 6,
     "texture-lifetime": 23,
-    "tooling-judges": 1040
+    "tooling-judges": 1081
   },
-  "tracked_scope": 4002
+  "tracked_scope": 4053
 }
