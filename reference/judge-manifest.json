@@ -1,12 +1,12 @@
 {
   "change": {
-    "base_commit": "34e2836749793897d9b1f3fab5820d9b3e1d3e3f",
-    "evidence": "reference/production-integration-20261101/character-math-parent-union.json",
-    "evidence_sha256": "dbd6ae30077d0232e620a463a111ccdd0b323835cbc5bac920b6f7976f4c4da5",
-    "reason": "Seal943-input reviewed parent union for character/math integration, complete consumer identities and bounded module artifacts; no expectations weakened"
+    "base_commit": "6373d724a112eb1237f7d796da61c198f1413a29",
+    "evidence": "docs/packets/executable-image/judge-registration.md",
+    "evidence_sha256": "8b8c717ef6a76a6ee5a312a237149d7996fcd3d431b5b5d19934a7aef2b946f6",
+    "reason": "Register reviewed PE image appended test rules/rows and frozen six-fault qualification; all943 inherited paths retained after exact corpus restoration"
   },
   "files": {
-    "Makefile": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
+    "Makefile": "637a6ca44490eb49e44500837fa6a6c9add6d1863950e902a1135445d2db2dad",
     "reference/address-dispatch-baseline-v1.json": "db0e83e323df714032ddad3046670d81968efe8e966630d9666ecbbe87d38bd7",
     "reference/constexpr-table-review.json": "388f02fcaa3c464ee7938e73b7fe607f490e6a1bd7196801fbba2b8ffdf5daf0",
     "reference/fp-control-census.json": "6e3c48227461edbcdc6a9c807a1596b8870178df7511981ee779c71dee09a505",
@@ -336,6 +336,7 @@
     "reference/production-integration-20261026/gamma-weld-cursors/mutants.json": "f5d1c223aaff445cd661e58b1aad3c40cb37aee7cd958c1bf0cdc9b9a945de85",
     "reference/production-integration-20261026/native-model-binding-mutants.json": "8d936da60183fd5f8ffec99fe7c9f07f5e88c1e76829d9cabc42d2c4ca6ff6a2",
     "reference/production-integration-20261026/selection-player-queries/mutants.json": "5ef23236ac47efe1e21f0c13b0394f055c3a7f9f3d45ba60a1b9fffe2d3094ca",
+    "reference/production-integration-20261101/executable-image-mutants.json": "ffe5309b0d9fe61917a38c07739d84a019100029437f5347e601bf62a3ec8546",
     "reference/production-integration-20261101/menu-progress-shared/mutants.json": "cab8745d573efa9caa6e281654ef85ce535c0d28b4e593236e921d275faed40d",
     "reference/production-integration-20261101/menu-texture-bindings-mutants.json": "b2af4ad069e8b0f32ccfb12ffb0da20d247ea0aaeefc8c9454a8349d7caa919a",
     "reference/production-integration-20261101/save-completion-mutants.json": "1b4657b0ff662bcc21255779aa675f8acc40cdb8fb55cbfef7a8b974e70e5694",
@@ -645,7 +646,7 @@
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",
     "tests/python/test_voice_publication.py": "5c00051d9b3de640f64e224dda4d810cdd7d26acafd91d7b1dc44e9786a734f3",
-    "tests/unit/manifest.tsv": "62f57dece463090098b77dc82d05e814cad423f1a7128a47796a31f88def8f7c",
+    "tests/unit/manifest.tsv": "efb6c50d3e035429ecd18460e5c814e928d9336387b839de4eb408871b280ea0",
     "tools/analysis/fp_control_census.cpp": "5d7d39f15112f884efc4348efbae5497f90d26fa8d9826a0fcef631c299745dc",
     "tools/analysis/run_fp_census.py": "a798063826aff0da2f67c552a38798ac4fd1bff2b09a01bcb7f71df25b7f5c2f",
     "tools/analysis/verify_frame_control_holdout.py": "618a9e43ea39fc81c3d7c977b6cacdf3d50b69c365957ea31f17f8c7c4bb0b25",

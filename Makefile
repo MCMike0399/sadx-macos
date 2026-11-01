@@ -490,3 +490,9 @@ build/native-gamma-weld-cursors-test: tests/unit/native_gamma_weld_cursors.mm sr
 # Same ninja_render module, independent source leaves and explicit private bridge.
 build/native-ninja-render-depth-probe.dylib: tests/probes/native_ninja_render_depth_probe.cpp tests/probes/ninja_render_depth_probe.cpp src/engine/ninja_render.cpp src/engine/ninja_render.hpp src/engine/ninja_depth_internal.hpp src/engine/ninja_blend_internal.hpp
 	$(CXX) $(CXXFLAGS) -dynamiclib $(INCLUDES) tests/probes/native_ninja_render_depth_probe.cpp src/engine/ninja_render.cpp -o $@
+
+# Bounded PE32 image contract: synthetic bytes, no guest runtime or external assets.
+build/executable-image-test: tests/unit/executable_image.cpp src/loader/executable_image.cpp src/loader/executable_image.hpp | build
+	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/executable_image.cpp src/loader/executable_image.cpp -o $@
+build/executable-image-edges-test: tests/unit/executable_image_edges.cpp src/loader/executable_image.cpp src/loader/executable_image.hpp | build
+	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/executable_image_edges.cpp src/loader/executable_image.cpp -o $@

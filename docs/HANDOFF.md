@@ -675,3 +675,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * All 943 protected inputs pass. Module evidence splits at the existing 2 MiB cap, preserving every ordered record; independent review 7371ece approves. Asset-contract review closes 11 header modules, leaves Gamma migration and selection playback review open.
 * Earlier gate attempt exited 2 on stale table evidence; immutable source/declaration/consumer revalidation fixes that evidence without exemptions. Music ownership, PE image and guest heap packets are separately reviewed privately; integration remains pending.
 * Whole renderer, player, audio, resources, Session and complete campaign remain open. No actor/GPU/N3b/story/gameplay 63 FPS or new controller qualification; no push.
+
+### 2026-11-01 — Bounded ExecutableImage packet, Root integration pending
+
+* Complete executable_image header and implementation are structured C++; final mapped relocation headers cannot consume absent entries. File, section, RVA, string, target and IAT bounds reject malformed or wrapping inputs explicitly.
+* Fresh unchanged source passed 65,630 valid checks before rewriting; the synthetic LB-1 case failed as expected because the old implementation accepted it. Candidate contract and edge suites pass, including every raw-file truncation, ASan/UBSan and six caught compiled faults.
+* Additional exact-base edge checks and the unchanged real model-DLL unit pass against base and candidate. Two registered asset-free Make targets build and run. Evidence and complete hashes are in docs/packets/executable-image/PACKET.md and SUMMARY.json.
+* Source is fc4be98; registration is a separate judge commit. The inherited 943-entry manifest remains untouched; all 53 raw corpora are absent locally and must be restored before Root seals a parent-preserving union.
+* No full gate, guest/HLE integration, journeys, delegate, Main write or push. Root fresh review, inventory reconciliation, integration and composite qualification remain pending. Other loader modules and whole campaign conformance stay open.
