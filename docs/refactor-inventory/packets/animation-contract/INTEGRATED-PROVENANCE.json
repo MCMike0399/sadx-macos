@@ -1,0 +1,14 @@
+{
+  "source_tree": "ab5067ec5160c0d153fde5c896ff9a7713a80992",
+  "result": "Provenance: {'FUNCTION': 488, 'GLOBAL': 95, 'STUB': 84, 'PATCH': 2, 'DATA': 3}, 167440 legacy/annotated byte identities, 0 errors",
+  "exit": 0,
+  "log_sha256": "134fb3234cead0947d78975261d8095cd4d398a70de5ae66098518fca1bebdd2",
+  "database_sha256": "0aaf8f8122ea502a5958327dd2f8d2894b86dc9847b997864d26668da910a0e5",
+  "symbol_override_sha256": "352c3b679454574a1cf86cf1aa14a8a4a0add74549804b0c463c30b4b9d6cd17",
+  "method": "Official generator with current integrated Source/overrides, actual pinned mod-loader and sa-tools repositories, strict Git/header/label byte checks, and a read-only local input overlay. Only the gitlink query cwd is resolved to the actual project root; no Git output or generated result is substituted.",
+  "development_setup_failure": "First overlay omitted the tracked ghidra-game-loop-seeds.tsv input and generation stopped. Added that exact Root input and reran generation/check only. Initial missing-database diagnostic remains in integrated-provenance.log.",
+  "limits": [
+    "No live analysis provider or source behavior execution.",
+    "Native integration gate and full scope receipt remain pending."
+  ]
+}
