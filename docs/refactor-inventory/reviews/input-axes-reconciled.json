@@ -1,0 +1,421 @@
+{
+  "schema_version": 1,
+  "independent_reviews": [
+    "ee6fdcc",
+    "b4cd9f6"
+  ],
+  "source_commit": "c77091c",
+  "scope": "Two complete input_mod_axes files and their exact module, not broaderinput or CPUclosure",
+  "files": {
+    "src/input/input_mod_axes.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete exact axis module is readable and behavior-preserving under independent source review and frozen source-bound comparisons.",
+      "semantic_justification": "Named decoding, signed-axis handling, ordered binary32/binary64 measurement, deadzone scaling, low16 conversion and per-stick publications retain the source arithmetic. PublicAPIs and recordlayouts are unchanged. Outputoptionals describe committedstores, not unavailablefixturefacts; seeded/aliaseddestinations and unreachedfields staylive. Caller-selectedSSEcontext preservesflags/rounding/DAZ/FTZ/unmaskedprefixes; no guesseddefault or hostfloat replacement is introduced. Numericcoefficient content ownsnoDLLmemory, puredecoder ownsnoPEaccess, helperscarryNOTSA andactualfunctionentry has source-backedINPUT provenance.",
+      "resolved_owners": [
+        {
+          "resolution": "InputModRawAxes and coefficient values are caller-owned; direction and conversion temporaries are invocation-local. InputModAxesOutput optionals track not-yet-completed component stores before an arithmetic exception, not missing guest bytes or a missing game device. Caller reuse preserves prior fields unless a source store is reached. The decoder rejects a missing/wrong-sized20-byte caller buffer and never opens an EXE/DLL. That boundary nullopt is decoding failure, not fixture availability threaded through the axis algorithm.",
+          "evidence": [
+            {
+              "path": "src/input/input_mod_axes.hpp",
+              "line": 1,
+              "sha256": "51cb3a746951707ac7fc624f54a481aa81312af153412b31f5cc14b1ec333e81"
+            },
+            {
+              "path": "src/input/input_mod_axes.cpp",
+              "line": 1,
+              "sha256": "1d9aee1c76bb2c09b937bca9b5525d9fbaba9c7af95521364076c8dac1dd3df4"
+            },
+            {
+              "path": "tests/unit/input_mod_axes.cpp",
+              "line": 1,
+              "sha256": "933fd4791acbdf535671948b24137ec7b358409efdbb1fd56a554f42368d376c"
+            },
+            {
+              "path": "tests/probes/native_input_mod_axes_probe.cpp",
+              "line": 1,
+              "sha256": "79f1bdf2811da9f584c850c5c72290a3b771d6bb9a2bf8843047afb4a09aa04f"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Both input::InputState::sample_tick and native::Input::Impl::poll_keyboard call keyboard normalization; Input mod pad convert calls controller conversion. Diagnostic probes/tester decode externally provided coefficient bytes; oracle probe marshals bytes and partial output sentinels. Native coefficient factory supplies production/normal boot values directly. No hidden deadzone or image fetch occurs in conversion.",
+          "evidence": [
+            {
+              "path": "src/input/input.cpp",
+              "line": 1,
+              "sha256": "908777b22b43861ff0c767937a478d7981f0ac31091f63d00d55da36dc8163bf"
+            },
+            {
+              "path": "src/runtime/native_input.cpp",
+              "line": 1,
+              "sha256": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114"
+            },
+            {
+              "path": "src/input/input_mod_pad.cpp",
+              "line": 1,
+              "sha256": "236237ddd8fc2d46eb941012ff6bf495524e6026bb764cfbe01135499f7c0525"
+            },
+            {
+              "path": "src/input/input_mod_constants.cpp",
+              "line": 1,
+              "sha256": "dc2f26b82c0d631afe1f42c910cbeb85e39601d24a90e126a194884e8c783e3b"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "line": 1,
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            },
+            {
+              "path": "src/apps/diagnostics/mac_controller_probe.mm",
+              "line": 1,
+              "sha256": "7bc76539972a0b205ad3afbd86164b37dc4770dfed770daa9e4201aa80c6f2a3"
+            },
+            {
+              "path": "src/apps/diagnostics/mac_controller_tester.mm",
+              "line": 1,
+              "sha256": "0238fe3998f84b09c664a01ad9af2aee1893d1779f4ad71dfd3b4b032a666d8c"
+            },
+            {
+              "path": "tests/probes/native_input_mod_axes_probe.cpp",
+              "line": 1,
+              "sha256": "79f1bdf2811da9f584c850c5c72290a3b771d6bb9a2bf8843047afb4a09aa04f"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent standards ee6fdcc approves both completeSourcefiles with no actionablefindings; independent spec b4cd9f6 finds no introducedbehaviorregression and identifies only integration/protection requirements. Widened1268parentunion explicitlyseals the newcontract body.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/input-axes-standards.md",
+              "sha256": "da414b76210dbe81c2ea1147e94f228f3fa9d41824fafdcf2c3c38a70df645f5"
+            },
+            {
+              "path": "docs/REVIEW-input-axes-spec-641752f.md",
+              "sha256": "e35a9aac843d2d9e9b706e7cc9aab8cfc7705aa7b47183cde7f1396bbda8744f"
+            }
+          ]
+        },
+        {
+          "resolution": "Exact source-backed/default/native/holdout/consumer evidence retained in the current packet; allnative/FP/failurewords and partial IDs remain compared.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/input-axes/QUALIFICATION.json",
+              "sha256": "f4fe7d016b78035443968d2055acac21c26fab8bd8c78963846d93f75fac0e14"
+            },
+            {
+              "path": "docs/refactor-inventory/packets/input-axes/ROOT-HOLDOUT-RESULT.json",
+              "sha256": "953af7decf6129616fd26ada01557887f41ef6ae879419b95367630dd2471476"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Complete two-file axis module source conformance is independently reviewed; this does not close input_mod_pad, native_input, CPU arithmetic libraries or whole input/Session/campaign.",
+        "Unchanged default109056cases retain0valuefailures and93104FPpartial identities. Native327681case alias/fault characterization and8192freshmasked comparisons are exact; fresh7408FPpartials remainpartial.",
+        "Fullofficialsymbol parsing/provenance passes with pinnedlocalSDKinputs; isolatednativeapp+force-loadclosurebuild hasno reference/game tree. Actualconsumer/journey/Maincoherentgate qualification remains separately recorded, not inferred from sourceapproval.",
+        "Allfive directconsumerTUscompile; full1044maskedpadrecords preserve300FPpartial IDs. The inherited unmaskedpad staging/publication gap and underlyingSSE5076value failures remainopen.",
+        "No physicalcontroller/Windows/hardware parity, gameplay63FPS or newroute claim."
+      ],
+      "destination": "Keep recovered axis/deadzone policy in src/input/input_mod_axes; retain exact numerical operations locally or behind a narrowly named cpu fidelity helper only where the same judge proves it. Byte decoding stays a bounded value/probe boundary; no new framework.",
+      "reviewed_source_sha256": "f1ff8f9c36b898d73cd8d7fbe39f7eb02a053dd108d29267ece6e4332fefbc54",
+      "read_lines": [
+        1,
+        32
+      ],
+      "complete_member_list": [
+        "InputModRawAxes(x,y)",
+        "InputModAxesConstants(epsilon,maximum,keyboard_scale,controller_scale,magnitude_cap)",
+        "decode_input_mod_axes_constants",
+        "InputModAxesOutput(x,y,magnitude)",
+        "convert_input_mod_261_axes",
+        "normalize_input_mod_261_keyboard"
+      ],
+      "evidence": [
+        {
+          "path": "docs/refactor-inventory/reviews/input-axes-standards.md",
+          "sha256": "da414b76210dbe81c2ea1147e94f228f3fa9d41824fafdcf2c3c38a70df645f5"
+        },
+        {
+          "path": "docs/REVIEW-input-axes-spec-641752f.md",
+          "sha256": "e35a9aac843d2d9e9b706e7cc9aab8cfc7705aa7b47183cde7f1396bbda8744f"
+        }
+      ]
+    },
+    "src/input/input_mod_axes.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete exact axis module is readable and behavior-preserving under independent source review and frozen source-bound comparisons.",
+      "semantic_justification": "Named decoding, signed-axis handling, ordered binary32/binary64 measurement, deadzone scaling, low16 conversion and per-stick publications retain the source arithmetic. PublicAPIs and recordlayouts are unchanged. Outputoptionals describe committedstores, not unavailablefixturefacts; seeded/aliaseddestinations and unreachedfields staylive. Caller-selectedSSEcontext preservesflags/rounding/DAZ/FTZ/unmaskedprefixes; no guesseddefault or hostfloat replacement is introduced. Numericcoefficient content ownsnoDLLmemory, puredecoder ownsnoPEaccess, helperscarryNOTSA andactualfunctionentry has source-backedINPUT provenance.",
+      "resolved_owners": [
+        {
+          "resolution": "InputModRawAxes and coefficient values are caller-owned; direction and conversion temporaries are invocation-local. InputModAxesOutput optionals track not-yet-completed component stores before an arithmetic exception, not missing guest bytes or a missing game device. Caller reuse preserves prior fields unless a source store is reached. The decoder rejects a missing/wrong-sized20-byte caller buffer and never opens an EXE/DLL. That boundary nullopt is decoding failure, not fixture availability threaded through the axis algorithm.",
+          "evidence": [
+            {
+              "path": "src/input/input_mod_axes.hpp",
+              "line": 1,
+              "sha256": "51cb3a746951707ac7fc624f54a481aa81312af153412b31f5cc14b1ec333e81"
+            },
+            {
+              "path": "src/input/input_mod_axes.cpp",
+              "line": 1,
+              "sha256": "1d9aee1c76bb2c09b937bca9b5525d9fbaba9c7af95521364076c8dac1dd3df4"
+            },
+            {
+              "path": "tests/unit/input_mod_axes.cpp",
+              "line": 1,
+              "sha256": "933fd4791acbdf535671948b24137ec7b358409efdbb1fd56a554f42368d376c"
+            },
+            {
+              "path": "tests/probes/native_input_mod_axes_probe.cpp",
+              "line": 1,
+              "sha256": "79f1bdf2811da9f584c850c5c72290a3b771d6bb9a2bf8843047afb4a09aa04f"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Both input::InputState::sample_tick and native::Input::Impl::poll_keyboard call keyboard normalization; Input mod pad convert calls controller conversion. Diagnostic probes/tester decode externally provided coefficient bytes; oracle probe marshals bytes and partial output sentinels. Native coefficient factory supplies production/normal boot values directly. No hidden deadzone or image fetch occurs in conversion.",
+          "evidence": [
+            {
+              "path": "src/input/input.cpp",
+              "line": 1,
+              "sha256": "908777b22b43861ff0c767937a478d7981f0ac31091f63d00d55da36dc8163bf"
+            },
+            {
+              "path": "src/runtime/native_input.cpp",
+              "line": 1,
+              "sha256": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114"
+            },
+            {
+              "path": "src/input/input_mod_pad.cpp",
+              "line": 1,
+              "sha256": "236237ddd8fc2d46eb941012ff6bf495524e6026bb764cfbe01135499f7c0525"
+            },
+            {
+              "path": "src/input/input_mod_constants.cpp",
+              "line": 1,
+              "sha256": "dc2f26b82c0d631afe1f42c910cbeb85e39601d24a90e126a194884e8c783e3b"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "line": 1,
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            },
+            {
+              "path": "src/apps/diagnostics/mac_controller_probe.mm",
+              "line": 1,
+              "sha256": "7bc76539972a0b205ad3afbd86164b37dc4770dfed770daa9e4201aa80c6f2a3"
+            },
+            {
+              "path": "src/apps/diagnostics/mac_controller_tester.mm",
+              "line": 1,
+              "sha256": "0238fe3998f84b09c664a01ad9af2aee1893d1779f4ad71dfd3b4b032a666d8c"
+            },
+            {
+              "path": "tests/probes/native_input_mod_axes_probe.cpp",
+              "line": 1,
+              "sha256": "79f1bdf2811da9f584c850c5c72290a3b771d6bb9a2bf8843047afb4a09aa04f"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent standards ee6fdcc approves both completeSourcefiles with no actionablefindings; independent spec b4cd9f6 finds no introducedbehaviorregression and identifies only integration/protection requirements. Widened1268parentunion explicitlyseals the newcontract body.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/input-axes-standards.md",
+              "sha256": "da414b76210dbe81c2ea1147e94f228f3fa9d41824fafdcf2c3c38a70df645f5"
+            },
+            {
+              "path": "docs/REVIEW-input-axes-spec-641752f.md",
+              "sha256": "e35a9aac843d2d9e9b706e7cc9aab8cfc7705aa7b47183cde7f1396bbda8744f"
+            }
+          ]
+        },
+        {
+          "resolution": "Exact source-backed/default/native/holdout/consumer evidence retained in the current packet; allnative/FP/failurewords and partial IDs remain compared.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/input-axes/QUALIFICATION.json",
+              "sha256": "f4fe7d016b78035443968d2055acac21c26fab8bd8c78963846d93f75fac0e14"
+            },
+            {
+              "path": "docs/refactor-inventory/packets/input-axes/ROOT-HOLDOUT-RESULT.json",
+              "sha256": "953af7decf6129616fd26ada01557887f41ef6ae879419b95367630dd2471476"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Complete two-file axis module source conformance is independently reviewed; this does not close input_mod_pad, native_input, CPU arithmetic libraries or whole input/Session/campaign.",
+        "Unchanged default109056cases retain0valuefailures and93104FPpartial identities. Native327681case alias/fault characterization and8192freshmasked comparisons are exact; fresh7408FPpartials remainpartial.",
+        "Fullofficialsymbol parsing/provenance passes with pinnedlocalSDKinputs; isolatednativeapp+force-loadclosurebuild hasno reference/game tree. Actualconsumer/journey/Maincoherentgate qualification remains separately recorded, not inferred from sourceapproval.",
+        "Allfive directconsumerTUscompile; full1044maskedpadrecords preserve300FPpartial IDs. The inherited unmaskedpad staging/publication gap and underlyingSSE5076value failures remainopen.",
+        "No physicalcontroller/Windows/hardware parity, gameplay63FPS or newroute claim."
+      ],
+      "destination": "Keep recovered axis/deadzone policy in src/input/input_mod_axes; retain exact numerical operations locally or behind a narrowly named cpu fidelity helper only where the same judge proves it. Byte decoding stays a bounded value/probe boundary; no new framework.",
+      "reviewed_source_sha256": "95e61568ed6357c7c4629361f57adb3fb91687f47320b30dec246bd2d5992ed7",
+      "read_lines": [
+        1,
+        68
+      ],
+      "complete_member_list": [
+        "word",
+        "absolute",
+        "clipped",
+        "low16",
+        "Direction(magnitude,x,y)",
+        "direction",
+        "decode_input_mod_axes_constants",
+        "convert_input_mod_261_axes (component lambda included)",
+        "normalize_input_mod_261_keyboard"
+      ],
+      "evidence": [
+        {
+          "path": "docs/refactor-inventory/reviews/input-axes-standards.md",
+          "sha256": "da414b76210dbe81c2ea1147e94f228f3fa9d41824fafdcf2c3c38a70df645f5"
+        },
+        {
+          "path": "docs/REVIEW-input-axes-spec-641752f.md",
+          "sha256": "e35a9aac843d2d9e9b706e7cc9aab8cfc7705aa7b47183cde7f1396bbda8744f"
+        }
+      ]
+    }
+  },
+  "modules": {
+    "src/input/input_mod_axes": {
+      "disposition": "already_conforming",
+      "reason": "Independent whole-module approval of both exactcurrentmembers, with actualintegration/fidelity limits explicit.",
+      "reviewed_members": {
+        "src/input/input_mod_axes.hpp": "f1ff8f9c36b898d73cd8d7fbe39f7eb02a053dd108d29267ece6e4332fefbc54",
+        "src/input/input_mod_axes.cpp": "95e61568ed6357c7c4629361f57adb3fb91687f47320b30dec246bd2d5992ed7"
+      },
+      "semantic_justification": "Named decoding, signed-axis handling, ordered binary32/binary64 measurement, deadzone scaling, low16 conversion and per-stick publications retain the source arithmetic. PublicAPIs and recordlayouts are unchanged. Outputoptionals describe committedstores, not unavailablefixturefacts; seeded/aliaseddestinations and unreachedfields staylive. Caller-selectedSSEcontext preservesflags/rounding/DAZ/FTZ/unmaskedprefixes; no guesseddefault or hostfloat replacement is introduced. Numericcoefficient content ownsnoDLLmemory, puredecoder ownsnoPEaccess, helperscarryNOTSA andactualfunctionentry has source-backedINPUT provenance.",
+      "evidence": [
+        {
+          "path": "docs/refactor-inventory/reviews/input-axes-standards.md",
+          "sha256": "da414b76210dbe81c2ea1147e94f228f3fa9d41824fafdcf2c3c38a70df645f5"
+        },
+        {
+          "path": "docs/REVIEW-input-axes-spec-641752f.md",
+          "sha256": "e35a9aac843d2d9e9b706e7cc9aab8cfc7705aa7b47183cde7f1396bbda8744f"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "InputModRawAxes and coefficient values are caller-owned; direction and conversion temporaries are invocation-local. InputModAxesOutput optionals track not-yet-completed component stores before an arithmetic exception, not missing guest bytes or a missing game device. Caller reuse preserves prior fields unless a source store is reached. The decoder rejects a missing/wrong-sized20-byte caller buffer and never opens an EXE/DLL. That boundary nullopt is decoding failure, not fixture availability threaded through the axis algorithm.",
+          "evidence": [
+            {
+              "path": "src/input/input_mod_axes.hpp",
+              "line": 1,
+              "sha256": "51cb3a746951707ac7fc624f54a481aa81312af153412b31f5cc14b1ec333e81"
+            },
+            {
+              "path": "src/input/input_mod_axes.cpp",
+              "line": 1,
+              "sha256": "1d9aee1c76bb2c09b937bca9b5525d9fbaba9c7af95521364076c8dac1dd3df4"
+            },
+            {
+              "path": "tests/unit/input_mod_axes.cpp",
+              "line": 1,
+              "sha256": "933fd4791acbdf535671948b24137ec7b358409efdbb1fd56a554f42368d376c"
+            },
+            {
+              "path": "tests/probes/native_input_mod_axes_probe.cpp",
+              "line": 1,
+              "sha256": "79f1bdf2811da9f584c850c5c72290a3b771d6bb9a2bf8843047afb4a09aa04f"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Both input::InputState::sample_tick and native::Input::Impl::poll_keyboard call keyboard normalization; Input mod pad convert calls controller conversion. Diagnostic probes/tester decode externally provided coefficient bytes; oracle probe marshals bytes and partial output sentinels. Native coefficient factory supplies production/normal boot values directly. No hidden deadzone or image fetch occurs in conversion.",
+          "evidence": [
+            {
+              "path": "src/input/input.cpp",
+              "line": 1,
+              "sha256": "908777b22b43861ff0c767937a478d7981f0ac31091f63d00d55da36dc8163bf"
+            },
+            {
+              "path": "src/runtime/native_input.cpp",
+              "line": 1,
+              "sha256": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114"
+            },
+            {
+              "path": "src/input/input_mod_pad.cpp",
+              "line": 1,
+              "sha256": "236237ddd8fc2d46eb941012ff6bf495524e6026bb764cfbe01135499f7c0525"
+            },
+            {
+              "path": "src/input/input_mod_constants.cpp",
+              "line": 1,
+              "sha256": "dc2f26b82c0d631afe1f42c910cbeb85e39601d24a90e126a194884e8c783e3b"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "line": 1,
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            },
+            {
+              "path": "src/apps/diagnostics/mac_controller_probe.mm",
+              "line": 1,
+              "sha256": "7bc76539972a0b205ad3afbd86164b37dc4770dfed770daa9e4201aa80c6f2a3"
+            },
+            {
+              "path": "src/apps/diagnostics/mac_controller_tester.mm",
+              "line": 1,
+              "sha256": "0238fe3998f84b09c664a01ad9af2aee1893d1779f4ad71dfd3b4b032a666d8c"
+            },
+            {
+              "path": "tests/probes/native_input_mod_axes_probe.cpp",
+              "line": 1,
+              "sha256": "79f1bdf2811da9f584c850c5c72290a3b771d6bb9a2bf8843047afb4a09aa04f"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Independent standards ee6fdcc approves both completeSourcefiles with no actionablefindings; independent spec b4cd9f6 finds no introducedbehaviorregression and identifies only integration/protection requirements. Widened1268parentunion explicitlyseals the newcontract body.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/input-axes-standards.md",
+              "sha256": "da414b76210dbe81c2ea1147e94f228f3fa9d41824fafdcf2c3c38a70df645f5"
+            },
+            {
+              "path": "docs/REVIEW-input-axes-spec-641752f.md",
+              "sha256": "e35a9aac843d2d9e9b706e7cc9aab8cfc7705aa7b47183cde7f1396bbda8744f"
+            }
+          ]
+        },
+        {
+          "resolution": "Exact source-backed/default/native/holdout/consumer evidence retained in the current packet; allnative/FP/failurewords and partial IDs remain compared.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/input-axes/QUALIFICATION.json",
+              "sha256": "f4fe7d016b78035443968d2055acac21c26fab8bd8c78963846d93f75fac0e14"
+            },
+            {
+              "path": "docs/refactor-inventory/packets/input-axes/ROOT-HOLDOUT-RESULT.json",
+              "sha256": "953af7decf6129616fd26ada01557887f41ef6ae879419b95367630dd2471476"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Complete two-file axis module source conformance is independently reviewed; this does not close input_mod_pad, native_input, CPU arithmetic libraries or whole input/Session/campaign.",
+        "Unchanged default109056cases retain0valuefailures and93104FPpartial identities. Native327681case alias/fault characterization and8192freshmasked comparisons are exact; fresh7408FPpartials remainpartial.",
+        "Fullofficialsymbol parsing/provenance passes with pinnedlocalSDKinputs; isolatednativeapp+force-loadclosurebuild hasno reference/game tree. Actualconsumer/journey/Maincoherentgate qualification remains separately recorded, not inferred from sourceapproval.",
+        "Allfive directconsumerTUscompile; full1044maskedpadrecords preserve300FPpartial IDs. The inherited unmaskedpad staging/publication gap and underlyingSSE5076value failures remainopen.",
+        "No physicalcontroller/Windows/hardware parity, gameplay63FPS or newroute claim."
+      ],
+      "destination": "Keep recovered axis/deadzone policy in src/input/input_mod_axes; retain exact numerical operations locally or behind a narrowly named cpu fidelity helper only where the same judge proves it. Byte decoding stays a bounded value/probe boundary; no new framework."
+    }
+  }
+}

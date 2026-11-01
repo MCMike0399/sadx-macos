@@ -21761,9 +21761,9 @@
       ]
     },
     "src/input/input_mod_axes.cpp": {
-      "disposition": "needs_migration",
-      "reason": "Terse c/d/l/r/lo/ro calculations and compound statements obscure exact deadzone, rounding and store policy; migrate presentation without discarding the justified numerical mechanism.",
-      "semantic_justification": "All100lines read, including word/absolute/clipped/low16/Direction/direction, decoder and both public algorithms. Native coefficient decoding is a20-byte value conversion, not executable parsing. Strict both-axes early deadzone check precedes clipped-32768 input; Y-square precedes X-square, sum narrows before double sqrt then narrows to single. UCOMISD status is retained. COMISS/CMOVBE-style cap differs from MINSS; controller128 scaling converts to low16 before signed clamp127, nonradial suppresses each sub-deadzone component. Keyboard127 direction is separate from capped magnitude; left Y/magnitude/X then right X/magnitude/Y stores are intentional. Singular deadzone32767 and low16 indefinite behavior must survive. c/d/l/r/lo/ro and compressed compound statements obscure these semantically distinct policies; header addresses/store-site comments are not canonical FUNCTION/DATA annotations. Rewrite the calculation names/control presentation under the same judge; do not relocate all axis behavior to reference or replace the selected SSE semantics with host sqrt.",
+      "disposition": "already_conforming",
+      "reason": "Complete exact axis module is readable and behavior-preserving under independent source review and frozen source-bound comparisons.",
+      "semantic_justification": "Named decoding, signed-axis handling, ordered binary32/binary64 measurement, deadzone scaling, low16 conversion and per-stick publications retain the source arithmetic. PublicAPIs and recordlayouts are unchanged. Outputoptionals describe committedstores, not unavailablefixturefacts; seeded/aliaseddestinations and unreachedfields staylive. Caller-selectedSSEcontext preservesflags/rounding/DAZ/FTZ/unmaskedprefixes; no guesseddefault or hostfloat replacement is introduced. Numericcoefficient content ownsnoDLLmemory, puredecoder ownsnoPEaccess, helperscarryNOTSA andactualfunctionentry has source-backedINPUT provenance.",
       "resolved_owners": [
         {
           "resolution": "InputModRawAxes and coefficient values are caller-owned; direction and conversion temporaries are invocation-local. InputModAxesOutput optionals track not-yet-completed component stores before an arithmetic exception, not missing guest bytes or a missing game device. Caller reuse preserves prior fields unless a source store is reached. The decoder rejects a missing/wrong-sized20-byte caller buffer and never opens an EXE/DLL. That boundary nullopt is decoding failure, not fixture availability threaded through the axis algorithm.",
@@ -21840,61 +21840,41 @@
       ],
       "accepted_judges": [
         {
-          "accepted_scope": "Historical axes report:4560 controller cases/72960 evaluations and2256 keyboard cases/36096 evaluations; zero value mismatches,57024+36080 MXCSR differences. Existing unit discriminates singular deadzone32767 and left-store completion before a right-stick precision trap. Assembly/provenance explains single square/sum, double sqrt and narrowing, COMISS selection and low16 truncation.",
-          "limits": "FP partial; passed=false is preserved. All original comparisons mask exceptions; no original unmasked prefix judge. Axes report has no source_files pins, only source-byte/constants/probe-binary hashes; old validation names obsolete sadx-native paths. Raw probe library/full report is absent here. Keep current source output identities before rewriting; do not infer current hardware status from old counts.",
+          "resolution": "Independent standards ee6fdcc approves both completeSourcefiles with no actionablefindings; independent spec b4cd9f6 finds no introducedbehaviorregression and identifies only integration/protection requirements. Widened1268parentunion explicitlyseals the newcontract body.",
           "evidence": [
             {
-              "path": "reference/oracle-reports/input_mod_axes.json",
-              "line": 1,
-              "sha256": "28f962437406442410b9f54189ec93e90c72a575ee8615116206e718eac81e7f"
+              "path": "docs/refactor-inventory/reviews/input-axes-standards.md",
+              "sha256": "da414b76210dbe81c2ea1147e94f228f3fa9d41824fafdcf2c3c38a70df645f5"
             },
             {
-              "path": "tools/oracles/verify_original_input_mod_axes.py",
-              "line": 1,
-              "sha256": "f20c214141bfa217c423463d90b8ba62d2f387c3c674dad3ed8d459606e9ace2"
+              "path": "docs/REVIEW-input-axes-spec-641752f.md",
+              "sha256": "e35a9aac843d2d9e9b706e7cc9aab8cfc7705aa7b47183cde7f1396bbda8744f"
+            }
+          ]
+        },
+        {
+          "resolution": "Exact source-backed/default/native/holdout/consumer evidence retained in the current packet; allnative/FP/failurewords and partial IDs remain compared.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/input-axes/QUALIFICATION.json",
+              "sha256": "f4fe7d016b78035443968d2055acac21c26fab8bd8c78963846d93f75fac0e14"
             },
             {
-              "path": "tests/unit/input_mod_axes.cpp",
-              "line": 1,
-              "sha256": "933fd4791acbdf535671948b24137ec7b358409efdbb1fd56a554f42368d376c"
-            },
-            {
-              "path": "tests/probes/native_input_mod_axes_probe.cpp",
-              "line": 1,
-              "sha256": "79f1bdf2811da9f584c850c5c72290a3b771d6bb9a2bf8843047afb4a09aa04f"
-            },
-            {
-              "path": "reference/input-mod-axes-provenance.md",
-              "line": 1,
-              "sha256": "a90175b165ccf98807c1cd77b86223dc11d668ccae0b0db7016398ba79eb82ea"
-            },
-            {
-              "path": "reference/input-mod-controller-normalize.asm",
-              "line": 1,
-              "sha256": "99d2be46c1a87424740ee27f1a992bfd4cf1459a94644b8820b09c1c90d102df"
-            },
-            {
-              "path": "reference/input-mod-keyboard-normalize.asm",
-              "line": 1,
-              "sha256": "8302f8b246a8337a6457285217e1528942913c9544ad436c61ecfde1c1a234ef"
-            },
-            {
-              "path": "reference/input-mod-axes-validation.json",
-              "line": 1,
-              "sha256": "e164b2ac9a260c72592a4e6630b802f32e3ebc131838f78fc8e4f24f75367a0e"
+              "path": "docs/refactor-inventory/packets/input-axes/ROOT-HOLDOUT-RESULT.json",
+              "sha256": "953af7decf6129616fd26ada01557887f41ef6ae879419b95367630dd2471476"
             }
           ]
         }
       ],
       "classification_limits": [
-        "Static complete-body semantic review only. No build, unit, oracle, mutant, holdout, provider, network, host, storage-helper or runtime operation executed. Metadata/hash comparison is not a fresh verdict.",
-        "Only these four exact modules are dispositioned. input_initial_state is dependency context, not a duplicate review. Input/player/Session/platform/campaign closure, Windows parity and measured gameplay63FPS are not implied.",
-        "The active full gate at Main353d528 is user-reported running and untouched. The last tracked green receipt is mpeg-foundations-gate.json at8c9f540; its scope remains historical.",
-        "No dedicated current axes/pad semantic mutant or reserved holdout receipt located among tracked evidence. This checkout has no build directory; raw original run outputs/probe libraries were not revalidated. Main/build and external temporary paths were not inspected.",
-        "InputModAxesOutput is partial publication, not fixture-availability debt. Do not erase it or stage all stores transactionally merely to remove std::optional. Any alternative must preserve observable prefix state."
+        "Complete two-file axis module source conformance is independently reviewed; this does not close input_mod_pad, native_input, CPU arithmetic libraries or whole input/Session/campaign.",
+        "Unchanged default109056cases retain0valuefailures and93104FPpartial identities. Native327681case alias/fault characterization and8192freshmasked comparisons are exact; fresh7408FPpartials remainpartial.",
+        "Fullofficialsymbol parsing/provenance passes with pinnedlocalSDKinputs; isolatednativeapp+force-loadclosurebuild hasno reference/game tree. Actualconsumer/journey/Maincoherentgate qualification remains separately recorded, not inferred from sourceapproval.",
+        "Allfive directconsumerTUscompile; full1044maskedpadrecords preserve300FPpartial IDs. The inherited unmaskedpad staging/publication gap and underlyingSSE5076value failures remainopen.",
+        "No physicalcontroller/Windows/hardware parity, gameplay63FPS or newroute claim."
       ],
       "destination": "Keep recovered axis/deadzone policy in src/input/input_mod_axes; retain exact numerical operations locally or behind a narrowly named cpu fidelity helper only where the same judge proves it. Byte decoding stays a bounded value/probe boundary; no new framework.",
-      "reviewed_source_sha256": "1d9aee1c76bb2c09b937bca9b5525d9fbaba9c7af95521364076c8dac1dd3df4",
+      "reviewed_source_sha256": "95e61568ed6357c7c4629361f57adb3fb91687f47320b30dec246bd2d5992ed7",
       "read_lines": [
         1,
         68
@@ -21912,16 +21892,19 @@
       ],
       "evidence": [
         {
-          "path": "src/input/input_mod_axes.cpp",
-          "line": 1,
-          "sha256": "1d9aee1c76bb2c09b937bca9b5525d9fbaba9c7af95521364076c8dac1dd3df4"
+          "path": "docs/refactor-inventory/reviews/input-axes-standards.md",
+          "sha256": "da414b76210dbe81c2ea1147e94f228f3fa9d41824fafdcf2c3c38a70df645f5"
+        },
+        {
+          "path": "docs/REVIEW-input-axes-spec-641752f.md",
+          "sha256": "e35a9aac843d2d9e9b706e7cc9aab8cfc7705aa7b47183cde7f1396bbda8744f"
         }
       ]
     },
     "src/input/input_mod_axes.hpp": {
-      "disposition": "needs_migration",
-      "reason": "Recover numerical entrypoint provenance and clarify the complete partial-publication/byte-value contract alongside the bounded implementation rewrite; raw source-address comments are not canonical annotations.",
-      "semantic_justification": "All100lines read, including word/absolute/clipped/low16/Direction/direction, decoder and both public algorithms. Native coefficient decoding is a20-byte value conversion, not executable parsing. Strict both-axes early deadzone check precedes clipped-32768 input; Y-square precedes X-square, sum narrows before double sqrt then narrows to single. UCOMISD status is retained. COMISS/CMOVBE-style cap differs from MINSS; controller128 scaling converts to low16 before signed clamp127, nonradial suppresses each sub-deadzone component. Keyboard127 direction is separate from capped magnitude; left Y/magnitude/X then right X/magnitude/Y stores are intentional. Singular deadzone32767 and low16 indefinite behavior must survive. c/d/l/r/lo/ro and compressed compound statements obscure these semantically distinct policies; header addresses/store-site comments are not canonical FUNCTION/DATA annotations. Rewrite the calculation names/control presentation under the same judge; do not relocate all axis behavior to reference or replace the selected SSE semantics with host sqrt.",
+      "disposition": "already_conforming",
+      "reason": "Complete exact axis module is readable and behavior-preserving under independent source review and frozen source-bound comparisons.",
+      "semantic_justification": "Named decoding, signed-axis handling, ordered binary32/binary64 measurement, deadzone scaling, low16 conversion and per-stick publications retain the source arithmetic. PublicAPIs and recordlayouts are unchanged. Outputoptionals describe committedstores, not unavailablefixturefacts; seeded/aliaseddestinations and unreachedfields staylive. Caller-selectedSSEcontext preservesflags/rounding/DAZ/FTZ/unmaskedprefixes; no guesseddefault or hostfloat replacement is introduced. Numericcoefficient content ownsnoDLLmemory, puredecoder ownsnoPEaccess, helperscarryNOTSA andactualfunctionentry has source-backedINPUT provenance.",
       "resolved_owners": [
         {
           "resolution": "InputModRawAxes and coefficient values are caller-owned; direction and conversion temporaries are invocation-local. InputModAxesOutput optionals track not-yet-completed component stores before an arithmetic exception, not missing guest bytes or a missing game device. Caller reuse preserves prior fields unless a source store is reached. The decoder rejects a missing/wrong-sized20-byte caller buffer and never opens an EXE/DLL. That boundary nullopt is decoding failure, not fixture availability threaded through the axis algorithm.",
@@ -21998,61 +21981,41 @@
       ],
       "accepted_judges": [
         {
-          "accepted_scope": "Historical axes report:4560 controller cases/72960 evaluations and2256 keyboard cases/36096 evaluations; zero value mismatches,57024+36080 MXCSR differences. Existing unit discriminates singular deadzone32767 and left-store completion before a right-stick precision trap. Assembly/provenance explains single square/sum, double sqrt and narrowing, COMISS selection and low16 truncation.",
-          "limits": "FP partial; passed=false is preserved. All original comparisons mask exceptions; no original unmasked prefix judge. Axes report has no source_files pins, only source-byte/constants/probe-binary hashes; old validation names obsolete sadx-native paths. Raw probe library/full report is absent here. Keep current source output identities before rewriting; do not infer current hardware status from old counts.",
+          "resolution": "Independent standards ee6fdcc approves both completeSourcefiles with no actionablefindings; independent spec b4cd9f6 finds no introducedbehaviorregression and identifies only integration/protection requirements. Widened1268parentunion explicitlyseals the newcontract body.",
           "evidence": [
             {
-              "path": "reference/oracle-reports/input_mod_axes.json",
-              "line": 1,
-              "sha256": "28f962437406442410b9f54189ec93e90c72a575ee8615116206e718eac81e7f"
+              "path": "docs/refactor-inventory/reviews/input-axes-standards.md",
+              "sha256": "da414b76210dbe81c2ea1147e94f228f3fa9d41824fafdcf2c3c38a70df645f5"
             },
             {
-              "path": "tools/oracles/verify_original_input_mod_axes.py",
-              "line": 1,
-              "sha256": "f20c214141bfa217c423463d90b8ba62d2f387c3c674dad3ed8d459606e9ace2"
+              "path": "docs/REVIEW-input-axes-spec-641752f.md",
+              "sha256": "e35a9aac843d2d9e9b706e7cc9aab8cfc7705aa7b47183cde7f1396bbda8744f"
+            }
+          ]
+        },
+        {
+          "resolution": "Exact source-backed/default/native/holdout/consumer evidence retained in the current packet; allnative/FP/failurewords and partial IDs remain compared.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/input-axes/QUALIFICATION.json",
+              "sha256": "f4fe7d016b78035443968d2055acac21c26fab8bd8c78963846d93f75fac0e14"
             },
             {
-              "path": "tests/unit/input_mod_axes.cpp",
-              "line": 1,
-              "sha256": "933fd4791acbdf535671948b24137ec7b358409efdbb1fd56a554f42368d376c"
-            },
-            {
-              "path": "tests/probes/native_input_mod_axes_probe.cpp",
-              "line": 1,
-              "sha256": "79f1bdf2811da9f584c850c5c72290a3b771d6bb9a2bf8843047afb4a09aa04f"
-            },
-            {
-              "path": "reference/input-mod-axes-provenance.md",
-              "line": 1,
-              "sha256": "a90175b165ccf98807c1cd77b86223dc11d668ccae0b0db7016398ba79eb82ea"
-            },
-            {
-              "path": "reference/input-mod-controller-normalize.asm",
-              "line": 1,
-              "sha256": "99d2be46c1a87424740ee27f1a992bfd4cf1459a94644b8820b09c1c90d102df"
-            },
-            {
-              "path": "reference/input-mod-keyboard-normalize.asm",
-              "line": 1,
-              "sha256": "8302f8b246a8337a6457285217e1528942913c9544ad436c61ecfde1c1a234ef"
-            },
-            {
-              "path": "reference/input-mod-axes-validation.json",
-              "line": 1,
-              "sha256": "e164b2ac9a260c72592a4e6630b802f32e3ebc131838f78fc8e4f24f75367a0e"
+              "path": "docs/refactor-inventory/packets/input-axes/ROOT-HOLDOUT-RESULT.json",
+              "sha256": "953af7decf6129616fd26ada01557887f41ef6ae879419b95367630dd2471476"
             }
           ]
         }
       ],
       "classification_limits": [
-        "Static complete-body semantic review only. No build, unit, oracle, mutant, holdout, provider, network, host, storage-helper or runtime operation executed. Metadata/hash comparison is not a fresh verdict.",
-        "Only these four exact modules are dispositioned. input_initial_state is dependency context, not a duplicate review. Input/player/Session/platform/campaign closure, Windows parity and measured gameplay63FPS are not implied.",
-        "The active full gate at Main353d528 is user-reported running and untouched. The last tracked green receipt is mpeg-foundations-gate.json at8c9f540; its scope remains historical.",
-        "No dedicated current axes/pad semantic mutant or reserved holdout receipt located among tracked evidence. This checkout has no build directory; raw original run outputs/probe libraries were not revalidated. Main/build and external temporary paths were not inspected.",
-        "InputModAxesOutput is partial publication, not fixture-availability debt. Do not erase it or stage all stores transactionally merely to remove std::optional. Any alternative must preserve observable prefix state."
+        "Complete two-file axis module source conformance is independently reviewed; this does not close input_mod_pad, native_input, CPU arithmetic libraries or whole input/Session/campaign.",
+        "Unchanged default109056cases retain0valuefailures and93104FPpartial identities. Native327681case alias/fault characterization and8192freshmasked comparisons are exact; fresh7408FPpartials remainpartial.",
+        "Fullofficialsymbol parsing/provenance passes with pinnedlocalSDKinputs; isolatednativeapp+force-loadclosurebuild hasno reference/game tree. Actualconsumer/journey/Maincoherentgate qualification remains separately recorded, not inferred from sourceapproval.",
+        "Allfive directconsumerTUscompile; full1044maskedpadrecords preserve300FPpartial IDs. The inherited unmaskedpad staging/publication gap and underlyingSSE5076value failures remainopen.",
+        "No physicalcontroller/Windows/hardware parity, gameplay63FPS or newroute claim."
       ],
       "destination": "Keep recovered axis/deadzone policy in src/input/input_mod_axes; retain exact numerical operations locally or behind a narrowly named cpu fidelity helper only where the same judge proves it. Byte decoding stays a bounded value/probe boundary; no new framework.",
-      "reviewed_source_sha256": "51cb3a746951707ac7fc624f54a481aa81312af153412b31f5cc14b1ec333e81",
+      "reviewed_source_sha256": "f1ff8f9c36b898d73cd8d7fbe39f7eb02a053dd108d29267ece6e4332fefbc54",
       "read_lines": [
         1,
         32
@@ -22067,9 +22030,12 @@
       ],
       "evidence": [
         {
-          "path": "src/input/input_mod_axes.hpp",
-          "line": 1,
-          "sha256": "51cb3a746951707ac7fc624f54a481aa81312af153412b31f5cc14b1ec333e81"
+          "path": "docs/refactor-inventory/reviews/input-axes-standards.md",
+          "sha256": "da414b76210dbe81c2ea1147e94f228f3fa9d41824fafdcf2c3c38a70df645f5"
+        },
+        {
+          "path": "docs/REVIEW-input-axes-spec-641752f.md",
+          "sha256": "e35a9aac843d2d9e9b706e7cc9aab8cfc7705aa7b47183cde7f1396bbda8744f"
         }
       ]
     },
@@ -33450,23 +33416,21 @@
       "destination": "Retain src/input/input; no semantic rewrite requested. Lowercase legacy enum labels/compact small declarations are nonblocking naming/style cleanup, not reference transport debt."
     },
     "src/input/input_mod_axes": {
-      "disposition": "needs_migration",
-      "reason": "Exact numeric behavior is legitimate, but the complete API/implementation still needs readable named calculations and canonical provenance rather than terse instruction-shaped sequences and address comments.",
+      "disposition": "already_conforming",
+      "reason": "Independent whole-module approval of both exactcurrentmembers, with actualintegration/fidelity limits explicit.",
       "reviewed_members": {
-        "src/input/input_mod_axes.cpp": "1d9aee1c76bb2c09b937bca9b5525d9fbaba9c7af95521364076c8dac1dd3df4",
-        "src/input/input_mod_axes.hpp": "51cb3a746951707ac7fc624f54a481aa81312af153412b31f5cc14b1ec333e81"
+        "src/input/input_mod_axes.hpp": "f1ff8f9c36b898d73cd8d7fbe39f7eb02a053dd108d29267ece6e4332fefbc54",
+        "src/input/input_mod_axes.cpp": "95e61568ed6357c7c4629361f57adb3fb91687f47320b30dec246bd2d5992ed7"
       },
-      "semantic_justification": "All100lines read, including word/absolute/clipped/low16/Direction/direction, decoder and both public algorithms. Native coefficient decoding is a20-byte value conversion, not executable parsing. Strict both-axes early deadzone check precedes clipped-32768 input; Y-square precedes X-square, sum narrows before double sqrt then narrows to single. UCOMISD status is retained. COMISS/CMOVBE-style cap differs from MINSS; controller128 scaling converts to low16 before signed clamp127, nonradial suppresses each sub-deadzone component. Keyboard127 direction is separate from capped magnitude; left Y/magnitude/X then right X/magnitude/Y stores are intentional. Singular deadzone32767 and low16 indefinite behavior must survive. c/d/l/r/lo/ro and compressed compound statements obscure these semantically distinct policies; header addresses/store-site comments are not canonical FUNCTION/DATA annotations. Rewrite the calculation names/control presentation under the same judge; do not relocate all axis behavior to reference or replace the selected SSE semantics with host sqrt.",
+      "semantic_justification": "Named decoding, signed-axis handling, ordered binary32/binary64 measurement, deadzone scaling, low16 conversion and per-stick publications retain the source arithmetic. PublicAPIs and recordlayouts are unchanged. Outputoptionals describe committedstores, not unavailablefixturefacts; seeded/aliaseddestinations and unreachedfields staylive. Caller-selectedSSEcontext preservesflags/rounding/DAZ/FTZ/unmaskedprefixes; no guesseddefault or hostfloat replacement is introduced. Numericcoefficient content ownsnoDLLmemory, puredecoder ownsnoPEaccess, helperscarryNOTSA andactualfunctionentry has source-backedINPUT provenance.",
       "evidence": [
         {
-          "path": "src/input/input_mod_axes.cpp",
-          "line": 1,
-          "sha256": "1d9aee1c76bb2c09b937bca9b5525d9fbaba9c7af95521364076c8dac1dd3df4"
+          "path": "docs/refactor-inventory/reviews/input-axes-standards.md",
+          "sha256": "da414b76210dbe81c2ea1147e94f228f3fa9d41824fafdcf2c3c38a70df645f5"
         },
         {
-          "path": "src/input/input_mod_axes.hpp",
-          "line": 1,
-          "sha256": "51cb3a746951707ac7fc624f54a481aa81312af153412b31f5cc14b1ec333e81"
+          "path": "docs/REVIEW-input-axes-spec-641752f.md",
+          "sha256": "e35a9aac843d2d9e9b706e7cc9aab8cfc7705aa7b47183cde7f1396bbda8744f"
         }
       ],
       "resolved_owners": [
@@ -33545,58 +33509,38 @@
       ],
       "accepted_judges": [
         {
-          "accepted_scope": "Historical axes report:4560 controller cases/72960 evaluations and2256 keyboard cases/36096 evaluations; zero value mismatches,57024+36080 MXCSR differences. Existing unit discriminates singular deadzone32767 and left-store completion before a right-stick precision trap. Assembly/provenance explains single square/sum, double sqrt and narrowing, COMISS selection and low16 truncation.",
-          "limits": "FP partial; passed=false is preserved. All original comparisons mask exceptions; no original unmasked prefix judge. Axes report has no source_files pins, only source-byte/constants/probe-binary hashes; old validation names obsolete sadx-native paths. Raw probe library/full report is absent here. Keep current source output identities before rewriting; do not infer current hardware status from old counts.",
+          "resolution": "Independent standards ee6fdcc approves both completeSourcefiles with no actionablefindings; independent spec b4cd9f6 finds no introducedbehaviorregression and identifies only integration/protection requirements. Widened1268parentunion explicitlyseals the newcontract body.",
           "evidence": [
             {
-              "path": "reference/oracle-reports/input_mod_axes.json",
-              "line": 1,
-              "sha256": "28f962437406442410b9f54189ec93e90c72a575ee8615116206e718eac81e7f"
+              "path": "docs/refactor-inventory/reviews/input-axes-standards.md",
+              "sha256": "da414b76210dbe81c2ea1147e94f228f3fa9d41824fafdcf2c3c38a70df645f5"
             },
             {
-              "path": "tools/oracles/verify_original_input_mod_axes.py",
-              "line": 1,
-              "sha256": "f20c214141bfa217c423463d90b8ba62d2f387c3c674dad3ed8d459606e9ace2"
+              "path": "docs/REVIEW-input-axes-spec-641752f.md",
+              "sha256": "e35a9aac843d2d9e9b706e7cc9aab8cfc7705aa7b47183cde7f1396bbda8744f"
+            }
+          ]
+        },
+        {
+          "resolution": "Exact source-backed/default/native/holdout/consumer evidence retained in the current packet; allnative/FP/failurewords and partial IDs remain compared.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/packets/input-axes/QUALIFICATION.json",
+              "sha256": "f4fe7d016b78035443968d2055acac21c26fab8bd8c78963846d93f75fac0e14"
             },
             {
-              "path": "tests/unit/input_mod_axes.cpp",
-              "line": 1,
-              "sha256": "933fd4791acbdf535671948b24137ec7b358409efdbb1fd56a554f42368d376c"
-            },
-            {
-              "path": "tests/probes/native_input_mod_axes_probe.cpp",
-              "line": 1,
-              "sha256": "79f1bdf2811da9f584c850c5c72290a3b771d6bb9a2bf8843047afb4a09aa04f"
-            },
-            {
-              "path": "reference/input-mod-axes-provenance.md",
-              "line": 1,
-              "sha256": "a90175b165ccf98807c1cd77b86223dc11d668ccae0b0db7016398ba79eb82ea"
-            },
-            {
-              "path": "reference/input-mod-controller-normalize.asm",
-              "line": 1,
-              "sha256": "99d2be46c1a87424740ee27f1a992bfd4cf1459a94644b8820b09c1c90d102df"
-            },
-            {
-              "path": "reference/input-mod-keyboard-normalize.asm",
-              "line": 1,
-              "sha256": "8302f8b246a8337a6457285217e1528942913c9544ad436c61ecfde1c1a234ef"
-            },
-            {
-              "path": "reference/input-mod-axes-validation.json",
-              "line": 1,
-              "sha256": "e164b2ac9a260c72592a4e6630b802f32e3ebc131838f78fc8e4f24f75367a0e"
+              "path": "docs/refactor-inventory/packets/input-axes/ROOT-HOLDOUT-RESULT.json",
+              "sha256": "953af7decf6129616fd26ada01557887f41ef6ae879419b95367630dd2471476"
             }
           ]
         }
       ],
       "classification_limits": [
-        "Static complete-body semantic review only. No build, unit, oracle, mutant, holdout, provider, network, host, storage-helper or runtime operation executed. Metadata/hash comparison is not a fresh verdict.",
-        "Only these four exact modules are dispositioned. input_initial_state is dependency context, not a duplicate review. Input/player/Session/platform/campaign closure, Windows parity and measured gameplay63FPS are not implied.",
-        "The active full gate at Main353d528 is user-reported running and untouched. The last tracked green receipt is mpeg-foundations-gate.json at8c9f540; its scope remains historical.",
-        "No dedicated current axes/pad semantic mutant or reserved holdout receipt located among tracked evidence. This checkout has no build directory; raw original run outputs/probe libraries were not revalidated. Main/build and external temporary paths were not inspected.",
-        "InputModAxesOutput is partial publication, not fixture-availability debt. Do not erase it or stage all stores transactionally merely to remove std::optional. Any alternative must preserve observable prefix state."
+        "Complete two-file axis module source conformance is independently reviewed; this does not close input_mod_pad, native_input, CPU arithmetic libraries or whole input/Session/campaign.",
+        "Unchanged default109056cases retain0valuefailures and93104FPpartial identities. Native327681case alias/fault characterization and8192freshmasked comparisons are exact; fresh7408FPpartials remainpartial.",
+        "Fullofficialsymbol parsing/provenance passes with pinnedlocalSDKinputs; isolatednativeapp+force-loadclosurebuild hasno reference/game tree. Actualconsumer/journey/Maincoherentgate qualification remains separately recorded, not inferred from sourceapproval.",
+        "Allfive directconsumerTUscompile; full1044maskedpadrecords preserve300FPpartial IDs. The inherited unmaskedpad staging/publication gap and underlyingSSE5076value failures remainopen.",
+        "No physicalcontroller/Windows/hardware parity, gameplay63FPS or newroute claim."
       ],
       "destination": "Keep recovered axis/deadzone policy in src/input/input_mod_axes; retain exact numerical operations locally or behind a narrowly named cpu fidelity helper only where the same judge proves it. Byte decoding stays a bounded value/probe boundary; no new framework."
     },
