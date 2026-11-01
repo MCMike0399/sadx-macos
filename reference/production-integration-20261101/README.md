@@ -1,4 +1,4 @@
-# Refactor campaign baseline in progress
+# Refactor campaign baseline
 
 Behavior and inherited judges: `f6c4e53`. ADR-0009 is `d43df6f`; the initial
 inventory is integrated at `ba801c1`. No behavior-bearing source has changed.
@@ -31,7 +31,17 @@ migration is the shared render-state/packed-blend/device-write boundary, includi
 live device reacquisition and canonical packed-state borrowing. Full queue traversal,
 matrix math, texture lifetime and Session splitting follow their own system closures.
 
-The full gate is still running in `build/refactor-baseline-20261101/gate.log` in
-the main worktree. Windowed smoke and native closure have passed, but no fresh
-green gate is claimed until its real terminal status is captured. Clean source
-export is prepared; native build/frontier and journey qualification remain pending.
+The full gate finished with real exit 0; `refactor-baseline-gate.json` records
+278 native programs, 400 Python tests, windowed smoke, native closure, R1–R4,
+three native menu/save journeys and all sixteen startup comparisons. Its seven
+skips remain in the gate: six optional qualified-raster tests and the existing
+filesystem case-alias test. `content-offline-receipt.json` records the separate
+successful six-test replay with the preserved qualified corpus.
+
+`native-source-only-frontier.json` records the clean native source build and
+force-load closure, both exit 0. Only pinned SDL/libusb dependencies were reused;
+maintained game code and numerical libraries rebuilt from source. With no Windows
+binaries in the export, normal input reaches `native_gamma_load_setup_resource`
+at frame 1382, diagnostic exit 1. The screenshot matches the main binary and
+the prior title image; selected state fields match too. This does not complete
+CharacterSelect, qualify actors/GPU parity, or measure gameplay at 63 FPS.
