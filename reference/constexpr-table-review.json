@@ -1,0 +1,883 @@
+{
+  "schema": 1,
+  "scope": "Named constexpr aggregate candidates in the readability game-tier scope. Scalar masks/colors remain outside this table census. Classification concerns the table only, not whole-module conformity.",
+  "tables": {
+    "src/cpu/crt_atan2.cpp::targets": {
+      "sha256": "353516ef64e2a091ebbb618512dbc5a33ca0f62d21ff415ffd159c368c9cf18b",
+      "classification": "open_migration",
+      "purpose": "CRT argument classes select switch branches by original instruction PC; replace PCs with named cases under the unchanged numerical judge.",
+      "evidence": [
+        {
+          "path": "src/cpu/crt_atan2.cpp",
+          "line": 52,
+          "sha256": "1fbb0c6f470930b6a087655233d14dd02b93ecf5d105bb723a4894c740fb9555"
+        }
+      ],
+      "verification": [
+        "tests/unit/crt_atan2.cpp",
+        "tools/oracles/verify_original_crt_atan2.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/cpu/sse_math.cpp::modes": {
+      "sha256": "fb05ad698d8593ca10ef4593102c3b87c3392ede242bb3439c22de90e1b27384",
+      "classification": "numeric_encoding",
+      "purpose": "Map MXCSR rounding-control bits to SoftFloat rounding enumerators.",
+      "evidence": [
+        {
+          "path": "src/cpu/sse_math.cpp",
+          "line": 18,
+          "sha256": "b7ddd9dc425ac2e1ebd49929de1dcdf4bd7671466bf041544a6ba57157ca12b7"
+        }
+      ],
+      "verification": [
+        "tests/unit/sse_math.cpp",
+        "tools/oracles/verify_original_sse_math.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/math/ninja_sine_table.cpp::kQuarterSineTable": {
+      "sha256": "22f4685f274b1e6db8ec787e7f5a7ff7f00aacb8ed1352e2a18f97f3d57ab38f",
+      "classification": "numeric_encoding",
+      "purpose": "Numerical quarter-sine coefficients consumed by Ninja sine interpolation; source-byte validation is separate from address identity.",
+      "evidence": [
+        {
+          "path": "src/math/ninja_sine_table.cpp",
+          "line": 7,
+          "sha256": "5843cdcab33b2ec76edff60437bfb908db6d8afe720374c47b13c25ddc57c454"
+        }
+      ],
+      "verification": [
+        "tests/unit/ninja_sine_table.cpp",
+        "tools/oracles/verify_original_ninja_sine_table.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/engine/basic_model.cpp::kTextureAddressModes": {
+      "sha256": "4a988a14a931a3a90d57b30f210d8ceefe6929248391a268db8ecb5a698f7b0c",
+      "classification": "numeric_encoding",
+      "purpose": "Device texture-address enumeration values for model state writes.",
+      "evidence": [
+        {
+          "path": "src/engine/basic_model.cpp",
+          "line": 40,
+          "sha256": "92c102056e70380186cdb295e121916837ed9caead67996c6d99fda5c8ad0815"
+        }
+      ],
+      "verification": [
+        "tests/unit/basic_model.cpp",
+        "tools/oracles/verify_original_basic_model.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/engine/basic_model.cpp::kBlendModes": {
+      "sha256": "1972de5a8e7ee2b2bb975c0ae3fb389a8d8c8c75480089dc865c518116f699dd",
+      "classification": "numeric_encoding",
+      "purpose": "Device blend enumeration values for model state writes.",
+      "evidence": [
+        {
+          "path": "src/engine/basic_model.cpp",
+          "line": 41,
+          "sha256": "92c102056e70380186cdb295e121916837ed9caead67996c6d99fda5c8ad0815"
+        }
+      ],
+      "verification": [
+        "tests/unit/basic_model.cpp",
+        "tools/oracles/verify_original_basic_model.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/engine/basic_model.cpp::kEnvironmentMapTransform": {
+      "sha256": "e009f8d9a79b9fb08a35b5e262446608d3f09b885937b964d1260e925a9de6ae",
+      "classification": "numeric_encoding",
+      "purpose": "Environment UV transform coefficients with distinct source data identity.",
+      "evidence": [
+        {
+          "path": "src/engine/basic_model.cpp",
+          "line": 43,
+          "sha256": "92c102056e70380186cdb295e121916837ed9caead67996c6d99fda5c8ad0815"
+        }
+      ],
+      "verification": [
+        "tests/unit/basic_model.cpp",
+        "tools/oracles/verify_original_basic_model.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/engine/basic_model.cpp::kResetTextureTransform": {
+      "sha256": "0d2569ac5ca1abd9ea7b044fea53f663fe01e42f6ad49ce5cbbbb0e3be0922cf",
+      "classification": "numeric_encoding",
+      "purpose": "Identity coefficients used to reset the texture transform.",
+      "evidence": [
+        {
+          "path": "src/engine/basic_model.cpp",
+          "line": 45,
+          "sha256": "92c102056e70380186cdb295e121916837ed9caead67996c6d99fda5c8ad0815"
+        }
+      ],
+      "verification": [
+        "tests/unit/basic_model.cpp",
+        "tools/oracles/verify_original_basic_model.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/engine/character_pack.cpp::kTitleActionDescriptors": {
+      "sha256": "b20f70b969a359c1621c736ca0b9ff66630295cb01768b53f9d02aad98a0c9e6",
+      "classification": "named_structure",
+      "purpose": "Imported-pack schema descriptors identify character/action indices, not source pointers.",
+      "evidence": [
+        {
+          "path": "src/engine/character_pack.cpp",
+          "line": 12,
+          "sha256": "b2c5e28e05279a2bd20608aec766d3bfcb471bd11e659f9113dd77e677214a8d"
+        }
+      ],
+      "verification": [
+        "tests/unit/character_pack.cpp"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/engine/character_pack.cpp::kSelectionActionDescriptors": {
+      "sha256": "2cd4bbcc4254819ccbe0c28f770895476fa87db38821793b153ec4c373a9c379",
+      "classification": "named_structure",
+      "purpose": "Pack schema descriptors distinguish exported and constructor-derived selection actions.",
+      "evidence": [
+        {
+          "path": "src/engine/character_pack.cpp",
+          "line": 15,
+          "sha256": "b2c5e28e05279a2bd20608aec766d3bfcb471bd11e659f9113dd77e677214a8d"
+        }
+      ],
+      "verification": [
+        "tests/unit/character_pack.cpp"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/engine/graphics_frame.hpp::kIdentity": {
+      "sha256": "5b42be93bd9e9433f3ee2e79e444847ba09e539edada95e50941dc608f06e963",
+      "classification": "numeric_encoding",
+      "purpose": "Numerical identity matrix for native graphics transforms.",
+      "evidence": [
+        {
+          "path": "src/engine/graphics_frame.hpp",
+          "line": 13,
+          "sha256": "001ebff8c298d0dd252433bfe9e5110a19b50ada0204185330db12a48ab22b09"
+        },
+        {
+          "path": "src/engine/graphics_frame.cpp",
+          "line": 1,
+          "sha256": "738509ac0a918990e8ea8a285beabba60acc677ab1631d8c6cb0d19ac32fde8a"
+        }
+      ],
+      "verification": [
+        "tests/unit/graphics_frame.cpp"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/engine/menu_draw_primitives.cpp::shifts": {
+      "sha256": "58850e7d6f54904acde6dedb60ecd786f831b8c33a78f96b7284e3f9d6896c7a",
+      "classification": "numeric_encoding",
+      "purpose": "Packed color channel bit positions consumed by interpolation.",
+      "evidence": [
+        {
+          "path": "src/engine/menu_draw_primitives.cpp",
+          "line": 236,
+          "sha256": "163b20359b1d1b0ae1f4342fc38797bafedc3aa70be96a2423fd9a9ef61bdad2"
+        }
+      ],
+      "verification": [
+        "tests/unit/menu_draw_primitives.cpp",
+        "tools/oracles/verify_original_menu_draw_primitives.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/engine/ninja_queue_consumer.cpp::body_entries": {
+      "sha256": "7f055471aef1bfffeee8263f7fef0723026678df508f0bb7af08cf6f07ab5e8a",
+      "classification": "open_migration",
+      "purpose": "Unrecovered entry diagnostics select instruction boundaries; move diagnostic metadata when the consumer migrates.",
+      "evidence": [
+        {
+          "path": "src/engine/ninja_queue_consumer.cpp",
+          "line": 82,
+          "sha256": "b5a6cb784a570507e9844cee6607d785a3522ce486b0a3a0ce23cb7d52d7d43a"
+        }
+      ],
+      "verification": [
+        "tests/unit/ninja_queue_consumer.cpp",
+        "tools/oracles/verify_original_ninja_queue_consumer.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/engine/texture_selection_native.cpp::values": {
+      "sha256": "edb6e93cd2486f7f6d068caa2210b49a239b2a7d8f4c327e6fba76194c596615",
+      "classification": "numeric_encoding",
+      "purpose": "Four numerical format result values consumed by typed native texture binding.",
+      "evidence": [
+        {
+          "path": "src/engine/texture_selection_native.cpp",
+          "line": 60,
+          "sha256": "1d17d34f1bf3110360686ffad4bc4a66a3fdb9f282d7415bc687b72dd39e04cd"
+        }
+      ],
+      "verification": [
+        "src/engine/texture_selection_native.cpp"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/input/input_mod_pad.cpp::map": {
+      "sha256": "117cb556cb2a1e20704e030ca83ba6f2bf25d0138818bdd2a65149fef2af660a",
+      "classification": "numeric_encoding",
+      "purpose": "SDL button ordinals paired with the pinned controller bit masks.",
+      "evidence": [
+        {
+          "path": "src/input/input_mod_pad.cpp",
+          "line": 36,
+          "sha256": "236237ddd8fc2d46eb941012ff6bf495524e6026bb764cfbe01135499f7c0525"
+        }
+      ],
+      "verification": [
+        "tests/unit/input_mod_pad.cpp",
+        "tools/oracles/verify_original_input_mod_pad.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/player/ground_acceleration_native.cpp::values": {
+      "sha256": "561761af91d87cc8dfa54ee1babf136c983faa6d4cbf8b9181d9dec2221f2783",
+      "classification": "numeric_encoding",
+      "purpose": "Default GroundConstants aggregate of compiler numerical literals, not an instruction recipe.",
+      "evidence": [
+        {
+          "path": "src/player/ground_acceleration_native.cpp",
+          "line": 6,
+          "sha256": "f1729d583f165daf41bf49296fb839b3b9d0badbc73c5b13977060c0670eece9"
+        },
+        {
+          "path": "src/player/ground_acceleration_internal.hpp",
+          "line": 1,
+          "sha256": "c9938bc44091750a8faeca2c6915b298295ff1e5dc2774718bef183657824595"
+        }
+      ],
+      "verification": [
+        "tests/unit/native_ground_acceleration.cpp",
+        "tools/oracles/verify_original_ground_acceleration.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/player/player_contact_attributes.cpp::boundaries": {
+      "sha256": "76873c1a8572e8975b776dff8341c48b5144b4fc9edbfdb50c3ffd0c273f416e",
+      "classification": "open_migration",
+      "purpose": "Null-motion diagnostics select original instruction sites inside game logic.",
+      "evidence": [
+        {
+          "path": "src/player/player_contact_attributes.cpp",
+          "line": 43,
+          "sha256": "03a7022aef4b70648fa2b60fbe8c318ca769c4620b3de0cdca754746d9d8b877"
+        }
+      ],
+      "verification": [
+        "tests/unit/player_contact_attributes.cpp",
+        "tools/oracles/verify_original_player_contact_attributes.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/player/player_contact_initializer.hpp::addresses": {
+      "sha256": "8fb02a2fc2a751ba860e7968098fdc2dbdd28e88059b775695e9d8a1306120be",
+      "classification": "open_migration",
+      "purpose": "Executable addresses key numerical contact-initialization constants.",
+      "evidence": [
+        {
+          "path": "src/player/player_contact_initializer.hpp",
+          "line": 9,
+          "sha256": "5b664af75665144851a85118f6414c82c9f95f7c11757c5f103ec1dd70a248b8"
+        },
+        {
+          "path": "src/player/player_contact_initializer.cpp",
+          "line": 1,
+          "sha256": "10489fda406e458b4406eb5ae5751042c820d4b9d291f0cfc69520e6e9e4625a"
+        }
+      ],
+      "verification": [
+        "tests/unit/player_contact_initializer.cpp",
+        "tools/oracles/verify_original_player_contact_initializer.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/player/player_contact_response.cpp::sites": {
+      "sha256": "34a2123d3af9d0f2811d302800a4b74e31f0e3fcea675a4e7b34934d2a4a6cfb",
+      "classification": "open_migration",
+      "purpose": "Per-contact instruction-site diagnostics remain inside the algorithm.",
+      "evidence": [
+        {
+          "path": "src/player/player_contact_response.cpp",
+          "line": 15,
+          "sha256": "e263fba0e09a776eb89c4b4023a3e5359f3e598808fdb499f81603a339f24c63"
+        }
+      ],
+      "verification": [
+        "tests/unit/player_contact_response.cpp",
+        "tools/oracles/verify_original_player_contact_response.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/player/player_hold.cpp::classes": {
+      "sha256": "e00a6b5a40501f48285c45d821c24abb4714d2cc416e5c39e1e720fa8dd9f00c",
+      "classification": "named_structure",
+      "purpose": "Character ordinal to held-object capability class mapping.",
+      "evidence": [
+        {
+          "path": "src/player/player_hold.cpp",
+          "line": 10,
+          "sha256": "a05c67631eb355dc6999806e8269788df92863399afcd36be2214458307d902d"
+        }
+      ],
+      "verification": [
+        "tests/unit/player_hold.cpp",
+        "tools/oracles/verify_original_player_hold.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/player/player_mesh_registry.cpp::fabs_sites": {
+      "sha256": "5cadc22a29084490deca6409669fd28b64580d8abb35d8ca89a912e4e7dea367",
+      "classification": "open_migration",
+      "purpose": "Per-edge arithmetic diagnostics retain original instruction sites.",
+      "evidence": [
+        {
+          "path": "src/player/player_mesh_registry.cpp",
+          "line": 151,
+          "sha256": "3df8f5a39895ef6ecf4ff51c0ffad27e2da043cd74641a89de5dbf5eab0beb63"
+        }
+      ],
+      "verification": [
+        "tests/unit/player_mesh_registry.cpp",
+        "tools/oracles/verify_original_player_mesh_registry.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/player/player_mesh_registry.cpp::message": {
+      "sha256": "b9937c3cda2fb614ac4f4347ac9ee1099150ad59f6671ff2dbf62810e5f10443",
+      "classification": "typed_content",
+      "purpose": "Encoded source diagnostic text passed to fwrite; whole-module text/import review remains open.",
+      "evidence": [
+        {
+          "path": "src/player/player_mesh_registry.cpp",
+          "line": 215,
+          "sha256": "3df8f5a39895ef6ecf4ff51c0ffad27e2da043cd74641a89de5dbf5eab0beb63"
+        }
+      ],
+      "verification": [
+        "tests/unit/player_mesh_registry.cpp",
+        "tools/oracles/verify_original_player_mesh_registry.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/player/player_rotation.hpp::float_addresses": {
+      "sha256": "5369d82e6fe606b09609a671a0dc94593f4e65f36c96348b7a6b5da57b06422e",
+      "classification": "open_migration",
+      "purpose": "Executable addresses key binary32 rotation coefficients.",
+      "evidence": [
+        {
+          "path": "src/player/player_rotation.hpp",
+          "line": 10,
+          "sha256": "8bdf5a75ca53c7857db86c6f15778095257d3e58428de71b7f34e4b0b2cbeb32"
+        },
+        {
+          "path": "src/player/player_rotation.cpp",
+          "line": 1,
+          "sha256": "87e7f62da064257f47af017e596c3c61078a1c65ca05828d8d6c73903c835cbe"
+        }
+      ],
+      "verification": [
+        "tests/unit/player_rotation.cpp",
+        "tools/oracles/verify_original_player_rotation.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/player/player_rotation.hpp::double_addresses": {
+      "sha256": "8c92c16d2516dd30a827637485dd5faee11d5f750d7e280bf0ef8b9db6932d42",
+      "classification": "open_migration",
+      "purpose": "Executable addresses key binary64 rotation coefficients; preserve operand widths during migration.",
+      "evidence": [
+        {
+          "path": "src/player/player_rotation.hpp",
+          "line": 14,
+          "sha256": "8bdf5a75ca53c7857db86c6f15778095257d3e58428de71b7f34e4b0b2cbeb32"
+        },
+        {
+          "path": "src/player/player_rotation.cpp",
+          "line": 1,
+          "sha256": "87e7f62da064257f47af017e596c3c61078a1c65ca05828d8d6c73903c835cbe"
+        }
+      ],
+      "verification": [
+        "tests/unit/player_rotation.cpp",
+        "tools/oracles/verify_original_player_rotation.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/player/player_scene_registration.cpp::message": {
+      "sha256": "addb5cb0f8c5aadf4f028b04108d4ace530477e6f01943e1233ed996a67f457a",
+      "classification": "typed_content",
+      "purpose": "Encoded source diagnostic text passed to fwrite, not executable targets.",
+      "evidence": [
+        {
+          "path": "src/player/player_scene_registration.cpp",
+          "line": 77,
+          "sha256": "d11f264669d75203e764fb926610d6f5f861a8fce163f76e6c8a3311d54ed3dd"
+        }
+      ],
+      "verification": [
+        "tests/unit/player_scene.cpp",
+        "tools/oracles/verify_original_player_scene.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/player/scene_input_producer.cpp::enable_reads": {
+      "sha256": "65c5b5ad089b73816a088c057114241f15381b953962c9b5fd107d2183d5cf90",
+      "classification": "open_migration",
+      "purpose": "One declaration groups enable_reads, pointer_loads and copies with original instruction-site diagnostics.",
+      "evidence": [
+        {
+          "path": "src/player/scene_input_producer.cpp",
+          "line": 62,
+          "sha256": "a995ae53cdcb46727994b0febaf61644c8f2a0b5d02aa38123d608625989e8e3"
+        }
+      ],
+      "verification": [
+        "tests/unit/scene_input_producer.cpp",
+        "tools/oracles/verify_original_scene_input_producer.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/player/sonic_animation_operations.hpp::sonic_animation_operations": {
+      "sha256": "4275f9c40a8ac8a88166e7e5659a7861f37e546cbbc5a041aaa14363903ad6dc",
+      "classification": "open_migration",
+      "purpose": "1027 read/store operations carry PCs, slots, field offsets and bit patterns; consumer interprets instruction recipes and partial field masks.",
+      "evidence": [
+        {
+          "path": "src/player/sonic_animation_operations.hpp",
+          "line": 6,
+          "sha256": "8af69713c6bf0807f92460079f675d0f05c123bb873090155f4244bf5ee775ea"
+        },
+        {
+          "path": "src/player/sonic_animation_table.cpp",
+          "line": 1,
+          "sha256": "c4ad3db54a8eaa4032a692653a2eb2b99232544fd00f8c5f3aa44f2981dcdafb"
+        }
+      ],
+      "verification": [
+        "tests/unit/sonic_animation_table.cpp",
+        "tools/oracles/verify_original_sonic_animation_table.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/player/sonic_animation_table_data.hpp::sonic_animation_recipes": {
+      "sha256": "0b91a0cb4b1a287b309e6ed881051860ccfe0e8932d192ee3d6bd8ece2df8935",
+      "classification": "open_review",
+      "purpose": "Typed action-export indices, object counts, animation mode/next fields and binary32 encodings inform resource graph counts in player_animation_decode; content/import boundary remains unresolved. Hex entries are not all PCs.",
+      "evidence": [
+        {
+          "path": "src/player/sonic_animation_table_data.hpp",
+          "line": 7,
+          "sha256": "d8c8aa041e018a67edfe0e01fcabeb752a80362f8ee1f0b680414bfc8e119f03"
+        },
+        {
+          "path": "src/player/player_animation_decode.cpp",
+          "line": 1,
+          "sha256": "27e1a4cc025b9291bbf4d40beb0f2ab960629017619a57c3961af3e3d04ff9f6"
+        }
+      ],
+      "verification": [
+        "src/player/player_animation_decode.cpp",
+        "tests/unit/sonic_animation_table.cpp"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/player/sonic_player.cpp::table": {
+      "sha256": "8c10f93faf97038a8dae94424046caf2cd7dcb3600ae6eedb73d0da00d8f4b08",
+      "classification": "open_migration",
+      "purpose": "Sonic action classification returns basic-block PCs used by action dispatch.",
+      "evidence": [
+        {
+          "path": "src/player/sonic_player.cpp",
+          "line": 219,
+          "sha256": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483"
+        }
+      ],
+      "verification": [
+        "tests/unit/sonic_player.cpp",
+        "tools/oracles/verify_original_sonic_player.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/player/sonic_player.hpp::addresses": {
+      "sha256": "a6a48f24e8e57254e7d94a66e99a962f8a805fc00b9058293169860c028b31b1",
+      "classification": "open_migration",
+      "purpose": "Executable addresses key Sonic numerical constants.",
+      "evidence": [
+        {
+          "path": "src/player/sonic_player.hpp",
+          "line": 70,
+          "sha256": "8ab874d28623af1876eebed149625c447f112a677098c0fa4f6e56da3286b0b4"
+        },
+        {
+          "path": "src/player/sonic_player.cpp",
+          "line": 1,
+          "sha256": "cdf3df011cbd2c98fd5d1df18afd996c665f0b3292e656967765fbd7f56ef483"
+        }
+      ],
+      "verification": [
+        "tests/unit/sonic_player.cpp",
+        "tools/oracles/verify_original_sonic_player.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/game/game_cleanup.cpp::life_slots": {
+      "sha256": "fe2b8ba060a7297790c0665720eb4412a7c19c39dd3bad86592fe69462142d20",
+      "classification": "named_structure",
+      "purpose": "Character-to-save life-slot choices preserve source character aliases.",
+      "evidence": [
+        {
+          "path": "src/game/game_cleanup.cpp",
+          "line": 55,
+          "sha256": "b03a1bb62b391f331f929a4f544ae2846f70b1c34af1018956ba9396d8a54649"
+        }
+      ],
+      "verification": [
+        "tests/unit/game_cleanup.cpp",
+        "tools/oracles/verify_original_game_cleanup.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/game/level_sounds.cpp::kStageBanks": {
+      "sha256": "ceed81ee01c3418f020884eed446d7585e77e703e12638ada7b946759492d4aa",
+      "classification": "named_structure",
+      "purpose": "Source switch immediates expressed as stage-to-bank choices; sound payload comes from imported banks.",
+      "evidence": [
+        {
+          "path": "src/game/level_sounds.cpp",
+          "line": 9,
+          "sha256": "11ca277befbbab24562fbab6bbf52ba8d43058efae351b5e42d56167c7d45cdf"
+        }
+      ],
+      "verification": [
+        "tests/unit/level_sounds.cpp",
+        "tools/oracles/verify_original_level_sounds.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/game/main_menu.cpp::positions_x": {
+      "sha256": "964644e5c9a2cacfb72a4b59ff4de762aeaa712b4709cd30546d2af13d6ce934",
+      "classification": "numeric_encoding",
+      "purpose": "Horizontal offsets for source background tile draw calls.",
+      "evidence": [
+        {
+          "path": "src/game/main_menu.cpp",
+          "line": 220,
+          "sha256": "b5f03cb7a953ea9fba84fe4a9e128ff6be47d1366dbed0031e813bf897681f43"
+        }
+      ],
+      "verification": [
+        "tools/oracles/verify_original_main_menu.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/game/main_menu.cpp::positions_y": {
+      "sha256": "e6fc6fe8cdd6e65a8f48315e0aaf0923e4d01de787ed48d867a4c884535529c6",
+      "classification": "numeric_encoding",
+      "purpose": "Vertical offsets for source background tile draw calls.",
+      "evidence": [
+        {
+          "path": "src/game/main_menu.cpp",
+          "line": 221,
+          "sha256": "b5f03cb7a953ea9fba84fe4a9e128ff6be47d1366dbed0031e813bf897681f43"
+        }
+      ],
+      "verification": [
+        "tools/oracles/verify_original_main_menu.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/game/main_menu_eligibility.cpp::clear_flags": {
+      "sha256": "56515675b88dc7c6db6bb68888c04d3daa0be5a4093169cd308ec09a6e864849",
+      "classification": "named_structure",
+      "purpose": "Story clear-flag indices consumed by eligibility predicates.",
+      "evidence": [
+        {
+          "path": "src/game/main_menu_eligibility.cpp",
+          "line": 6,
+          "sha256": "5ca7c0e54a3e2d9bd6459188daa2b49af3a3a1089a0a4e6a3bc3ba4da5faee76"
+        }
+      ],
+      "verification": [
+        "tests/unit/main_menu_eligibility.cpp",
+        "tools/oracles/verify_original_main_menu_eligibility.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/game/menu_eligibility.cpp::flags": {
+      "sha256": "ea851d547045e608704a203e45b0487f48a24b0761c879248a7bdf6cbdad567d",
+      "classification": "named_structure",
+      "purpose": "Character-to-story availability flag indices.",
+      "evidence": [
+        {
+          "path": "src/game/menu_eligibility.cpp",
+          "line": 28,
+          "sha256": "cf76022d0d362fcefed25327173331282b6fe705d035f1eeff14eafc1e2a9e14"
+        }
+      ],
+      "verification": [
+        "tests/unit/menu_eligibility.cpp",
+        "tools/oracles/verify_original_menu_eligibility.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/game/model_dlls.hpp::kModelDllNames": {
+      "sha256": "509954910a914802df490e0b09f2c14a674c2f914aee13790f4edebe93cf63f3",
+      "classification": "open_migration",
+      "purpose": "Legacy DLL container paths still couple game-tier code to original resource acquisition; move to importer/reference boundary.",
+      "evidence": [
+        {
+          "path": "src/game/model_dlls.hpp",
+          "line": 42,
+          "sha256": "ad30ce9d7074911a4fbff81d270083202930959dfd034c4f3ac1b1937189a81c"
+        },
+        {
+          "path": "src/game/model_dlls.cpp",
+          "line": 1,
+          "sha256": "9640ce6cecf32a944922b68926e0d1987f0784334b8d02f406558ff35f23cfaa"
+        }
+      ],
+      "verification": [
+        "tests/unit/model_dlls.cpp",
+        "tools/oracles/verify_original_model_dlls.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/game/model_dlls.hpp::kModelDllBindings": {
+      "sha256": "01681eb7707fc646d3b93e57b88d791283acb5f5ceaf4d83c4e9251fd8ff6a47",
+      "classification": "open_migration",
+      "purpose": "Export/global-address bindings model executable storage in the game tier.",
+      "evidence": [
+        {
+          "path": "src/game/model_dlls.hpp",
+          "line": 43,
+          "sha256": "ad30ce9d7074911a4fbff81d270083202930959dfd034c4f3ac1b1937189a81c"
+        },
+        {
+          "path": "src/game/model_dlls.cpp",
+          "line": 1,
+          "sha256": "9640ce6cecf32a944922b68926e0d1987f0784334b8d02f406558ff35f23cfaa"
+        }
+      ],
+      "verification": [
+        "tests/unit/model_dlls.cpp",
+        "tools/oracles/verify_original_model_dlls.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/game/save_creation.cpp::slots": {
+      "sha256": "c94a752ca000d963f0d1d43e378c934d192df9cf149ee48477522089b663e0af",
+      "classification": "named_structure",
+      "purpose": "Character-to-save life-slot choices with source aliases.",
+      "evidence": [
+        {
+          "path": "src/game/save_creation.cpp",
+          "line": 9,
+          "sha256": "f226be20c3de073d112cae2b31b20105843accc668388398afaabf07f65c1c1d"
+        }
+      ],
+      "verification": [
+        "tests/unit/save_creation.cpp",
+        "tools/oracles/verify_original_save_creation.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/game/title_menu.cpp::shifts": {
+      "sha256": "e07a619617931b411cd6e5ca0199966f19a9e818b42afff3c73f333ac5ef551c",
+      "classification": "numeric_encoding",
+      "purpose": "Packed title color component shifts used by channel interpolation.",
+      "evidence": [
+        {
+          "path": "src/game/title_menu.cpp",
+          "line": 11,
+          "sha256": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d"
+        }
+      ],
+      "verification": [
+        "tests/unit/title_menu.cpp",
+        "tools/oracles/verify_original_title_menu.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/game/title_menu.cpp::tiles": {
+      "sha256": "ff60af864032bde15d678da522f7feffcc9b9d1e16ebe5c56a9031b174cfbddc",
+      "classification": "numeric_encoding",
+      "purpose": "Packed descriptors forwarded to draw_scaled_texture contain draw flags and texture ordinals, not call targets.",
+      "evidence": [
+        {
+          "path": "src/game/title_menu.cpp",
+          "line": 802,
+          "sha256": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d"
+        }
+      ],
+      "verification": [
+        "tests/unit/title_menu.cpp",
+        "tools/oracles/verify_original_title_menu.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/game/title_menu.cpp::first_columns": {
+      "sha256": "1542f5e502d40ce5b8cfec30b09e56965ebf0eaa7b93d6f440d907f389db4dec",
+      "classification": "named_structure",
+      "purpose": "Starting columns for source logo tile rows.",
+      "evidence": [
+        {
+          "path": "src/game/title_menu.cpp",
+          "line": 815,
+          "sha256": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d"
+        }
+      ],
+      "verification": [
+        "tests/unit/title_menu.cpp",
+        "tools/oracles/verify_original_title_menu.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/game/title_menu.cpp::end_columns": {
+      "sha256": "0cbf7896033bdba76524f320c6bfec28b2fafb0a4caa41b56f6061abc4895dd4",
+      "classification": "named_structure",
+      "purpose": "Exclusive ending columns for source logo tile rows.",
+      "evidence": [
+        {
+          "path": "src/game/title_menu.cpp",
+          "line": 816,
+          "sha256": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d"
+        }
+      ],
+      "verification": [
+        "tests/unit/title_menu.cpp",
+        "tools/oracles/verify_original_title_menu.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/game/title_menu.cpp::horizontal_offsets": {
+      "sha256": "37e09308925aae60de5fdea62596e61d31828277ef52f30ea20c5a326c088434",
+      "classification": "numeric_encoding",
+      "purpose": "Numerical X spacing of source logo tiles.",
+      "evidence": [
+        {
+          "path": "src/game/title_menu.cpp",
+          "line": 817,
+          "sha256": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d"
+        }
+      ],
+      "verification": [
+        "tests/unit/title_menu.cpp",
+        "tools/oracles/verify_original_title_menu.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/game/title_menu.cpp::vertical_offsets": {
+      "sha256": "80f9bf7ca05cc8b6e74b2ac548049787851c8ab945baf68550f822b5a1a93b1a",
+      "classification": "numeric_encoding",
+      "purpose": "Numerical Y spacing of source logo tiles.",
+      "evidence": [
+        {
+          "path": "src/game/title_menu.cpp",
+          "line": 818,
+          "sha256": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d"
+        }
+      ],
+      "verification": [
+        "tests/unit/title_menu.cpp",
+        "tools/oracles/verify_original_title_menu.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/game/title_menu.cpp::factories": {
+      "sha256": "9097adadac991790fb89ed952dcbae4df8dee56e7f4cf899ad0a1a77f22e92df",
+      "classification": "named_structure",
+      "purpose": "Named native C++ member-function factories for menu objects replace original PCs.",
+      "evidence": [
+        {
+          "path": "src/game/title_menu.cpp",
+          "line": 959,
+          "sha256": "f66c4b75d20f61cf2ca3017bbb6e996c4ccfc40d6b36b49635715af5dc88c08d"
+        }
+      ],
+      "verification": [
+        "tests/unit/title_menu.cpp",
+        "tools/oracles/verify_original_title_menu.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/runtime/logo_renderer.cpp::names": {
+      "sha256": "c7f6a5f6150e62648ed35432944a915e3fd38f4ba0507a1a1de583ba6c401b40",
+      "classification": "typed_content",
+      "purpose": "Resource names matched to imported logo textures.",
+      "evidence": [
+        {
+          "path": "src/runtime/logo_renderer.cpp",
+          "line": 58,
+          "sha256": "901b8773c7a913b4f0fcc74893eb3cf89c9fb23de03a6f8541ba8c764f755798"
+        }
+      ],
+      "verification": [
+        "tools/journey/compare_native_startup.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/runtime/native_input.cpp::masks": {
+      "sha256": "0f6c6a61694827efcb197d09c971eb781857a6b2f7fbb36fd17045dcca337972",
+      "classification": "numeric_encoding",
+      "purpose": "Pinned input action bit masks indexed by semantic KeyBinding.",
+      "evidence": [
+        {
+          "path": "src/runtime/native_input.cpp",
+          "line": 230,
+          "sha256": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114"
+        }
+      ],
+      "verification": [
+        "tests/unit/native_input.cpp",
+        "tools/oracles/verify_original_native_input.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/runtime/native_input.cpp::directions": {
+      "sha256": "72deeef9a76b474b7a918cfebb9b4cf01d27cc9c73693eccbf360f7c9753a1db",
+      "classification": "numeric_encoding",
+      "purpose": "Directional button masks for the two native sticks.",
+      "evidence": [
+        {
+          "path": "src/runtime/native_input.cpp",
+          "line": 238,
+          "sha256": "9f4127898ef0c1f67fd87a6121078d0cb88daa7d6c746e6925b42a8539eea114"
+        }
+      ],
+      "verification": [
+        "tests/unit/native_input.cpp",
+        "tools/oracles/verify_original_native_input.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    },
+    "src/runtime/native_title_tasks.cpp::names": {
+      "sha256": "01135e293e8f46eb2f275fdc3f96e8686c4477dd0c88240fe396724db14e4451",
+      "classification": "typed_content",
+      "purpose": "Readable suffixes used for menu task stop diagnostics.",
+      "evidence": [
+        {
+          "path": "src/runtime/native_title_tasks.cpp",
+          "line": 13,
+          "sha256": "5bc34cd9456afb6af1f38f7af33708ca322ba1f5240897a49706371dd7a6a71c"
+        }
+      ],
+      "verification": [
+        "tests/unit/title_menu.cpp",
+        "tools/journey/check_native_main_menu.py"
+      ],
+      "verification_limit": "Existing judge/consumer paths identify verification to retain; not a claim of fresh execution or complete module fidelity."
+    }
+  },
+  "retired": {}
+}

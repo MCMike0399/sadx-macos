@@ -1,0 +1,141 @@
+{
+  "base": "c55762db5a42ad77b56fbaa8617ccfead4dbf0e1",
+  "measurement_change": "signature-dispatch-v1; unchanged source, separate metric; not source regression",
+  "unchanged_protected_inputs": {
+    "tools/gate/check_readability.py": {
+      "sha256": "4be4b86842b84692df425fbd8456c2964c69e79bf8c3222b701e0ec1c7fd7d51",
+      "identical_to_base": true
+    },
+    "reference/readability-baseline.json": {
+      "sha256": "ed54af0fc27250eeabe75bb6109dec08ad35030d58294ed4caf9c2926879af3e",
+      "identical_to_base": true
+    },
+    "tests/python/test_readability.py": {
+      "sha256": "5593d449e6b7f507e233903a14aaae0a6c3621db888b31ae2169a3ca5229db94",
+      "identical_to_base": true
+    },
+    "reference/judge-manifest.json": {
+      "sha256": "7d75489b94854f87886d6e1d9c3b802bf1b81c222029ab7990b9b6e98d94f4cb",
+      "identical_to_base": true
+    }
+  },
+  "prior_metrics": {
+    "hex_literals": 3244,
+    "address_identifiers": 1454,
+    "address_calls": 61,
+    "goto": 0,
+    "address_labels": 0,
+    "long_lines": 1183,
+    "multi_statement_lines": 1818,
+    "large_decimal_literals": 233,
+    "emulator_arithmetic": 3297,
+    "address_comments": 1059
+  },
+  "source_dispatch_counts": {
+    "src/engine/ninja_system_init.cpp": 9,
+    "src/engine/ninja_vibration.cpp": 4,
+    "src/game/game_frame_owners.cpp": 4,
+    "src/game/game_reset.cpp": 18,
+    "src/game/game_reset_leaves.cpp": 8,
+    "src/game/game_scene_logic.cpp": 8,
+    "src/game/game_view.cpp": 3,
+    "src/game/game_winmain.cpp": 7,
+    "src/game/mod_loader_frame.cpp": 2,
+    "src/game/sound_manager.cpp": 9,
+    "src/player/sonic_player.cpp": 41
+  },
+  "sonic_old_metrics": {
+    "hex_literals": 547,
+    "address_identifiers": 171,
+    "address_calls": 0,
+    "goto": 0,
+    "address_labels": 0,
+    "long_lines": 65,
+    "multi_statement_lines": 2,
+    "large_decimal_literals": 0,
+    "emulator_arithmetic": 86,
+    "address_comments": 0
+  },
+  "new_dispatch_total": 113,
+  "unresolved_candidate_tokens": 23463,
+  "sample_findings": [
+    {
+      "path": "src/player/sonic_player.cpp",
+      "line": 702,
+      "column": 29,
+      "helper": "call",
+      "target_argument": 4,
+      "target_expression": "0x45a870"
+    },
+    {
+      "path": "src/game/game_reset_leaves.cpp",
+      "line": 24,
+      "column": 127,
+      "helper": "call",
+      "target_argument": 2,
+      "target_expression": "0x504ed0"
+    },
+    {
+      "path": "src/game/game_reset_leaves.cpp",
+      "line": 30,
+      "column": 85,
+      "helper": "call",
+      "target_argument": 2,
+      "target_expression": "callback"
+    },
+    {
+      "path": "src/game/game_winmain.cpp",
+      "line": 28,
+      "column": 27,
+      "helper": "call",
+      "target_argument": 2,
+      "target_expression": "0x7db040"
+    },
+    {
+      "path": "src/game/game_winmain.cpp",
+      "line": 33,
+      "column": 13,
+      "helper": "call",
+      "target_argument": 2,
+      "target_expression": "proc"
+    },
+    {
+      "path": "src/game/game_view.cpp",
+      "line": 33,
+      "column": 13,
+      "helper": "call",
+      "target_argument": 2,
+      "target_expression": "0x4071c0"
+    }
+  ],
+  "checks": [
+    {
+      "command": "python3 -m unittest discover -s tests/python -p 'test_readability.py' -v",
+      "exit_status": 0,
+      "tests": 17
+    },
+    {
+      "command": "python3 -m unittest discover -s tests/python -p 'test_address_dispatch.py' -v",
+      "exit_status": 0,
+      "tests": 12
+    },
+    {
+      "command": "python3 tools/gate/check_readability.py",
+      "exit_status": 0
+    },
+    {
+      "command": "python3 tools/gate/check_address_dispatch.py --migrate-signature-v1 --report /tmp/address-dispatch-report.json",
+      "exit_status": 0
+    }
+  ],
+  "skipped": [
+    "builds",
+    "oracles",
+    "full gate",
+    "providers",
+    "formal independent review",
+    "judge manifest refresh",
+    "inventory generation"
+  ],
+  "limits_document": "reference/production-integration-20261101/address-dispatch-enforcement.md"
+}

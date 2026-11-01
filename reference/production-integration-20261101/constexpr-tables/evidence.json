@@ -1,0 +1,31 @@
+{
+  "base_commit": "c55762d",
+  "requirement": "Fingerprint explicitly reviewed named constexpr aggregates; preserve legitimate scalar masks/colors and visible open instruction-table debt.",
+  "before": {
+    "existing_readability_hex_literals": 0,
+    "source": "src/player/sonic_animation_operations.hpp",
+    "blind_spot": "The 1027-operation declaration is fully masked by the existing constexpr literal exemption."
+  },
+  "after": {
+    "aggregate_candidates": 49,
+    "classifications": {
+      "named_structure": 11,
+      "numeric_encoding": 19,
+      "open_migration": 14,
+      "open_review": 1,
+      "typed_content": 4
+    },
+    "sonic_operation_classification": "open_migration"
+  },
+  "focused_tests": {
+    "command": "python3 -m unittest discover -s tests/python -p test_constexpr_tables.py -v",
+    "exit_status": 0,
+    "tests": 8
+  },
+  "limits": [
+    "Lexical aggregate census, not a general C++ parser or numeric-address detector.",
+    "No behavior-bearing source or existing oracle, fixture, mutant, tolerance or expected value changed.",
+    "Candidate not yet independently reviewed, integrated, manifest-refreshed or full-gate qualified.",
+    "Whole module conformity and all non-constexpr tables remain subject to the exhaustive inventory."
+  ]
+}
