@@ -1,0 +1,54 @@
+{
+  "source_commit": "31b67928321bdc68023580779e30d7c7fb519cc0",
+  "source_tree": "bf19c86735cd858277769b30e6de97b7161763b9",
+  "full_streams": {
+    "sse": {
+      "bytes": 16229824,
+      "sha256": "f3ad37f858486670e055c23156f9d5a351eef39fce2b91532ed67f7cba769ad8",
+      "every_byte_equal": true,
+      "every_case_identity_equal": true
+    },
+    "axes": {
+      "bytes": 30497802,
+      "sha256": "392936528012f91d95e0e1ef834695929db9534c46f1f0cbb9bfe5f4eee74461",
+      "every_byte_equal": true,
+      "every_case_identity_equal": true
+    },
+    "pad": {
+      "bytes": 609696,
+      "sha256": "4469625963c56bfc206bb1f6d906441b4eb47790d831526f2298215c845a2c5e",
+      "every_byte_equal": true,
+      "every_case_identity_equal": true
+    },
+    "native-sse": {
+      "bytes": 199068120,
+      "sha256": "a9a591283153e551c6ddb38205847612679c7efed9640a313e62766bc657f349",
+      "every_byte_equal": true
+    },
+    "native-axes": {
+      "bytes": 24903828,
+      "sha256": "dcfc3900e5caf0560606c634c0e3c2e0da971d8c563addc9077c048418709e3f",
+      "every_byte_equal": true
+    }
+  },
+  "contracts": {
+    "sse": "1244160 cases 199068120 bytes 4458530012893139995",
+    "axes": "327681 24903828 9340279443059284959"
+  },
+  "native_input_constants": "Existing native-input-mod-constants producer check passed.",
+  "artifacts": {
+    "build/sse-main-contract-build.log": "a3dc1ee1a81d72fa08fd20a60db1486228d6253b48b4d836c8590db0ecd48293",
+    "build/sse-main-unit.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "build/sse-main-contract.log": "8600d311a81784ee75cdc5e5c36728d8ec9ed87dd096aedef0896904af3ce05f",
+    "build/sse-main-axes-contract.log": "67bb2ef31c780b2456bdbe39e53757c01ac1162e886817a4118325b052f29d08",
+    "build/sse-main-pad-unit.log": "c4eecee1273df3d6770b8f0423aca207af68e5ba2bd54a1989a3008d2d80bace",
+    "build/sse-main-probe-build.log": "2b8e55b1898bc57f315e33e644fd27afbb1072e319052693097d2f993643ef85",
+    "build/sse-main-streams/commands.json": "58f6d5a976bfb5391577587f9128f81d982108ddd5ed93241b52c7ccf8e6cbb7",
+    "build/sse-main-streams/comparison.json": "b4f93ff8e14b74445fb20dca651cf1f2d5810040c29cb41a67ff0cb3ed35f510"
+  },
+  "limits": [
+    "Default SSE5076value/232720status disagreements and axes93104/pad300 FP partial identities remain unchanged, not full-state passes.",
+    "Reserved fresh results remain separate distinct-input receipts.",
+    "Product/journey/integration gate qualification for this Main Source is pending."
+  ]
+}
