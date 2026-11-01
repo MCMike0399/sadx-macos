@@ -1,0 +1,48 @@
+{
+  "candidate": "e6fb2f8255a6083fdaec62541344a08b3c05d47c",
+  "inherited_inputs": 948,
+  "expected_inputs": 970,
+  "expected_added": {
+    "tests/fixtures/animation_table_publications.hpp": "072315e8f29640e0da452332f9da5f7c8d81813dd57c377f2d1641e0c11c18e1",
+    "tests/probes/native_animation_table_characterization_probe.cpp": "f10fec0de24b73a7a78824976f3504749dda254eacaa17fde2327cf33ec39ef8",
+    "tests/probes/native_plain_player_animation_blend_probe.cpp": "61419d5c88cd8a225238035edd468f25f7d4c077ab4dae39b57efbf16bb0fae4",
+    "tests/probes/native_plain_player_animation_probe.cpp": "4c86299981b26700bc616b0de569fd2ff9b4b6ccb2d6934b7ca8b5939ff6e833",
+    "tests/probes/native_plain_sonic_animation_table_probe.cpp": "a1b36d34b3f6bbfb6d7473ce3ce3e5bc43bffffe31f8482b6b84b2e8769800fe",
+    "tools/oracles/animation_judges/build.py": "2eac44085f9fabc4a3f9bcaf2dca7b0dafb597f464538c6586fd2068aefbccc0",
+    "tools/oracles/animation_judges/capture.py": "845e06fd90b11058f49856e0bd15f3a63ee281c743683ab6b769814268e66c69",
+    "tools/oracles/animation_judges/capture_consumers.py": "ad6871e720d295d87b96adaae4c0f7db43b8433cced731dc6ee6c4f3b3a1a339",
+    "tools/oracles/animation_judges/check_comparator.py": "b3036e53978938ec711be2676ac910ae199f4ef76f322bfb9c10a8f7626efc82",
+    "tools/oracles/animation_judges/compare.py": "a5c3ba2d84773bf1a343c3aa8aa12dd93d45fa3f1489603748eb3522c48006ea",
+    "tools/oracles/animation_judges/consumer_identities.py": "2d5c5a4916b0c1998d875dde6e05498159563548fca8722bddfe2360e567ee98",
+    "tools/oracles/animation_judges/gamma_assets.py": "07581cdaca52f6aac09f5c182e1c50694babeaafcea12ce1050fc50172f3cf02",
+    "tools/oracles/animation_judges/migration_faults.py": "9101f01d5349f229b2665394254e225608ed104796af0ff546a3b186d53472df",
+    "tools/oracles/animation_judges/mutate_motion.py": "03703dd149033aaa027d1714149d6369be18863b8d997bf5a1f602e433318746",
+    "tools/oracles/animation_judges/mutate_table.py": "b8d019b149c2df43e806c358876ba80b5e8485dbb2e0e59a6e0ad74cab7e1680",
+    "tools/oracles/animation_judges/replay_frozen.py": "e3edd13c88890103d03a22d4b530690d934e1b2e98b26327479a271070377874",
+    "tools/oracles/animation_judges/run_units.py": "faf0dacc436e3c4339533d650c38df8aa6dd9da7ca202d09d5c32aee2a5171fd",
+    "tools/oracles/animation_judges/seal.py": "fbd1e31001e1f4003cc96102ae02ea091c499a7afb596f00ccb125ac72772142",
+    "tools/oracles/animation_judges/seal_migration.py": "0fff2ed872d6ae8fef87670d1a28bac591247582f8925e0ab54c1d9f42b793a8",
+    "tools/oracles/animation_judges/source_order.py": "8ac3a5312e2672aca9e4e66d6b57c8cf118bbd02219c0db80d43fcc0d263fc68",
+    "tools/oracles/animation_judges/table.py": "b53e66b9a53a6b8b8f985b7427644684c2bd8e8b38119c07f9fdc07e761bd5f1",
+    "tools/oracles/animation_judges/verify_packet.py": "cec75eb48f714f5e7c394ffb821fd05a164a4c28b194b9a718962f81ee6b3c89"
+  },
+  "changed_proposal": {
+    "Makefile": {
+      "before": "1589ad72e6f32dc1684709122d78fbdc5c691ee571293be016301f90a6480ded",
+      "current": "92eddb86c50b796a5675c9890374d485a110df17e90c5b03e34c9f4d569b40e0"
+    },
+    "tests/unit/manifest.tsv": {
+      "before": "ef212f0b7bdc43ac4c7bf5ba6583f3313f652f68a8e236758ec03b95ec7e491f",
+      "current": "c4c0c500e94ffb41cc789afccbee878a8ba9323d79d30f1149621e72678e9eab"
+    }
+  },
+  "removed_proposal": [],
+  "limits": [
+    "Root seal of committed prerequisite/binding changes only; not independent source approval or integration qualification.",
+    "Main1266-input parent union, widened unit protection, inventory/constexpr lineage, holdouts/product closure/journeys/gate remain pending."
+  ],
+  "all_inherited_paths_present": true,
+  "all_actual_hashes_equal_explicit_proposal": true,
+  "all_changed_and_added_bytes_equal_immutable_candidate": true,
+  "current_inputs": 970
+}
