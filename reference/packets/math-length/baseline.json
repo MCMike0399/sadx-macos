@@ -1,0 +1,498 @@
+{
+  "source_base": "3efc9b7",
+  "judge_setup_commit": "e411eff",
+  "source_tree_clean": true,
+  "artifacts": {
+    "build/math-length/baseline/build-receipt.json": {
+      "bytes": 79048,
+      "sha256": "798f9101730f08500f3559d89879f70b3e77eef76b5650c6d9c741d48c3995a4"
+    },
+    "build/math-length/baseline/contract.dylib": {
+      "bytes": 173808,
+      "sha256": "ef4b98a4b91aaf36be377a411e99440e9be10bbf553bf8ae6f6c606f27442d70"
+    },
+    "build/math-length/baseline/contract.json": {
+      "bytes": 536,
+      "sha256": "59b87841e688840b7abdcd46cc7e6ce1d715512bc01e78dfad7d26e2351d181d"
+    },
+    "build/math-length/baseline/contract.outputs.bin": {
+      "bytes": 66742260,
+      "sha256": "03e767f358a7acf87cee5fdec60e42ad8109e8f1f56af6a6ec338b1315a02add"
+    },
+    "build/math-length/baseline/sonic_player-unit.log": {
+      "bytes": 2511,
+      "sha256": "5db5efbbc7e6cd47fec3f420941437fb0204f8b49e8e4ccffef8ee6849393cf3"
+    },
+    "build/math-length/baseline/unit-receipt-extra.json": {
+      "bytes": 28357,
+      "sha256": "7d921350e68d2911319a188d9f4584076b820a7f8cb17056c3295f8e5aa9d477"
+    },
+    "build/math-length/baseline/unit-receipt.json": {
+      "bytes": 59394,
+      "sha256": "f56c63b864b6958b1b2802a1ac9614e9f008591e2099aabf46d30cbbbbdb0906"
+    },
+    "build/math-length/baseline2/alternate_acceleration-attribute20000.cases.bin": {
+      "bytes": 798720,
+      "sha256": "261865298b39c89a752fdc2031a4d9a94210a13e9e14c1c870419e197f814505"
+    },
+    "build/math-length/baseline2/alternate_acceleration-attribute20000.full.jsonl.gz": {
+      "bytes": 18009549,
+      "sha256": "b51951248bbed98f03de1080d5407d7548115dcdd8912a30e7b8a8f060c1e93d"
+    },
+    "build/math-length/baseline2/alternate_acceleration-attribute20000.json": {
+      "bytes": 95790765,
+      "sha256": "2911d7c2cbcc6e9966a9877142e2e6452acfee9cfc3f3a88f990bfd62492d680"
+    },
+    "build/math-length/baseline2/alternate_acceleration-attribute20000.log": {
+      "bytes": 1451,
+      "sha256": "f2d8923eac7c424869fd6a9c12d1cd18f02576e3d1b1c3693149c492baa6e720"
+    },
+    "build/math-length/baseline2/alternate_acceleration-attribute4000.cases.bin": {
+      "bytes": 798720,
+      "sha256": "691b1f017689fbdfdbfea7393e4418bd7c098c91e2b001e6d149822c26dcba5f"
+    },
+    "build/math-length/baseline2/alternate_acceleration-attribute4000.full.jsonl.gz": {
+      "bytes": 15725062,
+      "sha256": "6861dc3f888a2ffaecc8a10654510f226c80237f3e5458a977ea1b53a2058d8a"
+    },
+    "build/math-length/baseline2/alternate_acceleration-attribute4000.json": {
+      "bytes": 86793404,
+      "sha256": "8aeda1a588fa337de78866a56875a93df83d8db08f8cb60be9d6dc9fc9e05289"
+    },
+    "build/math-length/baseline2/alternate_acceleration-attribute4000.log": {
+      "bytes": 1451,
+      "sha256": "f2d8923eac7c424869fd6a9c12d1cd18f02576e3d1b1c3693149c492baa6e720"
+    },
+    "build/math-length/baseline2/alternate_acceleration-eventair.cases.bin": {
+      "bytes": 590080,
+      "sha256": "10f3c181d17aeb0bc551a5a90e062ed1584b5efd6dd21abe1b1cbd0de226eb9a"
+    },
+    "build/math-length/baseline2/alternate_acceleration-eventair.full.jsonl.gz": {
+      "bytes": 14906201,
+      "sha256": "28a7c78141577c907e89efdc9ad4d5d3acf5aa28aed03ae0ab3f24c3048a99c1"
+    },
+    "build/math-length/baseline2/alternate_acceleration-eventair.json": {
+      "bytes": 74478695,
+      "sha256": "f1579f3e0e77989be831625d7b262472bfbc31ebbd93ff7b69111b29073312b9"
+    },
+    "build/math-length/baseline2/alternate_acceleration-eventair.log": {
+      "bytes": 1451,
+      "sha256": "118ef6f92ca65a44e26b6af4d51a1e9db3df447b4d86033b6d94903d2347e003"
+    },
+    "build/math-length/baseline2/alternate_acceleration-eventground.cases.bin": {
+      "bytes": 590080,
+      "sha256": "aa3208ca6fbd878194b1d04b559ab584bbbf9902eecbb4280b6cea51b86a9228"
+    },
+    "build/math-length/baseline2/alternate_acceleration-eventground.full.jsonl.gz": {
+      "bytes": 14745066,
+      "sha256": "4e7c11fb8f0054dbd449cca054d0fdcae3665ee39dc492fdfff2341b32acaab9"
+    },
+    "build/math-length/baseline2/alternate_acceleration-eventground.json": {
+      "bytes": 74546963,
+      "sha256": "4da357c2bd61489efd251afc8160734e554eb89afbb63902a21badd8d0af4556"
+    },
+    "build/math-length/baseline2/alternate_acceleration-eventground.log": {
+      "bytes": 1451,
+      "sha256": "9de3aec2e7f84211e8fcd06cea98a718adf0ac51d90e464e77f1679542e39983"
+    },
+    "build/math-length/baseline2/alternate_acceleration.dylib": {
+      "bytes": 256800,
+      "sha256": "175ee1d782265969d449b12527b44178bbf75f959daad69b453f71dd0e1f2239"
+    },
+    "build/math-length/baseline2/collision_component.dylib": {
+      "bytes": 194536,
+      "sha256": "a8903351497e5f648d29a5468aaebbbf707da253bb8e71c99695c2b7fc5d02b5"
+    },
+    "build/math-length/baseline2/collision_component.full.jsonl.gz": {
+      "bytes": 2140242,
+      "sha256": "3a84339c89b89a0a30e1ae7276bbbde6865884e2c48276ef99a370134bfb4f88"
+    },
+    "build/math-length/baseline2/collision_component.json": {
+      "bytes": 68680,
+      "sha256": "56b00e272e18ba435e97db68a8bb795d1ccb3124310297502aa749abce2892da"
+    },
+    "build/math-length/baseline2/collision_component.log": {
+      "bytes": 76,
+      "sha256": "2d69343cd06fc0723eea4797c84089a320f86ec482a61c0bcf8bf256cf667854"
+    },
+    "build/math-length/baseline2/contract.dylib": {
+      "bytes": 173808,
+      "sha256": "ef4b98a4b91aaf36be377a411e99440e9be10bbf553bf8ae6f6c606f27442d70"
+    },
+    "build/math-length/baseline2/identities.json": {
+      "bytes": 2331213,
+      "sha256": "154cbd981f8958d6e852059c2110d0b6126f05fef5e845e40d340edd6f124a25"
+    },
+    "build/math-length/baseline2/player_contact_initializer.cases.bin": {
+      "bytes": 960000,
+      "sha256": "686147b3886d788c716a444910983013a00c2aef1bc041dc55cef6441c076b2e"
+    },
+    "build/math-length/baseline2/player_contact_initializer.dylib": {
+      "bytes": 175248,
+      "sha256": "f6a72309748673e4252467152b1df5b98e7ff7ec522df5f2dd4a8c96979d9abd"
+    },
+    "build/math-length/baseline2/player_contact_initializer.full.jsonl.gz": {
+      "bytes": 9366200,
+      "sha256": "bb642f9d657efef2f539ba8efc1c2164888aca7a1b583c1fbbe162b3d58955fd"
+    },
+    "build/math-length/baseline2/player_contact_initializer.json": {
+      "bytes": 36880883,
+      "sha256": "4737690d6a7132281068fa19979240d3f2e6e5b8a3ba2a6c18a02550dfa46ec7"
+    },
+    "build/math-length/baseline2/player_contact_initializer.log": {
+      "bytes": 1187,
+      "sha256": "b0018136493a5991479c9ae602dbe2237c9b68b2d040dbd778fe2644b64ad8ef"
+    },
+    "build/math-length/baseline2/player_contact_response.constants.bin": {
+      "bytes": 52,
+      "sha256": "10889309fdb5c0b466b1f62c5d0adcda8f271ce9a4b5a6332feee9397899e557"
+    },
+    "build/math-length/baseline2/player_contact_response.dylib": {
+      "bytes": 223136,
+      "sha256": "cdeb3a04550af0e4624ce8b85d7970ea9e7f35f0166b8861a405d8cfb25bc950"
+    },
+    "build/math-length/baseline2/player_contact_response.full.jsonl.gz": {
+      "bytes": 8245360,
+      "sha256": "a7f8a1939560d31f7aeec866203ac2b8dc3b4499c056b0d5dfb22cfc106af152"
+    },
+    "build/math-length/baseline2/player_contact_response.json": {
+      "bytes": 49146,
+      "sha256": "6bf1287c8aa20369861d4a51717be730fe6233d90e1d1bcf729fc1cf9861f9ea"
+    },
+    "build/math-length/baseline2/player_contact_response.log": {
+      "bytes": 5935,
+      "sha256": "8c1ea7ef43c270f7f7ada229902793cb54c1378de6ea633542b998b0d3df8816"
+    },
+    "build/math-length/baseline2/player_direction_reset.cases.bin": {
+      "bytes": 152760,
+      "sha256": "2ecaf4d2e00959349ee6fdb3cf0bb6951491b010978fb14d389c1dfdaa5c80c0"
+    },
+    "build/math-length/baseline2/player_direction_reset.dylib": {
+      "bytes": 205296,
+      "sha256": "677a9060df0fcef13f838d3b5048b458d79e2d50aae39ea5f27275b6d647f5fd"
+    },
+    "build/math-length/baseline2/player_direction_reset.full.jsonl.gz": {
+      "bytes": 3667151,
+      "sha256": "150c2b48ee27efce4a6cbf7a9d3b5c6d79a87830b20419449b91b82ccbfe26de"
+    },
+    "build/math-length/baseline2/player_direction_reset.json": {
+      "bytes": 14362,
+      "sha256": "8bc6284de2fbcaa856165afe03990fd8d987e7d9fa7aa2f51073df574e88e199"
+    },
+    "build/math-length/baseline2/player_direction_reset.log": {
+      "bytes": 1139,
+      "sha256": "807e4f478bf85592b9efcdccb3dbf17a9bcc22fad76b78d2587672b944deffc9"
+    },
+    "build/math-length/baseline2/player_mesh_query.cases.bin": {
+      "bytes": 27716,
+      "sha256": "a80e585e4467bcdd50f9db3a813f449c5a6677dd32aeb68ee3d4c2bf7fac28d6"
+    },
+    "build/math-length/baseline2/player_mesh_query.dylib": {
+      "bytes": 216408,
+      "sha256": "6ca9e1daa4ca03ab272f07d131670b3f7da681eae8b2e575bfc2c3f5f0639503"
+    },
+    "build/math-length/baseline2/player_mesh_query.full.jsonl.gz": {
+      "bytes": 2142383,
+      "sha256": "9c63a03ce25b01170ccbb40d5597920a34dbc69adc896194780cb2d8e3180d2c"
+    },
+    "build/math-length/baseline2/player_mesh_query.json": {
+      "bytes": 4910,
+      "sha256": "3ee2a690f70cc6b6fa423d9aaf2e480960ed81f772d96431c67196319a08caeb"
+    },
+    "build/math-length/baseline2/player_mesh_query.log": {
+      "bytes": 923,
+      "sha256": "e355ca0f93e13728ef19859453095891c07280cad3cb8daacc3bc39c0b670e5f"
+    },
+    "build/math-length/baseline2/player_position.cases.bin": {
+      "bytes": 1357056,
+      "sha256": "b9575f16252742ea7af7fdcc4737a84e6052eba36e6cc9a7768c81b3861d276c"
+    },
+    "build/math-length/baseline2/player_position.dylib": {
+      "bytes": 213896,
+      "sha256": "97b99406ce1f60d49b0a07656b4c4ca9f6f30b2ccf32c2129573272b0e984b2d"
+    },
+    "build/math-length/baseline2/player_position.full.jsonl.gz": {
+      "bytes": 9102981,
+      "sha256": "815cd1ae0e74d81c394437693396f766e4da995853d3db859ec3686e59180676"
+    },
+    "build/math-length/baseline2/player_position.json": {
+      "bytes": 9523,
+      "sha256": "dd12c9a166fe0d942fc447d5718b2c17b1157ec01f02d7ab85465137ef878656"
+    },
+    "build/math-length/baseline2/player_position.log": {
+      "bytes": 935,
+      "sha256": "2e2e3d68919c6874283155e8f46c85aeb77fc8f9fd8673e535118da77f7dab6f"
+    },
+    "build/math-length/baseline2/player_reaction.cases.bin": {
+      "bytes": 72744,
+      "sha256": "19431b3ae8e640bf30375054864d172f2549f2fcec5048babb3477e426d63210"
+    },
+    "build/math-length/baseline2/player_reaction.dylib": {
+      "bytes": 232280,
+      "sha256": "badc3af14687eaeb6622062fc37846d8f1a0294f5ed69ff93ed293674f1aede8"
+    },
+    "build/math-length/baseline2/player_reaction.full.jsonl.gz": {
+      "bytes": 1838925,
+      "sha256": "2a454bc0ebc843d4f0333146839bd7be4f1317655ca9b69929d8eb0756d8a3a9"
+    },
+    "build/math-length/baseline2/player_reaction.json": {
+      "bytes": 249849,
+      "sha256": "894c56f7102c0c547f5eade7d49ff55c8929fd95735b3d31841327a4ee5a5036"
+    },
+    "build/math-length/baseline2/player_reaction.log": {
+      "bytes": 2183,
+      "sha256": "86c3010a235ee4ea4d4102f4d4061875289d4fc66f731304c6cefb1f944572cc"
+    },
+    "build/math-length/baseline2/player_rotation.cases.bin": {
+      "bytes": 1563408,
+      "sha256": "151f6dc1bfdddb5d60812c8a56da9457028f4a242b688a746e16a4bdeca6dcca"
+    },
+    "build/math-length/baseline2/player_rotation.dylib": {
+      "bytes": 173112,
+      "sha256": "02fffff6cbeed83acacd493408383cafad6ef16aef2681bde47a1341f337e8b4"
+    },
+    "build/math-length/baseline2/player_rotation.full.jsonl.gz": {
+      "bytes": 11323892,
+      "sha256": "03d5d2245c08b52ad8bb7a434161cbab62e3feb94381685530ffc03b75a93a9d"
+    },
+    "build/math-length/baseline2/player_rotation.json": {
+      "bytes": 10361,
+      "sha256": "e3e035826a8079ebb350daf6eb18763dd1786f4312062d1a65eaf674b9c3171e"
+    },
+    "build/math-length/baseline2/player_rotation.log": {
+      "bytes": 1079,
+      "sha256": "f6086887fc61b1431b7bbca7e5606af93b84f4a5f08ead515864629fb962a1ae"
+    },
+    "build/math-length/baseline2/player_scene.cases.bin": {
+      "bytes": 38400,
+      "sha256": "dc7e0bc5e4c3dd420d80503ee3a16bcbd0551dba7d3fd0250009f2e2074dcee3"
+    },
+    "build/math-length/baseline2/player_scene.dylib": {
+      "bytes": 243504,
+      "sha256": "2b34ad41ed7804afc888d11164ccad9442355a6311cf2b31ea35a128c936fc40"
+    },
+    "build/math-length/baseline2/player_scene.full.jsonl.gz": {
+      "bytes": 60293662,
+      "sha256": "17c35c32eacca59f1573a916589436d93abb1404e456666565be261f141a6668"
+    },
+    "build/math-length/baseline2/player_scene.json": {
+      "bytes": 4799,
+      "sha256": "dad47379a1ac78fd297e51c32985756758ef1aaabec17cbf516eb73492eece31"
+    },
+    "build/math-length/baseline2/player_scene.log": {
+      "bytes": 923,
+      "sha256": "32c22b791535b4152155718624e3081b8b06d39acc1e7d23a02f584a9e6940b2"
+    },
+    "build/math-length/baseline2/player_scene_helpers.cases.bin": {
+      "bytes": 113064,
+      "sha256": "f9f3a28b61b4410891845cc21242d190c863d1f003ee965df0204d65765267d2"
+    },
+    "build/math-length/baseline2/player_scene_helpers.dylib": {
+      "bytes": 469752,
+      "sha256": "489eda6a8929b1f94294d7c2c8ec25c56709770bf0ba88531829a68019badf83"
+    },
+    "build/math-length/baseline2/player_scene_helpers.full.jsonl.gz": {
+      "bytes": 4943716,
+      "sha256": "bc1297ae87b13be1b3098547e354e7609df913ee599c722f55ea78932b59a629"
+    },
+    "build/math-length/baseline2/player_scene_helpers.json": {
+      "bytes": 5513,
+      "sha256": "ee86cb6fd0378835cd25f664898873c78ff429fa9c4b2b4684f57e4a06f4b8fb"
+    },
+    "build/math-length/baseline2/player_scene_helpers.log": {
+      "bytes": 923,
+      "sha256": "e5a6e82bfe6b6c34c7f01717996422d72a67c941c24e07a0804b042cc7d22855"
+    },
+    "build/math-length/baseline2/player_scene_position.cases.bin": {
+      "bytes": 9792,
+      "sha256": "e3006f51ed725e1fa698ad9d0b2662287abc30cb9115bdaae5ba7b3ff134f2f2"
+    },
+    "build/math-length/baseline2/player_scene_position.dylib": {
+      "bytes": 471912,
+      "sha256": "89b19e5aba585de41dbac682d08adc6c69403af1165cc00a1b8023c70ed8a081"
+    },
+    "build/math-length/baseline2/player_scene_position.full.jsonl.gz": {
+      "bytes": 103934709,
+      "sha256": "3cb33500103344e5eeb37f0db41e57e0a2fbcfa946714b25dfb215e92c5be6a5"
+    },
+    "build/math-length/baseline2/player_scene_position.json": {
+      "bytes": 10305,
+      "sha256": "c64cd33491f607882017dc50b87150ad269ece9e70579fcf39069372e481a76c"
+    },
+    "build/math-length/baseline2/player_scene_position.log": {
+      "bytes": 5192,
+      "sha256": "107d59c58e73d392b3525c7bd6ebd631e36238a7d9d534e05c3601a6846bb534"
+    },
+    "build/math-length/baseline2/run-receipt.json": {
+      "bytes": 1377,
+      "sha256": "ee8a785842d11de328b15efca9f20f1d6fdac099e571df064299f01ccdf06500"
+    },
+    "build/math-length/baseline2/sonic_action.constants.bin": {
+      "bytes": 52,
+      "sha256": "cac3a43b8a00509706505b79771f4f9c2ec6b500a925b2cb4820b611fffe34b7"
+    },
+    "build/math-length/baseline2/sonic_action.dylib": {
+      "bytes": 544752,
+      "sha256": "9f69e6e440b932f868f2113e8e2363116b12ec9912661163bd892f241d9b8a39"
+    },
+    "build/math-length/baseline2/sonic_action.full.jsonl.gz": {
+      "bytes": 1139680,
+      "sha256": "292ae85c9712233a4da7426fabafb1386f10611087a0e96bc14df250f847fc42"
+    },
+    "build/math-length/baseline2/sonic_action.json": {
+      "bytes": 37487,
+      "sha256": "2d54f2bffb0461278418867511fea18a4e932701b70fdd0a4ca68887dc34150c"
+    },
+    "build/math-length/baseline2/sonic_action.log": {
+      "bytes": 142,
+      "sha256": "1ead2d6ef8cdd3e9100d6d295eb8aaf24ca6fa363ee58f47f2f0b59be671e9c9"
+    },
+    "build/math-length/baseline2/sonic_player.constants.bin": {
+      "bytes": 52,
+      "sha256": "cac3a43b8a00509706505b79771f4f9c2ec6b500a925b2cb4820b611fffe34b7"
+    },
+    "build/math-length/baseline2/sonic_player.dispatch.bin": {
+      "bytes": 352,
+      "sha256": "e78b7fb8a08356eca526539587e821b2ac2a642a623411ad374f1cfee846ab77"
+    },
+    "build/math-length/baseline2/sonic_player.dylib": {
+      "bytes": 548144,
+      "sha256": "404d53852b1047f65eda0039f10a52239caa4d83d201fd4e2cde511822d4a31e"
+    },
+    "build/math-length/baseline2/sonic_player.full.jsonl.gz": {
+      "bytes": 1045503,
+      "sha256": "c0e7bb3fa415adaed4f7c0726fe93e0fae29e78309bf24dd807bfd94491f06d4"
+    },
+    "build/math-length/baseline2/sonic_player.json": {
+      "bytes": 25113,
+      "sha256": "47eb85750679d7e50572d24e65ab3a9bb8c76ffb158086e80302a1f073494c54"
+    },
+    "build/math-length/baseline2/sonic_player.log": {
+      "bytes": 149,
+      "sha256": "2d13e95aec58908790fea9db374073f09250b812955383e71730eb368f88babf"
+    },
+    "build/math-length/build.py": {
+      "bytes": 3131,
+      "sha256": "f9cf50ae887cc75c7ecd6535749656ad422dcecf4e36d282f6ab9eeab0ea24c1"
+    },
+    "build/math-length/capture.py": {
+      "bytes": 4409,
+      "sha256": "158eb842c5f2f28734880d2d1b41671ca5122c13af5d049119f48245dfead4ff"
+    },
+    "build/math-length/contract.cpp": {
+      "bytes": 1483,
+      "sha256": "e298a4ae8e9c4d8ac90d4fa48b24fb2afb5f8595f26ccc7ea2c2c7a9bdf972ac"
+    },
+    "build/math-length/contract.py": {
+      "bytes": 1777,
+      "sha256": "9d17a74cde6d29a6e60b2822d09acc025c8dd842a5365ccf28c06a7b4a5cdf7a"
+    },
+    "build/math-length/identities.py": {
+      "bytes": 4376,
+      "sha256": "ccdc9b03d00a3a8ffb38b9f98a5a4d7a16d6a631c17cbbac7bf378221b1935c7"
+    },
+    "build/math-length/pre-edit-sources.json": {
+      "bytes": 914,
+      "sha256": "0825c74123f7ec141a84702b48e68deadd61606ec8b675217dfbbb0c0cdebdab"
+    },
+    "build/math-length/units.py": {
+      "bytes": 4052,
+      "sha256": "5e05082c89ec249af4c9b2fa90434527748374285e97eb23d4d352e0eee04602"
+    }
+  },
+  "runs": [
+    {
+      "slug": "collision_component",
+      "variant": null,
+      "exit": 2
+    },
+    {
+      "slug": "player_rotation",
+      "variant": null,
+      "exit": 0
+    },
+    {
+      "slug": "player_position",
+      "variant": null,
+      "exit": 0
+    },
+    {
+      "slug": "player_contact_response",
+      "variant": null,
+      "exit": 0
+    },
+    {
+      "slug": "alternate_acceleration",
+      "variant": "attribute4000",
+      "exit": 0
+    },
+    {
+      "slug": "alternate_acceleration",
+      "variant": "eventground",
+      "exit": 1
+    },
+    {
+      "slug": "alternate_acceleration",
+      "variant": "eventair",
+      "exit": 1
+    },
+    {
+      "slug": "alternate_acceleration",
+      "variant": "attribute20000",
+      "exit": 0
+    },
+    {
+      "slug": "player_direction_reset",
+      "variant": null,
+      "exit": 0
+    },
+    {
+      "slug": "player_reaction",
+      "variant": null,
+      "exit": 1
+    },
+    {
+      "slug": "player_contact_initializer",
+      "variant": null,
+      "exit": 0
+    },
+    {
+      "slug": "player_mesh_query",
+      "variant": null,
+      "exit": 0
+    },
+    {
+      "slug": "sonic_player",
+      "variant": null,
+      "exit": 0
+    },
+    {
+      "slug": "sonic_action",
+      "variant": null,
+      "exit": 0
+    },
+    {
+      "slug": "player_scene_position",
+      "variant": null,
+      "exit": 0
+    },
+    {
+      "slug": "player_scene",
+      "variant": null,
+      "exit": 0
+    },
+    {
+      "slug": "player_scene_helpers",
+      "variant": null,
+      "exit": 0
+    }
+  ],
+  "limits": [
+    "All baseline captures precede length source edits.",
+    "First observer used Python profiling and was replaced; all17 final baselines rerun with complete original evaluator returns.",
+    "All30456 rotation native records identical between observers.",
+    "Early unit invocations omitted manifest arguments; corrected before frozen unit receipts.",
+    "Sonic unit remains unbuildable on retired current-owner fields; execution skipped.",
+    "No holdout, gate, journey, network/provider or shared build mutation."
+  ]
+}

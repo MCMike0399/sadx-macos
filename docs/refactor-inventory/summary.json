@@ -1,7 +1,7 @@
 {
   "base_commit": "f6c4e538af463a2eaf4c1fe961f04e8443d51878",
   "baseline_removed_paths": [],
-  "boundary_entries": 2235,
+  "boundary_entries": 2248,
   "checks_not_run": [
     "builds",
     "gate",
@@ -12,15 +12,16 @@
   ],
   "coverage": "exact tracked path equality; no semantic completeness or behavior verdict",
   "dispositions": {
-    "already_conforming": 27,
-    "needs_migration": 13,
-    "open_review": 1602,
+    "already_conforming": 30,
+    "needs_migration": 17,
+    "open_review": 1595,
     "reference_infrastructure": 7
   },
   "maintained_and_script_entries": 1649,
   "module_dispositions": {
-    "already_conforming": 11,
-    "open_review": 1038
+    "already_conforming": 13,
+    "needs_migration": 2,
+    "open_review": 1034
   },
   "modules": 1049,
   "native_translation_units_listed": 128,
@@ -36,7 +37,7 @@
   },
   "reviewed_stub_bindings": 2,
   "roots": {
-    "reference": 2133,
+    "reference": 2146,
     "src": 647,
     "tests": 587,
     "third_party": 155,
@@ -62,5 +63,5 @@
     "texture-lifetime": 23,
     "tooling-judges": 1002
   },
-  "tracked_scope": 3884
+  "tracked_scope": 3897
 }

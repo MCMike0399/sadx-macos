@@ -1,0 +1,12 @@
+{
+  "source_commit": "92dbd07",
+  "command": "SADX_CONTENT_CORPUS=$PWD make -j10 gate",
+  "exit_status": 2,
+  "log_sha256": "cb31fd3a2a1e56cbfe5329a247c6f7bc75f1815fc021729e021475d65d8fe6f1",
+  "failure": "check_constexpr_tables: stale whole-file native_title_tasks.cpp::names evidence after regular resource consumer rewrite",
+  "source_behavior_failure_observed": false,
+  "limits": [
+    "Incomplete integration gate; no green record or STATUS update.",
+    "Parallel units continued after check failure. Journeys/Python gate completion not established."
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "review": "a9e07eb",
+  "post_review_holdout": true,
+  "before_script_exit": 2,
+  "current_script_exit": 2,
+  "cases": 8864,
+  "value_mismatches": 0,
+  "fp_partial_cases": 6834,
+  "scalar": {
+    "cases": 888,
+    "value_mismatches": 0,
+    "fp_partials": 834
+  },
+  "case_blob_sha256": "bb9eb8f84138105538a42608216ec64b12812c296b56619d28c55ee23888f455",
+  "full_comparison": [
+    {
+      "slug": "collision_component",
+      "full_outputs_identical": true,
+      "full_output_identity": {
+        "sha256": "ef025a3d2724151c4dd156e01260cc5599ff6f1c352b7f0b794fc17a6152dc24",
+        "bytes": 26515554,
+        "records": 9752
+      },
+      "reports_equal_without_build_metadata": true
+    }
+  ],
+  "library_sha256": {
+    "before": "a8903351497e5f648d29a5468aaebbbf707da253bb8e71c99695c2b7fc5d02b5",
+    "current": "5af4efedbe6521788ce2b252e439ccdd894a7c7c30b103fcea2d423bc7dbd795"
+  },
+  "limits": [
+    "FP partial remains partial; scalar888 combines444 length/444 signed-root cases.",
+    "Stock old-library report reads current checkout source metadata; pinned baseline library and original worker build maps establish old artifact identity.",
+    "No complete hardware x87 stack/tag/deferred exception delivery or whole math/player/campaign claim."
+  ]
+}

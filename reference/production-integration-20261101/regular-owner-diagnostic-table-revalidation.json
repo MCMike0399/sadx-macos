@@ -1,0 +1,17 @@
+{
+  "prior_commit": "e5cf19d",
+  "owner_commit": "d160717",
+  "current_source_commit": "92dbd07",
+  "table": "src/runtime/native_title_tasks.cpp::names",
+  "classification_unchanged": "typed_content",
+  "declaration_sha256": "01135e293e8f46eb2f275fdc3f96e8686c4477dd0c88240fe396724db14e4451",
+  "diagnostic_consumer_sha256": "5442e5a4d42decad7ae3484a3ac761547a898fc7c07a75ea2c7c399d93b9bbd8",
+  "diagnostic_consumer_identical": true,
+  "evidence_before_sha256": "e41744c5417fbc793679a62b72eeeed3d17ca9c6aed037889fd0496b03dc8f44",
+  "evidence_after_sha256": "4a6e34468bc7d163d4de136493aca32c73cba16be465c358159df6619c36476f",
+  "reason": "RegularResources consumer accesses changed elsewhere in the same file. Diagnostic suffix table and complete selector/throw consumer remain identical. Strings are typed diagnostic content, never dispatch targets.",
+  "limits": [
+    "No table exemption widened or open instruction debt retired.",
+    "Original gate attempt exited2 on stale evidence; this revalidation alone is not a green gate."
+  ]
+}

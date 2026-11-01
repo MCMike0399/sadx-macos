@@ -156,6 +156,21 @@ class ExactFloat {
         }
         return ExactFloat(context, context.sqrt(reloaded), nullptr);
     }
+    // NOTSA: retained return shared by the exact-value and legacy numerical APIs.
+    // Borrow components so each load stays interleaved with its square. Only the
+    // squared sum is stored; rounding the root here would change the caller's return.
+    // FUNCTION: SONIC 0x787cc0 njScalor
+    static X87Value vector_length_return(Context &context, const float &x, const float &y,
+                                         const float &z) {
+        const ExactFloat loaded_x(context, x);
+        const auto xx = loaded_x * loaded_x;
+        const ExactFloat loaded_y(context, y);
+        const auto yy = loaded_y * loaded_y;
+        const ExactFloat loaded_z(context, z);
+        const auto zz = loaded_z * loaded_z;
+        const float squared = ((zz + yy) + xx).rounded();
+        return signed_square_root(context, squared).value_;
+    }
     // NOTSA: selected Bochs P5/P6 atan2(numerator, denominator), with numerator ST1
     // and denominator ST0. Callers explicitly order their two loads before this operation.
     static ExactFloat arctangent(const ExactFloat &numerator, const ExactFloat &denominator) {
