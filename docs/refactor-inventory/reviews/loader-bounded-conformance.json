@@ -1,0 +1,452 @@
+{
+  "schema_version": 1,
+  "source_scope": "Four independently reviewed source members; MPEG purpose only stays separate.",
+  "files": {
+    "src/loader/executable_image.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete two-file module independently approved as readable reference infrastructure, with explicit purpose/contract limits.",
+      "reviewed_source_sha256": "a445f239d4b4303c54ab321697eeb0bb06ff7c96352576298cfdf8f7a54315b6",
+      "semantic_justification": "Immutable PE32 reference mapping facts, bounded imports/exports/forwarders and one-shot HIGHLOW flat rebasing; named checked helpers and explicit malformed-byte failure preserve valid behavior.",
+      "resolved_owners": [
+        {
+          "resolution": "ExecutableImage owns loaded bytes and descriptors; guest execution uses a separate mutable snapshot. HLE/NativeGame import consumers borrow declared guest locations; no native product EXE dependency.",
+          "evidence": [
+            {
+              "path": "src/loader/executable_image.hpp",
+              "sha256": "a445f239d4b4303c54ab321697eeb0bb06ff7c96352576298cfdf8f7a54315b6"
+            },
+            {
+              "path": "src/loader/executable_image.cpp",
+              "sha256": "3f376bb5c78c6a4a1d67162175ab459b144fe1e27849f9fae6acabdad7ac3f99"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "ExecutableImage owns loaded bytes and descriptors; guest execution uses a separate mutable snapshot. HLE/NativeGame import consumers borrow declared guest locations; no native product EXE dependency.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/loader-boundaries.md",
+              "sha256": "1e3df5ebc81d00587613f418a3f443190d46113ce4273103f9996a07aa278955"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Fresh pre-edit valid contract preserved; extra immutable-base valid edge checks, ASan/UBSan, six compiled faults and six unchanged model-DLL consumers qualify this local reference subset.",
+          "evidence": [
+            {
+              "path": "docs/packets/executable-image/review-8089f84.md",
+              "sha256": "c93f4dc823f12777d9332167787bfae08186ed83f1d9c2190e116b35218df902"
+            },
+            {
+              "path": "docs/packets/executable-image/qualification.json",
+              "sha256": "ffe5309b0d9fe61917a38c07739d84a019100029437f5347e601bf62a3ec8546"
+            },
+            {
+              "path": "docs/packets/executable-image/pinned-models.json",
+              "sha256": "9c4e3bf9e9f68e22619e26e761d2c6c83877057c934233e2990c011ffec1c335"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "No general PE/Windows mapping parity or attacker memory-allocation cap invented.",
+        "Current guest-import/DLL consumer execution and final integrated gate remain pending."
+      ],
+      "evidence": [
+        {
+          "path": "src/loader/executable_image.hpp",
+          "sha256": "a445f239d4b4303c54ab321697eeb0bb06ff7c96352576298cfdf8f7a54315b6"
+        },
+        {
+          "path": "src/loader/executable_image.cpp",
+          "sha256": "3f376bb5c78c6a4a1d67162175ab459b144fe1e27849f9fae6acabdad7ac3f99"
+        },
+        {
+          "path": "docs/packets/executable-image/review-8089f84.md",
+          "sha256": "c93f4dc823f12777d9332167787bfae08186ed83f1d9c2190e116b35218df902"
+        },
+        {
+          "path": "docs/packets/executable-image/qualification.json",
+          "sha256": "ffe5309b0d9fe61917a38c07739d84a019100029437f5347e601bf62a3ec8546"
+        },
+        {
+          "path": "docs/packets/executable-image/pinned-models.json",
+          "sha256": "9c4e3bf9e9f68e22619e26e761d2c6c83877057c934233e2990c011ffec1c335"
+        }
+      ]
+    },
+    "src/loader/executable_image.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete two-file module independently approved as readable reference infrastructure, with explicit purpose/contract limits.",
+      "reviewed_source_sha256": "3f376bb5c78c6a4a1d67162175ab459b144fe1e27849f9fae6acabdad7ac3f99",
+      "semantic_justification": "Immutable PE32 reference mapping facts, bounded imports/exports/forwarders and one-shot HIGHLOW flat rebasing; named checked helpers and explicit malformed-byte failure preserve valid behavior.",
+      "resolved_owners": [
+        {
+          "resolution": "ExecutableImage owns loaded bytes and descriptors; guest execution uses a separate mutable snapshot. HLE/NativeGame import consumers borrow declared guest locations; no native product EXE dependency.",
+          "evidence": [
+            {
+              "path": "src/loader/executable_image.hpp",
+              "sha256": "a445f239d4b4303c54ab321697eeb0bb06ff7c96352576298cfdf8f7a54315b6"
+            },
+            {
+              "path": "src/loader/executable_image.cpp",
+              "sha256": "3f376bb5c78c6a4a1d67162175ab459b144fe1e27849f9fae6acabdad7ac3f99"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "ExecutableImage owns loaded bytes and descriptors; guest execution uses a separate mutable snapshot. HLE/NativeGame import consumers borrow declared guest locations; no native product EXE dependency.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/loader-boundaries.md",
+              "sha256": "1e3df5ebc81d00587613f418a3f443190d46113ce4273103f9996a07aa278955"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Fresh pre-edit valid contract preserved; extra immutable-base valid edge checks, ASan/UBSan, six compiled faults and six unchanged model-DLL consumers qualify this local reference subset.",
+          "evidence": [
+            {
+              "path": "docs/packets/executable-image/review-8089f84.md",
+              "sha256": "c93f4dc823f12777d9332167787bfae08186ed83f1d9c2190e116b35218df902"
+            },
+            {
+              "path": "docs/packets/executable-image/qualification.json",
+              "sha256": "ffe5309b0d9fe61917a38c07739d84a019100029437f5347e601bf62a3ec8546"
+            },
+            {
+              "path": "docs/packets/executable-image/pinned-models.json",
+              "sha256": "9c4e3bf9e9f68e22619e26e761d2c6c83877057c934233e2990c011ffec1c335"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "No general PE/Windows mapping parity or attacker memory-allocation cap invented.",
+        "Current guest-import/DLL consumer execution and final integrated gate remain pending."
+      ],
+      "evidence": [
+        {
+          "path": "src/loader/executable_image.hpp",
+          "sha256": "a445f239d4b4303c54ab321697eeb0bb06ff7c96352576298cfdf8f7a54315b6"
+        },
+        {
+          "path": "src/loader/executable_image.cpp",
+          "sha256": "3f376bb5c78c6a4a1d67162175ab459b144fe1e27849f9fae6acabdad7ac3f99"
+        },
+        {
+          "path": "docs/packets/executable-image/review-8089f84.md",
+          "sha256": "c93f4dc823f12777d9332167787bfae08186ed83f1d9c2190e116b35218df902"
+        },
+        {
+          "path": "docs/packets/executable-image/qualification.json",
+          "sha256": "ffe5309b0d9fe61917a38c07739d84a019100029437f5347e601bf62a3ec8546"
+        },
+        {
+          "path": "docs/packets/executable-image/pinned-models.json",
+          "sha256": "9c4e3bf9e9f68e22619e26e761d2c6c83877057c934233e2990c011ffec1c335"
+        }
+      ]
+    },
+    "src/loader/guest_heap.hpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete two-file module independently approved as readable reference infrastructure, with explicit purpose/contract limits.",
+      "reviewed_source_sha256": "75c7bceaf03236483300d7adf067039ee04e416f5319fb4e258a1ff4604b6f42",
+      "semantic_justification": "Structured synthetic reference heap preserves handle/token allocation, byte knownness, strict32bit limit, gap/span policy, result/trace order and no-publication-on-failed-allocation.",
+      "resolved_owners": [
+        {
+          "resolution": "GuestHeap owns synthetic blocks and optional bytes, separate from Ninja source handle and actual HLE memory. NativeGame/CRT worlds keep separate instances; Ninja allocation wrappers borrow the same owner.",
+          "evidence": [
+            {
+              "path": "src/loader/guest_heap.hpp",
+              "sha256": "75c7bceaf03236483300d7adf067039ee04e416f5319fb4e258a1ff4604b6f42"
+            },
+            {
+              "path": "src/loader/guest_heap.cpp",
+              "sha256": "04b27bd29ddeb5710929d7d3bf92e2ef597701ab64f3d1f0100fae20eafa70f9"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "GuestHeap owns synthetic blocks and optional bytes, separate from Ninja source handle and actual HLE memory. NativeGame/CRT worlds keep separate instances; Ninja allocation wrappers borrow the same owner.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/loader-boundaries.md",
+              "sha256": "1e3df5ebc81d00587613f418a3f443190d46113ce4273103f9996a07aa278955"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Unchanged unit and actual Ninja/CD consumer pass;20,480 mixed operations and complete traces exactly match immutable source; six valid compiled faults detected.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/guest-heap-independent-review.md",
+              "sha256": "b7dee368cc77cbf816fed6f5fc900f885165d117920f6eeda99cb5561f279a44"
+            },
+            {
+              "path": "reference/packets/guest-heap/QUALIFICATION.json",
+              "sha256": "b50e99ebf5339baa6569bcfe3b0e1de714396cc2c7624ede68018fb56ae6e9ff"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Synthetic tokens are not captured Windows heap addresses; no host OOM/races or allocator parity claim.",
+        "Default contract digest is backed by retained complete raw source-baseline/current outputs; final reference integration/gate pending."
+      ],
+      "evidence": [
+        {
+          "path": "src/loader/guest_heap.hpp",
+          "sha256": "75c7bceaf03236483300d7adf067039ee04e416f5319fb4e258a1ff4604b6f42"
+        },
+        {
+          "path": "src/loader/guest_heap.cpp",
+          "sha256": "04b27bd29ddeb5710929d7d3bf92e2ef597701ab64f3d1f0100fae20eafa70f9"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/guest-heap-independent-review.md",
+          "sha256": "b7dee368cc77cbf816fed6f5fc900f885165d117920f6eeda99cb5561f279a44"
+        },
+        {
+          "path": "reference/packets/guest-heap/QUALIFICATION.json",
+          "sha256": "b50e99ebf5339baa6569bcfe3b0e1de714396cc2c7624ede68018fb56ae6e9ff"
+        }
+      ]
+    },
+    "src/loader/guest_heap.cpp": {
+      "disposition": "already_conforming",
+      "reason": "Complete two-file module independently approved as readable reference infrastructure, with explicit purpose/contract limits.",
+      "reviewed_source_sha256": "04b27bd29ddeb5710929d7d3bf92e2ef597701ab64f3d1f0100fae20eafa70f9",
+      "semantic_justification": "Structured synthetic reference heap preserves handle/token allocation, byte knownness, strict32bit limit, gap/span policy, result/trace order and no-publication-on-failed-allocation.",
+      "resolved_owners": [
+        {
+          "resolution": "GuestHeap owns synthetic blocks and optional bytes, separate from Ninja source handle and actual HLE memory. NativeGame/CRT worlds keep separate instances; Ninja allocation wrappers borrow the same owner.",
+          "evidence": [
+            {
+              "path": "src/loader/guest_heap.hpp",
+              "sha256": "75c7bceaf03236483300d7adf067039ee04e416f5319fb4e258a1ff4604b6f42"
+            },
+            {
+              "path": "src/loader/guest_heap.cpp",
+              "sha256": "04b27bd29ddeb5710929d7d3bf92e2ef597701ab64f3d1f0100fae20eafa70f9"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "GuestHeap owns synthetic blocks and optional bytes, separate from Ninja source handle and actual HLE memory. NativeGame/CRT worlds keep separate instances; Ninja allocation wrappers borrow the same owner.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/loader-boundaries.md",
+              "sha256": "1e3df5ebc81d00587613f418a3f443190d46113ce4273103f9996a07aa278955"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Unchanged unit and actual Ninja/CD consumer pass;20,480 mixed operations and complete traces exactly match immutable source; six valid compiled faults detected.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/guest-heap-independent-review.md",
+              "sha256": "b7dee368cc77cbf816fed6f5fc900f885165d117920f6eeda99cb5561f279a44"
+            },
+            {
+              "path": "reference/packets/guest-heap/QUALIFICATION.json",
+              "sha256": "b50e99ebf5339baa6569bcfe3b0e1de714396cc2c7624ede68018fb56ae6e9ff"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Synthetic tokens are not captured Windows heap addresses; no host OOM/races or allocator parity claim.",
+        "Default contract digest is backed by retained complete raw source-baseline/current outputs; final reference integration/gate pending."
+      ],
+      "evidence": [
+        {
+          "path": "src/loader/guest_heap.hpp",
+          "sha256": "75c7bceaf03236483300d7adf067039ee04e416f5319fb4e258a1ff4604b6f42"
+        },
+        {
+          "path": "src/loader/guest_heap.cpp",
+          "sha256": "04b27bd29ddeb5710929d7d3bf92e2ef597701ab64f3d1f0100fae20eafa70f9"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/guest-heap-independent-review.md",
+          "sha256": "b7dee368cc77cbf816fed6f5fc900f885165d117920f6eeda99cb5561f279a44"
+        },
+        {
+          "path": "reference/packets/guest-heap/QUALIFICATION.json",
+          "sha256": "b50e99ebf5339baa6569bcfe3b0e1de714396cc2c7624ede68018fb56ae6e9ff"
+        }
+      ]
+    }
+  },
+  "modules": {
+    "src/loader/executable_image": {
+      "disposition": "already_conforming",
+      "reason": "Explicit complete module code review, not a directory-wide reference exemption.",
+      "reviewed_members": {
+        "src/loader/executable_image.hpp": "a445f239d4b4303c54ab321697eeb0bb06ff7c96352576298cfdf8f7a54315b6",
+        "src/loader/executable_image.cpp": "3f376bb5c78c6a4a1d67162175ab459b144fe1e27849f9fae6acabdad7ac3f99"
+      },
+      "semantic_justification": "Immutable PE32 reference mapping facts, bounded imports/exports/forwarders and one-shot HIGHLOW flat rebasing; named checked helpers and explicit malformed-byte failure preserve valid behavior.",
+      "resolved_owners": [
+        {
+          "resolution": "ExecutableImage owns loaded bytes and descriptors; guest execution uses a separate mutable snapshot. HLE/NativeGame import consumers borrow declared guest locations; no native product EXE dependency.",
+          "evidence": [
+            {
+              "path": "src/loader/executable_image.hpp",
+              "sha256": "a445f239d4b4303c54ab321697eeb0bb06ff7c96352576298cfdf8f7a54315b6"
+            },
+            {
+              "path": "src/loader/executable_image.cpp",
+              "sha256": "3f376bb5c78c6a4a1d67162175ab459b144fe1e27849f9fae6acabdad7ac3f99"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "ExecutableImage owns loaded bytes and descriptors; guest execution uses a separate mutable snapshot. HLE/NativeGame import consumers borrow declared guest locations; no native product EXE dependency.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/loader-boundaries.md",
+              "sha256": "1e3df5ebc81d00587613f418a3f443190d46113ce4273103f9996a07aa278955"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Fresh pre-edit valid contract preserved; extra immutable-base valid edge checks, ASan/UBSan, six compiled faults and six unchanged model-DLL consumers qualify this local reference subset.",
+          "evidence": [
+            {
+              "path": "docs/packets/executable-image/review-8089f84.md",
+              "sha256": "c93f4dc823f12777d9332167787bfae08186ed83f1d9c2190e116b35218df902"
+            },
+            {
+              "path": "docs/packets/executable-image/qualification.json",
+              "sha256": "ffe5309b0d9fe61917a38c07739d84a019100029437f5347e601bf62a3ec8546"
+            },
+            {
+              "path": "docs/packets/executable-image/pinned-models.json",
+              "sha256": "9c4e3bf9e9f68e22619e26e761d2c6c83877057c934233e2990c011ffec1c335"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "No general PE/Windows mapping parity or attacker memory-allocation cap invented.",
+        "Current guest-import/DLL consumer execution and final integrated gate remain pending."
+      ],
+      "evidence": [
+        {
+          "path": "src/loader/executable_image.hpp",
+          "sha256": "a445f239d4b4303c54ab321697eeb0bb06ff7c96352576298cfdf8f7a54315b6"
+        },
+        {
+          "path": "src/loader/executable_image.cpp",
+          "sha256": "3f376bb5c78c6a4a1d67162175ab459b144fe1e27849f9fae6acabdad7ac3f99"
+        },
+        {
+          "path": "docs/packets/executable-image/review-8089f84.md",
+          "sha256": "c93f4dc823f12777d9332167787bfae08186ed83f1d9c2190e116b35218df902"
+        },
+        {
+          "path": "docs/packets/executable-image/qualification.json",
+          "sha256": "ffe5309b0d9fe61917a38c07739d84a019100029437f5347e601bf62a3ec8546"
+        },
+        {
+          "path": "docs/packets/executable-image/pinned-models.json",
+          "sha256": "9c4e3bf9e9f68e22619e26e761d2c6c83877057c934233e2990c011ffec1c335"
+        }
+      ]
+    },
+    "src/loader/guest_heap": {
+      "disposition": "already_conforming",
+      "reason": "Explicit complete module code review, not a directory-wide reference exemption.",
+      "reviewed_members": {
+        "src/loader/guest_heap.hpp": "75c7bceaf03236483300d7adf067039ee04e416f5319fb4e258a1ff4604b6f42",
+        "src/loader/guest_heap.cpp": "04b27bd29ddeb5710929d7d3bf92e2ef597701ab64f3d1f0100fae20eafa70f9"
+      },
+      "semantic_justification": "Structured synthetic reference heap preserves handle/token allocation, byte knownness, strict32bit limit, gap/span policy, result/trace order and no-publication-on-failed-allocation.",
+      "resolved_owners": [
+        {
+          "resolution": "GuestHeap owns synthetic blocks and optional bytes, separate from Ninja source handle and actual HLE memory. NativeGame/CRT worlds keep separate instances; Ninja allocation wrappers borrow the same owner.",
+          "evidence": [
+            {
+              "path": "src/loader/guest_heap.hpp",
+              "sha256": "75c7bceaf03236483300d7adf067039ee04e416f5319fb4e258a1ff4604b6f42"
+            },
+            {
+              "path": "src/loader/guest_heap.cpp",
+              "sha256": "04b27bd29ddeb5710929d7d3bf92e2ef597701ab64f3d1f0100fae20eafa70f9"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "GuestHeap owns synthetic blocks and optional bytes, separate from Ninja source handle and actual HLE memory. NativeGame/CRT worlds keep separate instances; Ninja allocation wrappers borrow the same owner.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/loader-boundaries.md",
+              "sha256": "1e3df5ebc81d00587613f418a3f443190d46113ce4273103f9996a07aa278955"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "resolution": "Unchanged unit and actual Ninja/CD consumer pass;20,480 mixed operations and complete traces exactly match immutable source; six valid compiled faults detected.",
+          "evidence": [
+            {
+              "path": "docs/refactor-inventory/reviews/guest-heap-independent-review.md",
+              "sha256": "b7dee368cc77cbf816fed6f5fc900f885165d117920f6eeda99cb5561f279a44"
+            },
+            {
+              "path": "reference/packets/guest-heap/QUALIFICATION.json",
+              "sha256": "b50e99ebf5339baa6569bcfe3b0e1de714396cc2c7624ede68018fb56ae6e9ff"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Synthetic tokens are not captured Windows heap addresses; no host OOM/races or allocator parity claim.",
+        "Default contract digest is backed by retained complete raw source-baseline/current outputs; final reference integration/gate pending."
+      ],
+      "evidence": [
+        {
+          "path": "src/loader/guest_heap.hpp",
+          "sha256": "75c7bceaf03236483300d7adf067039ee04e416f5319fb4e258a1ff4604b6f42"
+        },
+        {
+          "path": "src/loader/guest_heap.cpp",
+          "sha256": "04b27bd29ddeb5710929d7d3bf92e2ef597701ab64f3d1f0100fae20eafa70f9"
+        },
+        {
+          "path": "docs/refactor-inventory/reviews/guest-heap-independent-review.md",
+          "sha256": "b7dee368cc77cbf816fed6f5fc900f885165d117920f6eeda99cb5561f279a44"
+        },
+        {
+          "path": "reference/packets/guest-heap/QUALIFICATION.json",
+          "sha256": "b50e99ebf5339baa6569bcfe3b0e1de714396cc2c7624ede68018fb56ae6e9ff"
+        }
+      ]
+    }
+  }
+}
