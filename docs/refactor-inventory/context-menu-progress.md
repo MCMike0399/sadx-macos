@@ -35,9 +35,17 @@ precedes unsupported-character rejection. No algorithm was moved into reference.
 
 Fresh pre-edit baseline is frozen in menu-progress-baseline. The two predicate
 probes were built from packet source; consumer probes initially borrowed existing
-Main libraries. Seven current probes rebuild all eight affected/header-dependent
+Main libraries. Eight current probes rebuild all eight affected/header-dependent
 game objects and borrow only unchanged Root library dependencies. Six existing
 unit programs pass. No judge, expected value, fixture, tolerance or oracle input
 was edited. Character Select and title retain 733 and 270 FP partial cases; full
 native/original output digests and exact partial identities match their baselines.
 No completed system, GPU, actor, new journey or gameplay performance claim.
+
+A final closure check identified title_factory as the actual source-backed consumer
+judge for the two stage-list builders; title_menu alone does not qualify those
+bodies. Unchanged Main baseline and the updated private probe each pass all 2,268
+factory cases. This extra qualification happened after the private naming edit,
+before review/integration; it is not described as a pre-edit execution. No failing
+case or expected output was changed. Final fresh-seed predicate holdouts remain
+reserved until independent source review completes.
