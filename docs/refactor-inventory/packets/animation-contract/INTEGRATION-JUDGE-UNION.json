@@ -1,0 +1,68 @@
+{
+  "base_commit": "57b7366dbf3d9c689bb4106b31f2d079351f5885",
+  "parent_entries": 1294,
+  "merged_entries": 1310,
+  "added": {
+    "tests/python/test_animation_consumer_fault.py": "25e68c97a641af93631da356aae7527348751c804aa5cbeac7e7b1deeee4bff6",
+    "tests/unit/animation_characterization.cpp": "61297b2ffd7859b5bc81509fd8df0d350a9fc9990218310b9e775179c1a27928",
+    "tests/unit/animation_gamma_assets.mm": "3c3211f851d135a6725f80f868811e44b65122f5154fb31d4bcbd71f7d37b5ee",
+    "tests/unit/animation_gamma_shared_binding.mm": "53a13523c8d21f47a241cf00d1fe887c9c01cc4fc68b0e20249b97e31d8e456c",
+    "tests/unit/animation_sonic_composition.cpp": "3de3be273e60491c7631d311c5fc89f2bd1c689e75193825ee875cf65c68415a",
+    "tests/unit/animation_table_publication.cpp": "a454e810e58af4b5f4ef68b6162e7e2bed7301ef52226a18cdb45705c81e35d8",
+    "tools/oracles/animation_final_cohorts/build_consumer.py": "1d1387b5ceaae5e4c4f258665fb5b7485df775c34d4d969996d868623f55642f",
+    "tools/oracles/animation_final_cohorts/build_gamma.py": "c288864eef4d7917b364b54207e64442578ca3a2c6d3e8b0480c0cd1a8b9f568",
+    "tools/oracles/animation_final_cohorts/consumer.cpp": "7d907fc2e308bdb94fd7bcdfac58a1e9ddcc573b1dd98830b083941a8f1dacfa",
+    "tools/oracles/animation_final_cohorts/gamma.mm": "3e31f90d66e98377f9e3a12f9dfb18b8c8e1fa1833551e113e8cf614d3491f57",
+    "tools/oracles/animation_final_cohorts/interface.cpp": "bc4c0fb1078a3f88f87e3709470daa317b8eb667412514b67ebcc8d2765bd21e",
+    "tools/oracles/animation_final_cohorts/prepare.py": "4853265c7060890e52b476ad015c1447cafc798e422372e3718782285d6679c7",
+    "tools/oracles/animation_final_cohorts/run.py": "d2ad0c496581410dfc27cd7af58cde1a17f5733b4ba46986cafacb533152a172",
+    "tools/oracles/animation_final_cohorts/table.cpp": "1075916db9b39f9060c4d6e06f654e2a85d1d6881c71d10c665a7898637b9644",
+    "tools/oracles/animation_judges/consumer_continuation.py": "86590ce3c0ee9105e567a438c71521dcbf94f84060d6a40e4c88590bbe48d096",
+    "tools/oracles/animation_judges/consumer_fault_observer.py": "062ee835b95c94c16bde2ad627012ecfec55d09eb0545ad8e4f9c9fe8ac800c6"
+  },
+  "changed": {
+    "Makefile": {
+      "before": "77a6cc1837d73f1d569b65edc81f429a297ef8a6ca49b0656dee53a945cbfe14",
+      "after": "20b793d5201033b79fe8a2a7a88306b7376ada39791db0b802d5c93730168c26"
+    },
+    "tests/unit/manifest.tsv": {
+      "before": "7bbf12fcf856078db0a1c4a66f5f91e338d45a5c86495e16fdb6cc4a7c4ecfe4",
+      "after": "0333d3006925d67bfc98f8112ec4dc442dabc193f8c9ca07fafcc5fdf2203f53"
+    },
+    "tests/unit/native_gamma_binding.mm": {
+      "before": "0a2690737ec88d7e3d7402fd2d363e8f5eb18bfb7851d65a7341f87c35a5832d",
+      "after": "d22a305415975452024839ee732d9b97819d3b52ca50f7f4063df8f1feadc904"
+    },
+    "tests/unit/native_gamma_weld_cursors.mm": {
+      "before": "7b0c49f06344759858c95033a9e503241fa79eda58a3b5f4f00fe7e6cd86352e",
+      "after": "28fe8bfca8b7ec3cc5973b351aa305d0800ba78cc595814e2f018c4e2916762f"
+    },
+    "tools/inventory/refactor_inventory.py": {
+      "before": "24e3577db533d84e95217851a0cd9c0777171cbed5f12c1a99f7e38e483502db",
+      "after": "9aa16d8c22faece95e33672ae0a308ca06ee70d237d056da3129d35b673ddb54"
+    }
+  },
+  "removed": [],
+  "unchanged_parent_hashes": 1289,
+  "source_integration": {
+    "total": 660,
+    "differences_from_qualified_animation_source": [
+      "src/input/input_mod_axes.cpp",
+      "src/input/input_mod_axes.hpp"
+    ],
+    "all_differences_equal_qualified_main": true,
+    "uncommitted_source_changes": []
+  },
+  "evidence": [
+    "docs/refactor-inventory/packets/animation-contract/ROOT-REQUALIFIED.json",
+    "docs/refactor-inventory/packets/animation-consumer-fault/INDEPENDENT-RECHECK.md",
+    "docs/refactor-inventory/packets/animation-consumer-fault/CONTINUATION-RESULT.json",
+    "docs/refactor-inventory/packets/animation-consumer-fault/REGISTERED-BUILD.json",
+    "docs/refactor-inventory/reviews/source-lineage-rollback-recheck.md"
+  ],
+  "scope": "Finite immutable-parent union and explicitly evidenced registration/binding/tool corrections. No Source expectations, tolerances, input vectors, previous scalar/dispatch ratchets or unrelated protected hashes changed.",
+  "limits": [
+    "Actual lineage edge and activation still pending independent review.",
+    "Integrated product/journeys/full gate remain pending."
+  ]
+}
