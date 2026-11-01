@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "5e6b3869acae32a6a4972e163b3ef687ddb5b8b2",
-    "evidence": "reference/production-integration-20261101/canonical-save-owner-manifest-union.json",
-    "evidence_sha256": "1b65b9d1c4d30059d4e6680a694dd5996522b6e60bc4cc4bbf8242fb928f2cff",
-    "reason": "Seal composite save owner/completion source after explicit unchanged-parent protected input union"
+    "base_commit": "a291b0348e1dca51b6daa77ca16d25d8bd883954",
+    "evidence": "reference/production-integration-20261101/canonical-save-composite-replay.json",
+    "evidence_sha256": "5d64254e7ef83969d8f5695a9ee754f189ce697cccd04ca4fcbd473d6957d8e9",
+    "reason": "Track actual composite Main source replay with complete default case identities unchanged after separately committed owner and callback migrations"
   },
   "files": {
     "Makefile": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef",
@@ -32,7 +32,7 @@
     "reference/oracle-reports/caption_frame_reference.json": "8b70b3af76573bdfb55f01dbb71c84c823696ab7c77eb88abcbd11cc0973ef7f",
     "reference/oracle-reports/cd_drive_scan.json": "ab5fb5deab1fb754f98cb16212e45dd5d0c3f2c89e361f0a76c1b32c318bfe29",
     "reference/oracle-reports/center_screen_sprite.json": "d086c01908e6fbcf09c1dc8605db433ea446d5dfb9373f8d1fef700534ebcf4b",
-    "reference/oracle-reports/character_completion.json": "8fedbe22276644958152639d0316ea7a7cada953bcd6884836241bf181752a07",
+    "reference/oracle-reports/character_completion.json": "b576509a7ddbdce871072a31b2e0a5d99e8cdba60a1b26c33dae16a16f79c10d",
     "reference/oracle-reports/character_select_availability.json": "7292f592c7b50cf175dee48f0d2d829782e571b497596125a472039dd35a8feb",
     "reference/oracle-reports/character_select_menu.json": "0be5b4fb4f89b82b6db6ebb552e04c45c6666ba0af95762795b03d6fdfaec278",
     "reference/oracle-reports/character_textures.json": "5e297b6e0d4167222b95344169d8a68c38e6de5c50a09529681dfaac38c500c6",
@@ -80,7 +80,7 @@
     "reference/oracle-reports/game_loop.json": "7bbe32f3a915b05b34f148eaf85c015f2994d3186716b82bbdf909ea75ac56e8",
     "reference/oracle-reports/game_mode.cases.bin": "05c8ac3db56f68dcd6c7cb7334699f164bf2803b602a6694ec4dd7077f6d2ea0",
     "reference/oracle-reports/game_mode.json": "8c487a818339dbdc067e6aeba59afef5bd536153244eae5810041a5c9033fca0",
-    "reference/oracle-reports/game_mode_leaves.json": "0a6fa816b6005097c3244c6d96fdfb367808b43b69d818770746958c62b53980",
+    "reference/oracle-reports/game_mode_leaves.json": "8106bbc57600bce21fa614ddcf7a84712a6f9481592106d44cac495ac3541547",
     "reference/oracle-reports/game_reset.json": "724ee9d45293cca5900677074e9fbaea3cbad177d08ab326e51776dd43503c47",
     "reference/oracle-reports/game_reset_composed.json": "2bc1515e9e7e776199d338e91bc61a996bddbb80eb90f50309884a60322fa9ca",
     "reference/oracle-reports/game_scene_logic.cases.bin": "7fdde1565043d55880b875b821b33d6cfbe45620b94f8e3e5660fde40d7fb1fc",
