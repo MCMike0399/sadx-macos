@@ -1,0 +1,46 @@
+{
+  "status": "development_only_no_reserved_seeds",
+  "definitions": {
+    "task_work": {
+      "seed": 7,
+      "sequences": 1,
+      "operations_before_final_release": 4
+    },
+    "task_lifecycle": {
+      "seed": 11,
+      "sequences": 1,
+      "operations_before_final_release": 4
+    },
+    "task_display": {
+      "seed": 7,
+      "random_cases": 4
+    },
+    "task_delete": {
+      "seed": 423723,
+      "random_cases": 192,
+      "existing_default_ids": [
+        0,
+        1,
+        85,
+        87,
+        91,
+        121,
+        143,
+        201
+      ]
+    }
+  },
+  "libraries": {
+    "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-c8fa9287/build/task-source/old/task_delete.dylib": "e5f0888b22cd56517ee7c5a91830ac9897fc0a2cf7e0a2ec0fcc589724cc8e72",
+    "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-c8fa9287/build/task-source/old/task_display.dylib": "853df072d21c220dca8ce1c4f16c4cadd89f88e691959d3bb57e97673761434b",
+    "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-c8fa9287/build/task-source/old/task_lifecycle.dylib": "e24b2ef0fe4f5732c525ea955380348c39c681c68e10be56c3701918d67443b6",
+    "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-c8fa9287/build/task-source/old/task_work.dylib": "e892fd307752aeb6a3d6026d3ce726b122b6ab2762399cbdb4c098198aca043d"
+  },
+  "exe": {
+    "path": "/Users/burbujamc/Developer/sadx-macos/game/Sonic Adventure DX/sonic.exe",
+    "sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74"
+  },
+  "purpose": "Observer development against immutable before-source libraries only; not final candidate qualification. Actual scripts/source reflect the same unchanged Task before implementation. Delete rows reuse prior documented exclusions; all are labeled repeated. Synthetic Unicorn invalid read separately validates hook signature and no page-zero mapping.",
+  "inputs_generated": false,
+  "reserved_inputs_generated": false
+}

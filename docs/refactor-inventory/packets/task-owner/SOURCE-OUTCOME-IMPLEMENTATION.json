@@ -1,0 +1,28 @@
+{
+  "base_commit": "16a163c6d2a0c4b47f1680d67847076db20b45f7",
+  "purpose": "Record actual source attempts and reached outcomes without altering original comparator decisions; retain failure prefixes even when no native/report completion exists.",
+  "files": {
+    "tools/oracles/task_judges/reserved_observer.py": "935139aac5ddc7dd701c355d134643dce194ccd82128c41741c121d3dd4a4bb1",
+    "tests/python/test_task_reserved_observer.py": "ff1063003a4f1077b0f9a29ab320430b8fcdf1f53bee0ba9d82ade7ed6e5a131"
+  },
+  "tests": {
+    "command": "python3 -m unittest discover -s tests/python -p 'test_task_*' -v",
+    "tests": 43,
+    "exit_status": 0,
+    "log_sha256": "1448538a5f0fbe6ff2953b22694372c2939a1e459c7bf666d458459d6dac6941"
+  },
+  "contracts": [
+    "Source return requires actual STOP, not zero boundary or restored stack alone.",
+    "Only existing callback/material/saved-next sites and the repeated inactive diagnostic are established stops.",
+    "Unexpected invalid emulated accesses record PC/access/address/width and remain faults: no mapping, fabricated value or resumed execution.",
+    "Delete exclusions retain exact inherited reason plus actual callback/return/stop boundary; a returned source with unsupported projection remains excluded.",
+    "Work/lifecycle helper entry order and actual returns are separately observed; lifecycle pool initialization and repeated inactive control have explicit PC checks.",
+    "Finally receipts retain attempted/unattempted IDs and partial source observations; no success is synthesized on exceptions."
+  ],
+  "remaining": [
+    "Actual development characterization on fixed unreserved inputs",
+    "Fresh full helper/outcome review",
+    "Exact reserved runner, recipes, closure seal and admission",
+    "No reserved input generation or final Source pass claimed"
+  ]
+}

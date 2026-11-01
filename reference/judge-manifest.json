@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "d7fef1051a439bac76883ddf6b815486d198d80a",
-    "evidence": "docs/refactor-inventory/packets/task-owner/CAPTURE-BINDING-CORRECTION.json",
-    "evidence_sha256": "a83e709f9c7d0f2fea148e8e874d12651328870076e1dc4ab4e0147bc489c7dd",
-    "reason": "Bind reserved task captures to independent expected cases and ABI extents"
+    "base_commit": "16a163c6d2a0c4b47f1680d67847076db20b45f7",
+    "evidence": "docs/refactor-inventory/packets/task-owner/SOURCE-OUTCOME-IMPLEMENTATION.json",
+    "evidence_sha256": "6efd0c7a07120e39b1f5e740dc481b5ab69609cb58ae562328b5945110196eab",
+    "reason": "Observe actual task source returns/stops/faults and retain failed-attempt ledgers"
   },
   "files": {
     "Makefile": "f145daba48afc9b3e7609df89506e4ce95b8693af2bc826358904427af53bfb6",
@@ -683,7 +683,7 @@
     "tests/python/test_symbol_context.py": "e276e801136d0821369682beb43c42c0f460ff137123683d8c1150487eec2690",
     "tests/python/test_symbols.py": "9e9a03a6389d6cd58aa49c63272049754f55ccddb19eeb894b8b92ccce362e0f",
     "tests/python/test_task_reserved_inputs.py": "ce771feeee0e8dac64450381a8e15ea6d1216aeb3235008a804aea1ada3482b4",
-    "tests/python/test_task_reserved_observer.py": "deb194f9b00559cd19b8079d787c23d5ef72ec4b1519f5dd1e48d30b01f60079",
+    "tests/python/test_task_reserved_observer.py": "ff1063003a4f1077b0f9a29ab320430b8fcdf1f53bee0ba9d82ade7ed6e5a131",
     "tests/python/test_task_stream_completeness.py": "b99019420543e49346ea3e8e870ce1e2e5bb28ccd68cdbc3bc3baba26bd80612",
     "tests/python/test_title_menu_import.py": "25a9eb8eb320234ea6d5b8fb4da5aafc1c5b123b9a4d262285dea7d0fce5fae8",
     "tests/python/test_voice_assets.py": "d2f8b77127775abca46047a715eff1411ff4c9aeb30fe32821ee2f753682d5fc",
@@ -1102,7 +1102,7 @@
     "tools/oracles/task_judges/freeze.py": "d8f60a37ad0970b6e19d3744fc1df891eff7a348f2edd299c3029e9c1b850d38",
     "tools/oracles/task_judges/mutate.py": "da598d7d20fd5a5e8d0de553b84aa13bb3ee5ea60eaa54c4ed75b48f229ed11e",
     "tools/oracles/task_judges/reserved_inputs.py": "2e15c69e6c872035005af4bffd50fae0c9e3d8717dcf61dbf04e1d081d0a8492",
-    "tools/oracles/task_judges/reserved_observer.py": "f901d6024b2d16a9fe64292ab6611fda8477c46c31d050d57122e2298913b549",
+    "tools/oracles/task_judges/reserved_observer.py": "935139aac5ddc7dd701c355d134643dce194ccd82128c41741c121d3dd4a4bb1",
     "tools/oracles/verdict.py": "333ac997dd1211ab70ed04d8fe7a7a424f418d00f13cd913a355f39773e1a63a",
     "tools/oracles/verify_original_air_acceleration.py": "a1f2fdeb24e84173f73538f9d1c02c4758d801b17568c58a679554f77c0b00c8",
     "tools/oracles/verify_original_alternate_acceleration.py": "0d6be36372b0e584a17d8d1b3fe1e4a1a25b35a5aca64aea7abfcf40a53f22a0",

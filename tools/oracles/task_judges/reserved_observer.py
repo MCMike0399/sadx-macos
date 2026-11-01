@@ -5,6 +5,7 @@ committed dependency freeze and create its single-use admission marker BEFORE
 generating cases or calling observe(). Importing this module generates nothing.
 """
 import copy
+from contextlib import contextmanager
 import hashlib
 import importlib
 import importlib.util
@@ -14,6 +15,156 @@ import struct
 import sys
 
 from reserved_inputs import arena_sequences, lifecycle_sequences
+
+
+def input_digest(value):
+    return hashlib.sha256(json.dumps(value, separators=(',', ':')).encode()).hexdigest()
+
+
+@contextmanager
+def record_faults(original, machine, events, read_ip):
+    """Observe invalid emulated accesses; never map memory or resume a fault."""
+    def fault(current, access, address, size, value, unused):
+        events.append(dict(pc=read_ip(current), access=access, address=address, size=size, value=value))
+        return False
+    hook = machine.hook_add(original.unicorn.UC_HOOK_MEM_INVALID, fault)
+    try:
+        yield
+    finally:
+        machine.hook_del(hook)
+
+
+def traversal_outcome(original, source, pc):
+    """Classify only the unchanged traversal observer's established hook stops."""
+    if source.failure == 0 and pc == original.STOP:
+        return 'returned'
+    callback_sites = {original.CODE + offset for offset in (0x10, 0x20, 0x30)}
+    if source.failure == 1 and pc in callback_sites | {0x4128f0}:
+        return 'established_observer_stop'
+    if source.failure == 2 and pc == source.boundary and pc in (0x40b510, 0x40b140, 0x40b750):
+        return 'established_observer_stop'
+    raise ValueError(f'Unestablished traversal outcome: failure={source.failure}, pc={pc:x}')
+
+
+@contextmanager
+def audit_traversal(slug, original, cases, events, read_ip):
+    previous = original.Source.run
+
+    def run(source, values):
+        index = len(events)
+        if index >= len(cases) or values != cases[index]:
+            raise ValueError('Original case order/input differs from generated bundle')
+        event = dict(case=index, input_sha256=input_digest(values), projection='attempted', memory_faults=[])
+        events.append(event)
+        try:
+            with record_faults(original, source.m, event['memory_faults'], read_ip):
+                expected = previous(source, values)
+        except Exception as error:
+            event.update(error_type=type(error).__name__, error=str(error))
+            event['projection'] = 'unexpected_error'
+            event['pc'] = read_ip(source.m)
+            if event['memory_faults']:
+                raise
+            if (slug == 'task_delete' and isinstance(error, RuntimeError) and
+                    str(error) in ('source free list cycle', 'source reentrant destructor boundary')):
+                pc = read_ip(source.m)
+                if str(error) == 'source reentrant destructor boundary':
+                    if pc not in {original.CODE + offset for offset in (0x10, 0x20, 0x30)}:
+                        raise ValueError('Unestablished reentrant destructor boundary') from error
+                    outcome = 'established_observer_stop'
+                else:
+                    outcome = traversal_outcome(original, source, pc)
+                event.update(pc=pc, original_outcome=outcome, projection='excluded',
+                             exclusion=str(error))
+            raise
+        pc = read_ip(source.m)
+        if event['memory_faults']:
+            raise ValueError('Original memory fault was suppressed')
+        event.update(pc=pc, source_failure=source.failure, source_boundary=source.boundary,
+                     projection='unexpected_stop')
+        event.update(original_outcome=traversal_outcome(original, source, pc),
+                     expected_words=expected, projection='produced')
+        return expected
+
+    try:
+        original.Source.run = run
+        yield
+        if len(events) != len(cases):
+            raise ValueError('Incomplete original traversal attempts')
+    finally:
+        original.Source.run = previous
+
+
+@contextmanager
+def audit_helpers(slug, original, cases, events, read_ip):
+    previous = original.call
+    active = None
+    machine = None
+
+    def call(current, entry, arguments):
+        nonlocal active, machine
+        if entry == 0x40b1ce:
+            index = len(events)
+            control = slug == 'task_lifecycle' and index == len(cases)
+            if index >= len(cases) and not control:
+                raise ValueError('Unexpected original helper sequence')
+            active = dict(case=None if control else index, calls=[],
+                          kind='repeated_inactive_control' if control else 'generated_sequence')
+            events.append(active)
+        if active is None:
+            raise ValueError('Original helper before sequence initialization')
+        machine = current
+        # The lifecycle pool initializer uses emu_start directly between these
+        # Python helpers. Observe its actual end PC before the first operation.
+        if slug == 'task_lifecycle' and len(active['calls']) == 1:
+            active['pool_initializer_end_pc'] = read_ip(current)
+            if read_ip(current) != original.STOP:
+                raise ValueError('Original pool initializer did not reach STOP')
+        row = dict(entry=entry, arguments=list(arguments), outcome='attempted', memory_faults=[])
+        active['calls'].append(row)
+        try:
+            with record_faults(original, current, row['memory_faults'], read_ip):
+                result = previous(current, entry, arguments)
+        except Exception as error:
+            row.update(outcome='unexpected_error', error_type=type(error).__name__, error=str(error),
+                       pc=read_ip(current))
+            raise
+        pc = read_ip(current)
+        if row['memory_faults']:
+            raise ValueError('Original helper memory fault was suppressed')
+        row.update(pc=pc, result=result, outcome='returned' if pc == original.STOP else 'unexpected_stop')
+        if pc != original.STOP:
+            raise ValueError('Original helper did not reach STOP')
+        return result
+
+    try:
+        original.call = call
+        yield
+        expected_count = len(cases) + (slug == 'task_lifecycle')
+        if len(events) != expected_count:
+            raise ValueError('Incomplete original helper sequence attempts')
+        op_entries = {0: 0x40b030, 1: 0x40b860, 2: 0x40b940, 3: 0x40b570,
+                      4: 0x40b6c0, 5: 0x40b0c0, 6: 0x40b7e0}
+        for event, case in zip(events, cases):
+            entries = [0x40b1ce]
+            for op in case:
+                if slug == 'task_work':
+                    entries.append(0x40b220 if op[0] == 0 else 0x40b310)
+                elif op[0] == 9:
+                    entries.extend([0x40b220] * 7)
+                elif op[0] not in (7, 8, 10):
+                    entries.append(op_entries[op[0]])
+            if [row['entry'] for row in event['calls']] != entries:
+                raise ValueError('Original helper operation sequence changed')
+            event.update(input_sha256=input_digest(case), original_outcome='helpers_returned')
+        if slug == 'task_lifecycle':
+            control = events[-1]
+            pc = read_ip(machine)
+            if pc != 0x401000 or [row['entry'] for row in control['calls']] != [0x40b1ce, 0x40b860]:
+                raise ValueError('Inactive control did not reach established diagnostic stop')
+            control.update(original_outcome='established_observer_stop', pc=pc)
+    finally:
+        original.call = previous
 
 
 def generate(slug, definition, original):
@@ -174,35 +325,77 @@ def validate_capture(slug, cases, report, output):
         raise ValueError(f'Native capture call count {count} differs from expected {len(expected)}')
 
 
+def validate_source_report(slug, report, cases, events, definition):
+    generated = [event for event in events if event['case'] is not None]
+    if [event['case'] for event in generated] != list(range(len(cases))):
+        raise ValueError('Incomplete ordered source attempt ledger')
+    if slug == 'task_display':
+        outcomes = {}
+        for event in generated:
+            key = str(event['source_failure'])
+            outcomes[key] = outcomes.get(key, 0) + 1
+        if report['source_outcomes'] != outcomes:
+            raise ValueError('Source outcome counts differ from observed stops/returns')
+    elif slug == 'task_delete':
+        excluded = [dict(case=event['case'], input=cases[event['case']], reason=event['exclusion'])
+                    for event in generated if event['projection'] == 'excluded']
+        if report['source_unsupported'] != excluded or report['seed'] != definition['seed']:
+            raise ValueError('Source exclusions/seed differ from actual observations')
+    elif slug == 'task_lifecycle':
+        control = report['inactive_destroy_boundary']
+        if control['original_stop'] != '0x401000' or control['original_return_observed'] is not False:
+            raise ValueError('Repeated inactive stop mislabeled as returned')
+
+
 def observe(slug, cases, labels, definition, exe, library, output):
     """Called only after the final runner has sealed/admitted this whole closure."""
-    if not cases or len(cases) != len(labels):
+    if (not cases or len(cases) != len(labels) or
+            any(label not in ('fresh', 'repeated_fixed') for label in labels)):
         raise ValueError('Missing complete labeled input bundle')
     output = Path(output)
     output.mkdir(parents=True, exist_ok=False)
     inputs = [dict(case=index, provenance=label, input=case)
               for index, (case, label) in enumerate(zip(cases, labels))]
     (output / 'inputs.json').write_text(json.dumps(inputs, separators=(',', ':')) + '\n')
-    original = importlib.import_module('verify_original_' + slug)
-    # Bind this task recorder by file, rather than an unrelated cached module
-    # named "freeze". The final runner must seal this file before imports.
-    spec = importlib.util.spec_from_file_location('_task_reserved_recorder',
-                                                Path(__file__).with_name('freeze.py'))
-    recorder = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(recorder)
-    result = capture_cases(slug, original, recorder, cases, definition, exe, library, output)
+    events, result, error, validated = [], None, None, False
     report_path = output / (slug + '.json')
-    if result == 0:
-        report = json.loads(report_path.read_text())
-        validate_report(slug, report, cases)
-        validate_capture(slug, cases, report, output)
-    receipt = dict(slug=slug, oracle_exit=result, generated_ids=list(range(len(cases))),
-                   fresh_ids=[row['case'] for row in inputs if row['provenance'] == 'fresh'],
-                   repeated_fixed_ids=[row['case'] for row in inputs
-                                       if row['provenance'] == 'repeated_fixed'],
-                   inputs_sha256=hashlib.sha256((output / 'inputs.json').read_bytes()).hexdigest(),
-                   report_sha256=hashlib.sha256(report_path.read_bytes()).hexdigest(),
-                   limits='Source returns/stops/exclusions retain the unchanged oracle policy. '
-                          'Generated IDs alone do not prove attempted/completed source execution.')
-    (output / 'reserved-observation.json').write_text(json.dumps(receipt, indent=2) + '\n')
-    return result
+    try:
+        original = importlib.import_module('verify_original_' + slug)
+        # Bind the recorder by file, not an unrelated cached "freeze" module.
+        spec = importlib.util.spec_from_file_location('_task_reserved_recorder',
+                                                    Path(__file__).with_name('freeze.py'))
+        recorder = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(recorder)
+        register = getattr(original, 'UC_X86_REG_EIP', None)
+        if register is None:
+            from unicorn.x86_const import UC_X86_REG_EIP
+            register = UC_X86_REG_EIP
+        audit = audit_helpers if slug in ('task_work', 'task_lifecycle') else audit_traversal
+        with audit(slug, original, cases, events, lambda machine: machine.reg_read(register)):
+            result = capture_cases(slug, original, recorder, cases, definition, exe, library, output)
+        if result == 0:
+            report = json.loads(report_path.read_text())
+            validate_report(slug, report, cases)
+            validate_source_report(slug, report, cases, events, definition)
+            validate_capture(slug, cases, report, output)
+            validated = True
+        return result
+    except BaseException as failure:
+        error = dict(type=type(failure).__name__, message=str(failure))
+        raise
+    finally:
+        attempted = [event['case'] for event in events if event['case'] is not None]
+        receipt = dict(slug=slug, oracle_exit=result, error=error, validated=validated,
+                       generated_ids=list(range(len(cases))), attempted_source_ids=attempted,
+                       unattempted_source_ids=sorted(set(range(len(cases))) - set(attempted)),
+                       fresh_ids=[row['case'] for row in inputs if row['provenance'] == 'fresh'],
+                       repeated_fixed_ids=[row['case'] for row in inputs
+                                           if row['provenance'] == 'repeated_fixed'],
+                       inputs_sha256=hashlib.sha256((output / 'inputs.json').read_bytes()).hexdigest(),
+                       report_sha256=hashlib.sha256(report_path.read_bytes()).hexdigest()
+                       if report_path.exists() else None,
+                       source_observations=events,
+                       limits='Helper sequences, normally returned traversals, established hook stops '
+                              'and excluded projections are distinct. No unexpected memory fault is accepted. '
+                              'A source return with an excluded projection is not a completed comparison.')
+        (output / 'reserved-observation.json').write_text(json.dumps(receipt, separators=(',', ':')) + '\n')
