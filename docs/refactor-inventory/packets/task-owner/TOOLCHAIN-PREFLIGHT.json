@@ -1,0 +1,45 @@
+{
+  "base_commit": "5d046aaa3545b9fc5e3d8a0ca2683d446bd050f2",
+  "status": "No prepare/freeze/build/link/reserved generation or execution occurred.",
+  "observed_setup_failures": [
+    "Initial hardcoded toolchain C++ include path absent; compiler -E -v declares SDK/usr/include/c++/v1 instead.",
+    "Exact compiler -### recipe rejected deprecated -fuse-ld= path under Werror; use --ld-path=. Resolving clang++ executable spelling to clang also omitted automatic libc++ linkage.",
+    "Initial new fixture expected /var rather than canonical /private/var; corrected expectation to resolve(), no implementation/algorithm change."
+  ],
+  "corrections": [
+    "Query sanitized explicit compiler include search; pin every declared search directory.",
+    "Keep clang++ argv spelling, use supported linker option and bind driver-selected libLTO."
+  ],
+  "actual_toolchain": {
+    "compiler": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++",
+    "linker": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/ld",
+    "lto": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/libLTO.dylib",
+    "sdk": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk",
+    "resource": "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21",
+    "cxx": "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+    "include_search": [
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include/c++/v1",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/21/include",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/usr/include",
+      "/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/Frameworks",
+      "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX.sdk/System/Library/SubFrameworks"
+    ]
+  },
+  "dry_run": {
+    "exit_status": 0,
+    "log_sha256": "438b440c45bd70e7db980e1898d065c066b2cddd65b82a6ec45363d2868c5cc2",
+    "explicit_linker_lto_and_libcpp_confirmed": true,
+    "compiler_linker_executed": false
+  },
+  "tests": {
+    "tests": 62,
+    "exit_status": 0,
+    "log_sha256": "bf7b4bbf47fb0c0aee8decfc34ab86ec6b5ed526661d423ec0a4e62eff43170c"
+  },
+  "remaining": [
+    "Include this exact follow-up in active runner correction review",
+    "Final frozen dependency snapshot only after acceptance",
+    "Distinct Root admission and final reserved execution"
+  ]
+}

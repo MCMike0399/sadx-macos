@@ -21,6 +21,51 @@ SPEC.loader.exec_module(RUN)
 
 
 class TaskReservedRun(unittest.TestCase):
+    def test_declared_sdk_cpp_search_preserves_cpp_driver_identity(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            binary = root / 'toolchain/usr/bin'
+            binary.mkdir(parents=True)
+            (binary / 'clang').write_text('compiler')
+            compiler = binary / 'clang++'
+            compiler.symlink_to('clang')
+            linker = binary / 'ld'
+            linker.write_text('linker')
+            support = root / 'toolchain/usr/lib/libLTO.dylib'
+            support.parent.mkdir(parents=True)
+            support.write_text('support')
+            sdk, resource = root / 'sdk', root / 'resource'
+            cxx = sdk / 'usr/include/c++/v1'
+            cxx.mkdir(parents=True)
+            resource.mkdir()
+            search = '#include <...> search starts here:\n ' + str(cxx) + '\nEnd of search list.\n'
+            answers = [str(compiler), str(linker), str(sdk), str(resource)]
+            with patch.object(RUN.subprocess, 'check_output', side_effect=answers), \
+                    patch.object(RUN.subprocess, 'run', return_value=SimpleNamespace(returncode=0, stderr=search)):
+                tools = RUN.toolchain()
+            self.assertEqual(tools['compiler'], str(compiler))
+            self.assertEqual(tools['cxx'], str(cxx.resolve()))
+            self.assertEqual(tools['include_search'], [str(cxx.resolve())])
+            self.assertEqual(tools['lto'], str(support))
+
+    def test_build_uses_explicit_current_linker_option_and_pinned_search(self):
+        with tempfile.TemporaryDirectory() as directory:
+            out = Path(directory)
+            (out / 'old').mkdir()
+            tools = dict(compiler='/pinned/clang++', sdk='/pinned/sdk', resource='/pinned/resource',
+                         cxx='/pinned/cxx', linker='/pinned/ld')
+            with patch.object(RUN, 'OUT', out), patch.object(RUN, 'command') as command:
+                RUN.build('old', out / 'tree', tools)
+            self.assertEqual(command.call_count, 4)
+            for call in command.call_args_list:
+                argv = call.args[0]
+                self.assertEqual(argv[0], '/pinned/clang++')
+                self.assertIn('--ld-path=/pinned/ld', argv)
+                self.assertIn('--no-default-config', argv)
+                self.assertIn('/pinned/sdk', argv)
+                self.assertIn('/pinned/resource', argv)
+                self.assertIn('/pinned/cxx', argv)
+
     def test_timestamp_valid_stale_cache_cannot_replace_checked_source(self):
         with tempfile.TemporaryDirectory() as directory:
             path = Path(directory) / 'helper.py'

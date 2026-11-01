@@ -79,15 +79,37 @@ def tree_inputs(directory, seen=None):
 
 
 def toolchain():
-    compiler = Path(subprocess.check_output(['xcrun', '--find', 'clang++'], text=True).strip()).resolve()
+    # Keep the clang++ argv spelling: resolving its symlink to "clang" changes
+    # the driver's default link language even when the source suffix is .cpp.
+    compiler = Path(subprocess.check_output(['xcrun', '--find', 'clang++'], text=True).strip())
     linker = Path(subprocess.check_output(['xcrun', '--find', 'ld'], text=True).strip()).resolve()
     sdk = Path(subprocess.check_output(['xcrun', '--sdk', 'macosx', '--show-sdk-path'], text=True).strip()).resolve()
     resource = Path(subprocess.check_output([str(compiler), '-print-resource-dir'], text=True).strip()).resolve()
-    cxx = compiler.parent.parent / 'include/c++/v1'
-    if not cxx.is_dir():
+    search = subprocess.run([str(compiler), '-E', '-v', '-x', 'c++', '-',
+                             '-arch', 'arm64', '-mmacosx-version-min=14.0',
+                             '-isysroot', str(sdk), '-resource-dir', str(resource),
+                             '--no-default-config'], input='', capture_output=True, text=True,
+                            env=dict(PATH='/usr/bin:/bin', LANG='C', LC_ALL='C'))
+    if search.returncode:
+        raise ValueError('Cannot establish compiler include closure: ' + search.stderr)
+    includes, inside = [], False
+    for line in search.stderr.splitlines():
+        if 'search starts here:' in line:
+            inside = True
+        elif 'End of search list.' in line:
+            inside = False
+        elif inside:
+            path = Path(line.strip().removesuffix(' (framework directory)'))
+            if path.is_dir():
+                includes.append(str(path.resolve()))
+    cxx = [path for path in includes if Path(path).name == 'v1' and Path(path).parent.name == 'c++']
+    if len(cxx) != 1:
         raise ValueError('Explicit compiler C++ include tree unavailable')
-    return dict(compiler=str(compiler), linker=str(linker), sdk=str(sdk),
-                resource=str(resource), cxx=str(cxx))
+    lto = compiler.parent.parent / 'lib/libLTO.dylib'
+    if not lto.is_file():
+        raise ValueError('Driver linker support library unavailable')
+    return dict(compiler=str(compiler), linker=str(linker), lto=str(lto), sdk=str(sdk),
+                resource=str(resource), cxx=cxx[0], include_search=includes)
 
 
 def root_inputs():
@@ -103,12 +125,15 @@ def root_inputs():
     # load verified source directly; the pinned Unicorn package binds both forms.
     paths.extend(p for p in package.rglob('*') if p.is_file())
     tools = toolchain()
-    paths.extend((Path(tools['compiler']), Path(tools['linker']), Path(sys.executable).resolve()))
+    paths.extend((Path(tools['compiler']), Path(tools['linker']), Path(tools['lto']),
+                  Path(sys.executable).resolve()))
     exe = ROOT / 'game/Sonic Adventure DX/sonic.exe'
     paths.append(exe)
     result = {str(path.resolve()): digest(path) for path in sorted(set(paths))}
     for name in ('sdk', 'resource', 'cxx'):
         result.update(tree_inputs(Path(tools[name])))
+    for directory in tools['include_search']:
+        result.update(tree_inputs(Path(directory)))
     return result
 
 
@@ -222,7 +247,7 @@ def build(world, tree, tools):
                 '-ffp-contract=off', '-fno-fast-math', '-arch', 'arm64',
                 '-mmacosx-version-min=14.0', '-isysroot', tools['sdk'],
                 '-resource-dir', tools['resource'], '-isystem', tools['cxx'],
-                '-fuse-ld=' + tools['linker'], '-fno-modules', '-fno-implicit-modules',
+                '--ld-path=' + tools['linker'], '-fno-modules', '-fno-implicit-modules',
                 '--no-default-config',
                 '-Isrc', '-Itests/fixtures', '-dynamiclib',
                 'tests/probes/native_' + slug + '_probe.cpp',
