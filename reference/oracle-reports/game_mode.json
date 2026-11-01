@@ -1,15 +1,15 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "22396cb2dbc5f003fdb86f5d893a6664966a7b28ad12137fc89327d449b95469",
+ "native_library_sha256": "7b7dc32bb53950f7c9a5ceb4391efc872f796bbb14634a727dd93827db4e9862",
  "source_files": {
   "src/game/game_mode.hpp": "44230c85f069ad96fc7360b6b16536e1da4001b6cf9d35574f3af772bbaf4075",
-  "src/game/game_mode_services.hpp": "9418083f94061e08ac207a0776a35e6620344b713c0323b3f828dc7a65ef9a7e",
+  "src/game/game_mode_services.hpp": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36",
   "src/game/game_mode.cpp": "8f830dabd7b2f3e594333799b47af001a6afebb7548ec2e95119b45c9dae5a43",
-  "src/game/game_mode_internal.hpp": "f3919cfef6d2c47a1eb98bdfdd647d4e92d7080afbb99a888c20c85162455429",
-  "src/game/game_mode_native.cpp": "b35b5df1a4751c9bebffe2b8be653a89d5d6d15054ed487cc31d2ff299fc8cbe",
+  "src/game/game_mode_internal.hpp": "9a86c138e051465311d23780210976ce19a23c9f2f4d1abf96c784ce22774d7d",
+  "src/game/game_mode_native.cpp": "cdf3a649e194591c4ed3ec324cb6ae3ecac6c25c3ea83ec7c5a3e69a37e44dd5",
   "src/guest/game_mode_reference.hpp": "a5e0f644ad592b50ce6d32eddc2d100997fe137e4145c379de0866adb14280f9",
   "src/guest/game_mode_reference.cpp": "db11678fd7fbdb2d0046a543c0954f1d6f45d98202e5f6a84710e43040d90029",
-  "tests/probes/native_game_mode_probe.cpp": "d1e1c146a4cc6b46819cac257b2dcba737cec41915f26e84887bc1252f0bb587",
+  "tests/probes/native_game_mode_probe.cpp": "1d1f8a6e22aefb24f5eb657cc167cd17b6de4897b0f49ff6f232433d89caa4df",
   "tools/oracles/verify_original_game_mode.py": "a8df08e0f9d0b995213f45f94652de08077bf56b3e056adc7001faaef0b4fd69"
  },
  "original_range_sha256": "09f9d83f6875ff84677c411a81e573d66feb815e538e15847e1e11bfb653a78f",
@@ -89,7 +89,7 @@
  "order_arguments_stores_boundaries_match": true,
  "limits": "Game-mode state machine 40c090 against original instructions.\n\nEvery callee is an explicit owner fixture with a scripted EAX (callees whose\nresult the source ignores return 0x5a5a5a5a); up to two scripted callees\nrewrite a source global when called, to exercise the source's rereads after\ncalls; one call can fail. The level pointer at 3b0ef4c targets a mapped word or\nis null (source faults at the MOVSX). This compares call order, call sites,\narguments, stores and failure boundaries; it does not show any owner subsystem\n(menus, saves, file loads, cutscenes, audio) is implemented.\n",
  "tracked_summary": {
-  "full_sha256": "2984ad7a7491cd0ba4de4673aee48bfb730075c39f487212eea8752b8f4b846a",
+  "full_sha256": "80ce97de7cdcff790b58cf7f36fa5db7cdbb50a55de7c21fcabb586e309ba297",
   "full_bytes": 3890,
   "lists_cut_to": 10,
   "cut_lists": {}

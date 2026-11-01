@@ -508,3 +508,9 @@ build/task-scheduler-contract-test: tests/unit/task_scheduler_contract.cpp tests
 	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/task_scheduler_contract.cpp src/engine/task.cpp src/engine/task_work.cpp -o $@
 build/task-bridge-contract-test: tests/unit/task_bridge_contract.cpp tests/probes/task_bridge_contract.hpp build/libsadx-guest.a build/libsadx-core.a
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -I$(UNICORN_DIR)/include tests/unit/task_bridge_contract.cpp $(GUEST_LINK) build/libsadx-core.a -o $@
+
+# Finite native mode forwarding and complete tagged reference diagnostics.
+build/game-mode-forwarding-test: tests/unit/game_mode_forwarding.cpp src/game/game_mode.cpp src/game/game_mode_native.cpp src/game/game_mode.hpp src/game/game_mode_internal.hpp src/game/game_mode_services.hpp | build
+	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/game_mode_forwarding.cpp src/game/game_mode.cpp src/game/game_mode_native.cpp -o $@
+build/game-mode-diagnostics-test: tests/unit/game_mode_diagnostics.cpp src/game/game_mode.cpp src/guest/game_mode_reference.cpp src/guest/game_mode_reference.hpp src/game/game_mode.hpp src/game/game_mode_internal.hpp src/game/game_mode_services.hpp src/game/game_loop.hpp src/engine/game_logic.hpp | build
+	$(CXX) $(CXXFLAGS) $(INCLUDES) tests/unit/game_mode_diagnostics.cpp src/game/game_mode.cpp src/guest/game_mode_reference.cpp -o $@
