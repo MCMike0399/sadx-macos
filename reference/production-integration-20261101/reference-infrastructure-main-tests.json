@@ -1,0 +1,40 @@
+{
+  "source_commit": "e307839",
+  "build_exit": 0,
+  "units": [
+    {
+      "name": "image",
+      "exit": 0,
+      "log_sha256": "f630131b096ff3ad91f6d577485c2491b2c94f33f1906e8a243e0ac24faed5d1"
+    },
+    {
+      "name": "image-edges",
+      "exit": 0,
+      "log_sha256": "e7844494f22dc68e5182f02b049545586638756ff82d437146baf9098b2834bb"
+    },
+    {
+      "name": "heap",
+      "exit": 0,
+      "log_sha256": "afa7de72fa41f7b9d5fc660a9ed55b2da90baa83891dcb02bf809851efcec89b"
+    },
+    {
+      "name": "heap-contract",
+      "exit": 0,
+      "log_sha256": "264529efbf2356af1bf42bdaf8bca1a3ec1a4df25c6d965b72d17fc4c935b4ab"
+    },
+    {
+      "name": "imports",
+      "exit": 0,
+      "log_sha256": "dbc1f43aac252a06e19e712252f5016005909def4aa73311d7135a6fd4c84b36"
+    },
+    {
+      "name": "dlls",
+      "exit": 0,
+      "log_sha256": "4f6874c3bd5c0195b6e3e851f1f4b57409ab0909f21e2ee6be4b2104b5435a85"
+    }
+  ],
+  "limits": [
+    "Actual reference imports/DLL emulation and synthetic image/heap tests; no Windows allocator/loader parity or new native gameplay claim.",
+    "Full combined integration gate still pending."
+  ]
+}
