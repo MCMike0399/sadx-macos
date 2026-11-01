@@ -1,0 +1,1418 @@
+{
+  "schema_version": 1,
+  "review_kind": "independent read-only complete loader semantic inventory fragment",
+  "review_base": "73be9a5c4217157a05c11fdd4f875d98877e16d4",
+  "source_review_base": "73be9a5c4217157a05c11fdd4f875d98877e16d4",
+  "packet_branch": "packet/review-loader-boundaries",
+  "assigned_worktree": "/Users/burbujamc/.t3/worktrees/sadx-macos/t3-d1410585",
+  "scope": "All SIX exact tracked src/loader files, 263 lines, and three complete basename modules at Main73be9a5. Boundary consumers inspected without dispositioning their full modules.",
+  "counts": {
+    "files": 6,
+    "modules": 3,
+    "source_lines": 263,
+    "file_dispositions": {
+      "reference_infrastructure": 6,
+      "already_conforming": 0,
+      "needs_migration": 0,
+      "open_review": 0,
+      "obsolete": 0
+    },
+    "module_dispositions": {
+      "reference_infrastructure": 3,
+      "already_conforming": 0,
+      "needs_migration": 0,
+      "open_review": 0,
+      "obsolete": 0
+    },
+    "actual_findings": 1,
+    "conforming_module_closures": 0
+  },
+  "files": {
+    "src/loader/executable_image.cpp": {
+      "disposition": "reference_infrastructure",
+      "reason": "PE mapping/import/export/rebase infrastructure for reference guest execution and source facts; no recovered game policy inside this module.",
+      "semantic_justification": "Complete header and implementation reviewed: bounded little-endian file reads, MZ/PE32/i386 identification, header/section mapping and zero tails, named exports/forwarders, RVA-to-VA conversion, HIGHLOW rebasing, import descriptors/thunks/name-or-ordinal and u32 reads. VAs mean guest image locations by their use, not their magnitude. MZ/PE signatures, machine/magic, ordinal flag, relocation type/offset masks and field offsets are legitimate format encodings. Missing image bytes/export names and malformed image results are real boundary absence, not gameplay fixture fields. No game-mode, allocation policy or resource-selection algorithm is recovered here. Caller-owned PE reads can still feed legacy fixture optionals; this API does not make those callers conforming. Code is densely packed and rebased has an unchecked optional dereference, so purpose does not establish code conformity.",
+      "evidence": [
+        {
+          "path": "src/loader/executable_image.cpp",
+          "line": 1,
+          "sha256": "0f21f60ae1034911a271afe3de215683f6c4d5410965bdbfe6e67e4882d17c9b"
+        },
+        {
+          "path": "src/loader/executable_image.hpp",
+          "line": 1,
+          "sha256": "112d26830c0e807ee7b3c4bd5bb9b1600a86c9ee0e08a17ad733e99a7e6b22cd"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "ExecutableImage owns bytes, sections, exports and directory metadata as a value. HleModules stores shared mapped images per GuestModule; X86Guest copies their bytes into separate mutable guest execution memory. NativeGameConfiguration holds shared const input/game/model images; writes before/within the guest are not modeled as image mutations.",
+          "evidence": [
+            {
+              "path": "src/loader/executable_image.hpp",
+              "line": 1,
+              "sha256": "112d26830c0e807ee7b3c4bd5bb9b1600a86c9ee0e08a17ad733e99a7e6b22cd"
+            },
+            {
+              "path": "src/hle/hle_modules.hpp",
+              "line": 1,
+              "sha256": "b8949efaa458104ecdb0d1af43fd66d30ed4c4f3a78060b1c81cb67d416a8df0"
+            },
+            {
+              "path": "src/hle/hle_modules.cpp",
+              "line": 1,
+              "sha256": "ac8e773a8242412f7d9c7ec821af1b07800d4c2c3ac04a532adee48f2232a593"
+            },
+            {
+              "path": "src/guest/x86_guest.cpp",
+              "line": 1,
+              "sha256": "8a6e880b8383e43de46cb99bf51d6f8e297e11ea94b5cf64f5cfca803787914e"
+            },
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "line": 1,
+              "sha256": "bf1f2d8040355e4f6e627894f5c74e52b9f0146ec3c16ac0dff03ce8dfed0e15"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "HleModules parses/rebases DLLs, maps them and resolves named exports; bind_imports writes resolved targets to IAT VAs in X86Guest. App/reference session parses the main image. override_table reads source image facts. ModelDllSet maps DLL exports/action pointers through this API and remains an address-bearing game-directory consumer needing its own migration; no exemption is conferred on it.",
+          "evidence": [
+            {
+              "path": "src/hle/hle_modules.cpp",
+              "line": 1,
+              "sha256": "ac8e773a8242412f7d9c7ec821af1b07800d4c2c3ac04a532adee48f2232a593"
+            },
+            {
+              "path": "src/hle/hle_registry.cpp",
+              "line": 1,
+              "sha256": "92ac4924220ad8e9f00acf1211cb34a0fd3b2a1ab8275826920707990cd4d99b"
+            },
+            {
+              "path": "src/guest/x86_guest.cpp",
+              "line": 1,
+              "sha256": "8a6e880b8383e43de46cb99bf51d6f8e297e11ea94b5cf64f5cfca803787914e"
+            },
+            {
+              "path": "src/apps/sadx_app.mm",
+              "line": 1,
+              "sha256": "c130b1895a1a6e7f1e644f651967d8f67859730f2d7dcdc278b1b9a0c3440c8d"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "line": 1,
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            },
+            {
+              "path": "src/guest/override_table.cpp",
+              "line": 1,
+              "sha256": "8f55db3d274697694ef5bb745c3d501492dd323633f627c1de3f47d2d975ed90"
+            },
+            {
+              "path": "src/game/model_dlls.cpp",
+              "line": 1,
+              "sha256": "9640ce6cecf32a944922b68926e0d1987f0784334b8d02f406558ff35f23cfaa"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Existing guest_imports assertions cover pinned 9-DLL/159-import parsing, ordinal import, exact IAT slots and HLE trap binding. model_dlls covers exact export case, rebased exports/HIGHLOW data, distinct mapping and missing slot. guest_dlls exercises real module loading and profile writes.",
+          "limits": "Historical accepted paths only, not rerun. No exhaustive malformed/truncated image, relocation-size, ordinal export, forwarder-chain or Windows loader equivalence qualification is established. Source-backed P2 is not excluded by these tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/guest_imports.cpp",
+              "line": 1,
+              "sha256": "99c6803285be49700b53d8b8c3cfede7b71a713be8dc5eb78a6733c804791280"
+            },
+            {
+              "path": "tests/unit/model_dlls.cpp",
+              "line": 1,
+              "sha256": "9afe228733823df2f4039f35d84bf417affc5038a55a82df25affd6738fe9a54"
+            },
+            {
+              "path": "tests/unit/guest_dlls.cpp",
+              "line": 1,
+              "sha256": "fe3c7979614bd29a119cd636e44d4f19b5117aad3bae8861411ee831de8ff1c2"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 1,
+              "sha256": "56f941595e3606cb04fae06853689a80cc548eb64c1cf1f2be35f3e8789aa7cb"
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-texture-owner-gate.json",
+              "line": 1,
+              "sha256": "39ce5405246459938178d699f6edef793f8411a9f2d72f1a553b85aa1217857d"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Independent complete-body static review at Main 73be9a5 only. No builds, tests, oracles, mutations, codecs, spec lookups, providers, network, storage operations, delegates or gates were run. No source edits.",
+        "reference_infrastructure is a purpose disposition, not already_conforming, native runtime proof, a whole-system verdict or campaign closure. Dense declarations/control flow still need maintained-source readability cleanup; the PE safety finding remains open.",
+        "Historical receipts retain their recorded command, inputs and limitations. Current source fingerprints matching a historical receipt do not establish current execution, complete parser coverage, Windows behavior or hardware qualification.",
+        "Only the six loader members are dispositioned. Mentioned game/engine callers, importer, HLE graph, platform decoder and native closure checker are boundary evidence, not newly conforming modules."
+      ],
+      "code_conformity": "Not already_conforming: purpose reviewed; dense maintained formatting/declarations/control flow need cleanup under existing checks. No automatic conformity exemption.",
+      "findings": [
+        {
+          "id": "LB-1",
+          "priority": "P2",
+          "title": "Reject relocation entries outside mapped image before dereferencing",
+          "evidence": [
+            {
+              "path": "src/loader/executable_image.cpp",
+              "line": 59,
+              "sha256": "0f21f60ae1034911a271afe3de215683f6c4d5410965bdbfe6e67e4882d17c9b"
+            },
+            {
+              "path": "src/loader/executable_image.cpp",
+              "line": 61,
+              "sha256": "0f21f60ae1034911a271afe3de215683f6c4d5410965bdbfe6e67e4882d17c9b"
+            }
+          ],
+          "description": "rebased validates block size against the declared relocation directory extent, but not against mapped.size(). The entry loop unconditionally dereferences le(mapped,e,2). Static example: SizeOfImage 4096, relocation RVA 4088 and directory size 10, readable final 8-byte block header declaring block size 10. Both header reads succeed and block passes validation; first entry starts at byte 4096, le returns nullopt and operator* violates its precondition. parse accepts the directory metadata without checking mapped extent. This is an actual unchecked boundary in a malformed-image path, not an address-style violation or an observed supported-image failure.",
+          "suggested_followup": "In a separate source/judge packet, bounds-check directory/block entries and retain explicit error results; add discriminating malformed-image coverage without weakening pinned-image checks.",
+          "validation": "Static complete-body reasoning only; no input constructed or executed."
+        }
+      ],
+      "qualification_gaps": [
+        "Historical accepted paths only, not rerun. No exhaustive malformed/truncated image, relocation-size, ordinal export, forwarder-chain or Windows loader equivalence qualification is established. Source-backed P2 is not excluded by these tests."
+      ],
+      "destination": "Retain this bounded reference-purpose responsibility; any future relocation is organizational work, not recovered game logic progress.",
+      "reviewed_source_sha256": "0f21f60ae1034911a271afe3de215683f6c4d5410965bdbfe6e67e4882d17c9b",
+      "complete_body_lines": 95,
+      "file_specific_review": "All parse/read/export/import/rebase bodies and private le helper inspected; LB-1 belongs to this implementation."
+    },
+    "src/loader/executable_image.hpp": {
+      "disposition": "reference_infrastructure",
+      "reason": "PE mapping/import/export/rebase infrastructure for reference guest execution and source facts; no recovered game policy inside this module.",
+      "semantic_justification": "Complete header and implementation reviewed: bounded little-endian file reads, MZ/PE32/i386 identification, header/section mapping and zero tails, named exports/forwarders, RVA-to-VA conversion, HIGHLOW rebasing, import descriptors/thunks/name-or-ordinal and u32 reads. VAs mean guest image locations by their use, not their magnitude. MZ/PE signatures, machine/magic, ordinal flag, relocation type/offset masks and field offsets are legitimate format encodings. Missing image bytes/export names and malformed image results are real boundary absence, not gameplay fixture fields. No game-mode, allocation policy or resource-selection algorithm is recovered here. Caller-owned PE reads can still feed legacy fixture optionals; this API does not make those callers conforming. Code is densely packed and rebased has an unchecked optional dereference, so purpose does not establish code conformity.",
+      "evidence": [
+        {
+          "path": "src/loader/executable_image.cpp",
+          "line": 1,
+          "sha256": "0f21f60ae1034911a271afe3de215683f6c4d5410965bdbfe6e67e4882d17c9b"
+        },
+        {
+          "path": "src/loader/executable_image.hpp",
+          "line": 1,
+          "sha256": "112d26830c0e807ee7b3c4bd5bb9b1600a86c9ee0e08a17ad733e99a7e6b22cd"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "ExecutableImage owns bytes, sections, exports and directory metadata as a value. HleModules stores shared mapped images per GuestModule; X86Guest copies their bytes into separate mutable guest execution memory. NativeGameConfiguration holds shared const input/game/model images; writes before/within the guest are not modeled as image mutations.",
+          "evidence": [
+            {
+              "path": "src/loader/executable_image.hpp",
+              "line": 1,
+              "sha256": "112d26830c0e807ee7b3c4bd5bb9b1600a86c9ee0e08a17ad733e99a7e6b22cd"
+            },
+            {
+              "path": "src/hle/hle_modules.hpp",
+              "line": 1,
+              "sha256": "b8949efaa458104ecdb0d1af43fd66d30ed4c4f3a78060b1c81cb67d416a8df0"
+            },
+            {
+              "path": "src/hle/hle_modules.cpp",
+              "line": 1,
+              "sha256": "ac8e773a8242412f7d9c7ec821af1b07800d4c2c3ac04a532adee48f2232a593"
+            },
+            {
+              "path": "src/guest/x86_guest.cpp",
+              "line": 1,
+              "sha256": "8a6e880b8383e43de46cb99bf51d6f8e297e11ea94b5cf64f5cfca803787914e"
+            },
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "line": 1,
+              "sha256": "bf1f2d8040355e4f6e627894f5c74e52b9f0146ec3c16ac0dff03ce8dfed0e15"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "HleModules parses/rebases DLLs, maps them and resolves named exports; bind_imports writes resolved targets to IAT VAs in X86Guest. App/reference session parses the main image. override_table reads source image facts. ModelDllSet maps DLL exports/action pointers through this API and remains an address-bearing game-directory consumer needing its own migration; no exemption is conferred on it.",
+          "evidence": [
+            {
+              "path": "src/hle/hle_modules.cpp",
+              "line": 1,
+              "sha256": "ac8e773a8242412f7d9c7ec821af1b07800d4c2c3ac04a532adee48f2232a593"
+            },
+            {
+              "path": "src/hle/hle_registry.cpp",
+              "line": 1,
+              "sha256": "92ac4924220ad8e9f00acf1211cb34a0fd3b2a1ab8275826920707990cd4d99b"
+            },
+            {
+              "path": "src/guest/x86_guest.cpp",
+              "line": 1,
+              "sha256": "8a6e880b8383e43de46cb99bf51d6f8e297e11ea94b5cf64f5cfca803787914e"
+            },
+            {
+              "path": "src/apps/sadx_app.mm",
+              "line": 1,
+              "sha256": "c130b1895a1a6e7f1e644f651967d8f67859730f2d7dcdc278b1b9a0c3440c8d"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "line": 1,
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            },
+            {
+              "path": "src/guest/override_table.cpp",
+              "line": 1,
+              "sha256": "8f55db3d274697694ef5bb745c3d501492dd323633f627c1de3f47d2d975ed90"
+            },
+            {
+              "path": "src/game/model_dlls.cpp",
+              "line": 1,
+              "sha256": "9640ce6cecf32a944922b68926e0d1987f0784334b8d02f406558ff35f23cfaa"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Existing guest_imports assertions cover pinned 9-DLL/159-import parsing, ordinal import, exact IAT slots and HLE trap binding. model_dlls covers exact export case, rebased exports/HIGHLOW data, distinct mapping and missing slot. guest_dlls exercises real module loading and profile writes.",
+          "limits": "Historical accepted paths only, not rerun. No exhaustive malformed/truncated image, relocation-size, ordinal export, forwarder-chain or Windows loader equivalence qualification is established. Source-backed P2 is not excluded by these tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/guest_imports.cpp",
+              "line": 1,
+              "sha256": "99c6803285be49700b53d8b8c3cfede7b71a713be8dc5eb78a6733c804791280"
+            },
+            {
+              "path": "tests/unit/model_dlls.cpp",
+              "line": 1,
+              "sha256": "9afe228733823df2f4039f35d84bf417affc5038a55a82df25affd6738fe9a54"
+            },
+            {
+              "path": "tests/unit/guest_dlls.cpp",
+              "line": 1,
+              "sha256": "fe3c7979614bd29a119cd636e44d4f19b5117aad3bae8861411ee831de8ff1c2"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 1,
+              "sha256": "56f941595e3606cb04fae06853689a80cc548eb64c1cf1f2be35f3e8789aa7cb"
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-texture-owner-gate.json",
+              "line": 1,
+              "sha256": "39ce5405246459938178d699f6edef793f8411a9f2d72f1a553b85aa1217857d"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Independent complete-body static review at Main 73be9a5 only. No builds, tests, oracles, mutations, codecs, spec lookups, providers, network, storage operations, delegates or gates were run. No source edits.",
+        "reference_infrastructure is a purpose disposition, not already_conforming, native runtime proof, a whole-system verdict or campaign closure. Dense declarations/control flow still need maintained-source readability cleanup; the PE safety finding remains open.",
+        "Historical receipts retain their recorded command, inputs and limitations. Current source fingerprints matching a historical receipt do not establish current execution, complete parser coverage, Windows behavior or hardware qualification.",
+        "Only the six loader members are dispositioned. Mentioned game/engine callers, importer, HLE graph, platform decoder and native closure checker are boundary evidence, not newly conforming modules."
+      ],
+      "code_conformity": "Not already_conforming: purpose reviewed; dense maintained formatting/declarations/control flow need cleanup under existing checks. No automatic conformity exemption.",
+      "findings": [
+        {
+          "id": "LB-1",
+          "priority": "P2",
+          "title": "Reject relocation entries outside mapped image before dereferencing",
+          "evidence": [
+            {
+              "path": "src/loader/executable_image.cpp",
+              "line": 59,
+              "sha256": "0f21f60ae1034911a271afe3de215683f6c4d5410965bdbfe6e67e4882d17c9b"
+            },
+            {
+              "path": "src/loader/executable_image.cpp",
+              "line": 61,
+              "sha256": "0f21f60ae1034911a271afe3de215683f6c4d5410965bdbfe6e67e4882d17c9b"
+            }
+          ],
+          "description": "rebased validates block size against the declared relocation directory extent, but not against mapped.size(). The entry loop unconditionally dereferences le(mapped,e,2). Static example: SizeOfImage 4096, relocation RVA 4088 and directory size 10, readable final 8-byte block header declaring block size 10. Both header reads succeed and block passes validation; first entry starts at byte 4096, le returns nullopt and operator* violates its precondition. parse accepts the directory metadata without checking mapped extent. This is an actual unchecked boundary in a malformed-image path, not an address-style violation or an observed supported-image failure.",
+          "suggested_followup": "In a separate source/judge packet, bounds-check directory/block entries and retain explicit error results; add discriminating malformed-image coverage without weakening pinned-image checks.",
+          "validation": "Static complete-body reasoning only; no input constructed or executed."
+        }
+      ],
+      "qualification_gaps": [
+        "Historical accepted paths only, not rerun. No exhaustive malformed/truncated image, relocation-size, ordinal export, forwarder-chain or Windows loader equivalence qualification is established. Source-backed P2 is not excluded by these tests."
+      ],
+      "destination": "Retain this bounded reference-purpose responsibility; any future relocation is organizational work, not recovered game logic progress.",
+      "reviewed_source_sha256": "112d26830c0e807ee7b3c4bd5bb9b1600a86c9ee0e08a17ad733e99a7e6b22cd",
+      "complete_body_lines": 39,
+      "file_specific_review": "Entire public API, Export/ImportedSymbol/ImportedModule alternatives, optional absence comments, Section layout and all private value ownership inspected; compact multi-field declarations remain debt."
+    },
+    "src/loader/guest_heap.cpp": {
+      "disposition": "reference_infrastructure",
+      "reason": "Synthetic byte/identity/availability backing for reference-composed legacy heap callers; recovered allocator wrappers and game policies are separate consumers.",
+      "semantic_justification": "Complete header and implementation reviewed: constructor parameters define synthetic guest token/address space; create traces one token, alloc validates handle and 32-bit capacity, rounds zero-size storage to one byte and spans to eight bytes plus a gap, free erases only exact bases, upper_bound resolves reads/writes within owned blocks. The allocation map, byte availability and trace are per-instance, with no original GLOBAL owner. Default token/base are deliberate reference identities, not recovered Windows allocation observations. 32-bit maximum and alignment masks are numeric encodings. alloc nullopt represents modeled failure; read nullopt deliberately combines unmapped storage and indeterminate unwritten bytes. This unknown byte model is appropriate reference infrastructure and must not be carried into native gameplay state. Lazy heap creation/global publication and CD/system allocation policies remain in engine/game callers, not hidden inside this module.",
+      "evidence": [
+        {
+          "path": "src/loader/guest_heap.cpp",
+          "line": 1,
+          "sha256": "4597e674c4c5fa69c4fef0451c8a2182eb25224e3c81e26306145593cb83d7ed"
+        },
+        {
+          "path": "src/loader/guest_heap.hpp",
+          "line": 1,
+          "sha256": "1cb4f0451bc1e5fa8e86b43dc3c0b80a2560cbfa5db2a154faf582684b838c37"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "NativeGame reference composition owns heap_ and separate crt_heap_ identities; NinjaMemoryState separately owns the source heap handle word. Borrowed NinjaSystemInitRuntime carries heap references. GuestHeap does not own that source global and is not a second owner of it. Real x86 HLE HeapCreate/HeapAlloc use HleProcess handles plus HleMemory, not this backing map.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "line": 1,
+              "sha256": "bf1f2d8040355e4f6e627894f5c74e52b9f0146ec3c16ac0dff03ce8dfed0e15"
+            },
+            {
+              "path": "src/engine/ninja_memory.hpp",
+              "line": 1,
+              "sha256": "600cb8cf2cd66c72d1b5556831ec4a6d46a951dde647fa236eaab66aebd8974e"
+            },
+            {
+              "path": "src/engine/ninja_system_init.hpp",
+              "line": 1,
+              "sha256": "14736c82ec84341cfe19192bd72870b8ba12189bae4b77cf84b52e007cfa000f"
+            },
+            {
+              "path": "src/hle/hle_kernel32.cpp",
+              "line": 1,
+              "sha256": "7f7e52297fbdc90d38751c36272e2bb2c0736efd9cb4620c51f9bdc75f027042"
+            },
+            {
+              "path": "src/hle/hle_memory.hpp",
+              "line": 1,
+              "sha256": "65736d62bd288efd128d5ab4d7ea9c28cae501e93f3d247282bba8bb3c672576"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "nj_malloc/nj_free overloads adapt the synthetic heap into NinjaMemoryMethods, converting allocation nullopt to completed DWORD zero; host-unavailable optional and ordinary failure remain distinct. run_cd_drive_scan writes/reads drive-list bytes through this heap; system init borrows it for pools/buffers. Their source-address state/dispatch/fixture concerns are real recovered caller behavior outside these six files, not justified infrastructure by association.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_memory.cpp",
+              "line": 1,
+              "sha256": "668dca17f50a61813a1b05fb098f6288c048a0b30e0668b07f34008ce1b325b0"
+            },
+            {
+              "path": "src/game/game_winmain.cpp",
+              "line": 1,
+              "sha256": "1c3f61392a8df72217f5c3831061084a72520a182acb6bdfafbc0fe146adf7a9"
+            },
+            {
+              "path": "src/engine/ninja_system_init.cpp",
+              "line": 1,
+              "sha256": "8b4de4a49c9f8be8d55e08a7752f1e120ccd12ccb08fa406cd1c3c1a2b0c9210"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "line": 1,
+              "sha256": "9ffe1944dad7c6c7d951d23d27e6dccbe98a0b9e5c39a241eced9a05808ecb19"
+            },
+            {
+              "path": "tests/unit/ninja_memory.cpp",
+              "line": 1,
+              "sha256": "251f9eb3720c016dc64ba3bb5cc2bc61141e31f5fa068d2f9da96a43f86f1ac6"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "guest_heap assertions cover synthetic addresses/alignment, zero-sized allocation storage, unwritten bytes, bounds, handle rejection, frees and trace. ninja_memory exercises lazy source handle publication, zero allocation and unavailable-method distinction; CD scan consumes the blocks.",
+          "limits": "Historical accepted paths only, not rerun. They prove the model contract at their cases, not actual Windows token/address choices, allocator reuse, reservation, host OOM or arbitrary constructor alignment. Caller oracles are not standalone HeapAlloc equivalence proofs.",
+          "evidence": [
+            {
+              "path": "tests/unit/guest_heap.cpp",
+              "line": 1,
+              "sha256": "c09dbf036a1cfa7f3fbb00c520caeaf1e1fc206d1aa5d4e3eef681e93ea8cf0a"
+            },
+            {
+              "path": "tests/unit/ninja_memory.cpp",
+              "line": 1,
+              "sha256": "251f9eb3720c016dc64ba3bb5cc2bc61141e31f5fa068d2f9da96a43f86f1ac6"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 1,
+              "sha256": "56f941595e3606cb04fae06853689a80cc548eb64c1cf1f2be35f3e8789aa7cb"
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-texture-owner-gate.json",
+              "line": 1,
+              "sha256": "39ce5405246459938178d699f6edef793f8411a9f2d72f1a553b85aa1217857d"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Independent complete-body static review at Main 73be9a5 only. No builds, tests, oracles, mutations, codecs, spec lookups, providers, network, storage operations, delegates or gates were run. No source edits.",
+        "reference_infrastructure is a purpose disposition, not already_conforming, native runtime proof, a whole-system verdict or campaign closure. Dense declarations/control flow still need maintained-source readability cleanup; the PE safety finding remains open.",
+        "Historical receipts retain their recorded command, inputs and limitations. Current source fingerprints matching a historical receipt do not establish current execution, complete parser coverage, Windows behavior or hardware qualification.",
+        "Only the six loader members are dispositioned. Mentioned game/engine callers, importer, HLE graph, platform decoder and native closure checker are boundary evidence, not newly conforming modules."
+      ],
+      "code_conformity": "Not already_conforming: purpose reviewed; dense maintained formatting/declarations/control flow need cleanup under existing checks. No automatic conformity exemption.",
+      "findings": [],
+      "qualification_gaps": [
+        "Historical accepted paths only, not rerun. They prove the model contract at their cases, not actual Windows token/address choices, allocator reuse, reservation, host OOM or arbitrary constructor alignment. Caller oracles are not standalone HeapAlloc equivalence proofs."
+      ],
+      "destination": "Retain this bounded reference-purpose responsibility; any future relocation is organizational work, not recovered game logic progress.",
+      "reviewed_source_sha256": "4597e674c4c5fa69c4fef0451c8a2182eb25224e3c81e26306145593cb83d7ed",
+      "complete_body_lines": 31,
+      "file_specific_review": "All constructor/create/alloc/free/find/read/write bodies reviewed, including overflow arithmetic, gap and unwritten-byte optional; compact control flow remains debt."
+    },
+    "src/loader/guest_heap.hpp": {
+      "disposition": "reference_infrastructure",
+      "reason": "Synthetic byte/identity/availability backing for reference-composed legacy heap callers; recovered allocator wrappers and game policies are separate consumers.",
+      "semantic_justification": "Complete header and implementation reviewed: constructor parameters define synthetic guest token/address space; create traces one token, alloc validates handle and 32-bit capacity, rounds zero-size storage to one byte and spans to eight bytes plus a gap, free erases only exact bases, upper_bound resolves reads/writes within owned blocks. The allocation map, byte availability and trace are per-instance, with no original GLOBAL owner. Default token/base are deliberate reference identities, not recovered Windows allocation observations. 32-bit maximum and alignment masks are numeric encodings. alloc nullopt represents modeled failure; read nullopt deliberately combines unmapped storage and indeterminate unwritten bytes. This unknown byte model is appropriate reference infrastructure and must not be carried into native gameplay state. Lazy heap creation/global publication and CD/system allocation policies remain in engine/game callers, not hidden inside this module.",
+      "evidence": [
+        {
+          "path": "src/loader/guest_heap.cpp",
+          "line": 1,
+          "sha256": "4597e674c4c5fa69c4fef0451c8a2182eb25224e3c81e26306145593cb83d7ed"
+        },
+        {
+          "path": "src/loader/guest_heap.hpp",
+          "line": 1,
+          "sha256": "1cb4f0451bc1e5fa8e86b43dc3c0b80a2560cbfa5db2a154faf582684b838c37"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "NativeGame reference composition owns heap_ and separate crt_heap_ identities; NinjaMemoryState separately owns the source heap handle word. Borrowed NinjaSystemInitRuntime carries heap references. GuestHeap does not own that source global and is not a second owner of it. Real x86 HLE HeapCreate/HeapAlloc use HleProcess handles plus HleMemory, not this backing map.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "line": 1,
+              "sha256": "bf1f2d8040355e4f6e627894f5c74e52b9f0146ec3c16ac0dff03ce8dfed0e15"
+            },
+            {
+              "path": "src/engine/ninja_memory.hpp",
+              "line": 1,
+              "sha256": "600cb8cf2cd66c72d1b5556831ec4a6d46a951dde647fa236eaab66aebd8974e"
+            },
+            {
+              "path": "src/engine/ninja_system_init.hpp",
+              "line": 1,
+              "sha256": "14736c82ec84341cfe19192bd72870b8ba12189bae4b77cf84b52e007cfa000f"
+            },
+            {
+              "path": "src/hle/hle_kernel32.cpp",
+              "line": 1,
+              "sha256": "7f7e52297fbdc90d38751c36272e2bb2c0736efd9cb4620c51f9bdc75f027042"
+            },
+            {
+              "path": "src/hle/hle_memory.hpp",
+              "line": 1,
+              "sha256": "65736d62bd288efd128d5ab4d7ea9c28cae501e93f3d247282bba8bb3c672576"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "nj_malloc/nj_free overloads adapt the synthetic heap into NinjaMemoryMethods, converting allocation nullopt to completed DWORD zero; host-unavailable optional and ordinary failure remain distinct. run_cd_drive_scan writes/reads drive-list bytes through this heap; system init borrows it for pools/buffers. Their source-address state/dispatch/fixture concerns are real recovered caller behavior outside these six files, not justified infrastructure by association.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_memory.cpp",
+              "line": 1,
+              "sha256": "668dca17f50a61813a1b05fb098f6288c048a0b30e0668b07f34008ce1b325b0"
+            },
+            {
+              "path": "src/game/game_winmain.cpp",
+              "line": 1,
+              "sha256": "1c3f61392a8df72217f5c3831061084a72520a182acb6bdfafbc0fe146adf7a9"
+            },
+            {
+              "path": "src/engine/ninja_system_init.cpp",
+              "line": 1,
+              "sha256": "8b4de4a49c9f8be8d55e08a7752f1e120ccd12ccb08fa406cd1c3c1a2b0c9210"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "line": 1,
+              "sha256": "9ffe1944dad7c6c7d951d23d27e6dccbe98a0b9e5c39a241eced9a05808ecb19"
+            },
+            {
+              "path": "tests/unit/ninja_memory.cpp",
+              "line": 1,
+              "sha256": "251f9eb3720c016dc64ba3bb5cc2bc61141e31f5fa068d2f9da96a43f86f1ac6"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "guest_heap assertions cover synthetic addresses/alignment, zero-sized allocation storage, unwritten bytes, bounds, handle rejection, frees and trace. ninja_memory exercises lazy source handle publication, zero allocation and unavailable-method distinction; CD scan consumes the blocks.",
+          "limits": "Historical accepted paths only, not rerun. They prove the model contract at their cases, not actual Windows token/address choices, allocator reuse, reservation, host OOM or arbitrary constructor alignment. Caller oracles are not standalone HeapAlloc equivalence proofs.",
+          "evidence": [
+            {
+              "path": "tests/unit/guest_heap.cpp",
+              "line": 1,
+              "sha256": "c09dbf036a1cfa7f3fbb00c520caeaf1e1fc206d1aa5d4e3eef681e93ea8cf0a"
+            },
+            {
+              "path": "tests/unit/ninja_memory.cpp",
+              "line": 1,
+              "sha256": "251f9eb3720c016dc64ba3bb5cc2bc61141e31f5fa068d2f9da96a43f86f1ac6"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 1,
+              "sha256": "56f941595e3606cb04fae06853689a80cc548eb64c1cf1f2be35f3e8789aa7cb"
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-texture-owner-gate.json",
+              "line": 1,
+              "sha256": "39ce5405246459938178d699f6edef793f8411a9f2d72f1a553b85aa1217857d"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Independent complete-body static review at Main 73be9a5 only. No builds, tests, oracles, mutations, codecs, spec lookups, providers, network, storage operations, delegates or gates were run. No source edits.",
+        "reference_infrastructure is a purpose disposition, not already_conforming, native runtime proof, a whole-system verdict or campaign closure. Dense declarations/control flow still need maintained-source readability cleanup; the PE safety finding remains open.",
+        "Historical receipts retain their recorded command, inputs and limitations. Current source fingerprints matching a historical receipt do not establish current execution, complete parser coverage, Windows behavior or hardware qualification.",
+        "Only the six loader members are dispositioned. Mentioned game/engine callers, importer, HLE graph, platform decoder and native closure checker are boundary evidence, not newly conforming modules."
+      ],
+      "code_conformity": "Not already_conforming: purpose reviewed; dense maintained formatting/declarations/control flow need cleanup under existing checks. No automatic conformity exemption.",
+      "findings": [],
+      "qualification_gaps": [
+        "Historical accepted paths only, not rerun. They prove the model contract at their cases, not actual Windows token/address choices, allocator reuse, reservation, host OOM or arbitrary constructor alignment. Caller oracles are not standalone HeapAlloc equivalence proofs."
+      ],
+      "destination": "Retain this bounded reference-purpose responsibility; any future relocation is organizational work, not recovered game logic progress.",
+      "reviewed_source_sha256": "1cb4f0451bc1e5fa8e86b43dc3c0b80a2560cbfa5db2a154faf582684b838c37",
+      "complete_body_lines": 31,
+      "file_specific_review": "Entire token/block/trace API and private Block storage reviewed; constructor defaults model guest identities, not product pointers; compact declarations remain debt."
+    },
+    "src/loader/mpeg_timing.cpp": {
+      "disposition": "reference_infrastructure",
+      "reason": "Reference DirectShow metadata timing helper, with uncaptured splitter policy explicitly assumed by its sole runtime caller; excluded from actual native movie/import paths.",
+      "semantic_justification": "Complete header and implementation reviewed: local timing accumulator, 33-bit timestamp extraction, MPEG-1 pack/system/packet walk, E0 video filtering, stuffing/STD skips, PTS/PTS+DTS payload offsets, min/max timestamp aggregation, first in-packet sequence header size/rate decode and truncated integer conversion to 100 ns plus one frame. Format start codes, stream IDs, masks and rate fractions are numeric encodings, not addresses. Optional result means unsupported/malformed/missing stream metadata. There are no fixture-availability state members or recovered game branches. The duration formula is the reference HLE duration assumption, not recovered DirectShow splitter behavior. Actual use is AddSourceFilter in hle_dshow; it is neither native movie playback nor the importer despite the loader directory and generated asset-boundary label. Dense implementation still needs readability cleanup.",
+      "evidence": [
+        {
+          "path": "src/loader/mpeg_timing.cpp",
+          "line": 1,
+          "sha256": "fafd2daf8e2e44e080b6b761fd536b2e50152bb380c5866d29acef3ce43b3dc7"
+        },
+        {
+          "path": "src/loader/mpeg_timing.hpp",
+          "line": 1,
+          "sha256": "c6f31e9f97289124fcf9affd35037e367868eece8fdd011efe318fb633f420c9"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "MpegTiming is a result value and the parser has local state only plus immutable rate data. HleDshow Graph owns optional duration, run-start/position and completion queue. Its unknown duration before AddSourceFilter is graph lifecycle absence. Native MoviePlayer separately owns AVFoundation samples/timeline and audio presentation state.",
+          "evidence": [
+            {
+              "path": "src/loader/mpeg_timing.hpp",
+              "line": 1,
+              "sha256": "c6f31e9f97289124fcf9affd35037e367868eece8fdd011efe318fb633f420c9"
+            },
+            {
+              "path": "src/loader/mpeg_timing.cpp",
+              "line": 1,
+              "sha256": "fafd2daf8e2e44e080b6b761fd536b2e50152bb380c5866d29acef3ce43b3dc7"
+            },
+            {
+              "path": "src/hle/hle_dshow.cpp",
+              "line": 1,
+              "sha256": "f339d310b33b553dbc5aa3cef0192527096c0f11cebbbc7f15bb6e2bdf6940aa"
+            },
+            {
+              "path": "src/platform/mac/mac_movie.mm",
+              "line": 1,
+              "sha256": "8996fa785c3ce2bf2da292e48785c2b9789c54549e243b608d0319bc26c10014"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Only maintained non-test direct parser caller is HLE AddSourceFilter: reads mapped host movie, stops on parser failure, stores duration and reports the uncaptured splitter assumption. stream_time/deliver_due/get_Duration consume that value, including EC_COMPLETE. Native app opens MoviePlayer on imported paths; completion uses decoder EOS, audio presentation frames and AVFoundation track end. Importer copies/hashes movie bytes and extracts clip/playlist declarations with separate Python PEImage; it never calls this C++ parser.",
+          "evidence": [
+            {
+              "path": "src/hle/hle_dshow.cpp",
+              "line": 1,
+              "sha256": "f339d310b33b553dbc5aa3cef0192527096c0f11cebbbc7f15bb6e2bdf6940aa"
+            },
+            {
+              "path": "src/apps/sadx_native.mm",
+              "line": 1,
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "src/platform/mac/mac_movie.mm",
+              "line": 1,
+              "sha256": "8996fa785c3ce2bf2da292e48785c2b9789c54549e243b608d0319bc26c10014"
+            },
+            {
+              "path": "tools/import/movie_assets.py",
+              "line": 1,
+              "sha256": "795fd3fcecbfdb2a4523d77996c43b8060aafd34f325604ee08d9eeaef547c5e"
+            },
+            {
+              "path": "tools/import/native_assets.py",
+              "line": 1,
+              "sha256": "77a45eb581c9e7936ea5747e2bef60693fd69c06dddb7c56b653ac9b6727cf5e"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "mpeg_timing unit builds a synthetic 640x480/code-4 stream with stuffing, STD, audio, PTS and PTS+DTS, verifies two video timestamps and 10 s plus one truncated frame; rejects MPEG-2 pack, broken length and absent PTS. Registered gate invocation additionally reads local RE-US.MPG.",
+          "limits": "Historical accepted path only, not rerun. This does not independently recover DirectShow duration/EC_COMPLETE policy or validate decoder/audio/hardware behavior. Marker validity, PTS wrap, split sequence headers, other rate codes and malformed tails are not established by this unit. ISO table comment is source attribution, not a spec verification performed here.",
+          "evidence": [
+            {
+              "path": "tests/unit/mpeg_timing.cpp",
+              "line": 1,
+              "sha256": "391d36d5f1666c58e8eb00bacc56dced24642134eedd4a7bb45ebb41c3e727f2"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 1,
+              "sha256": "56f941595e3606cb04fae06853689a80cc548eb64c1cf1f2be35f3e8789aa7cb"
+            },
+            {
+              "path": "src/hle/hle_dshow.cpp",
+              "line": 1,
+              "sha256": "f339d310b33b553dbc5aa3cef0192527096c0f11cebbbc7f15bb6e2bdf6940aa"
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-texture-owner-gate.json",
+              "line": 1,
+              "sha256": "39ce5405246459938178d699f6edef793f8411a9f2d72f1a553b85aa1217857d"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Independent complete-body static review at Main 73be9a5 only. No builds, tests, oracles, mutations, codecs, spec lookups, providers, network, storage operations, delegates or gates were run. No source edits.",
+        "reference_infrastructure is a purpose disposition, not already_conforming, native runtime proof, a whole-system verdict or campaign closure. Dense declarations/control flow still need maintained-source readability cleanup; the PE safety finding remains open.",
+        "Historical receipts retain their recorded command, inputs and limitations. Current source fingerprints matching a historical receipt do not establish current execution, complete parser coverage, Windows behavior or hardware qualification.",
+        "Only the six loader members are dispositioned. Mentioned game/engine callers, importer, HLE graph, platform decoder and native closure checker are boundary evidence, not newly conforming modules."
+      ],
+      "code_conformity": "Not already_conforming: purpose reviewed; dense maintained formatting/declarations/control flow need cleanup under existing checks. No automatic conformity exemption.",
+      "findings": [],
+      "qualification_gaps": [
+        "Historical accepted path only, not rerun. This does not independently recover DirectShow duration/EC_COMPLETE policy or validate decoder/audio/hardware behavior. Marker validity, PTS wrap, split sequence headers, other rate codes and malformed tails are not established by this unit. ISO table comment is source attribution, not a spec verification performed here."
+      ],
+      "destination": "Retain this bounded reference-purpose responsibility; any future relocation is organizational work, not recovered game logic progress.",
+      "reviewed_source_sha256": "fafd2daf8e2e44e080b6b761fd536b2e50152bb380c5866d29acef3ce43b3dc7",
+      "complete_body_lines": 47,
+      "file_specific_review": "Entire timestamp/fail helpers, rate table, packet walk, sequence scan, failures and duration expression reviewed; compact nested control flow remains debt."
+    },
+    "src/loader/mpeg_timing.hpp": {
+      "disposition": "reference_infrastructure",
+      "reason": "Reference DirectShow metadata timing helper, with uncaptured splitter policy explicitly assumed by its sole runtime caller; excluded from actual native movie/import paths.",
+      "semantic_justification": "Complete header and implementation reviewed: local timing accumulator, 33-bit timestamp extraction, MPEG-1 pack/system/packet walk, E0 video filtering, stuffing/STD skips, PTS/PTS+DTS payload offsets, min/max timestamp aggregation, first in-packet sequence header size/rate decode and truncated integer conversion to 100 ns plus one frame. Format start codes, stream IDs, masks and rate fractions are numeric encodings, not addresses. Optional result means unsupported/malformed/missing stream metadata. There are no fixture-availability state members or recovered game branches. The duration formula is the reference HLE duration assumption, not recovered DirectShow splitter behavior. Actual use is AddSourceFilter in hle_dshow; it is neither native movie playback nor the importer despite the loader directory and generated asset-boundary label. Dense implementation still needs readability cleanup.",
+      "evidence": [
+        {
+          "path": "src/loader/mpeg_timing.cpp",
+          "line": 1,
+          "sha256": "fafd2daf8e2e44e080b6b761fd536b2e50152bb380c5866d29acef3ce43b3dc7"
+        },
+        {
+          "path": "src/loader/mpeg_timing.hpp",
+          "line": 1,
+          "sha256": "c6f31e9f97289124fcf9affd35037e367868eece8fdd011efe318fb633f420c9"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "MpegTiming is a result value and the parser has local state only plus immutable rate data. HleDshow Graph owns optional duration, run-start/position and completion queue. Its unknown duration before AddSourceFilter is graph lifecycle absence. Native MoviePlayer separately owns AVFoundation samples/timeline and audio presentation state.",
+          "evidence": [
+            {
+              "path": "src/loader/mpeg_timing.hpp",
+              "line": 1,
+              "sha256": "c6f31e9f97289124fcf9affd35037e367868eece8fdd011efe318fb633f420c9"
+            },
+            {
+              "path": "src/loader/mpeg_timing.cpp",
+              "line": 1,
+              "sha256": "fafd2daf8e2e44e080b6b761fd536b2e50152bb380c5866d29acef3ce43b3dc7"
+            },
+            {
+              "path": "src/hle/hle_dshow.cpp",
+              "line": 1,
+              "sha256": "f339d310b33b553dbc5aa3cef0192527096c0f11cebbbc7f15bb6e2bdf6940aa"
+            },
+            {
+              "path": "src/platform/mac/mac_movie.mm",
+              "line": 1,
+              "sha256": "8996fa785c3ce2bf2da292e48785c2b9789c54549e243b608d0319bc26c10014"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Only maintained non-test direct parser caller is HLE AddSourceFilter: reads mapped host movie, stops on parser failure, stores duration and reports the uncaptured splitter assumption. stream_time/deliver_due/get_Duration consume that value, including EC_COMPLETE. Native app opens MoviePlayer on imported paths; completion uses decoder EOS, audio presentation frames and AVFoundation track end. Importer copies/hashes movie bytes and extracts clip/playlist declarations with separate Python PEImage; it never calls this C++ parser.",
+          "evidence": [
+            {
+              "path": "src/hle/hle_dshow.cpp",
+              "line": 1,
+              "sha256": "f339d310b33b553dbc5aa3cef0192527096c0f11cebbbc7f15bb6e2bdf6940aa"
+            },
+            {
+              "path": "src/apps/sadx_native.mm",
+              "line": 1,
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "src/platform/mac/mac_movie.mm",
+              "line": 1,
+              "sha256": "8996fa785c3ce2bf2da292e48785c2b9789c54549e243b608d0319bc26c10014"
+            },
+            {
+              "path": "tools/import/movie_assets.py",
+              "line": 1,
+              "sha256": "795fd3fcecbfdb2a4523d77996c43b8060aafd34f325604ee08d9eeaef547c5e"
+            },
+            {
+              "path": "tools/import/native_assets.py",
+              "line": 1,
+              "sha256": "77a45eb581c9e7936ea5747e2bef60693fd69c06dddb7c56b653ac9b6727cf5e"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "mpeg_timing unit builds a synthetic 640x480/code-4 stream with stuffing, STD, audio, PTS and PTS+DTS, verifies two video timestamps and 10 s plus one truncated frame; rejects MPEG-2 pack, broken length and absent PTS. Registered gate invocation additionally reads local RE-US.MPG.",
+          "limits": "Historical accepted path only, not rerun. This does not independently recover DirectShow duration/EC_COMPLETE policy or validate decoder/audio/hardware behavior. Marker validity, PTS wrap, split sequence headers, other rate codes and malformed tails are not established by this unit. ISO table comment is source attribution, not a spec verification performed here.",
+          "evidence": [
+            {
+              "path": "tests/unit/mpeg_timing.cpp",
+              "line": 1,
+              "sha256": "391d36d5f1666c58e8eb00bacc56dced24642134eedd4a7bb45ebb41c3e727f2"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 1,
+              "sha256": "56f941595e3606cb04fae06853689a80cc548eb64c1cf1f2be35f3e8789aa7cb"
+            },
+            {
+              "path": "src/hle/hle_dshow.cpp",
+              "line": 1,
+              "sha256": "f339d310b33b553dbc5aa3cef0192527096c0f11cebbbc7f15bb6e2bdf6940aa"
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-texture-owner-gate.json",
+              "line": 1,
+              "sha256": "39ce5405246459938178d699f6edef793f8411a9f2d72f1a553b85aa1217857d"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Independent complete-body static review at Main 73be9a5 only. No builds, tests, oracles, mutations, codecs, spec lookups, providers, network, storage operations, delegates or gates were run. No source edits.",
+        "reference_infrastructure is a purpose disposition, not already_conforming, native runtime proof, a whole-system verdict or campaign closure. Dense declarations/control flow still need maintained-source readability cleanup; the PE safety finding remains open.",
+        "Historical receipts retain their recorded command, inputs and limitations. Current source fingerprints matching a historical receipt do not establish current execution, complete parser coverage, Windows behavior or hardware qualification.",
+        "Only the six loader members are dispositioned. Mentioned game/engine callers, importer, HLE graph, platform decoder and native closure checker are boundary evidence, not newly conforming modules."
+      ],
+      "code_conformity": "Not already_conforming: purpose reviewed; dense maintained formatting/declarations/control flow need cleanup under existing checks. No automatic conformity exemption.",
+      "findings": [],
+      "qualification_gaps": [
+        "Historical accepted path only, not rerun. This does not independently recover DirectShow duration/EC_COMPLETE policy or validate decoder/audio/hardware behavior. Marker validity, PTS wrap, split sequence headers, other rate codes and malformed tails are not established by this unit. ISO table comment is source attribution, not a spec verification performed here."
+      ],
+      "destination": "Retain this bounded reference-purpose responsibility; any future relocation is organizational work, not recovered game logic progress.",
+      "reviewed_source_sha256": "c6f31e9f97289124fcf9affd35037e367868eece8fdd011efe318fb633f420c9",
+      "complete_body_lines": 20,
+      "file_specific_review": "Entire MpegTiming value and parser signature/comments reviewed; time units and optional parser failure are explicit. Reference purpose classification does not require rewriting legitimate rate/time numeric data."
+    }
+  },
+  "modules": {
+    "src/loader/executable_image": {
+      "disposition": "reference_infrastructure",
+      "reason": "PE mapping/import/export/rebase infrastructure for reference guest execution and source facts; no recovered game policy inside this module.",
+      "semantic_justification": "Complete header and implementation reviewed: bounded little-endian file reads, MZ/PE32/i386 identification, header/section mapping and zero tails, named exports/forwarders, RVA-to-VA conversion, HIGHLOW rebasing, import descriptors/thunks/name-or-ordinal and u32 reads. VAs mean guest image locations by their use, not their magnitude. MZ/PE signatures, machine/magic, ordinal flag, relocation type/offset masks and field offsets are legitimate format encodings. Missing image bytes/export names and malformed image results are real boundary absence, not gameplay fixture fields. No game-mode, allocation policy or resource-selection algorithm is recovered here. Caller-owned PE reads can still feed legacy fixture optionals; this API does not make those callers conforming. Code is densely packed and rebased has an unchecked optional dereference, so purpose does not establish code conformity.",
+      "evidence": [
+        {
+          "path": "src/loader/executable_image.cpp",
+          "line": 1,
+          "sha256": "0f21f60ae1034911a271afe3de215683f6c4d5410965bdbfe6e67e4882d17c9b"
+        },
+        {
+          "path": "src/loader/executable_image.hpp",
+          "line": 1,
+          "sha256": "112d26830c0e807ee7b3c4bd5bb9b1600a86c9ee0e08a17ad733e99a7e6b22cd"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "ExecutableImage owns bytes, sections, exports and directory metadata as a value. HleModules stores shared mapped images per GuestModule; X86Guest copies their bytes into separate mutable guest execution memory. NativeGameConfiguration holds shared const input/game/model images; writes before/within the guest are not modeled as image mutations.",
+          "evidence": [
+            {
+              "path": "src/loader/executable_image.hpp",
+              "line": 1,
+              "sha256": "112d26830c0e807ee7b3c4bd5bb9b1600a86c9ee0e08a17ad733e99a7e6b22cd"
+            },
+            {
+              "path": "src/hle/hle_modules.hpp",
+              "line": 1,
+              "sha256": "b8949efaa458104ecdb0d1af43fd66d30ed4c4f3a78060b1c81cb67d416a8df0"
+            },
+            {
+              "path": "src/hle/hle_modules.cpp",
+              "line": 1,
+              "sha256": "ac8e773a8242412f7d9c7ec821af1b07800d4c2c3ac04a532adee48f2232a593"
+            },
+            {
+              "path": "src/guest/x86_guest.cpp",
+              "line": 1,
+              "sha256": "8a6e880b8383e43de46cb99bf51d6f8e297e11ea94b5cf64f5cfca803787914e"
+            },
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "line": 1,
+              "sha256": "bf1f2d8040355e4f6e627894f5c74e52b9f0146ec3c16ac0dff03ce8dfed0e15"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "HleModules parses/rebases DLLs, maps them and resolves named exports; bind_imports writes resolved targets to IAT VAs in X86Guest. App/reference session parses the main image. override_table reads source image facts. ModelDllSet maps DLL exports/action pointers through this API and remains an address-bearing game-directory consumer needing its own migration; no exemption is conferred on it.",
+          "evidence": [
+            {
+              "path": "src/hle/hle_modules.cpp",
+              "line": 1,
+              "sha256": "ac8e773a8242412f7d9c7ec821af1b07800d4c2c3ac04a532adee48f2232a593"
+            },
+            {
+              "path": "src/hle/hle_registry.cpp",
+              "line": 1,
+              "sha256": "92ac4924220ad8e9f00acf1211cb34a0fd3b2a1ab8275826920707990cd4d99b"
+            },
+            {
+              "path": "src/guest/x86_guest.cpp",
+              "line": 1,
+              "sha256": "8a6e880b8383e43de46cb99bf51d6f8e297e11ea94b5cf64f5cfca803787914e"
+            },
+            {
+              "path": "src/apps/sadx_app.mm",
+              "line": 1,
+              "sha256": "c130b1895a1a6e7f1e644f651967d8f67859730f2d7dcdc278b1b9a0c3440c8d"
+            },
+            {
+              "path": "src/guest/native_game_session.cpp",
+              "line": 1,
+              "sha256": "e1cb8225e0b566e6679ed8e68e640ad7db1e7d388e24679768ced6b6dd2dca43"
+            },
+            {
+              "path": "src/guest/override_table.cpp",
+              "line": 1,
+              "sha256": "8f55db3d274697694ef5bb745c3d501492dd323633f627c1de3f47d2d975ed90"
+            },
+            {
+              "path": "src/game/model_dlls.cpp",
+              "line": 1,
+              "sha256": "9640ce6cecf32a944922b68926e0d1987f0784334b8d02f406558ff35f23cfaa"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "Existing guest_imports assertions cover pinned 9-DLL/159-import parsing, ordinal import, exact IAT slots and HLE trap binding. model_dlls covers exact export case, rebased exports/HIGHLOW data, distinct mapping and missing slot. guest_dlls exercises real module loading and profile writes.",
+          "limits": "Historical accepted paths only, not rerun. No exhaustive malformed/truncated image, relocation-size, ordinal export, forwarder-chain or Windows loader equivalence qualification is established. Source-backed P2 is not excluded by these tests.",
+          "evidence": [
+            {
+              "path": "tests/unit/guest_imports.cpp",
+              "line": 1,
+              "sha256": "99c6803285be49700b53d8b8c3cfede7b71a713be8dc5eb78a6733c804791280"
+            },
+            {
+              "path": "tests/unit/model_dlls.cpp",
+              "line": 1,
+              "sha256": "9afe228733823df2f4039f35d84bf417affc5038a55a82df25affd6738fe9a54"
+            },
+            {
+              "path": "tests/unit/guest_dlls.cpp",
+              "line": 1,
+              "sha256": "fe3c7979614bd29a119cd636e44d4f19b5117aad3bae8861411ee831de8ff1c2"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 1,
+              "sha256": "56f941595e3606cb04fae06853689a80cc548eb64c1cf1f2be35f3e8789aa7cb"
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-texture-owner-gate.json",
+              "line": 1,
+              "sha256": "39ce5405246459938178d699f6edef793f8411a9f2d72f1a553b85aa1217857d"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Independent complete-body static review at Main 73be9a5 only. No builds, tests, oracles, mutations, codecs, spec lookups, providers, network, storage operations, delegates or gates were run. No source edits.",
+        "reference_infrastructure is a purpose disposition, not already_conforming, native runtime proof, a whole-system verdict or campaign closure. Dense declarations/control flow still need maintained-source readability cleanup; the PE safety finding remains open.",
+        "Historical receipts retain their recorded command, inputs and limitations. Current source fingerprints matching a historical receipt do not establish current execution, complete parser coverage, Windows behavior or hardware qualification.",
+        "Only the six loader members are dispositioned. Mentioned game/engine callers, importer, HLE graph, platform decoder and native closure checker are boundary evidence, not newly conforming modules."
+      ],
+      "code_conformity": "Not already_conforming: purpose reviewed; dense maintained formatting/declarations/control flow need cleanup under existing checks. No automatic conformity exemption.",
+      "findings": [
+        {
+          "id": "LB-1",
+          "priority": "P2",
+          "title": "Reject relocation entries outside mapped image before dereferencing",
+          "evidence": [
+            {
+              "path": "src/loader/executable_image.cpp",
+              "line": 59,
+              "sha256": "0f21f60ae1034911a271afe3de215683f6c4d5410965bdbfe6e67e4882d17c9b"
+            },
+            {
+              "path": "src/loader/executable_image.cpp",
+              "line": 61,
+              "sha256": "0f21f60ae1034911a271afe3de215683f6c4d5410965bdbfe6e67e4882d17c9b"
+            }
+          ],
+          "description": "rebased validates block size against the declared relocation directory extent, but not against mapped.size(). The entry loop unconditionally dereferences le(mapped,e,2). Static example: SizeOfImage 4096, relocation RVA 4088 and directory size 10, readable final 8-byte block header declaring block size 10. Both header reads succeed and block passes validation; first entry starts at byte 4096, le returns nullopt and operator* violates its precondition. parse accepts the directory metadata without checking mapped extent. This is an actual unchecked boundary in a malformed-image path, not an address-style violation or an observed supported-image failure.",
+          "suggested_followup": "In a separate source/judge packet, bounds-check directory/block entries and retain explicit error results; add discriminating malformed-image coverage without weakening pinned-image checks.",
+          "validation": "Static complete-body reasoning only; no input constructed or executed."
+        }
+      ],
+      "qualification_gaps": [
+        "Historical accepted paths only, not rerun. No exhaustive malformed/truncated image, relocation-size, ordinal export, forwarder-chain or Windows loader equivalence qualification is established. Source-backed P2 is not excluded by these tests."
+      ],
+      "destination": "Retain this bounded reference-purpose responsibility; any future relocation is organizational work, not recovered game logic progress.",
+      "reviewed_members": {
+        "src/loader/executable_image.cpp": "0f21f60ae1034911a271afe3de215683f6c4d5410965bdbfe6e67e4882d17c9b",
+        "src/loader/executable_image.hpp": "112d26830c0e807ee7b3c4bd5bb9b1600a86c9ee0e08a17ad733e99a7e6b22cd"
+      }
+    },
+    "src/loader/guest_heap": {
+      "disposition": "reference_infrastructure",
+      "reason": "Synthetic byte/identity/availability backing for reference-composed legacy heap callers; recovered allocator wrappers and game policies are separate consumers.",
+      "semantic_justification": "Complete header and implementation reviewed: constructor parameters define synthetic guest token/address space; create traces one token, alloc validates handle and 32-bit capacity, rounds zero-size storage to one byte and spans to eight bytes plus a gap, free erases only exact bases, upper_bound resolves reads/writes within owned blocks. The allocation map, byte availability and trace are per-instance, with no original GLOBAL owner. Default token/base are deliberate reference identities, not recovered Windows allocation observations. 32-bit maximum and alignment masks are numeric encodings. alloc nullopt represents modeled failure; read nullopt deliberately combines unmapped storage and indeterminate unwritten bytes. This unknown byte model is appropriate reference infrastructure and must not be carried into native gameplay state. Lazy heap creation/global publication and CD/system allocation policies remain in engine/game callers, not hidden inside this module.",
+      "evidence": [
+        {
+          "path": "src/loader/guest_heap.cpp",
+          "line": 1,
+          "sha256": "4597e674c4c5fa69c4fef0451c8a2182eb25224e3c81e26306145593cb83d7ed"
+        },
+        {
+          "path": "src/loader/guest_heap.hpp",
+          "line": 1,
+          "sha256": "1cb4f0451bc1e5fa8e86b43dc3c0b80a2560cbfa5db2a154faf582684b838c37"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "NativeGame reference composition owns heap_ and separate crt_heap_ identities; NinjaMemoryState separately owns the source heap handle word. Borrowed NinjaSystemInitRuntime carries heap references. GuestHeap does not own that source global and is not a second owner of it. Real x86 HLE HeapCreate/HeapAlloc use HleProcess handles plus HleMemory, not this backing map.",
+          "evidence": [
+            {
+              "path": "src/guest/native_game_reference.hpp",
+              "line": 1,
+              "sha256": "bf1f2d8040355e4f6e627894f5c74e52b9f0146ec3c16ac0dff03ce8dfed0e15"
+            },
+            {
+              "path": "src/engine/ninja_memory.hpp",
+              "line": 1,
+              "sha256": "600cb8cf2cd66c72d1b5556831ec4a6d46a951dde647fa236eaab66aebd8974e"
+            },
+            {
+              "path": "src/engine/ninja_system_init.hpp",
+              "line": 1,
+              "sha256": "14736c82ec84341cfe19192bd72870b8ba12189bae4b77cf84b52e007cfa000f"
+            },
+            {
+              "path": "src/hle/hle_kernel32.cpp",
+              "line": 1,
+              "sha256": "7f7e52297fbdc90d38751c36272e2bb2c0736efd9cb4620c51f9bdc75f027042"
+            },
+            {
+              "path": "src/hle/hle_memory.hpp",
+              "line": 1,
+              "sha256": "65736d62bd288efd128d5ab4d7ea9c28cae501e93f3d247282bba8bb3c672576"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "nj_malloc/nj_free overloads adapt the synthetic heap into NinjaMemoryMethods, converting allocation nullopt to completed DWORD zero; host-unavailable optional and ordinary failure remain distinct. run_cd_drive_scan writes/reads drive-list bytes through this heap; system init borrows it for pools/buffers. Their source-address state/dispatch/fixture concerns are real recovered caller behavior outside these six files, not justified infrastructure by association.",
+          "evidence": [
+            {
+              "path": "src/engine/ninja_memory.cpp",
+              "line": 1,
+              "sha256": "668dca17f50a61813a1b05fb098f6288c048a0b30e0668b07f34008ce1b325b0"
+            },
+            {
+              "path": "src/game/game_winmain.cpp",
+              "line": 1,
+              "sha256": "1c3f61392a8df72217f5c3831061084a72520a182acb6bdfafbc0fe146adf7a9"
+            },
+            {
+              "path": "src/engine/ninja_system_init.cpp",
+              "line": 1,
+              "sha256": "8b4de4a49c9f8be8d55e08a7752f1e120ccd12ccb08fa406cd1c3c1a2b0c9210"
+            },
+            {
+              "path": "src/guest/native_game_reference.cpp",
+              "line": 1,
+              "sha256": "9ffe1944dad7c6c7d951d23d27e6dccbe98a0b9e5c39a241eced9a05808ecb19"
+            },
+            {
+              "path": "tests/unit/ninja_memory.cpp",
+              "line": 1,
+              "sha256": "251f9eb3720c016dc64ba3bb5cc2bc61141e31f5fa068d2f9da96a43f86f1ac6"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "guest_heap assertions cover synthetic addresses/alignment, zero-sized allocation storage, unwritten bytes, bounds, handle rejection, frees and trace. ninja_memory exercises lazy source handle publication, zero allocation and unavailable-method distinction; CD scan consumes the blocks.",
+          "limits": "Historical accepted paths only, not rerun. They prove the model contract at their cases, not actual Windows token/address choices, allocator reuse, reservation, host OOM or arbitrary constructor alignment. Caller oracles are not standalone HeapAlloc equivalence proofs.",
+          "evidence": [
+            {
+              "path": "tests/unit/guest_heap.cpp",
+              "line": 1,
+              "sha256": "c09dbf036a1cfa7f3fbb00c520caeaf1e1fc206d1aa5d4e3eef681e93ea8cf0a"
+            },
+            {
+              "path": "tests/unit/ninja_memory.cpp",
+              "line": 1,
+              "sha256": "251f9eb3720c016dc64ba3bb5cc2bc61141e31f5fa068d2f9da96a43f86f1ac6"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 1,
+              "sha256": "56f941595e3606cb04fae06853689a80cc548eb64c1cf1f2be35f3e8789aa7cb"
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-texture-owner-gate.json",
+              "line": 1,
+              "sha256": "39ce5405246459938178d699f6edef793f8411a9f2d72f1a553b85aa1217857d"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Independent complete-body static review at Main 73be9a5 only. No builds, tests, oracles, mutations, codecs, spec lookups, providers, network, storage operations, delegates or gates were run. No source edits.",
+        "reference_infrastructure is a purpose disposition, not already_conforming, native runtime proof, a whole-system verdict or campaign closure. Dense declarations/control flow still need maintained-source readability cleanup; the PE safety finding remains open.",
+        "Historical receipts retain their recorded command, inputs and limitations. Current source fingerprints matching a historical receipt do not establish current execution, complete parser coverage, Windows behavior or hardware qualification.",
+        "Only the six loader members are dispositioned. Mentioned game/engine callers, importer, HLE graph, platform decoder and native closure checker are boundary evidence, not newly conforming modules."
+      ],
+      "code_conformity": "Not already_conforming: purpose reviewed; dense maintained formatting/declarations/control flow need cleanup under existing checks. No automatic conformity exemption.",
+      "findings": [],
+      "qualification_gaps": [
+        "Historical accepted paths only, not rerun. They prove the model contract at their cases, not actual Windows token/address choices, allocator reuse, reservation, host OOM or arbitrary constructor alignment. Caller oracles are not standalone HeapAlloc equivalence proofs."
+      ],
+      "destination": "Retain this bounded reference-purpose responsibility; any future relocation is organizational work, not recovered game logic progress.",
+      "reviewed_members": {
+        "src/loader/guest_heap.cpp": "4597e674c4c5fa69c4fef0451c8a2182eb25224e3c81e26306145593cb83d7ed",
+        "src/loader/guest_heap.hpp": "1cb4f0451bc1e5fa8e86b43dc3c0b80a2560cbfa5db2a154faf582684b838c37"
+      }
+    },
+    "src/loader/mpeg_timing": {
+      "disposition": "reference_infrastructure",
+      "reason": "Reference DirectShow metadata timing helper, with uncaptured splitter policy explicitly assumed by its sole runtime caller; excluded from actual native movie/import paths.",
+      "semantic_justification": "Complete header and implementation reviewed: local timing accumulator, 33-bit timestamp extraction, MPEG-1 pack/system/packet walk, E0 video filtering, stuffing/STD skips, PTS/PTS+DTS payload offsets, min/max timestamp aggregation, first in-packet sequence header size/rate decode and truncated integer conversion to 100 ns plus one frame. Format start codes, stream IDs, masks and rate fractions are numeric encodings, not addresses. Optional result means unsupported/malformed/missing stream metadata. There are no fixture-availability state members or recovered game branches. The duration formula is the reference HLE duration assumption, not recovered DirectShow splitter behavior. Actual use is AddSourceFilter in hle_dshow; it is neither native movie playback nor the importer despite the loader directory and generated asset-boundary label. Dense implementation still needs readability cleanup.",
+      "evidence": [
+        {
+          "path": "src/loader/mpeg_timing.cpp",
+          "line": 1,
+          "sha256": "fafd2daf8e2e44e080b6b761fd536b2e50152bb380c5866d29acef3ce43b3dc7"
+        },
+        {
+          "path": "src/loader/mpeg_timing.hpp",
+          "line": 1,
+          "sha256": "c6f31e9f97289124fcf9affd35037e367868eece8fdd011efe318fb633f420c9"
+        }
+      ],
+      "resolved_owners": [
+        {
+          "resolution": "MpegTiming is a result value and the parser has local state only plus immutable rate data. HleDshow Graph owns optional duration, run-start/position and completion queue. Its unknown duration before AddSourceFilter is graph lifecycle absence. Native MoviePlayer separately owns AVFoundation samples/timeline and audio presentation state.",
+          "evidence": [
+            {
+              "path": "src/loader/mpeg_timing.hpp",
+              "line": 1,
+              "sha256": "c6f31e9f97289124fcf9affd35037e367868eece8fdd011efe318fb633f420c9"
+            },
+            {
+              "path": "src/loader/mpeg_timing.cpp",
+              "line": 1,
+              "sha256": "fafd2daf8e2e44e080b6b761fd536b2e50152bb380c5866d29acef3ce43b3dc7"
+            },
+            {
+              "path": "src/hle/hle_dshow.cpp",
+              "line": 1,
+              "sha256": "f339d310b33b553dbc5aa3cef0192527096c0f11cebbbc7f15bb6e2bdf6940aa"
+            },
+            {
+              "path": "src/platform/mac/mac_movie.mm",
+              "line": 1,
+              "sha256": "8996fa785c3ce2bf2da292e48785c2b9789c54549e243b608d0319bc26c10014"
+            }
+          ]
+        }
+      ],
+      "resolved_consumers": [
+        {
+          "resolution": "Only maintained non-test direct parser caller is HLE AddSourceFilter: reads mapped host movie, stops on parser failure, stores duration and reports the uncaptured splitter assumption. stream_time/deliver_due/get_Duration consume that value, including EC_COMPLETE. Native app opens MoviePlayer on imported paths; completion uses decoder EOS, audio presentation frames and AVFoundation track end. Importer copies/hashes movie bytes and extracts clip/playlist declarations with separate Python PEImage; it never calls this C++ parser.",
+          "evidence": [
+            {
+              "path": "src/hle/hle_dshow.cpp",
+              "line": 1,
+              "sha256": "f339d310b33b553dbc5aa3cef0192527096c0f11cebbbc7f15bb6e2bdf6940aa"
+            },
+            {
+              "path": "src/apps/sadx_native.mm",
+              "line": 1,
+              "sha256": "8e1365a83d89ab55ae9ca4405ff4d9ec1376d7af27184777c08bded54ac069f2"
+            },
+            {
+              "path": "src/platform/mac/mac_movie.mm",
+              "line": 1,
+              "sha256": "8996fa785c3ce2bf2da292e48785c2b9789c54549e243b608d0319bc26c10014"
+            },
+            {
+              "path": "tools/import/movie_assets.py",
+              "line": 1,
+              "sha256": "795fd3fcecbfdb2a4523d77996c43b8060aafd34f325604ee08d9eeaef547c5e"
+            },
+            {
+              "path": "tools/import/native_assets.py",
+              "line": 1,
+              "sha256": "77a45eb581c9e7936ea5747e2bef60693fd69c06dddb7c56b653ac9b6727cf5e"
+            }
+          ]
+        }
+      ],
+      "accepted_judges": [
+        {
+          "accepted_scope": "mpeg_timing unit builds a synthetic 640x480/code-4 stream with stuffing, STD, audio, PTS and PTS+DTS, verifies two video timestamps and 10 s plus one truncated frame; rejects MPEG-2 pack, broken length and absent PTS. Registered gate invocation additionally reads local RE-US.MPG.",
+          "limits": "Historical accepted path only, not rerun. This does not independently recover DirectShow duration/EC_COMPLETE policy or validate decoder/audio/hardware behavior. Marker validity, PTS wrap, split sequence headers, other rate codes and malformed tails are not established by this unit. ISO table comment is source attribution, not a spec verification performed here.",
+          "evidence": [
+            {
+              "path": "tests/unit/mpeg_timing.cpp",
+              "line": 1,
+              "sha256": "391d36d5f1666c58e8eb00bacc56dced24642134eedd4a7bb45ebb41c3e727f2"
+            },
+            {
+              "path": "tests/unit/manifest.tsv",
+              "line": 1,
+              "sha256": "56f941595e3606cb04fae06853689a80cc548eb64c1cf1f2be35f3e8789aa7cb"
+            },
+            {
+              "path": "src/hle/hle_dshow.cpp",
+              "line": 1,
+              "sha256": "f339d310b33b553dbc5aa3cef0192527096c0f11cebbbc7f15bb6e2bdf6940aa"
+            },
+            {
+              "path": "reference/production-integration-20261101/menu-texture-owner-gate.json",
+              "line": 1,
+              "sha256": "39ce5405246459938178d699f6edef793f8411a9f2d72f1a553b85aa1217857d"
+            }
+          ]
+        }
+      ],
+      "classification_limits": [
+        "Independent complete-body static review at Main 73be9a5 only. No builds, tests, oracles, mutations, codecs, spec lookups, providers, network, storage operations, delegates or gates were run. No source edits.",
+        "reference_infrastructure is a purpose disposition, not already_conforming, native runtime proof, a whole-system verdict or campaign closure. Dense declarations/control flow still need maintained-source readability cleanup; the PE safety finding remains open.",
+        "Historical receipts retain their recorded command, inputs and limitations. Current source fingerprints matching a historical receipt do not establish current execution, complete parser coverage, Windows behavior or hardware qualification.",
+        "Only the six loader members are dispositioned. Mentioned game/engine callers, importer, HLE graph, platform decoder and native closure checker are boundary evidence, not newly conforming modules."
+      ],
+      "code_conformity": "Not already_conforming: purpose reviewed; dense maintained formatting/declarations/control flow need cleanup under existing checks. No automatic conformity exemption.",
+      "findings": [],
+      "qualification_gaps": [
+        "Historical accepted path only, not rerun. This does not independently recover DirectShow duration/EC_COMPLETE policy or validate decoder/audio/hardware behavior. Marker validity, PTS wrap, split sequence headers, other rate codes and malformed tails are not established by this unit. ISO table comment is source attribution, not a spec verification performed here."
+      ],
+      "destination": "Retain this bounded reference-purpose responsibility; any future relocation is organizational work, not recovered game logic progress.",
+      "reviewed_members": {
+        "src/loader/mpeg_timing.cpp": "fafd2daf8e2e44e080b6b761fd536b2e50152bb380c5866d29acef3ce43b3dc7",
+        "src/loader/mpeg_timing.hpp": "c6f31e9f97289124fcf9affd35037e367868eece8fdd011efe318fb633f420c9"
+      }
+    }
+  },
+  "prioritized_findings": [
+    {
+      "id": "LB-1",
+      "priority": "P2",
+      "title": "Reject relocation entries outside mapped image before dereferencing",
+      "evidence": [
+        {
+          "path": "src/loader/executable_image.cpp",
+          "line": 59,
+          "sha256": "0f21f60ae1034911a271afe3de215683f6c4d5410965bdbfe6e67e4882d17c9b"
+        },
+        {
+          "path": "src/loader/executable_image.cpp",
+          "line": 61,
+          "sha256": "0f21f60ae1034911a271afe3de215683f6c4d5410965bdbfe6e67e4882d17c9b"
+        }
+      ],
+      "description": "rebased validates block size against the declared relocation directory extent, but not against mapped.size(). The entry loop unconditionally dereferences le(mapped,e,2). Static example: SizeOfImage 4096, relocation RVA 4088 and directory size 10, readable final 8-byte block header declaring block size 10. Both header reads succeed and block passes validation; first entry starts at byte 4096, le returns nullopt and operator* violates its precondition. parse accepts the directory metadata without checking mapped extent. This is an actual unchecked boundary in a malformed-image path, not an address-style violation or an observed supported-image failure.",
+      "suggested_followup": "In a separate source/judge packet, bounds-check directory/block entries and retain explicit error results; add discriminating malformed-image coverage without weakening pinned-image checks.",
+      "validation": "Static complete-body reasoning only; no input constructed or executed."
+    }
+  ],
+  "historical_receipt": {
+    "evidence": [
+      {
+        "path": "reference/production-integration-20261101/menu-texture-owner-gate.json",
+        "line": 1,
+        "sha256": "39ce5405246459938178d699f6edef793f8411a9f2d72f1a553b85aa1217857d"
+      }
+    ],
+    "recorded_command": "SADX_CONTENT_CORPUS=/Users/burbujamc/Developer/sadx-macos make -j10 gate",
+    "recorded_exit_status": 0,
+    "recorded_passed": true,
+    "recorded_limits": [
+      "Bounded MenuTextureBindings owner preserves actual regular aliases/catalog/Japanese binding, failure prefixes, callback and storage lifetime; independent review06c7a02 P3 literal restoration verified. Frozen native observations, five compiled mutants, default original menu1401/regular609 exact and post-review menu701 exact. Fresh private native source build/force-load closure and three native menu/save journeys passed. Composite qualified-corpus gate also includes corrected explicit module review policy, nine authored closed modules, all936 protected inputs, one inherited filesystem skip, smoke120, R1-R4, three native journeys and16 startup comparisons. Existing FP partials/failures remain inherited; renderer/resources/Session/campaign incomplete. No actor/GPU/N3b/story/gameplay63FPS/new physical controller qualification."
+    ],
+    "attribution": "Historical Root composite gate, not executed or renewed by this reviewer. Receipt lists guest-heap, ninja-memory, model-dlls, guest-imports and mpeg-timing program names; current manifest supplies arguments. No raw log or per-case replay is claimed.",
+    "loader_source_identity": {
+      "src/loader/executable_image.cpp": {
+        "current": "0f21f60ae1034911a271afe3de215683f6c4d5410965bdbfe6e67e4882d17c9b",
+        "receipt": "0f21f60ae1034911a271afe3de215683f6c4d5410965bdbfe6e67e4882d17c9b",
+        "matches": true
+      },
+      "src/loader/executable_image.hpp": {
+        "current": "112d26830c0e807ee7b3c4bd5bb9b1600a86c9ee0e08a17ad733e99a7e6b22cd",
+        "receipt": "112d26830c0e807ee7b3c4bd5bb9b1600a86c9ee0e08a17ad733e99a7e6b22cd",
+        "matches": true
+      },
+      "src/loader/guest_heap.cpp": {
+        "current": "4597e674c4c5fa69c4fef0451c8a2182eb25224e3c81e26306145593cb83d7ed",
+        "receipt": "4597e674c4c5fa69c4fef0451c8a2182eb25224e3c81e26306145593cb83d7ed",
+        "matches": true
+      },
+      "src/loader/guest_heap.hpp": {
+        "current": "1cb4f0451bc1e5fa8e86b43dc3c0b80a2560cbfa5db2a154faf582684b838c37",
+        "receipt": "1cb4f0451bc1e5fa8e86b43dc3c0b80a2560cbfa5db2a154faf582684b838c37",
+        "matches": true
+      },
+      "src/loader/mpeg_timing.cpp": {
+        "current": "fafd2daf8e2e44e080b6b761fd536b2e50152bb380c5866d29acef3ce43b3dc7",
+        "receipt": "fafd2daf8e2e44e080b6b761fd536b2e50152bb380c5866d29acef3ce43b3dc7",
+        "matches": true
+      },
+      "src/loader/mpeg_timing.hpp": {
+        "current": "c6f31e9f97289124fcf9affd35037e367868eece8fdd011efe318fb633f420c9",
+        "receipt": "c6f31e9f97289124fcf9affd35037e367868eece8fdd011efe318fb633f420c9",
+        "matches": true
+      }
+    }
+  },
+  "build_boundary": {
+    "resolution": "CORE_LAYERS wildcard puts loader cpp objects in portable libsadx-core.a; that archive name is not native independence. NATIVE_SOURCES combines explicit native-sources.txt with engine/*_native.cpp and runtime/native_*.cpp; none includes these loader translation units. Production app separately links mac_movie.o. Force-load native-closure excludes loader source layer and checks symbols; it is an accepted dependency judge, not run here, and cannot prove parser/game behavior.",
+    "evidence": [
+      {
+        "path": "Makefile",
+        "line": 1,
+        "sha256": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef"
+      },
+      {
+        "path": "native-sources.txt",
+        "line": 1,
+        "sha256": "13e462b1ddc2df160580f9c6caf8544f444d87ca907b2a89f32ceada33f24eec"
+      },
+      {
+        "path": "tools/gate/check_native_closure.py",
+        "line": 1,
+        "sha256": "405656d6154dc89aec53cdc49c854ae6ec9287b7bb58dc894daa6ee07d8bc2d2"
+      }
+    ]
+  },
+  "numeric_and_absence_review": "No number classified by magnitude. PE tags/offsets/masks, MPEG tags/timestamps/rate fractions and heap alignment/32-bit-capacity masks remain valid numeric encodings. Guest image VAs and synthetic allocation addresses are identified by actual reference use. Image/export absence, allocation failure and byte indeterminacy retain distinct documented boundary meanings; no blanket optional ban.",
+  "external_boundary_details": [
+    {
+      "description": "Original sonic.exe, model DLLs/mod DLLs, RE-US.MPG and Windows runtime inputs are local/ignored external raw dependencies. Tracked unit/manifest/receipt files describe them but are not the files themselves. No raw dependency was read or qualified here.",
+      "evidence": [
+        {
+          "path": "docs/SOURCES.md",
+          "line": 1,
+          "sha256": "294c2a7709e693e66f78f1c8aa1155b9bbb6aa6414dd29a75dbeeadde2e5826f"
+        },
+        {
+          "path": "tests/unit/manifest.tsv",
+          "line": 1,
+          "sha256": "56f941595e3606cb04fae06853689a80cc548eb64c1cf1f2be35f3e8789aa7cb"
+        },
+        {
+          "path": "tools/import/movie_assets.py",
+          "line": 1,
+          "sha256": "795fd3fcecbfdb2a4523d77996c43b8060aafd34f325604ee08d9eeaef547c5e"
+        }
+      ]
+    },
+    {
+      "description": "mac_movie.mm uses installed Apple AVFoundation, AudioToolbox and CoreVideo SDK/frameworks. Includes and recipe are tracked evidence of dependency, not tracked SDK source, a newly consulted specification or fresh codec/Windows/hardware proof.",
+      "evidence": [
+        {
+          "path": "src/platform/mac/mac_movie.mm",
+          "line": 1,
+          "sha256": "8996fa785c3ce2bf2da292e48785c2b9789c54549e243b608d0319bc26c10014"
+        },
+        {
+          "path": "Makefile",
+          "line": 1,
+          "sha256": "7639b835aa7f963921e5feafa13d572ce4eb85eeb751a0f45e103f30110fe3ef"
+        }
+      ]
+    }
+  ],
+  "root_reconciliation_required": "Authored files/modules fragment only. Root may reconcile these exact fingerprints into its own review policy after considering open findings and code conformity limits. No review.json, generated shards, manifests, source, HANDOFF or STATUS changed; no broad campaign closure.",
+  "criteria_evidence": [
+    {
+      "path": "AGENTS.md",
+      "line": 1,
+      "sha256": "79d97f8cc1d657a75c38d9fb2a8cbb574ee1e8f023e542caef9dc7f31303ffac"
+    },
+    {
+      "path": "docs/STYLE.md",
+      "line": 1,
+      "sha256": "bd44068383b2198cf5165c2869086c6cf7844b1c96be44db7194c768ee62afdd"
+    },
+    {
+      "path": "docs/ARCHITECTURE.md",
+      "line": 1,
+      "sha256": "01b08d262279a42140d0cc301322baba861e72e6f5c4f332e4b26da6d88026b7"
+    },
+    {
+      "path": "docs/PROMPT-complete-refactor.md",
+      "line": 1,
+      "sha256": "2136204b6f9af8232f5573510438af570534eab1bc6d2ddc3a48802dc1feccc7"
+    },
+    {
+      "path": "docs/refactor-inventory/MODULE-REVIEW.md",
+      "line": 1,
+      "sha256": "aa94a5e19b17ebf362c49c741423b9d87a6852dc50cd448baaa3749487103ca5"
+    },
+    {
+      "path": "docs/decisions/ADR-0009-complete-refactor-prerequisite.md",
+      "line": 1,
+      "sha256": "c48bf4ad6023af5eef5510f48be57ffe5b17e55bac08608bbb61eb306c5e2dc0"
+    },
+    {
+      "path": "tools/inventory/refactor_inventory.py",
+      "line": 1,
+      "sha256": "819017ba6c719e12dcfc6b0f969e21307556b0afbf38c8f2b891b28a3a77b8f2"
+    }
+  ],
+  "classification_limits": [
+    "Independent complete-body static review at Main 73be9a5 only. No builds, tests, oracles, mutations, codecs, spec lookups, providers, network, storage operations, delegates or gates were run. No source edits.",
+    "reference_infrastructure is a purpose disposition, not already_conforming, native runtime proof, a whole-system verdict or campaign closure. Dense declarations/control flow still need maintained-source readability cleanup; the PE safety finding remains open.",
+    "Historical receipts retain their recorded command, inputs and limitations. Current source fingerprints matching a historical receipt do not establish current execution, complete parser coverage, Windows behavior or hardware qualification.",
+    "Only the six loader members are dispositioned. Mentioned game/engine callers, importer, HLE graph, platform decoder and native closure checker are boundary evidence, not newly conforming modules."
+  ]
+}
