@@ -54,3 +54,32 @@ to the actual engine owners, with no behavior recovered or skipped.
 
 `DEBT.json` records lexical changes for all four complete engine files. Their semantic review
 and final disposition remain Root-owned. No arithmetic or game tuning changes are made.
+
+## Review correction and qualification boundary
+
+Source `bceff1b` replaces the auxiliary consumer's intermediate optional TaskResult with a
+plain TaskStep. Its old numeric nested diagnostic did not retain a task; the semantic form
+likewise adds no handle retention. Scene logic already retained TaskResult and keeps it.
+Root's Source `72d0e83` then names all 116 members of seven enums in CamelCase, without
+changing ordinal order, and gives the extracted child-lifetime declaration its own NOTSA.
+`ROOT-STANDARDS-CORRECTION.json` records the exact 20-file reverse-token proof.
+Fresh `STANDARDS-RECHECK.md` accepts both complete engine modules for their bounded purpose.
+This is standards acceptance, not independent fidelity or integrated campaign acceptance.
+`CANDIDATE-SOURCE.json` plus `CANDIDATE-SOURCE-DELTA.json` freeze the current complete tree.
+
+The four full development streams in `CURRENT-STREAMS.json`, 13 focused units in
+`UNITS-CURRENT.json`, and five real consumer checks in `CONSUMERS-CURRENT.json` are
+predecessor execution evidence for Source `78702db`. Native app/force-load/closure artifacts
+are pinned by `PREDECESSOR-CLOSURE.json`. Final Source `72d0e83` compilation, defaults,
+full streams and compiled faults remain pending until Root releases the compute slot.
+No new heavy job was admitted after the Root hold. No reserved input has been generated.
+
+`JUDGE-BINDING.json` explains the protected binding adaptations, exact preserved historical
+fault table, added native width/isolation and scene task-failure checks, and setup failures.
+Those failures remain failures: the incorrect NativeGame target, missed test API bindings,
+and auxiliary unit invocation without its registered arguments were corrected before passes.
+The native controller dependency recipe unexpectedly rebuilt copied dependencies because of
+header mtime, downloaded pinned sources and used its default six jobs. That violated the
+requested setup. Its own process tree was stopped (exit 143), the hash-exact local third-party
+copy restored, header freshness fixed, and the corrected private build stayed at -j2.
+No maintained Main archive was borrowed, no Main file was written and no push occurred.

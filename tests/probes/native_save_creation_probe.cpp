@@ -140,7 +140,7 @@ struct FinishFixture final : sadx::file_select::SaveCompletionCalls {
     std::vector<std::uint32_t> calls;
     std::int8_t selection;
     explicit FinishFixture(std::int8_t value) : selection(value) {
-        scheduler.set_default_field30(std::shared_ptr<void>{});
+        scheduler.set_default_cooperative_thread(std::shared_ptr<void>{});
     }
     void request_dialog(std::int32_t index) override {
         calls.push_back(100 + static_cast<std::uint32_t>(index));
@@ -172,7 +172,7 @@ extern "C" int sadx_native_save_completion(const std::uint32_t *v, std::uint32_t
     auto backup = static_cast<std::uint16_t>(v[10]);
     auto disabled = static_cast<std::int32_t>(v[11]);
     sadx::TaskScheduler scheduler;
-    scheduler.set_default_field30(std::shared_ptr<void>{});
+    scheduler.set_default_cooperative_thread(std::shared_ptr<void>{});
     auto task = scheduler.append_task(0, nullptr).task;
     const auto initial = task;
     sadx::file_select::SaveCompletionState state{alert, ok,   fade,   phase,    ready, exec,

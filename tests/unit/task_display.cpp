@@ -15,18 +15,18 @@ struct DisplayContext : TaskCallbackContext {
 void display(TaskScheduler &scheduler, const TaskHandle &task) {
     const auto context = std::static_pointer_cast<DisplayContext>(scheduler.callback_context(display));
     assert(scheduler.context().current_function == context->expected_exec);
-    assert(scheduler.context().field30 == context->expected_work);
-    context->visits.push_back(*std::static_pointer_cast<int>(task->field30));
+    assert(scheduler.context().cooperative_thread == context->expected_work);
+    context->visits.push_back(*std::static_pointer_cast<int>(task->cooperative_thread));
     if (context->action)
         context->action(scheduler, task);
 }
 void execute_display(TaskScheduler &scheduler, const TaskHandle &task) {
     const auto context = std::static_pointer_cast<DisplayContext>(scheduler.callback_context(display));
     context->expected_exec = execute_display;
-    context->expected_work = task->field30;
+    context->expected_work = task->cooperative_thread;
     assert(scheduler.display_index(0));
     assert(scheduler.context().current_function == execute_display);
-    assert(scheduler.context().field30 == task->field30);
+    assert(scheduler.context().cooperative_thread == task->cooperative_thread);
 }
 void forbidden_exec(TaskScheduler &, const TaskHandle &) { assert(false); }
 TaskHandle append(TaskScheduler &scheduler, int list, int number) {
@@ -50,13 +50,13 @@ void verify_auxiliary_lifetime() {
     const auto primary = task->primary_work, force = task->force_work;
     const auto motion = task->motion_work, auxiliary = task->auxiliary_work;
     auto control = std::make_shared<Task::ObjectControl>();
-    control->flags_at_2 = 1;
+    control->status_flags = 1;
     task->object_control = control;
     unsigned released = 0;
     task->auxiliary_native_work = std::shared_ptr<int>(new int(1), [&](int *work) {
         assert(primary->released() && force->released() && motion->released() && auxiliary->released());
         assert(!task->primary_work && !task->force_work && !task->motion_work && !task->auxiliary_work);
-        assert(task->object_control == control && control->flags_at_2 == 1 && !task->retired());
+        assert(task->object_control == control && control->status_flags == 1 && !task->retired());
         ++released;
         delete work;
     });
@@ -87,7 +87,7 @@ void verify_auxiliary_lifetime() {
     retained_native.reset();
     assert(arena->release(interrupted->auxiliary_work));
     const auto stopped = scheduler.destroy_task(interrupted);
-    assert(stopped.failure == TaskFailure::work_failure);
+    assert(stopped.failure == TaskFailure::WorkFailure);
     assert(interrupted->auxiliary_native_work && !interrupted->retired());
 }
 } // namespace
@@ -121,16 +121,16 @@ int main() {
     context->visits.clear();
     auto nested = scheduler.append_task(1, execute_display, std::make_shared<int>(11));
     assert(nested && scheduler.run_index(1));
-    assert(!scheduler.context().field30 && !scheduler.context().current_function);
+    assert(!scheduler.context().cooperative_thread && !scheduler.context().current_function);
     context->expected_exec = nullptr;
     context->expected_work.reset();
     context->action = [](TaskScheduler &active, const TaskHandle &task) {
-        active.raise_callback_failure({TaskFailure::callback_failed, task});
+        active.raise_callback_failure({TaskFailure::CallbackFailed, task});
     };
     const auto failed = scheduler.display_index(0);
-    assert(failed.failure == TaskFailure::callback_failed);
-    assert(!scheduler.context().field30 && !scheduler.context().current_function);
-    assert(scheduler.display_index(-1).failure == TaskFailure::invalid_list_index);
-    assert(scheduler.display_children({}).failure == TaskFailure::foreign_task);
+    assert(failed.failure == TaskFailure::CallbackFailed);
+    assert(!scheduler.context().cooperative_thread && !scheduler.context().current_function);
+    assert(scheduler.display_index(-1).failure == TaskFailure::InvalidListIndex);
+    assert(scheduler.display_children({}).failure == TaskFailure::ForeignTask);
     verify_auxiliary_lifetime();
 }

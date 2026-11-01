@@ -1,3 +1,4 @@
+#include "guest/task_reference.hpp"
 // player/player_task: the child-state factory the player layer installs into the engine's
 // TaskScheduler (0x40b960..0x40b9a3 for a parent with a live PlayerTaskState).
 #include "player/player_task.hpp"
@@ -21,7 +22,7 @@ int main() {
         parent->primary_state->control_timer_at_6=77;
 
         const auto missing=scheduler.create_child(2,nullptr,parent);
-        require(missing.failure==TaskFailure::child_state_factory_missing && missing.source_boundary==0x40b98d,"no factory is explicit");
+        require(missing.failure==TaskFailure::ChildStateFactoryMissing && sadx::task_reference::source_boundary(missing)==0x40b98d,"no factory is explicit");
 
         install_player_child_state(scheduler);
         const auto child=scheduler.create_child(2,nullptr,parent).task;
@@ -33,7 +34,7 @@ int main() {
 
         // Direct call: an unobserved parent position stops at 0x40b98d with the zeroed child kept.
         parent->primary_state->position.reset();
-        require(copy_player_child_state(*parent,*child)==std::optional<std::uint32_t>{0x40b98d} &&
+        require(sadx::task_reference::source_boundary(copy_player_child_state(*parent,*child))==0x40b98d &&
                 child->primary_state->position->x==0,"unobserved position boundary");
         std::cout<<"Player child-state factory: installed copy, explicit missing factory and unobserved boundary passed.\n";
         return 0;

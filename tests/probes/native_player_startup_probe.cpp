@@ -1,3 +1,4 @@
+#include "guest/task_reference.hpp"
 #include "player/player_startup.hpp"
 #include <cstddef>
 #include <cstdint>
@@ -19,7 +20,7 @@ extern "C" int sadx_native_player_startup(const std::uint8_t* parameters,std::si
     std::uint16_t cw,std::uint32_t* out,std::size_t out_count,std::uint8_t* snapshot,std::size_t snapshot_size){
     if(!parameters||parameter_size!=1056||!events||event_size!=512||!w||words!=33||!out||out_count!=24||!snapshot||snapshot_size!=1376)return 1;
     try{
-        auto arena=std::make_shared<sadx::TaskWorkArena>(0x20000000);sadx::TaskScheduler scheduler;
+        auto arena=std::make_shared<sadx::TaskWorkArena>(sadx::task_reference::pointer_encoder(0x20000000));sadx::TaskScheduler scheduler;
         if(!scheduler.initialize_source_pool(arena,std::shared_ptr<void>{}))return 2;
         auto task=scheduler.create_element(3,1,nullptr).task;if(!task)return 2;
         const auto primary=task->primary_work,motion_work=task->motion_work;

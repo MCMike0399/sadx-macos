@@ -19,7 +19,7 @@ struct Fixture final : SaveCompletionCalls {
     std::function<void(int)> observe = [](int) {};
     int selection = 1;
     Fixture() {
-        scheduler.set_default_field30(std::shared_ptr<void>{});
+        scheduler.set_default_cooperative_thread(std::shared_ptr<void>{});
         warning = scheduler.append_task(0, nullptr).task;
         replacement = scheduler.append_task(0, nullptr).task;
         set_control_stage(work, ControlStage::WaitForNewSave);

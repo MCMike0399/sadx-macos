@@ -37,7 +37,7 @@ struct Fixture final : sfx::ServerCalls {
         for(int cue=-1;cue<=1400;++cue) {std::array<char,64> name{};std::snprintf(name.data(),name.size(),"B00_00_%02d.wav",cue);names.emplace_back(name.data());}
     }
     std::uint32_t sample_id() const {const auto *sample=dynamic_cast<const Resource *>(work.selected_sample.resource.get());return sample?sample->identity:0;}
-    std::uint32_t task_id(std::size_t n) const {return tasks[n]?*std::static_pointer_cast<std::uint32_t>(tasks[n]->field30):0;}
+    std::uint32_t task_id(std::size_t n) const {return tasks[n]?*std::static_pointer_cast<std::uint32_t>(tasks[n]->cooperative_thread):0;}
     void row(std::size_t n,std::uint32_t *r) const {
         const auto &a=sound.records[n];const auto &b=work.records[n];
         r[0]=static_cast<std::uint32_t>(b.priority);r[1]=static_cast<std::uint32_t>(a.timer);r[2]=bindings.identities[n]?*static_cast<const std::uint32_t *>(bindings.identities[n]):0;r[3]=a.flags;r[4]=static_cast<std::uint32_t>(a.tone);r[5]=static_cast<std::uint32_t>(a.pan_angle);r[6]=static_cast<std::uint32_t>(a.volume);r[7]=static_cast<std::uint32_t>(b.volume_limit);r[8]=static_cast<std::uint32_t>(a.pitch);std::memcpy(r+9,b.position.data(),12);r[12]=static_cast<std::uint32_t>(b.queue_number);r[13]=bindings.bank_slots[n];

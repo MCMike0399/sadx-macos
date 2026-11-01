@@ -1,3 +1,4 @@
+#include "guest/task_reference.hpp"
 #include "engine/task.hpp"
 #include "player/player_task.hpp"
 
@@ -41,17 +42,17 @@ void source_lifecycle() {
     auto detached=s.allocate_task(7,nullptr).task;
     auto last=s.allocate_task(8,nullptr).task;
     check(s.list_head(7)==last && s.list_head(8)==last && !s.active_member(detached));
-    check(s.destroy_task(detached).failure==TaskFailure::inactive_task);
+    check(s.destroy_task(detached).failure==TaskFailure::InactiveTask);
     a->primary_state=std::make_shared<PlayerTaskState>();
     auto graph=s.source_graph();TaskScheduler reconciled;check(reconciled.initialize_source_pool(arena,std::shared_ptr<void>{}));check(reconciled.restore_source_graph(graph));check(reconciled.source_task(*a->source_slot())&&reconciled.source_task(*detached->source_slot())&&!reconciled.active_member(reconciled.source_task(*detached->source_slot())));check(reconciled.source_graph().free_slots==graph.free_slots);check(reconciled.source_task(*a->source_slot())->primary_state==a->primary_state);
-    auto corrupt=graph;corrupt.nodes.front().next=corrupt.nodes.front().slot;check(reconciled.restore_source_graph(corrupt).failure==TaskFailure::invalid_source_graph);check(reconciled.source_graph().free_slots==graph.free_slots);
+    auto corrupt=graph;corrupt.nodes.front().next=corrupt.nodes.front().slot;check(reconciled.restore_source_graph(corrupt).failure==TaskFailure::InvalidSourceGraph);check(reconciled.source_graph().free_slots==graph.free_slots);
     a->primary_state.reset();
-    auto resource=std::make_shared<int>(9);a->field30=resource;
+    auto resource=std::make_shared<int>(9);a->cooperative_thread=resource;
     const std::uint32_t words[]={0x7f812345,0x80000000,0xdeadbeef};
     check(arena->write(a->primary_work,32,words,12));
     check(arena->write(a->primary_work,20,words,12));
     auto child=s.create_child(2,&mark_child,a).task;
-    check(child && child->field30==resource && s.first_child(a)==child);
+    check(child && child->cooperative_thread==resource && s.first_child(a)==child);
     std::uint32_t copied[3]{};
     check(arena->read(child->primary_work,32,copied,12));
     for(int i=0;i<3;++i)check(copied[i]==words[i]);
@@ -61,11 +62,11 @@ void source_lifecycle() {
     check(!a->retired() && a->primary_work);
     check(s.run_index(0));
     check(a->retired() && child->retired() && child2->retired() && !a->primary_work);
-    check(a->field30==resource); // source recycle does not clear +30
+    check(a->cooperative_thread==resource); // source recycle does not clear +30
     check(s.source_free_slots()==4093); // detached,b,last remain
     auto reused=s.allocate_task(0,nullptr).task;
     check(reused!=a && reused->source_slot()==a->source_slot());
-    check(s.free_task(a).failure==TaskFailure::retired_task);
+    check(s.free_task(a).failure==TaskFailure::RetiredTask);
 }
 void real_cleanup_and_partial() {
     auto arena=std::make_shared<TaskWorkArena>();TaskScheduler s;
@@ -82,18 +83,18 @@ void real_cleanup_and_partial() {
     check(arena->set_reference(chain1,16,chain2));
     check(arena->set_reference(object,64,chain1));check(arena->set_reference(object,68,extra));
     check(arena->set_reference(object,76,chain3));check(arena->set_reference(t->primary_work,60,object));
-    auto control=std::make_shared<Task::ObjectControl>();control->flags_at_2=0xff;control->task_at_4=t;t->object_control=control;
+    auto control=std::make_shared<Task::ObjectControl>();control->status_flags=0xff;control->linked_task=t;t->object_control=control;
     check(s.destroy_task(t));
     for(auto w:{collision,nested,object,chain1,chain2,chain3,extra})check(w->released());
-    check(control->flags_at_2==0xfe && !control->task_at_4);
+    check(control->status_flags==0xfe && !control->linked_task);
     auto partial=s.create_element(2,0,nullptr).task;
     std::uint32_t unknown=0x11223344;check(arena->write(partial->primary_work,56,&unknown,4));
     check(s.free_task(partial));
     auto failed=s.run_index(0);
-    check(failed.failure==TaskFailure::work_failure && failed.work_failure==TaskWorkFailure::unbound_reference && failed.source_boundary==0x40b617);
+    check(failed.failure==TaskFailure::WorkFailure && failed.work_failure==TaskWorkFailure::UnboundReference && sadx::task_reference::source_boundary(failed)==0x40b617);
     check(!s.active_member(partial) && partial->primary_work && !partial->retired());
     check(s.context().current_function==&TaskScheduler::destroy_callback);
-    check(s.destroy_task(partial).failure==TaskFailure::inactive_task);
+    check(s.destroy_task(partial).failure==TaskFailure::InactiveTask);
     check(arena->set_reference(partial->primary_work,56,{}));check(s.resume_destruction(partial));
     check(partial->retired());
     auto staged=s.create_element(2,0,nullptr).task;
@@ -104,7 +105,7 @@ void real_cleanup_and_partial() {
     check(arena->set_reference(staged->primary_work,60,object2));
     check(arena->write(tail,16,&unknown,4));
     failed=s.destroy_task(staged);
-    check(failed.source_boundary==0x417eb3 && head->released() && !tail->released() && !object2->released());
+    check(sadx::task_reference::source_boundary(failed)==0x417eb3 && head->released() && !tail->released() && !object2->released());
     check(arena->set_reference(tail,16,{}));check(s.resume_destruction(staged));
     check(tail->released() && object2->released() && staged->retired());
 }
@@ -119,30 +120,30 @@ void limits_and_mutation() {
     check(!visited.empty() && visited[0]==*replacement->source_slot());
     check(s.run_index(0)); // old first is scheduled for destruction
     while(s.source_free_slots())check(s.allocate_task(7,nullptr));
-    check(s.allocate_task(0,nullptr).failure==TaskFailure::source_pool_exhausted);
-    check(s.retire(first).failure==TaskFailure::source_task_requires_destructor || first->retired());
-    TaskScheduler unknown;check(unknown.initialize_source_pool(std::make_shared<TaskWorkArena>()));
+    check(s.allocate_task(0,nullptr).failure==TaskFailure::SourcePoolExhausted);
+    check(s.retire(first).failure==TaskFailure::SourceTaskRequiresDestructor || first->retired());
+    TaskScheduler unknown;sadx::task_reference::unavailable_default(unknown);check(unknown.initialize_source_pool(std::make_shared<TaskWorkArena>(),std::shared_ptr<void>{}));
     auto pending=unknown.create_element(2,0,nullptr);
-    check(pending.failure==TaskFailure::default_field30_unobserved && pending.task->primary_work && unknown.active_member(pending.task));
+    check(pending.failure==TaskFailure::DefaultResourceUnavailable && pending.task->primary_work && unknown.active_member(pending.task));
     auto exhausted_arena=std::make_shared<TaskWorkArena>();TaskScheduler exhausted;
     check(exhausted.initialize_source_pool(exhausted_arena,std::shared_ptr<void>{}));
     auto remaining=exhausted_arena->allocate(TaskWorkArena::usable_bytes-0x34020-32).work;check(remaining);
     auto leak=exhausted.create_element(2,7,nullptr);
-    check(leak.failure==TaskFailure::detached_creation_rollback_rejected && leak.task && !leak.task->retired() && exhausted.source_free_slots()==4095);
+    check(leak.failure==TaskFailure::DetachedCreationRollbackRejected && leak.task && !leak.task->retired() && exhausted.source_free_slots()==4095);
     auto rolled=exhausted.create_element(2,0,nullptr);
-    check(rolled.failure==TaskFailure::work_failure && rolled.task->retired() && exhausted.source_free_slots()==4095);
+    check(rolled.failure==TaskFailure::WorkFailure && rolled.task->retired() && exhausted.source_free_slots()==4095);
     auto partial_arena=std::make_shared<TaskWorkArena>();TaskScheduler partial;
     check(partial.initialize_source_pool(partial_arena,std::shared_ptr<void>{}));
     check(partial_arena->allocate(TaskWorkArena::usable_bytes-0x34020-96-32));
     auto retained=partial.create_element(6,7,nullptr);
-    check(retained.failure==TaskFailure::detached_creation_rollback_rejected && retained.task->primary_work && !retained.task->primary_work->released() && !retained.task->force_work);
-    check(partial.destroy_task(retained.task).source_boundary==0x401000);
+    check(retained.failure==TaskFailure::DetachedCreationRollbackRejected && retained.task->primary_work && !retained.task->primary_work->released() && !retained.task->force_work);
+    check(sadx::task_reference::source_boundary(partial.destroy_task(retained.task))==0x401000);
     TaskScheduler unsupported;
     check(unsupported.initialize_source_pool(std::make_shared<TaskWorkArena>(),std::shared_ptr<void>{}));
     snapshot_target=unsupported.allocate_task(0,nullptr).task;
     check(unsupported.allocate_task(0,&replace_snapshot_detached));
     auto stopped=unsupported.run_index(0);
-    check(stopped.failure==TaskFailure::detached_snapshot_next && stopped.task==replacement && stopped.source_boundary==0x40b0e0);
+    check(stopped.failure==TaskFailure::DetachedSnapshotNext && stopped.task==replacement && sadx::task_reference::source_boundary(stopped)==0x40b0e0);
 }
 void live_primary_view() {
     TaskScheduler s;auto arena=std::make_shared<TaskWorkArena>();
@@ -154,7 +155,7 @@ void live_primary_view() {
     state.orientation.angles={111,222,333};state.character_id=6;state.task_id_at_2=9;
     // Without the player layer's factory the engine cannot build a child PlayerTaskState: explicit failure.
     auto unbound=s.create_child(2,nullptr,parent);
-    check(unbound.failure==TaskFailure::child_state_factory_missing && unbound.source_boundary==0x40b98d && unbound.task && !unbound.task->primary_state);
+    check(unbound.failure==TaskFailure::ChildStateFactoryMissing && sadx::task_reference::source_boundary(unbound)==0x40b98d && unbound.task && !unbound.task->primary_state);
     install_player_child_state(s);
     auto child=s.create_child(2,nullptr,parent).task;
     check(child && child->primary_state && child->primary_state!=parent->primary_state);
@@ -166,7 +167,7 @@ void live_primary_view() {
     state.position->x=42;auto later=s.create_child(2,nullptr,parent).task;
     check(later->primary_state->position->x==42 && child->primary_state->position->x==7);
     state.position.reset();auto partial=s.create_child(2,nullptr,parent);
-    check(partial.failure==TaskFailure::work_failure && partial.work_failure==TaskWorkFailure::unobserved_live_field && partial.source_boundary==0x40b98d);
+    check(partial.failure==TaskFailure::WorkFailure && partial.work_failure==TaskWorkFailure::UnobservedLiveField && sadx::task_reference::source_boundary(partial)==0x40b98d);
     check(partial.task && s.first_child(parent)==partial.task && partial.task->primary_state->position->x==0);
 }
 }

@@ -1,3 +1,4 @@
+#include "guest/task_reference.hpp"
 #include "engine/collision_component.hpp"
 #include "math/ninja_length.hpp"
 #include <cstring>
@@ -98,7 +99,7 @@ extern "C" int sadx_collision_component_lifecycle(unsigned operation, unsigned c
                                                   unsigned status, unsigned id, unsigned remaining,
                                                   unsigned char *output, unsigned *result) {
     try {
-        auto arena = std::make_shared<sadx::TaskWorkArena>(0x20000000);
+        auto arena = std::make_shared<sadx::TaskWorkArena>(sadx::task_reference::pointer_encoder(0x20000000));
         sadx::TaskScheduler scheduler;
         if (!scheduler.initialize_source_pool(arena, std::shared_ptr<void>{}))
             return 2;

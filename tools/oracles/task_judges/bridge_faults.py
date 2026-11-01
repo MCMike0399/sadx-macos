@@ -11,10 +11,12 @@ BASE = '99bdaf4a9e06006aed7f9fcf2c963a6e68cf61d3'
 def main():
     p = argparse.ArgumentParser(description=__doc__)
     p.add_argument('--unicorn', type=Path, required=True)
+    p.add_argument('--base', default=BASE, help='Immutable source commit; historical default retained')
+    p.add_argument('--out', type=Path, default=Path('build/task-judges/bridge-faults'))
     args = p.parse_args()
-    out = Path('build/task-judges/bridge-faults')
+    out = args.out
     out.mkdir(parents=True, exist_ok=True)
-    source = subprocess.check_output(['git', 'show', BASE + ':src/hle/hle_task_bridge.cpp']).decode()
+    source = subprocess.check_output(['git', 'show', args.base + ':src/hle/hle_task_bridge.cpp']).decode()
     assert Path('src/hle/hle_task_bridge.cpp').read_text() == source
     faults = [
         ('eager-ready-before-shortcut', 'if(!ready())return 0;\n        import_graph();TaskResult result;',
@@ -36,10 +38,10 @@ def main():
         command = ['xcrun', 'clang++', '-std=c++17', '-O2', '-Wall', '-Wextra', '-Werror',
                    '-ffp-contract=off', '-fno-fast-math', '-Isrc', '-I' + str(args.unicorn / 'include'),
                    test, str(copied), 'build/libsadx-guest.a', str(args.unicorn / 'lib/libunicorn.a'),
-                   '-lpthread', 'build/libsadx-core.a', '-o', str(binary)]
+                   '-lpthread', 'build/libsadx-core.a', '-Wl,-map,' + str(binary) + '.map', '-o', str(binary)]
         compiled = subprocess.run(command, capture_output=True, text=True)
         (out / (name + '.compile.log')).write_text(compiled.stdout + compiled.stderr)
-        row = dict(name=name, old=old, new=new, command=command, compile_exit=compiled.returncode,
+        row = dict(name=name, base=args.base, old=old, new=new, command=command, compile_exit=compiled.returncode,
                    copied_sha256=hashlib.sha256(copied.read_bytes()).hexdigest(), caught=False)
         if compiled.returncode == 0:
             run = subprocess.run([str(binary)], capture_output=True, text=True, timeout=60)

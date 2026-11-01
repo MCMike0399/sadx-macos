@@ -73,7 +73,7 @@ void checked_prefix(const PlayerStartupParameterTable& table) {
         check(arena->reference(task->motion_work,0).work==player->player_work);
         const auto speed=arena->reference_view(player->player_work,0x138);
         check(speed && speed.work==player->player_work && speed.byte_offset==0x38);
-        check(arena->reference(player->player_work,0x138).failure==TaskWorkFailure::interior_reference_requires_view);
+        check(arena->reference(player->player_work,0x138).failure==TaskWorkFailure::InteriorReferenceRequiresView);
         check(arena->reference(player->player_work,0x13c).work==player->player_work);
         check(player->self_at_13c()==player->player.get());
         player->player->motion.speed.x=17;check(player->speed_at_138()->x==17);

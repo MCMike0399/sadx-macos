@@ -1,3 +1,4 @@
+#include "guest/task_reference.hpp"
 #include "engine/task_work.hpp"
 
 #include <cassert>
@@ -8,7 +9,7 @@
 using namespace sadx;
 
 int main() {
-    TaskWorkArena arena(0x20000000);
+    TaskWorkArena arena(sadx::task_reference::pointer_encoder(0x20000000));
     auto mirror = arena.source_bytes();
     std::vector<unsigned> events;
     arena.set_metadata_writer([&](unsigned at, std::optional<unsigned> value) {
@@ -48,7 +49,7 @@ int main() {
         ++resolutions;
         events.push_back(4);
         assert(observed == 0x20000000 + other->data_offset() + 7);
-        return TaskWorkReferenceResult{TaskWorkFailure::none, other, 7, other->data_offset()};
+        return TaskWorkReferenceResult{TaskWorkFailure::None, other, 7, other->data_offset()};
     });
     raw = 0x20000000 + other->data_offset() + 7;
     std::memcpy(mirror.data() + owner->data_offset(), &raw, 4);
@@ -63,13 +64,13 @@ int main() {
     assert(reused != target && reused->data_offset() == original_offset);
     {
         const auto released = arena.reference_view(owner, 0);
-        assert(released.failure == TaskWorkFailure::released_work && released.work == target);
+        assert(released.failure == TaskWorkFailure::ReleasedWork && released.work == target);
         assert(released.byte_offset == 12 && released.allocation_data_offset == original_offset);
     }
     assert(resolutions == 1); // same raw address still names the released generation
     target.reset();
     const auto expired = arena.reference_view(owner, 0);
-    assert(expired.failure == TaskWorkFailure::released_work && !expired.work);
+    assert(expired.failure == TaskWorkFailure::ReleasedWork && !expired.work);
     assert(expired.byte_offset == 12 && expired.allocation_data_offset == original_offset);
     assert(resolutions == 1);
     std::cout << "Arena transport: metadata/payload ordering, live null/redirect, interior/self "
