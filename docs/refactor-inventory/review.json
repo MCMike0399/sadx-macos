@@ -18927,10 +18927,10 @@
       ]
     },
     "src/game/game_mode_native.cpp": {
-      "disposition": "open_review",
-      "reason": "Readable native field access and finite forwarding are established, but complete current binding qualification is unresolved.",
+      "disposition": "already_conforming",
+      "reason": "Fresh independent review approves the complete current native forwarding/explicit-stop module; no source rewrite required.",
       "reviewed_source_sha256": "cdf3a649e194591c4ed3ec324cb6ae3ecac6c25c3ea83ec7c5a3e69a37e44dd5",
-      "semantic_justification": "All275lines reviewed. State writes are immediate, null sequence throws at actual use,27 forwarders require nonnull flow.native, remaining uncomposed named functions throw. request_file_module alone is a claimed recovered diagnostic no-op. The legacy leaf judge supports source no-op behavior, but neither mode oracle nor old native unit executes this current body. Stale native receipt hashes, no direct current all-forwarder/prefix result receipt, and incomplete diagnostic no-op raw anchors keep whole-module qualification open; no speculative rewrite is requested.",
+      "semantic_justification": "All 275 lines reviewed independently. Native accesses publish immediate typed stores and read borrowed values at use; sequence absence fails at the signed-level read. All 27 finite native forwards retain arguments, return bits, callback mutation and exceptions. Remaining uncomposed operations stop by name. The only successful empty module-request behavior has complete pinned instruction/disabled-printer evidence; no source owner, fixture knownness, address dispatch or guest transport is introduced.",
       "resolved_owners": [
         {
           "resolution": "Session::flow_ is the native canonical flow value owner. Session bootstrap borrows flow_.movie_number; save/message/title/character-selection/input consumers access the same flow fields through Session/TitleScene views. FlowContext borrows GameFlowState and NativeServices synchronously, owns only a logical phase; the services pointer has no captured callable lifetime or deferred publication. SequenceSelection is a borrowed nullable game sequence, not fixture availability. MenuResource is an opaque zero/nonzero release token here; native free_message_resource remains an explicit failure, so this does not establish a native allocation/asset identity.",
@@ -19036,84 +19036,47 @@
       ],
       "accepted_judges": [
         {
-          "resolution": "Accepted scoped core/reference judge: current game_mode.hpp/.cpp, reference.hpp/.cpp, probe and verifier hashes match the tracked24000-case report;252 call-site paths,0 mismatches. Complete48-word input/256-word output ABI compares source call order/sites/args, final observable globals and failure/completion. Scripted owner mutations exercise rereads; owner fixtures are not real subsystems. The internal header changed annotations since the report; its function declarations remain link-compatible, and this review independently reads the complete current declaration surface. Native services/backend stale hashes are explicitly not accepted as current behavioral qualification.",
+          "resolution": "Fresh independent complete-body STYLE12/spec review f9c5f09 approves exactly the native backend and finite service interface and accepts the bounded judge packet. All source fingerprints, complete streams, fault copies and observer payloads were verified read-only; no builds, original executions, mutations or holdouts reran. Integration is pending Root.",
           "evidence": [
             {
-              "path": "reference/oracle-reports/game_mode.json",
-              "sha256": "8c487a818339dbdc067e6aeba59afef5bd536153244eae5810041a5c9033fca0"
-            },
-            {
-              "path": "tests/probes/native_game_mode_probe.cpp",
-              "sha256": "d1e1c146a4cc6b46819cac257b2dcba737cec41915f26e84887bc1252f0bb587"
-            },
-            {
-              "path": "tools/oracles/verify_original_game_mode.py",
-              "sha256": "a8df08e0f9d0b995213f45f94652de08077bf56b3e056adc7001faaef0b4fd69"
-            },
-            {
-              "path": "tests/unit/game_mode.cpp",
-              "sha256": "af0e3bda405195d9d9b8a2b3244facbcb91fea89605469f60d5b0d14e089859c"
+              "path": "docs/refactor-inventory/reviews/mode-forwarding.md",
+              "sha256": "e3c31dfa411c6f96394ab7417173076c23b42c56948efaf9ac2b326dc33005e0"
             }
           ]
         },
         {
-          "resolution": "Historical semantic migration evidence: three valid faults caught1629/54/10 mismatches; fixed2048-case before/after holdout0 mismatches and identical395e8e... case identity. Initial semantic report core/native/internal hashes are outdated and do not independently certify current composition. Native unit only checks four explicit-stop/prefix paths with no NativeServices installation. These judges support unchanged structured decisions and declared stop semantics, not every current native forwarder.",
+          "resolution": "The prior frame/mode review remains historical context. Its open qualification of exactly these two files is superseded by the new independent approval; other module dispositions and downstream limits remain unchanged.",
           "evidence": [
             {
-              "path": "reference/production-integration-20261016/game-mode-semantic-147-evidence.json",
-              "sha256": "5df58948d6d92c38bd66842632225fab658b1edaca99bfeb6117261b2301a36d"
-            },
-            {
-              "path": "reference/production-integration-20261016/game-mode-semantic-147-mutants.txt",
-              "sha256": "ce25c121600efd7f3f4773332fa7883a8bde5c4aa244267de8dbee4f37cc6fb4"
-            },
-            {
-              "path": "reference/production-integration-20261016/game-mode-semantic-mutants.json",
-              "sha256": "38b1c88a1327d24ce2299bf08010ccbd1923f66689f8f4016957b7c94e3f4143"
-            },
-            {
-              "path": "reference/production-integration-20261016/game-mode-reference-mutants.json",
-              "sha256": "f2e2a4a2ed410d50a0f31c8ff89498fe39015b8534a3c102f8b6d8bfb13140e1"
-            },
-            {
-              "path": "reference/production-integration-20261016/game-mode-semantic-147-holdout.json",
-              "sha256": "e9bfc6ad64bd6ca92ca2d62e42b9c1dd0bec9e1201d976a10efd7b8818322e37"
-            },
-            {
-              "path": "reference/production-integration-20261016/game-mode-semantic-147-before-holdout.json",
-              "sha256": "fd2fd0009c84a4def4133b95f5882db53cf5800eec463baf182c75593738fe3a"
-            },
-            {
-              "path": "tests/unit/native_game_mode.cpp",
-              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+              "path": "docs/refactor-inventory/reviews/frame-mode-foundations.json",
+              "sha256": "739130900cac678739cd1ca242773c40c49f626e69b686325ffc85ef35601202"
             }
           ]
         }
       ],
       "classification_limits": [
-        "Conformance here covers only the current structured core/value API or private declarations explicitly dispositioned; native binding/services qualification remains open and does not inherit the reference oracle.",
-        "No recovered Action/Adventure/Mission/summary/tutorial/staff-roll implementation or native story/CharacterSelect milestone is inferred. Named link-time throws are legitimate STUB seams; do not invent callbacks to turn them into successful execution.",
-        "Reference scripted owner failures/null sequence/missing return are intentional source-boundary comparisons, not successfully implemented subsystems. The256-word probe does not serialize nested_source_boundary or pending_call; unit checks pending-call presence but does not fully freeze the complete result tuple on all paths.",
-        "Mode receipts lack full historical transitive dependency identities and held-out output streams. Current direct dependencies are pinned below; stale header/native/service hashes remain stale. No FP equivalence claim: mode core is integer dispatch; downstream title/cleanup FP partials and inherited failures remain partial/failing.",
-        "Actual native source product/force-load and native/reference comparison journeys remain Root evidence, not executed here. Last tracked gate is1300815; the user reports full gate97018 active at frozen99bdaf4. No whole Session/runtime/campaign closure or changed product acceptance."
+        "Approve exactly these two complete files and their single-file stem modules within native forwarding and explicit-stop purpose. Whole Mode, Session, downstream subsystems and campaign remain open.",
+        "Qualified candidate 0806b90 has 27 forwarder checks, nine native scenarios and 57 failure prefixes, 26 reference diagnostic scenarios, ten valid copied faults, 24000 exact legacy ABI records and unchanged original comparison with 252 paths and zero mismatches. These are retained runs independently inspected by review f9c5f09, not fresh Main executions.",
+        "Candidate contracts, companion observer and canonical report have not yet been integrated into Main. Protected parent union, new unit registration execution and coherent integration gate remain pending. Source bytes here exactly match the reviewed candidate.",
+        "Direct 21-byte module-request body and one-byte printer RET support only the pinned static profile. No general module/resource loading or live mod execution is inferred.",
+        "Actual private Session implementations, native product closure, journeys, resource lifetimes, audio/save algorithms, old FP partials and inherited failures retain their separate qualifications. Test services do not prove those downstream algorithms.",
+        "No reserved holdout, new route, native actor, stage63FPS or new physical-controller qualification is claimed."
       ],
       "evidence": [
         {
-          "path": "src/game/game_mode_native.cpp",
-          "sha256": "cdf3a649e194591c4ed3ec324cb6ae3ecac6c25c3ea83ec7c5a3e69a37e44dd5",
-          "line": 1,
-          "link": "src/game/game_mode_native.cpp#L1"
+          "path": "docs/refactor-inventory/reviews/mode-forwarding.md",
+          "sha256": "e3c31dfa411c6f96394ab7417173076c23b42c56948efaf9ac2b326dc33005e0"
         }
       ],
       "qualification_gaps": [
-        "Do not rewrite the typed composition or promote its old oracle metadata. Root should attach current backend/service/Session dependency identities to existing actual native closure/journey evidence and characterize forwarder/prefix failure behavior where not covered. Preserve original missing owner/return/nested/cancellation tuples separately from successful callees."
+        "Integrate the reviewed candidate contracts/observer/report and protected parent union; run canonical registered checks and a coherent gate. No downstream implementation or full-system closure follows."
       ]
     },
     "src/game/game_mode_services.hpp": {
-      "disposition": "open_review",
-      "reason": "Finite typed composition interface has a real Session consumer; current whole-interface acceptance remains open.",
+      "disposition": "already_conforming",
+      "reason": "Fresh independent review approves the complete current native forwarding/explicit-stop module; no source rewrite required.",
       "reviewed_source_sha256": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36",
-      "semantic_justification": "All40lines reviewed.27 pure virtual game operations plus virtual destructor and an overload, no state owner, address key, generic invoke, std::function registry or fixture-availability value. Session privately implements all operations; context borrows it only during advance. Its cross-system breadth alone is not demonstrated nonconformance. Twelve added cleanup/title operations postdate the tracked mode report; current source build/journey evidence must be tied to current transitive binding dependencies before whole-interface approval.",
+      "semantic_justification": "All 40 lines reviewed independently. NativeServices is an existing finite game-flow composition interface with 27 named operations and a virtual destructor. It owns no source state, carries no generic address/dispatch key or availability mask, and is consumed by Session through the same borrowed flow state. The interface preserves invocation-local routing and explicit missing-system boundaries; it is not a universal service framework or a downstream implementation certification.",
       "resolved_owners": [
         {
           "resolution": "Session::flow_ is the native canonical flow value owner. Session bootstrap borrows flow_.movie_number; save/message/title/character-selection/input consumers access the same flow fields through Session/TitleScene views. FlowContext borrows GameFlowState and NativeServices synchronously, owns only a logical phase; the services pointer has no captured callable lifetime or deferred publication. SequenceSelection is a borrowed nullable game sequence, not fixture availability. MenuResource is an opaque zero/nonzero release token here; native free_message_resource remains an explicit failure, so this does not establish a native allocation/asset identity.",
@@ -19219,77 +19182,40 @@
       ],
       "accepted_judges": [
         {
-          "resolution": "Accepted scoped core/reference judge: current game_mode.hpp/.cpp, reference.hpp/.cpp, probe and verifier hashes match the tracked24000-case report;252 call-site paths,0 mismatches. Complete48-word input/256-word output ABI compares source call order/sites/args, final observable globals and failure/completion. Scripted owner mutations exercise rereads; owner fixtures are not real subsystems. The internal header changed annotations since the report; its function declarations remain link-compatible, and this review independently reads the complete current declaration surface. Native services/backend stale hashes are explicitly not accepted as current behavioral qualification.",
+          "resolution": "Fresh independent complete-body STYLE12/spec review f9c5f09 approves exactly the native backend and finite service interface and accepts the bounded judge packet. All source fingerprints, complete streams, fault copies and observer payloads were verified read-only; no builds, original executions, mutations or holdouts reran. Integration is pending Root.",
           "evidence": [
             {
-              "path": "reference/oracle-reports/game_mode.json",
-              "sha256": "8c487a818339dbdc067e6aeba59afef5bd536153244eae5810041a5c9033fca0"
-            },
-            {
-              "path": "tests/probes/native_game_mode_probe.cpp",
-              "sha256": "d1e1c146a4cc6b46819cac257b2dcba737cec41915f26e84887bc1252f0bb587"
-            },
-            {
-              "path": "tools/oracles/verify_original_game_mode.py",
-              "sha256": "a8df08e0f9d0b995213f45f94652de08077bf56b3e056adc7001faaef0b4fd69"
-            },
-            {
-              "path": "tests/unit/game_mode.cpp",
-              "sha256": "af0e3bda405195d9d9b8a2b3244facbcb91fea89605469f60d5b0d14e089859c"
+              "path": "docs/refactor-inventory/reviews/mode-forwarding.md",
+              "sha256": "e3c31dfa411c6f96394ab7417173076c23b42c56948efaf9ac2b326dc33005e0"
             }
           ]
         },
         {
-          "resolution": "Historical semantic migration evidence: three valid faults caught1629/54/10 mismatches; fixed2048-case before/after holdout0 mismatches and identical395e8e... case identity. Initial semantic report core/native/internal hashes are outdated and do not independently certify current composition. Native unit only checks four explicit-stop/prefix paths with no NativeServices installation. These judges support unchanged structured decisions and declared stop semantics, not every current native forwarder.",
+          "resolution": "The prior frame/mode review remains historical context. Its open qualification of exactly these two files is superseded by the new independent approval; other module dispositions and downstream limits remain unchanged.",
           "evidence": [
             {
-              "path": "reference/production-integration-20261016/game-mode-semantic-147-evidence.json",
-              "sha256": "5df58948d6d92c38bd66842632225fab658b1edaca99bfeb6117261b2301a36d"
-            },
-            {
-              "path": "reference/production-integration-20261016/game-mode-semantic-147-mutants.txt",
-              "sha256": "ce25c121600efd7f3f4773332fa7883a8bde5c4aa244267de8dbee4f37cc6fb4"
-            },
-            {
-              "path": "reference/production-integration-20261016/game-mode-semantic-mutants.json",
-              "sha256": "38b1c88a1327d24ce2299bf08010ccbd1923f66689f8f4016957b7c94e3f4143"
-            },
-            {
-              "path": "reference/production-integration-20261016/game-mode-reference-mutants.json",
-              "sha256": "f2e2a4a2ed410d50a0f31c8ff89498fe39015b8534a3c102f8b6d8bfb13140e1"
-            },
-            {
-              "path": "reference/production-integration-20261016/game-mode-semantic-147-holdout.json",
-              "sha256": "e9bfc6ad64bd6ca92ca2d62e42b9c1dd0bec9e1201d976a10efd7b8818322e37"
-            },
-            {
-              "path": "reference/production-integration-20261016/game-mode-semantic-147-before-holdout.json",
-              "sha256": "fd2fd0009c84a4def4133b95f5882db53cf5800eec463baf182c75593738fe3a"
-            },
-            {
-              "path": "tests/unit/native_game_mode.cpp",
-              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+              "path": "docs/refactor-inventory/reviews/frame-mode-foundations.json",
+              "sha256": "739130900cac678739cd1ca242773c40c49f626e69b686325ffc85ef35601202"
             }
           ]
         }
       ],
       "classification_limits": [
-        "Conformance here covers only the current structured core/value API or private declarations explicitly dispositioned; native binding/services qualification remains open and does not inherit the reference oracle.",
-        "No recovered Action/Adventure/Mission/summary/tutorial/staff-roll implementation or native story/CharacterSelect milestone is inferred. Named link-time throws are legitimate STUB seams; do not invent callbacks to turn them into successful execution.",
-        "Reference scripted owner failures/null sequence/missing return are intentional source-boundary comparisons, not successfully implemented subsystems. The256-word probe does not serialize nested_source_boundary or pending_call; unit checks pending-call presence but does not fully freeze the complete result tuple on all paths.",
-        "Mode receipts lack full historical transitive dependency identities and held-out output streams. Current direct dependencies are pinned below; stale header/native/service hashes remain stale. No FP equivalence claim: mode core is integer dispatch; downstream title/cleanup FP partials and inherited failures remain partial/failing.",
-        "Actual native source product/force-load and native/reference comparison journeys remain Root evidence, not executed here. Last tracked gate is1300815; the user reports full gate97018 active at frozen99bdaf4. No whole Session/runtime/campaign closure or changed product acceptance."
+        "Approve exactly these two complete files and their single-file stem modules within native forwarding and explicit-stop purpose. Whole Mode, Session, downstream subsystems and campaign remain open.",
+        "Qualified candidate 0806b90 has 27 forwarder checks, nine native scenarios and 57 failure prefixes, 26 reference diagnostic scenarios, ten valid copied faults, 24000 exact legacy ABI records and unchanged original comparison with 252 paths and zero mismatches. These are retained runs independently inspected by review f9c5f09, not fresh Main executions.",
+        "Candidate contracts, companion observer and canonical report have not yet been integrated into Main. Protected parent union, new unit registration execution and coherent integration gate remain pending. Source bytes here exactly match the reviewed candidate.",
+        "Direct 21-byte module-request body and one-byte printer RET support only the pinned static profile. No general module/resource loading or live mod execution is inferred.",
+        "Actual private Session implementations, native product closure, journeys, resource lifetimes, audio/save algorithms, old FP partials and inherited failures retain their separate qualifications. Test services do not prove those downstream algorithms.",
+        "No reserved holdout, new route, native actor, stage63FPS or new physical-controller qualification is claimed."
       ],
       "evidence": [
         {
-          "path": "src/game/game_mode_services.hpp",
-          "sha256": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36",
-          "line": 1,
-          "link": "src/game/game_mode_services.hpp#L1"
+          "path": "docs/refactor-inventory/reviews/mode-forwarding.md",
+          "sha256": "e3c31dfa411c6f96394ab7417173076c23b42c56948efaf9ac2b326dc33005e0"
         }
       ],
       "qualification_gaps": [
-        "Do not rewrite the typed composition or promote its old oracle metadata. Root should attach current backend/service/Session dependency identities to existing actual native closure/journey evidence and characterize forwarder/prefix failure behavior where not covered. Preserve original missing owner/return/nested/cancellation tuples separately from successful callees."
+        "Integrate the reviewed candidate contracts/observer/report and protected parent union; run canonical registered checks and a coherent gate. No downstream implementation or full-system closure follows."
       ]
     },
     "src/game/save_data.hpp": {
@@ -30887,9 +30813,9 @@
       ]
     },
     "src/game/game_mode_native": {
-      "disposition": "open_review",
-      "reason": "Readable native field access and finite forwarding are established, but complete current binding qualification is unresolved.",
-      "semantic_justification": "All275lines reviewed. State writes are immediate, null sequence throws at actual use,27 forwarders require nonnull flow.native, remaining uncomposed named functions throw. request_file_module alone is a claimed recovered diagnostic no-op. The legacy leaf judge supports source no-op behavior, but neither mode oracle nor old native unit executes this current body. Stale native receipt hashes, no direct current all-forwarder/prefix result receipt, and incomplete diagnostic no-op raw anchors keep whole-module qualification open; no speculative rewrite is requested.",
+      "disposition": "already_conforming",
+      "reason": "Fresh independent review approves the complete current native forwarding/explicit-stop module; no source rewrite required.",
+      "semantic_justification": "All 275 lines reviewed independently. Native accesses publish immediate typed stores and read borrowed values at use; sequence absence fails at the signed-level read. All 27 finite native forwards retain arguments, return bits, callback mutation and exceptions. Remaining uncomposed operations stop by name. The only successful empty module-request behavior has complete pinned instruction/disabled-printer evidence; no source owner, fixture knownness, address dispatch or guest transport is introduced.",
       "resolved_owners": [
         {
           "resolution": "Session::flow_ is the native canonical flow value owner. Session bootstrap borrows flow_.movie_number; save/message/title/character-selection/input consumers access the same flow fields through Session/TitleScene views. FlowContext borrows GameFlowState and NativeServices synchronously, owns only a logical phase; the services pointer has no captured callable lifetime or deferred publication. SequenceSelection is a borrowed nullable game sequence, not fixture availability. MenuResource is an opaque zero/nonzero release token here; native free_message_resource remains an explicit failure, so this does not establish a native allocation/asset identity.",
@@ -30995,86 +30921,49 @@
       ],
       "accepted_judges": [
         {
-          "resolution": "Accepted scoped core/reference judge: current game_mode.hpp/.cpp, reference.hpp/.cpp, probe and verifier hashes match the tracked24000-case report;252 call-site paths,0 mismatches. Complete48-word input/256-word output ABI compares source call order/sites/args, final observable globals and failure/completion. Scripted owner mutations exercise rereads; owner fixtures are not real subsystems. The internal header changed annotations since the report; its function declarations remain link-compatible, and this review independently reads the complete current declaration surface. Native services/backend stale hashes are explicitly not accepted as current behavioral qualification.",
+          "resolution": "Fresh independent complete-body STYLE12/spec review f9c5f09 approves exactly the native backend and finite service interface and accepts the bounded judge packet. All source fingerprints, complete streams, fault copies and observer payloads were verified read-only; no builds, original executions, mutations or holdouts reran. Integration is pending Root.",
           "evidence": [
             {
-              "path": "reference/oracle-reports/game_mode.json",
-              "sha256": "8c487a818339dbdc067e6aeba59afef5bd536153244eae5810041a5c9033fca0"
-            },
-            {
-              "path": "tests/probes/native_game_mode_probe.cpp",
-              "sha256": "d1e1c146a4cc6b46819cac257b2dcba737cec41915f26e84887bc1252f0bb587"
-            },
-            {
-              "path": "tools/oracles/verify_original_game_mode.py",
-              "sha256": "a8df08e0f9d0b995213f45f94652de08077bf56b3e056adc7001faaef0b4fd69"
-            },
-            {
-              "path": "tests/unit/game_mode.cpp",
-              "sha256": "af0e3bda405195d9d9b8a2b3244facbcb91fea89605469f60d5b0d14e089859c"
+              "path": "docs/refactor-inventory/reviews/mode-forwarding.md",
+              "sha256": "e3c31dfa411c6f96394ab7417173076c23b42c56948efaf9ac2b326dc33005e0"
             }
           ]
         },
         {
-          "resolution": "Historical semantic migration evidence: three valid faults caught1629/54/10 mismatches; fixed2048-case before/after holdout0 mismatches and identical395e8e... case identity. Initial semantic report core/native/internal hashes are outdated and do not independently certify current composition. Native unit only checks four explicit-stop/prefix paths with no NativeServices installation. These judges support unchanged structured decisions and declared stop semantics, not every current native forwarder.",
+          "resolution": "The prior frame/mode review remains historical context. Its open qualification of exactly these two files is superseded by the new independent approval; other module dispositions and downstream limits remain unchanged.",
           "evidence": [
             {
-              "path": "reference/production-integration-20261016/game-mode-semantic-147-evidence.json",
-              "sha256": "5df58948d6d92c38bd66842632225fab658b1edaca99bfeb6117261b2301a36d"
-            },
-            {
-              "path": "reference/production-integration-20261016/game-mode-semantic-147-mutants.txt",
-              "sha256": "ce25c121600efd7f3f4773332fa7883a8bde5c4aa244267de8dbee4f37cc6fb4"
-            },
-            {
-              "path": "reference/production-integration-20261016/game-mode-semantic-mutants.json",
-              "sha256": "38b1c88a1327d24ce2299bf08010ccbd1923f66689f8f4016957b7c94e3f4143"
-            },
-            {
-              "path": "reference/production-integration-20261016/game-mode-reference-mutants.json",
-              "sha256": "f2e2a4a2ed410d50a0f31c8ff89498fe39015b8534a3c102f8b6d8bfb13140e1"
-            },
-            {
-              "path": "reference/production-integration-20261016/game-mode-semantic-147-holdout.json",
-              "sha256": "e9bfc6ad64bd6ca92ca2d62e42b9c1dd0bec9e1201d976a10efd7b8818322e37"
-            },
-            {
-              "path": "reference/production-integration-20261016/game-mode-semantic-147-before-holdout.json",
-              "sha256": "fd2fd0009c84a4def4133b95f5882db53cf5800eec463baf182c75593738fe3a"
-            },
-            {
-              "path": "tests/unit/native_game_mode.cpp",
-              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+              "path": "docs/refactor-inventory/reviews/frame-mode-foundations.json",
+              "sha256": "739130900cac678739cd1ca242773c40c49f626e69b686325ffc85ef35601202"
             }
           ]
         }
       ],
       "classification_limits": [
-        "Conformance here covers only the current structured core/value API or private declarations explicitly dispositioned; native binding/services qualification remains open and does not inherit the reference oracle.",
-        "No recovered Action/Adventure/Mission/summary/tutorial/staff-roll implementation or native story/CharacterSelect milestone is inferred. Named link-time throws are legitimate STUB seams; do not invent callbacks to turn them into successful execution.",
-        "Reference scripted owner failures/null sequence/missing return are intentional source-boundary comparisons, not successfully implemented subsystems. The256-word probe does not serialize nested_source_boundary or pending_call; unit checks pending-call presence but does not fully freeze the complete result tuple on all paths.",
-        "Mode receipts lack full historical transitive dependency identities and held-out output streams. Current direct dependencies are pinned below; stale header/native/service hashes remain stale. No FP equivalence claim: mode core is integer dispatch; downstream title/cleanup FP partials and inherited failures remain partial/failing.",
-        "Actual native source product/force-load and native/reference comparison journeys remain Root evidence, not executed here. Last tracked gate is1300815; the user reports full gate97018 active at frozen99bdaf4. No whole Session/runtime/campaign closure or changed product acceptance."
+        "Approve exactly these two complete files and their single-file stem modules within native forwarding and explicit-stop purpose. Whole Mode, Session, downstream subsystems and campaign remain open.",
+        "Qualified candidate 0806b90 has 27 forwarder checks, nine native scenarios and 57 failure prefixes, 26 reference diagnostic scenarios, ten valid copied faults, 24000 exact legacy ABI records and unchanged original comparison with 252 paths and zero mismatches. These are retained runs independently inspected by review f9c5f09, not fresh Main executions.",
+        "Candidate contracts, companion observer and canonical report have not yet been integrated into Main. Protected parent union, new unit registration execution and coherent integration gate remain pending. Source bytes here exactly match the reviewed candidate.",
+        "Direct 21-byte module-request body and one-byte printer RET support only the pinned static profile. No general module/resource loading or live mod execution is inferred.",
+        "Actual private Session implementations, native product closure, journeys, resource lifetimes, audio/save algorithms, old FP partials and inherited failures retain their separate qualifications. Test services do not prove those downstream algorithms.",
+        "No reserved holdout, new route, native actor, stage63FPS or new physical-controller qualification is claimed."
       ],
       "reviewed_members": {
         "src/game/game_mode_native.cpp": "cdf3a649e194591c4ed3ec324cb6ae3ecac6c25c3ea83ec7c5a3e69a37e44dd5"
       },
       "evidence": [
         {
-          "path": "src/game/game_mode_native.cpp",
-          "sha256": "cdf3a649e194591c4ed3ec324cb6ae3ecac6c25c3ea83ec7c5a3e69a37e44dd5",
-          "line": 1,
-          "link": "src/game/game_mode_native.cpp#L1"
+          "path": "docs/refactor-inventory/reviews/mode-forwarding.md",
+          "sha256": "e3c31dfa411c6f96394ab7417173076c23b42c56948efaf9ac2b326dc33005e0"
         }
       ],
       "qualification_gaps": [
-        "Do not rewrite the typed composition or promote its old oracle metadata. Root should attach current backend/service/Session dependency identities to existing actual native closure/journey evidence and characterize forwarder/prefix failure behavior where not covered. Preserve original missing owner/return/nested/cancellation tuples separately from successful callees."
+        "Integrate the reviewed candidate contracts/observer/report and protected parent union; run canonical registered checks and a coherent gate. No downstream implementation or full-system closure follows."
       ]
     },
     "src/game/game_mode_services": {
-      "disposition": "open_review",
-      "reason": "Finite typed composition interface has a real Session consumer; current whole-interface acceptance remains open.",
-      "semantic_justification": "All40lines reviewed.27 pure virtual game operations plus virtual destructor and an overload, no state owner, address key, generic invoke, std::function registry or fixture-availability value. Session privately implements all operations; context borrows it only during advance. Its cross-system breadth alone is not demonstrated nonconformance. Twelve added cleanup/title operations postdate the tracked mode report; current source build/journey evidence must be tied to current transitive binding dependencies before whole-interface approval.",
+      "disposition": "already_conforming",
+      "reason": "Fresh independent review approves the complete current native forwarding/explicit-stop module; no source rewrite required.",
+      "semantic_justification": "All 40 lines reviewed independently. NativeServices is an existing finite game-flow composition interface with 27 named operations and a virtual destructor. It owns no source state, carries no generic address/dispatch key or availability mask, and is consumed by Session through the same borrowed flow state. The interface preserves invocation-local routing and explicit missing-system boundaries; it is not a universal service framework or a downstream implementation certification.",
       "resolved_owners": [
         {
           "resolution": "Session::flow_ is the native canonical flow value owner. Session bootstrap borrows flow_.movie_number; save/message/title/character-selection/input consumers access the same flow fields through Session/TitleScene views. FlowContext borrows GameFlowState and NativeServices synchronously, owns only a logical phase; the services pointer has no captured callable lifetime or deferred publication. SequenceSelection is a borrowed nullable game sequence, not fixture availability. MenuResource is an opaque zero/nonzero release token here; native free_message_resource remains an explicit failure, so this does not establish a native allocation/asset identity.",
@@ -31180,80 +31069,43 @@
       ],
       "accepted_judges": [
         {
-          "resolution": "Accepted scoped core/reference judge: current game_mode.hpp/.cpp, reference.hpp/.cpp, probe and verifier hashes match the tracked24000-case report;252 call-site paths,0 mismatches. Complete48-word input/256-word output ABI compares source call order/sites/args, final observable globals and failure/completion. Scripted owner mutations exercise rereads; owner fixtures are not real subsystems. The internal header changed annotations since the report; its function declarations remain link-compatible, and this review independently reads the complete current declaration surface. Native services/backend stale hashes are explicitly not accepted as current behavioral qualification.",
+          "resolution": "Fresh independent complete-body STYLE12/spec review f9c5f09 approves exactly the native backend and finite service interface and accepts the bounded judge packet. All source fingerprints, complete streams, fault copies and observer payloads were verified read-only; no builds, original executions, mutations or holdouts reran. Integration is pending Root.",
           "evidence": [
             {
-              "path": "reference/oracle-reports/game_mode.json",
-              "sha256": "8c487a818339dbdc067e6aeba59afef5bd536153244eae5810041a5c9033fca0"
-            },
-            {
-              "path": "tests/probes/native_game_mode_probe.cpp",
-              "sha256": "d1e1c146a4cc6b46819cac257b2dcba737cec41915f26e84887bc1252f0bb587"
-            },
-            {
-              "path": "tools/oracles/verify_original_game_mode.py",
-              "sha256": "a8df08e0f9d0b995213f45f94652de08077bf56b3e056adc7001faaef0b4fd69"
-            },
-            {
-              "path": "tests/unit/game_mode.cpp",
-              "sha256": "af0e3bda405195d9d9b8a2b3244facbcb91fea89605469f60d5b0d14e089859c"
+              "path": "docs/refactor-inventory/reviews/mode-forwarding.md",
+              "sha256": "e3c31dfa411c6f96394ab7417173076c23b42c56948efaf9ac2b326dc33005e0"
             }
           ]
         },
         {
-          "resolution": "Historical semantic migration evidence: three valid faults caught1629/54/10 mismatches; fixed2048-case before/after holdout0 mismatches and identical395e8e... case identity. Initial semantic report core/native/internal hashes are outdated and do not independently certify current composition. Native unit only checks four explicit-stop/prefix paths with no NativeServices installation. These judges support unchanged structured decisions and declared stop semantics, not every current native forwarder.",
+          "resolution": "The prior frame/mode review remains historical context. Its open qualification of exactly these two files is superseded by the new independent approval; other module dispositions and downstream limits remain unchanged.",
           "evidence": [
             {
-              "path": "reference/production-integration-20261016/game-mode-semantic-147-evidence.json",
-              "sha256": "5df58948d6d92c38bd66842632225fab658b1edaca99bfeb6117261b2301a36d"
-            },
-            {
-              "path": "reference/production-integration-20261016/game-mode-semantic-147-mutants.txt",
-              "sha256": "ce25c121600efd7f3f4773332fa7883a8bde5c4aa244267de8dbee4f37cc6fb4"
-            },
-            {
-              "path": "reference/production-integration-20261016/game-mode-semantic-mutants.json",
-              "sha256": "38b1c88a1327d24ce2299bf08010ccbd1923f66689f8f4016957b7c94e3f4143"
-            },
-            {
-              "path": "reference/production-integration-20261016/game-mode-reference-mutants.json",
-              "sha256": "f2e2a4a2ed410d50a0f31c8ff89498fe39015b8534a3c102f8b6d8bfb13140e1"
-            },
-            {
-              "path": "reference/production-integration-20261016/game-mode-semantic-147-holdout.json",
-              "sha256": "e9bfc6ad64bd6ca92ca2d62e42b9c1dd0bec9e1201d976a10efd7b8818322e37"
-            },
-            {
-              "path": "reference/production-integration-20261016/game-mode-semantic-147-before-holdout.json",
-              "sha256": "fd2fd0009c84a4def4133b95f5882db53cf5800eec463baf182c75593738fe3a"
-            },
-            {
-              "path": "tests/unit/native_game_mode.cpp",
-              "sha256": "0c78056401e474301a2ab6034ae9f58dee4ab7ebacd417e0b81794fa2ec026be"
+              "path": "docs/refactor-inventory/reviews/frame-mode-foundations.json",
+              "sha256": "739130900cac678739cd1ca242773c40c49f626e69b686325ffc85ef35601202"
             }
           ]
         }
       ],
       "classification_limits": [
-        "Conformance here covers only the current structured core/value API or private declarations explicitly dispositioned; native binding/services qualification remains open and does not inherit the reference oracle.",
-        "No recovered Action/Adventure/Mission/summary/tutorial/staff-roll implementation or native story/CharacterSelect milestone is inferred. Named link-time throws are legitimate STUB seams; do not invent callbacks to turn them into successful execution.",
-        "Reference scripted owner failures/null sequence/missing return are intentional source-boundary comparisons, not successfully implemented subsystems. The256-word probe does not serialize nested_source_boundary or pending_call; unit checks pending-call presence but does not fully freeze the complete result tuple on all paths.",
-        "Mode receipts lack full historical transitive dependency identities and held-out output streams. Current direct dependencies are pinned below; stale header/native/service hashes remain stale. No FP equivalence claim: mode core is integer dispatch; downstream title/cleanup FP partials and inherited failures remain partial/failing.",
-        "Actual native source product/force-load and native/reference comparison journeys remain Root evidence, not executed here. Last tracked gate is1300815; the user reports full gate97018 active at frozen99bdaf4. No whole Session/runtime/campaign closure or changed product acceptance."
+        "Approve exactly these two complete files and their single-file stem modules within native forwarding and explicit-stop purpose. Whole Mode, Session, downstream subsystems and campaign remain open.",
+        "Qualified candidate 0806b90 has 27 forwarder checks, nine native scenarios and 57 failure prefixes, 26 reference diagnostic scenarios, ten valid copied faults, 24000 exact legacy ABI records and unchanged original comparison with 252 paths and zero mismatches. These are retained runs independently inspected by review f9c5f09, not fresh Main executions.",
+        "Candidate contracts, companion observer and canonical report have not yet been integrated into Main. Protected parent union, new unit registration execution and coherent integration gate remain pending. Source bytes here exactly match the reviewed candidate.",
+        "Direct 21-byte module-request body and one-byte printer RET support only the pinned static profile. No general module/resource loading or live mod execution is inferred.",
+        "Actual private Session implementations, native product closure, journeys, resource lifetimes, audio/save algorithms, old FP partials and inherited failures retain their separate qualifications. Test services do not prove those downstream algorithms.",
+        "No reserved holdout, new route, native actor, stage63FPS or new physical-controller qualification is claimed."
       ],
       "reviewed_members": {
         "src/game/game_mode_services.hpp": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36"
       },
       "evidence": [
         {
-          "path": "src/game/game_mode_services.hpp",
-          "sha256": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36",
-          "line": 1,
-          "link": "src/game/game_mode_services.hpp#L1"
+          "path": "docs/refactor-inventory/reviews/mode-forwarding.md",
+          "sha256": "e3c31dfa411c6f96394ab7417173076c23b42c56948efaf9ac2b326dc33005e0"
         }
       ],
       "qualification_gaps": [
-        "Do not rewrite the typed composition or promote its old oracle metadata. Root should attach current backend/service/Session dependency identities to existing actual native closure/journey evidence and characterize forwarder/prefix failure behavior where not covered. Preserve original missing owner/return/nested/cancellation tuples separately from successful callees."
+        "Integrate the reviewed candidate contracts/observer/report and protected parent union; run canonical registered checks and a coherent gate. No downstream implementation or full-system closure follows."
       ]
     },
     "src/game/save_data": {
