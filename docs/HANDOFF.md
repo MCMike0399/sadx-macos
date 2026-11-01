@@ -683,3 +683,11 @@ The native frontier remains Question drawing at frame 1382. Integrate in reached
 * Additional exact-base edge checks and the unchanged real model-DLL unit pass against base and candidate. Two registered asset-free Make targets build and run. Evidence and complete hashes are in docs/packets/executable-image/PACKET.md and SUMMARY.json.
 * Source is fc4be98; registration is a separate judge commit. The inherited 943-entry manifest remains untouched; all 53 raw corpora are absent locally and must be restored before Root seals a parent-preserving union.
 * No full gate, guest/HLE integration, journeys, delegate, Main write or push. Root fresh review, inventory reconciliation, integration and composite qualification remain pending. Other loader modules and whole campaign conformance stay open.
+
+### 2026-11-01 — MPEG timing readability packet, Root review pending
+
+* Complete mpeg_timing header and implementation are readable named format and packet steps. Source 537691b preserves the API, MPEG subset, errors, integer truncation and HleDshow timing assumption.
+* Fresh pre-source existing unit and 30,657 synthetic full byte/result observations pass. Current output is byte-identical across 7,774,713 bytes; actual HleDshow transcript is identical across 10,873 bytes and all eight rates. The read-only RE-US.MPG unit remains unchanged.
+* Ten compiled faults are caught by the frozen contract; ASan/UBSan passes. Pinned support archives qualify an additional immutable-old/current consumer replay after concurrent Main support rebuilds; this replay is explicitly retrospective.
+* Separate judge commits add two registered tests with direct source dependencies. All 946 protected paths check; all 945 base paths and 53 raw inputs survive exactly. No gate, journeys, delegate, Main write or push.
+* docs/packets/mpeg-timing/PACKET.md records hashes, commands and limits. Root independent review, holdout, inventory reconciliation, integration and combined gate remain pending. No native movie, Windows splitter, whole Loader or campaign closure claim.
