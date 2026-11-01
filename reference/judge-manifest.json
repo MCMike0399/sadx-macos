@@ -1,9 +1,9 @@
 {
   "change": {
-    "base_commit": "7f51e76b6a0c636c2cee48cdbdd22bbfac994656",
-    "evidence": "docs/packets/mpeg-timing/root-parent-union.json",
-    "evidence_sha256": "cee346aaa98ea24d277824934b7b9139df6e4ec4ed336b8e88053110eb1b1533",
-    "reason": "Seal948-input reviewed MPEG/music/reference parent union with additive rules and exact appended tests; all existing expectations retained"
+    "base_commit": "68112a0967b60070cc62706b6d6345e3c64ec586",
+    "evidence": "reference/production-integration-20261101/mpeg-main-parent-union.json",
+    "evidence_sha256": "aa6b36cac05fedc7b45499b2a113e2833c071d9ac5720d0b4823df0241b22283",
+    "reason": "Seal948-input reviewed MPEG parent union and retained whole-module dispositions, without changing old expectations"
   },
   "files": {
     "Makefile": "1589ad72e6f32dc1684709122d78fbdc5c691ee571293be016301f90a6480ded",
