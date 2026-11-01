@@ -1,0 +1,144 @@
+{
+  "edge_without_review": {
+    "before": {
+      "commit": "f6c4e538af463a2eaf4c1fe961f04e8443d51878",
+      "path": "src/player/sonic_animation_operations.hpp",
+      "proof": {
+        "path": "docs/refactor-inventory/packets/source-lineage/proofs/baseline-operations.txt",
+        "sha256": "8af69713c6bf0807f92460079f675d0f05c123bb873090155f4244bf5ee775ea"
+      },
+      "sha256": "8af69713c6bf0807f92460079f675d0f05c123bb873090155f4244bf5ee775ea"
+    },
+    "behavior_evidence": [
+      {
+        "path": "docs/refactor-inventory/packets/source-lineage/proofs/root-requalified.txt",
+        "sha256": "9b3f2c1d38362de83ee7b4d7f1c547de662a5b8a0900efba99e40c3527c4e782"
+      },
+      {
+        "path": "docs/refactor-inventory/packets/source-lineage/proofs/publication.txt",
+        "sha256": "45110e5d0978c0d378b76a5866fb532a8d27a012137a62ed6f390043bf6f16f8"
+      }
+    ],
+    "consumer_evidence": [
+      {
+        "path": "docs/refactor-inventory/packets/source-lineage/proofs/native-table.txt",
+        "sha256": "b1b9de5049667fbb38faf1033db6cdc631e07721e9cfa87da1a186c798279d3c"
+      },
+      {
+        "path": "docs/refactor-inventory/packets/source-lineage/proofs/reference-table.txt",
+        "sha256": "4a2c2d2c66261c02aa0facd0c53e5f9c742d38f31f969018a293a565eb895779"
+      }
+    ],
+    "disposition": "reviewed_migration",
+    "member": {
+      "module": "src/player/sonic_animation_operations",
+      "observed_counts": {
+        "entries": 1027,
+        "lines": 1035,
+        "reads": 145,
+        "stores": 882
+      },
+      "prior_disposition": "needs_migration",
+      "remaining_debt": [
+        "Retirement lineage has not been independently reviewed or activated by Root.",
+        "Replacement content, initializer, adapters and whole-system/STUB closure require explicit current review; no exemption is inherited."
+      ]
+    },
+    "rationale": "Proposed whole-file rewrite lineage: the old operation interpreter input becomes typed SonicRecipe content plus shared ordered field publication, native ContentSink and reference diagnostics. The PC is instruction-site metadata; slot/index/record/field/bits are not all executable addresses. This mapping proposes continuity of scope, not semantic acceptance.",
+    "replacements": [
+      {
+        "commit": "38e1c69ecae029e38bf1d51c404e6a6358a75025",
+        "path": "src/player/animation/animation_content.hpp",
+        "proof": {
+          "path": "docs/refactor-inventory/packets/source-lineage/proofs/animation-content.txt",
+          "sha256": "e23ff8d5b43fd3e046f94223dc530d20b99575477db372b3f2007972941ea4a7"
+        },
+        "sha256": "e23ff8d5b43fd3e046f94223dc530d20b99575477db372b3f2007972941ea4a7"
+      },
+      {
+        "commit": "38e1c69ecae029e38bf1d51c404e6a6358a75025",
+        "path": "src/player/animation/sonic_animation_content.hpp",
+        "proof": {
+          "path": "docs/refactor-inventory/packets/source-lineage/proofs/sonic-content.txt",
+          "sha256": "4a19944124840a61fa4a97aae8c6bfa6bfb39c76db76f958e8148ba48946da4a"
+        },
+        "sha256": "4a19944124840a61fa4a97aae8c6bfa6bfb39c76db76f958e8148ba48946da4a"
+      },
+      {
+        "commit": "38e1c69ecae029e38bf1d51c404e6a6358a75025",
+        "path": "src/player/animation/sonic_animation_initialize.hpp",
+        "proof": {
+          "path": "docs/refactor-inventory/packets/source-lineage/proofs/sonic-initialize.txt",
+          "sha256": "25c0d5cb6471832b66e9335feb22ebb5c0d2675545a50f77b60d39e1fd841ab9"
+        },
+        "sha256": "25c0d5cb6471832b66e9335feb22ebb5c0d2675545a50f77b60d39e1fd841ab9"
+      },
+      {
+        "commit": "38e1c69ecae029e38bf1d51c404e6a6358a75025",
+        "path": "src/player/sonic_animation_table.cpp",
+        "proof": {
+          "path": "docs/refactor-inventory/packets/source-lineage/proofs/native-table.txt",
+          "sha256": "b1b9de5049667fbb38faf1033db6cdc631e07721e9cfa87da1a186c798279d3c"
+        },
+        "sha256": "b1b9de5049667fbb38faf1033db6cdc631e07721e9cfa87da1a186c798279d3c"
+      },
+      {
+        "commit": "38e1c69ecae029e38bf1d51c404e6a6358a75025",
+        "path": "src/guest/sonic_animation_table_reference.cpp",
+        "proof": {
+          "path": "docs/refactor-inventory/packets/source-lineage/proofs/reference-table.txt",
+          "sha256": "4a2c2d2c66261c02aa0facd0c53e5f9c742d38f31f969018a293a565eb895779"
+        },
+        "sha256": "4a2c2d2c66261c02aa0facd0c53e5f9c742d38f31f969018a293a565eb895779"
+      }
+    ]
+  },
+  "existing_evidence": [
+    {
+      "commit": "38e1c69ecae029e38bf1d51c404e6a6358a75025",
+      "path": "docs/refactor-inventory/reviews/animation-contract-standards-recheck.md",
+      "proof": {
+        "path": "docs/refactor-inventory/packets/source-lineage/proofs/standards-recheck.txt",
+        "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+      },
+      "sha256": "25769477f98bd3ade9a851a3fb04863ec8acbb64a31053831161b7ef926d5541"
+    },
+    {
+      "commit": "38e1c69ecae029e38bf1d51c404e6a6358a75025",
+      "path": "docs/refactor-inventory/reviews/animation-contract-fidelity-recheck.md",
+      "proof": {
+        "path": "docs/refactor-inventory/packets/source-lineage/proofs/fidelity-recheck.txt",
+        "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+      },
+      "sha256": "e1d3d25a1dc93748fe0a7a27b2f151fa85f9d78e531b10244e8e0fb3b3b275b9"
+    },
+    {
+      "commit": "38e1c69ecae029e38bf1d51c404e6a6358a75025",
+      "path": "docs/refactor-inventory/packets/animation-contract/ROOT-REQUALIFIED.json",
+      "proof": {
+        "path": "docs/refactor-inventory/packets/source-lineage/proofs/root-requalified.txt",
+        "sha256": "9b3f2c1d38362de83ee7b4d7f1c547de662a5b8a0900efba99e40c3527c4e782"
+      },
+      "sha256": "9b3f2c1d38362de83ee7b4d7f1c547de662a5b8a0900efba99e40c3527c4e782"
+    },
+    {
+      "commit": "38e1c69ecae029e38bf1d51c404e6a6358a75025",
+      "path": "docs/refactor-inventory/packets/animation-contract/publication.json",
+      "proof": {
+        "path": "docs/refactor-inventory/packets/source-lineage/proofs/publication.txt",
+        "sha256": "45110e5d0978c0d378b76a5866fb532a8d27a012137a62ed6f390043bf6f16f8"
+      },
+      "sha256": "45110e5d0978c0d378b76a5866fb532a8d27a012137a62ed6f390043bf6f16f8"
+    }
+  ],
+  "limits": [
+    "Existing rechecks accept bounded source behavior but explicitly leave retirement lineage pending. They are not an accepted lineage-review JSON.",
+    "No active policy, global inventory or constexpr review changed. No source semantic certification by this packet.",
+    "Root must review replacement membership and retained debt, add a dedicated independent fingerprinted review, and seal an immutable receipt after integration."
+  ],
+  "proposed_edge_sha256": "1b1ffc4238d73ddd1571f313cd675be4e149ea8f692e1455f2c79811f04f0533",
+  "schema_version": 1,
+  "source_candidate": "38e1c69ecae029e38bf1d51c404e6a6358a75025",
+  "source_seal": "a833f7584320eb47b8e1ff48009fe111e11c8fb7",
+  "status": "DEMONSTRATION_ONLY_ROOT_REVIEW_PENDING"
+}
