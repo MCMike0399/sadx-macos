@@ -47,13 +47,9 @@ struct View {
     PlayerAnimationTail &tail;
     TaskWorkHandle player_allocation;
 };
-struct Constants {
-    float zero = 0.0f, one = 1.0f, unsigned_correction = 4294967296.0f;
-};
 struct Runtime {
     TaskWorkArena *arena;
     const Resources &resources;
-    const Constants &constants;
 };
 Outcome update(View &, Runtime &, fidelity::Context &);
 Outcome reset_frame(View &, const Runtime &, fidelity::Context &);

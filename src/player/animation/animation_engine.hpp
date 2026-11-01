@@ -81,7 +81,7 @@ template <class Access> class Engine {
         std::memcpy(&signed_value, &raw, 4);
         auto value = ExactFloat::integer(fp, signed_value);
         if (signed_value < 0)
-            value = (value + rt.constants.unsigned_correction);
+            value = (value + 4294967296.0f);
         return value;
     }
     std::uint32_t bits(float v) {
@@ -175,16 +175,14 @@ template <class Access> class Engine {
                 !greater_or_unordered((period).compare(*access.state(v).frame)))
                 stop(Failure::LoopNoProgress, boundary);
         }
-        while ((ExactFloat(fp, rt.constants.zero))
-                   .compare(read_value(access.state(v).frame, boundary)) ==
+        while ((ExactFloat(fp, 0.0f)).compare(read_value(access.state(v).frame, boundary)) ==
                X87Comparison::greater) {
             auto before = *access.state(v).frame;
             auto p = unsigned_frame(selected, rt, boundary, fp);
             access.state(v).frame = ((p + before)).rounded();
             ++result.wrap_iterations;
             if (bits(before) == bits(*access.state(v).frame) &&
-                (ExactFloat(fp, rt.constants.zero)).compare(*access.state(v).frame) ==
-                    X87Comparison::greater)
+                (ExactFloat(fp, 0.0f)).compare(*access.state(v).frame) == X87Comparison::greater)
                 stop(Failure::LoopNoProgress, boundary);
         }
     }
@@ -198,7 +196,7 @@ template <class Access> class Engine {
                 const auto current = read_value(access.state(v).current, Phase::ResetCurrent);
                 auto frame =
                     unsigned_frame(record(v, current, Phase::ResetRow), rt, Phase::ResetLength, fp);
-                access.state(v).frame = ((frame - rt.constants.one)).rounded();
+                access.state(v).frame = ((frame - 1.0f)).rounded();
             } else if (mode == 3 || mode == 9 || mode == 10 || mode == 12) {
                 access.state(v).frame = read_value(access.state(v).start, Phase::ResetStart);
                 access.state(v).start = 0;
@@ -338,7 +336,7 @@ template <class Access> class Engine {
         auto step = read_value(selected.transition_step, at);
         auto frame = (ExactFloat(fp, step) + read_value(access.state(v).frame, at));
         access.state(v).frame = (frame).rounded();
-        auto c = (frame).compare(rt.constants.one);
+        auto c = (frame).compare(1.0f);
         if (c == X87Comparison::less || c == X87Comparison::unordered)
             return complete();
         access.state(v).mode = read_value(selected.mode, Phase::TransitionMode);
@@ -439,7 +437,7 @@ template <class Access> class Engine {
                         *access.state(v).frame);
         access.state(v).frame = (advanced).rounded();
         if (mode == 6 || mode == 7) {
-            auto c = (ExactFloat(fp, rt.constants.zero)).compare(advanced);
+            auto c = (ExactFloat(fp, 0.0f)).compare(advanced);
             if (c != X87Comparison::greater)
                 return complete();
             if (mode == 6)
@@ -448,7 +446,7 @@ template <class Access> class Engine {
             access.state(v).flags = 1;
             return complete();
         }
-        auto end = (unsigned_frame(selected, rt, Phase::PlaybackEnd, fp) - rt.constants.one);
+        auto end = (unsigned_frame(selected, rt, Phase::PlaybackEnd, fp) - 1.0f);
         std::optional<float> stored_end;
         if (mode == 5)
             stored_end = (end).rounded();
@@ -634,12 +632,12 @@ template <class Access> class Engine {
         return std::uint32_t(p[0]) | (std::uint32_t(p[1]) << 8) | (std::uint32_t(p[2]) << 16) |
                (std::uint32_t(p[3]) << 24);
     }
-    ExactFloat frame_value(std::uint32_t frame, const PlayerAnimationRuntime &rt,
+    ExactFloat frame_value(std::uint32_t frame, const PlayerAnimationRuntime &,
                            fidelity::Context &fp) {
         const auto s = signed_word(frame);
         auto v = ExactFloat::integer(fp, s);
         if (s < 0)
-            v = (v + rt.constants.unsigned_correction);
+            v = (v + 4294967296.0f);
         return v;
     }
     struct Interval {
