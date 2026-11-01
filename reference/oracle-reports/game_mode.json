@@ -1,6 +1,6 @@
 {
  "source_sha256": "6b0937caa0151287c182fcd8cd02b89ea464bd33a13a081c1220fa791f24cd74",
- "native_library_sha256": "7b7dc32bb53950f7c9a5ceb4391efc872f796bbb14634a727dd93827db4e9862",
+ "native_library_sha256": "c992570d69abbcb7b116a3b4b1b0bc4502180f4bb52cec65e066cf6ee8ec1a6f",
  "source_files": {
   "src/game/game_mode.hpp": "44230c85f069ad96fc7360b6b16536e1da4001b6cf9d35574f3af772bbaf4075",
   "src/game/game_mode_services.hpp": "da4464a976ea9fc6a838529c199a367886a18dd00c6ecdcd784e30338b99ac36",
@@ -89,7 +89,7 @@
  "order_arguments_stores_boundaries_match": true,
  "limits": "Game-mode state machine 40c090 against original instructions.\n\nEvery callee is an explicit owner fixture with a scripted EAX (callees whose\nresult the source ignores return 0x5a5a5a5a); up to two scripted callees\nrewrite a source global when called, to exercise the source's rereads after\ncalls; one call can fail. The level pointer at 3b0ef4c targets a mapped word or\nis null (source faults at the MOVSX). This compares call order, call sites,\narguments, stores and failure boundaries; it does not show any owner subsystem\n(menus, saves, file loads, cutscenes, audio) is implemented.\n",
  "tracked_summary": {
-  "full_sha256": "80ce97de7cdcff790b58cf7f36fa5db7cdbb50a55de7c21fcabb586e309ba297",
+  "full_sha256": "e6def5dbe3aeafe0662b402a32a0b03fc46e6c5d0273ce46555f51aea9eb7f5a",
   "full_bytes": 3890,
   "lists_cut_to": 10,
   "cut_lists": {}
