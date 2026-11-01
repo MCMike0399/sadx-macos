@@ -1,3 +1,4 @@
+#include "guest/task_reference.hpp"
 #include "hle/hle_task_bridge.hpp"
 #include "hle/hle_heap_bridge.hpp"
 #include "hle/hle_process.hpp"
@@ -80,7 +81,7 @@ struct TaskBridge {
 
     explicit TaskBridge(HleProcess& p):process(p){}
     void bind(std::uint32_t address){
-        base=address;pool=0;scheduler.reset();allocations.clear();input_rumble_timers.clear();arena=std::make_shared<TaskWorkArena>(base);
+        base=address;pool=0;scheduler.reset();allocations.clear();input_rumble_timers.clear();arena=std::make_shared<TaskWorkArena>(task_reference::pointer_encoder(base));
         arena->set_metadata_writer([this](std::uint32_t offset,std::optional<std::uint32_t> value){
             if(!value||!process.guest().set_u32(base+offset,*value)){
                 process.guest().stop("task bridge: unavailable metadata at "+hex(entry)+" ("+hex(base+offset)+")");throw MetadataUnavailable{};
@@ -127,7 +128,7 @@ struct TaskBridge {
     void initialize_pool(){
         entry=0x40b460;if(!ready())return;
         try{input_rumble_timers.clear();scheduler=std::make_unique<TaskScheduler>();const auto result=scheduler->initialize_source_pool(arena,resource(word(0x38f6e08)));
-            if(!result){if(result.work_failure==TaskWorkFailure::exhausted){pool=0;process.guest().set_u32(0x3abdbe4,0);process.guest().set_u32(0x3abdbec,0);process.guest().set_u32(0x3abdbf8,0);process.guest().set_eax(0);flush_work();scheduler.reset();return;}process.guest().stop("task bridge: pool native boundary "+hex(result.source_boundary));return;}
+            if(!result){if(result.work_failure==TaskWorkFailure::exhausted){pool=0;process.guest().set_u32(0x3abdbe4,0);process.guest().set_u32(0x3abdbec,0);process.guest().set_u32(0x3abdbf8,0);process.guest().set_eax(0);flush_work();scheduler.reset();return;}process.guest().stop("task bridge: pool native boundary "+hex(task_reference::source_boundary(result)));return;}
             pool=address(scheduler->source_pool_work());process.guest().set_u32(0x3abdbe4,pool);allocations[pool]=scheduler->source_pool_work();serialized.assign(4096,{});
             const auto current=word(0x3abdbf4);export_graph();process.guest().set_u32(0x3abdbf4,current);process.guest().set_eax(0);process.guest().set_reg(UC_X86_REG_EDX,0);process.guest().set_reg(UC_X86_REG_ECX,0);flush_work();
         }catch(const MetadataUnavailable&){}
@@ -154,15 +155,15 @@ struct TaskBridge {
                 imported_rumble_timers.emplace(k,InputRumbleTimer{words[10]});
             else
                 n.force=work(words[10],k,40);
-            n.auxiliary=work(words[11],k,44);n.field30=resource(words[12]);
-            if(words[7]){auto control=std::make_shared<Task::ObjectControl>();if(!g.read(words[7]+2,&control->flags_at_2,1)){g.stop("task bridge: missing control flag at "+hex(entry));throw MetadataUnavailable{};}control_tasks.push_back({control,slot(word(words[7]+4))});controls[control.get()]=words[7];n.control=control;}
+            n.auxiliary=work(words[11],k,44);n.cooperative_thread=resource(words[12]);
+            if(words[7]){auto control=std::make_shared<Task::ObjectControl>();if(!g.read(words[7]+2,&control->status_flags,1)){g.stop("task bridge: missing control flag at "+hex(entry));throw MetadataUnavailable{};}control_tasks.push_back({control,slot(word(words[7]+4))});controls[control.get()]=words[7];n.control=control;}
             state.nodes.push_back(std::move(n));
         }
-        state.context.current_function=callback(word(0x3abdbf4));state.context.field30=resource(word(0x3abdbf8));
-        scheduler->set_default_field30(resource(word(0x38f6e08)));
+        state.context.current_function=callback(word(0x3abdbf4));state.context.cooperative_thread=resource(word(0x3abdbf8));
+        scheduler->set_default_cooperative_thread(resource(word(0x38f6e08)));
         const auto result=scheduler->restore_source_graph(state);if(!result){g.stop("task bridge: invalid native graph at "+hex(entry));throw MetadataUnavailable{};}
         input_rumble_timers=std::move(imported_rumble_timers);
-        for(auto& [control,target]:control_tasks){control->task_at_4=target?scheduler->source_task(*target):TaskHandle{};if(target&&!control->task_at_4){g.stop("task bridge: unbound control task at "+hex(entry));throw MetadataUnavailable{};}}
+        for(auto& [control,target]:control_tasks){control->linked_task=target?scheduler->source_task(*target):TaskHandle{};if(target&&!control->linked_task){g.stop("task bridge: unbound control task at "+hex(entry));throw MetadataUnavailable{};}}
     }
     void export_graph(){
         auto& g=process.guest();const auto state=scheduler->source_graph();if(state.failure!=TaskFailure::none){g.stop("task bridge: incomplete native graph at "+hex(entry));throw MetadataUnavailable{};}
@@ -171,7 +172,7 @@ struct TaskBridge {
             const TaskWorkHandle handles[4]={n.primary,n.motion,n.force,n.auxiliary};for(unsigned k=0;k<4;++k){words[8+k]=address(handles[k]);if(handles[k])allocations[words[8+k]]=handles[k];}
             if (const auto timer=input_rumble_timers.find(n.slot); timer!=input_rumble_timers.end())
                 words[10]=timer->second.address;
-            words[12]=raw(n.field30);
+            words[12]=raw(n.cooperative_thread);
         }
         for(unsigned k=0;k<state.free_slots.size();++k){auto& words=serialized[state.free_slots[k]];words[0]=k?address(state.free_slots[k-1]):0;words[1]=k+1<state.free_slots.size()?address(state.free_slots[k+1]):0;}
         // Compare the pool in one read: no guest code runs between these independent
@@ -194,7 +195,7 @@ struct TaskBridge {
         }
         for(unsigned k=0;k<8;++k)g.set_u32(0x3abdbc4+4*k,address(state.heads[k]));
         g.set_u32(0x3abdbec,state.free_slots.empty()?0:address(state.free_slots.back()));
-        g.set_u32(0x3abdbf4,raw(state.context.current_function));g.set_u32(0x3abdbf8,raw(state.context.field30));
+        g.set_u32(0x3abdbf4,raw(state.context.current_function));g.set_u32(0x3abdbf8,raw(state.context.cooperative_thread));
     }
     std::uint32_t graph(X86Guest& g,std::uint32_t at){
         entry=at;
@@ -207,11 +208,11 @@ struct TaskBridge {
             if(at==0x40b030)result=scheduler->allocate_task(static_cast<int>(g.reg(UC_X86_REG_EDX)),callback(g.reg(UC_X86_REG_EDI)));
             else if(at==0x40b860)result=scheduler->create_element(word(g.esp()+4),static_cast<int>(word(g.esp()+8)),callback(word(g.esp()+12)));
             else {const auto target_word=word(g.esp()+(at==0x40b940?12:4));const bool in_pool=target_word>=pool&&(target_word-pool)%52==0&&(target_word-pool)/52<4096;const auto target=in_pool?slot(target_word):std::nullopt;const auto parent=target?scheduler->source_task(*target):TaskHandle{};
-                if(at==0x40b940){if(!parent){result=scheduler->create_element(word(g.esp()+4),7,callback(word(g.esp()+8)));export_graph();flush_work();if(result){g.set_eax(address(result.task->source_slot()));g.stop("task bridge: unobserved parent at 40b95c");}else if(result.failure==TaskFailure::source_pool_exhausted)g.set_eax(0);else g.stop("task bridge: graph native boundary "+hex(result.source_boundary));return 0;}result=scheduler->create_child(word(g.esp()+4),callback(word(g.esp()+8)),parent);}
+                if(at==0x40b940){if(!parent){result=scheduler->create_element(word(g.esp()+4),7,callback(word(g.esp()+8)));export_graph();flush_work();if(result){g.set_eax(address(result.task->source_slot()));g.stop("task bridge: unobserved parent at 40b95c");}else if(result.failure==TaskFailure::source_pool_exhausted)g.set_eax(0);else g.stop("task bridge: graph native boundary "+hex(task_reference::source_boundary(result)));return 0;}result=scheduler->create_child(word(g.esp()+4),callback(word(g.esp()+8)),parent);}
                 else {const bool active=scheduler->active_member(parent);g.set_eax(active?1:0);if(active)result=scheduler->free_task(parent);}}
             const bool exhausted=!result&&result.work_failure==TaskWorkFailure::exhausted&&result.task&&result.task->retired();
-            if(exhausted){auto& words=serialized[*result.task->source_slot()];for(unsigned f=2;f<12;++f)words[f]=0;words[12]=raw(result.task->field30);}
-            export_graph();flush_work();if(exhausted){g.set_eax(0);return 0;}if(!result){if(result.failure==TaskFailure::source_pool_exhausted||result.failure==TaskFailure::invalid_list_index){g.set_eax(0);return 0;}g.stop("task bridge: graph native boundary "+hex(result.source_boundary));return 0;}
+            if(exhausted){auto& words=serialized[*result.task->source_slot()];for(unsigned f=2;f<12;++f)words[f]=0;words[12]=raw(result.task->cooperative_thread);}
+            export_graph();flush_work();if(exhausted){g.set_eax(0);return 0;}if(!result){if(result.failure==TaskFailure::source_pool_exhausted||result.failure==TaskFailure::invalid_list_index){g.set_eax(0);return 0;}g.stop("task bridge: graph native boundary "+hex(task_reference::source_boundary(result)));return 0;}
             if(at!=0x40b6c0)g.set_eax(result.task?address(result.task->source_slot()):0);
         }catch(const CallbackUnavailable& call){export_graph();flush_work();g.stop("task bridge: unported callback "+hex(raw(callbacks[call.token]))+" at 40b590");}
         catch(const MetadataUnavailable&){}
@@ -239,10 +240,10 @@ struct TaskBridge {
             auto before=scheduler->source_graph();std::vector<std::pair<std::shared_ptr<Task::ObjectControl>,std::uint32_t>> borrowed;
             for(const auto& n:before.nodes)if(n.control)borrowed.push_back({n.control,controls.at(n.control.get())});
             const auto call=scheduler->advance_lifetime(run->cursor);
-            if(call.task&&call.task->retired()){auto& row=serialized[*call.task->source_slot()];for(unsigned f=2;f<12;++f)row[f]=0;row[12]=raw(call.task->field30);}
-            for(const auto& [control,address_value]:borrowed){g.write(address_value+2,&control->flags_at_2,1);g.set_u32(address_value+4,control->task_at_4?address(control->task_at_4->source_slot()):0);}
+            if(call.task&&call.task->retired()){auto& row=serialized[*call.task->source_slot()];for(unsigned f=2;f<12;++f)row[f]=0;row[12]=raw(call.task->cooperative_thread);}
+            for(const auto& [control,address_value]:borrowed){g.write(address_value+2,&control->status_flags,1);g.set_u32(address_value+4,control->linked_task?address(control->linked_task->source_slot()):0);}
             export_graph();flush_work();
-            if(!call.result){g.stop("task bridge: lifetime boundary "+hex(call.result.source_boundary?call.result.source_boundary:run->owner));return;}
+            if(!call.result){g.stop("task bridge: lifetime boundary "+hex(task_reference::source_boundary(call.result)?task_reference::source_boundary(call.result):run->owner));return;}
             if(call.completed){g.set_reg(UC_X86_REG_ESI,run->saved[1]);if(!run->children){g.set_reg(UC_X86_REG_EBP,run->saved[0]);g.set_reg(UC_X86_REG_EBX,run->saved[2]);g.set_reg(UC_X86_REG_EDI,run->saved[3]);}return;}
             const auto task=address(call.task->source_slot());std::uint32_t target=0,back=0,reserve=0;const auto sp=g.esp();
             if(run->children){target=call.callee==TaskLifetimeCallee::run_children?0x40b420:0x40b570;back=call.callee==TaskLifetimeCallee::run_children?0x40b7f4:0x40b826;reserve=8;g.set_u32(sp-4,run->saved[1]);g.set_reg(UC_X86_REG_ESI,address(run->cursor.task->source_slot()));g.set_eax(task);}
@@ -285,20 +286,20 @@ struct TaskBridge {
             if(returned){if(pool!=run->source_pool){g.stop("task bridge: changed snapshot pool at "+hex(run->children?0x40b433:0x40b0e0));return;}if(!ready())return;import_graph();}
             for(;;){
                 const auto call=scheduler->advance_dispatch(run->cursor);export_graph();
-                if(!call.result){g.stop("task bridge: dispatch boundary "+hex(call.result.source_boundary?call.result.source_boundary:run->children?0x40b43cU:0x40b0e0U));return;}
+                if(!call.result){g.stop("task bridge: dispatch boundary "+hex(task_reference::source_boundary(call.result)?task_reference::source_boundary(call.result):run->children?0x40b43cU:0x40b0e0U));return;}
                 if(call.completed){
                     if(run->all&&++run->position<8){run->cursor=scheduler->begin_index_dispatch(run->position-1);continue;}
                     g.set_reg(UC_X86_REG_ESI,run->saved[1]);if(!run->children){g.set_reg(UC_X86_REG_EBP,run->saved[0]);g.set_reg(UC_X86_REG_EBX,run->saved[2]);g.set_reg(UC_X86_REG_EDI,run->saved[3]);}
                     return;
                 }
-                const auto task=address(call.task->source_slot()),next=run->cursor.next?address(run->cursor.next->source_slot()):0,fn=raw(call.callback),field30=raw(call.task->field30);
+                const auto task=address(call.task->source_slot()),next=run->cursor.next?address(run->cursor.next->source_slot()):0,fn=raw(call.callback),cooperative_thread=raw(call.task->cooperative_thread);
                 const auto sp=g.esp();unsigned reserve=run->children?8U:run->all?0x20U:0x14U;
-                if(run->children){g.set_u32(sp-4,run->saved[1]);g.set_eax(task);g.set_reg(UC_X86_REG_ECX,field30);g.set_reg(UC_X86_REG_ESI,next);}
+                if(run->children){g.set_u32(sp-4,run->saved[1]);g.set_eax(task);g.set_reg(UC_X86_REG_ECX,cooperative_thread);g.set_reg(UC_X86_REG_ESI,next);}
                 else {
                     auto top=sp;
                     if(run->all){g.set_u32(sp-4,run->saved[1]);g.set_u32(sp-8,run->position==0?8U:static_cast<unsigned>(run->position-1));g.set_u32(sp-12,run->position==0?0x40b178:0x40b186);top-=12;}
                     g.set_u32(top-4,run->saved[0]);g.set_u32(top-8,run->all&&run->position?static_cast<unsigned>(run->position-1):run->saved[1]);g.set_u32(top-12,run->saved[2]);g.set_u32(top-16,run->saved[3]);
-                    g.set_reg(UC_X86_REG_EBP,0);g.set_reg(UC_X86_REG_ESI,task);g.set_reg(UC_X86_REG_EBX,next);g.set_reg(UC_X86_REG_EDI,fn);g.set_eax(field30);
+                    g.set_reg(UC_X86_REG_EBP,0);g.set_reg(UC_X86_REG_ESI,task);g.set_reg(UC_X86_REG_EBX,next);g.set_reg(UC_X86_REG_EDI,fn);g.set_eax(cooperative_thread);
                 }
                 g.redirect(fn,{task},0,[this,run](X86Guest&){dispatch_next(run,true);},reserve,run->children?0x40b43fU:0x40b10bU);
                 return;

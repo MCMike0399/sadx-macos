@@ -20,7 +20,7 @@ GameSceneLogicResult run_game_scene_logic(GameSceneLogicRuntime& runtime){
     if(!state.mode_at_3abdc7c||!*state.mode_at_3abdc7c){fail(GameSceneLogicFailure::unknown_mode,0x413d4a);return result;}
     if(**state.mode_at_3abdc7c==10&&!call(GameSceneOperation::conditional_5919c0,0x413d53,0x5919c0))return result;
     const auto tasks=runtime.scheduler.run_game_tasks();
-    if(!tasks){result.task_failure=tasks;result.nested_source_boundary=tasks.source_boundary;fail(GameSceneLogicFailure::task_failed,0x413d58);return result;}
+    if(!tasks){result.task_failure=tasks;fail(GameSceneLogicFailure::task_failed,0x413d58);return result;}
     result.tasks_completed=true;
     if(!call(GameSceneOperation::collision_420700,0x413d5d,0x420700)||
        !call(GameSceneOperation::collision_456ec0,0x413d62,0x456ec0)||

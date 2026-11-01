@@ -20,7 +20,7 @@ PlayerAuxiliaryEffectResult bind_auxiliary_effect_work(TaskScheduler& s,const Ta
 std::shared_ptr<PlayerAuxiliaryEffectRuntime> context(TaskScheduler& s){return std::dynamic_pointer_cast<PlayerAuxiliaryEffectRuntime>(s.callback_context(&player_auxiliary_effect_initialize_callback));}
 void propagate(const TaskHandle& task,PlayerAuxiliaryEffectResult result){
     if(result)return;
-    TaskResult failure{TaskFailure::callback_failed,task,result.work_failure,result.source_boundary,std::make_shared<PlayerAuxiliaryEffectDiagnostic>(std::move(result))};
+    TaskResult failure{TaskFailure::callback_failed,task,result.work_failure,TaskStep::callback_dependency,std::make_shared<PlayerAuxiliaryEffectDiagnostic>(std::move(result))};
     TaskScheduler::raise_callback_failure(std::move(failure));
 }
 PlayerAuxiliaryEffectResult character(PlayerAuxiliaryEffectRuntime& runtime){
@@ -157,7 +157,7 @@ PlayerAuxiliaryEffectResult update_player_auxiliary_effect(TaskScheduler& s,cons
             retire=true;
         }
     }
-    if(retire){const auto scheduled=s.free_task(task);if(!scheduled){auto r=fail(PlayerAuxiliaryEffectFailure::work_failed,0x4a29f0,scheduled.source_boundary);r.work_failure=scheduled.work_failure;return r;}return {};}
+    if(retire){const auto scheduled=s.free_task(task);if(!scheduled){auto r=fail(PlayerAuxiliaryEffectFailure::work_failed,0x4a29f0);r.task_failure=scheduled;r.work_failure=scheduled.work_failure;return r;}return {};}
     const auto& player=**registered;
     if(!player.secondary_mode_at_1)return fail(PlayerAuxiliaryEffectFailure::missing_secondary_mode,0x4a25d9);
     std::uint8_t secondary;read=s.work_arena()->read(task->primary_work,1,&secondary,1);if(!read)return work_fail(read,0x4a25df);

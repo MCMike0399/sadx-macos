@@ -44,10 +44,10 @@ inline PlayerInputTask input_task_view(const PlayerTaskState& task) {
             task.orientation.angles[1],task.event_move ? task.event_move->mode : std::nullopt};
 }
 
-// Installs the scheduler's child-state factory (0x40b960..0x40b9a3 for a parent with a live
-// PlayerTaskState): the child gets zeroed live fields, then the parent's position x,y,z and angles
-// 0,1,2 in source order. An unobserved parent position fails at 0x40b98d with the child state kept.
+// NOTSA: installs the scheduler's live child-transform copy. Child fields are zeroed,
+// then position and angles are copied in source order. Missing parent position retains
+// the initialized child and reports the semantic read operation.
 void install_player_child_state(TaskScheduler&);
-std::optional<std::uint32_t> copy_player_child_state(const Task& parent, Task& child);
+TaskStep copy_player_child_state(const Task& parent, Task& child);
 
 } // namespace sadx

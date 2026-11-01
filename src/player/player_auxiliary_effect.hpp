@@ -46,6 +46,8 @@ struct PlayerAuxiliaryEffectResult {
     TaskWorkHandle pending_node;
     std::optional<X87Failure> fp_failure;
     std::uint16_t fp_exceptions=0;
+    // Native task failures retain semantic operations; reference consumers serialize diagnostics.
+    std::optional<TaskResult> task_failure;
     explicit operator bool()const noexcept{return failure==PlayerAuxiliaryEffectFailure::none;}
 };
 struct PlayerAuxiliaryEffectDiagnostic final:TaskCallbackDiagnostic {PlayerAuxiliaryEffectResult result;explicit PlayerAuxiliaryEffectDiagnostic(PlayerAuxiliaryEffectResult r):result(std::move(r)){};};

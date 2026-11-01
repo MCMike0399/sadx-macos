@@ -1,3 +1,4 @@
+#include "guest/task_reference.hpp"
 #include "player/player_startup.hpp"
 #include "player/player_initialization.hpp"
 
@@ -146,7 +147,7 @@ PlayerStartupResult initialize_player_startup(std::int32_t index,const TaskHandl
         case B::RegistrationSlot:result.failure=F::unsupported_registration_slot;result.source_boundary=0x4427b1;break;
         case B::TaskId:result.failure=F::missing_task_id;result.source_boundary=0x44294c;break;
         case B::AuxiliaryCallback:result.failure=F::missing_auxiliary_effect_callback;result.source_boundary=0x44297b;result.callee_boundary=0x4a2b60;break;
-        case B::TaskCreation:result.failure=F::task_creation_failed;result.source_boundary=0x44297b;result.callee_boundary=error.task_failure.source_boundary;result.task_failure=error.task_failure;break;
+        case B::TaskCreation:result.failure=F::task_creation_failed;result.source_boundary=0x44297b;result.callee_boundary=task_reference::source_boundary(error.task_failure);result.task_failure=error.task_failure;break;
         default: {
             result.failure=F::work_failure;
             switch(error.boundary) {

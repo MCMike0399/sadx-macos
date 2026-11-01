@@ -30,6 +30,7 @@ struct GameSceneLogicResult {
     GameSceneLogicFailure failure=GameSceneLogicFailure::none;
     std::uint32_t source_boundary=0,nested_source_boundary=0;
     std::optional<GameSceneCall> pending_call;
+    // Task failures retain their semantic operation; adapters serialize its diagnostic boundary.
     std::optional<TaskResult> task_failure;
     std::shared_ptr<const GameLogicOwnerDiagnostic> diagnostic={};
     bool tasks_completed=false,completed=false;

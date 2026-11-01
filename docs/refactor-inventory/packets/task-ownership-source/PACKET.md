@@ -23,3 +23,34 @@ are preserved in place. Pinned Python and original PE hashes match the assignmen
 Root reserved cohort definitions at Main ac8ea27 remain unconsumed. No reserved input
 creation/execution, full gate, Main write, child/delegate or push is authorized here.
 Implementation, focused consumer closure and fault qualification follow this baseline.
+
+## Shared implementation and boundary design
+
+TaskScheduler remains the sole graph/storage/free-slot/pool/context owner. TaskWorkArena
+remains the sole allocation and reference-identity owner. Links remain nonowning, retained
+handles can outlive recycled slots, and outermost WalkGuard still controls reclamation.
+The staged cleanup algorithm remains in engine, split into named retryable steps. Graph
+validation/publication are named engine steps with a temporary plan, not another cache.
+
+Native callers must supply the default cooperative thread explicitly, including known-null.
+A narrow lazy reader supports reference composition; missing fixture state lives in
+`guest/task_reference.hpp`, not an optional scheduler field. NativeGame installs that
+missingness boundary explicitly. The source task.thp field is named cooperative_thread;
+SDK aliases and instruction evidence are recorded in the targeted symbol overrides.
+
+Semantic TaskStep values carry interrupted operations. The reference header maps those to
+original diagnostic PCs, including callback diagnostics. Legacy scene/auxiliary consumers
+retain nested TaskResult values; their reference probes serialize the old diagnostics.
+The arena accepts a pure pointer encoder from the reference boundary instead of storing
+reference_base. Allocation offsets, weak target identity and the saved allocation offset
+remain distinct. Metadata callbacks still bypass payload writes, live payload reads precede
+cached reference resolution, and stale coalesced headers remain observable allocation bytes.
+
+The player child-state factory now returns a semantic copy step. Live typed player/motion
+owners, raw SuperSonic bytes, and animation interior/self-reference behavior are unchanged.
+This does not approve broader PlayerSystem or animation-engine migration. Gamma's pending
+HUD/child-dispatch composition still fails explicitly; its duplicate callee annotations move
+to the actual engine owners, with no behavior recovered or skipped.
+
+`DEBT.json` records lexical changes for all four complete engine files. Their semantic review
+and final disposition remain Root-owned. No arithmetic or game tuning changes are made.
