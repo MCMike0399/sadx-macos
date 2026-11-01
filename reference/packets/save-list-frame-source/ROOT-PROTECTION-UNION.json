@@ -1,0 +1,66 @@
+{
+  "base_commit": "7f43a5a06efaf67baf478afa51d3e72baca56838",
+  "added": {
+    "reference/packets/save-list-frame-source/qualify_consumers.py": "8ada3d6790e8c6be3ae9910605af81d6404b1f6f1112c2971cbe03a19483dd61",
+    "reference/packets/save-list-frame-source/rebind_mutants.py": "2186413c6d8a82a5015270efc2b72338d41d16ef6201d2ef1c78069741133234",
+    "reference/packets/save-list-frame-source/reserved.py": "ab00f9028e5170bb120126b6e2d35ac3869969ddc853d1b65333e231604cae76",
+    "tests/unit/save_policy_boundaries.cpp": "8a799eddfcd81c6b9274ebb1b13bd92fc5e8bd1203824813de9e143e2c3ae749"
+  },
+  "changed": {
+    "Makefile": {
+      "before": "38bdc3d9ba31a03b868c23e4c181b6c1d6c5b79a063149527f1f8c66bbed6ed3",
+      "after": "f145daba48afc9b3e7609df89506e4ce95b8693af2bc826358904427af53bfb6"
+    },
+    "reference/constexpr-table-review.json": {
+      "before": "10783f332ea0de675a80696a482e59a83f882ea37202a8b2ddc13a32be4405a8",
+      "after": "953d6c06a6b08624b7d0c99810cea63de6f7b8683de7cb190cfff32cd5e49bde"
+    },
+    "tests/probes/native_file_select_display_probe.cpp": {
+      "before": "c961e88cfa5b92bae8682bb781f14b19283b0b7ba875efc15bbf71fd70a7a59a",
+      "after": "714c5373f7b58e220dff84be2a3ae86254ac614e830716986b05a7d439e890e9"
+    },
+    "tests/probes/native_menu_dialog_confirmation_probe.cpp": {
+      "before": "f5267581e4eaeaf7c0e43327dda5dee4838ec3e184f56e68bbb348c9b14ae278",
+      "after": "f7c22ea6564ea89afc8ac406240902872f0888fcdb05df2d3b1e4d24704f500a"
+    },
+    "tests/probes/native_save_creation_probe.cpp": {
+      "before": "7b97306fb3d911a3b675906b498b54f40e5319e7bece3c290d010bb525760f92",
+      "after": "d53eeb293bfcfe19265099f48cc08bf3e629c8716f300e52968b578e1181cf6e"
+    },
+    "tests/probes/native_save_file_list_probe.cpp": {
+      "before": "8d04b72f060080006b9eb380a90d7d7fd3213683534fdaea988997d0dc9c2df0",
+      "after": "bddadd747368acbfd39c00b0089fb3f9b956aa35b864fa865782a42c53f7e6d7"
+    },
+    "tests/probes/native_save_list_free_probe.cpp": {
+      "before": "870ec1a37cf6a9b9246a675245a7ee3f1864a0dcdf9efa01370f104feab8d1f9",
+      "after": "55e65d1773c980628b773f056ab5bd1618736aa6b437b9710a7db0a00083b9bc"
+    },
+    "tests/unit/manifest.tsv": {
+      "before": "2f3ad93dff21b6fe9489ba8e7e77929f135572c5201889a200e09fbf070c776c",
+      "after": "d56c3086b1bcc0111d5bd3f37ff291628ed7d718e526d6e1b18792cc7624fe0d"
+    },
+    "tests/unit/save_io_characterization.cpp": {
+      "before": "da596f4e5145fdfe267278b641390d550136debae068448688a64728149e5292",
+      "after": "916f5c4177fb7f5f9cc5c9ba6739c023bc86b10fca2bdebb5776b3b21abefccc"
+    },
+    "tests/unit/save_write.cpp": {
+      "before": "416797df92f00bf59601813a619caadea0daf6a3236f235315488ea11663bd09",
+      "after": "674c7cd4150725e26b4ead690bdd29e789aa347beb5fc150559e7beb06d37c38"
+    }
+  },
+  "removed": [],
+  "diagnostic_table": {
+    "key": "src/runtime/native_title_tasks.cpp::names",
+    "initializer_and_index_policy_unchanged": true
+  },
+  "portable_sdk_dependency": "xcrun --sdk macosx --show-sdk-path selects the same SDK metadata instead of a host-specific absolute Xcode path.",
+  "evidence": [
+    "reference/packets/save-list-frame-source/JUDGE-BINDINGS.md",
+    "reference/packets/save-list-frame-source/ROOT-REVIEW.md",
+    "reference/packets/save-list-frame-source/RESERVED-RESULT.json"
+  ],
+  "limits": [
+    "No inputs, tolerances, expected values, old mutant intent or Source behavior change in this judge binding step.",
+    "Actual Main consumer/product/journey/gate qualification remains pending."
+  ]
+}
