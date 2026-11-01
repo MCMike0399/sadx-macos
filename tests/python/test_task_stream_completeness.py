@@ -34,20 +34,25 @@ def ledger(rows):
 
 
 class TaskStreamCompleteness(unittest.TestCase):
-    def compare(self, rows, calls=None, identity=True, compressed_digest=None):
+    def compare(self, rows, calls=None, identity=True, compressed_digest=None,
+                candidate_rows=None, candidate_exit=0, candidate_exclusions=None):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             for world in ('old', 'current'):
+                captured = (candidate_rows if world == 'current' and candidate_rows is not None
+                            else rows)
                 folder = root / world
                 folder.mkdir()
                 stream = folder / (SLUG + '.native.jsonl.gz')
                 with gzip.open(stream, 'wt') as sink:
-                    for row in rows:
+                    for row in captured:
                         sink.write(json.dumps(row) + '\n')
-                (folder / (SLUG + '.json')).write_text('{}')
+                report = ({'source_unsupported': candidate_exclusions}
+                          if world == 'current' and candidate_exclusions is not None else {})
+                (folder / (SLUG + '.json')).write_text(json.dumps(report))
                 if identity:
-                    receipt = dict(slug=SLUG, oracle_exit=0,
-                                   calls=ledger(rows) if calls is None else calls,
+                    receipt = dict(slug=SLUG, oracle_exit=candidate_exit if world == 'current' else 0,
+                                   calls=ledger(captured) if calls is None else calls,
                                    compressed_sha256=compressed_digest or hashlib.sha256(stream.read_bytes()).hexdigest())
                     (folder / (SLUG + '.identity.json')).write_text(json.dumps(receipt))
             result = subprocess.run([sys.executable, str(SCRIPT), str(root / 'old'),
@@ -88,6 +93,32 @@ class TaskStreamCompleteness(unittest.TestCase):
 
     def test_wrong_compressed_identity_rejected(self):
         self.assertNotEqual(self.compare([record(0)], compressed_digest='0' * 64)[0], 0)
+
+    def test_failed_candidate_receipt_rejected(self):
+        self.assertNotEqual(self.compare([record(0)], candidate_exit=1)[0], 0)
+
+    def test_one_sided_truncation_rejected(self):
+        rows = [record(0), record(1)]
+        self.assertNotEqual(self.compare(rows, ledger(rows), candidate_rows=rows[:1])[0], 0)
+
+    def test_valid_candidate_scalar_difference_rejected(self):
+        candidate = record(0)
+        candidate['scalar_arguments'] = [1]
+        self.assertNotEqual(self.compare([record(0)], candidate_rows=[candidate])[0], 0)
+
+    def test_valid_candidate_payload_difference_rejected(self):
+        candidate = record(0)
+        candidate['after']['0'] = base64.b64encode(b'different').decode()
+        self.assertNotEqual(self.compare([record(0)], candidate_rows=[candidate])[0], 0)
+
+    def test_valid_candidate_return_difference_rejected(self):
+        candidate = record(0)
+        candidate['result'] = 1
+        self.assertNotEqual(self.compare([record(0)], candidate_rows=[candidate])[0], 0)
+
+    def test_unequal_exclusion_cohorts_rejected(self):
+        self.assertNotEqual(self.compare([record(0)],
+                                        candidate_exclusions=[{'case': 0, 'reason': 'boundary'}])[0], 0)
 
 
 if __name__ == '__main__':
