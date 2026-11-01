@@ -1,0 +1,52 @@
+{
+  "status": "UNSEALED; Root preserves full current parent union",
+  "baseline": "a799c518a2dc4ae9fceb3aeb05f7a41f270abb93",
+  "inherited_paths": 1310,
+  "unchanged": 1301,
+  "changed": {
+    "Makefile": {
+      "baseline": "c49e460279b00d6b9775fbef8da5aac4c0ec5618277729d0e3637ab6640809da",
+      "current": "024fcf684c7f58e1a32d98b3e6319de3239fc779e75e05e08336cc6836365f8f"
+    },
+    "tests/probes/native_file_select_display_probe.cpp": {
+      "baseline": "c961e88cfa5b92bae8682bb781f14b19283b0b7ba875efc15bbf71fd70a7a59a",
+      "current": "714c5373f7b58e220dff84be2a3ae86254ac614e830716986b05a7d439e890e9"
+    },
+    "tests/probes/native_menu_dialog_confirmation_probe.cpp": {
+      "baseline": "f5267581e4eaeaf7c0e43327dda5dee4838ec3e184f56e68bbb348c9b14ae278",
+      "current": "f7c22ea6564ea89afc8ac406240902872f0888fcdb05df2d3b1e4d24704f500a"
+    },
+    "tests/probes/native_save_creation_probe.cpp": {
+      "baseline": "7b97306fb3d911a3b675906b498b54f40e5319e7bece3c290d010bb525760f92",
+      "current": "d53eeb293bfcfe19265099f48cc08bf3e629c8716f300e52968b578e1181cf6e"
+    },
+    "tests/probes/native_save_file_list_probe.cpp": {
+      "baseline": "8d04b72f060080006b9eb380a90d7d7fd3213683534fdaea988997d0dc9c2df0",
+      "current": "bddadd747368acbfd39c00b0089fb3f9b956aa35b864fa865782a42c53f7e6d7"
+    },
+    "tests/probes/native_save_list_free_probe.cpp": {
+      "baseline": "870ec1a37cf6a9b9246a675245a7ee3f1864a0dcdf9efa01370f104feab8d1f9",
+      "current": "55e65d1773c980628b773f056ab5bd1618736aa6b437b9710a7db0a00083b9bc"
+    },
+    "tests/unit/manifest.tsv": {
+      "baseline": "0333d3006925d67bfc98f8112ec4dc442dabc193f8c9ca07fafcc5fdf2203f53",
+      "current": "ff05743681f483418a17767cdcc85028a5523b4f5f39eb0905b2d2ba687d8dd2"
+    },
+    "tests/unit/save_io_characterization.cpp": {
+      "baseline": "da596f4e5145fdfe267278b641390d550136debae068448688a64728149e5292",
+      "current": "916f5c4177fb7f5f9cc5c9ba6739c023bc86b10fca2bdebb5776b3b21abefccc"
+    },
+    "tests/unit/save_write.cpp": {
+      "baseline": "416797df92f00bf59601813a619caadea0daf6a3236f235315488ea11663bd09",
+      "current": "674c7cd4150725e26b4ead690bdd29e789aa347beb5fc150559e7beb06d37c38"
+    }
+  },
+  "added": {
+    "reference/packets/save-list-frame-source/rebind_mutants.py": "2186413c6d8a82a5015270efc2b72338d41d16ef6201d2ef1c78069741133234",
+    "reference/packets/save-list-frame-source/qualify_consumers.py": "8ada3d6790e8c6be3ae9910605af81d6404b1f6f1112c2971cbe03a19483dd61",
+    "tests/unit/save_policy_boundaries.cpp": "8a799eddfcd81c6b9274ebb1b13bd92fc5e8bd1203824813de9e143e2c3ae749"
+  },
+  "missing": [],
+  "no_removed_paths": true,
+  "global_manifest_unchanged": true
+}
